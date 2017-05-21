@@ -3,11 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "axios": "^0.16.1",
+    "classnames": "^2.2.5",
+    "js-cookie": "^2.1.4",
     "react": "^15.5.4",
-    "react-dom": "^15.5.4"
+    "react-dom": "^15.5.4",
+    "react-router-dom": "^4.1.1"
   },
   "devDependencies": {
-    "react-scripts": "1.0.2"
+    "react-scripts": "0.9.5"
   },
   "scripts": {
     "start": "react-scripts start",
