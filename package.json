@@ -5,10 +5,15 @@
   "dependencies": {
     "axios": "^0.16.1",
     "classnames": "^2.2.5",
+    "history": "^4.6.1",
     "js-cookie": "^2.1.4",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
-    "react-router-dom": "^4.1.1"
+    "react-redux": "^5.0.5",
+    "react-router-dom": "^4.1.1",
+    "react-router-redux": "^4.0.8",
+    "redux": "^3.6.0",
+    "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
     "@sparkpost/matchbox": "^0.1.2",

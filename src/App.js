@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
-import './App.scss';
+import _ from 'lodash';
+
+// Pages
+import AuthPage from './pages/AuthPage';
+import { connect } from 'react-redux';
+import authCookie from './helpers/authCookie';
+import { logout } from './actions/auth';
 
 import {
   BrowserRouter as Router,
@@ -8,156 +14,86 @@ import {
   withRouter
 } from 'react-router-dom'
 
-// import cookie from 'js-cookie';
 import axios from 'axios';
 
-class AuthPage extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      username: '',
-      password: '',
-      rememberMe: false,
-      loggedIn: false
-    }
-  }
+import './App.scss';
 
-  updateInput(name, value) {
-    this.setState({
-      [name]: value
-    });
-  }
-
-  login() {
-    const { username, password, rememberMe } = this.state;
-    const query = `grant_type=password&username=${username}&password=${password}&rememberMe=${rememberMe}`;
-    this.setState({
-      error_description: null
-    });
-    return axios.post('http://api.sparkpost.dev/api/v1/authenticate', query, {
-      headers: {
-        Authorization: 'Basic bXN5c1dlYlVJOmZhODZkNzJlLTYyODctNDUxMy1hZTdmLWVjOGM4ZmEwZDc2Ng==',
-        'Content-Type': 'application/x-www-form-urlencoded'
-      }
-    })
-    .then(({ data }) => {
-      this.setState({
-        loggedIn: true,
-        data,
-        username
-      });
-    })
-    .catch(({ response }) => {
-      const { error_description = 'An unknown error occurred' } = response.data;
-      this.setState({
-        loggedIn: false,
-        error_description
-      });
-    });
-  }
-
-  renderLoginError() {
-    if (!this.state.error_description) {
-      return null;
-    }
-    return (
-      <div className='error'>
-        <p>{this.state.error_description}</p>
-      </div>
-    );
-  }
-
+class _ProtectedRoute extends Component {
   render() {
-    if (this.state.loggedIn) {
-      this.props.history.push('/dashboard');
-      return null;
-    }
     return (
-      <div className="join-wrapper">
-        <div className="join-content">
-          <div className="row">
-            <div className="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-              <h4 className="logo-type margin-bottom-lg text-center"><a href="https://www.sparkpost.com"
-              title="SparkPost"><img alt="SparkPost" height="68" src="/assets/images/sparkpost-logo-color.svg" width="188" /></a></h4>
-
-              <div className="join-panel">
-                <div className="join-panel__body">
-                  <h3 className="margin-bottom-xl" id="sp-login-message"><span>Log In</span></h3>
-
-                  <form>
-
-                    {this.renderLoginError()}
-
-                    <div className="row">
-                      <div className="col-xs-12">
-                        <div className="form-group">
-                          <div className="text-muted">Username or Email</div>
-                          <input autoFocus={true} className="form-control input-sm form-username"
-                          name="username" required={true} value={this.state.username}
-                          type="text" onChange={(e) => this.updateInput('username', e.target.value)} />
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="row margin-bottom-md">
-                      <div className="col-xs-12">
-                        <div className="form-group">
-                          <div className="text-muted">Password</div>
-                          <input className="form-control input-sm form-password"
-                          name="password" required={true} value={this.state.password}
-                          type="password" onChange={(e) => this.updateInput('password', e.target.value)} />
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="row">
-                      <div className="col-xs-12 margin-bottom-md">
-                        <div className="checkbox small">
-                          <label><input name="rememberMe" type="checkbox"
-                          checked={this.state.rememberMe} onChange={(e) => this.updateInput('rememberMe', e.target.checked)} /> Keep me logged in</label>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="row">
-                      <div className="col-xs-12">
-                        <button className="btn btn-primary btn-loading" id="login-button"
-                        type="submit" onClick={(e) => {
-                          e.preventDefault();
-                          this.login();
-                        }}>Log In<i className="fa fa-spinner fa-spin"></i></button>
-                      </div>
-                    </div>
-
-                  </form>
-
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <Route {...rest} render={(props) => (
+        auth.loggedIn ? (
+          <div><Component {...props} /></div>
+        ) : (
+          <Redirect to={{
+            pathname: '/auth',
+            state: { redirectAfterLogin: props.location.pathname }
+          }}/>
+        )
+      )}/>
     );
   }
 }
+const ProtectedRoute = connect(({ auth }) => ({ auth }))(_ProtectedRoute);
 
-const AuthPageRouter = withRouter(AuthPage);
+const Dashboard = () => <h1>Dashboard</h1>;
+const SummaryReport = () => <h1>Summary Report</h1>;
 
-class App extends Component {
+class _AuthenticationContainer extends Component {
+  
+  componentWillMount() {
+    const { auth, dispatch } = this.props;
+    if (auth.loggedIn) {
+      return;
+    }
+    
+    const foundCookie = authCookie.get();
+    if (foundCookie) {
+      dispatch({
+        type: 'LOGIN_SUCCESS',
+        payload: foundCookie
+      });
+    }
+  }
+  
+  componentWillUpdate(newProps) {
+    const { auth, history, location = {} } = this.props;
+    let redirectPath = _.get(location, 'state.redirectAfterLogin');
+    
+    if (location.pathname === '/auth' && newProps.location.pathname === '/auth' && !redirectPath) {
+      redirectPath = '/dashboard';
+    }
+    
+    console.log('what', location.pathname, newProps.location.pathname, redirectPath);
+    console.log('receiving props', this.props, newProps);
+    
+    // if logging in with redirect
+    if (!auth.loggedIn && newProps.auth.loggedIn && redirectPath) {
+      console.log('log in', redirectPath);
+      history.push(redirectPath);
+    }
+    
+    // if logging out
+    if (auth.loggedIn && !newProps.auth.loggedIn) {
+      console.log('log out');
+      history.push('/auth');
+    }
+  }
+  
   render() {
-    return (
-      <Router>
-        <div className="app-container">
-          <Route exact path="/">
-            <Redirect to="/auth" />
-          </Route>
-          <Route path="/auth" component={AuthPageRouter} />
-
-          <Route path="/dashboard" render={() => <h1>Dashboard</h1>} />
-        </div>
-      </Router>
-    );
+    return <div className="app-container">{this.props.children}</div>;
   }
 }
+const AuthenticationContainer = withRouter(connect(({ auth }) => ({ auth }))(_AuthenticationContainer));
 
-export default App;
+export default () => (
+  <Router>
+    <AuthenticationContainer>
+      <Route path="/auth" component={AuthPage} />
+      
+      <ProtectedRoute path="/dashboard" component={Dashboard} />
+      <ProtectedRoute path="/summary" component={SummaryReport} />
+      <Route path="/logout" component={Logout} />
+    </AuthenticationContainer>
+  </Router>
+);
