@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import './App.scss';
 
 import {
   BrowserRouter as Router,
@@ -21,13 +21,13 @@ class AuthPage extends Component {
       loggedIn: false
     }
   }
-  
+
   updateInput(name, value) {
     this.setState({
       [name]: value
     });
   }
-  
+
   login() {
     const { username, password, rememberMe } = this.state;
     const query = `grant_type=password&username=${username}&password=${password}&rememberMe=${rememberMe}`;
@@ -55,7 +55,7 @@ class AuthPage extends Component {
       });
     });
   }
-  
+
   renderLoginError() {
     if (!this.state.error_description) {
       return null;
@@ -66,7 +66,7 @@ class AuthPage extends Component {
       </div>
     );
   }
-  
+
   render() {
     if (this.state.loggedIn) {
       this.props.history.push('/dashboard');
@@ -79,15 +79,15 @@ class AuthPage extends Component {
             <div className="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
               <h4 className="logo-type margin-bottom-lg text-center"><a href="https://www.sparkpost.com"
               title="SparkPost"><img alt="SparkPost" height="68" src="/assets/images/sparkpost-logo-color.svg" width="188" /></a></h4>
-              
+
               <div className="join-panel">
                 <div className="join-panel__body">
                   <h3 className="margin-bottom-xl" id="sp-login-message"><span>Log In</span></h3>
 
                   <form>
-                    
+
                     {this.renderLoginError()}
-                    
+
                     <div className="row">
                       <div className="col-xs-12">
                         <div className="form-group">
@@ -98,18 +98,18 @@ class AuthPage extends Component {
                         </div>
                       </div>
                     </div>
-                    
+
                     <div className="row margin-bottom-md">
                       <div className="col-xs-12">
                         <div className="form-group">
                           <div className="text-muted">Password</div>
                           <input className="form-control input-sm form-password"
-                          name="password" required={true} value={this.state.password} 
+                          name="password" required={true} value={this.state.password}
                           type="password" onChange={(e) => this.updateInput('password', e.target.value)} />
                         </div>
                       </div>
                     </div>
-                    
+
                     <div className="row">
                       <div className="col-xs-12 margin-bottom-md">
                         <div className="checkbox small">
@@ -118,7 +118,7 @@ class AuthPage extends Component {
                         </div>
                       </div>
                     </div>
-                    
+
                     <div className="row">
                       <div className="col-xs-12">
                         <button className="btn btn-primary btn-loading" id="login-button"
@@ -128,9 +128,9 @@ class AuthPage extends Component {
                         }}>Log In<i className="fa fa-spinner fa-spin"></i></button>
                       </div>
                     </div>
-                    
+
                   </form>
-                  
+
                 </div>
               </div>
             </div>
@@ -152,7 +152,7 @@ class App extends Component {
             <Redirect to="/auth" />
           </Route>
           <Route path="/auth" component={AuthPageRouter} />
-          
+
           <Route path="/dashboard" render={() => <h1>Dashboard</h1>} />
         </div>
       </Router>
