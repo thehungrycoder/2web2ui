@@ -1,19 +1,10 @@
 import { sparkpostLogin } from '../helpers/http';
 import authCookie from '../helpers/authCookie';
 
-export function checkLogin() {
-  // check if auth cookie exists
-  const data = authCookie.get();
-  if (data && data.access_token) {
-    return {
-      type: 'LOGIN_SUCCESS',
-      payload: data
-    };
-  }
-  
+export function login(authData) {
   return {
-    type: 'LOGIN_FAIL',
-    payload: {}
+    type: 'LOGIN_SUCCESS',
+    payload: authData
   };
 }
 
@@ -28,7 +19,7 @@ export function clearAuthRedirect() {
   return { type: 'CLEAR_AUTH_REDIRECT' };
 }
 
-export function login(username, password, remember_me = false) {
+export function authenticate(username, password, remember_me = false) {
       
   // return a thunk
   return (dispatch, getState) => {
@@ -48,15 +39,14 @@ export function login(username, password, remember_me = false) {
         authCookie.save(payload);
         
         // dispatch login success event
-        dispatch({
-          type: 'LOGIN_SUCCESS', 
-          payload
-        });
+        dispatch(login(payload));
       })
       .catch((err) => {
         const { response = {}} = err;
         const { data = {}} = response;
         const { error_description: errorDescription = 'An unknown error occurred' } = data;
+        
+        // TODO: handle a timeout error better
         
         dispatch({
           type: 'LOGIN_FAIL',

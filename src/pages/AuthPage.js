@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { login } from '../actions/auth';
+import { authenticate } from '../actions/auth';
 import { withRouter } from 'react-router-dom';
 
 class AuthPage extends Component {
@@ -88,7 +88,7 @@ class AuthPage extends Component {
                         type="submit" onClick={(e) => {
                           const { username, password, remember_me } = this.state;
                           e.preventDefault();
-                          this.props.login(username, password, remember_me);
+                          this.props.authenticate(username, password, remember_me);
                         }}>{this.renderLoginButton()}</button>
                       </div>
                     </div>
@@ -109,4 +109,4 @@ function mapStateToProps({ auth }) {
   return { auth };
 }
 
-export default withRouter(connect(mapStateToProps, { login })(AuthPage));
+export default withRouter(connect(mapStateToProps, { authenticate })(AuthPage));

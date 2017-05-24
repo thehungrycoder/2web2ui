@@ -1,23 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import _ from 'lodash';
 import authCookie from '../helpers/authCookie';
+import { login } from '../actions/auth';
 
 export class _AuthenticationGate extends Component {
   
   componentWillMount() {
-    const { auth, dispatch } = this.props;
+    const { auth } = this.props;
     if (auth.loggedIn && auth.access_token) {
       return;
     }
         
     const foundCookie = authCookie.get();
     if (foundCookie) {
-      dispatch({
-        type: 'LOGIN_SUCCESS',
-        payload: foundCookie
-      });
+      this.props.login(foundCookie);
     }
   }
   
@@ -36,8 +34,14 @@ export class _AuthenticationGate extends Component {
   }
   
   render() {
-    return <p className="small text-muted text-center">You are currently: <strong>{this.props.auth.loggedIn ? 'logged in' : 'not logged in'}</strong></p>;
+    const { loggedIn } = this.props.auth
+    return (
+      <div className="small text-center">
+        <p className="text-muted">You are currently: <strong>{loggedIn ? 'logged in' : 'not logged in'}</strong></p>
+        {loggedIn && <Link to='/logout'>Log out</Link>}
+      </div>
+    );
   }
 }
 
-export default withRouter(connect(({ auth }) => ({ auth }))(_AuthenticationGate));
+export default withRouter(connect(({ auth }) => ({ auth }), { login })(_AuthenticationGate));

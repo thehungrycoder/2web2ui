@@ -4,11 +4,11 @@ export default (state, action) => {
       return { ...state, error_description: null, loginPending: true }
       
     case 'LOGIN_SUCCESS':
-      const { token, username = state.username, refresh_token } = action.payload;
+      const { access_token: token, username = state.username, refresh_token: refreshToken } = action.payload;
       return {
         token,
         username,
-        refresh_token,
+        refreshToken,
         loggedIn: true
       };
       
@@ -17,18 +17,6 @@ export default (state, action) => {
         ...action.payload,
         loggedIn: false
       }
-    
-    // case 'AUTH_REDIRECT':
-    //   return {
-    //     ...state,
-    //     redirectPath: action.payload.path
-    //   }
-    // 
-    // case 'CLEAR_AUTH_REDIRECT':
-    //   return {
-    //     ...state,
-    //     redirectPath: null
-    //   }
 
     default:
       return { loggedIn: false, redirectPath: null };
