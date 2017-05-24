@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { login } from '../actions/auth';
+import { withRouter } from 'react-router-dom';
 
 class AuthPage extends Component {
   state = {
@@ -29,8 +30,11 @@ class AuthPage extends Component {
     );
   }
   
+  renderLoginButton() {
+    return this.props.auth.loginPending ? <span><i className="fa fa-spinner fa-spin"></i> Logging In</span> : <span>Log In</span>;
+  }
+  
   render() {
-    console.log('rendering authpage component');
     return (
       <div className="join-wrapper">
         <div className="join-content">
@@ -85,7 +89,7 @@ class AuthPage extends Component {
                           const { username, password, remember_me } = this.state;
                           e.preventDefault();
                           this.props.login(username, password, remember_me);
-                        }}>Log In<i className="fa fa-spinner fa-spin"></i></button>
+                        }}>{this.renderLoginButton()}</button>
                       </div>
                     </div>
                     
@@ -105,4 +109,4 @@ function mapStateToProps({ auth }) {
   return { auth };
 }
 
-export default connect(mapStateToProps, { login })(AuthPage);
+export default withRouter(connect(mapStateToProps, { login })(AuthPage));

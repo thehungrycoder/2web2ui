@@ -17,16 +17,27 @@ export function checkLogin() {
   };
 }
 
+export function setAuthRedirect(path) {
+  return {
+    type: 'AUTH_REDIRECT',
+    payload: { path }
+  }
+}
+
+export function clearAuthRedirect() {
+  return { type: 'CLEAR_AUTH_REDIRECT' };
+}
+
 export function login(username, password, remember_me = false) {
-  
+      
   // return a thunk
   return (dispatch, getState) => {
     const { loggedIn } = getState().auth;
-    
+        
     if (loggedIn) {
       return;
     }
-    
+            
     dispatch({ type: 'LOGIN_PENDING' });
     
     sparkpostLogin(username, password, remember_me)

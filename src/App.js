@@ -14,12 +14,22 @@ import {
   withRouter
 } from 'react-router-dom'
 
-import axios from 'axios';
-
 import './App.scss';
+
+class _Logout extends Component {
+  componentDidMount() {
+    this.props.logout();
+    this.props.history.push('/auth');
+  }
+  render() {
+    return null;
+  }
+}
+const Logout = withRouter(connect(null, { logout })(_Logout));
 
 class _ProtectedRoute extends Component {
   render() {
+    const { component: Component, auth, ...rest } = this.props;
     return (
       <Route {...rest} render={(props) => (
         auth.loggedIn ? (
@@ -34,19 +44,20 @@ class _ProtectedRoute extends Component {
     );
   }
 }
-const ProtectedRoute = connect(({ auth }) => ({ auth }))(_ProtectedRoute);
+const ProtectedRoute = withRouter(connect(({ auth }) => ({ auth }))(_ProtectedRoute));
 
 const Dashboard = () => <h1>Dashboard</h1>;
 const SummaryReport = () => <h1>Summary Report</h1>;
+const ForgotPassword = () => <h1>Forgot Password</h1>;
 
-class _AuthenticationContainer extends Component {
+class _AuthenticationGate extends Component {
   
   componentWillMount() {
     const { auth, dispatch } = this.props;
-    if (auth.loggedIn) {
+    if (auth.loggedIn && auth.access_token) {
       return;
     }
-    
+        
     const foundCookie = authCookie.get();
     if (foundCookie) {
       dispatch({
@@ -56,44 +67,37 @@ class _AuthenticationContainer extends Component {
     }
   }
   
-  componentWillUpdate(newProps) {
+  componentWillUpdate(newProps) {    
     const { auth, history, location = {} } = this.props;
     let redirectPath = _.get(location, 'state.redirectAfterLogin');
     
     if (location.pathname === '/auth' && newProps.location.pathname === '/auth' && !redirectPath) {
       redirectPath = '/dashboard';
     }
-    
-    console.log('what', location.pathname, newProps.location.pathname, redirectPath);
-    console.log('receiving props', this.props, newProps);
-    
-    // if logging in with redirect
+  
+    // if logging in
     if (!auth.loggedIn && newProps.auth.loggedIn && redirectPath) {
-      console.log('log in', redirectPath);
       history.push(redirectPath);
-    }
-    
-    // if logging out
-    if (auth.loggedIn && !newProps.auth.loggedIn) {
-      console.log('log out');
-      history.push('/auth');
     }
   }
   
   render() {
-    return <div className="app-container">{this.props.children}</div>;
+    return <h1><strong>You are currently:</strong> {this.props.auth.loggedIn ? 'logged in' : 'not logged in'}</h1>;
   }
 }
-const AuthenticationContainer = withRouter(connect(({ auth }) => ({ auth }))(_AuthenticationContainer));
+const AuthenticationGate = withRouter(connect(({ auth }) => ({ auth }))(_AuthenticationGate));
 
 export default () => (
   <Router>
-    <AuthenticationContainer>
-      <Route path="/auth" component={AuthPage} />
+    <div>
+      <AuthenticationGate />
       
-      <ProtectedRoute path="/dashboard" component={Dashboard} />
-      <ProtectedRoute path="/summary" component={SummaryReport} />
-      <Route path="/logout" component={Logout} />
-    </AuthenticationContainer>
+      <Route path='/auth' component={AuthPage} />
+      <Route path='/forgot-password' component={ForgotPassword} />
+      <Route path='/logout' component={Logout} />
+          
+      <ProtectedRoute path='/dashboard' component={Dashboard} />
+      <ProtectedRoute path='/summary' component={SummaryReport} />
+    </div>
   </Router>
 );
