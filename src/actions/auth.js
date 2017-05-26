@@ -1,26 +1,22 @@
 import { sparkpostLogin } from '../helpers/http';
 import authCookie from '../helpers/authCookie';
+import { fetch as fetchAccount } from './account';
+import { fetch as fetchCurrentUser } from './currentUser';
 
 export function login(authData) {
-  return {
-    type: 'LOGIN_SUCCESS',
-    payload: authData
-  };
-}
-
-export function setAuthRedirect(path) {
-  return {
-    type: 'AUTH_REDIRECT',
-    payload: { path }
+  return (dispatch) => {
+    dispatch({
+      type: 'LOGIN_SUCCESS',
+      payload: authData
+    });
+    
+    // initialize some state
+    dispatch(fetchAccount({ includeBilling: true }));
+    dispatch(fetchCurrentUser());
   }
 }
 
-export function clearAuthRedirect() {
-  return { type: 'CLEAR_AUTH_REDIRECT' };
-}
-
 export function authenticate(username, password, remember_me = false) {
-      
   // return a thunk
   return (dispatch, getState) => {
     const { loggedIn } = getState().auth;

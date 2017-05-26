@@ -1,4 +1,6 @@
-export default (state, action) => {
+const initialState = { loggedIn: false };
+
+export default (state = initialState, action) => {
   switch(action.type) {
     case 'LOGIN_PENDING':
       return { ...state, error_description: null, loginPending: true }
@@ -11,14 +13,8 @@ export default (state, action) => {
         refreshToken,
         loggedIn: true
       };
-      
-    case 'LOGIN_FAIL':
-      return {
-        ...action.payload,
-        loggedIn: false
-      }
-
+    
     default:
-      return { loggedIn: false, redirectPath: null };
+      return state;
   }
 }

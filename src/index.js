@@ -5,7 +5,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import spApiMiddleware from './middleware/sparkpostApiMiddleware';
 import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+import registerServiceWorker from './helpers/registerServiceWorker';
 import rootReducer from './reducers';
 
 import './index.scss';

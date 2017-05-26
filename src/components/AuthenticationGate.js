@@ -9,7 +9,7 @@ export class _AuthenticationGate extends Component {
   
   componentWillMount() {
     const { auth } = this.props;
-    if (auth.loggedIn && auth.access_token) {
+    if (auth.loggedIn && auth.token) {
       return;
     }
         
