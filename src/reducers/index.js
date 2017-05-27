@@ -7,4 +7,4 @@ export default combineReducers({
   account,
   currentUser,
   auth
-})
+});

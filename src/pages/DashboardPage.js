@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 export class DashboardPage extends Component {
-  renderKeyValue(object, key) {
+  renderKeyValue (object, key) {
     return (
       <tr key={key}>
         <td>{key}</td>
@@ -10,8 +10,8 @@ export class DashboardPage extends Component {
       </tr>
     );
   }
-  
-  render() {
+
+  render () {
     return (
       <div>
         <h1>My Dashboard</h1>
@@ -24,10 +24,10 @@ export class DashboardPage extends Component {
             {this.props.account ? Object.keys(this.props.account).map((key) => this.renderKeyValue('account', key)) : null}
           </tbody>
         </table>
-        
+
         <br />
         <br />
-        
+
         <table>
           <thead>
             <tr><th colSpan={2} style={{ borderBottom: '1px solid #ccc', paddingBottom: '5px' }}>User</th></tr>
@@ -38,7 +38,7 @@ export class DashboardPage extends Component {
           </tbody>
         </table>
       </div>
-    )
+    );
   }
 }
 

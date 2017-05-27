@@ -1,4 +1,4 @@
-export function fetch() {
+export function fetch () {
   return (dispatch, getState) => {
     const { username } = getState().auth;
     dispatch({
@@ -9,6 +9,5 @@ export function fetch() {
         url: `/users/${username}`
       }
     });
-  }
-  
+  };
 }

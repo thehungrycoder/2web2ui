@@ -1,4 +1,4 @@
-export function fetch(params = {}) {
+export function fetch (params = {}) {
   return {
     type: 'SPARKPOST_API_REQUEST',
     meta: {
@@ -7,5 +7,5 @@ export function fetch(params = {}) {
       url: '/account',
       params
     }
-  }
+  };
 }

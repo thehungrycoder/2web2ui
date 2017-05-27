@@ -10,9 +10,8 @@ import { sparkpostRequest, useRefreshToken } from '../helpers/http';
 
 const maxRefreshRetries = 3;
 
-export default function sparkpostApiRequest({ dispatch, getState }) {
+export default function sparkpostApiRequest ({ dispatch, getState }) {
   return (next) => (action) => {
-
     next(action);
 
     if (action.type !== 'SPARKPOST_API_REQUEST') {
@@ -42,7 +41,7 @@ export default function sparkpostApiRequest({ dispatch, getState }) {
       _.set(httpOptions, 'headers.Authorization', auth.token);
     }
 
-    return sparkpostRequest(httpOptions).then(({ data: { results }}) => {
+    return sparkpostRequest(httpOptions).then(({ data: { results } }) => {
       // we only get here if the request returned a 2xx status code
       dispatch({
         type: SUCCESS_TYPE,
@@ -53,7 +52,6 @@ export default function sparkpostApiRequest({ dispatch, getState }) {
       if (typeof chain.success === 'function') {
         chain.success({ dispatch, getState, results });
       }
-
     }, ({ message, response = {} }) => {
       // NOTE: if this is a 401, need to do a refresh to get
       // a new auth token and then re-dispatch this action
