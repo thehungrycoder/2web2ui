@@ -8,6 +8,7 @@ import Nav from './components/Nav';
 // Pages
 import AuthPage from './pages/AuthPage';
 import DashboardPage from './pages/DashboardPage';
+import SummaryReportPage from './pages/SummaryReportPage';
 
 import {
   BrowserRouter as Router,
@@ -15,7 +16,6 @@ import {
   Redirect
 } from 'react-router-dom';
 
-const SummaryReport = () => <h1>Summary Report</h1>;
 const ForgotPassword = () => <h1>Forgot Password</h1>;
 
 export default () => (
@@ -30,7 +30,7 @@ export default () => (
       <ProtectedRoute path='/' component={Nav} />
       <ProtectedRoute path='/dashboard' component={DashboardPage} />
       <Route path='/reports' render={() => <Redirect to='/reports/summary' />} />
-      <ProtectedRoute path='/reports/summary' component={SummaryReport} />
+      <ProtectedRoute path='/reports/summary' component={SummaryReportPage} />
     </div>
   </Router>
 );
