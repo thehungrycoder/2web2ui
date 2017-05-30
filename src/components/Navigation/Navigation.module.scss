@@ -1,0 +1,27 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.navigation {
+  position: fixed;
+  width: rem(220);
+  background: color(gray, 1);
+  min-height: 100vh;
+}
+
+
+.list, .nestedList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.link, .link:visited {
+  display: block;
+  padding: spacing();
+  color: color(gray, 5);
+
+  &:hover {
+    background: color(gray, 2);
+    color: color(gray, 10);
+    text-decoration: none;
+  }
+}

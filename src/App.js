@@ -3,7 +3,6 @@ import React from 'react';
 // Components
 import ProtectedRoute from './components/ProtectedRoute';
 import AuthenticationGate from './components/AuthenticationGate';
-import Nav from './components/Nav';
 
 // Pages
 import AuthPage from './pages/AuthPage';
@@ -27,7 +26,6 @@ export default () => (
       <Route path='/auth' component={AuthPage} />
       <Route path='/forgot-password' component={ForgotPassword} />
 
-      <ProtectedRoute path='/' component={Nav} />
       <ProtectedRoute path='/dashboard' component={DashboardPage} />
       <Route path='/reports' render={() => <Redirect to='/reports/summary' />} />
       <ProtectedRoute path='/reports/summary' component={SummaryReportPage} />

@@ -1,0 +1,37 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.wrapper {
+  position: relative;
+  display: flex;
+  min-height: 100vh;
+}
+
+.accent:before {
+  display: block;
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 3px;
+  background: color(orange);
+  z-index: 100;
+}
+
+.aside {
+  position: relative;
+  flex: 1 0 0;
+  max-width: rem(220);
+  min-width: rem(220);
+}
+
+.content {
+  position: relative;
+  flex: 1 0 0;
+  padding: spacing(larger);
+}
+
+.contentContainer {
+  max-width: rem(920);
+  margin: 0 auto;
+}

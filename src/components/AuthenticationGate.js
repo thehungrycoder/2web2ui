@@ -35,11 +35,12 @@ export class _AuthenticationGate extends Component {
 
   render () {
     const { loggedIn } = this.props.auth;
-    return (
-      <div className="small text-center">
-        <p className="text-muted" style={{ padding: '5px 0' }}>You are currently: <strong>{loggedIn ? 'logged in' : 'not logged in'}</strong></p>
-      </div>
-    );
+    return null;
+    // return (
+    //   <div className="small text-center">
+    //     <p className="text-muted" style={{ padding: '5px 0' }}>You are currently: <strong>{loggedIn ? 'logged in' : 'not logged in'}</strong></p>
+    //   </div>
+    // );
   }
 }
 
