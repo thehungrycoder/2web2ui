@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { authenticate } from '../actions/auth';
-import { withRouter } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 class AuthPage extends Component {
   state = {
@@ -35,6 +35,9 @@ class AuthPage extends Component {
   }
 
   render () {
+    if (this.props.auth.loggedIn) {
+      return <Redirect to='/dashboard' />;
+    }
     return (
       <div className="join-wrapper">
         <div className="join-content">
@@ -109,4 +112,4 @@ function mapStateToProps ({ auth }) {
   return { auth };
 }
 
-export default withRouter(connect(mapStateToProps, { authenticate })(AuthPage));
+export default connect(mapStateToProps, { authenticate })(AuthPage);
