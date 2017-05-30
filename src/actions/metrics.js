@@ -2,7 +2,7 @@ import moment from 'moment';
 
 const apiFormat = 'YYYY-MM-DDTHH:MM';
 const defaultParams = () => ({
-  from: moment().subtract(1, 'days').format(apiFormat),
+  from: moment().subtract(30, 'days').format(apiFormat),
   metrics: 'count_targeted'
 });
 
