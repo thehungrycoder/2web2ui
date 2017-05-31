@@ -9,7 +9,7 @@ const App = ({ children }) => (
       <Navigation />
     </div>
     <main role="main" className={styles.content}>
-      <div className={styles.contentContainer}>
+      <div className={styles.container}>
         { children }
       </div>
     </main>
@@ -18,8 +18,8 @@ const App = ({ children }) => (
 
 const Form = ({ children }) => (
   <div className={styles.wrapper}>
-    <main role="main" className={styles.content}>
-      <div className={styles.contentContainer}>
+    <main role="main" className={styles.formContent}>
+      <div className={styles.formContainer}>
         { children }
       </div>
     </main>

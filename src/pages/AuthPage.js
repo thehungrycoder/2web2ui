@@ -4,6 +4,7 @@ import { authenticate } from '../actions/auth';
 import { Redirect } from 'react-router-dom';
 
 import Layout from '../components/Layout/Layout';
+import { Panel } from '@sparkpost/matchbox';
 
 class AuthPage extends Component {
   state = {
@@ -42,71 +43,44 @@ class AuthPage extends Component {
     }
     return (
       <Layout.Form>
-        <div className="join-wrapper">
-          <div className="join-content">
-            <div className="row">
-              <div className="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-                <h4 className="logo-type margin-bottom-lg text-center"><a href="https://www.sparkpost.com"
-                title="SparkPost"><img alt="SparkPost" height="68" src="/assets/images/sparkpost-logo-color.svg" width="188" /></a></h4>
+        <a href="https://www.sparkpost.com" title="SparkPost">
+          <img alt="SparkPost" height="68" src="/assets/images/sparkpost-logo-color.svg" width="188" />
+        </a>
 
-                <div className="join-panel">
-                  <div className="join-panel__body">
-                    <h3 className="margin-bottom-xl" id="sp-login-message"><span>Log In</span></h3>
+        <Panel sectioned accent>
 
-                    <form>
-
-                      {this.renderLoginError()}
-
-                      <div className="row">
-                        <div className="col-xs-12">
-                          <div className="form-group">
-                            <div className="text-muted">Username or Email</div>
-                            <input autoFocus={true} className="form-control input-sm form-username"
-                            name="username" required={true} value={this.state.username}
-                            type="text" onChange={(e) => this.updateInput('username', e.target.value)} />
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="row margin-bottom-md">
-                        <div className="col-xs-12">
-                          <div className="form-group">
-                            <div className="text-muted">Password</div>
-                            <input className="form-control input-sm form-password"
-                            name="password" required={true} value={this.state.password}
-                            type="password" onChange={(e) => this.updateInput('password', e.target.value)} />
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="row">
-                        <div className="col-xs-12 margin-bottom-md">
-                          <div className="checkbox small">
-                            <label><input name="remember_me" type="checkbox"
-                            checked={this.state.remember_me} onChange={(e) => this.updateInput('remember_me', e.target.checked)} /> Keep me logged in</label>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="row">
-                        <div className="col-xs-12">
-                          <button className="btn btn-primary btn-loading" id="login-button"
-                          type="submit" onClick={(e) => {
-                            const { username, password, remember_me } = this.state;
-                            e.preventDefault();
-                            this.props.authenticate(username, password, remember_me);
-                          }}>{this.renderLoginButton()}</button>
-                        </div>
-                      </div>
-
-                    </form>
-
-                  </div>
-                </div>
+            <h3 className="margin-bottom-xl" id="sp-login-message"><span>Log In</span></h3>
+            <form>
+              {this.renderLoginError()}
+              <div className="form-group">
+                <div className="text-muted">Username or Email</div>
+                <input autoFocus={true} className="form-control input-sm form-username"
+                name="username" required={true} value={this.state.username}
+                type="text" onChange={(e) => this.updateInput('username', e.target.value)} />
               </div>
-            </div>
-          </div>
-        </div>
+
+              <div className="form-group">
+                <div className="text-muted">Password</div>
+                <input className="form-control input-sm form-password"
+                name="password" required={true} value={this.state.password}
+                type="password" onChange={(e) => this.updateInput('password', e.target.value)} />
+              </div>
+
+              <div className="checkbox small">
+                <label><input name="remember_me" type="checkbox"
+                checked={this.state.remember_me} onChange={(e) => this.updateInput('remember_me', e.target.checked)} /> Keep me logged in</label>
+              </div>
+
+              <button className="btn btn-primary btn-loading" id="login-button"
+              type="submit" onClick={(e) => {
+                const { username, password, remember_me } = this.state;
+                e.preventDefault();
+                this.props.authenticate(username, password, remember_me);
+              }}>{this.renderLoginButton()}</button>
+
+            </form>
+
+        </Panel>
       </Layout.Form>
     );
   }
