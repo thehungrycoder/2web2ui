@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Navigation Item renders a top level link correctly 1`] = `
+<span>
+  <li>
+    <Link
+      className=""
+      replace={false}
+      to="/to"
+    >
+      <span>
+        icon
+      </span>
+      label
+    </Link>
+  </li>
+</span>
+`;

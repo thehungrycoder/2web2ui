@@ -7,7 +7,7 @@ import Footer from './Footer';
 import navItems from './navItems';
 import styles from './Navigation.module.scss';
 
-export class Navigation extends Component {
+class Navigation extends Component {
   renderItems () {
     return navItems.map((item, key) => <Item {...item} key={key} />);
   }

@@ -9,7 +9,7 @@ const Chevron = () => (
   <path d="M1427 301l-531 531 531 531q19 19 19 45t-19 45l-166 166q-19 19-45 19t-45-19l-742-742q-19-19-19-45t19-45l742-742q19-19 45-19t45 19l166 166q19 19 19 45t-19 45z"/></svg>
 );
 
-export class Item extends Component {
+export class DetachedItem extends Component {
   constructor (props) {
     super(props);
 
@@ -81,4 +81,4 @@ export class Item extends Component {
     );
   }
 }
-export default withRouter(Item);
+export default withRouter(DetachedItem);
