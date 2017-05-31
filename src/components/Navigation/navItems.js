@@ -2,22 +2,21 @@ export default [
   {
     label: 'Dashboard',
     to: '/dashboard',
-    icon: 'test'
+    icon: '🏠'
   },
   {
     label: 'Reports',
-    to: '/reports',
-    icon: 'test',
+    to: '/reports', // This does nothing right now
+    icon: '📈',
     children: [
       {
         label: 'Summary',
         to: '/reports/summary'
+      },
+      {
+        label: 'Message Events',
+        to: '/reports/message-events'
       }
     ]
-  },
-  {
-    label: 'Account',
-    to: '/reports',
-    icon: 'test'
   }
 ];

@@ -4,24 +4,90 @@
   position: fixed;
   width: rem(220);
   background: color(gray, 1);
-  min-height: 100vh;
+  height: 100vh;
+  overflow-y: auto;
 }
 
 
-.list, .nestedList {
+.list, .nestedList, .footer {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
+.list {
+  min-height: 100%;
+  padding-bottom: rem(136);
+  margin-bottom: rem(-136);
+}
+
 .link, .link:visited {
+  position: relative;
   display: block;
-  padding: spacing();
+  padding: spacing(large);
   color: color(gray, 5);
 
+  text-decoration: none;
+
+  transition: 0.15s;
+
   &:hover {
-    background: color(gray, 2);
     color: color(gray, 10);
-    text-decoration: none;
+    cursor: pointer;
+
+    .chevron {
+      fill: color(gray, 10);
+    }
   }
+
+  &.isActive {
+    color: color(gray, 10);
+    background: color(gray, 2);
+  }
+
+  &.hasChildren {
+    & + .nestedList {
+      display: none;
+    }
+  }
+
+  &.hasChildren.isOpen {
+    background: color(gray, 1);
+
+    .chevron {
+      transform: translate(0, -50%) rotate(-90deg);
+    }
+
+    & + .nestedList {
+      display: block;
+    }
+  }
+}
+
+.nestedList {
+  margin-bottom: spacing();
+}
+
+.nestedList .link {
+  padding: rem(12) spacing(large) rem(12) rem(54);
+}
+
+.icon {
+  display: inline-block;
+  width: rem(30);
+}
+
+.chevron {
+  position: absolute;
+  top: 50%;
+  right: rem(15);
+  width: rem(15);
+  height: rem(15);
+  transform: translate(0, -50%);
+  fill: color(gray, 4);
+  transition: 0.1s;
+}
+
+.footer {
+
 }
