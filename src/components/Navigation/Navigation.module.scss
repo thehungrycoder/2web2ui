@@ -17,17 +17,23 @@
 
 .list {
   min-height: 100%;
-  padding-bottom: rem(136);
-  margin-bottom: rem(-136);
+  padding-bottom: rem(130);
+  margin-bottom: rem(-130);
+  padding-top: spacing();
 }
 
 .link, .link:visited {
   position: relative;
   display: block;
-  padding: spacing(large);
+  padding: spacing() spacing(large);
   color: color(gray, 5);
 
   text-decoration: none;
+  font-size: rem(14);
+  font-weight: 500;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 
   transition: 0.15s;
 
@@ -89,5 +95,5 @@
 }
 
 .footer {
-
+  padding-bottom: spacing();
 }
