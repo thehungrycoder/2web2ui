@@ -23,7 +23,7 @@ export class DetachedItem extends Component {
 
     return (
       <ul className={styles.nestedList}>
-        { children.map((child, key) => <Item {...child} location={location} key={key} />) }
+        { children.map((child, key) => <DetachedItem {...child} location={location} key={key} />) }
       </ul>
     );
   }
@@ -81,4 +81,5 @@ export class DetachedItem extends Component {
     );
   }
 }
+
 export default withRouter(DetachedItem);
