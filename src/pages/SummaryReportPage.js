@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { fetch as fetchMetrics } from '../actions/metrics';
 import { Line as LineChart } from 'react-chartjs-2';
+import Layout from '../components/Layout/Layout';
 import _ from 'lodash';
 import moment from 'moment';
 
@@ -69,7 +70,7 @@ class SummaryReportPage extends Component {
 
   render () {
     if (!this.props.metrics.length || this.props.metrics.loading) {
-      return null;
+      return <Layout.App></Layout.App>;
     }
 
     // console.log(JSON.stringify(this.props.metrics, null, 2));
@@ -104,7 +105,7 @@ class SummaryReportPage extends Component {
     console.log(JSON.stringify(data, null, 2));
 
     return (
-      <div>
+      <Layout.App>
         <h1>Summary Report</h1>
         <p>From: {this.state.queryParams.from || 'not specified'}</p>
         <form>
@@ -123,7 +124,7 @@ class SummaryReportPage extends Component {
           width={800}
         >
         </LineChart>
-      </div>
+      </Layout.App>
     );
   }
 }

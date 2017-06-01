@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'; // eslint-disable-line no-unused-vars
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import _ from 'lodash';
@@ -34,12 +34,8 @@ export class _AuthenticationGate extends Component {
   }
 
   render () {
-    const { loggedIn } = this.props.auth;
-    return (
-      <div className="small text-center">
-        <p className="text-muted" style={{ padding: '5px 0' }}>You are currently: <strong>{loggedIn ? 'logged in' : 'not logged in'}</strong></p>
-      </div>
-    );
+    return null;
+    // return <p className="text-muted" style={{ padding: '5px 0' }}>You are currently: <strong>{loggedIn ? 'logged in' : 'not logged in'}</strong></p>;
   }
 }
 

@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders without crashing 1`] = `
+<BrowserRouter>
+  <div>
+    <withRouter(Connect(_AuthenticationGate)) />
+    <Route
+      exact={true}
+      path="/"
+      render={[Function]}
+    />
+    <Route
+      component={[Function]}
+      path="/auth"
+    />
+    <Route
+      component={[Function]}
+      path="/forgot-password"
+    />
+    <withRouter(Connect(_ProtectedRoute))
+      component={[Function]}
+      path="/dashboard"
+    />
+    <Route
+      path="/reports"
+      render={[Function]}
+    />
+    <withRouter(Connect(_ProtectedRoute))
+      component={[Function]}
+      path="/reports/summary"
+    />
+  </div>
+</BrowserRouter>
+`;

@@ -1,0 +1,99 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.navigation {
+  position: fixed;
+  width: rem(220);
+  background: color(gray, 1);
+  height: 100vh;
+  overflow-y: auto;
+}
+
+
+.list, .nestedList, .footer {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.list {
+  min-height: 100%;
+  padding-bottom: rem(130);
+  margin-bottom: rem(-130);
+  padding-top: spacing();
+}
+
+.link, .link:visited {
+  position: relative;
+  display: block;
+  padding: spacing() spacing(large);
+  color: color(gray, 5);
+
+  text-decoration: none;
+  font-size: rem(14);
+  font-weight: 500;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  transition: 0.15s;
+
+  &:hover {
+    color: color(gray, 10);
+    cursor: pointer;
+
+    .chevron {
+      fill: color(gray, 10);
+    }
+  }
+
+  &.isActive {
+    color: color(gray, 10);
+    background: color(gray, 2);
+  }
+
+  &.hasChildren {
+    & + .nestedList {
+      display: none;
+    }
+  }
+
+  &.hasChildren.isOpen {
+    background: color(gray, 1);
+
+    .chevron {
+      transform: translate(0, -50%) rotate(-90deg);
+    }
+
+    & + .nestedList {
+      display: block;
+    }
+  }
+}
+
+.nestedList {
+  margin-bottom: spacing();
+}
+
+.nestedList .link {
+  padding: rem(12) spacing(large) rem(12) rem(54);
+}
+
+.icon {
+  display: inline-block;
+  width: rem(30);
+}
+
+.chevron {
+  position: absolute;
+  top: 50%;
+  right: rem(15);
+  width: rem(15);
+  height: rem(15);
+  transform: translate(0, -50%);
+  fill: color(gray, 4);
+  transition: 0.1s;
+}
+
+.footer {
+  padding-bottom: spacing();
+}
