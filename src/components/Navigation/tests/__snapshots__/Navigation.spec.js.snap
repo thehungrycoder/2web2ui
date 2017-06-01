@@ -1,18 +1,64 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Navigation Item renders a top level link correctly 1`] = `
+exports[`Navigation Item renders a link correctly 1`] = `
 <span>
   <li>
-    <Link
-      className=""
-      replace={false}
-      to="/to"
+    <a
+      class=""
+      href="/to"
     >
       <span>
         icon
       </span>
       label
-    </Link>
+    </a>
+  </li>
+</span>
+`;
+
+exports[`Navigation Item renders children correctly 1`] = `
+<span>
+  <li>
+    <a
+      class=""
+    >
+      <span>
+        icon
+      </span>
+      label
+      <svg
+        height="1792"
+        viewbox="0 0 1792 1792"
+        width="1792"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M1427 301l-531 531 531 531q19 19 19 45t-19 45l-166 166q-19 19-45 19t-45-19l-742-742q-19-19-19-45t19-45l742-742q19-19 45-19t45 19l166 166q19 19 19 45t-19 45z"
+        />
+      </svg>
+    </a>
+    <ul>
+      <span>
+        <li>
+          <a
+            class=""
+            href="/child1"
+          >
+            child 1
+          </a>
+        </li>
+      </span>
+      <span>
+        <li>
+          <a
+            class=""
+            href="/child2"
+          >
+            child 2
+          </a>
+        </li>
+      </span>
+    </ul>
   </li>
 </span>
 `;

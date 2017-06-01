@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { logout } from '../../actions/auth';
+import { withRouter } from 'react-router-dom';
 
 import Item from './Item';
 import Footer from './Footer';
@@ -9,7 +8,7 @@ import styles from './Navigation.module.scss';
 
 class Navigation extends Component {
   renderItems () {
-    return navItems.map((item, key) => <Item {...item} key={key} />);
+    return navItems.map((item, key) => <Item {...item} location={this.props.location} key={key} />);
   }
 
   render () {
@@ -24,4 +23,4 @@ class Navigation extends Component {
   }
 }
 
-export default connect(({ auth }) => ({ auth }), { logout })(Navigation);
+export default withRouter(Navigation);

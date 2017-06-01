@@ -18,6 +18,21 @@ export class DetachedItem extends Component {
     };
   }
 
+  isActive () {
+    const { to, location } = this.props;
+    return location.pathname.includes(to);
+  }
+
+  handleParentClick () {
+    this.setState({ open: !this.state.open });
+  }
+
+  componentWillMount () {
+    if (this.isActive()) {
+      this.setState({ open: true });
+    }
+  }
+
   renderChildren () {
     const { children, location } = this.props;
 
@@ -28,29 +43,15 @@ export class DetachedItem extends Component {
     );
   }
 
-  handleClick () {
-    this.setState({ open: !this.state.open });
-  }
-
-  componentWillMount () {
-    const { to, location } = this.props;
-    if (location.pathname.includes(to)) {
-      this.setState({
-        open: true
-      });
-    }
-  }
-
   render () {
     const {
       to,
       icon,
       label,
-      location,
       children
     } = this.props;
 
-    const active = location.pathname.includes(to); // Not sure if this is the best way to do this
+    const active = this.isActive();
     const linkClasses = classnames(
       styles.link,
       active && styles.isActive,
@@ -62,7 +63,7 @@ export class DetachedItem extends Component {
       <span>
         { children
           ? <li>
-              <a onClick={() => this.handleClick()} className={linkClasses}>
+              <a onClick={() => this.handleParentClick()} className={linkClasses}>
                 <span className={styles.icon}>{ icon }</span>
                 { label }
                 <Chevron />
