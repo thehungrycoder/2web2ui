@@ -70,7 +70,7 @@ class SummaryReportPage extends Component {
 
   render () {
     if (!this.props.metrics.length || this.props.metrics.loading) {
-      return null;
+      return <Layout.App></Layout.App>;
     }
 
     // console.log(JSON.stringify(this.props.metrics, null, 2));
