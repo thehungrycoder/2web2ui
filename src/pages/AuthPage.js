@@ -4,7 +4,7 @@ import { authenticate } from '../actions/auth';
 import { Redirect } from 'react-router-dom';
 
 import Layout from '../components/Layout/Layout';
-import { Panel } from '@sparkpost/matchbox';
+import { Panel, Button, TextField } from '@sparkpost/matchbox';
 
 class AuthPage extends Component {
   state = {
@@ -52,31 +52,39 @@ class AuthPage extends Component {
             <h3 className="margin-bottom-xl" id="sp-login-message"><span>Log In</span></h3>
             <form>
               {this.renderLoginError()}
-              <div className="form-group">
-                <div className="text-muted">Username or Email</div>
-                <input autoFocus={true} className="form-control input-sm form-username"
-                name="username" required={true} value={this.state.username}
-                type="text" onChange={(e) => this.updateInput('username', e.target.value)} />
-              </div>
 
-              <div className="form-group">
-                <div className="text-muted">Password</div>
-                <input className="form-control input-sm form-password"
-                name="password" required={true} value={this.state.password}
-                type="password" onChange={(e) => this.updateInput('password', e.target.value)} />
-              </div>
+              <TextField
+                autoFocus
+                id='username'
+                label='Username or Email'
+                placeholder='Leslie Knope'
+                value={this.state.username}
+                onChange={ (e) => this.updateInput('username', e.target.value) }
+              />
+
+              <TextField
+                id='password'
+                label='Password'
+                type='password'
+                placeholder='Your Password'
+                value={this.state.password}
+                onChange={ (e) => this.updateInput('password', e.target.value) }
+              />
 
               <div className="checkbox small">
                 <label><input name="remember_me" type="checkbox"
                 checked={this.state.remember_me} onChange={(e) => this.updateInput('remember_me', e.target.checked)} /> Keep me logged in</label>
               </div>
 
-              <button className="btn btn-primary btn-loading" id="login-button"
-              type="submit" onClick={(e) => {
-                const { username, password, remember_me } = this.state;
-                e.preventDefault();
-                this.props.authenticate(username, password, remember_me);
-              }}>{this.renderLoginButton()}</button>
+              <Button
+                submit
+                primary
+                onClick={(e) => {
+                  const { username, password, remember_me } = this.state;
+                  e.preventDefault();
+                  this.props.authenticate(username, password, remember_me);
+                }}
+                >{ this.renderLoginButton() }</Button>
 
             </form>
 
