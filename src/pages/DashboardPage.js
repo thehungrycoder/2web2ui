@@ -26,7 +26,7 @@ export class DashboardPage extends Component {
           <Table>
             <thead>
               <Table.Row>
-                <Table.HeaderCell>Key</Table.HeaderCell>
+                <Table.HeaderCell style={{width: '200px'}}>Key</Table.HeaderCell>
                 <Table.HeaderCell>Value</Table.HeaderCell>
               </Table.Row>
             </thead>
@@ -40,7 +40,7 @@ export class DashboardPage extends Component {
           <Table>
             <thead>
               <Table.Row>
-                <Table.HeaderCell>Key</Table.HeaderCell>
+                <Table.HeaderCell style={{width: '200px'}}>Key</Table.HeaderCell>
                 <Table.HeaderCell>Value</Table.HeaderCell>
               </Table.Row>
             </thead>
