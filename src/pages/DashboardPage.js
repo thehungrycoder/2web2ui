@@ -2,45 +2,53 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import Layout from '../components/Layout/Layout';
+import { Panel, Table } from '@sparkpost/matchbox';
 
 export class DashboardPage extends Component {
   renderKeyValue (object, key) {
-    return (
-      <tr key={key}>
-        <td>{key}</td>
-        <td>{JSON.stringify(this.props[object][key])}</td>
-      </tr>
-    );
+    return <Table.Row key={key} rowData={ [key, JSON.stringify(this.props[object][key])] } />;
   }
 
   render () {
+    const accountMarkup = this.props.account
+      ? Object.keys(this.props.account).map((key) => this.renderKeyValue('account', key))
+      : null;
+
+    const userMarkup = this.props.currentUser
+        ? Object.keys(this.props.currentUser).map((key) => this.renderKeyValue('currentUser', key))
+        : null;
+
     return (
       <Layout.App>
-        <div>
-          <h1>My Dashboard</h1>
-          <table>
+        <h1>My Dashboard</h1>
+
+        <Panel>
+          <Table>
             <thead>
-              <tr><th colSpan={2} style={{ borderBottom: '1px solid #ccc', paddingBottom: '5px' }}>Account</th></tr>
-              <tr><th style={{ padding: '5px 0' }}>Key</th><th>Value</th></tr>
+              <Table.Row>
+                <Table.HeaderCell style={{width: '200px'}}>Key</Table.HeaderCell>
+                <Table.HeaderCell>Value</Table.HeaderCell>
+              </Table.Row>
             </thead>
             <tbody>
-              {this.props.account ? Object.keys(this.props.account).map((key) => this.renderKeyValue('account', key)) : null}
+              { accountMarkup }
             </tbody>
-          </table>
+          </Table>
+        </Panel>
 
-          <br />
-          <br />
-
-          <table>
+        <Panel>
+          <Table>
             <thead>
-              <tr><th colSpan={2} style={{ borderBottom: '1px solid #ccc', paddingBottom: '5px' }}>User</th></tr>
-              <tr><th style={{ padding: '5px 0' }}>Key</th><th>Value</th></tr>
+              <Table.Row>
+                <Table.HeaderCell style={{width: '200px'}}>Key</Table.HeaderCell>
+                <Table.HeaderCell>Value</Table.HeaderCell>
+              </Table.Row>
             </thead>
             <tbody>
-              {this.props.currentUser ? Object.keys(this.props.currentUser).map((key) => this.renderKeyValue('currentUser', key)) : null}
+              { userMarkup }
             </tbody>
-          </table>
-        </div>
+          </Table>
+        </Panel>
       </Layout.App>
     );
   }

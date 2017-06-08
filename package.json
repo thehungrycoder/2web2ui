@@ -18,7 +18,7 @@
     "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
-    "@sparkpost/matchbox": "^0.1.2",
+    "@sparkpost/matchbox": "*",
     "autoprefixer": "7.1.0",
     "babel-core": "6.24.1",
     "babel-eslint": "7.2.3",
@@ -57,6 +57,7 @@
     "react-dev-utils": "^2.0.1",
     "react-error-overlay": "^1.0.6",
     "react-test-renderer": "^15.5.4",
+    "redux-form": "^6.7.0",
     "sass-loader": "^6.0.5",
     "style-loader": "0.17.0",
     "sw-precache-webpack-plugin": "0.9.1",

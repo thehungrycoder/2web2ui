@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { reducer as reduxFormReducer } from 'redux-form';
 import auth from './auth';
 import account from './account';
 import currentUser from './currentUser';
@@ -8,5 +9,6 @@ export default combineReducers({
   auth,
   account,
   currentUser,
-  metrics
+  metrics,
+  form: reduxFormReducer
 });

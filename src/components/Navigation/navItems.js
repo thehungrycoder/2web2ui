@@ -18,5 +18,16 @@ export default [
         to: '/reports/message-events'
       }
     ]
+  },
+  {
+    label: 'Settings',
+    to: '/settings',
+    icon: '🛠',
+    children: [
+      {
+        label: 'Profile',
+        to: '/settings/profile'
+      }
+    ]
   }
 ];

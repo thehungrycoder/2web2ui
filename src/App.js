@@ -5,9 +5,12 @@ import ProtectedRoute from './components/ProtectedRoute';
 import AuthenticationGate from './components/AuthenticationGate';
 
 // Pages
-import AuthPage from './pages/AuthPage';
-import DashboardPage from './pages/DashboardPage';
-import SummaryReportPage from './pages/SummaryReportPage';
+import {
+  AuthPage,
+  DashboardPage,
+  SummaryReportPage,
+  ProfilePage
+} from './pages';
 
 import {
   BrowserRouter as Router,
@@ -29,6 +32,7 @@ export default () => (
       <ProtectedRoute path='/dashboard' component={DashboardPage} />
       <Route path='/reports' render={() => <Redirect to='/reports/summary' />} />
       <ProtectedRoute path='/reports/summary' component={SummaryReportPage} />
+      <ProtectedRoute path='/settings/profile' component={ProfilePage} />
     </div>
   </Router>
 );
