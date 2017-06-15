@@ -1,0 +1,26 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.Item {
+  &.completed {
+
+  }
+}
+
+.Label {
+  margin-bottom: 0;
+  font-size: rem(15);
+
+  &.link a {
+    color: color(blue);
+    text-decoration: none;
+
+    &:hover {
+      color: color(blue, dark);  
+    }
+  }
+}
+
+.HelpText {
+  margin-bottom: 0;
+  color: color(gray, 4);
+}

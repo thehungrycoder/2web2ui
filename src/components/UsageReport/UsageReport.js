@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { Panel, ProgressBar, Button } from '@sparkpost/matchbox';
+import { Panel, ProgressBar } from '@sparkpost/matchbox';
 import styles from './UsageReport.module.scss';
 import classnames from 'classnames';
 
@@ -34,27 +34,23 @@ class UsageReport extends Component {
     const { subscription, usage } = this.props;
 
     if (!subscription || !usage) {
-      return null;
+      return null; // TODO figure out loading state or is this ok
     }
 
-    const dayStart = usage.day.start
-      ? `Since ${usage.day.start}`
-      : null;
-
-    const monthCycle = usage.month.start && usage.month.end
-      ? `Billing cycle: ${usage.month.start} - ${usage.month.end}`
-      : null;
-
     const remaining = subscription.plan_volume - usage.month.used;
-    const overage = remaining < 0
-      ? Math.abs(remaining)
-      : 0;
-    const monthlyUsage = getPercent(subscription.plan_volume, usage.month.used);
-    const dailyUsage = getPercent(usage.day.limit, usage.day.used);
+    const overage = remaining < 0 ? Math.abs(remaining) : 0;
 
+    const dailyUsage = getPercent(usage.day.limit, usage.day.used);
+    const monthlyUsage = getPercent(
+      usage.month.limit !== subscription.plan_volume ? usage.month.limit : subscription.plan_volume,
+      usage.month.used
+    );
+
+    // idk how to add commas to numbers but toLocaleString works
     const dailyLimitMarkup = usage.day.limit
       ? <DisplayNumber label='Daily Limit' content={usage.day.limit.toLocaleString()}/>
       : null;
+
     const overageMarkup = overage
       ? <DisplayNumber label='Extra Emails Used' content={overage.toLocaleString()}/>
       : null;
@@ -66,18 +62,28 @@ class UsageReport extends Component {
     return (
       <Panel title='Your Usage Report' actions={actions}>
         <Panel.Section>
-          <ProgressLabel title='Today' secondaryTitle={dayStart} />
+
+          <ProgressLabel
+            title='Today'
+            secondaryTitle={`Since ${usage.day.start}`}
+          />
           <ProgressBar completed={dailyUsage} />
           <DisplayNumber label='Used' content={usage.day.used.toLocaleString()} orange />
           { dailyLimitMarkup }
+
         </Panel.Section>
         <Panel.Section>
-          <ProgressLabel title='This Month' secondaryTitle={monthCycle} />
+
+          <ProgressLabel
+            title='This Month'
+            secondaryTitle={`Billing cycle: ${usage.month.start} - ${usage.month.end}`}
+          />
           <ProgressBar completed={monthlyUsage} />
           <DisplayNumber label='Used' content={usage.month.used.toLocaleString()} orange />
           <DisplayNumber label='Included' content={subscription.plan_volume.toLocaleString()}/>
           { overageMarkup }
           { monthlyLimitMarkup }
+
         </Panel.Section>
       </Panel>
     );
