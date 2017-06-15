@@ -11,7 +11,7 @@ export function login (authData) {
     });
 
     // initialize some state
-    dispatch(fetchAccount({ includeBilling: true }));
+    dispatch(fetchAccount({ include: 'usage,billing' }));
     dispatch(fetchCurrentUser());
   };
 }
