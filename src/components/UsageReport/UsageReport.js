@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import moment from 'moment';
+import classnames from 'classnames';
 
 import { Panel, ProgressBar } from '@sparkpost/matchbox';
 import styles from './UsageReport.module.scss';
-import classnames from 'classnames';
 
 const actions = [
   {
@@ -65,7 +66,7 @@ class UsageReport extends Component {
 
           <ProgressLabel
             title='Today'
-            secondaryTitle={`Since ${usage.day.start}`}
+            secondaryTitle={`Since ${moment(usage.day.start).format('MMMM Do, YYYY h:mma')}`}
           />
           <ProgressBar completed={dailyUsage} />
           <DisplayNumber label='Used' content={usage.day.used.toLocaleString()} orange />
@@ -76,7 +77,7 @@ class UsageReport extends Component {
 
           <ProgressLabel
             title='This Month'
-            secondaryTitle={`Billing cycle: ${usage.month.start} - ${usage.month.end}`}
+            secondaryTitle={`Billing cycle: ${moment(usage.month.start).format('MMMM D')} - ${moment(usage.month.end).format('MMMM D')}`}
           />
           <ProgressBar completed={monthlyUsage} />
           <DisplayNumber label='Used' content={usage.month.used.toLocaleString()} orange />
