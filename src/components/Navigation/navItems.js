@@ -20,6 +20,11 @@ export default [
     ]
   },
   {
+    label: 'Templates',
+    to: '/templates',
+    icon: '📝'
+  },
+  {
     label: 'Settings',
     to: '/settings',
     icon: '🛠',

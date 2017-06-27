@@ -9,7 +9,8 @@ import {
   AuthPage,
   DashboardPage,
   SummaryReportPage,
-  ProfilePage
+  ProfilePage,
+  TemplatesPage
 } from './pages';
 
 import {
@@ -32,6 +33,7 @@ export default () => (
       <ProtectedRoute path='/dashboard' component={DashboardPage} />
       <Route path='/reports' render={() => <Redirect to='/reports/summary' />} />
       <ProtectedRoute path='/reports/summary' component={SummaryReportPage} />
+      <ProtectedRoute path='/templates' component={TemplatesPage} />
       <ProtectedRoute path='/settings/profile' component={ProfilePage} />
     </div>
   </Router>
