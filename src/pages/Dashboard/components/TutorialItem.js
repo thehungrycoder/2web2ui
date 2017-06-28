@@ -1,24 +1,33 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import classnames from 'classnames';
+
+import { Icon } from '@sparkpost/matchbox';
 import styles from './TutorialItem.module.scss';
 
 const TutorialItem = ({
   label,
-  helpText,
+  children,
   labelLink,
   completed
 }) => {
   const itemClasses = classnames(styles.Item, completed && styles.completed);
 
   const labelMarkup = labelLink
-    ? <h6 className={classnames(styles.Label, styles.link)}><Link to={labelLink}>{ label }</Link></h6>
+    ? <h6 className={classnames(styles.Label, styles.link)}><Link to={labelLink}>{ label } <Icon name='ArrowForward'/></Link></h6>
     : <h6 className={styles.Label}>{ label }</h6>;
+
+  const completedMarkup = completed
+    ? <Icon name='Check' size={24} className={styles.Completed} />
+    : null;
 
   return (
     <div className={itemClasses}>
-      { labelMarkup }
-      <p className={styles.HelpText}>{ helpText }</p>
+      { completedMarkup }
+      <div className={styles.Content}>
+        { labelMarkup }
+        <div className={styles.HelpText}>{ children }</div>
+      </div>
     </div>
   );
 };

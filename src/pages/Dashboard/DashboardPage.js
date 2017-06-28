@@ -1,54 +1,70 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { Banner } from '@sparkpost/matchbox';
 import Layout from '../../components/Layout/Layout';
 import UsageReport from '../../components/UsageReport/UsageReport';
-import { Panel } from '@sparkpost/matchbox';
-import TutorialItem from './components/TutorialItem';
+import Tutorial from './components/Tutorial';
+import EmailBanner from './components/EmailBanner';
+import UpgradeBanner from './components/UpgradeBanner';
 
 export class DashboardPage extends Component {
+  constructor (props) {
+    super(props);
+
+    this.state = {
+      sendingStatus: null
+    };
+  }
+
+  resendVerfication () {
+    // TODO do this in redux
+    this.setState({ sendingStatus: 'sending' });
+  }
+
+  renderOneCta () {
+    const { currentUser } = this.props;
+
+    if (!currentUser['email_verfied']) {
+      return (
+        <EmailBanner
+          sendingStatus={this.state.sendingStatus}
+          handleResend={() => this.resendVerfication()} />
+      );
+    }
+
+    // TODO
+    return (
+      <UpgradeBanner hasCC />
+    );
+  }
+
+  renderSuppressionBanner () {
+    // TODO suppression get
+    // if accountAgeInWeeks > 1 && no suppressions
+    return (
+      <Banner title="Hey! We noticed you haven't imported a suppression list">
+        <p>If you're coming from a previous provider, be sure to also <a>import your suppressions</a>.</p>
+      </Banner>
+    );
+  }
+
   render () {
-    const tutorialMarkup = tutorial.map((item) => <Panel.Section><TutorialItem {...item} /></Panel.Section>);
     return (
       <Layout.App>
         <h1>Dashboard</h1>
 
+        { this.renderOneCta() }
+
         <UsageReport />
 
-        <Panel title='Getting Started'>
-          { tutorialMarkup }
-        </Panel>
+        { this.renderSuppressionBanner() }
+
+        <Tutorial {...this.props} />
+
       </Layout.App>
     );
   }
 }
-
-const tutorial = [
-  {
-    label: 'Veriy your email address',
-    helpText: 'Check your email to verify your email address and increase your daily sending limits',
-    completed: true // does nothing yet
-  },
-  {
-    label: 'Add a sending domain',
-    labelLink: 'settings/profile',
-    helpText: 'Add a sending domain to send email from your own domain'
-  },
-  {
-    label: 'Verify your sending domain',
-    labelLink: 'settings/profile',
-    helpText: 'You\'ll need to verify your domain before you can use it'
-  },
-  {
-    label: 'Create a bounce domain',
-    labelLink: 'settings/profile',
-    helpText: 'You\'ll need to verify your domain before you can use it'
-  },
-  {
-    label: 'Create an API key',
-    labelLink: 'settings/profile',
-    helpText: 'You\'ll need to create an API key to use our API or SMTP integration.'
-  }
-];
 
 export default connect(({ account, currentUser }) => ({ account, currentUser }))(DashboardPage);
