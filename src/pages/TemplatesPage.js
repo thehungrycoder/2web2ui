@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import { withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 // Actions
 import { listTemplates } from '../actions/templates';
@@ -16,8 +16,13 @@ class TemplatesPage extends Component {
   }
 
   renderRow (template) {
-    const status = template.published ? 'published' : 'unpublished';
-    return <Table.Row key={template.id} rowData={ [template.name, template.id, status] } />;
+    const status = template.published ? 'published' : 'draft';
+    const nameLink = <Link to="/dashboard">{template.name}</Link>;
+    return (
+      <Table.Row key={template.id} rowData={ [nameLink, template.id, status, Date(template.last_update_time)]} >
+
+      </Table.Row>
+    );
   }
 
   renderTemplateRows (templates, currentPage, perPage) {
@@ -32,33 +37,40 @@ class TemplatesPage extends Component {
   }
 
   render () {
-    const templateCount = this.props.templates.length;
-    const templateRows = templateCount ? this.renderTemplateRows(this.props.templates, this.state.currentPage, this.state.perPage) : null;
+    const templatesCount = this.props.templates.length;
+
+    if (!templatesCount) {
+      return <Layout.App />;
+    }
+
+    const templateRows = templatesCount ? this.renderTemplateRows(this.props.templates, this.state.currentPage, this.state.perPage) : null;
 
     return (
 
       <Layout.App>
 
         <h1>Templates</h1>
-        <Button primary={ true }>Create Template</Button>
+        <Button primary>Create Template</Button>
 
         <Panel>
-          <Table>
-            <thead>
-              <Table.Row>
-                <Table.HeaderCell>Label</Table.HeaderCell>
-                <Table.HeaderCell>ID</Table.HeaderCell>
-                <Table.HeaderCell>Status</Table.HeaderCell>
-              </Table.Row>
-            </thead>
-            <tbody>
-              { templateRows }
-            </tbody>
-          </Table>
+            <Table>
+              <thead>
+                <Table.Row>
+                  <Table.HeaderCell>Name</Table.HeaderCell>
+                  <Table.HeaderCell>ID</Table.HeaderCell>
+                  <Table.HeaderCell>Published</Table.HeaderCell>
+                  <Table.HeaderCell>Updated</Table.HeaderCell>
+                </Table.Row>
+              </thead>
+              <tbody>
+                { templateRows }
+              </tbody>
+            </Table>
         </Panel>
         <Pagination
-          pages={Math.floor(templateCount / this.state.perPage)}
+          pages={Math.ceil(templatesCount / this.state.perPage)}
           pageRange={5}
+          initialIndex={0}
           onChange={(index) => { this.setState({currentPage: index}); }}
         />
         <Button.Group>
