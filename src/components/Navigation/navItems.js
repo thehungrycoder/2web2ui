@@ -2,12 +2,12 @@ export default [
   {
     label: 'Dashboard',
     to: '/dashboard',
-    icon: '🏠'
+    icon: 'Home'
   },
   {
     label: 'Reports',
     to: '/reports', // This does nothing right now
-    icon: '📈',
+    icon: 'InsertChart',
     children: [
       {
         label: 'Summary',
@@ -22,7 +22,7 @@ export default [
   {
     label: 'Settings',
     to: '/settings',
-    icon: '🛠',
+    icon: 'Settings',
     children: [
       {
         label: 'Profile',

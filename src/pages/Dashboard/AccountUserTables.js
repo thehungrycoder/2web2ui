@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import Layout from '../components/Layout/Layout';
+import Layout from '../../components/Layout/Layout';
 import { Panel, Table } from '@sparkpost/matchbox';
 
-export class DashboardPage extends Component {
+export class AccountUserTables extends Component {
   renderKeyValue (object, key) {
     return <Table.Row key={key} rowData={ [key, JSON.stringify(this.props[object][key])] } />;
   }
@@ -54,4 +54,4 @@ export class DashboardPage extends Component {
   }
 }
 
-export default connect(({ account, currentUser }) => ({ account, currentUser }))(DashboardPage);
+export default connect(({ account, currentUser }) => ({ account, currentUser }))(AccountUserTables);
