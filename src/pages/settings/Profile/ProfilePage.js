@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import Layout from '../../../components/Layout/Layout';
-import { Panel, Table, TextField, Button } from '@sparkpost/matchbox';
+import { Page, Panel, Table, TextField, Button } from '@sparkpost/matchbox';
 import NameForm from './NameForm';
 
 export class ProfilePage extends Component {
@@ -15,7 +15,8 @@ export class ProfilePage extends Component {
 
     return (
       <Layout.App>
-        <Panel title='Profile'>
+        <Page title='Profile' />
+        <Panel>
           <Table>
             <Table.Row>
               <Table.HeaderCell>Account ID</Table.HeaderCell>

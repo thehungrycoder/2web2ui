@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { Banner } from '@sparkpost/matchbox';
+import { Page, Banner } from '@sparkpost/matchbox';
 import Layout from '../../components/Layout/Layout';
 import UsageReport from '../../components/UsageReport/UsageReport';
 import Tutorial from './components/Tutorial';
@@ -52,7 +52,7 @@ export class DashboardPage extends Component {
   render () {
     return (
       <Layout.App>
-        <h1>Dashboard</h1>
+        <Page title='Dashboard'/>
 
         { this.renderOneCta() }
 
