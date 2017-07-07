@@ -7,7 +7,7 @@ import { listTemplates } from '../actions/templates';
 
 // Components
 import Layout from '../components/Layout/Layout';
-import { Panel, Table, Button, Pagination } from '@sparkpost/matchbox';
+import { Page, Panel, Table, Button, Pagination } from '@sparkpost/matchbox';
 
 class TemplatesPage extends Component {
   state = {
@@ -19,9 +19,7 @@ class TemplatesPage extends Component {
     const status = template.published ? 'published' : 'draft';
     const nameLink = <Link to="/dashboard">{template.name}</Link>;
     return (
-      <Table.Row key={template.id} rowData={ [nameLink, template.id, status, Date(template.last_update_time)]} >
-
-      </Table.Row>
+      <Table.Row key={template.id} rowData={[nameLink, template.id, status, Date(template.last_update_time)]} />
     );
   }
 
@@ -38,20 +36,55 @@ class TemplatesPage extends Component {
 
   render () {
     const templatesCount = this.props.templates.length;
+    const loading = this.props.listLoading;
+    const error = this.props.apiError;
 
-    if (!templatesCount) {
-      return <Layout.App />;
+    // This should probably be a universal loading component
+    if (loading) {
+      return (
+        <Layout.App>
+          <Page
+            primaryAction={{content: 'Create Template', onClick: () => { console.log('create template'); }}}
+            title={'Templates'}
+          />
+          <Panel>
+            <Panel.Section>
+              Loading...
+            </Panel.Section>
+          </Panel>
+        </Layout.App>
+      );
     }
+
+    if (!loading && !templatesCount && !error) {
+      // TODO: instead of making a CTA here, we could just redirect to the create page
+      return (
+        <Layout.App>
+            <Page
+              title={'Templates'}
+            />
+            <Panel>
+            <Panel.Section>
+              Lets get you started with your first template
+            </Panel.Section>
+            <Panel.Section>
+              <Button primary>Create Template</Button>
+            </Panel.Section>
+          </Panel>
+        </Layout.App>
+      );
+    }
+
+    // Maybe do an error state.
 
     const templateRows = templatesCount ? this.renderTemplateRows(this.props.templates, this.state.currentPage, this.state.perPage) : null;
 
     return (
-
       <Layout.App>
-
-        <h1>Templates</h1>
-        <Button primary>Create Template</Button>
-
+        <Page
+          primaryAction={{content: 'Create Template', onClick: () => { console.log('create template'); }}}
+          title={'Templates'}
+        />
         <Panel>
             <Table>
               <thead>
@@ -85,7 +118,11 @@ class TemplatesPage extends Component {
 }
 
 function mapStateToProps ({ templates }) {
-  return { templates: templates.list };
+  return {
+    templates: templates.list,
+    listLoading: templates.listLoading,
+    apiError: templates.apiError
+  };
 }
 
 export default connect(mapStateToProps, { listTemplates })(TemplatesPage);
