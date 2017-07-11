@@ -37,7 +37,6 @@ class TemplatesPage extends Component {
   render () {
     const templatesCount = this.props.templates.length;
     const loading = this.props.listLoading;
-    const error = this.props.apiError;
 
     // This should probably be a universal loading component
     if (loading) {
@@ -56,7 +55,8 @@ class TemplatesPage extends Component {
       );
     }
 
-    if (!loading && !templatesCount && !error) {
+    // No Templates (not error case)
+    if (!loading && !templatesCount) {
       // TODO: instead of making a CTA here, we could just redirect to the create page
       return (
         <Layout.App>
