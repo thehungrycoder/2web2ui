@@ -7,7 +7,7 @@ import { listWebhooks } from '../../actions/webhooks';
 // Components
 import { Link } from 'react-router-dom';
 import Layout from '../../components/Layout/Layout';
-import { Table, Panel, Button, Pagination } from '@sparkpost/matchbox';
+import { Page, Table, Panel, Button, Pagination } from '@sparkpost/matchbox';
 
 class WebhooksPage extends Component {
   state = {
@@ -40,13 +40,34 @@ class WebhooksPage extends Component {
 
   render () {
     const webhookCount = this.props.webhooks.length;
+    const loading = this.props.listLoading;
+
+    // This should probably be a universal page-loading component
+    if (loading) {
+      return (
+        <Layout.App>
+          <Page
+            primaryAction={{content: 'Create Template', onClick: () => { console.log('create template'); }}}
+            title={'Templates'}
+          />
+          <Panel>
+            <Panel.Section>
+              Loading...
+            </Panel.Section>
+          </Panel>
+        </Layout.App>
+      );
+    }
+
     const webhookRows = webhookCount ? this.renderWebhookRows(this.props.webhooks, this.state.currentPage, this.state.perPage) : null;
 
     return (
 
       <Layout.App>
-        <h1>Webhooks</h1>
-        <Button primary>Create Webhook</Button>
+        <Page
+          primaryAction={{content: 'Create Webhook', onClick: () => { console.log('create webhook'); }}}
+          title={'Webhooks'}
+        />
         <Panel>
           <Table>
             <thead>
@@ -79,7 +100,10 @@ class WebhooksPage extends Component {
 }
 
 function mapStateToProps ({ webhooks }) {
-  return { webhooks: webhooks.list };
+  return {
+    webhooks: webhooks.list,
+    listLoading: webhooks.listLoading
+  };
 }
 
 export default connect(mapStateToProps, { listWebhooks })(WebhooksPage);
