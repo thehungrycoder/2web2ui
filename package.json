@@ -111,7 +111,7 @@
       "react-app"
     ]
   },
-  "description": "SparkPost web APP built in React",
+  "description": "SparkPost web app built in React",
   "main": "index.js",
   "repository": {
     "type": "git",
