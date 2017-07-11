@@ -13,6 +13,6 @@ export default combineReducers({
   currentUser,
   metrics,
   templates,
-  webhooks
+  webhooks,
   form: reduxFormReducer
 });
