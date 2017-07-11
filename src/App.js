@@ -10,7 +10,8 @@ import {
   DashboardPage,
   SummaryReportPage,
   ProfilePage,
-  TemplatesPage
+  TemplatesPage,
+  WebhooksPage
 } from './pages';
 
 import {
@@ -35,6 +36,7 @@ export default () => (
       <ProtectedRoute path='/reports/summary' component={SummaryReportPage} />
       <ProtectedRoute path='/templates' component={TemplatesPage} />
       <ProtectedRoute path='/settings/profile' component={ProfilePage} />
+      <ProtectedRoute path='/settings/webhooks' component={WebhooksPage}/>
     </div>
   </Router>
 );

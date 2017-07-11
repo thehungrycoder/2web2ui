@@ -32,6 +32,10 @@ export default [
       {
         label: 'Profile',
         to: '/settings/profile'
+      },
+      {
+        label: 'Webhooks',
+        to: '/settings/webhooks'
       }
     ]
   }

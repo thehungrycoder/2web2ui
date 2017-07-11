@@ -5,6 +5,7 @@ import account from './account';
 import currentUser from './currentUser';
 import metrics from './metrics';
 import templates from './templates';
+import webhooks from './webhooks';
 
 export default combineReducers({
   auth,
@@ -12,5 +13,6 @@ export default combineReducers({
   currentUser,
   metrics,
   templates,
+  webhooks
   form: reduxFormReducer
 });
