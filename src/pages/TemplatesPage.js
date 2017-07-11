@@ -120,8 +120,7 @@ class TemplatesPage extends Component {
 function mapStateToProps ({ templates }) {
   return {
     templates: templates.list,
-    listLoading: templates.listLoading,
-    apiError: templates.apiError
+    listLoading: templates.listLoading
   };
 }
 
