@@ -22,7 +22,7 @@ export default [
   {
     label: 'Templates',
     to: '/templates',
-    icon: '📝'
+    icon: 'Code'
   },
   {
     label: 'Settings',
