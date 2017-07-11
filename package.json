@@ -110,5 +110,16 @@
       "semistandard",
       "react-app"
     ]
-  }
+  },
+  "description": "SparkPost web app built in React",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SparkPost/2web2ui.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/SparkPost/2web2ui/issues"
+  },
+  "homepage": "https://github.com/SparkPost/2web2ui"
 }
