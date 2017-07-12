@@ -1,3 +1,16 @@
+## Actual Readme
+
+This project uses `npm5`.
+
+To run locally:
+
+```
+npm install
+npm start
+```
+
+## Create React App Readme: 
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
