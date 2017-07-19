@@ -84,6 +84,14 @@ export default function sparkpostApiRequest ({ dispatch, getState }) {
         type: FAIL_TYPE,
         payload: { message, response }
       });
+
+      if (response.status >= 500) {
+        dispatch({
+          type: 'API_FAILURE_RECEIVED',
+          payload: { message, response },
+          meta
+        });
+      }
     })
     .catch((err) => {
       // curious to understand when/how errors would find their way here, and what happens if/when they do
