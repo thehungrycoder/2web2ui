@@ -6,7 +6,7 @@ export default [
   },
   {
     label: 'Reports',
-    to: '/reports', // This does nothing right now
+    to: '/reports',
     icon: 'InsertChart',
     children: [
       {

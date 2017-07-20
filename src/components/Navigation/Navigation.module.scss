@@ -2,12 +2,49 @@
 
 .navigation {
   position: fixed;
-  width: rem(220);
-  background: color(gray, 1);
-  height: 100vh;
-  overflow-y: auto;
+  width: rem(250);
+  z-index: 100;
+
+  transform: translate(-100%, 0);
+  transition: 0.2s;
+
+  @media screen and (min-width: breakpoint(medium)) {
+    width: rem(220);
+    transform: translate(0);
+  }
+
+  &.showNav {
+    transform: translate(0);
+    box-shadow: 10px 0px 30px rgba(#414146, 0.16)
+  }
 }
 
+.overlay {
+  display: block;
+  content: "";
+  position: fixed;
+  z-index: 99;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(color(gray, 3), 0.8);
+
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.3s;
+
+  &.showOverlay {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+.wrapper {
+  overflow-y: auto;
+  height: 100vh;
+  background: color(gray, 1);
+}
 
 .list, .nestedList, .footer {
   list-style: none;
@@ -108,6 +145,76 @@
   transition: 0.1s;
 }
 
-.footer {
-  padding-bottom: spacing();
+// Open Trigger
+.bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 98;
+  display: block;
+  padding: rem(15) rem(18) rem(9);
+  background: color(gray, 2);
+
+  @media screen and (min-width: breakpoint(medium)) {
+    display: none;
+  }
+}
+
+.open {
+  position: relative;
+  display: inline-block;
+  padding: rem(18);
+  border-radius: border-radius();
+
+  &:hover {
+    cursor: pointer;
+
+    .hamburger, .hamburger:before, .hamburger:after {
+      background: color(gray, 10);
+    }
+  }
+}
+
+.close {
+  position: absolute;
+  left: 105%;
+  top: rem(14);
+  fill: color(gray, 10);
+
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.2s;
+
+  .showNav & {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+%hamburgerbar {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  height: 2px;
+  width: rem(30);
+  background: color(gray, 7);
+  border-radius: border-radius();
+  transition: 0.15s;
+}
+
+.hamburger {
+  @extend %hamburgerbar;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:before, &:after {
+    display: block;
+    content: "";
+    @extend %hamburgerbar;
+  }
+
+  &:before { top: -7px; }
+  &:after { top: 7px; }
 }
