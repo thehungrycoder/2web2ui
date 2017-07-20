@@ -10,7 +10,8 @@ import {
   DashboardPage,
   SummaryReportPage,
   ProfilePage,
-  TemplatesPage,
+  TemplatesListPage,
+  TemplatesEditPage,
   WebhooksPage
 } from './pages';
 
@@ -34,7 +35,10 @@ export default () => (
       <ProtectedRoute path='/dashboard' component={DashboardPage} />
       <Route path='/reports' render={() => <Redirect to='/reports/summary' />} />
       <ProtectedRoute path='/reports/summary' component={SummaryReportPage} />
-      <ProtectedRoute path='/templates' component={TemplatesPage} />
+
+      <ProtectedRoute exact path='/templates' component={TemplatesListPage} />
+      <ProtectedRoute path='/templates/edit/:id' component={TemplatesEditPage} />
+
       <ProtectedRoute path='/settings/profile' component={ProfilePage} />
       <ProtectedRoute path='/settings/webhooks' component={WebhooksPage}/>
     </div>

@@ -3,13 +3,13 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 // Actions
-import { listTemplates } from '../actions/templates';
+import { listTemplates } from '../../actions/templates';
 
 // Components
-import Layout from '../components/Layout/Layout';
+import Layout from '../../components/Layout/Layout';
 import { Page, Panel, Table, Button, Pagination } from '@sparkpost/matchbox';
 
-class TemplatesPage extends Component {
+class ListPage extends Component {
   state = {
     perPage: 10,
     currentPage: 0
@@ -17,7 +17,7 @@ class TemplatesPage extends Component {
 
   renderRow (template) {
     const status = template.published ? 'published' : 'draft';
-    const nameLink = <Link to="/dashboard">{template.name}</Link>;
+    const nameLink = <Link to={`/templates/edit/${template.id}`}>{template.name}</Link>;
     return (
       <Table.Row key={template.id} rowData={[nameLink, template.id, status, Date(template.last_update_time)]} />
     );
@@ -124,4 +124,4 @@ function mapStateToProps ({ templates }) {
   };
 }
 
-export default connect(mapStateToProps, { listTemplates })(TemplatesPage);
+export default connect(mapStateToProps, { listTemplates })(ListPage);
