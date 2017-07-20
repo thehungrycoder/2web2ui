@@ -40,7 +40,7 @@ class EditPage extends Component {
             content: 'Templates',
             onClick: () => this.props.history.push('/templates')
           }}
-          title={match.params.id}
+          title={match.params.id || 'New Template'}
         />
         <Grid>
           <Grid.Column xs={5}>
