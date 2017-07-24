@@ -9,6 +9,12 @@ import { listTemplates } from '../../actions/templates';
 import Layout from '../../components/Layout/Layout';
 import { Page, Panel, Table, Button, Pagination } from '@sparkpost/matchbox';
 
+const CREATE_ACTION = {
+  content: 'Create Template',
+  to: '/templates/edit',
+  Component: Link
+};
+
 class ListPage extends Component {
   state = {
     perPage: 10,
@@ -43,7 +49,7 @@ class ListPage extends Component {
       return (
         <Layout.App>
           <Page
-            primaryAction={{content: 'Create Template', onClick: () => { console.log('create template'); }}}
+            primaryAction={CREATE_ACTION}
             title={'Templates'}
           />
           <Panel>
@@ -68,7 +74,10 @@ class ListPage extends Component {
               Lets get you started with your first template
             </Panel.Section>
             <Panel.Section>
-              <Button primary>Create Template</Button>
+              <Button
+                primary
+                {...CREATE_ACTION}
+                >Create Template</Button>
             </Panel.Section>
           </Panel>
         </Layout.App>
@@ -82,7 +91,7 @@ class ListPage extends Component {
     return (
       <Layout.App>
         <Page
-          primaryAction={{content: 'Create Template', onClick: () => { console.log('create template'); }}}
+          primaryAction={CREATE_ACTION}
           title={'Templates'}
         />
         <Panel>

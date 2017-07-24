@@ -18,7 +18,7 @@
     "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
-    "@sparkpost/matchbox": "^0.1.22",
+    "@sparkpost/matchbox": "^0.5.4",
     "autoprefixer": "7.1.0",
     "babel-core": "6.24.1",
     "babel-eslint": "7.2.3",
