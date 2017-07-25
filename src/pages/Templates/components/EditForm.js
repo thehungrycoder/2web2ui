@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm, change } from 'redux-form';
 
 import { updateTemplate } from '../../../actions/templates';
 
@@ -13,9 +13,31 @@ const TextFieldWrapper = ({ input, meta: { error }, ...rest }) => (
   <TextField {...rest} {...input} error={error} />
 );
 
+const ID_ALLOWED_CHARS = 'a-z0-9_-';
+
+// TODO move this into shared helpers
+const slugify = (value) => {
+  return value
+    .replace(/([a-z])([A-Z])/g, '$1-$2')
+    .replace(/_/g, '-')
+    .replace(/\s+/g, '-')
+    .toLowerCase();
+};
+
 class EditForm extends Component {
+  // Fills in ID based on Name
+  handleIdFill (e) {
+    const { newTemplate, change } = this.props;
+    if (!newTemplate) {
+      return;
+    }
+
+    const idValue = slugify(e.target.value).replace(new RegExp(`[^${ID_ALLOWED_CHARS}]`, 'g'), '');
+    change('id', idValue);
+  }
+
   render () {
-    const { handleSubmit, updateTemplate } = this.props;
+    const { handleSubmit, updateTemplate, newTemplate } = this.props;
 
     return (
       <Panel>
@@ -24,6 +46,7 @@ class EditForm extends Component {
             name='name' id='name'
             component={TextFieldWrapper}
             label='Template Name'
+            onChange={(e) => this.handleIdFill(e)}
           />
 
           <Field
@@ -31,7 +54,7 @@ class EditForm extends Component {
             component={TextFieldWrapper}
             label='Template ID'
             helpText={`A Unique ID for your template, we'll fill this in for you.`}
-            disabled // TODO disabled when editing
+            disabled={!newTemplate}
           />
         </Panel.Section>
 
@@ -109,7 +132,6 @@ class EditForm extends Component {
 
 const mapStateToProps = ({ templates: { activeTemplate } }) => ({
   initialValues: { ...activeTemplate }
-
 });
 
 const formOptions = {
@@ -117,5 +139,4 @@ const formOptions = {
   enableReinitialize: true // required to update initial values from redux state
 };
 
-// breaks if you do reduxForm first
-export default connect(mapStateToProps, { updateTemplate })(reduxForm(formOptions)(EditForm));
+export default connect(mapStateToProps, { updateTemplate, change })(reduxForm(formOptions)(EditForm));

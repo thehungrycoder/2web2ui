@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 
 // Actions
-import { getTemplate, resetTemplate, updateTemplate } from '../../actions/templates';
+import { getTemplate, resetTemplate, updateTemplate, createTemplate } from '../../actions/templates';
 
 // Components
 import Layout from '../../components/Layout/Layout';
@@ -29,7 +29,12 @@ class EditPage extends Component {
   }
 
   handleUpdate (params) {
-    this.props.updateTemplate(params);
+    const { updateTemplate, createTemplate } = this.props;
+    if (this.state.newTemplate) {
+      createTemplate();
+    } else {
+      updateTemplate(params);
+    }
   }
 
   render () {
@@ -83,13 +88,13 @@ class EditPage extends Component {
       <Layout.App>
         <Page
           primaryAction={primaryAction}
-          secondaryActions={secondaryActions}
+          secondaryActions={!newTemplate ? secondaryActions : []}
           breadcrumbAction={backAction}
           title={newTemplate ? 'New Template' : match.params.id }
         />
         <Grid>
           <Grid.Column xs={6}>
-            <EditForm />
+            <EditForm newTemplate={newTemplate} />
           </Grid.Column>
           <Grid.Column xs={6}>
             <Editor />
@@ -107,4 +112,6 @@ const formOptions = {
   form: 'templateEdit'
 };
 
-export default connect(mapStateToProps, { getTemplate, resetTemplate, updateTemplate })(reduxForm(formOptions)(EditPage));
+export default connect(mapStateToProps, {
+  getTemplate, resetTemplate, updateTemplate, createTemplate
+})(reduxForm(formOptions)(EditPage));
