@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm, change } from 'redux-form';
 
-import { updateTemplate } from '../../../actions/templates';
-
 // Components
-import { Panel, TextField, Button } from '@sparkpost/matchbox';
+import { Panel, TextField } from '@sparkpost/matchbox';
 import ToggleBlock from './ToggleBlock';
 
 // TODO use shared component instead of this
@@ -33,11 +31,20 @@ class EditForm extends Component {
     }
 
     const idValue = slugify(e.target.value).replace(new RegExp(`[^${ID_ALLOWED_CHARS}]`, 'g'), '');
+
+    // Call redux-form change action
     change('id', idValue);
   }
 
+  componentDidUpdate () {
+    const { change, newTemplate } = this.props;
+    if (newTemplate) {
+      change('content.from.email', 'sandbox@sparkpostbox.com');
+    }
+  }
+
   render () {
-    const { handleSubmit, updateTemplate, newTemplate } = this.props;
+    const { newTemplate } = this.props;
 
     return (
       <Panel>
@@ -70,7 +77,7 @@ class EditForm extends Component {
             name='content.from.email' id='fromEmail'
             component={TextFieldWrapper}
             label='From Email'
-            // disabled={} TODO disable if no sending domains exist
+            disabled={newTemplate}
           />
 
           <Field
@@ -100,7 +107,7 @@ class EditForm extends Component {
             component={ToggleBlock}
             label='Track Opens'
             type='checkbox'
-            parse={value => !!value}
+            parse={value => !!value} // Prevents unchecked value from equaling ""
           />
 
           <Field
@@ -139,4 +146,4 @@ const formOptions = {
   enableReinitialize: true // required to update initial values from redux state
 };
 
-export default connect(mapStateToProps, { updateTemplate, change })(reduxForm(formOptions)(EditForm));
+export default connect(mapStateToProps, { change })(reduxForm(formOptions)(EditForm));

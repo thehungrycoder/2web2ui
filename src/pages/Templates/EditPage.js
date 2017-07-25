@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { reduxForm } from 'redux-form';
-
+import { reduxForm, formValueSelector } from 'redux-form';
 // Actions
 import { getTemplate, resetTemplate, updateTemplate, createTemplate } from '../../actions/templates';
 
@@ -28,8 +27,21 @@ class EditPage extends Component {
     }
   }
 
+  componentDidUpdate () {
+    const {
+      id,
+      submitSucceeded,
+      history
+    } = this.props;
+
+    if (this.state.newTemplate && submitSucceeded) {
+      history.push(`/templates/edit/${id}`);
+    }
+  }
+
   handleUpdate (params) {
     const { updateTemplate, createTemplate } = this.props;
+
     if (this.state.newTemplate) {
       createTemplate();
     } else {
@@ -41,8 +53,7 @@ class EditPage extends Component {
     const {
       match,
       loading,
-      handleSubmit,
-      updateTemplate
+      handleSubmit
     } = this.props;
 
     const { newTemplate } = this.state;
@@ -105,8 +116,10 @@ class EditPage extends Component {
   }
 }
 
-const mapStateToProps = ({ templates, form }) => ({
-  loading: templates.getLoading
+const selector = formValueSelector('templateEdit');
+const mapStateToProps = (state) => ({
+  loading: state.templates.getLoading,
+  id: selector(state, 'id')
 });
 const formOptions = {
   form: 'templateEdit'
