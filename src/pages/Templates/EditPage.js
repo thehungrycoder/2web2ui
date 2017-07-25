@@ -13,11 +13,17 @@ import Editor from './components/Editor';
 import { Page, Panel, Grid } from '@sparkpost/matchbox';
 
 class EditPage extends Component {
+  state = {
+    newTemplate: false
+  }
+
   componentDidMount () {
     const { match, getTemplate, resetTemplate } = this.props;
     if (match.params.id) {
+      this.setState({ newTemplate: false });
       getTemplate(match.params.id);
     } else {
+      this.setState({ newTemplate: true });
       resetTemplate();
     }
   }
@@ -34,8 +40,10 @@ class EditPage extends Component {
       updateTemplate
     } = this.props;
 
+    const { newTemplate } = this.state;
+
     const primaryAction = {
-      content: 'Save & Publish',
+      content: newTemplate ? 'Save' : 'Save & Publish',
       onClick: handleSubmit(() => this.handleUpdate({ update_published: true }))
     };
 
@@ -61,7 +69,7 @@ class EditPage extends Component {
       to: '/templates'
     };
 
-    if (match.params.id && loading) {
+    if (!newTemplate && loading) {
       return (
         <Layout.App>
           <Panel sectioned>
@@ -77,7 +85,7 @@ class EditPage extends Component {
           primaryAction={primaryAction}
           secondaryActions={secondaryActions}
           breadcrumbAction={backAction}
-          title={match.params.id || 'New Template'}
+          title={newTemplate ? 'New Template' : match.params.id }
         />
         <Grid>
           <Grid.Column xs={6}>
@@ -92,13 +100,9 @@ class EditPage extends Component {
   }
 }
 
-function mapStateToProps ({ templates, form }) {
-  return {
-    loading: templates.getLoading,
-    id: form.templateEdit && form.templateEdit.values.id
-  };
-}
-
+const mapStateToProps = ({ templates, form }) => ({
+  loading: templates.getLoading
+});
 const formOptions = {
   form: 'templateEdit'
 };

@@ -20,11 +20,26 @@ export function getTemplate (id) {
   };
 }
 
+export function createTemplate () {
+  return (dispatch, getState) => {
+    const data = getState().form.templateEdit.values;
+
+    dispatch({
+      type: 'SPARKPOST_API_REQUEST',
+      meta: {
+        type: 'CREATE_TEMPLATE',
+        method: 'POST',
+        url: '/templates',
+        data
+      }
+    });
+  };
+}
+
 export function updateTemplate (params = {}) {
   return (dispatch, getState) => {
     const data = getState().form.templateEdit.values;
     const id = data.id;
-    console.log(id);
 
     dispatch({
       type: 'SPARKPOST_API_REQUEST',
