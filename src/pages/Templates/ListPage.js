@@ -11,7 +11,7 @@ import { Page, Panel, Table, Button, Pagination } from '@sparkpost/matchbox';
 
 const CREATE_ACTION = {
   content: 'Create Template',
-  to: '/templates/edit',
+  to: '/templates/create',
   Component: Link
 };
 

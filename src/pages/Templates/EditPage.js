@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { reduxForm, formValueSelector } from 'redux-form';
+import { reduxForm, formValueSelector, formValues } from 'redux-form';
 // Actions
-import { getTemplate, resetTemplate, updateTemplate, createTemplate } from '../../actions/templates';
+import { getTemplate, resetTemplate, updateTemplate, createTemplate, publishTemplate } from '../../actions/templates';
 
 // Components
 import Layout from '../../components/Layout/Layout';
-import EditForm from './components/EditForm';
+import Form from './components/Form';
 import Editor from './components/Editor';
 import { Page, Panel, Grid } from '@sparkpost/matchbox';
 
@@ -33,40 +33,51 @@ class EditPage extends Component {
       submitSucceeded,
       history
     } = this.props;
-
-    if (this.state.newTemplate && submitSucceeded) {
-      history.push(`/templates/edit/${id}`);
-    }
   }
 
-  handleUpdate (params) {
-    const { updateTemplate, createTemplate } = this.props;
+  handleUpdateOrCreate (values, shouldPublish = false, params) {
+    const {
+      updateTemplate,
+      createTemplate,
+      publishTemplate
+    } = this.props;
 
     if (this.state.newTemplate) {
-      createTemplate();
+      return createTemplate(values);
     } else {
-      updateTemplate(params);
+      return updateTemplate(values).then(() => {
+        if (shouldPublish) {
+          publishTemplate(values.id);
+        }
+      });
     }
   }
 
   render () {
     const {
       match,
+      id,
       loading,
-      handleSubmit
+      handleSubmit,
+      submitSucceeded,
+      published
     } = this.props;
 
     const { newTemplate } = this.state;
 
+    if (newTemplate && submitSucceeded) {
+      return <Redirect to={`/templates/edit/${this.props.id}`} />;
+    }
+
     const primaryAction = {
-      content: newTemplate ? 'Save' : 'Save & Publish',
-      onClick: handleSubmit(() => this.handleUpdate({ update_published: true }))
+      content: newTemplate ? 'Save Template' : 'Save & Publish',
+      onClick: handleSubmit((values) => this.handleUpdateOrCreate(values, true))
     };
 
     const secondaryActions = [
       {
         content: 'Save',
-        onClick: handleSubmit(() => this.handleUpdate())
+        onClick: handleSubmit((values) => this.handleUpdateOrCreate(values))
       },
       {
         content: 'Delete'
@@ -101,13 +112,13 @@ class EditPage extends Component {
           primaryAction={primaryAction}
           secondaryActions={!newTemplate ? secondaryActions : []}
           breadcrumbAction={backAction}
-          title={newTemplate ? 'New Template' : match.params.id }
+          title={newTemplate ? 'New Template' : id }
         />
         <Grid>
-          <Grid.Column xs={6}>
-            <EditForm newTemplate={newTemplate} />
+          <Grid.Column xs={12} lg={4}>
+            <Form newTemplate={newTemplate} />
           </Grid.Column>
-          <Grid.Column xs={6}>
+          <Grid.Column xs={12} lg={8}>
             <Editor />
           </Grid.Column>
         </Grid>
@@ -119,12 +130,13 @@ class EditPage extends Component {
 const selector = formValueSelector('templateEdit');
 const mapStateToProps = (state) => ({
   loading: state.templates.getLoading,
-  id: selector(state, 'id')
+  id: selector(state, 'id'),
+  published: selector(state, 'published')
 });
 const formOptions = {
   form: 'templateEdit'
 };
 
 export default connect(mapStateToProps, {
-  getTemplate, resetTemplate, updateTemplate, createTemplate
+  getTemplate, resetTemplate, updateTemplate, createTemplate, publishTemplate
 })(reduxForm(formOptions)(EditPage));

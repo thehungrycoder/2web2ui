@@ -12,7 +12,7 @@ export default (state = initialState, action) => {
     case 'LIST_TEMPLATES_FAIL':
       return { ...state, listLoading: false };
 
-    // Get One
+    // Get
     case 'GET_TEMPLATE_PENDING':
       return { ...state, getLoading: true };
 

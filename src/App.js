@@ -37,7 +37,8 @@ export default () => (
       <ProtectedRoute path='/reports/summary' component={SummaryReportPage} />
 
       <ProtectedRoute exact path='/templates' component={TemplatesListPage} />
-      <ProtectedRoute path='/templates/edit/:id?' component={TemplatesEditPage} />
+      <ProtectedRoute exact path='/templates/create/' component={TemplatesEditPage} />
+      <ProtectedRoute exact path='/templates/edit/:id' component={TemplatesEditPage} />
 
       <ProtectedRoute path='/settings/profile' component={ProfilePage} />
       <ProtectedRoute path='/settings/webhooks' component={WebhooksPage}/>

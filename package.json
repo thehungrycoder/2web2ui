@@ -18,6 +18,7 @@
     "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
+    "@sparkpost/matchbox": "^0.5.5",
     "autoprefixer": "7.1.0",
     "babel-core": "6.24.1",
     "babel-eslint": "7.2.3",
@@ -25,6 +26,7 @@
     "babel-loader": "7.0.0",
     "babel-preset-react-app": "^3.0.0",
     "babel-runtime": "6.23.0",
+    "brace": "^0.10.0",
     "case-sensitive-paths-webpack-plugin": "1.1.4",
     "chalk": "1.1.3",
     "css-loader": "0.28.1",
@@ -53,6 +55,7 @@
     "postcss-flexbugs-fixes": "3.0.0",
     "postcss-loader": "2.0.5",
     "promise": "7.1.1",
+    "react-ace": "^5.1.1",
     "react-dev-utils": "^2.0.1",
     "react-error-overlay": "^1.0.6",
     "react-test-renderer": "^15.5.4",

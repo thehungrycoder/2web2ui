@@ -22,7 +22,7 @@ const slugify = (value) => {
     .toLowerCase();
 };
 
-class EditForm extends Component {
+class Form extends Component {
   // Fills in ID based on Name
   handleIdFill (e) {
     const { newTemplate, change } = this.props;
@@ -31,8 +31,6 @@ class EditForm extends Component {
     }
 
     const idValue = slugify(e.target.value).replace(new RegExp(`[^${ID_ALLOWED_CHARS}]`, 'g'), '');
-
-    // Call redux-form change action
     change('id', idValue);
   }
 
@@ -117,11 +115,9 @@ class EditForm extends Component {
             type='checkbox'
             parse={value => !!value}
           />
-
         </Panel.Section>
 
         <Panel.Section>
-
           <Field
             name='options.transactional' id='transactional'
             component={ToggleBlock}
@@ -130,7 +126,6 @@ class EditForm extends Component {
             parse={value => !!value}
             helpText='Transactional messages are triggered by a user’s actions on the website, like requesting a password reset, signing up, or making a purchase.'
           />
-
         </Panel.Section>
       </Panel>
     );
@@ -146,4 +141,4 @@ const formOptions = {
   enableReinitialize: true // required to update initial values from redux state
 };
 
-export default connect(mapStateToProps, { change })(reduxForm(formOptions)(EditForm));
+export default connect(mapStateToProps, { change })(reduxForm(formOptions)(Form));
