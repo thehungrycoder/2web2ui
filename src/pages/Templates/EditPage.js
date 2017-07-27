@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { reduxForm, formValueSelector, formValues } from 'redux-form';
+import { reduxForm } from 'redux-form';
 // Actions
 import {
   getDraft,
@@ -54,7 +54,7 @@ class EditPage extends Component {
     const {
       handleSubmit,
       published,
-      id
+      match
     } = this.props;
 
     const primaryAction = {
@@ -66,7 +66,7 @@ class EditPage extends Component {
       {
         content: 'View Published',
         Component: Link,
-        to: `/templates/edit/${this.props.id}/published`
+        to: `/templates/edit/${match.params.id}/published`
       }
     ] : [];
 
@@ -96,7 +96,7 @@ class EditPage extends Component {
       to: '/templates'
     };
 
-    let title = `${id} (Draft)`;
+    let title = `${match.params.id} (Draft)`;
 
     return (
       <Page
@@ -111,15 +111,13 @@ class EditPage extends Component {
   render () {
     const {
       match,
-      id,
       loading,
       draft,
-      handleSubmit,
       submitSucceeded
     } = this.props;
 
     if (submitSucceeded && this.state.shouldRedirectToPublished) {
-      return <Redirect to={`/templates/edit/${this.props.id}/published`} />;
+      return <Redirect to={`/templates/edit/${match.params.id}/published`} />;
     }
 
     if (loading) {
@@ -140,7 +138,7 @@ class EditPage extends Component {
             <Form name='templateEdit' initialValues={draft} />
           </Grid.Column>
           <Grid.Column xs={12} lg={8}>
-            <Editor name='templateEdit' />
+            <Editor name='templateEdit' initialValues={draft} />
           </Grid.Column>
         </Grid>
       </Layout.App>
@@ -148,12 +146,10 @@ class EditPage extends Component {
   }
 }
 
-const selector = formValueSelector('templateEdit');
 const mapStateToProps = (state) => ({
   loading: state.templates.getLoading,
   draft: state.templates.draft,
   published: state.templates.published,
-  id: selector(state, 'id'),
   initialValues: state.templates.draft
 });
 const formOptions = {

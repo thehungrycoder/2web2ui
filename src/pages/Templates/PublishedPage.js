@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { reduxForm, formValueSelector, formValues } from 'redux-form';
+import { reduxForm } from 'redux-form';
 // Actions
 import {
   getDraft,
@@ -35,16 +35,13 @@ class PublishedPage extends Component {
   }
 
   renderPageHeader () {
-    const {
-      handleSubmit,
-      match
-    } = this.props;
+    const { match } = this.props;
 
     const secondaryActions = [
       {
         content: 'View Draft',
         Component: Link,
-        to: `/templates/edit/${this.props.id}`
+        to: `/templates/edit/${match.params.id}`
       },
       {
         content: 'Preview & Send',
@@ -68,14 +65,7 @@ class PublishedPage extends Component {
   }
 
   render () {
-    const {
-      match,
-      id,
-      loading,
-      published,
-      handleSubmit,
-      submitSucceeded
-    } = this.props;
+    const { loading, published } = this.props;
 
     if (loading) {
       return (
@@ -92,10 +82,10 @@ class PublishedPage extends Component {
         { this.renderPageHeader() }
         <Grid>
           <Grid.Column xs={12} lg={4}>
-            <Form name='templateEdit' initialValues={published} />
+            <Form name='templatePublished' disableAll initialValues={published} />
           </Grid.Column>
           <Grid.Column xs={12} lg={8}>
-            <Editor name='templateEdit' />
+            <Editor name='templatePublished' disableAll initialValues={published} />
           </Grid.Column>
         </Grid>
       </Layout.App>
@@ -103,13 +93,10 @@ class PublishedPage extends Component {
   }
 }
 
-const selector = formValueSelector('templateEdit');
 const mapStateToProps = (state) => ({
   loading: state.templates.getLoading,
-  draft: state.templates.draft,
   published: state.templates.published,
-  id: selector(state, 'id'),
-  initialValues: state.templates.draft
+  initialValues: state.templates.published
 });
 const formOptions = {
   form: 'templateEdit',

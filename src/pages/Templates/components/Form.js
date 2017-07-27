@@ -43,7 +43,7 @@ class Form extends Component {
   }
 
   render () {
-    const { newTemplate } = this.props;
+    const { newTemplate, disableAll } = this.props;
 
     return (
       <Panel>
@@ -53,6 +53,7 @@ class Form extends Component {
             component={TextFieldWrapper}
             label='Template Name'
             onChange={(e) => this.handleIdFill(e)}
+            disabled={disableAll}
           />
 
           <Field
@@ -60,7 +61,7 @@ class Form extends Component {
             component={TextFieldWrapper}
             label='Template ID'
             helpText={`A Unique ID for your template, we'll fill this in for you.`}
-            disabled={!newTemplate}
+            disabled={!newTemplate || disableAll}
           />
         </Panel.Section>
 
@@ -70,13 +71,14 @@ class Form extends Component {
             component={TextFieldWrapper}
             label='From Name'
             helpText='A friendly from for your recipients.'
+            disabled={disableAll}
           />
 
           <Field
             name='content.from.email' id='fromEmail'
             component={TextFieldWrapper}
             label='From Email'
-            disabled={newTemplate}
+            disabled={newTemplate || disableAll}
           />
 
           <Field
@@ -84,12 +86,14 @@ class Form extends Component {
             component={TextFieldWrapper}
             label='Reply To'
             helpText='An email address recipients can reply to.'
+            disabled={disableAll}
           />
 
           <Field
             name='content.subject' id='subject'
             component={TextFieldWrapper}
             label='Subject'
+            disabled={disableAll}
           />
 
           <Field
@@ -97,6 +101,7 @@ class Form extends Component {
             component={TextFieldWrapper}
             label='Description'
             helpText='Not visible to recipients.'
+            disabled={disableAll}
           />
         </Panel.Section>
 
@@ -107,6 +112,7 @@ class Form extends Component {
             label='Track Opens'
             type='checkbox'
             parse={value => !!value} // Prevents unchecked value from equaling ""
+            disabled={disableAll}
           />
 
           <Field
@@ -115,6 +121,7 @@ class Form extends Component {
             label='Track Clicks'
             type='checkbox'
             parse={value => !!value}
+            disabled={disableAll}
           />
         </Panel.Section>
 
@@ -126,6 +133,7 @@ class Form extends Component {
             type='checkbox'
             parse={value => !!value}
             helpText='Transactional messages are triggered by a user’s actions on the website, like requesting a password reset, signing up, or making a purchase.'
+            disabled={disableAll}
           />
         </Panel.Section>
       </Panel>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { reduxForm, formValueSelector } from 'redux-form';
+import { reduxForm } from 'redux-form';
 // Actions
 import { clear, create } from '../../actions/templates';
 
@@ -9,7 +9,7 @@ import { clear, create } from '../../actions/templates';
 import Layout from '../../components/Layout/Layout';
 import Form from './components/Form';
 import Editor from './components/Editor';
-import { Page, Panel, Grid } from '@sparkpost/matchbox';
+import { Page, Grid } from '@sparkpost/matchbox';
 
 class CreatePage extends Component {
   state = {
@@ -54,15 +54,11 @@ class CreatePage extends Component {
   render () {
     const {
       match,
-      id,
-      loading,
-      published,
-      handleSubmit,
       submitSucceeded
     } = this.props;
 
     if (submitSucceeded && this.state.shouldRedirect) {
-      return <Redirect to={`/templates/edit/${id}`} />;
+      return <Redirect to={`/templates/edit/${match.params.id}`} />;
     }
 
     return (
@@ -81,13 +77,9 @@ class CreatePage extends Component {
   }
 }
 
-const selector = formValueSelector('templateCreate');
-const mapStateToProps = (state) => ({
-  loading: state.templates.getLoading,
-  id: selector(state, 'id')
-});
+// const mapStateToProps = (state) => ({ });
 const formOptions = {
   form: 'templateCreate'
 };
 
-export default connect(mapStateToProps, { create, clear })(reduxForm(formOptions)(CreatePage));
+export default connect(null, { create, clear })(reduxForm(formOptions)(CreatePage));

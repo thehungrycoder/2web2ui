@@ -7,12 +7,7 @@ import { Field, reduxForm } from 'redux-form';
 import AceEditor from 'react-ace';
 import 'brace/mode/html';
 import 'brace/theme/tomorrow';
-import { Panel, TextField } from '@sparkpost/matchbox';
-
-// TODO use shared component instead of this
-const TextFieldWrapper = ({ input, meta: { error }, ...rest }) => (
-  <TextField {...rest} {...input} error={error} />
-);
+import { Panel } from '@sparkpost/matchbox';
 
 const AceWrapper = ({ input, ...rest }) => (
   <AceEditor
