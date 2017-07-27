@@ -9,18 +9,35 @@ export function listTemplates () {
   };
 }
 
-export function getTemplate (id) {
+export function getDraft (id) {
   return {
     type: 'SPARKPOST_API_REQUEST',
     meta: {
-      type: 'GET_TEMPLATE',
+      type: 'GET_DRAFT_TEMPLATE',
       method: 'GET',
-      url: `/templates/${id}`
+      url: `/templates/${id}`,
+      params: {
+        draft: true
+      }
     }
   };
 }
 
-export function createTemplate (data) {
+export function getPublished (id) {
+  return {
+    type: 'SPARKPOST_API_REQUEST',
+    meta: {
+      type: 'GET_PUBLISHED_TEMPLATE',
+      method: 'GET',
+      url: `/templates/${id}`,
+      params: {
+        draft: false
+      }
+    }
+  };
+}
+
+export function create (data) {
   return {
     type: 'SPARKPOST_API_REQUEST',
     meta: {
@@ -32,7 +49,7 @@ export function createTemplate (data) {
   };
 }
 
-export function updateTemplate (data, params = {}) {
+export function update (data, params = {}) {
   const id = data.id;
   return {
     type: 'SPARKPOST_API_REQUEST',
@@ -46,7 +63,7 @@ export function updateTemplate (data, params = {}) {
   };
 }
 
-export function publishTemplate (id) {
+export function publish (id) {
   return {
     type: 'SPARKPOST_API_REQUEST',
     meta: {
@@ -58,8 +75,8 @@ export function publishTemplate (id) {
   };
 }
 
-export function resetTemplate () {
+export function clear () {
   return {
-    type: 'RESET_TEMPLATE'
+    type: 'CLEAR_TEMPLATE'
   };
 }

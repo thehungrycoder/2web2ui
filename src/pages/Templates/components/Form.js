@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Field, reduxForm, change } from 'redux-form';
 
@@ -34,7 +35,7 @@ class Form extends Component {
     change('id', idValue);
   }
 
-  componentDidUpdate () {
+  componentDidMount () {
     const { change, newTemplate } = this.props;
     if (newTemplate) {
       change('content.from.email', 'sandbox@sparkpostbox.com');
@@ -132,13 +133,10 @@ class Form extends Component {
   }
 }
 
-const mapStateToProps = ({ templates: { activeTemplate } }) => ({
-  initialValues: { ...activeTemplate }
-});
+const mapStateToProps = (state, { name }) => ({ form: name });
+const formOptions = {};
 
-const formOptions = {
-  form: 'templateEdit',
-  enableReinitialize: true // required to update initial values from redux state
-};
-
-export default connect(mapStateToProps, { change })(reduxForm(formOptions)(Form));
+export default compose(
+  connect(mapStateToProps, { change }),
+  reduxForm(formOptions)
+)(Form);

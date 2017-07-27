@@ -12,18 +12,28 @@ export default (state = initialState, action) => {
     case 'LIST_TEMPLATES_FAIL':
       return { ...state, listLoading: false };
 
-    // Get
-    case 'GET_TEMPLATE_PENDING':
+    // Get Draft
+    case 'GET_DRAFT_TEMPLATE_PENDING':
       return { ...state, getLoading: true };
 
-    case 'GET_TEMPLATE_SUCCESS':
-      return { ...state, activeTemplate: action.payload, getLoading: false };
+    case 'GET_DRAFT_TEMPLATE_SUCCESS':
+      return { ...state, draft: action.payload, getLoading: false };
 
-    case 'GET_TEMPLATE_FAIL':
+    case 'GET_DRAFT_TEMPLATE_FAIL':
       return { ...state, getLoading: false };
 
-    case 'RESET_TEMPLATE':
-      return { ...state, activeTemplate: null };
+    // Get Published
+    case 'GET_PUBLISHED_TEMPLATE_PENDING':
+      return { ...state, getLoading: true };
+
+    case 'GET_PUBLISHED_TEMPLATE_SUCCESS':
+      return { ...state, published: action.payload, getLoading: false };
+
+    case 'GET_PUBLISHED_TEMPLATE_FAIL':
+      return { ...state, getLoading: false };
+
+    case 'CLEAR_TEMPLATE':
+      return { ...state, draft: null, published: null };
 
     default:
       return state;

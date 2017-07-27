@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 
@@ -44,13 +45,13 @@ class Editor extends Component {
   }
 }
 
-const mapStateToProps = ({ templates: { activeTemplate } }) => ({
-  initialValues: { ...activeTemplate }
-});
+const mapStateToProps = (state, { name }) => ({ form: name });
 
 const formOptions = {
-  form: 'templateEdit',
   enableReinitialize: true // required to update initial values from redux state
 };
 
-export default connect(mapStateToProps)(reduxForm(formOptions)(Editor));
+export default compose(
+  connect(mapStateToProps),
+  reduxForm(formOptions)
+)(Editor);
