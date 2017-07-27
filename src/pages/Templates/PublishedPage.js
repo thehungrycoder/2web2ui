@@ -6,7 +6,7 @@ import { reduxForm, formValueSelector, formValues } from 'redux-form';
 import {
   getDraft,
   getPublished,
-  reset,
+  clear,
   update,
   create,
   publish
@@ -18,95 +18,37 @@ import Form from './components/Form';
 import Editor from './components/Editor';
 import { Page, Panel, Grid } from '@sparkpost/matchbox';
 
-class EditPage extends Component {
+class PublishedPage extends Component {
   state = {
-    newTemplate: false,
-    showPublished: false
-  }
+    shouldRedirectToPublished: false
+  };
 
   componentDidMount () {
     const {
       match,
-      getDraft,
       getPublished,
-      reset
-    } = this.props;
-    if (match.params.id) {
-      this.setState({ newTemplate: false });
-      getDraft(match.params.id);
-      // getPublished(match.params.id);
-    } else {
-      this.setState({ newTemplate: true });
-      reset();
-    }
-  }
-
-  componentDidUpdate () {
-    const {
-      id,
-      submitSucceeded,
-      history
-    } = this.props;
-  }
-
-  handleUpdateOrCreate (values, shouldPublish = false, params) {
-    const {
-      update,
-      create,
-      publish
+      clear
     } = this.props;
 
-    if (this.state.newTemplate) {
-      return create(values);
-    } else {
-      return update(values).then(() => {
-        if (shouldPublish) {
-          publish(values.id);
-        }
-      });
-    }
+    clear();
+    getPublished(match.params.id);
   }
 
   renderPageHeader () {
     const {
-      newTemplate,
-      showPublished
-    } = this.state;
-
-    const {
       handleSubmit,
-      published,
-      id
+      match
     } = this.props;
 
-    const primaryAction = {
-      content: newTemplate ? 'Save Template' : 'Publish Template',
-      onClick: handleSubmit((values) => this.handleUpdateOrCreate(values, true))
-    };
-
-    const viewActions = published ? [
-      {
-        content: !showPublished ? 'View Published' : 'View Draft'
-      }
-    ] : null;
-
-    const editActions = !showPublished ? [
-      {
-        content: 'Save as Draft',
-        onClick: handleSubmit((values) => this.handleUpdateOrCreate(values))
-      },
-      {
-        content: 'Delete'
-      },
-      {
-        content: 'Duplicate'
-      }
-    ] : null;
-
     const secondaryActions = [
-      ...viewActions, ...editActions,
       {
-        content: 'Preview & Send'
+        content: 'View Draft',
+        Component: Link,
+        to: `/templates/edit/${this.props.id}`
+      },
+      {
+        content: 'Preview & Send',
+        disabled: true
       }
     ];
 
@@ -116,22 +58,11 @@ class EditPage extends Component {
       to: '/templates'
     };
 
-    let title = newTemplate ? 'New Template' : id;
-
-    if (!newTemplate) {
-      if (showPublished) {
-        title = `${title} (Published)`;
-      } else {
-        title = `${title} (Draft)`;
-      }
-    }
-
     return (
       <Page
-        primaryAction={primaryAction}
-        secondaryActions={!newTemplate ? secondaryActions : []}
+        secondaryActions={secondaryActions}
         breadcrumbAction={backAction}
-        title={title}
+        title={`${match.params.id} (Published)`}
       />
     );
   }
@@ -146,13 +77,7 @@ class EditPage extends Component {
       submitSucceeded
     } = this.props;
 
-    const { newTemplate } = this.state;
-
-    if (newTemplate && submitSucceeded) {
-      return <Redirect to={`/templates/edit/${this.props.id}`} />;
-    }
-
-    if (!newTemplate && loading) {
+    if (loading) {
       return (
         <Layout.App>
           <Panel sectioned>
@@ -167,10 +92,10 @@ class EditPage extends Component {
         { this.renderPageHeader() }
         <Grid>
           <Grid.Column xs={12} lg={4}>
-            <Form newTemplate={newTemplate} />
+            <Form name='templateEdit' initialValues={published} />
           </Grid.Column>
           <Grid.Column xs={12} lg={8}>
-            <Editor />
+            <Editor name='templateEdit' />
           </Grid.Column>
         </Grid>
       </Layout.App>
@@ -183,17 +108,19 @@ const mapStateToProps = (state) => ({
   loading: state.templates.getLoading,
   draft: state.templates.draft,
   published: state.templates.published,
-  id: selector(state, 'id')
+  id: selector(state, 'id'),
+  initialValues: state.templates.draft
 });
 const formOptions = {
-  form: 'templateEdit'
+  form: 'templateEdit',
+  enableReinitialize: true // required to update initial values from redux state
 };
 
 export default connect(mapStateToProps, {
   getDraft,
   getPublished,
-  reset,
+  clear,
   update,
   create,
   publish
-})(reduxForm(formOptions)(EditPage));
+})(reduxForm(formOptions)(PublishedPage));

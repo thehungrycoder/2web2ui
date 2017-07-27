@@ -19,6 +19,10 @@ import Editor from './components/Editor';
 import { Page, Panel, Grid } from '@sparkpost/matchbox';
 
 class EditPage extends Component {
+  state = {
+    shouldRedirectToPublished: false
+  };
+
   componentDidMount () {
     const {
       match,
@@ -27,6 +31,7 @@ class EditPage extends Component {
       clear
     } = this.props;
 
+    clear();
     getDraft(match.params.id);
     getPublished(match.params.id);
   }
@@ -35,7 +40,8 @@ class EditPage extends Component {
     const { update, publish, match, getDraft } = this.props;
     return update(values)
       .then(() => publish(match.params.id))
-      .then(() => getDraft(match.params.id));
+      .then(() => getDraft(match.params.id))
+      .then(() => this.setState({ shouldRedirectToPublished: true }));
   }
 
   handleSave (values) {
@@ -58,7 +64,9 @@ class EditPage extends Component {
 
     const viewActions = published ? [
       {
-        content: 'View Published'
+        content: 'View Published',
+        Component: Link,
+        to: `/templates/edit/${this.props.id}/published`
       }
     ] : [];
 
@@ -110,8 +118,8 @@ class EditPage extends Component {
       submitSucceeded
     } = this.props;
 
-    if (submitSucceeded) {
-      return <Redirect to={`/templates/edit/${this.props.id}`} />;
+    if (submitSucceeded && this.state.shouldRedirectToPublished) {
+      return <Redirect to={`/templates/edit/${this.props.id}/published`} />;
     }
 
     if (loading) {

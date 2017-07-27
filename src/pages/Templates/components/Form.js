@@ -37,7 +37,7 @@ class Form extends Component {
 
   componentDidMount () {
     const { change, newTemplate } = this.props;
-    if (newTemplate) {
+    if (newTemplate) { // TODO update to reflect sending domains
       change('content.from.email', 'sandbox@sparkpostbox.com');
     }
   }

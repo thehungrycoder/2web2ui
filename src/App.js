@@ -12,6 +12,7 @@ import {
   ProfilePage,
   TemplatesListPage,
   TemplatesEditPage,
+  TemplatesPublishedPage,
   TemplatesCreatePage,
   WebhooksPage
 } from './pages';
@@ -40,8 +41,8 @@ export default () => (
       <ProtectedRoute exact path='/templates' component={TemplatesListPage} />
       <ProtectedRoute exact path='/templates/create/' component={TemplatesCreatePage} />
       <ProtectedRoute exact path='/templates/edit/:id' component={TemplatesEditPage} />
-      {/* <ProtectedRoute exact path='/templates/edit/:id/published' component={TemplatesEditPage} />
-      <ProtectedRoute exact path='/templates/edit/:id/preview' component={TemplatesEditPage} /> */}
+      <ProtectedRoute exact path='/templates/edit/:id/published' component={TemplatesPublishedPage} />
+      {/* <ProtectedRoute exact path='/templates/edit/:id/preview' component={TemplatesEditPage} /> */}
 
       <ProtectedRoute path='/settings/profile' component={ProfilePage} />
       <ProtectedRoute path='/settings/webhooks' component={WebhooksPage}/>
