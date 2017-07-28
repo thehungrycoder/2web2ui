@@ -4,12 +4,8 @@ import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 // Actions
 import {
-  getDraft,
   getPublished,
-  clear,
-  update,
-  create,
-  publish
+  clear
 } from '../../actions/templates';
 
 // Components
@@ -17,6 +13,8 @@ import Layout from '../../components/Layout/Layout';
 import Form from './components/Form';
 import Editor from './components/Editor';
 import { Page, Panel, Grid } from '@sparkpost/matchbox';
+
+const FORM_NAME = 'templatePublished';
 
 class PublishedPage extends Component {
   state = {
@@ -82,10 +80,10 @@ class PublishedPage extends Component {
         { this.renderPageHeader() }
         <Grid>
           <Grid.Column xs={12} lg={4}>
-            <Form name='templatePublished' disableAll initialValues={published} />
+            <Form name={FORM_NAME} disableAll initialValues={published} />
           </Grid.Column>
           <Grid.Column xs={12} lg={8}>
-            <Editor name='templatePublished' disableAll initialValues={published} />
+            <Editor name={FORM_NAME} disableAll initialValues={published} />
           </Grid.Column>
         </Grid>
       </Layout.App>
@@ -93,21 +91,17 @@ class PublishedPage extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  loading: state.templates.getLoading,
-  published: state.templates.published,
-  initialValues: state.templates.published
+const mapStateToProps = ({ templates }) => ({
+  loading: templates.getLoading,
+  published: templates.published,
+  initialValues: templates.published
 });
 const formOptions = {
-  form: 'templateEdit',
+  form: FORM_NAME,
   enableReinitialize: true // required to update initial values from redux state
 };
 
 export default connect(mapStateToProps, {
-  getDraft,
   getPublished,
-  clear,
-  update,
-  create,
-  publish
+  clear
 })(reduxForm(formOptions)(PublishedPage));

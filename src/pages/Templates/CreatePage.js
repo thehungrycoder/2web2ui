@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { reduxForm } from 'redux-form';
+import { reduxForm, formValueSelector } from 'redux-form';
 // Actions
 import { clear, create } from '../../actions/templates';
 
@@ -10,6 +10,8 @@ import Layout from '../../components/Layout/Layout';
 import Form from './components/Form';
 import Editor from './components/Editor';
 import { Page, Grid } from '@sparkpost/matchbox';
+
+const FORM_NAME = 'templateCreate';
 
 class CreatePage extends Component {
   state = {
@@ -23,17 +25,16 @@ class CreatePage extends Component {
   handleCreate (values) {
     const { create } = this.props;
     return create(values)
-      .then(() => {
-        this.setState({ shouldRedirect: true });
-      });
+      .then(() => this.setState({ shouldRedirect: true }));
   }
 
   renderPageHeader () {
-    const { handleSubmit } = this.props;
+    const { handleSubmit, submitting } = this.props;
 
     const primaryAction = {
       content: 'Save Template',
-      onClick: handleSubmit((values) => this.handleCreate(values))
+      onClick: handleSubmit((values) => this.handleCreate(values)),
+      disabled: submitting
     };
 
     const backAction = {
@@ -52,13 +53,10 @@ class CreatePage extends Component {
   }
 
   render () {
-    const {
-      match,
-      submitSucceeded
-    } = this.props;
+    const { id } = this.props;
 
-    if (submitSucceeded && this.state.shouldRedirect) {
-      return <Redirect to={`/templates/edit/${match.params.id}`} />;
+    if (this.state.shouldRedirect) {
+      return <Redirect to={`/templates/edit/${id}`} />;
     }
 
     return (
@@ -66,10 +64,10 @@ class CreatePage extends Component {
         { this.renderPageHeader() }
         <Grid>
           <Grid.Column xs={12} lg={4}>
-            <Form newTemplate={true} name='templateCreate' />
+            <Form newTemplate={true} name={FORM_NAME} />
           </Grid.Column>
           <Grid.Column xs={12} lg={8}>
-            <Editor name='templateCreate' />
+            <Editor name={FORM_NAME} />
           </Grid.Column>
         </Grid>
       </Layout.App>
@@ -77,9 +75,13 @@ class CreatePage extends Component {
   }
 }
 
-// const mapStateToProps = (state) => ({ });
+const selector = formValueSelector(FORM_NAME);
+const mapStateToProps = (state) => ({
+  id: selector(state, 'id')
+});
+
 const formOptions = {
-  form: 'templateCreate'
+  form: FORM_NAME
 };
 
-export default connect(null, { create, clear })(reduxForm(formOptions)(CreatePage));
+export default connect(mapStateToProps, { create, clear })(reduxForm(formOptions)(CreatePage));

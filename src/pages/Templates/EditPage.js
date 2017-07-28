@@ -19,6 +19,8 @@ import Editor from './components/Editor';
 import DeleteModal from './components/DeleteModal';
 import { Page, Panel, Grid } from '@sparkpost/matchbox';
 
+const FORM_NAME = 'templateEdit';
+
 class EditPage extends Component {
   state = {
     shouldRedirectToPublished: false,
@@ -67,12 +69,14 @@ class EditPage extends Component {
     const {
       handleSubmit,
       published,
-      match
+      match,
+      submitting
     } = this.props;
 
     const primaryAction = {
       content: 'Publish Template',
-      onClick: handleSubmit((values) => this.handlePublish(values))
+      onClick: handleSubmit((values) => this.handlePublish(values)),
+      disabled: submitting
     };
 
     const viewActions = published ? [
@@ -87,7 +91,8 @@ class EditPage extends Component {
       ...viewActions,
       {
         content: 'Save as Draft',
-        onClick: handleSubmit((values) => this.handleSave(values))
+        onClick: handleSubmit((values) => this.handleSave(values)),
+        disabled: submitting
       },
       {
         content: 'Delete',
@@ -151,10 +156,10 @@ class EditPage extends Component {
         { this.renderPageHeader() }
         <Grid>
           <Grid.Column xs={12} lg={4}>
-            <Form name='templateEdit' initialValues={draft} />
+            <Form name={FORM_NAME} initialValues={draft} />
           </Grid.Column>
           <Grid.Column xs={12} lg={8}>
-            <Editor name='templateEdit' initialValues={draft} />
+            <Editor name={FORM_NAME} initialValues={draft} />
           </Grid.Column>
         </Grid>
         <DeleteModal
@@ -166,14 +171,14 @@ class EditPage extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  loading: state.templates.getLoading,
-  draft: state.templates.draft,
-  published: state.templates.published,
-  initialValues: state.templates.draft
+const mapStateToProps = ({ templates }) => ({
+  loading: templates.getLoading,
+  draft: templates.draft,
+  published: templates.published,
+  initialValues: templates.draft
 });
 const formOptions = {
-  form: 'templateEdit',
+  form: FORM_NAME,
   enableReinitialize: true // required to update initial values from redux state
 };
 
