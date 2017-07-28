@@ -8,7 +8,7 @@ import {
   getPublished,
   clear,
   update,
-  create,
+  deleteTemplate,
   publish
 } from '../../actions/templates';
 
@@ -16,11 +16,14 @@ import {
 import Layout from '../../components/Layout/Layout';
 import Form from './components/Form';
 import Editor from './components/Editor';
+import DeleteModal from './components/DeleteModal';
 import { Page, Panel, Grid } from '@sparkpost/matchbox';
 
 class EditPage extends Component {
   state = {
-    shouldRedirectToPublished: false
+    shouldRedirectToPublished: false,
+    shouldRedirectToList: false,
+    deleteOpen: false
   };
 
   componentDidMount () {
@@ -48,6 +51,16 @@ class EditPage extends Component {
     const { update, match, getDraft } = this.props;
     return update(values)
       .then(() => getDraft(match.params.id));
+  }
+
+  handleDelete () {
+    const { deleteTemplate, match } = this.props;
+    return deleteTemplate(match.params.id)
+      .then(() => this.setState({ shouldRedirectToList: true }));
+  }
+
+  handleDeleteModalToggle () {
+    this.setState({ deleteOpen: !this.state.deleteOpen });
   }
 
   renderPageHeader () {
@@ -78,7 +91,7 @@ class EditPage extends Component {
       },
       {
         content: 'Delete',
-        disabled: true
+        onClick: () => this.handleDeleteModalToggle()
       },
       {
         content: 'Duplicate',
@@ -112,12 +125,15 @@ class EditPage extends Component {
     const {
       match,
       loading,
-      draft,
-      submitSucceeded
+      draft
     } = this.props;
 
-    if (submitSucceeded && this.state.shouldRedirectToPublished) {
+    if (this.state.shouldRedirectToPublished) {
       return <Redirect to={`/templates/edit/${match.params.id}/published`} />;
+    }
+
+    if (this.state.shouldRedirectToList) {
+      return <Redirect to='/templates/' />;
     }
 
     if (loading) {
@@ -141,6 +157,10 @@ class EditPage extends Component {
             <Editor name='templateEdit' initialValues={draft} />
           </Grid.Column>
         </Grid>
+        <DeleteModal
+          open={this.state.deleteOpen}
+          handleToggle={() => this.handleDeleteModalToggle()}
+          handleDelete={() => this.handleDelete()}/>
       </Layout.App>
     );
   }
@@ -162,6 +182,6 @@ export default connect(mapStateToProps, {
   getPublished,
   clear,
   update,
-  create,
+  deleteTemplate,
   publish
 })(reduxForm(formOptions)(EditPage));

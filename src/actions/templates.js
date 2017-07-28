@@ -75,6 +75,17 @@ export function publish (id) {
   };
 }
 
+export function deleteTemplate (id) {
+  return {
+    type: 'SPARKPOST_API_REQUEST',
+    meta: {
+      type: 'DELETE_TEMPLATE',
+      method: 'DELETE',
+      url: `/templates/${id}`
+    }
+  };
+}
+
 export function clear () {
   return {
     type: 'CLEAR_TEMPLATE'

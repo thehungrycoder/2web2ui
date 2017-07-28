@@ -28,7 +28,7 @@ const AceWrapper = ({ input, ...rest }) => (
 class Editor extends Component {
   render () {
     return (
-      <Panel style={{ height: '100%' }}>
+      <Panel style={{ height: '100%', position: 'relative', zIndex: '1' }}>
         <Panel.Section style={{ height: '100%' }}>
           <Field
             name='content.html'
