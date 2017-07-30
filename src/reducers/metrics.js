@@ -1,13 +1,13 @@
-export default (state = {}, action) => {
+export default (state = { pending: false, error: null, results: [] }, action) => {
   switch (action.type) {
     case 'FETCH_METRICS_PENDING':
       return { ...state, pending: true };
 
     case 'FETCH_METRICS_SUCCESS':
-      return action.payload;
+      return { ...state, error: null, pending: false, results: action.payload };
 
     case 'FETCH_METRICS_FAIL':
-      return { error: action.payload };
+      return { ...state, pending: false, error: action.payload };
 
     default:
       return state;
