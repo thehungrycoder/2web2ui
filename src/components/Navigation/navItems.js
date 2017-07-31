@@ -25,17 +25,17 @@ export default [
     icon: 'Code'
   },
   {
-    label: 'Settings',
-    to: '/settings',
+    label: 'Account',
+    to: '/account',
     icon: 'Settings',
     children: [
       {
         label: 'Profile',
-        to: '/settings/profile'
+        to: '/account/profile'
       },
       {
         label: 'Webhooks',
-        to: '/settings/webhooks'
+        to: '/webhooks'
       }
     ]
   }

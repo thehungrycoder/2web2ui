@@ -12,7 +12,7 @@ const UpgradeBanner = ({ hasCC }) => {
         action={{
           content: 'Upgrade Now',
           Component: Link,
-          to: '/settings/profile'
+          to: '/account/profile'
         }}>
         <p>Upgrade now to increase daily limits and start sending more mail.</p>
       </Banner>
@@ -26,7 +26,7 @@ const UpgradeBanner = ({ hasCC }) => {
       action={{
         content: 'Add Payment Information',
         Component: Link,
-        to: '/settings/profile'
+        to: '/account/profile'
       }}>
       <p>Add a credit card to your account to unlock higher sending limits.</p>
     </Banner>

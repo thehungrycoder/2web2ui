@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link, withRouter } from 'react-router-dom';
 
 // Actions
 import { listWebhooks } from '../../actions/webhooks';
 
 // Components
-import { Link } from 'react-router-dom';
 import Layout from '../../components/Layout/Layout';
 import { Page, Table, Panel, Button, Pagination } from '@sparkpost/matchbox';
 
-class WebhooksPage extends Component {
+class WebhooksHome extends Component {
   state = {
     perPage: 10,
     currentPage: 0
@@ -19,12 +19,8 @@ class WebhooksPage extends Component {
     this.props.listWebhooks();
   }
 
-  viewDetail () {
-    console.log('viewing details');
-  }
-
   renderRow (webhook) {
-    const nameLink = <Link to="/dashboard">{webhook.name}</Link>;
+    const nameLink = <Link to={`/webhooks/details/${webhook.id}`}>{webhook.name}</Link>;
     return (
         <Table.Row key={webhook.id} rowData={ [nameLink, webhook.id, webhook.target]} >
         </Table.Row>
@@ -39,16 +35,15 @@ class WebhooksPage extends Component {
   }
 
   render () {
-    const webhookCount = this.props.webhooks.length;
-    const loading = this.props.listLoading;
+    const { webhooks, listLoading } = this.props;
 
     // This should probably be a universal page-loading component
-    if (loading) {
+    if (listLoading && !webhooks.length) {
       return (
         <Layout.App>
           <Page
-            primaryAction={{content: 'Create Template', onClick: () => { console.log('create template'); }}}
-            title={'Templates'}
+            primaryAction={{content: 'Create Webhook', onClick: () => { this.props.history.push('/webhooks/create'); }}}
+            title={'Webhooks'}
           />
           <Panel>
             <Panel.Section>
@@ -59,13 +54,13 @@ class WebhooksPage extends Component {
       );
     }
 
-    const webhookRows = webhookCount ? this.renderWebhookRows(this.props.webhooks, this.state.currentPage, this.state.perPage) : null;
+    // TODO: fix paging error
+    const webhookRows = webhooks.length ? this.renderWebhookRows(webhooks, this.state.currentPage, this.state.perPage) : null;
 
     return (
-
       <Layout.App>
         <Page
-          primaryAction={{content: 'Create Webhook', onClick: () => { console.log('create webhook'); }}}
+          primaryAction={{content: 'Create Webhook', onClick: () => { this.props.history.push('/webhooks/create'); }}}
           title={'Webhooks'}
         />
         <Panel>
@@ -83,7 +78,7 @@ class WebhooksPage extends Component {
           </Table>
         </Panel>
         <Pagination
-           pages={Math.ceil(webhookCount / this.state.perPage)}
+           pages={Math.ceil(webhooks.length / this.state.perPage)}
            pageRange={5}
            initialIndex={0}
            onChange={(index) => { this.setState({currentPage: index}); }}
@@ -106,4 +101,4 @@ function mapStateToProps ({ webhooks }) {
   };
 }
 
-export default connect(mapStateToProps, { listWebhooks })(WebhooksPage);
+export default withRouter(connect(mapStateToProps, { listWebhooks })(WebhooksHome));
