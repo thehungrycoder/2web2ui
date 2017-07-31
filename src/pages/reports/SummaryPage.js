@@ -5,21 +5,32 @@ import { fetch as fetchMetrics } from '../../actions/metrics';
 import LineChart from './components/LineChart';
 import Layout from '../../components/Layout/Layout';
 import { getQueryFromOptions, getDayLines, getLineChartFormatters } from '../../helpers/metrics';
-import { Page, Icon } from '@sparkpost/matchbox';
+import { Page, Icon, Datepicker } from '@sparkpost/matchbox';
 import _ from 'lodash';
+import moment from 'moment';
 // import qs from 'query-string';
 
-class SummaryReportPage extends Component {
-  state = {
-    options: {
-      metrics: ['count_targeted', 'count_delivered', 'count_accepted', 'count_bounce']
-    }
-  };
+const displayDateFormat = 'YYYY-MM-DDTHH:mm';
 
+class SummaryReportPage extends Component {
   constructor (props) {
     super(props);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDayClick = this.handleDayClick.bind(this);
+    this.handleDayHover = this.handleDayHover.bind(this);
+
+    const today = new Date();
+    this.state = {
+      options: {
+        metrics: ['count_targeted', 'count_delivered', 'count_accepted', 'count_bounce'],
+        from: moment(today).subtract(1, 'day').toDate(),
+        to: today
+      },
+      datepicker: {
+        selecting: false
+      }
+    };
   }
 
   componentWillMount () {
@@ -45,7 +56,26 @@ class SummaryReportPage extends Component {
 
   handleSubmit ({ preventDefault }) {
     preventDefault();
+    this.setState({ showDatePicker: false });
     this.refresh();
+  }
+
+  handleDayClick (selected) {
+    const { selecting } = this.state.datepicker;
+    if (selecting) {
+      this.setState({ options: { ...this.state.options, to: selected } });
+    } else {
+      this.setState({ options: { ...this.state.options, from: selected } });
+    }
+
+    this.setState({ datepicker: { ...this.state.datepicker, selecting: !selecting } });
+  }
+
+  handleDayHover (entered) {
+    const { selecting } = this.state.datepicker;
+    if (selecting) {
+      this.setState({ options: { ...this.state.options, to: entered } });
+    }
   }
 
   refresh () {
@@ -98,6 +128,8 @@ class SummaryReportPage extends Component {
   }
 
   render () {
+    const { showDatePicker = false } = this.state;
+    const { from, to } = this.state.options;
     return (
       <Layout.App>
         <Page title='Summary Report'/>
@@ -105,9 +137,29 @@ class SummaryReportPage extends Component {
         {this.renderLoading()}
 
         <form onSubmit={this.handleSubmit}>
-          <input name='from' onChange={this.handleInputChange} placeholder='From' />
-          <input name='to' onChange={this.handleInputChange} placeholder='To' />
-          <button type='submit'>Refresh</button>
+          {from &&
+            <div>
+              <input style={{width: '100%'}} value={`${from} to ${to}`} disabled />
+              <Icon name='InsertChart' style={{ cursor: 'pointer' }} onClick={() => {
+                this.setState({ showDatePicker: !showDatePicker });
+              }} />
+            </div>
+          }
+
+          {this.state.showDatePicker &&
+            <div>
+              <Datepicker
+                numberOfMonths={2}
+                fixedWeeks
+                onDayClick={this.handleDayClick}
+                onDayMouseEnter={this.handleDayHover}
+                selectedDays={this.state.options}
+              />
+              <br/>
+              <button type='submit'>Apply</button>
+            </div>
+          }
+
         </form>
 
         {this.renderChart()}

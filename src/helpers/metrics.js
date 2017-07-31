@@ -30,7 +30,7 @@ const getTickFormatter = _.memoize((precisionType) => {
 const getTooltipLabelFormatter = _.memoize((precisionType) => {
   let labelFormat = 'MMMM Do';
   if (precisionType === 'hours') {
-    labelFormat = 'MMM Do [at] h:mma';
+    labelFormat = 'MMM Do [at] LT';
   }
   return (label) => moment(label).format(labelFormat);
 });
@@ -47,8 +47,8 @@ function getLineChartFormatters ({ precision }) {
 }
 
 function getQueryFromOptions ({ from, to, metrics }) {
-  from = from ? moment(from).utc() : moment.utc().subtract(1, 'day');
-  to = to ? moment(to).utc() : moment.utc();
+  from = moment(from).utc();
+  to = moment(to).utc();
 
   return {
     metrics: metrics.join(','),
