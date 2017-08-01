@@ -3,10 +3,10 @@ import _ from 'lodash';
 
 const apiDateFormat = 'YYYY-MM-DDTHH:mm';
 const precisionMap = [
-  { time: 60, value: '1min', format: 'h:mma' },
-  { time: 60 * 2, value: '5min', format: 'h:mma' },
-  { time: 60 * 4, value: '15min', format: 'h:mma' },
-  { time: 60 * 24 * 2, value: 'hour', format: 'h:mma' },
+  { time: 60, value: '1min', format: 'ha' },
+  { time: 60 * 2, value: '5min', format: 'ha' },
+  { time: 60 * 4, value: '15min', format: 'ha' },
+  { time: 60 * 24 * 2, value: 'hour', format: 'ha' },
   { time: 60 * 24 * 7, value: '12hr', format: 'MMM Do' },
   { time: 60 * 24 * 33, value: 'day', format: 'MMM Do' },
   { time: 60 * 24 * 190, value: 'week', format: 'MMM Do' },
@@ -23,7 +23,7 @@ export {
 };
 
 const getTickFormatter = _.memoize((precisionType) => {
-  let tickFormat = (precisionType === 'hours') ? 'h:mma' : 'MMM Do';
+  let tickFormat = (precisionType === 'hours') ? 'ha' : 'MMM Do';
   return (tick) => moment(tick).format(tickFormat);
 });
 
@@ -39,7 +39,19 @@ function getLineChartFormatters ({ precision }) {
   const formatters = {};
   const precisionType = getPrecisionType(precision);
 
-  formatters.tickFormatter = getTickFormatter(precisionType);
+  formatters.xTickFormatter = getTickFormatter(precisionType);
+  formatters.yTickFormatter = (value) => {
+    if (value < 1000) {
+      return value.toLocaleString();
+    }
+    if (value < 1000000) {
+      return `${(value / 1000).toFixed(0).toLocaleString()}K`;
+    }
+    if (value < 100000000) {
+      return `${(value / 1000000).toFixed(0).toLocaleString()}M`;
+    }
+    return value.toPrecision(2);
+  };
   formatters.tooltipLabelFormatter = getTooltipLabelFormatter(precisionType);
   formatters.tooltipValueFormatter = (value) => Number(value).toLocaleString();
 

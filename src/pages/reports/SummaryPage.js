@@ -5,30 +5,31 @@ import { fetch as fetchMetrics } from '../../actions/metrics';
 import LineChart from './components/LineChart';
 import Layout from '../../components/Layout/Layout';
 import { getQueryFromOptions, getDayLines, getLineChartFormatters } from '../../helpers/metrics';
-import { Page, Icon, Datepicker } from '@sparkpost/matchbox';
+import { Page, Icon, Datepicker, UnstyledLink } from '@sparkpost/matchbox';
 import _ from 'lodash';
 import moment from 'moment';
+import { subMonths } from 'date-fns';
 // import qs from 'query-string';
-
-const displayDateFormat = 'YYYY-MM-DDTHH:mm';
 
 class SummaryReportPage extends Component {
   constructor (props) {
     super(props);
-    this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDayClick = this.handleDayClick.bind(this);
     this.handleDayHover = this.handleDayHover.bind(this);
 
-    const today = new Date();
+    const to = new Date();
+    const from = moment(to).subtract(1, 'day').toDate();
+
     this.state = {
       options: {
         metrics: ['count_targeted', 'count_delivered', 'count_accepted', 'count_bounce'],
-        from: moment(today).subtract(1, 'day').toDate(),
-        to: today
+        from,
+        to
       },
       datepicker: {
-        selecting: false
+        selecting: false,
+        selected: { from, to }
       }
     };
   }
@@ -44,45 +45,47 @@ class SummaryReportPage extends Component {
     }
   }
 
-  handleInputChange ({ target }) {
-    const { name, value } = target;
-    this.setState({
-      options: {
-        ...this.state.options,
-        [name]: value
-      }
-    });
-  }
-
-  handleSubmit ({ preventDefault }) {
-    preventDefault();
+  handleSubmit (e) {
+    e.preventDefault();
     this.setState({ showDatePicker: false });
     this.refresh();
   }
 
-  handleDayClick (selected) {
-    const { selecting } = this.state.datepicker;
-    if (selecting) {
-      this.setState({ options: { ...this.state.options, to: selected } });
-    } else {
-      this.setState({ options: { ...this.state.options, from: selected } });
-    }
+  handleDayClick (clicked) {
+    const { selecting, selected } = this.state.datepicker;
+    const range = selecting ? selected : { from: clicked, to: getEndOfDay(clicked) };
 
-    this.setState({ datepicker: { ...this.state.datepicker, selecting: !selecting } });
+    this.setState({
+      options: { ...this.state.options, ...range },
+      datepicker: { ...this.state.datepicker, selected: range, selecting: !selecting }
+    });
   }
 
-  handleDayHover (entered) {
+  handleDayHover (hovered) {
     const { selecting } = this.state.datepicker;
+
     if (selecting) {
-      this.setState({ options: { ...this.state.options, to: entered } });
+      this.setState({
+        datepicker: {
+          ...this.state.datepicker,
+          selected: {
+            ...this.state.datepicker.selected,
+            ...this.getOrderedRange(hovered)
+          }
+        }
+      });
     }
+  }
+
+  getOrderedRange (newDate) {
+    const { from, to } = this.state.options;
+    return (from.getTime() <= newDate.getTime()) ? { from, to: newDate } : { from: newDate, to };
   }
 
   refresh () {
     if (this.props.metricsData.pending || (this.state.chartOptions === this.state.options)) {
       return;
     }
-    this.setState({ refreshing: true });
     const query = getQueryFromOptions(this.state.options);
 
     this.props.fetchMetrics('deliverability/time-series', query)
@@ -140,9 +143,10 @@ class SummaryReportPage extends Component {
           {from &&
             <div>
               <input style={{width: '100%'}} value={`${from} to ${to}`} disabled />
-              <Icon name='InsertChart' style={{ cursor: 'pointer' }} onClick={() => {
+              <UnstyledLink onClick={(e) => {
+                e.preventDefault();
                 this.setState({ showDatePicker: !showDatePicker });
-              }} />
+              }}>Toggle DatePicker</UnstyledLink>
             </div>
           }
 
@@ -151,9 +155,12 @@ class SummaryReportPage extends Component {
               <Datepicker
                 numberOfMonths={2}
                 fixedWeeks
+                initialMonth={subMonths(new Date(), 1)}
                 onDayClick={this.handleDayClick}
                 onDayMouseEnter={this.handleDayHover}
-                selectedDays={this.state.options}
+                onDayFocus={this.handleDayHover}
+                selectedDays={this.state.datepicker.selected}
+                disabledDays={{ after: new Date() }}
               />
               <br/>
               <button type='submit'>Apply</button>
@@ -172,6 +179,16 @@ class SummaryReportPage extends Component {
 // this will be replaced with proper metrics config
 function formatMetricLabel (name) {
   return _.startCase(name.replace(/^count_/, ''));
+}
+
+function getEndOfDay (date) {
+  const end = new Date(date);
+  end.setHours(11);
+  end.setMinutes(59);
+  end.setSeconds(59);
+  end.setMilliseconds(0);
+
+  return end;
 }
 
 export default withRouter(connect(({ metrics }) => ({ metricsData: metrics }), { fetchMetrics })(SummaryReportPage));
