@@ -7,43 +7,50 @@ import { Field, reduxForm } from 'redux-form';
 import AceEditor from 'react-ace';
 import 'brace/mode/html';
 import 'brace/theme/tomorrow';
-import { Panel } from '@sparkpost/matchbox';
+import { Panel, Button } from '@sparkpost/matchbox';
+
+import styles from './FormEditor.module.scss';
 
 const AceWrapper = ({ input, ...rest }) => (
   <AceEditor
     mode='html'
     theme='tomorrow'
     name='emailContent'
-    height='100%'
+    height='900px'
     width='auto'
+    style={{ marginBottom: '-18px' }}
     tabSize={2}
     fontSize={11}
-    style={{ maxHeight: '100%' }}
     markers={[]}
     cursorStart={1}
+    highlightActiveLine
+    showPrintMargin={false}
+    {...rest}
     {...input}
   />
 );
 
 class Editor extends Component {
   render () {
+    const { published } = this.props;
     return (
-      <Panel style={{ height: '100%', position: 'relative', zIndex: '1' }}>
-        <Panel.Section style={{ height: '100%' }}>
-          <Field
-            name='content.html'
-            component={AceWrapper}
-          />
+      <Panel className={styles.EditorPanel}>
+        <Panel.Section>
+        <Button size='small'>Test Data</Button>
         </Panel.Section>
+        <Field
+          name='content.html'
+          component={AceWrapper}
+          readOnly={published}
+        />
       </Panel>
     );
   }
 }
 
 const mapStateToProps = (state, { name }) => ({ form: name });
-
 const formOptions = {
-  enableReinitialize: true // required to update initial values from redux state
+  enableReinitialize: true
 };
 
 export default compose(

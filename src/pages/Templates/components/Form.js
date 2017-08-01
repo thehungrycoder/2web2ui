@@ -7,6 +7,8 @@ import { Field, reduxForm, change } from 'redux-form';
 import { Panel, TextField } from '@sparkpost/matchbox';
 import ToggleBlock from './ToggleBlock';
 
+import styles from './FormEditor.module.scss';
+
 // TODO use shared component instead of this
 const TextFieldWrapper = ({ input, meta: { error }, ...rest }) => (
   <TextField {...rest} {...input} error={error} />
@@ -43,17 +45,17 @@ class Form extends Component {
   }
 
   render () {
-    const { newTemplate, disableAll } = this.props;
+    const { newTemplate, published } = this.props;
 
     return (
-      <Panel>
+      <Panel className={styles.Panel}>
         <Panel.Section>
           <Field
             name='name' id='name'
             component={TextFieldWrapper}
             label='Template Name'
             onChange={(e) => this.handleIdFill(e)}
-            disabled={disableAll}
+            disabled={published}
           />
 
           <Field
@@ -61,7 +63,7 @@ class Form extends Component {
             component={TextFieldWrapper}
             label='Template ID'
             helpText={`A Unique ID for your template, we'll fill this in for you.`}
-            disabled={!newTemplate || disableAll}
+            disabled={!newTemplate || published}
           />
         </Panel.Section>
 
@@ -71,14 +73,14 @@ class Form extends Component {
             component={TextFieldWrapper}
             label='From Name'
             helpText='A friendly from for your recipients.'
-            disabled={disableAll}
+            disabled={published}
           />
 
           <Field
             name='content.from.email' id='fromEmail'
             component={TextFieldWrapper}
             label='From Email'
-            disabled={newTemplate || disableAll}
+            disabled={newTemplate || published}
           />
 
           <Field
@@ -86,14 +88,14 @@ class Form extends Component {
             component={TextFieldWrapper}
             label='Reply To'
             helpText='An email address recipients can reply to.'
-            disabled={disableAll}
+            disabled={published}
           />
 
           <Field
             name='content.subject' id='subject'
             component={TextFieldWrapper}
             label='Subject'
-            disabled={disableAll}
+            disabled={published}
           />
 
           <Field
@@ -101,7 +103,7 @@ class Form extends Component {
             component={TextFieldWrapper}
             label='Description'
             helpText='Not visible to recipients.'
-            disabled={disableAll}
+            disabled={published}
           />
         </Panel.Section>
 
@@ -112,7 +114,7 @@ class Form extends Component {
             label='Track Opens'
             type='checkbox'
             parse={value => !!value} // Prevents unchecked value from equaling ""
-            disabled={disableAll}
+            disabled={published}
           />
 
           <Field
@@ -121,7 +123,7 @@ class Form extends Component {
             label='Track Clicks'
             type='checkbox'
             parse={value => !!value}
-            disabled={disableAll}
+            disabled={published}
           />
         </Panel.Section>
 
@@ -133,7 +135,7 @@ class Form extends Component {
             type='checkbox'
             parse={value => !!value}
             helpText='Transactional messages are triggered by a user’s actions on the website, like requesting a password reset, signing up, or making a purchase.'
-            disabled={disableAll}
+            disabled={published}
           />
         </Panel.Section>
       </Panel>

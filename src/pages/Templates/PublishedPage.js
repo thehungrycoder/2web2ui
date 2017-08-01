@@ -80,10 +80,10 @@ class PublishedPage extends Component {
         { this.renderPageHeader() }
         <Grid>
           <Grid.Column xs={12} lg={4}>
-            <Form name={FORM_NAME} disableAll initialValues={published} />
+            <Form name={FORM_NAME} published initialValues={published} />
           </Grid.Column>
           <Grid.Column xs={12} lg={8}>
-            <Editor name={FORM_NAME} disableAll initialValues={published} />
+            <Editor name={FORM_NAME} published initialValues={published} />
           </Grid.Column>
         </Grid>
       </Layout.App>
