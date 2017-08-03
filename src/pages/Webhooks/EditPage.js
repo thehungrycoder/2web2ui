@@ -21,12 +21,16 @@ class WebhooksEdit extends Component {
       id: this.props.match.params.id,
       updated: false,
       showBanner: false,
-      showDelete: false
+      showDelete: false,
+      settingsTab: true,
+      testTab: false
     };
 
     this.onDismiss = this.dismissBanner.bind(this);
-    this.handleToggle = this.hideDelete.bind(this);
-    this.handleDelete = this.deleteWebhook.bind(this);
+    this.modalHandleToggle = this.hideDelete.bind(this);
+    this.modalHandleDelete = this.deleteWebhook.bind(this);
+    this.testToggle = this.showTest.bind(this);
+    this.settingsToggle = this.showSettings.bind(this);
   }
 
   /*
@@ -165,6 +169,14 @@ class WebhooksEdit extends Component {
     this.setState({ showDelete: false });
   }
 
+  showTest () {
+    this.setState({ testTab: true, settingsTab: false });
+  }
+
+  showSettings () {
+    this.setState({ testTab: false, settingsTab: true });
+  }
+
   deleteWebhook () {
     return this.props.deleteWebhook(this.state.id).then(() => {
       this.props.history.push('/webhooks/');
@@ -215,11 +227,17 @@ class WebhooksEdit extends Component {
       });
     }
 
+    const secondaryActions = [
+      { content: 'Settings', onClick: this.settingsToggle, disabled: this.state.settingsTab },
+      { content: 'Test', onClick: this.testToggle, disabled: this.testTab },
+      { content: 'Delete', onClick: () => { this.setState({ showDelete: true }); } }
+    ];
+
     return (
       <Layout.App>
         <Page
           title={webhook.name}
-          secondaryActions={[{ content: 'Test', onClick: () => { console.log('testTab'); } }, { content: 'Delete', onClick: () => { this.setState({ showDelete: true }); } }]}
+          secondaryActions={secondaryActions}
           breadcrumbAction={{ content: 'Webhooks', Component: Link, to: '/webhooks/' }}
         />
         { updateSuccess && this.state.showBanner &&
@@ -227,15 +245,18 @@ class WebhooksEdit extends Component {
         }
         <Panel>
           <Panel.Section>
-            <WebhookForm eventsTree={eventsTree} allChecked={allChecked} newWebhook={false} checkedEvents={checkedEvents} onSubmit={(values) => { return this.updateWebhook(values, webhook, allEvents); }}/>
+            { this.state.testTab
+            ? <div>Very Test</div>
+            : <WebhookForm eventsTree={eventsTree} allChecked={allChecked} newWebhook={false} checkedEvents={checkedEvents} onSubmit={(values) => { return this.updateWebhook(values, webhook, allEvents); }}/>
+            }
           </Panel.Section>
         </Panel>
         <DeleteModal
           open={this.state.showDelete}
           title='Delete Webhook'
           text='Are you sure you want to delete this webhook?'
-          handleToggle={this.handleToggle}
-          handleDelete={this.handleDelete}
+          handleToggle={this.modalHandleToggle}
+          handleDelete={this.modalHandleDelete}
         />
       </Layout.App>
     );
