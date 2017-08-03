@@ -1,9 +1,6 @@
 
-import defaultConfig from './default';
-import development from './development';
-// import staging from './staging';
-// import production from './production';
-// import test from './test';
+import defaultConfig from './env/default';
+import development from './env/development';
 import _ from 'lodash';
 
 const envs = { development };

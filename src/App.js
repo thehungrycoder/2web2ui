@@ -35,7 +35,7 @@ export default () => (
       <Route path='/forgot-password' component={ForgotPassword} />
 
       <ProtectedRoute path='/dashboard' component={DashboardPage} />
-      <Route path='/reports' render={() => <Redirect to='/reports/summary' />} />
+      <Route exact path='/reports' render={() => <Redirect to='/reports/summary' />} />
       <ProtectedRoute path='/reports/summary' component={SummaryReportPage} />
 
       <ProtectedRoute exact path='/templates' component={TemplatesListPage} />
