@@ -5,7 +5,7 @@ import { fetch as fetchMetrics } from '../../actions/metrics';
 import LineChart from './components/LineChart';
 import Layout from '../../components/Layout/Layout';
 import { getQueryFromOptions, getDayLines, getLineChartFormatters } from '../../helpers/metrics';
-import { Page, Icon, Datepicker, UnstyledLink } from '@sparkpost/matchbox';
+import { Page, Grid, Panel, Icon, Datepicker, UnstyledLink, TextField } from '@sparkpost/matchbox';
 import _ from 'lodash';
 import moment from 'moment';
 import { subMonths } from 'date-fns';
@@ -139,37 +139,44 @@ class SummaryReportPage extends Component {
 
         {this.renderLoading()}
 
-        <form onSubmit={this.handleSubmit}>
-          {from &&
-            <div>
-              <input style={{width: '100%'}} value={`${from} to ${to}`} disabled />
-              <UnstyledLink onClick={(e) => {
-                e.preventDefault();
-                this.setState({ showDatePicker: !showDatePicker });
-              }}>Toggle DatePicker</UnstyledLink>
-            </div>
-          }
+        <Panel>
 
-          {this.state.showDatePicker &&
-            <div>
-              <Datepicker
-                numberOfMonths={2}
-                fixedWeeks
-                initialMonth={subMonths(new Date(), 1)}
-                onDayClick={this.handleDayClick}
-                onDayMouseEnter={this.handleDayHover}
-                onDayFocus={this.handleDayHover}
-                selectedDays={this.state.datepicker.selected}
-                disabledDays={{ after: new Date() }}
-              />
-              <br/>
-              <button type='submit'>Apply</button>
-            </div>
-          }
+              {from &&
+                <Panel.Section>
+                  <form onSubmit={this.handleSubmit}>
+                  <TextField fullWidth value={`${from} to ${to}`} disabled/>
+                  {/* <input style={{width: '100%'}} value={`${from} to ${to}`}  /> */}
+                  <UnstyledLink onClick={(e) => {
+                    e.preventDefault();
+                    this.setState({ showDatePicker: !showDatePicker });
+                  }}>Toggle DatePicker</UnstyledLink>
+                  </form>
+                </Panel.Section>
 
-        </form>
+              }
 
-        {this.renderChart()}
+              {this.state.showDatePicker &&
+                <div>
+                  <Datepicker
+                    numberOfMonths={2}
+                    fixedWeeks
+                    initialMonth={subMonths(new Date(), 1)}
+                    onDayClick={this.handleDayClick}
+                    onDayMouseEnter={this.handleDayHover}
+                    onDayFocus={this.handleDayHover}
+                    selectedDays={this.state.datepicker.selected}
+                    disabledDays={{ after: new Date() }}
+                  />
+                  <br/>
+                  <button type='submit'>Apply</button>
+                </div>
+              }
+
+            <Panel.Section>
+              {this.renderChart()}
+            </Panel.Section>
+
+        </Panel>
 
       </Layout.App>
     );

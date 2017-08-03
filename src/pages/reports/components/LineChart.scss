@@ -1,0 +1,116 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+// Tick label
+.recharts-text.recharts-cartesian-axis-tick-value {
+  fill: color(gray, 5);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.xAxis {
+  .recharts-text.recharts-cartesian-axis-tick-value {
+    transform: translate(0, 6px);
+  }
+  .recharts-cartesian-axis-tick {
+    &:first-child, &:last-child {
+      display: none;
+    }
+  }
+}
+
+.yAxis {
+  .recharts-text.recharts-cartesian-axis-tick-value {
+    transform: translate(-6px, 0);
+  }
+}
+
+.recharts-label {
+  fill: color(gray, 4);
+  font-size: 12px
+}
+
+.recharts-line > path {}
+.recharts-line-dots {}
+
+.recharts-cartesian-grid-horizontal line {
+  stroke: color(gray, 8);
+}
+
+.recharts-cartesian-axis-line {
+  stroke: color(gray, 8);
+}
+
+.recharts-cartesian-axis-tick-line {
+  stroke: color(gray, 8);
+  stroke-width: 1;
+}
+
+.recharts-reference-line line {
+  stroke: color(gray, 8);
+  stroke-width: 1;
+}
+
+// Tooltip
+.recharts-tooltip-wrapper {
+  .recharts-default-tooltip {
+    background: #fff !important; // fuck cssinjs
+    box-shadow: shadow(deeper) !important;
+    border-radius: border-radius(large) !important;
+    border: 1px solid color(gray, 8) !important;
+    padding: rem(18) !important;
+
+    .recharts-tooltip-label {
+      font-weight: 500;
+      color: color(gray, 3);
+      font-size: rem(15);
+      margin-bottom: rem(9) !important;
+    }
+    .recharts-tooltip-item-list {
+       .recharts-tooltip-item {
+         font-size: rem(13)!important;
+         padding: rem(0) !important;
+         margin: 0!important;
+        .recharts-tooltip-item-name {}
+        .recharts-tooltip-item-separator {}
+        .recharts-tooltip-item-value {
+          float: right;
+        }
+        .recharts-tooltip-item-unit {}
+      }
+     }
+  }
+}
+
+.recharts-legend-wrapper {
+  padding-bottom: rem(18);
+}
+
+.recharts-legend-item-text {
+  display: inline-block;
+  vertical-align: middle;
+  padding: 0 rem(6) 0 rem(3);
+  font-size: rem(13);
+}
+// // Containers
+// .recharts-wrapper {}
+// .recharts-responsive-container {}
+// .recharts-surface {} // general svg wrapper
+// .recharts-legend-wrapper {}
+// .recharts-tooltip-wrapper {}
+//
+// // Data
+// .recharts-layer {}
+// .recharts-cartesian-axis {}
+// .recharts-xAxis {}
+// .xAxis {}
+// .recharts-yAxis {}
+// .yAxis {}
+// .recharts-cartesian-grid {}
+// .recharts-reference-line {}
+// .recharts-line {}
+// .recharts-line-dots {}
+// // Legend
+// .recharts-default-legend {}
+// .recharts-legend-item {}
+// .recharts-default-tooltip {}
+// .recharts-tooltip-label {}

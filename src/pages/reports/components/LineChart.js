@@ -1,7 +1,7 @@
 import React from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Brush, ResponsiveContainer, ReferenceLine } from 'recharts';
 import _ from 'lodash';
-
+import './LineChart.scss';
 const colors = ['#37aadc', '#9bcd5a', '#b70c9e', '#e3af00', '#6D39A1'];
 
 export default class SpLineChart extends React.Component {
@@ -14,7 +14,9 @@ export default class SpLineChart extends React.Component {
     this.state = {
       lines: lines.map((line) => ({
         stroke: colors[colorIndex++],
+        strokeWidth: 2,
         activeDot: { r: 6 },
+        dot: false,
         type: 'linear',
         ...line
       }))
@@ -41,13 +43,26 @@ export default class SpLineChart extends React.Component {
     } = this.props;
 
     return (
-      <ResponsiveContainer width='100%' aspect={2}>
+      <ResponsiveContainer aspect={2}>
         <LineChart data={data}>
-          <XAxis tickFormatter={xTickFormatter} dataKey='ts' interval={1} />
-          <YAxis tickFormatter={yTickFormatter} />
-          <CartesianGrid vertical={false} strokeDasharray="2 2"/>
-          <Tooltip labelFormatter={tooltipLabelFormatter} formatter={tooltipValueFormatter} />
-          <Legend verticalAlign='top' wrapperStyle={{ paddingBottom: '30px' }} />
+          <CartesianGrid vertical={false} strokeDasharray="4 1"/>
+          <XAxis
+            tickFormatter={xTickFormatter}
+            dataKey='ts'
+            interval={1}
+            height={30} />
+          <YAxis
+            tickLine={false}
+            width={30}
+            tickFormatter={yTickFormatter}/>
+
+          <Tooltip
+            labelFormatter={tooltipLabelFormatter}
+            formatter={tooltipValueFormatter}
+          />
+          <Legend
+            verticalAlign='top'
+            iconType='circle'/>
           {this.renderReferenceLines()}
           {this.renderLines()}
         </LineChart>
