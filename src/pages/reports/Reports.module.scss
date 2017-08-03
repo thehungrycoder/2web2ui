@@ -1,0 +1,12 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.AddMetric {
+  position: absolute;
+  right: spacing();
+  bottom: spacing();
+}
+
+.ChartSection {
+  position: relative;
+  padding: spacing();
+}
