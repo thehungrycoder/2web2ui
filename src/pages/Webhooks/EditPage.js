@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import _ from 'lodash';
 
 // Actions
@@ -25,6 +25,8 @@ class WebhooksEdit extends Component {
     };
 
     this.onDismiss = this.dismissBanner.bind(this);
+    this.handleToggle = this.hideDelete.bind(this);
+    this.handleDelete = this.deleteWebhook.bind(this);
   }
 
   /*
@@ -163,7 +165,7 @@ class WebhooksEdit extends Component {
     this.setState({ showDelete: false });
   }
 
-  handleDelete () {
+  deleteWebhook () {
     return this.props.deleteWebhook(this.state.id).then(() => {
       this.props.history.push('/webhooks/');
     });
@@ -177,7 +179,7 @@ class WebhooksEdit extends Component {
         <Layout.App>
           <Page
             title={'Webhook Settings'}
-            breadcrumbAction={{content: 'Webhooks', onClick: () => { this.props.history.push('/webhooks/'); }}}
+            breadcrumbAction={{ content: 'Webhooks', Component: Link, to: '/webhooks' }}
           />
           <Panel>
             <Panel.Section>
@@ -218,7 +220,7 @@ class WebhooksEdit extends Component {
         <Page
           title={webhook.name}
           secondaryActions={[{ content: 'Test', onClick: () => { console.log('testTab'); } }, { content: 'Delete', onClick: () => { this.setState({ showDelete: true }); } }]}
-          breadcrumbAction={{content: 'Webhooks', onClick: () => { this.props.history.push('/webhooks/'); }}}
+          breadcrumbAction={{ content: 'Webhooks', Component: Link, to: '/webhooks/' }}
         />
         { updateSuccess && this.state.showBanner &&
           <Banner title='Update Successful' status='success' onDismiss={this.onDismiss}/>
@@ -230,8 +232,8 @@ class WebhooksEdit extends Component {
         </Panel>
         <DeleteModal
           open={this.state.showDelete}
-          handleToggle={() => this.hideDelete()}
-          handleDelete={() => this.handleDelete()}
+          handleToggle={this.handleToggle}
+          handleDelete={this.handleDelete}
         />
       </Layout.App>
     );

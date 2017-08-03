@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import _ from 'lodash';
 
 // Actions
-import { createWebhook as createAction, getEventDocs } from '../../actions/webhooks';
+import { createWebhook, getEventDocs } from '../../actions/webhooks';
 
 // Components
 import Layout from '../../components/Layout/Layout';
@@ -60,7 +61,7 @@ class WebhooksCreate extends Component {
         break;
     }
 
-    return this.props.createAction(webhook);
+    return this.props.createWebhook(webhook);
   }
 
   /*
@@ -94,7 +95,7 @@ class WebhooksCreate extends Component {
         <Layout.App>
           <Page
             title={'Create Webhook'}
-            breadcrumbAction={{content: 'Webhooks', onClick: () => { this.props.history.push('/webhooks/'); }}}
+            breadcrumbAction={{ content: 'Webhooks', Component: Link, to: '/webhooks' }}
           />
           <Panel>
             <Panel.Section>
@@ -113,7 +114,7 @@ class WebhooksCreate extends Component {
       <Layout.App>
         <Page
           title={'Create Webhook'}
-          breadcrumbAction={{content: 'Webhooks', onClick: () => { this.props.history.push('/webhooks/'); }}}
+          breadcrumbAction={{ content: 'Webhooks', Component: Link, to: '/webhooks' }}
         />
         <Panel>
           <Panel.Section>
@@ -130,4 +131,4 @@ const mapStateToProps = ({ webhooks }) => ({
   eventDocs: webhooks.docs
 });
 
-export default connect(mapStateToProps, { createAction, getEventDocs })(WebhooksCreate);
+export default connect(mapStateToProps, { createWebhook, getEventDocs })(WebhooksCreate);

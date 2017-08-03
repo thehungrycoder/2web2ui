@@ -42,7 +42,7 @@ class WebhooksHome extends Component {
       return (
         <Layout.App>
           <Page
-            primaryAction={{content: 'Create Webhook', onClick: () => { this.props.history.push('/webhooks/create'); }}}
+            primaryAction={{ content: 'Create Webhook', Component: Link, to: '/webhooks/create' }}
             title={'Webhooks'}
           />
           <Panel>
@@ -60,7 +60,7 @@ class WebhooksHome extends Component {
     return (
       <Layout.App>
         <Page
-          primaryAction={{content: 'Create Webhook', onClick: () => { this.props.history.push('/webhooks/create'); }}}
+          primaryAction={{ content: 'Create Webhook', Component: Link, to: '/webhooks/create' }}
           title={'Webhooks'}
         />
         <Panel>
