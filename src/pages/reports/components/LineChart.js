@@ -43,7 +43,7 @@ export default class SpLineChart extends React.Component {
     } = this.props;
 
     return (
-      <ResponsiveContainer aspect={2}>
+      <ResponsiveContainer width='99%' height={480}>
         <LineChart data={data}>
           <CartesianGrid vertical={false} strokeDasharray="4 1"/>
           <XAxis
