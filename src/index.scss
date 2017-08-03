@@ -1,1 +1,11 @@
 @import '~@sparkpost/matchbox/styles.scss'; // Global Compiled
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+// All components use REMs for sizing
+// Adjusting the root font size here will scale the UI proportionally
+
+html {
+  font-size: rem(16);
+  @media screen and (min-width: breakpoint(medium)) { font-size: rem(18); }
+  @media screen and (min-width: breakpoint(larger)) { font-size: rem(20); }
+}
