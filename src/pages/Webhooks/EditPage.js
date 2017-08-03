@@ -8,9 +8,9 @@ import { getWebhook, getEventDocs, updateWebhook, deleteWebhook } from '../../ac
 
 // Components
 import Layout from '../../components/Layout/Layout';
+import DeleteModal from '../../components/DeleteModal/DeleteModal';
 import { Page, Panel, Banner } from '@sparkpost/matchbox';
 import WebhookForm from './components/WebhookForm';
-import DeleteModal from './components/DeleteModal';
 
 class WebhooksEdit extends Component {
   constructor (props) {
@@ -232,6 +232,8 @@ class WebhooksEdit extends Component {
         </Panel>
         <DeleteModal
           open={this.state.showDelete}
+          title='Delete Webhook'
+          text='Are you sure you want to delete this webhook?'
           handleToggle={this.handleToggle}
           handleDelete={this.handleDelete}
         />
