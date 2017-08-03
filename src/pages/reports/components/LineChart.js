@@ -1,31 +1,25 @@
 import React from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Brush, ResponsiveContainer, ReferenceLine } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceLine } from 'recharts';
 import _ from 'lodash';
 import './LineChart.scss';
+
 const colors = ['#37aadc', '#9bcd5a', '#b70c9e', '#e3af00', '#6D39A1'];
 
 export default class SpLineChart extends React.Component {
-  constructor (props) {
-    super(props);
+  renderLines () {
     const { lines = [] } = this.props;
-
     let colorIndex = 0;
-
-    this.state = {
-      lines: lines.map((line) => ({
-        stroke: colors[colorIndex++],
+    return lines.map((line) => {
+      const lineProps = {
         strokeWidth: 2,
         activeDot: { r: 6 },
         dot: false,
         type: 'linear',
-        ...line
-      }))
-    };
-  }
-
-  renderLines () {
-    const { lines = [] } = this.state;
-    return lines.map((props) => <Line {...props} />);
+        ...line,
+        stroke: line.stroke || colors[colorIndex++]
+      };
+      return <Line {...lineProps} />;
+    });
   }
 
   renderReferenceLines () {

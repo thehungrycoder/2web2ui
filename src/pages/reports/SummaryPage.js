@@ -5,10 +5,10 @@ import { fetch as fetchMetrics } from '../../actions/metrics';
 import LineChart from './components/LineChart';
 import Layout from '../../components/Layout/Layout';
 import { getQueryFromOptions, getDayLines, getLineChartFormatters } from '../../helpers/metrics';
-import { Page, Grid, Button, Panel, Icon, Datepicker, UnstyledLink, TextField } from '@sparkpost/matchbox';
+import { Page, Grid, Button, Panel, Icon, Datepicker, TextField } from '@sparkpost/matchbox';
 import _ from 'lodash';
 import moment from 'moment';
-import { subMonths } from 'date-fns';
+import { subMonths, format } from 'date-fns';
 import styles from './Reports.module.scss';
 // import qs from 'query-string';
 
@@ -18,6 +18,7 @@ class SummaryReportPage extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDayClick = this.handleDayClick.bind(this);
     this.handleDayHover = this.handleDayHover.bind(this);
+    this.toggleDatePicker = this.toggleDatePicker.bind(this);
 
     const to = new Date();
     const from = moment(to).subtract(1, 'day').toDate();
@@ -46,8 +47,7 @@ class SummaryReportPage extends Component {
     }
   }
 
-  handleSubmit (e) {
-    e.preventDefault();
+  handleSubmit () {
     this.setState({ showDatePicker: false });
     this.refresh();
   }
@@ -83,6 +83,20 @@ class SummaryReportPage extends Component {
     return (from.getTime() <= newDate.getTime()) ? { from, to: newDate } : { from: newDate, to };
   }
 
+  toggleDatePicker () {
+    const { showDatePicker, options, chartOptions: { from, to } } = this.state;
+    const previousRange = { from, to };
+    if (showDatePicker) {
+      this.setState({
+        options: { ...options, ...previousRange },
+        datepicker: { ...this.state.datepicker, selected: previousRange },
+        showDatePicker: false
+      });
+    } else {
+      this.setState({ showDatePicker: true });
+    }
+  }
+
   refresh () {
     if (this.props.metricsData.pending || (this.state.chartOptions === this.state.options)) {
       return;
@@ -109,7 +123,7 @@ class SummaryReportPage extends Component {
   }
 
   renderChart () {
-    const { results = [] } = this.props.metricsData;
+    const { results = [], pending } = this.props.metricsData;
     const { chartOptions = false } = this.state;
     const { metrics = [] } = chartOptions;
 
@@ -123,7 +137,8 @@ class SummaryReportPage extends Component {
         lines={metrics.map((metric) => ({
           key: metric,
           dataKey: metric,
-          name: formatMetricLabel(metric)
+          name: formatMetricLabel(metric),
+          stroke: pending ? '#ccc' : false
         }))}
         {...getLineChartFormatters(chartOptions)}
         referenceLines={this.createDayReferenceLines()}
@@ -134,6 +149,12 @@ class SummaryReportPage extends Component {
   render () {
     const { showDatePicker = false } = this.state;
     const { from, to } = this.state.options;
+    const displayFormat = 'MMM Do, YYYY [at] h:mma';
+    const formatted = {
+      from: format(from, displayFormat),
+      to: format(to, displayFormat)
+    };
+
     return (
       <Layout.App>
         <Page title='Summary Report'/>
@@ -144,24 +165,20 @@ class SummaryReportPage extends Component {
 
               {from &&
                 <Panel.Section>
-                  <form onSubmit={this.handleSubmit}>
+                  <form>
                     <Grid>
                       <Grid.Column xs={12} md={6}>
-                        <TextField fullWidth value={`${from} to ${to}`} />
+                        <TextField fullWidth value={`${formatted.from} to ${formatted.to}`} onClick={this.toggleDatePicker} />
                       </Grid.Column>
                       <Grid.Column xs={12} md={6}>
                         <TextField fullWidth placeholder='Filter Report'/>
                       </Grid.Column>
                     </Grid>
-                  <UnstyledLink onClick={(e) => {
-                    e.preventDefault();
-                    this.setState({ showDatePicker: !showDatePicker });
-                  }}>Toggle DatePicker</UnstyledLink>
                   </form>
                 </Panel.Section>
               }
 
-              {this.state.showDatePicker &&
+              {showDatePicker &&
                 <Panel.Section>
                   <Datepicker
                     numberOfMonths={2}
@@ -174,13 +191,14 @@ class SummaryReportPage extends Component {
                     disabledDays={{ after: new Date() }}
                   />
 
-                  <Button type='submit' primary>Apply</Button>
+                  <Button primary onClick={this.handleSubmit}>Apply</Button>
+                  <Button onClick={this.toggleDatePicker}>Cancel</Button>
                 </Panel.Section>
               }
 
             <Panel.Section className={styles.ChartSection}>
               {this.renderChart()}
-              <Button size='small' className={styles.AddMetric}>Add Metric</Button>
+              <Button size='small' className={styles.AddMetric}>Select Metrics</Button>
             </Panel.Section>
 
         </Panel>
