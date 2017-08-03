@@ -11,6 +11,10 @@ import { Page, Panel } from '@sparkpost/matchbox';
 import WebhookForm from './components/WebhookForm';
 
 class WebhooksCreate extends Component {
+  /*
+    Makes a webhook object from form values and calls the createWebhook action
+    with it. Invoked in the form's onSubmit func
+  */
   createWebhook (values, eventsTree) {
     const { name, target, eventsRadio, auth } = values;
 
@@ -25,6 +29,7 @@ class WebhooksCreate extends Component {
       const checkedEvents = _.concat(values.message_event, values.track_event, values.gen_event, values.unsubscribe_event, values.relay_event);
       events = _.filter(checkedEvents, (event) => (event)); // filter for truthy
     } else {
+      // all events
       events = _.flatten(_.map(eventsTree, ({events}) => {
         return _.map(events, ({key}) => (key));
       }));
@@ -32,6 +37,7 @@ class WebhooksCreate extends Component {
 
     webhook.events = events;
 
+    // builds the webhooks auth details from the form values
     switch (auth) {
       case 'basic':
         webhook.auth_type = 'basic';
@@ -50,19 +56,23 @@ class WebhooksCreate extends Component {
           }
         };
         break;
-      default:
+      default: // none
         break;
     }
 
-    this.props.createAction(webhook);
+    return this.props.createAction(webhook);
   }
 
+  /*
+    Builds a tree of event data, besed on the eventDocs, for the form to create
+    the checkbox groups with.
+  */
   buildEventsData (eventGroups) {
     return _.map(eventGroups, ({display_name, description, events}, key) => {
       return {
         key: key,
         label: display_name,
-        description: description, // TODO: make tooltipes from this?
+        description: description,
         events: _.map(events, ({display_name, description}, eventKey) => ({
           key: eventKey,
           label: display_name,
@@ -95,10 +105,7 @@ class WebhooksCreate extends Component {
       );
     }
 
-    const {
-      createLoading, // For disabling submit and gateing redirect
-      eventDocs
-    } = this.props;
+    const { eventDocs } = this.props;
 
     const eventsTree = Object.keys(eventDocs).length !== 0 ? this.buildEventsData(eventDocs) : [];
 
@@ -110,17 +117,15 @@ class WebhooksCreate extends Component {
         />
         <Panel>
           <Panel.Section>
-            <WebhookForm eventsTree={eventsTree} newWebhook={true} submitting={createLoading} onSubmit={(values) => { this.createWebhook(values, eventsTree); }}/>
+            <WebhookForm eventsTree={eventsTree} newWebhook={true} onSubmit={(values) => { return this.createWebhook(values, eventsTree); }}/>
           </Panel.Section>
         </Panel>
-
       </Layout.App>
     );
   }
 }
 
 const mapStateToProps = ({ webhooks }) => ({
-  createLoading: webhooks.createLoading,
   eventsLoading: webhooks.docsLoading,
   eventDocs: webhooks.docs
 });

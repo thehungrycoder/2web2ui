@@ -4,38 +4,52 @@ import { withRouter } from 'react-router-dom';
 import _ from 'lodash';
 
 // Actions
-import { getWebhook, getEventDocs, updateWebhook } from '../../actions/webhooks';
+import { getWebhook, getEventDocs, updateWebhook, deleteWebhook } from '../../actions/webhooks';
 
 // Components
 import Layout from '../../components/Layout/Layout';
 import { Page, Panel, Banner } from '@sparkpost/matchbox';
 import WebhookForm from './components/WebhookForm';
+import DeleteModal from './components/DeleteModal';
 
 class WebhooksEdit extends Component {
   constructor (props) {
     super(props);
 
+    // takes id from url param
     this.state = {
       id: this.props.match.params.id,
       updated: false,
-      showBanner: false
+      showBanner: false,
+      showDelete: false
     };
 
     this.onDismiss = this.dismissBanner.bind(this);
   }
 
+  /*
+    Dispatches eventDocs & getWebhook actions
+  */
   componentWillMount () {
     this.props.getEventDocs();
     this.props.getWebhook(this.state.id);
   }
 
-  componentWillUpdate () {
+  /*
+   Gets webhook if the updated is true, then resets updated to false
+   and sets showBanner
+  */
+  componentDidUpdate () {
     if (this.state.updated) {
       this.props.getWebhook(this.state.id);
       this.setState({ updated: false, showBanner: true });
     }
   }
 
+  /*
+    Called by updateWebhook. Figures out if the webhooks auth details need to be updated,
+    then returns those updates if so.
+  */
   resolveAuthUpdates (values, webhook) {
     const { auth, basicUser, basicPass, clientId, clientSecret, tokenURL } = values;
     const update = {};
@@ -89,6 +103,10 @@ class WebhooksEdit extends Component {
     return update;
   }
 
+  /*
+    Passed as onSubmit to WebhookForm. Figures out what updates need to be passed
+    to the updateWebhook action.
+  */
   updateWebhook (values, webhook, allEvents) {
     const authDetails = this.resolveAuthUpdates(values, webhook);
 
@@ -116,8 +134,9 @@ class WebhooksEdit extends Component {
     }
 
     if (Object.keys(update).length !== 0) {
-      this.props.updateWebhook(webhook.id, update);
-      this.setState({ updated: true });
+      return this.props.updateWebhook(webhook.id, update).then(() => {
+        this.setState({ updated: true });
+      });
     }
   }
 
@@ -137,17 +156,27 @@ class WebhooksEdit extends Component {
   }
 
   dismissBanner () {
-    this.setState({showBanner: false});
+    this.setState({ showBanner: false });
+  }
+
+  hideDelete () {
+    this.setState({ showDelete: false });
+  }
+
+  handleDelete () {
+    return this.props.deleteWebhook(this.state.id).then(() => {
+      this.props.history.push('/webhooks/');
+    });
   }
 
   render () {
     const { webhook, getLoading, eventsLoading } = this.props;
 
-    if (webhook.id !== this.state.id || eventsLoading || getLoading) {
+    if (webhook.id !== this.state.id || getLoading || eventsLoading) {
       return (
         <Layout.App>
           <Page
-            title={'Edit Webhook'}
+            title={'Webhook Settings'}
             breadcrumbAction={{content: 'Webhooks', onClick: () => { this.props.history.push('/webhooks/'); }}}
           />
           <Panel>
@@ -159,7 +188,7 @@ class WebhooksEdit extends Component {
       );
     }
 
-    const { eventDocs, updateLoading, updateSuccess } = this.props;
+    const { eventDocs, updateSuccess } = this.props;
 
     const eventsTree = Object.keys(eventDocs).length !== 0 ? this.buildEventsData(eventDocs) : [];
 
@@ -186,18 +215,24 @@ class WebhooksEdit extends Component {
 
     return (
       <Layout.App>
+        <Page
+          title={webhook.name}
+          secondaryActions={[{ content: 'Test', onClick: () => { console.log('testTab'); } }, { content: 'Delete', onClick: () => { this.setState({ showDelete: true }); } }]}
+          breadcrumbAction={{content: 'Webhooks', onClick: () => { this.props.history.push('/webhooks/'); }}}
+        />
         { updateSuccess && this.state.showBanner &&
           <Banner title='Update Successful' status='success' onDismiss={this.onDismiss}/>
         }
-        <Page
-          title={webhook.name}
-          breadcrumbAction={{content: 'Webhooks', onClick: () => { this.props.history.push('/webhooks/'); }}}
-        />
         <Panel>
           <Panel.Section>
-            <WebhookForm eventsTree={eventsTree} submitting={updateLoading} allChecked={allChecked} newWebhook={false} checkedEvents={checkedEvents} onSubmit={(values) => { this.updateWebhook(values, webhook, allEvents); }}/>
+            <WebhookForm eventsTree={eventsTree} allChecked={allChecked} newWebhook={false} checkedEvents={checkedEvents} onSubmit={(values) => { return this.updateWebhook(values, webhook, allEvents); }}/>
           </Panel.Section>
         </Panel>
+        <DeleteModal
+          open={this.state.showDelete}
+          handleToggle={() => this.hideDelete()}
+          handleDelete={() => this.handleDelete()}
+        />
       </Layout.App>
     );
   }
@@ -208,8 +243,7 @@ const mapStateToProps = ({ webhooks }) => ({
   getLoading: webhooks.getLoading,
   eventsLoading: webhooks.docsLoading,
   eventDocs: webhooks.docs,
-  updateLoading: webhooks.updateLoading,
   updateSuccess: webhooks.updateSuccess
 });
 
-export default withRouter(connect(mapStateToProps, { getWebhook, getEventDocs, updateWebhook })(WebhooksEdit));
+export default withRouter(connect(mapStateToProps, { getWebhook, getEventDocs, updateWebhook, deleteWebhook })(WebhooksEdit));

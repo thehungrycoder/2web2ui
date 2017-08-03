@@ -12,20 +12,20 @@ const required = value => value ? undefined : 'Required';
 const basicAuthFields = (
   <div>
   Basic Auth
-    <Field name='basicUser' id='basicUser' label='Username' placeholder='username' component={TextFieldWrapper} validate={required}/>
+    <Field name='basicUser' label='Username' placeholder='username' component={TextFieldWrapper} validate={required}/>
 
-    <Field name='basicPass' id='basicPass' label='Password' placeholder='password' component={TextFieldWrapper} validate={required}/>
+    <Field name='basicPass' label='Password' placeholder='password' component={TextFieldWrapper} validate={required}/>
   </div>
 );
 
 const oAuth2Fields = (
   <div>
   OAuth 2.0
-    <Field name='clientId' id='clientId' label='Client ID' placeholder='clientID' component={TextFieldWrapper} validate={required}/>
+    <Field name='clientId' label='Client ID' placeholder='clientID' component={TextFieldWrapper} validate={required}/>
 
-    <Field name='clientSecret' id='clientSecret' label='Client Secret' placeholder='clientSecret' component={TextFieldWrapper} validate={required}/>
+    <Field name='clientSecret' label='Client Secret' placeholder='clientSecret' component={TextFieldWrapper} validate={required}/>
 
-    <Field name='tokenURL' id='tokenURL' label='Token URL' placeholder='https://www.example.com/tokens/' component={TextFieldWrapper} validate={required}/>
+    <Field name='tokenURL' label='Token URL' placeholder='https://www.example.com/tokens/' component={TextFieldWrapper} validate={required}/>
   </div>
 );
 
@@ -48,16 +48,27 @@ const buildCheckBoxes = (eventsTree) => {
 };
 
 let WebhookForm = props => {
-  const { handleSubmit, submitting, auth, eventsRadio, eventsTree, submitSucceeded, webhook, newWebhook } = props;
-  const loading = submitting ? (<div>Loading...</div>) : (<div/>);
-  const submitText = newWebhook ? 'Create Webhook' : 'Update Webhook';
-  const authFields = auth && auth === 'basic' ? basicAuthFields : oAuth2Fields;
-  const showEvents = eventsRadio === 'select';
-  const eventBoxes = buildCheckBoxes(eventsTree);
+  const {
+    handleSubmit,
+    submitting,
+    auth,
+    eventsRadio,
+    eventsTree,
+    submitSucceeded,
+    pristine,
+    webhook,            /* taken from state       */
+    newWebhook          /* passed from CreatePage */
+  } = props;
 
   if (newWebhook && submitSucceeded && !submitting && webhook.id) {
     return <Redirect to={`/webhooks/details/${webhook.id}`}/>;
   }
+
+  const submitText = newWebhook ? 'Create Webhook' : 'Update Webhook';
+  const authFields = auth && auth === 'basic' ? basicAuthFields : oAuth2Fields;
+  const showEvents = eventsRadio === 'select';
+  const eventBoxes = buildCheckBoxes(eventsTree);
+  const disabled = submitting || pristine;
 
   return (
     <form onSubmit={handleSubmit}>
@@ -68,7 +79,6 @@ let WebhookForm = props => {
         validate={required}
 
         // for the matchbox component
-        id='name'
         label='Webhook Name'
         placeholder='Opens and Clicks'
       />
@@ -78,7 +88,6 @@ let WebhookForm = props => {
         component={TextFieldWrapper}
         validate={required}
 
-        id='target'
         label='Target URL'
         placeholder='https://www.example.com/target'
         type={'url'}
@@ -100,7 +109,6 @@ let WebhookForm = props => {
 
       <Field
         name='auth'
-        id='auth'
         label='Authentication'
         component={SelectWrapper}
         options={[{value: '', label: 'None'}, {value: 'basic', label: 'Basic Auth'}, {value: 'oauth2', label: 'OAuth 2.0'}]}
@@ -108,8 +116,8 @@ let WebhookForm = props => {
 
       { auth && authFields }
 
-      <Button submit primary={true} disabled={submitting}>{submitText}</Button>
-      { loading }
+      <Button submit primary={true} disabled={disabled}>{submitText}</Button>
+      { submitting && !submitSucceeded && <div>Loading...</div>}
     </form>
   );
 };

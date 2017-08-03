@@ -45,6 +45,17 @@ export function updateWebhook (id, update) {
   };
 }
 
+export function deleteWebhook (id) {
+  return {
+    type: 'SPARKPOST_API_REQUEST',
+    meta: {
+      type: 'DELETE_WEBHOOK',
+      method: 'DELETE',
+      url: `/webhooks/${id}`
+    }
+  };
+}
+
 export function getEventDocs () {
   return {
     type: 'SPARKPOST_API_REQUEST',

@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@sparkpost/matchbox": "^0.3.2",
+    "@sparkpost/matchbox": "^0.6.4",
     "axios": "^0.16.1",
     "chart.js": "^2.6.0",
     "classnames": "^2.2.5",
@@ -16,10 +16,10 @@
     "react-redux": "^5.0.5",
     "react-router-dom": "^4.1.1",
     "redux": "^3.6.0",
+    "redux-form": "^7.0.3",
     "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
-    "@sparkpost/matchbox": "^0.5.0",
     "autoprefixer": "7.1.0",
     "babel-core": "6.24.1",
     "babel-eslint": "7.2.3",
@@ -58,7 +58,6 @@
     "react-dev-utils": "^2.0.1",
     "react-error-overlay": "^1.0.6",
     "react-test-renderer": "^15.5.4",
-    "redux-form": "^6.7.0",
     "sass-loader": "^6.0.5",
     "style-loader": "0.17.0",
     "sw-precache-webpack-plugin": "0.9.1",
