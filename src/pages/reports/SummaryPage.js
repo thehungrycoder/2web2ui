@@ -5,10 +5,11 @@ import { fetch as fetchMetrics } from '../../actions/metrics';
 import LineChart from './components/LineChart';
 import Layout from '../../components/Layout/Layout';
 import { getQueryFromOptions, getDayLines, getLineChartFormatters } from '../../helpers/metrics';
-import { Page, Grid, Panel, Icon, Datepicker, UnstyledLink, TextField } from '@sparkpost/matchbox';
+import { Page, Grid, Button, Panel, Icon, Datepicker, UnstyledLink, TextField } from '@sparkpost/matchbox';
 import _ from 'lodash';
 import moment from 'moment';
 import { subMonths } from 'date-fns';
+import styles from './Reports.module.scss';
 // import qs from 'query-string';
 
 class SummaryReportPage extends Component {
@@ -144,19 +145,24 @@ class SummaryReportPage extends Component {
               {from &&
                 <Panel.Section>
                   <form onSubmit={this.handleSubmit}>
-                  <TextField fullWidth value={`${from} to ${to}`} disabled/>
-                  {/* <input style={{width: '100%'}} value={`${from} to ${to}`}  /> */}
+                    <Grid>
+                      <Grid.Column xs={12} md={6}>
+                        <TextField fullWidth value={`${from} to ${to}`} />
+                      </Grid.Column>
+                      <Grid.Column xs={12} md={6}>
+                        <TextField fullWidth placeholder='Filter Report'/>
+                      </Grid.Column>
+                    </Grid>
                   <UnstyledLink onClick={(e) => {
                     e.preventDefault();
                     this.setState({ showDatePicker: !showDatePicker });
                   }}>Toggle DatePicker</UnstyledLink>
                   </form>
                 </Panel.Section>
-
               }
 
               {this.state.showDatePicker &&
-                <div>
+                <Panel.Section>
                   <Datepicker
                     numberOfMonths={2}
                     fixedWeeks
@@ -167,17 +173,17 @@ class SummaryReportPage extends Component {
                     selectedDays={this.state.datepicker.selected}
                     disabledDays={{ after: new Date() }}
                   />
-                  <br/>
-                  <button type='submit'>Apply</button>
-                </div>
+
+                  <Button type='submit' primary>Apply</Button>
+                </Panel.Section>
               }
 
-            <Panel.Section>
+            <Panel.Section className={styles.ChartSection}>
               {this.renderChart()}
+              <Button size='small' className={styles.AddMetric}>Add Metric</Button>
             </Panel.Section>
 
         </Panel>
-
       </Layout.App>
     );
   }
