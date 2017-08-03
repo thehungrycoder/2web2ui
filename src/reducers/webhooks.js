@@ -29,13 +29,13 @@ export default (state = initialState, action) => {
     /* CREATE */
 
     case 'CREATE_WEBHOOK_PENDING':
-      return { ...state, webhook: {}, createLoading: true };
+      return { ...state, webhook: {} };
 
     case 'CREATE_WEBHOOK_SUCCESS':
-      return { ...state, createSuccess: true, createLoading: false };
+      return { ...state, webhook: { id: action.payload.id } };
 
     case 'CREATE_WEBHOOK_FAIL':
-      return { ...state, webhook: {}, createLoading: false };
+      return { ...state, webhook: {} };
 
     /* UPDATE */
 
@@ -47,6 +47,17 @@ export default (state = initialState, action) => {
 
     case 'UPDATE_WEBHOOK_FAIL':
       return { ...state, updateLoading: false };
+
+    /* DELETE */
+
+    case 'DELETE_WEBHOOK_PENDING':
+      return { ...state, deleteLoading: true };
+
+    case 'DELETE_WEBHOOK_SUCCESS':
+      return { ...state, deleteSuccess: true, deleteLoading: false };
+
+    case 'DELETE_WEBHOOK_FAIL':
+      return { ...state, deleteLoading: false };
 
     /* EVENT DOCS */
 
