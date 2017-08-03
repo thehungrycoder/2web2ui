@@ -11,6 +11,6 @@ const webhooks = {
 export { webhooks };
 export * from './settings/Profile';
 export * from './Dashboard';
+export * from './Templates';
 export { default as AuthPage } from './AuthPage';
 export { default as SummaryReportPage } from './SummaryReportPage';
-export { default as TemplatesPage } from './TemplatesPage';

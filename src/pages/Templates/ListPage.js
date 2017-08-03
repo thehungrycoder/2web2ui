@@ -3,13 +3,19 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 // Actions
-import { listTemplates } from '../actions/templates';
+import { listTemplates } from '../../actions/templates';
 
 // Components
-import Layout from '../components/Layout/Layout';
+import Layout from '../../components/Layout/Layout';
 import { Page, Panel, Table, Button, Pagination } from '@sparkpost/matchbox';
 
-class TemplatesPage extends Component {
+const CREATE_ACTION = {
+  content: 'Create Template',
+  to: '/templates/create',
+  Component: Link
+};
+
+class ListPage extends Component {
   state = {
     perPage: 10,
     currentPage: 0
@@ -17,7 +23,7 @@ class TemplatesPage extends Component {
 
   renderRow (template) {
     const status = template.published ? 'published' : 'draft';
-    const nameLink = <Link to="/dashboard">{template.name}</Link>;
+    const nameLink = <Link to={`/templates/edit/${template.id}`}>{template.name}</Link>;
     return (
       <Table.Row key={template.id} rowData={[nameLink, template.id, status, Date(template.last_update_time)]} />
     );
@@ -43,7 +49,7 @@ class TemplatesPage extends Component {
       return (
         <Layout.App>
           <Page
-            primaryAction={{content: 'Create Template', onClick: () => { console.log('create template'); }}}
+            primaryAction={CREATE_ACTION}
             title={'Templates'}
           />
           <Panel>
@@ -68,7 +74,10 @@ class TemplatesPage extends Component {
               Lets get you started with your first template
             </Panel.Section>
             <Panel.Section>
-              <Button primary>Create Template</Button>
+              <Button
+                primary
+                {...CREATE_ACTION}
+                >Create Template</Button>
             </Panel.Section>
           </Panel>
         </Layout.App>
@@ -82,7 +91,7 @@ class TemplatesPage extends Component {
     return (
       <Layout.App>
         <Page
-          primaryAction={{content: 'Create Template', onClick: () => { console.log('create template'); }}}
+          primaryAction={CREATE_ACTION}
           title={'Templates'}
         />
         <Panel>
@@ -124,4 +133,4 @@ function mapStateToProps ({ templates }) {
   };
 }
 
-export default connect(mapStateToProps, { listTemplates })(TemplatesPage);
+export default connect(mapStateToProps, { listTemplates })(ListPage);
