@@ -11,6 +11,7 @@ import Layout from '../../components/Layout/Layout';
 import DeleteModal from '../../components/DeleteModal/DeleteModal';
 import { Page, Panel, Banner } from '@sparkpost/matchbox';
 import WebhookForm from './components/WebhookForm';
+import WebhookTest from './components/WebhookTest/WebhookTest';
 
 class WebhooksEdit extends Component {
   constructor (props) {
@@ -36,7 +37,7 @@ class WebhooksEdit extends Component {
   /*
     Dispatches eventDocs & getWebhook actions
   */
-  componentWillMount () {
+  componentDidMount () {
     this.props.getEventDocs();
     this.props.getWebhook(this.state.id);
   }
@@ -229,7 +230,7 @@ class WebhooksEdit extends Component {
 
     const secondaryActions = [
       { content: 'Settings', onClick: this.settingsToggle, disabled: this.state.settingsTab },
-      { content: 'Test', onClick: this.testToggle, disabled: this.testTab },
+      { content: 'Test', onClick: this.testToggle, disabled: this.state.testTab },
       { content: 'Delete', onClick: () => { this.setState({ showDelete: true }); } }
     ];
 
@@ -246,8 +247,8 @@ class WebhooksEdit extends Component {
         <Panel>
           <Panel.Section>
             { this.state.testTab
-            ? <div>Very Test</div>
-            : <WebhookForm eventsTree={eventsTree} allChecked={allChecked} newWebhook={false} checkedEvents={checkedEvents} onSubmit={(values) => { return this.updateWebhook(values, webhook, allEvents); }}/>
+              ? <WebhookTest webhook={webhook}/>
+              : <WebhookForm eventsTree={eventsTree} allChecked={allChecked} newWebhook={false} checkedEvents={checkedEvents} onSubmit={(values) => { return this.updateWebhook(values, webhook, allEvents); }}/>
             }
           </Panel.Section>
         </Panel>

@@ -56,13 +56,37 @@ export function deleteWebhook (id) {
   };
 }
 
+export function testWebhook (id, payload) {
+  return {
+    type: 'SPARKPOST_API_REQUEST',
+    meta: {
+      type: 'TEST_WEBHOOK',
+      method: 'POST',
+      url: `/webhooks/${id}/validate`,
+      data: { message: payload }
+    }
+  };
+}
+
 export function getEventDocs () {
   return {
     type: 'SPARKPOST_API_REQUEST',
     meta: {
       type: 'GET_EVENT_DOCS',
       method: 'GET',
-      url: 'webhooks/events/documentation '
+      url: 'webhooks/events/documentation'
+    }
+  };
+}
+
+export function getEventSamples (events) {
+  return {
+    type: 'SPARKPOST_API_REQUEST',
+    meta: {
+      type: 'GET_EVENT_SAMPLES',
+      method: 'GET',
+      url: 'webhooks/events/samples',
+      params: { events: events.join(',') }
     }
   };
 }
