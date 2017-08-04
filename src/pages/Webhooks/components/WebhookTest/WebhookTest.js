@@ -66,7 +66,7 @@ class WebhookTest extends Component {
         <br/>
         { testLoading && <div>Sending test...</div> }
         { this.state.testSent && testResponse && <ResponseBlock testResponse={testResponse}/> }
-        { !this.state.testSent && !testLoading && <RequestBlock testRequest={testRequest}/> }
+        { !this.state.testSent && !testLoading && <RequestBlock testRequest={testRequest} targetURL={webhook.target}/> }
       </div>
     );
   }
