@@ -244,7 +244,7 @@ class WebhooksEdit extends Component {
         { updateSuccess && this.state.showBanner &&
           <Banner title='Update Successful' status='success' onDismiss={this.onDismiss}/>
         }
-        <Panel>
+        <Panel sectioned>
           <Panel.Section>
             { this.state.testTab
               ? <WebhookTest webhook={webhook}/>

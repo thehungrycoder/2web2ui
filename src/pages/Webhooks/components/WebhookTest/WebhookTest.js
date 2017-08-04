@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import _ from 'lodash';
 
 import { getEventSamples, testWebhook } from '../../../../actions/webhooks';
 
-import { Button } from '@sparkpost/matchbox';
-import ResponseBlock from './TestResponseBlock';
-import RequestBlock from './TestRequestBlock';
+import { Button, Panel } from '@sparkpost/matchbox';
+import ResponseBlock from './ResponseBlock';
+import RequestBlock from './RequestBlock';
 
 class WebhookTest extends Component {
   state = {
-    testSent: false
+    testSent: false,
+    buildRequest: _.once(this.buildTestRequest)
   }
 
   componentDidMount () {
@@ -56,17 +58,23 @@ class WebhookTest extends Component {
     }
 
     const { webhook, samples, testResponse, testLoading } = this.props;
-    const buttonText = this.state.testSent ? 'Re-send batch' : 'Set Test Batch';
-    const testRequest = this.buildTestRequest(webhook, samples);
+    const { testSent, buildRequest } = this.state;
+
+    const buttonText = testSent ? 'Re-send batch' : 'Send Test Batch';
+    const testRequest = buildRequest(webhook, samples);
 
     return (
       <div>
-        <Button primary disabled={testLoading} onClick={() => { this.testWebhook(webhook.id, testRequest); }}>{buttonText}</Button>
-        <br/>
-        <br/>
+        <div>
+          <Button primary disabled={testLoading} onClick={() => { this.testWebhook(webhook.id, testRequest); }}>
+            {buttonText}
+          </Button>
+          <br/>
+          <br/>
+        </div>
         { testLoading && <div>Sending test...</div> }
-        { this.state.testSent && testResponse && <ResponseBlock testResponse={testResponse}/> }
-        { !this.state.testSent && !testLoading && <RequestBlock testRequest={testRequest} targetURL={webhook.target}/> }
+        { !testLoading && <ResponseBlock testSent={testSent} testResponse={testResponse}/> }
+        <RequestBlock testSent={testSent} testRequest={testRequest} targetURL={webhook.target}/>
       </div>
     );
   }

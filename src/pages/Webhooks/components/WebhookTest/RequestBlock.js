@@ -1,12 +1,12 @@
 import React from 'react';
 
-const RequestBlock = (props) => {
-  const { testRequest, targetURL } = props;
+const RequestBlock = ({ testRequest, testSent, targetURL }) => {
+  const requestText = `The test sends the following request to this webhook's target URL (${targetURL}):`;
 
   return (
     <div>
       <p>
-        The following request will be sent to this webhook's target URL ({targetURL}):
+        {requestText}
       </p>
       <pre>
         <code>
