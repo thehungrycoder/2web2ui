@@ -11,7 +11,7 @@ describe('Navigation', () => {
       <MemoryRouter>
         <Item
           to='/to'
-          icon='icon'
+          icon='Mail'
           label='label'
           location={ { pathname: 'to' } }
         />
@@ -30,7 +30,7 @@ describe('Navigation', () => {
       <MemoryRouter>
         <Item
           to='/to'
-          icon='icon'
+          icon='Mail'
           label='label'
           children={children}
           location={location}
