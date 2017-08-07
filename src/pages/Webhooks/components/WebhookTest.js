@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
-import { getEventSamples, testWebhook } from '../../../../actions/webhooks';
+import { getEventSamples, testWebhook } from '../../../actions/webhooks';
 
-import { Button, Panel } from '@sparkpost/matchbox';
+import { Button } from '@sparkpost/matchbox';
 import ResponseBlock from './ResponseBlock';
 import RequestBlock from './RequestBlock';
 

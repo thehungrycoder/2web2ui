@@ -7,7 +7,7 @@ export default [
   {
     label: 'Reports',
     to: '/reports',
-    icon: 'InsertChart',
+    icon: 'ReportBox',
     children: [
       {
         label: 'Summary',

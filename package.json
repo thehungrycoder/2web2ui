@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@sparkpost/matchbox": "^1.2.0",
     "axios": "^0.16.1",
     "chart.js": "^2.6.0",
     "classnames": "^2.2.5",
@@ -25,6 +26,7 @@
     "babel-jest": "20.0.3",
     "babel-loader": "7.0.0",
     "babel-preset-react-app": "^3.0.0",
+    "babel-preset-stage-2": "^6.24.1",
     "babel-runtime": "6.23.0",
     "brace": "^0.10.0",
     "case-sensitive-paths-webpack-plugin": "1.1.4",
@@ -103,7 +105,8 @@
   },
   "babel": {
     "presets": [
-      "react-app"
+      "react-app",
+      "stage-2"
     ]
   },
   "eslintConfig": {

@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-const initialState = { list: [], webhook: {}, docs: {}, getLoading: true, docsLoading: true };
+const initialState = { list: [], webhook: {}, getLoading: true, docsLoading: true };
 
 export default (state = initialState, action) => {
   switch (action.type) {

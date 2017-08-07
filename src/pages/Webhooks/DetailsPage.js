@@ -11,9 +11,10 @@ import Layout from '../../components/Layout/Layout';
 import DeleteModal from '../../components/DeleteModal/DeleteModal';
 import { Page, Panel, Banner } from '@sparkpost/matchbox';
 import WebhookForm from './components/WebhookForm';
-import WebhookTest from './components/WebhookTest/WebhookTest';
+import WebhookTest from './components/WebhookTest';
+import WebhooksLoading from './components/WebhooksLoading';
 
-class WebhooksEdit extends Component {
+class WebhooksDetails extends Component {
   constructor (props) {
     super(props);
 
@@ -23,23 +24,23 @@ class WebhooksEdit extends Component {
       updated: false,
       showBanner: false,
       showDelete: false,
-      settingsTab: true,
-      testTab: false
+      activeTab: 'settings'
     };
 
-    this.onDismiss = this.dismissBanner.bind(this);
-    this.modalHandleToggle = this.hideDelete.bind(this);
-    this.modalHandleDelete = this.deleteWebhook.bind(this);
-    this.testToggle = this.showTest.bind(this);
-    this.settingsToggle = this.showSettings.bind(this);
+    this.buildEventsTree = _.once(this.buildEventsTree);
+    this.getAllEvents = _.once(this.getAllEvents);
   }
 
   /*
     Dispatches eventDocs & getWebhook actions
   */
   componentDidMount () {
-    this.props.getEventDocs();
     this.props.getWebhook(this.state.id);
+
+    // Only do this once
+    if (!this.props.eventDocs) {
+      this.props.getEventDocs();
+    }
   }
 
   /*
@@ -147,7 +148,24 @@ class WebhooksEdit extends Component {
     }
   }
 
-  buildEventsData (eventGroups) {
+  /*
+    Calls deleteWebhook action then redirects to list page.
+    Bound to modalHandleDelete in constructor
+  */
+  deleteWebhook = () => {
+    return this.props.deleteWebhook(this.state.id).then(() => {
+      this.props.history.push('/webhooks/');
+    });
+  }
+
+  /*
+    Build an event tree based on the docs from /webhooks/documentation. Passed
+    to _.once() in the constructor so it only happens once per mount.
+    TODO: consider moving this to the reducer. This doesn't change from webhook
+          to webhook, and if other resources need to use webhooks/documentation
+          we can put it on its own key in the state.
+  */
+  buildEventsTree (eventGroups) {
     return _.map(eventGroups, ({display_name, description, events}, key) => {
       return {
         key: key,
@@ -162,60 +180,60 @@ class WebhooksEdit extends Component {
     });
   }
 
-  dismissBanner () {
+  /*
+    Makes an array with all possible events from the eventsTree.
+    Bound _.once in constructor
+  */
+  getAllEvents (eventsTree) {
+    return _.flatten(_.map(eventsTree, ({events}) => {
+      return _.map(events, ({key}) => (key));
+    }));
+  }
+
+  dismissBanner = () => {
     this.setState({ showBanner: false });
   }
 
-  hideDelete () {
+  /*
+    for delete modal, bound to modalHandleToggle in constructor
+  */
+  hideDelete = () => {
     this.setState({ showDelete: false });
   }
 
-  showTest () {
-    this.setState({ testTab: true, settingsTab: false });
+  /*
+    tab switch, bound to testToggle in constructor
+  */
+  showTest = () => {
+    this.setState({ activeTab: 'test' });
   }
 
-  showSettings () {
-    this.setState({ testTab: false, settingsTab: true });
-  }
-
-  deleteWebhook () {
-    return this.props.deleteWebhook(this.state.id).then(() => {
-      this.props.history.push('/webhooks/');
-    });
+  /*
+    tab switch, bound to settingsToggle in constructor
+  */
+  showSettings = () => {
+    this.setState({ activeTab: 'settings' });
   }
 
   render () {
     const { webhook, getLoading, eventsLoading } = this.props;
 
-    if (webhook.id !== this.state.id || getLoading || eventsLoading) {
+    /*
+      Checks .events to guard from the create page redirect,
+      which sets id on the state but doesn't have the rest of the webhook
+    */
+    if (webhook.id !== this.state.id || !webhook.events || getLoading || eventsLoading) {
       return (
-        <Layout.App>
-          <Page
-            title={'Webhook Settings'}
-            breadcrumbAction={{ content: 'Webhooks', Component: Link, to: '/webhooks' }}
-          />
-          <Panel>
-            <Panel.Section>
-              Loading...
-            </Panel.Section>
-          </Panel>
-        </Layout.App>
+        <WebhooksLoading
+          title={''}
+          breadcrumbAction={{ content: 'Webhooks', Component: Link, to: '/webhooks' }} />
       );
     }
 
     const { eventDocs, updateSuccess } = this.props;
 
-    const eventsTree = Object.keys(eventDocs).length !== 0 ? this.buildEventsData(eventDocs) : [];
-
-    // to match form values, where none is undefined
-    if (webhook.auth_type === 'none') {
-      delete webhook.auth_type;
-    }
-
-    // used for allEvents prop and passed to updateWebhook()
-    const allEvents = _.flatten(_.map(eventsTree, ({events}) => {
-      return _.map(events, ({key}) => (key));
-    }));
+    const eventsTree = this.buildEventsTree(eventDocs);
+    const allEvents = this.getAllEvents(eventsTree);
 
     const allChecked = webhook.events.length === allEvents.length;
     const checkedEvents = {};
@@ -228,9 +246,16 @@ class WebhooksEdit extends Component {
       });
     }
 
+    // to match form values, where none is undefined
+    if (webhook.auth_type === 'none') {
+      delete webhook.auth_type;
+    }
+
+    const { activeTab, showBanner, showDelete } = this.state;
+
     const secondaryActions = [
-      { content: 'Settings', onClick: this.settingsToggle, disabled: this.state.settingsTab },
-      { content: 'Test', onClick: this.testToggle, disabled: this.state.testTab },
+      { content: 'Settings', onClick: this.showSettings, disabled: activeTab === 'settings' },
+      { content: 'Test', onClick: this.showTest, disabled: activeTab === 'test' },
       { content: 'Delete', onClick: () => { this.setState({ showDelete: true }); } }
     ];
 
@@ -241,23 +266,23 @@ class WebhooksEdit extends Component {
           secondaryActions={secondaryActions}
           breadcrumbAction={{ content: 'Webhooks', Component: Link, to: '/webhooks/' }}
         />
-        { updateSuccess && this.state.showBanner &&
-          <Banner title='Update Successful' status='success' onDismiss={this.onDismiss}/>
+        { updateSuccess && showBanner &&
+          <Banner title='Update Successful' status='success' onDismiss={this.dismissBanner}/>
         }
         <Panel sectioned>
           <Panel.Section>
-            { this.state.testTab
+            { activeTab === 'test'
               ? <WebhookTest webhook={webhook}/>
               : <WebhookForm eventsTree={eventsTree} allChecked={allChecked} newWebhook={false} checkedEvents={checkedEvents} onSubmit={(values) => { return this.updateWebhook(values, webhook, allEvents); }}/>
             }
           </Panel.Section>
         </Panel>
         <DeleteModal
-          open={this.state.showDelete}
+          open={showDelete}
           title='Delete Webhook'
           text='Are you sure you want to delete this webhook?'
-          handleToggle={this.modalHandleToggle}
-          handleDelete={this.modalHandleDelete}
+          handleToggle={this.hideDelete}
+          handleDelete={this.deleteWebhook}
         />
       </Layout.App>
     );
@@ -272,4 +297,4 @@ const mapStateToProps = ({ webhooks }) => ({
   updateSuccess: webhooks.updateSuccess
 });
 
-export default withRouter(connect(mapStateToProps, { getWebhook, getEventDocs, updateWebhook, deleteWebhook })(WebhooksEdit));
+export default withRouter(connect(mapStateToProps, { getWebhook, getEventDocs, updateWebhook, deleteWebhook })(WebhooksDetails));

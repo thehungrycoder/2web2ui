@@ -47,7 +47,7 @@ export default () => (
       <ProtectedRoute path='/account/profile' component={ProfilePage} />
       <ProtectedRoute exact path='/webhooks' component={webhooks.HomePage}/>
       <ProtectedRoute exact path='/webhooks/create' component={webhooks.CreatePage}/>
-      <ProtectedRoute exact path='/webhooks/details/:id' component={webhooks.EditPage}/>
+      <ProtectedRoute exact path='/webhooks/details/:id' component={webhooks.DetailsPage}/>
     </div>
   </Router>
 );

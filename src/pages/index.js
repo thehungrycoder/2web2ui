@@ -1,11 +1,11 @@
 import WebhooksHome from './Webhooks/HomePage';
 import WebhooksCreate from './Webhooks/CreatePage';
-import WebhooksEdit from './Webhooks/EditPage';
+import WebhooksDetails from './Webhooks/DetailsPage';
 
 const webhooks = {
   HomePage: WebhooksHome,
   CreatePage: WebhooksCreate,
-  EditPage: WebhooksEdit
+  EditPage: WebhooksDetails
 };
 
 export { webhooks };

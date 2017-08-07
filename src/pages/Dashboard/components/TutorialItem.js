@@ -14,7 +14,7 @@ const TutorialItem = ({
   const itemClasses = classnames(styles.Item, completed && styles.completed);
 
   const labelMarkup = labelLink
-    ? <h6 className={classnames(styles.Label, styles.link)}><Link to={labelLink}>{ label } <Icon name='ArrowForward'/></Link></h6>
+    ? <h6 className={classnames(styles.Label, styles.link)}><Link to={labelLink}>{ label } <Icon name='ArrowRight'/></Link></h6>
     : <h6 className={styles.Label}>{ label }</h6>;
 
   const completedMarkup = completed

@@ -8,6 +8,7 @@ import { listWebhooks } from '../../actions/webhooks';
 // Components
 import Layout from '../../components/Layout/Layout';
 import { Page, Table, Panel, Button, Pagination } from '@sparkpost/matchbox';
+import WebhooksLoading from './components/WebhooksLoading';
 
 class WebhooksHome extends Component {
   state = {
@@ -40,17 +41,9 @@ class WebhooksHome extends Component {
     // This should probably be a universal page-loading component
     if (listLoading && !webhooks.length) {
       return (
-        <Layout.App>
-          <Page
-            primaryAction={{ content: 'Create Webhook', Component: Link, to: '/webhooks/create' }}
-            title={'Webhooks'}
-          />
-          <Panel>
-            <Panel.Section>
-              Loading...
-            </Panel.Section>
-          </Panel>
-        </Layout.App>
+        <WebhooksLoading
+          title={'Webhooks'}
+          primaryAction={{ content: 'Create Webhook', Component: Link, to: '/webhooks/create' }}/>
       );
     }
 
