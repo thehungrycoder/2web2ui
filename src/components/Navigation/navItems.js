@@ -7,15 +7,11 @@ export default [
   {
     label: 'Reports',
     to: '/reports',
-    icon: 'InsertChart',
+    icon: 'ReportBox',
     children: [
       {
         label: 'Summary',
         to: '/reports/summary'
-      },
-      {
-        label: 'Message Events',
-        to: '/reports/message-events'
       }
     ]
   },
