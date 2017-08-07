@@ -22,12 +22,52 @@ exports[`renders without crashing 1`] = `
       path="/dashboard"
     />
     <Route
+      exact={true}
       path="/reports"
       render={[Function]}
     />
     <withRouter(Connect(_ProtectedRoute))
       component={[Function]}
       path="/reports/summary"
+    />
+    <withRouter(Connect(_ProtectedRoute))
+      component={[Function]}
+      exact={true}
+      path="/templates"
+    />
+    <withRouter(Connect(_ProtectedRoute))
+      component={[Function]}
+      exact={true}
+      path="/templates/create/"
+    />
+    <withRouter(Connect(_ProtectedRoute))
+      component={[Function]}
+      exact={true}
+      path="/templates/edit/:id"
+    />
+    <withRouter(Connect(_ProtectedRoute))
+      component={[Function]}
+      exact={true}
+      path="/templates/edit/:id/published"
+    />
+    <withRouter(Connect(_ProtectedRoute))
+      component={[Function]}
+      path="/account/profile"
+    />
+    <withRouter(Connect(_ProtectedRoute))
+      component={[Function]}
+      exact={true}
+      path="/webhooks"
+    />
+    <withRouter(Connect(_ProtectedRoute))
+      component={[Function]}
+      exact={true}
+      path="/webhooks/create"
+    />
+    <withRouter(Connect(_ProtectedRoute))
+      component={[Function]}
+      exact={true}
+      path="/webhooks/details/:id"
     />
   </div>
 </BrowserRouter>
