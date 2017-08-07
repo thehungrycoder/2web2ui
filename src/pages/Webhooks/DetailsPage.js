@@ -195,21 +195,21 @@ class WebhooksDetails extends Component {
   }
 
   /*
-    for delete modal, bound to modalHandleToggle in constructor
+    for delete modal
   */
   hideDelete = () => {
     this.setState({ showDelete: false });
   }
 
   /*
-    tab switch, bound to testToggle in constructor
+    tab switch
   */
   showTest = () => {
     this.setState({ activeTab: 'test' });
   }
 
   /*
-    tab switch, bound to settingsToggle in constructor
+    tab switch
   */
   showSettings = () => {
     this.setState({ activeTab: 'settings' });
