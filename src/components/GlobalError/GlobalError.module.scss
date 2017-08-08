@@ -1,0 +1,19 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.GlobalError {
+  position: absolute;
+  width: rem(400);
+  left: 50%;
+  transform: translate(-50%, -25px);
+
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.3s cubic-bezier(0,0,.5,1.5);
+}
+
+.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, 0);
+  transition: 0.3s 1s cubic-bezier(0,0,.5,1.5);
+}

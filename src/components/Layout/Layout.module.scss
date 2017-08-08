@@ -72,4 +72,17 @@
       margin-left: rem(110);
     }
   }
+  
+.appError, .formError {
+  position: fixed;
+  top: spacing();
+  right: spacing();
+}
+
+.appError {
+  left: rem(220) + spacing();
+}
+
+.formError {
+  left: spacing();
 }
