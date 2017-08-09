@@ -6,8 +6,8 @@ export function received (payload, meta) {
   };
 }
 
-export function dismiss () {
+export function clear () {
   return {
-    type: 'API_FAILURE_DISMISS'
+    type: 'API_FAILURE_CLEARED'
   };
 }

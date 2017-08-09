@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
-import { dismiss } from '../../actions/apiFailure';
+import { clear } from '../../actions/apiFailure';
 import { Banner } from '@sparkpost/matchbox';
 
 import styles from './GlobalError.module.scss';
@@ -13,13 +13,11 @@ class GlobalError extends Component {
 
   handleDismiss () {
     this.setState({ show: false });
-    setTimeout(() => this.props.dismiss(), 400); // Wait for transition out before killing
+    setTimeout(() => this.props.clear(), 400); // Wait for transition out before killing
   }
 
-  componentWillReceiveProps () {
-    if (this.props.error) {
-      this.setState({ show: true });
-    }
+  componentWillReceiveProps (nextProps) {
+    this.setState({ show: !!nextProps.error });
   }
 
   render () {
@@ -50,4 +48,4 @@ class GlobalError extends Component {
 }
 
 const mapStateToProps = ({ apiFailure: { error } }) => ({ error });
-export default connect(mapStateToProps, { dismiss })(GlobalError);
+export default connect(mapStateToProps, { clear })(GlobalError);
