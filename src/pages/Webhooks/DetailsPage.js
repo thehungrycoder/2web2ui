@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Link, Route } from 'react-router-dom';
-
+import _ from 'lodash';
 // Actions
 import { getWebhook, deleteWebhook } from '../../actions/webhooks';
 
@@ -18,23 +18,48 @@ class WebhooksDetails extends Component {
     super(props);
 
     this.state = {
-      id: props.match.params.id,
-      selectedTab: 0
+      showDelete: false
     };
+
+    const { id } = props.match.params;
+
+    this.id = id;
+    this.editPath = `/webhooks/details/${id}`;
+    this.testPath = `/webhooks/details/${id}/test`;
+
+    this.secondaryActions = [
+      {
+        content: 'Delete',
+        onClick: this.toggleDelete
+      }
+    ];
+
+    this.tabs = [
+      {
+        content: 'Settings',
+        Component: Link,
+        to: this.editPath
+      },
+      {
+        content: 'Test',
+        Component: Link,
+        to: this.testPath
+      }
+    ];
   }
 
   /*
     Dispatches getWebhook action
   */
   componentDidMount () {
-    this.props.getWebhook(this.state.id);
+    this.props.getWebhook(this.id);
   }
 
   /*
     Calls deleteWebhook action then redirects to list page.
   */
   deleteWebhook = () => {
-    return this.props.deleteWebhook(this.state.id).then(() => {
+    return this.props.deleteWebhook(this.id).then(() => {
       this.props.history.push('/webhooks/');
     });
   }
@@ -62,7 +87,7 @@ class WebhooksDetails extends Component {
 
   render () {
     const { webhook } = this.props;
-    const webhookId = this.state.id;
+    const webhookId = this.id;
 
     /*
       Checks .events to guard from the create page redirect,
@@ -76,43 +101,21 @@ class WebhooksDetails extends Component {
       );
     }
 
-    const editPath = `/webhooks/details/${webhookId}`;
-    const testPath = `/webhooks/details/${webhookId}/test`;
-
-    const secondaryActions = [
-      { content: 'Delete',
-        onClick: this.toggleDelete
-      }
-    ];
-
-    const tabs = [
-      { content: 'Settings',
-        Component: Link,
-        to: editPath,
-        onClick: this.showSettings
-      },
-      { content: 'Test',
-        Component: Link,
-        to: testPath,
-        onClick: this.showTest
-      }
-    ];
+    const selectedTab = _.endsWith(this.props.location.pathname, 'test') ? 1 : 0;
 
     return (
       <Layout.App>
         <Page
           title={webhook.name}
-          secondaryActions={secondaryActions}
+          secondaryActions={this.secondaryActions}
           breadcrumbAction={{ content: 'Webhooks', Component: Link, to: '/webhooks/' }}
         />
         <Tabs
-          selected={this.state.selectedTab}
-          tabs={tabs}
+          selected={selectedTab}
+          tabs={this.tabs}
         />
-        <div>
-          <Route exact path={editPath} render={() => <EditTab id={webhookId}/> } />
-          <Route path={testPath} render={() => <TestTab webhook={webhook}/>} />
-        </div>
+        <Route exact path={this.editPath} render={() => <EditTab id={webhookId}/> } />
+        <Route path={this.testPath} render={() => <TestTab webhook={webhook}/>} />
         <DeleteModal
           open={this.state.showDelete}
           title='Delete Webhook'
