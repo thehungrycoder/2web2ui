@@ -2,7 +2,7 @@ import React from 'react';
 
 import styles from './Layout.module.scss';
 import Navigation from '../Navigation/Navigation';
-import Loading from '../Loading/Loading';
+import { Loading, LoadingCircle } from '../Loading/Loading';
 
 const App = ({ children, loading }) => (
   <div className={`${styles.wrapper} ${styles.accent}`}>
@@ -11,7 +11,9 @@ const App = ({ children, loading }) => (
     </div>
     <main role="main" className={styles.content}>
       <div className={styles.container}>
-        { loading ? <Loading className={styles.loading} /> : children }
+        <LoadingCircle />
+        <Loading />
+        {/* { loading ? <Loading className={styles.loading} /> : children } */}
       </div>
     </main>
   </div>

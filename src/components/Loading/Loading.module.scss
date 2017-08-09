@@ -15,3 +15,44 @@
     opacity: 1;
   }
 }
+
+.CircleWrapper {
+  width: 70px;
+  height: 70px;
+  fill: none;
+  animation: rotate 2s linear infinite;
+}
+
+.Circle {
+  stroke: color(orange);
+  stroke-width: 4px;
+  stroke-linecap: round;
+
+  stroke-dasharray: 150 200;
+  stroke-dashoffset: -10;
+  animation: dash 1.5s ease-in-out infinite;
+}
+
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1 200;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 120 200;
+    stroke-dashoffset: -35;
+  }
+  100% {
+    stroke-dasharray: 120 200;
+    stroke-dashoffset: -175;
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
