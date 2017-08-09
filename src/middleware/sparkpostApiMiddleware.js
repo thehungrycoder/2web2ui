@@ -6,6 +6,7 @@
 
 import _ from 'lodash';
 import { refresh, logout } from '../actions/auth';
+import { received } from '../actions/apiFailure';
 import { sparkpostRequest, useRefreshToken } from '../helpers/http';
 
 const maxRefreshRetries = 3;
@@ -85,12 +86,10 @@ export default function sparkpostApiRequest ({ dispatch, getState }) {
         payload: { message, response }
       });
 
+      // dispatch(received({ message, response }, meta));
+
       if (response.status >= 500) {
-        dispatch({
-          type: 'API_FAILURE_RECEIVED',
-          payload: { message, response },
-          meta
-        });
+        dispatch(received({ message, response }, meta));
       }
     })
     .catch((err) => {
