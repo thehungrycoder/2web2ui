@@ -1,8 +1,8 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 
 .Loading {
-  width: rem(90);
-  height: rem(90);
+  width: 70px;
+  height: 70px;
   fill: color(orange);
   animation: pulse 3s ease-in-out infinite;
 }
