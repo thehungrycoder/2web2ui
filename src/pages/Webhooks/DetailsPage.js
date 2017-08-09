@@ -32,7 +32,6 @@ class WebhooksDetails extends Component {
 
   /*
     Calls deleteWebhook action then redirects to list page.
-    Bound to modalHandleDelete in constructor
   */
   deleteWebhook = () => {
     return this.props.deleteWebhook(this.state.id).then(() => {

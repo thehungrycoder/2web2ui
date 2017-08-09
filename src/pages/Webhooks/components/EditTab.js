@@ -161,7 +161,7 @@ class EditTab extends Component {
 
   /*
     Makes an array with all possible events from the eventsTree.
-    Bound _.once in constructor
+    Bound to a _.once in constructor
   */
   getAllEvents (eventsTree) {
     return _.flatten(_.map(eventsTree, ({events}) => {
