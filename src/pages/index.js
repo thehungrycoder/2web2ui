@@ -5,7 +5,7 @@ import WebhooksDetails from './Webhooks/DetailsPage';
 const webhooks = {
   HomePage: WebhooksHome,
   CreatePage: WebhooksCreate,
-  EditPage: WebhooksDetails
+  DetailsPage: WebhooksDetails
 };
 
 export { webhooks };

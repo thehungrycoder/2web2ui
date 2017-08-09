@@ -18,7 +18,7 @@ export default (state = initialState, action) => {
     /* GET */
 
     case 'GET_WEBHOOK_PENDING':
-      return { ...state, webhook: {}, getLoading: true };
+      return { ...state, getLoading: true };
 
     case 'GET_WEBHOOK_SUCCESS':
       return { ...state, webhook: action.payload, getLoading: false };

@@ -4,18 +4,17 @@ import _ from 'lodash';
 
 import { getEventSamples, testWebhook } from '../../../actions/webhooks';
 
-import { Button } from '@sparkpost/matchbox';
+import { Button, Panel } from '@sparkpost/matchbox';
 import ResponseBlock from './ResponseBlock';
 import RequestBlock from './RequestBlock';
 
-class WebhookTest extends Component {
+class TestTab extends Component {
   state = {
     testSent: false,
     buildRequest: _.once(this.buildTestRequest)
   }
 
   componentDidMount () {
-    // Only do this the first time
     if (!this.props.samples) {
       this.props.getEventSamples(this.props.webhook.events);
     }
@@ -64,18 +63,20 @@ class WebhookTest extends Component {
     const testRequest = buildRequest(webhook, samples);
 
     return (
-      <div>
-        <div>
-          <Button primary disabled={testLoading} onClick={() => { this.testWebhook(webhook.id, testRequest); }}>
-            {buttonText}
-          </Button>
-          <br/>
-          <br/>
-        </div>
-        { testLoading && <div>Sending test...</div> }
-        { !testLoading && <ResponseBlock testSent={testSent} testResponse={testResponse}/> }
-        <RequestBlock testSent={testSent} testRequest={testRequest} targetURL={webhook.target}/>
-      </div>
+      <Panel sectioned>
+        <Panel.Section>
+          <div>
+            <Button primary disabled={testLoading} onClick={() => { this.testWebhook(webhook.id, testRequest); }}>
+              {buttonText}
+            </Button>
+            <br/>
+            <br/>
+          </div>
+          { testLoading && <div>Sending test...</div> }
+          { !testLoading && <ResponseBlock testSent={testSent} testResponse={testResponse}/> }
+          <RequestBlock testSent={testSent} testRequest={testRequest} targetURL={webhook.target}/>
+        </Panel.Section>
+      </Panel>
     );
   }
 }
@@ -87,4 +88,4 @@ const mapStateToProps = ({webhooks}) => ({
   testResponse: webhooks.testResponse
 });
 
-export default connect(mapStateToProps, { getEventSamples, testWebhook })(WebhookTest);
+export default connect(mapStateToProps, { getEventSamples, testWebhook })(TestTab);
