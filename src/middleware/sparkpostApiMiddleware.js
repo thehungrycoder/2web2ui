@@ -86,8 +86,6 @@ export default function sparkpostApiRequest ({ dispatch, getState }) {
         payload: { message, response }
       });
 
-      dispatch(received({ message, response }, meta));
-
       if (response.status >= 500) {
         dispatch(received({ message, response }, meta));
       }
