@@ -8,6 +8,7 @@
 
   opacity: 0;
   pointer-events: none;
+  transition-property: transform;
   transition: 0.3s cubic-bezier(0,0,.5,1.5);
 }
 
@@ -15,5 +16,6 @@
   opacity: 1;
   pointer-events: auto;
   transform: translate(-50%, 0);
+  transition-property: transform;
   transition: 0.3s 1s cubic-bezier(0,0,.5,1.5);
 }

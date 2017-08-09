@@ -80,7 +80,12 @@
 }
 
 .appError {
-  left: rem(220) + spacing();
+  left: spacing();
+  top: rem(100);
+  @media screen and (min-width: breakpoint(medium)) {
+    left: rem(220) + spacing();
+    top: spacing();
+  }
 }
 
 .formError {
