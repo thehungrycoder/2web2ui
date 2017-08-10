@@ -1,16 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import _ from 'lodash';
 
 // Actions
-import { createWebhook as createAction, getEventDocs } from '../../actions/webhooks';
+import { createWebhook, getEventDocs } from '../../actions/webhooks';
 
 // Components
 import Layout from '../../components/Layout/Layout';
 import { Page, Panel } from '@sparkpost/matchbox';
 import WebhookForm from './components/WebhookForm';
+import WebhooksLoading from './components/WebhooksLoading';
 
 class WebhooksCreate extends Component {
+  componentDidMount () {
+    if (!this.props.eventDocs) {
+      this.props.getEventDocs();
+    }
+  }
+
   /*
     Makes a webhook object from form values and calls the createWebhook action
     with it. Invoked in the form's onSubmit func
@@ -60,11 +68,11 @@ class WebhooksCreate extends Component {
         break;
     }
 
-    return this.props.createAction(webhook);
+    return this.props.createWebhook(webhook);
   }
 
   /*
-    Builds a tree of event data, besed on the eventDocs, for the form to create
+    Builds a tree of event data, based on the eventDocs, for the form to create
     the checkbox groups with.
   */
   buildEventsData (eventGroups) {
@@ -82,38 +90,26 @@ class WebhooksCreate extends Component {
     });
   }
 
-  componentDidMount () {
-    this.props.getEventDocs();
-  }
-
   render () {
     const { eventsLoading } = this.props;  // Form doesn't load until we have events
 
     if (eventsLoading) {
       return (
-        <Layout.App>
-          <Page
-            title={'Create Webhook'}
-            breadcrumbAction={{content: 'Webhooks', onClick: () => { this.props.history.push('/webhooks/'); }}}
-          />
-          <Panel>
-            <Panel.Section>
-              Loading...
-            </Panel.Section>
-          </Panel>
-        </Layout.App>
+        <WebhooksLoading
+          title='Create Webhook'
+          breadcrumbAction={{ content: 'Webhooks', Component: Link, to: '/webhooks' }} />
       );
     }
 
     const { eventDocs } = this.props;
 
-    const eventsTree = Object.keys(eventDocs).length !== 0 ? this.buildEventsData(eventDocs) : [];
+    const eventsTree = this.buildEventsData(eventDocs);
 
     return (
       <Layout.App>
         <Page
-          title={'Create Webhook'}
-          breadcrumbAction={{content: 'Webhooks', onClick: () => { this.props.history.push('/webhooks/'); }}}
+          title='Create Webhook'
+          breadcrumbAction={{ content: 'Webhooks', Component: Link, to: '/webhooks' }}
         />
         <Panel>
           <Panel.Section>
@@ -130,4 +126,4 @@ const mapStateToProps = ({ webhooks }) => ({
   eventDocs: webhooks.docs
 });
 
-export default connect(mapStateToProps, { createAction, getEventDocs })(WebhooksCreate);
+export default connect(mapStateToProps, { createWebhook, getEventDocs })(WebhooksCreate);

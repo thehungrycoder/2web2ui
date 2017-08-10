@@ -4,44 +4,41 @@ import { withRouter } from 'react-router-dom';
 import _ from 'lodash';
 
 // Actions
-import { getWebhook, getEventDocs, updateWebhook, deleteWebhook } from '../../actions/webhooks';
+import { getWebhook, getEventDocs, updateWebhook } from '../../../actions/webhooks';
 
 // Components
-import Layout from '../../components/Layout/Layout';
-import { Page, Panel, Banner } from '@sparkpost/matchbox';
-import WebhookForm from './components/WebhookForm';
-import DeleteModal from './components/DeleteModal';
+import { Panel, Banner } from '@sparkpost/matchbox';
+import WebhookForm from './WebhookForm';
 
-class WebhooksEdit extends Component {
+class EditTab extends Component {
   constructor (props) {
     super(props);
 
-    // takes id from url param
     this.state = {
-      id: this.props.match.params.id,
       updated: false,
-      showBanner: false,
-      showDelete: false
+      showBanner: false
     };
 
-    this.onDismiss = this.dismissBanner.bind(this);
+    this.buildEventsTree = _.once(this.buildEventsTree);
+    this.getAllEvents = _.once(this.getAllEvents);
   }
 
   /*
-    Dispatches eventDocs & getWebhook actions
+    Dispatches eventDocs if it isn't set on state already
   */
-  componentWillMount () {
-    this.props.getEventDocs();
-    this.props.getWebhook(this.state.id);
+  componentDidMount () {
+    if (!this.props.eventDocs) {
+      this.props.getEventDocs();
+    }
   }
 
   /*
-   Gets webhook if the updated is true, then resets updated to false
-   and sets showBanner
+   Gets webhook if updated, then resets updated to false
+   and sets showBanner.
   */
   componentDidUpdate () {
     if (this.state.updated) {
-      this.props.getWebhook(this.state.id);
+      this.props.getWebhook(this.props.id);
       this.setState({ updated: false, showBanner: true });
     }
   }
@@ -140,7 +137,14 @@ class WebhooksEdit extends Component {
     }
   }
 
-  buildEventsData (eventGroups) {
+  /*
+    Build an event tree based on the docs from /webhooks/documentation. Passed
+    to _.once() in the constructor so it only happens once per mount.
+    TODO: consider moving this to the reducer. This doesn't change from webhook
+          to webhook, and if other resources need to use webhooks/documentation
+          we can put it on its own key in the state.
+  */
+  buildEventsTree (eventGroups) {
     return _.map(eventGroups, ({display_name, description, events}, key) => {
       return {
         key: key,
@@ -155,52 +159,52 @@ class WebhooksEdit extends Component {
     });
   }
 
-  dismissBanner () {
+  /*
+    Makes an array with all possible events from the eventsTree.
+    Bound to a _.once in constructor
+  */
+  getAllEvents (eventsTree) {
+    return _.flatten(_.map(eventsTree, ({events}) => {
+      return _.map(events, ({key}) => (key));
+    }));
+  }
+
+  dismissBanner = () => {
     this.setState({ showBanner: false });
   }
 
-  hideDelete () {
-    this.setState({ showDelete: false });
-  }
+  /*
+    Renders a banner based on whether the update succeded or failed
+    TODO: Make a global wrapper for banner that behaves like this.
+  */
+  renderBanner = (updateSuccess) => {
+    const title = updateSuccess ? 'Update Successful' : 'Update Failed';
+    const status = updateSuccess ? 'success' : 'danger';
 
-  handleDelete () {
-    return this.props.deleteWebhook(this.state.id).then(() => {
-      this.props.history.push('/webhooks/');
-    });
+    return <Banner title={title} status={status} onDismiss={this.dismissBanner}/>;
   }
 
   render () {
-    const { webhook, getLoading, eventsLoading } = this.props;
+    const { eventsLoading } = this.props;
 
-    if (webhook.id !== this.state.id || getLoading || eventsLoading) {
+    /*
+      TODO: We probably don't need to load on eventsLoading (even though it only happens once),
+            but we should eventually catch this call failing.
+    */
+    if (eventsLoading) {
       return (
-        <Layout.App>
-          <Page
-            title={'Webhook Settings'}
-            breadcrumbAction={{content: 'Webhooks', onClick: () => { this.props.history.push('/webhooks/'); }}}
-          />
-          <Panel>
-            <Panel.Section>
-              Loading...
-            </Panel.Section>
-          </Panel>
-        </Layout.App>
+        <Panel>
+          <Panel.Section>
+            Loading...
+          </Panel.Section>
+        </Panel>
       );
     }
 
-    const { eventDocs, updateSuccess } = this.props;
+    const { webhook, eventDocs } = this.props;
 
-    const eventsTree = Object.keys(eventDocs).length !== 0 ? this.buildEventsData(eventDocs) : [];
-
-    // to match form values, where none is undefined
-    if (webhook.auth_type === 'none') {
-      delete webhook.auth_type;
-    }
-
-    // used for allEvents prop and passed to updateWebhook()
-    const allEvents = _.flatten(_.map(eventsTree, ({events}) => {
-      return _.map(events, ({key}) => (key));
-    }));
+    const eventsTree = this.buildEventsTree(eventDocs);
+    const allEvents = this.getAllEvents(eventsTree);
 
     const allChecked = webhook.events.length === allEvents.length;
     const checkedEvents = {};
@@ -213,37 +217,29 @@ class WebhooksEdit extends Component {
       });
     }
 
+    // to match form values, where none is undefined
+    if (webhook.auth_type === 'none') {
+      delete webhook.auth_type;
+    }
+
+    const { showBanner } = this.state;
+
     return (
-      <Layout.App>
-        <Page
-          title={webhook.name}
-          secondaryActions={[{ content: 'Test', onClick: () => { console.log('testTab'); } }, { content: 'Delete', onClick: () => { this.setState({ showDelete: true }); } }]}
-          breadcrumbAction={{content: 'Webhooks', onClick: () => { this.props.history.push('/webhooks/'); }}}
-        />
-        { updateSuccess && this.state.showBanner &&
-          <Banner title='Update Successful' status='success' onDismiss={this.onDismiss}/>
-        }
-        <Panel>
-          <Panel.Section>
-            <WebhookForm eventsTree={eventsTree} allChecked={allChecked} newWebhook={false} checkedEvents={checkedEvents} onSubmit={(values) => { return this.updateWebhook(values, webhook, allEvents); }}/>
-          </Panel.Section>
-        </Panel>
-        <DeleteModal
-          open={this.state.showDelete}
-          handleToggle={() => this.hideDelete()}
-          handleDelete={() => this.handleDelete()}
-        />
-      </Layout.App>
+      <Panel sectioned>
+        { showBanner && this.renderBanner(this.props.updateSuccess) }
+        <Panel.Section>
+          <WebhookForm eventsTree={eventsTree} allChecked={allChecked} newWebhook={false} checkedEvents={checkedEvents} onSubmit={(values) => { return this.updateWebhook(values, webhook, allEvents); }}/>
+        </Panel.Section>
+      </Panel>
     );
   }
 }
 
 const mapStateToProps = ({ webhooks }) => ({
   webhook: webhooks.webhook,
-  getLoading: webhooks.getLoading,
   eventsLoading: webhooks.docsLoading,
   eventDocs: webhooks.docs,
   updateSuccess: webhooks.updateSuccess
 });
 
-export default withRouter(connect(mapStateToProps, { getWebhook, getEventDocs, updateWebhook, deleteWebhook })(WebhooksEdit));
+export default withRouter(connect(mapStateToProps, { getWebhook, getEventDocs, updateWebhook })(EditTab));

@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-const initialState = { list: [], webhook: {}, docs: {}, getLoading: true, docsLoading: true };
+const initialState = { list: [], webhook: {}, getLoading: true, docsLoading: true };
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -18,7 +18,7 @@ export default (state = initialState, action) => {
     /* GET */
 
     case 'GET_WEBHOOK_PENDING':
-      return { ...state, webhook: {}, getLoading: true };
+      return { ...state, getLoading: true };
 
     case 'GET_WEBHOOK_SUCCESS':
       return { ...state, webhook: action.payload, getLoading: false };
@@ -59,6 +59,17 @@ export default (state = initialState, action) => {
     case 'DELETE_WEBHOOK_FAIL':
       return { ...state, deleteLoading: false };
 
+    /* TEST */
+
+    case 'TEST_WEBHOOK_PENDING':
+      return { ...state, testLoading: true };
+
+    case 'TEST_WEBHOOK_SUCCESS':
+      return { ...state, testResponse: action.payload.response, testLoading: false };
+
+    case 'TEST_WEBHOOK_FAIL':
+      return { ...state, testResponse: action.payload.response, testLoading: false };
+
     /* EVENT DOCS */
 
     case 'GET_EVENT_DOCS_PENDING':
@@ -68,6 +79,17 @@ export default (state = initialState, action) => {
       return { ...state, docs: action.payload, docsLoading: false };
 
     case 'GET_EVENT_DOCS_FAIL':
+      return { ...state, docsLoading: false };
+
+    /* EVENT SAMPLES */
+
+    case 'GET_EVENT_SAMPLES_PENDING':
+      return { ...state, samplesLoading: true };
+
+    case 'GET_EVENT_SAMPLES_SUCCESS':
+      return { ...state, samples: action.payload, samplesLoading: false };
+
+    case 'GET_EVENT_SAMPLES_FAIL':
       return { ...state, docsLoading: false };
 
     default:
