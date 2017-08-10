@@ -44,23 +44,6 @@ class ListPage extends Component {
     const templatesCount = this.props.templates.length;
     const loading = this.props.listLoading;
 
-    // This should probably be a universal loading component
-    if (loading) {
-      return (
-        <Layout.App>
-          <Page
-            primaryAction={CREATE_ACTION}
-            title={'Templates'}
-          />
-          <Panel>
-            <Panel.Section>
-              Loading...
-            </Panel.Section>
-          </Panel>
-        </Layout.App>
-      );
-    }
-
     // No Templates (not error case)
     if (!loading && !templatesCount) {
       // TODO: instead of making a CTA here, we could just redirect to the create page
@@ -89,7 +72,7 @@ class ListPage extends Component {
     const templateRows = templatesCount ? this.renderTemplateRows(this.props.templates, this.state.currentPage, this.state.perPage) : null;
 
     return (
-      <Layout.App>
+      <Layout.App loading={loading}>
         <Page
           primaryAction={CREATE_ACTION}
           title={'Templates'}

@@ -5,7 +5,6 @@ export default {
     cookie: {
       name: 'auth',
       options: {
-        domain: 'no-default-set',
         path: '/'
       }
     },

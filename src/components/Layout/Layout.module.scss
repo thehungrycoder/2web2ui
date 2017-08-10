@@ -30,6 +30,7 @@
   }
 }
 
+// TODO Clean this up so app vs. form is more readable
 .content, .formContent {
   position: relative;
   padding: spacing(larger);
@@ -78,4 +79,17 @@
 
 .formError {
   left: spacing();
+}
+
+.loading {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  .container & {
+    @media screen and (min-width: breakpoint(medium)) {
+      margin-left: rem(110);
+    }
+  }
 }
