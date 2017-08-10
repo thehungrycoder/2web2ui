@@ -2,7 +2,7 @@ import React from 'react';
 
 import styles from './Layout.module.scss';
 import Navigation from '../Navigation/Navigation';
-import { Loading, LoadingCircle } from '../Loading/Loading';
+import { Loading } from '../Loading/Loading';
 
 const App = ({ children, loading }) => (
   <div className={`${styles.wrapper} ${styles.accent}`}>
@@ -11,9 +11,7 @@ const App = ({ children, loading }) => (
     </div>
     <main role="main" className={styles.content}>
       <div className={styles.container}>
-        <LoadingCircle />
-        <Loading />
-        {/* { loading ? <Loading className={styles.loading} /> : children } */}
+        { loading ? <div className={styles.loading}><Loading /></div> : children }
       </div>
     </main>
   </div>
@@ -23,7 +21,7 @@ const Form = ({ children, loading }) => (
   <div className={styles.wrapper}>
     <main role="main" className={styles.formContent}>
       <div className={styles.formContainer}>
-        { loading ? <Loading className={styles.loading} /> : children }
+        { loading ? <div className={styles.loading}><Loading /></div> : children }
       </div>
     </main>
   </div>

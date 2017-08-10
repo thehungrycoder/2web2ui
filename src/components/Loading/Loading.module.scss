@@ -1,6 +1,7 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 
-.Loading {
+// Logo styles
+.Logo {
   width: 70px;
   height: 70px;
   fill: color(orange);
@@ -16,9 +17,10 @@
   }
 }
 
+// Circle styles
 .CircleWrapper {
-  width: 70px;
-  height: 70px;
+  width: 60px;
+  height: 60px;
   fill: none;
   animation: rotate 2s linear infinite;
 }
@@ -35,16 +37,19 @@
 
 @keyframes dash {
   0% {
+    stroke: adjust-hue(color(orange), 15);
     stroke-dasharray: 1 200;
     stroke-dashoffset: 0;
   }
   50% {
+    stroke: color(orange);
     stroke-dasharray: 120 200;
-    stroke-dashoffset: -35;
+    stroke-dashoffset: -25;
   }
   100% {
+    stroke: adjust-hue(color(orange), 15);
     stroke-dasharray: 120 200;
-    stroke-dashoffset: -175;
+    stroke-dashoffset: -145;
   }
 }
 
