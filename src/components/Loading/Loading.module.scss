@@ -1,0 +1,63 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+// Logo styles
+.Logo {
+  width: 70px;
+  height: 70px;
+  fill: color(orange);
+  animation: pulse 3s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+// Circle styles
+.CircleWrapper {
+  width: 60px;
+  height: 60px;
+  fill: none;
+  animation: rotate 2s linear infinite;
+}
+
+.Circle {
+  stroke: color(orange);
+  stroke-width: 4px;
+  stroke-linecap: round;
+
+  stroke-dasharray: 150 200;
+  stroke-dashoffset: -10;
+  animation: dash 1.5s ease-in-out infinite;
+}
+
+@keyframes dash {
+  0% {
+    stroke: adjust-hue(color(orange), 15);
+    stroke-dasharray: 1 200;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke: color(orange);
+    stroke-dasharray: 120 200;
+    stroke-dashoffset: -25;
+  }
+  100% {
+    stroke: adjust-hue(color(orange), 15);
+    stroke-dasharray: 120 200;
+    stroke-dashoffset: -145;
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
