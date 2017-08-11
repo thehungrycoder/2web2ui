@@ -66,7 +66,6 @@ exports[`renders without crashing 1`] = `
     />
     <withRouter(Connect(_ProtectedRoute))
       component={[Function]}
-      exact={true}
       path="/webhooks/details/:id"
     />
   </div>
