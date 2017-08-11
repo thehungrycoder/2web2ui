@@ -8,6 +8,9 @@ export default {
         path: '/'
       }
     },
-    headers: {}
+    headers: {
+      Authorization: 'Basic bXN5c1dlYlVJOmZhODZkNzJlLTYyODctNDUxMy1hZTdmLWVjOGM4ZmEwZDc2Ng==',
+      'Content-Type': 'application/x-www-form-urlencoded'
+    }
   }
 };
