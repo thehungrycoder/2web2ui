@@ -55,8 +55,8 @@ export default class SpLineChart extends React.Component {
             formatter={tooltipValueFormatter}
           />
           <Legend
-            verticalAlign='bottom'
-            iconType='circle'/>
+            verticalAlign='top'
+            iconType='square'/>
           {this.renderReferenceLines()}
           {this.renderLines()}
         </LineChart>

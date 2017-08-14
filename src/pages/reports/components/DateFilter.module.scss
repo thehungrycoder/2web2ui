@@ -1,0 +1,10 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.RangeButtonWrapper {
+  margin-bottom: spacing(small);
+}
+
+.Popover {
+  width: rem(610);
+  padding: spacing();
+}

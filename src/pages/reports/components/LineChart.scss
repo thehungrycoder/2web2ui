@@ -82,16 +82,20 @@
 }
 
 .recharts-legend-wrapper {
-  padding-top: rem(15);
+  padding-top: rem(0);
   padding-bottom: rem(0);
 }
 
 .recharts-legend-item-text {
   display: inline-block;
   vertical-align: middle;
-  padding: 0 rem(6) 0 rem(3);
+  padding: rem(0) rem(12) rem(24);
   font-size: rem(13);
 }
+.recharts-legend-item .recharts-surface {
+  margin-top: rem(-24);
+}
+
 // // Containers
 // .recharts-wrapper {}
 // .recharts-responsive-container {}

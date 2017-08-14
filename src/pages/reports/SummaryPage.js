@@ -5,12 +5,14 @@ import { fetch as fetchMetrics } from '../../actions/metrics';
 import LineChart from './components/LineChart';
 import Layout from '../../components/Layout/Layout';
 import { getQueryFromOptions, getDayLines, getLineChartFormatters } from '../../helpers/metrics';
-import { Page, Grid, Button, Panel, Icon, Datepicker, TextField } from '@sparkpost/matchbox';
+import { Page, Grid, Button, Panel, Icon, Datepicker, TextField, Tabs, Table } from '@sparkpost/matchbox';
 import _ from 'lodash';
 import moment from 'moment';
 import { subMonths, format } from 'date-fns';
 import styles from './Reports.module.scss';
 // import qs from 'query-string';
+
+import DateFilter from './components/DateFilter';
 
 class SummaryReportPage extends Component {
   constructor (props) {
@@ -157,28 +159,44 @@ class SummaryReportPage extends Component {
 
     return (
       <Layout.App>
-        <Page title='Summary Report'/>
+        <Page
+          title='Summary Report'
+          secondaryActions={[{
+            content: 'Share this Report'
+          }]}
+        />
 
         {this.renderLoading()}
 
         <Panel>
 
-              {from &&
+          <Panel.Section>
+            <Grid>
+              <Grid.Column>
+                <DateFilter />
+              </Grid.Column>
+              <Grid.Column>
+                <TextField placeholder='Filter by domain'/>
+              </Grid.Column>
+            </Grid>
+          </Panel.Section>
+
+              {/* {from &&
                 <Panel.Section>
                   <form>
                     <Grid>
                       <Grid.Column xs={12} md={6}>
-                        <TextField fullWidth value={`${formatted.from} to ${formatted.to}`} onClick={this.toggleDatePicker} />
+                        <TextField value={`${formatted.from} to ${formatted.to}`} onClick={this.toggleDatePicker} />
                       </Grid.Column>
                       <Grid.Column xs={12} md={6}>
-                        <TextField fullWidth placeholder='Filter Report'/>
+                        <TextField placeholder='Filter Report'/>
                       </Grid.Column>
                     </Grid>
                   </form>
                 </Panel.Section>
-              }
+              } */}
 
-              {showDatePicker &&
+              {/* {showDatePicker &&
                 <Panel.Section>
                   <Datepicker
                     numberOfMonths={2}
@@ -194,13 +212,28 @@ class SummaryReportPage extends Component {
                   <Button primary onClick={this.handleSubmit}>Apply</Button>
                   <Button onClick={this.toggleDatePicker}>Cancel</Button>
                 </Panel.Section>
-              }
+              } */}
 
             <Panel.Section className={styles.ChartSection}>
               {this.renderChart()}
               <Button size='small' className={styles.AddMetric}>Select Metrics</Button>
             </Panel.Section>
 
+        </Panel>
+
+        <Tabs
+          selected={0}
+          tabs={[
+            { content: 'Domains' },
+            { content: 'Campaigns' },
+            { content: 'Templates' }
+          ]}/>
+        <Panel>
+          <Table>
+            <Table.Row rowData={[1, 2, 3]}>
+
+            </Table.Row>
+          </Table>
         </Panel>
       </Layout.App>
     );
