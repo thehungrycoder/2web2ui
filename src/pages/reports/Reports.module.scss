@@ -10,3 +10,10 @@
   position: relative;
   padding: spacing();
 }
+
+.FieldWrapper {
+  margin-bottom: spacing();
+  @media screen and (min-width: breakpoint(medium)) {
+    margin-bottom: 0;
+  }
+}
