@@ -1,5 +1,6 @@
 import config from '../config';
 import axios from 'axios';
+import { resolveOnCondition } from './promise';
 
 const { apiBase, apiRequestTimeout, authentication } = config;
 
@@ -13,18 +14,13 @@ const sparkpostRequest = axios.create({
 const tokensUsed = [];
 let refreshing = false;
 
-function wait (condition, fn, ms = 500) {
-  setTimeout(() => {
-    if (condition) {
-      return fn();
-    }
-    wait(condition, fn);
-  }, ms);
-}
-
 function useRefreshToken (refreshToken) {
+  // If we are already mid-refresh for this token, return a promise
+  // that will just resolve when we are done refreshing so that the
+  // request can be retried with the new token without requesting
+  // new auth tokens multiple times per refresh token
   if (tokensUsed.includes(refreshToken)) {
-    return new Promise((resolve) => wait(refreshing, resolve));
+    return resolveOnCondition(() => !refreshing);
   }
 
   tokensUsed.push(refreshToken);
