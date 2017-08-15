@@ -37,10 +37,13 @@ export default function sparkpostApiRequest ({ dispatch, getState }) {
       data
     };
 
+    // TODO should we really continue if not loggedIn?
     if (auth.loggedIn) {
       _.set(httpOptions, 'headers.Authorization', auth.token);
     }
 
+    // TODO don't make this request if we're refreshing the
+    // token, wait and retry when we have new token
     return sparkpostRequest(httpOptions).then(({ data: { results } }) => {
       // we only get here if the request returned a 2xx status code
       dispatch({
@@ -52,7 +55,9 @@ export default function sparkpostApiRequest ({ dispatch, getState }) {
       if (typeof chain.success === 'function') {
         chain.success({ dispatch, getState, results });
       }
-    }, ({ message, response = {} }) => {
+    }, (result) => {
+      const { message, response = {} } = result;
+
       // NOTE: if this is a 401, need to do a refresh to get
       // a new auth token and then re-dispatch this action
       if (response.status === 401 && auth.refreshToken && retries <= maxRefreshRetries) {
@@ -62,16 +67,19 @@ export default function sparkpostApiRequest ({ dispatch, getState }) {
         return useRefreshToken(auth.refreshToken)
 
           // dispatch a refresh action to save new token results in cookie and store
-          .then(({ data }) => dispatch(refresh(data.access_token, data.refresh_token)))
+          // if we were given new data to save (queued requests won't have new data)
+          .then(({ data } = {}) => {
+            if (data) {
+              return dispatch(refresh(data.access_token, data.refresh_token));
+            }
+          })
 
           // dispatch the original action again, now that we have a new token ...
-          // if anything in this refresh flow blew up, dispatch the fail action
-          .then(() => dispatch(action), ({ message, response }) => {
-            dispatch({
-              type: FAIL_TYPE,
-              payload: { message, response, retries }
-            });
-          });
+          // if anything in this refresh flow blew up, log out
+          .then(
+            () => dispatch(action),
+            (err) => { console.log('oops', err); dispatch(logout()); }
+          );
       }
 
       // If we have a 401 and we're not refreshing, log the user out silently
