@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { fetch as fetchMetrics } from '../../actions/metrics';
 import LineChart from './components/LineChart';
 import List from './components/List';
-import DateFilter from './components/DateFilter';
+import DateFilter from '../../components/DateFilter/DateFilter';
 import Layout from '../../components/Layout/Layout';
 import { getQueryFromOptions, getDayLines, getLineChartFormatters } from '../../helpers/metrics';
 import { Page, Grid, Button, Panel, Icon, TextField, Tabs } from '@sparkpost/matchbox';

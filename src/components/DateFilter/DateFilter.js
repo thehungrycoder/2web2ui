@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { subMonths, format } from 'date-fns';
-import { Grid, Button, Panel, Icon, Datepicker, TextField, Tooltip, Select, Popover } from '@sparkpost/matchbox';
+import { Grid, Button, Datepicker, TextField, Tooltip, Select, Popover, Icon } from '@sparkpost/matchbox';
 
 import styles from './DateFilter.module.scss';
 
@@ -187,26 +187,23 @@ class DateFilter extends Component {
         />
 
         <div className={styles.DateFields}>
-          <Grid>
-            <Grid.Column xs={6}>
-              <Grid>
-                <Grid.Column xs={6}>
-                  <TextField label='From' labelHidden value={formatted.from.day} />
-                </Grid.Column>
-                <Grid.Column xs={6}>
-                  <TextField labelHidden value={formatted.from.time} />
-                </Grid.Column>
-              </Grid>
+          <Grid middle='xs'>
+            <Grid.Column >
+              <TextField label='From' labelHidden value={formatted.from.day} />
             </Grid.Column>
-            <Grid.Column xs={6}>
-              <Grid>
-                <Grid.Column xs={6}>
-                  <TextField label='To' labelHidden value={formatted.to.day} />
-                </Grid.Column>
-                <Grid.Column xs={6}>
-                  <TextField labelHidden value={formatted.to.time} />
-                </Grid.Column>
-              </Grid>
+            <Grid.Column >
+              <TextField labelHidden value={formatted.from.time} />
+            </Grid.Column>
+            <Grid.Column xs={1}>
+              <div className={styles.ArrowWrapper}>
+                <Icon name='ArrowRight'/>
+              </div>
+            </Grid.Column>
+            <Grid.Column >
+              <TextField label='To' labelHidden value={formatted.to.day} />
+            </Grid.Column>
+            <Grid.Column >
+              <TextField labelHidden value={formatted.to.time} />
             </Grid.Column>
           </Grid>
         </div>
