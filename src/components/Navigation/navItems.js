@@ -21,17 +21,22 @@ export default [
     icon: 'Code'
   },
   {
+    label: 'Webhooks',
+    to: '/webhooks',
+    icon: 'Language'
+  },
+  {
     label: 'Account',
     to: '/account',
     icon: 'Settings',
     children: [
       {
-        label: 'Profile',
-        to: '/account/profile'
+        label: 'Billing',
+        to: '/account/billing'
       },
       {
-        label: 'Webhooks',
-        to: '/webhooks'
+        label: 'Profile',
+        to: '/account/profile'
       }
     ]
   }
