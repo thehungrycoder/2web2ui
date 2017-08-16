@@ -6,6 +6,7 @@ import { fetch as fetchMetrics } from '../../actions/metrics';
 
 import LineChart from './components/LineChart';
 import List from './components/List';
+import MetricsModal from './components/MetricsModal';
 import DateFilter from '../../components/DateFilter/DateFilter';
 import Typeahead from '../../components/Typeahead/Typeahead';
 import Layout from '../../components/Layout/Layout';
@@ -26,6 +27,7 @@ class SummaryReportPage extends Component {
     const from = moment(to).subtract(1, 'day').toDate();
 
     this.state = {
+      showMetrics: false,
       eventTime: true,
       options: {
         metrics: ['count_targeted', 'count_delivered', 'count_accepted', 'count_bounce'],
@@ -113,6 +115,14 @@ class SummaryReportPage extends Component {
     );
   }
 
+  handleMetricsApply = () => {
+
+  }
+
+  handleMetricsToggle = () => {
+    this.setState({ showMetrics: !this.state.showMetrics });
+  }
+
   handleTimeToggle = () => {
     this.setState({ eventTime: !this.state.eventTime });
   }
@@ -169,7 +179,7 @@ class SummaryReportPage extends Component {
             {this.renderChart()}
 
             <div className={styles.Controls}>
-              <Button size='small'>Select Metrics</Button>
+              <Button size='small' onClick={this.handleMetricsToggle}>Select Metrics</Button>
 
               {this.renderTimeMode()}
 
@@ -195,6 +205,10 @@ class SummaryReportPage extends Component {
         <Panel>
           <List />
         </Panel>
+        <MetricsModal
+          open={this.state.showMetrics}
+          handleToggle={this.handleMetricsToggle}
+          handleApply={this.handleMetricsApply} />
       </Layout.App>
     );
   }
