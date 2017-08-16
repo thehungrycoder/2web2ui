@@ -34,3 +34,21 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.TimeMode {
+  display: inline-block;
+  font-size: rem(13);
+  line-height: rem(15);
+  color: color(gray, 4);
+  padding: spacing(small) 0 0;
+}
+
+.Controls {
+  position: absolute;
+  top: rem(30);
+  right: spacing(large);
+}
+
+.ButtonSpacer {
+  margin-left: spacing(small);
+}

@@ -82,14 +82,15 @@
 }
 
 .recharts-legend-wrapper {
-  padding-top: rem(0);
+  margin-left: rem(30);
+  padding-top: rem(11);
   padding-bottom: rem(0);
 }
 
 .recharts-legend-item-text {
   display: inline-block;
   vertical-align: middle;
-  padding: rem(0) rem(12) rem(24);
+  padding: rem(0) rem(15) rem(24) rem(6);
   font-size: rem(13);
 }
 .recharts-legend-item .recharts-surface {

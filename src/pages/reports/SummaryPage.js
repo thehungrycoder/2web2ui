@@ -12,7 +12,7 @@ import Layout from '../../components/Layout/Layout';
 import { Loading } from '../../components/Loading/Loading';
 
 import { getQueryFromOptions, getDayLines, getLineChartFormatters } from '../../helpers/metrics';
-import { Page, Grid, Button, Panel, Icon, TextField, Tabs } from '@sparkpost/matchbox';
+import { Page, Grid, Button, Panel, Tabs, Tooltip } from '@sparkpost/matchbox';
 import _ from 'lodash';
 import moment from 'moment';
 import styles from './Reports.module.scss';
@@ -26,6 +26,7 @@ class SummaryReportPage extends Component {
     const from = moment(to).subtract(1, 'day').toDate();
 
     this.state = {
+      eventTime: true,
       options: {
         metrics: ['count_targeted', 'count_delivered', 'count_accepted', 'count_bounce'],
         from,
@@ -112,6 +113,22 @@ class SummaryReportPage extends Component {
     );
   }
 
+  handleTimeToggle = () => {
+    this.setState({ eventTime: !this.state.eventTime });
+  }
+
+  renderTimeMode () {
+    const { eventTime } = this.state;
+
+    return this.state.eventTime
+    ? <Tooltip content='Sort events by injection time'>
+        <Button onClick={this.handleTimeToggle} className={styles.ButtonSpacer} size='small'>Event Time</Button>
+      </Tooltip>
+    : <Tooltip content='Sort events by event time'>
+        <Button onClick={this.handleTimeToggle} className={styles.ButtonSpacer} size='small'>Injection Time</Button>
+      </Tooltip>;
+  }
+
   render () {
     const { metricsData } = this.props;
     const { from, to } = this.state.options;
@@ -148,8 +165,20 @@ class SummaryReportPage extends Component {
           </Panel.Section>
 
           <Panel.Section className={classnames(styles.ChartSection, metricsData.pending && styles.pending)}>
+
             {this.renderChart()}
-            <Button size='small' className={styles.AddMetric}>Select Metrics</Button>
+
+            <div className={styles.Controls}>
+              <Button size='small'>Select Metrics</Button>
+
+              {this.renderTimeMode()}
+
+              <Button.Group className={styles.ButtonSpacer}>
+                <Button size='small' primary>Linear</Button>
+                <Button size='small'>Log</Button>
+              </Button.Group>
+            </div>
+
           </Panel.Section>
 
           {this.renderLoading()}

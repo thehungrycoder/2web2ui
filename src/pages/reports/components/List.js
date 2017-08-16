@@ -3,7 +3,9 @@ import { Table } from '@sparkpost/matchbox';
 
 const List = () => (
   <Table>
-    <Table.Row rowData={[1, 2, 3]}/>
+    <tbody>
+      <Table.Row rowData={[1, 2, 3]}/>
+    </tbody>
   </Table>
 );
 

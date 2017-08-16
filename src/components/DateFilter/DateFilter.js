@@ -125,6 +125,10 @@ class DateFilter extends Component {
 
   }
 
+  handleFieldChange = () => {
+
+  }
+
   handleSubmit = () => {
     this.setState({ showDatePicker: false });
     this.props.onSubmit(this.state.datepicker.selected);
@@ -148,14 +152,6 @@ class DateFilter extends Component {
       }
     };
 
-    const timeConnect = this.state.eventTime
-    ? <Tooltip content='Sort events by injection time'>
-        <Button onClick={() => this.handleTimeToggle()}>Event Time</Button>
-      </Tooltip>
-    : <Tooltip content='Sort events by event time'>
-        <Button onClick={() => this.handleTimeToggle()}>Injection Time</Button>
-      </Tooltip>;
-
     const dateField = <TextField
       labelHidden={true}
       onClick={() => this.showDatePicker()}
@@ -164,6 +160,7 @@ class DateFilter extends Component {
         options={this.rangeOptions}
         defaultValue='7days' />}
       value={`${formatted.from.full} - ${formatted.to.full}`}
+      readOnly
     />;
 
     return (
@@ -192,11 +189,13 @@ class DateFilter extends Component {
               <TextField
                 label='From'
                 labelHidden
+                onChange={this.handleFieldChange}
                 value={formatted.from.day} />
             </Grid.Column>
             <Grid.Column >
               <TextField
                 labelHidden
+                onChange={this.handleFieldChange}
                 value={formatted.from.time} />
             </Grid.Column>
             <Grid.Column xs={1}>
@@ -208,11 +207,13 @@ class DateFilter extends Component {
               <TextField
                 label='To'
                 labelHidden
+                onChange={this.handleFieldChange}
                 value={formatted.to.day} />
             </Grid.Column>
             <Grid.Column >
               <TextField
                 labelHidden
+                onChange={this.handleFieldChange}
                 value={formatted.to.time} />
             </Grid.Column>
           </Grid>

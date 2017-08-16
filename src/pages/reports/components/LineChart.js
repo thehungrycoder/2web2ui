@@ -56,6 +56,8 @@ export default class SpLineChart extends React.Component {
           />
           <Legend
             verticalAlign='top'
+            align='left'
+            height={80}
             iconType='square'/>
           {this.renderReferenceLines()}
           {this.renderLines()}
