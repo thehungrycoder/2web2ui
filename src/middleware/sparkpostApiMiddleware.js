@@ -49,7 +49,7 @@ export default function sparkpostApiRequest ({ dispatch, getState }) {
     if (refreshing) {
       return resolveOnCondition(() => !refreshing).then(() => {
         dispatch(action);
-      });
+      }, _.noop);
     }
 
     return sparkpostRequest(httpOptions).then(({ data: { results } }) => {
@@ -77,7 +77,7 @@ export default function sparkpostApiRequest ({ dispatch, getState }) {
         if (refreshing || refreshTokensUsed.has(auth.refreshToken)) {
           return resolveOnCondition(() => !refreshing).then(() => {
             dispatch(action);
-          });
+          }, _.noop);
         }
 
         refreshing = true;
@@ -122,11 +122,6 @@ export default function sparkpostApiRequest ({ dispatch, getState }) {
           meta
         });
       }
-    })
-    .catch((err) => {
-      // curious to understand when/how errors would find their way here, and what happens if/when they do
-      console.log('error appeared in spapirequest middleware catch()', err.message); // eslint-disable-line no-console
-      throw err;
     });
   };
 }

@@ -9,7 +9,7 @@ function wait (options) {
   } = options;
 
   if (retry >= maxRetries) {
-    return reject();
+    return reject(new Error('Max retries reached'));
   }
 
   setTimeout(() => {
