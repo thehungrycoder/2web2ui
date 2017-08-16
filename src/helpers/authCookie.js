@@ -4,6 +4,7 @@ import config from '../config';
 const { name, options } = config.authentication.cookie;
 
 function save (data) {
+  console.log('saving new cookie', JSON.stringify(data, null, 2));
   cookie.set(name, data, options);
 }
 
