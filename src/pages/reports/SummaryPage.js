@@ -2,10 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { fetch as fetchMetrics } from '../../actions/metrics';
+
 import LineChart from './components/LineChart';
 import List from './components/List';
 import DateFilter from '../../components/DateFilter/DateFilter';
+import Typeahead from '../../components/Typeahead/Typeahead';
 import Layout from '../../components/Layout/Layout';
+
 import { getQueryFromOptions, getDayLines, getLineChartFormatters } from '../../helpers/metrics';
 import { Page, Grid, Button, Panel, Icon, TextField, Tabs } from '@sparkpost/matchbox';
 import _ from 'lodash';
@@ -16,7 +19,6 @@ import styles from './Reports.module.scss';
 class SummaryReportPage extends Component {
   constructor (props) {
     super(props);
-    this.handleSubmit = this.handleSubmit.bind(this);
 
     const to = new Date();
     const from = moment(to).subtract(1, 'day').toDate();
@@ -41,10 +43,22 @@ class SummaryReportPage extends Component {
     }
   }
 
-  handleSubmit (selected) {
+  handleSubmit = (selected) => {
     this.setState({
       options: { ...this.state.options, from: selected.from, to: selected.to }
     }, () => this.refresh());
+  }
+
+  handleTypeahead = () => {
+    this.setState({
+      typeaheadList: [
+        { content: 'test' },
+        { content: 'test' },
+        { content: 'test' },
+        { content: 'test' },
+        { content: 'test' }
+      ]
+    });
   }
 
   refresh () {
@@ -101,12 +115,7 @@ class SummaryReportPage extends Component {
 
     return (
       <Layout.App>
-        <Page
-          title='Summary Report'
-          secondaryActions={[{
-            content: 'Share'
-          }]}
-        />
+        <Page title='Summary Report' />
 
         {this.renderLoading()}
 
@@ -125,7 +134,10 @@ class SummaryReportPage extends Component {
               </Grid.Column>
               <Grid.Column xs={12} md={5}>
                 <div className={styles.FieldWrapper}>
-                  <TextField placeholder='Filter by domain'/>
+                  <Typeahead
+                    placeholder='Filter by domain'
+                    onChange={this.handleTypeahead}
+                    options={this.state.typeaheadList} />
                 </div>
               </Grid.Column>
               <Grid.Column xs={12} md={1}>

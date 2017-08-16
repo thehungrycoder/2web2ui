@@ -189,10 +189,15 @@ class DateFilter extends Component {
         <div className={styles.DateFields}>
           <Grid middle='xs'>
             <Grid.Column >
-              <TextField label='From' labelHidden value={formatted.from.day} />
+              <TextField
+                label='From'
+                labelHidden
+                value={formatted.from.day} />
             </Grid.Column>
             <Grid.Column >
-              <TextField labelHidden value={formatted.from.time} />
+              <TextField
+                labelHidden
+                value={formatted.from.time} />
             </Grid.Column>
             <Grid.Column xs={1}>
               <div className={styles.ArrowWrapper}>
@@ -200,10 +205,15 @@ class DateFilter extends Component {
               </div>
             </Grid.Column>
             <Grid.Column >
-              <TextField label='To' labelHidden value={formatted.to.day} />
+              <TextField
+                label='To'
+                labelHidden
+                value={formatted.to.day} />
             </Grid.Column>
             <Grid.Column >
-              <TextField labelHidden value={formatted.to.time} />
+              <TextField
+                labelHidden
+                value={formatted.to.time} />
             </Grid.Column>
           </Grid>
         </div>
