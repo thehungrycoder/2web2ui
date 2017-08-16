@@ -9,6 +9,16 @@
 .ChartSection {
   position: relative;
   padding: spacing();
+  min-height: rem(480);
+
+  opacity: 1;
+  pointer-events: auto;
+  transition: 0.15s;
+}
+
+.pending {
+  opacity: 0.5;
+  pointer-events: none;
 }
 
 .FieldWrapper {
@@ -16,4 +26,11 @@
   @media screen and (min-width: breakpoint(medium)) {
     margin-bottom: 0;
   }
+}
+
+.Loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

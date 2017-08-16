@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import classnames from 'classnames';
 import { fetch as fetchMetrics } from '../../actions/metrics';
 
 import LineChart from './components/LineChart';
@@ -8,6 +9,7 @@ import List from './components/List';
 import DateFilter from '../../components/DateFilter/DateFilter';
 import Typeahead from '../../components/Typeahead/Typeahead';
 import Layout from '../../components/Layout/Layout';
+import { Loading } from '../../components/Loading/Loading';
 
 import { getQueryFromOptions, getDayLines, getLineChartFormatters } from '../../helpers/metrics';
 import { Page, Grid, Button, Panel, Icon, TextField, Tabs } from '@sparkpost/matchbox';
@@ -39,7 +41,7 @@ class SummaryReportPage extends Component {
   renderLoading () {
     const { metricsData } = this.props;
     if (metricsData.pending) {
-      return <p><Icon name='Refresh' /> Loading metrics...</p>;
+      return <div className={styles.Loading}><Loading /></div>;
     }
   }
 
@@ -102,7 +104,7 @@ class SummaryReportPage extends Component {
           key: metric,
           dataKey: metric,
           name: formatMetricLabel(metric),
-          stroke: pending ? '#ccc' : false
+          stroke: pending ? '#f8f8f8' : false
         }))}
         {...getLineChartFormatters(chartOptions)}
         referenceLines={this.createDayReferenceLines()}
@@ -111,13 +113,12 @@ class SummaryReportPage extends Component {
   }
 
   render () {
+    const { metricsData } = this.props;
     const { from, to } = this.state.options;
 
     return (
       <Layout.App>
         <Page title='Summary Report' />
-
-        {this.renderLoading()}
 
         <Panel>
 
@@ -146,10 +147,12 @@ class SummaryReportPage extends Component {
             </Grid>
           </Panel.Section>
 
-          <Panel.Section className={styles.ChartSection}>
+          <Panel.Section className={classnames(styles.ChartSection, metricsData.pending && styles.pending)}>
             {this.renderChart()}
             <Button size='small' className={styles.AddMetric}>Select Metrics</Button>
           </Panel.Section>
+
+          {this.renderLoading()}
 
         </Panel>
 

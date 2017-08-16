@@ -20,7 +20,7 @@
 
 .yAxis {
   .recharts-text.recharts-cartesian-axis-tick-value {
-    transform: translate(-6px, 0);
+    transform: translate(0, 0);
   }
 }
 
@@ -96,6 +96,9 @@
   margin-top: rem(-24);
 }
 
+.recharts-tooltip-cursor {
+  stroke: color(gray, 5) !important;
+}
 // // Containers
 // .recharts-wrapper {}
 // .recharts-responsive-container {}
