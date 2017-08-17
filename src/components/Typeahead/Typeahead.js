@@ -12,12 +12,12 @@ class Typeahead extends Component {
 
   componentDidMount () {
     window.addEventListener('click', this.handleClickOutside);
-    window.addEventListener('keydown', this.handleEsc);
+    window.addEventListener('keydown', this.handleKey);
   }
 
   componentWillUnmount () {
     window.removeEventListener('click', this.handleClickOutside);
-    window.removeEventListener('keydown', this.handleEsc);
+    window.removeEventListener('keydown', this.handleKey);
   }
 
   handleClickOutside = (e) => {
@@ -27,9 +27,13 @@ class Typeahead extends Component {
     }
   }
 
-  handleEsc = (e) => {
-    if (this.state.open && e.code === 'Escape') {
-      this.setState({ open: false });
+  handleKey = (e) => {
+    const code = e.code;
+
+    if (this.state.open) {
+      if (code === 'Escape') {
+        this.setState({ open: false });
+      }
     }
   }
 
@@ -52,16 +56,20 @@ class Typeahead extends Component {
       name = '',
       input = {},
       meta: { touched, error } = {},
-      options,
+      options = [],
+      onSelect,
       ...rest
     } = this.props;
 
     const listClasses = classnames(styles.List, this.state.open && styles.open);
+    const actions = options.map((option, index) => {
+      return { ...option, onClick: () => onSelect(index) };
+    });
 
     return (
       <div className={styles.Typeahead}>
         <div className={listClasses}>
-          <ActionList actions={options} />
+          <ActionList actions={actions} />
         </div>
         <TextField
           id={input.name || name}

@@ -6,6 +6,7 @@ import { fetch as fetchMetrics } from '../../actions/metrics';
 
 import LineChart from './components/LineChart';
 import List from './components/List';
+import TypeaheadItem from './components/TypeaheadItem';
 import MetricsModal from './components/MetricsModal';
 import DateFilter from '../../components/DateFilter/DateFilter';
 import Typeahead from '../../components/Typeahead/Typeahead';
@@ -13,7 +14,7 @@ import Layout from '../../components/Layout/Layout';
 import { Loading } from '../../components/Loading/Loading';
 
 import { getQueryFromOptions, getDayLines, getLineChartFormatters } from '../../helpers/metrics';
-import { Page, Grid, Button, Panel, Tabs, Tooltip } from '@sparkpost/matchbox';
+import { Page, Grid, Button, Panel, Tabs, Tooltip, Tag } from '@sparkpost/matchbox';
 import _ from 'lodash';
 import moment from 'moment';
 import styles from './Reports.module.scss';
@@ -33,7 +34,9 @@ class SummaryReportPage extends Component {
         metrics: ['count_targeted', 'count_delivered', 'count_accepted', 'count_bounce'],
         from,
         to
-      }
+      },
+      typeaheadList: [],
+      filterList: []
     };
   }
 
@@ -57,13 +60,26 @@ class SummaryReportPage extends Component {
   handleTypeahead = () => {
     this.setState({
       typeaheadList: [
-        { content: 'test' },
-        { content: 'test' },
-        { content: 'test' },
-        { content: 'test' },
-        { content: 'test' }
+        { content: <TypeaheadItem value='Test' type='type' /> },
+        { content: <TypeaheadItem value='Test1' type='type' /> },
+        { content: <TypeaheadItem value='Test2' type='type' /> },
+        { content: <TypeaheadItem value='Test3' type='type' /> },
+        { content: <TypeaheadItem value='Test4' type='type' /> }
       ]
     });
+  }
+
+  handleTypeaheadSelect = (index) => {
+    const { typeaheadList, filterList } = this.state;
+    this.setState({
+      filterList: [...filterList, typeaheadList[index]]
+    });
+  }
+
+  handleFilterRemove = (index) => {
+    const { filterList } = this.state;
+    filterList.splice(index, 1);
+    this.setState({ filterList: [...filterList] });
   }
 
   refresh () {
@@ -165,6 +181,7 @@ class SummaryReportPage extends Component {
                   <Typeahead
                     placeholder='Filter by domain'
                     onChange={this.handleTypeahead}
+                    onSelect={this.handleTypeaheadSelect}
                     options={this.state.typeaheadList} />
                 </div>
               </Grid.Column>
@@ -173,6 +190,14 @@ class SummaryReportPage extends Component {
               </Grid.Column>
             </Grid>
           </Panel.Section>
+
+          { this.state.filterList.length
+            ? <Panel.Section>
+                <small>Filters:</small>
+                { this.state.filterList.map((item, index) => <Tag key={index} onRemove={() => this.handleFilterRemove(index)} className={styles.TagWrapper}>{ item.content.props.value }</Tag>)}
+              </Panel.Section>
+            : null
+          }
 
           <Panel.Section className={classnames(styles.ChartSection, metricsData.pending && styles.pending)}>
 
