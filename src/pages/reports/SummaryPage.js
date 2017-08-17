@@ -130,7 +130,7 @@ class SummaryReportPage extends Component {
   renderTimeMode () {
     const { eventTime } = this.state;
 
-    return this.state.eventTime
+    return eventTime
     ? <Tooltip content='Sort events by injection time'>
         <Button onClick={this.handleTimeToggle} className={styles.ButtonSpacer} size='small'>Event Time</Button>
       </Tooltip>

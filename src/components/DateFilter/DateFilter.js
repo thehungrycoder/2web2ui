@@ -155,7 +155,6 @@ class DateFilter extends Component {
     const dateField = <TextField
       labelHidden={true}
       onClick={() => this.showDatePicker()}
-      // connectLeft={timeConnect}
       connectLeft={<Select
         options={this.rangeOptions}
         defaultValue='7days' />}

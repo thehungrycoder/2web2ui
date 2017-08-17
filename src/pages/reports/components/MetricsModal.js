@@ -4,7 +4,7 @@ import { Modal, Panel, Button } from '@sparkpost/matchbox';
 import styles from './MetricsModal.module.scss';
 
 const MetricsModal = (props) => {
-  const { open, text, handleToggle, handleApply } = props;
+  const { open, handleToggle, handleApply } = props;
   return (
     <Modal open={open}>
       <Panel title='Select Metrics' sectioned>
