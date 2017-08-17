@@ -56,10 +56,7 @@ export function authenticate (username, password, rememberMe = false) {
 
 export function refresh (token, refreshToken) {
   let oldCookie = authCookie.get();
-  if (oldCookie) {
-    oldCookie = JSON.parse(oldCookie);
-  }
-  const newCookie = Object.assign({}, oldCookie, { token, refreshToken });
+  const newCookie = Object.assign({}, oldCookie, { access_token: token, refresh_token: refreshToken });
   authCookie.save(newCookie);
   return login(newCookie);
 }
