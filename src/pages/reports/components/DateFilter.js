@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import ReactDOM from 'react-dom';
 import { subMonths, format } from 'date-fns';
-import { Grid, Button, Datepicker, TextField, Tooltip, Select, Popover, Icon } from '@sparkpost/matchbox';
+import { Grid, Button, Datepicker, TextField, Select, Popover, Icon } from '@sparkpost/matchbox';
+import { setExactTime } from 'actions/reportFilters';
 
 import styles from './DateFilter.module.scss';
 
 class DateFilter extends Component {
-  constructor (props) {
-    super(props);
-
-    this.state = {
-      showDatePicker: false,
-      eventTime: true,
-      datepicker: {
-        selecting: false,
-        selected: { from: props.from, to: props.to }
+  state = {
+    showDatePicker: false,
+    datepicker: {
+      selecting: false,
+      selected: {
+        from: null,
+        to: null
       }
-    };
+    }
   }
 
   rangeOptions = [
@@ -50,7 +50,7 @@ class DateFilter extends Component {
     this.setState({
       datepicker: {
         ...this.state.datepicker,
-        selected: { from: this.props.from, to: this.props.to }
+        selected: { from: this.props.filter.from, to: this.props.filter.to }
       }
     });
     window.addEventListener('click', this.handleClickOutside);
@@ -79,10 +79,6 @@ class DateFilter extends Component {
 
   showDatePicker = () => {
     this.setState({ showDatePicker: true });
-  }
-
-  handleTimeToggle = () => {
-    this.setState({ eventTime: !this.state.eventTime });
   }
 
   handleDayClick = (clicked) => {
@@ -131,7 +127,8 @@ class DateFilter extends Component {
 
   handleSubmit = () => {
     this.setState({ showDatePicker: false });
-    this.props.onSubmit(this.state.datepicker.selected);
+    this.props.setExactTime(this.state.datepicker.selected);
+    this.props.refresh();
   }
 
   render () {
@@ -139,6 +136,7 @@ class DateFilter extends Component {
     const fullFormat = 'MMM DD, YY h:mma';
     const dayFormat = 'MM/DD/YY';
     const timeFormat = 'h:mma';
+
     const formatted = {
       from: {
         full: format(from, fullFormat),
@@ -233,4 +231,5 @@ function getEndOfDay (date) {
   return end;
 }
 
-export default DateFilter;
+const mapStateToProps = ({ reportFilters }) => ({ filter: reportFilters });
+export default connect(mapStateToProps, { setExactTime })(DateFilter);

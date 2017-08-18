@@ -2,41 +2,33 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import classnames from 'classnames';
-import { fetch as fetchMetrics } from '../../actions/metrics';
 
+import { fetch as fetchMetrics } from 'actions/metrics';
+import { getQueryFromOptions, getDayLines, getLineChartFormatters } from 'helpers/metrics';
+
+import { Page, Button, Panel, Tabs, Tooltip } from '@sparkpost/matchbox';
+import Layout from 'components/Layout/Layout';
+import { Loading } from 'components/Loading/Loading';
+
+import Filters from '../components/Filters';
 import LineChart from './components/LineChart';
 import List from './components/List';
-import TypeaheadItem from './components/TypeaheadItem';
 import MetricsModal from './components/MetricsModal';
-import DateFilter from '../../components/DateFilter/DateFilter';
-import Typeahead from '../../components/Typeahead/Typeahead';
-import Layout from '../../components/Layout/Layout';
-import { Loading } from '../../components/Loading/Loading';
 
-import { getQueryFromOptions, getDayLines, getLineChartFormatters } from '../../helpers/metrics';
-import { Page, Grid, Button, Panel, Tabs, Tooltip, Tag } from '@sparkpost/matchbox';
 import _ from 'lodash';
-import moment from 'moment';
-import styles from './Reports.module.scss';
+import styles from './SummaryPage.module.scss';
 // import qs from 'query-string';
 
 class SummaryReportPage extends Component {
   constructor (props) {
     super(props);
 
-    const to = new Date();
-    const from = moment(to).subtract(1, 'day').toDate();
-
     this.state = {
       showMetrics: false,
       eventTime: true,
       options: {
-        metrics: ['count_targeted', 'count_delivered', 'count_accepted', 'count_bounce'],
-        from,
-        to
-      },
-      typeaheadList: [],
-      filterList: []
+        metrics: ['count_targeted', 'count_delivered', 'count_accepted', 'count_bounce']
+      }
     };
   }
 
@@ -51,42 +43,14 @@ class SummaryReportPage extends Component {
     }
   }
 
-  handleSubmit = (selected) => {
-    this.setState({
-      options: { ...this.state.options, from: selected.from, to: selected.to }
-    }, () => this.refresh());
-  }
+  refresh = () => {
+    const { to, from } = this.props.filter;
 
-  handleTypeahead = () => {
-    this.setState({
-      typeaheadList: [
-        { content: <TypeaheadItem value='Test' type='type' /> },
-        { content: <TypeaheadItem value='Test1' type='type' /> },
-        { content: <TypeaheadItem value='Test2' type='type' /> },
-        { content: <TypeaheadItem value='Test3' type='type' /> },
-        { content: <TypeaheadItem value='Test4' type='type' /> }
-      ]
-    });
-  }
-
-  handleTypeaheadSelect = (index) => {
-    const { typeaheadList, filterList } = this.state;
-    this.setState({
-      filterList: [...filterList, typeaheadList[index]]
-    });
-  }
-
-  handleFilterRemove = (index) => {
-    const { filterList } = this.state;
-    filterList.splice(index, 1);
-    this.setState({ filterList: [...filterList] });
-  }
-
-  refresh () {
     if (this.props.metricsData.pending || (this.state.chartOptions === this.state.options)) {
       return;
     }
-    const query = getQueryFromOptions(this.state.options);
+
+    const query = getQueryFromOptions({ ...this.state.options, to, from });
 
     this.props.fetchMetrics('deliverability/time-series', query)
       .then(() => this.setState({ chartOptions: {
@@ -157,67 +121,28 @@ class SummaryReportPage extends Component {
 
   render () {
     const { metricsData } = this.props;
-    const { from, to } = this.state.options;
 
     return (
       <Layout.App>
         <Page title='Summary Report' />
 
+        <Filters refresh={this.refresh}/>
+
         <Panel>
-
-          <Panel.Section >
-            <Grid>
-              <Grid.Column xs={12} md={6}>
-                <div className={styles.FieldWrapper}>
-                  <DateFilter
-                    from={from}
-                    to={to}
-                    onSubmit={this.handleSubmit}
-                    />
-                </div>
-              </Grid.Column>
-              <Grid.Column xs={12} md={5}>
-                <div className={styles.FieldWrapper}>
-                  <Typeahead
-                    placeholder='Filter by domain'
-                    onChange={this.handleTypeahead}
-                    onSelect={this.handleTypeaheadSelect}
-                    options={this.state.typeaheadList} />
-                </div>
-              </Grid.Column>
-              <Grid.Column xs={12} md={1}>
-                <Button fullWidth>Share</Button>
-              </Grid.Column>
-            </Grid>
-          </Panel.Section>
-
-          { this.state.filterList.length
-            ? <Panel.Section>
-                <small>Filters:</small>
-                { this.state.filterList.map((item, index) => <Tag key={index} onRemove={() => this.handleFilterRemove(index)} className={styles.TagWrapper}>{ item.content.props.value }</Tag>)}
-              </Panel.Section>
-            : null
-          }
-
           <Panel.Section className={classnames(styles.ChartSection, metricsData.pending && styles.pending)}>
-
             {this.renderChart()}
 
             <div className={styles.Controls}>
               <Button size='small' onClick={this.handleMetricsToggle}>Select Metrics</Button>
-
               {this.renderTimeMode()}
-
               <Button.Group className={styles.ButtonSpacer}>
                 <Button size='small' primary>Linear</Button>
                 <Button size='small'>Log</Button>
               </Button.Group>
             </div>
-
           </Panel.Section>
 
           {this.renderLoading()}
-
         </Panel>
 
         <Tabs
@@ -243,5 +168,5 @@ class SummaryReportPage extends Component {
 function formatMetricLabel (name) {
   return _.startCase(name.replace(/^count_/, ''));
 }
-
-export default withRouter(connect(({ metrics }) => ({ metricsData: metrics }), { fetchMetrics })(SummaryReportPage));
+const mapStateToProps = ({ metrics, reportFilters }) => ({ metricsData: metrics, filter: reportFilters });
+export default withRouter(connect(mapStateToProps, { fetchMetrics })(SummaryReportPage));

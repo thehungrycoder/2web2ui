@@ -1,0 +1,12 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.FieldWrapper {
+  margin-bottom: spacing();
+  @media screen and (min-width: breakpoint(medium)) {
+    margin-bottom: 0;
+  }
+}
+
+.TagWrapper {
+  margin: 0 spacing(small);
+}

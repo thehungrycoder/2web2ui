@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import classnames from 'classnames';
 import { TextField, ActionList } from '@sparkpost/matchbox';
+import TypeaheadItem from './TypeaheadItem';
 
 import styles from './Typeahead.module.scss';
 
@@ -63,7 +64,10 @@ class Typeahead extends Component {
 
     const listClasses = classnames(styles.List, this.state.open && styles.open);
     const actions = options.map((option, index) => {
-      return { ...option, onClick: () => onSelect(index) };
+      return {
+        content: <TypeaheadItem value={option.value} type={option.type} />,
+        onClick: () => onSelect(index)
+      };
     });
 
     return (

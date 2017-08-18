@@ -21,13 +21,6 @@
   pointer-events: none;
 }
 
-.FieldWrapper {
-  margin-bottom: spacing();
-  @media screen and (min-width: breakpoint(medium)) {
-    margin-bottom: 0;
-  }
-}
-
 .Loading {
   position: absolute;
   top: 55%;
@@ -51,8 +44,4 @@
 
 .ButtonSpacer {
   margin-left: spacing(small);
-}
-
-.TagWrapper {
-  margin: 0 spacing(small);
 }
