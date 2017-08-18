@@ -52,7 +52,7 @@ export class DashboardPage extends Component {
   render() {
     return (
       <Layout.App>
-        <Page title='Dashboard'/>
+        <Page title='Control Panel'/>
 
         { this.renderOneCta() }
 
