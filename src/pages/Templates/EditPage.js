@@ -28,7 +28,7 @@ class EditPage extends Component {
     deleteOpen: false
   };
 
-  componentDidMount () {
+  componentDidMount() {
     const {
       match,
       getDraft,
@@ -41,7 +41,7 @@ class EditPage extends Component {
     getPublished(match.params.id);
   }
 
-  handlePublish (values) {
+  handlePublish(values) {
     const { update, publish, match, getDraft } = this.props;
     return update(values)
       .then(() => publish(match.params.id))
@@ -49,23 +49,23 @@ class EditPage extends Component {
       .then(() => this.setState({ shouldRedirectToPublished: true }));
   }
 
-  handleSave (values) {
+  handleSave(values) {
     const { update, match, getDraft } = this.props;
     return update(values)
       .then(() => getDraft(match.params.id));
   }
 
-  handleDelete () {
+  handleDelete() {
     const { deleteTemplate, match } = this.props;
     return deleteTemplate(match.params.id)
       .then(() => this.setState({ shouldRedirectToList: true }));
   }
 
-  handleDeleteModalToggle () {
+  handleDeleteModalToggle() {
     this.setState({ deleteOpen: !this.state.deleteOpen });
   }
 
-  renderPageHeader () {
+  renderPageHeader() {
     const {
       handleSubmit,
       published,
@@ -114,7 +114,7 @@ class EditPage extends Component {
       to: '/templates'
     };
 
-    let title = `${match.params.id} (Draft)`;
+    const title = `${match.params.id} (Draft)`;
 
     return (
       <Page
@@ -126,7 +126,7 @@ class EditPage extends Component {
     );
   }
 
-  render () {
+  render() {
     const {
       match,
       loading,

@@ -1,7 +1,7 @@
 import React from 'react';
 import Item from '../Item';
 import { render } from 'enzyme';
-import { MemoryRouter } from 'react-router-dom'
+import { MemoryRouter } from 'react-router-dom';
 
 
 describe('Navigation', () => {

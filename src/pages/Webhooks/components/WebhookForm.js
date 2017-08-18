@@ -7,7 +7,7 @@ import CheckboxGroup from './CheckboxGroup';
 import { TextFieldWrapper, SelectWrapper, RadioGroup } from '../../../components/reduxFormWrappers';
 import { Redirect } from 'react-router-dom';
 
-const required = value => value ? undefined : 'Required';
+const required = (value) => value ? undefined : 'Required';
 
 const basicAuthFields = (
   <div>
@@ -33,9 +33,7 @@ const oAuth2Fields = (
    CheckboxGroup component */
 const buildCheckBoxes = (eventsTree) => {
   const checkboxes = eventsTree.map((parent, index) => {
-    const options = parent.events.map((child) => {
-      return { label: child.label, value: child.key };
-    });
+    const options = parent.events.map((child) => ({ label: child.label, value: child.key }));
 
     return (
       <Grid.Column xs={2} lg={2} md={2} key={index}>
@@ -47,7 +45,7 @@ const buildCheckBoxes = (eventsTree) => {
   return (<Grid>{checkboxes}</Grid>);
 };
 
-let WebhookForm = props => {
+let WebhookForm = (props) => {
   const {
     handleSubmit,
     submitting,
@@ -98,8 +96,8 @@ let WebhookForm = props => {
         component={RadioGroup}
         title='Events'
         options={[
-          {value: 'all', label: 'All'},
-          {value: 'select', label: 'Select'}
+          { value: 'all', label: 'All' },
+          { value: 'select', label: 'Select' }
         ]}
       />
 
@@ -111,7 +109,7 @@ let WebhookForm = props => {
         name='auth'
         label='Authentication'
         component={SelectWrapper}
-        options={[{value: '', label: 'None'}, {value: 'basic', label: 'Basic Auth'}, {value: 'oauth2', label: 'OAuth 2.0'}]}
+        options={[{ value: '', label: 'None' }, { value: 'basic', label: 'Basic Auth' }, { value: 'oauth2', label: 'OAuth 2.0' }]}
       />
 
       { auth && authFields }

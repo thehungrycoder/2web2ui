@@ -132,7 +132,10 @@
         }
       ],
       "complexity": "off",
-      "one-var": ["error", "never"],
+      "one-var": [
+        "error",
+        "never"
+      ],
       "object-curly-spacing": [
         "error",
         "always",
@@ -141,7 +144,10 @@
           "objectsInObjects": false
         }
       ],
-      "block-spacing": ["error", "always"],
+      "block-spacing": [
+        "error",
+        "always"
+      ],
       "operator-linebreak": [
         "error",
         "after",

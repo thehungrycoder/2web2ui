@@ -6,8 +6,8 @@ import './LineChart.scss';
 const colors = ['#37aadc', '#9bcd5a', '#b70c9e', '#e3af00', '#6D39A1'];
 
 export default class SpLineChart extends React.Component {
-  renderLines () {
-    const { lines = [] } = this.props;
+  renderLines() {
+    const { lines = []} = this.props;
     let colorIndex = 0;
     return lines.map((line) => {
       const lineProps = {
@@ -22,12 +22,12 @@ export default class SpLineChart extends React.Component {
     });
   }
 
-  renderReferenceLines () {
-    const { referenceLines = [] } = this.props;
+  renderReferenceLines() {
+    const { referenceLines = []} = this.props;
     return referenceLines.map((props) => <ReferenceLine {...props} />);
   }
 
-  render () {
+  render() {
     const {
       data,
       xTickFormatter = _.identity,

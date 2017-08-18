@@ -12,9 +12,9 @@ import { resolveOnCondition } from '../helpers/promise';
 
 const maxRefreshRetries = 3;
 let refreshing = false;
-let refreshTokensUsed = new Set();
+const refreshTokensUsed = new Set();
 
-export default function sparkpostApiRequest ({ dispatch, getState }) {
+export default function sparkpostApiRequest({ dispatch, getState }) {
   return (next) => (action) => {
     next(action);
 
@@ -53,7 +53,7 @@ export default function sparkpostApiRequest ({ dispatch, getState }) {
       }, _.noop);
     }
 
-    return sparkpostRequest(httpOptions).then(({ data: { results } }) => {
+    return sparkpostRequest(httpOptions).then(({ data: { results }}) => {
       // we only get here if the request returned a 2xx status code
       dispatch({
         type: SUCCESS_TYPE,
@@ -66,7 +66,7 @@ export default function sparkpostApiRequest ({ dispatch, getState }) {
       }
     },
     // API request failed
-    ({ message, response = {} }) => {
+    ({ message, response = {}}) => {
       // NOTE: if this is a 401 and we have a refresh token, we need to do a
       // refresh to get a new auth token and then re-dispatch this action
       if (response.status === 401 && auth.refreshToken && retries <= maxRefreshRetries) {
@@ -88,9 +88,7 @@ export default function sparkpostApiRequest ({ dispatch, getState }) {
         return useRefreshToken(auth.refreshToken)
 
           // dispatch a refresh action to save new token results in cookie and store
-          .then(({ data } = {}) => {
-            return dispatch(refresh(data.access_token, data.refresh_token));
-          })
+          .then(({ data } = {}) => dispatch(refresh(data.access_token, data.refresh_token)))
 
           // dispatch the original action again, now that we have a new token ...
           // if anything in this refresh flow blew up, log out

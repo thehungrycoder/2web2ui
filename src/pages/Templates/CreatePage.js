@@ -18,17 +18,17 @@ class CreatePage extends Component {
     shouldRedirect: false
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.props.clear();
   }
 
-  handleCreate (values) {
+  handleCreate(values) {
     const { create } = this.props;
     return create(values)
       .then(() => this.setState({ shouldRedirect: true }));
   }
 
-  renderPageHeader () {
+  renderPageHeader() {
     const { handleSubmit, submitting } = this.props;
 
     const primaryAction = {
@@ -52,7 +52,7 @@ class CreatePage extends Component {
     );
   }
 
-  render () {
+  render() {
     const { id } = this.props;
 
     if (this.state.shouldRedirect) {

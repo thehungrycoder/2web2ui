@@ -1,4 +1,4 @@
-export function received (payload, meta) {
+export function received(payload, meta) {
   return {
     type: 'API_FAILURE_RECEIVED',
     payload,
@@ -6,7 +6,7 @@ export function received (payload, meta) {
   };
 }
 
-export function clear () {
+export function clear() {
   return {
     type: 'API_FAILURE_CLEARED'
   };

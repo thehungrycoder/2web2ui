@@ -11,16 +11,16 @@ class GlobalError extends Component {
     show: false // Controls the .show css class
   }
 
-  handleDismiss () {
+  handleDismiss() {
     this.setState({ show: false });
     setTimeout(() => this.props.clear(), 400); // Wait for transition out before killing
   }
 
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps(nextProps) {
     this.setState({ show: !!nextProps.error });
   }
 
-  render () {
+  render() {
     const { error } = this.props;
 
     const classes = classnames(
@@ -47,5 +47,5 @@ class GlobalError extends Component {
   }
 }
 
-const mapStateToProps = ({ apiFailure: { error } }) => ({ error });
+const mapStateToProps = ({ apiFailure: { error }}) => ({ error });
 export default connect(mapStateToProps, { clear })(GlobalError);

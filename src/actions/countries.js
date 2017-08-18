@@ -6,5 +6,5 @@ export function fetch() {
       method: 'GET',
       url: '/account/countries'
     }
-  }
-};
+  };
+}

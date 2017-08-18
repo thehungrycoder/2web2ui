@@ -11,7 +11,7 @@ import { Panel, Banner } from '@sparkpost/matchbox';
 import WebhookForm from './WebhookForm';
 
 class EditTab extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
 
     this.state = {
@@ -26,7 +26,7 @@ class EditTab extends Component {
   /*
     Dispatches eventDocs if it isn't set on state already
   */
-  componentDidMount () {
+  componentDidMount() {
     if (!this.props.eventDocs) {
       this.props.getEventDocs();
     }
@@ -36,7 +36,7 @@ class EditTab extends Component {
    Gets webhook if updated, then resets updated to false
    and sets showBanner.
   */
-  componentDidUpdate () {
+  componentDidUpdate() {
     if (this.state.updated) {
       this.props.getWebhook(this.props.id);
       this.setState({ updated: false, showBanner: true });
@@ -47,7 +47,7 @@ class EditTab extends Component {
     Called by updateWebhook. Figures out if the webhooks auth details need to be updated,
     then returns those updates if so.
   */
-  resolveAuthUpdates (values, webhook) {
+  resolveAuthUpdates(values, webhook) {
     const { auth, basicUser, basicPass, clientId, clientSecret, tokenURL } = values;
     const update = {};
 
@@ -104,7 +104,7 @@ class EditTab extends Component {
     Passed as onSubmit to WebhookForm. Figures out what updates need to be passed
     to the updateWebhook action.
   */
-  updateWebhook (values, webhook, allEvents) {
+  updateWebhook(values, webhook, allEvents) {
     const authDetails = this.resolveAuthUpdates(values, webhook);
 
     const update = { ...authDetails };
@@ -144,29 +144,25 @@ class EditTab extends Component {
           to webhook, and if other resources need to use webhooks/documentation
           we can put it on its own key in the state.
   */
-  buildEventsTree (eventGroups) {
-    return _.map(eventGroups, ({display_name, description, events}, key) => {
-      return {
-        key: key,
+  buildEventsTree(eventGroups) {
+    return _.map(eventGroups, ({ display_name, description, events }, key) => ({
+      key: key,
+      label: display_name,
+      description: description,
+      events: _.map(events, ({ display_name, description }, eventKey) => ({
+        key: eventKey,
         label: display_name,
-        description: description,
-        events: _.map(events, ({display_name, description}, eventKey) => ({
-          key: eventKey,
-          label: display_name,
-          description: description
-        }))
-      };
-    });
+        description: description
+      }))
+    }));
   }
 
   /*
     Makes an array with all possible events from the eventsTree.
     Bound to a _.once in constructor
   */
-  getAllEvents (eventsTree) {
-    return _.flatten(_.map(eventsTree, ({events}) => {
-      return _.map(events, ({key}) => (key));
-    }));
+  getAllEvents(eventsTree) {
+    return _.flatten(_.map(eventsTree, ({ events }) => _.map(events, ({ key }) => (key))));
   }
 
   dismissBanner = () => {
@@ -184,7 +180,7 @@ class EditTab extends Component {
     return <Banner title={title} status={status} onDismiss={this.dismissBanner}/>;
   }
 
-  render () {
+  render() {
     const { eventsLoading } = this.props;
 
     /*
@@ -211,9 +207,9 @@ class EditTab extends Component {
 
     // Build event arrays if not all events
     if (!allChecked) {
-      eventsTree.forEach(({key, events}) => {
-        const filtered = _.filter(events, ({key}) => (_.includes(webhook.events, key)));
-        checkedEvents[key] = _.map(filtered, ({key}) => (key));
+      eventsTree.forEach(({ key, events }) => {
+        const filtered = _.filter(events, ({ key }) => (_.includes(webhook.events, key)));
+        checkedEvents[key] = _.map(filtered, ({ key }) => (key));
       });
     }
 
@@ -228,7 +224,7 @@ class EditTab extends Component {
       <Panel sectioned>
         { showBanner && this.renderBanner(this.props.updateSuccess) }
         <Panel.Section>
-          <WebhookForm eventsTree={eventsTree} allChecked={allChecked} newWebhook={false} checkedEvents={checkedEvents} onSubmit={(values) => { return this.updateWebhook(values, webhook, allEvents); }}/>
+          <WebhookForm eventsTree={eventsTree} allChecked={allChecked} newWebhook={false} checkedEvents={checkedEvents} onSubmit={(values) => this.updateWebhook(values, webhook, allEvents)}/>
         </Panel.Section>
       </Panel>
     );
