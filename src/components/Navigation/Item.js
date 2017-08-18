@@ -6,7 +6,7 @@ import { Icon } from '@sparkpost/matchbox';
 import styles from './Navigation.module.scss';
 
 export class Item extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
 
     this.state = {
@@ -14,22 +14,22 @@ export class Item extends Component {
     };
   }
 
-  isActive () {
+  isActive() {
     const { to, location } = this.props;
     return location.pathname.includes(to);
   }
 
-  handleParentClick () {
+  handleParentClick() {
     this.setState({ open: !this.state.open });
   }
 
-  componentWillMount () {
+  componentWillMount() {
     if (this.isActive()) {
       this.setState({ open: true });
     }
   }
 
-  renderChildren () {
+  renderChildren() {
     const { children, location } = this.props;
 
     return (
@@ -39,7 +39,7 @@ export class Item extends Component {
     );
   }
 
-  render () {
+  render() {
     const {
       to,
       icon,

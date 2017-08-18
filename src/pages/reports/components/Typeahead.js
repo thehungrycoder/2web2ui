@@ -11,12 +11,12 @@ class Typeahead extends Component {
     open: false
   }
 
-  componentDidMount () {
+  componentDidMount() {
     window.addEventListener('click', this.handleClickOutside);
     window.addEventListener('keydown', this.handleKey);
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     window.removeEventListener('click', this.handleClickOutside);
     window.removeEventListener('keydown', this.handleKey);
   }
@@ -52,7 +52,7 @@ class Typeahead extends Component {
     }
   }
 
-  render () {
+  render() {
     const {
       name = '',
       input = {},
@@ -63,12 +63,10 @@ class Typeahead extends Component {
     } = this.props;
 
     const listClasses = classnames(styles.List, this.state.open && styles.open);
-    const actions = options.map((option, index) => {
-      return {
-        content: <TypeaheadItem value={option.value} type={option.type} />,
-        onClick: () => onSelect(index)
-      };
-    });
+    const actions = options.map((option, index) => ({
+      content: <TypeaheadItem value={option.value} type={option.type} />,
+      onClick: () => onSelect(index)
+    }));
 
     return (
       <div className={styles.Typeahead}>

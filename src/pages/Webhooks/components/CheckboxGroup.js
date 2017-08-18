@@ -4,16 +4,16 @@ import { Checkbox } from '@sparkpost/matchbox';
 /* Returns a Checkbox.Group that is controled by a parent checkbox. The group
    is based on the options prop, and the label for the parent checkbox comes
    through the parent prop. Built to be passed to a react-redux Field component prop. */
-const CheckboxGroup = ({input, options, parent}) => {
-  const {name, onChange} = input;
+const CheckboxGroup = ({ input, options, parent }) => {
+  const { name, onChange } = input;
 
   const checkedValues = input.value; // array of currently checked values
-  const allValues = options.map(o => o.value); // all possible values from options, used for parentOnChange
+  const allValues = options.map((o) => o.value); // all possible values from options, used for parentOnChange
   const parentChecked = checkedValues.length === allValues.length; // controls whether the parent checkbox is checked
 
   /* Array of checkboxes for each option passed in. Each checkbox has
      its own onChange to add or remove itself from checkedValues */
-  const checkboxes = options.map(({label, value}, index) => {
+  const checkboxes = options.map(({ label, value }, index) => {
     // Adds or removes its own value from checkedValues then calls input's onChange
     const handleChange = (event) => {
       const arr = [...checkedValues];

@@ -5,11 +5,11 @@ import Layout from '../../components/Layout/Layout';
 import { Panel, Table } from '@sparkpost/matchbox';
 
 export class AccountUserTables extends Component {
-  renderKeyValue (object, key) {
+  renderKeyValue(object, key) {
     return <Table.Row key={key} rowData={ [key, JSON.stringify(this.props[object][key])] } />;
   }
 
-  render () {
+  render() {
     const accountMarkup = this.props.account
       ? Object.keys(this.props.account).map((key) => this.renderKeyValue('account', key))
       : null;
@@ -26,7 +26,7 @@ export class AccountUserTables extends Component {
           <Table>
             <thead>
               <Table.Row>
-                <Table.HeaderCell style={{width: '200px'}}>Key</Table.HeaderCell>
+                <Table.HeaderCell style={{ width: '200px' }}>Key</Table.HeaderCell>
                 <Table.HeaderCell>Value</Table.HeaderCell>
               </Table.Row>
             </thead>
@@ -40,7 +40,7 @@ export class AccountUserTables extends Component {
           <Table>
             <thead>
               <Table.Row>
-                <Table.HeaderCell style={{width: '200px'}}>Key</Table.HeaderCell>
+                <Table.HeaderCell style={{ width: '200px' }}>Key</Table.HeaderCell>
                 <Table.HeaderCell>Value</Table.HeaderCell>
               </Table.Row>
             </thead>

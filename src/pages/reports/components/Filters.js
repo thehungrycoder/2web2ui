@@ -32,7 +32,7 @@ class Filters extends Component {
     this.props.removeFilter(index);
   }
 
-  render () {
+  render() {
     const { filter, refresh } = this.props;
 
     return (

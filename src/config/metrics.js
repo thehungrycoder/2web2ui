@@ -1,4 +1,4 @@
-const list = [
+export const list = [
   {
     key: 'count_targeted',
     label: 'Targeted',

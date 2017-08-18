@@ -31,7 +31,7 @@ const ProgressLabel = ({ title, secondaryTitle }) => (
 );
 
 class UsageReport extends Component {
-  render () {
+  render() {
     const { subscription, usage } = this.props;
 
     if (!subscription || !usage) {
@@ -91,5 +91,5 @@ class UsageReport extends Component {
   }
 }
 
-const mapStateToProps = ({ account: { usage, subscription } }) => ({ usage, subscription });
+const mapStateToProps = ({ account: { usage, subscription }}) => ({ usage, subscription });
 export default connect(mapStateToProps)(UsageReport);

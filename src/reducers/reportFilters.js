@@ -19,7 +19,7 @@ export default (state = initialState, action) => {
       return { ...state };
 
     case 'ADD_FILTER':
-      return { ...state, activeList: [ ...state.activeList, action.payload ] };
+      return { ...state, activeList: [ ...state.activeList, action.payload ]};
 
     case 'REMOVE_FILTER':
       return {

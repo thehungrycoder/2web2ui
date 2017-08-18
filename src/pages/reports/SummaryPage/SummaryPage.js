@@ -20,7 +20,7 @@ import styles from './SummaryPage.module.scss';
 // import qs from 'query-string';
 
 class SummaryReportPage extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
 
     this.state = {
@@ -32,11 +32,11 @@ class SummaryReportPage extends Component {
     };
   }
 
-  componentWillMount () {
+  componentWillMount() {
     this.refresh();
   }
 
-  renderLoading () {
+  renderLoading() {
     const { metricsData } = this.props;
     if (metricsData.pending) {
       return <div className={styles.Loading}><Loading /></div>;
@@ -56,11 +56,11 @@ class SummaryReportPage extends Component {
       .then(() => this.setState({ chartOptions: {
         ...this.state.options,
         precision: query.precision
-      } }));
+      }}));
   }
 
-  createDayReferenceLines () {
-    const { results = {} } = this.props.metricsData;
+  createDayReferenceLines() {
+    const { results = {}} = this.props.metricsData;
     const { chartOptions } = this.state;
 
     return getDayLines(results, chartOptions).map(({ ts }) => ({
@@ -71,10 +71,10 @@ class SummaryReportPage extends Component {
     }));
   }
 
-  renderChart () {
+  renderChart() {
     const { results = [], pending } = this.props.metricsData;
     const { chartOptions = false } = this.state;
-    const { metrics = [] } = chartOptions;
+    const { metrics = []} = chartOptions;
 
     if (!results.length || !chartOptions) {
       return null;
@@ -107,7 +107,7 @@ class SummaryReportPage extends Component {
     this.setState({ eventTime: !this.state.eventTime });
   }
 
-  renderTimeMode () {
+  renderTimeMode() {
     const { eventTime } = this.state;
 
     return eventTime
@@ -119,7 +119,7 @@ class SummaryReportPage extends Component {
       </Tooltip>;
   }
 
-  render () {
+  render() {
     const { metricsData } = this.props;
 
     return (
@@ -165,7 +165,7 @@ class SummaryReportPage extends Component {
 }
 
 // this will be replaced with proper metrics config
-function formatMetricLabel (name) {
+function formatMetricLabel(name) {
   return _.startCase(name.replace(/^count_/, ''));
 }
 const mapStateToProps = ({ metrics, reportFilters }) => ({ metricsData: metrics, filter: reportFilters });

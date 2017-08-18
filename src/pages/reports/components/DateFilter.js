@@ -46,7 +46,7 @@ class DateFilter extends Component {
     }
   ];
 
-  componentDidMount () {
+  componentDidMount() {
     this.setState({
       datepicker: {
         ...this.state.datepicker,
@@ -57,7 +57,7 @@ class DateFilter extends Component {
     window.addEventListener('keydown', this.handleEsc);
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     window.removeEventListener('click', this.handleClickOutside);
     window.removeEventListener('keydown', this.handleEsc);
   }
@@ -112,7 +112,7 @@ class DateFilter extends Component {
     }
   }
 
-  getOrderedRange (newDate) {
+  getOrderedRange(newDate) {
     const { from, to } = this.state.datepicker.beforeSelected;
     return (from.getTime() <= newDate.getTime()) ? { from, to: newDate } : { from: newDate, to };
   }
@@ -131,7 +131,7 @@ class DateFilter extends Component {
     this.props.refresh();
   }
 
-  render () {
+  render() {
     const { from, to } = this.state.datepicker.selected;
     const fullFormat = 'MMM DD, YY h:mma';
     const dayFormat = 'MM/DD/YY';
@@ -221,7 +221,7 @@ class DateFilter extends Component {
   }
 }
 
-function getEndOfDay (date) {
+function getEndOfDay(date) {
   const end = new Date(date);
   end.setHours(11);
   end.setMinutes(59);
