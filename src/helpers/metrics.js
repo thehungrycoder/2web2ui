@@ -23,7 +23,7 @@ export {
 };
 
 const getTickFormatter = _.memoize((precisionType) => {
-  let tickFormat = (precisionType === 'hours') ? 'ha' : 'MMM Do';
+  const tickFormat = (precisionType === 'hours') ? 'ha' : 'MMM Do';
   return (tick) => moment(tick).format(tickFormat);
 });
 
@@ -35,7 +35,7 @@ const getTooltipLabelFormatter = _.memoize((precisionType) => {
   return (label) => moment(label).format(labelFormat);
 });
 
-function getLineChartFormatters ({ precision }) {
+function getLineChartFormatters({ precision }) {
   const formatters = {};
   const precisionType = getPrecisionType(precision);
 
@@ -58,7 +58,7 @@ function getLineChartFormatters ({ precision }) {
   return formatters;
 }
 
-function getQueryFromOptions ({ from, to, metrics }) {
+function getQueryFromOptions({ from, to, metrics }) {
   from = moment(from).utc();
   to = moment(to).utc();
 
@@ -75,16 +75,16 @@ function getQueryFromOptions ({ from, to, metrics }) {
  * and returns the closest precision value
  *
  */
-function getPrecision (from, to = moment()) {
+function getPrecision(from, to = moment()) {
   const diff = to.diff(from, 'minutes');
   return precisionMap.find(({ time }) => diff <= time).value;
 }
 
-function getPrecisionType (precision) {
+function getPrecisionType(precision) {
   return (indexedPrecisions[precision].time <= (60 * 24 * 2)) ? 'hours' : 'days';
 }
 
-function getDayLines (data, { precision = 'day' }) {
+function getDayLines(data, { precision = 'day' }) {
   if (getPrecisionType(precision) !== 'hours') {
     return [];
   }

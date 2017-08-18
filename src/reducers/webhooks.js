@@ -29,13 +29,13 @@ export default (state = initialState, action) => {
     /* CREATE */
 
     case 'CREATE_WEBHOOK_PENDING':
-      return { ...state, webhook: {} };
+      return { ...state, webhook: {}};
 
     case 'CREATE_WEBHOOK_SUCCESS':
-      return { ...state, webhook: { id: action.payload.id } };
+      return { ...state, webhook: { id: action.payload.id }};
 
     case 'CREATE_WEBHOOK_FAIL':
-      return { ...state, webhook: {} };
+      return { ...state, webhook: {}};
 
     /* UPDATE */
 

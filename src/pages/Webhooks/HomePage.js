@@ -16,11 +16,11 @@ class WebhooksHome extends Component {
     currentPage: 0
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.props.listWebhooks();
   }
 
-  renderRow (webhook) {
+  renderRow(webhook) {
     const nameLink = <Link to={`/webhooks/details/${webhook.id}`}>{webhook.name}</Link>;
     return (
         <Table.Row key={webhook.id} rowData={ [nameLink, webhook.id, webhook.target]} >
@@ -28,14 +28,14 @@ class WebhooksHome extends Component {
     );
   }
 
-  renderWebhookRows (webhooks, currentPage, perPage) {
+  renderWebhookRows(webhooks, currentPage, perPage) {
     const currentIndex = currentPage * perPage;
     return webhooks.slice(currentIndex, currentIndex + perPage).map(
       (webhook) => this.renderRow(webhook)
     );
   }
 
-  render () {
+  render() {
     const { webhooks, listLoading } = this.props;
 
     // This should probably be a universal page-loading component
@@ -74,7 +74,7 @@ class WebhooksHome extends Component {
            pages={Math.ceil(webhooks.length / this.state.perPage)}
            pageRange={5}
            initialIndex={0}
-           onChange={(index) => { this.setState({currentPage: index}); }}
+           onChange={(index) => { this.setState({ currentPage: index }); }}
          />
         <Button.Group>
          Show:
@@ -87,7 +87,7 @@ class WebhooksHome extends Component {
   }
 }
 
-function mapStateToProps ({ webhooks }) {
+function mapStateToProps({ webhooks }) {
   return {
     webhooks: webhooks.list,
     listLoading: webhooks.listLoading

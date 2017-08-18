@@ -4,7 +4,7 @@ import { Panel, Button, Modal } from '@sparkpost/matchbox';
 import styles from './DeleteModal.module.scss';
 
 class DeleteModal extends Component {
-  render () {
+  render() {
     const { open, handleToggle, handleDelete } = this.props;
 
     return (

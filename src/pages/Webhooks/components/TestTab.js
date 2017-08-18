@@ -14,25 +14,25 @@ class TestTab extends Component {
     buildRequest: _.once(this.buildTestRequest)
   }
 
-  componentDidMount () {
+  componentDidMount() {
     if (!this.props.samples) {
       this.props.getEventSamples(this.props.webhook.events);
     }
   }
 
-  buildTestRequest (webhook, payload) {
+  buildTestRequest(webhook, payload) {
     const parser = document.createElement('a');
     parser.href = webhook.target;
 
     const requestLines = [
-      'POST ' + parser.pathname + ' HTTP/1.1',
-      'Host: ' + parser.hostname,
+      `POST ${parser.pathname} HTTP/1.1`,
+      `Host: ${parser.hostname}`,
       'Content-Type: application/json',
       'X-MessageSystems-Batch-ID: 77c2b630-d712-11e4-9642-efc2723b99c1' // hardcoded value in the API
     ];
 
     if (webhook.auth_token) {
-      requestLines.push('X-MessageSystems-Webhook-Token: ' + webhook.auth_token);
+      requestLines.push(`X-MessageSystems-Webhook-Token: ${webhook.auth_token}`);
     }
     if (webhook.auth_type === 'oauth2') {
       requestLines.push('Authorization: Bearer <OAUTH2 ACCESS TOKEN>');
@@ -46,12 +46,12 @@ class TestTab extends Component {
     return requestLines.join('\n');
   }
 
-  testWebhook (id, payload) {
+  testWebhook(id, payload) {
     this.props.testWebhook(id, payload);
     this.setState({ testSent: true });
   }
 
-  render () {
+  render() {
     if (this.props.samplesLoading) {
       return (<div>Loading...</div>);
     }
@@ -81,7 +81,7 @@ class TestTab extends Component {
   }
 }
 
-const mapStateToProps = ({webhooks}) => ({
+const mapStateToProps = ({ webhooks }) => ({
   samples: webhooks.samples,
   samplesLoading: webhooks.samplesLoading,
   testLoading: webhooks.testLoading,

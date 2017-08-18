@@ -5,7 +5,7 @@ import { logout } from '../../actions/auth';
 import styles from './Navigation.module.scss';
 
 export class Footer extends Component {
-  render () {
+  render() {
     return (
       <ul className={styles.footer}>
         <li><a className={styles.link}>Help &amp; API</a></li>

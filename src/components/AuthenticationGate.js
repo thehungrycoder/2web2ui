@@ -6,7 +6,7 @@ import authCookie from '../helpers/authCookie';
 import { login } from '../actions/auth';
 
 export class _AuthenticationGate extends Component {
-  componentWillMount () {
+  componentWillMount() {
     const { auth } = this.props;
     if (auth.loggedIn && auth.token) {
       return;
@@ -18,9 +18,9 @@ export class _AuthenticationGate extends Component {
     }
   }
 
-  componentDidUpdate (oldProps) {
-    const { auth, history, location = {} } = this.props;
-    let redirectPath = _.get(location, 'state.redirectAfterLogin');
+  componentDidUpdate(oldProps) {
+    const { auth, history, location = {}} = this.props;
+    const redirectPath = _.get(location, 'state.redirectAfterLogin');
 
     // if logging in via the form
     if (location.pathname === '/auth' && !oldProps.auth.loggedIn && auth.loggedIn) {
@@ -33,7 +33,7 @@ export class _AuthenticationGate extends Component {
     }
   }
 
-  render () {
+  render() {
     return null;
     // return <p className="text-muted" style={{ padding: '5px 0' }}>You are currently: <strong>{loggedIn ? 'logged in' : 'not logged in'}</strong></p>;
   }

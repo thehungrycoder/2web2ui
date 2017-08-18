@@ -21,7 +21,7 @@ class PublishedPage extends Component {
     shouldRedirectToPublished: false
   };
 
-  componentDidMount () {
+  componentDidMount() {
     const {
       match,
       getPublished,
@@ -32,7 +32,7 @@ class PublishedPage extends Component {
     getPublished(match.params.id);
   }
 
-  renderPageHeader () {
+  renderPageHeader() {
     const { match } = this.props;
 
     const secondaryActions = [
@@ -62,7 +62,7 @@ class PublishedPage extends Component {
     );
   }
 
-  render () {
+  render() {
     const { loading, published } = this.props;
 
     if (loading) {

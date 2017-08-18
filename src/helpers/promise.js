@@ -1,4 +1,4 @@
-function wait (options) {
+function wait(options) {
   const {
     condition,
     resolve,
@@ -29,7 +29,7 @@ function wait (options) {
  *
  * @return {Promise} - promise that will resolve when condition is met
  */
-function resolveOnCondition (condition, options = {}) {
+function resolveOnCondition(condition, options = {}) {
   return new Promise((resolve, reject) => {
     if (typeof condition !== 'function') {
       return reject(new Error('condition function not provided to resolveOnCondition helper'));
