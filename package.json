@@ -27,7 +27,7 @@
   "devDependencies": {
     "autoprefixer": "7.1.0",
     "babel-core": "6.24.1",
-    "babel-eslint": "7.2.3",
+    "babel-eslint": "^7.2.3",
     "babel-jest": "20.0.3",
     "babel-loader": "7.0.0",
     "babel-preset-react-app": "^3.0.0",
@@ -118,6 +118,7 @@
     ]
   },
   "eslintConfig": {
+    "parser": "babel-eslint",
     "env": {
       "browser": true,
       "phantomjs": true
@@ -129,10 +130,30 @@
           "max": 150,
           "skipComments": true
         }
+      ],
+      "complexity": "off",
+      "one-var": ["error", "never"],
+      "object-curly-spacing": [
+        "error",
+        "always",
+        {
+          "arraysInObjects": false,
+          "objectsInObjects": false
+        }
+      ],
+      "block-spacing": ["error", "always"],
+      "operator-linebreak": [
+        "error",
+        "after",
+        {
+          "overrides": {
+            "?": "before",
+            ":": "before"
+          }
+        }
       ]
     },
     "extends": [
-      "semistandard",
       "react-app",
       "sparkpost"
     ]
@@ -148,5 +169,3 @@
     "url": "https://github.com/SparkPost/2web2ui/issues"
   }
 }
-
-

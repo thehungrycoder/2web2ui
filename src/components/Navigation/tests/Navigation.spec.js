@@ -23,8 +23,8 @@ describe('Navigation', () => {
   test('Item renders children correctly', () => {
     const location = { pathname: 'to' };
     const children = [
-      { to: '/child1', label: 'child 1', location},
-      { to: '/child2', label: 'child 2', location}
+      { to: '/child1', label: 'child 1', location },
+      { to: '/child2', label: 'child 2', location }
     ];
     const item = render(
       <MemoryRouter>
