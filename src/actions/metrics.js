@@ -6,7 +6,7 @@ const defaultParams = () => ({
   metrics: 'count_targeted'
 });
 
-export function fetch (url, params = {}) {
+export function fetch(url, params = {}) {
   return {
     type: 'SPARKPOST_API_REQUEST',
     meta: {
@@ -21,10 +21,10 @@ export function fetch (url, params = {}) {
   };
 }
 
-export function fetchDeliverability (params = {}) {
+export function fetchDeliverability(params = {}) {
   return fetch('deliverability', params);
 }
 
-export function getTimeSeries (params = {}) {
+export function getTimeSeries(params = {}) {
   return fetch('time-series', params);
 }

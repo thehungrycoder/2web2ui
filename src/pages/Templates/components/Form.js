@@ -17,17 +17,15 @@ const TextFieldWrapper = ({ input, meta: { error }, ...rest }) => (
 const ID_ALLOWED_CHARS = 'a-z0-9_-';
 
 // TODO move this into shared helpers
-const slugify = (value) => {
-  return value
+const slugify = (value) => value
     .replace(/([a-z])([A-Z])/g, '$1-$2')
     .replace(/_/g, '-')
     .replace(/\s+/g, '-')
     .toLowerCase();
-};
 
 class Form extends Component {
   // Fills in ID based on Name
-  handleIdFill (e) {
+  handleIdFill(e) {
     const { newTemplate, change } = this.props;
     if (!newTemplate) {
       return;
@@ -37,14 +35,14 @@ class Form extends Component {
     change('id', idValue);
   }
 
-  componentDidMount () {
+  componentDidMount() {
     const { change, newTemplate } = this.props;
     if (newTemplate) { // TODO update to reflect sending domains
       change('content.from.email', 'sandbox@sparkpostbox.com');
     }
   }
 
-  render () {
+  render() {
     const { newTemplate, published } = this.props;
 
     return (
@@ -62,7 +60,7 @@ class Form extends Component {
             name='id' id='id'
             component={TextFieldWrapper}
             label='Template ID'
-            helpText={`A Unique ID for your template, we'll fill this in for you.`}
+            helpText={'A Unique ID for your template, we\'ll fill this in for you.'}
             disabled={!newTemplate || published}
           />
         </Panel.Section>
@@ -113,7 +111,7 @@ class Form extends Component {
             component={ToggleBlock}
             label='Track Opens'
             type='checkbox'
-            parse={value => !!value} // Prevents unchecked value from equaling ""
+            parse={(value) => !!value} // Prevents unchecked value from equaling ""
             disabled={published}
           />
 
@@ -122,7 +120,7 @@ class Form extends Component {
             component={ToggleBlock}
             label='Track Clicks'
             type='checkbox'
-            parse={value => !!value}
+            parse={(value) => !!value}
             disabled={published}
           />
         </Panel.Section>
@@ -133,7 +131,7 @@ class Form extends Component {
             component={ToggleBlock}
             label='Transactional'
             type='checkbox'
-            parse={value => !!value}
+            parse={(value) => !!value}
             helpText='Transactional messages are triggered by a user’s actions on the website, like requesting a password reset, signing up, or making a purchase.'
             disabled={published}
           />

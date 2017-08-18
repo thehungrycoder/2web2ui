@@ -14,7 +14,7 @@ import TestTab from './components/TestTab';
 import EditTab from './components/EditTab';
 
 class WebhooksDetails extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
 
     this.state = {
@@ -51,18 +51,16 @@ class WebhooksDetails extends Component {
   /*
     Dispatches getWebhook action
   */
-  componentDidMount () {
+  componentDidMount() {
     this.props.getWebhook(this.id);
   }
 
   /*
     Calls deleteWebhook action then redirects to list page.
   */
-  deleteWebhook = () => {
-    return this.props.deleteWebhook(this.id).then(() => {
-      this.props.history.push('/webhooks/');
-    });
-  }
+  deleteWebhook = () => this.props.deleteWebhook(this.id).then(() => {
+    this.props.history.push('/webhooks/');
+  })
 
   /*
     for delete modal
@@ -85,7 +83,7 @@ class WebhooksDetails extends Component {
     this.setState({ selectedTab: 0 });
   }
 
-  render () {
+  render() {
     const { webhook } = this.props;
     const webhookId = this.id;
 

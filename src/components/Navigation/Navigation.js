@@ -13,15 +13,15 @@ class Navigation extends Component {
     open: false
   }
 
-  renderItems () {
+  renderItems() {
     return navItems.map((item, key) => <Item {...item} location={this.props.location} key={key} />);
   }
 
-  handleClick () {
+  handleClick() {
     this.setState({ open: !this.state.open });
   }
 
-  render () {
+  render() {
     const navClasses = classnames(
       styles.navigation,
       this.state.open && styles.showNav

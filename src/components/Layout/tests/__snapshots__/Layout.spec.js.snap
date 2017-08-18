@@ -13,6 +13,9 @@ exports[`Layout Tests Layout renders App layout 1`] = `
     <div>
       App Layout
     </div>
+    <div>
+      <Connect(GlobalError) />
+    </div>
   </main>
 </div>
 `;
@@ -24,6 +27,9 @@ exports[`Layout Tests Layout renders Form layout 1`] = `
   >
     <div>
       Form Layout
+    </div>
+    <div>
+      <Connect(GlobalError) />
     </div>
   </main>
 </div>

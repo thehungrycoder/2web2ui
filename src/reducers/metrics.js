@@ -1,4 +1,4 @@
-export default (state = { pending: false, error: null, results: [] }, action) => {
+export default (state = { pending: false, error: null, results: []}, action) => {
   switch (action.type) {
     case 'FETCH_METRICS_PENDING':
       return { ...state, pending: true };

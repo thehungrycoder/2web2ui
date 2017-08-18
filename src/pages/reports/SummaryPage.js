@@ -13,7 +13,7 @@ import styles from './Reports.module.scss';
 // import qs from 'query-string';
 
 class SummaryReportPage extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDayClick = this.handleDayClick.bind(this);
@@ -36,23 +36,23 @@ class SummaryReportPage extends Component {
     };
   }
 
-  componentWillMount () {
+  componentWillMount() {
     this.refresh();
   }
 
-  renderLoading () {
+  renderLoading() {
     const { metricsData } = this.props;
     if (metricsData.pending) {
       return <p><Icon name='Refresh' /> Loading metrics...</p>;
     }
   }
 
-  handleSubmit () {
+  handleSubmit() {
     this.setState({ showDatePicker: false });
     this.refresh();
   }
 
-  handleDayClick (clicked) {
+  handleDayClick(clicked) {
     const { selecting, selected } = this.state.datepicker;
     const range = selecting ? selected : { from: clicked, to: getEndOfDay(clicked) };
 
@@ -62,7 +62,7 @@ class SummaryReportPage extends Component {
     });
   }
 
-  handleDayHover (hovered) {
+  handleDayHover(hovered) {
     const { selecting } = this.state.datepicker;
 
     if (selecting) {
@@ -78,13 +78,13 @@ class SummaryReportPage extends Component {
     }
   }
 
-  getOrderedRange (newDate) {
+  getOrderedRange(newDate) {
     const { from, to } = this.state.options;
     return (from.getTime() <= newDate.getTime()) ? { from, to: newDate } : { from: newDate, to };
   }
 
-  toggleDatePicker () {
-    const { showDatePicker, options, chartOptions: { from, to } } = this.state;
+  toggleDatePicker() {
+    const { showDatePicker, options, chartOptions: { from, to }} = this.state;
     const previousRange = { from, to };
     if (showDatePicker) {
       this.setState({
@@ -97,7 +97,7 @@ class SummaryReportPage extends Component {
     }
   }
 
-  refresh () {
+  refresh() {
     if (this.props.metricsData.pending || (this.state.chartOptions === this.state.options)) {
       return;
     }
@@ -107,11 +107,11 @@ class SummaryReportPage extends Component {
       .then(() => this.setState({ chartOptions: {
         ...this.state.options,
         precision: query.precision
-      } }));
+      }}));
   }
 
-  createDayReferenceLines () {
-    const { results = {} } = this.props.metricsData;
+  createDayReferenceLines() {
+    const { results = {}} = this.props.metricsData;
     const { chartOptions } = this.state;
 
     return getDayLines(results, chartOptions).map(({ ts }) => ({
@@ -122,10 +122,10 @@ class SummaryReportPage extends Component {
     }));
   }
 
-  renderChart () {
+  renderChart() {
     const { results = [], pending } = this.props.metricsData;
     const { chartOptions = false } = this.state;
-    const { metrics = [] } = chartOptions;
+    const { metrics = []} = chartOptions;
 
     if (!results.length || !chartOptions) {
       return null;
@@ -146,7 +146,7 @@ class SummaryReportPage extends Component {
     );
   }
 
-  render () {
+  render() {
     const { showDatePicker = false } = this.state;
     const { from, to } = this.state.options;
     const displayFormat = 'MMM Do, YYYY [at] h:mma';
@@ -208,11 +208,11 @@ class SummaryReportPage extends Component {
 }
 
 // this will be replaced with proper metrics config
-function formatMetricLabel (name) {
+function formatMetricLabel(name) {
   return _.startCase(name.replace(/^count_/, ''));
 }
 
-function getEndOfDay (date) {
+function getEndOfDay(date) {
   const end = new Date(date);
   end.setHours(11);
   end.setMinutes(59);
