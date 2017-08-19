@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
+import _ from 'lodash';
 
 // Actions
 import { listTemplates } from '../../actions/templates';
@@ -9,13 +10,14 @@ import { listTemplates } from '../../actions/templates';
 import Layout from '../../components/Layout/Layout';
 import ListRow from './components/ListRow';
 import Collection from '../../components/Collection/Collection';
-import { Page, Panel, Button } from '@sparkpost/matchbox';
+import { Page } from '@sparkpost/matchbox';
 
 const CREATE_ACTION = {
   content: 'Create Template',
   to: '/templates/create',
   Component: Link
 };
+const columns = ['Name', 'ID', 'Published', 'Updated'];
 
 class ListPage extends Component {
   state = {
@@ -34,19 +36,40 @@ class ListPage extends Component {
     this.props.listTemplates();
   }
 
+  renderError() {
+    const { error } = this.props;
+    return (
+      <div>
+        <p>An error occurred loading templates. <small>({error.message})</small></p>
+        <Collection columns={columns} rowData={[]} />
+      </div>
+    );
+  }
+
+  renderCollection() {
+    const { templates, location } = this.props;
+    return (
+      <Collection
+        columns={columns}
+        rowData={templates}
+        rowComponent={ListRow}
+        rowKeyName="id"
+        pagination={true}
+        defaultPerPage={25}
+        perPageButtons={[10, 25, 50]}
+        location={location}
+      />
+    );
+  }
+
   render() {
-    const templatesCount = this.props.templates.length;
-    const loading = this.props.listLoading;
+    const templatesCount = _.get(this, 'props.templates.length');
+    const { loading, error } = this.props;
 
     // No Templates (not error case)
-    if (!loading && !templatesCount) {
+    if (!loading && templatesCount === 0) {
       return <Redirect to="/templates/create" />;
     }
-
-    // Maybe do an error state.
-
-    // const templateRows = templatesCount ? this.renderTemplateRows(this.props.templates, this.state.currentPage, this.state.perPage) : null;
-    const { templates, location } = this.props;
 
     return (
       <Layout.App loading={loading}>
@@ -54,16 +77,8 @@ class ListPage extends Component {
           primaryAction={CREATE_ACTION}
           title={'Templates'}
         />
-        <Collection
-          columns={['Name', 'ID', 'Published', 'Updated']}
-          rowData={templates}
-          rowComponent={ListRow}
-          rowKeyName="id"
-          pagination={true}
-          defaultPerPage={25}
-          perPageButtons={[10, 25, 50]}
-          location={location}
-        />
+        {error && this.renderError()}
+        {!error && this.renderCollection()}
       </Layout.App>
     );
   }
@@ -72,7 +87,8 @@ class ListPage extends Component {
 function mapStateToProps({ templates }) {
   return {
     templates: templates.list,
-    listLoading: templates.listLoading
+    loading: templates.listLoading,
+    error: templates.listError
   };
 }
 
