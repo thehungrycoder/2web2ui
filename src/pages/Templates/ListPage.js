@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 // Actions
 import { listTemplates } from '../../actions/templates';
@@ -40,25 +40,7 @@ class ListPage extends Component {
 
     // No Templates (not error case)
     if (!loading && !templatesCount) {
-      // TODO: instead of making a CTA here, we could just redirect to the create page
-      return (
-        <Layout.App>
-            <Page
-              title={'Templates'}
-            />
-            <Panel>
-            <Panel.Section>
-              Lets get you started with your first template
-            </Panel.Section>
-            <Panel.Section>
-              <Button
-                primary
-                {...CREATE_ACTION}
-                >Create Template</Button>
-            </Panel.Section>
-          </Panel>
-        </Layout.App>
-      );
+      return <Redirect to="/templates/create" />;
     }
 
     // Maybe do an error state.

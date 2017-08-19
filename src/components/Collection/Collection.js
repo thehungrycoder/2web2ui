@@ -15,27 +15,22 @@ class Collection extends Component {
   }
 
   handlePageChange = (index) => {
-    const { updateQueryString = false } = this.props;
     const currentPage = index + 1;
     this.setState({ currentPage });
-
-    if (updateQueryString) {
-      const { search, pathname } = this.props.location;
-      const parsed = qs.parse(search);
-      parsed.page = currentPage;
-      this.props.history.push(`${pathname}?${qs.stringify(parsed)}`);
-    }
+    this.maybeUpdateQueryString({ currentPage });
   }
 
   handlePerPageChange = (perPage) => {
-    const { updateQueryString = false } = this.props;
-    this.setState({ perPage, currentPage: 1 });
+    const currentPage = 1;
+    this.setState({ perPage, currentPage });
+    this.maybeUpdateQueryString({ perPage, currentPage });
+  }
 
-    if (updateQueryString) {
+  maybeUpdateQueryString(updates) {
+    if (this.props.updateQueryString) {
       const { search, pathname } = this.props.location;
-      const parsed = qs.parse(search);
-      parsed.perPage = perPage;
-      this.props.history.push(`${pathname}?${qs.stringify(parsed)}`);
+      const updated = Object.assign(qs.parse(search), updates);
+      this.props.history.push(`${pathname}?${qs.stringify(updated)}`);
     }
   }
 
@@ -60,6 +55,7 @@ class Collection extends Component {
     );
   }
 
+  // TODO either make pagination elements depend on props.pagination or remove that prop and always have pagination
   render() {
     const { rowData, rowComponent: RowComponent, rowKeyName, perPageButtons = [10, 25, 50]} = this.props;
     const { currentPage, perPage } = this.state;
