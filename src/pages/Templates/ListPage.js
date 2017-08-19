@@ -7,7 +7,9 @@ import { listTemplates } from '../../actions/templates';
 
 // Components
 import Layout from '../../components/Layout/Layout';
-import { Page, Panel, Table, Button, Pagination } from '@sparkpost/matchbox';
+import ListRow from './components/ListRow';
+import Collection from '../../components/Collection/Collection';
+import { Page, Panel, Button } from '@sparkpost/matchbox';
 
 const CREATE_ACTION = {
   content: 'Create Template',
@@ -21,19 +23,11 @@ class ListPage extends Component {
     currentPage: 0
   }
 
-  renderRow(template) {
-    const status = template.published ? 'published' : 'draft';
-    const nameLink = <Link to={`/templates/edit/${template.id}`}>{template.name}</Link>;
-    return (
-      <Table.Row key={template.id} rowData={[nameLink, template.id, status, Date(template.last_update_time)]} />
-    );
-  }
-
-  renderTemplateRows(templates, currentPage, perPage) {
+  getCurrentPage() {
+    const { perPage, currentPage } = this.state;
+    const { templates } = this.props;
     const currentIndex = currentPage * perPage;
-    return templates.slice(currentIndex, currentIndex + perPage).map(
-      (template) => this.renderRow(template)
-    );
+    return templates.slice(currentIndex, currentIndex + perPage);
   }
 
   componentDidMount() {
@@ -69,7 +63,8 @@ class ListPage extends Component {
 
     // Maybe do an error state.
 
-    const templateRows = templatesCount ? this.renderTemplateRows(this.props.templates, this.state.currentPage, this.state.perPage) : null;
+    // const templateRows = templatesCount ? this.renderTemplateRows(this.props.templates, this.state.currentPage, this.state.perPage) : null;
+    const { templates, location } = this.props;
 
     return (
       <Layout.App loading={loading}>
@@ -77,33 +72,16 @@ class ListPage extends Component {
           primaryAction={CREATE_ACTION}
           title={'Templates'}
         />
-        <Panel>
-            <Table>
-              <thead>
-                <Table.Row>
-                  <Table.HeaderCell>Name</Table.HeaderCell>
-                  <Table.HeaderCell>ID</Table.HeaderCell>
-                  <Table.HeaderCell>Published</Table.HeaderCell>
-                  <Table.HeaderCell>Updated</Table.HeaderCell>
-                </Table.Row>
-              </thead>
-              <tbody>
-                { templateRows }
-              </tbody>
-            </Table>
-        </Panel>
-        <Pagination
-          pages={Math.ceil(templatesCount / this.state.perPage)}
-          pageRange={5}
-          initialIndex={0}
-          onChange={(index) => { this.setState({ currentPage: index }); }}
+        <Collection
+          columns={['Name', 'ID', 'Published', 'Updated']}
+          rowData={templates}
+          rowComponent={ListRow}
+          rowKeyName="id"
+          pagination={true}
+          defaultPerPage={25}
+          perPageButtons={[10, 25, 50]}
+          location={location}
         />
-        <Button.Group>
-          Show:
-          <Button onClick={ () => { this.setState({ perPage: 10 }); } }>10</Button>
-          <Button onClick={ () => { this.setState({ perPage: 25 }); } }>25</Button>
-          <Button onClick={ () => { this.setState({ perPage: 50 }); } }>50</Button>
-        </Button.Group>
       </Layout.App>
     );
   }
