@@ -55,25 +55,14 @@ class Collection extends Component {
     );
   }
 
-  // TODO either make pagination elements depend on props.pagination or remove that prop and always have pagination
-  render() {
-    const { rowData, rowComponent: RowComponent, rowKeyName, perPageButtons = [10, 25, 50]} = this.props;
+  renderPagination() {
+    const { rowData, perPageButtons = [10, 25, 50], pagination } = this.props;
     const { currentPage, perPage } = this.state;
 
-    if (!currentPage) {
-      return null;
-    }
+    if (!pagination || !currentPage) { return null; }
 
     return (
       <div>
-        <Panel>
-          <Table>
-            {this.renderHeader()}
-            <tbody>
-              {this.getVisibleRows().map((row, i) => <RowComponent key={row[rowKeyName] || i} {...row} />)}
-            </tbody>
-          </Table>
-        </Panel>
         <Pagination
           pages={Math.ceil(rowData.length / perPage)}
           pageRange={5}
@@ -85,6 +74,25 @@ class Collection extends Component {
             <Button key={perPage} onClick={() => this.handlePerPageChange(perPage)}>{perPage}</Button>
           ))}
         </Button.Group>
+      </div>
+    );
+  }
+
+  // TODO either make pagination elements depend on props.pagination or remove that prop and always have pagination
+  render() {
+    const { rowComponent: RowComponent, rowKeyName } = this.props;
+
+    return (
+      <div>
+        <Panel>
+          <Table>
+            {this.renderHeader()}
+            <tbody>
+              {this.getVisibleRows().map((row, i) => <RowComponent key={row[rowKeyName] || i} {...row} />)}
+            </tbody>
+          </Table>
+        </Panel>
+        {this.renderPagination()}
       </div>
     );
   }

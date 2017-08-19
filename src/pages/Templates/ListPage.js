@@ -38,10 +38,10 @@ class ListPage extends Component {
 
   renderError() {
     const { error } = this.props;
+    const errorRow = <p>An error occurred loading templates. <small>({error.message})</small></p>;
     return (
       <div>
-        <p>An error occurred loading templates. <small>({error.message})</small></p>
-        <Collection columns={columns} rowData={[]} />
+        <Collection columns={columns} rowData={[1]} rowComponent={() => errorRow} />
       </div>
     );
   }
@@ -78,7 +78,7 @@ class ListPage extends Component {
           title={'Templates'}
         />
         {error && this.renderError()}
-        {!error && this.renderCollection()}
+        {!error && templatesCount > 0 && this.renderCollection()}
       </Layout.App>
     );
   }
