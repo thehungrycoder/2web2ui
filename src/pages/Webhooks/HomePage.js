@@ -7,16 +7,14 @@ import { listWebhooks } from '../../actions/webhooks';
 
 // Components
 import Layout from '../../components/Layout/Layout';
-import { Page, Table } from '@sparkpost/matchbox';
+import { Page } from '@sparkpost/matchbox';
 import WebhooksLoading from './components/WebhooksLoading';
 import TableCollection from '../../components/Collection/TableCollection';
 
 const columns = ['Name', 'ID', 'Target'];
-const ListRow = ({ id, name, target }) => {
+const getRowData = ({ id, name, target }) => {
   const nameLink = <Link to={`/webhooks/details/${id}`}>{name}</Link>;
-  return (
-    <Table.Row key={id} rowData={ [nameLink, id, target]} />
-  );
+  return [nameLink, id, target];
 };
 
 class WebhooksHome extends Component {
@@ -46,8 +44,8 @@ class WebhooksHome extends Component {
         />
         <TableCollection
           columns={columns}
-          rowData={webhooks}
-          rowComponent={ListRow}
+          rowList={webhooks}
+          getRowData={getRowData}
           pagination={true}
         />
       </Layout.App>

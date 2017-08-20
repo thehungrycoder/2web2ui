@@ -8,7 +8,6 @@ import { listTemplates } from '../../actions/templates';
 
 // Components
 import Layout from '../../components/Layout/Layout';
-import ListRow from './components/ListRow';
 import TableCollection from '../../components/Collection/TableCollection';
 import { Page, Banner, Button } from '@sparkpost/matchbox';
 
@@ -18,6 +17,11 @@ const CREATE_ACTION = {
   Component: Link
 };
 const columns = ['Name', 'ID', 'Published', 'Updated'];
+const getRowData = ({ published, id, name, last_update_time }) => {
+  const status = published ? 'published' : 'draft';
+  const nameLink = <Link to={`/templates/edit/${id}`}>{name}</Link>;
+  return [nameLink, id, status, Date(last_update_time)];
+};
 
 class ListPage extends Component {
   state = {
@@ -50,14 +54,13 @@ class ListPage extends Component {
   }
 
   renderCollection() {
-    const { templates, location } = this.props;
+    const { templates } = this.props;
     return (
       <TableCollection
         columns={columns}
-        rowData={templates}
-        rowComponent={ListRow}
+        rowList={templates}
+        getRowData={getRowData}
         pagination={true}
-        location={location}
       />
     );
   }

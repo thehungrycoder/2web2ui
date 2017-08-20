@@ -38,20 +38,20 @@ class Collection extends Component {
 
   getVisibleRows() {
     const { perPage, currentPage } = this.state;
-    const { rowData } = this.props;
+    const { rowList } = this.props;
     const currentIndex = (currentPage - 1) * perPage;
-    return rowData.slice(currentIndex, currentIndex + perPage);
+    return rowList.slice(currentIndex, currentIndex + perPage);
   }
 
   renderPagination() {
-    const { rowData, perPageButtons, pagination } = this.props;
+    const { rowList, perPageButtons, pagination } = this.props;
     const { currentPage, perPage } = this.state;
 
     if (!pagination || !currentPage) { return null; }
 
     return (
       <Pagination
-        data={rowData}
+        data={rowList}
         perPage={perPage}
         currentPage={currentPage}
         perPageButtons={perPageButtons}
