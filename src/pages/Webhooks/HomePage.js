@@ -7,48 +7,36 @@ import { listWebhooks } from '../../actions/webhooks';
 
 // Components
 import Layout from '../../components/Layout/Layout';
-import { Page, Table, Panel, Button, Pagination } from '@sparkpost/matchbox';
+import { Page, Table } from '@sparkpost/matchbox';
 import WebhooksLoading from './components/WebhooksLoading';
+import TableCollection from '../../components/Collection/TableCollection';
+
+const columns = ['Name', 'ID', 'Target'];
+const ListRow = ({ id, name, target }) => {
+  const nameLink = <Link to={`/webhooks/details/${id}`}>{name}</Link>;
+  return (
+    <Table.Row key={id} rowData={ [nameLink, id, target]} />
+  );
+};
 
 class WebhooksHome extends Component {
-  state = {
-    perPage: 10,
-    currentPage: 0
-  }
 
   componentDidMount() {
     this.props.listWebhooks();
   }
 
-  renderRow(webhook) {
-    const nameLink = <Link to={`/webhooks/details/${webhook.id}`}>{webhook.name}</Link>;
-    return (
-        <Table.Row key={webhook.id} rowData={ [nameLink, webhook.id, webhook.target]} >
-        </Table.Row>
-    );
-  }
-
-  renderWebhookRows(webhooks, currentPage, perPage) {
-    const currentIndex = currentPage * perPage;
-    return webhooks.slice(currentIndex, currentIndex + perPage).map(
-      (webhook) => this.renderRow(webhook)
-    );
-  }
-
   render() {
-    const { webhooks, listLoading } = this.props;
+    const { webhooks, listLoading, location } = this.props;
 
     // This should probably be a universal page-loading component
     if (listLoading && !webhooks.length) {
       return (
         <WebhooksLoading
           title={'Webhooks'}
-          primaryAction={{ content: 'Create Webhook', Component: Link, to: '/webhooks/create' }}/>
+          primaryAction={{ content: 'Create Webhook', Component: Link, to: '/webhooks/create' }}
+        />
       );
     }
-
-    // TODO: fix paging error
-    const webhookRows = webhooks.length ? this.renderWebhookRows(webhooks, this.state.currentPage, this.state.perPage) : null;
 
     return (
       <Layout.App>
@@ -56,32 +44,15 @@ class WebhooksHome extends Component {
           primaryAction={{ content: 'Create Webhook', Component: Link, to: '/webhooks/create' }}
           title={'Webhooks'}
         />
-        <Panel>
-          <Table>
-            <thead>
-              <Table.Row>
-                <Table.HeaderCell>Name</Table.HeaderCell>
-                <Table.HeaderCell>ID</Table.HeaderCell>
-                <Table.HeaderCell>Target</Table.HeaderCell>
-              </Table.Row>
-            </thead>
-            <tbody>
-              { webhookRows }
-            </tbody>
-          </Table>
-        </Panel>
-        <Pagination
-           pages={Math.ceil(webhooks.length / this.state.perPage)}
-           pageRange={5}
-           initialIndex={0}
-           onChange={(index) => { this.setState({ currentPage: index }); }}
-         />
-        <Button.Group>
-         Show:
-         <Button onClick={ () => { this.setState({ perPage: 10 }); } }>10</Button>
-         <Button onClick={ () => { this.setState({ perPage: 25 }); } }>25</Button>
-         <Button onClick={ () => { this.setState({ perPage: 50 }); } }>50</Button>
-        </Button.Group>
+        <TableCollection
+          columns={columns}
+          rowData={webhooks}
+          rowComponent={ListRow}
+          rowKeyName="id"
+          pagination={true}
+          defaultPerPage={25}
+          location={location}
+        />
       </Layout.App>
     );
   }
