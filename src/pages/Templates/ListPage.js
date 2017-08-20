@@ -9,8 +9,8 @@ import { listTemplates } from '../../actions/templates';
 // Components
 import Layout from '../../components/Layout/Layout';
 import ListRow from './components/ListRow';
-import Collection from '../../components/Collection/Collection';
-import { Page } from '@sparkpost/matchbox';
+import TableCollection from '../../components/Collection/TableCollection';
+import { Page, Banner, Button } from '@sparkpost/matchbox';
 
 const CREATE_ACTION = {
   content: 'Create Template',
@@ -21,15 +21,7 @@ const columns = ['Name', 'ID', 'Published', 'Updated'];
 
 class ListPage extends Component {
   state = {
-    perPage: 10,
-    currentPage: 0
-  }
-
-  getCurrentPage() {
-    const { perPage, currentPage } = this.state;
-    const { templates } = this.props;
-    const currentIndex = currentPage * perPage;
-    return templates.slice(currentIndex, currentIndex + perPage);
+    showErrorDetails: false
   }
 
   componentDidMount() {
@@ -38,25 +30,35 @@ class ListPage extends Component {
 
   renderError() {
     const { error } = this.props;
-    const errorRow = <p>An error occurred loading templates. <small>({error.message})</small></p>;
+    const { showErrorDetails } = this.state;
+    const buttonText = showErrorDetails ? 'Hide Error Details' : 'Show Error Details';
+
     return (
-      <div>
-        <Collection columns={columns} rowData={[1]} rowComponent={() => errorRow} />
-      </div>
+      <Banner status='warning' title='An error occurred'>
+        <p>Sorry, we seem to have had some trouble loading your templates.</p>
+
+        <Button outline={true} onClick={() => this.props.listTemplates()} style={{ marginRight: '10px' }}>
+          Try Again
+        </Button>
+        <Button outline={true} onClick={() => this.setState({ showErrorDetails: !showErrorDetails })}>
+          {buttonText}
+        </Button>
+
+        {showErrorDetails && <p style={{ marginTop: '20px' }}><strong>Details:</strong> {error.message}</p>}
+      </Banner>
     );
   }
 
   renderCollection() {
     const { templates, location } = this.props;
     return (
-      <Collection
+      <TableCollection
         columns={columns}
         rowData={templates}
         rowComponent={ListRow}
         rowKeyName="id"
         pagination={true}
         defaultPerPage={25}
-        perPageButtons={[10, 25, 50]}
         location={location}
       />
     );

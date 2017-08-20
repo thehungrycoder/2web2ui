@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
-import { Panel, Table, Button, Pagination } from '@sparkpost/matchbox';
 import qs from 'query-string';
 import { withRouter } from 'react-router-dom';
+import Pagination from './Pagination';
+
+const PassThroughWrapper = (props) => props.children;
 
 class Collection extends Component {
   state = {};
 
   componentDidMount() {
-    const { defaultPerPage = 0, location } = this.props;
+    const { defaultPerPage = 10, location } = this.props;
     this.setState({
       perPage: defaultPerPage,
       currentPage: qs.parse(location.search).page || 1
@@ -41,57 +43,41 @@ class Collection extends Component {
     return rowData.slice(currentIndex, currentIndex + perPage);
   }
 
-  renderHeader() {
-    const { header: Header, columns = []} = this.props;
-    if (Header) {
-      return <Header />;
-    }
-    return (
-      <thead>
-        <Table.Row>
-          {columns.map((title) => <Table.HeaderCell key={title}>{title}</Table.HeaderCell>)}
-        </Table.Row>
-      </thead>
-    );
-  }
-
   renderPagination() {
-    const { rowData, perPageButtons = [10, 25, 50], pagination } = this.props;
+    const { rowData, perPageButtons, pagination } = this.props;
     const { currentPage, perPage } = this.state;
 
     if (!pagination || !currentPage) { return null; }
 
     return (
-      <div>
-        <Pagination
-          pages={Math.ceil(rowData.length / perPage)}
-          pageRange={5}
-          initialIndex={(currentPage - 1)}
-          onChange={this.handlePageChange}
-        />
-        <Button.Group>Show:
-          {perPageButtons.map((perPage) => (
-            <Button key={perPage} onClick={() => this.handlePerPageChange(perPage)}>{perPage}</Button>
-          ))}
-        </Button.Group>
-      </div>
+      <Pagination
+        data={rowData}
+        perPage={perPage}
+        currentPage={currentPage}
+        perPageButtons={perPageButtons}
+        onPageChange={this.handlePageChange}
+        onPerPageChange={this.handlePerPageChange}
+      />
     );
   }
 
-  // TODO either make pagination elements depend on props.pagination or remove that prop and always have pagination
   render() {
-    const { rowComponent: RowComponent, rowKeyName } = this.props;
+    const {
+      rowComponent: RowComponent,
+      rowKeyName,
+      header: Header,
+      outerWrapper: OuterWrapper = PassThroughWrapper,
+      bodyWrapper: BodyWrapper = PassThroughWrapper
+    } = this.props;
 
     return (
       <div>
-        <Panel>
-          <Table>
-            {this.renderHeader()}
-            <tbody>
-              {this.getVisibleRows().map((row, i) => <RowComponent key={row[rowKeyName] || i} {...row} />)}
-            </tbody>
-          </Table>
-        </Panel>
+        <OuterWrapper>
+          <Header />
+          <BodyWrapper>
+            {this.getVisibleRows().map((row, i) => <RowComponent key={row[rowKeyName] || i} {...row} />)}
+          </BodyWrapper>
+        </OuterWrapper>
         {this.renderPagination()}
       </div>
     );
