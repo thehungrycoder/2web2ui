@@ -9,7 +9,8 @@ import { listTemplates } from '../../actions/templates';
 // Components
 import Layout from '../../components/Layout/Layout';
 import TableCollection from '../../components/Collection/TableCollection';
-import { Page, Banner, Button } from '@sparkpost/matchbox';
+import ApiErrorBanner from '../../components/ApiErrorBanner';
+import { Page } from '@sparkpost/matchbox';
 
 const CREATE_ACTION = {
   content: 'Create Template',
@@ -24,32 +25,19 @@ const getRowData = ({ published, id, name, last_update_time }) => {
 };
 
 class ListPage extends Component {
-  state = {
-    showErrorDetails: false
-  }
 
   componentDidMount() {
     this.props.listTemplates();
   }
 
   renderError() {
-    const { error } = this.props;
-    const { showErrorDetails } = this.state;
-    const buttonText = showErrorDetails ? 'Hide Error Details' : 'Show Error Details';
-
+    const { error, listTemplates } = this.props;
     return (
-      <Banner status='warning' title='An error occurred'>
-        <p>Sorry, we seem to have had some trouble loading your templates.</p>
-
-        <Button outline={true} onClick={() => this.props.listTemplates()} style={{ marginRight: '10px' }}>
-          Try Again
-        </Button>
-        <Button outline={true} onClick={() => this.setState({ showErrorDetails: !showErrorDetails })}>
-          {buttonText}
-        </Button>
-
-        {showErrorDetails && <p style={{ marginTop: '20px' }}><strong>Details:</strong> {error.message}</p>}
-      </Banner>
+      <ApiErrorBanner
+        message={'Sorry, we seem to have had some trouble loading your templates.'}
+        errorDetails={error.message}
+        reload={listTemplates}
+      />
     );
   }
 
