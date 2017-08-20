@@ -26,7 +26,7 @@ class WebhooksHome extends Component {
   }
 
   render() {
-    const { webhooks, listLoading, location } = this.props;
+    const { webhooks, listLoading } = this.props;
 
     // This should probably be a universal page-loading component
     if (listLoading && !webhooks.length) {
@@ -48,10 +48,7 @@ class WebhooksHome extends Component {
           columns={columns}
           rowData={webhooks}
           rowComponent={ListRow}
-          rowKeyName="id"
           pagination={true}
-          defaultPerPage={25}
-          location={location}
         />
       </Layout.App>
     );

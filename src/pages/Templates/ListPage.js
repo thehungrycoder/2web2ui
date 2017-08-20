@@ -56,9 +56,7 @@ class ListPage extends Component {
         columns={columns}
         rowData={templates}
         rowComponent={ListRow}
-        rowKeyName="id"
         pagination={true}
-        defaultPerPage={25}
         location={location}
       />
     );

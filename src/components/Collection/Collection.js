@@ -9,7 +9,7 @@ class Collection extends Component {
   state = {};
 
   componentDidMount() {
-    const { defaultPerPage = 10, location } = this.props;
+    const { defaultPerPage = 25, location } = this.props;
     this.setState({
       perPage: defaultPerPage,
       currentPage: qs.parse(location.search).page || 1
@@ -18,20 +18,20 @@ class Collection extends Component {
 
   handlePageChange = (index) => {
     const currentPage = index + 1;
-    this.setState({ currentPage });
-    this.maybeUpdateQueryString({ currentPage });
+    this.setState({ currentPage }, this.maybeUpdateQueryString);
   }
 
   handlePerPageChange = (perPage) => {
     const currentPage = 1;
-    this.setState({ perPage, currentPage });
-    this.maybeUpdateQueryString({ perPage, currentPage });
+    this.setState({ perPage, currentPage }, this.maybeUpdateQueryString);
   }
 
-  maybeUpdateQueryString(updates) {
-    if (this.props.updateQueryString) {
-      const { search, pathname } = this.props.location;
-      const updated = Object.assign(qs.parse(search), updates);
+  maybeUpdateQueryString() {
+    const { currentPage, perPage } = this.state;
+    const { search, pathname } = this.props.location;
+    const parsed = qs.parse(search);
+    if (parsed.page || this.props.updateQueryString) {
+      const updated = Object.assign(parsed, { page: currentPage, perPage });
       this.props.history.push(`${pathname}?${qs.stringify(updated)}`);
     }
   }
@@ -64,7 +64,7 @@ class Collection extends Component {
   render() {
     const {
       rowComponent: RowComponent,
-      rowKeyName,
+      rowKeyName = 'id',
       header: Header,
       outerWrapper: OuterWrapper = PassThroughWrapper,
       bodyWrapper: BodyWrapper = PassThroughWrapper
