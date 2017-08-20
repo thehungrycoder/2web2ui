@@ -8,8 +8,8 @@ import { listWebhooks } from '../../actions/webhooks';
 // Components
 import Layout from '../../components/Layout/Layout';
 import { Page } from '@sparkpost/matchbox';
-import WebhooksLoading from './components/WebhooksLoading';
 import TableCollection from '../../components/Collection/TableCollection';
+import ApiErrorBanner from '../../components/ApiErrorBanner';
 
 const columns = ['Name', 'ID', 'Target'];
 const getRowData = ({ id, name, target }) => {
@@ -17,37 +17,46 @@ const getRowData = ({ id, name, target }) => {
   return [nameLink, id, target];
 };
 
-class WebhooksHome extends Component {
+class WebhooksList extends Component {
 
   componentDidMount() {
     this.props.listWebhooks();
   }
 
-  render() {
-    const { webhooks, listLoading } = this.props;
+  renderError() {
+    const { error, listWebhooks } = this.props;
+    return (
+      <ApiErrorBanner
+        message={'Sorry, we seem to have had some trouble loading your webhooks.'}
+        errorDetails={error.message}
+        reload={listWebhooks}
+      />
+    );
+  }
 
-    // This should probably be a universal page-loading component
-    if (listLoading && !webhooks.length) {
-      return (
-        <WebhooksLoading
-          title={'Webhooks'}
-          primaryAction={{ content: 'Create Webhook', Component: Link, to: '/webhooks/create' }}
-        />
-      );
-    }
+  renderCollection() {
+    const { webhooks } = this.props;
+    return (
+      <TableCollection
+        columns={columns}
+        rowList={webhooks}
+        getRowData={getRowData}
+        pagination={true}
+      />
+    );
+  }
+
+  render() {
+    const { webhooks, loading, error } = this.props;
 
     return (
-      <Layout.App>
+      <Layout.App loading={webhooks.length === 0 && loading}>
         <Page
           primaryAction={{ content: 'Create Webhook', Component: Link, to: '/webhooks/create' }}
           title={'Webhooks'}
         />
-        <TableCollection
-          columns={columns}
-          rowList={webhooks}
-          getRowData={getRowData}
-          pagination={true}
-        />
+        {error && this.renderError()}
+        {!error && this.renderCollection()}
       </Layout.App>
     );
   }
@@ -56,8 +65,9 @@ class WebhooksHome extends Component {
 function mapStateToProps({ webhooks }) {
   return {
     webhooks: webhooks.list,
-    listLoading: webhooks.listLoading
+    loading: webhooks.listLoading,
+    error: webhooks.listError
   };
 }
 
-export default withRouter(connect(mapStateToProps, { listWebhooks })(WebhooksHome));
+export default withRouter(connect(mapStateToProps, { listWebhooks })(WebhooksList));
