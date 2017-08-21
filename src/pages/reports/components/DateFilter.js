@@ -110,8 +110,7 @@ class DateFilter extends Component {
 
   handleSubmit = () => {
     this.setState({ showDatePicker: false });
-    this.props.setExactTime(this.state.datepicker.selected);
-    this.props.refresh();
+    this.props.setExactTime(this.state.datepicker.selected).then(() => this.props.refresh());
   }
 
   render() {
