@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactDOM from 'react-dom';
 import { subMonths, format } from 'date-fns';
+import { getEndOfDay } from 'helpers/metrics';
 import { Grid, Button, Datepicker, TextField, Select, Popover, Icon } from '@sparkpost/matchbox';
 import { setExactTime } from 'actions/reportFilters';
 
@@ -20,30 +21,12 @@ class DateFilter extends Component {
   }
 
   rangeOptions = [
-    {
-      value: 'hour',
-      label: 'Last Hour'
-    },
-    {
-      value: 'day',
-      label: 'Last 24 Hours'
-    },
-    {
-      value: '7days',
-      label: 'Last 7 Days'
-    },
-    {
-      value: '30days',
-      label: 'Last 30 Days'
-    },
-    {
-      value: '90days',
-      label: 'Last 90 Days'
-    },
-    {
-      value: 'custom',
-      label: 'Custom'
-    }
+    { value: 'hour', label: 'Last Hour' },
+    { value: 'day', label: 'Last 24 Hours' },
+    { value: '7days', label: 'Last 7 Days' },
+    { value: '30days', label: 'Last 30 Days' },
+    { value: '90days', label: 'Last 90 Days' },
+    { value: 'custom', label: 'Custom' }
   ];
 
   componentDidMount() {
@@ -219,16 +202,6 @@ class DateFilter extends Component {
       </Popover>
     );
   }
-}
-
-function getEndOfDay(date) {
-  const end = new Date(date);
-  end.setHours(11);
-  end.setMinutes(59);
-  end.setSeconds(59);
-  end.setMilliseconds(0);
-
-  return end;
 }
 
 const mapStateToProps = ({ reportFilters }) => ({ filter: reportFilters });

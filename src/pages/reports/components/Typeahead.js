@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import ReactDOM from 'react-dom';
 import classnames from 'classnames';
 import { TextField, ActionList } from '@sparkpost/matchbox';
 import TypeaheadItem from './TypeaheadItem';
+
+import { addFilter, searchFilter } from 'actions/reportFilters';
 
 import styles from './Typeahead.module.scss';
 
@@ -31,41 +34,30 @@ class Typeahead extends Component {
   handleKey = (e) => {
     const code = e.code;
 
-    if (this.state.open) {
-      if (code === 'Escape') {
-        this.setState({ open: false });
-      }
+    if (this.state.open && code === 'Escape') {
+      this.setState({ open: false });
     }
   }
 
   handleOnChange = (e) => {
-    const { input, onChange } = this.props;
-
     if (e.currentTarget.value) {
       this.setState({ open: true });
     }
 
-    if (input) {
-      input.onChange(e);
-    } else if (onChange) {
-      onChange(e);
-    }
+    this.props.searchFilter();
+  }
+
+  handleSelect = (index) => {
+    this.props.addFilter(this.props.filter.searchList[index]);
   }
 
   render() {
-    const {
-      name = '',
-      input = {},
-      meta: { touched, error } = {},
-      options = [],
-      onSelect,
-      ...rest
-    } = this.props;
+    const { options = []} = this.props;
 
     const listClasses = classnames(styles.List, this.state.open && styles.open);
     const actions = options.map((option, index) => ({
       content: <TypeaheadItem value={option.value} type={option.type} />,
-      onClick: () => onSelect(index)
+      onClick: () => this.handleSelect(index)
     }));
 
     return (
@@ -73,15 +65,11 @@ class Typeahead extends Component {
         <div className={listClasses}>
           <ActionList actions={actions} />
         </div>
-        <TextField
-          id={input.name || name}
-          {...rest}
-          {...input}
-          onChange={this.handleOnChange}
-          error={touched && error ? error : undefined} />
+        <TextField onChange={this.handleOnChange} />
       </div>
     );
   }
 }
 
-export default Typeahead;
+const mapStateToProps = ({ reportFilters }) => ({ filter: reportFilters });
+export default connect(mapStateToProps, { addFilter, searchFilter })(Typeahead);

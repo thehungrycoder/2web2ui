@@ -10,10 +10,6 @@ import Typeahead from './Typeahead';
 import styles from './Filters.module.scss';
 
 class Filters extends Component {
-  handleTypeahead = () => {
-    this.props.searchFilter();
-  }
-
   renderActiveFilters = () => {
     const { filter } = this.props;
     return filter.activeList.length
@@ -22,10 +18,6 @@ class Filters extends Component {
           { filter.activeList.map((item, index) => <Tag key={index} onRemove={() => this.handleFilterRemove(index)} className={styles.TagWrapper}>{ item.value }</Tag>)}
         </Panel.Section>
       : null;
-  }
-
-  handleTypeaheadSelect = (index) => {
-    this.props.addFilter(this.props.filter.searchList[index]);
   }
 
   handleFilterRemove = (index) => {
@@ -48,7 +40,6 @@ class Filters extends Component {
               <div className={styles.FieldWrapper}>
                 <Typeahead
                   placeholder='Filter by domain'
-                  onChange={this.handleTypeahead}
                   onSelect={this.handleTypeaheadSelect}
                   options={filter.searchList} />
               </div>

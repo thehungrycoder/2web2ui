@@ -19,7 +19,8 @@ export {
   getQueryFromOptions,
   getLineChartFormatters,
   getPrecision,
-  getDayLines
+  getDayLines,
+  getEndOfDay
 };
 
 const getTickFormatter = _.memoize((precisionType) => {
@@ -98,4 +99,14 @@ function getDayLines(data, { precision = 'day' }) {
     }
     return true;
   });
+}
+
+function getEndOfDay(date) {
+  const end = new Date(date);
+  end.setHours(11);
+  end.setMinutes(59);
+  end.setSeconds(59);
+  end.setMilliseconds(0);
+
+  return end;
 }
