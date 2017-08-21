@@ -39,7 +39,7 @@ class WebhooksList extends Component {
     return (
       <TableCollection
         columns={columns}
-        rowList={webhooks}
+        rows={webhooks}
         getRowData={getRowData}
         pagination={true}
       />

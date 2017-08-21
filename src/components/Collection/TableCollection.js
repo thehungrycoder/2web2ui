@@ -15,14 +15,14 @@ const TableHeader = ({ columns = []}) => (
 const TableBody = (props) => <tbody>{props.children}</tbody>;
 
 const TableCollection = (props) => {
-  const { header, columns, getRowData } = props;
-  const Header = header ? header : () => <TableHeader columns={columns} />;
+  const { headerComponent, columns, getRowData } = props;
+  const HeaderComponent = headerComponent ? headerComponent : () => <TableHeader columns={columns} />;
   const TableRow = (props) => <Table.Row rowData={getRowData(props)} />;
 
   return (
     <Collection
       outerWrapper={TableWrapper}
-      header={Header}
+      headerComponent={HeaderComponent}
       bodyWrapper={TableBody}
       rowComponent={TableRow}
       {...props}

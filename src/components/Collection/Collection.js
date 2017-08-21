@@ -38,20 +38,20 @@ class Collection extends Component {
 
   getVisibleRows() {
     const { perPage, currentPage } = this.state;
-    const { rowList } = this.props;
+    const { rows } = this.props;
     const currentIndex = (currentPage - 1) * perPage;
-    return rowList.slice(currentIndex, currentIndex + perPage);
+    return rows.slice(currentIndex, currentIndex + perPage);
   }
 
   renderPagination() {
-    const { rowList, perPageButtons, pagination } = this.props;
+    const { rows, perPageButtons, pagination } = this.props;
     const { currentPage, perPage } = this.state;
 
     if (!pagination || !currentPage) { return null; }
 
     return (
       <Pagination
-        data={rowList}
+        data={rows}
         perPage={perPage}
         currentPage={currentPage}
         perPageButtons={perPageButtons}
@@ -65,7 +65,7 @@ class Collection extends Component {
     const {
       rowComponent: RowComponent,
       rowKeyName = 'id',
-      header: Header,
+      headerComponent: HeaderComponent,
       outerWrapper: OuterWrapper = PassThroughWrapper,
       bodyWrapper: BodyWrapper = PassThroughWrapper
     } = this.props;
@@ -73,7 +73,7 @@ class Collection extends Component {
     return (
       <div>
         <OuterWrapper>
-          <Header />
+          <HeaderComponent />
           <BodyWrapper>
             {this.getVisibleRows().map((row, i) => <RowComponent key={row[rowKeyName] || i} {...row} />)}
           </BodyWrapper>

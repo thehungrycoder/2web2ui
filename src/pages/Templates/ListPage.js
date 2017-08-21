@@ -46,7 +46,7 @@ class ListPage extends Component {
     return (
       <TableCollection
         columns={columns}
-        rowList={templates}
+        rows={templates}
         getRowData={getRowData}
         pagination={true}
       />
