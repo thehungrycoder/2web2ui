@@ -4,19 +4,17 @@ import { connect } from 'react-redux';
 import ReactDOM from 'react-dom';
 import { subMonths, format } from 'date-fns';
 import { getEndOfDay, relativeDateOptions } from 'helpers/metrics';
-import { Grid, Button, Datepicker, TextField, Select, Popover, Icon } from '@sparkpost/matchbox';
+import { Button, Datepicker, TextField, Select, Popover } from '@sparkpost/matchbox';
 import { setExactTime, setRelativeTime } from 'actions/reportFilters';
-
+import DateForm from './DateForm';
 import styles from './DateFilter.module.scss';
 
 class DateFilter extends Component {
+  format = 'MMM DD, YY h:mma';
   state = {
     showDatePicker: false,
     selecting: false,
-    selected: {
-      from: null,
-      to: null
-    }
+    selected: { }
   }
 
   componentDidMount() {
@@ -77,7 +75,6 @@ class DateFilter extends Component {
 
     if (selecting) {
       this.setState({
-        ...this.state,
         selected: { ...this.state.selected, ...this.getOrderedRange(hovered) }
       });
     }
@@ -95,12 +92,13 @@ class DateFilter extends Component {
       this.setState({ showDatePicker: true });
       this.props.setRelativeTime(value);
     } else {
+      this.setState({ showDatePicker: false });
       this.props.setRelativeTime(value).then(() => this.props.refresh());
     }
   }
 
-  handleFieldChange = () => {
-
+  handleFormBlur = ({ from, to}) => {
+    this.setState({ selected: { from, to } })
   }
 
   handleSubmit = () => {
@@ -110,21 +108,10 @@ class DateFilter extends Component {
 
   render() {
     const { selected: { from, to } } = this.state;
-    const fullFormat = 'MMM DD, YY h:mma';
-    const dayFormat = 'MM/DD/YY';
-    const timeFormat = 'h:mma';
 
     const formatted = {
-      from: {
-        full: format(from, fullFormat),
-        day: format(from, dayFormat),
-        time: format(from, timeFormat)
-      },
-      to: {
-        full: format(to, fullFormat),
-        day: format(to, dayFormat),
-        time: format(to, timeFormat)
-      }
+      from: format(from, this.format),
+      to: format(to, this.format)
     };
 
     const rangeSelect = <Select
@@ -136,7 +123,7 @@ class DateFilter extends Component {
       labelHidden={true}
       onClick={() => this.showDatePicker()}
       connectLeft={rangeSelect}
-      value={`${formatted.from.full} - ${formatted.to.full}`}
+      value={`${formatted.from} - ${formatted.to}`}
       readOnly />;
 
     return (
@@ -158,41 +145,7 @@ class DateFilter extends Component {
           onDayFocus={this.handleDayHover}
           selectedDays={this.state.selected} />
 
-        <div className={styles.DateFields}>
-          <Grid middle='xs'>
-            <Grid.Column >
-              <TextField
-                label='From'
-                labelHidden
-                onChange={this.handleFieldChange}
-                value={formatted.from.day} />
-            </Grid.Column>
-            <Grid.Column >
-              <TextField
-                labelHidden
-                onChange={this.handleFieldChange}
-                value={formatted.from.time} />
-            </Grid.Column>
-            <Grid.Column xs={1}>
-              <div className={styles.ArrowWrapper}>
-                <Icon name='ArrowRight'/>
-              </div>
-            </Grid.Column>
-            <Grid.Column >
-              <TextField
-                label='To'
-                labelHidden
-                onChange={this.handleFieldChange}
-                value={formatted.to.day} />
-            </Grid.Column>
-            <Grid.Column >
-              <TextField
-                labelHidden
-                onChange={this.handleFieldChange}
-                value={formatted.to.time} />
-            </Grid.Column>
-          </Grid>
-        </div>
+          <DateForm onBlur={this.handleFormBlur} to={to} from={from} />
         <Button primary onClick={this.handleSubmit}>Apply</Button>
       </Popover>
     );

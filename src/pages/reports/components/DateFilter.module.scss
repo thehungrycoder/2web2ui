@@ -1,18 +1,6 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 
-.RangeButtonWrapper {
-  margin-bottom: spacing(small);
-}
-
 .Popover {
   width: rem(640);
   padding: spacing();
-}
-
-.DateFields {
-  margin: spacing() 0;
-}
-
-.ArrowWrapper {
-  text-align: center;
 }
