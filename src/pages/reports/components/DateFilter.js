@@ -1,41 +1,26 @@
+/* eslint-disable */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactDOM from 'react-dom';
 import { subMonths, format } from 'date-fns';
-import { getEndOfDay } from 'helpers/metrics';
+import { getEndOfDay, relativeDateOptions } from 'helpers/metrics';
 import { Grid, Button, Datepicker, TextField, Select, Popover, Icon } from '@sparkpost/matchbox';
-import { setExactTime } from 'actions/reportFilters';
+import { setExactTime, setRelativeTime } from 'actions/reportFilters';
 
 import styles from './DateFilter.module.scss';
 
 class DateFilter extends Component {
   state = {
     showDatePicker: false,
-    datepicker: {
-      selecting: false,
-      selected: {
-        from: null,
-        to: null
-      }
+    selecting: false,
+    selected: {
+      from: null,
+      to: null
     }
   }
 
-  rangeOptions = [
-    { value: 'hour', label: 'Last Hour' },
-    { value: 'day', label: 'Last 24 Hours' },
-    { value: '7days', label: 'Last 7 Days' },
-    { value: '30days', label: 'Last 30 Days' },
-    { value: '90days', label: 'Last 90 Days' },
-    { value: 'custom', label: 'Custom' }
-  ];
-
   componentDidMount() {
-    this.setState({
-      datepicker: {
-        ...this.state.datepicker,
-        selected: { from: this.props.filter.from, to: this.props.filter.to }
-      }
-    });
+    this.syncStateToProps(this.props);
     window.addEventListener('click', this.handleClickOutside);
     window.addEventListener('keydown', this.handleEsc);
   }
@@ -43,6 +28,15 @@ class DateFilter extends Component {
   componentWillUnmount() {
     window.removeEventListener('click', this.handleClickOutside);
     window.removeEventListener('keydown', this.handleEsc);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.syncStateToProps(nextProps);
+  }
+
+  // Sets local state from reportFilters redux state - need to separate to handle pre-apply state
+  syncStateToProps = ({ filter }) => {
+    this.setState({ selected: { from: filter.from, to: filter.to }});
   }
 
   // Closes popover when clicking outside
@@ -53,7 +47,7 @@ class DateFilter extends Component {
     }
   }
 
-  // Closes popover pressing escape key
+  // Closes popover on escape
   handleEsc = (e) => {
     if (this.state.showDatePicker && e.code === 'Escape') {
       this.setState({ showDatePicker: false });
@@ -65,43 +59,44 @@ class DateFilter extends Component {
   }
 
   handleDayClick = (clicked) => {
-    const { selecting, selected } = this.state.datepicker;
-    const range = selecting ? selected : { from: clicked, to: getEndOfDay(clicked) };
+    const { selecting, selected } = this.state;
+    const dates = selecting ? selected : { from: clicked, to: getEndOfDay(clicked) };
 
-    this.setState({
-      datepicker: {
-        ...this.state.datepicker,
-        range: 'custom',
-        selected: range,
+    this.props.setRelativeTime('custom').then(() => {
+      this.setState({
+        ...this.state,
+        selected: dates,
         selecting: !selecting,
-        beforeSelected: { ...range }
-      }
+        beforeSelected: { ...dates }
+      });
     });
   }
 
   handleDayHover = (hovered) => {
-    const { selecting } = this.state.datepicker;
+    const { selecting } = this.state;
 
     if (selecting) {
       this.setState({
-        datepicker: {
-          ...this.state.datepicker,
-          selected: {
-            ...this.state.datepicker.selected,
-            ...this.getOrderedRange(hovered)
-          }
-        }
+        ...this.state,
+        selected: { ...this.state.selected, ...this.getOrderedRange(hovered) }
       });
     }
   }
 
   getOrderedRange(newDate) {
-    const { from, to } = this.state.datepicker.beforeSelected;
+    const { from, to } = this.state.beforeSelected;
     return (from.getTime() <= newDate.getTime()) ? { from, to: newDate } : { from: newDate, to };
   }
 
-  handleSelectRange = () => {
+  handleSelectRange = (e) => {
+    const value = e.currentTarget.value;
 
+    if (value === 'custom') {
+      this.setState({ showDatePicker: true });
+      this.props.setRelativeTime(value);
+    } else {
+      this.props.setRelativeTime(value).then(() => this.props.refresh());
+    }
   }
 
   handleFieldChange = () => {
@@ -110,11 +105,11 @@ class DateFilter extends Component {
 
   handleSubmit = () => {
     this.setState({ showDatePicker: false });
-    this.props.setExactTime(this.state.datepicker.selected).then(() => this.props.refresh());
+    this.props.setExactTime(this.state.selected).then(() => this.props.refresh());
   }
 
   render() {
-    const { from, to } = this.state.datepicker.selected;
+    const { selected: { from, to } } = this.state;
     const fullFormat = 'MMM DD, YY h:mma';
     const dayFormat = 'MM/DD/YY';
     const timeFormat = 'h:mma';
@@ -132,15 +127,17 @@ class DateFilter extends Component {
       }
     };
 
+    const rangeSelect = <Select
+      options={relativeDateOptions}
+      onChange={this.handleSelectRange}
+      value={this.props.filter.range} />;
+
     const dateField = <TextField
       labelHidden={true}
       onClick={() => this.showDatePicker()}
-      connectLeft={<Select
-        options={this.rangeOptions}
-        defaultValue='7days' />}
+      connectLeft={rangeSelect}
       value={`${formatted.from.full} - ${formatted.to.full}`}
-      readOnly
-    />;
+      readOnly />;
 
     return (
       <Popover
@@ -159,8 +156,7 @@ class DateFilter extends Component {
           onDayClick={this.handleDayClick}
           onDayMouseEnter={this.handleDayHover}
           onDayFocus={this.handleDayHover}
-          selectedDays={this.state.datepicker.selected}
-        />
+          selectedDays={this.state.selected} />
 
         <div className={styles.DateFields}>
           <Grid middle='xs'>
@@ -204,4 +200,4 @@ class DateFilter extends Component {
 }
 
 const mapStateToProps = ({ reportFilters }) => ({ filter: reportFilters });
-export default connect(mapStateToProps, { setExactTime })(DateFilter);
+export default connect(mapStateToProps, { setExactTime, setRelativeTime })(DateFilter);

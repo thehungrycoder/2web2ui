@@ -1,11 +1,9 @@
-import moment from 'moment';
+import { getRelativeDates } from 'helpers/metrics';
 
-const to = new Date();
-const from = moment(to).subtract(1, 'day').toDate();
-
+const DEFAULT_RANGE = 'day';
 const initialState = {
-  to,
-  from,
+  ...getRelativeDates(DEFAULT_RANGE),
+  range: DEFAULT_RANGE,
   activeList: [],
   searchList: []
 };
@@ -16,7 +14,7 @@ export default (state = initialState, action) => {
       return { ...state, ...action.payload };
 
     case 'SET_RELATIVE_TIME':
-      return { ...state };
+      return { ...state, ...action.payload };
 
     case 'ADD_FILTER':
       return { ...state, activeList: [ ...state.activeList, action.payload ]};
