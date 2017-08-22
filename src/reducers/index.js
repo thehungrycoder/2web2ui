@@ -7,6 +7,7 @@ import metrics from './metrics';
 import templates from './templates';
 import webhooks from './webhooks';
 import apiFailure from './apiFailure';
+import reportFilters from './reportFilters';
 
 export default combineReducers({
   auth,
@@ -16,5 +17,6 @@ export default combineReducers({
   templates,
   webhooks,
   apiFailure,
+  reportFilters,
   form: reduxFormReducer
 });
