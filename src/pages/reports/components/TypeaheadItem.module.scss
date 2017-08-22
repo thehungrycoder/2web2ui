@@ -1,0 +1,22 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.TypeaheadItem:before,
+.TypeaheadItem:after {
+  content: "";
+  display: table;
+}
+.TypeaheadItem:after {
+  clear: both;
+}
+
+.Value {
+  float: left;
+  font-size: rem(15);
+  font-weight: 600;
+}
+
+.Type {
+  float: right;
+  font-size: rem(14);
+  opacity: 0.8;
+}

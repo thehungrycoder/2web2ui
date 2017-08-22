@@ -3,7 +3,8 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsi
 import _ from 'lodash';
 import './LineChart.scss';
 
-const colors = ['#37aadc', '#9bcd5a', '#b70c9e', '#e3af00', '#6D39A1'];
+// const colors = ['#37aadc', '#9bcd5a', '#b70c9e', '#e3af00', '#6D39A1'];
+const colors = ['#20578E', '#F38415', '#45A6FF', '#FFD300', '#41B5AB', '#6BEAA8'];
 
 export default class SpLineChart extends React.Component {
   renderLines() {
@@ -55,8 +56,10 @@ export default class SpLineChart extends React.Component {
             formatter={tooltipValueFormatter}
           />
           <Legend
-            verticalAlign='bottom'
-            iconType='circle'/>
+            verticalAlign='top'
+            align='left'
+            height={80}
+            iconType='square'/>
           {this.renderReferenceLines()}
           {this.renderLines()}
         </LineChart>
