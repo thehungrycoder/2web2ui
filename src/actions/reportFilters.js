@@ -1,12 +1,10 @@
-/* eslint-disable */
 import { getRelativeDates } from 'helpers/metrics';
 
 export function setRelativeTime(payload) {
-  const dates = { ...getRelativeDates(payload) }
   return (dispatch) => {
     dispatch({
       type: 'SET_RELATIVE_TIME',
-      payload: { ...dates, range: payload }
+      payload: { ...getRelativeDates(payload), range: payload }
     });
     return Promise.resolve();
   };

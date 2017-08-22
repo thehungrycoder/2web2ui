@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactDOM from 'react-dom';
@@ -97,8 +96,8 @@ class DateFilter extends Component {
     }
   }
 
-  handleFormBlur = ({ from, to}) => {
-    this.setState({ selected: { from, to } })
+  handleFormBlur = ({ from, to }) => {
+    this.setState({ selected: { from, to }});
   }
 
   handleSubmit = () => {
@@ -107,12 +106,7 @@ class DateFilter extends Component {
   }
 
   render() {
-    const { selected: { from, to } } = this.state;
-
-    const formatted = {
-      from: format(from, this.format),
-      to: format(to, this.format)
-    };
+    const { selected: { from, to }} = this.state;
 
     const rangeSelect = <Select
       options={relativeDateOptions}
@@ -121,9 +115,9 @@ class DateFilter extends Component {
 
     const dateField = <TextField
       labelHidden={true}
-      onClick={() => this.showDatePicker()}
+      onClick={this.showDatePicker}
       connectLeft={rangeSelect}
-      value={`${formatted.from} - ${formatted.to}`}
+      value={`${format(from, this.format)} - ${format(to, this.format)}`}
       readOnly />;
 
     return (
