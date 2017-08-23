@@ -95,8 +95,11 @@ class SummaryReportPage extends Component {
     );
   }
 
-  handleMetricsApply = () => {
-
+  handleMetricsApply = (selectedMetrics) => {
+    this.setState({
+      showMetrics: false,
+      options: { metrics: selectedMetrics }
+    }, () => this.refresh());
   }
 
   handleMetricsToggle = () => {
@@ -156,6 +159,7 @@ class SummaryReportPage extends Component {
           <List />
         </Panel>
         <MetricsModal
+          selectedMetrics={this.state.options.metrics}
           open={this.state.showMetrics}
           handleToggle={this.handleMetricsToggle}
           handleApply={this.handleMetricsApply} />

@@ -1,7 +1,19 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
 .Apply {
   float: left;
 }
 
 .Cancel {
   float: right;
+}
+
+.Metric {
+  display: inline-block;
+  width: 33%;
+  margin-right: -4px;
+
+  * {
+    margin-bottom: 0;
+  }
 }
