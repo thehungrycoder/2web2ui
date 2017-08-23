@@ -30,6 +30,7 @@
   }
 }
 
+// TODO Clean this up so app vs. form is more readable
 .content, .formContent {
   position: relative;
   padding: spacing(larger);
@@ -61,6 +62,25 @@
   margin: 0 auto;
 }
 
+.appError, .formError {
+  position: fixed;
+  top: spacing();
+  right: spacing();
+}
+
+.appError {
+  left: spacing();
+  top: rem(100);
+  @media screen and (min-width: breakpoint(medium)) {
+    left: rem(220) + spacing();
+    top: spacing();
+  }
+}
+
+.formError {
+  left: spacing();
+}
+
 .loading {
   position: fixed;
   top: 50%;
@@ -72,4 +92,23 @@
       margin-left: rem(110);
     }
   }
+}
+
+.appError, .formError {
+  position: fixed;
+  top: spacing();
+  right: spacing();
+}
+
+.appError {
+  left: spacing();
+  top: rem(100);
+  @media screen and (min-width: breakpoint(medium)) {
+    left: rem(220) + spacing();
+    top: spacing();
+  }
+}
+
+.formError {
+  left: spacing();
 }

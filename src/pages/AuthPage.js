@@ -13,13 +13,13 @@ class AuthPage extends Component {
     remember_me: false
   }
 
-  updateInput (name, value) {
+  updateInput(name, value) {
     this.setState({
       [name]: value
     });
   }
 
-  renderLoginError () {
+  renderLoginError() {
     const { errorDescription } = this.props.auth;
 
     if (!errorDescription) {
@@ -33,11 +33,11 @@ class AuthPage extends Component {
     );
   }
 
-  renderLoginButton () {
+  renderLoginButton() {
     return this.props.auth.loginPending ? <span><i className="fa fa-spinner fa-spin"></i> Logging In</span> : <span>Log In</span>;
   }
 
-  render () {
+  render() {
     if (this.props.auth.loggedIn) {
       return <Redirect to='/dashboard' />;
     }
@@ -94,7 +94,7 @@ class AuthPage extends Component {
   }
 }
 
-function mapStateToProps ({ auth }) {
+function mapStateToProps({ auth }) {
   return { auth };
 }
 

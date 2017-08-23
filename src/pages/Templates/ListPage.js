@@ -21,7 +21,7 @@ class ListPage extends Component {
     currentPage: 0
   }
 
-  renderRow (template) {
+  renderRow(template) {
     const status = template.published ? 'published' : 'draft';
     const nameLink = <Link to={`/templates/edit/${template.id}`}>{template.name}</Link>;
     return (
@@ -29,18 +29,18 @@ class ListPage extends Component {
     );
   }
 
-  renderTemplateRows (templates, currentPage, perPage) {
+  renderTemplateRows(templates, currentPage, perPage) {
     const currentIndex = currentPage * perPage;
     return templates.slice(currentIndex, currentIndex + perPage).map(
       (template) => this.renderRow(template)
     );
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.props.listTemplates();
   }
 
-  render () {
+  render() {
     const templatesCount = this.props.templates.length;
     const loading = this.props.listLoading;
 
@@ -96,7 +96,7 @@ class ListPage extends Component {
           pages={Math.ceil(templatesCount / this.state.perPage)}
           pageRange={5}
           initialIndex={0}
-          onChange={(index) => { this.setState({currentPage: index}); }}
+          onChange={(index) => { this.setState({ currentPage: index }); }}
         />
         <Button.Group>
           Show:
@@ -109,7 +109,7 @@ class ListPage extends Component {
   }
 }
 
-function mapStateToProps ({ templates }) {
+function mapStateToProps({ templates }) {
   return {
     templates: templates.list,
     listLoading: templates.listLoading

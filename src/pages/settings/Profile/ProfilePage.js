@@ -6,7 +6,7 @@ import { Page, Panel, Table, TextField, Button } from '@sparkpost/matchbox';
 import NameForm from './NameForm';
 
 export class ProfilePage extends Component {
-  render () {
+  render() {
     const {
       username,
       email,

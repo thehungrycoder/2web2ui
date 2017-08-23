@@ -9,7 +9,7 @@ import EmailBanner from './components/EmailBanner';
 import UpgradeBanner from './components/UpgradeBanner';
 
 export class DashboardPage extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
 
     this.state = {
@@ -17,12 +17,12 @@ export class DashboardPage extends Component {
     };
   }
 
-  resendVerfication () {
+  resendVerfication() {
     // TODO do this in redux
     this.setState({ sendingStatus: 'sending' });
   }
 
-  renderOneCta () {
+  renderOneCta() {
     const { currentUser } = this.props;
 
     if (!currentUser['email_verfied']) {
@@ -39,7 +39,7 @@ export class DashboardPage extends Component {
     );
   }
 
-  renderSuppressionBanner () {
+  renderSuppressionBanner() {
     // TODO suppression get
     // if accountAgeInWeeks > 1 && no suppressions
     return (
@@ -49,10 +49,10 @@ export class DashboardPage extends Component {
     );
   }
 
-  render () {
+  render() {
     return (
       <Layout.App>
-        <Page title='Dashboard'/>
+        <Page title='Control Panel'/>
 
         { this.renderOneCta() }
 
