@@ -35,13 +35,13 @@ class GlobalError extends Component {
 
     return (
       <div className={classes}>
-        <Banner
-          title={title}
-          onDismiss={() => this.handleDismiss()}
-          status='danger'
-          overlay >
-          { description }
-        </Banner>
+      <Banner
+        title={title}
+        onDismiss={() => this.handleDismiss()}
+        status='danger'
+      >
+        { description }
+      </Banner>
       </div>
     );
   }

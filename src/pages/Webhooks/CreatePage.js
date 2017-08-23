@@ -10,7 +10,6 @@ import { createWebhook, getEventDocs } from '../../actions/webhooks';
 import Layout from '../../components/Layout/Layout';
 import { Page, Panel } from '@sparkpost/matchbox';
 import WebhookForm from './components/WebhookForm';
-import WebhooksLoading from './components/WebhooksLoading';
 
 class WebhooksCreate extends Component {
   componentDidMount() {
@@ -88,21 +87,11 @@ class WebhooksCreate extends Component {
 
   render() {
     const { eventsLoading } = this.props;  // Form doesn't load until we have events
-
-    if (eventsLoading) {
-      return (
-        <WebhooksLoading
-          title='Create Webhook'
-          breadcrumbAction={{ content: 'Webhooks', Component: Link, to: '/webhooks' }} />
-      );
-    }
-
     const { eventDocs } = this.props;
-
     const eventsTree = this.buildEventsData(eventDocs);
 
     return (
-      <Layout.App>
+      <Layout.App loading={eventsLoading}>
         <Page
           title='Create Webhook'
           breadcrumbAction={{ content: 'Webhooks', Component: Link, to: '/webhooks' }}

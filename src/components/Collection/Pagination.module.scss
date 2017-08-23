@@ -1,0 +1,24 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.Selected {
+  font-weight: 700;
+  color: color(orange);
+  pointer-events: none;
+}
+
+.PageButtons {
+  margin-bottom: spacing();
+  @media screen and (min-width: breakpoint(small)) {
+    width: 50%;
+    float: left;
+  }
+}
+
+.PerPageButtons {
+  @media screen and (min-width: breakpoint(small)) {
+    width: 50%;
+    float: right;
+    text-align: right;
+  }
+}
+
