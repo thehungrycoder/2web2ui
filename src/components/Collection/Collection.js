@@ -22,8 +22,7 @@ class Collection extends Component {
   }
 
   handlePerPageChange = (perPage) => {
-    const currentPage = 1;
-    this.setState({ perPage, currentPage }, this.maybeUpdateQueryString);
+    this.setState({ perPage, currentPage: 1 }, this.maybeUpdateQueryString);
   }
 
   maybeUpdateQueryString() {
