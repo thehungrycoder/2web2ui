@@ -61,10 +61,9 @@ class DateFilter extends Component {
 
     this.props.setRelativeTime('custom').then(() => {
       this.setState({
-        ...this.state,
         selected: dates,
-        selecting: !selecting,
-        beforeSelected: { ...dates }
+        beforeSelected: dates,
+        selecting: !selecting
       });
     });
   }
@@ -73,9 +72,7 @@ class DateFilter extends Component {
     const { selecting } = this.state;
 
     if (selecting) {
-      this.setState({
-        selected: { ...this.state.selected, ...this.getOrderedRange(hovered) }
-      });
+      this.setState({ selected: { ...this.getOrderedRange(hovered) }});
     }
   }
 
