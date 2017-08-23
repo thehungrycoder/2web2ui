@@ -1,22 +1,24 @@
-/* eslint-disable */
 import React, { Component } from 'react';
 import { Modal, Panel, Button, Checkbox, Tooltip } from '@sparkpost/matchbox';
-import { list as METRICS_LIST } from 'config/metrics';
+import { list } from 'config/metrics';
 import _ from 'lodash';
 import styles from './MetricsModal.module.scss';
 
+const METRICS_LIST = _.sortBy(list, ['label']);
+const MAX_METRICS = 5;
+
 class MetricsModal extends Component {
   componentWillMount() {
-    this.syncStateWithProps(this.props);
+    this.syncPropsToState(this.props);
   }
 
   componentWillReceiveProps(nextProps) {
-    this.syncStateWithProps(nextProps);
+    this.syncPropsToState(nextProps);
   }
 
-  syncStateWithProps = (props) => {
+  syncPropsToState = ({ selectedMetrics }) => {
     METRICS_LIST.map((metric) => {
-      const isActive = _.findIndex(props.selectedMetrics, (key) => key === metric.key) > -1;
+      const isActive = _.findIndex(selectedMetrics, (key) => key === metric.key) > -1;
       this.setState({ [metric.key]: isActive });
     });
   }
@@ -29,23 +31,21 @@ class MetricsModal extends Component {
     this.props.handleApply(this.getSelectedMetrics());
   }
 
-  getSelectedMetrics = () => {
-    return _.keys(this.state).filter((key) => !!this.state[key]);
-  }
+  getSelectedMetrics = () => _.keys(this.state).filter((key) => !!this.state[key])
 
   renderMetrics() {
     const selectedCount = this.getSelectedMetrics().length;
     return METRICS_LIST.map((metric) => {
-      if (metric.label) {
-        const selected = this.state[metric.key];
+      if (metric.inSummary) {
+        const checked = this.state[metric.key];
         return (
           <div className={styles.Metric} key={metric.key}>
             <Tooltip content={metric.description}>
               <Checkbox
                 id={metric.key}
-                disabled={selectedCount > 4 && !selected}
+                disabled={selectedCount >= MAX_METRICS && !checked}
                 onChange={() => this.handleCheckbox(metric.key)}
-                checked={selected}
+                checked={checked}
                 label={metric.label} />
             </Tooltip>
           </div>
@@ -55,7 +55,7 @@ class MetricsModal extends Component {
   }
 
   render() {
-    const { open, handleToggle, handleApply } = this.props;
+    const { open, handleToggle } = this.props;
     return (
       <Modal open={open}>
         <Panel title='Select Metrics' sectioned>
