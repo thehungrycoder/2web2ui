@@ -19,7 +19,7 @@ class DateFilter extends Component {
   componentDidMount() {
     this.syncStateToProps(this.props);
     window.addEventListener('click', this.handleClickOutside);
-    window.addEventListener('keydown', this.handleEsc);
+    window.addEventListener('keydown', this.handleKeyDown);
   }
 
   componentWillUnmount() {
@@ -44,11 +44,24 @@ class DateFilter extends Component {
     }
   }
 
-  // Closes popover on escape
-  handleEsc = (e) => {
-    if (this.state.showDatePicker && e.code === 'Escape') {
+  // Closes popover on escape, submits on enter
+  handleKeyDown = (e) => {
+    if (!this.state.showDatePicker) {
+      return;
+    }
+
+    if (e.key === 'Escape') {
       this.cancelDatePicker();
     }
+
+    if (!this.state.selecting && e.key === 'Enter') {
+      this.handleSubmit();
+    }
+  }
+
+  handleDayKeyDown = (day, modifiers, e) => {
+    this.handleKeyDown(e);
+    e.stopPropagation();
   }
 
   cancelDatePicker = () => {
@@ -89,7 +102,6 @@ class DateFilter extends Component {
 
     if (value === 'custom') {
       this.setState({ showDatePicker: true });
-      // this.props.setRelativeTime(value);
     } else {
       this.setState({ showDatePicker: false });
       this.props.setRelativeTime(value).then(() => this.props.refresh());
@@ -138,6 +150,8 @@ class DateFilter extends Component {
           onDayClick={this.handleDayClick}
           onDayMouseEnter={this.handleDayHover}
           onDayFocus={this.handleDayHover}
+          onKeyDown={this.handleKeyDown}
+          onDayKeyDown={this.handleDayKeyDown}
           selectedDays={this.state.selected}
         />
 
