@@ -47,8 +47,13 @@ class DateFilter extends Component {
   // Closes popover on escape
   handleEsc = (e) => {
     if (this.state.showDatePicker && e.code === 'Escape') {
-      this.setState({ showDatePicker: false });
+      this.cancelDatePicker();
     }
+  }
+
+  cancelDatePicker = () => {
+    this.syncStateToProps(this.props);
+    this.setState({ showDatePicker: false });
   }
 
   showDatePicker = () => {
@@ -59,12 +64,10 @@ class DateFilter extends Component {
     const { selecting, selected } = this.state;
     const dates = selecting ? selected : { from: clicked, to: getEndOfDay(clicked) };
 
-    this.props.setRelativeTime('custom').then(() => {
-      this.setState({
-        selected: dates,
-        beforeSelected: dates,
-        selecting: !selecting
-      });
+    this.setState({
+      selected: dates,
+      beforeSelected: dates,
+      selecting: !selecting
     });
   }
 
@@ -86,7 +89,7 @@ class DateFilter extends Component {
 
     if (value === 'custom') {
       this.setState({ showDatePicker: true });
-      this.props.setRelativeTime(value);
+      // this.props.setRelativeTime(value);
     } else {
       this.setState({ showDatePicker: false });
       this.props.setRelativeTime(value).then(() => this.props.refresh());
@@ -103,12 +106,13 @@ class DateFilter extends Component {
   }
 
   render() {
-    const { selected: { from, to }} = this.state;
+    const { selected: { from, to }, showDatePicker } = this.state;
+    const selectedRange = showDatePicker ? 'custom' : this.props.filter.range;
 
     const rangeSelect = <Select
       options={relativeDateOptions}
       onChange={this.handleSelectRange}
-      value={this.props.filter.range} />;
+      value={selectedRange} />;
 
     const dateField = <TextField
       labelHidden={true}
@@ -134,10 +138,12 @@ class DateFilter extends Component {
           onDayClick={this.handleDayClick}
           onDayMouseEnter={this.handleDayHover}
           onDayFocus={this.handleDayHover}
-          selectedDays={this.state.selected} />
+          selectedDays={this.state.selected}
+        />
 
-          <DateForm onBlur={this.handleFormBlur} to={to} from={from} />
+        <DateForm onBlur={this.handleFormBlur} to={to} from={from} />
         <Button primary onClick={this.handleSubmit}>Apply</Button>
+        <Button onClick={this.cancelDatePicker}>Cancel</Button>
       </Popover>
     );
   }
