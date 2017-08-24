@@ -1,23 +1,20 @@
 import React from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceLine } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ReferenceLine } from 'recharts';
 import _ from 'lodash';
 import './LineChart.scss';
 
-// const colors = ['#37aadc', '#9bcd5a', '#b70c9e', '#e3af00', '#6D39A1'];
-const colors = ['#20578E', '#F38415', '#45A6FF', '#FFD300', '#41B5AB', '#6BEAA8'];
+
 
 export default class SpLineChart extends React.Component {
   renderLines() {
     const { lines = []} = this.props;
-    let colorIndex = 0;
     return lines.map((line) => {
       const lineProps = {
         strokeWidth: 2,
         activeDot: { r: 6 },
         dot: false,
         type: 'linear',
-        ...line,
-        stroke: line.stroke || colors[colorIndex++]
+        ...line
       };
       return <Line {...lineProps} />;
     });
@@ -55,11 +52,11 @@ export default class SpLineChart extends React.Component {
             labelFormatter={tooltipLabelFormatter}
             formatter={tooltipValueFormatter}
           />
-          <Legend
+          {/* <Legend
             verticalAlign='top'
             align='left'
             height={80}
-            iconType='square'/>
+            iconType='square'/> */}
           {this.renderReferenceLines()}
           {this.renderLines()}
         </LineChart>

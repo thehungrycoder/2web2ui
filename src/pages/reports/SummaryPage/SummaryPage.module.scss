@@ -36,10 +36,24 @@
   padding: spacing(small) 0 0;
 }
 
+.ChartHeader {
+  margin-bottom: spacing(large);
+}
+
 .Controls {
-  position: absolute;
-  top: rem(30);
-  right: spacing(large);
+  margin-top: spacing();
+  margin-left: spacing(larger);
+  text-align: left;
+
+  & * {
+    text-align: left;
+  }
+
+  @media screen and (min-width: breakpoint(small)) {
+    margin-top: 0;
+    margin-left: 0;
+    text-align: right;
+  }
 }
 
 .ButtonSpacer {

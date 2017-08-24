@@ -21,6 +21,7 @@
 
 .aside {
   position: relative;
+  z-index: 1;
   flex: 0 0 0;
 
   @media screen and (min-width: breakpoint(medium)) {

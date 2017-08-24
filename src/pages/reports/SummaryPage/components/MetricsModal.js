@@ -58,11 +58,15 @@ class MetricsModal extends Component {
     const { open, handleToggle } = this.props;
     return (
       <Modal open={open}>
-        <Panel title='Select Metrics' sectioned>
-          <p>Select up to 5 metrics:</p>
-          <div>{ this.renderMetrics() }</div>
-          <Button onClick={this.handleApply} primary className={styles.Apply}>Apply Metrics</Button>
-          <Button onClick={handleToggle} className={styles.Cancel}>Cancel</Button>
+        <Panel>
+          <Panel.Section>
+            <h5>Select up to 5 metrics</h5>
+            <div>{ this.renderMetrics() }</div>
+          </Panel.Section>
+          <Panel.Section>
+            <Button onClick={this.handleApply} primary className={styles.Apply}>Apply Metrics</Button>
+            <Button onClick={handleToggle} className={styles.Cancel}>Cancel</Button>
+          </Panel.Section>
         </Panel>
       </Modal>
     );
