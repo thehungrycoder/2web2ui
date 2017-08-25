@@ -17,7 +17,7 @@ class DateFilter extends Component {
   }
 
   componentDidMount() {
-    this.syncStateToProps(this.props);
+    this.syncPropsToState(this.props);
     window.addEventListener('click', this.handleClickOutside);
     window.addEventListener('keydown', this.handleKeyDown);
   }
@@ -28,11 +28,11 @@ class DateFilter extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.syncStateToProps(nextProps);
+    this.syncPropsToState(nextProps);
   }
 
   // Sets local state from reportFilters redux state - need to separate to handle pre-apply state
-  syncStateToProps = ({ filter }) => {
+  syncPropsToState = ({ filter }) => {
     this.setState({ selected: { from: filter.from, to: filter.to }});
   }
 
@@ -65,7 +65,7 @@ class DateFilter extends Component {
   }
 
   cancelDatePicker = () => {
-    this.syncStateToProps(this.props);
+    this.syncPropsToState(this.props);
     this.setState({ showDatePicker: false });
   }
 
@@ -108,8 +108,8 @@ class DateFilter extends Component {
     }
   }
 
-  handleFormChange = ({ from, to }) => {
-    this.setState({ selected: { from, to }});
+  handleFormDates = ({ from, to }, callback) => {
+    this.setState({ selected: { from, to }}, () => callback());
   }
 
   handleSubmit = () => {
@@ -155,8 +155,8 @@ class DateFilter extends Component {
           selectedDays={this.state.selected}
         />
 
-        <DateForm onChange={this.handleFormChange} to={to} from={from} />
-        <Button primary onClick={this.handleSubmit}>Apply</Button>
+        <DateForm selectDates={this.handleFormDates} onEnter={this.handleKeyDown} to={to} from={from} />
+        <Button primary onClick={this.handleSubmit} className={styles.Apply}>Apply</Button>
         <Button onClick={this.cancelDatePicker}>Cancel</Button>
       </Popover>
     );
