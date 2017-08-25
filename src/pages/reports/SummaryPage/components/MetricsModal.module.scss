@@ -10,12 +10,8 @@
 
 .Metric {
   display: inline-block;
-  margin-bottom: rem(-12);
+  margin-bottom: rem(3);
   min-width: rem(210);
   width: 33%;
   margin-right: -4px;
-
-  * {
-    margin-bottom: 0;
-  }
 }
