@@ -20,6 +20,7 @@ export {
   getLineChartFormatters,
   getPrecision,
   getDayLines,
+  getStartOfDay,
   getEndOfDay,
   relativeDateOptions,
   getRelativeDates
@@ -105,12 +106,22 @@ function getDayLines(data, { precision = 'day' }) {
 
 function getEndOfDay(date) {
   const end = new Date(date);
-  end.setHours(11);
+  end.setHours(23);
   end.setMinutes(59);
   end.setSeconds(59);
   end.setMilliseconds(0);
 
   return end;
+}
+
+function getStartOfDay(date) {
+  const start = new Date(date);
+  start.setHours(0);
+  start.setMinutes(0);
+  start.setSeconds(0);
+  start.setMilliseconds(0);
+
+  return start;
 }
 
 const relativeDateOptions = [

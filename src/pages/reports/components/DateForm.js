@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import { format } from 'date-fns';
+import _ from 'lodash';
 
 import { Grid, TextField, Icon } from '@sparkpost/matchbox';
 import styles from './DateForm.module.scss';
@@ -31,21 +32,22 @@ class DateForm extends Component {
 
   handleFieldChange = (e, key) => {
     this.setState({ [key]: e.target.value });
+    this.debounceChanges();
   }
 
-  handleBlur = (e) => {
+  debounceChanges = _.debounce(() => {
     const format = `${this.dayFormat} ${this.timeFormat}`;
     const to = moment(`${this.state.toDate} ${this.state.toTime}`, format, true);
     const from = moment(`${this.state.fromDate} ${this.state.fromTime}`, format, true);
     const now = moment();
 
     if (to.isValid() && from.isValid() && from.isBefore(to) && to.isBefore(now)) {
-      this.props.onBlur({ to: to.toDate(), from: from.toDate() });
+      this.props.onChange({ to: to.toDate(), from: from.toDate() });
     } else {
       // Resets fields if dates are not valid
       this.syncStateToProps(this.props);
     }
-  }
+  }, 500);
 
   render() {
     const { toDate, toTime, fromDate, fromTime } = this.state;
@@ -57,14 +59,12 @@ class DateForm extends Component {
             <TextField
               label='From Date' labelHidden
               onChange={(e) => this.handleFieldChange(e, 'fromDate')}
-              onBlur={this.handleBlur}
               value={fromDate} />
           </Grid.Column>
           <Grid.Column >
             <TextField
               label='From Time' labelHidden
               onChange={(e) => this.handleFieldChange(e, 'fromTime')}
-              onBlur={this.handleBlur}
               value={fromTime} />
           </Grid.Column>
           <Grid.Column xs={1}>
@@ -76,14 +76,12 @@ class DateForm extends Component {
             <TextField
               label='To Date' labelHidden
               onChange={(e) => this.handleFieldChange(e, 'toDate')}
-              onBlur={this.handleBlur}
               value={toDate} />
           </Grid.Column>
           <Grid.Column >
             <TextField
               label='To Time' labelHidden
               onChange={(e) => this.handleFieldChange(e, 'toTime')}
-              onBlur={this.handleBlur}
               value={toTime} />
           </Grid.Column>
         </Grid>

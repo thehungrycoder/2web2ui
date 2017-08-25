@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactDOM from 'react-dom';
 import { subMonths, format } from 'date-fns';
-import { getEndOfDay, relativeDateOptions } from 'helpers/metrics';
+import { getStartOfDay, getEndOfDay, relativeDateOptions } from 'helpers/metrics';
 import { Button, Datepicker, TextField, Select, Popover } from '@sparkpost/matchbox';
 import { setExactTime, setRelativeTime } from 'actions/reportFilters';
 import DateForm from './DateForm';
@@ -75,7 +75,7 @@ class DateFilter extends Component {
 
   handleDayClick = (clicked) => {
     const { selecting, selected } = this.state;
-    const dates = selecting ? selected : { from: clicked, to: getEndOfDay(clicked) };
+    const dates = selecting ? selected : { from: getStartOfDay(clicked), to: getEndOfDay(clicked) };
 
     this.setState({
       selected: dates,
@@ -94,7 +94,7 @@ class DateFilter extends Component {
 
   getOrderedRange(newDate) {
     const { from, to } = this.state.beforeSelected;
-    return (from.getTime() <= newDate.getTime()) ? { from, to: newDate } : { from: newDate, to };
+    return (from.getTime() <= newDate.getTime()) ? { from, to: getEndOfDay(newDate) } : { from: getStartOfDay(newDate), to };
   }
 
   handleSelectRange = (e) => {
@@ -108,12 +108,12 @@ class DateFilter extends Component {
     }
   }
 
-  handleFormBlur = ({ from, to }) => {
+  handleFormChange = ({ from, to }) => {
     this.setState({ selected: { from, to }});
   }
 
   handleSubmit = () => {
-    this.setState({ showDatePicker: false });
+    this.setState({ showDatePicker: false, selecting: false });
     this.props.setExactTime(this.state.selected).then(() => this.props.refresh());
   }
 
@@ -155,7 +155,7 @@ class DateFilter extends Component {
           selectedDays={this.state.selected}
         />
 
-        <DateForm onBlur={this.handleFormBlur} to={to} from={from} />
+        <DateForm onChange={this.handleFormChange} to={to} from={from} />
         <Button primary onClick={this.handleSubmit}>Apply</Button>
         <Button onClick={this.cancelDatePicker}>Cancel</Button>
       </Popover>
