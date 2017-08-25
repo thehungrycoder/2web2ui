@@ -20,7 +20,7 @@ export default function sparkpostApiRequest ({ dispatch, getState }) {
 
     const { auth } = getState();
     const { meta } = action;
-    const { url, method = 'get', type = 'NO_TYPE_DEFINED', params, headers, data, chain = {}, retries = 0 } = meta;
+    const { url, method = 'get', type = 'NO_TYPE_DEFINED', params, headers, data, onSuccess, retries = 0 } = meta;
     const PENDING_TYPE = `${type}_PENDING`;
     const SUCCESS_TYPE = `${type}_SUCCESS`;
     const FAIL_TYPE = `${type}_FAIL`;
@@ -49,8 +49,8 @@ export default function sparkpostApiRequest ({ dispatch, getState }) {
       });
 
       // if we need to chain together another action, do it here
-      if (typeof chain.success === 'function') {
-        chain.success({ dispatch, getState, results });
+      if (typeof onSuccess === 'function') {
+        onSuccess({ dispatch, getState, results });
       }
     }, ({ message, response = {} }) => {
       // NOTE: if this is a 401, need to do a refresh to get
