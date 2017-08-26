@@ -2,47 +2,38 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactDOM from 'react-dom';
 import { subMonths, format } from 'date-fns';
-import { getEndOfDay } from 'helpers/metrics';
-import { Grid, Button, Datepicker, TextField, Select, Popover, Icon } from '@sparkpost/matchbox';
-import { setExactTime } from 'actions/reportFilters';
-
+import { getStartOfDay, getEndOfDay, relativeDateOptions } from 'helpers/metrics';
+import { Button, Datepicker, TextField, Select, Popover } from '@sparkpost/matchbox';
+import { setExactTime, setRelativeTime } from 'actions/reportFilters';
+import DateForm from './DateForm';
 import styles from './DateFilter.module.scss';
 
 class DateFilter extends Component {
+  format = 'MMM DD, YY h:mma';
   state = {
     showDatePicker: false,
-    datepicker: {
-      selecting: false,
-      selected: {
-        from: null,
-        to: null
-      }
-    }
+    selecting: false,
+    selected: { }
   }
 
-  rangeOptions = [
-    { value: 'hour', label: 'Last Hour' },
-    { value: 'day', label: 'Last 24 Hours' },
-    { value: '7days', label: 'Last 7 Days' },
-    { value: '30days', label: 'Last 30 Days' },
-    { value: '90days', label: 'Last 90 Days' },
-    { value: 'custom', label: 'Custom' }
-  ];
-
   componentDidMount() {
-    this.setState({
-      datepicker: {
-        ...this.state.datepicker,
-        selected: { from: this.props.filter.from, to: this.props.filter.to }
-      }
-    });
+    this.syncPropsToState(this.props);
     window.addEventListener('click', this.handleClickOutside);
-    window.addEventListener('keydown', this.handleEsc);
+    window.addEventListener('keydown', this.handleKeyDown);
   }
 
   componentWillUnmount() {
     window.removeEventListener('click', this.handleClickOutside);
     window.removeEventListener('keydown', this.handleEsc);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.syncPropsToState(nextProps);
+  }
+
+  // Sets local state from reportFilters redux state - need to separate to handle pre-apply state
+  syncPropsToState = ({ filter }) => {
+    this.setState({ selected: { from: filter.from, to: filter.to }});
   }
 
   // Closes popover when clicking outside
@@ -53,11 +44,29 @@ class DateFilter extends Component {
     }
   }
 
-  // Closes popover pressing escape key
-  handleEsc = (e) => {
-    if (this.state.showDatePicker && e.code === 'Escape') {
-      this.setState({ showDatePicker: false });
+  // Closes popover on escape, submits on enter
+  handleKeyDown = (e) => {
+    if (!this.state.showDatePicker) {
+      return;
     }
+
+    if (e.key === 'Escape') {
+      this.cancelDatePicker();
+    }
+
+    if (!this.state.selecting && e.key === 'Enter') {
+      this.handleSubmit();
+    }
+  }
+
+  handleDayKeyDown = (day, modifiers, e) => {
+    this.handleKeyDown(e);
+    e.stopPropagation();
+  }
+
+  cancelDatePicker = () => {
+    this.syncPropsToState(this.props);
+    this.setState({ showDatePicker: false });
   }
 
   showDatePicker = () => {
@@ -65,82 +74,64 @@ class DateFilter extends Component {
   }
 
   handleDayClick = (clicked) => {
-    const { selecting, selected } = this.state.datepicker;
-    const range = selecting ? selected : { from: clicked, to: getEndOfDay(clicked) };
+    const { selecting, selected } = this.state;
+    const dates = selecting ? selected : { from: getStartOfDay(clicked), to: getEndOfDay(clicked) };
 
     this.setState({
-      datepicker: {
-        ...this.state.datepicker,
-        range: 'custom',
-        selected: range,
-        selecting: !selecting,
-        beforeSelected: { ...range }
-      }
+      selected: dates,
+      beforeSelected: dates,
+      selecting: !selecting
     });
   }
 
   handleDayHover = (hovered) => {
-    const { selecting } = this.state.datepicker;
+    const { selecting } = this.state;
 
     if (selecting) {
-      this.setState({
-        datepicker: {
-          ...this.state.datepicker,
-          selected: {
-            ...this.state.datepicker.selected,
-            ...this.getOrderedRange(hovered)
-          }
-        }
-      });
+      this.setState({ selected: { ...this.getOrderedRange(hovered) }});
     }
   }
 
   getOrderedRange(newDate) {
-    const { from, to } = this.state.datepicker.beforeSelected;
-    return (from.getTime() <= newDate.getTime()) ? { from, to: newDate } : { from: newDate, to };
+    const { from, to } = this.state.beforeSelected;
+    return (from.getTime() <= newDate.getTime()) ? { from, to: getEndOfDay(newDate) } : { from: getStartOfDay(newDate), to };
   }
 
-  handleSelectRange = () => {
+  handleSelectRange = (e) => {
+    const value = e.currentTarget.value;
 
+    if (value === 'custom') {
+      this.setState({ showDatePicker: true });
+    } else {
+      this.setState({ showDatePicker: false });
+      this.props.setRelativeTime(value).then(() => this.props.refresh());
+    }
   }
 
-  handleFieldChange = () => {
-
+  handleFormDates = ({ from, to }, callback) => {
+    this.setState({ selected: { from, to }}, () => callback());
   }
 
   handleSubmit = () => {
-    this.setState({ showDatePicker: false });
-    this.props.setExactTime(this.state.datepicker.selected).then(() => this.props.refresh());
+    this.setState({ showDatePicker: false, selecting: false });
+    this.props.setExactTime(this.state.selected).then(() => this.props.refresh());
   }
 
   render() {
-    const { from, to } = this.state.datepicker.selected;
-    const fullFormat = 'MMM DD, YY h:mma';
-    const dayFormat = 'MM/DD/YY';
-    const timeFormat = 'h:mma';
+    const { selected: { from, to }, showDatePicker } = this.state;
+    const selectedRange = showDatePicker ? 'custom' : this.props.filter.range;
 
-    const formatted = {
-      from: {
-        full: format(from, fullFormat),
-        day: format(from, dayFormat),
-        time: format(from, timeFormat)
-      },
-      to: {
-        full: format(to, fullFormat),
-        day: format(to, dayFormat),
-        time: format(to, timeFormat)
-      }
-    };
+    const rangeSelect = <Select
+      options={relativeDateOptions}
+      onChange={this.handleSelectRange}
+      value={selectedRange} />;
 
     const dateField = <TextField
       labelHidden={true}
-      onClick={() => this.showDatePicker()}
-      connectLeft={<Select
-        options={this.rangeOptions}
-        defaultValue='7days' />}
-      value={`${formatted.from.full} - ${formatted.to.full}`}
-      readOnly
-    />;
+      onClick={this.showDatePicker}
+      connectLeft={rangeSelect}
+      value={`${format(from, this.format)} - ${format(to, this.format)}`}
+      readOnly />;
 
     return (
       <Popover
@@ -159,49 +150,18 @@ class DateFilter extends Component {
           onDayClick={this.handleDayClick}
           onDayMouseEnter={this.handleDayHover}
           onDayFocus={this.handleDayHover}
-          selectedDays={this.state.datepicker.selected}
+          onKeyDown={this.handleKeyDown}
+          onDayKeyDown={this.handleDayKeyDown}
+          selectedDays={this.state.selected}
         />
 
-        <div className={styles.DateFields}>
-          <Grid middle='xs'>
-            <Grid.Column >
-              <TextField
-                label='From'
-                labelHidden
-                onChange={this.handleFieldChange}
-                value={formatted.from.day} />
-            </Grid.Column>
-            <Grid.Column >
-              <TextField
-                labelHidden
-                onChange={this.handleFieldChange}
-                value={formatted.from.time} />
-            </Grid.Column>
-            <Grid.Column xs={1}>
-              <div className={styles.ArrowWrapper}>
-                <Icon name='ArrowRight'/>
-              </div>
-            </Grid.Column>
-            <Grid.Column >
-              <TextField
-                label='To'
-                labelHidden
-                onChange={this.handleFieldChange}
-                value={formatted.to.day} />
-            </Grid.Column>
-            <Grid.Column >
-              <TextField
-                labelHidden
-                onChange={this.handleFieldChange}
-                value={formatted.to.time} />
-            </Grid.Column>
-          </Grid>
-        </div>
-        <Button primary onClick={this.handleSubmit}>Apply</Button>
+        <DateForm selectDates={this.handleFormDates} onEnter={this.handleKeyDown} to={to} from={from} />
+        <Button primary onClick={this.handleSubmit} className={styles.Apply}>Apply</Button>
+        <Button onClick={this.cancelDatePicker}>Cancel</Button>
       </Popover>
     );
   }
 }
 
 const mapStateToProps = ({ reportFilters }) => ({ filter: reportFilters });
-export default connect(mapStateToProps, { setExactTime })(DateFilter);
+export default connect(mapStateToProps, { setExactTime, setRelativeTime })(DateFilter);
