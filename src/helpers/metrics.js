@@ -15,6 +15,15 @@ const precisionMap = [
 
 const indexedPrecisions = _.keyBy(precisionMap, 'value');
 
+const relativeDateOptions = [
+  { value: 'hour', label: 'Last Hour' },
+  { value: 'day', label: 'Last 24 Hours' },
+  { value: '7days', label: 'Last 7 Days' },
+  { value: '30days', label: 'Last 30 Days' },
+  { value: '90days', label: 'Last 90 Days' },
+  { value: 'custom', label: 'Custom' }
+];
+
 export {
   getQueryFromOptions,
   getLineChartFormatters,
@@ -123,15 +132,6 @@ function getStartOfDay(date) {
 
   return start;
 }
-
-const relativeDateOptions = [
-    { value: 'hour', label: 'Last Hour' },
-    { value: 'day', label: 'Last 24 Hours' },
-    { value: '7days', label: 'Last 7 Days' },
-    { value: '30days', label: 'Last 30 Days' },
-    { value: '90days', label: 'Last 90 Days' },
-    { value: 'custom', label: 'Custom' }
-];
 
 function getRelativeDates(range) {
   const to = new Date();
