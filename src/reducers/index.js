@@ -8,6 +8,7 @@ import templates from './templates';
 import webhooks from './webhooks';
 import apiFailure from './apiFailure';
 import reportFilters from './reportFilters';
+import summaryChart from './summaryChart';
 
 export default combineReducers({
   auth,
@@ -18,5 +19,6 @@ export default combineReducers({
   webhooks,
   apiFailure,
   reportFilters,
+  summaryChart,
   form: reduxFormReducer
 });

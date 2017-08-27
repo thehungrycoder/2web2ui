@@ -1,6 +1,8 @@
 import moment from 'moment';
 import _ from 'lodash';
+import { list as METRICS_LIST } from 'config/metrics';
 
+const COLORS = ['#20578E', '#F38415', '#45A6FF', '#FFD300', '#41B5AB', '#6BEAA8'];
 const apiDateFormat = 'YYYY-MM-DDTHH:mm';
 const precisionMap = [
   { time: 60, value: '1min', format: 'ha' },
@@ -32,7 +34,8 @@ export {
   getStartOfDay,
   getEndOfDay,
   relativeDateOptions,
-  getRelativeDates
+  getRelativeDates,
+  getMetricsFromList
 };
 
 const getTickFormatter = _.memoize((precisionType) => {
@@ -48,7 +51,7 @@ const getTooltipLabelFormatter = _.memoize((precisionType) => {
   return (label) => moment(label).format(labelFormat);
 });
 
-function getLineChartFormatters({ precision }) {
+function getLineChartFormatters(precision) {
   const formatters = {};
   const precisionType = getPrecisionType(precision);
 
@@ -75,6 +78,10 @@ function getQueryFromOptions({ from, to, metrics }) {
   from = moment(from).utc();
   to = moment(to).utc();
 
+  if (_.isObject(metrics[0])) {
+    metrics = metrics.map((m) => m.key);
+  }
+
   return {
     metrics: metrics.join(','),
     precision: getPrecision(from, to),
@@ -97,7 +104,7 @@ function getPrecisionType(precision) {
   return (indexedPrecisions[precision].time <= (60 * 24 * 2)) ? 'hours' : 'days';
 }
 
-function getDayLines(data, { precision = 'day' }) {
+function getDayLines(data, precision = 'day') {
   if (getPrecisionType(precision) !== 'hours') {
     return [];
   }
@@ -152,4 +159,11 @@ function getRelativeDates(range) {
     case '90days':
       return { to, from: moment(to).subtract(90, 'day').toDate() };
   }
+}
+
+function getMetricsFromList(list) {
+  return list.map((metric, i) => {
+    const found = METRICS_LIST.find((M) => M.key === metric);
+    return { ...found, name: found.key, stroke: COLORS[i] };
+  });
 }

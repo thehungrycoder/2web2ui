@@ -30,7 +30,8 @@ export default function sparkpostApiRequest({ dispatch, getState }) {
     const FAIL_TYPE = `${type}_FAIL`;
 
     dispatch({
-      type: PENDING_TYPE
+      type: PENDING_TYPE,
+      meta
     });
 
     const httpOptions = {
@@ -57,7 +58,8 @@ export default function sparkpostApiRequest({ dispatch, getState }) {
       // we only get here if the request returned a 2xx status code
       dispatch({
         type: SUCCESS_TYPE,
-        payload: results
+        payload: results,
+        meta
       });
 
       // if we need to chain together another action, do it here
@@ -111,7 +113,8 @@ export default function sparkpostApiRequest({ dispatch, getState }) {
       // any other API error should automatically fail, to be handled in the reducers/components
       dispatch({
         type: FAIL_TYPE,
-        payload: { message, response }
+        payload: { message, response },
+        meta
       });
 
       if (response.status >= 500) {

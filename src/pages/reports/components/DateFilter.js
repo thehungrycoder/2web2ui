@@ -4,7 +4,6 @@ import ReactDOM from 'react-dom';
 import { subMonths, format } from 'date-fns';
 import { getStartOfDay, getEndOfDay, relativeDateOptions } from 'helpers/metrics';
 import { Button, Datepicker, TextField, Select, Popover } from '@sparkpost/matchbox';
-import { setExactTime, setRelativeTime } from 'actions/reportFilters';
 import DateForm from './DateForm';
 import styles from './DateFilter.module.scss';
 
@@ -104,7 +103,7 @@ class DateFilter extends Component {
       this.setState({ showDatePicker: true });
     } else {
       this.setState({ showDatePicker: false });
-      this.props.setRelativeTime(value).then(() => this.props.refresh());
+      this.props.refresh({ relativeRange: value });
     }
   }
 
@@ -114,7 +113,7 @@ class DateFilter extends Component {
 
   handleSubmit = () => {
     this.setState({ showDatePicker: false, selecting: false });
-    this.props.setExactTime(this.state.selected).then(() => this.props.refresh());
+    this.props.refresh({ ...this.state.selected, relativeRange: 'custom' });
   }
 
   render() {
@@ -164,4 +163,4 @@ class DateFilter extends Component {
 }
 
 const mapStateToProps = ({ reportFilters }) => ({ filter: reportFilters });
-export default connect(mapStateToProps, { setExactTime, setRelativeTime })(DateFilter);
+export default connect(mapStateToProps)(DateFilter);
