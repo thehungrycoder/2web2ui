@@ -1,16 +1,16 @@
-import { getMetricsFromList, transformData } from 'helpers/metrics';
+import { getMetricsFromKeys, transformData } from 'helpers/metrics';
 
 const initialState = {
-  metrics: getMetricsFromList(['count_targeted', 'spam_complaint_rate', 'count_accepted', 'count_bounce']),
+  metrics: getMetricsFromKeys(['count_targeted', 'spam_complaint_rate', 'count_accepted', 'count_bounce']),
   precision: '',
   data: []
 };
 
-export default (state = initialState, { type, payload, meta }) => {
+export default (state = initialState, { type, payload }) => {
   switch (type) {
-    case 'FETCH_METRICS_SUCCESS': {
-      const { metrics, precision } = meta;
-      return { ...state, data: transformData(payload, metrics), metrics, precision };
+    case 'REFRESH_SUMMARY_CHART': {
+      const { data, metrics, precision } = payload;
+      return { ...state, data: transformData(data, metrics), metrics, precision };
     }
 
     default:

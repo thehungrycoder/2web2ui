@@ -23,26 +23,6 @@ const getTimeTickFormatter = _.memoize((precisionType) => {
   return (tick) => moment(tick).format(tickFormat);
 });
 
-const formatLargeNumber = (value) => {
-  if (value < 1000) {
-    return value.toLocaleString();
-  }
-  if (value < 1000000) {
-    return `${(value / 1000).toFixed(0).toLocaleString()}K`;
-  }
-  if (value < 100000000) {
-    return `${(value / 1000000).toFixed(0).toLocaleString()}M`;
-  }
-  return value.toPrecision(2);
-};
-
-const getUnitTickFormatter = (unit) => (value) => {
-  if (!unit) {
-    return formatLargeNumber(value);
-  }
-  return `${value}${unit}`;
-};
-
 const getTooltipLabelFormatter = _.memoize((precisionType) => {
   let labelFormat = 'MMMM Do';
   if (precisionType === 'hours') {
@@ -56,17 +36,12 @@ function getLineChartFormatters(precision) {
   const precisionType = getPrecisionType(precision);
 
   formatters.xTickFormatter = getTimeTickFormatter(precisionType);
-  // formatters.yTickFormatter = getUnitTickFormatter();
   formatters.tooltipLabelFormatter = getTooltipLabelFormatter(precisionType);
-  formatters.tooltipValueFormatter = (value) => Number(value).toLocaleString();
 
   return formatters;
 }
 
 export {
   getDayLines,
-  getTimeTickFormatter,
-  getUnitTickFormatter,
-  getTooltipLabelFormatter,
   getLineChartFormatters
 };

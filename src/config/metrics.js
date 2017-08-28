@@ -3,8 +3,7 @@ function average(item, keys = []) {
 }
 
 function rate(item, keys) {
-  const rate = (item[keys[0]] / item[keys[1]]) * 100;
-  return parseFloat(rate.toFixed(1), 10);
+  return (item[keys[0]] / item[keys[1]]) * 100;
 }
 
 export const list = [
@@ -12,7 +11,7 @@ export const list = [
     key: 'count_targeted',
     label: 'Targeted',
     type: 'total',
-    measure: 'count',
+    unit: 'number',
     description: 'Messages successfully injected into SparkPost as well as rejected by it.',
     inSummary: true
   },
@@ -20,7 +19,7 @@ export const list = [
     key: 'count_injected',
     label: 'Injected',
     type: 'total',
-    measure: 'count',
+    unit: 'number',
     description: 'Messages either injected to or received by SparkPost.',
     inSummary: true
   },
@@ -28,7 +27,7 @@ export const list = [
     key: 'count_sent',
     label: 'Sent',
     type: 'total',
-    measure: 'count',
+    unit: 'number',
     description: 'Messages that SparkPost attempted to deliver, which includes both Deliveries and In-Band Bounces.',
     inSummary: true
   },
@@ -36,7 +35,7 @@ export const list = [
     key: 'count_accepted',
     label: 'Accepted',
     type: 'total',
-    measure: 'count',
+    unit: 'number',
     description: 'Messages an ISP or other remote domain accepted (less Out-of-Band Bounces).',
     inSummary: true
   },
@@ -44,7 +43,7 @@ export const list = [
     key: 'count_delivered_first',
     label: 'Delivered 1st Attempt',
     type: 'total',
-    measure: 'count',
+    unit: 'number',
     description: 'Messages delivered on the first attempt.',
     inSummary: true
   },
@@ -52,7 +51,7 @@ export const list = [
     key: 'count_delivered_subsequent',
     label: 'Delivered 2+ Attempts',
     type: 'total',
-    measure: 'count',
+    unit: 'number',
     description: 'Messages delivered that required more than one delivery attempt.',
     inSummary: true
   },
@@ -60,7 +59,7 @@ export const list = [
     key: 'count_spam_complaint',
     label: 'Spam Complaints',
     type: 'total',
-    measure: 'count',
+    unit: 'number',
     description: 'Number of spam complaints received from an ISP',
     notApplicableFor: ['nodes'],
     inSummary: true
@@ -68,8 +67,7 @@ export const list = [
   {
     key: 'spam_complaint_rate',
     label: 'Spam Complaint Rate',
-    measure: 'percent',
-    unit: '%',
+    unit: 'percent',
     computeKeys: ['count_spam_complaint', 'count_delivered'],
     compute: rate,
     description: 'Percentage of Delivered messages that resulted in spam complaints.',
@@ -79,7 +77,7 @@ export const list = [
     key: 'count_rendered',
     label: 'Rendered',
     type: 'total',
-    measure: 'count',
+    unit: 'number',
     description: 'Total renderings of a message.',
     inSummary: true
   },
@@ -87,7 +85,7 @@ export const list = [
     key: 'count_unique_rendered_approx',
     label: 'Unique Rendered',
     type: 'total',
-    measure: 'count',
+    unit: 'number',
     description: 'Total number of messages that were rendered at least once.',
     inSummary: true
   },
@@ -95,7 +93,7 @@ export const list = [
     key: 'count_unique_confirmed_opened_approx',
     label: 'Unique Confirmed Opens',
     type: 'total',
-    measure: 'count',
+    unit: 'number',
     description: 'Total number of messages that were either rendered or had at least one link selected.',
     inSummary: true
   },
@@ -103,7 +101,7 @@ export const list = [
     key: 'count_clicked',
     label: 'Clicks',
     type: 'total',
-    measure: 'count',
+    unit: 'number',
     description: 'Total number of times that links were selected across all messages.',
     inSummary: true
   },
@@ -111,7 +109,7 @@ export const list = [
     key: 'count_unique_clicked_approx',
     label: 'Unique Clicks',
     type: 'total',
-    measure: 'count',
+    unit: 'number',
     description: 'Total number of messages which had at least one link selected one or more times. ',
     inSummary: true
   },
@@ -119,7 +117,7 @@ export const list = [
     key: 'count_bounce',
     label: 'Bounced',
     type: 'total',
-    measure: 'count',
+    unit: 'number',
     description: 'Total number of bounced messages, which includes both In-Band and Out-of-Band bounces.',
     inSummary: true
   },
@@ -127,7 +125,7 @@ export const list = [
     key: 'count_hard_bounce',
     label: 'Hard Bounced',
     type: 'total',
-    measure: 'count',
+    unit: 'number',
     description: 'Total number of Bounced messages due to hard bounce classification reasons.',
     inSummary: true
   },
@@ -135,7 +133,7 @@ export const list = [
     key: 'count_soft_bounce',
     label: 'Soft Bounced',
     type: 'total',
-    measure: 'count',
+    unit: 'number',
     description: 'Total number of Bounced messages due to soft bounce classification reasons.',
     inSummary: true
   },
@@ -143,7 +141,7 @@ export const list = [
     key: 'count_block_bounce',
     label: 'Block Bounced',
     type: 'total',
-    measure: 'count',
+    unit: 'number',
     description: 'Total number of Bounced messages due to an IP block.',
     inSummary: true
   },
@@ -151,7 +149,7 @@ export const list = [
     key: 'count_admin_bounce',
     label: 'Admin Bounced',
     type: 'total',
-    measure: 'count',
+    unit: 'number',
     description: 'Total number of Bounced messages due to admin bounce classification reasons, also includes Rejected.',
     inSummary: true
   },
@@ -159,7 +157,7 @@ export const list = [
     key: 'count_undetermined_bounce',
     label: 'Undetermined Bounced',
     type: 'total',
-    measure: 'count',
+    unit: 'number',
     description: 'Total number of Bounced messages due to undetermined bounce reasons.',
     inSummary: true
   },
@@ -167,7 +165,7 @@ export const list = [
     key: 'count_rejected',
     label: 'Rejected',
     type: 'total',
-    measure: 'count',
+    unit: 'number',
     description: 'Messages either rejected due to policy or failed to generate.',
     inSummary: true
   },
@@ -175,7 +173,7 @@ export const list = [
     key: 'count_policy_rejection',
     label: 'Policy Rejection',
     type: 'total',
-    measure: 'count',
+    unit: 'number',
     description: 'Messages rejected by SparkPost due to policy.',
     inSummary: true
   },
@@ -183,7 +181,7 @@ export const list = [
     key: 'count_generation_failed',
     label: 'Generation Failure',
     type: 'total',
-    measure: 'count',
+    unit: 'number',
     description: 'Message generation failed for an intended recipient.',
     inSummary: true
   },
@@ -191,15 +189,14 @@ export const list = [
     key: 'count_generation_rejection',
     label: 'Generation Rejection',
     type: 'total',
-    measure: 'count',
+    unit: 'number',
     description: 'Messages rejected by SparkPost due to policy.',
     inSummary: true
   },
   {
     key: 'accepted_rate',
     label: 'Accepted Rate',
-    measure: 'percent',
-    unit: '%',
+    unit: 'percent',
     computeKeys: ['count_accepted', 'count_targeted'],
     compute: rate,
     description: 'Percentage of Targeted messages that were accepted.',
@@ -209,8 +206,7 @@ export const list = [
     key: 'open_rate_approx',
     label: 'Open Rate',
     type: 'percentage',
-    measure: 'percent',
-    unit: '%',
+    unit: 'percent',
     computeKeys: ['count_unique_confirmed_opened_approx', 'count_targeted'],
     compute: rate,
     description: 'Percentage of Targeted messages that were either rendered or had at least one link selected.',
@@ -219,8 +215,7 @@ export const list = [
   {
     key: 'click_through_rate_approx',
     label: 'Click-through Rate',
-    measure: 'percent',
-    unit: '%',
+    unit: 'percent',
     computeKeys: ['count_unique_clicked_approx', 'count_targeted'],
     compute: rate,
     description: 'Percentage of Targeted messages that had at least one link selected.',
@@ -230,8 +225,7 @@ export const list = [
     key: 'bounce_rate',
     label: 'All Bounce Rate',
     type: 'percentage',
-    measure: 'percent',
-    unit: '%',
+    unit: 'percent',
     computeKeys: ['count_bounce', 'count_targeted'],
     compute: rate,
     description: 'Percentage of Targeted messages that Bounced.',
@@ -240,8 +234,7 @@ export const list = [
   {
     key: 'hard_bounce_rate',
     label: 'Hard Bounce Rate',
-    measure: 'percent',
-    unit: '%',
+    unit: 'percent',
     computeKeys: ['count_hard_bounce', 'count_targeted'],
     compute: rate,
     description: 'Percentage of Targeted messages that Hard Bounced.',
@@ -250,8 +243,7 @@ export const list = [
   {
     key: 'soft_bounce_rate',
     label: 'Soft Bounce Rate',
-    measure: 'percent',
-    unit: '%',
+    unit: 'percent',
     computeKeys: ['count_soft_bounce', 'count_targeted'],
     compute: rate,
     description: 'Percentage of Targeted messages that Soft Bounced.',
@@ -261,8 +253,7 @@ export const list = [
     key: 'block_bounce_rate',
     label: 'Block Bounce Rate',
     type: 'percentage',
-    measure: 'percent',
-    unit: '%',
+    unit: 'percent',
     computeKeys: ['count_block_bounce', 'count_targeted'],
     compute: rate,
     description: 'Percentage of Targeted messages that Block Bounced.',
@@ -271,8 +262,7 @@ export const list = [
   {
     key: 'admin_bounce_rate',
     label: 'Admin Bounce Rate',
-    measure: 'percent',
-    unit: '%',
+    unit: 'percent',
     computeKeys: ['count_admin_bounce', 'count_targeted'],
     compute: rate,
     description: 'Percentage of Targeted messages that Admin Bounced.',
@@ -281,8 +271,7 @@ export const list = [
   {
     key: 'undetermined_bounce_rate',
     label: 'Undetermined Bounce Rate',
-    measure: 'percent',
-    unit: '%',
+    unit: 'percent',
     computeKeys: ['count_undetermined_bounce', 'count_targeted'],
     compute: rate,
     description: 'Percentage of Targeted messages that Undetermined Bounced.',
@@ -292,7 +281,7 @@ export const list = [
     key: 'count_delayed',
     label: 'Delayed',
     type: 'total',
-    measure: 'count',
+    unit: 'number',
     description: 'Total number of delays due to any temporary failure.',
     inSummary: true
   },
@@ -300,15 +289,14 @@ export const list = [
     key: 'count_delayed_first',
     label: 'Delayed 1st Attempt',
     type: 'total',
-    measure: 'count',
+    unit: 'number',
     description: 'Messages delayed on the first delivery attempt.',
     inSummary: true
   },
   {
     key: 'avg_delivery_time_first',
     label: 'Avg Latency 1st Attempt',
-    measure: 'time',
-    unit: 'ms',
+    unit: 'milliseconds',
     computeKeys: ['total_delivery_time_first', 'count_delivered_first'],
     compute: average,
     description: 'Average delivery time in milliseconds (latency) for messages delivered on the first attempt.',
@@ -317,8 +305,7 @@ export const list = [
   {
     key: 'avg_delivery_time_subsequent',
     label: 'Avg Latency 2+ Attempts',
-    measure: 'time',
-    unit: 'ms',
+    unit: 'milliseconds',
     computeKeys: ['total_delivery_time_subsequent', 'count_delivered_subsequent'],
     compute: average,
     description: 'Average delivery time in milliseconds (latency) for messages delivered that required more than one attempt.',
@@ -327,8 +314,7 @@ export const list = [
   {
     key: 'avg_msg_size',
     label: 'Avg Delivery Message Size',
-    measure: 'size',
-    unit: 'B',
+    unit: 'bytes',
     computeKeys: ['total_msg_volume', 'count_delivered'],
     compute: average,
     description: 'Average size of delivered messages, in bytes (including attachments).',
@@ -338,8 +324,7 @@ export const list = [
     key: 'total_msg_volume',
     label: 'Delivery Message Volume',
     type: 'total',
-    measure: 'size',
-    unit: 'B',
+    unit: 'bytes',
     description: 'Total size of delivered messages, in bytes (including attachments).',
     inSummary: true
   },
@@ -347,16 +332,16 @@ export const list = [
   {
     key: 'count_inband_bounce',
     type: 'total',
-    measure: 'count'
+    unit: 'number'
   },
   {
     key: 'count_outofband_bounce',
     type: 'total',
-    measure: 'count'
+    unit: 'number'
   },
   {
     key: 'count_raw_clicked_approx',
     type: 'total',
-    measure: 'count'
+    unit: 'number'
   }
 ];

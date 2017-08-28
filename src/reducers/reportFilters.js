@@ -16,8 +16,8 @@ export default (state = initialState, action) => {
     case 'SET_RELATIVE_TIME':
       return { ...state, ...action.payload };
 
-    case 'FETCH_METRICS_SUCCESS': {
-      const { to, from, range } = action.meta;
+    case 'REFRESH_REPORT_FILTERS': {
+      const { to, from, range } = action.payload;
       return { ...state, to, from, range };
     }
 
