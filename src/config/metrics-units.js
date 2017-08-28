@@ -56,7 +56,7 @@ export default {
   },
   percent: {
     label: 'Percent',
-    yAxisFormatter: (v) => `${roundToPlaces(v, 1)}%`
+    yAxisFormatter: (v) => v < 1 ? `${roundToPlaces(v, 2)}%` : `${roundToPlaces(v, 1)}%`
   },
   milliseconds: {
     label: 'Time',
