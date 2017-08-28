@@ -1,9 +1,11 @@
 import React from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ReferenceLine } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ReferenceLine, Text } from 'recharts';
 import _ from 'lodash';
 import './LineChart.scss';
 
-
+function orderDesc(a, b) {
+  return b.value - a.value;
+}
 
 export default class SpLineChart extends React.Component {
   renderLines() {
@@ -28,6 +30,8 @@ export default class SpLineChart extends React.Component {
   render() {
     const {
       data,
+      lines = [],
+      syncId,
       xTickFormatter = _.identity,
       yTickFormatter = _.identity,
       tooltipLabelFormatter = _.identity,
@@ -35,8 +39,8 @@ export default class SpLineChart extends React.Component {
     } = this.props;
 
     return (
-      <ResponsiveContainer width='99%' height={480}>
-        <LineChart data={data}>
+      <ResponsiveContainer width='99%' height={120 * lines.length}>
+        <LineChart data={data} syncId={syncId}>
           <CartesianGrid vertical={false} strokeDasharray="4 1"/>
           <XAxis
             tickFormatter={xTickFormatter}
@@ -47,16 +51,14 @@ export default class SpLineChart extends React.Component {
             tickLine={false}
             width={30}
             tickFormatter={yTickFormatter}/>
-
+          <Text
+            angle={270}
+          >By Count</Text>
           <Tooltip
             labelFormatter={tooltipLabelFormatter}
             formatter={tooltipValueFormatter}
+            itemSorter={orderDesc}
           />
-          {/* <Legend
-            verticalAlign='top'
-            align='left'
-            height={80}
-            iconType='square'/> */}
           {this.renderReferenceLines()}
           {this.renderLines()}
         </LineChart>

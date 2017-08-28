@@ -1,5 +1,6 @@
 import { fetch as fetchMetrics } from 'actions/metrics';
-import { getQueryFromOptions, getMetricsFromList, getRelativeDates } from 'helpers/metrics';
+import { getQueryFromOptions, getMetricsFromList } from 'helpers/metrics';
+import { getRelativeDates } from 'helpers/date';
 
 export function refresh(options = {}, { clear } = {}) {
   return (dispatch, getState) => {

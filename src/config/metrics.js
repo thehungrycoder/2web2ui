@@ -1,3 +1,12 @@
+function average(item, keys = []) {
+  return item[keys[0]] / item[keys[1]];
+}
+
+function rate(item, keys) {
+  const rate = (item[keys[0]] / item[keys[1]]) * 100;
+  return parseFloat(rate.toFixed(1), 10);
+}
+
 export const list = [
   {
     key: 'count_targeted',
@@ -59,13 +68,10 @@ export const list = [
   {
     key: 'spam_complaint_rate',
     label: 'Spam Complaint Rate',
-    type: 'percentage',
     measure: 'percent',
     unit: '%',
-    computation: {
-      count: 'count_spam_complaint',
-      totalCount: 'count_delivered'
-    },
+    computeKeys: ['count_spam_complaint', 'count_delivered'],
+    compute: rate,
     description: 'Percentage of Delivered messages that resulted in spam complaints.',
     inSummary: true
   },
@@ -192,13 +198,10 @@ export const list = [
   {
     key: 'accepted_rate',
     label: 'Accepted Rate',
-    type: 'percentage',
     measure: 'percent',
     unit: '%',
-    computation: {
-      count: 'count_accepted',
-      totalCount: 'count_targeted'
-    },
+    computeKeys: ['count_accepted', 'count_targeted'],
+    compute: rate,
     description: 'Percentage of Targeted messages that were accepted.',
     inSummary: true
   },
@@ -208,23 +211,18 @@ export const list = [
     type: 'percentage',
     measure: 'percent',
     unit: '%',
-    computation: {
-      count: 'count_unique_confirmed_opened_approx',
-      totalCount: 'count_targeted'
-    },
+    computeKeys: ['count_unique_confirmed_opened_approx', 'count_targeted'],
+    compute: rate,
     description: 'Percentage of Targeted messages that were either rendered or had at least one link selected.',
     inSummary: true
   },
   {
     key: 'click_through_rate_approx',
     label: 'Click-through Rate',
-    type: 'percentage',
     measure: 'percent',
     unit: '%',
-    computation: {
-      count: 'count_unique_clicked_approx',
-      totalCount: 'count_targeted'
-    },
+    computeKeys: ['count_unique_clicked_approx', 'count_targeted'],
+    compute: rate,
     description: 'Percentage of Targeted messages that had at least one link selected.',
     inSummary: true
   },
@@ -234,36 +232,28 @@ export const list = [
     type: 'percentage',
     measure: 'percent',
     unit: '%',
-    computation: {
-      count: 'count_bounce',
-      totalCount: 'count_targeted'
-    },
+    computeKeys: ['count_bounce', 'count_targeted'],
+    compute: rate,
     description: 'Percentage of Targeted messages that Bounced.',
     inSummary: true
   },
   {
     key: 'hard_bounce_rate',
     label: 'Hard Bounce Rate',
-    type: 'percentage',
     measure: 'percent',
     unit: '%',
-    computation: {
-      count: 'count_hard_bounce',
-      totalCount: 'count_targeted'
-    },
+    computeKeys: ['count_hard_bounce', 'count_targeted'],
+    compute: rate,
     description: 'Percentage of Targeted messages that Hard Bounced.',
     inSummary: true
   },
   {
     key: 'soft_bounce_rate',
     label: 'Soft Bounce Rate',
-    type: 'percentage',
     measure: 'percent',
     unit: '%',
-    computation: {
-      count: 'count_soft_bounce',
-      totalCount: 'count_targeted'
-    },
+    computeKeys: ['count_soft_bounce', 'count_targeted'],
+    compute: rate,
     description: 'Percentage of Targeted messages that Soft Bounced.',
     inSummary: true
   },
@@ -273,36 +263,28 @@ export const list = [
     type: 'percentage',
     measure: 'percent',
     unit: '%',
-    computation: {
-      count: 'count_block_bounce',
-      totalCount: 'count_targeted'
-    },
+    computeKeys: ['count_block_bounce', 'count_targeted'],
+    compute: rate,
     description: 'Percentage of Targeted messages that Block Bounced.',
     inSummary: true
   },
   {
     key: 'admin_bounce_rate',
     label: 'Admin Bounce Rate',
-    type: 'percentage',
     measure: 'percent',
     unit: '%',
-    computation: {
-      count: 'count_admin_bounce',
-      totalCount: 'count_targeted'
-    },
+    computeKeys: ['count_admin_bounce', 'count_targeted'],
+    compute: rate,
     description: 'Percentage of Targeted messages that Admin Bounced.',
     inSummary: true
   },
   {
     key: 'undetermined_bounce_rate',
     label: 'Undetermined Bounce Rate',
-    type: 'percentage',
     measure: 'percent',
     unit: '%',
-    computation: {
-      count: 'count_undetermined_bounce',
-      totalCount: 'count_targeted'
-    },
+    computeKeys: ['count_undetermined_bounce', 'count_targeted'],
+    compute: rate,
     description: 'Percentage of Targeted messages that Undetermined Bounced.',
     inSummary: true
   },
@@ -325,39 +307,30 @@ export const list = [
   {
     key: 'avg_delivery_time_first',
     label: 'Avg Latency 1st Attempt',
-    type: 'average',
     measure: 'time',
     unit: 'ms',
-    computation: {
-      totalValue: 'total_delivery_time_first',
-      totalCount: 'count_delivered_first'
-    },
+    computeKeys: ['total_delivery_time_first', 'count_delivered_first'],
+    compute: average,
     description: 'Average delivery time in milliseconds (latency) for messages delivered on the first attempt.',
     inSummary: true
   },
   {
     key: 'avg_delivery_time_subsequent',
     label: 'Avg Latency 2+ Attempts',
-    type: 'average',
     measure: 'time',
     unit: 'ms',
-    computation: {
-      totalValue: 'total_delivery_time_subsequent',
-      totalCount: 'count_delivered_subsequent'
-    },
+    computeKeys: ['total_delivery_time_subsequent', 'count_delivered_subsequent'],
+    compute: average,
     description: 'Average delivery time in milliseconds (latency) for messages delivered that required more than one attempt.',
     inSummary: true
   },
   {
     key: 'avg_msg_size',
     label: 'Avg Delivery Message Size',
-    type: 'average',
     measure: 'size',
     unit: 'B',
-    computation: {
-      totalValue: 'total_msg_volume',
-      totalCount: 'count_delivered'
-    },
+    computeKeys: ['total_msg_volume', 'count_delivered'],
+    compute: average,
     description: 'Average size of delivered messages, in bytes (including attachments).',
     inSummary: true
   },

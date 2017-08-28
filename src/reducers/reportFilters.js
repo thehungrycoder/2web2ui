@@ -1,4 +1,4 @@
-import { getRelativeDates } from 'helpers/metrics';
+import { getRelativeDates } from 'helpers/date';
 
 const DEFAULT_RANGE = 'day';
 const initialState = {

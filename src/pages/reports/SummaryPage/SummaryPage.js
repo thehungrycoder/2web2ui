@@ -5,17 +5,16 @@ import { withRouter } from 'react-router-dom';
 import classnames from 'classnames';
 
 import { refresh as refreshSummaryChart } from 'actions/summaryChart';
-import { getQueryFromOptions, getDayLines, getLineChartFormatters } from 'helpers/metrics';
+import { getQueryFromOptions } from 'helpers/metrics';
 
 import { Page, Button, Panel, Tabs, Tooltip, Grid } from '@sparkpost/matchbox';
 import Layout from 'components/Layout/Layout';
 import { Loading } from 'components/Loading/Loading';
-
 import Filters from '../components/Filters';
-import LineChart from './components/LineChart';
 import List from './components/List';
 import MetricsModal from './components/MetricsModal';
 import Legend from './components/Legend';
+import ChartGroup from './components/ChartGroup';
 
 import { list as METRICS_LIST } from 'config/metrics';
 
@@ -47,40 +46,6 @@ class SummaryReportPage extends Component {
     if (metricsData.pending) {
       return <div className={styles.Loading}><Loading /></div>;
     }
-  }
-
-  createDayReferenceLines() {
-    const { metricsData, chart } = this.props;
-    const { results = {}} = metricsData;
-
-    return getDayLines(results, chart.precision).map(({ ts }) => ({
-      key: ts,
-      x: ts,
-      stroke: '#bbb',
-      strokeWidth: 2
-    }));
-  }
-
-  renderChart() {
-    const { metricsData, chart } = this.props;
-
-    if (!metricsData.results.length || !chart) {
-      return null;
-    }
-
-    return (
-      <LineChart
-        data={metricsData.results}
-        lines={chart.metrics.map(({ name, label, stroke }) => ({
-          key: name,
-          dataKey: name,
-          name: label,
-          stroke: metricsData.pending ? '#f8f8f8' : stroke
-        }))}
-        {...getLineChartFormatters(chart.precision)}
-        referenceLines={this.createDayReferenceLines()}
-      />
-    );
   }
 
   handleMetricsApply = (selectedMetrics) => {
@@ -137,7 +102,10 @@ class SummaryReportPage extends Component {
               </Grid.Column>
             </Grid>
 
-            {this.renderChart()}
+            <ChartGroup
+              loading={metricsData.pending}
+              {...chart}
+            />
           </Panel.Section>
 
           {this.renderLoading()}
