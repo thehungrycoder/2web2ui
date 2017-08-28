@@ -31,6 +31,7 @@ class SummaryReportPage extends Component {
     this.state = {
       showMetrics: false,
       eventTime: true,
+      scale: 'linear',
       options: {
         metrics: ['count_targeted', 'count_rendered', 'count_accepted', 'count_bounce']
       }
@@ -61,6 +62,10 @@ class SummaryReportPage extends Component {
     this.setState({ eventTime: !this.state.eventTime });
   }
 
+  renderScaleButton(scale, label) {
+    return <Button size='small' primary={scale === this.state.scale} onClick={() => this.setState({ scale })}>{label}</Button>
+  }
+
   renderTimeMode() {
     const { eventTime } = this.state;
 
@@ -75,6 +80,7 @@ class SummaryReportPage extends Component {
 
   render() {
     const { chart } = this.props;
+    const { scale } = this.state;
 
     return (
       <Layout.App>
@@ -95,14 +101,15 @@ class SummaryReportPage extends Component {
                   <Button size='small' onClick={this.handleMetricsToggle}>Select Metrics</Button>
                   {this.renderTimeMode()}
                   <Button.Group className={styles.ButtonSpacer}>
-                    <Button size='small' primary>Linear</Button>
-                    <Button size='small'>Log</Button>
+                    {this.renderScaleButton('linear', 'Linear')}
+                    {this.renderScaleButton('log', 'Log')}
+                    {this.renderScaleButton('sqrt', '√ Sq Rt')}
                   </Button.Group>
                 </div>
               </Grid.Column>
             </Grid>
 
-            <ChartGroup {...chart} />
+            <ChartGroup {...chart} yScale={scale} />
           </Panel.Section>
 
           {this.renderLoading()}

@@ -23,7 +23,7 @@ export default class ChartGroup extends Component {
   }
 
   render() {
-    const { data = [], metrics, loading, precision } = this.props;
+    const { data = [], metrics, loading, precision, yScale } = this.props;
 
     if (!data.length || !metrics) {
       return null;
@@ -52,6 +52,7 @@ export default class ChartGroup extends Component {
           yTickFormatter={chart.yAxisFormatter}
           tooltipValueFormatter={chart.yAxisFormatter}
           referenceLines={referenceLines}
+          yScale={yScale}
           showXAxis={i === charts.length - 1}
         />)}
       </div>
