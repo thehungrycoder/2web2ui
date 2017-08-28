@@ -42,6 +42,7 @@ export default class ChartGroup extends Component {
           {...formatters}
           yTickFormatter={getUnitTickFormatter(_.find(metrics, { measure: currentMeasure }).unit)}
           referenceLines={referenceLines}
+          showXAxis={i === measures.length - 1}
         />)}
       </div>
     );

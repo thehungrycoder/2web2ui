@@ -1,5 +1,5 @@
 import React from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ReferenceLine, Text } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ReferenceLine } from 'recharts';
 import _ from 'lodash';
 import './LineChart.scss';
 
@@ -35,25 +35,27 @@ export default class SpLineChart extends React.Component {
       xTickFormatter = _.identity,
       yTickFormatter = _.identity,
       tooltipLabelFormatter = _.identity,
-      tooltipValueFormatter = _.identity
+      tooltipValueFormatter = _.identity,
+      showXAxis
     } = this.props;
+
+    const xAxis = showXAxis
+      ? <XAxis
+        tickFormatter={xTickFormatter}
+        dataKey='ts'
+        interval={1}
+        height={30} />
+      : null;
 
     return (
       <ResponsiveContainer width='99%' height={120 * lines.length}>
         <LineChart data={data} syncId={syncId}>
           <CartesianGrid vertical={false} strokeDasharray="4 1"/>
-          <XAxis
-            tickFormatter={xTickFormatter}
-            dataKey='ts'
-            interval={1}
-            height={30} />
+          {xAxis}
           <YAxis
             tickLine={false}
-            width={30}
+            width={50}
             tickFormatter={yTickFormatter}/>
-          <Text
-            angle={270}
-          >By Count</Text>
           <Tooltip
             labelFormatter={tooltipLabelFormatter}
             formatter={tooltipValueFormatter}
