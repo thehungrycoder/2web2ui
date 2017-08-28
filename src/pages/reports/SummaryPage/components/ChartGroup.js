@@ -52,6 +52,7 @@ export default class ChartGroup extends Component {
           yTickFormatter={chart.yAxisFormatter}
           tooltipValueFormatter={chart.yAxisFormatter}
           referenceLines={referenceLines}
+          showXAxis={i === measures.length - 1}
         />)}
       </div>
     );

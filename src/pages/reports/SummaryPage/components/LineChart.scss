@@ -20,7 +20,7 @@
 
 .yAxis {
   .recharts-text.recharts-cartesian-axis-tick-value {
-    transform: translate(0, 0);
+    transform: translate(-2px, 0);
   }
 }
 
@@ -34,10 +34,14 @@
 
 .recharts-cartesian-grid-horizontal line {
   stroke: color(gray, 8);
+  &:last-child {
+    stroke: color(gray, 7);
+    stroke-dasharray: 4 0 !important;
+  }
 }
 
 .recharts-cartesian-axis-line {
-  stroke: color(gray, 8);
+  stroke: color(gray, 7);
 }
 
 .recharts-cartesian-axis-tick-line {
@@ -54,7 +58,7 @@
 .recharts-tooltip-wrapper {
   .recharts-default-tooltip {
     background: #fff !important; // fuck cssinjs
-    box-shadow: shadow(deeper) !important;
+    box-shadow: shadow(deep) !important;
     border-radius: border-radius(large) !important;
     border: 1px solid color(gray, 8) !important;
     padding: rem(18) !important;
@@ -74,6 +78,8 @@
         .recharts-tooltip-item-separator {}
         .recharts-tooltip-item-value {
           float: right;
+          padding-left: rem(9);
+          font-weight: 600;
         }
         .recharts-tooltip-item-unit {}
       }
@@ -100,26 +106,10 @@
 .recharts-tooltip-cursor {
   stroke: color(gray, 5) !important;
 }
-// // Containers
-// .recharts-wrapper {}
-// .recharts-responsive-container {}
-// .recharts-surface {} // general svg wrapper
-// .recharts-legend-wrapper {}
-// .recharts-tooltip-wrapper {}
-//
-// // Data
-// .recharts-layer {}
-// .recharts-cartesian-axis {}
-// .recharts-xAxis {}
-// .xAxis {}
-// .recharts-yAxis {}
-// .yAxis {}
-// .recharts-cartesian-grid {}
-// .recharts-reference-line {}
-// .recharts-line {}
-// .recharts-line-dots {}
-// // Legend
-// .recharts-default-legend {}
-// .recharts-legend-item {}
-// .recharts-default-tooltip {}
-// .recharts-tooltip-label {}
+
+.recharts-responsive-container {
+  margin-bottom: rem(30);
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
