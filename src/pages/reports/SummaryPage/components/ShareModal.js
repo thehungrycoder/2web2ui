@@ -1,12 +1,12 @@
 /* eslint-disable */
 import React, { Component } from 'react';
-import { Modal, Panel, Button, TextField } from '@sparkpost/matchbox';
+import { Modal, Panel, Button, TextField, Icon } from '@sparkpost/matchbox';
 
 import styles from './ShareModal.module.scss';
 
 class ShareModal extends Component {
-  constructor(props) {
-    super(props);
+  state = {
+    showConfimation: false
   }
 
   handleFocus = (e) => {
@@ -17,10 +17,16 @@ class ShareModal extends Component {
     this.textInput.select();
     document.execCommand('copy');
     this.textInput.blur();
+    this.setState({ showConfimation: true })
+  }
+
+  handleToggle = () => {
+    this.setState({ showConfimation: false });
+    this.props.handleToggle();
   }
 
   render() {
-    const { open, handleToggle, link } = this.props;
+    const { open, link } = this.props;
 
     return (
       <Modal open={open}>
@@ -34,8 +40,16 @@ class ShareModal extends Component {
             <TextField
               value={link} readOnly
               onFocus={this.handleFocus}
-              connectRight={<Button onClick={() => this.handleCopy()}>Copy</Button>}/>
-            <Button primary onClick={handleToggle} className={styles.Done}>Done</Button>
+              connectRight={
+                <Button onClick={() => this.handleCopy()}>
+                  <Icon name='Copy' size={14} /> Copy
+                </Button>
+              }/>
+              { this.state.showConfimation
+                ? <p className={styles.Copied}>Copied to clipboard!</p>
+                : null
+              }
+            <Button primary onClick={this.handleToggle}>Done</Button>
           </Panel.Section>
         </Panel>
       </Modal>
