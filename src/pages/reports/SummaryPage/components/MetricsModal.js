@@ -12,14 +12,22 @@ class MetricsModal extends Component {
     this.syncPropsToState(this.props);
   }
 
+  componentDidMount() {
+    window.addEventListener('keydown', this.handleKeyDown);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this.handleKeyDown);
+  }
+
   componentWillReceiveProps(nextProps) {
     this.syncPropsToState(nextProps);
   }
 
   syncPropsToState = ({ selectedMetrics }) => {
-    METRICS_LIST.map((metric) => {
-      const isActive = _.findIndex(selectedMetrics, (key) => key === metric.key) > -1;
-      this.setState({ [metric.key]: isActive });
+    METRICS_LIST.map(({ key }) => {
+      const isActive = _.some(selectedMetrics, { key });
+      this.setState({ [key]: isActive });
     });
   }
 
@@ -28,7 +36,23 @@ class MetricsModal extends Component {
   }
 
   handleApply = () => {
-    this.props.handleApply(this.getSelectedMetrics());
+    this.props.onSubmit(this.getSelectedMetrics());
+  }
+
+  handleKeyDown = (e) => {
+    const { open, onCancel } = this.props;
+
+    if (!open) {
+      return;
+    }
+
+    if (e.key === 'Enter') {
+      this.handleApply();
+    }
+
+    if (e.key === 'Escape') {
+      onCancel();
+    }
   }
 
   getSelectedMetrics = () => _.keys(this.state).filter((key) => !!this.state[key])
@@ -55,7 +79,7 @@ class MetricsModal extends Component {
   }
 
   render() {
-    const { open, handleToggle } = this.props;
+    const { open, onCancel } = this.props;
     return (
       <Modal open={open}>
         <Panel>
@@ -65,7 +89,7 @@ class MetricsModal extends Component {
           </Panel.Section>
           <Panel.Section>
             <Button onClick={this.handleApply} primary className={styles.Apply}>Apply Metrics</Button>
-            <Button onClick={handleToggle} className={styles.Cancel}>Cancel</Button>
+            <Button onClick={onCancel} className={styles.Cancel}>Cancel</Button>
           </Panel.Section>
         </Panel>
       </Modal>

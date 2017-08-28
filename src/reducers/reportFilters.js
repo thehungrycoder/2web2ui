@@ -1,4 +1,4 @@
-import { getRelativeDates } from 'helpers/metrics';
+import { getRelativeDates } from 'helpers/date';
 
 const DEFAULT_RANGE = 'day';
 const initialState = {
@@ -15,6 +15,11 @@ export default (state = initialState, action) => {
 
     case 'SET_RELATIVE_TIME':
       return { ...state, ...action.payload };
+
+    case 'REFRESH_REPORT_FILTERS': {
+      const { to, from, range } = action.payload;
+      return { ...state, to, from, range };
+    }
 
     case 'ADD_FILTER':
       return { ...state, activeList: [ ...state.activeList, action.payload ]};
