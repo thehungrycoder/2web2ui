@@ -33,29 +33,32 @@ export default class SpLineChart extends React.Component {
       lines = [],
       syncId,
       xTickFormatter = _.identity,
-      yTickFormatter = _.identity,
+      yScale = 'linear', // eslint-disable-line
       tooltipLabelFormatter = _.identity,
       tooltipValueFormatter = _.identity,
       showXAxis
     } = this.props;
 
-    const xAxis = showXAxis
-      ? <XAxis
-        tickFormatter={xTickFormatter}
-        dataKey='ts'
-        interval={1}
-        height={30} />
-      : null;
+    const domain = yScale === 'log' ? [0.001, 'auto'] : [0, 'auto'];
 
     return (
       <ResponsiveContainer width='99%' height={120 * lines.length}>
         <LineChart data={data} syncId={syncId}>
           <CartesianGrid vertical={false} strokeDasharray="4 1"/>
-          {xAxis}
+          <XAxis
+            tickFormatter={xTickFormatter}
+            dataKey='ts'
+            interval={1}
+            height={30}
+            hide={!showXAxis}
+          />
           <YAxis
             tickLine={false}
             width={50}
-            tickFormatter={yTickFormatter}/>
+            scale={yScale}
+            domain={domain}
+            allowDataOverflow={yScale === 'log'}
+          />
           <Tooltip
             labelFormatter={tooltipLabelFormatter}
             formatter={tooltipValueFormatter}
