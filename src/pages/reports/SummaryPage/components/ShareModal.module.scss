@@ -1,0 +1,10 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.Done {
+
+}
+
+
+.Hidden {
+  @include visually-hidden;
+}
