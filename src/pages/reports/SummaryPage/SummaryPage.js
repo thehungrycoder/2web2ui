@@ -42,8 +42,8 @@ class SummaryReportPage extends Component {
   }
 
   renderLoading() {
-    const { metricsData } = this.props;
-    if (metricsData.pending) {
+    const { chart } = this.props;
+    if (chart.loading) {
       return <div className={styles.Loading}><Loading /></div>;
     }
   }
@@ -74,7 +74,7 @@ class SummaryReportPage extends Component {
   }
 
   render() {
-    const { metricsData, chart } = this.props;
+    const { chart } = this.props;
 
     return (
       <Layout.App>
@@ -83,7 +83,7 @@ class SummaryReportPage extends Component {
         <Filters refresh={this.props.refreshSummaryChart}/>
 
         <Panel>
-          <Panel.Section className={classnames(styles.ChartSection, metricsData.pending && styles.pending)}>
+          <Panel.Section className={classnames(styles.ChartSection, chart.loading && styles.pending)}>
 
             {/* TODO: maybe move Legend and Controls into own component? */}
             <Grid className={styles.ChartHeader}>
@@ -102,10 +102,7 @@ class SummaryReportPage extends Component {
               </Grid.Column>
             </Grid>
 
-            <ChartGroup
-              loading={metricsData.pending}
-              {...chart}
-            />
+            <ChartGroup {...chart} />
           </Panel.Section>
 
           {this.renderLoading()}
@@ -122,17 +119,16 @@ class SummaryReportPage extends Component {
           <List />
         </Panel>
         <MetricsModal
-          selectedMetrics={this.state.options.metrics}
+          selectedMetrics={chart.metrics}
           open={this.state.showMetrics}
-          handleToggle={this.handleMetricsToggle}
-          handleApply={this.handleMetricsApply} />
+          onCancel={this.handleMetricsToggle}
+          onSubmit={this.handleMetricsApply} />
       </Layout.App>
     );
   }
 }
 
-const mapStateToProps = ({ metrics, reportFilters, summaryChart }) => ({
-  metricsData: metrics,
+const mapStateToProps = ({ reportFilters, summaryChart }) => ({
   filters: reportFilters,
   chart: summaryChart
 });

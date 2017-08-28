@@ -23,7 +23,7 @@ class DateFilter extends Component {
 
   componentWillUnmount() {
     window.removeEventListener('click', this.handleClickOutside);
-    window.removeEventListener('keydown', this.handleEsc);
+    window.removeEventListener('keydown', this.handleKeyDown);
   }
 
   componentWillReceiveProps(nextProps) {
