@@ -1,18 +1,18 @@
-import { getRelativeDates } from 'helpers/metrics';
+// import { getRelativeDates } from 'helpers/metrics';
 
-export function setRelativeTime(range) {
-  return (dispatch) => Promise.resolve(dispatch({
-    type: 'SET_RELATIVE_TIME',
-    payload: { ...getRelativeDates(range), range }
-  }));
-}
+// export function setRelativeTime(range) {
+//   return (dispatch) => Promise.resolve(dispatch({
+//     type: 'SET_RELATIVE_TIME',
+//     payload: { ...getRelativeDates(range), range }
+//   }));
+// }
 
-export function setExactTime(rangeDates) {
-  return (dispatch) => Promise.resolve(dispatch({
-    type: 'SET_EXACT_TIME',
-    payload: { ...rangeDates, range: 'custom' }
-  }));
-}
+// export function setExactTime(rangeDates) {
+//   return (dispatch) => Promise.resolve(dispatch({
+//     type: 'SET_EXACT_TIME',
+//     payload: { ...rangeDates, range: 'custom' }
+//   }));
+// }
 
 export function addFilter(payload) {
   return {
