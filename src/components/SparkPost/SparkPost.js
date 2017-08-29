@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import styles from './SparkPost.module.scss';
 
 /* SparkPost.Logo: Full SparkPost logo
- * SparkPost.Logo: Just the flame
+ * SparkPost.Icon: Just the flame
  * type: 'muted' | 'white'
  */
 
