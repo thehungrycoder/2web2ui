@@ -1,5 +1,6 @@
 import React from 'react';
 
+import ScrollToTop from './ScrollToTop';
 import GlobalError from '../GlobalError/GlobalError';
 import { Loading } from '../Loading/Loading';
 import styles from './Layout.module.scss';
@@ -14,6 +15,7 @@ const Form = ({ children, loading }) => (
         <GlobalError />
       </div>
     </main>
+    <ScrollToTop/>
   </div>
 );
 

@@ -1,0 +1,26 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.Logo, .Icon {
+  display: inline-block;
+  max-height: rem(60);
+}
+
+.Base {
+  fill: color(gray, 2);
+}
+
+.Flame {
+  fill: color(orange);
+}
+
+.muted {
+  .Base, .Flame {
+    fill: color(gray, 2);
+  }
+}
+
+.white {
+  .Base, .Flame {
+    fill: color(gray, 10);
+  }
+}
