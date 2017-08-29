@@ -4,6 +4,7 @@ import { authenticate } from '../actions/auth';
 import { Redirect } from 'react-router-dom';
 
 import Layout from '../components/Layout/Layout';
+import SparkPost from '../components/SparkPost/SparkPost';
 import { Panel, Button, TextField } from '@sparkpost/matchbox';
 
 class AuthPage extends Component {
@@ -44,7 +45,7 @@ class AuthPage extends Component {
     return (
       <Layout.Form>
         <a href="https://www.sparkpost.com" title="SparkPost">
-          <img alt="SparkPost" height="68" src="/assets/images/sparkpost-logo-color.svg" width="188" />
+          <SparkPost.Logo />
         </a>
 
         <Panel sectioned accent>
