@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import classnames from 'classnames';
 
+import SparkPost from 'components/SparkPost/SparkPost';
 import Item from './Item';
 import Footer from './Footer';
 import navItems from './navItems';
@@ -40,6 +41,7 @@ class Navigation extends Component {
 
         <nav className={navClasses}>
           <div className={styles.wrapper}>
+            <div className={styles.logo}><SparkPost.Logo type='white' /></div>
             <ul className={styles.list}>
               { this.renderItems() }
             </ul>
@@ -53,6 +55,7 @@ class Navigation extends Component {
         </nav>
 
         <nav className={styles.bar}>
+          <div className={styles.mobileLogo}><SparkPost.Logo type='white' /></div>
           <a className={styles.open} onClick={() => this.handleClick()}>
             <span className={styles.hamburger} />
           </a>
