@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -6,45 +5,46 @@ import classnames from 'classnames';
 
 import { refresh as refreshSummaryChart } from 'actions/summaryChart';
 import { refreshTypeaheadCache } from 'actions/reportFilters';
-import { getQueryFromOptions } from 'helpers/metrics';
 
 import { Page, Button, Panel, Tabs, Tooltip, Grid } from '@sparkpost/matchbox';
 import { Layout, Loading } from 'components';
 import Filters from '../components/Filters';
+import ShareModal from '../components/ShareModal';
 import List from './components/List';
 import MetricsModal from './components/MetricsModal';
-import ShareModal from './components/ShareModal';
 import Legend from './components/Legend';
 import ChartGroup from './components/ChartGroup';
 
-import { list as METRICS_LIST } from 'config/metrics';
-
 import qs from 'query-string';
 import moment from 'moment';
-import _ from 'lodash';
 import styles from './SummaryPage.module.scss';
 
 class SummaryReportPage extends Component {
-  COLORS = ['#20578E', '#F38415', '#45A6FF', '#FFD300', '#41B5AB', '#6BEAA8'];
-
   constructor(props) {
     super(props);
 
     this.state = {
+      showShare: false,
       showMetrics: false,
       eventTime: true,
-      scale: 'linear',
-      link: '',
-      options: {
-        metrics: ['count_targeted', 'count_rendered', 'count_accepted', 'count_bounce']
-      }
+      scale: 'linear'
     };
   }
 
   componentWillMount() {
     const { location } = this.props;
-    // const search = qs.parse(location.search);
-    this.props.refreshSummaryChart();
+    let options = {};
+
+    if (location.search) {
+      const { from, to, metrics } = qs.parse(location.search);
+      options = {
+        metrics,
+        from: (from instanceof Date) ? from : new Date(from),
+        to: (to instanceof Date) ? to : new Date(to)
+      };
+    }
+
+    this.props.refreshSummaryChart(options);
     this.props.refreshTypeaheadCache();
   }
 
@@ -73,7 +73,7 @@ class SummaryReportPage extends Component {
   }
 
   renderScaleButton(scale, label) {
-    return <Button size='small' primary={scale === this.state.scale} onClick={() => this.setState({ scale })}>{label}</Button>
+    return <Button size='small' primary={scale === this.state.scale} onClick={() => this.setState({ scale })}>{label}</Button>;
   }
 
   getShareableLink = () => {
@@ -82,7 +82,7 @@ class SummaryReportPage extends Component {
       from: moment(filters.from).utc().format(),
       to: moment(filters.to).utc().format(),
       metrics: chart.metrics.map((metric) => metric.key)
-    }
+    };
     return `${window.location.href.split('?')[0]}?${qs.stringify(options, { encode: false })}`;
   }
 
@@ -153,8 +153,7 @@ class SummaryReportPage extends Component {
         <ShareModal
           open={this.state.showShare}
           handleToggle={this.handleShareToggle}
-          link={link}
-        />
+          link={link} />
         <MetricsModal
           selectedMetrics={chart.metrics}
           open={this.state.showMetrics}
