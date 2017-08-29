@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
-import { billingCreate } from '../../actions/zuora';
-import { getPlans } from '../../actions/account';
+import { billingCreate, updateSubscription } from '../../actions/zuora';
+import { getPlans, getBillingCountries } from '../../actions/account';
 
 import UpgradeModal from './components/UpgradeModal';
 import Layout from '../../components/Layout/Layout';
@@ -19,51 +19,101 @@ class BillingPage extends Component {
   }
 
   componentDidMount () {
-    // this.props.testAction();
     if (!this.props.billing.plans) {
       this.props.getPlans();
     }
+
+    if (!this.props.billing.countries) {
+      this.props.getBillingCountries();
+    }
   }
 
-  updatePlan = (values) => {
+  createBillingAccount (values) {
+    const {
+      cardName,
+      cardNumber,
+      email,
+      address1,
+      address2,
+      city,
+      state,
+      country,
+      zipCode,
+      billingId
+    } = values;
+
+    // For CORS Endpoint
     const siftData = {
-      email: values.email,
-      cardholder_name: values.cardName,
-      address1: values.address1 || '1403 William St',
-      address2: values.address2,
-      city: values.city || 'Baltmore',
-      state: values.state || 'Maryland',
-      country: values.country || 'United States',
-      zip_code: values.zipCode || '21230',
-      bin: values.number.slice(0, 6),
-      last_four: values.number.slice(11, 15),
-      plan_id: values.billingId
+      email: email,
+      cardholder_name: cardName,
+      address1: address1,
+      address2: address2,
+      city: city,
+      state: state,
+      country: country,
+      zip_code: zipCode,
+      bin: cardNumber.slice(0, 6),
+      last_four: cardNumber.slice(-4),
+      plan_id: billingId
     };
 
-    this.props.billingCreate(siftData);
+    // For Zuora
+    const billingData = {
+      billingId: billingId,
+      billToContact: {
+        firstName: values.firstName,
+        lastName: values.lastName,
+        workEmail: email,
+        country,
+        state
+      },
+      creditCard: {
+        cardType: values.cardType,
+        cardNumber: cardNumber,
+        expirationMonth: values.expirationMonth,
+        expirationYear: values.expirationYear,
+        securityCode: values.cvc,
+        cardHolderInfo: {
+          cardHolderName: cardName,
+          addressLine1: address1,
+          addressLine2: address2,
+          city: city,
+          zipCode: zipCode
+        }
+      }
+    };
+
+    this.props.billingCreate(siftData, billingData);
+  }
+
+  // Submit function given to CreditCardForm
+  updatePlan = (values) => {
+    if (this.props.account.billing) {
+      const updatePlan = _.find(this.props.billing.plans, { 'billingId': values.billingId });
+      this.props.updateSubscription(updatePlan.code);
+    } else {
+      this.createBillingAccount(values);
+    }
   }
 
   render () {
     const { account, billing } = this.props;
 
     // TODO: develop pending status for account reducer
-    const loading = Object.keys(account).length === 0 || billing.plansLoading;
+    const loading = Object.keys(account).length === 0 || billing.plansLoading || billing.countriesLoading;
 
     const currentCode = !loading ? account.subscription.code : undefined;
-    const currentPlan = currentCode ? _.find(billing.plans, { 'code': currentCode }) : {};
+    const currentPlan = currentCode ? _.find(billing.plans, { 'code': currentCode }) : { price: 0, volume: 0, overage: 0 };
 
     const publicPlans = _.filter(billing.plans, (plan) => {
       return plan.status === 'public';
     });
 
     const freePlan = currentPlan.name === 'Free';
+    const billingPanelActions = [{ content: freePlan ? 'Upgrade' : 'Change Plan', onClick: this.togglePlansModal }];
 
-    const actionText = freePlan ? 'Upgrade Plan' : 'Change Plan';
-
-    const billingPanelActions = [{ content: actionText, onClick: this.togglePlansModal }];
-
-    currentPlan.price = currentPlan.price ? currentPlan.price : '0';
-    currentPlan.volume = currentPlan.volume ? currentPlan.volume : 'N/A';
+    // Set defaults for plans without all keys
+    currentPlan.monthly = currentPlan.monthly ? currentPlan.monthly : 0;
     currentPlan.overage = currentPlan.overage ? currentPlan.overage : 'N/A';
 
     return (
@@ -75,28 +125,31 @@ class BillingPage extends Component {
             <Grid>
               <Grid.Column>
                 Price <br/><br/>
-                { currentPlan.price.toLocaleString() + ' monthly' }
+                ${ currentPlan.monthly.toLocaleString() + ' monthly' }
               </Grid.Column>
               <Grid.Column>
                 Emails <br/><br/>
-                { currentPlan.volume.toLocaleString()}
+                { currentPlan.volume.toLocaleString() }
               </Grid.Column>
               <Grid.Column>
-                Overage* <br/><br/>
-                { currentPlan.overage.toLocaleString() }
+                Overage <br/><br/>
+                { currentPlan.overage.toLocaleString() + ' per email' }
               </Grid.Column>
             </Grid>
           </Panel.Section>
         </Panel>
-        <UpgradeModal
-          open={this.state.showUpgradeModal}
-          freePlan={freePlan}
-          handleToggle={this.togglePlansModal}
-          plans={publicPlans}
-          currentPlan={currentPlan}
-          updatePlan={this.updatePlan}
-          currentUser={this.props.currentUser}
-        />
+        { this.state.showUpgradeModal &&
+          <UpgradeModal
+            open={this.state.showUpgradeModal}
+            freePlan={freePlan}
+            handleToggle={this.togglePlansModal}
+            plans={publicPlans}
+            currentPlan={currentPlan}
+            updatePlan={this.updatePlan}
+            currentUser={this.props.currentUser}
+            countries={this.props.billing.countries}
+            hasBilling={!!account.billing}
+          /> }
       </Layout.App>
     );
   }
@@ -108,4 +161,4 @@ const mapStateToProps = ({ account, billing, currentUser }) => ({
   currentUser
 });
 
-export default connect(mapStateToProps, { getPlans, billingCreate })(BillingPage);
+export default connect(mapStateToProps, { getPlans, getBillingCountries, billingCreate, updateSubscription })(BillingPage);

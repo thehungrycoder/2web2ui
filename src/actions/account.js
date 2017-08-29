@@ -20,3 +20,17 @@ export function getPlans () {
     }
   };
 }
+
+export function getBillingCountries () {
+  return {
+    type: 'SPARKPOST_API_REQUEST',
+    meta: {
+      type: 'GET_COUNTRIES_BILLING',
+      method: 'GET',
+      url: '/account/countries',
+      params: {
+        filter: 'billing'
+      }
+    }
+  };
+}

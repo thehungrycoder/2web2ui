@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
 
-import { Panel, Button, Modal, Table, Grid } from '@sparkpost/matchbox';
+import { Panel, Button, Modal, Table } from '@sparkpost/matchbox';
 import CreditCardForm from './CreditCardForm';
+import PlanCompareGrid from './PlanCompareGrid';
 
-const PlanRow = (props) => {
-  const { plan, handleClick, currentVolume } = props;
-
+const PlanRow = ({ plan, handleClick, currentVolume }) => {
   const rowOnClick = () => {
     handleClick(plan);
   };
@@ -17,8 +16,11 @@ const PlanRow = (props) => {
     plan.button = <Button onClick={rowOnClick} primary>Upgrade</Button>;
   }
 
+  plan.monthly = plan.monthly ? plan.monthly : 0;
+  plan.overage = plan.overage ? plan.overage : 'N/A';
+
   return (
-    <Table.Row rowData={ [ plan.name, plan.monthly + '/mo', plan.volume.toLocaleString(), plan.overage, plan.button ]}/>
+    <Table.Row rowData={ [ plan.name, '$' + plan.monthly.toLocaleString() + '/mo', plan.volume.toLocaleString(), plan.overage.toLocaleString(), plan.button ]}/>
   );
 };
 
@@ -36,18 +38,10 @@ class UpgradeModal extends Component {
   }
 
   renderPlanRows (plans, currentPlan) {
-    // remove currentPlan
-    // TODO: replace with a your plan row
+    // remove currentPlan from rows TODO: replace with a different "your plan" row
     _.remove(plans, (plan) => {
       return plan.code === currentPlan.code;
     });
-
-    // set missing values for free plan
-    const freePlan = _.find(plans, { 'name': 'Free' });
-    if (freePlan) {
-      freePlan.monthly = '0';
-      freePlan.overage = 'N/A';
-    }
 
     return plans.map((plan) => {
       return (
@@ -57,7 +51,7 @@ class UpgradeModal extends Component {
   }
 
   render () {
-    const { open, handleToggle, plans, currentPlan, freePlan, updatePlan, currentUser } = this.props;
+    const { open, handleToggle, plans, currentPlan, freePlan, updatePlan, currentUser, countries, hasBilling } = this.props;
 
     const planRows = this.renderPlanRows(plans, currentPlan);
     const panelActions = [{ content: 'Cancel', onClick: handleToggle }];
@@ -71,37 +65,17 @@ class UpgradeModal extends Component {
             { this.state.showCreditCardForm
 
             ? <div>
-              <Grid>
-                <Grid.Column xs={2}>
-                  <p>
-                    <br/>
-                    Plan: <br/>
-                    Price: <br/>
-                    Emails: <br/>
-                    Overage*: <br/>
-                  </p>
-                </Grid.Column>
-                <Grid.Column>
-                  Current Plan <br/>
-                  {currentPlan.name} <br/>
-                  ${currentPlan.monthly.toLocaleString()}/mo <br/>
-                  {currentPlan.volume.toLocaleString()} <br/>
-                  {currentPlan.overage.toLocaleString()}
-                </Grid.Column>
-                <Grid.Column>
-                  New Plan <br/>
-                  {selectedPlan.name} <br/>
-                  ${selectedPlan.monthly.toLocaleString()}/mo <br/>
-                  {selectedPlan.volume.toLocaleString()} <br/>
-                  {selectedPlan.overage.toLocaleString()}
-                </Grid.Column>
-              </Grid>
+              <PlanCompareGrid
+                currentPlan={currentPlan}
+                selectedPlan={selectedPlan}
+              />
               <CreditCardForm
                 onSubmit={updatePlan}
                 backToPlans={this.toggleCreditCardForm}
                 currentUser={currentUser}
                 billingId={selectedPlan.billingId}
-              />
+                countries={countries}
+                hasBilling={hasBilling} />
             </div>
 
             : <Table>
@@ -110,7 +84,7 @@ class UpgradeModal extends Component {
                   <Table.HeaderCell>Plan</Table.HeaderCell>
                   <Table.HeaderCell>Price</Table.HeaderCell>
                   <Table.HeaderCell>Emails</Table.HeaderCell>
-                  <Table.HeaderCell>Overage*</Table.HeaderCell>
+                  <Table.HeaderCell>Overage</Table.HeaderCell>
                 </Table.Row>
               </thead>
               <tbody>
