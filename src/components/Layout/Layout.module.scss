@@ -16,12 +16,12 @@
   top: 0;
   height: 3px;
   background: color(orange);
-  z-index: 100;
+  z-index: z-index(overlay) - 1;
 }
 
 .aside {
   position: relative;
-  z-index: z-index(overlay);
+  z-index: z-index(overlay) - 2;
   flex: 0 0 0;
 
   @media screen and (min-width: breakpoint(medium)) {

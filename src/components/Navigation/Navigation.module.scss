@@ -48,7 +48,7 @@
 
 .logo {
   height: rem(30);
-  margin: spacing(larger) 0 0;
+  margin-bottom: spacing();
   text-align: center;
   opacity: 0.9;
 }
@@ -63,7 +63,7 @@
   min-height: 100%;
   padding-bottom: rem(130);
   margin-bottom: rem(-130);
-  padding-top: spacing(large);
+  padding-top: spacing(larger);
 }
 
 .link, .link:visited {
