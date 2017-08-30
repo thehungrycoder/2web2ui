@@ -41,8 +41,8 @@ class Navigation extends Component {
 
         <nav className={navClasses}>
           <div className={styles.wrapper}>
-            <div className={styles.logo}><SparkPost.Logo type='white' /></div>
             <ul className={styles.list}>
+              <div className={styles.logo}><SparkPost.Logo type='white' /></div>
               { this.renderItems() }
             </ul>
             <Footer />
