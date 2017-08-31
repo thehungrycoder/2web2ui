@@ -4,7 +4,7 @@ import { Panel } from '@sparkpost/matchbox';
 import TutorialItem from './TutorialItem';
 
 export class Tutorial extends Component {
-  render () {
+  render() {
     const {
       currentUser
     } = this.props;

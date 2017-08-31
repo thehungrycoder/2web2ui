@@ -1,69 +1,19 @@
 import moment from 'moment';
 import _ from 'lodash';
+import { list as METRICS_LIST } from 'config/metrics';
+import config from 'config/index';
 
-const apiDateFormat = 'YYYY-MM-DDTHH:mm';
-const precisionMap = [
-  { time: 60, value: '1min', format: 'ha' },
-  { time: 60 * 2, value: '5min', format: 'ha' },
-  { time: 60 * 4, value: '15min', format: 'ha' },
-  { time: 60 * 24 * 2, value: 'hour', format: 'ha' },
-  { time: 60 * 24 * 7, value: '12hr', format: 'MMM Do' },
-  { time: 60 * 24 * 33, value: 'day', format: 'MMM Do' },
-  { time: 60 * 24 * 190, value: 'week', format: 'MMM Do' },
-  { time: Infinity, value: 'month', format: 'MMM YY' }
-];
-
+const { metricsPrecisionMap: precisionMap, apiDateFormat, chartColors } = config;
 const indexedPrecisions = _.keyBy(precisionMap, 'value');
 
-export {
-  getQueryFromOptions,
-  getLineChartFormatters,
-  getPrecision,
-  getDayLines
-};
-
-const getTickFormatter = _.memoize((precisionType) => {
-  let tickFormat = (precisionType === 'hours') ? 'ha' : 'MMM Do';
-  return (tick) => moment(tick).format(tickFormat);
-});
-
-const getTooltipLabelFormatter = _.memoize((precisionType) => {
-  let labelFormat = 'MMMM Do';
-  if (precisionType === 'hours') {
-    labelFormat = 'MMM Do [at] LT';
-  }
-  return (label) => moment(label).format(labelFormat);
-});
-
-function getLineChartFormatters ({ precision }) {
-  const formatters = {};
-  const precisionType = getPrecisionType(precision);
-
-  formatters.xTickFormatter = getTickFormatter(precisionType);
-  formatters.yTickFormatter = (value) => {
-    if (value < 1000) {
-      return value.toLocaleString();
-    }
-    if (value < 1000000) {
-      return `${(value / 1000).toFixed(0).toLocaleString()}K`;
-    }
-    if (value < 100000000) {
-      return `${(value / 1000000).toFixed(0).toLocaleString()}M`;
-    }
-    return value.toPrecision(2);
-  };
-  formatters.tooltipLabelFormatter = getTooltipLabelFormatter(precisionType);
-  formatters.tooltipValueFormatter = (value) => Number(value).toLocaleString();
-
-  return formatters;
-}
-
-function getQueryFromOptions ({ from, to, metrics }) {
+function getQueryFromOptions({ from, to, metrics }) {
   from = moment(from).utc();
   to = moment(to).utc();
 
+  const apiMetricsKeys = getKeysFromMetrics(metrics);
+
   return {
-    metrics: metrics.join(','),
+    metrics: apiMetricsKeys.join(','),
     precision: getPrecision(from, to),
     from: from.format(apiDateFormat),
     to: to.format(apiDateFormat)
@@ -75,27 +25,53 @@ function getQueryFromOptions ({ from, to, metrics }) {
  * and returns the closest precision value
  *
  */
-function getPrecision (from, to = moment()) {
+function getPrecision(from, to = moment()) {
   const diff = to.diff(from, 'minutes');
   return precisionMap.find(({ time }) => diff <= time).value;
 }
 
-function getPrecisionType (precision) {
+function getPrecisionType(precision) {
   return (indexedPrecisions[precision].time <= (60 * 24 * 2)) ? 'hours' : 'days';
 }
 
-function getDayLines (data, { precision = 'day' }) {
-  if (getPrecisionType(precision) !== 'hours') {
-    return [];
-  }
-  const lastIndex = data.length - 1;
-  return data.filter(({ ts }, i) => {
-    if (i === 0 || i === lastIndex) {
-      return false;
-    }
-    if (new Date(ts).getHours() !== 0) {
-      return false;
-    }
-    return true;
+function getMetricsFromKeys(keys) {
+  return keys.map((metric, i) => {
+    const found = METRICS_LIST.find((M) => M.key === metric);
+    return { ...found, name: found.key, stroke: chartColors[i] };
   });
 }
+
+function getKeysFromMetrics(metrics) {
+  const flattened = _.flatMap(metrics, ({ key, computeKeys }) => computeKeys ? computeKeys : key);
+  return _.uniq(flattened);
+}
+
+function computeKeysForItem(metrics) {
+  return (item) => metrics.reduce((acc, metric) => {
+    if (metric.compute) {
+      acc[metric.key] = metric.compute(acc, metric.computeKeys);
+    }
+    return acc;
+  }, item);
+}
+
+/**
+ * Transforms API result into chart-ready data in 2 steps:
+ * 1. compute any necessary computed metrics
+ * 2. arrange metrics into groups sorted by unit/measure
+ *
+ * @param {Array} metrics - list of currently selected metrics objects from config
+ * @param {Array} data - results from the metrics API
+ */
+function transformData(data, metrics) {
+  // const charts = metrics.reduce((acc, { measure = 'count' }) => ({ ...acc, [measure]: [] }), {});
+  return data.map(computeKeysForItem(metrics));
+}
+
+export {
+  getQueryFromOptions,
+  getPrecision,
+  getPrecisionType,
+  getMetricsFromKeys,
+  transformData
+};

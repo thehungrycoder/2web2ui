@@ -11,7 +11,7 @@ const TextFieldWrapper = ({ input, meta: { error }, ...rest }) => (
 );
 
 export class NameForm extends Component {
-  render () {
+  render() {
     return (
       <form>
         <Field

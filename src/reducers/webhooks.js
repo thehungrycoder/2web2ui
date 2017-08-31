@@ -7,13 +7,13 @@ export default (state = initialState, action) => {
     /* LIST */
 
     case 'LIST_WEBHOOKS_PENDING':
-      return { ...state, listLoading: true };
+      return { ...state, listLoading: true, listError: null };
 
     case 'LIST_WEBHOOKS_SUCCESS':
       return { ...state, list: _.sortBy(action.payload, ['name']), listLoading: false };
 
     case 'LIST_WEBHOOKS_FAIL':
-      return { ...state, listLoading: false };
+      return { ...state, listError: action.payload, listLoading: false };
 
     /* GET */
 
@@ -29,13 +29,13 @@ export default (state = initialState, action) => {
     /* CREATE */
 
     case 'CREATE_WEBHOOK_PENDING':
-      return { ...state, webhook: {} };
+      return { ...state, webhook: {}};
 
     case 'CREATE_WEBHOOK_SUCCESS':
-      return { ...state, webhook: { id: action.payload.id } };
+      return { ...state, webhook: { id: action.payload.id }};
 
     case 'CREATE_WEBHOOK_FAIL':
-      return { ...state, webhook: {} };
+      return { ...state, webhook: {}};
 
     /* UPDATE */
 

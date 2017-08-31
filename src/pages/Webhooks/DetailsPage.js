@@ -9,12 +9,11 @@ import { getWebhook, deleteWebhook } from '../../actions/webhooks';
 import Layout from '../../components/Layout/Layout';
 import DeleteModal from '../../components/DeleteModal/DeleteModal';
 import { Page, Tabs } from '@sparkpost/matchbox';
-import WebhooksLoading from './components/WebhooksLoading';
 import TestTab from './components/TestTab';
 import EditTab from './components/EditTab';
 
 class WebhooksDetails extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
 
     this.state = {
@@ -51,18 +50,16 @@ class WebhooksDetails extends Component {
   /*
     Dispatches getWebhook action
   */
-  componentDidMount () {
+  componentDidMount() {
     this.props.getWebhook(this.id);
   }
 
   /*
     Calls deleteWebhook action then redirects to list page.
   */
-  deleteWebhook = () => {
-    return this.props.deleteWebhook(this.id).then(() => {
-      this.props.history.push('/webhooks/');
-    });
-  }
+  deleteWebhook = () => this.props.deleteWebhook(this.id).then(() => {
+    this.props.history.push('/webhooks/');
+  })
 
   /*
     for delete modal
@@ -85,26 +82,19 @@ class WebhooksDetails extends Component {
     this.setState({ selectedTab: 0 });
   }
 
-  render () {
-    const { webhook } = this.props;
+  render() {
+    const { webhook, location } = this.props;
     const webhookId = this.id;
+    const selectedTab = _.endsWith(location.pathname, 'test') ? 1 : 0;
 
     /*
-      Checks .events to guard from the create page redirect,
+      Check .events to guard from the create page redirect,
       which sets id on the state but doesn't have the rest of the webhook
     */
-    if (webhook.id !== webhookId || !webhook.events) {
-      return (
-        <WebhooksLoading
-          title={''}
-          breadcrumbAction={{ content: 'Webhooks', Component: Link, to: '/webhooks' }} />
-      );
-    }
-
-    const selectedTab = _.endsWith(this.props.location.pathname, 'test') ? 1 : 0;
+    const isLoading = (webhook.id !== webhookId) || !webhook.events;
 
     return (
-      <Layout.App>
+      <Layout.App loading={isLoading}>
         <Page
           title={webhook.name}
           secondaryActions={this.secondaryActions}

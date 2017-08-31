@@ -31,7 +31,7 @@ const AceWrapper = ({ input, ...rest }) => (
 );
 
 class Editor extends Component {
-  render () {
+  render() {
     const { published } = this.props;
     return (
       <Panel className={styles.EditorPanel}>

@@ -10,7 +10,7 @@ const sparkpostRequest = axios.create({
 
 // TODO handle timeout error better
 
-function useRefreshToken (refreshToken) {
+function useRefreshToken(refreshToken) {
   return sparkpostRequest({
     method: 'POST',
     url: '/authenticate',
@@ -19,7 +19,7 @@ function useRefreshToken (refreshToken) {
   });
 }
 
-function sparkpostLogin (username, password, rememberMe) {
+function sparkpostLogin(username, password, rememberMe) {
   username = encodeURIComponent(username);
   password = encodeURIComponent(password);
   const data = `grant_type=password&username=${username}&password=${password}&rememberMe=${rememberMe}`;

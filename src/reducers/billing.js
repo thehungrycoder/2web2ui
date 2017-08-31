@@ -12,9 +12,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         countriesLoading: false,
-        countries: action.payload.map((c) => {
-          return { value: c.code, label: c.name };
-        })
+        countries: action.payload.map((c) => ({ value: c.code, label: c.name }))
       };
 
     default:

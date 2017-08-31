@@ -16,11 +16,12 @@
   top: 0;
   height: 3px;
   background: color(orange);
-  z-index: 100;
+  z-index: z-index(overlay) - 1;
 }
 
 .aside {
   position: relative;
+  z-index: z-index(overlay) - 2;
   flex: 0 0 0;
 
   @media screen and (min-width: breakpoint(medium)) {
@@ -30,6 +31,7 @@
   }
 }
 
+// TODO Clean this up so app vs. form is more readable
 .content, .formContent {
   position: relative;
   padding: spacing(larger);
@@ -61,6 +63,25 @@
   margin: 0 auto;
 }
 
+.appError, .formError {
+  position: fixed;
+  top: spacing();
+  right: spacing();
+}
+
+.appError {
+  left: spacing();
+  top: rem(100);
+  @media screen and (min-width: breakpoint(medium)) {
+    left: rem(220) + spacing();
+    top: spacing();
+  }
+}
+
+.formError {
+  left: spacing();
+}
+
 .loading {
   position: fixed;
   top: 50%;
@@ -72,4 +93,23 @@
       margin-left: rem(110);
     }
   }
+}
+
+.appError, .formError {
+  position: fixed;
+  top: spacing();
+  right: spacing();
+}
+
+.appError {
+  left: spacing();
+  top: rem(100);
+  @media screen and (min-width: breakpoint(medium)) {
+    left: rem(220) + spacing();
+    top: spacing();
+  }
+}
+
+.formError {
+  left: spacing();
 }

@@ -81,10 +81,6 @@ let form = (props) => {
                     label='CVC'
                     placeholder='***'
                     component={TextFieldWrapper} />
-                  <Field
-                    name='selectedPlan'
-                    type='hidden'
-                    component='input' />
                 </div>
               </Grid.Column>
               <Grid.Column>
@@ -123,6 +119,10 @@ let form = (props) => {
               </Grid.Column>
             </Grid>
           </div> }
+        <Field
+          name='selectedPlan'
+          type='hidden'
+          component='input' />
         <Button submit primary={true}>Upgrade</Button>
         <Button onClick={backToPlans}>Back to Plans</Button>
       </form>
@@ -141,7 +141,7 @@ const mapStateToProps = (state, props) => {
 
   return {
     initialValues: {
-      cardHolderName: currentUser.first_name + ' ' + currentUser.last_name,
+      cardHolderName: `${currentUser.first_name} ${currentUser.last_name}`,
       email: currentUser.email,
       firstName: currentUser.first_name,
       lastName: currentUser.last_name,

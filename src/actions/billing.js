@@ -2,7 +2,7 @@ import { formatDataForCors } from './helpers/billing';
 
 const apiBase = 'https://apisandbox-api.zuora.com/rest/v1';
 
-export function updateSubscription (code) {
+export function updateSubscription(code) {
   return {
     type: 'SPARKPOST_API_REQUEST',
     meta: {
@@ -14,13 +14,13 @@ export function updateSubscription (code) {
   };
 }
 
-export function billingCreate (values) {
+export function billingCreate(values) {
   const createData = formatDataForCors(values);
   const { corsData, billingData } = createData;
 
   return (dispatch) => {
     const cb = ({ results }) => {
-      var accountData = {
+      const accountData = {
         accountNumber: results.accountNumber,
         autoPay: true,
         crmId: results.crmId,
@@ -46,7 +46,7 @@ export function billingCreate (values) {
         meta: {
           type: 'ZUORA_CREATE',
           method: 'POST',
-          url: apiBase + '/accounts',
+          url: `${apiBase}/accounts`,
           data: accountData,
           headers: {
             token: results.token,
@@ -70,7 +70,7 @@ export function billingCreate (values) {
   };
 }
 
-export function getBillingCountries () {
+export function getBillingCountries() {
   return {
     type: 'SPARKPOST_API_REQUEST',
     meta: {

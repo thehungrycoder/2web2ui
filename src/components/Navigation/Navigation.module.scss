@@ -46,6 +46,13 @@
   background: color(gray, 1);
 }
 
+.logo {
+  height: rem(30);
+  margin-bottom: spacing();
+  text-align: center;
+  opacity: 0.9;
+}
+
 .list, .nestedList, .footer {
   list-style: none;
   margin: 0;
@@ -56,7 +63,7 @@
   min-height: 100%;
   padding-bottom: rem(130);
   margin-bottom: rem(-130);
-  padding-top: spacing();
+  padding-top: spacing(larger);
 }
 
 .link, .link:visited {
@@ -117,7 +124,7 @@
 }
 
 .nestedList {
-  margin-bottom: spacing();
+  margin-bottom: spacing(small);
 }
 
 .nestedList .link {
@@ -217,4 +224,14 @@
 
   &:before { top: -7px; }
   &:after { top: 7px; }
+}
+
+.mobileLogo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  height: rem(36);
+  margin-top: rem(12);
 }

@@ -3,7 +3,7 @@ import authCookie from '../helpers/authCookie';
 import { fetch as fetchAccount } from './account';
 import { fetch as fetchCurrentUser } from './currentUser';
 
-export function login (authData) {
+export function login(authData) {
   return (dispatch) => {
     dispatch({
       type: 'LOGIN_SUCCESS',
@@ -16,7 +16,7 @@ export function login (authData) {
   };
 }
 
-export function authenticate (username, password, rememberMe = false) {
+export function authenticate(username, password, rememberMe = false) {
   // return a thunk
   return (dispatch, getState) => {
     const { loggedIn } = getState().auth;
@@ -28,7 +28,7 @@ export function authenticate (username, password, rememberMe = false) {
     dispatch({ type: 'LOGIN_PENDING' });
 
     sparkpostLogin(username, password, rememberMe)
-      .then(({ data = {} } = {}) => {
+      .then(({ data = {}} = {}) => {
         const payload = { ...data, username };
 
         // save auth cookie
@@ -38,8 +38,8 @@ export function authenticate (username, password, rememberMe = false) {
         dispatch(login(payload));
       })
       .catch((err) => {
-        const { response = {} } = err;
-        const { data = {} } = response;
+        const { response = {}} = err;
+        const { data = {}} = response;
         const { error_description: errorDescription } = data;
 
         // TODO: handle a timeout error better
@@ -54,17 +54,14 @@ export function authenticate (username, password, rememberMe = false) {
   };
 }
 
-export function refresh (token, refreshToken) {
-  let oldCookie = authCookie.get();
-  if (oldCookie) {
-    oldCookie = JSON.parse(oldCookie);
-  }
-  const newCookie = Object.assign({}, oldCookie, { token, refreshToken });
+export function refresh(token, refreshToken) {
+  const oldCookie = authCookie.get();
+  const newCookie = Object.assign({}, oldCookie, { access_token: token, refresh_token: refreshToken });
   authCookie.save(newCookie);
   return login(newCookie);
 }
 
-export function logout () {
+export function logout() {
   return (dispatch) => {
     authCookie.remove();
     dispatch({

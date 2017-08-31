@@ -1,16 +1,16 @@
-const initialState = { list: [] };
+const initialState = { list: null, listError: null };
 
 export default (state = initialState, action) => {
   switch (action.type) {
     // List
     case 'LIST_TEMPLATES_PENDING':
-      return { ...state, listLoading: true };
+      return { ...state, listLoading: true, listError: null };
 
     case 'LIST_TEMPLATES_SUCCESS':
       return { ...state, list: action.payload, listLoading: false };
 
     case 'LIST_TEMPLATES_FAIL':
-      return { ...state, listLoading: false };
+      return { ...state, listError: action.payload, listLoading: false };
 
     // Get Draft
     case 'GET_DRAFT_TEMPLATE_PENDING':

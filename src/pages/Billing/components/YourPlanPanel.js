@@ -1,7 +1,7 @@
 import React from 'react';
 import { Panel, Grid } from '@sparkpost/matchbox';
 
-function formatCurrentPlan (currentPlan) {
+function formatCurrentPlan(currentPlan) {
   const formattedPlan = { monthly: 0, overage: 'N/A' };
 
   if (!currentPlan) {

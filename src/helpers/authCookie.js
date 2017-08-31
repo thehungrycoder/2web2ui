@@ -3,15 +3,15 @@ import config from '../config';
 
 const { name, options } = config.authentication.cookie;
 
-function save (data) {
+function save(data) {
   cookie.set(name, data, options);
 }
 
-function get () {
+function get() {
   return cookie.getJSON(name);
 }
 
-function remove () {
+function remove() {
   return cookie.remove(name, options);
 }
 

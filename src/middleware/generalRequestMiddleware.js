@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export default function namedFunc ({ dispatch, getState }) {
+export default function namedFunc({ dispatch, getState }) {
   return (next) => (action) => {
     next(action);
 
@@ -39,7 +39,7 @@ export default function namedFunc ({ dispatch, getState }) {
       if (typeof onSuccess === 'function') {
         onSuccess({ dispatch, getState, results });
       }
-    }, ({ message, response = {} }) => {
+    }, ({ message, response = {}}) => {
         // TODO: dispatch API_FAILURE_RECEIVED instead?
       dispatch({
         type: FAIL_TYPE,

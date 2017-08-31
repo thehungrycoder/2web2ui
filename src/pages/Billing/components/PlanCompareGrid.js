@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid } from '@sparkpost/matchbox';
 
-function formatPlan (plan) {
+function formatPlan(plan) {
   const formattedPlan = { monthly: '0', overage: 'N/A' };
 
   if (!plan) {

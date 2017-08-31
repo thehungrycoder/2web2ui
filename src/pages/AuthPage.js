@@ -4,7 +4,10 @@ import { authenticate } from '../actions/auth';
 import { Redirect } from 'react-router-dom';
 
 import Layout from '../components/Layout/Layout';
-import { Panel, Button, TextField } from '@sparkpost/matchbox';
+import SparkPost from '../components/SparkPost/SparkPost';
+import { Panel, Button, TextField, Checkbox } from '@sparkpost/matchbox';
+
+import styles from './AuthPage.module.scss';
 
 class AuthPage extends Component {
   state = {
@@ -13,13 +16,11 @@ class AuthPage extends Component {
     remember_me: false
   }
 
-  updateInput (name, value) {
-    this.setState({
-      [name]: value
-    });
+  updateInput(name, value) {
+    this.setState({ [name]: value });
   }
 
-  renderLoginError () {
+  renderLoginError() {
     const { errorDescription } = this.props.auth;
 
     if (!errorDescription) {
@@ -33,23 +34,21 @@ class AuthPage extends Component {
     );
   }
 
-  renderLoginButton () {
+  renderLoginButton() {
     return this.props.auth.loginPending ? <span><i className="fa fa-spinner fa-spin"></i> Logging In</span> : <span>Log In</span>;
   }
 
-  render () {
+  render() {
     if (this.props.auth.loggedIn) {
       return <Redirect to='/dashboard' />;
     }
     return (
       <Layout.Form>
-        <a href="https://www.sparkpost.com" title="SparkPost">
-          <img alt="SparkPost" height="68" src="/assets/images/sparkpost-logo-color.svg" width="188" />
-        </a>
+        <div className={styles.LogoWrapper}>
+          <a href="https://www.sparkpost.com" title="SparkPost"><SparkPost.Logo /></a>
+        </div>
 
-        <Panel sectioned accent>
-
-            <h3 className="margin-bottom-xl" id="sp-login-message"><span>Log In</span></h3>
+        <Panel sectioned accent title='Log In'>
             <form>
               {this.renderLoginError()}
 
@@ -71,10 +70,12 @@ class AuthPage extends Component {
                 onChange={ (e) => this.updateInput('password', e.target.value) }
               />
 
-              <div className="checkbox small">
-                <label><input name="remember_me" type="checkbox"
-                checked={this.state.remember_me} onChange={(e) => this.updateInput('remember_me', e.target.checked)} /> Keep me logged in</label>
-              </div>
+              <Checkbox
+                id='remember_me'
+                label='Keep me logged in'
+                checked={this.state.remember_me}
+                onChange={(e) => this.updateInput('remember_me', e.target.checked)}
+              />
 
               <Button
                 submit
@@ -94,7 +95,7 @@ class AuthPage extends Component {
   }
 }
 
-function mapStateToProps ({ auth }) {
+function mapStateToProps({ auth }) {
   return { auth };
 }
 

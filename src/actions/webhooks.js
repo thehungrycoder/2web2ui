@@ -1,5 +1,5 @@
 // TODO: support timezone param?
-export function listWebhooks () {
+export function listWebhooks() {
   return {
     type: 'SPARKPOST_API_REQUEST',
     meta: {
@@ -10,7 +10,7 @@ export function listWebhooks () {
   };
 }
 
-export function getWebhook (id) {
+export function getWebhook(id) {
   return {
     type: 'SPARKPOST_API_REQUEST',
     meta: {
@@ -21,7 +21,7 @@ export function getWebhook (id) {
   };
 }
 
-export function createWebhook (webhook) {
+export function createWebhook(webhook) {
   return {
     type: 'SPARKPOST_API_REQUEST',
     meta: {
@@ -33,7 +33,7 @@ export function createWebhook (webhook) {
   };
 }
 
-export function updateWebhook (id, update) {
+export function updateWebhook(id, update) {
   return {
     type: 'SPARKPOST_API_REQUEST',
     meta: {
@@ -45,7 +45,7 @@ export function updateWebhook (id, update) {
   };
 }
 
-export function deleteWebhook (id) {
+export function deleteWebhook(id) {
   return {
     type: 'SPARKPOST_API_REQUEST',
     meta: {
@@ -56,7 +56,7 @@ export function deleteWebhook (id) {
   };
 }
 
-export function testWebhook (id, payload) {
+export function testWebhook(id, payload) {
   return {
     type: 'SPARKPOST_API_REQUEST',
     meta: {
@@ -68,7 +68,7 @@ export function testWebhook (id, payload) {
   };
 }
 
-export function getEventDocs () {
+export function getEventDocs() {
   return {
     type: 'SPARKPOST_API_REQUEST',
     meta: {
@@ -79,7 +79,7 @@ export function getEventDocs () {
   };
 }
 
-export function getEventSamples (events) {
+export function getEventSamples(events) {
   return {
     type: 'SPARKPOST_API_REQUEST',
     meta: {

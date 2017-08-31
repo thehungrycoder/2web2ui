@@ -1,4 +1,4 @@
-export function fetch (params = {}) {
+export function fetch(params = {}) {
   return {
     type: 'SPARKPOST_API_REQUEST',
     meta: {
@@ -10,7 +10,7 @@ export function fetch (params = {}) {
   };
 }
 
-export function getPlans () {
+export function getPlans() {
   return {
     type: 'SPARKPOST_API_REQUEST',
     meta: {

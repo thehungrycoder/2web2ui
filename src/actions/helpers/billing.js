@@ -1,4 +1,4 @@
-function formatDataForCors (values) {
+function formatDataForCors(values) {
   const {
     firstName,
     lastName,

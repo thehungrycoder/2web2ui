@@ -19,7 +19,7 @@ class BillingPage extends Component {
     this.setState({ showUpgradeModal: !this.state.showUpgradeModal });
   }
 
-  componentDidMount () {
+  componentDidMount() {
     if (!this.props.billing.plans) {
       this.props.getPlans();
     }
@@ -38,13 +38,11 @@ class BillingPage extends Component {
     }
   }
 
-  renderBilling (account, billing) {
+  renderBilling(account, billing) {
     // TODO: move billing reducer into account reducer to have access to account
     //       and do all this in there. Or....SELECTORS
     const currentPlan = _.find(billing.plans, { 'code': account.subscription.code });
-    const publicPlans = _.filter(billing.plans, (plan) => {
-      return plan.status === 'public';
-    });
+    const publicPlans = _.filter(billing.plans, (plan) => plan.status === 'public');
 
     const panelActions = [{ content: 'Change Plan', onClick: this.togglePlansModal }];
 
@@ -69,7 +67,7 @@ class BillingPage extends Component {
     );
   }
 
-  render () {
+  render() {
     const { account, billing } = this.props;
 
     // TODO: develop pending status for account reducer

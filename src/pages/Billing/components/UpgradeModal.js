@@ -15,7 +15,7 @@ const PlanRow = ({ plan, handleClick }) => {
   plan.overage = plan.overage ? plan.overage : 'N/A';
 
   return (
-    <Table.Row rowData={ [ plan.name, '$' + plan.monthly.toLocaleString() + '/mo', plan.volume.toLocaleString(), plan.overage.toLocaleString(), plan.button ]}/>
+    <Table.Row rowData={ [ plan.name, `$${plan.monthly.toLocaleString()}/mo`, plan.volume.toLocaleString(), plan.overage.toLocaleString(), plan.button ]}/>
   );
 };
 
@@ -32,20 +32,16 @@ class UpgradeModal extends Component {
     });
   }
 
-  renderPlanRows (plans, currentPlan) {
+  renderPlanRows(plans, currentPlan) {
     // remove currentPlan from rows TODO: replace with a different "your plan" row
-    _.remove(plans, (plan) => {
-      return plan.code === currentPlan.code;
-    });
+    _.remove(plans, (plan) => plan.code === currentPlan.code);
 
-    return plans.map((plan) => {
-      return (
+    return plans.map((plan) => (
         <PlanRow key={plan.code} plan={plan} handleClick={this.toggleCreditCardForm}/>
-      );
-    });
+      ));
   }
 
-  renderPlansTable () {
+  renderPlansTable() {
     const { plans, currentPlan } = this.props;
 
     return (
@@ -65,7 +61,7 @@ class UpgradeModal extends Component {
     );
   }
 
-  renderCreditCardForm () {
+  renderCreditCardForm() {
     const { selectedPlan } = this.state;
     const { currentPlan, updatePlan, currentUser, countries, hasBilling } = this.props;
 
@@ -86,7 +82,7 @@ class UpgradeModal extends Component {
     );
   }
 
-  render () {
+  render() {
     const { open, handleToggle } = this.props;
     const panelActions = [{ content: 'Cancel', onClick: handleToggle }];
 
