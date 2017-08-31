@@ -7,6 +7,7 @@ import metrics from './metrics';
 import templates from './templates';
 import webhooks from './webhooks';
 import apiFailure from './apiFailure';
+import billing from './billing';
 import reportFilters from './reportFilters';
 import summaryChart from './summaryChart';
 
@@ -18,6 +19,7 @@ export default combineReducers({
   templates,
   webhooks,
   apiFailure,
+  billing,
   reportFilters,
   summaryChart,
   form: reduxFormReducer

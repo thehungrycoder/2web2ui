@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import spApiMiddleware from './middleware/sparkpostApiMiddleware';
+import generalRequest from './middleware/generalRequestMiddleware';
 import registerServiceWorker from './helpers/registerServiceWorker';
 import rootReducer from './reducers';
 
@@ -14,7 +15,7 @@ import App from './App';
 const composeEnhancers = process.env.NODE_ENV !== 'production' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; // eslint-disable-line no-mixed-operators
 const store = createStore(
   rootReducer,
-  composeEnhancers(applyMiddleware(thunk, spApiMiddleware))
+  composeEnhancers(applyMiddleware(thunk, spApiMiddleware, generalRequest))
 );
 
 render(

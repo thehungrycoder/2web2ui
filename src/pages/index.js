@@ -15,3 +15,4 @@ export * from './Templates';
 export * from './reports';
 export { default as AuthPage } from './AuthPage';
 export { default as TemplatesPage } from './Templates';
+export { default as BillingPage } from './Billing/BillingPage';
