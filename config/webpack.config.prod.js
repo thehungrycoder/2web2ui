@@ -305,9 +305,9 @@ module.exports = {
     }),
 
     // Note: this won't work without ExtractTextPlugin.extract(..) in `loaders`.
-    appCSS,
-    globalCSS,
     criticalCSS,
+    globalCSS,
+    appCSS,
 
     // This is for inlining critical CSS
     new StyleExtHtmlWebpackPlugin('critical.css'),
