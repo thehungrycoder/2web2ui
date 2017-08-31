@@ -11,11 +11,7 @@ html {
 }
 
 // Overrides Critical CSS. Prevents FOUT.
-#root {
-  opacity: 1 !important;
-}
-
-#critical {
+#critical.ready {
   opacity: 0 !important;
   pointer-events: none !important;
 }

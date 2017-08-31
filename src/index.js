@@ -25,3 +25,6 @@ render(
   document.getElementById('root')
 );
 registerServiceWorker();
+
+// Kill loading screen
+document.getElementById('critical').className += ' ready';
