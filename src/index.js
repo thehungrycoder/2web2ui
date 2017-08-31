@@ -7,6 +7,7 @@ import spApiMiddleware from './middleware/sparkpostApiMiddleware';
 import registerServiceWorker from './helpers/registerServiceWorker';
 import rootReducer from './reducers';
 
+import './critical.scss';
 import './index.scss';
 import App from './App';
 

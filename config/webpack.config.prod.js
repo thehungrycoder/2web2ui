@@ -1,10 +1,12 @@
 'use strict';
 
 const autoprefixer = require('autoprefixer');
+const cssnano = require('cssnano');
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const StyleExtHtmlWebpackPlugin = require('style-ext-html-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
@@ -34,6 +36,29 @@ if (env.stringified['process.env'].NODE_ENV !== '"production"') {
 
 // Note: defined here because it will be used more than once.
 const cssFilename = 'static/css/[name].[contenthash:8].css';
+
+// Need different instances of this plugin
+const criticalCSS = new ExtractTextPlugin('critical.css');
+const appCSS = new ExtractTextPlugin({ filename: cssFilename });
+const globalCSS = new ExtractTextPlugin({ filename: cssFilename });
+
+// Because we have multiple css tests
+const postCssOptions = {
+  ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
+  plugins: () => [
+    require('postcss-flexbugs-fixes'),
+    autoprefixer({
+      browsers: [
+        '>1%',
+        'last 4 versions',
+        'Firefox ESR',
+        'not ie < 9', // React doesn't support IE8 anyway
+      ],
+      flexbox: 'no-2009',
+    }),
+    cssnano()
+  ],
+};
 
 // ExtractTextPlugin expects the build output to be flat.
 // (See https://github.com/webpack-contrib/extract-text-webpack-plugin/issues/27)
@@ -178,7 +203,7 @@ module.exports = {
       // Component Sass
       {
         test: /\.module.scss$/,
-        loader: ExtractTextPlugin.extract(
+        use: appCSS.extract(
           Object.assign(
             {
               fallback: require.resolve('style-loader'),
@@ -192,27 +217,8 @@ module.exports = {
                     localIdentName: '[name]__[local]___[hash:base64:5]'
                   },
                 },
-                {
-                  loader: require.resolve('postcss-loader'),
-                  options: {
-                    ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
-                    plugins: () => [
-                      require('postcss-flexbugs-fixes'),
-                      autoprefixer({
-                        browsers: [
-                          '>1%',
-                          'last 4 versions',
-                          'Firefox ESR',
-                          'not ie < 9', // React doesn't support IE8 anyway
-                        ],
-                        flexbox: 'no-2009',
-                      }),
-                    ],
-                  },
-                },
-                {
-                  loader: require.resolve('sass-loader')
-                }
+                { loader: require.resolve('postcss-loader'), options: postCssOptions },
+                { loader: require.resolve('sass-loader') }
               ]
             },
             extractTextPluginOptions
@@ -221,34 +227,34 @@ module.exports = {
       },
       // Global Sass
       {
-        test: /^((?!\.module).)*scss/,
-        use: [
-          require.resolve('style-loader'),
-          {
-            loader: require.resolve('css-loader'),
-          },
-          {
-            loader: require.resolve('postcss-loader'),
-            options: {
-              ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
-              plugins: () => [
-                require('postcss-flexbugs-fixes'),
-                autoprefixer({
-                  browsers: [
-                    '>1%',
-                    'last 4 versions',
-                    'Firefox ESR',
-                    'not ie < 9', // React doesn't support IE8 anyway
-                  ],
-                  flexbox: 'no-2009',
-                }),
+        test: /^((?!\.module)(?!critical).)*scss/,
+        use: globalCSS.extract(
+          Object.assign(
+            {
+              fallback: require.resolve('style-loader'),
+              use: [
+                { loader: require.resolve('css-loader'), },
+                { loader: require.resolve('postcss-loader'), options: postCssOptions },
+                { loader: require.resolve('sass-loader') }
               ],
             },
-          },
-          {
-            loader: require.resolve('sass-loader')
-          }
-        ],
+            extractTextPluginOptions
+          )
+        )
+      },
+      // Critical Path CSS
+      {
+        test: /critical.scss/,
+        use: criticalCSS.extract(
+          Object.assign({
+            fallback: require.resolve('style-loader'),
+            use: [
+              { loader: require.resolve('css-loader'), },
+              { loader: require.resolve('postcss-loader'), options: postCssOptions },
+              { loader: require.resolve('sass-loader') }
+            ]
+          }, extractTextPluginOptions)
+        )
       },
       // ** STOP ** Are you adding a new loader?
       // Remember to add the new extension(s) to the "file" loader exclusion list.
@@ -297,10 +303,15 @@ module.exports = {
       },
       sourceMap: true,
     }),
+
     // Note: this won't work without ExtractTextPlugin.extract(..) in `loaders`.
-    new ExtractTextPlugin({
-      filename: cssFilename,
-    }),
+    appCSS,
+    globalCSS,
+    criticalCSS,
+
+    // This is for inlining critical CSS
+    new StyleExtHtmlWebpackPlugin('critical.css'),
+
     // Generate a manifest file which contains a mapping of all asset filenames
     // to their corresponding output file so that tools can pick it up without
     // having to parse `index.html`.
