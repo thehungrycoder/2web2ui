@@ -110,7 +110,9 @@
     "snapshotSerializers": [
       "<rootDir>/node_modules/enzyme-to-json/serializer"
     ],
-    "modulePaths": ["src"]
+    "modulePaths": [
+      "src"
+    ]
   },
   "babel": {
     "presets": [
