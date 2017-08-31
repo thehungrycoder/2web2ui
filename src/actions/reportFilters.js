@@ -1,18 +1,25 @@
-// import { getRelativeDates } from 'helpers/metrics';
+import { fetch as fetchMetrics } from './metrics';
 
-// export function setRelativeTime(range) {
-//   return (dispatch) => Promise.resolve(dispatch({
-//     type: 'SET_RELATIVE_TIME',
-//     payload: { ...getRelativeDates(range), range }
-//   }));
-// }
+const actionType = 'REFRESH_AUTOCOMPLETE';
 
-// export function setExactTime(rangeDates) {
-//   return (dispatch) => Promise.resolve(dispatch({
-//     type: 'SET_EXACT_TIME',
-//     payload: { ...rangeDates, range: 'custom' }
-//   }));
-// }
+function getACDomains(params) {
+  const path = '/domains';
+  const meta = { cacheKey: 'domains' };
+  return fetchMetrics({ path, params, meta, actionType });
+}
+
+function getACCampaigns(params) {
+  const path = '/campaigns';
+  const meta = { cacheKey: 'campaigns' };
+  return fetchMetrics({ path, params, meta, actionType });
+}
+
+export function refreshAutocomplete(params) {
+  return (dispatch) => {
+    dispatch(getACDomains(params));
+    dispatch(getACCampaigns(params));
+  };
+}
 
 export function addFilter(payload) {
   return {

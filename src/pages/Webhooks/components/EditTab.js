@@ -10,6 +10,9 @@ import { getWebhook, getEventDocs, updateWebhook } from '../../../actions/webhoo
 import { Panel, Banner } from '@sparkpost/matchbox';
 import WebhookForm from './WebhookForm';
 
+import prepareWebhookUpdate from '../helpers/prepareWebhookUpdate';
+import buildEventsTree from '../helpers/buildEventsTree';
+
 class EditTab extends Component {
   constructor(props) {
     super(props);
@@ -44,117 +47,17 @@ class EditTab extends Component {
   }
 
   /*
-    Called by updateWebhook. Figures out if the webhooks auth details need to be updated,
-    then returns those updates if so.
-  */
-  resolveAuthUpdates(values, webhook) {
-    const { auth, basicUser, basicPass, clientId, clientSecret, tokenURL } = values;
-    const update = {};
-
-    // none is undefined !== undefined
-    if (auth !== webhook.auth_type) {
-      switch (auth) {
-        case 'basic':
-          update.auth_type = 'basic';
-          update.auth_credentials = { username: basicUser, password: basicPass };
-          break;
-        case 'oauth2':
-          update.auth_type = 'oauth2';
-          update.auth_request_details = {
-            url: tokenURL,
-            body: { client_id: clientId, client_secret: clientSecret }
-          };
-          break;
-        default:
-          update.auth_type = 'none';
-          break;
-      }
-    } else {
-      const {
-        auth_credentials: authCredentials,
-        auth_request_details: authRequestDetails
-      } = webhook;
-
-      switch (auth) {
-        case 'basic':
-          if (authCredentials.username !== basicUser ||
-              authCredentials.password !== basicPass) {
-            update.auth_credentials = { username: basicUser, password: basicPass };
-          }
-          break;
-        case 'oauth2':
-          if (authRequestDetails.url !== tokenURL ||
-              authCredentials.body.client_id !== clientId ||
-              authCredentials.body.client_secret !== clientSecret) {
-            update.auth_request_details = {
-              url: tokenURL,
-              body: { client_id: clientId, client_secret: clientSecret }
-            };
-          }
-          break;
-        default:
-          update.auth_type = 'none';
-          break;
-      }
-    }
-    return update;
-  }
-
-  /*
     Passed as onSubmit to WebhookForm. Figures out what updates need to be passed
     to the updateWebhook action.
   */
   updateWebhook(values, webhook, allEvents) {
-    const authDetails = this.resolveAuthUpdates(values, webhook);
-
-    const update = { ...authDetails };
-
-    if (values.name !== webhook.name) {
-      update.name = values.name;
-    }
-
-    if (values.target !== webhook.target) {
-      update.target = values.target;
-    }
-
-    const checkedEvents = _.concat(values.message_event, values.track_event, values.gen_event, values.unsubscribe_event, values.relay_event);
-
-    // "All" selected, or all boxes clicked
-    if (values.eventsRadio === 'all' || checkedEvents.length === allEvents.length) {
-      if (webhook.events.length !== allEvents.length) {
-        update.events = allEvents;
-      }
-    } else {
-      if (!_.isEqual(webhook.events, checkedEvents)) {
-        update.events = _.filter(checkedEvents, (event) => (event)); // remove for truthy
-      }
-    }
+    const update = prepareWebhookUpdate(values, webhook, allEvents);
 
     if (Object.keys(update).length !== 0) {
       return this.props.updateWebhook(webhook.id, update).then(() => {
         this.setState({ updated: true });
       });
     }
-  }
-
-  /*
-    Build an event tree based on the docs from /webhooks/documentation. Passed
-    to _.once() in the constructor so it only happens once per mount.
-    TODO: consider moving this to the reducer. This doesn't change from webhook
-          to webhook, and if other resources need to use webhooks/documentation
-          we can put it on its own key in the state.
-  */
-  buildEventsTree(eventGroups) {
-    return _.map(eventGroups, ({ display_name, description, events }, key) => ({
-      key: key,
-      label: display_name,
-      description: description,
-      events: _.map(events, ({ display_name, description }, eventKey) => ({
-        key: eventKey,
-        label: display_name,
-        description: description
-      }))
-    }));
   }
 
   /*
@@ -181,27 +84,9 @@ class EditTab extends Component {
   }
 
   render() {
-    const { eventsLoading } = this.props;
-
-    /*
-      TODO: We probably don't need to load on eventsLoading (even though it only happens once),
-            but we should eventually catch this call failing.
-    */
-    if (eventsLoading) {
-      return (
-        <Panel>
-          <Panel.Section>
-            Loading...
-          </Panel.Section>
-        </Panel>
-      );
-    }
-
-    const { webhook, eventDocs } = this.props;
-
-    const eventsTree = this.buildEventsTree(eventDocs);
+    const { webhook, eventDocs, eventsLoading } = this.props;
+    const eventsTree = buildEventsTree(eventDocs);
     const allEvents = this.getAllEvents(eventsTree);
-
     const allChecked = webhook.events.length === allEvents.length;
     const checkedEvents = {};
 
@@ -224,7 +109,9 @@ class EditTab extends Component {
       <Panel sectioned>
         { showBanner && this.renderBanner(this.props.updateSuccess) }
         <Panel.Section>
-          <WebhookForm eventsTree={eventsTree} allChecked={allChecked} newWebhook={false} checkedEvents={checkedEvents} onSubmit={(values) => this.updateWebhook(values, webhook, allEvents)}/>
+          {eventsLoading ? 'Loading...' : (
+            <WebhookForm eventsTree={eventsTree} allChecked={allChecked} newWebhook={false} checkedEvents={checkedEvents} onSubmit={(values) => this.updateWebhook(values, webhook, allEvents)}/>
+          )}
         </Panel.Section>
       </Panel>
     );

@@ -1,49 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { Field, reduxForm, formValueSelector } from 'redux-form';
-import { Button, Grid } from '@sparkpost/matchbox';
-import CheckboxGroup from './CheckboxGroup';
-import { TextFieldWrapper, SelectWrapper, RadioGroup } from '../../../components/reduxFormWrappers';
+import { reduxForm, formValueSelector } from 'redux-form';
+import { Button } from '@sparkpost/matchbox';
 import { Redirect } from 'react-router-dom';
-
-const required = (value) => value ? undefined : 'Required';
-
-const basicAuthFields = (
-  <div>
-  Basic Auth
-    <Field name='basicUser' label='Username' placeholder='username' component={TextFieldWrapper} validate={required}/>
-
-    <Field name='basicPass' label='Password' placeholder='password' component={TextFieldWrapper} validate={required}/>
-  </div>
-);
-
-const oAuth2Fields = (
-  <div>
-  OAuth 2.0
-    <Field name='clientId' label='Client ID' placeholder='clientID' component={TextFieldWrapper} validate={required}/>
-
-    <Field name='clientSecret' label='Client Secret' placeholder='clientSecret' component={TextFieldWrapper} validate={required}/>
-
-    <Field name='tokenURL' label='Token URL' placeholder='https://www.example.com/tokens/' component={TextFieldWrapper} validate={required}/>
-  </div>
-);
-
-/* Takes in the event tree and builds a grid of checkboxes using the
-   CheckboxGroup component */
-const buildCheckBoxes = (eventsTree) => {
-  const checkboxes = eventsTree.map((parent, index) => {
-    const options = parent.events.map((child) => ({ label: child.label, value: child.key }));
-
-    return (
-      <Grid.Column xs={2} lg={2} md={2} key={index}>
-        <Field parent={parent.label} name={parent.key} options={options} component={CheckboxGroup} />
-      </Grid.Column>
-    );
-  });
-
-  return (<Grid>{checkboxes}</Grid>);
-};
+import { NameField, EventsRadioGroup, AuthDropDown, BasicAuthFields, OAuth2Fields } from './Fields';
+import formatEditValues from '../helpers/formatEditValues';
+import buildCheckBoxes from '../helpers/buildCheckBoxes';
 
 let WebhookForm = (props) => {
   const {
@@ -63,56 +26,21 @@ let WebhookForm = (props) => {
   }
 
   const submitText = newWebhook ? 'Create Webhook' : 'Update Webhook';
-  const authFields = auth && auth === 'basic' ? basicAuthFields : oAuth2Fields;
+  const AuthFields = auth && auth === 'basic' ? BasicAuthFields : OAuth2Fields;
   const showEvents = eventsRadio === 'select';
   const eventBoxes = buildCheckBoxes(eventsTree);
   const disabled = submitting || pristine;
 
   return (
     <form onSubmit={handleSubmit}>
-      <Field
-        // for redux-form
-        name='name'
-        component={TextFieldWrapper}
-        validate={required}
-
-        // for the matchbox component
-        label='Webhook Name'
-        placeholder='Opens and Clicks'
-      />
-
-      <Field
-        name='target'
-        component={TextFieldWrapper}
-        validate={required}
-
-        label='Target URL'
-        placeholder='https://www.example.com/target'
-        type={'url'}
-      />
-
-      <Field
-        name='eventsRadio'
-        component={RadioGroup}
-        title='Events'
-        options={[
-          { value: 'all', label: 'All' },
-          { value: 'select', label: 'Select' }
-        ]}
-      />
-
+      <NameField />
+      <EventsRadioGroup />
       { showEvents && eventBoxes }
 
       <br/>
 
-      <Field
-        name='auth'
-        label='Authentication'
-        component={SelectWrapper}
-        options={[{ value: '', label: 'None' }, { value: 'basic', label: 'Basic Auth' }, { value: 'oauth2', label: 'OAuth 2.0' }]}
-      />
-
-      { auth && authFields }
+      <AuthDropDown />
+      { auth && <AuthFields /> }
 
       <Button submit primary={true} disabled={disabled}>{submitText}</Button>
       { submitting && !submitSucceeded && <div>Loading...</div>}
@@ -129,36 +57,8 @@ WebhookForm = reduxForm({
 
 const selector = formValueSelector(formName);
 
-// TODO: maybe move this to the Edit Page and pass as a prop
-const formatEditValues = (webhook) => {
-  const values = {
-    id: webhook.id,
-    name: webhook.name,
-    target: webhook.target
-  };
-
-  switch (webhook.auth_type) {
-    case 'basic':
-      values.auth = webhook.auth_type;
-      values.basicUser = webhook.auth_credentials.username;
-      values.basicPass = webhook.auth_credentials.password;
-      break;
-    case 'oauth2':
-      values.auth = webhook.auth_type;
-      values.clientId = webhook.auth_request_details.body.client_id;
-      values.clientSecret = webhook.auth_request_details.body.client_secret;
-      values.tokenURL = webhook.auth_request_details.url;
-      break;
-    default:
-      break;
-  }
-
-  return values;
-};
-
 const mapStateToProps = (state, props) => {
-  const { name, target, eventsRadio, auth } = selector(state, 'name', 'taget', 'eventsRadio', 'auth');
-
+  const { name, target, eventsRadio, auth } = selector(state, 'name', 'target', 'eventsRadio', 'auth');
   const webhookValues = props.newWebhook ? {} : formatEditValues(state.webhooks.webhook);
 
   return {

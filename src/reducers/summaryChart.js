@@ -1,8 +1,9 @@
 import { getMetricsFromKeys, transformData } from 'helpers/metrics';
+import config from 'config/index';
 
 const initialState = {
   loading: false,
-  metrics: getMetricsFromKeys(['count_targeted', 'spam_complaint_rate', 'count_accepted', 'count_bounce']),
+  metrics: getMetricsFromKeys(config.summaryChart.defaultMetrics),
   precision: '',
   data: []
 };

@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 function average(item, keys = []) {
   return item[keys[0]] / item[keys[1]];
 }
