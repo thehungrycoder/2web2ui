@@ -9,3 +9,14 @@ export function fetch(params = {}) {
     }
   };
 }
+
+export function getPlans() {
+  return {
+    type: 'SPARKPOST_API_REQUEST',
+    meta: {
+      type: 'GET_PLANS',
+      method: 'GET',
+      url: '/account/plans'
+    }
+  };
+}

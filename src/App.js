@@ -7,6 +7,7 @@ import AuthenticationGate from './components/AuthenticationGate';
 // Pages
 import {
   AuthPage,
+  BillingPage,
   DashboardPage,
   SummaryReportPage,
   ProfilePage,
@@ -44,10 +45,12 @@ export default () => (
       <ProtectedRoute exact path='/templates/edit/:id/published' component={TemplatesPublishedPage} />
       {/* <ProtectedRoute exact path='/templates/edit/:id/preview' component={TemplatesEditPage} /> */}
 
-      <ProtectedRoute path='/account/profile' component={ProfilePage} />
       <ProtectedRoute exact path='/webhooks' component={webhooks.ListPage}/>
       <ProtectedRoute exact path='/webhooks/create' component={webhooks.CreatePage}/>
       <ProtectedRoute path='/webhooks/details/:id' component={webhooks.DetailsPage}/>
+
+      <ProtectedRoute path='/account/profile' component={ProfilePage} />
+      <ProtectedRoute exact path='/account/billing' component={BillingPage}/>
     </div>
   </Router>
 );
