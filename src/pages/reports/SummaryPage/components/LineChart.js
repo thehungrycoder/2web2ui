@@ -48,7 +48,7 @@ export default class SpLineChart extends React.Component {
           <XAxis
             tickFormatter={xTickFormatter}
             dataKey='ts'
-            interval={1}
+            interval='preserveEnd'
             height={30}
             hide={!showXAxis}
           />

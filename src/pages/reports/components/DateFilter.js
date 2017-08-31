@@ -118,7 +118,7 @@ class DateFilter extends Component {
 
   render() {
     const { selected: { from, to }, showDatePicker } = this.state;
-    const selectedRange = showDatePicker ? 'custom' : this.props.filter.range;
+    const selectedRange = showDatePicker ? 'custom' : this.props.filter.relativeRange;
 
     const rangeSelect = <Select
       options={relativeDateOptions}

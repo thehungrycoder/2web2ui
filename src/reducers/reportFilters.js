@@ -3,7 +3,7 @@ import { getRelativeDates } from 'helpers/date';
 const DEFAULT_RANGE = 'day';
 const initialState = {
   ...getRelativeDates(DEFAULT_RANGE),
-  range: DEFAULT_RANGE,
+  relativeRange: DEFAULT_RANGE,
   activeList: [],
   searchList: []
 };
@@ -17,8 +17,8 @@ export default (state = initialState, action) => {
       return { ...state, ...action.payload };
 
     case 'REFRESH_REPORT_FILTERS': {
-      const { to, from, range } = action.payload;
-      return { ...state, to, from, range };
+      const { to, from, relativeRange } = action.payload;
+      return { ...state, to, from, relativeRange };
     }
 
     case 'ADD_FILTER':
