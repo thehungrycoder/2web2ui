@@ -35,6 +35,10 @@ export default [
         to: '/account/billing'
       },
       {
+        label: 'Credentials',
+        to: '/account/credentials'
+      },
+      {
         label: 'Profile',
         to: '/account/profile'
       }

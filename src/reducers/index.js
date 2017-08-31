@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
-import { reducer as reduxFormReducer } from 'redux-form';
-import auth from './auth';
+import { reducer as form } from 'redux-form';
+
 import account from './account';
 import apiFailure from './apiFailure';
+import apiKeys from './apiKeys';
+import auth from './auth';
 import billing from './billing';
 import currentUser from './currentUser';
 import metrics from './metrics';
@@ -14,12 +16,13 @@ import templates from './templates';
 import webhooks from './webhooks';
 
 export default combineReducers({
-  auth,
   account,
   apiFailure,
+  apiKeys,
+  auth,
   billing,
   currentUser,
-  form: reduxFormReducer,
+  form,
   metrics,
   reportFilters,
   sendingDomains,
