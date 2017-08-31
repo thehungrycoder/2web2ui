@@ -27,6 +27,8 @@ Running the test suite (not built yet).
 ```
 npm test
 ```
+**NOTE:** You may need to `brew install watchman` for jest to run in watch mode on OS X.
+https://github.com/facebook/react-native/issues/9309#issuecomment-238966924
 
 ## Docs
 
