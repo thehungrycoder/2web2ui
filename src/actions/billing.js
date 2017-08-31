@@ -1,4 +1,5 @@
-// import _ from 'lodash';
+import { formatDataForCors } from './helpers/billing';
+
 const apiBase = 'https://apisandbox-api.zuora.com/rest/v1';
 
 export function updateSubscription (code) {
@@ -13,7 +14,10 @@ export function updateSubscription (code) {
   };
 }
 
-export function billingCreate (corsData, billingData, context) {
+export function billingCreate (values) {
+  const createData = formatDataForCors(values);
+  const { corsData, billingData } = createData;
+
   return (dispatch) => {
     const cb = ({ results }) => {
       var accountData = {
@@ -63,5 +67,19 @@ export function billingCreate (corsData, billingData, context) {
         onSuccess: cb
       }
     });
+  };
+}
+
+export function getBillingCountries () {
+  return {
+    type: 'SPARKPOST_API_REQUEST',
+    meta: {
+      type: 'GET_COUNTRIES_BILLING',
+      method: 'GET',
+      url: '/account/countries',
+      params: {
+        filter: 'billing'
+      }
+    }
   };
 }

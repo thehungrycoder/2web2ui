@@ -8,9 +8,7 @@ import { TextFieldWrapper, SelectWrapper } from '../../../components/reduxFormWr
 
 const getCcYears = () => {
   const year = new Date().getFullYear();
-  return _.range(year, year + 20).map((y) => {
-    return { label: y.toString(), value: y.toString() };
-  });
+  return _.range(year, year + 20);
 };
 
 const cardOptions = [
@@ -20,22 +18,9 @@ const cardOptions = [
   { value: 'Discover', label: 'Discover' }
 ];
 
-const monthOptions = [
-  { value: '01', label: '01' },
-  { value: '02', label: '02' },
-  { value: '03', label: '03' },
-  { value: '04', label: '04' },
-  { value: '05', label: '05' },
-  { value: '06', label: '06' },
-  { value: '07', label: '07' },
-  { value: '08', label: '08' },
-  { value: '08', label: '08' },
-  { value: '10', label: '10' },
-  { value: '11', label: '11' },
-  { value: '12', label: '12' }
-];
+const monthOptions = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
 
-let CreditCardForm = (props) => {
+let form = (props) => {
   const { handleSubmit, backToPlans, countries, hasBilling } = props;
 
   return (
@@ -77,7 +62,7 @@ let CreditCardForm = (props) => {
                     placeholder='**** **** **** ****'
                     component={TextFieldWrapper}/>
                   <Field
-                    name='cardName'
+                    name='cardHolderName'
                     label='Name on Card'
                     placeholder=''
                     component={TextFieldWrapper}/>
@@ -97,7 +82,7 @@ let CreditCardForm = (props) => {
                     placeholder='***'
                     component={TextFieldWrapper} />
                   <Field
-                    name='billingId'
+                    name='selectedPlan'
                     type='hidden'
                     component='input' />
                 </div>
@@ -147,34 +132,24 @@ let CreditCardForm = (props) => {
 
 const formName = 'creditCardForm';
 
-CreditCardForm = reduxForm({
+form = reduxForm({
   form: formName
-})(CreditCardForm);
+})(form);
 
 const mapStateToProps = (state, props) => {
-  const { currentUser, billingId } = props;
+  const { currentUser, selectedPlan } = props;
 
   return {
     initialValues: {
-      cardNumber: '4111111111111111',
-      cardType: 'Visa',
-      expirationMonth: '02',
-      expirationYear: '2018',
-      cardName: currentUser.first_name + ' ' + currentUser.last_name,
+      cardHolderName: currentUser.first_name + ' ' + currentUser.last_name,
       email: currentUser.email,
       firstName: currentUser.first_name,
       lastName: currentUser.last_name,
-      billingId: billingId,
-      address1: '123 William St',
-      city: 'Baltmore',
-      state: 'Maryland',
-      country: 'US',
-      zipCode: '55555',
-      cvc: '123'
+      selectedPlan: selectedPlan
     }
   };
 };
 
-CreditCardForm = connect(mapStateToProps)(CreditCardForm);
+const CreditCardForm = connect(mapStateToProps)(form);
 
 export default CreditCardForm;

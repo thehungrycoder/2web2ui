@@ -15,7 +15,8 @@ export default function namedFunc ({ dispatch, getState }) {
     const FAIL_TYPE = `${type}_FAIL`;
 
     dispatch({
-      type: PENDING_TYPE
+      type: PENDING_TYPE,
+      meta
     });
 
     const httpOptions = {
@@ -30,7 +31,8 @@ export default function namedFunc ({ dispatch, getState }) {
       // we only get here if the request returned a 2xx status code
       dispatch({
         type: SUCCESS_TYPE,
-        payload: results
+        payload: results,
+        meta
       });
 
       // if we need to chain together another action, do it here
@@ -41,7 +43,8 @@ export default function namedFunc ({ dispatch, getState }) {
         // TODO: dispatch API_FAILURE_RECEIVED instead?
       dispatch({
         type: FAIL_TYPE,
-        payload: { message, response }
+        payload: { message, response },
+        meta
       });
     });
   };

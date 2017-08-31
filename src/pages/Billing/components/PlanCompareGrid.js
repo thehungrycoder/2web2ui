@@ -1,11 +1,31 @@
 import React from 'react';
 import { Grid } from '@sparkpost/matchbox';
 
-// TODO: use a table?
+function formatPlan (plan) {
+  const formattedPlan = { monthly: '0', overage: 'N/A' };
+
+  if (!plan) {
+    plan = { name: '', monthly: 0, volume: 0, overage: 0 };
+  }
+
+  if (plan.overage) {
+    formattedPlan.overage = `${plan.overage.toLocaleString()} per email`;
+  }
+
+  if (plan.monthly) {
+    formattedPlan.monthly = `${plan.monthly.toLocaleString()} monthly`;
+  }
+
+  formattedPlan.volume = plan.volume.toLocaleString();
+  formattedPlan.name = plan.name;
+
+  return formattedPlan;
+}
+
+// TODO: use a table? <br/> are the best
 const PlanCompareGrid = ({ currentPlan, selectedPlan }) => {
-  // Current plan already has this set up from BillingPage
-  selectedPlan.monthly = selectedPlan.monthly ? selectedPlan.monthly : '0';
-  selectedPlan.overage = selectedPlan.overage ? selectedPlan.overage : 'N/A';
+  const formattedCurrentPlan = formatPlan(currentPlan);
+  const formattedSelectedPlan = formatPlan(selectedPlan);
 
   return (
     <Grid>
@@ -20,17 +40,17 @@ const PlanCompareGrid = ({ currentPlan, selectedPlan }) => {
       </Grid.Column>
       <Grid.Column>
         Current Plan <br/>
-        {currentPlan.name} <br/>
-        ${currentPlan.monthly.toLocaleString()}/mo <br/>
-        {currentPlan.volume.toLocaleString()} <br/>
-        {currentPlan.overage.toLocaleString()}
+        {formattedCurrentPlan.name} <br/>
+        ${formattedCurrentPlan.monthly}<br/>
+        {formattedCurrentPlan.volume} <br/>
+        {formattedCurrentPlan.overage}
       </Grid.Column>
       <Grid.Column>
         New Plan <br/>
-        {selectedPlan.name} <br/>
-        ${selectedPlan.monthly.toLocaleString()}/mo <br/>
-        {selectedPlan.volume.toLocaleString()} <br/>
-        {selectedPlan.overage.toLocaleString()}
+        {formattedSelectedPlan.name} <br/>
+        ${formattedSelectedPlan.monthly}<br/>
+        {formattedSelectedPlan.volume} <br/>
+        {formattedSelectedPlan.overage}
       </Grid.Column>
     </Grid>
   );
