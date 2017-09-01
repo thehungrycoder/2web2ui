@@ -6,12 +6,12 @@ const defaultParams = () => ({
   metrics: 'count_targeted'
 });
 
-export function fetch({ path, params = {}, meta = {}}) {
+export function fetch({ path, params = {}, meta = {}, actionType = 'FETCH_METRICS' }) {
   return {
     type: 'SPARKPOST_API_REQUEST',
     meta: {
       ...meta,
-      type: 'FETCH_METRICS',
+      type: actionType,
       method: 'GET',
       url: `/metrics/${path}`,
       params: {

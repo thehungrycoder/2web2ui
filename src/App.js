@@ -1,8 +1,9 @@
 import React from 'react';
 
 // Components
-import ProtectedRoute from './components/ProtectedRoute';
-import AuthenticationGate from './components/AuthenticationGate';
+import ProtectedRoute from 'components/ProtectedRoute';
+import AuthenticationGate from 'components/AuthenticationGate';
+import Typeahead from 'components/Typeahead';
 
 // Pages
 import {
@@ -26,6 +27,12 @@ import {
 
 const ForgotPassword = () => <h1>Forgot Password</h1>;
 
+const typeaheadItems = [
+  { type: 'domain', value: 'something.com' },
+  { type: 'campaign', value: 'camp-5' },
+  { type: 'ip', value: '1.2.33.45' }
+];
+
 export default () => (
   <Router>
     <div>
@@ -38,6 +45,10 @@ export default () => (
       <ProtectedRoute path='/dashboard' component={DashboardPage} />
       <Route exact path='/reports' render={() => <Redirect to='/reports/summary' />} />
       <ProtectedRoute path='/reports/summary' component={SummaryReportPage} />
+
+      <Route exact path='/typeahead' render={() => (
+        <Typeahead items={typeaheadItems} onChange={(...args) => console.log(args)} /> // eslint-disable-line
+      )} />
 
       <ProtectedRoute exact path='/templates' component={TemplatesListPage} />
       <ProtectedRoute exact path='/templates/create/' component={TemplatesCreatePage} />

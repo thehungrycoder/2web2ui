@@ -1,3 +1,4 @@
+/* eslint max-lines: ["error", 175] */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactDOM from 'react-dom';
@@ -118,7 +119,7 @@ class DateFilter extends Component {
 
   render() {
     const { selected: { from, to }, showDatePicker } = this.state;
-    const selectedRange = showDatePicker ? 'custom' : this.props.filter.range;
+    const selectedRange = showDatePicker ? 'custom' : this.props.filter.relativeRange;
 
     const rangeSelect = <Select
       options={relativeDateOptions}

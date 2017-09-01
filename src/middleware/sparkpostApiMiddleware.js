@@ -15,6 +15,12 @@ let refreshing = false;
 const refreshTokensUsed = new Set();
 
 export default function sparkpostApiRequest({ dispatch, getState }) {
+
+  // Re-dispatches a given action after we finish refreshing the auth token
+  function redispatchAfterRefresh(action) {
+    return resolveOnCondition(() => !refreshing).then(() => dispatch(action));
+  }
+
   return (next) => (action) => {
     next(action);
 
@@ -49,9 +55,7 @@ export default function sparkpostApiRequest({ dispatch, getState }) {
     // if we are currently refreshing our token, wait for refresh
     // to complete and then re-dispatch the action so it uses new token
     if (refreshing) {
-      return resolveOnCondition(() => !refreshing).then(() => {
-        dispatch(action);
-      }, _.noop);
+      return redispatchAfterRefresh(action);
     }
 
     return sparkpostRequest(httpOptions).then(({ data: { results }}) => {
@@ -75,12 +79,9 @@ export default function sparkpostApiRequest({ dispatch, getState }) {
         action.meta.retries = retries + 1;
 
         // If we are currently refreshing the token OR if this refresh token
-        // has already been used to refresh, we should re-dispatch the action
-        // without trying to use the refresh token
+        // has already been used to refresh, we should re-dispatch after refresh is complete
         if (refreshing || refreshTokensUsed.has(auth.refreshToken)) {
-          return resolveOnCondition(() => !refreshing).then(() => {
-            dispatch(action);
-          }, _.noop);
+          return redispatchAfterRefresh(action);
         }
 
         refreshing = true;
