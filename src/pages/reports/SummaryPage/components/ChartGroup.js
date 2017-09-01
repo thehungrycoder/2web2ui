@@ -42,6 +42,7 @@ export default class ChartGroup extends Component {
           key={`chart=${i}`}
           syncId='summaryChart'
           data={data}
+          precision={precision}
           lines={chart.metrics.map(({ name, label, stroke }) => ({
             key: name,
             dataKey: name,

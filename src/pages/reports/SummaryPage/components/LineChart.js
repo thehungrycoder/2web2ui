@@ -1,7 +1,7 @@
-/* eslint-disable */
 import React from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ReferenceLine } from 'recharts';
 import _ from 'lodash';
+import moment from 'moment';
 import './LineChart.scss';
 
 function orderDesc(a, b) {
@@ -47,15 +47,30 @@ export default class SpLineChart extends React.Component {
     return _.max(lineData);
   }
 
+  // Manually generates Y axis ticks
   getYTicks() {
     const { yLabel, yScale } = this.props;
     if (yLabel === 'Percent' && yScale === 'linear') {
       return { ticks: [0, 25, 50, 75, 100]};
     }
 
-    // The ticks prop does not have a default value
-    // Need to spread an empty object automatically set them
+    // The ticks prop does not have a default value, need to spread an empty object automatically set them
     return {};
+  }
+
+  // Manually generates X axis ticks
+  getXTicks() {
+    const { data, precision } = this.props;
+    const times = data.map((tick) => tick.ts);
+    let ticks = {};
+
+    if (precision === '1min') {
+      ticks = { ticks: times.filter((time) => moment(time).minutes() % 15 === 0) };
+    } else if (precision === '15min') {
+      ticks = { ticks: times.filter((time) => moment(time).minutes() % 30 === 0) };
+    }
+
+    return ticks;
   }
 
   render() {
@@ -74,7 +89,8 @@ export default class SpLineChart extends React.Component {
 
     const yDomain = this.getYDomain();
     const yTicks = this.getYTicks();
-    console.log(data);
+    const xTicks = this.getXTicks();
+
     return (
       <div className='sp-linechart-wrapper'>
         <ResponsiveContainer width='99%' height={150 + (40 * lines.length)}>
@@ -82,6 +98,7 @@ export default class SpLineChart extends React.Component {
             <CartesianGrid vertical={false} strokeDasharray="4 1"/>
             <XAxis
               tickFormatter={xTickFormatter}
+              {...xTicks}
               scale='utcTime'
               dataKey='ts'
               interval='preserveEnd'
