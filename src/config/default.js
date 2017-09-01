@@ -24,7 +24,10 @@ const config = {
     { time: 60 * 24 * 33, value: 'day', format: 'MMM Do' },
     { time: 60 * 24 * 190, value: 'week', format: 'MMM Do' },
     { time: Infinity, value: 'month', format: 'MMM YY' }
-  ]
+  ],
+  summaryChart: {
+    defaultMetrics: ['count_targeted', 'count_rendered', 'count_accepted', 'count_bounce']
+  }
 };
 
 export default config;
