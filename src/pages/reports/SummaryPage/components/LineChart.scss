@@ -26,6 +26,10 @@
 
 .sp-linechart-wrapper {
   position: relative;
+  margin-bottom: rem(30);
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
 .sp-linechart-yLabel, .recharts-label {
@@ -121,8 +125,4 @@
 
 .recharts-responsive-container {
   position: relative;
-  margin-bottom: rem(30);
-  &:last-child {
-    margin-bottom: 0;
-  }
 }
