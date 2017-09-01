@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ReferenceLine } from 'recharts';
 import _ from 'lodash';
@@ -27,15 +28,34 @@ export default class SpLineChart extends React.Component {
     return referenceLines.map((props) => <ReferenceLine {...props} />);
   }
 
-  getDomain() {
+  getYDomain() {
     const { yLabel, yScale } = this.props;
-    let domain = yScale === 'log' ? domain = [0.001, 'auto'] : [0, 'auto'];
+    const max = this.getMax();
+    let domainMax = 100; // Defaults to 100 max domain so y axis always renders at least 0 - 100
 
-    if (yLabel === 'Percent') {
-      domain = [0, 100];
+    if (yLabel !== 'Percent' && max) {
+      domainMax = `dataMax + ${max * 0.08}`; // Adds 8% top 'padding'
     }
 
-    return domain;
+    return yScale === 'log' ? [0.001, domainMax] : [0, domainMax];
+  }
+
+  // Gets max value for this LineChart
+  getMax() {
+    const { lines, data } = this.props;
+    const lineData = _.flatten(lines.map((line) => data.map((d) => d[line.key])));
+    return _.max(lineData);
+  }
+
+  getYTicks() {
+    const { yLabel, yScale } = this.props;
+    if (yLabel === 'Percent' && yScale === 'linear') {
+      return { ticks: [0, 25, 50, 75, 100]};
+    }
+
+    // The ticks prop does not have a default value
+    // Need to spread an empty object automatically set them
+    return {};
   }
 
   render() {
@@ -52,25 +72,28 @@ export default class SpLineChart extends React.Component {
       yLabel
     } = this.props;
 
-    const domain = this.getDomain();
-
+    const yDomain = this.getYDomain();
+    const yTicks = this.getYTicks();
+    console.log(data);
     return (
       <div className='sp-linechart-wrapper'>
-        <ResponsiveContainer width='99%' height={120 * lines.length}>
+        <ResponsiveContainer width='99%' height={150 + (40 * lines.length)}>
           <LineChart data={data} syncId={syncId}>
             <CartesianGrid vertical={false} strokeDasharray="4 1"/>
             <XAxis
               tickFormatter={xTickFormatter}
+              scale='utcTime'
               dataKey='ts'
               interval='preserveEnd'
               height={30}
               hide={!showXAxis} />
             <YAxis
               tickFormatter={yTickFormatter}
+              {...yTicks}
               tickLine={false}
               width={60}
               scale={yScale}
-              domain={domain}
+              domain={yDomain}
               allowDataOverflow={yScale === 'log'} />
             <Tooltip
               labelFormatter={tooltipLabelFormatter}

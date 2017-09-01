@@ -27,22 +27,23 @@
 .sp-linechart-wrapper {
   position: relative;
   margin-bottom: rem(30);
+  backface-visibility: hidden;
   &:last-child {
     margin-bottom: 0;
   }
 }
 
-.sp-linechart-yLabel, .recharts-label {
-  fill: color(gray, 4);
+.sp-linechart-yLabel {
+  color: color(gray, 4);
   font-size: 13px
 }
 
 .sp-linechart-yLabel {
   position: absolute;
-  top: 43%;
-  left: -10px;
-  transform: translate(0, -50%) rotate(-90deg);
-  backface-visibility: hidden;
+  top: 50%;
+  left: 9px;
+  transform: rotate(-90deg);
+  transform-origin: 0;
 }
 
 .recharts-line > path {}
