@@ -27,47 +27,61 @@ export default class SpLineChart extends React.Component {
     return referenceLines.map((props) => <ReferenceLine {...props} />);
   }
 
+  getDomain() {
+    const { yLabel, yScale } = this.props;
+    let domain = yScale === 'log' ? domain = [0.001, 'auto'] : [0, 'auto'];
+
+    if (yLabel === 'Percent') {
+      domain = [0, 100];
+    }
+
+    return domain;
+  }
+
   render() {
     const {
       data,
       lines = [],
       syncId,
       xTickFormatter = _.identity,
+      yTickFormatter = _.identity,
       yScale = 'linear', // eslint-disable-line
       tooltipLabelFormatter = _.identity,
       tooltipValueFormatter = _.identity,
-      showXAxis
+      showXAxis,
+      yLabel
     } = this.props;
 
-    const domain = yScale === 'log' ? [0.001, 'auto'] : [0, 'auto'];
+    const domain = this.getDomain();
 
     return (
-      <ResponsiveContainer width='99%' height={120 * lines.length}>
-        <LineChart data={data} syncId={syncId}>
-          <CartesianGrid vertical={false} strokeDasharray="4 1"/>
-          <XAxis
-            tickFormatter={xTickFormatter}
-            dataKey='ts'
-            interval='preserveEnd'
-            height={30}
-            hide={!showXAxis}
-          />
-          <YAxis
-            tickLine={false}
-            width={50}
-            scale={yScale}
-            domain={domain}
-            allowDataOverflow={yScale === 'log'}
-          />
-          <Tooltip
-            labelFormatter={tooltipLabelFormatter}
-            formatter={tooltipValueFormatter}
-            itemSorter={orderDesc}
-          />
-          {this.renderReferenceLines()}
-          {this.renderLines()}
-        </LineChart>
-      </ResponsiveContainer>
+      <div className='sp-linechart-wrapper'>
+        <ResponsiveContainer width='99%' height={120 * lines.length}>
+          <LineChart data={data} syncId={syncId}>
+            <CartesianGrid vertical={false} strokeDasharray="4 1"/>
+            <XAxis
+              tickFormatter={xTickFormatter}
+              dataKey='ts'
+              interval='preserveEnd'
+              height={30}
+              hide={!showXAxis} />
+            <YAxis
+              tickFormatter={yTickFormatter}
+              tickLine={false}
+              width={60}
+              scale={yScale}
+              domain={domain}
+              allowDataOverflow={yScale === 'log'} />
+            <Tooltip
+              labelFormatter={tooltipLabelFormatter}
+              formatter={tooltipValueFormatter}
+              itemSorter={orderDesc} />
+            {this.renderReferenceLines()}
+            {this.renderLines()}
+          </LineChart>
+        </ResponsiveContainer>
+        <span className='sp-linechart-yLabel'>{yLabel}</span>
+      </div>
     );
   }
 }

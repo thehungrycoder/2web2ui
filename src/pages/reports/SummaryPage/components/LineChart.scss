@@ -24,9 +24,21 @@
   }
 }
 
-.recharts-label {
+.sp-linechart-wrapper {
+  position: relative;
+}
+
+.sp-linechart-yLabel, .recharts-label {
   fill: color(gray, 4);
-  font-size: 12px
+  font-size: 13px
+}
+
+.sp-linechart-yLabel {
+  position: absolute;
+  top: 43%;
+  left: -10px;
+  transform: translate(0, -50%) rotate(-90deg);
+  backface-visibility: hidden;
 }
 
 .recharts-line > path {}
@@ -108,6 +120,7 @@
 }
 
 .recharts-responsive-container {
+  position: relative;
   margin-bottom: rem(30);
   &:last-child {
     margin-bottom: 0;

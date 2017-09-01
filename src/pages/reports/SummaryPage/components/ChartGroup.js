@@ -50,9 +50,10 @@ export default class ChartGroup extends Component {
           }))}
           {...formatters}
           yTickFormatter={chart.yAxisFormatter}
+          yScale={yScale}
+          yLabel={chart.label}
           tooltipValueFormatter={chart.yAxisFormatter}
           referenceLines={referenceLines}
-          yScale={yScale}
           showXAxis={i === charts.length - 1}
         />)}
       </div>
