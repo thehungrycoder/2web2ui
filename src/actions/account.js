@@ -1,13 +1,14 @@
+import sparkpostApiRequest from 'actions/helpers/sparkpostApiRequest';
+
 export function fetch(params = {}) {
-  return {
-    type: 'SPARKPOST_API_REQUEST',
+  return sparkpostApiRequest({
+    type: 'FETCH_ACCOUNT',
     meta: {
-      type: 'FETCH_ACCOUNT',
       method: 'GET',
       url: '/account',
       params
     }
-  };
+  });
 }
 
 export function getPlans() {

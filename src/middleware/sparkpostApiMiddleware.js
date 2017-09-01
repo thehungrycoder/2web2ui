@@ -28,6 +28,8 @@ export default function sparkpostApiRequest({ dispatch, getState }) {
       return;
     }
 
+    dispatch({ type: 'OOPS_STILL_USING_SPAPI_MIDDLEWARE', meta });
+
     const { auth } = getState();
     const { meta } = action;
     const { url, method = 'get', type = 'NO_TYPE_DEFINED', params, headers, data, onSuccess, retries = 0 } = meta;
