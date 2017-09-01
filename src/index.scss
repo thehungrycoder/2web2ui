@@ -9,3 +9,9 @@ html {
   @media screen and (min-width: breakpoint(medium)) { font-size: rem(18); }
   @media screen and (min-width: breakpoint(larger)) { font-size: rem(20); }
 }
+
+// Overrides Critical CSS. Prevents FOUT.
+#critical.ready {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}

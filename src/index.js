@@ -8,6 +8,7 @@ import generalRequest from './middleware/generalRequestMiddleware';
 import registerServiceWorker from './helpers/registerServiceWorker';
 import rootReducer from './reducers';
 
+import './critical.scss';
 import './index.scss';
 import App from './App';
 
@@ -25,3 +26,6 @@ render(
   document.getElementById('root')
 );
 registerServiceWorker();
+
+// Kill loading screen
+document.getElementById('critical').className += ' ready';

@@ -4,7 +4,7 @@
   "private": true,
   "package-lock": false,
   "dependencies": {
-    "@sparkpost/matchbox": "^1.4.2",
+    "@sparkpost/matchbox": "*",
     "axios": "^0.16.1",
     "chart.js": "^2.6.0",
     "classnames": "^2.2.5",
@@ -37,6 +37,7 @@
     "case-sensitive-paths-webpack-plugin": "1.1.4",
     "chalk": "1.1.3",
     "css-loader": "0.28.1",
+    "cssnano": "^3.10.0",
     "dotenv": "4.0.0",
     "enzyme": "^2.8.2",
     "enzyme-to-json": "^1.5.1",
@@ -69,6 +70,7 @@
     "react-error-overlay": "^1.0.6",
     "react-test-renderer": "^15.5.4",
     "sass-loader": "^6.0.5",
+    "style-ext-html-webpack-plugin": "^3.4.1",
     "style-loader": "0.17.0",
     "sw-precache-webpack-plugin": "0.9.1",
     "url-loader": "0.5.8",
@@ -110,7 +112,9 @@
     "snapshotSerializers": [
       "<rootDir>/node_modules/enzyme-to-json/serializer"
     ],
-    "modulePaths": ["src"]
+    "modulePaths": [
+      "src"
+    ]
   },
   "babel": {
     "presets": [

@@ -9,6 +9,8 @@ const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
 const eslintFormatter = require('react-dev-utils/eslintFormatter');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const StyleExtHtmlWebpackPlugin = require('style-ext-html-webpack-plugin');
 const getClientEnvironment = require('./env');
 const paths = require('./paths');
 
@@ -21,6 +23,23 @@ const publicPath = '/';
 const publicUrl = '';
 // Get environment variables to inject into our app.
 const env = getClientEnvironment(publicUrl);
+
+// Because we have multiple css tests
+const postCssOptions = {
+  ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
+  plugins: () => [
+    require('postcss-flexbugs-fixes'),
+    autoprefixer({
+      browsers: [
+        '>1%',
+        'last 4 versions',
+        'Firefox ESR',
+        'not ie < 9', // React doesn't support IE8 anyway
+      ],
+      flexbox: 'no-2009',
+    }),
+  ],
+};
 
 // This is the development configuration.
 // It is focused on developer experience and fast rebuilds.
@@ -192,59 +211,34 @@ module.exports = {
               localIdentName: '[name]__[local]___[hash:base64:5]'
             },
           },
-          {
-            loader: require.resolve('postcss-loader'),
-            options: {
-              ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
-              plugins: () => [
-                require('postcss-flexbugs-fixes'),
-                autoprefixer({
-                  browsers: [
-                    '>1%',
-                    'last 4 versions',
-                    'Firefox ESR',
-                    'not ie < 9', // React doesn't support IE8 anyway
-                  ],
-                  flexbox: 'no-2009',
-                }),
-              ],
-            },
-          },
-          {
-            loader: require.resolve('sass-loader')
-          }
+          { loader: require.resolve('postcss-loader'), options: postCssOptions },
+          { loader: require.resolve('sass-loader') }
         ],
       },
       // Global Sass
       {
-        test: /^((?!\.module).)*scss/,
+        test: /^((?!\.module)(?!critical).)*scss/,
         use: [
           require.resolve('style-loader'),
-          {
-            loader: require.resolve('css-loader'),
-          },
-          {
-            loader: require.resolve('postcss-loader'),
-            options: {
-              ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
-              plugins: () => [
-                require('postcss-flexbugs-fixes'),
-                autoprefixer({
-                  browsers: [
-                    '>1%',
-                    'last 4 versions',
-                    'Firefox ESR',
-                    'not ie < 9', // React doesn't support IE8 anyway
-                  ],
-                  flexbox: 'no-2009',
-                }),
-              ],
-            },
-          },
-          {
-            loader: require.resolve('sass-loader')
-          }
+          { loader: require.resolve('css-loader'), },
+          { loader: require.resolve('postcss-loader'), options: postCssOptions },
+          { loader: require.resolve('sass-loader') }
         ],
+      },
+      // Critical Path CSS
+      {
+        test: /critical.scss/,
+        use: ExtractTextPlugin.extract(
+          Object.assign({
+            fallback: require.resolve('style-loader'),
+            use: [
+              { loader: require.resolve('css-loader'), },
+              { loader: require.resolve('postcss-loader'), options: postCssOptions },
+              { loader: require.resolve('sass-loader') }
+            ]
+            // From the production config. Something to get ExtractTextPlugin working.
+          }, { publicPath: Array('static/css/[name].[contenthash:8].css'.split('/').length).join('../') })
+        )
       },
       // ** STOP ** Are you adding a new loader?
       // Remember to add the new extension(s) to the "file" loader exclusion list.
@@ -281,6 +275,10 @@ module.exports = {
     // https://github.com/jmblog/how-to-optimize-momentjs-with-webpack
     // You can remove this if you don't use Moment.js:
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+
+    // This is for inlining critical CSS
+    new ExtractTextPlugin('critical.css'),
+    new StyleExtHtmlWebpackPlugin('critical.css')
   ],
   // Some libraries import Node modules but don't use them in the browser.
   // Tell Webpack to provide empty mocks for them so importing them works.
