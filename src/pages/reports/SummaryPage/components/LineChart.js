@@ -30,14 +30,15 @@ export default class SpLineChart extends React.Component {
 
   getYDomain() {
     const { yLabel, yScale } = this.props;
-    const max = this.getMax();
-    let domainMax = 100; // Defaults to 100 max domain so y axis always renders at least 0 - 100
+    const minDomain = yScale === 'log' ? 0.001 : 0;
+    let maxDomain = 100; // Defaults to 100 max domain so y axis always renders at least 0 - 100
 
-    if (yLabel !== 'Percent' && max) {
-      domainMax = `dataMax + ${max * 0.08}`; // Adds 8% top 'padding'
+    if (yLabel !== 'Percent') {
+      const max = this.getMax();
+      maxDomain = max ? `dataMax + ${max * 0.08}` : maxDomain; // Adds 8% top 'padding'
     }
 
-    return yScale === 'log' ? [0.001, domainMax] : [0, domainMax];
+    return [minDomain, maxDomain];
   }
 
   // Gets max value for this LineChart
@@ -54,23 +55,20 @@ export default class SpLineChart extends React.Component {
       return { ticks: [0, 25, 50, 75, 100]};
     }
 
-    // The ticks prop does not have a default value, need to spread an empty object automatically set them
     return {};
   }
 
   // Manually generates X axis ticks
   getXTicks() {
     const { data, precision } = this.props;
-    const times = data.map((tick) => tick.ts);
-    let ticks = {};
 
     if (precision === '1min') {
-      ticks = { ticks: times.filter((time) => moment(time).minutes() % 15 === 0) };
+      return { ticks: data.map((tick) => tick.ts).filter((time) => moment(time).minutes() % 15 === 0) };
     } else if (precision === '15min') {
-      ticks = { ticks: times.filter((time) => moment(time).minutes() % 30 === 0) };
+      return { ticks: data.map((tick) => tick.ts).filter((time) => moment(time).minutes() % 30 === 0) };
     }
 
-    return ticks;
+    return {};
   }
 
   render() {
