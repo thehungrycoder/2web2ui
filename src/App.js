@@ -46,6 +46,7 @@ export default () => (
       <Route exact path='/reports' render={() => <Redirect to='/reports/summary' />} />
       <ProtectedRoute path='/reports/summary' component={SummaryReportPage} />
 
+      {/* TODO remove this */}
       <Route exact path='/typeahead' render={() => (
         <Typeahead items={typeaheadItems} onChange={(...args) => console.log(args)} /> // eslint-disable-line
       )} />

@@ -30,6 +30,11 @@ exports[`renders without crashing 1`] = `
       component={[Function]}
       path="/reports/summary"
     />
+    <Route
+      exact={true}
+      path="/typeahead"
+      render={[Function]}
+    />
     <withRouter(Connect(_ProtectedRoute))
       component={[Function]}
       exact={true}
