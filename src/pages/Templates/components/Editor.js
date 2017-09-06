@@ -9,6 +9,7 @@ import 'brace/mode/html';
 import 'brace/theme/tomorrow';
 import { Panel, Button } from '@sparkpost/matchbox';
 
+import './Editor.scss';
 import styles from './FormEditor.module.scss';
 
 const AceWrapper = ({ input, ...rest }) => (
@@ -16,15 +17,18 @@ const AceWrapper = ({ input, ...rest }) => (
     mode='html'
     theme='tomorrow'
     name='emailContent'
+    className='TemplateEditor'
     height='900px'
     width='auto'
     style={{ marginBottom: '-18px' }}
     tabSize={2}
-    fontSize={11}
-    markers={[]}
+    fontSize={12}
     cursorStart={1}
     highlightActiveLine
     showPrintMargin={false}
+    setOptions={{
+      displayIndentGuides: false
+    }}
     {...rest}
     {...input}
   />
@@ -36,13 +40,12 @@ class Editor extends Component {
     return (
       <Panel className={styles.EditorPanel}>
         <Panel.Section>
-        <Button size='small'>Test Data</Button>
+          <Button size='small'>Test Data</Button>
         </Panel.Section>
         <Field
           name='content.html'
           component={AceWrapper}
-          readOnly={published}
-        />
+          readOnly={published} />
       </Panel>
     );
   }
