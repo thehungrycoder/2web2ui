@@ -99,7 +99,11 @@ exports[`UsageReport Component should render with regular usage 1`] = `
   </Panel.Section>
   <Panel.Section>
     <ProgressLabel
+<<<<<<< HEAD
       secondaryTitle="Billing cycle: August 1 - August 31"
+=======
+      secondaryTitle="Billing cycle: August 1 - September 6"
+>>>>>>> Components tests
       title="This Month"
     />
     <t
