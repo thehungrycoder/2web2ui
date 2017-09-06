@@ -1,11 +1,13 @@
+/* eslint-disable */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addFilter, removeFilter, searchFilter } from 'actions/reportFilters';
 
 import { Grid, Button, Panel, Tag } from '@sparkpost/matchbox';
+import Typeahead from 'components/Typeahead/Typeahead';
 
 import DateFilter from './DateFilter';
-import Typeahead from './Typeahead';
+// import Typeahead from './Typeahead';
 
 import styles from './Filters.module.scss';
 
@@ -20,9 +22,9 @@ class Filters extends Component {
       : null;
   }
 
-  handleFilterRemove = (index) => {
-    this.props.removeFilter(index);
-  }
+  handleFilterRemove = (index) => this.props.removeFilter(index);
+  handleTypeaheadSearch = () => this.props.searchFilter();
+  handleTypeaheadSelect = (item) => this.props.addFilter(item);
 
   render() {
     const { filter, refresh } = this.props;
@@ -40,8 +42,9 @@ class Filters extends Component {
               <div className={styles.FieldWrapper}>
                 <Typeahead
                   placeholder='Filter by domain'
+                  onSearch={this.handleTypeaheadSearch}
                   onSelect={this.handleTypeaheadSelect}
-                  options={filter.searchList} />
+                  items={filter.searchList} />
               </div>
             </Grid.Column>
             <Grid.Column xs={12} md={1}>
