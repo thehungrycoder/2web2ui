@@ -1,6 +1,6 @@
 export function fetchApiKeys() {
   return (dispatch, getState) => {
-    if (getState().apiKeys.list.length) {
+    if (getState().apiKeys.keys.length) {
       return;
     }
 

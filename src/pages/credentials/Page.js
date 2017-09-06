@@ -10,7 +10,11 @@ import Layout from 'components/Layout/Layout';
 
 const COLUMNS = ['Name', 'Key', 'Permissions'];
 
-const getRowData = (key) => [key.label, key.short_key, ''];
+const getRowData = (key) => [
+  key.label,
+  `${key.short_key} ••••••••••••••••••••••••••••••••••••`,
+  '[list of grants]'
+];
 
 class CredentialsPage extends Component {
   componentDidMount() {
@@ -44,19 +48,20 @@ class CredentialsPage extends Component {
 
   render() {
     const { error, loading } = this.props;
+
     return (
       <Layout.App loading={loading}>
-        <Page title="API Keys and Credentials" />
+        <Page title="API Keys" />
         {error ? this.renderError() : this.renderCollection()}
       </Layout.App>
     );
   }
 }
 
-const mapStateToProps = ({ apiKeys = {}}) => ({
-  apiKeys: apiKeys.list,
-  loading: apiKeys.loading,
-  error: apiKeys.error
+const mapStateToProps = (state) => ({
+  apiKeys: state.apiKeys.keys,
+  loading: state.apiKeys.loadingKeys,
+  error: state.apiKeys.error
 });
 
 export default connect(mapStateToProps, { fetchApiKeys })(CredentialsPage);
