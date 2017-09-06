@@ -15,7 +15,8 @@ describe('UsageReport Component', () => {
       month: {
         used: 1000,
         limit: 50000,
-        start: '2017-08-01T08:00:00.000Z'
+        start: '2017-08-01T08:00:00.000Z',
+        end: '2017-08-31T08:00:00.000Z'
       },
       day: {
         used: 1000,
