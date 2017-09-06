@@ -12,7 +12,7 @@ import {
 import Layout from '../../components/Layout/Layout';
 import Form from './components/Form';
 import Editor from './components/Editor';
-import { Page, Panel, Grid } from '@sparkpost/matchbox';
+import { Page, Grid } from '@sparkpost/matchbox';
 
 const FORM_NAME = 'templatePublished';
 
@@ -65,18 +65,8 @@ class PublishedPage extends Component {
   render() {
     const { loading, published } = this.props;
 
-    if (loading) {
-      return (
-        <Layout.App>
-          <Panel sectioned>
-            Loading template...
-          </Panel>
-        </Layout.App>
-      );
-    }
-
     return (
-      <Layout.App>
+      <Layout.App loading={loading}>
         { this.renderPageHeader() }
         <Grid>
           <Grid.Column xs={12} lg={4}>

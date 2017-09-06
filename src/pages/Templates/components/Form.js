@@ -4,15 +4,11 @@ import { connect } from 'react-redux';
 import { Field, reduxForm, change } from 'redux-form';
 
 // Components
-import { Panel, TextField } from '@sparkpost/matchbox';
+import { Panel } from '@sparkpost/matchbox';
 import ToggleBlock from './ToggleBlock';
+import { TextFieldWrapper } from 'components/reduxFormWrappers';
 
 import styles from './FormEditor.module.scss';
-
-// TODO use shared component instead of this
-const TextFieldWrapper = ({ input, meta: { error }, ...rest }) => (
-  <TextField {...rest} {...input} error={error} />
-);
 
 const ID_ALLOWED_CHARS = 'a-z0-9_-';
 
@@ -49,7 +45,7 @@ class Form extends Component {
       <Panel className={styles.Panel}>
         <Panel.Section>
           <Field
-            name='name' id='name'
+            name='name'
             component={TextFieldWrapper}
             label='Template Name'
             onChange={(e) => this.handleIdFill(e)}
@@ -57,7 +53,7 @@ class Form extends Component {
           />
 
           <Field
-            name='id' id='id'
+            name='id'
             component={TextFieldWrapper}
             label='Template ID'
             helpText={'A Unique ID for your template, we\'ll fill this in for you.'}
@@ -67,7 +63,7 @@ class Form extends Component {
 
         <Panel.Section>
           <Field
-            name='content.from.name' id='fromName'
+            name='content.from.name'
             component={TextFieldWrapper}
             label='From Name'
             helpText='A friendly from for your recipients.'
@@ -75,14 +71,14 @@ class Form extends Component {
           />
 
           <Field
-            name='content.from.email' id='fromEmail'
+            name='content.from.email'
             component={TextFieldWrapper}
             label='From Email'
             disabled={newTemplate || published}
           />
 
           <Field
-            name='reply_to' id='replyTo'
+            name='reply_to'
             component={TextFieldWrapper}
             label='Reply To'
             helpText='An email address recipients can reply to.'
@@ -90,14 +86,14 @@ class Form extends Component {
           />
 
           <Field
-            name='content.subject' id='subject'
+            name='content.subject'
             component={TextFieldWrapper}
             label='Subject'
             disabled={published}
           />
 
           <Field
-            name='description' id='description'
+            name='description'
             component={TextFieldWrapper}
             label='Description'
             helpText='Not visible to recipients.'
@@ -107,7 +103,7 @@ class Form extends Component {
 
         <Panel.Section>
           <Field
-            name='options.open_tracking' id='openTracking'
+            name='options.open_tracking'
             component={ToggleBlock}
             label='Track Opens'
             type='checkbox'
@@ -116,7 +112,7 @@ class Form extends Component {
           />
 
           <Field
-            name='options.click_tracking' id='clickTracking'
+            name='options.click_tracking'
             component={ToggleBlock}
             label='Track Clicks'
             type='checkbox'
@@ -127,7 +123,7 @@ class Form extends Component {
 
         <Panel.Section>
           <Field
-            name='options.transactional' id='transactional'
+            name='options.transactional'
             component={ToggleBlock}
             label='Transactional'
             type='checkbox'
