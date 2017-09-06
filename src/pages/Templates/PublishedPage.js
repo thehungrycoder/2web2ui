@@ -63,17 +63,17 @@ class PublishedPage extends Component {
   }
 
   render() {
-    const { loading, published } = this.props;
+    const { loading } = this.props;
 
     return (
       <Layout.App loading={loading}>
         { this.renderPageHeader() }
         <Grid>
           <Grid.Column xs={12} lg={4}>
-            <Form name={FORM_NAME} published initialValues={published} />
+            <Form name={FORM_NAME} published />
           </Grid.Column>
           <Grid.Column xs={12} lg={8}>
-            <Editor name={FORM_NAME} published initialValues={published} />
+            <Editor name={FORM_NAME} published />
           </Grid.Column>
         </Grid>
       </Layout.App>

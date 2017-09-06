@@ -15,7 +15,7 @@ import styles from './FormEditor.module.scss';
 
 const AceWrapper = ({ input, ...rest }) => (
   <AceEditor
-    mode={input.name === 'testData' ? 'json' : 'html'}
+    mode={input.name === 'test' ? 'json' : 'html'}
     theme='tomorrow'
     name='emailContent'
     className='TemplateEditor'
@@ -54,7 +54,7 @@ class Editor extends Component {
     ];
 
     return (
-      <div>
+      <div className={styles.EditorSection}>
         <Tabs selected={this.state.selectedTab} tabs={tabs}/>
         <Panel className={styles.EditorPanel}>
           <Field

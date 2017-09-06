@@ -130,8 +130,7 @@ class EditPage extends Component {
   render() {
     const {
       match,
-      loading,
-      draft
+      loading
     } = this.props;
 
     if (this.state.shouldRedirectToPublished) {
@@ -147,10 +146,10 @@ class EditPage extends Component {
         { this.renderPageHeader() }
         <Grid>
           <Grid.Column xs={12} lg={4}>
-            <Form name={FORM_NAME} initialValues={draft} />
+            <Form name={FORM_NAME} />
           </Grid.Column>
           <Grid.Column xs={12} lg={8}>
-            <Editor name={FORM_NAME} initialValues={draft} />
+            <Editor name={FORM_NAME} />
           </Grid.Column>
         </Grid>
         <DeleteModal

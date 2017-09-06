@@ -42,7 +42,7 @@ class Form extends Component {
     const { newTemplate, published } = this.props;
 
     return (
-      <Panel className={styles.Panel}>
+      <Panel className={styles.FormPanel}>
         <Panel.Section>
           <Field
             name='name'
