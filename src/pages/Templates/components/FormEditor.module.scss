@@ -6,8 +6,7 @@
 }
 
 .EditorPanel {
-  height: 600px;
-  margin-top: spacing();
+  margin-bottom: 0;
   z-index: 1;
 
   @media screen and (min-width: breakpoint(medium)) {
