@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TableCollection Component should render with no props 1`] = `
+<withRouter(Collection)
+  bodyWrapper={[Function]}
+  headerComponent={[Function]}
+  outerWrapper={[Function]}
+  rowComponent={[Function]}
+/>
+`;
+
+exports[`TableCollection Component should render with props 1`] = `
+<withRouter(Collection)
+  bodyWrapper={[Function]}
+  columns={
+    Array [
+      "one",
+      "two",
+    ]
+  }
+  extraProp="plsPassDown"
+  getRowData={[Function]}
+  headerComponent={
+    <thead>
+      <Table.Row>
+        <Table.HeaderCell>
+          one
+        </Table.HeaderCell>
+        <Table.HeaderCell>
+          two
+        </Table.HeaderCell>
+      </Table.Row>
+    </thead>
+  }
+  outerWrapper={[Function]}
+  rowComponent={[Function]}
+/>
+`;

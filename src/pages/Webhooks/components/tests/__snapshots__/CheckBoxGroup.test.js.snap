@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should check all children and check parent 1`] = `
+<div>
+  <t
+    checked={true}
+    id="parent"
+    label="parent"
+    onChange={[Function]}
+  />
+  <Checkbox.Group>
+    <t
+      checked={true}
+      id="myCheckBoxGroup[0]"
+      label="First"
+      name="myCheckBoxGroup[0]"
+      onChange={[Function]}
+      value="one"
+    />
+    <t
+      checked={true}
+      id="myCheckBoxGroup[1]"
+      label="Second"
+      name="myCheckBoxGroup[1]"
+      onChange={[Function]}
+      value="two"
+    />
+  </Checkbox.Group>
+</div>
+`;
+
+exports[`should check one child 1`] = `
+<div>
+  <t
+    checked={false}
+    id="parent"
+    label="parent"
+    onChange={[Function]}
+  />
+  <Checkbox.Group>
+    <t
+      checked={true}
+      id="myCheckBoxGroup[0]"
+      label="First"
+      name="myCheckBoxGroup[0]"
+      onChange={[Function]}
+      value="one"
+    />
+    <t
+      checked={false}
+      id="myCheckBoxGroup[1]"
+      label="Second"
+      name="myCheckBoxGroup[1]"
+      onChange={[Function]}
+      value="two"
+    />
+  </Checkbox.Group>
+</div>
+`;
+
+exports[`should render a CheckBoxGroup, no children 1`] = `
+<div>
+  <t
+    checked={false}
+    id="parent"
+    label="parent"
+    onChange={[Function]}
+  />
+</div>
+`;
