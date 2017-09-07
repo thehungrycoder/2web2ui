@@ -16,7 +16,7 @@ const ToggleBlock = ({ input, meta, label, helpText, ...rest }) => {
         </Grid.Column>
         <Grid.Column xs={4}>
           <div className={styles.ToggleWrapper}>
-            <Toggle {...input} {...rest} />
+            <Toggle id={input.name} {...input} {...rest} />
           </div>
         </Grid.Column>
       </Grid>

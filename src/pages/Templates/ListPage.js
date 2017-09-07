@@ -48,7 +48,7 @@ class ListPage extends Component {
         columns={columns}
         rows={templates}
         getRowData={getRowData}
-        pagination={true}
+        pagination
       />
     );
   }

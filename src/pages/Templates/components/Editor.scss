@@ -1,0 +1,50 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+// These go into the global scope
+.TemplateEditor {
+  font-family: font-family(monospace);
+  border-bottom-right-radius: 2px;
+  border-bottom-left-radius: 2px;
+  overflow: hidden;
+
+  // Error markers
+  .ace_gutter-cell {
+    &.ace_info, &.ace_error {
+      background-image: none;
+    }
+  }
+
+  .ace_tooltip {
+    display: none !important;
+  }
+
+  .ace_gutter-cell {
+    padding-right: 19px;
+    padding-left: 6px;
+  }
+
+  .ace_fold-widget {
+    opacity: 0.5;
+  }
+
+  // Gutter wrapper
+  .ace_gutter {
+    background: color(gray, 10) !important;
+    color: color(gray, 6) !important;
+  }
+
+  // Box shadow when left side overflowed
+  .ace_scroller.ace_scroll-left {
+    box-shadow: 15px 0 25px rgba(color(gray, 2), 0.1) inset;
+  }
+
+  // Box shadow transition
+  .ace_scroller {
+    transition: 0.15s;
+  }
+
+  // Active line highlight
+  .ace_gutter-active-line, .ace_active-line {
+    background: color(gray, 9) !important;
+  }
+}
