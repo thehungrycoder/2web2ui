@@ -49,7 +49,7 @@ function getKeysFromMetrics(metrics) {
 function computeKeysForItem(metrics) {
   return (item) => metrics.reduce((acc, metric) => {
     if (metric.compute) {
-      acc[metric.key] = metric.compute(acc, metric.computeKeys);
+      acc[metric.key] = metric.compute(acc, metric.computeKeys) || 0;
     }
     return acc;
   }, item);

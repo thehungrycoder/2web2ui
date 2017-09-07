@@ -19,7 +19,7 @@ function getDayLines(data, precision = 'day') {
 }
 
 const getTimeTickFormatter = _.memoize((precisionType) => {
-  const tickFormat = (precisionType === 'hours') ? 'ha' : 'MMM Do';
+  const tickFormat = (precisionType === 'hours') ? 'h:mma' : 'MMM Do';
   return (tick) => moment(tick).format(tickFormat);
 });
 
