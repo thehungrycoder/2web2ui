@@ -27,6 +27,8 @@ const AceWrapper = ({ input, ...rest }) => (
     highlightActiveLine
     showPrintMargin={false}
     setOptions={{
+      useWorker: false,
+      showInvisibles: true,
       displayIndentGuides: false
     }}
     {...rest}
