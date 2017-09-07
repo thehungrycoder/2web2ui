@@ -11,11 +11,6 @@
   .recharts-text.recharts-cartesian-axis-tick-value {
     transform: translate(0, 6px);
   }
-  .recharts-cartesian-axis-tick {
-    &:first-child, &:last-child {
-      // display: none;
-    }
-  }
 }
 
 .yAxis {
@@ -27,15 +22,9 @@
 .sp-linechart-wrapper {
   position: relative;
   margin-bottom: rem(30);
-  backface-visibility: hidden;
   &:last-child {
     margin-bottom: 0;
   }
-}
-
-.sp-linechart-yLabel {
-  color: color(gray, 4);
-  font-size: 13px
 }
 
 .sp-linechart-yLabel {
@@ -44,6 +33,10 @@
   left: 9px;
   transform: rotate(-90deg);
   transform-origin: 0;
+  backface-visibility: hidden;
+
+  color: color(gray, 4);
+  font-size: 13px
 }
 
 .recharts-line > path {}

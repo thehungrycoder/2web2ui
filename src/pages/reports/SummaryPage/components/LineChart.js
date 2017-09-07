@@ -63,8 +63,10 @@ export default class SpLineChart extends React.Component {
     const { data, precision } = this.props;
 
     if (precision === '1min') {
+      // Show ticks every 15 minutes
       return { ticks: data.map((tick) => tick.ts).filter((time) => moment(time).minutes() % 15 === 0) };
     } else if (precision === '15min') {
+      // Show ticks every 30 minutes
       return { ticks: data.map((tick) => tick.ts).filter((time) => moment(time).minutes() % 30 === 0) };
     }
 
