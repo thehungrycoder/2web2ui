@@ -65,6 +65,8 @@ export default function sparkpostApiRequest(action) {
             payload: 'You shouldn\'t be using onSuccess callbacks anymore.'
           });
         }
+
+        return results;
       },
       // API request failed
       ({ message, response = {}}) => {

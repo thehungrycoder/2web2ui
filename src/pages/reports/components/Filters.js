@@ -1,14 +1,13 @@
 /* eslint-disable */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addFilter, removeFilter, searchFilter } from 'actions/reportFilters';
+import { addFilter, removeFilter } from 'actions/reportFilters';
 
 import { Grid, Button, Panel, Tag } from '@sparkpost/matchbox';
-import Typeahead from 'components/Typeahead/Typeahead';
+import Typeahead from './Typeahead';
 
 import DateFilter from './DateFilter';
-// import Typeahead from './Typeahead';
-
+import typeaheadCacheSelector from 'selectors/reportFilterTypeaheadCache';
 import styles from './Filters.module.scss';
 
 class Filters extends Component {
@@ -23,11 +22,10 @@ class Filters extends Component {
   }
 
   handleFilterRemove = (index) => this.props.removeFilter(index);
-  handleTypeaheadSearch = () => this.props.searchFilter();
   handleTypeaheadSelect = (item) => this.props.addFilter(item);
 
   render() {
-    const { filter, refresh } = this.props;
+    const { typeaheadCache, refresh } = this.props;
 
     return (
       <Panel>
@@ -41,10 +39,9 @@ class Filters extends Component {
             <Grid.Column xs={12} md={5}>
               <div className={styles.FieldWrapper}>
                 <Typeahead
-                  placeholder='Filter by domain'
-                  onSearch={this.handleTypeaheadSearch}
+                  placeholder='Filter by domain, campaign, etc'
                   onSelect={this.handleTypeaheadSelect}
-                  items={filter.searchList} />
+                  items={typeaheadCache} />
               </div>
             </Grid.Column>
             <Grid.Column xs={12} md={1}>
@@ -58,5 +55,8 @@ class Filters extends Component {
   }
 }
 
-const mapStateToProps = ({ reportFilters }) => ({ filter: reportFilters });
-export default connect(mapStateToProps, { addFilter, removeFilter, searchFilter })(Filters);
+const mapStateToProps = (state) => ({
+  filter: state.reportFilters,
+  typeaheadCache: typeaheadCacheSelector(state)
+});
+export default connect(mapStateToProps, { addFilter, removeFilter })(Filters);

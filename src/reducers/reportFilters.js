@@ -4,8 +4,7 @@ const DEFAULT_RANGE = 'day';
 const initialState = {
   ...getRelativeDates(DEFAULT_RANGE),
   relativeRange: DEFAULT_RANGE,
-  activeList: [],
-  searchList: []
+  activeList: []
 };
 
 export default (state = initialState, action) => {
@@ -32,9 +31,6 @@ export default (state = initialState, action) => {
           ...state.activeList.slice(action.payload + 1)
         ]
       };
-
-    case 'SEARCH_FILTER':
-      return { ...state, searchList: action.payload };
 
     default:
       return state;

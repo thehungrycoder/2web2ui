@@ -1,4 +1,5 @@
 import { fetch as fetchMetrics } from 'actions/metrics';
+import { refreshTypeaheadCache } from 'actions/reportFilters';
 import { getQueryFromOptions, getMetricsFromKeys } from 'helpers/metrics';
 import { getRelativeDates } from 'helpers/date';
 
@@ -39,6 +40,12 @@ export function refresh(options = {}) {
         payload: { ...options }
       });
     };
+
+    const { from, to } = options;
+    if (from || to) {
+      const params = getQueryFromOptions({ from, to });
+      dispatch(refreshTypeaheadCache(params));
+    }
 
     dispatch(fetchMetrics({ path: 'deliverability/time-series', params, meta: { onSuccess }}));
   };

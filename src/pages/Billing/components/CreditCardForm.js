@@ -1,3 +1,5 @@
+/* eslint max-lines: ["error", { "max": 156, "skipComments": true }] */
+/* if you edit this file, get it under 150 and remove this comment! */
 import React from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
