@@ -44,7 +44,7 @@ class ListPage extends Component {
     return (
       <TableCollection
         columns={columns}
-        rows={templates}
+        rows={_.values(templates)}
         getRowData={getRowData}
         pagination
       />
@@ -52,7 +52,7 @@ class ListPage extends Component {
   }
 
   render() {
-    const templatesCount = _.get(this, 'props.templates.length');
+    const templatesCount = _.size(this.props.templates);
     const { loading, error } = this.props;
 
     // No Templates (not error case)
@@ -75,7 +75,7 @@ class ListPage extends Component {
 
 function mapStateToProps({ templates }) {
   return {
-    templates: templates.list,
+    templates: templates.byId,
     loading: templates.listLoading,
     error: templates.listError
   };

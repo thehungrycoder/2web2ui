@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { Field, reduxForm, change } from 'redux-form';
+import { Field, change } from 'redux-form';
 
 // Components
 import { Panel } from '@sparkpost/matchbox';
@@ -139,9 +138,4 @@ class Form extends Component {
 }
 
 const mapStateToProps = (state, { name }) => ({ form: name });
-const formOptions = {};
-
-export default compose(
-  connect(mapStateToProps, { change }),
-  reduxForm(formOptions)
-)(Form);
+export default connect(mapStateToProps, { change })(Form);

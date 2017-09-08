@@ -80,9 +80,3 @@ export function deleteTemplate(id) {
     }
   });
 }
-
-export function clear() {
-  return {
-    type: 'CLEAR_TEMPLATE'
-  };
-}

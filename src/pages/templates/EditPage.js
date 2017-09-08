@@ -7,7 +7,6 @@ import { reduxForm } from 'redux-form';
 import {
   getDraft,
   getPublished,
-  clear,
   update,
   deleteTemplate,
   publish
@@ -29,14 +28,7 @@ class EditPage extends Component {
   };
 
   componentDidMount() {
-    const {
-      match,
-      getDraft,
-      getPublished,
-      clear
-    } = this.props;
-
-    clear();
+    const { match, getDraft, getPublished } = this.props;
     getDraft(match.params.id);
     getPublished(match.params.id);
   }
@@ -66,8 +58,8 @@ class EditPage extends Component {
   }
 
   componentDidUpdate() {
-    const { loading, draft, published } = this.props;
-    if (!loading && !draft && !published) {
+    const { loading, template } = this.props;
+    if (!loading && !template.draftDetails && !template.publishedDetails) {
       // Redirect if no draft or published found
       // TODO: show error banner?
       this.setState({ redirectTo: '/templates/' });
@@ -77,10 +69,11 @@ class EditPage extends Component {
   renderPageHeader() {
     const {
       handleSubmit,
-      published,
+      template,
       match,
       submitting
     } = this.props;
+    const published = template.publishedDetails;
 
     const primaryAction = {
       content: 'Publish Template',
@@ -103,18 +96,9 @@ class EditPage extends Component {
         onClick: handleSubmit((values) => this.handleSave(values)),
         disabled: submitting
       },
-      {
-        content: 'Delete',
-        onClick: () => this.handleDeleteModalToggle()
-      },
-      {
-        content: 'Duplicate',
-        disabled: true
-      },
-      {
-        content: 'Preview & Send',
-        disabled: true
-      }
+      { content: 'Delete', onClick: () => this.handleDeleteModalToggle() },
+      { content: 'Duplicate', disabled: true },
+      { content: 'Preview & Send', disabled: true }
     ];
 
     const backAction = {
@@ -160,12 +144,14 @@ class EditPage extends Component {
   }
 }
 
-const mapStateToProps = ({ templates }) => ({
-  loading: templates.getLoading,
-  draft: templates.draft,
-  published: templates.published,
-  initialValues: templates.draft || templates.published // Some templates have published but not draft
-});
+const mapStateToProps = ({ templates }, { match }) => {
+  const template = templates.byId[match.params.id] || { draftDetails: {}, publishedDetails: {}};
+  return {
+    loading: templates.getLoading,
+    template,
+    initialValues: template.draftDetails || template.publishedDetails // Some templates are published but lack a draft
+  };
+};
 const formOptions = {
   form: FORM_NAME,
   enableReinitialize: true // required to update initial values from redux state
@@ -174,7 +160,6 @@ const formOptions = {
 export default connect(mapStateToProps, {
   getDraft,
   getPublished,
-  clear,
   update,
   deleteTemplate,
   publish

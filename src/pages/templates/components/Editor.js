@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { Field, reduxForm } from 'redux-form';
+import { Field } from 'redux-form';
 
 // Components
 import AceEditor from 'react-ace';
@@ -69,11 +68,4 @@ class Editor extends Component {
 }
 
 const mapStateToProps = (state, { name }) => ({ form: name });
-const formOptions = {
-  enableReinitialize: true
-};
-
-export default compose(
-  connect(mapStateToProps),
-  reduxForm(formOptions)
-)(Editor);
+export default connect(mapStateToProps)(Editor);

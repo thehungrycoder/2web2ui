@@ -7,7 +7,7 @@ function substitution(value) {
 }
 
 function idSyntax(value) {
-  return new RegExp(`/^[${ID_ALLOWED_CHARS}]*$/`).test(value) ? undefined : 'Can only contain lowercase letters, numbers, hyphens and underscores';
+  return new RegExp(`^[${ID_ALLOWED_CHARS}]*$`).test(value) ? undefined : 'Can only contain lowercase letters, numbers, hyphens and underscores';
 }
 
 function emailOrSubstitution(value) {

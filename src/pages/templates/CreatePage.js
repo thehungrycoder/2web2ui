@@ -3,7 +3,7 @@ import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { reduxForm, formValueSelector } from 'redux-form';
 // Actions
-import { clear, create } from '../../actions/templates';
+import { create } from '../../actions/templates';
 
 // Components
 import { Layout } from 'components';
@@ -84,4 +84,4 @@ const formOptions = {
   form: FORM_NAME
 };
 
-export default connect(mapStateToProps, { create, clear })(reduxForm(formOptions)(CreatePage));
+export default connect(mapStateToProps, { create })(reduxForm(formOptions)(CreatePage));

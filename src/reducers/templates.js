@@ -1,4 +1,9 @@
-const initialState = { list: null, listError: null };
+import _ from 'lodash';
+
+const initialState = {
+  listError: null,
+  byId: {}
+};
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -7,7 +12,11 @@ export default (state = initialState, action) => {
       return { ...state, listLoading: true, listError: null };
 
     case 'LIST_TEMPLATES_SUCCESS':
-      return { ...state, list: action.payload, listLoading: false };
+      return {
+        ...state,
+        byId: _.keyBy(action.payload, (item) => item.id),
+        listLoading: false
+      };
 
     case 'LIST_TEMPLATES_FAIL':
       return { ...state, listError: action.payload, listLoading: false };
@@ -17,7 +26,14 @@ export default (state = initialState, action) => {
       return { ...state, getLoading: true };
 
     case 'GET_DRAFT_TEMPLATE_SUCCESS':
-      return { ...state, draft: action.payload, getLoading: false };
+      return {
+        ...state,
+        byId: {
+          ...state.byId,
+          [action.payload.id]: { ...state.byId[action.payload.id], draftDetails: action.payload }
+        },
+        getLoading: false
+      };
 
     case 'GET_DRAFT_TEMPLATE_FAIL':
       return { ...state, getLoading: false };
@@ -27,13 +43,17 @@ export default (state = initialState, action) => {
       return { ...state, getLoading: true };
 
     case 'GET_PUBLISHED_TEMPLATE_SUCCESS':
-      return { ...state, published: action.payload, getLoading: false };
+      return {
+        ...state,
+        byId: {
+          ...state.byId,
+          [action.payload.id]: { ...state.byId[action.payload.id], publishedDetails: action.payload }
+        },
+        getLoading: false
+      };
 
     case 'GET_PUBLISHED_TEMPLATE_FAIL':
       return { ...state, getLoading: false };
-
-    case 'CLEAR_TEMPLATE':
-      return { ...state, draft: null, published: null };
 
     default:
       return state;
