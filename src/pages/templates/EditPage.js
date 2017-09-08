@@ -24,8 +24,7 @@ const FORM_NAME = 'templateEdit';
 
 class EditPage extends Component {
   state = {
-    shouldRedirectToPublished: false,
-    shouldRedirectToList: false,
+    redirectTo: null,
     deleteOpen: false
   };
 
@@ -47,7 +46,7 @@ class EditPage extends Component {
     return update(values)
       .then(() => publish(match.params.id))
       .then(() => getDraft(match.params.id))
-      .then(() => this.setState({ shouldRedirectToPublished: true }));
+      .then(() => this.setState({ redirectTo: `/templates/edit/${match.params.id}/published` }));
   }
 
   handleSave(values) {
@@ -59,11 +58,20 @@ class EditPage extends Component {
   handleDelete() {
     const { deleteTemplate, match } = this.props;
     return deleteTemplate(match.params.id)
-      .then(() => this.setState({ shouldRedirectToList: true }));
+      .then(() => this.setState({ redirectTo: '/templates/' }));
   }
 
   handleDeleteModalToggle() {
     this.setState({ deleteOpen: !this.state.deleteOpen });
+  }
+
+  componentDidUpdate() {
+    const { loading, draft, published } = this.props;
+    if (!loading && !draft && !published) {
+      // Redirect if no draft or published found
+      // TODO: show error banner?
+      this.setState({ redirectTo: '/templates/' });
+    }
   }
 
   renderPageHeader() {
@@ -115,30 +123,21 @@ class EditPage extends Component {
       to: '/templates'
     };
 
-    const title = `${match.params.id} (Draft)`;
-
     return (
       <Page
         primaryAction={primaryAction}
         secondaryActions={secondaryActions}
         breadcrumbAction={backAction}
-        title={title}
+        title={`${match.params.id} (Draft)`}
       />
     );
   }
 
   render() {
-    const {
-      match,
-      loading
-    } = this.props;
+    const { loading } = this.props;
 
-    if (this.state.shouldRedirectToPublished) {
-      return <Redirect to={`/templates/edit/${match.params.id}/published`} />;
-    }
-
-    if (this.state.shouldRedirectToList) {
-      return <Redirect to='/templates/' />;
+    if (this.state.redirectTo) {
+      return <Redirect to={this.state.redirectTo} />;
     }
 
     return (
@@ -165,7 +164,7 @@ const mapStateToProps = ({ templates }) => ({
   loading: templates.getLoading,
   draft: templates.draft,
   published: templates.published,
-  initialValues: templates.draft
+  initialValues: templates.draft || templates.published // Some templates have published but not draft
 });
 const formOptions = {
   form: FORM_NAME,
