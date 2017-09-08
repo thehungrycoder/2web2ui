@@ -17,7 +17,6 @@ const AceWrapper = ({ input, ...rest }) => (
   <AceEditor
     mode={input.name === 'test' ? 'json' : 'html'}
     theme='tomorrow'
-    name='emailContent'
     className='TemplateEditor'
     height='900px'
     width='auto'
@@ -28,9 +27,9 @@ const AceWrapper = ({ input, ...rest }) => (
     showPrintMargin={false}
     setOptions={{
       useWorker: false,
-      showInvisibles: true,
       displayIndentGuides: false
     }}
+    editorProps={{ $blockScrolling: true }}
     {...rest}
     {...input}
   />
