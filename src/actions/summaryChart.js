@@ -25,7 +25,7 @@ export function refresh(options = {}) {
     // convert new meta data into query param format
     const params = getQueryFromOptions(options);
 
-    const onSuccess = ({ results }) => {
+    const onSuccess = (results) => {
       dispatch({
         type: 'REFRESH_SUMMARY_CHART',
         payload: {
@@ -47,6 +47,6 @@ export function refresh(options = {}) {
       dispatch(refreshTypeaheadCache(params));
     }
 
-    dispatch(fetchMetrics({ path: 'deliverability/time-series', params, meta: { onSuccess }}));
+    dispatch(fetchMetrics({ path: 'deliverability/time-series', params })).then(onSuccess);
   };
 }
