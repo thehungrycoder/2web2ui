@@ -3,7 +3,7 @@ import { email, emailLocal, domain } from 'helpers/validation';
 const ID_ALLOWED_CHARS = 'a-z0-9_-';
 
 function substitution(value) {
-  return /{{\s*(\w|\.)+\s*}}/.test(value) ? undefined : 'Substitution sytax error';
+  return /{{\s*(\w|\.)+\s*}}/.test(value) ? undefined : 'Substitution syntax error';
 }
 
 function idSyntax(value) {
@@ -14,12 +14,12 @@ function emailOrSubstitution(value) {
   if (!value) {
     return undefined;
   }
-  const validEmail = !email(value);
+
   const parts = value.split('@');
   const validLocal = !emailLocal(parts[0]);
   const validDomain = !substitution(parts[1]) || !domain(parts[1]);
 
-  return validEmail || (validLocal && validDomain) ? undefined : 'Invalid email';
+  return !substitution(value) || !email(value) || (validLocal && validDomain) ? undefined : 'Invalid email or substitution value';
 }
 
 function verifiedDomain(value) {
