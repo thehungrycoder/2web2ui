@@ -22,7 +22,7 @@ class EditTab extends Component {
       showBanner: false
     };
 
-    this.buildEventsTree = _.once(this.buildEventsTree);
+    this.buildEventsTree = _.once(buildEventsTree);
     this.getAllEvents = _.once(this.getAllEvents);
   }
 
