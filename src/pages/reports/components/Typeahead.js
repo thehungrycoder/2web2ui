@@ -2,32 +2,38 @@
 import React, { Component } from 'react';
 import Downshift from 'downshift';
 import classnames from 'classnames';
+import _ from 'lodash';
 
 import { TextField, ActionList, Panel } from '@sparkpost/matchbox';
 import Item from './TypeaheadItem';
 import styles from './Typeahead.module.scss';
 
+function flattenItem(item) {
+  return `${item.type}:${item.value}`;
+}
 class Typeahead extends Component {
   state = {
     inputValue: '',
     matches: []
   }
 
-  findMatches = (pattern) => {
+  updateMatches = _.debounce((pattern) => {
     if (!pattern || pattern.length < 2) {
       return [];
     }
-    const { items } = this.props;
+    const { items, selected = [] } = this.props;
+    const flatSelected = selected.map(flattenItem);
     pattern = pattern.toLowerCase();
-    return items
-      .filter((item) => item.value.toLowerCase().includes(pattern))
+    const matches = items
+      .filter((item) => item.value.toLowerCase().includes(pattern) && !flatSelected.includes(flattenItem(item)))
       .sort((a, b) => a.value.toLowerCase().indexOf(pattern) - b.value.toLowerCase().indexOf(pattern))
-      .slice(0, 100)
-  }
+      .slice(0, 100);
+    
+    this.setState({ matches });
+  }, 250)
 
   handleFieldChange = (e) => {
-    const { value } = e.target;
-    this.setState({ matches: this.findMatches(value), inputValue: value });
+    this.updateMatches(e.target.value);
   };
 
   render() {
@@ -36,7 +42,7 @@ class Typeahead extends Component {
       placeholder, // TextField placeholder
     } = this.props;
 
-    const { matches } = this.state;
+    const { matches = [] } = this.state;
 
     const typeaheadFn = ({
       getInputProps,
@@ -62,22 +68,13 @@ class Typeahead extends Component {
           <div className={listClasses}><ActionList actions={mappedMatches} /></div>
           <TextField {...getInputProps({
             placeholder,
-            onChange: this.handleFieldChange,
-            value: this.state.inputValue
+            onChange: this.handleFieldChange
           })} />
         </div>
       );
     }
 
-    // Downshift automatically sets inputValue to selected value (which is an object and it converts it to a string lol)
-    // So instead we manage input value manually.
-    const handleStageChange = ({ inputValue }) => {
-      if (inputValue === '[object Object]') {
-        this.setState({ inputValue: '' });
-      }
-    }
-
-    return <Downshift onChange={onSelect} onStateChange={handleStageChange}>{typeaheadFn}</Downshift>;
+    return <Downshift onChange={onSelect} itemToString={() => ''}>{typeaheadFn}</Downshift>;
   }
 }
 

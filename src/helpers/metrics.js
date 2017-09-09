@@ -20,14 +20,9 @@ function getQueryFromOptions({ from, to, metrics, activeList = []}) {
   from = moment(from).utc();
   to = moment(to).utc();
 
-  activeList.push({ type: 'Campaign', value: 'Cool, template' });
-  activeList.push({ type: 'Campaign', value: 'whoa; why would templates :: have these' });
-
   const apiMetricsKeys = getKeysFromMetrics(metrics);
   const delimiter = getDelimiter(activeList);
   const filters = getFilterSets(activeList, delimiter);
-
-  console.log({ delimiter, filters }); // eslint-disable-line
 
   return {
     metrics: apiMetricsKeys.join(delimiter),
