@@ -34,19 +34,19 @@ function getPrecisionType(precision) {
   return (indexedPrecisions[precision].time <= (60 * 24 * 2)) ? 'hours' : 'days';
 }
 
-function getMetricsFromKeys(keys) {
+function getMetricsFromKeys(keys = []) {
   return keys.map((metric, i) => {
     const found = METRICS_LIST.find((M) => M.key === metric);
     return { ...found, name: found.key, stroke: chartColors[i] };
   });
 }
 
-function getKeysFromMetrics(metrics) {
+function getKeysFromMetrics(metrics = []) {
   const flattened = _.flatMap(metrics, ({ key, computeKeys }) => computeKeys ? computeKeys : key);
   return _.uniq(flattened);
 }
 
-function computeKeysForItem(metrics) {
+function computeKeysForItem(metrics = []) {
   return (item) => metrics.reduce((acc, metric) => {
     if (metric.compute) {
       acc[metric.key] = metric.compute(acc, metric.computeKeys) || 0;
@@ -63,8 +63,7 @@ function computeKeysForItem(metrics) {
  * @param {Array} metrics - list of currently selected metrics objects from config
  * @param {Array} data - results from the metrics API
  */
-function transformData(data, metrics) {
-  // const charts = metrics.reduce((acc, { measure = 'count' }) => ({ ...acc, [measure]: [] }), {});
+function transformData(data = [], metrics = []) {
   return data.map(computeKeysForItem(metrics));
 }
 

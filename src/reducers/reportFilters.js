@@ -15,7 +15,7 @@ export default (state = initialState, action) => {
     case 'SET_RELATIVE_TIME':
       return { ...state, ...action.payload };
 
-    case 'REFRESH_REPORT_FILTERS': {
+    case 'REFRESH_REPORT_RANGE': {
       const { to, from, relativeRange } = action.payload;
       return { ...state, to, from, relativeRange };
     }

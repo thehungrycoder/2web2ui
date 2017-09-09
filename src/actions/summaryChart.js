@@ -3,50 +3,56 @@ import { refreshTypeaheadCache } from 'actions/reportFilters';
 import { getQueryFromOptions, getMetricsFromKeys } from 'helpers/metrics';
 import { getRelativeDates } from 'helpers/date';
 
-export function refresh(options = {}) {
+export function refresh(updates = {}) {
   return (dispatch, getState) => {
     const state = getState();
 
     // if new metrics are included, convert them to their full representation from config
-    if (options.metrics) {
-      options.metrics = getMetricsFromKeys(options.metrics);
+    if (updates.metrics) {
+      updates.metrics = getMetricsFromKeys(updates.metrics);
     }
 
     // if relativeRange is included, merge in the calculated from/to values
-    Object.assign(options, getRelativeDates(options.relativeRange) || {});
+    if (updates.relativeRange) {
+      Object.assign(updates, getRelativeDates(updates.relativeRange) || {});
+    }
 
-    // merge in existing state
-    options = {
-      ...state.summaryChart,
-      ...state.reportFilters,
-      ...options
-    };
-
-    // convert new meta data into query param format
-    const params = getQueryFromOptions(options);
-
-    const onSuccess = (results) => {
-      dispatch({
-        type: 'REFRESH_SUMMARY_CHART',
-        payload: {
-          data: results,
-          metrics: options.metrics,
-          precision: params.precision
-        }
-      });
-
-      dispatch({
-        type: 'REFRESH_REPORT_FILTERS',
-        payload: { ...options }
-      });
-    };
-
-    const { from, to } = options;
+    // refresh the typeahead cache if the date range has been updated
+    const { from, to } = updates;
     if (from || to) {
       const params = getQueryFromOptions({ from, to });
       dispatch(refreshTypeaheadCache(params));
     }
 
-    dispatch(fetchMetrics({ path: 'deliverability/time-series', params })).then(onSuccess);
+    // merge in existing state
+    const options = {
+      ...state.summaryChart,
+      ...state.reportFilters,
+      ...updates
+    };
+
+    // convert new meta data into query param format
+    const params = getQueryFromOptions(options);
+
+    // get new data
+    dispatch(fetchMetrics({ path: 'deliverability/time-series', params }))
+      .then((results) => {
+
+        // refresh the chart with the new data
+        dispatch({
+          type: 'REFRESH_SUMMARY_CHART',
+          payload: {
+            data: results,
+            metrics: options.metrics,
+            precision: params.precision
+          }
+        });
+
+        // refresh the date range
+        dispatch({
+          type: 'REFRESH_REPORT_RANGE',
+          payload: { ...options }
+        });
+      });
   };
 }

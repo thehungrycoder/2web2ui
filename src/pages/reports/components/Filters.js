@@ -21,8 +21,15 @@ class Filters extends Component {
       : null;
   }
 
-  handleFilterRemove = (index) => this.props.removeFilter(index);
-  handleTypeaheadSelect = (item) => this.props.addFilter(item);
+  handleFilterRemove = (index) => {
+    this.props.removeFilter(index);
+    this.props.refresh();
+  }
+
+  handleTypeaheadSelect = (item) => {
+    this.props.addFilter(item);
+    this.props.refresh();
+  }
 
   render() {
     const { typeaheadCache, refresh } = this.props;
