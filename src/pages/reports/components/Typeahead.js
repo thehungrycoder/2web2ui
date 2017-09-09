@@ -7,13 +7,6 @@ import { TextField, ActionList, Panel } from '@sparkpost/matchbox';
 import Item from './TypeaheadItem';
 import styles from './Typeahead.module.scss';
 
-// const Item = ({ value, helpText = null }) => (
-//   <div className={styles.Item}>
-//     <span className={styles.Value}>{ value }</span>
-//     { helpText && <span className={styles.HelpText}>{ helpText }</span> }
-//   </div>
-// );
-
 class Typeahead extends Component {
   state = {
     inputValue: '',
@@ -25,8 +18,10 @@ class Typeahead extends Component {
       return [];
     }
     const { items } = this.props;
+    pattern = pattern.toLowerCase();
     return items
-      .filter((item) => item.value.toLowerCase().includes(pattern.toLowerCase()))
+      .filter((item) => item.value.toLowerCase().includes(pattern))
+      .sort((a, b) => a.value.toLowerCase().indexOf(pattern) - b.value.toLowerCase().indexOf(pattern))
       .slice(0, 100)
   }
 

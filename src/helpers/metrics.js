@@ -5,19 +5,61 @@ import config from 'config/index';
 
 const { metricsPrecisionMap: precisionMap, apiDateFormat, chartColors } = config;
 const indexedPrecisions = _.keyBy(precisionMap, 'value');
+const FILTER_KEY_MAP = {
+  'Domain': 'domains',
+  'Campaign': 'campaigns',
+  'Template': 'templates',
+  'Sending IP': 'sending_ips',
+  'IP Pool': 'ip_pools',
+  'Subaccount': 'subaccounts',
+  'Sending/Bounce Domain': 'sending_domains'
+};
+const DELIMITERS = ',;:+~`!@#$%^*()-={}[]"\'<>?./|\\'.split('');
 
-function getQueryFromOptions({ from, to, metrics }) {
+function getQueryFromOptions({ from, to, metrics, activeList = []}) {
   from = moment(from).utc();
   to = moment(to).utc();
 
+  activeList.push({ type: 'Campaign', value: 'Cool, template' });
+  activeList.push({ type: 'Campaign', value: 'whoa; why would templates :: have these' });
+
   const apiMetricsKeys = getKeysFromMetrics(metrics);
+  const delimiter = getDelimiter(activeList);
+  const filters = getFilterSets(activeList, delimiter);
+
+  console.log({ delimiter, filters }); // eslint-disable-line
 
   return {
-    metrics: apiMetricsKeys.join(','),
+    metrics: apiMetricsKeys.join(delimiter),
     precision: getPrecision(from, to),
     from: from.format(apiDateFormat),
-    to: to.format(apiDateFormat)
+    to: to.format(apiDateFormat),
+    delimiter,
+    ...filters
   };
+}
+
+function pushToKey(obj, key, value) {
+  const updated = { [key]: [], ...obj };
+  updated[key].push(value);
+  return updated;
+}
+
+function getFilterSets(filters = [], delimiter) {
+  const hash = filters.reduce((result, { type, value }) => pushToKey(result, FILTER_KEY_MAP[type], value), {});
+  return _.mapValues(hash, (v) => v.join(delimiter));
+}
+
+/**
+ * Get an array of unique chars based on all filters and
+ * find all delimiters that don't appear in that list, then
+ * return the first one to use as the delimiter
+ *
+ * @param {array} filters
+ */
+function getDelimiter(filters = []) {
+  const uniques = _.uniq(filters.map((f) => f.value).join(''));
+  return _.difference(DELIMITERS, uniques).shift();
 }
 
 /**
