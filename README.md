@@ -35,6 +35,6 @@ https://github.com/facebook/react-native/issues/9309#issuecomment-238966924
 The docs folder will have links to basic resources and some contextual guides<br>
 to get you started.
 
-[Docs Folder](https://github.com/SparkPost/2web2ui/docs)
+[Docs Folder](./docs)
 
 ![](https://media0.giphy.com/media/5y1LH29N3k556/giphy.gif)
