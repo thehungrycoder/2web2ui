@@ -137,5 +137,4 @@ class Form extends Component {
   }
 }
 
-const mapStateToProps = (state, { name }) => ({ form: name });
-export default connect(mapStateToProps, { change })(Form);
+export default connect(null, { change })(Form);

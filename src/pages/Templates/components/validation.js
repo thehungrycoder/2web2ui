@@ -22,6 +22,10 @@ function emailOrSubstitution(value) {
   return !substitution(value) || !email(value) || (validLocal && validDomain) ? undefined : 'Invalid email or substitution value';
 }
 
+function contentRequired(html, text) {
+  return !html && !text ? 'Template content is required. Please add HTML or Text content.' : undefined;
+}
+
 function verifiedDomain(value) {
   return undefined; // TODO
 }
@@ -31,5 +35,6 @@ export {
   idSyntax,
   substitution,
   emailOrSubstitution,
+  contentRequired,
   verifiedDomain
 };
