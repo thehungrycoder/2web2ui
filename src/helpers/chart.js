@@ -43,5 +43,7 @@ function getLineChartFormatters(precision) {
 
 export {
   getDayLines,
+  getTimeTickFormatter,
+  getTooltipLabelFormatter,
   getLineChartFormatters
 };
