@@ -1,6 +1,6 @@
 export function fetchApiKeys() {
   return (dispatch, getState) => {
-    if (getState().apiKeys.keys.length) {
+    if (getState().credentials.keys.length) {
       return;
     }
 

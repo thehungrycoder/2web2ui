@@ -2,18 +2,20 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Page } from '@sparkpost/matchbox';
 
-import { fetchApiKeys } from 'actions/apiKeys';
+import { fetchApiKeys } from 'actions/credentials';
 
 import ApiErrorBanner from 'components/ApiErrorBanner';
 import TableCollection from 'components/Collection/TableCollection';
 import Layout from 'components/Layout/Layout';
+import KeyColumn from './components/KeyColumn';
+import PermissionsColumn from './components/PermissionsColumn';
 
 const COLUMNS = ['Name', 'Key', 'Permissions'];
 
 const getRowData = (key) => [
   key.label,
-  `${key.short_key} ••••••••••••••••••••••••••••••••••••`,
-  '[list of grants]'
+  <KeyColumn shortKey={key.short_key} />,
+  <PermissionsColumn grants={key.grants} />
 ];
 
 class CredentialsPage extends Component {
@@ -22,14 +24,14 @@ class CredentialsPage extends Component {
   }
 
   renderCollection() {
-    const { apiKeys } = this.props;
+    const { keys } = this.props;
 
     return (
       <TableCollection
         columns={COLUMNS}
         getRowData={getRowData}
         pagination={true}
-        rows={apiKeys}
+        rows={keys}
       />
     );
   }
@@ -59,9 +61,9 @@ class CredentialsPage extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  apiKeys: state.apiKeys.keys,
-  loading: state.apiKeys.loadingKeys,
-  error: state.apiKeys.error
+  error: state.credentials.error,
+  keys: state.credentials.keys,
+  loading: state.credentials.loadingKeys
 });
 
 export default connect(mapStateToProps, { fetchApiKeys })(CredentialsPage);
