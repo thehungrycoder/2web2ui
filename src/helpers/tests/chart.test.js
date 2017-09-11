@@ -4,9 +4,9 @@ import {
   getTooltipLabelFormatter,
   getLineChartFormatters
 } from '../chart';
-import { getPrecisionType as mockGetPrecisionType } from '../metrics';
+import * as metrics from '../metrics';
 
-jest.mock('../metrics');
+jest.mock('../metrics', );
 
 function getDate(hours, date = '2017-06-15T12:00') {
   const d = new Date(date);
@@ -21,15 +21,17 @@ function getTimestampWithFixedHour(date, hour) {
 
 describe('Helper: chart', () => {
 
+  beforeEach(() => jest.resetAllMocks());
+
   describe('getDayLines', () => {
     it('should return an empty array if precision type is not "hours"', () => {
-      mockGetPrecisionType.returns('not-hours');
+      metrics.getPrecisionType = jest.fn(() => 'not-hours');
       const lines = getDayLines([]);
       expect(lines.length).toEqual(0);
     });
 
     it('should return an item for every 0-hour date', () => {
-      mockGetPrecisionType.returns('hours');
+      metrics.getPrecisionType = jest.fn(() => 'hours');
       const data = [
         { ts: getTimestampWithFixedHour('2017-01-01T12:00', 12) },
         { ts: getTimestampWithFixedHour('2017-01-02T00:00', 0) },
@@ -43,7 +45,7 @@ describe('Helper: chart', () => {
     });
 
     it('should ignore 0-hour dates in the first and last position', () => {
-      mockGetPrecisionType.returns('hours');
+      metrics.getPrecisionType = jest.fn(() => 'hours');
       const data = [
         { ts: getTimestampWithFixedHour('2017-01-01T12:00', 0) },
         { ts: getTimestampWithFixedHour('2017-01-02T00:00', 0) },
@@ -105,11 +107,11 @@ describe('Helper: chart', () => {
   });
 
   describe('getLineChartFormatters', () => {
-    mockGetPrecisionType.returns('hours');
-    const formatters = getLineChartFormatters();
-    expect(Object.keys(formatters).length).toEqual(2);
-    expect(formatters.xTickFormatter).toEqual(expect.any(Function));
-    expect(formatters.tooltipLabelFormatter).toEqual(expect.any(Function));
+    metrics.getPrecisionType = jest.fn(() => 'hours');
+    expect(getLineChartFormatters()).toEqual({
+      xTickFormatter: expect.any(Function),
+      tooltipLabelFormatter: expect.any(Function)
+    });
   });
 
 });

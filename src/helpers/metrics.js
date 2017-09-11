@@ -62,12 +62,12 @@ function getDelimiter(filters = []) {
  * and returns the closest precision value
  *
  */
-function getPrecision(from, to = moment()) {
+export function getPrecision(from, to = moment()) {
   const diff = to.diff(from, 'minutes');
   return precisionMap.find(({ time }) => diff <= time).value;
 }
 
-function getPrecisionType(precision) {
+export function getPrecisionType(precision) {
   return (indexedPrecisions[precision].time <= (60 * 24 * 2)) ? 'hours' : 'days';
 }
 
@@ -103,11 +103,3 @@ function computeKeysForItem(metrics = []) {
 function transformData(data = [], metrics = []) {
   return data.map(computeKeysForItem(metrics));
 }
-
-export {
-  getQueryFromOptions,
-  getPrecision,
-  getPrecisionType,
-  getMetricsFromKeys,
-  transformData
-};
