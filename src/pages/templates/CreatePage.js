@@ -18,10 +18,6 @@ class CreatePage extends Component {
     shouldRedirect: false
   }
 
-  componentDidMount() {
-    this.props.clear();
-  }
-
   handleCreate(values) {
     const { create } = this.props;
     return create(values)

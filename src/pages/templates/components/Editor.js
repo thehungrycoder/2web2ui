@@ -39,7 +39,7 @@ class Editor extends Component {
     selectedTab: 0
   }
 
-  fieldNames = ['content.html', 'text', 'test']
+  fieldNames = ['content.html', 'content.text', 'test']
 
   handleTab = (i) => {
     this.setState({ selectedTab: i });

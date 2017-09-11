@@ -4,13 +4,10 @@ import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 // Actions
-import {
-  getDraft,
-  getPublished,
-  update,
-  deleteTemplate,
-  publish
-} from '../../actions/templates';
+import { getDraft, getPublished, update, deleteTemplate, publish } from '../../actions/templates';
+
+// Selectors
+import { templateById } from 'selectors/templates';
 
 // Components
 import { Layout } from 'components';
@@ -145,11 +142,12 @@ class EditPage extends Component {
 }
 
 const mapStateToProps = ({ templates }, { match }) => {
-  const template = templates.byId[match.params.id] || { draftDetails: {}, publishedDetails: {}};
+  const template = templateById(templates, match.params.id);
   return {
     loading: templates.getLoading,
     template,
-    initialValues: template.draftDetails || template.publishedDetails // Some templates are published but lack a draft
+    // For templates with published but no draft, pull in published values
+    initialValues: template.draftDetails || template.publishedDetails
   };
 };
 const formOptions = {

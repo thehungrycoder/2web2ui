@@ -17,19 +17,19 @@ import styles from './FormEditor.module.scss';
 class Form extends Component {
   // Fills in ID based on Name
   handleIdFill = (e) => {
-    const { newTemplate, change } = this.props;
+    const { newTemplate, change, name } = this.props;
     if (!newTemplate) {
       return;
     }
 
     const idValue = slugify(e.target.value).replace(new RegExp(`[^${ID_ALLOWED_CHARS}]`, 'g'), '');
-    change('id', idValue);
+    change(name, 'id', idValue);
   }
 
   componentDidMount() {
-    const { change, newTemplate } = this.props;
+    const { change, newTemplate, name } = this.props;
     if (newTemplate) { // TODO update to reflect sending domains
-      change('content.from.email', 'sandbox@sparkpostbox.com');
+      change(name, 'content.from.email', 'sandbox@sparkpostbox.com');
     }
   }
 

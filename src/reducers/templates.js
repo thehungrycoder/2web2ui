@@ -1,6 +1,5 @@
-import _ from 'lodash';
-
 const initialState = {
+  list: [],
   listError: null,
   byId: {}
 };
@@ -12,11 +11,7 @@ export default (state = initialState, action) => {
       return { ...state, listLoading: true, listError: null };
 
     case 'LIST_TEMPLATES_SUCCESS':
-      return {
-        ...state,
-        byId: _.keyBy(action.payload, (item) => item.id),
-        listLoading: false
-      };
+      return { ...state, list: action.payload, listLoading: false };
 
     case 'LIST_TEMPLATES_FAIL':
       return { ...state, listError: action.payload, listLoading: false };
