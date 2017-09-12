@@ -6,7 +6,7 @@ import {
 } from '../chart';
 import * as metrics from '../metrics';
 
-jest.mock('../metrics', );
+jest.mock('../metrics');
 
 function getDate(hours, date = '2017-06-15T12:00') {
   const d = new Date(date);
@@ -21,41 +21,39 @@ function getTimestampWithFixedHour(date, hour) {
 
 describe('Helper: chart', () => {
 
-  beforeEach(() => jest.resetAllMocks());
+  let data;
+
+  beforeEach(() => {
+    jest.resetAllMocks();
+    data = [
+      { ts: getTimestampWithFixedHour('2017-01-01T12:00', 12) },
+      { ts: getTimestampWithFixedHour('2017-01-02T00:00', 0) },
+      { ts: getTimestampWithFixedHour('2017-01-02T12:00', 12) },
+      { ts: getTimestampWithFixedHour('2017-01-03T00:00', 0) },
+      { ts: getTimestampWithFixedHour('2017-01-03T00:15', 0) },
+      { ts: getTimestampWithFixedHour('2017-01-03T12:00', 12) }
+    ];
+  });
 
   describe('getDayLines', () => {
     it('should return an empty array if precision type is not "hours"', () => {
       metrics.getPrecisionType = jest.fn(() => 'not-hours');
-      const lines = getDayLines([]);
+      const lines = getDayLines(data);
       expect(lines.length).toEqual(0);
     });
 
     it('should return an item for every 0-hour date', () => {
       metrics.getPrecisionType = jest.fn(() => 'hours');
-      const data = [
-        { ts: getTimestampWithFixedHour('2017-01-01T12:00', 12) },
-        { ts: getTimestampWithFixedHour('2017-01-02T00:00', 0) },
-        { ts: getTimestampWithFixedHour('2017-01-02T12:00', 12) },
-        { ts: getTimestampWithFixedHour('2017-01-03T00:00', 0) },
-        { ts: getTimestampWithFixedHour('2017-01-03T00:15', 0) },
-        { ts: getTimestampWithFixedHour('2017-01-03T12:00', 12) }
-      ];
       const lines = getDayLines(data);
       expect(lines.length).toEqual(3);
     });
 
     it('should ignore 0-hour dates in the first and last position', () => {
       metrics.getPrecisionType = jest.fn(() => 'hours');
-      const data = [
-        { ts: getTimestampWithFixedHour('2017-01-01T12:00', 0) },
-        { ts: getTimestampWithFixedHour('2017-01-02T00:00', 0) },
-        { ts: getTimestampWithFixedHour('2017-01-02T12:00', 12) },
-        { ts: getTimestampWithFixedHour('2017-01-03T00:00', 12) },
-        { ts: getTimestampWithFixedHour('2017-01-03T00:15', 0) },
-        { ts: getTimestampWithFixedHour('2017-01-03T12:00', 0) }
-      ];
+      data[0].setHours(0);
+      data[data.length - 1].setHours(0);
       const lines = getDayLines(data);
-      expect(lines.length).toEqual(2);
+      expect(lines.length).toEqual(3);
     })
   });
 
