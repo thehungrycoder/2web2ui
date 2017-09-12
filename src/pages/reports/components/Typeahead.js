@@ -1,16 +1,17 @@
-/* eslint-disable */
 import React, { Component } from 'react';
 import Downshift from 'downshift';
 import classnames from 'classnames';
 import _ from 'lodash';
 
-import { TextField, ActionList, Panel } from '@sparkpost/matchbox';
+import sortMatch from 'helpers/sortMatch';
+import { TextField, ActionList } from '@sparkpost/matchbox';
 import Item from './TypeaheadItem';
 import styles from './Typeahead.module.scss';
 
-function flattenItem(item) {
-  return `${item.type}:${item.value}`;
+function flattenItem({ type, value }) {
+  return `${type}:${value}`;
 }
+
 class Typeahead extends Component {
   state = {
     inputValue: '',
@@ -18,17 +19,18 @@ class Typeahead extends Component {
   }
 
   updateMatches = _.debounce((pattern) => {
+    let matches;
+
     if (!pattern || pattern.length < 2) {
-      return [];
+      matches = [];
+    } else {
+      const { items, selected = []} = this.props;
+      const flatSelected = selected.map(flattenItem);
+      matches = sortMatch(items, pattern, (i) => i.value)
+        .filter(({ type, value }) => !flatSelected.includes(flattenItem({ type, value })))
+        .slice(0, 100);
     }
-    const { items, selected = [] } = this.props;
-    const flatSelected = selected.map(flattenItem);
-    pattern = pattern.toLowerCase();
-    const matches = items
-      .filter((item) => item.value.toLowerCase().includes(pattern) && !flatSelected.includes(flattenItem(item)))
-      .sort((a, b) => a.value.toLowerCase().indexOf(pattern) - b.value.toLowerCase().indexOf(pattern))
-      .slice(0, 100);
-    
+
     this.setState({ matches });
   }, 250)
 
@@ -39,10 +41,10 @@ class Typeahead extends Component {
   render() {
     const {
       onSelect, // Maps to downshift's onChange function https://github.com/paypal/downshift#onchange
-      placeholder, // TextField placeholder
+      placeholder // TextField placeholder
     } = this.props;
 
-    const { matches = [] } = this.state;
+    const { matches = []} = this.state;
 
     const typeaheadFn = ({
       getInputProps,
@@ -72,7 +74,7 @@ class Typeahead extends Component {
           })} />
         </div>
       );
-    }
+    };
 
     return <Downshift onChange={onSelect} itemToString={() => ''}>{typeaheadFn}</Downshift>;
   }
