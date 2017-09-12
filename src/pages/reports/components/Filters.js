@@ -1,31 +1,38 @@
+/* eslint-disable */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addFilter, removeFilter, searchFilter } from 'actions/reportFilters';
+import { addFilter, removeFilter } from 'actions/reportFilters';
 
 import { Grid, Button, Panel, Tag } from '@sparkpost/matchbox';
-
-import DateFilter from './DateFilter';
 import Typeahead from './Typeahead';
 
+import DateFilter from './DateFilter';
+import typeaheadCacheSelector from 'selectors/reportFilterTypeaheadCache';
 import styles from './Filters.module.scss';
 
 class Filters extends Component {
   renderActiveFilters = () => {
-    const { filter } = this.props;
-    return filter.activeList.length
+    const { filters } = this.props;
+    return filters.activeList.length
       ? <Panel.Section>
           <small>Filters:</small>
-          { filter.activeList.map((item, index) => <Tag key={index} onRemove={() => this.handleFilterRemove(index)} className={styles.TagWrapper}>{ item.value }</Tag>)}
+          { filters.activeList.map((item, index) => <Tag key={index} onRemove={() => this.handleFilterRemove(index)} className={styles.TagWrapper}>{ item.value }</Tag>)}
         </Panel.Section>
       : null;
   }
 
   handleFilterRemove = (index) => {
     this.props.removeFilter(index);
+    this.props.refresh();
+  }
+
+  handleTypeaheadSelect = (item) => {
+    this.props.addFilter(item);
+    this.props.refresh();
   }
 
   render() {
-    const { filter, refresh } = this.props;
+    const { typeaheadCache, refresh, filters } = this.props;
 
     return (
       <Panel>
@@ -39,9 +46,11 @@ class Filters extends Component {
             <Grid.Column xs={12} md={5}>
               <div className={styles.FieldWrapper}>
                 <Typeahead
-                  placeholder='Filter by domain'
+                  placeholder='Filter by domain, campaign, etc'
                   onSelect={this.handleTypeaheadSelect}
-                  options={filter.searchList} />
+                  items={typeaheadCache}
+                  selected={filters.activeList}
+                />
               </div>
             </Grid.Column>
             <Grid.Column xs={12} md={1}>
@@ -55,5 +64,8 @@ class Filters extends Component {
   }
 }
 
-const mapStateToProps = ({ reportFilters }) => ({ filter: reportFilters });
-export default connect(mapStateToProps, { addFilter, removeFilter, searchFilter })(Filters);
+const mapStateToProps = (state) => ({
+  filters: state.reportFilters,
+  typeaheadCache: typeaheadCacheSelector(state)
+});
+export default connect(mapStateToProps, { addFilter, removeFilter })(Filters);

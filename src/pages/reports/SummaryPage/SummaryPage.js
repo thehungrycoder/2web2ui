@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom';
 import classnames from 'classnames';
 
 import { refresh as refreshSummaryChart } from 'actions/summaryChart';
+import { refreshTypeaheadCache } from 'actions/reportFilters';
 import { getQueryFromOptions } from 'helpers/metrics';
 
 import { Page, Button, Panel, Tabs, Tooltip, Grid } from '@sparkpost/matchbox';
@@ -22,7 +23,6 @@ import _ from 'lodash';
 import styles from './SummaryPage.module.scss';
 
 class SummaryReportPage extends Component {
-  // colors = ['#37aadc', '#9bcd5a', '#b70c9e', '#e3af00', '#6D39A1'];
   COLORS = ['#20578E', '#F38415', '#45A6FF', '#FFD300', '#41B5AB', '#6BEAA8'];
 
   constructor(props) {
@@ -40,6 +40,7 @@ class SummaryReportPage extends Component {
 
   componentWillMount() {
     this.props.refreshSummaryChart();
+    this.props.refreshTypeaheadCache();
   }
 
   renderLoading() {
@@ -139,4 +140,4 @@ const mapStateToProps = ({ reportFilters, summaryChart }) => ({
   filters: reportFilters,
   chart: summaryChart
 });
-export default withRouter(connect(mapStateToProps, { refreshSummaryChart })(SummaryReportPage));
+export default withRouter(connect(mapStateToProps, { refreshSummaryChart, refreshTypeaheadCache })(SummaryReportPage));

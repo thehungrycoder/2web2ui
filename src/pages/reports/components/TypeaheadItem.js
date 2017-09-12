@@ -1,12 +1,12 @@
 import React from 'react';
 
-import styles from './TypeaheadItem.module.scss';
+import styles from './Typeahead.module.scss';
 
-const TypeaheadItem = ({ value, type }) => (
-    <div className={styles.TypeaheadItem}>
-      <span className={styles.Value}>{ value }</span>
-      <span className={styles.Type}>{ type }</span>
-    </div>
-  );
+const TypeaheadItem = ({ value, helpText = null }) => (
+  <div className={styles.Item}>
+    <span className={styles.Value}>{ value }</span>
+    { helpText && <span className={styles.HelpText}>{ helpText }</span> }
+  </div>
+);
 
 export default TypeaheadItem;
