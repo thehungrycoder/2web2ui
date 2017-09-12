@@ -1,10 +1,11 @@
+/* eslint-disable */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import classnames from 'classnames';
 
 import { refresh as refreshSummaryChart } from 'actions/summaryChart';
-import { refreshTypeaheadCache } from 'actions/reportFilters';
+import { addFilter, refreshTypeaheadCache } from 'actions/reportFilters';
 
 import { Page, Button, Panel, Tabs, Tooltip, Grid } from '@sparkpost/matchbox';
 import { Page, Panel, Tabs } from '@sparkpost/matchbox';
@@ -18,32 +19,47 @@ import moment from 'moment';
 import styles from './SummaryPage.module.scss';
 
 class SummaryReportPage extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      showShare: false,
-      showMetrics: false,
-      eventTime: 'real',
-      scale: 'linear'
-    };
+  state = {
+    shareModal: false,
+    metricsModal: false,
+    eventTime: 'real',
+    scale: 'linear',
+    link: ''
   }
 
   componentWillMount() {
-    const { location } = this.props;
+    this.handleRefresh(this.parseSearch());
+    this.props.refreshTypeaheadCache();
+  }
+
+  parseSearch() {
+    const { location, addFilter } = this.props;
     let options = {};
 
     if (location.search) {
-      const { from, to, metrics } = qs.parse(location.search);
+      const { from, to, metrics = [], filters = [] } = qs.parse(location.search);
+
+      // Checks if there is only one metric/filter
+      const metricsList = typeof metrics === 'string' ? [metrics] : [...metrics];
+      const filtersList = typeof filters === 'string' ? [filters] : [...filters];
+
+      filtersList.forEach((filter) => {
+        const parts = filter.split(',');
+        addFilter({ value: parts[0], type: parts[1] });
+      });
+
       options = {
-        metrics,
-        from: (from instanceof Date) ? from : new Date(from),
-        to: (to instanceof Date) ? to : new Date(to)
+        metrics: metricsList,
+        from: new Date(from),
+        to: new Date(to)
       };
     }
 
-    this.props.refreshSummaryChart(options);
-    this.props.refreshTypeaheadCache();
+    return options;
+  }
+
+  handleRefresh = (options) => {
+    this.props.refreshSummaryChart(options).then(() => this.updateLink());
   }
 
   renderLoading() {
@@ -54,16 +70,12 @@ class SummaryReportPage extends Component {
   }
 
   handleMetricsApply = (selectedMetrics) => {
-    this.setState({ showMetrics: false });
-    this.props.refreshSummaryChart({ metrics: selectedMetrics });
+    this.setState({ metricsModal: false });
+    this.handleRefresh({ metrics: selectedMetrics });
   }
 
-  handleMetricsToggle = () => {
-    this.setState({ showMetrics: !this.state.showMetrics });
-  }
-
-  handleShareToggle = () => {
-    this.setState({ showShare: !this.state.showShare });
+  handleModalToggle = (modal) => {
+    this.setState({ [modal]: !this.state[modal] });
   }
 
   handleTimeClick = (time) => {
@@ -74,29 +86,29 @@ class SummaryReportPage extends Component {
     this.setState({ scale });
   }
 
-  getShareableLink = () => {
-    const { filters, chart } = this.props;
+  updateLink = () => {
+    const { filters, chart, history } = this.props;
     const options = {
       from: moment(filters.from).utc().format(),
       to: moment(filters.to).utc().format(),
-      metrics: chart.metrics.map((metric) => metric.key)
+      metrics: chart.metrics.map((metric) => metric.key),
+      filters: filters.activeList.map((filter) => `${filter.value},${filter.type}`)
     };
-    return `${window.location.href.split('?')[0]}?${qs.stringify(options, { encode: false })}`;
+
+    const search = `?${qs.stringify(options, { encode: false })}`;
+    this.setState({ link: `${window.location.href.split('?')[0]}${search}` });
+    history.replace({ pathname: '/reports/summary', search  })
   }
 
   render() {
     const { chart } = this.props;
-    const { scale, eventTime } = this.state;
-
-    const link = this.getShareableLink();
+    const { scale, eventTime, link, metricsModal, shareModal } = this.state;
 
     return (
       <Layout.App>
         <Page title='Summary Report' />
 
-        <Filters
-          refresh={this.props.refreshSummaryChart}
-          onShare={this.handleShareToggle} />
+        <Filters refresh={this.handleRefresh} onShare={() => this.handleModalToggle('shareModal')} />
 
         <Panel>
           <Panel.Section className={classnames(styles.ChartSection, chart.loading && styles.pending)}>
@@ -106,7 +118,7 @@ class SummaryReportPage extends Component {
               selectedScale={scale}
               onScaleClick={this.handleScaleClick}
               onTimeClick={this.handleTimeClick}
-              onMetricsToggle={this.handleMetricsToggle}
+              onMetricsToggle={() => this.handleModalToggle('metricsModal')}
             />
             <ChartGroup {...chart} yScale={scale} />
           </Panel.Section>
@@ -118,13 +130,13 @@ class SummaryReportPage extends Component {
         <Panel><List /></Panel>
 
         <ShareModal
-          open={this.state.showShare}
-          handleToggle={this.handleShareToggle}
+          open={shareModal}
+          handleToggle={() => this.handleModalToggle('shareModal')}
           link={link} />
         <MetricsModal
           selectedMetrics={chart.metrics}
-          open={this.state.showMetrics}
-          onCancel={this.handleMetricsToggle}
+          open={metricsModal}
+          onCancel={() => this.handleModalToggle('metricsModal')}
           onSubmit={this.handleMetricsApply} />
       </Layout.App>
     );
@@ -135,4 +147,4 @@ const mapStateToProps = ({ reportFilters, summaryChart }) => ({
   filters: reportFilters,
   chart: summaryChart
 });
-export default withRouter(connect(mapStateToProps, { refreshSummaryChart, refreshTypeaheadCache })(SummaryReportPage));
+export default withRouter(connect(mapStateToProps, { refreshSummaryChart, refreshTypeaheadCache, addFilter })(SummaryReportPage));
