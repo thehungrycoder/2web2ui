@@ -6,7 +6,7 @@ import { Banner } from '@sparkpost/matchbox';
 
 import styles from './GlobalError.module.scss';
 
-class GlobalError extends Component {
+export class GlobalError extends Component {
   state = {
     show: false // Controls the .show css class
   }

@@ -1,0 +1,122 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render AuthDropDown 1`] = `
+<Field
+  component={[Function]}
+  label="Authentication"
+  name="auth"
+  options={
+    Array [
+      Object {
+        "label": "None",
+        "value": "",
+      },
+      Object {
+        "label": "Basic Auth",
+        "value": "basic",
+      },
+      Object {
+        "label": "OAuth 2.0",
+        "value": "oauth2",
+      },
+    ]
+  }
+/>
+`;
+
+exports[`should render BasicAuthFields 1`] = `
+<div>
+  Basic Auth
+  <Field
+    component={[Function]}
+    label="Username"
+    name="basicUser"
+    placeholder="username"
+    validate={[Function]}
+  />
+  <Field
+    component={[Function]}
+    label="Password"
+    name="basicPass"
+    placeholder="password"
+    validate={[Function]}
+  />
+</div>
+`;
+
+exports[`should render BasicAuthFields 2`] = `
+<div>
+  Basic Auth
+  <Field
+    component={[Function]}
+    label="Username"
+    name="basicUser"
+    placeholder="username"
+    validate={[Function]}
+  />
+  <Field
+    component={[Function]}
+    label="Password"
+    name="basicPass"
+    placeholder="password"
+    validate={[Function]}
+  />
+</div>
+`;
+
+exports[`should render EventsRadioGroup 1`] = `
+<Field
+  component={[Function]}
+  name="eventsRadio"
+  options={
+    Array [
+      Object {
+        "label": "All",
+        "value": "all",
+      },
+      Object {
+        "label": "Select",
+        "value": "select",
+      },
+    ]
+  }
+  title="Events"
+/>
+`;
+
+exports[`should render NameField 1`] = `
+<Field
+  component={[Function]}
+  label="Webhook Name"
+  name="name"
+  placeholder="Opens and Clicks"
+  validate={[Function]}
+/>
+`;
+
+exports[`should render OAuth2Fields 1`] = `
+<div>
+  OAuth 2.0
+  <Field
+    component={[Function]}
+    label="Client ID"
+    name="clientId"
+    placeholder="clientID"
+    validate={[Function]}
+  />
+  <Field
+    component={[Function]}
+    label="Client Secret"
+    name="clientSecret"
+    placeholder="clientSecret"
+    validate={[Function]}
+  />
+  <Field
+    component={[Function]}
+    label="Token URL"
+    name="tokenURL"
+    placeholder="https://www.example.com/tokens/"
+    validate={[Function]}
+  />
+</div>
+`;

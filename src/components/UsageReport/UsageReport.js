@@ -14,7 +14,7 @@ const actions = [
   }
 ];
 
-const getPercent = (used, volume) => Math.floor((volume / used) * 100);
+const getPercent = (used, limit) => Math.floor((used / limit) * 100);
 
 const DisplayNumber = ({ label, content, orange }) => (
   <div className={styles.Display}>
@@ -30,7 +30,7 @@ const ProgressLabel = ({ title, secondaryTitle }) => (
     </div>
 );
 
-class UsageReport extends Component {
+export class UsageReport extends Component {
   render() {
     const { subscription, usage } = this.props;
 
@@ -41,13 +41,11 @@ class UsageReport extends Component {
     const remaining = subscription.plan_volume - usage.month.used;
     const overage = remaining < 0 ? Math.abs(remaining) : 0;
 
-    const dailyUsage = getPercent(usage.day.limit, usage.day.used);
-    const monthlyUsage = getPercent(
-      usage.month.limit !== subscription.plan_volume ? usage.month.limit : subscription.plan_volume,
-      usage.month.used
-    );
+    const dailyUsage = getPercent(usage.day.used, usage.day.limit);
 
-    // idk how to add commas to numbers but toLocaleString works
+    const monthlyLimit = usage.month.limit || subscription.plan_volume;
+    const monthlyUsage = getPercent(usage.month.used, monthlyLimit);
+
     const dailyLimitMarkup = usage.day.limit
       ? <DisplayNumber label='Daily Limit' content={usage.day.limit.toLocaleString()}/>
       : null;

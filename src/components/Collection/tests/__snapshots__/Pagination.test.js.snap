@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Collection Pagination Component should render with no props 1`] = `null`;
+
+exports[`Collection Pagination Component should render with perPageButtons 1`] = `
+<div>
+  <div>
+    <t
+      initialIndex={0}
+      onChange={[Function]}
+      pageRange={5}
+      pages={6}
+    />
+  </div>
+  <div>
+    <Group>
+      <span
+        style={
+          Object {
+            "color": "rgba(0,0,0,0.5)",
+            "display": "inline-block",
+            "fontSize": "80%",
+            "marginRight": "10px",
+            "textTransform": "uppercase",
+          }
+        }
+      >
+        Per Page
+      </span>
+      <t
+        className=""
+        onClick={[Function]}
+        size="default"
+      >
+        10
+      </t>
+      <t
+        className=""
+        onClick={[Function]}
+        size="default"
+      >
+        25
+      </t>
+      <t
+        className=""
+        onClick={[Function]}
+        size="default"
+      >
+        50
+      </t>
+      <t
+        className=""
+        onClick={[Function]}
+        size="default"
+      >
+        100
+      </t>
+    </Group>
+  </div>
+</div>
+`;
+
+exports[`Collection Pagination Component should render without perPageButtons 1`] = `
+<div>
+  <div>
+    <t
+      initialIndex={0}
+      onChange={[Function]}
+      pageRange={5}
+      pages={3}
+    />
+  </div>
+  <div />
+</div>
+`;
