@@ -50,11 +50,11 @@ describe('Helper: chart', () => {
 
     it('should ignore 0-hour dates in the first and last position', () => {
       metrics.getPrecisionType = jest.fn(() => 'hours');
-      data[0].setHours(0);
-      data[data.length - 1].setHours(0);
+      data[0] = getTimestampWithFixedHour('2017-01-01', 0);
+      data[data.length - 1] = getTimestampWithFixedHour('2017-01-01', 0);
       const lines = getDayLines(data);
       expect(lines.length).toEqual(3);
-    })
+    });
   });
 
   describe('getTimeTickFormatter', () => {

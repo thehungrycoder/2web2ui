@@ -1,5 +1,4 @@
 import React from 'react';
-import sinon from 'sinon';
 import { GlobalError } from '../GlobalError';
 
 describe('GlobalError', () => {
@@ -10,20 +9,23 @@ describe('GlobalError', () => {
   };
 
   describe('Mounted', () => {
-    sinon.spy(GlobalError.prototype, 'componentWillReceiveProps');
 
     it('should mount', () => {
+      const willReceivePropsSpy = jest.spyOn(GlobalError.prototype, 'componentWillReceiveProps');
       const wrapper = mount(<GlobalError/>);
-      expect(GlobalError.prototype.componentWillReceiveProps.calledOnce).toEqual(false);
+      expect(willReceivePropsSpy).not.toHaveBeenCalled();
       expect(wrapper.state()).toEqual({ show: false });
+      willReceivePropsSpy.mockRestore();
     });
 
     it('should componentWillReceiveProps', () => {
+      const willReceivePropsSpy = jest.spyOn(GlobalError.prototype, 'componentWillReceiveProps');
       const wrapper = mount(<GlobalError />);
-      expect(GlobalError.prototype.componentWillReceiveProps.calledOnce).toEqual(false);
+      expect(willReceivePropsSpy).not.toHaveBeenCalled();
       wrapper.setProps(props);
-      expect(GlobalError.prototype.componentWillReceiveProps.calledOnce).toEqual(true);
+      expect(willReceivePropsSpy).toHaveBeenCalled();
       expect(wrapper.state()).toEqual({ show: true });
+      willReceivePropsSpy.mockRestore();
     });
 
     it('should dismis banner', () => {
