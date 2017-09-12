@@ -7,14 +7,15 @@ import { fetchApiKeys } from 'actions/credentials';
 import ApiErrorBanner from 'components/ApiErrorBanner';
 import TableCollection from 'components/Collection/TableCollection';
 import Layout from 'components/Layout/Layout';
-import KeyColumn from './components/KeyColumn';
 import PermissionsColumn from './components/PermissionsColumn';
 
 const COLUMNS = ['Name', 'Key', 'Permissions'];
 
 const getRowData = (key) => [
   key.label,
-  <KeyColumn shortKey={key.short_key} />,
+  <code>
+    {key.short_key} ••••
+  </code>,
   <PermissionsColumn grants={key.grants} />
 ];
 

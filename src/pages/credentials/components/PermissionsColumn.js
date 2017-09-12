@@ -15,7 +15,7 @@ const PermissionsColumn = ({ grants }) => {
   );
 
   return (
-    <Tooltip content={tooltipContent}>
+    <Tooltip content={tooltipContent} right horizontalOffset="-24px">
       {grants.length}
     </Tooltip>
   );
