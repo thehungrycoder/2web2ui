@@ -39,8 +39,8 @@ class SummaryReportPage extends Component {
   }
 
   componentWillMount() {
-    this.props.refreshTypeaheadCache();
     this.props.refreshSummaryChart();
+    this.props.refreshTypeaheadCache();
   }
 
   renderLoading() {

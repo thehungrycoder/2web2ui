@@ -1,7 +1,7 @@
 const config = {
   apiBase: 'no-default-set',
   apiDateFormat: 'YYYY-MM-DDTHH:mm',
-  apiRequestTimeout: 10000,
+  apiRequestTimeout: 15000,
   authentication: {
     cookie: {
       name: 'auth',

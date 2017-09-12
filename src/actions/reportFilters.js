@@ -13,15 +13,18 @@ import { list as listSendingDomains } from './sendingDomains';
 // sending domains, since they aren't dependent on the params...
 // maybe load (all) vs refresh (4 metrics calls)
 export function refreshTypeaheadCache(params) {
-  return (dispatch) => Promise.all([
-    dispatch(fetchMetricsDomains(params)),
-    dispatch(fetchMetricsCampaigns(params)),
-    dispatch(fetchMetricsSendingIps(params)),
-    dispatch(fetchMetricsIpPools(params)),
-    dispatch(listTemplates()),
-    dispatch(listSubaccounts()),
-    dispatch(listSendingDomains())
-  ]);
+  return (dispatch) => {
+    dispatch({ type: 'REFRESH_TYPEAHEAD_CACHE' });
+    return Promise.all([
+      dispatch(fetchMetricsDomains(params)),
+      dispatch(fetchMetricsCampaigns(params)),
+      dispatch(fetchMetricsSendingIps(params)),
+      dispatch(fetchMetricsIpPools(params)),
+      dispatch(listTemplates()),
+      dispatch(listSubaccounts()),
+      dispatch(listSendingDomains())
+    ]);
+  };
 }
 
 export function addFilter(payload) {

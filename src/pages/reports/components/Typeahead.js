@@ -15,11 +15,14 @@ function flattenItem({ type, value }) {
 class Typeahead extends Component {
   state = {
     inputValue: '',
-    matches: []
+    matches: [],
+    calculatingMatches: false
   }
 
   updateMatches = _.debounce((pattern) => {
     let matches;
+
+    this.setState({ calculatingMatches: true });
 
     if (!pattern || pattern.length < 2) {
       matches = [];
@@ -31,7 +34,7 @@ class Typeahead extends Component {
         .slice(0, 100);
     }
 
-    this.setState({ matches });
+    this.setState({ matches, calculatingMatches: false });
   }, 250)
 
   handleFieldChange = (e) => {
