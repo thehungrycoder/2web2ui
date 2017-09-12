@@ -27,12 +27,14 @@ Running the test suite (not built yet).
 ```
 npm test
 ```
+**NOTE:** You may need to `brew install watchman` for jest to run in watch mode on OS X.
+https://github.com/facebook/react-native/issues/9309#issuecomment-238966924
 
 ## Docs
 
 The docs folder will have links to basic resources and some contextual guides<br>
 to get you started.
 
-[Docs Folder](https://github.com/SparkPost/2web2ui/docs)
+[Docs Folder](./docs)
 
 ![](https://media0.giphy.com/media/5y1LH29N3k556/giphy.gif)
