@@ -1,5 +1,5 @@
 function templateById(templates, id) {
-  return templates.byId[id] || { draftDetails: {}, publishedDetails: {}};
+  return templates.byId[id] || { draft: {}, published: {}};
 }
 
 export {

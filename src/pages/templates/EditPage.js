@@ -56,7 +56,7 @@ class EditPage extends Component {
 
   componentDidUpdate() {
     const { loading, template } = this.props;
-    if (!loading && !template.draftDetails && !template.publishedDetails) {
+    if (!loading && !template.draft && !template.published) {
       // Redirect if no draft or published found
       // TODO: show error banner?
       this.setState({ redirectTo: '/templates/' });
@@ -70,7 +70,7 @@ class EditPage extends Component {
       match,
       submitting
     } = this.props;
-    const published = template.publishedDetails;
+    const published = template.published;
 
     const primaryAction = {
       content: 'Publish Template',
@@ -147,7 +147,7 @@ const mapStateToProps = ({ templates }, { match }) => {
     loading: templates.getLoading,
     template,
     // For templates with published but no draft, pull in published values
-    initialValues: template.draftDetails || template.publishedDetails
+    initialValues: template.draft || template.published
   };
 };
 const formOptions = {
