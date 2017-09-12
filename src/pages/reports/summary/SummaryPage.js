@@ -7,13 +7,11 @@ import { refresh as refreshSummaryChart } from 'actions/summaryChart';
 import { refreshTypeaheadCache } from 'actions/reportFilters';
 
 import { Page, Button, Panel, Tabs, Tooltip, Grid } from '@sparkpost/matchbox';
+import { Page, Panel, Tabs } from '@sparkpost/matchbox';
 import { Layout, Loading } from 'components';
 import Filters from '../components/Filters';
 import ShareModal from '../components/ShareModal';
-import List from './components/List';
-import MetricsModal from './components/MetricsModal';
-import Legend from './components/Legend';
-import ChartGroup from './components/ChartGroup';
+import { List, MetricsModal, ChartGroup, ChartHeader } from './components';
 
 import qs from 'query-string';
 import moment from 'moment';
@@ -26,7 +24,7 @@ class SummaryReportPage extends Component {
     this.state = {
       showShare: false,
       showMetrics: false,
-      eventTime: true,
+      eventTime: 'real',
       scale: 'linear'
     };
   }
@@ -68,12 +66,12 @@ class SummaryReportPage extends Component {
     this.setState({ showShare: !this.state.showShare });
   }
 
-  handleTimeToggle = () => {
-    this.setState({ eventTime: !this.state.eventTime });
+  handleTimeClick = (time) => {
+    this.setState({ eventTime: time });
   }
 
-  renderScaleButton(scale, label) {
-    return <Button size='small' primary={scale === this.state.scale} onClick={() => this.setState({ scale })}>{label}</Button>;
+  handleScaleClick = (scale) => {
+    this.setState({ scale });
   }
 
   getShareableLink = () => {
@@ -86,21 +84,9 @@ class SummaryReportPage extends Component {
     return `${window.location.href.split('?')[0]}?${qs.stringify(options, { encode: false })}`;
   }
 
-  renderTimeMode() {
-    const { eventTime } = this.state;
-
-    return eventTime
-    ? <Tooltip content='Sort events by injection time'>
-        <Button onClick={this.handleTimeToggle} className={styles.ButtonSpacer} size='small'>Event Time</Button>
-      </Tooltip>
-    : <Tooltip content='Sort events by event time'>
-        <Button onClick={this.handleTimeToggle} className={styles.ButtonSpacer} size='small'>Injection Time</Button>
-      </Tooltip>;
-  }
-
   render() {
-    const { metricsData, chart } = this.props;
-    const { scale } = this.state;
+    const { chart } = this.props;
+    const { scale, eventTime } = this.state;
 
     const link = this.getShareableLink();
 
@@ -114,41 +100,22 @@ class SummaryReportPage extends Component {
 
         <Panel>
           <Panel.Section className={classnames(styles.ChartSection, chart.loading && styles.pending)}>
-
-            {/* TODO: maybe move Legend and Controls into own component? */}
-            <Grid className={styles.ChartHeader}>
-              <Grid.Column xs={12} md={7} lg={6}>
-                <Legend metrics={chart.metrics}/>
-              </Grid.Column>
-              <Grid.Column xs={12} md={5} lg={6}>
-                <div className={styles.Controls}>
-                  <Button size='small' onClick={this.handleMetricsToggle}>Select Metrics</Button>
-                  {this.renderTimeMode()}
-                  <Button.Group className={styles.ButtonSpacer}>
-                    {this.renderScaleButton('linear', 'Linear')}
-                    {this.renderScaleButton('log', 'Log')}
-                    {this.renderScaleButton('sqrt', '√ Sq Rt')}
-                  </Button.Group>
-                </div>
-              </Grid.Column>
-            </Grid>
-
+            <ChartHeader
+              selectedMetrics={chart.metrics}
+              selectedTime={eventTime}
+              selectedScale={scale}
+              onScaleClick={this.handleScaleClick}
+              onTimeClick={this.handleTimeClick}
+              onMetricsToggle={this.handleMetricsToggle}
+            />
             <ChartGroup {...chart} yScale={scale} />
           </Panel.Section>
 
           {this.renderLoading()}
         </Panel>
 
-        <Tabs
-          selected={0}
-          tabs={[
-            { content: 'Domains' },
-            { content: 'Campaigns' },
-            { content: 'Templates' }
-          ]}/>
-        <Panel>
-          <List />
-        </Panel>
+        <Tabs selected={0} tabs={[ { content: 'Domains' }, { content: 'Campaigns' }, { content: 'Templates' } ]}/>
+        <Panel><List /></Panel>
 
         <ShareModal
           open={this.state.showShare}
