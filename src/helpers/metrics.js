@@ -16,7 +16,7 @@ const FILTER_KEY_MAP = {
 };
 const DELIMITERS = ',;:+~`!@#$%^*()-={}[]"\'<>?./|\\'.split('');
 
-function getQueryFromOptions({ from, to, metrics, activeList = []}) {
+export function getQueryFromOptions({ from, to, metrics, activeList = []}) {
   from = moment(from).utc();
   to = moment(to).utc();
 
@@ -34,13 +34,13 @@ function getQueryFromOptions({ from, to, metrics, activeList = []}) {
   };
 }
 
-function pushToKey(obj, key, value) {
+export function pushToKey(obj, key, value) {
   const updated = { [key]: [], ...obj };
   updated[key].push(value);
   return updated;
 }
 
-function getFilterSets(filters = [], delimiter) {
+export function getFilterSets(filters = [], delimiter) {
   const hash = filters.reduce((result, { type, value }) => pushToKey(result, FILTER_KEY_MAP[type], value), {});
   return _.mapValues(hash, (v) => v.join(delimiter));
 }
@@ -52,7 +52,7 @@ function getFilterSets(filters = [], delimiter) {
  *
  * @param {array} filters
  */
-function getDelimiter(filters = []) {
+export function getDelimiter(filters = []) {
   const uniques = _.uniq(filters.map((f) => f.value).join(''));
   return _.difference(DELIMITERS, uniques).shift();
 }
@@ -62,28 +62,28 @@ function getDelimiter(filters = []) {
  * and returns the closest precision value
  *
  */
-function getPrecision(from, to = moment()) {
+export function getPrecision(from, to = moment()) {
   const diff = to.diff(from, 'minutes');
   return precisionMap.find(({ time }) => diff <= time).value;
 }
 
-function getPrecisionType(precision) {
+export function getPrecisionType(precision) {
   return (indexedPrecisions[precision].time <= (60 * 24 * 2)) ? 'hours' : 'days';
 }
 
-function getMetricsFromKeys(keys = []) {
+export function getMetricsFromKeys(keys = []) {
   return keys.map((metric, i) => {
     const found = METRICS_LIST.find((M) => M.key === metric);
     return { ...found, name: found.key, stroke: chartColors[i] };
   });
 }
 
-function getKeysFromMetrics(metrics = []) {
+export function getKeysFromMetrics(metrics = []) {
   const flattened = _.flatMap(metrics, ({ key, computeKeys }) => computeKeys ? computeKeys : key);
   return _.uniq(flattened);
 }
 
-function computeKeysForItem(metrics = []) {
+export function computeKeysForItem(metrics = []) {
   return (item) => metrics.reduce((acc, metric) => {
     if (metric.compute) {
       acc[metric.key] = metric.compute(acc, metric.computeKeys) || 0;
@@ -100,14 +100,6 @@ function computeKeysForItem(metrics = []) {
  * @param {Array} metrics - list of currently selected metrics objects from config
  * @param {Array} data - results from the metrics API
  */
-function transformData(data = [], metrics = []) {
+export function transformData(data = [], metrics = []) {
   return data.map(computeKeysForItem(metrics));
 }
-
-export {
-  getQueryFromOptions,
-  getPrecision,
-  getPrecisionType,
-  getMetricsFromKeys,
-  transformData
-};

@@ -85,7 +85,7 @@ class EditTab extends Component {
 
   render() {
     const { webhook, eventDocs, eventsLoading } = this.props;
-    const eventsTree = buildEventsTree(eventDocs);
+    const eventsTree = this.buildEventsTree(eventDocs);
     const allEvents = this.getAllEvents(eventsTree);
     const allChecked = webhook.events.length === allEvents.length;
     const checkedEvents = {};
