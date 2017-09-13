@@ -47,15 +47,14 @@ export function billingCreate(values) {
 }
 
 export function getBillingCountries() {
-  return {
-    type: 'SPARKPOST_API_REQUEST',
+  return sparkpostApiRequest({
+    type: 'GET_COUNTRIES_BILLING',
     meta: {
-      type: 'GET_COUNTRIES_BILLING',
       method: 'GET',
       url: '/account/countries',
       params: {
         filter: 'billing'
       }
     }
-  };
+  });
 }
