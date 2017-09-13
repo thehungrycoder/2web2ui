@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { authenticate } from '../actions/auth';
 import { Redirect } from 'react-router-dom';
 
+import { authenticate } from 'actions/auth';
 import { Layout, SparkPost } from 'components';
 import { Panel, Button, TextField, Checkbox } from '@sparkpost/matchbox';
 

@@ -1,4 +1,4 @@
-export { default as AuthPage } from './AuthPage';
+export { default as AuthPage } from './auth/AuthPage';
 export { default as BillingPage } from './billing/BillingPage';
 export { default as DashboardPage } from './dashboard/DashboardPage';
 export { default as ProfilePage } from './profile/ProfilePage';

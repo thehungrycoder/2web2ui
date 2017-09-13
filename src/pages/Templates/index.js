@@ -1,11 +1,11 @@
-import TemplatesListPage from './ListPage';
-import TemplatesEditPage from './EditPage';
-import TemplatesPublishedPage from './PublishedPage';
-import TemplatesCreatePage from './CreatePage';
+import ListPage from './ListPage';
+import EditPage from './EditPage';
+import PublishedPage from './PublishedPage';
+import CreatePage from './CreatePage';
 
 export default {
-  ListPage: TemplatesListPage,
-  CreatePage: TemplatesCreatePage,
-  EditPage: TemplatesEditPage,
-  PublishedPage: TemplatesPublishedPage
+  ListPage,
+  CreatePage,
+  EditPage,
+  PublishedPage
 };
