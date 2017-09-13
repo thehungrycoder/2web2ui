@@ -1,20 +1,16 @@
 import React from 'react';
 
 // Components
-import ProtectedRoute from 'components/ProtectedRoute';
-import AuthenticationGate from 'components/AuthenticationGate';
+import { ProtectedRoute, AuthenticationGate } from 'components';
 
 // Pages
 import {
   AuthPage,
   BillingPage,
   DashboardPage,
-  SummaryReportPage,
   ProfilePage,
-  TemplatesListPage,
-  TemplatesEditPage,
-  TemplatesPublishedPage,
-  TemplatesCreatePage,
+  reports,
+  templates,
   webhooks
 } from './pages';
 
@@ -37,12 +33,12 @@ export default () => (
 
       <ProtectedRoute path='/dashboard' component={DashboardPage} />
       <Route exact path='/reports' render={() => <Redirect to='/reports/summary' />} />
-      <ProtectedRoute path='/reports/summary' component={SummaryReportPage} />
+      <ProtectedRoute path='/reports/summary' component={reports.SummaryPage} />
 
-      <ProtectedRoute exact path='/templates' component={TemplatesListPage} />
-      <ProtectedRoute exact path='/templates/create/' component={TemplatesCreatePage} />
-      <ProtectedRoute exact path='/templates/edit/:id' component={TemplatesEditPage} />
-      <ProtectedRoute exact path='/templates/edit/:id/published' component={TemplatesPublishedPage} />
+      <ProtectedRoute exact path='/templates' component={templates.ListPage} />
+      <ProtectedRoute exact path='/templates/create/' component={templates.CreatePage} />
+      <ProtectedRoute exact path='/templates/edit/:id' component={templates.EditPage} />
+      <ProtectedRoute exact path='/templates/edit/:id/published' component={templates.PublishedPage} />
       {/* <ProtectedRoute exact path='/templates/edit/:id/preview' component={TemplatesEditPage} /> */}
 
       <ProtectedRoute exact path='/webhooks' component={webhooks.ListPage}/>
