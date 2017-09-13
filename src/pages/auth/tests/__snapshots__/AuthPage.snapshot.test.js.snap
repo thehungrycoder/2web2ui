@@ -1,6 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`matches snapshot 1`] = `
+exports[`redirects when logged in 1`] = `
+<Redirect
+  push={false}
+  to="/dashboard"
+/>
+`;
+
+exports[`renders correctly 1`] = `
 <Form>
   <div>
     <a
@@ -16,6 +23,124 @@ exports[`matches snapshot 1`] = `
     title="Log In"
   >
     <form>
+      <t
+        autoFocus={true}
+        id="username"
+        label="Username or Email"
+        onChange={[Function]}
+        placeholder="Leslie Knope"
+        type="text"
+        value=""
+      />
+      <t
+        id="password"
+        label="Password"
+        onChange={[Function]}
+        placeholder="Your Password"
+        type="password"
+        value=""
+      />
+      <t
+        checked={false}
+        id="rememberMe"
+        label="Keep me logged in"
+        onChange={[Function]}
+      />
+      <t
+        onClick={[Function]}
+        primary={true}
+        size="default"
+        submit={true}
+      >
+        <span>
+          Log In
+        </span>
+      </t>
+    </form>
+  </t>
+</Form>
+`;
+
+exports[`renders correctly when logging in 1`] = `
+<Form>
+  <div>
+    <a
+      href="https://www.sparkpost.com"
+      title="SparkPost"
+    >
+      <Logo />
+    </a>
+  </div>
+  <t
+    accent={true}
+    sectioned={true}
+    title="Log In"
+  >
+    <form>
+      <t
+        autoFocus={true}
+        id="username"
+        label="Username or Email"
+        onChange={[Function]}
+        placeholder="Leslie Knope"
+        type="text"
+        value=""
+      />
+      <t
+        id="password"
+        label="Password"
+        onChange={[Function]}
+        placeholder="Your Password"
+        type="password"
+        value=""
+      />
+      <t
+        checked={false}
+        id="rememberMe"
+        label="Keep me logged in"
+        onChange={[Function]}
+      />
+      <t
+        onClick={[Function]}
+        primary={true}
+        size="default"
+        submit={true}
+      >
+        <span>
+          <i
+            className="fa fa-spinner fa-spin"
+          />
+           Logging In
+        </span>
+      </t>
+    </form>
+  </t>
+</Form>
+`;
+
+exports[`renders correctly when there is a login error 1`] = `
+<Form>
+  <div>
+    <a
+      href="https://www.sparkpost.com"
+      title="SparkPost"
+    >
+      <Logo />
+    </a>
+  </div>
+  <t
+    accent={true}
+    sectioned={true}
+    title="Log In"
+  >
+    <form>
+      <div
+        className="error"
+      >
+        <p>
+          uh oh!
+        </p>
+      </div>
       <t
         autoFocus={true}
         id="username"
