@@ -1,10 +1,11 @@
+import sparkpostApiRequest from 'actions/helpers/sparkpostApiRequest'
+
 export function fetch() {
-  return {
-    type: 'SPARKPOST_API_REQUEST',
+  return sparkpostApiRequest({
+    type: 'FETCH_COUNTRIES',
     meta: {
-      type: 'FETCH_COUNTRIES',
       method: 'GET',
       url: '/account/countries'
     }
-  };
+  });
 }

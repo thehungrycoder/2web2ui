@@ -1,10 +1,11 @@
+import sparkpostApiRequest from 'actions/helpers/sparkpostApiRequest';
+
 export function list() {
-  return {
-    type: 'SPARKPOST_API_REQUEST',
+  return sparkpostApiRequest({
+    type: 'LIST_SUBACCOUNTS',
     meta: {
-      type: 'LIST_SUBACCOUNTS',
       method: 'GET',
       url: '/subaccounts'
     }
-  };
+  });
 }
