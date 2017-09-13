@@ -8,86 +8,97 @@ import { Panel, Button, TextField, Checkbox } from '@sparkpost/matchbox';
 
 import styles from './AuthPage.module.scss';
 
-class AuthPage extends Component {
+export class AuthPage extends Component {
   state = {
     username: '',
     password: '',
-    remember_me: false
-  }
+    rememberMe: false
+  };
 
-  updateInput(name, value) {
-    this.setState({ [name]: value });
-  }
+  onChangeUsername = (evt) => {
+    this.setState({ username: evt.target.value });
+  };
+
+  onChangePassword = (evt) => {
+    this.setState({ password: evt.target.value });
+  };
+
+  onChangeRememberMe = (evt) => {
+    this.setState({ rememberMe: evt.target.checked });
+  };
+
+  onClickSubmit = (evt) => {
+    const { username, password, rememberMe } = this.state;
+    evt.preventDefault();
+    this.props.authenticate(username, password, rememberMe);
+  };
 
   renderLoginError() {
-    const { errorDescription } = this.props.auth;
-
-    if (!errorDescription) {
-      return null;
-    }
-
     return (
-      <div className='error'>
-        <p>{errorDescription}</p>
+      <div className="error">
+        <p>
+          {this.props.auth.errorDescription}
+        </p>
       </div>
     );
   }
 
-  renderLoginButton() {
-    return this.props.auth.loginPending ? <span><i className="fa fa-spinner fa-spin"></i> Logging In</span> : <span>Log In</span>;
+  renderLoginButtonText() {
+    return this.props.auth.loginPending
+      ? <span>
+          <i className="fa fa-spinner fa-spin" /> Logging In
+        </span>
+      : <span>Log In</span>;
   }
 
   render() {
-    if (this.props.auth.loggedIn) {
-      return <Redirect to='/dashboard' />;
+    const { errorDescription, loggedIn } = this.props.auth;
+
+    if (loggedIn) {
+      return <Redirect to="/dashboard" />;
     }
+
     return (
       <Layout.Form>
         <div className={styles.LogoWrapper}>
-          <a href="https://www.sparkpost.com" title="SparkPost"><SparkPost.Logo /></a>
+          <a href="https://www.sparkpost.com" title="SparkPost">
+            <SparkPost.Logo />
+          </a>
         </div>
 
-        <Panel sectioned accent title='Log In'>
-            <form>
-              {this.renderLoginError()}
+        <Panel sectioned accent title="Log In">
+          <form>
+            {errorDescription && this.renderLoginError()}
 
-              <TextField
-                autoFocus
-                id='username'
-                label='Username or Email'
-                placeholder='Leslie Knope'
-                value={this.state.username}
-                onChange={ (e) => this.updateInput('username', e.target.value) }
-              />
+            <TextField
+              autoFocus
+              id="username"
+              label="Username or Email"
+              placeholder="Leslie Knope"
+              value={this.state.username}
+              onChange={this.onChangeUsername}
+            />
 
-              <TextField
-                id='password'
-                label='Password'
-                type='password'
-                placeholder='Your Password'
-                value={this.state.password}
-                onChange={ (e) => this.updateInput('password', e.target.value) }
-              />
+            <TextField
+              id="password"
+              label="Password"
+              type="password"
+              placeholder="Your Password"
+              value={this.state.password}
+              onChange={this.onChangePassword}
+            />
 
-              <Checkbox
-                id='remember_me'
-                label='Keep me logged in'
-                checked={this.state.remember_me}
-                onChange={(e) => this.updateInput('remember_me', e.target.checked)}
-              />
+            <Checkbox
+              id="rememberMe"
+              label="Keep me logged in"
+              checked={this.state.rememberMe}
+              onChange={this.onChangeRememberMe}
+            />
 
-              <Button
-                submit
-                primary
-                onClick={(e) => {
-                  const { username, password, remember_me } = this.state;
-                  e.preventDefault();
-                  this.props.authenticate(username, password, remember_me);
-                }}
-                >{ this.renderLoginButton() }</Button>
-
-            </form>
-
+            <Button submit primary onClick={this.onClickSubmit}>
+              {this.renderLoginButtonText()}
+            </Button>
+          </form>
         </Panel>
       </Layout.Form>
     );
