@@ -22,7 +22,7 @@ export default function sparkpostApiRequest(action) {
   return (dispatch, getState) => {
     const { auth } = getState();
     const { type = 'NO_TYPE_DEFINED', meta } = action;
-    const { url, method = 'get', params, headers, data, onSuccess, retries = 0 } = meta;
+    const { url, method = 'get', params, headers, data, retries = 0 } = meta;
     const PENDING_TYPE = `${type}_PENDING`;
     const SUCCESS_TYPE = `${type}_SUCCESS`;
     const FAIL_TYPE = `${type}_FAIL`;
@@ -58,13 +58,6 @@ export default function sparkpostApiRequest(action) {
           payload: results,
           meta
         });
-
-        if (typeof onSuccess === 'function') {
-          dispatch({
-            type: 'OOPS_ON_SUCCESS_FUNC',
-            payload: 'You shouldn\'t be using onSuccess callbacks anymore.'
-          });
-        }
 
         return results;
       },

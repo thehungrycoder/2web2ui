@@ -1,89 +1,84 @@
+import sparkpostApiRequest from 'actions/helpers/sparkpostApiRequest';
+
 export function listTemplates() {
-  return {
-    type: 'SPARKPOST_API_REQUEST',
+  return sparkpostApiRequest({
+    type: 'LIST_TEMPLATES',
     meta: {
-      type: 'LIST_TEMPLATES',
       method: 'GET',
       url: '/templates'
     }
-  };
+  });
 }
 
 export function getDraft(id) {
-  return {
-    type: 'SPARKPOST_API_REQUEST',
+  return sparkpostApiRequest({
+    type: 'GET_DRAFT_TEMPLATE',
     meta: {
-      type: 'GET_DRAFT_TEMPLATE',
       method: 'GET',
       url: `/templates/${id}`,
       params: {
         draft: true
       }
     }
-  };
+  });
 }
 
 export function getPublished(id) {
-  return {
-    type: 'SPARKPOST_API_REQUEST',
+  return sparkpostApiRequest({
+    type: 'GET_PUBLISHED_TEMPLATE',
     meta: {
-      type: 'GET_PUBLISHED_TEMPLATE',
       method: 'GET',
       url: `/templates/${id}`,
       params: {
         draft: false
       }
     }
-  };
+  });
 }
 
 export function create(data) {
-  return {
-    type: 'SPARKPOST_API_REQUEST',
+  return sparkpostApiRequest({
+    type: 'CREATE_TEMPLATE',
     meta: {
-      type: 'CREATE_TEMPLATE',
       method: 'POST',
       url: '/templates',
       data
     }
-  };
+  });
 }
 
 export function update(data, params = {}) {
   const id = data.id;
-  return {
-    type: 'SPARKPOST_API_REQUEST',
+  return sparkpostApiRequest({
+    type: 'UPDATE_TEMPLATE',
     meta: {
-      type: 'UPDATE_TEMPLATE',
       method: 'PUT',
       url: `/templates/${id}`,
       data,
       params: { ...params }
     }
-  };
+  });
 }
 
 export function publish(id) {
-  return {
-    type: 'SPARKPOST_API_REQUEST',
+  return sparkpostApiRequest({
+    type: 'PUBLISH_TEMPLATE',
     meta: {
-      type: 'PUBLISH_TEMPLATE',
       method: 'PUT',
       url: `/templates/${id}`,
       data: { published: true }
     }
-  };
+  });
 }
 
 export function deleteTemplate(id) {
-  return {
-    type: 'SPARKPOST_API_REQUEST',
+  return sparkpostApiRequest({
+    type: 'DELETE_TEMPLATE',
     meta: {
-      type: 'DELETE_TEMPLATE',
       method: 'DELETE',
       url: `/templates/${id}`
     }
-  };
+  });
 }
 
 export function clear() {

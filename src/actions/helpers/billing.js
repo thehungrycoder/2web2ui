@@ -1,4 +1,4 @@
-function formatDataForCors(values) {
+export function formatDataForCors(values) {
   const {
     firstName,
     lastName,
@@ -62,4 +62,33 @@ function formatDataForCors(values) {
   return { corsData, billingData };
 }
 
-export { formatDataForCors };
+export function formatCreateData({
+  accountNumber,
+  crmId,
+  name,
+  contractEffectiveDate,
+  discountId = false,
+  billingId,
+  creditCard,
+  billToContact
+}) {
+  const formatted = {
+    accountNumber,
+    autoPay: true,
+    crmId,
+    currency: 'USD',
+    invoiceCollect: true,
+    name,
+    subscription: {
+      contractEffectiveDate,
+      subscribeToRatePlans: [{ productRatePlanId: billingId }],
+      termType: 'EVERGREEN'
+    },
+    creditCard,
+    billToContact
+  };
+
+  if (discountId) {
+    formatted.subscription.subscribeToRatePlans.push({ productRatePlanId: discountId });
+  }
+}

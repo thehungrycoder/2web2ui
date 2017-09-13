@@ -1,15 +1,9 @@
 import axios from 'axios';
 
-export default function namedFunc({ dispatch, getState }) {
-  return (next) => (action) => {
-    next(action);
-
-    if (action.type !== 'GENERAL_REQUEST') {
-      return;
-    }
-
-    const { meta } = action;
-    const { url, method = 'get', type = 'NO_TYPE_DEFINED', params, headers, data, onSuccess } = meta;
+export default function generalRequest(action) {
+  return (dispatch, getState) => {
+    const { type = 'NO_TYPE_DEFINED', meta } = action;
+    const { url, method = 'get', params, headers, data } = meta;
     const PENDING_TYPE = `${type}_PENDING`;
     const SUCCESS_TYPE = `${type}_SUCCESS`;
     const FAIL_TYPE = `${type}_FAIL`;
@@ -35,10 +29,7 @@ export default function namedFunc({ dispatch, getState }) {
         meta
       });
 
-      // if we need to chain together another action, do it here
-      if (typeof onSuccess === 'function') {
-        onSuccess({ dispatch, getState, results });
-      }
+      return results;
     }, ({ message, response = {}}) => {
         // TODO: dispatch API_FAILURE_RECEIVED instead?
       dispatch({
