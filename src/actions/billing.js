@@ -1,5 +1,6 @@
 import { formatDataForCors, formatCreateData } from './helpers/billing';
 import sparkpostApiRequest from 'actions/helpers/sparkpostApiRequest';
+import generalRequest from 'actions/helpers/generalRequest';
 
 const apiBase = 'https://apisandbox-api.zuora.com/rest/v1';
 
@@ -32,16 +33,15 @@ export function billingCreate(values) {
       const data = formatCreateData({ ...results, ...billingData });
 
       // TODO: Convert this to using a general request helper instead of middleware
-      dispatch({
-        type: 'GENERAL_REQUEST',
+      return dispatch(generalRequest({
+        type: 'ZUORA_CREATE',
         meta: {
-          type: 'ZUORA_CREATE',
           method: 'POST',
           url: `${apiBase}/accounts`,
           data,
           headers: { token, signature }
         }
-      });
+      }));
     });
   };
 }
