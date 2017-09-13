@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<Form>
+  <div>
+    <a
+      href="https://www.sparkpost.com"
+      title="SparkPost"
+    >
+      <Logo />
+    </a>
+  </div>
+  <t
+    accent={true}
+    sectioned={true}
+    title="Log In"
+  >
+    <form>
+      <t
+        autoFocus={true}
+        id="username"
+        label="Username or Email"
+        onChange={[Function]}
+        placeholder="Leslie Knope"
+        type="text"
+        value=""
+      />
+      <t
+        id="password"
+        label="Password"
+        onChange={[Function]}
+        placeholder="Your Password"
+        type="password"
+        value=""
+      />
+      <t
+        checked={false}
+        id="rememberMe"
+        label="Keep me logged in"
+        onChange={[Function]}
+      />
+      <t
+        onClick={[Function]}
+        primary={true}
+        size="default"
+        submit={true}
+      >
+        <span>
+          Log In
+        </span>
+      </t>
+    </form>
+  </t>
+</Form>
+`;

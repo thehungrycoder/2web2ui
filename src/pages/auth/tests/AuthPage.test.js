@@ -5,7 +5,7 @@ import { Button } from '@sparkpost/matchbox';
 
 import { AuthPage } from '../AuthPage';
 
-const props = {
+export const props = {
   auth: {
     loggedIn: false,
     loginPending: false
