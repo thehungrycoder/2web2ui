@@ -7,7 +7,6 @@ import classnames from 'classnames';
 import { refresh as refreshSummaryChart } from 'actions/summaryChart';
 import { addFilter, refreshTypeaheadCache } from 'actions/reportFilters';
 
-import { Page, Button, Panel, Tabs, Tooltip, Grid } from '@sparkpost/matchbox';
 import { Page, Panel, Tabs } from '@sparkpost/matchbox';
 import { Layout, Loading } from 'components';
 import Filters from '../components/Filters';
