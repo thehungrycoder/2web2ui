@@ -1,0 +1,237 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.navigation {
+  position: fixed;
+  width: rem(250);
+  z-index: 100;
+
+  transform: translate(-100%, 0);
+  transition: 0.2s;
+
+  @media screen and (min-width: breakpoint(medium)) {
+    width: rem(220);
+    transform: translate(0);
+  }
+
+  &.showNav {
+    transform: translate(0);
+    box-shadow: 10px 0px 30px rgba(#414146, 0.16)
+  }
+}
+
+.overlay {
+  display: block;
+  content: "";
+  position: fixed;
+  z-index: 99;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(color(gray, 3), 0.8);
+
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.3s;
+
+  &.showOverlay {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+.wrapper {
+  overflow-y: auto;
+  height: 100vh;
+  background: color(gray, 1);
+}
+
+.logo {
+  height: rem(30);
+  margin-bottom: spacing();
+  text-align: center;
+  opacity: 0.9;
+}
+
+.list, .nestedList, .footer {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.list {
+  min-height: 100%;
+  padding-bottom: rem(130);
+  margin-bottom: rem(-130);
+  padding-top: spacing(larger);
+}
+
+.link, .link:visited {
+  position: relative;
+  display: block;
+  padding: spacing() spacing(large);
+  color: color(gray, 5);
+
+  text-decoration: none;
+  border-bottom: none;
+  font-size: rem(14);
+  font-weight: 500;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  transition: 0.15s;
+
+  &:hover {
+    color: color(gray, 10);
+    cursor: pointer;
+
+    .chevron {
+      fill: color(gray, 10);
+    }
+
+    .icon {
+      fill: color(gray, 8);
+    }
+  }
+
+  &.isActive {
+    color: color(gray, 10);
+    background: color(gray, 2);
+
+    .icon {
+      fill: color(gray, 9);
+    }
+  }
+
+  &.hasChildren {
+    & + .nestedList {
+      display: none;
+    }
+  }
+
+  &.hasChildren.isOpen {
+    background: color(gray, 1);
+
+    .chevron {
+      transform: translate(0, -50%) rotate(-90deg);
+    }
+
+    & + .nestedList {
+      display: block;
+    }
+  }
+}
+
+.nestedList {
+  margin-bottom: spacing(small);
+}
+
+.nestedList .link {
+  padding: rem(12) spacing(large) rem(12) rem(54);
+}
+
+.iconWrapper {
+  display: inline-block;
+  width: rem(30);
+}
+
+.icon {
+  fill: color(gray, 4);
+  transition: 0.1s;
+}
+
+.chevron {
+  position: absolute;
+  top: 50%;
+  right: rem(15);
+  width: rem(24);
+  height: rem(24);
+  transform: translate(0, -50%);
+  fill: color(gray, 4);
+  transition: 0.1s;
+}
+
+// Open Trigger
+.bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 98;
+  display: block;
+  padding: rem(15) rem(18) rem(9);
+  background: color(gray, 2);
+
+  @media screen and (min-width: breakpoint(medium)) {
+    display: none;
+  }
+}
+
+.open {
+  position: relative;
+  display: inline-block;
+  padding: rem(18);
+  border-radius: border-radius();
+
+  &:hover {
+    cursor: pointer;
+
+    .hamburger, .hamburger:before, .hamburger:after {
+      background: color(gray, 10);
+    }
+  }
+}
+
+.close {
+  position: absolute;
+  left: 105%;
+  top: rem(14);
+  fill: color(gray, 10);
+
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.2s;
+
+  .showNav & {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+%hamburgerbar {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  height: 2px;
+  width: rem(30);
+  background: color(gray, 7);
+  border-radius: border-radius();
+  transition: 0.15s;
+}
+
+.hamburger {
+  @extend %hamburgerbar;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:before, &:after {
+    display: block;
+    content: "";
+    @extend %hamburgerbar;
+  }
+
+  &:before { top: -7px; }
+  &:after { top: 7px; }
+}
+
+.mobileLogo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  height: rem(36);
+  margin-top: rem(12);
+}

@@ -1,0 +1,31 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.ToggleBlock {
+  margin-bottom: spacing();
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.Label {
+  display: block;
+  margin-bottom: spacing(small);
+  padding-top: rem(7);
+  font-weight: 400;
+  font-size: rem(15);
+  line-height: rem(15);
+  color: color(gray, 2);
+}
+
+.ToggleWrapper {
+  text-align: right;
+}
+
+.Help {
+  padding-top: rem(3);
+  font-size: rem(13);
+  font-weight: 500;
+  line-height: rem(15);
+  color: color(gray, 4);
+}
