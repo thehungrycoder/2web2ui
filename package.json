@@ -4,11 +4,7 @@
   "private": true,
   "package-lock": false,
   "dependencies": {
-<<<<<<< HEAD
-    "@sparkpost/matchbox": "^1.4.6",
-=======
     "@sparkpost/matchbox": "^1.4.9",
->>>>>>> fd2c396... FAD-5288 Use template selector on published page, Update template store keys
     "axios": "^0.16.1",
     "chart.js": "^2.6.0",
     "classnames": "^2.2.5",
