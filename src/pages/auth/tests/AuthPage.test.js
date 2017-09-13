@@ -31,22 +31,19 @@ it('renders correctly', () => {
 });
 
 it('renders correctly when logging in', () => {
-  const auth = { loginPending: true };
-  wrapper = shallow(<AuthPage {...props} auth={auth} />);
+  wrapper.setProps({ auth: { loginPending: true }});
 
   expect(wrapper.find(Button).children()).toIncludeText('Logging In');
 });
 
 it('renders correctly when there is a login error', () => {
-  const auth = { errorDescription: 'uh oh!' };
-  wrapper = shallow(<AuthPage {...props} auth={auth} />);
+  wrapper.setProps({ auth: { errorDescription: 'uh oh!' }});
 
   expect(wrapper.find('.error')).toHaveText('uh oh!');
 });
 
 it('redirects when logged in', () => {
-  const auth = { loggedIn: true };
-  wrapper = shallow(<AuthPage {...props} auth={auth} />);
+  wrapper.setProps({ auth: { loggedIn: true }});
 
   expect(wrapper.find(Redirect)).toBePresent();
 });
