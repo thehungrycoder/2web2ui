@@ -7,9 +7,7 @@ import _ from 'lodash';
 import { listTemplates } from '../../actions/templates';
 
 // Components
-import Layout from '../../components/Layout/Layout';
-import TableCollection from '../../components/Collection/TableCollection';
-import ApiErrorBanner from '../../components/ApiErrorBanner';
+import { Layout, TableCollection, ApiErrorBanner } from 'components';
 import { Page } from '@sparkpost/matchbox';
 
 const CREATE_ACTION = {

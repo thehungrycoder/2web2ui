@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import Layout from '../../../components/Layout/Layout';
+import { Layout } from 'components';
 import { Page, Panel, Table, TextField, Button } from '@sparkpost/matchbox';
 import NameForm from './NameForm';
 

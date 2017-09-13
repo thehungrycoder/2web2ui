@@ -6,10 +6,8 @@ import { Link, withRouter } from 'react-router-dom';
 import { listWebhooks } from '../../actions/webhooks';
 
 // Components
-import Layout from '../../components/Layout/Layout';
+import { Layout, TableCollection, ApiErrorBanner } from 'components';
 import { Page } from '@sparkpost/matchbox';
-import TableCollection from '../../components/Collection/TableCollection';
-import ApiErrorBanner from '../../components/ApiErrorBanner';
 
 const columns = ['Name', 'ID', 'Target'];
 const getRowData = ({ id, name, target }) => {

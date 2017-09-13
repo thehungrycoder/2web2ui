@@ -6,8 +6,7 @@ import _ from 'lodash';
 import { getWebhook, deleteWebhook } from '../../actions/webhooks';
 
 // Components
-import Layout from '../../components/Layout/Layout';
-import DeleteModal from '../../components/DeleteModal/DeleteModal';
+import { Layout, DeleteModal } from 'components';
 import { Page, Tabs } from '@sparkpost/matchbox';
 import TestTab from './components/TestTab';
 import EditTab from './components/EditTab';

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Field } from 'redux-form';
 import { required } from 'helpers/validation';
-import { TextFieldWrapper, SelectWrapper, RadioGroup } from 'components/reduxFormWrappers';
+import { TextFieldWrapper, SelectWrapper, RadioGroup } from 'components';
 
 const BasicAuthFields = () => (
   <div>

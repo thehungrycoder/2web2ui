@@ -6,7 +6,7 @@ import { Field, reduxForm, change } from 'redux-form';
 // Components
 import { Panel } from '@sparkpost/matchbox';
 import ToggleBlock from './ToggleBlock';
-import { TextFieldWrapper } from 'components/reduxFormWrappers';
+import { TextFieldWrapper } from 'components';
 
 import styles from './FormEditor.module.scss';
 

@@ -6,7 +6,7 @@ import _ from 'lodash';
 
 import { Field, reduxForm } from 'redux-form';
 import { Button, Grid } from '@sparkpost/matchbox';
-import { TextFieldWrapper, SelectWrapper } from '../../../components/reduxFormWrappers';
+import { TextFieldWrapper, SelectWrapper } from 'components';
 
 const getCcYears = () => {
   const year = new Date().getFullYear();

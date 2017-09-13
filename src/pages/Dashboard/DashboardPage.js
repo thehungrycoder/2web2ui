@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { Page, Banner } from '@sparkpost/matchbox';
-import Layout from '../../components/Layout/Layout';
-import UsageReport from '../../components/UsageReport/UsageReport';
+import { Layout, UsageReport } from 'components';
 import Tutorial from './components/Tutorial';
 import EmailBanner from './components/EmailBanner';
 import UpgradeBanner from './components/UpgradeBanner';

@@ -6,7 +6,7 @@ import { reduxForm, formValueSelector } from 'redux-form';
 import { clear, create } from '../../actions/templates';
 
 // Components
-import Layout from '../../components/Layout/Layout';
+import { Layout } from 'components';
 import Form from './components/Form';
 import Editor from './components/Editor';
 import { Page, Grid } from '@sparkpost/matchbox';

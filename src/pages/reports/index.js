@@ -1,1 +1,5 @@
-export { default as SummaryReportPage } from './SummaryPage/SummaryPage.js';
+import SummaryPage from './summary/SummaryPage.js';
+
+export default {
+  SummaryPage: SummaryPage
+};

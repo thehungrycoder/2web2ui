@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 import { authenticate } from '../actions/auth';
 import { Redirect } from 'react-router-dom';
 
-import Layout from '../components/Layout/Layout';
-import SparkPost from '../components/SparkPost/SparkPost';
+import { Layout, SparkPost } from 'components';
 import { Panel, Button, TextField, Checkbox } from '@sparkpost/matchbox';
 
 import styles from './AuthPage.module.scss';

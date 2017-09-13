@@ -5,8 +5,8 @@ import _ from 'lodash';
 import { billingCreate, updateSubscription, getBillingCountries } from '../../actions/billing';
 import { getPlans } from '../../actions/account';
 
+import { Layout } from 'components';
 import UpgradeModal from './components/UpgradeModal';
-import Layout from '../../components/Layout/Layout';
 import { Page } from '@sparkpost/matchbox';
 import YourPlanPanel from './components/YourPlanPanel';
 

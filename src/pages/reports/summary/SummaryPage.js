@@ -9,8 +9,7 @@ import { refreshTypeaheadCache } from 'actions/reportFilters';
 import { getQueryFromOptions } from 'helpers/metrics';
 
 import { Page, Button, Panel, Tabs, Tooltip, Grid } from '@sparkpost/matchbox';
-import Layout from 'components/Layout/Layout';
-import { Loading } from 'components/Loading/Loading';
+import { Layout, Loading } from 'components';
 import Filters from '../components/Filters';
 import List from './components/List';
 import MetricsModal from './components/MetricsModal';
