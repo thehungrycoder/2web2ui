@@ -31,8 +31,9 @@ const AceWrapper = ({ input, meta: { touched, error }, ...rest }) => (
         displayIndentGuides: false
       }}
       editorProps={{ $blockScrolling: true }}
+      value={input.value}
+      onChange={input.onChange}
       {...rest}
-      {...input}
     />
     { touched && error ? <span className={styles.Error}>{ error }</span> : null }
   </div>
