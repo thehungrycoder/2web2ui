@@ -1,4 +1,8 @@
-const initialState = { list: null, listError: null };
+const initialState = {
+  list: [],
+  listError: null,
+  byId: {}
+};
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -17,7 +21,14 @@ export default (state = initialState, action) => {
       return { ...state, getLoading: true };
 
     case 'GET_DRAFT_TEMPLATE_SUCCESS':
-      return { ...state, draft: action.payload, getLoading: false };
+      return {
+        ...state,
+        byId: {
+          ...state.byId,
+          [action.payload.id]: { ...state.byId[action.payload.id], draft: action.payload }
+        },
+        getLoading: false
+      };
 
     case 'GET_DRAFT_TEMPLATE_FAIL':
       return { ...state, getLoading: false };
@@ -27,13 +38,17 @@ export default (state = initialState, action) => {
       return { ...state, getLoading: true };
 
     case 'GET_PUBLISHED_TEMPLATE_SUCCESS':
-      return { ...state, published: action.payload, getLoading: false };
+      return {
+        ...state,
+        byId: {
+          ...state.byId,
+          [action.payload.id]: { ...state.byId[action.payload.id], published: action.payload }
+        },
+        getLoading: false
+      };
 
     case 'GET_PUBLISHED_TEMPLATE_FAIL':
       return { ...state, getLoading: false };
-
-    case 'CLEAR_TEMPLATE':
-      return { ...state, draft: null, published: null };
 
     default:
       return state;

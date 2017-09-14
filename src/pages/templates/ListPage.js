@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import _ from 'lodash';
 
 // Actions
@@ -56,9 +56,10 @@ class ListPage extends Component {
     const { loading, error } = this.props;
 
     // No Templates (not error case)
-    if (!loading && templatesCount === 0) {
-      return <Redirect to="/templates/create" />;
-    }
+    // This is broken on a hard refresh
+    // if (!loading && templatesCount === 0) {
+    //   return <Redirect to="/templates/create" />;
+    // }
 
     return (
       <Layout.App loading={loading}>

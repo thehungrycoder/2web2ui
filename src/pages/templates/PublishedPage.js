@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
+
 // Actions
-import {
-  getPublished,
-  clear
-} from '../../actions/templates';
+import { getPublished } from '../../actions/templates';
+
+// Selectors
+import { templateById } from 'selectors/templates';
 
 // Components
 import { Layout } from 'components';
@@ -21,14 +22,8 @@ class PublishedPage extends Component {
     shouldRedirectToPublished: false
   };
 
-  componentDidMount() {
-    const {
-      match,
-      getPublished,
-      clear
-    } = this.props;
-
-    clear();
+  componentWillMount() {
+    const { match, getPublished } = this.props;
     getPublished(match.params.id);
   }
 
@@ -81,17 +76,14 @@ class PublishedPage extends Component {
   }
 }
 
-const mapStateToProps = ({ templates }) => ({
+const mapStateToProps = ({ templates }, { match }) => ({
   loading: templates.getLoading,
-  published: templates.published,
-  initialValues: templates.published
+  initialValues: templateById(templates, match.params.id).published
 });
+
 const formOptions = {
   form: FORM_NAME,
   enableReinitialize: true // required to update initial values from redux state
 };
 
-export default connect(mapStateToProps, {
-  getPublished,
-  clear
-})(reduxForm(formOptions)(PublishedPage));
+export default connect(mapStateToProps, { getPublished })(reduxForm(formOptions)(PublishedPage));
