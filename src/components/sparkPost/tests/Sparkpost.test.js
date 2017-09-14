@@ -1,6 +1,7 @@
 import React from 'react';
 import SparkPost from '../SparkPost';
 import cases from 'jest-in-case';
+import { render } from 'enzyme';
 
 describe('SparkPost Component', () => {
   // type doesn't actually change render output, passed in case it ever does.

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Table } from '@sparkpost/matchbox';
+import { shallow } from 'enzyme';
 
 import TableCollection from '../TableCollection';
 
