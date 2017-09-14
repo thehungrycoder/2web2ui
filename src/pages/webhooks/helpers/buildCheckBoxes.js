@@ -10,9 +10,9 @@ export default function(eventsTree) {
     const options = parent.events.map((child) => ({ label: child.label, value: child.key }));
 
     return (
-    <Grid.Column xs={2} lg={2} md={2} key={index}>
-      <Field parent={parent.label} name={parent.key} options={options} component={CheckboxGroup} />
-    </Grid.Column>
+      <Grid.Column xs={2} lg={2} md={2} key={index}>
+        <Field parent={parent.label} name={parent.key} options={options} component={CheckboxGroup} />
+      </Grid.Column>
     );
   });
 

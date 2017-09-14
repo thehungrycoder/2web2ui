@@ -29,24 +29,24 @@ export default (state = initialState, action) => {
     /* CREATE */
 
     case 'CREATE_WEBHOOK_PENDING':
-      return { ...state, webhook: {}};
+      return { ...state, webhook: {}, createError: null };
 
     case 'CREATE_WEBHOOK_SUCCESS':
       return { ...state, webhook: { id: action.payload.id }};
 
     case 'CREATE_WEBHOOK_FAIL':
-      return { ...state, webhook: {}};
+      return { ...state, webhook: {}, createError: action.payload };
 
     /* UPDATE */
 
     case 'UPDATE_WEBHOOK_PENDING':
-      return { ...state, updateLoading: true };
+      return { ...state, updateLoading: true, updateError: null, updateSuccess: null };
 
     case 'UPDATE_WEBHOOK_SUCCESS':
       return { ...state, updateSuccess: true, updateLoading: false };
 
     case 'UPDATE_WEBHOOK_FAIL':
-      return { ...state, updateLoading: false };
+      return { ...state, updateLoading: false, updateError: action.payload };
 
     /* DELETE */
 

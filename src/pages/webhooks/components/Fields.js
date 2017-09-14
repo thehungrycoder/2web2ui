@@ -1,7 +1,9 @@
 import React from 'react';
 import { Field } from 'redux-form';
-import { required } from 'helpers/validation';
+import { required, maxLength } from 'helpers/validation';
 import { TextFieldWrapper, SelectWrapper, RadioGroup } from 'components';
+
+const maxLength24 = maxLength(24);
 
 const BasicAuthFields = () => (
   <div>
@@ -24,9 +26,19 @@ const NameField = () => (
   <Field
     name='name'
     component={TextFieldWrapper}
-    validate={required}
+    validate={[required, maxLength24]}
     label='Webhook Name'
-    placeholder='Opens and Clicks'
+    placeholder='e.g. My Opens and Clicks Webhook'
+  />
+);
+
+const TargetField = () => (
+  <Field
+    name='target'
+    component={TextFieldWrapper}
+    validate={required}
+    label='Target'
+    placeholder='https://example.com/webhook-target'
   />
 );
 
@@ -54,6 +66,7 @@ const AuthDropDown = () => (
 
 export {
   NameField,
+  TargetField,
   EventsRadioGroup,
   AuthDropDown,
   BasicAuthFields,

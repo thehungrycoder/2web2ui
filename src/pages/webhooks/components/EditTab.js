@@ -22,8 +22,8 @@ class EditTab extends Component {
       showBanner: false
     };
 
-    this.buildEventsTree = _.once(buildEventsTree);
-    this.getAllEvents = _.once(this.getAllEvents);
+    this.buildEventsTree = _.memoize(buildEventsTree);
+    this.getAllEvents = _.memoize(this.getAllEvents);
   }
 
   /*
@@ -36,33 +36,28 @@ class EditTab extends Component {
   }
 
   /*
-   Gets webhook if updated, then resets updated to false
-   and sets showBanner.
-  */
-  componentDidUpdate() {
-    if (this.state.updated) {
-      this.props.getWebhook(this.props.id);
-      this.setState({ updated: false, showBanner: true });
-    }
-  }
-
-  /*
     Passed as onSubmit to WebhookForm. Figures out what updates need to be passed
     to the updateWebhook action.
   */
-  updateWebhook(values, webhook, allEvents) {
+  handleSubmit = (values, webhook, allEvents) => {
     const update = prepareWebhookUpdate(values, webhook, allEvents);
 
     if (Object.keys(update).length !== 0) {
-      return this.props.updateWebhook(webhook.id, update).then(() => {
-        this.setState({ updated: true });
-      });
+      return this.props.updateWebhook(webhook.id, update)
+        .then(() => {
+          this.setState({ showBanner: true });
+          this.props.getWebhook(webhook.id);
+        })
+        .catch((err) => {
+          this.setState({ showBanner: true });
+          throw err;
+        });
     }
   }
 
   /*
     Makes an array with all possible events from the eventsTree.
-    Bound to a _.once in constructor
+    Memoized in constructor to limit unnecessary work
   */
   getAllEvents(eventsTree) {
     return _.flatten(_.map(eventsTree, ({ events }) => _.map(events, ({ key }) => (key))));
@@ -76,11 +71,13 @@ class EditTab extends Component {
     Renders a banner based on whether the update succeded or failed
     TODO: Make a global wrapper for banner that behaves like this.
   */
-  renderBanner = (updateSuccess) => {
+  renderBanner = () => {
+    const { updateSuccess, updateError } = this.props;
     const title = updateSuccess ? 'Update Successful' : 'Update Failed';
     const status = updateSuccess ? 'success' : 'danger';
+    const message = _.get(updateError, 'response.data.errors[0].message', null);
 
-    return <Banner title={title} status={status} onDismiss={this.dismissBanner}/>;
+    return <Banner title={title} status={status} onDismiss={this.dismissBanner}>{message}</Banner>;
   }
 
   render() {
@@ -107,10 +104,10 @@ class EditTab extends Component {
 
     return (
       <Panel sectioned>
-        { showBanner && this.renderBanner(this.props.updateSuccess) }
+        {showBanner && this.renderBanner()}
         <Panel.Section>
           {eventsLoading ? 'Loading...' : (
-            <WebhookForm eventsTree={eventsTree} allChecked={allChecked} newWebhook={false} checkedEvents={checkedEvents} onSubmit={(values) => this.updateWebhook(values, webhook, allEvents)}/>
+            <WebhookForm eventsTree={eventsTree} allChecked={allChecked} newWebhook={false} checkedEvents={checkedEvents} onSubmit={(values) => this.handleSubmit(values, webhook, allEvents)}/>
           )}
         </Panel.Section>
       </Panel>
@@ -118,11 +115,12 @@ class EditTab extends Component {
   }
 }
 
-const mapStateToProps = ({ webhooks }) => ({
+const mapStateToProps = ({ webhooks, form }) => ({
   webhook: webhooks.webhook,
   eventsLoading: webhooks.docsLoading,
   eventDocs: webhooks.docs,
-  updateSuccess: webhooks.updateSuccess
+  updateSuccess: webhooks.updateSuccess,
+  updateError: webhooks.updateError
 });
 
 export default withRouter(connect(mapStateToProps, { getWebhook, getEventDocs, updateWebhook })(EditTab));

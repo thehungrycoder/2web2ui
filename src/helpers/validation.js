@@ -7,25 +7,27 @@ const regex = {
   domain: /^(?!:\/\/)([a-z0-9-]+\.)*[a-z0-9][a-z0-9-]+\.[a-z]{2,63}$/i
 };
 
-function required(value) {
+export function required(value) {
   return value ? undefined : 'Required';
 }
 
-function email(value) {
+export function email(value) {
   return regex.email.test(value) ? undefined : 'Invalid Email';
 }
 
-function emailLocal(value) {
+export function emailLocal(value) {
   return regex.emailLocal.test(value) ? undefined : 'Invalid Email';
 }
 
-function domain(value) {
+export function domain(value) {
   return regex.domain.test(value) ? undefined : 'Invalid Domain';
 }
 
-export {
-  required,
-  email,
-  emailLocal,
-  domain
-};
+// Note: for some wild reason you have to call this function and store the resulting validator
+// function in a variable that you pass to redux form or else it doesn't work :mindblown: :why:
+// ex.
+// const maxLength24 = maxLength(24)
+// validate={maxLength24} <-- calling maxLength here doesn't work! i know!
+export function maxLength(length) {
+  return (value) => (value && value.length > length) ? `Must be ${length} characters or less` : undefined;
+}
