@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -36,15 +35,17 @@ class SummaryReportPage extends Component {
     let options = {};
 
     if (location.search) {
-      const { from, to, metrics = [], filters = [] } = qs.parse(location.search);
+      const { from, to, metrics = [], filters = []} = qs.parse(location.search);
 
       // Checks if there is only one metric/filter
-      const metricsList = typeof metrics === 'string' ? [metrics] : [...metrics];
-      const filtersList = typeof filters === 'string' ? [filters] : [...filters];
+      const metricsList = typeof metrics === 'string' ? [metrics] : metrics;
+      const filtersList = typeof filters === 'string' ? [filters] : filters;
 
       filtersList.forEach((filter) => {
-        const parts = filter.split(',');
-        addFilter({ value: parts[0], type: parts[1] });
+        const parts = filter.split(':');
+        const type = parts.shift();
+        const value = parts.join(':');
+        addFilter({ value, type });
       });
 
       options = {
@@ -91,12 +92,12 @@ class SummaryReportPage extends Component {
       from: moment(filters.from).utc().format(),
       to: moment(filters.to).utc().format(),
       metrics: chart.metrics.map((metric) => metric.key),
-      filters: filters.activeList.map((filter) => `${filter.value},${filter.type}`)
+      filters: filters.activeList.map((filter) => `${filter.type}:${filter.value}`)
     };
 
     const search = `?${qs.stringify(options, { encode: false })}`;
     this.setState({ link: `${window.location.href.split('?')[0]}${search}` });
-    history.replace({ pathname: '/reports/summary', search  })
+    history.replace({ pathname: '/reports/summary', search });
   }
 
   render() {
