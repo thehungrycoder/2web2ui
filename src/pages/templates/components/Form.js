@@ -1,40 +1,35 @@
 import React, { Component } from 'react';
-import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { Field, reduxForm, change } from 'redux-form';
+import { Field, change } from 'redux-form';
 
 // Components
 import { Panel } from '@sparkpost/matchbox';
 import ToggleBlock from './ToggleBlock';
 import { TextFieldWrapper } from 'components';
 
+// Helpers & Validation
+import { required } from 'helpers/validation';
+import { slugify } from 'helpers/string';
+import { ID_ALLOWED_CHARS, idSyntax, emailOrSubstitution, verifiedDomain } from './validation';
+
 import styles from './FormEditor.module.scss';
-
-const ID_ALLOWED_CHARS = 'a-z0-9_-';
-
-// TODO move this into shared helpers
-const slugify = (value) => value
-    .replace(/([a-z])([A-Z])/g, '$1-$2')
-    .replace(/_/g, '-')
-    .replace(/\s+/g, '-')
-    .toLowerCase();
 
 class Form extends Component {
   // Fills in ID based on Name
-  handleIdFill(e) {
-    const { newTemplate, change } = this.props;
+  handleIdFill = (e) => {
+    const { newTemplate, change, name } = this.props;
     if (!newTemplate) {
       return;
     }
 
     const idValue = slugify(e.target.value).replace(new RegExp(`[^${ID_ALLOWED_CHARS}]`, 'g'), '');
-    change('id', idValue);
+    change(name, 'id', idValue);
   }
 
   componentDidMount() {
-    const { change, newTemplate } = this.props;
+    const { change, newTemplate, name } = this.props;
     if (newTemplate) { // TODO update to reflect sending domains
-      change('content.from.email', 'sandbox@sparkpostbox.com');
+      change(name, 'content.from.email', 'sandbox@sparkpostbox.com');
     }
   }
 
@@ -48,8 +43,9 @@ class Form extends Component {
             name='name'
             component={TextFieldWrapper}
             label='Template Name'
-            onChange={(e) => this.handleIdFill(e)}
+            onChange={this.handleIdFill}
             disabled={published}
+            validate={required}
           />
 
           <Field
@@ -58,6 +54,7 @@ class Form extends Component {
             label='Template ID'
             helpText={'A Unique ID for your template, we\'ll fill this in for you.'}
             disabled={!newTemplate || published}
+            validate={[required, idSyntax]}
           />
         </Panel.Section>
 
@@ -74,7 +71,8 @@ class Form extends Component {
             name='content.from.email'
             component={TextFieldWrapper}
             label='From Email'
-            disabled={newTemplate || published}
+            disabled={newTemplate || published} // TODO check for sending domains
+            validate={[required, emailOrSubstitution, verifiedDomain]}
           />
 
           <Field
@@ -83,6 +81,7 @@ class Form extends Component {
             label='Reply To'
             helpText='An email address recipients can reply to.'
             disabled={published}
+            validate={emailOrSubstitution}
           />
 
           <Field
@@ -90,6 +89,7 @@ class Form extends Component {
             component={TextFieldWrapper}
             label='Subject'
             disabled={published}
+            validate={required}
           />
 
           <Field
@@ -137,10 +137,4 @@ class Form extends Component {
   }
 }
 
-const mapStateToProps = (state, { name }) => ({ form: name });
-const formOptions = {};
-
-export default compose(
-  connect(mapStateToProps, { change }),
-  reduxForm(formOptions)
-)(Form);
+export default connect(null, { change })(Form);
