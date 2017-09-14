@@ -35,7 +35,7 @@ export function refresh(updates = {}) {
     const params = getQueryFromOptions(options);
 
     // get new data
-    dispatch(fetchMetrics({ path: 'deliverability/time-series', params }))
+    return dispatch(fetchMetrics({ path: 'deliverability/time-series', params }))
       .then((results) => {
 
         // refresh the chart with the new data
