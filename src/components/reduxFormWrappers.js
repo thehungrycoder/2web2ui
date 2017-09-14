@@ -5,8 +5,8 @@ import { TextField, Select, Radio } from '@sparkpost/matchbox';
  Wrapped matchbox components for use with react-redux Field components
 */
 
-export const TextFieldWrapper = ({ input, meta: { touched, error }, ...rest }) => (
-  <TextField id={input.name} {...rest} {...input} error={touched && error ? error : undefined} />
+export const TextFieldWrapper = ({ input, meta: { active, touched, error }, ...rest }) => (
+  <TextField id={input.name} {...rest} {...input} error={!active && touched && error ? error : undefined} />
 );
 
 export const SelectWrapper = ({ input, meta: { error }, ...rest }) => (
