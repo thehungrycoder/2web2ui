@@ -1,0 +1,12 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+
+.Hidden {
+  @include visually-hidden;
+}
+
+.Copied {
+  float: right;
+  font-weight: 500;
+  line-height: rem(14);
+}

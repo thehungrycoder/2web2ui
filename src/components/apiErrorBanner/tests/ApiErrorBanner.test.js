@@ -1,6 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
-import ApiErrorBanner from '../index';
+import ApiErrorBanner from '../ApiErrorBanner';
 
 describe('ApiErrorBanner Component', () => {
   const props = {

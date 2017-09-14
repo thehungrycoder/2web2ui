@@ -1,3 +1,6 @@
+// SparkPost metric colors
+// colors = ['#37aadc', '#9bcd5a', '#b70c9e', '#e3af00', '#6D39A1']
+
 const config = {
   apiBase: 'no-default-set',
   apiDateFormat: 'YYYY-MM-DDTHH:mm',
