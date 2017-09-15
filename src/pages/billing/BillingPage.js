@@ -1,23 +1,27 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
+import { Page } from '@sparkpost/matchbox';
 
-import { billingCreate, updateSubscription, getBillingCountries } from '../../actions/billing';
-import { getPlans } from '../../actions/account';
+import {
+  billingCreate,
+  updateSubscription,
+  getBillingCountries
+} from 'actions/billing';
+import { getPlans } from 'actions/account';
 
 import { Layout } from 'components';
 import UpgradeModal from './components/UpgradeModal';
-import { Page } from '@sparkpost/matchbox';
 import YourPlanPanel from './components/YourPlanPanel';
 
-class BillingPage extends Component {
+export class BillingPage extends Component {
   state = {
     showUpgradeModal: false
-  }
+  };
 
   togglePlansModal = () => {
     this.setState({ showUpgradeModal: !this.state.showUpgradeModal });
-  }
+  };
 
   componentDidMount() {
     if (!this.props.billing.plans) {
@@ -36,15 +40,22 @@ class BillingPage extends Component {
     } else {
       this.props.billingCreate(values);
     }
-  }
+  };
 
   renderBilling(account, billing) {
     // TODO: move billing reducer into account reducer to have access to account
     //       and do all this in there. Or....SELECTORS
-    const currentPlan = _.find(billing.plans, { 'code': account.subscription.code });
-    const publicPlans = _.filter(billing.plans, (plan) => plan.status === 'public');
+    const currentPlan = _.find(billing.plans, {
+      code: account.subscription.code
+    });
+    const publicPlans = _.filter(
+      billing.plans,
+      (plan) => plan.status === 'public'
+    );
 
-    const panelActions = [{ content: 'Change Plan', onClick: this.togglePlansModal }];
+    const panelActions = [
+      { content: 'Change Plan', onClick: this.togglePlansModal }
+    ];
 
     const { showUpgradeModal } = this.state;
 
@@ -62,7 +73,7 @@ class BillingPage extends Component {
     return (
       <div>
         <YourPlanPanel currentPlan={currentPlan} actions={panelActions} />
-        <UpgradeModal {...modalProps}/>
+        <UpgradeModal {...modalProps} />
       </div>
     );
   }
@@ -71,12 +82,15 @@ class BillingPage extends Component {
     const { account, billing } = this.props;
 
     // TODO: develop pending status for account reducer
-    const loading = Object.keys(account).length === 0 || billing.plansLoading || billing.countriesLoading;
+    const loading =
+      Object.keys(account).length === 0 ||
+      billing.plansLoading ||
+      billing.countriesLoading;
 
     return (
       <Layout.App loading={loading}>
-        <Page title='Billing'/>
-        { !loading && this.renderBilling(account, billing) }
+        <Page title="Billing" />
+        {!loading && this.renderBilling(account, billing)}
       </Layout.App>
     );
   }
@@ -88,4 +102,9 @@ const mapStateToProps = ({ account, billing, currentUser }) => ({
   currentUser
 });
 
-export default connect(mapStateToProps, { getPlans, getBillingCountries, billingCreate, updateSubscription })(BillingPage);
+export default connect(mapStateToProps, {
+  getPlans,
+  getBillingCountries,
+  billingCreate,
+  updateSubscription
+})(BillingPage);

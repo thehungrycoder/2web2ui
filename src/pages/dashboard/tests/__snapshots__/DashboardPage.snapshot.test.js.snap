@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<App>
+  <t
+    title="Control Panel"
+  />
+  <EmailBanner
+    handleResend={[Function]}
+    sendingStatus={null}
+  />
+  <Connect(UsageReport) />
+  <t
+    status="default"
+    title="Hey! We noticed you haven't imported a suppression list"
+  >
+    <p>
+      If you're coming from a previous provider, be sure to also 
+      <a>
+        import your suppressions
+      </a>
+      .
+    </p>
+  </t>
+  <Tutorial
+    currentUser={
+      Object {
+        "email_verified": true,
+      }
+    }
+  />
+</App>
+`;
+
+exports[`renders correctly when user is not verified 1`] = `
+<App>
+  <t
+    title="Control Panel"
+  />
+  <EmailBanner
+    handleResend={[Function]}
+    sendingStatus={null}
+  />
+  <Connect(UsageReport) />
+  <t
+    status="default"
+    title="Hey! We noticed you haven't imported a suppression list"
+  >
+    <p>
+      If you're coming from a previous provider, be sure to also 
+      <a>
+        import your suppressions
+      </a>
+      .
+    </p>
+  </t>
+  <Tutorial
+    currentUser={
+      Object {
+        "email_verfied": false,
+      }
+    }
+  />
+</App>
+`;

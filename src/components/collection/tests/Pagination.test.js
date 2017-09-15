@@ -1,6 +1,7 @@
 import React from 'react';
 import CollectionPagination from '../Pagination';
 import _ from 'lodash';
+import { shallow } from 'enzyme';
 
 describe('Collection Pagination Component', () => {
   const props = {

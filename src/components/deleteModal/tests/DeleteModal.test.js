@@ -1,5 +1,6 @@
 import React from 'react';
 import DeleteModal from '../DeleteModal';
+import { shallow } from 'enzyme';
 
 describe('DeleteModal Component', () => {
   const props = {
