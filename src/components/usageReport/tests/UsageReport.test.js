@@ -1,6 +1,7 @@
 import React from 'react';
 import cases from 'jest-in-case';
 import _ from 'lodash';
+import { shallow } from 'enzyme';
 
 import { UsageReport } from '../UsageReport';
 

@@ -2,6 +2,7 @@ import React from 'react';
 import CheckboxGroup from '../CheckboxGroup';
 import { Checkbox } from '@sparkpost/matchbox';
 import _ from 'lodash';
+import { shallow } from 'enzyme';
 
 const baseProps = {
   input: {

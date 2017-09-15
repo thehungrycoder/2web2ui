@@ -1,6 +1,6 @@
 import React from 'react';
 import { Loading, LoadingLogo } from '../Loading';
-
+import { render } from 'enzyme';
 
 describe('Loading Component', () => {
 

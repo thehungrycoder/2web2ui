@@ -1,5 +1,6 @@
 import React from 'react';
 import { GlobalError } from '../GlobalError';
+import { mount, shallow } from 'enzyme';
 
 describe('GlobalError', () => {
   const props = {
