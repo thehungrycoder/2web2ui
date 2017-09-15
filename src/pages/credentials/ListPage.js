@@ -19,7 +19,7 @@ const getRowData = (key) => [
   <PermissionsColumn grants={key.grants} />
 ];
 
-class ListPage extends Component {
+export class ListPage extends Component {
   componentDidMount() {
     this.props.fetchApiKeys();
   }
