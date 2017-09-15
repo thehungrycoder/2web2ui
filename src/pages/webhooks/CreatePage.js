@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import _ from 'lodash';
 
 // Actions
@@ -12,6 +12,8 @@ import { Page, Panel } from '@sparkpost/matchbox';
 import WebhookForm from './components/WebhookForm';
 
 class WebhooksCreate extends Component {
+  state = {}
+
   componentDidMount() {
     if (!this.props.eventDocs) {
       this.props.getEventDocs();
@@ -65,7 +67,7 @@ class WebhooksCreate extends Component {
         break;
     }
 
-    return this.props.createWebhook(webhook);
+    return this.props.createWebhook(webhook).then(() => this.setState({ redirectTo: '/webhooks' }));
   }
 
   /*
@@ -86,6 +88,12 @@ class WebhooksCreate extends Component {
   }
 
   render() {
+    const { redirectTo } = this.state;
+
+    if (redirectTo) {
+      return <Redirect to={redirectTo} />;
+    }
+
     const { eventsLoading } = this.props;  // Form doesn't load until we have events
     const { eventDocs } = this.props;
     const eventsTree = this.buildEventsData(eventDocs);

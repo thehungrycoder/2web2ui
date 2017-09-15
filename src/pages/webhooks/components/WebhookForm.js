@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { reduxForm, formValueSelector } from 'redux-form';
 import { Button } from '@sparkpost/matchbox';
 import { Redirect } from 'react-router-dom';
-import { NameField, EventsRadioGroup, AuthDropDown, BasicAuthFields, OAuth2Fields } from './Fields';
+import { NameField, TargetField, EventsRadioGroup, AuthDropDown, BasicAuthFields, OAuth2Fields } from './Fields';
 import formatEditValues from '../helpers/formatEditValues';
 import buildCheckBoxes from '../helpers/buildCheckBoxes';
 
@@ -34,6 +34,7 @@ let WebhookForm = (props) => {
   return (
     <form onSubmit={handleSubmit}>
       <NameField />
+      <TargetField />
       <EventsRadioGroup />
       { showEvents && eventBoxes }
 
