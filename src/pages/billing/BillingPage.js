@@ -35,12 +35,14 @@ export class BillingPage extends Component {
 
   // Submit function given to CreditCardForm
   updatePlan = (values) => {
+    let request;
     if (this.props.account.billing) {
-      this.props.updateSubscription(values.selectedPlan.code);
+      request = this.props.updateSubscription(values.selectedPlan.code);
     } else {
-      this.props.billingCreate(values);
+      request = this.props.billingCreate(values);
     }
-  };
+    request.then(() => this.setState({ showUpgradeModal: false }));
+  }
 
   renderBilling(account, billing) {
     // TODO: move billing reducer into account reducer to have access to account

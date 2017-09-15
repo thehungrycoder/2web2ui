@@ -91,4 +91,6 @@ export function formatCreateData({
   if (discountId) {
     formatted.subscription.subscribeToRatePlans.push({ productRatePlanId: discountId });
   }
+
+  return formatted;
 }

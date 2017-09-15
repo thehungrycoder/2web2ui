@@ -3,8 +3,6 @@ import { Field } from 'redux-form';
 import { required, maxLength } from 'helpers/validation';
 import { TextFieldWrapper, SelectWrapper, RadioGroup } from 'components';
 
-const maxLength24 = maxLength(24);
-
 const BasicAuthFields = () => (
   <div>
   Basic Auth
@@ -26,7 +24,7 @@ const NameField = () => (
   <Field
     name='name'
     component={TextFieldWrapper}
-    validate={[required, maxLength24]}
+    validate={[required, maxLength(24)]}
     label='Webhook Name'
     placeholder='e.g. My Opens and Clicks Webhook'
   />
