@@ -1,3 +1,3 @@
-import Page from './Page';
+import ListPage from './ListPage';
 
-export default { Page };
+export default { ListPage };

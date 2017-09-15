@@ -4,9 +4,9 @@ import { Page } from '@sparkpost/matchbox';
 
 import { fetchApiKeys } from 'actions/credentials';
 
-import ApiErrorBanner from 'components/ApiErrorBanner';
-import TableCollection from 'components/Collection/TableCollection';
-import Layout from 'components/Layout/Layout';
+import ApiErrorBanner from 'components/apiErrorBanner/ApiErrorBanner';
+import TableCollection from 'components/collection/TableCollection';
+import Layout from 'components/layout/Layout';
 import PermissionsColumn from './components/PermissionsColumn';
 
 const COLUMNS = ['Name', 'Key', 'Permissions'];
@@ -19,7 +19,7 @@ const getRowData = (key) => [
   <PermissionsColumn grants={key.grants} />
 ];
 
-class CredentialsPage extends Component {
+class ListPage extends Component {
   componentDidMount() {
     this.props.fetchApiKeys();
   }
@@ -67,4 +67,4 @@ const mapStateToProps = (state) => ({
   loading: state.credentials.loadingKeys
 });
 
-export default connect(mapStateToProps, { fetchApiKeys })(CredentialsPage);
+export default connect(mapStateToProps, { fetchApiKeys })(ListPage);

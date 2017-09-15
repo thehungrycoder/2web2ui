@@ -1,16 +1,17 @@
+import sparkpostApiRequest from './helpers/sparkpostApiRequest';
+
 export function fetchApiKeys() {
   return (dispatch, getState) => {
     if (getState().credentials.keys.length) {
       return;
     }
 
-    dispatch({
-      type: 'SPARKPOST_API_REQUEST',
+    return dispatch(sparkpostApiRequest({
+      type: 'FETCH_API_KEYS',
       meta: {
-        type: 'FETCH_API_KEYS',
         method: 'GET',
         url: '/api-keys'
       }
-    });
+    }));
   };
 }
