@@ -1,4 +1,4 @@
-import requestFactory from './requestFactory';
+import requestHelperFactory from './requestHelperFactory';
 import config from 'config/index';
 import { refresh, logout } from 'actions/auth';
 import { received } from 'actions/apiFailure';
@@ -21,7 +21,7 @@ function redispatchAfterRefresh(action) {
   return resolveOnCondition(() => !refreshing).then(() => sparkpostRequest(action));
 }
 
-const sparkpostRequest = requestFactory({
+const sparkpostRequest = requestHelperFactory({
   request: sparkpostAxios,
   transformHttpOptions: (options, getState) => {
     const { auth } = getState();

@@ -1,3 +1,3 @@
-import requestFactory from './requestFactory';
+import requestHelperFactory from './requestHelperFactory';
 
-export default requestFactory();
+export default requestHelperFactory();

@@ -18,8 +18,6 @@ function defaultOnFail({ types, err, dispatch, meta, action }) {
     payload: { message, response },
     meta
   });
-
-  return { error: true };
 }
 
 export default function requestFactory({
@@ -60,19 +58,8 @@ export default function requestFactory({
         // request failed
         (err) => {
           onFail({ types, err, dispatch, meta, action, getState });
-          err.handled = true;
           throw err;
         }
-      )
-      .catch((err) => {
-        // this is an HTTP rejection but we usually won't care because we "handled" it
-        // by dispatching a fail action ... but for chaining we need to re-throw those errors in
-        // case we want to catch and do something else on error later...
-
-        // check for handled prop that tells us we know about this error, and if not there, re-throw
-        if (!err.handled) {
-          throw err;
-        }
-      });
+      );
   };
 }

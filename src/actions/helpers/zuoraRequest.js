@@ -1,5 +1,5 @@
 import config from 'config/index';
-import requestFactory from './requestFactory';
+import requestHelperFactory from './requestHelperFactory';
 import axios from 'axios';
 import _ from 'lodash';
 
@@ -8,7 +8,7 @@ const zuoraRequest = axios.create({
   timeout: config.zuora.timeout
 });
 
-export default requestFactory({
+export default requestHelperFactory({
   request: zuoraRequest,
   onSuccess: ({ types, response, dispatch, meta }) => {
     if (!response.success) {
