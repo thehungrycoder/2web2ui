@@ -89,8 +89,13 @@ exports[`should render NameField 1`] = `
   component={[Function]}
   label="Webhook Name"
   name="name"
-  placeholder="Opens and Clicks"
-  validate={[Function]}
+  placeholder="e.g. My Opens and Clicks Webhook"
+  validate={
+    Array [
+      [Function],
+      [Function],
+    ]
+  }
 />
 `;
 
