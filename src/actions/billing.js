@@ -1,8 +1,17 @@
-import { formatDataForCors, formatCreateData } from './helpers/billing';
+import { formatDataForCors, formatCreateData } from 'helpers/billing';
+import { fetch as fetchAccount } from './account';
 import sparkpostApiRequest from 'actions/helpers/sparkpostApiRequest';
-import generalRequest from 'actions/helpers/generalRequest';
+import zuoraRequest from 'actions/helpers/zuoraRequest';
 
-const apiBase = 'https://apisandbox-api.zuora.com/rest/v1';
+export function syncSubscription() {
+  return sparkpostApiRequest({
+    type: 'SYNC_SUBSCRIPTION',
+    meta: {
+      method: 'POST',
+      url: '/account/subscription/check'
+    }
+  });
+}
 
 export function updateSubscription(code) {
   return sparkpostApiRequest({
@@ -15,35 +24,50 @@ export function updateSubscription(code) {
   });
 }
 
+export function corsCreate(data) {
+  return sparkpostApiRequest({
+    type: 'CORS_CREATE',
+    meta: {
+      method: 'POST',
+      url: '/account/cors-data',
+      params: { context: 'create-account' },
+      data
+    }
+  });
+}
+
+export function createZuoraAccount({ data, token, signature }) {
+  return zuoraRequest({
+    type: 'ZUORA_CREATE',
+    meta: {
+      method: 'POST',
+      url: '/accounts',
+      data,
+      headers: { token, signature }
+    }
+  });
+}
+
 export function billingCreate(values) {
   const { corsData, billingData } = formatDataForCors(values);
 
-  return (dispatch) => {
-    dispatch(sparkpostApiRequest({
-      type: 'CORS_CREATE',
-      meta: {
-        method: 'POST',
-        url: '/account/cors-data',
-        params: { context: 'create-account' },
-        data: corsData
-      }
-    }))
+  return (dispatch) =>
+
+    // get CORS data for the create account context
+    dispatch(corsCreate(corsData))
+
+    // create the Zuora account
     .then((results) => {
       const { token, signature } = results;
       const data = formatCreateData({ ...results, ...billingData });
+      return dispatch(createZuoraAccount({ data, token, signature }));
+    })
 
-      // TODO: Convert this to using a general request helper instead of middleware
-      return dispatch(generalRequest({
-        type: 'ZUORA_CREATE',
-        meta: {
-          method: 'POST',
-          url: `${apiBase}/accounts`,
-          data,
-          headers: { token, signature }
-        }
-      }));
-    });
-  };
+    // sync our db with new Zuora state
+    .then(() => dispatch(syncSubscription()))
+
+    // refetch the account
+    .then(() => dispatch(fetchAccount()));
 }
 
 export function getBillingCountries() {

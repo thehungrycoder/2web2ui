@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 const regex = {
   email: /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i,
   emailLocal: /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+$/i,
@@ -23,11 +25,6 @@ export function domain(value) {
   return regex.domain.test(value) ? undefined : 'Invalid Domain';
 }
 
-// Note: for some wild reason you have to call this function and store the resulting validator
-// function in a variable that you pass to redux form or else it doesn't work :mindblown: :why:
-// ex.
-// const maxLength24 = maxLength(24)
-// validate={maxLength24} <-- calling maxLength here doesn't work! i know!
-export function maxLength(length) {
+export const maxLength = _.memoize(function maxLength(length) {
   return (value) => (value && value.length > length) ? `Must be ${length} characters or less` : undefined;
-}
+});

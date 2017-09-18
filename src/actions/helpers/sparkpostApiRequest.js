@@ -1,116 +1,108 @@
-/**
- * Creates "actions" for a SparkPost API request, dispatching
- * the 3 necessary actions for each request.
- */
-
-import _ from 'lodash';
+import requestHelperFactory from 'actions/helpers/requestHelperFactory';
+import config from 'config/index';
 import { refresh, logout } from 'actions/auth';
 import { received } from 'actions/apiFailure';
-import { sparkpostRequest, useRefreshToken } from 'helpers/http';
+import { useRefreshToken } from 'helpers/http';
 import { resolveOnCondition } from 'helpers/promise';
+import _ from 'lodash';
+import { sparkpost as sparkpostAxios } from './axiosInstances';
 
 const maxRefreshRetries = 3;
-let refreshing = false;
 const refreshTokensUsed = new Set();
+let refreshing = false;
 
 // Re-dispatches a given action after we finish refreshing the auth token
 function redispatchAfterRefresh(action) {
-  return resolveOnCondition(() => !refreshing).then(() => sparkpostApiRequest(action));
+  return resolveOnCondition(() => !refreshing).then(() => sparkpostRequest(action));
 }
 
-export default function sparkpostApiRequest(action) {
-  return (dispatch, getState) => {
+const sparkpostRequest = requestHelperFactory({
+  request: sparkpostAxios,
+  transformHttpOptions: (options, getState) => {
     const { auth } = getState();
-    const { type = 'NO_TYPE_DEFINED', meta } = action;
-    const { url, method = 'get', params, headers, data, retries = 0 } = meta;
-    const PENDING_TYPE = `${type}_PENDING`;
-    const SUCCESS_TYPE = `${type}_SUCCESS`;
-    const FAIL_TYPE = `${type}_FAIL`;
-
+    const transformed = { ...options };
+    if (auth.loggedIn) {
+      _.set(transformed, 'headers.Authorization', auth.token);
+    }
+    return transformed;
+  },
+  onSuccess: ({ response, dispatch, types, meta }) => {
+    const { data: { results }} = response;
     dispatch({
-      type: PENDING_TYPE,
+      type: types.SUCCESS,
+      payload: results,
       meta
     });
 
-    const httpOptions = {
-      method: method.toLowerCase(),
-      url,
-      params,
-      headers,
-      data
-    };
+    return results;
+  },
+  onFail: ({ types, err, dispatch, meta, action, getState }) => {
+    const { message, response = {}} = err;
+    const { auth } = getState();
+    const { retries = 0 } = meta;
 
-    if (auth.loggedIn) {
-      _.set(httpOptions, 'headers.Authorization', auth.token);
-    }
+    // NOTE: if this is a 401 and we have a refresh token, we need to do a
+    // refresh to get a new auth token and then re-dispatch this action
+    if (response.status === 401 && auth.refreshToken && retries <= maxRefreshRetries) {
+      action.meta.retries = retries + 1;
 
-    // if we are currently refreshing our token, wait for refresh
-    // to complete and then re-dispatch the action so it uses new token
-    if (refreshing) {
-      return redispatchAfterRefresh(action);
-    }
+      // If we are currently refreshing the token OR if this refresh token
+      // has already been used to refresh, we should re-dispatch after refresh is complete
+      if (refreshing || refreshTokensUsed.has(auth.refreshToken)) {
+        return redispatchAfterRefresh(action);
+      }
 
-    return sparkpostRequest(httpOptions)
-      .then(({ data: { results }}) => {
-        // we only get here if the request returned a 2xx status code
-        dispatch({
-          type: SUCCESS_TYPE,
-          payload: results,
-          meta
-        });
+      refreshing = true;
+      refreshTokensUsed.add(auth.refreshToken);
 
-        return results;
-      },
-      // API request failed
-      ({ message, response = {}}) => {
-        // NOTE: if this is a 401 and we have a refresh token, we need to do a
-        // refresh to get a new auth token and then re-dispatch this action
-        if (response.status === 401 && auth.refreshToken && retries <= maxRefreshRetries) {
-          action.meta.retries = retries + 1;
+      // call API for a new token
+      return useRefreshToken(auth.refreshToken)
 
-          // If we are currently refreshing the token OR if this refresh token
-          // has already been used to refresh, we should re-dispatch after refresh is complete
-          if (refreshing || refreshTokensUsed.has(auth.refreshToken)) {
-            return redispatchAfterRefresh(action);
+        // dispatch a refresh action to save new token results in cookie and store
+        .then(({ data } = {}) => dispatch(refresh(data.access_token, data.refresh_token)))
+
+        // dispatch the original action again, now that we have a new token ...
+        // if anything in this refresh flow blew up, log out
+        .then(
+          // refresh token request succeeded
+          () => {
+            refreshing = false;
+            return sparkpostRequest(action);
+          },
+          // refresh token request failed
+          (err) => {
+            dispatch(logout());
+            throw err;
           }
+        );
+    }
 
-          refreshing = true;
-          refreshTokensUsed.add(auth.refreshToken);
+    // If we have a 403 or a 401 and we're not refreshing, log the user out silently
+    if (response.status === 401 || response.status === 403) {
+      dispatch(logout());
+      throw err;
+    }
 
-          // call API for a new token
-          return useRefreshToken(auth.refreshToken)
+    // any other API error should automatically fail, to be handled in the reducers/components
+    dispatch({
+      type: types.FAIL,
+      payload: { message, response },
+      meta
+    });
 
-            // dispatch a refresh action to save new token results in cookie and store
-            .then(({ data } = {}) => dispatch(refresh(data.access_token, data.refresh_token)))
+    if (response.status >= 500) {
+      dispatch(received({ message, response }, meta));
+    }
 
-            // dispatch the original action again, now that we have a new token ...
-            // if anything in this refresh flow blew up, log out
-            .then(
-              // refresh token request succeeded
-              () => {
-                refreshing = false;
-                return sparkpostApiRequest(action);
-              },
-              // refresh token request failed
-              () => dispatch(logout())
-            );
-        }
+    throw err;
+  }
+});
 
-        // If we have a 403 or a 401 and we're not refreshing, log the user out silently
-        if (response.status === 401 || response.status === 403) {
-          return dispatch(logout());
-        }
+export default (action) => {
+  // check for refreshing and exit early, otherwise call factory-made function
+  if (refreshing) {
+    return redispatchAfterRefresh(action);
+  }
 
-        // any other API error should automatically fail, to be handled in the reducers/components
-        dispatch({
-          type: FAIL_TYPE,
-          payload: { message, response },
-          meta
-        });
-
-        if (response.status >= 500) {
-          dispatch(received({ message, response }, meta));
-        }
-      });
-  };
-}
+  return sparkpostRequest(action);
+};

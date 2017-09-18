@@ -8,11 +8,6 @@ import { Field, reduxForm } from 'redux-form';
 import { Button, Grid } from '@sparkpost/matchbox';
 import { TextFieldWrapper, SelectWrapper } from 'components';
 
-const getCcYears = () => {
-  const year = new Date().getFullYear();
-  return _.range(year, year + 20);
-};
-
 const cardOptions = [
   { value: 'Visa', label: 'Visa' },
   { value: 'MasterCard', label: 'Master Card' },
@@ -21,6 +16,8 @@ const cardOptions = [
 ];
 
 const monthOptions = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+const currentYear = new Date().getFullYear();
+const yearOptions = _.range(currentYear, currentYear + 20);
 
 let form = (props) => {
   const { handleSubmit, backToPlans, countries, hasBilling } = props;
@@ -76,7 +73,7 @@ let form = (props) => {
                   <Field
                     name='expirationYear'
                     label='Expiration Year'
-                    options={getCcYears()}
+                    options={yearOptions}
                     component={SelectWrapper} />
                   <Field
                     name='cvc'
@@ -144,6 +141,9 @@ const mapStateToProps = (state, props) => {
   return {
     initialValues: {
       cardHolderName: `${currentUser.first_name} ${currentUser.last_name}`,
+      cardType: cardOptions[0].value,
+      expirationMonth: monthOptions[0],
+      expirationYear: yearOptions[0],
       email: currentUser.email,
       firstName: currentUser.first_name,
       lastName: currentUser.last_name,
