@@ -1,0 +1,96 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Helper: SparkPost API Request failures should get a refresh token and re-dispatch 1`] = `
+Array [
+  Array [
+    Object {
+      "meta": Object {
+        "method": "GET",
+        "retries": 1,
+        "url": "/some/path",
+      },
+      "type": "TEST_PENDING",
+    },
+  ],
+  Array [
+    Promise {},
+  ],
+  Array [
+    Object {
+      "meta": Object {
+        "method": "GET",
+        "retries": 1,
+        "url": "/some/path",
+      },
+      "type": "TEST_PENDING",
+    },
+  ],
+  Array [
+    Object {
+      "meta": Object {
+        "method": "GET",
+        "retries": 1,
+        "url": "/some/path",
+      },
+      "payload": Array [],
+      "type": "TEST_SUCCESS",
+    },
+  ],
+]
+`;
+
+exports[`Helper: SparkPost API Request failures should handle a failed API call 1`] = `
+Array [
+  Array [
+    Object {
+      "meta": Object {
+        "method": "GET",
+        "url": "/some/path",
+      },
+      "type": "TEST_PENDING",
+    },
+  ],
+  Array [
+    Object {
+      "meta": Object {
+        "method": "GET",
+        "url": "/some/path",
+      },
+      "payload": Object {
+        "message": "API call failed",
+        "response": Object {
+          "data": Object {
+            "results": Array [],
+          },
+          "status": 400,
+        },
+      },
+      "type": "TEST_FAIL",
+    },
+  ],
+]
+`;
+
+exports[`Helper: SparkPost API Request should successfully call the API 1`] = `
+Array [
+  Array [
+    Object {
+      "meta": Object {
+        "method": "GET",
+        "url": "/some/path",
+      },
+      "type": "TEST_PENDING",
+    },
+  ],
+  Array [
+    Object {
+      "meta": Object {
+        "method": "GET",
+        "url": "/some/path",
+      },
+      "payload": Array [],
+      "type": "TEST_SUCCESS",
+    },
+  ],
+]
+`;
