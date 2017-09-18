@@ -108,7 +108,6 @@ describe('Helper: SparkPost API Request', () => {
         .mockImplementation(() => Promise.resolve({ data: { results }}));
       
       const rethunk = await thunk(dispatchMock, getStateMock);
-        // .then((rethunk) => {
       expect(dispatchMock).toHaveBeenCalledTimes(2);
       expect(httpHelpersMock.useRefreshToken).toHaveBeenCalledTimes(1);
       expect(httpHelpersMock.useRefreshToken).toHaveBeenCalledWith('REFRESH_1');
@@ -116,11 +115,8 @@ describe('Helper: SparkPost API Request', () => {
       expect(action.meta.retries).toEqual(1);
 
       await rethunk(dispatchMock, getStateMock);
-            // .then(() => {
       expect(dispatchMock).toHaveBeenCalledTimes(4);
       expect(dispatchMock.mock.calls).toMatchSnapshot();
-            // });
-        // });
     });
   });
 });
