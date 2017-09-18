@@ -1,17 +1,12 @@
-import requestHelperFactory from './requestHelperFactory';
+import requestHelperFactory from 'actions/helpers/requestHelperFactory';
 import config from 'config/index';
 import { refresh, logout } from 'actions/auth';
 import { received } from 'actions/apiFailure';
 import { useRefreshToken } from 'helpers/http';
 import { resolveOnCondition } from 'helpers/promise';
 import _ from 'lodash';
-import axios from 'axios';
+import { sparkpost as sparkpostAxios } from './axiosInstances';
 
-const { apiBase, apiRequestTimeout } = config;
-const sparkpostAxios = axios.create({
-  baseURL: apiBase,
-  timeout: apiRequestTimeout
-});
 const maxRefreshRetries = 3;
 const refreshTokensUsed = new Set();
 let refreshing = false;
@@ -44,7 +39,7 @@ const sparkpostRequest = requestHelperFactory({
   onFail: ({ types, err, dispatch, meta, action, getState }) => {
     const { message, response = {}} = err;
     const { auth } = getState();
-    const { retries } = meta;
+    const { retries = 0 } = meta;
 
     // NOTE: if this is a 401 and we have a refresh token, we need to do a
     // refresh to get a new auth token and then re-dispatch this action
@@ -75,13 +70,17 @@ const sparkpostRequest = requestHelperFactory({
             return sparkpostRequest(action);
           },
           // refresh token request failed
-          () => dispatch(logout())
+          (err) => {
+            dispatch(logout());
+            throw err;
+          }
         );
     }
 
     // If we have a 403 or a 401 and we're not refreshing, log the user out silently
     if (response.status === 401 || response.status === 403) {
-      return dispatch(logout());
+      dispatch(logout());
+      throw err;
     }
 
     // any other API error should automatically fail, to be handled in the reducers/components
@@ -94,6 +93,8 @@ const sparkpostRequest = requestHelperFactory({
     if (response.status >= 500) {
       dispatch(received({ message, response }, meta));
     }
+
+    throw err;
   }
 });
 

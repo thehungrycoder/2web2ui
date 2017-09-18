@@ -18,6 +18,8 @@ function defaultOnFail({ types, err, dispatch, meta, action }) {
     payload: { message, response },
     meta
   });
+
+  throw err;
 }
 
 export default function requestFactory({
@@ -55,11 +57,8 @@ export default function requestFactory({
         // request succeeded, we only get here if the request returned a 2xx status code
         (response) => onSuccess({ types, response, dispatch, meta, action, getState }),
 
-        // request failed
-        (err) => {
-          onFail({ types, err, dispatch, meta, action, getState });
-          throw err;
-        }
+        // request failed (remember to throw err in your onFail)
+        (err) => onFail({ types, err, dispatch, meta, action, getState })
       );
   };
 }
