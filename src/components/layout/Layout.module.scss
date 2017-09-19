@@ -75,19 +75,3 @@
     }
   }
 }
-
-.appError, .formError {
-  position: fixed;
-  bottom: spacing();
-  right: spacing();
-  z-index: z-index(overlay) - 2;
-}
-
-.appError {
-  left: spacing();
-  bottom: spacing();
-}
-
-.formError {
-  right: spacing();
-}
