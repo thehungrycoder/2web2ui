@@ -93,8 +93,6 @@ const sparkpostRequest = requestHelperFactory({
       dispatch(showAlert({ type: 'error', message: 'Something went wrong.', details: message }));
     }
 
-    dispatch(showAlert({ type: 'error', message: 'Something went wrong.' }));
-
     throw err;
   }
 });
