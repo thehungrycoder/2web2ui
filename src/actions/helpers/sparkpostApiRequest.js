@@ -8,12 +8,12 @@ import _ from 'lodash';
 import { sparkpost as sparkpostAxios } from './axiosInstances';
 
 const maxRefreshRetries = 3;
-const refreshTokensUsed = new Set();
-let refreshing = false;
+export const refreshTokensUsed = new Set();
+export let refreshing = false;
 
 // Re-dispatches a given action after we finish refreshing the auth token
-function redispatchAfterRefresh(action) {
-  return resolveOnCondition(() => !refreshing).then(() => sparkpostRequest(action));
+function redispatchAfterRefresh(action, dispatch) {
+  return resolveOnCondition(() => !refreshing).then(() => dispatch(sparkpostRequest(action)));
 }
 
 const sparkpostRequest = requestHelperFactory({
@@ -40,16 +40,16 @@ const sparkpostRequest = requestHelperFactory({
     const { message, response = {}} = err;
     const { auth } = getState();
     const { retries = 0 } = meta;
-
+    
     // NOTE: if this is a 401 and we have a refresh token, we need to do a
     // refresh to get a new auth token and then re-dispatch this action
-    if (response.status === 401 && auth.refreshToken && retries <= maxRefreshRetries) {
+    if (response.status === 401 && auth.refreshToken && retries < maxRefreshRetries) {
       action.meta.retries = retries + 1;
 
       // If we are currently refreshing the token OR if this refresh token
       // has already been used to refresh, we should re-dispatch after refresh is complete
       if (refreshing || refreshTokensUsed.has(auth.refreshToken)) {
-        return redispatchAfterRefresh(action);
+        return redispatchAfterRefresh(action, dispatch);
       }
 
       refreshing = true;
@@ -67,7 +67,7 @@ const sparkpostRequest = requestHelperFactory({
           // refresh token request succeeded
           () => {
             refreshing = false;
-            return sparkpostRequest(action);
+            return dispatch(sparkpostRequest(action));
           },
           // refresh token request failed
           (err) => {
@@ -98,11 +98,11 @@ const sparkpostRequest = requestHelperFactory({
   }
 });
 
-export default (action) => {
+export default (action) => (dispatch, getState) => {
   // check for refreshing and exit early, otherwise call factory-made function
   if (refreshing) {
-    return redispatchAfterRefresh(action);
+    return redispatchAfterRefresh(action, dispatch);
   }
 
-  return sparkpostRequest(action);
+  return dispatch(sparkpostRequest(action));
 };

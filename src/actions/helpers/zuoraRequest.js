@@ -1,8 +1,6 @@
-import config from 'config/index';
 import requestHelperFactory from './requestHelperFactory';
-import axios from 'axios';
 import _ from 'lodash';
-import { zuoraAxios } from './axiosInstances';
+import { zuora as zuoraAxios } from './axiosInstances';
 
 export default requestHelperFactory({
   request: zuoraAxios,
@@ -17,7 +15,7 @@ export default requestHelperFactory({
       });
 
       const err = new Error(message);
-      err.handled = true;
+      err.response = response;
       throw err;
     }
 
