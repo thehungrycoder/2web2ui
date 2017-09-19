@@ -1,7 +1,7 @@
 import React from 'react';
 
 import ScrollToTop from './ScrollToTop';
-import { Loading, GlobalError } from 'components';
+import { Loading, GlobalAlert } from 'components';
 import styles from './Layout.module.scss';
 
 const Form = ({ children, loading }) => (
@@ -11,7 +11,7 @@ const Form = ({ children, loading }) => (
         { loading ? <div className={styles.loading}><Loading /></div> : children }
       </div>
       <div className={styles.formError}>
-        <GlobalError />
+        <GlobalAlert />
       </div>
     </main>
     <ScrollToTop/>

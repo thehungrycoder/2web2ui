@@ -1,8 +1,8 @@
 import React from 'react';
-import { GlobalError } from '../GlobalError';
+import { GlobalAlert } from '../GlobalAlert';
 import { mount, shallow } from 'enzyme';
 
-describe('GlobalError', () => {
+describe('GlobalAlert', () => {
   const props = {
     error: {
       message: 'Oh no'
@@ -12,16 +12,16 @@ describe('GlobalError', () => {
   describe('Mounted', () => {
 
     it('should mount', () => {
-      const willReceivePropsSpy = jest.spyOn(GlobalError.prototype, 'componentWillReceiveProps');
-      const wrapper = mount(<GlobalError/>);
+      const willReceivePropsSpy = jest.spyOn(GlobalAlert.prototype, 'componentWillReceiveProps');
+      const wrapper = mount(<GlobalAlert/>);
       expect(willReceivePropsSpy).not.toHaveBeenCalled();
       expect(wrapper.state()).toEqual({ show: false });
       willReceivePropsSpy.mockRestore();
     });
 
     it('should componentWillReceiveProps', () => {
-      const willReceivePropsSpy = jest.spyOn(GlobalError.prototype, 'componentWillReceiveProps');
-      const wrapper = mount(<GlobalError />);
+      const willReceivePropsSpy = jest.spyOn(GlobalAlert.prototype, 'componentWillReceiveProps');
+      const wrapper = mount(<GlobalAlert />);
       expect(willReceivePropsSpy).not.toHaveBeenCalled();
       wrapper.setProps(props);
       expect(willReceivePropsSpy).toHaveBeenCalled();
@@ -30,7 +30,7 @@ describe('GlobalError', () => {
     });
 
     it('should dismis banner', () => {
-      const wrapper = mount(<GlobalError />);
+      const wrapper = mount(<GlobalAlert />);
       wrapper.setProps(props);
       expect(wrapper.state()).toEqual({ show: true });
       wrapper.find('.Matchbox-Banner__Dismiss').simulate('click');
@@ -41,12 +41,12 @@ describe('GlobalError', () => {
   // TODO: decide if also necessary
   describe('Shallow', () => {
     it('should render with no props', () => {
-      const wrapper = shallow(<GlobalError />);
+      const wrapper = shallow(<GlobalAlert />);
       expect(wrapper).toMatchSnapshot();
     });
 
     it('should render with error', () => {
-      const wrapper = shallow(<GlobalError {...props}/>);
+      const wrapper = shallow(<GlobalAlert {...props}/>);
       expect(wrapper).toMatchSnapshot();
     });
   });

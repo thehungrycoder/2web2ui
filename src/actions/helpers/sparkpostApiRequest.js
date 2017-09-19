@@ -1,6 +1,6 @@
 import requestHelperFactory from 'actions/helpers/requestHelperFactory';
 import { refresh, logout } from 'actions/auth';
-import { received } from 'actions/apiFailure';
+import { showAlert } from 'actions/globalAlert';
 import { useRefreshToken } from 'helpers/http';
 import { resolveOnCondition } from 'helpers/promise';
 import _ from 'lodash';
@@ -90,8 +90,10 @@ const sparkpostRequest = requestHelperFactory({
     });
 
     if (response.status >= 500) {
-      dispatch(received({ message, response }, meta));
+      dispatch(showAlert({ type: 'error', message: 'Something went wrong.', details: message }));
     }
+
+    dispatch(showAlert({ type: 'error', message: 'Something went wrong.' }));
 
     throw err;
   }
