@@ -1,0 +1,729 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<SubaccountTypeahead
+  name="subaccount"
+  onChange={[Function]}
+  subaccounts={
+    Array [
+      Object {
+        "id": 1,
+        "name": "Subaccount 1",
+      },
+      Object {
+        "id": 2,
+        "name": "Subaccount 2",
+      },
+      Object {
+        "id": 3,
+        "name": "Subaccount 3",
+      },
+      Object {
+        "id": 4,
+        "name": "Subaccount 4",
+      },
+      Object {
+        "id": 5,
+        "name": "Subaccount 5",
+      },
+      Object {
+        "id": 6,
+        "name": "Subaccount 6",
+      },
+    ]
+  }
+>
+  <Downshift
+    defaultHighlightedIndex={null}
+    defaultInputValue=""
+    defaultIsOpen={false}
+    defaultSelectedItem={null}
+    getA11yStatusMessage={[Function]}
+    itemToString={[Function]}
+    onChange={[Function]}
+    onStateChange={[Function]}
+    onUserAction={[Function]}
+  >
+    <div
+      onClick={[Function]}
+    >
+      <t
+        aria-activedescendant={null}
+        aria-autocomplete="list"
+        aria-expanded={false}
+        autoComplete="off"
+        connectRight={null}
+        disabled={false}
+        id="subaccount"
+        label="Subaccount"
+        name="subaccount"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onKeyDown={[Function]}
+        placeholder="None"
+        role="combobox"
+        type="text"
+        value=""
+      >
+        <fieldset
+          className="Matchbox-TextField"
+        >
+          <Label
+            id="subaccount"
+            label="Subaccount"
+          >
+            <label
+              className="Matchbox-Label"
+              htmlFor="subaccount"
+              id="subaccountLabel"
+            >
+              Subaccount
+            </label>
+          </Label>
+          <t
+            right={null}
+          >
+            <div
+              className="Matchbox-Connect"
+            >
+              <div
+                className="Matchbox-Connect__Primary"
+              >
+                <input
+                  aria-activedescendant={null}
+                  aria-autocomplete="list"
+                  aria-expanded={false}
+                  autoComplete="off"
+                  className="Matchbox-TextField__Input"
+                  disabled={false}
+                  id="subaccount"
+                  name="nodejs"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  onKeyDown={[Function]}
+                  placeholder="None"
+                  role="combobox"
+                  style={
+                    Object {
+                      "paddingLeft": undefined,
+                      "paddingRight": undefined,
+                    }
+                  }
+                  type="text"
+                  value=""
+                />
+              </div>
+            </div>
+          </t>
+        </fieldset>
+      </t>
+      <t
+        actions={
+          Array [
+            Object {
+              "content": <SubaccountTypeaheadItem
+                id={1}
+                name="Subaccount 1"
+              />,
+              "highlighted": false,
+              "id": "downshift-1-item-0",
+              "onMouseEnter": [Function],
+            },
+            Object {
+              "content": <SubaccountTypeaheadItem
+                id={2}
+                name="Subaccount 2"
+              />,
+              "highlighted": false,
+              "id": "downshift-1-item-1",
+              "onMouseEnter": [Function],
+            },
+            Object {
+              "content": <SubaccountTypeaheadItem
+                id={3}
+                name="Subaccount 3"
+              />,
+              "highlighted": false,
+              "id": "downshift-1-item-2",
+              "onMouseEnter": [Function],
+            },
+            Object {
+              "content": <SubaccountTypeaheadItem
+                id={4}
+                name="Subaccount 4"
+              />,
+              "highlighted": false,
+              "id": "downshift-1-item-3",
+              "onMouseEnter": [Function],
+            },
+            Object {
+              "content": <SubaccountTypeaheadItem
+                id={5}
+                name="Subaccount 5"
+              />,
+              "highlighted": false,
+              "id": "downshift-1-item-4",
+              "onMouseEnter": [Function],
+            },
+            Object {
+              "content": <SubaccountTypeaheadItem
+                id={6}
+                name="Subaccount 6"
+              />,
+              "highlighted": false,
+              "id": "downshift-1-item-5",
+              "onMouseEnter": [Function],
+            },
+          ]
+        }
+        className=""
+      >
+        <div
+          className=""
+        >
+          <Section
+            section={
+              Object {
+                "actions": Array [
+                  Object {
+                    "content": <SubaccountTypeaheadItem
+                      id={1}
+                      name="Subaccount 1"
+                    />,
+                    "highlighted": false,
+                    "id": "downshift-1-item-0",
+                    "onMouseEnter": [Function],
+                  },
+                  Object {
+                    "content": <SubaccountTypeaheadItem
+                      id={2}
+                      name="Subaccount 2"
+                    />,
+                    "highlighted": false,
+                    "id": "downshift-1-item-1",
+                    "onMouseEnter": [Function],
+                  },
+                  Object {
+                    "content": <SubaccountTypeaheadItem
+                      id={3}
+                      name="Subaccount 3"
+                    />,
+                    "highlighted": false,
+                    "id": "downshift-1-item-2",
+                    "onMouseEnter": [Function],
+                  },
+                  Object {
+                    "content": <SubaccountTypeaheadItem
+                      id={4}
+                      name="Subaccount 4"
+                    />,
+                    "highlighted": false,
+                    "id": "downshift-1-item-3",
+                    "onMouseEnter": [Function],
+                  },
+                  Object {
+                    "content": <SubaccountTypeaheadItem
+                      id={5}
+                      name="Subaccount 5"
+                    />,
+                    "highlighted": false,
+                    "id": "downshift-1-item-4",
+                    "onMouseEnter": [Function],
+                  },
+                  Object {
+                    "content": <SubaccountTypeaheadItem
+                      id={6}
+                      name="Subaccount 6"
+                    />,
+                    "highlighted": false,
+                    "id": "downshift-1-item-5",
+                    "onMouseEnter": [Function],
+                  },
+                ],
+              }
+            }
+          >
+            <div
+              className="Matchbox-ActionList__Section"
+            >
+              <t
+                className="Matchbox-ActionList__Action"
+                id="downshift-1-item-0"
+                onMouseEnter={[Function]}
+              >
+                <a
+                  className="Matchbox-ActionList__Action"
+                  id="downshift-1-item-0"
+                  onMouseEnter={[Function]}
+                >
+                  <SubaccountTypeaheadItem
+                    id={1}
+                    name="Subaccount 1"
+                  >
+                    <div>
+                      Subaccount 1
+                      <span>
+                        1
+                      </span>
+                    </div>
+                  </SubaccountTypeaheadItem>
+                </a>
+              </t>
+              <t
+                className="Matchbox-ActionList__Action"
+                id="downshift-1-item-1"
+                onMouseEnter={[Function]}
+              >
+                <a
+                  className="Matchbox-ActionList__Action"
+                  id="downshift-1-item-1"
+                  onMouseEnter={[Function]}
+                >
+                  <SubaccountTypeaheadItem
+                    id={2}
+                    name="Subaccount 2"
+                  >
+                    <div>
+                      Subaccount 2
+                      <span>
+                        2
+                      </span>
+                    </div>
+                  </SubaccountTypeaheadItem>
+                </a>
+              </t>
+              <t
+                className="Matchbox-ActionList__Action"
+                id="downshift-1-item-2"
+                onMouseEnter={[Function]}
+              >
+                <a
+                  className="Matchbox-ActionList__Action"
+                  id="downshift-1-item-2"
+                  onMouseEnter={[Function]}
+                >
+                  <SubaccountTypeaheadItem
+                    id={3}
+                    name="Subaccount 3"
+                  >
+                    <div>
+                      Subaccount 3
+                      <span>
+                        3
+                      </span>
+                    </div>
+                  </SubaccountTypeaheadItem>
+                </a>
+              </t>
+              <t
+                className="Matchbox-ActionList__Action"
+                id="downshift-1-item-3"
+                onMouseEnter={[Function]}
+              >
+                <a
+                  className="Matchbox-ActionList__Action"
+                  id="downshift-1-item-3"
+                  onMouseEnter={[Function]}
+                >
+                  <SubaccountTypeaheadItem
+                    id={4}
+                    name="Subaccount 4"
+                  >
+                    <div>
+                      Subaccount 4
+                      <span>
+                        4
+                      </span>
+                    </div>
+                  </SubaccountTypeaheadItem>
+                </a>
+              </t>
+              <t
+                className="Matchbox-ActionList__Action"
+                id="downshift-1-item-4"
+                onMouseEnter={[Function]}
+              >
+                <a
+                  className="Matchbox-ActionList__Action"
+                  id="downshift-1-item-4"
+                  onMouseEnter={[Function]}
+                >
+                  <SubaccountTypeaheadItem
+                    id={5}
+                    name="Subaccount 5"
+                  >
+                    <div>
+                      Subaccount 5
+                      <span>
+                        5
+                      </span>
+                    </div>
+                  </SubaccountTypeaheadItem>
+                </a>
+              </t>
+              <t
+                className="Matchbox-ActionList__Action"
+                id="downshift-1-item-5"
+                onMouseEnter={[Function]}
+              >
+                <a
+                  className="Matchbox-ActionList__Action"
+                  id="downshift-1-item-5"
+                  onMouseEnter={[Function]}
+                >
+                  <SubaccountTypeaheadItem
+                    id={6}
+                    name="Subaccount 6"
+                  >
+                    <div>
+                      Subaccount 6
+                      <span>
+                        6
+                      </span>
+                    </div>
+                  </SubaccountTypeaheadItem>
+                </a>
+              </t>
+            </div>
+          </Section>
+        </div>
+      </t>
+    </div>
+  </Downshift>
+</SubaccountTypeahead>
+`;
+
+exports[`renders correctly with a selected item 1`] = `
+<SubaccountTypeahead
+  name="subaccount"
+  onChange={[Function]}
+  subaccounts={
+    Array [
+      Object {
+        "id": 1,
+        "name": "Subaccount 1",
+      },
+      Object {
+        "id": 2,
+        "name": "Subaccount 2",
+      },
+      Object {
+        "id": 3,
+        "name": "Subaccount 3",
+      },
+      Object {
+        "id": 4,
+        "name": "Subaccount 4",
+      },
+      Object {
+        "id": 5,
+        "name": "Subaccount 5",
+      },
+      Object {
+        "id": 6,
+        "name": "Subaccount 6",
+      },
+    ]
+  }
+>
+  <Downshift
+    defaultHighlightedIndex={null}
+    defaultInputValue=""
+    defaultIsOpen={false}
+    defaultSelectedItem={null}
+    getA11yStatusMessage={[Function]}
+    itemToString={[Function]}
+    onChange={[Function]}
+    onStateChange={[Function]}
+    onUserAction={[Function]}
+  >
+    <div
+      onClick={[Function]}
+    >
+      <t
+        aria-activedescendant={null}
+        aria-autocomplete="list"
+        aria-expanded={false}
+        autoComplete="off"
+        connectRight={
+          <t
+            className={undefined}
+            onClick={[Function]}
+            size="default"
+          >
+            Clear
+          </t>
+        }
+        disabled={true}
+        id="subaccount"
+        label="Subaccount"
+        name="subaccount"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onKeyDown={[Function]}
+        placeholder="None"
+        role="combobox"
+        type="text"
+        value="Subaccount 1"
+      >
+        <fieldset
+          className="Matchbox-TextField"
+        >
+          <Label
+            id="subaccount"
+            label="Subaccount"
+          >
+            <label
+              className="Matchbox-Label"
+              htmlFor="subaccount"
+              id="subaccountLabel"
+            >
+              Subaccount
+            </label>
+          </Label>
+          <t
+            right={
+              <t
+                className={undefined}
+                onClick={[Function]}
+                size="default"
+              >
+                Clear
+              </t>
+            }
+          >
+            <div
+              className="Matchbox-Connect"
+            >
+              <div
+                className="Matchbox-Connect__Primary Matchbox-Connect--hasRight"
+              >
+                <input
+                  aria-activedescendant={null}
+                  aria-autocomplete="list"
+                  aria-expanded={false}
+                  autoComplete="off"
+                  className="Matchbox-TextField__Input"
+                  disabled={true}
+                  id="subaccount"
+                  name="nodejs"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  onKeyDown={[Function]}
+                  placeholder="None"
+                  role="combobox"
+                  style={
+                    Object {
+                      "paddingLeft": undefined,
+                      "paddingRight": undefined,
+                    }
+                  }
+                  type="text"
+                  value="Subaccount 1"
+                />
+              </div>
+              <div
+                className="Matchbox-Connect__Right"
+              >
+                <t
+                  onClick={[Function]}
+                  size="default"
+                >
+                  <button
+                    className="Matchbox-Button"
+                    onClick={[Function]}
+                    onMouseUp={[Function]}
+                    type="button"
+                  >
+                    Clear
+                  </button>
+                </t>
+              </div>
+            </div>
+          </t>
+        </fieldset>
+      </t>
+      <t
+        actions={
+          Array [
+            Object {
+              "content": <SubaccountTypeaheadItem
+                id={1}
+                name="Subaccount 1"
+              />,
+              "highlighted": false,
+              "id": "downshift-3-item-0",
+              "onMouseEnter": [Function],
+            },
+          ]
+        }
+        className=""
+      >
+        <div
+          className=""
+        >
+          <Section
+            section={
+              Object {
+                "actions": Array [
+                  Object {
+                    "content": <SubaccountTypeaheadItem
+                      id={1}
+                      name="Subaccount 1"
+                    />,
+                    "highlighted": false,
+                    "id": "downshift-3-item-0",
+                    "onMouseEnter": [Function],
+                  },
+                ],
+              }
+            }
+          >
+            <div
+              className="Matchbox-ActionList__Section"
+            >
+              <t
+                className="Matchbox-ActionList__Action"
+                id="downshift-3-item-0"
+                onMouseEnter={[Function]}
+              >
+                <a
+                  className="Matchbox-ActionList__Action"
+                  id="downshift-3-item-0"
+                  onMouseEnter={[Function]}
+                >
+                  <SubaccountTypeaheadItem
+                    id={1}
+                    name="Subaccount 1"
+                  >
+                    <div>
+                      Subaccount 1
+                      <span>
+                        1
+                      </span>
+                    </div>
+                  </SubaccountTypeaheadItem>
+                </a>
+              </t>
+            </div>
+          </Section>
+        </div>
+      </t>
+    </div>
+  </Downshift>
+</SubaccountTypeahead>
+`;
+
+exports[`renders correctly with no subaccounts 1`] = `
+<SubaccountTypeahead
+  name="subaccount"
+  subaccounts={Array []}
+>
+  <Downshift
+    defaultHighlightedIndex={null}
+    defaultInputValue=""
+    defaultIsOpen={false}
+    defaultSelectedItem={null}
+    getA11yStatusMessage={[Function]}
+    itemToString={[Function]}
+    onChange={[Function]}
+    onStateChange={[Function]}
+    onUserAction={[Function]}
+  >
+    <div
+      onClick={[Function]}
+    >
+      <t
+        aria-activedescendant={null}
+        aria-autocomplete="list"
+        aria-expanded={false}
+        autoComplete="off"
+        connectRight={null}
+        disabled={false}
+        id="subaccount"
+        label="Subaccount"
+        name="subaccount"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onKeyDown={[Function]}
+        placeholder="None"
+        role="combobox"
+        type="text"
+        value=""
+      >
+        <fieldset
+          className="Matchbox-TextField"
+        >
+          <Label
+            id="subaccount"
+            label="Subaccount"
+          >
+            <label
+              className="Matchbox-Label"
+              htmlFor="subaccount"
+              id="subaccountLabel"
+            >
+              Subaccount
+            </label>
+          </Label>
+          <t
+            right={null}
+          >
+            <div
+              className="Matchbox-Connect"
+            >
+              <div
+                className="Matchbox-Connect__Primary"
+              >
+                <input
+                  aria-activedescendant={null}
+                  aria-autocomplete="list"
+                  aria-expanded={false}
+                  autoComplete="off"
+                  className="Matchbox-TextField__Input"
+                  disabled={false}
+                  id="subaccount"
+                  name="nodejs"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  onKeyDown={[Function]}
+                  placeholder="None"
+                  role="combobox"
+                  style={
+                    Object {
+                      "paddingLeft": undefined,
+                      "paddingRight": undefined,
+                    }
+                  }
+                  type="text"
+                  value=""
+                />
+              </div>
+            </div>
+          </t>
+        </fieldset>
+      </t>
+      <t
+        actions={Array []}
+        className=""
+      >
+        <div
+          className=""
+        >
+          <Section
+            section={
+              Object {
+                "actions": Array [],
+              }
+            }
+          >
+            <div
+              className="Matchbox-ActionList__Section"
+            />
+          </Section>
+        </div>
+      </t>
+    </div>
+  </Downshift>
+</SubaccountTypeahead>
+`;
