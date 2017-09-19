@@ -32,7 +32,7 @@ const config = {
     defaultMetrics: ['count_targeted', 'count_rendered', 'count_accepted', 'count_bounce']
   },
   zuora: {
-    baseUrl: 'https://apisandbox-api.zuora.com/rest/v1',
+    baseUrl: 'https://rest.apisandbox.zuora.com/v1',
     timeout: 15000
   }
 };

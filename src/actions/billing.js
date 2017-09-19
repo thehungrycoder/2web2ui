@@ -24,16 +24,70 @@ export function updateSubscription(code) {
   });
 }
 
-export function corsCreate(data) {
+/**
+ * For updating billing info via our API (e.g. contact info)
+ * @param {Object} data
+ */
+export function updateBilling(data) {
   return sparkpostApiRequest({
-    type: 'CORS_CREATE',
+    type: 'UPDATE_BILLING',
     meta: {
-      method: 'POST',
-      url: '/account/cors-data',
-      params: { context: 'create-account' },
+      method: 'PUT',
+      url: '/account/subscription',
       data
     }
   });
+}
+
+export function cors(context, data = {}) {
+  const type = `CORS_${context.toUpperCase().replace('-', '_')}`;
+  return sparkpostApiRequest({
+    type,
+    meta: {
+      method: 'POST',
+      url: '/account/cors-data',
+      params: { context },
+      data
+    }
+  });
+}
+// export function corsCreate(data) {
+//   return sparkpostApiRequest({
+//     type: 'CORS_CREATE',
+//     meta: {
+//       method: 'POST',
+//       url: '/account/cors-data',
+//       params: { context: 'create-account' },
+//       data
+//     }
+//   });
+// }
+
+export function updateCreditCard({ data, token, signature }) {
+  return zuoraRequest({
+    type: 'ZUORA_UPDATE_CC',
+    meta: {
+      method: 'POST',
+      url: '/payment-methods/credit-cards',
+      data,
+      headers: { token, signature }
+    }
+  });
+}
+
+export function updateAddons(product, data) {
+  return sparkpostApiRequest({
+    type: `UPDATE_ADDON_${product.toUpperCase()}`,
+    meta: {
+      method: 'POST',
+      url: `/account/add-ons/${product}`,
+      data
+    }
+  });
+}
+
+export function addDedicatedIps(data) {
+  return updateAddons('dedicated_ips', data);
 }
 
 export function createZuoraAccount({ data, token, signature }) {
@@ -54,20 +108,20 @@ export function billingCreate(values) {
   return (dispatch) =>
 
     // get CORS data for the create account context
-    dispatch(corsCreate(corsData))
+    dispatch(cors('create-account', corsData))
 
-    // create the Zuora account
-    .then((results) => {
-      const { token, signature } = results;
-      const data = formatCreateData({ ...results, ...billingData });
-      return dispatch(createZuoraAccount({ data, token, signature }));
-    })
+      // create the Zuora account
+      .then((results) => {
+        const { token, signature } = results;
+        const data = formatCreateData({ ...results, ...billingData });
+        return dispatch(createZuoraAccount({ data, token, signature }));
+      })
 
-    // sync our db with new Zuora state
-    .then(() => dispatch(syncSubscription()))
+      // sync our db with new Zuora state
+      .then(() => dispatch(syncSubscription()))
 
-    // refetch the account
-    .then(() => dispatch(fetchAccount()));
+      // refetch the account
+      .then(() => dispatch(fetchAccount()));
 }
 
 export function getBillingCountries() {
