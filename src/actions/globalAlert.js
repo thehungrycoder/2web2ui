@@ -1,7 +1,7 @@
-export function showAlert(alert) {
+export function showAlert({ type = 'default', ...alert }) {
   return {
     type: 'SHOW_GLOBAL_ALERT',
-    payload: alert
+    payload: { type, ...alert }
   };
 }
 

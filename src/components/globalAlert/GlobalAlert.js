@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
@@ -13,6 +12,8 @@ export class GlobalAlert extends Component {
     showDetails: false
   }
 
+  autoClose = null;
+
   handleDismiss() {
     clearTimeout(this.autoClose);
     this.setState({ show: false });
@@ -23,13 +24,10 @@ export class GlobalAlert extends Component {
     }, 200); // Wait for transition out before killing
   }
 
-  componentDidMount() {
-    this.autoClose = null;
-  }
-
   componentWillReceiveProps({ message }) {
-    if (!!message) {
+    if (message) {
       this.setState({ show: true });
+      clearTimeout(this.autoClose);
       this.autoClose = setTimeout(() => this.handleDismiss(), 10000);
     }
   }
@@ -50,13 +48,13 @@ export class GlobalAlert extends Component {
   }
 
   render() {
+    const { type } = this.props;
+    const status = type === 'error' ? 'danger' : type; // TODO change type strings in MB
+
     const classes = classnames(
       styles.GlobalAlert,
       this.state.show && styles.show
     );
-
-    const { type = 'default' } = this.props;
-    const status = type === 'error' ? 'danger' : type; // TODO change type strings in MB
 
     return (
       <div className={classes}>
