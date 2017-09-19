@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Helper: Zuora API Request should handle a zuora failure 1`] = `
+Array [
+  Object {
+    "meta": Object {},
+    "type": "ZUORA_REQUEST_PENDING",
+  },
+  Object {
+    "meta": Object {},
+    "payload": Object {
+      "message": "The credit card is bad and wrong",
+      "response": Object {
+        "reasons": Array [
+          Object {
+            "message": "The credit card is bad and wrong",
+          },
+        ],
+        "success": false,
+      },
+    },
+    "type": "ZUORA_REQUEST_FAIL",
+  },
+]
+`;
+
+exports[`Helper: Zuora API Request should make a successful call 1`] = `
+Array [
+  Object {
+    "meta": Object {},
+    "type": "ZUORA_REQUEST_PENDING",
+  },
+  Object {
+    "meta": Object {},
+    "payload": Object {
+      "success": true,
+    },
+    "type": "ZUORA_REQUEST_SUCCESS",
+  },
+]
+`;

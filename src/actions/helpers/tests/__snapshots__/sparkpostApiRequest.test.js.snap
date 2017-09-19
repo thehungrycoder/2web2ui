@@ -1,96 +1,297 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Helper: SparkPost API Request failures should get a refresh token and re-dispatch 1`] = `
+exports[`Helper: SparkPost API Request failure cases should dispatch a logout action on a 401 with no refresh token 1`] = `
 Array [
-  Array [
-    Object {
-      "meta": Object {
-        "method": "GET",
-        "retries": 1,
-        "url": "/some/path",
-      },
-      "type": "TEST_PENDING",
+  Object {
+    "meta": Object {
+      "method": "GET",
+      "url": "/some/path",
     },
-  ],
-  Array [
-    Promise {},
-  ],
-  Array [
-    Object {
-      "meta": Object {
-        "method": "GET",
-        "retries": 1,
-        "url": "/some/path",
-      },
-      "type": "TEST_PENDING",
-    },
-  ],
-  Array [
-    Object {
-      "meta": Object {
-        "method": "GET",
-        "retries": 1,
-        "url": "/some/path",
-      },
-      "payload": Array [],
-      "type": "TEST_SUCCESS",
-    },
-  ],
+    "type": "TEST_PENDING",
+  },
+  Object {
+    "type": "LOGOUT",
+  },
 ]
 `;
 
-exports[`Helper: SparkPost API Request failures should handle a failed API call 1`] = `
+exports[`Helper: SparkPost API Request failure cases should dispatch a logout action on a 403 response 1`] = `
 Array [
-  Array [
-    Object {
-      "meta": Object {
-        "method": "GET",
-        "url": "/some/path",
-      },
-      "type": "TEST_PENDING",
+  Object {
+    "meta": Object {
+      "method": "GET",
+      "url": "/some/path",
     },
-  ],
-  Array [
-    Object {
-      "meta": Object {
-        "method": "GET",
-        "url": "/some/path",
-      },
-      "payload": Object {
-        "message": "API call failed",
-        "response": Object {
-          "data": Object {
-            "results": Array [],
-          },
-          "status": 400,
+    "type": "TEST_PENDING",
+  },
+  Object {
+    "type": "LOGOUT",
+  },
+]
+`;
+
+exports[`Helper: SparkPost API Request failure cases should dispatch a special 5xx error action 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "method": "GET",
+      "url": "/some/path",
+    },
+    "type": "TEST_PENDING",
+  },
+  Object {
+    "meta": Object {
+      "method": "GET",
+      "url": "/some/path",
+    },
+    "payload": Object {
+      "message": "API call failed",
+      "response": Object {
+        "data": Object {
+          "results": Array [],
         },
+        "status": 500,
       },
-      "type": "TEST_FAIL",
     },
-  ],
+    "type": "TEST_FAIL",
+  },
+  Object {
+    "meta": Object {
+      "method": "GET",
+      "url": "/some/path",
+    },
+    "payload": Object {
+      "message": "API call failed",
+      "response": Object {
+        "data": Object {
+          "results": Array [],
+        },
+        "status": 500,
+      },
+    },
+    "type": "API_FAILURE_RECEIVED",
+  },
+]
+`;
+
+exports[`Helper: SparkPost API Request failure cases should handle a failed API call 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "method": "GET",
+      "url": "/some/path",
+    },
+    "type": "TEST_PENDING",
+  },
+  Object {
+    "meta": Object {
+      "method": "GET",
+      "url": "/some/path",
+    },
+    "payload": Object {
+      "message": "API call failed",
+      "response": Object {
+        "data": Object {
+          "results": Array [],
+        },
+        "status": 400,
+      },
+    },
+    "type": "TEST_FAIL",
+  },
+]
+`;
+
+exports[`Helper: SparkPost API Request failure cases with refresh tokens should get a refresh token and re-dispatch 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "method": "GET",
+      "retries": 1,
+      "url": "/some/path",
+    },
+    "type": "TEST_PENDING",
+  },
+  Object {
+    "type": "REFRESH",
+  },
+  Object {
+    "meta": Object {
+      "method": "GET",
+      "retries": 1,
+      "url": "/some/path",
+    },
+    "type": "TEST_PENDING",
+  },
+  Object {
+    "meta": Object {
+      "method": "GET",
+      "retries": 1,
+      "url": "/some/path",
+    },
+    "payload": Array [],
+    "type": "TEST_SUCCESS",
+  },
+]
+`;
+
+exports[`Helper: SparkPost API Request failure cases with refresh tokens should only request one refresh token at a time 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "retries": 1,
+    },
+    "type": "TEST_WITH_REFRESH_PENDING",
+  },
+  Object {
+    "meta": Object {
+      "retries": 1,
+    },
+    "type": "TEST_NO_REFRESH_PENDING",
+  },
+  Object {
+    "meta": Object {
+      "retries": 1,
+    },
+    "type": "TEST_NO_REFRESH_PENDING",
+  },
+  Object {
+    "type": "REFRESH",
+  },
+  Object {
+    "meta": Object {
+      "retries": 1,
+    },
+    "type": "TEST_WITH_REFRESH_PENDING",
+  },
+  Object {
+    "meta": Object {
+      "retries": 1,
+    },
+    "payload": Array [],
+    "type": "TEST_WITH_REFRESH_SUCCESS",
+  },
+  Object {
+    "meta": Object {
+      "retries": 1,
+    },
+    "type": "TEST_NO_REFRESH_PENDING",
+  },
+  Object {
+    "meta": Object {
+      "retries": 1,
+    },
+    "type": "TEST_NO_REFRESH_PENDING",
+  },
+  Object {
+    "meta": Object {
+      "retries": 1,
+    },
+    "payload": Array [],
+    "type": "TEST_NO_REFRESH_SUCCESS",
+  },
+  Object {
+    "meta": Object {
+      "retries": 1,
+    },
+    "payload": Array [],
+    "type": "TEST_NO_REFRESH_SUCCESS",
+  },
+]
+`;
+
+exports[`Helper: SparkPost API Request failure cases with refresh tokens should only retry 3 times 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "retries": 3,
+    },
+    "type": "TEST_MAX_RETRIES_PENDING",
+  },
+  Object {
+    "type": "REFRESH",
+  },
+  Object {
+    "meta": Object {
+      "retries": 3,
+    },
+    "type": "TEST_MAX_RETRIES_PENDING",
+  },
+  Object {
+    "type": "REFRESH",
+  },
+  Object {
+    "meta": Object {
+      "retries": 3,
+    },
+    "type": "TEST_MAX_RETRIES_PENDING",
+  },
+  Object {
+    "type": "REFRESH",
+  },
+  Object {
+    "meta": Object {
+      "retries": 3,
+    },
+    "type": "TEST_MAX_RETRIES_PENDING",
+  },
+  Object {
+    "type": "LOGOUT",
+  },
+]
+`;
+
+exports[`Helper: SparkPost API Request failure cases with refresh tokens should only retry once with the same token 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "retries": 3,
+    },
+    "type": "TEST_ONE_RETRY_PER_TOKEN_PENDING",
+  },
+  Object {
+    "type": "REFRESH",
+  },
+  Object {
+    "meta": Object {
+      "retries": 3,
+    },
+    "type": "TEST_ONE_RETRY_PER_TOKEN_PENDING",
+  },
+  Object {
+    "meta": Object {
+      "retries": 3,
+    },
+    "type": "TEST_ONE_RETRY_PER_TOKEN_PENDING",
+  },
+  Object {
+    "meta": Object {
+      "retries": 3,
+    },
+    "type": "TEST_ONE_RETRY_PER_TOKEN_PENDING",
+  },
+  Object {
+    "type": "LOGOUT",
+  },
 ]
 `;
 
 exports[`Helper: SparkPost API Request should successfully call the API 1`] = `
 Array [
-  Array [
-    Object {
-      "meta": Object {
-        "method": "GET",
-        "url": "/some/path",
-      },
-      "type": "TEST_PENDING",
+  Object {
+    "meta": Object {
+      "method": "GET",
+      "url": "/some/path",
     },
-  ],
-  Array [
-    Object {
-      "meta": Object {
-        "method": "GET",
-        "url": "/some/path",
-      },
-      "payload": Array [],
-      "type": "TEST_SUCCESS",
+    "type": "TEST_PENDING",
+  },
+  Object {
+    "meta": Object {
+      "method": "GET",
+      "url": "/some/path",
     },
-  ],
+    "payload": Array [],
+    "type": "TEST_SUCCESS",
+  },
 ]
 `;
