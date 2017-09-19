@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GlobalAlert Shallow should render with error details 1`] = `
+<div
+  className=""
+>
+  <t
+    onDismiss={[Function]}
+    status="danger"
+  >
+    <div>
+      <div>
+        Oh no
+         
+        <a
+          onClick={[Function]}
+        >
+          View Details
+        </a>
+      </div>
+    </div>
+  </t>
+</div>
+`;
+
+exports[`GlobalAlert Shallow should render with no props 1`] = `
+<div
+  className=""
+>
+  <t
+    onDismiss={[Function]}
+  >
+    <div>
+      <div>
+         
+      </div>
+    </div>
+  </t>
+</div>
+`;
+
+exports[`GlobalAlert Shallow should render without error details 1`] = `
+<div
+  className=""
+>
+  <t
+    onDismiss={[Function]}
+    status="danger"
+  >
+    <div>
+      <div>
+        Oh no
+         
+      </div>
+    </div>
+  </t>
+</div>
+`;

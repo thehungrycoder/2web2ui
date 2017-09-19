@@ -79,6 +79,7 @@ exports[`renders without crashing 1`] = `
       exact={true}
       path="/account/profile"
     />
+    <Connect(GlobalAlert) />
   </div>
 </BrowserRouter>
 `;

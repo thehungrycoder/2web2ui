@@ -4,9 +4,9 @@ import { mount, shallow } from 'enzyme';
 
 describe('GlobalAlert', () => {
   const props = {
-    error: {
-      message: 'Oh no'
-    }
+    type: 'error',
+    message: 'Oh no',
+    details: 'details'
   };
 
   describe('Mounted', () => {
@@ -15,7 +15,7 @@ describe('GlobalAlert', () => {
       const willReceivePropsSpy = jest.spyOn(GlobalAlert.prototype, 'componentWillReceiveProps');
       const wrapper = mount(<GlobalAlert/>);
       expect(willReceivePropsSpy).not.toHaveBeenCalled();
-      expect(wrapper.state()).toEqual({ show: false });
+      expect(wrapper.state()).toEqual({ show: false, showDetails: false });
       willReceivePropsSpy.mockRestore();
     });
 
@@ -25,16 +25,26 @@ describe('GlobalAlert', () => {
       expect(willReceivePropsSpy).not.toHaveBeenCalled();
       wrapper.setProps(props);
       expect(willReceivePropsSpy).toHaveBeenCalled();
-      expect(wrapper.state()).toEqual({ show: true });
+      expect(wrapper.state()).toEqual({ show: true, showDetails: false });
       willReceivePropsSpy.mockRestore();
     });
 
-    it('should dismis banner', () => {
+    it('should show details', () => {
       const wrapper = mount(<GlobalAlert />);
       wrapper.setProps(props);
-      expect(wrapper.state()).toEqual({ show: true });
-      wrapper.find('.Matchbox-Banner__Dismiss').simulate('click');
-      expect(wrapper.state()).toEqual({ show: false });
+      expect(wrapper.state()).toEqual({ show: true, showDetails: false });
+      wrapper.find('.Matchbox-Snackbar__Content a').simulate('click');
+      expect(wrapper.state()).toEqual({ show: true, showDetails: true });
+    });
+
+    it('should dismiss alert', () => {
+      const handleDismissSpy = jest.spyOn(GlobalAlert.prototype, 'handleDismiss');
+      const wrapper = mount(<GlobalAlert />);
+      wrapper.setProps(props);
+      expect(wrapper.state()).toEqual({ show: true, showDetails: false });
+      wrapper.find('.Matchbox-Snackbar__Dismiss').simulate('click');
+      expect(handleDismissSpy).toHaveBeenCalled();
+      expect(wrapper.state()).toEqual({ show: false, showDetails: false });
     });
   });
 
@@ -45,8 +55,13 @@ describe('GlobalAlert', () => {
       expect(wrapper).toMatchSnapshot();
     });
 
-    it('should render with error', () => {
+    it('should render with error details', () => {
       const wrapper = shallow(<GlobalAlert {...props}/>);
+      expect(wrapper).toMatchSnapshot();
+    });
+
+    it('should render without error details', () => {
+      const wrapper = shallow(<GlobalAlert {...props} details={null} />);
       expect(wrapper).toMatchSnapshot();
     });
   });
