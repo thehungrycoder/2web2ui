@@ -45,6 +45,7 @@ exports[`renders correctly 1`] = `
     onUserAction={[Function]}
   >
     <div
+      className="Typeahead"
       onClick={[Function]}
     >
       <t
@@ -97,7 +98,7 @@ exports[`renders correctly 1`] = `
                   className="Matchbox-TextField__Input"
                   disabled={false}
                   id="subaccount"
-                  name="nodejs"
+                  name="subaccount"
                   onBlur={[Function]}
                   onChange={[Function]}
                   onKeyDown={[Function]}
@@ -176,10 +177,10 @@ exports[`renders correctly 1`] = `
             },
           ]
         }
-        className=""
+        className="List"
       >
         <div
-          className=""
+          className="List"
         >
           <Section
             section={
@@ -438,6 +439,7 @@ exports[`renders correctly with a selected item 1`] = `
     onUserAction={[Function]}
   >
     <div
+      className="Typeahead"
       onClick={[Function]}
     >
       <t
@@ -447,7 +449,7 @@ exports[`renders correctly with a selected item 1`] = `
         autoComplete="off"
         connectRight={
           <t
-            className={undefined}
+            className="Clear"
             onClick={[Function]}
             size="default"
           >
@@ -484,7 +486,7 @@ exports[`renders correctly with a selected item 1`] = `
           <t
             right={
               <t
-                className={undefined}
+                className="Clear"
                 onClick={[Function]}
                 size="default"
               >
@@ -506,7 +508,7 @@ exports[`renders correctly with a selected item 1`] = `
                   className="Matchbox-TextField__Input"
                   disabled={true}
                   id="subaccount"
-                  name="nodejs"
+                  name="subaccount"
                   onBlur={[Function]}
                   onChange={[Function]}
                   onKeyDown={[Function]}
@@ -526,11 +528,12 @@ exports[`renders correctly with a selected item 1`] = `
                 className="Matchbox-Connect__Right"
               >
                 <t
+                  className="Clear"
                   onClick={[Function]}
                   size="default"
                 >
                   <button
-                    className="Matchbox-Button"
+                    className="Matchbox-Button Clear"
                     onClick={[Function]}
                     onMouseUp={[Function]}
                     type="button"
@@ -557,10 +560,10 @@ exports[`renders correctly with a selected item 1`] = `
             },
           ]
         }
-        className=""
+        className="List"
       >
         <div
-          className=""
+          className="List"
         >
           <Section
             section={
@@ -631,6 +634,7 @@ exports[`renders correctly with no subaccounts 1`] = `
     onUserAction={[Function]}
   >
     <div
+      className="Typeahead"
       onClick={[Function]}
     >
       <t
@@ -683,7 +687,7 @@ exports[`renders correctly with no subaccounts 1`] = `
                   className="Matchbox-TextField__Input"
                   disabled={false}
                   id="subaccount"
-                  name="nodejs"
+                  name="subaccount"
                   onBlur={[Function]}
                   onChange={[Function]}
                   onKeyDown={[Function]}
@@ -705,10 +709,10 @@ exports[`renders correctly with no subaccounts 1`] = `
       </t>
       <t
         actions={Array []}
-        className=""
+        className="List"
       >
         <div
-          className=""
+          className="List"
         >
           <Section
             section={

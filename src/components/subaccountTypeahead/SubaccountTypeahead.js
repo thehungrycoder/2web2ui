@@ -1,4 +1,4 @@
-import cx from 'classnames';
+import classnames from 'classnames/bind';
 import Downshift from 'downshift';
 import React, { Component } from 'react';
 import { ActionList, Button, TextField } from '@sparkpost/matchbox';
@@ -6,6 +6,8 @@ import { ActionList, Button, TextField } from '@sparkpost/matchbox';
 import sortMatch from 'helpers/sortMatch';
 import Item from './SubaccountTypeaheadItem';
 import styles from './SubaccountTypeahead.module.scss';
+
+const cx = classnames.bind(styles);
 
 const itemToString = (item) => (item ? item.name : '');
 
@@ -25,22 +27,19 @@ export class SubaccountTypeahead extends Component {
     isOpen
   }) => {
     const { name, subaccounts } = this.props;
+
     const mappedMatches = sortMatch(
       subaccounts,
       inputValue,
-      ({ name, id }) => `${name} ID: ${id}`
-    ).map((item, index) => {
-      const { id, name } = item;
+      (item) => `${item.name} ID: ${item.id}`
+    ).map((item, index) => ({
+      ...getItemProps({ item, index }),
+      content: <Item name={item.name} id={item.id} />,
+      highlighted: highlightedIndex === index
+    }));
 
-      return {
-        ...getItemProps({ item, index }),
-        content: <Item name={name} id={id} />,
-        highlighted: highlightedIndex === index
-      };
-    });
-
-    const listClasses = cx(styles.List, {
-      [styles.open]: isOpen && mappedMatches.length
+    const listClasses = cx('List', {
+      open: isOpen && mappedMatches.length
     });
 
     const textFieldProps = getInputProps({
@@ -53,7 +52,7 @@ export class SubaccountTypeahead extends Component {
     });
 
     return (
-      <div className={styles.Typeahead}>
+      <div className={cx('Typeahead')}>
         <TextField {...textFieldProps} />
         <ActionList className={listClasses} actions={mappedMatches} />
       </div>
@@ -62,7 +61,7 @@ export class SubaccountTypeahead extends Component {
 
   renderClearButton(clearSelection) {
     return (
-      <Button className={styles.Clear} onClick={clearSelection}>
+      <Button className={cx('Clear')} onClick={clearSelection}>
         Clear
       </Button>
     );

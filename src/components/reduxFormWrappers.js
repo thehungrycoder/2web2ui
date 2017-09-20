@@ -39,6 +39,15 @@ export const RadioGroup = ({ input, options, title }) => (
   </Radio.Group>
 );
 
+/**
+ * @example
+ * // This plugs into a redux-form Field like so:
+ * <Field
+ *   name="subaccount"
+ *   component={SubaccountTypeaheadWrapper}
+ *   subaccounts={subaccountsFromReduxStore}
+ * />
+ */
 export const SubaccountTypeaheadWrapper = ({ input, subaccounts }) => (
   <SubaccountTypeahead
     name={input.name}
