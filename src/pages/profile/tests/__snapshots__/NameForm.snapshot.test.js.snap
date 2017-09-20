@@ -642,7 +642,7 @@ exports[`renders correctly 1`] = `
                                 <input
                                   className="Matchbox-TextField__Input"
                                   id="firstName"
-                                  name="nodejs"
+                                  name="firstName"
                                   onBlur={[Function]}
                                   onChange={[Function]}
                                   onDragStart={[Function]}
@@ -1018,7 +1018,7 @@ exports[`renders correctly 1`] = `
                                 <input
                                   className="Matchbox-TextField__Input"
                                   id="lirstName"
-                                  name="nodejs"
+                                  name="lastName"
                                   onBlur={[Function]}
                                   onChange={[Function]}
                                   onDragStart={[Function]}
