@@ -1,16 +1,20 @@
 import cx from 'classnames';
 import Downshift from 'downshift';
-import PropTypes from 'prop-types';
-import React from 'react';
+import React, { Component } from 'react';
 import { ActionList, Button, TextField } from '@sparkpost/matchbox';
 
+import sortMatch from 'helpers/sortMatch';
 import Item from './SubaccountTypeaheadItem';
 import styles from './SubaccountTypeahead.module.scss';
 
 const itemToString = (item) => (item ? item.name : '');
 
-const SubaccountTypeahead = ({ name, onChange, subaccounts }) => {
-  const typeaheadFn = ({
+export class SubaccountTypeahead extends Component {
+  static defaultProps = {
+    name: 'subaccount'
+  };
+
+  typeaheadFn = ({
     getInputProps,
     getItemProps,
     getLabelProps,
@@ -20,69 +24,63 @@ const SubaccountTypeahead = ({ name, onChange, subaccounts }) => {
     clearSelection,
     isOpen
   }) => {
-    const mappedMatches = subaccounts
-      .filter(
-        (item) =>
-          !inputValue ||
-          item.name.toLowerCase().includes(inputValue.toLowerCase()) ||
-          item.id.toString().includes(inputValue)
-      )
-      // .slice(0, 10) // TODO tweak this number
-      .map((item, index) => {
-        const { id, name } = item;
+    const { name, subaccounts } = this.props;
+    const mappedMatches = sortMatch(
+      subaccounts,
+      inputValue,
+      ({ name, id }) => `${name} ID: ${id}`
+    ).map((item, index) => {
+      const { id, name } = item;
 
-        return {
-          ...getItemProps({ item, index }),
-          content: <Item name={name} id={id} />,
-          highlighted: highlightedIndex === index
-        };
-      });
+      return {
+        ...getItemProps({ item, index }),
+        content: <Item name={name} id={id} />,
+        highlighted: highlightedIndex === index
+      };
+    });
 
     const listClasses = cx(styles.List, {
       [styles.open]: isOpen && mappedMatches.length
     });
 
+    const textFieldProps = getInputProps({
+      connectRight: selectedItem && this.renderClearButton(clearSelection),
+      disabled: !!selectedItem,
+      id: name,
+      label: 'Subaccount',
+      name,
+      placeholder: 'None'
+    });
+
     return (
       <div className={styles.Typeahead}>
-        <TextField
-          {...getInputProps({
-            name,
-            id: name,
-            placeholder: 'None',
-            label: 'Subaccount',
-            disabled: !!selectedItem,
-            connectRight: selectedItem && (
-              <Button className={styles.Clear} onClick={clearSelection}>
-                Clear
-              </Button>
-            )
-          })}
-        />
+        <TextField {...textFieldProps} />
         <ActionList className={listClasses} actions={mappedMatches} />
       </div>
     );
   };
 
-  return (
-    <Downshift onChange={onChange} itemToString={itemToString}>
-      {typeaheadFn}
-    </Downshift>
-  );
-};
+  renderClearButton(clearSelection) {
+    return (
+      <Button className={styles.Clear} onClick={clearSelection}>
+        Clear
+      </Button>
+    );
+  }
 
-SubaccountTypeahead.propTypes = {
-  name: PropTypes.string,
-  onChange: PropTypes.func,
-  subaccounts: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired
-    })
-  ).isRequired
-};
+  render() {
+    const { onChange, selectedItem } = this.props;
 
-SubaccountTypeahead.defaultProps = {
-  name: 'subaccount'
-};
+    return (
+      <Downshift
+        itemToString={itemToString}
+        onChange={onChange}
+        selectedItem={selectedItem}
+      >
+        {this.typeaheadFn}
+      </Downshift>
+    );
+  }
+}
 
 export default SubaccountTypeahead;

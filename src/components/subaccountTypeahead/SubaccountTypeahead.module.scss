@@ -12,7 +12,9 @@
   box-shadow: shadow(deep);
   left: 0;
   margin-top: 3px;
+  max-height: 20rem;
   opacity: 0;
+  overflow-y: scroll;
   pointer-events: none;
   position: absolute;
   right: 0;

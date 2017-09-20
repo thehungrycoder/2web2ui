@@ -43,6 +43,7 @@ export const SubaccountTypeaheadWrapper = ({ input, subaccounts }) => (
   <SubaccountTypeahead
     name={input.name}
     onChange={input.onChange}
+    selectedItem={input.value}
     subaccounts={subaccounts}
   />
 );
