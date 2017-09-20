@@ -1,5 +1,6 @@
 import React from 'react';
 import { TextField, Select, Radio } from '@sparkpost/matchbox';
+import PlanPicker from './planPicker/PlanPicker';
 
 /*
  Wrapped matchbox components for use with react-redux Field components
@@ -18,4 +19,9 @@ export const RadioGroup = ({ input, options, title }) => (
     {title}
     {options.map((o) => (<Radio key={o.label} {...input} id={o.label} label={o.label} value={o.value} checked={o.value === input.value}/>))}
   </Radio.Group>
+);
+
+
+export const PlanPickerWrapper = ({ input, plans }) => (
+  <PlanPicker plans={plans} {...input} />
 );
