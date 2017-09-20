@@ -17,10 +17,6 @@ describe('Action Creator: Billing', () => {
     expect(mockStore.getActions()).toMatchSnapshot();
   }
 
-  function returnPromiseThunk(arg) {
-    return () => Promise.resolve(arg);
-  }
-
   beforeEach(() => {
     mockStore = createMockStore({});
     token = 'SOME$%TEST#*TOKEN';

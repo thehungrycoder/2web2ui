@@ -51,17 +51,6 @@ export function cors(context, data = {}) {
     }
   });
 }
-// export function corsCreate(data) {
-//   return sparkpostApiRequest({
-//     type: 'CORS_CREATE',
-//     meta: {
-//       method: 'POST',
-//       url: '/account/cors-data',
-//       params: { context: 'create-account' },
-//       data
-//     }
-//   });
-// }
 
 export function updateCreditCard({ data, token, signature }) {
   return zuoraRequest({
