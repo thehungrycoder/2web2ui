@@ -7,6 +7,7 @@ import auth from './auth';
 import billing from './billing';
 import credentials from './credentials';
 import currentUser from './currentUser';
+import ipPools from './ipPools';
 import metrics from './metrics';
 import reportFilters from './reportFilters';
 import sendingDomains from './sendingDomains';
@@ -23,6 +24,7 @@ export default combineReducers({
   credentials,
   currentUser,
   form,
+  ipPools,
   metrics,
   reportFilters,
   sendingDomains,
