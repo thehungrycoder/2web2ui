@@ -1,5 +1,4 @@
 import requestHelperFactory from 'actions/helpers/requestHelperFactory';
-import config from 'config/index';
 import { refresh, logout } from 'actions/auth';
 import { received } from 'actions/apiFailure';
 import { useRefreshToken } from 'helpers/http';
@@ -40,7 +39,7 @@ const sparkpostRequest = requestHelperFactory({
     const { message, response = {}} = err;
     const { auth } = getState();
     const { retries = 0 } = meta;
-    
+
     // NOTE: if this is a 401 and we have a refresh token, we need to do a
     // refresh to get a new auth token and then re-dispatch this action
     if (response.status === 401 && auth.refreshToken && retries < maxRefreshRetries) {

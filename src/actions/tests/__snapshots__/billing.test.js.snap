@@ -1,0 +1,177 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Action Creator: Billing should dispatch a chained billing create action 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "data": Object {
+        "some": "test-cors-data",
+      },
+      "method": "POST",
+      "params": Object {
+        "context": "create-account",
+      },
+      "url": "/account/cors-data",
+    },
+    "type": "CORS_CREATE_ACCOUNT",
+  },
+  Object {
+    "meta": Object {
+      "data": Object {
+        "formatted": "data",
+      },
+      "headers": Object {
+        "signature": undefined,
+        "token": undefined,
+      },
+      "method": "POST",
+      "url": "/accounts",
+    },
+    "type": "ZUORA_CREATE",
+  },
+  Object {
+    "meta": Object {
+      "method": "POST",
+      "url": "/account/subscription/check",
+    },
+    "type": "SYNC_SUBSCRIPTION",
+  },
+  Object {
+    "meta": Object {
+      "method": "GET",
+      "params": Object {},
+      "url": "/account",
+    },
+    "type": "FETCH_ACCOUNT",
+  },
+]
+`;
+
+exports[`Action Creator: Billing should dispatch a cors action 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "data": Object {
+        "some": "cors-data",
+      },
+      "method": "POST",
+      "params": Object {
+        "context": "some-context",
+      },
+      "url": "/account/cors-data",
+    },
+    "type": "CORS_SOME_CONTEXT",
+  },
+]
+`;
+
+exports[`Action Creator: Billing should dispatch a create zuora account action 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "data": Object {
+        "some": "test-zuora-data",
+      },
+      "headers": Object {
+        "signature": "some-test-signature",
+        "token": "SOME$%TEST#*TOKEN",
+      },
+      "method": "POST",
+      "url": "/accounts",
+    },
+    "type": "ZUORA_CREATE",
+  },
+]
+`;
+
+exports[`Action Creator: Billing should dispatch a subscription sync action 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "method": "POST",
+      "url": "/account/subscription/check",
+    },
+    "type": "SYNC_SUBSCRIPTION",
+  },
+]
+`;
+
+exports[`Action Creator: Billing should dispatch an add dedicated IPs action 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "data": Object {
+        "pool": "my_cool_test_pool",
+        "quantity": 2,
+      },
+      "method": "POST",
+      "url": "/account/add-ons/dedicated_ips",
+    },
+    "type": "UPDATE_ADDON_DEDICATED_IPS",
+  },
+]
+`;
+
+exports[`Action Creator: Billing should dispatch an update add-ons action 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "data": Object {
+        "some": "add-on-data",
+      },
+      "method": "POST",
+      "url": "/account/add-ons/some_product",
+    },
+    "type": "UPDATE_ADDON_SOME_PRODUCT",
+  },
+]
+`;
+
+exports[`Action Creator: Billing should dispatch an update billing action 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "data": Object {
+        "some": "data",
+      },
+      "method": "PUT",
+      "url": "/account/subscription",
+    },
+    "type": "UPDATE_BILLING",
+  },
+]
+`;
+
+exports[`Action Creator: Billing should dispatch an update credit card action 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "data": Object {
+        "some": "credit-card-data",
+      },
+      "headers": Object {
+        "signature": "some-test-signature",
+        "token": "SOME$%TEST#*TOKEN",
+      },
+      "method": "POST",
+      "url": "/payment-methods/credit-cards",
+    },
+    "type": "ZUORA_UPDATE_CC",
+  },
+]
+`;
+
+exports[`Action Creator: Billing should dispatch an update subscription action 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "data": Object {
+        "code": "test-code",
+      },
+      "method": "PUT",
+      "url": "/account/subscription",
+    },
+    "type": "UPDATE_SUBSCRIPTION",
+  },
+]
+`;
