@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Layout, PlanPickerWrapper } from 'components';
@@ -8,13 +7,18 @@ import { Field, reduxForm } from 'redux-form';
 import PaymentForm from './components/PaymentForm';
 import BillingAddressForm from './components/BillingAddressForm';
 import BillingContactForm from './components/BillingContactForm';
+import DedicatedIpsForm from './components/DedicatedIpsForm';
 
 import { getPlans } from 'actions/account';
 import { getBillingCountries } from 'actions/billing';
 import _ from 'lodash';
 
+
 const FORMNAME = 'test';
 
+/**
+ * HEY this is just a test page
+ */
 class BillingPage extends Component {
   componentDidMount() {
     if (!this.props.billing.plans) {
@@ -47,6 +51,9 @@ class BillingPage extends Component {
           </Panel.Section>
           <Panel.Section>
             <BillingContactForm countries={this.props.billing.countries} formName={FORMNAME} />
+          </Panel.Section>
+          <Panel.Section>
+            <DedicatedIpsForm formName={FORMNAME} />
           </Panel.Section>
         </Panel>
       </Layout.App>

@@ -21,7 +21,6 @@ export const RadioGroup = ({ input, options, title }) => (
   </Radio.Group>
 );
 
-
 export const PlanPickerWrapper = ({ input, plans }) => (
   <PlanPicker plans={plans} {...input} />
 );

@@ -1,11 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Field, formValueSelector } from 'redux-form';
-
 import PropTypes from 'prop-types';
+
 import { Grid } from '@sparkpost/matchbox';
 import { TextFieldWrapper, SelectWrapper } from 'components';
 import { required, email } from 'helpers/validation';
+import { getZipLabel } from 'helpers/billing';
 
 import styles from './Forms.module.scss';
 import _ from 'lodash';
@@ -95,19 +96,8 @@ BillingContactForm.propTypes = {
     value: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired
   })).isRequired,
-  countryValue: PropTypes.string
-};
-
-const getZipLabel = (country) => {
-  if (country === 'US') {
-    return 'Zip Code';
-  }
-
-  if (country === 'CA') {
-    return 'Postal Code';
-  }
-
-  return 'Zip/Postal Code';
+  countryValue: PropTypes.string,
+  formName: PropTypes.string.isRequired
 };
 
 // Get country value from state

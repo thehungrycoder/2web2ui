@@ -116,3 +116,15 @@ function formatForSelect({ code, name, states }) {
   }
   return { value: code, label: name };
 }
+
+export function getZipLabel(country) {
+  if (country === 'US') {
+    return 'Zip Code';
+  }
+
+  if (country === 'CA') {
+    return 'Postal Code';
+  }
+
+  return 'Zip/Postal Code';
+};
