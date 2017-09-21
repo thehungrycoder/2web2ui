@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Layout, PlanPickerWrapper } from 'components';
+import { Layout, PlanPicker } from 'components';
 import { Page, Panel } from '@sparkpost/matchbox';
 
-import { Field, reduxForm } from 'redux-form';
+import { reduxForm } from 'redux-form';
 import PaymentForm from './components/PaymentForm';
 import BillingAddressForm from './components/BillingAddressForm';
 import BillingContactForm from './components/BillingContactForm';
@@ -12,7 +12,6 @@ import DedicatedIpsForm from './components/DedicatedIpsForm';
 import { getPlans } from 'actions/account';
 import { getBillingCountries } from 'actions/billing';
 import _ from 'lodash';
-
 
 const FORMNAME = 'test';
 
@@ -42,7 +41,7 @@ class BillingPage extends Component {
         <Page title='Billing'/>
         <Panel>
           <Panel.Section></Panel.Section>
-          <Field component={PlanPickerWrapper} name='planpicker' plans={plans}/>
+            <PlanPicker subscription={account.subscription} pendingSubscription={account.pending_subscription} plans={plans} />
           <Panel.Section>
             <PaymentForm />
           </Panel.Section>

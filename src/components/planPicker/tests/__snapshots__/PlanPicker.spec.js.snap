@@ -2,7 +2,11 @@
 
 exports[`renders correctly 1`] = `
 <PlanPicker
-  onChange={[Function]}
+  input={
+    Object {
+      "onChange": [Function],
+    }
+  }
   plans={
     Array [
       Object {
@@ -269,7 +273,18 @@ exports[`renders correctly 1`] = `
 
 exports[`renders correctly with an initial value 1`] = `
 <PlanPicker
-  onChange={[Function]}
+  input={
+    Object {
+      "onChange": [Function],
+      "value": Object {
+        "code": "4",
+        "monthly": 400,
+        "name": "Four",
+        "overage": 0.4,
+        "volume": 4,
+      },
+    }
+  }
   plans={
     Array [
       Object {
@@ -297,15 +312,6 @@ exports[`renders correctly with an initial value 1`] = `
         "volume": 3,
       },
     ]
-  }
-  value={
-    Object {
-      "code": "4",
-      "monthly": 400,
-      "name": "Four",
-      "overage": 0.4,
-      "volume": 4,
-    }
   }
 >
   <Downshift

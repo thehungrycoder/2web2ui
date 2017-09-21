@@ -40,9 +40,11 @@ const selected = {
 };
 
 const props = {
-  onChange: jest.fn(),
+  input: { onChange: jest.fn() },
   plans,
 };
+
+const selectedProps = { ...props, input: { ...props.input, value: selected } };
 
 it('renders correctly', () => {
   const wrapper = mount(<PlanPicker {...props} />);
@@ -50,6 +52,17 @@ it('renders correctly', () => {
 });
 
 it('renders correctly with an initial value', () => {
-  const wrapper = mount(<PlanPicker {...props} value={selected} />);
+  const wrapper = mount(<PlanPicker {...selectedProps} />);
   expect(wrapper).toMatchSnapshot();
+});
+
+it('should focus on input when opened', () => {
+  const wrapper = mount(<PlanPicker {...props} />);
+  const openSpy = jest.spyOn(wrapper.instance(), 'handleOpen');
+  expect(openSpy).not.toHaveBeenCalled();
+
+  // This passes and I have no idea why it works
+  wrapper.find(Downshift).node.openMenu();
+  wrapper.find('a').at(3).simulate('click');
+  expect(openSpy).toHaveBeenCalled();
 });
