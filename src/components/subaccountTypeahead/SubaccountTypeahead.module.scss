@@ -30,11 +30,6 @@
   }
 }
 
-// TODO: Remove me once this is fixed in Matchbox
-.Clear {
-  box-shadow: none;
-}
-
 .Item {
   @include clearfix;
 

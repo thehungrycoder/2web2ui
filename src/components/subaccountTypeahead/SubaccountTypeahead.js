@@ -60,11 +60,7 @@ export class SubaccountTypeahead extends Component {
   };
 
   renderClearButton(clearSelection) {
-    return (
-      <Button className={cx('Clear')} onClick={clearSelection}>
-        Clear
-      </Button>
-    );
+    return <Button onClick={clearSelection}>Clear</Button>;
   }
 
   render() {

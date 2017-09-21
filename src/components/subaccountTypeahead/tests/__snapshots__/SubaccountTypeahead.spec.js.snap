@@ -449,7 +449,6 @@ exports[`renders correctly with a selected item 1`] = `
         autoComplete="off"
         connectRight={
           <t
-            className="Clear"
             onClick={[Function]}
             size="default"
           >
@@ -486,7 +485,6 @@ exports[`renders correctly with a selected item 1`] = `
           <t
             right={
               <t
-                className="Clear"
                 onClick={[Function]}
                 size="default"
               >
@@ -528,12 +526,11 @@ exports[`renders correctly with a selected item 1`] = `
                 className="Matchbox-Connect__Right"
               >
                 <t
-                  className="Clear"
                   onClick={[Function]}
                   size="default"
                 >
                   <button
-                    className="Matchbox-Button Clear"
+                    className="Matchbox-Button"
                     onClick={[Function]}
                     onMouseUp={[Function]}
                     type="button"
