@@ -1,4 +1,3 @@
-/* eslint-disable */
 import _ from 'lodash';
 
 export function formatDataForCors(values) {
@@ -127,4 +126,4 @@ export function getZipLabel(country) {
   }
 
   return 'Zip/Postal Code';
-};
+}
