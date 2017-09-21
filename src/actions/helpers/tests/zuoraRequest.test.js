@@ -26,8 +26,10 @@ describe('Helper: Zuora API Request', () => {
 
   it('should handle a zuora failure', async () => {
     axiosMocks.zuora.mockImplementation(() => Promise.resolve({
-      success: false,
-      reasons: [{ message: 'The credit card is bad and wrong' }]
+      data: {
+        success: false,
+        reasons: [{ message: 'The credit card is bad and wrong' }]
+      }
     }));
 
     try {

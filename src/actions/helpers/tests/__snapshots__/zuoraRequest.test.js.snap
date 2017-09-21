@@ -11,12 +11,14 @@ Array [
     "payload": Object {
       "message": "The credit card is bad and wrong",
       "response": Object {
-        "reasons": Array [
-          Object {
-            "message": "The credit card is bad and wrong",
-          },
-        ],
-        "success": false,
+        "data": Object {
+          "reasons": Array [
+            Object {
+              "message": "The credit card is bad and wrong",
+            },
+          ],
+          "success": false,
+        },
       },
     },
     "type": "ZUORA_REQUEST_FAIL",
