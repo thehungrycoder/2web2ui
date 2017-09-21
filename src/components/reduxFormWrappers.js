@@ -10,8 +10,8 @@ export const TextFieldWrapper = ({ input, meta: { active, touched, error }, ...r
   <TextField id={input.name} {...rest} {...input} error={!active && touched && error ? error : undefined} />
 );
 
-export const SelectWrapper = ({ input, meta: { error }, ...rest }) => (
-  <Select id={input.name} {...input} error={error} {...rest}/>
+export const SelectWrapper = ({ input, meta: { touched, error }, ...rest }) => (
+  <Select id={input.name} {...input} error={touched && error ? error : undefined} {...rest}/>
 );
 
 export const RadioGroup = ({ input, options, title }) => (

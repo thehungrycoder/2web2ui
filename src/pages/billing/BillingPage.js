@@ -1,28 +1,21 @@
+/* eslint-disable */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import _ from 'lodash';
-import { Page } from '@sparkpost/matchbox';
+import { Layout, PlanPickerWrapper } from 'components';
+import { Page, Panel } from '@sparkpost/matchbox';
 
-import {
-  billingCreate,
-  updateSubscription,
-  getBillingCountries
-} from 'actions/billing';
+import { Field, reduxForm } from 'redux-form';
+import PaymentForm from './components/PaymentForm';
+import BillingAddressForm from './components/BillingAddressForm';
+import BillingContactForm from './components/BillingContactForm';
+
 import { getPlans } from 'actions/account';
+import { getBillingCountries } from 'actions/billing';
+import _ from 'lodash';
 
-import { Layout } from 'components';
-import UpgradeModal from './components/UpgradeModal';
-import YourPlanPanel from './components/YourPlanPanel';
+const FORMNAME = 'test';
 
-export class BillingPage extends Component {
-  state = {
-    showUpgradeModal: false
-  };
-
-  togglePlansModal = () => {
-    this.setState({ showUpgradeModal: !this.state.showUpgradeModal });
-  };
-
+class BillingPage extends Component {
   componentDidMount() {
     if (!this.props.billing.plans) {
       this.props.getPlans();
@@ -33,80 +26,55 @@ export class BillingPage extends Component {
     }
   }
 
-  // Submit function given to CreditCardForm
-  updatePlan = (values) => {
-    let request;
-    if (this.props.account.billing) {
-      request = this.props.updateSubscription(values.selectedPlan.code);
-    } else {
-      request = this.props.billingCreate(values);
-    }
-    request.then(() => this.setState({ showUpgradeModal: false }));
-  }
-
-  renderBilling(account, billing) {
-    // TODO: move billing reducer into account reducer to have access to account
-    //       and do all this in there. Or....SELECTORS
-    const currentPlan = _.find(billing.plans, {
-      code: account.subscription.code
-    });
-    const publicPlans = _.filter(
-      billing.plans,
-      (plan) => plan.status === 'public'
-    );
-
-    const panelActions = [
-      { content: 'Change Plan', onClick: this.togglePlansModal }
-    ];
-
-    const { showUpgradeModal } = this.state;
-
-    const modalProps = {
-      open: showUpgradeModal,
-      handleToggle: this.togglePlansModal,
-      plans: publicPlans,
-      currentPlan: currentPlan,
-      updatePlan: this.updatePlan,
-      currentUser: this.props.currentUser,
-      countries: this.props.billing.countries,
-      hasBilling: !!account.billing
-    };
-
-    return (
-      <div>
-        <YourPlanPanel currentPlan={currentPlan} actions={panelActions} />
-        <UpgradeModal {...modalProps} />
-      </div>
-    );
-  }
-
   render() {
-    const { account, billing } = this.props;
+    const { billing, account, plans } = this.props;
 
-    // TODO: develop pending status for account reducer
-    const loading =
-      Object.keys(account).length === 0 ||
-      billing.plansLoading ||
-      billing.countriesLoading;
+    if (!billing.plans || Object.keys(account).length === 0) {
+      return null;
+    }
 
     return (
-      <Layout.App loading={loading}>
-        <Page title="Billing" />
-        {!loading && this.renderBilling(account, billing)}
+      <Layout.App>
+        <Page title='Billing'/>
+        <Panel>
+          <Panel.Section></Panel.Section>
+          <Field component={PlanPickerWrapper} name='planpicker' plans={plans}/>
+          <Panel.Section>
+            <PaymentForm />
+          </Panel.Section>
+          <Panel.Section>
+            <BillingAddressForm countries={this.props.billing.countries} formName={FORMNAME} />
+          </Panel.Section>
+          <Panel.Section>
+            <BillingContactForm countries={this.props.billing.countries} formName={FORMNAME} />
+          </Panel.Section>
+        </Panel>
       </Layout.App>
     );
   }
 }
 
-const mapStateToProps = ({ account, billing, currentUser }) => ({
-  account,
-  billing,
-  currentUser
-});
+const mapStateToProps = ({ account, billing }) => {
+  const publicPlans = billing.plans
+    ? _.sortBy(billing.plans.filter((plan) => plan.status === 'public'), (plan) => plan.volume)
+    : [];
 
-export default connect(mapStateToProps, {
-  getPlans,
-  getBillingCountries,
-  billingCreate,
-  updateSubscription
-})(BillingPage);
+  const initialPlan = billing.plans && Object.keys(account).length
+    ? _.find(billing.plans, { code: account.subscription.code })
+    : {};
+
+  return {
+    account,
+    billing,
+    plans: publicPlans,
+    initialValues: {
+      planpicker: initialPlan
+    }
+  };
+};
+
+const formOptions = {
+  form: FORMNAME,
+  enableReinitialize: true
+};
+export default connect(mapStateToProps, { getPlans, getBillingCountries })(reduxForm(formOptions)(BillingPage));

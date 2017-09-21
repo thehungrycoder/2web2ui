@@ -15,6 +15,11 @@ class PlanPicker extends Component {
   render() {
     const { plans, onChange, value } = this.props;
 
+    if (typeof(value.overage) === 'undefined' || typeof(value.monthly) === 'undefined') {
+      // TODO is billable / manually billed, should be handled above this component
+      return null;
+    }
+
     const planFn = ({
       getInputProps,
       getRootProps,
@@ -73,12 +78,13 @@ PlanPicker.propTypes = {
     monthly: PropTypes.number.isRequired,
     overage: PropTypes.number.isRequired
   })).isRequired,
+
   // Sets the initial plan
   value: PropTypes.shape({
     code: PropTypes.string.isRequired,
     volume: PropTypes.number.isRequired,
-    monthly: PropTypes.number.isRequired,
-    overage: PropTypes.number.isRequired
+    monthly: PropTypes.number,
+    overage: PropTypes.number
   })
 };
 
