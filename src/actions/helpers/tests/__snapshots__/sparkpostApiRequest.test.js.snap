@@ -55,22 +55,6 @@ Array [
     },
     "type": "TEST_FAIL",
   },
-  Object {
-    "meta": Object {
-      "method": "GET",
-      "url": "/some/path",
-    },
-    "payload": Object {
-      "message": "API call failed",
-      "response": Object {
-        "data": Object {
-          "results": Array [],
-        },
-        "status": 500,
-      },
-    },
-    "type": "API_FAILURE_RECEIVED",
-  },
 ]
 `;
 
