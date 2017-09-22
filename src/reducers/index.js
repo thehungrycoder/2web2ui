@@ -22,6 +22,7 @@ export default combineReducers({
   billing,
   credentials,
   currentUser,
+  form,
   ipPools,
   globalAlert,
   metrics,
