@@ -1,7 +1,7 @@
 import React from 'react';
 
 import ScrollToTop from './ScrollToTop';
-import { Loading, Navigation, GlobalError } from 'components';
+import { Loading, Navigation } from 'components';
 import styles from './Layout.module.scss';
 
 const App = ({ children, loading }) => (
@@ -12,9 +12,6 @@ const App = ({ children, loading }) => (
     <main role="main" className={styles.content}>
       <div className={styles.container}>
         { loading ? <div className={styles.loading}><Loading /></div> : children }
-      </div>
-      <div className={styles.appError}>
-        <GlobalError />
       </div>
     </main>
     <ScrollToTop/>

@@ -1,6 +1,3 @@
-// SparkPost metric colors
-// colors = ['#37aadc', '#9bcd5a', '#b70c9e', '#e3af00', '#6D39A1']
-
 const config = {
   apiBase: 'no-default-set',
   apiDateFormat: 'YYYY-MM-DDTHH:mm',
@@ -17,7 +14,7 @@ const config = {
       'Content-Type': 'application/x-www-form-urlencoded'
     }
   },
-  chartColors: ['#20578E', '#F38415', '#45A6FF', '#FFD300', '#41B5AB', '#6BEAA8'],
+  chartColors: ['#04AEF9', '#fa6423', '#FFD300', '#8CCA3A', '#2693c3'],
   metricsPrecisionMap: [
     { time: 60, value: '1min', format: 'ha' },
     { time: 60 * 2, value: '5min', format: 'ha' },

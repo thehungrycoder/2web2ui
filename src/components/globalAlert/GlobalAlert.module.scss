@@ -1,0 +1,22 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.GlobalAlert {
+  position: fixed;
+  z-index: 1;
+  right: spacing();
+  bottom: spacing();
+  transform: translate(0, 15px);
+
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.2s cubic-bezier(0,0,.5,1.5);
+
+  box-shadow: shadow();
+}
+
+.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(0, 0);
+  transition: 0.2s 1s cubic-bezier(0,0,.5,1.8);
+}

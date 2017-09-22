@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 // Actions
 import { getDraft, getPublished, update, deleteTemplate, publish } from '../../actions/templates';
+import { showAlert } from 'actions/globalAlert';
 
 // Selectors
 import { templateById } from 'selectors/templates';
@@ -26,28 +27,33 @@ class EditPage extends Component {
 
   componentDidMount() {
     const { match, getDraft, getPublished } = this.props;
-    getDraft(match.params.id);
-    getPublished(match.params.id);
+    // Do nothing if these fail
+    getDraft(match.params.id).catch((err) => err);
+    getPublished(match.params.id).catch((err) => err);
   }
 
   handlePublish(values) {
-    const { update, publish, match, getDraft } = this.props;
-    return update(values)
-      .then(() => publish(match.params.id))
-      .then(() => getDraft(match.params.id))
-      .then(() => this.setState({ redirectTo: `/templates/edit/${match.params.id}/published` }));
+    const { publish, match, showAlert } = this.props;
+    return publish(match.params.id)
+      .then(() => this.setState({ redirectTo: `/templates/edit/${match.params.id}/published` }))
+      .then(() => showAlert({ type: 'success', message: 'Template published' }))
+      .catch((err) => showAlert({ type: 'error', message: 'Could not publish template', details: err.message }));
   }
 
   handleSave(values) {
-    const { update, match, getDraft } = this.props;
+    const { update, match, getDraft, showAlert } = this.props;
     return update(values)
-      .then(() => getDraft(match.params.id));
+      .then(() => getDraft(match.params.id))
+      .then(() => showAlert({ type: 'success', message: 'Template saved' }))
+      .catch((err) => showAlert({ type: 'error', message: 'Could not save template', details: err.message }));
   }
 
   handleDelete() {
-    const { deleteTemplate, match } = this.props;
+    const { deleteTemplate, match, showAlert } = this.props;
     return deleteTemplate(match.params.id)
-      .then(() => this.setState({ redirectTo: '/templates/' }));
+      .then(() => this.setState({ redirectTo: '/templates/' }))
+      .then(() => showAlert({ message: 'Template deleted' }))
+      .catch((err) => showAlert({ type: 'error', message: 'Could not delete template', details: err.message }));
   }
 
   handleDeleteModalToggle() {
@@ -55,11 +61,11 @@ class EditPage extends Component {
   }
 
   componentDidUpdate() {
-    const { loading, template } = this.props;
-    if (!loading && !template.draft && !template.published) {
-      // Redirect if no draft or published found
-      // TODO: show error banner?
-      this.setState({ redirectTo: '/templates/' });
+    const { loading, template, showAlert } = this.props;
+
+    if (!loading && !Object.keys(template.draft).length && !Object.keys(template.published).length) {
+      this.setState({ redirectTo: '/templates/' }); // Redirect if no draft or published found
+      showAlert({ type: 'error', message: 'Could not find template' });
     }
   }
 
@@ -160,5 +166,6 @@ export default connect(mapStateToProps, {
   getPublished,
   update,
   deleteTemplate,
-  publish
+  publish,
+  showAlert
 })(reduxForm(formOptions)(EditPage));
