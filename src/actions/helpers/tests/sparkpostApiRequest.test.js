@@ -71,14 +71,14 @@ describe('Helper: SparkPost API Request', () => {
     });
 
     it('should dispatch a special 5xx error action', async () => {
-      jest.spyOn(apiFailure, 'received');
+      jest.spyOn(globalAlertMock, 'showAlert');
       apiErr.response.status = 500;
       try {
         await mockStore.dispatch(sparkpostApiRequest(action));
       } catch (err) {
-        const { message, response } = err;
-        expect(err).toBe(apiErr);
-        expect(globalAlertMock.showAlert).toHaveBeenCalledWith({ message: 'Something went wrong.', type: 'error', details: message});
+        // const { message, response } = err;
+        // expect(err).toBe(apiErr);
+        expect(globalAlertMock.showAlert).toHaveBeenCalledWith({ message: 'Something went wrong.', type: 'error', details: apiErr.message});
         expect(mockStore.getActions()).toMatchSnapshot();
       }
       globalAlertMock.showAlert.mockRestore();
