@@ -1,11 +1,11 @@
 import _ from 'lodash';
 
 export function overviewProps(state) {
-  const { billing, subscription } = state.account;
+  const { subscription } = state.account;
 
   return {
     loading: !Object.keys(state.account).length || state.billing.plansLoading,
-    hasBillingAccount: !!billing,
+    hasBillingAccount: !!state.billing,
     plans: selectPublicPlans(state),
     currentPlan: selectCurrentPlan(state),
     subscription

@@ -1,19 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Selector: Get Account Billing Info should return the selected data for a customer with a billing account 1`] = `
+exports[`Selector: Get Account Overview Info should return the selected data for a customer with a billing account 1`] = `
 Object {
-  "code": "test-plan-0817",
+  "currentPlan": Object {
+    "code": "test-plan-0817",
+    "status": "public",
+    "volume": 5000000,
+  },
   "hasBillingAccount": true,
-  "plan": "test plan",
-  "self_serve": true,
-}
-`;
-
-exports[`Selector: Get Account Billing Info should return the selected data for a customer with no billing account 1`] = `
-Object {
-  "code": "test-plan-0817",
-  "hasBillingAccount": false,
-  "plan": "test plan",
-  "self_serve": true,
+  "loading": false,
+  "plans": Array [
+    Object {
+      "code": "test-plan-0817",
+      "status": "public",
+      "volume": 5000000,
+    },
+  ],
+  "subscription": Object {
+    "code": "test-plan-0817",
+    "plan": "test plan",
+    "self_serve": true,
+  },
 }
 `;

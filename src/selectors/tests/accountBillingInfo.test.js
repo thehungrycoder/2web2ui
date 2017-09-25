@@ -1,6 +1,6 @@
-import selector from '../accountBillingInfo';
+import { overviewProps } from '../accountBillingInfo';
 
-describe('Selector: Get Account Billing Info', () => {
+describe('Selector: Get Account Overview Info', () => {
 
   let store;
 
@@ -11,17 +11,22 @@ describe('Selector: Get Account Billing Info', () => {
           plan: 'test plan',
           code: 'test-plan-0817',
           self_serve: true
-        }
+        },
+      },
+      billing: {
+        plansLoading: false,
+        plans: [
+          {
+            code: 'test-plan-0817',
+            status: 'public',
+            volume: 5000000
+          },
+        ]
       }
     };
   })
 
   it('should return the selected data for a customer with a billing account', () => {
-    store.account.billing = {};
-    expect(selector(store)).toMatchSnapshot();
-  });
-
-  it('should return the selected data for a customer with no billing account', () => {
-    expect(selector(store)).toMatchSnapshot();
+    expect(overviewProps(store)).toMatchSnapshot();
   });
 });
