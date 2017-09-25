@@ -35,10 +35,9 @@ export function selectCurrentPlan(state) {
  * Gets IP pools and formats for select options
  */
 export function selectIpPools(state) {
-  return state.ipPools.list
-  ? flow(
+  return flow(
     reject({ id: 'default' }),
     sortBy(({ name }) => name.toLowerCase()),
     map(({ name, id }) => ({ label: `${name} [${id}]`, value: id }))
-  )(state.ipPools.list) : [];
+  )(state.ipPools.list);
 }
