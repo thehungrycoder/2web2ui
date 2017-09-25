@@ -1,4 +1,4 @@
-import { overviewProps } from '../accountBillingInfo';
+import { overviewProps, selectIpPools } from '../accountBillingInfo';
 
 describe('Selector: Get Account Overview Info', () => {
 
@@ -28,5 +28,26 @@ describe('Selector: Get Account Overview Info', () => {
 
   it('should return the selected data for a customer with a billing account', () => {
     expect(overviewProps(store)).toMatchSnapshot();
+  });
+});
+
+describe('IP Pool List Selector', () => {
+
+  const store = {
+    ipPools: {
+      list: [
+        { id: 'ip_id', name: 'IP Name', },
+        { id: 'default', name: 'IP Name2', }
+      ]
+    }
+  }
+
+  it('should format IP Pools for select options', () => {
+    expect(selectIpPools(store)).toMatchSnapshot();
+  });
+
+  it('should return empty array with no IP Pools', () => {
+    store.ipPools = {};
+    expect(selectIpPools(store)).toMatchSnapshot();
   });
 });
