@@ -19,7 +19,7 @@ const radioOptions = [
  * dedicatedIps.poolName
  */
 const PaymentForm = ({ whichPool, ipPools, ips }) => {
-  const max = MAX_IPS;
+  const max = MAX_IPS; // TODO calculate max
   let poolMarkup = null;
 
   // Render radio only when account has IP Pools
@@ -46,7 +46,7 @@ const PaymentForm = ({ whichPool, ipPools, ips }) => {
   }
 
   // Render ip pool create
-  if (whichPool === 'new' || ipPools.length === 0) {
+  if (ipPools.length && whichPool === 'new') {
     poolMarkup = (
       <Field
         label='Name your new IP Pool to assign this IP to'
