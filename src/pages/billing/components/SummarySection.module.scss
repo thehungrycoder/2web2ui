@@ -1,0 +1,21 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.Label, .Content {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.Label {
+  width: rem(120);
+}
+
+.Content {
+  font-size: rem(16);
+  line-height: rem(21);
+
+  small {
+    font-size: rem(13);
+    line-height: rem(16);
+    color: color(gray, 4);
+  }
+}

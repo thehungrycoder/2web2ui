@@ -9,7 +9,7 @@ const PlanPickerWrapper = ({ plans, pendingSubscription, subscription }) => {
   /**
    * Hide PlanPicker for users with non-self-serve plans
    */
-  if (!subscription.self_serve) {
+  if (subscription && !subscription.self_serve) {
     let supportText = (
       <span>
         To make changes to your plan or billing information, <a href={`mailto:${config.contact.supportEmail}`}>contact support</a>.
@@ -50,10 +50,10 @@ PlanPickerWrapper.propTypes = {
 
   // The account.subscription object
   subscription: PropTypes.shape({
-    self_serve: PropTypes.bool.isRequired,
-    plan_volume: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired
-  }).isRequired,
+    self_serve: PropTypes.bool,
+    plan_volume: PropTypes.number,
+    name: PropTypes.string
+  }),
 
   // The account.pending_subscription object
   pendingSubscription: PropTypes.shape({

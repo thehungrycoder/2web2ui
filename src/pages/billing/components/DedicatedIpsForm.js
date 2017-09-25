@@ -6,60 +6,74 @@ import PropTypes from 'prop-types';
 import { TextFieldWrapper, RadioGroup, SelectWrapper } from 'components';
 import { required, minNumber, maxNumber } from 'helpers/validation';
 
+const MAX_IPS = 4;
+const radioOptions = [
+  { label: 'Assign to a new IP Pool', value: 'new' },
+  { label: 'Assign to an existing IP Pool', value: 'existing' }
+];
+
 /**
  * This component will register the following redux-form fields
  * dedicatedIps.quantity
  * dedicatedIps.whichPool
  * dedicatedIps.poolName
  */
+const PaymentForm = ({ whichPool, ipPools, ips }) => {
+  const max = MAX_IPS;
+  let poolMarkup = null;
 
-// TODO pass through IP Pools list as a prop, add to select options
-const radioOptions = [
-  { label: 'Assign to a new IP Pool', value: 'new' },
-  { label: 'Assign to an existing IP Pool', value: 'existing' }
-];
+  // Render radio only when account has IP Pools
+  const radioMarkup = ipPools.length
+    ? <Field
+        label='Assign to a new IP Pool'
+        name='dedicatedIps.whichPool'
+        component={RadioGroup}
+        options={radioOptions}
+      />
+    : null;
 
-const PaymentForm = ({ whichPool }) => (
-  <div>
-    <Field
-      label='Quantity'
-      name='dedicatedIps.quantity'
-      type='number'
-      component={TextFieldWrapper}
-      min='1' max='4' // TODO set max
-      validate={[required, minNumber(1), maxNumber(4)]}
-    />
-
-    <Field
-      label='Assign to a new IP Pool'
-      name='dedicatedIps.whichPool'
-      component={RadioGroup}
-      options={radioOptions}
-    />
-
-    { whichPool === 'new' &&
+  // Render ip pool select
+  if (ipPools.length && whichPool === 'existing') {
+    poolMarkup = (
       <Field
-        label='Name your new IP Pool'
+          label='Choose an IP Pool'
+          name='dedicatedIps.poolName'
+          component={SelectWrapper}
+          validate={required}
+          options={ipPools}
+        />
+    );
+  }
+
+  // Render ip pool create
+  if (whichPool === 'new' || ipPools.length === 0) {
+    poolMarkup = (
+      <Field
+        label='Name your new IP Pool to assign this IP to'
         name='dedicatedIps.poolName'
         component={TextFieldWrapper}
         validate={required}
       />
-    }
+    );
+  }
 
-    { whichPool === 'existing' &&
+  return (
+    <div>
       <Field
-        label='Choose an IP Pool'
-        name='dedicatedIps.poolName'
-        component={SelectWrapper}
-        validate={required}
-        options={[ { label: 'test', value: 'test' }]} // TODO
+        label='Quantity'
+        name='dedicatedIps.quantity'
+        type='number'
+        component={TextFieldWrapper}
+        min='1' max={max}
+        validate={[required, minNumber(1), maxNumber(max)]}
       />
-    }
-  </div>
-);
+      { radioMarkup }
+      { poolMarkup }
+    </div>
+  );
+};
 
 PaymentForm.propTypes = {
-  // TODO IP Pool List array/shape
   formName: PropTypes.string.isRequired
 };
 

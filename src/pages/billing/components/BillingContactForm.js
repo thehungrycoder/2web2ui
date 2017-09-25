@@ -95,7 +95,7 @@ BillingContactForm.propTypes = {
   countries: PropTypes.arrayOf(PropTypes.shape({
     value: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired
-  })).isRequired,
+  })),
   countryValue: PropTypes.string,
   formName: PropTypes.string.isRequired
 };

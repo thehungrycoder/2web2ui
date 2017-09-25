@@ -1,5 +1,7 @@
-import OverviewPage from './OverviewPage.js';
+import OverviewPage from './OverviewPage';
+import ChangePlanPage from './ChangePlanPage';
 
 export default {
-  OverviewPage
+  OverviewPage,
+  ChangePlanPage
 };
