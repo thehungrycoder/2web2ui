@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import { reject, sortBy, map, flow } from 'lodash/fp';
 
 export function overviewProps(state) {
   const { subscription } = state.account;
@@ -35,10 +36,9 @@ export function selectCurrentPlan(state) {
  */
 export function selectIpPools(state) {
   return state.ipPools.list
-    ? _.chain(state.ipPools.list)
-      .reject({ id: 'default' })
-      .sortBy(({ name }) => name.toLowerCase())
-      .map(({ name, id }) => ({ label: `${name} [${id}]`, value: id }))
-      .value()
-    : [];
+  ? flow(
+    reject({ id: 'default' }),
+    sortBy(({ name }) => name.toLowerCase()),
+    map(({ name, id }) => ({ label: `${name} [${id}]`, value: id }))
+  )(state.ipPools.list) : [];
 }
