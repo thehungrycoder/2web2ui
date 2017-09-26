@@ -9,7 +9,7 @@
     "chart.js": "^2.6.0",
     "classnames": "^2.2.5",
     "date-fns": "^1.28.5",
-    "downshift": "^1.1.1",
+    "downshift": "^1.9.1",
     "history": "^4.6.1",
     "jest-in-case": "^1.0.1",
     "js-cookie": "^2.1.4",

@@ -39,6 +39,7 @@ exports[`renders correctly 1`] = `
     defaultIsOpen={false}
     defaultSelectedItem={null}
     getA11yStatusMessage={[Function]}
+    id="downshift-1"
     itemToString={[Function]}
     onChange={[Function]}
     onStateChange={[Function]}
@@ -46,7 +47,6 @@ exports[`renders correctly 1`] = `
   >
     <div
       className="Typeahead"
-      onClick={[Function]}
     >
       <t
         aria-activedescendant={null}
@@ -128,6 +128,7 @@ exports[`renders correctly 1`] = `
               />,
               "highlighted": false,
               "id": "downshift-1-item-0",
+              "onClick": [Function],
               "onMouseEnter": [Function],
             },
             Object {
@@ -137,6 +138,7 @@ exports[`renders correctly 1`] = `
               />,
               "highlighted": false,
               "id": "downshift-1-item-1",
+              "onClick": [Function],
               "onMouseEnter": [Function],
             },
             Object {
@@ -146,6 +148,7 @@ exports[`renders correctly 1`] = `
               />,
               "highlighted": false,
               "id": "downshift-1-item-2",
+              "onClick": [Function],
               "onMouseEnter": [Function],
             },
             Object {
@@ -155,6 +158,7 @@ exports[`renders correctly 1`] = `
               />,
               "highlighted": false,
               "id": "downshift-1-item-3",
+              "onClick": [Function],
               "onMouseEnter": [Function],
             },
             Object {
@@ -164,6 +168,7 @@ exports[`renders correctly 1`] = `
               />,
               "highlighted": false,
               "id": "downshift-1-item-4",
+              "onClick": [Function],
               "onMouseEnter": [Function],
             },
             Object {
@@ -173,6 +178,7 @@ exports[`renders correctly 1`] = `
               />,
               "highlighted": false,
               "id": "downshift-1-item-5",
+              "onClick": [Function],
               "onMouseEnter": [Function],
             },
           ]
@@ -193,6 +199,7 @@ exports[`renders correctly 1`] = `
                     />,
                     "highlighted": false,
                     "id": "downshift-1-item-0",
+                    "onClick": [Function],
                     "onMouseEnter": [Function],
                   },
                   Object {
@@ -202,6 +209,7 @@ exports[`renders correctly 1`] = `
                     />,
                     "highlighted": false,
                     "id": "downshift-1-item-1",
+                    "onClick": [Function],
                     "onMouseEnter": [Function],
                   },
                   Object {
@@ -211,6 +219,7 @@ exports[`renders correctly 1`] = `
                     />,
                     "highlighted": false,
                     "id": "downshift-1-item-2",
+                    "onClick": [Function],
                     "onMouseEnter": [Function],
                   },
                   Object {
@@ -220,6 +229,7 @@ exports[`renders correctly 1`] = `
                     />,
                     "highlighted": false,
                     "id": "downshift-1-item-3",
+                    "onClick": [Function],
                     "onMouseEnter": [Function],
                   },
                   Object {
@@ -229,6 +239,7 @@ exports[`renders correctly 1`] = `
                     />,
                     "highlighted": false,
                     "id": "downshift-1-item-4",
+                    "onClick": [Function],
                     "onMouseEnter": [Function],
                   },
                   Object {
@@ -238,6 +249,7 @@ exports[`renders correctly 1`] = `
                     />,
                     "highlighted": false,
                     "id": "downshift-1-item-5",
+                    "onClick": [Function],
                     "onMouseEnter": [Function],
                   },
                 ],
@@ -250,11 +262,13 @@ exports[`renders correctly 1`] = `
               <t
                 className="Matchbox-ActionList__Action"
                 id="downshift-1-item-0"
+                onClick={[Function]}
                 onMouseEnter={[Function]}
               >
                 <a
                   className="Matchbox-ActionList__Action"
                   id="downshift-1-item-0"
+                  onClick={[Function]}
                   onMouseEnter={[Function]}
                 >
                   <SubaccountTypeaheadItem
@@ -273,11 +287,13 @@ exports[`renders correctly 1`] = `
               <t
                 className="Matchbox-ActionList__Action"
                 id="downshift-1-item-1"
+                onClick={[Function]}
                 onMouseEnter={[Function]}
               >
                 <a
                   className="Matchbox-ActionList__Action"
                   id="downshift-1-item-1"
+                  onClick={[Function]}
                   onMouseEnter={[Function]}
                 >
                   <SubaccountTypeaheadItem
@@ -296,11 +312,13 @@ exports[`renders correctly 1`] = `
               <t
                 className="Matchbox-ActionList__Action"
                 id="downshift-1-item-2"
+                onClick={[Function]}
                 onMouseEnter={[Function]}
               >
                 <a
                   className="Matchbox-ActionList__Action"
                   id="downshift-1-item-2"
+                  onClick={[Function]}
                   onMouseEnter={[Function]}
                 >
                   <SubaccountTypeaheadItem
@@ -319,11 +337,13 @@ exports[`renders correctly 1`] = `
               <t
                 className="Matchbox-ActionList__Action"
                 id="downshift-1-item-3"
+                onClick={[Function]}
                 onMouseEnter={[Function]}
               >
                 <a
                   className="Matchbox-ActionList__Action"
                   id="downshift-1-item-3"
+                  onClick={[Function]}
                   onMouseEnter={[Function]}
                 >
                   <SubaccountTypeaheadItem
@@ -342,11 +362,13 @@ exports[`renders correctly 1`] = `
               <t
                 className="Matchbox-ActionList__Action"
                 id="downshift-1-item-4"
+                onClick={[Function]}
                 onMouseEnter={[Function]}
               >
                 <a
                   className="Matchbox-ActionList__Action"
                   id="downshift-1-item-4"
+                  onClick={[Function]}
                   onMouseEnter={[Function]}
                 >
                   <SubaccountTypeaheadItem
@@ -365,11 +387,13 @@ exports[`renders correctly 1`] = `
               <t
                 className="Matchbox-ActionList__Action"
                 id="downshift-1-item-5"
+                onClick={[Function]}
                 onMouseEnter={[Function]}
               >
                 <a
                   className="Matchbox-ActionList__Action"
                   id="downshift-1-item-5"
+                  onClick={[Function]}
                   onMouseEnter={[Function]}
                 >
                   <SubaccountTypeaheadItem
@@ -433,6 +457,7 @@ exports[`renders correctly with a selected item 1`] = `
     defaultIsOpen={false}
     defaultSelectedItem={null}
     getA11yStatusMessage={[Function]}
+    id="downshift-1"
     itemToString={[Function]}
     onChange={[Function]}
     onStateChange={[Function]}
@@ -440,7 +465,6 @@ exports[`renders correctly with a selected item 1`] = `
   >
     <div
       className="Typeahead"
-      onClick={[Function]}
     >
       <t
         aria-activedescendant={null}
@@ -552,7 +576,8 @@ exports[`renders correctly with a selected item 1`] = `
                 name="Subaccount 1"
               />,
               "highlighted": false,
-              "id": "downshift-3-item-0",
+              "id": "downshift-1-item-0",
+              "onClick": [Function],
               "onMouseEnter": [Function],
             },
           ]
@@ -572,7 +597,8 @@ exports[`renders correctly with a selected item 1`] = `
                       name="Subaccount 1"
                     />,
                     "highlighted": false,
-                    "id": "downshift-3-item-0",
+                    "id": "downshift-1-item-0",
+                    "onClick": [Function],
                     "onMouseEnter": [Function],
                   },
                 ],
@@ -584,12 +610,14 @@ exports[`renders correctly with a selected item 1`] = `
             >
               <t
                 className="Matchbox-ActionList__Action"
-                id="downshift-3-item-0"
+                id="downshift-1-item-0"
+                onClick={[Function]}
                 onMouseEnter={[Function]}
               >
                 <a
                   className="Matchbox-ActionList__Action"
-                  id="downshift-3-item-0"
+                  id="downshift-1-item-0"
+                  onClick={[Function]}
                   onMouseEnter={[Function]}
                 >
                   <SubaccountTypeaheadItem
@@ -625,6 +653,7 @@ exports[`renders correctly with no subaccounts 1`] = `
     defaultIsOpen={false}
     defaultSelectedItem={null}
     getA11yStatusMessage={[Function]}
+    id="downshift-1"
     itemToString={[Function]}
     onChange={[Function]}
     onStateChange={[Function]}
@@ -632,7 +661,6 @@ exports[`renders correctly with no subaccounts 1`] = `
   >
     <div
       className="Typeahead"
-      onClick={[Function]}
     >
       <t
         aria-activedescendant={null}
