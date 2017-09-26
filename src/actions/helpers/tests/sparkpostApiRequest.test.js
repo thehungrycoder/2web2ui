@@ -145,7 +145,16 @@ describe('Helper: SparkPost API Request', () => {
         expect(httpHelpersMock.useRefreshToken).toHaveBeenCalledTimes(1);
         expect(httpHelpersMock.useRefreshToken).toHaveBeenCalledWith('REFRESH_1');
         expect(authMock.refresh).toHaveBeenCalledWith('NEW_TOKEN', 'REFRESH_2');
-        expect(mockStore.getActions()).toMatchSnapshot();
+        
+        // checking action counts instead of snapshotting them in order because these
+        // are "kind of async" so they can sometimes get out of order and fail the snapshot
+        const actions = mockStore.getActions();
+        const byType = (keep) => ({ type }) => type === keep;
+        expect(actions.filter(byType('TEST_WITH_REFRESH_PENDING'))).toHaveLength(2);
+        expect(actions.filter(byType('TEST_WITH_REFRESH_SUCCESS'))).toHaveLength(1);
+        expect(actions.filter(byType('REFRESH'))).toHaveLength(1);
+        expect(actions.filter(byType('TEST_NO_REFRESH_PENDING'))).toHaveLength(4);
+        expect(actions.filter(byType('TEST_NO_REFRESH_SUCCESS'))).toHaveLength(2);
       });
 
       it('should only retry 3 times', async () => {
