@@ -1,5 +1,5 @@
 import { getMetricsFromKeys, transformData } from 'src/helpers/metrics';
-import config from 'src/config/index';
+import config from 'src/config';
 
 const initialState = {
   loading: false,

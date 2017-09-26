@@ -1,5 +1,5 @@
 import cookie from 'js-cookie';
-import config from 'src/config/index';
+import config from 'src/config';
 
 const { name, options } = config.authentication.cookie;
 
