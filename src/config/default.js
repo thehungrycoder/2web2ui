@@ -15,6 +15,11 @@ const config = {
     }
   },
   chartColors: ['#04AEF9', '#fa6423', '#FFD300', '#8CCA3A', '#2693c3'],
+  contact: {
+    abuseEmail: 'compliance@sparkpost.com',
+    contactEmail: 'hello@sparkpost.com',
+    supportEmail: 'support@sparkpost.com'
+  },
   metricsPrecisionMap: [
     { time: 60, value: '1min', format: 'ha' },
     { time: 60 * 2, value: '5min', format: 'ha' },

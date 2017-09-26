@@ -19,9 +19,17 @@ export const TextFieldWrapper = ({ input, meta, ...rest }) => {
   );
 };
 
-export const SelectWrapper = ({ input, meta, ...rest }) => (
-  <Select id={input.name} {...input} error={meta.error} {...rest} />
-);
+export const SelectWrapper = ({ input, meta, ...rest }) => {
+  const { active, error, touched } = meta;
+  return (
+    <Select
+      id={input.name}
+      {...input}
+      error={!active && touched && error ? error : undefined}
+      {...rest}
+    />
+  );
+};
 
 export const RadioGroup = ({ input, options, title }) => (
   <Radio.Group>

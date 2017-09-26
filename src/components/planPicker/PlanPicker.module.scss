@@ -1,0 +1,113 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.PlanPicker {
+  position: relative;
+
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  border-bottom: 1px solid color(gray, 9);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.TriggerPlan {
+  position: relative;
+  z-index: 1;
+  display: block;
+  padding: spacing(large);
+
+  &.triggerOpen {
+    box-shadow: shadow(deep);
+  }
+
+  .MainLabel {
+    color: color(orange);
+    font-size: rem(25);
+  }
+}
+
+.DropdownPlan {
+  display: block;
+  padding: spacing() spacing(large);
+  border-bottom: 1px solid color(gray, 9);
+  background: color(gray, 10);
+  transition: 0.15s;
+
+  &:hover, &.highlighted {
+    background: color(gray, 9);
+  }
+
+  .MainLabel {
+    font-size: rem(16);
+    line-height: 1em;
+    color: color(gray, 4);
+  }
+}
+
+.MainLabel {
+  display: block;
+
+  .selected & {
+    color: color(orange);
+  }
+}
+
+.SupportLabel {
+  display: block;
+  color: color(gray, 4);
+  font-size: rem(15);
+}
+
+.List {
+  position: absolute;
+  z-index: 1;
+  top: 100%;
+  left: 0;
+  right: 0;
+
+  max-height: rem(280);
+  overflow: auto;
+
+  box-shadow: shadow(deep);
+  border-radius: 0 0 border-radius(large) border-radius(large);
+
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(0, -18px);
+  transition: 0.15s;
+}
+
+.open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(0, 0);
+}
+
+.Chevron {
+  position: absolute;
+  right: spacing(large);
+  top: 50%;
+  transform: translate(0, -50%);
+  pointer-events: none;
+  fill: color(orange);
+}
+
+.Input {
+  @include visually-hidden;
+}
+
+.ManualTitle {
+  font-size: rem(21);
+  margin: 0;
+  padding: spacing() spacing() 0;
+}
+
+.ManualHelp {
+  font-size: rem(15);
+  margin: 0;
+  padding: 0 spacing() spacing();
+}
