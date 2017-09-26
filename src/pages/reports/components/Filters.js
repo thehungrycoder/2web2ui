@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addFilter, removeFilter } from 'actions/reportFilters';
+import { addFilter, removeFilter } from 'src/actions/reportFilters';
 
 import { Grid, Button, Panel, Tag } from '@sparkpost/matchbox';
 import Typeahead from './Typeahead';
 
 import DateFilter from './DateFilter';
-import typeaheadCacheSelector from 'selectors/reportFilterTypeaheadCache';
+import typeaheadCacheSelector from 'src/selectors/reportFilterTypeaheadCache';
 import styles from './Filters.module.scss';
 
 class Filters extends Component {

@@ -1,7 +1,7 @@
 import moment from 'moment';
 import _ from 'lodash';
-import { list as METRICS_LIST } from 'config/metrics';
-import config from 'config/index';
+import { list as METRICS_LIST } from 'src/config/metrics';
+import config from 'src/config';
 
 const { metricsPrecisionMap: precisionMap, apiDateFormat, chartColors } = config;
 const indexedPrecisions = _.keyBy(precisionMap, 'value');

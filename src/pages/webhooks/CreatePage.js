@@ -7,7 +7,7 @@ import _ from 'lodash';
 import { createWebhook, getEventDocs } from '../../actions/webhooks';
 
 // Components
-import { Layout } from 'components';
+import { Layout } from 'src/components';
 import { Page, Panel } from '@sparkpost/matchbox';
 import WebhookForm from './components/WebhookForm';
 

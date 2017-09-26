@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-import { authenticate } from 'actions/auth';
-import { Layout, SparkPost } from 'components';
+import { authenticate } from 'src/actions/auth';
+import { Layout, SparkPost } from 'src/components';
 import { Panel, Button, TextField, Checkbox } from '@sparkpost/matchbox';
 
 import styles from './AuthPage.module.scss';

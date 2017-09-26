@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Layout, PlanPicker } from 'components';
+import { Layout, PlanPicker } from 'src/components';
 import { Page, Panel } from '@sparkpost/matchbox';
 
 import { reduxForm } from 'redux-form';
@@ -10,11 +10,11 @@ import BillingAddressForm from './components/BillingAddressForm';
 import BillingContactForm from './components/BillingContactForm';
 import DedicatedIpsForm from './components/DedicatedIpsForm';
 
-import { getPlans } from 'actions/account';
-import { fetch as fetchAccount } from 'actions/account';
-import { list as getIpPools } from 'actions/ipPools';
-import { getBillingCountries } from 'actions/billing';
-import { selectPublicPlans, selectCurrentPlan, selectIpPools } from 'selectors/accountBillingInfo';
+import { getPlans } from 'src/actions/account';
+import { fetch as fetchAccount } from 'src/actions/account';
+import { list as getIpPools } from 'src/actions/ipPools';
+import { getBillingCountries } from 'src/actions/billing';
+import { selectPublicPlans, selectCurrentPlan, selectIpPools } from 'src/selectors/accountBillingInfo';
 
 const FORMNAME = 'test';
 

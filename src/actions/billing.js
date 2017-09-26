@@ -1,7 +1,7 @@
-import { formatDataForCors, formatCreateData } from 'helpers/billing';
+import { formatDataForCors, formatCreateData } from 'src/helpers/billing';
 import { fetch as fetchAccount } from './account';
-import sparkpostApiRequest from 'actions/helpers/sparkpostApiRequest';
-import zuoraRequest from 'actions/helpers/zuoraRequest';
+import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
+import zuoraRequest from 'src/actions/helpers/zuoraRequest';
 
 export function syncSubscription() {
   return sparkpostApiRequest({
