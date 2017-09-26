@@ -13,9 +13,13 @@ const PlanSummary = ({ plan }) => {
       ? <div><small>${ plan.overage.toFixed(2) }/thousand extra emails</small></div>
       : null;
 
+    const volume = plan.volume
+      ? <span><strong>{ plan.volume.toLocaleString() }</strong> emails per month</span>
+      : null;
+
     content = (
       <div>
-        <div><strong>{ plan.volume.toLocaleString() }</strong> emails per month { monthly }</div>
+        <div>{ volume } { monthly }</div>
         { overage }
       </div>
     );
