@@ -1,11 +1,11 @@
-import { createMockStore } from '__testHelpers__/mockStore';
+import { createMockStore } from 'src/__testHelpers__/mockStore';
 import * as billing from '../billing';
-import * as billingHelpers from 'helpers/billing';
+import * as billingHelpers from 'src/helpers/billing';
 import _ from 'lodash';
 
 jest.mock('../helpers/sparkpostApiRequest', () => jest.fn((a) => a));
 jest.mock('../helpers/zuoraRequest', () => jest.fn((a) => a));
-jest.mock('helpers/billing');
+jest.mock('src/helpers/billing');
 
 describe('Action Creator: Billing', () => {
 

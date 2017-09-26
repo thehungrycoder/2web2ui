@@ -1,5 +1,5 @@
 import moment from 'moment';
-import sparkpostApiRequest from 'actions/helpers/sparkpostApiRequest';
+import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 
 const apiFormat = 'YYYY-MM-DDTHH:MM';
 const defaultParams = () => ({

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import ScrollToTop from './ScrollToTop';
-import { Loading, Navigation } from 'components';
+import { Loading, Navigation } from 'src/components';
 import styles from './Layout.module.scss';
 
 const App = ({ children, loading }) => (

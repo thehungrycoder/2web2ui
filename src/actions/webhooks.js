@@ -1,4 +1,4 @@
-import sparkpostApiRequest from 'actions/helpers/sparkpostApiRequest';
+import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 
 // TODO: support timezone param?
 export function listWebhooks() {

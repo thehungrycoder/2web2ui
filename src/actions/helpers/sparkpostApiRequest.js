@@ -1,8 +1,8 @@
-import requestHelperFactory from 'actions/helpers/requestHelperFactory';
-import { refresh, logout } from 'actions/auth';
-import { showAlert } from 'actions/globalAlert';
-import { useRefreshToken } from 'helpers/http';
-import { resolveOnCondition } from 'helpers/promise';
+import requestHelperFactory from 'src/actions/helpers/requestHelperFactory';
+import { refresh, logout } from 'src/actions/auth';
+import { showAlert } from 'src/actions/globalAlert';
+import { useRefreshToken } from 'src/helpers/http';
+import { resolveOnCondition } from 'src/helpers/promise';
 import _ from 'lodash';
 import { sparkpost as sparkpostAxios } from './axiosInstances';
 

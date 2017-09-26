@@ -7,10 +7,10 @@ import { reduxForm } from 'redux-form';
 import { getPublished } from '../../actions/templates';
 
 // Selectors
-import { templateById } from 'selectors/templates';
+import { templateById } from 'src/selectors/templates';
 
 // Components
-import { Layout } from 'components';
+import { Layout } from 'src/components';
 import Form from './components/Form';
 import Editor from './components/Editor';
 import { Page, Grid } from '@sparkpost/matchbox';
