@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Layout } from 'components';
+import { Layout } from 'src/components';
 import { Page, Panel, Banner } from '@sparkpost/matchbox';
 
-import { getPlans } from 'actions/account';
-import { overviewProps } from 'selectors/accountBillingInfo';
+import { getPlans } from 'src/actions/account';
+import { overviewProps } from 'src/selectors/accountBillingInfo';
 
 import { SummarySection, PlanSummary } from './components/SummarySection';
 

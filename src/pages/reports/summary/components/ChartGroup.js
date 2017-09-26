@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
-import { getDayLines, getLineChartFormatters } from 'helpers/chart';
+import { getDayLines, getLineChartFormatters } from 'src/helpers/chart';
 import LineChart from './LineChart';
-import METRICS_UNIT_CONFIG from 'config/metrics-units';
+import METRICS_UNIT_CONFIG from 'src/config/metrics-units';
 const DEFAULT_UNIT = 'number';
 
 function getUniqueUnits(metrics) {

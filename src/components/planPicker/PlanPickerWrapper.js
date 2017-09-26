@@ -2,7 +2,7 @@ import React from 'react';
 import { Field } from 'redux-form';
 import PropTypes from 'prop-types';
 import PlanPicker from './PlanPicker';
-import config from 'config';
+import config from 'src/config';
 import styles from './PlanPicker.module.scss';
 
 const PlanPickerWrapper = ({ plans, pendingSubscription, subscription }) => {

@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Page } from '@sparkpost/matchbox';
 
-import { fetchApiKeys } from 'actions/credentials';
+import { fetchApiKeys } from 'src/actions/credentials';
 
-import ApiErrorBanner from 'components/apiErrorBanner/ApiErrorBanner';
-import TableCollection from 'components/collection/TableCollection';
-import Layout from 'components/layout/Layout';
+import ApiErrorBanner from 'src/components/apiErrorBanner/ApiErrorBanner';
+import TableCollection from 'src/components/collection/TableCollection';
+import Layout from 'src/components/layout/Layout';
 import PermissionsColumn from './components/PermissionsColumn';
 
 const COLUMNS = ['Name', 'Key', 'Permissions'];

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactDOM from 'react-dom';
 import { subMonths, format } from 'date-fns';
-import { getStartOfDay, getEndOfDay, relativeDateOptions } from 'helpers/date';
+import { getStartOfDay, getEndOfDay, relativeDateOptions } from 'src/helpers/date';
 import { Button, Datepicker, TextField, Select, Popover } from '@sparkpost/matchbox';
 import DateForm from './DateForm';
 import styles from './DateFilter.module.scss';

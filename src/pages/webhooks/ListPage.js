@@ -6,7 +6,7 @@ import { Link, withRouter } from 'react-router-dom';
 import { listWebhooks } from '../../actions/webhooks';
 
 // Components
-import { Layout, TableCollection, ApiErrorBanner } from 'components';
+import { Layout, TableCollection, ApiErrorBanner } from 'src/components';
 import { Page } from '@sparkpost/matchbox';
 
 const columns = ['Name', 'ID', 'Target'];

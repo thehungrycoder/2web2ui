@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { Field, formValueSelector } from 'redux-form';
 import PropTypes from 'prop-types';
 
-import { TextFieldWrapper, RadioGroup, SelectWrapper } from 'components';
-import { required, minNumber, maxNumber } from 'helpers/validation';
+import { TextFieldWrapper, RadioGroup, SelectWrapper } from 'src/components';
+import { required, minNumber, maxNumber } from 'src/helpers/validation';
 
 const MAX_IPS = 4;
 const radioOptions = [

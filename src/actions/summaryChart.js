@@ -1,7 +1,7 @@
-import { fetch as fetchMetrics } from 'actions/metrics';
-import { refreshTypeaheadCache } from 'actions/reportFilters';
-import { getQueryFromOptions, getMetricsFromKeys } from 'helpers/metrics';
-import { getRelativeDates } from 'helpers/date';
+import { fetch as fetchMetrics } from 'src/actions/metrics';
+import { refreshTypeaheadCache } from 'src/actions/reportFilters';
+import { getQueryFromOptions, getMetricsFromKeys } from 'src/helpers/metrics';
+import { getRelativeDates } from 'src/helpers/date';
 
 export function refresh(updates = {}) {
   return (dispatch, getState) => {

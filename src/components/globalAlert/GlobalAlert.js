@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
-import { clear } from 'actions/globalAlert';
+import { clear } from 'src/actions/globalAlert';
 import { Snackbar } from '@sparkpost/matchbox';
 
 import styles from './GlobalAlert.module.scss';

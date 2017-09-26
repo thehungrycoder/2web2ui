@@ -1,14 +1,14 @@
 import sparkpostApiRequest, { refreshTokensUsed } from '../sparkpostApiRequest';
-import { createMockStore } from '__testHelpers__/mockStore';
+import { createMockStore } from 'src/__testHelpers__/mockStore';
 import * as axiosMocks from '../axiosInstances';
-import * as authMock from 'actions/auth';
-import * as globalAlertMock from 'actions/globalAlert';
-import * as httpHelpersMock from 'helpers/http';
+import * as authMock from 'src/actions/auth';
+import * as globalAlertMock from 'src/actions/globalAlert';
+import * as httpHelpersMock from 'src/helpers/http';
 
 jest.mock('../axiosInstances');
-jest.mock('actions/auth');
-jest.mock('actions/globalAlert');
-jest.mock('helpers/http');
+jest.mock('src/actions/auth');
+jest.mock('src/actions/globalAlert');
+jest.mock('src/helpers/http');
 
 describe('Helper: SparkPost API Request', () => {
 
@@ -145,7 +145,7 @@ describe('Helper: SparkPost API Request', () => {
         expect(httpHelpersMock.useRefreshToken).toHaveBeenCalledTimes(1);
         expect(httpHelpersMock.useRefreshToken).toHaveBeenCalledWith('REFRESH_1');
         expect(authMock.refresh).toHaveBeenCalledWith('NEW_TOKEN', 'REFRESH_2');
-        
+
         // checking action counts instead of snapshotting them in order because these
         // are "kind of async" so they can sometimes get out of order and fail the snapshot
         const actions = mockStore.getActions();

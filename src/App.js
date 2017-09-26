@@ -1,7 +1,7 @@
 import React from 'react';
 
 // Components
-import { ProtectedRoute, AuthenticationGate, GlobalAlert } from 'components';
+import { ProtectedRoute, AuthenticationGate, GlobalAlert } from 'src/components';
 
 // Pages
 import {

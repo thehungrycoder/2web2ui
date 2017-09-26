@@ -5,13 +5,13 @@ import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 // Actions
 import { getDraft, getPublished, update, deleteTemplate, publish } from '../../actions/templates';
-import { showAlert } from 'actions/globalAlert';
+import { showAlert } from 'src/actions/globalAlert';
 
 // Selectors
-import { templateById } from 'selectors/templates';
+import { templateById } from 'src/selectors/templates';
 
 // Components
-import { Layout } from 'components';
+import { Layout } from 'src/components';
 import Form from './components/Form';
 import Editor from './components/Editor';
 import DeleteModal from './components/DeleteModal';

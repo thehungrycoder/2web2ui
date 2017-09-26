@@ -5,11 +5,11 @@ import { Field, change } from 'redux-form';
 // Components
 import { Panel } from '@sparkpost/matchbox';
 import ToggleBlock from './ToggleBlock';
-import { TextFieldWrapper } from 'components';
+import { TextFieldWrapper } from 'src/components';
 
 // Helpers & Validation
-import { required } from 'helpers/validation';
-import { slugify } from 'helpers/string';
+import { required } from 'src/helpers/validation';
+import { slugify } from 'src/helpers/string';
 import { ID_ALLOWED_CHARS, idSyntax, emailOrSubstitution, verifiedDomain } from './validation';
 
 import styles from './FormEditor.module.scss';

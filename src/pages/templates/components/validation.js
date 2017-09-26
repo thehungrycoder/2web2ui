@@ -1,4 +1,4 @@
-import { email, emailLocal, domain } from 'helpers/validation';
+import { email, emailLocal, domain } from 'src/helpers/validation';
 
 const ID_ALLOWED_CHARS = 'a-z0-9_-';
 
