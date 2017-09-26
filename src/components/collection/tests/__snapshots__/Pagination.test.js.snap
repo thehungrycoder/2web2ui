@@ -13,7 +13,7 @@ exports[`Collection Pagination Component should render with perPageButtons 1`] =
     />
   </div>
   <div>
-    <Group>
+    <Button.Group>
       <span
         style={
           Object {
@@ -55,7 +55,7 @@ exports[`Collection Pagination Component should render with perPageButtons 1`] =
       >
         100
       </t>
-    </Group>
+    </Button.Group>
   </div>
 </div>
 `;

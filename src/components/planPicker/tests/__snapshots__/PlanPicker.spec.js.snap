@@ -51,20 +51,20 @@ exports[`renders correctly 1`] = `
       }
     }
     getA11yStatusMessage={[Function]}
+    id="downshift-1"
     itemToString={[Function]}
     onChange={[Function]}
     onStateChange={[Function]}
     onUserAction={[Function]}
   >
-    <div
-      onClick={[Function]}
-    >
+    <div>
       <div
         className=""
       >
         <Plan
           className=""
           id="downshift-1-item-0"
+          onClick={[Function]}
           onMouseEnter={[Function]}
           plan={
             Object {
@@ -80,6 +80,7 @@ exports[`renders correctly 1`] = `
           <a
             className=""
             id="downshift-1-item-0"
+            onClick={[Function]}
             onMouseEnter={[Function]}
           >
             <span>
@@ -104,6 +105,7 @@ exports[`renders correctly 1`] = `
         <Plan
           className=""
           id="downshift-1-item-1"
+          onClick={[Function]}
           onMouseEnter={[Function]}
           plan={
             Object {
@@ -120,6 +122,7 @@ exports[`renders correctly 1`] = `
           <a
             className=""
             id="downshift-1-item-1"
+            onClick={[Function]}
             onMouseEnter={[Function]}
           >
             <span>
@@ -139,6 +142,7 @@ exports[`renders correctly 1`] = `
         <Plan
           className=""
           id="downshift-1-item-2"
+          onClick={[Function]}
           onMouseEnter={[Function]}
           plan={
             Object {
@@ -153,6 +157,7 @@ exports[`renders correctly 1`] = `
           <a
             className=""
             id="downshift-1-item-2"
+            onClick={[Function]}
             onMouseEnter={[Function]}
           >
             <span>
@@ -328,20 +333,20 @@ exports[`renders correctly with an initial value 1`] = `
       }
     }
     getA11yStatusMessage={[Function]}
+    id="downshift-1"
     itemToString={[Function]}
     onChange={[Function]}
     onStateChange={[Function]}
     onUserAction={[Function]}
   >
-    <div
-      onClick={[Function]}
-    >
+    <div>
       <div
         className=""
       >
         <Plan
           className=""
-          id="downshift-3-item-0"
+          id="downshift-1-item-0"
+          onClick={[Function]}
           onMouseEnter={[Function]}
           plan={
             Object {
@@ -356,7 +361,8 @@ exports[`renders correctly with an initial value 1`] = `
         >
           <a
             className=""
-            id="downshift-3-item-0"
+            id="downshift-1-item-0"
+            onClick={[Function]}
             onMouseEnter={[Function]}
           >
             <span>
@@ -380,7 +386,8 @@ exports[`renders correctly with an initial value 1`] = `
         </Plan>
         <Plan
           className=""
-          id="downshift-3-item-1"
+          id="downshift-1-item-1"
+          onClick={[Function]}
           onMouseEnter={[Function]}
           plan={
             Object {
@@ -396,7 +403,8 @@ exports[`renders correctly with an initial value 1`] = `
         >
           <a
             className=""
-            id="downshift-3-item-1"
+            id="downshift-1-item-1"
+            onClick={[Function]}
             onMouseEnter={[Function]}
           >
             <span>
@@ -415,7 +423,8 @@ exports[`renders correctly with an initial value 1`] = `
         </Plan>
         <Plan
           className=""
-          id="downshift-3-item-2"
+          id="downshift-1-item-2"
+          onClick={[Function]}
           onMouseEnter={[Function]}
           plan={
             Object {
@@ -429,7 +438,8 @@ exports[`renders correctly with an initial value 1`] = `
         >
           <a
             className=""
-            id="downshift-3-item-2"
+            id="downshift-1-item-2"
+            onClick={[Function]}
             onMouseEnter={[Function]}
           >
             <span>
@@ -489,7 +499,7 @@ exports[`renders correctly with an initial value 1`] = `
         aria-autocomplete="list"
         aria-expanded={false}
         autoComplete="off"
-        id="downshift-input-4"
+        id="downshift-input-3"
         onBlur={[Function]}
         onChange={[Function]}
         onKeyDown={[Function]}
