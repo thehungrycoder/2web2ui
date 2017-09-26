@@ -41,6 +41,10 @@ export default [
       {
         label: 'Profile',
         to: '/account/profile'
+      },
+      {
+        label: 'Users',
+        to: '/account/users'
       }
     ]
   }

@@ -12,6 +12,7 @@ import {
   apiKeys,
   reports,
   templates,
+  users,
   webhooks
 } from './pages';
 
@@ -51,6 +52,7 @@ export default () => (
       <ProtectedRoute path='/account/api-keys/details/:id' component={apiKeys.DetailsPage} />
 
       <ProtectedRoute exact path='/account/profile' component={ProfilePage} />
+      <ProtectedRoute exact path='/account/users' component={users.ListPage} />
 
       <ProtectedRoute exact path='/account/billing' component={billing.OverviewPage}/>
       <ProtectedRoute exact path='/account/billing/change' component={billing.ChangePlanPage}/>

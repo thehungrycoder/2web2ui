@@ -86,6 +86,11 @@ exports[`renders without crashing 1`] = `
     <withRouter(Connect(_ProtectedRoute))
       component={[Function]}
       exact={true}
+      path="/account/users"
+    />
+    <withRouter(Connect(_ProtectedRoute))
+      component={[Function]}
+      exact={true}
       path="/account/billing"
     />
     <withRouter(Connect(_ProtectedRoute))
