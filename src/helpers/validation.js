@@ -28,3 +28,11 @@ export function domain(value) {
 export const maxLength = _.memoize(function maxLength(length) {
   return (value) => (value && value.length > length) ? `Must be ${length} characters or less` : undefined;
 });
+
+export const minNumber = _.memoize(function minNumber(min) {
+  return (value) => (value < min) ? `Must be at least ${min}` : undefined;
+});
+
+export const maxNumber = _.memoize(function maxNumber(max) {
+  return (value) => (value > max) ? `Must be less than ${max}` : undefined;
+});

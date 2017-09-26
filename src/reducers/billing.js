@@ -1,3 +1,5 @@
+import { formatCountries } from 'helpers/billing';
+
 const initialState = {};
 
 export default (state = initialState, action) => {
@@ -12,7 +14,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         countriesLoading: false,
-        countries: action.payload.map((c) => ({ value: c.code, label: c.name }))
+        countries: formatCountries(action.payload)
       };
 
     default:

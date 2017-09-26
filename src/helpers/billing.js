@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 export function formatDataForCors(values) {
   const {
     firstName,
@@ -93,4 +95,35 @@ export function formatCreateData({
   }
 
   return formatted;
+}
+
+// Formats countries before storing in state
+export function formatCountries(countries) {
+  const ordered = _.flatten([
+    _.remove(countries, { code: 'US' }),
+    _.remove(countries, { code: 'GB' }),
+    _.remove(countries, { code: 'CA' }),
+    countries
+  ]);
+
+  return ordered.map((country) => formatForSelect(country));
+}
+
+function formatForSelect({ code, name, states }) {
+  if (states) {
+    return { value: code, label: name, states: states.map((state) => formatForSelect(state)) };
+  }
+  return { value: code, label: name };
+}
+
+export function getZipLabel(country) {
+  if (country === 'US') {
+    return 'Zip Code';
+  }
+
+  if (country === 'CA') {
+    return 'Postal Code';
+  }
+
+  return 'Zip/Postal Code';
 }
