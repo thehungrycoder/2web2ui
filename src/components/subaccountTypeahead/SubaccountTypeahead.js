@@ -3,7 +3,7 @@ import Downshift from 'downshift';
 import React, { Component } from 'react';
 import { ActionList, Button, TextField } from '@sparkpost/matchbox';
 
-import sortMatch from 'helpers/sortMatch';
+import sortMatch from 'src/helpers/sortMatch';
 import Item from './SubaccountTypeaheadItem';
 import styles from './SubaccountTypeahead.module.scss';
 

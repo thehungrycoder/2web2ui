@@ -3,7 +3,7 @@ import Downshift from 'downshift';
 import classnames from 'classnames';
 import _ from 'lodash';
 
-import sortMatch from 'helpers/sortMatch';
+import sortMatch from 'src/helpers/sortMatch';
 import { TextField, ActionList } from '@sparkpost/matchbox';
 import Item from './TypeaheadItem';
 import styles from './Typeahead.module.scss';

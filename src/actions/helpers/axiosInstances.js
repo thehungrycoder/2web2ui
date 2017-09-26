@@ -1,5 +1,5 @@
 import axios from 'axios';
-import config from 'config/index';
+import config from 'src/config/index';
 
 const { apiBase, apiRequestTimeout, zuora: zuoraConfig } = config;
 

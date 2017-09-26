@@ -1,6 +1,6 @@
 import cookieMock from 'js-cookie';
 import authCookie from '../authCookie';
-import config from 'config/index';
+import config from 'src/config/index';
 
 jest.mock('js-cookie');
 

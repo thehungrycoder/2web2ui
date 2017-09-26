@@ -1,8 +1,8 @@
 import React from 'react';
 import { Field } from 'redux-form';
 import { Grid } from '@sparkpost/matchbox';
-import { TextFieldWrapper } from 'components';
-import { required } from 'helpers/validation';
+import { TextFieldWrapper } from 'src/components';
+import { required } from 'src/helpers/validation';
 
 import styles from './Forms.module.scss';
 /**

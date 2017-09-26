@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import classnames from 'classnames';
 
-import { refresh as refreshSummaryChart } from 'actions/summaryChart';
-import { addFilter, refreshTypeaheadCache } from 'actions/reportFilters';
+import { refresh as refreshSummaryChart } from 'src/actions/summaryChart';
+import { addFilter, refreshTypeaheadCache } from 'src/actions/reportFilters';
 
 import { Page, Panel, Tabs } from '@sparkpost/matchbox';
-import { Layout, Loading } from 'components';
+import { Layout, Loading } from 'src/components';
 import Filters from '../components/Filters';
 import ShareModal from '../components/ShareModal';
 import { List, MetricsModal, ChartGroup, ChartHeader } from './components';

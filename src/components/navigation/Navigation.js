@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import classnames from 'classnames';
 
-import { SparkPost } from 'components';
+import { SparkPost } from 'src/components';
 import Item from './Item';
 import Footer from './Footer';
 import navItems from './navItems';

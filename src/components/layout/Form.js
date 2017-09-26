@@ -1,7 +1,7 @@
 import React from 'react';
 
 import ScrollToTop from './ScrollToTop';
-import { Loading } from 'components';
+import { Loading } from 'src/components';
 import styles from './Layout.module.scss';
 
 const Form = ({ children, loading }) => (

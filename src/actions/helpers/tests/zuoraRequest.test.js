@@ -1,5 +1,5 @@
 import zuoraRequest from '../zuoraRequest';
-import { createMockStore } from '__testHelpers__/mockStore';
+import { createMockStore } from 'src/__testHelpers__/mockStore';
 import * as axiosMocks from '../axiosInstances';
 
 jest.mock('../axiosInstances');
