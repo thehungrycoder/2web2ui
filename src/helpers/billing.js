@@ -1,65 +1,76 @@
+/* eslint-disable */
 import _ from 'lodash';
 
 export function formatDataForCors(values) {
-  const {
-    firstName,
-    lastName,
-    cardType,
-    cardNumber,
-    expirationMonth,
-    expirationYear,
-    cardHolderName,
-    securityCode,
-    email,
-    address1,
-    address2,
-    city,
-    state,
-    country,
-    zipCode,
-    selectedPlan
-  } = values;
+  const { email, planpicker, card, billingAddress, billingContact } = values;
 
   // For CORS Endpoint + sift
   const corsData = {
     email,
-    cardholder_name: cardHolderName,
-    address1,
-    address2,
-    city,
-    state,
-    country,
-    zip_code: zipCode,
-    bin: cardNumber.slice(0, 6),
-    last_four: cardNumber.slice(-4),
-    plan_id: selectedPlan.billingId
+    cardholder_name: card.name,
+    address1: billingAddress.streetAddress,
+    // address2: '',
+    // city: '',
+    state: billingAddress.state,
+    country: billingAddress.country,
+    zip_code: billingAddress.zip,
+    bin: card.number.slice(0, 6),
+    last_four: card.number.slice(-4),
+    plan_id: planpicker.billingId
   };
+
 
   // For Zuora
   const billingData = {
-    billingId: selectedPlan.billingId,
+    billingId: planpicker.billingId,
     billToContact: {
-      firstName,
-      lastName,
+      firstName: billingAddress.firstName,
+      lastName: billingAddress.lastName,
       workEmail: email,
-      country,
-      state
+      country: billingAddress.country,
+      state: billingAddress.state
     },
     creditCard: {
-      cardType,
-      cardNumber,
-      expirationMonth,
-      expirationYear,
-      securityCode,
+      cardType: card.type,
+      cardNumber: card.number,
+      expirationMonth: card.expMonth,
+      expirationYear: card.expYear,
+      securityCode: card.securityCode,
       cardHolderInfo: {
-        cardHolderName: cardHolderName,
-        addressLine1: address1,
-        addressLine2: address2,
-        city,
-        zipCode
+        cardHolderName: card.name,
+        addressLine1: billingAddress.streetAddress,
+        // addressLine2: 'TEST',
+        // city: 'TEST',
+        zipCode: billingAddress.zip
       }
     }
-  };
+  }
+
+  // // For Zuora
+  // const billingData = {
+  //   billingId: selectedPlan.billingId,
+  //   billToContact: {
+  //     firstName,
+  //     lastName,
+  //     workEmail: email,
+  //     country,
+  //     state
+  //   },
+  //   creditCard: {
+  //     cardType,
+  //     cardNumber,
+  //     expirationMonth,
+  //     expirationYear,
+  //     securityCode,
+  //     cardHolderInfo: {
+  //       cardHolderName: cardHolderName,
+  //       addressLine1: address1,
+  //       addressLine2: address2,
+  //       city,
+  //       zipCode
+  //     }
+  //   }
+  // };
 
   return { corsData, billingData };
 }
@@ -126,4 +137,50 @@ export function getZipLabel(country) {
   }
 
   return 'Zip/Postal Code';
+}
+
+// What api accepts
+// 'creditCard.cardType' value should be one of:
+//  Visa,
+//  MasterCard,
+//  AmericanExpress,
+//  Discover,
+//  JCB,
+//  Diners,
+//  - CUP,
+//  Maestro,
+//  -Electron,
+//  -AppleVisa,
+//  -AppleMasterCard,
+//  -AppleAmericanExpress,
+//  -AppleDiscover,
+//  -AppleJCB
+
+// What payment provides by default
+// visa (available in old ui select)
+// mastercard (available in old ui select)
+// discover (available in old ui select)
+// amex (available in old ui select)
+// dankort
+// visaelectron
+// jcb
+// dinersclub
+// maestro
+// laser
+// unionpay
+// elo
+// hipercard
+const acceptedCardTypes = [
+  { paymentFormat: 'visa', apiFormat: 'Visa' },
+  { paymentFormat: 'mastercard', apiFormat: 'MasterCard' },
+  { paymentFormat: 'amex', apiFormat: 'AmericanExpress' },
+  { paymentFormat: 'discover', apiFormat: 'Discover' }
+];
+
+/**
+ * Removes unused card types from payment card array and formats the type string for our api
+ */
+export function convertCardTypes(cards) {
+  const accepted = cards.filter((card) => _.find(acceptedCardTypes, { paymentFormat: card.type }));
+  return accepted.map((card) => ({ ...card, type: _.find(acceptedCardTypes, { paymentFormat: card.type }).apiFormat }));
 }

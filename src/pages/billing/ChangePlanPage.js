@@ -1,26 +1,24 @@
+/* eslint-disable */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { formValueSelector } from 'redux-form';
 import { Layout, PlanPicker } from 'src/components';
-import { Page, Panel } from '@sparkpost/matchbox';
+import { Page, Panel, Grid } from '@sparkpost/matchbox';
 
 import { reduxForm } from 'redux-form';
 import PaymentForm from './components/PaymentForm';
 import BillingAddressForm from './components/BillingAddressForm';
 import BillingContactForm from './components/BillingContactForm';
-import DedicatedIpsForm from './components/DedicatedIpsForm';
+import Confirmation from './components/Confirmation';
 
 import { getPlans } from 'src/actions/account';
-import { fetch as fetchAccount } from 'src/actions/account';
-import { list as getIpPools } from 'src/actions/ipPools';
-import { getBillingCountries } from 'src/actions/billing';
-import { selectPublicPlans, selectCurrentPlan, selectIpPools } from 'src/selectors/accountBillingInfo';
+import { showAlert } from 'src/actions/globalAlert';
+import { updateSubscription, billingCreate, getBillingCountries } from 'src/actions/billing';
+import { selectPublicPlans, selectCurrentPlan } from 'src/selectors/accountBillingInfo';
+import { selectInitialValues } from 'src/selectors/accountChangePlan';
+const FORMNAME = 'changePlan';
 
-const FORMNAME = 'test';
-
-/**
- * HEY this is just a test page
- */
 class ChangePlanPage extends Component {
   componentDidMount() {
     if (!this.props.billing.plans) {
@@ -30,68 +28,67 @@ class ChangePlanPage extends Component {
     if (!this.props.billing.countries) {
       this.props.getBillingCountries();
     }
+  }
 
-    if (!this.props.ipPools.length) {
-      this.props.getIpPools();
-    }
+  updatePlan = (values) => {
+    const { updateSubscription, account, billingCreate } = this.props;
 
-    if (!this.props.account.add_ons) {
-      this.props.fetchAccount({ include: 'add_ons' });
+    if (account.billing) {
+      updateSubscription(values.planpicker.code)
+        .then(() => showAlert({ type: 'success', message: 'Subscription updated'}));
+    } else {
+      billingCreate(values)
+        .then(() => showAlert({ type: 'success', message: 'Subscription upgraded'}));
     }
   }
 
   render() {
-    const { account, billing, plans, loading, ipPools } = this.props;
+    const { account, billing, plans, loading, handleSubmit } = this.props;
 
     return (
       <Layout.App loading={loading}>
-        <Page title='Billing' breadcrumbAction={{ content: 'Back', to: '/account/billing', Component: Link }}/>
-        <Panel>
-          <Panel.Section></Panel.Section>
-            <PlanPicker
-              subscription={account.subscription}
-              pendingSubscription={account.pending_subscription}
-              plans={plans} />
-          <Panel.Section>
-            <PaymentForm />
-          </Panel.Section>
-          <Panel.Section>
-            <BillingAddressForm countries={billing.countries} formName={FORMNAME} />
-          </Panel.Section>
-          <Panel.Section>
-            <BillingContactForm countries={billing.countries} formName={FORMNAME} />
-          </Panel.Section>
-          <Panel.Section>
-            <DedicatedIpsForm formName={FORMNAME} ipPools={ipPools} ips={account.add_ons}/>
-          </Panel.Section>
-        </Panel>
+        <Page title='Change your plan' breadcrumbAction={{ content: 'Back to billing', to: '/account/billing', Component: Link }}/>
+        <Grid>
+          <Grid.Column>
+            <Panel>
+                <PlanPicker
+                  subscription={account.subscription}
+                  pendingSubscription={account.pending_subscription}
+                  plans={plans} />
+              <Panel.Section>
+                <PaymentForm formName={FORMNAME} />
+              </Panel.Section>
+              <Panel.Section>
+                <BillingAddressForm countries={billing.countries} formName={FORMNAME} />
+              </Panel.Section>
+            </Panel>
+          </Grid.Column>
+          <Grid.Column xs={5}>
+            <Confirmation
+              current={this.props.currentPlan}
+              selected={this.props.selectedPlan}
+              onSubmit={handleSubmit((values) => this.updatePlan(values))} />
+          </Grid.Column>
+        </Grid>
       </Layout.App>
     );
   }
 }
 
-const mapStateToProps = (state) => ({
-  loading: !Object.keys(state.account).length || state.billing.plansLoading || state.ipPools.listLoading,
-  plans: selectPublicPlans(state),
-  ipPools: selectIpPools(state),
-  billing: state.billing,
-  account: state.account,
+const mapStateToProps = (state) => {
+  const selector = formValueSelector(FORMNAME);
+  return {
+    loading: !Object.keys(state.account).length || state.billing.plansLoading,
+    plans: selectPublicPlans(state),
+    billing: state.billing,
+    account: state.account,
+    currentPlan: selectCurrentPlan(state),
+    selectedPlan: selector(state, 'planpicker'),
 
-  // Sets initial form values
-  initialValues: {
-    planpicker: selectCurrentPlan(state),
-    dedicatedIps: {
-      quantity: 1,
-      whichPool: 'new'
-    },
-    billingAddress: {
-      country: '_placeholder'
-    },
-    billingContact: {
-      country: '_placeholder'
-    }
+    // Sets initial form values
+    initialValues: selectInitialValues(state)
   }
-});
+};
 
 const formOptions = { form: FORMNAME, enableReinitialize: true };
-export default connect(mapStateToProps, { getPlans, getBillingCountries, getIpPools, fetchAccount })(reduxForm(formOptions)(ChangePlanPage));
+export default connect(mapStateToProps, { billingCreate, updateSubscription, getPlans, getBillingCountries })(reduxForm(formOptions)(ChangePlanPage));

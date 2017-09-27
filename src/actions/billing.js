@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { formatDataForCors, formatCreateData } from 'src/helpers/billing';
 import { fetch as fetchAccount } from './account';
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
@@ -14,6 +15,7 @@ export function syncSubscription() {
 }
 
 export function updateSubscription(code) {
+  console.log('update');
   return sparkpostApiRequest({
     type: 'UPDATE_SUBSCRIPTION',
     meta: {
@@ -93,6 +95,7 @@ export function createZuoraAccount({ data, token, signature }) {
 
 export function billingCreate(values) {
   const { corsData, billingData } = formatDataForCors(values);
+  console.log(corsData, billingData);
 
   return (dispatch) =>
 
@@ -101,6 +104,7 @@ export function billingCreate(values) {
 
       // create the Zuora account
       .then((results) => {
+        console.log(results)
         const { token, signature } = results;
         const data = formatCreateData({ ...results, ...billingData });
         return dispatch(createZuoraAccount({ data, token, signature }));
