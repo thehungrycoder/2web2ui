@@ -39,38 +39,12 @@ export function formatDataForCors(values) {
       cardHolderInfo: {
         cardHolderName: card.name,
         addressLine1: billingAddress.streetAddress,
-        // addressLine2: 'TEST',
-        // city: 'TEST',
+        // addressLine2: '',
+        // city: '',
         zipCode: billingAddress.zip
       }
     }
   }
-
-  // // For Zuora
-  // const billingData = {
-  //   billingId: selectedPlan.billingId,
-  //   billToContact: {
-  //     firstName,
-  //     lastName,
-  //     workEmail: email,
-  //     country,
-  //     state
-  //   },
-  //   creditCard: {
-  //     cardType,
-  //     cardNumber,
-  //     expirationMonth,
-  //     expirationYear,
-  //     securityCode,
-  //     cardHolderInfo: {
-  //       cardHolderName: cardHolderName,
-  //       addressLine1: address1,
-  //       addressLine2: address2,
-  //       city,
-  //       zipCode
-  //     }
-  //   }
-  // };
 
   return { corsData, billingData };
 }
@@ -139,48 +113,17 @@ export function getZipLabel(country) {
   return 'Zip/Postal Code';
 }
 
-// What api accepts
-// 'creditCard.cardType' value should be one of:
-//  Visa,
-//  MasterCard,
-//  AmericanExpress,
-//  Discover,
-//  JCB,
-//  Diners,
-//  - CUP,
-//  Maestro,
-//  -Electron,
-//  -AppleVisa,
-//  -AppleMasterCard,
-//  -AppleAmericanExpress,
-//  -AppleDiscover,
-//  -AppleJCB
+/**
+ * Removes unused card types from payment card array and rewrites the type string for our api
+ */
+export function convertCardTypes(cards) {
+  const accepted = cards.filter((card) => _.find(acceptedCardTypes, { paymentFormat: card.type }));
+  return accepted.map((card) => ({ ...card, type: _.find(acceptedCardTypes, { paymentFormat: card.type }).apiFormat }));
+}
 
-// What payment provides by default
-// visa (available in old ui select)
-// mastercard (available in old ui select)
-// discover (available in old ui select)
-// amex (available in old ui select)
-// dankort
-// visaelectron
-// jcb
-// dinersclub
-// maestro
-// laser
-// unionpay
-// elo
-// hipercard
 const acceptedCardTypes = [
   { paymentFormat: 'visa', apiFormat: 'Visa' },
   { paymentFormat: 'mastercard', apiFormat: 'MasterCard' },
   { paymentFormat: 'amex', apiFormat: 'AmericanExpress' },
   { paymentFormat: 'discover', apiFormat: 'Discover' }
 ];
-
-/**
- * Removes unused card types from payment card array and formats the type string for our api
- */
-export function convertCardTypes(cards) {
-  const accepted = cards.filter((card) => _.find(acceptedCardTypes, { paymentFormat: card.type }));
-  return accepted.map((card) => ({ ...card, type: _.find(acceptedCardTypes, { paymentFormat: card.type }).apiFormat }));
-}

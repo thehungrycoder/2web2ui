@@ -10,12 +10,13 @@
 }
 
 .Content {
-  font-size: rem(16);
   line-height: rem(21);
 
   small {
-    font-size: rem(13);
     line-height: rem(16);
-    color: color(gray, 4);
+  }
+  
+  h6 {
+    margin-bottom: 0;
   }
 }

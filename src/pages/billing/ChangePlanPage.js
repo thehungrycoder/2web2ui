@@ -2,24 +2,29 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { formValueSelector } from 'redux-form';
+import { reduxForm, formValueSelector } from 'redux-form';
 import { Layout, PlanPicker } from 'src/components';
-import { Page, Panel, Grid } from '@sparkpost/matchbox';
+import { Page, Panel, Grid, Icon } from '@sparkpost/matchbox';
 
-import { reduxForm } from 'redux-form';
 import PaymentForm from './components/PaymentForm';
 import BillingAddressForm from './components/BillingAddressForm';
 import BillingContactForm from './components/BillingContactForm';
 import Confirmation from './components/Confirmation';
+import { SummarySection } from './components/SummarySection';
 
 import { getPlans } from 'src/actions/account';
 import { showAlert } from 'src/actions/globalAlert';
 import { updateSubscription, billingCreate, getBillingCountries } from 'src/actions/billing';
 import { selectPublicPlans, selectCurrentPlan } from 'src/selectors/accountBillingInfo';
 import { selectInitialValues } from 'src/selectors/accountChangePlan';
+
 const FORMNAME = 'changePlan';
 
 class ChangePlanPage extends Component {
+  state = {
+    useSavedCC: false
+  };
+
   componentDidMount() {
     if (!this.props.billing.plans) {
       this.props.getPlans();
@@ -30,10 +35,16 @@ class ChangePlanPage extends Component {
     }
   }
 
+  componentWillReceiveProps(props) {
+    if (props.currentPlan.isFree || !!props.account.billing) {
+      this.setState({ useSavedCC: true });
+    }
+  }
+
   updatePlan = (values) => {
     const { updateSubscription, account, billingCreate } = this.props;
 
-    if (account.billing) {
+    if (!!account.billing) {
       updateSubscription(values.planpicker.code)
         .then(() => showAlert({ type: 'success', message: 'Subscription updated'}));
     } else {
@@ -42,31 +53,64 @@ class ChangePlanPage extends Component {
     }
   }
 
+  handleCardSelect = () => {
+    this.setState({ useSavedCC: !this.state.useSavedCC });
+  }
+
+  renderCCSection = () => {
+    const { billing } = this.props.account;
+    const savedPaymentAction = billing
+      ? [{ content: 'Use Saved Payment Method', onClick: this.handleCardSelect }]
+      : null;
+
+    if (this.props.selectedPlan && this.props.selectedPlan.isFree) {
+      return null;
+    }
+
+    if (this.state.useSavedCC) {
+      const { credit_card } = billing;
+      const action = [{ content: 'Use Another Credit Card', onClick: this.handleCardSelect }];
+      return (
+        <Panel title='Saved Payment Method' actions={action}>
+          <Panel.Section>
+            <SummarySection>
+              <Icon name='CreditCard' size={16}/>
+              <h6>···· { credit_card.number.substr(credit_card.number.length - 4) } { credit_card.type }</h6>
+              <h6>{ billing.first_name } { billing.last_name }</h6>
+              <div><small>Expires { credit_card.expiration_month }/{ credit_card.expiration_year }</small></div>
+            </SummarySection>
+          </Panel.Section>
+        </Panel>
+      );
+    }
+
+    return (
+      <Panel title='Add Credit Card' actions={savedPaymentAction}>
+        <Panel.Section><PaymentForm formName={FORMNAME} /></Panel.Section>
+        <Panel.Section><BillingAddressForm countries={this.props.billing.countries} formName={FORMNAME} /></Panel.Section>
+      </Panel>
+    );
+  }
+
   render() {
-    const { account, billing, plans, loading, handleSubmit } = this.props;
+    const { account, plans, loading, handleSubmit, currentPlan, selectedPlan } = this.props;
 
     return (
       <Layout.App loading={loading}>
-        <Page title='Change your plan' breadcrumbAction={{ content: 'Back to billing', to: '/account/billing', Component: Link }}/>
+        <Page breadcrumbAction={{ content: 'Back to billing', to: '/account/billing', Component: Link }}/>
         <Grid>
           <Grid.Column>
-            <Panel>
-                <PlanPicker
-                  subscription={account.subscription}
-                  pendingSubscription={account.pending_subscription}
-                  plans={plans} />
-              <Panel.Section>
-                <PaymentForm formName={FORMNAME} />
-              </Panel.Section>
-              <Panel.Section>
-                <BillingAddressForm countries={billing.countries} formName={FORMNAME} />
-              </Panel.Section>
+            <Panel title='Select A Plan'>
+              <PlanPicker plans={plans} />
             </Panel>
+
+            { this.renderCCSection() }
+
           </Grid.Column>
           <Grid.Column xs={5}>
             <Confirmation
-              current={this.props.currentPlan}
-              selected={this.props.selectedPlan}
+              current={currentPlan}
+              selected={selectedPlan}
               onSubmit={handleSubmit((values) => this.updatePlan(values))} />
           </Grid.Column>
         </Grid>

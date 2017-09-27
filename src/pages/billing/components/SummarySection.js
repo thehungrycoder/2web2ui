@@ -29,7 +29,7 @@ const PlanSummary = ({ plan }) => {
 
 const SummarySection = ({ label, children }) => (
   <div>
-    <small className={styles.Label}>{ label }</small>
+    { label && <small className={styles.Label}>{ label }</small> }
     <div className={styles.Content}>
       { children }
     </div>

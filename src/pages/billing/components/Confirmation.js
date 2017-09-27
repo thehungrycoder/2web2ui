@@ -50,31 +50,29 @@ const Confirmation = ({ onSubmit, current = {}, selected = {} }) => {
   const buttonText = isDowngrade ? 'Downgrade Plan' : 'Upgrade Plan';
 
   return (
-    <div>
-      <Panel>
-        <Panel.Section>
-          <small>Current Plan</small>
-          <h4>{ current.volume && current.volume.toLocaleString() } emails { currentPrice }</h4>
-        </Panel.Section>
-        <Panel.Section>
-          { selectedPlanMarkup }
-          { effectiveDateMarkup }
-          { ipMarkup }
-          { addonMarkup }
-        </Panel.Section>
-        <Panel.Section>
-          <Button
-            type='submit'
-            fullWidth
-            primary={!isDowngrade}
-            destructive={isDowngrade}
-            disabled={!isPlanSelected}
-            onClick={onSubmit}>
-            { buttonText }
-          </Button>
-        </Panel.Section>
-      </Panel>
-    </div>
+    <Panel>
+      <Panel.Section>
+        <small>Current Plan</small>
+        <h4>{ current.volume && current.volume.toLocaleString() } emails { currentPrice }</h4>
+      </Panel.Section>
+      <Panel.Section>
+        { selectedPlanMarkup }
+        { effectiveDateMarkup }
+        { ipMarkup }
+        { addonMarkup }
+      </Panel.Section>
+      <Panel.Section>
+        <Button
+          type='submit'
+          fullWidth
+          primary={!isDowngrade}
+          destructive={isDowngrade}
+          disabled={!isPlanSelected}
+          onClick={onSubmit}>
+          { buttonText }
+        </Button>
+      </Panel.Section>
+    </Panel>
   );
 };
 
