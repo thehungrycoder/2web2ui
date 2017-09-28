@@ -14,6 +14,7 @@ import sendingDomains from './sendingDomains';
 import subaccounts from './subaccounts';
 import summaryChart from './summaryChart';
 import templates from './templates';
+import users from './users';
 import webhooks from './webhooks';
 
 export default combineReducers({
@@ -31,5 +32,6 @@ export default combineReducers({
   subaccounts,
   summaryChart,
   templates,
+  users,
   webhooks
 });

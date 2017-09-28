@@ -1,19 +1,77 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-<App>
+<App
+  loading={false}
+>
   <t
     title="Users"
+  />
+  <TableCollection
+    columns={
+      Array [
+        "Name",
+        "Role",
+        "Email",
+        "Last Login",
+      ]
+    }
+    getRowData={[Function]}
+    pagination={true}
+    rows={
+      Array [
+        Object {
+          "access": "admin",
+          "email": "user1@test.com",
+          "name": "Test User 1",
+        },
+        Object {
+          "access": "admin",
+          "email": "user2@test.com",
+          "name": "Test User 2",
+        },
+      ]
+    }
   />
 </App>
 `;
 
-exports[`renders errors when present 1`] = `
+exports[`renders errors when present with empty table 1`] = `
 <App
-  loading={true}
+  loading={false}
 >
   <t
     title="Users"
+  />
+  <ApiErrorBanner
+    errorDetails="Uh oh! It broke. "
+    message="Sorry, we seem to have had some trouble loading your API keys."
+  />
+  <TableCollection
+    columns={
+      Array [
+        "Name",
+        "Role",
+        "Email",
+        "Last Login",
+      ]
+    }
+    getRowData={[Function]}
+    pagination={true}
+    rows={
+      Array [
+        Object {
+          "access": "admin",
+          "email": "user1@test.com",
+          "name": "Test User 1",
+        },
+        Object {
+          "access": "admin",
+          "email": "user2@test.com",
+          "name": "Test User 2",
+        },
+      ]
+    }
   />
 </App>
 `;

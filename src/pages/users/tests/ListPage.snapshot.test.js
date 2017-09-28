@@ -3,7 +3,14 @@ import React from 'react';
 
 import { ListPage } from '../ListPage';
 
-const props = {};
+const props = {
+  error: null,
+  loading: false,
+  users: [
+    { name: 'Test User 1', access: 'admin', email: 'user1@test.com' },
+    { name: 'Test User 2', access: 'admin', email: 'user2@test.com' },
+  ]
+};
 
 let wrapper;
 
@@ -15,4 +22,7 @@ it('renders correctly', () => {
   expect(wrapper).toMatchSnapshot();
 });
 
-xit('renders errors when present');
+it('renders errors when present', () => {
+  wrapper.setProps({ error: { message: 'Uh oh! It broke. ' }});
+  expect(wrapper).toMatchSnapshot();
+});
