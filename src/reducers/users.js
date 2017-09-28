@@ -1,9 +1,8 @@
-import _ from 'lodash';
-
 const initialState = {
   list: [],
   error: null,
-  loading: false
+  loading: false,
+  sortKey: 'name'
 };
 
 export default (state = initialState, action) => {
@@ -13,7 +12,7 @@ export default (state = initialState, action) => {
     case 'LIST_USERS_PENDING':
       return { ...initialState, loading: true };
     case 'LIST_USERS_SUCCESS':
-      return { ...initialState, list: _.sortBy(action.payload, ['name']) };
+      return { ...initialState, list: action.payload };
 
     default:
       return state;

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Page } from '@sparkpost/matchbox';
 
 import { listUsers } from 'src/actions/users';
+import { selectUsers } from 'src/selectors/users';
 
 import ApiErrorBanner from 'src/components/apiErrorBanner/ApiErrorBanner';
 import TableCollection from 'src/components/collection/TableCollection';
@@ -58,7 +59,7 @@ export class ListPage extends Component {
 const mapStateToProps = (state) => ({
   error: state.users.error,
   loading: state.users.loading,
-  users: state.users.list
+  users: selectUsers(state)
 });
 
 export default connect(mapStateToProps, { listUsers })(ListPage);
