@@ -97,7 +97,7 @@ const sparkpostRequest = requestHelperFactory({
   }
 });
 
-export default (action) => (dispatch, getState) => {
+export default (action) => (dispatch) => {
   // check for refreshing and exit early, otherwise call factory-made function
   if (refreshing) {
     return redispatchAfterRefresh(action, dispatch);

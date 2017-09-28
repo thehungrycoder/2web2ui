@@ -12,9 +12,8 @@ export function login(authData) {
 
     // initialize some state
     dispatch(fetchAccount({ include: 'usage,billing' }));
-    dispatch(getCurrentUser()).then(({ access_level }) => (
-      dispatch(getGrants({ role: access_level }))
-    ));
+    dispatch(getCurrentUser())
+      .then(({ access_level }) => dispatch(getGrants({ role: access_level })));
   };
 }
 
@@ -34,7 +33,7 @@ export function authenticate(username, password, rememberMe = false) {
         const payload = { ...data, username };
 
         // save auth cookie
-        authCookie.save(payload);
+        authCookie.merge(payload);
 
         // dispatch login success event
         dispatch(login(payload));
@@ -57,9 +56,7 @@ export function authenticate(username, password, rememberMe = false) {
 }
 
 export function refresh(token, refreshToken) {
-  const oldCookie = authCookie.get();
-  const newCookie = Object.assign({}, oldCookie, { access_token: token, refresh_token: refreshToken });
-  authCookie.save(newCookie);
+  const newCookie = authCookie.merge({ access_token: token, refresh_token: refreshToken });
   return login(newCookie);
 }
 

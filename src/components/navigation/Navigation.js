@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import classnames from 'classnames';
 
 import { SparkPost } from 'src/components';
 import Item from './Item';
 import Footer from './Footer';
-import navItems from './navItems';
+import prepareNavItems from './prepareNavItems';
 import { Icon } from '@sparkpost/matchbox';
 import styles from './Navigation.module.scss';
 
@@ -14,8 +15,13 @@ class Navigation extends Component {
     open: false
   }
 
+  constructor(props) {
+    super(props);
+    this.state.navItems = prepareNavItems(this.props.store);
+  }
+
   renderItems() {
-    return navItems.map((item, key) => <Item {...item} location={this.props.location} key={key} />);
+    return this.state.navItems.map((item, key) => <Item {...item} location={this.props.location} key={key} />);
   }
 
   handleClick() {
@@ -65,4 +71,4 @@ class Navigation extends Component {
   }
 }
 
-export default withRouter(Navigation);
+export default withRouter(connect((store) => ({ store }))(Navigation));

@@ -2,10 +2,11 @@ import React, { Component } from 'react'; // eslint-disable-line no-unused-vars
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import _ from 'lodash';
-import authCookie from '../helpers/authCookie';
-import { login } from '../actions/auth';
+import authCookie from 'src/helpers/authCookie';
+import { login } from 'src/actions/auth';
+import { getGrantsFromCookie } from 'src/actions/currentUser';
 
-export class _AuthenticationGate extends Component {
+export class AuthenticationGate extends Component {
   componentWillMount() {
     const { auth } = this.props;
     if (auth.loggedIn && auth.token) {
@@ -15,6 +16,7 @@ export class _AuthenticationGate extends Component {
     const foundCookie = authCookie.get();
     if (foundCookie) {
       this.props.login(foundCookie);
+      this.props.getGrantsFromCookie(foundCookie);
     }
   }
 
@@ -39,4 +41,4 @@ export class _AuthenticationGate extends Component {
   }
 }
 
-export default withRouter(connect(({ auth }) => ({ auth }), { login })(_AuthenticationGate));
+export default withRouter(connect(({ auth }) => ({ auth }), { login, getGrantsFromCookie })(AuthenticationGate));

@@ -25,7 +25,7 @@ class SummaryReportPage extends Component {
     link: ''
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.handleRefresh(this.parseSearch());
     this.props.refreshTypeaheadCache();
   }

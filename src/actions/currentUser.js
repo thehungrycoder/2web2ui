@@ -1,4 +1,5 @@
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
+import authCookie from 'src/helpers/authCookie';
 
 export function get() {
   return (dispatch, getState) => {
@@ -13,12 +14,26 @@ export function get() {
   };
 }
 
+export function getGrantsFromCookie(authCookieData = authCookie.get()) {
+  const { grants = []} = authCookieData;
+  const expanded = grants.map((key) => ({ key }));
+  return {
+    type: 'GET_GRANTS_SUCCESS',
+    payload: expanded
+  };
+}
+
 export function getGrants({ beta = false, role } = {}) {
-  return sparkpostApiRequest({
+  return (dispatch) => dispatch(sparkpostApiRequest({
     type: 'GET_GRANTS',
     meta: {
       url: '/authenticate/grants',
       params: { beta, role }
     }
+  }))
+  .then((grantData) => {
+    const grants = grantData.map(({ key }) => key);
+    authCookie.merge({ grants });
   });
+
 }
