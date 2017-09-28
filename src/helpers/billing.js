@@ -39,8 +39,8 @@ export function formatDataForCors(values) {
       cardHolderInfo: {
         cardHolderName: card.name,
         addressLine1: billingAddress.streetAddress,
-        // addressLine2: '',
-        // city: '',
+        addressLine2: '',
+        city: '',
         zipCode: billingAddress.zip
       }
     }
@@ -83,6 +83,7 @@ export function formatCreateData({
 }
 
 // Formats countries before storing in state
+// TODO move to a selector
 export function formatCountries(countries) {
   const ordered = _.flatten([
     _.remove(countries, { code: 'US' }),
@@ -117,8 +118,11 @@ export function getZipLabel(country) {
  * Removes unused card types from payment card array and rewrites the type string for our api
  */
 export function convertCardTypes(cards) {
-  const accepted = cards.filter((card) => _.find(acceptedCardTypes, { paymentFormat: card.type }));
-  return accepted.map((card) => ({ ...card, type: _.find(acceptedCardTypes, { paymentFormat: card.type }).apiFormat }));
+  // const accepted = cards.filter((card) => _.find(acceptedCardTypes, { paymentFormat: card.type }));
+  return cards.map((card) => {
+    const type = _.find(acceptedCardTypes, { paymentFormat: card.type });
+    return { ...card, type: type ? type.apiFormat : card.type }
+  });
 }
 
 const acceptedCardTypes = [

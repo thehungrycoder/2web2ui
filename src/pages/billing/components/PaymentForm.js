@@ -6,7 +6,7 @@ import { Field, change } from 'redux-form';
 import { Grid } from '@sparkpost/matchbox';
 import { TextFieldWrapper } from 'src/components';
 import { required } from 'src/helpers/validation';
-import payment from 'payment';
+import Payment from 'payment';
 import { convertCardTypes } from 'src/helpers/billing';
 
 import styles from './Forms.module.scss';
@@ -24,19 +24,19 @@ import styles from './Forms.module.scss';
 class PaymentForm extends Component {
   componentDidMount() {
     // Remove unaccepted card types and format strings for our api
-    const types = payment.getCardArray();
-    payment.setCardArray(convertCardTypes(types));
+    const types = Payment.getCardArray();
+    Payment.setCardArray(convertCardTypes(types));
 
     // Format these textfields on change
-    payment.formatCardNumber(ReactDOM.findDOMNode(this.cc));
-    payment.formatCardExpiry(ReactDOM.findDOMNode(this.expiry));
-    payment.formatCardCVC(ReactDOM.findDOMNode(this.cvc));
+    Payment.formatCardNumber(ReactDOM.findDOMNode(this.cc));
+    Payment.formatCardExpiry(ReactDOM.findDOMNode(this.expiry));
+    Payment.formatCardCVC(ReactDOM.findDOMNode(this.cvc));
   }
 
   // Splits month and year into two hidden fields
   handleExpiry = (e) => {
     const { change, formName } = this.props;
-    const values = payment.fns.cardExpiryVal(e.target.value);
+    const values = Payment.fns.cardExpiryVal(e.target.value);
     change(formName, 'card.expMonth', values.month);
     change(formName, 'card.expYear', values.year);
   }
@@ -44,7 +44,7 @@ class PaymentForm extends Component {
   // Sets type from cc number into a hidden field
   handleType = (e) => {
     const { change, formName } = this.props;
-    const value = payment.fns.cardType(e.target.value);
+    const value = Payment.fns.cardType(e.target.value);
     change(formName, 'card.type', value);
   }
 

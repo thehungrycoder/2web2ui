@@ -3,9 +3,9 @@ import React from 'react';
 import { Panel, Button, Banner } from '@sparkpost/matchbox';
 import config from 'src/config';
 
-const Confirmation = ({ onSubmit, current = {}, selected = {} }) => {
+const Confirmation = ({ current = {}, selected = {}, disableSubmit }) => {
   const isDowngrade = current.monthly > selected.monthly;
-  const isPlanSelected = current !== selected;
+  const isPlanSelected = current.code !== selected.code;
   let effectiveDateMarkup, ipMarkup, addonMarkup;
 
   const selectedPrice = selected.monthly === 0
@@ -48,7 +48,7 @@ const Confirmation = ({ onSubmit, current = {}, selected = {} }) => {
   }
 
   const buttonText = isDowngrade ? 'Downgrade Plan' : 'Upgrade Plan';
-
+  
   return (
     <Panel>
       <Panel.Section>
@@ -67,8 +67,7 @@ const Confirmation = ({ onSubmit, current = {}, selected = {} }) => {
           fullWidth
           primary={!isDowngrade}
           destructive={isDowngrade}
-          disabled={!isPlanSelected}
-          onClick={onSubmit}>
+          disabled={!isPlanSelected || disableSubmit}>
           { buttonText }
         </Button>
       </Panel.Section>

@@ -10,13 +10,18 @@
 }
 
 .Content {
-  line-height: rem(21);
+  p {
+    line-height: rem(24);
+    margin-bottom: rem(0);
+  }
 
-  small {
-    line-height: rem(16);
+  h6 {
+    font-size: rem(16);
+    line-height: rem(24);
+    margin-bottom: rem(0);
   }
   
-  h6 {
-    margin-bottom: 0;
+  svg {
+    margin-top: -2px;
   }
 }

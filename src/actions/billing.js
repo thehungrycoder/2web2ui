@@ -15,7 +15,6 @@ export function syncSubscription() {
 }
 
 export function updateSubscription(code) {
-  console.log('update');
   return sparkpostApiRequest({
     type: 'UPDATE_SUBSCRIPTION',
     meta: {
@@ -95,16 +94,14 @@ export function createZuoraAccount({ data, token, signature }) {
 
 export function billingCreate(values) {
   const { corsData, billingData } = formatDataForCors(values);
-  console.log(corsData, billingData);
 
-  return (dispatch) =>
+  return (dispatch) => {
 
     // get CORS data for the create account context
-    dispatch(cors('create-account', corsData))
+    return dispatch(cors('create-account', corsData))
 
       // create the Zuora account
       .then((results) => {
-        console.log(results)
         const { token, signature } = results;
         const data = formatCreateData({ ...results, ...billingData });
         return dispatch(createZuoraAccount({ data, token, signature }));
@@ -115,6 +112,30 @@ export function billingCreate(values) {
 
       // refetch the account
       .then(() => dispatch(fetchAccount()));
+  }
+}
+
+export function billingUpdate(values) {
+  const { corsData, billingData } = formatDataForCors(values);
+
+  return (dispatch) => {
+
+    // get CORS data for the update billing context
+    return dispatch(cors('update-billing', corsData))
+
+      // Update Zuora with new CC
+      .then((results) => {
+        const { token, signature } = results;
+        const data = formatCreateData({ ...results, ...billingData });
+        return dispatch(updateCreditCard({ data, token, signature }));
+      })
+
+      // sync our db with new Zuora state
+      .then(() => dispatch(syncSubscription()))
+
+      // refetch the account
+      .then(() => dispatch(fetchAccount()));
+  }
 }
 
 export function getBillingCountries() {
