@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`listApiKeys() dispatches the correct action when no keys are present 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "method": "GET",
+      "url": "/api-keys",
+    },
+    "type": "LIST_API_KEYS",
+  },
+]
+`;
+
+exports[`listGrants() dispatches the correct action when no grants are present 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "method": "GET",
+      "url": "/authenticate/grants",
+    },
+    "type": "LIST_GRANTS",
+  },
+]
+`;

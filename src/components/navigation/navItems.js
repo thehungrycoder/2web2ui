@@ -35,8 +35,8 @@ export default [
         to: '/account/billing'
       },
       {
-        label: 'Credentials',
-        to: '/account/credentials'
+        label: 'API Keys',
+        to: '/account/api-keys'
       },
       {
         label: 'Profile',
