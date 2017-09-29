@@ -1,5 +1,5 @@
 const initialState = {
-  list: [],
+  entities: [],
   error: null,
   loading: false,
   sortKey: 'name'
@@ -12,7 +12,7 @@ export default (state = initialState, action) => {
     case 'LIST_USERS_PENDING':
       return { ...initialState, loading: true };
     case 'LIST_USERS_SUCCESS':
-      return { ...initialState, list: action.payload };
+      return { ...initialState, entities: action.payload };
 
     default:
       return state;
