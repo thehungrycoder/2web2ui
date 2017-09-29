@@ -1,12 +1,13 @@
-/* eslint-disable */
 import React from 'react';
-import { Panel, Button, Banner } from '@sparkpost/matchbox';
+import { Panel, Button } from '@sparkpost/matchbox';
 import config from 'src/config';
 
 const Confirmation = ({ current = {}, selected = {}, disableSubmit }) => {
   const isDowngrade = current.monthly > selected.monthly;
   const isPlanSelected = current.code !== selected.code;
-  let effectiveDateMarkup, ipMarkup, addonMarkup;
+  let effectiveDateMarkup = null;
+  let ipMarkup = null;
+  let addonMarkup = null;
 
   const selectedPrice = selected.monthly === 0
     ? 'for Free'
@@ -48,7 +49,7 @@ const Confirmation = ({ current = {}, selected = {}, disableSubmit }) => {
   }
 
   const buttonText = isDowngrade ? 'Downgrade Plan' : 'Upgrade Plan';
-  
+
   return (
     <Panel>
       <Panel.Section>

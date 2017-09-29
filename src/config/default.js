@@ -18,7 +18,8 @@ const config = {
   contact: {
     abuseEmail: 'compliance@sparkpost.com',
     contactEmail: 'hello@sparkpost.com',
-    supportEmail: 'support@sparkpost.com'
+    supportEmail: 'support@sparkpost.com',
+    billingEmail: 'billing@sparkpost.com'
   },
   metricsPrecisionMap: [
     { time: 60, value: '1min', format: 'ha' },

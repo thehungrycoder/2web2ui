@@ -4,23 +4,24 @@ import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import { reduxForm, formValueSelector } from 'redux-form';
 import { Layout, PlanPicker } from 'src/components';
-import { format } from 'date-fns';
-import { Page, Panel, Grid, Icon, Banner } from '@sparkpost/matchbox';
+
+import { Page, Panel, Grid } from '@sparkpost/matchbox';
 
 import PaymentForm from './components/PaymentForm';
 import BillingAddressForm from './components/BillingAddressForm';
 import Confirmation from './components/Confirmation';
-import { SummarySection } from './components/SummarySection';
+import { PendingPlanBanner, SuspendedBanner, ManuallyBilledBanner } from './components/Banners';
+import { CardSummary } from './components/SummarySection';
 
-import config from 'src/config';
 import { getPlans } from 'src/actions/account';
 import { showAlert } from 'src/actions/globalAlert';
 import { updateSubscription, billingCreate, billingUpdate, getBillingCountries } from 'src/actions/billing';
-import { selectPublicPlans, selectCurrentPlan } from 'src/selectors/accountBillingInfo';
-import { selectInitialValues } from 'src/selectors/accountChangePlan';
 
+import { selectPublicPlans, selectCurrentPlan } from 'src/selectors/accountBillingInfo';
+import { changePlanValues } from 'src/selectors/accountBillingForms';
 const FORMNAME = 'changePlan';
 
+// TODO clear state when logging out
 class ChangePlanPage extends Component {
   state = {
     useSavedCC: null
@@ -78,28 +79,20 @@ class ChangePlanPage extends Component {
     const { billing } = this.props.account;
 
     if (this.props.selectedPlan && this.props.selectedPlan.isFree) {
-      return null;
+      return null; // CC not required on free plans
+    }
+
+    if (this.state.useSavedCC) {
+      return (
+        <Panel title='Saved Payment Method' actions={[{ content: 'Use Another Credit Card', onClick: () => this.handleCardToggle() }]}>
+          <Panel.Section><CardSummary billing={billing} /></Panel.Section>
+        </Panel>
+      );
     }
 
     const savedPaymentAction = this.props.billable
       ? [{ content: 'Use Saved Payment Method', onClick: () => this.handleCardToggle() }]
       : null;
-
-    if (this.state.useSavedCC) {
-      const { credit_card } = billing;
-      const action = [{ content: 'Use Another Credit Card', onClick: () => this.handleCardToggle() }];
-      return (
-        <Panel title='Saved Payment Method' actions={action}>
-          <Panel.Section>
-            <SummarySection>
-              <h6><Icon name='CreditCard' size={16}/> { credit_card.type } ···· { credit_card.number.substr(credit_card.number.length - 4) }</h6>
-              <h6>{ billing.first_name } { billing.last_name }</h6>
-              <p><small>Expires { credit_card.expiration_month }/{ credit_card.expiration_year }</small></p>
-            </SummarySection>
-          </Panel.Section>
-        </Panel>
-      );
-    }
 
     return (
       <Panel title='Add Credit Card' actions={savedPaymentAction}>
@@ -109,39 +102,40 @@ class ChangePlanPage extends Component {
     );
   }
 
-  renderPendingBanner = () => {
-    const { pending_subscription } = this.props.account;
-    return pending_subscription
-      ? <Banner status='danger' title='Pending Plan Change' >
-          <p>You're scheduled to switch to the { pending_subscription.name } plan on {format(pending_subscription.effective_date, 'MMM DD, YYYY')}, and can't update your plan until that switch happens.</p>
-          <p>If you have any questions, please <a href={`mailto:${config.contact.supportEmail}`}>contact support</a>.</p>
-        </Banner>
-      : null;
-  }
+  renderForm = () => {
+    const { account, plans, handleSubmit, currentPlan, selectedPlan } = this.props;
+    const { subscription, isSuspendedForBilling, pending_subscription } = account;
 
-  render() {
-    const { plans, loading, handleSubmit, currentPlan, selectedPlan } = this.props;
+    if ((subscription && !subscription.self_serve) || isSuspendedForBilling || pending_subscription) {
+      return null;
+    }
 
     return (
-      <Layout.App loading={loading}>
+      <form onSubmit={handleSubmit((values) => this.updatePlan(values))}>
+        <Grid>
+          <Grid.Column>
+            <Panel title='Select A Plan'><PlanPicker plans={plans} /></Panel>
+            { this.renderCCSection() }
+          </Grid.Column>
+          <Grid.Column xs={12} md={5}>
+            <Confirmation
+              current={currentPlan}
+              selected={selectedPlan}
+              disableSubmit={this.props.submitting || this.props.pristine} />
+          </Grid.Column>
+        </Grid>
+      </form>
+    );
+  };
+
+  render() {
+    return (
+      <Layout.App loading={this.props.loading}>
         <Page breadcrumbAction={{ content: 'Back to billing', to: '/account/billing', Component: Link }}/>
-        { this.renderPendingBanner() }
-        <form onSubmit={handleSubmit((values) => this.updatePlan(values))}>
-          <Grid>
-            <Grid.Column>
-              <Panel title='Select A Plan'>
-                <PlanPicker plans={plans} />
-              </Panel>
-              { this.renderCCSection() }
-            </Grid.Column>
-            <Grid.Column xs={12} md={5}>
-              <Confirmation
-                current={currentPlan}
-                selected={selectedPlan}
-                disableSubmit={this.props.submitting || this.props.pristine} />
-            </Grid.Column>
-          </Grid>
-        </form>
+        <PendingPlanBanner account={this.props.account} />
+        <SuspendedBanner account={this.props.account}/>
+        <ManuallyBilledBanner account={this.props.account}/>
+        { this.renderForm() }
       </Layout.App>
     );
   }
@@ -151,14 +145,14 @@ const mapStateToProps = (state) => {
   const selector = formValueSelector(FORMNAME);
   const currentPlan = selectCurrentPlan(state);
   return {
-    loading: !Object.keys(state.account).length || state.billing.plansLoading,
+    loading: !Object.keys(state.account).length || state.billing.plansLoading || !state.billing.countries,
     billable: !!state.account.billing && !currentPlan.isFree,
     plans: selectPublicPlans(state),
     billing: state.billing,
     account: state.account,
     currentPlan,
     selectedPlan: selector(state, 'planpicker'),
-    initialValues: selectInitialValues(state)
+    initialValues: changePlanValues(state)
   };
 };
 
