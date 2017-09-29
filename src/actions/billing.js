@@ -125,7 +125,6 @@ export function billingUpdate(values) {
 
       // Update Zuora with new CC
       .then((results) => {
-        console.log(results)
         const { token, signature } = results;
         const data = formatCreateData({ ...results, ...billingData });
         return dispatch(updateCreditCard({ data, token, signature }));

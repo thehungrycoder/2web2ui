@@ -1,0 +1,112 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Page: ChangePlanPage should render 1`] = `
+<App>
+  <t
+    breadcrumbAction={
+      Object {
+        "Component": [Function],
+        "content": "Back to billing",
+        "to": "/account/billing",
+      }
+    }
+  />
+  <Component
+    account={Object {}}
+  />
+  <Component
+    account={Object {}}
+  />
+  <Component
+    account={Object {}}
+  />
+  <form>
+    <t>
+      <Grid.Column>
+        <t
+          title="Select A Plan"
+        >
+          <Component />
+        </t>
+        <t
+          actions={null}
+          title="Add Credit Card"
+        >
+          <Panel.Section>
+            <Connect(PaymentForm)
+              formName="changePlan"
+            />
+          </Panel.Section>
+          <Panel.Section>
+            <Connect(BillingAddressForm)
+              countries={Array []}
+              formName="changePlan"
+            />
+          </Panel.Section>
+        </t>
+      </Grid.Column>
+      <Grid.Column
+        md={5}
+        xs={12}
+      >
+        <Confirmation />
+      </Grid.Column>
+    </t>
+  </form>
+</App>
+`;
+
+exports[`Page: ChangePlanPage should render cc summary and toggle 1`] = `
+<App>
+  <t
+    breadcrumbAction={
+      Object {
+        "Component": [Function],
+        "content": "Back to billing",
+        "to": "/account/billing",
+      }
+    }
+  />
+  <Component
+    account={Object {}}
+  />
+  <Component
+    account={Object {}}
+  />
+  <Component
+    account={Object {}}
+  />
+  <form>
+    <t>
+      <Grid.Column>
+        <t
+          title="Select A Plan"
+        >
+          <Component />
+        </t>
+        <t
+          actions={
+            Array [
+              Object {
+                "content": "Use Another Credit Card",
+                "onClick": [Function],
+              },
+            ]
+          }
+          title="Saved Payment Method"
+        >
+          <Panel.Section>
+            <CardSummary />
+          </Panel.Section>
+        </t>
+      </Grid.Column>
+      <Grid.Column
+        md={5}
+        xs={12}
+      >
+        <Confirmation />
+      </Grid.Column>
+    </t>
+  </form>
+</App>
+`;

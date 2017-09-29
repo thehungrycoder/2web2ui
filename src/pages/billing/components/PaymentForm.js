@@ -7,7 +7,7 @@ import { Grid } from '@sparkpost/matchbox';
 import { TextFieldWrapper } from 'src/components';
 import { required } from 'src/helpers/validation';
 import Payment from 'payment';
-import { convertCardTypes } from 'src/helpers/billing';
+import { formatCardTypes } from 'src/helpers/billing';
 
 import styles from './Forms.module.scss';
 
@@ -25,7 +25,7 @@ class PaymentForm extends Component {
   componentDidMount() {
     // Remove unaccepted card types and format strings for our api
     const types = Payment.getCardArray();
-    Payment.setCardArray(convertCardTypes(types));
+    Payment.setCardArray(formatCardTypes(types));
 
     // Format these textfields on change
     Payment.formatCardNumber(ReactDOM.findDOMNode(this.cc));

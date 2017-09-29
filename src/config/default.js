@@ -14,6 +14,12 @@ const config = {
       'Content-Type': 'application/x-www-form-urlencoded'
     }
   },
+  cardTypes: [
+    { paymentFormat: 'visa', apiFormat: 'Visa' },
+    { paymentFormat: 'mastercard', apiFormat: 'MasterCard' },
+    { paymentFormat: 'amex', apiFormat: 'AmericanExpress' },
+    { paymentFormat: 'discover', apiFormat: 'Discover' }
+  ],
   chartColors: ['#04AEF9', '#fa6423', '#FFD300', '#8CCA3A', '#2693c3'],
   contact: {
     abuseEmail: 'compliance@sparkpost.com',

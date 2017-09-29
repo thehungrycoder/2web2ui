@@ -18,11 +18,10 @@ import { showAlert } from 'src/actions/globalAlert';
 import { updateSubscription, billingCreate, billingUpdate, getBillingCountries } from 'src/actions/billing';
 
 import { selectPublicPlans, selectCurrentPlan } from 'src/selectors/accountBillingInfo';
-import { changePlanValues } from 'src/selectors/accountBillingForms';
+import { changePlanInitialValues } from 'src/selectors/accountBillingForms';
 const FORMNAME = 'changePlan';
 
-// TODO clear state when logging out
-class ChangePlanPage extends Component {
+export class ChangePlanPage extends Component {
   state = {
     useSavedCC: null
   };
@@ -103,24 +102,23 @@ class ChangePlanPage extends Component {
   }
 
   renderForm = () => {
-    const { account, plans, handleSubmit, currentPlan, selectedPlan } = this.props;
-    const { subscription, isSuspendedForBilling, pending_subscription } = account;
+    const { subscription, isSuspendedForBilling, pending_subscription } = this.props.account;
 
     if ((subscription && !subscription.self_serve) || isSuspendedForBilling || pending_subscription) {
       return null;
     }
 
     return (
-      <form onSubmit={handleSubmit((values) => this.updatePlan(values))}>
+      <form onSubmit={this.props.handleSubmit((values) => this.updatePlan(values))}>
         <Grid>
           <Grid.Column>
-            <Panel title='Select A Plan'><PlanPicker plans={plans} /></Panel>
+            <Panel title='Select A Plan'><PlanPicker plans={this.props.plans} /></Panel>
             { this.renderCCSection() }
           </Grid.Column>
           <Grid.Column xs={12} md={5}>
             <Confirmation
-              current={currentPlan}
-              selected={selectedPlan}
+              current={this.props.currentPlan}
+              selected={this.props.selectedPlan}
               disableSubmit={this.props.submitting || this.props.pristine} />
           </Grid.Column>
         </Grid>
@@ -152,7 +150,7 @@ const mapStateToProps = (state) => {
     account: state.account,
     currentPlan,
     selectedPlan: selector(state, 'planpicker'),
-    initialValues: changePlanValues(state)
+    initialValues: changePlanInitialValues(state)
   };
 };
 

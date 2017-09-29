@@ -1,8 +1,8 @@
-/* eslint-disable */
 import _ from 'lodash';
+import config from 'src/config';
 
 export function formatDataForCors(values) {
-  const { email, planpicker, card, billingAddress, billingContact } = values;
+  const { email, planpicker, card, billingAddress } = values;
 
   // For CORS Endpoint + sift
   const corsData = {
@@ -44,7 +44,7 @@ export function formatDataForCors(values) {
         zipCode: billingAddress.zip
       }
     }
-  }
+  };
 
   return { corsData, billingData };
 }
@@ -83,7 +83,6 @@ export function formatCreateData({
 }
 
 // Formats countries before storing in state
-// TODO move to a selector
 export function formatCountries(countries) {
   const ordered = _.flatten([
     _.remove(countries, { code: 'US' }),
@@ -115,19 +114,11 @@ export function getZipLabel(country) {
 }
 
 /**
- * Removes unused card types from payment card array and rewrites the type string for our api
+ * Reshapes type strings from what the payment lib provides to a format our api accepts
  */
-export function convertCardTypes(cards) {
-  // const accepted = cards.filter((card) => _.find(acceptedCardTypes, { paymentFormat: card.type }));
+export function formatCardTypes(cards) {
   return cards.map((card) => {
-    const type = _.find(acceptedCardTypes, { paymentFormat: card.type });
-    return { ...card, type: type ? type.apiFormat : card.type }
+    const type = _.find(config.cardTypes, { paymentFormat: card.type });
+    return { ...card, type: type ? type.apiFormat : card.type };
   });
 }
-
-const acceptedCardTypes = [
-  { paymentFormat: 'visa', apiFormat: 'Visa' },
-  { paymentFormat: 'mastercard', apiFormat: 'MasterCard' },
-  { paymentFormat: 'amex', apiFormat: 'AmericanExpress' },
-  { paymentFormat: 'discover', apiFormat: 'Discover' }
-];

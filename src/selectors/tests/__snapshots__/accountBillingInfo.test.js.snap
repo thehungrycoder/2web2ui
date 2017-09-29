@@ -34,3 +34,27 @@ Object {
   },
 }
 `;
+
+exports[`Selector: current plan should get current plan from billing 1`] = `
+Object {
+  "code": "qwe",
+  "status": "private",
+}
+`;
+
+exports[`Selector: public plans should get public plans and sort by volume 1`] = `
+Array [
+  Object {
+    "status": "public",
+    "volume": 1,
+  },
+  Object {
+    "status": "public",
+    "volume": 2,
+  },
+  Object {
+    "status": "public",
+    "volume": 3,
+  },
+]
+`;
