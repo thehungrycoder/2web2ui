@@ -49,6 +49,29 @@ export function formatDataForCors(values) {
   return { corsData, billingData };
 }
 
+export function formatUpdateData({ accountKey, billingAddress, card }) {
+  const { securityCode } = card;
+  const { zip, country, state } = billingAddress;
+  return {
+    accountKey,
+    defaultPaymentMethod: true,
+    cardHolderInfo: {
+      cardHolderName: card.name,
+      addressLine1: billingAddress.streetAddress,
+      addressLine2: null,
+      city: null,
+      zipCode: zip,
+      country,
+      state
+    },
+    creditCardNumber: card.number.replace(/\W/g, ''),
+    expirationMonth: card.expMonth,
+    expirationYear: card.expYear,
+    securityCode,
+    creditCardType: card.type
+  };
+}
+
 export function formatCreateData({
   accountNumber,
   crmId,
