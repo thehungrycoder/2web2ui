@@ -22,8 +22,8 @@ import styles from './Forms.module.scss';
  */
 export class PaymentForm extends Component {
   componentDidMount() {
-    // Remove unaccepted card types and format strings for our api
     const types = Payment.getCardArray();
+    // Formats strings for our api (the ones we accept)
     Payment.setCardArray(formatCardTypes(types));
 
     // Format these textfields on change
