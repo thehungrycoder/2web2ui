@@ -9,8 +9,8 @@ export function formatDataForCors(values) {
     email,
     cardholder_name: card.name,
     address1: billingAddress.streetAddress,
-    // address2: '',
-    // city: '',
+    address2: null,
+    city: null,
     state: billingAddress.state,
     country: billingAddress.country,
     zip_code: billingAddress.zip,
@@ -39,8 +39,8 @@ export function formatDataForCors(values) {
       cardHolderInfo: {
         cardHolderName: card.name,
         addressLine1: billingAddress.streetAddress,
-        addressLine2: '',
-        city: '',
+        addressLine2: null,
+        city: null,
         zipCode: billingAddress.zip
       }
     }

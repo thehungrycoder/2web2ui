@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { formatDataForCors, formatCreateData, formatUpdateData } from 'src/helpers/billing';
 import { fetch as fetchAccount } from './account';
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
@@ -15,14 +14,14 @@ export function syncSubscription() {
 }
 
 export function updateSubscription(code) {
-  return sparkpostApiRequest({
+  return (dispatch) => dispatch(sparkpostApiRequest({
     type: 'UPDATE_SUBSCRIPTION',
     meta: {
       method: 'PUT',
       url: '/account/subscription',
       data: { code }
     }
-  });
+  })).then(() => dispatch(fetchAccount({ include: 'usage,billing' })));
 }
 
 /**
@@ -95,10 +94,10 @@ export function createZuoraAccount({ data, token, signature }) {
 export function billingCreate(values) {
   const { corsData, billingData } = formatDataForCors(values);
 
-  return (dispatch) => {
+  return (dispatch) =>
 
     // get CORS data for the create account context
-    return dispatch(cors('create-account', corsData))
+     dispatch(cors('create-account', corsData))
 
       // create the Zuora account
       .then((results) => {
@@ -112,7 +111,6 @@ export function billingCreate(values) {
 
       // refetch the account
       .then(() => dispatch(fetchAccount({ include: 'usage,billing' })));
-  }
 }
 
 // note: this action creator should detect
@@ -123,10 +121,10 @@ export function billingCreate(values) {
 export function billingUpdate(values) {
   const { code } = values.planpicker;
 
-  return (dispatch) => {
+  return (dispatch) =>
 
     // get CORS data for the update billing context
-    return dispatch(cors('update-billing'))
+     dispatch(cors('update-billing'))
 
       // Update Zuora with new CC
       .then(({ accountKey, token, signature }) => {
@@ -142,7 +140,6 @@ export function billingUpdate(values) {
 
       // refetch the account
       .then(() => dispatch(fetchAccount({ include: 'usage,billing' })));
-  }
 }
 
 export function getBillingCountries() {

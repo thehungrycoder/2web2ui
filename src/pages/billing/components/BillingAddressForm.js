@@ -20,7 +20,7 @@ import _ from 'lodash';
  * billingAddress.state (if country US | CA)
  * billingAddress.zip
  */
-const BillingAddressForm = ({ countries, countryValue }) => {
+const BillingAddressForm = ({ countries, countryValue, disabled }) => {
   const stateOrProvince = countryValue === 'US' || countryValue === 'CA'
     ? <Grid.Column xs={6}>
         <Field
@@ -29,6 +29,7 @@ const BillingAddressForm = ({ countries, countryValue }) => {
           component={SelectWrapper}
           options={_.find(countries, { value: countryValue }).states}
           validate={required}
+          disabled={disabled}
         />
       </Grid.Column>
     : null;
@@ -43,6 +44,7 @@ const BillingAddressForm = ({ countries, countryValue }) => {
             name='billingAddress.firstName'
             component={TextFieldWrapper}
             validate={required}
+            disabled={disabled}
           />
         </Grid.Column>
         <Grid.Column xs={6}>
@@ -51,6 +53,7 @@ const BillingAddressForm = ({ countries, countryValue }) => {
             name='billingAddress.lastName'
             component={TextFieldWrapper}
             validate={required}
+            disabled={disabled}
           />
         </Grid.Column>
       </Grid>
@@ -61,12 +64,14 @@ const BillingAddressForm = ({ countries, countryValue }) => {
         component={SelectWrapper}
         options={countries}
         validate={required}
+        disabled={disabled}
       />
       <Field
         label='Street Address'
         name='billingAddress.streetAddress'
         component={TextFieldWrapper}
         validate={required}
+        disabled={disabled}
       />
       <Grid>
         { stateOrProvince }
@@ -76,6 +81,7 @@ const BillingAddressForm = ({ countries, countryValue }) => {
             name='billingAddress.zip'
             component={TextFieldWrapper}
             validate={required}
+            disabled={disabled}
           />
         </Grid.Column>
       </Grid>

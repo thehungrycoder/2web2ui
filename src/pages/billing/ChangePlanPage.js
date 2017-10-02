@@ -3,10 +3,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import { reduxForm, formValueSelector } from 'redux-form';
+
 import { Layout, PlanPicker } from 'src/components';
-
 import { Page, Panel, Grid } from '@sparkpost/matchbox';
-
 import PaymentForm from './components/PaymentForm';
 import BillingAddressForm from './components/BillingAddressForm';
 import Confirmation from './components/Confirmation';
@@ -19,6 +18,7 @@ import { updateSubscription, billingCreate, billingUpdate, getBillingCountries }
 
 import { selectPublicPlans, selectCurrentPlan } from 'src/selectors/accountBillingInfo';
 import { changePlanInitialValues } from 'src/selectors/accountBillingForms';
+
 const FORMNAME = 'changePlan';
 
 export class ChangePlanPage extends Component {
@@ -83,7 +83,7 @@ export class ChangePlanPage extends Component {
 
     if (this.state.useSavedCC) {
       return (
-        <Panel title='Saved Payment Method' actions={[{ content: 'Use Another Credit Card', onClick: () => this.handleCardToggle() }]}>
+        <Panel title='Pay With Saved Payment Method' actions={[{ content: 'Use Another Credit Card', onClick: () => this.handleCardToggle() }]}>
           <Panel.Section><CardSummary billing={billing} /></Panel.Section>
         </Panel>
       );
@@ -94,9 +94,18 @@ export class ChangePlanPage extends Component {
       : null;
 
     return (
-      <Panel title='Add Credit Card' actions={savedPaymentAction}>
-        <Panel.Section><PaymentForm formName={FORMNAME} /></Panel.Section>
-        <Panel.Section><BillingAddressForm countries={this.props.billing.countries} formName={FORMNAME} /></Panel.Section>
+      <Panel title='Pay With New Credit Card' actions={savedPaymentAction}>
+        <Panel.Section>
+          <PaymentForm
+            formName={FORMNAME}
+            disabled={this.props.submitting} />
+          </Panel.Section>
+        <Panel.Section>
+          <BillingAddressForm
+            formName={FORMNAME}
+            disabled={this.props.submitting}
+            countries={this.props.billing.countries} />
+        </Panel.Section>
       </Panel>
     );
   }
@@ -112,7 +121,9 @@ export class ChangePlanPage extends Component {
       <form onSubmit={this.props.handleSubmit((values) => this.updatePlan(values))}>
         <Grid>
           <Grid.Column>
-            <Panel title='Select A Plan'><PlanPicker plans={this.props.plans} /></Panel>
+            <Panel title='Select A Plan'>
+              <PlanPicker disabled={this.props.submitting} plans={this.props.plans} />
+            </Panel>
             { this.renderCCSection() }
           </Grid.Column>
           <Grid.Column xs={12} md={5}>

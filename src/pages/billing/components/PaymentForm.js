@@ -49,6 +49,7 @@ class PaymentForm extends Component {
   }
 
   render() {
+    const { disabled } = this.props;
     return (
       <div>
         <p><small>Credit Card</small></p>
@@ -59,12 +60,14 @@ class PaymentForm extends Component {
           onChange={this.handleType}
           component={TextFieldWrapper}
           validate={required}
+          disabled={disabled}
         />
         <Field
           label='Cardholder Name'
           name='card.name'
           component={TextFieldWrapper}
           validate={required}
+          disabled={disabled}
         />
         <Grid>
           <Grid.Column xs={6}>
@@ -76,6 +79,7 @@ class PaymentForm extends Component {
               placeholder='MM/YYYY'
               component={TextFieldWrapper}
               validate={required}
+              disabled={disabled}
             />
           </Grid.Column>
           <Grid.Column xs={6}>
@@ -86,6 +90,7 @@ class PaymentForm extends Component {
               placeholder='CVV/CVC'
               component={TextFieldWrapper}
               validate={required}
+              disabled={disabled}
             />
           </Grid.Column>
         </Grid>

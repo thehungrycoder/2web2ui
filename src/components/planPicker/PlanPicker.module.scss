@@ -28,6 +28,11 @@
     color: color(orange);
     font-size: rem(25);
   }
+
+  &.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
 }
 
 .DropdownPlan {

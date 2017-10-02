@@ -25,7 +25,7 @@ class PlanPicker extends Component {
     selectedItem,
     highlightedIndex
   }) => {
-    const { plans, input } = this.props;
+    const { plans, input, disabled } = this.props;
 
     const items = plans.map((item, index) => {
       const classes = cx(
@@ -38,7 +38,11 @@ class PlanPicker extends Component {
     });
 
     const listClasses = cx(styles.List, isOpen && styles.open);
-    const triggerClasses = cx(styles.TriggerPlan, isOpen && styles.triggerOpen);
+    const triggerClasses = cx(
+      styles.TriggerPlan,
+      disabled && styles.disabled,
+      isOpen && styles.triggerOpen
+    );
     const triggerProps = getButtonProps({
       plan: selectedItem,
       onClick: this.handleOpen
@@ -68,4 +72,4 @@ class PlanPicker extends Component {
   }
 }
 
-export default ({ plans }) => <Field component={PlanPicker} name='planpicker' plans={plans} />;
+export default ({ plans, ...rest }) => <Field component={PlanPicker} name='planpicker' plans={plans} {...rest} />;

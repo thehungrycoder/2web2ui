@@ -37,7 +37,7 @@ const Confirmation = ({ current = {}, selected = {}, disableSubmit }) => {
       ipMarkup = (
         <div>
           <p>Note: your current plan includes a free dedicated IP address.</p>
-          <p>If you downgrade to the selected plan, you will lose that discount and will be charged the standard *TODO* /month price for each dedicated IP on your next statement.</p>
+          <p>If you downgrade to the selected plan, you will lose that discount and will be charged the standard ${ config.sendingIps.pricePerIp } / month price for each dedicated IP on your next statement.</p>
           <p>To remove dedicated IPs from your account, please <a href={`mailto:${config.contact.supportEmail}`}>contact our support team</a>.</p>
         </div>
       );

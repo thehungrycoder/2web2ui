@@ -37,6 +37,9 @@ const config = {
     { time: 60 * 24 * 190, value: 'week', format: 'MMM Do' },
     { time: Infinity, value: 'month', format: 'MMM YY' }
   ],
+  sendingIps: {
+    pricePerIp: 20.00
+  },
   summaryChart: {
     defaultMetrics: ['count_targeted', 'count_rendered', 'count_accepted', 'count_bounce']
   },
