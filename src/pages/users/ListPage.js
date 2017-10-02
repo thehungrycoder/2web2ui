@@ -2,27 +2,33 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Page } from '@sparkpost/matchbox';
 
-import { listUsers } from 'src/actions/users';
+import usersActions from 'src/actions/users';
 import { selectUsers } from 'src/selectors/users';
 
 import ApiErrorBanner from 'src/components/apiErrorBanner/ApiErrorBanner';
 import TableCollection from 'src/components/collection/TableCollection';
 import Layout from 'src/components/layout/Layout';
 
-const COLUMNS = ['Name', 'Role', 'Email', 'Last Login'];
+import AccessSelect from './AccessSelect';
 
-// TODO: handling underscores
-const getRowData = ({ access, email, last_login, name }) => [
-  name,
-  access,
-  email,
-  last_login
-];
+const COLUMNS = ['Name', 'Role', 'Email', 'Last Login'];
 
 export class ListPage extends Component {
   componentDidMount() {
     this.props.listUsers();
   }
+
+  // Do not allow current user to change their access/role
+  getRowData = (user) => [
+    user.name,
+    <AccessSelect
+      disabled={user.isCurrentUser}
+      onChange={this.props.updateUser}
+      user={user}
+    />,
+    user.email,
+    user.last_login
+  ];
 
   renderError() {
     const { error, listUsers } = this.props;
@@ -47,7 +53,7 @@ export class ListPage extends Component {
         {this.renderError()}
         <TableCollection
           columns={COLUMNS}
-          getRowData={getRowData}
+          getRowData={this.getRowData}
           pagination={true}
           rows={users}
         />
@@ -62,4 +68,4 @@ const mapStateToProps = (state) => ({
   users: selectUsers(state)
 });
 
-export default connect(mapStateToProps, { listUsers })(ListPage);
+export default connect(mapStateToProps, usersActions)(ListPage);

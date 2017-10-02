@@ -18,6 +18,15 @@ export default (state = initialState, action) => {
     case 'LIST_USERS_SUCCESS':
       return { ...initialState, entities: reduceUsers(action.payload) };
 
+    case 'UPDATE_USER_SUCCESS': {
+      const { access_level, username } = action.meta.data;
+      const user = fp.get(username)(state.entities);
+
+      if (fp.isUndefined(user)) { return state; } // ignore
+
+      return fp.set(['entities', username, 'access'], access_level)(state);
+    }
+
     default:
       return state;
   }
