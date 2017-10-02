@@ -1,9 +1,13 @@
+import fp from 'lodash/fp';
+
 const initialState = {
-  entities: [],
+  entities: {},
   error: null,
   loading: false,
   sortKey: 'name'
 };
+
+const reduceUsers = fp.reduce((result, user) => ({ ...result, [user.username]: user }), {});
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -12,7 +16,7 @@ export default (state = initialState, action) => {
     case 'LIST_USERS_PENDING':
       return { ...initialState, loading: true };
     case 'LIST_USERS_SUCCESS':
-      return { ...initialState, entities: action.payload };
+      return { ...initialState, entities: reduceUsers(action.payload) };
 
     default:
       return state;
