@@ -7,9 +7,6 @@ Object {
     "firstName": "ann",
     "lastName": "perkins",
   },
-  "billingContact": Object {
-    "country": "_placeholder",
-  },
   "email": "ann@perkins.com",
   "planpicker": "Plan",
 }
