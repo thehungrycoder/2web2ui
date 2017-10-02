@@ -11,9 +11,6 @@ export function changePlanInitialValues(state) {
       firstName: state.currentUser.first_name,
       lastName: state.currentUser.last_name,
       country: '_placeholder'
-    },
-    billingContact: {
-      country: '_placeholder'
     }
   };
 }
