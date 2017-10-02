@@ -1,0 +1,84 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Billing Banners:  ManuallyBilledBanner should render with pending subscription 1`] = `
+<t
+  status="info"
+  title="Your current whoa plan includes 123 emails /mo"
+>
+  <p>
+    You're scheduled to switch to the 
+    omg
+     plan on 
+    Oct 05, 2020
+    . If you have any questions, please 
+    <a
+      href="mailto:support@sparkpost.com"
+    >
+      contact support
+    </a>
+    .
+  </p>
+</t>
+`;
+
+exports[`Billing Banners:  ManuallyBilledBanner should render with subscription 1`] = `
+<t
+  status="info"
+  title="Your current whoa plan includes 123 emails /mo"
+>
+  <p>
+    To make changes to your plan or billing information, 
+    <a
+      href="mailto:support@sparkpost.com"
+    >
+      contact support
+    </a>
+    .
+  </p>
+</t>
+`;
+
+exports[`Billing Banners:  PendingPlanBanner should render with pending_subscription 1`] = `
+<t
+  status="info"
+  title="Pending Plan Change"
+>
+  <p>
+    You're scheduled to switch to the 
+     plan on 
+    Oct 05, 2020
+    , and can't update your plan until that switch happens.
+  </p>
+  <p>
+    If you have any questions, please 
+    <a
+      href="mailto:support@sparkpost.com"
+    >
+      contact support
+    </a>
+    .
+  </p>
+</t>
+`;
+
+exports[`Billing Banners:  SuspendedBanner should render with isSuspendedForBilling 1`] = `
+<t
+  status="danger"
+  title="Your account has been suspended due to a billing problem"
+>
+  <p>
+    We sent an email notification to your current billing contact email address (
+    tst
+    ). To reactivate your account and pay your outstanding balance due, please update your payment information below.
+  </p>
+  <p>
+    If you have any questions, please 
+    <a
+      href="mailto:billing@sparkpost.com"
+    >
+      contact us
+    </a>
+    .
+  </p>
+</t>
+`;

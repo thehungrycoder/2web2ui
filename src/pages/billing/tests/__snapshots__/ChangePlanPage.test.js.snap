@@ -30,7 +30,7 @@ exports[`Page: ChangePlanPage should render 1`] = `
         </t>
         <t
           actions={null}
-          title="Add Credit Card"
+          title="Pay With New Credit Card"
         >
           <Panel.Section>
             <Connect(PaymentForm)
@@ -93,7 +93,7 @@ exports[`Page: ChangePlanPage should render cc summary and toggle 1`] = `
               },
             ]
           }
-          title="Saved Payment Method"
+          title="Pay With Saved Payment Method"
         >
           <Panel.Section>
             <CardSummary />

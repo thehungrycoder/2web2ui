@@ -21,7 +21,7 @@ import styles from './Forms.module.scss';
  * card.expCombined
  * card.securityCode
  */
-class PaymentForm extends Component {
+export class PaymentForm extends Component {
   componentDidMount() {
     // Remove unaccepted card types and format strings for our api
     const types = Payment.getCardArray();

@@ -39,7 +39,59 @@ Array [
   Object {
     "meta": Object {
       "method": "GET",
-      "params": Object {},
+      "params": Object {
+        "include": "usage,billing",
+      },
+      "url": "/account",
+    },
+    "type": "FETCH_ACCOUNT",
+  },
+]
+`;
+
+exports[`Action Creator: Billing should dispatch a chained billing update action 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "data": Object {},
+      "method": "POST",
+      "params": Object {
+        "context": "update-billing",
+      },
+      "url": "/account/cors-data",
+    },
+    "type": "CORS_UPDATE_BILLING",
+  },
+  Object {
+    "meta": Object {
+      "data": Object {
+        "accountKey": Object {
+          "some": "test-billing-data",
+        },
+      },
+      "headers": Object {
+        "signature": undefined,
+        "token": undefined,
+      },
+      "method": "POST",
+      "url": "/payment-methods/credit-cards",
+    },
+    "type": "ZUORA_UPDATE_CC",
+  },
+  [Function],
+  Object {
+    "meta": Object {
+      "method": "POST",
+      "url": "/account/subscription/check",
+    },
+    "type": "SYNC_SUBSCRIPTION",
+  },
+  Object {
+    "meta": Object {
+      "method": "GET",
+      "params": Object {
+        "include": "usage,billing",
+      },
       "url": "/account",
     },
     "type": "FETCH_ACCOUNT",
@@ -172,6 +224,16 @@ Array [
       "url": "/account/subscription",
     },
     "type": "UPDATE_SUBSCRIPTION",
+  },
+  Object {
+    "meta": Object {
+      "method": "GET",
+      "params": Object {
+        "include": "usage,billing",
+      },
+      "url": "/account",
+    },
+    "type": "FETCH_ACCOUNT",
   },
 ]
 `;

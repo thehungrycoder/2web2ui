@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Payment Form:  should render 1`] = `
+<div>
+  <p>
+    <small>
+      Credit Card
+    </small>
+  </p>
+  <Field
+    component={[Function]}
+    label="Credit Card Number"
+    name="card.number"
+    onChange={[Function]}
+    validate={[Function]}
+  />
+  <Field
+    component={[Function]}
+    label="Cardholder Name"
+    name="card.name"
+    validate={[Function]}
+  />
+  <t>
+    <Grid.Column
+      xs={6}
+    >
+      <Field
+        component={[Function]}
+        label="Expiration Date"
+        name="card.expCombined"
+        onChange={[Function]}
+        placeholder="MM/YYYY"
+        validate={[Function]}
+      />
+    </Grid.Column>
+    <Grid.Column
+      xs={6}
+    >
+      <Field
+        component={[Function]}
+        label="Security Code"
+        name="card.securityCode"
+        placeholder="CVV/CVC"
+        validate={[Function]}
+      />
+    </Grid.Column>
+  </t>
+  <div>
+    <Field
+      component="input"
+      name="card.type"
+      tabIndex="-1"
+    />
+    <Field
+      component="input"
+      name="card.expMonth"
+      tabIndex="-1"
+    />
+    <Field
+      component="input"
+      name="card.expYear"
+      tabIndex="-1"
+    />
+  </div>
+</div>
+`;
