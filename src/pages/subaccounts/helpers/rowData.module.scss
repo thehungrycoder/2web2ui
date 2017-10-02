@@ -1,0 +1,11 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.StatusActive {
+  color: color(green);
+}
+.StatusSuspended {
+  color: color(orange, dark);
+}
+.StatusTerminated {
+  color: color(red, light);
+}

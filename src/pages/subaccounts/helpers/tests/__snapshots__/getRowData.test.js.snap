@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Get row data active 1`] = `
+Array [
+  <Link
+    replace={false}
+    to="/account/subaccounts/undefined"
+  >
+    active
+  </Link>,
+  <p />,
+  <p
+    className={undefined}
+  />,
+]
+`;
+
+exports[`Get row data suspended 1`] = `
+Array [
+  <Link
+    replace={false}
+    to="/account/subaccounts/undefined"
+  >
+    suspended
+  </Link>,
+  <p />,
+  <p
+    className={undefined}
+  />,
+]
+`;
+
+exports[`Get row data terminated 1`] = `
+Array [
+  <Link
+    replace={false}
+    to="/account/subaccounts/undefined"
+  >
+    terminated
+  </Link>,
+  <p />,
+  <p
+    className={undefined}
+  />,
+]
+`;

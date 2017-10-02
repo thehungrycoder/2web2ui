@@ -12,7 +12,7 @@
     "date-fns": "^1.28.5",
     "downshift": "^1.9.1",
     "history": "^4.6.1",
-    "jest-in-case": "^1.0.1",
+    "jest-in-case": "^1.0.2",
     "js-cookie": "^2.1.4",
     "moment": "^2.18.1",
     "query-string": "^5.0.0",
