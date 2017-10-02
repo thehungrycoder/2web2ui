@@ -8,7 +8,6 @@ exports[`renders access label when disabled 1`] = `
 
 exports[`renders select 1`] = `
 <t
-  defaultValue="admin"
   onChange={[Function]}
   options={
     Array [
@@ -22,5 +21,6 @@ exports[`renders select 1`] = `
       },
     ]
   }
+  value="admin"
 />
 `;

@@ -21,9 +21,9 @@ export default function AccessSelect({ disabled = false, user, ...props }) {
 
   return (
     <Select
-      defaultValue={user.access}
       onChange={onChange}
       options={OPTIONS}
+      value={user.access}
     />
   );
 }
