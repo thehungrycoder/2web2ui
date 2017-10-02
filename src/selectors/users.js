@@ -1,6 +1,9 @@
-import _ from 'lodash';
+import fp from 'lodash/fp';
 
-// Get and sort list of users
-export function selectUsers({ users }) {
-  return _.sortBy(users.entities, users.sortKey);
+// Get, enrich, and sort list of users
+export function selectUsers({ currentUser, users }) {
+  return fp.flow(
+    fp.map((user) => ({ ...user, isCurrentUser: currentUser.username === user.username })),
+    fp.sortBy(users.sortKey)
+  )(users.entities);
 }

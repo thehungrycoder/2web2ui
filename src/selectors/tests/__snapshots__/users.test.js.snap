@@ -1,16 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Users List Selector returns empty array without a user list 1`] = `Array []`;
-
-exports[`Users List Selector returns sorted list of users 1`] = `
+exports[`Users Selectors returns enriched and sorted list 1`] = `
 Array [
   Object {
-    "id": 1,
-    "name": "Zebra",
+    "isCurrentUser": false,
+    "name": "Ape",
+    "username": "ape",
   },
   Object {
-    "id": 2,
-    "name": "Ape",
+    "isCurrentUser": true,
+    "name": "Zebra",
+    "username": "zebra",
   },
 ]
 `;

@@ -1,21 +1,18 @@
 import { selectUsers } from '../users';
 
-describe('Users List Selector', () => {
-  let store = {
+describe('Users Selectors', () => {
+  const store = {
+    currentUser: { username: 'zebra' },
     users: {
-      list: [
-        { id: 1, name: 'Zebra' },
-        { id: 2, name: 'Ape' },
+      entities: [
+        { name: 'Zebra', username: 'zebra' },
+        { name: 'Ape', username: 'ape' },
       ],
+      sortKey: 'name',
     },
   };
 
-  it('returns sorted list of users', () => {
-    expect(selectUsers(store)).toMatchSnapshot();
-  });
-
-  it('returns empty array without a user list', () => {
-    store.users.list = [];
+  it('returns enriched and sorted list', () => {
     expect(selectUsers(store)).toMatchSnapshot();
   });
 });
