@@ -46,9 +46,3 @@ export function updateUser(username, data) {
     .then(({ message }) => dispatch(showAlert({ type: 'success', message })))
     .catch(({ message }) => dispatch(showAlert({ type: 'error', message })));
 }
-
-export default {
-  deleteUser,
-  listUsers,
-  updateUser
-};

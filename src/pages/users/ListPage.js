@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Page } from '@sparkpost/matchbox';
 
-import usersActions from 'src/actions/users';
+import * as usersActions from 'src/actions/users';
 import { selectUsers } from 'src/selectors/users';
 
 import ApiErrorBanner from 'src/components/apiErrorBanner/ApiErrorBanner';
