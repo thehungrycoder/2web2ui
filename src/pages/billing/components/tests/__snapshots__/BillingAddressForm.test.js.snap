@@ -31,6 +31,12 @@ exports[`Billing Address Form: should render 1`] = `
   </t>
   <Field
     component={[Function]}
+    label="Street Address"
+    name="billingAddress.streetAddress"
+    validate={[Function]}
+  />
+  <Field
+    component={[Function]}
     label="Country"
     name="billingAddress.country"
     options={
@@ -48,12 +54,6 @@ exports[`Billing Address Form: should render 1`] = `
       ]
     }
     placeholder="Select a country"
-    validate={[Function]}
-  />
-  <Field
-    component={[Function]}
-    label="Street Address"
-    name="billingAddress.streetAddress"
     validate={[Function]}
   />
   <t>
@@ -102,6 +102,12 @@ exports[`Billing Address Form: should show states 1`] = `
   </t>
   <Field
     component={[Function]}
+    label="Street Address"
+    name="billingAddress.streetAddress"
+    validate={[Function]}
+  />
+  <Field
+    component={[Function]}
     label="Country"
     name="billingAddress.country"
     options={
@@ -119,12 +125,6 @@ exports[`Billing Address Form: should show states 1`] = `
       ]
     }
     placeholder="Select a country"
-    validate={[Function]}
-  />
-  <Field
-    component={[Function]}
-    label="Street Address"
-    name="billingAddress.streetAddress"
     validate={[Function]}
   />
   <t>

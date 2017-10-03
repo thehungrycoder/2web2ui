@@ -78,18 +78,18 @@ export class BillingAddressForm extends Component {
         <p><small>Billing Address</small></p>
         { nameFields }
         <Field
+          label='Street Address'
+          name='billingAddress.streetAddress'
+          component={TextFieldWrapper}
+          validate={required}
+          disabled={disabled}
+        />
+        <Field
           label='Country'
           name='billingAddress.country'
           placeholder='Select a country'
           component={SelectWrapper}
           options={countries}
-          validate={required}
-          disabled={disabled}
-        />
-        <Field
-          label='Street Address'
-          name='billingAddress.streetAddress'
-          component={TextFieldWrapper}
           validate={required}
           disabled={disabled}
         />
