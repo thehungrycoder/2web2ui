@@ -14,6 +14,7 @@ exports[`renders correctly 1`] = `
         "Role",
         "Email",
         "Last Login",
+        null,
       ]
     }
     getRowData={[Function]}
@@ -54,6 +55,7 @@ exports[`renders errors when present 1`] = `
         "Role",
         "Email",
         "Last Login",
+        null,
       ]
     }
     getRowData={[Function]}

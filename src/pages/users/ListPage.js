@@ -10,15 +10,16 @@ import TableCollection from 'src/components/collection/TableCollection';
 import Layout from 'src/components/layout/Layout';
 
 import AccessSelect from './AccessSelect';
+import DeleteButton from './DeleteButton';
 
-const COLUMNS = ['Name', 'Role', 'Email', 'Last Login'];
+const COLUMNS = ['Name', 'Role', 'Email', 'Last Login', null];
 
 export class ListPage extends Component {
   componentDidMount() {
     this.props.listUsers();
   }
 
-  // Do not allow current user to change their access/role
+  // Do not allow current user to change their access/role or delete their account
   getRowData = (user) => [
     user.name,
     <AccessSelect
@@ -27,7 +28,12 @@ export class ListPage extends Component {
       user={user}
     />,
     user.email,
-    user.last_login
+    user.last_login,
+    <DeleteButton
+      disabled={user.isCurrentUser}
+      onSubmit={this.props.deleteUser}
+      user={user}
+    />
   ];
 
   renderError() {

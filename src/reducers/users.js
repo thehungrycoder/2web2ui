@@ -1,6 +1,6 @@
 import fp from 'lodash/fp';
 
-const initialState = {
+export const initialState = {
   entities: {},
   error: null,
   loading: false,
@@ -11,6 +11,11 @@ const reduceUsers = fp.reduce((result, user) => ({ ...result, [user.username]: u
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case 'DELETE_USER_SUCCESS': {
+      const { username } = action.meta.data;
+      return fp.omit([['entities', username]])(state);
+    }
+
     case 'LIST_USERS_FAIL':
       return { ...initialState, error: action.payload };
     case 'LIST_USERS_PENDING':

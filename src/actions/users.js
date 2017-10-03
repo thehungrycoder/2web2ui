@@ -1,6 +1,24 @@
 import sparkpostApiRequest from './helpers/sparkpostApiRequest';
 import { showAlert } from './globalAlert';
 
+export function deleteUser(username) {
+  const action = {
+    type: 'DELETE_USER',
+    meta: {
+      data: { username }, // need in reducer, no user reference in response
+      method: 'DELETE',
+      url: `/users/${username}`
+    }
+  };
+
+  return (dispatch) => dispatch(sparkpostApiRequest(action))
+    .then(() => dispatch(showAlert({
+      type: 'success',
+      message: `Successfully deleted ${username}`
+    })))
+    .catch(({ message }) => dispatch(showAlert({ type: 'error', message })));
+}
+
 export function listUsers() {
   return sparkpostApiRequest({
     type: 'LIST_USERS',
@@ -30,6 +48,7 @@ export function updateUser(username, data) {
 }
 
 export default {
+  deleteUser,
   listUsers,
   updateUser
 };
