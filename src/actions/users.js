@@ -16,7 +16,10 @@ export function deleteUser(username) {
       type: 'success',
       message: `Successfully deleted ${username}`
     })))
-    .catch(({ message }) => dispatch(showAlert({ type: 'error', message })));
+    .catch(() => dispatch(showAlert({
+      type: 'error',
+      message: `Unable to delete ${username}.`
+    })));
 }
 
 export function listUsers() {
@@ -44,5 +47,8 @@ export function updateUser(username, data) {
 
   return (dispatch) => dispatch(sparkpostApiRequest(action))
     .then(({ message }) => dispatch(showAlert({ type: 'success', message })))
-    .catch(({ message }) => dispatch(showAlert({ type: 'error', message })));
+    .catch(() => dispatch(showAlert({
+      type: 'error',
+      message: `Unable to update role for ${username}.`
+    })));
 }
