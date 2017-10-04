@@ -1,26 +1,17 @@
 import { shallow } from 'enzyme';
+import cases from 'jest-in-case';
 import fp from 'lodash/fp';
 import React from 'react';
 
 import AccessSelect from '../AccessSelect';
 
-const defaultProps = {
-  user: {
-    access: 'admin'
-  }
+const defaultProps = { value: 'admin' };
+const tests = {
+  'renders select': defaultProps,
+  'renders access label when disabled': { ...defaultProps, disabled: true }
 };
 
-const TestComponent = (props = {}) => {
-  const nextProps = fp.merge(defaultProps, props);
-  return shallow(<AccessSelect {...nextProps} />);
-};
-
-it('renders select', () => {
-  const wrapper = TestComponent();
+cases('AccessSelect', (props) => {
+  const wrapper = shallow(<AccessSelect {...props} />);
   expect(wrapper).toMatchSnapshot();
-});
-
-it('renders access label when disabled', () => {
-  const wrapper = TestComponent({ disabled: true });
-  expect(wrapper).toMatchSnapshot();
-});
+}, tests);

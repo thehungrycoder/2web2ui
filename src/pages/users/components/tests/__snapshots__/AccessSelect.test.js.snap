@@ -1,13 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders access label when disabled 1`] = `
+exports[`AccessSelect renders access label when disabled 1`] = `
 <span>
   Administrator
 </span>
 `;
 
-exports[`renders select 1`] = `
+exports[`AccessSelect renders select 1`] = `
 <t
+  name="renders select"
   onChange={[Function]}
   options={
     Array [

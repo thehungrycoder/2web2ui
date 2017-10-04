@@ -24,8 +24,9 @@ export class ListPage extends Component {
     user.name,
     <AccessSelect
       disabled={user.isCurrentUser}
-      onChange={this.props.updateUser}
-      user={user}
+      name={user.username}
+      onChange={this.handleAccessChange}
+      value={user.access}
     />,
     user.email,
     user.last_login,
@@ -35,6 +36,10 @@ export class ListPage extends Component {
       user={user}
     />
   ];
+
+  handleAccessChange = ({ name, value }) => {
+    this.props.updateUser(name, { access_level: value });
+  }
 
   renderError() {
     const { error, listUsers } = this.props;
