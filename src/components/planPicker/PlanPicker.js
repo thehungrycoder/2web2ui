@@ -18,7 +18,6 @@ export class PlanPicker extends Component {
 
   planFn = ({
     getInputProps,
-    getRootProps,
     getButtonProps,
     getItemProps,
     isOpen,
@@ -49,7 +48,7 @@ export class PlanPicker extends Component {
     });
 
     return (
-       <div {...getRootProps()} className={styles.PlanPicker}>
+       <div className={styles.PlanPicker}>
          <div className={listClasses}>{ items }</div>
          <Icon name='ChevronDown' size={24} className={styles.Chevron} />
          <input {...getInputProps()} ref={(input) => this.input = input} className={styles.Input} />
