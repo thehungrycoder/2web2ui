@@ -6,8 +6,7 @@ import { Link } from 'react-router-dom';
 /*
  Subaccounts getRowData passed to TableCollection in ListPage.
 */
-const getRowData = (subaccount) => {
-  const { status, id, name } = subaccount;
+const getRowData = ({ status, id, name }) => {
   let className;
   switch (status) {
     case 'active':
