@@ -1,4 +1,4 @@
-import { formatDataForCors, formatCreateData } from 'src/helpers/billing';
+import { formatDataForCors, formatCreateData, formatUpdateData } from 'src/helpers/billing';
 import { fetch as fetchAccount } from './account';
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 import zuoraRequest from 'src/actions/helpers/zuoraRequest';
@@ -14,14 +14,14 @@ export function syncSubscription() {
 }
 
 export function updateSubscription(code) {
-  return sparkpostApiRequest({
+  return (dispatch) => dispatch(sparkpostApiRequest({
     type: 'UPDATE_SUBSCRIPTION',
     meta: {
       method: 'PUT',
       url: '/account/subscription',
       data: { code }
     }
-  });
+  })).then(() => dispatch(fetchAccount({ include: 'usage,billing' })));
 }
 
 /**
@@ -97,7 +97,7 @@ export function billingCreate(values) {
   return (dispatch) =>
 
     // get CORS data for the create account context
-    dispatch(cors('create-account', corsData))
+     dispatch(cors('create-account', corsData))
 
       // create the Zuora account
       .then((results) => {
@@ -110,7 +110,36 @@ export function billingCreate(values) {
       .then(() => dispatch(syncSubscription()))
 
       // refetch the account
-      .then(() => dispatch(fetchAccount()));
+      .then(() => dispatch(fetchAccount({ include: 'usage,billing' })));
+}
+
+// note: this action creator should detect
+// 1. if payment info is present, contact zuora first
+// 2. otherwise it's just a call to our API + sync + refetch
+//
+// call this action creator from the "free -> paid" form if account.billing is present
+export function billingUpdate(values) {
+  const { code } = values.planpicker;
+
+  return (dispatch) =>
+
+    // get CORS data for the update billing context
+     dispatch(cors('update-billing'))
+
+      // Update Zuora with new CC
+      .then(({ accountKey, token, signature }) => {
+        const data = formatUpdateData({ ...values, accountKey });
+        return dispatch(updateCreditCard({ data, token, signature }));
+      })
+
+      // change plan via our API
+      .then(() => dispatch(updateSubscription(code)))
+
+      // sync our db with new Zuora state
+      .then(() => dispatch(syncSubscription()))
+
+      // refetch the account
+      .then(() => dispatch(fetchAccount({ include: 'usage,billing' })));
 }
 
 export function getBillingCountries() {

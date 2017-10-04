@@ -14,11 +14,18 @@ const config = {
       'Content-Type': 'application/x-www-form-urlencoded'
     }
   },
+  cardTypes: [
+    { paymentFormat: 'visa', apiFormat: 'Visa' },
+    { paymentFormat: 'mastercard', apiFormat: 'MasterCard' },
+    { paymentFormat: 'amex', apiFormat: 'AmericanExpress' },
+    { paymentFormat: 'discover', apiFormat: 'Discover' }
+  ],
   chartColors: ['#04AEF9', '#fa6423', '#FFD300', '#8CCA3A', '#2693c3'],
   contact: {
     abuseEmail: 'compliance@sparkpost.com',
     contactEmail: 'hello@sparkpost.com',
-    supportEmail: 'support@sparkpost.com'
+    supportEmail: 'support@sparkpost.com',
+    billingEmail: 'billing@sparkpost.com'
   },
   metricsPrecisionMap: [
     { time: 60, value: '1min', format: 'ha' },
@@ -30,6 +37,9 @@ const config = {
     { time: 60 * 24 * 190, value: 'week', format: 'MMM Do' },
     { time: Infinity, value: 'month', format: 'MMM YY' }
   ],
+  sendingIps: {
+    pricePerIp: 20.00
+  },
   summaryChart: {
     defaultMetrics: ['count_targeted', 'count_rendered', 'count_accepted', 'count_bounce']
   },

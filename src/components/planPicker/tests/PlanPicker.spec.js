@@ -48,23 +48,16 @@
 
 it('should not fail without any tests until we fix this', () => expect(1).toEqual(1));
 
-// it('renders correctly', () => {
-//   const wrapper = mount(<PlanPicker {...props} />);
-//   expect(wrapper).toMatchSnapshot();
-// });
-
-// it('renders correctly with an initial value', () => {
-//   const wrapper = mount(<PlanPicker {...selectedProps} />);
-//   expect(wrapper).toMatchSnapshot();
-// });
-
-// it('should focus on input when opened', () => {
-//   const wrapper = mount(<PlanPicker {...props} />);
-//   const openSpy = jest.spyOn(wrapper.instance(), 'handleOpen');
-//   expect(openSpy).not.toHaveBeenCalled();
-
-//   // This passes and I have no idea why it works
-//   wrapper.find(Downshift).node.openMenu();
-//   wrapper.find('a').at(3).simulate('click');
-//   expect(openSpy).toHaveBeenCalled();
+// describe('Plan Picker: ', () => {
+//
+//   it('renders correctly', () => {
+//     const wrapper = shallow(<PlanPicker {...props} />);
+//     expect(wrapper).toMatchSnapshot();
+//   });
+//
+//   it('renders correctly with an initial value', () => {
+//     const wrapper = shallow(<PlanPicker {...selectedProps} />);
+//     expect(wrapper).toMatchSnapshot();
+//   });
+//
 // });

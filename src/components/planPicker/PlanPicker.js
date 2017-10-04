@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 import Downshift from 'downshift';
+import { Field } from 'redux-form';
 import cx from 'classnames';
 
 import { Icon } from '@sparkpost/matchbox';
 import Plan from './Plan';
 import styles from './PlanPicker.module.scss';
 
-class PlanPicker extends Component {
+/**
+ * This component will register the a redux-form field named 'planpicker'
+ * Entire selected plan object is stored in state
+ */
+export class PlanPicker extends Component {
   handleOpen = () => {
     this.input.focus();
   }
@@ -20,7 +25,7 @@ class PlanPicker extends Component {
     selectedItem,
     highlightedIndex
   }) => {
-    const { plans, input } = this.props;
+    const { plans, input, disabled } = this.props;
 
     const items = plans.map((item, index) => {
       const classes = cx(
@@ -33,7 +38,11 @@ class PlanPicker extends Component {
     });
 
     const listClasses = cx(styles.List, isOpen && styles.open);
-    const triggerClasses = cx(styles.TriggerPlan, isOpen && styles.triggerOpen);
+    const triggerClasses = cx(
+      styles.TriggerPlan,
+      disabled && styles.disabled,
+      isOpen && styles.triggerOpen
+    );
     const triggerProps = getButtonProps({
       plan: selectedItem,
       onClick: this.handleOpen
@@ -63,4 +72,4 @@ class PlanPicker extends Component {
   }
 }
 
-export default PlanPicker;
+export default ({ plans, ...rest }) => <Field component={PlanPicker} name='planpicker' plans={plans} {...rest} />;

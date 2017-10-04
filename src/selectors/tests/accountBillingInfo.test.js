@@ -1,4 +1,4 @@
-import { overviewProps, selectIpPools } from '../accountBillingInfo';
+import { overviewProps, selectPublicPlans, selectCurrentPlan, selectIpPools } from '../accountBillingInfo';
 
 describe('Selector: Get Account Overview Info', () => {
 
@@ -31,8 +31,40 @@ describe('Selector: Get Account Overview Info', () => {
   });
 });
 
-describe('IP Pool List Selector', () => {
+describe('Selector: public plans', () => {
+  const store = {
+    billing: {
+      plans: [
+        { status: 'public', volume: 1 },
+        { status: 'public', volume: 3 },
+        { status: 'private', volume: 4 },
+        { status: 'public', volume: 2 },
+      ]
+    }
+  }
 
+  it('should get public plans and sort by volume', () => {
+    expect(selectPublicPlans(store)).toMatchSnapshot();
+  });
+});
+
+describe('Selector: current plan', () => {
+  const store = {
+    account: { subscription: { code: 'qwe' }},
+    billing: {
+      plans: [
+        { status: 'public', code: '123' },
+        { status: 'private', code: 'qwe' },
+      ]
+    }
+  }
+
+  it('should get current plan from billing', () => {
+    expect(selectCurrentPlan(store)).toMatchSnapshot();
+  });
+});
+
+describe('IP Pool List Selector', () => {
   const store = {
     ipPools: {
       list: [

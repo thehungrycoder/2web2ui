@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Helper: Billing Countries should reorder and format countries for select options 1`] = `
+Array [
+  Object {
+    "label": "USOFA",
+    "states": Array [
+      Object {
+        "label": "maryland",
+        "value": "MD",
+      },
+      Object {
+        "label": "new york",
+        "value": "NY",
+      },
+    ],
+    "value": "US",
+  },
+  Object {
+    "label": "United Kingdom",
+    "value": "GB",
+  },
+  Object {
+    "label": "Canada",
+    "value": "CA",
+  },
+  Object {
+    "label": "gg",
+    "value": "GG",
+  },
+  Object {
+    "label": "ez",
+    "value": "EZ",
+  },
+]
+`;
+
+exports[`Helper: Card Types should format card type strings 1`] = `
+Array [
+  Object {
+    "type": "Visa",
+  },
+  Object {
+    "type": "MasterCard",
+  },
+  Object {
+    "type": "AmericanExpress",
+  },
+  Object {
+    "type": "Discover",
+  },
+  Object {
+    "type": "bUtNoTtHiSoNe",
+  },
+]
+`;

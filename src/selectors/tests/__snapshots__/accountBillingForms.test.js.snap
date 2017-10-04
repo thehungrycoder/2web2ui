@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Initial Values: change plan should return user name, email, and plan 1`] = `
+Object {
+  "billingAddress": Object {
+    "country": "_placeholder",
+    "firstName": "ann",
+    "lastName": "perkins",
+  },
+  "email": "ann@perkins.com",
+  "planpicker": "Plan",
+}
+`;

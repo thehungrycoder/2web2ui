@@ -16,7 +16,7 @@ import summaryChart from './summaryChart';
 import templates from './templates';
 import webhooks from './webhooks';
 
-export default combineReducers({
+const appReducer = combineReducers({
   account,
   auth,
   billing,
@@ -33,3 +33,14 @@ export default combineReducers({
   templates,
   webhooks
 });
+
+/**
+ * Resets state to initial values on log out
+ */
+export default (state, action) => {
+  if (action.type === 'LOGOUT') {
+    state = undefined;
+  }
+
+  return appReducer(state, action);
+};

@@ -14,7 +14,7 @@ describe('Helper: Zuora API Request', () => {
     jest.clearAllMocks();
     mockStore = createMockStore({});
     action = { type: 'ZUORA_REQUEST', meta: {}};
-    expectedResponse = { success: true }
+    expectedResponse = { data: { success: true }}
     axiosMocks.zuora.mockImplementation(() => Promise.resolve(expectedResponse));
   });
 
