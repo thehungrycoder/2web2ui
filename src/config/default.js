@@ -43,7 +43,7 @@ const config = {
   showThingOnDash: true,
   showSummaryReport: true,
   summaryChart: {
-    enabled: true,
+    enabled: false,
     defaultMetrics: ['count_targeted', 'count_rendered', 'count_accepted', 'count_bounce']
   },
   zuora: {

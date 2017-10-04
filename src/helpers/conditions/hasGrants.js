@@ -9,5 +9,5 @@ const memoizedCompareGrants = _.memoize(
 );
 
 export default function hasGrants(...required) {
-  return ({ store }) => memoizedCompareGrants(required, getGrantsList(store));
+  return ({ state }) => memoizedCompareGrants(required, getGrantsList(state));
 }

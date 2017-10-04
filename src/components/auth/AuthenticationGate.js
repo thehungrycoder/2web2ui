@@ -30,7 +30,7 @@ export class AuthenticationGate extends Component {
     }
 
     // if logging out
-    if (oldProps.auth.loggedIn && !auth.loggedIn) {
+    if (location.pathname !== '/auth' && oldProps.auth.loggedIn && !auth.loggedIn) {
       history.push('/auth');
     }
   }

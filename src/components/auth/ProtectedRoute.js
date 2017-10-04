@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Redirect, Route, withRouter } from 'react-router-dom';
+import { Redirect, Route } from 'react-router-dom';
 import { AccessControl } from 'src/components/auth';
 
 export class ProtectedRoute extends Component {
@@ -39,4 +39,4 @@ const mapStateToProps = ({ auth, currentUser = {}}) => ({
   auth,
   grants: currentUser.grants || []
 });
-export default withRouter(connect(mapStateToProps)(ProtectedRoute));
+export default connect(mapStateToProps)(ProtectedRoute);

@@ -5,27 +5,30 @@ import routes from 'src/config/routes';
 import {
   BrowserRouter as Router,
   Route,
-  Redirect
+  Redirect,
+  Switch
 } from 'react-router-dom';
 
-export default function App() {
-  return (
-    <Router>
-      <div>
-        <AuthenticationGate />
+const App = () => (
+  <Router>
+    <div>
+      <AuthenticationGate />
 
+      <Switch>
         {routes.map((route) => {
           const MyRoute = route.public ? Route : ProtectedRoute;
           route.exact = !(route.exact === false); // this makes exact default to true
 
           if (route.redirect) {
-            return <Route key={route.path} {...route} render={() => <Redirect to={route.redirect} />} />;
+            return <Redirect key={route.path} exact from={route.path} to={route.redirect} />;
           }
           return <MyRoute key={route.path} {...route} />;
         })}
+      </Switch>
 
-        <GlobalAlert />
-      </div>
-    </Router>
-  );
-}
+      <GlobalAlert />
+    </div>
+  </Router>
+);
+
+export default App;

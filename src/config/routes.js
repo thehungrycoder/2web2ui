@@ -1,3 +1,4 @@
+/* eslint-disable */
 import {
   AuthPage,
   billing,
@@ -37,10 +38,7 @@ export default [
   {
     path: '/reports/summary',
     component: reports.SummaryPage,
-    condition: composeConditions(
-      hasGrants('metrics/view'),
-      configFlag('summaryChart.enabled')
-    )
+    condition: configFlag('summaryChart.enabled')
   },
   {
     path: '/templates',

@@ -33,7 +33,7 @@ export function authenticate(username, password, rememberMe = false) {
         const payload = { ...data, username };
 
         // save auth cookie
-        authCookie.merge(payload);
+        authCookie.save(payload);
 
         // dispatch login success event
         dispatch(login(payload));

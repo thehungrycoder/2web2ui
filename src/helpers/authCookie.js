@@ -8,7 +8,7 @@ function save(data) {
 }
 
 function merge(data) {
-  const merged = Object.assign(get(), data);
+  const merged = Object.assign(get() || {}, data);
   save(merged);
   return merged;
 }
