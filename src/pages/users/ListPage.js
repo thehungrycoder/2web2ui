@@ -49,7 +49,7 @@ export class ListPage extends Component {
     return (
       <ApiErrorBanner
         errorDetails={error.message}
-        message="Sorry, we seem to have had some trouble loading your API keys."
+        message="Sorry, we seem to have had some trouble loading your users."
         reload={listUsers}
       />
     );
