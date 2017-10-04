@@ -9,8 +9,8 @@ import ApiErrorBanner from 'src/components/apiErrorBanner/ApiErrorBanner';
 import TableCollection from 'src/components/collection/TableCollection';
 import Layout from 'src/components/layout/Layout';
 
-import AccessSelect from './AccessSelect';
-import DeleteButton from './DeleteButton';
+import AccessSelect from './components/AccessSelect';
+import DeleteButton from './components/DeleteButton';
 
 const COLUMNS = ['Name', 'Role', 'Email', 'Last Login', null];
 
