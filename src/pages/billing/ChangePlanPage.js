@@ -27,13 +27,8 @@ export class ChangePlanPage extends Component {
   };
 
   componentDidMount() {
-    if (!this.props.billing.plans) {
-      this.props.getPlans();
-    }
-
-    if (!this.props.billing.countries) {
-      this.props.getBillingCountries();
-    }
+    this.props.getPlans();
+    this.props.getBillingCountries();
   }
 
   componentWillReceiveProps(nextProps) {
