@@ -25,7 +25,7 @@ class OverviewPage extends Component {
         <Banner title='Yer suspended' status='warning' action={{ content: 'Update Billing Information' }}>Update your billing info or something</Banner>
 
         <Panel accent title='Plan Overview'>
-          <Panel.Section actions={[{ content: 'Change Plan', to: '/account/billing/change', Component: Link }]}>
+          <Panel.Section actions={[{ content: 'Change Plan', to: '/account/billing/plan', Component: Link }]}>
             <PlanSummary plan={currentPlan} />
           </Panel.Section>
           <Panel.Section actions={[{ content: 'Add Dedicated IPs' }]}>
