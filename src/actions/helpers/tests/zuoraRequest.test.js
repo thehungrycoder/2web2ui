@@ -35,7 +35,7 @@ describe('Helper: Zuora API Request', () => {
     try {
       await mockStore.dispatch(zuoraRequest(action));
     } catch (err) {
-      expect(err.response).toBeDefined;
+      expect(err.response).toBeDefined();
       expect(mockStore.getActions()).toMatchSnapshot();
     }
   });
