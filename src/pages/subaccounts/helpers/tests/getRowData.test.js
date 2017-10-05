@@ -1,5 +1,3 @@
-import React from 'react';
-import { shallow } from 'enzyme';
 import cases from 'jest-in-case';
 
 import getRowData from '../getRowData';
