@@ -5,7 +5,7 @@ import { zuora as zuoraAxios } from './axiosInstances';
 export default requestHelperFactory({
   request: zuoraAxios,
   onSuccess: ({ types, response, dispatch, meta }) => {
-    if (!response.success) {
+    if (!response.data.success) {
       const message = _.get(response, 'data.reasons[0].message', 'An error occurred while contacting the billing service');
 
       dispatch({

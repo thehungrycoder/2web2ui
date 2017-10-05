@@ -35,7 +35,9 @@ Array [
   Object {
     "meta": Object {},
     "payload": Object {
-      "success": true,
+      "data": Object {
+        "success": true,
+      },
     },
     "type": "ZUORA_REQUEST_SUCCESS",
   },

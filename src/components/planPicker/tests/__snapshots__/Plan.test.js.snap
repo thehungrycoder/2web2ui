@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Plan:  renders correctly 1`] = `
+<a>
+  <span>
+    <strong>
+      200
+    </strong>
+     emails for 
+    <span>
+      <strong>
+        $
+        100
+      </strong>
+      /mo
+    </span>
+  </span>
+  <span>
+    $0.90/ thousand extra emails
+  </span>
+</a>
+`;
+
+exports[`Plan:  renders free and ip correctly 1`] = `
+<a>
+  <span>
+    <strong>
+      300
+    </strong>
+     emails for 
+    <strong>
+      Free
+    </strong>
+  </span>
+  <span>
+    Full-featured developer account
+    , first dedicated IP address is free
+  </span>
+</a>
+`;
