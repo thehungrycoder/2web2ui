@@ -31,7 +31,7 @@ export const SuspendedBanner = ({ account }) => account.isSuspendedForBilling
  * Renders plan information for non-self-serve users
  * @prop account Account state from redux store
  */
-export const ManuallyBilledBanner = ({ account }) => {
+export const ManuallyBilledBanner = ({ account, ...rest }) => {
   if (account.subscription.self_serve) {
     return null;
   }
@@ -40,10 +40,10 @@ export const ManuallyBilledBanner = ({ account }) => {
     ? <p>
         You're scheduled to switch to the { account.pending_subscription.name } plan on { dateFormat(account.pending_subscription.effective_date) }. If you have any questions, please <a href={`mailto:${config.contact.supportEmail}`}>contact support</a>.
       </p>
-    : <p>To make changes to your plan or billing information, <a href={`mailto:${config.contact.supportEmail}`}>contact support</a>.</p>;
+    : <p>To make changes to your plan, billing information, or addons <a href={`mailto:${config.contact.supportEmail}`}>contact support</a>.</p>;
 
   return (
-    <Banner status='info' title={`Your current ${account.subscription.name} plan includes ${account.subscription.plan_volume.toLocaleString()} emails /mo`} >
+    <Banner status='info' title={`Your current ${account.subscription.name} plan includes ${account.subscription.plan_volume.toLocaleString()} emails /mo`} {...rest}>
       { content }
     </Banner>
   );

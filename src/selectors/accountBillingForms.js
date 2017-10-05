@@ -1,12 +1,18 @@
-import { selectCurrentPlan } from './accountBillingInfo';
+import { selectCurrentPlan, selectPublicPlans } from './accountBillingInfo';
+import _ from 'lodash';
 
 /**
  * Selects initial values for all the forms on account/billing/plan
  */
 export function changePlanInitialValues(state) {
+
+  // For manually billed users, their plan won't be selectable through plan picker
+  const currentPlan = selectCurrentPlan(state);
+  const initialPlan = currentPlan.hasOwnProperty('billingId') ? currentPlan : _.find(selectPublicPlans(state), { isFree: true });
+
   return {
     email: state.currentUser.email, // This sets the email value even though the field does not exist
-    planpicker: selectCurrentPlan(state),
+    planpicker: initialPlan,
     billingAddress: {
       firstName: state.currentUser.first_name,
       lastName: state.currentUser.last_name,

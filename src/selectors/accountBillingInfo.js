@@ -1,20 +1,6 @@
 import _ from 'lodash';
 import _fp from 'lodash/fp';
 
-export function overviewProps(state) {
-  return {
-    loading: !Object.keys(state.account).length || state.billing.plansLoading,
-
-    account: state.account,
-    billing: state.account.billing,
-
-    billable: selectBillable(state),
-    canChangePlan: canChangePlan(state),
-    currentPlan: selectCurrentPlan(state),
-    plans: selectPublicPlans(state)
-  };
-}
-
 /**
  * Returns true if user should be allowed to change plan
  */
@@ -44,7 +30,7 @@ export function selectPublicPlans(state) {
  * Gets current plan
  */
 export function selectCurrentPlan(state) {
-  return state.billing.plans && Object.keys(state.account).length
+  return !state.billing.plansLoading && !state.account.loading
     ? _.find(state.billing.plans, { code: state.account.subscription.code })
     : {};
 }

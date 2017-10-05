@@ -71,4 +71,4 @@ export class PlanPicker extends Component {
   }
 }
 
-export default ({ plans, ...rest }) => <Field component={PlanPicker} name='planpicker' plans={plans} {...rest} />;
+export default ({ plans = [], ...rest }) => <Field component={PlanPicker} name='planpicker' plans={plans} {...rest} />;

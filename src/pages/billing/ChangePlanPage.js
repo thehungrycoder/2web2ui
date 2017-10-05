@@ -1,4 +1,4 @@
-/* eslint-disable max-lines */
+/* eslint-disable */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
@@ -16,7 +16,7 @@ import { getPlans } from 'src/actions/account';
 import { showAlert } from 'src/actions/globalAlert';
 import { updateSubscription, billingCreate, billingUpdate, getBillingCountries } from 'src/actions/billing';
 
-import { selectPublicPlans, selectCurrentPlan } from 'src/selectors/accountBillingInfo';
+import { selectPublicPlans, selectCurrentPlan, canChangePlan, selectBillable } from 'src/selectors/accountBillingInfo';
 import { changePlanInitialValues } from 'src/selectors/accountBillingForms';
 
 const FORMNAME = 'changePlan';
@@ -105,14 +105,9 @@ export class ChangePlanPage extends Component {
     );
   }
 
-  renderForm = () => {
-    const { subscription, isSuspendedForBilling, pending_subscription } = this.props.account;
-
-    if ((subscription && !subscription.self_serve) || isSuspendedForBilling || pending_subscription) {
-      return null;
-    }
-
-    return (
+  renderForm = () =>
+    // const { subscription, isSuspendedForBilling, pending_subscription } = this.props.account;
+     (
       <form onSubmit={this.props.handleSubmit((values) => this.updatePlan(values))}>
         <Grid>
           <Grid.Column>
@@ -130,7 +125,6 @@ export class ChangePlanPage extends Component {
         </Grid>
       </form>
     );
-  };
 
   render() {
     return (
@@ -138,8 +132,7 @@ export class ChangePlanPage extends Component {
         <Page breadcrumbAction={{ content: 'Back to billing', to: '/account/billing', Component: Link }}/>
         <PendingPlanBanner account={this.props.account} />
         <SuspendedBanner account={this.props.account}/>
-        <ManuallyBilledBanner account={this.props.account}/>
-        { this.renderForm() }
+        { this.props.canChangePlan && this.renderForm() }
       </Layout.App>
     );
   }
@@ -149,12 +142,13 @@ const mapStateToProps = (state) => {
   const selector = formValueSelector(FORMNAME);
   const currentPlan = selectCurrentPlan(state);
   return {
-    loading: !Object.keys(state.account).length || state.billing.plansLoading || !state.billing.countries,
-    billable: !!state.account.billing && !currentPlan.isFree,
+    loading: state.account.loading || state.billing.plansLoading || !state.billing.countries,
+    billable: selectBillable(state),
     plans: selectPublicPlans(state),
     billing: state.billing,
     account: state.account,
     currentPlan,
+    canChangePlan: canChangePlan(state),
     selectedPlan: selector(state, 'planpicker'),
     initialValues: changePlanInitialValues(state)
   };

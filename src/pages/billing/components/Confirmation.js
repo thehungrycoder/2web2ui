@@ -8,14 +8,17 @@ const Confirmation = ({ current = {}, selected = {}, disableSubmit }) => {
   let effectiveDateMarkup = null;
   let ipMarkup = null;
   let addonMarkup = null;
+  let currentPrice = '';
 
   const selectedPrice = selected.monthly === 0
     ? 'for Free'
     : <span>for ${selected.monthly && selected.monthly.toLocaleString()}/mo</span>;
 
-  const currentPrice = current.monthly === 0
-    ? 'for Free'
-    : <span>for ${current.monthly && current.monthly.toLocaleString()}/mo</span>;
+  if (current.monthly !== undefined) {
+    currentPrice = current.monthly === 0
+      ? 'for Free'
+      : <span>for ${current.monthly && current.monthly.toLocaleString()}/mo</span>;
+  }
 
   const selectedPlanMarkup = !isPlanSelected
     ? <p>Select a plan on the left to update your subscription</p>

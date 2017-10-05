@@ -7,13 +7,14 @@ import { Page, Panel, Modal } from '@sparkpost/matchbox';
 import { getPlans } from 'src/actions/account';
 import { selectBillable, canChangePlan, selectCurrentPlan, selectPublicPlans } from 'src/selectors/accountBillingInfo';
 
-import { PremiumBanner, EnterpriseBanner, SuspendedBanner } from './components/Banners';
+import { PremiumBanner, EnterpriseBanner, SuspendedBanner, ManuallyBilledBanner, PendingPlanBanner } from './components/Banners';
 import UpdatePayment from './formContainers/UpdatePayment';
 import UpdateContact from './formContainers/UpdateContact';
 import { SummarySection, PlanSummary, CardSummary } from './components/SummarySection';
 
 const PAYMENT_MODAL = 'payment';
 const CONTACT_MODAL = 'contact';
+// const IP_MODAL = 'ip';
 
 class SummaryPage extends Component {
   state = {
@@ -51,10 +52,20 @@ class SummaryPage extends Component {
     );
   }
 
-  render() {
-    const { currentPlan, loading, canChangePlan, billable } = this.props;
-    const { show } = this.state;
+  renderManuallyBilled = () => {
+    const { account } = this.props;
+    return (
+      <div>
+        <ManuallyBilledBanner
+          account={account}
+          action={{ content: 'Add Credit Card', to: '/account/billing/plan', Component: Link }} />
+      </div>
+    );
+  }
 
+  renderSummary = () => {
+    const { account, currentPlan, canChangePlan, billable } = this.props;
+    const { show } = this.state;
     let changePlanAction = {};
 
     if (canChangePlan) {
@@ -63,10 +74,9 @@ class SummaryPage extends Component {
     }
 
     return (
-      <Layout.App loading={loading}>
-        <Page title='Billing'/>
-
-        <SuspendedBanner account={this.props.account} />
+      <div>
+        <SuspendedBanner account={account} />
+        <PendingPlanBanner account={account} />
 
         <Panel accent title='Plan Overview'>
           <Panel.Section actions={[changePlanAction]}>
@@ -84,18 +94,31 @@ class SummaryPage extends Component {
         <PremiumBanner />
         <EnterpriseBanner />
 
-        <Modal open={!!this.state.show}>
+        <Modal open={!!show}>
           <WindowEvent event='keydown' handler={this.handleEscape} />
           { show === PAYMENT_MODAL && <UpdatePayment onCancel={this.handleModal}/> }
           { show === CONTACT_MODAL && <UpdateContact onCancel={this.handleModal}/> }
         </Modal>
+      </div>
+    );
+  }
+
+  render() {
+    const pageMarkup = !this.props.account.subscription.self_serve
+      ? this.renderManuallyBilled()
+      : this.renderSummary();
+
+    return (
+      <Layout.App loading={this.props.loading}>
+        <Page title='Billing'/>
+        { pageMarkup }
       </Layout.App>
     );
   }
 }
 
 const mapStateToProps = (state) => ({
-  loading: !Object.keys(state.account).length || state.billing.plansLoading,
+  loading: state.account.loading || state.billing.plansLoading,
   account: state.account,
   billing: state.account.billing,
   billable: selectBillable(state),
