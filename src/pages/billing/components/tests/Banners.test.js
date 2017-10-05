@@ -7,7 +7,7 @@ describe('Billing Banners: ', () => {
     const props = {
       account: {
         pending_subscription: { effective_date: '10/5/2020' }
-      },
+      }
     };
     const wrapper = shallow(<PendingPlanBanner {...props} />);
     expect(wrapper).toMatchSnapshot();
@@ -18,7 +18,7 @@ describe('Billing Banners: ', () => {
       account: {
         isSuspendedForBilling: true,
         billing: { email: 'tst' }
-      },
+      }
     };
     const wrapper = shallow(<SuspendedBanner {...props} />);
     expect(wrapper).toMatchSnapshot();
@@ -31,7 +31,7 @@ describe('Billing Banners: ', () => {
           name: 'whoa',
           plan_volume: 123
         }
-      },
+      }
     };
     const wrapper = shallow(<ManuallyBilledBanner {...props} />);
     expect(wrapper).toMatchSnapshot();
@@ -48,7 +48,7 @@ describe('Billing Banners: ', () => {
           name: 'omg',
           effective_date: '10/5/2020'
         }
-      },
+      }
     };
     const wrapper = shallow(<ManuallyBilledBanner {...props} />);
     expect(wrapper).toMatchSnapshot();
@@ -56,7 +56,7 @@ describe('Billing Banners: ', () => {
 
   it('ManuallyBilledBanner should not render if self-serve', () => {
     const props = {
-      account: { subscription: { self_serve: true } }
+      account: { subscription: { self_serve: true }}
     };
     const wrapper = shallow(<ManuallyBilledBanner {...props} />);
     expect(wrapper.find('t')).not.toBePresent();

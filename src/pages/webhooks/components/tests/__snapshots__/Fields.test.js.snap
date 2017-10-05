@@ -44,26 +44,6 @@ exports[`should render BasicAuthFields 1`] = `
 </div>
 `;
 
-exports[`should render BasicAuthFields 2`] = `
-<div>
-  Basic Auth
-  <Field
-    component={[Function]}
-    label="Username"
-    name="basicUser"
-    placeholder="username"
-    validate={[Function]}
-  />
-  <Field
-    component={[Function]}
-    label="Password"
-    name="basicPass"
-    placeholder="password"
-    validate={[Function]}
-  />
-</div>
-`;
-
 exports[`should render EventsRadioGroup 1`] = `
 <Field
   component={[Function]}

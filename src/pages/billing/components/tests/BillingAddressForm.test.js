@@ -9,7 +9,7 @@ describe('Billing Address Form:', () => {
     formName: 'form-name',
     countryValue: 'GG',
     countries: [
-      { value: 'US', label: 'USOFA', states: [{ name: 'mrylnd', value: 'MD' }] }
+      { value: 'US', label: 'USOFA', states: [{ name: 'mrylnd', value: 'MD' }]}
     ]
   };
 
@@ -19,13 +19,13 @@ describe('Billing Address Form:', () => {
 
   it('should render', () => {
     expect(wrapper).toMatchSnapshot();
-    expect(wrapper).toHaveState('showName', true );
+    expect(wrapper).toHaveState('showName', true);
   });
 
   it('should not render name fields if provided', () => {
     wrapper.setProps({ firstName: 'ann', lastName: 'perkins' });
-    wrapper.instance().componentDidMount()
-    expect(wrapper).toHaveState('showName', false );
+    wrapper.instance().componentDidMount();
+    expect(wrapper).toHaveState('showName', false);
   });
 
   it('should show states', () => {

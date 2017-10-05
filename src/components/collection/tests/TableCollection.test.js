@@ -20,7 +20,7 @@ describe('TableCollection Component', () => {
     columns: columns,
     getRowData: () => {},
     extraProp: 'plsPassDown'
-  }
+  };
 
   it('should render with no props', () => {
     const wrapper = shallow(<TableCollection />);
