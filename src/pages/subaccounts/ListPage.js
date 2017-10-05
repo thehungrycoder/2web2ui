@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import Layout from 'src/components/layout/Layout';
-import { Page } from '@sparkpost/matchbox';
+import { Page, EmptyState } from '@sparkpost/matchbox';
 import TableCollection from 'src/components/collection/TableCollection';
 import ApiErrorBanner from 'src/components/apiErrorBanner/ApiErrorBanner';
 
@@ -27,16 +27,31 @@ export class ListPage extends Component {
     this.props.listSubaccounts({ force: true }); // force a refresh
   };
 
+  renderEmpty() {
+    return (
+      <EmptyState
+        title="Get started with Subaccounts"
+        action={{ content: 'Create a Subaccount' }}
+        secondaryAction={{ content: 'Learn more', to: 'https://developers.sparkpost.com/api/subaccounts.html', target: '_blank' }}
+      >
+        <p>Subaccounts are a good way of managing external client accounts.</p>
+      </EmptyState>
+    );
+  }
+
   renderCollection() {
     const { subaccounts } = this.props;
 
     return (
-      <TableCollection
-        columns={columns}
-        getRowData={getRowData}
-        pagination={true}
-        rows={subaccounts}
-      />
+      <div>
+        <Page title='Subaccounts' primaryAction={primaryAction}/>
+        <TableCollection
+          columns={columns}
+          getRowData={getRowData}
+          pagination={true}
+          rows={subaccounts}
+        />
+      </div>
     );
   }
 
@@ -51,11 +66,15 @@ export class ListPage extends Component {
   }
 
   render() {
-    const { error, loading } = this.props;
+    const { error, loading, subaccounts } = this.props;
+
     return (
       <Layout.App loading={loading}>
-        <Page title='Subaccounts' primaryAction={primaryAction}/>
-        { error ? this.renderError() : this.renderCollection() }
+        { error && this.renderError() }
+        { subaccounts.length
+          ? this.renderCollection()
+          : this.renderEmpty()
+        }
       </Layout.App>
     );
   }
