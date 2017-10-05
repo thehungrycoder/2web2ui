@@ -4,14 +4,11 @@ import { Field, formValueSelector } from 'redux-form';
 import { contentRequired } from './validation';
 
 // Components
-import AceEditor from 'react-ace';
-import 'brace/mode/html';
-import 'brace/mode/json';
-import 'brace/theme/tomorrow';
 import { Panel, Tabs } from '@sparkpost/matchbox';
-
 import './Editor.scss';
 import styles from './FormEditor.module.scss';
+
+let AceEditor;
 
 const AceWrapper = ({ input, meta: { touched, error }, ...rest }) => (
   <div>
@@ -41,10 +38,27 @@ const AceWrapper = ({ input, meta: { touched, error }, ...rest }) => (
 
 class Editor extends Component {
   state = {
-    selectedTab: 0
+    selectedTab: 0,
+    editorLoaded: false
   }
 
   fieldNames = ['content.html', 'content.text', 'test']
+
+  componentDidMount() {
+    this.mounted = true;
+    require.ensure([], () => {
+      AceEditor = require('react-ace').default;
+      require('brace/mode/html');
+      require('brace/mode/json');
+      require('brace/theme/tomorrow');
+
+      this.mounted && this.setState({ editorLoaded: true });
+    });
+  }
+
+  componentWillUnmount() {
+    this.mounted = false;
+  }
 
   handleTab = (i) => {
     this.setState({ selectedTab: i });
@@ -57,6 +71,10 @@ class Editor extends Component {
       { content: 'Text', onClick: () => this.handleTab(1) },
       { content: 'Test Data', onClick: () => this.handleTab(2) }
     ];
+
+    if (!this.state.editorLoaded) {
+      return null; // some kind of loading icon thing?
+    }
 
     return (
       <div className={styles.EditorSection}>
