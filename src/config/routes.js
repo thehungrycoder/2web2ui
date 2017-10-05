@@ -16,6 +16,44 @@ import {
   composeConditions
 } from 'src/helpers/conditions';
 
+/**
+ *  Angular UI Grant List:
+    dashboard: ['api_keys/manage', 'templates/modify', 'sending_domains/manage'],
+    credentials: ['api_keys/manage'],
+    billing: ['account/manage'],
+    domains: ['sending_domains/manage'], // make domains
+    profile: ['users/self-manage'],
+    security: ['users/self-manage'],
+    sendingDomains: ['sending_domains/manage'],
+    subaccounts: ['subaccount/manage', 'api_keys/manage', 'sending_domains/manage'],
+    smtp: ['api_keys/manage'],
+    trackingDomains: ['tracking_domains/view'],
+    usage: ['account/manage'],
+    users: ['users/manage'],
+    webhooks: ['webhooks/view'],
+    templates: ['templates/modify'],
+    templatesView: ['templates/view'],
+    transmit: ['transmissions/modify'],
+    recipientLists: ['recipient_lists/manage'],
+    suppressions: ['suppression_lists/manage'],
+    ipPools: ['ip_pools/manage']
+ */
+
+ /**
+  * Reporting user grants:
+  * metrics/view
+  * message_events/view
+  * templates/view
+  * templates/preview
+  * sending_domains/view
+  * adaptive-delivery/view
+  * users/self-manage
+  * grants/view
+  * subaccount/view
+  * messaging-tools/manage
+  * support/manage
+  */
+
 export default [
   {
     path: '/',
@@ -29,7 +67,8 @@ export default [
   },
   {
     path: '/dashboard',
-    component: DashboardPage
+    component: DashboardPage,
+    condition: () => true // do not put any condition here bc all other routes redirect here if condition is false
   },
   {
     path: '/reports',
@@ -37,51 +76,61 @@ export default [
   },
   {
     path: '/reports/summary',
-    component: reports.SummaryPage,
-    condition: configFlag('summaryChart.enabled')
+    component: reports.SummaryPage
   },
   {
     path: '/templates',
-    component: templates.ListPage
+    component: templates.ListPage,
+    condition: hasGrants('templates/modify')
   },
   {
     path: '/templates/create',
-    component: templates.CreatePage
+    component: templates.CreatePage,
+    condition: hasGrants('templates/modify')
   },
   {
     path: '/templates/edit/:id',
-    component: templates.EditPage
+    component: templates.EditPage,
+    condition: hasGrants('templates/modify')
   },
   {
     path: '/templates/edit/:id/published',
-    component: templates.PublishedPage
+    component: templates.PublishedPage,
+    condition: hasGrants('templates/modify')
   },
   {
     path: '/webhooks',
-    component: webhooks.ListPage
+    component: webhooks.ListPage,
+    condition: hasGrants('webhooks/view')
   },
   {
     path: '/webhooks/create',
-    component: webhooks.CreatePage
+    component: webhooks.CreatePage,
+    condition: hasGrants('webhooks/modify')
   },
   {
     path: '/webhooks/details/:id',
-    component: webhooks.DetailsPage
+    component: webhooks.DetailsPage,
+    condition: hasGrants('webhooks/modify')
   },
   {
     path: '/account/credentials',
-    component: credentials.ListPage
+    component: credentials.ListPage,
+    condition: hasGrants('api_keys/manage')
   },
   {
     path: '/account/profile',
-    component: ProfilePage
+    component: ProfilePage,
+    condition: hasGrants('users/self-manage')
   },
   {
     path: '/account/billing',
-    component: billing.OverviewPage
+    component: billing.OverviewPage,
+    condition: hasGrants('account/manage')
   },
   {
     path: '/account/billing/change',
-    component: billing.ChangePlanPage
+    component: billing.ChangePlanPage,
+    condition: hasGrants('account/manage')
   }
 ];
