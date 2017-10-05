@@ -4,50 +4,78 @@ exports[`renders correctly 1`] = `
 <App
   loading={false}
 >
+  <div>
+    <t
+      primaryAction={
+        Object {
+          "Component": [Function],
+          "content": "Create Subaccount",
+          "to": "/account/subaccounts/create",
+        }
+      }
+      title="Subaccounts"
+    />
+    <TableCollection
+      columns={
+        Array [
+          "Name",
+          "ID",
+          "Status",
+        ]
+      }
+      getRowData={[Function]}
+      pagination={true}
+      rows={
+        Array [
+          Object {
+            "compliance_status": "active",
+            "id": 123,
+            "ip_pool": "my_ip_pool",
+            "name": "Joe's Garage",
+            "status": "active",
+          },
+          Object {
+            "compliance_status": "active",
+            "id": 456,
+            "name": "SharkPost",
+            "status": "active",
+          },
+          Object {
+            "compliance_status": "active",
+            "id": 789,
+            "name": "Dev Avocado",
+            "status": "suspended",
+          },
+        ]
+      }
+    />
+  </div>
+</App>
+`;
+
+exports[`renders empty state 1`] = `
+<App
+  loading={false}
+>
   <t
-    primaryAction={
+    action={
       Object {
-        "Component": [Function],
-        "content": "Create Subaccount",
-        "to": "/account/subaccounts/create",
+        "content": "Create a Subaccount",
       }
     }
-    title="Subaccounts"
-  />
-  <TableCollection
-    columns={
-      Array [
-        "Name",
-        "ID",
-        "Status",
-      ]
+    secondaryAction={
+      Object {
+        "content": "Learn more",
+        "target": "_blank",
+        "to": "https://developers.sparkpost.com/api/subaccounts.html",
+      }
     }
-    getRowData={[Function]}
-    pagination={true}
-    rows={
-      Array [
-        Object {
-          "compliance_status": "active",
-          "id": 123,
-          "ip_pool": "my_ip_pool",
-          "name": "Joe's Garage",
-          "status": "active",
-        },
-        Object {
-          "compliance_status": "active",
-          "id": 456,
-          "name": "SharkPost",
-          "status": "active",
-        },
-        Object {
-          "compliance_status": "active",
-          "id": 789,
-          "name": "Dev Avocado",
-          "status": "suspended",
-        },
-      ]
-    }
-  />
+    title="Get started with Subaccounts"
+  >
+    <p>
+      Subaccounts are a good way of managing external client accounts.
+    </p>
+  </t>
 </App>
 `;
 
@@ -55,20 +83,56 @@ exports[`renders errors when present 1`] = `
 <App
   loading={false}
 >
-  <t
-    primaryAction={
-      Object {
-        "Component": [Function],
-        "content": "Create Subaccount",
-        "to": "/account/subaccounts/create",
-      }
-    }
-    title="Subaccounts"
-  />
   <ApiErrorBanner
     errorDetails="Uh oh! It broke."
     message="Sorry, we ran into an error loading your Subaccounts"
     reload={[Function]}
   />
+  <div>
+    <t
+      primaryAction={
+        Object {
+          "Component": [Function],
+          "content": "Create Subaccount",
+          "to": "/account/subaccounts/create",
+        }
+      }
+      title="Subaccounts"
+    />
+    <TableCollection
+      columns={
+        Array [
+          "Name",
+          "ID",
+          "Status",
+        ]
+      }
+      getRowData={[Function]}
+      pagination={true}
+      rows={
+        Array [
+          Object {
+            "compliance_status": "active",
+            "id": 123,
+            "ip_pool": "my_ip_pool",
+            "name": "Joe's Garage",
+            "status": "active",
+          },
+          Object {
+            "compliance_status": "active",
+            "id": 456,
+            "name": "SharkPost",
+            "status": "active",
+          },
+          Object {
+            "compliance_status": "active",
+            "id": 789,
+            "name": "Dev Avocado",
+            "status": "suspended",
+          },
+        ]
+      }
+    />
+  </div>
 </App>
 `;

@@ -39,6 +39,11 @@ it('renders correctly', () => {
   expect(wrapper).toMatchSnapshot();
 });
 
+it('renders empty state', () => {
+  wrapper = shallow(<ListPage loading={false} error={null} subaccounts={[]} />);
+  expect(wrapper).toMatchSnapshot();
+});
+
 it('renders errors when present', () => {
   wrapper.setProps({ error: { message: 'Uh oh! It broke.' }});
   expect(wrapper).toMatchSnapshot();
