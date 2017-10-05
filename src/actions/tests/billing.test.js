@@ -87,7 +87,7 @@ describe('Action Creator: Billing', () => {
     const accountKey = { some: 'test-billing-data' };
     billingHelpers.formatUpdateData = jest.fn((values) => ({ accountKey }));
 
-    const thunk = billing.billingUpdate({ planpicker: { code: 'test-plan'} });
+    const thunk = billing.billingUpdate({ planpicker: { code: 'test-plan' }});
     await thunk(dispatchMock);
 
     expect(_.flatten(dispatchMock.mock.calls)).toMatchSnapshot();

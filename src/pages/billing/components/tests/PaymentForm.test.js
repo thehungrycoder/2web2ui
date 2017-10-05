@@ -12,7 +12,7 @@ describe('Payment Form: ', () => {
 
   const props = {
     formName: 'form-name',
-    change: jest.fn(),
+    change: jest.fn()
   };
 
   beforeEach(() => {
@@ -24,7 +24,7 @@ describe('Payment Form: ', () => {
   });
 
   it('should handle type', () => {
-    const e = { target: { value: '123' }}
+    const e = { target: { value: '123' }};
     const changeSpy = jest.spyOn(wrapper.instance().props, 'change');
     expect(changeSpy).not.toHaveBeenCalled();
     wrapper.instance().handleType(e);
@@ -34,9 +34,9 @@ describe('Payment Form: ', () => {
   });
 
   it('should handle expiry', () => {
-    const e = { target: { value: '112020' }}
+    const e = { target: { value: '112020' }};
     const changeSpy = jest.spyOn(wrapper.instance().props, 'change');
-    PaymentMock.fns.cardExpiryVal.mockImplementation(() => ({ month: '11', year: '2020'}));
+    PaymentMock.fns.cardExpiryVal.mockImplementation(() => ({ month: '11', year: '2020' }));
     wrapper.instance().handleExpiry(e);
     expect(PaymentMock.fns.cardExpiryVal).toHaveBeenCalledWith(e.target.value);
     expect(changeSpy).toHaveBeenCalledTimes(2);

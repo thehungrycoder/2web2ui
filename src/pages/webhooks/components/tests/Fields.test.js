@@ -6,7 +6,7 @@ import {
     AuthDropDown,
     BasicAuthFields,
     OAuth2Fields
-} from '../Fields.js'
+} from '../Fields.js';
 
 it('should render NameField', () => {
   const wrapper = shallow(<NameField />);

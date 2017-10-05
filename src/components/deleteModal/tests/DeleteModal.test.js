@@ -8,7 +8,7 @@ describe('DeleteModal Component', () => {
     text: 'Got Damn',
     handleToggle: () => {},
     handleDelete: () => {}
-  }
+  };
 
   it('should render - no props', () => {
     const wrapper = shallow(<DeleteModal />);
