@@ -4,14 +4,18 @@ exports[`Get row data active 1`] = `
 Array [
   <Link
     replace={false}
-    to="/account/subaccounts/undefined"
+    to="/account/subaccounts/123"
   >
-    active
+    Joe's Garage
   </Link>,
-  <p />,
+  <p>
+    123
+  </p>,
   <p
     className={undefined}
-  />,
+  >
+    active
+  </p>,
 ]
 `;
 
@@ -19,14 +23,18 @@ exports[`Get row data suspended 1`] = `
 Array [
   <Link
     replace={false}
-    to="/account/subaccounts/undefined"
+    to="/account/subaccounts/789"
   >
-    suspended
+    Dev Avocado
   </Link>,
-  <p />,
+  <p>
+    789
+  </p>,
   <p
     className={undefined}
-  />,
+  >
+    suspended
+  </p>,
 ]
 `;
 
@@ -34,13 +42,17 @@ exports[`Get row data terminated 1`] = `
 Array [
   <Link
     replace={false}
-    to="/account/subaccounts/undefined"
+    to="/account/subaccounts/456"
   >
-    terminated
+    SharkPost
   </Link>,
-  <p />,
+  <p>
+    456
+  </p>,
   <p
     className={undefined}
-  />,
+  >
+    terminated
+  </p>,
 ]
 `;

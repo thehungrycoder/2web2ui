@@ -3,27 +3,19 @@ import styles from './rowData.module.scss';
 
 import { Link } from 'react-router-dom';
 
+const STATUS_CLASSES = {
+  active: styles.StatusActive,
+  suspended: styles.StatusSuspended,
+  terminated: styles.StatusTerminated
+};
+
 /*
  Subaccounts getRowData passed to TableCollection in ListPage.
 */
-const getRowData = ({ status, id, name }) => {
-  let className;
-  switch (status) {
-    case 'active':
-      className = styles.StatusActive;
-      break;
-    case 'terminated':
-      className = styles.StatusTerminated;
-      break;
-    case 'suspended':
-      className = styles.StatusSuspended;
-      break;
-  }
-  return [
-    <Link to={`/account/subaccounts/${id}`}>{name}</Link>,
-    <p>{id}</p>,
-    <p className={className}>{status}</p>
-  ];
-};
+const getRowData = ({ status, id, name }) => [
+  <Link to={`/account/subaccounts/${id}`}>{name}</Link>,
+  <p>{id}</p>,
+  <p className={STATUS_CLASSES[status]}>{status}</p>
+];
 
 export default getRowData;
