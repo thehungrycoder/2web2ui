@@ -32,12 +32,6 @@ it('should render BasicAuthFields', () => {
   expect(wrapper).toMatchSnapshot();
 });
 
-it('should render BasicAuthFields', () => {
-  const wrapper = shallow(<BasicAuthFields />);
-
-  expect(wrapper).toMatchSnapshot();
-});
-
 it('should render OAuth2Fields', () => {
   const wrapper = shallow(<OAuth2Fields />);
 
