@@ -1,3 +1,4 @@
+/* eslint max-lines: ["error", 202] */
 import sparkpostApiRequest, { refreshTokensUsed } from '../sparkpostApiRequest';
 import { createMockStore } from 'src/__testHelpers__/mockStore';
 import * as axiosMocks from '../axiosInstances';
@@ -13,12 +14,9 @@ jest.mock('src/helpers/http');
 describe('Helper: SparkPost API Request', () => {
 
   let meta;
-  let dispatchMock;
-  let getStateMock;
   let results;
   let state;
   let action;
-  let thunk;
   let refreshData;
 
   let mockStore;
@@ -78,7 +76,7 @@ describe('Helper: SparkPost API Request', () => {
       } catch (err) {
         // const { message, response } = err;
         // expect(err).toBe(apiErr);
-        expect(globalAlertMock.showAlert).toHaveBeenCalledWith({ message: 'Something went wrong.', type: 'error', details: apiErr.message});
+        expect(globalAlertMock.showAlert).toHaveBeenCalledWith({ message: 'Something went wrong.', type: 'error', details: apiErr.message });
         expect(mockStore.getActions()).toMatchSnapshot();
       }
       globalAlertMock.showAlert.mockRestore();
@@ -137,9 +135,9 @@ describe('Helper: SparkPost API Request', () => {
           .mockImplementation(() => Promise.resolve({ data: { results }}));
 
         await Promise.all([
-          mockStore.dispatch(sparkpostApiRequest({ type: 'TEST_WITH_REFRESH', meta: {} })),
-          mockStore.dispatch(sparkpostApiRequest({ type: 'TEST_NO_REFRESH', meta: {} })),
-          mockStore.dispatch(sparkpostApiRequest({ type: 'TEST_NO_REFRESH', meta: {} }))
+          mockStore.dispatch(sparkpostApiRequest({ type: 'TEST_WITH_REFRESH', meta: {}})),
+          mockStore.dispatch(sparkpostApiRequest({ type: 'TEST_NO_REFRESH', meta: {}})),
+          mockStore.dispatch(sparkpostApiRequest({ type: 'TEST_NO_REFRESH', meta: {}}))
         ]);
 
         expect(httpHelpersMock.useRefreshToken).toHaveBeenCalledTimes(1);
@@ -164,7 +162,7 @@ describe('Helper: SparkPost API Request', () => {
         });
 
         try {
-          await mockStore.dispatch(sparkpostApiRequest({ type: 'TEST_MAX_RETRIES', meta: {} }));
+          await mockStore.dispatch(sparkpostApiRequest({ type: 'TEST_MAX_RETRIES', meta: {}}));
         } catch (err) {
           expect(httpHelpersMock.useRefreshToken).toHaveBeenCalledTimes(3);
           expect(httpHelpersMock.useRefreshToken).toHaveBeenCalledWith('REFRESH_1');
@@ -175,7 +173,7 @@ describe('Helper: SparkPost API Request', () => {
 
       it('should only retry once with the same token', async () => {
         try {
-          await mockStore.dispatch(sparkpostApiRequest({ type: 'TEST_ONE_RETRY_PER_TOKEN', meta: {} }));
+          await mockStore.dispatch(sparkpostApiRequest({ type: 'TEST_ONE_RETRY_PER_TOKEN', meta: {}}));
         } catch (err) {
           expect(httpHelpersMock.useRefreshToken).toHaveBeenCalledTimes(1);
           expect(mockStore.getActions()).toMatchSnapshot();

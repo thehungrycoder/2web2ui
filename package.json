@@ -55,6 +55,7 @@
     "eslint-loader": "1.7.1",
     "eslint-plugin-flowtype": "2.33.0",
     "eslint-plugin-import": "2.2.0",
+    "eslint-plugin-jest": "^21.2.0",
     "eslint-plugin-jsx-a11y": "5.0.3",
     "eslint-plugin-node": "^4.2.2",
     "eslint-plugin-promise": "^3.5.0",
@@ -180,7 +181,11 @@
     },
     "extends": [
       "react-app",
-      "sparkpost"
+      "sparkpost",
+      "plugin:jest/recommended"
+    ],
+    "plugins": [
+      "jest"
     ]
   },
   "description": "SparkPost web app built in React",

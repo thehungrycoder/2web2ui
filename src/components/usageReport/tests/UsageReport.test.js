@@ -10,7 +10,7 @@ describe('UsageReport Component', () => {
 
   const props = {
     subscription: {
-      plan_volume: 10000,
+      plan_volume: 10000
     },
     usage: {
       month: {
@@ -28,9 +28,9 @@ describe('UsageReport Component', () => {
   };
 
   const nullRenderCases = [
-    { name: 'no props', },
-    { name: 'only subscription', props: { subscription: {} } },
-    { name: 'only usage', props: { usage: {} } }
+    { name: 'no props' },
+    { name: 'only subscription', props: { subscription: {}}},
+    { name: 'only usage', props: { usage: {}}}
   ];
 
   cases('render null:', (opts) => {

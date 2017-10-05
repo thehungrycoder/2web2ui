@@ -1,7 +1,6 @@
 import React from 'react';
 import { ChangePlanPage } from '../ChangePlanPage';
 import { shallow } from 'enzyme';
-import * as billingMock from 'src/actions/billing';
 
 jest.mock('src/actions/billing');
 
@@ -17,7 +16,7 @@ describe('Page: ChangePlanPage', () => {
     billingCreate: jest.fn(() => Promise.resolve()),
     billingUpdate: jest.fn(() => Promise.resolve()),
     updateSubscription: jest.fn(() => Promise.resolve()),
-    billing: { countries: [] }
+    billing: { countries: []}
   };
 
   beforeEach(() => {
@@ -29,7 +28,7 @@ describe('Page: ChangePlanPage', () => {
   });
 
   it('should get plans and countries on mount', () => {
-    wrapper.setProps({ billing: {} });
+    wrapper.setProps({ billing: {}});
     const plansSpy = jest.spyOn(wrapper.instance().props, 'getPlans');
     const countrySpy = jest.spyOn(wrapper.instance().props, 'getBillingCountries');
     wrapper.instance().componentDidMount();
