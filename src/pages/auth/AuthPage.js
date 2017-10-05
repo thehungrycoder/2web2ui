@@ -73,7 +73,7 @@ export class AuthPage extends Component {
             <TextField
               autoFocus
               id="username"
-              label="Username or Email"
+              label="Email"
               placeholder="Leslie Knope"
               value={this.state.username}
               onChange={this.onChangeUsername}
