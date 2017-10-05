@@ -1,4 +1,5 @@
-import { formatDataForCors, formatCreateData, formatUpdateData } from 'src/helpers/billing';
+/* eslint-disable max-lines*/
+import { formatDataForCors, formatCreateData, formatUpdateData, formatContactData } from 'src/helpers/billing';
 import { fetch as fetchAccount } from './account';
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 import zuoraRequest from 'src/actions/helpers/zuoraRequest';
@@ -13,30 +14,46 @@ export function syncSubscription() {
   });
 }
 
+/**
+ * Updates plan
+ * @param {string} code
+ */
 export function updateSubscription(code) {
-  return (dispatch) => dispatch(sparkpostApiRequest({
+  const action = sparkpostApiRequest({
     type: 'UPDATE_SUBSCRIPTION',
     meta: {
       method: 'PUT',
       url: '/account/subscription',
       data: { code }
     }
-  })).then(() => dispatch(fetchAccount({ include: 'usage,billing' })));
+  });
+
+  return (dispatch) => dispatch(action)
+    .then(() => dispatch(fetchAccount({ include: 'usage,billing' })));
 }
 
 /**
  * For updating billing info via our API (e.g. contact info)
  * @param {Object} data
  */
-export function updateBilling(data) {
-  return sparkpostApiRequest({
-    type: 'UPDATE_BILLING',
+export function updateBillingContact(data) {
+  const action = sparkpostApiRequest({
+    type: 'UPDATE_BILLING_CONTACT',
     meta: {
       method: 'PUT',
-      url: '/account/subscription',
-      data
+      url: '/account/billing',
+      data: {
+        ...formatContactData(data),
+        address1: 'iamrequired',
+        city: 'iamrequired',
+        zip_code: 'iamrequired',
+        country_code: 'NO'
+      }
     }
   });
+
+  return (dispatch) => dispatch(action)
+    .then(() => dispatch(fetchAccount({ include: 'usage,billing' })));
 }
 
 export function cors(context, data = {}) {
@@ -119,7 +136,6 @@ export function billingCreate(values) {
 //
 // call this action creator from the "free -> paid" form if account.billing is present
 export function billingUpdate(values) {
-  const { code } = values.planpicker;
 
   return (dispatch) =>
 
@@ -132,8 +148,12 @@ export function billingUpdate(values) {
         return dispatch(updateCreditCard({ data, token, signature }));
       })
 
-      // change plan via our API
-      .then(() => dispatch(updateSubscription(code)))
+      // change plan via our API if plan is included
+      .then(() => {
+        if (values.planpicker) {
+          return dispatch(updateSubscription(values.planpicker.code));
+        }
+      })
 
       // sync our db with new Zuora state
       .then(() => dispatch(syncSubscription()))
@@ -142,6 +162,9 @@ export function billingUpdate(values) {
       .then(() => dispatch(fetchAccount({ include: 'usage,billing' })));
 }
 
+/**
+ * Gets countries for billing forms
+ */
 export function getBillingCountries() {
   return sparkpostApiRequest({
     type: 'GET_COUNTRIES_BILLING',

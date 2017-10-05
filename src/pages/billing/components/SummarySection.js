@@ -11,7 +11,7 @@ const PlanSummary = ({ plan }) => {
       : null;
 
     const overage = plan.overage
-      ? <p><small>${ plan.overage.toFixed(2) }/thousand extra emails</small></p>
+      ? <p>${ plan.overage.toFixed(2) }/thousand extra emails</p>
       : null;
 
     const volume = plan.volume
@@ -28,13 +28,12 @@ const PlanSummary = ({ plan }) => {
   return <SummarySection label='Your Plan'>{ content }</SummarySection>;
 };
 
-const CardSummary = ({ billing }) => (
-  <SummarySection>
+const CardSummary = ({ billing, label }) => (
+  <SummarySection label={label}>
     <h6>
       <strong><Icon name='CreditCard' size={16}/> { billing.credit_card.type } ···· { billing.credit_card.number.substr(billing.credit_card.number.length - 4) }</strong>
     </h6>
-    <h6><strong>{ billing.first_name } { billing.last_name }</strong></h6>
-    <p><small>Expires { billing.credit_card.expiration_month }/{ billing.credit_card.expiration_year }</small></p>
+    <p>Expires { billing.credit_card.expiration_month }/{ billing.credit_card.expiration_year }</p>
   </SummarySection>
 );
 

@@ -2,15 +2,33 @@ import _ from 'lodash';
 import _fp from 'lodash/fp';
 
 export function overviewProps(state) {
-  const { subscription } = state.account;
-
   return {
     loading: !Object.keys(state.account).length || state.billing.plansLoading,
-    hasBillingAccount: !!state.billing,
-    plans: selectPublicPlans(state),
+
+    account: state.account,
+    billing: state.account.billing,
+
+    billable: selectBillable(state),
+    canChangePlan: canChangePlan(state),
     currentPlan: selectCurrentPlan(state),
-    subscription
+    plans: selectPublicPlans(state)
   };
+}
+
+/**
+ * Returns true if user should be allowed to change plan
+ */
+export function canChangePlan(state) {
+  const { subscription, isSuspendedForBilling, pending_subscription } = state.account;
+  return (subscription && subscription.self_serve) || !isSuspendedForBilling || !pending_subscription;
+}
+
+/**
+ * Returns true if user has billing account and they are on a paid plan
+ */
+export function selectBillable(state) {
+  const currentPlan = selectCurrentPlan(state);
+  return !!state.account.billing && !currentPlan.isFree;
 }
 
 /**

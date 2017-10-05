@@ -35,7 +35,7 @@ export class BillingAddressForm extends Component {
   }
 
   render() {
-    const { countries, countryValue, disabled } = this.props;
+    const { countries = [], countryValue, disabled } = this.props;
 
     const stateOrProvince = countryValue === 'US' || countryValue === 'CA'
       ? <Grid.Column xs={6}>

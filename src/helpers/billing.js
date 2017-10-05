@@ -19,7 +19,6 @@ export function formatDataForCors(values) {
     plan_id: planpicker.billingId
   };
 
-
   // For Zuora
   const billingData = {
     billingId: planpicker.billingId,
@@ -103,6 +102,14 @@ export function formatCreateData({
   }
 
   return formatted;
+}
+
+export function formatContactData({ billingContact }) {
+  return {
+    email: billingContact.email,
+    first_name: billingContact.firstName,
+    last_name: billingContact.lastName
+  };
 }
 
 // Formats countries before storing in state

@@ -14,3 +14,29 @@ export function changePlanInitialValues(state) {
     }
   };
 }
+
+/**
+ * Selects initial values for all the update payment form on the summary page
+ */
+export function updatePaymentInitialValues(state) {
+  return {
+    billingAddress: {
+      firstName: state.currentUser.first_name,
+      lastName: state.currentUser.last_name,
+      country: '_placeholder'
+    }
+  };
+}
+
+/**
+ * Selects initial values for the update contact form on the summary page
+ */
+export function updateContactInitialValues(state) {
+  return {
+    billingContact: {
+      email: state.account.billing.email,
+      firstName: state.account.billing.first_name,
+      lastName: state.account.billing.last_name
+    }
+  };
+}
