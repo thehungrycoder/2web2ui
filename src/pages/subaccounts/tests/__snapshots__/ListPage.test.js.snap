@@ -83,11 +83,6 @@ exports[`renders errors when present 1`] = `
 <App
   loading={false}
 >
-  <ApiErrorBanner
-    errorDetails="Uh oh! It broke."
-    message="Sorry, we ran into an error loading your Subaccounts"
-    reload={[Function]}
-  />
   <div>
     <t
       primaryAction={
@@ -99,39 +94,10 @@ exports[`renders errors when present 1`] = `
       }
       title="Subaccounts"
     />
-    <TableCollection
-      columns={
-        Array [
-          "Name",
-          "ID",
-          "Status",
-        ]
-      }
-      getRowData={[Function]}
-      pagination={true}
-      rows={
-        Array [
-          Object {
-            "compliance_status": "active",
-            "id": 123,
-            "ip_pool": "my_ip_pool",
-            "name": "Joe's Garage",
-            "status": "active",
-          },
-          Object {
-            "compliance_status": "active",
-            "id": 456,
-            "name": "SharkPost",
-            "status": "active",
-          },
-          Object {
-            "compliance_status": "active",
-            "id": 789,
-            "name": "Dev Avocado",
-            "status": "suspended",
-          },
-        ]
-      }
+    <ApiErrorBanner
+      errorDetails="Uh oh! It broke."
+      message="Sorry, we ran into an error loading your Subaccounts"
+      reload={[Function]}
     />
   </div>
 </App>

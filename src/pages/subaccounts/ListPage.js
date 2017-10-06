@@ -18,6 +18,28 @@ const primaryAction = {
   to: '/account/subaccounts/create'
 };
 
+const renderEmpty = () => (
+    <EmptyState
+      title="Get started with Subaccounts"
+      action={{ content: 'Create a Subaccount' }}
+      secondaryAction={{ content: 'Learn more', to: 'https://developers.sparkpost.com/api/subaccounts.html', target: '_blank' }}
+    >
+      <p>Subaccounts are a good way of managing external client accounts.</p>
+    </EmptyState>
+  );
+
+const renderCollection = (subaccounts) => (
+    <div>
+      <Page title='Subaccounts' primaryAction={primaryAction}/>
+      <TableCollection
+        columns={columns}
+        getRowData={getRowData}
+        pagination={true}
+        rows={subaccounts}
+      />
+    </div>
+  );
+
 export class ListPage extends Component {
   componentDidMount() {
     this.props.listSubaccounts();
@@ -27,41 +49,16 @@ export class ListPage extends Component {
     this.props.listSubaccounts({ force: true }); // force a refresh
   };
 
-  renderEmpty() {
-    return (
-      <EmptyState
-        title="Get started with Subaccounts"
-        action={{ content: 'Create a Subaccount' }}
-        secondaryAction={{ content: 'Learn more', to: 'https://developers.sparkpost.com/api/subaccounts.html', target: '_blank' }}
-      >
-        <p>Subaccounts are a good way of managing external client accounts.</p>
-      </EmptyState>
-    );
-  }
-
-  renderCollection() {
-    const { subaccounts } = this.props;
-
+  renderError() {
     return (
       <div>
         <Page title='Subaccounts' primaryAction={primaryAction}/>
-        <TableCollection
-          columns={columns}
-          getRowData={getRowData}
-          pagination={true}
-          rows={subaccounts}
+        <ApiErrorBanner
+          errorDetails={this.props.error.message}
+          message="Sorry, we ran into an error loading your Subaccounts"
+          reload={this.onReloadApiBanner}
         />
       </div>
-    );
-  }
-
-  renderError() {
-    return (
-      <ApiErrorBanner
-        errorDetails={this.props.error.message}
-        message="Sorry, we ran into an error loading your Subaccounts"
-        reload={this.onReloadApiBanner}
-      />
     );
   }
 
@@ -70,10 +67,11 @@ export class ListPage extends Component {
 
     return (
       <Layout.App loading={loading}>
-        { error && this.renderError() }
-        { subaccounts.length
-          ? this.renderCollection()
-          : this.renderEmpty()
+        { error
+          ? this.renderError()
+          : subaccounts.length
+            ? renderCollection(subaccounts)
+            : renderEmpty()
         }
       </Layout.App>
     );
