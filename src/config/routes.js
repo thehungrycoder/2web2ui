@@ -1,11 +1,12 @@
 /* eslint-disable */
 import {
+  apiKeys,
   AuthPage,
   billing,
   DashboardPage,
   ProfilePage,
-  apiKeys,
   reports,
+  subaccounts,
   templates,
   webhooks
 } from 'src/pages';
@@ -77,6 +78,11 @@ export default [
   {
     path: '/reports/summary',
     component: reports.SummaryPage
+  },
+  {
+    path: '/account/subaccounts',
+    component: subaccounts.ListPage,
+    condition: hasGrants('subaccount/manage')
   },
   {
     path: '/templates',
