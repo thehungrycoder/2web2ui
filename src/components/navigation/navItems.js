@@ -45,6 +45,10 @@ export default [
       {
         label: 'Subaccounts',
         to: '/account/subaccounts'
+      },
+      {
+        label: 'Users',
+        to: '/account/users'
       }
     ]
   }

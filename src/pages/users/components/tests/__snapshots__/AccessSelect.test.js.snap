@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AccessSelect renders access label when disabled 1`] = `
+<span>
+  Administrator
+</span>
+`;
+
+exports[`AccessSelect renders select 1`] = `
+<t
+  name="renders select"
+  onChange={[Function]}
+  options={
+    Array [
+      Object {
+        "label": "Administrator",
+        "value": "admin",
+      },
+      Object {
+        "label": "Reporting",
+        "value": "reporting",
+      },
+    ]
+  }
+  value="admin"
+/>
+`;

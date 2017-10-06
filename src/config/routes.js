@@ -8,6 +8,7 @@ import {
   reports,
   subaccounts,
   templates,
+  users,
   webhooks
 } from 'src/pages';
 
@@ -83,6 +84,11 @@ export default [
     path: '/account/subaccounts',
     component: subaccounts.ListPage,
     condition: hasGrants('subaccount/manage')
+  },
+  {
+    path: '/account/users',
+    component: users.ListPage,
+    condition: hasGrants('users/manage')
   },
   {
     path: '/templates',
