@@ -39,5 +39,7 @@ export function filterNavByAccess(items, store) {
 }
 
 export default function prepareNavItems(store) {
-  return filterNavByAccess(mapNavToRoutes(navItems), store);
+  return navItems;
+  // temporarily bypassing this until we figure out how to be dynamic here
+  // return filterNavByAccess(mapNavToRoutes(navItems), store);
 }
