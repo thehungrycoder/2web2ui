@@ -40,7 +40,10 @@ const config = {
   sendingIps: {
     pricePerIp: 20.00
   },
+  showThingOnDash: true,
+  showSummaryReport: true,
   summaryChart: {
+    enabled: false,
     defaultMetrics: ['count_targeted', 'count_rendered', 'count_accepted', 'count_bounce']
   },
   zuora: {

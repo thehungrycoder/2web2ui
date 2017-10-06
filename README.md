@@ -22,9 +22,28 @@ npm test
 **NOTE:** You may need to `brew install watchman` for jest to run in watch mode on OS X.
 https://github.com/facebook/react-native/issues/9309#issuecomment-238966924
 
+## Learning Resources
+
+A good comparison of React and Redux and how they relate to Angular is here:
+https://github.com/jasonrhodes/how-to-react
+
+If you're new to React, you should have a basic understanding of how it works before jumping into this project. Mainly, you should understand what `JSX` is, the difference between a functional/stateless and class component, and how `setState` works inside class components. 
+
+Here are some resources for learning basic React:
+
+- https://reactforbeginners.com/
+- https://reactjs.org/tutorial/tutorial.html
+
+Once you're familiar with React, you should also begin to understand what Redux is. For Redux, you should understand what an action creator and a reducer is, how you `connect` a component to the Redux store using `react-redux` (and using connect's 2 arguments, `mapStateToProps` and `bindActionCreators`), and when to use Redux vs. local component state.
+
+Good resources for learning Redux:
+
+- https://egghead.io/courses/getting-started-with-redux
+- https://learnredux.com/
+
 ## About the project
 
-Before jumping into writing code, here are a few things you'll want to be aware of:
+Before jumping into writing code, here are a few conventions you should be aware of:
 
 1. We use ESLint to enforce automated linting. The config is extended from a few places and defined inside the package.json file, under the "eslintConfig" key (instead of using a root level .eslintrc file).
     * To run our linting, you can run `npm run lint` or `npm run lint -- --fix` to run in "auto fix mode". 

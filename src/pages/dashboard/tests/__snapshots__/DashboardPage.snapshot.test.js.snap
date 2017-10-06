@@ -5,10 +5,16 @@ exports[`renders correctly 1`] = `
   <t
     title="Control Panel"
   />
-  <EmailBanner
-    handleResend={[Function]}
-    sendingStatus={null}
+  <UpgradeBanner
+    hasCC={true}
   />
+  <Connect(AccessControl)
+    condition={[Function]}
+  >
+    <h1>
+      Show a thing on the dashboard based on config
+    </h1>
+  </Connect(AccessControl)>
   <Connect(UsageReport) />
   <t
     status="default"
@@ -41,6 +47,13 @@ exports[`renders correctly when user is not verified 1`] = `
     handleResend={[Function]}
     sendingStatus={null}
   />
+  <Connect(AccessControl)
+    condition={[Function]}
+  >
+    <h1>
+      Show a thing on the dashboard based on config
+    </h1>
+  </Connect(AccessControl)>
   <Connect(UsageReport) />
   <t
     status="default"
