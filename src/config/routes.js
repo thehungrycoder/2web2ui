@@ -67,8 +67,8 @@ export default [
   },
   {
     path: '/dashboard',
-    component: DashboardPage,
-    condition: () => true // do not put any condition here bc all other routes redirect here if condition is false
+    component: DashboardPage
+    // do not put any condition here bc all other routes redirect here if their condition is false
   },
   {
     path: '/reports',
