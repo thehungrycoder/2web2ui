@@ -1,24 +1,19 @@
 import { shallow } from 'enzyme';
-import fp from 'lodash/fp';
 import React from 'react';
+import cases from 'jest-in-case';
 
 import DeleteButton from '../DeleteButton';
 
 const defaultProps = {
-  user: {},
+  user: {}
 };
 
-const TestComponent = (props = {}) => {
-  const nextProps = fp.merge(defaultProps, props);
-  return shallow(<DeleteButton {...nextProps} />);
+const TEST_CASES = {
+  'renders a button': { ...defaultProps },
+  'renders null': { disabled: true }
 };
 
-it('renders a button and hidden modal', () => {
-  const wrapper = TestComponent();
+cases('DeleteButton', (props) => {
+  const wrapper = shallow(<DeleteButton {...props} />);
   expect(wrapper).toMatchSnapshot();
-});
-
-it('renders nothing', () => {
-  const wrapper = TestComponent({ disabled: true });
-  expect(wrapper).toMatchSnapshot();
-});
+}, TEST_CASES);

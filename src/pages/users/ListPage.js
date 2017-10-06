@@ -1,20 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import fp from 'lodash/fp';
 import { Page } from '@sparkpost/matchbox';
 
 import * as usersActions from 'src/actions/users';
 import { selectUsers } from 'src/selectors/users';
 
-import ApiErrorBanner from 'src/components/apiErrorBanner/ApiErrorBanner';
-import TableCollection from 'src/components/collection/TableCollection';
-import Layout from 'src/components/layout/Layout';
-
+import { ApiErrorBanner, DeleteModal, Layout, TableCollection } from 'src/components';
 import AccessSelect from './components/AccessSelect';
 import DeleteButton from './components/DeleteButton';
 
 const COLUMNS = ['Name', 'Role', 'Email', 'Last Login', null];
+const DEFAULT_STATE = {
+  userToDelete: {}
+};
 
 export class ListPage extends Component {
+  state = DEFAULT_STATE;
+
   componentDidMount() {
     this.props.listUsers();
   }
@@ -32,13 +35,28 @@ export class ListPage extends Component {
     user.last_login,
     <DeleteButton
       disabled={user.isCurrentUser}
-      onSubmit={this.props.deleteUser}
-      user={user}
+      name={user.username}
+      onClick={this.handleDeleteRequest}
     />
   ];
 
   handleAccessChange = ({ name, value }) => {
     this.props.updateUser(name, { access_level: value });
+  }
+
+  handleCancel = () => { this.setState(DEFAULT_STATE); }
+
+  handleDelete = () => {
+    const { userToDelete } = this.state;
+
+    this.setState(DEFAULT_STATE, () => {
+      this.props.deleteUser(userToDelete.username);
+    });
+  };
+
+  handleDeleteRequest = (username) => {
+    const user = fp.find((user) => user.username === username)(this.props.users);
+    this.setState({ userToDelete: user });
   }
 
   renderError() {
@@ -51,6 +69,23 @@ export class ListPage extends Component {
         errorDetails={error.message}
         message="Sorry, we seem to have had some trouble loading your users."
         reload={listUsers}
+      />
+    );
+  }
+
+  // @note This component must always be the page to properly handle css transition
+  renderDeleteModal() {
+    const { userToDelete } = this.state;
+    const isOpen = !fp.isEmpty(userToDelete);
+    const name = fp.get('name')(userToDelete);
+
+    return (
+      <DeleteModal
+        handleDelete={this.handleDelete}
+        handleToggle={this.handleCancel}
+        open={isOpen}
+        text={`Are you sure you want to delete ${name}?`}
+        title="Delete User"
       />
     );
   }
@@ -68,6 +103,7 @@ export class ListPage extends Component {
           pagination={true}
           rows={users}
         />
+        {this.renderDeleteModal()}
       </Layout.App>
     );
   }

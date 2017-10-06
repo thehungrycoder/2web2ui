@@ -1,49 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders a button and hidden modal 1`] = `
-<span>
+exports[`DeleteButton renders a button 1`] = `
+<t
+  name="renders a button"
+  onClick={[Function]}
+  plain={true}
+  size="default"
+>
   <t
-    onClick={[Function]}
-    plain={true}
-    size="default"
-  >
-    <t
-      name="Delete"
-    />
-  </t>
-  <t
-    open={false}
-  >
-    <t
-      accent={true}
-      sectioned={true}
-      title="Delete User"
-    >
-      <p>
-        Are you sure you want to delete 
-        ?
-      </p>
-      <t
-        onClick={[Function]}
-        primary={true}
-        size="default"
-        style={
-          Object {
-            "marginRight": "1rem",
-          }
-        }
-      >
-        Delete
-      </t>
-      <t
-        onClick={[Function]}
-        size="default"
-      >
-        Cancel
-      </t>
-    </t>
-  </t>
-</span>
+    name="Delete"
+  />
+</t>
 `;
 
-exports[`renders nothing 1`] = `null`;
+exports[`DeleteButton renders null 1`] = `null`;
