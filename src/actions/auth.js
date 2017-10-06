@@ -1,7 +1,7 @@
 import { sparkpostLogin } from '../helpers/http';
 import authCookie from '../helpers/authCookie';
 import { fetch as fetchAccount } from './account';
-import { fetch as fetchCurrentUser } from './currentUser';
+import { get as getCurrentUser, getGrants } from './currentUser';
 
 export function login(authData) {
   return (dispatch) => {
@@ -12,7 +12,8 @@ export function login(authData) {
 
     // initialize some state
     dispatch(fetchAccount({ include: 'usage,billing' }));
-    dispatch(fetchCurrentUser());
+    dispatch(getCurrentUser())
+      .then(({ access_level }) => dispatch(getGrants({ role: access_level })));
   };
 }
 
@@ -55,9 +56,7 @@ export function authenticate(username, password, rememberMe = false) {
 }
 
 export function refresh(token, refreshToken) {
-  const oldCookie = authCookie.get();
-  const newCookie = Object.assign({}, oldCookie, { access_token: token, refresh_token: refreshToken });
-  authCookie.save(newCookie);
+  const newCookie = authCookie.merge({ access_token: token, refresh_token: refreshToken });
   return login(newCookie);
 }
 

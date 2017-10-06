@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: AccessControl should render correctly when access is granted 1`] = `
+<h1>
+  Some children
+</h1>
+`;
+
+exports[`Component: AccessControl should render correctly when no access and not redirecting 1`] = `null`;
+
+exports[`Component: AccessControl should render correctly when no access and redirecting 1`] = `
+<Redirect
+  push={false}
+  to="/some/path"
+/>
+`;

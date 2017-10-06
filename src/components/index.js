@@ -10,6 +10,4 @@ export { default as PlanPicker } from './planPicker/PlanPicker';
 export { default as SparkPost } from './sparkPost/SparkPost';
 export { default as UsageReport } from './usageReport/UsageReport';
 
-export { default as AuthenticationGate } from './AuthenticationGate';
-export { default as ProtectedRoute } from './ProtectedRoute';
 export * from './reduxFormWrappers';

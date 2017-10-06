@@ -1,7 +1,14 @@
-export default (state = {}, action) => {
+const initialState = {
+  grants: []
+};
+
+export default (state = initialState, action) => {
   switch (action.type) {
-    case 'FETCH_CURRENT_USER_SUCCESS':
-      return action.payload;
+    case 'GET_CURRENT_USER_SUCCESS':
+      return { ...state, ...action.payload };
+
+    case 'GET_GRANTS_SUCCESS':
+      return { ...state, grants: action.payload };
 
     default:
       return state;
