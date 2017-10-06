@@ -6,7 +6,7 @@ import _ from 'lodash';
  */
 export function changePlanInitialValues(state) {
 
-  // For manually billed users, their plan won't be selectable through plan picker
+  // Plans outside zuora won't be selectable through plan picker
   const currentPlan = selectCurrentPlan(state);
   const initialPlan = currentPlan.hasOwnProperty('billingId') ? currentPlan : _.find(selectPublicPlans(state), { isFree: true });
 

@@ -7,12 +7,12 @@ import { showAlert } from 'src/actions/globalAlert';
 import { updatePaymentInitialValues } from 'src/selectors/accountBillingForms';
 
 import { Panel, Button } from '@sparkpost/matchbox';
-import PaymentForm from '../components/PaymentForm';
-import BillingAddressForm from '../components/BillingAddressForm';
+import PaymentForm from './forms/PaymentForm';
+import BillingAddressForm from './forms/BillingAddressForm';
 
 import styles from './formContainers.module.scss';
 
-const FORMNAME = 'update-payment';
+const FORMNAME = 'updatePayment';
 
 class UpdatePayment extends Component {
   componentDidMount() {

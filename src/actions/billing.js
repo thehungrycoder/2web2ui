@@ -151,7 +151,7 @@ export function billingUpdate(values) {
       // change plan via our API if plan is included
       .then(() => {
         if (values.planpicker) {
-          return dispatch(updateSubscription(values.planpicker.code));
+          dispatch(updateSubscription(values.planpicker.code));
         }
       })
 

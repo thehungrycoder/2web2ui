@@ -2,7 +2,7 @@ import React from 'react';
 import { Panel, Button } from '@sparkpost/matchbox';
 import config from 'src/config';
 
-const Confirmation = ({ current = {}, selected = {}, disableSubmit }) => {
+const Confirmation = ({ current = {}, selected = {}, disableSubmit, selfServe }) => {
   const isDowngrade = current.monthly > selected.monthly;
   const isPlanSelected = current.code !== selected.code;
   let effectiveDateMarkup = null;
@@ -27,7 +27,7 @@ const Confirmation = ({ current = {}, selected = {}, disableSubmit }) => {
         <h5>{ selected.volume && selected.volume.toLocaleString() } emails { selectedPrice }</h5>
       </div>;
 
-  if (isPlanSelected) {
+  if (isPlanSelected && selfServe) {
     if (!isDowngrade) {
       effectiveDateMarkup = current.isFree
         ? <p>Your upgrade will be effective today.</p>
@@ -46,7 +46,7 @@ const Confirmation = ({ current = {}, selected = {}, disableSubmit }) => {
       );
     }
 
-    if (selected.isFree) {
+    if (selected.isFree && selfServe) {
       addonMarkup = <p>This downgrade will remove all add-ons, including any dedicated IP addresses you may have purchased.</p>;
     }
   }
@@ -71,7 +71,7 @@ const Confirmation = ({ current = {}, selected = {}, disableSubmit }) => {
           fullWidth
           primary={!isDowngrade}
           destructive={isDowngrade}
-          disabled={!isPlanSelected || disableSubmit}>
+          disabled={disableSubmit}>
           { buttonText }
         </Button>
       </Panel.Section>

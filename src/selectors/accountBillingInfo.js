@@ -5,16 +5,16 @@ import _fp from 'lodash/fp';
  * Returns true if user should be allowed to change plan
  */
 export function canChangePlan(state) {
-  const { subscription, isSuspendedForBilling, pending_subscription } = state.account;
-  return (subscription && subscription.self_serve) || !isSuspendedForBilling || !pending_subscription;
+  const { isSuspendedForBilling, pending_subscription } = state.account;
+  return !isSuspendedForBilling && !pending_subscription;
 }
 
 /**
  * Returns true if user has billing account and they are on a paid plan
  */
-export function selectBillable(state) {
-  const currentPlan = selectCurrentPlan(state);
-  return !!state.account.billing && !currentPlan.isFree;
+export function shouldExposeCard(state) {
+  const plan = selectCurrentPlan(state);
+  return !!state.account.billing && (plan && !plan.isFree);
 }
 
 /**

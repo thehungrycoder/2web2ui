@@ -9,6 +9,5 @@ export { default as Navigation } from './navigation/Navigation';
 export { default as PlanPicker } from './planPicker/PlanPicker';
 export { default as SparkPost } from './sparkPost/SparkPost';
 export { default as UsageReport } from './usageReport/UsageReport';
-export { default as WindowEvent } from './windowEvent/WindowEvent';
 
 export * from './reduxFormWrappers';
