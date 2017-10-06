@@ -6,6 +6,7 @@
   "dependencies": {
     "@sparkpost/matchbox": "^1.6.1",
     "axios": "^0.16.1",
+    "babel-plugin-lodash": "^3.2.11",
     "chart.js": "^2.6.0",
     "classnames": "^2.2.5",
     "copy-to-clipboard": "^3.0.8",
@@ -135,6 +136,9 @@
     "presets": [
       "react-app",
       "stage-2"
+    ],
+    "plugins": [
+      "lodash"
     ]
   },
   "eslintConfig": {

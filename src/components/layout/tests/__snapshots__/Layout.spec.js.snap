@@ -5,7 +5,7 @@ exports[`Layout Tests Layout renders App layout 1`] = `
   className="undefined undefined"
 >
   <div>
-    <withRouter(Navigation) />
+    <withRouter(Connect(Navigation)) />
   </div>
   <main
     role="main"

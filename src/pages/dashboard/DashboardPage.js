@@ -7,6 +7,9 @@ import Tutorial from './components/Tutorial';
 import EmailBanner from './components/EmailBanner';
 import UpgradeBanner from './components/UpgradeBanner';
 
+import { AccessControl } from 'src/components/auth';
+import { configFlag } from 'src/helpers/conditions';
+
 export class DashboardPage extends Component {
   constructor(props) {
     super(props);
@@ -16,7 +19,7 @@ export class DashboardPage extends Component {
     };
   }
 
-  resendVerfication() {
+  resendVerification() {
     // TODO do this in redux
     this.setState({ sendingStatus: 'sending' });
   }
@@ -24,11 +27,11 @@ export class DashboardPage extends Component {
   renderOneCta() {
     const { currentUser } = this.props;
 
-    if (!currentUser['email_verfied']) {
+    if (!currentUser['email_verified']) {
       return (
         <EmailBanner
           sendingStatus={this.state.sendingStatus}
-          handleResend={() => this.resendVerfication()} />
+          handleResend={() => this.resendVerification()} />
       );
     }
 
@@ -54,6 +57,10 @@ export class DashboardPage extends Component {
         <Page title='Control Panel'/>
 
         { this.renderOneCta() }
+
+        <AccessControl condition={configFlag('showThingOnDash')}>
+          <h1>Show a thing on the dashboard based on config</h1>
+        </AccessControl>
 
         <UsageReport />
 

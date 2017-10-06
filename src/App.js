@@ -1,64 +1,34 @@
 import React from 'react';
-
-// Components
-import { ProtectedRoute, AuthenticationGate, GlobalAlert } from 'src/components';
-
-// Pages
-import {
-  AuthPage,
-  billing,
-  DashboardPage,
-  ProfilePage,
-  apiKeys,
-  reports,
-  subaccounts,
-  templates,
-  webhooks
-} from './pages';
-
+import { ProtectedRoute, AuthenticationGate } from 'src/components/auth';
+import { GlobalAlert } from 'src/components';
+import routes from 'src/config/routes';
 import {
   BrowserRouter as Router,
   Route,
-  Redirect
+  Redirect,
+  Switch
 } from 'react-router-dom';
 
-const ForgotPassword = () => <h1>Forgot Password</h1>;
-
-export default () => (
+const App = () => (
   <Router>
     <div>
       <AuthenticationGate />
 
-      <Route exact path='/' render={() => <Redirect to='/auth' />} />
-      <Route path='/auth' component={AuthPage} />
-      <Route path='/forgot-password' component={ForgotPassword} />
+      <Switch>
+        {routes.map((route) => {
+          const MyRoute = route.public ? Route : ProtectedRoute;
+          route.exact = !(route.exact === false); // this makes exact default to true
 
-      <ProtectedRoute path='/dashboard' component={DashboardPage} />
-      <Route exact path='/reports' render={() => <Redirect to='/reports/summary' />} />
-      <ProtectedRoute path='/reports/summary' component={reports.SummaryPage} />
-
-      <ProtectedRoute exact path='/templates' component={templates.ListPage} />
-      <ProtectedRoute exact path='/templates/create/' component={templates.CreatePage} />
-      <ProtectedRoute exact path='/templates/edit/:id' component={templates.EditPage} />
-      <ProtectedRoute exact path='/templates/edit/:id/published' component={templates.PublishedPage} />
-      {/* <ProtectedRoute exact path='/templates/edit/:id/preview' component={TemplatesEditPage} /> */}
-
-      <ProtectedRoute exact path='/webhooks' component={webhooks.ListPage}/>
-      <ProtectedRoute exact path='/webhooks/create' component={webhooks.CreatePage}/>
-      <ProtectedRoute path='/webhooks/details/:id' component={webhooks.DetailsPage}/>
-
-      <ProtectedRoute exact path='/account/api-keys' component={apiKeys.ListPage} />
-      <ProtectedRoute exact path='/account/api-keys/create' component={apiKeys.CreatePage} />
-      <ProtectedRoute path='/account/api-keys/details/:id' component={apiKeys.DetailsPage} />
-
-      <ProtectedRoute exact path='/account/profile' component={ProfilePage} />
-
-      <ProtectedRoute exact path='/account/billing' component={billing.OverviewPage}/>
-      <ProtectedRoute exact path='/account/billing/plan' component={billing.ChangePlanPage}/>
-
-      <ProtectedRoute exact path='/account/subaccounts' component={subaccounts.ListPage}/>
+          if (route.redirect) {
+            return <Redirect key={route.path} exact from={route.path} to={route.redirect} />;
+          }
+          return <MyRoute key={route.path} {...route} />;
+        })}
+      </Switch>
 
       <GlobalAlert />
     </div>
   </Router>
 );
+
+export default App;
