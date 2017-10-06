@@ -29,7 +29,7 @@
     "redux-form": "7.0.3",
     "redux-thunk": "^2.2.0",
     "reselect": "^3.0.1",
-    "sinon": "^3.2.1"
+    "source-map-explorer": "^1.5.0"
   },
   "devDependencies": {
     "autoprefixer": "7.1.0",
@@ -37,6 +37,8 @@
     "babel-eslint": "^7.2.3",
     "babel-jest": "^21.0.2",
     "babel-loader": "7.0.0",
+    "babel-plugin-lodash": "^3.2.11",
+    "babel-plugin-recharts": "^1.1.0",
     "babel-preset-react-app": "^3.0.0",
     "babel-preset-stage-2": "^6.24.1",
     "babel-runtime": "6.23.0",
@@ -69,14 +71,11 @@
     "jest": "^21.1.0",
     "jest-enzyme": "^3.8.2",
     "jest-junit": "^2.1.0",
-    "mocha": "^3.5.3",
-    "mocha-webpack": "^0.7.0",
     "node-sass": "^4.5.3",
     "object-assign": "4.1.1",
     "postcss-flexbugs-fixes": "3.0.0",
     "postcss-loader": "2.0.5",
     "promise": "7.1.1",
-    "proxyquire": "^1.8.0",
     "react-ace": "^5.1.1",
     "react-dev-utils": "^2.0.1",
     "react-error-overlay": "^1.0.6",
@@ -96,6 +95,7 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
+    "analyze": "source-map-explorer build/static/js/main.*",
     "test": "node scripts/test.js --env=jsdom",
     "lint": "eslint src"
   },
@@ -138,7 +138,8 @@
       "stage-2"
     ],
     "plugins": [
-      "lodash"
+      "lodash",
+      "recharts"
     ]
   },
   "eslintConfig": {
