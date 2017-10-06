@@ -25,7 +25,6 @@ const Plan = ({ plan, className, ...rest }) => {
 
 Plan.propTypes = {
   plan: PropTypes.shape({
-    code: PropTypes.string.isRequired,
     volume: PropTypes.number.isRequired,
     monthly: PropTypes.number.isRequired,
     overage: PropTypes.number.isRequired,

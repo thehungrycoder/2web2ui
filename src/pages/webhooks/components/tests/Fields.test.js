@@ -6,7 +6,7 @@ import {
     AuthDropDown,
     BasicAuthFields,
     OAuth2Fields
-} from '../Fields.js'
+} from '../Fields.js';
 
 it('should render NameField', () => {
   const wrapper = shallow(<NameField />);
@@ -22,12 +22,6 @@ it('should render EventsRadioGroup', () => {
 
 it('should render AuthDropDown', () => {
   const wrapper = shallow(<AuthDropDown />);
-
-  expect(wrapper).toMatchSnapshot();
-});
-
-it('should render BasicAuthFields', () => {
-  const wrapper = shallow(<BasicAuthFields />);
 
   expect(wrapper).toMatchSnapshot();
 });

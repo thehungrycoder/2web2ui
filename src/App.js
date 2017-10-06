@@ -55,7 +55,7 @@ export default () => (
       <ProtectedRoute exact path='/account/users' component={users.ListPage} />
 
       <ProtectedRoute exact path='/account/billing' component={billing.OverviewPage}/>
-      <ProtectedRoute exact path='/account/billing/change' component={billing.ChangePlanPage}/>
+      <ProtectedRoute exact path='/account/billing/plan' component={billing.ChangePlanPage}/>
 
       <GlobalAlert />
     </div>

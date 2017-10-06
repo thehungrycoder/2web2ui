@@ -26,7 +26,7 @@ exports[`renders correctly 1`] = `
       <t
         autoFocus={true}
         id="username"
-        label="Username or Email"
+        label="Email"
         onChange={[Function]}
         placeholder="Leslie Knope"
         type="text"
@@ -80,7 +80,7 @@ exports[`renders correctly when logging in 1`] = `
       <t
         autoFocus={true}
         id="username"
-        label="Username or Email"
+        label="Email"
         onChange={[Function]}
         placeholder="Leslie Knope"
         type="text"
@@ -144,7 +144,7 @@ exports[`renders correctly when there is a login error 1`] = `
       <t
         autoFocus={true}
         id="username"
-        label="Username or Email"
+        label="Email"
         onChange={[Function]}
         placeholder="Leslie Knope"
         type="text"

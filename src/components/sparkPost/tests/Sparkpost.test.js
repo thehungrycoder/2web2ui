@@ -7,8 +7,8 @@ describe('SparkPost Component', () => {
   // type doesn't actually change render output, passed in case it ever does.
   const propCases = [
     { name: 'no props' },
-    { name: 'type', props: { type: 'Flame' } },
-    { name: 'type and extra', props: { type: 'Base', display: 'inline' } }
+    { name: 'type', props: { type: 'Flame' }},
+    { name: 'type and extra', props: { type: 'Base', display: 'inline' }}
   ];
 
   describe('Logo', () => {
@@ -19,7 +19,7 @@ describe('SparkPost Component', () => {
   });
 
   describe('Icon', () => {
-    cases('Render:', opts => {
+    cases('Render:', (opts) => {
       const wrapper = render(<SparkPost.Icon {...opts.props} />);
       expect(wrapper).toMatchSnapshot();
     }, propCases);

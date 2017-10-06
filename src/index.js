@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import registerServiceWorker from './helpers/registerServiceWorker';
+import { unregister } from './helpers/registerServiceWorker';
 import rootReducer from './reducers';
 
 import './critical.scss';
@@ -23,7 +23,7 @@ render(
   </Provider>,
   document.getElementById('root')
 );
-registerServiceWorker();
+unregister(); // our bundle is currently too big to be added to SW cache, causing problems on every deploy
 
 // Kill loading screen
 document.getElementById('critical').className += ' ready';

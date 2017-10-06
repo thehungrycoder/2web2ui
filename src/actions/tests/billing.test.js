@@ -28,9 +28,11 @@ describe('Action Creator: Billing', () => {
     snapActions();
   });
 
-  it('should dispatch an update subscription action', () => {
-    mockStore.dispatch(billing.updateSubscription('test-code'));
-    snapActions();
+  it('should dispatch an update subscription action', async () => {
+    const dispatchMock = jest.fn((a) => Promise.resolve(a));
+    const thunk = billing.updateSubscription('test-code');
+    await thunk(dispatchMock);
+    expect(_.flatten(dispatchMock.mock.calls)).toMatchSnapshot();
   });
 
   it('should dispatch an update billing action', () => {
@@ -75,6 +77,17 @@ describe('Action Creator: Billing', () => {
     billingHelpers.formatCreateData = jest.fn(() => ({ formatted: 'data' }));
 
     const thunk = billing.billingCreate({ some: 'test-values' });
+    await thunk(dispatchMock);
+
+    expect(_.flatten(dispatchMock.mock.calls)).toMatchSnapshot();
+  });
+
+  it('should dispatch a chained billing update action', async () => {
+    const dispatchMock = jest.fn((a) => Promise.resolve(a));
+    const accountKey = { some: 'test-billing-data' };
+    billingHelpers.formatUpdateData = jest.fn((values) => ({ accountKey }));
+
+    const thunk = billing.billingUpdate({ planpicker: { code: 'test-plan' }});
     await thunk(dispatchMock);
 
     expect(_.flatten(dispatchMock.mock.calls)).toMatchSnapshot();

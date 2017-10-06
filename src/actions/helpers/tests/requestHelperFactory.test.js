@@ -1,5 +1,4 @@
 import factory from '../requestHelperFactory';
-const badSuccessError = new Error('Promise succeeded when it should have failed');
 
 describe('Helper: Request Helper Factory', () => {
 
@@ -20,16 +19,16 @@ describe('Helper: Request Helper Factory', () => {
     let onFailMock;
     let requestMock;
     let transformHttpOptionsMock;
-    
+
     let response;
     let meta;
     let action;
-  
+
     beforeEach(() => {
-      response = {}
+      response = {};
       meta = {};
       action = { type: 'TEST', meta };
-  
+
       dispatchMock = jest.fn();
       getStateMock = jest.fn();
       onSuccessMock = jest.fn();
@@ -46,24 +45,24 @@ describe('Helper: Request Helper Factory', () => {
         request: requestMock,
         transformHttpOptions: transformHttpOptionsMock
       });
-  
+
       return request(action)(dispatchMock, getStateMock).then((result) => {
         expect(dispatchMock).toHaveBeenCalledTimes(2);
-        
+
         const pendingAction = dispatchMock.mock.calls[0][0];
         expect(pendingAction.type).toEqual('TEST_PENDING');
         expect(pendingAction.meta).toBe(meta);
-  
+
         const successAction = dispatchMock.mock.calls[1][0];
         expect(successAction.type).toEqual('TEST_SUCCESS');
         expect(successAction.payload).toBe(response);
         expect(successAction.meta).toBe(meta);
-  
+
         expect(requestMock).toHaveBeenCalled();
         expect(transformHttpOptionsMock).toHaveBeenCalled();
       });
     });
-  
+
     it('should dispatch a default failure event', () => {
       const err = new Error('a message');
       err.response = {};
@@ -77,11 +76,11 @@ describe('Helper: Request Helper Factory', () => {
       return request(action)(dispatchMock, getStateMock)
         .catch((err) => {
           expect(dispatchMock).toHaveBeenCalledTimes(2);
-          
+
           const pendingAction = dispatchMock.mock.calls[0][0];
           expect(pendingAction.type).toEqual('TEST_PENDING');
           expect(pendingAction.meta).toBe(meta);
-    
+
           const failAction = dispatchMock.mock.calls[1][0];
           expect(failAction.type).toEqual('TEST_FAIL');
           expect(failAction.payload).toEqual({ message: err.message, response });
@@ -132,6 +131,6 @@ describe('Helper: Request Helper Factory', () => {
     });
 
   });
-  
+
 
 });

@@ -1,0 +1,221 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Confirmation:  should render correctly with a downgrade 1`] = `
+<t>
+  <Panel.Section>
+    <small>
+      Current Plan
+    </small>
+    <h4>
+      1,000
+       emails 
+      <span>
+        for $
+        100
+        /mo
+      </span>
+    </h4>
+  </Panel.Section>
+  <Panel.Section>
+    <div>
+      <small>
+        New Plan
+      </small>
+      <h5>
+        500
+         emails 
+        <span>
+          for $
+          50
+          /mo
+        </span>
+      </h5>
+    </div>
+    <p>
+      Your downgrade will take effect at the end of the current billing cycle. You will not be able to make any plan changes until your downgrade takes effect.
+    </p>
+    <div>
+      <p>
+        Note: your current plan includes a free dedicated IP address.
+      </p>
+      <p>
+        If you downgrade to the selected plan, you will lose that discount and will be charged the standard $
+        20
+         / month price for each dedicated IP on your next statement.
+      </p>
+      <p>
+        To remove dedicated IPs from your account, please 
+        <a
+          href="mailto:support@sparkpost.com"
+        >
+          contact our support team
+        </a>
+        .
+      </p>
+    </div>
+  </Panel.Section>
+  <Panel.Section>
+    <t
+      destructive={true}
+      fullWidth={true}
+      primary={false}
+      size="default"
+      type="submit"
+    >
+      Downgrade Plan
+    </t>
+  </Panel.Section>
+</t>
+`;
+
+exports[`Confirmation:  should render correctly with a downgrade to free 1`] = `
+<t>
+  <Panel.Section>
+    <small>
+      Current Plan
+    </small>
+    <h4>
+      1,000
+       emails 
+      <span>
+        for $
+        100
+        /mo
+      </span>
+    </h4>
+  </Panel.Section>
+  <Panel.Section>
+    <div>
+      <small>
+        New Plan
+      </small>
+      <h5>
+        100
+         emails 
+        for Free
+      </h5>
+    </div>
+    <p>
+      Your downgrade will take effect at the end of the current billing cycle. You will not be able to make any plan changes until your downgrade takes effect.
+    </p>
+    <p>
+      This downgrade will remove all add-ons, including any dedicated IP addresses you may have purchased.
+    </p>
+  </Panel.Section>
+  <Panel.Section>
+    <t
+      destructive={true}
+      fullWidth={true}
+      primary={false}
+      size="default"
+      type="submit"
+    >
+      Downgrade Plan
+    </t>
+  </Panel.Section>
+</t>
+`;
+
+exports[`Confirmation:  should render correctly with an upgrade 1`] = `
+<t>
+  <Panel.Section>
+    <small>
+      Current Plan
+    </small>
+    <h4>
+      1,000
+       emails 
+      <span>
+        for $
+        100
+        /mo
+      </span>
+    </h4>
+  </Panel.Section>
+  <Panel.Section>
+    <div>
+      <small>
+        New Plan
+      </small>
+      <h5>
+        2,000
+         emails 
+        <span>
+          for $
+          200
+          /mo
+        </span>
+      </h5>
+    </div>
+    <p>
+      Your upgrade will be effective today and you'll be billed a pro-rated amount for your current billing cycle.
+    </p>
+    <div>
+      <p>
+        Note: your current plan includes a free dedicated IP address.
+      </p>
+      <p>
+        If you downgrade to the selected plan, you will lose that discount and will be charged the standard $
+        20
+         / month price for each dedicated IP on your next statement.
+      </p>
+      <p>
+        To remove dedicated IPs from your account, please 
+        <a
+          href="mailto:support@sparkpost.com"
+        >
+          contact our support team
+        </a>
+        .
+      </p>
+    </div>
+  </Panel.Section>
+  <Panel.Section>
+    <t
+      destructive={false}
+      fullWidth={true}
+      primary={true}
+      size="default"
+      type="submit"
+    >
+      Upgrade Plan
+    </t>
+  </Panel.Section>
+</t>
+`;
+
+exports[`Confirmation:  should render with nothing selected 1`] = `
+<t>
+  <Panel.Section>
+    <small>
+      Current Plan
+    </small>
+    <h4>
+      1,000
+       emails 
+      <span>
+        for $
+        100
+        /mo
+      </span>
+    </h4>
+  </Panel.Section>
+  <Panel.Section>
+    <p>
+      Select a plan on the left to update your subscription
+    </p>
+  </Panel.Section>
+  <Panel.Section>
+    <t
+      destructive={false}
+      disabled={true}
+      fullWidth={true}
+      primary={true}
+      size="default"
+      type="submit"
+    >
+      Upgrade Plan
+    </t>
+  </Panel.Section>
+</t>
+`;

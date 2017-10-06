@@ -1,67 +1,75 @@
 import _ from 'lodash';
+import config from 'src/config';
 
 export function formatDataForCors(values) {
-  const {
-    firstName,
-    lastName,
-    cardType,
-    cardNumber,
-    expirationMonth,
-    expirationYear,
-    cardHolderName,
-    securityCode,
-    email,
-    address1,
-    address2,
-    city,
-    state,
-    country,
-    zipCode,
-    selectedPlan
-  } = values;
+  const { email, planpicker, card, billingAddress } = values;
 
   // For CORS Endpoint + sift
   const corsData = {
     email,
-    cardholder_name: cardHolderName,
-    address1,
-    address2,
-    city,
-    state,
-    country,
-    zip_code: zipCode,
-    bin: cardNumber.slice(0, 6),
-    last_four: cardNumber.slice(-4),
-    plan_id: selectedPlan.billingId
+    cardholder_name: card.name,
+    address1: billingAddress.streetAddress,
+    address2: null,
+    city: null,
+    state: billingAddress.state,
+    country: billingAddress.country,
+    zip_code: billingAddress.zip,
+    bin: card.number.slice(0, 6),
+    last_four: card.number.slice(-4),
+    plan_id: planpicker.billingId
   };
+
 
   // For Zuora
   const billingData = {
-    billingId: selectedPlan.billingId,
+    billingId: planpicker.billingId,
     billToContact: {
-      firstName,
-      lastName,
+      firstName: billingAddress.firstName,
+      lastName: billingAddress.lastName,
       workEmail: email,
-      country,
-      state
+      country: billingAddress.country,
+      state: billingAddress.state
     },
     creditCard: {
-      cardType,
-      cardNumber,
-      expirationMonth,
-      expirationYear,
-      securityCode,
+      cardType: card.type,
+      cardNumber: card.number,
+      expirationMonth: card.expMonth,
+      expirationYear: card.expYear,
+      securityCode: card.securityCode,
       cardHolderInfo: {
-        cardHolderName: cardHolderName,
-        addressLine1: address1,
-        addressLine2: address2,
-        city,
-        zipCode
+        cardHolderName: card.name,
+        addressLine1: billingAddress.streetAddress,
+        addressLine2: null,
+        city: null,
+        zipCode: billingAddress.zip
       }
     }
   };
 
   return { corsData, billingData };
+}
+
+export function formatUpdateData({ accountKey, billingAddress, card }) {
+  const { securityCode } = card;
+  const { zip, country, state } = billingAddress;
+  return {
+    accountKey,
+    defaultPaymentMethod: true,
+    cardHolderInfo: {
+      cardHolderName: card.name,
+      addressLine1: billingAddress.streetAddress,
+      addressLine2: null,
+      city: null,
+      zipCode: zip,
+      country,
+      state
+    },
+    creditCardNumber: card.number.replace(/\W/g, ''),
+    expirationMonth: card.expMonth,
+    expirationYear: card.expYear,
+    securityCode,
+    creditCardType: card.type
+  };
 }
 
 export function formatCreateData({
@@ -126,4 +134,14 @@ export function getZipLabel(country) {
   }
 
   return 'Zip/Postal Code';
+}
+
+/**
+ * Reshapes type strings from what the payment lib provides to a format our api accepts
+ */
+export function formatCardTypes(cards) {
+  return cards.map((card) => {
+    const type = _.find(config.cardTypes, { paymentFormat: card.type });
+    return { ...card, type: type ? type.apiFormat : card.type };
+  });
 }
