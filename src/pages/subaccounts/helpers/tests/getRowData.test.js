@@ -27,8 +27,8 @@ const terminated = {
 cases('Get row data', (opts) => {
   const rowData = getRowData(opts.subaccount);
   expect(rowData).toMatchSnapshot();
-}, [
-  { name: 'active', subaccount: active },
-  { name: 'suspended', subaccount: suspended },
-  { name: 'terminated', subaccount: terminated }
-]);
+}, {
+  active: { subaccount: active },
+  suspended: { subaccount: suspended },
+  terminated: { subaccount: terminated }
+});
