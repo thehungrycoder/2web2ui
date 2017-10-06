@@ -49,6 +49,10 @@ export default [
       {
         label: 'Users',
         to: '/account/users'
+      },
+      {
+        label: 'Tracking Domains',
+        to: '/account/tracking-domains'
       }
     ]
   }
