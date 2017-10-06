@@ -4,7 +4,7 @@ import {
   billing,
   DashboardPage,
   ProfilePage,
-  credentials,
+  apiKeys,
   reports,
   templates,
   webhooks
@@ -114,8 +114,18 @@ export default [
     condition: hasGrants('webhooks/modify')
   },
   {
-    path: '/account/credentials',
-    component: credentials.ListPage,
+    path: '/account/api-keys',
+    component: apiKeys.ListPage,
+    condition: hasGrants('api_keys/manage')
+  },
+  {
+    path: '/account/api-keys/create',
+    component: apiKeys.CreatePage,
+    condition: hasGrants('api_keys/manage')
+  },
+  {
+    path: '/account/api-keys/details/:id',
+    component: apiKeys.DetailsPage,
     condition: hasGrants('api_keys/manage')
   },
   {
@@ -129,7 +139,7 @@ export default [
     condition: hasGrants('account/manage')
   },
   {
-    path: '/account/billing/change',
+    path: '/account/billing/plan',
     component: billing.ChangePlanPage,
     condition: hasGrants('account/manage')
   }
