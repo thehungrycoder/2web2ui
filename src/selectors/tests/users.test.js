@@ -6,10 +6,10 @@ describe('Users Selectors', () => {
     users: {
       entities: [
         { name: 'Zebra', username: 'zebra' },
-        { name: 'Ape', username: 'ape' },
+        { name: 'Ape', username: 'ape' }
       ],
-      sortKey: 'name',
-    },
+      sortKey: 'name'
+    }
   };
 
   it('returns enriched and sorted list', () => {

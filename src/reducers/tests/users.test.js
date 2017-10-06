@@ -18,11 +18,11 @@ const state = {
 const TEST_CASES = {
   'removes user from entities': {
     type: 'DELETE_USER_SUCCESS',
-    meta: { data: { username: 'test-user-two' } }
+    meta: { data: { username: 'test-user-two' }}
   },
   'ignores update for unknown user': {
     type: 'UPDATE_USER_SUCCESS',
-    meta: { data: { username: 'unknown-user' } }
+    meta: { data: { username: 'unknown-user' }}
   },
   'updates users access level from admin to reporting': {
     type: 'UPDATE_USER_SUCCESS',
