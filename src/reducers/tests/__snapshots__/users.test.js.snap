@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Users reducer ignores update for unknown user 1`] = `
+Object {
+  "entities": Object {
+    "test-user-one": Object {
+      "access": "admin",
+      "username": "test-user-one",
+    },
+    "test-user-two": Object {
+      "access": "reporting",
+      "username": "test-user-two",
+    },
+  },
+  "error": null,
+  "loading": false,
+  "sortKey": "name",
+}
+`;
+
+exports[`Users reducer removes user from entities 1`] = `
+Object {
+  "entities": Object {
+    "test-user-one": Object {
+      "access": "admin",
+      "username": "test-user-one",
+    },
+  },
+  "error": null,
+  "loading": false,
+  "sortKey": "name",
+}
+`;
+
+exports[`Users reducer updates users access level from admin to reporting 1`] = `
+Object {
+  "entities": Object {
+    "test-user-one": Object {
+      "access": "reporting",
+      "username": "test-user-one",
+    },
+    "test-user-two": Object {
+      "access": "reporting",
+      "username": "test-user-two",
+    },
+  },
+  "error": null,
+  "loading": false,
+  "sortKey": "name",
+}
+`;

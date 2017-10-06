@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Users list page renders error banner, table, and hidden modal 1`] = `
+<App
+  loading={false}
+>
+  <t
+    title="Users"
+  />
+  <ApiErrorBanner
+    errorDetails="Uh oh! It broke."
+    message="Sorry, we seem to have had some trouble loading your users."
+  />
+  <TableCollection
+    columns={
+      Array [
+        "Name",
+        "Role",
+        "Email",
+        "Last Login",
+        null,
+      ]
+    }
+    getRowData={[Function]}
+    pagination={true}
+  />
+  <DeleteModal
+    handleDelete={[Function]}
+    handleToggle={[Function]}
+    open={false}
+    text="Are you sure you want to delete undefined?"
+    title="Delete User"
+  />
+</App>
+`;
+
+exports[`Users list page renders table and hidden modal 1`] = `
+<App
+  loading={false}
+>
+  <t
+    title="Users"
+  />
+  <TableCollection
+    columns={
+      Array [
+        "Name",
+        "Role",
+        "Email",
+        "Last Login",
+        null,
+      ]
+    }
+    getRowData={[Function]}
+    pagination={true}
+    rows={
+      Array [
+        Object {
+          "access": "admin",
+          "email": "user1@test.com",
+          "name": "Test User 1",
+        },
+        Object {
+          "access": "admin",
+          "email": "user2@test.com",
+          "name": "Test User 2",
+        },
+      ]
+    }
+  />
+  <DeleteModal
+    handleDelete={[Function]}
+    handleToggle={[Function]}
+    open={false}
+    text="Are you sure you want to delete undefined?"
+    title="Delete User"
+  />
+</App>
+`;

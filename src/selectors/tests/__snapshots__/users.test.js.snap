@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Users Selectors returns enriched and sorted list 1`] = `
+Array [
+  Object {
+    "isCurrentUser": false,
+    "name": "Ape",
+    "username": "ape",
+  },
+  Object {
+    "isCurrentUser": true,
+    "name": "Zebra",
+    "username": "zebra",
+  },
+]
+`;

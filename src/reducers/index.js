@@ -14,6 +14,7 @@ import sendingDomains from './sendingDomains';
 import subaccounts from './subaccounts';
 import summaryChart from './summaryChart';
 import templates from './templates';
+import users from './users';
 import webhooks from './webhooks';
 
 const appReducer = combineReducers({
@@ -31,6 +32,7 @@ const appReducer = combineReducers({
   subaccounts,
   summaryChart,
   templates,
+  users,
   webhooks
 });
 
