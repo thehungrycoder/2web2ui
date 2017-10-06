@@ -93,6 +93,11 @@ exports[`renders without crashing 1`] = `
       exact={true}
       path="/account/billing/plan"
     />
+    <withRouter(Connect(_ProtectedRoute))
+      component={[Function]}
+      exact={true}
+      path="/account/subaccounts"
+    />
     <Connect(GlobalAlert) />
   </div>
 </BrowserRouter>
