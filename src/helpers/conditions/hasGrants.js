@@ -11,5 +11,5 @@ const memoizedCompareGrants = _.memoize(
 );
 
 export default function hasGrants(...required) {
-  return ({ state }) => memoizedCompareGrants(required, getGrantsList(state));
+  return (accessConditionState) => memoizedCompareGrants(required, getGrantsList(accessConditionState));
 }

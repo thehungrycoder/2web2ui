@@ -1,5 +1,6 @@
 import _ from 'lodash';
+import config from 'src/config';
 
 export default function configFlag(flagPath) {
-  return ({ config }) => _.get(config, flagPath, false);
+  return () => _.get(config, flagPath, false);
 }

@@ -1,7 +1,6 @@
 import routes from 'src/config/routes';
 import navItems from './navItems';
 import _ from 'lodash';
-import config from 'src/config';
 
 const routesByPath = _.keyBy(routes, 'path');
 
@@ -15,18 +14,18 @@ export function mapNavToRoutes(items) {
   });
 }
 
-export function filterNavByAccess(items, store) {
+export function filterNavByAccess(items, accessConditionState) {
   return items.filter((item) => {
     const condition = _.get(item, 'route.condition');
 
     // if condition function returns false, block access here
-    if (typeof condition === 'function' && !condition({ store, config })) {
+    if (typeof condition === 'function' && !condition(accessConditionState)) {
       return false;
     }
 
     // do the filter process on children, if they exist
     if (item.children) {
-      item.children = filterNavByAccess(item.children, store);
+      item.children = filterNavByAccess(item.children, accessConditionState);
 
       // if all children are eliminated by access, remove this parent too
       if (item.children.length === 0) {
@@ -38,8 +37,12 @@ export function filterNavByAccess(items, store) {
   });
 }
 
-export default function prepareNavItems(store) {
-  return navItems;
-  // temporarily bypassing this until we figure out how to be dynamic here
-  // return filterNavByAccess(mapNavToRoutes(navItems), store);
+export function prepareNavItems(accessConditionState) {
+  return filterNavByAccess(mapNavToRoutes(navItems), accessConditionState);
 }
+
+// This function is memoized against the reference value of the state object passed to it
+// This prevents it from re-calculating unless the state has changed
+const memoizedPrepareNavItems = _.memoize(prepareNavItems);
+
+export default memoizedPrepareNavItems;
