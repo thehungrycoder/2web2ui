@@ -3,21 +3,17 @@ import TableCollection from 'src/components/collection/TableCollection';
 
 import TrackingDomainsListHeader from './TrackingDomainsListHeader';
 
-import getRowData from '../helpers/getRowData';
+import { getRowData, getRowDataWithSubaccount } from '../helpers/getRowData';
 
 const TrackingDomainsCollection = ({ rows, hasSubaccounts }) => {
-  const columns = ['Domain', 'Status'];
-
-  if (hasSubaccounts) {
-    columns.push('Subaccount');
-  }
+  const columns = hasSubaccounts ? ['Domain', 'Status', 'Subaccount'] : ['Domain', 'Status'];
 
   return (
     <div>
       <TrackingDomainsListHeader />
       <TableCollection
         columns={columns}
-        getRowData={getRowData}
+        getRowData={ hasSubaccounts ? getRowDataWithSubaccount : getRowData }
         pagination={true}
         rows={rows}
       />

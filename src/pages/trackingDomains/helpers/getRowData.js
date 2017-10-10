@@ -13,14 +13,29 @@ const resolveStatus = ({ verified, compliance_status }) => {
   }
 };
 
+const linkColumn = (domain, isDefault) => (
+    <div>
+      <Link to={`/account/trackingDomains/${domain}`}>{domain}</Link>
+      { isDefault && ' (default)' }
+    </div>
+  );
+
 /*
  Tracking Domains getRowData passed to TableCollection in ListPage.
 */
-const getRowData = ({ domain, status, subaccount_id }) => ([
-  <Link to={`/account/trackingDomains/${domain}`}>{domain}</Link>,
-  resolveStatus(status),
-  subaccount_id ? subaccount_id : null
-]);
+export const getRowData = (trackingDomain) => {
+  const { domain, status } = trackingDomain;
+  return [
+    linkColumn(domain, trackingDomain.default),
+    resolveStatus(status)
+  ];
+};
 
-
-export default getRowData;
+export const getRowDataWithSubaccount = (trackingDomain) => {
+  const { domain, status, subaccount_id } = trackingDomain;
+  return [
+    linkColumn(domain, trackingDomain.default),
+    resolveStatus(status),
+    subaccount_id ? subaccount_id : null
+  ];
+};
