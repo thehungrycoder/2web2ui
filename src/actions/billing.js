@@ -1,4 +1,4 @@
-/* eslint-disable max-lines*/
+/* eslint-disable max-lines */
 import { formatDataForCors, formatCreateData, formatUpdateData, formatContactData } from 'src/helpers/billing';
 import { fetch as fetchAccount } from './account';
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
@@ -44,10 +44,8 @@ export function updateBillingContact(data) {
       url: '/account/billing',
       data: {
         ...formatContactData(data),
-        address1: 'iamrequired',
-        city: 'iamrequired',
-        zip_code: 'iamrequired',
-        country_code: 'NO'
+        address1: 'N/A', // TODO remove when accusers is updated FAD-5660
+        city: 'N/A'
       }
     }
   });

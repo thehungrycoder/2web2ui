@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 
-import { updateBillingContact } from 'src/actions/billing';
+import { updateBillingContact, getBillingCountries } from 'src/actions/billing';
 import { showAlert } from 'src/actions/globalAlert';
 import { updateContactInitialValues } from 'src/selectors/accountBillingForms';
 
@@ -14,6 +14,9 @@ import styles from './formContainers.module.scss';
 const FORMNAME = 'updateContact';
 
 class UpdateContact extends Component {
+  componentDidMount() {
+    this.props.getBillingCountries();
+  }
 
   onSubmit = (values) => {
     const { updateBillingContact, onCancel, reset, showAlert } = this.props;
@@ -51,6 +54,6 @@ const mapStateToProps = (state) => ({
   initialValues: updateContactInitialValues(state)
 });
 
-const mapDispatchtoProps = { updateBillingContact, showAlert };
+const mapDispatchtoProps = { getBillingCountries, updateBillingContact, showAlert };
 const formOptions = { form: FORMNAME, enableReinitialize: true };
 export default connect(mapStateToProps, mapDispatchtoProps)(reduxForm(formOptions)(UpdateContact));

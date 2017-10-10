@@ -55,11 +55,7 @@ class SummaryPage extends Component {
           <Panel.Section {...changePlanActions}>
             <PlanSummary label='Your Plan' plan={currentPlan} />
           </Panel.Section>
-          <Panel.Section actions={[{ content: 'Add Dedicated IPs', onClick: () => this.handleModal(IP_MODAL) }]}>
-            <SummarySection label='Dedicated IPs'>
-              <h6>0</h6>
-            </SummarySection>
-          </Panel.Section>
+          { shouldExposeCard && this.renderDedicatedIps() }
         </Panel>
 
         { shouldExposeCard && this.renderBillingSummary() }
@@ -77,12 +73,20 @@ class SummaryPage extends Component {
     );
   }
 
+  renderDedicatedIps = () => (
+    <Panel.Section actions={[{ content: 'Add Dedicated IPs', onClick: () => this.handleModal(IP_MODAL) }]}>
+      <SummarySection label='Dedicated IPs'>
+        <h6>0</h6>
+      </SummarySection>
+    </Panel.Section>
+  )
+
   renderBillingSummary = () => {
     const { billing } = this.props;
     return (
       <Panel title='Billing'>
         <Panel.Section actions={[{ content: 'Update Payment Information', onClick: () => this.handleModal(PAYMENT_MODAL) }]}>
-          <CardSummary label='Credit Card' billing={this.props.billing} />
+          <CardSummary label='Credit Card' billing={billing} />
         </Panel.Section>
         <Panel.Section actions={[{ content: 'Update Billing Contact', onClick: () => this.handleModal(CONTACT_MODAL) }]}>
           <SummarySection label='Billing Contact'>

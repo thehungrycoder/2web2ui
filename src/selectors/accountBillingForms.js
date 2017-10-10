@@ -38,11 +38,15 @@ export function updatePaymentInitialValues(state) {
  * Selects initial values for the update contact form on the summary page
  */
 export function updateContactInitialValues(state) {
+  const { billing } = state.account;
   return {
     billingContact: {
-      email: state.account.billing.email,
-      firstName: state.account.billing.first_name,
-      lastName: state.account.billing.last_name
+      email: billing.email,
+      firstName: billing.first_name,
+      lastName: billing.last_name,
+      country: billing.country_code,
+      state: billing.state,
+      zip: billing.zip_code
     }
   };
 }

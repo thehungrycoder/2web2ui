@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Field, formValueSelector } from 'redux-form';
+import { Field, formValueSelector, change } from 'redux-form';
 import PropTypes from 'prop-types';
 
 import { Grid } from '@sparkpost/matchbox';
@@ -16,7 +16,6 @@ import _ from 'lodash';
  * billingAddress.firstName
  * billingAddress.lastName
  * billingAddress.country
- * billingAddress.streetAddress
  * billingAddress.state (if country US | CA)
  * billingAddress.zip
  */
@@ -25,10 +24,20 @@ export class BillingAddressForm extends Component {
     showName: true
   }
 
+  handleCountryChange = (e) => {
+    const value = e.target.value;
+
+    // Removes state value from store
+    if (value !== 'US' || value !== 'CA') {
+      this.props.change(this.props.formName, 'billingContact.state', null);
+    }
+  }
+
   componentDidMount() {
     const { firstName, lastName } = this.props;
 
     // Hide name fields if we already have them
+    // Their values are still in the redux-form store although the fields are hidden
     if (firstName && lastName) {
       this.setState({ showName: false });
     }
@@ -37,7 +46,7 @@ export class BillingAddressForm extends Component {
   render() {
     const { countries = [], countryValue, disabled } = this.props;
 
-    const stateOrProvince = countryValue === 'US' || countryValue === 'CA'
+    const stateOrProvince = countries.length && (countryValue === 'US' || countryValue === 'CA')
       ? <Grid.Column xs={6}>
           <Field
             label={countryValue === 'US' ? 'State' : 'Province'}
@@ -78,13 +87,6 @@ export class BillingAddressForm extends Component {
         <p><small>Billing Address</small></p>
         { nameFields }
         <Field
-          label='Street Address'
-          name='billingAddress.streetAddress'
-          component={TextFieldWrapper}
-          validate={required}
-          disabled={disabled}
-        />
-        <Field
           label='Country'
           name='billingAddress.country'
           placeholder='Select a country'
@@ -92,6 +94,7 @@ export class BillingAddressForm extends Component {
           options={countries}
           validate={required}
           disabled={disabled}
+          onChange={this.handleCountryChange}
         />
         <Grid>
           { stateOrProvince }
@@ -128,4 +131,4 @@ const mapStateToProps = (state, { formName }) => {
     lastName: selector(state, 'billingAddress.lastName')
   };
 };
-export default connect(mapStateToProps, null)(BillingAddressForm);
+export default connect(mapStateToProps, { change })(BillingAddressForm);
