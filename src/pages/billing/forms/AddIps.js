@@ -5,9 +5,9 @@ import { reduxForm } from 'redux-form';
 import { showAlert } from 'src/actions/globalAlert';
 
 import { Panel, Button } from '@sparkpost/matchbox';
-import DedicatedIpsForm from './forms/DedicatedIpsForm';
+import DedicatedIpsForm from './fields/DedicatedIpsForm';
 
-import styles from './formContainers.module.scss';
+import styles from './Forms.module.scss';
 
 const FORMNAME = 'add-ips';
 

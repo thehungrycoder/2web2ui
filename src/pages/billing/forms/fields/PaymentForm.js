@@ -8,7 +8,7 @@ import { required } from 'src/helpers/validation';
 import Payment from 'payment';
 import { formatCardTypes } from 'src/helpers/billing';
 
-import styles from './Forms.module.scss';
+import styles from './Fields.module.scss';
 
 /**
  * This component will register the following redux-form fields

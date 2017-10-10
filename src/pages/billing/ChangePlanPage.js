@@ -6,7 +6,7 @@ import { Layout } from 'src/components';
 import { Page } from '@sparkpost/matchbox';
 
 import { PendingPlanBanner, SuspendedBanner } from './components/Banners';
-import ChangePlan from './formContainers/ChangePlan';
+import ChangePlan from './forms/ChangePlan';
 
 import { getPlans } from 'src/actions/account';
 import { getBillingCountries } from 'src/actions/billing';

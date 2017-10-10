@@ -11,8 +11,8 @@ import { selectPublicPlans, selectCurrentPlan, shouldExposeCard } from 'src/sele
 import { Panel, Grid } from '@sparkpost/matchbox';
 import { PlanPicker } from 'src/components';
 
-import PaymentForm from './forms/PaymentForm';
-import BillingAddressForm from './forms/BillingAddressForm';
+import PaymentForm from './fields/PaymentForm';
+import BillingAddressForm from './fields/BillingAddressForm';
 import Confirmation from '../components/Confirmation';
 import { CardSummary } from '../components/SummarySection';
 

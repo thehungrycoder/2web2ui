@@ -8,9 +8,9 @@ import { fetch as fetchAccount, getPlans } from 'src/actions/account';
 import { shouldExposeCard, canChangePlan, selectCurrentPlan, selectPublicPlans } from 'src/selectors/accountBillingInfo';
 
 import { PremiumBanner, EnterpriseBanner, SuspendedBanner, ManuallyBilledBanner, PendingPlanBanner } from './components/Banners';
-import UpdatePayment from './formContainers/UpdatePayment';
-import UpdateContact from './formContainers/UpdateContact';
-import AddIps from './formContainers/AddIps';
+import UpdatePayment from './forms/UpdatePayment';
+import UpdateContact from './forms/UpdateContact';
+import AddIps from './forms/AddIps';
 import { SummarySection, PlanSummary, CardSummary } from './components/SummarySection';
 
 const PAYMENT_MODAL = 'payment';

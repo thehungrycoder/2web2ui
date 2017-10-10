@@ -8,7 +8,7 @@ import { TextFieldWrapper, SelectWrapper } from 'src/components';
 import { required } from 'src/helpers/validation';
 import { getZipLabel } from 'src/helpers/billing';
 
-import styles from './Forms.module.scss';
+import styles from './Fields.module.scss';
 import _ from 'lodash';
 
 /**

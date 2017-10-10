@@ -7,9 +7,9 @@ import { showAlert } from 'src/actions/globalAlert';
 import { updateContactInitialValues } from 'src/selectors/accountBillingForms';
 
 import { Panel, Button } from '@sparkpost/matchbox';
-import BillingContactForm from './forms/BillingContactForm';
+import BillingContactForm from './fields/BillingContactForm';
 
-import styles from './formContainers.module.scss';
+import styles from './Forms.module.scss';
 
 const FORMNAME = 'updateContact';
 
