@@ -20,12 +20,12 @@ import styles from './Fields.module.scss';
  * billingContact.state (if country US | CA)
  * billingContact.zip
  */
-class BillingContactForm extends Component {
+export class BillingContactForm extends Component {
   handleCountryChange = (e) => {
     const value = e.target.value;
 
     // Removes state value from store
-    if (value !== 'US' || value !== 'CA') {
+    if (value !== 'US' && value !== 'CA') {
       this.props.change(this.props.formName, 'billingContact.state', null);
     }
   }

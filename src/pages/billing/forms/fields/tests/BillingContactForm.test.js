@@ -1,5 +1,5 @@
 import React from 'react';
-import { BillingAddressForm } from '../BillingAddressForm';
+import { BillingContactForm } from '../BillingContactForm';
 import { shallow } from 'enzyme';
 
 describe('Billing Address Form:', () => {
@@ -15,23 +15,11 @@ describe('Billing Address Form:', () => {
   };
 
   beforeEach(() => {
-    wrapper = shallow(<BillingAddressForm {...props} />);
+    wrapper = shallow(<BillingContactForm {...props} />);
   });
 
   it('should render', () => {
-    const stateSpy = jest.spyOn(wrapper.instance(), 'setState');
     expect(wrapper).toMatchSnapshot();
-    wrapper.instance().componentDidMount()
-    expect(stateSpy).not.toHaveBeenCalled();
-    expect(wrapper).toHaveState('showName', true );
-  });
-
-  it('should not render name fields if provided', () => {
-    const stateSpy = jest.spyOn(wrapper.instance(), 'setState');
-    wrapper.setProps({ firstName: 'ann', lastName: 'perkins' });
-    wrapper.instance().componentDidMount()
-    expect(stateSpy).toHaveBeenCalledWith({ 'showName': false });
-    expect(wrapper).toHaveState('showName', false );
   });
 
   it('should show states', () => {
@@ -45,6 +33,6 @@ describe('Billing Address Form:', () => {
     expect(changeSpy).not.toHaveBeenCalled();
     changeSpy.mockReset();
     wrapper.instance().handleCountryChange({ target: { value: 'GG' }});
-    expect(changeSpy).toHaveBeenCalledWith(props.formName, 'billingAddress.state', null);
+    expect(changeSpy).toHaveBeenCalledWith(props.formName, 'billingContact.state', null);
   });
 });
