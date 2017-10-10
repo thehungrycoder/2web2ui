@@ -100,9 +100,10 @@ BillingContactForm.propTypes = {
 };
 
 // Get country value from state
-const mapStateToProps = (state, { formName }) =>
-  // const selector = formValueSelector(formName);
-   ({
-    // countryValue: selector(state, 'billingContact.country')
-   });
-export default connect(mapStateToProps, null)(BillingContactForm);
+// const mapStateToProps = (state, { formName }) => {
+//   const selector = formValueSelector(formName);
+//   return {
+//     countryValue: selector(state, 'billingContact.country')
+//   };
+// };
+export default connect({}, null)(BillingContactForm);

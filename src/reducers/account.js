@@ -1,5 +1,6 @@
 const initialState = {
-  loading: false
+  loading: false,
+  subscription: {}
 };
 
 export default (state = initialState, action) => {

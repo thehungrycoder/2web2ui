@@ -33,7 +33,7 @@ export const SuspendedBanner = ({ account }) => account.isSuspendedForBilling
  * @prop account Account state from redux store
  */
 export const ManuallyBilledBanner = ({ account, ...rest }) => {
-  if (!account.subscription || account.subscription.self_serve) {
+  if (account.subscription.self_serve || !account.subscription.plan_volume) {
     return null;
   }
 

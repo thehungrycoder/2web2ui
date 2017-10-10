@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -25,7 +24,6 @@ class SummaryPage extends Component {
 
   componentWillMount() {
     this.props.getPlans();
-    // this.props.fetchAccount({ include: 'usage,billing' })
   }
 
   handleModal = (modal = false) => {
@@ -97,17 +95,14 @@ class SummaryPage extends Component {
   }
 
   render() {
-    if (!this.props.account.subscription) {
-      return null;
-    }
+    const pageMarkup = this.props.account.subscription.self_serve
+      ? this.renderSummary()
+      : <ManuallyBilledBanner account={this.props.account} />;
+
     return (
       <Layout.App loading={this.props.loading}>
         <Page title='Billing'/>
-        {
-          !this.props.account.subscription.self_serve
-            ? <ManuallyBilledBanner account={this.props.account} />
-            : this.renderSummary()
-        }
+        { pageMarkup }
       </Layout.App>
     );
   }
