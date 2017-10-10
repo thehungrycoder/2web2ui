@@ -13,7 +13,6 @@ import { getBillingCountries } from 'src/actions/billing';
 import { canChangePlan } from 'src/selectors/accountBillingInfo';
 
 export class ChangePlanPage extends Component {
-
   componentWillMount() {
     this.props.getPlans();
     this.props.getBillingCountries();

@@ -208,7 +208,6 @@ exports[`Confirmation:  should render with nothing selected 1`] = `
   <Panel.Section>
     <t
       destructive={false}
-      disabled={true}
       fullWidth={true}
       primary={true}
       size="default"

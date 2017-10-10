@@ -31,25 +31,25 @@ describe('Confirmation: ', () => {
   };
 
   it('should render with nothing selected', () => {
-    const props = { current, selected: current };
+    const props = { current, selected: current, selfServe: true };
     const wrapper = shallow(<Confirmation {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render correctly with an upgrade', () => {
-    const props = { current, selected: upgrade };
+    const props = { current, selected: upgrade, selfServe: true };
     const wrapper = shallow(<Confirmation {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render correctly with a downgrade', () => {
-    const props = { current, selected: downgrade };
+    const props = { current, selected: downgrade, selfServe: true };
     const wrapper = shallow(<Confirmation {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render correctly with a downgrade to free', () => {
-    const props = { current, selected: free };
+    const props = { current, selected: free, selfServe: true };
     const wrapper = shallow(<Confirmation {...props} />);
     expect(wrapper).toMatchSnapshot();
   });

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Page: ChangePlanPage should render 1`] = `
+exports[`Page: ChangePlanPage should not render form if not allowed to change plan 1`] = `
 <App>
   <t
     breadcrumbAction={
@@ -17,46 +17,10 @@ exports[`Page: ChangePlanPage should render 1`] = `
   <Component
     account={Object {}}
   />
-  <Component
-    account={Object {}}
-  />
-  <form>
-    <t>
-      <Grid.Column>
-        <t
-          title="Select A Plan"
-        >
-          <Component />
-        </t>
-        <t
-          actions={null}
-          title="Pay With New Credit Card"
-        >
-          <Panel.Section>
-            <Connect(PaymentForm)
-              formName="changePlan"
-            />
-          </Panel.Section>
-          <Panel.Section>
-            <Connect(BillingAddressForm)
-              countries={Array []}
-              formName="changePlan"
-            />
-          </Panel.Section>
-        </t>
-      </Grid.Column>
-      <Grid.Column
-        md={5}
-        xs={12}
-      >
-        <Confirmation />
-      </Grid.Column>
-    </t>
-  </form>
 </App>
 `;
 
-exports[`Page: ChangePlanPage should render cc summary and toggle 1`] = `
+exports[`Page: ChangePlanPage should render form if allowed to change plan 1`] = `
 <App>
   <t
     breadcrumbAction={
@@ -73,40 +37,6 @@ exports[`Page: ChangePlanPage should render cc summary and toggle 1`] = `
   <Component
     account={Object {}}
   />
-  <Component
-    account={Object {}}
-  />
-  <form>
-    <t>
-      <Grid.Column>
-        <t
-          title="Select A Plan"
-        >
-          <Component />
-        </t>
-        <t
-          actions={
-            Array [
-              Object {
-                "content": "Use Another Credit Card",
-                "onClick": [Function],
-              },
-            ]
-          }
-          title="Pay With Saved Payment Method"
-        >
-          <Panel.Section>
-            <CardSummary />
-          </Panel.Section>
-        </t>
-      </Grid.Column>
-      <Grid.Column
-        md={5}
-        xs={12}
-      >
-        <Confirmation />
-      </Grid.Column>
-    </t>
-  </form>
+  <withRouter(Connect(ReduxForm)) />
 </App>
 `;

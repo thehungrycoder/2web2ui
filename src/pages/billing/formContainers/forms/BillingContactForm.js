@@ -106,4 +106,4 @@ BillingContactForm.propTypes = {
 //     countryValue: selector(state, 'billingContact.country')
 //   };
 // };
-export default connect({}, null)(BillingContactForm);
+export default connect(null, {})(BillingContactForm);
