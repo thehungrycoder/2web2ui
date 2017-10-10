@@ -35,11 +35,6 @@ describe('Action Creator: Billing', () => {
     expect(_.flatten(dispatchMock.mock.calls)).toMatchSnapshot();
   });
 
-  it('should dispatch an update billing action', () => {
-    mockStore.dispatch(billing.updateBilling({ some: 'data' }));
-    snapActions();
-  });
-
   it('should dispatch a cors action', () => {
     mockStore.dispatch(billing.cors('some-context', { some: 'cors-data' }));
     snapActions();

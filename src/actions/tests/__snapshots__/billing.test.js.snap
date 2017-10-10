@@ -179,21 +179,6 @@ Array [
 ]
 `;
 
-exports[`Action Creator: Billing should dispatch an update billing action 1`] = `
-Array [
-  Object {
-    "meta": Object {
-      "data": Object {
-        "some": "data",
-      },
-      "method": "PUT",
-      "url": "/account/subscription",
-    },
-    "type": "UPDATE_BILLING",
-  },
-]
-`;
-
 exports[`Action Creator: Billing should dispatch an update credit card action 1`] = `
 Array [
   Object {

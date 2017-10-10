@@ -1,35 +1,4 @@
-import { overviewProps, selectPublicPlans, selectCurrentPlan, selectIpPools } from '../accountBillingInfo';
-
-describe('Selector: Get Account Overview Info', () => {
-
-  let store;
-
-  beforeEach(() => {
-    store = {
-      account: {
-        subscription: {
-          plan: 'test plan',
-          code: 'test-plan-0817',
-          self_serve: true
-        }
-      },
-      billing: {
-        plansLoading: false,
-        plans: [
-          {
-            code: 'test-plan-0817',
-            status: 'public',
-            volume: 5000000
-          }
-        ]
-      }
-    };
-  });
-
-  it('should return the selected data for a customer with a billing account', () => {
-    expect(overviewProps(store)).toMatchSnapshot();
-  });
-});
+import * as billingInfo from '../accountBillingInfo';
 
 describe('Selector: public plans', () => {
   const store = {
@@ -44,7 +13,7 @@ describe('Selector: public plans', () => {
   };
 
   it('should get public plans and sort by volume', () => {
-    expect(selectPublicPlans(store)).toMatchSnapshot();
+    expect(billingInfo.selectPublicPlans(store)).toMatchSnapshot();
   });
 });
 
@@ -60,7 +29,41 @@ describe('Selector: current plan', () => {
   };
 
   it('should get current plan from billing', () => {
-    expect(selectCurrentPlan(store)).toMatchSnapshot();
+    expect(billingInfo.selectCurrentPlan(store)).toMatchSnapshot();
+  });
+});
+
+describe('Selector: should expose card', () => {
+  const store = {
+    account: { subscription: { code: 'qwe' }, billing: {}},
+    billing: {
+      plans: [
+        { status: 'public', code: '123' },
+        { status: 'public', code: 'qwe', isFree: false},
+      ]
+    }
+  }
+
+  it('should return true if on paid plan', () => {
+    expect(billingInfo.shouldExposeCard(store)).toEqual(true);
+  });
+});
+
+describe('Selector: can change plan', () => {
+  it('should return false with a suspension', () => {
+    const store = {
+      account: { isSuspendedForBilling: true }
+    };
+
+    expect(billingInfo.canChangePlan(store)).toEqual(false);
+  });
+
+  it('should return false with a pending plan change', () => {
+    const store = {
+      account: { pending_subscription: {} }
+    };
+
+    expect(billingInfo.canChangePlan(store)).toEqual(false);
   });
 });
 
@@ -75,11 +78,11 @@ describe('IP Pool List Selector', () => {
   };
 
   it('should format IP Pools for select options', () => {
-    expect(selectIpPools(store)).toMatchSnapshot();
+    expect(billingInfo.selectIpPools(store)).toMatchSnapshot();
   });
 
   it('should return empty array with no IP Pools', () => {
     store.ipPools = {};
-    expect(selectIpPools(store)).toMatchSnapshot();
+    expect(billingInfo.selectIpPools(store)).toMatchSnapshot();
   });
 });

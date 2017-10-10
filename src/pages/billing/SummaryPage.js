@@ -17,7 +17,7 @@ const PAYMENT_MODAL = 'payment';
 const CONTACT_MODAL = 'contact';
 const IP_MODAL = 'ip';
 
-class SummaryPage extends Component {
+export class SummaryPage extends Component {
   state = {
     show: false
   }

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Initial Values: change plan should return user name, email, and plan 1`] = `
+exports[`Billing Initial Values should return change plan values: with a billing id 1`] = `
 Object {
   "billingAddress": Object {
     "country": "_placeholder",
@@ -8,6 +8,47 @@ Object {
     "lastName": "perkins",
   },
   "email": "ann@perkins.com",
-  "planpicker": "Plan",
+  "planpicker": Object {
+    "billingId": "1",
+    "code": "abc",
+  },
+}
+`;
+
+exports[`Billing Initial Values should return change plan values: without billing id 1`] = `
+Object {
+  "billingAddress": Object {
+    "country": "_placeholder",
+    "firstName": "ann",
+    "lastName": "perkins",
+  },
+  "email": "ann@perkins.com",
+  "planpicker": Object {
+    "code": "im free",
+    "isFree": true,
+  },
+}
+`;
+
+exports[`Billing Initial Values should return update contact values 1`] = `
+Object {
+  "billingContact": Object {
+    "country": "GG",
+    "email": "ann@perkins.com",
+    "firstName": "ann",
+    "lastName": "perkins",
+    "state": "EZ",
+    "zip": "54321",
+  },
+}
+`;
+
+exports[`Billing Initial Values should return update payment values 1`] = `
+Object {
+  "billingAddress": Object {
+    "country": "_placeholder",
+    "firstName": "ann",
+    "lastName": "perkins",
+  },
 }
 `;

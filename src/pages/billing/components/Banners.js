@@ -41,7 +41,7 @@ export const ManuallyBilledBanner = ({ account, ...rest }) => {
     ? <p>
         You're scheduled to switch to the { account.pending_subscription.name } plan on { dateFormat(account.pending_subscription.effective_date) }. If you have any questions, please <a href={`mailto:${config.contact.supportEmail}`}>contact support</a>.
       </p>
-    : <p>To make changes to your plan, billing information, or addons <a href={`mailto:${config.contact.supportEmail}`}>contact support</a>.</p>;
+    : <p>To make changes to your plan, billing information, or addons, <a href={`mailto:${config.contact.supportEmail}`}>contact support</a>.</p>;
 
   const convertAction = !account.pending_subscription
     ? { content: 'Enable Automatic Billing', to: '/account/billing/plan', Component: Link }

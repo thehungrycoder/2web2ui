@@ -31,14 +31,9 @@ exports[`Billing Address Form: should render 1`] = `
   </t>
   <Field
     component={[Function]}
-    label="Street Address"
-    name="billingAddress.streetAddress"
-    validate={[Function]}
-  />
-  <Field
-    component={[Function]}
     label="Country"
     name="billingAddress.country"
+    onChange={[Function]}
     options={
       Array [
         Object {
@@ -102,14 +97,9 @@ exports[`Billing Address Form: should show states 1`] = `
   </t>
   <Field
     component={[Function]}
-    label="Street Address"
-    name="billingAddress.streetAddress"
-    validate={[Function]}
-  />
-  <Field
-    component={[Function]}
     label="Country"
     name="billingAddress.country"
+    onChange={[Function]}
     options={
       Array [
         Object {

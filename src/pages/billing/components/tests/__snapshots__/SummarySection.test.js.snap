@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Summary Sections:  should render card summary 1`] = `
+<SummarySection>
+  <h6>
+    <strong>
+      <t
+        name="CreditCard"
+        size={16}
+      />
+       
+      visa
+       ···· 
+      5555
+    </strong>
+  </h6>
+  <p>
+    Expires 
+    5
+    /
+    2025
+  </p>
+</SummarySection>
+`;
+
+exports[`Summary Sections:  should render plan summary 1`] = `
+<SummarySection
+  label="Your Plan"
+>
+  <div>
+    <h6>
+      <span>
+        <strong>
+          10
+        </strong>
+         emails per month
+      </span>
+       
+      <span>
+        for 
+        <strong>
+          $
+          100
+        </strong>
+        /mo
+      </span>
+    </h6>
+    <p>
+      $
+      0.10
+      /thousand extra emails
+    </p>
+  </div>
+</SummarySection>
+`;
+
+exports[`Summary Sections:  should render summary with a label and children 1`] = `
+<div>
+  <small>
+    omg
+  </small>
+  <div>
+    hello
+  </div>
+</div>
+`;
