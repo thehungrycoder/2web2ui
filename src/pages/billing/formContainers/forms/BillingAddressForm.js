@@ -29,7 +29,7 @@ export class BillingAddressForm extends Component {
 
     // Removes state value from store
     if (value !== 'US' || value !== 'CA') {
-      this.props.change(this.props.formName, 'billingContact.state', null);
+      this.props.change(this.props.formName, 'billingAddress.state', null);
     }
   }
 
