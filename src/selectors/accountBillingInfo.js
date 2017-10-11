@@ -29,7 +29,7 @@ export const publicPlansSelector = createSelector(
  */
 export const currentPlanSelector = createSelector(
   [currentPlanCodeSelector, plansSelector],
-  (currentPlanCode, plans) => _.find(plans, { code: currentPlanCode })
+  (currentPlanCode, plans) => _.find(plans, { code: currentPlanCode }) || {}
 );
 
 /**
