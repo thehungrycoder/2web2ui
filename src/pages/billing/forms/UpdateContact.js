@@ -31,7 +31,7 @@ export class UpdateContact extends Component {
     const { onCancel, handleSubmit, submitting } = this.props;
 
     return (
-      <form onSubmit={handleSubmit((values) => this.onSubmit(values))}>
+      <form onSubmit={handleSubmit(this.onSubmit)}>
         <Panel title='Update Billing Contact'>
           <Panel.Section>
             <BillingContactForm

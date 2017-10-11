@@ -71,14 +71,14 @@ export class ChangePlan extends Component {
 
     if (this.state.useSavedCC) {
       return (
-        <Panel title='Pay With Saved Payment Method' actions={[{ content: 'Use Another Credit Card', onClick: () => this.handleCardToggle() }]}>
+        <Panel title='Pay With Saved Payment Method' actions={[{ content: 'Use Another Credit Card', onClick: this.handleCardToggle }]}>
           <Panel.Section><CardSummary billing={billing} /></Panel.Section>
         </Panel>
       );
     }
 
     const savedPaymentAction = this.props.shouldExposeCard
-      ? [{ content: 'Use Saved Payment Method', onClick: () => this.handleCardToggle() }]
+      ? [{ content: 'Use Saved Payment Method', onClick: this.handleCardToggle }]
       : null;
 
     return (
@@ -110,7 +110,7 @@ export class ChangePlan extends Component {
       : plans;
 
     return (
-      <form onSubmit={this.props.handleSubmit((values) => this.onSubmit(values))}>
+      <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
         <Grid>
           <Grid.Column>
             <Panel title='Select A Plan'>

@@ -32,7 +32,7 @@ export class UpdatePayment extends Component {
     const { onCancel, handleSubmit, submitting } = this.props;
 
     return (
-      <form onSubmit={handleSubmit((values) => this.onSubmit(values))}>
+      <form onSubmit={handleSubmit(this.onSubmit)}>
         <Panel title='Update Payment Information'>
           <Panel.Section>
             <PaymentForm
