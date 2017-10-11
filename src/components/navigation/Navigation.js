@@ -6,18 +6,17 @@ import classnames from 'classnames';
 import { SparkPost } from 'src/components';
 import Item from './Item';
 import Footer from './Footer';
-import accessConditionState from 'src/selectors/accessConditionState';
-import prepareNavItems from './prepareNavItems';
+import selectNavItems from 'src/selectors/navItems';
 import { Icon } from '@sparkpost/matchbox';
 import styles from './Navigation.module.scss';
 
 class Navigation extends Component {
   state = {
     open: false
-  }
+  };
 
   renderItems(items) {
-    return prepareNavItems(this.props.accessConditionState).map((item, key) => (
+    return this.props.navItems.map((item, key) => (
       <Item {...item} location={this.props.location} key={key} />
     ));
   }
@@ -70,5 +69,5 @@ class Navigation extends Component {
 }
 
 export default withRouter(connect((state) => ({
-  accessConditionState: accessConditionState(state)
+  navItems: selectNavItems(state)
 }))(Navigation));
