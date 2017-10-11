@@ -6,12 +6,7 @@ import { AccessControl } from 'src/components/auth';
 export class ProtectedRoute extends Component {
 
   renderComponent(propsFromRoute) {
-    const { component: Component, grants = [], condition } = this.props;
-
-    if (grants.length === 0) {
-      // TODO: make this render the loading page somehow??
-      return null;
-    }
+    const { component: Component, condition } = this.props;
 
     return (
       <AccessControl condition={condition} redirect='/dashboard'>
@@ -35,8 +30,7 @@ export class ProtectedRoute extends Component {
   }
 }
 
-const mapStateToProps = ({ auth, currentUser = {}}) => ({
-  auth,
-  grants: currentUser.grants || []
+const mapStateToProps = ({ auth }) => ({
+  auth
 });
 export default connect(mapStateToProps)(ProtectedRoute);
