@@ -26,6 +26,10 @@ export class PlanPicker extends Component {
   }) => {
     const { plans, input, disabled } = this.props;
 
+    if (!selectedItem || !plans) {
+      return null;
+    }
+
     const items = plans.map((item, index) => {
       const classes = cx(
         styles.DropdownPlan,

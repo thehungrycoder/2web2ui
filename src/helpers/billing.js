@@ -1,4 +1,4 @@
-/* eslint-disable max-lines */
+/* eslint max-lines: ["error", 200] */
 import _ from 'lodash';
 import config from 'src/config';
 

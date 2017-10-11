@@ -1,4 +1,4 @@
-/* eslint-disable max-lines */
+/* eslint max-lines: ["error", 200] */
 import { formatDataForCors, formatCreateData, formatUpdateData, formatContactData } from 'src/helpers/billing';
 import { fetch as fetchAccount } from './account';
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
