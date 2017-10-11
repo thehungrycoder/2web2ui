@@ -149,17 +149,18 @@
       "phantomjs": true
     },
     "rules": {
+      "block-spacing": [
+        "error",
+        "always"
+      ],
+      "complexity": "off",
+      "react/jsx-no-bind": "off",
       "max-lines": [
         "error",
         {
           "max": 150,
           "skipComments": true
         }
-      ],
-      "complexity": "off",
-      "one-var": [
-        "error",
-        "never"
       ],
       "object-curly-spacing": [
         "error",
@@ -169,9 +170,9 @@
           "objectsInObjects": false
         }
       ],
-      "block-spacing": [
+      "one-var": [
         "error",
-        "always"
+        "never"
       ],
       "operator-linebreak": [
         "error",
