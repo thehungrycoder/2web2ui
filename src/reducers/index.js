@@ -15,6 +15,7 @@ import sendingDomains from './sendingDomains';
 import subaccounts from './subaccounts';
 import summaryChart from './summaryChart';
 import templates from './templates';
+import recipientLists from './recipientLists';
 import users from './users';
 import webhooks from './webhooks';
 
@@ -30,6 +31,7 @@ const appReducer = combineReducers({
   globalAlert,
   metrics,
   reportFilters,
+  recipientLists,
   sendingDomains,
   subaccounts,
   summaryChart,
