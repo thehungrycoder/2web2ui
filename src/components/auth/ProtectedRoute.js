@@ -16,9 +16,9 @@ export class ProtectedRoute extends Component {
   }
 
   render() {
-    const { component, auth, condition, ...rest } = this.props;
+    const { auth } = this.props;
     return (
-      <Route {...rest} render={(props) => (
+      <Route {...this.props} render={(props) => (
         auth.loggedIn ? this.renderComponent(props) : (
           <Redirect to={{
             pathname: '/auth',
