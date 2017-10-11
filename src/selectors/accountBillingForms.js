@@ -1,4 +1,4 @@
-import { selectCurrentPlan, selectPublicPlans } from './accountBillingInfo';
+import { currentPlanSelector, publicPlansSelector } from './accountBillingInfo';
 import _ from 'lodash';
 
 /**
@@ -7,8 +7,8 @@ import _ from 'lodash';
 export function changePlanInitialValues(state) {
 
   // Plans outside zuora won't be selectable through plan picker
-  const currentPlan = selectCurrentPlan(state);
-  const initialPlan = currentPlan.hasOwnProperty('billingId') ? currentPlan : _.find(selectPublicPlans(state), { isFree: true });
+  const currentPlan = currentPlanSelector(state);
+  const initialPlan = currentPlan.hasOwnProperty('billingId') ? currentPlan : _.find(publicPlansSelector(state), { isFree: true });
 
   return {
     email: state.currentUser.email, // This sets the email value even though the field does not exist

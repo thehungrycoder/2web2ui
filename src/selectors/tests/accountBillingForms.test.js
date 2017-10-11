@@ -13,14 +13,14 @@ describe('Billing Initial Values', () => {
 
   it('should return change plan values: with a billing id', () => {
     const store = { currentUser: user };
-    billingInfo.selectCurrentPlan = jest.fn(() => ({ billingId: '1', code: 'abc' }));
+    billingInfo.currentPlanSelector = jest.fn(() => ({ billingId: '1', code: 'abc' }));
     expect(changePlanInitialValues(store)).toMatchSnapshot();
   });
 
   it('should return change plan values: without billing id', () => {
     const store = { currentUser: user };
-    billingInfo.selectCurrentPlan = jest.fn(() => ({ code: 'notinzuora' }));
-    billingInfo.selectPublicPlans = jest.fn(() => ([
+    billingInfo.currentPlanSelector = jest.fn(() => ({ code: 'notinzuora' }));
+    billingInfo.publicPlansSelector = jest.fn(() => ([
       { isFree: true, code: 'im free' },
       { isFree: false, code: 'im not free' }
     ]));

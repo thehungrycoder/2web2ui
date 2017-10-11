@@ -10,7 +10,7 @@ import ChangePlan from './forms/ChangePlan';
 
 import { getPlans } from 'src/actions/account';
 import { getBillingCountries } from 'src/actions/billing';
-import { canChangePlan } from 'src/selectors/accountBillingInfo';
+import { canChangePlanSelector } from 'src/selectors/accountBillingInfo';
 
 export class ChangePlanPage extends Component {
   componentWillMount() {
@@ -33,7 +33,7 @@ export class ChangePlanPage extends Component {
 const mapStateToProps = (state) => ({
   loading: state.account.loading || state.billing.plansLoading || state.billing.countriesLoading,
   account: state.account,
-  canChangePlan: canChangePlan(state)
+  canChangePlan: canChangePlanSelector(state)
 });
 
 const mapDispatchtoProps = {

@@ -5,7 +5,7 @@ import { Layout } from 'src/components';
 import { Page, Panel, Modal, WindowEvent } from '@sparkpost/matchbox';
 
 import { fetch as fetchAccount, getPlans } from 'src/actions/account';
-import { shouldExposeCard, canChangePlan, selectCurrentPlan, selectPublicPlans } from 'src/selectors/accountBillingInfo';
+import { shouldExposeCardSelector, canChangePlanSelector, currentPlanSelector, publicPlansSelector } from 'src/selectors/accountBillingInfo';
 
 import { PremiumBanner, EnterpriseBanner, SuspendedBanner, ManuallyBilledBanner, PendingPlanBanner } from './components/Banners';
 import UpdatePayment from './forms/UpdatePayment';
@@ -116,9 +116,9 @@ const mapStateToProps = (state) => ({
   loading: state.account.loading || state.billing.plansLoading || !state.account.subscription,
   account: state.account,
   billing: state.account.billing,
-  shouldExposeCard: shouldExposeCard(state),
-  canChangePlan: canChangePlan(state),
-  currentPlan: selectCurrentPlan(state),
-  plans: selectPublicPlans(state)
+  shouldExposeCard: shouldExposeCardSelector(state),
+  canChangePlan: canChangePlanSelector(state),
+  currentPlan: currentPlanSelector(state),
+  plans: publicPlansSelector(state)
 });
 export default connect(mapStateToProps, { getPlans, fetchAccount })(SummaryPage);

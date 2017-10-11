@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom';
 import { billingCreate, billingUpdate, updateSubscription } from 'src/actions/billing';
 import { showAlert } from 'src/actions/globalAlert';
 import { changePlanInitialValues } from 'src/selectors/accountBillingForms';
-import { selectPublicPlans, selectCurrentPlan, shouldExposeCard } from 'src/selectors/accountBillingInfo';
+import { publicPlansSelector, currentPlanSelector, shouldExposeCardSelector } from 'src/selectors/accountBillingInfo';
 
 import { Panel, Grid } from '@sparkpost/matchbox';
 import { PlanPicker } from 'src/components';
@@ -131,9 +131,9 @@ const mapStateToProps = (state) => {
   return {
     account: state.account,
     billing: state.billing,
-    shouldExposeCard: shouldExposeCard(state),
-    plans: selectPublicPlans(state),
-    currentPlan: selectCurrentPlan(state),
+    shouldExposeCard: shouldExposeCardSelector(state),
+    plans: publicPlansSelector(state),
+    currentPlan: currentPlanSelector(state),
     selectedPlan: selector(state, 'planpicker'),
     initialValues: changePlanInitialValues(state)
   };

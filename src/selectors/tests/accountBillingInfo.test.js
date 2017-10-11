@@ -13,7 +13,7 @@ describe('Selector: public plans', () => {
   };
 
   it('should get public plans and sort by volume', () => {
-    expect(billingInfo.selectPublicPlans(store)).toMatchSnapshot();
+    expect(billingInfo.publicPlansSelector(store)).toMatchSnapshot();
   });
 });
 
@@ -29,7 +29,7 @@ describe('Selector: current plan', () => {
   };
 
   it('should get current plan from billing', () => {
-    expect(billingInfo.selectCurrentPlan(store)).toMatchSnapshot();
+    expect(billingInfo.currentPlanSelector(store)).toMatchSnapshot();
   });
 });
 
@@ -45,7 +45,7 @@ describe('Selector: should expose card', () => {
   }
 
   it('should return true if on paid plan', () => {
-    expect(billingInfo.shouldExposeCard(store)).toEqual(true);
+    expect(billingInfo.shouldExposeCardSelector(store)).toEqual(true);
   });
 });
 
@@ -55,7 +55,7 @@ describe('Selector: can change plan', () => {
       account: { isSuspendedForBilling: true }
     };
 
-    expect(billingInfo.canChangePlan(store)).toEqual(false);
+    expect(billingInfo.canChangePlanSelector(store)).toEqual(false);
   });
 
   it('should return false with a pending plan change', () => {
@@ -63,7 +63,7 @@ describe('Selector: can change plan', () => {
       account: { pending_subscription: {} }
     };
 
-    expect(billingInfo.canChangePlan(store)).toEqual(false);
+    expect(billingInfo.canChangePlanSelector(store)).toEqual(false);
   });
 });
 
