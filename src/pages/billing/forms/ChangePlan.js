@@ -18,7 +18,7 @@ import { CardSummary } from '../components/SummarySection';
 
 const FORMNAME = 'changePlan';
 
-class ChangePlan extends Component {
+export class ChangePlan extends Component {
 
   state = {
     useSavedCC: null

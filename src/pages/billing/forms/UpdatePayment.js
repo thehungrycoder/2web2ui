@@ -14,7 +14,7 @@ import styles from './Forms.module.scss';
 
 const FORMNAME = 'updatePayment';
 
-class UpdatePayment extends Component {
+export class UpdatePayment extends Component {
   componentDidMount() {
     this.props.getBillingCountries();
   }

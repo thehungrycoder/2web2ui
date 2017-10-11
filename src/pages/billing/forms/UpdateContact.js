@@ -13,7 +13,7 @@ import styles from './Forms.module.scss';
 
 const FORMNAME = 'updateContact';
 
-class UpdateContact extends Component {
+export class UpdateContact extends Component {
   componentDidMount() {
     this.props.getBillingCountries();
   }
