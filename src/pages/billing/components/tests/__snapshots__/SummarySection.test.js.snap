@@ -33,16 +33,15 @@ exports[`Summary Sections:  should render plan summary 1`] = `
         <strong>
           10
         </strong>
-         emails per month
+         emails
       </span>
        
       <span>
-        for 
         <strong>
-          $
+          for $
           100
         </strong>
-        /mo
+         per month
       </span>
     </h6>
     <p>

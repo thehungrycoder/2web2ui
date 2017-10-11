@@ -82,7 +82,7 @@ export class ChangePlan extends Component {
       : null;
 
     return (
-      <Panel title='Pay With New Credit Card' actions={savedPaymentAction}>
+      <Panel title='Add a Credit Card' actions={savedPaymentAction}>
         <Panel.Section>
           <PaymentForm
             formName={FORMNAME}
@@ -99,17 +99,22 @@ export class ChangePlan extends Component {
   }
 
   render() {
-    const { account, submitting, pristine, currentPlan, selectedPlan } = this.props;
+    const { account, submitting, pristine, currentPlan, selectedPlan, plans } = this.props;
 
     // Manually billed accounts can submit without changing plan
     const disableSubmit = submitting || (account.subscription.self_serve && (pristine || currentPlan.code === selectedPlan.code));
+
+    // Strip free plans for manually billed accounts looking to convert
+    const options = !account.subscription.self_serve
+      ? plans.filter((plan) => !plan.isFree)
+      : plans;
 
     return (
       <form onSubmit={this.props.handleSubmit((values) => this.onSubmit(values))}>
         <Grid>
           <Grid.Column>
             <Panel title='Select A Plan'>
-              <PlanPicker disabled={this.props.submitting} plans={this.props.plans} />
+              <PlanPicker disabled={this.props.submitting} plans={options} />
             </Panel>
             { this.renderCCSection() }
           </Grid.Column>

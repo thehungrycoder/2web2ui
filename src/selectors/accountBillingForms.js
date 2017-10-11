@@ -6,9 +6,13 @@ import _ from 'lodash';
  */
 export function changePlanInitialValues(state) {
 
-  // Plans outside zuora won't be selectable through plan picker
-  const currentPlan = currentPlanSelector(state);
-  const initialPlan = currentPlan.hasOwnProperty('billingId') ? currentPlan : _.find(publicPlansSelector(state), { isFree: true });
+  let initialPlan = currentPlanSelector(state);
+
+  // Plans outside zuora won't be selectable through plan picker (only possible through manually billed accounts)
+  // Picker default to the highest plan
+  if (!initialPlan.hasOwnProperty('billingId') && !state.account.subscription.self_serve) {
+    initialPlan = _.last(publicPlansSelector(state));
+  }
 
   return {
     email: state.currentUser.email, // This sets the email value even though the field does not exist

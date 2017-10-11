@@ -24,8 +24,8 @@ Object {
   },
   "email": "ann@perkins.com",
   "planpicker": Object {
-    "code": "im free",
-    "isFree": true,
+    "code": "im not free",
+    "isFree": false,
   },
 }
 `;

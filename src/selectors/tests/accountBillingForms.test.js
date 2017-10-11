@@ -18,7 +18,7 @@ describe('Billing Initial Values', () => {
   });
 
   it('should return change plan values: without billing id', () => {
-    const store = { currentUser: user };
+    const store = { currentUser: user, account: { subscription: { self_serve: false }} };
     billingInfo.currentPlanSelector = jest.fn(() => ({ code: 'notinzuora' }));
     billingInfo.publicPlansSelector = jest.fn(() => ([
       { isFree: true, code: 'im free' },

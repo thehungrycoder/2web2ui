@@ -9,6 +9,13 @@ const Confirmation = ({ current = {}, selected = {}, disableSubmit, selfServe })
   let ipMarkup = null;
   let addonMarkup = null;
   let currentPrice = '';
+  let buttonText = '';
+
+  if (!selfServe) {
+    buttonText = 'Enable Automatic Billing';
+  } else {
+    buttonText = isDowngrade ? 'Downgrade Plan' : 'Upgrade Plan';
+  }
 
   const selectedPrice = selected.monthly === 0
     ? 'for Free'
@@ -50,8 +57,6 @@ const Confirmation = ({ current = {}, selected = {}, disableSubmit, selfServe })
       addonMarkup = <p>This downgrade will remove all add-ons, including any dedicated IP addresses you may have purchased.</p>;
     }
   }
-
-  const buttonText = isDowngrade ? 'Downgrade Plan' : 'Upgrade Plan';
 
   return (
     <Panel>

@@ -4,18 +4,21 @@ import { Icon } from '@sparkpost/matchbox';
 
 const PlanSummary = ({ plan }) => {
   let content = '';
+  let monthly = '';
 
   if (plan) {
-    const monthly = plan.monthly
-      ? <span>for <strong>${ plan.monthly.toLocaleString() }</strong>/mo</span>
-      : null;
+    if (plan.monthly !== undefined) {
+      monthly = plan.monthly === 0
+          ? 'for Free'
+          : <span><strong>for ${plan.monthly.toLocaleString()}</strong> per month</span>;
+    }
 
     const overage = plan.overage
       ? <p>${ plan.overage.toFixed(2) }/thousand extra emails</p>
       : null;
 
     const volume = plan.volume
-      ? <span><strong>{ plan.volume.toLocaleString() }</strong> emails per month</span>
+      ? <span><strong>{ plan.volume.toLocaleString() }</strong> emails</span>
       : null;
 
     content = (

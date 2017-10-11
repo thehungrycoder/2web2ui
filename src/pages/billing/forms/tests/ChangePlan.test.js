@@ -10,6 +10,7 @@ describe('Form Container: Change Plan', () => {
       subscription: { self_serve: true },
     },
     billing: { countries: [] },
+    plans: [],
     currentPlan: {},
     selectedPlan: {},
     shouldExposeCard: false,

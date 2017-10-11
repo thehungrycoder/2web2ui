@@ -7,11 +7,13 @@ exports[`Form Container: Change Plan should render 1`] = `
       <t
         title="Select A Plan"
       >
-        <Component />
+        <Component
+          plans={Array []}
+        />
       </t>
       <t
         actions={null}
-        title="Pay With New Credit Card"
+        title="Add a Credit Card"
       >
         <Panel.Section>
           <Connect(PaymentForm)
@@ -48,7 +50,9 @@ exports[`Form Container: Change Plan should show saved card 1`] = `
       <t
         title="Select A Plan"
       >
-        <Component />
+        <Component
+          plans={Array []}
+        />
       </t>
       <t
         actions={
