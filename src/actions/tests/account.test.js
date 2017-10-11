@@ -1,11 +1,11 @@
 import { fetch, getPlans } from '../account';
 
-test.skip('fetch - no params', () => {
+test('fetch - no params', () => {
   const fetchAction = fetch();
   expect(fetchAction).toMatchSnapshot();
 });
 
-test.skip('fetch with params', () => {
+test('fetch with params', () => {
   const params = {
     this: 'one',
     also: 'that one'
@@ -14,7 +14,7 @@ test.skip('fetch with params', () => {
   expect(fetchAction).toMatchSnapshot();
 });
 
-test.skip('getPlans', () => {
+test('getPlans', () => {
   const getPlansAction = getPlans();
   expect(getPlansAction).toMatchSnapshot();
 });

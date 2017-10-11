@@ -1,7 +1,6 @@
 import { sparkpostLogin } from '../helpers/http';
 import authCookie from '../helpers/authCookie';
-import { fetch as fetchAccount } from './account';
-import { get as getCurrentUser, getGrants } from './currentUser';
+import { initializeAccessControl } from './accessControl';
 
 export function login(authData) {
   return (dispatch) => {
@@ -10,10 +9,7 @@ export function login(authData) {
       payload: authData
     });
 
-    // initialize some state
-    dispatch(fetchAccount({ include: 'usage,billing' }));
-    dispatch(getCurrentUser())
-      .then(({ access_level }) => dispatch(getGrants({ role: access_level })));
+    dispatch(initializeAccessControl());
   };
 }
 

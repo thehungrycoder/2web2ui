@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import { reducer as form } from 'redux-form';
 
+import accessControlReady from './accessControlReady';
 import account from './account';
 import apiKeys from './api-keys';
 import auth from './auth';
@@ -18,6 +19,7 @@ import users from './users';
 import webhooks from './webhooks';
 
 const appReducer = combineReducers({
+  accessControlReady,
   account,
   auth,
   billing,

@@ -1,6 +1,8 @@
-import routes from 'src/config/routes';
-import navItems from './navItems';
+import { createSelector } from 'reselect';
 import _ from 'lodash';
+import routes from 'src/config/routes';
+import navItems from 'src/config/navItems';
+import accessConditionState from './accessConditionState';
 
 const routesByPath = _.keyBy(routes, 'path');
 
@@ -41,8 +43,4 @@ export function prepareNavItems(accessConditionState) {
   return filterNavByAccess(mapNavToRoutes(navItems), accessConditionState);
 }
 
-// This function is memoized against the reference value of the state object passed to it
-// This prevents it from re-calculating unless the state has changed
-const memoizedPrepareNavItems = _.memoize(prepareNavItems);
-
-export default memoizedPrepareNavItems;
+export default createSelector([accessConditionState], prepareNavItems);

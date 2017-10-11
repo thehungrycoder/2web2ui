@@ -1,6 +1,5 @@
 import { shallow } from 'enzyme';
 import cases from 'jest-in-case';
-import fp from 'lodash/fp';
 import React from 'react';
 
 import AccessSelect from '../AccessSelect';

@@ -6,25 +6,22 @@ import classnames from 'classnames';
 import { SparkPost } from 'src/components';
 import Item from './Item';
 import Footer from './Footer';
-import prepareNavItems from './prepareNavItems';
+import selectNavItems from 'src/selectors/navItems';
 import { Icon } from '@sparkpost/matchbox';
 import styles from './Navigation.module.scss';
 
 class Navigation extends Component {
   state = {
     open: false
+  };
+
+  renderItems(items) {
+    return this.props.navItems.map((item, key) => (
+      <Item {...item} location={this.props.location} key={key} />
+    ));
   }
 
-  constructor(props) {
-    super(props);
-    this.state.navItems = prepareNavItems(this.props.store);
-  }
-
-  renderItems() {
-    return this.state.navItems.map((item, key) => <Item {...item} location={this.props.location} key={key} />);
-  }
-
-  handleClick() {
+  handleClick = () => {
     this.setState({ open: !this.state.open });
   }
 
@@ -43,13 +40,13 @@ class Navigation extends Component {
       <div>
         <div
           className={overlayClasses}
-          onClick={() => this.handleClick()} />
+          onClick={this.handleClick} />
 
         <nav className={navClasses}>
           <div className={styles.wrapper}>
             <ul className={styles.list}>
               <div className={styles.logo}><SparkPost.Logo type='white' /></div>
-              { this.renderItems() }
+              {this.renderItems()}
             </ul>
             <Footer />
           </div>
@@ -57,12 +54,12 @@ class Navigation extends Component {
             name='Close'
             className={styles.close}
             size={33}
-            onClick={() => this.handleClick()} />
+            onClick={this.handleClick} />
         </nav>
 
         <nav className={styles.bar}>
           <div className={styles.mobileLogo}><SparkPost.Logo type='white' /></div>
-          <a className={styles.open} onClick={() => this.handleClick()}>
+          <a className={styles.open} onClick={this.handleClick}>
             <span className={styles.hamburger} />
           </a>
         </nav>
@@ -71,4 +68,6 @@ class Navigation extends Component {
   }
 }
 
-export default withRouter(connect((store) => ({ store }))(Navigation));
+export default withRouter(connect((state) => ({
+  navItems: selectNavItems(state)
+}))(Navigation));
