@@ -40,7 +40,6 @@ export function filterNavByAccess(items, accessConditionState) {
 }
 
 export function prepareNavItems(accessConditionState) {
-  console.log('preparing nav items'); // eslint-disable-line
   return filterNavByAccess(mapNavToRoutes(navItems), accessConditionState);
 }
 
