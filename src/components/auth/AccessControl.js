@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import config from 'src/config';
+import accessConditionState from 'src/selectors/accessConditionState';
 
 export const AccessControl = function AccessControl({ children, redirect, show }) {
   if (redirect && !show) {
@@ -11,8 +11,9 @@ export const AccessControl = function AccessControl({ children, redirect, show }
 };
 
 const accept = () => true;
-const mapStateToProps = (state, { condition = accept }) => ({
-  show: condition({ state, config })
+const mapStateToProps = (state, { condition = accept, redirect }) => ({
+  redirect: state.accessControlReady && redirect,
+  show: condition(accessConditionState(state))
 });
 
 export default connect(mapStateToProps)(AccessControl);

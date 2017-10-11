@@ -93,7 +93,7 @@ export default [
   {
     path: '/templates',
     component: templates.ListPage,
-    condition: hasGrants('templates/modify')
+    condition: composeConditions(hasGrants('templates/modify'), ({ account }) => account.status === 'active')
   },
   {
     path: '/templates/create',
