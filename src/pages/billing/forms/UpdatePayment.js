@@ -20,11 +20,10 @@ export class UpdatePayment extends Component {
   }
 
   onSubmit = (values) => {
-    const { billingUpdate, onCancel, reset, showAlert } = this.props;
+    const { billingUpdate, onCancel, showAlert } = this.props;
     return billingUpdate(values).then(() => {
       showAlert({ type: 'success', message: 'Payment Information Updated' });
       onCancel();
-      reset();
     }).catch((err) => showAlert({ type: 'error', message: 'Payment Information Update Failed' }));
   }
 

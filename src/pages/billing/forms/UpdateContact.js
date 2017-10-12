@@ -19,11 +19,10 @@ export class UpdateContact extends Component {
   }
 
   onSubmit = (values) => {
-    const { updateBillingContact, onCancel, reset, showAlert } = this.props;
+    const { updateBillingContact, onCancel, showAlert } = this.props;
     return updateBillingContact(values).then(() => {
       showAlert({ type: 'success', message: 'Billing Contact Updated' });
       onCancel();
-      reset();
     }).catch((err) => showAlert({ type: 'error', message: 'Billing Contact Update Failed' }));
   }
 
