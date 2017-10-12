@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import _ from 'lodash';
+import config from 'src/config';
 
 // Actions
 import { listTemplates } from '../../actions/templates';
@@ -9,6 +10,7 @@ import { listTemplates } from '../../actions/templates';
 // Components
 import { Layout, TableCollection, ApiErrorBanner } from 'src/components';
 import { Page } from '@sparkpost/matchbox';
+import Filters from './components/Filters';
 
 const CREATE_ACTION = {
   content: 'Create Template',
@@ -68,6 +70,7 @@ class ListPage extends Component {
           title={'Templates'}
         />
         {error && this.renderError()}
+        {!error && templatesCount > config.filters.minCount && <Filters />}
         {!error && templatesCount > 0 && this.renderCollection()}
       </Layout.App>
     );

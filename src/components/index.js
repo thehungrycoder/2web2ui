@@ -2,6 +2,7 @@ export { default as ApiErrorBanner } from './apiErrorBanner/ApiErrorBanner';
 export { default as Collection } from './collection/Collection';
 export { default as TableCollection } from './collection/TableCollection';
 export { default as DeleteModal } from './deleteModal/DeleteModal';
+export { default as FilterDropdown } from './filterDropdown/FilterDropdown';
 export { default as GlobalAlert } from './globalAlert/GlobalAlert';
 export { default as Layout } from './layout/Layout';
 export * from './loading/Loading';
