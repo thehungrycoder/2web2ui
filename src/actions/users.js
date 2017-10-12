@@ -1,6 +1,28 @@
 import sparkpostApiRequest from './helpers/sparkpostApiRequest';
 import { showAlert } from './globalAlert';
 
+export function inviteUser(email, access_level) {
+  const action = {
+    type: 'INVITE_USER',
+    meta: {
+      data: { email, access_level },
+      method: 'POST',
+      url: '/users/invite'
+    }
+  };
+
+  return (dispatch) => dispatch(sparkpostApiRequest(action))
+    .then((result) => dispatch(showAlert({
+      type: 'success',
+      message: 'Invitation is on its way! Once your user signs up, you\'ll see them below'
+    }))
+    )
+    .catch(() => dispatch(showAlert({
+      type: 'error',
+      message: 'Unable to invite user.'
+    })));
+}
+
 export function deleteUser(username) {
   const action = {
     type: 'DELETE_USER',
