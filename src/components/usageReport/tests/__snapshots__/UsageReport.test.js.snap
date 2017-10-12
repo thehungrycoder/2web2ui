@@ -21,7 +21,7 @@ exports[`UsageReport Component should render with overages 1`] = `
 >
   <Panel.Section>
     <ProgressLabel
-      secondaryTitle="Since August 29th, 2017 8:00pm"
+      secondaryTitle="Since August 30th, 2017 1:00am"
       title="Today"
     />
     <t
@@ -81,7 +81,7 @@ exports[`UsageReport Component should render with regular usage 1`] = `
 >
   <Panel.Section>
     <ProgressLabel
-      secondaryTitle="Since August 29th, 2017 8:00pm"
+      secondaryTitle="Since August 30th, 2017 1:00am"
       title="Today"
     />
     <t
