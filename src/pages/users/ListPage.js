@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import fp from 'lodash/fp';
 import { Page } from '@sparkpost/matchbox';
 
@@ -13,6 +14,12 @@ import DeleteButton from './components/DeleteButton';
 const COLUMNS = ['Name', 'Role', 'Email', 'Last Login', null];
 const DEFAULT_STATE = {
   userToDelete: {}
+};
+
+const primaryAction = {
+  content: 'Add User',
+  Component: Link,
+  to: '/account/users/create'
 };
 
 export class ListPage extends Component {
@@ -95,7 +102,7 @@ export class ListPage extends Component {
 
     return (
       <Layout.App loading={loading}>
-        <Page title="Users" />
+        <Page primaryAction={primaryAction} title="Users" />
         {this.renderError()}
         <TableCollection
           columns={COLUMNS}
