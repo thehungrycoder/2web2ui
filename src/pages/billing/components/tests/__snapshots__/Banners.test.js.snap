@@ -2,8 +2,9 @@
 
 exports[`Billing Banners:  ManuallyBilledBanner should render with pending subscription 1`] = `
 <t
+  action={null}
   status="info"
-  title="Your current whoa plan includes 123 emails /mo"
+  title="Your current whoa plan includes 123 emails per month"
 >
   <p>
     You're scheduled to switch to the 
@@ -23,17 +24,27 @@ exports[`Billing Banners:  ManuallyBilledBanner should render with pending subsc
 
 exports[`Billing Banners:  ManuallyBilledBanner should render with subscription 1`] = `
 <t
+  action={
+    Object {
+      "Component": [Function],
+      "content": "Enable Automatic Billing",
+      "to": "/account/billing/plan",
+    }
+  }
   status="info"
-  title="Your current whoa plan includes 123 emails /mo"
+  title="Your current whoa plan includes 123 emails per month"
 >
   <p>
-    To make changes to your plan or billing information, 
+    To make changes to your plan, billing information, or addons, 
     <a
       href="mailto:support@sparkpost.com"
     >
       contact support
     </a>
     .
+  </p>
+  <p>
+    Enable automatic billing to self-manage your plan and add-ons.
   </p>
 </t>
 `;
@@ -80,5 +91,72 @@ exports[`Billing Banners:  SuspendedBanner should render with isSuspendedForBill
     </a>
     .
   </p>
+</t>
+`;
+
+exports[`Billing Banners:  renders Enterprise banner 1`] = `
+<t
+  action={
+    Object {
+      "content": "Contact Us",
+      "external": true,
+      "to": "https://www.sparkpost.com/contact-enterprise/",
+    }
+  }
+  status="default"
+  title="Enterprise"
+>
+  <p>
+    Enterprise-grade guarantees and SLAs across email, push, and SMS - manage, analyzed, and reported from a single console.
+  </p>
+  <ul>
+    <li>
+      The industry's best uptime SLAs with service credits
+    </li>
+    <li>
+      Guaranteed burst rates
+    </li>
+    <li>
+      Push notifications and SMS messaging
+    </li>
+    <li>
+      Single sign-on support
+    </li>
+    <li>
+      Support for iOS universal links
+    </li>
+  </ul>
+</t>
+`;
+
+exports[`Billing Banners:  renders Premium banner 1`] = `
+<t
+  action={
+    Object {
+      "content": "Contact Us",
+      "external": true,
+      "to": "https://www.sparkpost.com/contact-premium/",
+    }
+  }
+  status="default"
+  title="Premium Addon Plan"
+>
+  <p>
+    Technical and deliverability account management - full service support on a first name basis.
+  </p>
+  <ul>
+    <li>
+      Dedicated Technical Account Manager
+    </li>
+    <li>
+      Proactive deliverability reporting, planning & reviews
+    </li>
+    <li>
+      Global ISP relations and mediation
+    </li>
+    <li>
+      Deliverability data analysis and guidance with 250ok
+    </li>
+  </ul>
 </t>
 `;

@@ -1,7 +1,19 @@
-export default (state = {}, action) => {
+const initialState = {
+  loading: false,
+  subscription: {}
+};
+
+export default (state = initialState, action) => {
   switch (action.type) {
+    case 'FETCH_ACCOUNT_PENDING': {
+      return { ...state, loading: true };
+    }
+
     case 'FETCH_ACCOUNT_SUCCESS':
-      return action.payload;
+      return { ...state, loading: false, ...action.payload };
+
+    case 'FETCH_ACCOUNT_ERROR':
+      return { ...state, loading: false };
 
     default:
       return state;

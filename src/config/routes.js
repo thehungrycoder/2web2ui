@@ -147,7 +147,7 @@ export default [
   },
   {
     path: '/account/billing',
-    component: billing.OverviewPage,
+    component: billing.SummaryPage,
     condition: hasGrants('account/manage')
   },
   {

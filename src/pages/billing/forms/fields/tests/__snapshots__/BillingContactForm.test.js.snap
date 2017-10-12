@@ -2,11 +2,6 @@
 
 exports[`Billing Address Form: should render 1`] = `
 <div>
-  <p>
-    <small>
-      Billing Address
-    </small>
-  </p>
   <t>
     <Grid.Column
       xs={6}
@@ -14,7 +9,7 @@ exports[`Billing Address Form: should render 1`] = `
       <Field
         component={[Function]}
         label="First Name"
-        name="billingAddress.firstName"
+        name="billingContact.firstName"
         validate={[Function]}
       />
     </Grid.Column>
@@ -24,21 +19,27 @@ exports[`Billing Address Form: should render 1`] = `
       <Field
         component={[Function]}
         label="Last Name"
-        name="billingAddress.lastName"
+        name="billingContact.lastName"
         validate={[Function]}
       />
     </Grid.Column>
   </t>
   <Field
     component={[Function]}
-    label="Street Address"
-    name="billingAddress.streetAddress"
-    validate={[Function]}
+    label="Email"
+    name="billingContact.email"
+    validate={
+      Array [
+        [Function],
+        [Function],
+      ]
+    }
   />
   <Field
     component={[Function]}
     label="Country"
-    name="billingAddress.country"
+    name="billingContact.country"
+    onChange={[Function]}
     options={
       Array [
         Object {
@@ -63,7 +64,7 @@ exports[`Billing Address Form: should render 1`] = `
       <Field
         component={[Function]}
         label="Zip/Postal Code"
-        name="billingAddress.zip"
+        name="billingContact.zip"
         validate={[Function]}
       />
     </Grid.Column>
@@ -73,11 +74,6 @@ exports[`Billing Address Form: should render 1`] = `
 
 exports[`Billing Address Form: should show states 1`] = `
 <div>
-  <p>
-    <small>
-      Billing Address
-    </small>
-  </p>
   <t>
     <Grid.Column
       xs={6}
@@ -85,7 +81,7 @@ exports[`Billing Address Form: should show states 1`] = `
       <Field
         component={[Function]}
         label="First Name"
-        name="billingAddress.firstName"
+        name="billingContact.firstName"
         validate={[Function]}
       />
     </Grid.Column>
@@ -95,21 +91,27 @@ exports[`Billing Address Form: should show states 1`] = `
       <Field
         component={[Function]}
         label="Last Name"
-        name="billingAddress.lastName"
+        name="billingContact.lastName"
         validate={[Function]}
       />
     </Grid.Column>
   </t>
   <Field
     component={[Function]}
-    label="Street Address"
-    name="billingAddress.streetAddress"
-    validate={[Function]}
+    label="Email"
+    name="billingContact.email"
+    validate={
+      Array [
+        [Function],
+        [Function],
+      ]
+    }
   />
   <Field
     component={[Function]}
     label="Country"
-    name="billingAddress.country"
+    name="billingContact.country"
+    onChange={[Function]}
     options={
       Array [
         Object {
@@ -134,7 +136,7 @@ exports[`Billing Address Form: should show states 1`] = `
       <Field
         component={[Function]}
         label="State"
-        name="billingAddress.state"
+        name="billingContact.state"
         options={
           Array [
             Object {
@@ -152,7 +154,7 @@ exports[`Billing Address Form: should show states 1`] = `
       <Field
         component={[Function]}
         label="Zip Code"
-        name="billingAddress.zip"
+        name="billingContact.zip"
         validate={[Function]}
       />
     </Grid.Column>

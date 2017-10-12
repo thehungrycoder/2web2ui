@@ -1,7 +1,7 @@
-import OverviewPage from './OverviewPage';
+import SummaryPage from './SummaryPage';
 import ChangePlanPage from './ChangePlanPage';
 
 export default {
-  OverviewPage,
+  SummaryPage,
   ChangePlanPage
 };

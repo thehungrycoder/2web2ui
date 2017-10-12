@@ -1,107 +1,94 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Field, formValueSelector } from 'redux-form';
+import { Field, formValueSelector, change } from 'redux-form';
 import PropTypes from 'prop-types';
+import _ from 'lodash';
 
 import { Grid } from '@sparkpost/matchbox';
 import { TextFieldWrapper, SelectWrapper } from 'src/components';
-import { required } from 'src/helpers/validation';
+import { required, email } from 'src/helpers/validation';
 import { getZipLabel } from 'src/helpers/billing';
 
-import styles from './Forms.module.scss';
-import _ from 'lodash';
+import styles from './Fields.module.scss';
 
 /**
  * This component will register the following redux-form fields
- * billingAddress.firstName
- * billingAddress.lastName
- * billingAddress.country
- * billingAddress.streetAddress
- * billingAddress.state (if country US | CA)
- * billingAddress.zip
+ * billingContact.email
+ * billingContact.firstName
+ * billingContact.lastName
+ * billingContact.country
+ * billingContact.state (if country US | CA)
+ * billingContact.zip
  */
-export class BillingAddressForm extends Component {
-  state = {
-    showName: true
-  }
+export class BillingContactForm extends Component {
+  handleCountryChange = (e) => {
+    const value = e.target.value;
 
-  componentDidMount() {
-    const { firstName, lastName } = this.props;
-
-    // Hide name fields if we already have them
-    if (firstName && lastName) {
-      this.setState({ showName: false });
+    // Removes state value from store
+    if (value !== 'US' && value !== 'CA') {
+      this.props.change(this.props.formName, 'billingContact.state', null);
     }
   }
 
   render() {
-    const { countries, countryValue, disabled } = this.props;
+    const { countries = [], countryValue } = this.props;
 
-    const stateOrProvince = countryValue === 'US' || countryValue === 'CA'
+    const stateOrProvince = countries.length && (countryValue === 'US' || countryValue === 'CA')
       ? <Grid.Column xs={6}>
           <Field
             label={countryValue === 'US' ? 'State' : 'Province'}
-            name='billingAddress.state'
+            name='billingContact.state'
             component={SelectWrapper}
             options={_.find(countries, { value: countryValue }).states}
             validate={required}
-            disabled={disabled}
           />
         </Grid.Column>
       : null;
 
-    const nameFields = this.state.showName
-      ? <Grid className={styles.spacer}>
+    return (
+      <div>
+        <Grid className={styles.spacer}>
           <Grid.Column xs={6}>
             <Field
               label='First Name'
-              name='billingAddress.firstName'
+              name='billingContact.firstName'
               component={TextFieldWrapper}
               validate={required}
-              disabled={disabled}
             />
           </Grid.Column>
           <Grid.Column xs={6}>
             <Field
               label='Last Name'
-              name='billingAddress.lastName'
+              name='billingContact.lastName'
               component={TextFieldWrapper}
               validate={required}
-              disabled={disabled}
             />
           </Grid.Column>
         </Grid>
-      : null;
-
-    return (
-      <div>
-        <p><small>Billing Address</small></p>
-        { nameFields }
         <Field
-          label='Street Address'
-          name='billingAddress.streetAddress'
+          label='Email'
+          name='billingContact.email'
           component={TextFieldWrapper}
-          validate={required}
-          disabled={disabled}
+          validate={[required, email]}
         />
+
         <Field
           label='Country'
-          name='billingAddress.country'
+          name='billingContact.country'
           placeholder='Select a country'
           component={SelectWrapper}
+          onChange={this.handleCountryChange}
           options={countries}
           validate={required}
-          disabled={disabled}
         />
         <Grid>
           { stateOrProvince }
           <Grid.Column xs={6}>
             <Field
               label={getZipLabel(countryValue)}
-              name='billingAddress.zip'
+              name='billingContact.zip'
               component={TextFieldWrapper}
               validate={required}
-              disabled={disabled}
             />
           </Grid.Column>
         </Grid>
@@ -110,7 +97,7 @@ export class BillingAddressForm extends Component {
   }
 }
 
-BillingAddressForm.propTypes = {
+BillingContactForm.propTypes = {
   countries: PropTypes.arrayOf(PropTypes.shape({
     value: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired
@@ -123,9 +110,7 @@ BillingAddressForm.propTypes = {
 const mapStateToProps = (state, { formName }) => {
   const selector = formValueSelector(formName);
   return {
-    countryValue: selector(state, 'billingAddress.country'),
-    firstName: selector(state, 'billingAddress.firstName'),
-    lastName: selector(state, 'billingAddress.lastName')
+    countryValue: selector(state, 'billingContact.country')
   };
 };
-export default connect(mapStateToProps, null)(BillingAddressForm);
+export default connect(mapStateToProps, { change })(BillingContactForm);

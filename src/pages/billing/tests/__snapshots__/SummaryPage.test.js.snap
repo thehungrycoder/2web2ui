@@ -1,0 +1,315 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Page: SummaryPage should handle modal toggle 1`] = `
+<App>
+  <t
+    title="Billing"
+  />
+  <div>
+    <Component
+      account={
+        Object {
+          "subscription": Object {
+            "self_serve": true,
+          },
+        }
+      }
+    />
+    <Component
+      account={
+        Object {
+          "subscription": Object {
+            "self_serve": true,
+          },
+        }
+      }
+    />
+    <t
+      accent={true}
+      title="Plan Overview"
+    >
+      <Panel.Section>
+        <PlanSummary
+          label="Your Plan"
+          plan={Object {}}
+        />
+      </Panel.Section>
+    </t>
+    <Component />
+    <Component />
+    <t
+      open={true}
+    >
+      <t
+        event="keydown"
+        handler={[Function]}
+      />
+      <Connect(ReduxForm)
+        onCancel={[Function]}
+      />
+    </t>
+  </div>
+</App>
+`;
+
+exports[`Page: SummaryPage should not render billing and ips if on free plan 1`] = `
+<App>
+  <t
+    title="Billing"
+  />
+  <div>
+    <Component
+      account={
+        Object {
+          "subscription": Object {
+            "self_serve": true,
+          },
+        }
+      }
+    />
+    <Component
+      account={
+        Object {
+          "subscription": Object {
+            "self_serve": true,
+          },
+        }
+      }
+    />
+    <t
+      accent={true}
+      title="Plan Overview"
+    >
+      <Panel.Section
+        actions={
+          Array [
+            Object {
+              "Component": [Function],
+              "content": "Upgrade Now",
+              "to": "/account/billing/plan",
+            },
+          ]
+        }
+      >
+        <PlanSummary
+          label="Your Plan"
+          plan={
+            Object {
+              "isFree": true,
+            }
+          }
+        />
+      </Panel.Section>
+    </t>
+    <Component />
+    <Component />
+    <t
+      open={false}
+    >
+      <t
+        event="keydown"
+        handler={[Function]}
+      />
+    </t>
+  </div>
+</App>
+`;
+
+exports[`Page: SummaryPage should render banner when manually billed 1`] = `
+<App>
+  <t
+    title="Billing"
+  />
+  <ManuallyBilledBanner
+    account={
+      Object {
+        "subscription": Object {
+          "self_serve": false,
+        },
+      }
+    }
+  />
+</App>
+`;
+
+exports[`Page: SummaryPage should render billing summary if on paid plan 1`] = `
+<App>
+  <t
+    title="Billing"
+  />
+  <div>
+    <Component
+      account={
+        Object {
+          "subscription": Object {
+            "self_serve": true,
+          },
+        }
+      }
+    />
+    <Component
+      account={
+        Object {
+          "subscription": Object {
+            "self_serve": true,
+          },
+        }
+      }
+    />
+    <t
+      accent={true}
+      title="Plan Overview"
+    >
+      <Panel.Section
+        actions={
+          Array [
+            Object {
+              "Component": [Function],
+              "content": "Change Plan",
+              "to": "/account/billing/plan",
+            },
+          ]
+        }
+      >
+        <PlanSummary
+          label="Your Plan"
+          plan={
+            Object {
+              "isFree": false,
+            }
+          }
+        />
+      </Panel.Section>
+      <Panel.Section
+        actions={
+          Array [
+            Object {
+              "content": "Add Dedicated IPs",
+              "onClick": [Function],
+            },
+          ]
+        }
+      >
+        <SummarySection
+          label="Dedicated IPs"
+        >
+          <h6>
+            0
+          </h6>
+        </SummarySection>
+      </Panel.Section>
+    </t>
+    <t
+      title="Billing"
+    >
+      <Panel.Section
+        actions={
+          Array [
+            Object {
+              "content": "Update Payment Information",
+              "onClick": [Function],
+            },
+          ]
+        }
+      >
+        <CardSummary
+          billing={Object {}}
+          label="Credit Card"
+        />
+      </Panel.Section>
+      <Panel.Section
+        actions={
+          Array [
+            Object {
+              "content": "Update Billing Contact",
+              "onClick": [Function],
+            },
+          ]
+        }
+      >
+        <SummarySection
+          label="Billing Contact"
+        >
+          <h6>
+             
+          </h6>
+          <p />
+        </SummarySection>
+      </Panel.Section>
+    </t>
+    <Component />
+    <Component />
+    <t
+      open={false}
+    >
+      <t
+        event="keydown"
+        handler={[Function]}
+      />
+    </t>
+  </div>
+</App>
+`;
+
+exports[`Page: SummaryPage should render upgrade on free plan 1`] = `
+<App>
+  <t
+    title="Billing"
+  />
+  <div>
+    <Component
+      account={
+        Object {
+          "subscription": Object {
+            "self_serve": true,
+          },
+        }
+      }
+    />
+    <Component
+      account={
+        Object {
+          "subscription": Object {
+            "self_serve": true,
+          },
+        }
+      }
+    />
+    <t
+      accent={true}
+      title="Plan Overview"
+    >
+      <Panel.Section
+        actions={
+          Array [
+            Object {
+              "Component": [Function],
+              "content": "Upgrade Now",
+              "to": "/account/billing/plan",
+            },
+          ]
+        }
+      >
+        <PlanSummary
+          label="Your Plan"
+          plan={
+            Object {
+              "isFree": true,
+            }
+          }
+        />
+      </Panel.Section>
+    </t>
+    <Component />
+    <Component />
+    <t
+      open={false}
+    >
+      <t
+        event="keydown"
+        handler={[Function]}
+      />
+    </t>
+  </div>
+</App>
+`;
