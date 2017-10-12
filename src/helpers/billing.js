@@ -1,3 +1,4 @@
+/* eslint max-lines: ["error", 200] */
 import _ from 'lodash';
 import config from 'src/config';
 
@@ -8,17 +9,16 @@ export function formatDataForCors(values) {
   const corsData = {
     email,
     cardholder_name: card.name,
-    address1: billingAddress.streetAddress,
-    address2: null,
-    city: null,
     state: billingAddress.state,
     country: billingAddress.country,
     zip_code: billingAddress.zip,
     bin: card.number.slice(0, 6),
     last_four: card.number.slice(-4),
-    plan_id: planpicker.billingId
+    plan_id: planpicker.billingId,
+    address1: null,
+    address2: null,
+    city: null
   };
-
 
   // For Zuora
   const billingData = {
@@ -28,7 +28,8 @@ export function formatDataForCors(values) {
       lastName: billingAddress.lastName,
       workEmail: email,
       country: billingAddress.country,
-      state: billingAddress.state
+      state: billingAddress.state,
+      zipCode: billingAddress.zip
     },
     creditCard: {
       cardType: card.type,
@@ -38,10 +39,10 @@ export function formatDataForCors(values) {
       securityCode: card.securityCode,
       cardHolderInfo: {
         cardHolderName: card.name,
-        addressLine1: billingAddress.streetAddress,
+        zipCode: billingAddress.zip,
+        addressLine1: null,
         addressLine2: null,
-        city: null,
-        zipCode: billingAddress.zip
+        city: null
       }
     }
   };
@@ -57,12 +58,12 @@ export function formatUpdateData({ accountKey, billingAddress, card }) {
     defaultPaymentMethod: true,
     cardHolderInfo: {
       cardHolderName: card.name,
-      addressLine1: billingAddress.streetAddress,
-      addressLine2: null,
-      city: null,
       zipCode: zip,
       country,
-      state
+      state,
+      addressLine1: null,
+      addressLine2: null,
+      city: null
     },
     creditCardNumber: card.number.replace(/\W/g, ''),
     expirationMonth: card.expMonth,
@@ -103,6 +104,17 @@ export function formatCreateData({
   }
 
   return formatted;
+}
+
+export function formatContactData({ billingContact }) {
+  return {
+    email: billingContact.email,
+    first_name: billingContact.firstName,
+    last_name: billingContact.lastName,
+    country_code: billingContact.country,
+    zip_code: billingContact.zip,
+    state: billingContact.state
+  };
 }
 
 // Formats countries before storing in state

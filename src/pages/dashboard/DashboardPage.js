@@ -56,6 +56,7 @@ export class DashboardPage extends Component {
       <Layout.App>
         <Page title='Control Panel'/>
 
+
         { this.renderOneCta() }
 
         <AccessControl condition={configFlag('showThingOnDash')}>

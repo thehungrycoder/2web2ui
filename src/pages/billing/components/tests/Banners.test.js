@@ -1,5 +1,5 @@
 import React from 'react';
-import { PendingPlanBanner, SuspendedBanner, ManuallyBilledBanner } from '../Banners';
+import { PendingPlanBanner, SuspendedBanner, ManuallyBilledBanner, PremiumBanner, EnterpriseBanner } from '../Banners';
 import { shallow } from 'enzyme';
 
 describe('Billing Banners: ', () => {
@@ -60,5 +60,15 @@ describe('Billing Banners: ', () => {
     };
     const wrapper = shallow(<ManuallyBilledBanner {...props} />);
     expect(wrapper.find('t')).not.toBePresent();
+  });
+
+  it('renders Premium banner', () => {
+    const wrapper = shallow(<PremiumBanner />);
+    expect(wrapper).toMatchSnapshot()
+  });
+
+  it('renders Enterprise banner', () => {
+    const wrapper = shallow(<EnterpriseBanner />);
+    expect(wrapper).toMatchSnapshot()
   });
 });

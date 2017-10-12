@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Form Container: Update Contact should render 1`] = `
+<form>
+  <t
+    title="Update Billing Contact"
+  >
+    <Panel.Section>
+      <Connect(BillingContactForm)
+        countries={Array []}
+        formName="updateContact"
+      />
+    </Panel.Section>
+    <Panel.Section>
+      <t
+        primary={true}
+        size="default"
+        type="submit"
+      >
+        Update Billing Contact
+      </t>
+      <t
+        size="default"
+      >
+        Cancel
+      </t>
+    </Panel.Section>
+  </t>
+</form>
+`;

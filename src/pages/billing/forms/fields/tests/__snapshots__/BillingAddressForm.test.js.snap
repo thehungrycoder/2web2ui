@@ -1,0 +1,151 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Billing Address Form: should render 1`] = `
+<div>
+  <p>
+    <small>
+      Billing Address
+    </small>
+  </p>
+  <t>
+    <Grid.Column
+      xs={6}
+    >
+      <Field
+        component={[Function]}
+        label="First Name"
+        name="billingAddress.firstName"
+        validate={[Function]}
+      />
+    </Grid.Column>
+    <Grid.Column
+      xs={6}
+    >
+      <Field
+        component={[Function]}
+        label="Last Name"
+        name="billingAddress.lastName"
+        validate={[Function]}
+      />
+    </Grid.Column>
+  </t>
+  <Field
+    component={[Function]}
+    label="Country"
+    name="billingAddress.country"
+    onChange={[Function]}
+    options={
+      Array [
+        Object {
+          "label": "USOFA",
+          "states": Array [
+            Object {
+              "name": "mrylnd",
+              "value": "MD",
+            },
+          ],
+          "value": "US",
+        },
+      ]
+    }
+    placeholder="Select a country"
+    validate={[Function]}
+  />
+  <t>
+    <Grid.Column
+      xs={6}
+    >
+      <Field
+        component={[Function]}
+        label="Zip/Postal Code"
+        name="billingAddress.zip"
+        validate={[Function]}
+      />
+    </Grid.Column>
+  </t>
+</div>
+`;
+
+exports[`Billing Address Form: should show states 1`] = `
+<div>
+  <p>
+    <small>
+      Billing Address
+    </small>
+  </p>
+  <t>
+    <Grid.Column
+      xs={6}
+    >
+      <Field
+        component={[Function]}
+        label="First Name"
+        name="billingAddress.firstName"
+        validate={[Function]}
+      />
+    </Grid.Column>
+    <Grid.Column
+      xs={6}
+    >
+      <Field
+        component={[Function]}
+        label="Last Name"
+        name="billingAddress.lastName"
+        validate={[Function]}
+      />
+    </Grid.Column>
+  </t>
+  <Field
+    component={[Function]}
+    label="Country"
+    name="billingAddress.country"
+    onChange={[Function]}
+    options={
+      Array [
+        Object {
+          "label": "USOFA",
+          "states": Array [
+            Object {
+              "name": "mrylnd",
+              "value": "MD",
+            },
+          ],
+          "value": "US",
+        },
+      ]
+    }
+    placeholder="Select a country"
+    validate={[Function]}
+  />
+  <t>
+    <Grid.Column
+      xs={6}
+    >
+      <Field
+        component={[Function]}
+        label="State"
+        name="billingAddress.state"
+        options={
+          Array [
+            Object {
+              "name": "mrylnd",
+              "value": "MD",
+            },
+          ]
+        }
+        validate={[Function]}
+      />
+    </Grid.Column>
+    <Grid.Column
+      xs={6}
+    >
+      <Field
+        component={[Function]}
+        label="Zip Code"
+        name="billingAddress.zip"
+        validate={[Function]}
+      />
+    </Grid.Column>
+  </t>
+</div>
+`;
