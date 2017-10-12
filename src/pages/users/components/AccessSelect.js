@@ -14,9 +14,10 @@ const OPTIONS = [
  * @param {string} name
  * @param {Function} onChange - event handler passes new
  * @param {null, string} value
+ * @param {Object} input - redux-form <Field /> props
  */
 export default function AccessSelect({
-  disabled = false, name = null, onChange = fp.noop, value = null
+  disabled = false, name = null, onChange = fp.noop, value = null, input = {}
 }) {
   // Only return text to match the current style
   // TODO: won't need the span tags with v16
@@ -36,6 +37,7 @@ export default function AccessSelect({
       onChange={handleChange}
       options={OPTIONS}
       value={value}
+      {...input}
     />
   );
 }
