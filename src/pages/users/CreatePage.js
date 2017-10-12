@@ -20,7 +20,6 @@ class CreatePage extends React.Component {
   onSubmit = (values) => {
     const { email, access } = values;
     const { inviteUser, history } = this.props;
-    console.log(values); //eslint-disable-line no-console
     return inviteUser(email, access).then((res) => {
       history.push('/account/users');
     });
