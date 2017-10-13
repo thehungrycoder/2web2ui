@@ -27,7 +27,6 @@ const breadcrumbAction = {
 const CreatePage = (props) => {
   const {
     submitting,
-    submitSucceeded,
     pristine,
     handleSubmit,
     inviteUser,
@@ -77,9 +76,8 @@ const CreatePage = (props) => {
               />
               <Field name="access" label="Role" component={AccessSelect} />
               <Button submit primary disabled={submitting || pristine}>
-                Add user
+                {submitting ? 'Loading' : 'Add User' }
               </Button>
-              {submitting && !submitSucceeded && <div>Loading&hellip;</div>}
             </form>
         </Panel.Section>
       </Panel>
@@ -99,4 +97,3 @@ const ReduxCreatePage = reduxForm({ form: formName })(CreatePage);
 export default withRouter(
   connect(mapStateToProps, mapDispatchToProps)(ReduxCreatePage)
 );
-
