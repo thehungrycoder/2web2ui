@@ -91,6 +91,11 @@ export default [
     condition: hasGrants('users/manage')
   },
   {
+    path: '/account/users/create',
+    component: users.CreatePage,
+    condition: hasGrants('users/manage')
+  },
+  {
     path: '/templates',
     component: templates.ListPage,
     condition: composeConditions(hasGrants('templates/modify'), ({ account }) => account.status === 'active')

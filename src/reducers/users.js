@@ -11,6 +11,9 @@ const reduceUsers = fp.reduce((result, user) => ({ ...result, [user.username]: u
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case 'INVITE_USER_FAIL':
+      return { ...state, error: action.payload };
+
     case 'DELETE_USER_SUCCESS': {
       const { username } = action.meta.data;
       return fp.omit([['entities', username]])(state);
