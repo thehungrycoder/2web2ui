@@ -5,8 +5,13 @@ import { shallow } from 'enzyme';
 
 import { UsageReport } from '../UsageReport';
 
+import datefns from 'date-fns';
+
+// Overrides format function - prevents tests from failing when run in different timezones.
+datefns.format = jest.fn((date) => date);
 
 describe('UsageReport Component', () => {
+
 
   const props = {
     subscription: {

@@ -1,6 +1,19 @@
 import sparkpostApiRequest from './helpers/sparkpostApiRequest';
 import { showAlert } from './globalAlert';
 
+export function inviteUser(email, access_level) {
+  const action = {
+    type: 'INVITE_USER',
+    meta: {
+      data: { email, access_level },
+      method: 'POST',
+      url: '/users/invite'
+    }
+  };
+
+  return sparkpostApiRequest(action);
+}
+
 export function deleteUser(username) {
   const action = {
     type: 'DELETE_USER',
