@@ -1,13 +1,9 @@
-/* eslint-disable */
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
-import _ from 'lodash';
 
-import { Panel, TextField, Button, Grid, Icon, Popover, ActionList } from '@sparkpost/matchbox';
+import { Panel, Grid, Icon } from '@sparkpost/matchbox';
 import { TextFieldWrapper, FilterDropdown } from 'src/components';
-
-import styles from './Filters.module.scss';
 
 const FORMNAME = 'templateFilters';
 

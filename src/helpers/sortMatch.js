@@ -1,5 +1,5 @@
 export function score(haystack, needle) {
-  if (needle > haystack) {
+  if (needle.length > haystack.length) {
     return 0;
   }
 

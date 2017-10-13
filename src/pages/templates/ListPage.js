@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import config from 'src/config';
 
 // Actions
@@ -8,7 +8,7 @@ import { listTemplates } from 'src/actions/templates';
 import { templatesListSelector, filteredTemplatesSelector } from 'src/selectors/templates';
 // Components
 import { Layout, TableCollection, ApiErrorBanner } from 'src/components';
-import { Page } from '@sparkpost/matchbox';
+import { Page, EmptyState } from '@sparkpost/matchbox';
 import Filters from './components/Filters';
 
 const CREATE_ACTION = {
@@ -55,11 +55,18 @@ class ListPage extends Component {
   render() {
     const { count, loading, error } = this.props;
 
-    // No Templates (not error case)
-    // This is broken on a hard refresh
-    // if (!loading && templatesCount === 0) {
-    //   return <Redirect to="/templates/create" />;
-    // }
+    if (!loading && count === 0) {
+      return (
+        <Layout.App>
+          <EmptyState
+            title='Manage your email templates'
+            action={CREATE_ACTION} >
+            {/* secondaryAction={content: 'Learn More', onClick: Learn_More()} > */}
+            <p>Build, test, preview and send your transmissions.</p>
+          </EmptyState>
+        </Layout.App>
+      );
+    }
 
     return (
       <Layout.App loading={loading}>
@@ -84,4 +91,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { listTemplates })(ListPage);
+export default withRouter(connect(mapStateToProps, { listTemplates })(ListPage));
