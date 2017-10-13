@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import _ from 'lodash';
 import config from 'src/config';
 
 // Actions
-import { listTemplates } from '../../actions/templates';
-
+import { listTemplates } from 'src/actions/templates';
+import { templatesListSelector, filteredTemplatesSelector } from 'src/selectors/templates';
 // Components
 import { Layout, TableCollection, ApiErrorBanner } from 'src/components';
 import { Page } from '@sparkpost/matchbox';
@@ -54,8 +53,7 @@ class ListPage extends Component {
   }
 
   render() {
-    const templatesCount = _.get(this, 'props.templates.length');
-    const { loading, error } = this.props;
+    const { count, loading, error } = this.props;
 
     // No Templates (not error case)
     // This is broken on a hard refresh
@@ -70,18 +68,19 @@ class ListPage extends Component {
           title={'Templates'}
         />
         {error && this.renderError()}
-        {!error && templatesCount > config.filters.minCount && <Filters />}
-        {!error && templatesCount > 0 && this.renderCollection()}
+        {!error && count > config.filters.minCount && <Filters />}
+        {!error && count > 0 && this.renderCollection()}
       </Layout.App>
     );
   }
 }
 
-function mapStateToProps({ templates }) {
+function mapStateToProps(state) {
   return {
-    templates: templates.list,
-    loading: templates.listLoading,
-    error: templates.listError
+    count: templatesListSelector(state).length,
+    templates: filteredTemplatesSelector(state),
+    loading: state.templates.listLoading,
+    error: state.templates.listError
   };
 }
 

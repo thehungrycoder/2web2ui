@@ -74,7 +74,7 @@ class Collection extends Component {
         <OuterWrapper>
           <HeaderComponent />
           <BodyWrapper>
-            {this.getVisibleRows().map((row, i) => <RowComponent key={row[rowKeyName] || i} {...row} />)}
+            {this.getVisibleRows().map((row, i) => <RowComponent key={row[rowKeyName] ? `${row[rowKeyName]}-${i}` : i} {...row} />)}
           </BodyWrapper>
         </OuterWrapper>
         {this.renderPagination()}

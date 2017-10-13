@@ -8,7 +8,7 @@ import { getDraft, getPublished, update, deleteTemplate, publish } from '../../a
 import { showAlert } from 'src/actions/globalAlert';
 
 // Selectors
-import { templateById } from 'src/selectors/templates';
+import { templateByIdSelector } from 'src/selectors/templates';
 
 // Components
 import { Layout } from 'src/components';
@@ -147,10 +147,10 @@ class EditPage extends Component {
   }
 }
 
-const mapStateToProps = ({ templates }, { match }) => {
-  const template = templateById(templates, match.params.id);
+const mapStateToProps = (state, props) => {
+  const template = templateByIdSelector(state, props);
   return {
-    loading: templates.getLoading,
+    loading: state.templates.getLoading,
     template,
     // For templates with published but no draft, pull in published values
     initialValues: template.draft || template.published
