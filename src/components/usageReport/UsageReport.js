@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import moment from 'moment';
+import { format } from 'date-fns';
 import classnames from 'classnames';
 
 import { Panel, ProgressBar } from '@sparkpost/matchbox';
@@ -64,7 +64,7 @@ export class UsageReport extends Component {
 
           <ProgressLabel
             title='Today'
-            secondaryTitle={`Since ${moment(usage.day.start).format('MMMM Do, YYYY h:mma')}`}
+            secondaryTitle={`Since ${format(usage.day.start, 'MMMM Do, YYYY h:mma')}`}
           />
           <ProgressBar completed={dailyUsage} />
           <DisplayNumber label='Used' content={usage.day.used.toLocaleString()} orange />
@@ -75,7 +75,7 @@ export class UsageReport extends Component {
 
           <ProgressLabel
             title='This Month'
-            secondaryTitle={`Billing cycle: ${moment(usage.month.start).format('MMMM D')} - ${moment(usage.month.end).format('MMMM D')}`}
+            secondaryTitle={`Billing cycle: ${format(usage.month.start, 'MMMM D')} - ${format(usage.month.end, 'MMMM D')}`}
           />
           <ProgressBar completed={monthlyUsage} />
           <DisplayNumber label='Used' content={usage.month.used.toLocaleString()} orange />
