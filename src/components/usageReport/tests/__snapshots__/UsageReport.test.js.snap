@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`UsageReport Component render null: no props 1`] = `null`;
+exports[`UsageReport Component render null: no props 1`] = `""`;
 
-exports[`UsageReport Component render null: only subscription 1`] = `null`;
+exports[`UsageReport Component render null: only subscription 1`] = `""`;
 
-exports[`UsageReport Component render null: only usage 1`] = `null`;
+exports[`UsageReport Component render null: only usage 1`] = `""`;
 
 exports[`UsageReport Component should render with overages 1`] = `
 <t

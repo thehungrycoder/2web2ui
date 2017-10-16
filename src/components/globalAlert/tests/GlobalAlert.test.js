@@ -1,6 +1,6 @@
 import React from 'react';
 import { GlobalAlert } from '../GlobalAlert';
-import { mount, shallow } from 'enzyme';
+import { shallow } from 'enzyme';
 
 describe('GlobalAlert', () => {
   const props = {
@@ -13,7 +13,7 @@ describe('GlobalAlert', () => {
 
     it('should mount', () => {
       const willReceivePropsSpy = jest.spyOn(GlobalAlert.prototype, 'componentWillReceiveProps');
-      const wrapper = mount(<GlobalAlert/>);
+      const wrapper = shallow(<GlobalAlert/>);
       expect(willReceivePropsSpy).not.toHaveBeenCalled();
       expect(wrapper.state()).toEqual({ show: false, showDetails: false });
       willReceivePropsSpy.mockRestore();
@@ -21,7 +21,7 @@ describe('GlobalAlert', () => {
 
     it('should componentWillReceiveProps', () => {
       const willReceivePropsSpy = jest.spyOn(GlobalAlert.prototype, 'componentWillReceiveProps');
-      const wrapper = mount(<GlobalAlert />);
+      const wrapper = shallow(<GlobalAlert />);
       expect(willReceivePropsSpy).not.toHaveBeenCalled();
       wrapper.setProps(props);
       expect(willReceivePropsSpy).toHaveBeenCalled();
@@ -30,20 +30,17 @@ describe('GlobalAlert', () => {
     });
 
     it('should show details', () => {
-      const wrapper = mount(<GlobalAlert />);
+      const wrapper = shallow(<GlobalAlert />);
       wrapper.setProps(props);
-      expect(wrapper.state()).toEqual({ show: true, showDetails: false });
-      wrapper.find('.Matchbox-Snackbar__Content a').simulate('click');
-      expect(wrapper.state()).toEqual({ show: true, showDetails: true });
+      expect(wrapper.setState({ show: true, showDetails: true }));
+      expect(wrapper).toMatchSnapshot();
     });
 
     it('should dismiss alert', () => {
-      const handleDismissSpy = jest.spyOn(GlobalAlert.prototype, 'handleDismiss');
-      const wrapper = mount(<GlobalAlert />);
+      const wrapper = shallow(<GlobalAlert />);
       wrapper.setProps(props);
       expect(wrapper.state()).toEqual({ show: true, showDetails: false });
-      wrapper.find('.Matchbox-Snackbar__Dismiss').simulate('click');
-      expect(handleDismissSpy).toHaveBeenCalled();
+      wrapper.instance().handleDismiss();
       expect(wrapper.state()).toEqual({ show: false, showDetails: false });
     });
   });

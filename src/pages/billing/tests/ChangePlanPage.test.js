@@ -43,6 +43,10 @@ describe('Page: ChangePlanPage', () => {
   it('should not render form if not allowed to change plan', () => {
     wrapper.setProps({ canChangePlan: false });
     expect(wrapper).toMatchSnapshot();
+    expect(wrapper.find('CardSummary')).toBePresent();
+    wrapper.setState({ useSavedCC: false });
+    expect(wrapper.find('Connect(PaymentForm)')).toBePresent();
+    expect(wrapper.find('Connect(BillingAddressForm)')).toBePresent();
   });
 
   // it('should not render form if self serve', () => {

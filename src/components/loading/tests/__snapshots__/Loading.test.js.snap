@@ -3,7 +3,7 @@
 exports[`Loading Component Circle should render - no props 1`] = `
 <svg
   class=""
-  viewbox="25 25 50 50"
+  viewBox="25 25 50 50"
   xmlns="http://www.w3.org/2000/svg"
 >
   <circle
@@ -18,7 +18,7 @@ exports[`Loading Component Circle should render - no props 1`] = `
 exports[`Loading Component Logo should render - no props 1`] = `
 <svg
   class=""
-  viewbox="0 0 127.5 260"
+  viewBox="0 0 127.5 260"
   xmlns="http://www.w3.org/2000/svg"
 >
   <path
