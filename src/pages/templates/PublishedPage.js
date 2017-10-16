@@ -7,7 +7,7 @@ import { reduxForm } from 'redux-form';
 import { getPublished } from '../../actions/templates';
 
 // Selectors
-import { templateByIdSelector } from 'src/selectors/templates';
+import { getTemplateById } from 'src/selectors/templates';
 
 // Components
 import { Layout } from 'src/components';
@@ -78,7 +78,7 @@ class PublishedPage extends Component {
 
 const mapStateToProps = (state, props) => ({
   loading: state.templates.getLoading,
-  initialValues: templateByIdSelector(state, props).published
+  initialValues: getTemplateById(state, props).published
 });
 
 const formOptions = {

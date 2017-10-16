@@ -34,8 +34,7 @@ export class SubaccountTypeahead extends Component {
       (item) => `${item.name} ID: ${item.id}`
     ).map((item, index) => ({
       ...getItemProps({ item, index }),
-      content: <Item name={item.name} id={item.id} />,
-      highlighted: highlightedIndex === index
+      content: <Item name={item.name} id={item.id} />
     }));
 
     const listClasses = cx('List', {

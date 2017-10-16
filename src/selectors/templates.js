@@ -1,20 +1,20 @@
 import { createSelector } from 'reselect';
 import sortMatch from 'src/helpers/sortMatch';
 
-export const templatesListSelector = (state) => state.templates.list;
-export const templateByIdSelector = (state, props) => state.templates.byId[props.match.params.id] || { draft: {}, published: {}};
+export const getTemplates = (state) => state.templates.list;
+export const getTemplateById = (state, props) => state.templates.byId[props.match.params.id] || { draft: {}, published: {}};
 
-const filtersSelector = (state) => state.form.templateFilters && state.form.templateFilters.values;
+const getFilters = (state) => state.form.templateFilters && state.form.templateFilters.values;
 
-export const filteredTemplatesSelector = createSelector(
-  templatesListSelector, filtersSelector,
+export const getfilterTemplates = createSelector(
+  getTemplates, getFilters,
   (list, filters = {}) => {
     let matches = list;
-    const { search = false, status = {}, subaccount = {}} = filters;
+    const { search, status = {}, subaccount = {}} = filters;
 
     if (search) {
       matches = sortMatch(
-        list, search,
+        matches, search,
         (item) => `${item.name} ID: ${item.id} Subaccount: ${item.subaccount_id}`
       );
     }
@@ -40,11 +40,15 @@ const filterStatus = (item, filter) => {
 };
 
 const filterSubaccount = (item, filter) => {
-  if (!filter.all && !filter.master) {
+  if (!filter.all && !filter.master && !filter.subaccount) {
     return true;
   }
 
-  if (filter.all && item.shared_with_subaccounts) {
+  if (filter.all && item.shared_with_subaccounts && !item.subaccount_id) {
+    return true;
+  }
+
+  if (filter.subaccount && item.subaccount_id) {
     return true;
   }
 

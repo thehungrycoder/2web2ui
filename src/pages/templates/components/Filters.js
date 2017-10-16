@@ -6,6 +6,15 @@ import { Panel, Grid, Icon } from '@sparkpost/matchbox';
 import { TextFieldWrapper, FilterDropdown } from 'src/components';
 
 const FORMNAME = 'templateFilters';
+const statusOptions = [
+  { content: 'Draft', name: 'draft' },
+  { content: 'Published', name: 'published' }
+];
+const subaccountOptions = [
+  { content: 'Assigned to Master', name: 'master' },
+  { content: 'Assigned to Subaccount', name: 'subaccount' },
+  { content: 'Shared with all', name: 'all' }
+];
 
 const Filters = () => {
   const statusOptions = [

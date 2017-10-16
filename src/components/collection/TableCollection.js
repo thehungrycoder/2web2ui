@@ -16,13 +16,12 @@ const TableBody = (props) => <tbody>{props.children}</tbody>;
 
 const TableCollection = (props) => {
   const { headerComponent, columns, getRowData } = props;
-  const HeaderComponent = headerComponent ? headerComponent : () => <TableHeader columns={columns} />;
   const TableRow = (props) => <Table.Row rowData={getRowData(props)} />;
 
   return (
     <Collection
       outerWrapper={TableWrapper}
-      headerComponent={HeaderComponent}
+      headerComponent={headerComponent || <TableHeader columns={columns} />}
       bodyWrapper={TableBody}
       rowComponent={TableRow}
       {...props}

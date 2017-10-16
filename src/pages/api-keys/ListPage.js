@@ -3,28 +3,20 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Banner, Page } from '@sparkpost/matchbox';
+import config from 'src/config';
 
 import { hideNewApiKey, listApiKeys } from 'src/actions/api-keys';
 
-import ApiErrorBanner from 'src/components/apiErrorBanner/ApiErrorBanner';
-import TableCollection from 'src/components/collection/TableCollection';
-import Layout from 'src/components/layout/Layout';
-import { getLoading } from 'src/selectors/api-keys';
-import PermissionsColumn from './components/PermissionsColumn';
-
-const columns = ['Name', 'Key', 'Permissions'];
+import { Layout, TableCollection, ApiErrorBanner } from 'src/components';
+import { getLoading, getFilteredKeys } from 'src/selectors/api-keys';
+import Filters from './components/Filters';
+import { getRowData, TableHeader } from './components/TableComponents';
 
 const primaryAction = {
   content: 'Create API Key',
   Component: Link,
   to: '/account/api-keys/create'
 };
-
-const getRowData = (key) => [
-  <Link to={`/account/api-keys/details/${key.id}`}>{key.label}</Link>,
-  <code>{key.short_key} ••••</code>,
-  <PermissionsColumn grants={key.grants} />
-];
 
 export class ListPage extends Component {
   state = { copied: false };
@@ -57,9 +49,7 @@ export class ListPage extends Component {
         status="success"
         onDismiss={hideNewApiKey}
       >
-        <p>
-          Make sure to copy your API key now. You won't be able to see it again!
-        </p>
+        <p>Make sure to copy your API key now. You won't be able to see it again!</p>
         <strong>{newKey}</strong>
       </Banner>
     );
@@ -70,7 +60,7 @@ export class ListPage extends Component {
 
     return (
       <TableCollection
-        columns={columns}
+        headerComponent={<TableHeader/>}
         getRowData={getRowData}
         pagination={true}
         rows={keys}
@@ -89,13 +79,15 @@ export class ListPage extends Component {
   }
 
   render() {
-    const { error, loading, newKey } = this.props;
+    const { error, loading, newKey, count } = this.props;
 
     return (
       <Layout.App loading={loading}>
         <Page primaryAction={primaryAction} title="API Keys" />
         {newKey && this.renderBanner()}
-        {error ? this.renderError() : this.renderCollection()}
+        {!error && count > config.filters.minCount && <Filters/>}
+        {!error && count > 0 && this.renderCollection()}
+        {error && this.renderError()}
       </Layout.App>
     );
   }
@@ -104,9 +96,10 @@ export class ListPage extends Component {
 const mapStateToProps = (state) => {
   const { error, keys, newKey } = state.apiKeys;
   return {
-    error,
-    keys,
+    count: keys.length,
+    keys: getFilteredKeys(state),
     loading: getLoading(state),
+    error,
     newKey
   };
 };

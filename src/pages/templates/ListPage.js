@@ -5,22 +5,18 @@ import config from 'src/config';
 
 // Actions
 import { listTemplates } from 'src/actions/templates';
-import { templatesListSelector, filteredTemplatesSelector } from 'src/selectors/templates';
+import { getTemplates, getfilterTemplates } from 'src/selectors/templates';
+
 // Components
 import { Layout, TableCollection, ApiErrorBanner } from 'src/components';
 import { Page, EmptyState } from '@sparkpost/matchbox';
 import Filters from './components/Filters';
+import { getRowData, TableHeader } from './components/TableComponents';
 
-const CREATE_ACTION = {
+const primaryAction = {
   content: 'Create Template',
   to: '/templates/create',
   Component: Link
-};
-const columns = ['Name', 'ID', 'Published', 'Updated'];
-const getRowData = ({ published, id, name, last_update_time }) => {
-  const status = published ? 'published' : 'draft';
-  const nameLink = <Link to={`/templates/edit/${id}`}>{name}</Link>;
-  return [nameLink, id, status, Date(last_update_time)];
 };
 
 class ListPage extends Component {
@@ -30,22 +26,20 @@ class ListPage extends Component {
   }
 
   renderError() {
-    const { error, listTemplates } = this.props;
     return (
       <ApiErrorBanner
         message={'Sorry, we seem to have had some trouble loading your templates.'}
-        errorDetails={error.message}
-        reload={listTemplates}
+        errorDetails={this.props.error.message}
+        reload={this.props.listTemplates}
       />
     );
   }
 
   renderCollection() {
-    const { templates } = this.props;
     return (
       <TableCollection
-        columns={columns}
-        rows={templates}
+        headerComponent={<TableHeader />}
+        rows={this.props.templates}
         getRowData={getRowData}
         pagination
       />
@@ -60,7 +54,7 @@ class ListPage extends Component {
         <Layout.App>
           <EmptyState
             title='Manage your email templates'
-            action={CREATE_ACTION} >
+            action={primaryAction} >
             {/* secondaryAction={content: 'Learn More', onClick: Learn_More()} > */}
             <p>Build, test, preview and send your transmissions.</p>
           </EmptyState>
@@ -71,12 +65,12 @@ class ListPage extends Component {
     return (
       <Layout.App loading={loading}>
         <Page
-          primaryAction={CREATE_ACTION}
-          title={'Templates'}
+          primaryAction={primaryAction}
+          title='Templates'
         />
         {error && this.renderError()}
         {!error && count > config.filters.minCount && <Filters />}
-        {!error && count > 0 && this.renderCollection()}
+        {!error && this.renderCollection()}
       </Layout.App>
     );
   }
@@ -84,8 +78,8 @@ class ListPage extends Component {
 
 function mapStateToProps(state) {
   return {
-    count: templatesListSelector(state).length,
-    templates: filteredTemplatesSelector(state),
+    count: getTemplates(state).length,
+    templates: getfilterTemplates(state),
     loading: state.templates.listLoading,
     error: state.templates.listError
   };

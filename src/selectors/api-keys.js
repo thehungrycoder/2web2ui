@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import { createSelector } from 'reselect';
+import sortMatch from 'src/helpers/sortMatch';
 
 /*
  * generic apiKeys selectors
@@ -12,6 +13,8 @@ const getApiKeyId = (state, props) => props.match.params.id;
 const getKeysLoading = (state) => state.apiKeys.keysLoading;
 const getGrantsLoading = (state) => state.apiKeys.grantsLoading;
 const getSubaccountsLoading = (state) => state.subaccounts.listLoading;
+
+const getFilters = (state) => state.form.apiKeysFilters && state.form.apiKeysFilters.values;
 
 export const getApiKey = createSelector(
   [getApiKeys, getApiKeyId],
@@ -28,6 +31,40 @@ export const getLoading = createSelector(
   (keysLoading, grantsLoading, subaccountsLoading) =>
     keysLoading || grantsLoading || subaccountsLoading
 );
+
+// Filtered Keys
+export const getFilteredKeys = createSelector(
+  getApiKeys, getFilters,
+  (list, filters = {}) => {
+    let matches = list;
+    const { search = false, subaccount = {}} = filters;
+
+    if (search) {
+      matches = sortMatch(
+        matches, search,
+        (item) => `${item.label} User: ${item.username} Shortkey: ${item.short_key} Subaccount: ${item.subaccount_id}`
+      );
+    }
+
+    return matches.filter((item) => filterSubaccount(item, subaccount));
+  }
+);
+
+const filterSubaccount = (item, filter) => {
+  if (!filter.master && !filter.subaccount) {
+    return true;
+  }
+
+  if (filter.subaccount && item.subaccount_id) {
+    return true;
+  }
+
+  if (filter.master && !item.subaccount_id) {
+    return true;
+  }
+
+  return false;
+};
 
 /*
  * ApiKeyForm selectors

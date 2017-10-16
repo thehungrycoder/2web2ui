@@ -8,7 +8,7 @@ import { getDraft, getPublished, update, deleteTemplate, publish } from '../../a
 import { showAlert } from 'src/actions/globalAlert';
 
 // Selectors
-import { templateByIdSelector } from 'src/selectors/templates';
+import { getTemplateById } from 'src/selectors/templates';
 
 // Components
 import { Layout } from 'src/components';
@@ -148,7 +148,7 @@ class EditPage extends Component {
 }
 
 const mapStateToProps = (state, props) => {
-  const template = templateByIdSelector(state, props);
+  const template = getTemplateById(state, props);
   return {
     loading: state.templates.getLoading,
     template,

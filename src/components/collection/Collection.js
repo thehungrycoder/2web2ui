@@ -64,7 +64,7 @@ class Collection extends Component {
     const {
       rowComponent: RowComponent,
       rowKeyName = 'id',
-      headerComponent: HeaderComponent,
+      headerComponent,
       outerWrapper: OuterWrapper = PassThroughWrapper,
       bodyWrapper: BodyWrapper = PassThroughWrapper
     } = this.props;
@@ -72,9 +72,9 @@ class Collection extends Component {
     return (
       <div>
         <OuterWrapper>
-          <HeaderComponent />
+          {headerComponent}
           <BodyWrapper>
-            {this.getVisibleRows().map((row, i) => <RowComponent key={row[rowKeyName] ? `${row[rowKeyName]}-${i}` : i} {...row} />)}
+            {this.getVisibleRows().map((row, i) => <RowComponent key={`${row[rowKeyName]}-${i}`} {...row} />)}
           </BodyWrapper>
         </OuterWrapper>
         {this.renderPagination()}
