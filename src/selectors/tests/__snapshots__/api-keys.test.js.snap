@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Filter Api Keys Selector filters all subaccount options 1`] = `
+Array [
+  Object {
+    "label": "One",
+    "subaccount_id": 1,
+  },
+  Object {
+    "label": "Two",
+  },
+]
+`;
+
+exports[`Filter Api Keys Selector filters assigned to master 1`] = `
+Array [
+  Object {
+    "label": "Two",
+  },
+]
+`;
+
+exports[`Filter Api Keys Selector filters assigned to subaccount 1`] = `
+Array [
+  Object {
+    "label": "One",
+    "subaccount_id": 1,
+  },
+]
+`;
+
+exports[`Filter Api Keys Selector filters search 1`] = `
+Array [
+  Object {
+    "label": "Two",
+  },
+]
+`;
+
+exports[`Filter Api Keys Selector returns unfiltered list 1`] = `
+Array [
+  Object {
+    "label": "One",
+    "subaccount_id": 1,
+  },
+  Object {
+    "label": "Two",
+  },
+]
+`;

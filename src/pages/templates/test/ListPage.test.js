@@ -6,18 +6,13 @@ import { ListPage } from '../ListPage';
 const props = {
   loading: false,
   error: null,
-  listApiKeys: jest.fn(() => []),
   count: 30,
-  keys: [
+  templates: [
     {
-      label: 'Test Key 1',
-      short_key: 'ab01',
-      grants: ['metrics/view']
+      name: 'Temp 1',
     },
     {
-      label: 'Test Key 2',
-      short_key: 'fe98',
-      grants: ['smtp/inject']
+      name: 'Temp 2',
     }
   ]
 };
@@ -29,6 +24,11 @@ beforeEach(() => {
 });
 
 it('renders correctly', () => {
+  expect(wrapper).toMatchSnapshot();
+});
+
+it('renders empty state', () => {
+  wrapper.setProps({ count: 0 });
   expect(wrapper).toMatchSnapshot();
 });
 

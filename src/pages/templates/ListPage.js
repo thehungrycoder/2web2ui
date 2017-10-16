@@ -19,7 +19,7 @@ const primaryAction = {
   Component: Link
 };
 
-class ListPage extends Component {
+export class ListPage extends Component {
 
   componentDidMount() {
     this.props.listTemplates();

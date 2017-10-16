@@ -8,11 +8,11 @@ exports[`renders correctly 1`] = `
     primaryAction={
       Object {
         "Component": [Function],
-        "content": "Create API Key",
-        "to": "/account/api-keys/create",
+        "content": "Create Template",
+        "to": "/templates/create",
       }
     }
-    title="API Keys"
+    title="Templates"
   />
   <Connect(ReduxForm) />
   <TableCollection
@@ -22,22 +22,33 @@ exports[`renders correctly 1`] = `
     rows={
       Array [
         Object {
-          "grants": Array [
-            "metrics/view",
-          ],
-          "label": "Test Key 1",
-          "short_key": "ab01",
+          "name": "Temp 1",
         },
         Object {
-          "grants": Array [
-            "smtp/inject",
-          ],
-          "label": "Test Key 2",
-          "short_key": "fe98",
+          "name": "Temp 2",
         },
       ]
     }
   />
+</App>
+`;
+
+exports[`renders empty state 1`] = `
+<App>
+  <t
+    action={
+      Object {
+        "Component": [Function],
+        "content": "Create Template",
+        "to": "/templates/create",
+      }
+    }
+    title="Manage your email templates"
+  >
+    <p>
+      Build, test, preview and send your transmissions.
+    </p>
+  </t>
 </App>
 `;
 
@@ -49,16 +60,15 @@ exports[`renders errors when present 1`] = `
     primaryAction={
       Object {
         "Component": [Function],
-        "content": "Create API Key",
-        "to": "/account/api-keys/create",
+        "content": "Create Template",
+        "to": "/templates/create",
       }
     }
-    title="API Keys"
+    title="Templates"
   />
   <ApiErrorBanner
     errorDetails="Uh oh! It broke. "
-    message="Sorry, we seem to have had some trouble loading your API keys."
-    reload={[Function]}
+    message="Sorry, we seem to have had some trouble loading your templates."
   />
 </App>
 `;

@@ -1,0 +1,133 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div>
+  <t
+    trigger={
+      <t
+        prefix={null}
+        readOnly={true}
+        suffix={
+          <t
+            name="CaretDown"
+          />
+        }
+        type="text"
+        value="Status"
+      />
+    }
+  >
+    <t
+      actions={
+        Array [
+          Object {
+            "content": "Active",
+            "name": "active",
+            "onClick": [Function],
+            "selected": undefined,
+          },
+          Object {
+            "content": "Terminated",
+            "name": "terminated",
+            "onClick": [Function],
+            "selected": undefined,
+          },
+          Object {
+            "content": "Suspended",
+            "name": "suspended",
+            "onClick": [Function],
+            "selected": undefined,
+          },
+        ]
+      }
+    />
+  </t>
+  <Field
+    component="input"
+    name="status.active"
+    parse={[Function]}
+    tabIndex="-1"
+    type="checkbox"
+  />
+  <Field
+    component="input"
+    name="status.terminated"
+    parse={[Function]}
+    tabIndex="-1"
+    type="checkbox"
+  />
+  <Field
+    component="input"
+    name="status.suspended"
+    parse={[Function]}
+    tabIndex="-1"
+    type="checkbox"
+  />
+</div>
+`;
+
+exports[`renders selected correctly 1`] = `
+<div>
+  <t
+    trigger={
+      <t
+        prefix="(1)"
+        readOnly={true}
+        suffix={
+          <t
+            name="CaretDown"
+          />
+        }
+        type="text"
+        value="Status"
+      />
+    }
+  >
+    <t
+      actions={
+        Array [
+          Object {
+            "content": "Active",
+            "name": "active",
+            "onClick": [Function],
+            "selected": false,
+          },
+          Object {
+            "content": "Terminated",
+            "name": "terminated",
+            "onClick": [Function],
+            "selected": false,
+          },
+          Object {
+            "content": "Suspended",
+            "name": "suspended",
+            "onClick": [Function],
+            "selected": true,
+          },
+        ]
+      }
+    />
+  </t>
+  <Field
+    component="input"
+    name="status.active"
+    parse={[Function]}
+    tabIndex="-1"
+    type="checkbox"
+  />
+  <Field
+    component="input"
+    name="status.terminated"
+    parse={[Function]}
+    tabIndex="-1"
+    type="checkbox"
+  />
+  <Field
+    component="input"
+    name="status.suspended"
+    parse={[Function]}
+    tabIndex="-1"
+    type="checkbox"
+  />
+</div>
+`;

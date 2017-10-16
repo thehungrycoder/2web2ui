@@ -8,7 +8,7 @@ import { TextField, Icon, Popover, ActionList } from '@sparkpost/matchbox';
 
 import styles from './FilterDropdown.module.scss';
 
-class FilterDropdown extends Component {
+export class FilterDropdown extends Component {
 
   handleActionClick(e, name) {
     const { formName, change, namespace, values } = this.props;
