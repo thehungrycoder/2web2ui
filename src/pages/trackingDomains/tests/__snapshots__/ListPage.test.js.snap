@@ -54,12 +54,28 @@ exports[`renders errors when present 1`] = `
   loading={false}
 >
   <div>
-    <TrackingDomainsListHeader />
+    <t
+      primaryAction={
+        Object {
+          "Component": [Function],
+          "content": "Create Tracking Domain",
+          "to": "/account/tracking-domains/create",
+        }
+      }
+      title="Tracking Domains"
+    />
     <ApiErrorBanner
-      action="GET"
-      errorDetails="Uh oh! It broke."
+      error={
+        Object {
+          "meta": Object {
+            "method": "GET",
+          },
+          "payload": Object {
+            "message": "Uh oh! It broke.",
+          },
+        }
+      }
       reload={[Function]}
-      resource="tracking domains"
     />
   </div>
 </App>

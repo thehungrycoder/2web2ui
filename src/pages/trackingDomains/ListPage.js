@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
+import { Page } from '@sparkpost/matchbox';
 import Layout from 'src/components/layout/Layout';
 import ApiErrorBanner from 'src/components/apiErrorBanner/ApiErrorBanner';
+
 import TrackingDomainsCollection from './components/TrackingDomainsCollection';
-import TrackingDomainsListHeader from './components/TrackingDomainsListHeader';
 import TrackingDomainsEmptyState from './components/TrackingDomainsEmptyState';
 
 import { listTrackingDomains } from 'src/actions/trackingDomains';
@@ -22,14 +24,18 @@ export class ListPage extends Component {
     this.props.listTrackingDomains({ force: true }); // force a refresh
   };
 
-  renderError({ payload, meta }) {
+  renderError(error) {
+    const primaryAction = {
+      content: 'Create Tracking Domain',
+      Component: Link,
+      to: '/account/tracking-domains/create'
+    };
+
     return (
       <div>
-        <TrackingDomainsListHeader />
+        <Page title='Tracking Domains' primaryAction={primaryAction}/>
         <ApiErrorBanner
-          errorDetails={payload.message}
-          action={meta.method}
-          resource='tracking domains'
+          error={error}
           reload={this.onReloadApiBanner}
         />
       </div>
