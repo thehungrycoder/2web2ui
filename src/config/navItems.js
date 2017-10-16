@@ -68,6 +68,10 @@ export default [
       {
         label: 'Tracking Domains',
         to: '/account/tracking-domains'
+      },
+      {
+        label: 'IP Pools',
+        to: '/account/ip-pools'
       }
     ]
   }
