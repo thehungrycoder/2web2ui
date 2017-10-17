@@ -7,6 +7,7 @@ const props = {
   loading: false,
   error: null,
   count: 30,
+  listTemplates: jest.fn(),
   templates: [
     {
       name: 'Temp 1',

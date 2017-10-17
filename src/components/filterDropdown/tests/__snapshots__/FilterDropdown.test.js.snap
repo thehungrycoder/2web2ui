@@ -44,6 +44,7 @@ exports[`renders correctly 1`] = `
   </t>
   <Field
     component="input"
+    key="active"
     name="status.active"
     parse={[Function]}
     tabIndex="-1"
@@ -51,6 +52,7 @@ exports[`renders correctly 1`] = `
   />
   <Field
     component="input"
+    key="terminated"
     name="status.terminated"
     parse={[Function]}
     tabIndex="-1"
@@ -58,6 +60,7 @@ exports[`renders correctly 1`] = `
   />
   <Field
     component="input"
+    key="suspended"
     name="status.suspended"
     parse={[Function]}
     tabIndex="-1"
@@ -110,6 +113,7 @@ exports[`renders selected correctly 1`] = `
   </t>
   <Field
     component="input"
+    key="active"
     name="status.active"
     parse={[Function]}
     tabIndex="-1"
@@ -117,6 +121,7 @@ exports[`renders selected correctly 1`] = `
   />
   <Field
     component="input"
+    key="terminated"
     name="status.terminated"
     parse={[Function]}
     tabIndex="-1"
@@ -124,6 +129,7 @@ exports[`renders selected correctly 1`] = `
   />
   <Field
     component="input"
+    key="suspended"
     name="status.suspended"
     parse={[Function]}
     tabIndex="-1"
