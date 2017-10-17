@@ -21,14 +21,19 @@ export default [
     icon: 'Code'
   },
   {
-    label: 'Recipients',
-    to: '/recipient-lists',
-    icon: 'Mail'
-  },
-  {
-    label: 'Suppressions',
-    to: '/suppression-lists',
-    icon: 'Block'
+    label: 'Lists',
+    to: '/lists',
+    icon: 'Mail',
+    children: [
+      {
+        label: 'Recipient Lists',
+        to: '/lists/recipient-lists'
+      },
+      {
+        label: 'Suppressions',
+        to: '/lits/suppression-list'
+      }
+    ]
   },
   {
     label: 'Webhooks',

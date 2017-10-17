@@ -117,7 +117,7 @@ export default [
     condition: hasGrants('templates/modify')
   },
   {
-    path: '/recipient-lists',
+    path: '/lists/recipient-lists',
     component: recipientLists.ListPage,
     condition: hasGrants('recipient_lists/manage')
   },
