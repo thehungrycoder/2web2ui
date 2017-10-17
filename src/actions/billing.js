@@ -42,11 +42,7 @@ export function updateBillingContact(data) {
     meta: {
       method: 'PUT',
       url: '/account/billing',
-      data: {
-        ...formatContactData(data),
-        address1: 'N/A', // TODO remove when accusers is updated FAD-5660
-        city: 'N/A'
-      }
+      data: formatContactData(data)
     }
   });
 
