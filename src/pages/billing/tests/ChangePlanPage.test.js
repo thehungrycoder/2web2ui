@@ -11,7 +11,7 @@ describe('Page: ChangePlanPage', () => {
     account: {},
     // handleSubmit: jest.fn(),
     getPlans: jest.fn(),
-    getBillingCountries: jest.fn(),
+    getBillingCountries: jest.fn()
     // showAlert: jest.fn(),
     // billingCreate: jest.fn(() => Promise.resolve()),
     // billingUpdate: jest.fn(() => Promise.resolve()),

@@ -6,6 +6,7 @@ import { ListPage } from '../ListPage';
 const props = {
   loading: false,
   error: null,
+  listApiKeys: jest.fn(() => []),
   keys: [
     {
       label: 'Test Key 1',

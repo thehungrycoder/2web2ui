@@ -17,6 +17,7 @@ exports[`Users list page renders error banner, table, and hidden modal 1`] = `
   <ApiErrorBanner
     errorDetails="Uh oh! It broke."
     message="Sorry, we seem to have had some trouble loading your users."
+    reload={[Function]}
   />
   <TableCollection
     columns={

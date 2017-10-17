@@ -12,6 +12,7 @@ exports[`should check all children and check parent 1`] = `
     <t
       checked={true}
       id="myCheckBoxGroup[0]"
+      key="checkbox-0"
       label="First"
       name="myCheckBoxGroup[0]"
       onChange={[Function]}
@@ -20,6 +21,7 @@ exports[`should check all children and check parent 1`] = `
     <t
       checked={true}
       id="myCheckBoxGroup[1]"
+      key="checkbox-1"
       label="Second"
       name="myCheckBoxGroup[1]"
       onChange={[Function]}
@@ -41,6 +43,7 @@ exports[`should check one child 1`] = `
     <t
       checked={true}
       id="myCheckBoxGroup[0]"
+      key="checkbox-0"
       label="First"
       name="myCheckBoxGroup[0]"
       onChange={[Function]}
@@ -49,6 +52,7 @@ exports[`should check one child 1`] = `
     <t
       checked={false}
       id="myCheckBoxGroup[1]"
+      key="checkbox-1"
       label="Second"
       name="myCheckBoxGroup[1]"
       onChange={[Function]}

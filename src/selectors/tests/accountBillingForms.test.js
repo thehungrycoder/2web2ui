@@ -9,7 +9,7 @@ describe('Billing Initial Values', () => {
     country_code: 'GG',
     state: 'EZ',
     zip_code: '54321'
-  }
+  };
 
   it('should return change plan values: with a billing id', () => {
     const store = { currentUser: user };
@@ -18,7 +18,7 @@ describe('Billing Initial Values', () => {
   });
 
   it('should return change plan values: without billing id', () => {
-    const store = { currentUser: user, account: { subscription: { self_serve: false }} };
+    const store = { currentUser: user, account: { subscription: { self_serve: false }}};
     billingInfo.currentPlanSelector = jest.fn(() => ({ code: 'notinzuora' }));
     billingInfo.publicPlansSelector = jest.fn(() => ([
       { isFree: true, code: 'im free' },
@@ -33,7 +33,7 @@ describe('Billing Initial Values', () => {
   });
 
   it('should return update contact values', () => {
-    const store = { account:{ billing: user } };
+    const store = { account: { billing: user }};
     expect(updateContactInitialValues(store)).toMatchSnapshot();
   });
 });

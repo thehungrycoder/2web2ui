@@ -1,11 +1,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-
 import { ListPage } from '../ListPage';
 
 const props = {
   loading: false,
   error: null,
+  listSubaccounts: jest.fn(() => []),
   subaccounts: [
     {
       id: 123,
@@ -40,7 +40,7 @@ it('renders correctly', () => {
 });
 
 it('renders empty state', () => {
-  wrapper = shallow(<ListPage loading={false} error={null} subaccounts={[]} />);
+  wrapper = shallow(<ListPage {...props} loading={false} error={null} subaccounts={[]} />);
   expect(wrapper).toMatchSnapshot();
 });
 

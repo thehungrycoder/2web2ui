@@ -19,6 +19,14 @@ describe('Payment Form: ', () => {
     wrapper = shallow(<PaymentForm {...props} />);
   });
 
+  it('should register events on mount', () => {
+    expect(PaymentMock.getCardArray).toHaveBeenCalledTimes(1);
+    expect(HelpersMock.formatCardTypes).toHaveBeenCalledTimes(1);
+    expect(PaymentMock.formatCardNumber).toHaveBeenCalledTimes(1);
+    expect(PaymentMock.formatCardExpiry).toHaveBeenCalledTimes(1);
+    expect(PaymentMock.formatCardCVC).toHaveBeenCalledTimes(1);
+  });
+
   it('should render', () => {
     expect(wrapper).toMatchSnapshot();
   });
@@ -41,14 +49,5 @@ describe('Payment Form: ', () => {
     expect(PaymentMock.fns.cardExpiryVal).toHaveBeenCalledWith(e.target.value);
     expect(changeSpy).toHaveBeenCalledTimes(2);
     changeSpy.mockReset();
-  });
-
-  it('should register events on mount', () => {
-    wrapper.instance().componentDidMount();
-    expect(PaymentMock.getCardArray).toHaveBeenCalledTimes(1);
-    expect(HelpersMock.formatCardTypes).toHaveBeenCalledTimes(1);
-    expect(PaymentMock.formatCardNumber).toHaveBeenCalledTimes(1);
-    expect(PaymentMock.formatCardExpiry).toHaveBeenCalledTimes(1);
-    expect(PaymentMock.formatCardCVC).toHaveBeenCalledTimes(1);
   });
 });

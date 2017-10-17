@@ -65,11 +65,10 @@ describe('Page: SummaryPage', () => {
 
   it('should handle modal toggle', () => {
     wrapper.setProps({
-      account: { subscription: { self_serve: true }},
+      account: { subscription: { self_serve: true }}
     });
     const modalSpy = jest.spyOn(wrapper.instance(), 'handleModal');
-    wrapper.instance().handleModal('payment');
-    expect(wrapper).toHaveState('show', 'payment');
+    wrapper.setState({ show: 'payment' });
     expect(wrapper).toMatchSnapshot();
     wrapper.instance().handleEscape({ key: 'Escape' });
     expect(modalSpy).toHaveBeenCalled();

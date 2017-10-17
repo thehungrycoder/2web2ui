@@ -3,7 +3,7 @@
 exports[`SparkPost Component Icon Render: no props 1`] = `
 <svg
   class=""
-  viewbox="0 0 127.5 260"
+  viewBox="0 0 127.5 260"
   xmlns="http://www.w3.org/2000/svg"
 >
   <path
@@ -15,7 +15,7 @@ exports[`SparkPost Component Icon Render: no props 1`] = `
 exports[`SparkPost Component Icon Render: type 1`] = `
 <svg
   class=""
-  viewbox="0 0 127.5 260"
+  viewBox="0 0 127.5 260"
   xmlns="http://www.w3.org/2000/svg"
 >
   <path
@@ -28,7 +28,7 @@ exports[`SparkPost Component Icon Render: type and extra 1`] = `
 <svg
   class=""
   display="inline"
-  viewbox="0 0 127.5 260"
+  viewBox="0 0 127.5 260"
   xmlns="http://www.w3.org/2000/svg"
 >
   <path
@@ -41,7 +41,7 @@ exports[`SparkPost Component Logo Render: no props 1`] = `
 <svg
   class=""
   height="100%"
-  viewbox="0 0 499 130"
+  viewBox="0 0 499 130"
   xmlns="http://www.w3.org/2000/svg"
 >
   <path
@@ -57,7 +57,7 @@ exports[`SparkPost Component Logo Render: type 1`] = `
 <svg
   class=""
   height="100%"
-  viewbox="0 0 499 130"
+  viewBox="0 0 499 130"
   xmlns="http://www.w3.org/2000/svg"
 >
   <path
@@ -74,7 +74,7 @@ exports[`SparkPost Component Logo Render: type and extra 1`] = `
   class=""
   display="inline"
   height="100%"
-  viewbox="0 0 499 130"
+  viewBox="0 0 499 130"
   xmlns="http://www.w3.org/2000/svg"
 >
   <path
