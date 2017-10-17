@@ -1,5 +1,5 @@
-import ListPage from './ListPage';
+import IpPoolsList from './ListPage';
 
 export default {
-  ListPage
+  ListPage: IpPoolsList
 };

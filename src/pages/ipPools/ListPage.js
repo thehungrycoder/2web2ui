@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 // Actions
 import { listPools } from '../../actions/ipPools';
@@ -15,7 +15,7 @@ const getRowData = ({ id, name, ips }) => {
   return [nameLink, id, ips.length.toString()];
 };
 
-class IpPoolsList extends Component {
+export class IpPoolsList extends Component {
 
   componentDidMount() {
     this.props.listPools();
@@ -68,4 +68,4 @@ function mapStateToProps({ ipPools }) {
   };
 }
 
-export default withRouter(connect(mapStateToProps, { listPools })(IpPoolsList));
+export default connect(mapStateToProps, { listPools })(IpPoolsList);
