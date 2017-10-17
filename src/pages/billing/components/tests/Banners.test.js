@@ -64,11 +64,11 @@ describe('Billing Banners: ', () => {
 
   it('renders Premium banner', () => {
     const wrapper = shallow(<PremiumBanner />);
-    expect(wrapper).toMatchSnapshot()
+    expect(wrapper).toMatchSnapshot();
   });
 
   it('renders Enterprise banner', () => {
     const wrapper = shallow(<EnterpriseBanner />);
-    expect(wrapper).toMatchSnapshot()
+    expect(wrapper).toMatchSnapshot();
   });
 });

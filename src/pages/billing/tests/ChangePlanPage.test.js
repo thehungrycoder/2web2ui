@@ -11,7 +11,7 @@ describe('Page: ChangePlanPage', () => {
     account: {},
     // handleSubmit: jest.fn(),
     getPlans: jest.fn(),
-    getBillingCountries: jest.fn(),
+    getBillingCountries: jest.fn()
     // showAlert: jest.fn(),
     // billingCreate: jest.fn(() => Promise.resolve()),
     // billingUpdate: jest.fn(() => Promise.resolve()),
@@ -43,10 +43,6 @@ describe('Page: ChangePlanPage', () => {
   it('should not render form if not allowed to change plan', () => {
     wrapper.setProps({ canChangePlan: false });
     expect(wrapper).toMatchSnapshot();
-    expect(wrapper.find('CardSummary')).toBePresent();
-    wrapper.setState({ useSavedCC: false });
-    expect(wrapper.find('Connect(PaymentForm)')).toBePresent();
-    expect(wrapper.find('Connect(BillingAddressForm)')).toBePresent();
   });
 
   // it('should not render form if self serve', () => {

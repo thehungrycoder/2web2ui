@@ -7,9 +7,9 @@ describe('Form Container: Change Plan', () => {
 
   const props = {
     account: {
-      subscription: { self_serve: true },
+      subscription: { self_serve: true }
     },
-    billing: { countries: [] },
+    billing: { countries: []},
     plans: [],
     currentPlan: {},
     selectedPlan: {},
@@ -18,7 +18,7 @@ describe('Form Container: Change Plan', () => {
     showAlert: jest.fn(),
     billingCreate: jest.fn(() => Promise.resolve()),
     billingUpdate: jest.fn(() => Promise.resolve()),
-    updateSubscription: jest.fn(() => Promise.resolve()),
+    updateSubscription: jest.fn(() => Promise.resolve())
   };
 
   beforeEach(() => {
@@ -32,17 +32,17 @@ describe('Form Container: Change Plan', () => {
   it('should show saved card', () => {
     const receiveSpy = jest.spyOn(wrapper.instance(), 'componentWillReceiveProps');
     expect(wrapper).toHaveState('useSavedCC', null);
-    wrapper.setProps({ shouldExposeCard: true })
+    wrapper.setProps({ shouldExposeCard: true });
     expect(receiveSpy).toHaveBeenCalledWith({ ...props, shouldExposeCard: true }, {});
     expect(wrapper).toHaveState('useSavedCC', true);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should handle toggle', () => {
-    wrapper.setProps({ shouldExposeCard: true })
+    wrapper.setProps({ shouldExposeCard: true });
     expect(wrapper.find('CardSummary')).toBePresent();
     expect(wrapper.find('Connect(PaymentForm)')).not.toBePresent();
-    wrapper.instance().handleCardToggle();
+    wrapper.setState({ useSavedCC: false });
     expect(wrapper.find('CardSummary')).not.toBePresent();
     expect(wrapper.find('Connect(PaymentForm)')).toBePresent();
   });
@@ -70,9 +70,9 @@ describe('Form Container: Change Plan', () => {
     const newProps = {
       account: {
         billing: {},
-        subscription: { self_serve: true },
+        subscription: { self_serve: true }
       }
-    }
+    };
     const updateSpy = jest.spyOn(wrapper.instance().props, 'billingUpdate');
     wrapper.setProps(newProps);
     wrapper.instance().onSubmit('hi');
@@ -83,9 +83,9 @@ describe('Form Container: Change Plan', () => {
     const newProps = {
       account: {
         billing: {},
-        subscription: { self_serve: true },
+        subscription: { self_serve: true }
       }
-    }
+    };
     const subSpy = jest.spyOn(wrapper.instance().props, 'updateSubscription');
     const planpicker = { planpicker: { code: 'newplan' }};
     wrapper.setProps(newProps);

@@ -32,7 +32,7 @@ describe('GlobalAlert', () => {
     it('should show details', () => {
       const wrapper = shallow(<GlobalAlert />);
       wrapper.setProps(props);
-      expect(wrapper.setState({ show: true, showDetails: true }));
+      wrapper.setState({ show: true, showDetails: true });
       expect(wrapper).toMatchSnapshot();
     });
 

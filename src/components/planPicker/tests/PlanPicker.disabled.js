@@ -1,4 +1,4 @@
-// 
+//
 // import React from 'react';
 // import Downshift from 'downshift';
 
