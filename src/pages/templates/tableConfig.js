@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { format } from 'date-fns';
-import { Table } from '@sparkpost/matchbox';
 
 export const getRowData = ({ published, id, name, last_update_time, subaccount_id, shared_with_subaccounts }) => [
   <Link to={`/templates/edit/${id}`}>{name}</Link>,
@@ -11,18 +10,10 @@ export const getRowData = ({ published, id, name, last_update_time, subaccount_i
   shared_with_subaccounts ? 'All' : subaccount_id
 ];
 
-const columns = [
+export const columns = [
   { label: 'Name', width: '25%' },
-  { label: 'ID', width: '20%' },
+  { label: 'ID', width: '25%' },
   { label: 'Published', width: '15%' },
-  { label: 'Updated', width: '' },
+  { label: 'Updated' },
   { label: 'Subaccount', width: '15%' }
 ];
-
-export const TableHeader = () => (
-  <thead>
-    <Table.Row>
-      {columns.map(({ label, ...rest }) => <Table.HeaderCell key={label} {...rest}>{label}</Table.HeaderCell>)}
-    </Table.Row>
-  </thead>
-);

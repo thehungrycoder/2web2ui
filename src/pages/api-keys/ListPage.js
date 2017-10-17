@@ -10,7 +10,7 @@ import { hideNewApiKey, listApiKeys } from 'src/actions/api-keys';
 import { Layout, TableCollection, ApiErrorBanner } from 'src/components';
 import { getLoading, getFilteredKeys } from 'src/selectors/api-keys';
 import Filters from './components/Filters';
-import { getRowData, TableHeader } from './components/TableComponents';
+import { getRowData, columns } from './tableConfig';
 
 const primaryAction = {
   content: 'Create API Key',
@@ -60,7 +60,7 @@ export class ListPage extends Component {
 
     return (
       <TableCollection
-        headerComponent={<TableHeader/>}
+        columns={columns}
         getRowData={getRowData}
         pagination={true}
         rows={keys}

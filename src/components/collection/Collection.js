@@ -64,7 +64,7 @@ class Collection extends Component {
     const {
       rowComponent: RowComponent,
       rowKeyName = 'id',
-      headerComponent,
+      headerComponent: HeaderComponent,
       outerWrapper: OuterWrapper = PassThroughWrapper,
       bodyWrapper: BodyWrapper = PassThroughWrapper
     } = this.props;
@@ -72,7 +72,7 @@ class Collection extends Component {
     return (
       <div>
         <OuterWrapper>
-          {headerComponent}
+          <HeaderComponent />
           <BodyWrapper>
             {this.getVisibleRows().map((row, i) => <RowComponent key={`${row[rowKeyName]}-${i}`} {...row} />)}
           </BodyWrapper>

@@ -47,9 +47,17 @@ export const RadioGroup = ({ input, options, title }) => (
   </Radio.Group>
 );
 
-export const CheckboxWrapper = ({ input, meta, ...rest }) => (
-  <Checkbox id={input.name} {...input} {...rest} />
-);
+export const CheckboxWrapper = ({ input, meta, ...rest }) => {
+  const { active, error, touched } = meta;
+  return (
+    <Checkbox
+      id={input.name}
+      {...input}
+      error={!active && touched && error ? error : undefined}
+      {...rest}
+    />
+  );
+};
 
 /**
  * @example

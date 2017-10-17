@@ -11,7 +11,7 @@ import { getTemplates, getfilterTemplates } from 'src/selectors/templates';
 import { Layout, TableCollection, ApiErrorBanner } from 'src/components';
 import { Page, EmptyState } from '@sparkpost/matchbox';
 import Filters from './components/Filters';
-import { getRowData, TableHeader } from './components/TableComponents';
+import { getRowData, columns } from './tableConfig';
 
 const primaryAction = {
   content: 'Create Template',
@@ -38,7 +38,7 @@ export class ListPage extends Component {
   renderCollection() {
     return (
       <TableCollection
-        headerComponent={<TableHeader />}
+        columns={columns}
         rows={this.props.templates}
         getRowData={getRowData}
         pagination

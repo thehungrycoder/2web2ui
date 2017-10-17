@@ -3,11 +3,7 @@
 exports[`TableCollection Component should render with no props 1`] = `
 <withRouter(Collection)
   bodyWrapper={[Function]}
-  headerComponent={
-    <TableHeader
-      columns={undefined}
-    />
-  }
+  headerComponent={[Function]}
   outerWrapper={[Function]}
   rowComponent={[Function]}
 />

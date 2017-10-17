@@ -5,7 +5,7 @@ import { reduxForm, Field } from 'redux-form';
 import { Panel, Grid, Icon } from '@sparkpost/matchbox';
 import { TextFieldWrapper, FilterDropdown } from 'src/components';
 
-const FORMNAME = 'templateFilters';
+const formName = 'templateFilters';
 const statusOptions = [
   { content: 'Draft', name: 'draft' },
   { content: 'Published', name: 'published' }
@@ -16,11 +16,34 @@ const subaccountOptions = [
   { content: 'Shared with all', name: 'all' }
 ];
 
-const Filters = () => {
-  const statusOptions = [
-    { content: 'Draft', name: 'draft' },
-    { content: 'Published', name: 'published' }
-  ];
+const Filters = () => (
+  <Panel sectioned>
+    <Grid>
+      <Grid.Column xs={5}>
+        <Field
+          name='search'
+          placeholder='Search by label, ID, or subaccount id'
+          prefix={<Icon name='Search'/>}
+          component={TextFieldWrapper}
+        />
+      </Grid.Column>
+      <Grid.Column>
+        <FilterDropdown
+          formName={formName}
+          namespace='status'
+          options={statusOptions}
+          displayValue='Status' />
+      </Grid.Column>
+      <Grid.Column>
+        <FilterDropdown
+          formName={formName}
+          namespace='subaccount'
+          options={subaccountOptions}
+          displayValue='Subaccount' />
+      </Grid.Column>
+    </Grid>
+  </Panel>
+);
 
   const subaccountOptions = [
     { content: 'Assigned to Master', name: 'master' },
@@ -62,6 +85,5 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchtoProps = { };
-const formOptions = { form: FORMNAME };
-export default connect(mapStateToProps, mapDispatchtoProps)(reduxForm(formOptions)(Filters));
+const formOptions = { form: formName };
+export default connect(mapStateToProps, {})(reduxForm(formOptions)(Filters));

@@ -16,8 +16,23 @@ exports[`renders correctly 1`] = `
   />
   <Connect(ReduxForm) />
   <TableCollection
+    columns={
+      Array [
+        Object {
+          "label": "Name",
+          "width": "40%",
+        },
+        Object {
+          "label": "Key",
+          "width": "20%",
+        },
+        Object {
+          "label": "Subaccount",
+          "width": "20%",
+        },
+      ]
+    }
     getRowData={[Function]}
-    headerComponent={<TableHeader />}
     pagination={true}
     rows={
       Array [
