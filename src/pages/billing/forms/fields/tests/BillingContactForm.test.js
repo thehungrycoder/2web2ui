@@ -9,7 +9,7 @@ describe('Billing Address Form:', () => {
     formName: 'form-name',
     countryValue: 'GG',
     countries: [
-      { value: 'US', label: 'USOFA', states: [{ name: 'mrylnd', value: 'MD' }] }
+      { value: 'US', label: 'USOFA', states: [{ name: 'mrylnd', value: 'MD' }]}
     ],
     change: jest.fn()
   };

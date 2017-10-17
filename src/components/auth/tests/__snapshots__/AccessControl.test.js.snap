@@ -6,7 +6,7 @@ exports[`Component: AccessControl should render correctly when access is granted
 </h1>
 `;
 
-exports[`Component: AccessControl should render correctly when no access and not redirecting 1`] = `null`;
+exports[`Component: AccessControl should render correctly when no access and not redirecting 1`] = `""`;
 
 exports[`Component: AccessControl should render correctly when no access and redirecting 1`] = `
 <Redirect

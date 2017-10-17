@@ -39,10 +39,10 @@ describe('Selector: should expose card', () => {
     billing: {
       plans: [
         { status: 'public', code: '123' },
-        { status: 'public', code: 'qwe', isFree: false},
+        { status: 'public', code: 'qwe', isFree: false }
       ]
     }
-  }
+  };
 
   it('should return true if on paid plan', () => {
     expect(billingInfo.shouldExposeCardSelector(store)).toEqual(true);
@@ -60,7 +60,7 @@ describe('Selector: can change plan', () => {
 
   it('should return false with a pending plan change', () => {
     const store = {
-      account: { pending_subscription: {} }
+      account: { pending_subscription: {}}
     };
 
     expect(billingInfo.canChangePlanSelector(store)).toEqual(false);

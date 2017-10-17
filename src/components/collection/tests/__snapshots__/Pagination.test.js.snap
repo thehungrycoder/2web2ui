@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Collection Pagination Component should render with no props 1`] = `null`;
+exports[`Collection Pagination Component should render with no props 1`] = `""`;
 
 exports[`Collection Pagination Component should render with perPageButtons 1`] = `
 <div>
@@ -29,6 +29,7 @@ exports[`Collection Pagination Component should render with perPageButtons 1`] =
       </span>
       <t
         className=""
+        key="10"
         onClick={[Function]}
         size="default"
       >
@@ -36,6 +37,7 @@ exports[`Collection Pagination Component should render with perPageButtons 1`] =
       </t>
       <t
         className=""
+        key="25"
         onClick={[Function]}
         size="default"
       >
@@ -43,6 +45,7 @@ exports[`Collection Pagination Component should render with perPageButtons 1`] =
       </t>
       <t
         className=""
+        key="50"
         onClick={[Function]}
         size="default"
       >
@@ -50,6 +53,7 @@ exports[`Collection Pagination Component should render with perPageButtons 1`] =
       </t>
       <t
         className=""
+        key="100"
         onClick={[Function]}
         size="default"
       >

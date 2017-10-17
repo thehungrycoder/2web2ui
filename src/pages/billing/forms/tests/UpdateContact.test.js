@@ -6,11 +6,11 @@ describe('Form Container: Update Contact', () => {
   let wrapper;
 
   const props = {
-    billing: { countries: [] },
+    billing: { countries: []},
     handleSubmit: jest.fn(),
     showAlert: jest.fn(),
     getBillingCountries: jest.fn(),
-    updateBillingContact: jest.fn(() => Promise.resolve()),
+    updateBillingContact: jest.fn(() => Promise.resolve())
   };
 
   beforeEach(() => {

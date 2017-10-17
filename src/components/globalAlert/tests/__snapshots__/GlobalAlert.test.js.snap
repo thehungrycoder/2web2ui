@@ -1,5 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`GlobalAlert Mounted should show details 1`] = `
+<div
+  className=""
+>
+  <t
+    onDismiss={[Function]}
+    status="danger"
+  >
+    <div>
+      <div>
+        details
+      </div>
+    </div>
+  </t>
+</div>
+`;
+
 exports[`GlobalAlert Shallow should render with error details 1`] = `
 <div
   className=""

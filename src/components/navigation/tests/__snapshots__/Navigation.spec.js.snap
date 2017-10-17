@@ -11,9 +11,9 @@ exports[`Navigation Item renders a link correctly 1`] = `
         <svg
           fill="currentColor"
           height="18"
-          preserveaspectratio="xMidYMid meet"
-          style="vertical-align:middle;"
-          viewbox="0 0 40 40"
+          preserveAspectRatio="xMidYMid meet"
+          style="vertical-align:middle"
+          viewBox="0 0 40 40"
           width="18"
         >
           <g>
@@ -39,9 +39,9 @@ exports[`Navigation Item renders children correctly 1`] = `
         <svg
           fill="currentColor"
           height="18"
-          preserveaspectratio="xMidYMid meet"
-          style="vertical-align:middle;"
-          viewbox="0 0 40 40"
+          preserveAspectRatio="xMidYMid meet"
+          style="vertical-align:middle"
+          viewBox="0 0 40 40"
           width="18"
         >
           <g>
@@ -55,9 +55,9 @@ exports[`Navigation Item renders children correctly 1`] = `
       <svg
         fill="currentColor"
         height="18"
-        preserveaspectratio="xMidYMid meet"
-        style="vertical-align:middle;"
-        viewbox="0 0 40 40"
+        preserveAspectRatio="xMidYMid meet"
+        style="vertical-align:middle"
+        viewBox="0 0 40 40"
         width="18"
       >
         <g>

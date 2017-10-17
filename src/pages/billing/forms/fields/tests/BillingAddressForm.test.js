@@ -9,7 +9,7 @@ describe('Billing Address Form:', () => {
     formName: 'form-name',
     countryValue: 'GG',
     countries: [
-      { value: 'US', label: 'USOFA', states: [{ name: 'mrylnd', value: 'MD' }] }
+      { value: 'US', label: 'USOFA', states: [{ name: 'mrylnd', value: 'MD' }]}
     ],
     change: jest.fn()
   };
@@ -21,17 +21,17 @@ describe('Billing Address Form:', () => {
   it('should render', () => {
     const stateSpy = jest.spyOn(wrapper.instance(), 'setState');
     expect(wrapper).toMatchSnapshot();
-    wrapper.instance().componentDidMount()
+    wrapper.instance().componentDidMount();
     expect(stateSpy).not.toHaveBeenCalled();
-    expect(wrapper).toHaveState('showName', true );
+    expect(wrapper).toHaveState('showName', true);
   });
 
   it('should not render name fields if provided', () => {
     const stateSpy = jest.spyOn(wrapper.instance(), 'setState');
     wrapper.setProps({ firstName: 'ann', lastName: 'perkins' });
-    wrapper.instance().componentDidMount()
+    wrapper.instance().componentDidMount();
     expect(stateSpy).toHaveBeenCalledWith({ 'showName': false });
-    expect(wrapper).toHaveState('showName', false );
+    expect(wrapper).toHaveState('showName', false);
   });
 
   it('should show states', () => {

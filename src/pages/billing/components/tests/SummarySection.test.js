@@ -1,5 +1,5 @@
 import React from 'react';
-import { CardSummary, PlanSummary, SummarySection} from '../SummarySection';
+import { CardSummary, PlanSummary, SummarySection } from '../SummarySection';
 import { shallow } from 'enzyme';
 
 describe('Summary Sections: ', () => {
@@ -14,7 +14,7 @@ describe('Summary Sections: ', () => {
       monthly: 100,
       overage: 0.1,
       volume: 10
-    }
+    };
     const wrapper = shallow(<PlanSummary plan={plan} />);
     expect(wrapper).toMatchSnapshot();
   });
@@ -27,7 +27,7 @@ describe('Summary Sections: ', () => {
         expiration_year: 2025,
         expiration_month: 5
       }
-    }
+    };
     const wrapper = shallow(<CardSummary billing={billing} />);
     expect(wrapper).toMatchSnapshot();
   });

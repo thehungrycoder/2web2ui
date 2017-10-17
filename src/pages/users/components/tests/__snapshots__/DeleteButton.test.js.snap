@@ -13,4 +13,4 @@ exports[`DeleteButton renders a button 1`] = `
 </t>
 `;
 
-exports[`DeleteButton renders null 1`] = `null`;
+exports[`DeleteButton renders null 1`] = `""`;
