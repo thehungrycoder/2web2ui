@@ -1,0 +1,117 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<App
+  loading={false}
+>
+  <div>
+    <t
+      primaryAction={
+        Object {
+          "Component": [Function],
+          "content": "Create Recipient List",
+          "to": "/lists/recipient-lists/create",
+        }
+      }
+      title="Recipient Lists"
+    />
+    <TableCollection
+      columns={
+        Array [
+          "Name",
+          "ID",
+          "Recipients",
+        ]
+      }
+      getRowData={[Function]}
+      pagination={true}
+      rows={
+        Array [
+          Object {
+            "attributes": Object {
+              "internal_id": 112,
+              "list_group_id": 12321,
+            },
+            "description": "An email list of graduate students at UMD",
+            "id": "unique_id_4_graduate_students_list",
+            "name": "graduate_students",
+            "total_accepted_recipients": 3,
+          },
+          Object {
+            "attributes": Object {
+              "internal_id": 111,
+              "list_group_id": 11321,
+            },
+            "description": "An email list of undergraduate students at UMBC",
+            "id": "unique_id_4_undergraduates",
+            "name": "undergraduate_students",
+            "total_accepted_recipients": 8,
+          },
+        ]
+      }
+    />
+  </div>
+</App>
+`;
+
+exports[`renders empty state 1`] = `
+<App
+  loading={false}
+>
+  <RecipientListsEmptyState />
+</App>
+`;
+
+exports[`renders errors when present 1`] = `
+<App
+  loading={false}
+>
+  <div>
+    <t
+      primaryAction={
+        Object {
+          "Component": [Function],
+          "content": "Create Recipient List",
+          "to": "/lists/recipient-lists/create",
+        }
+      }
+      title="Recipient Lists"
+    />
+    <TableCollection
+      columns={
+        Array [
+          "Name",
+          "ID",
+          "Recipients",
+        ]
+      }
+      getRowData={[Function]}
+      pagination={true}
+      rows={
+        Array [
+          Object {
+            "attributes": Object {
+              "internal_id": 112,
+              "list_group_id": 12321,
+            },
+            "description": "An email list of graduate students at UMD",
+            "id": "unique_id_4_graduate_students_list",
+            "name": "graduate_students",
+            "total_accepted_recipients": 3,
+          },
+          Object {
+            "attributes": Object {
+              "internal_id": 111,
+              "list_group_id": 11321,
+            },
+            "description": "An email list of undergraduate students at UMBC",
+            "id": "unique_id_4_undergraduates",
+            "name": "undergraduate_students",
+            "total_accepted_recipients": 8,
+          },
+        ]
+      }
+    />
+  </div>
+</App>
+`;
