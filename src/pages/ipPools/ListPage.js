@@ -11,7 +11,7 @@ import { Page } from '@sparkpost/matchbox';
 
 const columns = ['Name', 'ID', 'Number of IPs Assigned'];
 const getRowData = ({ id, name, ips }) => {
-  const nameLink = <Link to={'/account/ip-pools'}>{name}</Link>;
+  const nameLink = <Link to={`/account/ip-pools/edit/${id}`}>{name}</Link>;
   return [nameLink, id, ips.length.toString()];
 };
 

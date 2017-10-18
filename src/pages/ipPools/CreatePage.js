@@ -28,7 +28,7 @@ export class CreatePage extends React.Component {
         <Page title="Create IP Pool" breadcrumbAction={breadcrumbAction} />
         <Panel>
           <Panel.Section>
-            <PoolForm onSubmit={this.onSubmit} />
+            <PoolForm onSubmit={this.onSubmit} isNew={true} />
           </Panel.Section>
         </Panel>
       </Layout.App>

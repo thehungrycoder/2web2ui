@@ -20,3 +20,38 @@ export function createPool({ name }) {
     }
   });
 }
+
+export function updatePool(data, params = {}) {
+  return sparkpostApiRequest({
+    type: 'UPDATE_IP_POOL',
+    meta: {
+      method: 'PUT',
+      url: `/ip-pools/${data.id}`,
+      data,
+      params: { ...params }
+    }
+  });
+}
+
+export function deletePool(id) {
+  return sparkpostApiRequest({
+    type: 'DELETE_IP_POOL',
+    meta: {
+      method: 'DELETE',
+      url: `/ip-pools/${id}`
+    }
+  });
+}
+
+
+export function getPool(id) {
+  return sparkpostApiRequest({
+    type: 'GET_IP_POOL',
+    meta: {
+      method: 'GET',
+      url: `/ip-pools/${id}`
+    }
+  });
+}
+
+

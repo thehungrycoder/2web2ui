@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
+
 import { TextField, Button } from '@sparkpost/matchbox';
+
+import { getPool } from '../../actions/ipPools';
 
 const required = (value) => (value || value === null ? undefined : 'Required');
 
@@ -11,7 +14,9 @@ const TextFieldWrapper = ({ input, meta: { error }, ...rest }) => (
 
 export class PoolForm extends Component {
   render() {
-    const { handleSubmit, submitSucceeded, submitting, isNew, pristine } = this.props;
+    const { isNew } = this.props;
+
+    const { handleSubmit, submitSucceeded, submitting, pristine } = this.props;
     const submitText = isNew ? 'Create IP Pool' : 'Update IP Pool';
 
     return (
@@ -22,6 +27,8 @@ export class PoolForm extends Component {
           validate={required}
           label="Pool Name"
         />
+
+        <p>IP listing coming soon...</p>
 
         <Button submit primary disabled={submitting || pristine}>
           {submitText}
@@ -34,13 +41,13 @@ export class PoolForm extends Component {
 
 const mapStateToProps = ({ form, ipPools }) => ({
   theForm: form,
-  isNew: true,
-  initialValues: { name: null }
+  initialValues: ipPools.pool
 });
 
 const formOptions = {
-  form: 'poolForm'
+  form: 'poolForm',
+  enableReinitialize: true
 };
 
 // breaks if you do reduxForm first
-export default connect(mapStateToProps)(reduxForm(formOptions)(PoolForm));
+export default connect(mapStateToProps, { getPool })(reduxForm(formOptions)(PoolForm));

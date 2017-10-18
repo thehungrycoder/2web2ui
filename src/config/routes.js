@@ -182,5 +182,10 @@ export default [
     path: '/account/ip-pools/create',
     component: ipPools.CreatePage,
     condition: hasGrants('ip_pools/manage')
+  },
+  {
+    path: '/account/ip-pools/edit/:id',
+    component: ipPools.EditPage,
+    condition: hasGrants('ip_pools/manage')
   }
 ];
