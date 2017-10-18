@@ -1,0 +1,82 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<App
+  loading={false}
+>
+  <TrackingDomainsCollection
+    hasSubaccounts={false}
+    rows={
+      Array [
+        Object {
+          "default": false,
+          "domain": "all.verified.com",
+          "status": Object {
+            "cname_status": "valid",
+            "compliance_status": "valid",
+            "verified": true,
+          },
+        },
+        Object {
+          "default": false,
+          "domain": "all.unverified.com",
+          "status": Object {
+            "cname_status": "unverified",
+            "compliance_status": "unverified",
+            "verified": false,
+          },
+        },
+        Object {
+          "default": true,
+          "domain": "the.default.com",
+          "status": Object {
+            "cname_status": "valid",
+            "compliance_status": "valid",
+            "verified": true,
+          },
+        },
+      ]
+    }
+  />
+</App>
+`;
+
+exports[`renders empty state 1`] = `
+<App
+  loading={false}
+>
+  <TrackingDomainsEmptyState />
+</App>
+`;
+
+exports[`renders errors when present 1`] = `
+<App
+  loading={false}
+>
+  <div>
+    <t
+      primaryAction={
+        Object {
+          "Component": [Function],
+          "content": "Create Tracking Domain",
+          "to": "/account/tracking-domains/create",
+        }
+      }
+      title="Tracking Domains"
+    />
+    <ApiErrorBanner
+      error={
+        Object {
+          "meta": Object {
+            "method": "GET",
+          },
+          "payload": Object {
+            "message": "Uh oh! It broke.",
+          },
+        }
+      }
+      reload={[Function]}
+    />
+  </div>
+</App>
+`;

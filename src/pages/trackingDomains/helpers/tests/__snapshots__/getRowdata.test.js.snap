@@ -1,0 +1,295 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getRowData all unverified 1`] = `
+Array [
+  <div>
+    <Link
+      replace={false}
+      to="/account/trackingDomains/all.unverified.com"
+    >
+      all.unverified.com
+    </Link>
+  </div>,
+  "unverified",
+]
+`;
+
+exports[`getRowData all verified 1`] = `
+Array [
+  <div>
+    <Link
+      replace={false}
+      to="/account/trackingDomains/all.verified.com"
+    >
+      all.verified.com
+    </Link>
+  </div>,
+  "verified",
+]
+`;
+
+exports[`getRowData cname invalid 1`] = `
+Array [
+  <div>
+    <Link
+      replace={false}
+      to="/account/trackingDomains/cname.invalid.com"
+    >
+      cname.invalid.com
+    </Link>
+  </div>,
+  "unverified",
+]
+`;
+
+exports[`getRowData cname pending 1`] = `
+Array [
+  <div>
+    <Link
+      replace={false}
+      to="/account/trackingDomains/cname.pending.com"
+    >
+      cname.pending.com
+    </Link>
+  </div>,
+  "unverified",
+]
+`;
+
+exports[`getRowData cname unverified 1`] = `
+Array [
+  <div>
+    <Link
+      replace={false}
+      to="/account/trackingDomains/cname.unverified.com"
+    >
+      cname.unverified.com
+    </Link>
+  </div>,
+  "unverified",
+]
+`;
+
+exports[`getRowData compliance blocked 1`] = `
+Array [
+  <div>
+    <Link
+      replace={false}
+      to="/account/trackingDomains/cname.invalid.com"
+    >
+      cname.invalid.com
+    </Link>
+  </div>,
+  "blocked",
+]
+`;
+
+exports[`getRowData compliance pending 1`] = `
+Array [
+  <div>
+    <Link
+      replace={false}
+      to="/account/trackingDomains/compliance.pending.com"
+    >
+      compliance.pending.com
+    </Link>
+  </div>,
+  "pending",
+]
+`;
+
+exports[`getRowData compliance unverified 1`] = `
+Array [
+  <div>
+    <Link
+      replace={false}
+      to="/account/trackingDomains/compliance.unverified.com"
+    >
+      compliance.unverified.com
+    </Link>
+  </div>,
+  "unverified",
+]
+`;
+
+exports[`getRowData default 1`] = `
+Array [
+  <div>
+    <Link
+      replace={false}
+      to="/account/trackingDomains/the.default.com"
+    >
+      the.default.com
+    </Link>
+     (default)
+  </div>,
+  "verified",
+]
+`;
+
+exports[`getRowDataWithSubaccount all unverified 1`] = `
+Array [
+  <div>
+    <Link
+      replace={false}
+      to="/account/trackingDomains/all.unverified.com"
+    >
+      all.unverified.com
+    </Link>
+  </div>,
+  "unverified",
+  null,
+]
+`;
+
+exports[`getRowDataWithSubaccount all verified 1`] = `
+Array [
+  <div>
+    <Link
+      replace={false}
+      to="/account/trackingDomains/all.verified.com"
+    >
+      all.verified.com
+    </Link>
+  </div>,
+  "verified",
+  null,
+]
+`;
+
+exports[`getRowDataWithSubaccount cname invalid 1`] = `
+Array [
+  <div>
+    <Link
+      replace={false}
+      to="/account/trackingDomains/cname.invalid.com"
+    >
+      cname.invalid.com
+    </Link>
+  </div>,
+  "unverified",
+  null,
+]
+`;
+
+exports[`getRowDataWithSubaccount cname pending 1`] = `
+Array [
+  <div>
+    <Link
+      replace={false}
+      to="/account/trackingDomains/cname.pending.com"
+    >
+      cname.pending.com
+    </Link>
+  </div>,
+  "unverified",
+  null,
+]
+`;
+
+exports[`getRowDataWithSubaccount cname unverified 1`] = `
+Array [
+  <div>
+    <Link
+      replace={false}
+      to="/account/trackingDomains/cname.unverified.com"
+    >
+      cname.unverified.com
+    </Link>
+  </div>,
+  "unverified",
+  null,
+]
+`;
+
+exports[`getRowDataWithSubaccount compliance blocked 1`] = `
+Array [
+  <div>
+    <Link
+      replace={false}
+      to="/account/trackingDomains/cname.invalid.com"
+    >
+      cname.invalid.com
+    </Link>
+  </div>,
+  "blocked",
+  null,
+]
+`;
+
+exports[`getRowDataWithSubaccount compliance pending 1`] = `
+Array [
+  <div>
+    <Link
+      replace={false}
+      to="/account/trackingDomains/compliance.pending.com"
+    >
+      compliance.pending.com
+    </Link>
+  </div>,
+  "pending",
+  null,
+]
+`;
+
+exports[`getRowDataWithSubaccount compliance unverified 1`] = `
+Array [
+  <div>
+    <Link
+      replace={false}
+      to="/account/trackingDomains/compliance.unverified.com"
+    >
+      compliance.unverified.com
+    </Link>
+  </div>,
+  "unverified",
+  null,
+]
+`;
+
+exports[`getRowDataWithSubaccount default 1`] = `
+Array [
+  <div>
+    <Link
+      replace={false}
+      to="/account/trackingDomains/the.default.com"
+    >
+      the.default.com
+    </Link>
+     (default)
+  </div>,
+  "verified",
+  null,
+]
+`;
+
+exports[`getRowDataWithSubaccount sub default 1`] = `
+Array [
+  <div>
+    <Link
+      replace={false}
+      to="/account/trackingDomains/the.default.com"
+    >
+      the.default.com
+    </Link>
+     (default)
+  </div>,
+  "verified",
+  125,
+]
+`;
+
+exports[`getRowDataWithSubaccount sub unverified 1`] = `
+Array [
+  <div>
+    <Link
+      replace={false}
+      to="/account/trackingDomains/all.unverified.com"
+    >
+      all.unverified.com
+    </Link>
+  </div>,
+  "unverified",
+  145,
+]
+`;

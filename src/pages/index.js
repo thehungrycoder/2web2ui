@@ -7,4 +7,5 @@ export { default as reports } from './reports';
 export { default as subaccounts } from './subaccounts';
 export { default as templates } from './templates';
 export { default as users } from './users';
+export { default as trackingDomains } from './trackingDomains';
 export { default as webhooks } from './webhooks';

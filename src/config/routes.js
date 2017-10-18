@@ -8,6 +8,7 @@ import {
   reports,
   subaccounts,
   templates,
+  trackingDomains,
   users,
   webhooks
 } from 'src/pages';
@@ -144,6 +145,11 @@ export default [
     path: '/account/api-keys/details/:id',
     component: apiKeys.DetailsPage,
     condition: hasGrants('api_keys/manage')
+  },
+  {
+    path: '/account/tracking-domains/',
+    component: trackingDomains.ListPage,
+    condition: hasGrants('tracking_domains/view')
   },
   {
     path: '/account/profile',
