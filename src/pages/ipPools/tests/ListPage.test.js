@@ -11,7 +11,8 @@ describe('IP Pools List Page', () => {
       ipPools: [
         {name: 'Test Pool 1', id: 101, ips: [{external_ip: 1111}, {external_ip: 2222}]},
         {name: 'Test Pool 2', id: 102, ips: []}
-      ]
+      ],
+      listPools: () => {}
     };
     const wrapper = shallow(<IpPoolsList {...props} />);
     expect(wrapper).toMatchSnapshot();
@@ -20,6 +21,7 @@ describe('IP Pools List Page', () => {
   it('should show alert upon error', () => {
     const props = {
       ipPools: [],
+      listPools: () => {},
       error: {
         message: 'Uh oh! It broke.' // renders as details
       },
