@@ -98,7 +98,8 @@
     "build": "node scripts/build.js",
     "analyze": "source-map-explorer build/static/js/main.*",
     "test": "node scripts/test.js --env=jsdom",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "autolint": "eslint src -- --fix"
   },
   "jest": {
     "collectCoverageFrom": [
