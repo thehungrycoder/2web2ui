@@ -2,6 +2,9 @@ const initialState = {
   grants: [],
   grantsLoaded: false,
   grantsLoading: false,
+  subaccountGrants: [],
+  subaccountGrantsLoaded: false,
+  subaccountGrantsLoading: false,
   keys: [],
   keysLoaded: false,
   keysLoading: false,
@@ -38,7 +41,7 @@ export default (state = initialState, { payload, type }) => {
     }
 
     case 'LIST_SUBACCOUNT_GRANTS_PENDING': {
-      return { ...state, grantsLoading: true, error: null };
+      return { ...state, subaccountGrantsLoading: true, error: null };
     }
 
     case 'LIST_SUBACCOUNT_GRANTS_SUCCESS': {

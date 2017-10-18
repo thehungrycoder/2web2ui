@@ -12,6 +12,7 @@ const getApiKeyId = (state, props) => props.match.params.id;
 
 const getKeysLoading = (state) => state.apiKeys.keysLoading;
 const getGrantsLoading = (state) => state.apiKeys.grantsLoading;
+const getSubaccountGrantsLoading = (state) => state.apiKeys.subaccountGrantsLoading;
 const getSubaccountsLoading = (state) => state.subaccounts.listLoading;
 
 export const getApiKey = createSelector(
@@ -29,9 +30,9 @@ export const getSubaccountGrants = createSelector(getSubaccountGrantsArray, (gra
 );
 
 export const getLoading = createSelector(
-  [getKeysLoading, getGrantsLoading, getSubaccountsLoading],
-  (keysLoading, grantsLoading, subaccountsLoading) =>
-    keysLoading || grantsLoading || subaccountsLoading
+  [getKeysLoading, getGrantsLoading, getSubaccountGrantsLoading, getSubaccountsLoading],
+  (keysLoading, grantsLoading, subaccountGrantsLoading, subaccountsLoading) =>
+    keysLoading || grantsLoading || subaccountGrantsLoading || subaccountsLoading
 );
 
 /*
