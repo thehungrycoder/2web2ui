@@ -21,6 +21,21 @@ export default [
     icon: 'Code'
   },
   {
+    label: 'Lists',
+    to: '/lists',
+    icon: 'Mail',
+    children: [
+      {
+        label: 'Recipient Lists',
+        to: '/lists/recipient-lists'
+      },
+      {
+        label: 'Suppressions',
+        to: '/lits/suppression-list'
+      }
+    ]
+  },
+  {
     label: 'Webhooks',
     to: '/webhooks',
     icon: 'Language'

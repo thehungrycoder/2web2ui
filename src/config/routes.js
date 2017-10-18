@@ -6,6 +6,7 @@ import {
   DashboardPage,
   ProfilePage,
   reports,
+  recipientLists,
   subaccounts,
   templates,
   trackingDomains,
@@ -115,6 +116,11 @@ export default [
     path: '/templates/edit/:id/published',
     component: templates.PublishedPage,
     condition: hasGrants('templates/modify')
+  },
+  {
+    path: '/lists/recipient-lists',
+    component: recipientLists.ListPage,
+    condition: hasGrants('recipient_lists/manage')
   },
   {
     path: '/webhooks',
