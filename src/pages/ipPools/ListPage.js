@@ -50,7 +50,7 @@ export class IpPoolsList extends Component {
     return (
       <Layout.App loading={ipPools.length === 0 && loading}>
         <Page
-          primaryAction={{ content: 'Create IP Pool', Component: Link, to: '/account/ip-pools' }}
+          primaryAction={{ content: 'Create IP Pool', Component: Link, to: '/account/ip-pools/create' }}
           title={'IP Pools'}
         />
         {error && this.renderError()}

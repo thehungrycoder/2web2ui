@@ -177,5 +177,10 @@ export default [
     path: '/account/ip-pools',
     component: ipPools.ListPage,
     condition: hasGrants('ip_pools/manage')
+  },
+  {
+    path: '/account/ip-pools/create',
+    component: ipPools.CreatePage,
+    condition: hasGrants('ip_pools/manage')
   }
 ];

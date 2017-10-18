@@ -10,7 +10,7 @@ export function listPools() {
   });
 }
 
-export function create(name) {
+export function createPool({ name }) {
   return sparkpostApiRequest({
     type: 'CREATE_IP_POOL',
     meta: {
