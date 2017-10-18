@@ -1,54 +1,71 @@
-export function score(haystack, needle) {
-  if (needle.length > haystack.length) {
-    return 0;
-  }
+import _ from 'lodash';
+import { basicScorer, objectScorer } from './sortMatchScorers';
+const identity = (a) => a;
+const objectPatternRegex = /([^\s]+:[^\s"]+)/g;
+const objectPatternExactRegex = /([^\s]+):"([^"]+)"/g;
+const enclosingQuotesRegex = /^"?([^"]+)"?$/;
 
-  // case-sensitive exact match
-  if (haystack === needle) {
-    return 10;
-  }
-
-  haystack = haystack.toLowerCase();
-  needle = needle.toLowerCase();
-
-  // case-insensitive exact match
-  if (haystack === needle) {
-    return 9;
-  }
-
-  // starts with needle
-  if (haystack.startsWith(needle)) {
-    return 8;
-  }
-
-  // word starts with needle, e.g. something needle
-  const afterSpace = haystack.includes(` ${needle}`);
-  if (afterSpace) {
-    return 7;
-  }
-
-  // needle found after - or _ e.g. something-needle
-  const afterDash = haystack.includes(`-${needle}`);
-  const afterUnderscore = haystack.includes(`_${needle}`);
-  if (afterDash || afterUnderscore) {
-    return 6;
-  }
-
-  // 3-character needle contained in haystack at all
-  if (needle.length > 2 && haystack.includes(needle)) {
-    return 5;
-  }
-
-  return 0;
-}
-
-export default function sortMatch(items, needle, getter = (a) => a) {
-  return items
-    .map((item) => {
-      const haystack = getter(item);
-      return [score(haystack, needle), item];
-    })
-    .filter(([score]) => score > 0)
+export function filterAndSortByScore(list) {
+  return list.filter(([score]) => score > 0)
     .sort((a, b) => b[0] - a[0])
     .map(([score, item]) => item);
+}
+
+/**
+ * Converts a list of colon-separated pairs
+ * into a key/value hash
+ * @param {Array} list
+ *
+ */
+function convertPairsToHash(list = []) {
+  const split = list.map((m) => m.split(':'));
+  const keys = split.map((m) => m[0]);
+  const values = split.map((m) => m[1].replace(enclosingQuotesRegex, '$1'));
+  return _.zipObject(keys, values);
+}
+
+/**
+ * Takes a string like ->
+ * something first:thing another:"thing with spaces"
+ *
+ * and returns ->
+ * {
+ *   first: "thing",
+ *   another: "thing with spaces"
+ * }
+ * @param {String} string
+ */
+export const getObjectPattern = _.memoize((string) => {
+  const matches = string.match(objectPatternRegex) || [];
+  const exactMatches = string.match(objectPatternExactRegex) || [];
+
+  if (!matches.length && !exactMatches.length) {
+    return {};
+  }
+
+  return convertPairsToHash([ ...matches, ...exactMatches ]);
+});
+
+export default function sortMatch(items, pattern, getter = identity) {
+  const scoredItems = items.map((item) => {
+    const haystack = getter(item);
+    const score = basicScorer(haystack, pattern);
+    return [score, item];
+  });
+  return filterAndSortByScore(scoredItems);
+}
+
+// TODO: should we memoize somehow?
+// TODO: key translation to not force people to know key returned by API (e.g. short_key vs key, label vs name)
+export function objectSortMatch({ items, pattern, getter, keyMap = {}}) {
+  const objectPattern = getObjectPattern(pattern);
+  if (objectPattern && Object.keys(objectPattern)) {
+    const scoredItems = items.map((item) => {
+      const score = objectScorer({ item, objectPattern, keyMap }) || basicScorer(getter(item), pattern);
+      return [score, item];
+    });
+    return filterAndSortByScore(scoredItems);
+  }
+
+  return sortMatch(items, pattern, getter);
 }

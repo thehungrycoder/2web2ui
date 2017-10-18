@@ -13,7 +13,12 @@ export const getRowData = ({ published, id, name, last_update_time, subaccount_i
 export const columns = [
   { label: 'Name', width: '25%' },
   { label: 'ID', width: '25%' },
-  { label: 'Published', width: '15%' },
+  { label: 'Status', width: '15%' },
   { label: 'Updated' },
   { label: 'Subaccount', width: '15%' }
 ];
+
+export const filterBoxConfig = {
+  show: true,
+  compareKeys: ['name', 'id', 'subaccount_id']
+};

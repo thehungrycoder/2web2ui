@@ -3,6 +3,8 @@ import { Pagination, Button } from '@sparkpost/matchbox';
 import classnames from 'classnames';
 import styles from './Pagination.module.scss';
 
+export const defaultPerPageButtons = [10, 25, 50, 100];
+
 export default class CollectionPagination extends Component {
 
   renderPageButtons() {
@@ -23,7 +25,7 @@ export default class CollectionPagination extends Component {
   }
 
   renderPerPageButtons() {
-    const { data, perPage, perPageButtons = [10, 25, 50, 100], onPerPageChange } = this.props;
+    const { data, perPage, perPageButtons = defaultPerPageButtons, onPerPageChange } = this.props;
 
     if (data.length <= Math.min(...perPageButtons)) {
       return null;

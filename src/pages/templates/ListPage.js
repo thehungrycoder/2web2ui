@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
-import config from 'src/config';
 
 // Actions
 import { listTemplates } from 'src/actions/templates';
@@ -10,8 +9,7 @@ import { getTemplates, getfilterTemplates } from 'src/selectors/templates';
 // Components
 import { Layout, TableCollection, ApiErrorBanner } from 'src/components';
 import { Page, EmptyState } from '@sparkpost/matchbox';
-import Filters from './components/Filters';
-import { getRowData, columns } from './tableConfig';
+import { getRowData, columns, filterBoxConfig } from './tableConfig';
 
 const primaryAction = {
   content: 'Create Template',
@@ -42,6 +40,7 @@ export class ListPage extends Component {
         rows={this.props.templates}
         getRowData={getRowData}
         pagination
+        filterBox={filterBoxConfig}
       />
     );
   }
@@ -69,7 +68,6 @@ export class ListPage extends Component {
           title='Templates'
         />
         {error && this.renderError()}
-        {!error && count > config.filters.minCount && <Filters />}
         {!error && this.renderCollection()}
       </Layout.App>
     );

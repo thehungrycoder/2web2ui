@@ -12,3 +12,9 @@ export const columns = [
   { label: 'Key', width: '20%' },
   { label: 'Subaccount', width: '20%' }
 ];
+
+export const filterBoxConfig = {
+  show: true,
+  keyMap: { name: 'label', key: 'short_key' },
+  compareKeys: ['label', 'short_key', 'id']
+};

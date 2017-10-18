@@ -14,7 +14,6 @@ exports[`renders correctly 1`] = `
     }
     title="Templates"
   />
-  <Connect(ReduxForm) />
   <TableCollection
     columns={
       Array [
@@ -27,7 +26,7 @@ exports[`renders correctly 1`] = `
           "width": "25%",
         },
         Object {
-          "label": "Published",
+          "label": "Status",
           "width": "15%",
         },
         Object {
@@ -38,6 +37,16 @@ exports[`renders correctly 1`] = `
           "width": "15%",
         },
       ]
+    }
+    filterBox={
+      Object {
+        "compareKeys": Array [
+          "name",
+          "id",
+          "subaccount_id",
+        ],
+        "show": true,
+      }
     }
     getRowData={[Function]}
     pagination={true}

@@ -14,7 +14,6 @@ exports[`renders correctly 1`] = `
     }
     title="API Keys"
   />
-  <Connect(ReduxForm) />
   <TableCollection
     columns={
       Array [
@@ -31,6 +30,20 @@ exports[`renders correctly 1`] = `
           "width": "20%",
         },
       ]
+    }
+    filterBox={
+      Object {
+        "compareKeys": Array [
+          "label",
+          "short_key",
+          "id",
+        ],
+        "keyMap": Object {
+          "key": "short_key",
+          "name": "label",
+        },
+        "show": true,
+      }
     }
     getRowData={[Function]}
     pagination={true}
