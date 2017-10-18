@@ -43,4 +43,16 @@ describe('ApiErrorBanner Component', () => {
     wrapper.find('t').at(1).simulate('click');
     expect(wrapper).toMatchSnapshot();
   });
+
+  it('should render when error prop is passed', () => {
+    const error = {
+      payload: { message: 'error message' },
+      meta: { method: 'GET' },
+      resource: 'your resource'
+    };
+
+    const wrapper = shallow(<ApiErrorBanner error={error} />);
+    expect(wrapper).toMatchSnapshot();
+
+  });
 });

@@ -1,5 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`ApiErrorBanner Component should render when error prop is passed 1`] = `
+<t
+  status="warning"
+  title="An error occurred"
+>
+  <p>
+    Sorry, there was an issue loading your your resource.
+  </p>
+  <t
+    onClick={[Function]}
+    outline={true}
+    size="default"
+  >
+    Show Error Details
+  </t>
+</t>
+`;
+
 exports[`ApiErrorBanner Component should render with details 1`] = `
 <t
   status="info"
@@ -54,7 +72,9 @@ exports[`ApiErrorBanner Component should render with no props 1`] = `
   status="warning"
   title="An error occurred"
 >
-  <p />
+  <p>
+    Sorry, there was an issue.
+  </p>
 </t>
 `;
 
