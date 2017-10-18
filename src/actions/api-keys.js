@@ -120,3 +120,24 @@ export function listGrants({ force } = {}) {
     );
   };
 }
+
+export function listSubaccountGrants({ force } = {}) {
+  return (dispatch, getState) => {
+    if (!force && getState().apiKeys.subaccountGrantsLoaded) {
+      return;
+    }
+
+    return dispatch(
+      sparkpostApiRequest({
+        type: 'LIST_SUBACCOUNT_GRANTS',
+        meta: {
+          method: 'GET',
+          url: '/authenticate/grants',
+          params: {
+            role: 'subaccount'
+          }
+        }
+      })
+    );
+  };
+}

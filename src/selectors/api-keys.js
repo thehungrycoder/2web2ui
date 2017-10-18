@@ -6,6 +6,7 @@ import { createSelector } from 'reselect';
  */
 const getApiKeys = (state) => state.apiKeys.keys;
 const getGrantsArray = (state) => state.apiKeys.grants;
+const getSubaccountGrantsArray = (state) => state.apiKeys.subaccountGrants;
 const getSubaccounts = (state) => state.subaccounts.list;
 const getApiKeyId = (state, props) => props.match.params.id;
 
@@ -20,6 +21,10 @@ export const getApiKey = createSelector(
 
 // Convert grants array to an object keyed by `grant.key`
 export const getGrants = createSelector(getGrantsArray, (grants) =>
+  _.keyBy(grants, 'key')
+);
+
+export const getSubaccountGrants = createSelector(getSubaccountGrantsArray, (grants) =>
   _.keyBy(grants, 'key')
 );
 

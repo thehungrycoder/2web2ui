@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Field, change, reduxForm, formValueSelector } from 'redux-form';
+import { Field, reduxForm, formValueSelector } from 'redux-form';
 import { Button } from '@sparkpost/matchbox';
 
-import { listGrants } from 'src/actions/api-keys';
+import { listGrants, listSubaccountGrants } from 'src/actions/api-keys';
 import { list as listSubaccounts } from 'src/actions/subaccounts';
 import {
   RadioGroup,
@@ -12,12 +12,14 @@ import {
 } from 'src/components/reduxFormWrappers';
 import {
   getGrants,
+  getSubaccountGrants,
   getIsNew,
   getInitialGrantsRadio,
   getInitialSubaccount,
   getInitialValues
 } from 'src/selectors/api-keys';
 import validIpList from '../helpers/validIpList';
+import { required } from 'src/helpers/validation';
 import GrantsCheckboxes from './GrantsCheckboxes';
 
 
@@ -27,23 +29,23 @@ const grantsOptions = [
   { value: 'select', label: 'Select' }
 ];
 
-const required = (value) => (value ? undefined : 'Required');
-
 export class ApiKeyForm extends Component {
   componentDidMount() {
     this.props.listGrants();
+    this.props.listSubaccountGrants();
     this.props.listSubaccounts();
   }
 
   render() {
     const {
       grants,
+      subaccountGrants,
       subaccounts,
       isNew,
       handleSubmit,
       pristine,
       showGrants,
-      submitSucceeded,
+      showSubaccountGrants,
       submitting
     } = this.props;
 
@@ -68,7 +70,7 @@ export class ApiKeyForm extends Component {
           title="API Permissions"
           options={grantsOptions}
         />
-        <GrantsCheckboxes grants={grants} show={showGrants} />
+        <GrantsCheckboxes grants={showSubaccountGrants ? subaccountGrants : grants} show={showGrants} />
         <Field
           name="validIps"
           component={TextFieldWrapper}
@@ -79,9 +81,8 @@ export class ApiKeyForm extends Component {
         />
 
         <Button submit primary disabled={submitting || pristine}>
-          {submitText}
+          {submitting ? 'Loading...' : submitText}
         </Button>
-        {submitting && !submitSucceeded && <div>Loading&hellip;</div>}
       </form>
     );
   }
@@ -92,7 +93,9 @@ const valueSelector = formValueSelector(formName);
 
 const mapStateToProps = (state, props) => ({
   grants: getGrants(state),
+  subaccountGrants: getSubaccountGrants(state),
   subaccounts: state.subaccounts.list,
+  showSubaccountGrants: !!valueSelector(state, 'subaccount'),
   showGrants: valueSelector(state, 'grantsRadio') === 'select',
   isNew: getIsNew(state, props),
   initialValues: {
@@ -103,7 +106,7 @@ const mapStateToProps = (state, props) => ({
 });
 
 export default connect(mapStateToProps, {
-  formChange: change,
   listGrants,
+  listSubaccountGrants,
   listSubaccounts
 })(ApiKeyReduxForm);

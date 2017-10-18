@@ -30,21 +30,23 @@ export default (state = initialState, { payload, type }) => {
     }
 
     case 'LIST_GRANTS_SUCCESS': {
-      return {
-        ...state,
-        grants: payload,
-        grantsLoaded: true,
-        grantsLoading: false
-      };
+      return { ...state, grants: payload, grantsLoaded: true, grantsLoading: false };
     }
 
     case 'LIST_GRANTS_FAIL': {
-      return {
-        ...state,
-        error: payload,
-        grantsLoaded: true,
-        grantsLoading: false
-      };
+      return { ...state, error: payload, grantsLoaded: true, grantsLoading: false };
+    }
+
+    case 'LIST_SUBACCOUNT_GRANTS_PENDING': {
+      return { ...state, grantsLoading: true, error: null };
+    }
+
+    case 'LIST_SUBACCOUNT_GRANTS_SUCCESS': {
+      return { ...state, subaccountGrants: payload, subaccountGrantsLoaded: true, subaccountGrantsLoading: false };
+    }
+
+    case 'LIST_SUBACCOUNT_GRANTS_FAIL': {
+      return { ...state, error: payload, subaccountGrantsLoaded: true, subaccountGrantsLoading: false };
     }
 
     // CRUD
