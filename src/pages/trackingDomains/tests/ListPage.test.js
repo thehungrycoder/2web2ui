@@ -20,13 +20,13 @@ const props = {
       }
     },
     {
-     default: false,
-     domain: 'all.unverified.com',
-     status: {
-       verified: false,
-       cname_status: 'unverified',
-       compliance_status: 'unverified'
-     }
+      default: false,
+      domain: 'all.unverified.com',
+      status: {
+        verified: false,
+        cname_status: 'unverified',
+        compliance_status: 'unverified'
+      }
     },
     {
       default: true,

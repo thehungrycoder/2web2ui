@@ -1,5 +1,4 @@
 import { shallow } from 'enzyme';
-import cases from 'jest-in-case';
 import React from 'react';
 
 import { IpPoolsList } from '../ListPage';
@@ -9,8 +8,8 @@ describe('IP Pools List Page', () => {
     const props = {
       loading: false,
       ipPools: [
-        {name: 'Test Pool 1', id: 101, ips: [{external_ip: 1111}, {external_ip: 2222}]},
-        {name: 'Test Pool 2', id: 102, ips: []}
+        { name: 'Test Pool 1', id: 101, ips: [{ external_ip: 1111 }, { external_ip: 2222 }]},
+        { name: 'Test Pool 2', id: 102, ips: []}
       ],
       listPools: jest.fn(() => [])
     };
@@ -26,7 +25,7 @@ describe('IP Pools List Page', () => {
         message: 'Uh oh! It broke.' // renders as details
       },
       loading: false
-    }
+    };
     const wrapper = shallow(<IpPoolsList {...props} />);
     expect(wrapper).toMatchSnapshot();
   });

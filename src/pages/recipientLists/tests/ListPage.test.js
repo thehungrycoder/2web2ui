@@ -42,7 +42,7 @@ it('renders correctly', () => {
 });
 
 it('renders empty state', () => {
-  const emptyprops ={
+  const emptyprops = {
     loading: false,
     error: null,
     recipientLists: [],

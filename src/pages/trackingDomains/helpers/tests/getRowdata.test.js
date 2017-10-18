@@ -15,15 +15,15 @@ const baseCases = {
     }
   },
   'all unverified': {
-     trackingDomain: {
-       default: false,
-       domain: 'all.unverified.com',
-       status: {
-         verified: false,
-         cname_status: 'unverified',
-         compliance_status: 'unverified'
-       }
-     }
+    trackingDomain: {
+      default: false,
+      domain: 'all.unverified.com',
+      status: {
+        verified: false,
+        cname_status: 'unverified',
+        compliance_status: 'unverified'
+      }
+    }
   },
   default: {
     trackingDomain: {
@@ -120,16 +120,16 @@ subaccountCases['sub default'] = {
 };
 
 subaccountCases['sub unverified'] = {
-   trackingDomain: {
-     default: false,
-     domain: 'all.unverified.com',
-     subaccount_id: 145,
-     status: {
-       verified: false,
-       cname_status: 'unverified',
-       compliance_status: 'unverified'
-     }
-   }
+  trackingDomain: {
+    default: false,
+    domain: 'all.unverified.com',
+    subaccount_id: 145,
+    status: {
+      verified: false,
+      cname_status: 'unverified',
+      compliance_status: 'unverified'
+    }
+  }
 };
 
 cases('getRowData', (opts) => {
