@@ -7,6 +7,8 @@ const props = {
   loading: false,
   error: null,
   hasSubaccounts: false,
+  listTrackingDomains: jest.fn(() => []),
+  listSubaccounts: jest.fn(() => []),
   trackingDomains: [
     {
       default: false,
@@ -49,7 +51,14 @@ it('renders correctly', () => {
 });
 
 it('renders empty state', () => {
-  wrapper = shallow(<ListPage loading={false} error={null} trackingDomains={[]} />);
+  wrapper = shallow(
+    <ListPage
+      loading={false}
+      error={null}
+      listTrackingDomains={jest.fn(() => [])}
+      listSubaccounts={jest.fn(() => [])}
+      trackingDomains={[]} />
+    );
   expect(wrapper).toMatchSnapshot();
 });
 
