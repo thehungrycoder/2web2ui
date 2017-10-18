@@ -6,6 +6,7 @@ import { ListPage } from '../ListPage';
 const props = {
   loading: false,
   error: null,
+  listRecipientLists: jest.fn(() => []),
   recipientLists: [
     {
       id: 'unique_id_4_graduate_students_list',
@@ -41,7 +42,13 @@ it('renders correctly', () => {
 });
 
 it('renders empty state', () => {
-  wrapper = shallow(<ListPage loading={false} error={null} recipientLists={[]} />);
+  const emptyprops ={
+    loading: false,
+    error: null,
+    recipientLists: [],
+    listRecipientLists: jest.fn(() => [])
+  };
+  wrapper = shallow(<ListPage {...emptyprops} />);
   expect(wrapper).toMatchSnapshot();
 });
 
