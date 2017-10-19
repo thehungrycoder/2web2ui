@@ -16,5 +16,6 @@ export const columns = [
 export const filterBoxConfig = {
   show: true,
   keyMap: { name: 'label', key: 'short_key' },
-  compareKeys: ['label', 'short_key', 'id']
+  compareKeys: ['label', 'short_key', 'id'],
+  exampleModifiers: ['key', 'name', 'id']
 };

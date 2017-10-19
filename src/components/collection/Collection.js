@@ -68,7 +68,7 @@ class Collection extends Component {
   renderFilterBox() {
     const { filterBox = {}, rows, perPageButtons = defaultPerPageButtons } = this.props;
     if (filterBox.show && (rows.length > Math.min(...perPageButtons))) {
-      return <CollectionFilter onChange={this.handleFilterChange} />;
+      return <CollectionFilter {...filterBox} onChange={this.handleFilterChange} />;
     }
     return null;
   }

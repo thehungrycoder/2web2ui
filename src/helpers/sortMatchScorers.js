@@ -49,7 +49,9 @@ export function basicScorer(haystack, needle) {
   }
 
   // 3-character needle contained in haystack at all
-  if (lcNeedle.length > 2 && lcHaystack.includes(lcNeedle)) {
+  // (can also be 1 or 2 character needle if haystack is short)
+  const threshold = Math.min(Math.ceil(lcHaystack.length / 4), 3);
+  if (lcNeedle.length >= threshold && lcHaystack.includes(lcNeedle)) {
     return 4;
   }
 
