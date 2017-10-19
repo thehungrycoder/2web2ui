@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`IP Pools List Page should render the list page correctly 1`] = `
+<App
+  loading={false}
+>
+  <t
+    primaryAction={
+      Object {
+        "Component": [Function],
+        "content": "Create IP Pool",
+        "to": "/account/ip-pools",
+      }
+    }
+    title="IP Pools"
+  />
+  <TableCollection
+    columns={
+      Array [
+        "Name",
+        "ID",
+        "Number of IPs Assigned",
+      ]
+    }
+    getRowData={[Function]}
+    pagination={true}
+    rows={
+      Array [
+        Object {
+          "id": 101,
+          "ips": Array [
+            Object {
+              "external_ip": 1111,
+            },
+            Object {
+              "external_ip": 2222,
+            },
+          ],
+          "name": "Test Pool 1",
+        },
+        Object {
+          "id": 102,
+          "ips": Array [],
+          "name": "Test Pool 2",
+        },
+      ]
+    }
+  />
+</App>
+`;
+
+exports[`IP Pools List Page should show alert upon error 1`] = `
+<App
+  loading={false}
+>
+  <t
+    primaryAction={
+      Object {
+        "Component": [Function],
+        "content": "Create IP Pool",
+        "to": "/account/ip-pools",
+      }
+    }
+    title="IP Pools"
+  />
+  <ApiErrorBanner
+    errorDetails="Uh oh! It broke."
+    message="Sorry, we seem to have had some trouble loading your ip pools."
+    reload={[Function]}
+  />
+</App>
+`;

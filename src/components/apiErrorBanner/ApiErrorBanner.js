@@ -29,7 +29,7 @@ export default class ApiErrorBanner extends Component {
       reload = false,
       title = 'An error occurred',
       status = 'warning',
-      error = { payload: {}, meta: {} }
+      error = { payload: {}, meta: {}}
     } = this.props;
 
     const { showErrorDetails } = this.state;
