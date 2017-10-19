@@ -1,6 +1,6 @@
 import React from 'react';
 import { ProtectedRoute, AuthenticationGate } from 'src/components/auth';
-import { GlobalAlert } from 'src/components';
+import { Layout, GlobalAlert } from 'src/components';
 import routes from 'src/config/routes';
 import {
   BrowserRouter as Router,
@@ -13,19 +13,20 @@ const App = () => (
   <Router>
     <div>
       <AuthenticationGate />
+      <Layout>
+        <Switch>
+            {routes.map((route) => {
+              const MyRoute = route.public ? Route : ProtectedRoute;
+              route.exact = !(route.exact === false); // this makes exact default to true
 
-      <Switch>
-        {routes.map((route) => {
-          const MyRoute = route.public ? Route : ProtectedRoute;
-          route.exact = !(route.exact === false); // this makes exact default to true
+              if (route.redirect) {
+                return <Redirect key={route.path} exact from={route.path} to={route.redirect} />;
+              }
+              return <MyRoute key={route.path} {...route} />;
+            })}
 
-          if (route.redirect) {
-            return <Redirect key={route.path} exact from={route.path} to={route.redirect} />;
-          }
-          return <MyRoute key={route.path} {...route} />;
-        })}
-      </Switch>
-
+        </Switch>
+      </Layout>
       <GlobalAlert />
     </div>
   </Router>

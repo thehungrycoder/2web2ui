@@ -7,7 +7,7 @@ import _ from 'lodash';
 import { listTemplates } from '../../actions/templates';
 
 // Components
-import { Layout, TableCollection, ApiErrorBanner } from 'src/components';
+import { TableCollection, ApiErrorBanner } from 'src/components';
 import { Page } from '@sparkpost/matchbox';
 
 const CREATE_ACTION = {
@@ -62,14 +62,14 @@ class ListPage extends Component {
     // }
 
     return (
-      <Layout.App loading={loading}>
+      <div loading={loading}>
         <Page
           primaryAction={CREATE_ACTION}
           title={'Templates'}
         />
         {error && this.renderError()}
         {!error && templatesCount > 0 && this.renderCollection()}
-      </Layout.App>
+      </div>
     );
   }
 }

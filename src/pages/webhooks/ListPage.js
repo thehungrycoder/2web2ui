@@ -6,7 +6,7 @@ import { Link, withRouter } from 'react-router-dom';
 import { listWebhooks } from '../../actions/webhooks';
 
 // Components
-import { Layout, TableCollection, ApiErrorBanner } from 'src/components';
+import { TableCollection, ApiErrorBanner } from 'src/components';
 import { Page } from '@sparkpost/matchbox';
 
 const columns = ['Name', 'ID', 'Target'];
@@ -48,14 +48,14 @@ class WebhooksList extends Component {
     const { webhooks, loading, error } = this.props;
 
     return (
-      <Layout.App loading={webhooks.length === 0 && loading}>
+      <div loading={webhooks.length === 0 && loading}>
         <Page
           primaryAction={{ content: 'Create Webhook', Component: Link, to: '/webhooks/create' }}
           title={'Webhooks'}
         />
         {error && this.renderError()}
         {!error && this.renderCollection()}
-      </Layout.App>
+      </div>
     );
   }
 }

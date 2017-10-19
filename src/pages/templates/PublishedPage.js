@@ -10,7 +10,6 @@ import { getPublished } from '../../actions/templates';
 import { templateById } from 'src/selectors/templates';
 
 // Components
-import { Layout } from 'src/components';
 import Form from './components/Form';
 import Editor from './components/Editor';
 import { Page, Grid } from '@sparkpost/matchbox';
@@ -61,7 +60,7 @@ class PublishedPage extends Component {
     const { loading } = this.props;
 
     return (
-      <Layout.App loading={loading}>
+      <div loading={loading}>
         { this.renderPageHeader() }
         <Grid>
           <Grid.Column xs={12} lg={4}>
@@ -71,7 +70,7 @@ class PublishedPage extends Component {
             <Editor name={FORM_NAME} published />
           </Grid.Column>
         </Grid>
-      </Layout.App>
+      </div>
     );
   }
 }

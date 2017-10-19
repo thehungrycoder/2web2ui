@@ -7,7 +7,6 @@ import _ from 'lodash';
 import { createWebhook, getEventDocs } from '../../actions/webhooks';
 
 // Components
-import { Layout } from 'src/components';
 import { Page, Panel } from '@sparkpost/matchbox';
 import WebhookForm from './components/WebhookForm';
 
@@ -99,7 +98,7 @@ class WebhooksCreate extends Component {
     const eventsTree = this.buildEventsData(eventDocs);
 
     return (
-      <Layout.App loading={eventsLoading}>
+      <div loading={eventsLoading}>
         <Page
           title='Create Webhook'
           breadcrumbAction={{ content: 'Webhooks', Component: Link, to: '/webhooks' }}
@@ -109,7 +108,7 @@ class WebhooksCreate extends Component {
             <WebhookForm eventsTree={eventsTree} newWebhook={true} onSubmit={(values) => this.createWebhook(values, eventsTree)}/>
           </Panel.Section>
         </Panel>
-      </Layout.App>
+      </div>
     );
   }
 }

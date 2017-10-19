@@ -6,9 +6,7 @@ import { Banner, Page } from '@sparkpost/matchbox';
 
 import { hideNewApiKey, listApiKeys } from 'src/actions/api-keys';
 
-import ApiErrorBanner from 'src/components/apiErrorBanner/ApiErrorBanner';
-import TableCollection from 'src/components/collection/TableCollection';
-import Layout from 'src/components/layout/Layout';
+import { ApiErrorBanner, TableCollection } from 'src/components';
 import { getLoading } from 'src/selectors/api-keys';
 import PermissionsColumn from './components/PermissionsColumn';
 
@@ -92,11 +90,11 @@ export class ListPage extends Component {
     const { error, loading, newKey } = this.props;
 
     return (
-      <Layout.App loading={loading}>
+      <div loading={loading}>
         <Page primaryAction={primaryAction} title="API Keys" />
         {newKey && this.renderBanner()}
         {error ? this.renderError() : this.renderCollection()}
-      </Layout.App>
+      </div>
     );
   }
 }

@@ -6,7 +6,7 @@ import _ from 'lodash';
 import { getWebhook, deleteWebhook } from '../../actions/webhooks';
 
 // Components
-import { Layout, DeleteModal } from 'src/components';
+import { DeleteModal } from 'src/components';
 import { Page, Tabs } from '@sparkpost/matchbox';
 import TestTab from './components/TestTab';
 import EditTab from './components/EditTab';
@@ -92,28 +92,32 @@ class WebhooksDetails extends Component {
     */
     const isLoading = (webhook.id !== webhookId) || !webhook.events;
 
-    return (
-      <Layout.App loading={isLoading}>
-        <Page
-          title={webhook.name}
-          secondaryActions={this.secondaryActions}
-          breadcrumbAction={{ content: 'Webhooks', Component: Link, to: '/webhooks/' }}
-        />
-        <Tabs
-          selected={selectedTab}
-          tabs={this.tabs}
-        />
-        <Route exact path={this.editPath} render={() => <EditTab id={webhookId}/> } />
-        <Route path={this.testPath} render={() => <TestTab webhook={webhook}/>} />
-        <DeleteModal
-          open={this.state.showDelete}
-          title='Delete Webhook'
-          text='Are you sure you want to delete this webhook?'
-          handleToggle={this.toggleDelete}
-          handleDelete={this.deleteWebhook}
-        />
-      </Layout.App>
-    );
+    if (!isLoading) {
+      return (
+        <div loading={isLoading}>
+          <Page
+            title={webhook.name}
+            secondaryActions={this.secondaryActions}
+            breadcrumbAction={{ content: 'Webhooks', Component: Link, to: '/webhooks/' }}
+          />
+          <Tabs
+            selected={selectedTab}
+            tabs={this.tabs}
+          />
+          <Route exact path={this.editPath} render={() => <EditTab id={webhookId}/> } />
+          <Route path={this.testPath} render={() => <TestTab webhook={webhook}/>} />
+          <DeleteModal
+            open={this.state.showDelete}
+            title='Delete Webhook'
+            text='Are you sure you want to delete this webhook?'
+            handleToggle={this.toggleDelete}
+            handleDelete={this.deleteWebhook}
+          />
+        </div>
+      );
+    }
+
+    return null;
   }
 }
 

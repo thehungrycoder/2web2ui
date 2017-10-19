@@ -11,7 +11,6 @@ import { showAlert } from 'src/actions/globalAlert';
 import { templateById } from 'src/selectors/templates';
 
 // Components
-import { Layout } from 'src/components';
 import Form from './components/Form';
 import Editor from './components/Editor';
 import DeleteModal from './components/DeleteModal';
@@ -128,7 +127,7 @@ class EditPage extends Component {
     }
 
     return (
-      <Layout.App loading={loading}>
+      <div loading={loading}>
         { this.renderPageHeader() }
         <Grid>
           <Grid.Column xs={12} lg={4}>
@@ -142,7 +141,7 @@ class EditPage extends Component {
           open={this.state.deleteOpen}
           handleToggle={() => this.handleDeleteModalToggle()}
           handleDelete={() => this.handleDelete()}/>
-      </Layout.App>
+      </div>
     );
   }
 }

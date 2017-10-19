@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Layout } from 'src/components';
 import { Page, Panel, Modal, WindowEvent } from '@sparkpost/matchbox';
 
 import { fetch as fetchAccount, getPlans } from 'src/actions/account';
@@ -104,10 +103,10 @@ export class SummaryPage extends Component {
       : <ManuallyBilledBanner account={this.props.account} />;
 
     return (
-      <Layout.App loading={this.props.loading}>
+      <div loading={this.props.loading}>
         <Page title='Billing'/>
         { pageMarkup }
-      </Layout.App>
+      </div>
     );
   }
 }

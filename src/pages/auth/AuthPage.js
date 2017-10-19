@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import { authenticate } from 'src/actions/auth';
-import { Layout, SparkPost } from 'src/components';
+import { SparkPost } from 'src/components';
 import { Panel, Button, TextField, Checkbox } from '@sparkpost/matchbox';
 
 import styles from './AuthPage.module.scss';
@@ -59,7 +59,7 @@ export class AuthPage extends Component {
     }
 
     return (
-      <Layout.Form>
+      <div>
         <div className={styles.LogoWrapper}>
           <a href="https://www.sparkpost.com" title="SparkPost">
             <SparkPost.Logo />
@@ -100,7 +100,7 @@ export class AuthPage extends Component {
             </Button>
           </form>
         </Panel>
-      </Layout.Form>
+      </div>
     );
   }
 }

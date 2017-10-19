@@ -4,7 +4,6 @@ import { Link, withRouter } from 'react-router-dom';
 import { Page, Panel } from '@sparkpost/matchbox';
 
 import { createApiKey } from 'src/actions/api-keys';
-import Layout from 'src/components/layout/Layout';
 import { getLoading } from 'src/selectors/api-keys';
 import ApiKeyForm from './components/ApiKeyForm';
 
@@ -25,14 +24,14 @@ export class CreatePage extends React.Component {
 
   render() {
     return (
-      <Layout.App loading={this.props.loading}>
+      <div loading={this.props.loading}>
         <Page title="Create API Key" breadcrumbAction={breadcrumbAction} />
         <Panel>
           <Panel.Section>
             <ApiKeyForm onSubmit={this.onSubmit} />
           </Panel.Section>
         </Panel>
-      </Layout.App>
+      </div>
     );
   }
 }
