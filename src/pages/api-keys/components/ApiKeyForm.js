@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 import { Button } from '@sparkpost/matchbox';
 
-import { listGrants, listSubaccountGrants } from 'src/actions/api-keys';
-import { list as listSubaccounts } from 'src/actions/subaccounts';
 import {
   RadioGroup,
   TextFieldWrapper,
@@ -18,10 +16,10 @@ import {
   getInitialSubaccount,
   getInitialValues
 } from 'src/selectors/api-keys';
+import { hasSubaccounts } from 'src/selectors/subaccounts';
 import validIpList from '../helpers/validIpList';
 import { required } from 'src/helpers/validation';
 import GrantsCheckboxes from './GrantsCheckboxes';
-
 
 const formName = 'apiKeyForm';
 const grantsOptions = [
@@ -30,12 +28,6 @@ const grantsOptions = [
 ];
 
 export class ApiKeyForm extends Component {
-  componentDidMount() {
-    this.props.listGrants();
-    this.props.listSubaccountGrants();
-    this.props.listSubaccounts();
-  }
-
   render() {
     const {
       grants,
@@ -43,6 +35,7 @@ export class ApiKeyForm extends Component {
       subaccounts,
       isNew,
       handleSubmit,
+      hasSubaccounts,
       pristine,
       showGrants,
       showSubaccountGrants,
@@ -59,11 +52,13 @@ export class ApiKeyForm extends Component {
           validate={required}
           label="API Key Name"
         />
-        <Field
-          name="subaccount"
-          component={SubaccountTypeaheadWrapper}
-          subaccounts={subaccounts}
-        />
+        { hasSubaccounts &&
+          <Field
+            name="subaccount"
+            component={SubaccountTypeaheadWrapper}
+            subaccounts={subaccounts}
+          />
+        }
         <Field
           name="grantsRadio"
           component={RadioGroup}
@@ -88,11 +83,10 @@ export class ApiKeyForm extends Component {
   }
 }
 
-const ApiKeyReduxForm = reduxForm({ form: formName })(ApiKeyForm);
 const valueSelector = formValueSelector(formName);
-
 const mapStateToProps = (state, props) => ({
   grants: getGrants(state),
+  hasSubaccounts: hasSubaccounts(state),
   subaccountGrants: getSubaccountGrants(state),
   subaccounts: state.subaccounts.list,
   showSubaccountGrants: !!valueSelector(state, 'subaccount'),
@@ -105,8 +99,5 @@ const mapStateToProps = (state, props) => ({
   }
 });
 
-export default connect(mapStateToProps, {
-  listGrants,
-  listSubaccountGrants,
-  listSubaccounts
-})(ApiKeyReduxForm);
+const formOptions = { form: formName };
+export default connect(mapStateToProps, {})(reduxForm(formOptions)(ApiKeyForm));

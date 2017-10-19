@@ -85,59 +85,35 @@ export function hideNewApiKey() {
   };
 }
 
-export function listApiKeys({ force } = {}) {
-  return (dispatch, getState) => {
-    if (!force && getState().apiKeys.keysLoaded) {
-      return;
+export function listApiKeys() {
+  return sparkpostApiRequest({
+    type: 'LIST_API_KEYS',
+    meta: {
+      method: 'GET',
+      url: '/api-keys'
     }
-
-    return dispatch(
-      sparkpostApiRequest({
-        type: 'LIST_API_KEYS',
-        meta: {
-          method: 'GET',
-          url: '/api-keys'
-        }
-      })
-    );
-  };
+  });
 }
 
-export function listGrants({ force } = {}) {
-  return (dispatch, getState) => {
-    if (!force && getState().apiKeys.grantsLoaded) {
-      return;
+export function listGrants() {
+  return sparkpostApiRequest({
+    type: 'LIST_GRANTS',
+    meta: {
+      method: 'GET',
+      url: '/authenticate/grants'
     }
-
-    return dispatch(
-      sparkpostApiRequest({
-        type: 'LIST_GRANTS',
-        meta: {
-          method: 'GET',
-          url: '/authenticate/grants'
-        }
-      })
-    );
-  };
+  });
 }
 
-export function listSubaccountGrants({ force } = {}) {
-  return (dispatch, getState) => {
-    if (!force && getState().apiKeys.subaccountGrantsLoaded) {
-      return;
+export function listSubaccountGrants() {
+  return sparkpostApiRequest({
+    type: 'LIST_SUBACCOUNT_GRANTS',
+    meta: {
+      method: 'GET',
+      url: '/authenticate/grants',
+      params: {
+        role: 'subaccount'
+      }
     }
-
-    return dispatch(
-      sparkpostApiRequest({
-        type: 'LIST_SUBACCOUNT_GRANTS',
-        meta: {
-          method: 'GET',
-          url: '/authenticate/grants',
-          params: {
-            role: 'subaccount'
-          }
-        }
-      })
-    );
-  };
+  });
 }

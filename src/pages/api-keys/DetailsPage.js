@@ -3,9 +3,13 @@ import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import { Page, Panel } from '@sparkpost/matchbox';
 
-import { deleteApiKey, listApiKeys, updateApiKey } from 'src/actions/api-keys';
+import { deleteApiKey, listApiKeys, updateApiKey, listGrants, listSubaccountGrants } from 'src/actions/api-keys';
+import { list as listSubaccounts } from 'src/actions/subaccounts';
+
+import { hasSubaccounts } from 'src/selectors/subaccounts';
+import { getApiKey, getFormLoading, getKeysLoading } from 'src/selectors/api-keys';
+
 import { Loading, DeleteModal } from 'src/components';
-import { getApiKey, getLoading } from 'src/selectors/api-keys';
 import ApiKeyForm from './components/ApiKeyForm';
 
 const breadcrumbAction = {
@@ -32,6 +36,11 @@ export class ApiKeysDetailsPage extends Component {
 
   componentDidMount() {
     this.props.listApiKeys();
+    this.props.listGrants();
+    if (this.props.hasSubaccounts) {
+      this.props.listSubaccountGrants();
+      this.props.listSubaccounts();
+    }
   }
 
   onDelete = () => {
@@ -93,7 +102,8 @@ const mapStateToProps = (state, props) => {
     keys,
     error,
     grants,
-    loading: getLoading(state)
+    hasSubaccounts: hasSubaccounts(state),
+    loading: getFormLoading(state) || getKeysLoading(state)
   };
 };
 
@@ -103,7 +113,10 @@ const mapDispatchToProps = (dispatch, props) => {
   return {
     deleteApiKey: () => dispatch(deleteApiKey(id)),
     listApiKeys: () => dispatch(listApiKeys()),
-    updateApiKey: (values) => dispatch(updateApiKey(id, values))
+    updateApiKey: (values) => dispatch(updateApiKey(id, values)),
+    listGrants: () => dispatch(listGrants()),
+    listSubaccountGrants: () => dispatch(listSubaccountGrants()),
+    listSubaccounts: () => dispatch(listSubaccounts())
   };
 };
 

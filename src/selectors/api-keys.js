@@ -10,7 +10,7 @@ const getSubaccountGrantsArray = (state) => state.apiKeys.subaccountGrants;
 const getSubaccounts = (state) => state.subaccounts.list;
 const getApiKeyId = (state, props) => props.match.params.id;
 
-const getKeysLoading = (state) => state.apiKeys.keysLoading;
+export const getKeysLoading = (state) => state.apiKeys.keysLoading;
 const getGrantsLoading = (state) => state.apiKeys.grantsLoading;
 const getSubaccountGrantsLoading = (state) => state.apiKeys.subaccountGrantsLoading;
 const getSubaccountsLoading = (state) => state.subaccounts.listLoading;
@@ -29,10 +29,10 @@ export const getSubaccountGrants = createSelector(getSubaccountGrantsArray, (gra
   _.keyBy(grants, 'key')
 );
 
-export const getLoading = createSelector(
-  [getKeysLoading, getGrantsLoading, getSubaccountGrantsLoading, getSubaccountsLoading],
-  (keysLoading, grantsLoading, subaccountGrantsLoading, subaccountsLoading) =>
-    keysLoading || grantsLoading || subaccountGrantsLoading || subaccountsLoading
+export const getFormLoading = createSelector(
+  [getGrantsLoading, getSubaccountGrantsLoading, getSubaccountsLoading],
+  (grantsLoading, subaccountGrantsLoading, subaccountsLoading) =>
+    grantsLoading || subaccountGrantsLoading || subaccountsLoading
 );
 
 /*

@@ -1,12 +1,9 @@
 const initialState = {
   grants: [],
-  grantsLoaded: false,
   grantsLoading: false,
   subaccountGrants: [],
-  subaccountGrantsLoaded: false,
   subaccountGrantsLoading: false,
   keys: [],
-  keysLoaded: false,
   keysLoading: false,
   error: null,
   newKey: null
@@ -20,11 +17,11 @@ export default (state = initialState, { payload, type }) => {
     }
 
     case 'LIST_API_KEYS_SUCCESS': {
-      return { ...state, keysLoading: false, keysLoaded: true, keys: payload };
+      return { ...state, keysLoading: false, keys: payload };
     }
 
     case 'LIST_API_KEYS_FAIL': {
-      return { ...state, keysLoading: false, keysLoaded: true, error: payload };
+      return { ...state, keysLoading: false, error: payload };
     }
 
     // LIST_GRANTS
@@ -33,11 +30,11 @@ export default (state = initialState, { payload, type }) => {
     }
 
     case 'LIST_GRANTS_SUCCESS': {
-      return { ...state, grants: payload, grantsLoaded: true, grantsLoading: false };
+      return { ...state, grants: payload, grantsLoading: false };
     }
 
     case 'LIST_GRANTS_FAIL': {
-      return { ...state, error: payload, grantsLoaded: true, grantsLoading: false };
+      return { ...state, error: payload, grantsLoading: false };
     }
 
     case 'LIST_SUBACCOUNT_GRANTS_PENDING': {
@@ -45,20 +42,20 @@ export default (state = initialState, { payload, type }) => {
     }
 
     case 'LIST_SUBACCOUNT_GRANTS_SUCCESS': {
-      return { ...state, subaccountGrants: payload, subaccountGrantsLoaded: true, subaccountGrantsLoading: false };
+      return { ...state, subaccountGrants: payload, subaccountGrantsLoading: false };
     }
 
     case 'LIST_SUBACCOUNT_GRANTS_FAIL': {
-      return { ...state, error: payload, subaccountGrantsLoaded: true, subaccountGrantsLoading: false };
+      return { ...state, error: payload, subaccountGrantsLoading: false };
     }
 
     // CRUD
     case 'CREATE_API_KEY_SUCCESS':
-      return { ...state, keysLoaded: false, newKey: payload.key };
+      return { ...state, newKey: payload.key };
 
     case 'DELETE_API_KEY_SUCCESS':
     case 'UPDATE_API_KEY_SUCCESS': {
-      return { ...state, keysLoaded: false };
+      return { ...state };
     }
 
     case 'HIDE_NEW_API_KEY': {
