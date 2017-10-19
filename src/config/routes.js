@@ -11,7 +11,8 @@ import {
   templates,
   trackingDomains,
   users,
-  webhooks
+  webhooks,
+  ipPools
 } from 'src/pages';
 
 import {
@@ -171,5 +172,10 @@ export default [
     path: '/account/billing/plan',
     component: billing.ChangePlanPage,
     condition: hasGrants('account/manage')
+  },
+  {
+    path: '/account/ip-pools',
+    component: ipPools.ListPage,
+    condition: hasGrants('ip_pools/manage')
   }
 ];

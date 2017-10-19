@@ -1,6 +1,6 @@
 import sparkpostApiRequest from './helpers/sparkpostApiRequest';
 
-export function list() {
+export function listPools() {
   return sparkpostApiRequest({
     type: 'LIST_IP_POOLS',
     meta: {
@@ -9,6 +9,7 @@ export function list() {
     }
   });
 }
+
 export function create(name) {
   return sparkpostApiRequest({
     type: 'CREATE_IP_POOL',
