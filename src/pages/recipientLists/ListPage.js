@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { Page } from '@sparkpost/matchbox';
-import { ApiErrorBanner, TableCollection } from 'src/components';
+import { Loading, ApiErrorBanner, TableCollection } from 'src/components';
 
 import RecipientListsEmptyState from './components/RecipientListsEmptyState';
 
@@ -61,8 +61,12 @@ export class ListPage extends Component {
   render() {
     const { error, loading, recipientLists } = this.props;
 
+    if (loading) {
+      return <Loading />;
+    }
+
     return (
-      <div loading={loading}>
+      <div>
         { error
           ? this.renderError(error)
           : recipientLists.length

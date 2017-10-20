@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
+
 // Actions
 import { getDraft, getPublished, update, deleteTemplate, publish } from '../../actions/templates';
 import { showAlert } from 'src/actions/globalAlert';
@@ -13,7 +14,8 @@ import { templateById } from 'src/selectors/templates';
 // Components
 import Form from './components/Form';
 import Editor from './components/Editor';
-import DeleteModal from './components/DeleteModal';
+import DeleteModal from './components/DeleteModal'; // TODO use reusable DeleteModal from src/components
+import { Loading } from 'src/components';
 import { Page, Grid } from '@sparkpost/matchbox';
 
 const FORM_NAME = 'templateEdit';
@@ -123,11 +125,15 @@ class EditPage extends Component {
     const { loading } = this.props;
 
     if (this.state.redirectTo) {
-      return <Redirect to={this.state.redirectTo} />;
+      return <Redirect to={this.state.redirectTo} />; // TODO use history.push instead
+    }
+
+    if (loading) {
+      return <Loading />;
     }
 
     return (
-      <div loading={loading}>
+      <div>
         { this.renderPageHeader() }
         <Grid>
           <Grid.Column xs={12} lg={4}>

@@ -12,6 +12,7 @@ import { templateById } from 'src/selectors/templates';
 // Components
 import Form from './components/Form';
 import Editor from './components/Editor';
+import { Loading } from 'src/components';
 import { Page, Grid } from '@sparkpost/matchbox';
 
 const FORM_NAME = 'templatePublished';
@@ -59,8 +60,12 @@ class PublishedPage extends Component {
   render() {
     const { loading } = this.props;
 
+    if (loading) {
+      return <Loading />;
+    }
+
     return (
-      <div loading={loading}>
+      <div>
         { this.renderPageHeader() }
         <Grid>
           <Grid.Column xs={12} lg={4}>

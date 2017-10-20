@@ -1,11 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
-import { Page, Panel } from '@sparkpost/matchbox';
 
 import { createApiKey } from 'src/actions/api-keys';
 import { getLoading } from 'src/selectors/api-keys';
 import ApiKeyForm from './components/ApiKeyForm';
+import { Page, Panel } from '@sparkpost/matchbox';
+import { Loading } from 'src/components';
 
 const breadcrumbAction = {
   content: 'API Keys',
@@ -23,8 +24,13 @@ export class CreatePage extends React.Component {
   };
 
   render() {
+
+    if (this.props.loading) {
+      return <Loading />;
+    }
+
     return (
-      <div loading={this.props.loading}>
+      <div>
         <Page title="Create API Key" breadcrumbAction={breadcrumbAction} />
         <Panel>
           <Panel.Section>

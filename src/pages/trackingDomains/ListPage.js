@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { Page } from '@sparkpost/matchbox';
-import ApiErrorBanner from 'src/components/apiErrorBanner/ApiErrorBanner';
+import { Loading, ApiErrorBanner } from 'src/components';
 
 import TrackingDomainsCollection from './components/TrackingDomainsCollection';
 import TrackingDomainsEmptyState from './components/TrackingDomainsEmptyState';
@@ -44,8 +44,12 @@ export class ListPage extends Component {
   render() {
     const { error, loading, trackingDomains, hasSubaccounts } = this.props;
 
+    if (loading) {
+      return <Loading />;
+    }
+
     return (
-      <div loading={loading}>
+      <div>
         { error
           ? this.renderError(error)
           : trackingDomains.length

@@ -1,13 +1,14 @@
+/* eslint-disable */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import _ from 'lodash';
 
 // Actions
-import { listTemplates } from '../../actions/templates';
+import { listTemplates } from 'src/actions/templates';
 
 // Components
-import { TableCollection, ApiErrorBanner } from 'src/components';
+import { TableCollection, ApiErrorBanner, Loading } from 'src/components';
 import { Page } from '@sparkpost/matchbox';
 
 const CREATE_ACTION = {
@@ -61,8 +62,12 @@ class ListPage extends Component {
     //   return <Redirect to="/templates/create" />;
     // }
 
+    if (loading) {
+      return <Loading />;
+    }
+
     return (
-      <div loading={loading}>
+      <div>
         <Page
           primaryAction={CREATE_ACTION}
           title={'Templates'}

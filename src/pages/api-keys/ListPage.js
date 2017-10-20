@@ -6,7 +6,7 @@ import { Banner, Page } from '@sparkpost/matchbox';
 
 import { hideNewApiKey, listApiKeys } from 'src/actions/api-keys';
 
-import { ApiErrorBanner, TableCollection } from 'src/components';
+import { Loading, ApiErrorBanner, TableCollection } from 'src/components';
 import { getLoading } from 'src/selectors/api-keys';
 import PermissionsColumn from './components/PermissionsColumn';
 
@@ -89,8 +89,12 @@ export class ListPage extends Component {
   render() {
     const { error, loading, newKey } = this.props;
 
+    if (loading) {
+      return <Loading />;
+    }
+
     return (
-      <div loading={loading}>
+      <div>
         <Page primaryAction={primaryAction} title="API Keys" />
         {newKey && this.renderBanner()}
         {error ? this.renderError() : this.renderCollection()}

@@ -6,6 +6,7 @@ import { Page, Panel, Modal, WindowEvent } from '@sparkpost/matchbox';
 import { fetch as fetchAccount, getPlans } from 'src/actions/account';
 import { shouldExposeCardSelector, canChangePlanSelector, currentPlanSelector, publicPlansSelector } from 'src/selectors/accountBillingInfo';
 
+import { Loading } from 'src/components';
 import { PremiumBanner, EnterpriseBanner, SuspendedBanner, ManuallyBilledBanner, PendingPlanBanner } from './components/Banners';
 import UpdatePayment from './forms/UpdatePayment';
 import UpdateContact from './forms/UpdateContact';
@@ -98,12 +99,17 @@ export class SummaryPage extends Component {
   }
 
   render() {
+
+    if (this.props.loading) {
+      return <Loading />;
+    }
+
     const pageMarkup = this.props.account.subscription.self_serve
       ? this.renderSummary()
       : <ManuallyBilledBanner account={this.props.account} />;
 
     return (
-      <div loading={this.props.loading}>
+      <div>
         <Page title='Billing'/>
         { pageMarkup }
       </div>
