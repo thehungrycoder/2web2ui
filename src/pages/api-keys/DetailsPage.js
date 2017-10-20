@@ -7,7 +7,7 @@ import { deleteApiKey, listApiKeys, updateApiKey, listGrants, listSubaccountGran
 import { list as listSubaccounts } from 'src/actions/subaccounts';
 
 import { hasSubaccounts } from 'src/selectors/subaccounts';
-import { getApiKey, getFormLoading, getKeysLoading } from 'src/selectors/api-keys';
+import { getApiKey, getFormLoading } from 'src/selectors/api-keys';
 
 import { Loading, DeleteModal } from 'src/components';
 import ApiKeyForm from './components/ApiKeyForm';
@@ -95,15 +95,14 @@ export class ApiKeysDetailsPage extends Component {
 }
 
 const mapStateToProps = (state, props) => {
-  const { error, grants, keys } = state.apiKeys;
+  const { error, grants } = state.apiKeys;
 
   return {
     apiKey: getApiKey(state, props),
-    keys,
     error,
     grants,
     hasSubaccounts: hasSubaccounts(state),
-    loading: getFormLoading(state) || getKeysLoading(state)
+    loading: getFormLoading(state) || state.apiKeys.keysLoading
   };
 };
 

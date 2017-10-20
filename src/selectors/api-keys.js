@@ -10,7 +10,6 @@ const getSubaccountGrantsArray = (state) => state.apiKeys.subaccountGrants;
 const getSubaccounts = (state) => state.subaccounts.list;
 const getApiKeyId = (state, props) => props.match.params.id;
 
-export const getKeysLoading = (state) => state.apiKeys.keysLoading;
 const getGrantsLoading = (state) => state.apiKeys.grantsLoading;
 const getSubaccountGrantsLoading = (state) => state.apiKeys.subaccountGrantsLoading;
 const getSubaccountsLoading = (state) => state.subaccounts.listLoading;

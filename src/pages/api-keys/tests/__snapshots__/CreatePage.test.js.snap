@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly with no subaccounts 1`] = `
+<App
+  loading={false}
+>
+  <t
+    breadcrumbAction={
+      Object {
+        "Component": [Function],
+        "content": "API Keys",
+        "to": "/account/api-keys",
+      }
+    }
+    title="Create API Key"
+  />
+  <t>
+    <Panel.Section>
+      <Connect(ReduxForm)
+        onSubmit={[Function]}
+      />
+    </Panel.Section>
+  </t>
+</App>
+`;

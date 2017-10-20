@@ -108,7 +108,7 @@ const mapStateToProps = (state) => {
   return {
     error,
     keys,
-    loading: getKeysLoading(state),
+    loading: state.apiKeys.keysLoading,
     newKey
   };
 };
