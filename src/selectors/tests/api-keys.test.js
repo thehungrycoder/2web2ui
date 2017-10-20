@@ -9,8 +9,8 @@ describe('Filter Api Keys Selector', () => {
           subaccount_id: 1
         },
         {
-          label: 'Two',
-        },
+          label: 'Two'
+        }
       ]
     },
     form: {
@@ -24,21 +24,21 @@ describe('Filter Api Keys Selector', () => {
 
   it('filters search', () => {
     const search = { form: { apiKeysFilters: { values: { search: 'tw' }}}};
-    expect(getFilteredKeys({...store, ...search})).toMatchSnapshot();
+    expect(getFilteredKeys({ ...store, ...search })).toMatchSnapshot();
   });
 
   it('filters assigned to subaccount', () => {
-    const search = { form: { apiKeysFilters: { values: { subaccount: { subaccount: true} }}}};
-    expect(getFilteredKeys({...store, ...search})).toMatchSnapshot();
+    const search = { form: { apiKeysFilters: { values: { subaccount: { subaccount: true }}}}};
+    expect(getFilteredKeys({ ...store, ...search })).toMatchSnapshot();
   });
 
   it('filters assigned to master', () => {
-    const search = { form: { apiKeysFilters: { values: { subaccount: { master: true} }}}};
-    expect(getFilteredKeys({...store, ...search})).toMatchSnapshot();
+    const search = { form: { apiKeysFilters: { values: { subaccount: { master: true }}}}};
+    expect(getFilteredKeys({ ...store, ...search })).toMatchSnapshot();
   });
 
   it('filters all subaccount options', () => {
     const search = { form: { apiKeysFilters: { values: { subaccount: { master: true, subaccount: true }}}}};
-    expect(getFilteredKeys({...store, ...search})).toMatchSnapshot();
+    expect(getFilteredKeys({ ...store, ...search })).toMatchSnapshot();
   });
 });

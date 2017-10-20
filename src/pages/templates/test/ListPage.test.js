@@ -10,10 +10,10 @@ const props = {
   listTemplates: jest.fn(),
   templates: [
     {
-      name: 'Temp 1',
+      name: 'Temp 1'
     },
     {
-      name: 'Temp 2',
+      name: 'Temp 2'
     }
   ]
 };

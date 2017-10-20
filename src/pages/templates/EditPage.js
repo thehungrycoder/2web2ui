@@ -63,7 +63,13 @@ class EditPage extends Component {
   componentDidUpdate() {
     const { loading, template, showAlert } = this.props;
 
-    if (!loading && !Object.keys(template.draft).length && !Object.keys(template.published).length) {
+    if (loading || !template) {
+      return;
+    }
+
+    const { draft = {}, published = {}} = template;
+
+    if (!Object.keys(draft).length && !Object.keys(published).length) {
       this.setState({ redirectTo: '/templates/' }); // Redirect if no draft or published found
       showAlert({ type: 'error', message: 'Could not find template' });
     }

@@ -17,7 +17,7 @@ export function filterAndSortByScore(list) {
  * @param {Array} list
  *
  */
-function convertPairsToHash(list = []) {
+function convertPairsToHash(list) {
   const split = list.map((m) => m.split(':'));
   const keys = split.map((m) => m[0]);
   const values = split.map((m) => m[1].replace(enclosingQuotesRegex, '$1'));
@@ -38,11 +38,6 @@ function convertPairsToHash(list = []) {
 export const getObjectPattern = _.memoize((string) => {
   const matches = string.match(objectPatternRegex) || [];
   const exactMatches = string.match(objectPatternExactRegex) || [];
-
-  if (!matches.length && !exactMatches.length) {
-    return {};
-  }
-
   return convertPairsToHash([ ...matches, ...exactMatches ]);
 });
 
@@ -55,13 +50,16 @@ export default function sortMatch(items, pattern, getter = identity) {
   return filterAndSortByScore(scoredItems);
 }
 
-// TODO: should we memoize somehow?
-// TODO: key translation to not force people to know key returned by API (e.g. short_key vs key, label vs name)
 export function objectSortMatch({ items, pattern, getter, keyMap = {}}) {
   const objectPattern = getObjectPattern(pattern);
-  if (objectPattern && Object.keys(objectPattern)) {
-    const scoredItems = items.map((item) => {
-      const score = objectScorer({ item, objectPattern, keyMap }) || basicScorer(getter(item), pattern);
+  if (objectPattern && Object.keys(objectPattern).length) {
+    const remainingPattern = pattern
+      .replace(objectPatternRegex, '')
+      .replace(objectPatternExactRegex, '')
+      .trim();
+
+    const scoredItems = items.map((item, i) => {
+      const score = objectScorer({ item, objectPattern, keyMap }) + basicScorer(getter(item), remainingPattern);
       return [score, item];
     });
     return filterAndSortByScore(scoredItems);

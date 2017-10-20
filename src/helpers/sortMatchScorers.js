@@ -58,10 +58,10 @@ export function basicScorer(haystack, needle) {
   return 0;
 }
 
-export function objectScorer({ item, objectPattern, keyMap }) {
+export function objectScorer({ item, objectPattern, keyMap = {}, scorer = basicScorer }) {
   const mergedKeyMap = { ...defaultKeyMap, ...keyMap };
   const mappedKeys = _.mapKeys(objectPattern, (v, key) => mergedKeyMap[key] || key);
   const mergedObjectPattern = { ...objectPattern, ...mappedKeys }; // leaves original keys alongside mapped keys
   const keys = _.intersection(Object.keys(item), Object.keys(mergedObjectPattern));
-  return keys.reduce((score, key) => score + basicScorer(item[key], mergedObjectPattern[key]), 0);
+  return keys.reduce((score, key) => score + scorer(item[key], mergedObjectPattern[key]), 0);
 }

@@ -1,52 +1,104 @@
-import sortMatch, { objectSortMatch } from '../sortMatch';
-import _ from 'lodash';
+import sortMatch, { objectSortMatch, getObjectPattern } from '../sortMatch';
+import * as scorers from '../sortMatchScorers';
 
 describe('Helper: sortMatch', () => {
 
-  let testList;
-  let titleGetter;
-
   beforeEach(() => {
-    testList = [
-      { title: 'Moby Dick', author: 'Herman Melville' },
-      { title: 'Hamlet', author: 'William Shakespeare' },
-      { title: 'don quixote', author: 'Not Real' },
-      { title: 'Don Quixote', author: 'Miguel de Cervantes' },
-      { title: 'Again with Don Quixote', author: 'Miguel de Cervantes' },
-      { title: 'Ulysses', author: 'James Joyce' },
-      { title: 'the odyssey in tweets', author: '@Homer' },
-      { title: 'The Odyssey', author: 'Homer' },
-      { title: 'War and Peace', author: 'Leo Tolstoy' },
-      { title: 'The Adventures of Huckleberry Finn', author: 'Mark Twain' },
-      { title: 'The Great Gatsby', author: 'F. Scott Fitzgerald' }
-    ];
-    titleGetter = (book) => book.title;
-  })
-
-  it('should prefer exact case-sensitive matches', () => {
-    const sorted = sortMatch(testList, 'Don Quixote', titleGetter);
-    expect(sorted[0]).toBe(_.find(testList, { title: 'Don Quixote' }));
+    scorers.basicScorer = jest.fn();
+    scorers.objectScorer = jest.fn();
+    scorers.basicScorer.mockReturnValue(0);
+    scorers.objectScorer.mockReturnValue(0);
   });
 
-  it('should prefer exact case-insensitive matches', () => {
-    const sorted = sortMatch(testList, 'the odyssey', titleGetter);
-    expect(sorted[0]).toBe(_.find(testList, { title: 'The Odyssey' }));
+  it('should filter and sort by basic score', () => {
+    scorers.basicScorer
+      .mockReturnValueOnce(5)
+      .mockReturnValueOnce(8);
+
+    const result = sortMatch(['a', 'b', 'c', 'd', 'e'], 'test pattern');
+    expect(scorers.basicScorer).toHaveBeenCalledTimes(5);
+    expect(result).toEqual(['b', 'a']);
   });
 
-  it('should prefer case-sensitive prefixes', () => {
-    const sorted = sortMatch(testList, 'Don', titleGetter);
-    expect(sorted[0]).toBe(_.find(testList, { title: 'Don Quixote' }));
+  it('should call a custom getter for every item', () => {
+    const getter = jest.fn(() => 'a');
+    sortMatch([1, 2, 3, 4, 5], 'test-pattern', getter);
+    expect(getter).toHaveBeenCalledTimes(5);
   });
 
-  describe('object match', () => {
+  describe('objectSortMatch', () => {
 
-    it('should match objects as the highest match', () => {
-      const sorted = objectSortMatch({
-        items: testList,
-        pattern: 'author:"Mark Twain"',
-        getter: titleGetter
+    beforeEach(() => {
+      scorers.basicScorer
+        .mockReturnValueOnce(5)
+        .mockReturnValueOnce(8);
+    });
+
+    it('should filter and sort results when an object pattern is present', () => {
+      const result = objectSortMatch({
+        items: [{ a: 1 }, { a: 2 }, { a: 3 }],
+        pattern: 'key:value',
+        getter: (item) => item.a
       });
-      expect(sorted[0].title).toEqual('The Adventures of Huckleberry Finn');
+      expect(scorers.basicScorer).toHaveBeenCalledTimes(3);
+      expect(scorers.objectScorer).toHaveBeenCalledTimes(3);
+      expect(result).toEqual([{ a: 2 }, { a: 1 }]);
+    });
+
+    it('should filter and sort results when no object pattern is present', () => {
+      const result = objectSortMatch({
+        items: [{ a: 1 }, { a: 2 }, { a: 3 }],
+        pattern: 'value',
+        getter: (item) => item.a
+      });
+      expect(scorers.basicScorer).toHaveBeenCalledTimes(3);
+      expect(scorers.objectScorer).toHaveBeenCalledTimes(0);
+      expect(result).toEqual([{ a: 2 }, { a: 1 }]);
+    });
+
+    it('should add basic and object scorer results together for final sort', () => {
+      scorers.basicScorer
+        .mockReturnValueOnce(3)
+        .mockReturnValueOnce(4)
+        .mockReturnValueOnce(0);
+
+      scorers.objectScorer
+        .mockReturnValueOnce(0)
+        .mockReturnValueOnce(7)
+        .mockReturnValueOnce(10);
+
+      const result = objectSortMatch({
+        items: [{ a: 1 }, { a: 2 }, { a: 3 }],
+        pattern: 'key:value',
+        getter: (item) => item.a
+      });
+
+      expect(scorers.basicScorer).toHaveBeenCalledTimes(3);
+      expect(scorers.objectScorer).toHaveBeenCalledTimes(3);
+      expect(result).toEqual([{ a: 2 }, { a: 3 }, { a: 1 }]);
+    });
+
+  });
+
+  describe('getObjectPattern', () => {
+
+    it('should convert key:value pairs', () => {
+      expect(getObjectPattern('whatever key:value name:bob')).toEqual({ key: 'value', name: 'bob' });
+    });
+
+    it('should convert exact matches wrapped in quotes', () => {
+      expect(getObjectPattern('whatever key:"some value with spaces" other:"cool"'))
+        .toEqual({ key: 'some value with spaces', other: 'cool' });
+    });
+
+    it('should return an empty object if no key:value pattern is found', () => {
+      expect(getObjectPattern('no pairs here')).toEqual({});
+    });
+
+    it('should return the memoized cached version if the pattern stays the same', () => {
+      const first = getObjectPattern('k:v');
+      const second = getObjectPattern('k:v');
+      expect(first).toBe(second);
     });
 
   });

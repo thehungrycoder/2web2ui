@@ -38,6 +38,11 @@ exports[`renders correctly 1`] = `
           "short_key",
           "id",
         ],
+        "exampleModifiers": Array [
+          "key",
+          "name",
+          "id",
+        ],
         "keyMap": Object {
           "key": "short_key",
           "name": "label",

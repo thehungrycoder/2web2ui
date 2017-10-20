@@ -60,8 +60,10 @@ class Collection extends Component {
 
   getVisibleRows() {
     const { perPage, currentPage, filteredRows } = this.state;
-    const { rows } = this.props;
+    const { rows = []} = this.props;
     const currentIndex = (currentPage - 1) * perPage;
+
+    console.log(typeof filteredRows, typeof rows); // eslint-disable-line
     return (filteredRows || rows).slice(currentIndex, currentIndex + perPage);
   }
 
@@ -106,7 +108,7 @@ class Collection extends Component {
         <OuterWrapper>
           <HeaderComponent />
           <BodyWrapper>
-            {this.getVisibleRows().map((row, i) => <RowComponent key={`${row[rowKeyName]}-${i}`} {...row} />)}
+            {this.getVisibleRows().map((row, i) => <RowComponent key={`${row[rowKeyName] || 'row'}-${i}`} {...row} />)}
           </BodyWrapper>
         </OuterWrapper>
         {this.renderPagination()}

@@ -45,6 +45,10 @@ exports[`renders correctly 1`] = `
           "id",
           "subaccount_id",
         ],
+        "exampleModifiers": Array [
+          "id",
+          "name",
+        ],
         "show": true,
       }
     }

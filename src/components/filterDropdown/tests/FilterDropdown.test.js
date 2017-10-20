@@ -17,7 +17,7 @@ const props = {
 
 const e = {
   stopPropagation: jest.fn()
-}
+};
 
 let wrapper;
 
@@ -30,14 +30,14 @@ it('renders correctly', () => {
 });
 
 it('renders selected correctly', () => {
-  wrapper.setProps({ values: { suspended: true } })
+  wrapper.setProps({ values: { suspended: true }});
   expect(wrapper).toMatchSnapshot();
 });
 
 it('handles click', () => {
-  wrapper.setProps({ values: { suspended: true } })
-  const changeSpy = jest.spyOn(wrapper.instance().props, 'change')
-  const eSpy = jest.spyOn(e, 'stopPropagation')
+  wrapper.setProps({ values: { suspended: true }});
+  const changeSpy = jest.spyOn(wrapper.instance().props, 'change');
+  const eSpy = jest.spyOn(e, 'stopPropagation');
   wrapper.instance().handleActionClick(e, 'terminated');
   expect(changeSpy).toHaveBeenCalledWith(props.formName, `${props.namespace}.terminated`, true);
   expect(eSpy).toHaveBeenCalled();
