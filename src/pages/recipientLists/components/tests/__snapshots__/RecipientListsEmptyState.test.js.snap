@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`should render 1`] = `
-<t
+<EmptyState
   action={
     Object {
       "content": "Create a Recipient List",
@@ -19,5 +19,5 @@ exports[`should render 1`] = `
   <p>
     Recipient List Explanation
   </p>
-</t>
+</EmptyState>
 `;

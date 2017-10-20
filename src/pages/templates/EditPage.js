@@ -14,7 +14,7 @@ import { templateById } from 'src/selectors/templates';
 // Components
 import Form from './components/Form';
 import Editor from './components/Editor';
-import DeleteModal from './components/DeleteModal'; // TODO use reusable DeleteModal from src/components
+import { DeleteModal } from 'src/components';
 import { Loading } from 'src/components';
 import { Page, Grid } from '@sparkpost/matchbox';
 
@@ -49,7 +49,7 @@ class EditPage extends Component {
       .catch((err) => showAlert({ type: 'error', message: 'Could not save template', details: err.message }));
   }
 
-  handleDelete() {
+  handleDelete = () => {
     const { deleteTemplate, match, showAlert } = this.props;
     return deleteTemplate(match.params.id)
       .then(() => this.setState({ redirectTo: '/templates/' }))
@@ -57,7 +57,7 @@ class EditPage extends Component {
       .catch((err) => showAlert({ type: 'error', message: 'Could not delete template', details: err.message }));
   }
 
-  handleDeleteModalToggle() {
+  handleDeleteModalToggle = () => {
     this.setState({ deleteOpen: !this.state.deleteOpen });
   }
 
@@ -145,8 +145,10 @@ class EditPage extends Component {
         </Grid>
         <DeleteModal
           open={this.state.deleteOpen}
-          handleToggle={() => this.handleDeleteModalToggle()}
-          handleDelete={() => this.handleDelete()}/>
+          title='Delete Template'
+          text='Are you sure you want to delete this template? Both draft and published versions of this template will be deleted.'
+          handleToggle={this.handleDeleteModalToggle}
+          handleDelete={this.handleDelete} />
       </div>
     );
   }

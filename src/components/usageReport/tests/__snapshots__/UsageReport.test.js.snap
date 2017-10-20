@@ -7,7 +7,7 @@ exports[`UsageReport Component render null: only subscription 1`] = `""`;
 exports[`UsageReport Component render null: only usage 1`] = `""`;
 
 exports[`UsageReport Component should render with overages 1`] = `
-<t
+<Panel
   actions={
     Array [
       Object {
@@ -24,7 +24,7 @@ exports[`UsageReport Component should render with overages 1`] = `
       secondaryTitle="Since 2017-08-30T00:00:00.000Z"
       title="Today"
     />
-    <t
+    <ProgressBar
       completed={50}
     />
     <DisplayNumber
@@ -42,7 +42,7 @@ exports[`UsageReport Component should render with overages 1`] = `
       secondaryTitle="Billing cycle: 2017-08-01T08:00:00.000Z - 2017-08-31T08:00:00.000Z"
       title="This Month"
     />
-    <t
+    <ProgressBar
       completed={22}
     />
     <DisplayNumber
@@ -63,11 +63,11 @@ exports[`UsageReport Component should render with overages 1`] = `
       label="Monthly limit"
     />
   </Panel.Section>
-</t>
+</Panel>
 `;
 
 exports[`UsageReport Component should render with regular usage 1`] = `
-<t
+<Panel
   actions={
     Array [
       Object {
@@ -84,7 +84,7 @@ exports[`UsageReport Component should render with regular usage 1`] = `
       secondaryTitle="Since 2017-08-30T00:00:00.000Z"
       title="Today"
     />
-    <t
+    <ProgressBar
       completed={50}
     />
     <DisplayNumber
@@ -102,7 +102,7 @@ exports[`UsageReport Component should render with regular usage 1`] = `
       secondaryTitle="Billing cycle: 2017-08-01T08:00:00.000Z - 2017-08-31T08:00:00.000Z"
       title="This Month"
     />
-    <t
+    <ProgressBar
       completed={2}
     />
     <DisplayNumber
@@ -119,5 +119,5 @@ exports[`UsageReport Component should render with regular usage 1`] = `
       label="Monthly limit"
     />
   </Panel.Section>
-</t>
+</Panel>
 `;

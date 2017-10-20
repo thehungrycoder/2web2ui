@@ -4,7 +4,7 @@ exports[`GlobalAlert Mounted should show details 1`] = `
 <div
   className=""
 >
-  <t
+  <Snackbar
     onDismiss={[Function]}
     status="danger"
   >
@@ -13,7 +13,7 @@ exports[`GlobalAlert Mounted should show details 1`] = `
         details
       </div>
     </div>
-  </t>
+  </Snackbar>
 </div>
 `;
 
@@ -21,7 +21,7 @@ exports[`GlobalAlert Shallow should render with error details 1`] = `
 <div
   className=""
 >
-  <t
+  <Snackbar
     onDismiss={[Function]}
     status="danger"
   >
@@ -36,7 +36,7 @@ exports[`GlobalAlert Shallow should render with error details 1`] = `
         </a>
       </div>
     </div>
-  </t>
+  </Snackbar>
 </div>
 `;
 
@@ -44,7 +44,7 @@ exports[`GlobalAlert Shallow should render with no props 1`] = `
 <div
   className=""
 >
-  <t
+  <Snackbar
     onDismiss={[Function]}
     status="default"
   >
@@ -53,7 +53,7 @@ exports[`GlobalAlert Shallow should render with no props 1`] = `
          
       </div>
     </div>
-  </t>
+  </Snackbar>
 </div>
 `;
 
@@ -61,7 +61,7 @@ exports[`GlobalAlert Shallow should render without error details 1`] = `
 <div
   className=""
 >
-  <t
+  <Snackbar
     onDismiss={[Function]}
     status="danger"
   >
@@ -71,6 +71,6 @@ exports[`GlobalAlert Shallow should render without error details 1`] = `
          
       </div>
     </div>
-  </t>
+  </Snackbar>
 </div>
 `;

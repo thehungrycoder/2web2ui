@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Page, Panel, Modal, WindowEvent } from '@sparkpost/matchbox';
+import { Page, Panel, WindowEvent } from '@sparkpost/matchbox';
 
 import { fetch as fetchAccount, getPlans } from 'src/actions/account';
 import { shouldExposeCardSelector, canChangePlanSelector, currentPlanSelector, publicPlansSelector } from 'src/selectors/accountBillingInfo';
 
-import { Loading } from 'src/components';
+import { Loading, Modal } from 'src/components';
 import { PremiumBanner, EnterpriseBanner, SuspendedBanner, ManuallyBilledBanner, PendingPlanBanner } from './components/Banners';
 import UpdatePayment from './forms/UpdatePayment';
 import UpdateContact from './forms/UpdateContact';

@@ -2,14 +2,14 @@
 
 exports[`should check all children and check parent 1`] = `
 <div>
-  <t
+  <Checkbox
     checked={true}
     id="parent"
     label="parent"
     onChange={[Function]}
   />
   <Checkbox.Group>
-    <t
+    <Checkbox
       checked={true}
       id="myCheckBoxGroup[0]"
       key="checkbox-0"
@@ -18,7 +18,7 @@ exports[`should check all children and check parent 1`] = `
       onChange={[Function]}
       value="one"
     />
-    <t
+    <Checkbox
       checked={true}
       id="myCheckBoxGroup[1]"
       key="checkbox-1"
@@ -33,14 +33,14 @@ exports[`should check all children and check parent 1`] = `
 
 exports[`should check one child 1`] = `
 <div>
-  <t
+  <Checkbox
     checked={false}
     id="parent"
     label="parent"
     onChange={[Function]}
   />
   <Checkbox.Group>
-    <t
+    <Checkbox
       checked={true}
       id="myCheckBoxGroup[0]"
       key="checkbox-0"
@@ -49,7 +49,7 @@ exports[`should check one child 1`] = `
       onChange={[Function]}
       value="one"
     />
-    <t
+    <Checkbox
       checked={false}
       id="myCheckBoxGroup[1]"
       key="checkbox-1"
@@ -64,7 +64,7 @@ exports[`should check one child 1`] = `
 
 exports[`should render a CheckBoxGroup, no children 1`] = `
 <div>
-  <t
+  <Checkbox
     checked={false}
     id="parent"
     label="parent"

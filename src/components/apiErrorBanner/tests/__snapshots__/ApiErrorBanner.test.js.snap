@@ -1,56 +1,56 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ApiErrorBanner Component should render when error prop is passed 1`] = `
-<t
+<Banner
   status="warning"
   title="An error occurred"
 >
   <p>
     Sorry, there was an issue loading your your resource.
   </p>
-  <t
+  <Button
     onClick={[Function]}
     outline={true}
     size="default"
   >
     Show Error Details
-  </t>
-</t>
+  </Button>
+</Banner>
 `;
 
 exports[`ApiErrorBanner Component should render with details 1`] = `
-<t
+<Banner
   status="info"
   title="You Have Another Mission"
 >
   <p>
     Clean the conference room
   </p>
-  <t
+  <Button
     onClick={[Function]}
     outline={true}
     size="default"
   >
     Show Error Details
-  </t>
-</t>
+  </Button>
+</Banner>
 `;
 
 exports[`ApiErrorBanner Component should render with details 2`] = `
-<t
+<Banner
   status="info"
   title="You Have Another Mission"
 >
   <p>
     Clean the conference room
   </p>
-  <t
+  <Button
     onClick={[Function]}
     outline={true}
     size="default"
   >
     Hide Error Details
-  </t>
+  </Button>
   <p
     style={
       Object {
@@ -64,40 +64,40 @@ exports[`ApiErrorBanner Component should render with details 2`] = `
      
     Got Damn!
   </p>
-</t>
+</Banner>
 `;
 
 exports[`ApiErrorBanner Component should render with no props 1`] = `
-<t
+<Banner
   status="warning"
   title="An error occurred"
 >
   <p>
     Sorry, there was an issue.
   </p>
-</t>
+</Banner>
 `;
 
 exports[`ApiErrorBanner Component should render with props 1`] = `
-<t
+<Banner
   status="info"
   title="You Have Another Mission"
 >
   <p>
     Clean the conference room
   </p>
-</t>
+</Banner>
 `;
 
 exports[`ApiErrorBanner Component should render with reload 1`] = `
-<t
+<Banner
   status="info"
   title="You Have Another Mission"
 >
   <p>
     Clean the conference room
   </p>
-  <t
+  <Button
     onClick={[Function]}
     outline={true}
     size="default"
@@ -108,6 +108,6 @@ exports[`ApiErrorBanner Component should render with reload 1`] = `
     }
   >
     Try Again
-  </t>
-</t>
+  </Button>
+</Banner>
 `;

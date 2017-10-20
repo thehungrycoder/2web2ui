@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Page: ChangePlanPage should not render form if not allowed to change plan 1`] = `
-<App>
-  <t
+<div>
+  <Page
     breadcrumbAction={
       Object {
         "Component": [Function],
@@ -10,6 +10,7 @@ exports[`Page: ChangePlanPage should not render form if not allowed to change pl
         "to": "/account/billing",
       }
     }
+    empty={Object {}}
   />
   <Component
     account={Object {}}
@@ -17,12 +18,12 @@ exports[`Page: ChangePlanPage should not render form if not allowed to change pl
   <Component
     account={Object {}}
   />
-</App>
+</div>
 `;
 
 exports[`Page: ChangePlanPage should render form if allowed to change plan 1`] = `
-<App>
-  <t
+<div>
+  <Page
     breadcrumbAction={
       Object {
         "Component": [Function],
@@ -30,6 +31,7 @@ exports[`Page: ChangePlanPage should render form if allowed to change plan 1`] =
         "to": "/account/billing",
       }
     }
+    empty={Object {}}
   />
   <Component
     account={Object {}}
@@ -38,5 +40,5 @@ exports[`Page: ChangePlanPage should render form if allowed to change plan 1`] =
     account={Object {}}
   />
   <withRouter(Connect(ReduxForm)) />
-</App>
+</div>
 `;
