@@ -2,8 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 
-import { createApiKey } from 'src/actions/api-keys';
-import { getLoading } from 'src/selectors/api-keys';
+import { createApiKey, listGrants, listSubaccountGrants } from 'src/actions/api-keys';
+import { list as listSubaccounts } from 'src/actions/subaccounts';
+import { getFormLoading } from 'src/selectors/api-keys';
+import { hasSubaccounts } from 'src/selectors/subaccounts';
+
 import ApiKeyForm from './components/ApiKeyForm';
 import { Page, Panel } from '@sparkpost/matchbox';
 import { Loading } from 'src/components';
@@ -15,6 +18,14 @@ const breadcrumbAction = {
 };
 
 export class CreatePage extends React.Component {
+  componentDidMount() {
+    this.props.listGrants();
+    if (this.props.hasSubaccounts) {
+      this.props.listSubaccountGrants();
+      this.props.listSubaccounts();
+    }
+  }
+
   onSubmit = (values) => {
     const { createApiKey, history } = this.props;
 
@@ -43,9 +54,10 @@ export class CreatePage extends React.Component {
 }
 
 const mapStateToProps = (state, props) => ({
-  loading: getLoading(state)
+  loading: getFormLoading(state),
+  hasSubaccounts: hasSubaccounts(state)
 });
 
 export default withRouter(
-  connect(mapStateToProps, { createApiKey })(CreatePage)
+  connect(mapStateToProps, { createApiKey, listGrants, listSubaccountGrants, listSubaccounts })(CreatePage)
 );

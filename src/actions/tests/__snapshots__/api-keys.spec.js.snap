@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`listApiKeys() dispatches the correct action when no keys are present 1`] = `
+exports[`listApiKeys() dispatches the correct action 1`] = `
 Array [
   Object {
     "meta": Object {
@@ -12,7 +12,7 @@ Array [
 ]
 `;
 
-exports[`listGrants() dispatches the correct action when no grants are present 1`] = `
+exports[`listGrants() dispatches the correct action 1`] = `
 Array [
   Object {
     "meta": Object {

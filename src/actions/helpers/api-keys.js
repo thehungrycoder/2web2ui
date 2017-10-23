@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { getGrants } from 'src/selectors/api-keys';
+import { getGrants, getSubaccountGrants } from 'src/selectors/api-keys';
 
 export function formatKeyForRequest(key, getState) {
   const request = { data: {}};
@@ -11,7 +11,8 @@ export function formatKeyForRequest(key, getState) {
   request.data.label = key.label;
 
   if (key.grantsRadio === 'all') {
-    request.data.grants = _.keys(getGrants(getState()));
+    const grants = key.subaccount ? getSubaccountGrants : getGrants;
+    request.data.grants = _.keys(grants(getState()));
   } else {
     request.data.grants = _.keys(_.pickBy(key.grants));
   }
