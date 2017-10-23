@@ -45,10 +45,10 @@ export class IpPoolsList extends Component {
   }
 
   render() {
-    const { ipPools, loading, error } = this.props;
+    const { loading, error } = this.props;
 
     if (loading) {
-      return <Loading />
+      return <Loading />;
     }
 
     return (
