@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import Layout from 'src/components/layout/Layout';
 import { Page, EmptyState } from '@sparkpost/matchbox';
-import TableCollection from 'src/components/collection/TableCollection';
-import ApiErrorBanner from 'src/components/apiErrorBanner/ApiErrorBanner';
+import { Loading, TableCollection, ApiErrorBanner } from 'src/components';
 
 import { list as listSubaccounts } from 'src/actions/subaccounts';
 import getRowData from './helpers/getRowData';
@@ -65,15 +63,19 @@ export class ListPage extends Component {
   render() {
     const { error, loading, subaccounts } = this.props;
 
+    if (loading) {
+      return <Loading />;
+    }
+
     return (
-      <Layout.App loading={loading}>
+      <div>
         { error
           ? this.renderError()
           : subaccounts.length
             ? renderCollection(subaccounts)
             : renderEmpty()
         }
-      </Layout.App>
+      </div>
     );
   }
 }

@@ -1,14 +1,12 @@
 import React from 'react';
-
 import ScrollToTop from './ScrollToTop';
-import { Loading } from 'src/components';
 import styles from './Layout.module.scss';
 
-const Form = ({ children, loading }) => (
-  <div className={styles.wrapper}>
-    <main role="main" className={styles.formContent}>
-      <div className={styles.formContainer}>
-        { loading ? <div className={styles.loading}><Loading /></div> : children }
+const Form = ({ children }) => (
+  <div className={`${styles.wrapper} ${styles.form}`}>
+    <main role="main" className={styles.content}>
+      <div className={styles.container}>
+        { children }
       </div>
     </main>
     <ScrollToTop/>

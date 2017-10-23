@@ -8,7 +8,7 @@ exports[`redirects when logged in 1`] = `
 `;
 
 exports[`renders correctly 1`] = `
-<Form>
+<div>
   <div>
     <a
       href="https://www.sparkpost.com"
@@ -17,13 +17,13 @@ exports[`renders correctly 1`] = `
       <Logo />
     </a>
   </div>
-  <t
+  <Panel
     accent={true}
     sectioned={true}
     title="Log In"
   >
     <form>
-      <t
+      <TextField
         autoFocus={true}
         id="username"
         label="Email"
@@ -32,7 +32,7 @@ exports[`renders correctly 1`] = `
         type="text"
         value=""
       />
-      <t
+      <TextField
         id="password"
         label="Password"
         onChange={[Function]}
@@ -40,13 +40,13 @@ exports[`renders correctly 1`] = `
         type="password"
         value=""
       />
-      <t
+      <Checkbox
         checked={false}
         id="rememberMe"
         label="Keep me logged in"
         onChange={[Function]}
       />
-      <t
+      <Button
         onClick={[Function]}
         primary={true}
         size="default"
@@ -55,14 +55,14 @@ exports[`renders correctly 1`] = `
         <span>
           Log In
         </span>
-      </t>
+      </Button>
     </form>
-  </t>
-</Form>
+  </Panel>
+</div>
 `;
 
 exports[`renders correctly when logging in 1`] = `
-<Form>
+<div>
   <div>
     <a
       href="https://www.sparkpost.com"
@@ -71,13 +71,13 @@ exports[`renders correctly when logging in 1`] = `
       <Logo />
     </a>
   </div>
-  <t
+  <Panel
     accent={true}
     sectioned={true}
     title="Log In"
   >
     <form>
-      <t
+      <TextField
         autoFocus={true}
         id="username"
         label="Email"
@@ -86,7 +86,7 @@ exports[`renders correctly when logging in 1`] = `
         type="text"
         value=""
       />
-      <t
+      <TextField
         id="password"
         label="Password"
         onChange={[Function]}
@@ -94,13 +94,13 @@ exports[`renders correctly when logging in 1`] = `
         type="password"
         value=""
       />
-      <t
+      <Checkbox
         checked={false}
         id="rememberMe"
         label="Keep me logged in"
         onChange={[Function]}
       />
-      <t
+      <Button
         onClick={[Function]}
         primary={true}
         size="default"
@@ -112,14 +112,14 @@ exports[`renders correctly when logging in 1`] = `
           />
            Logging In
         </span>
-      </t>
+      </Button>
     </form>
-  </t>
-</Form>
+  </Panel>
+</div>
 `;
 
 exports[`renders correctly when there is a login error 1`] = `
-<Form>
+<div>
   <div>
     <a
       href="https://www.sparkpost.com"
@@ -128,7 +128,7 @@ exports[`renders correctly when there is a login error 1`] = `
       <Logo />
     </a>
   </div>
-  <t
+  <Panel
     accent={true}
     sectioned={true}
     title="Log In"
@@ -141,7 +141,7 @@ exports[`renders correctly when there is a login error 1`] = `
           uh oh!
         </p>
       </div>
-      <t
+      <TextField
         autoFocus={true}
         id="username"
         label="Email"
@@ -150,7 +150,7 @@ exports[`renders correctly when there is a login error 1`] = `
         type="text"
         value=""
       />
-      <t
+      <TextField
         id="password"
         label="Password"
         onChange={[Function]}
@@ -158,13 +158,13 @@ exports[`renders correctly when there is a login error 1`] = `
         type="password"
         value=""
       />
-      <t
+      <Checkbox
         checked={false}
         id="rememberMe"
         label="Keep me logged in"
         onChange={[Function]}
       />
-      <t
+      <Button
         onClick={[Function]}
         primary={true}
         size="default"
@@ -173,8 +173,8 @@ exports[`renders correctly when there is a login error 1`] = `
         <span>
           Log In
         </span>
-      </t>
+      </Button>
     </form>
-  </t>
-</Form>
+  </Panel>
+</div>
 `;

@@ -6,7 +6,6 @@ import { reduxForm, formValueSelector } from 'redux-form';
 import { create } from '../../actions/templates';
 
 // Components
-import { Layout } from 'src/components';
 import Form from './components/Form';
 import Editor from './components/Editor';
 import { Page, Grid } from '@sparkpost/matchbox';
@@ -56,7 +55,7 @@ class CreatePage extends Component {
     }
 
     return (
-      <Layout.App>
+      <div>
         { this.renderPageHeader() }
         <Grid>
           <Grid.Column xs={12} lg={4}>
@@ -66,7 +65,7 @@ class CreatePage extends Component {
             <Editor name={FORM_NAME} />
           </Grid.Column>
         </Grid>
-      </Layout.App>
+      </div>
     );
   }
 }

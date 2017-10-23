@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { Page, Banner } from '@sparkpost/matchbox';
-import { Layout, UsageReport } from 'src/components';
+import { UsageReport } from 'src/components';
 import Tutorial from './components/Tutorial';
 import EmailBanner from './components/EmailBanner';
 import UpgradeBanner from './components/UpgradeBanner';
@@ -53,9 +53,8 @@ export class DashboardPage extends Component {
 
   render() {
     return (
-      <Layout.App>
+      <div>
         <Page title='Control Panel'/>
-
 
         { this.renderOneCta() }
 
@@ -68,8 +67,7 @@ export class DashboardPage extends Component {
         { this.renderSuppressionBanner() }
 
         <Tutorial {...this.props} />
-
-      </Layout.App>
+      </div>
     );
   }
 }

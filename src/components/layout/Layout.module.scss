@@ -31,47 +31,38 @@
   }
 }
 
-// TODO Clean this up so app vs. form is more readable
-.content, .formContent {
+.content {
   position: relative;
   padding: spacing(larger);
-}
 
-.content {
-  flex: 1 0 0;
-  margin-top: rem(70);
+  .app & {
+    flex: 1 0 0;
+    margin-top: rem(70);
 
-  @media screen and (min-width: breakpoint(medium)) {
-    margin-top: rem(0);
+    @media screen and (min-width: breakpoint(medium)) {
+      margin-top: rem(0);
+    }
+  }
+
+  .form & {
+    display: flex;
+    align-items: center;
+    width: 100%;
   }
 }
 
 .container {
-  max-width: rem(1020);
-  margin: 0 auto;
-}
+  position: relative;
 
-.formContent {
-  display: flex;
-  align-items: center;
-  width: 100%;
-}
+  .form & {
+    flex: 1 0 0;
+    max-width: rem(520);
+    margin: 0 auto;
+  }
 
-.formContainer {
-  flex: 1 0 0;
-  max-width: rem(520);
-  margin: 0 auto;
-}
-
-.loading {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-
-  .container & {
-    @media screen and (min-width: breakpoint(medium)) {
-      margin-left: rem(110);
-    }
+  .app & {
+    min-height: 100%;
+    max-width: rem(1020);
+    margin: 0 auto;
   }
 }

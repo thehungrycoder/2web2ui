@@ -4,8 +4,7 @@ import { Link, withRouter } from 'react-router-dom';
 import { Page, Panel } from '@sparkpost/matchbox';
 
 import { deleteApiKey, listApiKeys, updateApiKey } from 'src/actions/api-keys';
-import Layout from 'src/components/layout/Layout';
-import DeleteModal from 'src/components/deleteModal/DeleteModal';
+import { Loading, DeleteModal } from 'src/components';
 import { getApiKey, getLoading } from 'src/selectors/api-keys';
 import ApiKeyForm from './components/ApiKeyForm';
 
@@ -58,8 +57,12 @@ export class ApiKeysDetailsPage extends Component {
   render() {
     const { apiKey, loading } = this.props;
 
+    if (loading) {
+      return <Loading />;
+    }
+
     return (
-      <Layout.App loading={loading}>
+      <div>
         <Page
           title={apiKey.label}
           breadcrumbAction={breadcrumbAction}
@@ -77,7 +80,7 @@ export class ApiKeysDetailsPage extends Component {
           handleToggle={this.onToggleDelete}
           handleDelete={this.onDelete}
         />
-      </Layout.App>
+      </div>
     );
   }
 }

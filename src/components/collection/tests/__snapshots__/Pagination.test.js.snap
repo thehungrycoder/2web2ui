@@ -5,7 +5,7 @@ exports[`Collection Pagination Component should render with no props 1`] = `""`;
 exports[`Collection Pagination Component should render with perPageButtons 1`] = `
 <div>
   <div>
-    <t
+    <Pagination
       initialIndex={0}
       onChange={[Function]}
       pageRange={5}
@@ -27,38 +27,38 @@ exports[`Collection Pagination Component should render with perPageButtons 1`] =
       >
         Per Page
       </span>
-      <t
+      <Button
         className=""
         key="10"
         onClick={[Function]}
         size="default"
       >
         10
-      </t>
-      <t
+      </Button>
+      <Button
         className=""
         key="25"
         onClick={[Function]}
         size="default"
       >
         25
-      </t>
-      <t
+      </Button>
+      <Button
         className=""
         key="50"
         onClick={[Function]}
         size="default"
       >
         50
-      </t>
-      <t
+      </Button>
+      <Button
         className=""
         key="100"
         onClick={[Function]}
         size="default"
       >
         100
-      </t>
+      </Button>
     </Button.Group>
   </div>
 </div>
@@ -67,7 +67,7 @@ exports[`Collection Pagination Component should render with perPageButtons 1`] =
 exports[`Collection Pagination Component should render without perPageButtons 1`] = `
 <div>
   <div>
-    <t
+    <Pagination
       initialIndex={0}
       onChange={[Function]}
       pageRange={5}

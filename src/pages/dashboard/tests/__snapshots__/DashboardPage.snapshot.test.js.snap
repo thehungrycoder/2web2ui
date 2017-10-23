@@ -1,8 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-<App>
-  <t
+<div>
+  <Page
+    empty={Object {}}
     title="Control Panel"
   />
   <UpgradeBanner
@@ -16,7 +17,7 @@ exports[`renders correctly 1`] = `
     </h1>
   </Connect(AccessControl)>
   <Connect(UsageReport) />
-  <t
+  <Banner
     status="default"
     title="Hey! We noticed you haven't imported a suppression list"
   >
@@ -27,7 +28,7 @@ exports[`renders correctly 1`] = `
       </a>
       .
     </p>
-  </t>
+  </Banner>
   <Tutorial
     currentUser={
       Object {
@@ -35,12 +36,13 @@ exports[`renders correctly 1`] = `
       }
     }
   />
-</App>
+</div>
 `;
 
 exports[`renders correctly when user is not verified 1`] = `
-<App>
-  <t
+<div>
+  <Page
+    empty={Object {}}
     title="Control Panel"
   />
   <EmailBanner
@@ -55,7 +57,7 @@ exports[`renders correctly when user is not verified 1`] = `
     </h1>
   </Connect(AccessControl)>
   <Connect(UsageReport) />
-  <t
+  <Banner
     status="default"
     title="Hey! We noticed you haven't imported a suppression list"
   >
@@ -66,7 +68,7 @@ exports[`renders correctly when user is not verified 1`] = `
       </a>
       .
     </p>
-  </t>
+  </Banner>
   <Tutorial
     currentUser={
       Object {
@@ -74,5 +76,5 @@ exports[`renders correctly when user is not verified 1`] = `
       }
     }
   />
-</App>
+</div>
 `;

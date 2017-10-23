@@ -2,7 +2,7 @@
 
 exports[`Layout Tests Layout renders App layout 1`] = `
 <div
-  className="undefined undefined"
+  className="undefined undefined undefined"
 >
   <div>
     <withRouter(Connect(Navigation)) />
@@ -19,7 +19,9 @@ exports[`Layout Tests Layout renders App layout 1`] = `
 `;
 
 exports[`Layout Tests Layout renders Form layout 1`] = `
-<div>
+<div
+  className="undefined undefined"
+>
   <main
     role="main"
   >
