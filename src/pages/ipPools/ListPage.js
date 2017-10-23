@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 // Actions
-import { listPools } from '../../actions/ipPools';
+import { listPools } from 'src/actions/ipPools';
 
 // Components
-import { Layout, TableCollection, ApiErrorBanner } from 'src/components';
+import { Loading, TableCollection, ApiErrorBanner } from 'src/components';
 import { Page } from '@sparkpost/matchbox';
 
 const columns = ['Name', 'ID', 'Number of IPs Assigned'];
@@ -47,15 +47,19 @@ export class IpPoolsList extends Component {
   render() {
     const { ipPools, loading, error } = this.props;
 
+    if (loading) {
+      return <Loading />
+    }
+
     return (
-      <Layout.App loading={ipPools.length === 0 && loading}>
+      <div>
         <Page
           primaryAction={{ content: 'Create IP Pool', Component: Link, to: '/account/ip-pools' }}
           title={'IP Pools'}
         />
         {error && this.renderError()}
         {!error && this.renderCollection()}
-      </Layout.App>
+      </div>
     );
   }
 }

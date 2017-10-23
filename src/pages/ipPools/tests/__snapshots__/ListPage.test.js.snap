@@ -1,10 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`IP Pools List Page should render the list page correctly 1`] = `
-<App
-  loading={false}
->
-  <t
+<div>
+  <Page
+    empty={Object {}}
     primaryAction={
       Object {
         "Component": [Function],
@@ -46,14 +45,13 @@ exports[`IP Pools List Page should render the list page correctly 1`] = `
       ]
     }
   />
-</App>
+</div>
 `;
 
 exports[`IP Pools List Page should show alert upon error 1`] = `
-<App
-  loading={false}
->
-  <t
+<div>
+  <Page
+    empty={Object {}}
     primaryAction={
       Object {
         "Component": [Function],
@@ -68,5 +66,5 @@ exports[`IP Pools List Page should show alert upon error 1`] = `
     message="Sorry, we seem to have had some trouble loading your ip pools."
     reload={[Function]}
   />
-</App>
+</div>
 `;
