@@ -7,7 +7,7 @@ exports[`Billing Address Form: should render 1`] = `
       Billing Address
     </small>
   </p>
-  <t>
+  <Grid>
     <Grid.Column
       xs={6}
     >
@@ -28,7 +28,7 @@ exports[`Billing Address Form: should render 1`] = `
         validate={[Function]}
       />
     </Grid.Column>
-  </t>
+  </Grid>
   <Field
     component={[Function]}
     label="Country"
@@ -51,7 +51,7 @@ exports[`Billing Address Form: should render 1`] = `
     placeholder="Select a country"
     validate={[Function]}
   />
-  <t>
+  <Grid>
     <Grid.Column
       xs={6}
     >
@@ -62,7 +62,7 @@ exports[`Billing Address Form: should render 1`] = `
         validate={[Function]}
       />
     </Grid.Column>
-  </t>
+  </Grid>
 </div>
 `;
 
@@ -73,7 +73,7 @@ exports[`Billing Address Form: should show states 1`] = `
       Billing Address
     </small>
   </p>
-  <t>
+  <Grid>
     <Grid.Column
       xs={6}
     >
@@ -94,7 +94,7 @@ exports[`Billing Address Form: should show states 1`] = `
         validate={[Function]}
       />
     </Grid.Column>
-  </t>
+  </Grid>
   <Field
     component={[Function]}
     label="Country"
@@ -117,7 +117,7 @@ exports[`Billing Address Form: should show states 1`] = `
     placeholder="Select a country"
     validate={[Function]}
   />
-  <t>
+  <Grid>
     <Grid.Column
       xs={6}
     >
@@ -146,6 +146,6 @@ exports[`Billing Address Form: should show states 1`] = `
         validate={[Function]}
       />
     </Grid.Column>
-  </t>
+  </Grid>
 </div>
 `;

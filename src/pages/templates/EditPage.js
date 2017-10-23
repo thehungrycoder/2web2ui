@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
+
 // Actions
 import { getDraft, getPublished, update, deleteTemplate, publish } from '../../actions/templates';
 import { showAlert } from 'src/actions/globalAlert';
@@ -11,10 +12,10 @@ import { showAlert } from 'src/actions/globalAlert';
 import { templateById } from 'src/selectors/templates';
 
 // Components
-import { Layout } from 'src/components';
 import Form from './components/Form';
 import Editor from './components/Editor';
-import DeleteModal from './components/DeleteModal';
+import { DeleteModal } from 'src/components';
+import { Loading } from 'src/components';
 import { Page, Grid } from '@sparkpost/matchbox';
 
 const FORM_NAME = 'templateEdit';
@@ -48,7 +49,7 @@ class EditPage extends Component {
       .catch((err) => showAlert({ type: 'error', message: 'Could not save template', details: err.message }));
   }
 
-  handleDelete() {
+  handleDelete = () => {
     const { deleteTemplate, match, showAlert } = this.props;
     return deleteTemplate(match.params.id)
       .then(() => this.setState({ redirectTo: '/templates/' }))
@@ -56,7 +57,7 @@ class EditPage extends Component {
       .catch((err) => showAlert({ type: 'error', message: 'Could not delete template', details: err.message }));
   }
 
-  handleDeleteModalToggle() {
+  handleDeleteModalToggle = () => {
     this.setState({ deleteOpen: !this.state.deleteOpen });
   }
 
@@ -124,11 +125,15 @@ class EditPage extends Component {
     const { loading } = this.props;
 
     if (this.state.redirectTo) {
-      return <Redirect to={this.state.redirectTo} />;
+      return <Redirect to={this.state.redirectTo} />; // TODO use history.push instead
+    }
+
+    if (loading) {
+      return <Loading />;
     }
 
     return (
-      <Layout.App loading={loading}>
+      <div>
         { this.renderPageHeader() }
         <Grid>
           <Grid.Column xs={12} lg={4}>
@@ -140,9 +145,11 @@ class EditPage extends Component {
         </Grid>
         <DeleteModal
           open={this.state.deleteOpen}
-          handleToggle={() => this.handleDeleteModalToggle()}
-          handleDelete={() => this.handleDelete()}/>
-      </Layout.App>
+          title='Delete Template'
+          text='Are you sure you want to delete this template? Both draft and published versions of this template will be deleted.'
+          handleToggle={this.handleDeleteModalToggle}
+          handleDelete={this.handleDelete} />
+      </div>
     );
   }
 }

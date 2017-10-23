@@ -7,7 +7,7 @@ import { Page } from '@sparkpost/matchbox';
 import * as usersActions from 'src/actions/users';
 import { selectUsers } from 'src/selectors/users';
 
-import { ApiErrorBanner, DeleteModal, Layout, TableCollection } from 'src/components';
+import { Loading, ApiErrorBanner, DeleteModal, TableCollection } from 'src/components';
 import AccessSelect from './components/AccessSelect';
 import DeleteButton from './components/DeleteButton';
 
@@ -100,8 +100,12 @@ export class ListPage extends Component {
   render() {
     const { loading, users } = this.props;
 
+    if (loading) {
+      return <Loading />;
+    }
+
     return (
-      <Layout.App loading={loading}>
+      <div>
         <Page primaryAction={primaryAction} title="Users" />
         {this.renderError()}
         <TableCollection
@@ -111,7 +115,7 @@ export class ListPage extends Component {
           rows={users}
         />
         {this.renderDeleteModal()}
-      </Layout.App>
+      </div>
     );
   }
 }

@@ -2,7 +2,8 @@
 
 exports[`TrackingDomainsCollection no subaccounts 1`] = `
 <div>
-  <t
+  <Page
+    empty={Object {}}
     primaryAction={
       Object {
         "Component": [Function],
@@ -49,7 +50,8 @@ exports[`TrackingDomainsCollection no subaccounts 1`] = `
 
 exports[`TrackingDomainsCollection subaccounts 1`] = `
 <div>
-  <t
+  <Page
+    empty={Object {}}
     primaryAction={
       Object {
         "Component": [Function],

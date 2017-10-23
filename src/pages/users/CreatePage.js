@@ -5,8 +5,7 @@ import { Field, reduxForm } from 'redux-form';
 
 import { Page, Panel, Button } from '@sparkpost/matchbox';
 
-import { TextFieldWrapper } from 'src/components/reduxFormWrappers';
-import Layout from 'src/components/layout/Layout';
+import { TextFieldWrapper } from 'src/components';
 
 import AccessSelect from './components/AccessSelect';
 
@@ -62,7 +61,8 @@ const CreatePage = (props) => {
     });
   };
 
-  return <Layout.App>
+  return (
+    <div>
       <Page title="Add User" breadcrumbAction={breadcrumbAction} />
       <Panel>
         <Panel.Section>
@@ -81,7 +81,8 @@ const CreatePage = (props) => {
             </form>
         </Panel.Section>
       </Panel>
-    </Layout.App>;
+    </div>
+  );
 };
 
 const mapStateToProps = () => ({

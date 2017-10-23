@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Billing Banners:  ManuallyBilledBanner should render with pending subscription 1`] = `
-<t
+<Banner
   action={null}
   status="info"
   title="Your current whoa plan includes 123 emails per month"
@@ -19,11 +19,11 @@ exports[`Billing Banners:  ManuallyBilledBanner should render with pending subsc
     </a>
     .
   </p>
-</t>
+</Banner>
 `;
 
 exports[`Billing Banners:  ManuallyBilledBanner should render with subscription 1`] = `
-<t
+<Banner
   action={
     Object {
       "Component": [Function],
@@ -46,11 +46,11 @@ exports[`Billing Banners:  ManuallyBilledBanner should render with subscription 
   <p>
     Enable automatic billing to self-manage your plan and add-ons.
   </p>
-</t>
+</Banner>
 `;
 
 exports[`Billing Banners:  PendingPlanBanner should render with pending_subscription 1`] = `
-<t
+<Banner
   status="info"
   title="Pending Plan Change"
 >
@@ -69,11 +69,11 @@ exports[`Billing Banners:  PendingPlanBanner should render with pending_subscrip
     </a>
     .
   </p>
-</t>
+</Banner>
 `;
 
 exports[`Billing Banners:  SuspendedBanner should render with isSuspendedForBilling 1`] = `
-<t
+<Banner
   status="danger"
   title="Your account has been suspended due to a billing problem"
 >
@@ -91,11 +91,11 @@ exports[`Billing Banners:  SuspendedBanner should render with isSuspendedForBill
     </a>
     .
   </p>
-</t>
+</Banner>
 `;
 
 exports[`Billing Banners:  renders Enterprise banner 1`] = `
-<t
+<Banner
   action={
     Object {
       "content": "Contact Us",
@@ -126,11 +126,11 @@ exports[`Billing Banners:  renders Enterprise banner 1`] = `
       Support for iOS universal links
     </li>
   </ul>
-</t>
+</Banner>
 `;
 
 exports[`Billing Banners:  renders Premium banner 1`] = `
-<t
+<Banner
   action={
     Object {
       "content": "Contact Us",
@@ -158,5 +158,5 @@ exports[`Billing Banners:  renders Premium banner 1`] = `
       Deliverability data analysis and guidance with 250ok
     </li>
   </ul>
-</t>
+</Banner>
 `;

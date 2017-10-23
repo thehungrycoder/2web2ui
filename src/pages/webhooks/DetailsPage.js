@@ -6,7 +6,7 @@ import _ from 'lodash';
 import { getWebhook, deleteWebhook } from '../../actions/webhooks';
 
 // Components
-import { Layout, DeleteModal } from 'src/components';
+import { Loading, DeleteModal } from 'src/components';
 import { Page, Tabs } from '@sparkpost/matchbox';
 import TestTab from './components/TestTab';
 import EditTab from './components/EditTab';
@@ -91,9 +91,13 @@ class WebhooksDetails extends Component {
       which sets id on the state but doesn't have the rest of the webhook
     */
     const isLoading = (webhook.id !== webhookId) || !webhook.events;
+    if (isLoading) {
+      return <Loading />;
+    }
+
 
     return (
-      <Layout.App loading={isLoading}>
+      <div>
         <Page
           title={webhook.name}
           secondaryActions={this.secondaryActions}
@@ -112,7 +116,7 @@ class WebhooksDetails extends Component {
           handleToggle={this.toggleDelete}
           handleDelete={this.deleteWebhook}
         />
-      </Layout.App>
+      </div>
     );
   }
 }

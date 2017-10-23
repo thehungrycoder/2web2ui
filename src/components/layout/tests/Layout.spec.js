@@ -1,18 +1,19 @@
 import React from 'react';
-import Layout from '../Layout';
+import App from '../App';
+import Form from '../Form';
 import { shallow } from 'enzyme';
 
 describe('Layout Tests', () => {
   test('Layout renders App layout', () => {
     const component = shallow(
-        <Layout.App>App Layout</Layout.App>
+        <App>App Layout</App>
     );
     expect(component).toMatchSnapshot();
   });
 
   test('Layout renders Form layout', () => {
     const component = shallow(
-        <Layout.Form>Form Layout</Layout.Form>
+        <Form>Form Layout</Form>
     );
     expect(component).toMatchSnapshot();
   });

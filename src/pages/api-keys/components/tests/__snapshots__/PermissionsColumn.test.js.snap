@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-<WithPositioning(t)
+<WithPositioning(Tooltip)
   content={
     <span
       className={undefined}
@@ -13,7 +13,7 @@ exports[`renders correctly 1`] = `
   right={true}
 >
   3
-</WithPositioning(t)>
+</WithPositioning(Tooltip)>
 `;
 
 exports[`renders correctly with no grants 1`] = `

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Panel, Button, Modal } from '@sparkpost/matchbox';
-
+import { Panel, Button } from '@sparkpost/matchbox';
+import { Modal } from 'src/components';
 import styles from './DeleteModal.module.scss';
 
 class DeleteModal extends Component {

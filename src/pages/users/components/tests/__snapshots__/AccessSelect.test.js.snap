@@ -7,7 +7,7 @@ exports[`AccessSelect renders access label when disabled 1`] = `
 `;
 
 exports[`AccessSelect renders select 1`] = `
-<t
+<Select
   name="renders select"
   onChange={[Function]}
   options={

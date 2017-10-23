@@ -3,9 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { Page } from '@sparkpost/matchbox';
-import Layout from 'src/components/layout/Layout';
-import ApiErrorBanner from 'src/components/apiErrorBanner/ApiErrorBanner';
-import TableCollection from 'src/components/collection/TableCollection';
+import { Loading, ApiErrorBanner, TableCollection } from 'src/components';
 
 import RecipientListsEmptyState from './components/RecipientListsEmptyState';
 
@@ -63,15 +61,19 @@ export class ListPage extends Component {
   render() {
     const { error, loading, recipientLists } = this.props;
 
+    if (loading) {
+      return <Loading />;
+    }
+
     return (
-      <Layout.App loading={loading}>
+      <div>
         { error
           ? this.renderError(error)
           : recipientLists.length
             ? renderCollection(recipientLists)
             : <RecipientListsEmptyState />
         }
-      </Layout.App>
+      </div>
     );
   }
 }

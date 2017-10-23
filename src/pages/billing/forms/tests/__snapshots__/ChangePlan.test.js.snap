@@ -2,16 +2,16 @@
 
 exports[`Form Container: Change Plan should render 1`] = `
 <form>
-  <t>
+  <Grid>
     <Grid.Column>
-      <t
+      <Panel
         title="Select A Plan"
       >
         <Component
           plans={Array []}
         />
-      </t>
-      <t
+      </Panel>
+      <Panel
         actions={null}
         title="Add a Credit Card"
       >
@@ -26,7 +26,7 @@ exports[`Form Container: Change Plan should render 1`] = `
             formName="changePlan"
           />
         </Panel.Section>
-      </t>
+      </Panel>
     </Grid.Column>
     <Grid.Column
       md={5}
@@ -39,22 +39,22 @@ exports[`Form Container: Change Plan should render 1`] = `
         selfServe={true}
       />
     </Grid.Column>
-  </t>
+  </Grid>
 </form>
 `;
 
 exports[`Form Container: Change Plan should show saved card 1`] = `
 <form>
-  <t>
+  <Grid>
     <Grid.Column>
-      <t
+      <Panel
         title="Select A Plan"
       >
         <Component
           plans={Array []}
         />
-      </t>
-      <t
+      </Panel>
+      <Panel
         actions={
           Array [
             Object {
@@ -68,7 +68,7 @@ exports[`Form Container: Change Plan should show saved card 1`] = `
         <Panel.Section>
           <CardSummary />
         </Panel.Section>
-      </t>
+      </Panel>
     </Grid.Column>
     <Grid.Column
       md={5}
@@ -81,6 +81,6 @@ exports[`Form Container: Change Plan should show saved card 1`] = `
         selfServe={true}
       />
     </Grid.Column>
-  </t>
+  </Grid>
 </form>
 `;
