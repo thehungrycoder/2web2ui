@@ -7,7 +7,7 @@ import { Page, Panel } from '@sparkpost/matchbox';
 
 import { getPool, updatePool, deletePool } from 'src/actions/ipPools';
 import { Layout, DeleteModal } from 'src/components';
-import PoolForm from './PoolForm';
+import PoolForm from './components/PoolForm';
 
 const breadcrumbAction = {
   content: 'IP Pools',
@@ -77,6 +77,8 @@ export class EditPage extends React.Component {
   }
 }
 
-const mapStateToProps = (state, props) => ({});
+const mapStateToProps = ({ ipPools }) => ({
+  loading: ipPools.getLoading
+});
 
 export default withRouter(connect(mapStateToProps, { updatePool, deletePool, getPool })(EditPage));

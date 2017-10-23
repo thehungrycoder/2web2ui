@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 // Actions
-import { listPools } from '../../actions/ipPools';
+import { listPools } from 'src/actions/ipPools';
 
 // Components
 import { Layout, TableCollection, ApiErrorBanner } from 'src/components';

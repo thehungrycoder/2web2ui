@@ -5,7 +5,7 @@ import { Page, Panel } from '@sparkpost/matchbox';
 
 import { createPool } from 'src/actions/ipPools';
 import Layout from 'src/components/layout/Layout';
-import PoolForm from './PoolForm';
+import PoolForm from './components/PoolForm';
 
 const breadcrumbAction = {
   content: 'IP Pools',

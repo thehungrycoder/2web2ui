@@ -2,20 +2,44 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 
-import { TextField, Button, Select } from '@sparkpost/matchbox';
+import { Button, Select } from '@sparkpost/matchbox';
 
 import { TableCollection } from 'src/components';
-import { getPool } from '../../actions/ipPools';
-
-const required = (value) => (value || value === null ? undefined : 'Required');
-
-const TextFieldWrapper = ({ input, meta: { error }, ...rest }) => (
-  <TextField {...rest} {...input} error={error} />
-);
+import { getPool } from 'src/actions/ipPools';
+import { required } from 'src/helpers/validation';
+import { TextFieldWrapper } from 'src/components';
 
 const columns = ['Sending IP', 'Hostname', 'IP Pool'];
 
 export class PoolForm extends Component {
+  getRowData(ip) {
+    const { list = []} = this.props;
+
+    return [
+      ip.external_ip,
+      ip.hostname,
+      <Select
+        id="id"
+        placeholder="Select IP Pool"
+        options={ list }
+    />
+    ];
+  }
+
+  renderCollection() {
+    const { ips = []} = this.props.pool;
+    const getRowDataFunc = this.getRowData.bind(this);
+
+    return (
+      <TableCollection
+        columns={columns}
+        rows={ips}
+        getRowData={getRowDataFunc}
+        pagination={false}
+      />
+    );
+  }
+
   render() {
     const { isNew } = this.props;
 
@@ -39,35 +63,6 @@ export class PoolForm extends Component {
         </Button>
         {submitting && !submitSucceeded && <div>Loading&hellip;</div>}
       </form>
-    );
-  }
-
-  getRowData(ip) {
-    const { list = []} = this.props;
-
-    return [
-      ip.external_ip,
-      ip.hostname,
-      <Select
-        id="id"
-        placeholder="Select IP Pool"
-        options={ list }
-    />
-    ];
-  }
-
-
-  renderCollection() {
-    const { ips = []} = this.props.pool;
-    const getRowDataFunc = this.getRowData.bind(this);
-
-    return (
-      <TableCollection
-        columns={columns}
-        rows={ips}
-        getRowData={getRowDataFunc}
-        pagination={true}
-      />
     );
   }
 }
