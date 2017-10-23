@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Field, change, reduxForm, formValueSelector } from 'redux-form';
+import { Field, reduxForm, formValueSelector } from 'redux-form';
 import { Button } from '@sparkpost/matchbox';
 
-import { listGrants } from 'src/actions/api-keys';
-import { list as listSubaccounts } from 'src/actions/subaccounts';
 import {
   RadioGroup,
   TextFieldWrapper,
@@ -12,14 +10,16 @@ import {
 } from 'src/components/reduxFormWrappers';
 import {
   getGrants,
+  getSubaccountGrants,
   getIsNew,
   getInitialGrantsRadio,
   getInitialSubaccount,
   getInitialValues
 } from 'src/selectors/api-keys';
+import { hasSubaccounts } from 'src/selectors/subaccounts';
 import validIpList from '../helpers/validIpList';
+import { required } from 'src/helpers/validation';
 import GrantsCheckboxes from './GrantsCheckboxes';
-
 
 const formName = 'apiKeyForm';
 const grantsOptions = [
@@ -27,23 +27,18 @@ const grantsOptions = [
   { value: 'select', label: 'Select' }
 ];
 
-const required = (value) => (value ? undefined : 'Required');
-
 export class ApiKeyForm extends Component {
-  componentDidMount() {
-    this.props.listGrants();
-    this.props.listSubaccounts();
-  }
-
   render() {
     const {
       grants,
+      subaccountGrants,
       subaccounts,
       isNew,
       handleSubmit,
+      hasSubaccounts,
       pristine,
       showGrants,
-      submitSucceeded,
+      showSubaccountGrants,
       submitting
     } = this.props;
 
@@ -57,18 +52,20 @@ export class ApiKeyForm extends Component {
           validate={required}
           label="API Key Name"
         />
-        <Field
-          name="subaccount"
-          component={SubaccountTypeaheadWrapper}
-          subaccounts={subaccounts}
-        />
+        { hasSubaccounts &&
+          <Field
+            name="subaccount"
+            component={SubaccountTypeaheadWrapper}
+            subaccounts={subaccounts}
+          />
+        }
         <Field
           name="grantsRadio"
           component={RadioGroup}
           title="API Permissions"
           options={grantsOptions}
         />
-        <GrantsCheckboxes grants={grants} show={showGrants} />
+        <GrantsCheckboxes grants={showSubaccountGrants ? subaccountGrants : grants} show={showGrants} />
         <Field
           name="validIps"
           component={TextFieldWrapper}
@@ -79,20 +76,20 @@ export class ApiKeyForm extends Component {
         />
 
         <Button submit primary disabled={submitting || pristine}>
-          {submitText}
+          {submitting ? 'Loading...' : submitText}
         </Button>
-        {submitting && !submitSucceeded && <div>Loading&hellip;</div>}
       </form>
     );
   }
 }
 
-const ApiKeyReduxForm = reduxForm({ form: formName })(ApiKeyForm);
 const valueSelector = formValueSelector(formName);
-
 const mapStateToProps = (state, props) => ({
   grants: getGrants(state),
+  hasSubaccounts: hasSubaccounts(state),
+  subaccountGrants: getSubaccountGrants(state),
   subaccounts: state.subaccounts.list,
+  showSubaccountGrants: !!valueSelector(state, 'subaccount'),
   showGrants: valueSelector(state, 'grantsRadio') === 'select',
   isNew: getIsNew(state, props),
   initialValues: {
@@ -102,8 +99,5 @@ const mapStateToProps = (state, props) => ({
   }
 });
 
-export default connect(mapStateToProps, {
-  formChange: change,
-  listGrants,
-  listSubaccounts
-})(ApiKeyReduxForm);
+const formOptions = { form: formName };
+export default connect(mapStateToProps, {})(reduxForm(formOptions)(ApiKeyForm));

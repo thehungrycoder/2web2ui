@@ -7,7 +7,6 @@ import { Banner, Page } from '@sparkpost/matchbox';
 import { hideNewApiKey, listApiKeys } from 'src/actions/api-keys';
 
 import { Loading, ApiErrorBanner, TableCollection } from 'src/components';
-import { getLoading } from 'src/selectors/api-keys';
 import PermissionsColumn from './components/PermissionsColumn';
 
 const columns = ['Name', 'Key', 'Permissions'];
@@ -108,11 +107,9 @@ const mapStateToProps = (state) => {
   return {
     error,
     keys,
-    loading: getLoading(state),
+    loading: state.apiKeys.keysLoading,
     newKey
   };
 };
 
-export default connect(mapStateToProps, { hideNewApiKey, listApiKeys })(
-  ListPage
-);
+export default connect(mapStateToProps, { hideNewApiKey, listApiKeys })(ListPage);
