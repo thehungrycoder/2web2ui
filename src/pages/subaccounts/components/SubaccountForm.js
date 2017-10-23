@@ -3,12 +3,23 @@ import { connect } from 'react-redux';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 
 import { Button, Panel } from '@sparkpost/matchbox';
-import { TextFieldWrapper, CheckboxWrapper } from 'src/components/reduxFormWrappers';
+import { TextFieldWrapper, CheckboxWrapper, RadioGroup } from 'src/components/reduxFormWrappers';
 import ipValidator from '../helpers/ipValidator';
+import GrantsCheckboxes from 'src/components/grantBoxes/GrantsCheckboxes';
 
-const FORMNAME = 'SubaccountForm';
+import {
+  getGrants
+} from 'src/selectors/api-keys';
 
-const apiKeyFields = () => (
+
+const formName = 'SubaccountForm';
+const grantsOptions = [
+  { value: 'all', label: 'All' },
+  { value: 'select', label: 'Select' }
+];
+
+
+const apiKeyFields = (showGrants = false, grants) => (
   <Panel.Section>
     <p>
       API Key <br/>
@@ -20,10 +31,12 @@ const apiKeyFields = () => (
       label="Key Name"
     />
     <Field
-      name="keyPermissions"
-      component={TextFieldWrapper}
-      label="Key Permissions"
+      name="grantsRadio"
+      component={RadioGroup}
+      title="API Permissions"
+      options={grantsOptions}
     />
+    <GrantsCheckboxes grants={grants} show={true} />
     <Field
       name="validIps"
       component={TextFieldWrapper}
@@ -41,6 +54,8 @@ export class SubaccountForm extends Component {
     const {
       handleSubmit,
       pristine,
+      showGrants,
+      grants,
       // submitSucceeded,
       submitting,
       createAPIKey
@@ -68,7 +83,7 @@ export class SubaccountForm extends Component {
             helpText={ !createAPIKey ? 'Every subaccount you create will need its own API key.' : '' }
           />
         </Panel.Section>
-        { createAPIKey && apiKeyFields() }
+        { createAPIKey && apiKeyFields(showGrants, grants) }
         <Panel.Section>
           <Button submit primary disabled={submitting || pristine}>
             Create
@@ -79,14 +94,17 @@ export class SubaccountForm extends Component {
   }
 }
 
-const valueSelector = formValueSelector(FORMNAME);
+const valueSelector = formValueSelector(formName);
 
 const mapStateToProps = (state, props) => ({
+  grants: getGrants(state),
   createAPIKey: valueSelector(state, 'apiKeyCheckbox'),
+  showGrants: valueSelector(state, 'grantsRadio') === 'select',
   initialValues: {
+    grantsRadio: 'all',
     apiKeyCheckbox: true
   }
 });
 
-const SubaccountReduxForm = reduxForm({ form: FORMNAME })(SubaccountForm);
+const SubaccountReduxForm = reduxForm({ form: formName })(SubaccountForm);
 export default connect(mapStateToProps, {})(SubaccountReduxForm);
