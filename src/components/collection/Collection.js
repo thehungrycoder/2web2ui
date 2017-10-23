@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import CollectionPropTypes from './Collection.propTypes';
 import qs from 'query-string';
 import _ from 'lodash';
 import { withRouter } from 'react-router-dom';
@@ -8,14 +9,14 @@ import { objectSortMatch } from 'src/helpers/sortMatch';
 
 const PassThroughWrapper = (props) => props.children;
 
-class Collection extends Component {
+export class _Collection extends Component {
   state = {};
 
   componentDidMount() {
     const { defaultPerPage = 25, location } = this.props;
     this.setState({
       perPage: defaultPerPage,
-      currentPage: qs.parse(location.search).page || 1
+      currentPage: Number(qs.parse(location.search).page) || 1
     });
   }
 
@@ -46,7 +47,7 @@ class Collection extends Component {
     }
 
     this.setState(update);
-  }, 500);
+  }, 300);
 
   maybeUpdateQueryString() {
     const { currentPage, perPage } = this.state;
@@ -62,8 +63,6 @@ class Collection extends Component {
     const { perPage, currentPage, filteredRows } = this.state;
     const { rows = []} = this.props;
     const currentIndex = (currentPage - 1) * perPage;
-
-    console.log(typeof filteredRows, typeof rows); // eslint-disable-line
     return (filteredRows || rows).slice(currentIndex, currentIndex + perPage);
   }
 
@@ -117,4 +116,6 @@ class Collection extends Component {
   }
 }
 
-export default withRouter(Collection);
+_Collection.propTypes = CollectionPropTypes;
+
+export default withRouter(_Collection);
