@@ -7,7 +7,6 @@ import { Banner, Page } from '@sparkpost/matchbox';
 import { hideNewApiKey, listApiKeys } from 'src/actions/api-keys';
 
 import { Loading, ApiErrorBanner, TableCollection } from 'src/components';
-import { getKeysLoading } from 'src/selectors/api-keys';
 import PermissionsColumn from './components/PermissionsColumn';
 
 const columns = ['Name', 'Key', 'Permissions'];

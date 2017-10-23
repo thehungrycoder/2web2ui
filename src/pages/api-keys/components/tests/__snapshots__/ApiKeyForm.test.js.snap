@@ -42,13 +42,13 @@ exports[`renders correctly - new and no subaccounts 1`] = `
     placeholder="10.20.30.40, 10.20.30.0/24"
     validate={[Function]}
   />
-  <t
+  <Button
     primary={true}
     size="default"
     submit={true}
   >
     Create API Key
-  </t>
+  </Button>
 </form>
 `;
 
@@ -98,13 +98,13 @@ exports[`renders correctly - update and subaccounts 1`] = `
     placeholder="10.20.30.40, 10.20.30.0/24"
     validate={[Function]}
   />
-  <t
+  <Button
     primary={true}
     size="default"
     submit={true}
   >
     Update API Key
-  </t>
+  </Button>
 </form>
 `;
 
@@ -150,13 +150,13 @@ exports[`submits correctly 1`] = `
     placeholder="10.20.30.40, 10.20.30.0/24"
     validate={[Function]}
   />
-  <t
+  <Button
     disabled={true}
     primary={true}
     size="default"
     submit={true}
   >
     Loading...
-  </t>
+  </Button>
 </form>
 `;

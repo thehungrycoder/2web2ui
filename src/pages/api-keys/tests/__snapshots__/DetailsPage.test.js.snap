@@ -1,10 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly with no subaccounts 1`] = `
-<App
-  loading={false}
->
-  <t
+<div>
+  <Page
     breadcrumbAction={
       Object {
         "Component": [Function],
@@ -12,6 +10,7 @@ exports[`renders correctly with no subaccounts 1`] = `
         "to": "/account/api-keys",
       }
     }
+    empty={Object {}}
     secondaryActions={
       Array [
         Object {
@@ -21,14 +20,14 @@ exports[`renders correctly with no subaccounts 1`] = `
       ]
     }
   />
-  <t>
+  <Panel>
     <Panel.Section>
       <Connect(ReduxForm)
         apiKey={Object {}}
         onSubmit={[Function]}
       />
     </Panel.Section>
-  </t>
+  </Panel>
   <DeleteModal
     handleDelete={[Function]}
     handleToggle={[Function]}
@@ -36,5 +35,5 @@ exports[`renders correctly with no subaccounts 1`] = `
     text="Are you sure you want to delete this API Key?"
     title="Delete API Key"
   />
-</App>
+</div>
 `;
