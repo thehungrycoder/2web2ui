@@ -40,7 +40,7 @@ exports[`renders correctly 1`] = `
     }
     filterBox={
       Object {
-        "compareKeys": Array [
+        "itemToStringKeys": Array [
           "name",
           "id",
           "subaccount_id",

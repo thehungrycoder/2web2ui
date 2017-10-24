@@ -21,6 +21,11 @@ import {
   composeConditions
 } from 'src/helpers/conditions';
 
+import App from 'src/components/layout/App';
+import Form from 'src/components/layout/Form';
+
+import CollectionDemo from './CollectionDemo';
+
 /**
  *  Angular UI Grant List:
     dashboard: ['api_keys/manage', 'templates/modify', 'sending_domains/manage'],
@@ -69,6 +74,10 @@ export default [
     path: '/auth',
     public: true,
     component: AuthPage
+  },
+  {
+    path: '/collection-demo',
+    component: CollectionDemo
   },
   {
     path: '/dashboard',

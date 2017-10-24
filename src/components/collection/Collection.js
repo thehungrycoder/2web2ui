@@ -8,6 +8,8 @@ import CollectionFilter from './Filter';
 import { objectSortMatch } from 'src/helpers/sortMatch';
 
 const PassThroughWrapper = (props) => props.children;
+const NullComponent = () => null;
+const objectValuesToString = (keys) => (item) => (keys || Object.keys(item)).map((key) => item[key]).join(' ');
 
 export class _Collection extends Component {
   state = {};
@@ -31,7 +33,7 @@ export class _Collection extends Component {
 
   handleFilterChange = _.debounce((pattern) => {
     const { rows, filterBox } = this.props;
-    const { keyMap, compareKeys = []} = filterBox;
+    const { keyMap, itemToStringKeys } = filterBox;
     const update = {
       currentPage: 1,
       filteredRows: null
@@ -41,7 +43,7 @@ export class _Collection extends Component {
       update.filteredRows = objectSortMatch({
         items: rows,
         pattern,
-        getter: (item) => compareKeys.map((key) => item[key]).join(' '),
+        getter: objectValuesToString(itemToStringKeys),
         keyMap
       });
     }
@@ -50,10 +52,14 @@ export class _Collection extends Component {
   }, 300);
 
   maybeUpdateQueryString() {
+    const { location, pagination, updateQueryString } = this.props;
+    if (!pagination || updateQueryString === false) {
+      return;
+    }
     const { currentPage, perPage } = this.state;
-    const { search, pathname } = this.props.location;
+    const { search, pathname } = location;
     const parsed = qs.parse(search);
-    if (parsed.page || this.props.updateQueryString) {
+    if (parsed.page || updateQueryString) {
       const updated = Object.assign(parsed, { page: currentPage, perPage });
       this.props.history.push(`${pathname}?${qs.stringify(updated)}`);
     }
@@ -61,7 +67,10 @@ export class _Collection extends Component {
 
   getVisibleRows() {
     const { perPage, currentPage, filteredRows } = this.state;
-    const { rows = []} = this.props;
+    const { rows = [], pagination } = this.props;
+    if (!pagination) {
+      return filteredRows || rows;
+    }
     const currentIndex = (currentPage - 1) * perPage;
     return (filteredRows || rows).slice(currentIndex, currentIndex + perPage);
   }
@@ -69,7 +78,7 @@ export class _Collection extends Component {
   renderFilterBox() {
     const { filterBox = {}, rows, perPageButtons = defaultPerPageButtons } = this.props;
     if (filterBox.show && (rows.length > Math.min(...perPageButtons))) {
-      return <CollectionFilter {...filterBox} onChange={this.handleFilterChange} />;
+      return <CollectionFilter {...filterBox} rows={rows} onChange={this.handleFilterChange} />;
     }
     return null;
   }
@@ -96,7 +105,7 @@ export class _Collection extends Component {
     const {
       rowComponent: RowComponent,
       rowKeyName = 'id',
-      headerComponent: HeaderComponent,
+      headerComponent: HeaderComponent = NullComponent,
       outerWrapper: OuterWrapper = PassThroughWrapper,
       bodyWrapper: BodyWrapper = PassThroughWrapper
     } = this.props;

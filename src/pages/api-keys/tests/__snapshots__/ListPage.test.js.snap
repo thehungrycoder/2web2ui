@@ -33,7 +33,7 @@ exports[`renders correctly 1`] = `
     }
     filterBox={
       Object {
-        "compareKeys": Array [
+        "itemToStringKeys": Array [
           "label",
           "short_key",
           "id",

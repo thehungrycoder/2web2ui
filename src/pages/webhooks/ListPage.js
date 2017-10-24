@@ -16,7 +16,7 @@ const getRowData = ({ id, name, target }) => {
 };
 const filterBoxConfig = {
   show: true,
-  compareKeys: ['name', 'id', 'target']
+  itemToStringKeys: ['name', 'id', 'target']
 };
 
 

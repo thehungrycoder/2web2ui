@@ -21,5 +21,5 @@ export const columns = [
 export const filterBoxConfig = {
   show: true,
   exampleModifiers: ['id', 'name'],
-  compareKeys: ['name', 'id', 'subaccount_id']
+  itemToStringKeys: ['name', 'id', 'subaccount_id']
 };

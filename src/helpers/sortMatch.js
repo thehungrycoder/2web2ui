@@ -8,7 +8,7 @@ const enclosingQuotesRegex = /^"?([^"]+)"?$/;
 export function filterAndSortByScore(list) {
   return list.filter(([score]) => score > 0)
     .sort((a, b) => b[0] - a[0])
-    .map(([score, item]) => item);
+    .map(([score, item]) => (item.matchScore = score, item));
 }
 
 /**
@@ -59,7 +59,7 @@ export function objectSortMatch({ items, pattern, getter, keyMap = {}}) {
       .trim();
 
     const scoredItems = items.map((item, i) => {
-      const score = objectScorer({ item, objectPattern, keyMap }) + basicScorer(getter(item), remainingPattern);
+      const score = objectScorer({ item, objectPattern, keyMap }) + (remainingPattern ? basicScorer(getter(item), remainingPattern) : 0);
       return [score, item];
     });
     return filterAndSortByScore(scoredItems);

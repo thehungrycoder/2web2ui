@@ -1,19 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
+function includedInRows(props, propName) {
+  if (typeof props[propName] === 'undefined' ||
+  Object.keys(props.rows[0]).includes(props[propName])) {
+    return null;
+  }
+  return new Error(`${propName} must be a key included in every item in the rows array`);
+}
+
 export default {
   rows: PropTypes.arrayOf(PropTypes.object).isRequired,
-  rowComponent: PropTypes.oneOfType([
+  rowKeyName: includedInRows,
+  headerComponent: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.instanceOf(React.Component)
-  ]).isRequired,
-  rowKeyName: (props, propName) => {
-    if (typeof props[propName] === 'undefined' ||
-    Object.keys(props.rows[0]).includes(props[propName])) {
-      return null;
-    }
-    return new Error(`${propName} must be a key included in every item in the rows array`);
-  },
-  headerComponent: PropTypes.oneOfType([
+  ]),
+  rowComponent: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.instanceOf(React.Component)
   ]).isRequired,
