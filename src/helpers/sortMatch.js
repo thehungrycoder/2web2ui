@@ -42,7 +42,7 @@ export function score(haystack, needle) {
   return 0;
 }
 
-export default function sortMatch(items, needle, getter = (a) => a) {
+export default function sortMatch(items = [], needle, getter = (a) => a) {
   return items
     .map((item) => {
       const haystack = getter(item);

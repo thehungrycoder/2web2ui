@@ -97,7 +97,8 @@ export default [
   {
     path: '/account/subaccounts/create',
     component: subaccounts.CreatePage,
-    condition: hasGrants('subaccount/manage')
+    condition: hasGrants('subaccount/manage'),
+    layout: App
   },
   {
     path: '/account/users',

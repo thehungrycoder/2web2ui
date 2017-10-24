@@ -3,14 +3,17 @@ import { connect } from 'react-redux';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 
 import { Button, Panel } from '@sparkpost/matchbox';
-import { TextFieldWrapper, CheckboxWrapper, RadioGroup } from 'src/components/reduxFormWrappers';
+import {
+  TextFieldWrapper,
+  CheckboxWrapper,
+  RadioGroup,
+  PoolTypeaheadWrapper
+} from 'src/components/reduxFormWrappers';
 import ipValidator from '../helpers/ipValidator';
+import { required } from 'src/helpers/validation';
 import GrantsCheckboxes from 'src/components/grantBoxes/GrantsCheckboxes';
 
-import {
-  getGrants
-} from 'src/selectors/api-keys';
-
+import { getSubaccountGrants } from 'src/selectors/api-keys';
 
 const formName = 'SubaccountForm';
 const grantsOptions = [
@@ -18,17 +21,17 @@ const grantsOptions = [
   { value: 'select', label: 'Select' }
 ];
 
+const keyBoxHelpText = (createApiKey) => createApiKey
+    ? 'The key will only be shown once when created, so be sure to copy and save it somewhere safe.'
+    : 'Every subaccount you create will need its own API key. You can create one later.';
 
 const apiKeyFields = (showGrants = false, grants) => (
-  <Panel.Section>
-    <p>
-      API Key <br/>
-      <small>The key will only show once when created, so be sure to copy and save it somewhere safe.</small>
-    </p>
+  <div>
     <Field
       name="keyName"
       component={TextFieldWrapper}
       label="Key Name"
+      validate={required}
     />
     <Field
       name="grantsRadio"
@@ -36,7 +39,7 @@ const apiKeyFields = (showGrants = false, grants) => (
       title="API Permissions"
       options={grantsOptions}
     />
-    <GrantsCheckboxes grants={grants} show={true} />
+    <GrantsCheckboxes grants={grants} show={showGrants} />
     <Field
       name="validIps"
       component={TextFieldWrapper}
@@ -45,7 +48,16 @@ const apiKeyFields = (showGrants = false, grants) => (
       placeholder="10.20.30.40, 10.20.30.0/24"
       validate={ipValidator}
     />
-  </Panel.Section>
+  </div>
+);
+
+const ipPoolFields = (assingToPool, ipPools) => (
+  <Field
+    name="ipPool"
+    component={PoolTypeaheadWrapper}
+    pools={ipPools}
+    label="IP Pool"
+  />
 );
 
 export class SubaccountForm extends Component {
@@ -58,8 +70,12 @@ export class SubaccountForm extends Component {
       grants,
       // submitSucceeded,
       submitting,
-      createAPIKey
+      createApiKey,
+      ipPools,
+      assingToPool
     } = this.props;
+
+    const hasIpPools = !!ipPools.length;
 
     return (
       <form onSubmit={handleSubmit}>
@@ -69,21 +85,29 @@ export class SubaccountForm extends Component {
             component={TextFieldWrapper}
             label="Name"
           />
+        </Panel.Section>
+        <Panel.Section>
           <Field
-            name="ipPool"
-            component={TextFieldWrapper}
-            placeholder="Search for IP Pools"
-            label="IP Pool"
-          />
-          <Field
-            name="apiKeyCheckbox"
+            name="createApiKey"
             component={CheckboxWrapper}
             type="checkbox"
             label="Create API Key"
-            helpText={ !createAPIKey ? 'Every subaccount you create will need its own API key.' : '' }
+            helpText={ keyBoxHelpText(createApiKey) }
           />
+          { createApiKey && apiKeyFields(showGrants, grants) }
         </Panel.Section>
-        { createAPIKey && apiKeyFields(showGrants, grants) }
+        { hasIpPools &&
+          <Panel.Section>
+            <Field
+              name="assingToPool"
+              component={CheckboxWrapper}
+              type="checkbox"
+              label="Assign to IP Pool"
+              helpText={ 'You can do this later' }
+            />
+            { assingToPool && ipPoolFields(assingToPool, ipPools) }
+          </Panel.Section>
+        }
         <Panel.Section>
           <Button submit primary disabled={submitting || pristine}>
             Create
@@ -97,12 +121,14 @@ export class SubaccountForm extends Component {
 const valueSelector = formValueSelector(formName);
 
 const mapStateToProps = (state, props) => ({
-  grants: getGrants(state),
-  createAPIKey: valueSelector(state, 'apiKeyCheckbox'),
+  grants: getSubaccountGrants(state),
+  createApiKey: valueSelector(state, 'createApiKey'),
+  assingToPool: valueSelector(state, 'assingToPool'),
   showGrants: valueSelector(state, 'grantsRadio') === 'select',
+  ipPools: state.ipPools.list,
   initialValues: {
     grantsRadio: 'all',
-    apiKeyCheckbox: true
+    createApiKey: true
   }
 });
 
