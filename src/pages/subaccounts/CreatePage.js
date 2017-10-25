@@ -9,6 +9,8 @@ import SubaccountForm from './components/SubaccountForm';
 import { create as createSubaccount } from 'src/actions/subaccounts';
 import { listSubaccountGrants } from 'src/actions/api-keys';
 import { listPools } from 'src/actions/ipPools';
+import { showAlert } from 'src/actions/globalAlert';
+
 
 const breadcrumbAction = {
   content: 'Subaccounts',
@@ -29,7 +31,7 @@ export class CreatePage extends React.Component {
       // TODO: Direct to details page when built,
       //      details page needs to display the API Key if created here
       history.push('/account/subaccounts');
-    });
+    }).catch((err) => showAlert({ type: 'error', message: 'Could not create Subaccount', details: err.message }));
   };
 
   render() {
