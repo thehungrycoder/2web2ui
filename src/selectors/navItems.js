@@ -6,18 +6,17 @@ import accessConditionState from './accessConditionState';
 
 const routesByPath = _.keyBy(routes, 'path');
 
-export function mapNavToRoutes(items) {
-  return items.map((item) => {
-    item.route = routesByPath[item.to];
-    if (item.children) {
-      item.children = mapNavToRoutes(item.children);
-    }
-    return item;
-  });
-}
+export const mapNavToRoutes = _.memoize((items) => items.map((item) => {
+  item.route = routesByPath[item.to];
+  if (item.children) {
+    item.children = mapNavToRoutes(item.children);
+  }
+  return item;
+}));
 
 export function filterNavByAccess(items, accessConditionState) {
-  return items.filter((item) => {
+  return items.filter((reference) => {
+    const item = { ...reference }; // prevent weird mutation bugs
     const condition = _.get(item, 'route.condition');
 
     // if condition function returns false, block access here
