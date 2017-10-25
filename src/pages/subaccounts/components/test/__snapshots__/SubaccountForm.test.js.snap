@@ -1,0 +1,231 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`api key form 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <Panel.Section>
+    <Field
+      component={[Function]}
+      label="Name"
+      name="name"
+    />
+  </Panel.Section>
+  <Panel.Section>
+    <Field
+      component={[Function]}
+      helpText="The key will only be shown once when created, so be sure to copy and save it somewhere safe."
+      label="Create API Key"
+      name="createApiKey"
+      type="checkbox"
+    />
+    <div>
+      <Field
+        component={[Function]}
+        label="Key Name"
+        name="keyName"
+        validate={[Function]}
+      />
+      <Field
+        component={[Function]}
+        name="grantsRadio"
+        options={
+          Array [
+            Object {
+              "label": "All",
+              "value": "all",
+            },
+            Object {
+              "label": "Select",
+              "value": "select",
+            },
+          ]
+        }
+        title="API Permissions"
+      />
+      <GrantsCheckboxes
+        grants={
+          Array [
+            "subaccount grants",
+          ]
+        }
+        show={false}
+      />
+      <Field
+        component={[Function]}
+        helpText="Leaving the field blank will allow access by valid API keys from any IP address."
+        label="Allowed IPs"
+        name="validIps"
+        placeholder="10.20.30.40, 10.20.30.0/24"
+        validate={[Function]}
+      />
+    </div>
+  </Panel.Section>
+  <Panel.Section>
+    <Button
+      primary={true}
+      size="default"
+      submit={true}
+    >
+      Create
+    </Button>
+  </Panel.Section>
+</form>
+`;
+
+exports[`base case 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <Panel.Section>
+    <Field
+      component={[Function]}
+      label="Name"
+      name="name"
+    />
+  </Panel.Section>
+  <Panel.Section>
+    <Field
+      component={[Function]}
+      helpText="Every subaccount you create will need its own API key. You can create one later."
+      label="Create API Key"
+      name="createApiKey"
+      type="checkbox"
+    />
+  </Panel.Section>
+  <Panel.Section>
+    <Button
+      primary={true}
+      size="default"
+      submit={true}
+    >
+      Create
+    </Button>
+  </Panel.Section>
+</form>
+`;
+
+exports[`has ip pools 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <Panel.Section>
+    <Field
+      component={[Function]}
+      label="Name"
+      name="name"
+    />
+  </Panel.Section>
+  <Panel.Section>
+    <Field
+      component={[Function]}
+      helpText="Every subaccount you create will need its own API key. You can create one later."
+      label="Create API Key"
+      name="createApiKey"
+      type="checkbox"
+    />
+  </Panel.Section>
+  <Panel.Section>
+    <Field
+      component={[Function]}
+      helpText="You can do this later"
+      label="Assign to IP Pool"
+      name="assingToPool"
+      type="checkbox"
+    />
+  </Panel.Section>
+  <Panel.Section>
+    <Button
+      primary={true}
+      size="default"
+      submit={true}
+    >
+      Create
+    </Button>
+  </Panel.Section>
+</form>
+`;
+
+exports[`ip pools checked  1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <Panel.Section>
+    <Field
+      component={[Function]}
+      label="Name"
+      name="name"
+    />
+  </Panel.Section>
+  <Panel.Section>
+    <Field
+      component={[Function]}
+      helpText="Every subaccount you create will need its own API key. You can create one later."
+      label="Create API Key"
+      name="createApiKey"
+      type="checkbox"
+    />
+  </Panel.Section>
+  <Panel.Section>
+    <Field
+      component={[Function]}
+      helpText="You can do this later"
+      label="Assign to IP Pool"
+      name="assingToPool"
+      type="checkbox"
+    />
+    <Field
+      component={[Function]}
+      label="IP Pool"
+      name="ipPool"
+      pools={
+        Array [
+          "swimmin",
+        ]
+      }
+    />
+  </Panel.Section>
+  <Panel.Section>
+    <Button
+      primary={true}
+      size="default"
+      submit={true}
+    >
+      Create
+    </Button>
+  </Panel.Section>
+</form>
+`;
+
+exports[`submits correctly 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <Panel.Section>
+    <Field
+      component={[Function]}
+      label="Name"
+      name="name"
+    />
+  </Panel.Section>
+  <Panel.Section>
+    <Field
+      component={[Function]}
+      helpText="Every subaccount you create will need its own API key. You can create one later."
+      label="Create API Key"
+      name="createApiKey"
+      type="checkbox"
+    />
+  </Panel.Section>
+  <Panel.Section>
+    <Button
+      disabled={true}
+      primary={true}
+      size="default"
+      submit={true}
+    >
+      Create
+    </Button>
+  </Panel.Section>
+</form>
+`;

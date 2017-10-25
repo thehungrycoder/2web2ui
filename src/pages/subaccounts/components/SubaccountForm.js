@@ -84,6 +84,7 @@ export class SubaccountForm extends Component {
             name="name"
             component={TextFieldWrapper}
             label="Name"
+            validate={required}
           />
         </Panel.Section>
         <Panel.Section>

@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import { Page, Panel } from '@sparkpost/matchbox';
+import { Loading } from 'src/components';
 
 import SubaccountForm from './components/SubaccountForm';
 
@@ -32,6 +33,10 @@ export class CreatePage extends React.Component {
   };
 
   render() {
+    if (this.props.loading) {
+      return <Loading />;
+    }
+
     return (
       <div>
         <Page title="Create Subaccount" breadcrumbAction={breadcrumbAction} />
@@ -43,7 +48,9 @@ export class CreatePage extends React.Component {
   }
 }
 
-const mapStateToProps = (state, props) => ({ });
+const mapStateToProps = (state, props) => ({
+  loading: state.apiKeys.subaccountGrantsLoading || state.ipPools.listLoading
+});
 
 export default withRouter(
   connect(mapStateToProps, { listSubaccountGrants, listPools, createSubaccount })(CreatePage)
