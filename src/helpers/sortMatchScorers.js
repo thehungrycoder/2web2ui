@@ -5,13 +5,6 @@ const defaultKeyMap = {
 };
 
 export function basicScorer(haystack, needle) {
-  console.log(`looking for ${needle} in ${haystack}`); // eslint-disable-line
-  const score = xBasicScorer(haystack, needle);
-  console.log(`basic score: ${score}`); // eslint-disable-line
-  return score;
-}
-
-export function xBasicScorer(haystack, needle) {
   haystack = haystack.toString();
   needle = needle.toString();
 
@@ -65,14 +58,7 @@ export function xBasicScorer(haystack, needle) {
   return 0;
 }
 
-export function objectScorer(opts) {
-  console.log(`computing object score`, opts.item, opts.objectPattern); // eslint-disable-line
-  const score = xObjectScorer(opts);
-  console.log(`object score: ${score}`); // eslint-disable-line
-  return score;
-}
-
-export function xObjectScorer({ item, objectPattern, keyMap = {}, scorer = basicScorer }) {
+export function objectScorer({ item, objectPattern, keyMap = {}, scorer = basicScorer }) {
   const mergedKeyMap = { ...defaultKeyMap, ...keyMap };
   const mappedKeys = _.mapKeys(objectPattern, (v, key) => mergedKeyMap[key] || key);
   const mergedObjectPattern = { ...objectPattern, ...mappedKeys }; // leaves original keys alongside mapped keys

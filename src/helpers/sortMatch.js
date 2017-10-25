@@ -8,7 +8,7 @@ const enclosingQuotesRegex = /^"?([^"]+)"?$/;
 export function filterAndSortByScore(list) {
   return list.filter(([score]) => score > 0)
     .sort((a, b) => b[0] - a[0])
-    .map(([score, item]) => (item.matchScore = score, item));
+    .map(([score, item]) => item);
 }
 
 /**

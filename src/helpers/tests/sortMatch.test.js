@@ -29,39 +29,52 @@ describe('Helper: sortMatch', () => {
   describe('objectSortMatch', () => {
 
     beforeEach(() => {
+      scorers.objectScorer
+        .mockReturnValueOnce(5)
+        .mockReturnValueOnce(8);
+
       scorers.basicScorer
         .mockReturnValueOnce(5)
         .mockReturnValueOnce(8);
     });
 
-    it('should filter and sort results when an object pattern is present', () => {
+    it('should filter and sort results', () => {
       const result = objectSortMatch({
+        items: [{ a: 1 }, { a: 2 }, { a: 3 }],
+        pattern: 'key:value whatever',
+        getter: (item) => item.a
+      });
+      expect(result).toEqual([{ a: 2 }, { a: 1 }]);
+    });
+
+    it('should only run the object scorer when only modifiers are present', () => {
+      objectSortMatch({
         items: [{ a: 1 }, { a: 2 }, { a: 3 }],
         pattern: 'key:value',
         getter: (item) => item.a
       });
-      expect(scorers.basicScorer).toHaveBeenCalledTimes(3);
+      expect(scorers.basicScorer).toHaveBeenCalledTimes(0);
       expect(scorers.objectScorer).toHaveBeenCalledTimes(3);
-      expect(result).toEqual([{ a: 2 }, { a: 1 }]);
     });
 
-    it('should filter and sort results when no object pattern is present', () => {
-      const result = objectSortMatch({
+    it('should only run the basic scorer when no modifiers are present', () => {
+      objectSortMatch({
         items: [{ a: 1 }, { a: 2 }, { a: 3 }],
         pattern: 'value',
         getter: (item) => item.a
       });
       expect(scorers.basicScorer).toHaveBeenCalledTimes(3);
       expect(scorers.objectScorer).toHaveBeenCalledTimes(0);
-      expect(result).toEqual([{ a: 2 }, { a: 1 }]);
     });
 
     it('should add basic and object scorer results together for final sort', () => {
+      scorers.basicScorer.mockReset();
       scorers.basicScorer
         .mockReturnValueOnce(3)
         .mockReturnValueOnce(4)
         .mockReturnValueOnce(0);
 
+      scorers.objectScorer.mockReset();
       scorers.objectScorer
         .mockReturnValueOnce(0)
         .mockReturnValueOnce(7)
@@ -69,7 +82,7 @@ describe('Helper: sortMatch', () => {
 
       const result = objectSortMatch({
         items: [{ a: 1 }, { a: 2 }, { a: 3 }],
-        pattern: 'key:value',
+        pattern: 'key:value other stuff',
         getter: (item) => item.a
       });
 

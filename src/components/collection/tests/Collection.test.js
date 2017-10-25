@@ -1,7 +1,7 @@
 /* eslint max-lines: ["off"] */
 import React from 'react';
 import { shallow } from 'enzyme';
-import { _Collection as Collection } from '../Collection';
+import { Collection } from '../Collection';
 import CollectionFilter from '../Filter';
 import Pagination from '../Pagination';
 import * as sorters from 'src/helpers/sortMatch';
@@ -126,14 +126,24 @@ describe('Component: Collection', () => {
 
     it('should calculate visible rows', () => {
       addRows(50);
+      props.pagination = true;
       setupCollection();
       instance.handlePageChange(2);
       expect(instance.getVisibleRows()).toEqual(props.rows.slice(20, 30));
     });
 
+    it('should return all rows if pagination is false', () => {
+      addRows(50);
+      props.pagination = false;
+      setupCollection();
+      instance.handlePageChange(2);
+      expect(instance.getVisibleRows()).toEqual(props.rows);
+    });
+
     it('should update the query string if page is present', () => {
       props.location.search = '?page=2&other=cool';
       props.location.pathname = 'some-pathname';
+      props.pagination = true;
       delete props.defaultPerPage;
       setupCollection();
       instance.maybeUpdateQueryString();
@@ -144,6 +154,7 @@ describe('Component: Collection', () => {
       props.location.search = '?other=cool';
       props.location.pathname = 'some-pathname';
       props.updateQueryString = true;
+      props.pagination = true;
       setupCollection();
       instance.maybeUpdateQueryString();
       expect(pushStub).toHaveBeenCalledWith('some-pathname?other=cool&page=1&perPage=10');

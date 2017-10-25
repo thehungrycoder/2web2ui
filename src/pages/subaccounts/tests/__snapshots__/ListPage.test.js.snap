@@ -5,7 +5,8 @@ exports[`renders correctly 1`] = `
   loading={false}
 >
   <div>
-    <t
+    <Page
+      empty={Object {}}
       primaryAction={
         Object {
           "Component": [Function],
@@ -57,7 +58,7 @@ exports[`renders empty state 1`] = `
 <App
   loading={false}
 >
-  <t
+  <EmptyState
     action={
       Object {
         "content": "Create a Subaccount",
@@ -75,7 +76,7 @@ exports[`renders empty state 1`] = `
     <p>
       Subaccounts are a good way of managing external client accounts.
     </p>
-  </t>
+  </EmptyState>
 </App>
 `;
 
@@ -84,7 +85,8 @@ exports[`renders errors when present 1`] = `
   loading={false}
 >
   <div>
-    <t
+    <Page
+      empty={Object {}}
       primaryAction={
         Object {
           "Component": [Function],

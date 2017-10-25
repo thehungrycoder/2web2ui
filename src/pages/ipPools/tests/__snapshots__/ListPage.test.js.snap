@@ -4,7 +4,8 @@ exports[`IP Pools List Page should render the list page correctly 1`] = `
 <App
   loading={false}
 >
-  <t
+  <Page
+    empty={Object {}}
     primaryAction={
       Object {
         "Component": [Function],
@@ -53,7 +54,8 @@ exports[`IP Pools List Page should show alert upon error 1`] = `
 <App
   loading={false}
 >
-  <t
+  <Page
+    empty={Object {}}
     primaryAction={
       Object {
         "Component": [Function],

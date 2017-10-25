@@ -2,11 +2,12 @@
 
 exports[`renders correctly 1`] = `
 <App>
-  <t
+  <Page
+    empty={Object {}}
     title="Profile"
   />
-  <t>
-    <t>
+  <Panel>
+    <Table>
       <Table.Row>
         <Table.HeaderCell>
           Account ID
@@ -31,33 +32,33 @@ exports[`renders correctly 1`] = `
           ned.stark@winterfell.biz
         </Table.Cell>
       </Table.Row>
-    </t>
-  </t>
-  <t
+    </Table>
+  </Panel>
+  <Panel
     sectioned={true}
     title="Edit Profile"
   >
     <Connect(ReduxForm) />
-  </t>
-  <t
+  </Panel>
+  <Panel
     sectioned={true}
     title="Update Password"
   >
-    <t
+    <TextField
       id="currentPassword"
       label="Current Password"
       type="text"
     />
-    <t
+    <TextField
       id="newPassword"
       label="New Password"
       type="text"
     />
-    <t
+    <Button
       size="default"
     >
       Update Password
-    </t>
-  </t>
+    </Button>
+  </Panel>
 </App>
 `;

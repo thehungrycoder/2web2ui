@@ -55,6 +55,31 @@ exports[`Component: Collection should render correctly with basic props 1`] = `
         key="9-9"
         name="row-name--9"
       />
+      <rowComponent
+        id={10}
+        key="10-10"
+        name="row-name--10"
+      />
+      <rowComponent
+        id={11}
+        key="11-11"
+        name="row-name--11"
+      />
+      <rowComponent
+        id={12}
+        key="12-12"
+        name="row-name--12"
+      />
+      <rowComponent
+        id={13}
+        key="13-13"
+        name="row-name--13"
+      />
+      <rowComponent
+        id={14}
+        key="14-14"
+        name="row-name--14"
+      />
     </PassThroughWrapper>
   </PassThroughWrapper>
 </div>
@@ -102,6 +127,7 @@ exports[`Component: Collection should render pagination 1`] = `
     }
     onPageChange={[Function]}
     onPerPageChange={[Function]}
+    pageRange={5}
     perPage={10}
     perPageButtons={
       Array [
@@ -117,6 +143,70 @@ exports[`Component: Collection should render the filter box 1`] = `
 <div>
   <CollectionFilter
     onChange={[Function]}
+    rows={
+      Array [
+        Object {
+          "id": 0,
+          "name": "row-name--0",
+        },
+        Object {
+          "id": 1,
+          "name": "row-name--1",
+        },
+        Object {
+          "id": 2,
+          "name": "row-name--2",
+        },
+        Object {
+          "id": 3,
+          "name": "row-name--3",
+        },
+        Object {
+          "id": 4,
+          "name": "row-name--4",
+        },
+        Object {
+          "id": 5,
+          "name": "row-name--5",
+        },
+        Object {
+          "id": 6,
+          "name": "row-name--6",
+        },
+        Object {
+          "id": 7,
+          "name": "row-name--7",
+        },
+        Object {
+          "id": 8,
+          "name": "row-name--8",
+        },
+        Object {
+          "id": 9,
+          "name": "row-name--9",
+        },
+        Object {
+          "id": 10,
+          "name": "row-name--10",
+        },
+        Object {
+          "id": 11,
+          "name": "row-name--11",
+        },
+        Object {
+          "id": 12,
+          "name": "row-name--12",
+        },
+        Object {
+          "id": 13,
+          "name": "row-name--13",
+        },
+        Object {
+          "id": 14,
+          "name": "row-name--14",
+        },
+      ]
+    }
     show={true}
   />
   <PassThroughWrapper>
@@ -171,6 +261,31 @@ exports[`Component: Collection should render the filter box 1`] = `
         id={9}
         key="9-9"
         name="row-name--9"
+      />
+      <rowComponent
+        id={10}
+        key="10-10"
+        name="row-name--10"
+      />
+      <rowComponent
+        id={11}
+        key="11-11"
+        name="row-name--11"
+      />
+      <rowComponent
+        id={12}
+        key="12-12"
+        name="row-name--12"
+      />
+      <rowComponent
+        id={13}
+        key="13-13"
+        name="row-name--13"
+      />
+      <rowComponent
+        id={14}
+        key="14-14"
+        name="row-name--14"
       />
     </PassThroughWrapper>
   </PassThroughWrapper>

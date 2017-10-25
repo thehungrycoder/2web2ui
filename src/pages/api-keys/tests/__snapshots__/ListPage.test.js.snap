@@ -4,7 +4,8 @@ exports[`renders correctly 1`] = `
 <App
   loading={false}
 >
-  <t
+  <Page
+    empty={Object {}}
     primaryAction={
       Object {
         "Component": [Function],
@@ -33,14 +34,14 @@ exports[`renders correctly 1`] = `
     }
     filterBox={
       Object {
-        "itemToStringKeys": Array [
-          "label",
-          "short_key",
-          "id",
-        ],
         "exampleModifiers": Array [
           "key",
           "name",
+          "id",
+        ],
+        "itemToStringKeys": Array [
+          "label",
+          "short_key",
           "id",
         ],
         "keyMap": Object {
@@ -78,7 +79,8 @@ exports[`renders errors when present 1`] = `
 <App
   loading={false}
 >
-  <t
+  <Page
+    empty={Object {}}
     primaryAction={
       Object {
         "Component": [Function],

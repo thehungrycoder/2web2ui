@@ -20,7 +20,7 @@ exports[`Payment Form:  should render 1`] = `
     name="card.name"
     validate={[Function]}
   />
-  <t>
+  <Grid>
     <Grid.Column
       xs={6}
     >
@@ -44,7 +44,7 @@ exports[`Payment Form:  should render 1`] = `
         validate={[Function]}
       />
     </Grid.Column>
-  </t>
+  </Grid>
   <div>
     <Field
       component="input"

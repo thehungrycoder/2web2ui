@@ -5,10 +5,10 @@ import styles from './Pagination.module.scss';
 
 export const defaultPerPageButtons = [10, 25, 50, 100];
 
-export default class CollectionPagination extends Component {
+class CollectionPagination extends Component {
 
   renderPageButtons() {
-    const { data, perPage, currentPage, pageRange = 5, onPageChange } = this.props;
+    const { data, perPage, currentPage, pageRange, onPageChange } = this.props;
 
     if (data.length <= perPage) {
       return null;
@@ -25,7 +25,7 @@ export default class CollectionPagination extends Component {
   }
 
   renderPerPageButtons() {
-    const { data, perPage, perPageButtons = defaultPerPageButtons, onPerPageChange } = this.props;
+    const { data, perPage, perPageButtons, onPerPageChange } = this.props;
 
     if (data.length <= Math.min(...perPageButtons)) {
       return null;
@@ -65,3 +65,10 @@ export default class CollectionPagination extends Component {
     );
   }
 }
+
+CollectionPagination.defaultProps = {
+  pageRange: 5,
+  perPageButtons: defaultPerPageButtons
+};
+
+export default CollectionPagination;

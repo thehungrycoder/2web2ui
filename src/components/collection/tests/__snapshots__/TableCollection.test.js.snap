@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`TableCollection Component should render with no props 1`] = `
-<withRouter(_Collection)
+<withRouter(Collection)
   bodyWrapper={[Function]}
   headerComponent={[Function]}
   outerWrapper={[Function]}
@@ -10,7 +10,7 @@ exports[`TableCollection Component should render with no props 1`] = `
 `;
 
 exports[`TableCollection Component should render with props 1`] = `
-<withRouter(_Collection)
+<withRouter(Collection)
   bodyWrapper={[Function]}
   columns={
     Array [

@@ -11,7 +11,7 @@ const PassThroughWrapper = (props) => props.children;
 const NullComponent = () => null;
 const objectValuesToString = (keys) => (item) => (keys || Object.keys(item)).map((key) => item[key]).join(' ');
 
-export class _Collection extends Component {
+export class Collection extends Component {
   state = {};
 
   componentDidMount() {
@@ -125,6 +125,6 @@ export class _Collection extends Component {
   }
 }
 
-_Collection.propTypes = CollectionPropTypes;
+Collection.propTypes = CollectionPropTypes;
 
-export default withRouter(_Collection);
+export default withRouter(Collection);

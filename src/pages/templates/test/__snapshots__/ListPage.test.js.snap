@@ -4,7 +4,8 @@ exports[`renders correctly 1`] = `
 <App
   loading={false}
 >
-  <t
+  <Page
+    empty={Object {}}
     primaryAction={
       Object {
         "Component": [Function],
@@ -40,14 +41,14 @@ exports[`renders correctly 1`] = `
     }
     filterBox={
       Object {
+        "exampleModifiers": Array [
+          "id",
+          "name",
+        ],
         "itemToStringKeys": Array [
           "name",
           "id",
           "subaccount_id",
-        ],
-        "exampleModifiers": Array [
-          "id",
-          "name",
         ],
         "show": true,
       }
@@ -70,7 +71,7 @@ exports[`renders correctly 1`] = `
 
 exports[`renders empty state 1`] = `
 <App>
-  <t
+  <EmptyState
     action={
       Object {
         "Component": [Function],
@@ -83,7 +84,7 @@ exports[`renders empty state 1`] = `
     <p>
       Build, test, preview and send your transmissions.
     </p>
-  </t>
+  </EmptyState>
 </App>
 `;
 
@@ -91,7 +92,8 @@ exports[`renders errors when present 1`] = `
 <App
   loading={false}
 >
-  <t
+  <Page
+    empty={Object {}}
     primaryAction={
       Object {
         "Component": [Function],
