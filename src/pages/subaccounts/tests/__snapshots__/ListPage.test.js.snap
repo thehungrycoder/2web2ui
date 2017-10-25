@@ -1,9 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-<App
-  loading={false}
->
+<div>
   <div>
     <Page
       empty={Object {}}
@@ -51,13 +49,11 @@ exports[`renders correctly 1`] = `
       }
     />
   </div>
-</App>
+</div>
 `;
 
 exports[`renders empty state 1`] = `
-<App
-  loading={false}
->
+<div>
   <EmptyState
     action={
       Object {
@@ -77,13 +73,11 @@ exports[`renders empty state 1`] = `
       Subaccounts are a good way of managing external client accounts.
     </p>
   </EmptyState>
-</App>
+</div>
 `;
 
 exports[`renders errors when present 1`] = `
-<App
-  loading={false}
->
+<div>
   <div>
     <Page
       empty={Object {}}
@@ -102,5 +96,5 @@ exports[`renders errors when present 1`] = `
       reload={[Function]}
     />
   </div>
-</App>
+</div>
 `;

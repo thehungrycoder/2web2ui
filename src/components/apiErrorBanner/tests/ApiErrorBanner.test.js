@@ -40,7 +40,7 @@ describe('ApiErrorBanner Component', () => {
     expect(wrapper).toMatchSnapshot();
 
     // Second t on the snapshot = show details button
-    wrapper.find('t').at(1).simulate('click');
+    wrapper.find('Button').simulate('click');
     expect(wrapper).toMatchSnapshot();
   });
 

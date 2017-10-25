@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`should render 1`] = `
-<t
+<EmptyState
   action={
     Object {
       "content": "Create a Tracking Domain",
@@ -19,5 +19,5 @@ exports[`should render 1`] = `
   <p>
     Tracking Domains Explanation
   </p>
-</t>
+</EmptyState>
 `;

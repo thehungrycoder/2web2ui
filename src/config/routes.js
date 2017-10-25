@@ -75,7 +75,8 @@ export default [
   },
   {
     path: '/dashboard',
-    component: DashboardPage
+    component: DashboardPage,
+    layout: App
     // do not put any condition here bc all other routes redirect here if their condition is false
   },
   {
@@ -84,101 +85,121 @@ export default [
   },
   {
     path: '/reports/summary',
-    component: reports.SummaryPage
+    component: reports.SummaryPage,
+    layout: App
   },
   {
     path: '/account/subaccounts',
     component: subaccounts.ListPage,
-    condition: hasGrants('subaccount/manage')
+    condition: hasGrants('subaccount/manage'),
+    layout: App
   },
   {
     path: '/account/users',
     component: users.ListPage,
-    condition: hasGrants('users/manage')
+    condition: hasGrants('users/manage'),
+    layout: App
   },
   {
     path: '/account/users/create',
     component: users.CreatePage,
-    condition: hasGrants('users/manage')
+    condition: hasGrants('users/manage'),
+    layout: App
   },
   {
     path: '/templates',
     component: templates.ListPage,
-    condition: composeConditions(hasGrants('templates/modify'), ({ account }) => account.status === 'active')
+    condition: composeConditions(hasGrants('templates/modify'), ({ account }) => account.status === 'active'),
+    layout: App
   },
   {
     path: '/templates/create',
     component: templates.CreatePage,
-    condition: hasGrants('templates/modify')
+    condition: hasGrants('templates/modify'),
+    layout: App
   },
   {
     path: '/templates/edit/:id',
     component: templates.EditPage,
-    condition: hasGrants('templates/modify')
+    condition: hasGrants('templates/modify'),
+    layout: App
   },
   {
     path: '/templates/edit/:id/published',
     component: templates.PublishedPage,
-    condition: hasGrants('templates/modify')
+    condition: hasGrants('templates/modify'),
+    layout: App
   },
   {
     path: '/lists/recipient-lists',
     component: recipientLists.ListPage,
-    condition: hasGrants('recipient_lists/manage')
+    condition: hasGrants('recipient_lists/manage'),
+    layout: App
   },
   {
     path: '/webhooks',
     component: webhooks.ListPage,
-    condition: hasGrants('webhooks/view')
+    condition: hasGrants('webhooks/view'),
+    layout: App
   },
   {
     path: '/webhooks/create',
     component: webhooks.CreatePage,
-    condition: hasGrants('webhooks/modify')
+    condition: hasGrants('webhooks/modify'),
+    layout: App
   },
   {
     path: '/webhooks/details/:id',
     component: webhooks.DetailsPage,
-    condition: hasGrants('webhooks/modify')
+    condition: hasGrants('webhooks/modify'),
+    layout: App
   },
   {
     path: '/account/api-keys',
     component: apiKeys.ListPage,
-    condition: hasGrants('api_keys/manage')
+    condition: hasGrants('api_keys/manage'),
+    layout: App
   },
   {
     path: '/account/api-keys/create',
     component: apiKeys.CreatePage,
-    condition: hasGrants('api_keys/manage')
+    condition: hasGrants('api_keys/manage'),
+    layout: App
   },
   {
     path: '/account/api-keys/details/:id',
     component: apiKeys.DetailsPage,
-    condition: hasGrants('api_keys/manage')
+    condition: hasGrants('api_keys/manage'),
+    layout: App
   },
   {
     path: '/account/tracking-domains/',
     component: trackingDomains.ListPage,
-    condition: hasGrants('tracking_domains/view')
+    condition: hasGrants('tracking_domains/view'),
+    layout: App
   },
   {
     path: '/account/profile',
     component: ProfilePage,
-    condition: hasGrants('users/self-manage')
+    condition: hasGrants('users/self-manage'),
+    layout: App
   },
   {
     path: '/account/billing',
     component: billing.SummaryPage,
-    condition: hasGrants('account/manage')
+    condition: hasGrants('account/manage'),
+    layout: App
   },
   {
     path: '/account/billing/plan',
     component: billing.ChangePlanPage,
-    condition: hasGrants('account/manage')
+    condition: hasGrants('account/manage'),
+    layout: App
   },
   {
     path: '/account/ip-pools',
     component: ipPools.ListPage,
-    condition: hasGrants('ip_pools/manage')
+    condition: hasGrants('ip_pools/manage'),
+    layout: App
   }
 ];

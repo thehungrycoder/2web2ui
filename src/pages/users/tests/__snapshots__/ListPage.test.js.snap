@@ -1,9 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Users list page renders error banner, table, and hidden modal 1`] = `
-<App
-  loading={false}
->
+<div>
   <Page
     empty={Object {}}
     primaryAction={
@@ -40,13 +38,11 @@ exports[`Users list page renders error banner, table, and hidden modal 1`] = `
     text="Are you sure you want to delete undefined?"
     title="Delete User"
   />
-</App>
+</div>
 `;
 
 exports[`Users list page renders table and hidden modal 1`] = `
-<App
-  loading={false}
->
+<div>
   <Page
     empty={Object {}}
     primaryAction={
@@ -92,5 +88,5 @@ exports[`Users list page renders table and hidden modal 1`] = `
     text="Are you sure you want to delete undefined?"
     title="Delete User"
   />
-</App>
+</div>
 `;

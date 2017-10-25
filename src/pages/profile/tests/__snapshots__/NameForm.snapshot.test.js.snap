@@ -620,7 +620,7 @@ exports[`renders correctly 1`] = `
                         }
                       }
                     >
-                      <t
+                      <TextField
                         error={undefined}
                         id="firstName"
                         label="First Name"
@@ -648,7 +648,7 @@ exports[`renders correctly 1`] = `
                               First Name
                             </label>
                           </Label>
-                          <t
+                          <Connect
                             left={undefined}
                             right={undefined}
                           >
@@ -682,9 +682,9 @@ exports[`renders correctly 1`] = `
                                 />
                               </div>
                             </div>
-                          </t>
+                          </Connect>
                         </fieldset>
-                      </t>
+                      </TextField>
                     </TextFieldWrapper>
                   </ConnectedField>
                 </Connect(ConnectedField)>
@@ -1012,7 +1012,7 @@ exports[`renders correctly 1`] = `
                         }
                       }
                     >
-                      <t
+                      <TextField
                         error={undefined}
                         id="lirstName"
                         label="Last Name"
@@ -1040,7 +1040,7 @@ exports[`renders correctly 1`] = `
                               Last Name
                             </label>
                           </Label>
-                          <t
+                          <Connect
                             left={undefined}
                             right={undefined}
                           >
@@ -1074,14 +1074,14 @@ exports[`renders correctly 1`] = `
                                 />
                               </div>
                             </div>
-                          </t>
+                          </Connect>
                         </fieldset>
-                      </t>
+                      </TextField>
                     </TextFieldWrapper>
                   </ConnectedField>
                 </Connect(ConnectedField)>
               </Field>
-              <t
+              <Button
                 size="default"
                 submit={true}
               >
@@ -1096,7 +1096,7 @@ exports[`renders correctly 1`] = `
                 >
                   Update Profile
                 </button>
-              </t>
+              </Button>
             </form>
           </NameForm>
         </Form(NameForm)>

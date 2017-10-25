@@ -1,16 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`DeleteButton renders a button 1`] = `
-<t
+<Button
   name="renders a button"
   onClick={[Function]}
   plain={true}
   size="default"
 >
-  <t
+  <Icon
     name="Delete"
   />
-</t>
+</Button>
 `;
 
 exports[`DeleteButton renders null 1`] = `""`;

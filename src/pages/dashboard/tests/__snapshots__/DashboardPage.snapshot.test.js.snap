@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-<App>
+<div>
   <Page
     empty={Object {}}
     title="Control Panel"
@@ -36,11 +36,11 @@ exports[`renders correctly 1`] = `
       }
     }
   />
-</App>
+</div>
 `;
 
 exports[`renders correctly when user is not verified 1`] = `
-<App>
+<div>
   <Page
     empty={Object {}}
     title="Control Panel"
@@ -76,5 +76,5 @@ exports[`renders correctly when user is not verified 1`] = `
       }
     }
   />
-</App>
+</div>
 `;

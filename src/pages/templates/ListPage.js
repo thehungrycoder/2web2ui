@@ -1,15 +1,12 @@
+/* eslint-disable */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
-
-// Actions
 import { listTemplates } from 'src/actions/templates';
-import { getTemplates, getfilterTemplates } from 'src/selectors/templates';
-
-// Components
-import { Layout, TableCollection, ApiErrorBanner } from 'src/components';
-import { Page, EmptyState } from '@sparkpost/matchbox';
+import { getTemplates } from 'src/selectors/templates';
 import { getRowData, columns, filterBoxConfig } from './tableConfig';
+import { TableCollection, ApiErrorBanner, Loading } from 'src/components';
+import { Page } from '@sparkpost/matchbox';
 
 const primaryAction = {
   content: 'Create Template',
@@ -48,36 +45,32 @@ export class ListPage extends Component {
   render() {
     const { count, loading, error } = this.props;
 
-    if (!loading && count === 0) {
-      return (
-        <Layout.App>
-          <EmptyState
-            title='Manage your email templates'
-            action={primaryAction} >
-            {/* secondaryAction={content: 'Learn More', onClick: Learn_More()} > */}
-            <p>Build, test, preview and send your transmissions.</p>
-          </EmptyState>
-        </Layout.App>
-      );
+    if (loading) {
+      return <Loading />;
     }
 
     return (
-      <Layout.App loading={loading}>
+      <div>
         <Page
           primaryAction={primaryAction}
           title='Templates'
+          empty={{
+            test: count === 0,
+            title: 'Manage your email templates'
+          }}
         />
         {error && this.renderError()}
         {!error && this.renderCollection()}
-      </Layout.App>
+      </div>
     );
   }
 }
 
 function mapStateToProps(state) {
+  const templates = getTemplates(state);
   return {
-    count: getTemplates(state).length,
-    templates: getfilterTemplates(state),
+    count: templates.length,
+    templates,
     loading: state.templates.listLoading,
     error: state.templates.listError
   };

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Modal, Panel, Button, TextField, Icon } from '@sparkpost/matchbox';
+import { Panel, Button, TextField, Icon, WindowEvent } from '@sparkpost/matchbox';
+import { Modal } from 'src/components';
 
 import styles from './ShareModal.module.scss';
 
@@ -39,6 +40,7 @@ class ShareModal extends Component {
 
     return (
       <Modal open={open}>
+        { open && <WindowEvent event='keydown' handler={this.handleToggle} />}
         <Panel title='Share this report'>
           <Panel.Section>
             <input

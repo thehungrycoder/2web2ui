@@ -1,9 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-<App
-  loading={false}
->
+<div>
   <Page
     empty={Object {}}
     primaryAction={
@@ -72,13 +70,11 @@ exports[`renders correctly 1`] = `
       ]
     }
   />
-</App>
+</div>
 `;
 
 exports[`renders errors when present 1`] = `
-<App
-  loading={false}
->
+<div>
   <Page
     empty={Object {}}
     primaryAction={
@@ -95,5 +91,5 @@ exports[`renders errors when present 1`] = `
     message="Sorry, we seem to have had some trouble loading your API keys."
     reload={[Function]}
   />
-</App>
+</div>
 `;

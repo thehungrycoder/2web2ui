@@ -1,50 +1,58 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Filter Api Keys Selector filters all subaccount options 1`] = `
-Array [
-  Object {
-    "label": "One",
-    "subaccount_id": 1,
+exports[`ApiKey Selectors gets form grants radio value - all 1`] = `"all"`;
+
+exports[`ApiKey Selectors gets form grants radio value - select 1`] = `"select"`;
+
+exports[`ApiKey Selectors gets form is new - false 1`] = `false`;
+
+exports[`ApiKey Selectors gets form is new - true 1`] = `true`;
+
+exports[`ApiKey Selectors gets form loading 1`] = `true`;
+
+exports[`ApiKey Selectors gets grants 1`] = `
+Object {
+  "grant one": Object {
+    "key": "grant one",
   },
-  Object {
-    "label": "Two",
+  "grant two": Object {
+    "key": "grant two",
   },
-]
+}
 `;
 
-exports[`Filter Api Keys Selector filters assigned to master 1`] = `
-Array [
-  Object {
-    "label": "Two",
-  },
-]
+exports[`ApiKey Selectors gets initial subaccount 1`] = `
+Object {
+  "id": "subId",
+}
 `;
 
-exports[`Filter Api Keys Selector filters assigned to subaccount 1`] = `
-Array [
-  Object {
-    "label": "One",
-    "subaccount_id": 1,
+exports[`ApiKey Selectors gets initial values 1`] = `
+Object {
+  "grants": Object {
+    "grant": "true",
   },
-]
+  "subaccount_id": "subId",
+  "validIps": "ip",
+  "valid_ips": Array [
+    "ip",
+  ],
+}
 `;
 
-exports[`Filter Api Keys Selector filters search 1`] = `
-Array [
-  Object {
-    "label": "Two",
+exports[`ApiKey Selectors gets subaccount grants 1`] = `
+Object {
+  "sub grant one": Object {
+    "key": "sub grant one",
   },
-]
+  "sub grant two": Object {
+    "key": "sub grant two",
+  },
+}
 `;
 
-exports[`Filter Api Keys Selector returns unfiltered list 1`] = `
-Array [
-  Object {
-    "label": "One",
-    "subaccount_id": 1,
-  },
-  Object {
-    "label": "Two",
-  },
-]
+exports[`ApiKey Selectors returns single api key 1`] = `
+Object {
+  "id": "Ape",
+}
 `;

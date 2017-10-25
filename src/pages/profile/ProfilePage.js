@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { Layout } from 'src/components';
 import { Page, Panel, Table, TextField, Button } from '@sparkpost/matchbox';
 import NameForm from './NameForm';
 
@@ -14,7 +13,7 @@ export class ProfilePage extends Component {
     } = this.props.currentUser;
 
     return (
-      <Layout.App>
+      <div>
         <Page title='Profile' />
         <Panel>
           <Table>
@@ -50,7 +49,7 @@ export class ProfilePage extends Component {
 
           <Button>Update Password</Button>
         </Panel>
-      </Layout.App>
+      </div>
     );
   }
 }

@@ -1,11 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-<App
-  loading={false}
->
+<div>
   <Page
-    empty={Object {}}
+    empty={
+      Object {
+        "test": false,
+        "title": "Manage your email templates",
+      }
+    }
     primaryAction={
       Object {
         "Component": [Function],
@@ -66,34 +69,90 @@ exports[`renders correctly 1`] = `
       ]
     }
   />
-</App>
+</div>
 `;
 
 exports[`renders empty state 1`] = `
-<App>
-  <EmptyState
-    action={
+<div>
+  <Page
+    empty={
+      Object {
+        "test": true,
+        "title": "Manage your email templates",
+      }
+    }
+    primaryAction={
       Object {
         "Component": [Function],
         "content": "Create Template",
         "to": "/templates/create",
       }
     }
-    title="Manage your email templates"
-  >
-    <p>
-      Build, test, preview and send your transmissions.
-    </p>
-  </EmptyState>
-</App>
+    title="Templates"
+  />
+  <TableCollection
+    columns={
+      Array [
+        Object {
+          "label": "Name",
+          "width": "25%",
+        },
+        Object {
+          "label": "ID",
+          "width": "25%",
+        },
+        Object {
+          "label": "Status",
+          "width": "15%",
+        },
+        Object {
+          "label": "Updated",
+        },
+        Object {
+          "label": "Subaccount",
+          "width": "15%",
+        },
+      ]
+    }
+    filterBox={
+      Object {
+        "exampleModifiers": Array [
+          "id",
+          "name",
+        ],
+        "itemToStringKeys": Array [
+          "name",
+          "id",
+          "subaccount_id",
+        ],
+        "show": true,
+      }
+    }
+    getRowData={[Function]}
+    pagination={true}
+    rows={
+      Array [
+        Object {
+          "name": "Temp 1",
+        },
+        Object {
+          "name": "Temp 2",
+        },
+      ]
+    }
+  />
+</div>
 `;
 
 exports[`renders errors when present 1`] = `
-<App
-  loading={false}
->
+<div>
   <Page
-    empty={Object {}}
+    empty={
+      Object {
+        "test": false,
+        "title": "Manage your email templates",
+      }
+    }
     primaryAction={
       Object {
         "Component": [Function],
@@ -108,5 +167,5 @@ exports[`renders errors when present 1`] = `
     message="Sorry, we seem to have had some trouble loading your templates."
     reload={[Function]}
   />
-</App>
+</div>
 `;

@@ -8,7 +8,7 @@ exports[`redirects when logged in 1`] = `
 `;
 
 exports[`renders correctly 1`] = `
-<Form>
+<div>
   <div>
     <a
       href="https://www.sparkpost.com"
@@ -58,11 +58,11 @@ exports[`renders correctly 1`] = `
       </Button>
     </form>
   </Panel>
-</Form>
+</div>
 `;
 
 exports[`renders correctly when logging in 1`] = `
-<Form>
+<div>
   <div>
     <a
       href="https://www.sparkpost.com"
@@ -115,11 +115,11 @@ exports[`renders correctly when logging in 1`] = `
       </Button>
     </form>
   </Panel>
-</Form>
+</div>
 `;
 
 exports[`renders correctly when there is a login error 1`] = `
-<Form>
+<div>
   <div>
     <a
       href="https://www.sparkpost.com"
@@ -176,5 +176,5 @@ exports[`renders correctly when there is a login error 1`] = `
       </Button>
     </form>
   </Panel>
-</Form>
+</div>
 `;

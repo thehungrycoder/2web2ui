@@ -2,13 +2,13 @@
 
 exports[`renders correctly 1`] = `
 <div>
-  <t
+  <Popover
     trigger={
-      <t
+      <TextField
         prefix={null}
         readOnly={true}
         suffix={
-          <t
+          <Icon
             name="CaretDown"
           />
         }
@@ -17,7 +17,7 @@ exports[`renders correctly 1`] = `
       />
     }
   >
-    <t
+    <ActionList
       actions={
         Array [
           Object {
@@ -41,7 +41,7 @@ exports[`renders correctly 1`] = `
         ]
       }
     />
-  </t>
+  </Popover>
   <Field
     component="input"
     key="active"
@@ -71,13 +71,13 @@ exports[`renders correctly 1`] = `
 
 exports[`renders selected correctly 1`] = `
 <div>
-  <t
+  <Popover
     trigger={
-      <t
+      <TextField
         prefix="(1)"
         readOnly={true}
         suffix={
-          <t
+          <Icon
             name="CaretDown"
           />
         }
@@ -86,7 +86,7 @@ exports[`renders selected correctly 1`] = `
       />
     }
   >
-    <t
+    <ActionList
       actions={
         Array [
           Object {
@@ -110,7 +110,7 @@ exports[`renders selected correctly 1`] = `
         ]
       }
     />
-  </t>
+  </Popover>
   <Field
     component="input"
     key="active"

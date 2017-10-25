@@ -2,7 +2,15 @@ import React from 'react';
 import classnames from 'classnames';
 import styles from './Loading.module.scss';
 
-export const Loading = ({ className = '' }) => (
+/**
+ * A centered loading animation
+ */
+export const Loading = () => <LoadingSVG className={styles.Center}/>;
+
+/**
+ * Circle Animation
+ */
+export const LoadingSVG = ({ className = '' }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="25 25 50 50"
@@ -14,7 +22,10 @@ export const Loading = ({ className = '' }) => (
   </svg>
 );
 
-export const LoadingLogo = ({ className = '' }) => (
+/**
+ * SP Logo Animation
+ */
+export const LoadingLogoSVG = ({ className = '' }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 127.5 260"

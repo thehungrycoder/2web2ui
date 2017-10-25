@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Modal, Panel, Button, Checkbox, Tooltip } from '@sparkpost/matchbox';
+import { Panel, Button, Checkbox, Tooltip, WindowEvent } from '@sparkpost/matchbox';
+import { Modal } from 'src/components';
 import { list } from 'src/config/metrics';
 import _ from 'lodash';
 import styles from './MetricsModal.module.scss';
@@ -10,14 +11,6 @@ const MAX_METRICS = 5;
 class MetricsModal extends Component {
   componentWillMount() {
     this.syncPropsToState(this.props);
-  }
-
-  componentDidMount() {
-    window.addEventListener('keydown', this.handleKeyDown);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('keydown', this.handleKeyDown);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -82,6 +75,7 @@ class MetricsModal extends Component {
     const { open, onCancel } = this.props;
     return (
       <Modal open={open}>
+        <WindowEvent event='keydown' handler={this.handleKeyDown} />
         <Panel>
           <Panel.Section>
             <h5>Select up to 5 metrics</h5>

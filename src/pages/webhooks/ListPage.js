@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 
 // Actions
-import { listWebhooks } from '../../actions/webhooks';
+import { listWebhooks } from 'src/actions/webhooks';
 
 // Components
-import { Layout, TableCollection, ApiErrorBanner } from 'src/components';
+import { Loading, TableCollection, ApiErrorBanner } from 'src/components';
 import { Page } from '@sparkpost/matchbox';
 
 const columns = ['Name', 'ID', 'Target'];
@@ -51,17 +51,21 @@ class WebhooksList extends Component {
   }
 
   render() {
-    const { webhooks, loading, error } = this.props;
+    const { loading, error } = this.props;
+
+    if (loading) {
+      return <Loading />;
+    }
 
     return (
-      <Layout.App loading={webhooks.length === 0 && loading}>
+      <div>
         <Page
           primaryAction={{ content: 'Create Webhook', Component: Link, to: '/webhooks/create' }}
           title={'Webhooks'}
         />
         {error && this.renderError()}
         {!error && this.renderCollection()}
-      </Layout.App>
+      </div>
     );
   }
 }

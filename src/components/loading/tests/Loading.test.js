@@ -1,12 +1,12 @@
 import React from 'react';
-import { Loading, LoadingLogo } from '../Loading';
+import { LoadingSVG, LoadingLogoSVG } from '../Loading';
 import { render } from 'enzyme';
 
 describe('Loading Component', () => {
 
   describe('Circle', () => {
     it('should render - no props', () => {
-      const wrapper = render(<Loading />);
+      const wrapper = render(<LoadingSVG />);
 
       expect(wrapper).toMatchSnapshot();
     });
@@ -15,7 +15,7 @@ describe('Loading Component', () => {
 
   describe('Logo', () => {
     it('should render - no props', () => {
-      const wrapper = render(<LoadingLogo />);
+      const wrapper = render(<LoadingLogoSVG />);
 
       expect(wrapper).toMatchSnapshot();
     });

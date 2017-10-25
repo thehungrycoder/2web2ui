@@ -3,11 +3,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Banner, Page } from '@sparkpost/matchbox';
-
 import { hideNewApiKey, listApiKeys } from 'src/actions/api-keys';
-
-import { Layout, TableCollection, ApiErrorBanner } from 'src/components';
-import { getLoading } from 'src/selectors/api-keys';
+import { Loading, TableCollection, ApiErrorBanner } from 'src/components';
 import { getRowData, columns, filterBoxConfig } from './tableConfig';
 
 const primaryAction = {
@@ -80,13 +77,16 @@ export class ListPage extends Component {
   render() {
     const { error, loading, newKey, count } = this.props;
 
+    if (loading) {
+      return <Loading />;
+    }
+
     return (
-      <Layout.App loading={loading}>
+      <div>
         <Page primaryAction={primaryAction} title="API Keys" />
         {newKey && this.renderBanner()}
-        {!error && count > 0 && this.renderCollection()}
-        {error && this.renderError()}
-      </Layout.App>
+        {error ? this.renderError() : this.renderCollection()}
+      </div>
     );
   }
 }
@@ -96,12 +96,10 @@ const mapStateToProps = (state) => {
   return {
     count: keys.length,
     keys,
-    loading: getLoading(state),
     error,
+    loading: state.apiKeys.keysLoading,
     newKey
   };
 };
 
-export default connect(mapStateToProps, { hideNewApiKey, listApiKeys })(
-  ListPage
-);
+export default connect(mapStateToProps, { hideNewApiKey, listApiKeys })(ListPage);

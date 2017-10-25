@@ -1,17 +1,16 @@
 import React from 'react';
-
 import ScrollToTop from './ScrollToTop';
-import { Loading, Navigation } from 'src/components';
+import { Navigation } from 'src/components';
 import styles from './Layout.module.scss';
 
-const App = ({ children, loading }) => (
-  <div className={`${styles.wrapper} ${styles.accent}`}>
+const App = ({ children }) => (
+  <div className={`${styles.wrapper} ${styles.app} ${styles.accent}`}>
     <div className={styles.aside}>
       <Navigation />
     </div>
     <main role="main" className={styles.content}>
       <div className={styles.container}>
-        { loading ? <div className={styles.loading}><Loading /></div> : children }
+        { children }
       </div>
     </main>
     <ScrollToTop/>
