@@ -15,7 +15,7 @@ let wrapper;
 
 beforeEach(() => {
   wrapper = shallow(<SubaccountForm {...props} />);
-})
+});
 
 test('base case', () => {
   expect(wrapper).toMatchSnapshot();

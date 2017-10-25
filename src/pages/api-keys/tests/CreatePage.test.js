@@ -16,8 +16,8 @@ const props = {
 let wrapper;
 
 beforeEach(() => {
-  wrapper = shallow(<CreatePage {...props} />)
-})
+  wrapper = shallow(<CreatePage {...props} />);
+});
 
 it('renders correctly with no subaccounts', () => {
   const grantsSpy = jest.spyOn(wrapper.instance().props, 'listGrants');

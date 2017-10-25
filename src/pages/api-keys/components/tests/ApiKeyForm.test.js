@@ -17,7 +17,7 @@ let wrapper;
 
 beforeEach(() => {
   wrapper = shallow(<ApiKeyForm {...props} />);
-})
+});
 
 it('renders correctly - new and no subaccounts', () => {
   expect(wrapper).toMatchSnapshot();
