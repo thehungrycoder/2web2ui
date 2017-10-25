@@ -9,6 +9,7 @@ exports[`api key form 1`] = `
       component={[Function]}
       label="Name"
       name="name"
+      validate={[Function]}
     />
   </Panel.Section>
   <Panel.Section>
@@ -82,6 +83,7 @@ exports[`base case 1`] = `
       component={[Function]}
       label="Name"
       name="name"
+      validate={[Function]}
     />
   </Panel.Section>
   <Panel.Section>
@@ -114,6 +116,7 @@ exports[`has ip pools 1`] = `
       component={[Function]}
       label="Name"
       name="name"
+      validate={[Function]}
     />
   </Panel.Section>
   <Panel.Section>
@@ -155,6 +158,7 @@ exports[`ip pools checked  1`] = `
       component={[Function]}
       label="Name"
       name="name"
+      validate={[Function]}
     />
   </Panel.Section>
   <Panel.Section>
@@ -206,6 +210,7 @@ exports[`submits correctly 1`] = `
       component={[Function]}
       label="Name"
       name="name"
+      validate={[Function]}
     />
   </Panel.Section>
   <Panel.Section>
