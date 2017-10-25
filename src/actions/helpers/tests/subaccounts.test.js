@@ -15,7 +15,7 @@ const getState = jest.fn(() => ({
 const keyFieldsAll = {
   grantsRadio: 'all',
   createApiKey: true,
-  keyName: 'test key all grants',
+  keyName: 'test key all grants'
 };
 
 const keyFieldsSelect = {
@@ -32,10 +32,10 @@ const keyFieldsSelect = {
 };
 
 test('name only', () => {
-  const result = formatSubaccount({ name: 'mySubAccount'}, getState);
+  const result = formatSubaccount({ name: 'mySubAccount' }, getState);
   expect(result).toEqual({ name: 'mySubAccount', setup_api_key: false });
   expect(result).not.toHaveProperty('key_label');
-  expect(result).not.toHaveProperty('ip_pool')
+  expect(result).not.toHaveProperty('ip_pool');
   expect(getState).not.toHaveBeenCalled();
 });
 
