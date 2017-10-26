@@ -76,6 +76,7 @@ export class ListPage extends Component {
 
   render() {
     const { error, loading, newKey, count } = this.props;
+    const title = 'API Keys';
 
     if (loading) {
       return <Loading />;
@@ -83,7 +84,16 @@ export class ListPage extends Component {
 
     return (
       <div>
-        <Page primaryAction={primaryAction} title="API Keys" />
+        <Page primaryAction={primaryAction} title={title} empty={{
+          test: count === 0,
+          title,
+          content: <p>Create an API key you can use to access our REST or SMTP API services.</p>,
+          secondaryAction: {
+            content: 'View our API Docs',
+            external: true,
+            to: 'https://developers.sparkpost.com/api'
+          }
+        }} />
         {newKey && this.renderBanner()}
         {error ? this.renderError() : this.renderCollection()}
       </div>

@@ -103,12 +103,17 @@ export class Collection extends Component {
 
   render() {
     const {
+      rows,
       rowComponent: RowComponent,
       rowKeyName = 'id',
       headerComponent: HeaderComponent = NullComponent,
       outerWrapper: OuterWrapper = PassThroughWrapper,
       bodyWrapper: BodyWrapper = PassThroughWrapper
     } = this.props;
+
+    if (!rows.length) {
+      return null;
+    }
 
     return (
       <div>

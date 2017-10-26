@@ -3,7 +3,20 @@
 exports[`renders correctly 1`] = `
 <div>
   <Page
-    empty={Object {}}
+    empty={
+      Object {
+        "content": <p>
+          Create an API key you can use to access our REST or SMTP API services.
+        </p>,
+        "secondaryAction": Object {
+          "content": "View our API Docs",
+          "external": true,
+          "to": "https://developers.sparkpost.com/api",
+        },
+        "test": false,
+        "title": "API Keys",
+      }
+    }
     primaryAction={
       Object {
         "Component": [Function],
@@ -76,7 +89,20 @@ exports[`renders correctly 1`] = `
 exports[`renders errors when present 1`] = `
 <div>
   <Page
-    empty={Object {}}
+    empty={
+      Object {
+        "content": <p>
+          Create an API key you can use to access our REST or SMTP API services.
+        </p>,
+        "secondaryAction": Object {
+          "content": "View our API Docs",
+          "external": true,
+          "to": "https://developers.sparkpost.com/api",
+        },
+        "test": false,
+        "title": "API Keys",
+      }
+    }
     primaryAction={
       Object {
         "Component": [Function],

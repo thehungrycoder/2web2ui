@@ -36,6 +36,11 @@ describe('Component: Collection', () => {
     };
   });
 
+  it('should render null if there are no rows', () => {
+    const wrapper = shallow(<Collection {...props} />);
+    expect(wrapper.equals(null)).toEqual(true);
+  });
+
   it('should render correctly with basic props', () => {
     addRows(15);
     const wrapper = shallow(<Collection {...props} />);
