@@ -1,0 +1,139 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div>
+  <Popover
+    trigger={
+      <TextField
+        prefix={null}
+        readOnly={true}
+        suffix={
+          <Icon
+            name="CaretDown"
+          />
+        }
+        type="text"
+        value="Status"
+      />
+    }
+  >
+    <ActionList
+      actions={
+        Array [
+          Object {
+            "content": "Active",
+            "name": "active",
+            "onClick": [Function],
+            "selected": undefined,
+          },
+          Object {
+            "content": "Terminated",
+            "name": "terminated",
+            "onClick": [Function],
+            "selected": undefined,
+          },
+          Object {
+            "content": "Suspended",
+            "name": "suspended",
+            "onClick": [Function],
+            "selected": undefined,
+          },
+        ]
+      }
+    />
+  </Popover>
+  <Field
+    component="input"
+    key="active"
+    name="status.active"
+    parse={[Function]}
+    tabIndex="-1"
+    type="checkbox"
+  />
+  <Field
+    component="input"
+    key="terminated"
+    name="status.terminated"
+    parse={[Function]}
+    tabIndex="-1"
+    type="checkbox"
+  />
+  <Field
+    component="input"
+    key="suspended"
+    name="status.suspended"
+    parse={[Function]}
+    tabIndex="-1"
+    type="checkbox"
+  />
+</div>
+`;
+
+exports[`renders selected correctly 1`] = `
+<div>
+  <Popover
+    trigger={
+      <TextField
+        prefix="(1)"
+        readOnly={true}
+        suffix={
+          <Icon
+            name="CaretDown"
+          />
+        }
+        type="text"
+        value="Status"
+      />
+    }
+  >
+    <ActionList
+      actions={
+        Array [
+          Object {
+            "content": "Active",
+            "name": "active",
+            "onClick": [Function],
+            "selected": false,
+          },
+          Object {
+            "content": "Terminated",
+            "name": "terminated",
+            "onClick": [Function],
+            "selected": false,
+          },
+          Object {
+            "content": "Suspended",
+            "name": "suspended",
+            "onClick": [Function],
+            "selected": true,
+          },
+        ]
+      }
+    />
+  </Popover>
+  <Field
+    component="input"
+    key="active"
+    name="status.active"
+    parse={[Function]}
+    tabIndex="-1"
+    type="checkbox"
+  />
+  <Field
+    component="input"
+    key="terminated"
+    name="status.terminated"
+    parse={[Function]}
+    tabIndex="-1"
+    type="checkbox"
+  />
+  <Field
+    component="input"
+    key="suspended"
+    name="status.suspended"
+    parse={[Function]}
+    tabIndex="-1"
+    type="checkbox"
+  />
+</div>
+`;

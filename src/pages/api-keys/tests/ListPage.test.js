@@ -7,6 +7,7 @@ const props = {
   loading: false,
   error: null,
   listApiKeys: jest.fn(() => []),
+  count: 30,
   keys: [
     {
       label: 'Test Key 1',

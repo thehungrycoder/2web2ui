@@ -28,6 +28,24 @@ exports[`Users list page renders error banner, table, and hidden modal 1`] = `
         null,
       ]
     }
+    filterBox={
+      Object {
+        "exampleModifiers": Array [
+          "name",
+          "email",
+          "role",
+        ],
+        "itemToStringKeys": Array [
+          "username",
+          "name",
+          "email",
+        ],
+        "keyMap": Object {
+          "role": "access",
+        },
+        "show": true,
+      }
+    }
     getRowData={[Function]}
     pagination={true}
   />
@@ -63,6 +81,24 @@ exports[`Users list page renders table and hidden modal 1`] = `
         "Last Login",
         null,
       ]
+    }
+    filterBox={
+      Object {
+        "exampleModifiers": Array [
+          "name",
+          "email",
+          "role",
+        ],
+        "itemToStringKeys": Array [
+          "username",
+          "name",
+          "email",
+        ],
+        "keyMap": Object {
+          "role": "access",
+        },
+        "show": true,
+      }
     }
     getRowData={[Function]}
     pagination={true}

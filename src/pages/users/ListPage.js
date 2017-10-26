@@ -113,6 +113,12 @@ export class ListPage extends Component {
           getRowData={this.getRowData}
           pagination={true}
           rows={users}
+          filterBox={{
+            show: true,
+            keyMap: { role: 'access' },
+            exampleModifiers: ['name', 'email', 'role'],
+            itemToStringKeys: ['username', 'name', 'email']
+          }}
         />
         {this.renderDeleteModal()}
       </div>

@@ -4,13 +4,21 @@ import Collection from './Collection';
 
 const TableWrapper = (props) => <Panel><Table>{props.children}</Table></Panel>;
 
-const TableHeader = ({ columns = []}) => (
-  <thead>
-    <Table.Row>
-      {columns.map((title) => <Table.HeaderCell key={title}>{title}</Table.HeaderCell>)}
-    </Table.Row>
-  </thead>
-);
+const TableHeader = ({ columns = []}) => {
+  const cells = columns.map((item, i) => {
+    if (typeof item === 'string' || item === null) {
+      return <Table.HeaderCell key={`column ${i}: ${item}`}>{item}</Table.HeaderCell>;
+    }
+    const { label, ...rest } = item;
+    return <Table.HeaderCell key={label} {...rest}>{label}</Table.HeaderCell>;
+  });
+
+  return (
+    <thead>
+      <Table.Row>{ cells }</Table.Row>
+    </thead>
+  );
+};
 
 const TableBody = (props) => <tbody>{props.children}</tbody>;
 

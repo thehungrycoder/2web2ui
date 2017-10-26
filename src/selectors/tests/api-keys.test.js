@@ -39,23 +39,23 @@ describe('ApiKey Selectors', () => {
   });
 
   it('gets form loading', () => {
-    expect(apiKeys.getFormLoading(store)).toMatchSnapshot();
+    expect(apiKeys.getFormLoading(store)).toEqual(true);
   });
 
   it('gets form is new - true', () => {
-    expect(apiKeys.getIsNew(store, { })).toMatchSnapshot();
+    expect(apiKeys.getIsNew(store, { })).toEqual(true);
   });
 
   it('gets form is new - false', () => {
-    expect(apiKeys.getIsNew(store, { apiKey: { not: 'empty' }})).toMatchSnapshot();
+    expect(apiKeys.getIsNew(store, { apiKey: { not: 'empty' }})).toEqual(false);
   });
 
   it('gets form grants radio value - all', () => {
-    expect(apiKeys.getInitialGrantsRadio(store, { })).toMatchSnapshot();
+    expect(apiKeys.getInitialGrantsRadio(store, { })).toEqual('all');
   });
 
   it('gets form grants radio value - select', () => {
-    expect(apiKeys.getInitialGrantsRadio(store, { apiKey: { grants: ['grant']}})).toMatchSnapshot();
+    expect(apiKeys.getInitialGrantsRadio(store, { apiKey: { grants: ['grant']}})).toEqual('select');
   });
 
   it('gets initial subaccount', () => {
