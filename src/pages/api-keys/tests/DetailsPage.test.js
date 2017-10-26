@@ -18,8 +18,8 @@ const props = {
 let wrapper;
 
 beforeEach(() => {
-  wrapper = shallow(<ApiKeysDetailsPage {...props} />)
-})
+  wrapper = shallow(<ApiKeysDetailsPage {...props} />);
+});
 
 it('renders correctly with no subaccounts', () => {
   const grantsSpy = jest.spyOn(wrapper.instance().props, 'listGrants');
@@ -45,9 +45,9 @@ it('renders correctly with subaccounts', () => {
 });
 
 it('toggles modal', () => {
-  expect(wrapper).toHaveState('showDeleteModal',  false);
+  expect(wrapper).toHaveState('showDeleteModal', false);
   wrapper.instance().onToggleDelete();
-  expect(wrapper).toHaveState('showDeleteModal',  true);
+  expect(wrapper).toHaveState('showDeleteModal', true);
 });
 
 it('deletes correctly', () => {

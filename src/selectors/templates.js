@@ -1,7 +1,2 @@
-function templateById(templates, id) {
-  return templates.byId[id] || { draft: {}, published: {}};
-}
-
-export {
-  templateById
-};
+export const getTemplates = (state) => state.templates.list;
+export const getTemplateById = (state, props) => state.templates.byId[props.match.params.id] || { draft: {}, published: {}};

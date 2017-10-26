@@ -9,11 +9,11 @@ describe('ApiKey Selectors', () => {
       ],
       grants: [
         { key: 'grant one' },
-        { key: 'grant two' },
+        { key: 'grant two' }
       ],
       subaccountGrants: [
         { key: 'sub grant one' },
-        { key: 'sub grant two' },
+        { key: 'sub grant two' }
       ],
       grantsLoading: false,
       subaccountGrantsLoading: false
@@ -27,7 +27,7 @@ describe('ApiKey Selectors', () => {
   };
 
   it('returns single api key', () => {
-    expect(apiKeys.getApiKey(store, { match : { params : { id: 'Ape' }}})).toMatchSnapshot();
+    expect(apiKeys.getApiKey(store, { match: { params: { id: 'Ape' }}})).toMatchSnapshot();
   });
 
   it('gets grants', () => {
@@ -39,23 +39,23 @@ describe('ApiKey Selectors', () => {
   });
 
   it('gets form loading', () => {
-    expect(apiKeys.getFormLoading(store)).toMatchSnapshot();
+    expect(apiKeys.getFormLoading(store)).toEqual(true);
   });
 
   it('gets form is new - true', () => {
-    expect(apiKeys.getIsNew(store, { })).toMatchSnapshot();
+    expect(apiKeys.getIsNew(store, { })).toEqual(true);
   });
 
   it('gets form is new - false', () => {
-    expect(apiKeys.getIsNew(store, { apiKey: { not: 'empty' }})).toMatchSnapshot();
+    expect(apiKeys.getIsNew(store, { apiKey: { not: 'empty' }})).toEqual(false);
   });
 
   it('gets form grants radio value - all', () => {
-    expect(apiKeys.getInitialGrantsRadio(store, { })).toMatchSnapshot();
+    expect(apiKeys.getInitialGrantsRadio(store, { })).toEqual('all');
   });
 
   it('gets form grants radio value - select', () => {
-    expect(apiKeys.getInitialGrantsRadio(store, { apiKey: { grants: ['grant'] }})).toMatchSnapshot();
+    expect(apiKeys.getInitialGrantsRadio(store, { apiKey: { grants: ['grant']}})).toEqual('select');
   });
 
   it('gets initial subaccount', () => {
@@ -69,7 +69,7 @@ describe('ApiKey Selectors', () => {
         grants: ['grant'],
         valid_ips: ['ip']
       }
-    }
+    };
     expect(apiKeys.getInitialValues(store, props)).toMatchSnapshot();
   });
 });

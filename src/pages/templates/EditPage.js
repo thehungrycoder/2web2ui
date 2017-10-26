@@ -9,7 +9,7 @@ import { getDraft, getPublished, update, deleteTemplate, publish } from '../../a
 import { showAlert } from 'src/actions/globalAlert';
 
 // Selectors
-import { templateById } from 'src/selectors/templates';
+import { getTemplateById } from 'src/selectors/templates';
 
 // Components
 import Form from './components/Form';
@@ -64,7 +64,13 @@ class EditPage extends Component {
   componentDidUpdate() {
     const { loading, template, showAlert } = this.props;
 
-    if (!loading && !Object.keys(template.draft).length && !Object.keys(template.published).length) {
+    if (loading || !template) {
+      return;
+    }
+
+    const { draft = {}, published = {}} = template;
+
+    if (!Object.keys(draft).length && !Object.keys(published).length) {
       this.setState({ redirectTo: '/templates/' }); // Redirect if no draft or published found
       showAlert({ type: 'error', message: 'Could not find template' });
     }
@@ -154,10 +160,10 @@ class EditPage extends Component {
   }
 }
 
-const mapStateToProps = ({ templates }, { match }) => {
-  const template = templateById(templates, match.params.id);
+const mapStateToProps = (state, props) => {
+  const template = getTemplateById(state, props);
   return {
-    loading: templates.getLoading,
+    loading: state.templates.getLoading,
     template,
     // For templates with published but no draft, pull in published values
     initialValues: template.draft || template.published
