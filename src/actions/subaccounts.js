@@ -2,15 +2,13 @@ import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 import { formatSubaccount } from './helpers/subaccounts';
 
 export function list() {
-  return (dispatch) => dispatch(
-    sparkpostApiRequest({
-      type: 'LIST_SUBACCOUNTS',
-      meta: {
-        method: 'GET',
-        url: '/subaccounts'
-      }
-    })
-  );
+  return sparkpostApiRequest({
+    type: 'LIST_SUBACCOUNTS',
+    meta: {
+      method: 'GET',
+      url: '/subaccounts'
+    }
+  });
 }
 
 export function create(values) {

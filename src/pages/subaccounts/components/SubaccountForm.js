@@ -25,19 +25,21 @@ const keyBoxHelpText = (createApiKey) => createApiKey
     ? 'The key will only be shown once when created, so be sure to copy and save it somewhere safe.'
     : 'Every subaccount you create will need its own API key. You can create one later.';
 
-const apiKeyFields = (showGrants = false, grants) => (
+const apiKeyFields = (showGrants = false, grants, submitting) => (
   <div>
     <Field
       name="keyName"
       component={TextFieldWrapper}
       label="Key Name"
       validate={required}
+      disabled={submitting}
     />
     <Field
       name="grantsRadio"
       component={RadioGroup}
       title="API Permissions"
       options={grantsOptions}
+      disabled={submitting}
     />
     <GrantsCheckboxes grants={grants} show={showGrants} />
     <Field
@@ -47,16 +49,18 @@ const apiKeyFields = (showGrants = false, grants) => (
       helpText="Leaving the field blank will allow access by valid API keys from any IP address."
       placeholder="10.20.30.40, 10.20.30.0/24"
       validate={ipValidator}
+      disabled={submitting}
     />
   </div>
 );
 
-const ipPoolFields = (assingToPool, ipPools) => (
+const ipPoolFields = (assingToPool, ipPools, submitting) => (
   <Field
     name="ipPool"
     component={PoolTypeaheadWrapper}
     pools={ipPools}
     label="IP Pool"
+    disabled={submitting}
   />
 );
 
@@ -85,6 +89,7 @@ export class SubaccountForm extends Component {
             component={TextFieldWrapper}
             label="Name"
             validate={required}
+            disabled={submitting}
           />
         </Panel.Section>
         <Panel.Section>
@@ -94,6 +99,7 @@ export class SubaccountForm extends Component {
             type="checkbox"
             label="Create API Key"
             helpText={ keyBoxHelpText(createApiKey) }
+            disabled={submitting}
           />
           { createApiKey && apiKeyFields(showGrants, grants) }
         </Panel.Section>
@@ -105,13 +111,14 @@ export class SubaccountForm extends Component {
               type="checkbox"
               label="Assign to IP Pool"
               helpText={ 'You can do this later' }
+              disabled={submitting}
             />
             { assingToPool && ipPoolFields(assingToPool, ipPools) }
           </Panel.Section>
         }
         <Panel.Section>
           <Button submit primary disabled={submitting || pristine}>
-            Create
+            { submitting ? 'Loading...' : 'Create' }
           </Button>
         </Panel.Section>
       </form>

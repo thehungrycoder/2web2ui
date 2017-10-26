@@ -33,10 +33,7 @@ const keyFieldsSelect = {
 
 test('name only', () => {
   const result = formatSubaccount({ name: 'mySubAccount' }, getState);
-  expect(result).toEqual({ name: 'mySubAccount', setup_api_key: false });
-  expect(result).not.toHaveProperty('key_label');
-  expect(result).not.toHaveProperty('ip_pool');
-  expect(getState).not.toHaveBeenCalled();
+  expect(result).toMatchSnapshot();
 });
 
 test('with api key - all grants', () => {
@@ -45,7 +42,7 @@ test('with api key - all grants', () => {
     ...keyFieldsAll
   };
   const result = formatSubaccount(subaccount, getState);
-  expect(result.key_label).toEqual(keyFieldsAll.keyName);
+  expect(result).toMatchSnapshot();
   expect(result).toHaveProperty('key_grants', [
     'message_events/view',
     'message_events/write',
@@ -62,7 +59,7 @@ test('with api key - select grants', () => {
     ...keyFieldsSelect
   };
   const result = formatSubaccount(subaccount, getState);
-  expect(result.key_label).toEqual(keyFieldsSelect.keyName);
+  expect(result).toMatchSnapshot();
   expect(result).toHaveProperty('key_grants', [
     'message_events/view',
     'smtp/inject'
@@ -79,8 +76,7 @@ test('with api key - valid ips', () => {
     },
     getState
   );
-
-  expect(result).toHaveProperty('key_valid_ips', ['10.20.30.40', '10.20.30.0/24']);
+  expect(result).toMatchSnapshot();
 });
 
 test('with ip pool', () => {
@@ -95,5 +91,5 @@ test('with ip pool', () => {
     },
     getState
   );
-  expect(result.ip_pool).toEqual('marketing_ip_pool');
+  expect(result).toMatchSnapshot();
 });

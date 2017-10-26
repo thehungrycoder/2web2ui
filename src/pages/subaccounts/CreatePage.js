@@ -11,7 +11,6 @@ import { listSubaccountGrants } from 'src/actions/api-keys';
 import { listPools } from 'src/actions/ipPools';
 import { showAlert } from 'src/actions/globalAlert';
 
-
 const breadcrumbAction = {
   content: 'Subaccounts',
   Component: Link,
