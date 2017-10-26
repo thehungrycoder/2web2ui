@@ -5,9 +5,9 @@ import Collection from './Collection';
 const TableWrapper = (props) => <Panel><Table>{props.children}</Table></Panel>;
 
 const TableHeader = ({ columns = []}) => {
-  const cells = columns.map((item) => {
-    if (typeof item === 'string') {
-      return <Table.HeaderCell key={item}>{item}</Table.HeaderCell>;
+  const cells = columns.map((item, i) => {
+    if (typeof item === 'string' || item === null) {
+      return <Table.HeaderCell key={`column ${i}: ${item}`}>{item}</Table.HeaderCell>;
     }
     const { label, ...rest } = item;
     return <Table.HeaderCell key={label} {...rest}>{label}</Table.HeaderCell>;

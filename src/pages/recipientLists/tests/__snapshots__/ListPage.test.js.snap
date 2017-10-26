@@ -22,6 +22,23 @@ exports[`renders correctly 1`] = `
           "Recipients",
         ]
       }
+      filterBox={
+        Object {
+          "exampleModifiers": Array [
+            "name",
+            "id",
+            "count",
+          ],
+          "itemToStringKeys": Array [
+            "name",
+            "id",
+          ],
+          "keyMap": Object {
+            "count": "total_accepted_recipients",
+          },
+          "show": true,
+        }
+      }
       getRowData={[Function]}
       pagination={true}
       rows={
@@ -80,6 +97,23 @@ exports[`renders errors when present 1`] = `
           "ID",
           "Recipients",
         ]
+      }
+      filterBox={
+        Object {
+          "exampleModifiers": Array [
+            "name",
+            "id",
+            "count",
+          ],
+          "itemToStringKeys": Array [
+            "name",
+            "id",
+          ],
+          "keyMap": Object {
+            "count": "total_accepted_recipients",
+          },
+          "show": true,
+        }
       }
       getRowData={[Function]}
       pagination={true}

@@ -4,7 +4,11 @@ const defaultKeyMap = {
   subaccount: 'subaccount_id'
 };
 
-export function basicScorer(haystack, needle) {
+export function basicScorer(haystack = null, needle = null) {
+  if (haystack === null || needle === null || haystack === '' || needle === '') {
+    return 0;
+  }
+
   haystack = haystack.toString();
   needle = needle.toString();
 
