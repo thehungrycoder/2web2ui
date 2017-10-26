@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Templates by id Selector returns empty draft and published 1`] = `
+Object {
+  "draft": Object {},
+  "published": Object {},
+}
+`;
+
+exports[`Templates by id Selector returns template 1`] = `
+Object {
+  "name": "Ape",
+}
+`;

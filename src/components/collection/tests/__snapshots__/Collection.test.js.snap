@@ -1,0 +1,318 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: Collection should render correctly with basic props 1`] = `
+<div>
+  <PassThroughWrapper>
+    <headerComponent />
+    <PassThroughWrapper>
+      <rowComponent
+        id={0}
+        key="row-0"
+        name="row-name--0"
+      />
+      <rowComponent
+        id={1}
+        key="1-1"
+        name="row-name--1"
+      />
+      <rowComponent
+        id={2}
+        key="2-2"
+        name="row-name--2"
+      />
+      <rowComponent
+        id={3}
+        key="3-3"
+        name="row-name--3"
+      />
+      <rowComponent
+        id={4}
+        key="4-4"
+        name="row-name--4"
+      />
+      <rowComponent
+        id={5}
+        key="5-5"
+        name="row-name--5"
+      />
+      <rowComponent
+        id={6}
+        key="6-6"
+        name="row-name--6"
+      />
+      <rowComponent
+        id={7}
+        key="7-7"
+        name="row-name--7"
+      />
+      <rowComponent
+        id={8}
+        key="8-8"
+        name="row-name--8"
+      />
+      <rowComponent
+        id={9}
+        key="9-9"
+        name="row-name--9"
+      />
+      <rowComponent
+        id={10}
+        key="10-10"
+        name="row-name--10"
+      />
+      <rowComponent
+        id={11}
+        key="11-11"
+        name="row-name--11"
+      />
+      <rowComponent
+        id={12}
+        key="12-12"
+        name="row-name--12"
+      />
+      <rowComponent
+        id={13}
+        key="13-13"
+        name="row-name--13"
+      />
+      <rowComponent
+        id={14}
+        key="14-14"
+        name="row-name--14"
+      />
+    </PassThroughWrapper>
+  </PassThroughWrapper>
+</div>
+`;
+
+exports[`Component: Collection should render pagination 1`] = `
+<div>
+  <PassThroughWrapper>
+    <headerComponent />
+    <PassThroughWrapper>
+      <rowComponent
+        id={0}
+        key="row-0"
+        name="row-name--0"
+      />
+      <rowComponent
+        id={1}
+        key="1-1"
+        name="row-name--1"
+      />
+      <rowComponent
+        id={2}
+        key="2-2"
+        name="row-name--2"
+      />
+    </PassThroughWrapper>
+  </PassThroughWrapper>
+  <CollectionPagination
+    currentPage={1}
+    data={
+      Array [
+        Object {
+          "id": 0,
+          "name": "row-name--0",
+        },
+        Object {
+          "id": 1,
+          "name": "row-name--1",
+        },
+        Object {
+          "id": 2,
+          "name": "row-name--2",
+        },
+      ]
+    }
+    onPageChange={[Function]}
+    onPerPageChange={[Function]}
+    pageRange={5}
+    perPage={10}
+    perPageButtons={
+      Array [
+        10,
+        50,
+      ]
+    }
+  />
+</div>
+`;
+
+exports[`Component: Collection should render the filter box 1`] = `
+<div>
+  <CollectionFilter
+    onChange={[Function]}
+    rows={
+      Array [
+        Object {
+          "id": 0,
+          "name": "row-name--0",
+        },
+        Object {
+          "id": 1,
+          "name": "row-name--1",
+        },
+        Object {
+          "id": 2,
+          "name": "row-name--2",
+        },
+        Object {
+          "id": 3,
+          "name": "row-name--3",
+        },
+        Object {
+          "id": 4,
+          "name": "row-name--4",
+        },
+        Object {
+          "id": 5,
+          "name": "row-name--5",
+        },
+        Object {
+          "id": 6,
+          "name": "row-name--6",
+        },
+        Object {
+          "id": 7,
+          "name": "row-name--7",
+        },
+        Object {
+          "id": 8,
+          "name": "row-name--8",
+        },
+        Object {
+          "id": 9,
+          "name": "row-name--9",
+        },
+        Object {
+          "id": 10,
+          "name": "row-name--10",
+        },
+        Object {
+          "id": 11,
+          "name": "row-name--11",
+        },
+        Object {
+          "id": 12,
+          "name": "row-name--12",
+        },
+        Object {
+          "id": 13,
+          "name": "row-name--13",
+        },
+        Object {
+          "id": 14,
+          "name": "row-name--14",
+        },
+      ]
+    }
+    show={true}
+  />
+  <PassThroughWrapper>
+    <headerComponent />
+    <PassThroughWrapper>
+      <rowComponent
+        id={0}
+        key="row-0"
+        name="row-name--0"
+      />
+      <rowComponent
+        id={1}
+        key="1-1"
+        name="row-name--1"
+      />
+      <rowComponent
+        id={2}
+        key="2-2"
+        name="row-name--2"
+      />
+      <rowComponent
+        id={3}
+        key="3-3"
+        name="row-name--3"
+      />
+      <rowComponent
+        id={4}
+        key="4-4"
+        name="row-name--4"
+      />
+      <rowComponent
+        id={5}
+        key="5-5"
+        name="row-name--5"
+      />
+      <rowComponent
+        id={6}
+        key="6-6"
+        name="row-name--6"
+      />
+      <rowComponent
+        id={7}
+        key="7-7"
+        name="row-name--7"
+      />
+      <rowComponent
+        id={8}
+        key="8-8"
+        name="row-name--8"
+      />
+      <rowComponent
+        id={9}
+        key="9-9"
+        name="row-name--9"
+      />
+      <rowComponent
+        id={10}
+        key="10-10"
+        name="row-name--10"
+      />
+      <rowComponent
+        id={11}
+        key="11-11"
+        name="row-name--11"
+      />
+      <rowComponent
+        id={12}
+        key="12-12"
+        name="row-name--12"
+      />
+      <rowComponent
+        id={13}
+        key="13-13"
+        name="row-name--13"
+      />
+      <rowComponent
+        id={14}
+        key="14-14"
+        name="row-name--14"
+      />
+    </PassThroughWrapper>
+  </PassThroughWrapper>
+</div>
+`;
+
+exports[`Component: Collection should render with custom wrappers 1`] = `
+<div>
+  <CustomOuterWrapper>
+    <headerComponent />
+    <CustomBodyWrapper>
+      <rowComponent
+        id={0}
+        key="row-0"
+        name="row-name--0"
+      />
+      <rowComponent
+        id={1}
+        key="1-1"
+        name="row-name--1"
+      />
+      <rowComponent
+        id={2}
+        key="2-2"
+        name="row-name--2"
+      />
+    </CustomBodyWrapper>
+  </CustomOuterWrapper>
+</div>
+`;

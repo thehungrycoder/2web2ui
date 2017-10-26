@@ -3,25 +3,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Banner, Page } from '@sparkpost/matchbox';
-
 import { hideNewApiKey, listApiKeys } from 'src/actions/api-keys';
-
-import { Loading, ApiErrorBanner, TableCollection } from 'src/components';
-import PermissionsColumn from './components/PermissionsColumn';
-
-const columns = ['Name', 'Key', 'Permissions'];
+import { Loading, TableCollection, ApiErrorBanner } from 'src/components';
+import { getRowData, columns, filterBoxConfig } from './tableConfig';
 
 const primaryAction = {
   content: 'Create API Key',
   Component: Link,
   to: '/account/api-keys/create'
 };
-
-const getRowData = (key) => [
-  <Link to={`/account/api-keys/details/${key.id}`}>{key.label}</Link>,
-  <code>{key.short_key} ••••</code>,
-  <PermissionsColumn grants={key.grants} />
-];
 
 export class ListPage extends Component {
   state = { copied: false };
@@ -54,9 +44,7 @@ export class ListPage extends Component {
         status="success"
         onDismiss={hideNewApiKey}
       >
-        <p>
-          Make sure to copy your API key now. You won't be able to see it again!
-        </p>
+        <p>Make sure to copy your API key now. You won't be able to see it again!</p>
         <strong>{newKey}</strong>
       </Banner>
     );
@@ -71,6 +59,7 @@ export class ListPage extends Component {
         getRowData={getRowData}
         pagination={true}
         rows={keys}
+        filterBox={filterBoxConfig}
       />
     );
   }
@@ -86,7 +75,8 @@ export class ListPage extends Component {
   }
 
   render() {
-    const { error, loading, newKey } = this.props;
+    const { error, loading, newKey, count } = this.props;
+    const title = 'API Keys';
 
     if (loading) {
       return <Loading />;
@@ -94,7 +84,16 @@ export class ListPage extends Component {
 
     return (
       <div>
-        <Page primaryAction={primaryAction} title="API Keys" />
+        <Page primaryAction={primaryAction} title={title} empty={{
+          test: count === 0,
+          title,
+          content: <p>Create an API key you can use to access our REST or SMTP API services.</p>,
+          secondaryAction: {
+            content: 'View our API Docs',
+            external: true,
+            to: 'https://developers.sparkpost.com/api'
+          }
+        }} />
         {newKey && this.renderBanner()}
         {error ? this.renderError() : this.renderCollection()}
       </div>
@@ -105,8 +104,9 @@ export class ListPage extends Component {
 const mapStateToProps = (state) => {
   const { error, keys, newKey } = state.apiKeys;
   return {
-    error,
+    count: keys.length,
     keys,
+    error,
     loading: state.apiKeys.keysLoading,
     newKey
   };
