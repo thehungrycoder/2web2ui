@@ -32,6 +32,12 @@ const renderCollection = (rows) => (
       getRowData={getRowData}
       pagination={true}
       rows={rows}
+      filterBox={{
+        show: true,
+        keyMap: { count: 'total_accepted_recipients' },
+        exampleModifiers: ['name', 'id', 'count'],
+        itemToStringKeys: ['name', 'id']
+      }}
     />
   </div>
 );
