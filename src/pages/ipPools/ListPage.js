@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-
-// Actions
 import { listPools } from 'src/actions/ipPools';
-
-// Components
 import { Loading, TableCollection, ApiErrorBanner } from 'src/components';
 import { Page } from '@sparkpost/matchbox';
 
@@ -40,6 +36,11 @@ export class IpPoolsList extends Component {
         rows={ipPools}
         getRowData={getRowData}
         pagination={true}
+        filterBox={{
+          show: true,
+          exampleModifiers: ['name', 'id'],
+          itemToStringKeys: ['name', 'id']
+        }}
       />
     );
   }

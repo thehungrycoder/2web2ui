@@ -21,6 +21,19 @@ exports[`IP Pools List Page should render the list page correctly 1`] = `
         "Number of IPs Assigned",
       ]
     }
+    filterBox={
+      Object {
+        "exampleModifiers": Array [
+          "name",
+          "id",
+        ],
+        "itemToStringKeys": Array [
+          "name",
+          "id",
+        ],
+        "show": true,
+      }
+    }
     getRowData={[Function]}
     pagination={true}
     rows={

@@ -1,17 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-
 import { Page } from '@sparkpost/matchbox';
 import { Loading, ApiErrorBanner } from 'src/components';
-
 import TrackingDomainsCollection from './components/TrackingDomainsCollection';
 import TrackingDomainsEmptyState from './components/TrackingDomainsEmptyState';
-
 import { listTrackingDomains } from 'src/actions/trackingDomains';
 import { list as listSubaccounts } from 'src/actions/subaccounts';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
-
 
 export class ListPage extends Component {
   componentDidMount() {
