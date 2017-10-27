@@ -11,7 +11,7 @@ import { Loading, ApiErrorBanner, DeleteModal, TableCollection } from 'src/compo
 import AccessSelect from './components/AccessSelect';
 import DeleteButton from './components/DeleteButton';
 
-const COLUMNS = ['Name', 'Role', 'Email', 'Last Login', ''];
+const COLUMNS = ['Name', 'Role', 'Email', 'Last Login', null];
 const DEFAULT_STATE = {
   userToDelete: {}
 };

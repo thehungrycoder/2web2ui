@@ -40,7 +40,7 @@ exports[`Users list page renders table and hidden modal 1`] = `
           "Role",
           "Email",
           "Last Login",
-          "",
+          null,
         ]
       }
       filterBox={
