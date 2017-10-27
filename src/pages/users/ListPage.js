@@ -95,20 +95,23 @@ export class ListPage extends Component {
     );
   }
 
-  renderCollection() {
+  renderPage() {
     return (
-      <TableCollection
-        columns={COLUMNS}
-        getRowData={this.getRowData}
-        pagination={true}
-        rows={this.props.users}
-        filterBox={{
-          show: true,
-          keyMap: { role: 'access' },
-          exampleModifiers: ['name', 'email', 'role'],
-          itemToStringKeys: ['username', 'name', 'email']
-        }}
-      />
+      <div>
+        <TableCollection
+          columns={COLUMNS}
+          getRowData={this.getRowData}
+          pagination={true}
+          rows={this.props.users}
+          filterBox={{
+            show: true,
+            keyMap: { role: 'access' },
+            exampleModifiers: ['name', 'email', 'role'],
+            itemToStringKeys: ['username', 'name', 'email']
+          }}
+        />
+        { this.renderDeleteModal() }
+      </div>
     );
   }
 
@@ -121,9 +124,7 @@ export class ListPage extends Component {
 
     return (
       <Page primaryAction={primaryAction} title="Users">
-        { error && this.renderError() }
-        { !error && this.renderCollection() }
-        { !error && this.renderDeleteModal() }
+        { error ? this.renderError() : this.renderPage() }
       </Page>
     );
   }

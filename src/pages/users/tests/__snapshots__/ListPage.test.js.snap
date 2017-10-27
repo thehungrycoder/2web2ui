@@ -32,57 +32,59 @@ exports[`Users list page renders table and hidden modal 1`] = `
   }
   title="Users"
 >
-  <TableCollection
-    columns={
-      Array [
-        "Name",
-        "Role",
-        "Email",
-        "Last Login",
-        "",
-      ]
-    }
-    filterBox={
-      Object {
-        "exampleModifiers": Array [
-          "name",
-          "email",
-          "role",
-        ],
-        "itemToStringKeys": Array [
-          "username",
-          "name",
-          "email",
-        ],
-        "keyMap": Object {
-          "role": "access",
-        },
-        "show": true,
+  <div>
+    <TableCollection
+      columns={
+        Array [
+          "Name",
+          "Role",
+          "Email",
+          "Last Login",
+          "",
+        ]
       }
-    }
-    getRowData={[Function]}
-    pagination={true}
-    rows={
-      Array [
+      filterBox={
         Object {
-          "access": "admin",
-          "email": "user1@test.com",
-          "name": "Test User 1",
-        },
-        Object {
-          "access": "admin",
-          "email": "user2@test.com",
-          "name": "Test User 2",
-        },
-      ]
-    }
-  />
-  <DeleteModal
-    handleDelete={[Function]}
-    handleToggle={[Function]}
-    open={false}
-    text="Are you sure you want to delete undefined?"
-    title="Delete User"
-  />
+          "exampleModifiers": Array [
+            "name",
+            "email",
+            "role",
+          ],
+          "itemToStringKeys": Array [
+            "username",
+            "name",
+            "email",
+          ],
+          "keyMap": Object {
+            "role": "access",
+          },
+          "show": true,
+        }
+      }
+      getRowData={[Function]}
+      pagination={true}
+      rows={
+        Array [
+          Object {
+            "access": "admin",
+            "email": "user1@test.com",
+            "name": "Test User 1",
+          },
+          Object {
+            "access": "admin",
+            "email": "user2@test.com",
+            "name": "Test User 2",
+          },
+        ]
+      }
+    />
+    <DeleteModal
+      handleDelete={[Function]}
+      handleToggle={[Function]}
+      open={false}
+      text="Are you sure you want to delete undefined?"
+      title="Delete User"
+    />
+  </div>
 </Page>
 `;
