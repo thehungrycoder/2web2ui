@@ -1,0 +1,8 @@
+.Grants {
+  display: none;
+  margin-bottom: 1rem;
+
+  &.show {
+    display: flex;
+  }
+}

@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div>
+  <Page
+    breadcrumbAction={
+      Object {
+        "Component": [Function],
+        "content": "Subaccounts",
+        "to": "/account/subaccounts",
+      }
+    }
+    empty={Object {}}
+    title="Create Subaccount"
+  />
+  <Panel>
+    <Connect(ReduxForm)
+      onSubmit={[Function]}
+    />
+  </Panel>
+</div>
+`;

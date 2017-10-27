@@ -2,6 +2,7 @@ import React from 'react';
 import { Checkbox, TextField, Select, Radio } from '@sparkpost/matchbox';
 
 import SubaccountTypeahead from './subaccountTypeahead/SubaccountTypeahead';
+import PoolTypeahead from './ipPoolTypeahead/PoolTypeahead';
 
 /*
  Wrapped matchbox components for use with react-redux Field components
@@ -74,5 +75,15 @@ export const SubaccountTypeaheadWrapper = ({ input, subaccounts }) => (
     onChange={input.onChange}
     selectedItem={input.value}
     subaccounts={subaccounts}
+  />
+);
+
+
+export const PoolTypeaheadWrapper = ({ input, pools }) => (
+  <PoolTypeahead
+    name={input.name}
+    onChange={input.onChange}
+    selectedItem={input.value}
+    pools={pools}
   />
 );
