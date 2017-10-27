@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import loadable from 'react-loadable';
 
-export const LoadableEditor = loadable({
-  loader: () => import('./_Editor'),
+const LoadableLineChart = loadable({
+  loader: () => import('./LineChart'),
   render(loaded, props) {
     const Component = loaded.default;
     return <Component {...props}/>;
@@ -12,8 +12,8 @@ export const LoadableEditor = loadable({
   }
 });
 
-export default class Editor extends Component {
+export default class LineChart extends Component {
   render() {
-    return <LoadableEditor {...this.props}/>;
+    return <LoadableLineChart {...this.props}/>;
   }
 }
