@@ -1,38 +1,36 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Page: ChangePlanPage should not render form if not allowed to change plan 1`] = `
-<div>
-  <Page
-    breadcrumbAction={
-      Object {
-        "Component": [Function],
-        "content": "Back to billing",
-        "to": "/account/billing",
-      }
+<Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "Back to billing",
+      "to": "/account/billing",
     }
-    empty={Object {}}
-  />
+  }
+  empty={Object {}}
+>
   <Component
     account={Object {}}
   />
   <Component
     account={Object {}}
   />
-</div>
+</Page>
 `;
 
 exports[`Page: ChangePlanPage should render form if allowed to change plan 1`] = `
-<div>
-  <Page
-    breadcrumbAction={
-      Object {
-        "Component": [Function],
-        "content": "Back to billing",
-        "to": "/account/billing",
-      }
+<Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "Back to billing",
+      "to": "/account/billing",
     }
-    empty={Object {}}
-  />
+  }
+  empty={Object {}}
+>
   <Component
     account={Object {}}
   />
@@ -40,5 +38,5 @@ exports[`Page: ChangePlanPage should render form if allowed to change plan 1`] =
     account={Object {}}
   />
   <withRouter(Connect(ReduxForm)) />
-</div>
+</Page>
 `;

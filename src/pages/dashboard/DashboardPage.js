@@ -53,8 +53,7 @@ export class DashboardPage extends Component {
 
   render() {
     return (
-      <div>
-        <Page title='Control Panel'/>
+      <Page title='Control Panel'>
 
         { this.renderOneCta() }
 
@@ -67,7 +66,7 @@ export class DashboardPage extends Component {
         { this.renderSuppressionBanner() }
 
         <Tutorial {...this.props} />
-      </div>
+      </Page>
     );
   }
 }

@@ -11,7 +11,7 @@ import { Loading, ApiErrorBanner, DeleteModal, TableCollection } from 'src/compo
 import AccessSelect from './components/AccessSelect';
 import DeleteButton from './components/DeleteButton';
 
-const COLUMNS = ['Name', 'Role', 'Email', 'Last Login', null];
+const COLUMNS = ['Name', 'Role', 'Email', 'Last Login', ''];
 const DEFAULT_STATE = {
   userToDelete: {}
 };
@@ -69,8 +69,6 @@ export class ListPage extends Component {
   renderError() {
     const { error, listUsers } = this.props;
 
-    if (!error) { return null; }
-
     return (
       <ApiErrorBanner
         errorDetails={error.message}
@@ -97,31 +95,36 @@ export class ListPage extends Component {
     );
   }
 
+  renderCollection() {
+    return (
+      <TableCollection
+        columns={COLUMNS}
+        getRowData={this.getRowData}
+        pagination={true}
+        rows={this.props.users}
+        filterBox={{
+          show: true,
+          keyMap: { role: 'access' },
+          exampleModifiers: ['name', 'email', 'role'],
+          itemToStringKeys: ['username', 'name', 'email']
+        }}
+      />
+    );
+  }
+
   render() {
-    const { loading, users } = this.props;
+    const { loading, error } = this.props;
 
     if (loading) {
       return <Loading />;
     }
 
     return (
-      <div>
-        <Page primaryAction={primaryAction} title="Users" />
-        {this.renderError()}
-        <TableCollection
-          columns={COLUMNS}
-          getRowData={this.getRowData}
-          pagination={true}
-          rows={users}
-          filterBox={{
-            show: true,
-            keyMap: { role: 'access' },
-            exampleModifiers: ['name', 'email', 'role'],
-            itemToStringKeys: ['username', 'name', 'email']
-          }}
-        />
-        {this.renderDeleteModal()}
-      </div>
+      <Page primaryAction={primaryAction} title="Users">
+        { error && this.renderError() }
+        { !error && this.renderCollection() }
+        { !error && this.renderDeleteModal() }
+      </Page>
     );
   }
 }

@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
@@ -50,18 +49,17 @@ export class ListPage extends Component {
     }
 
     return (
-      <div>
-        <Page
-          primaryAction={primaryAction}
-          title='Templates'
-          empty={{
-            test: count === 0,
-            title: 'Manage your email templates'
-          }}
-        />
-        {error && this.renderError()}
-        {!error && this.renderCollection()}
-      </div>
+      <Page
+        primaryAction={primaryAction}
+        title='Templates'
+        empty={{
+          test: count === 0,
+          image: 'Templates',
+          title: 'Manage your email templates',
+          content: <p>Build, test, preview and send your transmissions.</p>
+        }} >
+        { error ? this.renderError() : this.renderCollection() }
+      </Page>
     );
   }
 }

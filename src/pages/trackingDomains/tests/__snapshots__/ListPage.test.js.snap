@@ -1,7 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-<div>
+<Page
+  empty={
+    Object {
+      "content": <p>
+        Track your email engagement events
+      </p>,
+      "image": "Generic",
+      "test": false,
+    }
+  }
+  primaryAction={
+    Object {
+      "Component": [Function],
+      "content": "Create Tracking Domain",
+      "to": "/account/tracking-domains/create",
+    }
+  }
+  title="Tracking Domains"
+>
   <TrackingDomainsCollection
     hasSubaccounts={false}
     rows={
@@ -36,42 +54,67 @@ exports[`renders correctly 1`] = `
       ]
     }
   />
-</div>
+</Page>
 `;
 
 exports[`renders empty state 1`] = `
-<div>
-  <TrackingDomainsEmptyState />
-</div>
+<Page
+  empty={
+    Object {
+      "content": <p>
+        Track your email engagement events
+      </p>,
+      "image": "Generic",
+      "test": true,
+    }
+  }
+  primaryAction={
+    Object {
+      "Component": [Function],
+      "content": "Create Tracking Domain",
+      "to": "/account/tracking-domains/create",
+    }
+  }
+  title="Tracking Domains"
+>
+  <TrackingDomainsCollection
+    rows={Array []}
+  />
+</Page>
 `;
 
 exports[`renders errors when present 1`] = `
-<div>
-  <div>
-    <Page
-      empty={Object {}}
-      primaryAction={
-        Object {
-          "Component": [Function],
-          "content": "Create Tracking Domain",
-          "to": "/account/tracking-domains/create",
-        }
+<Page
+  empty={
+    Object {
+      "content": <p>
+        Track your email engagement events
+      </p>,
+      "image": "Generic",
+      "test": false,
+    }
+  }
+  primaryAction={
+    Object {
+      "Component": [Function],
+      "content": "Create Tracking Domain",
+      "to": "/account/tracking-domains/create",
+    }
+  }
+  title="Tracking Domains"
+>
+  <ApiErrorBanner
+    error={
+      Object {
+        "meta": Object {
+          "method": "GET",
+        },
+        "payload": Object {
+          "message": "Uh oh! It broke.",
+        },
       }
-      title="Tracking Domains"
-    />
-    <ApiErrorBanner
-      error={
-        Object {
-          "meta": Object {
-            "method": "GET",
-          },
-          "payload": Object {
-            "message": "Uh oh! It broke.",
-          },
-        }
-      }
-      reload={[Function]}
-    />
-  </div>
-</div>
+    }
+    reload={[Function]}
+  />
+</Page>
 `;

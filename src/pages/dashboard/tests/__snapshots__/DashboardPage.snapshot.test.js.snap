@@ -1,11 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-<div>
-  <Page
-    empty={Object {}}
-    title="Control Panel"
-  />
+<Page
+  empty={Object {}}
+  title="Control Panel"
+>
   <UpgradeBanner
     hasCC={true}
   />
@@ -36,15 +35,14 @@ exports[`renders correctly 1`] = `
       }
     }
   />
-</div>
+</Page>
 `;
 
 exports[`renders correctly when user is not verified 1`] = `
-<div>
-  <Page
-    empty={Object {}}
-    title="Control Panel"
-  />
+<Page
+  empty={Object {}}
+  title="Control Panel"
+>
   <EmailBanner
     handleResend={[Function]}
     sendingStatus={null}
@@ -76,5 +74,5 @@ exports[`renders correctly when user is not verified 1`] = `
       }
     }
   />
-</div>
+</Page>
 `;

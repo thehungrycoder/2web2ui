@@ -41,14 +41,13 @@ export class CreatePage extends React.Component {
     }
 
     return (
-      <div>
-        <Page title="Create API Key" breadcrumbAction={breadcrumbAction} />
+      <Page title="Create API Key" breadcrumbAction={breadcrumbAction}>
         <Panel>
           <Panel.Section>
             <ApiKeyForm onSubmit={this.onSubmit} />
           </Panel.Section>
         </Panel>
-      </div>
+      </Page>
     );
   }
 }

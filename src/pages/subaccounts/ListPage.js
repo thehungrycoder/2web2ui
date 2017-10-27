@@ -23,21 +23,37 @@ export class ListPage extends Component {
     this.props.listSubaccounts({ force: true }); // force a refresh
   };
 
+  renderCollection() {
+    return (
+      <TableCollection
+        columns={columns}
+        getRowData={getRowData}
+        pagination={true}
+        rows={this.props.subaccounts}
+        filterBox={{
+          show: true,
+          exampleModifiers: ['name', 'id', 'status'],
+          itemToStringKeys: ['name', 'id']
+        }}
+      />
+    );
+  }
+
+  renderError() {
+    return (
+      <ApiErrorBanner
+        errorDetails={this.props.error.message}
+        message="Sorry, we ran into an error loading your Subaccounts"
+        reload={this.onReloadApiBanner}
+      />
+    );
+  }
+
   render() {
     const { error, loading, subaccounts } = this.props;
 
     if (loading) {
       return <Loading />;
-    }
-
-    if (error) {
-      return (
-        <ApiErrorBanner
-          errorDetails={this.props.error.message}
-          message="Sorry, we ran into an error loading your Subaccounts"
-          reload={this.onReloadApiBanner}
-        />
-      );
     }
 
     return (
@@ -46,26 +62,16 @@ export class ListPage extends Component {
         primaryAction={primaryAction}
         empty={{
           test: subaccounts.length === 0,
-          title: 'Subaccounts',
+          title: 'Manage your subaccounts',
           image: 'Users',
           content: <p>Subaccounts are a good way of managing external client accounts.</p>,
           secondaryAction: {
             content: 'Learn more',
             to: 'https://developers.sparkpost.com/api/subaccounts.html',
-            target: '_blank'
+            external: true
           }
         }}>
-        <TableCollection
-          columns={columns}
-          getRowData={getRowData}
-          pagination={true}
-          rows={subaccounts}
-          filterBox={{
-            show: true,
-            exampleModifiers: ['name', 'id', 'status'],
-            itemToStringKeys: ['name', 'id']
-          }}
-        />
+        { error ? this.renderError() : this.renderCollection() }
       </Page>
     );
   }

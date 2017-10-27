@@ -52,15 +52,23 @@ export class IpPoolsList extends Component {
       return <Loading />;
     }
 
+    const createAction = { content: 'Create IP Pool', Component: Link, to: '/account/ip-pools' }; // TODO redirect to create
+    const purchaseAction = { content: 'Purchase IPs', Component: Link, to: '/account/billing' };
+
     return (
-      <div>
-        <Page
-          primaryAction={{ content: 'Create IP Pool', Component: Link, to: '/account/ip-pools' }}
-          title={'IP Pools'}
-        />
-        {error && this.renderError()}
-        {!error && this.renderCollection()}
-      </div>
+      <Page
+        primaryAction={createAction}
+        title={'IP Pools'}
+        empty={{
+          test: false, // TODO check purchased IPs
+          title: 'Boost your deliverability',
+          image: 'Setup',
+          content: <p>Purchase dedicated IPs to manage your IP Pools</p>,
+          secondaryAction: createAction,
+          primaryAction: purchaseAction
+        }}>
+        { error ? this.renderError() : this.renderCollection() }
+      </Page>
     );
   }
 }
