@@ -91,12 +91,12 @@ Before jumping into writing code, here are a few conventions you should be aware
 
 We have two types of internal docs: general and directory-based. You'll find general docs like testing guides and general redux patterns, etc. in [our top level docs folder](./docs), but component directories will often have their own README.md files or docs folders (similar to tests) where individual docs related to those specific components can be found.
 
-- [Access Control]('./docs/access-control.md')
-- [Redux Form]('./docs/redux-form.md')
-- [Redux]('./docs/redux-redux.md')
+- [Access Control](./docs/access-control.md)
+- [Redux Form](./docs/redux-form.md)
+- [Redux](./docs/redux-redux.md)
 
 Components:
-- [Collection]('./src/components/collection/docs/Collection.md')
-- [PlanPicker]('./src/components/planPicker/readme.md')
+- [Collection](./src/components/collection/docs/Collection.md)
+- [PlanPicker](./src/components/planPicker/readme.md)
 
 ![](https://media0.giphy.com/media/5y1LH29N3k556/giphy.gif)
