@@ -5,7 +5,6 @@ import { Field, reduxForm } from 'redux-form';
 import { Button, Select } from '@sparkpost/matchbox';
 
 import { TableCollection } from 'src/components';
-import { getPool } from 'src/actions/ipPools';
 import { required } from 'src/helpers/validation';
 import { TextFieldWrapper } from 'src/components';
 
@@ -27,13 +26,16 @@ export class PoolForm extends Component {
   }
 
   renderCollection() {
-    const { ips = []} = this.props.pool;
     const getRowDataFunc = this.getRowData.bind(this);
+
+    if (this.props.isNew || !this.props.ips) {
+      return null;
+    }
 
     return (
       <TableCollection
         columns={columns}
-        rows={ips}
+        rows={this.props.ips}
         getRowData={getRowDataFunc}
         pagination={false}
       />
@@ -43,7 +45,7 @@ export class PoolForm extends Component {
   render() {
     const { isNew } = this.props;
 
-    const { handleSubmit, submitSucceeded, submitting, pristine } = this.props;
+    const { handleSubmit, submitting, pristine } = this.props;
     const submitText = isNew ? 'Create IP Pool' : 'Update IP Pool';
 
     return (
@@ -57,29 +59,21 @@ export class PoolForm extends Component {
 
         { this.renderCollection() }
 
-
         <Button submit primary disabled={submitting || pristine}>
-          {submitText}
+          {submitting ? 'Saving' : submitText}
         </Button>
-        {submitting && !submitSucceeded && <div>Loading&hellip;</div>}
       </form>
     );
   }
 }
 
-const mapStateToProps = ({ form, ipPools }) => {
-  const pool = ipPools.pool || {};
-  return {
-    theForm: form,
-    pool: pool, //TODO need to figure out how to access from initialValues and get rid of this
-    initialValues: pool
-  };
-};
+const PoolReduxForm = reduxForm({ form: 'poolForm' })(PoolForm);
 
-const formOptions = {
-  form: 'poolForm',
-  enableReinitialize: true
-};
+const mapStateToProps = ({ ipPools }, { isNew }) => ({
+  ips: ipPools.pool.ips,
+  initialValues: {
+    name: isNew ? null : ipPools.pool.name
+  }
+});
 
-// breaks if you do reduxForm first
-export default connect(mapStateToProps, { getPool })(reduxForm(formOptions)(PoolForm));
+export default connect(mapStateToProps)(PoolReduxForm);

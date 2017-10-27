@@ -21,14 +21,13 @@ export function createPool({ name }) {
   });
 }
 
-export function updatePool(data, params = {}) {
+export function updatePool(id, update) {
   return sparkpostApiRequest({
     type: 'UPDATE_IP_POOL',
     meta: {
       method: 'PUT',
-      url: `/ip-pools/${data.id}`,
-      data,
-      params: { ...params }
+      url: `/ip-pools/${id}`,
+      data: update
     }
   });
 }
@@ -43,7 +42,6 @@ export function deletePool(id) {
   });
 }
 
-
 export function getPool(id) {
   return sparkpostApiRequest({
     type: 'GET_IP_POOL',
@@ -53,5 +51,4 @@ export function getPool(id) {
     }
   });
 }
-
 

@@ -1,4 +1,7 @@
-const initialState = { list: [], listError: null };
+const initialState = {
+  list: [],
+  pool: {}
+};
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
@@ -15,13 +18,13 @@ export default (state = initialState, { type, payload }) => {
 
     //create pool
     case 'CREATE_IP_POOL_PENDING':
-      return { ...state, currentPool: { }, createError: null };
+      return { ...state, createError: null };
 
     case 'CREATE_IP_POOL_SUCCESS':
-      return { ...state, currentPool: { id: payload.id, name: payload.name }};
+      return { ...state, pool: payload };
 
     case 'CREATE_IP_POOL_FAIL':
-      return { ...state, currentPool: {}, createError: payload };
+      return { ...state, pool: {}, createError: payload };
 
     //update pool
     case 'UPDATE_IP_POOL_PENDING':
