@@ -7,7 +7,7 @@ import {
   TextFieldWrapper,
   CheckboxWrapper,
   RadioGroup,
-  PoolTypeaheadWrapper
+  SelectWrapper
 } from 'src/components/reduxFormWrappers';
 import ipValidator from '../helpers/ipValidator';
 import { required } from 'src/helpers/validation';
@@ -20,6 +20,11 @@ const grantsOptions = [
   { value: 'all', label: 'All' },
   { value: 'select', label: 'Select' }
 ];
+
+const ipPoolsSelectOptions = (ipPools) => (ipPools.map((pool) => ({
+  value: pool.id,
+  label: pool.name
+})));
 
 const keyBoxHelpText = (createApiKey) => createApiKey
     ? 'The key will only be shown once when created, so be sure to copy and save it somewhere safe.'
@@ -54,11 +59,11 @@ const apiKeyFields = (showGrants = false, grants, submitting) => (
   </div>
 );
 
-const ipPoolFields = (assingToPool, ipPools, submitting) => (
+const ipPoolFields = (ipPools, submitting) => (
   <Field
     name="ipPool"
-    component={PoolTypeaheadWrapper}
-    pools={ipPools}
+    component={SelectWrapper}
+    options={ipPoolsSelectOptions(ipPools)}
     label="IP Pool"
     disabled={submitting}
   />
@@ -75,8 +80,7 @@ export class SubaccountForm extends Component {
       // submitSucceeded,
       submitting,
       createApiKey,
-      ipPools,
-      assingToPool
+      ipPools
     } = this.props;
 
     const hasIpPools = !!ipPools.length;
@@ -101,19 +105,11 @@ export class SubaccountForm extends Component {
             helpText={ keyBoxHelpText(createApiKey) }
             disabled={submitting}
           />
-          { createApiKey && apiKeyFields(showGrants, grants) }
+          { createApiKey && apiKeyFields(showGrants, grants, submitting) }
         </Panel.Section>
         { hasIpPools &&
           <Panel.Section>
-            <Field
-              name="assingToPool"
-              component={CheckboxWrapper}
-              type="checkbox"
-              label="Assign to IP Pool"
-              helpText={ 'You can do this later' }
-              disabled={submitting}
-            />
-            { assingToPool && ipPoolFields(assingToPool, ipPools) }
+            { ipPoolFields(ipPools, submitting) }
           </Panel.Section>
         }
         <Panel.Section>
@@ -131,12 +127,12 @@ const valueSelector = formValueSelector(formName);
 const mapStateToProps = (state, props) => ({
   grants: getSubaccountGrants(state),
   createApiKey: valueSelector(state, 'createApiKey'),
-  assingToPool: valueSelector(state, 'assingToPool'),
   showGrants: valueSelector(state, 'grantsRadio') === 'select',
   ipPools: state.ipPools.list,
   initialValues: {
     grantsRadio: 'all',
-    createApiKey: true
+    createApiKey: true,
+    ipPool: 'default'
   }
 });
 

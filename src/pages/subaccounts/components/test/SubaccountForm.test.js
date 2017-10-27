@@ -32,7 +32,7 @@ test('has ip pools', () => {
 });
 
 test('ip pools checked ', () => {
-  wrapper.setProps({ assingToPool: true, ipPools: ['swimmin']});
+  wrapper.setProps({ ipPools: ['swimmin']});
   expect(wrapper).toMatchSnapshot();
 });
 

@@ -83,7 +83,6 @@ test('with ip pool', () => {
   const result = formatSubaccount(
     {
       name: 'pool account',
-      assingToPool: true,
       ipPool: {
         id: 'marketing_ip_pool',
         name: 'Marketing IP Pool'

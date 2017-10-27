@@ -131,10 +131,16 @@ exports[`has ip pools 1`] = `
   <Panel.Section>
     <Field
       component={[Function]}
-      helpText="You can do this later"
-      label="Assign to IP Pool"
-      name="assingToPool"
-      type="checkbox"
+      label="IP Pool"
+      name="ipPool"
+      options={
+        Array [
+          Object {
+            "label": undefined,
+            "value": undefined,
+          },
+        ]
+      }
     />
   </Panel.Section>
   <Panel.Section>
@@ -173,18 +179,14 @@ exports[`ip pools checked  1`] = `
   <Panel.Section>
     <Field
       component={[Function]}
-      helpText="You can do this later"
-      label="Assign to IP Pool"
-      name="assingToPool"
-      type="checkbox"
-    />
-    <Field
-      component={[Function]}
       label="IP Pool"
       name="ipPool"
-      pools={
+      options={
         Array [
-          "swimmin",
+          Object {
+            "label": undefined,
+            "value": undefined,
+          },
         ]
       }
     />
@@ -208,6 +210,7 @@ exports[`submits correctly 1`] = `
   <Panel.Section>
     <Field
       component={[Function]}
+      disabled={true}
       label="Name"
       name="name"
       validate={[Function]}
@@ -216,6 +219,7 @@ exports[`submits correctly 1`] = `
   <Panel.Section>
     <Field
       component={[Function]}
+      disabled={true}
       helpText="Every subaccount you create will need its own API key. You can create one later."
       label="Create API Key"
       name="createApiKey"
@@ -229,7 +233,7 @@ exports[`submits correctly 1`] = `
       size="default"
       submit={true}
     >
-      Create
+      Loading...
     </Button>
   </Panel.Section>
 </form>

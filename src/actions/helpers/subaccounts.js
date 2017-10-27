@@ -5,7 +5,7 @@ export function formatSubaccount(values, getState) {
   const {
     name,
     createApiKey,
-    assingToPool
+    ipPool
   } = values;
 
   const subaccount = { name };
@@ -34,8 +34,7 @@ export function formatSubaccount(values, getState) {
     subaccount.setup_api_key = false;
   }
 
-  if (assingToPool) {
-    const { ipPool } = values;
+  if (ipPool && ipPool.id !== 'default') {
     subaccount.ip_pool = ipPool.id;
   }
 
