@@ -185,6 +185,12 @@ export default [
     layout: App
   },
   {
+    path: '/account/tracking-domains/create',
+    component: trackingDomains.CreatePage,
+    condition: hasGrants('tracking_domains/manage'),
+    layout: App
+  },
+  {
     path: '/account/profile',
     component: ProfilePage,
     condition: hasGrants('users/self-manage'),
