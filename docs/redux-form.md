@@ -21,7 +21,6 @@ redux-form provides:
 
 In our app, you will find the reducer imported in `/src/reducers/index.js`  like so:
 ```js
-[...]
 import { reducer as reduxFormReducer } from 'redux-form';
 [...]
 export default combineReducers({
@@ -43,7 +42,7 @@ class MyForm extends Component {
   render() {
     return (
       <form onSubmit={this.props.handleSubmit}>
-        <Field name='firstNam' component={someComponent}/>
+        <Field name='firstName' component={someComponent}/>
         <button submit>Submit</button>
       </form>
     );
@@ -55,7 +54,9 @@ const formOptions = { form: 'my-form-name' };
 export default reduxForm(formOptions)(MyForm);
 ```
 
-* `handleSubmit` is a [redux-form function](https://redux-form.com/7.0.0/docs/api/props.md/#-code-handlesubmit-eventorsubmit-function-code-) passed through as a prop that either:
+**handleSubmit**
+
+`handleSubmit` is a [redux-form function](https://redux-form.com/7.0.0/docs/api/props.md/#-code-handlesubmit-eventorsubmit-function-code-) passed through as a prop that either:
 
 1) Calls your own `this.props.onSubmit` if provided in the parent component
 ```js
@@ -76,7 +77,9 @@ export default reduxForm(formOptions)(MyForm);
 <Page primaryAction={{ content: 'Action', onClick={this.props.handleSubmit(this.mySubmitFunc)} }} >
 ```
 
-* `Field` is a redux-form component through which you communicate with the state. **Every element on the form you want to have return a value to handleSubmit or change the state of the form has to be a Field** Field has the ability to behave like a regular `<input/>` tag, or you can pass any component to it via the `compoment` prop.
+**Field**
+
+`Field` is a redux-form component through which you communicate with the state. **Every element on the form you want to have return a value to handleSubmit or change the state of the form has to be a Field** Field has the ability to behave like a regular `<input/>` tag, or you can pass any component to it via the `compoment` prop.
 
 We have a most input types ready for use with redux-form in `src/components/reduxFormWrappers`.
 
