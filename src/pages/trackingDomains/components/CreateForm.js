@@ -10,7 +10,7 @@ const formOptions = {
   form: FORM_NAME
 };
 
-export class CreateTrackingDomainForm extends Component {
+export class CreateForm extends Component {
 
   render() {
     const { submitting, handleSubmit } = this.props;
@@ -38,4 +38,4 @@ export class CreateTrackingDomainForm extends Component {
   }
 }
 
-export default reduxForm(formOptions)(CreateTrackingDomainForm);
+export default reduxForm(formOptions)(CreateForm);
