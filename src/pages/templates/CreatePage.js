@@ -15,6 +15,7 @@ import { getTemplateById, cloneTemplate } from 'src/selectors/templates';
 import Form from './components/Form';
 import Editor from './components/Editor';
 import { Page, Grid } from '@sparkpost/matchbox';
+import { Loading } from 'src/components';
 
 const FORM_NAME = 'templateCreate';
 
@@ -29,27 +30,9 @@ class CreatePage extends Component {
   }
 
   componentDidMount() {
-    const { match, getDraft } = this.props;
-
-    getDraft(match.params.cloneFrom).catch((err) => err);
-  }
-
-  componentDidUpdate() {
-    if (!this.state.isDuplicating) {
-      return;
-    }
-
-    const { loading, template, showAlert } = this.props;
-
-    if (loading || !template) {
-      return;
-    }
-
-    const { draft = {}} = template;
-
-    if (!Object.keys(draft).length) {
-      this.setState({ redirectTo: '/templates/' }); // Redirect if no draft or published found
-      showAlert({ type: 'error', message: 'Could not find template' });
+    if (this.state.isDuplicating) {
+      const { match, getDraft } = this.props;
+      getDraft(match.params.cloneFrom).catch((err) => err);
     }
   }
 
@@ -64,10 +47,14 @@ class CreatePage extends Component {
   }
 
   render() {
-    const { id, handleSubmit, submitting, match } = this.props;
+    const { id, handleSubmit, submitting, match, loading } = this.props;
 
     if (this.state.shouldRedirect) {
       return <Redirect to={`/templates/edit/${id}`} />;
+    }
+
+    if (loading) {
+      return <Loading />;
     }
 
     const primaryAction = {
@@ -103,22 +90,18 @@ class CreatePage extends Component {
 
 const selector = formValueSelector(FORM_NAME);
 const mapStateToProps = (state, props) => {
-  const id = selector(state, 'id');
-  const template = getTemplateById(state, props.match.params.cloneFrom);
+  const stateToProps = {
+    id: selector(state, 'id'),
+    loading: state.templates.getLoading
+  };
 
-console.log(template); //eslint-disable-line
+  const template = getTemplateById(state, props.match.params.cloneFrom);
   if (_.get(props, 'match.params.cloneFrom') && !_.isEmpty(template.draft)) {
-    const drfatTemplate = cloneTemplate(template.draft);
-    return {
-      id: id,
-      loading: state.templates.getLoading,
-      initialValues: drfatTemplate
-    };
-  } else {
-    return {
-      id: id
-    };
+    const draftTemplate = cloneTemplate(template.draft);
+    stateToProps.initialValues = draftTemplate;
   }
+
+  return stateToProps;
 };
 
 const formOptions = {
