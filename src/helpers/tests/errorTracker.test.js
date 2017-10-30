@@ -1,4 +1,4 @@
-import ErrorTracker, { breadcrumbCallback, enrichData } from '../errorTracker';
+import ErrorTracker, { breadcrumbCallback, getEnricherOrDieTryin } from '../errorTracker';
 
 describe('.breadcrumbCallback', () => {
   test('returns false with blacklisted breadcrumb', () => {
@@ -11,9 +11,9 @@ describe('.breadcrumbCallback', () => {
   });
 });
 
-describe('.enrichData', () => {
+describe('.getEnricherOrDieTryin', () => {
   const getState = jest.fn();
-  const enrich = enrichData({ getState });
+  const enrich = getEnricherOrDieTryin({ getState });
 
   beforeEach(() => { getState.mockReset(); });
 

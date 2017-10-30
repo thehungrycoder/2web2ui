@@ -36,7 +36,7 @@ export function breadcrumbCallback(crumb) {
 }
 
 // Closure to safely enrich events with data from Redux store
-export function enrichData(store) {
+export function getEnricherOrDieTryin(store) {
   return function enrich(data) {
     const { currentUser } = store.getState();
     const user = _.pick(currentUser, ['access_level', 'customer', 'username']);
@@ -66,7 +66,7 @@ class ErrorTracker {
     const dsn = `https://${sentry.publicKey}@sentry.io/${sentry.projectId}`;
     const options = {
       breadcrumbCallback,
-      dataCallback: enrichData(store),
+      dataCallback: getEnricherOrDieTryin(store),
       environment,
       release,
       extra: { tenant }
