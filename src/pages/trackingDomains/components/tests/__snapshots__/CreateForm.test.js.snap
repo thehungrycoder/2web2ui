@@ -10,12 +10,19 @@ exports[`Component: Tracking Domains Create Form should render correctly when su
     <Panel.Section>
       <Field
         component={[Function]}
+        disabled={false}
         label="Domain Name"
         name="domain"
-        validate={[Function]}
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
       />
       <Field
         component={[Function]}
+        disabled={false}
         label="Assign to Subaccount"
         name="subaccount"
       />
@@ -42,12 +49,19 @@ exports[`Component: Tracking Domains Create Form should render correctly when su
     <Panel.Section>
       <Field
         component={[Function]}
+        disabled={true}
         label="Domain Name"
         name="domain"
-        validate={[Function]}
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
       />
       <Field
         component={[Function]}
+        disabled={true}
         label="Assign to Subaccount"
         name="subaccount"
       />
@@ -57,7 +71,7 @@ exports[`Component: Tracking Domains Create Form should render correctly when su
         size="default"
         submit={true}
       >
-        Add Tracking Domain
+        Submitting...
       </Button>
     </Panel.Section>
   </form>

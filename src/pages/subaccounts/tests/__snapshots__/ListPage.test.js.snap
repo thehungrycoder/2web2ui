@@ -13,7 +13,7 @@ exports[`renders correctly 1`] = `
         "external": true,
         "to": "https://developers.sparkpost.com/api/subaccounts.html",
       },
-      "test": false,
+      "show": false,
       "title": "Manage your subaccounts",
     }
   }
@@ -90,7 +90,7 @@ exports[`renders empty state 1`] = `
         "external": true,
         "to": "https://developers.sparkpost.com/api/subaccounts.html",
       },
-      "test": true,
+      "show": true,
       "title": "Manage your subaccounts",
     }
   }
@@ -145,7 +145,7 @@ exports[`renders errors when present 1`] = `
         "external": true,
         "to": "https://developers.sparkpost.com/api/subaccounts.html",
       },
-      "test": false,
+      "show": false,
       "title": "Manage your subaccounts",
     }
   }
