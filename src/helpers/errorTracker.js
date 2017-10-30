@@ -48,9 +48,6 @@ export function getEnricherOrDieTryin(store) {
 // The purpose of this helper is to provide a common interface for reporting errors
 // with the expectation that the current service will change in the future.
 class ErrorTracker {
-  constructor() {
-    this.service = Raven;
-  }
 
   /**
    * The service must be configured before it can be used
@@ -72,12 +69,12 @@ class ErrorTracker {
       extra: { tenant }
     };
 
-    this.service.config(dsn, options).install();
+    Raven.config(dsn, options).install();
   }
 
   // Record redux actions as breadcrumbs
   get middleware() {
-    return createRavenMiddleware(this.service);
+    return createRavenMiddleware(Raven);
   }
 
   /**
@@ -94,8 +91,8 @@ class ErrorTracker {
    */
   report(logger, error) {
     // Silently ignore if Sentry is not setup
-    if (!this.service.isSetup()) { return; }
-    this.service.captureException(error, { logger });
+    if (!Raven.isSetup()) { return; }
+    Raven.captureException(error, { logger });
   }
 }
 

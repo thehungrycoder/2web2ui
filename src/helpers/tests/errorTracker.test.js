@@ -1,4 +1,7 @@
 import ErrorTracker, { breadcrumbCallback, getEnricherOrDieTryin } from '../errorTracker';
+import * as mockRaven from 'raven-js';
+
+jest.mock('raven-js');
 
 describe('.breadcrumbCallback', () => {
   test('returns false with blacklisted breadcrumb', () => {
@@ -35,8 +38,8 @@ describe('.install', () => {
   const store = jest.fn();
 
   beforeEach(() => {
-    config = jest.spyOn(ErrorTracker.service, 'config').mockReturnThis();
-    install = jest.spyOn(ErrorTracker.service, 'install');
+    config = jest.spyOn(mockRaven, 'config').mockReturnThis();
+    install = jest.spyOn(mockRaven, 'install');
   });
 
   afterEach(() => {
@@ -60,8 +63,8 @@ describe('.report', () => {
   const error = new Error('Oh no!');
 
   beforeEach(() => {
-    captureException = jest.spyOn(ErrorTracker.service, 'captureException');
-    isSetup = jest.spyOn(ErrorTracker.service, 'isSetup');
+    captureException = jest.spyOn(mockRaven, 'captureException');
+    isSetup = jest.spyOn(mockRaven, 'isSetup');
   });
 
   afterEach(() => {
