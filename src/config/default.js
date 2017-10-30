@@ -27,6 +27,7 @@ const config = {
     supportEmail: 'support@sparkpost.com',
     billingEmail: 'billing@sparkpost.com'
   },
+  environment: 'development',
   metricsPrecisionMap: [
     { time: 60, value: '1min', format: 'ha' },
     { time: 60 * 2, value: '5min', format: 'ha' },
@@ -37,8 +38,13 @@ const config = {
     { time: 60 * 24 * 190, value: 'week', format: 'MMM Do' },
     { time: Infinity, value: 'month', format: 'MMM YY' }
   ],
+  release: process.env.REACT_APP_VERSION,
   sendingIps: {
     pricePerIp: 20.00
+  },
+  sentry: {
+    projectId: 232588,
+    publicKey: '63149b1565df4b7199db939a4410b47a'
   },
   showThingOnDash: true,
   showSummaryReport: true,
@@ -46,6 +52,7 @@ const config = {
     enabled: false,
     defaultMetrics: ['count_targeted', 'count_rendered', 'count_accepted', 'count_bounce']
   },
+  tenant: 'local',
   zuora: {
     baseUrl: 'https://rest.apisandbox.zuora.com/v1',
     timeout: 15000

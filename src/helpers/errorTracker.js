@@ -1,0 +1,102 @@
+import _ from 'lodash';
+import Raven from 'raven-js';
+import createRavenMiddleware from 'raven-for-redux';
+
+/**
+ * List of breadcrumbs to ignore to reduce noise
+ * @note Sentry has a 100 breadcrumb per event/error maximum
+ */
+const BLACKLIST = new Set([
+  '@@redux/INIT',
+  '@@redux-form/BLUR',
+  '@@redux-form/CHANGE',
+  '@@redux-form/DESTROY',
+  '@@redux-form/FOCUS',
+  '@@redux-form/REGISTER_FIELD',
+  '@@redux-form/TOUCH',
+  '@@redux-form/UPDATE_SYNC_ERRORS'
+]);
+
+/**
+ * Filter out blacklisted breadcrumbs
+ *
+ * @param {object} crumb
+ * @param {string} crumb.category - console, http, redux-action, xhr, etc.
+ * @param {string} crumb.message - error message, redux action type, etc.
+ * @param {number} crumb.timestamp - created at
+ * @see https://docs.sentry.io/clients/javascript/config
+ */
+export function breadcrumbCallback(crumb) {
+  if (BLACKLIST.has(crumb.message)) {
+    return false;
+  }
+
+  return crumb;
+}
+
+// Closure to safely enrich events with data from Redux store
+export function enrichData(store) {
+  return function enrich(data) {
+    const { currentUser } = store.getState();
+    const user = _.pick(currentUser, ['access_level', 'customer', 'username']);
+
+    return { ...data, user };
+  };
+}
+
+// The purpose of this helper is to provide a common interface for reporting errors
+// with the expectation that the current service will change in the future.
+class ErrorTracker {
+  constructor() {
+    this.service = Raven;
+  }
+
+  /**
+   * The service must be configured before it can be used
+   * @param {object} store - the Redux store for additional context
+   * @param {object}
+   */
+  install(config, store) {
+    const { environment, release, sentry, tenant } = config;
+
+    // Silently ignore installation if Sentry configuration is not provided
+    if (!sentry) { return; }
+
+    const dsn = `https://${sentry.publicKey}@sentry.io/${sentry.projectId}`;
+    const options = {
+      breadcrumbCallback,
+      dataCallback: enrichData(store),
+      environment,
+      release,
+      extra: { tenant }
+    };
+
+    this.service.config(dsn, options).install();
+  }
+
+  // Record redux actions as breadcrumbs
+  get middleware() {
+    return createRavenMiddleware(this.service);
+  }
+
+  /**
+   * Report an error
+   *
+   * @param {string} logger - simple description of where the error was caught
+   * @param {Error} error
+   * @example
+   *   try {
+   *     throw new Error('Oh no, save me!');
+   *   } catch(error) {
+   *     ErrorTracker.report('where-am-i', error);
+   *   }
+   */
+  report(logger, error) {
+    // Silently ignore if Sentry is not setup
+    if (!this.service.isSetup()) { return; }
+    this.service.captureException(error, { logger });
+  }
+}
+
+// Export a constructed instance to avoid the need to call `new` everywhere
+export default new ErrorTracker();
