@@ -99,7 +99,6 @@ export class SummaryPage extends Component {
   }
 
   render() {
-
     if (this.props.loading) {
       return <Loading />;
     }
@@ -108,12 +107,7 @@ export class SummaryPage extends Component {
       ? this.renderSummary()
       : <ManuallyBilledBanner account={this.props.account} />;
 
-    return (
-      <div>
-        <Page title='Billing'/>
-        { pageMarkup }
-      </div>
-    );
+    return <Page title='Billing'>{ pageMarkup }</Page>;
   }
 }
 

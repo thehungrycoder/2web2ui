@@ -105,9 +105,7 @@ class SummaryReportPage extends Component {
     const { scale, eventTime, link, metricsModal, shareModal } = this.state;
 
     return (
-      <div>
-        <Page title='Summary Report' />
-
+      <Page title='Summary Report'>
         <Filters refresh={this.handleRefresh} onShare={() => this.handleModalToggle('shareModal')} />
 
         <Panel>
@@ -138,7 +136,7 @@ class SummaryReportPage extends Component {
           open={metricsModal}
           onCancel={() => this.handleModalToggle('metricsModal')}
           onSubmit={this.handleMetricsApply} />
-      </div>
+      </Page>
     );
   }
 }

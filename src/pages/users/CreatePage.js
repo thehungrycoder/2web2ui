@@ -62,8 +62,7 @@ const CreatePage = (props) => {
   };
 
   return (
-    <div>
-      <Page title="Add User" breadcrumbAction={breadcrumbAction} />
+    <Page title="Add User" breadcrumbAction={breadcrumbAction}>
       <Panel>
         <Panel.Section>
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -81,7 +80,7 @@ const CreatePage = (props) => {
             </form>
         </Panel.Section>
       </Panel>
-    </div>
+    </Page>
   );
 };
 

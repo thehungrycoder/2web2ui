@@ -71,12 +71,10 @@ export class ApiKeysDetailsPage extends Component {
     }
 
     return (
-      <div>
-        <Page
-          title={apiKey.label}
-          breadcrumbAction={breadcrumbAction}
-          secondaryActions={this.secondaryActions}
-        />
+      <Page
+        title={apiKey.label}
+        breadcrumbAction={breadcrumbAction}
+        secondaryActions={this.secondaryActions}>
         <Panel>
           <Panel.Section>
             <ApiKeyForm apiKey={apiKey} onSubmit={this.onSubmit} />
@@ -89,7 +87,7 @@ export class ApiKeysDetailsPage extends Component {
           handleToggle={this.onToggleDelete}
           handleDelete={this.onDelete}
         />
-      </div>
+      </Page>
     );
   }
 }
