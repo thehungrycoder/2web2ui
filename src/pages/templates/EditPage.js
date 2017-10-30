@@ -107,7 +107,7 @@ class EditPage extends Component {
         disabled: submitting
       },
       { content: 'Delete', onClick: () => this.handleDeleteModalToggle() },
-      { content: 'Duplicate', disabled: true },
+      { content: 'Duplicate', to: `/templates/create/${match.params.id}/duplicate` },
       { content: 'Preview & Send', disabled: true }
     ];
 
@@ -158,7 +158,7 @@ class EditPage extends Component {
 }
 
 const mapStateToProps = (state, props) => {
-  const template = getTemplateById(state, props);
+  const template = getTemplateById(state, props.match.params.id);
   return {
     loading: state.templates.getLoading,
     template,
