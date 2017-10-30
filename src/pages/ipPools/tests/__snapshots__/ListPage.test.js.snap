@@ -18,7 +18,7 @@ exports[`IP Pools List Page should render the list page correctly 1`] = `
         "content": "Create IP Pool",
         "to": "/account/ip-pools",
       },
-      "test": false,
+      "show": false,
       "title": "Boost your deliverability",
     }
   }
@@ -97,7 +97,7 @@ exports[`IP Pools List Page should show alert upon error 1`] = `
         "content": "Create IP Pool",
         "to": "/account/ip-pools",
       },
-      "test": false,
+      "show": false,
       "title": "Boost your deliverability",
     }
   }

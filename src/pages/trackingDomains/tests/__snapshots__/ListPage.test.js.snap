@@ -8,7 +8,7 @@ exports[`renders correctly 1`] = `
         Track your email engagement events
       </p>,
       "image": "Generic",
-      "test": false,
+      "show": false,
     }
   }
   primaryAction={
@@ -65,7 +65,7 @@ exports[`renders empty state 1`] = `
         Track your email engagement events
       </p>,
       "image": "Generic",
-      "test": true,
+      "show": true,
     }
   }
   primaryAction={
@@ -91,7 +91,7 @@ exports[`renders errors when present 1`] = `
         Track your email engagement events
       </p>,
       "image": "Generic",
-      "test": false,
+      "show": false,
     }
   }
   primaryAction={
