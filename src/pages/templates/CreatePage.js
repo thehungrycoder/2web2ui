@@ -19,20 +19,20 @@ import { Loading } from 'src/components';
 
 const FORM_NAME = 'templateCreate';
 
-class CreatePage extends Component {
+export class CreatePage extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       shouldRedirect: false,
-      isDuplicating: !!props.match.params.cloneFrom
+      isDuplicating: !!props.match.params.id
     };
   }
 
   componentDidMount() {
     if (this.state.isDuplicating) {
       const { match, getDraft } = this.props;
-      getDraft(match.params.cloneFrom).catch((err) => err);
+      getDraft(match.params.id).catch((err) => err);
     }
   }
 
@@ -47,7 +47,7 @@ class CreatePage extends Component {
   }
 
   render() {
-    const { id, handleSubmit, submitting, match, loading } = this.props;
+    const { id, handleSubmit, submitting, loading } = this.props;
 
     if (this.state.shouldRedirect) {
       return <Redirect to={`/templates/edit/${id}`} />;
@@ -73,7 +73,7 @@ class CreatePage extends Component {
       <Page
         primaryAction={primaryAction}
         breadcrumbAction={backAction}
-        title= { match.params.cloneFrom ? 'Duplicate Template' : 'New Template' }>
+        title= { this.state.isDuplicating ? 'Duplicate Template' : 'New Template' }>
 
         <Grid>
           <Grid.Column xs={12} lg={4}>
@@ -95,8 +95,8 @@ const mapStateToProps = (state, props) => {
     loading: state.templates.getLoading
   };
 
-  const template = getTemplateById(state, props.match.params.cloneFrom);
-  if (_.get(props, 'match.params.cloneFrom') && !_.isEmpty(template.draft)) {
+  const template = getTemplateById(state, props.match.params.id);
+  if (_.get(props, 'match.params.id') && !_.isEmpty(template.draft)) {
     const draftTemplate = cloneTemplate(template.draft);
     stateToProps.initialValues = draftTemplate;
   }
