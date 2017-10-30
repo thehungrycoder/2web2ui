@@ -125,6 +125,12 @@ export default [
     layout: App
   },
   {
+    path: '/templates/create/:cloneFrom/duplicate',
+    component: templates.CreatePage,
+    condition: hasGrants('templates/modify'),
+    layout: App
+  },
+  {
     path: '/templates/edit/:id',
     component: templates.EditPage,
     condition: hasGrants('templates/modify'),
