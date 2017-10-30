@@ -34,7 +34,8 @@ describe('.getEnricherOrDieTryin', () => {
 });
 
 describe('.install', () => {
-  let config, install;
+  let config;
+  let install;
   const store = jest.fn();
 
   beforeEach(() => {
@@ -59,7 +60,8 @@ describe('.install', () => {
 });
 
 describe('.report', () => {
-  let captureException, isSetup;
+  let captureException;
+  let isSetup;
   const error = new Error('Oh no!');
 
   beforeEach(() => {
