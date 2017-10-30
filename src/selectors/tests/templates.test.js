@@ -1,4 +1,4 @@
-import { getTemplateById } from '../templates';
+import { getTemplateById, cloneTemplate } from '../templates';
 
 describe('Templates by id Selector', () => {
   const store = {
@@ -12,12 +12,24 @@ describe('Templates by id Selector', () => {
   };
 
   it('returns template', () => {
-    const props = { match: { params: { id: 'Ape' }}};
-    expect(getTemplateById(store, props)).toMatchSnapshot();
+    expect(getTemplateById(store, 'Ape')).toMatchSnapshot();
   });
 
   it('returns empty draft and published', () => {
-    const props = { match: { params: { id: 'Nope' }}};
-    expect(getTemplateById(store, props)).toMatchSnapshot();
+    expect(getTemplateById(store, 'Nope')).toMatchSnapshot(); 
   });
 });
+
+describe('cloneTemplate', () => {
+  const template = {
+    name: 'Test Template',
+    id: 'test-template',
+    published: false,
+    content: {}
+  };
+
+  it('clones template', () => {
+      expect(cloneTemplate(template)).toMatchSnapshot();
+  });
+});
+
