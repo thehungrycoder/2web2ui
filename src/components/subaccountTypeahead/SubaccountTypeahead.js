@@ -29,7 +29,7 @@ export class SubaccountTypeahead extends Component {
     clearSelection,
     isOpen
   }) => {
-    const { name, subaccounts } = this.props;
+    const { name, subaccounts, disabled } = this.props;
 
     const matches = sortMatch(
       subaccounts,
@@ -49,7 +49,8 @@ export class SubaccountTypeahead extends Component {
 
     const textFieldProps = getInputProps({
       connectRight: selectedItem && this.renderClearButton(clearSelection),
-      disabled: !!selectedItem,
+      readOnly: !!selectedItem,
+      disabled,
       id: name,
       label: 'Subaccount',
       name,

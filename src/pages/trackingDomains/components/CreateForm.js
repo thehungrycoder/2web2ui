@@ -2,13 +2,8 @@ import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { Panel, Button } from '@sparkpost/matchbox';
 import { TextFieldWrapper } from 'src/components';
-import { required } from 'src/helpers/validation';
+import { required, domain } from 'src/helpers/validation';
 import { SubaccountTypeaheadWrapper } from 'src/components/reduxFormWrappers';
-
-export const FORM_NAME = 'createTrackingDomain';
-const formOptions = {
-  form: FORM_NAME
-};
 
 export class CreateForm extends Component {
 
@@ -23,19 +18,25 @@ export class CreateForm extends Component {
               component={TextFieldWrapper}
               label='Domain Name'
               name='domain'
-              validate={required}
+              validate={[required, domain]}
+              disabled={submitting}
             />
             <Field
               component={SubaccountTypeaheadWrapper}
               label='Assign to Subaccount'
               name='subaccount'
+              disabled={submitting}
             />
-            <Button submit primary={true} disabled={submitting}>Add Tracking Domain</Button>
+            <Button submit primary={true} disabled={submitting}>{submitting ? 'Submitting...' : 'Add Tracking Domain'}</Button>
           </Panel.Section>
         </form>
       </Panel>
     );
   }
 }
+
+const formOptions = {
+  form: 'createTrackingDomain'
+};
 
 export default reduxForm(formOptions)(CreateForm);
