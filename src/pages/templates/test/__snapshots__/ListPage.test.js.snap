@@ -8,7 +8,7 @@ exports[`renders correctly 1`] = `
         Build, test, preview and send your transmissions.
       </p>,
       "image": "Templates",
-      "test": false,
+      "show": false,
       "title": "Manage your email templates",
     }
   }
@@ -83,7 +83,7 @@ exports[`renders empty state 1`] = `
         Build, test, preview and send your transmissions.
       </p>,
       "image": "Templates",
-      "test": true,
+      "show": true,
       "title": "Manage your email templates",
     }
   }
@@ -158,7 +158,7 @@ exports[`renders errors when present 1`] = `
         Build, test, preview and send your transmissions.
       </p>,
       "image": "Templates",
-      "test": false,
+      "show": false,
       "title": "Manage your email templates",
     }
   }
