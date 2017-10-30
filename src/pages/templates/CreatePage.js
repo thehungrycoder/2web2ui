@@ -34,27 +34,31 @@ class CreatePage extends Component {
     getDraft(match.params.cloneFrom).catch((err) => err);
   }
 
-  // componentDidUpdate() {
-  //   const { loading, template, showAlert } = this.props;
+  componentDidUpdate() {
+    if (!this.state.isDuplicating) {
+      return;
+    }
 
-  //   if (loading || !template) {
-  //     return;
-  //   }
+    const { loading, template, showAlert } = this.props;
 
-  //   const { draft = {}} = template;
+    if (loading || !template) {
+      return;
+    }
 
-  //   if (!Object.keys(draft).length) {
-  //     this.setState({ redirectTo: '/templates/' }); // Redirect if no draft or published found
-  //     showAlert({ type: 'error', message: 'Could not find template' });
-  //   }
-  // }
+    const { draft = {}} = template;
+
+    if (!Object.keys(draft).length) {
+      this.setState({ redirectTo: '/templates/' }); // Redirect if no draft or published found
+      showAlert({ type: 'error', message: 'Could not find template' });
+    }
+  }
 
   handleCreate(values) {
     const { create, showAlert } = this.props;
     return create(values)
       .then(() => this.setState({ shouldRedirect: true }))
       .catch((err) => {
-        const details = err.response.data.errors[0].description || err.message;
+        const details = _.get(err, 'response.data.errors[0].description') || err.message;
         return showAlert({ type: 'error', message: 'Could not create template', details: details });
       });
   }
