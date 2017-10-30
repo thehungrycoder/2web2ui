@@ -68,7 +68,7 @@ export class ListPage extends Component {
         title='Recipient Lists'
         primaryAction={primaryAction}
         empty={{
-          test: recipientLists.length === 0,
+          show: recipientLists.length === 0,
           image: 'Users',
           content: <p>Manage your recipient lists</p>,
           secondaryAction: {

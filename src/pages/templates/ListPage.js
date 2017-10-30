@@ -53,7 +53,7 @@ export class ListPage extends Component {
         primaryAction={primaryAction}
         title='Templates'
         empty={{
-          test: count === 0,
+          show: count === 0,
           image: 'Templates',
           title: 'Manage your email templates',
           content: <p>Build, test, preview and send your transmissions.</p>

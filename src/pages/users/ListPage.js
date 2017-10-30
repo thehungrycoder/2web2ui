@@ -17,7 +17,7 @@ const DEFAULT_STATE = {
 };
 
 const primaryAction = {
-  content: 'Add User',
+  content: 'Invite User',
   Component: Link,
   to: '/account/users/create'
 };
@@ -116,14 +116,22 @@ export class ListPage extends Component {
   }
 
   render() {
-    const { loading, error } = this.props;
+    const { loading, error, users } = this.props;
 
     if (loading) {
       return <Loading />;
     }
 
     return (
-      <Page primaryAction={primaryAction} title="Users">
+      <Page
+        primaryAction={primaryAction}
+        title="Users"
+        empty={{
+          show: users.length === 1,
+          title: 'Invite Your Team to SparkPost',
+          image: 'Users',
+          content: <p>Manage your team's accounts and roles.</p>
+        }}>
         { error ? this.renderError() : this.renderPage() }
       </Page>
     );

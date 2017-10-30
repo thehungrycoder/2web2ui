@@ -61,7 +61,7 @@ export class ListPage extends Component {
         title='Subaccounts'
         primaryAction={primaryAction}
         empty={{
-          test: subaccounts.length === 0,
+          show: subaccounts.length === 0,
           title: 'Manage your subaccounts',
           image: 'Users',
           content: <p>Subaccounts are a good way of managing external client accounts.</p>,

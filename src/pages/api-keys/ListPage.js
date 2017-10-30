@@ -83,7 +83,7 @@ export class ListPage extends Component {
 
     return (
       <Page primaryAction={primaryAction} title='API Keys' empty={{
-        test: count === 0,
+        show: count === 0,
         image: 'Setup',
         content: <p>Create an API key you can use to access our REST or SMTP API services.</p>,
         secondaryAction: {

@@ -46,7 +46,7 @@ export class ListPage extends Component {
         title='Tracking Domains'
         primaryAction={primaryAction}
         empty={{
-          test: trackingDomains.length === 0,
+          show: trackingDomains.length === 0,
           content: <p>Track your email engagement events</p>,
           image: 'Generic'
         }}>

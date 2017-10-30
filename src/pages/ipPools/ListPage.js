@@ -46,7 +46,7 @@ export class IpPoolsList extends Component {
   }
 
   render() {
-    const { loading, error } = this.props;
+    const { loading, error, ipPools } = this.props;
 
     if (loading) {
       return <Loading />;
@@ -58,9 +58,9 @@ export class IpPoolsList extends Component {
     return (
       <Page
         primaryAction={createAction}
-        title={'IP Pools'}
+        title='IP Pools'
         empty={{
-          test: false, // TODO check purchased IPs
+          show: ipPools.length === 1 && ipPools[0].ips === 0,
           title: 'Boost your deliverability',
           image: 'Setup',
           content: <p>Purchase dedicated IPs to manage your IP Pools</p>,

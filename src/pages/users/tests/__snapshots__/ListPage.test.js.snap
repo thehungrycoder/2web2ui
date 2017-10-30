@@ -2,11 +2,20 @@
 
 exports[`Users list page renders error banner, table, and hidden modal 1`] = `
 <Page
-  empty={Object {}}
+  empty={
+    Object {
+      "content": <p>
+        Manage your team's accounts and roles.
+      </p>,
+      "image": "Users",
+      "test": false,
+      "title": "Invite Your Team to SparkPost",
+    }
+  }
   primaryAction={
     Object {
       "Component": [Function],
-      "content": "Add User",
+      "content": "Invite User",
       "to": "/account/users/create",
     }
   }
@@ -22,11 +31,20 @@ exports[`Users list page renders error banner, table, and hidden modal 1`] = `
 
 exports[`Users list page renders table and hidden modal 1`] = `
 <Page
-  empty={Object {}}
+  empty={
+    Object {
+      "content": <p>
+        Manage your team's accounts and roles.
+      </p>,
+      "image": "Users",
+      "test": false,
+      "title": "Invite Your Team to SparkPost",
+    }
+  }
   primaryAction={
     Object {
       "Component": [Function],
-      "content": "Add User",
+      "content": "Invite User",
       "to": "/account/users/create",
     }
   }
