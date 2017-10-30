@@ -1,124 +1,98 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`TrackingDomainsCollection no subaccounts 1`] = `
-<div>
-  <Page
-    empty={Object {}}
-    primaryAction={
+<TableCollection
+  columns={
+    Array [
+      "Domain",
+      "Status",
+    ]
+  }
+  filterBox={
+    Object {
+      "exampleModifiers": Array [
+        "domain",
+        "status",
+      ],
+      "itemToStringKeys": Array [
+        "domain",
+        "subaccount_id",
+      ],
+      "show": true,
+    }
+  }
+  getRowData={[Function]}
+  pagination={true}
+  rows={
+    Array [
       Object {
-        "Component": [Function],
-        "content": "Create Tracking Domain",
-        "to": "/account/tracking-domains/create",
-      }
-    }
-    title="Tracking Domains"
-  />
-  <TableCollection
-    columns={
-      Array [
-        "Domain",
-        "Status",
-      ]
-    }
-    filterBox={
+        "default": false,
+        "domain": "all.verified.com",
+        "status": Object {
+          "cname_status": "valid",
+          "compliance_status": "valid",
+          "verified": true,
+        },
+      },
       Object {
-        "exampleModifiers": Array [
-          "domain",
-          "status",
-        ],
-        "itemToStringKeys": Array [
-          "domain",
-          "subaccount_id",
-        ],
-        "show": true,
-      }
-    }
-    getRowData={[Function]}
-    pagination={true}
-    rows={
-      Array [
-        Object {
-          "default": false,
-          "domain": "all.verified.com",
-          "status": Object {
-            "cname_status": "valid",
-            "compliance_status": "valid",
-            "verified": true,
-          },
+        "default": false,
+        "domain": "all.unverified.com",
+        "status": Object {
+          "cname_status": "unverified",
+          "compliance_status": "unverified",
+          "verified": false,
         },
-        Object {
-          "default": false,
-          "domain": "all.unverified.com",
-          "status": Object {
-            "cname_status": "unverified",
-            "compliance_status": "unverified",
-            "verified": false,
-          },
-        },
-      ]
-    }
-  />
-</div>
+      },
+    ]
+  }
+/>
 `;
 
 exports[`TrackingDomainsCollection subaccounts 1`] = `
-<div>
-  <Page
-    empty={Object {}}
-    primaryAction={
+<TableCollection
+  columns={
+    Array [
+      "Domain",
+      "Status",
+      "Subaccount",
+    ]
+  }
+  filterBox={
+    Object {
+      "exampleModifiers": Array [
+        "domain",
+        "status",
+      ],
+      "itemToStringKeys": Array [
+        "domain",
+        "subaccount_id",
+      ],
+      "show": true,
+    }
+  }
+  getRowData={[Function]}
+  pagination={true}
+  rows={
+    Array [
       Object {
-        "Component": [Function],
-        "content": "Create Tracking Domain",
-        "to": "/account/tracking-domains/create",
-      }
-    }
-    title="Tracking Domains"
-  />
-  <TableCollection
-    columns={
-      Array [
-        "Domain",
-        "Status",
-        "Subaccount",
-      ]
-    }
-    filterBox={
+        "default": false,
+        "domain": "all.verified.com",
+        "status": Object {
+          "cname_status": "valid",
+          "compliance_status": "valid",
+          "verified": true,
+        },
+      },
       Object {
-        "exampleModifiers": Array [
-          "domain",
-          "status",
-        ],
-        "itemToStringKeys": Array [
-          "domain",
-          "subaccount_id",
-        ],
-        "show": true,
-      }
-    }
-    getRowData={[Function]}
-    pagination={true}
-    rows={
-      Array [
-        Object {
-          "default": false,
-          "domain": "all.verified.com",
-          "status": Object {
-            "cname_status": "valid",
-            "compliance_status": "valid",
-            "verified": true,
-          },
+        "default": false,
+        "domain": "all.unverified.com",
+        "status": Object {
+          "cname_status": "unverified",
+          "compliance_status": "unverified",
+          "verified": false,
         },
-        Object {
-          "default": false,
-          "domain": "all.unverified.com",
-          "status": Object {
-            "cname_status": "unverified",
-            "compliance_status": "unverified",
-            "verified": false,
-          },
-        },
-      ]
-    }
-  />
-</div>
+      },
+    ]
+  }
+/>
 `;

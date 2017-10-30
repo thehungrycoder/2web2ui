@@ -23,8 +23,12 @@ class CreatePage extends Component {
       .then(() => this.setState({ shouldRedirect: true }));
   }
 
-  renderPageHeader() {
-    const { handleSubmit, submitting } = this.props;
+  render() {
+    const { id, handleSubmit, submitting } = this.props;
+
+    if (this.state.shouldRedirect) {
+      return <Redirect to={`/templates/edit/${id}`} />;
+    }
 
     const primaryAction = {
       content: 'Save Template',
@@ -42,21 +46,7 @@ class CreatePage extends Component {
       <Page
         primaryAction={primaryAction}
         breadcrumbAction={backAction}
-        title='New Template'
-      />
-    );
-  }
-
-  render() {
-    const { id } = this.props;
-
-    if (this.state.shouldRedirect) {
-      return <Redirect to={`/templates/edit/${id}`} />;
-    }
-
-    return (
-      <div>
-        { this.renderPageHeader() }
+        title='New Template' >
         <Grid>
           <Grid.Column xs={12} lg={4}>
             <Form newTemplate={true} name={FORM_NAME} />
@@ -65,7 +55,7 @@ class CreatePage extends Component {
             <Editor name={FORM_NAME} />
           </Grid.Column>
         </Grid>
-      </div>
+      </Page>
     );
   }
 }

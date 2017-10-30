@@ -24,12 +24,11 @@ export class ChangePlanPage extends Component {
     }
 
     return (
-      <div>
-        <Page breadcrumbAction={{ content: 'Back to billing', to: '/account/billing', Component: Link }}/>
+      <Page breadcrumbAction={{ content: 'Back to billing', to: '/account/billing', Component: Link }}>
         <PendingPlanBanner account={this.props.account} />
         <SuspendedBanner account={this.props.account}/>
         { this.props.canChangePlan && <ChangePlan /> }
-      </div>
+      </Page>
     );
   }
 }

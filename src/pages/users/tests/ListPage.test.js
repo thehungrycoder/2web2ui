@@ -17,6 +17,7 @@ const TEST_CASES = {
       message: 'Uh oh! It broke.' // renders as details
     },
     listUsers: jest.fn(),
+    users: [],
     loading: false
   }
 };

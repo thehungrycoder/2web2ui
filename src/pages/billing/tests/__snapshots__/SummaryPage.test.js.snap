@@ -1,11 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Page: SummaryPage should handle modal toggle 1`] = `
-<div>
-  <Page
-    empty={Object {}}
-    title="Billing"
-  />
+<Page
+  empty={Object {}}
+  title="Billing"
+>
   <div>
     <Component
       account={
@@ -50,15 +49,14 @@ exports[`Page: SummaryPage should handle modal toggle 1`] = `
       />
     </Modal>
   </div>
-</div>
+</Page>
 `;
 
 exports[`Page: SummaryPage should not render billing and ips if on free plan 1`] = `
-<div>
-  <Page
-    empty={Object {}}
-    title="Billing"
-  />
+<Page
+  empty={Object {}}
+  title="Billing"
+>
   <div>
     <Component
       account={
@@ -114,15 +112,14 @@ exports[`Page: SummaryPage should not render billing and ips if on free plan 1`]
       />
     </Modal>
   </div>
-</div>
+</Page>
 `;
 
 exports[`Page: SummaryPage should render banner when manually billed 1`] = `
-<div>
-  <Page
-    empty={Object {}}
-    title="Billing"
-  />
+<Page
+  empty={Object {}}
+  title="Billing"
+>
   <ManuallyBilledBanner
     account={
       Object {
@@ -132,15 +129,14 @@ exports[`Page: SummaryPage should render banner when manually billed 1`] = `
       }
     }
   />
-</div>
+</Page>
 `;
 
 exports[`Page: SummaryPage should render billing summary if on paid plan 1`] = `
-<div>
-  <Page
-    empty={Object {}}
-    title="Billing"
-  />
+<Page
+  empty={Object {}}
+  title="Billing"
+>
   <div>
     <Component
       account={
@@ -252,15 +248,14 @@ exports[`Page: SummaryPage should render billing summary if on paid plan 1`] = `
       />
     </Modal>
   </div>
-</div>
+</Page>
 `;
 
 exports[`Page: SummaryPage should render upgrade on free plan 1`] = `
-<div>
-  <Page
-    empty={Object {}}
-    title="Billing"
-  />
+<Page
+  empty={Object {}}
+  title="Billing"
+>
   <div>
     <Component
       account={
@@ -316,5 +311,5 @@ exports[`Page: SummaryPage should render upgrade on free plan 1`] = `
       />
     </Modal>
   </div>
-</div>
+</Page>
 `;

@@ -1,18 +1,36 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`IP Pools List Page should render the list page correctly 1`] = `
-<div>
-  <Page
-    empty={Object {}}
-    primaryAction={
-      Object {
+<Page
+  empty={
+    Object {
+      "content": <p>
+        Purchase dedicated IPs to manage your IP Pools
+      </p>,
+      "image": "Setup",
+      "primaryAction": Object {
+        "Component": [Function],
+        "content": "Purchase IPs",
+        "to": "/account/billing",
+      },
+      "secondaryAction": Object {
         "Component": [Function],
         "content": "Create IP Pool",
         "to": "/account/ip-pools",
-      }
+      },
+      "test": false,
+      "title": "Boost your deliverability",
     }
-    title="IP Pools"
-  />
+  }
+  primaryAction={
+    Object {
+      "Component": [Function],
+      "content": "Create IP Pool",
+      "to": "/account/ip-pools",
+    }
+  }
+  title="IP Pools"
+>
   <TableCollection
     columns={
       Array [
@@ -58,26 +76,44 @@ exports[`IP Pools List Page should render the list page correctly 1`] = `
       ]
     }
   />
-</div>
+</Page>
 `;
 
 exports[`IP Pools List Page should show alert upon error 1`] = `
-<div>
-  <Page
-    empty={Object {}}
-    primaryAction={
-      Object {
+<Page
+  empty={
+    Object {
+      "content": <p>
+        Purchase dedicated IPs to manage your IP Pools
+      </p>,
+      "image": "Setup",
+      "primaryAction": Object {
+        "Component": [Function],
+        "content": "Purchase IPs",
+        "to": "/account/billing",
+      },
+      "secondaryAction": Object {
         "Component": [Function],
         "content": "Create IP Pool",
         "to": "/account/ip-pools",
-      }
+      },
+      "test": false,
+      "title": "Boost your deliverability",
     }
-    title="IP Pools"
-  />
+  }
+  primaryAction={
+    Object {
+      "Component": [Function],
+      "content": "Create IP Pool",
+      "to": "/account/ip-pools",
+    }
+  }
+  title="IP Pools"
+>
   <ApiErrorBanner
     errorDetails="Uh oh! It broke."
     message="Sorry, we seem to have had some trouble loading your ip pools."
     reload={[Function]}
   />
-</div>
+</Page>
 `;

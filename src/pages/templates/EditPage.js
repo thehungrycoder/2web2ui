@@ -76,7 +76,7 @@ class EditPage extends Component {
     }
   }
 
-  renderPageHeader() {
+  getPageProps() {
     const {
       handleSubmit,
       template,
@@ -117,14 +117,12 @@ class EditPage extends Component {
       to: '/templates'
     };
 
-    return (
-      <Page
-        primaryAction={primaryAction}
-        secondaryActions={secondaryActions}
-        breadcrumbAction={backAction}
-        title={`${match.params.id} (Draft)`}
-      />
-    );
+    return {
+      secondaryActions,
+      primaryAction,
+      backAction,
+      title: `${match.params.id} (Draft)`
+    };
   }
 
   render() {
@@ -139,8 +137,7 @@ class EditPage extends Component {
     }
 
     return (
-      <div>
-        { this.renderPageHeader() }
+      <Page {...this.getPageProps()}>
         <Grid>
           <Grid.Column xs={12} lg={4}>
             <Form name={FORM_NAME} />
@@ -155,7 +152,7 @@ class EditPage extends Component {
           text='Are you sure you want to delete this template? Both draft and published versions of this template will be deleted.'
           handleToggle={this.handleDeleteModalToggle}
           handleDelete={this.handleDelete} />
-      </div>
+      </Page>
     );
   }
 }
