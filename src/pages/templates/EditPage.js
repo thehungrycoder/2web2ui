@@ -107,7 +107,7 @@ class EditPage extends Component {
         disabled: submitting
       },
       { content: 'Delete', onClick: () => this.handleDeleteModalToggle() },
-      { content: 'Duplicate', to: `/templates/create/${match.params.id}` },
+      { content: 'Duplicate', Component: Link, to: `/templates/create/${match.params.id}` },
       { content: 'Preview & Send', disabled: true }
     ];
 
