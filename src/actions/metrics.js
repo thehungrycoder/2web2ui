@@ -54,3 +54,15 @@ export function getTimeSeries(params = {}) {
   const path = 'deliverability/time-series';
   return fetch({ path , params });
 }
+
+export function getBounceClassifications(params = {}) {
+  const type = 'FETCH_METRICS_BOUNCE_CLASSIFICATIONS';
+  const path = 'deliverability/bounce-classification';
+  return fetch({ type, path, params });
+}
+
+export function getBounceReasons(params = {}) {
+  const type = 'FETCH_METRICS_BOUNCE_REASONS';
+  const path = 'deliverability/bounce-reason';
+  return fetch({ type, path, params });
+}

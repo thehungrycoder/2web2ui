@@ -6,6 +6,7 @@ import account from './account';
 import apiKeys from './api-keys';
 import auth from './auth';
 import billing from './billing';
+import bounceReport from './bounceReport';
 import currentUser from './currentUser';
 import globalAlert from './globalAlert';
 import ipPools from './ipPools';
@@ -25,6 +26,7 @@ const appReducer = combineReducers({
   account,
   auth,
   billing,
+  bounceReport,
   apiKeys,
   currentUser,
   form,
