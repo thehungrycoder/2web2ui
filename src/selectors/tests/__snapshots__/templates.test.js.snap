@@ -12,3 +12,12 @@ Object {
   "name": "Ape",
 }
 `;
+
+exports[`cloneTemplate clones template 1`] = `
+Object {
+  "content": Object {},
+  "id": "test-template-copy",
+  "name": "Test Template Copy",
+  "published": false,
+}
+`;

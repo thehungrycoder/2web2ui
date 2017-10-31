@@ -107,11 +107,11 @@ class EditPage extends Component {
         disabled: submitting
       },
       { content: 'Delete', onClick: () => this.handleDeleteModalToggle() },
-      { content: 'Duplicate', disabled: true },
+      { content: 'Duplicate', Component: Link, to: `/templates/create/${match.params.id}` },
       { content: 'Preview & Send', disabled: true }
     ];
 
-    const backAction = {
+    const breadcrumbAction = {
       content: 'Templates',
       Component: Link,
       to: '/templates'
@@ -120,7 +120,7 @@ class EditPage extends Component {
     return {
       secondaryActions,
       primaryAction,
-      backAction,
+      breadcrumbAction,
       title: `${match.params.id} (Draft)`
     };
   }

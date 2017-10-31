@@ -119,7 +119,7 @@ export default [
     layout: App
   },
   {
-    path: '/templates/create',
+    path: '/templates/create/:id?',
     component: templates.CreatePage,
     condition: hasGrants('templates/modify'),
     layout: App
