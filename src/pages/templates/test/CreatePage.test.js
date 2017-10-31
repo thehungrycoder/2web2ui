@@ -9,6 +9,7 @@ describe('Template CreatePage', ()=> {
   beforeEach( () => {
     props = {
       id: null,
+      cloneId: null,
       loading: false,
       template: {
         draft: {}
@@ -38,6 +39,7 @@ describe('Template CreatePage', ()=> {
   describe('Duplicate Template', ()=> {
      beforeEach(()=> {
       props.match.params.id = 100;
+      props.cloneId = 101;
       wrapper = shallow(<CreatePage {...props} />);
     });
 
