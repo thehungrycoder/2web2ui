@@ -111,7 +111,7 @@ class EditPage extends Component {
       { content: 'Preview & Send', disabled: true }
     ];
 
-    const backAction = {
+    const breadcrumbAction = {
       content: 'Templates',
       Component: Link,
       to: '/templates'
@@ -120,7 +120,7 @@ class EditPage extends Component {
     return {
       secondaryActions,
       primaryAction,
-      backAction,
+      breadcrumbAction,
       title: `${match.params.id} (Draft)`
     };
   }
