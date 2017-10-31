@@ -9,7 +9,7 @@ import { create, getDraft } from 'src/actions/templates';
 import { showAlert } from 'src/actions/globalAlert';
 
 // Selectors
-import { getTemplateById, cloneTemplate } from 'src/selectors/templates';
+import { getClonedTemplate } from 'src/selectors/templates';
 
 // Components
 import Form from './components/Form';
@@ -24,15 +24,14 @@ export class CreatePage extends Component {
     super(props);
 
     this.state = {
-      shouldRedirect: false,
-      isDuplicating: !!props.match.params.id
+      shouldRedirect: false
     };
   }
 
   componentDidMount() {
-    if (this.state.isDuplicating) {
-      const { match, getDraft } = this.props;
-      getDraft(match.params.id).catch((err) => err);
+    if (this.props.cloneId) {
+      const { getDraft } = this.props;
+      return getDraft(this.props.cloneId);
     }
   }
 
@@ -89,20 +88,12 @@ export class CreatePage extends Component {
 }
 
 const selector = formValueSelector(FORM_NAME);
-const mapStateToProps = (state, props) => {
-  const stateToProps = {
-    id: selector(state, 'id'),
-    loading: state.templates.getLoading
-  };
-
-  const template = getTemplateById(state, props.match.params.id);
-  if (_.get(props, 'match.params.id') && !_.isEmpty(template.draft)) {
-    const draftTemplate = cloneTemplate(template.draft);
-    stateToProps.initialValues = draftTemplate;
-  }
-
-  return stateToProps;
-};
+const mapStateToProps = (state, props) => ({
+  id: selector(state, 'id'),
+  loading: state.templates.getLoading,
+  cloneId: props.match.params.id, //ID of the template it's cloning from
+  initialValues: getClonedTemplate(state, props)
+});
 
 const formOptions = {
   form: FORM_NAME,

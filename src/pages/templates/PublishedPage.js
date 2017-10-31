@@ -75,7 +75,7 @@ class PublishedPage extends Component {
 
 const mapStateToProps = (state, props) => ({
   loading: state.templates.getLoading,
-  initialValues: getTemplateById(state, props.match.id).published
+  initialValues: getTemplateById(state, props).published
 });
 
 const formOptions = {

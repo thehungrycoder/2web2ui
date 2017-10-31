@@ -158,7 +158,7 @@ class EditPage extends Component {
 }
 
 const mapStateToProps = (state, props) => {
-  const template = getTemplateById(state, props.match.params.id);
+  const template = getTemplateById(state, props);
   return {
     loading: state.templates.getLoading,
     template,
