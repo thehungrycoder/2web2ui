@@ -1,4 +1,5 @@
 import { snakeToCamel } from 'src/helpers/string';
+import color from 'color';
 import _ from 'lodash';
 
 // function formatArray(arr) {
@@ -11,15 +12,22 @@ import _ from 'lodash';
 //   return map;
 // }
 
+/**
+ * Formats keys of aggregate metrics
+ * eg: count_soft_bounce -> softBounce
+ */
 function formatAggregates(aggregates) {
   const map = {};
   _.each(aggregates, (value, key) => map[snakeToCamel(key.replace('count_', ''))] = value);
   return map;
 }
 
-function formatCategories(data) {
+/**
+ * Reshapes results of getBounceClassifications for the report page pie chart
+ */
+function reshapeCategories(data) {
   const categories = [];
-  const formatted = _.flatten(data).map((item) => formatSubcategory(item));
+  const formatted = _.flatten(data).map((item) => formatCategory(item));
 
   _.each(formatted, (item) => {
     const { category, ...rest } = item;
@@ -37,10 +45,13 @@ function formatCategories(data) {
     }
   });
 
-  return categories;
+  return _.orderBy(categories, ['count'], ['desc']);
 }
 
-function formatSubcategory(classification) {
+/**
+ * Formats category objects from getBounceClassifications
+ */
+function formatCategory(classification) {
   const { bounce_category_name, bounce_class_name, bounce_class_description, count_bounce } = classification;
   return {
     category: bounce_category_name,
@@ -50,7 +61,17 @@ function formatSubcategory(classification) {
   };
 }
 
+function generateColors(categories) {
+  const base = color('#DB2F3D');
+  return categories.map(({ subcategories, ...category }, i) => ({
+    ...category,
+    fill: base.rotate(12 * i).saturate(0.1 * i).string(),
+    subcategories: subcategories && generateColors(subcategories)
+  }));
+}
+
 export {
   formatAggregates,
-  formatCategories
+  reshapeCategories,
+  generateColors
 };

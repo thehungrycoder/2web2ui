@@ -6,7 +6,7 @@ import {
 } from 'src/actions/metrics';
 import { getQueryFromOptions, getMetricsFromKeys } from 'src/helpers/metrics';
 import { getRelativeDates } from 'src/helpers/date';
-import { formatCategories, formatArray, formatAggregates } from 'src/helpers/bounce';
+import { reshapeCategories, formatAggregates } from 'src/helpers/bounce';
 
 export function refresh(updates = {}) {
   return (dispatch, getState) => {
@@ -67,12 +67,11 @@ export function refresh(updates = {}) {
           dispatch(getBounceClassifications(bounceParams)),
           // dispatch(getBounceReasons(bounceParams)) This is for the table I think
         ]).then((classifications) => {
-          console.log(formatCategories(classifications))
           // refresh the chart with the new data
           dispatch({
             type: 'REFRESH_BOUNCE_REPORT',
             payload: {
-              categories: formatCategories(classifications),
+              categories: reshapeCategories(classifications),
               aggregates: formatAggregates(aggregates[0])
             }
           });
