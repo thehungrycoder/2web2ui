@@ -5,7 +5,10 @@ const { apiBase, apiRequestTimeout, zuora: zuoraConfig } = config;
 
 export const sparkpost = axios.create({
   baseURL: apiBase,
-  timeout: apiRequestTimeout
+  timeout: apiRequestTimeout,
+  headers: {
+    'x-sparky': config.authentication.headers.xsparky
+  }
 });
 
 export const zuora = axios.create({

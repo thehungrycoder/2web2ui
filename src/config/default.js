@@ -11,7 +11,8 @@ const config = {
     },
     headers: {
       Authorization: 'Basic bXN5c1dlYlVJOmZhODZkNzJlLTYyODctNDUxMy1hZTdmLWVjOGM4ZmEwZDc2Ng==',
-      'Content-Type': 'application/x-www-form-urlencoded'
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'xsparky': '1d24c3473dd52a2f4a53fb6808cf9a73'
     }
   },
   cardTypes: [
