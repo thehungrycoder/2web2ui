@@ -72,7 +72,7 @@ export class CreatePage extends Component {
       <Page
         primaryAction={primaryAction}
         breadcrumbAction={backAction}
-        title= { this.state.isDuplicating ? 'Duplicate Template' : 'New Template' }>
+        title= { this.props.cloneId ? 'Duplicate Template' : 'New Template' }>
 
         <Grid>
           <Grid.Column xs={12} lg={4}>
