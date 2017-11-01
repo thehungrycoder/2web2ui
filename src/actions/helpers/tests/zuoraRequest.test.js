@@ -1,8 +1,8 @@
 import zuoraRequest from '../zuoraRequest';
 import { createMockStore } from 'src/__testHelpers__/mockStore';
-import * as axiosMocks from '../axiosInstances';
+import * as axiosMocks from 'src/helpers/axiosInstances';
 
-jest.mock('../axiosInstances');
+jest.mock('src/helpers/axiosInstances'); 
 
 describe('Helper: Zuora API Request', () => {
 

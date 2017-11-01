@@ -1,6 +1,6 @@
 import requestHelperFactory from './requestHelperFactory';
 import _ from 'lodash';
-import { zuora as zuoraAxios } from './axiosInstances';
+import { zuora as zuoraAxios } from 'src/helpers/axiosInstances';
 
 export default requestHelperFactory({
   request: zuoraAxios,

@@ -1,12 +1,12 @@
 /* eslint max-lines: ["error", 202] */
 import sparkpostApiRequest, { refreshTokensUsed } from '../sparkpostApiRequest';
 import { createMockStore } from 'src/__testHelpers__/mockStore';
-import * as axiosMocks from '../axiosInstances';
+import * as axiosMocks from 'src/helpers/axiosInstances';
 import * as authMock from 'src/actions/auth';
 import * as globalAlertMock from 'src/actions/globalAlert';
 import * as httpHelpersMock from 'src/helpers/http';
 
-jest.mock('../axiosInstances');
+jest.mock('src/helpers/axiosInstances');
 jest.mock('src/actions/auth');
 jest.mock('src/actions/globalAlert');
 jest.mock('src/helpers/http');
