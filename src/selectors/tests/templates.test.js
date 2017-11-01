@@ -1,6 +1,6 @@
 import { getTemplateById, cloneTemplate, getClonedTemplate } from '../templates';
 
-describe('Templates selectors', ()=> {
+describe('Templates selectors', () => {
   const store = {
     templates: {
       byId: {
@@ -8,7 +8,7 @@ describe('Templates selectors', ()=> {
           draft: {
             name: 'Ape',
             id: 'ape',
-            published: false,
+            published: false
           },
           published: {
             name: 'Ape',
@@ -22,13 +22,13 @@ describe('Templates selectors', ()=> {
 
   describe('Templates by id Selector', () => {
     it('returns template', () => {
-      const props = { match: { params: { id: 'Ape' }}};		
+      const props = { match: { params: { id: 'Ape' }}};
       expect(getTemplateById(store, props)).toMatchSnapshot();
     });
 
     it('returns empty draft and published', () => {
-      const props = { match: { params: { id: 'Nope' }}};		
-      expect(getTemplateById(store, props)).toMatchSnapshot(); 
+      const props = { match: { params: { id: 'Nope' }}};
+      expect(getTemplateById(store, props)).toMatchSnapshot();
     });
   });
 
@@ -41,18 +41,18 @@ describe('Templates selectors', ()=> {
     };
 
     it('clones template', () => {
-        expect(cloneTemplate(template)).toMatchSnapshot();
+      expect(cloneTemplate(template)).toMatchSnapshot();
     });
   });
 
-  describe('getClonedTemplate', ()=> {
+  describe('getClonedTemplate', () => {
     it('should clone template if :id exist in state', () => {
-      const props = { match: { params: { id: 'ape' }}};		
+      const props = { match: { params: { id: 'ape' }}};
       expect(getClonedTemplate(store, props)).toMatchSnapshot();
     });
 
     it('should not clone template if :id does not exist', () => {
-      const props = { match: { params: { id: 'Nope' }}};		
+      const props = { match: { params: { id: 'Nope' }}};
       expect(getClonedTemplate(store, props)).toMatchSnapshot();
     });
   });
