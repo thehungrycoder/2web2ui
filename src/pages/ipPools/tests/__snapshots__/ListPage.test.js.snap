@@ -1,19 +1,36 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`IP Pools List Page should render the list page correctly 1`] = `
-<App
-  loading={false}
->
-  <t
-    primaryAction={
-      Object {
+<Page
+  empty={
+    Object {
+      "content": <p>
+        Purchase dedicated IPs to manage your IP Pools
+      </p>,
+      "image": "Setup",
+      "primaryAction": Object {
+        "Component": [Function],
+        "content": "Purchase IPs",
+        "to": "/account/billing",
+      },
+      "secondaryAction": Object {
         "Component": [Function],
         "content": "Create IP Pool",
         "to": "/account/ip-pools",
-      }
+      },
+      "show": false,
+      "title": "Boost your deliverability",
     }
-    title="IP Pools"
-  />
+  }
+  primaryAction={
+    Object {
+      "Component": [Function],
+      "content": "Create IP Pool",
+      "to": "/account/ip-pools",
+    }
+  }
+  title="IP Pools"
+>
   <TableCollection
     columns={
       Array [
@@ -21,6 +38,19 @@ exports[`IP Pools List Page should render the list page correctly 1`] = `
         "ID",
         "Number of IPs Assigned",
       ]
+    }
+    filterBox={
+      Object {
+        "exampleModifiers": Array [
+          "name",
+          "id",
+        ],
+        "itemToStringKeys": Array [
+          "name",
+          "id",
+        ],
+        "show": true,
+      }
     }
     getRowData={[Function]}
     pagination={true}
@@ -46,27 +76,44 @@ exports[`IP Pools List Page should render the list page correctly 1`] = `
       ]
     }
   />
-</App>
+</Page>
 `;
 
 exports[`IP Pools List Page should show alert upon error 1`] = `
-<App
-  loading={false}
->
-  <t
-    primaryAction={
-      Object {
+<Page
+  empty={
+    Object {
+      "content": <p>
+        Purchase dedicated IPs to manage your IP Pools
+      </p>,
+      "image": "Setup",
+      "primaryAction": Object {
+        "Component": [Function],
+        "content": "Purchase IPs",
+        "to": "/account/billing",
+      },
+      "secondaryAction": Object {
         "Component": [Function],
         "content": "Create IP Pool",
         "to": "/account/ip-pools",
-      }
+      },
+      "show": false,
+      "title": "Boost your deliverability",
     }
-    title="IP Pools"
-  />
+  }
+  primaryAction={
+    Object {
+      "Component": [Function],
+      "content": "Create IP Pool",
+      "to": "/account/ip-pools",
+    }
+  }
+  title="IP Pools"
+>
   <ApiErrorBanner
     errorDetails="Uh oh! It broke."
     message="Sorry, we seem to have had some trouble loading your ip pools."
     reload={[Function]}
   />
-</App>
+</Page>
 `;

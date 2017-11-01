@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-
-// Actions
 import { listPools } from 'src/actions/ipPools';
-
-// Components
-import { Layout, TableCollection, ApiErrorBanner } from 'src/components';
+import { Loading, TableCollection, ApiErrorBanner } from 'src/components';
 import { Page } from '@sparkpost/matchbox';
 
 const columns = ['Name', 'ID', 'Number of IPs Assigned'];
@@ -40,22 +36,39 @@ export class IpPoolsList extends Component {
         rows={ipPools}
         getRowData={getRowData}
         pagination={true}
+        filterBox={{
+          show: true,
+          exampleModifiers: ['name', 'id'],
+          itemToStringKeys: ['name', 'id']
+        }}
       />
     );
   }
 
   render() {
-    const { ipPools, loading, error } = this.props;
+    const { loading, error, ipPools } = this.props;
+
+    if (loading) {
+      return <Loading />;
+    }
+
+    const createAction = { content: 'Create IP Pool', Component: Link, to: '/account/ip-pools/create' };
+    const purchaseAction = { content: 'Purchase IPs', Component: Link, to: '/account/billing' };
 
     return (
-      <Layout.App loading={ipPools.length === 0 && loading}>
-        <Page
-          primaryAction={{ content: 'Create IP Pool', Component: Link, to: '/account/ip-pools/create' }}
-          title={'IP Pools'}
-        />
-        {error && this.renderError()}
-        {!error && this.renderCollection()}
-      </Layout.App>
+      <Page
+        primaryAction={createAction}
+        title='IP Pools'
+        empty={{
+          show: ipPools.length === 1 && ipPools[0].ips === 0,
+          title: 'Boost your deliverability',
+          image: 'Setup',
+          content: <p>Purchase dedicated IPs to manage your IP Pools</p>,
+          secondaryAction: createAction,
+          primaryAction: purchaseAction
+        }}>
+        { error ? this.renderError() : this.renderCollection() }
+      </Page>
     );
   }
 }

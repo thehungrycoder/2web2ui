@@ -4,12 +4,12 @@ import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 
 import { Page, Panel } from '@sparkpost/matchbox';
+import { Loading, DeleteModal } from 'src/components';
+import PoolForm from './components/PoolForm';
 
 import { showAlert } from 'src/actions/globalAlert';
+import { listPools, getPool, updatePool, deletePool } from 'src/actions/ipPools';
 
-import { getPool, updatePool, deletePool } from 'src/actions/ipPools';
-import { Layout, DeleteModal } from 'src/components';
-import PoolForm from './components/PoolForm';
 
 const breadcrumbAction = {
   content: 'IP Pools',
@@ -39,6 +39,7 @@ export class EditPage extends React.Component {
   }
 
   componentDidMount() {
+    this.props.listPools();
     this.props.getPool(this.id);
   }
 
@@ -49,6 +50,9 @@ export class EditPage extends React.Component {
   updatePool = (values) => {
     const { updatePool, showAlert, history } = this.props;
 
+    // Update each changed sending IP
+    // Do not update the default pool
+    // Update the pool itself
     return updatePool(this.id, values).then((res) => {
       showAlert({
         type: 'success',
@@ -80,9 +84,15 @@ export class EditPage extends React.Component {
 
   render() {
 
+    if (this.props.loading) {
+      return <Loading />;
+    }
+
     return (
-      <Layout.App loading={this.props.loading}>
-        <Page title="Edit IP Pool" breadcrumbAction={breadcrumbAction} secondaryActions={this.secondaryActions} />
+      <Page
+        title="Edit IP Pool"
+        breadcrumbAction={breadcrumbAction}
+        secondaryActions={this.secondaryActions}>
         <Panel>
           <Panel.Section>
             <PoolForm onSubmit={this.updatePool} isNew={false} />
@@ -95,18 +105,19 @@ export class EditPage extends React.Component {
           handleToggle={this.toggleDelete}
           handleDelete={this.deletePool}
         />
-      </Layout.App>
+      </Page>
     );
   }
 }
 
 const mapStateToProps = ({ ipPools }) => ({
-  loading: ipPools.getLoading
+  loading: ipPools.getLoading || ipPools.listLoading
 });
 
 export default withRouter(connect(mapStateToProps, {
   updatePool,
   deletePool,
   getPool,
+  listPools,
   showAlert
 })(EditPage));

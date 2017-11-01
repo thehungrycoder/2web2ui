@@ -1,11 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Page, Panel } from '@sparkpost/matchbox';
 
-import { createPool } from 'src/actions/ipPools';
-import Layout from 'src/components/layout/Layout';
+import { Loading, Page, Panel } from '@sparkpost/matchbox';
 import PoolForm from './components/PoolForm';
+
+import { showAlert } from 'src/actions/globalAlert';
+import { createPool } from 'src/actions/ipPools';
+
 
 const breadcrumbAction = {
   content: 'IP Pools',
@@ -14,28 +16,41 @@ const breadcrumbAction = {
 };
 
 export class CreatePage extends React.Component {
-  onSubmit = (values) => {
-    const { createPool, history } = this.props;
+  createPool = (values) => {
+    const { createPool, showAlert, history } = this.props;
 
     return createPool(values).then((res) => {
+      showAlert({
+        type: 'success',
+        message: `Created IP pool ${values.name}.`
+      });
       history.push('/account/ip-pools');
-    });
+    }).catch((err) => showAlert({
+      type: 'error',
+      message: 'Unable to create IP pool. Please try again!'
+    }));
   };
 
   render() {
+    if (this.props.loading) {
+      return <Loading />;
+    }
+
     return (
-      <Layout.App loading={this.props.loading}>
-        <Page title="Create IP Pool" breadcrumbAction={breadcrumbAction} />
+      <Page title="Create IP Pool" breadcrumbAction={breadcrumbAction}>
         <Panel>
           <Panel.Section>
-            <PoolForm onSubmit={this.onSubmit} isNew={true} />
+            <PoolForm onSubmit={this.createPool} isNew={true} />
           </Panel.Section>
         </Panel>
-      </Layout.App>
+      </Page>
     );
   }
 }
 
 const mapStateToProps = (state, props) => ({});
 
-export default connect(mapStateToProps, { createPool })(CreatePage);
+export default connect(mapStateToProps, {
+  createPool,
+  showAlert
+})(CreatePage);
