@@ -1,9 +1,8 @@
 import config from '../config';
-import _ from 'lodash';
 
 import { sparkpost as sparkpostRequest } from 'src/helpers/axiosInstances';
 
-const { apiRequestHeaders, authentication } = config;
+const { authentication } = config;
 
 // TODO handle timeout error better
 
@@ -12,7 +11,7 @@ function useRefreshToken(refreshToken) {
     method: 'POST',
     url: '/authenticate',
     data: `grant_type=refresh_token&refresh_token=${refreshToken}`,
-    headers: _.merge({}, apiRequestHeaders, authentication.headers)
+    headers: authentication.headers
   });
 }
 
