@@ -1,12 +1,9 @@
 import config from '../config';
-import axios from 'axios';
+import _ from 'lodash';
 
-const { apiBase, apiRequestTimeout, authentication } = config;
+import { sparkpost as sparkpostRequest } from 'src/helpers/axiosInstances';
 
-const sparkpostRequest = axios.create({
-  baseURL: apiBase,
-  timeout: apiRequestTimeout
-});
+const { apiRequestHeaders, authentication } = config;
 
 // TODO handle timeout error better
 
@@ -15,7 +12,7 @@ function useRefreshToken(refreshToken) {
     method: 'POST',
     url: '/authenticate',
     data: `grant_type=refresh_token&refresh_token=${refreshToken}`,
-    headers: authentication.headers
+    headers: _.merge({}, apiRequestHeaders, authentication.headers)
   });
 }
 
