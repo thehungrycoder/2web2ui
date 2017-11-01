@@ -96,7 +96,7 @@ export class PoolForm extends Component {
 
 const mapStateToProps = ({ ipPools }, { isNew }) => {
   const { pool, list } = ipPools;
-  const { ips = []} = pool;
+  const { ips = [], name = null } = pool;
 
   // Each IP has an IP pool drop down, named for that IP's hostname.
   // We set each select's initial value to the current pool id:
@@ -107,15 +107,7 @@ const mapStateToProps = ({ ipPools }, { isNew }) => {
     return vals;
   }, {});
 
-  return {
-    list: isNew ? [] : list,
-    pool: pool,
-    ips: ips,
-    initialValues: {
-      name: pool ? pool.name : null,
-      ...initialValues
-    }
-  };
+  return { list, pool, ips, initialValues: { name, ...initialValues }};
 };
 
 const PoolReduxForm = reduxForm({ form: 'poolForm' })(PoolForm);
