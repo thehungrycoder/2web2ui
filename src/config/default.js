@@ -27,7 +27,6 @@ const config = {
     supportEmail: 'support@sparkpost.com',
     billingEmail: 'billing@sparkpost.com'
   },
-  environment: 'development',
   metricsPrecisionMap: [
     { time: 60, value: '1min', format: 'ha' },
     { time: 60 * 2, value: '5min', format: 'ha' },
