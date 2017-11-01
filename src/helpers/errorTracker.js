@@ -55,7 +55,7 @@ class ErrorTracker {
    * @param {object}
    */
   install(config, store) {
-    const { environment, release, sentry, tenant } = config;
+    const { release, sentry, tenant } = config;
 
     // Silently ignore installation if Sentry configuration is not provided
     if (!sentry) { return; }
@@ -64,7 +64,6 @@ class ErrorTracker {
     const options = {
       breadcrumbCallback,
       dataCallback: getEnricherOrDieTryin(store),
-      environment,
       release,
       extra: { tenant }
     };
