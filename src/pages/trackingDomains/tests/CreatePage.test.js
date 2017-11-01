@@ -10,7 +10,7 @@ describe('Component: Tracking Domains Create Page', () => {
     const historyMock = {
       push: jest.fn()
     };
-    const showAlertMock = jest.fn()
+    const showAlertMock = jest.fn();
     const createTrackingDomainMock = jest.fn(() => Promise.resolve());
     const data = {};
     const instance = shallow(<TrackingDomainsCreatePage

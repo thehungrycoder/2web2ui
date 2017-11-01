@@ -3,10 +3,11 @@ import React from 'react';
 
 import { CreatePage } from '../CreatePage';
 
-let wrapper, props;
+let wrapper;
+let props;
 
-describe('Template CreatePage', ()=> {
-  beforeEach( () => {
+describe('Template CreatePage', () => {
+  beforeEach(() => {
     props = {
       id: null,
       cloneId: null,
@@ -22,12 +23,12 @@ describe('Template CreatePage', ()=> {
     };
   });
 
-  describe('New Template', ()=> {
-    beforeEach(()=> {
+  describe('New Template', () => {
+    beforeEach(() => {
       wrapper = shallow(<CreatePage {...props} />);
     });
 
-    it('should render correctly', ()=> { 
+    it('should render correctly', () => {
       expect(wrapper).toMatchSnapshot();
     });
 
@@ -35,15 +36,15 @@ describe('Template CreatePage', ()=> {
       expect(props.getDraft).not.toHaveBeenCalled();
     });
   });
- 
-  describe('Duplicate Template', ()=> {
-     beforeEach(()=> {
+
+  describe('Duplicate Template', () => {
+    beforeEach(() => {
       props.match.params.id = 100;
       props.cloneId = 101;
       wrapper = shallow(<CreatePage {...props} />);
     });
 
-    it('should render correctly', ()=> {
+    it('should render correctly', () => {
       expect(wrapper).toMatchSnapshot();
     });
 
@@ -51,5 +52,5 @@ describe('Template CreatePage', ()=> {
       expect(props.getDraft).toHaveBeenCalled();
     });
   });
- 
 });
+
