@@ -9,6 +9,10 @@ import PoolForm from './components/PoolForm';
 
 import { showAlert } from 'src/actions/globalAlert';
 import { listPools, getPool, updatePool, deletePool } from 'src/actions/ipPools';
+import { updateSendingIp } from 'src/actions/sendingIps';
+
+import { decodeIp } from './helpers/ipNames';
+import isDefaultPool from './helpers/defaultPool';
 
 
 const breadcrumbAction = {
@@ -28,7 +32,7 @@ export class EditPage extends React.Component {
     };
 
     this.secondaryActions = [];
-    if (this.id !== 'default') {
+    if (isDefaultPool(this.id)) {
       this.secondaryActions.push(
         {
           content: 'Delete',
@@ -48,22 +52,33 @@ export class EditPage extends React.Component {
   };
 
   updatePool = (values) => {
-    const { updatePool, showAlert, history } = this.props;
+    const { updateSendingIp, updatePool, showAlert, history } = this.props;
+
+    // Pick out the IPs those pool assignment is not the current pool ergo
+    // have been reassigned by the user.
+    const changedIpKeys = Object.keys(values).filter((key) =>
+      key !== 'name' && values[key] !== this.id);
 
     // Update each changed sending IP
-    // Do not update the default pool
-    // Update the pool itself
-    return updatePool(this.id, values).then((res) => {
-      showAlert({
-        type: 'success',
-        message: `Updated IP pool ${this.id}.`
-      });
-      history.push('/account/ip-pools');
-    })
-    .catch(() => showAlert({
-      type: 'error',
-      message: `Unable to update IP pool ${this.id}.`
-    }));
+    Promise.all(changedIpKeys.map((ipKey) =>
+      updateSendingIp(decodeIp(ipKey), values[ipKey])))
+      .then(() => {
+        // Update the pool itself
+        if (!isDefaultPool(this.id)) {
+          return updatePool(this.id, values);
+        }
+      })
+      .then((res) => {
+        showAlert({
+          type: 'success',
+          message: `Updated IP pool ${this.id}.`
+        });
+        history.push('/account/ip-pools');
+      })
+      .catch(() => showAlert({
+        type: 'error',
+        message: `Unable to update IP pool ${this.id}.`
+      }));
   };
 
   deletePool = () => {
@@ -119,5 +134,6 @@ export default withRouter(connect(mapStateToProps, {
   deletePool,
   getPool,
   listPools,
+  updateSendingIp,
   showAlert
 })(EditPage));

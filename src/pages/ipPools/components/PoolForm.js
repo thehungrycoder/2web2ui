@@ -9,9 +9,10 @@ import { TableCollection } from 'src/components';
 import { required } from 'src/helpers/validation';
 import { TextFieldWrapper } from 'src/components';
 
-const columns = ['Sending IP', 'Hostname', 'IP Pool'];
+import { encodeIp } from '../helpers/ipNames';
+import isDefaultPool from '../helpers/defaultPool';
 
-const safeIpId = (ip) => ip.hostname.replace(/\./g, '_');
+const columns = ['Sending IP', 'Hostname', 'IP Pool'];
 
 export class PoolForm extends Component {
   ipOptions = (pools) => pools.map((pool) => ({
@@ -20,7 +21,7 @@ export class PoolForm extends Component {
   }));
 
   poolSelect = (ip, pools, submitting) => (<Field
-    name={safeIpId(ip)}
+    name={encodeIp(ip.external_ip)}
     component={SelectWrapper}
     options={this.ipOptions(pools)}
     label="IP pool"
@@ -67,10 +68,10 @@ export class PoolForm extends Component {
   }
 
   render() {
-    const { isNew } = this.props;
-
-    const { handleSubmit, submitting, pristine } = this.props;
+    const { isNew, pool, handleSubmit, submitting, pristine } = this.props;
     const submitText = isNew ? 'Create IP Pool' : 'Update IP Pool';
+    const editingDefault = isDefaultPool(pool.id);
+    const helpText = editingDefault ? 'Sorry, you can\'t edit the default pool\'s name. Then it wouldn\'t be the default!' : '';
 
     return (
       <form onSubmit={handleSubmit}>
@@ -79,6 +80,8 @@ export class PoolForm extends Component {
           component={TextFieldWrapper}
           validate={required}
           label="Pool Name"
+          disabled={editingDefault}
+          helpText={helpText}
         />
 
         { this.renderCollection() }
@@ -93,25 +96,23 @@ export class PoolForm extends Component {
 
 const mapStateToProps = ({ ipPools }, { isNew }) => {
   const { pool, list } = ipPools;
-  const { ips } = pool;
-  let initialValues = {};
+  const { ips = []} = pool;
 
-  if (ips) {
-    // Each IP has an IP pool drop down, named using the IP's hostname.
-    // We set each select's initial value to the current pool id:
-    // { ip_1: 'My favorite pool', ... }
-    // The user can then reassign each IP to another pool.
-    initialValues = ips.reduce((vals, ip) => {
-      vals[safeIpId(ip)] = pool.id;
-      return vals;
-    }, {});
-  }
+  // Each IP has an IP pool drop down, named for that IP's hostname.
+  // We set each select's initial value to the current pool id:
+  // { ip_1: 'My favorite pool', ... }
+  // The user can then reassign each IP to another pool.
+  const initialValues = ips.reduce((vals, ip) => {
+    vals[encodeIp(ip.external_ip)] = pool.id;
+    return vals;
+  }, {});
 
   return {
     list: isNew ? [] : list,
+    pool: pool,
     ips: ips,
     initialValues: {
-      name: isNew ? null : pool.name,
+      name: pool ? pool.name : null,
       ...initialValues
     }
   };
