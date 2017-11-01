@@ -1,78 +1,78 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`DeleteModal Component should render - no props 1`] = `
-<t>
-  <t
+<Modal>
+  <Panel
     sectioned={true}
   >
     <p />
-    <t
+    <Button
       primary={true}
       size="default"
     >
       Delete
-    </t>
-    <t
+    </Button>
+    <Button
       size="default"
     >
       Cancel
-    </t>
-  </t>
-</t>
+    </Button>
+  </Panel>
+</Modal>
 `;
 
 exports[`DeleteModal Component should render closed with props 1`] = `
-<t
+<Modal
   open={false}
 >
-  <t
+  <Panel
     sectioned={true}
     title="NoobNoob"
   >
     <p>
       Got Damn
     </p>
-    <t
+    <Button
       onClick={[Function]}
       primary={true}
       size="default"
     >
       Delete
-    </t>
-    <t
+    </Button>
+    <Button
       onClick={[Function]}
       size="default"
     >
       Cancel
-    </t>
-  </t>
-</t>
+    </Button>
+  </Panel>
+</Modal>
 `;
 
 exports[`DeleteModal Component should render open with props 1`] = `
-<t
+<Modal
   open={true}
 >
-  <t
+  <Panel
     sectioned={true}
     title="NoobNoob"
   >
     <p>
       Got Damn
     </p>
-    <t
+    <Button
       onClick={[Function]}
       primary={true}
       size="default"
     >
       Delete
-    </t>
-    <t
+    </Button>
+    <Button
       onClick={[Function]}
       size="default"
     >
       Cancel
-    </t>
-  </t>
-</t>
+    </Button>
+  </Panel>
+</Modal>
 `;

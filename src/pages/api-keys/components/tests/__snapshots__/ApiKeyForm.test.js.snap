@@ -1,0 +1,162 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly - new and no subaccounts 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <Field
+    component={[Function]}
+    label="API Key Name"
+    name="label"
+    validate={[Function]}
+  />
+  <Field
+    component={[Function]}
+    name="grantsRadio"
+    options={
+      Array [
+        Object {
+          "label": "All",
+          "value": "all",
+        },
+        Object {
+          "label": "Select",
+          "value": "select",
+        },
+      ]
+    }
+    title="API Permissions"
+  />
+  <GrantsCheckboxes
+    grants={
+      Array [
+        "all grants",
+      ]
+    }
+  />
+  <Field
+    component={[Function]}
+    helpText="Leaving the field blank will allow access by valid API keys from any IP address."
+    label="Allowed IPs"
+    name="validIps"
+    placeholder="10.20.30.40, 10.20.30.0/24"
+    validate={[Function]}
+  />
+  <Button
+    primary={true}
+    size="default"
+    submit={true}
+  >
+    Create API Key
+  </Button>
+</form>
+`;
+
+exports[`renders correctly - update and subaccounts 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <Field
+    component={[Function]}
+    label="API Key Name"
+    name="label"
+    validate={[Function]}
+  />
+  <Field
+    component={[Function]}
+    name="subaccount"
+  />
+  <Field
+    component={[Function]}
+    name="grantsRadio"
+    options={
+      Array [
+        Object {
+          "label": "All",
+          "value": "all",
+        },
+        Object {
+          "label": "Select",
+          "value": "select",
+        },
+      ]
+    }
+    title="API Permissions"
+  />
+  <GrantsCheckboxes
+    grants={
+      Array [
+        "subaccount grants",
+      ]
+    }
+  />
+  <Field
+    component={[Function]}
+    helpText="Leaving the field blank will allow access by valid API keys from any IP address."
+    label="Allowed IPs"
+    name="validIps"
+    placeholder="10.20.30.40, 10.20.30.0/24"
+    validate={[Function]}
+  />
+  <Button
+    primary={true}
+    size="default"
+    submit={true}
+  >
+    Update API Key
+  </Button>
+</form>
+`;
+
+exports[`submits correctly 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <Field
+    component={[Function]}
+    label="API Key Name"
+    name="label"
+    validate={[Function]}
+  />
+  <Field
+    component={[Function]}
+    name="grantsRadio"
+    options={
+      Array [
+        Object {
+          "label": "All",
+          "value": "all",
+        },
+        Object {
+          "label": "Select",
+          "value": "select",
+        },
+      ]
+    }
+    title="API Permissions"
+  />
+  <GrantsCheckboxes
+    grants={
+      Array [
+        "all grants",
+      ]
+    }
+  />
+  <Field
+    component={[Function]}
+    helpText="Leaving the field blank will allow access by valid API keys from any IP address."
+    label="Allowed IPs"
+    name="validIps"
+    placeholder="10.20.30.40, 10.20.30.0/24"
+    validate={[Function]}
+  />
+  <Button
+    disabled={true}
+    primary={true}
+    size="default"
+    submit={true}
+  >
+    Loading...
+  </Button>
+</form>
+`;

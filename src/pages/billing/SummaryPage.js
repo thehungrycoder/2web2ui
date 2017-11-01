@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Layout } from 'src/components';
-import { Page, Panel, Modal, WindowEvent } from '@sparkpost/matchbox';
+import { Page, Panel, WindowEvent } from '@sparkpost/matchbox';
 
 import { fetch as fetchAccount, getPlans } from 'src/actions/account';
 import { shouldExposeCardSelector, canChangePlanSelector, currentPlanSelector, publicPlansSelector } from 'src/selectors/accountBillingInfo';
 
+import { Loading, Modal } from 'src/components';
 import { PremiumBanner, EnterpriseBanner, SuspendedBanner, ManuallyBilledBanner, PendingPlanBanner } from './components/Banners';
 import UpdatePayment from './forms/UpdatePayment';
 import UpdateContact from './forms/UpdateContact';
@@ -99,16 +99,15 @@ export class SummaryPage extends Component {
   }
 
   render() {
+    if (this.props.loading) {
+      return <Loading />;
+    }
+
     const pageMarkup = this.props.account.subscription.self_serve
       ? this.renderSummary()
       : <ManuallyBilledBanner account={this.props.account} />;
 
-    return (
-      <Layout.App loading={this.props.loading}>
-        <Page title='Billing'/>
-        { pageMarkup }
-      </Layout.App>
-    );
+    return <Page title='Billing'>{ pageMarkup }</Page>;
   }
 }
 

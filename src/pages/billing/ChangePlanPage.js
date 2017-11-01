@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { Layout } from 'src/components';
 import { Page } from '@sparkpost/matchbox';
-
+import { Loading } from 'src/components';
 import { PendingPlanBanner, SuspendedBanner } from './components/Banners';
 import ChangePlan from './forms/ChangePlan';
 
@@ -19,13 +18,17 @@ export class ChangePlanPage extends Component {
   }
 
   render() {
+
+    if (this.props.loading) {
+      return <Loading />;
+    }
+
     return (
-      <Layout.App loading={this.props.loading}>
-        <Page breadcrumbAction={{ content: 'Back to billing', to: '/account/billing', Component: Link }}/>
+      <Page breadcrumbAction={{ content: 'Back to billing', to: '/account/billing', Component: Link }}>
         <PendingPlanBanner account={this.props.account} />
         <SuspendedBanner account={this.props.account}/>
         { this.props.canChangePlan && <ChangePlan /> }
-      </Layout.App>
+      </Page>
     );
   }
 }

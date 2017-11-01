@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Page: SummaryPage should handle modal toggle 1`] = `
-<App>
-  <t
-    title="Billing"
-  />
+<Page
+  empty={Object {}}
+  title="Billing"
+>
   <div>
     <Component
       account={
@@ -24,7 +24,7 @@ exports[`Page: SummaryPage should handle modal toggle 1`] = `
         }
       }
     />
-    <t
+    <Panel
       accent={true}
       title="Plan Overview"
     >
@@ -34,29 +34,29 @@ exports[`Page: SummaryPage should handle modal toggle 1`] = `
           plan={Object {}}
         />
       </Panel.Section>
-    </t>
+    </Panel>
     <Component />
     <Component />
-    <t
+    <Modal
       open={true}
     >
-      <t
+      <WindowEvent
         event="keydown"
         handler={[Function]}
       />
       <Connect(ReduxForm)
         onCancel={[Function]}
       />
-    </t>
+    </Modal>
   </div>
-</App>
+</Page>
 `;
 
 exports[`Page: SummaryPage should not render billing and ips if on free plan 1`] = `
-<App>
-  <t
-    title="Billing"
-  />
+<Page
+  empty={Object {}}
+  title="Billing"
+>
   <div>
     <Component
       account={
@@ -76,7 +76,7 @@ exports[`Page: SummaryPage should not render billing and ips if on free plan 1`]
         }
       }
     />
-    <t
+    <Panel
       accent={true}
       title="Plan Overview"
     >
@@ -100,26 +100,26 @@ exports[`Page: SummaryPage should not render billing and ips if on free plan 1`]
           }
         />
       </Panel.Section>
-    </t>
+    </Panel>
     <Component />
     <Component />
-    <t
+    <Modal
       open={false}
     >
-      <t
+      <WindowEvent
         event="keydown"
         handler={[Function]}
       />
-    </t>
+    </Modal>
   </div>
-</App>
+</Page>
 `;
 
 exports[`Page: SummaryPage should render banner when manually billed 1`] = `
-<App>
-  <t
-    title="Billing"
-  />
+<Page
+  empty={Object {}}
+  title="Billing"
+>
   <ManuallyBilledBanner
     account={
       Object {
@@ -129,14 +129,14 @@ exports[`Page: SummaryPage should render banner when manually billed 1`] = `
       }
     }
   />
-</App>
+</Page>
 `;
 
 exports[`Page: SummaryPage should render billing summary if on paid plan 1`] = `
-<App>
-  <t
-    title="Billing"
-  />
+<Page
+  empty={Object {}}
+  title="Billing"
+>
   <div>
     <Component
       account={
@@ -156,7 +156,7 @@ exports[`Page: SummaryPage should render billing summary if on paid plan 1`] = `
         }
       }
     />
-    <t
+    <Panel
       accent={true}
       title="Plan Overview"
     >
@@ -198,8 +198,8 @@ exports[`Page: SummaryPage should render billing summary if on paid plan 1`] = `
           </h6>
         </SummarySection>
       </Panel.Section>
-    </t>
-    <t
+    </Panel>
+    <Panel
       title="Billing"
     >
       <Panel.Section
@@ -236,26 +236,26 @@ exports[`Page: SummaryPage should render billing summary if on paid plan 1`] = `
           <p />
         </SummarySection>
       </Panel.Section>
-    </t>
+    </Panel>
     <Component />
     <Component />
-    <t
+    <Modal
       open={false}
     >
-      <t
+      <WindowEvent
         event="keydown"
         handler={[Function]}
       />
-    </t>
+    </Modal>
   </div>
-</App>
+</Page>
 `;
 
 exports[`Page: SummaryPage should render upgrade on free plan 1`] = `
-<App>
-  <t
-    title="Billing"
-  />
+<Page
+  empty={Object {}}
+  title="Billing"
+>
   <div>
     <Component
       account={
@@ -275,7 +275,7 @@ exports[`Page: SummaryPage should render upgrade on free plan 1`] = `
         }
       }
     />
-    <t
+    <Panel
       accent={true}
       title="Plan Overview"
     >
@@ -299,17 +299,17 @@ exports[`Page: SummaryPage should render upgrade on free plan 1`] = `
           }
         />
       </Panel.Section>
-    </t>
+    </Panel>
     <Component />
     <Component />
-    <t
+    <Modal
       open={false}
     >
-      <t
+      <WindowEvent
         event="keydown"
         handler={[Function]}
       />
-    </t>
+    </Modal>
   </div>
-</App>
+</Page>
 `;

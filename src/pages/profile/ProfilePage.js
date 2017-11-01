@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { Layout } from 'src/components';
 import { Page, Panel, Table, TextField, Button } from '@sparkpost/matchbox';
 import NameForm from './NameForm';
 
@@ -14,22 +13,23 @@ export class ProfilePage extends Component {
     } = this.props.currentUser;
 
     return (
-      <Layout.App>
-        <Page title='Profile' />
+      <Page title='Profile'>
         <Panel>
           <Table>
-            <Table.Row>
-              <Table.HeaderCell>Account ID</Table.HeaderCell>
-              <Table.Cell>{ customer }</Table.Cell>
-            </Table.Row>
-            <Table.Row>
-              <Table.HeaderCell>Username</Table.HeaderCell>
-              <Table.Cell>{ username }</Table.Cell>
-            </Table.Row>
-            <Table.Row>
-              <Table.HeaderCell>Email Address</Table.HeaderCell>
-              <Table.Cell>{ email }</Table.Cell>
-            </Table.Row>
+            <tbody>
+              <Table.Row>
+                <Table.HeaderCell>Account ID</Table.HeaderCell>
+                <Table.Cell>{ customer }</Table.Cell>
+              </Table.Row>
+              <Table.Row>
+                <Table.HeaderCell>Username</Table.HeaderCell>
+                <Table.Cell>{ username }</Table.Cell>
+              </Table.Row>
+              <Table.Row>
+                <Table.HeaderCell>Email Address</Table.HeaderCell>
+                <Table.Cell>{ email }</Table.Cell>
+              </Table.Row>
+            </tbody>
           </Table>
         </Panel>
 
@@ -50,7 +50,7 @@ export class ProfilePage extends Component {
 
           <Button>Update Password</Button>
         </Panel>
-      </Layout.App>
+      </Page>
     );
   }
 }

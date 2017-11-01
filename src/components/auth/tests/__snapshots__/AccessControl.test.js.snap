@@ -8,9 +8,11 @@ exports[`Component: AccessControl should render correctly when access is granted
 
 exports[`Component: AccessControl should render correctly when no access and not redirecting 1`] = `""`;
 
-exports[`Component: AccessControl should render correctly when no access and redirecting 1`] = `
+exports[`Component: AccessControl should render correctly when no access and ready to redirect 1`] = `
 <Redirect
   push={false}
   to="/some/path"
 />
 `;
+
+exports[`Component: AccessControl should render correctly when no access but not ready to redirect 1`] = `<Component />`;

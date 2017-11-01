@@ -1,9 +1,24 @@
-import App from './App';
+import React from 'react';
+import { withRouter } from 'react-router-dom';
+import { matchPath } from 'react-router';
+import _ from 'lodash';
+
 import Form from './Form';
+import routes from 'src/config/routes';
 
-class Layout {
-  static App = App;
-  static Form = Form;
-}
+/**
+ * Returns layout component from routes config
+ */
+const Layout = ({ children, location }) => {
 
-export default Layout;
+  // matchPath uses the same matching that <Route> uses
+  const route = _.find(routes, (route) => matchPath(location.pathname, {
+    path: route.path,
+    exact: true,
+    strict: false
+  }));
+
+  return React.createElement((route && route.layout) || Form, {}, children);
+};
+
+export default withRouter(Layout);

@@ -1,94 +1,108 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Users list page renders error banner, table, and hidden modal 1`] = `
-<App
-  loading={false}
->
-  <t
-    primaryAction={
-      Object {
-        "Component": [Function],
-        "content": "Add User",
-        "to": "/account/users/create",
-      }
+<Page
+  empty={
+    Object {
+      "content": <p>
+        Manage your team's accounts and roles.
+      </p>,
+      "image": "Users",
+      "show": false,
+      "title": "Invite Your Team to SparkPost",
     }
-    title="Users"
-  />
+  }
+  primaryAction={
+    Object {
+      "Component": [Function],
+      "content": "Invite User",
+      "to": "/account/users/create",
+    }
+  }
+  title="Users"
+>
   <ApiErrorBanner
     errorDetails="Uh oh! It broke."
     message="Sorry, we seem to have had some trouble loading your users."
     reload={[Function]}
   />
-  <TableCollection
-    columns={
-      Array [
-        "Name",
-        "Role",
-        "Email",
-        "Last Login",
-        null,
-      ]
-    }
-    getRowData={[Function]}
-    pagination={true}
-  />
-  <DeleteModal
-    handleDelete={[Function]}
-    handleToggle={[Function]}
-    open={false}
-    text="Are you sure you want to delete undefined?"
-    title="Delete User"
-  />
-</App>
+</Page>
 `;
 
 exports[`Users list page renders table and hidden modal 1`] = `
-<App
-  loading={false}
+<Page
+  empty={
+    Object {
+      "content": <p>
+        Manage your team's accounts and roles.
+      </p>,
+      "image": "Users",
+      "show": false,
+      "title": "Invite Your Team to SparkPost",
+    }
+  }
+  primaryAction={
+    Object {
+      "Component": [Function],
+      "content": "Invite User",
+      "to": "/account/users/create",
+    }
+  }
+  title="Users"
 >
-  <t
-    primaryAction={
-      Object {
-        "Component": [Function],
-        "content": "Add User",
-        "to": "/account/users/create",
+  <div>
+    <TableCollection
+      columns={
+        Array [
+          "Name",
+          "Role",
+          "Email",
+          "Last Login",
+          null,
+        ]
       }
-    }
-    title="Users"
-  />
-  <TableCollection
-    columns={
-      Array [
-        "Name",
-        "Role",
-        "Email",
-        "Last Login",
-        null,
-      ]
-    }
-    getRowData={[Function]}
-    pagination={true}
-    rows={
-      Array [
+      filterBox={
         Object {
-          "access": "admin",
-          "email": "user1@test.com",
-          "name": "Test User 1",
-        },
-        Object {
-          "access": "admin",
-          "email": "user2@test.com",
-          "name": "Test User 2",
-        },
-      ]
-    }
-  />
-  <DeleteModal
-    handleDelete={[Function]}
-    handleToggle={[Function]}
-    open={false}
-    text="Are you sure you want to delete undefined?"
-    title="Delete User"
-  />
-</App>
+          "exampleModifiers": Array [
+            "name",
+            "email",
+            "role",
+          ],
+          "itemToStringKeys": Array [
+            "username",
+            "name",
+            "email",
+          ],
+          "keyMap": Object {
+            "role": "access",
+          },
+          "show": true,
+        }
+      }
+      getRowData={[Function]}
+      pagination={true}
+      rows={
+        Array [
+          Object {
+            "access": "admin",
+            "email": "user1@test.com",
+            "name": "Test User 1",
+          },
+          Object {
+            "access": "admin",
+            "email": "user2@test.com",
+            "name": "Test User 2",
+          },
+        ]
+      }
+    />
+    <DeleteModal
+      handleDelete={[Function]}
+      handleToggle={[Function]}
+      open={false}
+      text="Are you sure you want to delete undefined?"
+      title="Delete User"
+    />
+  </div>
+</Page>
 `;

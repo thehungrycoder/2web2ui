@@ -7,12 +7,12 @@ import { reduxForm } from 'redux-form';
 import { getPublished } from '../../actions/templates';
 
 // Selectors
-import { templateById } from 'src/selectors/templates';
+import { getTemplateById } from 'src/selectors/templates';
 
 // Components
-import { Layout } from 'src/components';
 import Form from './components/Form';
 import Editor from './components/Editor';
+import { Loading } from 'src/components';
 import { Page, Grid } from '@sparkpost/matchbox';
 
 const FORM_NAME = 'templatePublished';
@@ -27,7 +27,7 @@ class PublishedPage extends Component {
     getPublished(match.params.id);
   }
 
-  renderPageHeader() {
+  getPageProps() {
     const { match } = this.props;
 
     const secondaryActions = [
@@ -48,21 +48,18 @@ class PublishedPage extends Component {
       to: '/templates'
     };
 
-    return (
-      <Page
-        secondaryActions={secondaryActions}
-        breadcrumbAction={backAction}
-        title={`${match.params.id} (Published)`}
-      />
-    );
+    return { secondaryActions, backAction, title: `${match.params.id} (Published)` };
   }
 
   render() {
     const { loading } = this.props;
 
+    if (loading) {
+      return <Loading />;
+    }
+
     return (
-      <Layout.App loading={loading}>
-        { this.renderPageHeader() }
+      <Page {...this.getPageProps()}>
         <Grid>
           <Grid.Column xs={12} lg={4}>
             <Form name={FORM_NAME} published />
@@ -71,14 +68,14 @@ class PublishedPage extends Component {
             <Editor name={FORM_NAME} published />
           </Grid.Column>
         </Grid>
-      </Layout.App>
+      </Page>
     );
   }
 }
 
-const mapStateToProps = ({ templates }, { match }) => ({
-  loading: templates.getLoading,
-  initialValues: templateById(templates, match.params.id).published
+const mapStateToProps = (state, props) => ({
+  loading: state.templates.getLoading,
+  initialValues: getTemplateById(state, props).published
 });
 
 const formOptions = {

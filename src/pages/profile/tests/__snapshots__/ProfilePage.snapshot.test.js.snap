@@ -1,63 +1,65 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-<App>
-  <t
-    title="Profile"
-  />
-  <t>
-    <t>
-      <Table.Row>
-        <Table.HeaderCell>
-          Account ID
-        </Table.HeaderCell>
-        <Table.Cell>
-          12345
-        </Table.Cell>
-      </Table.Row>
-      <Table.Row>
-        <Table.HeaderCell>
-          Username
-        </Table.HeaderCell>
-        <Table.Cell>
-          Lord Stark
-        </Table.Cell>
-      </Table.Row>
-      <Table.Row>
-        <Table.HeaderCell>
-          Email Address
-        </Table.HeaderCell>
-        <Table.Cell>
-          ned.stark@winterfell.biz
-        </Table.Cell>
-      </Table.Row>
-    </t>
-  </t>
-  <t
+<Page
+  empty={Object {}}
+  title="Profile"
+>
+  <Panel>
+    <Table>
+      <tbody>
+        <Table.Row>
+          <Table.HeaderCell>
+            Account ID
+          </Table.HeaderCell>
+          <Table.Cell>
+            12345
+          </Table.Cell>
+        </Table.Row>
+        <Table.Row>
+          <Table.HeaderCell>
+            Username
+          </Table.HeaderCell>
+          <Table.Cell>
+            Lord Stark
+          </Table.Cell>
+        </Table.Row>
+        <Table.Row>
+          <Table.HeaderCell>
+            Email Address
+          </Table.HeaderCell>
+          <Table.Cell>
+            ned.stark@winterfell.biz
+          </Table.Cell>
+        </Table.Row>
+      </tbody>
+    </Table>
+  </Panel>
+  <Panel
     sectioned={true}
     title="Edit Profile"
   >
     <Connect(ReduxForm) />
-  </t>
-  <t
+  </Panel>
+  <Panel
     sectioned={true}
     title="Update Password"
   >
-    <t
+    <TextField
       id="currentPassword"
       label="Current Password"
       type="text"
     />
-    <t
+    <TextField
       id="newPassword"
       label="New Password"
       type="text"
     />
-    <t
+    <Button
       size="default"
     >
       Update Password
-    </t>
-  </t>
-</App>
+    </Button>
+  </Panel>
+</Page>
 `;

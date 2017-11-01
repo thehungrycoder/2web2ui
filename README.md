@@ -27,7 +27,7 @@ https://github.com/facebook/react-native/issues/9309#issuecomment-238966924
 A good comparison of React and Redux and how they relate to Angular is here:
 https://github.com/jasonrhodes/how-to-react
 
-If you're new to React, you should have a basic understanding of how it works before jumping into this project. Mainly, you should understand what `JSX` is, the difference between a functional/stateless and class component, and how `setState` works inside class components. 
+If you're new to React, you should have a basic understanding of how it works before jumping into this project. Mainly, you should understand what `JSX` is, the difference between a functional/stateless and class component, and how `setState` works inside class components.
 
 Here are some resources for learning basic React:
 
@@ -46,7 +46,7 @@ Good resources for learning Redux:
 Before jumping into writing code, here are a few conventions you should be aware of:
 
 1. We use ESLint to enforce automated linting. The config is extended from a few places and defined inside the package.json file, under the "eslintConfig" key (instead of using a root level .eslintrc file).
-    * To run our linting, you can run `npm run lint` or `npm run lint -- --fix` to run in "auto fix mode". 
+    * To run our linting, you can run `npm run lint` or `npm run lint -- --fix` to run in "auto fix mode".
     * Linting is run during the build process but NOT during tests (jest runs tests in watch mode)
     * We are always looking for ways to move things into automated linting instead of just having "conventions" listed later in this section.
     * We should consider looking at some combination of prettier and eslint at some point.
@@ -60,7 +60,7 @@ Before jumping into writing code, here are a few conventions you should be aware
 1. **Magic module resolution:** we use webpack tomfoolery and jest shenanigans to make our modules resolve relative to `src/`, so you can `import something from whatever/yeah` so long as there is a `src/whatever/yeah.js` file. And so on. You should prefer this style to relative imports unless the files are directly next to each other or are related to each other and no more than one directory away.
     * Note: we should change this to resolve relative to the root, and then ever import from `src/` e.g. `import something from 'src/whatever/yeah'` to limit the scope of possible node_modules conflicts. Will need to change all existing references and then edit Jest and Webpack configs.
 
-1. **Don't use lodash `_.chain`.** We use [babel-plugin-lodash](https://github.com/lodash/babel-plugin-lodash#limitations) to tree-shake our use of lodash so we only have to bundle methods we use, but `_.chain` breaks all of that. If you want to do something like chaining, you can use `flow` from `lodash/fp`, which is somewhat explained in [this article](https://medium.com/making-internets/why-using-chain-is-a-mistake-9bc1f80d51ba). 
+1. **Don't use lodash `_.chain`.** We use [babel-plugin-lodash](https://github.com/lodash/babel-plugin-lodash#limitations) to tree-shake our use of lodash so we only have to bundle methods we use, but `_.chain` breaks all of that. If you want to do something like chaining, you can use `flow` from `lodash/fp`, which is somewhat explained in [this article](https://medium.com/making-internets/why-using-chain-is-a-mistake-9bc1f80d51ba).
     * Note: use `flow` and not `compose` bc compose is backwards and weird. ;)
     * Other note: you can import directly from `lodash/fp` because of our babel transform. (e.g. `import { map, flow } from 'lodash/fp'`)
 
@@ -74,7 +74,7 @@ Before jumping into writing code, here are a few conventions you should be aware
     ```javascript
     // do this
     expect(fn).toHaveBeenCalledWith(arg1, arg2);
-    
+
     // not this
     expect(fn.mock.calls[0]).toEqual([arg1, arg2]);
     ```
@@ -83,12 +83,20 @@ Before jumping into writing code, here are a few conventions you should be aware
 
 * We use a good amount of enzyme for any kind of logic testing (simulating actions in a component) or for shallow rendering, usually so we can snapshot test something without testing all of its dependency components.
 
-* We believe in direct regular old unit testing wherever possible, mostly for helpers. In other words, if we don't have to involve react in a test, we don't. 
+* We believe in direct regular old unit testing wherever possible, mostly for helpers. In other words, if we don't have to involve react in a test, we don't.
 
 * We try not to unit test redux, i.e. no tests for connected components or for mapStateToProps functions etc., we mock connected state and actions and pull any mapStateToProps logic into selectors where they can be tested more easily. We do sometimes use redux-mock-store to test chains of dispatches, but in those cases we just end up snapshot testing the dispatch chain.
 
 ### Docs
 
 We have two types of internal docs: general and directory-based. You'll find general docs like testing guides and general redux patterns, etc. in [our top level docs folder](./docs), but component directories will often have their own README.md files or docs folders (similar to tests) where individual docs related to those specific components can be found.
+
+- [Access Control](./docs/access-control.md)
+- [Redux Form](./docs/redux-form.md)
+- [Redux](./docs/redux-redux.md)
+
+Components:
+- [Collection](./src/components/collection/docs/Collection.md)
+- [PlanPicker](./src/components/planPicker/readme.md)
 
 ![](https://media0.giphy.com/media/5y1LH29N3k556/giphy.gif)

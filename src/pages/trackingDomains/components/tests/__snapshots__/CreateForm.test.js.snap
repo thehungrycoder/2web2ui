@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: Tracking Domains Create Form should render correctly when submitting is false 1`] = `
+<Panel
+  sectioned={true}
+>
+  <form
+    onSubmit={[Function]}
+  >
+    <Panel.Section>
+      <Field
+        component={[Function]}
+        disabled={false}
+        label="Domain Name"
+        name="domain"
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Field
+        component={[Function]}
+        disabled={false}
+        label="Assign to Subaccount"
+        name="subaccount"
+      />
+      <Button
+        disabled={false}
+        primary={true}
+        size="default"
+        submit={true}
+      >
+        Add Tracking Domain
+      </Button>
+    </Panel.Section>
+  </form>
+</Panel>
+`;
+
+exports[`Component: Tracking Domains Create Form should render correctly when submitting is true 1`] = `
+<Panel
+  sectioned={true}
+>
+  <form
+    onSubmit={[Function]}
+  >
+    <Panel.Section>
+      <Field
+        component={[Function]}
+        disabled={true}
+        label="Domain Name"
+        name="domain"
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Field
+        component={[Function]}
+        disabled={true}
+        label="Assign to Subaccount"
+        name="subaccount"
+      />
+      <Button
+        disabled={true}
+        primary={true}
+        size="default"
+        submit={true}
+      >
+        Submitting...
+      </Button>
+    </Panel.Section>
+  </form>
+</Panel>
+`;

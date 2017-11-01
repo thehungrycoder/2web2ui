@@ -7,7 +7,7 @@ import { Page } from '@sparkpost/matchbox';
 import * as usersActions from 'src/actions/users';
 import { selectUsers } from 'src/selectors/users';
 
-import { ApiErrorBanner, DeleteModal, Layout, TableCollection } from 'src/components';
+import { Loading, ApiErrorBanner, DeleteModal, TableCollection } from 'src/components';
 import AccessSelect from './components/AccessSelect';
 import DeleteButton from './components/DeleteButton';
 
@@ -17,7 +17,7 @@ const DEFAULT_STATE = {
 };
 
 const primaryAction = {
-  content: 'Add User',
+  content: 'Invite User',
   Component: Link,
   to: '/account/users/create'
 };
@@ -69,8 +69,6 @@ export class ListPage extends Component {
   renderError() {
     const { error, listUsers } = this.props;
 
-    if (!error) { return null; }
-
     return (
       <ApiErrorBanner
         errorDetails={error.message}
@@ -97,21 +95,45 @@ export class ListPage extends Component {
     );
   }
 
-  render() {
-    const { loading, users } = this.props;
-
+  renderPage() {
     return (
-      <Layout.App loading={loading}>
-        <Page primaryAction={primaryAction} title="Users" />
-        {this.renderError()}
+      <div>
         <TableCollection
           columns={COLUMNS}
           getRowData={this.getRowData}
           pagination={true}
-          rows={users}
+          rows={this.props.users}
+          filterBox={{
+            show: true,
+            keyMap: { role: 'access' },
+            exampleModifiers: ['name', 'email', 'role'],
+            itemToStringKeys: ['username', 'name', 'email']
+          }}
         />
-        {this.renderDeleteModal()}
-      </Layout.App>
+        { this.renderDeleteModal() }
+      </div>
+    );
+  }
+
+  render() {
+    const { loading, error, users } = this.props;
+
+    if (loading) {
+      return <Loading />;
+    }
+
+    return (
+      <Page
+        primaryAction={primaryAction}
+        title="Users"
+        empty={{
+          show: users.length === 1,
+          title: 'Invite Your Team to SparkPost',
+          image: 'Users',
+          content: <p>Manage your team's accounts and roles.</p>
+        }}>
+        { error ? this.renderError() : this.renderPage() }
+      </Page>
     );
   }
 }

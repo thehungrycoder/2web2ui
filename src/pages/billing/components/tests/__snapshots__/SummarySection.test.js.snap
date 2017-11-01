@@ -4,7 +4,7 @@ exports[`Summary Sections:  should render card summary 1`] = `
 <SummarySection>
   <h6>
     <strong>
-      <t
+      <Icon
         name="CreditCard"
         size={16}
       />

@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 
 // Actions
-import { listWebhooks } from '../../actions/webhooks';
+import { listWebhooks } from 'src/actions/webhooks';
 
 // Components
-import { Layout, TableCollection, ApiErrorBanner } from 'src/components';
+import { Loading, TableCollection, ApiErrorBanner } from 'src/components';
 import { Page } from '@sparkpost/matchbox';
 
 const columns = ['Name', 'ID', 'Target'];
@@ -14,6 +14,11 @@ const getRowData = ({ id, name, target }) => {
   const nameLink = <Link to={`/webhooks/details/${id}`}>{name}</Link>;
   return [nameLink, id, target];
 };
+const filterBoxConfig = {
+  show: true,
+  itemToStringKeys: ['name', 'id', 'target']
+};
+
 
 class WebhooksList extends Component {
 
@@ -40,22 +45,30 @@ class WebhooksList extends Component {
         rows={webhooks}
         getRowData={getRowData}
         pagination={true}
+        filterBox={filterBoxConfig}
       />
     );
   }
 
   render() {
-    const { webhooks, loading, error } = this.props;
+    const { loading, error, webhooks } = this.props;
+
+    if (loading) {
+      return <Loading />;
+    }
 
     return (
-      <Layout.App loading={webhooks.length === 0 && loading}>
-        <Page
-          primaryAction={{ content: 'Create Webhook', Component: Link, to: '/webhooks/create' }}
-          title={'Webhooks'}
-        />
-        {error && this.renderError()}
-        {!error && this.renderCollection()}
-      </Layout.App>
+      <Page
+        primaryAction={{ content: 'Create Webhook', Component: Link, to: '/webhooks/create' }}
+        title='Webhooks'
+        empty={{
+          show: webhooks.length === 0,
+          image: 'Setup',
+          title: 'Create a Webhook',
+          content: <p>Push message events directly to your own endpoints</p>
+        }}>
+        { error ? this.renderError() : this.renderCollection() }
+      </Page>
     );
   }
 }

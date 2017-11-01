@@ -7,7 +7,7 @@ import { refresh as refreshSummaryChart } from 'src/actions/summaryChart';
 import { addFilter, refreshTypeaheadCache } from 'src/actions/reportFilters';
 
 import { Page, Panel, Tabs } from '@sparkpost/matchbox';
-import { Layout, Loading } from 'src/components';
+import { Loading } from 'src/components';
 import Filters from '../components/Filters';
 import ShareModal from '../components/ShareModal';
 import { List, MetricsModal, ChartGroup, ChartHeader } from './components';
@@ -105,9 +105,7 @@ class SummaryReportPage extends Component {
     const { scale, eventTime, link, metricsModal, shareModal } = this.state;
 
     return (
-      <Layout.App>
-        <Page title='Summary Report' />
-
+      <Page title='Summary Report'>
         <Filters refresh={this.handleRefresh} onShare={() => this.handleModalToggle('shareModal')} />
 
         <Panel>
@@ -138,7 +136,7 @@ class SummaryReportPage extends Component {
           open={metricsModal}
           onCancel={() => this.handleModalToggle('metricsModal')}
           onSubmit={this.handleMetricsApply} />
-      </Layout.App>
+      </Page>
     );
   }
 }

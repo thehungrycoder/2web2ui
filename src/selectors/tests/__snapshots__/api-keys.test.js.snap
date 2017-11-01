@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ApiKey Selectors gets grants 1`] = `
+Object {
+  "grant one": Object {
+    "key": "grant one",
+  },
+  "grant two": Object {
+    "key": "grant two",
+  },
+}
+`;
+
+exports[`ApiKey Selectors gets initial subaccount 1`] = `
+Object {
+  "id": "subId",
+}
+`;
+
+exports[`ApiKey Selectors gets initial values 1`] = `
+Object {
+  "grants": Object {
+    "grant": "true",
+  },
+  "subaccount_id": "subId",
+  "validIps": "ip",
+  "valid_ips": Array [
+    "ip",
+  ],
+}
+`;
+
+exports[`ApiKey Selectors gets subaccount grants 1`] = `
+Object {
+  "sub grant one": Object {
+    "key": "sub grant one",
+  },
+  "sub grant two": Object {
+    "key": "sub grant two",
+  },
+}
+`;
+
+exports[`ApiKey Selectors returns single api key 1`] = `
+Object {
+  "id": "Ape",
+}
+`;

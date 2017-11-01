@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`name only 1`] = `
+Object {
+  "name": "mySubAccount",
+  "setup_api_key": false,
+}
+`;
+
+exports[`with api key - all grants 1`] = `
+Object {
+  "key_grants": Array [
+    "message_events/view",
+    "message_events/write",
+    "relay_webhooks/view",
+    "relay_webhooks/write",
+    "smtp/inject",
+  ],
+  "key_label": "test key all grants",
+  "name": "allThePerms",
+}
+`;
+
+exports[`with api key - select grants 1`] = `
+Object {
+  "key_grants": Array [
+    "message_events/view",
+    "smtp/inject",
+  ],
+  "key_label": "test key select grants",
+  "name": "selectPerms",
+}
+`;
+
+exports[`with api key - valid ips 1`] = `
+Object {
+  "key_grants": Array [
+    "message_events/view",
+    "message_events/write",
+    "relay_webhooks/view",
+    "relay_webhooks/write",
+    "smtp/inject",
+  ],
+  "key_label": "test key all grants",
+  "key_valid_ips": Array [
+    "10.20.30.40",
+    "10.20.30.0/24",
+  ],
+  "name": "mySubAccount",
+}
+`;
+
+exports[`with ip pool 1`] = `
+Object {
+  "ip_pool": "marketing_ip_pool",
+  "name": "pool account",
+  "setup_api_key": false,
+}
+`;
