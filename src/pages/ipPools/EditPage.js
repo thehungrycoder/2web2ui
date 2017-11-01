@@ -32,7 +32,7 @@ export class EditPage extends React.Component {
     };
 
     this.secondaryActions = [];
-    if (isDefaultPool(this.id)) {
+    if (!isDefaultPool(this.id)) {
       this.secondaryActions.push(
         {
           content: 'Delete',
@@ -60,7 +60,7 @@ export class EditPage extends React.Component {
       key !== 'name' && values[key] !== this.id);
 
     // Update each changed sending IP
-    Promise.all(changedIpKeys.map((ipKey) =>
+    return Promise.all(changedIpKeys.map((ipKey) =>
       updateSendingIp(decodeIp(ipKey), values[ipKey])))
       .then(() => {
         // Update the pool itself
@@ -84,7 +84,7 @@ export class EditPage extends React.Component {
   deletePool = () => {
     const { deletePool, showAlert, history } = this.props;
 
-    deletePool(this.id).then(() => {
+    return deletePool(this.id).then(() => {
       showAlert({
         type: 'success',
         message: `Deleted IP pool ${this.id}.`

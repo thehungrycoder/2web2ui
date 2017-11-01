@@ -80,7 +80,7 @@ export class PoolForm extends Component {
           component={TextFieldWrapper}
           validate={required}
           label="Pool Name"
-          disabled={editingDefault}
+          disabled={editingDefault || submitting}
           helpText={helpText}
         />
 
