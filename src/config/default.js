@@ -2,6 +2,9 @@ const config = {
   apiBase: 'no-default-set',
   apiDateFormat: 'YYYY-MM-DDTHH:mm',
   apiRequestTimeout: 15000,
+  apiRequestHeaders: {
+    'X-Sparky': '1d24c3473dd52a2f4a53fb6808cf9a73'
+  },
   authentication: {
     cookie: {
       name: 'auth',
@@ -11,8 +14,7 @@ const config = {
     },
     headers: {
       Authorization: 'Basic bXN5c1dlYlVJOmZhODZkNzJlLTYyODctNDUxMy1hZTdmLWVjOGM4ZmEwZDc2Ng==',
-      'Content-Type': 'application/x-www-form-urlencoded',
-      'xsparky': '1d24c3473dd52a2f4a53fb6808cf9a73'
+      'Content-Type': 'application/x-www-form-urlencoded'
     }
   },
   cardTypes: [

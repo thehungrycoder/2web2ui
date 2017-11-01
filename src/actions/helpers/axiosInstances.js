@@ -1,14 +1,12 @@
 import axios from 'axios';
 import config from 'src/config';
 
-const { apiBase, apiRequestTimeout, zuora: zuoraConfig } = config;
+const { apiBase, apiRequestTimeout, zuora: zuoraConfig, apiRequestHeaders } = config;
 
 export const sparkpost = axios.create({
   baseURL: apiBase,
   timeout: apiRequestTimeout,
-  headers: {
-    'x-sparky': config.authentication.headers.xsparky
-  }
+  headers: apiRequestHeaders
 });
 
 export const zuora = axios.create({
