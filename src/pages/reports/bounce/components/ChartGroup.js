@@ -1,42 +1,79 @@
 /* eslint-disable */
 import React, { Component } from 'react';
-
-import { generateColors } from 'src/helpers/bounce';
-import { PieChart, Pie, ResponsiveContainer } from 'recharts';
 import { Grid } from '@sparkpost/matchbox';
 
-class ChartGroup extends Component {
-  render() {
-    const { categories } = this.props;
-    const data = generateColors(categories);
+import ActiveLabel from './ActiveLabel';
+import BounceChart from './BounceChart';
+import Legend from './Legend';
 
-    const table = categories.map((category, i) => {
-      return <p key={i}>{category.name} - {category.count}</p>
-    });
+import styles from './ChartGroup.module.scss';
+
+class ChartGroup extends Component {
+  state = {
+    active: null,
+    activeSet: null
+  };
+
+  handleMouseOver = (e, activeSet) => {
+    const { categories, types } = this.props;
+    const { name, count } = e;
+
+    const data = activeSet === 'primary' ? categories : types;
+    const active = { name, count, index: _.findIndex(data, { name }) };
+    this.setState({ active, activeSet });
+  }
+
+  handleMouseOut = () => {
+    this.setState({ active: null, activeSet: null });
+  }
+
+  getLabelProps = () => {
+    const { aggregates } = this.props;
+    const { active } = this.state;
+
+    const getRate = (n) => `${(100 * n).toFixed(2)}%`;
+
+    return active
+      ? { name: active.name, value: getRate(active.count / aggregates.countBounce) }
+      : { name: 'Bounce Rate', value: getRate(aggregates.countBounce / aggregates.countTargeted) };
+  }
+
+  getLegendHeaderData = () => {
+    const { aggregates } = this.props;
+    return [
+      { name: 'Targeted', count: aggregates.countTargeted, disableInteraction: true },
+      { name: 'Bounce', count: aggregates.countBounce, disableInteraction: true }
+    ]
+  }
+
+  render() {
+    const { categories, types } = this.props;
+
     return (
-      <div>
-        <Grid>
-          <Grid.Column xs={6}>
-            <ResponsiveContainer width='99%' height={450}>
-              <PieChart height={450}>
-                <Pie
-                  onClick={(d) => console.log(d) }
-                  onMouseOver={(d) => console.log(d) }
-                  startAngle={90}
-                  endAngle={450}
-                  data={data}
-                  dataKey='count'
-                  innerRadius={100}
-                  outerRadius={140}
-                  fill="#DB2F3D" />
-              </PieChart>
-            </ResponsiveContainer>
-          </Grid.Column>
-          <Grid.Column>
-            {table}
-          </Grid.Column>
-        </Grid>
-      </div>
+      <Grid>
+        <Grid.Column xs={6}>
+          <div className={styles.ChartWrapper}>
+            <BounceChart
+              primaryData={categories}
+              secondaryData={types}
+              active={this.state.active}
+              activeSet={this.state.activeSet}
+              handleMouseOver={this.handleMouseOver}
+              handleMouseOut={this.handleMouseOut}
+            />
+            <ActiveLabel {...this.getLabelProps()}/>
+          </div>
+        </Grid.Column>
+        <Grid.Column>
+          <Legend
+            headerData={this.getLegendHeaderData()}
+            primaryData={categories}
+            secondaryData={types}
+            handleMouseOver={this.handleMouseOver}
+            handleMouseOut={this.handleMouseOut}
+          />
+        </Grid.Column>
+      </Grid>
     );
   }
 }

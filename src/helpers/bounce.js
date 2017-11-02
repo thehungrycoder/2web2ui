@@ -18,7 +18,7 @@ import _ from 'lodash';
  */
 function formatAggregates(aggregates) {
   const map = {};
-  _.each(aggregates, (value, key) => map[snakeToCamel(key.replace('count_', ''))] = value);
+  _.each(aggregates, (value, key) => map[snakeToCamel(key)] = value);
   return map;
 }
 
@@ -45,7 +45,7 @@ function reshapeCategories(data) {
     }
   });
 
-  return _.orderBy(categories, ['count'], ['desc']);
+  return generateColors(_.orderBy(categories, ['count'], ['desc']));
 }
 
 /**
@@ -61,17 +61,26 @@ function formatCategory(classification) {
   };
 }
 
-function generateColors(categories) {
-  const base = color('#DB2F3D');
+function generateColors(categories, base = '#DB2F3D') {
+  const baseColor = color(base);
   return categories.map(({ subcategories, ...category }, i) => ({
     ...category,
-    fill: base.rotate(12 * i).saturate(0.1 * i).string(),
+    fill: baseColor.rotate(12 * i).saturate(0.1 * i).string(),
     subcategories: subcategories && generateColors(subcategories)
   }));
+}
+
+
+function getBandTypes({ countInbandBounce, countOutofbandBounce }) {
+  return generateColors([
+    { name: 'In-Band', count: countInbandBounce },
+    { name: 'Out-of-Band', count: countOutofbandBounce }
+  ], '#04AEF9');
 }
 
 export {
   formatAggregates,
   reshapeCategories,
-  generateColors
+  generateColors,
+  getBandTypes
 };

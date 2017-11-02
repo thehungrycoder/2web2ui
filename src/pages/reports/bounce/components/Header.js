@@ -7,7 +7,7 @@ const Header = ({ aggregates }) => {
     return null;
   }
 
-  const bounceRate = 100 * (aggregates.bounce / aggregates.targeted);
+  const bounceRate = 100 * (aggregates.countBounce / aggregates.countTargeted);
 
   return (
     <Grid>
@@ -15,7 +15,7 @@ const Header = ({ aggregates }) => {
         <Panel sectioned>
           <h3>{ bounceRate.toFixed(2) }%</h3>
           <p>Bounce Rate</p>
-          <p>{ aggregates.bounce.toLocaleString() } Bounces of { aggregates.targeted.toLocaleString() } Targeted</p>
+          <p>{ aggregates.countBounce.toLocaleString() } Bounces of { aggregates.countTargeted.toLocaleString() } Targeted</p>
         </Panel>
       </Grid.Column>
     </Grid>

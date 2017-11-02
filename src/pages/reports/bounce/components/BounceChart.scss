@@ -1,0 +1,21 @@
+// Global scoped to target recharts classnames
+.BounceChart {
+  .recharts-sector {
+    opacity: 1;
+    transition: opacity 0.3s;
+  }
+
+  &.BounceChart--active {
+    .recharts-sector {
+      opacity: 0.4;
+    }
+  }
+
+  .recharts-sector.BounceChart--forceOpacity {
+    opacity: 1 !important;
+  }
+
+  .recharts-sector.BounceChart--hasChildren {
+    cursor: pointer;
+  }
+}

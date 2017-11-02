@@ -1,0 +1,46 @@
+import React from 'react';
+
+import { Grid } from '@sparkpost/matchbox';
+import LegendItem from './LegendItem';
+
+import styles from './Legend.module.scss';
+
+const Legend = ({
+  headerData,
+  primaryData,
+  secondaryData,
+  handleMouseOver,
+  handleMouseOut
+}) => {
+  const primaryLegend = primaryData.map((item, i) => (
+    <LegendItem key={i}
+      onMouseOver={() => handleMouseOver(item, 'primary')}
+      onMouseOut={handleMouseOut}
+      {...item} />
+  ));
+
+  const secondaryLegend = secondaryData.map((item, i) => (
+    <LegendItem key={i}
+      onMouseOver={() => handleMouseOver(item, 'secondary')}
+      onMouseOut={handleMouseOut}
+      {...item} />
+  ));
+
+  const header = headerData.map((item, i) => <LegendItem key={i} {...item} />);
+
+  return (
+    <div>
+      <div className={styles.LegendHeader}>{header}</div>
+      <Grid>
+        <Grid.Column>
+          {primaryLegend}
+        </Grid.Column>
+        <Grid.Column>
+          {secondaryLegend}
+        </Grid.Column>
+      </Grid>
+    </div>
+  );
+};
+
+export default Legend;

@@ -1,0 +1,46 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.LegendItem {
+  display: block;
+  padding: spacing(small);
+  color: color(gray, 1);
+
+  transition: 0.15s;
+
+  &:hover {
+    cursor: default;
+    color: color(gray, 1);
+  }
+}
+
+.enabled.LegendItem {
+  &:hover {
+    color: color(gray, 0);
+    background: color(gray, 9);
+  }
+}
+
+.hasChildren.enabled.LegendItem {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.Color {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: spacing(small);
+  width: rem(13);
+  height: rem(18);
+  border-radius: border-radius();
+}
+
+.Name {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.Count {
+  float: right;
+  font-weight: 500;
+}
