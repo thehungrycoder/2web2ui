@@ -11,7 +11,7 @@ import { listTemplates } from 'src/actions/templates';
 // Components
 import { TableCollection, ApiErrorBanner, Loading } from 'src/components';
 import { Page } from '@sparkpost/matchbox';
-import Editor from './components/AsyncEditor'
+import Editor from './components/Editor' // async, for preload
 
 const CREATE_ACTION = {
   content: 'Create Template',
@@ -29,7 +29,7 @@ class ListPage extends Component {
 
   componentDidMount() {
     this.props.listTemplates();
-    Editor.preload();
+    Editor.preload(); //loads editor chunk
   }
 
   renderError() {

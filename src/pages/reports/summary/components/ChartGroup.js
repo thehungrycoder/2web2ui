@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
 import { getDayLines, getLineChartFormatters } from 'src/helpers/chart';
-import LineChart from './AsyncLineChart';
+import LineChart from './LineChart'; // async
 import METRICS_UNIT_CONFIG from 'src/config/metrics-units';
 const DEFAULT_UNIT = 'number';
 

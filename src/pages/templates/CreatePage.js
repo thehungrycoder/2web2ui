@@ -7,7 +7,7 @@ import { create } from '../../actions/templates';
 
 // Components
 import Form from './components/Form';
-import Editor from './components/Editor';
+import Editor from './components/Editor'; // async
 import { Page, Grid } from '@sparkpost/matchbox';
 
 const FORM_NAME = 'templateCreate';
