@@ -1,5 +1,6 @@
 import React from 'react';
 import cx from 'classnames';
+import { Icon } from '@sparkpost/matchbox';
 
 import styles from './LegendItem.module.scss';
 
@@ -9,6 +10,7 @@ const LegendItem = ({
   fill,
   subcategories,
   disableInteraction,
+  breadcrumb,
   ...props
 }) => {
   const classes = cx(
@@ -17,11 +19,15 @@ const LegendItem = ({
     subcategories && styles.hasChildren
   );
 
+  const breadcrumbMarkup = breadcrumb
+    ? <Icon name='ChevronLeft' />
+    : null;
+
   return (
     <a className={classes} {...props}>
       { fill && <span className={styles.Color} style={{ backgroundColor: fill }}/> }
-      <span className={styles.Name}>{name}</span>
-      <span className={styles.Count}>{count.toLocaleString()}</span>
+      <span className={styles.Name}>{ breadcrumbMarkup }{name}</span>
+      { count && <span className={styles.Count}>{count.toLocaleString()}</span> }
     </a>
   );
 };

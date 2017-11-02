@@ -10,40 +10,81 @@ import styles from './ChartGroup.module.scss';
 
 class ChartGroup extends Component {
   state = {
-    active: null,
-    activeSet: null
+    hover: null,
+    hoverSet: null,
+    active: null
   };
 
-  handleMouseOver = (e, activeSet) => {
+  handleMouseOver = (e, hoverSet) => {
     const { categories, types } = this.props;
+    const { active } = this.state;
     const { name, count } = e;
 
-    const data = activeSet === 'primary' ? categories : types;
-    const active = { name, count, index: _.findIndex(data, { name }) };
-    this.setState({ active, activeSet });
+    let data = hoverSet === 'primary' ? categories : types;
+
+    if (active) {
+      data = active.subcategories;
+    }
+
+    const hover = { name, count, index: _.findIndex(data, { name }) };
+    this.setState({ hover, hoverSet });
   }
 
   handleMouseOut = () => {
-    this.setState({ active: null, activeSet: null });
+    this.setState({ hover: null, hoverSet: null });
+  }
+
+  handleClick = ({ name, subcategories, count }) => {
+    if (subcategories) {
+      this.setState({ active: { name, subcategories, count }});
+    }
+  }
+
+  handleBreadcrumb = () => {
+    this.setState({ active: null });
   }
 
   getLabelProps = () => {
     const { aggregates } = this.props;
-    const { active } = this.state;
+    const { hover } = this.state;
 
     const getRate = (n) => `${(100 * n).toFixed(2)}%`;
 
-    return active
-      ? { name: active.name, value: getRate(active.count / aggregates.countBounce) }
+    return hover
+      ? { name: hover.name, value: getRate(hover.count / aggregates.countBounce) }
       : { name: 'Bounce Rate', value: getRate(aggregates.countBounce / aggregates.countTargeted) };
   }
 
   getLegendHeaderData = () => {
     const { aggregates } = this.props;
+    const { active } = this.state;
+
+    if (active) {
+      return [
+        { name: 'All Bounces', breadcrumb: true, onClick: this.handleBreadcrumb },
+        { name: active.name, count: active.count, disableInteraction: true }
+      ]
+    }
+
     return [
       { name: 'Targeted', count: aggregates.countTargeted, disableInteraction: true },
       { name: 'Bounce', count: aggregates.countBounce, disableInteraction: true }
     ]
+  }
+
+  getData = () => {
+    const { categories, types } = this.props;
+    const { active } = this.state;
+
+    let primaryData = categories;
+    let secondaryData = types;
+
+    if (active) {
+      primaryData = active.subcategories;
+      secondaryData = null;
+    }
+
+    return { primaryData, secondaryData }
   }
 
   render() {
@@ -54,12 +95,12 @@ class ChartGroup extends Component {
         <Grid.Column xs={6}>
           <div className={styles.ChartWrapper}>
             <BounceChart
-              primaryData={categories}
-              secondaryData={types}
-              active={this.state.active}
-              activeSet={this.state.activeSet}
+              {...this.getData()}
+              hover={this.state.hover}
+              hoverSet={this.state.hoverSet}
               handleMouseOver={this.handleMouseOver}
               handleMouseOut={this.handleMouseOut}
+              handleClick={this.handleClick}
             />
             <ActiveLabel {...this.getLabelProps()}/>
           </div>
@@ -67,10 +108,10 @@ class ChartGroup extends Component {
         <Grid.Column>
           <Legend
             headerData={this.getLegendHeaderData()}
-            primaryData={categories}
-            secondaryData={types}
+            {...this.getData()}
             handleMouseOver={this.handleMouseOver}
             handleMouseOut={this.handleMouseOut}
+            handleClick={this.handleClick}
           />
         </Grid.Column>
       </Grid>

@@ -5,7 +5,7 @@
     transition: opacity 0.3s;
   }
 
-  &.BounceChart--active {
+  &.BounceChart--hover {
     .recharts-sector {
       opacity: 0.4;
     }

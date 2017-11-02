@@ -10,21 +10,24 @@ const Legend = ({
   primaryData,
   secondaryData,
   handleMouseOver,
-  handleMouseOut
+  handleMouseOut,
+  handleClick
 }) => {
   const primaryLegend = primaryData.map((item, i) => (
     <LegendItem key={i}
       onMouseOver={() => handleMouseOver(item, 'primary')}
       onMouseOut={handleMouseOut}
+      onClick={() => handleClick(item)}
       {...item} />
   ));
 
-  const secondaryLegend = secondaryData.map((item, i) => (
+  const secondaryLegend = secondaryData ? secondaryData.map((item, i) => (
     <LegendItem key={i}
       onMouseOver={() => handleMouseOver(item, 'secondary')}
       onMouseOut={handleMouseOut}
+      onClick={() => handleClick(item)}
       {...item} />
-  ));
+  )) : null;
 
   const header = headerData.map((item, i) => <LegendItem key={i} {...item} />);
 

@@ -11,16 +11,19 @@ const BounceChart = ({
   secondaryData, // Inner pie chart
   handleMouseOver,
   handleMouseOut,
-  active,
-  activeSet
+  handleClick,
+  hover,
+  hoverSet
 }) => {
-  const wrapperClasses = classnames('BounceChart', active && 'BounceChart--active');
+  const wrapperClasses = classnames('BounceChart', hover && 'BounceChart--hover');
 
   const sharedProps = {
-    activeShape: ActiveShape,
+    activeShape: ActiveShape, // Custom "active" (hover) sector component
     onMouseOut: handleMouseOut,
+    onClick: handleClick,
     dataKey: 'count',
     paddingAngle: 0.5,
+    minAngle: 2,
     startAngle: 90,
     endAngle: 450,
     animationDuration: 1000
@@ -31,16 +34,14 @@ const BounceChart = ({
       <ResponsiveContainer width='99%' height={350}>
         <PieChart height={350}>
           <Pie
-            onClick={(d) => console.log(d) }
-            activeIndex={activeSet === 'primary' ? active.index : null}
+            activeIndex={hoverSet === 'primary' ? hover.index : null}
             onMouseOver={(e) => handleMouseOver(e, 'primary')}
             data={primaryData}
             innerRadius={100}
             outerRadius={140}
             {...sharedProps} />
           <Pie
-            onClick={(d) => console.log(d) }
-            activeIndex={activeSet === 'secondary' ? active.index : null}
+            activeIndex={hoverSet === 'secondary' ? hover.index : null}
             onMouseOver={(e) => handleMouseOver(e, 'secondary')}
             data={secondaryData}
             innerRadius={75}
