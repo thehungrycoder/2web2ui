@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoadableLoading Component should render loading if pastDelay is true 1`] = `<Component />`;
+
+exports[`LoadableLoading Component should return null if no props 1`] = `""`;

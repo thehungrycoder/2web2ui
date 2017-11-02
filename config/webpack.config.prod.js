@@ -284,6 +284,20 @@ module.exports = {
         minifyURLs: true,
       },
     }),
+    //Extracts node modules into a chunk
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      minChunks: ({ resource }) => (
+        resource &&
+        resource.indexOf('node_modules') >= 0 &&
+        resource.match(/\.js$/)
+      )
+    }),
+    // Extracts webpack boilerplate and manifest
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'runtime',
+      filename: 'static/js/[name].[chunkhash:8].js',
+    }),
     // Makes some environment variables available to the JS code, for example:
     // if (process.env.NODE_ENV === 'production') { ... }. See `./env.js`.
     // It is absolutely essential that NODE_ENV was set to production here.

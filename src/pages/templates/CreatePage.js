@@ -13,7 +13,7 @@ import { getClonedTemplate } from 'src/selectors/templates';
 
 // Components
 import Form from './components/Form';
-import Editor from './components/Editor';
+import Editor from './components/Editor'; // async
 import { Page, Grid } from '@sparkpost/matchbox';
 import { Loading } from 'src/components';
 

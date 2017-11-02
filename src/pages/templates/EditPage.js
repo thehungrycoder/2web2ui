@@ -13,7 +13,7 @@ import { getTemplateById } from 'src/selectors/templates';
 
 // Components
 import Form from './components/Form';
-import Editor from './components/Editor';
+import Editor from './components/Editor'; // async
 import { DeleteModal } from 'src/components';
 import { Loading } from 'src/components';
 import { Page, Grid } from '@sparkpost/matchbox';
@@ -156,6 +156,7 @@ class EditPage extends Component {
     );
   }
 }
+
 
 const mapStateToProps = (state, props) => {
   const template = getTemplateById(state, props);

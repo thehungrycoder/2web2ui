@@ -33,7 +33,7 @@ exports[`Template CreatePage Duplicate Template should render correctly 1`] = `
       lg={8}
       xs={12}
     >
-      <AsyncComponent
+      <LoadableComponent
         name="templateCreate"
       />
     </Grid.Column>
@@ -74,7 +74,7 @@ exports[`Template CreatePage New Template should render correctly 1`] = `
       lg={8}
       xs={12}
     >
-      <AsyncComponent
+      <LoadableComponent
         name="templateCreate"
       />
     </Grid.Column>

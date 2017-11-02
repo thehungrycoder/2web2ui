@@ -1,7 +1,11 @@
+/*
+  This component is meant to be loaded asynchronously, do not import directly.
+  See ../Editor.js for async export
+*/
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, formValueSelector } from 'redux-form';
-import { contentRequired } from './validation';
+import { contentRequired } from '../validation';
 
 // Components
 import AceEditor from 'react-ace';
@@ -11,7 +15,7 @@ import 'brace/theme/tomorrow';
 import { Panel, Tabs } from '@sparkpost/matchbox';
 
 import './Editor.scss';
-import styles from './FormEditor.module.scss';
+import styles from '../FormEditor.module.scss';
 
 const AceWrapper = ({ input, meta: { touched, error }, ...rest }) => (
   <div>
