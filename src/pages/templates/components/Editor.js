@@ -1,2 +1,3 @@
-import asyncComponent from 'src/helpers/asyncComponent';
-export default asyncComponent(() => import('./_Editor'));
+import asyncComponent from 'src/components/asyncComponent/asyncComponent';
+
+export default asyncComponent(() => import('./async/Editor'));
