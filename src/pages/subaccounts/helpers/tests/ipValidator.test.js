@@ -16,7 +16,7 @@ cases('returns undefined', ({ value }) => {
 const INVALID_CASES = {
   'with an invalid IP address': { value: 'invalid.ip' },
   'with some valid IP addresses': { value: '10.20.30.40, invalid.ip, 10.20.30.0/24' }
-}
+};
 
 cases('returns error message with random string', ({ value }) => {
   expect(ipValidator(value)).toMatch(/must be a comma separated list/i);

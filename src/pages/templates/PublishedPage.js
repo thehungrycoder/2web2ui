@@ -42,13 +42,13 @@ class PublishedPage extends Component {
       }
     ];
 
-    const backAction = {
+    const breadcrumbAction = {
       content: 'Templates',
       Component: Link,
       to: '/templates'
     };
 
-    return { secondaryActions, backAction, title: `${match.params.id} (Published)` };
+    return { secondaryActions, breadcrumbAction, title: `${match.params.id} (Published)` };
   }
 
   render() {

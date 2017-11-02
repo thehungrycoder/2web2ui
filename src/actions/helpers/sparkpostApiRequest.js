@@ -4,7 +4,7 @@ import { showAlert } from 'src/actions/globalAlert';
 import { useRefreshToken } from 'src/helpers/http';
 import { resolveOnCondition } from 'src/helpers/promise';
 import _ from 'lodash';
-import { sparkpost as sparkpostAxios } from './axiosInstances';
+import { sparkpost as sparkpostAxios } from 'src/helpers/axiosInstances';
 
 const maxRefreshRetries = 3;
 export const refreshTokensUsed = new Set();

@@ -1,14 +1,34 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Templates by id Selector returns empty draft and published 1`] = `
+exports[`Templates selectors Templates by id Selector returns empty draft and published 1`] = `
 Object {
   "draft": Object {},
   "published": Object {},
 }
 `;
 
-exports[`Templates by id Selector returns template 1`] = `
+exports[`Templates selectors Templates by id Selector returns template 1`] = `
 Object {
-  "name": "Ape",
+  "draft": Object {},
+  "published": Object {},
 }
 `;
+
+exports[`Templates selectors cloneTemplate clones template 1`] = `
+Object {
+  "content": Object {},
+  "id": "test-template-copy",
+  "name": "Test Template Copy",
+  "published": false,
+}
+`;
+
+exports[`Templates selectors getClonedTemplate should clone template if :id exist in state 1`] = `
+Object {
+  "id": "ape-copy",
+  "name": "Ape Copy",
+  "published": false,
+}
+`;
+
+exports[`Templates selectors getClonedTemplate should not clone template if :id does not exist 1`] = `undefined`;

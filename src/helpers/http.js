@@ -1,12 +1,8 @@
 import config from '../config';
-import axios from 'axios';
 
-const { apiBase, apiRequestTimeout, authentication } = config;
+import { sparkpost as sparkpostRequest } from 'src/helpers/axiosInstances';
 
-const sparkpostRequest = axios.create({
-  baseURL: apiBase,
-  timeout: apiRequestTimeout
-});
+const { authentication } = config;
 
 // TODO handle timeout error better
 
