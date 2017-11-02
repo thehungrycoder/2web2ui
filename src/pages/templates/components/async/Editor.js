@@ -1,5 +1,6 @@
 /*
   This component is meant to be loaded asynchronously, do not import directly.
+  See ../Editor.js for async export
 */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
