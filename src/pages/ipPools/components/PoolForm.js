@@ -15,32 +15,31 @@ import isDefaultPool from '../helpers/defaultPool';
 const columns = ['Sending IP', 'Hostname', 'IP Pool'];
 
 export class PoolForm extends Component {
-  ipOptions = (pools) => pools.map((pool) => ({
-    value: pool.id,
-    label: pool.name
-  }));
-
-  poolSelect = (ip, pools, submitting) => (<Field
+  poolSelect = (ip, poolOptions, submitting) => (<Field
     name={encodeIp(ip.external_ip)}
     component={SelectWrapper}
-    options={this.ipOptions(pools)}
+    options={poolOptions}
     label="IP pool"
     disabled={submitting}/>
   );
 
-  getRowData(ip) {
-    const { submitting, list = []} = this.props;
+  getRowData(poolOptions, ip) {
+    const { submitting } = this.props;
 
     return [
       ip.external_ip,
       ip.hostname,
-      this.poolSelect(ip, list, submitting)
+      this.poolSelect(ip, poolOptions, submitting)
     ];
   }
 
   renderCollection() {
-    const getRowDataFunc = this.getRowData.bind(this);
-    const { isNew, ips } = this.props;
+    const { isNew, ips, list } = this.props;
+    const poolOptions = list.map((pool) => ({
+      value: pool.id,
+      label: pool.name
+    }));
+    const getRowDataFunc = this.getRowData.bind(this, poolOptions);
 
     // New pools have no IPs
     if (isNew) {
@@ -95,7 +94,7 @@ export class PoolForm extends Component {
 }
 
 const mapStateToProps = ({ ipPools }, { isNew }) => {
-  const { pool, list } = ipPools;
+  const { pool, list = []} = ipPools;
   const { ips = [], name = null } = pool;
 
   // Each IP has an IP pool drop down, named for that IP's hostname.
