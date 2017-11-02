@@ -1,10 +1,11 @@
-/* eslint-disable */
 import React, { Component } from 'react';
-import { Grid } from '@sparkpost/matchbox';
-
+import { connect } from 'react-redux';
+import _ from 'lodash';
+import { Grid, Panel } from '@sparkpost/matchbox';
 import ActiveLabel from './ActiveLabel';
 import BounceChart from './BounceChart';
 import Legend from './Legend';
+import { Loading } from 'src/components';
 
 import styles from './ChartGroup.module.scss';
 
@@ -36,7 +37,11 @@ class ChartGroup extends Component {
 
   handleClick = ({ name, subcategories, count }) => {
     if (subcategories) {
-      this.setState({ active: { name, subcategories, count }});
+      this.setState({
+        active: { name, subcategories, count },
+        hover: null,
+        hoverSet: null
+      });
     }
   }
 
@@ -63,13 +68,13 @@ class ChartGroup extends Component {
       return [
         { name: 'All Bounces', breadcrumb: true, onClick: this.handleBreadcrumb },
         { name: active.name, count: active.count, disableInteraction: true }
-      ]
+      ];
     }
 
     return [
       { name: 'Targeted', count: aggregates.countTargeted, disableInteraction: true },
-      { name: 'Bounce', count: aggregates.countBounce, disableInteraction: true }
-    ]
+      { name: 'All Bounces', count: aggregates.countBounce, disableInteraction: true }
+    ];
   }
 
   getData = () => {
@@ -84,39 +89,49 @@ class ChartGroup extends Component {
       secondaryData = null;
     }
 
-    return { primaryData, secondaryData }
+    return { primaryData, secondaryData };
   }
 
   render() {
-    const { categories, types } = this.props;
+    const { loading, aggregates } = this.props;
+
+    if (loading || !aggregates) {
+      return <Panel title='Bounce Rates' sectioned className={styles.LoadingPanel}><Loading /></Panel>;
+    }
 
     return (
-      <Grid>
-        <Grid.Column xs={6}>
-          <div className={styles.ChartWrapper}>
-            <BounceChart
+      <Panel title='Bounce Rates' sectioned>
+        <Grid>
+          <Grid.Column xs={12} lg={5}>
+            <div className={styles.ChartWrapper}>
+              <BounceChart
+                {...this.getData()}
+                hover={this.state.hover}
+                hoverSet={this.state.hoverSet}
+                handleMouseOver={this.handleMouseOver}
+                handleMouseOut={this.handleMouseOut}
+                handleClick={this.handleClick} />
+              <ActiveLabel {...this.getLabelProps()}/>
+            </div>
+          </Grid.Column>
+          <Grid.Column xs={12} lg={7}>
+            <Legend
+              headerData={this.getLegendHeaderData()}
               {...this.getData()}
-              hover={this.state.hover}
-              hoverSet={this.state.hoverSet}
               handleMouseOver={this.handleMouseOver}
               handleMouseOut={this.handleMouseOut}
-              handleClick={this.handleClick}
-            />
-            <ActiveLabel {...this.getLabelProps()}/>
-          </div>
-        </Grid.Column>
-        <Grid.Column>
-          <Legend
-            headerData={this.getLegendHeaderData()}
-            {...this.getData()}
-            handleMouseOver={this.handleMouseOver}
-            handleMouseOut={this.handleMouseOut}
-            handleClick={this.handleClick}
-          />
-        </Grid.Column>
-      </Grid>
+              handleClick={this.handleClick} />
+          </Grid.Column>
+        </Grid>
+      </Panel>
     );
   }
 }
 
-export default ChartGroup;
+const mapStateToProps = (state) => ({
+  loading: state.bounceReport.aggregatesLoading || state.bounceReport.categoriesLoading,
+  aggregates: state.bounceReport.aggregates,
+  categories: state.bounceReport.categories,
+  types: state.bounceReport.types
+});
+export default connect(mapStateToProps, {})(ChartGroup);

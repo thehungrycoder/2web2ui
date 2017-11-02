@@ -2,19 +2,8 @@ import { snakeToCamel } from 'src/helpers/string';
 import color from 'color';
 import _ from 'lodash';
 
-// function formatArray(arr) {
-//   return arr.map((item) => formatKeys(item));
-// }
-//
-// function formatKeys(obj) {
-//   const map = {};
-//   _.each(obj, (value, key) => map[snakeToCamel(key)] = value);
-//   return map;
-// }
-
 /**
- * Formats keys of aggregate metrics
- * eg: count_soft_bounce -> softBounce
+ * Camel cases aggregates
  */
 function formatAggregates(aggregates) {
   const map = {};
@@ -23,7 +12,7 @@ function formatAggregates(aggregates) {
 }
 
 /**
- * Reshapes results of getBounceClassifications for the report page pie chart
+ * Reshapes results of getBounceClassifications for the bounce chart
  */
 function reshapeCategories(data) {
   const categories = [];
@@ -45,7 +34,7 @@ function reshapeCategories(data) {
     }
   });
 
-  return generateColors(_.orderBy(categories, ['count'], ['desc']));
+  return generateColors(_.orderBy(categories, ['count'], ['desc']), '#DB2F3D');
 }
 
 /**
@@ -61,21 +50,28 @@ function formatCategory(classification) {
   };
 }
 
-function generateColors(categories, base = '#DB2F3D') {
+/**
+ * Generates a color palette for bounce chart data
+ */
+function generateColors(categories, base) {
   const baseColor = color(base);
+  const rotate = 60 / categories.length;
+  const saturate = 0.1 / categories.length;
   return categories.map(({ subcategories, ...category }, i) => ({
     ...category,
-    fill: baseColor.rotate(12 * i).saturate(0.1 * i).string(),
-    subcategories: subcategories && generateColors(subcategories)
+    fill: baseColor.rotate(rotate * i).saturate(saturate * i).string(),
+    subcategories: subcategories && generateColors(subcategories, '#DB2F3D')
   }));
 }
 
-
+/**
+ * Creates band type data for bounce chart from aggregates
+ */
 function getBandTypes({ countInbandBounce, countOutofbandBounce }) {
   return generateColors([
     { name: 'In-Band', count: countInbandBounce },
     { name: 'Out-of-Band', count: countOutofbandBounce }
-  ], '#04AEF9');
+  ], '#37aadc');
 }
 
 export {

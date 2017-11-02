@@ -7,10 +7,8 @@ import { Page, Panel } from '@sparkpost/matchbox';
 import Filters from '../components/Filters';
 import Header from './components/Header';
 import ChartGroup from './components/ChartGroup';
-import { Loading } from 'src/components';
 
 class BouncePage extends Component {
-
   componentDidMount() {
     this.props.refresh();
   }
@@ -24,21 +22,14 @@ class BouncePage extends Component {
   }
 
   render() {
-    const { loading, aggregates, categories, types } = this.props;
+    const { loading, aggregates } = this.props;
 
-    const pageContent = loading || !aggregates
-      ? <Loading />
-      : (
-        <div>
-        <Header aggregates={aggregates} />
-          <Panel sectioned title='Bounce Categories'>
-            <ChartGroup
-              categories={categories}
-              types={types}
-              aggregates={aggregates} />
-          </Panel>
-        </div>
-      );
+    const pageContent = !loading && aggregates && aggregates.countBounce === 0
+      ? <Panel sectioned><h6>No bounces to report.</h6></Panel> // TODO
+      : <div>
+          <Header />
+          <ChartGroup />
+        </div>;
 
     return (
       <Page title='Bounce Report'>
@@ -50,10 +41,7 @@ class BouncePage extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  loading: state.bounceReport.loading,
-  filters: state.reportFilters,
-  aggregates: state.bounceReport.aggregates,
-  categories: state.bounceReport.categories,
-  types: state.bounceReport.types
+  loading: state.bounceReport.aggregatesLoading || state.bounceReport.categoriesLoading,
+  aggregates: state.bounceReport.aggregates
 });
 export default connect(mapStateToProps, { refresh })(BouncePage);

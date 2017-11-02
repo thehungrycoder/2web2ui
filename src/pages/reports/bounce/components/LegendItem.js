@@ -13,10 +13,11 @@ const LegendItem = ({
   breadcrumb,
   ...props
 }) => {
-  const classes = cx(
+  const itemClasses = cx(
     styles.LegendItem,
     !disableInteraction && styles.enabled,
-    subcategories && styles.hasChildren
+    subcategories && styles.hasChildren,
+    breadcrumb && styles.breadcrumb
   );
 
   const breadcrumbMarkup = breadcrumb
@@ -24,7 +25,7 @@ const LegendItem = ({
     : null;
 
   return (
-    <a className={classes} {...props}>
+    <a className={itemClasses} {...props}>
       { fill && <span className={styles.Color} style={{ backgroundColor: fill }}/> }
       <span className={styles.Name}>{ breadcrumbMarkup }{name}</span>
       { count && <span className={styles.Count}>{count.toLocaleString()}</span> }

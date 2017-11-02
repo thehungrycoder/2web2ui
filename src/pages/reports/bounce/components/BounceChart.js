@@ -1,6 +1,5 @@
-/* eslint-disable */
 import React from 'react';
-import classnames from 'classnames';
+import cx from 'classnames';
 import { PieChart, Pie, ResponsiveContainer } from 'recharts';
 
 import ActiveShape from './ActiveShape';
@@ -15,8 +14,6 @@ const BounceChart = ({
   hover,
   hoverSet
 }) => {
-  const wrapperClasses = classnames('BounceChart', hover && 'BounceChart--hover');
-
   const sharedProps = {
     activeShape: ActiveShape, // Custom "active" (hover) sector component
     onMouseOut: handleMouseOut,
@@ -27,10 +24,10 @@ const BounceChart = ({
     startAngle: 90,
     endAngle: 450,
     animationDuration: 1000
-  }
+  };
 
   return (
-    <div className={wrapperClasses}>
+    <div className={cx('BounceChart', hover && 'BounceChart--hover')}>
       <ResponsiveContainer width='99%' height={350}>
         <PieChart height={350}>
           <Pie

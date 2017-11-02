@@ -1,6 +1,9 @@
 import React from 'react';
 import styles from './ActiveLabel.module.scss';
 
+/**
+ * Label that appears inside pie chart
+ */
 const ActiveLabel = ({
   name,
   value

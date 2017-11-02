@@ -14,19 +14,7 @@ export function refresh(updates = {}) {
 
     const bounceMetrics = [
       'count_targeted',
-      // 'count_accepted',
       'count_bounce',
-      'bounce_rate',
-      // 'count_admin_bounce',
-      // 'count_block_bounce',
-      // 'count_soft_bounce',
-      // 'count_hard_bounce',
-      // 'count_undetermined_bounce',
-      // 'admin_bounce_rate',
-      // 'block_bounce_rate',
-      // 'soft_bounce_rate',
-      // 'hard_bounce_rate',
-      // 'undetermined_bounce_rate',
       'count_inband_bounce',
       'count_outofband_bounce'
     ];
@@ -56,10 +44,8 @@ export function refresh(updates = {}) {
 
         const bounceParams = { ...aggregateParams, metrics: 'count_bounce' };
 
-        Promise.all([
-          dispatch(getBounceClassifications(bounceParams)),
-          // dispatch(getBounceReasons(bounceParams)) This is for the table I think
-        ]).then((classifications) => {
+        // dispatch(getBounceReasons(bounceParams)) This is for the table I think
+        dispatch(getBounceClassifications(bounceParams)).then((classifications) => {
 
           const formattedAggregates = formatAggregates(aggregates[0]);
 
@@ -73,11 +59,11 @@ export function refresh(updates = {}) {
             }
           });
 
-          // // refresh the date range
-          // dispatch({
-          //   type: 'REFRESH_REPORT_RANGE',
-          //   payload: { ...options }
-          // });
+          // refresh the date range
+          dispatch({
+            type: 'REFRESH_REPORT_RANGE',
+            payload: { ...options }
+          });
         });
       });
   };

@@ -1,25 +1,26 @@
 import React from 'react';
-import { Panel, Grid } from '@sparkpost/matchbox';
+import { connect } from 'react-redux';
+import { Panel } from '@sparkpost/matchbox';
 
 // TODO finish this
-const Header = ({ aggregates }) => {
-  if (!aggregates) {
+const Header = ({ aggregates, loading }) => {
+  if (loading || !aggregates) {
     return null;
   }
 
   const bounceRate = 100 * (aggregates.countBounce / aggregates.countTargeted);
 
   return (
-    <Grid>
-      <Grid.Column>
-        <Panel sectioned>
-          <h3>{ bounceRate.toFixed(2) }%</h3>
-          <p>Bounce Rate</p>
-          <p>{ aggregates.countBounce.toLocaleString() } Bounces of { aggregates.countTargeted.toLocaleString() } Targeted</p>
-        </Panel>
-      </Grid.Column>
-    </Grid>
+    <Panel sectioned>
+      <h3>{ bounceRate.toFixed(2) }%</h3>
+      <p>Bounce Rate</p>
+      <p>{ aggregates.countBounce.toLocaleString() } Bounces of { aggregates.countTargeted.toLocaleString() } Targeted</p>
+    </Panel>
   );
 };
 
-export default Header;
+const mapStateToProps = (state) => ({
+  loading: state.bounceReport.aggregatesLoading,
+  aggregates: state.bounceReport.aggregates
+});
+export default connect(mapStateToProps, {})(Header);

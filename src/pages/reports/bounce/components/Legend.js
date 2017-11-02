@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { Grid } from '@sparkpost/matchbox';
 import LegendItem from './LegendItem';
 
@@ -21,13 +20,17 @@ const Legend = ({
       {...item} />
   ));
 
-  const secondaryLegend = secondaryData ? secondaryData.map((item, i) => (
-    <LegendItem key={i}
-      onMouseOver={() => handleMouseOver(item, 'secondary')}
-      onMouseOut={handleMouseOut}
-      onClick={() => handleClick(item)}
-      {...item} />
-  )) : null;
+  const secondaryLegend = secondaryData
+    ? <Grid.Column>
+        {secondaryData.map((item, i) => (
+          <LegendItem key={i}
+            onMouseOver={() => handleMouseOver(item, 'secondary')}
+            onMouseOut={handleMouseOut}
+            onClick={() => handleClick(item)}
+            {...item} />
+        ))}
+      </Grid.Column>
+    : null;
 
   const header = headerData.map((item, i) => <LegendItem key={i} {...item} />);
 
@@ -35,12 +38,8 @@ const Legend = ({
     <div>
       <div className={styles.LegendHeader}>{header}</div>
       <Grid>
-        <Grid.Column>
-          {primaryLegend}
-        </Grid.Column>
-        <Grid.Column>
-          {secondaryLegend}
-        </Grid.Column>
+        <Grid.Column>{primaryLegend}</Grid.Column>
+        {secondaryLegend}
       </Grid>
     </div>
   );

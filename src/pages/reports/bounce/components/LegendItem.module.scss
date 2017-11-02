@@ -20,9 +20,11 @@
   }
 }
 
-.hasChildren.enabled.LegendItem {
-  &:hover {
-    cursor: pointer;
+.breadcrumb, .hasChildren {
+  &.enabled.LegendItem {
+    &:hover {
+      cursor: pointer;
+    }
   }
 }
 
