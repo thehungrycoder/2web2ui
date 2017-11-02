@@ -1,10 +1,11 @@
+/* eslint max-lines: ["error", 200] */
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 
 import { Page, Panel } from '@sparkpost/matchbox';
-import { Loading, DeleteModal } from 'src/components';
+import { Loading, DeleteModal, ApiErrorBanner } from 'src/components';
 import PoolForm from './components/PoolForm';
 
 import { showAlert } from 'src/actions/globalAlert';
@@ -42,16 +43,11 @@ export class EditPage extends React.Component {
     }
   }
 
-  componentDidMount() {
-    this.props.listPools();
-    this.props.getPool(this.id);
-  }
-
   toggleDelete = () => {
     this.setState({ showDelete: !this.state.showDelete });
   };
 
-  updatePool = (values) => {
+  onUpdatePool = (values) => {
     const { updateSendingIp, updatePool, showAlert, history } = this.props;
 
     // Pick out the IPs those pool assignment is not the current pool ergo
@@ -81,7 +77,7 @@ export class EditPage extends React.Component {
       }));
   };
 
-  deletePool = () => {
+  onDeletePool = () => {
     const { deletePool, showAlert, history } = this.props;
 
     return deletePool(this.id).then(() => {
@@ -97,8 +93,41 @@ export class EditPage extends React.Component {
     }));
   };
 
-  render() {
+  loadDependantData = () => {
+    this.props.listPools();
+    this.props.getPool(this.id);
+  };
 
+  componentDidMount() {
+    this.loadDependantData();
+  }
+
+  renderError() {
+    const { listError, getError } = this.props;
+    const msg = listError ? listError.message : getError.message;
+    return <ApiErrorBanner
+        errorDetails={msg}
+        message="Sorry, we seem to have had some trouble loading your IP pool."
+        reload={this.loadDependantData}
+      />;
+  }
+
+  renderForm() {
+    const { error } = this.props;
+
+    if (error) {
+      return this.renderError();
+    }
+
+    return <Panel>
+        <Panel.Section>
+          <PoolForm onSubmit={this.onUpdatePool} isNew={false} />
+        </Panel.Section>
+      </Panel>;
+
+  }
+
+  render() {
     if (this.props.loading) {
       return <Loading />;
     }
@@ -108,26 +137,31 @@ export class EditPage extends React.Component {
         title="Edit IP Pool"
         breadcrumbAction={breadcrumbAction}
         secondaryActions={this.secondaryActions}>
-        <Panel>
-          <Panel.Section>
-            <PoolForm onSubmit={this.updatePool} isNew={false} />
-          </Panel.Section>
-        </Panel>
+
+        { this.renderForm() }
+
         <DeleteModal
           open={this.state.showDelete}
           title='Delete IP Pool'
           text='Are you sure you want to delete this IP Pool?'
           handleToggle={this.toggleDelete}
-          handleDelete={this.deletePool}
+          handleDelete={this.onDeletePool}
         />
       </Page>
     );
   }
 }
 
-const mapStateToProps = ({ ipPools }) => ({
-  loading: ipPools.getLoading || ipPools.listLoading
-});
+const mapStateToProps = ({ ipPools }) => {
+  const { getLoading, getError, listLoading, listError } = ipPools;
+
+  return {
+    loading: getLoading || listLoading,
+    error: listError || getError,
+    listError,
+    getError
+  };
+};
 
 export default withRouter(connect(mapStateToProps, {
   updatePool,
