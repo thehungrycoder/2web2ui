@@ -1,100 +1,167 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-<div>
-  <div>
-    <Page
-      empty={Object {}}
-      primaryAction={
+<Page
+  empty={
+    Object {
+      "content": <p>
+        Subaccounts are a good way of managing external client accounts.
+      </p>,
+      "image": "Users",
+      "secondaryAction": Object {
+        "content": "Learn more",
+        "external": true,
+        "to": "https://developers.sparkpost.com/api/subaccounts.html",
+      },
+      "show": false,
+      "title": "Manage your subaccounts",
+    }
+  }
+  primaryAction={
+    Object {
+      "Component": [Function],
+      "content": "Create Subaccount",
+      "to": "/account/subaccounts/create",
+    }
+  }
+  title="Subaccounts"
+>
+  <TableCollection
+    columns={
+      Array [
+        "Name",
+        "ID",
+        "Status",
+      ]
+    }
+    filterBox={
+      Object {
+        "exampleModifiers": Array [
+          "name",
+          "id",
+          "status",
+        ],
+        "itemToStringKeys": Array [
+          "name",
+          "id",
+        ],
+        "show": true,
+      }
+    }
+    getRowData={[Function]}
+    pagination={true}
+    rows={
+      Array [
         Object {
-          "Component": [Function],
-          "content": "Create Subaccount",
-          "to": "/account/subaccounts/create",
-        }
-      }
-      title="Subaccounts"
-    />
-    <TableCollection
-      columns={
-        Array [
-          "Name",
-          "ID",
-          "Status",
-        ]
-      }
-      getRowData={[Function]}
-      pagination={true}
-      rows={
-        Array [
-          Object {
-            "compliance_status": "active",
-            "id": 123,
-            "ip_pool": "my_ip_pool",
-            "name": "Joe's Garage",
-            "status": "active",
-          },
-          Object {
-            "compliance_status": "active",
-            "id": 456,
-            "name": "SharkPost",
-            "status": "active",
-          },
-          Object {
-            "compliance_status": "active",
-            "id": 789,
-            "name": "Dev Avocado",
-            "status": "suspended",
-          },
-        ]
-      }
-    />
-  </div>
-</div>
+          "compliance_status": "active",
+          "id": 123,
+          "ip_pool": "my_ip_pool",
+          "name": "Joe's Garage",
+          "status": "active",
+        },
+        Object {
+          "compliance_status": "active",
+          "id": 456,
+          "name": "SharkPost",
+          "status": "active",
+        },
+        Object {
+          "compliance_status": "active",
+          "id": 789,
+          "name": "Dev Avocado",
+          "status": "suspended",
+        },
+      ]
+    }
+  />
+</Page>
 `;
 
 exports[`renders empty state 1`] = `
-<div>
-  <EmptyState
-    action={
-      Object {
-        "content": "Create a Subaccount",
-      }
-    }
-    secondaryAction={
-      Object {
+<Page
+  empty={
+    Object {
+      "content": <p>
+        Subaccounts are a good way of managing external client accounts.
+      </p>,
+      "image": "Users",
+      "secondaryAction": Object {
         "content": "Learn more",
-        "target": "_blank",
+        "external": true,
         "to": "https://developers.sparkpost.com/api/subaccounts.html",
+      },
+      "show": true,
+      "title": "Manage your subaccounts",
+    }
+  }
+  primaryAction={
+    Object {
+      "Component": [Function],
+      "content": "Create Subaccount",
+      "to": "/account/subaccounts/create",
+    }
+  }
+  title="Subaccounts"
+>
+  <TableCollection
+    columns={
+      Array [
+        "Name",
+        "ID",
+        "Status",
+      ]
+    }
+    filterBox={
+      Object {
+        "exampleModifiers": Array [
+          "name",
+          "id",
+          "status",
+        ],
+        "itemToStringKeys": Array [
+          "name",
+          "id",
+        ],
+        "show": true,
       }
     }
-    title="Get started with Subaccounts"
-  >
-    <p>
-      Subaccounts are a good way of managing external client accounts.
-    </p>
-  </EmptyState>
-</div>
+    getRowData={[Function]}
+    pagination={true}
+    rows={Array []}
+  />
+</Page>
 `;
 
 exports[`renders errors when present 1`] = `
-<div>
-  <div>
-    <Page
-      empty={Object {}}
-      primaryAction={
-        Object {
-          "Component": [Function],
-          "content": "Create Subaccount",
-          "to": "/account/subaccounts/create",
-        }
-      }
-      title="Subaccounts"
-    />
-    <ApiErrorBanner
-      errorDetails="Uh oh! It broke."
-      message="Sorry, we ran into an error loading your Subaccounts"
-      reload={[Function]}
-    />
-  </div>
-</div>
+<Page
+  empty={
+    Object {
+      "content": <p>
+        Subaccounts are a good way of managing external client accounts.
+      </p>,
+      "image": "Users",
+      "secondaryAction": Object {
+        "content": "Learn more",
+        "external": true,
+        "to": "https://developers.sparkpost.com/api/subaccounts.html",
+      },
+      "show": false,
+      "title": "Manage your subaccounts",
+    }
+  }
+  primaryAction={
+    Object {
+      "Component": [Function],
+      "content": "Create Subaccount",
+      "to": "/account/subaccounts/create",
+    }
+  }
+  title="Subaccounts"
+>
+  <ApiErrorBanner
+    errorDetails="Uh oh! It broke."
+    message="Sorry, we ran into an error loading your Subaccounts"
+    reload={[Function]}
+  />
+</Page>
 `;

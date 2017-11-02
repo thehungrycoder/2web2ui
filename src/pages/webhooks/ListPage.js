@@ -14,6 +14,11 @@ const getRowData = ({ id, name, target }) => {
   const nameLink = <Link to={`/webhooks/details/${id}`}>{name}</Link>;
   return [nameLink, id, target];
 };
+const filterBoxConfig = {
+  show: true,
+  itemToStringKeys: ['name', 'id', 'target']
+};
+
 
 class WebhooksList extends Component {
 
@@ -40,26 +45,30 @@ class WebhooksList extends Component {
         rows={webhooks}
         getRowData={getRowData}
         pagination={true}
+        filterBox={filterBoxConfig}
       />
     );
   }
 
   render() {
-    const { loading, error } = this.props;
+    const { loading, error, webhooks } = this.props;
 
     if (loading) {
       return <Loading />;
     }
 
     return (
-      <div>
-        <Page
-          primaryAction={{ content: 'Create Webhook', Component: Link, to: '/webhooks/create' }}
-          title={'Webhooks'}
-        />
-        {error && this.renderError()}
-        {!error && this.renderCollection()}
-      </div>
+      <Page
+        primaryAction={{ content: 'Create Webhook', Component: Link, to: '/webhooks/create' }}
+        title='Webhooks'
+        empty={{
+          show: webhooks.length === 0,
+          image: 'Setup',
+          title: 'Create a Webhook',
+          content: <p>Push message events directly to your own endpoints</p>
+        }}>
+        { error ? this.renderError() : this.renderCollection() }
+      </Page>
     );
   }
 }

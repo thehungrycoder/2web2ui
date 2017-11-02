@@ -1,37 +1,38 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-<div>
-  <Page
-    empty={Object {}}
-    title="Profile"
-  />
+<Page
+  empty={Object {}}
+  title="Profile"
+>
   <Panel>
     <Table>
-      <Table.Row>
-        <Table.HeaderCell>
-          Account ID
-        </Table.HeaderCell>
-        <Table.Cell>
-          12345
-        </Table.Cell>
-      </Table.Row>
-      <Table.Row>
-        <Table.HeaderCell>
-          Username
-        </Table.HeaderCell>
-        <Table.Cell>
-          Lord Stark
-        </Table.Cell>
-      </Table.Row>
-      <Table.Row>
-        <Table.HeaderCell>
-          Email Address
-        </Table.HeaderCell>
-        <Table.Cell>
-          ned.stark@winterfell.biz
-        </Table.Cell>
-      </Table.Row>
+      <tbody>
+        <Table.Row>
+          <Table.HeaderCell>
+            Account ID
+          </Table.HeaderCell>
+          <Table.Cell>
+            12345
+          </Table.Cell>
+        </Table.Row>
+        <Table.Row>
+          <Table.HeaderCell>
+            Username
+          </Table.HeaderCell>
+          <Table.Cell>
+            Lord Stark
+          </Table.Cell>
+        </Table.Row>
+        <Table.Row>
+          <Table.HeaderCell>
+            Email Address
+          </Table.HeaderCell>
+          <Table.Cell>
+            ned.stark@winterfell.biz
+          </Table.Cell>
+        </Table.Row>
+      </tbody>
     </Table>
   </Panel>
   <Panel
@@ -60,5 +61,5 @@ exports[`renders correctly 1`] = `
       Update Password
     </Button>
   </Panel>
-</div>
+</Page>
 `;

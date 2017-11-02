@@ -97,12 +97,10 @@ class WebhooksDetails extends Component {
 
 
     return (
-      <div>
-        <Page
-          title={webhook.name}
-          secondaryActions={this.secondaryActions}
-          breadcrumbAction={{ content: 'Webhooks', Component: Link, to: '/webhooks/' }}
-        />
+      <Page
+        title={webhook.name}
+        secondaryActions={this.secondaryActions}
+        breadcrumbAction={{ content: 'Webhooks', Component: Link, to: '/webhooks/' }} >
         <Tabs
           selected={selectedTab}
           tabs={this.tabs}
@@ -116,7 +114,7 @@ class WebhooksDetails extends Component {
           handleToggle={this.toggleDelete}
           handleDelete={this.deleteWebhook}
         />
-      </div>
+      </Page>
     );
   }
 }

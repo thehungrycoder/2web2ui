@@ -7,7 +7,7 @@ import { reduxForm } from 'redux-form';
 import { getPublished } from '../../actions/templates';
 
 // Selectors
-import { templateById } from 'src/selectors/templates';
+import { getTemplateById } from 'src/selectors/templates';
 
 // Components
 import Form from './components/Form';
@@ -27,7 +27,7 @@ class PublishedPage extends Component {
     getPublished(match.params.id);
   }
 
-  renderPageHeader() {
+  getPageProps() {
     const { match } = this.props;
 
     const secondaryActions = [
@@ -42,19 +42,13 @@ class PublishedPage extends Component {
       }
     ];
 
-    const backAction = {
+    const breadcrumbAction = {
       content: 'Templates',
       Component: Link,
       to: '/templates'
     };
 
-    return (
-      <Page
-        secondaryActions={secondaryActions}
-        breadcrumbAction={backAction}
-        title={`${match.params.id} (Published)`}
-      />
-    );
+    return { secondaryActions, breadcrumbAction, title: `${match.params.id} (Published)` };
   }
 
   render() {
@@ -65,8 +59,7 @@ class PublishedPage extends Component {
     }
 
     return (
-      <div>
-        { this.renderPageHeader() }
+      <Page {...this.getPageProps()}>
         <Grid>
           <Grid.Column xs={12} lg={4}>
             <Form name={FORM_NAME} published />
@@ -75,14 +68,14 @@ class PublishedPage extends Component {
             <Editor name={FORM_NAME} published />
           </Grid.Column>
         </Grid>
-      </div>
+      </Page>
     );
   }
 }
 
-const mapStateToProps = ({ templates }, { match }) => ({
-  loading: templates.getLoading,
-  initialValues: templateById(templates, match.params.id).published
+const mapStateToProps = (state, props) => ({
+  loading: state.templates.getLoading,
+  initialValues: getTemplateById(state, props).published
 });
 
 const formOptions = {

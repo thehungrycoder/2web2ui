@@ -9,7 +9,7 @@ import { getDraft, getPublished, update, deleteTemplate, publish } from '../../a
 import { showAlert } from 'src/actions/globalAlert';
 
 // Selectors
-import { templateById } from 'src/selectors/templates';
+import { getTemplateById } from 'src/selectors/templates';
 
 // Components
 import Form from './components/Form';
@@ -76,7 +76,7 @@ class EditPage extends Component {
     }
   }
 
-  renderPageHeader() {
+  getPageProps() {
     const {
       handleSubmit,
       template,
@@ -107,24 +107,22 @@ class EditPage extends Component {
         disabled: submitting
       },
       { content: 'Delete', onClick: () => this.handleDeleteModalToggle() },
-      { content: 'Duplicate', disabled: true },
+      { content: 'Duplicate', Component: Link, to: `/templates/create/${match.params.id}` },
       { content: 'Preview & Send', disabled: true }
     ];
 
-    const backAction = {
+    const breadcrumbAction = {
       content: 'Templates',
       Component: Link,
       to: '/templates'
     };
 
-    return (
-      <Page
-        primaryAction={primaryAction}
-        secondaryActions={secondaryActions}
-        breadcrumbAction={backAction}
-        title={`${match.params.id} (Draft)`}
-      />
-    );
+    return {
+      secondaryActions,
+      primaryAction,
+      breadcrumbAction,
+      title: `${match.params.id} (Draft)`
+    };
   }
 
   render() {
@@ -139,8 +137,7 @@ class EditPage extends Component {
     }
 
     return (
-      <div>
-        { this.renderPageHeader() }
+      <Page {...this.getPageProps()}>
         <Grid>
           <Grid.Column xs={12} lg={4}>
             <Form name={FORM_NAME} />
@@ -155,16 +152,16 @@ class EditPage extends Component {
           text='Are you sure you want to delete this template? Both draft and published versions of this template will be deleted.'
           handleToggle={this.handleDeleteModalToggle}
           handleDelete={this.handleDelete} />
-      </div>
+      </Page>
     );
   }
 }
 
-const mapStateToProps = ({ templates }, { match }) => {
-  const template = templateById(templates, match.params.id);
 
+const mapStateToProps = (state, props) => {
+  const template = getTemplateById(state, props);
   return {
-    loading: templates.getLoading,
+    loading: state.templates.getLoading,
     template,
     // For templates with published but no draft, pull in published values
     initialValues: template.draft || template.published

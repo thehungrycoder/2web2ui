@@ -2,6 +2,9 @@ const config = {
   apiBase: 'no-default-set',
   apiDateFormat: 'YYYY-MM-DDTHH:mm',
   apiRequestTimeout: 15000,
+  apiRequestHeaders: {
+    'X-Sparky': '1d24c3473dd52a2f4a53fb6808cf9a73'
+  },
   authentication: {
     cookie: {
       name: 'auth',
@@ -37,8 +40,13 @@ const config = {
     { time: 60 * 24 * 190, value: 'week', format: 'MMM Do' },
     { time: Infinity, value: 'month', format: 'MMM YY' }
   ],
+  release: process.env.REACT_APP_VERSION,
   sendingIps: {
     pricePerIp: 20.00
+  },
+  sentry: {
+    projectId: 232588,
+    publicKey: '63149b1565df4b7199db939a4410b47a'
   },
   showThingOnDash: true,
   showSummaryReport: true,
@@ -46,6 +54,7 @@ const config = {
     enabled: false,
     defaultMetrics: ['count_targeted', 'count_rendered', 'count_accepted', 'count_bounce']
   },
+  tenant: 'local',
   zuora: {
     baseUrl: 'https://rest.apisandbox.zuora.com/v1',
     timeout: 15000

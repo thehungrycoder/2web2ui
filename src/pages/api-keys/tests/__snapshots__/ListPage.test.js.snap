@@ -1,25 +1,65 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-<div>
-  <Page
-    empty={Object {}}
-    primaryAction={
-      Object {
-        "Component": [Function],
-        "content": "Create API Key",
-        "to": "/account/api-keys/create",
-      }
+<Page
+  empty={
+    Object {
+      "content": <p>
+        Create an API key you can use to access our REST or SMTP API services.
+      </p>,
+      "image": "Setup",
+      "secondaryAction": Object {
+        "content": "View our API Docs",
+        "external": true,
+        "to": "https://developers.sparkpost.com/api",
+      },
+      "show": false,
     }
-    title="API Keys"
-  />
+  }
+  primaryAction={
+    Object {
+      "Component": [Function],
+      "content": "Create API Key",
+      "to": "/account/api-keys/create",
+    }
+  }
+  title="API Keys"
+>
   <TableCollection
     columns={
       Array [
-        "Name",
-        "Key",
-        "Permissions",
+        Object {
+          "label": "Name",
+          "width": "40%",
+        },
+        Object {
+          "label": "Key",
+          "width": "20%",
+        },
+        Object {
+          "label": "Subaccount",
+          "width": "20%",
+        },
       ]
+    }
+    filterBox={
+      Object {
+        "exampleModifiers": Array [
+          "key",
+          "name",
+          "id",
+        ],
+        "itemToStringKeys": Array [
+          "label",
+          "short_key",
+          "id",
+        ],
+        "keyMap": Object {
+          "key": "short_key",
+          "name": "label",
+        },
+        "show": true,
+      }
     }
     getRowData={[Function]}
     pagination={true}
@@ -42,26 +82,38 @@ exports[`renders correctly 1`] = `
       ]
     }
   />
-</div>
+</Page>
 `;
 
 exports[`renders errors when present 1`] = `
-<div>
-  <Page
-    empty={Object {}}
-    primaryAction={
-      Object {
-        "Component": [Function],
-        "content": "Create API Key",
-        "to": "/account/api-keys/create",
-      }
+<Page
+  empty={
+    Object {
+      "content": <p>
+        Create an API key you can use to access our REST or SMTP API services.
+      </p>,
+      "image": "Setup",
+      "secondaryAction": Object {
+        "content": "View our API Docs",
+        "external": true,
+        "to": "https://developers.sparkpost.com/api",
+      },
+      "show": false,
     }
-    title="API Keys"
-  />
+  }
+  primaryAction={
+    Object {
+      "Component": [Function],
+      "content": "Create API Key",
+      "to": "/account/api-keys/create",
+    }
+  }
+  title="API Keys"
+>
   <ApiErrorBanner
     errorDetails="Uh oh! It broke. "
     message="Sorry, we seem to have had some trouble loading your API keys."
     reload={[Function]}
   />
-</div>
+</Page>
 `;

@@ -3,7 +3,9 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
+import config from './config';
 import { unregister } from './helpers/registerServiceWorker';
+import ErrorTracker from './helpers/errorTracker';
 import rootReducer from './reducers';
 
 import './critical.scss';
@@ -14,8 +16,13 @@ import App from './App';
 const composeEnhancers = process.env.NODE_ENV !== 'production' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; // eslint-disable-line no-mixed-operators
 const store = createStore(
   rootReducer,
-  composeEnhancers(applyMiddleware(thunk))
+  composeEnhancers(
+    applyMiddleware(thunk),
+    applyMiddleware(ErrorTracker.middleware)
+  )
 );
+
+ErrorTracker.install(config, store);
 
 render(
   <Provider store={store}>
@@ -27,3 +34,13 @@ unregister(); // our bundle is currently too big to be added to SW cache, causin
 
 // Kill loading screen
 document.getElementById('critical').className += ' ready';
+
+/**
+ * Track unhandled promise rejects
+ *
+ * @param {PromiseRejectionEvent} event
+ * @param {Error} event.reason
+ */
+window.onunhandledrejection = ({ reason }) => {
+  ErrorTracker.report('onunhandledrejection', reason);
+};

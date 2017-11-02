@@ -102,17 +102,13 @@ class WebhooksCreate extends Component {
     }
 
     return (
-      <div>
-        <Page
-          title='Create Webhook'
-          breadcrumbAction={{ content: 'Webhooks', Component: Link, to: '/webhooks' }}
-        />
+      <Page title='Create Webhook' breadcrumbAction={{ content: 'Webhooks', Component: Link, to: '/webhooks' }} >
         <Panel>
           <Panel.Section>
             <WebhookForm eventsTree={eventsTree} newWebhook={true} onSubmit={(values) => this.createWebhook(values, eventsTree)}/>
           </Panel.Section>
         </Panel>
-      </div>
+      </Page>
     );
   }
 }

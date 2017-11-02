@@ -95,6 +95,12 @@ export default [
     layout: App
   },
   {
+    path: '/account/subaccounts/create',
+    component: subaccounts.CreatePage,
+    condition: hasGrants('subaccount/manage'),
+    layout: App
+  },
+  {
     path: '/account/users',
     component: users.ListPage,
     condition: hasGrants('users/manage'),
@@ -113,7 +119,7 @@ export default [
     layout: App
   },
   {
-    path: '/templates/create',
+    path: '/templates/create/:id?',
     component: templates.CreatePage,
     condition: hasGrants('templates/modify'),
     layout: App
@@ -176,6 +182,12 @@ export default [
     path: '/account/tracking-domains/',
     component: trackingDomains.ListPage,
     condition: hasGrants('tracking_domains/view'),
+    layout: App
+  },
+  {
+    path: '/account/tracking-domains/create',
+    component: trackingDomains.CreatePage,
+    condition: hasGrants('tracking_domains/manage'),
     layout: App
   },
   {
