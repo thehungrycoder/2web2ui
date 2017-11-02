@@ -6,7 +6,7 @@ import { getTemplates } from 'src/selectors/templates';
 import { getRowData, columns, filterBoxConfig } from './tableConfig';
 import { TableCollection, ApiErrorBanner, Loading } from 'src/components';
 import { Page } from '@sparkpost/matchbox';
-import Editor from './components/Editor' // async, for preload
+import Editor from './components/Editor'; // async, for preload
 
 const primaryAction = {
   content: 'Create Template',
