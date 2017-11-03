@@ -32,12 +32,10 @@ Array [
     "children": Array [
       Object {
         "count": 2,
-        "description": 2,
         "name": 2,
       },
       Object {
         "count": 3,
-        "description": 3,
         "name": 3,
       },
     ],
@@ -48,7 +46,6 @@ Array [
     "children": Array [
       Object {
         "count": 1,
-        "description": 1,
         "name": 1,
       },
     ],

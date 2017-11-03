@@ -1,5 +1,5 @@
 import { fetch as fetchMetrics } from 'src/actions/metrics';
-import { refreshTypeaheadCache } from 'src/actions/reportFilters';
+import { refreshTypeaheadCache, refreshReportRage } from 'src/actions/reportFilters';
 import { getQueryFromOptions, getMetricsFromKeys } from 'src/helpers/metrics';
 import { getRelativeDates } from 'src/helpers/date';
 
@@ -39,20 +39,22 @@ export function refresh(updates = {}) {
       .then((results) => {
 
         // refresh the chart with the new data
-        dispatch({
-          type: 'REFRESH_SUMMARY_CHART',
-          payload: {
-            data: results,
-            metrics: options.metrics,
-            precision: params.precision
-          }
-        });
+        const summaryData = {
+          data: results,
+          metrics: options.metrics,
+          precision: params.precision
+        };
 
-        // refresh the date range
-        dispatch({
-          type: 'REFRESH_REPORT_RANGE',
-          payload: { ...options }
-        });
+        dispatch(refreshSummaryChart(summaryData));
+
+        dispatch(refreshReportRage(options));
       });
+  };
+}
+
+export function refreshSummaryChart(payload) {
+  return {
+    type: 'REFRESH_SUMMARY_CHART',
+    payload
   };
 }

@@ -1,5 +1,6 @@
 import moment from 'moment';
 import qs from 'query-string';
+import _ from 'lodash';
 
 function getFilterSearchOptions(filters) {
   return {
@@ -10,7 +11,7 @@ function getFilterSearchOptions(filters) {
 }
 
 function getSearch(options) {
-  return `?${qs.stringify(options, { encode: false })}`;
+  return _.isEmpty(options) ? '' : `?${qs.stringify(options, { encode: false })}`;
 }
 
 function getShareLink(options) {

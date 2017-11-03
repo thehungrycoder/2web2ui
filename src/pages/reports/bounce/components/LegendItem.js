@@ -11,13 +11,15 @@ const LegendItem = ({
   children,
   breadcrumb,
   onClick,
+  hovered,
   ...props
 }) => {
   const itemClasses = cx(
     styles.LegendItem,
     onClick && styles.enabled,
     children && styles.hasChildren,
-    breadcrumb && styles.breadcrumb
+    breadcrumb && styles.breadcrumb,
+    hovered && styles.hovered
   );
 
   const breadcrumbMarkup = breadcrumb

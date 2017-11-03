@@ -21,6 +21,11 @@ export class ChartGroup extends Component {
     active: null
   };
 
+  /**
+   * Handles mouse over event for LegendItems and BounceChart
+   * @param  {Object} e - Recharts synthetic event - behavior mimiced from Legend
+   * @param  {string} hoverSet - 'primary' | 'secondary'
+   */
   handleMouseOver = (e, hoverSet) => {
     const { categories, types } = this.props;
     const { active } = this.state;
@@ -133,6 +138,7 @@ export class ChartGroup extends Component {
             <Legend
               headerData={this.getLegendHeaderData()}
               {...this.getData()}
+              hoveredItem={this.state.hoveredItem}
               handleMouseOver={this.handleMouseOver}
               handleMouseOut={this.handleMouseOut}
               handleClick={this.handleClick} />

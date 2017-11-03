@@ -18,9 +18,11 @@ describe('Action Creator: Bounce Report', () => {
   });
 
   it('should dispatch a refresh action', async () => {
+    const fetchSpy = jest.spyOn(metricsActions, 'fetchDeliverability');
     metricsActions.fetchDeliverability = jest.fn(() => [{ count_bounce: 1 }]);
     const thunk = bounceReport.refresh();
     await thunk(dispatchMock, getStateMock);
     expect(dispatchMock.mock.calls).toMatchSnapshot();
+    fetchSpy.mockRestore();
   });
 });

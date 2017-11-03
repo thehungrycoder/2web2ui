@@ -10,13 +10,17 @@ const Legend = ({
   secondaryData,
   handleMouseOver,
   handleMouseOut,
-  handleClick
+  handleClick,
+  hoveredItem
 }) => {
+  const hoveredDataSet = hoveredItem && hoveredItem.dataSet;
+
   const primaryLegend = primaryData.map((item, i) => (
     <LegendItem key={i}
       onMouseOver={() => handleMouseOver(item, 'primary')}
       onMouseOut={handleMouseOut}
       onClick={() => handleClick(item)}
+      hovered={hoveredDataSet === 'primary' && hoveredItem.index === i}
       {...item} />
   ));
 
@@ -27,6 +31,7 @@ const Legend = ({
             onMouseOver={() => handleMouseOver(item, 'secondary')}
             onMouseOut={handleMouseOut}
             onClick={() => handleClick(item)}
+            hovered={hoveredDataSet === 'secondary' && hoveredItem.index === i}
             {...item} />
         ))}
       </Grid.Column>

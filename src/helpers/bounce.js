@@ -1,39 +1,37 @@
 import { snakeToCamel } from 'src/helpers/string';
 import color from 'color';
-import _ from 'lodash';
+import fp from 'lodash/fp';
 
 /**
  * Camel cases aggregates
  */
 function formatAggregates(aggregates) {
-  const map = {};
-  _.each(aggregates, (value, key) => map[snakeToCamel(key)] = value);
-  return map;
+  return fp.mapKeys((key) => snakeToCamel(key))(aggregates);
 }
 
 /**
  * Formats category objects from getBounceClassifications
  */
 function formatCategory(classification) {
-  const { bounce_category_name, bounce_class_name, bounce_class_description, count_bounce } = classification;
+  const { bounce_category_name, bounce_class_name, count_bounce } = classification;
   return {
     category: bounce_category_name,
     name: bounce_class_name,
-    description: bounce_class_description,
     count: count_bounce
   };
 }
 
 /**
  * Reshapes results of getBounceClassifications for the bounce chart
+ * @param  {Object} data - getBounceClassifications results
+ * @return {Array} - Categories ordered by count and grouped by bounce category name
  */
 function reshapeCategories(data) {
   const categories = [];
-  const formatted = _.flatten(data).map((item) => formatCategory(item));
 
-  _.each(formatted, (item) => {
+  const createCategory = (item) => {
     const { category, ...rest } = item;
-    const index = _.findIndex(categories, ({ name }) => name === category);
+    const index = fp.findIndex(({ name }) => name === category)(categories);
 
     if (index === -1) {
       categories.push({
@@ -45,9 +43,14 @@ function reshapeCategories(data) {
       categories[index].count = categories[index].count + rest.count;
       categories[index].children.push(rest);
     }
-  });
+  };
 
-  return _.orderBy(categories, ['count'], ['desc']);
+  fp.flow(
+    fp.flatMap(formatCategory),
+    fp.each(createCategory)
+  )(data);
+
+  return fp.orderBy(['count'], ['desc'])(categories);
 }
 
 /**

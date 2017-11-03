@@ -36,7 +36,6 @@ describe('Legend: ', () => {
   });
 
   it('should handle mouse over', () => {
-    wrapper.setProps({ });
     wrapper.find('LegendItem').at(1).simulate('mouseover');
     wrapper.find('LegendItem').at(2).simulate('mouseover');
     expect(props.handleMouseOver).toHaveBeenCalledWith({ name: 'primary' }, 'primary');
@@ -47,5 +46,10 @@ describe('Legend: ', () => {
     wrapper.find('LegendItem').at(1).simulate('mouseout');
     wrapper.find('LegendItem').at(2).simulate('mouseout');
     expect(props.handleMouseOut).toHaveBeenCalledTimes(2);
+  });
+
+  it('should handle external hover', () => {
+    wrapper.setProps({ hoveredItem: { dataSet: 'primary', index: 0 }})
+    expect(wrapper.find('Grid')).toMatchSnapshot();
   });
 });

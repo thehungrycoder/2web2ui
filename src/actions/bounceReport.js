@@ -1,5 +1,5 @@
-import { fetchDeliverability, getBounceClassifications } from 'src/actions/metrics';
-import { refreshTypeaheadCache } from 'src/actions/reportFilters';
+import { fetchDeliverability, fetchBounceClassifications } from 'src/actions/metrics';
+import { refreshTypeaheadCache, refreshReportRage } from 'src/actions/reportFilters';
 import { getQueryFromOptions, getMetricsFromKeys } from 'src/helpers/metrics';
 import { getRelativeDates } from 'src/helpers/date';
 import { getBandTypes, reshapeCategories, formatAggregates } from 'src/helpers/bounce';
@@ -49,27 +49,23 @@ export function refresh(updates = {}) {
         const bounceParams = { ...aggregateParams, metrics: 'count_bounce' };
 
         // dispatch(getBounceReasons(bounceParams)) For table data
-
-        dispatch(getBounceClassifications(bounceParams)).then((classifications) => {
-
-          const formattedAggregates = formatAggregates(aggregates[0]);
-
-          // refresh the chart with the new data
-          dispatch({
-            type: 'REFRESH_BOUNCE_REPORT',
-            payload: {
-              categories: reshapeCategories(classifications),
-              aggregates: formattedAggregates,
-              types: getBandTypes(formattedAggregates)
-            }
-          });
-
-          // refresh the date range
-          dispatch({
-            type: 'REFRESH_REPORT_RANGE',
-            payload: { ...options }
-          });
+        dispatch(fetchBounceClassifications(bounceParams)).then((classifications) => {
+          dispatch(refreshBounceReport({ aggregates, classifications }));
+          dispatch(refreshReportRage(options));
         });
       });
+  };
+}
+
+// refresh the chart with the new data
+export function refreshBounceReport({ aggregates, classifications }) {
+  const formattedAggregates = formatAggregates(aggregates[0]);
+  return {
+    type: 'REFRESH_BOUNCE_REPORT',
+    payload: {
+      categories: reshapeCategories(classifications),
+      aggregates: formattedAggregates,
+      types: getBandTypes(formattedAggregates)
+    }
   };
 }

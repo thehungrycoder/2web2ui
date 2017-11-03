@@ -40,3 +40,11 @@ export function removeFilter(payload) {
     payload
   };
 }
+
+// refresh the date range
+export function refreshReportRage(options) {
+  return {
+    type: 'REFRESH_REPORT_RANGE',
+    payload: options
+  };
+}

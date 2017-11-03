@@ -112,6 +112,7 @@ exports[`ChartGroup:  should render 1`] = `
             },
           ]
         }
+        hoveredItem={null}
         primaryData={
           Array [
             Object {
@@ -164,6 +165,7 @@ exports[`ChartGroup:  should render correctly after click 1`] = `
       },
     ]
   }
+  hoveredItem={null}
   primaryData={
     Array [
       Object {

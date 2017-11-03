@@ -19,16 +19,15 @@ it('Should get search string', () => {
   expect(reports.getSearch(options)).toEqual('?one=two&three=four');
 });
 
-
+it('Should not return anything with no options', () => {
+  expect(reports.getSearch({})).toEqual('');
+});
 
 it('Should get share link', () => {
-  Object.defineProperty(window.location, 'href', {
-    value: 'test.com?not=this',
-    writable: true,
-  });
   const options = {
     one: 'two',
     three: 'four'
   };
-  expect(reports.getShareLink(options)).toEqual('test.com?one=two&three=four');
+  // window location set in jest config
+  expect(reports.getShareLink(options)).toEqual('http://phoenix.test/?one=two&three=four');
 });

@@ -119,7 +119,7 @@
     ],
     "testResultsProcessor": "./node_modules/jest-junit",
     "testEnvironment": "node",
-    "testURL": "http://localhost",
+    "testURL": "http://phoenix.test",
     "transform": {
       "^.+\\.(js|jsx)$": "<rootDir>/node_modules/babel-jest",
       "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",

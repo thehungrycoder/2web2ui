@@ -13,7 +13,7 @@
   }
 }
 
-.enabled.LegendItem:hover {
+.enabled.LegendItem:hover, .enabled.LegendItem.hovered {
   color: color(gray, 0);
   background: color(gray, 9);
 }
