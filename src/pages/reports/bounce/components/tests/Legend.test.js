@@ -11,16 +11,16 @@ describe('Legend: ', () => {
     handleMouseOver: jest.fn(),
     handleMouseOut: jest.fn(),
     handleClick: jest.fn()
-  }
+  };
 
   let wrapper;
 
   beforeEach(() => {
     wrapper = shallow(<Legend {...props} />);
-  })
+  });
 
   it('should render', () => {
-    wrapper.setProps({ secondaryData: null })
+    wrapper.setProps({ secondaryData: null });
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -31,16 +31,16 @@ describe('Legend: ', () => {
   it('should handle click', () => {
     wrapper.find('LegendItem').at(1).simulate('click');
     wrapper.find('LegendItem').at(2).simulate('click');
-    expect(props.handleClick).toHaveBeenCalledWith({name: 'primary'});
-    expect(props.handleClick).toHaveBeenCalledWith({name: 'secondary'});
+    expect(props.handleClick).toHaveBeenCalledWith({ name: 'primary' });
+    expect(props.handleClick).toHaveBeenCalledWith({ name: 'secondary' });
   });
 
   it('should handle mouse over', () => {
-    wrapper.setProps({ })
+    wrapper.setProps({ });
     wrapper.find('LegendItem').at(1).simulate('mouseover');
     wrapper.find('LegendItem').at(2).simulate('mouseover');
-    expect(props.handleMouseOver).toHaveBeenCalledWith({name: 'primary'}, 'primary');
-    expect(props.handleMouseOver).toHaveBeenCalledWith({name: 'secondary'}, 'secondary');
+    expect(props.handleMouseOver).toHaveBeenCalledWith({ name: 'primary' }, 'primary');
+    expect(props.handleMouseOver).toHaveBeenCalledWith({ name: 'secondary' }, 'secondary');
   });
 
   it('should handle mouse out', () => {

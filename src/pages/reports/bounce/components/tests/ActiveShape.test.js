@@ -13,7 +13,7 @@ describe('ActiveShape: ', () => {
       startAngle: 5,
       endAngle: 6,
       children: []
-    }
+    };
     const wrapper = shallow(<ActiveShape {...props} />);
     expect(wrapper).toMatchSnapshot();
   });

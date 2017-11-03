@@ -7,7 +7,7 @@ describe('ActiveLabel: ', () => {
     const props = {
       name: 'name',
       value: '123'
-    }
+    };
     const wrapper = shallow(<ActiveLabel {...props} />);
     expect(wrapper).toMatchSnapshot();
   });

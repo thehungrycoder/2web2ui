@@ -12,20 +12,20 @@ describe('LegendItem: ', () => {
     breadcrumb: false,
     onClick: jest.fn(),
     handleClick: jest.fn()
-  }
+  };
 
   let wrapper;
 
   beforeEach(() => {
-    wrapper = shallow(<LegendItem {...props} />)
-  })
+    wrapper = shallow(<LegendItem {...props} />);
+  });
 
   it('should render', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render breadcrumb', () => {
-    wrapper.setProps({ breadcrumb: true })
+    wrapper.setProps({ breadcrumb: true });
     expect(wrapper).toMatchSnapshot();
   });
 });

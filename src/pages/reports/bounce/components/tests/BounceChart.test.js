@@ -5,26 +5,26 @@ import { shallow } from 'enzyme';
 describe('BounceChart: ', () => {
 
   const props = {
-    primaryData: [{ name: 'primary'}],
+    primaryData: [{ name: 'primary' }],
     secondaryData: [{ name: 'secondary' }],
     onClick: jest.fn(),
     handleClick: jest.fn(),
     handleMouseOver: jest.fn(),
     handleMouseOut: jest.fn()
-  }
+  };
 
   let wrapper;
 
   beforeEach(() => {
-    wrapper = shallow(<BounceChart {...props} />)
-  })
+    wrapper = shallow(<BounceChart {...props} />);
+  });
 
   it('should render', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render hovered object', () => {
-    wrapper.setProps({ hoveredItem: { dataSet: 'primary', index: 1 } })
+    wrapper.setProps({ hoveredItem: { dataSet: 'primary', index: 1 }});
     const pie = wrapper.find('Pie').at(0);
     expect(pie).toHaveProp('activeIndex', 1);
   });

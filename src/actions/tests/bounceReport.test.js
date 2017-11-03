@@ -1,4 +1,3 @@
-import { createMockStore } from 'src/__testHelpers__/mockStore';
 import * as bounceReport from '../bounceReport';
 import * as metricsActions from 'src/actions/metrics';
 
