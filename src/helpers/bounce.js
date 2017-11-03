@@ -33,7 +33,7 @@ function reshapeCategories(data) {
 
   _.each(formatted, (item) => {
     const { category, ...rest } = item;
-    const index = _.findIndex(categories, (o) => o.name === category);
+    const index = _.findIndex(categories, ({ name }) => name === category);
 
     if (index === -1) {
       categories.push({

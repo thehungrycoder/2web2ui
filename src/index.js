@@ -42,5 +42,5 @@ document.getElementById('critical').className += ' ready';
  * @param {Error} event.reason
  */
 window.onunhandledrejection = ({ reason }) => {
-  ErrorTracker.report('onunhandledrejection', reason);
+  ErrorTracker.capture('onunhandledrejection', reason);
 };
