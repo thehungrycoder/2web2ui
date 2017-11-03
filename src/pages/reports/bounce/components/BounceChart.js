@@ -11,8 +11,7 @@ const BounceChart = ({
   handleMouseOver,
   handleMouseOut,
   handleClick,
-  hover,
-  hoverSet
+  hoveredItem
 }) => {
   const sharedProps = {
     activeShape: ActiveShape, // Custom "active" (hover) sector component
@@ -26,19 +25,21 @@ const BounceChart = ({
     animationDuration: 1000
   };
 
+  const hoveredDataSet = hoveredItem && hoveredItem.dataSet;
+
   return (
-    <div className={cx('BounceChart', hover && 'BounceChart--hover')}>
-      <ResponsiveContainer width='99%' height={350}>
+    <div className={cx('BounceChart', hoveredItem && 'BounceChart--hover')}>
+      <ResponsiveContainer width='100%' height={350}>
         <PieChart height={350}>
           <Pie
-            activeIndex={hoverSet === 'primary' ? hover.index : null}
+            activeIndex={hoveredDataSet === 'primary' ? hoveredItem.index : null}
             onMouseOver={(e) => handleMouseOver(e, 'primary')}
             data={primaryData}
             innerRadius={100}
             outerRadius={140}
             {...sharedProps} />
           <Pie
-            activeIndex={hoverSet === 'secondary' ? hover.index : null}
+            activeIndex={hoveredDataSet === 'secondary' ? hoveredItem.index : null}
             onMouseOver={(e) => handleMouseOver(e, 'secondary')}
             data={secondaryData}
             innerRadius={75}

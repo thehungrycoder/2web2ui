@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ActiveLabel:  should render 1`] = `
+<div>
+  <span>
+    name
+  </span>
+  <span />
+  <span>
+    123
+  </span>
+</div>
+`;

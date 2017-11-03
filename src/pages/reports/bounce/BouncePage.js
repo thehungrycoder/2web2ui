@@ -5,10 +5,9 @@ import { refresh } from 'src/actions/bounceReport';
 
 import { Page, Panel } from '@sparkpost/matchbox';
 import Filters from '../components/Filters';
-import Header from './components/Header';
 import ChartGroup from './components/ChartGroup';
 
-class BouncePage extends Component {
+export class BouncePage extends Component {
   componentDidMount() {
     this.props.refresh();
   }
@@ -18,7 +17,7 @@ class BouncePage extends Component {
   }
 
   handleModalToggle = (modal) => {
-
+    // TODO
   }
 
   render() {
@@ -26,10 +25,7 @@ class BouncePage extends Component {
 
     const pageContent = !loading && aggregates && aggregates.countBounce === 0
       ? <Panel sectioned><h6>No bounces to report.</h6></Panel> // TODO
-      : <div>
-          <Header />
-          <ChartGroup />
-        </div>;
+      : <ChartGroup />;
 
     return (
       <Page title='Bounce Report'>

@@ -26,11 +26,11 @@ function reshapeCategories(data) {
       categories.push({
         name: category,
         count: rest.count,
-        subcategories: [rest]
+        children: [rest]
       });
     } else {
       categories[index].count = categories[index].count + rest.count;
-      categories[index].subcategories.push(rest);
+      categories[index].children.push(rest);
     }
   });
 
@@ -57,10 +57,10 @@ function generateColors(categories, base) {
   const baseColor = color(base);
   const rotate = 60 / categories.length;
   const saturate = 0.1 / categories.length;
-  return categories.map(({ subcategories, ...category }, i) => ({
+  return categories.map(({ children, ...category }, i) => ({
     ...category,
     fill: baseColor.rotate(rotate * i).saturate(saturate * i).string(),
-    subcategories: subcategories && generateColors(subcategories, '#DB2F3D')
+    children: children && generateColors(children, '#DB2F3D')
   }));
 }
 

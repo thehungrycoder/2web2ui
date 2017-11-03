@@ -9,10 +9,9 @@ import { Loading } from 'src/components';
 
 import styles from './ChartGroup.module.scss';
 
-class ChartGroup extends Component {
+export class ChartGroup extends Component {
   state = {
-    hover: null,
-    hoverSet: null,
+    hoveredItem: null,
     active: null
   };
 
@@ -21,26 +20,31 @@ class ChartGroup extends Component {
     const { active } = this.state;
     const { name, count } = e;
 
-    let data = hoverSet === 'primary' ? categories : types;
+    let dataSet = hoverSet === 'primary' ? categories : types;
 
     if (active) {
-      data = active.subcategories;
+      dataSet = active.children;
     }
 
-    const hover = { name, count, index: _.findIndex(data, { name }) };
-    this.setState({ hover, hoverSet });
+    const hoveredItem = {
+      name,
+      count,
+      index: _.findIndex(dataSet, { name }),
+      dataSet: hoverSet
+    };
+
+    this.setState({ hoveredItem });
   }
 
   handleMouseOut = () => {
-    this.setState({ hover: null, hoverSet: null });
+    this.setState({ hoveredItem: null });
   }
 
-  handleClick = ({ name, subcategories, count }) => {
-    if (subcategories) {
+  handleClick = ({ name, children, count }) => {
+    if (children) {
       this.setState({
-        active: { name, subcategories, count },
-        hover: null,
-        hoverSet: null
+        active: { name, children, count },
+        hoveredItem: null
       });
     }
   }
@@ -51,12 +55,12 @@ class ChartGroup extends Component {
 
   getLabelProps = () => {
     const { aggregates } = this.props;
-    const { hover } = this.state;
+    const { hoveredItem } = this.state;
 
     const getRate = (n) => `${(100 * n).toFixed(2)}%`;
 
-    return hover
-      ? { name: hover.name, value: getRate(hover.count / aggregates.countBounce) }
+    return hoveredItem
+      ? { name: hoveredItem.name, value: getRate(hoveredItem.count / aggregates.countBounce) }
       : { name: 'Bounce Rate', value: getRate(aggregates.countBounce / aggregates.countTargeted) };
   }
 
@@ -64,19 +68,22 @@ class ChartGroup extends Component {
     const { aggregates } = this.props;
     const { active } = this.state;
 
+    // Header with breadcrumb & active data
     if (active) {
       return [
         { name: 'All Bounces', breadcrumb: true, onClick: this.handleBreadcrumb },
-        { name: active.name, count: active.count, disableInteraction: true }
+        { name: active.name, count: active.count }
       ];
     }
 
+    // Default header
     return [
-      { name: 'Targeted', count: aggregates.countTargeted, disableInteraction: true },
-      { name: 'All Bounces', count: aggregates.countBounce, disableInteraction: true }
+      { name: 'Targeted', count: aggregates.countTargeted },
+      { name: 'All Bounces', count: aggregates.countBounce }
     ];
   }
 
+  // Gets primary and secondary data for BounceChart & Legend
   getData = () => {
     const { categories, types } = this.props;
     const { active } = this.state;
@@ -85,7 +92,7 @@ class ChartGroup extends Component {
     let secondaryData = types;
 
     if (active) {
-      primaryData = active.subcategories;
+      primaryData = active.children;
       secondaryData = null;
     }
 
@@ -106,8 +113,7 @@ class ChartGroup extends Component {
             <div className={styles.ChartWrapper}>
               <BounceChart
                 {...this.getData()}
-                hover={this.state.hover}
-                hoverSet={this.state.hoverSet}
+                hoveredItem={this.state.hoveredItem}
                 handleMouseOver={this.handleMouseOver}
                 handleMouseOut={this.handleMouseOut}
                 handleClick={this.handleClick} />
@@ -128,10 +134,10 @@ class ChartGroup extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  loading: state.bounceReport.aggregatesLoading || state.bounceReport.categoriesLoading,
-  aggregates: state.bounceReport.aggregates,
-  categories: state.bounceReport.categories,
-  types: state.bounceReport.types
+const mapStateToProps = ({ bounceReport }) => ({
+  loading: bounceReport.aggregatesLoading || bounceReport.categoriesLoading,
+  aggregates: bounceReport.aggregates,
+  categories: bounceReport.categories,
+  types: bounceReport.types
 });
 export default connect(mapStateToProps, {})(ChartGroup);

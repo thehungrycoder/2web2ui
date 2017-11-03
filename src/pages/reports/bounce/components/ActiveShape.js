@@ -11,7 +11,7 @@ const ActiveShape = ({
   innerRadius,
   outerRadius,
   startAngle, endAngle,
-  subcategories
+  children
 }) => (
   <Sector
     cx={cx}
@@ -23,7 +23,7 @@ const ActiveShape = ({
     outerRadius={outerRadius + 3}
     fill={fill}
     opacity={1}
-    className={classnames('BounceChart--forceOpacity', subcategories && 'BounceChart--hasChildren')}
+    className={classnames('BounceChart--forceOpacity', children && 'BounceChart--hasChildren')}
   />
 );
 

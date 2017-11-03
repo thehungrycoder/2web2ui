@@ -1,0 +1,102 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BounceChart:  should render 1`] = `
+<div
+  className="BounceChart"
+>
+  <ResponsiveContainer
+    debounce={0}
+    height={350}
+    width="100%"
+  >
+    <PieChart
+      barCategoryGap="10%"
+      barGap={4}
+      cx="50%"
+      cy="50%"
+      endAngle={360}
+      height={350}
+      innerRadius={0}
+      layout="centric"
+      margin={
+        Object {
+          "bottom": 5,
+          "left": 5,
+          "right": 5,
+          "top": 5,
+        }
+      }
+      outerRadius="80%"
+      stackOffset="none"
+      startAngle={0}
+    >
+      <Pie
+        activeIndex={null}
+        activeShape={[Function]}
+        animationBegin={400}
+        animationDuration={1000}
+        animationEasing="ease"
+        cx="50%"
+        cy="50%"
+        data={
+          Array [
+            Object {
+              "name": "primary",
+            },
+          ]
+        }
+        dataKey="count"
+        endAngle={450}
+        fill="#808080"
+        hide={false}
+        innerRadius={100}
+        isAnimationActive={true}
+        labelLine={true}
+        legendType="rect"
+        minAngle={2}
+        nameKey="name"
+        onClick={[Function]}
+        onMouseOut={[Function]}
+        onMouseOver={[Function]}
+        outerRadius={140}
+        paddingAngle={0.5}
+        startAngle={90}
+        stroke="#fff"
+      />
+      <Pie
+        activeIndex={null}
+        activeShape={[Function]}
+        animationBegin={400}
+        animationDuration={1000}
+        animationEasing="ease"
+        cx="50%"
+        cy="50%"
+        data={
+          Array [
+            Object {
+              "name": "secondary",
+            },
+          ]
+        }
+        dataKey="count"
+        endAngle={450}
+        fill="#808080"
+        hide={false}
+        innerRadius={75}
+        isAnimationActive={true}
+        labelLine={true}
+        legendType="rect"
+        minAngle={2}
+        nameKey="name"
+        onClick={[Function]}
+        onMouseOut={[Function]}
+        onMouseOver={[Function]}
+        outerRadius={95}
+        paddingAngle={0.5}
+        startAngle={90}
+        stroke="#fff"
+      />
+    </PieChart>
+  </ResponsiveContainer>
+</div>
+`;

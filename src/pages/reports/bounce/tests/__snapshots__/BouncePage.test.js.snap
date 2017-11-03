@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BouncePage:  should render 1`] = `
+<Page
+  empty={Object {}}
+  title="Bounce Report"
+>
+  <Connect(Filters)
+    refresh={[Function]}
+  />
+  <Connect(ChartGroup) />
+</Page>
+`;
+
+exports[`BouncePage:  should render correctly with no bounces 1`] = `
+<Page
+  empty={Object {}}
+  title="Bounce Report"
+>
+  <Connect(Filters)
+    refresh={[Function]}
+  />
+  <Panel
+    sectioned={true}
+  >
+    <h6>
+      No bounces to report.
+    </h6>
+  </Panel>
+</Page>
+`;

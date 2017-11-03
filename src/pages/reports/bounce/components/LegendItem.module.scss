@@ -13,18 +13,14 @@
   }
 }
 
-.enabled.LegendItem {
-  &:hover {
-    color: color(gray, 0);
-    background: color(gray, 9);
-  }
+.enabled.LegendItem:hover {
+  color: color(gray, 0);
+  background: color(gray, 9);
 }
 
 .breadcrumb, .hasChildren {
-  &.enabled.LegendItem {
-    &:hover {
-      cursor: pointer;
-    }
+  &.enabled.LegendItem:hover {
+    cursor: pointer;
   }
 }
 

@@ -8,15 +8,15 @@ const LegendItem = ({
   name,
   count,
   fill,
-  subcategories,
-  disableInteraction,
+  children,
   breadcrumb,
+  onClick,
   ...props
 }) => {
   const itemClasses = cx(
     styles.LegendItem,
-    !disableInteraction && styles.enabled,
-    subcategories && styles.hasChildren,
+    onClick && styles.enabled,
+    children && styles.hasChildren,
     breadcrumb && styles.breadcrumb
   );
 
@@ -25,7 +25,7 @@ const LegendItem = ({
     : null;
 
   return (
-    <a className={itemClasses} {...props}>
+    <a className={itemClasses} onClick={onClick} title={onClick && `View ${name}`} {...props}>
       { fill && <span className={styles.Color} style={{ backgroundColor: fill }}/> }
       <span className={styles.Name}>{ breadcrumbMarkup }{name}</span>
       { count && <span className={styles.Count}>{count.toLocaleString()}</span> }
