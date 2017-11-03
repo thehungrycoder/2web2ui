@@ -1,6 +1,7 @@
 import React from 'react';
 import { BouncePage } from '../BouncePage';
 import { shallow } from 'enzyme';
+import * as reportHelpers from 'src/helpers/reports';
 
 jest.mock('src/helpers/reports');
 
@@ -13,6 +14,7 @@ describe('BouncePage: ', () => {
     aggregates: { countBounce: 1 },
     refresh: jest.fn((a) => Promise.resolve()),
     refreshTypeaheadCache: jest.fn((a) => Promise.resolve()),
+    addFilter: jest.fn(),
     location: {
       search: {}
     },
@@ -22,10 +24,15 @@ describe('BouncePage: ', () => {
   };
 
   let wrapper;
+  let spy;
 
   beforeEach(() => {
+    spy = reportHelpers.getFilterListFromSearch = jest.fn(() => []);
     wrapper = shallow(<BouncePage {...props} />);
+  });
 
+  afterEach(() => {
+    spy.mockRestore();
   });
 
   it('should render', () => {

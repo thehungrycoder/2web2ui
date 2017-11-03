@@ -5,7 +5,7 @@ import classnames from 'classnames';
 
 import { refresh as refreshSummaryChart } from 'src/actions/summaryChart';
 import { addFilter, refreshTypeaheadCache } from 'src/actions/reportFilters';
-import { getShareLink, getFilterSearchOptions, getSearch } from 'src/helpers/reports';
+import { getShareLink, getFilterSearchOptions, getSearch, getFilterListFromSearch } from 'src/helpers/reports';
 
 import { Page, Panel, Tabs } from '@sparkpost/matchbox';
 import { Loading } from 'src/components';
@@ -37,16 +37,10 @@ class SummaryReportPage extends Component {
     if (location.search) {
       const { from, to, metrics = [], filters = []} = qs.parse(location.search);
 
-      // Checks if there is only one metric/filter
+      // Checks if there is only one metric
       const metricsList = typeof metrics === 'string' ? [metrics] : metrics;
-      const filtersList = typeof filters === 'string' ? [filters] : filters;
 
-      filtersList.forEach((filter) => {
-        const parts = filter.split(':');
-        const type = parts.shift();
-        const value = parts.join(':');
-        addFilter({ value, type });
-      });
+      getFilterListFromSearch(filters).forEach(addFilter);
 
       options = {
         metrics: metricsList,

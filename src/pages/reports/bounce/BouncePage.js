@@ -5,7 +5,7 @@ import qs from 'query-string';
 
 import { refresh } from 'src/actions/bounceReport';
 import { addFilter, refreshTypeaheadCache } from 'src/actions/reportFilters';
-import { getShareLink, getFilterSearchOptions, getSearch } from 'src/helpers/reports';
+import { getShareLink, getFilterSearchOptions, getSearch, getFilterListFromSearch } from 'src/helpers/reports';
 
 import { Page, Panel } from '@sparkpost/matchbox';
 import ShareModal from '../components/ShareModal';
@@ -30,14 +30,7 @@ export class BouncePage extends Component {
     if (location.search) {
       const { from, to, filters = []} = qs.parse(location.search);
 
-      const filtersList = typeof filters === 'string' ? [filters] : filters;
-
-      filtersList.forEach((filter) => {
-        const parts = filter.split(':');
-        const type = parts.shift();
-        const value = parts.join(':');
-        addFilter({ value, type });
-      });
+      getFilterListFromSearch(filters).forEach(addFilter);
 
       options = {
         from: new Date(from),

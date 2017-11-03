@@ -9,17 +9,14 @@
 }
 
 .Label {
-  display: block;
   font-size: rem(18);
 }
 
 .Value {
-  display: block;
-  @include text-style-heading ;
+  @include text-style-heading;
 }
 
 .Line {
-  display: block;
   margin: spacing(small) 0;
   height: 1px;
   width: 100%;

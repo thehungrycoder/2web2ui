@@ -9,9 +9,9 @@ const ActiveLabel = ({
   value
 }) => (
   <div className={styles.ActiveLabel}>
-    <span className={styles.Label}>{name}</span>
-    <span className={styles.Line}/>
-    <span className={styles.Value}>{value}</span>
+    <div className={styles.Label}>{name}</div>
+    <div className={styles.Line}/>
+    <div className={styles.Value}>{value}</div>
   </div>
 );
 

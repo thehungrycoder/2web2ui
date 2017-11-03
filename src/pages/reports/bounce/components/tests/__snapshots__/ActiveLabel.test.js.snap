@@ -2,12 +2,12 @@
 
 exports[`ActiveLabel:  should render 1`] = `
 <div>
-  <span>
+  <div>
     name
-  </span>
-  <span />
-  <span>
+  </div>
+  <div />
+  <div>
     123
-  </span>
+  </div>
 </div>
 `;
