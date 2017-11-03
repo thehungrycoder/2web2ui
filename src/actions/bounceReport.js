@@ -1,10 +1,5 @@
-/* eslint-disable */
-import {
-  fetchDeliverability,
-  getBounceClassifications,
-  getBounceReasons
-} from 'src/actions/metrics';
-import { getQueryFromOptions, getMetricsFromKeys, computeKeysForItem } from 'src/helpers/metrics';
+import { fetchDeliverability, getBounceClassifications } from 'src/actions/metrics';
+import { getQueryFromOptions, getMetricsFromKeys } from 'src/helpers/metrics';
 import { getRelativeDates } from 'src/helpers/date';
 import { getBandTypes, reshapeCategories, formatAggregates } from 'src/helpers/bounce';
 
@@ -44,7 +39,8 @@ export function refresh(updates = {}) {
 
         const bounceParams = { ...aggregateParams, metrics: 'count_bounce' };
 
-        // dispatch(getBounceReasons(bounceParams)) This is for the table I think
+        // dispatch(getBounceReasons(bounceParams)) For table data
+
         dispatch(getBounceClassifications(bounceParams)).then((classifications) => {
 
           const formattedAggregates = formatAggregates(aggregates[0]);

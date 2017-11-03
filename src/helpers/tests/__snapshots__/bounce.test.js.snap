@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should generate colors 1`] = `
+Array [
+  Object {
+    "fill": "hsl(210, 65.4%, 20.4%)",
+    "name": "1",
+  },
+  Object {
+    "fill": "hsl(240, 68.7%, 20.4%)",
+    "name": "2",
+  },
+]
+`;
+
+exports[`Should get band types from aggregates 1`] = `
+Array [
+  Object {
+    "count": 1,
+    "name": "In-Band",
+  },
+  Object {
+    "count": 2,
+    "name": "Out-of-Band",
+  },
+]
+`;
+
+exports[`Should reshape categories 1`] = `
+Array [
+  Object {
+    "children": Array [
+      Object {
+        "count": 2,
+        "description": 2,
+        "name": 2,
+      },
+      Object {
+        "count": 3,
+        "description": 3,
+        "name": 3,
+      },
+    ],
+    "count": 5,
+    "name": "cat 2",
+  },
+  Object {
+    "children": Array [
+      Object {
+        "count": 1,
+        "description": 1,
+        "name": 1,
+      },
+    ],
+    "count": 1,
+    "name": "cat 1",
+  },
+]
+`;

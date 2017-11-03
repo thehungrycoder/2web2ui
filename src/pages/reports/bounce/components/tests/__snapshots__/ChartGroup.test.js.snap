@@ -4,10 +4,12 @@ exports[`ChartGroup:  should handle breadcrumb 1`] = `
 Object {
   "active": Object {
     "children": Array [
-      "clicked children",
+      Object {
+        "name": "child",
+      },
     ],
     "count": 3,
-    "name": "One",
+    "name": "cats",
   },
   "hoveredItem": null,
 }
@@ -27,7 +29,7 @@ Object {
     "count": 2,
     "dataSet": undefined,
     "index": -1,
-    "name": "One",
+    "name": "cats",
   },
 }
 `;
@@ -58,15 +60,27 @@ exports[`ChartGroup:  should render 1`] = `
           primaryData={
             Array [
               Object {
+                "children": Array [
+                  Object {
+                    "name": "child",
+                  },
+                ],
                 "count": 1,
-                "name": "One",
+                "fill": "hsl(355.1, 70.5%, 52.2%)",
+                "name": "cats",
               },
             ]
           }
           secondaryData={
             Array [
               Object {
+                "children": Array [
+                  Object {
+                    "name": "child",
+                  },
+                ],
                 "count": 2,
+                "fill": "hsl(198.20000000000005, 70.2%, 53.9%)",
                 "name": "types",
               },
             ]
@@ -101,15 +115,27 @@ exports[`ChartGroup:  should render 1`] = `
         primaryData={
           Array [
             Object {
+              "children": Array [
+                Object {
+                  "name": "child",
+                },
+              ],
               "count": 1,
-              "name": "One",
+              "fill": "hsl(355.1, 70.5%, 52.2%)",
+              "name": "cats",
             },
           ]
         }
         secondaryData={
           Array [
             Object {
+              "children": Array [
+                Object {
+                  "name": "child",
+                },
+              ],
               "count": 2,
+              "fill": "hsl(198.20000000000005, 70.2%, 53.9%)",
               "name": "types",
             },
           ]
@@ -134,13 +160,16 @@ exports[`ChartGroup:  should render correctly after click 1`] = `
       },
       Object {
         "count": 3,
-        "name": "One",
+        "name": "cats",
       },
     ]
   }
   primaryData={
     Array [
-      "clicked children",
+      Object {
+        "fill": "hsl(355.1, 70.5%, 52.2%)",
+        "name": "child",
+      },
     ]
   }
   secondaryData={null}
@@ -155,7 +184,10 @@ exports[`ChartGroup:  should render correctly after click 2`] = `
   hoveredItem={null}
   primaryData={
     Array [
-      "clicked children",
+      Object {
+        "fill": "hsl(355.1, 70.5%, 52.2%)",
+        "name": "child",
+      },
     ]
   }
   secondaryData={null}
@@ -164,7 +196,7 @@ exports[`ChartGroup:  should render correctly after click 2`] = `
 
 exports[`ChartGroup:  should render label when hovering 1`] = `
 <ActiveLabel
-  name="One"
+  name="cats"
   value="4.00%"
 />
 `;

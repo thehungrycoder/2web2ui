@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Action Creator: Bounce Report should dispatch a refresh action 1`] = `
+Array [
+  Array [
+    Array [
+      Object {
+        "count_bounce": 1,
+      },
+    ],
+  ],
+  Array [
+    Object {
+      "meta": Object {
+        "method": "GET",
+        "params": Object {
+          "from": "2017-10-04T10:10",
+          "metrics": "count_bounce",
+        },
+        "url": "/metrics/deliverability/bounce-classification",
+      },
+      "type": "FETCH_METRICS_BOUNCE_CLASSIFICATIONS",
+    },
+  ],
+  Array [
+    Object {
+      "payload": Object {
+        "aggregates": undefined,
+        "categories": undefined,
+        "types": undefined,
+      },
+      "type": "REFRESH_BOUNCE_REPORT",
+    },
+  ],
+  Array [
+    Object {
+      "payload": Object {
+        "metrics": undefined,
+      },
+      "type": "REFRESH_REPORT_RANGE",
+    },
+  ],
+]
+`;

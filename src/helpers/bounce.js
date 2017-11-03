@@ -12,6 +12,19 @@ function formatAggregates(aggregates) {
 }
 
 /**
+ * Formats category objects from getBounceClassifications
+ */
+function formatCategory(classification) {
+  const { bounce_category_name, bounce_class_name, bounce_class_description, count_bounce } = classification;
+  return {
+    category: bounce_category_name,
+    name: bounce_class_name,
+    description: bounce_class_description,
+    count: count_bounce
+  };
+}
+
+/**
  * Reshapes results of getBounceClassifications for the bounce chart
  */
 function reshapeCategories(data) {
@@ -34,33 +47,19 @@ function reshapeCategories(data) {
     }
   });
 
-  return generateColors(_.orderBy(categories, ['count'], ['desc']), '#DB2F3D');
-}
-
-/**
- * Formats category objects from getBounceClassifications
- */
-function formatCategory(classification) {
-  const { bounce_category_name, bounce_class_name, bounce_class_description, count_bounce } = classification;
-  return {
-    category: bounce_category_name,
-    name: bounce_class_name,
-    description: bounce_class_description,
-    count: count_bounce
-  };
+  return _.orderBy(categories, ['count'], ['desc']);
 }
 
 /**
  * Generates a color palette for bounce chart data
  */
-function generateColors(categories, base) {
+function generateColors(arr, base) {
   const baseColor = color(base);
-  const rotate = 60 / categories.length;
-  const saturate = 0.1 / categories.length;
-  return categories.map(({ children, ...category }, i) => ({
-    ...category,
-    fill: baseColor.rotate(rotate * i).saturate(saturate * i).string(),
-    children: children && generateColors(children, '#DB2F3D')
+  const rotate = 60 / arr.length;
+  const saturate = 0.1 / arr.length;
+  return arr.map((item, i) => ({
+    ...item,
+    fill: baseColor.rotate(rotate * i).saturate(saturate * i).string()
   }));
 }
 
@@ -68,10 +67,10 @@ function generateColors(categories, base) {
  * Creates band type data for bounce chart from aggregates
  */
 function getBandTypes({ countInbandBounce, countOutofbandBounce }) {
-  return generateColors([
+  return [
     { name: 'In-Band', count: countInbandBounce },
     { name: 'Out-of-Band', count: countOutofbandBounce }
-  ], '#37aadc');
+  ];
 }
 
 export {
