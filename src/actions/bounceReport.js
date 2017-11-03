@@ -1,7 +1,9 @@
 import { fetchDeliverability, getBounceClassifications } from 'src/actions/metrics';
+import { refreshTypeaheadCache } from 'src/actions/reportFilters';
 import { getQueryFromOptions, getMetricsFromKeys } from 'src/helpers/metrics';
 import { getRelativeDates } from 'src/helpers/date';
 import { getBandTypes, reshapeCategories, formatAggregates } from 'src/helpers/bounce';
+import _ from 'lodash';
 
 export function refresh(updates = {}) {
   return (dispatch, getState) => {
@@ -21,13 +23,20 @@ export function refresh(updates = {}) {
       Object.assign(updates, getRelativeDates(updates.relativeRange) || {});
     }
 
+    // refresh the typeahead cache if the date range has been updated
+    const { from, to } = updates;
+    if (from || to) {
+      const params = getQueryFromOptions({ from, to });
+      dispatch(refreshTypeaheadCache(params));
+    }
+
     const options = {
       ...state.reportFilters,
       ...updates
     };
 
     // convert new meta data into query param format
-    const aggregateParams = getQueryFromOptions(options);
+    const aggregateParams = _.omit(getQueryFromOptions(options), 'precision');
 
     // get new data
     return dispatch(fetchDeliverability(aggregateParams))

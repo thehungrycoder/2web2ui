@@ -14,7 +14,7 @@ Array [
       "meta": Object {
         "method": "GET",
         "params": Object {
-          "from": "2017-10-04T11:10",
+          "from": "2017-01-15T07:01",
           "metrics": "count_bounce",
         },
         "url": "/metrics/deliverability/bounce-classification",

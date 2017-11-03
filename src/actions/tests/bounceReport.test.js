@@ -5,6 +5,8 @@ jest.mock('../helpers/sparkpostApiRequest', () => jest.fn((a) => a));
 jest.mock('src/helpers/bounce');
 jest.mock('src/helpers/metrics');
 
+Date.now = jest.fn(() => 1487076708000);
+
 describe('Action Creator: Bounce Report', () => {
 
   let dispatchMock;

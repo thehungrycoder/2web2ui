@@ -5,6 +5,7 @@ import classnames from 'classnames';
 
 import { refresh as refreshSummaryChart } from 'src/actions/summaryChart';
 import { addFilter, refreshTypeaheadCache } from 'src/actions/reportFilters';
+import { getShareLink, getFilterSearchOptions, getSearch } from 'src/helpers/reports';
 
 import { Page, Panel, Tabs } from '@sparkpost/matchbox';
 import { Loading } from 'src/components';
@@ -13,7 +14,6 @@ import ShareModal from '../components/ShareModal';
 import { List, MetricsModal, ChartGroup, ChartHeader } from './components';
 
 import qs from 'query-string';
-import moment from 'moment';
 import styles from './SummaryPage.module.scss';
 
 class SummaryReportPage extends Component {
@@ -88,15 +88,16 @@ class SummaryReportPage extends Component {
 
   updateLink = () => {
     const { filters, chart, history } = this.props;
+
     const options = {
-      from: moment(filters.from).utc().format(),
-      to: moment(filters.to).utc().format(),
       metrics: chart.metrics.map((metric) => metric.key),
-      filters: filters.activeList.map((filter) => `${filter.type}:${filter.value}`)
+      ...getFilterSearchOptions(filters)
     };
 
-    const search = `?${qs.stringify(options, { encode: false })}`;
-    this.setState({ link: `${window.location.href.split('?')[0]}${search}` });
+    const link = getShareLink(options);
+    const search = getSearch(options);
+
+    this.setState({ link });
     history.replace({ pathname: '/reports/summary', search });
   }
 

@@ -6,9 +6,15 @@ exports[`BouncePage:  should render 1`] = `
   title="Bounce Report"
 >
   <Connect(Filters)
+    onShare={[Function]}
     refresh={[Function]}
   />
   <Connect(ChartGroup) />
+  <ShareModal
+    handleToggle={[Function]}
+    link=""
+    open={false}
+  />
 </Page>
 `;
 
@@ -18,6 +24,7 @@ exports[`BouncePage:  should render correctly with no bounces 1`] = `
   title="Bounce Report"
 >
   <Connect(Filters)
+    onShare={[Function]}
     refresh={[Function]}
   />
   <Panel
@@ -27,5 +34,9 @@ exports[`BouncePage:  should render correctly with no bounces 1`] = `
       No bounces to report.
     </h6>
   </Panel>
+  <ShareModal
+    handleToggle={[Function]}
+    open={false}
+  />
 </Page>
 `;
