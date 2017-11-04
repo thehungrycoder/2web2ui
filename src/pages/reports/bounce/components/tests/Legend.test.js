@@ -49,7 +49,7 @@ describe('Legend: ', () => {
   });
 
   it('should handle external hover', () => {
-    wrapper.setProps({ hoveredItem: { dataSet: 'primary', index: 0 }})
+    wrapper.setProps({ hoveredItem: { dataSet: 'primary', index: 0 }});
     expect(wrapper.find('Grid')).toMatchSnapshot();
   });
 });

@@ -114,9 +114,9 @@ export class ChartGroup extends Component {
   }
 
   render() {
-    const { loading, aggregates } = this.props;
+    const { loading } = this.props;
 
-    if (loading || !aggregates) {
+    if (loading) {
       return <Panel title='Bounce Rates' sectioned className={styles.LoadingPanel}><Loading /></Panel>;
     }
 

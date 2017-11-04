@@ -2,7 +2,11 @@ import moment from 'moment';
 import qs from 'query-string';
 import _ from 'lodash';
 
-// Creates search options object from shared filter data
+/**
+ * Creates search options object from shared report options. Page specific options not included (ie. summary chart selected metrics)
+ * @param  {Object} filters - reportFilters state
+ * @return {Object} - formatted search options object
+ */
 function getFilterSearchOptions(filters) {
   return {
     from: moment(filters.from).utc().format(),
@@ -14,31 +18,51 @@ function getFilterSearchOptions(filters) {
   };
 }
 
-// Converts object to search string
-function getSearch(options) {
-  return _.isEmpty(options) ? '' : `?${qs.stringify(options, { encode: false })}`;
-}
-
-// Converts object to search string with window location
+/**
+ * Creates URL information from object
+ * @param  {Object} options object of options you wish to stringify
+ * @return {Object}
+ *   {
+ *     search - search string
+ *     link - full url
+ *   }
+ */
 function getShareLink(options) {
-  return `${window.location.href.split('?')[0]}${getSearch(options)}`;
+  const search = _.isEmpty(options) ? '' : `?${qs.stringify(options, { encode: false })}`;
+  const link = `${window.location.href.split('?')[0]}${search}`;
+  return { search, link };
 }
 
 /**
- * Parses filters from search string
- * @param  {Array} filters - Array parsed from qs
- * @return {Array} - Array of filter objects ready to be used with addFilter action
- * 'Subaccount:1234 (ID 554):554' -> { type: 'Subaccount', value: '1234 (ID 554)', id: '554' }
+ * Parses search string
+ * @param  {string} search - location.search
+ * @return {Object}
+ *   {
+ *     options - options for refresh actions
+ *     filters - array of objects ready to be called with reportFilters.addFilter action
+ *   }
  */
-function getFilterListFromSearch(filters) {
-  const filtersList = typeof filters === 'string' ? [filters] : filters;
+function parseSearch(search) {
+  let options = {};
+  let filtersList;
 
-  return filtersList.map((filter) => {
+  if (!search) {
+    return { options };
+  }
+
+  const { from, to, metrics = [], filters = []} = qs.parse(search);
+
+  const metricsList = typeof metrics === 'string' ? [metrics] : metrics;
+  filtersList = typeof filters === 'string' ? [filters] : filters;
+
+  filtersList = filtersList.map((filter) => {
     const parts = filter.split(':');
     const type = parts.shift();
     let value;
     let id;
 
+    // Subaccount filters include 3 parts
+    // 'Subaccount:1234 (ID 554):554' -> { type: 'Subaccount', value: '1234 (ID 554)', id: '554' }
     if (type === 'Subaccount') {
       value = parts[0];
       id = parts[1];
@@ -48,11 +72,19 @@ function getFilterListFromSearch(filters) {
 
     return { value, type, id };
   });
+
+  options = {
+    metrics: metricsList,
+    from: new Date(from),
+    to: new Date(to)
+  };
+
+  // Filters are not passed to metrics refresh actions
+  return { options, filters: filtersList };
 }
 
 export {
   getFilterSearchOptions,
-  getFilterListFromSearch,
-  getSearch,
-  getShareLink
+  getShareLink,
+  parseSearch
 };

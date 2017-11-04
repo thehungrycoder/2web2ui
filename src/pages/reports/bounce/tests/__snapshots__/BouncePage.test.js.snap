@@ -27,15 +27,10 @@ exports[`BouncePage:  should render correctly with no bounces 1`] = `
     onShare={[Function]}
     refresh={[Function]}
   />
-  <Panel
-    sectioned={true}
-  >
-    <h6>
-      No bounces to report.
-    </h6>
-  </Panel>
+  <Empty />
   <ShareModal
     handleToggle={[Function]}
+    link=""
     open={false}
   />
 </Page>

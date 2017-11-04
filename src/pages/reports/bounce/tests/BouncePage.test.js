@@ -24,15 +24,21 @@ describe('BouncePage: ', () => {
   };
 
   let wrapper;
-  let spy;
+  let spyFilterListFromSearch;
+  let spyParseSearch;
+  let spyGetShare;
 
   beforeEach(() => {
-    spy = reportHelpers.getFilterListFromSearch = jest.fn(() => []);
+    spyFilterListFromSearch = reportHelpers.getFilterListFromSearch = jest.fn(() => []);
+    spyParseSearch = reportHelpers.parseSearch = jest.fn(() => ({ options: {}}));
+    spyGetShare = reportHelpers.getShareLink = jest.fn(() => ({ link: '', search: '' }));
     wrapper = shallow(<BouncePage {...props} />);
   });
 
   afterEach(() => {
-    spy.mockRestore();
+    spyFilterListFromSearch.mockRestore();
+    spyParseSearch.mockRestore();
+    spyGetShare.mockRestore();
   });
 
   it('should render', () => {
@@ -45,7 +51,7 @@ describe('BouncePage: ', () => {
   });
 
   it('should render correctly with no bounces', () => {
-    wrapper.setProps({ aggregates: { countBounce: 0 }});
+    wrapper.setProps({ aggregates: null });
     expect(wrapper).toMatchSnapshot();
   });
 });

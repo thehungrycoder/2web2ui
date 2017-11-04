@@ -29,7 +29,7 @@ function formatCategory(classification) {
 function reshapeCategories(data) {
   const categories = [];
 
-  const createCategory = (item) => {
+  const assignToCategory = (item) => {
     const { category, ...rest } = item;
     const index = fp.findIndex(({ name }) => name === category)(categories);
 
@@ -47,7 +47,7 @@ function reshapeCategories(data) {
 
   fp.flow(
     fp.flatMap(formatCategory),
-    fp.each(createCategory)
+    fp.each(assignToCategory)
   )(data);
 
   return fp.orderBy(['count'], ['desc'])(categories);

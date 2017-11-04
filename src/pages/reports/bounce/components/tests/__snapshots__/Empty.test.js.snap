@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Empty:  should render 1`] = `
+<Panel
+  sectioned={true}
+  title="Bounce Rates"
+>
+  <h6>
+    No bounces to report
+  </h6>
+</Panel>
+`;

@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import qs from 'query-string';
 
 import { refresh } from 'src/actions/bounceReport';
 import { addFilter, refreshTypeaheadCache } from 'src/actions/reportFilters';
-import { getShareLink, getFilterSearchOptions, getSearch, getFilterListFromSearch } from 'src/helpers/reports';
+import { getShareLink, getFilterSearchOptions, parseSearch } from 'src/helpers/reports';
 
-import { Page, Panel } from '@sparkpost/matchbox';
+import { Page } from '@sparkpost/matchbox';
 import ShareModal from '../components/ShareModal';
 import Filters from '../components/Filters';
 import ChartGroup from './components/ChartGroup';
+import Empty from './components/Empty';
 
 export class BouncePage extends Component {
   state = {
@@ -24,18 +24,10 @@ export class BouncePage extends Component {
   }
 
   parseSearch() {
-    const { location, addFilter } = this.props;
-    let options = {};
+    const { options, filters } = parseSearch(this.props.location.search);
 
-    if (location.search) {
-      const { from, to, filters = []} = qs.parse(location.search);
-
-      getFilterListFromSearch(filters).forEach(addFilter);
-
-      options = {
-        from: new Date(from),
-        to: new Date(to)
-      };
+    if (filters) {
+      filters.forEach(this.props.addFilter);
     }
 
     return options;
@@ -51,10 +43,8 @@ export class BouncePage extends Component {
 
   updateLink = () => {
     const { filters, history } = this.props;
-
     const options = getFilterSearchOptions(filters);
-    const link = getShareLink(options);
-    const search = getSearch(options);
+    const { link, search } = getShareLink(options);
 
     this.setState({ link });
     history.replace({ pathname: '/reports/bounce', search });
@@ -64,8 +54,8 @@ export class BouncePage extends Component {
     const { loading, aggregates } = this.props;
     const { modal, link } = this.state;
 
-    const pageContent = !loading && aggregates && aggregates.countBounce === 0
-      ? <Panel sectioned><h6>No bounces to report.</h6></Panel> // TODO
+    const pageContent = !loading && !aggregates
+      ? <Empty/>
       : <ChartGroup />;
 
     return (

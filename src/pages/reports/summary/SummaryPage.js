@@ -5,7 +5,7 @@ import classnames from 'classnames';
 
 import { refresh as refreshSummaryChart } from 'src/actions/summaryChart';
 import { addFilter, refreshTypeaheadCache } from 'src/actions/reportFilters';
-import { getShareLink, getFilterSearchOptions, getSearch, getFilterListFromSearch } from 'src/helpers/reports';
+import { getShareLink, getFilterSearchOptions, parseSearch } from 'src/helpers/reports';
 
 import { Page, Panel, Tabs } from '@sparkpost/matchbox';
 import { Loading } from 'src/components';
@@ -13,7 +13,6 @@ import Filters from '../components/Filters';
 import ShareModal from '../components/ShareModal';
 import { List, MetricsModal, ChartGroup, ChartHeader } from './components';
 
-import qs from 'query-string';
 import styles from './SummaryPage.module.scss';
 
 class SummaryReportPage extends Component {
@@ -31,22 +30,10 @@ class SummaryReportPage extends Component {
   }
 
   parseSearch() {
-    const { location, addFilter } = this.props;
-    let options = {};
+    const { options, filters } = parseSearch(this.props.location.search);
 
-    if (location.search) {
-      const { from, to, metrics = [], filters = []} = qs.parse(location.search);
-
-      // Checks if there is only one metric
-      const metricsList = typeof metrics === 'string' ? [metrics] : metrics;
-
-      getFilterListFromSearch(filters).forEach(addFilter);
-
-      options = {
-        metrics: metricsList,
-        from: new Date(from),
-        to: new Date(to)
-      };
+    if (filters) {
+      filters.forEach(this.props.addFilter);
     }
 
     return options;
@@ -88,8 +75,7 @@ class SummaryReportPage extends Component {
       ...getFilterSearchOptions(filters)
     };
 
-    const link = getShareLink(options);
-    const search = getSearch(options);
+    const { link, search } = getShareLink(options);
 
     this.setState({ link });
     history.replace({ pathname: '/reports/summary', search });

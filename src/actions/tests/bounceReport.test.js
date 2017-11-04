@@ -34,7 +34,7 @@ describe('Action Creator: Bounce Report', () => {
 
   it('should handle relative range', async () => {
     const spy = jest.spyOn(dateHelpers, 'getRelativeDates');
-    const thunk = bounceReport.refresh({ relativeRange: 'test'});
+    const thunk = bounceReport.refresh({ relativeRange: 'test' });
     await thunk(dispatchMock, getStateMock);
     expect(spy).toHaveBeenCalledWith('test');
   });
