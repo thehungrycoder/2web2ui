@@ -213,5 +213,17 @@ export default [
     component: ipPools.ListPage,
     condition: hasGrants('ip_pools/manage'),
     layout: App
+  },
+  {
+    path: '/account/ip-pools/create',
+    component: ipPools.CreatePage,
+    condition: hasGrants('ip_pools/manage'),
+    layout: App
+  },
+  {
+    path: '/account/ip-pools/edit/:id',
+    component: ipPools.EditPage,
+    condition: hasGrants('ip_pools/manage'),
+    layout: App
   }
 ];

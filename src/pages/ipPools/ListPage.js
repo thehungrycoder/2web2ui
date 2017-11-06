@@ -7,7 +7,7 @@ import { Page } from '@sparkpost/matchbox';
 
 const columns = ['Name', 'ID', 'Number of IPs Assigned'];
 const getRowData = ({ id, name, ips }) => {
-  const nameLink = <Link to={'/account/ip-pools'}>{name}</Link>;
+  const nameLink = <Link to={`/account/ip-pools/edit/${id}`}>{name}</Link>;
   return [nameLink, id, ips.length.toString()];
 };
 
@@ -52,7 +52,7 @@ export class IpPoolsList extends Component {
       return <Loading />;
     }
 
-    const createAction = { content: 'Create IP Pool', Component: Link, to: '/account/ip-pools' }; // TODO redirect to create
+    const createAction = { content: 'Create IP Pool', Component: Link, to: '/account/ip-pools/create' };
     const purchaseAction = { content: 'Purchase IPs', Component: Link, to: '/account/billing' };
 
     return (
