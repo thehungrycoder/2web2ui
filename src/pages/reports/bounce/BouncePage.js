@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -5,6 +6,7 @@ import { withRouter } from 'react-router-dom';
 import { refresh } from 'src/actions/bounceReport';
 import { addFilter, refreshTypeaheadCache } from 'src/actions/reportFilters';
 import { getShareLink, getFilterSearchOptions, parseSearch } from 'src/helpers/reports';
+import { showAlert } from 'src/actions/globalAlert';
 
 import { Page } from '@sparkpost/matchbox';
 import ShareModal from '../components/ShareModal';
@@ -34,7 +36,11 @@ export class BouncePage extends Component {
   }
 
   handleRefresh = (options) => {
-    this.props.refresh(options).then(() => this.updateLink());
+    this.props.refresh(options)
+      .then(() => this.updateLink())
+      .catch((err) => {
+        this.props.showAlert({ type: 'error', message: 'Unable to refresh bounce report.', details: err.message });
+      });
   }
 
   handleModalToggle = (modal) => {
@@ -78,8 +84,9 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
+  addFilter,
   refresh,
   refreshTypeaheadCache,
-  addFilter
+  showAlert
 };
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(BouncePage));
