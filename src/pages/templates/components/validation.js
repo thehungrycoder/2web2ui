@@ -30,11 +30,21 @@ function verifiedDomain(value) {
   return undefined; // TODO
 }
 
+function validJson(str) {
+  try {
+    JSON.parse(str);
+  } catch (e) {
+    return 'Invalid JSON';
+  }
+  return undefined;
+}
+
 export {
   ID_ALLOWED_CHARS,
   idSyntax,
   substitution,
   emailOrSubstitution,
   contentRequired,
+  validJson,
   verifiedDomain
 };

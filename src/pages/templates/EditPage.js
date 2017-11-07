@@ -17,6 +17,7 @@ import Editor from './components/Editor'; // async
 import { DeleteModal } from 'src/components';
 import { Loading } from 'src/components';
 import { Page, Grid } from '@sparkpost/matchbox';
+import _ from 'lodash';
 
 const FORM_NAME = 'templateEdit';
 
@@ -25,6 +26,10 @@ class EditPage extends Component {
     redirectTo: null,
     deleteOpen: false
   };
+
+  static defaultProps = {
+    template: {}
+  }
 
   componentDidMount() {
     const { match, getDraft, getPublished } = this.props;
@@ -68,9 +73,9 @@ class EditPage extends Component {
       return;
     }
 
-    const { draft = {}, published = {}} = template;
+    const { draft, published } = template;
 
-    if (!Object.keys(draft).length && !Object.keys(published).length) {
+    if (_.isEmpty(draft) && _.isEmpty(published)) {
       this.setState({ redirectTo: '/templates/' }); // Redirect if no draft or published found
       showAlert({ type: 'error', message: 'Could not find template' });
     }
@@ -157,14 +162,13 @@ class EditPage extends Component {
   }
 }
 
-
 const mapStateToProps = (state, props) => {
   const template = getTemplateById(state, props);
+  const values = template.draft || template.published; // For templates with published but no draft, pull in published values
   return {
     loading: state.templates.getLoading,
     template,
-    // For templates with published but no draft, pull in published values
-    initialValues: template.draft || template.published
+    initialValues: { testData: state.templates.testData, ...values }
   };
 };
 const formOptions = {

@@ -9,19 +9,30 @@
 
   // Error markers
   .ace_gutter-cell {
-    &.ace_info, &.ace_error {
+    &.ace_info {
       background-image: none;
     }
+
+    // &.ace_error { }
   }
 
   .ace_tooltip {
-    display: none !important;
+    // display: none !important;
+    padding: spacing(small) spacing();
+    border-radius: border-radius(large);
+    box-shadow: shadow(deep);
+
+    font-family: font-family();
+    font-size: rem(13);
+    color: color(gray, 10);
+    background: color(gray, 1);
+    border: none;
   }
 
-  .ace_gutter-cell {
-    padding-right: 19px;
-    padding-left: 6px;
-  }
+  // .ace_gutter-cell {
+  //   padding-right: 19px;
+  //   padding-left: 6px;
+  // }
 
   .ace_fold-widget {
     opacity: 0.5;
