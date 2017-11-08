@@ -32,9 +32,9 @@ function verifiedDomain(value) {
 
 function validJson(str) {
   try {
-    JSON.parse(str);
+    JSON.parse(JSON.stringify(str));
   } catch (e) {
-    return 'Invalid JSON';
+    return `Invalid JSON: ${e.message}`;
   }
   return undefined;
 }

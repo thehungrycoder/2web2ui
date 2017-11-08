@@ -25,9 +25,7 @@ export default (state = initialState, action) => {
         ...state,
         byId: {
           ...state.byId,
-          [action.payload.id]: {
-            ...state.byId[action.payload.id],
-            draft: action.payload
+          [action.payload.id]: { ...state.byId[action.payload.id], draft: action.payload
           }
         },
         getLoading: false
@@ -45,10 +43,7 @@ export default (state = initialState, action) => {
         ...state,
         byId: {
           ...state.byId,
-          [action.payload.id]: {
-            ...state.byId[action.payload.id],
-            published: action.payload
-          }
+          [action.payload.id]: { ...state.byId[action.payload.id], published: action.payload }
         },
         getLoading: false
       };
@@ -57,7 +52,7 @@ export default (state = initialState, action) => {
       return { ...state, getLoading: false };
 
     case 'GET_TEMPLATE_TEST_DATA':
-      return { ...state, testData: action.payload.testData };
+      return { ...state, testData: action.payload };
 
     default:
       return state;

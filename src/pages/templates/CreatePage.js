@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { reduxForm, formValueSelector } from 'redux-form';
 import _ from 'lodash';
@@ -10,7 +10,7 @@ import { create, getDraft } from 'src/actions/templates';
 import { showAlert } from 'src/actions/globalAlert';
 
 // Selectors
-import { getClonedTemplate } from 'src/selectors/templates';
+import { selectClonedTemplate } from 'src/selectors/templates';
 
 // Components
 import Form from './components/Form';
@@ -21,14 +21,6 @@ import { Loading } from 'src/components';
 const FORM_NAME = 'templateCreate';
 
 export class CreatePage extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      shouldRedirect: false
-    };
-  }
-
   componentDidMount() {
     if (this.props.cloneId) {
       const { getDraft } = this.props;
@@ -37,9 +29,9 @@ export class CreatePage extends Component {
   }
 
   handleCreate(values) {
-    const { create, showAlert } = this.props;
+    const { create, showAlert, id, history } = this.props;
     return create(values)
-      .then(() => this.setState({ shouldRedirect: true }))
+      .then(() => history.push(`/templates/edit/${id}`))
       .catch((err) => {
         const details = _.get(err, 'response.data.errors[0].description') || err.message;
         return showAlert({ type: 'error', message: 'Could not create template', details: details });
@@ -47,11 +39,7 @@ export class CreatePage extends Component {
   }
 
   render() {
-    const { id, handleSubmit, submitting, loading } = this.props;
-
-    if (this.state.shouldRedirect) {
-      return <Redirect to={`/templates/edit/${id}`} />;
-    }
+    const { cloneId, handleSubmit, submitting, loading } = this.props;
 
     if (loading) {
       return <Loading />;
@@ -73,7 +61,7 @@ export class CreatePage extends Component {
       <Page
         primaryAction={primaryAction}
         breadcrumbAction={backAction}
-        title= { this.props.cloneId ? 'Duplicate Template' : 'New Template' }>
+        title={ cloneId ? 'Duplicate Template' : 'New Template' }>
 
         <Grid>
           <Grid.Column xs={12} lg={4}>
@@ -95,7 +83,7 @@ const mapStateToProps = (state, props) => ({
   cloneId: props.match.params.id, //ID of the template it's cloning from
   initialValues: {
     testData: config.templates.testData,
-    ...getClonedTemplate(state, props)
+    ...selectClonedTemplate(state, props)
   }
 });
 
@@ -104,4 +92,4 @@ const formOptions = {
   enableReinitialize: true // required to update initial values from redux state
 };
 
-export default connect(mapStateToProps, { create, getDraft, showAlert })(reduxForm(formOptions)(CreatePage));
+export default withRouter(connect(mapStateToProps, { create, getDraft, showAlert })(reduxForm(formOptions)(CreatePage)));

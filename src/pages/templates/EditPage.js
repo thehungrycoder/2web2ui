@@ -1,15 +1,15 @@
 /* eslint max-lines: ["error", 200] */
 import React, { Component } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 
 // Actions
-import { getDraft, getPublished, update, deleteTemplate, publish } from '../../actions/templates';
+import { getDraft, getPublished, update, deleteTemplate, publish, getTestData } from '../../actions/templates';
 import { showAlert } from 'src/actions/globalAlert';
 
 // Selectors
-import { getTemplateById, getTemplateTestData } from 'src/selectors/templates';
+import { selectTemplateById, selectTemplateTestData } from 'src/selectors/templates';
 
 // Components
 import Form from './components/Form';
@@ -23,7 +23,6 @@ const FORM_NAME = 'templateEdit';
 
 class EditPage extends Component {
   state = {
-    redirectTo: null,
     deleteOpen: false
   };
 
@@ -32,34 +31,42 @@ class EditPage extends Component {
   }
 
   componentDidMount() {
-    const { match, getDraft, getPublished } = this.props;
+    const { match, getDraft, getPublished, getTestData } = this.props;
     // Do nothing if these fail
     getDraft(match.params.id).catch((err) => err);
     getPublished(match.params.id).catch((err) => err);
+    getTestData({ id: match.params.id, mode: 'draft' });
   }
 
   handlePublish(values) {
-    const { publish, match, showAlert } = this.props;
-    return publish(match.params.id)
-      .then(() => this.setState({ redirectTo: `/templates/edit/${match.params.id}/published` }))
-      .then(() => showAlert({ type: 'success', message: 'Template published' }))
-      .catch((err) => showAlert({ type: 'error', message: 'Could not publish template', details: err.message }));
+    const { publish, match, showAlert, history } = this.props;
+    return publish(values).then(() => {
+      history.push(`/templates/edit/${match.params.id}/published`);
+      showAlert({ type: 'success', message: 'Template published' });
+    }).catch((err) => {
+      showAlert({ type: 'error', message: 'Could not publish template', details: err.message });
+    });
   }
 
   handleSave(values) {
-    const { update, match, getDraft, showAlert } = this.props;
-    return update(values)
-      .then(() => getDraft(match.params.id))
-      .then(() => showAlert({ type: 'success', message: 'Template saved' }))
-      .catch((err) => showAlert({ type: 'error', message: 'Could not save template', details: err.message }));
+    const { update, match, getDraft, showAlert, getTestData } = this.props;
+    return update(values).then(() => {
+      getDraft(match.params.id);
+      getTestData({ id: match.params.id, mode: 'draft' });
+      showAlert({ type: 'success', message: 'Template saved' });
+    }).catch((err) => {
+      showAlert({ type: 'error', message: 'Could not save template', details: err.message });
+    });
   }
 
   handleDelete = () => {
     const { deleteTemplate, match, showAlert } = this.props;
-    return deleteTemplate(match.params.id)
-      .then(() => this.setState({ redirectTo: '/templates/' }))
-      .then(() => showAlert({ message: 'Template deleted' }))
-      .catch((err) => showAlert({ type: 'error', message: 'Could not delete template', details: err.message }));
+    return deleteTemplate(match.params.id).then(() => {
+      history.push('/templates/');
+      showAlert({ message: 'Template deleted' });
+    }).catch((err) => {
+      showAlert({ type: 'error', message: 'Could not delete template', details: err.message });
+    });
   }
 
   handleDeleteModalToggle = () => {
@@ -67,7 +74,7 @@ class EditPage extends Component {
   }
 
   componentDidUpdate() {
-    const { loading, template, showAlert } = this.props;
+    const { loading, template, showAlert, history } = this.props;
 
     if (loading || !template) {
       return;
@@ -76,18 +83,13 @@ class EditPage extends Component {
     const { draft, published } = template;
 
     if (_.isEmpty(draft) && _.isEmpty(published)) {
-      this.setState({ redirectTo: '/templates/' }); // Redirect if no draft or published found
+      history.push('/templates/'); // Redirect if no draft or published found
       showAlert({ type: 'error', message: 'Could not find template' });
     }
   }
 
   getPageProps() {
-    const {
-      handleSubmit,
-      template,
-      match,
-      submitting
-    } = this.props;
+    const { handleSubmit, template, match, submitting } = this.props;
     const published = template.published;
 
     const primaryAction = {
@@ -131,13 +133,7 @@ class EditPage extends Component {
   }
 
   render() {
-    const { loading } = this.props;
-
-    if (this.state.redirectTo) {
-      return <Redirect to={this.state.redirectTo} />; // TODO use history.push instead
-    }
-
-    if (loading) {
+    if (this.props.loading) {
       return <Loading />;
     }
 
@@ -163,24 +159,28 @@ class EditPage extends Component {
 }
 
 const mapStateToProps = (state, props) => {
-  const template = getTemplateById(state, props);
+  const template = selectTemplateById(state, props);
   const values = template.draft || template.published; // For templates with published but no draft, pull in published values
   return {
     loading: state.templates.getLoading,
     template,
-    initialValues: { testData: getTemplateTestData(state), ...values }
+    initialValues: { testData: selectTemplateTestData(state), ...values }
   };
 };
+
 const formOptions = {
   form: FORM_NAME,
   enableReinitialize: true // required to update initial values from redux state
 };
 
-export default connect(mapStateToProps, {
+const mapDispatchToProps = {
   getDraft,
   getPublished,
+  getTestData,
   update,
   deleteTemplate,
   publish,
   showAlert
-})(reduxForm(formOptions)(EditPage));
+};
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(reduxForm(formOptions)(EditPage)));

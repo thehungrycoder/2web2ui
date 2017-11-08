@@ -3,13 +3,9 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 
-// Actions
-import { getPublished } from '../../actions/templates';
+import { getPublished, getTestData } from 'src/actions/templates';
+import { selectTemplateById, selectTemplateTestData } from 'src/selectors/templates';
 
-// Selectors
-import { getTemplateById } from 'src/selectors/templates';
-
-// Components
 import Form from './components/Form';
 import Editor from './components/Editor'; // async
 import { Loading } from 'src/components';
@@ -23,8 +19,9 @@ class PublishedPage extends Component {
   };
 
   componentWillMount() {
-    const { match, getPublished } = this.props;
+    const { match, getPublished, getTestData } = this.props;
     getPublished(match.params.id);
+    getTestData({ id: match.params.id, mode: 'published' });
   }
 
   getPageProps() {
@@ -52,9 +49,7 @@ class PublishedPage extends Component {
   }
 
   render() {
-    const { loading } = this.props;
-
-    if (loading) {
+    if (this.props.loading) {
       return <Loading />;
     }
 
@@ -75,7 +70,10 @@ class PublishedPage extends Component {
 
 const mapStateToProps = (state, props) => ({
   loading: state.templates.getLoading,
-  initialValues: getTemplateById(state, props).published
+  initialValues: {
+    testData: selectTemplateTestData(state),
+    ...selectTemplateById(state, props).published
+  }
 });
 
 const formOptions = {
@@ -83,4 +81,4 @@ const formOptions = {
   enableReinitialize: true // required to update initial values from redux state
 };
 
-export default connect(mapStateToProps, { getPublished })(reduxForm(formOptions)(PublishedPage));
+export default connect(mapStateToProps, { getPublished, getTestData })(reduxForm(formOptions)(PublishedPage));

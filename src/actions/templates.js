@@ -1,9 +1,8 @@
-/* eslint-disable */
+/* eslint max-lines: ["error", 200] */
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 import localforage from 'localforage';
 import config from 'src/config';
-import { getTestDataKey } from 'src/helpers/templates';
-import _ from 'lodash';
+import { getTestDataKey } from './helpers/templates';
 
 export function listTemplates() {
   return sparkpostApiRequest({
@@ -16,21 +15,16 @@ export function listTemplates() {
 }
 
 export function getDraft(id) {
-  return (dispatch) => {
-
-    dispatch(getTestData({ id, mode: 'draft' }));
-
-    return dispatch(sparkpostApiRequest({
-      type: 'GET_DRAFT_TEMPLATE',
-      meta: {
-        method: 'GET',
-        url: `/templates/${id}`,
-        params: {
-          draft: true
-        }
+  return sparkpostApiRequest({
+    type: 'GET_DRAFT_TEMPLATE',
+    meta: {
+      method: 'GET',
+      url: `/templates/${id}`,
+      params: {
+        draft: true
       }
-    }));
-  }
+    }
+  });
 }
 
 export function getPublished(id) {
@@ -47,21 +41,26 @@ export function getPublished(id) {
 }
 
 export function create(data) {
-  return sparkpostApiRequest({
-    type: 'CREATE_TEMPLATE',
-    meta: {
-      method: 'POST',
-      url: '/templates',
-      data: _.omit(data, 'testData')
-    }
-  });
+  const { id, testData, ...formData } = data;
+
+  return (dispatch) => {
+    dispatch(setTestData({ id, mode: 'draft', data: testData }));
+
+    return dispatch(sparkpostApiRequest({
+      type: 'CREATE_TEMPLATE',
+      meta: {
+        method: 'POST',
+        url: '/templates',
+        data: { ...formData, id }
+      }
+    }));
+  };
 }
 
 export function update(data, params = {}) {
   const { id, testData, ...formData } = data;
 
   return (dispatch) => {
-
     dispatch(setTestData({ id, mode: 'draft', data: testData }));
 
     return dispatch(sparkpostApiRequest({
@@ -73,12 +72,14 @@ export function update(data, params = {}) {
         params
       }
     }));
-  }
+  };
 }
 
 export function publish(data) {
   return (dispatch) => {
     const { id, testData } = data;
+
+    // Save draft first, then publish
     return dispatch(update(data)).then(() => {
       dispatch(setTestData({ id, mode: 'published', data: testData }));
 
@@ -91,7 +92,7 @@ export function publish(data) {
         }
       }));
     });
-  }
+  };
 }
 
 export function deleteTemplate(id) {
@@ -107,10 +108,8 @@ export function deleteTemplate(id) {
 export function setTestData({ data, id, mode }) {
   return (dispatch, getState) => {
     const username = getState().currentUser.username;
-
-    return localforage.setItem(getTestDataKey({ id, username, mode }), data).then(() => {
-      return dispatch({ type: 'SET_TEMPLATE_TEST_DATA' })
-    });
+    const testData = typeof data === 'object' ? JSON.stringify(data) : data;
+    return localforage.setItem(getTestDataKey({ id, username, mode }), testData).then(() => dispatch({ type: 'SET_TEMPLATE_TEST_DATA' }));
   };
 }
 
@@ -118,26 +117,22 @@ export function getTestData({ id, mode }) {
   return (dispatch, getState) => {
     const username = getState().currentUser.username;
 
-    return localforage.getItem(getTestDataKey({ id, username, mode }))
-      .then((results) => {
+    return localforage.getItem(getTestDataKey({ id, username, mode })).then((results) => {
+      let testData;
 
-        if (results) {
-          let testData = JSON.parse(results);
+      if (results) {
+        testData = JSON.parse(results);
 
-          // Reshapes test data if it does not conform with default JSON structure
-          if (!['substitution_data', 'metadata', 'options'].every((key) => key in testData)) {
-            testData = { ...config.templates.testData, substitution_data: testData };
-          }
+        // Reshapes test data if it does not conform with default JSON structure
+        if (!['substitution_data', 'metadata', 'options'].every((key) => key in testData)) {
+          testData = { ...config.templates.testData, substitution_data: testData };
         }
+      }
 
-        return dispatch({
-          type: 'GET_TEMPLATE_TEST_DATA',
-          payload: {
-            id,
-            mode,
-            testData
-          }
-        });
+      return dispatch({
+        type: 'GET_TEMPLATE_TEST_DATA',
+        payload: testData
       });
+    });
   };
 }
