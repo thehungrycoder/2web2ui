@@ -33,6 +33,11 @@ it('renders empty state', () => {
   expect(wrapper).toMatchSnapshot();
 });
 
+it('renders Loading', () => {
+  wrapper.setProps({ loading: true });
+  expect(wrapper.find('Loading')).toHaveLength(1);
+});
+
 it('renders errors when present', () => {
   wrapper.setProps({ error: { message: 'Uh oh! It broke. ' }});
   expect(wrapper).toMatchSnapshot();

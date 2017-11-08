@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Template PublishedPage should render correctly 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "Templates",
+      "to": "/templates",
+    }
+  }
+  empty={Object {}}
+  secondaryActions={
+    Array [
+      Object {
+        "Component": [Function],
+        "content": "View Draft",
+        "to": "/templates/edit/id",
+      },
+      Object {
+        "content": "Preview & Send",
+        "disabled": true,
+      },
+    ]
+  }
+  title="id (Published)"
+>
+  <Grid>
+    <Grid.Column
+      lg={4}
+      xs={12}
+    >
+      <Connect(Form)
+        name="templatePublished"
+        published={true}
+      />
+    </Grid.Column>
+    <Grid.Column
+      lg={8}
+      xs={12}
+    >
+      <LoadableComponent
+        name="templatePublished"
+        published={true}
+      />
+    </Grid.Column>
+  </Grid>
+</Page>
+`;

@@ -19,7 +19,11 @@ describe('Template CreatePage', () => {
       match: {
         params: {}
       },
-      handleSubmit: jest.fn()
+      handleSubmit: jest.fn(),
+      history: {
+        push: jest.fn()
+      },
+      showAlert: jest.fn()
     };
   });
 
@@ -34,6 +38,22 @@ describe('Template CreatePage', () => {
 
     it('should not call getDraft (load template)', () => {
       expect(props.getDraft).not.toHaveBeenCalled();
+    });
+
+    it('should handle create', async () => {
+      const createSuccess = jest.fn((a) => Promise.resolve(a));
+      wrapper.setProps({ id: 'id', create: createSuccess });
+      await wrapper.instance().handleCreate('values');
+      expect(createSuccess).toHaveBeenCalledWith('values');
+      expect(props.history.push).toHaveBeenCalledWith('/templates/edit/id');
+    });
+
+    it('should handle create fail', async () => {
+      const createFail = jest.fn((a) => Promise.reject({ message: 'fail' }));
+      wrapper.setProps({ id: 'id', create: createFail });
+      await wrapper.instance().handleCreate('values');
+      expect(createFail).toHaveBeenCalledWith('values');
+      expect(props.showAlert).toHaveBeenCalledWith({ details: 'fail', message: 'Could not create template', type: 'error' });
     });
   });
 
@@ -53,4 +73,3 @@ describe('Template CreatePage', () => {
     });
   });
 });
-

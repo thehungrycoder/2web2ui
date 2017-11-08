@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 
 // Actions
-import { getDraft, getPublished, update, deleteTemplate, publish, getTestData } from '../../actions/templates';
+import { getDraft, getPublished, update, deleteTemplate, publish, getTestData } from 'src/actions/templates';
 import { showAlert } from 'src/actions/globalAlert';
 
 // Selectors
@@ -21,7 +21,7 @@ import _ from 'lodash';
 
 const FORM_NAME = 'templateEdit';
 
-class EditPage extends Component {
+export class EditPage extends Component {
   state = {
     deleteOpen: false
   };
@@ -38,7 +38,7 @@ class EditPage extends Component {
     getTestData({ id: match.params.id, mode: 'draft' });
   }
 
-  handlePublish(values) {
+  handlePublish = (values) => {
     const { publish, match, showAlert, history } = this.props;
     return publish(values).then(() => {
       history.push(`/templates/edit/${match.params.id}/published`);
@@ -48,7 +48,7 @@ class EditPage extends Component {
     });
   }
 
-  handleSave(values) {
+  handleSave = (values) => {
     const { update, match, getDraft, showAlert, getTestData } = this.props;
     return update(values).then(() => {
       getDraft(match.params.id);
@@ -60,7 +60,7 @@ class EditPage extends Component {
   }
 
   handleDelete = () => {
-    const { deleteTemplate, match, showAlert } = this.props;
+    const { deleteTemplate, match, showAlert, history } = this.props;
     return deleteTemplate(match.params.id).then(() => {
       history.push('/templates/');
       showAlert({ message: 'Template deleted' });
@@ -94,7 +94,7 @@ class EditPage extends Component {
 
     const primaryAction = {
       content: 'Publish Template',
-      onClick: handleSubmit((values) => this.handlePublish(values)),
+      onClick: handleSubmit(this.handlePublish),
       disabled: submitting
     };
 
@@ -110,10 +110,10 @@ class EditPage extends Component {
       ...viewActions,
       {
         content: 'Save as Draft',
-        onClick: handleSubmit((values) => this.handleSave(values)),
+        onClick: handleSubmit(this.handleSave),
         disabled: submitting
       },
-      { content: 'Delete', onClick: () => this.handleDeleteModalToggle() },
+      { content: 'Delete', onClick: this.handleDeleteModalToggle },
       { content: 'Duplicate', Component: Link, to: `/templates/create/${match.params.id}` },
       { content: 'Preview & Send', disabled: true }
     ];

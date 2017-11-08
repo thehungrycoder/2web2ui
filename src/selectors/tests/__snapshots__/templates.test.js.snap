@@ -32,3 +32,14 @@ Object {
 `;
 
 exports[`Templates selectors getClonedTemplate should not clone template if :id does not exist 1`] = `undefined`;
+
+exports[`Templates selectors selectTemplates should return a list 1`] = `
+Array [
+  Object {
+    "one": "one",
+  },
+  Object {
+    "two": "two",
+  },
+]
+`;

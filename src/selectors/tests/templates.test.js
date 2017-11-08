@@ -1,8 +1,10 @@
-import { getTemplateById, cloneTemplate, getClonedTemplate } from '../templates';
+import * as selector from '../templates';
 
 describe('Templates selectors', () => {
   const store = {
     templates: {
+      list: [{ one: 'one' }, { two: 'two' }],
+      testData: { test: 'data' },
       byId: {
         ape: {
           draft: {
@@ -23,12 +25,12 @@ describe('Templates selectors', () => {
   describe('Templates by id Selector', () => {
     it('returns template', () => {
       const props = { match: { params: { id: 'Ape' }}};
-      expect(getTemplateById(store, props)).toMatchSnapshot();
+      expect(selector.selectTemplateById(store, props)).toMatchSnapshot();
     });
 
     it('returns empty draft and published', () => {
       const props = { match: { params: { id: 'Nope' }}};
-      expect(getTemplateById(store, props)).toMatchSnapshot();
+      expect(selector.selectTemplateById(store, props)).toMatchSnapshot();
     });
   });
 
@@ -41,19 +43,35 @@ describe('Templates selectors', () => {
     };
 
     it('clones template', () => {
-      expect(cloneTemplate(template)).toMatchSnapshot();
+      expect(selector.cloneTemplate(template)).toMatchSnapshot();
     });
   });
 
   describe('getClonedTemplate', () => {
     it('should clone template if :id exist in state', () => {
       const props = { match: { params: { id: 'ape' }}};
-      expect(getClonedTemplate(store, props)).toMatchSnapshot();
+      expect(selector.selectClonedTemplate(store, props)).toMatchSnapshot();
     });
 
     it('should not clone template if :id does not exist', () => {
       const props = { match: { params: { id: 'Nope' }}};
-      expect(getClonedTemplate(store, props)).toMatchSnapshot();
+      expect(selector.selectClonedTemplate(store, props)).toMatchSnapshot();
+    });
+  });
+
+  describe('selectTemplates', () => {
+    it('should return a list', () => {
+      expect(selector.selectTemplates(store)).toMatchSnapshot();
+    });
+  });
+
+  describe('selectTemplateTestData', () => {
+    it('should return test data', () => {
+      expect(selector.selectTemplateTestData(store)).toEqual({ test: 'data' });
+    });
+
+    it('should return default data', () => {
+      expect(selector.selectTemplateTestData({ templates: {}})).toEqual({ metadata: {}, options: {}, substitution_data: {}});
     });
   });
 });

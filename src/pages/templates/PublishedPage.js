@@ -13,11 +13,7 @@ import { Page, Grid } from '@sparkpost/matchbox';
 
 const FORM_NAME = 'templatePublished';
 
-class PublishedPage extends Component {
-  state = {
-    shouldRedirectToPublished: false
-  };
-
+export class PublishedPage extends Component {
   componentWillMount() {
     const { match, getPublished, getTestData } = this.props;
     getPublished(match.params.id);
