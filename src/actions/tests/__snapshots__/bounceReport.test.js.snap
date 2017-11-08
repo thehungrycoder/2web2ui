@@ -3,6 +3,14 @@
 exports[`Action Creator: Bounce Report should dispatch a refresh action 1`] = `
 Array [
   Array [
+    Object {
+      "payload": Object {
+        "metrics": undefined,
+      },
+      "type": "REFRESH_REPORT_RANGE",
+    },
+  ],
+  Array [
     Array [
       Object {
         "count_bounce": 1,
@@ -30,14 +38,6 @@ Array [
         "types": undefined,
       },
       "type": "REFRESH_BOUNCE_REPORT",
-    },
-  ],
-  Array [
-    Object {
-      "payload": Object {
-        "metrics": undefined,
-      },
-      "type": "REFRESH_REPORT_RANGE",
     },
   ],
 ]
