@@ -1,5 +1,5 @@
 import { fetch as fetchMetrics } from 'src/actions/metrics';
-import { refreshTypeaheadCache, refreshReportRage } from 'src/actions/reportFilters';
+import { refreshTypeaheadCache, refreshReportRange } from 'src/actions/reportFilters';
 import { getQueryFromOptions, getMetricsFromKeys } from 'src/helpers/metrics';
 import { getRelativeDates } from 'src/helpers/date';
 
@@ -31,24 +31,23 @@ export function refresh(updates = {}) {
       ...updates
     };
 
+    dispatch(refreshReportRange(options));
+
     // convert new meta data into query param format
     const params = getQueryFromOptions(options);
 
     // get new data
-    return dispatch(fetchMetrics({ path: 'deliverability/time-series', params }))
-      .then((results) => {
+    return dispatch(fetchMetrics({ path: 'deliverability/time-series', params })).then((results) => {
 
-        // refresh the chart with the new data
-        const summaryData = {
-          data: results,
-          metrics: options.metrics,
-          precision: params.precision
-        };
+      const summaryData = {
+        data: results,
+        metrics: options.metrics,
+        precision: params.precision
+      };
 
-        dispatch(refreshSummaryChart(summaryData));
-
-        dispatch(refreshReportRage(options));
-      });
+      // refresh the chart with the new data
+      dispatch(refreshSummaryChart(summaryData));
+    });
   };
 }
 

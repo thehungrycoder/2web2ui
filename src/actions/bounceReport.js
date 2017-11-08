@@ -1,6 +1,6 @@
 /* eslint-disable */
 import { fetchDeliverability, fetchBounceClassifications } from 'src/actions/metrics';
-import { refreshTypeaheadCache, refreshReportRage } from 'src/actions/reportFilters';
+import { refreshTypeaheadCache, refreshReportRange } from 'src/actions/reportFilters';
 import { getQueryFromOptions, getMetricsFromKeys } from 'src/helpers/metrics';
 import { getRelativeDates } from 'src/helpers/date';
 import { getBandTypes, reshapeCategories, formatAggregates } from 'src/helpers/bounce';
@@ -36,6 +36,8 @@ export function refresh(updates = {}) {
       ...updates
     };
 
+    dispatch(refreshReportRange(options));
+
     // convert new meta data into query param format
     const aggregateParams = _.omit(getQueryFromOptions(options), 'precision');
 
@@ -52,7 +54,6 @@ export function refresh(updates = {}) {
         // dispatch(getBounceReasons(bounceParams)) For table data
         dispatch(fetchBounceClassifications(bounceParams)).then((classifications) => {
           dispatch(refreshBounceReport({ aggregates, classifications }));
-          dispatch(refreshReportRage(options));
         });
       });
   };

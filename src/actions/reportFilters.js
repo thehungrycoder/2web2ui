@@ -42,7 +42,7 @@ export function removeFilter(payload) {
 }
 
 // refresh the date range
-export function refreshReportRage(options) {
+export function refreshReportRange(options) {
   return {
     type: 'REFRESH_REPORT_RANGE',
     payload: options
