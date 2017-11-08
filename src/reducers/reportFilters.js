@@ -17,6 +17,7 @@ export default (state = initialState, action) => {
 
     case 'REFRESH_REPORT_RANGE': {
       const { to, from, relativeRange } = action.payload;
+      console.log({ relativeRange }); // eslint-disable-line
       return { ...state, to, from, relativeRange };
     }
 

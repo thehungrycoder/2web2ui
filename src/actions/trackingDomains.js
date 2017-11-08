@@ -11,9 +11,9 @@ export function listTrackingDomains() {
   });
 }
 
-export function createTrackingDomain({ subaccount = {}, ...data }) {
+export function createTrackingDomain({ subaccount = null, ...data }) {
   const headers = {};
-  if (typeof subaccount === 'number') {
+  if (subaccount !== null) {
     headers['x-msys-subaccount'] = _.get(subaccount, 'id', subaccount);
   }
   return sparkpostApiRequest({
@@ -23,6 +23,42 @@ export function createTrackingDomain({ subaccount = {}, ...data }) {
       url: '/tracking-domains',
       data,
       headers
+    }
+  });
+}
+
+export function deleteTrackingDomain({ domain, subaccountId }) {
+  const headers = {};
+  if (typeof subaccountId === 'number') {
+    headers['x-msys-subaccount'] = subaccountId;
+  }
+  return (dispatch) => {
+    dispatch(sparkpostApiRequest({
+      type: 'DELETE_TRACKING_DOMAIN',
+      meta: {
+        method: 'DELETE',
+        url: `/tracking-domains/${domain}`,
+        headers,
+        domain
+      }
+    })).then(() => {
+      // dispatch success alert?
+    });
+  };
+}
+
+export function verifyTrackingDomain({ domain, subaccountId }) {
+  const headers = {};
+  if (typeof subaccountId === 'number') {
+    headers['x-msys-subaccount'] = subaccountId;
+  }
+  return sparkpostApiRequest({
+    type: 'VERIFY_TRACKING_DOMAIN',
+    meta: {
+      method: 'POST',
+      url: `/tracking-domains/${domain}/verify`,
+      headers,
+      domain
     }
   });
 }

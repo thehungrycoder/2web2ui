@@ -1,0 +1,36 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.Icon {
+  position: relative;
+  top: 0;
+}
+
+.IconSuccess {
+  @extend .Icon;
+  color: color(green);
+}
+
+.IconInfo {
+  @extend .Icon;
+  color: color(blue, light);
+}
+
+.IconWarning {
+  @extend .Icon;
+  color: color(mustard);
+}
+
+.IconDanger {
+  @extend .Icon;
+  color: color(red, light);
+}
+
+.ButtonColumn {
+  float: right;
+}
+
+.DomainHeading {
+  font-weight: 100;
+  font-size: 1.5em;
+  margin-bottom: 1em;
+}
