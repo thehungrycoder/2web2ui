@@ -16,6 +16,10 @@ export default [
       {
         label: 'Bounce',
         to: '/reports/bounce'
+      },
+      {
+        label: 'Message Events',
+        to: '/reports/message-events'
       }
     ]
   },
