@@ -34,7 +34,7 @@ function reshapeTemplates(templates) {
 
 function reshapeSubaccounts(subaccounts) {
   const type = 'Subaccount';
-  return subaccounts.map((s) => ({ type, value: `${s.name} (ID ${s.id})` }));
+  return subaccounts.map((s) => ({ type, value: `${s.name} (ID ${s.id})`, id: s.id }));
 }
 
 function reshapeSendingDomains(domains) {

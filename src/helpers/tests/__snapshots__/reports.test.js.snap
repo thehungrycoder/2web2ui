@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should get search options 1`] = `
+Object {
+  "filters": Array [
+    "type:123",
+  ],
+  "from": "2017-02-14T12:51:48Z",
+  "to": "2020-04-16T22:38:28Z",
+}
+`;
+
+exports[`Should get share link 1`] = `
+Object {
+  "link": "http://phoenix.test/?one=two&three=four",
+  "search": "?one=two&three=four",
+}
+`;
+
+exports[`Should get share link with no options 1`] = `
+Object {
+  "link": "http://phoenix.test/",
+  "search": "",
+}
+`;
+
+exports[`Should parse search 1`] = `
+Object {
+  "filters": Array [
+    Object {
+      "id": undefined,
+      "type": "Domain",
+      "value": "test.com",
+    },
+    Object {
+      "id": "123",
+      "type": "Subaccount",
+      "value": "test",
+    },
+  ],
+  "options": Object {
+    "from": 2017-11-03T14:43:00.000Z,
+    "metrics": Array [
+      "count-something",
+    ],
+    "to": 2017-11-04T14:43:00.000Z,
+  },
+}
+`;
+
+exports[`Should parse search with no empty value 1`] = `
+Object {
+  "options": Object {},
+}
+`;

@@ -1,0 +1,7 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.LegendHeader {
+  margin-bottom: spacing();
+  padding-bottom: spacing(small);
+  border-bottom: 1px solid color(gray, 9);
+}

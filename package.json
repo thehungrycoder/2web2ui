@@ -4,11 +4,12 @@
   "private": true,
   "package-lock": false,
   "dependencies": {
-    "@sparkpost/matchbox": "^1.7.13",
+    "@sparkpost/matchbox": "^1.8.0",
     "axios": "^0.16.1",
     "babel-plugin-lodash": "^3.2.11",
     "chart.js": "^2.6.0",
     "classnames": "^2.2.5",
+    "color": "^2.0.0",
     "copy-to-clipboard": "^3.0.8",
     "date-fns": "^1.28.5",
     "downshift": "^1.11.0",
@@ -118,7 +119,7 @@
     ],
     "testResultsProcessor": "./node_modules/jest-junit",
     "testEnvironment": "node",
-    "testURL": "http://localhost",
+    "testURL": "http://phoenix.test",
     "transform": {
       "^.+\\.(js|jsx)$": "<rootDir>/node_modules/babel-jest",
       "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",

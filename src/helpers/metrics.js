@@ -41,7 +41,7 @@ export function pushToKey(obj, key, value) {
 }
 
 export function getFilterSets(filters = [], delimiter) {
-  const hash = filters.reduce((result, { type, value }) => pushToKey(result, FILTER_KEY_MAP[type], value), {});
+  const hash = filters.reduce((result, { type, value, id }) => pushToKey(result, FILTER_KEY_MAP[type], type === 'Subaccount' ? id : value), {});
   return _.mapValues(hash, (v) => v.join(delimiter));
 }
 

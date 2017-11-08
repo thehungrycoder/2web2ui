@@ -1,0 +1,82 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Legend:  should handle external hover 1`] = `
+<Grid>
+  <Grid.Column>
+    <LegendItem
+      hovered={true}
+      key="0"
+      name="primary"
+      onClick={[Function]}
+      onMouseOut={[Function]}
+      onMouseOver={[Function]}
+    />
+  </Grid.Column>
+  <Grid.Column>
+    <LegendItem
+      hovered={false}
+      key="0"
+      name="secondary"
+      onClick={[Function]}
+      onMouseOut={[Function]}
+      onMouseOver={[Function]}
+    />
+  </Grid.Column>
+</Grid>
+`;
+
+exports[`Legend:  should render 1`] = `
+<div>
+  <div>
+    <LegendItem
+      key="0"
+      name="header"
+    />
+  </div>
+  <Grid>
+    <Grid.Column>
+      <LegendItem
+        hovered={false}
+        key="0"
+        name="primary"
+        onClick={[Function]}
+        onMouseOut={[Function]}
+        onMouseOver={[Function]}
+      />
+    </Grid.Column>
+  </Grid>
+</div>
+`;
+
+exports[`Legend:  should render with secondaryData 1`] = `
+<div>
+  <div>
+    <LegendItem
+      key="0"
+      name="header"
+    />
+  </div>
+  <Grid>
+    <Grid.Column>
+      <LegendItem
+        hovered={false}
+        key="0"
+        name="primary"
+        onClick={[Function]}
+        onMouseOut={[Function]}
+        onMouseOver={[Function]}
+      />
+    </Grid.Column>
+    <Grid.Column>
+      <LegendItem
+        hovered={false}
+        key="0"
+        name="secondary"
+        onClick={[Function]}
+        onMouseOut={[Function]}
+        onMouseOver={[Function]}
+      />
+    </Grid.Column>
+  </Grid>
+</div>
+`;

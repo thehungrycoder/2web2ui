@@ -6,6 +6,11 @@ function slugify(value) {
     .toLowerCase();
 }
 
+function snakeToCamel(string) {
+  return string.replace(/(\_\w)/g, (matches) => matches[1].toUpperCase());
+}
+
 export {
-  slugify
+  slugify,
+  snakeToCamel
 };
