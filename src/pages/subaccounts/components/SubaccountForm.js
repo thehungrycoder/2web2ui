@@ -1,73 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Field, reduxForm, formValueSelector } from 'redux-form';
+import { reduxForm, formValueSelector } from 'redux-form';
 
 import { Button, Panel } from '@sparkpost/matchbox';
-import {
-  TextFieldWrapper,
-  CheckboxWrapper,
-  RadioGroup,
-  SelectWrapper
-} from 'src/components/reduxFormWrappers';
-import ipValidator from '../helpers/ipValidator';
-import { required } from 'src/helpers/validation';
-import GrantsCheckboxes from 'src/components/grantBoxes/GrantsCheckboxes';
-
 import { getSubaccountGrants } from 'src/selectors/api-keys';
 
-const formName = 'SubaccountForm';
-const grantsOptions = [
-  { value: 'all', label: 'All' },
-  { value: 'select', label: 'Select' }
-];
-
-const ipPoolsSelectOptions = (ipPools) => (ipPools.map((pool) => ({
-  value: pool.id,
-  label: pool.name
-})));
-
-const keyBoxHelpText = (createApiKey) => createApiKey
-    ? 'The key will only be shown once when created, so be sure to copy and save it somewhere safe.'
-    : 'Every subaccount you create will need its own API key. You can create one later.';
-
-const apiKeyFields = (showGrants = false, grants, submitting) => (
-  <div>
-    <Field
-      name="keyName"
-      component={TextFieldWrapper}
-      label="Key Name"
-      validate={required}
-      disabled={submitting}
-    />
-    <Field
-      name="grantsRadio"
-      component={RadioGroup}
-      title="API Permissions"
-      options={grantsOptions}
-      disabled={submitting}
-    />
-    <GrantsCheckboxes grants={grants} show={showGrants} />
-    <Field
-      name="validIps"
-      component={TextFieldWrapper}
-      label="Allowed IPs"
-      helpText="Leaving the field blank will allow access by valid API keys from any IP address."
-      placeholder="10.20.30.40, 10.20.30.0/24"
-      validate={ipValidator}
-      disabled={submitting}
-    />
-  </div>
-);
-
-const ipPoolFields = (ipPools, submitting) => (
-  <Field
-    name="ipPool"
-    component={SelectWrapper}
-    options={ipPoolsSelectOptions(ipPools)}
-    label="IP Pool"
-    disabled={submitting}
-  />
-);
+import { NameField, ApiKeyCheckBox, ApiKeyFields, IpPoolSelect } from './FormFields';
 
 export class SubaccountForm extends Component {
 
@@ -82,33 +20,18 @@ export class SubaccountForm extends Component {
       ipPools
     } = this.props;
 
-    const hasIpPools = !!ipPools.length;
-
     return (
       <form onSubmit={handleSubmit}>
         <Panel.Section>
-          <Field
-            name="name"
-            component={TextFieldWrapper}
-            label="Name"
-            validate={required}
-            disabled={submitting}
-          />
+          <NameField disabled={submitting}/>
         </Panel.Section>
         <Panel.Section>
-          <Field
-            name="createApiKey"
-            component={CheckboxWrapper}
-            type="checkbox"
-            label="Create API Key"
-            helpText={ keyBoxHelpText(createApiKey) }
-            disabled={submitting}
-          />
-          { createApiKey && apiKeyFields(showGrants, grants, submitting) }
+          <ApiKeyCheckBox disabled={submitting} createApiKey={createApiKey}/>
+          <ApiKeyFields show={createApiKey} showGrants={showGrants} grants={grants} submitting={submitting}/>
         </Panel.Section>
-        { hasIpPools &&
+        { !!ipPools.length &&
           <Panel.Section>
-            { ipPoolFields(ipPools, submitting) }
+            <IpPoolSelect ipPools={ipPools} disabled={submitting} />
           </Panel.Section>
         }
         <Panel.Section>
@@ -121,6 +44,7 @@ export class SubaccountForm extends Component {
   }
 }
 
+const formName = 'SubaccountForm';
 const valueSelector = formValueSelector(formName);
 
 const mapStateToProps = (state, props) => ({

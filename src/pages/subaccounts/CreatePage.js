@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import { Page, Panel } from '@sparkpost/matchbox';
@@ -17,7 +17,7 @@ const breadcrumbAction = {
   to: '/account/subaccounts'
 };
 
-export class CreatePage extends React.Component {
+export class CreatePage extends Component {
   componentDidMount() {
     this.props.listSubaccountGrants();
     this.props.listPools();
@@ -27,9 +27,7 @@ export class CreatePage extends React.Component {
     const { createSubaccount, history } = this.props;
 
     return createSubaccount(values).then((res) => {
-      // TODO: Direct to details page when built,
-      //      details page needs to display the API Key if created here
-      history.push('/account/subaccounts');
+      history.push(`/account/subaccounts/${res.subaccount_id}`);
     }).catch((err) => showAlert({ type: 'error', message: 'Could not create Subaccount', details: err.message }));
   };
 

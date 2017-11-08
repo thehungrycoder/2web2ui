@@ -12,9 +12,9 @@ import routes from 'src/config/routes';
 const Layout = ({ children, location }) => {
 
   // matchPath uses the same matching that <Route> uses
-  const route = _.find(routes, (route) => matchPath(location.pathname, {
-    path: route.path,
-    exact: true,
+  const route = _.find(routes, ({ path, exact }) => matchPath(location.pathname, {
+    path: path,
+    exact: typeof exact === undefined ? true : exact,
     strict: false
   }));
 

@@ -67,20 +67,6 @@ class WebhooksDetails extends Component {
     this.setState({ showDelete: !this.state.showDelete });
   }
 
-  /*
-    tab switch
-  */
-  showTest = () => {
-    this.setState({ selectedTab: 1 });
-  }
-
-  /*
-    tab switch
-  */
-  showSettings = () => {
-    this.setState({ selectedTab: 0 });
-  }
-
   render() {
     const { webhook, location } = this.props;
     const webhookId = this.id;
