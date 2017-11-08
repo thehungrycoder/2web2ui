@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BouncePage:  should render 1`] = `
+<Page
+  empty={Object {}}
+  title="Bounce Report"
+>
+  <Connect(Filters)
+    onShare={[Function]}
+    refresh={[Function]}
+  />
+  <Connect(ChartGroup) />
+  <ShareModal
+    handleToggle={[Function]}
+    link=""
+    open={false}
+  />
+</Page>
+`;
+
+exports[`BouncePage:  should render correctly with no bounces 1`] = `
+<Page
+  empty={Object {}}
+  title="Bounce Report"
+>
+  <Connect(Filters)
+    onShare={[Function]}
+    refresh={[Function]}
+  />
+  <Empty />
+  <ShareModal
+    handleToggle={[Function]}
+    link=""
+    open={false}
+  />
+</Page>
+`;

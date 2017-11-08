@@ -12,6 +12,10 @@ export default [
       {
         label: 'Summary',
         to: '/reports/summary'
+      },
+      {
+        label: 'Bounce',
+        to: '/reports/bounce'
       }
     ]
   },

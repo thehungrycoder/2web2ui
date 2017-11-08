@@ -89,6 +89,11 @@ export default [
     layout: App
   },
   {
+    path: '/reports/bounce',
+    component: reports.BouncePage,
+    layout: App
+  },
+  {
     path: '/account/subaccounts',
     component: subaccounts.ListPage,
     condition: hasGrants('subaccount/manage'),

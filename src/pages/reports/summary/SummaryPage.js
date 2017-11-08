@@ -5,6 +5,7 @@ import classnames from 'classnames';
 
 import { refresh as refreshSummaryChart } from 'src/actions/summaryChart';
 import { addFilter, refreshTypeaheadCache } from 'src/actions/reportFilters';
+import { getShareLink, getFilterSearchOptions, parseSearch } from 'src/helpers/reports';
 
 import { Page, Panel, Tabs } from '@sparkpost/matchbox';
 import { Loading } from 'src/components';
@@ -12,8 +13,6 @@ import Filters from '../components/Filters';
 import ShareModal from '../components/ShareModal';
 import { List, MetricsModal, ChartGroup, ChartHeader } from './components';
 
-import qs from 'query-string';
-import moment from 'moment';
 import styles from './SummaryPage.module.scss';
 
 class SummaryReportPage extends Component {
@@ -31,28 +30,10 @@ class SummaryReportPage extends Component {
   }
 
   parseSearch() {
-    const { location, addFilter } = this.props;
-    let options = {};
+    const { options, filters } = parseSearch(this.props.location.search);
 
-    if (location.search) {
-      const { from, to, metrics = [], filters = []} = qs.parse(location.search);
-
-      // Checks if there is only one metric/filter
-      const metricsList = typeof metrics === 'string' ? [metrics] : metrics;
-      const filtersList = typeof filters === 'string' ? [filters] : filters;
-
-      filtersList.forEach((filter) => {
-        const parts = filter.split(':');
-        const type = parts.shift();
-        const value = parts.join(':');
-        addFilter({ value, type });
-      });
-
-      options = {
-        metrics: metricsList,
-        from: new Date(from),
-        to: new Date(to)
-      };
+    if (filters) {
+      filters.forEach(this.props.addFilter);
     }
 
     return options;
@@ -88,15 +69,15 @@ class SummaryReportPage extends Component {
 
   updateLink = () => {
     const { filters, chart, history } = this.props;
+
     const options = {
-      from: moment(filters.from).utc().format(),
-      to: moment(filters.to).utc().format(),
       metrics: chart.metrics.map((metric) => metric.key),
-      filters: filters.activeList.map((filter) => `${filter.type}:${filter.value}`)
+      ...getFilterSearchOptions(filters)
     };
 
-    const search = `?${qs.stringify(options, { encode: false })}`;
-    this.setState({ link: `${window.location.href.split('?')[0]}${search}` });
+    const { link, search } = getShareLink(options);
+
+    this.setState({ link });
     history.replace({ pathname: '/reports/summary', search });
   }
 
