@@ -24,10 +24,11 @@ export class CreatePage extends Component {
   }
 
   onSubmit = (values) => {
-    const { createSubaccount, history } = this.props;
+    const { createSubaccount, history, showAlert } = this.props;
 
-    return createSubaccount(values).then((res) => {
-      history.push(`/account/subaccounts/${res.subaccount_id}`);
+    return createSubaccount(values).then(({ subaccount_id }) => {
+      showAlert({ type: 'success', message: `Subaccount ${subaccount_id} created` });
+      history.push(`/account/subaccounts/${subaccount_id}`);
     }).catch((err) => showAlert({ type: 'error', message: 'Could not create Subaccount', details: err.message }));
   };
 
@@ -52,5 +53,5 @@ const mapStateToProps = (state, props) => ({
 });
 
 export default withRouter(
-  connect(mapStateToProps, { listSubaccountGrants, listPools, createSubaccount })(CreatePage)
+  connect(mapStateToProps, { listSubaccountGrants, listPools, createSubaccount, showAlert })(CreatePage)
 );

@@ -5,7 +5,7 @@ import { reduxForm, formValueSelector } from 'redux-form';
 import { Button, Panel } from '@sparkpost/matchbox';
 import { getSubaccountGrants } from 'src/selectors/api-keys';
 
-import { NameField, ApiKeyCheckBox, ApiKeyFields, IpPoolSelect } from './FormFields';
+import { NameField, ApiKeyCheckBox, ApiKeyFields, IpPoolSelect } from './formFields';
 
 export class SubaccountForm extends Component {
 

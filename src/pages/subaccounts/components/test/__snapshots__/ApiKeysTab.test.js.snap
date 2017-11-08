@@ -1,0 +1,116 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ApiKeysTab empty 1`] = `
+<Panel>
+  <Panel.Section>
+    <p>
+      This subaccount will need an API Key in order to send email
+    </p>
+    <Button
+      default={true}
+      size="default"
+      to="/account/api-keys/create"
+    >
+      Create
+    </Button>
+  </Panel.Section>
+  <TableCollection
+    columns={
+      Array [
+        Object {
+          "label": "Name",
+          "width": "40%",
+        },
+        Object {
+          "label": "Key",
+          "width": "20%",
+        },
+      ]
+    }
+    filterBox={
+      Object {
+        "exampleModifiers": Array [
+          "key",
+          "name",
+          "id",
+        ],
+        "itemToStringKeys": Array [
+          "label",
+          "short_key",
+          "id",
+        ],
+        "keyMap": Object {
+          "key": "short_key",
+          "name": "label",
+        },
+        "show": true,
+      }
+    }
+    getRowData={[Function]}
+    pagination={true}
+    rows={Array []}
+  />
+</Panel>
+`;
+
+exports[`ApiKeysTab loading 1`] = `""`;
+
+exports[`ApiKeysTab normal props 1`] = `
+<Panel>
+  <TableCollection
+    columns={
+      Array [
+        Object {
+          "label": "Name",
+          "width": "40%",
+        },
+        Object {
+          "label": "Key",
+          "width": "20%",
+        },
+      ]
+    }
+    filterBox={
+      Object {
+        "exampleModifiers": Array [
+          "key",
+          "name",
+          "id",
+        ],
+        "itemToStringKeys": Array [
+          "label",
+          "short_key",
+          "id",
+        ],
+        "keyMap": Object {
+          "key": "short_key",
+          "name": "label",
+        },
+        "show": true,
+      }
+    }
+    getRowData={[Function]}
+    pagination={true}
+    rows={
+      Array [
+        "an array of keys",
+      ]
+    }
+  />
+</Panel>
+`;
+
+exports[`getRowData 1`] = `
+Array [
+  <Link
+    replace={false}
+    to="/account/api-keys/details/12313"
+  >
+    test
+  </Link>,
+  <code>
+    cdwa
+    ••••••••
+  </code>,
+]
+`;

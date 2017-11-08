@@ -1,0 +1,157 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`edit path base props 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "Subaccounts",
+      "to": "/account/subaccounts",
+    }
+  }
+  empty={Object {}}
+  title="Bob Evans, the restaurant. (id: 123)"
+>
+  <Tabs
+    connectBelow={true}
+    selected={0}
+    tabs={
+      Array [
+        Object {
+          "Component": [Function],
+          "content": "Settings",
+          "to": "/account/subaccounts/123",
+        },
+        Object {
+          "Component": [Function],
+          "content": "API Keys",
+          "to": "/account/subaccounts/123/api-keys",
+        },
+      ]
+    }
+  />
+  <Switch>
+    <Route
+      exact={true}
+      path="/account/subaccounts/123"
+      render={[Function]}
+    />
+    <Route
+      path="/account/subaccounts/123/api-keys"
+      render={[Function]}
+    />
+  </Switch>
+</Page>
+`;
+
+exports[`edit path loading 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "Subaccounts",
+      "to": "/account/subaccounts",
+    }
+  }
+  empty={Object {}}
+  title="loading..."
+>
+  <Tabs
+    connectBelow={true}
+    selected={0}
+    tabs={
+      Array [
+        Object {
+          "Component": [Function],
+          "content": "Settings",
+          "to": "/account/subaccounts/123",
+        },
+        Object {
+          "Component": [Function],
+          "content": "API Keys",
+          "to": "/account/subaccounts/123/api-keys",
+        },
+      ]
+    }
+  />
+  <PanelLoading />
+</Page>
+`;
+
+exports[`keys path base props 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "Subaccounts",
+      "to": "/account/subaccounts",
+    }
+  }
+  empty={Object {}}
+  title="Bob Evans, the restaurant. (id: 123)"
+>
+  <Tabs
+    connectBelow={true}
+    selected={1}
+    tabs={
+      Array [
+        Object {
+          "Component": [Function],
+          "content": "Settings",
+          "to": "/account/subaccounts/123",
+        },
+        Object {
+          "Component": [Function],
+          "content": "API Keys",
+          "to": "/account/subaccounts/123/api-keys",
+        },
+      ]
+    }
+  />
+  <Switch>
+    <Route
+      exact={true}
+      path="/account/subaccounts/123"
+      render={[Function]}
+    />
+    <Route
+      path="/account/subaccounts/123/api-keys"
+      render={[Function]}
+    />
+  </Switch>
+</Page>
+`;
+
+exports[`keys path loading 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "Subaccounts",
+      "to": "/account/subaccounts",
+    }
+  }
+  empty={Object {}}
+  title="loading..."
+>
+  <Tabs
+    connectBelow={true}
+    selected={1}
+    tabs={
+      Array [
+        Object {
+          "Component": [Function],
+          "content": "Settings",
+          "to": "/account/subaccounts/123",
+        },
+        Object {
+          "Component": [Function],
+          "content": "API Keys",
+          "to": "/account/subaccounts/123/api-keys",
+        },
+      ]
+    }
+  />
+  <PanelLoading />
+</Page>
+`;

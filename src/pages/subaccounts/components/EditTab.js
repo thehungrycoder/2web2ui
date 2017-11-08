@@ -13,12 +13,12 @@ import SubaccountEditForm from './SubaccountEditForm';
 export class EditTab extends Component {
 
   onSubmit = ({ name, status, ipPool }) => {
-    const { editSubaccount, subaccount, getSubaccount } = this.props;
+    const { editSubaccount, subaccount, getSubaccount, showAlert } = this.props;
 
-    return editSubaccount(subaccount.id, { name, status, ip_pool: ipPool })
-      .then(() => showAlert({ type: 'success', message: 'Updated subaccount' })
-      .then(getSubaccount(subaccount.id,))
-    ).catch((err) =>
+    return editSubaccount(subaccount.id, { name, status, ip_pool: ipPool }).then(() => {
+      showAlert({ type: 'success', message: 'Updated subaccount' });
+      getSubaccount(subaccount.id);
+    }).catch((err) =>
       showAlert({ type: 'error', message: 'Error updating subaccount', details: err.message })
     );
   };
@@ -45,5 +45,5 @@ const mapStateToProps = (state, props) => ({
 });
 
 export default withRouter(
-  connect(mapStateToProps, { getSubaccount, editSubaccount })(EditTab)
+  connect(mapStateToProps, { getSubaccount, editSubaccount, showAlert })(EditTab)
 );

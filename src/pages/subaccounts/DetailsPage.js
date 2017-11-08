@@ -55,10 +55,7 @@ export class DetailsPage extends Component {
     if (loading) {
       return (
         <Page title={'loading...'} breadcrumbAction={breadcrumbAction} >
-          <Tabs
-            selected={selectedTab}
-            tabs={tabs}
-          />
+          <Tabs selected={selectedTab} tabs={tabs} />
           <PanelLoading />
         </Page>
       );
@@ -66,11 +63,8 @@ export class DetailsPage extends Component {
     const { match, subaccount } = this.props;
 
     return (
-      <Page title={`${subaccount.name}`} breadcrumbAction={breadcrumbAction}>
-        <Tabs
-          selected={selectedTab}
-          tabs={tabs}
-        />
+      <Page title={`${subaccount.name} (id: ${subaccount.id})`} breadcrumbAction={breadcrumbAction}>
+        <Tabs selected={selectedTab} tabs={tabs} />
         <Switch>
           <Route exact path={match.url} render={() => <EditTab subaccount={subaccount} />} />
           <Route path={`${match.url}/api-keys`} render={() => <ApiKeysTab id={subaccount.id}/>} />

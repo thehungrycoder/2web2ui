@@ -21,7 +21,7 @@ export class ListPage extends Component {
   }
 
   onReloadApiBanner = () => {
-    this.props.listSubaccounts({ force: true }); // force a refresh
+    this.props.listSubaccounts();
   };
 
   renderCollection() {

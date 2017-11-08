@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EditTab Render loading 1`] = `<PanelLoading />`;
+
+exports[`EditTab Render normal props 1`] = `
+<Panel>
+  <Connect(ReduxForm)
+    onSubmit={[Function]}
+    subaccount={
+      Object {
+        "compliance_status": "active",
+        "id": 123,
+        "name": "Caisey Neistat",
+        "status": "active",
+      }
+    }
+  />
+</Panel>
+`;

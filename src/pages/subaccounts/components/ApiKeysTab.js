@@ -6,15 +6,15 @@ import { TableCollection } from 'src/components';
 import { filterBoxConfig } from 'src/pages/api-keys/tableConfig';
 import { getSubaccountApiKeys } from 'src/selectors/api-keys';
 
-export const columns = [
-  { label: 'Name', width: '20%' },
+const columns = [
+  { label: 'Name', width: '40%' },
   { label: 'Key', width: '20%' }
 ];
 
 
-export const getRowData = (key) => [
-  <Link to={`/account/api-keys/details/${key.id}`}>{key.label}</Link>,
-  <code>{key.short_key}••••••••</code>
+export const getRowData = ({ id, label, short_key }) => [
+  <Link to={`/account/api-keys/details/${id}`}>{label}</Link>,
+  <code>{short_key}••••••••</code>
 ];
 
 export class ApiKeysTab extends Component {
@@ -39,7 +39,6 @@ export class ApiKeysTab extends Component {
       </Panel.Section>
     );
   }
-
 
   render() {
     const { loading } = this.props;

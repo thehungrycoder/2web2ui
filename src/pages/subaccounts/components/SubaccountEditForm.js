@@ -4,7 +4,7 @@ import { reduxForm } from 'redux-form';
 
 import { Button, Panel } from '@sparkpost/matchbox';
 
-import { NameField, IpPoolSelect, StatusSelect } from './FormFields';
+import { NameField, IpPoolSelect, StatusSelect } from './formFields';
 
 export class SubaccountEditForm extends Component {
 

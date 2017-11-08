@@ -81,7 +81,7 @@ const ApiKeyFields = ({ show, showGrants = false, grants, disabled }) => {
   );
 };
 
-const StatusSelect = ({ status, disabled, compliance }) => {
+const StatusSelect = ({ disabled, compliance }) => {
   const blocked = compliance !== 'active';
   return (
     <Field

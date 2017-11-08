@@ -1,15 +1,15 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import { SubaccountForm } from '../SubaccountForm';
+import { SubaccountEditForm } from '../SubaccountEditForm';
 
 const handleSubmit = jest.fn();
 
 const props = {
-  grants: ['subaccount grants'],
-  showGrants: false,
-  createApiKey: false,
-  ipPools: [],
+  submitting: false,
+  pristine: true,
+  compliance: 'active',
+  ipPools: ['an array of ip pools'],
   handleSubmit
 };
 
@@ -17,25 +17,20 @@ let wrapper;
 
 beforeEach(() => {
   jest.clearAllMocks();
-  wrapper = shallow(<SubaccountForm {...props} />);
+  wrapper = shallow(<SubaccountEditForm {...props} />);
 });
 
 test('base case', () => {
   expect(wrapper).toMatchSnapshot();
 });
 
-test('api key form', () => {
-  wrapper.setProps({ createApiKey: true });
+test('no ip pools', () => {
+  wrapper.setProps({ ipPools: [] });
   expect(wrapper).toMatchSnapshot();
 });
 
-test('has ip pools', () => {
-  wrapper.setProps({ ipPools: ['salt water']});
-  expect(wrapper).toMatchSnapshot();
-});
-
-test('ip pools checked ', () => {
-  wrapper.setProps({ ipPools: ['swimmin']});
+test('cancel button', () => {
+  wrapper.setProps({ pristine: false });
   expect(wrapper).toMatchSnapshot();
 });
 

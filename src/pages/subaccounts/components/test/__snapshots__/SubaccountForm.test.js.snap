@@ -5,62 +5,21 @@ exports[`api key form 1`] = `
   onSubmit={[Function]}
 >
   <Panel.Section>
-    <Field
-      component={[Function]}
-      label="Name"
-      name="name"
-      validate={[Function]}
-    />
+    <NameField />
   </Panel.Section>
   <Panel.Section>
-    <Field
-      component={[Function]}
-      helpText="The key will only be shown once when created, so be sure to copy and save it somewhere safe."
-      label="Create API Key"
-      name="createApiKey"
-      type="checkbox"
+    <ApiKeyCheckBox
+      createApiKey={true}
     />
-    <div>
-      <Field
-        component={[Function]}
-        label="Key Name"
-        name="keyName"
-        validate={[Function]}
-      />
-      <Field
-        component={[Function]}
-        name="grantsRadio"
-        options={
-          Array [
-            Object {
-              "label": "All",
-              "value": "all",
-            },
-            Object {
-              "label": "Select",
-              "value": "select",
-            },
-          ]
-        }
-        title="API Permissions"
-      />
-      <GrantsCheckboxes
-        grants={
-          Array [
-            "subaccount grants",
-          ]
-        }
-        show={false}
-      />
-      <Field
-        component={[Function]}
-        helpText="Leaving the field blank will allow access by valid API keys from any IP address."
-        label="Allowed IPs"
-        name="validIps"
-        placeholder="10.20.30.40, 10.20.30.0/24"
-        validate={[Function]}
-      />
-    </div>
+    <ApiKeyFields
+      grants={
+        Array [
+          "subaccount grants",
+        ]
+      }
+      show={true}
+      showGrants={false}
+    />
   </Panel.Section>
   <Panel.Section>
     <Button
@@ -79,20 +38,20 @@ exports[`base case 1`] = `
   onSubmit={[Function]}
 >
   <Panel.Section>
-    <Field
-      component={[Function]}
-      label="Name"
-      name="name"
-      validate={[Function]}
-    />
+    <NameField />
   </Panel.Section>
   <Panel.Section>
-    <Field
-      component={[Function]}
-      helpText="Every subaccount you create will need its own API key. You can create one later."
-      label="Create API Key"
-      name="createApiKey"
-      type="checkbox"
+    <ApiKeyCheckBox
+      createApiKey={false}
+    />
+    <ApiKeyFields
+      grants={
+        Array [
+          "subaccount grants",
+        ]
+      }
+      show={false}
+      showGrants={false}
     />
   </Panel.Section>
   <Panel.Section>
@@ -112,33 +71,27 @@ exports[`has ip pools 1`] = `
   onSubmit={[Function]}
 >
   <Panel.Section>
-    <Field
-      component={[Function]}
-      label="Name"
-      name="name"
-      validate={[Function]}
-    />
+    <NameField />
   </Panel.Section>
   <Panel.Section>
-    <Field
-      component={[Function]}
-      helpText="Every subaccount you create will need its own API key. You can create one later."
-      label="Create API Key"
-      name="createApiKey"
-      type="checkbox"
+    <ApiKeyCheckBox
+      createApiKey={false}
     />
-  </Panel.Section>
-  <Panel.Section>
-    <Field
-      component={[Function]}
-      label="IP Pool"
-      name="ipPool"
-      options={
+    <ApiKeyFields
+      grants={
         Array [
-          Object {
-            "label": undefined,
-            "value": undefined,
-          },
+          "subaccount grants",
+        ]
+      }
+      show={false}
+      showGrants={false}
+    />
+  </Panel.Section>
+  <Panel.Section>
+    <IpPoolSelect
+      ipPools={
+        Array [
+          "salt water",
         ]
       }
     />
@@ -160,33 +113,27 @@ exports[`ip pools checked  1`] = `
   onSubmit={[Function]}
 >
   <Panel.Section>
-    <Field
-      component={[Function]}
-      label="Name"
-      name="name"
-      validate={[Function]}
-    />
+    <NameField />
   </Panel.Section>
   <Panel.Section>
-    <Field
-      component={[Function]}
-      helpText="Every subaccount you create will need its own API key. You can create one later."
-      label="Create API Key"
-      name="createApiKey"
-      type="checkbox"
+    <ApiKeyCheckBox
+      createApiKey={false}
     />
-  </Panel.Section>
-  <Panel.Section>
-    <Field
-      component={[Function]}
-      label="IP Pool"
-      name="ipPool"
-      options={
+    <ApiKeyFields
+      grants={
         Array [
-          Object {
-            "label": undefined,
-            "value": undefined,
-          },
+          "subaccount grants",
+        ]
+      }
+      show={false}
+      showGrants={false}
+    />
+  </Panel.Section>
+  <Panel.Section>
+    <IpPoolSelect
+      ipPools={
+        Array [
+          "swimmin",
         ]
       }
     />
@@ -208,22 +155,24 @@ exports[`submits correctly 1`] = `
   onSubmit={[Function]}
 >
   <Panel.Section>
-    <Field
-      component={[Function]}
+    <NameField
       disabled={true}
-      label="Name"
-      name="name"
-      validate={[Function]}
     />
   </Panel.Section>
   <Panel.Section>
-    <Field
-      component={[Function]}
+    <ApiKeyCheckBox
+      createApiKey={false}
       disabled={true}
-      helpText="Every subaccount you create will need its own API key. You can create one later."
-      label="Create API Key"
-      name="createApiKey"
-      type="checkbox"
+    />
+    <ApiKeyFields
+      grants={
+        Array [
+          "subaccount grants",
+        ]
+      }
+      show={false}
+      showGrants={false}
+      submitting={true}
     />
   </Panel.Section>
   <Panel.Section>
