@@ -1,10 +1,9 @@
 import _ from 'lodash';
+import config from 'src/config';
 
 export const getTemplates = (state) => state.templates.list;
-export const getTemplateById = (state, props) => {
-  const template = state.templates.byId[props.match.params.id] || { draft: {}, published: {}};
-  return template;
-};
+export const getTemplateById = (state, props) => state.templates.byId[props.match.params.id] || { draft: {}, published: {}};
+export const getTemplateTestData = (state) => state.templates.testData || config.templates.testData;
 
 export const cloneTemplate = (template) => Object.assign({ ...template }, { name: `${template.name} Copy`, id: `${template.id}-copy` });
 

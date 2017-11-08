@@ -9,7 +9,7 @@ import { getDraft, getPublished, update, deleteTemplate, publish } from '../../a
 import { showAlert } from 'src/actions/globalAlert';
 
 // Selectors
-import { getTemplateById } from 'src/selectors/templates';
+import { getTemplateById, getTemplateTestData } from 'src/selectors/templates';
 
 // Components
 import Form from './components/Form';
@@ -168,7 +168,7 @@ const mapStateToProps = (state, props) => {
   return {
     loading: state.templates.getLoading,
     template,
-    initialValues: { testData: state.templates.testData, ...values }
+    initialValues: { testData: getTemplateTestData(state), ...values }
   };
 };
 const formOptions = {

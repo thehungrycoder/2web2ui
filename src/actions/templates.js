@@ -52,22 +52,17 @@ export function create(data) {
     meta: {
       method: 'POST',
       url: '/templates',
-      data
+      data: _.omit(data, 'testData')
     }
   });
 }
 
 export function update(data, params = {}) {
-  const id = data.id;
-  const { testData, ...formData } = data;
+  const { id, testData, ...formData } = data;
 
   return (dispatch) => {
 
-    dispatch(setTestData({
-      id,
-      mode: 'draft',
-      data: testData
-    }));
+    dispatch(setTestData({ id, mode: 'draft', data: testData }));
 
     return dispatch(sparkpostApiRequest({
       type: 'UPDATE_TEMPLATE',
@@ -81,15 +76,22 @@ export function update(data, params = {}) {
   }
 }
 
-export function publish(id) {
-  return sparkpostApiRequest({
-    type: 'PUBLISH_TEMPLATE',
-    meta: {
-      method: 'PUT',
-      url: `/templates/${id}`,
-      data: { published: true }
-    }
-  });
+export function publish(data) {
+  return (dispatch) => {
+    const { id, testData } = data;
+    return dispatch(update(data)).then(() => {
+      dispatch(setTestData({ id, mode: 'published', data: testData }));
+
+      return dispatch(sparkpostApiRequest({
+        type: 'PUBLISH_TEMPLATE',
+        meta: {
+          method: 'PUT',
+          url: `/templates/${id}`,
+          data: { published: true }
+        }
+      }));
+    });
+  }
 }
 
 export function deleteTemplate(id) {
@@ -118,16 +120,13 @@ export function getTestData({ id, mode }) {
 
     return localforage.getItem(getTestDataKey({ id, username, mode }))
       .then((results) => {
-        console.log(results, id)
-        let testData = config.templates.testData;
 
         if (results) {
-          console.log(results)
-          testData = JSON.parse(results);
+          let testData = JSON.parse(results);
 
+          // Reshapes test data if it does not conform with default JSON structure
           if (!['substitution_data', 'metadata', 'options'].every((key) => key in testData)) {
             testData = { ...config.templates.testData, substitution_data: testData };
-            console.log('data', testData)
           }
         }
 
