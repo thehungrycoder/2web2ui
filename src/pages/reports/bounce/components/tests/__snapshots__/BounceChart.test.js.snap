@@ -27,6 +27,7 @@ exports[`BounceChart:  should render 1`] = `
         }
       }
       outerRadius="80%"
+      reverseStackOrder={false}
       stackOffset="none"
       startAngle={0}
     >

@@ -117,7 +117,6 @@ exports[`renders correctly 1`] = `
           arraySplice={[Function]}
           arraySwap={[Function]}
           arrayUnshift={[Function]}
-          asyncErrors={undefined}
           asyncValidating={false}
           autofill={[Function]}
           blur={[Function]}
@@ -130,7 +129,6 @@ exports[`renders correctly 1`] = `
           dirty={false}
           dispatch={[Function]}
           enableReinitialize={true}
-          error={undefined}
           focus={[Function]}
           forceUnregisterOnUnmount={false}
           form="profileName"
@@ -205,7 +203,6 @@ exports[`renders correctly 1`] = `
           touch={[Function]}
           touchOnBlur={true}
           touchOnChange={false}
-          triggerSubmit={undefined}
           unregisterField={[Function]}
           untouch={[Function]}
           updateSyncErrors={[Function]}
@@ -218,7 +215,6 @@ exports[`renders correctly 1`] = `
               "lastName": "Stark",
             }
           }
-          warning={undefined}
         >
           <NameForm
             anyTouched={false}
@@ -247,7 +243,6 @@ exports[`renders correctly 1`] = `
             destroy={[Function]}
             dirty={false}
             dispatch={[Function]}
-            error={undefined}
             form="profileName"
             handleSubmit={[Function]}
             initialValues={
@@ -291,10 +286,8 @@ exports[`renders correctly 1`] = `
               }
             }
             touch={[Function]}
-            triggerSubmit={undefined}
             untouch={[Function]}
             valid={true}
-            warning={undefined}
           >
             <form>
               <Field
@@ -565,8 +558,6 @@ exports[`renders correctly 1`] = `
                         "warning": undefined,
                       }
                     }
-                    _value={undefined}
-                    asyncError={undefined}
                     asyncValidating={false}
                     component={[Function]}
                     dirty={false}
@@ -577,12 +568,6 @@ exports[`renders correctly 1`] = `
                     name="firstName"
                     normalize={[Function]}
                     pristine={true}
-                    state={undefined}
-                    submitError={undefined}
-                    submitFailed={undefined}
-                    submitting={undefined}
-                    syncError={undefined}
-                    syncWarning={undefined}
                     value="Ned"
                   >
                     <TextFieldWrapper
@@ -621,7 +606,6 @@ exports[`renders correctly 1`] = `
                       }
                     >
                       <TextField
-                        error={undefined}
                         id="firstName"
                         label="First Name"
                         name="firstName"
@@ -648,10 +632,7 @@ exports[`renders correctly 1`] = `
                               First Name
                             </label>
                           </Label>
-                          <Connect
-                            left={undefined}
-                            right={undefined}
-                          >
+                          <Connect>
                             <div
                               className="Matchbox-Connect"
                             >
@@ -659,9 +640,7 @@ exports[`renders correctly 1`] = `
                                 className="Matchbox-Connect__Primary"
                               >
                                 <input
-                                  autoFocus={undefined}
                                   className="Matchbox-TextField__Input"
-                                  disabled={undefined}
                                   id="firstName"
                                   name="firstName"
                                   onBlur={[Function]}
@@ -669,8 +648,6 @@ exports[`renders correctly 1`] = `
                                   onDragStart={[Function]}
                                   onDrop={[Function]}
                                   onFocus={[Function]}
-                                  placeholder={undefined}
-                                  readOnly={undefined}
                                   style={
                                     Object {
                                       "paddingLeft": undefined,
@@ -957,8 +934,6 @@ exports[`renders correctly 1`] = `
                         "warning": undefined,
                       }
                     }
-                    _value={undefined}
-                    asyncError={undefined}
                     asyncValidating={false}
                     component={[Function]}
                     dirty={false}
@@ -969,12 +944,6 @@ exports[`renders correctly 1`] = `
                     name="lastName"
                     normalize={[Function]}
                     pristine={true}
-                    state={undefined}
-                    submitError={undefined}
-                    submitFailed={undefined}
-                    submitting={undefined}
-                    syncError={undefined}
-                    syncWarning={undefined}
                     value="Stark"
                   >
                     <TextFieldWrapper
@@ -1013,7 +982,6 @@ exports[`renders correctly 1`] = `
                       }
                     >
                       <TextField
-                        error={undefined}
                         id="lirstName"
                         label="Last Name"
                         name="lastName"
@@ -1040,10 +1008,7 @@ exports[`renders correctly 1`] = `
                               Last Name
                             </label>
                           </Label>
-                          <Connect
-                            left={undefined}
-                            right={undefined}
-                          >
+                          <Connect>
                             <div
                               className="Matchbox-Connect"
                             >
@@ -1051,9 +1016,7 @@ exports[`renders correctly 1`] = `
                                 className="Matchbox-Connect__Primary"
                               >
                                 <input
-                                  autoFocus={undefined}
                                   className="Matchbox-TextField__Input"
-                                  disabled={undefined}
                                   id="lirstName"
                                   name="lastName"
                                   onBlur={[Function]}
@@ -1061,8 +1024,6 @@ exports[`renders correctly 1`] = `
                                   onDragStart={[Function]}
                                   onDrop={[Function]}
                                   onFocus={[Function]}
-                                  placeholder={undefined}
-                                  readOnly={undefined}
                                   style={
                                     Object {
                                       "paddingLeft": undefined,
@@ -1087,10 +1048,6 @@ exports[`renders correctly 1`] = `
               >
                 <button
                   className="Matchbox-Button"
-                  disabled={undefined}
-                  onBlur={undefined}
-                  onClick={undefined}
-                  onFocus={undefined}
                   onMouseUp={[Function]}
                   type="submit"
                 >
