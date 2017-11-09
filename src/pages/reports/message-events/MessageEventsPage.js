@@ -12,7 +12,7 @@ const maxResultsText = 'SparkPost retains message event data for 10 days.';
 const columns = ['Timestamp', 'Event', 'Recipient', 'Friendly From'];
 const getRowData = ({ formattedDate, type, friendly_from, rcpt_to }) => ([ formattedDate, type, rcpt_to, friendly_from ]);
 
-class MessageEventsPage extends Component {
+export class MessageEventsPage extends Component {
 
   componentDidMount() {
     this.props.getMessageEvents();
