@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { Page, Panel, Table, TextField, Button } from '@sparkpost/matchbox';
-import NameForm from './components/NameForm';
+import { Page, Panel, Table } from '@sparkpost/matchbox';
 
 import { updateUser } from 'src/actions/users';
+
+import NameForm from './components/NameForm';
+import PasswordForm from './components/PasswordForm';
 
 export class ProfilePage extends Component {
   updateName = (values) => {
     const { username } = this.props.currentUser;
     return this.props.updateUser(username, values);
+  }
+
+  updatePassword = (values) => {
+    console.log(values); //eslint-disable-line
   }
 
   render() {
@@ -45,17 +51,7 @@ export class ProfilePage extends Component {
         </Panel>
 
         <Panel sectioned title='Update Password'>
-          <TextField
-            id='currentPassword'
-            label='Current Password'
-          />
-
-          <TextField
-            id='newPassword'
-            label='New Password'
-          />
-
-          <Button>Update Password</Button>
+          <PasswordForm onSubmit={this.updatePassword} />
         </Panel>
       </Page>
     );
