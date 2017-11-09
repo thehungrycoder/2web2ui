@@ -65,13 +65,19 @@ describe('Templates selectors', () => {
     });
   });
 
+  describe('selectDefaultTestData', () => {
+    it('should return default test data', () => {
+      expect(selector.selectDefaultTestData(store)).toMatchSnapshot();
+    });
+  });
+
   describe('selectTemplateTestData', () => {
     it('should return test data', () => {
-      expect(selector.selectTemplateTestData(store)).toEqual({ test: 'data' });
+      expect(selector.selectTemplateTestData(store)).toMatchSnapshot();
     });
 
     it('should return default data', () => {
-      expect(selector.selectTemplateTestData({ templates: {}})).toEqual({ metadata: {}, options: {}, substitution_data: {}});
+      expect(selector.selectTemplateTestData({ templates: {}})).toMatchSnapshot();
     });
   });
 });

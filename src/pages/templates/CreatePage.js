@@ -3,14 +3,13 @@ import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { reduxForm, formValueSelector } from 'redux-form';
 import _ from 'lodash';
-import config from 'src/config';
 
 // Actions
 import { create, getDraft } from 'src/actions/templates';
 import { showAlert } from 'src/actions/globalAlert';
 
 // Selectors
-import { selectClonedTemplate } from 'src/selectors/templates';
+import { selectClonedTemplate, selectDefaultTestData } from 'src/selectors/templates';
 
 // Components
 import Form from './components/Form';
@@ -82,7 +81,7 @@ const mapStateToProps = (state, props) => ({
   loading: state.templates.getLoading,
   cloneId: props.match.params.id, //ID of the template it's cloning from
   initialValues: {
-    testData: config.templates.testData,
+    testData: selectDefaultTestData(),
     ...selectClonedTemplate(state, props)
   }
 });
