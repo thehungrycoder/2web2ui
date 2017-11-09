@@ -34,7 +34,7 @@ export class ChangePlanPage extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  loading: state.account.loading || state.billing.plansLoading || state.billing.countriesLoading,
+  loading: Boolean(state.account.loading || state.billing.plansLoading || state.billing.countriesLoading || state.billing.plansLoading),
   account: state.account,
   canChangePlan: canChangePlanSelector(state)
 });
