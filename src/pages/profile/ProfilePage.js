@@ -4,7 +4,14 @@ import { connect } from 'react-redux';
 import { Page, Panel, Table, TextField, Button } from '@sparkpost/matchbox';
 import NameForm from './NameForm';
 
+import { updateUser } from 'src/actions/users';
+
 export class ProfilePage extends Component {
+  updateName = (values) => {
+    const { username } = this.props.currentUser;
+    return this.props.updateUser(username, values);
+  }
+
   render() {
     const {
       username,
@@ -34,7 +41,7 @@ export class ProfilePage extends Component {
         </Panel>
 
         <Panel sectioned title='Edit Profile'>
-          <NameForm />
+          <NameForm onSubmit={this.updateName} />
         </Panel>
 
         <Panel sectioned title='Update Password'>
@@ -60,4 +67,4 @@ const mapStateToProps = ({ form, account, currentUser }) => ({
   currentUser
 });
 
-export default connect(mapStateToProps)(ProfilePage);
+export default connect(mapStateToProps, { updateUser })(ProfilePage);
