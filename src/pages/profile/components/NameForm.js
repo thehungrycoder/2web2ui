@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import { TextField, Button } from '@sparkpost/matchbox';
+import { Button } from '@sparkpost/matchbox';
 import { required } from 'src/helpers/validation';
 
-// This is wierd
-// Needed to pull out meta
-// Probably need to do a transform on `error`?
-const TextFieldWrapper = ({ input, meta: { error }, ...rest }) => (
-  <TextField {...rest} {...input} error={error} />
-);
+import { TextFieldWrapper } from 'src/components';
 
 export class NameForm extends Component {
   render() {
