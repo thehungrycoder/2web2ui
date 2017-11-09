@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { Page, Panel, Table, TextField, Button } from '@sparkpost/matchbox';
-import NameForm from './NameForm';
+import NameForm from './components/NameForm';
 
 import { updateUser } from 'src/actions/users';
 
