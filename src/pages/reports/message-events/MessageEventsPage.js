@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import { Page } from '@sparkpost/matchbox';
+import { Page, Banner } from '@sparkpost/matchbox';
 import { Loading, TableCollection, ApiErrorBanner } from 'src/components';
 import { getMessageEvents } from 'src/actions/messageEvents';
+import { formatMessageEvents } from 'src/selectors/messageEvents';
 
-const columns = ['Timestamp', 'Event', 'Campaign', 'Friendly From', 'Recipient', 'Message ID'];
-const getRowData = ({ timestamp, type, campaign_id, friendly_from, rcpt_to, message_id }) =>
-  ([ timestamp, type, campaign_id, friendly_from, rcpt_to, message_id ]);
+const maxResultsTitle = 'Note: A maximum of 1,000 results displayed';
+const maxResultsText = 'SparkPost retains message event data for 10 days.';
+const columns = ['Timestamp', 'Event', 'Recipient', 'Friendly From'];
+const getRowData = ({ formattedDate, type, friendly_from, rcpt_to }) => ([ formattedDate, type, rcpt_to, friendly_from ]);
 
 class MessageEventsPage extends Component {
 
@@ -48,6 +50,7 @@ class MessageEventsPage extends Component {
 
     return (
       <Page title='Message Events'>
+        <Banner status="info" title={maxResultsTitle}>{maxResultsText}</Banner>
         { error ? this.renderError() : this.renderCollection() }
       </Page>
     );
@@ -56,10 +59,14 @@ class MessageEventsPage extends Component {
 
 }
 
-const mapStateToProps = ({ messageEvents }) => ({
-  events: messageEvents.results,
-  loading: messageEvents.pending,
-  error: messageEvents.error
-});
+const mapStateToProps = ({ messageEvents }) => {
+  const events = formatMessageEvents(messageEvents.results);
+
+  return {
+    events: events,
+    loading: messageEvents.pending,
+    error: messageEvents.error
+  };
+};
 
 export default withRouter(connect(mapStateToProps, { getMessageEvents })(MessageEventsPage));
