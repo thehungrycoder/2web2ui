@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Panel, Grid, Icon, Button, Tag } from '@sparkpost/matchbox';
+import { Panel, Grid, Icon, Button, Tag, Tooltip } from '@sparkpost/matchbox';
 import { deleteTrackingDomain, verifyTrackingDomain } from 'src/actions/trackingDomains';
 import { DeleteModal, ConfirmationModal } from 'src/components/modals';
 import styles from './TrackingDomainRow.module.scss';
 
-const IsDefaultTag = ({ subaccount }) => <span style={{ marginRight: '10px' }}><Tag primary>{subaccount && 'Subaccount '}Default</Tag></span>;
-const SubaccountTag = ({ id }) => <Tag outline><Icon name='Link' /> Subaccount {id}</Tag>;
+const IsDefaultTag = ({ assignedToSubaccount }) => (
+  <Tag orange className={styles.Tag}>{assignedToSubaccount && 'Subaccount '}Default</Tag>
+);
+const SubaccountTag = ({ id }) => <Tag><Icon name='Link' /> Subaccount {id}</Tag>;
 
 export class TrackingDomainRow extends Component {
   state = {
@@ -39,6 +41,7 @@ export class TrackingDomainRow extends Component {
       return (
         <Button
           destructive={isDefault}
+          size='small'
           onClick={this.toggleDefaultModal}>
           {isDefault ? 'Remove Default' : 'Set as Default'}
         </Button>
@@ -46,7 +49,7 @@ export class TrackingDomainRow extends Component {
     }
     const verifyText = verifying.indexOf(domain) >= 0 ? 'Verifying...' : 'Retry Verification';
     return (
-      <Button onClick={this.retryVerification}><Icon name='Refresh' /> {verifyText}</Button>
+      <Button size='small' onClick={this.retryVerification}><Icon name='Refresh' /> {verifyText}</Button>
     );
   }
 
@@ -55,25 +58,35 @@ export class TrackingDomainRow extends Component {
     if (status === 'pending' || status === 'blocked') {
       return null;
     }
-    return <Button destructive onClick={this.toggleDeleteModal}>Delete</Button>;
+    return <Button destructive size='small' onClick={this.toggleDeleteModal}>Delete</Button>;
   }
 
-  renderIcon() {
-    const { verified, status } = this.props;
+  renderStatusTag() {
+    switch (this.props.status) {
+      case 'blocked':
+        return (
+          <Tooltip
+            content='This domain is not available for use. For more information, please contact support.'
+            dark preferredPostiion='top'>
+            <Tag className={styles.Tag}>Blocked</Tag>
+          </Tooltip>
+        );
 
-    if (status === 'pending') {
-      return <Icon className={styles.IconInfo} name='Clock' size={25} />;
+      case 'pending':
+        return (
+          <Tooltip
+            content='This domain is pending review, please check back again soon.'
+            dark preferredPosition='top'>
+            <Tag className={styles.Tag}>Pending</Tag>
+          </Tooltip>
+        );
+
+      case 'unverified':
+        return <Tag className={styles.Tag} yellow>Unverified</Tag>;
+
+      default:
+        return null;
     }
-
-    if (status === 'blocked') {
-      return <Icon className={styles.IconDanger} name='CloseCircle' size={25} />;
-    }
-
-    if (!verified) {
-      return <Icon className={styles.IconWarning} name='Error' size={25} />;
-    }
-
-    return <Icon className={styles.IconSuccess} name='Check' size={25} />;
   }
 
   renderModals() {
@@ -102,30 +115,26 @@ export class TrackingDomainRow extends Component {
   }
 
   render() {
-    const { domain, status, subaccount_id: subaccountId, isDefault } = this.props;
+    const { domain, subaccount_id: subaccountId, isDefault } = this.props;
     return (
-      <Panel.Section>
+      <Panel.Section className={styles.SpacedSection}>
         <Grid>
-          <Grid.Column xs={1}>
-            {this.renderIcon()}
-          </Grid.Column>
-          <Grid.Column xs={11} md={7}>
+          <Grid.Column xs={12} md={9}>
             <h3 className={styles.DomainHeading}>{domain}</h3>
-            {status === 'pending' && <p>This domain is pending review, please check back again soon.</p>}
-            {status === 'blocked' && <p>This domain is not available for use. Please contact support if you have questions.</p>}
-            <div>
-              {isDefault && <IsDefaultTag subaccount={!!subaccountId} />}
+            <div className={styles.TagRow}>
+              {this.renderStatusTag()}
+              {isDefault && <IsDefaultTag assignedToSubaccount={!!subaccountId} />}
               {subaccountId && <SubaccountTag id={subaccountId} />}
             </div>
           </Grid.Column>
-          <Grid.Column xs={11} md={4}>
+          <Grid.Column xs={12} md={3}>
             <Button.Group className={styles.ButtonColumn}>
               {this.renderDefaultOrVerifyButton()}
               {this.renderDeleteButton()}
             </Button.Group>
           </Grid.Column>
         </Grid>
-        {this.renderModals()};
+        {this.renderModals()}
       </Panel.Section>
     );
   }

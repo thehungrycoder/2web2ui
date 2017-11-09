@@ -3,11 +3,11 @@ import { createSelector } from 'reselect';
 const getTrackingDomains = (state) => state.trackingDomains.list;
 
 export const convertStatus = ({ verified, compliance_status }) => {
-  if (!verified) {
-    return 'unverified';
-  }
   if (compliance_status !== 'valid') {
     return compliance_status;
+  }
+  if (!verified) {
+    return 'unverified';
   }
   return 'verified';
 };

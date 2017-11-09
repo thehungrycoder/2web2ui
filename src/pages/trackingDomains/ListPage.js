@@ -23,7 +23,7 @@ export class ListPage extends Component {
 
   onReloadApiBanner = () => {
     this.props.listTrackingDomains();
-  };
+  }
 
   renderError() {
     return (
@@ -42,7 +42,7 @@ export class ListPage extends Component {
         <Collection
           rows={trackingDomains}
           rowComponent={(props) => <TrackingDomainRow {...props} verifying={verifying} />}
-          outerWrapper={({ children }) => <Panel sectioned>{children}</Panel>}
+          outerWrapper={Panel}
           pagination={true}
           filterBox={{
             show: true,
