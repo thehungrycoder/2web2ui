@@ -8,8 +8,8 @@ import { required, minNumber, maxNumber } from 'src/helpers/validation';
 
 const MAX_IPS = 4;
 const radioOptions = [
-  { label: 'Assign to a new IP Pool', value: 'new' },
-  { label: 'Assign to an existing IP Pool', value: 'existing' }
+  { label: 'Assign to an existing IP Pool', value: 'existing' },
+  { label: 'Assign to a new IP Pool', value: 'new' }
 ];
 
 /**

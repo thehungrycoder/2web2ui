@@ -3,3 +3,10 @@
 .Cancel {
   margin-left: spacing();
 }
+
+// Force <Error /> to align nicely after a <Button />
+.ErrorWrapper {
+  display: inline-block;
+  margin-left: spacing();
+  vertical-align: middle;
+}

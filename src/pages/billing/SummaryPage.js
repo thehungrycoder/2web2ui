@@ -69,7 +69,7 @@ export class SummaryPage extends Component {
           <WindowEvent event='keydown' handler={this.handleEscape} />
           { show === PAYMENT_MODAL && <UpdatePayment onCancel={this.handleModal}/> }
           { show === CONTACT_MODAL && <UpdateContact onCancel={this.handleModal}/> }
-          { show === IP_MODAL && <AddIps onCancel={this.handleModal}/> }
+          { show === IP_MODAL && <AddIps onClose={this.handleModal}/> }
         </Modal>
       </div>
     );
