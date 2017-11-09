@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 import { Page, Banner } from '@sparkpost/matchbox';
 import { Loading, TableCollection, ApiErrorBanner } from 'src/components';
 import { getMessageEvents } from 'src/actions/messageEvents';
-import { formatMessageEvents } from 'src/selectors/messageEvents';
+import { selectMessageEvents } from 'src/selectors/messageEvents';
 
 const maxResultsTitle = 'Note: A maximum of 1,000 results displayed';
 const maxResultsText = 'SparkPost retains message event data for 10 days.';
@@ -59,13 +59,13 @@ export class MessageEventsPage extends Component {
 
 }
 
-const mapStateToProps = ({ messageEvents }) => {
-  const events = formatMessageEvents(messageEvents.results);
+const mapStateToProps = (state) => {
+  const events = selectMessageEvents(state);
 
   return {
     events: events,
-    loading: messageEvents.pending,
-    error: messageEvents.error
+    loading: state.messageEvents.pending,
+    error: state.messageEvents.error
   };
 };
 
