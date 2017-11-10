@@ -19,12 +19,16 @@ export class ProfilePage extends Component {
   updatePassword = (values) => {
     const { username } = this.props.currentUser;
     const { history, showAlert } = this.props;
+    const currentPassword = values.current_password;
+    const newPassword = values.new_password;
 
-    console.log(values); //eslint-disable-line
-    return this.props.confirmPassword(username, values.current_password)
-      .then(() => this.props.updateUser(username, { password: values.new_password }))
+    if (currentPassword === newPassword) {
+      return showAlert({ type: 'error', message: 'Password unchanged' });
+    }
+
+    return this.props.confirmPassword(username, currentPassword)
+      .then(() => this.props.updateUser(username, { password: newPassword }))
       .catch((e) => {
-        console.log(e); //eslint-disable-line
         showAlert({ type: 'error', message: 'Unable to update password' });
         history.push('/account/profile');
       });
