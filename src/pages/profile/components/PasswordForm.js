@@ -2,19 +2,21 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { Button } from '@sparkpost/matchbox';
+import { formValueSelector } from 'redux-form';
+
 import { required, minLength } from 'src/helpers/validation';
 
 import { TextFieldWrapper } from 'src/components';
 
 export class PasswordForm extends Component {
   render() {
-    const { pristine, submitting, handleSubmit } = this.props;
+    const { pristine, submitting, handleSubmit, currentPassword, newPassword } = this.props;
 
     return (
       <form onSubmit={handleSubmit}>
         <Field
           type="password"
-          name='current_password'
+          name='currentPassword'
           component={TextFieldWrapper}
           id='currentPassword'
           label='Current Password'
@@ -23,24 +25,31 @@ export class PasswordForm extends Component {
 
         <Field
           type="password"
-          name='new_password'
+          name='newPassword'
           id='newPassword'
           label='New Password'
           component={TextFieldWrapper}
           validate={[required, minLength(8)]}
         />
 
-        <Button submit disabled={submitting || pristine}>
-          {submitting ? 'Updating Passwword' : 'Update Password'}
+        <Button submit disabled={submitting || pristine || (currentPassword === newPassword)}>
+          {submitting ? 'Updating Password' : 'Update Password'}
         </Button>
       </form>
     );
   }
 }
 
-const mapStateToProps = ({ form, currentUser }) => ({
-  theForm: form.profileName // breaks if you use a prop name 'form'
-});
+const selector = formValueSelector('passwordForm');
+
+const mapStateToProps = (state, props) => {
+  const { form } = state;
+  return {
+    theForm: form.profileName, // breaks if you use a prop name 'form',
+    currentPassword: selector(state, 'currentPassword'),
+    newPassword: selector(state, 'newPassword')
+  };
+};
 
 const formOptions = {
   form: 'passwordForm',
