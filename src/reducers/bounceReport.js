@@ -13,7 +13,7 @@ export default (state = initialState, { type, payload }) => {
     case 'FETCH_METRICS_FAIL':
       return { ...state, aggregatesLoading: false };
 
-    case 'FETCH_METRICS_BOUNCE_CLASSIFICATIONS':
+    case 'FETCH_METRICS_BOUNCE_CLASSIFICATIONS_PENDING':
       return { ...state, categoriesLoading: true };
 
     case 'FETCH_METRICS_BOUNCE_CLASSIFICATIONS_SUCCESS':

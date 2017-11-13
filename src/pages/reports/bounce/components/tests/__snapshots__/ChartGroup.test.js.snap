@@ -208,6 +208,6 @@ exports[`ChartGroup:  should render loading 1`] = `
   sectioned={true}
   title="Bounce Rates"
 >
-  <Component />
+  <Loading />
 </Panel>
 `;

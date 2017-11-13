@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Page: Message Events tests should only render loading component while loading 1`] = `<Loading />`;
+
+exports[`Page: Message Events tests should render error when action fails 1`] = `
+<Page
+  empty={Object {}}
+  title="Message Events"
+>
+  <Banner
+    status="info"
+    title="Note: A maximum of 1,000 results displayed"
+  >
+    SparkPost retains message event data for 10 days.
+  </Banner>
+  <ApiErrorBanner
+    errorDetails="You done f'ed up now"
+    message="Sorry, we seem to have had some trouble loading your message events."
+    reload={[Function]}
+  />
+</Page>
+`;
+
+exports[`Page: Message Events tests should render page correctly 1`] = `
+<Page
+  empty={Object {}}
+  title="Message Events"
+>
+  <Banner
+    status="info"
+    title="Note: A maximum of 1,000 results displayed"
+  >
+    SparkPost retains message event data for 10 days.
+  </Banner>
+  <TableCollection
+    columns={
+      Array [
+        "Timestamp",
+        "Event",
+        "Recipient",
+        "Friendly From",
+      ]
+    }
+    getRowData={[Function]}
+    pagination={true}
+    rows={
+      Array [
+        Object {
+          "formattedDate": "so-formatted",
+          "friendly_from": "hi@friendly",
+          "rcpt_to": "ron.swanson@pawnee.state.in.us",
+          "type": "delivery",
+        },
+        Object {
+          "formattedDate": "formatted",
+          "friendly_from": "mean@friendly",
+          "rcpt_to": "tom.haverford@pawnee.state.in.us",
+          "type": "injection",
+        },
+      ]
+    }
+  />
+</Page>
+`;
+
+exports[`Page: Message Events tests should render the empty message when 0 results are returned 1`] = `
+<Page
+  empty={Object {}}
+  title="Message Events"
+>
+  <Banner
+    status="info"
+    title="Note: A maximum of 1,000 results displayed"
+  >
+    SparkPost retains message event data for 10 days.
+  </Banner>
+  <Empty
+    message="There are no message events for your current query"
+  />
+</Page>
+`;

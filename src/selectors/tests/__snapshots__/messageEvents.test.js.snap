@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Selectors: Message Events returns formatted message event data 1`] = `
+Array [
+  Object {
+    "foo": "bar",
+    "formattedDate": "2017/11/09 00:00",
+    "timestamp": "2017-11-09T00:00",
+  },
+  Object {
+    "bat": "baz",
+    "foo": "bar",
+    "formattedDate": "2017/11/08 11:00",
+    "timestamp": "2017-11-08T11:00",
+  },
+]
+`;
