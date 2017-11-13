@@ -7,15 +7,12 @@ import { Loading, TableCollection, ApiErrorBanner } from 'src/components';
 import { getMessageEvents } from 'src/actions/messageEvents';
 import { selectMessageEvents } from 'src/selectors/messageEvents';
 import Empty from '../components/Empty';
+import { listColumns, getListRowData } from './tableConfig';
 
 const errorMsg = 'Sorry, we seem to have had some trouble loading your message events.';
 const emptyMesasage = 'There are no message events for your current query';
 const maxResultsTitle = 'Note: A maximum of 1,000 results displayed';
 const maxResultsText = 'SparkPost retains message event data for 10 days.';
-
-// formatters for the tabular data
-const columns = ['Timestamp', 'Event', 'Recipient', 'Friendly From'];
-const getRowData = ({ formattedDate, type, friendly_from, rcpt_to }) => ([ formattedDate, type, rcpt_to, friendly_from ]);
 
 export class MessageEventsPage extends Component {
 
@@ -41,9 +38,9 @@ export class MessageEventsPage extends Component {
       ? <Empty message={emptyMesasage} />
       : (
         <TableCollection
-          columns={columns}
+          columns={listColumns}
           rows={events}
-          getRowData={getRowData}
+          getRowData={getListRowData}
           pagination={true}
         />
       );

@@ -1,0 +1,18 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.Cell {
+  padding: spacing() spacing() spacing(small);
+  vertical-align: bottom;
+  color: color(gray, 1);
+}
+
+.PanelTitle {
+  @include text-style-smaller-heading;
+
+  line-height: rem(30);
+  margin: 0 0 spacing(small);
+
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

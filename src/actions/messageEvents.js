@@ -1,12 +1,12 @@
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 
-export function getMessageEvents() {
+export function getMessageEvents(params = {}) {
   return sparkpostApiRequest({
     type: 'GET_MESSAGE_EVENTS',
     meta: {
       method: 'GET',
-      url: '/message-events'
+      url: '/message-events',
+      params
     }
   });
 }
-
