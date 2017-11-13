@@ -62,3 +62,20 @@ exports[`Page: Message Events tests should render page correctly 1`] = `
   />
 </Page>
 `;
+
+exports[`Page: Message Events tests should render the empty message when 0 results are returned 1`] = `
+<Page
+  empty={Object {}}
+  title="Message Events"
+>
+  <Banner
+    status="info"
+    title="Note: A maximum of 1,000 results displayed"
+  >
+    SparkPost retains message event data for 10 days.
+  </Banner>
+  <Empty
+    message="There are no message events for your current query"
+  />
+</Page>
+`;

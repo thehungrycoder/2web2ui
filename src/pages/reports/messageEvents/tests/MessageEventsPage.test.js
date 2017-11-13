@@ -4,6 +4,7 @@ import { MessageEventsPage } from '../MessageEventsPage';
 
 describe('Page: Message Events tests', () => {
   const props = {
+    empty: false,
     error: null,
     loading: false,
     getMessageEvents: jest.fn(() => []),
@@ -41,7 +42,11 @@ describe('Page: Message Events tests', () => {
   it('should only render loading component while loading', () => {
     wrapper.setProps({ loading: true });
     expect(wrapper).toMatchSnapshot();
+  });
 
+  it('should render the empty message when 0 results are returned', () => {
+    wrapper.setProps({ empty: true });
+    expect(wrapper).toMatchSnapshot();
   });
 
 });

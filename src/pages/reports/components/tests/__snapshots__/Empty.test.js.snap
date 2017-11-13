@@ -3,10 +3,10 @@
 exports[`Empty:  should render 1`] = `
 <Panel
   sectioned={true}
-  title="Bounce Rates"
+  title="Empty Title"
 >
   <h6>
-    No bounces to report
+    nothing here to see
   </h6>
 </Panel>
 `;
