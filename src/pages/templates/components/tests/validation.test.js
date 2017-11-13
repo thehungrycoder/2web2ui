@@ -17,8 +17,8 @@ describe('contentRequired', () => {
         html: '',
         text: ''
       }
-    }
-    expect(validation.contentRequired('', allValues )).toEqual('Template HTML or text content is required.');
+    };
+    expect(validation.contentRequired('', allValues)).toEqual('Template HTML or text content is required.');
   });
 
   it('should handle success', () => {
@@ -27,8 +27,8 @@ describe('contentRequired', () => {
         html: 'test',
         text: ''
       }
-    }
-    expect(validation.contentRequired('', allValues )).toEqual(undefined);
+    };
+    expect(validation.contentRequired('', allValues)).toEqual(undefined);
   });
 });
 
