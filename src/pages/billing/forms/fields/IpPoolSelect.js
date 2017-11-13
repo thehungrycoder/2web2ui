@@ -5,6 +5,7 @@ import { Field, formValueSelector } from 'redux-form';
 import { listPools } from 'src/actions/ipPools';
 import { RadioGroup, SelectWrapper, TextFieldWrapper } from 'src/components';
 import { required } from 'src/helpers/validation';
+import { getNonDefaultIpPools } from 'src/selectors/ipPools';
 
 const EXISTING = 'existing';
 const NEW = 'new';
@@ -75,7 +76,7 @@ const mapStateToProps = (state, { formName }) => {
 
   return {
     action: selector(state, 'ipPool.action'),
-    ipPools: state.ipPools.list,
+    ipPools: getNonDefaultIpPools(state),
     loading: state.ipPools.listLoading
   };
 };
