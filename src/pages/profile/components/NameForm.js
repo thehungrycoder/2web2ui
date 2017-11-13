@@ -14,7 +14,7 @@ export class NameForm extends Component {
       <form onSubmit={handleSubmit}>
         <Field
           // for redux-form
-          name='first_name'
+          name='firstName'
           component={TextFieldWrapper}
 
           // for the matchbox component
@@ -42,8 +42,8 @@ export class NameForm extends Component {
 const mapStateToProps = ({ form, currentUser }) => ({
   theForm: form.profileName, // breaks if you use a prop name 'form'
   initialValues: {
-    first_name: currentUser.first_name,
-    last_name: currentUser.last_name
+    firstName: currentUser.first_name,
+    lastName: currentUser.last_name
   }
 });
 
