@@ -1,3 +1,4 @@
+/* eslint-disable */
 /* eslint max-lines: ["error", 200] */
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
@@ -73,16 +74,10 @@ export class EditPage extends Component {
     this.setState({ deleteOpen: !this.state.deleteOpen });
   }
 
-  componentDidUpdate() {
-    const { loading, template, showAlert, history } = this.props;
+  componentDidUpdate(prevProps) {
+    const { template, showAlert, history } = this.props;
 
-    if (loading || !template) {
-      return;
-    }
-
-    const { draft, published } = template;
-
-    if (_.isEmpty(draft) && _.isEmpty(published)) {
+    if (_.isEmpty(prevProps.template) &&  _.isEmpty(template.draft) && _.isEmpty(template.published)) {
       history.push('/templates/'); // Redirect if no draft or published found
       showAlert({ type: 'error', message: 'Could not find template' });
     }
