@@ -27,7 +27,10 @@ exports[`BouncePage:  should render correctly with no bounces 1`] = `
     onShare={[Function]}
     refresh={[Function]}
   />
-  <Empty />
+  <Empty
+    message="No bounces to report"
+    title="Bounce Rates"
+  />
   <ShareModal
     handleToggle={[Function]}
     link=""

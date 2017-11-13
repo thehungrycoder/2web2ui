@@ -5,7 +5,9 @@ import styles from './Loading.module.scss';
 /**
  * A centered loading animation
  */
-export const Loading = () => <LoadingSVG className={styles.Center}/>;
+export const Loading = function Loading() {
+  return <LoadingSVG className={styles.Center}/>;
+};
 
 /**
  * Circle Animation

@@ -12,7 +12,7 @@ import { Page } from '@sparkpost/matchbox';
 import ShareModal from '../components/ShareModal';
 import Filters from '../components/Filters';
 import ChartGroup from './components/ChartGroup';
-import Empty from './components/Empty';
+import Empty from '../components/Empty';
 
 export class BouncePage extends Component {
   state = {
@@ -61,7 +61,7 @@ export class BouncePage extends Component {
     const { modal, link } = this.state;
 
     const pageContent = !loading && !aggregates
-      ? <Empty/>
+      ? <Empty title={'Bounce Rates'} message={'No bounces to report'}/>
       : <ChartGroup />;
 
     return (

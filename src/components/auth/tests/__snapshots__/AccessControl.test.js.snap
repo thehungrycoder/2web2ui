@@ -15,4 +15,4 @@ exports[`Component: AccessControl should render correctly when no access and rea
 />
 `;
 
-exports[`Component: AccessControl should render correctly when no access but not ready to redirect 1`] = `<Component />`;
+exports[`Component: AccessControl should render correctly when no access but not ready to redirect 1`] = `<Loading />`;

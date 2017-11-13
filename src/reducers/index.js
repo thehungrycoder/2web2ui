@@ -20,6 +20,7 @@ import recipientLists from './recipientLists';
 import users from './users';
 import trackingDomains from './trackingDomains';
 import webhooks from './webhooks';
+import messageEvents from './messageEvents';
 
 const appReducer = combineReducers({
   accessControlReady,
@@ -33,6 +34,7 @@ const appReducer = combineReducers({
   ipPools,
   globalAlert,
   metrics,
+  messageEvents,
   reportFilters,
   recipientLists,
   sendingDomains,
