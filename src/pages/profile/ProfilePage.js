@@ -11,9 +11,12 @@ import PasswordForm from './components/PasswordForm';
 import { showAlert } from 'src/actions/globalAlert';
 
 export class ProfilePage extends Component {
-  updateName = (values) => {
+  updateProfile = (values) => {
     const { username } = this.props.currentUser;
-    return this.props.updateUser(username, values);
+    return this.props.updateUser(username, values)
+      .catch(() => {
+        showAlert({ type: 'error', message: 'Unable to update profile' });
+      });
   }
 
   updatePassword = (values) => {
@@ -23,7 +26,7 @@ export class ProfilePage extends Component {
 
     return this.props.confirmPassword(username, currentPassword)
       .then(() => this.props.updateUser(username, { password: newPassword }))
-      .catch((e) => showAlert({ type: 'error', message: 'Unable to update password' }));
+      .catch((err) => showAlert({ type: 'error', message: 'Unable to update password' }));
   }
 
   render() {
@@ -55,7 +58,7 @@ export class ProfilePage extends Component {
         </Panel>
 
         <Panel sectioned title='Edit Profile'>
-          <NameForm onSubmit={this.updateName} />
+          <NameForm onSubmit={this.updateProfile} />
         </Panel>
 
         <Panel sectioned title='Update Password'>
