@@ -12,7 +12,12 @@ exports[`Payment Form:  should render 1`] = `
     label="Credit Card Number"
     name="card.number"
     onChange={[Function]}
-    validate={[Function]}
+    validate={
+      Array [
+        [Function],
+        [Function],
+      ]
+    }
   />
   <Field
     component={[Function]}

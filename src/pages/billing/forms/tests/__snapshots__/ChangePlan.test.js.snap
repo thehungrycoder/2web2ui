@@ -7,9 +7,7 @@ exports[`Form Container: Change Plan should render 1`] = `
       <Panel
         title="Select A Plan"
       >
-        <Component
-          plans={Array []}
-        />
+        0
       </Panel>
       <Panel
         actions={null}
@@ -50,9 +48,7 @@ exports[`Form Container: Change Plan should show saved card 1`] = `
       <Panel
         title="Select A Plan"
       >
-        <Component
-          plans={Array []}
-        />
+        0
       </Panel>
       <Panel
         actions={
