@@ -1,3 +1,7 @@
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 function slugify(value) {
   return value
     .replace(/([a-z])([A-Z])/g, '$1-$2')
@@ -11,6 +15,7 @@ function snakeToCamel(string) {
 }
 
 export {
+  capitalizeFirstLetter,
   slugify,
   snakeToCamel
 };

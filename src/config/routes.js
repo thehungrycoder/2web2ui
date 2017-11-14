@@ -99,8 +99,8 @@ export default [
     layout: App
   },
   {
-    path: '/reports/message-events/:messageId/:eventId',
-    component: reports.MessagePage,
+    path: '/reports/message-events/:messageId',
+    component: reports.EventPage,
     layout: App
   },
   {

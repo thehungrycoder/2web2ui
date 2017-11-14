@@ -4,7 +4,7 @@
   "private": true,
   "package-lock": false,
   "dependencies": {
-    "@sparkpost/matchbox": "^1.8.2",
+    "@sparkpost/matchbox": "^1.8.3",
     "axios": "^0.16.1",
     "babel-plugin-lodash": "^3.2.11",
     "chart.js": "^2.6.0",
@@ -28,6 +28,7 @@
     "react-loadable": "^5.3.1",
     "react-redux": "^5.0.5",
     "react-router-dom": "^4.1.1",
+    "react-timeago": "^3.4.3",
     "recharts": "^1.0.0-alpha.2",
     "redux": "^3.6.0",
     "redux-form": "7.0.3",

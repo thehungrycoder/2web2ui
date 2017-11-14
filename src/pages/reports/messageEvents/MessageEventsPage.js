@@ -2,22 +2,43 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import { Page, Banner } from '@sparkpost/matchbox';
+import TimeAgo from 'react-timeago';
+import { Page, Banner, Button } from '@sparkpost/matchbox';
 import { Loading, TableCollection, ApiErrorBanner } from 'src/components';
 import { getMessageEvents } from 'src/actions/messageEvents';
 import { selectMessageEvents } from 'src/selectors/messageEvents';
 import Empty from '../components/Empty';
-import { listColumns, getListRowData } from './tableConfig';
 
 const errorMsg = 'Sorry, we seem to have had some trouble loading your message events.';
 const emptyMesasage = 'There are no message events for your current query';
 const maxResultsTitle = 'Note: A maximum of 1,000 results displayed';
 const maxResultsText = 'SparkPost retains message event data for 10 days.';
 
+const columns = ['Time', 'Event', 'Recipient', 'Friendly From', null];
+
 export class MessageEventsPage extends Component {
 
   componentDidMount() {
     this.props.getMessageEvents();
+  }
+
+  handleDetailClick = ({ message_id, event_id }) => {
+    const { history } = this.props;
+    history.push({
+      pathname: `/reports/message-events/${message_id}`,
+      state: { selectedId: event_id } // wonky
+    });
+  }
+
+  getRowData = (rowData) => {
+    const { timestamp, type, friendly_from, rcpt_to, message_id, event_id } = rowData;
+    return [
+      <TimeAgo date={timestamp}/>,
+      type,
+      rcpt_to,
+      friendly_from,
+      <Button onClick={() => this.handleDetailClick({ message_id, event_id })} size='small'>View Details</Button>
+    ];
   }
 
   renderError() {
@@ -38,9 +59,9 @@ export class MessageEventsPage extends Component {
       ? <Empty message={emptyMesasage} />
       : (
         <TableCollection
-          columns={listColumns}
+          columns={columns}
           rows={events}
-          getRowData={getListRowData}
+          getRowData={this.getRowData}
           pagination={true}
         />
       );
