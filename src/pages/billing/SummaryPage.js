@@ -5,6 +5,7 @@ import { Page, Panel, WindowEvent } from '@sparkpost/matchbox';
 
 import { fetch as fetchAccount, getPlans } from 'src/actions/account';
 import { list as getSendingIps } from 'src/actions/sendingIps';
+import config from 'src/config';
 import { shouldExposeCardSelector, canChangePlanSelector, currentPlanSelector, publicPlansSelector } from 'src/selectors/accountBillingInfo';
 
 import { Loading, Modal, LabelledValue } from 'src/components';
@@ -17,6 +18,7 @@ import { PlanSummary, CardSummary } from './components/SummarySection';
 const PAYMENT_MODAL = 'payment';
 const CONTACT_MODAL = 'contact';
 const IP_MODAL = 'ip';
+const MAX_IPS = config.sendingIps.maxPerAccount;
 
 export class SummaryPage extends Component {
   state = {
@@ -79,14 +81,20 @@ export class SummaryPage extends Component {
     // Exit early for free accounts
     if (!this.props.shouldExposeCard) { return null; }
 
+    const sendingIpCount = this.props.sendingIps.length;
+    const hasReachedMax = sendingIpCount >= MAX_IPS;
+
     // There are some paid accounts that do not allow dedicated IPs
     const action = this.props.currentPlan.canPurchaseIps === true
-      ? { content: 'Add Dedicated IPs', onClick: () => this.handleModal(IP_MODAL) }
+      ? { content: 'Add Dedicated IPs', disabled: hasReachedMax, onClick: () => this.handleModal(IP_MODAL) }
       : { content: 'Upgrade Now', to: '/account/billing/plan', Component: Link };
 
     return (
       <Panel.Section actions={[action]}>
-        <LabelledValue label='Dedicated IPs' value={this.props.sendingIps.length} />
+        <LabelledValue label='Dedicated IPs'>
+          <h6>{sendingIpCount}</h6>
+          {hasReachedMax && <p>You have reached the maximum allowed.</p>}
+        </LabelledValue>
       </Panel.Section>
     );
   }
