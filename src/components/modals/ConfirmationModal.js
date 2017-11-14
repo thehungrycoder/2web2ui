@@ -8,8 +8,8 @@ export default class ConfirmationModal extends Component {
 
   static PropTypes = {
     open: PropTypes.bool,
-    title: PropTypes.string.isRequired,
-    content: PropTypes.node.isRequired,
+    title: PropTypes.string,
+    content: PropTypes.node,
     onCancel: PropTypes.func.isRequired,
     onConfirm: PropTypes.func.isRequired,
     confirmVerb: PropTypes.string
@@ -19,7 +19,7 @@ export default class ConfirmationModal extends Component {
     const {
       open,
       title,
-      content,
+      content = null,
       onCancel,
       onConfirm,
       confirmVerb = 'Confirm'
