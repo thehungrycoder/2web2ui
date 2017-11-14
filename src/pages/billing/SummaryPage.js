@@ -57,7 +57,7 @@ export class SummaryPage extends Component {
           <Panel.Section {...changePlanActions}>
             <PlanSummary label='Your Plan' plan={currentPlan} />
           </Panel.Section>
-          { shouldExposeCard && this.renderDedicatedIps() }
+          { this.renderDedicatedIps() }
         </Panel>
 
         { shouldExposeCard && this.renderBillingSummary() }
@@ -75,11 +75,21 @@ export class SummaryPage extends Component {
     );
   }
 
-  renderDedicatedIps = () => (
-    <Panel.Section actions={[{ content: 'Add Dedicated IPs', onClick: () => this.handleModal(IP_MODAL) }]}>
-      <LabelledValue label='Dedicated IPs' value={this.props.sendingIps.length} />
-    </Panel.Section>
-  )
+  renderDedicatedIps = () => {
+    // Exit early for free accounts
+    if (!this.props.shouldExposeCard) { return null; }
+
+    // There are some paid accounts that do not allow dedicated IPs
+    const action = this.props.currentPlan.canPurchaseIps === true
+      ? { content: 'Add Dedicated IPs', onClick: () => this.handleModal(IP_MODAL) }
+      : { content: 'Upgrade Now', to: '/account/billing/plan', Component: Link };
+
+    return (
+      <Panel.Section actions={[action]}>
+        <LabelledValue label='Dedicated IPs' value={this.props.sendingIps.length} />
+      </Panel.Section>
+    );
+  }
 
   renderBillingSummary = () => {
     const { billing } = this.props;
