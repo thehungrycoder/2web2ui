@@ -141,7 +141,7 @@ exports[`Component: Collection should render pagination 1`] = `
 
 exports[`Component: Collection should render the filter box 1`] = `
 <div>
-  <CollectionFilter
+  <CollectionFilterBox
     onChange={[Function]}
     rows={
       Array [
