@@ -35,7 +35,7 @@ describe('Page: Message Events tests', () => {
   });
 
   it('should render error when action fails', () => {
-    wrapper.setProps({ error: { message: 'You done f\'ed up now' } });
+    wrapper.setProps({ error: { message: 'You done f\'ed up now' }});
     expect(wrapper).toMatchSnapshot();
   });
 

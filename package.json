@@ -195,7 +195,10 @@
           }
         }
       ],
-      "lodash/chaining": ["error", "never"]
+      "lodash/chaining": [
+        "error",
+        "never"
+      ]
     },
     "extends": [
       "react-app",
