@@ -40,14 +40,19 @@ export class SubaccountEditForm extends Component {
 
 const formName = 'SubaccountEditForm';
 
-const mapStateToProps = (state, { subaccount }) => ({
-  ipPools: state.ipPools.list,
-  compliance: subaccount.compliance_status,
-  initialValues: {
-    ipPool: subaccount.ip_pool || 'default',
-    ...subaccount
-  }
-});
+const mapStateToProps = (state, { subaccount }) => {
+  const { compliance } = subaccount;
+  const status = compliance ? `System ${subaccount.status}` : subaccount.status;
+  return {
+    ipPools: state.ipPools.list,
+    compliance,
+    initialValues: {
+      name: subaccount.name,
+      ipPool: subaccount.ip_pool || 'default',
+      status
+    }
+  };
+};
 
 const SubaccountEditReduxForm = reduxForm({ form: formName })(SubaccountEditForm);
 export default connect(mapStateToProps, {})(SubaccountEditReduxForm);

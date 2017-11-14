@@ -7,7 +7,7 @@ import { getSubaccountGrants } from 'src/selectors/api-keys';
 
 import { NameField, ApiKeyCheckBox, ApiKeyFields, IpPoolSelect } from './formFields';
 
-export class SubaccountForm extends Component {
+export class SubaccountCreateForm extends Component {
 
   render() {
     const {
@@ -44,7 +44,7 @@ export class SubaccountForm extends Component {
   }
 }
 
-const formName = 'SubaccountForm';
+const formName = 'SubaccountCreateForm';
 const valueSelector = formValueSelector(formName);
 
 const mapStateToProps = (state, props) => ({
@@ -59,5 +59,5 @@ const mapStateToProps = (state, props) => ({
   }
 });
 
-const SubaccountReduxForm = reduxForm({ form: formName })(SubaccountForm);
+const SubaccountReduxForm = reduxForm({ form: formName })(SubaccountCreateForm);
 export default connect(mapStateToProps, {})(SubaccountReduxForm);

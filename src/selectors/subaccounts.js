@@ -1,29 +1,37 @@
-// import _ from 'lodash';
-// import { createSelector } from 'reselect';
+import { createSelector } from 'reselect';
+import { Link } from 'react-router-dom';
 
-const resolveStatus = (status, compliance_status) => {
-  // Defensive status check for when it's not there
-  if (status && compliance_status === 'active') {
-    return status;
-  } else {
-    return compliance_status;
-  }
+const formatSubaccount = ({ compliance_status, status, ...rest }) => {
+  const compliance = compliance_status !== 'active' || !status;
+
+  return {
+    compliance,
+    status: compliance ? compliance_status : status,
+    ...rest
+  };
 };
 
 export const hasSubaccounts = (state) => state.currentUser.has_subaccounts;
 
-// TODO: do in reducer?
-export const getSubaccounts = (state) => state.subaccounts.list.map((subaccount) => {
-  const formatted = { ...subaccount };
-  formatted.status = resolveStatus(subaccount.status, subaccount.compliance_status);
-  return formatted;
-});
+export const selectSubaccounts = (state) => state.subaccounts.list.map((subaccount) => (formatSubaccount(subaccount)));
 
-export const getSubaccount = ({ subaccounts }) => {
-
-  const formatted = { ...subaccounts.subaccount };
-  formatted.status = resolveStatus(formatted.status, formatted.compliance_status);
-  return formatted;
-};
+export const selectSubaccount = ({ subaccounts }) => (formatSubaccount(subaccounts.subaccount));
 
 export const getSubaccountIdFromProps = (state, props) => props.id;
+export const getSubaccountIdFromParams = (state, props) => props.match.params.id;
+
+export const selectDetailTabs = createSelector(
+  [getSubaccountIdFromParams],
+  (id) => ([
+    {
+      content: 'Details',
+      Component: Link,
+      to: `/account/subaccounts/${id}`
+    },
+    {
+      content: 'API Keys',
+      Component: Link,
+      to: `/account/subaccounts/${id}/api-keys`
+    }
+  ])
+);

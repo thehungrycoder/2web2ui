@@ -10,7 +10,7 @@ exports[`edit path base props 1`] = `
     }
   }
   empty={Object {}}
-  title="Bob Evans, the restaurant. (id: 123)"
+  title="Bob Evans, the restaurant. (123)"
 >
   <Tabs
     connectBelow={true}
@@ -18,12 +18,12 @@ exports[`edit path base props 1`] = `
     tabs={
       Array [
         Object {
-          "Component": [Function],
-          "content": "Settings",
+          "Component": Object {},
+          "content": "Details",
           "to": "/account/subaccounts/123",
         },
         Object {
-          "Component": [Function],
+          "Component": Object {},
           "content": "API Keys",
           "to": "/account/subaccounts/123/api-keys",
         },
@@ -62,12 +62,12 @@ exports[`edit path loading 1`] = `
     tabs={
       Array [
         Object {
-          "Component": [Function],
-          "content": "Settings",
+          "Component": Object {},
+          "content": "Details",
           "to": "/account/subaccounts/123",
         },
         Object {
-          "Component": [Function],
+          "Component": Object {},
           "content": "API Keys",
           "to": "/account/subaccounts/123/api-keys",
         },
@@ -88,7 +88,7 @@ exports[`keys path base props 1`] = `
     }
   }
   empty={Object {}}
-  title="Bob Evans, the restaurant. (id: 123)"
+  title="Bob Evans, the restaurant. (123)"
 >
   <Tabs
     connectBelow={true}
@@ -96,12 +96,12 @@ exports[`keys path base props 1`] = `
     tabs={
       Array [
         Object {
-          "Component": [Function],
-          "content": "Settings",
+          "Component": Object {},
+          "content": "Details",
           "to": "/account/subaccounts/123",
         },
         Object {
-          "Component": [Function],
+          "Component": Object {},
           "content": "API Keys",
           "to": "/account/subaccounts/123/api-keys",
         },
@@ -140,12 +140,12 @@ exports[`keys path loading 1`] = `
     tabs={
       Array [
         Object {
-          "Component": [Function],
-          "content": "Settings",
+          "Component": Object {},
+          "content": "Details",
           "to": "/account/subaccounts/123",
         },
         Object {
-          "Component": [Function],
+          "Component": Object {},
           "content": "API Keys",
           "to": "/account/subaccounts/123/api-keys",
         },

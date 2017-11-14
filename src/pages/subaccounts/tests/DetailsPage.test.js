@@ -13,6 +13,18 @@ const paths = {
   keys: '/account/subaccounts/123/api-keys'
 }
 
+const tabs = [
+  {
+    content: 'Details',
+    Component: {},
+    to: '/account/subaccounts/123'
+  },
+  {
+    content: 'API Keys',
+    Component: {},
+    to: '/account/subaccounts/123/api-keys'
+  }
+]
 
 const props = {
   id: '123',
@@ -23,6 +35,7 @@ const props = {
   },
   location: { pathname: '' },
   match: { url: paths.edit },
+  tabs,
   getSubaccount,
   listPools,
   listApiKeys

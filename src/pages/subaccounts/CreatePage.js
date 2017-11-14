@@ -4,7 +4,7 @@ import { Link, withRouter } from 'react-router-dom';
 import { Page, Panel } from '@sparkpost/matchbox';
 import { Loading } from 'src/components';
 
-import SubaccountForm from './components/SubaccountForm';
+import SubaccountCreateForm from './components/SubaccountCreateForm';
 
 import { create as createSubaccount } from 'src/actions/subaccounts';
 import { listSubaccountGrants } from 'src/actions/api-keys';
@@ -41,7 +41,7 @@ export class CreatePage extends Component {
       <div>
         <Page title="Create Subaccount" breadcrumbAction={breadcrumbAction} />
         <Panel>
-          <SubaccountForm onSubmit={this.onSubmit}/>
+          <SubaccountCreateForm onSubmit={this.onSubmit}/>
         </Panel>
       </div>
     );

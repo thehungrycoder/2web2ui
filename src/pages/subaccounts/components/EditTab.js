@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Panel } from '@sparkpost/matchbox';
-import PanelLoading from './PanelLoading';
+import PanelLoading from 'src/components/panelLoading/PanelLoading';
 
 import { getSubaccount, editSubaccount } from 'src/actions/subaccounts';
-import { getSubaccount as getSubaccountSelector } from 'src/selectors/subaccounts';
+import { selectSubaccount } from 'src/selectors/subaccounts';
 import { showAlert } from 'src/actions/globalAlert';
 
 import SubaccountEditForm from './SubaccountEditForm';
@@ -40,7 +40,7 @@ export class EditTab extends Component {
 
 const mapStateToProps = (state, props) => ({
   loading: state.ipPools.listLoading,
-  subaccount: getSubaccountSelector(state),
+  subaccount: selectSubaccount(state),
   ...props
 });
 

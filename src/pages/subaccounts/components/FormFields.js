@@ -82,17 +82,27 @@ const ApiKeyFields = ({ show, showGrants = false, grants, disabled }) => {
 };
 
 const StatusSelect = ({ disabled, compliance }) => {
-  const blocked = compliance !== 'active';
-  return (
-    <Field
-      name="status"
-      component={SelectWrapper}
-      options={statusOptions}
-      label="Status"
-      disabled={disabled || blocked}
-      helpText={ blocked ? `Our system ${compliance} this subaccount, so you cannot edit it's status` : ''}
-    />
-  );
+  if (compliance) {
+    return (
+      <Field
+        name="status"
+        component={TextFieldWrapper}
+        label="Status"
+        disabled={true}
+        helpText={'System set statuses can\'t be edited'}
+      />
+    );
+  } else {
+    return (
+      <Field
+        name="status"
+        component={SelectWrapper}
+        options={statusOptions}
+        label="Status"
+        disabled={disabled}
+      />
+    );
+  }
 };
 
 

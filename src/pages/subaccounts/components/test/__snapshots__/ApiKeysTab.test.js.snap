@@ -2,101 +2,79 @@
 
 exports[`ApiKeysTab empty 1`] = `
 <Panel>
-  <Panel.Section>
-    <p>
-      This subaccount will need an API Key in order to send email
-    </p>
-    <Button
-      default={true}
-      size="default"
-      to="/account/api-keys/create"
-    >
-      Create
-    </Button>
-  </Panel.Section>
-  <TableCollection
-    columns={
-      Array [
-        Object {
-          "label": "Name",
-          "width": "40%",
-        },
-        Object {
-          "label": "Key",
-          "width": "20%",
-        },
-      ]
-    }
-    filterBox={
+  <Panel.Section
+    style={
       Object {
-        "exampleModifiers": Array [
-          "key",
-          "name",
-          "id",
-        ],
-        "itemToStringKeys": Array [
-          "label",
-          "short_key",
-          "id",
-        ],
-        "keyMap": Object {
-          "key": "short_key",
-          "name": "label",
-        },
-        "show": true,
+        "textAlign": "center",
       }
     }
-    getRowData={[Function]}
-    pagination={true}
-    rows={Array []}
-  />
+  >
+    <p>
+      This subaccount has no API Keys assinged to it. You can assing an existing one, or create a new one.
+    </p>
+    <Button
+      Component={[Function]}
+      plain={true}
+      size="default"
+      to="/account/api-keys"
+    >
+      Go to API Keys
+    </Button>
+  </Panel.Section>
 </Panel>
 `;
 
-exports[`ApiKeysTab loading 1`] = `""`;
+exports[`ApiKeysTab loading 1`] = `<PanelLoading />`;
 
 exports[`ApiKeysTab normal props 1`] = `
 <Panel>
-  <TableCollection
-    columns={
-      Array [
-        Object {
-          "label": "Name",
-          "width": "40%",
-        },
-        Object {
-          "label": "Key",
-          "width": "20%",
-        },
-      ]
-    }
-    filterBox={
-      Object {
-        "exampleModifiers": Array [
-          "key",
-          "name",
-          "id",
-        ],
-        "itemToStringKeys": Array [
-          "label",
-          "short_key",
-          "id",
-        ],
-        "keyMap": Object {
-          "key": "short_key",
-          "name": "label",
-        },
-        "show": true,
+  <div>
+    <Panel.Section>
+      <p>
+        API Keys assigned to this subaccount.
+      </p>
+    </Panel.Section>
+    <TableCollection
+      columns={
+        Array [
+          Object {
+            "label": "Name",
+            "width": "40%",
+          },
+          Object {
+            "label": "Key",
+            "width": "20%",
+          },
+        ]
       }
-    }
-    getRowData={[Function]}
-    pagination={true}
-    rows={
-      Array [
-        "an array of keys",
-      ]
-    }
-  />
+      filterBox={
+        Object {
+          "exampleModifiers": Array [
+            "key",
+            "name",
+            "id",
+          ],
+          "itemToStringKeys": Array [
+            "label",
+            "short_key",
+            "id",
+          ],
+          "keyMap": Object {
+            "key": "short_key",
+            "name": "label",
+          },
+          "show": true,
+        }
+      }
+      getRowData={[Function]}
+      pagination={true}
+      rows={
+        Array [
+          "an array of keys",
+        ]
+      }
+    />
+  </div>
 </Panel>
 `;
 

@@ -5,12 +5,12 @@ import { Panel, Button } from '@sparkpost/matchbox';
 import { TableCollection } from 'src/components';
 import { filterBoxConfig } from 'src/pages/api-keys/tableConfig';
 import { getSubaccountApiKeys } from 'src/selectors/api-keys';
+import PanelLoading from 'src/components/panelLoading/PanelLoading';
 
 const columns = [
   { label: 'Name', width: '40%' },
   { label: 'Key', width: '20%' }
 ];
-
 
 export const getRowData = ({ id, label, short_key }) => [
   <Link to={`/account/api-keys/details/${id}`}>{label}</Link>,
@@ -21,21 +21,26 @@ export class ApiKeysTab extends Component {
 
   renderCollection(keys) {
     return (
-      <TableCollection
-        columns={columns}
-        getRowData={getRowData}
-        pagination={true}
-        rows={keys}
-        filterBox={filterBoxConfig}
-      />
+      <div>
+        <Panel.Section>
+          <p>API Keys assigned to this subaccount.</p>
+        </Panel.Section>
+        <TableCollection
+          columns={columns}
+          getRowData={getRowData}
+          pagination={true}
+          rows={keys}
+          filterBox={filterBoxConfig}
+        />
+      </div>
     );
   }
 
   renderEmpty() {
     return (
-      <Panel.Section>
-        <p>This subaccount will need an API Key in order to send email</p>
-        <Button default to="/account/api-keys/create">Create</Button>
+      <Panel.Section style={{ textAlign: 'center' }}>
+        <p>This subaccount has no API Keys assinged to it. You can assing an existing one, or create a new one.</p>
+        <Button plain Component={Link} to='/account/api-keys'>Go to API Keys</Button>
       </Panel.Section>
     );
   }
@@ -44,23 +49,25 @@ export class ApiKeysTab extends Component {
     const { loading } = this.props;
 
     if (loading) {
-      return null;
+      return <PanelLoading />;
     }
 
     const { keys } = this.props;
-    const count = !!keys.length;
+    const showEmpty = keys.length === 0;
 
     return (
       <Panel>
-        { !count && this.renderEmpty() }
-        { this.renderCollection(keys) }
+        { showEmpty
+          ? this.renderEmpty()
+          : this.renderCollection(keys)
+        }
       </Panel>
     );
   }
 }
 
 const mapStateToProps = (state, props) => ({
-  loading: state.apiKeys.loading,
+  loading: state.apiKeys.keysLoading,
   keys: getSubaccountApiKeys(state, props)
 });
 
