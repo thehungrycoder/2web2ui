@@ -1,28 +1,60 @@
 /* eslint-disable */
-import React from 'react';
-import { Panel } from '@sparkpost/matchbox';
+import React, { Component } from 'react';
+import copy from 'copy-to-clipboard';
+
+import { Panel, TextField, Icon, Button } from '@sparkpost/matchbox';
+import DetailSection from './DetailSection';
 import _ from 'lodash';
 
-const MessageDetails = ({ details = {} }) => {
-  console.log(details);
-  const { rcpt_to, subject, friendly_from, ...otherDetails } = details;
+import styles from './MessageDetails.module.scss';
 
-  const markup = _.keys(otherDetails).map((key) => {
-    return <Panel.Section>{key}: {details[key].toString()}</Panel.Section>
-  });
+class MessageDetails extends Component {
+  static defaultProps = {
+    details: {}
+  }
 
-  console.log(markup)
-  return (
-    <div>
-      <Panel>
-        <Panel.Section>To: {rcpt_to}</Panel.Section>
-        <Panel.Section>From: {friendly_from}</Panel.Section>
-        <Panel.Section>Subject: {subject}</Panel.Section>
-      </Panel>
-      <Panel>
-        { markup }
-      </Panel>
-    </div>
-)};
+  handleFieldFocus = (e) => {
+    e.target.select();
+  }
+
+  handleCopy = () => {
+    copy(JSON.stringify(this.props.details))
+  }
+
+  render() {
+    const { details } = this.props;
+    const { rcpt_to, subject, friendly_from, ...otherDetails } = details;
+
+    const markup = _.keys(otherDetails).map((key) => {
+      return <Panel.Section>{key}: {details[key].toString()}</Panel.Section>
+    });
+
+    const copyButton = <Button onClick={() => this.handleCopy()}><Icon name='Copy'/></Button>;
+
+    const jsonField = <TextField
+      readOnly
+      connectRight={copyButton}
+      value={JSON.stringify(details)}
+      onFocus={this.handleFieldFocus} />
+
+    return (
+      <div>
+        <Panel>
+          <Panel.Section>
+            <DetailSection label='To' content={rcpt_to} />
+            <DetailSection label='From' content={friendly_from} />
+            <DetailSection label='Subject' content={subject} />
+          </Panel.Section>
+        </Panel>
+        {/* <Panel>{ markup }</Panel> */}
+        <Panel sectioned>
+          <DetailSection
+            label='Raw JSON'
+            content={jsonField} />
+        </Panel>
+      </div>
+    );
+  }
+}
 
 export default MessageDetails;

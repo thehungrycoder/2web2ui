@@ -1,0 +1,29 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.DetailSection {
+  display: flex;
+  margin-bottom: spacing(small);
+}
+
+.LabelContainer {
+  flex: 0 0 0;
+  min-width: rem(70);
+  align-items: flex-start;
+  // text-align: right;
+}
+
+.Content {
+  flex: 1 0 0;
+  padding-left: spacing();
+
+  h6 {
+    font-size: rem(15);
+    line-height: rem(24);
+    margin-bottom: 0;
+  }
+}
+
+.Label {
+  line-height: rem(24);
+  margin-bottom: 0;
+}
