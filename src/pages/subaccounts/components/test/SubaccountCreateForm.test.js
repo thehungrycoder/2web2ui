@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import { SubaccountForm } from '../SubaccountForm';
+import { SubaccountCreateForm } from '../SubaccountCreateForm';
 
 const handleSubmit = jest.fn();
 
@@ -17,7 +17,7 @@ let wrapper;
 
 beforeEach(() => {
   jest.clearAllMocks();
-  wrapper = shallow(<SubaccountForm {...props} />);
+  wrapper = shallow(<SubaccountCreateForm {...props} />);
 });
 
 test('base case', () => {

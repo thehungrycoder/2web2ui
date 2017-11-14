@@ -115,26 +115,10 @@ exports[`NameField 2`] = `
 exports[`StatusSelect 1`] = `
 <Field
   component={[Function]}
-  disabled={false}
-  helpText=""
+  disabled={true}
+  helpText="System set statuses can't be edited"
   label="Status"
   name="status"
-  options={
-    Array [
-      Object {
-        "label": "Active",
-        "value": "active",
-      },
-      Object {
-        "label": "Suspended",
-        "value": "suspended",
-      },
-      Object {
-        "label": "Terminated",
-        "value": "terminated",
-      },
-    ]
-  }
 />
 `;
 
@@ -142,25 +126,9 @@ exports[`StatusSelect 2`] = `
 <Field
   component={[Function]}
   disabled={true}
-  helpText="Our system suspended this subaccount, so you cannot edit it's status"
+  helpText="System set statuses can't be edited"
   label="Status"
   name="status"
-  options={
-    Array [
-      Object {
-        "label": "Active",
-        "value": "active",
-      },
-      Object {
-        "label": "Suspended",
-        "value": "suspended",
-      },
-      Object {
-        "label": "Terminated",
-        "value": "terminated",
-      },
-    ]
-  }
 />
 `;
 
@@ -168,24 +136,8 @@ exports[`StatusSelect 3`] = `
 <Field
   component={[Function]}
   disabled={true}
-  helpText="Our system terminated this subaccount, so you cannot edit it's status"
+  helpText="System set statuses can't be edited"
   label="Status"
   name="status"
-  options={
-    Array [
-      Object {
-        "label": "Active",
-        "value": "active",
-      },
-      Object {
-        "label": "Suspended",
-        "value": "suspended",
-      },
-      Object {
-        "label": "Terminated",
-        "value": "terminated",
-      },
-    ]
-  }
 />
 `;
