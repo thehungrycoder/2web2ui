@@ -52,9 +52,10 @@ class AddIps extends Component {
 
   onSubmit = async ({ ipPool, quantity }) => {
     const ip_pool = await this.getOrCreateIpPool(ipPool);
+    const { isAwsAccount } = this.props.currentPlan;
 
     try {
-      await this.props.addDedicatedIps({ ip_pool, quantity });
+      await this.props.addDedicatedIps({ ip_pool, isAwsAccount, quantity });
     } catch (error) {
       ErrorTracker.report('add-dedicated-sending-ips', error);
 

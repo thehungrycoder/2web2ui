@@ -86,8 +86,22 @@ export function updateAddons(product, data) {
   });
 }
 
-export function addDedicatedIps(data) {
-  return updateAddons('dedicated_ips', data);
+/**
+ * @todo Use updateAddons() when it supports AWS
+ */
+export function addDedicatedIps({ isAwsAccount, ...data }) {
+  const url = isAwsAccount
+    ? '/account/integrations/aws-marketplace/add-ons/dedicated_ips'
+    : '/account/add-ons/dedicated_ips';
+
+  return sparkpostApiRequest({
+    type: 'UPDATE_ADDON_DEDICATED_IPS',
+    meta: {
+      method: 'POST',
+      url,
+      data
+    }
+  });
 }
 
 export function createZuoraAccount({ data, token, signature }) {
