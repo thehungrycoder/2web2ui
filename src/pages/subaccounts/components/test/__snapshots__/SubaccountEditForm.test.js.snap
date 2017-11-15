@@ -1,0 +1,140 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`base case 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <Panel.Section>
+    <NameField
+      disabled={false}
+    />
+    <IpPoolSelect
+      disabled={false}
+      ipPools={
+        Array [
+          "an array of ip pools",
+        ]
+      }
+    />
+    <StatusSelect
+      compliance="active"
+      disabled={false}
+    />
+  </Panel.Section>
+  <Panel.Section>
+    <Button
+      disabled={true}
+      primary={true}
+      size="default"
+      submit={true}
+    >
+      Update
+    </Button>
+  </Panel.Section>
+</form>
+`;
+
+exports[`cancel button 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <Panel.Section>
+    <NameField
+      disabled={false}
+    />
+    <IpPoolSelect
+      disabled={false}
+      ipPools={
+        Array [
+          "an array of ip pools",
+        ]
+      }
+    />
+    <StatusSelect
+      compliance="active"
+      disabled={false}
+    />
+  </Panel.Section>
+  <Panel.Section>
+    <Button
+      disabled={false}
+      primary={true}
+      size="default"
+      submit={true}
+    >
+      Update
+    </Button>
+    <Button
+      disabled={false}
+      size="default"
+      style={
+        Object {
+          "marginLeft": "1em",
+        }
+      }
+    >
+      Cancel
+    </Button>
+  </Panel.Section>
+</form>
+`;
+
+exports[`no ip pools 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <Panel.Section>
+    <NameField
+      disabled={false}
+    />
+    <StatusSelect
+      compliance="active"
+      disabled={false}
+    />
+  </Panel.Section>
+  <Panel.Section>
+    <Button
+      disabled={true}
+      primary={true}
+      size="default"
+      submit={true}
+    >
+      Update
+    </Button>
+  </Panel.Section>
+</form>
+`;
+
+exports[`submits correctly 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <Panel.Section>
+    <NameField
+      disabled={true}
+    />
+    <IpPoolSelect
+      disabled={true}
+      ipPools={
+        Array [
+          "an array of ip pools",
+        ]
+      }
+    />
+    <StatusSelect
+      compliance="active"
+      disabled={true}
+    />
+  </Panel.Section>
+  <Panel.Section>
+    <Button
+      disabled={true}
+      primary={true}
+      size="default"
+      submit={true}
+    >
+      Updating...
+    </Button>
+  </Panel.Section>
+</form>
+`;

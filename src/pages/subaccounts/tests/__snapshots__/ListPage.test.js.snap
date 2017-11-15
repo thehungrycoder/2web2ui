@@ -29,9 +29,18 @@ exports[`renders correctly 1`] = `
   <TableCollection
     columns={
       Array [
-        "Name",
-        "ID",
-        "Status",
+        Object {
+          "label": "Name",
+          "width": "40%",
+        },
+        Object {
+          "label": "ID",
+          "width": "20%",
+        },
+        Object {
+          "label": "Status",
+          "width": "20%",
+        },
       ]
     }
     filterBox={
@@ -106,9 +115,18 @@ exports[`renders empty state 1`] = `
   <TableCollection
     columns={
       Array [
-        "Name",
-        "ID",
-        "Status",
+        Object {
+          "label": "Name",
+          "width": "40%",
+        },
+        Object {
+          "label": "ID",
+          "width": "20%",
+        },
+        Object {
+          "label": "Status",
+          "width": "20%",
+        },
       ]
     }
     filterBox={

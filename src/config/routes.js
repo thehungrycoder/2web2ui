@@ -111,6 +111,13 @@ export default [
     layout: App
   },
   {
+    path: '/account/subaccounts/:id',
+    component: subaccounts.DetailsPage,
+    condition: hasGrants('subaccount/manage'),
+    layout: App,
+    exact: false
+  },
+  {
     path: '/account/users',
     component: users.ListPage,
     condition: hasGrants('users/manage'),
@@ -168,7 +175,8 @@ export default [
     path: '/webhooks/details/:id',
     component: webhooks.DetailsPage,
     condition: hasGrants('webhooks/modify'),
-    layout: App
+    layout: App,
+    exact: false
   },
   {
     path: '/account/api-keys',

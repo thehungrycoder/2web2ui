@@ -1,0 +1,94 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ApiKeysTab empty 1`] = `
+<Panel>
+  <Panel.Section
+    style={
+      Object {
+        "textAlign": "center",
+      }
+    }
+  >
+    <p>
+      This subaccount has no API Keys assigned to it. You can assign an existing one, or create a new one.
+    </p>
+    <Button
+      Component={[Function]}
+      plain={true}
+      size="default"
+      to="/account/api-keys"
+    >
+      Go to API Keys
+    </Button>
+  </Panel.Section>
+</Panel>
+`;
+
+exports[`ApiKeysTab loading 1`] = `<PanelLoading />`;
+
+exports[`ApiKeysTab normal props 1`] = `
+<Panel>
+  <div>
+    <Panel.Section>
+      <p>
+        API Keys assigned to this subaccount.
+      </p>
+    </Panel.Section>
+    <TableCollection
+      columns={
+        Array [
+          Object {
+            "label": "Name",
+            "width": "40%",
+          },
+          Object {
+            "label": "Key",
+            "width": "20%",
+          },
+        ]
+      }
+      filterBox={
+        Object {
+          "exampleModifiers": Array [
+            "key",
+            "name",
+            "id",
+          ],
+          "itemToStringKeys": Array [
+            "label",
+            "short_key",
+            "id",
+          ],
+          "keyMap": Object {
+            "key": "short_key",
+            "name": "label",
+          },
+          "show": true,
+        }
+      }
+      getRowData={[Function]}
+      pagination={true}
+      rows={
+        Array [
+          "an array of keys",
+        ]
+      }
+    />
+  </div>
+</Panel>
+`;
+
+exports[`getRowData 1`] = `
+Array [
+  <Link
+    replace={false}
+    to="/account/api-keys/details/12313"
+  >
+    test
+  </Link>,
+  <code>
+    cdwa
+    ••••••••
+  </code>,
+]
+`;

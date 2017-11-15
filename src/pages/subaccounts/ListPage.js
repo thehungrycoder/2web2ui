@@ -5,9 +5,17 @@ import { Link } from 'react-router-dom';
 import { Page } from '@sparkpost/matchbox';
 import { Loading, TableCollection, ApiErrorBanner } from 'src/components';
 import { list as listSubaccounts } from 'src/actions/subaccounts';
+import { selectSubaccounts } from 'src/selectors/subaccounts';
 import getRowData from './helpers/getRowData';
 
-const columns = ['Name', 'ID', 'Status'];
+// const columns = ['Name', 'ID', 'Status', null];
+
+const columns = [
+  { label: 'Name', width: '40%' },
+  { label: 'ID', width: '20%' },
+  { label: 'Status', width: '20%' }
+];
+
 const primaryAction = {
   content: 'Create Subaccount',
   Component: Link,
@@ -20,7 +28,7 @@ export class ListPage extends Component {
   }
 
   onReloadApiBanner = () => {
-    this.props.listSubaccounts({ force: true }); // force a refresh
+    this.props.listSubaccounts();
   };
 
   renderCollection() {
@@ -77,10 +85,10 @@ export class ListPage extends Component {
   }
 }
 
-const mapStateToProps = ({ subaccounts }) => ({
-  subaccounts: subaccounts.list,
-  loading: subaccounts.listLoading,
-  error: subaccounts.listError
+const mapStateToProps = (state) => ({
+  subaccounts: selectSubaccounts(state),
+  loading: state.subaccounts.listLoading,
+  error: state.subaccounts.listError
 });
 
 export default connect(mapStateToProps, { listSubaccounts })(ListPage);

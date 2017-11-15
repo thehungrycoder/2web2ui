@@ -1,20 +1,23 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import { SubaccountForm } from '../SubaccountForm';
+import { SubaccountCreateForm } from '../SubaccountCreateForm';
+
+const handleSubmit = jest.fn();
 
 const props = {
   grants: ['subaccount grants'],
   showGrants: false,
   createApiKey: false,
   ipPools: [],
-  handleSubmit: jest.fn()
+  handleSubmit
 };
 
 let wrapper;
 
 beforeEach(() => {
-  wrapper = shallow(<SubaccountForm {...props} />);
+  jest.clearAllMocks();
+  wrapper = shallow(<SubaccountCreateForm {...props} />);
 });
 
 test('base case', () => {
@@ -37,9 +40,8 @@ test('ip pools checked ', () => {
 });
 
 it('submits correctly', () => {
-  const submitSpy = jest.spyOn(wrapper.instance().props, 'handleSubmit');
   wrapper.find('form').simulate('submit');
-  expect(submitSpy).toHaveBeenCalled();
+  expect(handleSubmit).toHaveBeenCalled();
   wrapper.setProps({ submitting: true });
   expect(wrapper).toMatchSnapshot();
 });

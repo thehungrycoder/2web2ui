@@ -2,10 +2,13 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { ListPage } from '../ListPage';
 
+// actions
+const listSubaccounts = jest.fn(() => []);
+
 const props = {
   loading: false,
   error: null,
-  listSubaccounts: jest.fn(() => []),
+  listSubaccounts,
   subaccounts: [
     {
       id: 123,
@@ -32,11 +35,13 @@ const props = {
 let wrapper;
 
 beforeEach(() => {
+  jest.clearAllMocks();
   wrapper = shallow(<ListPage {...props} />);
 });
 
 it('renders correctly', () => {
   expect(wrapper).toMatchSnapshot();
+  expect(listSubaccounts).toHaveBeenCalled;
 });
 
 it('renders empty state', () => {
@@ -47,4 +52,11 @@ it('renders empty state', () => {
 it('renders errors when present', () => {
   wrapper.setProps({ error: { message: 'Uh oh! It broke.' }});
   expect(wrapper).toMatchSnapshot();
+});
+
+describe('onReloadApiBanner', () => {
+  it('calls listSubaccounts again', () => {
+    wrapper.instance().onReloadApiBanner();
+    expect(listSubaccounts).toHaveBeenCalledTimes(2);
+  });
 });

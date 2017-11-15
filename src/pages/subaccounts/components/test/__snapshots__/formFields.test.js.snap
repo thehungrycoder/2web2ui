@@ -1,0 +1,143 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ApiKeyCheckBox 1`] = `
+<Field
+  component={[Function]}
+  disabled={false}
+  helpText="The key will only be shown once when created, so be sure to copy and save it somewhere safe."
+  label="Create API Key"
+  name="createApiKey"
+  type="checkbox"
+/>
+`;
+
+exports[`ApiKeyCheckBox 2`] = `
+<Field
+  component={[Function]}
+  disabled={false}
+  helpText="Every subaccount you create will need its own API key. You can create one later."
+  label="Create API Key"
+  name="createApiKey"
+  type="checkbox"
+/>
+`;
+
+exports[`ApiKeyFields 1`] = `""`;
+
+exports[`ApiKeyFields 2`] = `
+<div>
+  <Field
+    component={[Function]}
+    disabled={false}
+    label="Key Name"
+    name="keyName"
+    validate={[Function]}
+  />
+  <Field
+    component={[Function]}
+    disabled={false}
+    name="grantsRadio"
+    options={
+      Array [
+        Object {
+          "label": "All",
+          "value": "all",
+        },
+        Object {
+          "label": "Select",
+          "value": "select",
+        },
+      ]
+    }
+    title="API Permissions"
+  />
+  <GrantsCheckboxes
+    grants={
+      Array [
+        "l0L",
+      ]
+    }
+    show={true}
+  />
+  <Field
+    component={[Function]}
+    disabled={false}
+    helpText="Leaving the field blank will allow access by valid API keys from any IP address."
+    label="Allowed IPs"
+    name="validIps"
+    placeholder="10.20.30.40, 10.20.30.0/24"
+    validate={[Function]}
+  />
+</div>
+`;
+
+exports[`IpPoolSelect 1`] = `
+<Field
+  component={[Function]}
+  disabled={false}
+  label="IP Pool"
+  name="ipPool"
+  options={
+    Array [
+      Object {
+        "label": "Mine's just bigger is all (id: drake)",
+        "value": "drake",
+      },
+      Object {
+        "label": "Still nice (id: kanye)",
+        "value": "kanye",
+      },
+    ]
+  }
+/>
+`;
+
+exports[`NameField 1`] = `
+<Field
+  component={[Function]}
+  disabled={false}
+  label="Name"
+  name="name"
+  validate={[Function]}
+/>
+`;
+
+exports[`NameField 2`] = `
+<Field
+  component={[Function]}
+  disabled={true}
+  label="Name"
+  name="name"
+  validate={[Function]}
+/>
+`;
+
+exports[`StatusSelect 1`] = `
+<Field
+  component={[Function]}
+  disabled={true}
+  helpText="System set statuses can't be edited"
+  label="Status"
+  name="status"
+/>
+`;
+
+exports[`StatusSelect 2`] = `
+<Field
+  component={[Function]}
+  disabled={true}
+  helpText="System set statuses can't be edited"
+  label="Status"
+  name="status"
+/>
+`;
+
+exports[`StatusSelect 3`] = `
+<Field
+  component={[Function]}
+  disabled={true}
+  helpText="System set statuses can't be edited"
+  label="Status"
+  name="status"
+/>
+`;
