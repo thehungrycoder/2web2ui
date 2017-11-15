@@ -79,4 +79,23 @@ describe('Page: SummaryPage', () => {
     expect(modalSpy).toHaveBeenCalled();
     expect(wrapper).toHaveState('show', false);
   });
+
+  it('should render enabled add dedicated IPs button', () => {
+    wrapper.setProps({
+      account: { subscription: { self_serve: true }},
+      currentPlan: { canPurchaseIps: true },
+      shouldExposeCard: true
+    });
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render disable add dedicated IPs button', () => {
+    wrapper.setProps({
+      account: { subscription: { self_serve: true }},
+      currentPlan: { canPurchaseIps: true },
+      sendingIps: [{}, {}, {}, {}],
+      shouldExposeCard: true
+    });
+    expect(wrapper).toMatchSnapshot();
+  });
 });
