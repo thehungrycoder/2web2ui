@@ -23,3 +23,24 @@ export function create(values) {
     })
   );
 }
+
+export function getSubaccount(id) {
+  return sparkpostApiRequest({
+    type: 'GET_SUBACCOUNT',
+    meta: {
+      method: 'GET',
+      url: `subaccounts/${id}`
+    }
+  });
+}
+
+export function editSubaccount(id, data) {
+  return sparkpostApiRequest({
+    type: 'EDIT_SUBACCOUNT',
+    meta: {
+      method: 'PUT',
+      url: `subaccounts/${id}`,
+      data: data
+    }
+  });
+}

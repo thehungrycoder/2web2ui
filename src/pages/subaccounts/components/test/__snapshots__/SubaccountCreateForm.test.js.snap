@@ -1,0 +1,189 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`api key form 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <Panel.Section>
+    <NameField />
+  </Panel.Section>
+  <Panel.Section>
+    <ApiKeyCheckBox
+      createApiKey={true}
+    />
+    <ApiKeyFields
+      grants={
+        Array [
+          "subaccount grants",
+        ]
+      }
+      show={true}
+      showGrants={false}
+    />
+  </Panel.Section>
+  <Panel.Section>
+    <Button
+      primary={true}
+      size="default"
+      submit={true}
+    >
+      Create
+    </Button>
+  </Panel.Section>
+</form>
+`;
+
+exports[`base case 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <Panel.Section>
+    <NameField />
+  </Panel.Section>
+  <Panel.Section>
+    <ApiKeyCheckBox
+      createApiKey={false}
+    />
+    <ApiKeyFields
+      grants={
+        Array [
+          "subaccount grants",
+        ]
+      }
+      show={false}
+      showGrants={false}
+    />
+  </Panel.Section>
+  <Panel.Section>
+    <Button
+      primary={true}
+      size="default"
+      submit={true}
+    >
+      Create
+    </Button>
+  </Panel.Section>
+</form>
+`;
+
+exports[`has ip pools 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <Panel.Section>
+    <NameField />
+  </Panel.Section>
+  <Panel.Section>
+    <ApiKeyCheckBox
+      createApiKey={false}
+    />
+    <ApiKeyFields
+      grants={
+        Array [
+          "subaccount grants",
+        ]
+      }
+      show={false}
+      showGrants={false}
+    />
+  </Panel.Section>
+  <Panel.Section>
+    <IpPoolSelect
+      ipPools={
+        Array [
+          "salt water",
+        ]
+      }
+    />
+  </Panel.Section>
+  <Panel.Section>
+    <Button
+      primary={true}
+      size="default"
+      submit={true}
+    >
+      Create
+    </Button>
+  </Panel.Section>
+</form>
+`;
+
+exports[`ip pools checked  1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <Panel.Section>
+    <NameField />
+  </Panel.Section>
+  <Panel.Section>
+    <ApiKeyCheckBox
+      createApiKey={false}
+    />
+    <ApiKeyFields
+      grants={
+        Array [
+          "subaccount grants",
+        ]
+      }
+      show={false}
+      showGrants={false}
+    />
+  </Panel.Section>
+  <Panel.Section>
+    <IpPoolSelect
+      ipPools={
+        Array [
+          "swimmin",
+        ]
+      }
+    />
+  </Panel.Section>
+  <Panel.Section>
+    <Button
+      primary={true}
+      size="default"
+      submit={true}
+    >
+      Create
+    </Button>
+  </Panel.Section>
+</form>
+`;
+
+exports[`submits correctly 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <Panel.Section>
+    <NameField
+      disabled={true}
+    />
+  </Panel.Section>
+  <Panel.Section>
+    <ApiKeyCheckBox
+      createApiKey={false}
+      disabled={true}
+    />
+    <ApiKeyFields
+      grants={
+        Array [
+          "subaccount grants",
+        ]
+      }
+      show={false}
+      showGrants={false}
+      submitting={true}
+    />
+  </Panel.Section>
+  <Panel.Section>
+    <Button
+      disabled={true}
+      primary={true}
+      size="default"
+      submit={true}
+    >
+      Loading...
+    </Button>
+  </Panel.Section>
+</form>
+`;

@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from './rowData.module.scss';
-
 import { Link } from 'react-router-dom';
 
 const STATUS_CLASSES = {
@@ -8,6 +7,7 @@ const STATUS_CLASSES = {
   suspended: styles.StatusSuspended,
   terminated: styles.StatusTerminated
 };
+
 
 /*
  Subaccounts getRowData passed to TableCollection in ListPage.

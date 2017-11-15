@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Link, Route } from 'react-router-dom';
-import _ from 'lodash';
+
 // Actions
 import { getWebhook, deleteWebhook } from '../../actions/webhooks';
 
@@ -67,24 +67,10 @@ class WebhooksDetails extends Component {
     this.setState({ showDelete: !this.state.showDelete });
   }
 
-  /*
-    tab switch
-  */
-  showTest = () => {
-    this.setState({ selectedTab: 1 });
-  }
-
-  /*
-    tab switch
-  */
-  showSettings = () => {
-    this.setState({ selectedTab: 0 });
-  }
-
   render() {
     const { webhook, location } = this.props;
     const webhookId = this.id;
-    const selectedTab = _.endsWith(location.pathname, 'test') ? 1 : 0;
+    const selectedTab = location.pathname.endsWith('test') ? 1 : 0;
 
     /*
       Check .events to guard from the create page redirect,

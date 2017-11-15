@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import { Page, Panel } from '@sparkpost/matchbox';
 import { Loading } from 'src/components';
 
-import SubaccountForm from './components/SubaccountForm';
+import SubaccountCreateForm from './components/SubaccountCreateForm';
 
 import { create as createSubaccount } from 'src/actions/subaccounts';
 import { listSubaccountGrants } from 'src/actions/api-keys';
@@ -17,19 +17,18 @@ const breadcrumbAction = {
   to: '/account/subaccounts'
 };
 
-export class CreatePage extends React.Component {
+export class CreatePage extends Component {
   componentDidMount() {
     this.props.listSubaccountGrants();
     this.props.listPools();
   }
 
   onSubmit = (values) => {
-    const { createSubaccount, history } = this.props;
+    const { createSubaccount, history, showAlert } = this.props;
 
-    return createSubaccount(values).then((res) => {
-      // TODO: Direct to details page when built,
-      //      details page needs to display the API Key if created here
-      history.push('/account/subaccounts');
+    return createSubaccount(values).then(({ subaccount_id }) => {
+      showAlert({ type: 'success', message: `Subaccount ${subaccount_id} created` });
+      history.push(`/account/subaccounts/${subaccount_id}`);
     }).catch((err) => showAlert({ type: 'error', message: 'Could not create Subaccount', details: err.message }));
   };
 
@@ -42,7 +41,7 @@ export class CreatePage extends React.Component {
       <div>
         <Page title="Create Subaccount" breadcrumbAction={breadcrumbAction} />
         <Panel>
-          <SubaccountForm onSubmit={this.onSubmit}/>
+          <SubaccountCreateForm onSubmit={this.onSubmit}/>
         </Panel>
       </div>
     );
@@ -54,5 +53,5 @@ const mapStateToProps = (state, props) => ({
 });
 
 export default withRouter(
-  connect(mapStateToProps, { listSubaccountGrants, listPools, createSubaccount })(CreatePage)
+  connect(mapStateToProps, { listSubaccountGrants, listPools, createSubaccount, showAlert })(CreatePage)
 );

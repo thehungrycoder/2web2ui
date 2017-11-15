@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import { createSelector } from 'reselect';
-
+import { getSubaccountIdFromProps } from './subaccounts';
 /*
  * generic apiKeys selectors
  */
@@ -9,6 +9,7 @@ const getGrantsArray = (state) => state.apiKeys.grants;
 const getSubaccountGrantsArray = (state) => state.apiKeys.subaccountGrants;
 const getSubaccounts = (state) => state.subaccounts.list;
 const getApiKeyId = (state, props) => props.match.params.id;
+
 
 const getGrantsLoading = (state) => state.apiKeys.grantsLoading;
 const getSubaccountGrantsLoading = (state) => state.apiKeys.subaccountGrantsLoading;
@@ -66,3 +67,8 @@ export const getInitialValues = createSelector(getFormApiKey, (apiKey) => {
     validIps
   };
 });
+
+export const getSubaccountApiKeys = createSelector(
+  [getApiKeys, getSubaccountIdFromProps],
+  (apiKeys, id) => _.filter(apiKeys, ['subaccount_id', Number(id)])
+);
