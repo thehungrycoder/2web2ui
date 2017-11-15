@@ -1,0 +1,60 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.Icon {
+  position: relative;
+  top: 3px;
+}
+
+.IconSuccess {
+  @extend .Icon;
+  color: color(green);
+}
+
+.IconInfo {
+  @extend .Icon;
+  color: color(blue, light);
+}
+
+.IconWarning {
+  @extend .Icon;
+  color: color(mustard);
+}
+
+.IconDanger {
+  @extend .Icon;
+  color: color(red, light);
+}
+
+.IconFaded {
+  @extend .Icon;
+  color: rgba(0,0,0,0.2);
+}
+
+.ButtonColumn {
+  float: right;
+}
+
+.DomainHeading {
+  // font-weight: 100;
+  // font-size: 1.8em;
+  @include text-style-heading;
+  font-weight: 100;
+  font-size: 1.8em;
+  // margin-bottom: spacing();
+}
+
+.Tag {
+  margin-right: 10px;
+}
+
+.RedTag {
+  background: color(red);
+}
+
+.SpacedSection {
+  padding: 2rem;
+}
+
+.TagRow {
+  // padding: 0.5rem 0;
+}

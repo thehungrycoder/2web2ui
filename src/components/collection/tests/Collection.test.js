@@ -2,7 +2,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { Collection } from '../Collection';
-import CollectionFilter from '../Filter';
+import FilterBox from '../FilterBox';
 import Pagination from '../Pagination';
 import * as sorters from 'src/helpers/sortMatch';
 import delay from 'src/__testHelpers__/delay';
@@ -46,7 +46,7 @@ describe('Component: Collection', () => {
     const wrapper = shallow(<Collection {...props} />);
     expect(wrapper).toMatchSnapshot();
     expect(wrapper.find(Pagination).length).toEqual(0);
-    expect(wrapper.find(CollectionFilter).length).toEqual(0);
+    expect(wrapper.find(FilterBox).length).toEqual(0);
   });
 
   it('should render with custom wrappers', () => {
@@ -70,7 +70,7 @@ describe('Component: Collection', () => {
 
     const wrapper = shallow(<Collection {...props} />);
     expect(wrapper).toMatchSnapshot();
-    expect(wrapper.find(CollectionFilter).length).toEqual(1);
+    expect(wrapper.find(FilterBox).length).toEqual(1);
   });
 
   describe('state changes', () => {

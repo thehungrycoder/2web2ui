@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Page } from '@sparkpost/matchbox';
-import { Loading, ApiErrorBanner } from 'src/components';
-import TrackingDomainsCollection from './components/TrackingDomainsCollection';
-
+import { Page, Panel } from '@sparkpost/matchbox';
+import { Loading, ApiErrorBanner, Collection } from 'src/components';
 import { listTrackingDomains } from 'src/actions/trackingDomains';
 import { list as listSubaccounts } from 'src/actions/subaccounts';
-import { hasSubaccounts } from 'src/selectors/subaccounts';
+import { selectTrackingDomainsList, selectUnverifiedTrackingDomains } from 'src/selectors/trackingDomains';
+import UnverifiedBanner from './components/UnverifiedBanner';
+import TrackingDomainRow from './components/TrackingDomainRow';
 
 const primaryAction = {
   content: 'Create Tracking Domain',
@@ -22,8 +22,8 @@ export class ListPage extends Component {
   }
 
   onReloadApiBanner = () => {
-    this.props.listTrackingDomains({ force: true }); // force a refresh
-  };
+    this.props.listTrackingDomains();
+  }
 
   renderError() {
     return (
@@ -34,8 +34,28 @@ export class ListPage extends Component {
     );
   }
 
+  renderCollection() {
+    const { trackingDomains, unverified, verifying } = this.props;
+    return (
+      <div>
+        <UnverifiedBanner unverifiedDomains={unverified} />
+        <Collection
+          rows={trackingDomains}
+          rowComponent={(props) => <TrackingDomainRow {...props} verifying={verifying} />}
+          outerWrapper={Panel}
+          pagination={true}
+          filterBox={{
+            show: true,
+            exampleModifiers: ['domain', 'status'],
+            itemToStringKeys: ['domain', 'subaccount_id']
+          }}
+        />
+      </div>
+    );
+  }
+
   render() {
-    const { error, loading, trackingDomains, hasSubaccounts } = this.props;
+    const { error, loading, trackingDomains } = this.props;
 
     if (loading) {
       return <Loading />;
@@ -47,10 +67,10 @@ export class ListPage extends Component {
         primaryAction={primaryAction}
         empty={{
           show: trackingDomains.length === 0,
-          content: <p>Track your email engagement events</p>,
+          content: <p>Use a custom domain for engagement tracking</p>,
           image: 'Generic'
         }}>
-        { error ? this.renderError() : <TrackingDomainsCollection rows={trackingDomains} hasSubaccounts={hasSubaccounts}/> }
+        {error ? this.renderError() : this.renderCollection()}
       </Page>
     );
   }
@@ -61,8 +81,9 @@ const mapStateToProps = (state) => {
   return {
     error: trackingDomains.error,
     loading: trackingDomains.listLoading,
-    trackingDomains: trackingDomains.list,
-    hasSubaccounts: hasSubaccounts(state)
+    trackingDomains: selectTrackingDomainsList(state),
+    unverified: selectUnverifiedTrackingDomains(state),
+    verifying: trackingDomains.verifying
   };
 };
 
