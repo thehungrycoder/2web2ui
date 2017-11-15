@@ -61,13 +61,14 @@ export class EventPage extends Component {
       return <Loading />
     }
 
+    // TODO need to add first & last props to Grid.Column in MB
     return (
       <Page title={`Message: ${messageId}`} breadcrumbAction={breadcrumbAction}>
         <Grid>
-          <Grid.Column xs={6}>
+          <Grid.Column xs={12} md={6}>
             <MessageDetails details={selectedEvent}/>
           </Grid.Column>
-          <Grid.Column xs={6}>
+          <Grid.Column xs={12} md={6}>
             <HistoryTable
               messageHistory={messageHistory}
               selectedId={selectedId}
