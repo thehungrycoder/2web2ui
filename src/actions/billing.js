@@ -1,6 +1,7 @@
 /* eslint max-lines: ["error", 200] */
 import { formatDataForCors, formatCreateData, formatUpdateData, formatContactData } from 'src/helpers/billing';
 import { fetch as fetchAccount } from './account';
+import { list as getSendingIps } from 'src/actions/sendingIps';
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 import zuoraRequest from 'src/actions/helpers/zuoraRequest';
 
@@ -93,15 +94,17 @@ export function addDedicatedIps({ isAwsAccount, ...data }) {
   const url = isAwsAccount
     ? '/account/integrations/aws-marketplace/add-ons/dedicated_ips'
     : '/account/add-ons/dedicated_ips';
-
-  return sparkpostApiRequest({
+  const action = {
     type: 'UPDATE_ADDON_DEDICATED_IPS',
     meta: {
       method: 'POST',
       url,
       data
     }
-  });
+  };
+
+  return (dispatch) => dispatch(sparkpostApiRequest(action))
+    .then(dispatch(getSendingIps()));  // refresh list
 }
 
 export function createZuoraAccount({ data, token, signature }) {
