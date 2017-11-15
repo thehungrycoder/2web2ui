@@ -10,7 +10,7 @@ exports[`ApiKeysTab empty 1`] = `
     }
   >
     <p>
-      This subaccount has no API Keys assinged to it. You can assing an existing one, or create a new one.
+      This subaccount has no API Keys assigned to it. You can assign an existing one, or create a new one.
     </p>
     <Button
       Component={[Function]}

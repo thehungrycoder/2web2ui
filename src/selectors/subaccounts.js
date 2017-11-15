@@ -1,8 +1,8 @@
 import { createSelector } from 'reselect';
 import { Link } from 'react-router-dom';
 
-const formatSubaccount = ({ compliance_status, status, ...rest }) => {
-  const compliance = compliance_status !== 'active' || !status;
+const formatSubaccount = ({ compliance_status = 'active', status = 'active', ...rest }) => {
+  const compliance = compliance_status !== 'active';
 
   return {
     compliance,

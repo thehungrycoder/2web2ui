@@ -12,7 +12,7 @@ const STATUS_CLASSES = {
 /*
  Subaccounts getRowData passed to TableCollection in ListPage.
 */
-const getRowData = ({ status, id, name, compliance }) => [
+const getRowData = ({ status, id, name }) => [
   <Link to={`/account/subaccounts/${id}`}>{name}</Link>,
   <p>{id}</p>,
   <p className={STATUS_CLASSES[status]}>{status}</p>
