@@ -21,6 +21,7 @@ const MAX = config.sendingIps.maxPerAccount;
 const WarmUpArticleLink = () => (
   <a
     href='https://support.sparkpost.com/customer/portal/articles/1972209-ip-warm-up-overview'
+    rel='noopener noreferrer'
     target='_blank'
   >
     IP Warm-up Overview article
