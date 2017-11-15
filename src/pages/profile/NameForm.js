@@ -26,7 +26,7 @@ export class NameForm extends Component {
 
         <Field
           name='lastName'
-          id='lirstName'
+          id='lastName'
           label='Last Name'
           component={TextFieldWrapper}
         />

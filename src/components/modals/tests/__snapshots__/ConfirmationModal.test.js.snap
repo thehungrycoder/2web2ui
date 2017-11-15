@@ -1,43 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`DeleteModal Component should render - no props 1`] = `
+exports[`Component: ConfirmationModal should render correctly with basic props 1`] = `
 <Modal>
   <Panel
+    accent={true}
     sectioned={true}
   >
-    <p />
-    <Button
-      primary={true}
-      size="default"
-    >
-      Delete
-    </Button>
-    <Button
-      size="default"
-    >
-      Cancel
-    </Button>
-  </Panel>
-</Modal>
-`;
-
-exports[`DeleteModal Component should render closed with props 1`] = `
-<Modal
-  open={false}
->
-  <Panel
-    sectioned={true}
-    title="NoobNoob"
-  >
-    <p>
-      Got Damn
-    </p>
     <Button
       onClick={[Function]}
       primary={true}
       size="default"
     >
-      Delete
+      Confirm
     </Button>
     <Button
       onClick={[Function]}
@@ -49,23 +23,24 @@ exports[`DeleteModal Component should render closed with props 1`] = `
 </Modal>
 `;
 
-exports[`DeleteModal Component should render open with props 1`] = `
+exports[`Component: ConfirmationModal should render correctly with open, content, title and custom verb 1`] = `
 <Modal
   open={true}
 >
   <Panel
+    accent={true}
     sectioned={true}
-    title="NoobNoob"
+    title="Confirmation Modal Test Title"
   >
     <p>
-      Got Damn
+      Some JSX content for the modal
     </p>
     <Button
       onClick={[Function]}
       primary={true}
       size="default"
     >
-      Delete
+      DESTROY
     </Button>
     <Button
       onClick={[Function]}

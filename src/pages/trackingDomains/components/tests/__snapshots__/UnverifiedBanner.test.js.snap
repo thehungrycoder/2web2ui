@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: UnverifiedBanner should render correctly with 1 unverified domain 1`] = `
+<Banner
+  status="warning"
+  title="You have an unverified tracking domain"
+>
+  <p>
+    To verify a tracking domain, edit its DNS settings to 
+    <strong>
+      add a CNAME record
+    </strong>
+     with the value of 
+    <strong>
+      spgo.io
+    </strong>
+    .
+  </p>
+  <Button
+    external={true}
+    outline={true}
+    size="default"
+    to="https://www.sparkpost.com/docs/tech-resources/enabling-multiple-custom-tracking-domains/"
+  >
+    Learn more
+  </Button>
+</Banner>
+`;
+
+exports[`Component: UnverifiedBanner should render correctly with more than 1 unverified domain 1`] = `
+<Banner
+  status="warning"
+  title="You have 2 unverified tracking domains"
+>
+  <p>
+    To verify a tracking domain, edit its DNS settings to 
+    <strong>
+      add a CNAME record
+    </strong>
+     with the value of 
+    <strong>
+      spgo.io
+    </strong>
+    .
+  </p>
+  <Button
+    external={true}
+    outline={true}
+    size="default"
+    to="https://www.sparkpost.com/docs/tech-resources/enabling-multiple-custom-tracking-domains/"
+  >
+    Learn more
+  </Button>
+</Banner>
+`;
+
+exports[`Component: UnverifiedBanner should render nothing with no unverified domains 1`] = `""`;

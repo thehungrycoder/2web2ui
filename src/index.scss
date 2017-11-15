@@ -10,6 +10,19 @@ html {
   @media screen and (min-width: breakpoint(larger)) { font-size: rem(20); }
 }
 
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #aaa;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: #aaa;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: #aaa;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: #aaa;
+}
+
 // Overrides Critical CSS. Prevents FOUT.
 #critical.ready {
   opacity: 0 !important;

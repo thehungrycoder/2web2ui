@@ -1,7 +1,7 @@
 import React from 'react';
 import { TextField, Icon } from '@sparkpost/matchbox';
 
-export default function CollectionFilter({ onChange, rows, exampleModifiers = Object.keys(rows[0]) }) {
+export default function CollectionFilterBox({ onChange, rows, exampleModifiers = Object.keys(rows[0]) }) {
   function handleChange(e) {
     onChange(e.target.value);
   }
