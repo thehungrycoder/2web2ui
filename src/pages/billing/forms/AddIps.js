@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
 import { Button, Error, Panel } from '@sparkpost/matchbox';
 
@@ -11,11 +12,20 @@ import config from 'src/config';
 import IpPoolSelect from './fields/IpPoolSelect';
 import ErrorTracker from 'src/helpers/errorTracker';
 import { required, minNumber, maxNumber } from 'src/helpers/validation';
+import { currentPlanSelector, dedicatedIpPrice } from 'src/selectors/accountBillingInfo';
 
 import styles from './Forms.module.scss';
 
 const FORM_NAME = 'add-sending-ips';
 const MAX = config.sendingIps.maxPerAccount;
+const WarmUpArticleLink = () => (
+  <a
+    href='https://support.sparkpost.com/customer/portal/articles/1972209-ip-warm-up-overview'
+    target='_blank'
+  >
+    IP Warm-up Overview article
+  </a>
+);
 
 class AddIps extends Component {
   getOrCreateIpPool = async ({ action, id, name }) => {
@@ -62,6 +72,33 @@ class AddIps extends Component {
     this.props.onClose();
   }
 
+  renderDescription() {
+    const { currentPlan, dedicatedIpPrice } = this.props;
+
+    if (currentPlan.isAwsAccount) {
+      return (
+        <p>
+          Dedicated IP addresses are available to AWS Marketplace customers for { dedicatedIpPrice }
+          They give you better control over your sending reputation. You can purchase up to { MAX }.
+          { currentPlan.includesIp && 'Your plan includes one free.' } New dedicated IP addresses
+          will need to be warmed up first. Read the <WarmUpArticleLink /> for more information. Visit
+          the <Link to="/account/ip-pools">IP Pools page</Link> to manage your dedicated IP addresses.
+        </p>
+      );
+    }
+
+    return (
+      <p>
+        Dedicated IP addresses are available to paid plan customers for { dedicatedIpPrice }. They
+        give you better control over your sending reputation. You can purchase up to { MAX }.
+        { currentPlan.includesIp && `Your plan includes one free. Your account statement will show
+        a charge with a matching refund.` } New dedicated IP addresses will need to be warmed up
+        first. Read the <WarmUpArticleLink /> for more information. Visit
+        the <Link to='/account/ip-pools'>IP Pools page</Link> to manage your dedicated IP addresses.
+      </p>
+    );
+  }
+
   render() {
     const { error, handleSubmit, onClose, submitting } = this.props;
 
@@ -69,12 +106,7 @@ class AddIps extends Component {
       <form onSubmit={handleSubmit(this.onSubmit)}>
         <Panel title='Add Dedicated IPs'>
           <Panel.Section>
-            <p>
-              Dedicated IP addresses are available to paid plan customers for
-              $20.00/mo each, and give you better control over your sending
-              reputation. IPs can be managed on the IP Pools management page
-              after purchase.
-            </p>
+            { this.renderDescription() }
             <Field
               autoFocus={true}
               component={TextFieldWrapper}
@@ -98,6 +130,8 @@ class AddIps extends Component {
 }
 
 const mapStateToProps = (state) => ({
+  currentPlan: currentPlanSelector(state),
+  dedicatedIpPrice: dedicatedIpPrice(state),
   sendingIps: state.sendingIps.list
 });
 

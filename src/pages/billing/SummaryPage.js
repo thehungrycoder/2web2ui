@@ -6,7 +6,10 @@ import { Page, Panel, WindowEvent } from '@sparkpost/matchbox';
 import { fetch as fetchAccount, getPlans } from 'src/actions/account';
 import { list as getSendingIps } from 'src/actions/sendingIps';
 import config from 'src/config';
-import { shouldExposeCardSelector, canChangePlanSelector, currentPlanSelector, publicPlansSelector } from 'src/selectors/accountBillingInfo';
+import {
+  shouldExposeCardSelector, canChangePlanSelector, currentPlanSelector, dedicatedIpPrice,
+  publicPlansSelector
+} from 'src/selectors/accountBillingInfo';
 
 import { Loading, Modal, LabelledValue } from 'src/components';
 import { PremiumBanner, EnterpriseBanner, SuspendedBanner, ManuallyBilledBanner, PendingPlanBanner } from './components/Banners';
@@ -92,8 +95,8 @@ export class SummaryPage extends Component {
     return (
       <Panel.Section actions={[action]}>
         <LabelledValue label='Dedicated IPs'>
-          <h6>{sendingIpCount}</h6>
-          {hasReachedMax && <p>You have reached the maximum allowed.</p>}
+          <h6>{ sendingIpCount } for { this.props.dedicatedIpPrice }</h6>
+          { hasReachedMax && <p>You have reached the maximum allowed.</p>}
         </LabelledValue>
       </Panel.Section>
     );
@@ -136,6 +139,7 @@ const mapStateToProps = (state) => ({
   shouldExposeCard: shouldExposeCardSelector(state),
   canChangePlan: canChangePlanSelector(state),
   currentPlan: currentPlanSelector(state),
+  dedicatedIpPrice: dedicatedIpPrice(state),
   plans: publicPlansSelector(state),
   sendingIps: state.sendingIps.list
 });
