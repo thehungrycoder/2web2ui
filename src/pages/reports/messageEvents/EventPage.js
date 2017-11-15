@@ -38,7 +38,8 @@ export class EventPage extends Component {
 
       // Saves selected event from location state and resets because location state for some reason persists bt refreshes
       // Defaults to first event in message history
-      this.setState({ selectedId: location.state.selectedId || nextProps.messageHistory[0].event_id });
+      const selectedId = _.get(location, 'state.selectedId') || nextProps.messageHistory[0].event_id;
+      this.setState({ selectedId });
       history.replace({ ...location, state: {} });
     }
   }

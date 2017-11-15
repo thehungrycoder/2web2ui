@@ -17,25 +17,45 @@
 
 
 .Row {
+  position: relative;
   transition: 0.15s;
 
   &:not(.selected):hover {
     cursor: pointer;
-    background: lighten(color(gray, 9), 1);
+    // background: lighten(color(gray, 9), 1);
 
-    .Chevron {
-      color: color(gray, 4);
+    .Link {
+      opacity: 1;
     }
+  }
+
+  & > *:last-child {
+    text-align: right;
   }
 }
 
 .selected {
-  .Chevron {
-    color: color(orange, dark);
+  background: rgba(color(mustard), 0.05);
+
+  .Link {
+    opacity: 0;
+  }
+
+  .Bar {
+    opacity: 1;
   }
 }
 
-.Chevron {
-  color: color(gray, 6);
+.Link {
+  color: color(gray, 4);
+  font-size: rem(12);
+  font-weight: 400;
+  opacity: 0;
+  transition: 0.15s;
+}
+
+.Bar {
+  background: color(orange);
+  opacity: 0;
   transition: 0.15s;
 }

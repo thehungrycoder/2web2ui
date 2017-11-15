@@ -29,7 +29,7 @@ class MessageDetails extends Component {
       return <Panel.Section>{key}: {details[key].toString()}</Panel.Section>
     });
 
-    const copyButton = <Button onClick={() => this.handleCopy()}><Icon name='Copy'/></Button>;
+    const copyButton = <Button onClick={() => this.handleCopy()}><Icon name='Copy' size={14}/> Copy</Button>;
 
     const jsonField = <TextField
       readOnly
