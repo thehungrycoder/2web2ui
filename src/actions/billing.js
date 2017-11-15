@@ -1,7 +1,7 @@
 /* eslint max-lines: ["error", 200] */
 import { formatDataForCors, formatCreateData, formatUpdateData, formatContactData } from 'src/helpers/billing';
 import { fetch as fetchAccount } from './account';
-import { list as getSendingIps } from 'src/actions/sendingIps';
+import { list as getSendingIps } from './sendingIps';
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 import zuoraRequest from 'src/actions/helpers/zuoraRequest';
 
