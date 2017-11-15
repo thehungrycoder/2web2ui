@@ -10,13 +10,18 @@ import { getNonDefaultIpPools } from 'src/selectors/ipPools';
 const EXISTING = 'existing';
 const NEW = 'new';
 
-const ActionSelect = ({ ipPools, loading }) => {
-  // Disable option until IP pools are loaded and have at least
-  const disabled = loading || ipPools.length === 0;
-
+const ActionSelect = ({ disabled, ipPools, loading }) => {
   const options = [
-    { label: 'Assign to a new IP Pool', value: NEW },
-    { label: 'Assign to an existing IP Pool', value: EXISTING, disabled }
+    {
+      disabled,
+      label: 'Assign to a new IP Pool',
+      value: NEW
+    },
+    { // Disable option until IP pools are loaded and have at least
+      disabled: disabled || loading || ipPools.length === 0,
+      label: 'Assign to an existing IP Pool',
+      value: EXISTING
+    }
   ];
 
   return (
@@ -29,11 +34,12 @@ const ActionSelect = ({ ipPools, loading }) => {
   );
 };
 
-const ExistingIpPoolField = ({ ipPools }) => {
+const ExistingIpPoolField = ({ disabled, ipPools }) => {
   const options = ipPools.map((p) => ({ label: p.name, value: p.id }));
 
   return (
     <Field
+      disabled={disabled}
       name='ipPool.id'
       component={SelectWrapper}
       label='Choose an IP Pool'
@@ -44,8 +50,9 @@ const ExistingIpPoolField = ({ ipPools }) => {
   );
 };
 
-const NewIpPoolField = () => (
+const NewIpPoolField = ({ disabled }) => (
   <Field
+    disabled={disabled}
     name='ipPool.name'
     component={TextFieldWrapper}
     label='Name your new IP Pool'
@@ -64,8 +71,8 @@ class IpPoolSelect extends Component {
     return (
       <div>
         <ActionSelect {...this.props} />
-        {action === EXISTING && <ExistingIpPoolField {...this.props} />}
-        {action === NEW && <NewIpPoolField />}
+        { action === EXISTING && <ExistingIpPoolField { ...this.props } /> }
+        { action === NEW && <NewIpPoolField { ...this.props } /> }
       </div>
     );
   }
