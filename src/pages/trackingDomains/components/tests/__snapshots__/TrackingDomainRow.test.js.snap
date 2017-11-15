@@ -1,0 +1,996 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: TrackingDomainRow Tag components should render the IsDefaultTag 1`] = `
+<Tag
+  orange={true}
+>
+  Default
+</Tag>
+`;
+
+exports[`Component: TrackingDomainRow Tag components should render the IsDefaultTag when assigned to a subaccount 1`] = `
+<Tag
+  orange={true}
+>
+  Subaccount 
+  Default
+</Tag>
+`;
+
+exports[`Component: TrackingDomainRow Tag components should render the SubaccountTag 1`] = `
+<Tag>
+  <Icon
+    name="Link"
+  />
+   Subaccount 
+  213
+</Tag>
+`;
+
+exports[`Component: TrackingDomainRow rendering when assigned to master account should render a "currently verifying" domain 1`] = `
+<Panel.Section>
+  <Grid>
+    <Grid.Column
+      md={9}
+      xs={12}
+    >
+      <h3>
+        somedomain.com
+      </h3>
+      <div>
+        <Tag
+          yellow={true}
+        >
+          Unverified
+        </Tag>
+      </div>
+    </Grid.Column>
+    <Grid.Column
+      md={3}
+      xs={12}
+    >
+      <Button.Group>
+        <Button
+          onClick={[Function]}
+          size="small"
+        >
+          <Icon
+            name="Refresh"
+          />
+           
+          Verifying...
+        </Button>
+        <Button
+          destructive={true}
+          onClick={[Function]}
+          size="small"
+        >
+          Delete
+        </Button>
+      </Button.Group>
+    </Grid.Column>
+  </Grid>
+  <div>
+    <DeleteModal
+      content={
+        <p>
+          Any templates or transmissions that reference this domain will use the default tracking domain from now on.
+        </p>
+      }
+      onCancel={[Function]}
+      onDelete={[Function]}
+      open={false}
+      title="Permanently delete somedomain.com?"
+    />
+    <ConfirmationModal
+      confirmVerb="Set as Default"
+      content={
+        <p>
+          Transmissions and templates that don't specify a tracking domain will now use somedomain.com.
+        </p>
+      }
+      onCancel={[Function]}
+      open={false}
+      title="Change default tracking domain (somedomain.com)"
+    />
+  </div>
+</Panel.Section>
+`;
+
+exports[`Component: TrackingDomainRow rendering when assigned to master account should render a blocked domain 1`] = `
+<Panel.Section>
+  <Grid>
+    <Grid.Column
+      md={9}
+      xs={12}
+    >
+      <h3>
+        somedomain.com
+      </h3>
+      <div>
+        <WithPositioning(Tooltip)
+          content="This domain is not available for use. For more information, please contact support."
+          dark={true}
+          preferredPostiion="top"
+        >
+          <Tag>
+            Blocked
+          </Tag>
+        </WithPositioning(Tooltip)>
+      </div>
+    </Grid.Column>
+    <Grid.Column
+      md={3}
+      xs={12}
+    >
+      <Button.Group>
+        <Button
+          onClick={[Function]}
+          size="small"
+        >
+          <Icon
+            name="Refresh"
+          />
+           
+          Retry Verification
+        </Button>
+      </Button.Group>
+    </Grid.Column>
+  </Grid>
+  <div>
+    <DeleteModal
+      content={
+        <p>
+          Any templates or transmissions that reference this domain will use the default tracking domain from now on.
+        </p>
+      }
+      onCancel={[Function]}
+      onDelete={[Function]}
+      open={false}
+      title="Permanently delete somedomain.com?"
+    />
+    <ConfirmationModal
+      confirmVerb="Set as Default"
+      content={
+        <p>
+          Transmissions and templates that don't specify a tracking domain will now use somedomain.com.
+        </p>
+      }
+      onCancel={[Function]}
+      open={false}
+      title="Change default tracking domain (somedomain.com)"
+    />
+  </div>
+</Panel.Section>
+`;
+
+exports[`Component: TrackingDomainRow rendering when assigned to master account should render a default unverified domain 1`] = `
+<Panel.Section>
+  <Grid>
+    <Grid.Column
+      md={9}
+      xs={12}
+    >
+      <h3>
+        somedomain.com
+      </h3>
+      <div>
+        <Tag
+          yellow={true}
+        >
+          Unverified
+        </Tag>
+        <IsDefaultTag
+          assignedToSubaccount={false}
+        />
+      </div>
+    </Grid.Column>
+    <Grid.Column
+      md={3}
+      xs={12}
+    >
+      <Button.Group>
+        <Button
+          onClick={[Function]}
+          size="small"
+        >
+          <Icon
+            name="Refresh"
+          />
+           
+          Retry Verification
+        </Button>
+        <Button
+          destructive={true}
+          onClick={[Function]}
+          size="small"
+        >
+          Delete
+        </Button>
+      </Button.Group>
+    </Grid.Column>
+  </Grid>
+  <div>
+    <DeleteModal
+      content={
+        <p>
+          Any templates or transmissions that reference this domain will use the default tracking domain from now on.
+        </p>
+      }
+      onCancel={[Function]}
+      onDelete={[Function]}
+      open={false}
+      title="Permanently delete somedomain.com?"
+    />
+    <ConfirmationModal
+      confirmVerb="Unset Default"
+      content={
+        <p>
+          Transmissions and templates that don't specify a tracking domain will no longer use somedomain.com. Instead, they will use the system default until another default is selected.
+        </p>
+      }
+      onCancel={[Function]}
+      open={false}
+      title="Change default tracking domain (somedomain.com)"
+    />
+  </div>
+</Panel.Section>
+`;
+
+exports[`Component: TrackingDomainRow rendering when assigned to master account should render a default verified domain 1`] = `
+<Panel.Section>
+  <Grid>
+    <Grid.Column
+      md={9}
+      xs={12}
+    >
+      <h3>
+        somedomain.com
+      </h3>
+      <div>
+        <IsDefaultTag
+          assignedToSubaccount={false}
+        />
+      </div>
+    </Grid.Column>
+    <Grid.Column
+      md={3}
+      xs={12}
+    >
+      <Button.Group>
+        <Button
+          destructive={true}
+          onClick={[Function]}
+          size="small"
+        >
+          Remove Default
+        </Button>
+        <Button
+          destructive={true}
+          onClick={[Function]}
+          size="small"
+        >
+          Delete
+        </Button>
+      </Button.Group>
+    </Grid.Column>
+  </Grid>
+  <div>
+    <DeleteModal
+      content={
+        <p>
+          Any templates or transmissions that reference this domain will use the default tracking domain from now on.
+        </p>
+      }
+      onCancel={[Function]}
+      onDelete={[Function]}
+      open={false}
+      title="Permanently delete somedomain.com?"
+    />
+    <ConfirmationModal
+      confirmVerb="Unset Default"
+      content={
+        <p>
+          Transmissions and templates that don't specify a tracking domain will no longer use somedomain.com. Instead, they will use the system default until another default is selected.
+        </p>
+      }
+      onCancel={[Function]}
+      open={false}
+      title="Change default tracking domain (somedomain.com)"
+    />
+  </div>
+</Panel.Section>
+`;
+
+exports[`Component: TrackingDomainRow rendering when assigned to master account should render a non-default unverified domain 1`] = `
+<Panel.Section>
+  <Grid>
+    <Grid.Column
+      md={9}
+      xs={12}
+    >
+      <h3>
+        somedomain.com
+      </h3>
+      <div>
+        <Tag
+          yellow={true}
+        >
+          Unverified
+        </Tag>
+      </div>
+    </Grid.Column>
+    <Grid.Column
+      md={3}
+      xs={12}
+    >
+      <Button.Group>
+        <Button
+          onClick={[Function]}
+          size="small"
+        >
+          <Icon
+            name="Refresh"
+          />
+           
+          Retry Verification
+        </Button>
+        <Button
+          destructive={true}
+          onClick={[Function]}
+          size="small"
+        >
+          Delete
+        </Button>
+      </Button.Group>
+    </Grid.Column>
+  </Grid>
+  <div>
+    <DeleteModal
+      content={
+        <p>
+          Any templates or transmissions that reference this domain will use the default tracking domain from now on.
+        </p>
+      }
+      onCancel={[Function]}
+      onDelete={[Function]}
+      open={false}
+      title="Permanently delete somedomain.com?"
+    />
+    <ConfirmationModal
+      confirmVerb="Set as Default"
+      content={
+        <p>
+          Transmissions and templates that don't specify a tracking domain will now use somedomain.com.
+        </p>
+      }
+      onCancel={[Function]}
+      open={false}
+      title="Change default tracking domain (somedomain.com)"
+    />
+  </div>
+</Panel.Section>
+`;
+
+exports[`Component: TrackingDomainRow rendering when assigned to master account should render a non-default verified domain 1`] = `
+<Panel.Section>
+  <Grid>
+    <Grid.Column
+      md={9}
+      xs={12}
+    >
+      <h3>
+        somedomain.com
+      </h3>
+      <div />
+    </Grid.Column>
+    <Grid.Column
+      md={3}
+      xs={12}
+    >
+      <Button.Group>
+        <Button
+          destructive={false}
+          onClick={[Function]}
+          size="small"
+        >
+          Set as Default
+        </Button>
+        <Button
+          destructive={true}
+          onClick={[Function]}
+          size="small"
+        >
+          Delete
+        </Button>
+      </Button.Group>
+    </Grid.Column>
+  </Grid>
+  <div>
+    <DeleteModal
+      content={
+        <p>
+          Any templates or transmissions that reference this domain will use the default tracking domain from now on.
+        </p>
+      }
+      onCancel={[Function]}
+      onDelete={[Function]}
+      open={false}
+      title="Permanently delete somedomain.com?"
+    />
+    <ConfirmationModal
+      confirmVerb="Set as Default"
+      content={
+        <p>
+          Transmissions and templates that don't specify a tracking domain will now use somedomain.com.
+        </p>
+      }
+      onCancel={[Function]}
+      open={false}
+      title="Change default tracking domain (somedomain.com)"
+    />
+  </div>
+</Panel.Section>
+`;
+
+exports[`Component: TrackingDomainRow rendering when assigned to master account should render a pending domain 1`] = `
+<Panel.Section>
+  <Grid>
+    <Grid.Column
+      md={9}
+      xs={12}
+    >
+      <h3>
+        somedomain.com
+      </h3>
+      <div>
+        <WithPositioning(Tooltip)
+          content="This domain is pending review, please check back again soon."
+          dark={true}
+          preferredPosition="top"
+        >
+          <Tag>
+            Pending
+          </Tag>
+        </WithPositioning(Tooltip)>
+      </div>
+    </Grid.Column>
+    <Grid.Column
+      md={3}
+      xs={12}
+    >
+      <Button.Group>
+        <Button
+          onClick={[Function]}
+          size="small"
+        >
+          <Icon
+            name="Refresh"
+          />
+           
+          Retry Verification
+        </Button>
+      </Button.Group>
+    </Grid.Column>
+  </Grid>
+  <div>
+    <DeleteModal
+      content={
+        <p>
+          Any templates or transmissions that reference this domain will use the default tracking domain from now on.
+        </p>
+      }
+      onCancel={[Function]}
+      onDelete={[Function]}
+      open={false}
+      title="Permanently delete somedomain.com?"
+    />
+    <ConfirmationModal
+      confirmVerb="Set as Default"
+      content={
+        <p>
+          Transmissions and templates that don't specify a tracking domain will now use somedomain.com.
+        </p>
+      }
+      onCancel={[Function]}
+      open={false}
+      title="Change default tracking domain (somedomain.com)"
+    />
+  </div>
+</Panel.Section>
+`;
+
+exports[`Component: TrackingDomainRow rendering when assigned to subaccount should render a "currently verifying" domain 1`] = `
+<Panel.Section>
+  <Grid>
+    <Grid.Column
+      md={9}
+      xs={12}
+    >
+      <h3>
+        somedomain.com
+      </h3>
+      <div>
+        <Tag
+          yellow={true}
+        >
+          Unverified
+        </Tag>
+        <SubaccountTag
+          id={100}
+        />
+      </div>
+    </Grid.Column>
+    <Grid.Column
+      md={3}
+      xs={12}
+    >
+      <Button.Group>
+        <Button
+          onClick={[Function]}
+          size="small"
+        >
+          <Icon
+            name="Refresh"
+          />
+           
+          Verifying...
+        </Button>
+        <Button
+          destructive={true}
+          onClick={[Function]}
+          size="small"
+        >
+          Delete
+        </Button>
+      </Button.Group>
+    </Grid.Column>
+  </Grid>
+  <div>
+    <DeleteModal
+      content={
+        <p>
+          Any templates or transmissions that reference this domain will use the default tracking domain from now on.
+        </p>
+      }
+      onCancel={[Function]}
+      onDelete={[Function]}
+      open={false}
+      title="Permanently delete somedomain.com?"
+    />
+    <ConfirmationModal
+      confirmVerb="Set as Default"
+      content={
+        <p>
+          Transmissions and templates that don't specify a tracking domain will now use somedomain.com.
+        </p>
+      }
+      onCancel={[Function]}
+      open={false}
+      title="Change default tracking domain (somedomain.com)"
+    />
+  </div>
+</Panel.Section>
+`;
+
+exports[`Component: TrackingDomainRow rendering when assigned to subaccount should render a blocked domain 1`] = `
+<Panel.Section>
+  <Grid>
+    <Grid.Column
+      md={9}
+      xs={12}
+    >
+      <h3>
+        somedomain.com
+      </h3>
+      <div>
+        <WithPositioning(Tooltip)
+          content="This domain is not available for use. For more information, please contact support."
+          dark={true}
+          preferredPostiion="top"
+        >
+          <Tag>
+            Blocked
+          </Tag>
+        </WithPositioning(Tooltip)>
+        <SubaccountTag
+          id={100}
+        />
+      </div>
+    </Grid.Column>
+    <Grid.Column
+      md={3}
+      xs={12}
+    >
+      <Button.Group>
+        <Button
+          onClick={[Function]}
+          size="small"
+        >
+          <Icon
+            name="Refresh"
+          />
+           
+          Retry Verification
+        </Button>
+      </Button.Group>
+    </Grid.Column>
+  </Grid>
+  <div>
+    <DeleteModal
+      content={
+        <p>
+          Any templates or transmissions that reference this domain will use the default tracking domain from now on.
+        </p>
+      }
+      onCancel={[Function]}
+      onDelete={[Function]}
+      open={false}
+      title="Permanently delete somedomain.com?"
+    />
+    <ConfirmationModal
+      confirmVerb="Set as Default"
+      content={
+        <p>
+          Transmissions and templates that don't specify a tracking domain will now use somedomain.com.
+        </p>
+      }
+      onCancel={[Function]}
+      open={false}
+      title="Change default tracking domain (somedomain.com)"
+    />
+  </div>
+</Panel.Section>
+`;
+
+exports[`Component: TrackingDomainRow rendering when assigned to subaccount should render a default unverified domain 1`] = `
+<Panel.Section>
+  <Grid>
+    <Grid.Column
+      md={9}
+      xs={12}
+    >
+      <h3>
+        somedomain.com
+      </h3>
+      <div>
+        <Tag
+          yellow={true}
+        >
+          Unverified
+        </Tag>
+        <IsDefaultTag
+          assignedToSubaccount={true}
+        />
+        <SubaccountTag
+          id={100}
+        />
+      </div>
+    </Grid.Column>
+    <Grid.Column
+      md={3}
+      xs={12}
+    >
+      <Button.Group>
+        <Button
+          onClick={[Function]}
+          size="small"
+        >
+          <Icon
+            name="Refresh"
+          />
+           
+          Retry Verification
+        </Button>
+        <Button
+          destructive={true}
+          onClick={[Function]}
+          size="small"
+        >
+          Delete
+        </Button>
+      </Button.Group>
+    </Grid.Column>
+  </Grid>
+  <div>
+    <DeleteModal
+      content={
+        <p>
+          Any templates or transmissions that reference this domain will use the default tracking domain from now on.
+        </p>
+      }
+      onCancel={[Function]}
+      onDelete={[Function]}
+      open={false}
+      title="Permanently delete somedomain.com?"
+    />
+    <ConfirmationModal
+      confirmVerb="Unset Default"
+      content={
+        <p>
+          Transmissions and templates that don't specify a tracking domain will no longer use somedomain.com. Instead, they will use the system default until another default is selected.
+        </p>
+      }
+      onCancel={[Function]}
+      open={false}
+      title="Change default tracking domain (somedomain.com)"
+    />
+  </div>
+</Panel.Section>
+`;
+
+exports[`Component: TrackingDomainRow rendering when assigned to subaccount should render a default verified domain 1`] = `
+<Panel.Section>
+  <Grid>
+    <Grid.Column
+      md={9}
+      xs={12}
+    >
+      <h3>
+        somedomain.com
+      </h3>
+      <div>
+        <IsDefaultTag
+          assignedToSubaccount={true}
+        />
+        <SubaccountTag
+          id={100}
+        />
+      </div>
+    </Grid.Column>
+    <Grid.Column
+      md={3}
+      xs={12}
+    >
+      <Button.Group>
+        <Button
+          destructive={true}
+          onClick={[Function]}
+          size="small"
+        >
+          Remove Default
+        </Button>
+        <Button
+          destructive={true}
+          onClick={[Function]}
+          size="small"
+        >
+          Delete
+        </Button>
+      </Button.Group>
+    </Grid.Column>
+  </Grid>
+  <div>
+    <DeleteModal
+      content={
+        <p>
+          Any templates or transmissions that reference this domain will use the default tracking domain from now on.
+        </p>
+      }
+      onCancel={[Function]}
+      onDelete={[Function]}
+      open={false}
+      title="Permanently delete somedomain.com?"
+    />
+    <ConfirmationModal
+      confirmVerb="Unset Default"
+      content={
+        <p>
+          Transmissions and templates that don't specify a tracking domain will no longer use somedomain.com. Instead, they will use the system default until another default is selected.
+        </p>
+      }
+      onCancel={[Function]}
+      open={false}
+      title="Change default tracking domain (somedomain.com)"
+    />
+  </div>
+</Panel.Section>
+`;
+
+exports[`Component: TrackingDomainRow rendering when assigned to subaccount should render a non-default unverified domain 1`] = `
+<Panel.Section>
+  <Grid>
+    <Grid.Column
+      md={9}
+      xs={12}
+    >
+      <h3>
+        somedomain.com
+      </h3>
+      <div>
+        <Tag
+          yellow={true}
+        >
+          Unverified
+        </Tag>
+        <SubaccountTag
+          id={100}
+        />
+      </div>
+    </Grid.Column>
+    <Grid.Column
+      md={3}
+      xs={12}
+    >
+      <Button.Group>
+        <Button
+          onClick={[Function]}
+          size="small"
+        >
+          <Icon
+            name="Refresh"
+          />
+           
+          Retry Verification
+        </Button>
+        <Button
+          destructive={true}
+          onClick={[Function]}
+          size="small"
+        >
+          Delete
+        </Button>
+      </Button.Group>
+    </Grid.Column>
+  </Grid>
+  <div>
+    <DeleteModal
+      content={
+        <p>
+          Any templates or transmissions that reference this domain will use the default tracking domain from now on.
+        </p>
+      }
+      onCancel={[Function]}
+      onDelete={[Function]}
+      open={false}
+      title="Permanently delete somedomain.com?"
+    />
+    <ConfirmationModal
+      confirmVerb="Set as Default"
+      content={
+        <p>
+          Transmissions and templates that don't specify a tracking domain will now use somedomain.com.
+        </p>
+      }
+      onCancel={[Function]}
+      open={false}
+      title="Change default tracking domain (somedomain.com)"
+    />
+  </div>
+</Panel.Section>
+`;
+
+exports[`Component: TrackingDomainRow rendering when assigned to subaccount should render a non-default verified domain 1`] = `
+<Panel.Section>
+  <Grid>
+    <Grid.Column
+      md={9}
+      xs={12}
+    >
+      <h3>
+        somedomain.com
+      </h3>
+      <div>
+        <SubaccountTag
+          id={100}
+        />
+      </div>
+    </Grid.Column>
+    <Grid.Column
+      md={3}
+      xs={12}
+    >
+      <Button.Group>
+        <Button
+          destructive={false}
+          onClick={[Function]}
+          size="small"
+        >
+          Set as Default
+        </Button>
+        <Button
+          destructive={true}
+          onClick={[Function]}
+          size="small"
+        >
+          Delete
+        </Button>
+      </Button.Group>
+    </Grid.Column>
+  </Grid>
+  <div>
+    <DeleteModal
+      content={
+        <p>
+          Any templates or transmissions that reference this domain will use the default tracking domain from now on.
+        </p>
+      }
+      onCancel={[Function]}
+      onDelete={[Function]}
+      open={false}
+      title="Permanently delete somedomain.com?"
+    />
+    <ConfirmationModal
+      confirmVerb="Set as Default"
+      content={
+        <p>
+          Transmissions and templates that don't specify a tracking domain will now use somedomain.com.
+        </p>
+      }
+      onCancel={[Function]}
+      open={false}
+      title="Change default tracking domain (somedomain.com)"
+    />
+  </div>
+</Panel.Section>
+`;
+
+exports[`Component: TrackingDomainRow rendering when assigned to subaccount should render a pending domain 1`] = `
+<Panel.Section>
+  <Grid>
+    <Grid.Column
+      md={9}
+      xs={12}
+    >
+      <h3>
+        somedomain.com
+      </h3>
+      <div>
+        <WithPositioning(Tooltip)
+          content="This domain is pending review, please check back again soon."
+          dark={true}
+          preferredPosition="top"
+        >
+          <Tag>
+            Pending
+          </Tag>
+        </WithPositioning(Tooltip)>
+        <SubaccountTag
+          id={100}
+        />
+      </div>
+    </Grid.Column>
+    <Grid.Column
+      md={3}
+      xs={12}
+    >
+      <Button.Group>
+        <Button
+          onClick={[Function]}
+          size="small"
+        >
+          <Icon
+            name="Refresh"
+          />
+           
+          Retry Verification
+        </Button>
+      </Button.Group>
+    </Grid.Column>
+  </Grid>
+  <div>
+    <DeleteModal
+      content={
+        <p>
+          Any templates or transmissions that reference this domain will use the default tracking domain from now on.
+        </p>
+      }
+      onCancel={[Function]}
+      onDelete={[Function]}
+      open={false}
+      title="Permanently delete somedomain.com?"
+    />
+    <ConfirmationModal
+      confirmVerb="Set as Default"
+      content={
+        <p>
+          Transmissions and templates that don't specify a tracking domain will now use somedomain.com.
+        </p>
+      }
+      onCancel={[Function]}
+      open={false}
+      title="Change default tracking domain (somedomain.com)"
+    />
+  </div>
+</Panel.Section>
+`;

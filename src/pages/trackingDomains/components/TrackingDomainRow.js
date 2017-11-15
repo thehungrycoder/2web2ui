@@ -5,10 +5,12 @@ import { deleteTrackingDomain, verifyTrackingDomain } from 'src/actions/tracking
 import { DeleteModal, ConfirmationModal } from 'src/components/modals';
 import styles from './TrackingDomainRow.module.scss';
 
-const IsDefaultTag = ({ assignedToSubaccount }) => (
-  <Tag orange className={styles.Tag}>{assignedToSubaccount && 'Subaccount '}Default</Tag>
-);
-const SubaccountTag = ({ id }) => <Tag><Icon name='Link' /> Subaccount {id}</Tag>;
+export function IsDefaultTag({ assignedToSubaccount }) {
+  return <Tag orange className={styles.Tag}>{assignedToSubaccount && 'Subaccount '}Default</Tag>
+}
+export function SubaccountTag({ id }) {
+  return <Tag><Icon name='Link' /> Subaccount {id}</Tag>;
+}
 
 export class TrackingDomainRow extends Component {
   state = {
@@ -25,13 +27,13 @@ export class TrackingDomainRow extends Component {
   }
 
   handleDelete = () => {
-    const { domain, subaccount_id: subaccountId, deleteTrackingDomain } = this.props;
+    const { domain, subaccountId, deleteTrackingDomain } = this.props;
     deleteTrackingDomain({ domain, subaccountId });
     this.toggleDeleteModal();
   }
 
   retryVerification = () => {
-    const { verifyTrackingDomain, domain, subaccount_id: subaccountId } = this.props;
+    const { verifyTrackingDomain, domain, subaccountId } = this.props;
     verifyTrackingDomain({ domain, subaccountId });
   }
 
@@ -115,7 +117,7 @@ export class TrackingDomainRow extends Component {
   }
 
   render() {
-    const { domain, subaccount_id: subaccountId, isDefault } = this.props;
+    const { domain, subaccountId, isDefault } = this.props;
     return (
       <Panel.Section className={styles.SpacedSection}>
         <Grid>
@@ -140,7 +142,7 @@ export class TrackingDomainRow extends Component {
   }
 }
 
-const mapStateToProps = (state, { default: isDefault }) => ({ isDefault });
+const mapStateToProps = (state, { default: isDefault, subaccount_id: subaccountId }) => ({ isDefault, subaccountId });
 export default connect(mapStateToProps, {
   deleteTrackingDomain,
   verifyTrackingDomain
