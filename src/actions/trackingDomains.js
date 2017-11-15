@@ -41,9 +41,7 @@ export function deleteTrackingDomain({ domain, subaccountId }) {
         headers,
         domain
       }
-    })).then(() => {
-      // dispatch success alert?
-    });
+    }));
   };
 }
 

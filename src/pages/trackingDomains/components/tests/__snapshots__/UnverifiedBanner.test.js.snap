@@ -20,9 +20,9 @@ exports[`Component: UnverifiedBanner should render correctly with 1 unverified d
     external={true}
     outline={true}
     size="default"
-    to="http://google.com"
+    to="https://www.sparkpost.com/docs/tech-resources/enabling-multiple-custom-tracking-domains/"
   >
-    Learn more about DNS verification
+    Learn more
   </Button>
 </Banner>
 `;
@@ -47,9 +47,9 @@ exports[`Component: UnverifiedBanner should render correctly with more than 1 un
     external={true}
     outline={true}
     size="default"
-    to="http://google.com"
+    to="https://www.sparkpost.com/docs/tech-resources/enabling-multiple-custom-tracking-domains/"
   >
-    Learn more about DNS verification
+    Learn more
   </Button>
 </Banner>
 `;

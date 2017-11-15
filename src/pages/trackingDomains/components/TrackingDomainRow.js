@@ -69,7 +69,7 @@ export class TrackingDomainRow extends Component {
         return (
           <Tooltip
             content='This domain is not available for use. For more information, please contact support.'
-            dark preferredPostiion='top'>
+            dark>
             <Tag className={styles.Tag}>Blocked</Tag>
           </Tooltip>
         );
@@ -78,7 +78,7 @@ export class TrackingDomainRow extends Component {
         return (
           <Tooltip
             content='This domain is pending review, please check back again soon.'
-            dark preferredPosition='top'>
+            dark>
             <Tag className={styles.Tag}>Pending</Tag>
           </Tooltip>
         );

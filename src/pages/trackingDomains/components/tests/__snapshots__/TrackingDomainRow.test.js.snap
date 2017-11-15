@@ -111,7 +111,6 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
         <WithPositioning(Tooltip)
           content="This domain is not available for use. For more information, please contact support."
           dark={true}
-          preferredPostiion="top"
         >
           <Tag>
             Blocked
@@ -447,7 +446,6 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
         <WithPositioning(Tooltip)
           content="This domain is pending review, please check back again soon."
           dark={true}
-          preferredPosition="top"
         >
           <Tag>
             Pending
@@ -587,7 +585,6 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
         <WithPositioning(Tooltip)
           content="This domain is not available for use. For more information, please contact support."
           dark={true}
-          preferredPostiion="top"
         >
           <Tag>
             Blocked
@@ -939,7 +936,6 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
         <WithPositioning(Tooltip)
           content="This domain is pending review, please check back again soon."
           dark={true}
-          preferredPosition="top"
         >
           <Tag>
             Pending
