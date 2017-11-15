@@ -10,12 +10,17 @@ describe('Page: SummaryPage', () => {
       subscription: {}
     },
     billing: {},
+    dedicatedIpPrice: jest.fn(() => ''),
     getPlans: jest.fn(),
     getBillingCountries: jest.fn(),
+    getSendingIps: jest.fn(),
     shouldExposeCard: false,
     canChangePlan: false,
     currentPlan: {},
-    plans: []
+    plans: [],
+    sendingIps: {
+      list: []
+    }
   };
 
   beforeEach(() => {

@@ -184,16 +184,20 @@ exports[`Page: SummaryPage should render billing summary if on paid plan 1`] = `
         actions={
           Array [
             Object {
-              "content": "Add Dedicated IPs",
-              "onClick": [Function],
+              "Component": [Function],
+              "content": "Upgrade Now",
+              "to": "/account/billing/plan",
             },
           ]
         }
       >
         <LabelledValue
           label="Dedicated IPs"
-          value="0"
-        />
+        >
+          <h6>
+             for
+          </h6>
+        </SummarySection>
       </Panel.Section>
     </Panel>
     <Panel
@@ -228,7 +232,7 @@ exports[`Page: SummaryPage should render billing summary if on paid plan 1`] = `
           label="Billing Contact"
         >
           <h6>
-             
+
           </h6>
           <p />
         </LabelledValue>
