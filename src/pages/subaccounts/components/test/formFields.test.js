@@ -6,7 +6,7 @@ import {
   ApiKeyFields,
   IpPoolSelect,
   StatusSelect
-} from '../FormFields.js';
+} from '../formFields.js';
 
 test('NameField', () => {
   const wrapper = shallow(<NameField disabled={false}/>);
