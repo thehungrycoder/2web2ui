@@ -1,4 +1,7 @@
 import * as billingInfo from '../accountBillingInfo';
+import * as mockConfig from 'src/config';
+
+jest.mock('src/config', () => ({ sendingIps: { awsPricePerIp: 0.0011, pricePerIp: 10 } }));
 
 describe('Selector: public plans', () => {
   const store = {
@@ -84,5 +87,23 @@ describe('IP Pool List Selector', () => {
   it('should return empty array with no IP Pools', () => {
     store.ipPools = {};
     expect(billingInfo.selectIpPools(store)).toMatchSnapshot();
+  });
+});
+
+describe('Dedicated IP Price', () => {
+  it('returns regular formatted price', () => {
+    const store = {
+      account: { subscription: { code: 'abc' }},
+      billing: { plans: [{ code: 'abc' }] }
+    };
+    expect(billingInfo.dedicatedIpPrice(store)).toEqual('$10.00 per IP address per month');
+  });
+
+  it('returns AWS formatted price', () => {
+    const store = {
+      account: { subscription: { code: 'abc' }},
+      billing: { plans: [{ code: 'abc', isAwsAccount: true }] }
+    };
+    expect(billingInfo.dedicatedIpPrice(store)).toEqual('$0.001 per IP address per hour');
   });
 });
