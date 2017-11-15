@@ -1,18 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import styles from './DetailSection.module.scss';
+import styles from './LabelledValue.module.scss';
 
-const DetailSection = ({ label, content }) => (
-  <div className={styles.DetailSection}>
+const LabelledValue = ({ label, value }) => (
+  <div className={styles.LabelledValue}>
     <div className={styles.LabelContainer}>
       <small className={styles.Label}>{ label }</small>
     </div>
-    <div className={styles.Content}><h6>{ content }</h6></div>
+    <div className={styles.Content}><h6>{ value }</h6></div>
   </div>
 );
 
-DetailSection.propTypes = {
+LabelledValue.propTypes = {
   label: PropTypes.string.isRequired,
   content: PropTypes.oneOfType([
     PropTypes.string,
@@ -21,4 +21,4 @@ DetailSection.propTypes = {
   ])
 };
 
-export default DetailSection;
+export default LabelledValue;

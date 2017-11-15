@@ -1,6 +1,6 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 
-.DetailSection {
+.LabelledValue {
   display: flex;
   margin-bottom: spacing(small);
 }
@@ -23,7 +23,7 @@
   }
 }
 
-.Label {
+.Value {
   line-height: rem(24);
   margin-bottom: 0;
 }

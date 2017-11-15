@@ -28,6 +28,10 @@ export class EventPage extends Component {
   }
 
   componentDidMount() {
+    this.handleRefresh();
+  }
+
+  handleRefresh = () => {
     const { messageId, getMessageHistory } = this.props;
     getMessageHistory({ messageId })
   }
@@ -53,15 +57,22 @@ export class EventPage extends Component {
     const { selectedId } = this.state;
     const selectedEvent = _.find(messageHistory, (event) => event.event_id === selectedId)
 
-    // TODO localize loading into these panels
+    if (loading) {
+      return <Loading />
+    }
+
     return (
       <Page title={`Message: ${messageId}`} breadcrumbAction={breadcrumbAction}>
         <Grid>
           <Grid.Column xs={6}>
-            { !loading && <MessageDetails details={selectedEvent}/> }
+            <MessageDetails details={selectedEvent}/>
           </Grid.Column>
           <Grid.Column xs={6}>
-            { !loading && <HistoryTable messageHistory={messageHistory} selectedId={selectedId} handleEventClick={this.handleEventClick}/> }
+            <HistoryTable
+              messageHistory={messageHistory}
+              selectedId={selectedId}
+              handleEventClick={this.handleEventClick}
+              handleRefresh={this.handleRefresh}/>
           </Grid.Column>
         </Grid>
       </Page>
@@ -69,15 +80,11 @@ export class EventPage extends Component {
   }
 }
 
-const mapStateToProps = (state, props) => {
-  // const events = selectMessageEvents(state);
-  //
-  return {
-    loading: state.messageEvents.pending,
-    messageHistory: state.messageEvents.history[props.match.params.messageId],
-    messageId: props.match.params.messageId,
-    eventId: props.match.params.eventId,
-  };
-};
+const mapStateToProps = (state, props) => ({
+  loading: state.messageEvents.pending,
+  messageHistory: state.messageEvents.history[props.match.params.messageId],
+  messageId: props.match.params.messageId,
+  eventId: props.match.params.eventId,
+});
 
 export default withRouter(connect(mapStateToProps, { getMessageHistory })(EventPage));

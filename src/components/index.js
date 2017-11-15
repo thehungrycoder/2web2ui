@@ -1,6 +1,8 @@
 export { default as ApiErrorBanner } from './apiErrorBanner/ApiErrorBanner';
+export { default as CopyField } from './copyField/CopyField';
 export { default as FilterDropdown } from './filterDropdown/FilterDropdown';
 export { default as GlobalAlert } from './globalAlert/GlobalAlert';
+export { default as LabelledValue } from './labelledValue/LabelledValue';
 export { default as Layout } from './layout/Layout';
 export { default as Modal } from './modals/Modal';
 export { default as Navigation } from './navigation/Navigation';

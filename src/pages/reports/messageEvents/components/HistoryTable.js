@@ -1,37 +1,53 @@
-/* eslint-disable */
 import React, { Component } from 'react';
 
 import { TableCollection } from 'src/components';
 import { Panel } from '@sparkpost/matchbox';
-import { Header, Row } from './TableElements';
+import { Header, Row, TableWrapper } from './TableElements';
 
-import styles from './HistoryTable.module.scss';
+import _ from 'lodash';
 
 class HistoryTable extends Component {
   createRows = () => {
     const { messageHistory, selectedId, handleEventClick } = this.props;
+    let rows = [];
 
-    return messageHistory.map((row) => {
-      const selected = row.event_id === selectedId && messageHistory.length > 1;
+    rows = messageHistory.map((row) => {
+      const selected = row.event_id === selectedId;
       return {
-      ...row,
-      selected,
-      onClick: !selected ? () => handleEventClick(row.event_id) : null
-    }})
+        ...row,
+        selected,
+        onClick: !selected ? () => handleEventClick(row.event_id) : null
+      };
+    });
+
+    return rows;
   }
 
   render() {
     const rows = this.createRows();
 
+    // if (!rows.length) {
+    //   return null;
+    // }
+    // rows[rows.length - 1].type = 'notinjection';
+
+    const disclaimer = _.get(rows[rows.length - 1], 'type') !== 'injection'
+      ? <small>Previous events may be outside our 10 day storage range.</small>
+      : null;
+
     return (
-      <Panel>
-        <TableCollection
-          headerComponent={Header}
-          rowComponent={Row}
-          rows={rows}
-          pagination={false}
-        />
-      </Panel>
+      <div>
+        <Panel title='Message History' actions={[{ content: 'Refresh', onClick: this.props.handleRefresh }]}>
+          <TableCollection
+            outerWrapper={TableWrapper}
+            headerComponent={Header}
+            rowComponent={Row}
+            rows={rows}
+            pagination={false}
+          />
+        </Panel>
+        { disclaimer }
+      </div>
     );
   }
 }
