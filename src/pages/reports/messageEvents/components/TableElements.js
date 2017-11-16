@@ -1,9 +1,9 @@
 import React from 'react';
 import cx from 'classnames';
-import TimeAgo from 'react-timeago';
 import { capitalizeFirstLetter } from 'src/helpers/string';
 
 import { Table } from '@sparkpost/matchbox';
+import DisplayDate from './DisplayDate';
 
 import styles from './HistoryTable.module.scss';
 
@@ -12,26 +12,22 @@ const Header = () => (
     <Table.Row>
       <th width='2px'/>
       <Table.HeaderCell className={styles.HeaderCell} width='35%'>
-        {/* <h5 className={styles.PanelTitle}>Message History</h5> */}
         Time
       </Table.HeaderCell>
-      <Table.HeaderCell className={styles.HeaderCell} width='35%'>
+      <Table.HeaderCell className={styles.HeaderCell} width='auto'>
         Event
       </Table.HeaderCell>
-      <Table.HeaderCell />
     </Table.Row>
   </thead>
 );
 
-const Row = ({ onClick, selected, type, timestamp }) => (
+const Row = ({ onClick, selected, type, timestamp, formattedDate }) => (
   <Table.Row onClick={onClick} className={cx(styles.Row, selected && styles.selected)}>
     <td className={styles.Bar}/>
-    <Table.Cell><TimeAgo date={timestamp} /></Table.Cell>
-    <Table.Cell>{ capitalizeFirstLetter(type) }</Table.Cell>
     <Table.Cell>
-      {/* <UnstyledLink onClick={onClick} className={styles.Link}>View Details</UnstyledLink> */}
-      {/* <Icon name='ChevronLeft' className={styles.Chevron} size={21}/> */}
+      <DisplayDate timestamp={timestamp} formattedDate={formattedDate} />
     </Table.Cell>
+    <Table.Cell>{ capitalizeFirstLetter(type) }</Table.Cell>
   </Table.Row>
 );
 

@@ -1,5 +1,8 @@
+import { formatDocumentation } from 'src/helpers/messageEvents';
+
 const initialState = {
   pending: false,
+  documentationPending: false,
   error: null,
   events: [],
   history: {}
@@ -21,6 +24,15 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         history: { ...state.history, [payload.messageId]: payload.history }
       };
+
+    case 'GET_MESSAGE_EVENTS_DOCUMENTATION_PENDING':
+      return { ...state, documentationPending: true, error: null };
+
+    case 'GET_MESSAGE_EVENTS_DOCUMENTATION_SUCCESS':
+      return { ...state, documentationPending: false, documentation: formatDocumentation(payload) };
+
+    case 'GET_MESSAGE_EVENTS_DOCUMENTATION_FAIL':
+      return { ...state, documentationPending: false, error: payload };
 
     default:
       return state;

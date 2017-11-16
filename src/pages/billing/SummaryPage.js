@@ -6,12 +6,12 @@ import { Page, Panel, WindowEvent } from '@sparkpost/matchbox';
 import { fetch as fetchAccount, getPlans } from 'src/actions/account';
 import { shouldExposeCardSelector, canChangePlanSelector, currentPlanSelector, publicPlansSelector } from 'src/selectors/accountBillingInfo';
 
-import { Loading, Modal } from 'src/components';
+import { Loading, Modal, LabelledValue } from 'src/components';
 import { PremiumBanner, EnterpriseBanner, SuspendedBanner, ManuallyBilledBanner, PendingPlanBanner } from './components/Banners';
 import UpdatePayment from './forms/UpdatePayment';
 import UpdateContact from './forms/UpdateContact';
 import AddIps from './forms/AddIps';
-import { SummarySection, PlanSummary, CardSummary } from './components/SummarySection';
+import { PlanSummary, CardSummary } from './components/SummarySection';
 
 const PAYMENT_MODAL = 'payment';
 const CONTACT_MODAL = 'contact';
@@ -75,9 +75,7 @@ export class SummaryPage extends Component {
 
   renderDedicatedIps = () => (
     <Panel.Section actions={[{ content: 'Add Dedicated IPs', onClick: () => this.handleModal(IP_MODAL) }]}>
-      <SummarySection label='Dedicated IPs'>
-        <h6>0</h6>
-      </SummarySection>
+      <LabelledValue label='Dedicated IPs' value='0'/>
     </Panel.Section>
   )
 
@@ -89,10 +87,10 @@ export class SummaryPage extends Component {
           <CardSummary label='Credit Card' billing={billing} />
         </Panel.Section>
         <Panel.Section actions={[{ content: 'Update Billing Contact', onClick: () => this.handleModal(CONTACT_MODAL) }]}>
-          <SummarySection label='Billing Contact'>
+          <LabelledValue label='Billing Contact'>
             <h6>{ billing.first_name } { billing.last_name }</h6>
             <p>{ billing.email }</p>
-          </SummarySection>
+          </LabelledValue>
         </Panel.Section>
       </Panel>
     );

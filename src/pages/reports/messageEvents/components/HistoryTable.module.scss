@@ -22,35 +22,15 @@
   &:not(.selected):hover {
     cursor: pointer;
     background: lighten(color(gray, 9), 1);
-
-    .Link {
-      opacity: 1;
-    }
-  }
-
-  & > *:last-child {
-    text-align: right;
   }
 }
 
 .selected {
   background: rgba(color(mustard), 0.07);
 
-  .Link {
-    opacity: 0;
-  }
-
   .Bar {
     opacity: 1;
   }
-}
-
-.Link {
-  color: color(gray, 4);
-  font-size: rem(12);
-  font-weight: 400;
-  opacity: 0;
-  transition: 0.15s;
 }
 
 .Bar {

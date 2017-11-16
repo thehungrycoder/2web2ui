@@ -16,6 +16,8 @@ class CopyField extends Component {
     copied: false
   }
 
+  timeout = null
+
   handleFieldFocus = (e) => {
     e.target.select();
   }
@@ -23,14 +25,14 @@ class CopyField extends Component {
   handleCopy = () => {
     copy(this.props.value);
     this.setState({ copied: true });
-    window.setTimeout(() => {
-      this.setState({ copied: false });
-    }, 3000);
+    clearTimeout(this.timeout);
+    this.timeout = setTimeout(() => this.setState({ copied: false }), 3000);
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.value !== this.props.object) {
       this.setState({ copied: false });
+      clearTimeout(this.timeout);
     }
   }
 
@@ -40,9 +42,9 @@ class CopyField extends Component {
     let connectRight = null;
 
     if (!hideCopy) {
-      const button = <Button onClick={() => this.handleCopy()}><Icon name='Copy' size={14}/> Copy</Button>;
+      const button = <Button onClick={this.handleCopy}><Icon name='Copy' size={14}/> Copy</Button>;
       connectRight = copied
-        ? <Tooltip content='Copied to clipboard!' style={{ width: '40px' }}>{ button }</Tooltip>
+        ? <Tooltip content='Copied to clipboard!'>{ button }</Tooltip>
         : button;
     }
 

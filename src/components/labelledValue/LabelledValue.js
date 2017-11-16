@@ -3,19 +3,31 @@ import PropTypes from 'prop-types';
 
 import styles from './LabelledValue.module.scss';
 
-const LabelledValue = ({ label, value }) => (
-  <div className={styles.LabelledValue}>
-    <div className={styles.LabelContainer}>
-      <small className={styles.Label}>{ label }</small>
+const LabelledValue = ({ label, value, children }) => {
+  const childrenMarkup = value
+    ? <h6>{ value }</h6>
+    : children;
+
+  const labelMarkup = label
+    ? <div className={styles.LabelContainer}><small className={styles.Label}>{ label }</small></div>
+    : null;
+
+  return (
+    <div className={styles.LabelledValue}>
+      { labelMarkup }
+      <div className={styles.Content}>{ childrenMarkup }</div>
     </div>
-    <div className={styles.Content}><h6>{ value }</h6></div>
-  </div>
-);
+  );
+};
 
 LabelledValue.propTypes = {
-  label: PropTypes.string.isRequired,
-  content: PropTypes.oneOfType([
+  label: PropTypes.oneOfType([
     PropTypes.string,
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ]),
+  value: PropTypes.string,
+  children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
   ])

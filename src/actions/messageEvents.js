@@ -29,3 +29,13 @@ export function getMessageHistory({ messageId, params = {}}) {
     });
   };
 }
+
+export function getDocumentation() {
+  return sparkpostApiRequest({
+    type: 'GET_MESSAGE_EVENTS_DOCUMENTATION',
+    meta: {
+      method: 'GET',
+      url: '/message-events/events/documentation'
+    }
+  });
+}

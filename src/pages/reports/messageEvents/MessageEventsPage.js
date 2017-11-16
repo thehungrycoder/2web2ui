@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import TimeAgo from 'react-timeago';
+import { capitalizeFirstLetter } from 'src/helpers/string';
 import { Page, Banner, Button } from '@sparkpost/matchbox';
 import { Loading, TableCollection, ApiErrorBanner } from 'src/components';
+import DisplayDate from './components/DisplayDate';
 import { getMessageEvents } from 'src/actions/messageEvents';
 import { selectMessageEvents } from 'src/selectors/messageEvents';
 import Empty from '../components/Empty';
@@ -25,16 +26,16 @@ export class MessageEventsPage extends Component {
   handleDetailClick = ({ message_id, event_id }) => {
     const { history } = this.props;
     history.push({
-      pathname: `/reports/message-events/${message_id}`,
-      state: { selectedId: event_id } // wonky
+      pathname: `/reports/message-events/details/${message_id}`,
+      state: { selectedId: event_id }
     });
   }
 
   getRowData = (rowData) => {
-    const { timestamp, type, friendly_from, rcpt_to, message_id, event_id } = rowData;
+    const { timestamp, formattedDate, type, friendly_from, rcpt_to, message_id, event_id } = rowData;
     return [
-      <TimeAgo date={timestamp}/>,
-      type,
+      <DisplayDate timestamp={timestamp} formattedDate={formattedDate} />,
+      capitalizeFirstLetter(type),
       rcpt_to,
       friendly_from,
       <Button onClick={() => this.handleDetailClick({ message_id, event_id })} size='small'>View Details</Button>
