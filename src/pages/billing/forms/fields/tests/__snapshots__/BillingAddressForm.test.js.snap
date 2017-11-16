@@ -133,6 +133,7 @@ exports[`Billing Address Form: should show states 1`] = `
             },
           ]
         }
+        placeholder="Select a State"
         validate={[Function]}
       />
     </Grid.Column>

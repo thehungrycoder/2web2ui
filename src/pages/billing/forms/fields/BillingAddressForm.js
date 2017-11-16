@@ -51,6 +51,7 @@ export class BillingAddressForm extends Component {
           <Field
             label={countryValue === 'US' ? 'State' : 'Province'}
             name='billingAddress.state'
+            placeholder={`Select a ${countryValue === 'US' ? 'State' : 'Province'}`}
             component={SelectWrapper}
             options={_.find(countries, { value: countryValue }).states}
             validate={required}
