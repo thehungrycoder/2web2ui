@@ -40,7 +40,6 @@ export class NameForm extends Component {
 }
 
 const mapStateToProps = ({ form, currentUser }) => ({
-  theForm: form.profileName, // breaks if you use a prop name 'form'
   initialValues: {
     firstName: currentUser.first_name,
     lastName: currentUser.last_name
