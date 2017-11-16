@@ -58,7 +58,7 @@ export class PaymentForm extends Component {
       return undefined;
     }
 
-    return `Supported credit cards are ${allowedCards.join(', ')}`;
+    return `We only accept ${allowedCards.join(', ')}`;
   }
 
   render() {

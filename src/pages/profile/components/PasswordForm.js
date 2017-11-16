@@ -9,6 +9,10 @@ import { required, minLength } from 'src/helpers/validation';
 import { TextFieldWrapper } from 'src/components';
 
 export class PasswordForm extends Component {
+  validatePasswords(value, allValues, props) {
+    return value === props.currentPassword ? 'New Password is same as Current Password' : undefined;
+  }
+
   render() {
     const { pristine, submitting, handleSubmit, currentPassword, newPassword } = this.props;
 
@@ -29,7 +33,7 @@ export class PasswordForm extends Component {
           id='newPassword'
           label='New Password'
           component={TextFieldWrapper}
-          validate={[required, minLength(8)]}
+          validate={[required, minLength(8), this.validatePasswords]}
         />
 
         <Button submit disabled={submitting || pristine || (currentPassword === newPassword)}>
