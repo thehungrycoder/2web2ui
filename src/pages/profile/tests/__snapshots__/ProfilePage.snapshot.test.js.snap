@@ -39,27 +39,17 @@ exports[`renders correctly 1`] = `
     sectioned={true}
     title="Edit Profile"
   >
-    <Connect(ReduxForm) />
+    <Connect(ReduxForm)
+      onSubmit={[Function]}
+    />
   </Panel>
   <Panel
     sectioned={true}
     title="Update Password"
   >
-    <TextField
-      id="currentPassword"
-      label="Current Password"
-      type="text"
+    <Connect(ReduxForm)
+      onSubmit={[Function]}
     />
-    <TextField
-      id="newPassword"
-      label="New Password"
-      type="text"
-    />
-    <Button
-      size="default"
-    >
-      Update Password
-    </Button>
   </Panel>
 </Page>
 `;

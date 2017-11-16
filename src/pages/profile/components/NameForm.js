@@ -1,19 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import { TextField, Button } from '@sparkpost/matchbox';
+import { Button } from '@sparkpost/matchbox';
+import { required } from 'src/helpers/validation';
 
-// This is wierd
-// Needed to pull out meta
-// Probably need to do a transform on `error`?
-const TextFieldWrapper = ({ input, meta: { error }, ...rest }) => (
-  <TextField {...rest} {...input} error={error} />
-);
+import { TextFieldWrapper } from 'src/components';
 
 export class NameForm extends Component {
   render() {
+    const { pristine, submitting, handleSubmit } = this.props;
+
     return (
-      <form>
+      <form onSubmit={handleSubmit}>
         <Field
           // for redux-form
           name='firstName'
@@ -22,6 +20,7 @@ export class NameForm extends Component {
           // for the matchbox component
           id='firstName'
           label='First Name'
+          validate={required}
         />
 
         <Field
@@ -29,16 +28,18 @@ export class NameForm extends Component {
           id='lastName'
           label='Last Name'
           component={TextFieldWrapper}
+          validate={required}
         />
 
-        <Button submit>Update Profile</Button>
+        <Button submit disabled={submitting || pristine}>
+          {submitting ? 'Updating Profile' : 'Update Profile'}
+        </Button>
       </form>
     );
   }
 }
 
 const mapStateToProps = ({ form, currentUser }) => ({
-  theForm: form.profileName, // breaks if you use a prop name 'form'
   initialValues: {
     firstName: currentUser.first_name,
     lastName: currentUser.last_name

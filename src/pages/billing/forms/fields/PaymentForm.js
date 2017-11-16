@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 import ReactDOM from 'react-dom';
 import { Field, change } from 'redux-form';
 import { Grid } from '@sparkpost/matchbox';
+import _ from 'lodash';
+import config from 'src/config';
+
 import { TextFieldWrapper } from 'src/components';
 import { required } from 'src/helpers/validation';
 import Payment from 'payment';
@@ -47,6 +50,17 @@ export class PaymentForm extends Component {
     change(formName, 'card.type', value);
   }
 
+  validateType(number) {
+    const cardType = Payment.fns.cardType(number);
+    const allowedCards = _.map(config.cardTypes, 'apiFormat');
+
+    if (_.includes(allowedCards, cardType)) {
+      return undefined;
+    }
+
+    return `We only accept ${allowedCards.join(', ')}`;
+  }
+
   render() {
     const { disabled } = this.props;
     return (
@@ -58,7 +72,7 @@ export class PaymentForm extends Component {
           ref={(input) => this.cc = input}
           onChange={this.handleType}
           component={TextFieldWrapper}
-          validate={required}
+          validate={[required, this.validateType]}
           disabled={disabled}
         />
         <Field
