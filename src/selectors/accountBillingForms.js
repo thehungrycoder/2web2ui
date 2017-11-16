@@ -19,8 +19,7 @@ export function changePlanInitialValues(state) {
     planpicker: initialPlan,
     billingAddress: {
       firstName: state.currentUser.first_name,
-      lastName: state.currentUser.last_name,
-      country: ''
+      lastName: state.currentUser.last_name
     }
   };
 }
@@ -32,8 +31,7 @@ export function updatePaymentInitialValues(state) {
   return {
     billingAddress: {
       firstName: state.currentUser.first_name,
-      lastName: state.currentUser.last_name,
-      country: ''
+      lastName: state.currentUser.last_name
     }
   };
 }

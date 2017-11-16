@@ -3,7 +3,6 @@
 exports[`Billing Initial Values should return change plan values: with a billing id 1`] = `
 Object {
   "billingAddress": Object {
-    "country": "",
     "firstName": "ann",
     "lastName": "perkins",
   },
@@ -18,7 +17,6 @@ Object {
 exports[`Billing Initial Values should return change plan values: without billing id 1`] = `
 Object {
   "billingAddress": Object {
-    "country": "",
     "firstName": "ann",
     "lastName": "perkins",
   },
@@ -46,7 +44,6 @@ Object {
 exports[`Billing Initial Values should return update payment values 1`] = `
 Object {
   "billingAddress": Object {
-    "country": "",
     "firstName": "ann",
     "lastName": "perkins",
   },

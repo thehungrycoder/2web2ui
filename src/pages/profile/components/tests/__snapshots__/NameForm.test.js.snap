@@ -7,12 +7,14 @@ exports[`Component: NameForm should render correctly 1`] = `
     id="firstName"
     label="First Name"
     name="firstName"
+    validate={[Function]}
   />
   <Field
     component={[Function]}
     id="lastName"
     label="Last Name"
     name="lastName"
+    validate={[Function]}
   />
   <Button
     size="default"
