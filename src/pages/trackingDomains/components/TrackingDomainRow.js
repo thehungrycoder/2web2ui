@@ -6,7 +6,7 @@ import { DeleteModal, ConfirmationModal } from 'src/components/modals';
 import styles from './TrackingDomainRow.module.scss';
 
 export function IsDefaultTag({ assignedToSubaccount }) {
-  return <Tag orange className={styles.Tag}>{assignedToSubaccount && 'Subaccount '}Default</Tag>
+  return <Tag orange className={styles.Tag}>{assignedToSubaccount && 'Subaccount '}Default</Tag>;
 }
 export function SubaccountTag({ id }) {
   return <Tag><Icon name='Link' /> Subaccount {id}</Tag>;

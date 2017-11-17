@@ -1,3 +1,4 @@
+/* eslint max-lines: ["error", 250] */
 import React from 'react';
 import { shallow } from 'enzyme';
 import { TrackingDomainRow, IsDefaultTag, SubaccountTag } from '../TrackingDomainRow';
@@ -75,7 +76,7 @@ describe('Component: TrackingDomainRow', () => {
 
     it('should render the IsDefaultTag when assigned to a subaccount', () => {
       expect(shallow(<IsDefaultTag assignedToSubaccount />)).toMatchSnapshot();
-    })
+    });
 
     it('should render the SubaccountTag', () => {
       expect(shallow(<SubaccountTag id={213} />)).toMatchSnapshot();

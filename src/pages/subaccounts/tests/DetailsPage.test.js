@@ -11,7 +11,7 @@ const listApiKeys = jest.fn();
 const paths = {
   edit: '/account/subaccounts/123',
   keys: '/account/subaccounts/123/api-keys'
-}
+};
 
 const tabs = [
   {
@@ -24,7 +24,7 @@ const tabs = [
     Component: {},
     to: '/account/subaccounts/123/api-keys'
   }
-]
+];
 
 const props = {
   id: '123',

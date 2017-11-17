@@ -5,7 +5,8 @@ import ConfirmationModal from '../ConfirmationModal';
 
 describe('Component: ConfirmationModal', () => {
 
-  let onCancelMock, onConfirmMock;
+  let onCancelMock;
+  let onConfirmMock;
 
   beforeEach(() => {
     onCancelMock = jest.fn();

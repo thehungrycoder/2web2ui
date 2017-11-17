@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { Page, Panel, Table } from '@sparkpost/matchbox';
+import { Page, Panel } from '@sparkpost/matchbox';
 
 import { updateUser } from 'src/actions/users';
 import { confirmPassword } from 'src/actions/auth';

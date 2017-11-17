@@ -7,7 +7,7 @@ jest.mock('copy-to-clipboard');
 describe('CopyField Component', () => {
   window.setTimeout = jest.fn();
   window.clearTimeout = jest.fn();
-  
+
   it('should render - no props', () => {
     const wrapper = shallow(<CopyField />);
     expect(wrapper).toMatchSnapshot();

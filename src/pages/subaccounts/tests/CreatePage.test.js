@@ -38,20 +38,20 @@ describe('onSubmit', () => {
   test('success', async () => {
     await wrapper.instance().onSubmit(values);
     expect(createSubaccount).toHaveBeenCalledWith(values);
-    expect(showAlert).toHaveBeenCalledWith({ type: 'success', message: `Subaccount 123 created` });
-    expect(push).toHaveBeenCalledWith(`/account/subaccounts/123`)
+    expect(showAlert).toHaveBeenCalledWith({ type: 'success', message: 'Subaccount 123 created' });
+    expect(push).toHaveBeenCalledWith('/account/subaccounts/123');
   });
 
   test('fail', async () => {
     const error = { message: 'noo0o0o0' };
-    createSubaccount.mockReturnValue(Promise.reject(error))
+    createSubaccount.mockReturnValue(Promise.reject(error));
     await wrapper.instance().onSubmit(values);
     expect(createSubaccount).toHaveBeenCalledWith(values);
     expect(showAlert).toHaveBeenCalledWith({
       type: 'error',
       message: 'Could not create Subaccount',
       details: error.message
-     });
+    });
     expect(push).not.toHaveBeenCalled();
   });
 
