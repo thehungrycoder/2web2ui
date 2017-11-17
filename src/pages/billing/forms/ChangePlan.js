@@ -105,7 +105,7 @@ export class ChangePlan extends Component {
     const disableSubmit = submitting || (account.subscription.self_serve && (pristine || currentPlan.code === selectedPlan.code));
 
     // Strip free plans for manually billed accounts looking to convert
-    const options = !account.subscription.self_serve
+    const availablePlans = !account.subscription.self_serve
       ? plans.filter((plan) => !plan.isFree)
       : plans;
 
@@ -114,7 +114,9 @@ export class ChangePlan extends Component {
         <Grid>
           <Grid.Column>
             <Panel title='Select A Plan'>
-              <PlanPicker disabled={this.props.submitting} plans={options} />
+              { availablePlans.length &&
+                <PlanPicker disabled={this.props.submitting} plans={availablePlans} />
+              }
             </Panel>
             { this.renderCCSection() }
           </Grid.Column>

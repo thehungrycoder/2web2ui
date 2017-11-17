@@ -1,10 +1,34 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { Page, Panel, Table, TextField, Button } from '@sparkpost/matchbox';
-import NameForm from './NameForm';
+import { Page, Panel, Table } from '@sparkpost/matchbox';
+
+import { updateUser } from 'src/actions/users';
+import { confirmPassword } from 'src/actions/auth';
+
+import NameForm from './components/NameForm';
+import PasswordForm from './components/PasswordForm';
+import { showAlert } from 'src/actions/globalAlert';
 
 export class ProfilePage extends Component {
+  updateProfile = (values) => {
+    const { username } = this.props.currentUser;
+    return this.props.updateUser(username, values)
+      .catch(() => {
+        showAlert({ type: 'error', message: 'Unable to update profile' });
+      });
+  }
+
+  updatePassword = (values) => {
+    const { username } = this.props.currentUser;
+    const { showAlert } = this.props;
+    const { currentPassword, newPassword } = values;
+
+    return this.props.confirmPassword(username, currentPassword)
+      .then(() => this.props.updateUser(username, { password: newPassword }))
+      .catch((err) => showAlert({ type: 'error', message: 'Unable to update password' }));
+  }
+
   render() {
     const {
       username,
@@ -34,21 +58,11 @@ export class ProfilePage extends Component {
         </Panel>
 
         <Panel sectioned title='Edit Profile'>
-          <NameForm />
+          <NameForm onSubmit={this.updateProfile} />
         </Panel>
 
         <Panel sectioned title='Update Password'>
-          <TextField
-            id='currentPassword'
-            label='Current Password'
-          />
-
-          <TextField
-            id='newPassword'
-            label='New Password'
-          />
-
-          <Button>Update Password</Button>
+          <PasswordForm onSubmit={this.updatePassword} />
         </Panel>
       </Page>
     );
@@ -60,4 +74,4 @@ const mapStateToProps = ({ form, account, currentUser }) => ({
   currentUser
 });
 
-export default connect(mapStateToProps)(ProfilePage);
+export default connect(mapStateToProps, { updateUser, confirmPassword, showAlert })(ProfilePage);
