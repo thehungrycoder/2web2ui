@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import { capitalizeFirstLetter } from 'src/helpers/string';
+import { snakeToFriendly } from 'src/helpers/string';
 import { Page, Banner, Button } from '@sparkpost/matchbox';
 import { Loading, TableCollection, ApiErrorBanner } from 'src/components';
 import DisplayDate from './components/DisplayDate';
@@ -27,7 +27,7 @@ export class MessageEventsPage extends Component {
     const { history } = this.props;
     history.push({
       pathname: `/reports/message-events/details/${message_id}`,
-      state: { selectedId: event_id }
+      state: { selectedEventId: event_id }
     });
   }
 
@@ -35,7 +35,7 @@ export class MessageEventsPage extends Component {
     const { timestamp, formattedDate, type, friendly_from, rcpt_to, message_id, event_id } = rowData;
     return [
       <DisplayDate timestamp={timestamp} formattedDate={formattedDate} />,
-      capitalizeFirstLetter(type),
+      snakeToFriendly(type),
       rcpt_to,
       friendly_from,
       <Button onClick={() => this.handleDetailClick({ message_id, event_id })} size='small'>View Details</Button>

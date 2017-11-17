@@ -1,6 +1,6 @@
 import React from 'react';
 import cx from 'classnames';
-import { capitalizeFirstLetter } from 'src/helpers/string';
+import { snakeToFriendly } from 'src/helpers/string';
 
 import { Table } from '@sparkpost/matchbox';
 import DisplayDate from './DisplayDate';
@@ -27,7 +27,7 @@ const Row = ({ onClick, selected, type, timestamp, formattedDate }) => (
     <Table.Cell>
       <DisplayDate timestamp={timestamp} formattedDate={formattedDate} />
     </Table.Cell>
-    <Table.Cell>{ capitalizeFirstLetter(type) }</Table.Cell>
+    <Table.Cell>{ snakeToFriendly(type) }</Table.Cell>
   </Table.Row>
 );
 

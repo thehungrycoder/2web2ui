@@ -1,5 +1,7 @@
-function capitalizeFirstLetter(string) {
-  return string && string.charAt(0).toUpperCase() + string.slice(1);
+function snakeToFriendly(string) {
+  return string
+    .charAt(0).toUpperCase() + string.slice(1)
+    .replace(/(\_\w)/g, (matches) => ` ${matches[1].toUpperCase()}`);
 }
 
 function slugify(value) {
@@ -15,7 +17,7 @@ function snakeToCamel(string) {
 }
 
 export {
-  capitalizeFirstLetter,
+  snakeToFriendly,
   slugify,
   snakeToCamel
 };

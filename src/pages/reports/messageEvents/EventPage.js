@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 
 import { getMessageHistory, getDocumentation } from 'src/actions/messageEvents';
+import { selectMessageHistory, selectInitialEventId } from 'src/selectors/messageEvents';
 
 import { Page, Grid } from '@sparkpost/matchbox';
 import { Loading } from 'src/components';
@@ -23,7 +24,7 @@ export class EventPage extends Component {
   }
 
   state = {
-    selectedId: null
+    selectedEventId: null
   }
 
   componentDidMount() {
@@ -36,34 +37,28 @@ export class EventPage extends Component {
     getMessageHistory({ messageId });
   }
 
-  componentWillReceiveProps(nextProps) {
-    const { location, history } = this.props;
-    if (nextProps.messageHistory !== this.props.messageHistory) {
+  componentWillReceiveProps({ selectedEventId }) {
+    if (!this.state.selectedEventId && selectedEventId) {
+      // Saves selected event from location state, defaults to first event in message history
+      this.setState({ selectedEventId });
 
-      // Saves selected event from location state and resets because location state for some reason persists bt refreshes
-      // Defaults to first event in message history
-      const selectedId = _.get(location, 'state.selectedId') || nextProps.messageHistory[0].event_id;
-      this.setState({ selectedId });
-      history.replace({ ...location, state: {}});
+      // Resets location state
+      this.props.history.replace({ ...this.props.location, state: {}});
     }
   }
 
-  handleEventClick = (eventId) => {
-    this.setState({ selectedId: eventId });
+  handleEventClick = (selectedEventId) => {
+    this.setState({ selectedEventId });
   }
 
   render() {
     const { loading, messageId, messageHistory, documentation } = this.props;
-    const { selectedId } = this.state;
-    const selectedEvent = _.find(messageHistory, (event) => event.event_id === selectedId);
+    const { selectedEventId } = this.state;
+    const selectedEvent = _.find(messageHistory, (event) => event.event_id === selectedEventId);
 
-    if (loading) {
-      return <Loading />;
-    }
-
-    // TODO need to add first & last props to Grid.Column in MB
-    return (
-      <Page title={`Message: ${messageId}`} breadcrumbAction={breadcrumbAction}>
+    const pageContent = loading
+      ? <Loading />
+      : (
         <Grid>
           <Grid.Column xs={12} md={6}>
             <MessageDetails details={selectedEvent} documentation={documentation}/>
@@ -71,22 +66,23 @@ export class EventPage extends Component {
           <Grid.Column xs={12} md={6}>
             <HistoryTable
               messageHistory={messageHistory}
-              selectedId={selectedId}
+              selectedId={selectedEventId}
               handleEventClick={this.handleEventClick}
               handleRefresh={this.handleRefresh}/>
           </Grid.Column>
         </Grid>
-      </Page>
-    );
+      );
+
+    return <Page title={`Message: ${messageId}`} breadcrumbAction={breadcrumbAction}>{pageContent}</Page>;
   }
 }
 
 const mapStateToProps = (state, props) => ({
   loading: state.messageEvents.pending || state.messageEvents.documentationPending,
-  messageHistory: state.messageEvents.history[props.match.params.messageId],
+  messageHistory: selectMessageHistory(state, props),
   messageId: props.match.params.messageId,
-  eventId: props.match.params.eventId,
-  documentation: state.messageEvents.documentation
+  documentation: state.messageEvents.documentation,
+  selectedEventId: selectInitialEventId(state, props)
 });
 
 export default withRouter(connect(mapStateToProps, { getMessageHistory, getDocumentation })(EventPage));

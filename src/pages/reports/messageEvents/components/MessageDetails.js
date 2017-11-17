@@ -14,9 +14,9 @@ class MessageDetails extends Component {
     const { details, documentation } = this.props;
     const type = details.type;
 
-    return _.keys(details).map((key, i) => {
+    return _.keys(_.omit(details, 'formattedDate')).map((key, i) => {
       const value = details[key];
-      const helpText = documentation[type][key];
+      const helpText = _.get(documentation, [type, key]);
       const label = helpText ? <Tooltip dark content={helpText}>{key}</Tooltip> : key;
 
       if (typeof value === 'object') {
@@ -32,16 +32,16 @@ class MessageDetails extends Component {
   }
 
   render() {
-    const { details } = this.props;
+    const detailsToRender = _.omit(this.props.details, 'formattedDate');
 
     return (
-      <Panel>
+      <Panel title='Event Details'>
         <Panel.Section>
-          { this.renderDetails(details) }
+          { this.renderDetails(detailsToRender) }
         </Panel.Section>
         <Panel.Section>
           <LabelledValue label='Raw Json'>
-            <CopyField value={JSON.stringify(details)}/>
+            <CopyField value={JSON.stringify(detailsToRender)}/>
           </LabelledValue>
         </Panel.Section>
       </Panel>

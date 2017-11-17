@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MessageDetails Component should render with all props 1`] = `
+<Panel
+  title="Event Details"
+>
+  <Panel.Section>
+    <LabelledValue
+      key="0"
+      label={
+        <WithPositioning(Tooltip)
+          content="description for key1"
+          dark={true}
+        >
+          key1
+        </WithPositioning(Tooltip)>
+      }
+      value="val1"
+    />
+    <LabelledValue
+      key="1"
+      label="key2"
+    >
+      <CopyField
+        hideCopy={true}
+        value="[\\"an\\",\\"arrray\\"]"
+      />
+    </LabelledValue>
+    <LabelledValue
+      key="2"
+      label="type"
+      value="bounce"
+    />
+  </Panel.Section>
+  <Panel.Section>
+    <LabelledValue
+      label="Raw Json"
+    >
+      <CopyField
+        hideCopy={false}
+        value="{\\"key1\\":\\"val1\\",\\"key2\\":[\\"an\\",\\"arrray\\"],\\"type\\":\\"bounce\\"}"
+      />
+    </LabelledValue>
+  </Panel.Section>
+</Panel>
+`;
+
+exports[`MessageDetails Component should render with no props 1`] = `
+<Panel
+  title="Event Details"
+>
+  <Panel.Section />
+  <Panel.Section>
+    <LabelledValue
+      label="Raw Json"
+    >
+      <CopyField
+        hideCopy={false}
+        value="{}"
+      />
+    </LabelledValue>
+  </Panel.Section>
+</Panel>
+`;

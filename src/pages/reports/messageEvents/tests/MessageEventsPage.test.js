@@ -21,7 +21,10 @@ describe('Page: Message Events tests', () => {
         friendly_from: 'mean@friendly',
         rcpt_to: 'tom.haverford@pawnee.state.in.us'
       }
-    ]
+    ],
+    history: {
+      push: jest.fn()
+    }
   };
 
   let wrapper;
@@ -35,7 +38,7 @@ describe('Page: Message Events tests', () => {
   });
 
   it('should render error when action fails', () => {
-    wrapper.setProps({ error: { message: 'You done f\'ed up now' } });
+    wrapper.setProps({ error: { message: 'You done f\'ed up now' }});
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -49,4 +52,11 @@ describe('Page: Message Events tests', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('should handle view details click', () => {
+    wrapper.instance().handleDetailClick({ message_id: 'message', event_id: 'event' });
+    expect(props.history.push).toHaveBeenCalledWith({
+      pathname: '/reports/message-events/details/message',
+      state: { selectedEventId: 'event' }
+    });
+  });
 });

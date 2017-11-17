@@ -1,0 +1,95 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Page: Event tests should handle location state 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "All Message Events",
+      "to": "/reports/message-events",
+    }
+  }
+  empty={Object {}}
+  title="Message: id"
+>
+  <Grid>
+    <Grid.Column
+      md={6}
+      xs={12}
+    >
+      <MessageDetails
+        details={
+          Object {
+            "event_id": "1",
+          }
+        }
+      />
+    </Grid.Column>
+    <Grid.Column
+      md={6}
+      xs={12}
+    >
+      <HistoryTable
+        handleEventClick={[Function]}
+        handleRefresh={[Function]}
+        messageHistory={
+          Array [
+            Object {
+              "event_id": "1",
+            },
+            Object {
+              "event_id": "2",
+            },
+          ]
+        }
+        selectedId="1"
+      />
+    </Grid.Column>
+  </Grid>
+</Page>
+`;
+
+exports[`Page: Event tests should render page correctly 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "All Message Events",
+      "to": "/reports/message-events",
+    }
+  }
+  empty={Object {}}
+  title="Message: id"
+>
+  <Grid>
+    <Grid.Column
+      md={6}
+      xs={12}
+    >
+      <MessageDetails
+        details={Object {}}
+      />
+    </Grid.Column>
+    <Grid.Column
+      md={6}
+      xs={12}
+    >
+      <HistoryTable
+        handleEventClick={[Function]}
+        handleRefresh={[Function]}
+        messageHistory={
+          Array [
+            Object {
+              "event_id": "1",
+            },
+            Object {
+              "event_id": "2",
+            },
+          ]
+        }
+        selectedId={null}
+      />
+    </Grid.Column>
+  </Grid>
+</Page>
+`;

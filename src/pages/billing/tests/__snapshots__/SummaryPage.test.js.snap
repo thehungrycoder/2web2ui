@@ -190,13 +190,10 @@ exports[`Page: SummaryPage should render billing summary if on paid plan 1`] = `
           ]
         }
       >
-        <SummarySection
+        <LabelledValue
           label="Dedicated IPs"
-        >
-          <h6>
-            0
-          </h6>
-        </SummarySection>
+          value="0"
+        />
       </Panel.Section>
     </Panel>
     <Panel
@@ -227,14 +224,14 @@ exports[`Page: SummaryPage should render billing summary if on paid plan 1`] = `
           ]
         }
       >
-        <SummarySection
+        <LabelledValue
           label="Billing Contact"
         >
           <h6>
              
           </h6>
           <p />
-        </SummarySection>
+        </LabelledValue>
       </Panel.Section>
     </Panel>
     <Component />

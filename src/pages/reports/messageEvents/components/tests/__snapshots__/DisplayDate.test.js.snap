@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DisplayDate Component should render formattedDate 1`] = `"YYYY/MM/DD HH:mm"`;
+
+exports[`DisplayDate Component should render time ago  1`] = `
+<TimeAgo
+  component="time"
+  date="2017-11-17T15:08:00.000+00:00"
+  formatter={[Function]}
+  live={true}
+  maxPeriod={Infinity}
+  minPeriod={0}
+  now={[Function]}
+/>
+`;

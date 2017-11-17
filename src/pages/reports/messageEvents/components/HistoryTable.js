@@ -7,11 +7,14 @@ import { Header, Row, TableWrapper } from './TableElements';
 import _ from 'lodash';
 
 class HistoryTable extends Component {
+  static defaultProps = {
+    messageHistory: []
+  }
+
   createRows = () => {
     const { messageHistory, selectedId, handleEventClick } = this.props;
-    let rows = [];
 
-    rows = messageHistory.map((row) => {
+    return messageHistory.map((row) => {
       const selected = row.event_id === selectedId;
       return {
         ...row,
@@ -19,17 +22,10 @@ class HistoryTable extends Component {
         onClick: !selected ? () => handleEventClick(row.event_id) : null
       };
     });
-
-    return rows;
   }
 
   render() {
     const rows = this.createRows();
-
-    // if (!rows.length) {
-    //   return null;
-    // }
-    // rows[rows.length - 1].type = 'notinjection';
 
     const disclaimer = _.get(rows[rows.length - 1], 'type') !== 'injection'
       ? <small>Previous events may be outside our 10 day storage range.</small>
