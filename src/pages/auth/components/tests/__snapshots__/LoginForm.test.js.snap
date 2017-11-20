@@ -1,0 +1,105 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <Field
+    autoFocus={true}
+    component={[Function]}
+    id="username"
+    label="Email or Username"
+    name="username"
+    placeholder="Leslie Knope"
+    validate={[Function]}
+  />
+  <Field
+    component={[Function]}
+    id="password"
+    label="Password"
+    name="password"
+    placeholder="Your Password"
+    type="password"
+  />
+  <Field
+    component={[Function]}
+    id="rememberMe"
+    label="Keep me logged in"
+    name="rememberMe"
+  />
+  <Button
+    size="default"
+    submit={true}
+  >
+    <span>
+      Log In
+    </span>
+  </Button>
+</form>
+`;
+
+exports[`renders correctly when logging in 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <Field
+    autoFocus={true}
+    component={[Function]}
+    id="username"
+    label="Email or Username"
+    name="username"
+    placeholder="Leslie Knope"
+    validate={[Function]}
+  />
+  <Field
+    component={[Function]}
+    id="password"
+    label="Password"
+    name="password"
+    placeholder="Your Password"
+    type="password"
+  />
+  <Field
+    component={[Function]}
+    id="rememberMe"
+    label="Keep me logged in"
+    name="rememberMe"
+  />
+  <Button
+    disabled={true}
+    size="default"
+    submit={true}
+  >
+    <span>
+      <i
+        className="fa fa-spinner fa-spin"
+      />
+       Logging In
+    </span>
+  </Button>
+</form>
+`;
+
+exports[`renders correctly when ssoEnabled is true 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <Field
+    autoFocus={true}
+    component={[Function]}
+    id="username"
+    label="Email or Username"
+    name="username"
+    placeholder="Leslie Knope"
+    validate={[Function]}
+  />
+  <Button
+    size="default"
+    submit={true}
+  >
+    <span>
+      Log In
+    </span>
+  </Button>
+</form>
+`;
