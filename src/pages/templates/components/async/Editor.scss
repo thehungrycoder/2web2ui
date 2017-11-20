@@ -9,19 +9,35 @@
 
   // Error markers
   .ace_gutter-cell {
-    &.ace_info, &.ace_error {
+    &.ace_info {
       background-image: none;
+    }
+
+    &.ace_error {
+      // Error icon
+      background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTM4IDc5LjE1OTgyNCwgMjAxNi8wOS8xNC0wMTowOTowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6ODY1RDU4RUZCRDk5MTFFNzk0RENDQ0Q2NUNDQzMwNjQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6ODY1RDU4RjBCRDk5MTFFNzk0RENDQ0Q2NUNDQzMwNjQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4NjVENThFREJEOTkxMUU3OTREQ0NDRDY1Q0NDMzA2NCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4NjVENThFRUJEOTkxMUU3OTREQ0NDRDY1Q0NDMzA2NCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PiBsQnoAAAIeSURBVHjapFPNaxNREJ/39mW/TJM21g8qRJRatJQIFkRRoqGCzUWqHhT6V9ijf4PYf6IggnrwUg/FaqXQg15KUFG8CF0VtLVNu8l+vH3ObNbdRHPrwG8ZZub9dmbe7zGlFOzHBH12ni8CMw1wX6+C/3UDGGM1ufn7KretCuUjt7WulQZf4c+W9fIxsK9cAtX2oHCj3iEAzoDpOoCmjfifvzxUnn9bBYGAKOr8hvMZtuHcZ4b+VD9RnsNaR/l+1oFy29D68GnEfbO2GDV3K0wIQNBsCQNwJBOYu4M1Z/hAvq4fLzudBJrc3GK7L17Oh99/VFguBzgDhQPEbIKAYpSjGqqlMymB9/5jVf78dYsZRvd+NMS7BNrfINVQLZ1JCcKt7WvKD0SfJZsJegznF7K5V0t3AK32RNL2v+b1vTusVa47kRH0N4mLm0xuQXaP8Z8OwDIboNRMb59K8ELhQayDZlP0dIjiY7bVSHcghopLTM+FPeelBHN87CaB/CwBpJlQDB9cSgmM8dMr2nDpmfKykVEH0l17O0ogP1ugB+LwoSf62OhqSqCVhlT++tQ9cfTIOiowbjEej/OFGORjjHJUk5+emtOKAyolYLYJ1vlzjn35Qh1V9hgPhSoMGUqax0CfYtpg8ZFdvThtTp79xiyra4mRgljbUjr6qZN3UXM1ub1T5Qfs+KqiPbehFQoroItlkFGnNnnFbL/P+Y8AAwAkAOjijP+gSQAAAABJRU5ErkJggg==);
+      background-size: 15px 15px;
+      background-position: 3px center;
     }
   }
 
   .ace_tooltip {
-    display: none !important;
+    // display: none !important;
+    padding: spacing(small) spacing();
+    border-radius: border-radius(large);
+    box-shadow: shadow(deep);
+
+    font-family: font-family();
+    font-size: rem(13);
+    color: color(gray, 10);
+    background: color(gray, 1);
+    border: none;
   }
 
-  .ace_gutter-cell {
-    padding-right: 19px;
-    padding-left: 6px;
-  }
+  // .ace_gutter-cell {
+  //   padding-right: 19px;
+  //   padding-left: 6px;
+  // }
 
   .ace_fold-widget {
     opacity: 0.5;

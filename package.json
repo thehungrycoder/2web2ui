@@ -16,6 +16,7 @@
     "history": "^4.6.1",
     "jest-in-case": "^1.0.2",
     "js-cookie": "^2.1.4",
+    "localforage": "^1.5.3",
     "moment": "2.18.1",
     "payment": "^2.3.0",
     "query-string": "^5.0.0",
@@ -194,7 +195,10 @@
           }
         }
       ],
-      "lodash/chaining": ["error", "never"]
+      "lodash/chaining": [
+        "error",
+        "never"
+      ]
     },
     "extends": [
       "react-app",

@@ -32,3 +32,36 @@ Object {
 `;
 
 exports[`Templates selectors getClonedTemplate should not clone template if :id does not exist 1`] = `undefined`;
+
+exports[`Templates selectors selectDefaultTestData should return default test data 1`] = `
+"{
+  \\"substitution_data\\": {},
+  \\"metadata\\": {},
+  \\"options\\": {}
+}"
+`;
+
+exports[`Templates selectors selectTemplateTestData should return default data 1`] = `
+"{
+  \\"substitution_data\\": {},
+  \\"metadata\\": {},
+  \\"options\\": {}
+}"
+`;
+
+exports[`Templates selectors selectTemplateTestData should return test data 1`] = `
+"{
+  \\"test\\": \\"data\\"
+}"
+`;
+
+exports[`Templates selectors selectTemplates should return a list 1`] = `
+Array [
+  Object {
+    "one": "one",
+  },
+  Object {
+    "two": "two",
+  },
+]
+`;
