@@ -85,12 +85,13 @@ export function hideNewApiKey() {
   };
 }
 
-export function listApiKeys() {
+export function listApiKeys(key) {
   return sparkpostApiRequest({
     type: 'LIST_API_KEYS',
     meta: {
       method: 'GET',
-      url: '/api-keys'
+      url: '/api-keys',
+      ...formatKeyForRequest(key)
     }
   });
 }

@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { getGrants, getSubaccountGrants } from 'src/selectors/api-keys';
 
-export function formatKeyForRequest(key, getState) {
+export function formatKeyForRequest(key = {}, getState) {
   const request = { data: {}};
 
   if (key.subaccount) {

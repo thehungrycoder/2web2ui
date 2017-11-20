@@ -72,3 +72,8 @@ export const getSubaccountApiKeys = createSelector(
   [getApiKeys, getSubaccountIdFromProps],
   (apiKeys, id) => _.filter(apiKeys, ['subaccount_id', Number(id)])
 );
+
+export const selectApiKeysForSending = createSelector(
+  [getApiKeys],
+  (apiKeys) => apiKeys.filter((key) => key.grants.includes('smtp/inject') || key.grants.includes('transmissions/modify'))
+);
