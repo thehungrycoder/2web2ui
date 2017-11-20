@@ -1,4 +1,5 @@
 import { sparkpostLogin } from '../helpers/http';
+import { sparkpost as sparkpostRequest } from 'src/helpers/axiosInstances';
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 
 import authCookie from '../helpers/authCookie';
