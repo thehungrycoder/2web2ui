@@ -65,6 +65,9 @@ const config = {
   zuora: {
     baseUrl: 'https://rest.apisandbox.zuora.com/v1',
     timeout: 15000
+  },
+  sso: {
+    enabled: false
   }
 };
 

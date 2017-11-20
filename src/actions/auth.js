@@ -1,4 +1,6 @@
 import { sparkpostLogin } from '../helpers/http';
+import { sparkpost as sparkpostRequest } from 'src/helpers/axiosInstances';
+
 import authCookie from '../helpers/authCookie';
 import { initializeAccessControl } from './accessControl';
 
@@ -78,6 +80,35 @@ export function confirmPassword(username, password) {
         });
         throw err;
       });
+  };
+}
+
+export function ssoCheck(username) {
+  return (dispatch, getState) => {
+    dispatch({ type: 'SSO_CHECK' });
+
+    return sparkpostRequest({
+      method: 'GET',
+      url: `/users/${username}/saml`
+      // url: 'https://d79ace26-eeea-4129-8811-f51a31449321.mock.pstmn.io/api/v1/users/ddd/saml'
+    })
+    .then((payload) => {
+      dispatch({ type: 'SSO_CHECK_SUCCESS', payload: payload.data });
+    })
+    .catch((err) => {
+      let errorDescription = null;
+
+      try {
+        errorDescription = err.response.data.errors[0].message;
+      } catch (e) {
+        errorDescription = err.message;
+      }
+
+      dispatch({
+        type: 'SSO_CHECK_FAIL',
+        payload: { errorDescription }
+      });
+    });
   };
 }
 

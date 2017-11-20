@@ -1,37 +1,32 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-
-import { authenticate } from 'src/actions/auth';
+import { authenticate, ssoCheck } from 'src/actions/auth';
 import { SparkPost } from 'src/components';
-import { Panel, Button, TextField, Checkbox } from '@sparkpost/matchbox';
+import { Panel } from '@sparkpost/matchbox';
 
+import config from 'src/config';
+import LoginForm from './LoginForm';
 import styles from './AuthPage.module.scss';
 
 export class AuthPage extends Component {
-  state = {
-    username: '',
-    password: '',
-    rememberMe: false
-  };
+  redirectToSSO() {
+    window.location.href = `${config.apiBase}/api/v1/users/saml/login`;
+  }
 
-  onChangeUsername = (evt) => {
-    this.setState({ username: evt.target.value });
-  };
+  ssoSignIn(username) {
+    return this.props.ssoCheck(username)
+    .then(() => {
+      const { ssoEnabled } = this.props.auth;
+      if (ssoEnabled) {
+        this.redirectToSSO();
+      }
+    });
+  }
 
-  onChangePassword = (evt) => {
-    this.setState({ password: evt.target.value });
-  };
-
-  onChangeRememberMe = (evt) => {
-    this.setState({ rememberMe: evt.target.checked });
-  };
-
-  onClickSubmit = (evt) => {
-    const { username, password, rememberMe } = this.state;
-    evt.preventDefault();
-    this.props.authenticate(username, password, rememberMe);
-  };
+  regularSignIn(username, password, rememberMe) {
+    return this.props.authenticate(username, password, rememberMe);
+  }
 
   renderLoginError() {
     return (
@@ -51,6 +46,12 @@ export class AuthPage extends Component {
       : <span>Log In</span>;
   }
 
+  onClickSubmit = (values) => {
+    const { username, password, rememberMe } = values;
+    const { ssoEnabled } = this.props.auth;
+    ssoEnabled ? this.ssoSignIn(username) : this.regularSignIn(username, password, rememberMe);
+  };
+
   render() {
     const { errorDescription, loggedIn } = this.props.auth;
 
@@ -67,46 +68,18 @@ export class AuthPage extends Component {
         </div>
 
         <Panel sectioned accent title="Log In">
-          <form>
-            {errorDescription && this.renderLoginError()}
+          { errorDescription && this.renderLoginError()}
 
-            <TextField
-              autoFocus
-              id="username"
-              label="Email"
-              placeholder="Leslie Knope"
-              value={this.state.username}
-              onChange={this.onChangeUsername}
-            />
-
-            <TextField
-              id="password"
-              label="Password"
-              type="password"
-              placeholder="Your Password"
-              value={this.state.password}
-              onChange={this.onChangePassword}
-            />
-
-            <Checkbox
-              id="rememberMe"
-              label="Keep me logged in"
-              checked={this.state.rememberMe}
-              onChange={this.onChangeRememberMe}
-            />
-
-            <Button submit primary onClick={this.onClickSubmit}>
-              {this.renderLoginButtonText()}
-            </Button>
-          </form>
+          <LoginForm onSubmit={this.onClickSubmit} />
         </Panel>
       </div>
     );
   }
 }
 
-function mapStateToProps({ auth }) {
-  return { auth };
-}
+const mapStateToProps = ({ auth }) => ({
+  auth
+});
 
-export default connect(mapStateToProps, { authenticate })(AuthPage);
+export default connect(mapStateToProps, { authenticate, ssoCheck })(AuthPage);
+
