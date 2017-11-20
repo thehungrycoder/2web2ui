@@ -1,4 +1,5 @@
 import { email, emailLocal, domain } from 'src/helpers/validation';
+import _ from 'lodash';
 
 const ID_ALLOWED_CHARS = 'a-z0-9_-';
 
@@ -22,9 +23,22 @@ function emailOrSubstitution(value) {
   return !substitution(value) || !email(value) || (validLocal && validDomain) ? undefined : 'Invalid email or substitution value';
 }
 
-function contentRequired(html, text) {
-  return !html && !text ? 'Template content is required. Please add HTML or Text content.' : undefined;
+function contentRequired(value, allValues) {
+  const html = _.get(allValues, 'content.html');
+  const text = _.get(allValues, 'content.text');
+  return !html && !text ? 'Template HTML or text content is required.' : undefined;
 }
+
+function validJson(value, { testData }) {
+  try {
+    JSON.parse(testData);
+  } catch (e) {
+    return 'Invalid Test Data';
+  }
+
+  return undefined;
+}
+
 
 function verifiedDomain(value) {
   return undefined; // TODO
@@ -36,5 +50,6 @@ export {
   substitution,
   emailOrSubstitution,
   contentRequired,
+  validJson,
   verifiedDomain
 };

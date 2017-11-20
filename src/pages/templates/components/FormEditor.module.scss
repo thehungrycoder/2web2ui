@@ -25,10 +25,7 @@
 .Error {
   position: absolute;
   z-index: 1;
-  top: spacing(large);
+  top: rem(-40);
   right: spacing();
-  font-size: rem(13);
   line-height: rem(15);
-  font-weight: 500;
-  color: color(red);
 }

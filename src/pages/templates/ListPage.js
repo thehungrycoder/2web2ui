@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import { listTemplates } from 'src/actions/templates';
-import { getTemplates } from 'src/selectors/templates';
+import { selectTemplates } from 'src/selectors/templates';
 import { getRowData, columns, filterBoxConfig } from './tableConfig';
 import { TableCollection, ApiErrorBanner, Loading } from 'src/components';
 import { Page } from '@sparkpost/matchbox';
@@ -67,7 +67,7 @@ export class ListPage extends Component {
 }
 
 function mapStateToProps(state) {
-  const templates = getTemplates(state);
+  const templates = selectTemplates(state);
   return {
     count: templates.length,
     templates,

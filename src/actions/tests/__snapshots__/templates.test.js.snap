@@ -1,0 +1,128 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Action Creator: Templates should dispatch a create action 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "data": Object {
+        "form": "data",
+        "id": "id",
+      },
+      "method": "POST",
+      "url": "/templates",
+    },
+    "type": "CREATE_TEMPLATE",
+  },
+]
+`;
+
+exports[`Action Creator: Templates should dispatch a delete action 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "method": "DELETE",
+      "url": "/templates/three",
+    },
+    "type": "DELETE_TEMPLATE",
+  },
+]
+`;
+
+exports[`Action Creator: Templates should dispatch a get draft action 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "method": "GET",
+      "params": Object {
+        "draft": true,
+      },
+      "url": "/templates/one",
+    },
+    "type": "GET_DRAFT_TEMPLATE",
+  },
+]
+`;
+
+exports[`Action Creator: Templates should dispatch a get published action 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "method": "GET",
+      "params": Object {
+        "draft": false,
+      },
+      "url": "/templates/two",
+    },
+    "type": "GET_PUBLISHED_TEMPLATE",
+  },
+]
+`;
+
+exports[`Action Creator: Templates should dispatch a getTestData action 1`] = `
+Array [
+  Object {
+    "payload": Object {
+      "metadata": Object {},
+      "options": Object {},
+      "substitution_data": Object {
+        "test": "test",
+      },
+    },
+    "type": "GET_TEMPLATE_TEST_DATA",
+  },
+]
+`;
+
+exports[`Action Creator: Templates should dispatch a list action 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "method": "GET",
+      "url": "/templates",
+    },
+    "type": "LIST_TEMPLATES",
+  },
+]
+`;
+
+exports[`Action Creator: Templates should dispatch a publish action 1`] = `
+Array [
+  [Function],
+  [Function],
+  Object {
+    "meta": Object {
+      "data": Object {
+        "published": true,
+      },
+      "method": "PUT",
+      "url": "/templates/id",
+    },
+    "type": "PUBLISH_TEMPLATE",
+  },
+]
+`;
+
+exports[`Action Creator: Templates should dispatch a setTestData action 1`] = `
+Array [
+  Object {
+    "type": "SET_TEMPLATE_TEST_DATA",
+  },
+]
+`;
+
+exports[`Action Creator: Templates should dispatch an update action 1`] = `
+Array [
+  [Function],
+  Object {
+    "meta": Object {
+      "data": Object {
+        "form": "data",
+      },
+      "method": "PUT",
+      "params": Object {},
+      "url": "/templates/id",
+    },
+    "type": "UPDATE_TEMPLATE",
+  },
+]
+`;

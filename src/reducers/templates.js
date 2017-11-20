@@ -50,6 +50,9 @@ export default (state = initialState, action) => {
     case 'GET_PUBLISHED_TEMPLATE_FAIL':
       return { ...state, getLoading: false };
 
+    case 'GET_TEMPLATE_TEST_DATA':
+      return { ...state, testData: action.payload };
+
     default:
       return state;
   }

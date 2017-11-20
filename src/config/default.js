@@ -54,6 +54,13 @@ const config = {
     enabled: false,
     defaultMetrics: ['count_targeted', 'count_rendered', 'count_accepted', 'count_bounce']
   },
+  templates: {
+    testData: {
+      substitution_data: {},
+      metadata: {},
+      options: {}
+    }
+  },
   tenant: 'local',
   zuora: {
     baseUrl: 'https://rest.apisandbox.zuora.com/v1',
