@@ -6,7 +6,7 @@ import { SparkPost } from 'src/components';
 import { Panel } from '@sparkpost/matchbox';
 
 import config from 'src/config';
-import LoginForm from './LoginForm';
+import LoginForm from './components/LoginForm';
 import styles from './AuthPage.module.scss';
 
 export class AuthPage extends Component {
