@@ -25,8 +25,7 @@ export default (state = initialState, action) => {
         ...state,
         byId: {
           ...state.byId,
-          [action.payload.id]: { ...state.byId[action.payload.id], draft: action.payload
-          }
+          [action.payload.id]: { ...state.byId[action.payload.id], draft: action.payload }
         },
         getLoading: false
       };

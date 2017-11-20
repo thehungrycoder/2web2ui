@@ -1,9 +1,10 @@
-/* eslint-disable */
 /* eslint max-lines: ["error", 200] */
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
+
+import { allSettled } from 'src/helpers/promise';
 
 // Actions
 import { getDraft, getPublished, update, deleteTemplate, publish, getTestData } from 'src/actions/templates';
@@ -18,7 +19,6 @@ import Editor from './components/Editor'; // async
 import { DeleteModal } from 'src/components';
 import { Loading } from 'src/components';
 import { Page, Grid } from '@sparkpost/matchbox';
-import _ from 'lodash';
 
 const FORM_NAME = 'templateEdit';
 
@@ -27,15 +27,19 @@ export class EditPage extends Component {
     deleteOpen: false
   };
 
-  static defaultProps = {
-    template: {}
-  }
-
   componentDidMount() {
-    const { match, getDraft, getPublished, getTestData } = this.props;
-    // Do nothing if these fail
-    getDraft(match.params.id).catch((err) => err);
-    getPublished(match.params.id).catch((err) => err);
+    const { match, getDraft, getPublished, getTestData, showAlert, history } = this.props;
+
+    allSettled([
+      getDraft(match.params.id),
+      getPublished(match.params.id)
+    ], { onlyRejected: true }).then((errors) => {
+      if (errors.length === 2) {
+        history.push('/templates/'); // Redirect if no draft or published found
+        showAlert({ type: 'error', message: 'Could not find template' });
+      }
+    });
+
     getTestData({ id: match.params.id, mode: 'draft' });
   }
 
@@ -72,15 +76,6 @@ export class EditPage extends Component {
 
   handleDeleteModalToggle = () => {
     this.setState({ deleteOpen: !this.state.deleteOpen });
-  }
-
-  componentDidUpdate(prevProps) {
-    const { template, showAlert, history } = this.props;
-
-    if (_.isEmpty(prevProps.template) &&  _.isEmpty(template.draft) && _.isEmpty(template.published)) {
-      history.push('/templates/'); // Redirect if no draft or published found
-      showAlert({ type: 'error', message: 'Could not find template' });
-    }
   }
 
   getPageProps() {

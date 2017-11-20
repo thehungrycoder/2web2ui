@@ -1,4 +1,3 @@
-/* eslint max-lines: ["error", 200] */
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 import localforage from 'localforage';
 import config from 'src/config';
