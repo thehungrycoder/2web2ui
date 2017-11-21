@@ -7,11 +7,13 @@ class Alert extends Component {
     autoDismiss: PropTypes.bool,
     message: PropTypes.string.isRequired,
     type: PropTypes.oneOf(['default', 'success', 'error', 'danger']),
-    details: PropTypes.string
+    details: PropTypes.string,
+    onDismiss: PropTypes.func.isRequired
   };
 
   static defaultProps = {
-    autoDismiss: true
+    autoDismiss: true,
+    type: 'default'
   }
 
   state = {
@@ -37,7 +39,9 @@ class Alert extends Component {
   }
 
   handleDetails = () => {
-    this.refreshTimeout();
+    if (this.props.autoDismiss) {
+      this.refreshTimeout();
+    }
     this.setState({ showDetails: true });
   }
 

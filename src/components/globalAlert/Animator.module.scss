@@ -6,14 +6,6 @@
   transform: translate(20px, 0);
   opacity: 0;
   transition: 0.2s cubic-bezier(0,0,.5,1.5);
-
-  * {
-    text-align: left;
-  }
-
-  & > * {
-    margin-bottom: spacing();
-  }
 }
 
 .entered {

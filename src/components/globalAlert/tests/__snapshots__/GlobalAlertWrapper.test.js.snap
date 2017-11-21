@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GlobalAlertWrapper should render 1`] = `
+<Portal
+  containerId="alert-portal"
+>
+  <div>
+    <TransitionGroup
+      childFactory={[Function]}
+      component="div"
+    >
+      <Animator
+        key="a message-date"
+      >
+        <div>
+          <Alert
+            autoDismiss={true}
+            date="date"
+            message="a message"
+            onDismiss={[Function]}
+            type="default"
+          />
+        </div>
+      </Animator>
+    </TransitionGroup>
+  </div>
+</Portal>
+`;

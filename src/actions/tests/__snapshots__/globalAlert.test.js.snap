@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`clear alert should dispatch the correct action 1`] = `
+Array [
+  Object {
+    "payload": 0,
+    "type": "CLEAR_GLOBAL_ALERT",
+  },
+]
+`;
+
+exports[`show alert should dispatch the correct action 1`] = `
+Array [
+  Object {
+    "payload": Object {
+      "date": 1511303984050,
+      "message": "a message",
+      "type": "success",
+    },
+    "type": "SHOW_GLOBAL_ALERT",
+  },
+]
+`;
+
+exports[`show alert should dispatch the correct action without type 1`] = `
+Array [
+  Object {
+    "payload": Object {
+      "date": 1511303984050,
+      "message": "a message",
+      "type": "default",
+    },
+    "type": "SHOW_GLOBAL_ALERT",
+  },
+]
+`;

@@ -4,31 +4,24 @@ import Transition from 'react-transition-group/Transition';
 
 import styles from './Animator.module.scss';
 
-class Animator extends Component {
-  render() {
-    const { children, in: inProp } = this.props;
-
-    const transitionFn = (state) => {
+const Animator = ({
+  children,
+  in: inProp
+}) => (
+  <Transition in={inProp} timeout={{ enter: 150, exit: 100 }}>
+    {(state) => {
       const classes = cx(styles.Animator, state && styles[state]);
-      let height = 'auto';
-
-      if (this.node && state === 'exiting') {
-        height = this.node.getBoundingClientRect().height;
-      }
+      const height = this.node && state === 'exiting'
+        ? this.node.getBoundingClientRect().height
+        : 'auto';
 
       return (
         <div className={classes} style={{ height }} ref={(node) => this.node = node}>
           { children }
         </div>
       );
-    };
-
-    return (
-      <Transition in={inProp} timeout={{ enter: 150, exit: 100 }}>
-        {transitionFn}
-      </Transition>
-    );
-  }
-}
+    }}
+  </Transition>
+);
 
 export default Animator;
