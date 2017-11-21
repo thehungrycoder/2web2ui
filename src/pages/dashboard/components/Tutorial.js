@@ -21,6 +21,7 @@ export class Tutorial extends Component {
 
           <Panel.Section>
             <TutorialItem
+              completed
               label='Add a sending domain'
               labelLink='settings/profile'>
               <p>Add a sending domain to send email from your own domain</p>
@@ -29,6 +30,7 @@ export class Tutorial extends Component {
 
           <Panel.Section>
             <TutorialItem
+              completed
               label='Verify your sending domain'
               labelLink='settings/profile'>
               <p>You'll need to verify your domain before you can use it</p>

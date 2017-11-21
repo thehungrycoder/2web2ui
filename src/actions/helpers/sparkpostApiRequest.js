@@ -33,6 +33,15 @@ const sparkpostRequest = requestHelperFactory({
       meta
     });
 
+    dispatch(showAlert({
+      message: 'test alert.',
+      type: 'error',
+      details: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, ',
+      autoDismiss: false
+    }));
+    setTimeout(() => dispatch(showAlert({ message: 'test alert. more text', type: 'success' })), 1000);
+    setTimeout(() => dispatch(showAlert({ message: 'test alert. Lorem ipsum dolor sit amet, consectetur adipisicing elit.' })), 3000);
+
     return results;
   },
   onFail: ({ types, err, dispatch, meta, action, getState }) => {
