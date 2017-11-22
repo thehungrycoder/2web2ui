@@ -8,7 +8,7 @@ import { selectMessageHistory, selectInitialEventId } from 'src/selectors/messag
 import { Page, Grid } from '@sparkpost/matchbox';
 import { Loading } from 'src/components';
 import HistoryTable from './components/HistoryTable';
-import MessageDetails from './components/MessageDetails';
+import EventDetails from './components/EventDetails';
 
 import _ from 'lodash';
 
@@ -61,7 +61,7 @@ export class EventPage extends Component {
       : (
         <Grid>
           <Grid.Column xs={12} md={6}>
-            <MessageDetails details={selectedEvent} documentation={documentation}/>
+            <EventDetails details={selectedEvent} documentation={documentation}/>
           </Grid.Column>
           <Grid.Column xs={12} md={6}>
             <HistoryTable
@@ -78,7 +78,7 @@ export class EventPage extends Component {
 }
 
 const mapStateToProps = (state, props) => ({
-  loading: state.messageEvents.pending || state.messageEvents.documentationPending,
+  loading: state.messageEvents.historyLoading || state.messageEvents.documentationLoading,
   messageHistory: selectMessageHistory(state, props),
   messageId: props.match.params.messageId,
   documentation: state.messageEvents.documentation,

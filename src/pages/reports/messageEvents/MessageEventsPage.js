@@ -38,7 +38,9 @@ export class MessageEventsPage extends Component {
       snakeToFriendly(type),
       rcpt_to,
       friendly_from,
-      <Button onClick={() => this.handleDetailClick({ message_id, event_id })} size='small'>View Details</Button>
+      <div style={{ textAlign: 'right' }}>
+        <Button onClick={() => this.handleDetailClick({ message_id, event_id })} size='small'>View Details</Button>
+      </div>
     ];
   }
 
@@ -93,7 +95,7 @@ const mapStateToProps = (state) => {
 
   return {
     events: events,
-    loading: state.messageEvents.pending,
+    loading: state.messageEvents.loading,
     error: state.messageEvents.error,
     empty: events.length === 0
   };

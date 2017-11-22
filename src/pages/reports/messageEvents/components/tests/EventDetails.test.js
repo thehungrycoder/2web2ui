@@ -1,11 +1,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import MessageDetails from '../MessageDetails';
+import EventDetails from '../EventDetails';
 
-describe('MessageDetails Component', () => {
+describe('EventDetails Component', () => {
 
   it('should render with no props', () => {
-    const wrapper = shallow(<MessageDetails />);
+    const wrapper = shallow(<EventDetails />);
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -23,7 +23,7 @@ describe('MessageDetails Component', () => {
       }
     };
 
-    const wrapper = shallow(<MessageDetails {...props} />);
+    const wrapper = shallow(<EventDetails {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 });
