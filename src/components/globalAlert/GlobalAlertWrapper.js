@@ -16,7 +16,7 @@ export const GlobalAlertWrapper = ({
     <div className={styles.Wrapper}>
       <TransitionGroup>
         { alerts.map((alert, i) => (
-          <Animator key={`${alert.message}-${alert.date}`}>
+          <Animator key={alert.date}>
             <div className={styles.Alert}>
               <Alert onDismiss={() => clear(i)} {...alert}></Alert>
             </div>

@@ -30,9 +30,15 @@ class Alert extends Component {
     }
   }
 
+  handleDismiss = () => {
+    this.props.onDismiss();
+  }
+
   refreshTimeout = () => {
-    clearTimeout(this.timeout);
-    this.timeout = setTimeout(this.props.onDismiss, this.props.timeout);
+    if (this.timeout) {
+      clearTimeout(this.timeout);
+    }
+    this.timeout = setTimeout(this.handleDismiss, this.props.timeout);
   }
 
   handleDetails = () => {
@@ -58,10 +64,10 @@ class Alert extends Component {
   }
 
   render() {
-    const { onDismiss, type } = this.props;
+    const { type } = this.props;
     const status = type === 'error' ? 'danger' : type;
 
-    return <Snackbar status={status} onDismiss={onDismiss}>{ this.renderMessage() }</Snackbar>;
+    return <Snackbar status={status} onDismiss={this.handleDismiss}>{ this.renderMessage() }</Snackbar>;
   }
 }
 

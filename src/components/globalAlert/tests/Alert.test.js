@@ -34,10 +34,10 @@ describe('Alert', () => {
 
     // refresh
     expect(window.clearTimeout).toHaveBeenCalledWith(wrapper.instance().timeout);
-    expect(window.setTimeout).toHaveBeenCalledWith(props.onDismiss, props.timeout);
+    expect(window.setTimeout).toHaveBeenCalledWith(wrapper.instance().handleDismiss, props.timeout);
   });
 
-  it('should handle delete', () => {
+  it('should handle dismiss', () => {
     wrapper.find('Snackbar').simulate('dismiss');
     expect(props.onDismiss).toHaveBeenCalled();
   });

@@ -10,7 +10,7 @@ exports[`GlobalAlertWrapper should render 1`] = `
       component="div"
     >
       <Animator
-        key="a message-date"
+        key="date"
       >
         <div>
           <Alert
