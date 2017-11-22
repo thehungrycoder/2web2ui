@@ -9,7 +9,7 @@ describe('Animator', () => {
   };
 
   it('should render', () => {
-    const wrapper = shallow(<Animator {...props} />)
+    const wrapper = shallow(<Animator {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

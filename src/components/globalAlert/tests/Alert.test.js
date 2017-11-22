@@ -3,8 +3,12 @@ import Alert from '../Alert';
 import { shallow } from 'enzyme';
 
 describe('Alert', () => {
+  window.setTimeout = jest.fn((a) => a);
+  window.clearTimeout = jest.fn((a) => a);
+
   const props = {
     autoDismiss: true,
+    timeout: 500,
     message: 'message',
     type: 'error',
     details: 'details',
@@ -27,10 +31,14 @@ describe('Alert', () => {
     expect(wrapper).toMatchSnapshot();
     expect(wrapper).toHaveState('showDetails', true);
     expect(wrapper.instance().timeout).not.toBe(null)
+
+    // refresh
+    expect(window.clearTimeout).toHaveBeenCalledWith(wrapper.instance().timeout);
+    expect(window.setTimeout).toHaveBeenCalledWith(props.onDismiss, props.timeout);
   });
 
   it('should handle delete', () => {
-    wrapper.instance().handleDismiss();
+    wrapper.find('Snackbar').simulate('dismiss');
     expect(props.onDismiss).toHaveBeenCalled();
   });
 });

@@ -8,12 +8,14 @@ class Alert extends Component {
     message: PropTypes.string.isRequired,
     type: PropTypes.oneOf(['default', 'success', 'error', 'danger']),
     details: PropTypes.string,
+    timeout: PropTypes.number,
     onDismiss: PropTypes.func.isRequired
   };
 
   static defaultProps = {
     autoDismiss: true,
-    type: 'default'
+    type: 'default',
+    timeout: 15000
   }
 
   state = {
@@ -30,12 +32,7 @@ class Alert extends Component {
 
   refreshTimeout = () => {
     clearTimeout(this.timeout);
-    this.timeout = setTimeout(() => this.handleDismiss(), 15000);
-  }
-
-  handleDismiss() {
-    clearTimeout(this.timeout);
-    this.props.onDismiss();
+    this.timeout = setTimeout(this.props.onDismiss, this.props.timeout);
   }
 
   handleDetails = () => {

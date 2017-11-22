@@ -28,7 +28,6 @@ Array [
     "payload": Object {
       "date": 1511303984050,
       "message": "a message",
-      "type": "default",
     },
     "type": "SHOW_GLOBAL_ALERT",
   },

@@ -18,6 +18,7 @@ exports[`GlobalAlertWrapper should render 1`] = `
             date="date"
             message="a message"
             onDismiss={[Function]}
+            timeout={15000}
             type="default"
           />
         </div>

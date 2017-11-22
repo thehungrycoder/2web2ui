@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import TransitionGroup from 'react-transition-group/TransitionGroup';
 import { clear } from 'src/actions/globalAlert';
-import { Portal, Snackbar } from '@sparkpost/matchbox';
+import { Portal } from '@sparkpost/matchbox';
 
 import Animator from './Animator';
 import Alert from './Alert';

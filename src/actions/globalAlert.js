@@ -1,8 +1,7 @@
-export function showAlert({ type = 'default', ...alert }) {
+export function showAlert(alert) {
   return {
     type: 'SHOW_GLOBAL_ALERT',
     payload: {
-      type,
       date: Date.now(),
       ...alert
     }
