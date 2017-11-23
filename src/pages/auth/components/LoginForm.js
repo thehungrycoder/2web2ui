@@ -8,16 +8,6 @@ import { Button } from '@sparkpost/matchbox';
 
 export class LoginForm extends Component {
 
-  renderLoginButtonText() {
-    const { loginPending } = this.props;
-
-    return loginPending
-          ? <span>
-              <i className="fa fa-spinner fa-spin" /> Logging In
-            </span>
-          : <span>Log In</span>;
-  }
-
   render() {
     const { loginPending, pristine, ssoEnabled, handleSubmit } = this.props;
 
@@ -54,7 +44,7 @@ export class LoginForm extends Component {
         }
 
         <Button submit disabled={loginPending || pristine}>
-            {this.renderLoginButtonText()}
+            { loginPending ? 'Logging In' : 'Log In' }
         </Button>
         </form>
     );
@@ -63,7 +53,6 @@ export class LoginForm extends Component {
 
 function mapStateToProps({ auth }) {
   return {
-    ssoEnabled: auth.ssoEnabled,
     loginPending: auth.loginPending,
     initialValues: {
       username: auth.username,

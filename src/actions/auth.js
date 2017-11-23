@@ -90,7 +90,6 @@ export function ssoCheck(username) {
     return sparkpostRequest({
       method: 'GET',
       url: `/users/${username}/saml`
-      // url: 'https://d79ace26-eeea-4129-8811-f51a31449321.mock.pstmn.io/api/v1/users/ddd/saml'
     })
     .then((payload) => {
       dispatch({ type: 'SSO_CHECK_SUCCESS', payload: payload.data });

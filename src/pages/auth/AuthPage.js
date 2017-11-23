@@ -3,25 +3,26 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { authenticate, ssoCheck } from 'src/actions/auth';
 import { SparkPost } from 'src/components';
-import { Panel } from '@sparkpost/matchbox';
+import { Panel, Error } from '@sparkpost/matchbox';
 
 import config from 'src/config';
 import LoginForm from './components/LoginForm';
 import styles from './AuthPage.module.scss';
 
 export class AuthPage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      ssoEnabled: config.sso.enabled
+    };
+  }
+
   redirectToSSO() {
     window.location.href = `${config.apiBase}/api/v1/users/saml/login`;
   }
 
   ssoSignIn(username) {
-    return this.props.ssoCheck(username)
-    .then(() => {
-      const { ssoEnabled } = this.props.auth;
-      if (ssoEnabled) {
-        this.redirectToSSO();
-      }
-    });
+    return this.props.ssoCheck(username);
   }
 
   regularSignIn(username, password, rememberMe) {
@@ -30,26 +31,28 @@ export class AuthPage extends Component {
 
   renderLoginError() {
     return (
-      <div className="error">
-        <p>
-          {this.props.auth.errorDescription}
-        </p>
-      </div>
+      <Error error={this.props.auth.errorDescription} />
     );
   }
 
-  renderLoginButtonText() {
-    return this.props.auth.loginPending
-      ? <span>
-          <i className="fa fa-spinner fa-spin" /> Logging In
-        </span>
-      : <span>Log In</span>;
+  componentWillReceiveProps(nextProps) {
+    const { ssoUser } = nextProps.auth;
+
+    if (typeof ssoUser === 'undefined') { //anytime before action is dispatched
+      return;
+    }
+
+    if (ssoUser) {
+      this.redirectToSSO();
+    } else {
+      this.setState({ ssoEnabled: false });
+    }
+
   }
 
   onClickSubmit = (values) => {
     const { username, password, rememberMe } = values;
-    const { ssoEnabled } = this.props.auth;
-    ssoEnabled ? this.ssoSignIn(username) : this.regularSignIn(username, password, rememberMe);
+    this.state.ssoEnabled ? this.ssoSignIn(username) : this.regularSignIn(username, password, rememberMe);
   };
 
   render() {
@@ -70,7 +73,7 @@ export class AuthPage extends Component {
         <Panel sectioned accent title="Log In">
           { errorDescription && this.renderLoginError()}
 
-          <LoginForm onSubmit={this.onClickSubmit} />
+          <LoginForm onSubmit={this.onClickSubmit} ssoEnabled={this.state.ssoEnabled}/>
         </Panel>
       </div>
     );

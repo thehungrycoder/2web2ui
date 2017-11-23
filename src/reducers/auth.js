@@ -1,6 +1,5 @@
-import config from 'src/config';
 
-const initialState = { loggedIn: false, ssoEnabled: config.sso.enabled === true };
+const initialState = { loggedIn: false, ssoUser: undefined };
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -37,12 +36,12 @@ export default (state = initialState, action) => {
     }
 
     case 'SSO_CHECK_SUCCESS': {
-      return { ...state, ssoEnabled: action.payload.saml, loginPending: false };
+      return { ...state, ssoUser: action.payload.saml, loginPending: false, abcd: true };
     }
 
     case 'SSO_CHECK_FAIL': {
       const { errorDescription = 'An unknown error occurred' } = action.payload;
-      return { loginPending: false, errorDescription, ssoEnabled: false };
+      return { loginPending: false, errorDescription, ssoUser: false };
     }
 
     default: {
