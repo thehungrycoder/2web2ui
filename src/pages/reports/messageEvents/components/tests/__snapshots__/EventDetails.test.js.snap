@@ -1,12 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MessageDetails Component should render with all props 1`] = `
+exports[`EventDetails Component should render with all props 1`] = `
 <Panel
   title="Event Details"
 >
   <Panel.Section>
     <LabelledValue
-      key="0"
+      key="key1"
       label={
         <WithPositioning(Tooltip)
           content="description for key1"
@@ -18,7 +18,7 @@ exports[`MessageDetails Component should render with all props 1`] = `
       value="val1"
     />
     <LabelledValue
-      key="1"
+      key="key2"
       label="key2"
     >
       <CopyField
@@ -27,7 +27,7 @@ exports[`MessageDetails Component should render with all props 1`] = `
       />
     </LabelledValue>
     <LabelledValue
-      key="2"
+      key="type"
       label="type"
       value="bounce"
     />
@@ -45,7 +45,7 @@ exports[`MessageDetails Component should render with all props 1`] = `
 </Panel>
 `;
 
-exports[`MessageDetails Component should render with no props 1`] = `
+exports[`EventDetails Component should render with no props 1`] = `
 <Panel
   title="Event Details"
 >
