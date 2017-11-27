@@ -1,0 +1,55 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.Support {
+  position: fixed;
+  bottom: spacing();
+  right: spacing();
+  width: rem(60);
+  height: rem(60);
+}
+
+.Button {
+  position: relative;
+  display: inline-block;
+  width: rem(60);
+  height: rem(60);
+
+  background: color(orange);
+  border-radius: 50%;
+  box-shadow: shadow(deep);
+
+  &:hover {
+    box-shadow: shadow(deeper);
+  }
+}
+
+.Icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: color(gray, 10);
+
+  path {
+    box-shadow: shadow(deep);
+  }
+}
+
+// Support article
+
+.Article {
+  margin-bottom: spacing();
+}
+
+.ArticleTitle {
+  margin-bottom: 0;
+
+  * {
+    vertical-align: middle;
+  }
+
+  a {
+    color: color(blue, dark);
+    text-decoration: none;
+  }
+}

@@ -14,6 +14,7 @@ import metrics from './metrics';
 import reportFilters from './reportFilters';
 import sendingDomains from './sendingDomains';
 import subaccounts from './subaccounts';
+import support from './support';
 import summaryChart from './summaryChart';
 import templates from './templates';
 import recipientLists from './recipientLists';
@@ -40,6 +41,7 @@ const appReducer = combineReducers({
   recipientLists,
   sendingDomains,
   subaccounts,
+  support,
   summaryChart,
   suppressions,
   templates,

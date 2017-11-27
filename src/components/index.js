@@ -8,6 +8,7 @@ export { default as Modal } from './modals/Modal';
 export { default as Navigation } from './navigation/Navigation';
 export { default as PlanPicker } from './planPicker/PlanPicker';
 export { default as SparkPost } from './sparkPost/SparkPost';
+export { default as Support } from './support/Support';
 export { default as UsageReport } from './usageReport/UsageReport';
 
 export * from './collection';
