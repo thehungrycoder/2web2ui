@@ -43,7 +43,7 @@ export class LoginForm extends Component {
         />
         }
 
-        <Button submit disabled={loginPending || pristine}>
+        <Button primary submit disabled={loginPending || pristine}>
             { loginPending ? 'Logging In' : 'Log In' }
         </Button>
         </form>

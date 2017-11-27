@@ -28,6 +28,7 @@ exports[`renders correctly 1`] = `
     name="rememberMe"
   />
   <Button
+    primary={true}
     size="default"
     submit={true}
   >
@@ -65,6 +66,7 @@ exports[`renders correctly when logging in 1`] = `
   />
   <Button
     disabled={true}
+    primary={true}
     size="default"
     submit={true}
   >
@@ -87,6 +89,7 @@ exports[`renders correctly when ssoEnabled is true 1`] = `
     validate={[Function]}
   />
   <Button
+    primary={true}
     size="default"
     submit={true}
   >

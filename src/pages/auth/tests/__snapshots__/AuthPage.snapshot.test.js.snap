@@ -30,29 +30,6 @@ exports[`renders correctly 1`] = `
 </div>
 `;
 
-exports[`renders correctly when logging in 1`] = `
-<div>
-  <div>
-    <a
-      href="https://www.sparkpost.com"
-      title="SparkPost"
-    >
-      <Logo />
-    </a>
-  </div>
-  <Panel
-    accent={true}
-    sectioned={true}
-    title="Log In"
-  >
-    <Connect(ReduxForm)
-      onSubmit={[Function]}
-      ssoEnabled={false}
-    />
-  </Panel>
-</div>
-`;
-
 exports[`renders correctly when there is a login error 1`] = `
 <div>
   <div>
