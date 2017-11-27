@@ -1,4 +1,6 @@
 import { sparkpostLogin } from '../helpers/http';
+import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
+
 import authCookie from '../helpers/authCookie';
 import { initializeAccessControl } from './accessControl';
 
@@ -79,6 +81,16 @@ export function confirmPassword(username, password) {
         throw err;
       });
   };
+}
+
+export function ssoCheck(username) {
+  return sparkpostApiRequest({
+    type: 'SSO_CHECK',
+    meta: {
+      method: 'GET',
+      url: `/users/${username}/saml`
+    }
+  });
 }
 
 export function refresh(token, refreshToken) {

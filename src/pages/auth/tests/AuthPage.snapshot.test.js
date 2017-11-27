@@ -21,11 +21,6 @@ it('renders correctly', () => {
   expect(wrapper).toMatchSnapshot();
 });
 
-it('renders correctly when logging in', () => {
-  wrapper.setProps({ auth: { loginPending: true }});
-  expect(wrapper).toMatchSnapshot();
-});
-
 it('renders correctly when there is a login error', () => {
   wrapper.setProps({ auth: { errorDescription: 'uh oh!' }});
   expect(wrapper).toMatchSnapshot();

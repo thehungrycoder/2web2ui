@@ -22,98 +22,10 @@ exports[`renders correctly 1`] = `
     sectioned={true}
     title="Log In"
   >
-    <form>
-      <TextField
-        autoFocus={true}
-        id="username"
-        label="Email"
-        onChange={[Function]}
-        placeholder="Leslie Knope"
-        type="text"
-        value=""
-      />
-      <TextField
-        id="password"
-        label="Password"
-        onChange={[Function]}
-        placeholder="Your Password"
-        type="password"
-        value=""
-      />
-      <Checkbox
-        checked={false}
-        id="rememberMe"
-        label="Keep me logged in"
-        onChange={[Function]}
-      />
-      <Button
-        onClick={[Function]}
-        primary={true}
-        size="default"
-        submit={true}
-      >
-        <span>
-          Log In
-        </span>
-      </Button>
-    </form>
-  </Panel>
-</div>
-`;
-
-exports[`renders correctly when logging in 1`] = `
-<div>
-  <div>
-    <a
-      href="https://www.sparkpost.com"
-      title="SparkPost"
-    >
-      <Logo />
-    </a>
-  </div>
-  <Panel
-    accent={true}
-    sectioned={true}
-    title="Log In"
-  >
-    <form>
-      <TextField
-        autoFocus={true}
-        id="username"
-        label="Email"
-        onChange={[Function]}
-        placeholder="Leslie Knope"
-        type="text"
-        value=""
-      />
-      <TextField
-        id="password"
-        label="Password"
-        onChange={[Function]}
-        placeholder="Your Password"
-        type="password"
-        value=""
-      />
-      <Checkbox
-        checked={false}
-        id="rememberMe"
-        label="Keep me logged in"
-        onChange={[Function]}
-      />
-      <Button
-        onClick={[Function]}
-        primary={true}
-        size="default"
-        submit={true}
-      >
-        <span>
-          <i
-            className="fa fa-spinner fa-spin"
-          />
-           Logging In
-        </span>
-      </Button>
-    </form>
+    <Connect(ReduxForm)
+      onSubmit={[Function]}
+      ssoEnabled={false}
+    />
   </Panel>
 </div>
 `;
@@ -133,48 +45,13 @@ exports[`renders correctly when there is a login error 1`] = `
     sectioned={true}
     title="Log In"
   >
-    <form>
-      <div
-        className="error"
-      >
-        <p>
-          uh oh!
-        </p>
-      </div>
-      <TextField
-        autoFocus={true}
-        id="username"
-        label="Email"
-        onChange={[Function]}
-        placeholder="Leslie Knope"
-        type="text"
-        value=""
-      />
-      <TextField
-        id="password"
-        label="Password"
-        onChange={[Function]}
-        placeholder="Your Password"
-        type="password"
-        value=""
-      />
-      <Checkbox
-        checked={false}
-        id="rememberMe"
-        label="Keep me logged in"
-        onChange={[Function]}
-      />
-      <Button
-        onClick={[Function]}
-        primary={true}
-        size="default"
-        submit={true}
-      >
-        <span>
-          Log In
-        </span>
-      </Button>
-    </form>
+    <Error
+      error="uh oh!"
+    />
+    <Connect(ReduxForm)
+      onSubmit={[Function]}
+      ssoEnabled={false}
+    />
   </Panel>
 </div>
 `;
