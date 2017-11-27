@@ -25,7 +25,7 @@ test('base case', () => {
 });
 
 test('no ip pools', () => {
-  wrapper.setProps({ ipPools: [] });
+  wrapper.setProps({ ipPools: []});
   expect(wrapper).toMatchSnapshot();
 });
 

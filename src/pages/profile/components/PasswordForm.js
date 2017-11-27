@@ -45,14 +45,10 @@ export class PasswordForm extends Component {
 
 const selector = formValueSelector('passwordForm');
 
-const mapStateToProps = (state, props) => {
-  const { form } = state;
-  return {
-    theForm: form.profileName, // breaks if you use a prop name 'form',
-    currentPassword: selector(state, 'currentPassword'),
-    newPassword: selector(state, 'newPassword')
-  };
-};
+const mapStateToProps = (state, props) => ({
+  currentPassword: selector(state, 'currentPassword'),
+  newPassword: selector(state, 'newPassword')
+});
 
 const formOptions = {
   form: 'passwordForm',

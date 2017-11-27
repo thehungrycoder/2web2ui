@@ -1,0 +1,40 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.LabelledValue {
+  display: flex;
+  margin-bottom: rem(12);
+}
+
+.LabelContainer {
+  flex: 0 0 0;
+  min-width: rem(100);
+  align-items: flex-start;
+  // text-align: right;
+}
+
+.Label {
+  display: inline-block;
+  line-height: rem(15);
+
+  word-break: break-all;
+  word-wrap: break-word;
+}
+
+.Content {
+  flex: 1 0 0;
+  margin-left: spacing();
+  padding-top: rem(2);
+
+  word-break: break-all;
+  word-wrap: break-word;
+
+  h6 {
+    font-size: rem(15);
+    line-height: rem(24);
+    margin-bottom: 0;
+  }
+
+  & > *:last-child {
+    margin-bottom: 0;
+  }
+}

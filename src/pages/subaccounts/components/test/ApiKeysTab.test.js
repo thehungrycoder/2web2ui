@@ -19,13 +19,13 @@ describe('ApiKeysTab', () => {
   });
 
   test('loading', () => {
-    wrapper.setProps({ loading: true })
+    wrapper.setProps({ loading: true });
     expect(wrapper).toMatchSnapshot();
   });
 
   test('empty', () => {
-    wrapper.setProps({ keys: [] });
-    expect(wrapper).toMatchSnapshot()
+    wrapper.setProps({ keys: []});
+    expect(wrapper).toMatchSnapshot();
   });
 });
 

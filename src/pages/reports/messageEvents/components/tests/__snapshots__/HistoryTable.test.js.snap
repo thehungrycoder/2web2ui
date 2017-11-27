@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HistoryTable Component should render with all props 1`] = `
+<TableCollection
+  headerComponent={[Function]}
+  outerWrapper={[Function]}
+  pagination={false}
+  rowComponent={[Function]}
+  rows={
+    Array [
+      Object {
+        "event_id": "1",
+        "onClick": [Function],
+        "selected": false,
+      },
+      Object {
+        "event_id": "2",
+        "onClick": null,
+        "selected": true,
+      },
+    ]
+  }
+/>
+`;
+
+exports[`HistoryTable Component should render with no props 1`] = `
+<div>
+  <Panel
+    actions={
+      Array [
+        Object {
+          "content": "Refresh",
+          "onClick": undefined,
+        },
+      ]
+    }
+    title="Message History"
+  >
+    <TableCollection
+      headerComponent={[Function]}
+      outerWrapper={[Function]}
+      pagination={false}
+      rowComponent={[Function]}
+      rows={Array []}
+    />
+  </Panel>
+  <small>
+    Previous events may be outside our 10 day storage range.
+  </small>
+</div>
+`;

@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header Component should render 1`] = `
+<thead>
+  <Table.Row>
+    <th
+      width="2px"
+    />
+    <Table.HeaderCell
+      width="35%"
+    >
+      Time
+    </Table.HeaderCell>
+    <Table.HeaderCell
+      width="auto"
+    >
+      Event
+    </Table.HeaderCell>
+  </Table.Row>
+</thead>
+`;
+
+exports[`Row Component should render 1`] = `
+<Table.Row
+  className=""
+  onClick={[Function]}
+>
+  <td />
+  <Table.Cell>
+    <DisplayDate
+      formattedDate="date"
+      timestamp="ts"
+    />
+  </Table.Cell>
+  <Table.Cell>
+    Event Type
+  </Table.Cell>
+</Table.Row>
+`;
+
+exports[`Table Wrapper Component should render 1`] = `<Table />`;

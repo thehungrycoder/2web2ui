@@ -36,13 +36,13 @@ describe('EditTab', () => {
     });
 
     test('loading', () => {
-      wrapper.setProps({ loading: true })
+      wrapper.setProps({ loading: true });
       expect(wrapper).toMatchSnapshot();
     });
   });
 
   describe('onSubmit', () => {
-    const newValues =  {
+    const newValues = {
       name: 'Francine Neistat',
       status: 'suspended',
       ipPool: 'kiddy'

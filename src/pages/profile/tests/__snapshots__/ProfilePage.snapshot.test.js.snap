@@ -5,35 +5,21 @@ exports[`renders correctly 1`] = `
   empty={Object {}}
   title="Profile"
 >
-  <Panel>
-    <Table>
-      <tbody>
-        <Table.Row>
-          <Table.HeaderCell>
-            Account ID
-          </Table.HeaderCell>
-          <Table.Cell>
-            12345
-          </Table.Cell>
-        </Table.Row>
-        <Table.Row>
-          <Table.HeaderCell>
-            Username
-          </Table.HeaderCell>
-          <Table.Cell>
-            Lord Stark
-          </Table.Cell>
-        </Table.Row>
-        <Table.Row>
-          <Table.HeaderCell>
-            Email Address
-          </Table.HeaderCell>
-          <Table.Cell>
-            ned.stark@winterfell.biz
-          </Table.Cell>
-        </Table.Row>
-      </tbody>
-    </Table>
+  <Panel
+    sectioned={true}
+  >
+    <LabelledValue
+      label="Account ID"
+      value={12345}
+    />
+    <LabelledValue
+      label="Username"
+      value="Lord Stark"
+    />
+    <LabelledValue
+      label="Email Address"
+      value="ned.stark@winterfell.biz"
+    />
   </Panel>
   <Panel
     sectioned={true}

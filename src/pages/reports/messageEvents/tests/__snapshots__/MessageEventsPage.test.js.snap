@@ -35,10 +35,11 @@ exports[`Page: Message Events tests should render page correctly 1`] = `
   <TableCollection
     columns={
       Array [
-        "Timestamp",
+        "Time",
         "Event",
         "Recipient",
         "Friendly From",
+        null,
       ]
     }
     getRowData={[Function]}

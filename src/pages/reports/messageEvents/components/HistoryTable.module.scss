@@ -1,0 +1,40 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.HeaderCell {
+  padding: spacing(small) spacing() spacing(small);
+  vertical-align: bottom;
+}
+
+.PanelTitle {
+  @include text-style-smaller-heading;
+  color: color(gray, 1);
+  margin: 0 0 spacing();
+
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.Row {
+  position: relative;
+  transition: 0.15s;
+
+  &:not(.selected):hover {
+    cursor: pointer;
+    background: lighten(color(gray, 9), 1);
+  }
+}
+
+.selected {
+  background: rgba(color(mustard), 0.07);
+
+  .Bar {
+    opacity: 1;
+  }
+}
+
+.Bar {
+  background: color(orange);
+  opacity: 0;
+  transition: 0.15s;
+}
