@@ -12,7 +12,7 @@ export default (state = initialState, action) => {
     case 'FETCH_ACCOUNT_SUCCESS':
       return { ...state, loading: false, ...action.payload };
 
-    case 'FETCH_ACCOUNT_ERROR':
+    case 'FETCH_ACCOUNT_FAIL':
       return { ...state, loading: false };
 
     default:
