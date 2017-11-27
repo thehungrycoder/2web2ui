@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CopyField Component should render - no props 1`] = `
+<TextField
+  connectRight={
+    <Button
+      onClick={[Function]}
+      size="default"
+    >
+      <Icon
+        name="Copy"
+        size={14}
+      />
+       Copy
+    </Button>
+  }
+  onFocus={[Function]}
+  readOnly={true}
+  type="text"
+/>
+`;

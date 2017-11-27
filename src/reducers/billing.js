@@ -10,7 +10,7 @@ export default (state = initialState, action) => {
     case 'GET_PLANS_SUCCESS':
       return { ...state, plans: action.payload, plansLoading: false };
 
-    case 'GET_PLANS_ERROR':
+    case 'GET_PLANS_FAIL':
       return { ...state, plansLoading: false };
 
     case 'GET_COUNTRIES_BILLING_PENDING':
@@ -23,7 +23,7 @@ export default (state = initialState, action) => {
         countries: formatCountries(action.payload)
       };
 
-    case 'GET_COUNTRIES_BILLING_ERROR':
+    case 'GET_COUNTRIES_BILLING_FAIL':
       return { ...state, countriesLoading: false };
 
     default:

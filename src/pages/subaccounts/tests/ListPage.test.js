@@ -2,13 +2,10 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { ListPage } from '../ListPage';
 
-// actions
-const listSubaccounts = jest.fn(() => []);
-
 const props = {
   loading: false,
   error: null,
-  listSubaccounts,
+  listSubaccounts: jest.fn(),
   subaccounts: [
     {
       id: 123,
@@ -41,7 +38,7 @@ beforeEach(() => {
 
 it('renders correctly', () => {
   expect(wrapper).toMatchSnapshot();
-  expect(listSubaccounts).toHaveBeenCalled;
+  expect(props.listSubaccounts).toHaveBeenCalled();
 });
 
 it('renders empty state', () => {
@@ -57,6 +54,6 @@ it('renders errors when present', () => {
 describe('onReloadApiBanner', () => {
   it('calls listSubaccounts again', () => {
     wrapper.instance().onReloadApiBanner();
-    expect(listSubaccounts).toHaveBeenCalledTimes(2);
+    expect(props.listSubaccounts).toHaveBeenCalledTimes(2);
   });
 });

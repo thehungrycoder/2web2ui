@@ -1,3 +1,9 @@
+function snakeToFriendly(string) {
+  return string
+    .charAt(0).toUpperCase() + string.slice(1)
+    .replace(/(\_\w)/g, (matches) => ` ${matches[1].toUpperCase()}`);
+}
+
 function slugify(value) {
   return value
     .replace(/([a-z])([A-Z])/g, '$1-$2')
@@ -11,6 +17,7 @@ function snakeToCamel(string) {
 }
 
 export {
+  snakeToFriendly,
   slugify,
   snakeToCamel
 };

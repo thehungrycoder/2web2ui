@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import { Page, Banner } from '@sparkpost/matchbox';
+import { snakeToFriendly } from 'src/helpers/string';
+import { Page, Banner, Button } from '@sparkpost/matchbox';
 import { Loading, TableCollection, ApiErrorBanner } from 'src/components';
+import DisplayDate from './components/DisplayDate';
 import { getMessageEvents } from 'src/actions/messageEvents';
 import { selectMessageEvents } from 'src/selectors/messageEvents';
 import Empty from '../components/Empty';
@@ -13,14 +15,33 @@ const emptyMesasage = 'There are no message events for your current query';
 const maxResultsTitle = 'Note: A maximum of 1,000 results displayed';
 const maxResultsText = 'SparkPost retains message event data for 10 days.';
 
-// formatters for the tabular data
-const columns = ['Timestamp', 'Event', 'Recipient', 'Friendly From'];
-const getRowData = ({ formattedDate, type, friendly_from, rcpt_to }) => ([ formattedDate, type, rcpt_to, friendly_from ]);
+const columns = ['Time', 'Event', 'Recipient', 'Friendly From', null];
 
 export class MessageEventsPage extends Component {
 
   componentDidMount() {
     this.props.getMessageEvents();
+  }
+
+  handleDetailClick = ({ message_id, event_id }) => {
+    const { history } = this.props;
+    history.push({
+      pathname: `/reports/message-events/details/${message_id}`,
+      state: { selectedEventId: event_id }
+    });
+  }
+
+  getRowData = (rowData) => {
+    const { timestamp, formattedDate, type, friendly_from, rcpt_to, message_id, event_id } = rowData;
+    return [
+      <DisplayDate timestamp={timestamp} formattedDate={formattedDate} />,
+      snakeToFriendly(type),
+      rcpt_to,
+      friendly_from,
+      <div style={{ textAlign: 'right' }}>
+        <Button onClick={() => this.handleDetailClick({ message_id, event_id })} size='small'>View Details</Button>
+      </div>
+    ];
   }
 
   renderError() {
@@ -43,7 +64,7 @@ export class MessageEventsPage extends Component {
         <TableCollection
           columns={columns}
           rows={events}
-          getRowData={getRowData}
+          getRowData={this.getRowData}
           pagination={true}
         />
       );
@@ -74,7 +95,7 @@ const mapStateToProps = (state) => {
 
   return {
     events: events,
-    loading: state.messageEvents.pending,
+    loading: state.messageEvents.loading,
     error: state.messageEvents.error,
     empty: events.length === 0
   };

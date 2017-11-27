@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { Page, Panel, Table } from '@sparkpost/matchbox';
+import { Page, Panel } from '@sparkpost/matchbox';
 
 import { updateUser } from 'src/actions/users';
 import { confirmPassword } from 'src/actions/auth';
+import { showAlert } from 'src/actions/globalAlert';
 
 import NameForm from './components/NameForm';
 import PasswordForm from './components/PasswordForm';
-import { showAlert } from 'src/actions/globalAlert';
+import { LabelledValue } from 'src/components';
 
 export class ProfilePage extends Component {
   updateProfile = (values) => {
@@ -38,23 +39,10 @@ export class ProfilePage extends Component {
 
     return (
       <Page title='Profile'>
-        <Panel>
-          <Table>
-            <tbody>
-              <Table.Row>
-                <Table.HeaderCell>Account ID</Table.HeaderCell>
-                <Table.Cell>{ customer }</Table.Cell>
-              </Table.Row>
-              <Table.Row>
-                <Table.HeaderCell>Username</Table.HeaderCell>
-                <Table.Cell>{ username }</Table.Cell>
-              </Table.Row>
-              <Table.Row>
-                <Table.HeaderCell>Email Address</Table.HeaderCell>
-                <Table.Cell>{ email }</Table.Cell>
-              </Table.Row>
-            </tbody>
-          </Table>
+        <Panel sectioned>
+          <LabelledValue label='Account ID' value={customer}/>
+          <LabelledValue label='Username' value={username}/>
+          <LabelledValue label='Email Address' value={email}/>
         </Panel>
 
         <Panel sectioned title='Edit Profile'>
@@ -69,7 +57,7 @@ export class ProfilePage extends Component {
   }
 }
 
-const mapStateToProps = ({ form, account, currentUser }) => ({
+const mapStateToProps = ({ account, currentUser }) => ({
   account,
   currentUser
 });

@@ -99,6 +99,11 @@ export default [
     layout: App
   },
   {
+    path: '/reports/message-events/details/:messageId',
+    component: reports.EventPage,
+    layout: App
+  },
+  {
     path: '/account/subaccounts',
     component: subaccounts.ListPage,
     condition: hasGrants('subaccount/manage'),

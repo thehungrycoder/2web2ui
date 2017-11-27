@@ -30,7 +30,7 @@ test('ApiKeyFields', () => {
     showGrants: true,
     grants: ['l0L'],
     disabled: false
-  }
+  };
 
   const wrapper = shallow(<ApiKeyFields show={false}/>);
   expect(wrapper).toMatchSnapshot();
@@ -43,10 +43,10 @@ test('StatusSelect', () => {
   const wrapper = shallow(<StatusSelect disabled={false} compliance={'active'}/>);
   expect(wrapper).toMatchSnapshot();
 
-  wrapper.setProps({ disable: false, compliance: 'suspended'});
+  wrapper.setProps({ disable: false, compliance: 'suspended' });
   expect(wrapper).toMatchSnapshot();
 
-  wrapper.setProps({ disable: true, compliance: 'terminated'});
+  wrapper.setProps({ disable: true, compliance: 'terminated' });
   expect(wrapper).toMatchSnapshot();
 });
 
