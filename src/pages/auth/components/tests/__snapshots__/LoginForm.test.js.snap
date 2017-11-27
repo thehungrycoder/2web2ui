@@ -31,9 +31,7 @@ exports[`renders correctly 1`] = `
     size="default"
     submit={true}
   >
-    <span>
-      Log In
-    </span>
+    Log In
   </Button>
 </form>
 `;
@@ -70,12 +68,7 @@ exports[`renders correctly when logging in 1`] = `
     size="default"
     submit={true}
   >
-    <span>
-      <i
-        className="fa fa-spinner fa-spin"
-      />
-       Logging In
-    </span>
+    Logging In
   </Button>
 </form>
 `;
@@ -97,9 +90,7 @@ exports[`renders correctly when ssoEnabled is true 1`] = `
     size="default"
     submit={true}
   >
-    <span>
-      Log In
-    </span>
+    Log In
   </Button>
 </form>
 `;

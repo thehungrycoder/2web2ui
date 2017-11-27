@@ -22,16 +22,16 @@ export class AuthPage extends Component {
   }
 
   ssoSignIn(username) {
-    return this.props.ssoCheck(username);
+    return this.props.ssoCheck(username).catch((err) => err);
   }
 
   regularSignIn(username, password, rememberMe) {
     return this.props.authenticate(username, password, rememberMe);
   }
 
-  renderLoginError() {
+  renderLoginError(errorDescription) {
     return (
-      <Error error={this.props.auth.errorDescription} />
+      <Error error={errorDescription} />
     );
   }
 
@@ -71,7 +71,7 @@ export class AuthPage extends Component {
         </div>
 
         <Panel sectioned accent title="Log In">
-          { errorDescription && this.renderLoginError()}
+          { errorDescription && this.renderLoginError(errorDescription)}
 
           <LoginForm onSubmit={this.onClickSubmit} ssoEnabled={this.state.ssoEnabled}/>
         </Panel>

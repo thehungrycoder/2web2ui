@@ -1,5 +1,5 @@
 import { sparkpostLogin } from '../helpers/http';
-import { sparkpost as sparkpostRequest } from 'src/helpers/axiosInstances';
+import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 
 import authCookie from '../helpers/authCookie';
 import { initializeAccessControl } from './accessControl';
@@ -84,31 +84,13 @@ export function confirmPassword(username, password) {
 }
 
 export function ssoCheck(username) {
-  return (dispatch, getState) => {
-    dispatch({ type: 'SSO_CHECK' });
-
-    return sparkpostRequest({
+  return sparkpostApiRequest({
+    type: 'SSO_CHECK',
+    meta: {
       method: 'GET',
       url: `/users/${username}/saml`
-    })
-    .then((payload) => {
-      dispatch({ type: 'SSO_CHECK_SUCCESS', payload: payload.data });
-    })
-    .catch((err) => {
-      let errorDescription = null;
-
-      try {
-        errorDescription = err.response.data.errors[0].message;
-      } catch (e) {
-        errorDescription = err.message;
-      }
-
-      dispatch({
-        type: 'SSO_CHECK_FAIL',
-        payload: { errorDescription }
-      });
-    });
-  };
+    }
+  });
 }
 
 export function refresh(token, refreshToken) {

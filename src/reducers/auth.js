@@ -31,16 +31,22 @@ export default (state = initialState, action) => {
       return { loggedIn: false };
     }
 
-    case 'SSO_CHECK': {
+    case 'SSO_CHECK_PENDING': {
       return { ...state, errorDescription: null, loginPending: true };
     }
 
     case 'SSO_CHECK_SUCCESS': {
-      return { ...state, ssoUser: action.payload.saml, loginPending: false, abcd: true };
+      const { saml: ssoUser } = action.payload;
+
+      if (ssoUser) {
+        return { ...state, ssoUser }; //loginPending unchanged (true)to keep loading state on while redirecting
+      } else {
+        return { ...state, ssoUser, loginPending: false };
+      }
     }
 
     case 'SSO_CHECK_FAIL': {
-      const { errorDescription = 'An unknown error occurred' } = action.payload;
+      const { message: errorDescription = 'An unknown error occurred' } = action.payload;
       return { loginPending: false, errorDescription, ssoUser: false };
     }
 
