@@ -18,7 +18,7 @@ export class AuthPage extends Component {
   }
 
   redirectToSSO() {
-    window.location.href = `${config.apiBase}/api/v1/users/saml/login`;
+    window.location.href = `${config.apiBase}/users/saml/login`;
   }
 
   ssoSignIn(username) {
