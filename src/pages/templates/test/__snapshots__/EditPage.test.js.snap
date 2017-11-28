@@ -65,11 +65,15 @@ exports[`Template EditPage should render correctly 1`] = `
     </Grid.Column>
   </Grid>
   <DeleteModal
-    handleDelete={[Function]}
-    handleToggle={[Function]}
+    content={
+      <p>
+        Both the draft and published versions of this template will be deleted.
+      </p>
+    }
+    onCancel={[Function]}
+    onDelete={[Function]}
     open={false}
-    text="Are you sure you want to delete this template? Both draft and published versions of this template will be deleted."
-    title="Delete Template"
+    title="Are you sure you want to delete this template?"
   />
 </Page>
 `;
