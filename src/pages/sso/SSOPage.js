@@ -17,7 +17,6 @@ export class SSOPage extends Component {
     try {
       const data = JSON.parse(atob(token));
 
-
       if (data.accessToken && data.username) {
         this.props.login({
           access_token: data.accessToken,
