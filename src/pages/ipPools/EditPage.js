@@ -142,10 +142,10 @@ export class EditPage extends React.Component {
 
         <DeleteModal
           open={this.state.showDelete}
-          title='Delete IP Pool'
-          text='Are you sure you want to delete this IP Pool?'
-          handleToggle={this.toggleDelete}
-          handleDelete={this.onDeletePool}
+          title='Are you sure you want to delete this IP Pool?'
+          content={<p>IPs in this pool will be re-assigned to your Default pool.</p>}
+          onCancel={this.toggleDelete}
+          onDelete={this.onDeletePool}
         />
       </Page>
     );

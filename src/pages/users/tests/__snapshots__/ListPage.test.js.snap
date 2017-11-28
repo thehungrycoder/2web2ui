@@ -97,11 +97,16 @@ exports[`Users list page renders table and hidden modal 1`] = `
       }
     />
     <DeleteModal
-      handleDelete={[Function]}
-      handleToggle={[Function]}
+      content={
+        <p>
+          User "
+          " will no longer be able to log in or access this SparkPost account.
+        </p>
+      }
+      onCancel={[Function]}
+      onDelete={[Function]}
       open={false}
-      text="Are you sure you want to delete undefined?"
-      title="Delete User"
+      title="Are you sure you want to delete this user?"
     />
   </div>
 </Page>

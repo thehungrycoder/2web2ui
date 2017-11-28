@@ -52,7 +52,7 @@ it('toggles modal', () => {
 
 it('deletes correctly', () => {
   const spy = jest.spyOn(wrapper.instance().props, 'deleteApiKey');
-  wrapper.instance().onDelete();
+  wrapper.instance().handleDelete();
   expect(spy).toHaveBeenCalled();
 });
 
