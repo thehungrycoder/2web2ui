@@ -86,11 +86,11 @@ export class ListPage extends Component {
 
     return (
       <DeleteModal
-        handleDelete={this.handleDelete}
-        handleToggle={this.handleCancel}
+        onDelete={this.handleDelete}
+        onCancel={this.handleCancel}
         open={isOpen}
-        text={`Are you sure you want to delete ${name}?`}
-        title="Delete User"
+        content={<p>User "{name}" will no longer be able to log in or access this SparkPost account.</p>}
+        title="Are you sure you want to delete this user?"
       />
     );
   }

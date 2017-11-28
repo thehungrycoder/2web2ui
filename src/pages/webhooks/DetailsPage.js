@@ -95,10 +95,10 @@ class WebhooksDetails extends Component {
         <Route path={this.testPath} render={() => <TestTab webhook={webhook}/>} />
         <DeleteModal
           open={this.state.showDelete}
-          title='Delete Webhook'
-          text='Are you sure you want to delete this webhook?'
-          handleToggle={this.toggleDelete}
-          handleDelete={this.deleteWebhook}
+          title='Are you sure you want to delete this webhook?'
+          content={<p>The webhook will be permanently removed and send no further events. This cannot be undone.</p>}
+          onCancel={this.toggleDelete}
+          onDelete={this.deleteWebhook}
         />
       </Page>
     );

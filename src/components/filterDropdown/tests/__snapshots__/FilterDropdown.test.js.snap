@@ -3,6 +3,8 @@
 exports[`renders correctly 1`] = `
 <div>
   <Popover
+    bottom={true}
+    right={true}
     trigger={
       <TextField
         prefix={null}
@@ -72,6 +74,8 @@ exports[`renders correctly 1`] = `
 exports[`renders selected correctly 1`] = `
 <div>
   <Popover
+    bottom={true}
+    right={true}
     trigger={
       <TextField
         prefix="(1)"

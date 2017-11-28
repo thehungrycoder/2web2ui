@@ -43,7 +43,7 @@ export class ApiKeysDetailsPage extends Component {
     }
   }
 
-  onDelete = () => {
+  handleDelete = () => {
     const { deleteApiKey, history } = this.props;
 
     deleteApiKey().then(() => {
@@ -82,10 +82,10 @@ export class ApiKeysDetailsPage extends Component {
         </Panel>
         <DeleteModal
           open={this.state.showDeleteModal}
-          title="Delete API Key"
-          text="Are you sure you want to delete this API Key?"
-          handleToggle={this.onToggleDelete}
-          handleDelete={this.onDelete}
+          title="Are you sure you want to delete this key?"
+          content={<p>The key will be immediately and permanently removed. This cannot be undone.</p>}
+          onCancel={this.onToggleDelete}
+          onDelete={this.handleDelete}
         />
       </Page>
     );

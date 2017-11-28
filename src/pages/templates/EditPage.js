@@ -139,10 +139,10 @@ export class EditPage extends Component {
         </Grid>
         <DeleteModal
           open={this.state.deleteOpen}
-          title='Delete Template'
-          text='Are you sure you want to delete this template? Both draft and published versions of this template will be deleted.'
-          handleToggle={this.handleDeleteModalToggle}
-          handleDelete={this.handleDelete} />
+          title='Are you sure you want to delete this template?'
+          content={<p>Both the draft and published versions of this template will be deleted.</p>}
+          onCancel={this.handleDeleteModalToggle}
+          onDelete={this.handleDelete} />
       </Page>
     );
   }
