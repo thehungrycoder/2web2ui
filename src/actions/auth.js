@@ -6,7 +6,12 @@ import authCookie from '../helpers/authCookie';
 import { initializeAccessControl } from './accessControl';
 
 
-export function login(authData) {
+export function login(authData, saveCookie = false) {
+
+  if (saveCookie) { // save auth cookie
+    authCookie.save(authData);
+  }
+
   return (dispatch) => {
     dispatch({
       type: 'LOGIN_SUCCESS',
@@ -32,11 +37,8 @@ export function authenticate(username, password, rememberMe = false) {
       .then(({ data = {}} = {}) => {
         const payload = { ...data, username };
 
-        // save auth cookie
-        authCookie.save(payload);
-
         // dispatch login success event
-        dispatch(login(payload));
+        dispatch(login(payload, true));
       })
       .catch((err) => {
         const { response = {}} = err;
