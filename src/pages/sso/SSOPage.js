@@ -41,7 +41,5 @@ export class SSOPage extends Component {
   }
 }
 
-const mapStateToProps = () => ({});
 
-
-export default withRouter(connect(mapStateToProps, { login })(SSOPage));
+export default withRouter(connect(null, { login })(SSOPage));
