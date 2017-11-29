@@ -11,3 +11,4 @@ export { default as users } from './users';
 export { default as trackingDomains } from './trackingDomains';
 export { default as webhooks } from './webhooks';
 export { default as ipPools } from './ipPools';
+export { default as SSOPage } from './sso/SSOPage';

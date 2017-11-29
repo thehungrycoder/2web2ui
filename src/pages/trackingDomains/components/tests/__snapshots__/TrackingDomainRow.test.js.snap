@@ -90,6 +90,7 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
         </p>
       }
       onCancel={[Function]}
+      onConfirm={[Function]}
       open={false}
       title="Change default tracking domain (somedomain.com)"
     />
@@ -156,6 +157,7 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
         </p>
       }
       onCancel={[Function]}
+      onConfirm={[Function]}
       open={false}
       title="Change default tracking domain (somedomain.com)"
     />
@@ -229,6 +231,7 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
         </p>
       }
       onCancel={[Function]}
+      onConfirm={[Function]}
       open={false}
       title="Change default tracking domain (somedomain.com)"
     />
@@ -294,6 +297,7 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
         </p>
       }
       onCancel={[Function]}
+      onConfirm={[Function]}
       open={false}
       title="Change default tracking domain (somedomain.com)"
     />
@@ -364,6 +368,7 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
         </p>
       }
       onCancel={[Function]}
+      onConfirm={[Function]}
       open={false}
       title="Change default tracking domain (somedomain.com)"
     />
@@ -425,6 +430,7 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
         </p>
       }
       onCancel={[Function]}
+      onConfirm={[Function]}
       open={false}
       title="Change default tracking domain (somedomain.com)"
     />
@@ -491,6 +497,7 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
         </p>
       }
       onCancel={[Function]}
+      onConfirm={[Function]}
       open={false}
       title="Change default tracking domain (somedomain.com)"
     />
@@ -564,6 +571,7 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
         </p>
       }
       onCancel={[Function]}
+      onConfirm={[Function]}
       open={false}
       title="Change default tracking domain (somedomain.com)"
     />
@@ -633,6 +641,7 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
         </p>
       }
       onCancel={[Function]}
+      onConfirm={[Function]}
       open={false}
       title="Change default tracking domain (somedomain.com)"
     />
@@ -709,6 +718,7 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
         </p>
       }
       onCancel={[Function]}
+      onConfirm={[Function]}
       open={false}
       title="Change default tracking domain (somedomain.com)"
     />
@@ -777,6 +787,7 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
         </p>
       }
       onCancel={[Function]}
+      onConfirm={[Function]}
       open={false}
       title="Change default tracking domain (somedomain.com)"
     />
@@ -850,6 +861,7 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
         </p>
       }
       onCancel={[Function]}
+      onConfirm={[Function]}
       open={false}
       title="Change default tracking domain (somedomain.com)"
     />
@@ -915,6 +927,7 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
         </p>
       }
       onCancel={[Function]}
+      onConfirm={[Function]}
       open={false}
       title="Change default tracking domain (somedomain.com)"
     />
@@ -984,6 +997,7 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
         </p>
       }
       onCancel={[Function]}
+      onConfirm={[Function]}
       open={false}
       title="Change default tracking domain (somedomain.com)"
     />

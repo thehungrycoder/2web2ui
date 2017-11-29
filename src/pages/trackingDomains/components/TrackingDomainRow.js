@@ -91,6 +91,10 @@ export class TrackingDomainRow extends Component {
     }
   }
 
+  handleChangeDefault(){
+    //TODO implement this
+  }
+
   renderModals() {
     const { domain, isDefault } = this.props;
     const { deleteModalOpen, defaultModalOpen } = this.state;
