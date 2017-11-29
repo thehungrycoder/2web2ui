@@ -29,7 +29,7 @@ describe('Page: SummaryPage', () => {
 
   it('gets plans on mount', () => {
     const plansSpy = jest.spyOn(wrapper.instance().props, 'getPlans');
-    wrapper.instance().componentWillMount();
+    wrapper.instance().componentDidMount();
     expect(wrapper).toHaveState('show', false);
     expect(plansSpy).toHaveBeenCalled();
   });

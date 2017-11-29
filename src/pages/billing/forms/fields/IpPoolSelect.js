@@ -61,7 +61,7 @@ const NewIpPoolField = ({ disabled }) => (
 );
 
 class IpPoolSelect extends Component {
-  componentWillMount() {
+  componentDidMount() {
     this.props.listPools();
   }
 

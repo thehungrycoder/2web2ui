@@ -28,7 +28,7 @@ export class SummaryPage extends Component {
     show: false
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.getPlans();
     this.props.getSendingIps();
   }
