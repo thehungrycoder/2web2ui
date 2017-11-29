@@ -76,26 +76,12 @@ export function updateCreditCard({ data, token, signature }) {
   });
 }
 
-export function updateAddons(product, data) {
-  return sparkpostApiRequest({
-    type: `UPDATE_ADDON_${product.toUpperCase()}`,
-    meta: {
-      method: 'POST',
-      url: `/account/add-ons/${product}`,
-      data
-    }
-  });
-}
-
-/**
- * @todo Use updateAddons() when it supports AWS
- */
 export function addDedicatedIps({ isAwsAccount, ...data }) {
   const url = isAwsAccount
     ? '/account/integrations/aws-marketplace/add-ons/dedicated_ips'
     : '/account/add-ons/dedicated_ips';
   const action = {
-    type: 'UPDATE_ADDON_DEDICATED_IPS',
+    type: 'ADD_DEDICATED_IPS',
     meta: {
       method: 'POST',
       url,
