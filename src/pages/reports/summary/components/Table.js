@@ -33,7 +33,7 @@ const formatSize = (value) => {
   let formatted = value;
   let suffix = 'B';
 
-  const sizeFormatters = {
+  const formatters = {
     'PB': 1.126e+15,
     'TB': 1.1e+12,
     'GB': 1.074e+9,
@@ -41,10 +41,10 @@ const formatSize = (value) => {
     'KB': 1024
   };
 
-  _.forEach(sizeFormatters, (size, key) => {
-    if (value > size) {
+  _.forEach(formatters, (unit, key) => {
+    if (value > unit) {
       suffix = key;
-      formatted = value / size;
+      formatted = value / unit;
       return false;
     }
   });
@@ -62,6 +62,28 @@ const formatPercent = (value) => {
   return formatted;
 }
 
+const formatDuration = (value) => {
+  // Default case is milliseconds
+  let formatted = value;
+  let suffix = 'ms';
+
+  const formatters = {
+    'h': 3.6e+6,
+    'm': 60000,
+    's': 1000
+  };
+
+  _.forEach(formatters, function(unit, key) {
+    if (value > unit) {
+      suffix = key;
+      formatted = value / unit;
+      return false;
+    }
+  });
+
+  return `${formatted.toFixed(2)} ${suffix}`;
+}
+
 const formatUnit = (value, unit) => {
   let formatted = value.toLocaleString();
 
@@ -70,7 +92,7 @@ const formatUnit = (value, unit) => {
   }
 
   if (unit === 'milliseconds') {
-    formatted = value;
+    formatted = formatDuration(value);
   }
 
   if (unit === 'percent') {
