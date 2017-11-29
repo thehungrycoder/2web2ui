@@ -38,7 +38,7 @@ export function authenticate(username, password, rememberMe = false) {
         const payload = { ...data, username };
 
         // dispatch login success event
-        dispatch(login(payload, true));
+        login(payload, true);
       })
       .catch((err) => {
         const { response = {}} = err;
