@@ -6,7 +6,7 @@ import styles from './ConfirmationModal.module.scss';
 
 export default class ConfirmationModal extends Component {
 
-  static PropTypes = {
+  static propTypes = {
     open: PropTypes.bool,
     title: PropTypes.string,
     content: PropTypes.node,
