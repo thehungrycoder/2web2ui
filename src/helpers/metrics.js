@@ -1,3 +1,4 @@
+/* eslint-disable */
 import moment from 'moment';
 import _ from 'lodash';
 import { list as METRICS_LIST } from 'src/config/metrics';
@@ -6,14 +7,15 @@ import config from 'src/config';
 const { metricsPrecisionMap: precisionMap, apiDateFormat, chartColors } = config;
 const indexedPrecisions = _.keyBy(precisionMap, 'value');
 const FILTER_KEY_MAP = {
-  'Domain': 'domains',
+  'Recipient Domain': 'domains',
   'Campaign': 'campaigns',
   'Template': 'templates',
   'Sending IP': 'sending_ips',
   'IP Pool': 'ip_pools',
   'Subaccount': 'subaccounts',
-  'Sending/Bounce Domain': 'sending_domains'
+  'From Domain': 'sending_domains'
 };
+
 const DELIMITERS = ',;:+~`!@#$%^*()-={}[]"\'<>?./|\\'.split('');
 
 export function getQueryFromOptions({ from, to, metrics, activeList = []}) {

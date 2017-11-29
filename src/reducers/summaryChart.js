@@ -5,7 +5,9 @@ const initialState = {
   loading: false,
   metrics: getMetricsFromKeys(config.summaryChart.defaultMetrics),
   precision: '',
-  data: []
+  chartData: [],
+  tableData: [],
+  groupBy: 'domain'
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -19,7 +21,12 @@ export default (state = initialState, { type, payload }) => {
 
     case 'REFRESH_SUMMARY_CHART': {
       const { data, metrics, precision } = payload;
-      return { ...state, data: transformData(data, metrics), metrics, precision };
+      return { ...state, chartData: transformData(data, metrics), metrics, precision };
+    }
+
+    case 'REFRESH_SUMMARY_TABLE': {
+      const { data, metrics, groupBy } = payload;
+      return { ...state, tableData: transformData(data, metrics), groupBy };
     }
 
     default:

@@ -7,11 +7,11 @@ import { refresh as refreshSummaryChart } from 'src/actions/summaryChart';
 import { addFilter, refreshTypeaheadCache } from 'src/actions/reportFilters';
 import { getShareLink, getFilterSearchOptions, parseSearch } from 'src/helpers/reports';
 
-import { Page, Panel, Tabs } from '@sparkpost/matchbox';
+import { Page, Panel } from '@sparkpost/matchbox';
 import { Loading } from 'src/components';
 import Filters from '../components/Filters';
 import ShareModal from '../components/ShareModal';
-import { List, MetricsModal, ChartGroup, ChartHeader } from './components';
+import { Table, MetricsModal, ChartGroup, ChartHeader } from './components';
 
 import styles from './SummaryPage.module.scss';
 
@@ -105,8 +105,9 @@ class SummaryReportPage extends Component {
           {this.renderLoading()}
         </Panel>
 
-        <Tabs selected={0} tabs={[ { content: 'Domains' }, { content: 'Campaigns' }, { content: 'Templates' } ]}/>
-        <Panel><List /></Panel>
+        <Table {...chart} />
+        {/* <Tabs selected={0} tabs={[ { content: 'Domains' }, { content: 'Campaigns' }, { content: 'Templates' } ]}/>
+        <Panel><List /></Panel> */}
 
         <ShareModal
           open={shareModal}
