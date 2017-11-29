@@ -114,7 +114,6 @@ class AddIps extends Component {
           <Panel.Section>
             { this.renderDescription() }
             <Field
-              autoFocus={true}
               component={TextFieldWrapper}
               disabled={isDisabled}
               label='Quantity'
