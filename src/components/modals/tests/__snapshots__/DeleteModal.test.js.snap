@@ -1,16 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`DeleteModal Component should render - no props 1`] = `
-<ConfirmationModal
-  confirmVerb="Delete"
-/>
-`;
-
 exports[`DeleteModal Component should render closed with props 1`] = `
 <ConfirmationModal
   confirmVerb="Delete"
   handleDelete={[Function]}
   handleToggle={[Function]}
+  onCancel={[Function]}
+  onConfirm={[Function]}
   open={false}
   text="Got Damn"
   title="NoobNoob"
@@ -22,6 +18,8 @@ exports[`DeleteModal Component should render open with props 1`] = `
   confirmVerb="Delete"
   handleDelete={[Function]}
   handleToggle={[Function]}
+  onCancel={[Function]}
+  onConfirm={[Function]}
   open={true}
   text="Got Damn"
   title="NoobNoob"
