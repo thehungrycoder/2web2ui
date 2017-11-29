@@ -62,7 +62,7 @@ export class SummaryPage extends Component {
           <Panel.Section {...changePlanActions}>
             <PlanSummary label='Your Plan' plan={currentPlan} />
           </Panel.Section>
-          { this.renderDedicatedIps() }
+          {this.renderDedicatedIps()}
         </Panel>
 
         { shouldExposeCard && this.renderBillingSummary() }
@@ -95,8 +95,8 @@ export class SummaryPage extends Component {
     return (
       <Panel.Section actions={[action]}>
         <LabelledValue label='Dedicated IPs'>
-          <h6>{ sendingIpCount } for { this.props.dedicatedIpPrice }</h6>
-          { hasReachedMax && <p>You have reached the maximum allowed.</p>}
+          <h6>{sendingIpCount} for {this.props.dedicatedIpPrice}</h6>
+          {hasReachedMax && <p>You have reached the maximum allowed.</p>}
         </LabelledValue>
       </Panel.Section>
     );

@@ -195,9 +195,9 @@ exports[`Page: SummaryPage should render billing summary if on paid plan 1`] = `
           label="Dedicated IPs"
         >
           <h6>
-             for
+             for 
           </h6>
-        </SummarySection>
+        </LabelledValue>
       </Panel.Section>
     </Panel>
     <Panel
@@ -232,7 +232,7 @@ exports[`Page: SummaryPage should render billing summary if on paid plan 1`] = `
           label="Billing Contact"
         >
           <h6>
-
+             
           </h6>
           <p />
         </LabelledValue>
@@ -301,7 +301,7 @@ exports[`Page: SummaryPage should render disable add dedicated IPs button 1`] = 
           ]
         }
       >
-        <SummarySection
+        <LabelledValue
           label="Dedicated IPs"
         >
           <h6>
@@ -311,7 +311,7 @@ exports[`Page: SummaryPage should render disable add dedicated IPs button 1`] = 
           <p>
             You have reached the maximum allowed.
           </p>
-        </SummarySection>
+        </LabelledValue>
       </Panel.Section>
     </Panel>
     <Panel
@@ -342,14 +342,14 @@ exports[`Page: SummaryPage should render disable add dedicated IPs button 1`] = 
           ]
         }
       >
-        <SummarySection
+        <LabelledValue
           label="Billing Contact"
         >
           <h6>
              
           </h6>
           <p />
-        </SummarySection>
+        </LabelledValue>
       </Panel.Section>
     </Panel>
     <Component />
@@ -415,13 +415,13 @@ exports[`Page: SummaryPage should render enabled add dedicated IPs button 1`] = 
           ]
         }
       >
-        <SummarySection
+        <LabelledValue
           label="Dedicated IPs"
         >
           <h6>
              for 
           </h6>
-        </SummarySection>
+        </LabelledValue>
       </Panel.Section>
     </Panel>
     <Panel
@@ -452,14 +452,14 @@ exports[`Page: SummaryPage should render enabled add dedicated IPs button 1`] = 
           ]
         }
       >
-        <SummarySection
+        <LabelledValue
           label="Billing Contact"
         >
           <h6>
              
           </h6>
           <p />
-        </SummarySection>
+        </LabelledValue>
       </Panel.Section>
     </Panel>
     <Component />
