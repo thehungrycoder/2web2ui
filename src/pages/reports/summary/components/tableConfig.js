@@ -1,61 +1,37 @@
-export const GROUP_OPTIONS = [
+export const GROUP_COL_CONFIG2 = [
   {
     value: 'domain',
-    label: 'Recipient Domain'
+    label: 'Recipient Domain',
+    keyName: 'domain'
   },
   {
     value: 'campaign',
-    label: 'Campaign'
+    label: 'Campaign',
+    keyName: 'campaign_id'
   },
   {
     value: 'template',
-    label: 'Template'
+    label: 'Template',
+    keyName: 'template_id'
   },
   {
     value: 'subaccount',
-    label: 'Subaccount'
+    label: 'Subaccount',
+    keyName: 'subaccount_id'
   },
   {
     value: 'sending-domain',
-    label: 'From Domain'
+    label: 'Sending Domain',
+    keyName: 'sending_domain'
   },
   {
     value: 'sending-ip',
-    label: 'Sending IP'
+    label: 'Sending IP',
+    keyName: 'sending_ip'
   },
   {
     value: 'ip-pool',
-    label: 'Pool Name'
+    label: 'IP Pool',
+    keyName: 'ip_pool'
   }
 ];
-
-export const GROUP_COL_CONFIG = {
-  domain: {
-    columnLabel: 'Domain',
-    key: 'domain'
-  },
-  campaign: {
-    columnLabel: 'Campaign ID',
-    key: 'campaign_id'
-  },
-  template: {
-    columnLabel: 'Template ID',
-    key: 'template_id'
-  },
-  subaccount: {
-    columnLabel: 'Subaccount ID',
-    key: 'subaccount_id'
-  },
-  'sending-domain': {
-    columnLabel: 'Domain',
-    key: 'sending_domain'
-  },
-  'sending-ip': {
-    columnLabel: 'IP Name',
-    key: 'sending_ip'
-  },
-  'ip-pool': {
-    columnLabel: 'Pool Name',
-    key: 'ip_pool'
-  }
-};

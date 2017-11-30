@@ -31,17 +31,20 @@
 }
 
 .Item {
-  @include clearfix;
+  display: flex;
 }
 
 .Value {
-  float: left;
+  flex: 1 0 0;
+  padding-right: spacing();
   font-size: rem(15);
   font-weight: 400;
 }
 
 .HelpText {
-  float: right;
+  flex: 0 0 0;
+  white-space: nowrap;
+  text-align: right;
   font-size: rem(14);
   opacity: 0.8;
 }

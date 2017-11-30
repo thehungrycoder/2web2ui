@@ -1,9 +1,10 @@
+/* eslint-disable */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import classnames from 'classnames';
 
-import { refresh as refreshSummaryChart, getTableData } from 'src/actions/summaryChart';
+import { refresh as refreshSummaryChart } from 'src/actions/summaryChart';
 import { addFilter, refreshTypeaheadCache } from 'src/actions/reportFilters';
 import { getShareLink, getFilterSearchOptions, parseSearch } from 'src/helpers/reports';
 
@@ -41,10 +42,6 @@ class SummaryReportPage extends Component {
 
   handleRefresh = (options) => {
     this.props.refreshSummaryChart(options).then(() => this.updateLink());
-  }
-
-  handleGroupChange = (e) => {
-    this.props.getTableData({ groupBy: e.target.value });
   }
 
   renderLoading() {
@@ -109,9 +106,7 @@ class SummaryReportPage extends Component {
           {this.renderLoading()}
         </Panel>
 
-        <Table {...chart} onGroupChange={this.handleGroupChange} />
-        {/* <Tabs selected={0} tabs={[ { content: 'Domains' }, { content: 'Campaigns' }, { content: 'Templates' } ]}/>
-        <Panel><List /></Panel> */}
+        <Table refresh={this.handleRefresh} />
 
         <ShareModal
           open={shareModal}
@@ -135,8 +130,7 @@ const mapStateToProps = ({ reportFilters, summaryChart }) => ({
 const mapDispatchToProps = {
   refreshSummaryChart,
   refreshTypeaheadCache,
-  addFilter,
-  getTableData
+  addFilter
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SummaryReportPage));

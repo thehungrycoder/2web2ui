@@ -13,7 +13,7 @@ const FILTER_KEY_MAP = {
   'Sending IP': 'sending_ips',
   'IP Pool': 'ip_pools',
   'Subaccount': 'subaccounts',
-  'From Domain': 'sending_domains'
+  'Sending Domain': 'sending_domains'
 };
 
 const DELIMITERS = ',;:+~`!@#$%^*()-={}[]"\'<>?./|\\'.split('');

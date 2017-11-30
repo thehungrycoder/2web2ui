@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { fetch as fetchMetrics } from 'src/actions/metrics';
 import { refreshTypeaheadCache, refreshReportRange } from 'src/actions/reportFilters';
 import { getQueryFromOptions, getMetricsFromKeys } from 'src/helpers/metrics';
@@ -91,5 +90,5 @@ export function getTableData({ params, metrics, groupBy }) {
         }
       });
     });
-  }
+  };
 }

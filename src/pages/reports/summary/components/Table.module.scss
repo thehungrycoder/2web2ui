@@ -17,11 +17,13 @@
 }
 
 .HeaderCell {
-  font-size: rem(12);
+  font-size: rem(13);
+  line-height: rem(18);
   vertical-align: bottom;
+  word-break: normal;
 }
 
 .NumericalHeader {
   text-align: right;
-  max-width: rem(135);
+  max-width: rem(170);
 }
