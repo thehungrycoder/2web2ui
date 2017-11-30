@@ -129,7 +129,7 @@ class AddIps extends Component {
           <Panel.Section>
             <Button type='submit' primary disabled={isDisabled}>Add Dedicated IPs</Button>
             <Button onClick={onClose} className={styles.Cancel}>Cancel</Button>
-            { error && <div class={styles.ErrorWrapper}><Error error={error} /></div> }
+            { error && <div className={styles.ErrorWrapper}><Error error={error} /></div> }
           </Panel.Section>
         </Panel>
       </form>
