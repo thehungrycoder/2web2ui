@@ -26,22 +26,29 @@ describe('Action Creator: Bounce Report', () => {
     fetchSpy.mockRestore();
   });
 
-  it('should dispatch a refresh action', async () => {
-    const thunk = bounceReport.refresh();
+  it('should dispatch a chart refresh action', async () => {
+    const thunk = bounceReport.refreshBounceChartMetrics();
+    await thunk(dispatchMock, getStateMock);
+    expect(dispatchMock.mock.calls).toMatchSnapshot();
+  });
+
+
+  it('should dispatch a table refresh action', async () => {
+    const thunk = bounceReport.refreshBounceTableMetrics();
     await thunk(dispatchMock, getStateMock);
     expect(dispatchMock.mock.calls).toMatchSnapshot();
   });
 
   it('should handle relative range', async () => {
     const spy = jest.spyOn(dateHelpers, 'getRelativeDates');
-    const thunk = bounceReport.refresh({ relativeRange: 'test' });
+    const thunk = bounceReport.refreshBounceChartMetrics({ relativeRange: 'test' });
     await thunk(dispatchMock, getStateMock);
     expect(spy).toHaveBeenCalledWith('test');
   });
 
   it('should handle date updates', async () => {
     const spy = jest.spyOn(filterActions, 'refreshTypeaheadCache');
-    const thunk = bounceReport.refresh({ to: 'test', from: 'test' });
+    const thunk = bounceReport.refreshBounceChartMetrics({ to: 'test', from: 'test' });
     await thunk(dispatchMock, getStateMock);
     expect(spy).toHaveBeenCalled();
   });
