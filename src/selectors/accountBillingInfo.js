@@ -1,6 +1,5 @@
 import { createSelector } from 'reselect';
 import _ from 'lodash';
-import _fp from 'lodash/fp';
 
 const suspendedSelector = (state) => state.account.isSuspendedForBilling;
 const pendingSubscriptionSelector = (state) => state.account.pending_subscription;
