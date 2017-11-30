@@ -2,6 +2,7 @@
 import {
   apiKeys,
   AuthPage,
+  SSOPage,
   billing,
   DashboardPage,
   ProfilePage,
@@ -72,6 +73,11 @@ export default [
     path: '/auth',
     public: true,
     component: AuthPage
+  },
+   {
+    path: '/sso',
+    public: true,
+    component: SSOPage
   },
   {
     path: '/dashboard',

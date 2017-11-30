@@ -33,4 +33,3 @@ it('calls correct method on submit', () => {
   wrapper.find('form').first().simulate('submit');
   expect(props.handleSubmit).toHaveBeenCalledTimes(1);
 });
-
