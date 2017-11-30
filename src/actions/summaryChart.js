@@ -45,7 +45,13 @@ export function refresh(updates = {}) {
 }
 
 export function getChartData({ params = {}, metrics }) {
-  return (dispatch, getState) => dispatch(fetchMetrics({ path: 'deliverability/time-series', params })).then((results) => {
+  const options = {
+    type: 'FETCH_CHART_DATA',
+    path: 'deliverability/time-series',
+    params
+  };
+
+  return (dispatch, getState) => dispatch(fetchMetrics(options)).then((results) => {
     const payload = {
       data: results,
       precision: params.precision,
@@ -58,14 +64,24 @@ export function getChartData({ params = {}, metrics }) {
 
 export function getTableData({ params, metrics, groupBy }) {
   return (dispatch, getState) => {
-    const activeGroup = groupBy || getState().summaryChart.groupBy;
+    const state = getState();
+    const activeGroup = groupBy || state.summaryChart.groupBy;
+
+    if (!metrics) {
+      metrics = state.summaryChart.metrics;
+    }
 
     if (!params) {
-      const state = getState();
       params = getQueryFromOptions({ ...state.summaryChart, ...state.reportFilters });
     }
 
-    dispatch(fetchMetrics({ path: `deliverability/${activeGroup}`, params })).then((results) => {
+    const options = {
+      type: 'FETCH_TABLE_DATA',
+      path: `deliverability/${activeGroup}`,
+      params
+    };
+
+    dispatch(fetchMetrics(options)).then((results) => {
       dispatch({
         type: 'REFRESH_SUMMARY_TABLE',
         payload: {

@@ -12,12 +12,19 @@ const initialState = {
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
-    case 'FETCH_METRICS_PENDING':
-      return { ...state, loading: true };
+    case 'FETCH_CHART_DATA_PENDING':
+      return { ...state, chartLoading: true };
 
-    case 'FETCH_METRICS_SUCCESS':
-    case 'FETCH_METRICS_FAIL':
-      return { ...state, loading: false };
+    case 'FETCH_CHART_DATA_SUCCESS':
+    case 'FETCH_CHART_DATA_FAIL':
+      return { ...state, chartLoading: false };
+
+    case 'FETCH_TABLE_DATA_PENDING':
+      return { ...state, tableLoading: true };
+
+    case 'FETCH_TABLE_DATA_SUCCESS':
+    case 'FETCH_TABLE_DATA_FAIL':
+      return { ...state, tableLoading: false };
 
     case 'REFRESH_SUMMARY_CHART': {
       const { data, metrics, precision } = payload;

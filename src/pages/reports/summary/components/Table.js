@@ -1,146 +1,92 @@
 /* eslint-disable */
 import React, { Component } from 'react';
-import { TableCollection } from 'src/components';
-import { Panel } from '@sparkpost/matchbox';
+import cx from 'classnames';
+import { TableCollection, Unit, Loading } from 'src/components';
+import Empty from '../../components/Empty';
+import { Panel, Select, Grid } from '@sparkpost/matchbox';
+import { GROUP_OPTIONS, GROUP_COL_CONFIG } from './tableConfig';
 import _ from 'lodash';
 
-const groups = {
-  domain: {
-    label: 'Recipient Domain'
-  },
-  campaign: {
-    label: 'Campaign Name'
-  },
-  template: {
-    label: 'Template ID'
-  },
-  subaccount: {
-    label: 'Subaccount ID'
-  },
-  'sending-domain': {
-    label: 'From Domain'
-  },
-  'sending-ip': {
-    label: 'Sending IP'
-  },
-  'ip-pool': {
-    label: 'Pool Name'
-  }
-};
-
-const formatSize = (value) => {
-  // Default case is Bytes
-  let formatted = value;
-  let suffix = 'B';
-
-  const formatters = {
-    'PB': 1.126e+15,
-    'TB': 1.1e+12,
-    'GB': 1.074e+9,
-    'MB': 1.049e+6,
-    'KB': 1024
-  };
-
-  _.forEach(formatters, (unit, key) => {
-    if (value > unit) {
-      suffix = key;
-      formatted = value / unit;
-      return false;
-    }
-  });
-
-  return `${formatted.toFixed(2)} ${suffix}`;
-};
-
-const formatPercent = (value) => {
-  let formatted = `${value.toFixed(2)}%`;
-
-  if (value < 0.01 && value > 0){
-    formatted = '< 0.01%';
-  }
-
-  return formatted;
-}
-
-const formatDuration = (value) => {
-  // Default case is milliseconds
-  let formatted = value;
-  let suffix = 'ms';
-
-  const formatters = {
-    'h': 3.6e+6,
-    'm': 60000,
-    's': 1000
-  };
-
-  _.forEach(formatters, function(unit, key) {
-    if (value > unit) {
-      suffix = key;
-      formatted = value / unit;
-      return false;
-    }
-  });
-
-  return `${formatted.toFixed(2)} ${suffix}`;
-}
-
-const formatUnit = (value, unit) => {
-  let formatted = value.toLocaleString();
-
-  if (unit === 'bytes') {
-    formatted = formatSize(value)
-  }
-
-  if (unit === 'milliseconds') {
-    formatted = formatDuration(value);
-  }
-
-  if (unit === 'percent') {
-    formatted = formatPercent(value);
-  }
-
-  return formatted;
-}
+import styles from './Table.module.scss';
 
 class Table extends Component {
 
   getColumnHeaders() {
     const { metrics, groupBy } = this.props;
     return [
-      groups[groupBy].label,
-      ...metrics.map(({ label }) => ({ label }))
+      {
+        label: GROUP_COL_CONFIG[groupBy].columnLabel,
+        className: styles.HeaderCell
+      },
+      ...metrics.map(({ label }) => ({
+        label: <div className={styles.RightAlign}>{ label }</div>,
+        className: cx(styles.HeaderCell, styles.NumericalHeader)
+      }))
     ];
   }
 
   getRowData() {
     const { metrics, groupBy } = this.props;
-    console.log(metrics)
+    const key = GROUP_COL_CONFIG[groupBy].key;
+
     return (row) => {
+
       return [
-        row[groupBy],
+        String(row[key]),
         ...metrics.map((metric) => {
-          return formatUnit(row[metric.key], metric.unit);
+          return <div className={styles.RightAlign}><Unit value={row[metric.key]} unit={metric.unit}/></div>
         })
-      ]
+      ];
     }
   }
 
-  render() {
-    if (!this.props.tableData.length || !this.props.metrics.length) {
-      return null;
+  renderTable() {
+    const { tableData, tableLoading } = this.props;
+
+    if (tableLoading) {
+      return (
+        <div className={styles.LoadingSection}>
+          <div className={styles.Loading}><Loading /></div>
+        </div>
+      );
+    }
+
+    if (!tableData.length) {
+      return <Empty message='There is not data for your current query' />
     }
 
     return (
+      <TableCollection
+          columns={this.getColumnHeaders()}
+          getRowData={this.getRowData()}
+          pagination
+          defaultPerPage={10}
+          rows={this.props.tableData}
+          filterBox={{ show: false }}
+        />
+    )
+  }
+
+  render() {
+    const { tableLoading } = this.props;
+
+    return (
       <div>
-        <Panel></Panel>
-        <TableCollection
-            columns={this.getColumnHeaders()}
-            getRowData={this.getRowData()}
-            pagination
-            defaultPerPage={10}
-            rows={this.props.tableData}
-            filterBox={{ show: false }}
-          />
+        <Panel>
+          <Panel.Section>
+            <Grid>
+              <Grid.Column xs={12} md={6}>
+                <Select
+                  label='Group By'
+                  options={GROUP_OPTIONS}
+                  value={this.props.groupBy}
+                  onChange={this.props.onGroupChange}/>
+              </Grid.Column>
+              <Grid.Column></Grid.Column>
+            </Grid>
+          </Panel.Section>
+          { this.renderTable() }
+          </Panel>
       </div>
     );
   }
