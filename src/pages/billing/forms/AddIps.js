@@ -12,7 +12,8 @@ import config from 'src/config';
 import IpPoolSelect from './fields/IpPoolSelect';
 import ErrorTracker from 'src/helpers/errorTracker';
 import { required, minNumber, maxNumber } from 'src/helpers/validation';
-import { currentPlanSelector, dedicatedIpPrice } from 'src/selectors/accountBillingInfo';
+import { currentPlanSelector } from 'src/selectors/accountBillingInfo';
+import DedicatedIpCost from '../components/DedicatedIpCost';
 
 import styles from './Forms.module.scss';
 
@@ -75,12 +76,13 @@ class AddIps extends Component {
   }
 
   renderDescription() {
-    const { currentPlan, dedicatedIpPrice } = this.props;
+    const { currentPlan } = this.props;
+    const cost = <DedicatedIpCost plan={currentPlan} quantity={1} />;
 
     if (currentPlan.isAwsAccount) {
       return (
         <p>
-          Dedicated IP addresses are available to AWS Marketplace customers for { dedicatedIpPrice }
+          Dedicated IP addresses are available to AWS Marketplace customers for { cost }
           They give you better control over your sending reputation. You can purchase up to { MAX }.
           { currentPlan.includesIp && 'Your plan includes one free.' } New dedicated IP addresses
           will need to be warmed up first. Read the <WarmUpArticleLink /> for more information. Visit
@@ -91,7 +93,7 @@ class AddIps extends Component {
 
     return (
       <p>
-        Dedicated IP addresses are available to paid plan customers for { dedicatedIpPrice }. They
+        Dedicated IP addresses are available to paid plan customers for { cost }. They
         give you better control over your sending reputation. You can purchase up to { MAX }.
         { currentPlan.includesIp && `Your plan includes one free. Your account statement will show
         a charge with a matching refund.` } New dedicated IP addresses will need to be warmed up
@@ -137,7 +139,6 @@ class AddIps extends Component {
 
 const mapStateToProps = (state) => ({
   currentPlan: currentPlanSelector(state),
-  dedicatedIpPrice: dedicatedIpPrice(state),
   sendingIps: state.sendingIps.list
 });
 

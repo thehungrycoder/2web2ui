@@ -48,7 +48,7 @@ describe('Page: SummaryPage', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should render billing summary if on paid plan', () => {
+  it('should render billing and dedicated IP summary if on paid plan', () => {
     wrapper.setProps({
       canChangePlan: true,
       shouldExposeCard: true,
@@ -78,24 +78,5 @@ describe('Page: SummaryPage', () => {
     wrapper.instance().handleEscape({ key: 'Escape' });
     expect(modalSpy).toHaveBeenCalled();
     expect(wrapper).toHaveState('show', false);
-  });
-
-  it('should render enabled add dedicated IPs button', () => {
-    wrapper.setProps({
-      account: { subscription: { self_serve: true }},
-      currentPlan: { canPurchaseIps: true },
-      shouldExposeCard: true
-    });
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('should render disable add dedicated IPs button', () => {
-    wrapper.setProps({
-      account: { subscription: { self_serve: true }},
-      currentPlan: { canPurchaseIps: true },
-      sendingIps: [{}, {}, {}, {}],
-      shouldExposeCard: true
-    });
-    expect(wrapper).toMatchSnapshot();
   });
 });

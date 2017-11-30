@@ -89,21 +89,3 @@ describe('IP Pool List Selector', () => {
     expect(billingInfo.selectIpPools(store)).toMatchSnapshot();
   });
 });
-
-describe('Dedicated IP Price', () => {
-  it('returns regular formatted price', () => {
-    const store = {
-      account: { subscription: { code: 'abc' }},
-      billing: { plans: [{ code: 'abc' }] }
-    };
-    expect(billingInfo.dedicatedIpPrice(store)).toEqual('$10.00 per IP address per month');
-  });
-
-  it('returns AWS formatted price', () => {
-    const store = {
-      account: { subscription: { code: 'abc' }},
-      billing: { plans: [{ code: 'abc', isAwsAccount: true }] }
-    };
-    expect(billingInfo.dedicatedIpPrice(store)).toEqual('$0.001 per IP address per hour');
-  });
-});

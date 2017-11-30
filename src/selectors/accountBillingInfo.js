@@ -1,7 +1,6 @@
 import { createSelector } from 'reselect';
 import _ from 'lodash';
 import _fp from 'lodash/fp';
-import config from 'src/config';
 
 const suspendedSelector = (state) => state.account.isSuspendedForBilling;
 const pendingSubscriptionSelector = (state) => state.account.pending_subscription;
@@ -51,14 +50,3 @@ export function selectIpPools(state) {
     _fp.map(({ name, id }) => ({ label: `${name} [${id}]`, value: id }))
   )(state.ipPools.list);
 }
-
-/**
- * Get price for a dedicated IP address
- * @return {string}
- */
-export const dedicatedIpPrice = createSelector(
-  [currentPlanSelector],
-  (currentPlan) => currentPlan.isAwsAccount
-    ? `$${config.sendingIps.awsPricePerIp.toFixed(3)} per IP address per hour`
-    : `$${config.sendingIps.pricePerIp.toFixed(2)} per IP address per month`
-);
