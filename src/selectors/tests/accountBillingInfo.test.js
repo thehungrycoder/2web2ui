@@ -1,7 +1,4 @@
 import * as billingInfo from '../accountBillingInfo';
-import * as mockConfig from 'src/config';
-
-jest.mock('src/config', () => ({ sendingIps: { awsPricePerIp: 0.0011, pricePerIp: 10 } }));
 
 describe('Selector: public plans', () => {
   const store = {

@@ -20,7 +20,7 @@ const TEST_CASES = {
   }
 };
 
-cases('DedicatedIpSummarySection', props => {
+cases('DedicatedIpSummarySection', (props) => {
   const wrapper = shallow(<DedicatedIpSummarySection {...props} />);
   expect(wrapper).toMatchSnapshot();
 }, TEST_CASES);
