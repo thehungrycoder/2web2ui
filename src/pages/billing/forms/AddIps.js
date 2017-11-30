@@ -139,7 +139,12 @@ class AddIps extends Component {
 
 const mapStateToProps = (state) => ({
   currentPlan: currentPlanSelector(state),
-  sendingIps: state.sendingIps.list
+  sendingIps: state.sendingIps.list,
+  initialValues: {
+    ipPool: {
+      action: 'new'
+    }
+  }
 });
 
 const mapDispatchtoProps = { addDedicatedIps, createPool, showAlert };
