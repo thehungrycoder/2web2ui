@@ -1,9 +1,16 @@
 import { sparkpostLogin } from '../helpers/http';
+import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
+
 import authCookie from '../helpers/authCookie';
 import { initializeAccessControl } from './accessControl';
 
 
-export function login(authData) {
+export function login(authData, saveCookie = false) {
+
+  if (saveCookie) { // save auth cookie
+    authCookie.save(authData);
+  }
+
   return (dispatch) => {
     dispatch({
       type: 'LOGIN_SUCCESS',
@@ -29,11 +36,8 @@ export function authenticate(username, password, rememberMe = false) {
       .then(({ data = {}} = {}) => {
         const payload = { ...data, username };
 
-        // save auth cookie
-        authCookie.save(payload);
-
         // dispatch login success event
-        dispatch(login(payload));
+        login(payload, true);
       })
       .catch((err) => {
         const { response = {}} = err;
@@ -79,6 +83,16 @@ export function confirmPassword(username, password) {
         throw err;
       });
   };
+}
+
+export function ssoCheck(username) {
+  return sparkpostApiRequest({
+    type: 'SSO_CHECK',
+    meta: {
+      method: 'GET',
+      url: `/users/${username}/saml`
+    }
+  });
 }
 
 export function refresh(token, refreshToken) {
