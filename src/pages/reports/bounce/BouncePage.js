@@ -77,7 +77,6 @@ export class BouncePage extends Component {
   renderChart() {
     const { chartLoading, aggregates } = this.props;
 
-
     if (!chartLoading && !aggregates) {
       return <Empty title={'Bounce Rates'} message={'No bounces to report'}/>;
     }

@@ -25,7 +25,7 @@ it('renders correctly when logging in', () => {
 });
 
 it('renders correctly when ssoEnabled is true', () => {
-  wrapper.setProps({ssoEnabled: true});
+  wrapper.setProps({ ssoEnabled: true });
   expect(wrapper).toMatchSnapshot();
 });
 
@@ -33,3 +33,4 @@ it('calls correct method on submit', () => {
   wrapper.find('form').first().simulate('submit');
   expect(props.handleSubmit).toHaveBeenCalledTimes(1);
 });
+
