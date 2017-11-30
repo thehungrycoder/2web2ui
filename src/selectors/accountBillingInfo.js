@@ -39,14 +39,3 @@ export const shouldExposeCardSelector = createSelector(
   [currentPlanSelector, accountBillingSelector],
   (currentPlan, accountBilling) => !!accountBilling && !currentPlan.isFree
 );
-
-/**
- * Gets IP pools and formats for select options
- */
-export function selectIpPools(state) {
-  return _fp.flow(
-    _fp.reject({ id: 'default' }),
-    _fp.sortBy(({ name }) => name.toLowerCase()),
-    _fp.map(({ name, id }) => ({ label: `${name} [${id}]`, value: id }))
-  )(state.ipPools.list);
-}
