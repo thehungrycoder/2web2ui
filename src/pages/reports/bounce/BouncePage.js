@@ -15,7 +15,9 @@ import Filters from '../components/Filters';
 import ChartGroup from './components/ChartGroup';
 import Empty from '../components/Empty';
 
-const columns = ['Reason', 'Domain', 'Category', 'Classification', 'Count', '% of Total'];
+import './BouncePage.scss';
+
+const columns = ['Reason', 'Domain', 'Category', 'Classification', 'Count (%)'];
 
 export class BouncePage extends Component {
   state = {
@@ -64,12 +66,11 @@ export class BouncePage extends Component {
     const { totalBounces } = this.props;
     const { reason, domain, bounce_category_name, bounce_class_name, count_bounce } = rowData;
     return [
-      <div style={{ width: '300px' }}>{reason}</div>,
+      <div className='ReasonCell'>{reason}</div>,
       domain,
       bounce_category_name,
       bounce_class_name,
-      count_bounce,
-      `${Number((count_bounce / totalBounces) * 100).toFixed(2)}%`
+      `${count_bounce} (${Number((count_bounce / totalBounces) * 100).toFixed(2)}%)`
     ];
   }
 
@@ -111,7 +112,7 @@ export class BouncePage extends Component {
       <Page title='Bounce Report'>
         <Filters refresh={this.handleRefresh} onShare={this.handleModalToggle} />
         { this.renderChart() }
-        <Panel title='Bounced Messages'>
+        <Panel title='Bounced Messages' className='BounceTable'>
           { this.renderCollection() }
         </Panel>
         <ShareModal
