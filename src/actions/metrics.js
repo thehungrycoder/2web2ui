@@ -66,3 +66,9 @@ export function fetchBounceReasons(params = {}) {
   const path = 'deliverability/bounce-reason';
   return fetch({ type, path, params });
 }
+
+export function fetchBounceReasonsByDomain(params = {}) {
+  const type = 'FETCH_METRICS_BOUNCE_REASONS_BY_DOMAIN';
+  const path = 'deliverability/bounce-reason/domain';
+  return fetch({ type, path, params });
+}
