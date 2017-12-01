@@ -13,7 +13,8 @@ import {
   trackingDomains,
   users,
   webhooks,
-  ipPools
+  ipPools,
+  ComingSoonPage
 } from 'src/pages';
 
 import {
@@ -100,6 +101,26 @@ export default [
     layout: App
   },
   {
+    path: '/reports/rejections',
+    component: ComingSoonPage,
+    layout: App
+  },
+  {
+    path: '/reports/accepted',
+    component: ComingSoonPage,
+    layout: App
+  },
+  {
+    path: '/reports/delayed',
+    component: ComingSoonPage,
+    layout: App
+  },
+  {
+    path: '/reports/engagement',
+    component: ComingSoonPage,
+    layout: App
+  },
+  {
     path: '/reports/message-events',
     component: reports.MessageEventsPage,
     layout: App
@@ -171,6 +192,18 @@ export default [
     layout: App
   },
   {
+    path: '/lists/recipient-lists/create',
+    component: ComingSoonPage,
+    condition: hasGrants('recipient_lists/manage'),
+    layout: App
+  },
+  {
+    path: '/lists/suppressions',
+    component: ComingSoonPage,
+    condition: hasGrants('suppression_lists/manage'),
+    layout: App
+  },
+  {
     path: '/webhooks',
     component: webhooks.ListPage,
     condition: hasGrants('webhooks/view'),
@@ -223,6 +256,24 @@ export default [
     path: '/account/profile',
     component: ProfilePage,
     condition: hasGrants('users/self-manage'),
+    layout: App
+  },
+  {
+    path: '/account/security',
+    component: ComingSoonPage,
+    condition: hasGrants('users/self-manage'),
+    layout: App
+  },
+  {
+    path: '/account/sending-domains',
+    component: ComingSoonPage,
+    condition: hasGrants('sending_domains/manage'),
+    layout: App
+  },
+  {
+    path: '/account/smtp',
+    component: ComingSoonPage,
+    condition: hasGrants('api_keys/manage'),
     layout: App
   },
   {
