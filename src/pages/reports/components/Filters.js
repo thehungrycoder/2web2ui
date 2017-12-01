@@ -15,7 +15,7 @@ class Filters extends Component {
     return filters.activeList.length
       ? <Panel.Section>
           <small>Filters:</small>
-          { filters.activeList.map((item, index) => <Tag key={index} onRemove={() => this.handleFilterRemove(index)} className={styles.TagWrapper}>{ item.value }</Tag>)}
+          { filters.activeList.map((item, index) => <Tag key={index} onRemove={() => this.handleFilterRemove(index)} className={styles.TagWrapper}>{ item.type }: { item.value }</Tag>)}
         </Panel.Section>
       : null;
   }

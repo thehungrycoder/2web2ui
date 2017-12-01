@@ -9,7 +9,7 @@ import typeaheadCacheSelector from 'src/selectors/reportFilterTypeaheadCache';
 import { TableCollection, Unit, Loading } from 'src/components';
 import Empty from '../../components/Empty';
 import { Panel, Select, Grid, UnstyledLink } from '@sparkpost/matchbox';
-import { GROUP_COL_CONFIG2 } from './tableConfig';
+import { GROUP_CONFIG } from './tableConfig';
 import _ from 'lodash';
 
 import styles from './Table.module.scss';
@@ -29,7 +29,7 @@ class Table extends Component {
     const { metrics, groupBy } = this.props;
 
     const primaryCol = {
-      label: _.find(GROUP_COL_CONFIG2, { value: groupBy }).label,
+      label: _.find(GROUP_CONFIG, { value: groupBy }).label,
       className: styles.HeaderCell
     };
 
@@ -44,7 +44,7 @@ class Table extends Component {
 
   getRowData() {
     const { metrics, groupBy, typeaheadCache } = this.props;
-    const group = _.find(GROUP_COL_CONFIG2, { value: this.props.groupBy });
+    const group = _.find(GROUP_CONFIG, { value: groupBy });
 
     return (row) => {
       let value = row[group.keyName];
@@ -80,7 +80,7 @@ class Table extends Component {
   }
 
   renderTable() {
-    const { tableData, tableLoading, groupBy } = this.props;
+    const { tableData, tableLoading } = this.props;
 
     if (tableLoading) {
       return (
@@ -96,7 +96,7 @@ class Table extends Component {
 
     return (
       <TableCollection
-        rowKeyName={_.find(GROUP_COL_CONFIG2, { value: this.props.groupBy }).keyName}
+        rowKeyName={_.find(GROUP_CONFIG, { value: this.props.groupBy }).keyName}
         columns={this.getColumnHeaders()}
         getRowData={this.getRowData()}
         pagination
@@ -109,7 +109,7 @@ class Table extends Component {
 
   render() {
     const { tableLoading, groupBy } = this.props;
-    const options = GROUP_COL_CONFIG2.map(({ value, label }) => ({ value, label }));
+    const options = GROUP_CONFIG.map(({ value, label }) => ({ value, label }));
     return (
       <Panel>
         <Panel.Section>

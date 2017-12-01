@@ -1,4 +1,4 @@
-export const GROUP_COL_CONFIG2 = [
+export const GROUP_CONFIG = [
   {
     value: 'domain',
     label: 'Recipient Domain',

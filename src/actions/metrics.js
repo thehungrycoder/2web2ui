@@ -1,9 +1,9 @@
-import moment from 'moment';
+import { format, subDays } from 'date-fns';
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 
 const apiFormat = 'YYYY-MM-DDTHH:MM';
 const defaultParams = () => ({
-  from: moment().subtract(30, 'days').format(apiFormat),
+  from: format(subDays(Date.now(), 30), apiFormat),
   metrics: 'count_targeted'
 });
 

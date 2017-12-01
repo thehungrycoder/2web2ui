@@ -1,4 +1,3 @@
-/* eslint-disable */
 import moment from 'moment';
 import _ from 'lodash';
 import { list as METRICS_LIST } from 'src/config/metrics';

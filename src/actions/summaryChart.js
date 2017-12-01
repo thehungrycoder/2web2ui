@@ -64,12 +64,16 @@ export function getChartData({ params = {}, metrics }) {
 export function getTableData({ params, metrics, groupBy }) {
   return (dispatch, getState) => {
     const state = getState();
+
+    // The selected grouping
     const activeGroup = groupBy || state.summaryChart.groupBy;
 
+    // Get selected metrics - if this happens outside of a full chart refresh
     if (!metrics) {
       metrics = state.summaryChart.metrics;
     }
 
+    // Gets filters and metrics for params
     if (!params) {
       params = getQueryFromOptions({ ...state.summaryChart, ...state.reportFilters });
     }
