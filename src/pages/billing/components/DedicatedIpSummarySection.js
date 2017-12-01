@@ -26,7 +26,7 @@ export default function DedicatedIpSummarySection({ count = 0, plan = {}, onClic
     <Panel.Section actions={[action]}>
       <LabelledValue label='Dedicated IPs'>
         {summary}
-        {count === 0 && plan.includesIp && <p>First is free!</p>}
+        {count === 0 && plan.includesIp && <p>First IP is free!</p>}
         {hasReachedMax && <p>You have reached the maximum allowed.</p>}
       </LabelledValue>
     </Panel.Section>

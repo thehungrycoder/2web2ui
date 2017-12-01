@@ -107,7 +107,7 @@ exports[`DedicatedIpSummarySection renders zero count and first is free notice 1
       0
     </h6>
     <p>
-      First is free!
+      First IP is free!
     </p>
   </LabelledValue>
 </Panel.Section>
