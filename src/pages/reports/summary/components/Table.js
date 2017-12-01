@@ -101,7 +101,7 @@ class Table extends Component {
     }
 
     if (!tableData.length) {
-      return <Empty message='There is no data for your current query' />;
+      return <Empty message='There is no data to display' />;
     }
 
     return (

@@ -23,7 +23,7 @@ export default class ChartGroup extends Component {
   }
 
   render() {
-    const { chartData = [], metrics, loading, precision, yScale } = this.props;
+    const { chartData = [], metrics, chartLoading, precision, yScale } = this.props;
 
     if (!chartData.length || !metrics) {
       return null;
@@ -47,7 +47,7 @@ export default class ChartGroup extends Component {
             key: name,
             dataKey: name,
             name: label,
-            stroke: loading ? '#f8f8f8' : stroke
+            stroke: chartLoading ? '#f8f8f8' : stroke
           }))}
           {...formatters}
           yTickFormatter={chart.yAxisFormatter}
