@@ -5,6 +5,11 @@ export const GROUP_CONFIG = [
     keyName: 'domain'
   },
   {
+    value: 'sending-domain',
+    label: 'Sending Domain',
+    keyName: 'sending_domain'
+  },
+  {
     value: 'campaign',
     label: 'Campaign',
     keyName: 'campaign_id'
@@ -18,11 +23,6 @@ export const GROUP_CONFIG = [
     value: 'subaccount',
     label: 'Subaccount',
     keyName: 'subaccount_id'
-  },
-  {
-    value: 'sending-domain',
-    label: 'Sending Domain',
-    keyName: 'sending_domain'
   },
   {
     value: 'sending-ip',

@@ -5,6 +5,7 @@ import cx from 'classnames';
 import { getTableData } from 'src/actions/summaryChart';
 import { addFilter } from 'src/actions/reportFilters';
 import typeaheadCacheSelector from 'src/selectors/reportFilterTypeaheadCache';
+import { hasSubaccounts } from 'src/selectors/subaccounts';
 
 import { TableCollection, Unit, Loading } from 'src/components';
 import Empty from '../../components/Empty';
@@ -15,7 +16,6 @@ import _ from 'lodash';
 import styles from './Table.module.scss';
 
 class Table extends Component {
-
   handleGroupChange = (e) => {
     this.props.getTableData({ groupBy: e.target.value });
   }
@@ -48,7 +48,7 @@ class Table extends Component {
 
     return (row) => {
       let value = row[group.keyName];
-      const filter = {
+      let filter = {
         type: group.label,
         value
       };
@@ -63,8 +63,7 @@ class Table extends Component {
           value = 'Master Account (ID 0)';
         }
 
-        filter.value = value;
-        filter.id = id;
+        filter = { ...filter, value, id };
       }
 
       const primaryCol = <UnstyledLink onClick={() => this.handleRowClick(filter)}>{ value }</UnstyledLink>;
@@ -79,8 +78,19 @@ class Table extends Component {
     };
   }
 
+  getSelectOptions = () => {
+    const options = GROUP_CONFIG.map(({ value, label }) => ({ value, label }));
+
+    if (!this.props.hasSubaccounts) {
+      _.remove(options, { value: 'subaccount' });
+    }
+
+    return options;
+  }
+
   renderTable() {
     const { tableData, tableLoading } = this.props;
+    const rowKeyName = _.find(GROUP_CONFIG, { value: this.props.groupBy }).keyName;
 
     if (tableLoading) {
       return (
@@ -96,7 +106,7 @@ class Table extends Component {
 
     return (
       <TableCollection
-        rowKeyName={_.find(GROUP_CONFIG, { value: this.props.groupBy }).keyName}
+        rowKeyName={rowKeyName}
         columns={this.getColumnHeaders()}
         getRowData={this.getRowData()}
         pagination
@@ -109,7 +119,7 @@ class Table extends Component {
 
   render() {
     const { tableLoading, groupBy } = this.props;
-    const options = GROUP_CONFIG.map(({ value, label }) => ({ value, label }));
+
     return (
       <Panel>
         <Panel.Section>
@@ -117,7 +127,7 @@ class Table extends Component {
             <Grid.Column xs={12} md={5} lg={4}>
               <Select
                 label='Group By'
-                options={options}
+                options={this.getSelectOptions()}
                 value={groupBy}
                 disabled={tableLoading}
                 onChange={this.handleGroupChange}/>
@@ -133,6 +143,7 @@ class Table extends Component {
 
 const mapStateToProps = (state) => ({
   typeaheadCache: typeaheadCacheSelector(state),
+  hasSubaccounts: hasSubaccounts(state),
   ...state.summaryChart
 });
 export default connect(mapStateToProps, { getTableData, addFilter })(Table);

@@ -19,6 +19,7 @@ export default class SpLineChart extends React.Component {
     return lines.map((line) => {
       const lineProps = {
         strokeWidth: 2,
+        animationDuration: 400,
         activeDot: { r: 6 },
         dot: false,
         type: 'linear',
@@ -118,6 +119,7 @@ export default class SpLineChart extends React.Component {
               domain={yDomain}
               allowDataOverflow={yScale === 'log'} />
             <Tooltip
+              isAnimationActive={false}
               labelFormatter={tooltipLabelFormatter}
               formatter={tooltipValueFormatter}
               itemSorter={orderDesc} />
