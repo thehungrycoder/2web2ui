@@ -91,7 +91,7 @@ export class TrackingDomainRow extends Component {
     }
   }
 
-  handleChangeDefault(){
+  handleChangeDefault() {
     //TODO implement this
   }
 
