@@ -111,7 +111,7 @@ class AddIps extends Component {
     const isDisabled = submitting || remaining === 0;
 
     return (
-      <form onSubmit={handleSubmit(this.onSubmit)}>
+      <form onSubmit={handleSubmit(this.onSubmit)} noValidate>
         <Panel title='Add Dedicated IPs'>
           <Panel.Section>
             { this.renderDescription() }
