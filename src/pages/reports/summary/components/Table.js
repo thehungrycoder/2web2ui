@@ -118,8 +118,6 @@ class Table extends Component {
   }
 
   render() {
-    const { tableLoading, groupBy } = this.props;
-
     return (
       <Panel>
         <Panel.Section>
@@ -128,8 +126,8 @@ class Table extends Component {
               <Select
                 label='Group By'
                 options={this.getSelectOptions()}
-                value={groupBy}
-                disabled={tableLoading}
+                value={this.props.groupBy}
+                disabled={this.props.tableLoading}
                 onChange={this.handleGroupChange}/>
             </Grid.Column>
             <Grid.Column></Grid.Column>

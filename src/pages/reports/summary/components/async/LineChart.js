@@ -57,26 +57,36 @@ export default class SpLineChart extends React.Component {
   // Manually generates Y axis ticks
   getYTicks() {
     const { yLabel, yScale } = this.props;
+    let ticks;
+
     if (yLabel === 'Percent' && yScale === 'linear') {
-      return { ticks: [0, 25, 50, 75, 100]};
+      ticks = [0, 25, 50, 75, 100];
     }
 
-    return {};
+    return ticks;
   }
 
   // Manually generates X axis ticks
   getXTicks() {
     const { data, precision } = this.props;
+    let ticks;
 
-    if (precision === '1min') {
-      // Show ticks every 15 minutes
-      return { ticks: data.map((tick) => tick.ts).filter((time) => moment(time).minutes() % 15 === 0) };
-    } else if (precision === '15min') {
-      // Show ticks every 30 minutes
-      return { ticks: data.map((tick) => tick.ts).filter((time) => moment(time).minutes() % 30 === 0) };
+    // Shows ticks every Sunday
+    if (precision === 'day' && data.length > 15) {
+      ticks = data.map((tick) => tick.ts).filter((time) => moment(time).isoWeekday() === 7);
     }
 
-    return {};
+    // Show ticks every 15 minutes
+    if (precision === '1min') {
+      ticks = data.map((tick) => tick.ts).filter((time) => moment(time).minutes() % 15 === 0);
+    }
+
+    // Show ticks every 30 minutes
+    if (precision === '15min') {
+      ticks = data.map((tick) => tick.ts).filter((time) => moment(time).minutes() % 30 === 0);
+    }
+
+    return ticks;
   }
 
   render() {
@@ -93,30 +103,26 @@ export default class SpLineChart extends React.Component {
       yLabel
     } = this.props;
 
-    const yDomain = this.getYDomain();
-    const yTicks = this.getYTicks();
-    const xTicks = this.getXTicks();
-
     return (
       <div className='sp-linechart-wrapper'>
-        <ResponsiveContainer width='99%' height={150 + (40 * lines.length)}>
+        <ResponsiveContainer width='99%' height={170 + (30 * lines.length)}>
           <LineChart data={data} syncId={syncId}>
             <CartesianGrid vertical={false} strokeDasharray="4 1"/>
             <XAxis
               tickFormatter={xTickFormatter}
-              {...xTicks}
+              ticks={this.getXTicks()}
               scale='utcTime'
               dataKey='ts'
-              interval='preserveEnd'
+              interval='preserveStartEnd'
               height={30}
               hide={!showXAxis} />
             <YAxis
               tickFormatter={yTickFormatter}
-              {...yTicks}
+              ticks={this.getYTicks()}
               tickLine={false}
               width={60}
               scale={yScale}
-              domain={yDomain}
+              domain={this.getYDomain()}
               allowDataOverflow={yScale === 'log'} />
             <Tooltip
               isAnimationActive={false}
