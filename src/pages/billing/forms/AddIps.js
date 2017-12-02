@@ -85,8 +85,7 @@ class AddIps extends Component {
           Dedicated IP addresses are available to AWS Marketplace customers for { cost }
           They give you better control over your sending reputation. You can purchase up to { MAX }.
           { currentPlan.includesIp && 'Your plan includes one free.' } New dedicated IP addresses
-          will need to be warmed up first. Read the <WarmUpArticleLink /> for more information. Visit
-          the <Link to="/account/ip-pools">IP Pools page</Link> to manage your dedicated IP addresses.
+          will need to be warmed up first. Read the <WarmUpArticleLink /> for more information.
         </p>
       );
     }
@@ -97,8 +96,7 @@ class AddIps extends Component {
         give you better control over your sending reputation. You can purchase up to { MAX }.
         { currentPlan.includesIp && `Your plan includes one free. Your account statement will show
         a charge with a matching refund.` } New dedicated IP addresses will need to be warmed up
-        first. Read the <WarmUpArticleLink /> for more information. Visit
-        the <Link to='/account/ip-pools'>IP Pools page</Link> to manage your dedicated IP addresses.
+        first. Read the <WarmUpArticleLink /> for more information.
       </p>
     );
   }
@@ -110,9 +108,11 @@ class AddIps extends Component {
     // This form should not be rendered if the account has no remaining IP addresses
     const isDisabled = submitting || remaining === 0;
 
+    const action = { content: 'Manage Your IPs', to: '/account/ip-pools', Component: Link };
+
     return (
       <form onSubmit={handleSubmit(this.onSubmit)} noValidate>
-        <Panel title='Add Dedicated IPs'>
+        <Panel title='Add Dedicated IPs' actions={[action]}>
           <Panel.Section>
             { this.renderDescription() }
             <Field
