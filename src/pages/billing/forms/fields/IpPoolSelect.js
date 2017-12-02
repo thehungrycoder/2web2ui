@@ -45,6 +45,7 @@ const ExistingIpPoolField = ({ disabled, ipPools }) => {
       label='Choose an IP Pool'
       options={options}
       placeholder=' '  // needed for matchbox, treated same as empty string by redux-form
+      required
       validate={required}
     />
   );
@@ -56,6 +57,7 @@ const NewIpPoolField = ({ disabled }) => (
     name='ipPool.name'
     component={TextFieldWrapper}
     label='Name your new IP Pool'
+    required
     validate={required}
   />
 );

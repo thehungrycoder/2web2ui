@@ -121,6 +121,7 @@ class AddIps extends Component {
               label='Quantity'
               name='quantity'
               min='1' max={remaining}
+              required
               type='number'
               validate={[required, minNumber(1), maxNumber(remaining)]}
             />
