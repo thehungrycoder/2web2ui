@@ -6,11 +6,12 @@ import { Page, Tabs , Panel } from '@sparkpost/matchbox';
 
 import FilterForm from './components/FilterForm';
 import EmailSearch from './components/EmailSearch';
+import Results from './components/Results';
 
 const primaryAction = {
   content: 'Add Suppressions',
-  Component: Link,
-  to: '/lists/suppressions/upload'
+  Component: Link
+  // to: '/lists/suppressions/upload'
 };
 
 const tabs = [
@@ -40,7 +41,7 @@ export class ListPage extends Component {
   }
 
   render() {
-    const { selectedTab } = this.state;
+    const { selectedTab, results } = this.state;
     return (
         <Page
           title='Suppressions'
@@ -55,6 +56,10 @@ export class ListPage extends Component {
           <Panel className='AA'>
             <Panel.Section>
               { selectedTab === 1 ? this.renderFindByEmails() : this.renderFilters() }
+            </Panel.Section>
+
+            <Panel.Section>
+              <Results results={results}/>
             </Panel.Section>
           </Panel>
         </Page>
