@@ -1,6 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Button } from '@sparkpost/matchbox';
 
+import { Loading, TableCollection } from 'src/components';
+
+import { formatSubaccountDisplay } from '../helpers';
+
+const columns = [
+  { label: 'Recipient', width: '25%' },
+  { label: 'Type', width: '25%' },
+  { label: 'Source', width: '15%' },
+  { label: 'Subaccount' },
+  { label: '', width: '15%' }
+];
 
 class Results extends Component {
   renderPlaceholder() {
@@ -12,14 +24,38 @@ class Results extends Component {
     );
   }
 
+  getRowData = (row) => {
+    const { recipient, type, source, subaccount_id: subaccountId } = row;
+    const { allSubaccounts = []} = this.props;
+    return [recipient,
+      type === 'transactional' ? 'Transactional' : 'Non-transactional',
+      source,
+      formatSubaccountDisplay(subaccountId, allSubaccounts),
+      <div style={{ textAlign: 'right' }}>
+        <Button to={`/lists/suppressions/details/${recipient}`} size='small'>View Details</Button>
+      </div>
+    ];
+  };
+
+
   renderResults() {
+    const { results } = this.props;
     return (
-      <h1>Resultset coming here</h1>
+      <TableCollection
+        columns={columns}
+        rows={results}
+        getRowData={this.getRowData}
+        pagination
+      />
     );
   }
 
   render() {
-    const { results = []} = this.props;
+    const { results = [], loading } = this.props;
+
+    if (loading) {
+      return <Loading />;
+    }
 
     return results.length ? this.renderResults() : this.renderPlaceholder();
   }

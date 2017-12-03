@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 
 import { Page, Tabs , Panel } from '@sparkpost/matchbox';
 
+import { searchRecipient } from 'src/actions/suppressions';
+
 import FilterForm from './components/FilterForm';
 import EmailSearch from './components/EmailSearch';
 import Results from './components/Results';
@@ -25,23 +27,34 @@ const tabs = [
 
 export class ListPage extends Component {
   state = {
-    selectedTab: 0
+    selectedTab: 1
   };
 
+  handleSearchByFilters() {
+
+  }
+
+  handleSearchByEmail(options) {
+    this.props.searchRecipient(options);
+  }
+
   renderFilters() {
-    return <FilterForm />;
+    return <FilterForm onSubmit={this.handleSearchByFilters} />;
   }
 
   renderFindByEmails() {
-    return <EmailSearch />;
+    return <EmailSearch onSubmit={this.handleSearchByEmail.bind(this) } />;
   }
 
   handleTabs(tabIdx) {
     this.setState({ selectedTab: tabIdx });
   }
 
+
   render() {
-    const { selectedTab, results } = this.state;
+    const { selectedTab } = this.state;
+    const { loading, results } = this.props;
+
     return (
         <Page
           title='Suppressions'
@@ -59,7 +72,7 @@ export class ListPage extends Component {
             </Panel.Section>
 
             <Panel.Section>
-              <Results results={results}/>
+              <Results results={results} loading={loading}/>
             </Panel.Section>
           </Panel>
         </Page>
@@ -67,4 +80,9 @@ export class ListPage extends Component {
   }
 }
 
-export default connect(null, {})(ListPage);
+const mapStateToProps = ({ suppressions }) => ({
+  loading: suppressions.loading,
+  results: suppressions.resultsSet
+});
+
+export default connect(mapStateToProps, { searchRecipient })(ListPage);

@@ -1,26 +1,42 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { reduxForm, Field } from 'redux-form';
-import { Grid } from '@sparkpost/matchbox';
+import { Grid, TextField } from '@sparkpost/matchbox';
 import { TextFieldWrapper, FilterDropdown } from 'src/components';
 
 import { required } from 'src/helpers/validation';
 
-export let EmailSearch = (props) => {
-  const { handleSubmit, submitting, pristine, refresh, subaccounts = []} = props;
+export class EmailSearch extends Component {
+  state = {
+    email: '',
+    subaccounts: []
+  };
 
-  return (
+  handleChange(e, key) {
+    this.setState({ [key]: e.target.value });
+  }
+
+  handleBlur() {
+    this.props.onSubmit({ email: this.state.email });
+  }
+
+  render() {
+    const { handleSubmit, submitting, pristine, refresh, subaccounts = []} = this.props;
+    const { email } = this.state;
+
+    return (
     <Grid>
       <Grid.Column xs={12} md={6}>
         <div className=''>
-            <Field
-                name='email'
-                component={TextFieldWrapper}
-                helpText={''}
-                placeholder='Email'
-                validate={[required]}
-            />
+            <TextField
+              name='Email'
+              onChange={(e) => this.handleChange(e, 'email')}
+              onBlur={(e) => this.handleBlur(e)}
+              // value={fromDate}
+              placeholder='Email'
+              value={email}
+              />
         </div>
       </Grid.Column>
       <Grid.Column xs={12} md={6}>
@@ -34,13 +50,15 @@ export let EmailSearch = (props) => {
         </div>
       </Grid.Column>
     </Grid>
-  );
-};
+    );
+  }
+}
 
-const formName = 'emailSearchForm';
+// const formName = 'emailSearchForm';
 
-EmailSearch = reduxForm({
-  form: formName
-})(EmailSearch);
+// EmailSearch = reduxForm({
+//   form: formName
+// })(EmailSearch);
 
-export default connect(null)(EmailSearch);
+// export default connect(null)(EmailSearch);
+export default connect(null, { })(EmailSearch);
