@@ -38,11 +38,9 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
         somedomain.com
       </h3>
       <div>
-        <Tag
-          yellow={true}
-        >
-          Unverified
-        </Tag>
+        <Component
+          status="unverified"
+        />
       </div>
     </Grid.Column>
     <Grid.Column
@@ -74,7 +72,9 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
     <DeleteModal
       content={
         <p>
-          Any templates or transmissions that reference this domain will use the default tracking domain from now on.
+          <span>
+            Any templates or transmissions that use this tracking domain directly will fail.
+          </span>
         </p>
       }
       onCancel={[Function]}
@@ -109,14 +109,9 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
         somedomain.com
       </h3>
       <div>
-        <WithPositioning(Tooltip)
-          content="This domain is not available for use. For more information, please contact support."
-          dark={true}
-        >
-          <Tag>
-            Blocked
-          </Tag>
-        </WithPositioning(Tooltip)>
+        <Component
+          status="blocked"
+        />
       </div>
     </Grid.Column>
     <Grid.Column
@@ -141,7 +136,9 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
     <DeleteModal
       content={
         <p>
-          Any templates or transmissions that reference this domain will use the default tracking domain from now on.
+          <span>
+            Any templates or transmissions that use this tracking domain directly will fail.
+          </span>
         </p>
       }
       onCancel={[Function]}
@@ -176,11 +173,9 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
         somedomain.com
       </h3>
       <div>
-        <Tag
-          yellow={true}
-        >
-          Unverified
-        </Tag>
+        <Component
+          status="unverified"
+        />
         <IsDefaultTag
           assignedToSubaccount={false}
         />
@@ -215,7 +210,15 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
     <DeleteModal
       content={
         <p>
-          Any templates or transmissions that reference this domain will use the default tracking domain from now on.
+          <span>
+            Any templates or transmissions that use this tracking domain directly will fail.
+          </span>
+          <span>
+            <br />
+            <strong>
+              Note: Deleting this domain will remove it as default, as well.
+            </strong>
+          </span>
         </p>
       }
       onCancel={[Function]}
@@ -250,6 +253,9 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
         somedomain.com
       </h3>
       <div>
+        <Component
+          status="verified"
+        />
         <IsDefaultTag
           assignedToSubaccount={false}
         />
@@ -281,7 +287,15 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
     <DeleteModal
       content={
         <p>
-          Any templates or transmissions that reference this domain will use the default tracking domain from now on.
+          <span>
+            Any templates or transmissions that use this tracking domain directly will fail.
+          </span>
+          <span>
+            <br />
+            <strong>
+              Note: Deleting this domain will remove it as default, as well.
+            </strong>
+          </span>
         </p>
       }
       onCancel={[Function]}
@@ -316,11 +330,9 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
         somedomain.com
       </h3>
       <div>
-        <Tag
-          yellow={true}
-        >
-          Unverified
-        </Tag>
+        <Component
+          status="unverified"
+        />
       </div>
     </Grid.Column>
     <Grid.Column
@@ -352,7 +364,9 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
     <DeleteModal
       content={
         <p>
-          Any templates or transmissions that reference this domain will use the default tracking domain from now on.
+          <span>
+            Any templates or transmissions that use this tracking domain directly will fail.
+          </span>
         </p>
       }
       onCancel={[Function]}
@@ -386,7 +400,11 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
       <h3>
         somedomain.com
       </h3>
-      <div />
+      <div>
+        <Component
+          status="verified"
+        />
+      </div>
     </Grid.Column>
     <Grid.Column
       md={3}
@@ -414,7 +432,9 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
     <DeleteModal
       content={
         <p>
-          Any templates or transmissions that reference this domain will use the default tracking domain from now on.
+          <span>
+            Any templates or transmissions that use this tracking domain directly will fail.
+          </span>
         </p>
       }
       onCancel={[Function]}
@@ -449,14 +469,9 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
         somedomain.com
       </h3>
       <div>
-        <WithPositioning(Tooltip)
-          content="This domain is pending review, please check back again soon."
-          dark={true}
-        >
-          <Tag>
-            Pending
-          </Tag>
-        </WithPositioning(Tooltip)>
+        <Component
+          status="pending"
+        />
       </div>
     </Grid.Column>
     <Grid.Column
@@ -481,7 +496,9 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
     <DeleteModal
       content={
         <p>
-          Any templates or transmissions that reference this domain will use the default tracking domain from now on.
+          <span>
+            Any templates or transmissions that use this tracking domain directly will fail.
+          </span>
         </p>
       }
       onCancel={[Function]}
@@ -516,11 +533,9 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
         somedomain.com
       </h3>
       <div>
-        <Tag
-          yellow={true}
-        >
-          Unverified
-        </Tag>
+        <Component
+          status="unverified"
+        />
         <SubaccountTag
           id={100}
         />
@@ -555,7 +570,9 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
     <DeleteModal
       content={
         <p>
-          Any templates or transmissions that reference this domain will use the default tracking domain from now on.
+          <span>
+            Any templates or transmissions that use this tracking domain directly will fail.
+          </span>
         </p>
       }
       onCancel={[Function]}
@@ -590,14 +607,9 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
         somedomain.com
       </h3>
       <div>
-        <WithPositioning(Tooltip)
-          content="This domain is not available for use. For more information, please contact support."
-          dark={true}
-        >
-          <Tag>
-            Blocked
-          </Tag>
-        </WithPositioning(Tooltip)>
+        <Component
+          status="blocked"
+        />
         <SubaccountTag
           id={100}
         />
@@ -625,7 +637,9 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
     <DeleteModal
       content={
         <p>
-          Any templates or transmissions that reference this domain will use the default tracking domain from now on.
+          <span>
+            Any templates or transmissions that use this tracking domain directly will fail.
+          </span>
         </p>
       }
       onCancel={[Function]}
@@ -660,11 +674,9 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
         somedomain.com
       </h3>
       <div>
-        <Tag
-          yellow={true}
-        >
-          Unverified
-        </Tag>
+        <Component
+          status="unverified"
+        />
         <IsDefaultTag
           assignedToSubaccount={true}
         />
@@ -702,7 +714,15 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
     <DeleteModal
       content={
         <p>
-          Any templates or transmissions that reference this domain will use the default tracking domain from now on.
+          <span>
+            Any templates or transmissions that use this tracking domain directly will fail.
+          </span>
+          <span>
+            <br />
+            <strong>
+              Note: Deleting this domain will remove it as default, as well.
+            </strong>
+          </span>
         </p>
       }
       onCancel={[Function]}
@@ -737,6 +757,9 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
         somedomain.com
       </h3>
       <div>
+        <Component
+          status="verified"
+        />
         <IsDefaultTag
           assignedToSubaccount={true}
         />
@@ -771,7 +794,15 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
     <DeleteModal
       content={
         <p>
-          Any templates or transmissions that reference this domain will use the default tracking domain from now on.
+          <span>
+            Any templates or transmissions that use this tracking domain directly will fail.
+          </span>
+          <span>
+            <br />
+            <strong>
+              Note: Deleting this domain will remove it as default, as well.
+            </strong>
+          </span>
         </p>
       }
       onCancel={[Function]}
@@ -806,11 +837,9 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
         somedomain.com
       </h3>
       <div>
-        <Tag
-          yellow={true}
-        >
-          Unverified
-        </Tag>
+        <Component
+          status="unverified"
+        />
         <SubaccountTag
           id={100}
         />
@@ -845,7 +874,9 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
     <DeleteModal
       content={
         <p>
-          Any templates or transmissions that reference this domain will use the default tracking domain from now on.
+          <span>
+            Any templates or transmissions that use this tracking domain directly will fail.
+          </span>
         </p>
       }
       onCancel={[Function]}
@@ -880,6 +911,9 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
         somedomain.com
       </h3>
       <div>
+        <Component
+          status="verified"
+        />
         <SubaccountTag
           id={100}
         />
@@ -911,7 +945,9 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
     <DeleteModal
       content={
         <p>
-          Any templates or transmissions that reference this domain will use the default tracking domain from now on.
+          <span>
+            Any templates or transmissions that use this tracking domain directly will fail.
+          </span>
         </p>
       }
       onCancel={[Function]}
@@ -946,14 +982,9 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
         somedomain.com
       </h3>
       <div>
-        <WithPositioning(Tooltip)
-          content="This domain is pending review, please check back again soon."
-          dark={true}
-        >
-          <Tag>
-            Pending
-          </Tag>
-        </WithPositioning(Tooltip)>
+        <Component
+          status="pending"
+        />
         <SubaccountTag
           id={100}
         />
@@ -981,7 +1012,9 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
     <DeleteModal
       content={
         <p>
-          Any templates or transmissions that reference this domain will use the default tracking domain from now on.
+          <span>
+            Any templates or transmissions that use this tracking domain directly will fail.
+          </span>
         </p>
       }
       onCancel={[Function]}

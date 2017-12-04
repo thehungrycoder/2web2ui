@@ -5,8 +5,8 @@ import { Panel, Grid, Icon, Button, Tag } from '@sparkpost/matchbox';
 import { listTrackingDomains, updateTrackingDomain, deleteTrackingDomain, verifyTrackingDomain } from 'src/actions/trackingDomains';
 import { DeleteModal, ConfirmationModal } from 'src/components/modals';
 import styles from './TrackingDomainRow.module.scss';
-import DeleteButton from './DeleteButton';
 import StatusTag from './StatusTag';
+import _ from 'lodash';
 
 export function IsDefaultTag({ assignedToSubaccount }) {
   return <Tag orange className={styles.Tag}>{assignedToSubaccount && 'Subaccount '}Default</Tag>;
@@ -31,15 +31,21 @@ export class TrackingDomainRow extends Component {
 
   delete = () => {
     const { domain, subaccountId, deleteTrackingDomain } = this.props;
-    deleteTrackingDomain({ domain, subaccountId })
+    return deleteTrackingDomain({ domain, subaccountId })
+      .catch(_.noop) // swallow error
       .then(() => this.toggleDeleteModal());
   }
 
   update = (data) => {
     const { listTrackingDomains, updateTrackingDomain, domain, subaccountId: subaccount } = this.props;
-    updateTrackingDomain({ domain, subaccount, ...data })
-      .then(() => listTrackingDomains())
-      .then(() => this.toggleDefaultModal());
+    return updateTrackingDomain({ domain, subaccount, ...data })
+      .catch(_.noop) // ignore errors
+      .then(() => listTrackingDomains());
+  }
+
+  toggleDefaultValue = () => {
+    const { isDefault } = this.props;
+    return this.update({ default: !isDefault }).then(this.toggleDefaultModal);
   }
 
   retryVerification = () => {
@@ -74,7 +80,10 @@ export class TrackingDomainRow extends Component {
         <DeleteModal
           open={deleteModalOpen}
           title={`Permanently delete ${domain}?`}
-          content={<p>Any templates or transmissions that reference this domain will use the default tracking domain from now on.</p>}
+          content={<p>
+            <span>Any templates or transmissions that use this tracking domain directly will fail.</span>
+            {isDefault && <span><br /><strong>Note: Deleting this domain will remove it as default, as well.</strong></span>}
+          </p>}
           isPending={deleting}
           onDelete={this.delete}
           onCancel={this.toggleDeleteModal}
@@ -84,7 +93,7 @@ export class TrackingDomainRow extends Component {
           title={`Change default tracking domain (${domain})`}
           content={<p>{isDefault ? `Transmissions and templates that don't specify a tracking domain will no longer use ${domain}. Instead, they will use the system default until another default is selected.` : `Transmissions and templates that don't specify a tracking domain will now use ${domain}.`}</p>}
           isPending={updating}
-          onConfirm={() => this.update({ default: !isDefault })}
+          onConfirm={this.toggleDefaultValue}
           onCancel={this.toggleDefaultModal}
           confirmVerb={isDefault ? 'Unset Default' : 'Set as Default'}
         />
@@ -108,7 +117,7 @@ export class TrackingDomainRow extends Component {
           <Grid.Column xs={12} md={3}>
             <Button.Group className={styles.ButtonColumn}>
               {this.renderDefaultOrVerifyButton()}
-              <DeleteButton status={status} onClick={this.toggleDeleteModal} />
+              {status !== 'pending' && status !== 'blocked' && <Button destructive size='small' onClick={this.toggleDeleteModal}>Delete</Button>}
             </Button.Group>
           </Grid.Column>
         </Grid>

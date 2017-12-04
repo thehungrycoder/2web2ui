@@ -123,10 +123,16 @@
     "coveragePathIgnorePatterns": [
       "<rootDir>/src/App.js",
       "<rootDir>/src/index.js",
+      "<rootDir>/src/actions",
       "<rootDir>/src/config",
       "<rootDir>/src/helpers/registerServiceWorker",
       "<rootDir>/src/reducers"
     ],
+    "coverageThreshold": {
+      "global": {
+        "statements": 53
+      }
+    },
     "setupFiles": [
       "<rootDir>/config/polyfills.js"
     ],
