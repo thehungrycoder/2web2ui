@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 import { Page, Banner } from '@sparkpost/matchbox';
 import { UsageReport } from 'src/components';
@@ -28,7 +28,7 @@ export class DashboardPage extends Component {
   componentDidMount() {
     this.props.listSuppressions({ sources: 'Manually Added', limit: 1 });
     this.props.listSendingDomains();
-    this.props.listApiKeys({ subaccount: { id: 0 }});
+    this.props.listApiKeys({ id: 0 });
   }
 
   resendVerification() {
@@ -48,34 +48,13 @@ export class DashboardPage extends Component {
     }
   }
 
-  renderUpgradeCta() {
-    const { account } = this.props;
-
-    // if account is free and active
-    if (/free/i.test(account.subscription.code) && account.status === 'active') {
-      return (
-        <Banner
-          title='Send more mail'
-          status='info'
-          action={{
-            content: 'Upgrade Now',
-            Component: Link,
-            to: '/account/billing/plan'
-          }}>
-          <p>Upgrade now to increase daily limits and start sending more mail.</p>
-        </Banner>
-      );
-    }
-
-  }
-
   renderSuppressionBanner() {
     const { accountAgeInWeeks, hasSuppressions } = this.props;
 
-    if (accountAgeInWeeks < 1 && !hasSuppressions) {
+    if (accountAgeInWeeks > 1 && !hasSuppressions) {
       return (
-        <Banner title="Hey! We noticed you haven't imported a suppression list">
-          <p>If you're coming from a previous provider, be sure to also <a href="https://www.sparkpost.com/docs/getting-started/getting-started-sparkpost/#important-coming-from-other-email-services" target="_blank" rel="noopener noreferrer">import your suppressions</a>.</p>
+        <Banner title="Coming from another email service?">
+          <p>Welcome! Make sure you import your suppression list from your previous provider to avoid sending to people who have previously opted out, consistently bounced, etc. Learn more about migrating from Mailgun, Mandrill, or SendGrid. <a href="https://www.sparkpost.com/docs/getting-started/getting-started-sparkpost/#important-coming-from-other-email-services" target="_blank" rel="noopener noreferrer">import your suppressions</a>.</p>
         </Banner>
       );
     }
@@ -86,7 +65,6 @@ export class DashboardPage extends Component {
       <Page title='Dashboard'>
 
         { this.renderVerifyEmailCta() }
-        { this.renderUpgradeCta() }
 
         <UsageReport />
 
@@ -106,7 +84,6 @@ function mapStateToProps(state) {
 
   return {
     currentUser: state.currentUser,
-    account: state.account,
     accountAgeInWeeks: acctAge,
     hasSuppressions: state.suppressions.list.length > 0,
     hasSendingDomains: state.sendingDomains.list.length > 0,

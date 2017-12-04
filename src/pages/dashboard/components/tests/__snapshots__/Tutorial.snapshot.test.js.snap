@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: Tutorial should show default email banner 1`] = `
+<Panel
+  title="Getting Started"
+>
+  <Panel.Section>
+    <TutorialItem
+      completed={true}
+      label="Verify your email address"
+    >
+      <p>
+        Check your email to verify your email address and increase your daily sending limits
+      </p>
+    </TutorialItem>
+  </Panel.Section>
+  <Panel.Section>
+    <TutorialItem
+      completed={false}
+      label="Add a sending domain"
+      labelLink="account/profile"
+    >
+      <p>
+        Add a sending domain to send email from your own domain
+      </p>
+    </TutorialItem>
+  </Panel.Section>
+  <Panel.Section>
+    <TutorialItem
+      completed={true}
+      label="Verify your sending domain"
+      labelLink="account/profile"
+    >
+      <p>
+        You'll need to verify your domain before you can use it
+      </p>
+    </TutorialItem>
+  </Panel.Section>
+  <Panel.Section>
+    <TutorialItem
+      completed={true}
+      label="Create bounce domain"
+      labelLink="account/profile"
+    >
+      <p>
+        Create a bounce domain to track email engagement
+      </p>
+    </TutorialItem>
+  </Panel.Section>
+  <Panel.Section>
+    <TutorialItem
+      completed={false}
+      label="Create an API key"
+      labelLink="account/api-keys"
+    >
+      <p>
+        You'll need to create an API key to use our API or SMTP integration.
+      </p>
+    </TutorialItem>
+  </Panel.Section>
+</Panel>
+`;

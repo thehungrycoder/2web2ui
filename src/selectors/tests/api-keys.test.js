@@ -72,4 +72,49 @@ describe('ApiKey Selectors', () => {
     };
     expect(apiKeys.getInitialValues(store, props)).toMatchSnapshot();
   });
+
+  it('should get all subaccount api keys', () => {
+    const store = {
+      apiKeys: {
+        keys: [
+          {
+            subaccount_id: '101',
+            name: 'subby key'
+          },
+          {
+            name: 'master key'
+          }
+        ]
+      }
+    };
+
+    const props = {
+      id: 101
+    };
+
+    expect(apiKeys.getSubaccountApiKeys(store, props)).toMatchSnapshot();
+  });
+
+  it('it should return all api keys ready for sending', () => {
+    const store = {
+      apiKeys: {
+        keys: [
+          {
+            grants: ['smtp/inject', 'metrics/view'],
+            name: 'key1'
+          },
+          {
+            grants: ['stuff/role'],
+            name: 'dropped'
+          },
+          {
+            grants: ['transmissions/modify', 'foo/bar'],
+            name: 'key2'
+          }
+        ]
+      }
+    };
+
+    expect(apiKeys.selectApiKeysForSending(store)).toMatchSnapshot();
+  });
 });

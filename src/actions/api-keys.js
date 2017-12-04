@@ -1,6 +1,7 @@
 import { formatKeyForRequest } from './helpers/api-keys';
 import sparkpostApiRequest from './helpers/sparkpostApiRequest';
 import { showAlert } from './globalAlert';
+import setSubaccountHeader from './helpers/setSubaccountHeader';
 
 export function createApiKey(key) {
   return (dispatch, getState) =>
@@ -85,13 +86,15 @@ export function hideNewApiKey() {
   };
 }
 
-export function listApiKeys(key) {
+export function listApiKeys(subaccount) {
+  const headers = setSubaccountHeader(subaccount);
+
   return sparkpostApiRequest({
     type: 'LIST_API_KEYS',
     meta: {
       method: 'GET',
       url: '/api-keys',
-      ...formatKeyForRequest(key)
+      headers
     }
   });
 }

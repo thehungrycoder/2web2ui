@@ -41,8 +41,29 @@ Object {
 }
 `;
 
+exports[`ApiKey Selectors it should return all api keys ready for sending 1`] = `
+Array [
+  Object {
+    "grants": Array [
+      "smtp/inject",
+      "metrics/view",
+    ],
+    "name": "key1",
+  },
+  Object {
+    "grants": Array [
+      "transmissions/modify",
+      "foo/bar",
+    ],
+    "name": "key2",
+  },
+]
+`;
+
 exports[`ApiKey Selectors returns single api key 1`] = `
 Object {
   "id": "Ape",
 }
 `;
+
+exports[`ApiKey Selectors should get all subaccount api keys 1`] = `Array []`;
