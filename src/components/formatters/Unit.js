@@ -32,4 +32,4 @@ Unit.displayName = 'Unit';
 export {
   Unit,
   formatUnit
-}
+};

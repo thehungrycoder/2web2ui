@@ -38,6 +38,11 @@ describe('Summary Table ', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('should render with data', () => {
+    wrapper.setProps({ tableData: data });
+    expect(wrapper.find('TableCollection')).toMatchSnapshot();
+  });
+
   it('should render loading', () => {
     wrapper.setProps({ tableLoading: true });
     expect(wrapper.find('Loading')).toHaveLength(1);
@@ -63,11 +68,6 @@ describe('Summary Table ', () => {
     snaps[0].find('UnstyledLink').simulate('click');
     expect(props.addFilter).toHaveBeenCalledWith({ id: 0, type: 'Subaccount', value: 'Master Account (ID 0)' });
     expect(props.refresh).toHaveBeenCalled();
-  });
-
-  it('should render columns', () => {
-    const columns = wrapper.instance().getColumnHeaders();
-    expect(columns).toMatchSnapshot();
   });
 
   it('should handle select change', () => {

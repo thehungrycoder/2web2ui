@@ -1,28 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Summary Table  should render columns 1`] = `
-Array [
-  Object {
-    "className": undefined,
-    "label": "Recipient Domain",
-  },
-  Object {
-    "className": "",
-    "key": "metric_1",
-    "label": <div
-      className={undefined}
-    />,
-  },
-  Object {
-    "className": "",
-    "key": "metric_2",
-    "label": <div
-      className={undefined}
-    />,
-  },
-]
-`;
-
 exports[`Summary Table  should render row data & handle click 1`] = `
 Array [
   <UnstyledLink
@@ -140,6 +117,61 @@ exports[`Summary Table  should render subaccount option 1`] = `
   placeholderValue=""
   required={false}
   value="domain"
+/>
+`;
+
+exports[`Summary Table  should render with data 1`] = `
+<TableCollection
+  columns={
+    Array [
+      Object {
+        "className": undefined,
+        "label": "Recipient Domain",
+      },
+      Object {
+        "className": "",
+        "key": "metric_1",
+        "label": <div
+          className={undefined}
+        />,
+      },
+      Object {
+        "className": "",
+        "key": "metric_2",
+        "label": <div
+          className={undefined}
+        />,
+      },
+    ]
+  }
+  defaultPerPage={10}
+  filterBox={
+    Object {
+      "show": false,
+    }
+  }
+  getRowData={[Function]}
+  pagination={true}
+  rowKeyName="domain"
+  rows={
+    Array [
+      Object {
+        "metric_1": 123,
+        "metric_2": 12345,
+        "subaccount_id": 0,
+      },
+      Object {
+        "metric_1": 123,
+        "metric_2": 12345,
+        "subaccount_id": 555,
+      },
+      Object {
+        "metric_1": 123,
+        "metric_2": 12345,
+        "subaccount_id": 1010,
+      },
+    ]
+  }
 />
 `;
 

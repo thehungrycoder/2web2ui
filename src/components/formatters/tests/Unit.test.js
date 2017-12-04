@@ -1,6 +1,6 @@
 import React from 'react';
 import { Unit } from '../Unit';
-import { mount } from 'enzyme';
+import { mount, render } from 'enzyme';
 import _ from 'lodash';
 
 describe('Unit ', () => {
@@ -46,6 +46,16 @@ describe('Unit ', () => {
 
   it('should render size in TB', () => {
     const wrapper = mount(<Unit value={1100000000001} unit='bytes' />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render when undefined', () => {
+    const wrapper = mount(<Unit />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render when not a number', () => {
+    const wrapper = mount(<Unit value='not a number' />);
     expect(wrapper).toMatchSnapshot();
   });
 });

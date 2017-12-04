@@ -116,3 +116,13 @@ exports[`Unit  should render size in TB 1`] = `
   </Size>
 </Unit>
 `;
+
+exports[`Unit  should render when not a number 1`] = `
+<Unit
+  value="not a number"
+>
+  not a number
+</Unit>
+`;
+
+exports[`Unit  should render when undefined 1`] = `<Unit />`;

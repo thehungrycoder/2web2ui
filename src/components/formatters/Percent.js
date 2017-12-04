@@ -20,4 +20,4 @@ Percent.displayName = 'Percent';
 export {
   Percent,
   formatPercent
-}
+};

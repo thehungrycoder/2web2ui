@@ -34,4 +34,4 @@ Duration.displayName = 'Duration';
 export {
   Duration,
   formatDuration
-}
+};

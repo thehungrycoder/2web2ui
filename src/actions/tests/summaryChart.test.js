@@ -17,7 +17,7 @@ describe('Action Creator: Summary Chart', () => {
     const state = {
       summaryChart: {
         groupBy: 'domain',
-        metrics: ['metric']
+        metrics: ['count_accepted']
       }
     };
 
@@ -28,7 +28,13 @@ describe('Action Creator: Summary Chart', () => {
   });
 
   it('should dispatch a refresh action', async () => {
-    const thunk = summaryChart.refresh();
+    const updates = {
+      relativeRange: 'new range',
+      from: Date.now(),
+      to: Date.now(),
+      metrics: ['count_targeted']
+    };
+    const thunk = summaryChart.refresh(updates);
     await thunk(dispatchMock, getStateMock);
     expect(dispatchMock.mock.calls).toMatchSnapshot();
   });

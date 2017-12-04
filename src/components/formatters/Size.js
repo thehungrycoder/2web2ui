@@ -36,4 +36,4 @@ Size.displayName = 'Size';
 export {
   Size,
   formatSize
-}
+};
