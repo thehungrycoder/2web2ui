@@ -18,7 +18,6 @@ import DedicatedIpCost from '../components/DedicatedIpCost';
 import styles from './Forms.module.scss';
 
 const FORM_NAME = 'add-sending-ips';
-const MAX = config.sendingIps.maxPerAccount;
 const WarmUpArticleLink = () => (
   <a
     href='https://support.sparkpost.com/customer/portal/articles/1972209-ip-warm-up-overview'
@@ -75,38 +74,27 @@ class AddIps extends Component {
     this.props.onClose();
   }
 
-  renderDescription() {
-    const { currentPlan } = this.props;
-    const cost = <DedicatedIpCost plan={currentPlan} quantity={1} />;
-
-    if (currentPlan.isAwsAccount) {
-      return (
-        <p>
-          Dedicated IP addresses are available to AWS Marketplace customers for { cost }
-          They give you better control over your sending reputation. You can purchase up to { MAX }.
-          { currentPlan.includesIp && 'Your plan includes one free.' } New dedicated IP addresses
-          will need to be warmed up first. Read the <WarmUpArticleLink /> for more information.
-        </p>
-      );
+  renderFreeIpNotice() {
+    if (this.props.currentPlan.isAwsAccount) {
+      return <p>Your plan includes one free.</p>;
     }
 
     return (
       <p>
-        Dedicated IP addresses are available to paid plan customers for { cost }. They
-        give you better control over your sending reputation. You can purchase up to { MAX }.
-        { currentPlan.includesIp && `Your plan includes one free. Your account statement will show
-        a charge with a matching refund.` } New dedicated IP addresses will need to be warmed up
-        first. Read the <WarmUpArticleLink /> for more information.
+        Your plan includes one free IP.  If used, your account statement will show a charge
+        with a matching refund.
       </p>
     );
   }
 
   render() {
-    const { error, handleSubmit, onClose, sendingIps, submitting } = this.props;
-    const remaining = MAX - Math.min(sendingIps.length, MAX);
+    const { currentPlan, error, handleSubmit, onClose, submitting } = this.props;
+    const { maxPerAccount } = config.sendingIps;
+
+    const remainingCount = maxPerAccount - Math.min(this.props.sendingIps.length, maxPerAccount);
 
     // This form should not be rendered if the account has no remaining IP addresses
-    const isDisabled = submitting || remaining === 0;
+    const isDisabled = submitting || remainingCount === 0;
 
     const action = { content: 'Manage Your IPs', to: '/account/ip-pools', Component: Link };
 
@@ -114,18 +102,28 @@ class AddIps extends Component {
       <form onSubmit={handleSubmit(this.onSubmit)} noValidate>
         <Panel title='Add Dedicated IPs' actions={[action]}>
           <Panel.Section>
-            { this.renderDescription() }
+            <p>
+              Dedicated IPs give you better control over your sending reputation.  You can add up
+              to { remainingCount } dedicated IPs to your plan
+              for <DedicatedIpCost plan={currentPlan} quantity='1' /> each.
+            </p>
+            { currentPlan.includesIp && this.renderFreeIpNotice() }
             <Field
               component={TextFieldWrapper}
               disabled={isDisabled}
               label='Quantity'
               name='quantity'
-              min='1' max={remaining}
+              min='1' max={remainingCount}
               required
               type='number'
-              validate={[required, minNumber(1), maxNumber(remaining)]}
+              validate={[required, minNumber(1), maxNumber(remainingCount)]}
             />
             <IpPoolSelect disabled={isDisabled} formName={FORM_NAME} />
+            <p className={styles.AddInfo}>
+              New dedicated IP addresses will need to be warmed
+              up first, so we suggest adding them to an isolated pool first.  Read
+              the <WarmUpArticleLink /> for more information.
+            </p>
           </Panel.Section>
           <Panel.Section>
             <Button type='submit' primary disabled={isDisabled}>Add Dedicated IPs</Button>
