@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Animator should render 1`] = `
+<Transition
+  appear={false}
+  enter={true}
+  exit={true}
+  in={true}
+  mountOnEnter={false}
+  onEnter={[Function]}
+  onEntered={[Function]}
+  onEntering={[Function]}
+  onExit={[Function]}
+  onExited={[Function]}
+  onExiting={[Function]}
+  timeout={
+    Object {
+      "enter": 150,
+      "exit": 100,
+    }
+  }
+  unmountOnExit={false}
+/>
+`;
