@@ -9,6 +9,7 @@ exports[`renders correctly 1`] = `
       <TextField
         prefix={null}
         readOnly={true}
+        required={false}
         suffix={
           <Icon
             name="CaretDown"
@@ -80,6 +81,7 @@ exports[`renders selected correctly 1`] = `
       <TextField
         prefix="(1)"
         readOnly={true}
+        required={false}
         suffix={
           <Icon
             name="CaretDown"
