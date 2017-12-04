@@ -15,7 +15,7 @@ import _ from 'lodash';
 
 import styles from './Table.module.scss';
 
-class Table extends Component {
+export class Table extends Component {
   handleGroupChange = (e) => {
     this.props.getTableData({ groupBy: e.target.value });
   }
@@ -42,7 +42,7 @@ class Table extends Component {
     return [primaryCol, ...metricCols];
   }
 
-  getRowData() {
+  getRowData = () => {
     const { metrics, groupBy, typeaheadCache } = this.props;
     const group = _.find(GROUP_CONFIG, { value: groupBy });
 

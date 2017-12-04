@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import _ from 'lodash';
 
-export const formatSize = (value) => {
+const formatSize = (value) => {
   if (isNaN(parseFloat(value)) === true || isFinite(value) === false) {
     return value;
   }
@@ -30,4 +30,10 @@ export const formatSize = (value) => {
 };
 
 // Formats bytes into a readable size value
-export const Size = ({ value }) => <Fragment>{ formatSize(value) }</Fragment>;
+const Size = ({ value }) => <Fragment>{ formatSize(value) }</Fragment>;
+Size.displayName = 'Size';
+
+export {
+  Size,
+  formatSize
+}

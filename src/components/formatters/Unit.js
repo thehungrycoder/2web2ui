@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { Duration, Size, Percent } from 'src/components';
 
-export const formatUnit = (value, unit) => {
+const formatUnit = (value, unit) => {
   if (typeof value === 'undefined') {
     return '';
   }
@@ -26,4 +26,10 @@ export const formatUnit = (value, unit) => {
 };
 
 // Formats numerical value to a readable format for its provided unit
-export const Unit = ({ value, unit }) => <Fragment>{ formatUnit(value, unit) }</Fragment>;
+const Unit = ({ value, unit }) => <Fragment>{ formatUnit(value, unit) }</Fragment>;
+Unit.displayName = 'Unit';
+
+export {
+  Unit,
+  formatUnit
+}

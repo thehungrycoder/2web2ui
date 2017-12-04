@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import _ from 'lodash';
 
-export const formatDuration = (value) => {
+const formatDuration = (value) => {
   if (isNaN(parseFloat(value)) === true || isFinite(value) === false) {
     return value;
   }
@@ -28,4 +28,10 @@ export const formatDuration = (value) => {
 };
 
 // Formats milliseconds into a readable duration value
-export const Duration = ({ value }) => <Fragment>{ formatDuration(value) }</Fragment>;
+const Duration = ({ value }) => <Fragment>{ formatDuration(value) }</Fragment>;
+Duration.displayName = 'Duration';
+
+export {
+  Duration,
+  formatDuration
+}

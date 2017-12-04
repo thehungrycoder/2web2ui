@@ -14,4 +14,10 @@ const formatPercent = (value) => {
   return formatted;
 };
 
-export const Percent = ({ value }) => <Fragment>{ formatPercent(value) }</Fragment>;
+const Percent = ({ value }) => <Fragment>{ formatPercent(value) }</Fragment>;
+Percent.displayName = 'Percent';
+
+export {
+  Percent,
+  formatPercent
+}
