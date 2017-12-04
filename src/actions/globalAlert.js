@@ -1,12 +1,7 @@
-import _ from 'lodash';
-
 export function showAlert(alert) {
   return {
     type: 'SHOW_GLOBAL_ALERT',
-    payload: {
-      id: _.uniqueId('alert_'),
-      ...alert
-    }
+    payload: { ...alert }
   };
 }
 

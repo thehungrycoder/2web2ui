@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 const initialState = {
   alerts: []
 };
@@ -5,7 +7,12 @@ const initialState = {
 export default (state = initialState, { type, payload }) => {
   switch (type) {
     case 'SHOW_GLOBAL_ALERT':
-      return { ...state, alerts: [ ...state.alerts, payload ]};
+      return { ...state, alerts: [ ...state.alerts,
+        {
+          id: _.uniqueId('alert_'),
+          ...payload
+        }
+      ]};
 
     case 'CLEAR_GLOBAL_ALERT':
       return {
