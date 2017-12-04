@@ -120,9 +120,8 @@ class AddIps extends Component {
             />
             <IpPoolSelect disabled={isDisabled} formName={FORM_NAME} />
             <p className={styles.AddInfo}>
-              New dedicated IP addresses will need to be warmed
-              up first, so we suggest adding them to an isolated pool first.  Read
-              the <WarmUpArticleLink /> for more information.
+              New dedicated IP addresses will need to be warmed up, so we suggest adding them to
+              an isolated pool.  Read the <WarmUpArticleLink /> for more information.
             </p>
           </Panel.Section>
           <Panel.Section>
