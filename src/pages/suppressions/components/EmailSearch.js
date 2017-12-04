@@ -2,51 +2,59 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { reduxForm, Field } from 'redux-form';
-import { Grid, TextField } from '@sparkpost/matchbox';
-import { TextFieldWrapper, FilterDropdown } from 'src/components';
-
-import { required } from 'src/helpers/validation';
+import { Grid } from '@sparkpost/matchbox';
+import { TextFieldWrapper, SubaccountTypeaheadWrapper } from 'src/components';
 
 export class EmailSearch extends Component {
   state = {
     email: '',
-    subaccounts: []
+    subaccountId: null
   };
 
   handleChange(e, key) {
     this.setState({ [key]: e.target.value });
   }
 
+  handleSubaccountSelect(subaccount) {
+    this.setState({ subaccountId: subaccount.id }, this.handleBlur);
+  }
+
   handleBlur() {
-    this.props.onSubmit({ email: this.state.email });
+    const { email, subaccountId } = this.state;
+    this.props.onSubmit({ email, subaccountId });
+  }
+
+  handleSelect() {
+    debugger;
   }
 
   render() {
-    const { handleSubmit, submitting, pristine, refresh, subaccounts = []} = this.props;
-    const { email } = this.state;
+    const { subaccounts } = this.props;
 
     return (
     <Grid>
       <Grid.Column xs={12} md={6}>
         <div className=''>
-            <TextField
-              name='Email'
-              onChange={(e) => this.handleChange(e, 'email')}
-              onBlur={(e) => this.handleBlur(e)}
-              // value={fromDate}
-              placeholder='Email'
-              value={email}
-              />
+          <Field
+            name="email"
+            label='Email' //TODO remove label for both fields
+            onChange={(e) => this.handleChange(e, 'email')}
+            component={TextFieldWrapper}
+            title="Email"
+            placeholder='Email'
+          />
+
         </div>
       </Grid.Column>
       <Grid.Column xs={12} md={6}>
         <div className=''>
-            <FilterDropdown
-                formName='emailSearchForm'
-                options={subaccounts}
-                namespace='subaccounts'
-                displayValue='Subaccount'
-            />
+          <Field //TODO remove label for both fields
+            name="subaccount"
+            component={SubaccountTypeaheadWrapper}
+            subaccounts={subaccounts}
+            onChange={this.handleSubaccountSelect.bind(this)}
+            label={false}
+          />
         </div>
       </Grid.Column>
     </Grid>
@@ -54,11 +62,8 @@ export class EmailSearch extends Component {
   }
 }
 
-// const formName = 'emailSearchForm';
 
-// EmailSearch = reduxForm({
-//   form: formName
-// })(EmailSearch);
+const formName = 'recipientSearch';
 
-// export default connect(null)(EmailSearch);
-export default connect(null, { })(EmailSearch);
+const formOptions = { form: formName };
+export default connect(null, {})(reduxForm(formOptions)(EmailSearch));

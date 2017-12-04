@@ -7,9 +7,9 @@ import { Loading, TableCollection } from 'src/components';
 import { formatSubaccountDisplay } from '../helpers';
 
 const columns = [
-  { label: 'Recipient', width: '25%' },
-  { label: 'Type', width: '25%' },
-  { label: 'Source', width: '15%' },
+  { label: 'Recipient', width: '30%' },
+  { label: 'Type', width: '15%' },
+  { label: 'Source', width: '20%' },
   { label: 'Subaccount' },
   { label: '', width: '15%' }
 ];

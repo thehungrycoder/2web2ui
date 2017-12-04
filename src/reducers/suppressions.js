@@ -18,7 +18,7 @@ export default (state = initialState, action) => {
     case 'SEARCH_SUPPRESSIONS_RECIPIENT_SUCCESS':
       return { ...state, loading: false, resultsSet: payload };
 
-    case 'SEARCH_SUPPRESSIONS_RECIPIENT_FAIL': {
+    case 'SEARCH_SUPPRESSIONS_RECIPI  ENT_FAIL': {
       return { ...state, loading: false };
     }
 

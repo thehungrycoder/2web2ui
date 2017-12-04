@@ -12,13 +12,19 @@ export function listSuppressions(params) {
   });
 }
 
-export function searchRecipient({ email } = {}) {
+export function searchRecipient({ email, subaccountId } = {}) {
+  const headers = {};
+  if (subaccountId) {
+    headers['x-msys-subaccount'] = subaccountId;
+  }
+
   return (dispatch, getState) => dispatch(
       sparkpostApiRequest({
         type: 'SEARCH_SUPPRESSIONS_RECIPIENT',
         meta: {
           method: 'GET',
-          url: `/suppression-list/${email}`
+          url: `/suppression-list/${email}`,
+          headers
         }
       })
     );

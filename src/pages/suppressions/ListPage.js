@@ -5,6 +5,9 @@ import { Link } from 'react-router-dom';
 import { Page, Tabs , Panel } from '@sparkpost/matchbox';
 
 import { searchRecipient } from 'src/actions/suppressions';
+import { list as listSubaccounts } from 'src/actions/subaccounts';
+
+import { hasSubaccounts } from 'src/selectors/subaccounts';
 
 import FilterForm from './components/FilterForm';
 import EmailSearch from './components/EmailSearch';
@@ -43,17 +46,24 @@ export class ListPage extends Component {
   }
 
   renderFindByEmails() {
-    return <EmailSearch onSubmit={this.handleSearchByEmail.bind(this) } />;
+    const { subaccounts } = this.props;
+    return <EmailSearch onSubmit={this.handleSearchByEmail.bind(this)} subaccounts={subaccounts} />;
   }
 
   handleTabs(tabIdx) {
     this.setState({ selectedTab: tabIdx });
   }
 
+  componentDidMount() {
+    if (this.props.hasSubaccounts) {
+      this.props.listSubaccounts();
+    }
+    this.handleSearchByEmail({ email: '06bvm995wxn@msn.com' });
+  }
 
   render() {
     const { selectedTab } = this.state;
-    const { loading, results } = this.props;
+    const { loading, results, subaccounts, hasSubaccounts } = this.props;
 
     return (
         <Page
@@ -72,7 +82,7 @@ export class ListPage extends Component {
             </Panel.Section>
 
             <Panel.Section>
-              <Results results={results} loading={loading}/>
+              <Results results={results} loading={loading} subaccounts={subaccounts} hasSubaccounts={hasSubaccounts}/>
             </Panel.Section>
           </Panel>
         </Page>
@@ -80,9 +90,13 @@ export class ListPage extends Component {
   }
 }
 
-const mapStateToProps = ({ suppressions }) => ({
-  loading: suppressions.loading,
-  results: suppressions.resultsSet
-});
-
-export default connect(mapStateToProps, { searchRecipient })(ListPage);
+const mapStateToProps = (state) => {
+  const { loading, resultsSet } = state.suppressions;
+  return {
+    loading: loading,
+    results: resultsSet,
+    hasSubaccounts: hasSubaccounts(state),
+    subaccounts: state.subaccounts.list
+  };
+};
+export default connect(mapStateToProps, { searchRecipient, listSubaccounts })(ListPage);
