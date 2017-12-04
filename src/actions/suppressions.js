@@ -29,3 +29,20 @@ export function searchRecipient({ email, subaccountId } = {}) {
       })
     );
 }
+
+export function searchSuppressions({ from, to } = {}) {
+  const params = {
+    from, to
+  };
+  return (dispatch, getState) => dispatch(
+      sparkpostApiRequest({
+        type: 'SEARCH_SUPPRESSIONS',
+        meta: {
+          method: 'GET',
+          url: '/suppression-list',
+          params
+        }
+      })
+    );
+}
+

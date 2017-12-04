@@ -22,6 +22,16 @@ export default (state = initialState, action) => {
       return { ...state, loading: false };
     }
 
+    case 'SEARCH_SUPPRESSIONS_PENDING':
+      return { ...state, loading: true };
+
+    case 'SEARCH_SUPPRESSIONS_SUCCESS':
+      return { ...state, loading: false, resultsSet: payload };
+
+    case 'SEARCH_SUPPRESSIONS_FAIL': {
+      return { ...state, loading: false };
+    }
+
     default:
       return state;
   }

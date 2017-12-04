@@ -8,10 +8,10 @@ import { formatSubaccountDisplay } from '../helpers';
 
 const columns = [
   { label: 'Recipient', width: '30%' },
-  { label: 'Type', width: '15%' },
+  { label: 'Type', width: '18%' },
   { label: 'Source', width: '20%' },
   { label: 'Subaccount' },
-  { label: '', width: '15%' }
+  { label: '', width: '10%' }
 ];
 
 class Results extends Component {
