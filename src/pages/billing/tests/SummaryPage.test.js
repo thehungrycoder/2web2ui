@@ -10,12 +10,17 @@ describe('Page: SummaryPage', () => {
       subscription: {}
     },
     billing: {},
+    dedicatedIpPrice: jest.fn(() => ''),
     getPlans: jest.fn(),
     getBillingCountries: jest.fn(),
+    getSendingIps: jest.fn(),
     shouldExposeCard: false,
     canChangePlan: false,
     currentPlan: {},
-    plans: []
+    plans: [],
+    sendingIps: {
+      list: []
+    }
   };
 
   beforeEach(() => {
@@ -24,7 +29,7 @@ describe('Page: SummaryPage', () => {
 
   it('gets plans on mount', () => {
     const plansSpy = jest.spyOn(wrapper.instance().props, 'getPlans');
-    wrapper.instance().componentWillMount();
+    wrapper.instance().componentDidMount();
     expect(wrapper).toHaveState('show', false);
     expect(plansSpy).toHaveBeenCalled();
   });
@@ -43,7 +48,7 @@ describe('Page: SummaryPage', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should render billing summary if on paid plan', () => {
+  it('should render billing and dedicated IP summary if on paid plan', () => {
     wrapper.setProps({
       canChangePlan: true,
       shouldExposeCard: true,

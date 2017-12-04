@@ -10,3 +10,13 @@ export function updateSendingIp(id, ipPoolName) {
     }
   });
 }
+
+export function list() {
+  return sparkpostApiRequest({
+    type: 'LIST_SENDING_IPS',
+    meta: {
+      method: 'GET',
+      url: '/sending-ips'
+    }
+  });
+}

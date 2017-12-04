@@ -132,7 +132,7 @@ exports[`Page: SummaryPage should render banner when manually billed 1`] = `
 </Page>
 `;
 
-exports[`Page: SummaryPage should render billing summary if on paid plan 1`] = `
+exports[`Page: SummaryPage should render billing and dedicated IP summary if on paid plan 1`] = `
 <Page
   empty={Object {}}
   title="Billing"
@@ -180,21 +180,14 @@ exports[`Page: SummaryPage should render billing summary if on paid plan 1`] = `
           }
         />
       </Panel.Section>
-      <Panel.Section
-        actions={
-          Array [
-            Object {
-              "content": "Add Dedicated IPs",
-              "onClick": [Function],
-            },
-          ]
+      <DedicatedIpSummarySection
+        onClick={[Function]}
+        plan={
+          Object {
+            "isFree": false,
+          }
         }
-      >
-        <LabelledValue
-          label="Dedicated IPs"
-          value="0"
-        />
-      </Panel.Section>
+      />
     </Panel>
     <Panel
       title="Billing"

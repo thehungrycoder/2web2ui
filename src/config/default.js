@@ -42,6 +42,7 @@ const config = {
   ],
   release: process.env.REACT_APP_VERSION,
   sendingIps: {
+    maxPerAccount: 4,
     pricePerIp: 20.00
   },
   sentry: {
