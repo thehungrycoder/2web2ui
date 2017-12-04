@@ -6,7 +6,7 @@ describe('GlobalAlertWrapper', () => {
   const props = {
     alerts: [{
       message: 'a message',
-      date: 'date'
+      id: 'alert_1'
     }],
     clear: jest.fn()
   };
@@ -19,6 +19,6 @@ describe('GlobalAlertWrapper', () => {
   it('should clear', () => {
     const wrapper = shallow(<GlobalAlertWrapper {...props} />)
     wrapper.find('Alert').simulate('dismiss');
-    expect(props.clear).toHaveBeenCalledWith(0);
+    expect(props.clear).toHaveBeenCalledWith('alert_1');
   });
 });

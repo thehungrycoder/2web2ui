@@ -3,7 +3,9 @@
 exports[`clear alert should dispatch the correct action 1`] = `
 Array [
   Object {
-    "payload": 0,
+    "payload": Object {
+      "id": "alert_1",
+    },
     "type": "CLEAR_GLOBAL_ALERT",
   },
 ]
@@ -13,7 +15,7 @@ exports[`show alert should dispatch the correct action 1`] = `
 Array [
   Object {
     "payload": Object {
-      "date": 1511303984050,
+      "id": "alert_1",
       "message": "a message",
       "type": "success",
     },
@@ -26,7 +28,7 @@ exports[`show alert should dispatch the correct action without type 1`] = `
 Array [
   Object {
     "payload": Object {
-      "date": 1511303984050,
+      "id": "alert_2",
       "message": "a message",
     },
     "type": "SHOW_GLOBAL_ALERT",

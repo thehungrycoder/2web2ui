@@ -8,7 +8,7 @@ describe('Alert', () => {
 
   const props = {
     autoDismiss: true,
-    timeout: 500,
+    timeoutInterval: 500,
     message: 'message',
     type: 'error',
     details: 'details',
@@ -34,7 +34,7 @@ describe('Alert', () => {
 
     // refresh
     expect(window.clearTimeout).toHaveBeenCalledWith(wrapper.instance().timeout);
-    expect(window.setTimeout).toHaveBeenCalledWith(wrapper.instance().handleDismiss, props.timeout);
+    expect(window.setTimeout).toHaveBeenCalledWith(wrapper.instance().handleDismiss, props.timeoutInterval);
   });
 
   it('should handle dismiss', () => {

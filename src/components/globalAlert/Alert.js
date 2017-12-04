@@ -3,19 +3,19 @@ import PropTypes from 'prop-types';
 import { Snackbar } from '@sparkpost/matchbox';
 
 class Alert extends Component {
-  static PropTypes = {
+  static propTypes = {
     autoDismiss: PropTypes.bool,
     message: PropTypes.string.isRequired,
     type: PropTypes.oneOf(['default', 'success', 'error', 'danger']),
     details: PropTypes.string,
-    timeout: PropTypes.number,
+    timeoutInterval: PropTypes.number,
     onDismiss: PropTypes.func.isRequired
   };
 
   static defaultProps = {
     autoDismiss: true,
     type: 'default',
-    timeout: 15000
+    timeoutInterval: 15000
   }
 
   state = {
@@ -38,7 +38,7 @@ class Alert extends Component {
     if (this.timeout) {
       clearTimeout(this.timeout);
     }
-    this.timeout = setTimeout(this.handleDismiss, this.props.timeout);
+    this.timeout = setTimeout(this.handleDismiss, this.props.timeoutInterval);
   }
 
   handleDetails = () => {

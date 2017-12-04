@@ -1,8 +1,6 @@
 import { createMockStore } from '../../__testHelpers__/mockStore';
 import * as Actions from '../globalAlert';
 
-Date.now = jest.fn(() => 1511303984050);
-
 describe('show alert', () => {
   it('should dispatch the correct action', () => {
     const store = createMockStore({ globalAlert: { alerts: []}});
@@ -20,7 +18,7 @@ describe('show alert', () => {
 describe('clear alert', () => {
   it('should dispatch the correct action', () => {
     const store = createMockStore();
-    store.dispatch(Actions.clear(0));
+    store.dispatch(Actions.clear('alert_1'));
     expect(store.getActions()).toMatchSnapshot();
   });
 });

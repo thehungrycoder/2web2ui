@@ -10,10 +10,7 @@ export default (state = initialState, { type, payload }) => {
     case 'CLEAR_GLOBAL_ALERT':
       return {
         ...state,
-        alerts: [
-          ...state.alerts.slice(0, payload),
-          ...state.alerts.slice(payload + 1)
-        ]
+        alerts: state.alerts.filter(({ id }) => id !== payload.id)
       };
 
     default:

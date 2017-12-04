@@ -1,16 +1,18 @@
+import _ from 'lodash';
+
 export function showAlert(alert) {
   return {
     type: 'SHOW_GLOBAL_ALERT',
     payload: {
-      date: Date.now(),
+      id: _.uniqueId('alert_'),
       ...alert
     }
   };
 }
 
-export function clear(index) {
+export function clear(id) {
   return {
     type: 'CLEAR_GLOBAL_ALERT',
-    payload: index
+    payload: { id }
   };
 }
