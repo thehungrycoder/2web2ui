@@ -86,7 +86,7 @@ export default [
         to: '/account/security'
       },
       {
-        label: 'Sending domains',
+        label: 'Sending Domains',
         to: '/account/sending-domains'
       },
       {

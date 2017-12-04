@@ -198,6 +198,12 @@ export default [
     layout: App
   },
   {
+    path: '/lists/recipient-lists/edit/:id',
+    component: ComingSoonPage,
+    condition: hasGrants('recipient_lists/manage'),
+    layout: App
+  },
+  {
     path: '/lists/suppressions',
     component: ComingSoonPage,
     condition: hasGrants('suppression_lists/manage'),
