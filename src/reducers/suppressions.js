@@ -1,4 +1,4 @@
-const initialState = { list: [], listLoading: true };
+const initialState = { list: [], listLoading: true, resultsSet: null };
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -11,22 +11,23 @@ export default (state = initialState, action) => {
     case 'GET_SUPPRESSIONS_FAIL':
       return { ...state, listError: action.payload, listLoading: false };
 
-    // search suppressions
+    //recipients search
     case 'SEARCH_SUPPRESSIONS_RECIPIENT_PENDING':
       return { ...state, loading: true };
 
     case 'SEARCH_SUPPRESSIONS_RECIPIENT_SUCCESS':
-      return { ...state, loading: false, resultsSet: payload };
+      return { ...state, loading: false, resultsSet: action.payload };
 
     case 'SEARCH_SUPPRESSIONS_RECIPI  ENT_FAIL': {
       return { ...state, loading: false };
     }
 
+    //filters
     case 'SEARCH_SUPPRESSIONS_PENDING':
       return { ...state, loading: true };
 
     case 'SEARCH_SUPPRESSIONS_SUCCESS':
-      return { ...state, loading: false, resultsSet: payload };
+      return { ...state, loading: false, resultsSet: action.payload };
 
     case 'SEARCH_SUPPRESSIONS_FAIL': {
       return { ...state, loading: false };

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Button } from '@sparkpost/matchbox';
 
 import { Loading, TableCollection } from 'src/components';
+import styles from '../styles.scss';
 
 import { formatSubaccountDisplay } from '../helpers';
 
@@ -11,7 +12,7 @@ const columns = [
   { label: 'Type', width: '18%' },
   { label: 'Source', width: '20%' },
   { label: 'Subaccount' },
-  { label: '', width: '10%' }
+  { label: '', width: '14%' }
 ];
 
 class Results extends Component {
@@ -24,15 +25,24 @@ class Results extends Component {
     );
   }
 
+  renderEmpty() {
+    return (
+        <div>
+            <h3>There are no results for your current query</h3>
+        </div>
+    );
+  }
+
   getRowData = (row) => {
     const { recipient, type, source, subaccount_id: subaccountId } = row;
-    const { allSubaccounts = []} = this.props;
+    const { subaccounts: allSubaccounts } = this.props;
     return [recipient,
       type === 'transactional' ? 'Transactional' : 'Non-transactional',
       source,
-      formatSubaccountDisplay(subaccountId, allSubaccounts),
+      formatSubaccountDisplay(parseInt(subaccountId, 10), allSubaccounts),
       <div style={{ textAlign: 'right' }}>
-        <Button to={`/lists/suppressions/details/${recipient}`} size='small'>View Details</Button>
+        <Button size='small'>...</Button>
+        <Button destructive size='small'>Delete</Button>
       </div>
     ];
   };
@@ -44,7 +54,7 @@ class Results extends Component {
       <TableCollection
         columns={columns}
         rows={results}
-        getRowData={this.getRowData}
+        getRowData={this.getRowData.bind(this)}
         pagination
       />
     );
@@ -54,11 +64,15 @@ class Results extends Component {
     const { results = [], loading } = this.props;
 
     if (loading) {
-      return <Loading />;
+      return <div className={styles.Loading}><Loading /></div>;
     }
 
-    return results.length ? this.renderResults() : this.renderPlaceholder();
+    if (results === null) {
+      return this.renderPlaceholder();
+    }
+
+    return results.length ? this.renderResults() : this.renderEmpty();
   }
 }
 
-export default connect(null, {})(Results);
+export default connect(null)(Results);

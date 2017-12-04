@@ -12,7 +12,7 @@ export class EmailSearch extends Component {
   };
 
   handleChange(e, key) {
-    this.setState({ [key]: e.target.value });
+    this.setState({ [key]: e.target.value }, this.handleBlur);
   }
 
   handleSubaccountSelect(subaccount) {
@@ -21,7 +21,9 @@ export class EmailSearch extends Component {
 
   handleBlur() {
     const { email, subaccountId } = this.state;
-    this.props.onSubmit({ email, subaccountId });
+    if (email) { //TODO validate email
+      this.props.onSubmit({ email, subaccountId });
+    }
   }
 
   handleSelect() {
@@ -38,7 +40,7 @@ export class EmailSearch extends Component {
           <Field
             name="email"
             label='Email' //TODO remove label for both fields
-            onChange={(e) => this.handleChange(e, 'email')}
+            onBlur={(e) => this.handleChange(e, 'email')}
             component={TextFieldWrapper}
             title="Email"
             placeholder='Email'

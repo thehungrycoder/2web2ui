@@ -5,7 +5,7 @@ export function formatSubaccountDisplay(subaccountId, allSubAccounts) {
     return 'Master Account (0)';
   }
 
-  const subaccount = _.first(allSubAccounts, {
+  const subaccount = _.find(allSubAccounts, {
     id: subaccountId
   });
 

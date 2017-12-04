@@ -1,70 +1,83 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import moment from 'moment';
-import config from 'src/config';
+import _ from 'lodash';
 
 import { reduxForm } from 'redux-form';
 import { Grid } from '@sparkpost/matchbox';
 import { FilterDropdown } from 'src/components';
 import DateFilter from 'src/pages/reports/components/DateFilter';
 import { getRelativeDates } from 'src/helpers/date';
-import { relative } from 'path';
 
-const { apiDateFormat } = config;
+
+const DEFAULT_RANGE = 'day';
 
 const types = [
   {
     content: 'Transactional',
-    name: 'txn'
+    name: 'transactional'
   }, {
     content: 'Non-Transactional',
-    name: 'nonTxn'
+    name: 'non_transactional'
   }
 ];
 const sources = [
   {
     content: 'Spam Complaint',
-    name: 'spam'
+    name: 'Spam Complaint'
   },
   {
     content: 'List Unsubscribe',
-    name: 'listunsub'
+    name: 'List Unsubscribe'
   },
   {
     content: 'Bounce Rule',
-    name: 'bounce'
+    name: 'Bounce Rule'
   },
   {
     content: 'Unsubscribe Link',
-    name: 'linkunsub'
+    name: 'Unsubscribe Link'
   },
   {
     content: 'Manually Added',
-    name: 'manual'
+    name: 'Manually Added'
   },
   {
     content: 'Compliance',
-    name: 'compliance'
+    name: 'Compliance'
   }
 ];
 
 export class FilterForm extends Component {
-
-  handleChange() {
-    debugger;
+  state = {
+    ...getRelativeDates(DEFAULT_RANGE),
+    types: null,
+    sources: null
   }
 
-  refresh(options) {
-    const { relativeRange } = options;
+  refresh() {
+    this.props.onSubmit(this.state);
+  }
 
+  handleDateSelection(options) {
+    const { relativeRange } = options;
     if (relativeRange) {
       Object.assign(options, getRelativeDates(relativeRange));
     }
 
-    options.from = moment(options.from).utc().format(apiDateFormat);
-    options.to = moment(options.to).utc().format(apiDateFormat);
+    this.setState({
+      from: options.from,
+      to: options.to
+    }, this.refresh);
+  }
 
-    this.props.onSubmit(options);
+  handleTypesSelection(selected) {
+    const values = _.compact(_.map(selected, (val, key) => val ? key : undefined));
+    this.setState({ types: values.join(',') }, this.refresh);
+  }
+
+  handleSourcesSelection(selected) {
+    const values = _.compact(_.map(selected, (val, key) => val ? key : undefined));
+    this.setState({ sources: values.join(',') }, this.refresh);
   }
 
   render() {
@@ -73,7 +86,7 @@ export class FilterForm extends Component {
     <Grid>
       <Grid.Column xs={12} md={5}>
         <div className=''>
-          <DateFilter refresh={this.refresh.bind(this)} />
+          <DateFilter refresh={this.handleDateSelection.bind(this)} />
         </div>
       </Grid.Column>
       <Grid.Column xs={6} md={3}>
@@ -83,7 +96,7 @@ export class FilterForm extends Component {
             options={types}
             namespace='types'
             displayValue='Type'
-            onChange={this.handleChange}
+            onClose={this.handleTypesSelection.bind(this)}
           />
         </div>
       </Grid.Column>
@@ -95,6 +108,7 @@ export class FilterForm extends Component {
             options={sources}
             namespace='sources'
             displayValue='Sources'
+            onClose={this.handleSourcesSelection.bind(this)}
           />
         </div>
       </Grid.Column>
@@ -105,21 +119,8 @@ export class FilterForm extends Component {
 
 const formName = 'filterForm';
 
-const mapStateToProps = (state, props) => {
-  const { from, to, types, sources } = props;
-
-  return {
-    from,
-    to,
-    types,
-    sources
-
-
-  };
-};
-
 const formOptions = {
   form: formName
 };
 
-export default connect(mapStateToProps)(reduxForm(formOptions)(FilterForm));
+export default connect(null)(reduxForm(formOptions)(FilterForm));

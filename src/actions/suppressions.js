@@ -1,4 +1,8 @@
+import moment from 'moment';
+import config from 'src/config';
+
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
+const { apiDateFormat } = config;
 
 
 export function listSuppressions(params) {
@@ -30,10 +34,14 @@ export function searchRecipient({ email, subaccountId } = {}) {
     );
 }
 
-export function searchSuppressions({ from, to } = {}) {
+export function searchSuppressions({ from, to, types, sources } = {}) {
   const params = {
-    from, to
+    from: moment(from).utc().format(apiDateFormat),
+    to: moment(to).utc().format(apiDateFormat),
+    types,
+    sources
   };
+
   return (dispatch, getState) => dispatch(
       sparkpostApiRequest({
         type: 'SEARCH_SUPPRESSIONS',

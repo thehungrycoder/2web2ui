@@ -34,7 +34,6 @@ export class ListPage extends Component {
   };
 
   handleSearchByFilters(options) {
-    console.log(options);
     this.props.searchSuppressions(options);
   }
 
@@ -59,7 +58,7 @@ export class ListPage extends Component {
     if (this.props.hasSubaccounts) {
       this.props.listSubaccounts();
     }
-    this.handleSearchByEmail({ email: '06bvm995wxn@msn.com' });
+    this.handleSearchByEmail({ email: '06bvm995wxn@msn.com' }); //TODO remove this
   }
 
   render() {

@@ -54,6 +54,10 @@ export class FilterDropdown extends Component {
     ));
   }
 
+  onClose() {
+    this.props.onClose(this.props.values);
+  }
+
   render() {
     const { displayValue } = this.props;
     const count = this.countSelected();
@@ -63,7 +67,7 @@ export class FilterDropdown extends Component {
     return (
       <div>
         <Popover
-          trigger={<TextField prefix={prefix} value={displayValue} readOnly suffix={<Icon name='CaretDown'/>} />}>
+          trigger={<TextField prefix={prefix} value={displayValue} readOnly suffix={<Icon name='CaretDown'/>} />} onClose={this.onClose.bind(this)}>
           <ActionList actions={actions} />
         </Popover>
         {this.renderCheckboxes()}
