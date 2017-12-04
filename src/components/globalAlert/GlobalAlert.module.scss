@@ -1,22 +1,24 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 
-.GlobalAlert {
+.Wrapper {
   position: fixed;
-  z-index: 1;
+  top: rem(90);
   right: spacing();
-  bottom: spacing();
-  transform: translate(0, 15px);
 
-  opacity: 0;
-  pointer-events: none;
-  transition: 0.2s cubic-bezier(0,0,.5,1.5);
+  z-index: z-index(overlay);
+  text-align: right;
+  overflow: hidden;
 
-  box-shadow: shadow();
+  @media screen and (min-width: breakpoint(medium)) {
+    top: spacing();
+  }
 }
 
-.show {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translate(0, 0);
-  transition: 0.2s 1s cubic-bezier(0,0,.5,1.8);
+
+.Alert {
+  padding-bottom: spacing();
+
+  & > * {
+    text-align: left;
+  }
 }

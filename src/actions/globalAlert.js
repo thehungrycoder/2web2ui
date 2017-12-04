@@ -1,12 +1,13 @@
-export function showAlert({ type = 'default', ...alert }) {
+export function showAlert(alert) {
   return {
     type: 'SHOW_GLOBAL_ALERT',
-    payload: { type, ...alert }
+    payload: { ...alert }
   };
 }
 
-export function clear() {
+export function clear(id) {
   return {
-    type: 'CLEAR_GLOBAL_ALERT'
+    type: 'CLEAR_GLOBAL_ALERT',
+    payload: { id }
   };
 }
