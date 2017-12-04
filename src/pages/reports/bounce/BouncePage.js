@@ -17,7 +17,7 @@ import Empty from '../components/Empty';
 
 import './BouncePage.scss';
 
-const columns = ['Reason', 'Domain', 'Category', 'Classification', 'Count (%)'];
+const columns = [{ label: 'Reason', width: '45%' }, 'Domain', 'Category', 'Classification', 'Count (%)'];
 
 export class BouncePage extends Component {
   state = {
@@ -62,7 +62,7 @@ export class BouncePage extends Component {
     history.replace({ pathname: '/reports/bounce', search });
   }
 
-  getRowData(rowData) {
+  getRowData = (rowData) => {
     const { totalBounces } = this.props;
     const { reason, domain, bounce_category_name, bounce_class_name, count_bounce } = rowData;
     return [
@@ -72,13 +72,13 @@ export class BouncePage extends Component {
       bounce_class_name,
       `${count_bounce} (${Number((count_bounce / totalBounces) * 100).toFixed(2)}%)`
     ];
-  }
+  };
 
   renderChart() {
     const { chartLoading, aggregates } = this.props;
 
     if (!chartLoading && !aggregates) {
-      return <Empty title={'Bounce Rates'} message={'No bounces to report'}/>;
+      return <Empty title='Bounce Rates' message='No bounces to report' />;
     }
     return <ChartGroup />;
   }
@@ -94,12 +94,10 @@ export class BouncePage extends Component {
       return <Empty title={'Bounced Messages'} message={'No bounce reasons to report'} />;
     }
 
-    const getRowData = this.getRowData.bind(this);
-
     return <TableCollection
       columns={columns}
       rows={reasons}
-      getRowData={getRowData}
+      getRowData={this.getRowData}
       pagination={true}
     />;
   }
@@ -126,14 +124,12 @@ export class BouncePage extends Component {
 const mapStateToProps = (state) => {
   const chartLoading = state.bounceReport.aggregatesLoading || state.bounceReport.categoriesLoading;
   const tableLoading = chartLoading || state.bounceReport.reasonsLoading;
-  const pageLoading = typeof(chartLoading) === 'undefined';
   const aggregates = state.bounceReport.aggregates;
   return {
-    loading: pageLoading,
     filters: state.reportFilters,
     chartLoading,
     aggregates,
-    totalBounces: aggregates ? aggregates.countBounce : 0,
+    totalBounces: aggregates ? aggregates.countBounce : 1,
     tableLoading,
     reasons: state.bounceReport.reasons
   };
