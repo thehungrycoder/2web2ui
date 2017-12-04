@@ -22,7 +22,7 @@ Array [
       "meta": Object {
         "method": "GET",
         "params": Object {
-          "from": "2017-01-15T12:01",
+          "from": "2017-02-14T12:02",
           "metrics": "count_bounce",
         },
         "url": "/metrics/deliverability/bounce-classification",
@@ -50,7 +50,7 @@ Array [
       "meta": Object {
         "method": "GET",
         "params": Object {
-          "from": "2017-01-15T12:01",
+          "from": "2017-02-14T12:02",
           "metrics": "count_bounce",
         },
         "url": "/metrics/deliverability/bounce-reason/domain",
@@ -65,7 +65,7 @@ Array [
           "meta": Object {
             "method": "GET",
             "params": Object {
-              "from": "2017-01-15T12:01",
+              "from": "2017-02-14T12:02",
               "metrics": "count_bounce",
             },
             "url": "/metrics/deliverability/bounce-reason/domain",

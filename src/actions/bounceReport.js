@@ -85,7 +85,8 @@ export function refreshBounceTableMetrics(updates = {}) {
   return (dispatch, getState) => {
     const state = getState();
     const options = buildCommonOptions(state.reportFilters, updates);
-    const baseParams = _.omit(getQueryFromOptions(options), 'precision');
+    const query = getQueryFromOptions(options);
+    const baseParams = _.omit(query, 'precision');
     const params = { ...baseParams, metrics: 'count_bounce' };
 
     return dispatch(fetchBounceReasonsByDomain(params))
