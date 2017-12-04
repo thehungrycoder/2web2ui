@@ -8,14 +8,10 @@ import _ from 'lodash';
 // Extract from, to, filters (campaign, template, ...) and any other included update fields
 // into a set of common options for metrics queries.
 function buildCommonOptions(reportFilters, updates = {}) {
-  // if relativeRange is included, merge in the calculated from/to values
-  if (updates.relativeRange) {
-    Object.assign(updates, getRelativeDates(updates.relativeRange) || {});
-  }
-
   return {
     ...reportFilters,
-    ...updates
+    ...updates,
+    ...getRelativeDates(updates.relativeRange)
   };
 }
 
