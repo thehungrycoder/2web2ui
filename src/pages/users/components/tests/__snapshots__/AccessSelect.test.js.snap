@@ -23,6 +23,7 @@ exports[`AccessSelect renders select 1`] = `
     ]
   }
   placeholderValue=""
+  required={false}
   value="admin"
 />
 `;
