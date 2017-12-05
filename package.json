@@ -116,7 +116,10 @@
       "src/**/*.{js,jsx}"
     ],
     "coverageDirectory": "build-reports",
-    "coverageReporters": ["lcov", "text"],
+    "coverageReporters": [
+      "lcov",
+      "text"
+    ],
     "coveragePathIgnorePatterns": [
       "<rootDir>/src/App.js",
       "<rootDir>/src/index.js",
