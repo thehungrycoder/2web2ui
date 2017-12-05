@@ -72,12 +72,12 @@ export class FilterForm extends Component {
 
   handleTypesSelection(selected) {
     const values = _.compact(_.map(selected, (val, key) => val ? key : undefined));
-    this.setState({ types: values.join(',') }, this.refresh);
+    this.setState({ types: values }, this.refresh);
   }
 
   handleSourcesSelection(selected) {
     const values = _.compact(_.map(selected, (val, key) => val ? key : undefined));
-    this.setState({ sources: values.join(',') }, this.refresh);
+    this.setState({ sources: values }, this.refresh);
   }
 
   render() {

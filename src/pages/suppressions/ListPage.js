@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
+import config from 'src/config';
+import _ from 'lodash';
 
 import { Page, Tabs , Panel } from '@sparkpost/matchbox';
 
-import { searchRecipient, searchSuppressions } from 'src/actions/suppressions';
+import { searchRecipient, listSuppressions } from 'src/actions/suppressions';
 import { list as listSubaccounts } from 'src/actions/subaccounts';
 
 import { hasSubaccounts } from 'src/selectors/subaccounts';
@@ -12,6 +15,8 @@ import { hasSubaccounts } from 'src/selectors/subaccounts';
 import FilterForm from './components/FilterForm';
 import EmailSearch from './components/EmailSearch';
 import Results from './components/Results';
+
+const { apiDateFormat } = config;
 
 const primaryAction = {
   content: 'Add Suppressions',
@@ -33,8 +38,28 @@ export class ListPage extends Component {
     selectedTab: 0
   };
 
+
   handleSearchByFilters(options) {
-    this.props.searchSuppressions(options);
+    const { from, to, types = [], sources = []} = options;
+    const params = {};
+
+    if (from) {
+      params.from = moment(options.from).utc().format(apiDateFormat);
+    }
+
+    if (to) {
+      params.to = moment(options.to).utc().format(apiDateFormat);
+    }
+
+    if (!_.isEmpty(types)) {
+      params.types = types.join(',');
+    }
+
+    if (!_.isEmpty(sources)) {
+      params.sources = sources.join(',');
+    }
+
+    this.props.listSuppressions(params);
   }
 
   handleSearchByEmail(options) {
@@ -62,7 +87,7 @@ export class ListPage extends Component {
 
   render() {
     const { selectedTab } = this.state;
-    const { loading, results, subaccounts, hasSubaccounts } = this.props;
+    const { loading, list, subaccounts, hasSubaccounts } = this.props;
 
     return (
         <Page
@@ -75,13 +100,13 @@ export class ListPage extends Component {
           tabs={tabs.map(({ content }, idx) => ({ content, onClick: () => this.handleTabs(idx) }))}
           />
 
-          <Panel className='AA'>
+          <Panel>
             <Panel.Section>
               { selectedTab === 1 ? this.renderFindByEmails() : this.renderFilters() }
             </Panel.Section>
 
             <Panel.Section>
-              <Results results={results} loading={loading} subaccounts={subaccounts} hasSubaccounts={hasSubaccounts}/>
+              <Results results={list} loading={loading} subaccounts={subaccounts} hasSubaccounts={hasSubaccounts}/>
             </Panel.Section>
           </Panel>
         </Page>
@@ -90,12 +115,12 @@ export class ListPage extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const { loading, resultsSet } = state.suppressions;
+  const { listLoading, list } = state.suppressions;
   return {
-    loading: loading,
-    results: resultsSet,
+    loading: listLoading,
+    list: list,
     hasSubaccounts: hasSubaccounts(state),
     subaccounts: state.subaccounts.list
   };
 };
-export default connect(mapStateToProps, { searchSuppressions, searchRecipient, listSubaccounts })(ListPage);
+export default connect(mapStateToProps, { listSuppressions, searchRecipient, listSubaccounts })(ListPage);

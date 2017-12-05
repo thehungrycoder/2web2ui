@@ -85,7 +85,7 @@ function mapStateToProps(state) {
   return {
     currentUser: state.currentUser,
     accountAgeInWeeks: acctAge,
-    hasSuppressions: state.suppressions.list.length > 0,
+    hasSuppressions: (state.suppressions.list || []).length > 0,
     hasSendingDomains: state.sendingDomains.list.length > 0,
     hasVerifiedDomains: verifiedDomains.length > 0,
     hasApiKeysForSending: apiKeysForSending.length > 0,
