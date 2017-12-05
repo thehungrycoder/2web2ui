@@ -14,7 +14,8 @@ import {
   users,
   webhooks,
   ipPools,
-  ComingSoonPage
+  ComingSoonPage,
+  PageNotFound,
 } from 'src/pages';
 
 import {
@@ -64,7 +65,7 @@ import Form from 'src/components/layout/Form';
   * support/manage
   */
 
-export default [
+const routes = [
   {
     path: '/',
     public: true,
@@ -319,3 +320,12 @@ export default [
     layout: App
   }
 ];
+
+// ensure 404 is always last in routes
+routes.push({
+  path: '*',
+  component: PageNotFound,
+  layout: App
+});
+
+export default routes;

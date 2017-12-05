@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Page: Page Not Found tests renders correctly 1`] = `
+<EmptyState
+  image="Generic"
+  title="Page Not Found"
+>
+  <p>
+    We cannot find what you're looking for, use the navigation to find your way.
+  </p>
+</EmptyState>
+`;
