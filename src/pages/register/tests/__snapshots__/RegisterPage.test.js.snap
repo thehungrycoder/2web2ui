@@ -1,0 +1,94 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`happy path render 1`] = `
+<div>
+  <div>
+    <a
+      href="https://www.sparkpost.com"
+      title="SparkPost"
+    >
+      <Logo />
+    </a>
+  </div>
+  <Panel
+    accent={true}
+    sectioned={true}
+    title="Register"
+  >
+    <Connect(ReduxForm)
+      onSubmit={[Function]}
+    />
+  </Panel>
+  <UnstyledLink
+    to="/auth"
+  >
+    Already registered?
+  </UnstyledLink>
+</div>
+`;
+
+exports[`loading 1`] = `
+<div>
+  <div>
+    <a
+      href="https://www.sparkpost.com"
+      title="SparkPost"
+    >
+      <Logo />
+    </a>
+  </div>
+  <Panel
+    accent={true}
+    sectioned={true}
+    title="Register"
+  >
+    <PanelLoading />
+  </Panel>
+  <UnstyledLink
+    to="/auth"
+  >
+    Already registered?
+  </UnstyledLink>
+</div>
+`;
+
+exports[`no token 1`] = `
+<Redirect
+  push={false}
+  to="/auth"
+/>
+`;
+
+exports[`no token 2`] = `
+<Redirect
+  push={false}
+  to="/dashboard"
+/>
+`;
+
+exports[`token expired 1`] = `
+<div>
+  <div>
+    <a
+      href="https://www.sparkpost.com"
+      title="SparkPost"
+    >
+      <Logo />
+    </a>
+  </div>
+  <Panel
+    accent={true}
+    sectioned={true}
+    title="Register"
+  >
+    <p>
+      This invite has expired, please ask your account administator to re-send your invitation
+    </p>
+  </Panel>
+  <UnstyledLink
+    to="/auth"
+  >
+    Already registered?
+  </UnstyledLink>
+</div>
+`;

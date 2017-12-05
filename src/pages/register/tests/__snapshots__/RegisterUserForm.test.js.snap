@@ -1,0 +1,107 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <Field
+    component={[Function]}
+    disabled={false}
+    label="Username"
+    name="username"
+    validate={[Function]}
+  />
+  <Field
+    autoComplete="new-password"
+    component={[Function]}
+    disabled={false}
+    helpText="You password must have at least 8 characters and include 1 letter, 1 number, and 1 non-alphanumeric character."
+    label="Password"
+    name="password"
+    type="password"
+    validate={
+      Array [
+        [Function],
+        [Function],
+      ]
+    }
+    warn={
+      Array [
+        [Function],
+        [Function],
+        [Function],
+        [Function],
+      ]
+    }
+  />
+  <p>
+    <small>
+      By joining, you agree to SparPost's 
+      <UnstyledLink>
+        Terms of Use
+      </UnstyledLink>
+    </small>
+  </p>
+  <Button
+    disabled={false}
+    primary={true}
+    size="default"
+    submit={true}
+  >
+    Join SparkPost
+  </Button>
+</form>
+`;
+
+exports[`submitting 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <Field
+    component={[Function]}
+    disabled={true}
+    label="Username"
+    name="username"
+    validate={[Function]}
+  />
+  <Field
+    autoComplete="new-password"
+    component={[Function]}
+    disabled={true}
+    helpText="You password must have at least 8 characters and include 1 letter, 1 number, and 1 non-alphanumeric character."
+    label="Password"
+    name="password"
+    type="password"
+    validate={
+      Array [
+        [Function],
+        [Function],
+      ]
+    }
+    warn={
+      Array [
+        [Function],
+        [Function],
+        [Function],
+        [Function],
+      ]
+    }
+  />
+  <p>
+    <small>
+      By joining, you agree to SparPost's 
+      <UnstyledLink>
+        Terms of Use
+      </UnstyledLink>
+    </small>
+  </p>
+  <Button
+    disabled={true}
+    primary={true}
+    size="default"
+    submit={true}
+  >
+    Joining
+  </Button>
+</form>
+`;

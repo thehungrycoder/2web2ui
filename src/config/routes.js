@@ -6,6 +6,7 @@ import {
   billing,
   DashboardPage,
   ProfilePage,
+  RegisterPage,
   reports,
   recipientLists,
   subaccounts,
@@ -78,6 +79,11 @@ export default [
     path: '/sso',
     public: true,
     component: SSOPage
+  },
+  {
+    path: '/#/register',
+    public: true,
+    component: RegisterPage
   },
   {
     path: '/dashboard',
