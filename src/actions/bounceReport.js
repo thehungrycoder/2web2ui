@@ -15,11 +15,11 @@ function buildCommonOptions(reportFilters, updates = {}) {
   };
 }
 
-function maybeRefreshTypeaheadCache(dispatch, updates = {}) {
+function maybeRefreshTypeaheadCache(dispatch, options, updates = {}) {
   // refresh the typeahead cache if the date range has been updated
-  const { from, to } = updates;
-  if (from || to) {
-    const params = getQueryFromOptions({ from, to });
+  const { relativeRange, from, to } = updates;
+  if (relativeRange || from || to) {
+    const params = getQueryFromOptions({ from: options.from, to: options.to });
     dispatch(refreshTypeaheadCache(params));
   }
 }
@@ -41,7 +41,7 @@ export function refreshBounceChartMetrics(updates = {}) {
 
     const options = buildCommonOptions(state.reportFilters, updates);
 
-    maybeRefreshTypeaheadCache(dispatch, updates);
+    maybeRefreshTypeaheadCache(dispatch, options, updates);
 
     dispatch(refreshReportRange(options));
 

@@ -43,7 +43,6 @@ describe('Action Creator: Bounce Report', () => {
     expect(dispatchMock.mock.calls).toMatchSnapshot();
   });
 
-
   it('should dispatch a table refresh action', async () => {
     const thunk = bounceReport.refreshBounceTableMetrics();
     await thunk(dispatchMock, getStateMock);
@@ -56,9 +55,23 @@ describe('Action Creator: Bounce Report', () => {
     expect(dateHelpers.getRelativeDates).toHaveBeenCalledWith('test');
   });
 
-  it('should handle date updates', async () => {
+  it('should not refresh the typeahead cache by default', async () => {
+    const spy = jest.spyOn(filterActions, 'refreshTypeaheadCache');
+    const thunk = bounceReport.refreshBounceChartMetrics();
+    await thunk(dispatchMock, getStateMock);
+    expect(spy).toHaveBeenCalledTimes(0);
+  });
+
+  it('should refresh the typeahead cache on date change', async () => {
     const spy = jest.spyOn(filterActions, 'refreshTypeaheadCache');
     const thunk = bounceReport.refreshBounceChartMetrics({ to: 'test', from: 'test' });
+    await thunk(dispatchMock, getStateMock);
+    expect(spy).toHaveBeenCalled();
+  });
+
+  it('should refresh the typeahead cache on relative date change', async () => {
+    const spy = jest.spyOn(filterActions, 'refreshTypeaheadCache');
+    const thunk = bounceReport.refreshBounceChartMetrics({ from, range: 'hour' });
     await thunk(dispatchMock, getStateMock);
     expect(spy).toHaveBeenCalled();
   });
