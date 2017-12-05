@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
-
 import { Grid, Panel } from '@sparkpost/matchbox';
 import ActiveLabel from './ActiveLabel';
 import BounceChart from './BounceChart';
 import Legend from './Legend';
 import { Loading } from 'src/components';
 import { generateColors } from 'src/helpers/bounce';
-
 import styles from './ChartGroup.module.scss';
+
+// Overwrites 'LoadableComponent'
+BounceChart.displayName = 'BounceChart';
 
 // Chart color palette generated from:
 const primaryColor = '#DB2F3D';
