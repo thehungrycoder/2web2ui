@@ -112,7 +112,6 @@
     "lintfix": "eslint src -- --fix"
   },
   "jest": {
-    "coverageDirectory" : "build-reports/coverage",
     "collectCoverageFrom": [
       "src/**/*.{js,jsx}"
     ],
