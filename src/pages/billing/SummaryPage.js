@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { Page, Panel, WindowEvent } from '@sparkpost/matchbox';
 
 import { fetch as fetchAccount, getPlans } from 'src/actions/account';
-import { list as getSendingIps } from 'src/actions/sendingIps';
 import { shouldExposeCardSelector, canChangePlanSelector, currentPlanSelector, publicPlansSelector } from 'src/selectors/accountBillingInfo';
 
 import { Loading, Modal, LabelledValue } from 'src/components';
@@ -12,8 +11,7 @@ import { PremiumBanner, EnterpriseBanner, SuspendedBanner, ManuallyBilledBanner,
 import UpdatePayment from './forms/UpdatePayment';
 import UpdateContact from './forms/UpdateContact';
 import AddIps from './forms/AddIps';
-import DedicatedIpSummarySection from './components/DedicatedIpSummarySection';
-import { CardSummary, PlanSummary } from './components/SummarySection';
+import { PlanSummary, CardSummary } from './components/SummarySection';
 
 const PAYMENT_MODAL = 'payment';
 const CONTACT_MODAL = 'contact';
@@ -24,9 +22,8 @@ export class SummaryPage extends Component {
     show: false
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.props.getPlans();
-    this.props.getSendingIps();
   }
 
   handleModal = (modal = false) => {
@@ -58,7 +55,7 @@ export class SummaryPage extends Component {
           <Panel.Section {...changePlanActions}>
             <PlanSummary label='Your Plan' plan={currentPlan} />
           </Panel.Section>
-          { shouldExposeCard && this.renderDedicatedIpSummarySection() }
+          { shouldExposeCard && this.renderDedicatedIps() }
         </Panel>
 
         { shouldExposeCard && this.renderBillingSummary() }
@@ -70,11 +67,17 @@ export class SummaryPage extends Component {
           <WindowEvent event='keydown' handler={this.handleEscape} />
           { show === PAYMENT_MODAL && <UpdatePayment onCancel={this.handleModal}/> }
           { show === CONTACT_MODAL && <UpdateContact onCancel={this.handleModal}/> }
-          { show === IP_MODAL && <AddIps onClose={this.handleModal}/> }
+          { show === IP_MODAL && <AddIps onCancel={this.handleModal}/> }
         </Modal>
       </div>
     );
   }
+
+  renderDedicatedIps = () => (
+    <Panel.Section actions={[{ content: 'Add Dedicated IPs', onClick: () => this.handleModal(IP_MODAL) }]}>
+      <LabelledValue label='Dedicated IPs' value='0'/>
+    </Panel.Section>
+  )
 
   renderBillingSummary = () => {
     const { billing } = this.props;
@@ -92,14 +95,6 @@ export class SummaryPage extends Component {
       </Panel>
     );
   }
-
-  renderDedicatedIpSummarySection = () => (
-    <DedicatedIpSummarySection
-      count={this.props.sendingIps.length}
-      plan={this.props.currentPlan}
-      onClick={() => this.handleModal(IP_MODAL)}
-    />
-  );
 
   render() {
     if (this.props.loading) {
@@ -121,7 +116,6 @@ const mapStateToProps = (state) => ({
   shouldExposeCard: shouldExposeCardSelector(state),
   canChangePlan: canChangePlanSelector(state),
   currentPlan: currentPlanSelector(state),
-  plans: publicPlansSelector(state),
-  sendingIps: state.sendingIps.list
+  plans: publicPlansSelector(state)
 });
-export default connect(mapStateToProps, { getSendingIps, getPlans, fetchAccount })(SummaryPage);
+export default connect(mapStateToProps, { getPlans, fetchAccount })(SummaryPage);

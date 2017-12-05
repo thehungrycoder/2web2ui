@@ -66,3 +66,23 @@ describe('Selector: can change plan', () => {
     expect(billingInfo.canChangePlanSelector(store)).toEqual(false);
   });
 });
+
+describe('IP Pool List Selector', () => {
+  const store = {
+    ipPools: {
+      list: [
+        { id: 'ip_id', name: 'IP Name' },
+        { id: 'default', name: 'IP Name2' }
+      ]
+    }
+  };
+
+  it('should format IP Pools for select options', () => {
+    expect(billingInfo.selectIpPools(store)).toMatchSnapshot();
+  });
+
+  it('should return empty array with no IP Pools', () => {
+    store.ipPools = {};
+    expect(billingInfo.selectIpPools(store)).toMatchSnapshot();
+  });
+});

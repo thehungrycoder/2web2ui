@@ -1,5 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`IP Pool List Selector should format IP Pools for select options 1`] = `
+Array [
+  Object {
+    "label": "IP Name [ip_id]",
+    "value": "ip_id",
+  },
+]
+`;
+
+exports[`IP Pool List Selector should return empty array with no IP Pools 1`] = `Array []`;
+
 exports[`Selector: current plan should get current plan from billing 1`] = `
 Object {
   "code": "qwe",

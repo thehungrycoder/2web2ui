@@ -39,13 +39,13 @@ describe('Helper: chart', () => {
     it('should return an empty array if precision type is not "hours"', () => {
       metrics.getPrecisionType = jest.fn(() => 'not-hours');
       const lines = getDayLines(data);
-      expect(lines).toHaveLength(0);
+      expect(lines.length).toEqual(0);
     });
 
     it('should return an item for every 0-hour date', () => {
       metrics.getPrecisionType = jest.fn(() => 'hours');
       const lines = getDayLines(data);
-      expect(lines).toHaveLength(3);
+      expect(lines.length).toEqual(3);
     });
 
     it('should ignore 0-hour dates in the first and last position', () => {
@@ -53,7 +53,7 @@ describe('Helper: chart', () => {
       data[0] = getTimestampWithFixedHour('2017-01-01', 0);
       data[data.length - 1] = getTimestampWithFixedHour('2017-01-01', 0);
       const lines = getDayLines(data);
-      expect(lines).toHaveLength(3);
+      expect(lines.length).toEqual(3);
     });
   });
 

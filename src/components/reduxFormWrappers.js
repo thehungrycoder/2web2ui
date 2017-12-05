@@ -41,9 +41,8 @@ export const RadioGroup = ({ input, options, title }) => (
         {...input}
         id={o.label}
         label={o.label}
-        checked={o.value === input.value}
-        disabled={!!o.disabled}
         value={o.value}
+        checked={o.value === input.value}
       />
     ))}
   </Radio.Group>
