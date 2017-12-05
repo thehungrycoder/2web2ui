@@ -19,7 +19,7 @@ const formatSize = (value) => {
   };
 
   _.forEach(formatters, (unit, key) => {
-    if (value > unit) {
+    if (value >= unit) {
       suffix = key;
       formatted = value / unit;
       return false;

@@ -5,17 +5,17 @@ import _ from 'lodash';
 
 describe('Duration', () => {
   it('should render duration in seconds', () => {
-    const wrapper = mount(<Duration value={1001}/>);
+    const wrapper = mount(<Duration value={1000}/>);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render duration in minutes', () => {
-    const wrapper = mount(<Duration value={60001}/>);
+    const wrapper = mount(<Duration value={60000}/>);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render duration in hours', () => {
-    const wrapper = mount(<Duration value={3600001}/>);
+    const wrapper = mount(<Duration value={3600000}/>);
     expect(wrapper).toMatchSnapshot();
   });
 
