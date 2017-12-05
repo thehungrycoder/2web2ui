@@ -31,34 +31,35 @@ export class EmailSearch extends Component {
   }
 
   render() {
-    const { subaccounts } = this.props;
+    const { subaccounts, hasSubaccounts } = this.props;
 
     return (
     <Grid>
-      <Grid.Column xs={12} md={6}>
-        <div className=''>
+      <Grid.Column xs={12} md={ hasSubaccounts ? 6 : 12 }>
+        <div>
           <Field
             name="email"
             label='Email' //TODO remove label for both fields
             onBlur={(e) => this.handleChange(e, 'email')}
             component={TextFieldWrapper}
             title="Email"
-            placeholder='Email'
+            placeholder='Recipient Email'
           />
 
         </div>
       </Grid.Column>
-      <Grid.Column xs={12} md={6}>
-        <div className=''>
-          <Field //TODO remove label for both fields
-            name="subaccount"
-            component={SubaccountTypeaheadWrapper}
-            subaccounts={subaccounts}
-            onChange={this.handleSubaccountSelect.bind(this)}
-            label={false}
-          />
-        </div>
-      </Grid.Column>
+      { hasSubaccounts &&
+        <Grid.Column xs={12} md={6}>
+          <div>
+            <Field //TODO remove label for both fields
+              name="subaccount"
+              component={SubaccountTypeaheadWrapper}
+              subaccounts={subaccounts}
+              onChange={this.handleSubaccountSelect.bind(this)}
+            />
+          </div>
+        </Grid.Column>
+      }
     </Grid>
     );
   }

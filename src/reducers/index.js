@@ -47,8 +47,7 @@ const appReducer = combineReducers({
   templates,
   users,
   trackingDomains,
-  webhooks,
-  suppressions
+  webhooks
 });
 
 /**

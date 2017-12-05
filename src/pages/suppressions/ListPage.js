@@ -46,8 +46,8 @@ export class ListPage extends Component {
   }
 
   renderFindByEmails() {
-    const { subaccounts } = this.props;
-    return <EmailSearch onSubmit={this.handleSearchByEmail.bind(this)} subaccounts={subaccounts} />;
+    const { subaccounts, hasSubaccounts } = this.props;
+    return <EmailSearch onSubmit={this.handleSearchByEmail.bind(this)} subaccounts={subaccounts} hasSubaccounts={hasSubaccounts} />;
   }
 
   handleTabs(tabIdx) {
@@ -58,7 +58,6 @@ export class ListPage extends Component {
     if (this.props.hasSubaccounts) {
       this.props.listSubaccounts();
     }
-    this.handleSearchByEmail({ email: '06bvm995wxn@msn.com' }); //TODO remove this
   }
 
   render() {

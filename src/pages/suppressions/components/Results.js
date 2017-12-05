@@ -3,56 +3,75 @@ import { connect } from 'react-redux';
 import { Button } from '@sparkpost/matchbox';
 
 import { Loading, TableCollection } from 'src/components';
-import styles from '../styles.scss';
+import styles from '../Suppressions.module.scss';
 
 import { formatSubaccountDisplay } from '../helpers';
 
-const columns = [
-  { label: 'Recipient', width: '30%' },
-  { label: 'Type', width: '18%' },
-  { label: 'Source', width: '20%' },
-  { label: 'Subaccount' },
-  { label: '', width: '14%' }
-];
+
 
 class Results extends Component {
   renderPlaceholder() {
     return (
-        <div>
-            <h3>Query results will be displayed here</h3>
-            <p>Choose some options and search to see your suppressions.</p>
-        </div>
+      <div>
+        <h6 className={styles.Center}>Choose some options to see your suppressions</h6>
+      </div>
     );
   }
 
   renderEmpty() {
     return (
-        <div>
-            <h3>There are no results for your current query</h3>
+      <div>
+            <h6 className={styles.Center}>There are no results for your current query</h6>
         </div>
     );
   }
 
   getRowData = (row) => {
     const { recipient, type, source, subaccount_id: subaccountId } = row;
-    const { subaccounts: allSubaccounts } = this.props;
-    return [recipient,
+    const { subaccounts: allSubaccounts, hasSubaccounts } = this.props;
+    const rowData = [recipient,
       type === 'transactional' ? 'Transactional' : 'Non-transactional',
-      source,
-      formatSubaccountDisplay(parseInt(subaccountId, 10), allSubaccounts),
+      source
+    ];
+
+    if (hasSubaccounts) {
+      rowData.push(formatSubaccountDisplay(parseInt(subaccountId, 10), allSubaccounts));
+    }
+
+    rowData.push(
       <div style={{ textAlign: 'right' }}>
         <Button size='small'>...</Button>
         <Button destructive size='small'>Delete</Button>
       </div>
-    ];
+    );
+
+    return rowData;
   };
+
+  getColumns() {
+    const { hasSubaccounts } = this.props;
+
+    const columns = [
+      { label: 'Recipient' },
+      { label: 'Type', width: '18%' },
+      { label: 'Source', width: '20%' }
+    ];
+
+    if (hasSubaccounts) {
+      columns.push({ label: 'Subaccount', width: '18%' });
+    }
+
+    columns.push({ label: '', width: '14%' });
+
+    return columns;
+  }
 
 
   renderResults() {
     const { results } = this.props;
     return (
       <TableCollection
-        columns={columns}
+        columns={this.getColumns()}
         rows={results}
         getRowData={this.getRowData.bind(this)}
         pagination

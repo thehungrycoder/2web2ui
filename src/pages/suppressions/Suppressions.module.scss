@@ -1,0 +1,17 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.Loading {
+    min-height: 100px;
+    position: relative;
+}
+
+.NoShadow{
+    box-shadow: 0px;
+}
+
+.Center {
+    @include text-style-heading;
+    text-align: center;
+    padding: rem(80) 0;
+    color: color(gray, 6);
+  }
