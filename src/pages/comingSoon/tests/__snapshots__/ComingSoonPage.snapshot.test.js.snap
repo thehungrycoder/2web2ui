@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<EmptyState
+  image="Generic"
+  title="We are not quite finished in here."
+>
+  <p>
+    We won't bother putting up blinking construction stripes but you get the idea. 
+    <span
+      aria-label="smile"
+      role="img"
+    >
+      😃
+    </span>
+  </p>
+</EmptyState>
+`;

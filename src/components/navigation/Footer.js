@@ -8,7 +8,7 @@ export class Footer extends Component {
   render() {
     return (
       <ul className={styles.footer}>
-        <li><a className={styles.link}>Help &amp; API</a></li>
+        <li><a className={styles.link} href='https://www.sparkpost.com/docs/' target='_blank' rel='noopener noreferrer'>Help &amp; API</a></li>
         <li><a className={styles.link} onClick={() => this.props.logout()}>Log Out</a></li>
       </ul>
     );
