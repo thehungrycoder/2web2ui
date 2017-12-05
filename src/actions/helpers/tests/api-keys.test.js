@@ -30,7 +30,7 @@ it('formats a simple key correctly', () => {
   expect(result).toEqual({
     data: {
       label: 'test key',
-      grants: ['message_events/view', 'relay_webhooks/view'],
+      grants: ['message_events/view', 'relay_webhooks/view']
     },
     headers: {}
   });

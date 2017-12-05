@@ -28,7 +28,6 @@ export class Tutorial extends Component {
 
           <Panel.Section>
             <TutorialItem
-              completed
               label='Add a sending domain'
               labelLink={sendingDomainUrl}
               completed={hasSendingDomains}>
@@ -38,7 +37,6 @@ export class Tutorial extends Component {
 
           <Panel.Section>
             <TutorialItem
-              completed
               label='Verify your sending domain'
               labelLink={sendingDomainUrl}
               completed={hasVerifiedDomains}>

@@ -18,19 +18,19 @@ describe('Alert', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = shallow(<Alert {...props} />)
+    wrapper = shallow(<Alert {...props} />);
   });
 
   it('should render with all props', () => {
     expect(wrapper).toMatchSnapshot();
-    expect(wrapper.find('a').length).toEqual(1);
+    expect(wrapper.find('a')).toHaveLength(1);
   });
 
   it('should handle details click', () => {
-    wrapper.find('a').simulate('click')
+    wrapper.find('a').simulate('click');
     expect(wrapper).toMatchSnapshot();
     expect(wrapper).toHaveState('showDetails', true);
-    expect(wrapper.instance().timeout).not.toBe(null)
+    expect(wrapper.instance().timeout).not.toBe(null);
 
     // refresh
     expect(window.clearTimeout).toHaveBeenCalledWith(wrapper.instance().timeout);

@@ -1,4 +1,4 @@
-import { selectVerifiedDomains, selectReadyForBounce, readyFor } from '../sendingDomains';
+import { selectVerifiedDomains, selectReadyForBounce } from '../sendingDomains';
 
 describe('Selectors: sendingDomains', () => {
   const state = {
