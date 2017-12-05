@@ -375,7 +375,7 @@ module.exports = {
       analyzerMode: 'static',
       // Path to bundle report file that will be generated in `static` mode.
       // Relative to bundles output directory.
-      reportFilename: '../bundle-report/index.html',
+      reportFilename: '../build-reports/bundle/index.html',
       // Module sizes to show in report by default.
       // Should be one of `stat`, `parsed` or `gzip`.
       // See "Definitions" section for more information.
@@ -386,7 +386,7 @@ module.exports = {
       generateStatsFile: false,
       // Name of Webpack Stats JSON file that will be generated if `generateStatsFile` is `true`.
       // Relative to bundles output directory.
-      // statsFilename: '../bundle-report/stats.json',
+      // statsFilename: '../build-reports/bundle/stats.json',
       // Options for `stats.toJson()` method.
       // For example you can exclude sources of your modules from stats file with `source: false` option.
       // See more options here: https://github.com/webpack/webpack/blob/webpack-1/lib/Stats.js#L21

@@ -4,8 +4,7 @@
 /node_modules
 
 # testing
-/coverage
-/bundle-report
+/build-reports
 junit.xml
 
 # build report artifacts
