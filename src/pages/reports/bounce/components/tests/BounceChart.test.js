@@ -1,5 +1,5 @@
 import React from 'react';
-import BounceChart from '../BounceChart';
+import BounceChart from '../async/BounceChart';
 import { shallow } from 'enzyme';
 
 describe('BounceChart: ', () => {

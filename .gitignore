@@ -5,6 +5,7 @@
 
 # testing
 /coverage
+/bundle-report
 junit.xml
 
 # build report artifacts
