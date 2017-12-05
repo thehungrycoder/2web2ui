@@ -186,6 +186,12 @@ export default [
     layout: App
   },
   {
+    path: '/templates/preview/:id',
+    component: ComingSoonPage,
+    condition: hasGrants('templates/modify'),
+    layout: App
+  },
+  {
     path: '/lists/recipient-lists',
     component: recipientLists.ListPage,
     condition: hasGrants('recipient_lists/manage'),
