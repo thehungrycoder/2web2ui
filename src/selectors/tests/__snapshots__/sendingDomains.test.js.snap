@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Selectors: sendingDomains should return all domains ready for bounce domains 1`] = `
+Array [
+  Object {
+    "status": Object {
+      "cname_status": "invalid",
+      "compliance_status": "valid",
+      "dkim_status": "valid",
+      "mx_status": "valid",
+      "ownership_verified": false,
+    },
+  },
+  Object {
+    "status": Object {
+      "cname_status": "valid",
+      "compliance_status": "invalid",
+      "dkim_status": "invalid",
+      "mx_status": "invalid",
+      "ownership_verified": true,
+    },
+  },
+]
+`;
+
+exports[`Selectors: sendingDomains should return all verified domains 1`] = `
+Array [
+  Object {
+    "status": Object {
+      "compliance_status": "valid",
+      "ownership_verified": true,
+    },
+  },
+]
+`;

@@ -1,5 +1,5 @@
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
-import _ from 'lodash';
+import setSubaccountHeader from './helpers/setSubaccountHeader';
 
 export function listTrackingDomains() {
   return sparkpostApiRequest({
@@ -11,11 +11,8 @@ export function listTrackingDomains() {
   });
 }
 
-export function createTrackingDomain({ subaccount = null, ...data }) {
-  const headers = {};
-  if (subaccount !== null) {
-    headers['x-msys-subaccount'] = _.get(subaccount, 'id', subaccount);
-  }
+export function createTrackingDomain({ subaccount, ...data }) {
+  const headers = setSubaccountHeader(subaccount);
   return sparkpostApiRequest({
     type: 'CREATE_TRACKING_DOMAIN',
     meta: {
@@ -28,10 +25,7 @@ export function createTrackingDomain({ subaccount = null, ...data }) {
 }
 
 export function deleteTrackingDomain({ domain, subaccountId }) {
-  const headers = {};
-  if (typeof subaccountId === 'number') {
-    headers['x-msys-subaccount'] = subaccountId;
-  }
+  const headers = setSubaccountHeader(subaccountId);
   return (dispatch) => {
     dispatch(sparkpostApiRequest({
       type: 'DELETE_TRACKING_DOMAIN',
@@ -46,10 +40,7 @@ export function deleteTrackingDomain({ domain, subaccountId }) {
 }
 
 export function verifyTrackingDomain({ domain, subaccountId }) {
-  const headers = {};
-  if (typeof subaccountId === 'number') {
-    headers['x-msys-subaccount'] = subaccountId;
-  }
+  const headers = setSubaccountHeader(subaccountId);
   return sparkpostApiRequest({
     type: 'VERIFY_TRACKING_DOMAIN',
     meta: {

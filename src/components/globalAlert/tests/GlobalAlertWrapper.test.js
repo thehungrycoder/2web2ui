@@ -12,12 +12,12 @@ describe('GlobalAlertWrapper', () => {
   };
 
   it('should render', () => {
-    const wrapper = shallow(<GlobalAlertWrapper {...props} />)
+    const wrapper = shallow(<GlobalAlertWrapper {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should clear', () => {
-    const wrapper = shallow(<GlobalAlertWrapper {...props} />)
+    const wrapper = shallow(<GlobalAlertWrapper {...props} />);
     wrapper.find('Alert').simulate('dismiss');
     expect(props.clear).toHaveBeenCalledWith('alert_1');
   });
