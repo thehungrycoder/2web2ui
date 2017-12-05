@@ -4,7 +4,7 @@
   "private": true,
   "package-lock": false,
   "dependencies": {
-    "@sparkpost/matchbox": "^1.8.6",
+    "@sparkpost/matchbox": "^1.8.7",
     "axios": "^0.16.1",
     "babel-plugin-lodash": "^3.2.11",
     "chart.js": "^2.6.0",
@@ -106,6 +106,8 @@
     "build": "node scripts/build.js",
     "analyze": "source-map-explorer build/static/js/main.*",
     "test": "node scripts/test.js --env=jsdom",
+    "test-coverage": "npm test -- --coverage",
+    "test-ci": "CI=true npm test -- --coverage",
     "lint": "eslint src",
     "lintfix": "eslint src -- --fix"
   },
@@ -113,6 +115,8 @@
     "collectCoverageFrom": [
       "src/**/*.{js,jsx}"
     ],
+    "coverageDirectory": "build-reports",
+    "coverageReporters": ["lcov", "text"],
     "coveragePathIgnorePatterns": [
       "<rootDir>/src/App.js",
       "<rootDir>/src/index.js",
