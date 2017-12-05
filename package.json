@@ -4,7 +4,7 @@
   "private": true,
   "package-lock": true,
   "engines": {
-    "npm": ">=5.4"
+    "npm": ">=5.3"
   },
   "dependencies": {
     "@sparkpost/matchbox": "^1.8.7",
