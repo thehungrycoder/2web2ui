@@ -31,9 +31,9 @@ it('formats a simple key correctly', () => {
     data: {
       label: 'test key',
       grants: ['message_events/view', 'relay_webhooks/view']
-    }
+    },
+    headers: {}
   });
-  expect(result).not.toHaveProperty('headers');
   expect(result.data).not.toHaveProperty('valid_ips');
   expect(getState).not.toHaveBeenCalled();
 });
@@ -54,7 +54,7 @@ it('formats a key with a subaccount correctly', () => {
   );
 
   expect(result).toHaveProperty('headers', {
-    'X-MSYS-SUBACCOUNT': 101
+    'x-msys-subaccount': 101
   });
 });
 

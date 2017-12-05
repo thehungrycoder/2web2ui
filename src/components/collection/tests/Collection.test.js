@@ -45,8 +45,8 @@ describe('Component: Collection', () => {
     addRows(15);
     const wrapper = shallow(<Collection {...props} />);
     expect(wrapper).toMatchSnapshot();
-    expect(wrapper.find(Pagination).length).toEqual(0);
-    expect(wrapper.find(FilterBox).length).toEqual(0);
+    expect(wrapper.find(Pagination)).toHaveLength(0);
+    expect(wrapper.find(FilterBox)).toHaveLength(0);
   });
 
   it('should render with custom wrappers', () => {
@@ -61,7 +61,7 @@ describe('Component: Collection', () => {
     props.pagination = true;
     const wrapper = shallow(<Collection {...props} />);
     expect(wrapper).toMatchSnapshot();
-    expect(wrapper.find(Pagination).length).toEqual(1);
+    expect(wrapper.find(Pagination)).toHaveLength(1);
   });
 
   it('should render the filter box', () => {
@@ -70,7 +70,7 @@ describe('Component: Collection', () => {
 
     const wrapper = shallow(<Collection {...props} />);
     expect(wrapper).toMatchSnapshot();
-    expect(wrapper.find(FilterBox).length).toEqual(1);
+    expect(wrapper.find(FilterBox)).toHaveLength(1);
   });
 
   describe('state changes', () => {

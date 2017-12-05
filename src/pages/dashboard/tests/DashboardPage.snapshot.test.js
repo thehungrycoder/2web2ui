@@ -3,23 +3,46 @@ import React from 'react';
 
 import { DashboardPage } from '../DashboardPage';
 
-const props = {
-  currentUser: {
-    email_verified: true
-  }
-};
+describe('Page: Dashboard tests', () => {
+  const props = {
+    currentUser: {
+      email_verified: true
+    },
+    listSuppressions: jest.fn(() => []),
+    listSendingDomains: jest.fn(() => []),
+    listApiKeys: jest.fn(() => []),
+    account: {
+      subscription: {
+        code: 'paid'
+      },
+      status: 'active'
+    },
+    hasSuppressions: true,
+    accountAgeInWeeks: 0
+  };
 
-let wrapper;
+  let wrapper;
 
-beforeEach(() => {
-  wrapper = shallow(<DashboardPage {...props} />);
-});
+  beforeEach(() => {
+    wrapper = shallow(<DashboardPage {...props} />);
+  });
 
-it('renders correctly', () => {
-  expect(wrapper).toMatchSnapshot();
-});
+  it('should render page correctly with defaults', () => {
+    expect(wrapper).toMatchSnapshot();
+  });
 
-it('renders correctly when user is not verified', () => {
-  wrapper.setProps({ currentUser: { email_verfied: false }});
-  expect(wrapper).toMatchSnapshot();
+  it('should correctly render page when user is not verified', () => {
+    wrapper.setProps({ currentUser: { email_verfied: false }});
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render import suppression list when 0 suppressions and new account', () => {
+    wrapper.setProps({ hasSuppressions: false, accountAgeInWeeks: 40 });
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should display upgrade CTA when account is free and active', () => {
+    wrapper.setProps({ account: { subscription: { code: 'free' }, status: 'active' }});
+    expect(wrapper).toMatchSnapshot();
+  });
 });

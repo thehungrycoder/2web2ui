@@ -1,13 +1,11 @@
 import _ from 'lodash';
 import { getGrants, getSubaccountGrants } from 'src/selectors/api-keys';
+import setSubaccountHeader from './setSubaccountHeader';
 
-export function formatKeyForRequest(key, getState) {
+export function formatKeyForRequest(key = {}, getState) {
   const request = { data: {}};
 
-  if (key.subaccount) {
-    request.headers = { 'X-MSYS-SUBACCOUNT': key.subaccount.id };
-  }
-
+  request.headers = setSubaccountHeader(key.subaccount);
   request.data.label = key.label;
 
   if (key.grantsRadio === 'all') {

@@ -4,6 +4,7 @@ exports[`listApiKeys() dispatches the correct action 1`] = `
 Array [
   Object {
     "meta": Object {
+      "headers": Object {},
       "method": "GET",
       "url": "/api-keys",
     },

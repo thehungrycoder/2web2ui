@@ -21,6 +21,7 @@ import users from './users';
 import trackingDomains from './trackingDomains';
 import webhooks from './webhooks';
 import messageEvents from './messageEvents';
+import suppressions from './suppressions';
 
 const appReducer = combineReducers({
   accessControlReady,
@@ -40,6 +41,7 @@ const appReducer = combineReducers({
   sendingDomains,
   subaccounts,
   summaryChart,
+  suppressions,
   templates,
   users,
   trackingDomains,

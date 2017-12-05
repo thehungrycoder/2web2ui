@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 import { Page, Banner } from '@sparkpost/matchbox';
 import { UsageReport } from 'src/components';
 import Tutorial from './components/Tutorial';
 import EmailBanner from './components/EmailBanner';
-import UpgradeBanner from './components/UpgradeBanner';
 
-import { AccessControl } from 'src/components/auth';
-import { configFlag } from 'src/helpers/conditions';
+import { fetch as fetchAccount } from 'src/actions/account';
+import { listSuppressions } from 'src/actions/suppressions';
+import { list as listSendingDomains } from 'src/actions/sendingDomains';
+import { listApiKeys } from 'src/actions/api-keys';
+
+import selectAccountAgeInWeeks from 'src/selectors/accountAge';
+import { selectVerifiedDomains, selectReadyForBounce } from 'src/selectors/sendingDomains';
+import { selectApiKeysForSending } from 'src/selectors/api-keys';
 
 export class DashboardPage extends Component {
   constructor(props) {
@@ -19,47 +25,46 @@ export class DashboardPage extends Component {
     };
   }
 
+  componentDidMount() {
+    this.props.listSuppressions({ sources: 'Manually Added', limit: 1 });
+    this.props.listSendingDomains();
+    this.props.listApiKeys({ id: 0 });
+  }
+
   resendVerification() {
     // TODO do this in redux
     this.setState({ sendingStatus: 'sending' });
   }
 
-  renderOneCta() {
+  renderVerifyEmailCta() {
     const { currentUser } = this.props;
 
-    if (!currentUser['email_verified']) {
+    if (!currentUser.email_verified) {
       return (
         <EmailBanner
           sendingStatus={this.state.sendingStatus}
           handleResend={() => this.resendVerification()} />
       );
     }
-
-    // TODO
-    return (
-      <UpgradeBanner hasCC />
-    );
   }
 
   renderSuppressionBanner() {
-    // TODO suppression get
-    // if accountAgeInWeeks > 1 && no suppressions
-    return (
-      <Banner title="Hey! We noticed you haven't imported a suppression list">
-        <p>If you're coming from a previous provider, be sure to also <a>import your suppressions</a>.</p>
-      </Banner>
-    );
+    const { accountAgeInWeeks, hasSuppressions } = this.props;
+
+    if (accountAgeInWeeks > 1 && !hasSuppressions) {
+      return (
+        <Banner title="Coming from another email service?">
+          <p>Welcome! Make sure you import your suppression list from your previous provider to avoid sending to people who have previously opted out, consistently bounced, etc. Learn more about migrating from Mailgun, Mandrill, or SendGrid. <a href="https://www.sparkpost.com/docs/getting-started/getting-started-sparkpost/#important-coming-from-other-email-services" target="_blank" rel="noopener noreferrer">import your suppressions</a>.</p>
+        </Banner>
+      );
+    }
   }
 
   render() {
     return (
-      <Page title='Control Panel'>
+      <Page title='Dashboard'>
 
-        { this.renderOneCta() }
-
-        <AccessControl condition={configFlag('showThingOnDash')}>
-          <h1>Show a thing on the dashboard based on config</h1>
-        </AccessControl>
+        { this.renderVerifyEmailCta() }
 
         <UsageReport />
 
@@ -71,4 +76,22 @@ export class DashboardPage extends Component {
   }
 }
 
-export default connect(({ account, currentUser }) => ({ account, currentUser }))(DashboardPage);
+function mapStateToProps(state) {
+  const acctAge = selectAccountAgeInWeeks(state);
+  const verifiedDomains = selectVerifiedDomains(state);
+  const apiKeysForSending = selectApiKeysForSending(state);
+  const readyForBounce = selectReadyForBounce(state);
+
+  return {
+    currentUser: state.currentUser,
+    accountAgeInWeeks: acctAge,
+    hasSuppressions: state.suppressions.list.length > 0,
+    hasSendingDomains: state.sendingDomains.list.length > 0,
+    hasVerifiedDomains: verifiedDomains.length > 0,
+    hasApiKeysForSending: apiKeysForSending.length > 0,
+    hasBounceDomains: readyForBounce.length > 0,
+    hasSentThisMonth: state.account.usage.month.used > 0
+  };
+}
+
+export default withRouter(connect(mapStateToProps, { fetchAccount, listSuppressions, listSendingDomains, listApiKeys })(DashboardPage));
