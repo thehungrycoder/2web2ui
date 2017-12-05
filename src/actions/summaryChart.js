@@ -68,10 +68,8 @@ export function getTableData({ params, metrics, groupBy }) {
     // The selected grouping
     const activeGroup = groupBy || state.summaryChart.groupBy;
 
-    // Get selected metrics - if this happens outside of a full chart refresh
-    if (!metrics) {
-      metrics = state.summaryChart.metrics;
-    }
+    // Get selected metrics
+    const activeMetrics = metrics || state.summaryChart.metrics;
 
     // Gets filters and metrics for params
     if (!params) {
@@ -84,13 +82,13 @@ export function getTableData({ params, metrics, groupBy }) {
       params
     };
 
-    dispatch(fetchMetrics(options)).then((results) => {
+    return dispatch(fetchMetrics(options)).then((results) => {
       dispatch({
         type: 'REFRESH_SUMMARY_TABLE',
         payload: {
           data: results,
           groupBy: activeGroup,
-          metrics
+          metrics: activeMetrics
         }
       });
     });

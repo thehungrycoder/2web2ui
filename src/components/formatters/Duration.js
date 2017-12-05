@@ -24,7 +24,7 @@ const formatDuration = (value) => {
     }
   });
 
-  return `${formatted.toFixed(2)} ${suffix}`;
+  return `${formatted.toFixed(2)}${suffix}`;
 };
 
 // Formats milliseconds into a readable duration value

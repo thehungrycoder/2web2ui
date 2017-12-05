@@ -1,37 +1,30 @@
-export const GROUP_CONFIG = [
-  {
-    value: 'domain',
+export const GROUP_CONFIG = {
+  'domain': {
     label: 'Recipient Domain',
     keyName: 'domain'
   },
-  {
-    value: 'sending-domain',
+  'sending-domain': {
     label: 'Sending Domain',
     keyName: 'sending_domain'
   },
-  {
-    value: 'campaign',
+  'campaign': {
     label: 'Campaign',
     keyName: 'campaign_id'
   },
-  {
-    value: 'template',
+  'template': {
     label: 'Template',
     keyName: 'template_id'
   },
-  {
-    value: 'subaccount',
+  'subaccount': {
     label: 'Subaccount',
     keyName: 'subaccount_id'
   },
-  {
-    value: 'sending-ip',
+  'sending-ip': {
     label: 'Sending IP',
     keyName: 'sending_ip'
   },
-  {
-    value: 'ip-pool',
+  'ip-pool': {
     label: 'IP Pool',
     keyName: 'ip_pool'
   }
-];
+};

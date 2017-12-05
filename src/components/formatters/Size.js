@@ -26,7 +26,7 @@ const formatSize = (value) => {
     }
   });
 
-  return `${formatted.toFixed(2)} ${suffix}`;
+  return `${formatted.toFixed(2)}${suffix}`;
 };
 
 // Formats bytes into a readable size value

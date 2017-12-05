@@ -29,7 +29,7 @@ export class Table extends Component {
     const { metrics, groupBy } = this.props;
 
     const primaryCol = {
-      label: _.find(GROUP_CONFIG, { value: groupBy }).label,
+      label: GROUP_CONFIG[groupBy].label,
       className: styles.HeaderCell
     };
 
@@ -44,7 +44,7 @@ export class Table extends Component {
 
   getRowData = () => {
     const { metrics, groupBy, typeaheadCache } = this.props;
-    const group = _.find(GROUP_CONFIG, { value: groupBy });
+    const group = GROUP_CONFIG[groupBy];
 
     return (row) => {
       let value = row[group.keyName];
@@ -79,7 +79,7 @@ export class Table extends Component {
   }
 
   getSelectOptions = () => {
-    const options = GROUP_CONFIG.map(({ value, label }) => ({ value, label }));
+    const options = _.keys(GROUP_CONFIG).map((key) => ({ value: key, label: GROUP_CONFIG[key].label }));
 
     if (!this.props.hasSubaccounts) {
       _.remove(options, { value: 'subaccount' });
@@ -89,8 +89,8 @@ export class Table extends Component {
   }
 
   renderTable() {
-    const { tableData, tableLoading } = this.props;
-    const rowKeyName = _.find(GROUP_CONFIG, { value: this.props.groupBy }).keyName;
+    const { tableData, tableLoading, groupBy } = this.props;
+    const rowKeyName = GROUP_CONFIG[groupBy].keyName;
 
     if (tableLoading) {
       return (

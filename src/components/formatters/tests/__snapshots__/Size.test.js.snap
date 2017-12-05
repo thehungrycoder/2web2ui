@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Size should render size in GB 1`] = `
+<Size
+  value={1074000001}
+>
+  1.00GB
+</Size>
+`;
+
+exports[`Size should render size in KB 1`] = `
+<Size
+  value={1025}
+>
+  1.00KB
+</Size>
+`;
+
+exports[`Size should render size in MB 1`] = `
+<Size
+  value={1049001}
+>
+  1.00MB
+</Size>
+`;
+
+exports[`Size should render size in PB 1`] = `
+<Size
+  value={1126000000000001}
+>
+  1.00PB
+</Size>
+`;
+
+exports[`Size should render size in TB 1`] = `
+<Size
+  value={1100000000001}
+>
+  1.00TB
+</Size>
+`;
+
+exports[`Size should render when not a number 1`] = `
+<Size
+  value="not a number"
+>
+  not a number
+</Size>
+`;

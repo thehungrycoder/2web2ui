@@ -73,6 +73,8 @@ class MetricsModal extends Component {
 
   render() {
     const { open, onCancel } = this.props;
+    const selectedCount = this.getSelectedMetrics().length;
+
     return (
       <Modal open={open}>
         <WindowEvent event='keydown' handler={this.handleKeyDown} />
@@ -82,7 +84,7 @@ class MetricsModal extends Component {
             <div>{ this.renderMetrics() }</div>
           </Panel.Section>
           <Panel.Section>
-            <Button onClick={this.handleApply} primary className={styles.Apply}>Apply Metrics</Button>
+            <Button onClick={this.handleApply} primary className={styles.Apply} disabled={!selectedCount}>Apply Metrics</Button>
             <Button onClick={onCancel} className={styles.Cancel}>Cancel</Button>
           </Panel.Section>
         </Panel>

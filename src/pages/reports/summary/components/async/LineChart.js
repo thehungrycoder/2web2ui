@@ -73,17 +73,33 @@ export default class SpLineChart extends React.Component {
 
     // Shows ticks every Sunday
     if (precision === 'day' && data.length > 15) {
-      ticks = data.map((tick) => tick.ts).filter((time) => moment(time).isoWeekday() === 7);
+      ticks = data.reduce((acc, { ts }) => {
+        if (moment(ts).isoWeekday() === 7) {
+          acc.push(ts);
+        }
+        return acc;
+      }, []);
+
     }
 
     // Show ticks every 15 minutes
     if (precision === '1min') {
-      ticks = data.map((tick) => tick.ts).filter((time) => moment(time).minutes() % 15 === 0);
+      ticks = data.reduce((acc, { ts }) => {
+        if (moment(ts).minutes() % 15 === 0) {
+          acc.push(ts);
+        }
+        return acc;
+      }, []);
     }
 
     // Show ticks every 30 minutes
     if (precision === '15min') {
-      ticks = data.map((tick) => tick.ts).filter((time) => moment(time).minutes() % 30 === 0);
+      ticks = data.reduce((acc, { ts }) => {
+        if (moment(ts).minutes() % 30 === 0) {
+          acc.push(ts);
+        }
+        return acc;
+      }, []);
     }
 
     return ticks;
@@ -113,7 +129,7 @@ export default class SpLineChart extends React.Component {
               ticks={this.getXTicks()}
               scale='utcTime'
               dataKey='ts'
-              interval='preserveStartEnd'
+              interval='preserveEnd'
               height={30}
               hide={!showXAxis} />
             <YAxis

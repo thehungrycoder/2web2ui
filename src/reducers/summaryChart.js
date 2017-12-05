@@ -2,7 +2,8 @@ import { getMetricsFromKeys, transformData } from 'src/helpers/metrics';
 import config from 'src/config';
 
 const initialState = {
-  loading: false,
+  chartLoading: false,
+  tableLoading: false,
   metrics: getMetricsFromKeys(config.summaryChart.defaultMetrics),
   precision: '',
   chartData: [],
