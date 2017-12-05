@@ -1,3 +1,4 @@
+/* eslint max-lines: ["error", 200] */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Panel, Grid, Icon, Button, Tag, Tooltip } from '@sparkpost/matchbox';
