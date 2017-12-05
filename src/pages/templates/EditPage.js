@@ -105,7 +105,7 @@ export class EditPage extends Component {
       },
       { content: 'Delete', onClick: this.handleDeleteModalToggle },
       { content: 'Duplicate', Component: Link, to: `/templates/create/${match.params.id}` },
-      { content: 'Preview & Send', disabled: true }
+      { content: 'Preview & Send', Component: Link, to: `/templates/preview/${match.params.id}` }
     ];
 
     const breadcrumbAction = {
