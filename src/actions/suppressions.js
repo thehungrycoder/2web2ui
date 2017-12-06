@@ -32,3 +32,17 @@ export function searchRecipient({ email, subaccountId } = {}) {
       })
     );
 }
+
+export function listSuppressions(params) {
+
+  return (dispatch, getState) => dispatch(
+      sparkpostApiRequest({
+        type: 'GET_SUPPRESSIONS',
+        meta: {
+          method: 'GET',
+          url: '/suppression-list',
+          params
+        }
+      })
+    );
+}

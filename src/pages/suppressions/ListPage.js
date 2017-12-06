@@ -39,7 +39,7 @@ export class ListPage extends Component {
   };
 
 
-  handleSearchByFilters(options) {
+  handleSearchByFilters = (options) => {
     const { from, to, types = [], sources = []} = options;
     const params = {};
 
@@ -62,17 +62,17 @@ export class ListPage extends Component {
     this.props.listSuppressions(params);
   }
 
-  handleSearchByEmail(options) {
+  handleSearchByEmail = (options) => {
     this.props.searchRecipient(options);
   }
 
   renderFilters() {
-    return <FilterForm onSubmit={this.handleSearchByFilters.bind(this)} />;
+    return <FilterForm onSubmit={this.handleSearchByFilters} />;
   }
 
   renderFindByEmails() {
     const { subaccounts, hasSubaccounts } = this.props;
-    return <EmailSearch onSubmit={this.handleSearchByEmail.bind(this)} subaccounts={subaccounts} hasSubaccounts={hasSubaccounts} />;
+    return <EmailSearch onSubmit={this.handleSearchByEmail} subaccounts={subaccounts} hasSubaccounts={hasSubaccounts} />;
   }
 
   handleTabs(tabIdx) {
