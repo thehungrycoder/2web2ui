@@ -4,7 +4,7 @@ exports[`Duration should render duration in hours 1`] = `
 <Duration
   value={3600000}
 >
-  1.00h
+  1h
 </Duration>
 `;
 
@@ -12,7 +12,7 @@ exports[`Duration should render duration in minutes 1`] = `
 <Duration
   value={60000}
 >
-  1.00m
+  1m
 </Duration>
 `;
 
@@ -20,7 +20,7 @@ exports[`Duration should render duration in seconds 1`] = `
 <Duration
   value={1000}
 >
-  1.00s
+  1s
 </Duration>
 `;
 

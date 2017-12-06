@@ -1,12 +1,13 @@
 import React, { Fragment } from 'react';
-import { Duration, Size, Percent } from 'src/components';
+import { Duration, Size, Percent, Count } from 'src/components';
+import { isNumber } from 'src/helpers/units';
 
 const formatUnit = (value, unit) => {
   if (typeof value === 'undefined') {
     return '';
   }
 
-  if (isNaN(parseFloat(value)) === true || isFinite(value) === false) {
+  if (!isNumber(value)) {
     return value;
   }
 
@@ -20,6 +21,10 @@ const formatUnit = (value, unit) => {
 
   if (unit === 'percent') {
     return <Percent value={value} />;
+  }
+
+  if (unit === 'number') {
+    return <Count value={value} />;
   }
 
   return value.toLocaleString();

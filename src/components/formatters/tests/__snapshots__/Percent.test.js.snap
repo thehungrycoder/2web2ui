@@ -4,7 +4,7 @@ exports[`Percent should render negative 1`] = `
 <Percent
   value={-20}
 >
-  -20.00%
+  -20%
 </Percent>
 `;
 
@@ -12,7 +12,7 @@ exports[`Percent should render percent 1`] = `
 <Percent
   value={20}
 >
-  20.00%
+  20%
 </Percent>
 `;
 
