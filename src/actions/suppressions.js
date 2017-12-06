@@ -6,7 +6,6 @@ import { refreshReportRange } from 'src/actions/reportFilters';
 
 const { apiDateFormat } = config;
 
-
 export function checkSuppression() { //used in DashBoardPage to check if account has suppression
   const params = { sources: 'Manually Added', limit: 1 };
 
@@ -41,15 +40,17 @@ export function searchRecipient({ email, subaccountId } = {}) {
 }
 
 export function listSuppressions(options) {
-  const { from, to, types = [], sources = []} = options;
+  const { reportFilters, types = [], sources = []} = options;
+  const { from, to } = reportFilters;
+
   const params = {};
 
   if (from) {
-    params.from = moment(options.from).utc().format(apiDateFormat);
+    params.from = moment(from).utc().format(apiDateFormat);
   }
 
   if (to) {
-    params.to = moment(options.to).utc().format(apiDateFormat);
+    params.to = moment(to).utc().format(apiDateFormat);
   }
 
   if (!_.isEmpty(types)) {
@@ -61,7 +62,7 @@ export function listSuppressions(options) {
   }
 
   return (dispatch, getState) => {
-    dispatch(refreshReportRange(options));
+    dispatch(refreshReportRange(reportFilters));
 
     return dispatch(
       sparkpostApiRequest({

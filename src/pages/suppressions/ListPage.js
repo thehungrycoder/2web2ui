@@ -13,7 +13,6 @@ import FilterForm from './components/FilterForm';
 import EmailSearch from './components/EmailSearch';
 import Results from './components/Results';
 
-
 const primaryAction = {
   content: 'Add Suppressions',
   Component: Link
@@ -33,11 +32,6 @@ export class ListPage extends Component {
   state = {
     selectedTab: 0
   };
-
-
-  // handleSearchByFilters = (options) => {
-  //   this.props.listSuppressions(params);
-  // }
 
   handleSearchByEmail = (options) => {
     this.props.searchRecipient(options);

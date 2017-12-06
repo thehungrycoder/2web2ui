@@ -8,9 +8,6 @@ import { FilterDropdown } from 'src/components';
 import DateFilter from 'src/pages/reports/components/DateFilter';
 import { getRelativeDates } from 'src/helpers/date';
 
-
-const DEFAULT_RANGE = 'day';
-
 const types = [
   {
     content: 'Transactional',
@@ -20,6 +17,7 @@ const types = [
     name: 'non_transactional'
   }
 ];
+
 const sources = [
   {
     content: 'Spam Complaint',
@@ -48,10 +46,16 @@ const sources = [
 ];
 
 export class Results extends Component {
-  state = {
-    ...getRelativeDates(DEFAULT_RANGE),
-    types: null,
-    sources: null
+
+  constructor(props) {
+    super(props);
+
+    const { reportFilters } = props;
+    this.state = {
+      reportFilters,
+      types: null,
+      sources: null
+    };
   }
 
   refresh() {
@@ -65,9 +69,11 @@ export class Results extends Component {
     }
 
     this.setState({
-      from: options.from,
-      to: options.to,
-      relativeRange: relativeRange
+      reportFilters: {
+        from: options.from,
+        to: options.to,
+        relativeRange: relativeRange
+      }
     }, this.refresh);
   }
 
@@ -79,6 +85,10 @@ export class Results extends Component {
   handleSourcesSelection(selected) {
     const values = _.compact(_.map(selected, (val, key) => val ? key : undefined));
     this.setState({ sources: values }, this.refresh);
+  }
+
+  componentDidMount() {
+    this.refresh();
   }
 
   render() {
@@ -123,8 +133,8 @@ const formOptions = {
   form: formName
 };
 
-const mapStateToProps = (state) => ({
-  filters: state.reportFilters
+const mapStateToProps = ({ reportFilters }) => ({
+  reportFilters
 });
 
-export default connect(null)(reduxForm(formOptions)(Results));
+export default connect(mapStateToProps)(reduxForm(formOptions)(Results));

@@ -9,6 +9,7 @@ let wrapper;
 
 beforeEach(() => {
   props = {
+    onSubmit: jest.fn(() => Promise.resolve())
   };
 
 });
