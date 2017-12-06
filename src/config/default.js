@@ -62,6 +62,7 @@ const config = {
     }
   },
   tenant: 'local',
+  touLink: 'https://www.sparkpost.com/policies/tou/',
   zuora: {
     baseUrl: 'https://rest.apisandbox.zuora.com/v1',
     timeout: 15000

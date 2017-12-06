@@ -81,7 +81,7 @@ export default [
     component: SSOPage
   },
   {
-    path: '/#/register',
+    path: '/register',
     public: true,
     component: RegisterPage
   },

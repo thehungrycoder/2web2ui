@@ -5,7 +5,7 @@ export const initialState = {
   error: null,
   loading: false,
   sortKey: 'name',
-  inviteError: null
+  invite: {}
 };
 
 const reduceUsers = fp.reduce((result, user) => ({ ...result, [user.username]: user }), {});
@@ -37,22 +37,22 @@ export default (state = initialState, action) => {
     }
 
     case 'REGISTER_USER_PENDING':
-      return { ...initialState, error: null, loading: true };
+      return { ...state, loading: true };
 
     case 'REGISTER_USER_SUCCESS':
-      return { ...initialState, loading: false };
+      return { ...state, loading: false };
 
     case 'REGISTER_USER_FAIL':
-      return { ...initialState, error: action.payload, loading: false };
+      return { ...state, loading: false };
 
     case 'CHECK_INVITE_TOKEN_PENDING':
-      return { ...initialState, inviteError: null, loading: true };
+      return { ...state, loading: true };
 
     case 'CHECK_INVITE_TOKEN_SUCCESS':
-      return { ...initialState, loading: false };
+      return { ...state, invite: { ...action.payload }, loading: false };
 
     case 'CHECK_INVITE_TOKEN_FAIL':
-      return { ...initialState, inviteError: action.payload, loading: false };
+      return { ...state, invite: { ...state.invite, error: action.payload }, loading: false };
 
     default:
       return state;

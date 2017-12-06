@@ -22,7 +22,7 @@
     "query-string": "^5.0.0",
     "raven-for-redux": "^1.1.1",
     "raven-js": "^3.19.1",
-    "react": "^16.0.0",
+    "react": "^16.2.0",
     "react-chartjs-2": "^2.1.0",
     "react-day-picker": "^6.1.0",
     "react-dom": "^16.0.0",
@@ -116,7 +116,10 @@
       "src/**/*.{js,jsx}"
     ],
     "coverageDirectory": "build-reports",
-    "coverageReporters": ["lcov", "text"],
+    "coverageReporters": [
+      "lcov",
+      "text"
+    ],
     "coveragePathIgnorePatterns": [
       "<rootDir>/src/App.js",
       "<rootDir>/src/index.js",

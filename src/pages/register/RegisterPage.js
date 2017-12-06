@@ -25,18 +25,26 @@ export class RegisterPage extends Component {
   }
 
   renderRegisterPanel() {
-    const { error, loading } = this.props;
+    const { invite, loading } = this.props;
 
     if (loading) {
-      //TODO: make the width passable as a prop
       return <PanelLoading />;
     }
 
-    if (error) {
-      return <p>This invite has expired, please ask your account administator to re-send your invitation</p>;
+    if (invite.error) {
+      return (
+        <Panel.Section>
+          <p>This invite has expired, please ask your account administator to re-send your invitation</p>
+        </Panel.Section>
+      );
     }
 
-    return <RegisterUserForm onSubmit={this.onSubmit} />;
+    return (
+      <Panel.Section>
+        <p><small>{invite.from} invited you to join their SparkPost account.</small></p>
+        <RegisterUserForm onSubmit={this.onSubmit} email={invite.email} />
+      </Panel.Section>
+    );
   }
 
   render() {
@@ -58,10 +66,10 @@ export class RegisterPage extends Component {
           </a>
         </div>
 
-        <Panel sectioned accent title='Register'>
+        <Panel accent title='Set Password'>
           { this.renderRegisterPanel() }
         </Panel>
-        <UnstyledLink to='/auth'>Already registered?</UnstyledLink>
+        <UnstyledLink to='/auth'>Already signed up?</UnstyledLink>
       </div>
     );
   }
@@ -71,7 +79,7 @@ function mapStateToProps({ auth, users }, props) {
   return {
     token: qs.parse(props.location.search).token,
     loggedIn: auth.loggedIn,
-    error: users.inviteError,
+    invite: users.invite,
     loading: users.loading
   };
 }
