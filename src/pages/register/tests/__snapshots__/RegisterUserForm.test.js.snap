@@ -6,7 +6,7 @@ exports[`render 1`] = `
 >
   <Field
     component={[Function]}
-    disabled={false}
+    disabled={true}
     label="Username"
     name="username"
     validate={[Function]}
@@ -15,7 +15,7 @@ exports[`render 1`] = `
     autoComplete="new-password"
     component={[Function]}
     disabled={false}
-    helpText="You password must have at least 8 characters and include 1 letter, 1 number, and 1 non-alphanumeric character."
+    helpText="Your password must have at least 8 characters and include 1 letter, 1 number, and 1 non-alphanumeric character."
     label="Password"
     name="password"
     type="password"
@@ -37,7 +37,10 @@ exports[`render 1`] = `
   <p>
     <small>
       By joining, you agree to SparPost's 
-      <UnstyledLink>
+      <UnstyledLink
+        target="_blank"
+        to="https://www.sparkpost.com/policies/tou/"
+      >
         Terms of Use
       </UnstyledLink>
     </small>
@@ -48,7 +51,7 @@ exports[`render 1`] = `
     size="default"
     submit={true}
   >
-    Join SparkPost
+    Confirm
   </Button>
 </form>
 `;
@@ -68,7 +71,7 @@ exports[`submitting 1`] = `
     autoComplete="new-password"
     component={[Function]}
     disabled={true}
-    helpText="You password must have at least 8 characters and include 1 letter, 1 number, and 1 non-alphanumeric character."
+    helpText="Your password must have at least 8 characters and include 1 letter, 1 number, and 1 non-alphanumeric character."
     label="Password"
     name="password"
     type="password"
@@ -90,7 +93,10 @@ exports[`submitting 1`] = `
   <p>
     <small>
       By joining, you agree to SparPost's 
-      <UnstyledLink>
+      <UnstyledLink
+        target="_blank"
+        to="https://www.sparkpost.com/policies/tou/"
+      >
         Terms of Use
       </UnstyledLink>
     </small>
@@ -101,7 +107,7 @@ exports[`submitting 1`] = `
     size="default"
     submit={true}
   >
-    Joining
+    Loading
   </Button>
 </form>
 `;

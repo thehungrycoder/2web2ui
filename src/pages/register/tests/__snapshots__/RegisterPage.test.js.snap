@@ -12,17 +12,25 @@ exports[`happy path render 1`] = `
   </div>
   <Panel
     accent={true}
-    sectioned={true}
-    title="Register"
+    title="Set Password"
   >
-    <Connect(ReduxForm)
-      onSubmit={[Function]}
-    />
+    <Panel.Section>
+      <p>
+        <small>
+          jose@zamora.io
+           invited you to join their SparkPost account.
+        </small>
+      </p>
+      <Connect(ReduxForm)
+        email="appteam@sparkpost.com"
+        onSubmit={[Function]}
+      />
+    </Panel.Section>
   </Panel>
   <UnstyledLink
     to="/auth"
   >
-    Already registered?
+    Already signed up?
   </UnstyledLink>
 </div>
 `;
@@ -39,15 +47,14 @@ exports[`loading 1`] = `
   </div>
   <Panel
     accent={true}
-    sectioned={true}
-    title="Register"
+    title="Set Password"
   >
     <PanelLoading />
   </Panel>
   <UnstyledLink
     to="/auth"
   >
-    Already registered?
+    Already signed up?
   </UnstyledLink>
 </div>
 `;
@@ -78,17 +85,18 @@ exports[`token expired 1`] = `
   </div>
   <Panel
     accent={true}
-    sectioned={true}
-    title="Register"
+    title="Set Password"
   >
-    <p>
-      This invite has expired, please ask your account administator to re-send your invitation
-    </p>
+    <Panel.Section>
+      <p>
+        This invite has expired, please ask your account administator to re-send your invitation
+      </p>
+    </Panel.Section>
   </Panel>
   <UnstyledLink
     to="/auth"
   >
-    Already registered?
+    Already signed up?
   </UnstyledLink>
 </div>
 `;

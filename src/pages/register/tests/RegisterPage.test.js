@@ -10,7 +10,11 @@ const registerUser = jest.fn(() => Promise.resolve());
 const props = {
   token: 'tokerino',
   loggedIn: false,
-  error: null,
+  invite: {
+    error: null,
+    from: 'jose@zamora.io',
+    email: 'appteam@sparkpost.com'
+  },
   loading: false,
   checkInviteToken,
   registerUser
@@ -42,7 +46,7 @@ test('no token', () => {
 
 test('token expired', () => {
   const error = { message: 'n0o0o0o0' };
-  wrapper.setProps({ error });
+  wrapper.setProps({ invite: { error } });
   expect(wrapper).toMatchSnapshot();
 });
 
