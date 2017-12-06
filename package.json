@@ -2,7 +2,10 @@
   "name": "react-webui",
   "version": "0.1.0",
   "private": true,
-  "package-lock": false,
+  "package-lock": true,
+  "engines": {
+    "npm": ">=5.3"
+  },
   "dependencies": {
     "@sparkpost/matchbox": "^1.8.7",
     "axios": "^0.16.1",
@@ -25,12 +28,11 @@
     "react": "^16.2.0",
     "react-chartjs-2": "^2.1.0",
     "react-day-picker": "^6.1.0",
-    "react-dom": "^16.0.0",
+    "react-dom": "^16.2.0",
     "react-loadable": "^5.3.1",
     "react-redux": "^5.0.5",
     "react-router-dom": "^4.1.1",
     "react-timeago": "^3.4.3",
-    "react-transition-group": "^2.2.1",
     "recharts": "^1.0.0-alpha.2",
     "redux": "^3.6.0",
     "redux-form": "7.0.3",

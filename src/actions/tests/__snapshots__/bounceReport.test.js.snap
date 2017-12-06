@@ -1,11 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Action Creator: Bounce Report should dispatch a refresh action 1`] = `
+exports[`Action Creator: Bounce Report should dispatch a chart refresh action 1`] = `
 Array [
   Array [
     Object {
       "payload": Object {
+        "from": "2017-02-14T12:02",
         "metrics": undefined,
+        "to": "2017-05-21T19:05",
       },
       "type": "REFRESH_REPORT_RANGE",
     },
@@ -22,7 +24,7 @@ Array [
       "meta": Object {
         "method": "GET",
         "params": Object {
-          "from": "2017-01-15T07:01",
+          "from": "2017-02-14T12:02",
           "metrics": "count_bounce",
         },
         "url": "/metrics/deliverability/bounce-classification",
@@ -37,7 +39,43 @@ Array [
         "categories": undefined,
         "types": undefined,
       },
-      "type": "REFRESH_BOUNCE_REPORT",
+      "type": "REFRESH_BOUNCE_CHART",
+    },
+  ],
+]
+`;
+
+exports[`Action Creator: Bounce Report should dispatch a table refresh action 1`] = `
+Array [
+  Array [
+    Object {
+      "meta": Object {
+        "method": "GET",
+        "params": Object {
+          "from": "2017-02-14T12:02",
+          "metrics": "count_bounce",
+        },
+        "url": "/metrics/deliverability/bounce-reason/domain",
+      },
+      "type": "FETCH_METRICS_BOUNCE_REASONS_BY_DOMAIN",
+    },
+  ],
+  Array [
+    Object {
+      "payload": Object {
+        "reasons": Object {
+          "meta": Object {
+            "method": "GET",
+            "params": Object {
+              "from": "2017-02-14T12:02",
+              "metrics": "count_bounce",
+            },
+            "url": "/metrics/deliverability/bounce-reason/domain",
+          },
+          "type": "FETCH_METRICS_BOUNCE_REASONS_BY_DOMAIN",
+        },
+      },
+      "type": "REFRESH_BOUNCE_TABLE",
     },
   ],
 ]

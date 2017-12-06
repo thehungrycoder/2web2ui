@@ -1,0 +1,231 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Summary Table  should render row data & handle click 1`] = `
+Array [
+  <UnstyledLink
+    onClick={[Function]}
+  >
+    <a
+      onClick={[Function]}
+    >
+      Master Account (ID 0)
+    </a>
+  </UnstyledLink>,
+  <div>
+    <Unit
+      value={123}
+    >
+      123
+    </Unit>
+  </div>,
+  <div>
+    <Unit
+      unit="millisecond"
+      value={12345}
+    >
+      12,345
+    </Unit>
+  </div>,
+  <UnstyledLink
+    onClick={[Function]}
+  >
+    <a
+      onClick={[Function]}
+    >
+      sub 1 name
+    </a>
+  </UnstyledLink>,
+  <div>
+    <Unit
+      value={123}
+    >
+      123
+    </Unit>
+  </div>,
+  <div>
+    <Unit
+      unit="millisecond"
+      value={12345}
+    >
+      12,345
+    </Unit>
+  </div>,
+  <UnstyledLink
+    onClick={[Function]}
+  >
+    <a
+      onClick={[Function]}
+    >
+      Deleted (ID 1010)
+    </a>
+  </UnstyledLink>,
+  <div>
+    <Unit
+      value={123}
+    >
+      123
+    </Unit>
+  </div>,
+  <div>
+    <Unit
+      unit="millisecond"
+      value={12345}
+    >
+      12,345
+    </Unit>
+  </div>,
+]
+`;
+
+exports[`Summary Table  should render subaccount option 1`] = `
+<Select
+  disabled={false}
+  label="Group By"
+  onChange={[Function]}
+  options={
+    Array [
+      Object {
+        "label": "Recipient Domain",
+        "value": "domain",
+      },
+      Object {
+        "label": "Sending Domain",
+        "value": "sending-domain",
+      },
+      Object {
+        "label": "Campaign",
+        "value": "campaign",
+      },
+      Object {
+        "label": "Template",
+        "value": "template",
+      },
+      Object {
+        "label": "Subaccount",
+        "value": "subaccount",
+      },
+      Object {
+        "label": "Sending IP",
+        "value": "sending-ip",
+      },
+      Object {
+        "label": "IP Pool",
+        "value": "ip-pool",
+      },
+    ]
+  }
+  placeholderValue=""
+  required={false}
+  value="domain"
+/>
+`;
+
+exports[`Summary Table  should render with data 1`] = `
+<TableCollection
+  columns={
+    Array [
+      Object {
+        "className": undefined,
+        "label": "Recipient Domain",
+      },
+      Object {
+        "className": "",
+        "key": "metric_1",
+        "label": <div
+          className={undefined}
+        />,
+      },
+      Object {
+        "className": "",
+        "key": "metric_2",
+        "label": <div
+          className={undefined}
+        />,
+      },
+    ]
+  }
+  defaultPerPage={10}
+  filterBox={
+    Object {
+      "show": false,
+    }
+  }
+  getRowData={[Function]}
+  pagination={true}
+  rowKeyName="domain"
+  rows={
+    Array [
+      Object {
+        "metric_1": 123,
+        "metric_2": 12345,
+        "subaccount_id": 0,
+      },
+      Object {
+        "metric_1": 123,
+        "metric_2": 12345,
+        "subaccount_id": 555,
+      },
+      Object {
+        "metric_1": 123,
+        "metric_2": 12345,
+        "subaccount_id": 1010,
+      },
+    ]
+  }
+/>
+`;
+
+exports[`Summary Table  should render with no data 1`] = `
+<Panel>
+  <Panel.Section>
+    <Grid>
+      <Grid.Column
+        lg={4}
+        md={5}
+        xs={12}
+      >
+        <Select
+          disabled={false}
+          label="Group By"
+          onChange={[Function]}
+          options={
+            Array [
+              Object {
+                "label": "Recipient Domain",
+                "value": "domain",
+              },
+              Object {
+                "label": "Sending Domain",
+                "value": "sending-domain",
+              },
+              Object {
+                "label": "Campaign",
+                "value": "campaign",
+              },
+              Object {
+                "label": "Template",
+                "value": "template",
+              },
+              Object {
+                "label": "Sending IP",
+                "value": "sending-ip",
+              },
+              Object {
+                "label": "IP Pool",
+                "value": "ip-pool",
+              },
+            ]
+          }
+          placeholderValue=""
+          required={false}
+          value="domain"
+        />
+      </Grid.Column>
+      <Grid.Column />
+    </Grid>
+  </Panel.Section>
+  <Empty
+    message="There is no data to display"
+  />
+</Panel>
+`;

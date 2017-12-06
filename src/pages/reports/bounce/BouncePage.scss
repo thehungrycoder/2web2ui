@@ -1,0 +1,10 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.BounceTable {
+  .ReasonCell {
+    font-size: rem(15);
+    word-wrap: break-word;
+    word-break: keep-all;
+    white-space: normal;
+  }
+}

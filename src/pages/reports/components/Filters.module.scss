@@ -2,7 +2,7 @@
 
 .FieldWrapper {
   margin-bottom: spacing();
-  @media screen and (min-width: breakpoint(medium)) {
+  @media screen and (min-width: breakpoint(small)) {
     margin-bottom: 0;
   }
 }

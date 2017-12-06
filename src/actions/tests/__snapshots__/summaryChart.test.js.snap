@@ -1,0 +1,90 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Action Creator: Summary Chart should dispatch a get chart data 1`] = `
+Array [
+  Array [
+    Promise {},
+  ],
+  Array [
+    Object {
+      "payload": Object {
+        "data": Object {
+          "params": Object {},
+          "path": "deliverability/time-series",
+          "type": "FETCH_CHART_DATA",
+        },
+        "metrics": undefined,
+        "precision": undefined,
+      },
+      "type": "REFRESH_SUMMARY_CHART",
+    },
+  ],
+]
+`;
+
+exports[`Action Creator: Summary Chart should dispatch a get table data action 1`] = `
+Array [
+  Array [
+    Promise {},
+  ],
+  Array [
+    Object {
+      "payload": Object {
+        "data": Object {
+          "params": Object {
+            "delimiter": ",",
+            "from": "2017-02-14T12:51",
+            "metrics": "",
+            "precision": "1min",
+            "to": "2017-02-14T12:51",
+          },
+          "path": "deliverability/domain",
+          "type": "FETCH_TABLE_DATA",
+        },
+        "groupBy": "domain",
+        "metrics": Array [
+          "count_accepted",
+        ],
+      },
+      "type": "REFRESH_SUMMARY_TABLE",
+    },
+  ],
+]
+`;
+
+exports[`Action Creator: Summary Chart should dispatch a refresh action 1`] = `
+Array [
+  Array [
+    [Function],
+  ],
+  Array [
+    Object {
+      "payload": Object {
+        "from": 1487076708000,
+        "groupBy": "domain",
+        "metrics": Array [
+          Object {
+            "description": "Messages successfully injected into SparkPost as well as rejected by it.",
+            "inSummary": true,
+            "key": "count_targeted",
+            "label": "Targeted",
+            "name": "count_targeted",
+            "stroke": "#04AEF9",
+            "type": "total",
+            "unit": "number",
+          },
+        ],
+        "relativeRange": "new range",
+        "to": 1487076708000,
+      },
+      "type": "REFRESH_REPORT_RANGE",
+    },
+  ],
+  Array [
+    [Function],
+  ],
+  Array [
+    [Function],
+  ],
+]
+`;

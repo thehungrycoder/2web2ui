@@ -1,5 +1,4 @@
 const initialState = {
-  loading: false,
   precision: '',
   categories: []
 };
@@ -20,9 +19,18 @@ export default (state = initialState, { type, payload }) => {
     case 'FETCH_METRICS_BOUNCE_CLASSIFICATIONS_FAIL':
       return { ...state, categoriesLoading: false };
 
-    case 'REFRESH_BOUNCE_REPORT': {
+    case 'FETCH_METRICS_BOUNCE_REASONS_BY_DOMAIN_PENDING':
+      return { ...state, reasonsLoading: true };
+
+    case 'FETCH_METRICS_BOUNCE_REASONS_BY_DOMAIN_SUCCESS':
+    case 'FETCH_METRICS_BOUNCE_REASONS_BY_DOMAIN_FAIL':
+      return { ...state, reasonsLoading: false };
+
+    case 'REFRESH_BOUNCE_CHART':
       return { ...state, ...payload };
-    }
+
+    case 'REFRESH_BOUNCE_TABLE':
+      return { ...state, ...payload };
 
     default:
       return state;

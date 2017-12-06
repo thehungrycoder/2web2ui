@@ -16,7 +16,7 @@ const primaryAction = {
 };
 
 const getRowData = ({ name, id, total_accepted_recipients }) => [
-  <Link to={`/lists/recipient-lists/${id}`}>{name}</Link>,
+  <Link to={`/lists/recipient-lists/edit/${id}`}>{name}</Link>,
   id,
   total_accepted_recipients
 ];

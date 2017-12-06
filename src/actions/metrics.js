@@ -1,9 +1,9 @@
-import moment from 'moment';
+import { format, subDays } from 'date-fns';
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 
 const apiFormat = 'YYYY-MM-DDTHH:MM';
 const defaultParams = () => ({
-  from: moment().subtract(30, 'days').format(apiFormat),
+  from: format(subDays(Date.now(), 30), apiFormat),
   metrics: 'count_targeted'
 });
 
@@ -64,5 +64,11 @@ export function fetchBounceClassifications(params = {}) {
 export function fetchBounceReasons(params = {}) {
   const type = 'FETCH_METRICS_BOUNCE_REASONS';
   const path = 'deliverability/bounce-reason';
+  return fetch({ type, path, params });
+}
+
+export function fetchBounceReasonsByDomain(params = {}) {
+  const type = 'FETCH_METRICS_BOUNCE_REASONS_BY_DOMAIN';
+  const path = 'deliverability/bounce-reason/domain';
   return fetch({ type, path, params });
 }

@@ -18,6 +18,22 @@ export default [
         to: '/reports/bounce'
       },
       {
+        label: 'Rejections',
+        to: '/reports/rejections'
+      },
+      {
+        label: 'Accepted',
+        to: '/reports/accepted'
+      },
+      {
+        label: 'Delayed',
+        to: '/reports/delayed'
+      },
+      {
+        label: 'Engagement',
+        to: '/reports/engagement'
+      },
+      {
         label: 'Message Events',
         to: '/reports/message-events'
       }
@@ -39,7 +55,7 @@ export default [
       },
       {
         label: 'Suppressions',
-        to: '/lits/suppression-list'
+        to: '/lists/suppressions'
       }
     ]
   },
@@ -64,6 +80,18 @@ export default [
       {
         label: 'Profile',
         to: '/account/profile'
+      },
+      {
+        label: 'Security',
+        to: '/account/security'
+      },
+      {
+        label: 'Sending Domains',
+        to: '/account/sending-domains'
+      },
+      {
+        label: 'SMTP Relay',
+        to: '/account/smtp'
       },
       {
         label: 'Subaccounts',

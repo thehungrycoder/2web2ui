@@ -39,8 +39,9 @@ exports[`Template EditPage should render correctly 1`] = `
         "to": "/templates/create/id",
       },
       Object {
+        "Component": [Function],
         "content": "Preview & Send",
-        "disabled": true,
+        "to": "/templates/preview/id",
       },
     ]
   }

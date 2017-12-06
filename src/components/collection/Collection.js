@@ -14,8 +14,12 @@ const objectValuesToString = (keys) => (item) => (keys || Object.keys(item)).map
 export class Collection extends Component {
   state = {};
 
+  static defaultProps = {
+    defaultPerPage: 25
+  }
+
   componentDidMount() {
-    const { defaultPerPage = 25, location } = this.props;
+    const { defaultPerPage, location } = this.props;
     this.setState({
       perPage: defaultPerPage,
       currentPage: Number(qs.parse(location.search).page) || 1
