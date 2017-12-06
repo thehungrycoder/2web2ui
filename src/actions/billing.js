@@ -93,7 +93,7 @@ export function addDedicatedIps({ ip_pool, isAwsAccount, quantity }) {
   };
 
   return (dispatch) => dispatch(sparkpostApiRequest(action))
-    .then(dispatch(getSendingIps()));  // refresh list
+    .then(() => dispatch(getSendingIps()));  // refresh list
 }
 
 export function createZuoraAccount({ data, token, signature }) {
