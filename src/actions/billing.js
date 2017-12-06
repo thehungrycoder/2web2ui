@@ -76,7 +76,7 @@ export function updateCreditCard({ data, token, signature }) {
   });
 }
 
-export function addDedicatedIps({ isAwsAccount, ...data }) {
+export function addDedicatedIps({ ip_pool, isAwsAccount, quantity }) {
   const url = isAwsAccount
     ? '/account/integrations/aws-marketplace/add-ons/dedicated_ips'
     : '/account/add-ons/dedicated_ips';
@@ -85,7 +85,10 @@ export function addDedicatedIps({ isAwsAccount, ...data }) {
     meta: {
       method: 'POST',
       url,
-      data
+      data: {
+        ip_pool,
+        quantity: parseInt(quantity)
+      }
     }
   };
 
