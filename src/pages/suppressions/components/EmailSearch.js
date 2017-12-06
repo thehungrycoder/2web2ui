@@ -41,7 +41,6 @@ export class FilterForm extends Component {
         <div>
           <Field
             name="email"
-            label='Email' //TODO remove label for both fields
             onBlur={(e) => this.handleChange(e, 'email')}
             component={TextFieldWrapper}
             title="Email"
@@ -53,11 +52,13 @@ export class FilterForm extends Component {
       { hasSubaccounts &&
         <Grid.Column xs={12} md={6}>
           <div>
-            <Field //TODO remove label for both fields
+            <Field
               name="subaccount"
               component={SubaccountTypeaheadWrapper}
               subaccounts={subaccounts}
+              label={false}
               onChange={this.handleSubaccountSelect}
+              placeholder='Subaccount'
             />
           </div>
         </Grid.Column>

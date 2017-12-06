@@ -29,7 +29,7 @@ export class SubaccountTypeahead extends Component {
     clearSelection,
     isOpen
   }) => {
-    const { name, subaccounts, disabled } = this.props;
+    const { name, subaccounts, disabled, label = 'Subaccount', placeholder = 'None' } = this.props;
 
     const matches = sortMatch(
       subaccounts,
@@ -52,9 +52,9 @@ export class SubaccountTypeahead extends Component {
       readOnly: !!selectedItem,
       disabled,
       id: name,
-      label: 'Subaccount',
+      label,
       name,
-      placeholder: 'None'
+      placeholder
     });
 
     textFieldProps['data-lpignore'] = true;

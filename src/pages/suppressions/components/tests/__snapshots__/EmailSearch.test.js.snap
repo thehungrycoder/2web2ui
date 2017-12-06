@@ -9,7 +9,6 @@ exports[`EmailSearch renders correctly 1`] = `
     <div>
       <Field
         component={[Function]}
-        label="Email"
         name="email"
         onBlur={[Function]}
         placeholder="Recipient Email"
@@ -29,7 +28,6 @@ exports[`EmailSearch renders correctly with subaccounts 1`] = `
     <div>
       <Field
         component={[Function]}
-        label="Email"
         name="email"
         onBlur={[Function]}
         placeholder="Recipient Email"
@@ -44,8 +42,10 @@ exports[`EmailSearch renders correctly with subaccounts 1`] = `
     <div>
       <Field
         component={[Function]}
+        label={false}
         name="subaccount"
         onChange={[Function]}
+        placeholder="Subaccount"
       />
     </div>
   </Grid.Column>
