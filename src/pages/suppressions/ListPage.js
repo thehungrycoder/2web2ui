@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import moment from 'moment';
-import config from 'src/config';
-import _ from 'lodash';
 
 import { Page, Tabs , Panel } from '@sparkpost/matchbox';
 
@@ -16,7 +13,6 @@ import FilterForm from './components/FilterForm';
 import EmailSearch from './components/EmailSearch';
 import Results from './components/Results';
 
-const { apiDateFormat } = config;
 
 const primaryAction = {
   content: 'Add Suppressions',
@@ -39,35 +35,16 @@ export class ListPage extends Component {
   };
 
 
-  handleSearchByFilters = (options) => {
-    const { from, to, types = [], sources = []} = options;
-    const params = {};
-
-    if (from) {
-      params.from = moment(options.from).utc().format(apiDateFormat);
-    }
-
-    if (to) {
-      params.to = moment(options.to).utc().format(apiDateFormat);
-    }
-
-    if (!_.isEmpty(types)) {
-      params.types = types.join(',');
-    }
-
-    if (!_.isEmpty(sources)) {
-      params.sources = sources.join(',');
-    }
-
-    this.props.listSuppressions(params);
-  }
+  // handleSearchByFilters = (options) => {
+  //   this.props.listSuppressions(params);
+  // }
 
   handleSearchByEmail = (options) => {
     this.props.searchRecipient(options);
   }
 
   renderFilters() {
-    return <FilterForm onSubmit={this.handleSearchByFilters} />;
+    return <FilterForm onSubmit={this.props.listSuppressions} />;
   }
 
   renderFindByEmails() {

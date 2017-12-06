@@ -5,6 +5,8 @@ import { reduxForm, Field } from 'redux-form';
 import { Grid } from '@sparkpost/matchbox';
 import { TextFieldWrapper, SubaccountTypeaheadWrapper } from 'src/components';
 
+import { email as emailValidator } from 'src/helpers/validation';
+
 export class FilterForm extends Component {
   state = {
     email: '',
@@ -21,7 +23,7 @@ export class FilterForm extends Component {
 
   handleBlur() {
     const { email, subaccountId } = this.state;
-    if (email) { //TODO validate email
+    if (emailValidator(email) === undefined) {
       this.props.onSubmit({ email, subaccountId });
     }
   }

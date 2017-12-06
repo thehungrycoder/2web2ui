@@ -58,7 +58,7 @@ export class Results extends Component {
     this.props.onSubmit(this.state);
   }
 
-  handleDateSelection(options) {
+  handleDateSelection = (options) => {
     const { relativeRange } = options;
     if (relativeRange) {
       Object.assign(options, getRelativeDates(relativeRange));
@@ -66,7 +66,8 @@ export class Results extends Component {
 
     this.setState({
       from: options.from,
-      to: options.to
+      to: options.to,
+      relativeRange: relativeRange
     }, this.refresh);
   }
 
@@ -81,12 +82,11 @@ export class Results extends Component {
   }
 
   render() {
-
     return (
     <Grid>
       <Grid.Column xs={12} md={5}>
         <div className=''>
-          <DateFilter refresh={this.handleDateSelection.bind(this)} />
+          <DateFilter refresh={this.handleDateSelection} />
         </div>
       </Grid.Column>
       <Grid.Column xs={6} md={3}>
@@ -122,5 +122,9 @@ const formName = 'filterForm';
 const formOptions = {
   form: formName
 };
+
+const mapStateToProps = (state) => ({
+  filters: state.reportFilters
+});
 
 export default connect(null)(reduxForm(formOptions)(Results));
