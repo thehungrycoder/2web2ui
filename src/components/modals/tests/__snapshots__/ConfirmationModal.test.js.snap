@@ -6,19 +6,21 @@ exports[`Component: ConfirmationModal should render correctly with basic props 1
     accent={true}
     sectioned={true}
   >
-    <Button
-      onClick={[Function]}
-      primary={true}
-      size="default"
-    >
-      Confirm
-    </Button>
-    <Button
-      onClick={[Function]}
-      size="default"
-    >
-      Cancel
-    </Button>
+    <div>
+      <Button
+        onClick={[Function]}
+        primary={true}
+        size="default"
+      >
+        Confirm
+      </Button>
+      <Button
+        onClick={[Function]}
+        size="default"
+      >
+        Cancel
+      </Button>
+    </div>
   </Panel>
 </Modal>
 `;
@@ -32,22 +34,24 @@ exports[`Component: ConfirmationModal should render correctly with open, content
     sectioned={true}
     title="Confirmation Modal Test Title"
   >
-    <p>
-      Some JSX content for the modal
-    </p>
-    <Button
-      onClick={[Function]}
-      primary={true}
-      size="default"
-    >
-      DESTROY
-    </Button>
-    <Button
-      onClick={[Function]}
-      size="default"
-    >
-      Cancel
-    </Button>
+    <div>
+      <p>
+        Some JSX content for the modal
+      </p>
+      <Button
+        onClick={[Function]}
+        primary={true}
+        size="default"
+      >
+        DESTROY
+      </Button>
+      <Button
+        onClick={[Function]}
+        size="default"
+      >
+        Cancel
+      </Button>
+    </div>
   </Panel>
 </Modal>
 `;

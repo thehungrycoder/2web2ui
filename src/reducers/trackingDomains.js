@@ -1,5 +1,4 @@
 const initialState = {
-  list: [],
   error: null,
   listLoading: false,
   verifying: []
@@ -14,10 +13,25 @@ export default (state = initialState, { type, payload, meta }) => {
       return { ...state, listLoading: false, list: payload };
 
     case 'LIST_TRACKING_DOMAINS_FAIL':
-      return { ...state, listLoading: false, error: { payload, meta, resource: 'tracking domains' }};
+      return { ...state, list: state.list || [], listLoading: false, error: { payload, meta, resource: 'tracking domains' }};
+
+    case 'DELETE_TRACKING_DOMAIN_PENDING':
+      return { ...state, deleting: meta.domain, deleteError: null };
+
+    case 'DELETE_TRACKING_DOMAIN_FAIL':
+      return { ...state, deleting: false, deleteError: payload };
 
     case 'DELETE_TRACKING_DOMAIN_SUCCESS':
-      return { ...state, list: state.list.filter((d) => d.domain !== meta.domain) };
+      return { ...state, deleting: false, list: state.list.filter((d) => d.domain !== meta.domain) };
+
+    case 'UPDATE_TRACKING_DOMAIN_PENDING':
+      return { ...state, updating: meta.domain, updateError: null };
+
+    case 'UPDATE_TRACKING_DOMAIN_FAIL':
+      return { ...state, updating: false, updateError: payload };
+
+    case 'UPDATE_TRACKING_DOMAIN_SUCCESS':
+      return { ...state, updating: false };
 
     case 'VERIFY_TRACKING_DOMAIN_PENDING':
       return { ...state, verifying: [...state.verifying, meta.domain]};

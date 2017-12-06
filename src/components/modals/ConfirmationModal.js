@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Panel, Button } from '@sparkpost/matchbox';
 import Modal from './Modal';
 import styles from './ConfirmationModal.module.scss';
+import { Loading } from 'src/components/loading/Loading';
 
 export default class ConfirmationModal extends Component {
 
@@ -15,22 +16,30 @@ export default class ConfirmationModal extends Component {
     confirmVerb: PropTypes.string
   };
 
+  renderContent() {
+    const { content = null, onConfirm, onCancel, confirmVerb = 'Confirm' } = this.props;
+    return (
+      <div>
+        {content}
+        <Button onClick={onConfirm} primary className={styles.Confirm}>
+          {confirmVerb}
+        </Button>
+        <Button onClick={onCancel} className={styles.Cancel}>Cancel</Button>
+      </div>
+    );
+  }
+
   render() {
     const {
       open,
       title,
-      content = null,
-      onCancel,
-      onConfirm,
-      confirmVerb = 'Confirm'
+      isPending
     } = this.props;
 
     return (
       <Modal open={open}>
         <Panel title={title} accent sectioned>
-          {content}
-          <Button onClick={onConfirm} primary className={styles.Confirm}>{confirmVerb}</Button>
-          <Button onClick={onCancel} className={styles.Cancel}>Cancel</Button>
+          {isPending ? <div className={styles.Loading}><Loading /></div> : this.renderContent()}
         </Panel>
       </Modal>
     );

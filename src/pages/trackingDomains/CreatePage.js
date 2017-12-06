@@ -4,14 +4,12 @@ import { Link } from 'react-router-dom';
 import { Page, Banner } from '@sparkpost/matchbox';
 import CreateForm from './components/CreateForm';
 import { createTrackingDomain } from 'src/actions/trackingDomains';
-import { showAlert } from 'src/actions/globalAlert';
 
 export class CreatePage extends Component {
 
   onSubmit = (data) => {
-    const { history, showAlert, createTrackingDomain } = this.props;
+    const { history, createTrackingDomain } = this.props;
     return createTrackingDomain(data).then(() => {
-      showAlert({ type: 'success', message: `Successfully added ${data.domain}` });
       history.push('/account/tracking-domains');
     });
   };
@@ -34,4 +32,4 @@ export class CreatePage extends Component {
   }
 }
 
-export default connect(null, { createTrackingDomain, showAlert })(CreatePage);
+export default connect(null, { createTrackingDomain })(CreatePage);
