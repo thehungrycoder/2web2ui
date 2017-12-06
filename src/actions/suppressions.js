@@ -1,10 +1,11 @@
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 
-export function listSuppressions(params) {
+export function checkSuppression() { //used in DashBoardPage to check if account has suppression
+  const params = { sources: 'Manually Added', limit: 1 };
 
   return (dispatch, getState) => dispatch(
     sparkpostApiRequest({
-      type: 'GET_SUPPRESSIONS',
+      type: 'CHECK_SUPPRESSIONS',
       meta: {
         method: 'GET',
         url: '/suppression-list',
@@ -31,4 +32,3 @@ export function searchRecipient({ email, subaccountId } = {}) {
       })
     );
 }
-

@@ -1,14 +1,14 @@
-const initialState = { list: null, listLoading: false };
+const initialState = { list: null, hasSuppressions: false, listLoading: false };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case 'GET_SUPPRESSIONS_PENDING':
+    case 'CHECK_SUPPRESSIONS_PENDING':
       return { ...state, listLoading: true, listError: null };
 
-    case 'GET_SUPPRESSIONS_SUCCESS':
-      return { ...state, list: action.payload, listLoading: false };
+    case 'CHECK_SUPPRESSIONS_SUCCESS':
+      return { ...state, hasSuppression: Boolean((action.payload || []).length), listLoading: false };
 
-    case 'GET_SUPPRESSIONS_FAIL':
+    case 'CHECK_SUPPRESSIONS_FAIL':
       return { ...state, listError: action.payload, listLoading: false };
 
     //recipients search
