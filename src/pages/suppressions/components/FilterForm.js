@@ -77,12 +77,12 @@ export class Results extends Component {
     }, this.refresh);
   }
 
-  handleTypesSelection(selected) {
+  handleTypesSelection = (selected) => {
     const values = _.compact(_.map(selected, (val, key) => val ? key : undefined));
     this.setState({ types: values }, this.refresh);
   }
 
-  handleSourcesSelection(selected) {
+  handleSourcesSelection = (selected) => {
     const values = _.compact(_.map(selected, (val, key) => val ? key : undefined));
     this.setState({ sources: values }, this.refresh);
   }
@@ -106,7 +106,7 @@ export class Results extends Component {
             options={types}
             namespace='types'
             displayValue='Type'
-            onClose={this.handleTypesSelection.bind(this)}
+            onClose={this.handleTypesSelection}
           />
         </div>
       </Grid.Column>
@@ -118,7 +118,7 @@ export class Results extends Component {
             options={sources}
             namespace='sources'
             displayValue='Sources'
-            onClose={this.handleSourcesSelection.bind(this)}
+            onClose={this.handleSourcesSelection}
           />
         </div>
       </Grid.Column>

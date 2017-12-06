@@ -71,7 +71,7 @@ export class Results extends Component {
       <TableCollection
         columns={this.getColumns()}
         rows={results}
-        getRowData={this.getRowData.bind(this)}
+        getRowData={this.getRowData}
         pagination
       />
     );

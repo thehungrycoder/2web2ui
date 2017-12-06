@@ -17,7 +17,7 @@ export class FilterForm extends Component {
     this.setState({ [key]: e.target.value }, this.handleBlur);
   }
 
-  handleSubaccountSelect(subaccount) {
+  handleSubaccountSelect = (subaccount) => {
     this.setState({ subaccountId: subaccount.id }, this.handleBlur);
   }
 
@@ -57,7 +57,7 @@ export class FilterForm extends Component {
               name="subaccount"
               component={SubaccountTypeaheadWrapper}
               subaccounts={subaccounts}
-              onChange={this.handleSubaccountSelect.bind(this)}
+              onChange={this.handleSubaccountSelect}
             />
           </div>
         </Grid.Column>
