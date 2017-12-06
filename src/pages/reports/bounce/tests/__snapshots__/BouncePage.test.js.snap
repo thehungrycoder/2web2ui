@@ -10,6 +10,40 @@ exports[`BouncePage:  should render 1`] = `
     refresh={[Function]}
   />
   <Connect(ChartGroup) />
+  <Panel
+    className="BounceTable"
+    title="Bounced Messages"
+  >
+    <TableCollection
+      columns={
+        Array [
+          Object {
+            "label": "Reason",
+            "width": "45%",
+          },
+          "Domain",
+          "Category",
+          "Classification",
+          "Count (%)",
+        ]
+      }
+      getRowData={[Function]}
+      pagination={true}
+      rows={
+        Array [
+          Object {
+            "bounce_category_name": "Block",
+            "bounce_class_description": "The message was blocked by the receiver as coming from a known spam source",
+            "bounce_class_name": "Spam Block",
+            "classification_id": 51,
+            "count_bounce": 5,
+            "domain": "yahoo.com",
+            "reason": "554 - 5.7.1 Blacklisted by 'twoomail.com'(twoo.com.multi.surbl.org) Contact the postmaster of this domain for resolution. This attempt has been logged.",
+          },
+        ]
+      }
+    />
+  </Panel>
   <ShareModal
     handleToggle={[Function]}
     link=""
@@ -31,6 +65,40 @@ exports[`BouncePage:  should render correctly with no bounces 1`] = `
     message="No bounces to report"
     title="Bounce Rates"
   />
+  <Panel
+    className="BounceTable"
+    title="Bounced Messages"
+  >
+    <TableCollection
+      columns={
+        Array [
+          Object {
+            "label": "Reason",
+            "width": "45%",
+          },
+          "Domain",
+          "Category",
+          "Classification",
+          "Count (%)",
+        ]
+      }
+      getRowData={[Function]}
+      pagination={true}
+      rows={
+        Array [
+          Object {
+            "bounce_category_name": "Block",
+            "bounce_class_description": "The message was blocked by the receiver as coming from a known spam source",
+            "bounce_class_name": "Spam Block",
+            "classification_id": 51,
+            "count_bounce": 5,
+            "domain": "yahoo.com",
+            "reason": "554 - 5.7.1 Blacklisted by 'twoomail.com'(twoo.com.multi.surbl.org) Contact the postmaster of this domain for resolution. This attempt has been logged.",
+          },
+        ]
+      }
+    />
+  </Panel>
   <ShareModal
     handleToggle={[Function]}
     link=""

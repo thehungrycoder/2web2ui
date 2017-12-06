@@ -54,5 +54,8 @@ function getRelativeDates(range) {
 
     case '90days':
       return { to, from: moment(to).subtract(90, 'day').toDate() };
+
+    default:
+      return {};
   }
 }
