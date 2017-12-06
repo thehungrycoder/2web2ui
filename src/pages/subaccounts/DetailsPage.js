@@ -4,6 +4,7 @@ import { Link, withRouter, Route, Switch } from 'react-router-dom';
 import { Page, Tabs } from '@sparkpost/matchbox';
 
 import { getSubaccount } from 'src/actions/subaccounts';
+import { ApiKeySuccessBanner } from 'src/components';
 import { selectSubaccount, selectDetailTabs } from 'src/selectors/subaccounts';
 import { listPools } from 'src/actions/ipPools';
 import { listApiKeys } from 'src/actions/api-keys';
@@ -26,6 +27,14 @@ export class DetailsPage extends Component {
     this.props.listApiKeys();
   }
 
+  renderApiKeyBanner() {
+    return (
+      <ApiKeySuccessBanner
+        title="Don't Forget Your API Key"
+      />
+    );
+  }
+
   render() {
     const { loading, location, tabs } = this.props;
     const selectedTab = location.pathname.endsWith('keys') ? 1 : 0;
@@ -38,10 +47,12 @@ export class DetailsPage extends Component {
         </Page>
       );
     }
-    const { match, subaccount } = this.props;
+
+    const { match, subaccount, newKey } = this.props;
 
     return (
       <Page title={`${subaccount.name} (${subaccount.id})`} breadcrumbAction={breadcrumbAction}>
+        { newKey && this.renderApiKeyBanner() }
         <Tabs selected={selectedTab} tabs={tabs} />
         <Switch>
           <Route exact path={match.url} render={() => <EditTab subaccount={subaccount} />} />
@@ -53,12 +64,13 @@ export class DetailsPage extends Component {
 }
 
 const mapStateToProps = (state, props) => {
-  const { subaccounts } = state;
+  const { subaccounts, apiKeys } = state;
   return {
     id: props.match.params.id,
     loading: subaccounts.getLoading,
     subaccount: selectSubaccount(state),
-    tabs: selectDetailTabs(state, props)
+    tabs: selectDetailTabs(state, props),
+    newKey: apiKeys.newKey
   };
 };
 

@@ -31,6 +31,7 @@ export class ListPage extends Component {
     this.props.listSubaccounts();
   };
 
+
   renderCollection() {
     return (
       <TableCollection

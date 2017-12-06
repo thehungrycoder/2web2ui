@@ -9,6 +9,7 @@ export { default as Navigation } from './navigation/Navigation';
 export { default as PlanPicker } from './planPicker/PlanPicker';
 export { default as SparkPost } from './sparkPost/SparkPost';
 export { default as UsageReport } from './usageReport/UsageReport';
+export { default as ApiKeySuccessBanner } from './apiKeyBanner/';
 
 export * from './collection';
 export * from './loading/Loading';

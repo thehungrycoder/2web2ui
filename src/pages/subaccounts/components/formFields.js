@@ -81,29 +81,16 @@ const ApiKeyFields = ({ show, showGrants = false, grants, disabled }) => {
   );
 };
 
-const StatusSelect = ({ disabled, compliance }) => {
-  if (compliance) {
-    return (
-      <Field
-        name="status"
-        component={TextFieldWrapper}
-        label="Status"
-        disabled={true}
-        helpText={'System set statuses can\'t be edited'}
-      />
-    );
-  } else {
-    return (
+const StatusSelect = ({ disabled, compliance }) => (
       <Field
         name="status"
         component={SelectWrapper}
         options={statusOptions}
         label="Status"
         disabled={disabled}
+        helpText={compliance ? 'Please email compliance@sparkpost.com for help with your subaccount.' : ''}
       />
     );
-  }
-};
 
 
 const IpPoolSelect = ({ ipPools, disabled }) => (

@@ -25,10 +25,10 @@ export class SubaccountEditForm extends Component {
 
           { !!ipPools.length && <IpPoolSelect ipPools={ipPools} disabled={submitting} /> }
 
-          <StatusSelect disabled={submitting} compliance={compliance} />
+          <StatusSelect disabled={submitting || compliance} compliance={compliance} />
         </Panel.Section>
         <Panel.Section>
-          <Button submit primary disabled={pristine || submitting}>
+          <Button submit primary disabled={pristine || submitting || compliance}>
             { submitting ? 'Updating...' : 'Update' }
           </Button>
           { !pristine && <Button style={{ marginLeft: '1em' }} disabled={pristine || submitting} onClick={reset}>Cancel</Button> }
@@ -41,8 +41,7 @@ export class SubaccountEditForm extends Component {
 const formName = 'SubaccountEditForm';
 
 const mapStateToProps = (state, { subaccount }) => {
-  const { compliance } = subaccount;
-  const status = compliance ? `System ${subaccount.status}` : subaccount.status;
+  const { compliance, status } = subaccount;
   return {
     ipPools: state.ipPools.list,
     compliance,
