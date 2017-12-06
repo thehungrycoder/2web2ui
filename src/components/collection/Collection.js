@@ -22,6 +22,14 @@ export class Collection extends Component {
     });
   }
 
+  componentDidUpdate(prevProps) {
+    // re-calculate filtered results if the incoming
+    // row data has changed
+    if (this.props.rows !== prevProps.rows) {
+      this.handleFilterChange(this.state.pattern);
+    }
+  }
+
   handlePageChange = (index) => {
     const currentPage = index + 1;
     this.setState({ currentPage }, this.maybeUpdateQueryString);
@@ -31,12 +39,13 @@ export class Collection extends Component {
     this.setState({ perPage, currentPage: 1 }, this.maybeUpdateQueryString);
   }
 
-  handleFilterChange = _.debounce((pattern) => {
+  handleFilterChange = (pattern) => {
     const { rows, filterBox } = this.props;
     const { keyMap, itemToStringKeys } = filterBox;
     const update = {
       currentPage: 1,
-      filteredRows: null
+      filteredRows: null,
+      pattern
     };
 
     if (pattern) {
@@ -49,7 +58,9 @@ export class Collection extends Component {
     }
 
     this.setState(update);
-  }, 300);
+  };
+
+  debouncedHandleFilterChange = _.debounce(this.handleFilterChange, 300);
 
   maybeUpdateQueryString() {
     const { location, pagination, updateQueryString } = this.props;
@@ -78,7 +89,7 @@ export class Collection extends Component {
   renderFilterBox() {
     const { filterBox = {}, rows, perPageButtons = defaultPerPageButtons } = this.props;
     if (filterBox.show && (rows.length > Math.min(...perPageButtons))) {
-      return <FilterBox {...filterBox} rows={rows} onChange={this.handleFilterChange} />;
+      return <FilterBox {...filterBox} rows={rows} onChange={this.debouncedHandleFilterChange} />;
     }
     return null;
   }

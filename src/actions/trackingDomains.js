@@ -24,8 +24,8 @@ export function createTrackingDomain({ subaccount, ...data }) {
       headers
     }
   }))
-  .then(() => dispatch(showAlert({ type: 'success', message: `Successfully created ${data.domain}` })))
-  .catch((err) => dispatch(showAlert({ type: 'error', message: `Unable to create ${data.domain}` })));
+  .then(() => dispatch(showAlert({ type: 'success', message: `Successfully added ${data.domain}` })))
+  .catch((err) => dispatch(showAlert({ type: 'error', message: `Unable to add ${data.domain}` })));
 }
 
 export function updateTrackingDomain({ domain, subaccount = null, ...data }) {

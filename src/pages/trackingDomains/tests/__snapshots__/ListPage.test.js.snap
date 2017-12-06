@@ -39,6 +39,7 @@ exports[`renders correctly 1`] = `
       outerWrapper={[Function]}
       pagination={true}
       rowComponent={[Function]}
+      rowKeyName="domain"
       rows={
         Array [
           Object {
@@ -74,6 +75,8 @@ exports[`renders correctly 1`] = `
   </div>
 </Page>
 `;
+
+exports[`renders during initial load 1`] = `<Loading />`;
 
 exports[`renders empty state 1`] = `
 <Page
@@ -114,6 +117,7 @@ exports[`renders empty state 1`] = `
       outerWrapper={[Function]}
       pagination={true}
       rowComponent={[Function]}
+      rowKeyName="domain"
       rows={Array []}
     />
   </div>

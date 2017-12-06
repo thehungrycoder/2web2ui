@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 import { ListPage } from '../ListPage';
 
 const props = {
-  loading: false,
+  trackingDomainsLoaded: true,
   error: null,
   hasSubaccounts: false,
   listTrackingDomains: jest.fn(() => []),
@@ -50,10 +50,17 @@ it('renders correctly', () => {
   expect(wrapper).toMatchSnapshot();
 });
 
+it('renders during initial load', () => {
+  wrapper.setProps({
+    trackingDomainsLoaded: false
+  });
+  expect(wrapper).toMatchSnapshot();
+})
+
 it('renders empty state', () => {
   wrapper = shallow(
     <ListPage
-      loading={false}
+      trackingDomainsLoaded={true}
       error={null}
       listTrackingDomains={jest.fn(() => [])}
       listSubaccounts={jest.fn(() => [])}

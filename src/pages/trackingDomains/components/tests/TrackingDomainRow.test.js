@@ -54,24 +54,8 @@ describe('Component: TrackingDomainRow', () => {
 
     return instance.delete().then(() => {
       expect(deleteMock).toHaveBeenCalledWith({ domain: 'deleteme.com', subaccountId: 100 });
-      expect(instance.toggleDeleteModal).toHaveBeenCalledTimes(1);
-    });
-  });
-
-  it('should close the modal even if the delete fails', () => {
-    const deleteMock = jest.fn(() => Promise.reject(new Error('delete failed')));
-    const wrapper = shallow(<TrackingDomainRow
-      verifying={[]}
-      deleteTrackingDomain={deleteMock}
-      domain='deleteme.com'
-      subaccountId={100}
-    />);
-    const instance = wrapper.instance();
-    jest.spyOn(instance, 'toggleDeleteModal');
-
-    return instance.delete().then(() => {
-      expect(deleteMock).toHaveBeenCalledWith({ domain: 'deleteme.com', subaccountId: 100 });
-      expect(instance.toggleDeleteModal).toHaveBeenCalledTimes(1);
+      // don't toggle modal because component is unmounted, causes errors
+      expect(instance.toggleDeleteModal).toHaveBeenCalledTimes(0);
     });
   });
 
@@ -126,7 +110,8 @@ describe('Component: TrackingDomainRow', () => {
 
     instance.toggleDefaultValue().then(() => {
       expect(instance.update).toHaveBeenCalledWith({ default: false });
-      expect(instance.toggleDefaultModal).toHaveBeenCalledTimes(1);
+      // component is unmounted, no need to toggle (will cause errors if attempted)
+      expect(instance.toggleDefaultModal).toHaveBeenCalledTimes(0);
     });
   });
 

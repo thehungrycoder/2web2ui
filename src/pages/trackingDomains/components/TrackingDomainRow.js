@@ -21,6 +21,13 @@ export class TrackingDomainRow extends Component {
     defaultModalOpen: false
   }
 
+  componentWillUnmount() {
+    this.setState({
+      deleteModalOpen: false,
+      defaultModalOpen: false
+    });
+  }
+
   toggleDeleteModal = () => {
     this.setState({ deleteModalOpen: !this.state.deleteModalOpen });
   }
@@ -32,8 +39,7 @@ export class TrackingDomainRow extends Component {
   delete = () => {
     const { domain, subaccountId, deleteTrackingDomain } = this.props;
     return deleteTrackingDomain({ domain, subaccountId })
-      .catch(_.noop) // swallow error
-      .then(() => this.toggleDeleteModal());
+      .catch(_.noop); // swallow error
   }
 
   update = (data) => {
@@ -45,7 +51,7 @@ export class TrackingDomainRow extends Component {
 
   toggleDefaultValue = () => {
     const { isDefault } = this.props;
-    return this.update({ default: !isDefault }).then(this.toggleDefaultModal);
+    return this.update({ default: !isDefault });
   }
 
   retryVerification = () => {
@@ -90,12 +96,12 @@ export class TrackingDomainRow extends Component {
         />
         <ConfirmationModal
           open={defaultModalOpen}
-          title={`Change default tracking domain (${domain})`}
+          title={`${isDefault ? 'Remove' : 'Set'} default tracking domain (${domain})`}
           content={<p>{isDefault ? `Transmissions and templates that don't specify a tracking domain will no longer use ${domain}. Instead, they will use the system default until another default is selected.` : `Transmissions and templates that don't specify a tracking domain will now use ${domain}.`}</p>}
           isPending={updating}
           onConfirm={this.toggleDefaultValue}
           onCancel={this.toggleDefaultModal}
-          confirmVerb={isDefault ? 'Unset Default' : 'Set as Default'}
+          confirmVerb={isDefault ? 'Remove Default' : 'Set as Default'}
         />
       </div>
     );
