@@ -7,9 +7,7 @@ import styles from '../Suppressions.module.scss';
 
 import { formatSubaccountDisplay } from '../helpers';
 
-
-
-class Results extends Component {
+export class Results extends Component {
   renderPlaceholder() {
     return (
       <div>

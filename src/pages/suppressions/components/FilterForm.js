@@ -47,7 +47,7 @@ const sources = [
   }
 ];
 
-export class FilterForm extends Component {
+export class Results extends Component {
   state = {
     ...getRelativeDates(DEFAULT_RANGE),
     types: null,
@@ -123,4 +123,4 @@ const formOptions = {
   form: formName
 };
 
-export default connect(null)(reduxForm(formOptions)(FilterForm));
+export default connect(null)(reduxForm(formOptions)(Results));

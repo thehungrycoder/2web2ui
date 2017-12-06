@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EmailSearch renders correctly 1`] = `
+<Grid>
+  <Grid.Column
+    md={12}
+    xs={12}
+  >
+    <div>
+      <Field
+        component={[Function]}
+        label="Email"
+        name="email"
+        onBlur={[Function]}
+        placeholder="Recipient Email"
+        title="Email"
+      />
+    </div>
+  </Grid.Column>
+</Grid>
+`;
+
+exports[`EmailSearch renders correctly with subaccounts 1`] = `
+<Grid>
+  <Grid.Column
+    md={6}
+    xs={12}
+  >
+    <div>
+      <Field
+        component={[Function]}
+        label="Email"
+        name="email"
+        onBlur={[Function]}
+        placeholder="Recipient Email"
+        title="Email"
+      />
+    </div>
+  </Grid.Column>
+  <Grid.Column
+    md={6}
+    xs={12}
+  >
+    <div>
+      <Field
+        component={[Function]}
+        name="subaccount"
+        onChange={[Function]}
+      />
+    </div>
+  </Grid.Column>
+</Grid>
+`;

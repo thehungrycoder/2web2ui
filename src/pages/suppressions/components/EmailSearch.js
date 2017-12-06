@@ -5,7 +5,7 @@ import { reduxForm, Field } from 'redux-form';
 import { Grid } from '@sparkpost/matchbox';
 import { TextFieldWrapper, SubaccountTypeaheadWrapper } from 'src/components';
 
-export class EmailSearch extends Component {
+export class FilterForm extends Component {
   state = {
     email: '',
     subaccountId: null
@@ -69,4 +69,4 @@ export class EmailSearch extends Component {
 const formName = 'recipientSearch';
 
 const formOptions = { form: formName };
-export default connect(null, {})(reduxForm(formOptions)(EmailSearch));
+export default connect(null, {})(reduxForm(formOptions)(FilterForm));
