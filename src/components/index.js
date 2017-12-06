@@ -11,6 +11,7 @@ export { default as SparkPost } from './sparkPost/SparkPost';
 export { default as UsageReport } from './usageReport/UsageReport';
 
 export * from './collection';
+export * from './formatters';
 export * from './loading/Loading';
 export * from './modals';
 export * from './reduxFormWrappers';

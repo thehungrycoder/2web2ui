@@ -7,11 +7,11 @@ import { refresh as refreshSummaryChart } from 'src/actions/summaryChart';
 import { addFilter, refreshTypeaheadCache } from 'src/actions/reportFilters';
 import { getShareLink, getFilterSearchOptions, parseSearch } from 'src/helpers/reports';
 
-import { Page, Panel, Tabs } from '@sparkpost/matchbox';
+import { Page, Panel } from '@sparkpost/matchbox';
 import { Loading } from 'src/components';
 import Filters from '../components/Filters';
 import ShareModal from '../components/ShareModal';
-import { List, MetricsModal, ChartGroup, ChartHeader } from './components';
+import { Table, MetricsModal, ChartGroup, ChartHeader } from './components';
 
 import styles from './SummaryPage.module.scss';
 
@@ -45,7 +45,7 @@ class SummaryReportPage extends Component {
 
   renderLoading() {
     const { chart } = this.props;
-    if (chart.loading) {
+    if (chart.chartLoading) {
       return <div className={styles.Loading}><Loading /></div>;
     }
   }
@@ -90,7 +90,7 @@ class SummaryReportPage extends Component {
         <Filters refresh={this.handleRefresh} onShare={() => this.handleModalToggle('shareModal')} />
 
         <Panel>
-          <Panel.Section className={classnames(styles.ChartSection, chart.loading && styles.pending)}>
+          <Panel.Section className={classnames(styles.ChartSection, chart.chartLoading && styles.pending)}>
             <ChartHeader
               selectedMetrics={chart.metrics}
               selectedTime={eventTime}
@@ -105,8 +105,7 @@ class SummaryReportPage extends Component {
           {this.renderLoading()}
         </Panel>
 
-        <Tabs selected={0} tabs={[ { content: 'Domains' }, { content: 'Campaigns' }, { content: 'Templates' } ]}/>
-        <Panel><List /></Panel>
+        <Table refresh={this.handleRefresh} />
 
         <ShareModal
           open={shareModal}
@@ -126,4 +125,11 @@ const mapStateToProps = ({ reportFilters, summaryChart }) => ({
   filters: reportFilters,
   chart: summaryChart
 });
-export default withRouter(connect(mapStateToProps, { refreshSummaryChart, refreshTypeaheadCache, addFilter })(SummaryReportPage));
+
+const mapDispatchToProps = {
+  refreshSummaryChart,
+  refreshTypeaheadCache,
+  addFilter
+};
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SummaryReportPage));

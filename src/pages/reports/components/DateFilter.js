@@ -135,6 +135,7 @@ class DateFilter extends Component {
 
     return (
       <Popover
+        wrapper='div'
         className={styles.Popover}
         manualTrigger
         trigger={dateField}

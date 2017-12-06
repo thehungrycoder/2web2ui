@@ -1,5 +1,5 @@
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
-import { subDays, format } from 'date-fns';
+import { format, subDays } from 'date-fns';
 
 export function getMessageEvents(params = {}) {
   return sparkpostApiRequest({
