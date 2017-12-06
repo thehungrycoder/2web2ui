@@ -2,7 +2,10 @@
   "name": "react-webui",
   "version": "0.1.0",
   "private": true,
-  "package-lock": false,
+  "package-lock": true,
+  "engines": {
+    "npm": ">=5.3"
+  },
   "dependencies": {
     "@sparkpost/matchbox": "^1.8.7",
     "axios": "^0.16.1",
