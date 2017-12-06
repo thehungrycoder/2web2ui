@@ -1,18 +1,23 @@
-/* eslint-disable */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import { refresh } from 'src/actions/bounceReport';
+import { refreshBounceChartMetrics, refreshBounceTableMetrics } from 'src/actions/bounceReport';
 import { addFilter, refreshTypeaheadCache } from 'src/actions/reportFilters';
 import { getShareLink, getFilterSearchOptions, parseSearch } from 'src/helpers/reports';
 import { showAlert } from 'src/actions/globalAlert';
 
-import { Page } from '@sparkpost/matchbox';
+import { TableCollection } from 'src/components';
+import PanelLoading from 'src/components/panelLoading/PanelLoading';
+import { Page, Panel } from '@sparkpost/matchbox';
 import ShareModal from '../components/ShareModal';
 import Filters from '../components/Filters';
 import ChartGroup from './components/ChartGroup';
 import Empty from '../components/Empty';
+
+import './BouncePage.scss';
+
+const columns = [{ label: 'Reason', width: '45%' }, 'Domain', 'Category', 'Classification', 'Count (%)'];
 
 export class BouncePage extends Component {
   state = {
@@ -36,11 +41,12 @@ export class BouncePage extends Component {
   }
 
   handleRefresh = (options) => {
-    this.props.refresh(options)
+    this.props.refreshBounceChartMetrics(options)
       .then(() => this.updateLink())
-      .catch((err) => {
-        this.props.showAlert({ type: 'error', message: 'Unable to refresh bounce report.', details: err.message });
-      });
+      .then(() => this.props.refreshBounceTableMetrics(options))
+     .catch((err) => {
+       this.props.showAlert({ type: 'error', message: 'Unable to refresh bounce report.', details: err.message });
+     });
   }
 
   handleModalToggle = (modal) => {
@@ -56,18 +62,56 @@ export class BouncePage extends Component {
     history.replace({ pathname: '/reports/bounce', search });
   }
 
-  render() {
-    const { loading, aggregates } = this.props;
-    const { modal, link } = this.state;
+  getRowData = (rowData) => {
+    const { totalBounces } = this.props;
+    const { reason, domain, bounce_category_name, bounce_class_name, count_bounce } = rowData;
+    return [
+      <div className='ReasonCell'>{reason}</div>,
+      domain,
+      bounce_category_name,
+      bounce_class_name,
+      `${count_bounce} (${Number((count_bounce / totalBounces) * 100).toFixed(2)}%)`
+    ];
+  };
 
-    const pageContent = !loading && !aggregates
-      ? <Empty title={'Bounce Rates'} message={'No bounces to report'}/>
-      : <ChartGroup />;
+  renderChart() {
+    const { chartLoading, aggregates } = this.props;
+
+    if (!chartLoading && !aggregates) {
+      return <Empty title='Bounce Rates' message='No bounces to report' />;
+    }
+    return <ChartGroup />;
+  }
+
+  renderCollection() {
+    const { tableLoading, reasons } = this.props;
+
+    if (tableLoading) {
+      return <PanelLoading />;
+    }
+
+    if (!reasons) {
+      return <Empty title={'Bounced Messages'} message={'No bounce reasons to report'} />;
+    }
+
+    return <TableCollection
+      columns={columns}
+      rows={reasons}
+      getRowData={this.getRowData}
+      pagination={true}
+    />;
+  }
+
+  render() {
+    const { modal, link } = this.state;
 
     return (
       <Page title='Bounce Report'>
         <Filters refresh={this.handleRefresh} onShare={this.handleModalToggle} />
-        { pageContent }
+        { this.renderChart() }
+        <Panel title='Bounced Messages' className='BounceTable'>
+          { this.renderCollection() }
+        </Panel>
         <ShareModal
           open={modal}
           handleToggle={this.handleModalToggle}
@@ -77,15 +121,24 @@ export class BouncePage extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  filters: state.reportFilters,
-  loading: state.bounceReport.aggregatesLoading || state.bounceReport.categoriesLoading,
-  aggregates: state.bounceReport.aggregates
-});
+const mapStateToProps = (state) => {
+  const chartLoading = state.bounceReport.aggregatesLoading || state.bounceReport.categoriesLoading;
+  const tableLoading = chartLoading || state.bounceReport.reasonsLoading;
+  const aggregates = state.bounceReport.aggregates;
+  return {
+    filters: state.reportFilters,
+    chartLoading,
+    aggregates,
+    totalBounces: aggregates ? aggregates.countBounce : 1,
+    tableLoading,
+    reasons: state.bounceReport.reasons
+  };
+};
 
 const mapDispatchToProps = {
   addFilter,
-  refresh,
+  refreshBounceChartMetrics,
+  refreshBounceTableMetrics,
   refreshTypeaheadCache,
   showAlert
 };

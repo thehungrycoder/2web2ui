@@ -12,7 +12,17 @@ describe('BouncePage: ', () => {
   const props = {
     loading: false,
     aggregates: { countBounce: 1 },
-    refresh: jest.fn((a) => Promise.resolve()),
+    reasons: [ {
+      bounce_category_name: 'Block',
+      bounce_class_description: 'The message was blocked by the receiver as coming from a known spam source',
+      bounce_class_name: 'Spam Block',
+      classification_id: 51,
+      count_bounce: 5,
+      domain: 'yahoo.com',
+      reason: '554 - 5.7.1 Blacklisted by \'twoomail.com\'(twoo.com.multi.surbl.org) Contact the postmaster of this domain for resolution. This attempt has been logged.'
+    } ],
+    refreshBounceChartMetrics: jest.fn((a) => Promise.resolve()),
+    refreshBounceTableMetrics: jest.fn((a) => Promise.resolve()),
     refreshTypeaheadCache: jest.fn((a) => Promise.resolve()),
     addFilter: jest.fn(),
     location: {
@@ -44,7 +54,8 @@ describe('BouncePage: ', () => {
   it('should render', () => {
     const parseSpy = jest.spyOn(wrapper.instance(), 'parseSearch');
     wrapper.instance().componentDidMount();
-    expect(props.refresh).toHaveBeenCalled();
+    expect(props.refreshBounceChartMetrics).toHaveBeenCalled();
+    expect(props.refreshBounceTableMetrics).toHaveBeenCalled();
     expect(parseSpy).toHaveBeenCalled();
     expect(props.refreshTypeaheadCache).toHaveBeenCalled();
     expect(wrapper).toMatchSnapshot();
