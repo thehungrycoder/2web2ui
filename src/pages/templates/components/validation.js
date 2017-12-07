@@ -16,9 +16,13 @@ function emailOrSubstitution(value) {
     return undefined;
   }
 
+  console.log('validate', value);
+
   const parts = value.split('@');
   const validLocal = !emailLocal(parts[0]);
   const validDomain = !substitution(parts[1]) || !domain(parts[1]);
+
+  console.log(!substitution(value) || !email(value) || (validLocal && validDomain) ? undefined : 'Invalid email or substitution value');
 
   return !substitution(value) || !email(value) || (validLocal && validDomain) ? undefined : 'Invalid email or substitution value';
 }
@@ -39,17 +43,11 @@ function validJson(value, { testData }) {
   return undefined;
 }
 
-
-function verifiedDomain(value) {
-  return undefined; // TODO
-}
-
 export {
   ID_ALLOWED_CHARS,
   idSyntax,
   substitution,
   emailOrSubstitution,
   contentRequired,
-  validJson,
-  verifiedDomain
+  validJson
 };

@@ -14,7 +14,7 @@ import FromDomainWrapper from './FromDomain';
 // Helpers & Validation
 import { required } from 'src/helpers/validation';
 import { slugify } from 'src/helpers/string';
-import { ID_ALLOWED_CHARS, idSyntax, emailOrSubstitution, verifiedDomain } from './validation';
+import { ID_ALLOWED_CHARS, idSyntax, emailOrSubstitution } from './validation';
 
 import styles from './FormEditor.module.scss';
 
@@ -44,9 +44,24 @@ class Form extends Component {
     }
   }
 
+  verifiedDomain = (value) => {
+    const { domains } = this.props;
+    const parts = value.split('@');
+
+    if (value === `${config.sandbox.localpart}@${config.sandbox.domain}`) {
+      return undefined;
+    }
+
+    if (parts[1] && domains.map(({ domain }) => domain).includes(parts[1])) {
+      return undefined;
+    }
+
+    return 'Must use a verified sending domain';
+  }
+
   render() {
     const { newTemplate, published, domains } = this.props;
-    console.log('DOMAINS', domains);
+
     return (
       <Panel className={styles.FormPanel}>
         <Panel.Section>
@@ -83,7 +98,7 @@ class Form extends Component {
             component={FromDomainWrapper}
             label='From Email'
             disabled={!domains.length || published}
-            validate={[required, emailOrSubstitution, verifiedDomain]}
+            validate={[required, emailOrSubstitution, this.verifiedDomain]}
             domains={domains}
           />
 

@@ -11,7 +11,7 @@ const split = (value) => value.split('@');
 
 export class FromDomain extends Component {
   static defaultProps = {
-    name: 'fromDomain'
+    name: 'content.from.email'
   };
 
   getMatches = (inputValue, selectedItem) => {
@@ -43,7 +43,7 @@ export class FromDomain extends Component {
     selectedItem,
     isOpen
   }) => {
-    const { label, domains, onChange, disabled } = this.props;
+    const { label, domains, onChange, ...rest } = this.props;
     let matches = this.getMatches(inputValue, selectedItem);
 
     matches = matches.map((item, index) => getItemProps({
@@ -59,7 +59,7 @@ export class FromDomain extends Component {
       onChange && onChange(e);
     };
 
-    const textFieldProps = getInputProps({ label, name, onChange: handleOnChange, value: inputValue, disabled });
+    const textFieldProps = getInputProps({ label, name, onChange: handleOnChange, ...rest });
 
     return (
       <div>
@@ -78,9 +78,10 @@ export class FromDomain extends Component {
   }
 }
 
-const FromDomainWrapper = ({ input, ...rest }) => {
+const FromDomainWrapper = ({ input, meta, ...rest }) => {
   const { onChange, value } = input;
-  return <FromDomain onChange={onChange} value={value} {...rest} />;
+  const { active, error, touched } = meta;
+  return <FromDomain onChange={onChange} {...input} value={value} error={!active && touched && error ? error : undefined} {...rest} />;
 };
 
 export default FromDomainWrapper;
