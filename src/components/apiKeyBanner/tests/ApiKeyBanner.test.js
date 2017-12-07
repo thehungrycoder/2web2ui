@@ -2,6 +2,7 @@ import React from 'react';
 import _ from 'lodash';
 import { shallow } from 'enzyme';
 import { ApiKeySuccessBanner } from '../index';
+jest.mock('copy-to-clipboard');
 
 describe('ApiKeyBanner Component', () => {
   const props = {
@@ -29,6 +30,14 @@ describe('ApiKeyBanner Component', () => {
     expect(props.hideNewApiKey).not.toHaveBeenCalled();
     wrapper.find('Banner').simulate('dismiss');
     expect(props.hideNewApiKey).toHaveBeenCalledTimes(1);
+  });
+
+  it('should set copied state to true on click', () => {
+    const banner = new ApiKeySuccessBanner();
+    banner.props = { newKey: 'foo' };
+    banner.setState = jest.fn();
+    banner.onClickBanner();
+    expect(banner.setState).toHaveBeenCalledWith({ copied: true });
   });
 
 });

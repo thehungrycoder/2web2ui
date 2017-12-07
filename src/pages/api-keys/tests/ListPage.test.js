@@ -46,3 +46,10 @@ it('should show api key banner on successful create', () => {
   wrapper.setProps({ newKey: 'my-shiny-new-key' });
   expect(wrapper).toMatchSnapshot();
 });
+
+it('should list keys on reload', () => {
+  const page = new ListPage();
+  page.props = { listApiKeys: jest.fn() };
+  page.onReloadApiBanner();
+  expect(page.props.listApiKeys).toHaveBeenCalledTimes(1);
+});
