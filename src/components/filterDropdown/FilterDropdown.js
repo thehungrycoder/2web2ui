@@ -54,8 +54,10 @@ export class FilterDropdown extends Component {
     ));
   }
 
-  onClose() {
-    this.props.onClose(this.props.values);
+  onClose = () => {
+    const { onClose = _.noop } = this.props;
+
+    onClose(this.props.values);
   }
 
   render() {
@@ -67,7 +69,7 @@ export class FilterDropdown extends Component {
     return (
       <div>
         <Popover
-          trigger={<TextField prefix={prefix} value={displayValue} readOnly suffix={<Icon name='CaretDown'/>} />} onClose={this.onClose.bind(this)}>
+          trigger={<TextField prefix={prefix} value={displayValue} readOnly suffix={<Icon name='CaretDown'/>} />} onClose={this.onClose}>
           <ActionList actions={actions} />
         </Popover>
         {this.renderCheckboxes()}
@@ -85,7 +87,8 @@ FilterDropdown.propTypes = {
       content: PropTypes.string,
       name: PropTypes.string
     })
-  ).isRequired
+  ).isRequired,
+  onClose: PropTypes.func
 };
 
 const mapStateToProps = (state, { formName, namespace }) => {
