@@ -36,3 +36,13 @@ it('renders errors when present', () => {
   wrapper.setProps({ error: { message: 'Uh oh! It broke. ' }});
   expect(wrapper).toMatchSnapshot();
 });
+
+it('should show loading component during load', () => {
+  wrapper.setProps({ loading: true });
+  expect(wrapper).toMatchSnapshot();
+});
+
+it('should show api key banner on successful create', () => {
+  wrapper.setProps({ newKey: 'my-shiny-new-key' });
+  expect(wrapper).toMatchSnapshot();
+});

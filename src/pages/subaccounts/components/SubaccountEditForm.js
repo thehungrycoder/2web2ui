@@ -21,9 +21,9 @@ export class SubaccountEditForm extends Component {
     return (
       <form onSubmit={handleSubmit}>
         <Panel.Section>
-          <NameField disabled={submitting}/>
+          <NameField disabled={submitting || compliance}/>
 
-          { !!ipPools.length && <IpPoolSelect ipPools={ipPools} disabled={submitting} /> }
+          { !!ipPools.length && <IpPoolSelect ipPools={ipPools} disabled={submitting || compliance} /> }
 
           <StatusSelect disabled={submitting || compliance} compliance={compliance} />
         </Panel.Section>

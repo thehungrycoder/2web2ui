@@ -115,20 +115,52 @@ exports[`NameField 2`] = `
 exports[`StatusSelect 1`] = `
 <Field
   component={[Function]}
-  disabled={true}
-  helpText="System set statuses can't be edited"
+  disabled={false}
+  helpText=""
   label="Status"
   name="status"
+  options={
+    Array [
+      Object {
+        "label": "Active",
+        "value": "active",
+      },
+      Object {
+        "label": "Suspended",
+        "value": "suspended",
+      },
+      Object {
+        "label": "Terminated",
+        "value": "terminated",
+      },
+    ]
+  }
 />
 `;
 
 exports[`StatusSelect 2`] = `
 <Field
   component={[Function]}
-  disabled={true}
-  helpText="System set statuses can't be edited"
+  disabled={false}
+  helpText="Please email compliance@sparkpost.com for help with your subaccount."
   label="Status"
   name="status"
+  options={
+    Array [
+      Object {
+        "label": "Active",
+        "value": "active",
+      },
+      Object {
+        "label": "Suspended",
+        "value": "suspended",
+      },
+      Object {
+        "label": "Terminated",
+        "value": "terminated",
+      },
+    ]
+  }
 />
 `;
 
@@ -136,8 +168,24 @@ exports[`StatusSelect 3`] = `
 <Field
   component={[Function]}
   disabled={true}
-  helpText="System set statuses can't be edited"
+  helpText="Please email compliance@sparkpost.com for help with your subaccount."
   label="Status"
   name="status"
+  options={
+    Array [
+      Object {
+        "label": "Active",
+        "value": "active",
+      },
+      Object {
+        "label": "Suspended",
+        "value": "suspended",
+      },
+      Object {
+        "label": "Terminated",
+        "value": "terminated",
+      },
+    ]
+  }
 />
 `;

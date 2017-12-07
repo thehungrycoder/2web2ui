@@ -54,6 +54,14 @@ test('componentDidMount', () => {
   expect(listApiKeys).toHaveBeenCalled();
 });
 
+describe('on create scenario', () => {
+  it('should show api key banner on new key', () => {
+    wrapper.setProps({ newKey: 'my-key' });
+    expect(wrapper).toMatchSnapshot();
+  });
+
+});
+
 describe('edit path', () => {
   beforeEach(() => {
     wrapper.setProps({ location: { pathname: paths.edit }});
