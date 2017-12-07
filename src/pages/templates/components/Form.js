@@ -1,3 +1,4 @@
+/* eslint max-lines: ["error", 200] */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, change } from 'redux-form';
@@ -9,7 +10,7 @@ import config from 'src/config';
 import { Panel } from '@sparkpost/matchbox';
 import ToggleBlock from './ToggleBlock';
 import { TextFieldWrapper } from 'src/components';
-import FromDomainWrapper from './FromDomain';
+import FromEmailWrapper from './FromEmail';
 
 // Helpers & Validation
 import { required } from 'src/helpers/validation';
@@ -95,7 +96,7 @@ class Form extends Component {
 
           <Field
             name='content.from.email'
-            component={FromDomainWrapper}
+            component={FromEmailWrapper}
             label='From Email'
             disabled={!domains.length || published}
             validate={[required, emailOrSubstitution, this.verifiedDomain]}

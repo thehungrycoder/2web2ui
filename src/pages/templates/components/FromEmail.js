@@ -4,18 +4,40 @@ import { ActionList, TextField } from '@sparkpost/matchbox';
 import cx from 'classnames';
 
 import sortMatch from 'src/helpers/sortMatch';
-import styles from './FromDomain.module.scss';
+import styles from './FromEmail.module.scss';
 
-export class FromDomain extends Component {
+/**
+ * This component controls downshift's inputValue manually to prevent cursor jumping on change
+ * See:
+ * https://github.com/paypal/downshift#oninputvaluechange
+ * https://github.com/paypal/downshift/issues/217
+ */
+export class FromEmail extends Component {
 
-  handleChange = (value, downshift) => {
+  state = {
+    value: ''
+  }
+
+  componentDidMount() {
+    this.setState({ value: this.props.value });
+  }
+
+  handleInputValueChange = (value) => {
+    this.setState({ value });
+  }
+
+  handleStateChange = (changes, downshift) => {
     const { onChange } = this.props;
 
+    // Push changes to redux form store
+    if (changes.hasOwnProperty('inputValue')) {
+      onChange && onChange(changes.inputValue);
+    }
+
+    // Highlights first item in list by default
     if (!downshift.highlightedIndex) {
       downshift.setHighlightedIndex(0);
     }
-
-    onChange && onChange(value);
   }
 
   getMatches = (inputValue, selectedItem) => {
@@ -47,7 +69,7 @@ export class FromDomain extends Component {
     selectedItem,
     isOpen
   }) => {
-    const { label, domains, onChange, value, ...rest } = this.props;
+    const { domains, onChange, value, ...rest } = this.props;
     let matches = this.getMatches(inputValue, selectedItem);
 
     // Create ActionList actions from matches
@@ -57,11 +79,11 @@ export class FromDomain extends Component {
       highlighted: highlightedIndex === index
     }));
 
-    const textFieldProps = getInputProps({ label, name, onChange, value, ...rest });
+    const textFieldProps = getInputProps({ ...rest, value: this.state.value });
     const listClasses = cx(styles.List, (isOpen && matches.length) && styles.open);
 
     return (
-      <div className={styles.Typeahead}>
+      <div className={styles.Typeahead} onFocus={this.handleFocus}>
         <TextField {...textFieldProps} />
         <ActionList className={listClasses} actions={matches} />
       </div>
@@ -71,22 +93,23 @@ export class FromDomain extends Component {
   render() {
     return (
       <Downshift
-        onChange={this.handleChange}
-        value={this.props.value}>
+        onInputValueChange={this.handleInputValueChange}
+        onStateChange={this.handleStateChange}
+        selectedItem={this.state.value} >
         {this.typeaheadFn}
       </Downshift>
     );
   }
 }
 
-const FromDomainWrapper = ({ input, meta, ...rest }) => {
+const FromEmailWrapper = ({ input, meta, ...rest }) => {
   const { active, error, touched } = meta;
   return (
-    <FromDomain
+    <FromEmail
       {...input}
       error={!active && touched && error ? error : undefined}
       {...rest} />
   );
 };
 
-export default FromDomainWrapper;
+export default FromEmailWrapper;
