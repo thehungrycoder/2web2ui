@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, change } from 'redux-form';
+import { list as listDomains } from 'src/actions/sendingDomains';
+import { selectVerifiedDomains } from 'src/selectors/sendingDomains';
+import config from 'src/config';
 
 // Components
 import { Panel } from '@sparkpost/matchbox';
 import ToggleBlock from './ToggleBlock';
 import { TextFieldWrapper } from 'src/components';
+import FromDomainWrapper from './FromDomain';
 
 // Helpers & Validation
 import { required } from 'src/helpers/validation';
@@ -27,15 +31,22 @@ class Form extends Component {
   }
 
   componentDidMount() {
+    this.props.listDomains();
+  }
+
+  componentWillReceiveProps(nextProps) {
     const { change, newTemplate, name } = this.props;
-    if (newTemplate) { // TODO update to reflect sending domains
-      change(name, 'content.from.email', 'sandbox@sparkpostbox.com');
+    const { domains } = nextProps;
+
+    // If no verified sending domains, use sandbox
+    if (newTemplate && !domains.length) {
+      change(name, 'content.from.email', `${config.sandbox.localpart}@${config.sandbox.domain}`);
     }
   }
 
   render() {
-    const { newTemplate, published } = this.props;
-
+    const { newTemplate, published, domains } = this.props;
+    console.log('DOMAINS', domains);
     return (
       <Panel className={styles.FormPanel}>
         <Panel.Section>
@@ -69,10 +80,11 @@ class Form extends Component {
 
           <Field
             name='content.from.email'
-            component={TextFieldWrapper}
+            component={FromDomainWrapper}
             label='From Email'
-            disabled={newTemplate || published} // TODO check for sending domains
+            disabled={!domains.length || published}
             validate={[required, emailOrSubstitution, verifiedDomain]}
+            domains={domains}
           />
 
           <Field
@@ -137,4 +149,8 @@ class Form extends Component {
   }
 }
 
-export default connect(null, { change })(Form);
+const mapStateToProps = (state) => ({
+  domains: selectVerifiedDomains(state)
+});
+
+export default connect(mapStateToProps, { change, listDomains })(Form);

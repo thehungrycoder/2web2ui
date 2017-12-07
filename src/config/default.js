@@ -41,6 +41,10 @@ const config = {
     { time: Infinity, value: 'month', format: 'MMM YY' }
   ],
   release: process.env.REACT_APP_VERSION,
+  sandbox: {
+    localpart: 'sandbox',
+    domain: 'sparkpostbox.com'
+  },
   sendingIps: {
     maxPerAccount: 4,
     pricePerIp: 20.00

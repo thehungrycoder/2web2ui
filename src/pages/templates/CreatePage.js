@@ -64,7 +64,7 @@ export class CreatePage extends Component {
 
         <Grid>
           <Grid.Column xs={12} lg={4}>
-            <Form newTemplate={true} name={FORM_NAME} />
+            <Form newTemplate name={FORM_NAME} />
           </Grid.Column>
           <Grid.Column xs={12} lg={8}>
             <Editor name={FORM_NAME} />
