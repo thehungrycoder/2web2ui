@@ -13,6 +13,7 @@ exports[`EmailSearch renders correctly 1`] = `
         onBlur={[Function]}
         placeholder="Recipient Email"
         title="Email"
+        validate={[Function]}
       />
     </div>
   </Grid.Column>
@@ -32,6 +33,7 @@ exports[`EmailSearch renders correctly with subaccounts 1`] = `
         onBlur={[Function]}
         placeholder="Recipient Email"
         title="Email"
+        validate={[Function]}
       />
     </div>
   </Grid.Column>

@@ -28,10 +28,6 @@ export class FilterForm extends Component {
     }
   }
 
-  handleSelect() {
-    debugger;
-  }
-
   render() {
     const { subaccounts, hasSubaccounts } = this.props;
 
@@ -44,6 +40,7 @@ export class FilterForm extends Component {
             onBlur={(e) => this.handleChange(e, 'email')}
             component={TextFieldWrapper}
             title="Email"
+            validate={emailValidator}
             placeholder='Recipient Email'
           />
 
