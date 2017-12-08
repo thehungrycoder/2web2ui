@@ -1,3 +1,4 @@
+/* eslint max-lines: ["error", 200] */
 import React, { Component } from 'react';
 import CollectionPropTypes from './Collection.propTypes';
 import qs from 'query-string';
@@ -15,7 +16,10 @@ export class Collection extends Component {
   state = {};
 
   static defaultProps = {
-    defaultPerPage: 25
+    defaultPerPage: 25,
+    filterBox: {
+      show: false
+    }
   }
 
   componentDidMount() {
@@ -91,7 +95,7 @@ export class Collection extends Component {
   }
 
   renderFilterBox() {
-    const { filterBox = {}, rows, perPageButtons = defaultPerPageButtons } = this.props;
+    const { filterBox, rows, perPageButtons = defaultPerPageButtons } = this.props;
     if (filterBox.show && (rows.length > Math.min(...perPageButtons))) {
       return <FilterBox {...filterBox} rows={rows} onChange={this.debouncedHandleFilterChange} />;
     }
