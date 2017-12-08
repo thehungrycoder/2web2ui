@@ -1,6 +1,5 @@
-import { shallow, mount, render } from 'enzyme';
+import { shallow } from 'enzyme';
 import React from 'react';
-import toJson from 'enzyme-to-json'
 
 import FromEmailWrapper, { FromEmail } from '../FromEmail';
 
@@ -14,14 +13,14 @@ describe('From Email Typeahead Wrapper', () => {
       },
       meta: {},
       label: 'label'
-    }
+    };
 
     wrapper = shallow(<FromEmailWrapper {...props} />);
   });
 
   afterEach(() => {
     wrapper.unmount();
-  })
+  });
 
   it('should render', () => {
     expect(wrapper).toMatchSnapshot();
@@ -43,19 +42,19 @@ describe('From Email Typeahead', () => {
   beforeEach(() => {
     const props = {
       domains: [
-        { domain: 'test.com'},
-        { domain: 'another.com'}
+        { domain: 'test.com' },
+        { domain: 'another.com' }
       ],
       onChange: jest.fn(),
       value: 'test@t'
-    }
+    };
 
     wrapper = shallow(<FromEmail {...props} />);
   });
 
   afterEach(() => {
     wrapper.unmount();
-  })
+  });
 
   it('should render list', () => {
     const args = {
@@ -63,7 +62,7 @@ describe('From Email Typeahead', () => {
       isOpen: true,
       highlightedIndex: 0,
       getInputProps: jest.fn(),
-      getItemProps: jest.fn((a) => a),
+      getItemProps: jest.fn((a) => a)
     };
 
     expect(wrapper).toHaveState('value', 'test@t');
@@ -72,7 +71,7 @@ describe('From Email Typeahead', () => {
   });
 
   it('should handle input value', () => {
-    wrapper.instance().handleInputValueChange('new value')
+    wrapper.instance().handleInputValueChange('new value');
     expect(wrapper).toHaveState('value', 'new value');
   });
 
@@ -84,7 +83,7 @@ describe('From Email Typeahead', () => {
       highlightedIndex: null,
       setHighlightedIndex: jest.fn()
     };
-    wrapper.instance().handleStateChange(changes, downshift)
+    wrapper.instance().handleStateChange(changes, downshift);
     expect(wrapper.instance().props.onChange).toHaveBeenCalledWith('new value');
     expect(downshift.setHighlightedIndex).toHaveBeenCalledWith(0);
   });

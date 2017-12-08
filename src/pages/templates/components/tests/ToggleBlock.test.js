@@ -13,7 +13,7 @@ describe('ToggleBlock', () => {
       },
       meta: {},
       label: 'label',
-      helpText: 'some help',
+      helpText: 'some help'
     };
 
     wrapper = shallow(<ToggleBlock {...props} />);
@@ -21,7 +21,7 @@ describe('ToggleBlock', () => {
 
   afterEach(() => {
     wrapper.unmount();
-  })
+  });
 
   it('should render', () => {
     expect(wrapper).toMatchSnapshot();

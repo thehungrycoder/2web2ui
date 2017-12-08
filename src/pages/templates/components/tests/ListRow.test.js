@@ -5,7 +5,7 @@ import ListRow from '../ListRow';
 
 describe('ListRow', () => {
   let wrapper;
-  Date = jest.fn((a) => a);
+  Date = jest.fn((a) => a); // eslint-disable-line
 
   beforeEach(() => {
     const props = {
@@ -20,7 +20,7 @@ describe('ListRow', () => {
 
   afterEach(() => {
     wrapper.unmount();
-  })
+  });
 
   it('should render', () => {
     expect(wrapper).toMatchSnapshot();

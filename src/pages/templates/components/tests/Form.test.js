@@ -17,14 +17,14 @@ describe('Template Form', () => {
       newTemplate: false,
       published: false,
       name: 'form-name'
-    }
+    };
 
     wrapper = shallow(<Form {...props} />);
   });
 
   afterEach(() => {
     wrapper.unmount();
-  })
+  });
 
   it('should render', () => {
     expect(wrapper).toMatchSnapshot();
@@ -38,18 +38,18 @@ describe('Template Form', () => {
 
   it('should use sandbox domain if account has no verified domains', () => {
     wrapper.setProps({ newTemplate: true });
-    wrapper.setProps({ domains: [] });
+    wrapper.setProps({ domains: []});
     expect(wrapper.instance().props.change).toHaveBeenCalledWith(wrapper.instance().props.name, 'content.from.email', 'sandbox@sparkpostbox.com');
   });
 
   it('should not handle ID fill on edit', () => {
-    wrapper.find('Field').at(0).simulate('change', { target: { value: 'test 1 2!'}});
+    wrapper.find('Field').at(0).simulate('change', { target: { value: 'test 1 2!' }});
     expect(wrapper.instance().props.change).not.toHaveBeenCalled();
   });
 
   it('should handle ID fill', () => {
     wrapper.setProps({ newTemplate: true });
-    wrapper.find('Field').at(0).simulate('change', { target: { value: 'test 1 2!'}});
+    wrapper.find('Field').at(0).simulate('change', { target: { value: 'test 1 2!' }});
     expect(wrapper.instance().props.change).toHaveBeenCalledWith(wrapper.instance().props.name, 'id', 'test-1-2');
   });
 
