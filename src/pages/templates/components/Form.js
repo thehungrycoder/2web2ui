@@ -19,7 +19,7 @@ import { ID_ALLOWED_CHARS, idSyntax, emailOrSubstitution } from './validation';
 
 import styles from './FormEditor.module.scss';
 
-class Form extends Component {
+export class Form extends Component {
   // Fills in ID based on Name
   handleIdFill = (e) => {
     const { newTemplate, change, name } = this.props;
