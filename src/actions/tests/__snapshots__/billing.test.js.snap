@@ -148,37 +148,6 @@ Array [
 ]
 `;
 
-exports[`Action Creator: Billing should dispatch an add dedicated IPs action 1`] = `
-Array [
-  Object {
-    "meta": Object {
-      "data": Object {
-        "pool": "my_cool_test_pool",
-        "quantity": 2,
-      },
-      "method": "POST",
-      "url": "/account/add-ons/dedicated_ips",
-    },
-    "type": "UPDATE_ADDON_DEDICATED_IPS",
-  },
-]
-`;
-
-exports[`Action Creator: Billing should dispatch an update add-ons action 1`] = `
-Array [
-  Object {
-    "meta": Object {
-      "data": Object {
-        "some": "add-on-data",
-      },
-      "method": "POST",
-      "url": "/account/add-ons/some_product",
-    },
-    "type": "UPDATE_ADDON_SOME_PRODUCT",
-  },
-]
-`;
-
 exports[`Action Creator: Billing should dispatch an update credit card action 1`] = `
 Array [
   Object {

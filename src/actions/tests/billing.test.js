@@ -47,16 +47,6 @@ describe('Action Creator: Billing', () => {
     snapActions();
   });
 
-  it('should dispatch an update add-ons action', () => {
-    mockStore.dispatch(billing.updateAddons('some_product', { some: 'add-on-data' }));
-    snapActions();
-  });
-
-  it('should dispatch an add dedicated IPs action', () => {
-    mockStore.dispatch(billing.addDedicatedIps({ quantity: 2, pool: 'my_cool_test_pool' }));
-    snapActions();
-  });
-
   it('should dispatch a create zuora account action', () => {
     const data = { some: 'test-zuora-data' };
     mockStore.dispatch(billing.createZuoraAccount({ data, token, signature }));
