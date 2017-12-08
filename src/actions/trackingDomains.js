@@ -1,6 +1,5 @@
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 import setSubaccountHeader from './helpers/setSubaccountHeader';
-import _ from 'lodash';
 import { showAlert } from './globalAlert';
 
 export function listTrackingDomains() {

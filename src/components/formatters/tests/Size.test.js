@@ -1,7 +1,6 @@
 import React from 'react';
 import { Size } from '../Size';
 import { mount } from 'enzyme';
-import _ from 'lodash';
 
 describe('Size', () => {
   it('should render size in KB', () => {

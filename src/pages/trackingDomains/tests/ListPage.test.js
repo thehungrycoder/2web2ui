@@ -55,7 +55,7 @@ it('renders during initial load', () => {
     trackingDomainsLoaded: false
   });
   expect(wrapper).toMatchSnapshot();
-})
+});
 
 it('renders empty state', () => {
   wrapper = shallow(

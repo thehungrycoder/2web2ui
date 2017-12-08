@@ -99,7 +99,7 @@ describe('Selectors: Tracking Domains', () => {
         }
       };
       const unverified = selectUnverifiedTrackingDomains(state);
-      expect(unverified.length).toEqual(2);
+      expect(unverified).toHaveLength(2);
       expect(unverified).toMatchSnapshot();
     });
 
@@ -108,8 +108,6 @@ describe('Selectors: Tracking Domains', () => {
         trackingDomains: {}
       };
       expect(selectUnverifiedTrackingDomains(state)).toEqual([]);
-    })
-
-  })
+    });
+  });
 });
-
