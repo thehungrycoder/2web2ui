@@ -10,7 +10,7 @@ import { showAlert } from 'src/actions/globalAlert';
 import { TableCollection, Empty, LongTextContainer } from 'src/components';
 import { Percent } from 'src/components/formatters';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
-import { Page, Panel } from '@sparkpost/matchbox';
+import { Page, Panel, UnstyledLink } from '@sparkpost/matchbox';
 import ShareModal from '../components/ShareModal';
 import Filters from '../components/Filters';
 import ChartGroup from './components/ChartGroup';
@@ -60,12 +60,19 @@ export class BouncePage extends Component {
     history.replace({ pathname: '/reports/bounce', search });
   }
 
+  handleDomainClick = (domain) => {
+    this.props.addFilter({ type: 'Recipient Domain', value: domain });
+    this.handleRefresh();
+  }
+
   getRowData = (rowData) => {
     const { totalBounces } = this.props;
     const { reason, domain, bounce_category_name, bounce_class_name, count_bounce } = rowData;
     return [
       <LongTextContainer text={reason} />,
       domain,
+      <div className='ReasonCell'>{reason}</div>,
+      <UnstyledLink onClick={() => this.handleDomainClick(domain)}>{ domain }</UnstyledLink>,
       bounce_category_name,
       bounce_class_name,
       <span>{count_bounce}(<Percent value={(count_bounce / totalBounces) * 100} />)</span>
