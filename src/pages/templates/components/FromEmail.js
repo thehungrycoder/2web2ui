@@ -45,7 +45,7 @@ export class FromEmail extends Component {
     let matches = [];
 
     // Show matches as soon as '@' exists
-    if (parts[1] === '' || parts[1]) {
+    if (parts.length > 1) {
       // Removes selected domain from options
       matches = this.props.domains.reduce((options, { domain }) => {
         if (!selectedItem || parts[1] !== domain) {
@@ -64,7 +64,6 @@ export class FromEmail extends Component {
     getInputProps,
     getItemProps,
     highlightedIndex,
-    setHighlightedIndex,
     inputValue,
     selectedItem,
     isOpen

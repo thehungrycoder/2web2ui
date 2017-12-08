@@ -1,10 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Template Form should render 1`] = `
+exports[`Template Form should disable fields on published 1`] = `
 <Panel>
   <Panel.Section>
     <Field
       component={[Function]}
+      disabled={true}
       label="Template Name"
       name="name"
       onChange={[Function]}
@@ -27,12 +28,14 @@ exports[`Template Form should render 1`] = `
   <Panel.Section>
     <Field
       component={[Function]}
+      disabled={true}
       helpText="A friendly from for your recipients."
       label="From Name"
       name="content.from.name"
     />
     <Field
       component={[Function]}
+      disabled={true}
       domains={
         Array [
           Object {
@@ -55,6 +58,7 @@ exports[`Template Form should render 1`] = `
     />
     <Field
       component={[Function]}
+      disabled={true}
       helpText="An email address recipients can reply to."
       label="Reply To"
       name="reply_to"
@@ -62,12 +66,14 @@ exports[`Template Form should render 1`] = `
     />
     <Field
       component={[Function]}
+      disabled={true}
       label="Subject"
       name="content.subject"
       validate={[Function]}
     />
     <Field
       component={[Function]}
+      disabled={true}
       helpText="Not visible to recipients."
       label="Description"
       name="description"
@@ -76,6 +82,7 @@ exports[`Template Form should render 1`] = `
   <Panel.Section>
     <Field
       component={[Function]}
+      disabled={true}
       label="Track Opens"
       name="options.open_tracking"
       parse={[Function]}
@@ -83,6 +90,7 @@ exports[`Template Form should render 1`] = `
     />
     <Field
       component={[Function]}
+      disabled={true}
       label="Track Clicks"
       name="options.click_tracking"
       parse={[Function]}
@@ -92,6 +100,118 @@ exports[`Template Form should render 1`] = `
   <Panel.Section>
     <Field
       component={[Function]}
+      disabled={true}
+      helpText="Transactional messages are triggered by a user’s actions on the website, like requesting a password reset, signing up, or making a purchase."
+      label="Transactional"
+      name="options.transactional"
+      parse={[Function]}
+      type="checkbox"
+    />
+  </Panel.Section>
+</Panel>
+`;
+
+exports[`Template Form should render 1`] = `
+<Panel>
+  <Panel.Section>
+    <Field
+      component={[Function]}
+      disabled={false}
+      label="Template Name"
+      name="name"
+      onChange={[Function]}
+      validate={[Function]}
+    />
+    <Field
+      component={[Function]}
+      disabled={true}
+      helpText="A Unique ID for your template, we'll fill this in for you."
+      label="Template ID"
+      name="id"
+      validate={
+        Array [
+          [Function],
+          [Function],
+        ]
+      }
+    />
+  </Panel.Section>
+  <Panel.Section>
+    <Field
+      component={[Function]}
+      disabled={false}
+      helpText="A friendly from for your recipients."
+      label="From Name"
+      name="content.from.name"
+    />
+    <Field
+      component={[Function]}
+      disabled={false}
+      domains={
+        Array [
+          Object {
+            "domain": "test.com",
+          },
+          Object {
+            "domain": "verified.com",
+          },
+        ]
+      }
+      label="From Email"
+      name="content.from.email"
+      validate={
+        Array [
+          [Function],
+          [Function],
+          [Function],
+        ]
+      }
+    />
+    <Field
+      component={[Function]}
+      disabled={false}
+      helpText="An email address recipients can reply to."
+      label="Reply To"
+      name="reply_to"
+      validate={[Function]}
+    />
+    <Field
+      component={[Function]}
+      disabled={false}
+      label="Subject"
+      name="content.subject"
+      validate={[Function]}
+    />
+    <Field
+      component={[Function]}
+      disabled={false}
+      helpText="Not visible to recipients."
+      label="Description"
+      name="description"
+    />
+  </Panel.Section>
+  <Panel.Section>
+    <Field
+      component={[Function]}
+      disabled={false}
+      label="Track Opens"
+      name="options.open_tracking"
+      parse={[Function]}
+      type="checkbox"
+    />
+    <Field
+      component={[Function]}
+      disabled={false}
+      label="Track Clicks"
+      name="options.click_tracking"
+      parse={[Function]}
+      type="checkbox"
+    />
+  </Panel.Section>
+  <Panel.Section>
+    <Field
+      component={[Function]}
+      disabled={false}
       helpText="Transactional messages are triggered by a user’s actions on the website, like requesting a password reset, signing up, or making a purchase."
       label="Transactional"
       name="options.transactional"
