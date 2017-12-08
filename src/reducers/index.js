@@ -13,6 +13,7 @@ import ipPools from './ipPools';
 import metrics from './metrics';
 import reportFilters from './reportFilters';
 import sendingDomains from './sendingDomains';
+import sendingIps from './sendingIps';
 import subaccounts from './subaccounts';
 import summaryChart from './summaryChart';
 import templates from './templates';
@@ -39,6 +40,7 @@ const appReducer = combineReducers({
   reportFilters,
   recipientLists,
   sendingDomains,
+  sendingIps,
   subaccounts,
   summaryChart,
   suppressions,
