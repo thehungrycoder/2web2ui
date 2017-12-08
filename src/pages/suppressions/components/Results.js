@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button } from '@sparkpost/matchbox';
 
-import { Loading, TableCollection } from 'src/components';
+import { Loading, TableCollection, Empty } from 'src/components';
 import styles from '../Suppressions.module.scss';
 
 import { formatSubaccountDisplay } from '../helpers';
@@ -10,17 +10,13 @@ import { formatSubaccountDisplay } from '../helpers';
 export class Results extends Component {
   renderPlaceholder() {
     return (
-      <div>
-        <h6 className={styles.Center}>Choose some options to see your suppressions</h6>
-      </div>
+      <Empty message='Choose some options to see your suppressions' />
     );
   }
 
   renderEmpty() {
     return (
-      <div>
-            <h6 className={styles.Center}>There are no results for your current query</h6>
-        </div>
+      <Empty message='There are no results for your current query' />
     );
   }
 

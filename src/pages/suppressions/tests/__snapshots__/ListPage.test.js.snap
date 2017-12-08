@@ -12,7 +12,7 @@ exports[`ListPage renders correctly 1`] = `
   title="Suppressions"
 >
   <Tabs
-    connectBelow={false}
+    connectBelow={true}
     selected={0}
     tabs={
       Array [
@@ -31,9 +31,7 @@ exports[`ListPage renders correctly 1`] = `
     <Panel.Section>
       <Connect(ReduxForm) />
     </Panel.Section>
-    <Panel.Section>
-      <Connect(Results) />
-    </Panel.Section>
   </Panel>
+  <Connect(Results) />
 </Page>
 `;

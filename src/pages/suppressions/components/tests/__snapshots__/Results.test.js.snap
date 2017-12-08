@@ -1,11 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Results renders correctly (empty suppressions) 1`] = `
-<div>
-  <h6>
-    There are no results for your current query
-  </h6>
-</div>
+<Empty
+  message="There are no results for your current query"
+/>
 `;
 
 exports[`Results renders correctly (with suppressions) 1`] = `
@@ -95,9 +93,7 @@ exports[`Results renders correctly (with suppressions, with subaccount) 1`] = `
 `;
 
 exports[`Results renders correctly on initial loading 1`] = `
-<div>
-  <h6>
-    Choose some options to see your suppressions
-  </h6>
-</div>
+<Empty
+  message="Choose some options to see your suppressions"
+/>
 `;

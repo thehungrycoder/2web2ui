@@ -67,7 +67,7 @@ export class ListPage extends Component {
          >
           <Tabs
           selected={selectedTab}
-          connectBelow={false}
+          connectBelow={true}
           tabs={tabs.map(({ content }, idx) => ({ content, onClick: () => this.handleTabs(idx) }))}
           />
 
@@ -75,11 +75,8 @@ export class ListPage extends Component {
             <Panel.Section>
               { selectedTab === 1 ? this.renderFindByEmails() : this.renderFilters() }
             </Panel.Section>
-
-            <Panel.Section>
-              <Results results={list} loading={loading} subaccounts={subaccounts} hasSubaccounts={hasSubaccounts}/>
-            </Panel.Section>
           </Panel>
+          <Results results={list} loading={loading} subaccounts={subaccounts} hasSubaccounts={hasSubaccounts}/>
         </Page>
     );
   }
