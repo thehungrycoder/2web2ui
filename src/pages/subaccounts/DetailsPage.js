@@ -4,9 +4,10 @@ import { Link, withRouter, Route, Switch } from 'react-router-dom';
 import { Page, Tabs } from '@sparkpost/matchbox';
 
 import { getSubaccount } from 'src/actions/subaccounts';
+import { ApiKeySuccessBanner } from 'src/components';
 import { selectSubaccount, selectDetailTabs } from 'src/selectors/subaccounts';
 import { listPools } from 'src/actions/ipPools';
-import { listApiKeys } from 'src/actions/api-keys';
+import { listApiKeys, hideNewApiKey } from 'src/actions/api-keys';
 
 import ApiKeysTab from './components/ApiKeysTab';
 import EditTab from './components/EditTab';
@@ -20,10 +21,23 @@ const breadcrumbAction = {
 
 export class DetailsPage extends Component {
 
+  // only want to show the new key after a create
+  componentWillUnmount() {
+    this.props.hideNewApiKey();
+  }
+
   componentDidMount() {
     this.props.getSubaccount(this.props.id);
     this.props.listPools();
     this.props.listApiKeys();
+  }
+
+  renderApiKeyBanner() {
+    return (
+      <ApiKeySuccessBanner
+        title="Don't Forget Your API Key"
+      />
+    );
   }
 
   render() {
@@ -38,10 +52,12 @@ export class DetailsPage extends Component {
         </Page>
       );
     }
-    const { match, subaccount } = this.props;
+
+    const { match, subaccount, newKey } = this.props;
 
     return (
       <Page title={`${subaccount.name} (${subaccount.id})`} breadcrumbAction={breadcrumbAction}>
+        { newKey && this.renderApiKeyBanner() }
         <Tabs selected={selectedTab} tabs={tabs} />
         <Switch>
           <Route exact path={match.url} render={() => <EditTab subaccount={subaccount} />} />
@@ -53,15 +69,16 @@ export class DetailsPage extends Component {
 }
 
 const mapStateToProps = (state, props) => {
-  const { subaccounts } = state;
+  const { subaccounts, apiKeys } = state;
   return {
     id: props.match.params.id,
     loading: subaccounts.getLoading,
     subaccount: selectSubaccount(state),
-    tabs: selectDetailTabs(state, props)
+    tabs: selectDetailTabs(state, props),
+    newKey: apiKeys.newKey
   };
 };
 
 export default withRouter(
-  connect(mapStateToProps, { getSubaccount, listPools, listApiKeys })(DetailsPage)
+  connect(mapStateToProps, { getSubaccount, listPools, listApiKeys, hideNewApiKey })(DetailsPage)
 );

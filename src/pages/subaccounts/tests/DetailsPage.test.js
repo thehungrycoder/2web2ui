@@ -7,6 +7,7 @@ import { DetailsPage } from '../DetailsPage';
 const getSubaccount = jest.fn();
 const listPools = jest.fn();
 const listApiKeys = jest.fn();
+const hideNewApiKey = jest.fn();
 
 const paths = {
   edit: '/account/subaccounts/123',
@@ -38,7 +39,8 @@ const props = {
   tabs,
   getSubaccount,
   listPools,
-  listApiKeys
+  listApiKeys,
+  hideNewApiKey
 };
 
 let wrapper;
@@ -52,6 +54,20 @@ test('componentDidMount', () => {
   expect(getSubaccount).toHaveBeenCalledWith('123');
   expect(listPools).toHaveBeenCalled();
   expect(listApiKeys).toHaveBeenCalled();
+  expect(hideNewApiKey).not.toHaveBeenCalled();
+});
+
+test('componentDidUnmount', () => {
+  wrapper.unmount();
+  expect(hideNewApiKey).toHaveBeenCalled();
+});
+
+describe('on create scenario', () => {
+  it('should show api key banner on new key', () => {
+    wrapper.setProps({ newKey: 'my-key' });
+    expect(wrapper).toMatchSnapshot();
+  });
+
 });
 
 describe('edit path', () => {

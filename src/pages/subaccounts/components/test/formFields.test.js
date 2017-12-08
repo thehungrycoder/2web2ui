@@ -40,13 +40,13 @@ test('ApiKeyFields', () => {
 });
 
 test('StatusSelect', () => {
-  const wrapper = shallow(<StatusSelect disabled={false} compliance={'active'}/>);
+  const wrapper = shallow(<StatusSelect disabled={false} compliance={false}/>);
   expect(wrapper).toMatchSnapshot();
 
-  wrapper.setProps({ disable: false, compliance: 'suspended' });
+  wrapper.setProps({ disabled: false, compliance: true });
   expect(wrapper).toMatchSnapshot();
 
-  wrapper.setProps({ disable: true, compliance: 'terminated' });
+  wrapper.setProps({ disabled: true, compliance: true });
   expect(wrapper).toMatchSnapshot();
 });
 
