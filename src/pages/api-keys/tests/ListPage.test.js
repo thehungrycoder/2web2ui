@@ -3,11 +3,14 @@ import React from 'react';
 
 import { ListPage } from '../ListPage';
 
+const hideNewApiKey = jest.fn();
+const listApiKeys = jest.fn(() => []);
+
 const props = {
   loading: false,
   error: null,
-  hideNewApiKey: jest.fn(),
-  listApiKeys: jest.fn(() => []),
+  hideNewApiKey,
+  listApiKeys,
   count: 30,
   keys: [
     {
@@ -26,6 +29,7 @@ const props = {
 let wrapper;
 
 beforeEach(() => {
+  jest.clearAllMocks();
   wrapper = shallow(<ListPage {...props} />);
 });
 
@@ -56,7 +60,7 @@ it('should list keys on reload', () => {
 });
 
 it('should hide api key on component unmount', () => {
-  expect(props.hideNewApiKey).not.toHaveBeenCalled();
+  expect(hideNewApiKey).not.toHaveBeenCalled();
   wrapper.unmount();
-  expect(props.hideNewApiKey).toHaveBeenCalled();
+  expect(hideNewApiKey).toHaveBeenCalled();
 });
