@@ -53,7 +53,7 @@ export class FilterForm extends Component {
               name="subaccount"
               component={SubaccountTypeaheadWrapper}
               subaccounts={subaccounts}
-              label={false}
+              label=''
               onChange={this.handleSubaccountSelect}
               placeholder='Subaccount'
             />
