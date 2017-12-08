@@ -110,7 +110,7 @@ const routes = [
   },
   {
     path: '/reports/rejections',
-    component: ComingSoonPage,
+    component: reports.RejectionPage,
     layout: App
   },
   {

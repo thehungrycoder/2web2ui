@@ -8,6 +8,7 @@ import auth from './auth';
 import billing from './billing';
 import bounceReport from './bounceReport';
 import delayReport from './delayReport';
+import rejectionReasons from './rejectionReasons';
 import currentUser from './currentUser';
 import globalAlert from './globalAlert';
 import ipPools from './ipPools';
@@ -32,6 +33,7 @@ const appReducer = combineReducers({
   billing,
   bounceReport,
   delayReport,
+  rejectionReasons,
   apiKeys,
   currentUser,
   form,
