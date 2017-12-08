@@ -41,7 +41,10 @@ export class SubaccountEditForm extends Component {
 const formName = 'SubaccountEditForm';
 
 const mapStateToProps = (state, { subaccount }) => {
-  const { compliance, status } = subaccount;
+  const { compliance } = subaccount;
+  // setting additional context if set by compliance
+  const status = compliance ? `system_${subaccount.status}` : subaccount.status;
+
   return {
     ipPools: state.ipPools.list,
     compliance,

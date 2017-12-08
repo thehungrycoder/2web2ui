@@ -1,7 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
-import { shallow } from 'enzyme';
-import { ApiKeySuccessBanner } from '../index';
+import { shallow, mount } from 'enzyme';
+import { ApiKeySuccessBanner } from '../ApiKeyBanner';
 jest.mock('copy-to-clipboard');
 
 describe('ApiKeyBanner Component', () => {
@@ -33,11 +33,10 @@ describe('ApiKeyBanner Component', () => {
   });
 
   it('should set copied state to true on click', () => {
-    const banner = new ApiKeySuccessBanner();
-    banner.props = { newKey: 'foo' };
-    banner.setState = jest.fn();
-    banner.onClickBanner();
-    expect(banner.setState).toHaveBeenCalledWith({ copied: true });
+    const wrapper = mount(<ApiKeySuccessBanner {...props} />);
+    expect(wrapper.state('copied')).toEqual(false);
+    wrapper.find('button').simulate('click');
+    expect(wrapper.state('copied')).toEqual(true);
   });
 
 });

@@ -4,7 +4,9 @@ import { required } from 'src/helpers/validation';
 import ipValidator from '../helpers/ipValidator';
 import { TextFieldWrapper, CheckboxWrapper, RadioGroup, SelectWrapper } from 'src/components/reduxFormWrappers';
 import GrantsCheckboxes from 'src/components/grantBoxes/GrantsCheckboxes';
+import config from 'src/config';
 
+const uneditableMsg = `System set statuses cannot be edited. Please email ${config.contact.abuseEmail} for help with your subaccount`;
 const keyBoxHelpText = (createApiKey) => createApiKey
     ? 'The key will only be shown once when created, so be sure to copy and save it somewhere safe.'
     : 'Every subaccount you create will need its own API key. You can create one later.';
@@ -17,7 +19,9 @@ const ipPoolsOptions = (ipPools) => (ipPools.map(({ id, name }) => ({
 const statusOptions = [
   { value: 'active' , label: 'Active' },
   { value: 'suspended' , label: 'Suspended' },
-  { value: 'terminated' , label: 'Terminated' }
+  { value: 'terminated' , label: 'Terminated' },
+  { value: 'system_suspended' , label: 'System Suspended' },
+  { value: 'system_terminated' , label: 'System Terminated' }
 ];
 
 const grantsOptions = [
@@ -88,7 +92,7 @@ const StatusSelect = ({ disabled, compliance }) => (
         options={statusOptions}
         label="Status"
         disabled={disabled}
-        helpText={compliance ? 'Please email compliance@sparkpost.com for help with your subaccount.' : ''}
+        helpText={compliance ? uneditableMsg : ''}
       />
     );
 
