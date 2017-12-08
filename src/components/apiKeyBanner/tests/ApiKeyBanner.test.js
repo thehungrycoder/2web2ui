@@ -1,5 +1,4 @@
 import React from 'react';
-import _ from 'lodash';
 import { shallow, mount } from 'enzyme';
 import { ApiKeySuccessBanner } from '../ApiKeyBanner';
 jest.mock('copy-to-clipboard');
