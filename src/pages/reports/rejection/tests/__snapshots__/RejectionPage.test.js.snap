@@ -1,0 +1,89 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RejectionPage:  should render 1`] = `
+<Page
+  empty={Object {}}
+  title="Rejections Report"
+>
+  <Connect(Filters)
+    onShare={[Function]}
+    refresh={[Function]}
+  />
+  <Panel
+    className="RejectionTable"
+    title="Rejection Reasons"
+  >
+    <TableCollection
+      columns={
+        Array [
+          Object {
+            "label": "Reason",
+          },
+          Object {
+            "label": "Domain",
+            "width": "20%",
+          },
+          Object {
+            "label": "Category",
+            "width": "20%",
+          },
+          Object {
+            "label": "Count",
+            "width": "10%",
+          },
+        ]
+      }
+      getRowData={[Function]}
+      pagination={true}
+      rows={
+        Array [
+          Object {
+            "count_rejected": 65,
+            "domain": "gmail.com",
+            "reason": "551 - Cannot Relay 105",
+            "rejection_category_id": 1,
+            "rejection_category_name": "Policy Rejection",
+          },
+          Object {
+            "count_rejected": 62,
+            "domain": "gmail.com",
+            "reason": "550 - Invalid recipient ...@... (#5.1.1)",
+            "rejection_category_id": 1,
+            "rejection_category_name": "Policy Rejection",
+          },
+        ]
+      }
+    />
+  </Panel>
+  <ShareModal
+    handleToggle={[Function]}
+    link=""
+    open={false}
+  />
+</Page>
+`;
+
+exports[`RejectionPage:  should render correctly with no rejections 1`] = `
+<Page
+  empty={Object {}}
+  title="Rejections Report"
+>
+  <Connect(Filters)
+    onShare={[Function]}
+    refresh={[Function]}
+  />
+  <Panel
+    className="RejectionTable"
+    title="Rejection Reasons"
+  >
+    <Empty
+      message="There are no rejection messages for your current query"
+    />
+  </Panel>
+  <ShareModal
+    handleToggle={[Function]}
+    link=""
+    open={false}
+  />
+</Page>
+`;
