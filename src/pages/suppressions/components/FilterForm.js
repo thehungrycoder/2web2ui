@@ -46,15 +46,14 @@ const sources = [
 ];
 
 export class Results extends Component {
-
   constructor(props) {
     super(props);
 
     const { reportFilters } = props;
     this.state = {
       reportFilters,
-      types: null,
-      sources: null
+      types: [],
+      sources: []
     };
   }
 
@@ -79,12 +78,24 @@ export class Results extends Component {
 
   handleTypesSelection = (selected) => {
     const values = _.compact(_.map(selected, (val, key) => val ? key : undefined));
-    this.setState({ types: values }, this.refresh);
+    const { types } = this.state;
+    if (_.isEqual(types, values)) {
+      return; //same value, no need to do anything
+    }
+    this.setState({ types: values });
   }
 
   handleSourcesSelection = (selected) => {
     const values = _.compact(_.map(selected, (val, key) => val ? key : undefined));
-    this.setState({ sources: values }, this.refresh);
+    const { sources } = this.state;
+    if (_.isEqual(sources, values)) {
+      return; //same value, no need to do anything
+    }
+    this.setState({ sources: values });
+  }
+
+  componentDidUpdate() {
+    this.refresh();
   }
 
   componentDidMount() {
@@ -94,7 +105,7 @@ export class Results extends Component {
   render() {
     return (
     <Grid>
-      <Grid.Column xs={12} md={5}>
+      <Grid.Column xs={12} md={6}>
         <div className=''>
           <DateFilter refresh={this.handleDateSelection} />
         </div>

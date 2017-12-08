@@ -38,7 +38,7 @@ export class Results extends Component {
 
     rowData.push(
       <div style={{ textAlign: 'right' }}>
-        <Button size='small'>...</Button>
+        <Button size='small'>...</Button> &nbsp;
         <Button destructive size='small'>Delete</Button>
       </div>
     );
@@ -59,7 +59,7 @@ export class Results extends Component {
       columns.push({ label: 'Subaccount', width: '18%' });
     }
 
-    columns.push({ label: '', width: '14%' });
+    columns.push({ label: '', width: '15%' });
 
     return columns;
   }

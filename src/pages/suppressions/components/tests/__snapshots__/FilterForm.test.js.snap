@@ -3,7 +3,7 @@
 exports[`FilterForm renders correctly 1`] = `
 <Grid>
   <Grid.Column
-    md={5}
+    md={6}
     xs={12}
   >
     <div

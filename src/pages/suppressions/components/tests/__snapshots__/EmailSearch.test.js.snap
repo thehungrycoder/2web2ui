@@ -44,7 +44,7 @@ exports[`EmailSearch renders correctly with subaccounts 1`] = `
     <div>
       <Field
         component={[Function]}
-        label={false}
+        label=""
         name="subaccount"
         onChange={[Function]}
         placeholder="Subaccount"
