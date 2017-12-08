@@ -9,7 +9,6 @@
   "dependencies": {
     "@sparkpost/matchbox": "^1.8.7",
     "axios": "^0.16.1",
-    "babel-plugin-lodash": "^3.2.11",
     "chart.js": "^2.6.0",
     "classnames": "^2.2.5",
     "color": "^2.0.0",
