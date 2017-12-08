@@ -7,7 +7,7 @@ import { getSubaccount } from 'src/actions/subaccounts';
 import { ApiKeySuccessBanner } from 'src/components';
 import { selectSubaccount, selectDetailTabs } from 'src/selectors/subaccounts';
 import { listPools } from 'src/actions/ipPools';
-import { listApiKeys } from 'src/actions/api-keys';
+import { listApiKeys, hideNewApiKey } from 'src/actions/api-keys';
 
 import ApiKeysTab from './components/ApiKeysTab';
 import EditTab from './components/EditTab';
@@ -20,6 +20,11 @@ const breadcrumbAction = {
 };
 
 export class DetailsPage extends Component {
+
+  // only want to show the new key after a create
+  componentWillUnmount() {
+    this.props.hideNewApiKey();
+  }
 
   componentDidMount() {
     this.props.getSubaccount(this.props.id);
@@ -75,5 +80,5 @@ const mapStateToProps = (state, props) => {
 };
 
 export default withRouter(
-  connect(mapStateToProps, { getSubaccount, listPools, listApiKeys })(DetailsPage)
+  connect(mapStateToProps, { getSubaccount, listPools, listApiKeys, hideNewApiKey })(DetailsPage)
 );

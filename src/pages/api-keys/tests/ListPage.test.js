@@ -6,6 +6,7 @@ import { ListPage } from '../ListPage';
 const props = {
   loading: false,
   error: null,
+  hideNewApiKey: jest.fn(),
   listApiKeys: jest.fn(() => []),
   count: 30,
   keys: [
@@ -52,4 +53,10 @@ it('should list keys on reload', () => {
   page.props = { listApiKeys: jest.fn() };
   page.onReloadApiBanner();
   expect(page.props.listApiKeys).toHaveBeenCalledTimes(1);
+});
+
+it('should hide api key on component unmount', () => {
+  expect(props.hideNewApiKey).not.toHaveBeenCalled();
+  wrapper.unmount();
+  expect(props.hideNewApiKey).toHaveBeenCalled();
 });

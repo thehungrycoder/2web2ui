@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Page } from '@sparkpost/matchbox';
-import { listApiKeys } from 'src/actions/api-keys';
+import { listApiKeys, hideNewApiKey } from 'src/actions/api-keys';
 import { Loading, TableCollection, ApiErrorBanner, ApiKeySuccessBanner } from 'src/components';
 import { getRowData, columns, filterBoxConfig } from './tableConfig';
 
@@ -14,6 +14,11 @@ const primaryAction = {
 
 export class ListPage extends Component {
   state = { copied: false };
+
+  // only want to show the new key after a create
+  componentWillUnmount() {
+    this.props.hideNewApiKey();
+  }
 
   componentDidMount() {
     this.props.listApiKeys();
@@ -90,4 +95,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { listApiKeys })(ListPage);
+export default connect(mapStateToProps, { listApiKeys, hideNewApiKey })(ListPage);
