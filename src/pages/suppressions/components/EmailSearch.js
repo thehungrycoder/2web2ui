@@ -43,7 +43,6 @@ export class FilterForm extends Component {
             validate={emailValidator}
             placeholder='Recipient Email'
           />
-
         </div>
       </Grid.Column>
       { hasSubaccounts &&

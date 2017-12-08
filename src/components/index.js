@@ -11,6 +11,7 @@ export { default as SparkPost } from './sparkPost/SparkPost';
 export { default as UsageReport } from './usageReport/UsageReport';
 export { default as ApiKeySuccessBanner } from './apiKeyBanner/ApiKeyBanner';
 export { default as Empty } from './empty/Empty';
+export { default as PanelLoading } from './panelLoading/PanelLoading';
 
 export * from './collection';
 export * from './formatters';

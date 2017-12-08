@@ -94,8 +94,10 @@ export class Results extends Component {
     this.setState({ sources: values });
   }
 
-  componentDidUpdate() {
-    this.refresh();
+  componentDidUpdate(prevProps, prevState) {
+    if (!_.isEqual(this.state, prevState)) {
+      this.refresh();
+    }
   }
 
   componentDidMount() {
@@ -113,11 +115,7 @@ export class Results extends Component {
       <Grid.Column xs={6} md={3}>
         <div className=''>
           <FilterDropdown
-            formName='filterForm'
-            options={types}
-            namespace='types'
-            displayValue='Type'
-            onClose={this.handleTypesSelection}
+            formName='filterForm' options={types} namespace='types' displayValue='Type' onClose={this.handleTypesSelection}
           />
         </div>
       </Grid.Column>
@@ -125,11 +123,7 @@ export class Results extends Component {
       <Grid.Column xs={6} md={3}>
         <div>
           <FilterDropdown
-            formName='filterForm'
-            options={sources}
-            namespace='sources'
-            displayValue='Sources'
-            onClose={this.handleSourcesSelection}
+            formName='filterForm' options={sources} namespace='sources' displayValue='Sources' onClose={this.handleSourcesSelection}
           />
         </div>
       </Grid.Column>

@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button } from '@sparkpost/matchbox';
 
-import { Loading, TableCollection, Empty } from 'src/components';
-import styles from '../Suppressions.module.scss';
+import { PanelLoading, TableCollection, Empty } from 'src/components';
 
 import { formatSubaccountDisplay } from '../helpers';
 
@@ -77,7 +76,7 @@ export class Results extends Component {
     const { results = [], loading } = this.props;
 
     if (loading) {
-      return <div className={styles.Loading}><Loading /></div>;
+      return <PanelLoading />;
     }
 
     if (results === null) {
