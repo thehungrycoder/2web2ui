@@ -155,3 +155,50 @@ exports[`keys path loading 1`] = `
   <PanelLoading />
 </Page>
 `;
+
+exports[`on create scenario should show api key banner on new key 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "Subaccounts",
+      "to": "/account/subaccounts",
+    }
+  }
+  empty={Object {}}
+  title="Bob Evans, the restaurant. (123)"
+>
+  <Connect(ApiKeySuccessBanner)
+    title="Don't Forget Your API Key"
+  />
+  <Tabs
+    connectBelow={true}
+    selected={0}
+    tabs={
+      Array [
+        Object {
+          "Component": Object {},
+          "content": "Details",
+          "to": "/account/subaccounts/123",
+        },
+        Object {
+          "Component": Object {},
+          "content": "API Keys",
+          "to": "/account/subaccounts/123/api-keys",
+        },
+      ]
+    }
+  />
+  <Switch>
+    <Route
+      exact={true}
+      path="/account/subaccounts/123"
+      render={[Function]}
+    />
+    <Route
+      path="/account/subaccounts/123/api-keys"
+      render={[Function]}
+    />
+  </Switch>
+</Page>
+`;

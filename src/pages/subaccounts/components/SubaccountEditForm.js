@@ -21,14 +21,14 @@ export class SubaccountEditForm extends Component {
     return (
       <form onSubmit={handleSubmit}>
         <Panel.Section>
-          <NameField disabled={submitting}/>
+          <NameField disabled={submitting || compliance}/>
 
-          { !!ipPools.length && <IpPoolSelect ipPools={ipPools} disabled={submitting} /> }
+          { !!ipPools.length && <IpPoolSelect ipPools={ipPools} disabled={submitting || compliance} /> }
 
-          <StatusSelect disabled={submitting} compliance={compliance} />
+          <StatusSelect disabled={submitting || compliance} compliance={compliance} />
         </Panel.Section>
         <Panel.Section>
-          <Button submit primary disabled={pristine || submitting}>
+          <Button submit primary disabled={pristine || submitting || compliance}>
             { submitting ? 'Updating...' : 'Update' }
           </Button>
           { !pristine && <Button style={{ marginLeft: '1em' }} disabled={pristine || submitting} onClick={reset}>Cancel</Button> }
@@ -42,7 +42,9 @@ const formName = 'SubaccountEditForm';
 
 const mapStateToProps = (state, { subaccount }) => {
   const { compliance } = subaccount;
-  const status = compliance ? `System ${subaccount.status}` : subaccount.status;
+  // setting additional context if set by compliance
+  const status = compliance ? `system_${subaccount.status}` : subaccount.status;
+
   return {
     ipPools: state.ipPools.list,
     compliance,

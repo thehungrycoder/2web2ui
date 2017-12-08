@@ -8,7 +8,7 @@ const handleSubmit = jest.fn();
 const props = {
   submitting: false,
   pristine: true,
-  compliance: 'active',
+  compliance: false,
   ipPools: ['an array of ip pools'],
   handleSubmit
 };
@@ -40,3 +40,9 @@ it('submits correctly', () => {
   wrapper.setProps({ submitting: true });
   expect(wrapper).toMatchSnapshot();
 });
+
+it('should disable all fields when compliance is true', () => {
+  wrapper.setProps({ compliance: true });
+  expect(wrapper).toMatchSnapshot();
+});
+

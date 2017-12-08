@@ -115,20 +115,68 @@ exports[`NameField 2`] = `
 exports[`StatusSelect 1`] = `
 <Field
   component={[Function]}
-  disabled={true}
-  helpText="System set statuses can't be edited"
+  disabled={false}
+  helpText=""
   label="Status"
   name="status"
+  options={
+    Array [
+      Object {
+        "label": "Active",
+        "value": "active",
+      },
+      Object {
+        "label": "Suspended",
+        "value": "suspended",
+      },
+      Object {
+        "label": "Terminated",
+        "value": "terminated",
+      },
+      Object {
+        "label": "System Suspended",
+        "value": "system_suspended",
+      },
+      Object {
+        "label": "System Terminated",
+        "value": "system_terminated",
+      },
+    ]
+  }
 />
 `;
 
 exports[`StatusSelect 2`] = `
 <Field
   component={[Function]}
-  disabled={true}
-  helpText="System set statuses can't be edited"
+  disabled={false}
+  helpText="System set statuses cannot be edited. Please email compliance@sparkpost.com for help with your subaccount"
   label="Status"
   name="status"
+  options={
+    Array [
+      Object {
+        "label": "Active",
+        "value": "active",
+      },
+      Object {
+        "label": "Suspended",
+        "value": "suspended",
+      },
+      Object {
+        "label": "Terminated",
+        "value": "terminated",
+      },
+      Object {
+        "label": "System Suspended",
+        "value": "system_suspended",
+      },
+      Object {
+        "label": "System Terminated",
+        "value": "system_terminated",
+      },
+    ]
+  }
 />
 `;
 
@@ -136,8 +184,32 @@ exports[`StatusSelect 3`] = `
 <Field
   component={[Function]}
   disabled={true}
-  helpText="System set statuses can't be edited"
+  helpText="System set statuses cannot be edited. Please email compliance@sparkpost.com for help with your subaccount"
   label="Status"
   name="status"
+  options={
+    Array [
+      Object {
+        "label": "Active",
+        "value": "active",
+      },
+      Object {
+        "label": "Suspended",
+        "value": "suspended",
+      },
+      Object {
+        "label": "Terminated",
+        "value": "terminated",
+      },
+      Object {
+        "label": "System Suspended",
+        "value": "system_suspended",
+      },
+      Object {
+        "label": "System Terminated",
+        "value": "system_terminated",
+      },
+    ]
+  }
 />
 `;
