@@ -9,7 +9,7 @@ import { showAlert } from 'src/actions/globalAlert';
 
 import { TableCollection } from 'src/components';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
-import { Page, Panel } from '@sparkpost/matchbox';
+import { Page, Panel, UnstyledLink } from '@sparkpost/matchbox';
 import ShareModal from '../components/ShareModal';
 import Filters from '../components/Filters';
 import Empty from '../components/Empty';
@@ -61,11 +61,16 @@ export class RejectionPage extends Component {
     history.replace({ pathname: '/reports/rejections', search });
   }
 
+  handleDomainClick = (domain) => {
+    this.props.addFilter({ type: 'Recipient Domain', value: domain });
+    this.handleRefresh();
+  }
+
   getRowData = (rowData) => {
     const { reason, domain, rejection_category_name,count_rejected } = rowData;
     return [
       <div className='ReasonCell'>{reason}</div>,
-      domain,
+      <UnstyledLink onClick={() => this.handleDomainClick(domain)}>{ domain }</UnstyledLink>,
       rejection_category_name,
       count_rejected
     ];
