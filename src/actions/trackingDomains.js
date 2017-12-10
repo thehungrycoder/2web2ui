@@ -23,8 +23,8 @@ export function createTrackingDomain({ subaccount, ...data }) {
       headers
     }
   }))
-  .then(() => dispatch(showAlert({ type: 'success', message: `Successfully added ${data.domain}` })))
-  .catch((err) => dispatch(showAlert({ type: 'error', message: `Unable to add ${data.domain}` })));
+    .then(() => dispatch(showAlert({ type: 'success', message: `Successfully added ${data.domain}` })))
+    .catch((err) => dispatch(showAlert({ type: 'error', message: `Unable to add ${data.domain}` })));
 }
 
 export function updateTrackingDomain({ domain, subaccount = null, ...data }) {
@@ -39,8 +39,8 @@ export function updateTrackingDomain({ domain, subaccount = null, ...data }) {
       domain
     }
   }))
-  .then(() => dispatch(showAlert({ type: 'success', message: `Successfully updated ${domain}` })))
-  .catch(() => dispatch(showAlert({ type: 'error', message: `Unable to update ${domain}` })));
+    .then(() => dispatch(showAlert({ type: 'success', message: `Successfully updated ${domain}` })))
+    .catch(() => dispatch(showAlert({ type: 'error', message: `Unable to update ${domain}` })));
 }
 
 export function deleteTrackingDomain({ domain, subaccountId }) {
@@ -54,8 +54,8 @@ export function deleteTrackingDomain({ domain, subaccountId }) {
       domain
     }
   }))
-  .then(() => dispatch(showAlert({ type: 'success', message: `Successfully deleted ${domain}` })))
-  .catch(() => dispatch(showAlert({ type: 'error', message: `Unable to delete ${domain}` })));
+    .then(() => dispatch(showAlert({ type: 'success', message: `Successfully deleted ${domain}` })))
+    .catch(() => dispatch(showAlert({ type: 'error', message: `Unable to delete ${domain}` })));
 }
 
 export function verifyTrackingDomain({ domain, subaccountId }) {

@@ -59,20 +59,20 @@ export class Item extends Component {
       <span>
         { children
           ? <li>
-              <a onClick={() => this.handleParentClick()} className={linkClasses}>
-                <span className={styles.iconWrapper}><Icon name={icon} size={18} className={styles.icon} /></span>
-                { label }
-                <Icon name='ChevronLeft' className={styles.chevron} />
-              </a>
-              { this.renderChildren() }
-            </li>
+            <a onClick={() => this.handleParentClick()} className={linkClasses}>
+              <span className={styles.iconWrapper}><Icon name={icon} size={18} className={styles.icon} /></span>
+              { label }
+              <Icon name='ChevronLeft' className={styles.chevron} />
+            </a>
+            { this.renderChildren() }
+          </li>
 
           : <li>
-              <Link to={ to } className={linkClasses}>
-                { icon && <span className={styles.iconWrapper}><Icon name={icon} size={18} className={styles.icon} /></span> }
-                { label }
-              </Link>
-            </li>
+            <Link to={ to } className={linkClasses}>
+              { icon && <span className={styles.iconWrapper}><Icon name={icon} size={18} className={styles.icon} /></span> }
+              { label }
+            </Link>
+          </li>
         }
       </span>
     );

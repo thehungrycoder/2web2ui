@@ -65,7 +65,7 @@ it('renders empty state', () => {
       listTrackingDomains={jest.fn(() => [])}
       listSubaccounts={jest.fn(() => [])}
       trackingDomains={[]} />
-    );
+  );
   expect(wrapper).toMatchSnapshot();
 });
 

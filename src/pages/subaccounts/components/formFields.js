@@ -8,8 +8,8 @@ import config from 'src/config';
 
 const uneditableMsg = `System set statuses cannot be edited. Please email ${config.contact.abuseEmail} for help with your subaccount`;
 const keyBoxHelpText = (createApiKey) => createApiKey
-    ? 'The key will only be shown once when created, so be sure to copy and save it somewhere safe.'
-    : 'Every subaccount you create will need its own API key. You can create one later.';
+  ? 'The key will only be shown once when created, so be sure to copy and save it somewhere safe.'
+  : 'Every subaccount you create will need its own API key. You can create one later.';
 
 const ipPoolsOptions = (ipPools) => (ipPools.map(({ id, name }) => ({
   value: id,
@@ -86,15 +86,15 @@ const ApiKeyFields = ({ show, showGrants = false, grants, disabled }) => {
 };
 
 const StatusSelect = ({ disabled, compliance }) => (
-      <Field
-        name="status"
-        component={SelectWrapper}
-        options={statusOptions}
-        label="Status"
-        disabled={disabled}
-        helpText={compliance ? uneditableMsg : ''}
-      />
-    );
+  <Field
+    name="status"
+    component={SelectWrapper}
+    options={statusOptions}
+    label="Status"
+    disabled={disabled}
+    helpText={compliance ? uneditableMsg : ''}
+  />
+);
 
 
 const IpPoolSelect = ({ ipPools, disabled }) => (

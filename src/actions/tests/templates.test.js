@@ -53,7 +53,7 @@ describe('Action Creator: Templates', () => {
     expect(mockStore.getActions()).toMatchSnapshot();
   });
 
-  it('should dispatch an update action', async () => {
+  it('should dispatch an update action', async() => {
     const data = {
       id: 'id',
       testData: { test: 'data' },
@@ -64,7 +64,7 @@ describe('Action Creator: Templates', () => {
     expect(_.flatten(dispatchMock.mock.calls)).toMatchSnapshot();
   });
 
-  it('should dispatch a publish action', async () => {
+  it('should dispatch a publish action', async() => {
     const data = {
       id: 'id',
       testData: { test: 'data' },
@@ -75,7 +75,7 @@ describe('Action Creator: Templates', () => {
     expect(_.flatten(dispatchMock.mock.calls)).toMatchSnapshot();
   });
 
-  it('should dispatch a setTestData action', async () => {
+  it('should dispatch a setTestData action', async() => {
     const data = {
       id: 'id',
       data: { test: 'data' },
@@ -85,7 +85,7 @@ describe('Action Creator: Templates', () => {
     expect(mockStore.getActions()).toMatchSnapshot();
   });
 
-  it('should dispatch a getTestData action', async () => {
+  it('should dispatch a getTestData action', async() => {
     localforage.getItem = jest.fn((a) => Promise.resolve('{ "test": "test" }'));
     const data = { id: 'id', mode: 'draft' };
     await mockStore.dispatch(templates.getTestData(data));

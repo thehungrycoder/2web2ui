@@ -57,8 +57,8 @@ class Alert extends Component {
       : null;
 
     const markup = showDetails
-     ? <div>{ details }</div>
-     : <div>{ message } { detailsLink }</div>;
+      ? <div>{ details }</div>
+      : <div>{ message } { detailsLink }</div>;
 
     return <div>{ markup }</div>;
   }

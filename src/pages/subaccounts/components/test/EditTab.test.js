@@ -48,7 +48,7 @@ describe('EditTab', () => {
       ipPool: 'kiddy'
     };
 
-    test('success', async () => {
+    test('success', async() => {
       await wrapper.instance().onSubmit(newValues);
       expect(editSubaccount).toHaveBeenCalledWith(subaccount.id, {
         name: newValues.name,
@@ -59,7 +59,7 @@ describe('EditTab', () => {
       expect(getSubaccount).toHaveBeenCalledWith(subaccount.id);
     });
 
-    test('fail', async () => {
+    test('fail', async() => {
       const error = { mesage: 'bad edit' };
       editSubaccount.mockReturnValue(Promise.reject(error));
       await wrapper.instance().onSubmit(newValues);

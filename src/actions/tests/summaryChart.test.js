@@ -22,7 +22,7 @@ describe('Action Creator: Summary Chart', () => {
     getStateMock = jest.fn(() => state);
   });
 
-  it('should dispatch a refresh action', async () => {
+  it('should dispatch a refresh action', async() => {
     const updates = {
       relativeRange: 'new range',
       from: Date.now(),
@@ -34,13 +34,13 @@ describe('Action Creator: Summary Chart', () => {
     expect(dispatchMock.mock.calls).toMatchSnapshot();
   });
 
-  it('should dispatch a get chart data', async () => {
+  it('should dispatch a get chart data', async() => {
     const thunk = summaryChart.getChartData({});
     await thunk(dispatchMock, getStateMock);
     expect(dispatchMock.mock.calls).toMatchSnapshot();
   });
 
-  it('should dispatch a get table data action', async () => {
+  it('should dispatch a get table data action', async() => {
     const thunk = summaryChart.getTableData({});
     await thunk(dispatchMock, getStateMock);
     expect(dispatchMock.mock.calls).toMatchSnapshot();

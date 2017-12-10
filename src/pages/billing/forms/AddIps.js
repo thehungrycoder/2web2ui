@@ -29,7 +29,7 @@ const WarmUpArticleLink = () => (
 );
 
 class AddIps extends Component {
-  getOrCreateIpPool = async ({ action, id, name }) => {
+  getOrCreateIpPool = async({ action, id, name }) => {
     let response;
 
     // Exit early with provided IP pool ID
@@ -51,7 +51,7 @@ class AddIps extends Component {
     return response.id;
   }
 
-  onSubmit = async ({ ipPool, quantity }) => {
+  onSubmit = async({ ipPool, quantity }) => {
     const ip_pool = await this.getOrCreateIpPool(ipPool);
     const { isAwsAccount } = this.props.currentPlan;
 
