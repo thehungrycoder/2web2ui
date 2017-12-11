@@ -35,14 +35,14 @@ test('render', () => {
 describe('onSubmit', () => {
   const values = ['a', 'list', 'of', 'values'];
 
-  test('success', async () => {
+  test('success', async() => {
     await wrapper.instance().onSubmit(values);
     expect(createSubaccount).toHaveBeenCalledWith(values);
     expect(showAlert).toHaveBeenCalledWith({ type: 'success', message: 'Subaccount 123 created' });
     expect(push).toHaveBeenCalledWith('/account/subaccounts/123');
   });
 
-  test('fail', async () => {
+  test('fail', async() => {
     const error = { message: 'noo0o0o0' };
     createSubaccount.mockReturnValue(Promise.reject(error));
     await wrapper.instance().onSubmit(values);

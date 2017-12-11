@@ -31,9 +31,9 @@ export function getGrants({ beta = false, role } = {}) {
       params: { beta, role }
     }
   }))
-  .then((grantData) => {
-    const grants = grantData.map(({ key }) => key);
-    authCookie.merge({ grants });
-  });
+    .then((grantData) => {
+      const grants = grantData.map(({ key }) => key);
+      authCookie.merge({ grants });
+    });
 
 }

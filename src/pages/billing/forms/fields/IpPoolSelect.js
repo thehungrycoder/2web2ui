@@ -44,7 +44,7 @@ const ExistingIpPoolField = ({ disabled, ipPools }) => {
       component={SelectWrapper}
       label='Choose an IP Pool'
       options={options}
-      placeholder=' '  // needed for matchbox, treated same as empty string by redux-form
+      placeholder=' ' // needed for matchbox, treated same as empty string by redux-form
       required
       validate={required}
     />

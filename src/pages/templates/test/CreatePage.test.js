@@ -40,7 +40,7 @@ describe('Template CreatePage', () => {
       expect(props.getDraft).not.toHaveBeenCalled();
     });
 
-    it('should handle create', async () => {
+    it('should handle create', async() => {
       const createSuccess = jest.fn((a) => Promise.resolve(a));
       wrapper.setProps({ id: 'id', create: createSuccess });
       await wrapper.instance().handleCreate('values');
@@ -48,7 +48,7 @@ describe('Template CreatePage', () => {
       expect(props.history.push).toHaveBeenCalledWith('/templates/edit/id');
     });
 
-    it('should handle create fail', async () => {
+    it('should handle create fail', async() => {
       const createFail = jest.fn((a) => Promise.reject({ message: 'fail' }));
       wrapper.setProps({ id: 'id', create: createFail });
       await wrapper.instance().handleCreate('values');

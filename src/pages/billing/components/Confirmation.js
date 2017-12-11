@@ -30,9 +30,9 @@ const Confirmation = ({ current = {}, selected = {}, disableSubmit, selfServe })
   const selectedPlanMarkup = !isPlanSelected
     ? <p>Select a plan on the left to update your subscription</p>
     : <div>
-        <small>New Plan</small>
-        <h5>{ selected.volume && selected.volume.toLocaleString() } emails { selectedPrice }</h5>
-      </div>;
+      <small>New Plan</small>
+      <h5>{ selected.volume && selected.volume.toLocaleString() } emails { selectedPrice }</h5>
+    </div>;
 
   if (isPlanSelected && selfServe) {
     if (!isDowngrade) {
