@@ -61,23 +61,23 @@ export class ListPage extends Component {
     const { loading, list, subaccounts, hasSubaccounts } = this.props;
 
     return (
-        <Page
-          title='Suppressions'
-          primaryAction={primaryAction}
-         >
-          <Tabs
+      <Page
+        title='Suppressions'
+        primaryAction={primaryAction}
+      >
+        <Tabs
           selected={selectedTab}
           connectBelow={true}
           tabs={tabs.map(({ content }, idx) => ({ content, onClick: () => this.handleTabs(idx) }))}
-          />
+        />
 
-          <Panel>
-            <Panel.Section>
-              { selectedTab === 1 ? this.renderFindByEmails() : this.renderFilters() }
-            </Panel.Section>
-          </Panel>
-          <Results results={list} loading={loading} subaccounts={subaccounts} hasSubaccounts={hasSubaccounts}/>
-        </Page>
+        <Panel>
+          <Panel.Section>
+            { selectedTab === 1 ? this.renderFindByEmails() : this.renderFilters() }
+          </Panel.Section>
+        </Panel>
+        <Results results={list} loading={loading} subaccounts={subaccounts} hasSubaccounts={hasSubaccounts}/>
+      </Page>
     );
   }
 }

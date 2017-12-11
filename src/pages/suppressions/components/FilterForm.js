@@ -7,6 +7,7 @@ import { Grid } from '@sparkpost/matchbox';
 import { FilterDropdown } from 'src/components';
 import DateFilter from 'src/pages/reports/components/DateFilter';
 import { getRelativeDates } from 'src/helpers/date';
+import styles from './FilterForm.module.scss';
 
 const types = [
   {
@@ -106,28 +107,30 @@ export class Results extends Component {
 
   render() {
     return (
-    <Grid>
-      <Grid.Column xs={12} md={6}>
-        <div className=''>
-          <DateFilter refresh={this.handleDateSelection} />
-        </div>
-      </Grid.Column>
-      <Grid.Column xs={6} md={3}>
-        <div className=''>
-          <FilterDropdown
-            formName='filterForm' options={types} namespace='types' displayValue='Type' onClose={this.handleTypesSelection}
-          />
-        </div>
-      </Grid.Column>
+      <Grid>
+        <Grid.Column xs={12} md={6}>
+          <div>
+            <DateFilter refresh={this.handleDateSelection} />
+          </div>
+        </Grid.Column>
+        <Grid.Column xs={6} md={3}>
+          <div>
+            <FilterDropdown
+              popoverClassName={styles.fatPopover} formName='filterForm' options={types} namespace='types' displayValue='Type'
+              onClose={this.handleTypesSelection}
+            />
+          </div>
+        </Grid.Column>
 
-      <Grid.Column xs={6} md={3}>
-        <div>
-          <FilterDropdown
-            formName='filterForm' options={sources} namespace='sources' displayValue='Sources' onClose={this.handleSourcesSelection}
-          />
-        </div>
-      </Grid.Column>
-    </Grid>
+        <Grid.Column xs={6} md={3}>
+          <div>
+            <FilterDropdown
+              formName='filterForm' options={sources} namespace='sources' displayValue='Sources'
+              popoverClassName={styles.fatPopover} onClose={this.handleSourcesSelection}
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
     );
   }
 }

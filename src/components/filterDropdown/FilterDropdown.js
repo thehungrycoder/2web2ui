@@ -61,7 +61,7 @@ export class FilterDropdown extends Component {
   }
 
   render() {
-    const { displayValue } = this.props;
+    const { displayValue, popoverClassName } = this.props;
     const count = this.countSelected();
     const actions = this.buildActions();
     const prefix = count > 0 ? `(${count})` : null;
@@ -69,7 +69,8 @@ export class FilterDropdown extends Component {
     return (
       <div>
         <Popover
-          trigger={<TextField prefix={prefix} value={displayValue} readOnly suffix={<Icon name='CaretDown'/>} />} onClose={this.onClose}>
+          className={popoverClassName} trigger={<TextField prefix={prefix} value={displayValue} readOnly
+            suffix={<Icon name='CaretDown'/>} />} onClose={this.onClose}>
           <ActionList actions={actions} />
         </Popover>
         {this.renderCheckboxes()}

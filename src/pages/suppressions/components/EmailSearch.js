@@ -32,20 +32,20 @@ export class FilterForm extends Component {
     const { subaccounts, hasSubaccounts } = this.props;
 
     return (
-    <Grid>
-      <Grid.Column xs={12} md={ hasSubaccounts ? 6 : 12 }>
-        <div>
-          <Field
-            name="email"
-            onBlur={(e) => this.handleChange(e, 'email')}
-            component={TextFieldWrapper}
-            title="Email"
-            validate={emailValidator}
-            placeholder='Recipient Email'
-          />
-        </div>
-      </Grid.Column>
-      { hasSubaccounts &&
+      <Grid>
+        <Grid.Column xs={12} md={ hasSubaccounts ? 6 : 12 }>
+          <div>
+            <Field
+              name="email"
+              onBlur={(e) => this.handleChange(e, 'email')}
+              component={TextFieldWrapper}
+              title="Email"
+              validate={emailValidator}
+              placeholder='Recipient Email'
+            />
+          </div>
+        </Grid.Column>
+        { hasSubaccounts &&
         <Grid.Column xs={12} md={6}>
           <div>
             <Field
@@ -58,8 +58,8 @@ export class FilterForm extends Component {
             />
           </div>
         </Grid.Column>
-      }
-    </Grid>
+        }
+      </Grid>
     );
   }
 }
