@@ -42,8 +42,8 @@ const formName = 'SubaccountEditForm';
 
 const mapStateToProps = (state, { subaccount }) => {
   const { compliance } = subaccount;
-  // setting additional context if set by compliance
-  const status = compliance ? `system_${subaccount.status}` : subaccount.status;
+  // changing the status name if set by compliance because it is uneditable
+  const status = compliance ? `${subaccount.status.charAt(0).toUpperCase() + subaccount.status.slice(1)} by SparkPost` : subaccount.status;
 
   return {
     ipPools: state.ipPools.list,

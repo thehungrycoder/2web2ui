@@ -19,9 +19,7 @@ const ipPoolsOptions = (ipPools) => (ipPools.map(({ id, name }) => ({
 const statusOptions = [
   { value: 'active' , label: 'Active' },
   { value: 'suspended' , label: 'Suspended' },
-  { value: 'terminated' , label: 'Terminated' },
-  { value: 'system_suspended' , label: 'System Suspended' },
-  { value: 'system_terminated' , label: 'System Terminated' }
+  { value: 'terminated' , label: 'Terminated' }
 ];
 
 const grantsOptions = [
@@ -85,16 +83,22 @@ const ApiKeyFields = ({ show, showGrants = false, grants, disabled }) => {
   );
 };
 
-const StatusSelect = ({ disabled, compliance }) => (
-      <Field
+const StatusSelect = ({ disabled, compliance }) => compliance
+    ? (<Field
+        name="status"
+        component={TextFieldWrapper}
+        label="Status"
+        disabled={true}
+        helpText={uneditableMsg}
+      />
+    )
+      : (<Field
         name="status"
         component={SelectWrapper}
         options={statusOptions}
         label="Status"
         disabled={disabled}
-        helpText={compliance ? uneditableMsg : ''}
-      />
-    );
+      />);
 
 
 const IpPoolSelect = ({ ipPools, disabled }) => (
