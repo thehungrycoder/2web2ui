@@ -3,8 +3,7 @@ import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 
 const apiFormat = 'YYYY-MM-DDTHH:MM';
 const defaultParams = () => ({
-  from: format(subDays(Date.now(), 30), apiFormat),
-  metrics: 'count_targeted'
+  from: format(subDays(Date.now(), 30), apiFormat)
 });
 
 export function fetch({ type = 'FETCH_METRICS', path, params = {}}) {
@@ -70,5 +69,11 @@ export function fetchBounceReasons(params = {}) {
 export function fetchBounceReasonsByDomain(params = {}) {
   const type = 'FETCH_METRICS_BOUNCE_REASONS_BY_DOMAIN';
   const path = 'deliverability/bounce-reason/domain';
+  return fetch({ type, path, params });
+}
+
+export function fetchDelayReasonsByDomain(params = {}) {
+  const type = 'FETCH_METRICS_DELAY_REASONS_BY_DOMAIN';
+  const path = 'deliverability/delay-reason/domain';
   return fetch({ type, path, params });
 }
