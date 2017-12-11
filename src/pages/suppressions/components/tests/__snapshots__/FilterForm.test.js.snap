@@ -6,9 +6,7 @@ exports[`FilterForm renders correctly 1`] = `
     md={6}
     xs={12}
   >
-    <div
-      className=""
-    >
+    <div>
       <Connect(DateFilter)
         refresh={[Function]}
       />
@@ -18,9 +16,7 @@ exports[`FilterForm renders correctly 1`] = `
     md={3}
     xs={6}
   >
-    <div
-      className=""
-    >
+    <div>
       <Connect(FilterDropdown)
         displayValue="Type"
         formName="filterForm"
