@@ -38,7 +38,7 @@ const CreatePage = (props) => {
     return inviteUser(email, access).then((res) => {
       showAlert({
         type: 'success',
-        message: 'Invitation is on its way! Once your user signs up, you\'ll see them below'
+        message: `We sent an invitation to ${email}! Once they sign up, you\'ll see them on this page`
       });
       history.push('/account/users');
     })

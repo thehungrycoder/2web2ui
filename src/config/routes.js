@@ -6,6 +6,7 @@ import {
   billing,
   DashboardPage,
   ProfilePage,
+  RegisterPage,
   reports,
   recipientLists,
   subaccounts,
@@ -80,6 +81,11 @@ const routes = [
     path: '/sso',
     public: true,
     component: SSOPage
+  },
+  {
+    path: '/register',
+    public: true,
+    component: RegisterPage
   },
   {
     path: '/dashboard',

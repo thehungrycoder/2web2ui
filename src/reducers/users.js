@@ -4,7 +4,8 @@ export const initialState = {
   entities: {},
   error: null,
   loading: false,
-  sortKey: 'name'
+  sortKey: 'name',
+  invite: {}
 };
 
 const reduceUsers = fp.reduce((result, user) => ({ ...result, [user.username]: user }), {});
@@ -34,6 +35,24 @@ export default (state = initialState, action) => {
 
       return fp.set(['entities', username, 'access'], access_level)(state);
     }
+
+    case 'REGISTER_USER_PENDING':
+      return { ...state, loading: true };
+
+    case 'REGISTER_USER_SUCCESS':
+      return { ...state, loading: false };
+
+    case 'REGISTER_USER_FAIL':
+      return { ...state, loading: false };
+
+    case 'CHECK_INVITE_TOKEN_PENDING':
+      return { ...state, loading: true };
+
+    case 'CHECK_INVITE_TOKEN_SUCCESS':
+      return { ...state, invite: { ...action.payload }, loading: false };
+
+    case 'CHECK_INVITE_TOKEN_FAIL':
+      return { ...state, invite: { ...state.invite, error: action.payload }, loading: false };
 
     default:
       return state;
