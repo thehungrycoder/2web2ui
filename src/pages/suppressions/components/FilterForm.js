@@ -116,7 +116,7 @@ export class Results extends Component {
         <Grid.Column xs={6} md={3}>
           <div>
             <FilterDropdown
-              popoverClassName={styles.fatPopover} formName='filterForm' options={types} namespace='types' displayValue='Type'
+              popoverClassName={styles.suppresionPopver} formName='filterForm' options={types} namespace='types' displayValue='Type'
               onClose={this.handleTypesSelection}
             />
           </div>

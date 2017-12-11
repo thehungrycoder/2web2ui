@@ -23,13 +23,18 @@ export default (state = initialState, action) => {
 
     //recipients search
     case 'SEARCH_SUPPRESSIONS_RECIPIENT_PENDING':
-      return { ...state, loading: true };
+      return { ...state, listLoading: true };
 
     case 'SEARCH_SUPPRESSIONS_RECIPIENT_SUCCESS':
-      return { ...state, loading: false, list: action.payload };
+      return { ...state, listLoading: false, list: action.payload };
 
     case 'SEARCH_SUPPRESSIONS_RECIPIENT_FAIL': {
-      return { ...state, loading: false };
+      const { response = {}} = action.payload;
+      if (response.status === 404) {
+        return { ...state, listLoading: false, list: []};
+      } else {
+        return { ...state, listLoading: false, list: [], listError: action.payload };
+      }
     }
 
     default:

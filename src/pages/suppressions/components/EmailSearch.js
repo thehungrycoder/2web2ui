@@ -5,7 +5,7 @@ import { reduxForm, Field } from 'redux-form';
 import { Grid } from '@sparkpost/matchbox';
 import { TextFieldWrapper, SubaccountTypeaheadWrapper } from 'src/components';
 
-import { email as emailValidator } from 'src/helpers/validation';
+import { email as emailValidator, required } from 'src/helpers/validation';
 
 export class FilterForm extends Component {
   state = {
@@ -40,7 +40,7 @@ export class FilterForm extends Component {
               onBlur={(e) => this.handleChange(e, 'email')}
               component={TextFieldWrapper}
               title="Email"
-              validate={emailValidator}
+              validate={[required, emailValidator]}
               placeholder='Recipient Email'
             />
           </div>
