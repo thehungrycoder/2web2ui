@@ -43,7 +43,7 @@ const formName = 'SubaccountEditForm';
 const mapStateToProps = (state, { subaccount }) => {
   const { compliance } = subaccount;
   // changing the status name if set by compliance because it is uneditable
-  const status = compliance ? `${subaccount.status.charAt(0).toUpperCase() + subaccount.status.slice(1)} by SparkPost` : subaccount.status;
+  const status = compliance ? `${subaccount.status} by SparkPost` : subaccount.status;
 
   return {
     ipPools: state.ipPools.list,

@@ -4,9 +4,8 @@ import { required } from 'src/helpers/validation';
 import ipValidator from '../helpers/ipValidator';
 import { TextFieldWrapper, CheckboxWrapper, RadioGroup, SelectWrapper } from 'src/components/reduxFormWrappers';
 import GrantsCheckboxes from 'src/components/grantBoxes/GrantsCheckboxes';
-import config from 'src/config';
 
-const uneditableMsg = `System set statuses cannot be edited. Please email ${config.contact.abuseEmail} for help with your subaccount`;
+const uneditableMsg = 'System set statuses cannot be edited.';
 const keyBoxHelpText = (createApiKey) => createApiKey
     ? 'The key will only be shown once when created, so be sure to copy and save it somewhere safe.'
     : 'Every subaccount you create will need its own API key. You can create one later.';
