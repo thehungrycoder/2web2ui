@@ -15,7 +15,7 @@ import Filters from '../components/Filters';
 import ChartGroup from './components/ChartGroup';
 import Empty from '../components/Empty';
 
-import './BouncePage.scss';
+import '../ReasonsTable.scss';
 
 const columns = [{ label: 'Reason', width: '45%' }, 'Domain', 'Category', 'Classification', 'Count (%)'];
 
@@ -109,7 +109,7 @@ export class BouncePage extends Component {
       <Page title='Bounce Report'>
         <Filters refresh={this.handleRefresh} onShare={this.handleModalToggle} />
         { this.renderChart() }
-        <Panel title='Bounced Messages' className='BounceTable'>
+        <Panel title='Bounced Messages' className='ReasonsTable'>
           { this.renderCollection() }
         </Panel>
         <ShareModal

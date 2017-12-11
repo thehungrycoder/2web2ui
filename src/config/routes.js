@@ -119,7 +119,7 @@ const routes = [
   },
   {
     path: '/reports/delayed',
-    component: ComingSoonPage,
+    component: reports.DelayPage,
     layout: App
   },
   {
