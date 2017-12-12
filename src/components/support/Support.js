@@ -9,7 +9,7 @@ import SupportForm from './components/SupportForm';
 
 import styles from './Support.module.scss';
 
-class Support extends Component {
+export class Support extends Component {
 
   state = {
     showPanel: false
@@ -39,9 +39,8 @@ class Support extends Component {
   };
 
   render() {
-    const {
-      loggedIn
-    } = this.props;
+    const { loggedIn } = this.props;
+    const { showPanel } = this.state;
 
     if (!loggedIn) {
       return null;
@@ -61,10 +60,13 @@ class Support extends Component {
             left
             style={{ width: '500px', height: '475px' }}
             manualTrigger
-            open={this.state.showPanel}
+            open={showPanel}
             trigger={triggerMarkup}>
 
-            <SupportForm onSubmit={this.onSubmit} onCancel={this.resetPanel} onContinue={this.resetPanel} />
+            <SupportForm
+              onSubmit={this.onSubmit}
+              onCancel={this.resetPanel}
+              onContinue={this.resetPanel} />
 
           </Popover>
         </div>
@@ -73,9 +75,8 @@ class Support extends Component {
   }
 }
 
-const mapStateToProps = ({ auth, support }) => ({
-  loggedIn: auth.loggedIn,
-  ticketId: support.ticketId
+const mapStateToProps = ({ auth }) => ({
+  loggedIn: auth.loggedIn
 });
 
 const mapDispatchToProps = { createTicket, clearSupportForm, showAlert };

@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Support Form Component Form should render 1`] = `
+<div>
+  <Panel.Section>
+    <h6>
+      Submit a ticket
+    </h6>
+  </Panel.Section>
+  <form>
+    <Panel.Section>
+      <Field
+        component={[Function]}
+        label="Subject"
+        name="subject"
+        placeholder="Give your issue a title"
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Field
+        component={[Function]}
+        label="Message"
+        multiline={true}
+        name="message"
+        placeholder="Give us details about your issue"
+        rows={10}
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+    </Panel.Section>
+    <Panel.Section>
+      <Button
+        primary={true}
+        size="default"
+        submit={true}
+      >
+        Submit Ticket
+      </Button>
+      <Button
+        className="CancelBtn"
+        onClick={[Function]}
+        size="default"
+        style={
+          Object {
+            "float": "right",
+          }
+        }
+      >
+        Cancel
+      </Button>
+    </Panel.Section>
+  </form>
+</div>
+`;

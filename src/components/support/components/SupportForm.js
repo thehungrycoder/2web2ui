@@ -10,7 +10,7 @@ import { required, minLength } from 'src/helpers/validation';
 
 const formName = 'supportForm';
 
-class SupportForm extends Component {
+export class SupportForm extends Component {
   renderSuccess() {
     const { submitFailed, ticketId, onContinue } = this.props;
 
@@ -19,7 +19,7 @@ class SupportForm extends Component {
     }
 
     return <div>
-        <Panel.Section style={{ textAlign: 'center', paddingTop: '160px' }}>
+        <Panel.Section className='SuccessMessage' style={{ textAlign: 'center', paddingTop: '160px' }}>
           <h6>Your ticket has been submitted</h6>
           <div><small>Ticket # {ticketId}</small></div>
           <div><small>Please check your email for updates on your support ticket.</small></div>
@@ -78,7 +78,7 @@ class SupportForm extends Component {
               <Button submit primary disabled={submitting || pristine}>
                   {submitting ? 'Saving' : 'Submit Ticket' }
               </Button>
-              <Button disabled={submitting} onClick={() => this.reset(onCancel)} style={{ float: 'right' }}>Cancel</Button>
+              <Button className="CancelBtn" disabled={submitting} onClick={() => this.reset(onCancel)} style={{ float: 'right' }}>Cancel</Button>
             </Panel.Section>
           </form>
         </div>;
@@ -92,11 +92,8 @@ class SupportForm extends Component {
   }
 }
 
-const mapStateToProps = () => ({
-  initialValues: {
-    subject: 'EQD test subject',
-    message: 'EQD is testing again: real message goes here'
-  }
+const mapStateToProps = ({ support }) => ({
+  ticketId: support.ticketId
 });
 
 const ReduxSupportForm = reduxForm({ form: formName })(SupportForm);
