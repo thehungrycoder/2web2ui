@@ -1,4 +1,4 @@
-/* eslint max-lines: ["error", 250] */
+/* eslint max-lines: ["error", 300] */
 import React from 'react';
 import { shallow } from 'enzyme';
 import { TrackingDomainRow, IsDefaultTag, SubaccountTag } from '../TrackingDomainRow';

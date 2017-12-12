@@ -55,7 +55,7 @@ it('renders during initial load', () => {
     trackingDomainsLoaded: false
   });
   expect(wrapper).toMatchSnapshot();
-})
+});
 
 it('renders empty state', () => {
   wrapper = shallow(
@@ -65,7 +65,7 @@ it('renders empty state', () => {
       listTrackingDomains={jest.fn(() => [])}
       listSubaccounts={jest.fn(() => [])}
       trackingDomains={[]} />
-    );
+  );
   expect(wrapper).toMatchSnapshot();
 });
 

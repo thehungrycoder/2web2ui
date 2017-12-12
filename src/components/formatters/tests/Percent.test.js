@@ -1,7 +1,6 @@
 import React from 'react';
 import { Percent } from '../Percent';
 import { mount } from 'enzyme';
-import _ from 'lodash';
 
 describe('Percent', () => {
   it('should render percent', () => {

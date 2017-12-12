@@ -93,7 +93,7 @@ export function addDedicatedIps({ ip_pool, isAwsAccount, quantity }) {
   };
 
   return (dispatch) => dispatch(sparkpostApiRequest(action))
-    .then(() => dispatch(getSendingIps()));  // refresh list
+    .then(() => dispatch(getSendingIps())); // refresh list
 }
 
 export function createZuoraAccount({ data, token, signature }) {
@@ -114,7 +114,7 @@ export function billingCreate(values) {
   return (dispatch) =>
 
     // get CORS data for the create account context
-     dispatch(cors('create-account', corsData))
+    dispatch(cors('create-account', corsData))
 
       // create the Zuora account
       .then((results) => {
@@ -140,7 +140,7 @@ export function billingUpdate(values) {
   return (dispatch) =>
 
     // get CORS data for the update billing context
-     dispatch(cors('update-billing'))
+    dispatch(cors('update-billing'))
 
       // Update Zuora with new CC
       .then(({ accountKey, token, signature }) => {

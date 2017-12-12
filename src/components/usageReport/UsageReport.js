@@ -24,10 +24,10 @@ const DisplayNumber = ({ label, content, orange }) => (
 );
 
 const ProgressLabel = ({ title, secondaryTitle }) => (
-    <div>
-      <h5 className={styles.ProgressTitle}>{ title }</h5>
-      <h6 className={styles.ProgressSecondary}>{ secondaryTitle }</h6>
-    </div>
+  <div>
+    <h5 className={styles.ProgressTitle}>{ title }</h5>
+    <h6 className={styles.ProgressSecondary}>{ secondaryTitle }</h6>
+  </div>
 );
 
 export class UsageReport extends Component {

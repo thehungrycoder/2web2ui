@@ -42,23 +42,23 @@ const CreatePage = (props) => {
       });
       history.push('/account/users');
     })
-    .catch((err) => {
-      const { response: { status, data }} = err;
-      let message = 'Unable to invite user.';
+      .catch((err) => {
+        const { response: { status, data }} = err;
+        let message = 'Unable to invite user.';
 
-      if (status === 400) {
+        if (status === 400) {
         // Email address suppressed
-        message = 'The email you tried to invite is currently suppressed by SparkPost. Please use another email address or contact support.';
-      } else if (status === 409) {
+          message = 'The email you tried to invite is currently suppressed by SparkPost. Please use another email address or contact support.';
+        } else if (status === 409) {
         // User already exists
-        message = data.errors[0].message;
-      }
+          message = data.errors[0].message;
+        }
 
-      showAlert({
-        type: 'error',
-        message
+        showAlert({
+          type: 'error',
+          message
+        });
       });
-    });
   };
 
   return (
@@ -66,18 +66,18 @@ const CreatePage = (props) => {
       <Panel>
         <Panel.Section>
           <form onSubmit={handleSubmit(onSubmit)}>
-              <p>An invitation will be sent to the email address you supply</p>
-              <Field
-                name="email"
-                validate={[required, email]}
-                label="Email address"
-                component={TextFieldWrapper}
-              />
-              <Field name="access" label="Role" component={AccessSelect} />
-              <Button submit primary disabled={submitting || pristine}>
-                {submitting ? 'Loading' : 'Add User' }
-              </Button>
-            </form>
+            <p>An invitation will be sent to the email address you supply</p>
+            <Field
+              name="email"
+              validate={[required, email]}
+              label="Email address"
+              component={TextFieldWrapper}
+            />
+            <Field name="access" label="Role" component={AccessSelect} />
+            <Button submit primary disabled={submitting || pristine}>
+              {submitting ? 'Loading' : 'Add User' }
+            </Button>
+          </form>
         </Panel.Section>
       </Panel>
     </Page>

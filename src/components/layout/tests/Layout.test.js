@@ -6,14 +6,14 @@ import { shallow } from 'enzyme';
 describe('Layout Tests', () => {
   test('Layout renders App layout', () => {
     const component = shallow(
-        <App>App Layout</App>
+      <App>App Layout</App>
     );
     expect(component).toMatchSnapshot();
   });
 
   test('Layout renders Form layout', () => {
     const component = shallow(
-        <Form>Form Layout</Form>
+      <Form>Form Layout</Form>
     );
     expect(component).toMatchSnapshot();
   });

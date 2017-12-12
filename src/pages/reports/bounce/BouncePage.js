@@ -44,9 +44,9 @@ export class BouncePage extends Component {
     this.props.refreshBounceChartMetrics(options)
       .then(() => this.updateLink())
       .then(() => this.props.refreshBounceTableMetrics(options))
-     .catch((err) => {
-       this.props.showAlert({ type: 'error', message: 'Unable to refresh bounce report.', details: err.message });
-     });
+      .catch((err) => {
+        this.props.showAlert({ type: 'error', message: 'Unable to refresh bounce report.', details: err.message });
+      });
   }
 
   handleModalToggle = (modal) => {

@@ -17,17 +17,17 @@ describe('Summary Table ', () => {
     ],
     groupBy: 'domain',
     typeaheadCache: [
-      { type: 'Subaccount', id: 555, value: 'sub 1 name'},
+      { type: 'Subaccount', id: 555, value: 'sub 1 name' }
     ],
     tableData: [],
     tableLoading: false,
     hasSubaccounts: false
-  }
+  };
 
   const data = [
     { subaccount_id: 0, metric_1: 123, metric_2: 12345 },
     { subaccount_id: 555, metric_1: 123, metric_2: 12345 },
-    { subaccount_id: 1010, metric_1: 123, metric_2: 12345 },
+    { subaccount_id: 1010, metric_1: 123, metric_2: 12345 }
   ];
 
   beforeEach(() => {
@@ -54,16 +54,16 @@ describe('Summary Table ', () => {
   });
 
   it('should render row data & handle click', () => {
-    let snaps = [];
+    const snaps = [];
     wrapper.setProps({ hasSubaccounts: true, groupBy: 'subaccount' });
     const func = wrapper.instance().getRowData();
-    const results = _.flatten(data.map(func))
+    const results = _.flatten(data.map(func));
 
     _.each(results, (item, i) => {
-        snaps.push(mount(item));
+      snaps.push(mount(item));
     });
 
-    expect(snaps).toMatchSnapshot()
+    expect(snaps).toMatchSnapshot();
 
     snaps[0].find('UnstyledLink').simulate('click');
     expect(props.addFilter).toHaveBeenCalledWith({ id: 0, type: 'Subaccount', value: 'Master Account (ID 0)' });

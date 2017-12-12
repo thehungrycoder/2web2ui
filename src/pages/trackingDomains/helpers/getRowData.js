@@ -14,11 +14,11 @@ const resolveStatus = ({ verified, compliance_status }) => {
 };
 
 const linkColumn = (domain, isDefault) => (
-    <div>
-      <Link to={`/account/trackingDomains/${domain}`}>{domain}</Link>
-      { isDefault && ' (default)' }
-    </div>
-  );
+  <div>
+    <Link to={`/account/trackingDomains/${domain}`}>{domain}</Link>
+    { isDefault && ' (default)' }
+  </div>
+);
 
 /*
  Tracking Domains getRowData passed to TableCollection in ListPage.

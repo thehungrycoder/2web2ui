@@ -48,39 +48,39 @@ export class BillingAddressForm extends Component {
 
     const stateOrProvince = countries.length && (countryValue === 'US' || countryValue === 'CA')
       ? <Grid.Column xs={6}>
-          <Field
-            label={countryValue === 'US' ? 'State' : 'Province'}
-            name='billingAddress.state'
-            placeholder={`Select a ${countryValue === 'US' ? 'State' : 'Province'}`}
-            component={SelectWrapper}
-            options={_.find(countries, { value: countryValue }).states}
-            validate={required}
-            disabled={disabled}
-          />
-        </Grid.Column>
+        <Field
+          label={countryValue === 'US' ? 'State' : 'Province'}
+          name='billingAddress.state'
+          placeholder={`Select a ${countryValue === 'US' ? 'State' : 'Province'}`}
+          component={SelectWrapper}
+          options={_.find(countries, { value: countryValue }).states}
+          validate={required}
+          disabled={disabled}
+        />
+      </Grid.Column>
       : null;
 
     const nameFields = this.state.showName
       ? <Grid className={styles.spacer}>
-          <Grid.Column xs={6}>
-            <Field
-              label='First Name'
-              name='billingAddress.firstName'
-              component={TextFieldWrapper}
-              validate={required}
-              disabled={disabled}
-            />
-          </Grid.Column>
-          <Grid.Column xs={6}>
-            <Field
-              label='Last Name'
-              name='billingAddress.lastName'
-              component={TextFieldWrapper}
-              validate={required}
-              disabled={disabled}
-            />
-          </Grid.Column>
-        </Grid>
+        <Grid.Column xs={6}>
+          <Field
+            label='First Name'
+            name='billingAddress.firstName'
+            component={TextFieldWrapper}
+            validate={required}
+            disabled={disabled}
+          />
+        </Grid.Column>
+        <Grid.Column xs={6}>
+          <Field
+            label='Last Name'
+            name='billingAddress.lastName'
+            component={TextFieldWrapper}
+            validate={required}
+            disabled={disabled}
+          />
+        </Grid.Column>
+      </Grid>
       : null;
 
     return (

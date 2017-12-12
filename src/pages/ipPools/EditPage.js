@@ -87,10 +87,10 @@ export class EditPage extends React.Component {
       });
       history.push('/account/ip-pools');
     })
-    .catch(() => showAlert({
-      type: 'error',
-      message: `Unable to delete IP pool ${this.id}.`
-    }));
+      .catch(() => showAlert({
+        type: 'error',
+        message: `Unable to delete IP pool ${this.id}.`
+      }));
   };
 
   loadDependantData = () => {
@@ -106,10 +106,10 @@ export class EditPage extends React.Component {
     const { listError, getError } = this.props;
     const msg = listError ? listError.message : getError.message;
     return <ApiErrorBanner
-        errorDetails={msg}
-        message="Sorry, we seem to have had some trouble loading your IP pool."
-        reload={this.loadDependantData}
-      />;
+      errorDetails={msg}
+      message="Sorry, we seem to have had some trouble loading your IP pool."
+      reload={this.loadDependantData}
+    />;
   }
 
   renderForm() {
@@ -120,10 +120,10 @@ export class EditPage extends React.Component {
     }
 
     return <Panel>
-        <Panel.Section>
-          <PoolForm onSubmit={this.onUpdatePool} isNew={false} />
-        </Panel.Section>
-      </Panel>;
+      <Panel.Section>
+        <PoolForm onSubmit={this.onUpdatePool} isNew={false} />
+      </Panel.Section>
+    </Panel>;
 
   }
 

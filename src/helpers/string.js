@@ -1,7 +1,7 @@
 function snakeToFriendly(string) {
   return string
     .charAt(0).toUpperCase() + string.slice(1)
-    .replace(/(\_\w)/g, (matches) => ` ${matches[1].toUpperCase()}`);
+    .replace(/(_\w)/g, (matches) => ` ${matches[1].toUpperCase()}`);
 }
 
 function slugify(value) {
@@ -13,7 +13,7 @@ function slugify(value) {
 }
 
 function snakeToCamel(string) {
-  return string.replace(/(\_\w)/g, (matches) => matches[1].toUpperCase());
+  return string.replace(/(_\w)/g, (matches) => matches[1].toUpperCase());
 }
 
 export {

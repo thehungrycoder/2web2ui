@@ -18,13 +18,13 @@ describe('Helper: Zuora API Request', () => {
     axiosMocks.zuora.mockImplementation(() => Promise.resolve(expectedResponse));
   });
 
-  it('should make a successful call', async () => {
+  it('should make a successful call', async() => {
     const results = await mockStore.dispatch(zuoraRequest(action));
     expect(results).toBe(expectedResponse);
     expect(mockStore.getActions()).toMatchSnapshot();
   });
 
-  it('should handle a zuora failure', async () => {
+  it('should handle a zuora failure', async() => {
     axiosMocks.zuora.mockImplementation(() => Promise.resolve({
       data: {
         success: false,

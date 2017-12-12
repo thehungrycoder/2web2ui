@@ -1,7 +1,6 @@
 import React from 'react';
 import { Unit } from '../Unit';
 import { mount } from 'enzyme';
-import _ from 'lodash';
 
 describe('Unit', () => {
   it('should render duration', () => {

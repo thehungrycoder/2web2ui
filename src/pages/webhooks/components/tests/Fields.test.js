@@ -1,11 +1,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import {
-    NameField,
-    EventsRadioGroup,
-    AuthDropDown,
-    BasicAuthFields,
-    OAuth2Fields
+  NameField,
+  EventsRadioGroup,
+  AuthDropDown,
+  BasicAuthFields,
+  OAuth2Fields
 } from '../Fields.js';
 
 it('should render NameField', () => {

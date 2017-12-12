@@ -17,8 +17,8 @@ let WebhookForm = (props) => {
     eventsTree,
     submitSucceeded,
     pristine,
-    webhook,            /* taken from state       */
-    newWebhook          /* passed from CreatePage */
+    webhook, /* taken from state       */
+    newWebhook /* passed from CreatePage */
   } = props;
 
   if (newWebhook && submitSucceeded && !submitting && webhook.id) {
