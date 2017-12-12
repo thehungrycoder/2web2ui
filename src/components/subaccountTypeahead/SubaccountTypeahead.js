@@ -61,8 +61,8 @@ export class SubaccountTypeahead extends Component {
 
     return (
       <div className={cx('Typeahead')}>
-        <TextField {...textFieldProps} onFocus={openMenu} />
         <ActionList className={listClasses} actions={mappedItems} />
+        <TextField {...textFieldProps} onFocus={openMenu} />
       </div>
     );
   };

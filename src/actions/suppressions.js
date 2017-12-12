@@ -28,15 +28,15 @@ export function searchRecipient({ email, subaccountId } = {}) {
   }
 
   return (dispatch, getState) => dispatch(
-      sparkpostApiRequest({
-        type: 'SEARCH_SUPPRESSIONS_RECIPIENT',
-        meta: {
-          method: 'GET',
-          url: `/suppression-list/${email}`,
-          headers
-        }
-      })
-    );
+    sparkpostApiRequest({
+      type: 'SEARCH_SUPPRESSIONS_RECIPIENT',
+      meta: {
+        method: 'GET',
+        url: `/suppression-list/${email}`,
+        headers
+      }
+    })
+  );
 }
 
 export function listSuppressions(options) {
