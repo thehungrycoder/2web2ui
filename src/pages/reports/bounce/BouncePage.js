@@ -8,14 +8,15 @@ import { getShareLink, getFilterSearchOptions, parseSearch } from 'src/helpers/r
 import { showAlert } from 'src/actions/globalAlert';
 
 import { TableCollection } from 'src/components';
+import { Percent } from 'src/components/formatters';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
 import { Page, Panel } from '@sparkpost/matchbox';
 import ShareModal from '../components/ShareModal';
 import Filters from '../components/Filters';
 import ChartGroup from './components/ChartGroup';
 import Empty from '../components/Empty';
+import ReasonCell from '../components/ReasonCell';
 
-import '../ReasonsTable.scss';
 
 const columns = [{ label: 'Reason', width: '45%' }, 'Domain', 'Category', 'Classification', 'Count (%)'];
 
@@ -66,11 +67,11 @@ export class BouncePage extends Component {
     const { totalBounces } = this.props;
     const { reason, domain, bounce_category_name, bounce_class_name, count_bounce } = rowData;
     return [
-      <div className='ReasonCell'>{reason}</div>,
+      <ReasonCell reason={reason} />,
       domain,
       bounce_category_name,
       bounce_class_name,
-      `${count_bounce} (${Number((count_bounce / totalBounces) * 100).toFixed(2)}%)`
+      <span>{count_bounce}(<Percent value={(count_bounce / totalBounces) * 100} />)</span>
     ];
   };
 

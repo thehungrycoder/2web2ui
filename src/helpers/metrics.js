@@ -106,10 +106,13 @@ export function transformData(data = [], metrics = []) {
   return data.map(computeKeysForItem(metrics));
 }
 
+// Extract from, to, filters (campaign, template, ...) and any other included update fields
+// into a set of common options for metrics queries.
 export function buildCommonOptions(reportFilters, updates = {}) {
   return {
     ...reportFilters,
     ...updates,
-    ...getRelativeDates(updates.getRelativeDates)
+    ...getRelativeDates(updates.relativeRange)
   };
 }
+
