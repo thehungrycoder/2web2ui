@@ -37,6 +37,10 @@ export default (state = initialState, action) => {
       }
     }
 
+    //reset results
+    case 'RESET_SUPPRESSIONS_RESULTS':
+      return { ...state, list: null };
+
     default:
       return state;
   }

@@ -39,6 +39,15 @@ export function searchRecipient({ email, subaccountId } = {}) {
   );
 }
 
+export function resetSearch() {
+  return (dispatch, getState) => dispatch(
+    {
+      type: 'RESET_SUPPRESSIONS_RESULTS',
+      payload: []
+    }
+  );
+}
+
 export function listSuppressions(options) {
   const { reportFilters, types = [], sources = []} = options;
   const { from, to } = reportFilters;

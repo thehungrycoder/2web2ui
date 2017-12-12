@@ -9,6 +9,7 @@ let wrapper;
 
 beforeEach(() => {
   props = {
+    resetSearch: jest.fn(() => Promise.resolve())
   };
 
 });

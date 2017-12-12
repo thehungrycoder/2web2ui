@@ -11,7 +11,7 @@ beforeEach(() => {
   props = {};
 
   results = [
-    { recipient: 'rec1@dom.com', type: 'Transactional', source: 'Manually added'},
+    { recipient: 'rec1@dom.com', type: 'Transactional', source: 'Manually added' },
     { recipient: 'rec2@dom.com', type: 'Non-transactional', source: 'Manually added', subaccount_id: 101 }
   ];
 });
