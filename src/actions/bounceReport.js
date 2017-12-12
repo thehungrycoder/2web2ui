@@ -1,28 +1,9 @@
 import { fetchDeliverability, fetchBounceClassifications, fetchBounceReasonsByDomain } from 'src/actions/metrics';
-import { refreshTypeaheadCache, refreshReportRange } from 'src/actions/reportFilters';
-import { getQueryFromOptions, getMetricsFromKeys } from 'src/helpers/metrics';
-import { getRelativeDates } from 'src/helpers/date';
+import { maybeRefreshTypeaheadCache, refreshReportRange } from 'src/actions/reportFilters';
+import { getQueryFromOptions, buildCommonOptions, getMetricsFromKeys } from 'src/helpers/metrics';
 import { getBandTypes, reshapeCategories, formatAggregates } from 'src/helpers/bounce';
 import _ from 'lodash';
 
-// Extract from, to, filters (campaign, template, ...) and any other included update fields
-// into a set of common options for metrics queries.
-function buildCommonOptions(reportFilters, updates = {}) {
-  return {
-    ...reportFilters,
-    ...updates,
-    ...getRelativeDates(updates.relativeRange)
-  };
-}
-
-function maybeRefreshTypeaheadCache(dispatch, options, updates = {}) {
-  // refresh the typeahead cache if the date range has been updated
-  const { relativeRange, from, to } = updates;
-  if (relativeRange || from || to) {
-    const params = getQueryFromOptions({ from: options.from, to: options.to });
-    dispatch(refreshTypeaheadCache(params));
-  }
-}
 
 // Load new metrics for the bounce chart
 // Dispatches refreshBounceChart() on completion.

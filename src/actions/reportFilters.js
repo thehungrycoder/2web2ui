@@ -8,23 +8,35 @@ import {
 import { listTemplates } from './templates';
 import { list as listSubaccounts } from './subaccounts';
 import { list as listSendingDomains } from './sendingDomains';
+import { getQueryFromOptions } from 'src/helpers/metrics';
 
-// TODO: make this smarter to not always refresh templates, subaccounts, and
-// sending domains, since they aren't dependent on the params...
-// maybe load (all) vs refresh (4 metrics calls)
-export function refreshTypeaheadCache(params) {
+export function refreshTypeaheadCache(params, timeFiltered = false) {
   return (dispatch) => {
     dispatch({ type: 'REFRESH_TYPEAHEAD_CACHE' });
-    return Promise.all([
+    const requests = [
       dispatch(fetchMetricsDomains(params)),
       dispatch(fetchMetricsCampaigns(params)),
       dispatch(fetchMetricsSendingIps(params)),
-      dispatch(fetchMetricsIpPools(params)),
-      dispatch(listTemplates()),
-      dispatch(listSubaccounts()),
-      dispatch(listSendingDomains())
-    ]);
+      dispatch(fetchMetricsIpPools(params))
+    ];
+
+    // only need to refresh these lists on initial load, not when date ranges change
+    if (!timeFiltered) {
+      requests.push(dispatch(listTemplates()), dispatch(listSubaccounts()), dispatch(listSendingDomains()));
+    }
+
+    return Promise.all(requests);
   };
+}
+
+export function maybeRefreshTypeaheadCache(dispatch, options, updates = {}) {
+  // refresh the typeahead cache if the date range has been updated
+  const { relativeRange, from, to } = updates;
+
+  if (relativeRange || from || to) {
+    const params = getQueryFromOptions({ from: options.from, to: options.to });
+    dispatch(refreshTypeaheadCache(params, true));
+  }
 }
 
 export function addFilter(payload) {
