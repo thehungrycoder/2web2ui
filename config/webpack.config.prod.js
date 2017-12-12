@@ -56,7 +56,7 @@ const postCssOptions = {
       ],
       flexbox: 'no-2009',
     }),
-    cssnano()
+    cssnano({ zindex: false })
   ],
 };
 
