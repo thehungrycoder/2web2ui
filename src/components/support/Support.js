@@ -58,7 +58,7 @@ export class Support extends Component {
           <Popover
             top
             left
-            style={{ width: '500px', height: '475px' }}
+            style={{ width: '500px', height: '460px' }}
             manualTrigger
             open={showPanel}
             trigger={triggerMarkup}>
