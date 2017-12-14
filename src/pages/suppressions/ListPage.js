@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import { Page, Tabs , Panel } from '@sparkpost/matchbox';
 
-import { searchRecipient, listSuppressions } from 'src/actions/suppressions';
+import { searchRecipient, searchSuppressions } from 'src/actions/suppressions';
 import { list as listSubaccounts } from 'src/actions/subaccounts';
 
 import { hasSubaccounts } from 'src/selectors/subaccounts';
@@ -38,7 +38,7 @@ export class ListPage extends Component {
   }
 
   renderFilters() {
-    return <FilterForm onSubmit={this.props.listSuppressions} />;
+    return <FilterForm onSubmit={this.props.searchSuppressions} />;
   }
 
   renderFindByEmails() {
@@ -55,7 +55,7 @@ export class ListPage extends Component {
     if (this.props.hasSubaccounts) {
       this.props.listSubaccounts();
     }
-    this.props.listSuppressions({ reportFilters });
+    this.props.searchSuppressions({ reportFilters });
   }
 
   render() {
@@ -95,4 +95,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { listSuppressions, searchRecipient, listSubaccounts })(ListPage);
+export default connect(mapStateToProps, { searchSuppressions, searchRecipient, listSubaccounts })(ListPage);

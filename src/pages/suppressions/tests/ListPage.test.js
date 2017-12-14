@@ -11,7 +11,7 @@ beforeEach(() => {
   props = {
     listSubaccounts: jest.fn(() => Promise.resolve()),
     searchRecipient: jest.fn(() => Promise.resolve()),
-    listSuppressions: jest.fn(() => Promise.resolve())
+    searchSuppressions: jest.fn(() => Promise.resolve())
   };
 });
 

@@ -3,6 +3,7 @@ import config from 'src/config';
 import _ from 'lodash';
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 import { refreshReportRange } from 'src/actions/reportFilters';
+import { showAlert } from './globalAlert';
 
 const { apiDateFormat } = config;
 
@@ -35,20 +36,24 @@ export function searchRecipient({ email, subaccountId } = {}) {
         url: `/suppression-list/${email}`,
         headers
       }
-    })
-  );
+    }))
+    .catch((err) => {
+      const { response = {}} = err;
+      if (response.status === 404) {
+        return; //swallow 404s
+      }
+
+      dispatch(
+        showAlert({
+          type: 'error',
+          message: 'Error while searching recipient in suppressions list',
+          details: err.message
+        })
+      );
+    });
 }
 
-export function resetSearch() {
-  return (dispatch, getState) => dispatch(
-    {
-      type: 'RESET_SUPPRESSIONS_RESULTS',
-      payload: []
-    }
-  );
-}
-
-export function listSuppressions(options) {
+export function searchSuppressions(options) {
   const { reportFilters, types = [], sources = []} = options;
   const { from, to } = reportFilters;
 
@@ -81,7 +86,15 @@ export function listSuppressions(options) {
           url: '/suppression-list',
           params
         }
-      })
-    );
+      }))
+      .catch((err) => {
+        dispatch(
+          showAlert({
+            type: 'error',
+            message: 'Error while searching suppressions list',
+            details: err.message
+          })
+        );
+      });
   };
 }

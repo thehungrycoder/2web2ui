@@ -5,7 +5,6 @@ import { reduxForm, Field } from 'redux-form';
 import { Grid } from '@sparkpost/matchbox';
 
 import { TextFieldWrapper, SubaccountTypeaheadWrapper } from 'src/components';
-import { resetSearch } from 'src/actions/suppressions';
 
 import { email as emailValidator, required } from 'src/helpers/validation';
 
@@ -69,4 +68,4 @@ export class FilterForm extends Component {
 const formName = 'recipientSearch';
 
 const formOptions = { form: formName };
-export default connect(null, { resetSearch })(reduxForm(formOptions)(FilterForm));
+export default connect(null, { })(reduxForm(formOptions)(FilterForm));
