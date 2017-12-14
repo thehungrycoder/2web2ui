@@ -16,8 +16,7 @@ import Empty from '../components/Empty';
 
 import './RejectionPage.scss';
 
-const columns = [{ label: 'Reason' }, { label: 'Domain', width: '20%' }, { label: 'Category', width: '20%' }, { label: 'Count', width: '10%' }];
-
+const columns = [{ label: 'Reason', width: '45%' }, 'Domain', 'Category', 'Count'];
 export class RejectionPage extends Component {
   state = {
     modal: false,

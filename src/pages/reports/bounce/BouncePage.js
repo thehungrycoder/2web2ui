@@ -34,7 +34,6 @@ export class BouncePage extends Component {
     if (filters) {
       filters.forEach(this.props.addFilter);
     }
-
     return options;
   }
 
