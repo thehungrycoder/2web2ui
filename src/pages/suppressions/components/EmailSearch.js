@@ -23,10 +23,6 @@ export class FilterForm extends Component {
     this.setState({ subaccountId: subaccount.id }, this.refresh);
   }
 
-  componentDidMount() {
-    this.props.resetSearch();
-  }
-
   refresh() {
     const { email, subaccountId } = this.state;
     if (emailValidator(email) === undefined) {

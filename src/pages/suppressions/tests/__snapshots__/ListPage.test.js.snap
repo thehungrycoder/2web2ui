@@ -29,9 +29,51 @@ exports[`ListPage renders correctly 1`] = `
   />
   <Panel>
     <Panel.Section>
-      <Connect(ReduxForm) />
+      <Connect(ReduxForm)
+        onSubmit={[Function]}
+      />
     </Panel.Section>
   </Panel>
   <Connect(Results) />
+</Page>
+`;
+
+exports[`ListPage renders correctly with subaccounts 1`] = `
+<Page
+  empty={Object {}}
+  primaryAction={
+    Object {
+      "Component": [Function],
+      "content": "Add Suppressions",
+    }
+  }
+  title="Suppressions"
+>
+  <Tabs
+    connectBelow={true}
+    selected={0}
+    tabs={
+      Array [
+        Object {
+          "content": "Filters",
+          "onClick": [Function],
+        },
+        Object {
+          "content": "Find by Email",
+          "onClick": [Function],
+        },
+      ]
+    }
+  />
+  <Panel>
+    <Panel.Section>
+      <Connect(ReduxForm)
+        onSubmit={[Function]}
+      />
+    </Panel.Section>
+  </Panel>
+  <Connect(Results)
+    hasSubaccounts={true}
+  />
 </Page>
 `;

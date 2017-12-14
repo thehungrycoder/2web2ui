@@ -51,9 +51,11 @@ export class ListPage extends Component {
   }
 
   componentDidMount() {
+    const { reportFilters } = this.props;
     if (this.props.hasSubaccounts) {
       this.props.listSubaccounts();
     }
+    this.props.listSuppressions({ reportFilters });
   }
 
   render() {
@@ -85,10 +87,12 @@ export class ListPage extends Component {
 const mapStateToProps = (state) => {
   const { listLoading, list } = state.suppressions;
   return {
+    reportFilters: state.reportFilters,
     loading: listLoading,
     list: list,
     hasSubaccounts: hasSubaccounts(state),
     subaccounts: state.subaccounts.list
   };
 };
+
 export default connect(mapStateToProps, { listSuppressions, searchRecipient, listSubaccounts })(ListPage);

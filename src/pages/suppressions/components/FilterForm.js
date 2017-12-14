@@ -101,10 +101,6 @@ export class Results extends Component {
     }
   }
 
-  componentDidMount() {
-    this.refresh();
-  }
-
   render() {
     return (
       <Grid>
