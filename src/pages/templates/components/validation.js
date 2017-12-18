@@ -19,8 +19,9 @@ function emailOrSubstitution(value) {
   const parts = value.split('@');
   const validLocal = !emailLocal(parts[0]);
   const validDomain = !substitution(parts[1]) || !domain(parts[1]);
+  const validWhole = !substitution(value) || !email(value);
 
-  return !substitution(value) || !email(value) || (validLocal && validDomain) ? undefined : 'Invalid email or substitution value';
+  return validWhole && validLocal && validDomain ? undefined : 'Invalid email or substitution value';
 }
 
 function contentRequired(value, allValues) {

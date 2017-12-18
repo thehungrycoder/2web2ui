@@ -69,4 +69,16 @@ describe('Template Form', () => {
     const result = wrapper.instance().verifiedDomain('email@notvalid.com');
     expect(result).toEqual('Must use a verified sending domain');
   });
+
+  it('should validate substituted domain', () => {
+    wrapper.setProps({ domains: [{ domain: 'valid.com' }]});
+    const result = wrapper.instance().verifiedDomain('email@{{domain}}');
+    expect(result).toEqual(undefined);
+  });
+
+  it('should validate whole substituted value', () => {
+    wrapper.setProps({ domains: [{ domain: 'valid.com' }]});
+    const result = wrapper.instance().verifiedDomain('{{sub}}');
+    expect(result).toEqual(undefined);
+  });
 });
