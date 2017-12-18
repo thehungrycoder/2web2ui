@@ -8,7 +8,7 @@ import typeaheadCacheSelector from 'src/selectors/reportFilterTypeaheadCache';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
 
 import { TableCollection, Unit, Loading } from 'src/components';
-import Empty from '../../components/Empty';
+import { Empty } from 'src/components';
 import { Panel, Select, Grid, UnstyledLink } from '@sparkpost/matchbox';
 import { GROUP_CONFIG } from './tableConfig';
 import _ from 'lodash';
