@@ -1,0 +1,50 @@
+{
+  "collectCoverageFrom": [
+    "src/**/*.{js,jsx}"
+  ],
+  "coverageDirectory": "build-reports",
+  "coverageReporters": [
+    "lcov",
+    "text"
+  ],
+  "coveragePathIgnorePatterns": [
+    "<rootDir>/src/App.js",
+    "<rootDir>/src/index.js",
+    "<rootDir>/src/config",
+    "<rootDir>/src/helpers/registerServiceWorker",
+    "<rootDir>/src/reducers"
+  ],
+  "coverageThreshold": {
+    "global": {
+      "statements": 53
+    }
+  },
+  "setupFiles": [
+    "<rootDir>/config/polyfills.js"
+  ],
+  "setupTestFrameworkScriptFile": "<rootDir>/config/jest/setup.js",
+  "testMatch": [
+    "<rootDir>/src/**/__tests__/**/*.js?(x)",
+    "<rootDir>/src/**/?(*.)(spec|test).js?(x)"
+  ],
+  "testResultsProcessor": "./node_modules/jest-junit",
+  "testEnvironment": "node",
+  "testURL": "http://phoenix.test",
+  "transform": {
+    "^.+\\.(js|jsx)$": "<rootDir>/node_modules/babel-jest",
+    "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
+    "^(?!.*\\.(js|jsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
+  },
+  "transformIgnorePatterns": [
+    "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"
+  ],
+  "moduleNameMapper": {
+    "^react-native$": "react-native-web"
+  },
+  "snapshotSerializers": [
+    "<rootDir>/node_modules/enzyme-to-json/serializer"
+  ],
+  "modulePaths": [
+    ""
+  ]
+}

@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import { RegisterPage }  from '../RegisterPage';
+import { RegisterPage } from '../RegisterPage';
 
 // actions
 const checkInviteToken = jest.fn();
@@ -46,21 +46,21 @@ test('no token', () => {
 
 test('token expired', () => {
   const error = { message: 'n0o0o0o0' };
-  wrapper.setProps({ invite: { error } });
+  wrapper.setProps({ invite: { error }});
   expect(wrapper).toMatchSnapshot();
 });
 
 describe('onSubmit', () => {
   const values = ['some', 'values'];
 
-  test('success', async () => {
+  test('success', async() => {
     await wrapper.instance().onSubmit(values);
     expect(registerUser).toHaveBeenCalledWith(props.token, values);
   });
 
-  test('fail', async () => {
+  test('fail', async() => {
     const error = { message: 'n0o0o0o0' };
-    registerUser.mockReturnValue(Promise.reject(error))
+    registerUser.mockReturnValue(Promise.reject(error));
     await wrapper.instance().onSubmit(values);
     expect(registerUser).toHaveBeenCalledWith(props.token, values);
   });

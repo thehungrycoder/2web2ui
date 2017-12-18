@@ -6,6 +6,36 @@
   "engines": {
     "npm": ">=5.3"
   },
+  "scripts": {
+    "start": "REACT_APP_VERSION=local-$USER-$(git rev-parse HEAD) node scripts/start.js",
+    "build": "npm run lint && node scripts/build.js",
+    "analyze": "source-map-explorer build/static/js/main.*",
+    "test": "node scripts/test.js --env=jsdom --config=./jest.config.json",
+    "test-coverage": "npm test -- --coverage",
+    "test-ci": "CI=true npm test -- --coverage",
+    "lint": "eslint src",
+    "lintfix": "eslint src --fix",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.js": ["eslint --fix", "git add"]
+  },
+  "babel": {
+    "presets": [
+      "react-app",
+      "stage-2"
+    ]
+  },
+  "description": "SparkPost web app built in React",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SparkPost/2web2ui.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/SparkPost/2web2ui/issues"
+  },
   "dependencies": {
     "@sparkpost/matchbox": "^1.8.7",
     "axios": "^0.16.1",
@@ -73,9 +103,11 @@
     "file-loader": "0.11.1",
     "fs-extra": "3.0.1",
     "html-webpack-plugin": "2.28.0",
+    "husky": "^0.14.3",
     "jest": "^21.1.0",
     "jest-enzyme": "^4.0.0",
     "jest-junit": "^2.1.0",
+    "lint-staged": "^6.0.0",
     "node-sass": "^4.5.3",
     "object-assign": "4.1.1",
     "postcss-flexbugs-fixes": "3.0.0",
@@ -96,139 +128,5 @@
     "webpack-dev-server": "2.4.5",
     "webpack-manifest-plugin": "1.1.0",
     "whatwg-fetch": "2.0.3"
-  },
-  "scripts": {
-    "start": "REACT_APP_VERSION=local-$USER-$(git rev-parse HEAD) node scripts/start.js",
-    "build": "node scripts/build.js",
-    "analyze": "source-map-explorer build/static/js/main.*",
-    "test": "node scripts/test.js --env=jsdom",
-    "test-coverage": "npm test -- --coverage",
-    "test-ci": "CI=true npm test -- --coverage",
-    "lint": "eslint src",
-    "lintfix": "eslint src --fix"
-  },
-  "jest": {
-    "collectCoverageFrom": [
-      "src/**/*.{js,jsx}"
-    ],
-    "coverageDirectory": "build-reports",
-    "coverageReporters": [
-      "lcov",
-      "text"
-    ],
-    "coveragePathIgnorePatterns": [
-      "<rootDir>/src/App.js",
-      "<rootDir>/src/index.js",
-      "<rootDir>/src/actions",
-      "<rootDir>/src/config",
-      "<rootDir>/src/helpers/registerServiceWorker",
-      "<rootDir>/src/reducers"
-    ],
-    "coverageThreshold": {
-      "global": {
-        "statements": 53
-      }
-    },
-    "setupFiles": [
-      "<rootDir>/config/polyfills.js"
-    ],
-    "setupTestFrameworkScriptFile": "<rootDir>/config/jest/setup.js",
-    "testMatch": [
-      "<rootDir>/src/**/__tests__/**/*.js?(x)",
-      "<rootDir>/src/**/?(*.)(spec|test).js?(x)"
-    ],
-    "testResultsProcessor": "./node_modules/jest-junit",
-    "testEnvironment": "node",
-    "testURL": "http://phoenix.test",
-    "transform": {
-      "^.+\\.(js|jsx)$": "<rootDir>/node_modules/babel-jest",
-      "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
-      "^(?!.*\\.(js|jsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
-    },
-    "transformIgnorePatterns": [
-      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"
-    ],
-    "moduleNameMapper": {
-      "^react-native$": "react-native-web"
-    },
-    "snapshotSerializers": [
-      "<rootDir>/node_modules/enzyme-to-json/serializer"
-    ],
-    "modulePaths": [
-      ""
-    ]
-  },
-  "babel": {
-    "presets": [
-      "react-app",
-      "stage-2"
-    ]
-  },
-  "eslintConfig": {
-    "parser": "babel-eslint",
-    "env": {
-      "browser": true,
-      "phantomjs": true
-    },
-    "rules": {
-      "block-spacing": [
-        "error",
-        "always"
-      ],
-      "complexity": "off",
-      "react/jsx-no-bind": "off",
-      "max-lines": [
-        "error",
-        {
-          "max": 150,
-          "skipComments": true
-        }
-      ],
-      "object-curly-spacing": [
-        "error",
-        "always",
-        {
-          "arraysInObjects": false,
-          "objectsInObjects": false
-        }
-      ],
-      "one-var": [
-        "error",
-        "never"
-      ],
-      "operator-linebreak": [
-        "error",
-        "after",
-        {
-          "overrides": {
-            "?": "before",
-            ":": "before"
-          }
-        }
-      ],
-      "lodash/chaining": [
-        "error",
-        "never"
-      ]
-    },
-    "extends": [
-      "react-app",
-      "sparkpost",
-      "plugin:jest/recommended"
-    ],
-    "plugins": [
-      "lodash",
-      "jest"
-    ]
-  },
-  "description": "SparkPost web app built in React",
-  "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/SparkPost/2web2ui.git"
-  },
-  "keywords": [],
-  "bugs": {
-    "url": "https://github.com/SparkPost/2web2ui/issues"
   }
 }

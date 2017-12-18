@@ -83,21 +83,21 @@ const ApiKeyFields = ({ show, showGrants = false, grants, disabled }) => {
 };
 
 const StatusSelect = ({ disabled, compliance }) => compliance
-    ? (<Field
-        name="status"
-        component={TextFieldWrapper}
-        label="Status"
-        disabled={true}
-        helpText={uneditableMsg}
-      />
-    )
-      : (<Field
-        name="status"
-        component={SelectWrapper}
-        options={statusOptions}
-        label="Status"
-        disabled={disabled}
-      />);
+  ? (<Field
+    name="status"
+    component={TextFieldWrapper}
+    label="Status"
+    disabled={true}
+    helpText={uneditableMsg}
+  />
+  )
+  : (<Field
+    name="status"
+    component={SelectWrapper}
+    options={statusOptions}
+    label="Status"
+    disabled={disabled}
+  />);
 
 
 const IpPoolSelect = ({ ipPools, disabled }) => (
