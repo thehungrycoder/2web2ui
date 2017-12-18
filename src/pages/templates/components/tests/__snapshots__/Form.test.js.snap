@@ -48,6 +48,7 @@ exports[`Template Form should disable fields on published 1`] = `
       }
       label="From Email"
       name="content.from.email"
+      placeholder="example@email.com"
       validate={
         Array [
           [Function],
@@ -159,6 +160,7 @@ exports[`Template Form should render 1`] = `
       }
       label="From Email"
       name="content.from.email"
+      placeholder="example@email.com"
       validate={
         Array [
           [Function],

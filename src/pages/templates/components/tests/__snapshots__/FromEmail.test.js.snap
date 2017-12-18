@@ -18,7 +18,6 @@ exports[`From Email Typeahead Wrapper should render error 1`] = `
 exports[`From Email Typeahead should render list 1`] = `
 <div
   className={undefined}
-  onFocus={undefined}
 >
   <TextField
     required={false}

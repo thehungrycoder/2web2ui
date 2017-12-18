@@ -97,6 +97,7 @@ export class Form extends Component {
           <Field
             name='content.from.email'
             component={FromEmailWrapper}
+            placeholder='example@email.com'
             label='From Email'
             disabled={!domains.length || published}
             validate={[required, emailOrSubstitution, this.verifiedDomain]}

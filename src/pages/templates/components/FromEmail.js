@@ -68,7 +68,7 @@ export class FromEmail extends Component {
     selectedItem,
     isOpen
   }) => {
-    const { domains, onChange, value, ...rest } = this.props;
+    const { domains, onChange, value, error, ...rest } = this.props;
     let matches = this.getMatches(inputValue, selectedItem);
 
     // Create ActionList actions from matches
@@ -78,11 +78,11 @@ export class FromEmail extends Component {
       highlighted: highlightedIndex === index
     }));
 
-    const textFieldProps = getInputProps({ ...rest, value: this.state.value });
+    const textFieldProps = getInputProps({ ...rest, error: !isOpen && error ? error : undefined, value: this.state.value });
     const listClasses = cx(styles.List, (isOpen && matches.length) && styles.open);
 
     return (
-      <div className={styles.Typeahead} onFocus={this.handleFocus}>
+      <div className={styles.Typeahead}>
         <TextField {...textFieldProps} />
         <ActionList className={listClasses} actions={matches} />
       </div>
