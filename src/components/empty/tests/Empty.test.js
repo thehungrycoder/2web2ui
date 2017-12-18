@@ -1,5 +1,5 @@
 import React from 'react';
-import Empty from '../Empty';
+import { Empty } from 'src/components';
 import { shallow } from 'enzyme';
 
 describe('Empty: ', () => {

@@ -1,0 +1,82 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FilterForm renders correctly 1`] = `
+<Grid>
+  <Grid.Column
+    md={6}
+    xs={12}
+  >
+    <div>
+      <Connect(DateFilter)
+        refresh={[Function]}
+      />
+    </div>
+  </Grid.Column>
+  <Grid.Column
+    md={3}
+    xs={6}
+  >
+    <div>
+      <Connect(FilterDropdown)
+        displayValue="Type"
+        formName="filterForm"
+        namespace="types"
+        onClose={[Function]}
+        options={
+          Array [
+            Object {
+              "content": "Transactional",
+              "name": "transactional",
+            },
+            Object {
+              "content": "Non-Transactional",
+              "name": "non_transactional",
+            },
+          ]
+        }
+      />
+    </div>
+  </Grid.Column>
+  <Grid.Column
+    md={3}
+    xs={6}
+  >
+    <div>
+      <Connect(FilterDropdown)
+        displayValue="Sources"
+        formName="filterForm"
+        namespace="sources"
+        onClose={[Function]}
+        options={
+          Array [
+            Object {
+              "content": "Spam Complaint",
+              "name": "Spam Complaint",
+            },
+            Object {
+              "content": "List Unsubscribe",
+              "name": "List Unsubscribe",
+            },
+            Object {
+              "content": "Bounce Rule",
+              "name": "Bounce Rule",
+            },
+            Object {
+              "content": "Unsubscribe Link",
+              "name": "Unsubscribe Link",
+            },
+            Object {
+              "content": "Manually Added",
+              "name": "Manually Added",
+            },
+            Object {
+              "content": "Compliance",
+              "name": "Compliance",
+            },
+          ]
+        }
+      />
+    </div>
+  </Grid.Column>
+</Grid>
+`;

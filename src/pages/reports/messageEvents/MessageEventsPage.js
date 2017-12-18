@@ -4,11 +4,10 @@ import { withRouter } from 'react-router-dom';
 
 import { snakeToFriendly } from 'src/helpers/string';
 import { Page, Banner, Button } from '@sparkpost/matchbox';
-import { Loading, TableCollection, ApiErrorBanner } from 'src/components';
+import { Loading, TableCollection, ApiErrorBanner, Empty } from 'src/components';
 import DisplayDate from './components/DisplayDate';
 import { getMessageEvents } from 'src/actions/messageEvents';
 import { selectMessageEvents } from 'src/selectors/messageEvents';
-import Empty from '../components/Empty';
 
 const errorMsg = 'Sorry, we seem to have had some trouble loading your message events.';
 const emptyMesasage = 'There are no message events for your current query';
