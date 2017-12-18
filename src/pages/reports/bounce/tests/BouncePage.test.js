@@ -39,7 +39,7 @@ describe('BouncePage: ', () => {
   let spyGetShare;
 
   beforeEach(() => {
-    spyFilterListFromSearch = reportHelpers.getFilterListFromSearch = jest.fn(() => []);
+    spyFilterListFromSearch = reportHelpers.getFilterSearchOptions = jest.fn(() => []);
     spyParseSearch = reportHelpers.parseSearch = jest.fn(() => ({ options: {}}));
     spyGetShare = reportHelpers.getShareLink = jest.fn(() => ({ link: '', search: '' }));
     wrapper = shallow(<BouncePage {...props} />);

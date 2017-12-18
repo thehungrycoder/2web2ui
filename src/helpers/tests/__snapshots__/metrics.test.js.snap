@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`metrics helpers should build common metric options 1`] = `
+Object {
+  "campaign": "test",
+  "domain": "gmail",
+  "from": "foo",
+  "relativeRange": "7days",
+  "to": "bar",
+}
+`;
+
+exports[`metrics helpers should build return correct options from updates 1`] = `
+Object {
+  "delimiter": ",",
+  "domains": "gmail.com",
+  "from": "2017-12-18T05:00",
+  "metrics": "count_bounce,test + last",
+  "precision": "hour",
+  "subaccounts": "100",
+  "to": "2017-12-18T16:00",
+}
+`;
+
+exports[`metrics helpers should compute keys during transform 1`] = `
+Array [
+  Object {
+    "count_rendered": 100,
+    "count_targeted": 100,
+    "count_unique_confirmed_opened_approx": 1,
+    "open_rate_approx": 1,
+  },
+  Object {
+    "count_rendered": 101,
+    "open_rate_approx": 0,
+  },
+]
+`;
+
+exports[`metrics helpers should get metrics from keys 1`] = `
+Array [
+  Object {
+    "description": "Total number of delays due to any temporary failure.",
+    "inSummary": true,
+    "key": "count_delayed",
+    "label": "Delayed",
+    "name": "count_delayed",
+    "stroke": "#04AEF9",
+    "type": "total",
+    "unit": "number",
+  },
+  Object {
+    "description": "Messages either injected to or received by SparkPost.",
+    "inSummary": true,
+    "key": "count_injected",
+    "label": "Injected",
+    "name": "count_injected",
+    "stroke": "#fa6423",
+    "type": "total",
+    "unit": "number",
+  },
+]
+`;
+
+exports[`metrics helpers should pushToKey 1`] = `
+Object {
+  "baz": "bot",
+  "foo": "bar",
+  "test": Array [
+    "value",
+  ],
+}
+`;

@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Date helpers should get relative dates 1`] = `
+Object {
+  "from": 2017-12-17T23:00:00.000Z,
+  "to": 2017-12-18T00:00:00.000Z,
+}
+`;
+
+exports[`Date helpers should get relative dates 2`] = `
+Object {
+  "from": 2017-12-17T00:00:00.000Z,
+  "to": 2017-12-18T00:00:00.000Z,
+}
+`;
+
+exports[`Date helpers should get relative dates 3`] = `
+Object {
+  "from": 2017-12-11T00:00:00.000Z,
+  "to": 2017-12-18T00:00:00.000Z,
+}
+`;
+
+exports[`Date helpers should get relative dates 4`] = `
+Object {
+  "from": 2017-11-18T00:00:00.000Z,
+  "to": 2017-12-18T00:00:00.000Z,
+}
+`;
+
+exports[`Date helpers should get relative dates 5`] = `
+Object {
+  "from": 2017-09-18T23:00:00.000Z,
+  "to": 2017-12-18T00:00:00.000Z,
+}
+`;
+
+exports[`Date helpers should get relative dates 6`] = `Object {}`;

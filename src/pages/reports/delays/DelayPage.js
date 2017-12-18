@@ -39,7 +39,7 @@ export class DelayPage extends Component {
   }
 
   handleRefresh = (options) => {
-    this.props.loadDelayMetrics(options)
+    return this.props.loadDelayMetrics(options)
       .then(() => this.updateLink())
       .then(() => this.props.loadDelayReasonsByDomain(options))
       .catch((err) => {
@@ -113,7 +113,6 @@ export class DelayPage extends Component {
   }
 }
 
-// TODO: get aggregate counts
 const mapStateToProps = (state) => {
   const tableLoading = state.delayReport.aggregatesLoading || state.delayReport.reasonsLoading;
   const aggregates = state.delayReport.aggregates;

@@ -3,14 +3,7 @@
 exports[`Action Creator: Bounce Report should dispatch a chart refresh action 1`] = `
 Array [
   Array [
-    Object {
-      "payload": Object {
-        "from": "2017-02-14T12:02",
-        "metrics": undefined,
-        "to": "2017-05-21T19:05",
-      },
-      "type": "REFRESH_REPORT_RANGE",
-    },
+    undefined,
   ],
   Array [
     Array [
@@ -77,6 +70,21 @@ Array [
       },
       "type": "REFRESH_BOUNCE_TABLE",
     },
+  ],
+]
+`;
+
+exports[`Action Creator: Bounce Report should not refresh chart nor update bounce classifications if 0 bounces 1`] = `
+Array [
+  Array [
+    undefined,
+  ],
+  Array [
+    Array [
+      Object {
+        "foo": "bar",
+      },
+    ],
   ],
 ]
 `;
