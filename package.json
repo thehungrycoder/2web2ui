@@ -13,8 +13,8 @@
     "test": "node scripts/test.js --env=jsdom --config=./jest.config.json",
     "test-coverage": "npm test -- --coverage",
     "test-ci": "CI=true npm test -- --coverage",
-    "lint": "eslint src",
-    "lintfix": "eslint src --fix",
+    "lint": "node node_modules/eslint/bin/eslint.js src",
+    "lintfix": "npm run lint -- --fix",
     "precommit": "lint-staged"
   },
   "lint-staged": {
