@@ -20,6 +20,7 @@ exports[`Page: Dashboard tests should correctly render page when user is not ver
       }
     }
     accountAgeInWeeks={0}
+    checkSuppression={[Function]}
     currentUser={
       Object {
         "email_verfied": false,
@@ -28,7 +29,6 @@ exports[`Page: Dashboard tests should correctly render page when user is not ver
     hasSuppressions={true}
     listApiKeys={[Function]}
     listSendingDomains={[Function]}
-    listSuppressions={[Function]}
   />
 </Page>
 `;
@@ -49,6 +49,7 @@ exports[`Page: Dashboard tests should display upgrade CTA when account is free a
       }
     }
     accountAgeInWeeks={0}
+    checkSuppression={[Function]}
     currentUser={
       Object {
         "email_verified": true,
@@ -57,7 +58,6 @@ exports[`Page: Dashboard tests should display upgrade CTA when account is free a
     hasSuppressions={true}
     listApiKeys={[Function]}
     listSendingDomains={[Function]}
-    listSuppressions={[Function]}
   />
 </Page>
 `;
@@ -79,7 +79,7 @@ exports[`Page: Dashboard tests should render import suppression list when 0 supp
         rel="noopener noreferrer"
         target="_blank"
       >
-        import your suppressions
+        Import your suppressions
       </a>
       .
     </p>
@@ -94,6 +94,7 @@ exports[`Page: Dashboard tests should render import suppression list when 0 supp
       }
     }
     accountAgeInWeeks={40}
+    checkSuppression={[Function]}
     currentUser={
       Object {
         "email_verified": true,
@@ -102,7 +103,6 @@ exports[`Page: Dashboard tests should render import suppression list when 0 supp
     hasSuppressions={false}
     listApiKeys={[Function]}
     listSendingDomains={[Function]}
-    listSuppressions={[Function]}
   />
 </Page>
 `;
@@ -123,6 +123,7 @@ exports[`Page: Dashboard tests should render page correctly with defaults 1`] = 
       }
     }
     accountAgeInWeeks={0}
+    checkSuppression={[Function]}
     currentUser={
       Object {
         "email_verified": true,
@@ -131,7 +132,6 @@ exports[`Page: Dashboard tests should render page correctly with defaults 1`] = 
     hasSuppressions={true}
     listApiKeys={[Function]}
     listSendingDomains={[Function]}
-    listSuppressions={[Function]}
   />
 </Page>
 `;

@@ -37,7 +37,7 @@ describe('metrics helpers', () => {
 
   it('should getPrecision from dates', () => {
     const from = moment('2016-12-18T00:00').utc();
-    let to = moment('2016-12-18T00:30').utc();
+    const to = moment('2016-12-18T00:30').utc();
 
     expect(metricsHelpers.getPrecision(from, to)).toEqual('1min');
 

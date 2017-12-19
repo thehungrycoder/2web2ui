@@ -3,7 +3,6 @@ import * as metrics from 'src/actions/metrics';
 import { listTemplates } from 'src/actions/templates';
 import { list as listSubaccounts } from 'src/actions/subaccounts';
 import { list as listSendingDomains } from 'src/actions/sendingDomains';
-import _ from 'lodash';
 
 jest.mock('src/helpers/metrics');
 jest.mock('src/actions/metrics');

@@ -1,4 +1,3 @@
-import moment from 'moment';
 import * as dateHelpers from '../date';
 
 describe('Date helpers', () => {

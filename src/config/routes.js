@@ -9,6 +9,7 @@ import {
   RegisterPage,
   reports,
   recipientLists,
+  suppressions,
   subaccounts,
   templates,
   trackingDomains,
@@ -218,7 +219,7 @@ const routes = [
   },
   {
     path: '/lists/suppressions',
-    component: ComingSoonPage,
+    component: suppressions.ListPage,
     condition: hasGrants('suppression_lists/manage'),
     layout: App
   },

@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import { RegisterUserForm }  from '../RegisterUserForm';
+import { RegisterUserForm } from '../RegisterUserForm';
 
 // actions
 const handleSubmit = jest.fn();

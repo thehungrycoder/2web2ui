@@ -1,8 +1,7 @@
 import React from 'react';
 import { DelayPage } from '../DelayPage';
-import { shallow, mount, render } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import * as reportHelpers from 'src/helpers/reports';
-import _ from 'lodash';
 
 jest.mock('src/helpers/reports');
 
@@ -23,16 +22,16 @@ describe('DelayPage: ', () => {
     totalAccepted: 1000,
     loadDelayReasonsByDomain: jest.fn(() => Promise.resolve()),
     refreshTypeaheadCache: jest.fn(() => Promise.resolve()),
-    location: { search: {} },
+    location: { search: {}},
     loadDelayMetrics: jest.fn(() => Promise.resolve()),
     showAlert: jest.fn(),
     history: { replace: jest.fn() }
   };
 
-  let wrapper
-    , spyFilterListFromSearch
-    , spyParseSearch
-    , spyGetShare;
+  let wrapper;
+  let spyFilterListFromSearch;
+  let spyParseSearch;
+  let spyGetShare;
 
   beforeEach(() => {
     spyFilterListFromSearch = reportHelpers.getFilterSearchOptions = jest.fn(() => []);
@@ -88,7 +87,7 @@ describe('DelayPage: ', () => {
     const snaps = [
       mount(rows[0]),
       mount(rows[1]),
-      mount(rows[3]),
+      mount(rows[3])
     ];
 
     expect(snaps).toMatchSnapshot();
@@ -99,12 +98,13 @@ describe('DelayPage: ', () => {
     const rows = wrapper.instance().getRowData({ reason: 'bad delay', count_delayed: 1, count_delayed_first: 10, domain: 'gmail.com' });
     const link = mount(rows[1]);
     link.find('UnstyledLink').simulate('click');
-    expect(props.addFilter).toHaveBeenCalledWith({ type: 'Recipient Domain', value: 'gmail.com'});
+    expect(props.addFilter).toHaveBeenCalledWith({ type: 'Recipient Domain', value: 'gmail.com' });
   });
 
   it('should show modal toggle', () => {
     const stateSpy = jest.spyOn(wrapper.instance(), 'setState');
     wrapper.find('Connect').simulate('share');
+    expect(stateSpy).toHaveBeenCalled();
   });
 
 });

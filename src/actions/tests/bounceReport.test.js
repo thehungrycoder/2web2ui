@@ -15,7 +15,6 @@ describe('Action Creator: Bounce Report', () => {
   let dispatchMock;
   let getStateMock;
   let fetchSpy;
-  let getRelDatesSpy;
 
   beforeEach(() => {
     const metrics = 'count_bounce';
@@ -39,7 +38,7 @@ describe('Action Creator: Bounce Report', () => {
   });
 
   it('should not refresh chart nor update bounce classifications if 0 bounces', async() => {
-    metricsActions.fetchDeliverability = jest.fn(() => [{ foo: 'bar'}]);
+    metricsActions.fetchDeliverability = jest.fn(() => [{ foo: 'bar' }]);
     const thunk = bounceReport.refreshBounceChartMetrics();
     await thunk(dispatchMock, getStateMock);
     expect(dispatchMock.mock.calls).toMatchSnapshot();

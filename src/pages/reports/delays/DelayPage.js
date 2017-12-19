@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { TableCollection } from 'src/components';
+import { TableCollection, Empty } from 'src/components';
 import { addFilter, refreshTypeaheadCache } from 'src/actions/reportFilters';
 import { loadDelayReasonsByDomain, loadDelayMetrics } from 'src/actions/delayReport';
 import { parseSearch, getFilterSearchOptions, getShareLink } from 'src/helpers/reports';
 import { Percent } from 'src/components/formatters';
 import { showAlert } from 'src/actions/globalAlert';
 import { Page, Panel, UnstyledLink } from '@sparkpost/matchbox';
-import Empty from '../components/Empty';
 import ShareModal from '../components/ShareModal';
 import Filters from '../components/Filters';
 import ReasonCell from '../components/ReasonCell';
@@ -38,14 +37,12 @@ export class DelayPage extends Component {
     return options;
   }
 
-  handleRefresh = (options) => {
-    return this.props.loadDelayMetrics(options)
+  handleRefresh = (options) => this.props.loadDelayMetrics(options)
       .then(() => this.updateLink())
       .then(() => this.props.loadDelayReasonsByDomain(options))
       .catch((err) => {
         this.props.showAlert({ type: 'error', message: 'Unable to refresh delay report.', details: err.message });
       });
-  }
 
   handleModalToggle = (modal) => {
     this.setState({ modal: !this.state.modal });
