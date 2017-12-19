@@ -32,6 +32,14 @@ describe('contentRequired', () => {
   });
 });
 
+describe('substitution', () => {
+  it('should handle substitution values', () => {
+    expect(validation.substitution('{{ sub_content }}')).toEqual(undefined);
+    expect(validation.substitution('{{ not valid }}')).toEqual('Substitution syntax error');
+    expect(validation.substitution('{{ not }} valid')).toEqual('Substitution syntax error');
+  });
+});
+
 describe('emailOrSubstitution', () => {
   it('should handle invalid email', () => {
     expect(validation.emailOrSubstitution('not an email')).toEqual('Invalid email or substitution value');
