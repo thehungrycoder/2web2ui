@@ -199,6 +199,12 @@ const routes = [
     layout: App
   },
   {
+    path: '/templates/preview/:id/published',
+    component: templates.PreviewPage,
+    condition: hasGrants('templates/modify'),
+    layout: App
+  },
+  {
     path: '/lists/recipient-lists',
     component: recipientLists.ListPage,
     condition: hasGrants('recipient_lists/manage'),
