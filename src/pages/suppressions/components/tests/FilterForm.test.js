@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import { Results } from '../FilterForm';
+import { FilterForm } from '../FilterForm';
 
 let props;
 
@@ -16,7 +16,7 @@ beforeEach(() => {
 
 describe('FilterForm', () => {
   it('renders correctly', () => {
-    wrapper = shallow(<Results {...props} />);
+    wrapper = shallow(<FilterForm {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 
