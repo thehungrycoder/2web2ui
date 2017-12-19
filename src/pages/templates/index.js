@@ -1,11 +1,13 @@
-import ListPage from './ListPage';
-import EditPage from './EditPage';
-import PublishedPage from './PublishedPage';
 import CreatePage from './CreatePage';
+import EditPage from './EditPage';
+import ListPage from './ListPage';
+import PreviewPage from './PreviewPage';
+import PublishedPage from './PublishedPage';
 
 export default {
-  ListPage,
   CreatePage,
   EditPage,
+  ListPage,
+  PreviewPage,
   PublishedPage
 };

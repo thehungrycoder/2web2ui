@@ -194,7 +194,7 @@ const routes = [
   },
   {
     path: '/templates/preview/:id',
-    component: ComingSoonPage,
+    component: templates.PreviewPage,
     condition: hasGrants('templates/modify'),
     layout: App
   },
