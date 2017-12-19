@@ -44,6 +44,18 @@ describe('emailOrSubstitution', () => {
   it('should handle substitution values', () => {
     expect(validation.emailOrSubstitution('{{a}}@{{b}}')).toEqual(undefined);
   });
+
+  it('should handle domain substitution value', () => {
+    expect(validation.emailOrSubstitution('email@{{b}}')).toEqual(undefined);
+  });
+
+  it('should handle local substitution value', () => {
+    expect(validation.emailOrSubstitution('{{a}}@domain.com')).toEqual(undefined);
+  });
+
+  it('should handle whole substitution value', () => {
+    expect(validation.emailOrSubstitution('{{ab}}')).toEqual(undefined);
+  });
 });
 
 describe('idSyntax', () => {

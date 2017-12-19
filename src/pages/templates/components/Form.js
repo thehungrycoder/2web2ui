@@ -49,11 +49,13 @@ export class Form extends Component {
     const { domains } = this.props;
     const parts = value.split('@');
 
-    const validSandbox = value === `${config.sandbox.localpart}@${config.sandbox.domain}`;
-    const validDomain = parts[1] && (domains.map(({ domain }) => domain).includes(parts[1]) || !substitution(parts[1]));
-    const validWholeSubstitution = !substitution(value);
+    if (parts.length > 1) {
+      const validSandbox = value === `${config.sandbox.localpart}@${config.sandbox.domain}`;
+      const validDomain = parts[1] && (domains.map(({ domain }) => domain).includes(parts[1]) || !substitution(parts[1]));
+      return validSandbox || validDomain ? undefined : 'Must use a verified sending domain';
+    }
 
-    return validWholeSubstitution || validSandbox || validDomain ? undefined : 'Must use a verified sending domain';
+    return undefined;
   }
 
   render() {

@@ -75,10 +75,4 @@ describe('Template Form', () => {
     const result = wrapper.instance().verifiedDomain('email@{{domain}}');
     expect(result).toEqual(undefined);
   });
-
-  it('should validate whole substituted value', () => {
-    wrapper.setProps({ domains: [{ domain: 'valid.com' }]});
-    const result = wrapper.instance().verifiedDomain('{{sub}}');
-    expect(result).toEqual(undefined);
-  });
 });
