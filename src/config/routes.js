@@ -1,4 +1,4 @@
-/* eslint-disable */
+/* eslint-disable max-lines */
 import {
   apiKeys,
   AuthPage,
@@ -18,17 +18,15 @@ import {
   webhooks,
   ipPools,
   ComingSoonPage,
-  PageNotFound,
+  PageNotFound
 } from 'src/pages';
 
 import {
   hasGrants,
-  configFlag,
   composeConditions
 } from 'src/helpers/conditions';
 
 import App from 'src/components/layout/App';
-import Form from 'src/components/layout/Form';
 
 /**
  *  Angular UI Grant List:
@@ -53,7 +51,7 @@ import Form from 'src/components/layout/Form';
     ipPools: ['ip_pools/manage']
  */
 
- /**
+/**
   * Reporting user grants:
   * metrics/view
   * message_events/view
@@ -79,7 +77,7 @@ const routes = [
     public: true,
     component: AuthPage
   },
-   {
+  {
     path: '/sso',
     public: true,
     component: SSOPage
