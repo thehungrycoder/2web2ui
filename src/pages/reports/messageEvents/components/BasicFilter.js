@@ -77,7 +77,7 @@ export class BasicFilter extends Component {
     const invalids = this.getInvalidAddresses(this.parseAddresses(value));
 
     if (invalids.length) {
-      return `${invalids.join(',')} ${invalids.length > 1 ? 'are' : 'is'} not valid email ${invalids.length > 1 ? 'addresess' : 'address'}`;
+      return `${invalids.join(', ')} ${invalids.length > 1 ? 'are' : 'is'} not valid email ${invalids.length > 1 ? 'adresses' : 'address'}`;
     }
   }
 
@@ -90,7 +90,7 @@ export class BasicFilter extends Component {
         <Grid.Column xs={12} md={6}>
           <Field
             name="recipients"
-            onBlur={(e) => this.handleRecipientsChange(e)}
+            onBlur={this.handleRecipientsChange}
             component={TextFieldWrapper}
             title="Recipient Email(s)"
             validate={this.emailValidator}
