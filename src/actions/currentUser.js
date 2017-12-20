@@ -37,3 +37,10 @@ export function getGrants({ beta = false, role } = {}) {
     });
 
 }
+
+export function update(data) {
+  return (dispatch) => dispatch({
+    type: 'UPDATE_CURRENT_USER',
+    payload: data
+  });
+}

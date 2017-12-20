@@ -10,6 +10,9 @@ export default (state = initialState, action) => {
     case 'GET_GRANTS_SUCCESS':
       return { ...state, grants: action.payload };
 
+    case 'UPDATE_CURRENT_USER':
+      return { ...state, ...action.payload };
+
     default:
       return state;
   }
