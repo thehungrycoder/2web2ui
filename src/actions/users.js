@@ -27,7 +27,7 @@ export function deleteUser(username) {
   return (dispatch) => dispatch(sparkpostApiRequest(action))
     .then(() => dispatch(showAlert({
       type: 'success',
-      message: `Successfully deleted ${username}`
+      message: `Deleted ${username}`
     })))
     .catch(() => dispatch(showAlert({
       type: 'error',

@@ -11,14 +11,30 @@ import RegisterUserForm from './RegisterUserForm';
 import styles from './RegisterPage.module.scss';
 
 import { registerUser, checkInviteToken } from 'src/actions/users';
+import { authenticate, logout } from 'src/actions/auth';
 
 export class RegisterPage extends Component {
 
-  onSubmit = (values) => this.props.registerUser(this.props.token, values)
-    .then(() => <Redirect to='/dashboard' />)
-    .catch((error) => {
-      ErrorTracker.report('register-user', error);
-    });
+  onSubmit = (values) => {
+    const { username, password } = values;
+    return this.props.registerUser(this.props.token, values)
+      .then(() => {
+        this.props.logout(); // log out of current account
+        this.props.authenticate(username, password)
+          .then(() => {
+            this.props.history.push('/dashboard');
+          })
+          .catch((error) => {
+            // user was created but auth failed, redirect to /auth
+            this.props.history.push('/auth');
+            ErrorTracker.report('sign-in', error);
+          });
+      })
+      .catch((error) => {
+        ErrorTracker.report('register-user', error);
+      });
+  }
+
 
   componentDidMount() {
     this.props.checkInviteToken(this.props.token);
@@ -84,4 +100,4 @@ function mapStateToProps({ auth, users }, props) {
   };
 }
 
-export default withRouter(connect(mapStateToProps, { registerUser, checkInviteToken })(RegisterPage));
+export default withRouter(connect(mapStateToProps, { registerUser, checkInviteToken, logout, authenticate })(RegisterPage));
