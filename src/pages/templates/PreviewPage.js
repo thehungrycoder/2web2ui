@@ -33,7 +33,8 @@ export class PreviewPage extends Component {
         Component: Link,
         content: 'Edit Template',
         to: this.props.editTemplatePath
-      }
+      },
+      title: `${this.props.template.name} (${this.props.isPublished ? 'Published' : 'Draft'})`
     };
 
     return (

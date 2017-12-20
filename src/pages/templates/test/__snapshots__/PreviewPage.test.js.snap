@@ -10,6 +10,7 @@ exports[`PreviewPage renders draft template 1`] = `
     }
   }
   empty={Object {}}
+  title="Test Draft (Draft)"
 />
 `;
 
@@ -25,5 +26,6 @@ exports[`PreviewPage renders published template 1`] = `
     }
   }
   empty={Object {}}
+  title="Test Published (Draft)"
 />
 `;
