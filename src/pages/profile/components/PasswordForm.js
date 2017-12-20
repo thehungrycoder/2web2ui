@@ -19,6 +19,7 @@ export class PasswordForm extends Component {
       <form onSubmit={handleSubmit}>
         <Field
           type="password"
+          autoComplete="current-password"
           name='currentPassword'
           component={TextFieldWrapper}
           id='currentPassword'
@@ -28,6 +29,7 @@ export class PasswordForm extends Component {
 
         <Field
           type="password"
+          autoComplete="new-password"
           name='newPassword'
           id='newPassword'
           label='New Password'

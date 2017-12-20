@@ -3,6 +3,7 @@
 exports[`Component: NameForm should render correctly 1`] = `
 <form>
   <Field
+    autoComplete="given-name"
     component={[Function]}
     id="firstName"
     label="First Name"
@@ -10,6 +11,7 @@ exports[`Component: NameForm should render correctly 1`] = `
     validate={[Function]}
   />
   <Field
+    autoComplete="family-name"
     component={[Function]}
     id="lastName"
     label="Last Name"
