@@ -14,6 +14,7 @@ import { LabelledValue } from 'src/components';
 
 export class ProfilePage extends Component {
   updateProfile = (values) => {
+    const { showAlert } = this.props;
     const { username } = this.props.currentUser;
     const data = { first_name: values.firstName, last_name: values.lastName };
 
