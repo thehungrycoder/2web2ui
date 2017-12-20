@@ -4,7 +4,7 @@ import _ from 'lodash';
 const ID_ALLOWED_CHARS = 'a-z0-9_-';
 
 function substitution(value) {
-  return /{{\s*(\w|\.)+\s*}}/.test(value) ? undefined : 'Substitution syntax error';
+  return /^{{\s*(\w|\.)+\s*}}$/.test(value) ? undefined : 'Substitution syntax error';
 }
 
 function idSyntax(value) {
@@ -17,10 +17,14 @@ function emailOrSubstitution(value) {
   }
 
   const parts = value.split('@');
-  const validLocal = !emailLocal(parts[0]);
-  const validDomain = !substitution(parts[1]) || !domain(parts[1]);
 
-  return !substitution(value) || !email(value) || (validLocal && validDomain) ? undefined : 'Invalid email or substitution value';
+  if (parts.length > 1) {
+    const validLocal = !substitution(parts[0]) || !emailLocal(parts[0]);
+    const validDomain = !substitution(parts[1]) || !domain(parts[1]);
+    return validLocal && validDomain ? undefined : 'Invalid email or substitution value';
+  }
+
+  return !substitution(value) || !email(value) ? undefined : 'Invalid email or substitution value';
 }
 
 function contentRequired(value, allValues) {
@@ -39,17 +43,11 @@ function validJson(value, { testData }) {
   return undefined;
 }
 
-
-function verifiedDomain(value) {
-  return undefined; // TODO
-}
-
 export {
   ID_ALLOWED_CHARS,
   idSyntax,
   substitution,
   emailOrSubstitution,
   contentRequired,
-  validJson,
-  verifiedDomain
+  validJson
 };
