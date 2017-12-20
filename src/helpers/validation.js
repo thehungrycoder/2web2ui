@@ -32,3 +32,13 @@ export const minNumber = _.memoize(function minNumber(min) {
 export const maxNumber = _.memoize(function maxNumber(max) {
   return (value) => (value > max) ? `Must be less than ${max}` : undefined;
 });
+
+export const maxFileSize = _.memoize(function maxFilesSize(maxSize) {
+  return (file) => {
+    if (!file) {
+      return undefined;
+    }
+    return (file.size < maxSize) ? undefined : `Please keep file size under ${maxSize} bytes`;
+  };
+});
+
