@@ -46,7 +46,7 @@ const sources = [
   }
 ];
 
-export class Results extends Component {
+export class FilterForm extends Component {
   constructor(props) {
     super(props);
 
@@ -141,4 +141,4 @@ const mapStateToProps = ({ reportFilters }) => ({
   reportFilters
 });
 
-export default connect(mapStateToProps)(reduxForm(formOptions)(Results));
+export default connect(mapStateToProps)(reduxForm(formOptions)(FilterForm));

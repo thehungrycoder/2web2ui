@@ -1,0 +1,31 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.Typeahead {
+  margin: 0 0 spacing();
+  position: relative;
+}
+
+.List {
+  background: color(gray, 10);
+  border-radius: border-radius();
+  border: 1px solid color(gray, 7);
+  box-shadow: shadow(deeper);
+  left: 0;
+  margin-top: 3px;
+  max-height: 20rem;
+  opacity: 0;
+  overflow-y: scroll;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  transform: scale(0.96);
+  transition: 0.06s ease-out;
+  z-index: 1;
+
+  &.open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: scale(1);
+  }
+}

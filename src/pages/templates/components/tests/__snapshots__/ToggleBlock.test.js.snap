@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ToggleBlock should render 1`] = `
+<div>
+  <Grid>
+    <Grid.Column
+      xs={8}
+    >
+      <label>
+        label
+      </label>
+    </Grid.Column>
+    <Grid.Column
+      xs={4}
+    >
+      <div>
+        <Toggle
+          id="name"
+          name="name"
+        />
+      </div>
+    </Grid.Column>
+  </Grid>
+  <p>
+    some help
+  </p>
+</div>
+`;

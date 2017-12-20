@@ -14,7 +14,7 @@ import { LabelledValue } from 'src/components';
 export class ProfilePage extends Component {
   updateProfile = (values) => {
     const { username } = this.props.currentUser;
-    return this.props.updateUser(username, values)
+    return this.props.updateUser(username, { first_name: values.firstName, last_name: values.lastName })
       .catch(() => {
         showAlert({ type: 'error', message: 'Unable to update profile' });
       });
