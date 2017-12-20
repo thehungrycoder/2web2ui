@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import { formatBytes } from 'src/helpers/formatting';
 import { emailRegex, emailLocalRegex, domainRegex } from './regex';
 
 export function required(value) {
@@ -22,7 +23,7 @@ export const maxLength = _.memoize(function maxLength(length) {
 });
 
 export const minLength = _.memoize(function minLength(length) {
-  return (value) => (value && value.length < length) ? `Must be at least ${length} characters` : undefined;
+  return (value) => (typeof value !== 'undefined' && value.length < length) ? `Must be at least ${length} characters` : undefined;
 });
 
 export const minNumber = _.memoize(function minNumber(min) {
@@ -38,7 +39,7 @@ export const maxFileSize = _.memoize(function maxFilesSize(maxSize) {
     if (!file) {
       return undefined;
     }
-    return (file.size < maxSize) ? undefined : `Please keep file size under ${maxSize} bytes`;
+    return (file.size < maxSize) ? undefined : `Please keep file size under ${formatBytes(maxSize)}`;
   };
 });
 
