@@ -16,11 +16,10 @@ export class ProfilePage extends Component {
   updateProfile = (values) => {
     const { username } = this.props.currentUser;
     const data = { first_name: values.firstName, last_name: values.lastName };
+
     return this.props.updateUser(username, data)
       .then(() => this.props.updateCurrentUser(data))
-      .catch(() => {
-        showAlert({ type: 'error', message: 'Unable to update profile' });
-      });
+      .catch((err) => showAlert({ type: 'error', message: 'Unable to update profile' }));
   }
 
   updatePassword = (values) => {
