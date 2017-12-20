@@ -39,21 +39,19 @@ export class BasicFilter extends Component {
   }
 
   handleRecipientsChange = (event) => {
-    let value = _.trim(event.target.value, ' ,');
+    let value = _.trim(event.target.value, ' ,'); //strip whitespace and commas
 
-    if (!value) {
-      return;
+    if (value) {
+      const invalids = this.getInvalidAddresses(value);
+      if (invalids.length) {
+        return;
+      }
+
+      value = _.split(value, ',');
+      value = _.map(value, (value) => _.trim(value)).join(',');
     }
 
-    const invalids = this.getInvalidAddresses(value);
-    if (invalids.length) {
-      return;
-    }
-
-    value = _.split(value, ',');
-    value = _.map(value, (value) => _.trim(value));
-
-    this.setState({ recipients: value.join(',') }, this.refresh);
+    this.setState({ recipients: value }, this.refresh);
   }
 
   handleDateSelection = (options) => {
@@ -72,7 +70,7 @@ export class BasicFilter extends Component {
   }
 
   emailValidator = (value) => {
-    const invalids = this.getInvalidAddresses(_.trim(value, ' ,'));
+    const invalids = this.getInvalidAddresses(_.trim(value, ' ,')); //strip whitespace and commas
 
     if (invalids.length) {
       return `${invalids.join(',')} ${invalids.length > 1 ? 'are' : 'is'} not valid email ${invalids.length > 1 ? 'addresess' : 'address'}`;
