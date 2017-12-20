@@ -13,11 +13,11 @@ const SubaccountTag = ({ id, all, master }) => {
     content = 'Master account';
   }
 
-  return <Tag><Icon name='Link' /> {content}</Tag>;
+  return <Tag><Icon name='Link' size={15} /> {content}</Tag>;
 };
 
 SubaccountTag.propTypes = {
-  id: PropTypes.bool,
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   all: PropTypes.bool,
   master: PropTypes.bool
 };

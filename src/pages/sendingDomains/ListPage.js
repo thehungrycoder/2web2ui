@@ -1,77 +1,93 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { list as listDomains } from 'src/actions/sendingDomains';
-import { Loading, TableCollection, SubaccountTag, StatusTag } from 'src/components';
-
-import { Page, Button, Tag } from '@sparkpost/matchbox';
-
+import { hasSubaccounts } from 'src/selectors/subaccounts';
+import { Loading, TableCollection, SubaccountTag, StatusTag, ApiErrorBanner } from 'src/components';
+import { Page, Tooltip, Icon, UnstyledLink } from '@sparkpost/matchbox';
+import ReadyFor from './components/ReadyFor';
+import RemoveBanner from './components/RemoveBanner';
 import { resolveStatus, resolveReadyFor } from 'src/helpers/domains';
-import { snakeToFriendly } from 'src/helpers/string';
 
-import _ from 'lodash';
+import styles from './ListPage.module.scss';
 
-// import styles from './ListPage.module.scss';
+const tooltipContent = 'Domains can be ready for sending (From), sending with DKIM signing, and bounce (Return Path) usage.';
 
 class ListPage extends Component {
   componentDidMount() {
     this.props.listDomains();
   }
 
-  renderCollection() {
+  getColumns = () => {
+    const { hasSubaccounts } = this.props;
+
+    const tooltip = <Tooltip content={tooltipContent}>Status <Icon name='Help' size={15} className={styles.StatusTooltip}/></Tooltip>;
+
     const columns = [
       { label: 'Domain', width: '30%' },
-      { label: 'Ready For', width: '40%' },
-      { label: 'Subaccount', width: '20%' },
-      null
+      { label: tooltip, width: '40%' }
     ];
 
-    const getRowData = (row) => {
-      const { domain, is_default_bounce_domain, shared_with_subaccounts, subaccount_id } = row;
-      const sub = '';
+    if (hasSubaccounts) {
+      columns.push({ label: 'Subaccount', width: '20%' });
+    }
 
-      const statusCell = () => {
-        const readyFor = resolveReadyFor(row.status);
-        const status = resolveStatus(row.status);
+    return columns;
+  }
 
-        if (status !== 'verified') {
-          return <StatusTag unverified={status === 'unverified'} blocked={status === 'blocked'} pending={status === 'pending'}/>;
-        }
-        // className={styles.Red}
-        // className={styles.Status}
-        return (
-          <span>
-            <small>Ready For:</small>
-            { _.keys(readyFor).map((key) => {
-              if (key === 'bounce' && readyFor[key] && is_default_bounce_domain) {
-                return <Tag orange key={key}>Bounce (Default)</Tag>;
-              }
-              return readyFor[key] ? <Tag key={key}>{snakeToFriendly(key)}</Tag> : null;
-            })}
-          </span>
-        );
-      };
+  getStatusCell = ({ status, is_default_bounce_domain }) => {
+    const domainStatus = resolveStatus(status);
 
-      const subaccount = subaccount_id || shared_with_subaccounts
-        ? <SubaccountTag all={shared_with_subaccounts} id={subaccount_id} master={subaccount_id === 0}/>
+    if (domainStatus !== 'verified') {
+      return <StatusTag status={domainStatus} />;
+    }
+
+    return <ReadyFor {...resolveReadyFor(status)} bounceDefault={is_default_bounce_domain} />;
+  }
+
+  getRowData = (row) => {
+    const { hasSubaccounts } = this.props;
+    const { domain, shared_with_subaccounts, subaccount_id } = row;
+
+    const rowData = [
+      <UnstyledLink Component={Link} to={`/account/sending-domains/${domain}/edit`}>{domain}</UnstyledLink>,
+      this.getStatusCell(row)
+    ];
+
+    if (hasSubaccounts) {
+      const subaccountCol = subaccount_id || shared_with_subaccounts
+        ? <SubaccountTag all={shared_with_subaccounts} id={subaccount_id} />
         : null;
 
-      return [
-        <Fragment>{ domain }</Fragment>,
-        <Fragment>{ statusCell() }</Fragment>,
-        <Fragment>{subaccount}</Fragment>,
-        <Button disabled size='small'>View Details</Button>
-      ];
-    };
+      rowData.push(subaccountCol);
+    }
 
+    return rowData;
+  }
+
+  renderCollection() {
     return (
       <TableCollection
-        columns={columns}
-        getRowData={getRowData}
+        columns={this.getColumns()}
+        getRowData={this.getRowData}
         pagination={true}
         rows={this.props.domains}
-        filterBox={{ show: false }}
+        filterBox={{
+          show: true,
+          itemToStringKeys: ['domain'],
+          exampleModifiers: ['domain', 'subaccount_id']
+        }}
+      />
+    );
+  }
+
+  renderError() {
+    return (
+      <ApiErrorBanner
+        errorDetails={this.props.error.message}
+        message="Sorry, we seem to have had some trouble loading your domains."
+        reload={this.props.listDomains}
       />
     );
   }
@@ -96,23 +112,26 @@ class ListPage extends Component {
         empty={{
           show: domains.length === 0,
           title: 'Manage Your Domains',
-          image: 'Users',
+          content: <p>Create and configure your sending and bounce domains.</p>,
+          image: 'Setup',
           secondaryAction: {
             content: 'Learn more',
-            to: 'https://developers.sparkpost.com/api/subaccounts.html',
+            to: 'https://www.sparkpost.com/docs/getting-started/setting-up-domains/',
             external: true
           }
         }}>
-        { error ? 'error' : this.renderCollection() }
+        {domains.length && <RemoveBanner />}
+        {error ? this.renderError() : this.renderCollection()}
       </Page>
     );
   }
 }
 
-const mapStateToProps = ({ sendingDomains }) => ({
-  error: sendingDomains.error,
-  loading: sendingDomains.listLoading,
-  domains: sendingDomains.list
+const mapStateToProps = (state) => ({
+  hasSubaccounts: hasSubaccounts(state),
+  error: state.sendingDomains.error,
+  loading: state.sendingDomains.listLoading,
+  domains: state.sendingDomains.list
 });
 
 export default connect(mapStateToProps, { listDomains })(ListPage);

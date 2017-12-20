@@ -2,32 +2,38 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Tag, Icon } from '@sparkpost/matchbox';
 
-const StatusTag = ({ unverified, blocked, pending }) => {
+const StatusTag = ({ status }) => {
   let content = '';
   let icon = null;
+  let yellow = false;
 
-  if (unverified) {
-    content = 'Unverified';
-    <Icon name='Warning'/>;
+  if (status === 'verified') {
+    content = 'Verified';
   }
 
-  if (blocked) {
-    content = 'Blocked';
-    icon = <Icon name='Error'/>;
+  if (status === 'unverified') {
+    content = ' Unverified';
+    yellow = true;
+    icon = <Icon size={15} name='ErrorOutline'/>;
   }
 
-  if (pending) {
-    content = 'Pending';
-    icon = <Icon name='Clock'/>;
+  if (status === 'blocked') {
+    content = ' Blocked';
+    yellow = true;
+    icon = <Icon size={15} name='ErrorOutline'/>;
   }
 
-  return <Tag yellow={unverified || blocked}>{icon}{content}</Tag>;
+  if (status === 'pending') {
+    content = ' Pending';
+    icon = <Icon size={15} name='ClockOutline'/>;
+  }
+
+
+  return <Tag yellow={yellow}>{icon}{content}</Tag>;
 };
 
 StatusTag.propTypes = {
-  unverified: PropTypes.bool,
-  blocked: PropTypes.bool,
-  pending: PropTypes.bool
+  status: PropTypes.oneOf(['unverified', 'blocked', 'pending', 'verified'])
 };
 
 export default StatusTag;
