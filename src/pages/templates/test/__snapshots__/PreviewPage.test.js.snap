@@ -1,3 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`PreviewPage renders draft template 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "Edit Template",
+      "to": "/path/to/edit/template",
+    }
+  }
+  empty={Object {}}
+/>
+`;
+
 exports[`PreviewPage renders loading 1`] = `<Loading />`;
+
+exports[`PreviewPage renders published template 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "Edit Template",
+      "to": "/path/to/edit/template",
+    }
+  }
+  empty={Object {}}
+/>
+`;
