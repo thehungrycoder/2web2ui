@@ -1,0 +1,10 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.InputElement {
+  @include visually-hidden;
+}
+
+.Tag {
+  margin-left: spacing();
+}
+
