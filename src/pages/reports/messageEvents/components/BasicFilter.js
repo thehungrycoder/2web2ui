@@ -90,7 +90,7 @@ export class BasicFilter extends Component {
             name="recipients"
             onBlur={(e) => this.handleRecipientsChange(e)}
             component={TextFieldWrapper}
-            title="Email"
+            title="Recipient Email(s)"
             validate={this.emailValidator}
             placeholder='recipient1@domain.com, recipient2@domain.com'
           />

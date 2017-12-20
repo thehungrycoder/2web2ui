@@ -99,9 +99,7 @@ export class MessageEventsPage extends Component {
   }
 
   render() {
-    const { error, loading } = this.props;
-
-
+    const { error } = this.props;
 
     return (
       <Page title='Message Events'>

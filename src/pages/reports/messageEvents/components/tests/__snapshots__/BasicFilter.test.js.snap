@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BasicFilter renders correctly 1`] = `
+<Grid>
+  <Grid.Column
+    md={6}
+    xs={12}
+  >
+    <Connect(DateFilter)
+      refresh={[Function]}
+    />
+  </Grid.Column>
+  <Grid.Column
+    md={6}
+    xs={12}
+  >
+    <Field
+      component={[Function]}
+      name="recipients"
+      onBlur={[Function]}
+      placeholder="recipient1@domain.com, recipient2@domain.com"
+      title="Recipient Email(s)"
+      validate={[Function]}
+    />
+  </Grid.Column>
+</Grid>
+`;
