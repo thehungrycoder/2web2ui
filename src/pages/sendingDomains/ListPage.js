@@ -7,14 +7,14 @@ import { hasSubaccounts } from 'src/selectors/subaccounts';
 import { Loading, TableCollection, SubaccountTag, StatusTag, ApiErrorBanner } from 'src/components';
 import { Page, Tooltip, Icon, UnstyledLink } from '@sparkpost/matchbox';
 import ReadyFor from './components/ReadyFor';
-import RemoveBanner from './components/RemoveBanner';
+import UnverifiedWarningBanner from './components/UnverifiedWarningBanner';
 import { resolveStatus, resolveReadyFor } from 'src/helpers/domains';
 
 import styles from './ListPage.module.scss';
 
 const tooltipContent = 'Domains can be ready for sending (From), sending with DKIM signing, and bounce (Return Path) usage.';
 
-class ListPage extends Component {
+export class ListPage extends Component {
   componentDidMount() {
     this.props.listDomains();
   }
@@ -120,7 +120,7 @@ class ListPage extends Component {
             external: true
           }
         }}>
-        {domains.length && <RemoveBanner />}
+        {domains.length && !error && <UnverifiedWarningBanner />}
         {error ? this.renderError() : this.renderCollection()}
       </Page>
     );

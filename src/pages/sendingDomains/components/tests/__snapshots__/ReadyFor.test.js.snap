@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Ready For Component renders default bounce 1`] = `
+<span>
+  <small>
+    Ready For:
+  </small>
+  <Tag
+    orange={true}
+  >
+    Bounce (Default)
+  </Tag>
+</span>
+`;
+
+exports[`Ready For Component renders null if all options are false 1`] = `""`;
+
+exports[`Ready For Component renders sending and dkim correctly 1`] = `
+<span>
+  <small>
+    Ready For:
+  </small>
+  <Tag>
+    Sending
+  </Tag>
+  <Tag>
+    DKIM Signing
+  </Tag>
+</span>
+`;

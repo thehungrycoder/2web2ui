@@ -7,6 +7,10 @@ import styles from './ReadyFor.module.scss';
 const ReadyFor = ({ bounce, dkim, sending, bounceDefault }) => {
   let bounceMarkup = null;
 
+  if (!bounce && !dkim && !sending) {
+    return null;
+  }
+
   if (bounce) {
     bounceMarkup = bounceDefault
       ? <Tag orange>Bounce (Default)</Tag>
@@ -34,8 +38,6 @@ ReadyFor.propTypes = {
   sending: PropTypes.bool.isRequired,
   dkim: PropTypes.bool.isRequired,
   bounceDefault: PropTypes.bool
-  // sendingDefault: PropTypes.bool,
-  // dkimDefault: PropTypes.bool
 };
 
 export default ReadyFor;

@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Unverified Domain Warning Banner renders correctly 1`] = `
+<Banner
+  action={
+    Object {
+      "content": "Learn more about review requirements",
+      "external": true,
+      "to": "https://www.sparkpost.com/docs/getting-started/requirements-for-sending-domains/",
+    }
+  }
+  status="warning"
+  title="Unverified sending domains will be removed two weeks after creation."
+>
+  <p>
+    All domains will also need a clear web presence to pass verification review.
+  </p>
+</Banner>
+`;
