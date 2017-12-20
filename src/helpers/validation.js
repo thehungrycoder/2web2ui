@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { formatBytes } from 'src/helpers/formatting';
+import { formatBytes } from 'src/helpers/units';
 import { emailRegex, emailLocalRegex, domainRegex } from './regex';
 
 export function required(value) {

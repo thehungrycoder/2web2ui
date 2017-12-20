@@ -1,4 +1,9 @@
-import { roundToPlaces, formatNumber, formatMilliseconds, formatBytes } from 'src/helpers/formatting';
+import {
+  formatBytes,
+  formatMilliseconds,
+  formatNumber,
+  roundToPlaces
+} from 'src/helpers/units';
 
 export default {
   number: {
