@@ -24,31 +24,35 @@ export class BasicFilter extends Component {
     this.props.onSubmit(this.state);
   }
 
-  getInvalidAddresses = (addresses) => {
-    if (!addresses) {
+  parseAddresses = (value) => {
+    value = _.trim(value, ' ,'); //strip whitespace and commas
+    if (!value) {
       return [];
     }
-    const emails = addresses.split(',');
-    const invalids = _.filter(emails, (email) => {
-      email = _.trim(email);
 
-      email && emailValidator(email) !== undefined;
+    return value.split(',').map((address) => _.trim(address));
+  }
+
+  getInvalidAddresses = (addresses) => {
+    const invalids = _.filter(addresses, (address) => {
+      address = _.trim(address);
+
+      return address && emailValidator(address) !== undefined;
     });
 
     return invalids;
   }
 
   handleRecipientsChange = (event) => {
-    let value = _.trim(event.target.value, ' ,'); //strip whitespace and commas
+    let value = event.target.value;
+    const addresses = this.parseAddresses(value);
+    const invalids = this.getInvalidAddresses(addresses);
+    if (invalids.length) {
+      return;
+    }
 
-    if (value) {
-      const invalids = this.getInvalidAddresses(value);
-      if (invalids.length) {
-        return;
-      }
-
-      value = _.split(value, ',');
-      value = _.map(value, (value) => _.trim(value)).join(',');
+    if (addresses.length) {
+      value = addresses.join(',');
     }
 
     this.setState({ recipients: value }, this.refresh);
@@ -70,7 +74,7 @@ export class BasicFilter extends Component {
   }
 
   emailValidator = (value) => {
-    const invalids = this.getInvalidAddresses(_.trim(value, ' ,')); //strip whitespace and commas
+    const invalids = this.getInvalidAddresses(this.parseAddresses(value));
 
     if (invalids.length) {
       return `${invalids.join(',')} ${invalids.length > 1 ? 'are' : 'is'} not valid email ${invalids.length > 1 ? 'addresess' : 'address'}`;
