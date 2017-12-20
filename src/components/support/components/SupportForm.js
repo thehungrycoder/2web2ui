@@ -6,9 +6,15 @@ import { Button, Panel } from '@sparkpost/matchbox';
 
 import { TextFieldWrapper } from 'src/components';
 
-import { required, minLength } from 'src/helpers/validation';
+import { required, minLength, maxFileSize } from 'src/helpers/validation';
+
+import FileInput from './FileInput';
+
+import styles from './SupportForm.module.scss';
 
 const formName = 'supportForm';
+
+const fileSizeLimit = 1024;
 
 export class SupportForm extends Component {
   renderSuccess() {
@@ -35,9 +41,12 @@ export class SupportForm extends Component {
     return parentReset();
   }
 
+  renderAttachmentField = (props) => <FileInput {...props}>Attach a file</FileInput>;
+
   renderForm() {
     const {
         pristine,
+        invalid,
         submitting,
         submitSucceeded,
         handleSubmit,
@@ -65,6 +74,7 @@ export class SupportForm extends Component {
               <Field
                 multiline
                 rows={10}
+                className={styles.Message}
                 name='message'
                 label='Message'
                 placeholder='Give us details about your issue'
@@ -72,10 +82,16 @@ export class SupportForm extends Component {
                 validate={[required, minLength(20)]}
                 component={TextFieldWrapper}
               />
-              {/*<Button size='small'>Upload a file</Button>*/}
+              <Field
+                type='file'
+                name='attachment'
+                label='Attachment'
+                component={this.renderAttachmentField}
+                validate={maxFileSize(fileSizeLimit)}
+              />
             </Panel.Section>
             <Panel.Section>
-              <Button submit primary disabled={submitting || pristine}>
+              <Button submit primary disabled={pristine || invalid || submitting}>
                   {submitting ? 'Saving' : 'Submit Ticket' }
               </Button>
               <Button className="CancelBtn" disabled={submitting} onClick={() => this.reset(onCancel)} style={{ float: 'right' }}>Cancel</Button>
