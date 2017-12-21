@@ -19,6 +19,7 @@ export function refresh(updates = {}) {
 
     // refresh the typeahead cache if the date range has been updated
     const { from, to } = updates;
+
     if (from || to) {
       const params = getQueryFromOptions({ from, to });
       dispatch(refreshTypeaheadCache(params));

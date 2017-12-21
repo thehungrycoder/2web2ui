@@ -1,0 +1,128 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DelayPage:  should render page 1`] = `
+<Page
+  empty={Object {}}
+  title="Delay Report"
+>
+  <Connect(Filters)
+    onShare={[Function]}
+    refresh={[Function]}
+  />
+  <Panel
+    className="ReasonsTable"
+    title="Delayed Messages"
+  >
+    <TableCollection
+      columns={
+        Array [
+          Object {
+            "label": "Reason",
+            "width": "45%",
+          },
+          "Domain",
+          "Delayed",
+          "Delayed First Attempt (%)",
+        ]
+      }
+      getRowData={[Function]}
+      pagination={true}
+      rows={
+        Array [
+          Object {
+            "count_delayed": 100,
+            "count_delayed_first": 1,
+            "reason": "my reason",
+          },
+        ]
+      }
+    />
+  </Panel>
+  <ShareModal
+    handleToggle={[Function]}
+    link=""
+    open={false}
+  />
+</Page>
+`;
+
+exports[`DelayPage:  should render row data properly 1`] = `
+Array [
+  <LongTextContainer
+    text="bad delay"
+  >
+    <div>
+      bad delay
+    </div>
+  </LongTextContainer>,
+  <UnstyledLink
+    onClick={[Function]}
+  >
+    <a
+      onClick={[Function]}
+    >
+      gmail.com
+    </a>
+  </UnstyledLink>,
+  1,
+  <span>
+    10
+     (
+    <Percent
+      value={1}
+    >
+      1%
+    </Percent>
+    )
+  </span>,
+]
+`;
+
+exports[`DelayPage:  should show empty message when there are no reasons 1`] = `
+<Page
+  empty={Object {}}
+  title="Delay Report"
+>
+  <Connect(Filters)
+    onShare={[Function]}
+    refresh={[Function]}
+  />
+  <Panel
+    className="ReasonsTable"
+    title="Delayed Messages"
+  >
+    <Empty
+      message="No delay reasons to report"
+      title="Delayed Messages"
+    />
+  </Panel>
+  <ShareModal
+    handleToggle={[Function]}
+    link=""
+    open={false}
+  />
+</Page>
+`;
+
+exports[`DelayPage:  should show loading indicator when loading table 1`] = `
+<Page
+  empty={Object {}}
+  title="Delay Report"
+>
+  <Connect(Filters)
+    onShare={[Function]}
+    refresh={[Function]}
+  />
+  <Panel
+    className="ReasonsTable"
+    title="Delayed Messages"
+  >
+    <PanelLoading />
+  </Panel>
+  <ShareModal
+    handleToggle={[Function]}
+    link=""
+    open={false}
+  />
+</Page>
+`;

@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Action Creator: Delay Report should dispatch delay metrics and refresh the metrics 1`] = `
+Array [
+  Array [
+    Object {
+      "other": "stuff",
+    },
+  ],
+]
+`;
+
+exports[`Action Creator: Delay Report should dispatch delay metrics and refresh the metrics 2`] = `
+Array [
+  Array [
+    undefined,
+  ],
+  Array [
+    Array [
+      Object {
+        "count_accepted": 100,
+        "count_delay": 1,
+      },
+    ],
+  ],
+  Array [
+    Object {
+      "payload": Object {
+        "aggregates": Object {
+          "count_accepted": 100,
+          "count_delay": 1,
+        },
+      },
+      "type": "REFRESH_DELAY_AGGREGATES",
+    },
+  ],
+]
+`;
+
+exports[`Action Creator: Delay Report should dispatch delay reasons by domain and refresh table 1`] = `
+Array [
+  Array [
+    undefined,
+  ],
+  Array [
+    undefined,
+  ],
+  Array [
+    Object {
+      "payload": Object {
+        "reasons": undefined,
+      },
+      "type": "REFRESH_DELAY_TABLE",
+    },
+  ],
+]
+`;

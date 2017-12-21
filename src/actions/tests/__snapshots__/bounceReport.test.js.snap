@@ -4,13 +4,17 @@ exports[`Action Creator: Bounce Report should dispatch a chart refresh action 1`
 Array [
   Array [
     Object {
-      "payload": Object {
-        "from": "2017-02-14T12:02",
-        "metrics": undefined,
-        "to": "2017-05-21T19:05",
-      },
-      "type": "REFRESH_REPORT_RANGE",
+      "from": "2017-02-14T12:02",
+      "metrics": "count_bounce",
     },
+  ],
+]
+`;
+
+exports[`Action Creator: Bounce Report should dispatch a chart refresh action 2`] = `
+Array [
+  Array [
+    undefined,
   ],
   Array [
     Array [
@@ -20,17 +24,7 @@ Array [
     ],
   ],
   Array [
-    Object {
-      "meta": Object {
-        "method": "GET",
-        "params": Object {
-          "from": "2017-02-14T12:02",
-          "metrics": "count_bounce",
-        },
-        "url": "/metrics/deliverability/bounce-classification",
-      },
-      "type": "FETCH_METRICS_BOUNCE_CLASSIFICATIONS",
-    },
+    undefined,
   ],
   Array [
     Object {
@@ -49,34 +43,51 @@ exports[`Action Creator: Bounce Report should dispatch a table refresh action 1`
 Array [
   Array [
     Object {
-      "meta": Object {
-        "method": "GET",
-        "params": Object {
-          "from": "2017-02-14T12:02",
-          "metrics": "count_bounce",
-        },
-        "url": "/metrics/deliverability/bounce-reason/domain",
-      },
-      "type": "FETCH_METRICS_BOUNCE_REASONS_BY_DOMAIN",
+      "metrics": "count_bounce",
+      "other": "stuff",
     },
+  ],
+]
+`;
+
+exports[`Action Creator: Bounce Report should dispatch a table refresh action 2`] = `
+Array [
+  Array [
+    undefined,
   ],
   Array [
     Object {
       "payload": Object {
-        "reasons": Object {
-          "meta": Object {
-            "method": "GET",
-            "params": Object {
-              "from": "2017-02-14T12:02",
-              "metrics": "count_bounce",
-            },
-            "url": "/metrics/deliverability/bounce-reason/domain",
-          },
-          "type": "FETCH_METRICS_BOUNCE_REASONS_BY_DOMAIN",
-        },
+        "reasons": undefined,
       },
       "type": "REFRESH_BOUNCE_TABLE",
     },
+  ],
+]
+`;
+
+exports[`Action Creator: Bounce Report should not refresh chart nor update bounce classifications if 0 bounces 1`] = `
+Array [
+  Array [
+    Object {
+      "from": "2017-02-14T12:02",
+      "metrics": "count_bounce",
+    },
+  ],
+]
+`;
+
+exports[`Action Creator: Bounce Report should not refresh chart nor update bounce classifications if 0 bounces 2`] = `
+Array [
+  Array [
+    undefined,
+  ],
+  Array [
+    Array [
+      Object {
+        "foo": "bar",
+      },
+    ],
   ],
 ]
 `;

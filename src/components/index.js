@@ -12,6 +12,7 @@ export { default as UsageReport } from './usageReport/UsageReport';
 export { default as ApiKeySuccessBanner } from './apiKeyBanner/ApiKeyBanner';
 export { default as Empty } from './empty/Empty';
 export { default as PanelLoading } from './panelLoading/PanelLoading';
+export { default as LongTextContainer } from './longTextContainer/LongTextContainer';
 
 export * from './collection';
 export * from './formatters';
