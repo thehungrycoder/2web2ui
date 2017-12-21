@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { TableCollection, Empty } from 'src/components';
+import { TableCollection, Empty, LongTextContainer } from 'src/components';
 import { addFilter, refreshTypeaheadCache } from 'src/actions/reportFilters';
 import { loadDelayReasonsByDomain, loadDelayMetrics } from 'src/actions/delayReport';
 import { parseSearch, getFilterSearchOptions, getShareLink } from 'src/helpers/reports';
@@ -10,7 +10,6 @@ import { showAlert } from 'src/actions/globalAlert';
 import { Page, Panel, UnstyledLink } from '@sparkpost/matchbox';
 import ShareModal from '../components/ShareModal';
 import Filters from '../components/Filters';
-import ReasonCell from '../components/ReasonCell';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
 
 
@@ -38,11 +37,11 @@ export class DelayPage extends Component {
   }
 
   handleRefresh = (options) => this.props.loadDelayMetrics(options)
-      .then(() => this.updateLink())
-      .then(() => this.props.loadDelayReasonsByDomain(options))
-      .catch((err) => {
-        this.props.showAlert({ type: 'error', message: 'Unable to refresh delay report.', details: err.message });
-      });
+    .then(() => this.updateLink())
+    .then(() => this.props.loadDelayReasonsByDomain(options))
+    .catch((err) => {
+      this.props.showAlert({ type: 'error', message: 'Unable to refresh delay report.', details: err.message });
+    });
 
   handleModalToggle = (modal) => {
     this.setState({ modal: !this.state.modal });
@@ -66,10 +65,10 @@ export class DelayPage extends Component {
     const { totalAccepted } = this.props;
     const { reason, domain, count_delayed, count_delayed_first } = rowData;
     return [
-      <ReasonCell reason={reason} />,
+      <LongTextContainer text={reason} />,
       <UnstyledLink onClick={() => this.handleDomainClick(domain)}>{domain}</UnstyledLink>,
       count_delayed,
-      <span>{count_delayed_first}(<Percent value={(count_delayed_first / totalAccepted) * 100} />)</span>
+      <span>{count_delayed_first} (<Percent value={(count_delayed_first / totalAccepted) * 100} />)</span>
     ];
   }
 

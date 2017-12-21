@@ -10,21 +10,25 @@ import { list as listSubaccounts } from './subaccounts';
 import { list as listSendingDomains } from './sendingDomains';
 import { getQueryFromOptions } from 'src/helpers/metrics';
 
-export function refreshTypeaheadCache(params, timeFiltered = false) {
+// array of all lists that need to be re-filtered when time changes
+const metricLists = [
+  fetchMetricsDomains,
+  fetchMetricsCampaigns,
+  fetchMetricsSendingIps,
+  fetchMetricsIpPools
+];
+
+export function refreshTypeaheadCache(params) {
   return (dispatch) => {
-    dispatch({ type: 'REFRESH_TYPEAHEAD_CACHE' });
-    const requests = [
-      dispatch(fetchMetricsDomains(params)),
-      dispatch(fetchMetricsCampaigns(params)),
-      dispatch(fetchMetricsSendingIps(params)),
-      dispatch(fetchMetricsIpPools(params))
-    ];
+    const requests = metricLists.map((list) => dispatch(list(params)));
+    requests.push(dispatch(listTemplates()), dispatch(listSubaccounts()), dispatch(listSendingDomains()));
+    return Promise.all(requests);
+  };
+}
 
-    // only need to refresh these lists on initial load, not when date ranges change
-    if (!timeFiltered) {
-      requests.push(dispatch(listTemplates()), dispatch(listSubaccounts()), dispatch(listSendingDomains()));
-    }
-
+export function refreshListsByTime(params) {
+  return (dispatch) => {
+    const requests = metricLists.map((list) => dispatch(list(params)));
     return Promise.all(requests);
   };
 }
@@ -35,7 +39,7 @@ export function maybeRefreshTypeaheadCache(dispatch, options, updates = {}) {
 
   if (relativeRange || from || to) {
     const params = getQueryFromOptions({ from: options.from, to: options.to });
-    dispatch(refreshTypeaheadCache(params, true));
+    dispatch(refreshListsByTime(params));
   }
 }
 

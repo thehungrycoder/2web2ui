@@ -2,6 +2,7 @@ import React from 'react';
 import { DelayPage } from '../DelayPage';
 import { shallow, mount } from 'enzyme';
 import * as reportHelpers from 'src/helpers/reports';
+import { renderRowData } from 'src/__testHelpers__';
 
 jest.mock('src/helpers/reports');
 
@@ -83,15 +84,7 @@ describe('DelayPage: ', () => {
   it('should render row data properly', () => {
     const rows = wrapper.instance().getRowData({ reason: 'bad delay', count_delayed: 1, count_delayed_first: 10, domain: 'gmail.com' });
 
-    // ignore 3rd element because it's a raw span
-    const snaps = [
-      mount(rows[0]),
-      mount(rows[1]),
-      mount(rows[3])
-    ];
-
-    expect(snaps).toMatchSnapshot();
-    expect(rows[2]).toEqual(1);
+    expect(renderRowData(rows)).toMatchSnapshot();
   });
 
   it('should filter by domain', () => {

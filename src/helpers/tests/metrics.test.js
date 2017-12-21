@@ -64,11 +64,11 @@ describe('metrics helpers', () => {
 
   });
 
-  it('should return hours as precision', () => {
+  it('should return hours as precision type', () => {
     expect(metricsHelpers.getPrecisionType('1min')).toEqual('hours');
   });
 
-  it('should return days as precision', () => {
+  it('should return days as precision type', () => {
     expect(metricsHelpers.getPrecisionType('12hr')).toEqual('days');
   });
 

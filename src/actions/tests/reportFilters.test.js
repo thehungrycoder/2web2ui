@@ -32,16 +32,13 @@ describe('Action Creator: Report Filters', () => {
 
   });
 
-  it('should only call the metrics calls on refresh', async() => {
-    const thunk = reportFilters.refreshTypeaheadCache({ foo: 'bar' }, true);
+  it('should call the metrics lists on refresh lists by time', async() => {
+    const thunk = reportFilters.refreshListsByTime({ foo: 'bar' });
     await thunk(dispatchMock);
     expect(metrics.fetchMetricsDomains).toHaveBeenCalledTimes(1);
     expect(metrics.fetchMetricsCampaigns).toHaveBeenCalledTimes(1);
     expect(metrics.fetchMetricsSendingIps).toHaveBeenCalledTimes(1);
     expect(metrics.fetchMetricsIpPools).toHaveBeenCalledTimes(1);
-    expect(listTemplates).toHaveBeenCalledTimes(0);
-    expect(listSubaccounts).toHaveBeenCalledTimes(0);
-    expect(listSendingDomains).toHaveBeenCalledTimes(0);
   });
 
   it('should not refresh the typeahead cache by default', () => {

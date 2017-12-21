@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Reason Cell:  should render 1`] = `
+exports[`Long Text Container:  should render 1`] = `
 <div>
   foo
 </div>

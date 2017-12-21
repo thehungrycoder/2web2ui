@@ -3,6 +3,16 @@
 exports[`Action Creator: Delay Report should dispatch delay metrics and refresh the metrics 1`] = `
 Array [
   Array [
+    Object {
+      "other": "stuff",
+    },
+  ],
+]
+`;
+
+exports[`Action Creator: Delay Report should dispatch delay metrics and refresh the metrics 2`] = `
+Array [
+  Array [
     undefined,
   ],
   Array [
@@ -33,30 +43,12 @@ Array [
     undefined,
   ],
   Array [
-    Object {
-      "meta": Object {
-        "method": "GET",
-        "params": Object {
-          "from": "2017-02-14T12:02",
-        },
-        "url": "/metrics/deliverability/delay-reason/domain",
-      },
-      "type": "FETCH_METRICS_DELAY_REASONS_BY_DOMAIN",
-    },
+    undefined,
   ],
   Array [
     Object {
       "payload": Object {
-        "reasons": Object {
-          "meta": Object {
-            "method": "GET",
-            "params": Object {
-              "from": "2017-02-14T12:02",
-            },
-            "url": "/metrics/deliverability/delay-reason/domain",
-          },
-          "type": "FETCH_METRICS_DELAY_REASONS_BY_DOMAIN",
-        },
+        "reasons": undefined,
       },
       "type": "REFRESH_DELAY_TABLE",
     },

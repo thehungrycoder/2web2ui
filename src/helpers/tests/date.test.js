@@ -1,4 +1,5 @@
 import * as dateHelpers from '../date';
+import cases from 'jest-in-case';
 
 describe('Date helpers', () => {
   it('should get end of day', () => {
@@ -11,17 +12,18 @@ describe('Date helpers', () => {
 
   });
 
-  it('should get relative dates', () => {
-    const date = new Date('2017-12-18');
-    Date.now = jest.fn(() => date);
-    expect(dateHelpers.getRelativeDates('hour')).toMatchSnapshot();
-    expect(dateHelpers.getRelativeDates('day')).toMatchSnapshot();
-    expect(dateHelpers.getRelativeDates('7days')).toMatchSnapshot();
-    expect(dateHelpers.getRelativeDates('30days')).toMatchSnapshot();
-    expect(dateHelpers.getRelativeDates('90days')).toMatchSnapshot();
-    expect(dateHelpers.getRelativeDates('invalid-range')).toMatchSnapshot();
+  const date = new Date('2017-12-18');
+  Date.now = jest.fn(() => date);
+  cases('getRelativeDates calculations', ({ range }) => {
+    expect(dateHelpers.getRelativeDates(range)).toMatchSnapshot();
+  }, {
+    'for an hour ago': { range: 'hour' },
+    'for a day ago': { range: 'day' },
+    'for a week ago': { range: '7days' },
+    'for a month': { range: '30days' },
+    'for a quarter ago': { range: '90days' },
+    'for an invalid range': { range: 'invalid-range' }
   });
-
 });
 
 

@@ -7,14 +7,13 @@ import { addFilter, refreshTypeaheadCache } from 'src/actions/reportFilters';
 import { getShareLink, getFilterSearchOptions, parseSearch } from 'src/helpers/reports';
 import { showAlert } from 'src/actions/globalAlert';
 
-import { TableCollection, Empty } from 'src/components';
+import { TableCollection, Empty, LongTextContainer } from 'src/components';
 import { Percent } from 'src/components/formatters';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
 import { Page, Panel } from '@sparkpost/matchbox';
 import ShareModal from '../components/ShareModal';
 import Filters from '../components/Filters';
 import ChartGroup from './components/ChartGroup';
-import ReasonCell from '../components/ReasonCell';
 
 const columns = [{ label: 'Reason', width: '45%' }, 'Domain', 'Category', 'Classification', 'Count (%)'];
 
@@ -65,7 +64,7 @@ export class BouncePage extends Component {
     const { totalBounces } = this.props;
     const { reason, domain, bounce_category_name, bounce_class_name, count_bounce } = rowData;
     return [
-      <ReasonCell reason={reason} />,
+      <LongTextContainer text={reason} />,
       domain,
       bounce_category_name,
       bounce_class_name,

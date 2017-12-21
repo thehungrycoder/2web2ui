@@ -48,13 +48,13 @@ exports[`DelayPage:  should render page 1`] = `
 
 exports[`DelayPage:  should render row data properly 1`] = `
 Array [
-  <ReasonCell
-    reason="bad delay"
+  <LongTextContainer
+    text="bad delay"
   >
     <div>
       bad delay
     </div>
-  </ReasonCell>,
+  </LongTextContainer>,
   <UnstyledLink
     onClick={[Function]}
   >
@@ -64,9 +64,10 @@ Array [
       gmail.com
     </a>
   </UnstyledLink>,
+  1,
   <span>
     10
-    (
+     (
     <Percent
       value={1}
     >
