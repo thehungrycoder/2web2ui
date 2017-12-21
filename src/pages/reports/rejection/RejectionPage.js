@@ -8,13 +8,11 @@ import { addFilter, refreshTypeaheadCache } from 'src/actions/reportFilters';
 import { getShareLink, getFilterSearchOptions, parseSearch } from 'src/helpers/reports';
 import { showAlert } from 'src/actions/globalAlert';
 
-import { TableCollection, Empty } from 'src/components';
+import { TableCollection, Empty, LongTextContainer } from 'src/components';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
 import { Page, Panel, UnstyledLink } from '@sparkpost/matchbox';
 import ShareModal from '../components/ShareModal';
 import Filters from '../components/Filters';
-
-import './RejectionPage.scss';
 
 const columns = [{ label: 'Reason', width: '45%' }, 'Domain', 'Category', 'Count'];
 export class RejectionPage extends Component {
@@ -67,7 +65,7 @@ export class RejectionPage extends Component {
   getRowData = (rowData) => {
     const { reason, domain, rejection_category_name,count_rejected } = rowData;
     return [
-      <div className='ReasonCell'>{reason}</div>,
+      <LongTextContainer text={reason} />,
       <UnstyledLink onClick={() => this.handleDomainClick(domain)}>{ domain }</UnstyledLink>,
       rejection_category_name,
       count_rejected
