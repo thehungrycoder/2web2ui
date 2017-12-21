@@ -2,7 +2,6 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import { SupportForm } from '../SupportForm';
-import { createMockStore } from 'src/__testHelpers__/mockStore';
 
 describe('Support Form Component', () => {
   let wrapper;
@@ -29,7 +28,7 @@ describe('Support Form Component', () => {
   it('should render message on success', () => {
     const wrapper = shallow(<SupportForm submitSucceeded={true} />);
     expect(wrapper.find('.SuccessMessage')).toHaveLength(1);
-      expect(wrapper.find('form').exists()).toBeFalsy();
+    expect(wrapper.find('form').exists()).toBeFalsy();
   });
 
   describe('Control', () => {
@@ -63,7 +62,7 @@ describe('Support Form Component', () => {
     });
 
     it('should continue', () => {
-      props = {...props, submitSucceeded: true };
+      props = { ...props, submitSucceeded: true };
       wrapper = shallow(<SupportForm {...props} />);
       const spy = jest.spyOn(wrapper.instance(), 'reset');
       wrapper.find('.SuccessMessage Button').simulate('click');

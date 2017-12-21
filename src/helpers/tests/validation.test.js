@@ -27,7 +27,7 @@ const cases = {
     good: ['example.com', 'xo.co'],
     bad: ['101', 'no_capes']
   }
-}
+};
 
 const memoizedCases = {
   maxLength: {
@@ -48,8 +48,8 @@ const memoizedCases = {
   },
   maxFileSize: {
     // The null case below is for the redux-form validation that sometimes occurs before underlying fields are available
-    good: [[1024, {size: 1000}], [1, null]],
-    bad: [[1024, {size: 1025}]]
+    good: [[1024, { size: 1000 }], [1, null]],
+    bad: [[1024, { size: 1025 }]]
   }
 };
 
@@ -70,26 +70,26 @@ describe('Memoized validation helpers', () => {
     const goodInput = memoizedCases[caseName].good;
     const badInput = memoizedCases[caseName].bad;
     goodInput.forEach((input) => {
-        const configVars = input[0];
-        const arg = input[1];
-        const ctor =  validations[caseName];
-        const instance = ctor(configVars);
-        it(`${caseName}(${configVars}) should accept ${typeof(arg)}:'${arg}'`, () => {
-          expect(instance).toBeInstanceOf(Function);
-          expect(instance(arg)).toBeUndefined();
-        });
+      const configVars = input[0];
+      const arg = input[1];
+      const ctor = validations[caseName];
+      const instance = ctor(configVars);
+      it(`${caseName}(${configVars}) should accept ${typeof(arg)}:'${arg}'`, () => {
+        expect(instance).toBeInstanceOf(Function);
+        expect(instance(arg)).toBeUndefined();
       });
+    });
 
     badInput.forEach((input) => {
-        const configVars = input[0];
-        const arg = input[1];
-        const ctor =  validations[caseName];
-        const instance = ctor(configVars);
-        it(`${caseName}(${configVars}) should not accept ${typeof(arg)}:'${arg}'`, () => {
-          expect(instance).toBeInstanceOf(Function);
-          expect(instance(arg)).toBeDefined();
-        });
+      const configVars = input[0];
+      const arg = input[1];
+      const ctor = validations[caseName];
+      const instance = ctor(configVars);
+      it(`${caseName}(${configVars}) should not accept ${typeof(arg)}:'${arg}'`, () => {
+        expect(instance).toBeInstanceOf(Function);
+        expect(instance(arg)).toBeDefined();
       });
+    });
   });
 });
 

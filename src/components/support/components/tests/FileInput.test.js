@@ -48,7 +48,7 @@ describe('FileInput component', () => {
   it('should fire onChange and onBlur on change', () => {
     const evt = {
       target: {
-        files: [{name: 'animal.png', size: 54321}]
+        files: [{ name: 'animal.png', size: 54321 }]
       }
     };
     wrapper.instance().onChange(evt);

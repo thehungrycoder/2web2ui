@@ -2,7 +2,6 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import { Support } from '../Support';
-import SupportForm from '../components/SupportForm';
 
 describe('Support Component', () => {
   const ticket = {
@@ -51,5 +50,5 @@ describe('Support Component', () => {
   it('should clear out form state on reset', () => {
     wrapper.instance().resetPanel();
     expect(clearSupportForm).toHaveBeenCalled();
-  })
+  });
 });
