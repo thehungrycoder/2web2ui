@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders HTML by default 1`] = `
+<Panel>
+  <Panel.Section>
+    <Tabs
+      connectBelow={true}
+      selected={0}
+      tabs={
+        Array [
+          Object {
+            "content": "HTML",
+            "onClick": [Function],
+          },
+          Object {
+            "content": "Text",
+            "onClick": [Function],
+          },
+        ]
+      }
+    />
+    <PreviewFrame
+      content="<h1>Test Template</h1>"
+      key="html"
+    />
+  </Panel.Section>
+</Panel>
+`;
+
+exports[`renders text on tab click 1`] = `
+<Panel>
+  <Panel.Section>
+    <Tabs
+      connectBelow={true}
+      selected={1}
+      tabs={
+        Array [
+          Object {
+            "content": "HTML",
+            "onClick": [Function],
+          },
+          Object {
+            "content": "Text",
+            "onClick": [Function],
+          },
+        ]
+      }
+    />
+    <PreviewFrame
+      content="<p style=\\"white-space: pre-wrap\\">Test Template</p>"
+      key="text"
+    />
+  </Panel.Section>
+</Panel>
+`;
