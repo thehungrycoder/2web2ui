@@ -16,7 +16,7 @@ export function fetch({ type = 'FETCH_METRICS', path, params = {}}) {
 export function fetchMetricsDomains(params = {}) {
   const type = 'FETCH_METRICS_DOMAINS';
   const path = 'domains';
-  return fetch({ type, path, ...params });
+  return fetch({ type, path, params });
 }
 
 export function fetchMetricsCampaigns(params = {}) {
@@ -65,7 +65,7 @@ export function fetchBounceReasonsByDomain(params = {}) {
   return fetch({ type, path, params });
 }
 
-export function fetchRejectionReasonsByDomains(params = {}) {
+export function fetchRejectionReasonsByDomain(params = {}) {
   const type = 'FETCH_METRICS_REJECTION_REASONS_BY_DOMAIN';
   const path = 'deliverability/rejection-reason/domain';
   return fetch({ type, path, params });

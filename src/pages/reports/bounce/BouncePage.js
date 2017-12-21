@@ -69,8 +69,6 @@ export class BouncePage extends Component {
     const { reason, domain, bounce_category_name, bounce_class_name, count_bounce } = rowData;
     return [
       <LongTextContainer text={reason} />,
-      domain,
-      <div className='ReasonCell'>{reason}</div>,
       <UnstyledLink onClick={() => this.handleDomainClick(domain)}>{ domain }</UnstyledLink>,
       bounce_category_name,
       bounce_class_name,
