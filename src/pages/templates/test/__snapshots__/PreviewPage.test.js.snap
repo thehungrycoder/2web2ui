@@ -11,7 +11,12 @@ exports[`PreviewPage renders draft template 1`] = `
   }
   empty={Object {}}
   title="Test Draft (Draft)"
-/>
+>
+  <PreviewPanel
+    html="<h1>Test Draft Template</h1>"
+    text=""
+  />
+</Page>
 `;
 
 exports[`PreviewPage renders loading 1`] = `<Loading />`;
@@ -27,5 +32,10 @@ exports[`PreviewPage renders published template 1`] = `
   }
   empty={Object {}}
   title="Test Published (Draft)"
-/>
+>
+  <PreviewPanel
+    html="<h1>Test Published Template</h1>"
+    text=""
+  />
+</Page>
 `;

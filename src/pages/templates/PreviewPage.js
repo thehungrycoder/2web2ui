@@ -6,6 +6,8 @@ import { Page } from '@sparkpost/matchbox';
 import * as TemplateActions from 'src/actions/templates';
 import { Loading } from 'src/components';
 
+import PreviewPanel from './components/PreviewPanel';
+
 const IS_PUBLISHED_REGEX = new RegExp('/templates/preview/.+/published');
 
 export class PreviewPage extends Component {
@@ -39,6 +41,7 @@ export class PreviewPage extends Component {
 
     return (
       <Page {...pageProps}>
+        <PreviewPanel {...this.props.template.content}/>
       </Page>
     );
   }

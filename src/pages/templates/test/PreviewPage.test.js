@@ -19,14 +19,20 @@ const TEST_CASES = {
     match: { params: { id: 'test-draft' }},
     template: {
       id: 'test-draft',
-      name: 'Test Draft'
+      name: 'Test Draft',
+      content: {
+        html: '<h1>Test Draft Template</h1>'
+      }
     }
   },
   'renders published template': {
     match: { params: { id: 'test-published' }},
     template: {
       id: 'test-published',
-      name: 'Test Published'
+      name: 'Test Published',
+      content: {
+        html: '<h1>Test Published Template</h1>'
+      }
     }
   }
 };
