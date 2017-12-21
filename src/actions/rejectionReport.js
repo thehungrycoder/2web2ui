@@ -7,8 +7,7 @@ import { getQueryFromOptions } from 'src/helpers/metrics';
 import { getRelativeDates } from 'src/helpers/date';
 
 
-// Extract from, to, filters (campaign, template, ...) and any other included update fields
-// into a set of common options for metrics queries.
+//TODO Replace this with the implementation in src/helpers/metrics.js after FAD-5592 gets merged
 function buildCommonOptions(reportFilters, updates = {}) {
   return {
     ...reportFilters,
@@ -24,9 +23,7 @@ export function refreshRejectionsTable({ reasons }) {
   };
 }
 
-
-export function loadRejectionByDomainReports(updates = {}) {
-
+export function refreshRejectionTableMetrics(updates = {}) {
   return (dispatch, getState) => {
     const { reportFilters } = getState();
     const options = buildCommonOptions(reportFilters, updates);

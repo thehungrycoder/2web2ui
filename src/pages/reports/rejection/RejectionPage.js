@@ -2,17 +2,16 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import { loadRejectionByDomainReports } from 'src/actions/rejectionReport';
+import { refreshRejectionTableMetrics } from 'src/actions/rejectionReport';
 import { addFilter, refreshTypeaheadCache } from 'src/actions/reportFilters';
 import { getShareLink, getFilterSearchOptions, parseSearch } from 'src/helpers/reports';
 import { showAlert } from 'src/actions/globalAlert';
 
-import { TableCollection } from 'src/components';
+import { TableCollection, Empty } from 'src/components';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
 import { Page, Panel, UnstyledLink } from '@sparkpost/matchbox';
 import ShareModal from '../components/ShareModal';
 import Filters from '../components/Filters';
-import Empty from '../components/Empty';
 
 import './RejectionPage.scss';
 
@@ -39,7 +38,7 @@ export class RejectionPage extends Component {
   }
 
   handleRefresh = (options) => {
-    this.props.loadRejectionByDomainReports(options)
+    this.props.refreshRejectionTableMetrics(options)
       .then(() => this.updateLink())
       .catch((err) => {
         this.props.showAlert({ type: 'error', message: 'Unable to refresh rejection reports.', details: err.message });
@@ -113,15 +112,15 @@ export class RejectionPage extends Component {
   }
 }
 
-const mapStateToProps = ({ reportFilters, rejectionReasons }) => ({
+const mapStateToProps = ({ reportFilters, rejectionReport }) => ({
   filters: reportFilters,
-  loading: rejectionReasons.reasonsLoading,
-  list: rejectionReasons.list
+  loading: rejectionReport.reasonsLoading,
+  list: rejectionReport.list
 });
 
 const mapDispatchToProps = {
   addFilter,
-  loadRejectionByDomainReports,
+  refreshRejectionTableMetrics,
   refreshTypeaheadCache,
   showAlert
 };

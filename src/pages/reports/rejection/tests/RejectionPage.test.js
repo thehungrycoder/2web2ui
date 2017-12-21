@@ -32,7 +32,7 @@ describe('RejectionPage: ', () => {
           domain: 'gmail.com'
         }
       ],
-      loadRejectionByDomainReports: jest.fn(() => Promise.resolve()),
+      refreshRejectionTableMetrics: jest.fn(() => Promise.resolve()),
       refreshTypeaheadCache: jest.fn(),
       addFilter: jest.fn(),
       location: {
@@ -53,6 +53,7 @@ describe('RejectionPage: ', () => {
     expect(props.refreshTypeaheadCache).toHaveBeenCalled();
     expect(wrapper).toMatchSnapshot();
   });
+
 
   it('should render correctly with no rejections', () => {
     wrapper.setProps({ list: []});

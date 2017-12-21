@@ -12,7 +12,7 @@ export default (state = initialState, { type, payload }) => {
       return { ...state, reasonsLoading: false };
 
     case 'REFRESH_REJECTION_BY_DOMAIN_TABLE':
-      return { ...state, list: payload.reasons, reasonsLoading: false };
+      return { ...state, list: payload.reasons };
 
     default:
       return state;
