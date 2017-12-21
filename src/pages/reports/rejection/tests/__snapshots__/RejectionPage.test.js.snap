@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`RejectionPage:  should render 1`] = `
+exports[`RejectionPage:  renders correctly 1`] = `
 <Page
   empty={Object {}}
   title="Rejections Report"
@@ -55,7 +55,30 @@ exports[`RejectionPage:  should render 1`] = `
 </Page>
 `;
 
-exports[`RejectionPage:  should render correctly with no rejections 1`] = `
+exports[`RejectionPage:  renders correctly when loading 1`] = `
+<Page
+  empty={Object {}}
+  title="Rejections Report"
+>
+  <Connect(Filters)
+    onShare={[Function]}
+    refresh={[Function]}
+  />
+  <Panel
+    className="RejectionTable"
+    title="Rejection Reasons"
+  >
+    <PanelLoading />
+  </Panel>
+  <ShareModal
+    handleToggle={[Function]}
+    link="http://an-awesome-link-to-share.com"
+    open={false}
+  />
+</Page>
+`;
+
+exports[`RejectionPage:  renders correctly with no rejections 1`] = `
 <Page
   empty={Object {}}
   title="Rejections Report"
@@ -74,7 +97,7 @@ exports[`RejectionPage:  should render correctly with no rejections 1`] = `
   </Panel>
   <ShareModal
     handleToggle={[Function]}
-    link=""
+    link="http://an-awesome-link-to-share.com"
     open={false}
   />
 </Page>

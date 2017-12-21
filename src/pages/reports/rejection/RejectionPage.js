@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import _ from 'lodash';
 
 import { refreshRejectionTableMetrics } from 'src/actions/rejectionReport';
 import { addFilter, refreshTypeaheadCache } from 'src/actions/reportFilters';
@@ -28,25 +29,25 @@ export class RejectionPage extends Component {
   }
 
   parseSearch() {
+    const { addFilter } = this.props;
     const { options, filters } = parseSearch(this.props.location.search);
 
-    if (filters) {
-      filters.forEach(this.props.addFilter);
+    if (!_.isEmpty(filters)) {
+      filters.forEach(addFilter);
     }
 
     return options;
   }
 
   handleRefresh = (options) => {
-    this.props.refreshRejectionTableMetrics(options)
+    const { showAlert, refreshRejectionTableMetrics } = this.props;
+    return refreshRejectionTableMetrics(options)
       .then(() => this.updateLink())
-      .catch((err) => {
-        this.props.showAlert({ type: 'error', message: 'Unable to refresh rejection reports.', details: err.message });
-      });
+      .catch((err) => showAlert({ type: 'error', message: 'Unable to refresh rejection reports.', details: err.message }));
 
   }
 
-  handleModalToggle = (modal) => {
+  handleModalToggle = () => {
     this.setState({ modal: !this.state.modal });
   }
 
@@ -54,7 +55,6 @@ export class RejectionPage extends Component {
     const { filters, history } = this.props;
     const options = getFilterSearchOptions(filters);
     const { link, search } = getShareLink(options);
-
     this.setState({ link });
     history.replace({ pathname: '/reports/rejections', search });
   }
