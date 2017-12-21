@@ -7,15 +7,13 @@ import { addFilter, refreshTypeaheadCache } from 'src/actions/reportFilters';
 import { getShareLink, getFilterSearchOptions, parseSearch } from 'src/helpers/reports';
 import { showAlert } from 'src/actions/globalAlert';
 
-import { TableCollection, Empty } from 'src/components';
+import { TableCollection, Empty, LongTextContainer } from 'src/components';
+import { Percent } from 'src/components/formatters';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
 import { Page, Panel } from '@sparkpost/matchbox';
 import ShareModal from '../components/ShareModal';
 import Filters from '../components/Filters';
 import ChartGroup from './components/ChartGroup';
-
-
-import './BouncePage.scss';
 
 const columns = [{ label: 'Reason', width: '45%' }, 'Domain', 'Category', 'Classification', 'Count (%)'];
 
@@ -66,11 +64,11 @@ export class BouncePage extends Component {
     const { totalBounces } = this.props;
     const { reason, domain, bounce_category_name, bounce_class_name, count_bounce } = rowData;
     return [
-      <div className='ReasonCell'>{reason}</div>,
+      <LongTextContainer text={reason} />,
       domain,
       bounce_category_name,
       bounce_class_name,
-      `${count_bounce} (${Number((count_bounce / totalBounces) * 100).toFixed(2)}%)`
+      <span>{count_bounce}(<Percent value={(count_bounce / totalBounces) * 100} />)</span>
     ];
   };
 
@@ -109,7 +107,7 @@ export class BouncePage extends Component {
       <Page title='Bounce Report'>
         <Filters refresh={this.handleRefresh} onShare={this.handleModalToggle} />
         { this.renderChart() }
-        <Panel title='Bounced Messages' className='BounceTable'>
+        <Panel title='Bounced Messages' className='ReasonsTable'>
           { this.renderCollection() }
         </Panel>
         <ShareModal
