@@ -49,6 +49,13 @@ export default class FileInput extends Component {
     }
   }
 
+  buildAcceptList(accept) {
+    if (Array.isArray(accept)) {
+      return accept.join(',');
+    }
+    return accept;
+  }
+
   render() {
     const { accept = '', children } = this.props;
 
@@ -58,7 +65,7 @@ export default class FileInput extends Component {
         type='file'
         ref={(ref) => fileInput = ref}
         onChange={this.onChange}
-        accept={accept}
+        accept={this.buildAcceptList(accept)}
         className={styles.InputElement}
         />
         <Button onClick={() => fileInput && fileInput.click()}>{children}</Button>
@@ -69,6 +76,6 @@ export default class FileInput extends Component {
 }
 
 FileInput.propTypes = {
-  accept: PropTypes.oneOf([PropTypes.string, PropTypes.arrayOf(PropTypes.string)])
+  accept: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)])
 };
 
