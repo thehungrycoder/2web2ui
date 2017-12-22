@@ -35,6 +35,16 @@ unregister(); // our bundle is currently too big to be added to SW cache, causin
 // Kill loading screen
 document.getElementById('critical').className += ' ready';
 
+/*  Google Analytics */
+window.gtag('config', config.gaTag);
+
+// appends tag manager script src to head
+const gaScript = document.createElement('script');
+gaScript.src = `https://www.googletagmanager.com/gtag/js?id=${config.gaTag}`;
+gaScript.async = true;
+document.head.appendChild(gaScript);
+/*  Google Analytics End */
+
 /**
  * Track unhandled promise rejects
  *
