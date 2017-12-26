@@ -35,7 +35,7 @@ export class RegisterUserForm extends Component {
           type='password'
           autoComplete='new-password'
         />
-        <p><small>By joining, you agree to SparPost's <UnstyledLink target='_blank' to={config.touLink}>Terms of Use</UnstyledLink></small></p>
+        <p><small>By joining, you agree to SparkPost's <UnstyledLink target='_blank' to={config.touLink}>Terms of Use</UnstyledLink></small></p>
         <Button primary submit disabled={submitting}>{ submitting ? 'Loading' : 'Confirm' }</Button>
       </form>
     );
