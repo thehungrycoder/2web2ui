@@ -16,6 +16,8 @@ const formName = 'supportForm';
 
 const fileSizeLimit = 1024;
 
+const AttachmentField = (props) => <FileInput {...props}>Attach a file</FileInput>;
+
 export class SupportForm extends Component {
   renderSuccess() {
     const { submitFailed, ticketId, onContinue } = this.props;
@@ -41,7 +43,6 @@ export class SupportForm extends Component {
     return parentReset();
   }
 
-  renderAttachmentField = (props) => <FileInput {...props}>Attach a file</FileInput>;
 
   renderForm() {
     const {
@@ -60,7 +61,7 @@ export class SupportForm extends Component {
 
     return <div>
           <Panel.Section>
-            <h6>Submit a ticket</h6>
+            <h6>Submit a support ticket</h6>
           </Panel.Section>
           <form onSubmit={handleSubmit(onSubmit)}>
             <Panel.Section>
@@ -74,7 +75,7 @@ export class SupportForm extends Component {
               <Field
                 multiline
                 rows={10}
-                className={styles.Message}
+                resize='none'
                 name='message'
                 label='Message'
                 placeholder='Give us details about your issue'
@@ -86,7 +87,7 @@ export class SupportForm extends Component {
                 type='file'
                 name='attachment'
                 label='Attachment'
-                component={this.renderAttachmentField}
+                component={AttachmentField}
                 validate={maxFileSize(fileSizeLimit)}
               />
             </Panel.Section>
