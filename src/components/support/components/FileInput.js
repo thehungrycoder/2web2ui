@@ -3,9 +3,13 @@ import PropTypes from 'prop-types';
 
 import { Button, Tag, Error } from '@sparkpost/matchbox';
 
+import { shrinkToFit } from 'src/helpers/string';
+
 import styles from './FileInput.module.scss';
 
 const defaultLabel = 'No file selected';
+
+const maxLabelLength = 50;
 
 export default class FileInput extends Component {
   state = {
@@ -37,7 +41,7 @@ export default class FileInput extends Component {
   renderTag() {
     const { label } = this.state;
     if (label) {
-      return <Tag className={styles.Tag} onRemove={this.clear}>{label}</Tag>;
+      return <Tag className={styles.Tag} onRemove={this.clear}>{shrinkToFit(label, maxLabelLength)}</Tag>;
     }
     return <Tag className={styles.Tag}>No file selected</Tag>;
   }
