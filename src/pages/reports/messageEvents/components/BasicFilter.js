@@ -55,6 +55,10 @@ export class BasicFilter extends Component {
       value = addresses.join(',');
     }
 
+    if (this.state.recipients === value) { //nothing changed, don't trigger search
+      return;
+    }
+
     this.setState({ recipients: value }, this.refresh);
   }
 
@@ -77,7 +81,7 @@ export class BasicFilter extends Component {
     const invalids = this.getInvalidAddresses(this.parseAddresses(value));
 
     if (invalids.length) {
-      return `${invalids.join(', ')} ${invalids.length > 1 ? 'are' : 'is'} not valid email ${invalids.length > 1 ? 'adresses' : 'address'}`;
+      return `${invalids.join(', ')} ${invalids.length > 1 ? 'are not' : 'is not a'} valid email ${invalids.length > 1 ? 'addresses' : 'address'}`;
     }
   }
 

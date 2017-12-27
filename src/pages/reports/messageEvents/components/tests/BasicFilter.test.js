@@ -55,8 +55,8 @@ describe('BasicFilter', () => {
     it('returns correct validation error', () => {
       expect(instance.emailValidator('')).toEqual(undefined);
       expect(instance.emailValidator('email@domain.com, email2@domain.com')).toEqual(undefined);
-      expect(instance.emailValidator('email@domain.com ,email2')).toEqual('email2 is not valid email address');
-      expect(instance.emailValidator('email.com ,email2')).toEqual('email.com, email2 are not valid email adresses');
+      expect(instance.emailValidator('email@domain.com ,email2')).toEqual('email2 is not a valid email address');
+      expect(instance.emailValidator('email.com ,email2')).toEqual('email.com, email2 are not valid email addresses');
     });
   });
 
@@ -68,18 +68,15 @@ describe('BasicFilter', () => {
         }
       };
 
-      instance.handleRecipientsChange(event);
-      expect(wrapper.state().recipients).toEqual('');
-
       event.target.value = 'email@domain.com';
       instance.handleRecipientsChange(event);
       expect(wrapper.state().recipients).toEqual('email@domain.com');
 
-      event.target.value = 'email@domain.com , email2@domain.com';
+      event.target.value = 'email1@domain.com , email2@domain.com';
       instance.handleRecipientsChange(event);
-      expect(wrapper.state().recipients).toEqual('email@domain.com,email2@domain.com');
+      expect(wrapper.state().recipients).toEqual('email1@domain.com,email2@domain.com');
 
-      expect(props.onSubmit).toHaveBeenCalledTimes(3);
+      expect(props.onSubmit).toHaveBeenCalledTimes(2);
     });
 
     it('does not refresh on invalid recipient', () => {
@@ -93,18 +90,29 @@ describe('BasicFilter', () => {
       expect(wrapper.state().recipients).toEqual('');
       expect(props.onSubmit).toHaveBeenCalledTimes(0);
     });
+
+    it('does not refresh when value is unchanged', () => {
+      const event = {
+        target: {
+          value: 'foo@bar.com'
+        }
+      };
+      wrapper.setState({ recipients: 'foo@bar.com' });
+
+      instance.handleRecipientsChange(event);
+      expect(wrapper.state().recipients).toEqual('foo@bar.com');
+      expect(props.onSubmit).toHaveBeenCalledTimes(0);
+    });
   });
 
   describe('handleDateSelection', () => {
     const now = new Date();
 
     beforeEach(() => {
-      dateMock.getRelativeDates = jest.fn(() => {
-        return {
-          to: now,
-          from: now
-        };
-      });
+      dateMock.getRelativeDates = jest.fn(() => ({
+        to: now,
+        from: now
+      }));
     });
 
     it('converts relativeRange to correct value', () => {
