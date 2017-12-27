@@ -1,23 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import _ from 'lodash';
 
-import { refreshBounceChartMetrics, refreshBounceTableMetrics } from 'src/actions/bounceReport';
+import { refreshRejectionTableMetrics } from 'src/actions/rejectionReport';
 import { addFilter, refreshTypeaheadCache } from 'src/actions/reportFilters';
 import { getShareLink, getFilterSearchOptions, parseSearch } from 'src/helpers/reports';
 import { showAlert } from 'src/actions/globalAlert';
 
 import { TableCollection, Empty, LongTextContainer } from 'src/components';
-import { Percent } from 'src/components/formatters';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
 import { Page, Panel, UnstyledLink } from '@sparkpost/matchbox';
 import ShareModal from '../components/ShareModal';
 import Filters from '../components/Filters';
-import ChartGroup from './components/ChartGroup';
 
-const columns = [{ label: 'Reason', width: '45%' }, 'Domain', 'Category', 'Classification', 'Count (%)'];
-
-export class BouncePage extends Component {
+const columns = [{ label: 'Reason', width: '45%' }, 'Domain', 'Category', 'Count'];
+export class RejectionPage extends Component {
   state = {
     modal: false,
     link: ''
@@ -29,24 +27,25 @@ export class BouncePage extends Component {
   }
 
   parseSearch() {
+    const { addFilter } = this.props;
     const { options, filters } = parseSearch(this.props.location.search);
 
-    if (filters) {
-      filters.forEach(this.props.addFilter);
+    if (!_.isEmpty(filters)) {
+      filters.forEach(addFilter);
     }
+
     return options;
   }
 
   handleRefresh = (options) => {
-    this.props.refreshBounceChartMetrics(options)
+    const { showAlert, refreshRejectionTableMetrics } = this.props;
+    return refreshRejectionTableMetrics(options)
       .then(() => this.updateLink())
-      .then(() => this.props.refreshBounceTableMetrics(options))
-      .catch((err) => {
-        this.props.showAlert({ type: 'error', message: 'Unable to refresh bounce report.', details: err.message });
-      });
+      .catch((err) => showAlert({ type: 'error', message: 'Unable to refresh rejection reports.', details: err.message }));
+
   }
 
-  handleModalToggle = (modal) => {
+  handleModalToggle = () => {
     this.setState({ modal: !this.state.modal });
   }
 
@@ -54,9 +53,8 @@ export class BouncePage extends Component {
     const { filters, history } = this.props;
     const options = getFilterSearchOptions(filters);
     const { link, search } = getShareLink(options);
-
     this.setState({ link });
-    history.replace({ pathname: '/reports/bounce', search });
+    history.replace({ pathname: '/reports/rejections', search });
   }
 
   handleDomainClick = (domain) => {
@@ -65,40 +63,30 @@ export class BouncePage extends Component {
   }
 
   getRowData = (rowData) => {
-    const { totalBounces } = this.props;
-    const { reason, domain, bounce_category_name, bounce_class_name, count_bounce } = rowData;
+    const { reason, domain, rejection_category_name,count_rejected } = rowData;
     return [
       <LongTextContainer text={reason} />,
       <UnstyledLink onClick={() => this.handleDomainClick(domain)}>{ domain }</UnstyledLink>,
-      bounce_category_name,
-      bounce_class_name,
-      <span>{count_bounce}(<Percent value={(count_bounce / totalBounces) * 100} />)</span>
+      rejection_category_name,
+      count_rejected
     ];
   };
 
-  renderChart() {
-    const { chartLoading, aggregates } = this.props;
-
-    if (!chartLoading && !aggregates) {
-      return <Empty title='Bounce Rates' message='No bounces to report' />;
-    }
-    return <ChartGroup />;
-  }
-
   renderCollection() {
-    const { tableLoading, reasons } = this.props;
 
-    if (tableLoading) {
+    const { loading, list } = this.props;
+
+    if (loading) {
       return <PanelLoading />;
     }
 
-    if (!reasons) {
-      return <Empty title={'Bounced Messages'} message={'No bounce reasons to report'} />;
+    if (!list.length) {
+      return <Empty message={'There are no rejection messages for your current query'} />;
     }
 
     return <TableCollection
       columns={columns}
-      rows={reasons}
+      rows={list}
       getRowData={this.getRowData}
       pagination={true}
     />;
@@ -108,10 +96,9 @@ export class BouncePage extends Component {
     const { modal, link } = this.state;
 
     return (
-      <Page title='Bounce Report'>
+      <Page title='Rejections Report'>
         <Filters refresh={this.handleRefresh} onShare={this.handleModalToggle} />
-        { this.renderChart() }
-        <Panel title='Bounced Messages' className='ReasonsTable'>
+        <Panel title='Rejection Reasons' className='RejectionTable'>
           { this.renderCollection() }
         </Panel>
         <ShareModal
@@ -123,25 +110,16 @@ export class BouncePage extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  const chartLoading = state.bounceReport.aggregatesLoading || state.bounceReport.categoriesLoading;
-  const tableLoading = chartLoading || state.bounceReport.reasonsLoading;
-  const aggregates = state.bounceReport.aggregates;
-  return {
-    filters: state.reportFilters,
-    chartLoading,
-    aggregates,
-    totalBounces: aggregates ? aggregates.countBounce : 1,
-    tableLoading,
-    reasons: state.bounceReport.reasons
-  };
-};
+const mapStateToProps = ({ reportFilters, rejectionReport }) => ({
+  filters: reportFilters,
+  loading: rejectionReport.reasonsLoading,
+  list: rejectionReport.list
+});
 
 const mapDispatchToProps = {
   addFilter,
-  refreshBounceChartMetrics,
-  refreshBounceTableMetrics,
+  refreshRejectionTableMetrics,
   refreshTypeaheadCache,
   showAlert
 };
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(BouncePage));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(RejectionPage));
