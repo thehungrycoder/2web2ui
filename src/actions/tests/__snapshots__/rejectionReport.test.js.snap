@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Action Creator: Rejection Report refreshRejectionTableMetrics dispatchs a refresh action 1`] = `
+Array [
+  Array [
+    undefined,
+  ],
+  Array [
+    Promise {},
+  ],
+  Array [
+    Object {
+      "payload": Object {
+        "reasons": Array [
+          Object {
+            "count_rejected": 30,
+            "domain": "example.com",
+            "reason": "520 rejection message",
+            "rejection_category_id": 2,
+            "rejection_type": "Generation Rejection",
+          },
+        ],
+      },
+      "type": "REFRESH_REJECTION_BY_DOMAIN_TABLE",
+    },
+  ],
+]
+`;
