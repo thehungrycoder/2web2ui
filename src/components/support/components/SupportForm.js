@@ -10,8 +10,6 @@ import { required, minLength, maxFileSize } from 'src/helpers/validation';
 
 import FileInput from './FileInput';
 
-import styles from './SupportForm.module.scss';
-
 const formName = 'supportForm';
 
 const fileSizeLimit = 1024;
