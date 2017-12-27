@@ -5,8 +5,9 @@ import { reduxForm, Field } from 'redux-form';
 import { Grid } from '@sparkpost/matchbox';
 
 import { TextFieldWrapper, SubaccountTypeaheadWrapper } from 'src/components';
-
 import { email as emailValidator, required } from 'src/helpers/validation';
+import { onEnter } from 'src/helpers/keyEvents';
+
 
 export class FilterForm extends Component {
   state = {
@@ -14,8 +15,13 @@ export class FilterForm extends Component {
     subaccountId: null
   };
 
-  handleChange(e, key) {
-    this.setState({ [key]: e.target.value }, this.refresh);
+  handleChange = (event) => {
+    const { value } = event.target;
+    const { email } = this.state;
+
+    if (email !== value) { //ignore unchanged events
+      this.setState({ email: value }, this.refresh);
+    }
   }
 
   handleSubaccountSelect = (subaccount) => {
@@ -38,7 +44,8 @@ export class FilterForm extends Component {
           <div>
             <Field
               name="email"
-              onBlur={(e) => this.handleChange(e, 'email')}
+              onBlur={this.handleChange}
+              onKeyDown={onEnter(this.handleChange)}
               component={TextFieldWrapper}
               title="Email"
               validate={[required, emailValidator]}
