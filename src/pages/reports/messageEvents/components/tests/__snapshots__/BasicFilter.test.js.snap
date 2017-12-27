@@ -18,6 +18,7 @@ exports[`BasicFilter renders correctly 1`] = `
       component={[Function]}
       name="recipients"
       onBlur={[Function]}
+      onKeyDown={[Function]}
       placeholder="recipient1@domain.com, recipient2@domain.com"
       title="Recipient Email(s)"
       validate={[Function]}

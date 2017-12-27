@@ -8,7 +8,7 @@ import DateFilter from 'src/pages/reports/components/DateFilter';
 import { TextFieldWrapper } from 'src/components';
 import { getRelativeDates } from 'src/helpers/date';
 import { email as emailValidator } from 'src/helpers/validation';
-
+import { onEnter } from 'src/helpers/keyEvents';
 export class BasicFilter extends Component {
   constructor(props) {
     super(props);
@@ -95,6 +95,7 @@ export class BasicFilter extends Component {
           <Field
             name="recipients"
             onBlur={this.handleRecipientsChange}
+            onKeyDown={onEnter(this.handleRecipientsChange)}
             component={TextFieldWrapper}
             title="Recipient Email(s)"
             validate={this.emailValidator}
@@ -106,7 +107,7 @@ export class BasicFilter extends Component {
   }
 }
 
-const formName = 'basicFilter';
+const formName = 'msgEventsBasicFilter';
 const formOptions = { form: formName };
 const mapStateToProps = ({ reportFilters }) => ({
   reportFilters,
