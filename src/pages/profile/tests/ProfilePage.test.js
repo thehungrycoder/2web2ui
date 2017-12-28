@@ -15,7 +15,7 @@ beforeEach(() => {
       customer: 12345
     },
     updateUser: jest.fn(() => Promise.resolve()),
-    updateCurrentUser: jest.fn(() => Promise.resolve()),
+    getCurrentUser: jest.fn(() => Promise.resolve()),
     confirmPassword: jest.fn(() => Promise.resolve()),
     showAlert: jest.fn()
   };
@@ -34,7 +34,7 @@ describe('ProfilePage', () => {
     it('updates profile correctly', async() => {
       await instance.updateProfile({ firstName: 'John', lastName: 'Doe' });
       expect(props.updateUser).toHaveBeenCalledWith('Lord Stark', { first_name: 'John', last_name: 'Doe' });
-      expect(props.updateCurrentUser).toHaveBeenCalledWith({ first_name: 'John', last_name: 'Doe' });
+      expect(props.getCurrentUser).toHaveBeenCalledTimes(1);
       expect(props.showAlert).toHaveBeenCalledTimes(0);
     });
 
@@ -43,7 +43,7 @@ describe('ProfilePage', () => {
       await instance.updateProfile({ firstName: 'John', lastName: 'Doe' });
 
       expect(props.updateUser).toHaveBeenCalledWith('Lord Stark', { first_name: 'John', last_name: 'Doe' });
-      expect(props.updateCurrentUser).toHaveBeenCalledTimes(0);
+      expect(props.getCurrentUser).toHaveBeenCalledTimes(0);
       expect(props.showAlert).toHaveBeenCalledTimes(1);
     });
   });
