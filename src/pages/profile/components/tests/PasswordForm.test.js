@@ -23,6 +23,11 @@ describe('PasswordForm', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('disables button correctly', () => {
+    wrapper.setProps({ currentPassword: 'foo', newPassword: 'foo' });
+    expect(wrapper).toMatchSnapshot();
+  });
+
   describe('validatePasswords', () => {
     it('validates passwords correctly', () => {
       expect(instance.validatePasswords('abcd')).toEqual('New Password is same as Current Password');
