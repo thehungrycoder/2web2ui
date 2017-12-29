@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PreviewPage renders loading page when template is undefined 1`] = `<Loading />`;
+
+exports[`PreviewPage renders preview page 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "Edit Template",
+      "to": "/path/to/edit",
+    }
+  }
+  empty={Object {}}
+  title="Test Template (Draft)"
+>
+  <PreviewPanel
+    html="<html />"
+    text=""
+  />
+</Page>
+`;

@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders preview page 1`] = `
+<PreviewPage
+  editTemplatePath="/templates/edit/123/published"
+  label="Published"
+/>
+`;

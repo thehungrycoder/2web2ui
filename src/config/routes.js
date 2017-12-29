@@ -194,13 +194,13 @@ const routes = [
   },
   {
     path: '/templates/preview/:id',
-    component: templates.PreviewPage,
+    component: templates.PreviewDraftPage,
     condition: hasGrants('templates/modify'),
     layout: App
   },
   {
     path: '/templates/preview/:id/published',
-    component: templates.PreviewPage,
+    component: templates.PreviewPublishedPage,
     condition: hasGrants('templates/modify'),
     layout: App
   },

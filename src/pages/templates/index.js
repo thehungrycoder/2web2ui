@@ -1,13 +1,15 @@
 import CreatePage from './CreatePage';
 import EditPage from './EditPage';
 import ListPage from './ListPage';
-import PreviewPage from './PreviewPage';
+import PreviewDraftPage from './PreviewDraftPage';
+import PreviewPublishedPage from './PreviewPublishedPage';
 import PublishedPage from './PublishedPage';
 
 export default {
   CreatePage,
   EditPage,
   ListPage,
-  PreviewPage,
+  PreviewDraftPage,
+  PreviewPublishedPage,
   PublishedPage
 };
