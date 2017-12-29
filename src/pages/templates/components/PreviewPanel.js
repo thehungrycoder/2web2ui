@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Panel, Tabs } from '@sparkpost/matchbox';
+import { Tabs } from '@sparkpost/matchbox';
 
 import PreviewFrame from './PreviewFrame';
+import styles from './PreviewPanel.module.scss';
 
 export default class PreviewPanel extends Component {
   static defaultProps = {
@@ -38,12 +39,12 @@ export default class PreviewPanel extends Component {
       : this.props[contentType];
 
     return (
-      <Panel>
-        <Panel.Section>
-          <Tabs selected={selectedTabIndex} tabs={tabs} />
+      <div className={styles.PreviewPanel}>
+        <Tabs selected={selectedTabIndex} tabs={tabs} />
+        <div className={styles.PreviewPanelWrapper}>
           <PreviewFrame content={content} key={contentType} />
-        </Panel.Section>
-      </Panel>
+        </div>
+      </div>
     );
   }
 }

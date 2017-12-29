@@ -13,7 +13,11 @@ const TEST_CASES = {
     label: 'Draft',
     template: {
       content: {
-        html: '<html />'
+        from: {
+          email: 'test@example.com'
+        },
+        html: '<html />',
+        subject: 'Test Subject'
       },
       name: 'Test Template'
     }

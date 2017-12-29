@@ -14,9 +14,33 @@ exports[`PreviewPage renders preview page 1`] = `
   empty={Object {}}
   title="Test Template (Draft)"
 >
-  <PreviewPanel
-    html="<html />"
-    text=""
-  />
+  <Panel
+    sectioned={true}
+  >
+    <TextField
+      label="To"
+      placeholder="example@domain.com, example@domain.com, ..."
+      required={true}
+      type="text"
+    />
+    <TextField
+      disabled={true}
+      label="From"
+      required={false}
+      type="text"
+      value="test@example.com"
+    />
+    <TextField
+      disabled={true}
+      label="Subject"
+      required={false}
+      type="text"
+      value="Test Subject"
+    />
+    <PreviewPanel
+      html="<html />"
+      text=""
+    />
+  </Panel>
 </Page>
 `;
