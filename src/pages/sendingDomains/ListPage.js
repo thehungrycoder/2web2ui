@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import { list as listDomains } from 'src/actions/sendingDomains';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
-import { Loading, TableCollection, SubaccountTag, StatusTag, ApiErrorBanner } from 'src/components';
+import { Loading, TableCollection, SubaccountTag, DomainStatusTag, ApiErrorBanner } from 'src/components';
 import { Page, Tooltip, Icon, UnstyledLink } from '@sparkpost/matchbox';
 import ReadyFor from './components/ReadyFor';
 import UnverifiedWarningBanner from './components/UnverifiedWarningBanner';
@@ -40,7 +40,7 @@ export class ListPage extends Component {
     const domainStatus = resolveStatus(status);
 
     if (domainStatus !== 'verified') {
-      return <StatusTag status={domainStatus} />;
+      return <DomainStatusTag status={domainStatus} />;
     }
 
     return <ReadyFor {...resolveReadyFor(status)} bounceDefault={is_default_bounce_domain} />;

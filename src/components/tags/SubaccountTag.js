@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Tag, Icon } from '@sparkpost/matchbox';
 
-const SubaccountTag = ({ id, all, master }) => {
+const SubaccountTag = ({ id, all, master, isDefault }) => {
+  const defaultContent = isDefault ? ' (Default)' : null;
   let content = `Subaccount ${id}`;
 
   if (all) {
@@ -13,7 +14,7 @@ const SubaccountTag = ({ id, all, master }) => {
     content = 'Master account';
   }
 
-  return <Tag><Icon name='Link' size={15} /> {content}</Tag>;
+  return <Tag orange={isDefault}><Icon name='Link' size={15} /> {content}{defaultContent}</Tag>;
 };
 
 SubaccountTag.propTypes = {

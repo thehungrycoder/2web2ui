@@ -7,5 +7,3 @@ Object {
   "sending": true,
 }
 `;
-
-exports[`resolveStatus should return unverified if not ownership verified 1`] = `"unverified"`;
