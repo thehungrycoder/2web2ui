@@ -1,26 +1,49 @@
 import { sparkpostLogin } from '../helpers/http';
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
+import { get as tfaGet } from 'src/actions/tfa';
 
 import authCookie from '../helpers/authCookie';
 import { initializeAccessControl } from './accessControl';
 
 
-export function login(authData, saveCookie = false) {
-
+/**
+ * does the necessary actions to log a user in and set appropriate data in redux
+ * store and auth cookie
+ * Note: the login details are updated separately from setting "logged in"
+ *
+ * @param authData {Object} data used to update redux store and cookie
+ * @param saveCookie {Boolean} saves session cookie
+ *
+ */
+export function login({ authData = {}, saveCookie = false }) {
   if (saveCookie) { // save auth cookie
     authCookie.save(authData);
   }
 
   return (dispatch) => {
-    dispatch({
-      type: 'LOGIN_SUCCESS',
-      payload: authData
-    });
-
+    dispatch(setLoginCredentials(authData));
+    dispatch({ type: 'LOGIN_SUCCESS' });
     dispatch(initializeAccessControl());
   };
 }
 
+// updates the user specific data in the auth redux store
+export function setLoginCredentials(authData) {
+  return (dispatch) => dispatch({
+    type: 'LOGIN_DETAILS',
+    payload: authData
+  });
+}
+
+/**
+ * The login form flow
+ * 1. see if you're logged in
+ * 2. authenticate user
+ * 3. check if 2FA is one, if so(set flag in redux store)
+ * if not, update auth details in redux store, set cookie and update loggedIn
+ * within redux store
+ *
+ */
 export function authenticate(username, password, rememberMe = false) {
   // return a thunk
   return (dispatch, getState) => {
@@ -32,12 +55,26 @@ export function authenticate(username, password, rememberMe = false) {
 
     dispatch({ type: 'LOGIN_PENDING' });
 
+    let authData;
+
     sparkpostLogin(username, password, rememberMe)
       .then(({ data = {}} = {}) => {
-        const payload = { ...data, username };
+        authData = { ...data, username };
 
-        // dispatch login success event
-        dispatch(login(payload, true));
+        dispatch(setLoginCredentials(authData));
+        return tfaGet({ username, token: authData.access_token });
+      })
+      .then(({ data = {}} = {}) => {
+        const { results: { enabled }} = data;
+
+        // if tfa enabled must avoid logging in
+        if (enabled) {
+          dispatch({
+            type: 'TFA_ENABLED'
+          });
+        } else {
+          dispatch(login({ authData, saveCookie: true }));
+        }
       })
       .catch((err) => {
         const { response = {}} = err;
@@ -97,7 +134,7 @@ export function ssoCheck(username) {
 
 export function refresh(token, refreshToken) {
   const newCookie = authCookie.merge({ access_token: token, refresh_token: refreshToken });
-  return login(newCookie);
+  return login({ authData: newCookie });
 }
 
 export function logout() {

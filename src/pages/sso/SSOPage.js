@@ -19,10 +19,13 @@ export class SSOPage extends Component {
 
       if (data.accessToken && data.username) {
         this.props.login({
-          access_token: data.accessToken,
-          username: data.username,
-          refresh_token: ''
-        }, true);
+          authData: {
+            access_token: data.accessToken,
+            username: data.username,
+            refresh_token: ''
+          },
+          saveCookie: true
+        });
         return this.props.history.push('/dashboard');
 
         //Heroku.barMe(); TODO: copied from old ui, fix it when heroku specific behaviors are implemented
