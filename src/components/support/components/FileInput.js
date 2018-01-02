@@ -46,13 +46,6 @@ export default class FileInput extends Component {
     return <Tag className={styles.Tag}>No file selected</Tag>;
   }
 
-  renderError() {
-    const { meta: { touched, error }} = this.props;
-    if (touched && error) {
-      return <Error error={error} />;
-    }
-  }
-
   buildAcceptList(accept) {
     if (Array.isArray(accept)) {
       return accept.join(',');
@@ -61,7 +54,9 @@ export default class FileInput extends Component {
   }
 
   render() {
-    const { accept = '', children } = this.props;
+    const { accept = '', meta: { touched, error }, children } = this.props;
+
+    const errorMarkup = touched && error ? <Error inline={true} error={error} /> : null;
 
     let fileInput;
     return <div>
@@ -73,8 +68,7 @@ export default class FileInput extends Component {
         className={styles.InputElement}
         />
         <Button onClick={() => fileInput && fileInput.click()}>{children}</Button>
-        { this.renderTag() }
-        { this.renderError() }
+        { error ? errorMarkup : this.renderTag() }
     </div>;
   }
 }
