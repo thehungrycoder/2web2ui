@@ -12,21 +12,31 @@ describe('Support Component', () => {
     ticket_id: 103339
   };
   let wrapper;
+  let fetchAccount;
   let createTicket;
   let clearSupportForm;
   let showAlert;
+  let props;
 
   beforeEach(() => {
+    fetchAccount = jest.fn();
     createTicket = jest.fn().mockImplementation(() => Promise.resolve(createTicketResult));
 
     clearSupportForm = jest.fn();
     showAlert = jest.fn();
 
-    const props = { createTicket, clearSupportForm, showAlert };
+    props = { fetchAccount, createTicket, clearSupportForm, showAlert, entitledToSupport: true, loggedIn: true };
     wrapper = shallow(<Support {...props} />);
   });
 
+  it('should not render the icon if the account is not entitled to support', () => {
+    const localProps = {  ...props, entitledToSupport: false };
+    wrapper = shallow(<Support {...localProps} />);
+    expect(wrapper.get(0)).toBeFalsy();
+  });
+
   it('should render just the icon by default', () => {
+    expect(wrapper.get(0)).toBeTruthy();
     expect(wrapper).toMatchSnapshot();
   });
 

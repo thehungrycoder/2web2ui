@@ -1,3 +1,36 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Support Component should render just the icon by default 1`] = `""`;
+exports[`Support Component should render just the icon by default 1`] = `
+<Portal
+  containerId="support-portal"
+>
+  <div>
+    <Popover
+      bottom={true}
+      left={true}
+      manualTrigger={true}
+      open={false}
+      right={true}
+      top={true}
+      trigger={
+        <a
+          className={undefined}
+          onClick={[Function]}
+        >
+          <Icon
+            className={undefined}
+            name="HelpOutline"
+            size={33}
+          />
+        </a>
+      }
+    >
+      <Connect(ReduxForm)
+        onCancel={[Function]}
+        onContinue={[Function]}
+        onSubmit={[Function]}
+      />
+    </Popover>
+  </div>
+</Portal>
+`;
