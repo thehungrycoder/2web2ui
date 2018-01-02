@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styles from './PreviewFrame.module.scss';
 
+// Manually pad to avoid scrollbars
+const PADDING = 5;
+
 // @note This is a port of the previous fd.templates.preview.directive
 // @see https://github.com/SparkPost/webui/blob/master/src/app/templates/preview-directive.js
 export default class PreviewFrame extends Component {
@@ -20,32 +23,34 @@ export default class PreviewFrame extends Component {
 
   // Calculate height of loaded content and manually set iframe height to match to avoid
   // a scrollbar
-  // @note offsetHeight was used instead of scrollHeight because it is more likely a template
-  //   will include a border than pseudo-elements such as :before and :after and removed
-  //   border since both metrics don't include it
-  // @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetHeight
+  // @see http://www.dyn-web.com/tutorials/iframes/height/
   onLoad = () => {
-    const { body } = this.iframe.contentWindow.document;
+    const { body, documentElement: html } = this.iframe.contentDocument;
+    const height = Math.max(
+      body.offsetHeight,
+      body.scrollHeight,
+      html.clientHeight,
+      html.offsetHeight,
+      html.scrollHeight
+    );
 
-    body.style.marginBottom = 0;
-    body.style.marginTop = 0;
-
-    this.setState({ height: `${body.offsetHeight}px` });
+    this.setState({ height: `${height + PADDING}px` });
   }
 
   setRef = (iframe) => { this.iframe = iframe; }
 
   writeContent() {
-    const { document } = this.iframe.contentWindow;
+    const { contentDocument } = this.iframe;
 
-    document.open();
-    document.write(this.props.content);
-    document.close();
+    contentDocument.open();
+    contentDocument.write(this.props.content);
+    contentDocument.close();
   }
 
-  // @todo Shadow DOM might be a better solution when it has better browser support
+  // @todo srcDoc or Shadow DOM would be better solutions if they had better browser support
   // @see https://developer.mozilla.org/en-US/docs/Web/Web_Components/Shadow_DOM
   // @see https://github.com/Wildhoney/ReactShadow
+  // @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe#attr-srcdoc
   render() {
     return (
       <iframe

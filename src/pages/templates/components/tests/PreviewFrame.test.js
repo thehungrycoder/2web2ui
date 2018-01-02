@@ -15,13 +15,11 @@ const createWrapper = (content, contentDocument = {}) => {
     // @note Tried mocking contentWindow with jsdom, but didn't provide add value, so removed dep
     setRef = (iframe) => {
       this.iframe = {
-        contentWindow: {
-          document: {
-            close: jest.fn(),
-            open: jest.fn(),
-            write: jest.fn(),
-            ...contentDocument
-          }
+        contentDocument: {
+          close: jest.fn(),
+          open: jest.fn(),
+          write: jest.fn(),
+          ...contentDocument
         }
       };
     }
@@ -45,8 +43,13 @@ test('writes content to iframe document', () => {
 test('sets iframe height after it loads', () => {
   const wrapper = createWrapper(testContent, {
     body: {
-      offsetHeight: '99',
-      style: {}
+      offsetHeight: '94',
+      scrollHeight: '94'
+    },
+    documentElement: {
+      clientHeight: '94',
+      offsetHeight: '94',
+      scrollHeight: '94'
     }
   });
 
