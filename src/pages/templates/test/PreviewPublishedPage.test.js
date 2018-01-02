@@ -4,27 +4,28 @@ import { shallow } from 'enzyme';
 import { PreviewPublishedPage } from '../PreviewPublishedPage';
 
 const props = {
-  getPublished: jest.fn(),
+  getPublishedAndPreview: jest.fn(() => Promise.resolve()),
   match: {
     params: {
-      id: 123
+      id: 'test-template'
     }
   }
 };
 
 afterEach(() => { jest.clearAllMocks(); });
 
-test('renders preview page', () => {
+test('renders preview page when loading preview', () => {
   const wrapper = shallow(<PreviewPublishedPage {...props} />);
   expect(wrapper).toMatchSnapshot();
 });
 
-test('call .getPublished when template has not loaded', () => {
-  shallow(<PreviewPublishedPage {...props} />);
-  expect(props.getPublished).toHaveBeenCalledWith(123);
+test('re-renders preview page after preview is loaded', async() => {
+  const wrapper = await shallow(<PreviewPublishedPage {...props} />);
+  wrapper.update(); // must force a re-render with new state
+  expect(wrapper).toMatchSnapshot();
 });
 
-test('does not call .getPublished when template is loaded', () => {
-  shallow(<PreviewPublishedPage {...props} template={{ id: 123 }} />);
-  expect(props.getPublished).not.toHaveBeenCalled();
+test('call .getPublishedAndPreview when template has not loaded', () => {
+  shallow(<PreviewPublishedPage {...props} />);
+  expect(props.getPublishedAndPreview).toHaveBeenCalledWith('test-template');
 });

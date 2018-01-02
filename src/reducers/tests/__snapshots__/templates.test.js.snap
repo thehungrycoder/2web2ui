@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`stores preview payload as contentPreview.draft 1`] = `
+Object {
+  "byId": Object {},
+  "contentPreview": Object {
+    "draft": Object {
+      "test-template": Object {
+        "html": "<h1>Preview of Test Template</h1>",
+        "subject": "Preview of Test Template",
+      },
+    },
+    "published": Object {},
+  },
+  "list": Array [],
+  "listError": null,
+}
+`;

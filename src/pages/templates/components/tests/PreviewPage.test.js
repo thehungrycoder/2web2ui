@@ -6,18 +6,21 @@ import PreviewPage from '../PreviewPage';
 
 const TEST_CASES = {
   'renders loading page when template is undefined': {
-    template: undefined
+    loading: true
   },
   'renders preview page': {
     editTemplatePath: '/path/to/edit',
     label: 'Draft',
+    loading: false,
+    preview: {
+      html: '<html />',
+      subject: 'Test Subject'
+    },
     template: {
       content: {
         from: {
           email: 'test@example.com'
-        },
-        html: '<html />',
-        subject: 'Test Subject'
+        }
       },
       name: 'Test Template'
     }

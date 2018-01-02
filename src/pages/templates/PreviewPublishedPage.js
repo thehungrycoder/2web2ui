@@ -6,10 +6,13 @@ import * as TemplateActions from 'src/actions/templates';
 import PreviewPage from './components/PreviewPage';
 
 export class PreviewPublishedPage extends Component {
+  state = {
+    loading: true
+  }
+
   componentDidMount() {
-    if (!this.props.template) {
-      this.props.getPublished(this.props.match.params.id);
-    }
+    this.props.getPublishedAndPreview(this.props.match.params.id)
+      .then(() => { this.setState({ loading: false }); });
   }
 
   render() {
@@ -17,6 +20,8 @@ export class PreviewPublishedPage extends Component {
       <PreviewPage
         editTemplatePath={`/templates/edit/${this.props.match.params.id}/published`}
         label="Published"
+        loading={this.state.loading}
+        preview={this.props.preview}
         template={this.props.template}
       />
     );
@@ -27,6 +32,7 @@ export const mapStateToProps = (state, props) => {
   const templates = state.templates.byId[props.match.params.id] || {};
 
   return {
+    preview: state.templates.contentPreview.published[props.match.params.id],
     template: templates.published
   };
 };

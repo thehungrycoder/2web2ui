@@ -1,8 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders preview page 1`] = `
+exports[`re-renders preview page after preview is loaded 1`] = `
 <PreviewPage
-  editTemplatePath="/templates/edit/123/published"
+  editTemplatePath="/templates/edit/test-template/published"
   label="Published"
+  loading={false}
+/>
+`;
+
+exports[`renders preview page when loading preview 1`] = `
+<PreviewPage
+  editTemplatePath="/templates/edit/test-template/published"
+  label="Published"
+  loading={true}
 />
 `;

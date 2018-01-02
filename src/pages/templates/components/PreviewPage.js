@@ -5,8 +5,8 @@ import { Page, Panel, TextField } from '@sparkpost/matchbox';
 import { Loading } from 'src/components';
 import PreviewPanel from './PreviewPanel';
 
-export default function PreviewPage({ editTemplatePath, label, template }) {
-  if (!template) {
+export default function PreviewPage({ editTemplatePath, label, loading = true, preview, template }) {
+  if (loading) {
     return <Loading />;
   }
 
@@ -26,8 +26,8 @@ export default function PreviewPage({ editTemplatePath, label, template }) {
       <Panel sectioned>
         <TextField required label="To" placeholder="example@domain.com, example@domain.com, ..." />
         <TextField disabled label="From" value={name ? `${name} <${email}>` : email} />
-        <TextField disabled label="Subject" value={template.content.subject} />
-        <PreviewPanel html={template.content.html} text={template.content.text} />
+        <TextField disabled label="Subject" value={preview.subject} />
+        <PreviewPanel html={preview.html} text={preview.text} />
       </Panel>
     </Page>
   );

@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 import localforage from 'localforage';
 import config from 'src/config';
@@ -26,6 +27,28 @@ export function getDraft(id) {
   });
 }
 
+export function getDraftAndPreview(id) {
+  return async(dispatch) => {
+    const { content } = await dispatch(getDraft(id));
+    const { payload: { substitution_data }} = await dispatch(getTestData({ id, mode: 'draft' }));
+
+    return dispatch(getPreview({ content, id, mode: 'draft', substitution_data }));
+  };
+}
+
+// @see https://github.com/SparkPost/sparkpost-admin-api-documentation/blob/94bd8b8329a9645b32921eb1a4ead5390af2aed9/services/content_previewer_api.md#content-previewer-utilscontent-previewer
+export function getPreview({ content, id, mode, substitution_data = {}}) {
+  return sparkpostApiRequest({
+    type: 'GET_TEMPLATE_PREVIEW',
+    meta: {
+      context: { id, mode },
+      method: 'POST',
+      url: '/utils/content-previewer',
+      data: { content, substitution_data }
+    }
+  });
+}
+
 export function getPublished(id) {
   return sparkpostApiRequest({
     type: 'GET_PUBLISHED_TEMPLATE',
@@ -37,6 +60,15 @@ export function getPublished(id) {
       }
     }
   });
+}
+
+export function getPublishedAndPreview(id) {
+  return async(dispatch) => {
+    const { content } = await dispatch(getPublished(id));
+    const { payload: { substitution_data }} = await dispatch(getTestData({ id, mode: 'published' }));
+
+    return dispatch(getPreview({ content, id, mode: 'published', substitution_data }));
+  };
 }
 
 export function create(data) {
