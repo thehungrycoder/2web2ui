@@ -34,6 +34,11 @@ export default class PreviewFrame extends Component {
       html.scrollHeight
     );
 
+    // Avoid loading links in iframe
+    for (const a of this.iframe.contentDocument.getElementsByTagName('a')) {
+      a.setAttribute('target', '_parent');
+    }
+
     this.setState({ height: `${height + PADDING}px` });
   }
 
@@ -58,6 +63,7 @@ export default class PreviewFrame extends Component {
         height={this.state.height}
         ref={this.setRef}
         onLoad={this.onLoad}
+        sandbox="allow-same-origin allow-top-navigation-by-user-activation"
         title="preview email template frame"
       />
     );

@@ -17,6 +17,7 @@ const createWrapper = (content, contentDocument = {}) => {
       this.iframe = {
         contentDocument: {
           close: jest.fn(),
+          getElementsByTagName: jest.fn(() => []),
           open: jest.fn(),
           write: jest.fn(),
           ...contentDocument
