@@ -10,6 +10,7 @@ exports[`renders correctly 1`] = `
         prefix={null}
         readOnly={true}
         required={false}
+        resize="both"
         suffix={
           <Icon
             name="CaretDown"
@@ -82,6 +83,7 @@ exports[`renders selected correctly 1`] = `
         prefix="(1)"
         readOnly={true}
         required={false}
+        resize="both"
         suffix={
           <Icon
             name="CaretDown"

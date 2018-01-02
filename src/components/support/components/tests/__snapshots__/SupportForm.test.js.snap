@@ -11,6 +11,7 @@ exports[`Support Form Component Form should render 1`] = `
     <Panel.Section>
       <Field
         component={[Function]}
+        inlineErrors={true}
         label="Subject"
         name="subject"
         placeholder="Give your issue a title"
@@ -23,6 +24,7 @@ exports[`Support Form Component Form should render 1`] = `
       />
       <Field
         component={[Function]}
+        inlineErrors={true}
         label="Message"
         multiline={true}
         name="message"
