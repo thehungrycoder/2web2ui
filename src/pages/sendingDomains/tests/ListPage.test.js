@@ -3,7 +3,7 @@ import React from 'react';
 
 import { ListPage } from '../ListPage';
 
-describe('Ready For Component', () => {
+describe('Sending Domains List Page', () => {
   let wrapper;
 
   const domains = [
@@ -27,9 +27,9 @@ describe('Ready For Component', () => {
         cname_status: 'valid',
         dkim_status: 'valid',
         mx_status: 'valid'
-      },
+      }
     }
-  ]
+  ];
 
   beforeEach(() => {
     const props = {
@@ -37,7 +37,7 @@ describe('Ready For Component', () => {
       error: null,
       hasSubaccounts: false,
       domains,
-      listDomains: jest.fn(),
+      listDomains: jest.fn()
     };
 
     wrapper = shallow(<ListPage {...props}/>);

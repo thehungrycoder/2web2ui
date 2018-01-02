@@ -107,7 +107,7 @@ export class ListPage extends Component {
 
     return (
       <Page
-        title='Domains'
+        title='Sending Domains'
         primaryAction={primaryAction}
         empty={{
           show: domains.length === 0,
