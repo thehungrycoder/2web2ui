@@ -5,6 +5,8 @@ import { Portal, Icon, Popover } from '@sparkpost/matchbox';
 
 import { fetch as fetchAccount } from 'src/actions/account';
 
+import entitledToSupport from 'src/selectors/support';
+
 import { createTicket, clearSupportForm } from 'src/actions/support';
 import { showAlert } from 'src/actions/globalAlert';
 import SupportForm from './components/SupportForm';
@@ -81,9 +83,9 @@ export class Support extends Component {
   }
 }
 
-const mapStateToProps = ({ auth, account }) => ({
-  loggedIn: auth.loggedIn,
-  entitledToSupport: account.support ? account.support.online : false
+const mapStateToProps = (state) => ({
+  loggedIn: state.auth.loggedIn,
+  entitledToSupport: entitledToSupport(state)
 });
 
 const mapDispatchToProps = { fetchAccount, createTicket, clearSupportForm, showAlert };
