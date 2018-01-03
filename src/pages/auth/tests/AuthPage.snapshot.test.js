@@ -8,6 +8,9 @@ const props = {
     loggedIn: false,
     loginPending: false
   },
+  tfa: {
+    tfaEnabled: false
+  },
   authenticate: jest.fn()
 };
 
