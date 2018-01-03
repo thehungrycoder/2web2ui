@@ -3,40 +3,21 @@ import React from 'react';
 
 import ReadyFor from '../ReadyFor';
 
-describe('Ready For Component', () => {
-  let wrapper;
+describe('Component: Ready For', () => {
 
-  beforeEach(() => {
-    const props = {
-      bounce: false,
-      sending: true,
-      dkim: true
-    };
-
-    wrapper = shallow(<ReadyFor {...props}/>);
+  it('should render null when all flags are false', () => {
+    expect(shallow(<ReadyFor />)).toMatchSnapshot();
   });
 
-  it('renders sending and dkim correctly', () => {
-    expect(wrapper).toMatchSnapshot();
-  })
-
-  it('renders null if all options are false', () => {
-    wrapper.setProps({
-      sending: false,
-      dkim: false
-    });
-
-    expect(wrapper).toMatchSnapshot();
+  it('should render sending and dkim ready', () => {
+    expect(shallow(<ReadyFor sending dkim/>)).toMatchSnapshot();
   });
 
-  it('renders default bounce', () => {
-    wrapper.setProps({
-      bounce: true,
-      sending: false,
-      dkim: false,
-      bounceDefault: true
-    });
+  it('should render bounce ready', () => {
+    expect(shallow(<ReadyFor bounce/>)).toMatchSnapshot();
+  });
 
-    expect(wrapper).toMatchSnapshot();
+  it('should render bounce as default ready', () => {
+    expect(shallow(<ReadyFor bounce bounceDefault/>)).toMatchSnapshot();
   });
 });

@@ -22,7 +22,7 @@ export class ListPage extends Component {
   getColumns = () => {
     const { hasSubaccounts } = this.props;
 
-    const tooltip = <Tooltip content={tooltipContent}>Status <Icon name='Help' size={15} className={styles.StatusTooltip}/></Tooltip>;
+    const tooltip = <Tooltip dark content={tooltipContent}>Status <Icon name='Help' size={15} className={styles.StatusTooltip}/></Tooltip>;
 
     const columns = [
       { label: 'Domain', width: '30%' },

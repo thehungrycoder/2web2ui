@@ -2,7 +2,7 @@
 
 exports[`Component: TrackingDomainRow Tag component should render the IsDefaultTag 1`] = `
 <Tag
-  orange={true}
+  color="orange"
 >
   Default
 </Tag>

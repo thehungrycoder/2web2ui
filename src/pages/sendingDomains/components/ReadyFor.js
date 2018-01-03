@@ -13,7 +13,7 @@ const ReadyFor = ({ bounce, dkim, sending, bounceDefault }) => {
 
   if (bounce) {
     bounceMarkup = bounceDefault
-      ? <Tag orange>Bounce (Default)</Tag>
+      ? <Tag color='orange'>Bounce (Default)</Tag>
       : <Tag>Bounce</Tag>;
   }
 
@@ -34,9 +34,9 @@ const ReadyFor = ({ bounce, dkim, sending, bounceDefault }) => {
 };
 
 ReadyFor.propTypes = {
-  bounce: PropTypes.bool.isRequired,
-  sending: PropTypes.bool.isRequired,
-  dkim: PropTypes.bool.isRequired,
+  bounce: PropTypes.bool,
+  sending: PropTypes.bool,
+  dkim: PropTypes.bool,
   bounceDefault: PropTypes.bool
 };
 

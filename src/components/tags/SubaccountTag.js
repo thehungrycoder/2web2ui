@@ -5,6 +5,7 @@ import { Tag, Icon } from '@sparkpost/matchbox';
 const SubaccountTag = ({ id, all, master, isDefault }) => {
   const defaultContent = isDefault ? ' (Default)' : null;
   let content = `Subaccount ${id}`;
+  const color = isDefault ? 'orange' : null;
 
   if (all) {
     content = 'Shared with all';
@@ -14,13 +15,14 @@ const SubaccountTag = ({ id, all, master, isDefault }) => {
     content = 'Master account';
   }
 
-  return <Tag orange={isDefault}><Icon name='Link' size={15} /> {content}{defaultContent}</Tag>;
+  return <Tag color={color}><Icon name='Link' size={15} /> {content}{defaultContent}</Tag>;
 };
 
 SubaccountTag.propTypes = {
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   all: PropTypes.bool,
-  master: PropTypes.bool
+  master: PropTypes.bool,
+  isDefault: PropTypes.bool
 };
 
 export default SubaccountTag;

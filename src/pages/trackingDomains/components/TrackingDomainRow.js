@@ -9,7 +9,7 @@ import styles from './TrackingDomainRow.module.scss';
 import _ from 'lodash';
 
 export function IsDefaultTag() {
-  return <Tag orange className={styles.Tag}>Default</Tag>;
+  return <Tag color='orange' className={styles.Tag}>Default</Tag>;
 }
 
 export class TrackingDomainRow extends Component {

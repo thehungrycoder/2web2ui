@@ -14,7 +14,7 @@ const DomainStatusTag = ({ status, className }) => {
       <Tooltip
         content='This domain is not available for use. For more information, please contact support.'
         dark>
-        <Tag className={className} yellow><Icon size={size} name='ErrorOutline'/> Unverified</Tag>
+        <Tag className={className} color='yellow'><Icon size={size} name='ErrorOutline'/> Unverified</Tag>
       </Tooltip>
     );
   }
@@ -24,7 +24,7 @@ const DomainStatusTag = ({ status, className }) => {
       <Tooltip
         content='This domain is not available for use. For more information, please contact support.'
         dark>
-        <Tag className={className} yellow><Icon size={size} name='ErrorOutline'/> Blocked</Tag>
+        <Tag className={className} color='red'><Icon size={size} name='ErrorOutline'/> Blocked</Tag>
       </Tooltip>
     );
   }
@@ -43,7 +43,7 @@ const DomainStatusTag = ({ status, className }) => {
 };
 
 DomainStatusTag.propTypes = {
-  status: PropTypes.oneOf(['unverified', 'blocked', 'pending', 'verified'])
+  status: PropTypes.oneOf(['unverified', 'blocked', 'pending', 'verified', null])
 };
 
 export default DomainStatusTag;
