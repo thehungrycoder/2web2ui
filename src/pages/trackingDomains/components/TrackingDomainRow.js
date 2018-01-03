@@ -107,10 +107,10 @@ export class TrackingDomainRow extends Component {
   render() {
     const { domain, subaccountId, status, isDefault } = this.props;
     return (
-      <Panel.Section className={styles.SpacedSection}>
+      <Panel.Section>
         <Grid>
           <Grid.Column xs={12} md={9}>
-            <h3 className={styles.DomainHeading}>{domain}</h3>
+            <span className={styles.DomainHeading}>{domain}</span>
             <div className={styles.TagRow}>
               {status !== 'verified' && <DomainStatusTag className={styles.Tag} status={status} />}
               {isDefault && !subaccountId && <IsDefaultTag/>}

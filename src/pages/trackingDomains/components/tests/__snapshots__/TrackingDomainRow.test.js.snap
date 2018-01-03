@@ -15,9 +15,9 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
       md={9}
       xs={12}
     >
-      <h3>
+      <span>
         somedomain.com
-      </h3>
+      </span>
       <div>
         <DomainStatusTag
           status="unverified"
@@ -87,9 +87,9 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
       md={9}
       xs={12}
     >
-      <h3>
+      <span>
         somedomain.com
-      </h3>
+      </span>
       <div>
         <DomainStatusTag
           status="blocked"
@@ -152,9 +152,9 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
       md={9}
       xs={12}
     >
-      <h3>
+      <span>
         somedomain.com
-      </h3>
+      </span>
       <div>
         <DomainStatusTag
           status="unverified"
@@ -231,9 +231,9 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
       md={9}
       xs={12}
     >
-      <h3>
+      <span>
         somedomain.com
-      </h3>
+      </span>
       <div>
         <IsDefaultTag />
       </div>
@@ -303,9 +303,9 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
       md={9}
       xs={12}
     >
-      <h3>
+      <span>
         somedomain.com
-      </h3>
+      </span>
       <div>
         <DomainStatusTag
           status="unverified"
@@ -375,9 +375,9 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
       md={9}
       xs={12}
     >
-      <h3>
+      <span>
         somedomain.com
-      </h3>
+      </span>
       <div />
     </Grid.Column>
     <Grid.Column
@@ -439,9 +439,9 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
       md={9}
       xs={12}
     >
-      <h3>
+      <span>
         somedomain.com
-      </h3>
+      </span>
       <div>
         <DomainStatusTag
           status="pending"
@@ -504,9 +504,9 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
       md={9}
       xs={12}
     >
-      <h3>
+      <span>
         somedomain.com
-      </h3>
+      </span>
       <div>
         <DomainStatusTag
           status="unverified"
@@ -580,9 +580,9 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
       md={9}
       xs={12}
     >
-      <h3>
+      <span>
         somedomain.com
-      </h3>
+      </span>
       <div>
         <DomainStatusTag
           status="blocked"
@@ -649,9 +649,9 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
       md={9}
       xs={12}
     >
-      <h3>
+      <span>
         somedomain.com
-      </h3>
+      </span>
       <div>
         <DomainStatusTag
           status="unverified"
@@ -731,9 +731,9 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
       md={9}
       xs={12}
     >
-      <h3>
+      <span>
         somedomain.com
-      </h3>
+      </span>
       <div>
         <SubaccountTag
           id={100}
@@ -806,9 +806,9 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
       md={9}
       xs={12}
     >
-      <h3>
+      <span>
         somedomain.com
-      </h3>
+      </span>
       <div>
         <DomainStatusTag
           status="unverified"
@@ -882,9 +882,9 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
       md={9}
       xs={12}
     >
-      <h3>
+      <span>
         somedomain.com
-      </h3>
+      </span>
       <div>
         <SubaccountTag
           id={100}
@@ -951,9 +951,9 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
       md={9}
       xs={12}
     >
-      <h3>
+      <span>
         somedomain.com
-      </h3>
+      </span>
       <div>
         <DomainStatusTag
           status="pending"
