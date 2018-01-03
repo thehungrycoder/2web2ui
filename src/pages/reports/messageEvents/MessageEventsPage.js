@@ -72,7 +72,7 @@ export class MessageEventsPage extends Component {
       ? <Empty message={emptyMesasage} />
       : (
         <div>
-          { events.length === maxResults &&
+          { events.length >= maxResults &&
             <Banner status="info" title={maxResultsTitle}>{maxResultsText}</Banner>
           }
 
