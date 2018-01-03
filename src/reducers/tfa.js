@@ -3,7 +3,19 @@ const initialState = { tfaEnabled: false, tfaPending: false };
 export default (state = initialState, action) => {
   switch (action.type) {
     case 'TFA_ENABLED': {
-      return { ...state, tfaEnabled: true };
+      const {
+        access_token: token,
+        username = state.username,
+        refresh_token: refreshToken
+      } = action.payload;
+
+      return {
+        ...state,
+        token,
+        username,
+        refreshToken,
+        tfaEnabled: true
+      };
     }
 
     case 'TFA_VERIFICATION_PENDING': {

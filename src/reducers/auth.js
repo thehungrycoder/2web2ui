@@ -7,7 +7,7 @@ export default (state = initialState, action) => {
       return { ...state, errorDescription: null, loginPending: true };
     }
 
-    case 'LOGIN_DETAILS': {
+    case 'LOGIN_SUCCESS': {
       const {
         access_token: token,
         username = state.username,
@@ -18,12 +18,7 @@ export default (state = initialState, action) => {
         ...state,
         token,
         username,
-        refreshToken
-      };
-    }
-    case 'LOGIN_SUCCESS': {
-      return {
-        ...state,
+        refreshToken,
         loggedIn: true
       };
     }

@@ -11,11 +11,10 @@ export function get({ username, token }) {
   });
 }
 
-export function verifyAndLogin(code) {
-  return (dispatch, getState) => {
-    const authData = getState().auth;
-
+export function verifyAndLogin({ authData, code }) {
+  return (dispatch) => {
     dispatch({ type: 'TFA_VERIFICATION_PENDING' });
+
     return sparkpostRequest({
       method: 'POST',
       url: `/users/${authData.username}/two-factor`,

@@ -31,10 +31,6 @@ export class AuthPage extends Component {
     return this.props.authenticate(username, password, rememberMe);
   }
 
-  tfaVerify(code) {
-    return this.props.verifyAndLogin(code);
-  }
-
   renderLoginError(errorDescription) {
     return (
       <Error error={errorDescription} />
@@ -63,7 +59,8 @@ export class AuthPage extends Component {
 
   tfaSubmit = (values) => {
     const { code } = values;
-    return this.tfaVerify(code);
+    const { tfaEnabled, ...authData } = this.props.tfa;
+    return this.props.verifyAndLogin({ authData, code });
   };
 
   render() {

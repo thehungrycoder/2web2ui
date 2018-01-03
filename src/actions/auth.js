@@ -21,18 +21,12 @@ export function login({ authData = {}, saveCookie = false }) {
   }
 
   return (dispatch) => {
-    dispatch(setLoginCredentials(authData));
-    dispatch({ type: 'LOGIN_SUCCESS' });
+    dispatch({
+      type: 'LOGIN_SUCCESS',
+      payload: authData
+    });
     dispatch(initializeAccessControl());
   };
-}
-
-// updates the user specific data in the auth redux store
-export function setLoginCredentials(authData) {
-  return (dispatch) => dispatch({
-    type: 'LOGIN_DETAILS',
-    payload: authData
-  });
 }
 
 /**
@@ -55,25 +49,23 @@ export function authenticate(username, password, rememberMe = false) {
 
     dispatch({ type: 'LOGIN_PENDING' });
 
-    let authData;
-
-    sparkpostLogin(username, password, rememberMe)
+    return sparkpostLogin(username, password, rememberMe)
       .then(({ data = {}} = {}) => {
-        authData = { ...data, username };
+        const authData = { ...data, username };
 
-        dispatch(setLoginCredentials(authData));
-        return tfaGet({ username, token: authData.access_token });
+        return Promise.all([ authData, tfaGet({ username, token: authData.access_token })]);
       })
-      .then(({ data = {}} = {}) => {
+      .then(([ authData, { data = {}} = {}]) => {
         const { results: { enabled }} = data;
 
         // if tfa enabled must avoid logging in
         if (enabled) {
-          dispatch({
-            type: 'TFA_ENABLED'
+          return dispatch({
+            type: 'TFA_ENABLED',
+            payload: authData
           });
         } else {
-          dispatch(login({ authData, saveCookie: true }));
+          return dispatch(login({ authData, saveCookie: true }));
         }
       })
       .catch((err) => {

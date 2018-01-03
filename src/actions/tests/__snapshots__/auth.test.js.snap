@@ -1,0 +1,99 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Action Creator: Auth authenticate tests should dispatch a failed login if login fails 1`] = `
+Array [
+  Array [
+    Object {
+      "type": "LOGIN_PENDING",
+    },
+  ],
+  Array [
+    Object {
+      "payload": Object {
+        "errorDescription": "login failed",
+      },
+      "type": "LOGIN_FAIL",
+    },
+  ],
+]
+`;
+
+exports[`Action Creator: Auth authenticate tests should login if user is not TFA 1`] = `
+Array [
+  Array [
+    Object {
+      "type": "LOGIN_PENDING",
+    },
+  ],
+  Array [
+    [Function],
+  ],
+  Array [
+    [Function],
+  ],
+]
+`;
+
+exports[`Action Creator: Auth authenticate tests should update TFA to enabled if user is TFA 1`] = `
+Array [
+  Array [
+    Object {
+      "type": "LOGIN_PENDING",
+    },
+  ],
+  Array [
+    [Function],
+  ],
+  Array [
+    Object {
+      "type": "TFA_ENABLED",
+    },
+  ],
+]
+`;
+
+exports[`Action Creator: Auth confirm password tests should dispatch a confirm password fail when login fails 1`] = `
+Array [
+  Array [
+    Object {
+      "type": "CONFIRM_PASSWORD",
+    },
+  ],
+  Array [
+    Object {
+      "payload": Object {
+        "errorDescription": "login failed",
+      },
+      "type": "CONFIRM_PASSWORD_FAIL",
+    },
+  ],
+]
+`;
+
+exports[`Action Creator: Auth confirm password tests should dispatch a confirm password success when login succeeds 1`] = `
+Array [
+  Array [
+    Object {
+      "type": "CONFIRM_PASSWORD",
+    },
+  ],
+  Array [
+    Object {
+      "payload": Object {
+        "username": "bar",
+      },
+      "type": "CONFIRM_PASSWORD_SUCCESS",
+    },
+  ],
+]
+`;
+
+exports[`Action Creator: Auth should dispatch a logout when invoking logout, duh 1`] = `
+Array [
+  Array [
+    Object {
+      "type": "LOGOUT",
+    },
+  ],
+]
+`;
