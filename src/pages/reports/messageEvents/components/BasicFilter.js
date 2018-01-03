@@ -99,7 +99,7 @@ export class BasicFilter extends Component {
             component={TextFieldWrapper}
             title="Recipient Email(s)"
             validate={this.emailValidator}
-            placeholder='recipient1@domain.com, recipient2@domain.com'
+            placeholder="Filter by recipient email address"
           />
         </Grid.Column>
       </Grid>
