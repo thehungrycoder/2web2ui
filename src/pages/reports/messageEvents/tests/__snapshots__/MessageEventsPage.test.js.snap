@@ -5,12 +5,12 @@ exports[`Page: Message Events tests renders correctly with too many (1000) recor
   empty={Object {}}
   title="Message Events"
 >
-  <Panel>
-    <Panel.Section>
-      <Connect(ReduxForm)
-        onSubmit={[Function]}
-      />
-    </Panel.Section>
+  <Panel
+    sectioned={true}
+  >
+    <Connect(ReduxForm)
+      onSubmit={[Function]}
+    />
   </Panel>
   <div>
     <Banner
@@ -1045,12 +1045,12 @@ exports[`Page: Message Events tests should only render loading component while l
   empty={Object {}}
   title="Message Events"
 >
-  <Panel>
-    <Panel.Section>
-      <Connect(ReduxForm)
-        onSubmit={[Function]}
-      />
-    </Panel.Section>
+  <Panel
+    sectioned={true}
+  >
+    <Connect(ReduxForm)
+      onSubmit={[Function]}
+    />
   </Panel>
   <PanelLoading />
 </Page>
@@ -1061,12 +1061,12 @@ exports[`Page: Message Events tests should render error when action fails 1`] = 
   empty={Object {}}
   title="Message Events"
 >
-  <Panel>
-    <Panel.Section>
-      <Connect(ReduxForm)
-        onSubmit={[Function]}
-      />
-    </Panel.Section>
+  <Panel
+    sectioned={true}
+  >
+    <Connect(ReduxForm)
+      onSubmit={[Function]}
+    />
   </Panel>
   <ApiErrorBanner
     errorDetails="You done f'ed up now"
@@ -1081,12 +1081,12 @@ exports[`Page: Message Events tests should render page correctly 1`] = `
   empty={Object {}}
   title="Message Events"
 >
-  <Panel>
-    <Panel.Section>
-      <Connect(ReduxForm)
-        onSubmit={[Function]}
-      />
-    </Panel.Section>
+  <Panel
+    sectioned={true}
+  >
+    <Connect(ReduxForm)
+      onSubmit={[Function]}
+    />
   </Panel>
   <div>
     <TableCollection
@@ -1127,12 +1127,12 @@ exports[`Page: Message Events tests should render the empty message when 0 resul
   empty={Object {}}
   title="Message Events"
 >
-  <Panel>
-    <Panel.Section>
-      <Connect(ReduxForm)
-        onSubmit={[Function]}
-      />
-    </Panel.Section>
+  <Panel
+    sectioned={true}
+  >
+    <Connect(ReduxForm)
+      onSubmit={[Function]}
+    />
   </Panel>
   <Empty
     message="There are no message events for your current query"

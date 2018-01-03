@@ -88,23 +88,14 @@ export class MessageEventsPage extends Component {
     return content;
   }
 
-  renderFilter() {
-    return (
-      <Panel>
-        <Panel.Section>
-          <BasicFilter onSubmit={this.refresh} />
-        </Panel.Section>
-      </Panel>
-    );
-  }
-
   render() {
     const { error } = this.props;
 
     return (
       <Page title='Message Events'>
-        { this.renderFilter() }
-
+        <Panel sectioned>
+          <BasicFilter onSubmit={this.refresh} />
+        </Panel>
         { error ? this.renderError() : this.renderCollection() }
       </Page>
     );
