@@ -4,7 +4,7 @@ exports[`Support Form Component Form should render 1`] = `
 <div>
   <Panel.Section>
     <h6>
-      Submit a support ticket
+      Submit A Support Ticket
     </h6>
   </Panel.Section>
   <form>
@@ -55,14 +55,8 @@ exports[`Support Form Component Form should render 1`] = `
         Submit Ticket
       </Button>
       <Button
-        className="CancelBtn"
         onClick={[Function]}
         size="default"
-        style={
-          Object {
-            "float": "right",
-          }
-        }
       >
         Cancel
       </Button>

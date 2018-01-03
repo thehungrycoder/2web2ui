@@ -7,11 +7,12 @@ describe('Support Form Component', () => {
   let wrapper;
 
   describe('Form', () => {
+    let props;
     let handleSubmit;
 
     beforeEach(() => {
       handleSubmit = jest.fn();
-      const props = { handleSubmit };
+      props = { handleSubmit };
       wrapper = shallow(<SupportForm {...props} />);
     });
 
@@ -21,14 +22,23 @@ describe('Support Form Component', () => {
 
     it('should render the form by default', () => {
       expect(wrapper.find('form').exists()).toBeTruthy();
-      expect(wrapper.find('.SuccessMessage')).toHaveLength(0);
+      expect(wrapper.find('h6').text()).toMatch(/Submit A Support Ticket/);
     });
-  });
 
-  it('should render message on success', () => {
-    const wrapper = shallow(<SupportForm submitSucceeded={true} />);
-    expect(wrapper.find('.SuccessMessage')).toHaveLength(1);
-    expect(wrapper.find('form').exists()).toBeFalsy();
+    it('should not render on success', () => {
+      wrapper = shallow(<SupportForm {...props} submitSucceeded={true} />);
+      expect(wrapper.find('form').exists()).toBeFalsy();
+    });
+
+    it('should render message on success', () => {
+      wrapper = shallow(<SupportForm {...props} submitSucceeded={true} />);
+      expect(wrapper.find('h6').text()).toMatch(/Has Been Submitted/);
+    });
+
+    it('should not render message on failure', () => {
+      wrapper = shallow(<SupportForm {...props} submitFailed={true} />);
+      expect(wrapper.find('h6').text()).not.toMatch(/Has Been Submitted/);
+    });
   });
 
   describe('Control', () => {
@@ -56,7 +66,9 @@ describe('Support Form Component', () => {
 
     it('should cancel', () => {
       const spy = jest.spyOn(wrapper.instance(), 'reset');
-      wrapper.find('.CancelBtn').simulate('click');
+      const btns = wrapper.find('Button');
+      expect(btns).toHaveLength(2);
+      btns.at(1).simulate('click');
       expect(spy).toHaveBeenCalled();
       expect(props.onCancel).toHaveBeenCalled();
     });
@@ -65,7 +77,7 @@ describe('Support Form Component', () => {
       props = { ...props, submitSucceeded: true };
       wrapper = shallow(<SupportForm {...props} />);
       const spy = jest.spyOn(wrapper.instance(), 'reset');
-      wrapper.find('.SuccessMessage Button').simulate('click');
+      wrapper.find('Button').simulate('click');
       expect(spy).toHaveBeenCalled();
       expect(props.onContinue).toHaveBeenCalled();
     });

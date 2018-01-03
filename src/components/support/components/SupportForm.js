@@ -10,28 +10,27 @@ import { required, minLength, maxFileSize } from 'src/helpers/validation';
 
 import FileInput from './FileInput';
 
+import styles from './SupportForm.module.scss';
+
 const formName = 'supportForm';
 
-const fileSizeLimit = 1024;
+// 1MB limit for attachments into Desk.
+const fileSizeLimit = 1024 * 1024;
 
 const AttachmentField = (props) => <FileInput {...props}>Attach a file</FileInput>;
 
 export class SupportForm extends Component {
   renderSuccess() {
-    const { submitFailed, ticketId, onContinue } = this.props;
-
-    if (submitFailed) {
-      return null;
-    }
+    const { ticketId, onContinue } = this.props;
 
     return <div>
-        <Panel.Section className='SuccessMessage' style={{ textAlign: 'center', paddingTop: '160px' }}>
-          <h6>Your ticket has been submitted</h6>
-          <div><small>Ticket # {ticketId}</small></div>
-          <div><small>Please check your email for updates on your support ticket.</small></div>
-          <div style={{ paddingTop: '40px' }}>
-            <Button primary onClick={() => this.reset(onContinue)}>Continue</Button>
-          </div>
+        <Panel.Section className={styles.SuccessMessage}>
+            <h6>Your Ticket Has Been Submitted</h6>
+            <div>Ticket # {ticketId}</div>
+            <div>Please check your email for updates on your support ticket.</div>
+            <div style={{ paddingTop: '40px' }}>
+              <Button primary onClick={() => this.reset(onContinue)}>Continue</Button>
+            </div>
         </Panel.Section>
       </div>;
   }
@@ -59,7 +58,7 @@ export class SupportForm extends Component {
 
     return <div>
           <Panel.Section>
-            <h6>Submit a support ticket</h6>
+            <h6>Submit A Support Ticket</h6>
           </Panel.Section>
           <form onSubmit={handleSubmit(onSubmit)}>
             <Panel.Section>
@@ -95,7 +94,7 @@ export class SupportForm extends Component {
               <Button submit primary disabled={pristine || invalid || submitting}>
                   {submitting ? 'Saving' : 'Submit Ticket' }
               </Button>
-              <Button className="CancelBtn" disabled={submitting} onClick={() => this.reset(onCancel)} style={{ float: 'right' }}>Cancel</Button>
+              <Button className={styles.CancelBtn} disabled={submitting} onClick={() => this.reset(onCancel)}>Cancel</Button>
             </Panel.Section>
           </form>
         </div>;

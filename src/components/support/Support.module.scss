@@ -2,10 +2,15 @@
 
 .Support {
   position: fixed;
-  bottom: spacing();
-  right: spacing();
+  bottom: spacing(large);
+  right: spacing(large);
   width: rem(60);
-  height: rem(90);
+  height: rem(60);
+
+  // Targets the trigger wrapper
+  & > span {
+    display: block;
+  }
 }
 
 .Popover {
