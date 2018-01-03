@@ -107,3 +107,5 @@ Components:
 - [PlanPicker](./src/components/planPicker/readme.md)
 
 ![](https://media0.giphy.com/media/5y1LH29N3k556/giphy.gif)
+
+*Testing a change to a .md file, should not trigger a bamboo build*
