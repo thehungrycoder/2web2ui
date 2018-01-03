@@ -53,7 +53,6 @@ exports[`Sending Domains List Page renders correctly 1`] = `
   }
   title="Sending Domains"
 >
-  <UnverifiedWarningBanner />
   <TableCollection
     columns={
       Array [

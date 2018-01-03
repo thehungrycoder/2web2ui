@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 import { list as listDomains } from 'src/actions/sendingDomains';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
+import { hasUnverifiedDomains } from 'src/selectors/sendingDomains';
 import { Loading, TableCollection, SubaccountTag, DomainStatusTag, ApiErrorBanner } from 'src/components';
 import { Page, Tooltip, Icon, UnstyledLink } from '@sparkpost/matchbox';
 import ReadyFor from './components/ReadyFor';
@@ -93,7 +94,7 @@ export class ListPage extends Component {
   }
 
   render() {
-    const { error, loading, domains } = this.props;
+    const { error, loading, domains, hasUnverifiedDomains } = this.props;
 
     if (loading) {
       return <Loading />;
@@ -120,7 +121,7 @@ export class ListPage extends Component {
             external: true
           }
         }}>
-        {domains.length && !error && <UnverifiedWarningBanner />}
+        {hasUnverifiedDomains && <UnverifiedWarningBanner />}
         {error ? this.renderError() : this.renderCollection()}
       </Page>
     );
@@ -128,10 +129,11 @@ export class ListPage extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  hasSubaccounts: hasSubaccounts(state),
+  domains: state.sendingDomains.list,
   error: state.sendingDomains.error,
-  loading: state.sendingDomains.listLoading,
-  domains: state.sendingDomains.list
+  hasSubaccounts: hasSubaccounts(state),
+  hasUnverifiedDomains: hasUnverifiedDomains(state),
+  loading: state.sendingDomains.listLoading
 });
 
 export default connect(mapStateToProps, { listDomains })(ListPage);

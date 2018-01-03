@@ -33,10 +33,11 @@ describe('Sending Domains List Page', () => {
 
   beforeEach(() => {
     const props = {
-      loading: false,
+      domains,
       error: null,
       hasSubaccounts: false,
-      domains,
+      hasUnverifiedDomains: false,
+      loading: false,
       listDomains: jest.fn()
     };
 
@@ -56,6 +57,11 @@ describe('Sending Domains List Page', () => {
   it('renders error banner correctly', () => {
     wrapper.setProps({ error: 'error' });
     expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders warning banner with unverified sending domains', () => {
+    wrapper.setProps({ hasUnverifiedDomains: true });
+    expect(wrapper.find('UnverifiedWarningBanner')).toHaveLength(1);
   });
 
   it('renders correct columns with subaccounts', () => {
