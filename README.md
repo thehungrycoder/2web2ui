@@ -41,6 +41,12 @@ Good resources for learning Redux:
 - https://egghead.io/courses/getting-started-with-redux
 - https://learnredux.com/
 
+A few other things you will want to understand that we make heavy use of in this app:
+
+- [Redux Thunk](https://github.com/gaearon/redux-thunk) - A "middleware" library for redux that lets us dispatch a function instead of a plain object action. Helps with doing async stuff in actions.
+- [React Router](https://reacttraining.com/react-router/web/guides/philosophy) - This is the router we use for the entire application. We add new routes using declarative config but for things like `Link` and `props.location.match` you'll need to understand how RR works on some level.
+- [Reselect](https://github.com/reactjs/reselect) - Selectors are a redux idea that lets us move all logic out of `mapStateToProps` functions so it can be properly tested. The reselect library helps us create selectors that also get a nice memoization benefit.
+
 ## About the project
 
 Before jumping into writing code, here are a few conventions you should be aware of:
