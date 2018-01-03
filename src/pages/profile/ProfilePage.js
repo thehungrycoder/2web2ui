@@ -11,6 +11,7 @@ import { showAlert } from 'src/actions/globalAlert';
 import NameForm from './components/NameForm';
 import PasswordForm from './components/PasswordForm';
 import { LabelledValue } from 'src/components';
+import ErrorTracker from 'src/helpers/errorTracker';
 
 export class ProfilePage extends Component {
   updateProfile = (values) => {
@@ -19,8 +20,23 @@ export class ProfilePage extends Component {
     const data = { first_name: values.firstName, last_name: values.lastName };
 
     return this.props.updateUser(username, data)
-      .then(this.props.getCurrentUser)
-      .catch((err) => showAlert({ type: 'error', message: 'Unable to update profile' }));
+      .then(
+        // update success, re-fetch current user but ignore re-fetch errors
+        function onUpdateUserSuccess() {
+          return this.props.getCurrentUser().catch((err) => {
+            ErrorTracker.report('silent-ignore-refetch-current-user', err);
+          });
+        },
+        // update failed, show alert
+        function onUpdateUserFail(err) {
+          showAlert({
+            type: 'error',
+            message: 'Unable to update profile',
+            details: err.message
+          });
+        }
+      );
+
   }
 
   updatePassword = (values) => {

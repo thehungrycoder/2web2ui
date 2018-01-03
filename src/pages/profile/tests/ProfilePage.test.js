@@ -2,6 +2,9 @@ import { shallow } from 'enzyme';
 import React from 'react';
 
 import { ProfilePage } from '../ProfilePage';
+import errorTracker from 'src/helpers/errorTracker';
+
+jest.mock('src/helpers/errorTracker');
 
 let props;
 let wrapper;
@@ -31,20 +34,31 @@ describe('ProfilePage', () => {
   });
 
   describe('updateProfile', () => {
-    it('updates profile correctly', async() => {
+    it('should update profile correctly', async() => {
       await instance.updateProfile({ firstName: 'John', lastName: 'Doe' });
       expect(props.updateUser).toHaveBeenCalledWith('Lord Stark', { first_name: 'John', last_name: 'Doe' });
       expect(props.getCurrentUser).toHaveBeenCalledTimes(1);
       expect(props.showAlert).toHaveBeenCalledTimes(0);
     });
 
-    it('alerts on error', async() => {
+    it('should alert on update error', async() => {
       props.updateUser.mockReturnValue(Promise.reject(new Error('dooms day')));
       await instance.updateProfile({ firstName: 'John', lastName: 'Doe' });
 
       expect(props.updateUser).toHaveBeenCalledWith('Lord Stark', { first_name: 'John', last_name: 'Doe' });
       expect(props.getCurrentUser).toHaveBeenCalledTimes(0);
       expect(props.showAlert).toHaveBeenCalledTimes(1);
+    });
+
+    it('should ignore refetch error, but report error silently', async() => {
+      const getCurrentUserError = new Error('wow');
+      props.getCurrentUser.mockReturnValue(Promise.reject(getCurrentUserError));
+      await instance.updateProfile({ firstName: 'Ryan', lastName: 'Seacrest' });
+
+      expect(props.updateUser).toHaveBeenCalledWith('Lord Stark', { first_name: 'Ryan', last_name: 'Seacrest' });
+      expect(props.getCurrentUser).toHaveBeenCalledTimes(1);
+      expect(props.showAlert).not.toHaveBeenCalled();
+      expect(errorTracker.report).toHaveBeenCalledWith('silent-ignore-refetch-current-user', getCurrentUserError);
     });
   });
 
