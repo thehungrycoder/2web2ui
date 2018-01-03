@@ -23,15 +23,15 @@ export class SupportForm extends Component {
   renderSuccess() {
     const { ticketId, onContinue } = this.props;
 
-    return <div>
-        <Panel.Section className={styles.SuccessMessage}>
+    return <div className={styles.SupportForm}>
+        <div className={styles.SuccessMessage}>
             <h6>Your Ticket Has Been Submitted</h6>
             <div>Ticket # {ticketId}</div>
             <div>Please check your email for updates on your support ticket.</div>
             <div style={{ paddingTop: '40px' }}>
               <Button primary onClick={() => this.reset(onContinue)}>Continue</Button>
             </div>
-        </Panel.Section>
+        </div>
       </div>;
   }
 
@@ -40,23 +40,17 @@ export class SupportForm extends Component {
     return parentReset();
   }
 
-
   renderForm() {
     const {
         pristine,
         invalid,
         submitting,
-        submitSucceeded,
         handleSubmit,
         onSubmit,
         onCancel
       } = this.props;
 
-    if (submitSucceeded) {
-      return null;
-    }
-
-    return <div>
+    return <div className={styles.SupportForm}>
           <Panel.Section>
             <h6>Submit A Support Ticket</h6>
           </Panel.Section>

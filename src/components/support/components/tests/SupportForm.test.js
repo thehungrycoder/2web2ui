@@ -25,8 +25,10 @@ describe('Support Form Component', () => {
       expect(wrapper.find('h6').text()).toMatch(/Submit A Support Ticket/);
     });
 
-    it('should not render on success', () => {
-      wrapper = shallow(<SupportForm {...props} submitSucceeded={true} />);
+    it('should not render the form on success', () => {
+      const successProps = { ...props, submitSucceeded: true };
+
+      wrapper = shallow(<SupportForm {...successProps} />);
       expect(wrapper.find('form').exists()).toBeFalsy();
     });
 
