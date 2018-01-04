@@ -33,8 +33,10 @@ describe('Action Creator: Auth', () => {
 
     getStateMock = jest.fn(() => stateMock);
     sparkpostLogin.mockImplementation(() => Promise.resolve({
-      access_token: 'foo',
-      username: 'bar'
+      data: {
+        access_token: 'foo',
+        username: 'bar'
+      }
     }));
 
   });
@@ -45,25 +47,18 @@ describe('Action Creator: Auth', () => {
       await thunk(dispatchMock);
       expect(authCookie.save).toHaveBeenCalledTimes(0);
       expect(initializeAccessControl).toHaveBeenCalledTimes(1);
-      expect(dispatchMock).toHaveBeenCalledWith({ type: 'LOGIN_SUCCESS' });
-      expect(dispatchMock).toHaveBeenCalledTimes(3);
+      expect(dispatchMock).toHaveBeenCalledWith({
+        type: 'LOGIN_SUCCESS',
+        payload: authData
+      });
+      expect(dispatchMock).toHaveBeenCalledTimes(2);
     });
 
     it('should create cookie when flag is passed', async() => {
       const thunk = authActions.login({ authData, saveCookie: true });
       await thunk(dispatchMock);
       expect(authCookie.save).toHaveBeenCalledTimes(1);
-      expect(dispatchMock).toHaveBeenCalledTimes(3);
-    });
-  });
-
-  it('should update redux store for login details', async() => {
-    const thunk = authActions.setLoginCredentials(authData);
-    await thunk(dispatchMock);
-    expect(dispatchMock).toHaveBeenCalledTimes(1);
-    expect(dispatchMock).toHaveBeenCalledWith({
-      type: 'LOGIN_DETAILS',
-      payload: authData
+      expect(dispatchMock).toHaveBeenCalledTimes(2);
     });
   });
 

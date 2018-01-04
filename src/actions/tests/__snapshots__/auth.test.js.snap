@@ -28,9 +28,6 @@ Array [
   Array [
     [Function],
   ],
-  Array [
-    [Function],
-  ],
 ]
 `;
 
@@ -42,10 +39,11 @@ Array [
     },
   ],
   Array [
-    [Function],
-  ],
-  Array [
     Object {
+      "payload": Object {
+        "access_token": "foo",
+        "username": "bar",
+      },
       "type": "TFA_ENABLED",
     },
   ],
@@ -80,6 +78,7 @@ Array [
   Array [
     Object {
       "payload": Object {
+        "access_token": "foo",
         "username": "bar",
       },
       "type": "CONFIRM_PASSWORD_SUCCESS",

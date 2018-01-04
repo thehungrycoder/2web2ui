@@ -60,12 +60,12 @@ export function authenticate(username, password, rememberMe = false) {
 
         // if tfa enabled must avoid logging in
         if (enabled) {
-          return dispatch({
+          dispatch({
             type: 'TFA_ENABLED',
             payload: authData
           });
         } else {
-          return dispatch(login({ authData, saveCookie: true }));
+          dispatch(login({ authData, saveCookie: true }));
         }
       })
       .catch((err) => {
