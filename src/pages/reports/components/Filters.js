@@ -31,7 +31,7 @@ class Filters extends Component {
   }
 
   render() {
-    const { typeaheadCache, refresh, filters, onShare } = this.props;
+    const { typeaheadCache, refresh, filters, onShare, shareDisabled } = this.props;
 
     return (
       <Panel>
@@ -51,7 +51,7 @@ class Filters extends Component {
               />
             </Grid.Column>
             <Grid.Column xs={4} md={2} xl={1}>
-              <Button fullWidth onClick={onShare}>Share</Button>
+              <Button disabled={shareDisabled} fullWidth onClick={onShare}>Share</Button>
             </Grid.Column>
           </Grid>
         </Panel.Section>

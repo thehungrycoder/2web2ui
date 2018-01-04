@@ -45,19 +45,13 @@ export function getShareLink(options) {
  *   }
  */
 export function parseSearch(search) {
-  let options = {};
-  let filtersList;
-
   if (!search) {
-    return { options };
+    return { options: {}};
   }
 
   const { from, to, range = 'custom', metrics = [], filters = []} = qs.parse(search);
-
   const metricsList = typeof metrics === 'string' ? [metrics] : metrics;
-  filtersList = typeof filters === 'string' ? [filters] : filters;
-
-  filtersList = filtersList.map((filter) => {
+  const filtersList = (typeof filters === 'string' ? [filters] : filters).map((filter) => {
     const parts = filter.split(':');
     const type = parts.shift();
     let value;
@@ -75,11 +69,12 @@ export function parseSearch(search) {
     return { value, type, id };
   });
 
-  options = {
+  const options = {
     metrics: metricsList,
     from: new Date(from),
     to: new Date(to),
-    ...getRelativeDates(range) // invalid or custom ranges produce {} here
+    ...getRelativeDates(range), // invalid or custom ranges produce {} here
+    relativeRange: range
   };
 
   // Filters are not passed to metrics refresh actions
