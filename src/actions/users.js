@@ -1,5 +1,6 @@
 import sparkpostApiRequest from './helpers/sparkpostApiRequest';
 import { showAlert } from './globalAlert';
+import ErrorTracker from 'src/helpers/errorTracker';
 
 export function inviteUser(email, access_level) {
   const action = {
@@ -67,13 +68,16 @@ export function updateUser(username, data) {
 }
 
 export function checkInviteToken(token) {
-  return sparkpostApiRequest({
+  const action = {
     type: 'CHECK_INVITE_TOKEN',
     meta: {
       method: 'GET',
       url: `/users/invite/${token}`
     }
-  });
+  };
+
+  // returns 404 when not found
+  return (dispatch) => dispatch(sparkpostApiRequest(action)).catch((error) => { ErrorTracker.report('check-invite', error); });
 }
 
 export function registerUser(token, data) {

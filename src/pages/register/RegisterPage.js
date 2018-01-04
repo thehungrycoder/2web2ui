@@ -18,26 +18,22 @@ export class RegisterPage extends Component {
   onSubmit = (values) => {
     const { username, password } = values;
     return this.props.registerUser(this.props.token, values)
-      .then(() => {
-        this.props.logout(); // log out of current account
-        this.props.authenticate(username, password)
-          .then(() => {
-            this.props.history.push('/dashboard');
-          })
-          .catch((error) => {
-            // user was created but auth failed, redirect to /auth
-            this.props.history.push('/auth');
-            ErrorTracker.report('sign-in', error);
-          });
-      })
-      .catch((error) => {
-        ErrorTracker.report('register-user', error);
-      });
+      .then(() => this.props.authenticate(username, password)
+        .then(() => this.props.history.push('/dashboard'))
+        .catch((error) => {
+          // user was created but auth failed, redirect to /auth
+          this.props.history.push('/auth');
+          ErrorTracker.report('sign-in', error);
+        }))
+      .catch((error) => ErrorTracker.report('register-user', error));
   }
 
 
   componentDidMount() {
-    this.props.checkInviteToken(this.props.token);
+    this.props.logout().then(() => this.props.checkInviteToken(this.props.token));
+    // this.props.logout();
+    // not updated
+    // this.props.checkInviteToken(this.props.token);
   }
 
   renderRegisterPanel() {
