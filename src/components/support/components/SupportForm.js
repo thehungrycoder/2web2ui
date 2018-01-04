@@ -23,13 +23,13 @@ export class SupportForm extends Component {
     const { ticketId, onContinue } = this.props;
 
     return <div className={styles.SupportForm}>
-        <div className={styles.SuccessMessage}>
-            <h6>Your Ticket Has Been Submitted</h6>
-            <div>Ticket # {ticketId}</div>
-            <div>Please check your email for updates on your support ticket.</div>
-            <Button primary onClick={() => this.reset(onContinue)}>Continue</Button>
-        </div>
-      </div>;
+      <div className={styles.SuccessMessage}>
+        <h6>Your Ticket Has Been Submitted</h6>
+        <p>Ticket # {ticketId}</p>
+        <p>Please check your email for updates on your support ticket.</p>
+        <Button primary onClick={() => this.reset(onContinue)}>Continue</Button>
+      </div>
+    </div>;
   }
 
   reset(parentReset) {
@@ -39,56 +39,56 @@ export class SupportForm extends Component {
 
   renderForm() {
     const {
-        pristine,
-        invalid,
-        submitting,
-        handleSubmit,
-        onSubmit,
-        onCancel
-      } = this.props;
+      pristine,
+      invalid,
+      submitting,
+      handleSubmit,
+      onSubmit,
+      onCancel
+    } = this.props;
 
     return <div className={styles.SupportForm}>
-          <Panel.Section>
-            <h6>Submit A Support Ticket</h6>
-          </Panel.Section>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <Panel.Section>
-              <Field
-                name='subject'
-                label='Subject'
-                placeholder='Give your issue a title'
-                inlineErrors={true}
-                disabled={submitting}
-                validate={[required, minLength(5)]}
-                component={TextFieldWrapper} />
-              <Field
-                multiline
-                rows={10}
-                resize='none'
-                name='message'
-                label='Message'
-                placeholder='Give us details about your issue'
-                inlineErrors={true}
-                disabled={submitting}
-                validate={[required, minLength(20)]}
-                component={TextFieldWrapper}
-              />
-              <Field
-                type='file'
-                name='attachment'
-                label='Attachment'
-                component={AttachmentField}
-                validate={maxFileSize(config.support.maxAttachmentSizeBytes)}
-              />
-            </Panel.Section>
-            <Panel.Section>
-              <Button submit primary disabled={pristine || invalid || submitting}>
-                  {submitting ? 'Saving' : 'Submit Ticket' }
-              </Button>
-              <Button className={styles.CancelBtn} disabled={submitting} onClick={() => this.reset(onCancel)}>Cancel</Button>
-            </Panel.Section>
-          </form>
-        </div>;
+      <Panel.Section>
+        <h6>Submit A Support Ticket</h6>
+      </Panel.Section>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Panel.Section>
+          <Field
+            name='subject'
+            label='Subject'
+            placeholder='Give your issue a title'
+            inlineErrors={true}
+            disabled={submitting}
+            validate={[required, minLength(5)]}
+            component={TextFieldWrapper} />
+          <Field
+            multiline
+            rows={10}
+            resize='none'
+            name='message'
+            label='Message'
+            placeholder='Give us details about your issue'
+            inlineErrors={true}
+            disabled={submitting}
+            validate={[required, minLength(20)]}
+            component={TextFieldWrapper}
+          />
+          <Field
+            type='file'
+            name='attachment'
+            label='Attachment'
+            component={AttachmentField}
+            validate={maxFileSize(config.support.maxAttachmentSizeBytes)}
+          />
+        </Panel.Section>
+        <Panel.Section>
+          <Button submit primary disabled={pristine || invalid || submitting}>
+            {submitting ? 'Saving' : 'Submit Ticket' }
+          </Button>
+          <Button className={styles.CancelBtn} disabled={submitting} onClick={() => this.reset(onCancel)}>Cancel</Button>
+        </Panel.Section>
+      </form>
+    </div>;
   }
 
   render() {

@@ -68,9 +68,9 @@ export default class FileInput extends Component {
         onChange={this.onChange}
         accept={this.buildAcceptList(accept)}
         className={styles.InputElement}
-        />
-        <Button onClick={() => fileInput && fileInput.click()}>{children}</Button>
-        { error ? errorMarkup : this.renderTag() }
+      />
+      <Button onClick={() => fileInput && fileInput.click()}>{children}</Button>
+      { error ? errorMarkup : this.renderTag() }
     </div>;
   }
 }
