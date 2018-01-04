@@ -127,26 +127,11 @@ export function refresh(token, refreshToken) {
   return login({ authData: newCookie });
 }
 
-
-// export function logout() {
-//   return (dispatch) => {
-//     authCookie.remove();
-//     dispatch({
-//       type: 'LOGOUT'
-//     });
-//     // store updated
-//
-//   };
-// }
-
 export function logout() {
   return (dispatch) => {
     authCookie.remove();
-    return new Promise((resolve, reject) => {
-      dispatch({
-        type: 'LOGOUT'
-      });
-      resolve();
+    dispatch({
+      type: 'LOGOUT'
     });
   };
 }

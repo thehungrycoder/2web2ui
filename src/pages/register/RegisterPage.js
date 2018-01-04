@@ -30,10 +30,8 @@ export class RegisterPage extends Component {
 
 
   componentDidMount() {
-    this.props.logout().then(() => this.props.checkInviteToken(this.props.token));
-    // this.props.logout();
-    // not updated
-    // this.props.checkInviteToken(this.props.token);
+    this.props.logout();
+    this.props.checkInviteToken(this.props.token);
   }
 
   renderRegisterPanel() {

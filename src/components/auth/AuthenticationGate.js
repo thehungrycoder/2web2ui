@@ -13,10 +13,13 @@ export class AuthenticationGate extends Component {
       return;
     }
 
-    const foundCookie = authCookie.get();
-    if (foundCookie) {
-      this.props.login({ authData: foundCookie });
-      this.props.getGrantsFromCookie(foundCookie);
+    const { location = {}} = this.props;
+    if (location.pathname !== '/register') {
+      const foundCookie = authCookie.get();
+      if (foundCookie) {
+        this.props.login({ authData: foundCookie });
+        this.props.getGrantsFromCookie(foundCookie);
+      }
     }
   }
 
@@ -37,7 +40,6 @@ export class AuthenticationGate extends Component {
 
   render() {
     return null;
-    // return <p className="text-muted" style={{ padding: '5px 0' }}>You are currently: <strong>{loggedIn ? 'logged in' : 'not logged in'}</strong></p>;
   }
 }
 
