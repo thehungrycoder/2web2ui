@@ -28,9 +28,7 @@ export class SupportForm extends Component {
             <h6>Your Ticket Has Been Submitted</h6>
             <div>Ticket # {ticketId}</div>
             <div>Please check your email for updates on your support ticket.</div>
-            <div style={{ paddingTop: '40px' }}>
-              <Button primary onClick={() => this.reset(onContinue)}>Continue</Button>
-            </div>
+            <Button primary onClick={() => this.reset(onContinue)}>Continue</Button>
         </div>
       </div>;
   }

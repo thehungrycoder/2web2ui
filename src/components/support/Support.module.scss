@@ -6,6 +6,7 @@
   right: spacing(large);
   width: rem(60);
   height: rem(60);
+  z-index: z-index(overlay);
 
   // Targets the trigger wrapper
   & > span {
