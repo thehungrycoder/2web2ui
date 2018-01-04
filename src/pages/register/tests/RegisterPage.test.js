@@ -43,6 +43,7 @@ beforeEach(() => {
 });
 
 test('happy path render', () => {
+  expect(logout).toHaveBeenCalled();
   expect(checkInviteToken).toHaveBeenCalledWith(props.token);
   expect(wrapper).toMatchSnapshot();
 });
@@ -74,7 +75,6 @@ describe('onSubmit', () => {
   test('success', async() => {
     await wrapper.instance().onSubmit(values);
     expect(registerUser).toHaveBeenCalledWith(props.token, values);
-    expect(logout).toHaveBeenCalled();
     expect(authenticate).toHaveBeenCalledWith(values.username, values.password);
     expect(historyPush).toHaveBeenCalledWith('/dashboard');
   });
@@ -84,7 +84,6 @@ describe('onSubmit', () => {
     authenticate.mockReturnValue(Promise.reject(error));
     await wrapper.instance().onSubmit(values);
     expect(registerUser).toHaveBeenCalledWith(props.token, values);
-    expect(logout).toHaveBeenCalled();
     expect(historyPush).toHaveBeenCalledWith('/auth');
     expect(report).toHaveBeenCalledWith('sign-in', error);
   });
@@ -95,7 +94,6 @@ describe('onSubmit', () => {
     await wrapper.instance().onSubmit(values);
     expect(registerUser).toHaveBeenCalledWith(props.token, values);
     expect(authenticate).not.toHaveBeenCalled();
-    expect(logout).not.toHaveBeenCalled();
     expect(historyPush).not.toHaveBeenCalled();
     expect(report).toHaveBeenCalledWith('register-user', error);
   });
