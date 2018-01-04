@@ -6,6 +6,7 @@ Object {
     "type:123",
   ],
   "from": "2017-02-14T12:51:48Z",
+  "range": undefined,
   "to": "2020-04-16T22:38:28Z",
 }
 `;
@@ -24,7 +25,31 @@ Object {
 }
 `;
 
-exports[`Should parse search 1`] = `
+exports[`Should parse search with custom range 1`] = `
+Object {
+  "filters": Array [
+    Object {
+      "id": undefined,
+      "type": "Domain",
+      "value": "test.com",
+    },
+    Object {
+      "id": "123",
+      "type": "Subaccount",
+      "value": "test",
+    },
+  ],
+  "options": Object {
+    "from": 2017-11-03T14:43:00.000Z,
+    "metrics": Array [
+      "count-something",
+    ],
+    "to": 2017-11-04T14:43:00.000Z,
+  },
+}
+`;
+
+exports[`Should parse search with missing range (as custom) 1`] = `
 Object {
   "filters": Array [
     Object {
@@ -51,5 +76,29 @@ Object {
 exports[`Should parse search with no empty value 1`] = `
 Object {
   "options": Object {},
+}
+`;
+
+exports[`Should parse search with relative range 1`] = `
+Object {
+  "filters": Array [
+    Object {
+      "id": undefined,
+      "type": "Domain",
+      "value": "test.com",
+    },
+    Object {
+      "id": "123",
+      "type": "Subaccount",
+      "value": "test",
+    },
+  ],
+  "options": Object {
+    "from": "relative-from",
+    "metrics": Array [
+      "count-something",
+    ],
+    "to": "relative-to",
+  },
 }
 `;

@@ -1,16 +1,18 @@
 import moment from 'moment';
 import qs from 'query-string';
 import _ from 'lodash';
+import { getRelativeDates } from 'src/helpers/date';
 
 /**
  * Creates search options object from shared report options. Page specific options not included (ie. summary chart selected metrics)
  * @param  {Object} filters - reportFilters state
  * @return {Object} - formatted search options object
  */
-function getFilterSearchOptions(filters) {
+export function getFilterSearchOptions(filters) {
   return {
     from: moment(filters.from).utc().format(),
     to: moment(filters.to).utc().format(),
+    range: filters.relativeRange,
     filters: filters.activeList.map((filter) => {
       const subaccount = filter.type === 'Subaccount' ? `:${filter.id}` : '';
       return `${filter.type}:${filter.value}${subaccount}`;
@@ -27,7 +29,7 @@ function getFilterSearchOptions(filters) {
  *     link - full url
  *   }
  */
-function getShareLink(options) {
+export function getShareLink(options) {
   const search = _.isEmpty(options) ? '' : `?${qs.stringify(options, { encode: false })}`;
   const link = `${window.location.href.split('?')[0]}${search}`;
   return { search, link };
@@ -42,7 +44,7 @@ function getShareLink(options) {
  *     filters - array of objects ready to be called with reportFilters.addFilter action
  *   }
  */
-function parseSearch(search) {
+export function parseSearch(search) {
   let options = {};
   let filtersList;
 
@@ -50,7 +52,7 @@ function parseSearch(search) {
     return { options };
   }
 
-  const { from, to, metrics = [], filters = []} = qs.parse(search);
+  const { from, to, range = 'custom', metrics = [], filters = []} = qs.parse(search);
 
   const metricsList = typeof metrics === 'string' ? [metrics] : metrics;
   filtersList = typeof filters === 'string' ? [filters] : filters;
@@ -76,15 +78,10 @@ function parseSearch(search) {
   options = {
     metrics: metricsList,
     from: new Date(from),
-    to: new Date(to)
+    to: new Date(to),
+    ...getRelativeDates(range) // invalid or custom ranges produce {} here
   };
 
   // Filters are not passed to metrics refresh actions
   return { options, filters: filtersList };
 }
-
-export {
-  getFilterSearchOptions,
-  getShareLink,
-  parseSearch
-};

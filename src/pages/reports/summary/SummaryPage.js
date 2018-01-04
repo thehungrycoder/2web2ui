@@ -40,6 +40,8 @@ class SummaryReportPage extends Component {
   }
 
   handleRefresh = (options) => {
+    // TODO: Re-arrange how options are handled here so that updateLink can run
+    // in parallel with refreshSummaryChart instead of having to wait for data to load
     this.props.refreshSummaryChart(options).then(() => this.updateLink());
   }
 
