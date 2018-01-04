@@ -21,6 +21,7 @@ exports[`From Email Typeahead should render list 1`] = `
 >
   <TextField
     required={false}
+    resize="both"
     type="text"
   />
   <ActionList
