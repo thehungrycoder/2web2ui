@@ -34,7 +34,7 @@ exports[`Component: DomainStatusTag should render for pending status 1`] = `
 
 exports[`Component: DomainStatusTag should render for unverified status 1`] = `
 <WithPositioning(Tooltip)
-  content="This domain is not available for use. For more information, please contact support."
+  content="This domain must be verified before use."
   dark={true}
 >
   <Tag

@@ -12,7 +12,7 @@ const DomainStatusTag = ({ status, className }) => {
   if (status === 'unverified') {
     return (
       <Tooltip
-        content='This domain is not available for use. For more information, please contact support.'
+        content='This domain must be verified before use.'
         dark>
         <Tag className={className} color='yellow'><Icon size={size} name='ErrorOutline'/> Unverified</Tag>
       </Tooltip>

@@ -292,13 +292,13 @@ const routes = [
     layout: App
   },
   {
-    path: '/account/sending-domains/create',
+    path: '/account/sending-domains/add',
     component: ComingSoonPage,
     condition: hasGrants('sending_domains/manage'),
     layout: App
   },
   {
-    path: '/account/sending-domains/:id/edit',
+    path: '/account/sending-domains/edit/:id',
     component: ComingSoonPage,
     condition: hasGrants('sending_domains/manage'),
     layout: App

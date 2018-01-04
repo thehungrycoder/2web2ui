@@ -3,9 +3,14 @@ import PropTypes from 'prop-types';
 import { Tag, Icon } from '@sparkpost/matchbox';
 
 const SubaccountTag = ({ id, all, master, isDefault }) => {
-  const defaultContent = isDefault ? ' (Default)' : null;
   let content = `Subaccount ${id}`;
-  const color = isDefault ? 'orange' : null;
+  let color = null;
+  let defaultContent = null;
+
+  if (isDefault) {
+    defaultContent = ' (Default)';
+    color = 'orange';
+  }
 
   if (all) {
     content = 'Shared with all';

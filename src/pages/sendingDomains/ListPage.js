@@ -52,7 +52,7 @@ export class ListPage extends Component {
     const { domain, shared_with_subaccounts, subaccount_id } = row;
 
     const rowData = [
-      <UnstyledLink Component={Link} to={`/account/sending-domains/${domain}/edit`}>{domain}</UnstyledLink>,
+      <UnstyledLink Component={Link} to={`/account/sending-domains/edit/${domain}`}>{domain}</UnstyledLink>,
       this.getStatusCell(row)
     ];
 
@@ -86,7 +86,7 @@ export class ListPage extends Component {
   renderError() {
     return (
       <ApiErrorBanner
-        errorDetails={this.props.error.message}
+        errorDetails={this.props.listError.message}
         message="Sorry, we seem to have had some trouble loading your domains."
         reload={this.props.listDomains}
       />
@@ -94,16 +94,16 @@ export class ListPage extends Component {
   }
 
   render() {
-    const { error, loading, domains, hasUnverifiedDomains } = this.props;
+    const { listError, listLoading, domains, hasUnverifiedDomains } = this.props;
 
-    if (loading) {
+    if (listLoading) {
       return <Loading />;
     }
 
     const primaryAction = {
       content: 'Add a Domain',
       Component: Link,
-      to: '/account/sending-domains/create'
+      to: '/account/sending-domains/add'
     };
 
     return (
@@ -122,7 +122,7 @@ export class ListPage extends Component {
           }
         }}>
         {hasUnverifiedDomains && <UnverifiedWarningBanner />}
-        {error ? this.renderError() : this.renderCollection()}
+        {listError ? this.renderError() : this.renderCollection()}
       </Page>
     );
   }
@@ -130,10 +130,10 @@ export class ListPage extends Component {
 
 const mapStateToProps = (state) => ({
   domains: state.sendingDomains.list,
-  error: state.sendingDomains.error,
+  listError: state.sendingDomains.listError,
   hasSubaccounts: hasSubaccounts(state),
   hasUnverifiedDomains: hasUnverifiedDomains(state),
-  loading: state.sendingDomains.listLoading
+  listLoading: state.sendingDomains.listLoading
 });
 
 export default connect(mapStateToProps, { listDomains })(ListPage);

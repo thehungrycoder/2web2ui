@@ -34,10 +34,10 @@ describe('Sending Domains List Page', () => {
   beforeEach(() => {
     const props = {
       domains,
-      error: null,
+      listError: null,
       hasSubaccounts: false,
       hasUnverifiedDomains: false,
-      loading: false,
+      listLoading: false,
       listDomains: jest.fn()
     };
 
@@ -50,12 +50,12 @@ describe('Sending Domains List Page', () => {
   });
 
   it('renders loading correctly', () => {
-    wrapper.setProps({ loading: true });
+    wrapper.setProps({ listLoading: true });
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders error banner correctly', () => {
-    wrapper.setProps({ error: 'error' });
+    wrapper.setProps({ listError: { message: 'error' }});
     expect(wrapper).toMatchSnapshot();
   });
 

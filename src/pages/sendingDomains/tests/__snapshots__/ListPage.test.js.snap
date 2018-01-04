@@ -48,7 +48,7 @@ exports[`Sending Domains List Page renders correctly 1`] = `
     Object {
       "Component": [Function],
       "content": "Add a Domain",
-      "to": "/account/sending-domains/create",
+      "to": "/account/sending-domains/add",
     }
   }
   title="Sending Domains"
@@ -141,12 +141,13 @@ exports[`Sending Domains List Page renders error banner correctly 1`] = `
     Object {
       "Component": [Function],
       "content": "Add a Domain",
-      "to": "/account/sending-domains/create",
+      "to": "/account/sending-domains/add",
     }
   }
   title="Sending Domains"
 >
   <ApiErrorBanner
+    errorDetails="error"
     message="Sorry, we seem to have had some trouble loading your domains."
     reload={[Function]}
   />
@@ -160,7 +161,7 @@ Array [
   Array [
     <UnstyledLink
       Component={[Function]}
-      to="/account/sending-domains/test.com/edit"
+      to="/account/sending-domains/edit/test.com"
     >
       test.com
     </UnstyledLink>,
@@ -178,7 +179,7 @@ Array [
   Array [
     <UnstyledLink
       Component={[Function]}
-      to="/account/sending-domains/test2.com/edit"
+      to="/account/sending-domains/edit/test2.com"
     >
       test2.com
     </UnstyledLink>,
@@ -195,7 +196,7 @@ Array [
   Array [
     <UnstyledLink
       Component={[Function]}
-      to="/account/sending-domains/test.com/edit"
+      to="/account/sending-domains/edit/test.com"
     >
       test.com
     </UnstyledLink>,
@@ -209,7 +210,7 @@ Array [
   Array [
     <UnstyledLink
       Component={[Function]}
-      to="/account/sending-domains/test2.com/edit"
+      to="/account/sending-domains/edit/test2.com"
     >
       test2.com
     </UnstyledLink>,

@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`resolveReadyFor should return correct values 1`] = `
-Object {
-  "bounce": true,
-  "dkim": true,
-  "sending": true,
-}
-`;

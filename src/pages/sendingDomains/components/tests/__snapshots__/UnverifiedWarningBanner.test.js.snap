@@ -13,7 +13,7 @@ exports[`Component: Unverified Domain Warning Banner renders correctly 1`] = `
   title="Unverified sending domains will be removed two weeks after creation."
 >
   <p>
-    All domains will also need a clear web presence to pass verification review.
+    All domains will also need a clear web presence to pass verification.
   </p>
 </Banner>
 `;

@@ -2,13 +2,14 @@ import * as domains from '../domains';
 
 describe('resolveReadyFor', () => {
   it('should return correct values', () => {
-    const status = {
-      ownership_verified: true,
-      cname_status: 'valid',
-      dkim_status: 'valid',
-      mx_status: 'valid'
-    }
-    expect(domains.resolveReadyFor(status)).toMatchSnapshot();
+    expect(domains.resolveReadyFor({ ownership_verified: true }).sending).toBeTruthy();
+    expect(domains.resolveReadyFor({ ownership_verified: false }).sending).toBeFalsy();
+    expect(domains.resolveReadyFor({ dkim_status: 'valid' }).dkim).toBeTruthy();
+    expect(domains.resolveReadyFor({ dkim_status: 'invalid' }).dkim).toBeFalsy();
+    expect(domains.resolveReadyFor({ cname_status: 'valid' }).bounce).toBeTruthy();
+    expect(domains.resolveReadyFor({ cname_status: 'invalid' }).bounce).toBeFalsy();
+    expect(domains.resolveReadyFor({ mx_status: 'valid' }).bounce).toBeTruthy();
+    expect(domains.resolveReadyFor({ mx_status: 'invalid' }).bounce).toBeFalsy();
   });
 });
 
