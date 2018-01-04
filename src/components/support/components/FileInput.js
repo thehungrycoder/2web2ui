@@ -11,6 +11,8 @@ const defaultLabel = 'No file selected';
 
 const maxLabelLength = 50;
 
+const ErrorWrapper = ({ children }) => <span className={styles.Error}>{children}</span>;
+
 export default class FileInput extends Component {
   state = {
     label: null
@@ -56,7 +58,7 @@ export default class FileInput extends Component {
   render() {
     const { accept = '', meta: { touched, error }, children } = this.props;
 
-    const errorMarkup = touched && error ? <Error inline={true} error={error} /> : null;
+    const errorMarkup = touched && error ? <Error wrapper={ErrorWrapper} error={error} /> : null;
 
     let fileInput;
     return <div>
