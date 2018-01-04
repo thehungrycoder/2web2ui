@@ -8,14 +8,13 @@ import { TextFieldWrapper } from 'src/components';
 
 import { required, minLength, maxFileSize } from 'src/helpers/validation';
 
+import config from 'src/config';
+
 import FileInput from './FileInput';
 
 import styles from './SupportForm.module.scss';
 
 const formName = 'supportForm';
-
-// 1MB limit for attachments into Desk.
-const fileSizeLimit = 1024 * 1024;
 
 const AttachmentField = (props) => <FileInput {...props}>Attach a file</FileInput>;
 
@@ -79,7 +78,7 @@ export class SupportForm extends Component {
                 name='attachment'
                 label='Attachment'
                 component={AttachmentField}
-                validate={maxFileSize(fileSizeLimit)}
+                validate={maxFileSize(config.support.maxAttachmentSizeBytes)}
               />
             </Panel.Section>
             <Panel.Section>

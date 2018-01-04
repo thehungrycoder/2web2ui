@@ -54,6 +54,9 @@ const config = {
     enabled: false,
     defaultMetrics: ['count_targeted', 'count_rendered', 'count_accepted', 'count_bounce']
   },
+  support: {
+    maxAttachmentSizeBytes: 1000 * 1000
+  },
   templates: {
     testData: {
       substitution_data: {},
