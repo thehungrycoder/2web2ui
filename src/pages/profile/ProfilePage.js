@@ -22,19 +22,15 @@ export class ProfilePage extends Component {
     return this.props.updateUser(username, data)
       .then(
         // update success, re-fetch current user but ignore re-fetch errors
-        function onUpdateUserSuccess() {
-          return this.props.getCurrentUser().catch((err) => {
-            ErrorTracker.report('silent-ignore-refetch-current-user', err);
-          });
-        },
+        () => this.props.getCurrentUser().catch((err) => {
+          ErrorTracker.report('silent-ignore-refetch-current-user', err);
+        }),
         // update failed, show alert
-        function onUpdateUserFail(err) {
-          showAlert({
-            type: 'error',
-            message: 'Unable to update profile',
-            details: err.message
-          });
-        }
+        (err) => showAlert({
+          type: 'error',
+          message: 'Unable to update profile',
+          details: err.message
+        })
       );
 
   }
