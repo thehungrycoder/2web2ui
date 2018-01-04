@@ -21,6 +21,7 @@ exports[`Component: TrackingDomainRow Tag components should render the Subaccoun
 <Tag>
   <Icon
     name="Link"
+    size={18}
   />
    Subaccount 
   213
@@ -56,6 +57,7 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
         >
           <Icon
             name="Refresh"
+            size={18}
           />
            
           Verifying...
@@ -130,6 +132,7 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
         >
           <Icon
             name="Refresh"
+            size={18}
           />
            
           Retry Verification
@@ -197,6 +200,7 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
         >
           <Icon
             name="Refresh"
+            size={18}
           />
            
           Retry Verification
@@ -334,6 +338,7 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
         >
           <Icon
             name="Refresh"
+            size={18}
           />
            
           Retry Verification
@@ -470,6 +475,7 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
         >
           <Icon
             name="Refresh"
+            size={18}
           />
            
           Retry Verification
@@ -537,6 +543,7 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
         >
           <Icon
             name="Refresh"
+            size={18}
           />
            
           Verifying...
@@ -614,6 +621,7 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
         >
           <Icon
             name="Refresh"
+            size={18}
           />
            
           Retry Verification
@@ -684,6 +692,7 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
         >
           <Icon
             name="Refresh"
+            size={18}
           />
            
           Retry Verification
@@ -827,6 +836,7 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
         >
           <Icon
             name="Refresh"
+            size={18}
           />
            
           Retry Verification
@@ -970,6 +980,7 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
         >
           <Icon
             name="Refresh"
+            size={18}
           />
            
           Retry Verification

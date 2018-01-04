@@ -30,7 +30,7 @@ describe('Support Component', () => {
   });
 
   it('should not render the icon if the account is not entitled to support', () => {
-    const localProps = {  ...props, entitledToSupport: false };
+    const localProps = { ...props, entitledToSupport: false };
     wrapper = shallow(<Support {...localProps} />);
     expect(wrapper.get(0)).toBeFalsy();
   });

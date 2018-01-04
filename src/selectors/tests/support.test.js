@@ -1,12 +1,6 @@
 import entitledToSupport from '../support';
 
 describe('Selectors: support', () => {
-  const state = {
-    account: {
-      created: '2017-11-15T10:00:00.000Z'
-    }
-  };
-
   it('when account is not loaded', () => {
     const state = {
       account: {}

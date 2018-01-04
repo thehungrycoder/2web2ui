@@ -40,6 +40,7 @@ exports[`LegendItem:  should render breadcrumb 1`] = `
   <span>
     <Icon
       name="ChevronLeft"
+      size={18}
     />
     name
   </span>
