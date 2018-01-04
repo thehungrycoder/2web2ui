@@ -30,13 +30,16 @@ export function getDraft(id) {
 export function getDraftAndPreview(id) {
   return async(dispatch) => {
     const { content } = await dispatch(getDraft(id));
-    const { payload: { substitution_data }} = await dispatch(getTestData({ id, mode: 'draft' }));
+    const { payload = {}} = await dispatch(getTestData({ id, mode: 'draft' }));
+    const substitution_data = payload.substitution_data || {};
 
     return dispatch(getPreview({ content, id, mode: 'draft', substitution_data }));
   };
 }
 
-// @see https://github.com/SparkPost/sparkpost-admin-api-documentation/blob/94bd8b8329a9645b32921eb1a4ead5390af2aed9/services/content_previewer_api.md#content-previewer-utilscontent-previewer
+// @todo Switch to the newer preview endpoint
+// @see https://github.com/SparkPost/sparkpost-admin-api-documentation/blob/master/services/content_previewer_api.md#preview-inline-content-post
+// @see https://github.com/SparkPost/sparkpost-api-documentation/blob/master/services/templates.md#preview-templatesidpreviewdraft
 export function getPreview({ content, id, mode, substitution_data = {}}) {
   return sparkpostApiRequest({
     type: 'GET_TEMPLATE_PREVIEW',
@@ -65,7 +68,8 @@ export function getPublished(id) {
 export function getPublishedAndPreview(id) {
   return async(dispatch) => {
     const { content } = await dispatch(getPublished(id));
-    const { payload: { substitution_data }} = await dispatch(getTestData({ id, mode: 'published' }));
+    const { payload = {}} = await dispatch(getTestData({ id, mode: 'published' }));
+    const substitution_data = payload.substitution_data || {};
 
     return dispatch(getPreview({ content, id, mode: 'published', substitution_data }));
   };
