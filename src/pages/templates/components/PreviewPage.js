@@ -25,30 +25,33 @@ export default class PreviewPage extends React.Component {
   onSend = () => {
     const emails = emailAddresses.parseAddressList(this.state.to);
 
+    if (_.trim(this.state.to) === '') {
+      this.setState({ error: 'At least one email address is required' });
+      return;
+    }
+
     if (emails === null) {
-      return this.setState({ error: 'Please provide valid email address(es)' });
+      this.setState({ error: 'An email address is invalid' });
+      return;
     }
 
     this.setState({ sending: true });
 
-    this.props.sendPreview({
+    return this.props.sendPreview({
       id: this.props.template.id,
       mode: this.props.mode,
       emails: emails.map((e) => e.address),
-      from: this.props.template.content.from.email
+      from: this.props.preview.from.email
     }).then(this.onSendSuccess).catch(this.onSendFail);
   }
 
-  onSendFail = (error) => {
-    this.props.showAlert({ message: error.message, type: 'error' });
+  onSendFail = ({ message }) => {
+    this.props.showAlert({ message, type: 'error' });
     this.setState({ sending: false });
   }
 
-  onSendSuccess = ({ total_accepted_recipients }) => {
-    this.props.showAlert({
-      message: `Successfully sent to ${total_accepted_recipients} recipients.`,
-      type: 'success'
-    });
+  onSendSuccess = () => {
+    this.props.showAlert({ message: 'Successfully sent a test email', type: 'success' });
     this.setState({ sending: false, to: '' });
   }
 
