@@ -36,7 +36,7 @@ describe('Sending Domains List Page', () => {
       domains,
       listError: null,
       hasSubaccounts: false,
-      hasUnverifiedDomains: false,
+      hasUnverifiedDomains: true,
       listLoading: false,
       listDomains: jest.fn()
     };
@@ -59,9 +59,9 @@ describe('Sending Domains List Page', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('renders warning banner with unverified sending domains', () => {
-    wrapper.setProps({ hasUnverifiedDomains: true });
-    expect(wrapper.find('UnverifiedWarningBanner')).toHaveLength(1);
+  it('does not render warning banner without unverified sending domains', () => {
+    wrapper.setProps({ hasUnverifiedDomains: false });
+    expect(wrapper.find('UnverifiedWarningBanner')).toHaveLength(0);
   });
 
   it('renders correct columns with subaccounts', () => {

@@ -53,6 +53,7 @@ exports[`Sending Domains List Page renders correctly 1`] = `
   }
   title="Sending Domains"
 >
+  <UnverifiedWarningBanner />
   <TableCollection
     columns={
       Array [
@@ -146,6 +147,7 @@ exports[`Sending Domains List Page renders error banner correctly 1`] = `
   }
   title="Sending Domains"
 >
+  <UnverifiedWarningBanner />
   <ApiErrorBanner
     errorDetails="error"
     message="Sorry, we seem to have had some trouble loading your domains."
