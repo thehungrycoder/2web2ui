@@ -32,6 +32,14 @@ describe('contentRequired', () => {
   });
 });
 
+describe('substitution', () => {
+  it('should handle substitution values', () => {
+    expect(validation.substitution('{{ sub_content }}')).toEqual(undefined);
+    expect(validation.substitution('{{ not valid }}')).toEqual('Substitution syntax error');
+    expect(validation.substitution('{{ not }} valid')).toEqual('Substitution syntax error');
+  });
+});
+
 describe('emailOrSubstitution', () => {
   it('should handle invalid email', () => {
     expect(validation.emailOrSubstitution('not an email')).toEqual('Invalid email or substitution value');
@@ -43,6 +51,18 @@ describe('emailOrSubstitution', () => {
 
   it('should handle substitution values', () => {
     expect(validation.emailOrSubstitution('{{a}}@{{b}}')).toEqual(undefined);
+  });
+
+  it('should handle domain substitution value', () => {
+    expect(validation.emailOrSubstitution('email@{{b}}')).toEqual(undefined);
+  });
+
+  it('should handle local substitution value', () => {
+    expect(validation.emailOrSubstitution('{{a}}@domain.com')).toEqual(undefined);
+  });
+
+  it('should handle whole substitution value', () => {
+    expect(validation.emailOrSubstitution('{{ab}}')).toEqual(undefined);
   });
 });
 

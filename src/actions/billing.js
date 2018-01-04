@@ -1,6 +1,7 @@
 /* eslint max-lines: ["error", 200] */
 import { formatDataForCors, formatCreateData, formatUpdateData, formatContactData } from 'src/helpers/billing';
 import { fetch as fetchAccount } from './account';
+import { list as getSendingIps } from './sendingIps';
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 import zuoraRequest from 'src/actions/helpers/zuoraRequest';
 
@@ -75,19 +76,24 @@ export function updateCreditCard({ data, token, signature }) {
   });
 }
 
-export function updateAddons(product, data) {
-  return sparkpostApiRequest({
-    type: `UPDATE_ADDON_${product.toUpperCase()}`,
+export function addDedicatedIps({ ip_pool, isAwsAccount, quantity }) {
+  const url = isAwsAccount
+    ? '/account/integrations/aws-marketplace/add-ons/dedicated_ips'
+    : '/account/add-ons/dedicated_ips';
+  const action = {
+    type: 'ADD_DEDICATED_IPS',
     meta: {
       method: 'POST',
-      url: `/account/add-ons/${product}`,
-      data
+      url,
+      data: {
+        ip_pool,
+        quantity: parseInt(quantity)
+      }
     }
-  });
-}
+  };
 
-export function addDedicatedIps(data) {
-  return updateAddons('dedicated_ips', data);
+  return (dispatch) => dispatch(sparkpostApiRequest(action))
+    .then(() => dispatch(getSendingIps())); // refresh list
 }
 
 export function createZuoraAccount({ data, token, signature }) {
@@ -108,7 +114,7 @@ export function billingCreate(values) {
   return (dispatch) =>
 
     // get CORS data for the create account context
-     dispatch(cors('create-account', corsData))
+    dispatch(cors('create-account', corsData))
 
       // create the Zuora account
       .then((results) => {
@@ -134,7 +140,7 @@ export function billingUpdate(values) {
   return (dispatch) =>
 
     // get CORS data for the update billing context
-     dispatch(cors('update-billing'))
+    dispatch(cors('update-billing'))
 
       // Update Zuora with new CC
       .then(({ accountKey, token, signature }) => {

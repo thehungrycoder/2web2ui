@@ -28,7 +28,7 @@ describe('Action Creator: Billing', () => {
     snapActions();
   });
 
-  it('should dispatch an update subscription action', async () => {
+  it('should dispatch an update subscription action', async() => {
     const dispatchMock = jest.fn((a) => Promise.resolve(a));
     const thunk = billing.updateSubscription('test-code');
     await thunk(dispatchMock);
@@ -47,23 +47,13 @@ describe('Action Creator: Billing', () => {
     snapActions();
   });
 
-  it('should dispatch an update add-ons action', () => {
-    mockStore.dispatch(billing.updateAddons('some_product', { some: 'add-on-data' }));
-    snapActions();
-  });
-
-  it('should dispatch an add dedicated IPs action', () => {
-    mockStore.dispatch(billing.addDedicatedIps({ quantity: 2, pool: 'my_cool_test_pool' }));
-    snapActions();
-  });
-
   it('should dispatch a create zuora account action', () => {
     const data = { some: 'test-zuora-data' };
     mockStore.dispatch(billing.createZuoraAccount({ data, token, signature }));
     snapActions();
   });
 
-  it('should dispatch a chained billing create action', async () => {
+  it('should dispatch a chained billing create action', async() => {
     const dispatchMock = jest.fn((a) => Promise.resolve(a));
     const corsData = { some: 'test-cors-data' };
     const billingData = { some: 'test-billing-data' };
@@ -77,7 +67,7 @@ describe('Action Creator: Billing', () => {
     expect(_.flatten(dispatchMock.mock.calls)).toMatchSnapshot();
   });
 
-  it('should dispatch a chained billing update action', async () => {
+  it('should dispatch a chained billing update action', async() => {
     const dispatchMock = jest.fn((a) => Promise.resolve(a));
     const accountKey = { some: 'test-billing-data' };
     billingHelpers.formatUpdateData = jest.fn((values) => ({ accountKey }));

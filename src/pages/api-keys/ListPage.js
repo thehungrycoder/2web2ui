@@ -1,10 +1,9 @@
-import copy from 'copy-to-clipboard';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Banner, Page } from '@sparkpost/matchbox';
-import { hideNewApiKey, listApiKeys } from 'src/actions/api-keys';
-import { Loading, TableCollection, ApiErrorBanner } from 'src/components';
+import { Page } from '@sparkpost/matchbox';
+import { listApiKeys, hideNewApiKey } from 'src/actions/api-keys';
+import { Loading, TableCollection, ApiErrorBanner, ApiKeySuccessBanner } from 'src/components';
 import { getRowData, columns, filterBoxConfig } from './tableConfig';
 
 const primaryAction = {
@@ -16,37 +15,24 @@ const primaryAction = {
 export class ListPage extends Component {
   state = { copied: false };
 
+  // only want to show the new key after a create
+  componentWillUnmount() {
+    this.props.hideNewApiKey();
+  }
+
   componentDidMount() {
     this.props.listApiKeys();
   }
-
-  onClickBanner = () => {
-    copy(this.props.newKey);
-    this.setState({ copied: true });
-  };
 
   onReloadApiBanner = () => {
     this.props.listApiKeys();
   };
 
   renderBanner() {
-    const { hideNewApiKey, newKey } = this.props;
-
-    const action = {
-      content: this.state.copied ? 'Copied to clipboard' : 'Copy',
-      onClick: this.onClickBanner
-    };
-
     return (
-      <Banner
-        action={action}
+      <ApiKeySuccessBanner
         title="New API Key"
-        status="success"
-        onDismiss={hideNewApiKey}
-      >
-        <p>Make sure to copy your API key now. You won't be able to see it again!</p>
-        <strong>{newKey}</strong>
-      </Banner>
+      />
     );
   }
 
@@ -99,14 +85,14 @@ export class ListPage extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const { error, keys, newKey } = state.apiKeys;
+  const { error, keys, newKey, keysLoading } = state.apiKeys;
   return {
     count: keys.length,
     keys,
     error,
-    loading: state.apiKeys.keysLoading,
-    newKey
+    newKey,
+    loading: keysLoading
   };
 };
 
-export default connect(mapStateToProps, { hideNewApiKey, listApiKeys })(ListPage);
+export default connect(mapStateToProps, { listApiKeys, hideNewApiKey })(ListPage);

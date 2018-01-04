@@ -12,9 +12,9 @@ function getUniqueUnits(metrics) {
 export default class ChartGroup extends Component {
 
   createDayReferenceLines() {
-    const { data, precision } = this.props;
+    const { chartData, precision } = this.props;
 
-    return getDayLines(data, precision).map(({ ts }) => ({
+    return getDayLines(chartData, precision).map(({ ts }) => ({
       key: ts,
       x: ts,
       stroke: '#bbb',
@@ -23,9 +23,9 @@ export default class ChartGroup extends Component {
   }
 
   render() {
-    const { data = [], metrics, loading, precision, yScale } = this.props;
+    const { chartData = [], metrics, chartLoading, precision, yScale } = this.props;
 
-    if (!data.length || !metrics) {
+    if (!chartData.length || !metrics) {
       return null;
     }
 
@@ -41,13 +41,13 @@ export default class ChartGroup extends Component {
         {charts.map((chart, i) => <LineChart
           key={`chart=${i}`}
           syncId='summaryChart'
-          data={data}
+          data={chartData}
           precision={precision}
           lines={chart.metrics.map(({ name, label, stroke }) => ({
             key: name,
             dataKey: name,
             name: label,
-            stroke: loading ? '#f8f8f8' : stroke
+            stroke: chartLoading ? '#f8f8f8' : stroke
           }))}
           {...formatters}
           yTickFormatter={chart.yAxisFormatter}
@@ -60,5 +60,4 @@ export default class ChartGroup extends Component {
       </div>
     );
   }
-
 }

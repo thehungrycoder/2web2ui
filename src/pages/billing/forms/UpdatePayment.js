@@ -37,7 +37,7 @@ export class UpdatePayment extends Component {
             <PaymentForm
               formName={FORMNAME}
               disabled={submitting} />
-            </Panel.Section>
+          </Panel.Section>
           <Panel.Section>
             <BillingAddressForm
               formName={FORMNAME}

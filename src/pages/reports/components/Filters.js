@@ -14,9 +14,9 @@ class Filters extends Component {
     const { filters } = this.props;
     return filters.activeList.length
       ? <Panel.Section>
-          <small>Filters:</small>
-          { filters.activeList.map((item, index) => <Tag key={index} onRemove={() => this.handleFilterRemove(index)} className={styles.TagWrapper}>{ item.value }</Tag>)}
-        </Panel.Section>
+        <small>Filters:</small>
+        { filters.activeList.map((item, index) => <Tag key={index} onRemove={() => this.handleFilterRemove(index)} className={styles.TagWrapper}>{ item.type }: { item.value }</Tag>)}
+      </Panel.Section>
       : null;
   }
 
@@ -42,17 +42,15 @@ class Filters extends Component {
                 <DateFilter refresh={refresh} />
               </div>
             </Grid.Column>
-            <Grid.Column xs={12} md={5}>
-              <div className={styles.FieldWrapper}>
-                <Typeahead
-                  placeholder='Filter by domain, campaign, etc'
-                  onSelect={this.handleTypeaheadSelect}
-                  items={typeaheadCache}
-                  selected={filters.activeList}
-                />
-              </div>
+            <Grid.Column xs={8} md={4} xl={5}>
+              <Typeahead
+                placeholder='Filter by domain, campaign, etc'
+                onSelect={this.handleTypeaheadSelect}
+                items={typeaheadCache}
+                selected={filters.activeList}
+              />
             </Grid.Column>
-            <Grid.Column xs={12} md={1}>
+            <Grid.Column xs={4} md={2} xl={1}>
               <Button fullWidth onClick={onShare}>Share</Button>
             </Grid.Column>
           </Grid>

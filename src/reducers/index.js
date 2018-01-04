@@ -7,12 +7,15 @@ import apiKeys from './api-keys';
 import auth from './auth';
 import billing from './billing';
 import bounceReport from './bounceReport';
+import delayReport from './delayReport';
+import rejectionReport from './rejectionReport';
 import currentUser from './currentUser';
 import globalAlert from './globalAlert';
 import ipPools from './ipPools';
 import metrics from './metrics';
 import reportFilters from './reportFilters';
 import sendingDomains from './sendingDomains';
+import sendingIps from './sendingIps';
 import subaccounts from './subaccounts';
 import support from './support';
 import summaryChart from './summaryChart';
@@ -30,6 +33,8 @@ const appReducer = combineReducers({
   auth,
   billing,
   bounceReport,
+  delayReport,
+  rejectionReport,
   apiKeys,
   currentUser,
   form,
@@ -40,6 +45,7 @@ const appReducer = combineReducers({
   reportFilters,
   recipientLists,
   sendingDomains,
+  sendingIps,
   subaccounts,
   support,
   summaryChart,

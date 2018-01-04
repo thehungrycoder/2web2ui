@@ -37,7 +37,8 @@ function getStartOfDay(date) {
 }
 
 function getRelativeDates(range) {
-  const to = new Date();
+  const now = moment.utc();
+  const to = now.toDate();
 
   switch (range) {
     case 'hour':

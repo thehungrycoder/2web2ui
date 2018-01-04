@@ -12,51 +12,51 @@ export class LoginForm extends Component {
     const { loginPending } = this.props;
 
     return loginPending
-          ? <span>
-              <i className="fa fa-spinner fa-spin" /> Logging In
-            </span>
-          : <span>Log In</span>;
+      ? <span>
+        <i className="fa fa-spinner fa-spin" /> Logging In
+      </span>
+      : <span>Log In</span>;
   }
 
   render() {
     const { loginPending, pristine, ssoEnabled, handleSubmit } = this.props;
 
     return (
-        <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <Field
-            autoFocus
-            name='username'
-            id='username'
-            label='Email or Username'
-            placeholder="Leslie Knope"
-            component={TextFieldWrapper}
-            validate={required}
+          autoFocus
+          name='username'
+          id='username'
+          label='Email or Username'
+          placeholder="Leslie Knope"
+          component={TextFieldWrapper}
+          validate={required}
         />
 
         { !ssoEnabled &&
         <Field
-            type='password'
-            name='password'
-            id='password'
-            label='Password'
-            placeholder='Your Password'
-            component={TextFieldWrapper}
+          type='password'
+          name='password'
+          id='password'
+          label='Password'
+          placeholder='Your Password'
+          component={TextFieldWrapper}
         />
         }
 
         { !ssoEnabled &&
         <Field
-            name='rememberMe'
-            id='rememberMe'
-            label='Keep me logged in'
-            component={CheckboxWrapper}
+          name='rememberMe'
+          id='rememberMe'
+          label='Keep me logged in'
+          component={CheckboxWrapper}
         />
         }
 
         <Button submit disabled={loginPending || pristine}>
-            {this.renderLoginButtonText()}
+          {this.renderLoginButtonText()}
         </Button>
-        </form>
+      </form>
     );
   }
 }

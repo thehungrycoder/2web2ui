@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Selectors: Tracking Domains selectTrackingDomainsList should return a transformed array if list is present 1`] = `
+Array [
+  Object {
+    "domain": "1.com",
+    "status": "verified",
+    "verified": true,
+  },
+  Object {
+    "domain": "2.com",
+    "status": "blocked",
+    "verified": false,
+  },
+  Object {
+    "domain": "3.com",
+    "status": "unverified",
+    "verified": false,
+  },
+]
+`;
+
+exports[`Selectors: Tracking Domains selectUnverifiedTrackingDomains should return a list of unverified domains 1`] = `
+Array [
+  Object {
+    "domain": "2.com",
+    "status": "blocked",
+    "verified": false,
+  },
+  Object {
+    "domain": "3.com",
+    "status": "unverified",
+    "verified": false,
+  },
+]
+`;

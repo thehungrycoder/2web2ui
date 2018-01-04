@@ -2,18 +2,20 @@ import moment from 'moment';
 import _ from 'lodash';
 import { list as METRICS_LIST } from 'src/config/metrics';
 import config from 'src/config';
+import { getRelativeDates } from 'src/helpers/date';
 
 const { metricsPrecisionMap: precisionMap, apiDateFormat, chartColors } = config;
 const indexedPrecisions = _.keyBy(precisionMap, 'value');
 const FILTER_KEY_MAP = {
-  'Domain': 'domains',
+  'Recipient Domain': 'domains',
   'Campaign': 'campaigns',
   'Template': 'templates',
   'Sending IP': 'sending_ips',
   'IP Pool': 'ip_pools',
   'Subaccount': 'subaccounts',
-  'Sending/Bounce Domain': 'sending_domains'
+  'Sending Domain': 'sending_domains'
 };
+
 const DELIMITERS = ',;:+~`!@#$%^*()-={}[]"\'<>?./|\\'.split('');
 
 export function getQueryFromOptions({ from, to, metrics, activeList = []}) {
@@ -103,3 +105,14 @@ export function computeKeysForItem(metrics = []) {
 export function transformData(data = [], metrics = []) {
   return data.map(computeKeysForItem(metrics));
 }
+
+// Extract from, to, filters (campaign, template, ...) and any other included update fields
+// into a set of common options for metrics queries.
+export function buildCommonOptions(reportFilters, updates = {}) {
+  return {
+    ...reportFilters,
+    ...updates,
+    ...getRelativeDates(updates.relativeRange)
+  };
+}
+

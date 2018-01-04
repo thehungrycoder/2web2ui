@@ -87,7 +87,7 @@ export class ChangePlan extends Component {
           <PaymentForm
             formName={FORMNAME}
             disabled={this.props.submitting} />
-          </Panel.Section>
+        </Panel.Section>
         <Panel.Section>
           <BillingAddressForm
             formName={FORMNAME}

@@ -13,7 +13,7 @@ export default function(state) {
   } = metrics;
 
   return [
-    ...reshape(domains, 'Domain'),
+    ...reshape(domains, 'Recipient Domain'),
     ...reshape(campaigns, 'Campaign'),
     ...reshape(sendingIps, 'Sending IP'),
     ...reshape(ipPools, 'IP Pool'),
@@ -38,6 +38,6 @@ function reshapeSubaccounts(subaccounts) {
 }
 
 function reshapeSendingDomains(domains) {
-  const type = 'Sending/Bounce Domain';
+  const type = 'Sending Domain';
   return domains.map((d) => ({ type, value: d.domain }));
 }

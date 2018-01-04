@@ -8,9 +8,9 @@ export function initializeAccessControl() {
     dispatch(getCurrentUser())
       .then(({ access_level }) => dispatch(getGrants({ role: access_level })))
   ])
-  .then(() => dispatch({ type: 'ACCESS_CONTROL_READY' }))
-  .catch((err) => {
+    .then(() => dispatch({ type: 'ACCESS_CONTROL_READY' }))
+    .catch((err) => {
     // TODO: log to SENTRY
     // for now, just ignore this error
-  });
+    });
 }

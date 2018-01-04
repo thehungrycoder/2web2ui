@@ -41,8 +41,9 @@ export const RadioGroup = ({ input, options, title }) => (
         {...input}
         id={o.label}
         label={o.label}
-        value={o.value}
         checked={o.value === input.value}
+        disabled={!!o.disabled}
+        value={o.value}
       />
     ))}
   </Radio.Group>
@@ -69,12 +70,14 @@ export const CheckboxWrapper = ({ input, meta, ...rest }) => {
  *   subaccounts={subaccountsFromReduxStore}
  * />
  */
-export const SubaccountTypeaheadWrapper = ({ input, subaccounts }) => (
+export const SubaccountTypeaheadWrapper = ({ input, subaccounts, label, placeholder }) => (
   <SubaccountTypeahead
     name={input.name}
     onChange={input.onChange}
     selectedItem={input.value}
     subaccounts={subaccounts}
+    label={label}
+    placeholder={placeholder}
   />
 );
 

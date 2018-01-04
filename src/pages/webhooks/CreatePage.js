@@ -94,7 +94,7 @@ class WebhooksCreate extends Component {
       return <Redirect to={redirectTo} />; // TODO use history.push
     }
 
-    const { eventDocs, eventsLoading } = this.props;  // Form doesn't load until we have events
+    const { eventDocs, eventsLoading } = this.props; // Form doesn't load until we have events
     const eventsTree = this.buildEventsData(eventDocs);
 
     if (eventsLoading) {

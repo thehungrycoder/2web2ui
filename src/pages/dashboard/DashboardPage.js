@@ -8,7 +8,7 @@ import Tutorial from './components/Tutorial';
 import EmailBanner from './components/EmailBanner';
 
 import { fetch as fetchAccount } from 'src/actions/account';
-import { listSuppressions } from 'src/actions/suppressions';
+import { checkSuppression } from 'src/actions/suppressions';
 import { list as listSendingDomains } from 'src/actions/sendingDomains';
 import { listApiKeys } from 'src/actions/api-keys';
 
@@ -26,7 +26,7 @@ export class DashboardPage extends Component {
   }
 
   componentDidMount() {
-    this.props.listSuppressions({ sources: 'Manually Added', limit: 1 });
+    this.props.checkSuppression();
     this.props.listSendingDomains();
     this.props.listApiKeys({ id: 0 });
   }
@@ -54,7 +54,7 @@ export class DashboardPage extends Component {
     if (accountAgeInWeeks > 1 && !hasSuppressions) {
       return (
         <Banner title="Coming from another email service?">
-          <p>Welcome! Make sure you import your suppression list from your previous provider to avoid sending to people who have previously opted out, consistently bounced, etc. Learn more about migrating from Mailgun, Mandrill, or SendGrid. <a href="https://www.sparkpost.com/docs/getting-started/getting-started-sparkpost/#important-coming-from-other-email-services" target="_blank" rel="noopener noreferrer">import your suppressions</a>.</p>
+          <p>Welcome! Make sure you import your suppression list from your previous provider to avoid sending to people who have previously opted out, consistently bounced, etc. Learn more about migrating from Mailgun, Mandrill, or SendGrid. <a href="https://www.sparkpost.com/docs/getting-started/getting-started-sparkpost/#important-coming-from-other-email-services" target="_blank" rel="noopener noreferrer">Import your suppressions</a>.</p>
         </Banner>
       );
     }
@@ -85,7 +85,7 @@ function mapStateToProps(state) {
   return {
     currentUser: state.currentUser,
     accountAgeInWeeks: acctAge,
-    hasSuppressions: state.suppressions.list.length > 0,
+    hasSuppressions: state.suppressions.hasSuppression,
     hasSendingDomains: state.sendingDomains.list.length > 0,
     hasVerifiedDomains: verifiedDomains.length > 0,
     hasApiKeysForSending: apiKeysForSending.length > 0,
@@ -94,4 +94,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default withRouter(connect(mapStateToProps, { fetchAccount, listSuppressions, listSendingDomains, listApiKeys })(DashboardPage));
+export default withRouter(connect(mapStateToProps, { fetchAccount, checkSuppression, listSendingDomains, listApiKeys })(DashboardPage));

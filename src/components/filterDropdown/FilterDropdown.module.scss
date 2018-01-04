@@ -3,3 +3,10 @@
 .hidden {
   @include visually-hidden;
 }
+
+.filter-dropdown{
+  .Matchbox-ActionList{
+    overflow: auto;
+  }
+}
+

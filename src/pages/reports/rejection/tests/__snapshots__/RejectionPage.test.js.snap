@@ -1,0 +1,104 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RejectionPage:  renders correctly 1`] = `
+<Page
+  empty={Object {}}
+  title="Rejections Report"
+>
+  <Connect(Filters)
+    onShare={[Function]}
+    refresh={[Function]}
+  />
+  <Panel
+    className="RejectionTable"
+    title="Rejection Reasons"
+  >
+    <TableCollection
+      columns={
+        Array [
+          Object {
+            "label": "Reason",
+            "width": "45%",
+          },
+          "Domain",
+          "Category",
+          "Count",
+        ]
+      }
+      getRowData={[Function]}
+      pagination={true}
+      rows={
+        Array [
+          Object {
+            "count_rejected": 65,
+            "domain": "gmail.com",
+            "reason": "551 - Cannot Relay 105",
+            "rejection_category_id": 1,
+            "rejection_category_name": "Policy Rejection",
+          },
+          Object {
+            "count_rejected": 62,
+            "domain": "gmail.com",
+            "reason": "550 - Invalid recipient ...@... (#5.1.1)",
+            "rejection_category_id": 1,
+            "rejection_category_name": "Policy Rejection",
+          },
+        ]
+      }
+    />
+  </Panel>
+  <ShareModal
+    handleToggle={[Function]}
+    link=""
+    open={false}
+  />
+</Page>
+`;
+
+exports[`RejectionPage:  renders correctly when loading 1`] = `
+<Page
+  empty={Object {}}
+  title="Rejections Report"
+>
+  <Connect(Filters)
+    onShare={[Function]}
+    refresh={[Function]}
+  />
+  <Panel
+    className="RejectionTable"
+    title="Rejection Reasons"
+  >
+    <PanelLoading />
+  </Panel>
+  <ShareModal
+    handleToggle={[Function]}
+    link="http://an-awesome-link-to-share.com"
+    open={false}
+  />
+</Page>
+`;
+
+exports[`RejectionPage:  renders correctly with no rejections 1`] = `
+<Page
+  empty={Object {}}
+  title="Rejections Report"
+>
+  <Connect(Filters)
+    onShare={[Function]}
+    refresh={[Function]}
+  />
+  <Panel
+    className="RejectionTable"
+    title="Rejection Reasons"
+  >
+    <Empty
+      message="There are no rejection messages for your current query"
+    />
+  </Panel>
+  <ShareModal
+    handleToggle={[Function]}
+    link="http://an-awesome-link-to-share.com"
+    open={false}
+  />
+</Page>
+`;

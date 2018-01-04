@@ -1,78 +1,76 @@
 import * as bounceReport from '../bounceReport';
 import * as metricsActions from 'src/actions/metrics';
-import * as dateHelpers from 'src/helpers/date';
-import * as filterActions from 'src/actions/reportFilters';
 import * as metricsHelpers from 'src/helpers/metrics';
+import * as reportFilters from 'src/actions/reportFilters';
 
 import moment from 'moment';
 
 jest.mock('../helpers/sparkpostApiRequest', () => jest.fn((a) => a));
 jest.mock('src/helpers/bounce');
 jest.mock('src/helpers/metrics');
+jest.mock('src/actions/metrics');
+jest.mock('src/actions/reportFilters');
 
 describe('Action Creator: Bounce Report', () => {
 
   const from = moment(new Date(1487076708000)).utc().format('YYYY-MM-DDTHH:MM');
-  const to = moment(new Date(1495394277000)).utc().format('YYYY-MM-DDTHH:MM');
   let dispatchMock;
   let getStateMock;
-  let fetchSpy;
-  let getRelDatesSpy;
+  let stateMock;
 
   beforeEach(() => {
-    fetchSpy = jest.spyOn(metricsActions, 'fetchDeliverability');
+    const metrics = 'count_bounce';
     metricsActions.fetchDeliverability = jest.fn(() => [{ count_bounce: 1 }]);
+    metricsHelpers.getQueryFromOptions.mockImplementation(() => ({ from, metrics }));
 
-    getRelDatesSpy = jest.spyOn(dateHelpers, 'getRelativeDates');
-    dateHelpers.getRelativeDates = jest.fn(() => ({ from, to }));
-
-    metricsHelpers.getQueryFromOptions.mockImplementation(() => ({ from }));
+    stateMock = {};
 
     dispatchMock = jest.fn((a) => Promise.resolve(a));
-    getStateMock = jest.fn((a) => Promise.resolve(a));
+    getStateMock = jest.fn(() => stateMock);
   });
 
   afterEach(() => {
-    fetchSpy.mockRestore();
-    getRelDatesSpy.mockRestore();
+    jest.resetAllMocks();
   });
 
-  it('should dispatch a chart refresh action', async () => {
+  it('should dispatch a chart refresh action', async() => {
     const thunk = bounceReport.refreshBounceChartMetrics();
     await thunk(dispatchMock, getStateMock);
+    expect(reportFilters.maybeRefreshTypeaheadCache).toHaveBeenCalledTimes(1);
+    expect(reportFilters.refreshReportRange).toHaveBeenCalledTimes(1);
+    expect(metricsActions.fetchBounceClassifications).toHaveBeenCalledTimes(1);
+    expect(metricsActions.fetchBounceClassifications.mock.calls).toMatchSnapshot();
+
     expect(dispatchMock.mock.calls).toMatchSnapshot();
   });
 
-  it('should dispatch a table refresh action', async () => {
-    const thunk = bounceReport.refreshBounceTableMetrics();
+  it('should not refresh chart nor update bounce classifications if 0 bounces', async() => {
+    metricsActions.fetchDeliverability = jest.fn(() => [{ foo: 'bar' }]);
+    const thunk = bounceReport.refreshBounceChartMetrics();
     await thunk(dispatchMock, getStateMock);
+    expect(metricsActions.fetchDeliverability).toHaveBeenCalledTimes(1);
+    expect(metricsActions.fetchDeliverability.mock.calls).toMatchSnapshot();
+    expect(metricsActions.fetchBounceClassifications).not.toHaveBeenCalled();
+
     expect(dispatchMock.mock.calls).toMatchSnapshot();
   });
 
-  it('should handle relative range', async () => {
-    const thunk = bounceReport.refreshBounceChartMetrics({ relativeRange: 'test' });
+  it('should dispatch a table refresh action', async() => {
+    const updates = {};
+    stateMock.reportFilters = {};
+    const mockOptions = {};
+    metricsHelpers.buildCommonOptions = jest.fn(() => mockOptions);
+    metricsHelpers.getQueryFromOptions = jest.fn(() => ({
+      precision: 'cool', // verifying that precision gets stripped out in the snapshot below?
+      other: 'stuff'
+    }));
+    const thunk = bounceReport.refreshBounceTableMetrics(updates);
     await thunk(dispatchMock, getStateMock);
-    expect(dateHelpers.getRelativeDates).toHaveBeenCalledWith('test');
+    expect(metricsHelpers.buildCommonOptions).toHaveBeenCalledWith(stateMock.reportFilters, updates);
+    expect(metricsHelpers.getQueryFromOptions).toHaveBeenCalledWith(mockOptions);
+
+    expect(metricsActions.fetchBounceReasonsByDomain.mock.calls).toMatchSnapshot();
+    expect(dispatchMock.mock.calls).toMatchSnapshot();
   });
 
-  it('should not refresh the typeahead cache by default', async () => {
-    const spy = jest.spyOn(filterActions, 'refreshTypeaheadCache');
-    const thunk = bounceReport.refreshBounceChartMetrics();
-    await thunk(dispatchMock, getStateMock);
-    expect(spy).toHaveBeenCalledTimes(0);
-  });
-
-  it('should refresh the typeahead cache on date change', async () => {
-    const spy = jest.spyOn(filterActions, 'refreshTypeaheadCache');
-    const thunk = bounceReport.refreshBounceChartMetrics({ to: 'test', from: 'test' });
-    await thunk(dispatchMock, getStateMock);
-    expect(spy).toHaveBeenCalled();
-  });
-
-  it('should refresh the typeahead cache on relative date change', async () => {
-    const spy = jest.spyOn(filterActions, 'refreshTypeaheadCache');
-    const thunk = bounceReport.refreshBounceChartMetrics({ from, range: 'hour' });
-    await thunk(dispatchMock, getStateMock);
-    expect(spy).toHaveBeenCalled();
-  });
 });

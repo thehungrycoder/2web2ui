@@ -1,6 +1,6 @@
 import React from 'react';
 import { ProtectedRoute, AuthenticationGate } from 'src/components/auth';
-import { Layout, Support, GlobalAlertWrapper } from 'src/components';
+import { Layout, Support, GlobalAlertWrapper, RouteWatch } from 'src/components';
 import routes from 'src/config/routes';
 import {
   BrowserRouter as Router,
@@ -12,6 +12,7 @@ import {
 const App = () => (
   <Router>
     <div>
+      <RouteWatch />
       <AuthenticationGate />
       <Layout>
         <Switch>

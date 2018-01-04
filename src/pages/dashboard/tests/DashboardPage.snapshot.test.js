@@ -8,7 +8,7 @@ describe('Page: Dashboard tests', () => {
     currentUser: {
       email_verified: true
     },
-    listSuppressions: jest.fn(() => []),
+    checkSuppression: jest.fn(() => []),
     listSendingDomains: jest.fn(() => []),
     listApiKeys: jest.fn(() => []),
     account: {

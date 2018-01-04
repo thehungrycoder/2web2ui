@@ -52,12 +52,12 @@ export class PlanPicker extends Component {
     });
 
     return (
-       <div className={styles.PlanPicker}>
-         <div className={listClasses}>{ items }</div>
-         <Icon name='ChevronDown' size={24} className={styles.Chevron} />
-         <input {...getInputProps()} ref={(input) => this.input = input} className={styles.Input} />
-         <Plan {...triggerProps} className={triggerClasses} />
-       </div>
+      <div className={styles.PlanPicker}>
+        <div className={listClasses}>{ items }</div>
+        <Icon name='ChevronDown' size={24} className={styles.Chevron} />
+        <input {...getInputProps()} ref={(input) => this.input = input} className={styles.Input} />
+        <Plan {...triggerProps} className={triggerClasses} />
+      </div>
     );
   };
 

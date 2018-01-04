@@ -50,8 +50,9 @@ export default (state = initialState, { payload, type }) => {
     }
 
     // CRUD
-    case 'CREATE_API_KEY_SUCCESS':
+    case 'CREATE_API_KEY_SUCCESS': {
       return { ...state, newKey: payload.key };
+    }
 
     case 'DELETE_API_KEY_SUCCESS':
     case 'UPDATE_API_KEY_SUCCESS': {

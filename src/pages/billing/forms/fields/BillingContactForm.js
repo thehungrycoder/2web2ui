@@ -35,14 +35,14 @@ export class BillingContactForm extends Component {
 
     const stateOrProvince = countries.length && (countryValue === 'US' || countryValue === 'CA')
       ? <Grid.Column xs={6}>
-          <Field
-            label={countryValue === 'US' ? 'State' : 'Province'}
-            name='billingContact.state'
-            component={SelectWrapper}
-            options={_.find(countries, { value: countryValue }).states}
-            validate={required}
-          />
-        </Grid.Column>
+        <Field
+          label={countryValue === 'US' ? 'State' : 'Province'}
+          name='billingContact.state'
+          component={SelectWrapper}
+          options={_.find(countries, { value: countryValue }).states}
+          validate={required}
+        />
+      </Grid.Column>
       : null;
 
     return (

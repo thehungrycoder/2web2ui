@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ApiKeyBanner Component should change content when key is copied 1`] = `
+<Banner
+  action={
+    Object {
+      "content": "Copied to clipboard",
+      "onClick": [Function],
+    }
+  }
+  onDismiss={[Function]}
+  status="success"
+  title="congrats on your new key"
+>
+  <p>
+    Make sure to copy your API key now. You won't be able to see it again!
+  </p>
+  <strong>
+    nuevo-llave
+  </strong>
+</Banner>
+`;
+
+exports[`ApiKeyBanner Component should render default success message 1`] = `
+<Banner
+  action={
+    Object {
+      "content": "Copy",
+      "onClick": [Function],
+    }
+  }
+  onDismiss={[Function]}
+  status="success"
+  title="congrats on your new key"
+>
+  <p>
+    Make sure to copy your API key now. You won't be able to see it again!
+  </p>
+  <strong>
+    nuevo-llave
+  </strong>
+</Banner>
+`;

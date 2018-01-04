@@ -94,6 +94,7 @@ We have two types of internal docs: general and directory-based. You'll find gen
 - [Access Control](./docs/access-control.md)
 - [Redux Form](./docs/redux-form.md)
 - [Redux](./docs/redux-redux.md)
+- [Styles](./docs/styles.md)
 
 Components:
 - [Collection](./src/components/collection/docs/Collection.md)

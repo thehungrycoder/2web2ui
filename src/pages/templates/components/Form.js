@@ -1,20 +1,25 @@
+/* eslint max-lines: ["error", 200] */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, change } from 'redux-form';
+import { list as listDomains } from 'src/actions/sendingDomains';
+import { selectVerifiedDomains } from 'src/selectors/sendingDomains';
+import config from 'src/config';
 
 // Components
 import { Panel } from '@sparkpost/matchbox';
 import ToggleBlock from './ToggleBlock';
 import { TextFieldWrapper } from 'src/components';
+import FromEmailWrapper from './FromEmail';
 
 // Helpers & Validation
 import { required } from 'src/helpers/validation';
 import { slugify } from 'src/helpers/string';
-import { ID_ALLOWED_CHARS, idSyntax, emailOrSubstitution, verifiedDomain } from './validation';
+import { ID_ALLOWED_CHARS, idSyntax, substitution, emailOrSubstitution } from './validation';
 
 import styles from './FormEditor.module.scss';
 
-class Form extends Component {
+export class Form extends Component {
   // Fills in ID based on Name
   handleIdFill = (e) => {
     const { newTemplate, change, name } = this.props;
@@ -27,14 +32,34 @@ class Form extends Component {
   }
 
   componentDidMount() {
+    this.props.listDomains();
+  }
+
+  componentWillReceiveProps(nextProps) {
     const { change, newTemplate, name } = this.props;
-    if (newTemplate) { // TODO update to reflect sending domains
-      change(name, 'content.from.email', 'sandbox@sparkpostbox.com');
+    const { domains } = nextProps;
+
+    // If no verified sending domains, use sandbox
+    if (newTemplate && !domains.length) {
+      change(name, 'content.from.email', `${config.sandbox.localpart}@${config.sandbox.domain}`);
     }
   }
 
+  verifiedDomain = (value) => {
+    const { domains } = this.props;
+    const parts = value.split('@');
+
+    if (parts.length > 1) {
+      const validSandbox = value === `${config.sandbox.localpart}@${config.sandbox.domain}`;
+      const validDomain = parts[1] && (domains.map(({ domain }) => domain).includes(parts[1]) || !substitution(parts[1]));
+      return validSandbox || validDomain ? undefined : 'Must use a verified sending domain';
+    }
+
+    return undefined;
+  }
+
   render() {
-    const { newTemplate, published } = this.props;
+    const { newTemplate, published, domains } = this.props;
 
     return (
       <Panel className={styles.FormPanel}>
@@ -69,10 +94,12 @@ class Form extends Component {
 
           <Field
             name='content.from.email'
-            component={TextFieldWrapper}
+            component={FromEmailWrapper}
+            placeholder='example@email.com'
             label='From Email'
-            disabled={newTemplate || published} // TODO check for sending domains
-            validate={[required, emailOrSubstitution, verifiedDomain]}
+            disabled={!domains.length || published}
+            validate={[required, emailOrSubstitution, this.verifiedDomain]}
+            domains={domains}
           />
 
           <Field
@@ -137,4 +164,8 @@ class Form extends Component {
   }
 }
 
-export default connect(null, { change })(Form);
+const mapStateToProps = (state) => ({
+  domains: selectVerifiedDomains(state)
+});
+
+export default connect(mapStateToProps, { change, listDomains })(Form);

@@ -30,6 +30,7 @@ const config = {
     supportEmail: 'support@sparkpost.com',
     billingEmail: 'billing@sparkpost.com'
   },
+  gaTag: 'no-default-set',
   metricsPrecisionMap: [
     { time: 60, value: '1min', format: 'ha' },
     { time: 60 * 2, value: '5min', format: 'ha' },
@@ -41,7 +42,12 @@ const config = {
     { time: Infinity, value: 'month', format: 'MMM YY' }
   ],
   release: process.env.REACT_APP_VERSION,
+  sandbox: {
+    localpart: 'sandbox',
+    domain: 'sparkpostbox.com'
+  },
   sendingIps: {
+    maxPerAccount: 4,
     pricePerIp: 20.00
   },
   sentry: {
@@ -65,6 +71,7 @@ const config = {
     }
   },
   tenant: 'local',
+  touLink: 'https://www.sparkpost.com/policies/tou/',
   zuora: {
     baseUrl: 'https://rest.apisandbox.zuora.com/v1',
     timeout: 15000

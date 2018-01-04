@@ -7,15 +7,13 @@ import { addFilter, refreshTypeaheadCache } from 'src/actions/reportFilters';
 import { getShareLink, getFilterSearchOptions, parseSearch } from 'src/helpers/reports';
 import { showAlert } from 'src/actions/globalAlert';
 
-import { TableCollection } from 'src/components';
+import { TableCollection, Empty, LongTextContainer } from 'src/components';
+import { Percent } from 'src/components/formatters';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
-import { Page, Panel } from '@sparkpost/matchbox';
+import { Page, Panel, UnstyledLink } from '@sparkpost/matchbox';
 import ShareModal from '../components/ShareModal';
 import Filters from '../components/Filters';
 import ChartGroup from './components/ChartGroup';
-import Empty from '../components/Empty';
-
-import './BouncePage.scss';
 
 const columns = [{ label: 'Reason', width: '45%' }, 'Domain', 'Category', 'Classification', 'Count (%)'];
 
@@ -36,7 +34,6 @@ export class BouncePage extends Component {
     if (filters) {
       filters.forEach(this.props.addFilter);
     }
-
     return options;
   }
 
@@ -44,9 +41,9 @@ export class BouncePage extends Component {
     this.props.refreshBounceChartMetrics(options)
       .then(() => this.updateLink())
       .then(() => this.props.refreshBounceTableMetrics(options))
-     .catch((err) => {
-       this.props.showAlert({ type: 'error', message: 'Unable to refresh bounce report.', details: err.message });
-     });
+      .catch((err) => {
+        this.props.showAlert({ type: 'error', message: 'Unable to refresh bounce report.', details: err.message });
+      });
   }
 
   handleModalToggle = (modal) => {
@@ -62,15 +59,20 @@ export class BouncePage extends Component {
     history.replace({ pathname: '/reports/bounce', search });
   }
 
+  handleDomainClick = (domain) => {
+    this.props.addFilter({ type: 'Recipient Domain', value: domain });
+    this.handleRefresh();
+  }
+
   getRowData = (rowData) => {
     const { totalBounces } = this.props;
     const { reason, domain, bounce_category_name, bounce_class_name, count_bounce } = rowData;
     return [
-      <div className='ReasonCell'>{reason}</div>,
-      domain,
+      <LongTextContainer text={reason} />,
+      <UnstyledLink onClick={() => this.handleDomainClick(domain)}>{ domain }</UnstyledLink>,
       bounce_category_name,
       bounce_class_name,
-      `${count_bounce} (${Number((count_bounce / totalBounces) * 100).toFixed(2)}%)`
+      <span>{count_bounce}(<Percent value={(count_bounce / totalBounces) * 100} />)</span>
     ];
   };
 
@@ -109,7 +111,7 @@ export class BouncePage extends Component {
       <Page title='Bounce Report'>
         <Filters refresh={this.handleRefresh} onShare={this.handleModalToggle} />
         { this.renderChart() }
-        <Panel title='Bounced Messages' className='BounceTable'>
+        <Panel title='Bounced Messages' className='ReasonsTable'>
           { this.renderCollection() }
         </Panel>
         <ShareModal

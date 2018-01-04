@@ -5,9 +5,10 @@ import ipValidator from '../helpers/ipValidator';
 import { TextFieldWrapper, CheckboxWrapper, RadioGroup, SelectWrapper } from 'src/components/reduxFormWrappers';
 import GrantsCheckboxes from 'src/components/grantBoxes/GrantsCheckboxes';
 
+const uneditableMsg = 'System set statuses cannot be edited.';
 const keyBoxHelpText = (createApiKey) => createApiKey
-    ? 'The key will only be shown once when created, so be sure to copy and save it somewhere safe.'
-    : 'Every subaccount you create will need its own API key. You can create one later.';
+  ? 'The key will only be shown once when created, so be sure to copy and save it somewhere safe.'
+  : 'Every subaccount you create will need its own API key. You can create one later.';
 
 const ipPoolsOptions = (ipPools) => (ipPools.map(({ id, name }) => ({
   value: id,
@@ -81,29 +82,22 @@ const ApiKeyFields = ({ show, showGrants = false, grants, disabled }) => {
   );
 };
 
-const StatusSelect = ({ disabled, compliance }) => {
-  if (compliance) {
-    return (
-      <Field
-        name="status"
-        component={TextFieldWrapper}
-        label="Status"
-        disabled={true}
-        helpText={'System set statuses can\'t be edited'}
-      />
-    );
-  } else {
-    return (
-      <Field
-        name="status"
-        component={SelectWrapper}
-        options={statusOptions}
-        label="Status"
-        disabled={disabled}
-      />
-    );
-  }
-};
+const StatusSelect = ({ disabled, compliance }) => compliance
+  ? (<Field
+    name="status"
+    component={TextFieldWrapper}
+    label="Status"
+    disabled={true}
+    helpText={uneditableMsg}
+  />
+  )
+  : (<Field
+    name="status"
+    component={SelectWrapper}
+    options={statusOptions}
+    label="Status"
+    disabled={disabled}
+  />);
 
 
 const IpPoolSelect = ({ ipPools, disabled }) => (

@@ -12,41 +12,41 @@ export class LoginForm extends Component {
     const { loginPending, pristine, ssoEnabled, handleSubmit } = this.props;
 
     return (
-        <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <Field
-            autoFocus
-            name='username'
-            id='username'
-            label='Email or Username'
-            placeholder="Leslie Knope"
-            component={TextFieldWrapper}
-            validate={required}
+          autoFocus
+          name='username'
+          id='username'
+          label='Email or Username'
+          placeholder="Leslie Knope"
+          component={TextFieldWrapper}
+          validate={required}
         />
 
         { !ssoEnabled &&
         <Field
-            type='password'
-            name='password'
-            id='password'
-            label='Password'
-            placeholder='Your Password'
-            component={TextFieldWrapper}
+          type='password'
+          name='password'
+          id='password'
+          label='Password'
+          placeholder='Your Password'
+          component={TextFieldWrapper}
         />
         }
 
         { !ssoEnabled &&
         <Field
-            name='rememberMe'
-            id='rememberMe'
-            label='Keep me logged in'
-            component={CheckboxWrapper}
+          name='rememberMe'
+          id='rememberMe'
+          label='Keep me logged in'
+          component={CheckboxWrapper}
         />
         }
 
         <Button primary submit disabled={loginPending || pristine}>
-            { loginPending ? 'Logging In' : 'Log In' }
+          { loginPending ? 'Logging In' : 'Log In' }
         </Button>
-        </form>
+      </form>
     );
   }
 }

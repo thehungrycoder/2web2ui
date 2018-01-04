@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Percent should render negative 1`] = `
+<Percent
+  value={-20}
+>
+  -20%
+</Percent>
+`;
+
+exports[`Percent should render percent 1`] = `
+<Percent
+  value={20}
+>
+  20%
+</Percent>
+`;
+
+exports[`Percent should render percent floor 1`] = `
+<Percent
+  value={0.00001}
+>
+  &lt; 0.01%
+</Percent>
+`;
+
+exports[`Percent should render when not a number 1`] = `
+<Percent
+  value="not a number"
+>
+  not a number
+</Percent>
+`;

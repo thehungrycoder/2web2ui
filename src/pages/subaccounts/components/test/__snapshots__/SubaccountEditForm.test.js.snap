@@ -17,7 +17,7 @@ exports[`base case 1`] = `
       }
     />
     <StatusSelect
-      compliance="active"
+      compliance={false}
       disabled={false}
     />
   </Panel.Section>
@@ -51,7 +51,7 @@ exports[`cancel button 1`] = `
       }
     />
     <StatusSelect
-      compliance="active"
+      compliance={false}
       disabled={false}
     />
   </Panel.Section>
@@ -88,8 +88,42 @@ exports[`no ip pools 1`] = `
       disabled={false}
     />
     <StatusSelect
-      compliance="active"
+      compliance={false}
       disabled={false}
+    />
+  </Panel.Section>
+  <Panel.Section>
+    <Button
+      disabled={true}
+      primary={true}
+      size="default"
+      submit={true}
+    >
+      Update
+    </Button>
+  </Panel.Section>
+</form>
+`;
+
+exports[`should disable all fields when compliance is true 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <Panel.Section>
+    <NameField
+      disabled={true}
+    />
+    <IpPoolSelect
+      disabled={true}
+      ipPools={
+        Array [
+          "an array of ip pools",
+        ]
+      }
+    />
+    <StatusSelect
+      compliance={true}
+      disabled={true}
     />
   </Panel.Section>
   <Panel.Section>
@@ -122,7 +156,7 @@ exports[`submits correctly 1`] = `
       }
     />
     <StatusSelect
-      compliance="active"
+      compliance={false}
       disabled={true}
     />
   </Panel.Section>

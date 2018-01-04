@@ -65,3 +65,34 @@ export function updateUser(username, data) {
       message: `Unable to update role for ${username}.`
     })));
 }
+
+export function checkInviteToken(token) {
+  return sparkpostApiRequest({
+    type: 'CHECK_INVITE_TOKEN',
+    meta: {
+      method: 'GET',
+      url: `/users/invite/${token}`
+    }
+  });
+}
+
+export function registerUser(token, data) {
+  const action = {
+    type: 'REGISTER_USER',
+    meta: {
+      method: 'POST',
+      url: `/users/register/${token}`,
+      data: { ...data, tou_accepted: true }
+    }
+  };
+
+  return (dispatch) => dispatch(sparkpostApiRequest(action))
+    .then(() => dispatch(showAlert({ type: 'success', message: 'Welcome to SparkPost' })))
+    .catch((error) => {
+      dispatch(showAlert({
+        type: 'error',
+        message: 'Unable to register user.',
+        details: error.message
+      })).then(() => { throw error; });
+    });
+}

@@ -12,9 +12,14 @@ export const convertStatus = ({ verified, compliance_status }) => {
   return 'verified';
 };
 
+export const selectTrackingDomainsAreLoaded = createSelector(
+  [getTrackingDomains],
+  (trackingDomains) => !!trackingDomains
+);
+
 export const selectTrackingDomainsList = createSelector(
   [getTrackingDomains],
-  (trackingDomains) => trackingDomains.map((item) => ({
+  (trackingDomains = []) => trackingDomains.map((item) => ({
     ...item,
     verified: item.status.verified,
     status: convertStatus(item.status)

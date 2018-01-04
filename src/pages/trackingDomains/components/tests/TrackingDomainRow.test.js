@@ -1,4 +1,4 @@
-/* eslint max-lines: ["error", 250] */
+/* eslint max-lines: ["error", 300] */
 import React from 'react';
 import { shallow } from 'enzyme';
 import { TrackingDomainRow, IsDefaultTag, SubaccountTag } from '../TrackingDomainRow';
@@ -42,7 +42,7 @@ describe('Component: TrackingDomainRow', () => {
   });
 
   it('should handle deletion', () => {
-    const deleteMock = jest.fn();
+    const deleteMock = jest.fn(() => Promise.resolve());
     const wrapper = shallow(<TrackingDomainRow
       verifying={[]}
       deleteTrackingDomain={deleteMock}
@@ -51,9 +51,68 @@ describe('Component: TrackingDomainRow', () => {
     />);
     const instance = wrapper.instance();
     jest.spyOn(instance, 'toggleDeleteModal');
-    instance.handleDelete();
-    expect(deleteMock).toHaveBeenCalledWith({ domain: 'deleteme.com', subaccountId: 100 });
-    expect(instance.toggleDeleteModal).toHaveBeenCalledTimes(1);
+
+    return instance.delete().then(() => {
+      expect(deleteMock).toHaveBeenCalledWith({ domain: 'deleteme.com', subaccountId: 100 });
+      // don't toggle modal because component is unmounted, causes errors
+      expect(instance.toggleDeleteModal).toHaveBeenCalledTimes(0);
+    });
+  });
+
+  it('should handle update', () => {
+    const updateMock = jest.fn(() => Promise.resolve());
+    const listMock = jest.fn(() => Promise.resolve());
+    const wrapper = shallow(<TrackingDomainRow
+      verifying={[]}
+      updateTrackingDomain={updateMock}
+      listTrackingDomains={listMock}
+      domain='updateme.com'
+      subaccountId={100}
+    />);
+    const instance = wrapper.instance();
+    const data = { some: 'value' };
+
+    return instance.update(data).then(() => {
+      expect(updateMock).toHaveBeenCalledWith({ domain: 'updateme.com', subaccount: 100, some: 'value' });
+      expect(listMock).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  it('should ignore update errors (they will be handled via global alert)', () => {
+    const updateMock = jest.fn(() => Promise.reject(new Error('update failed')));
+    const listMock = jest.fn(() => Promise.resolve());
+    const wrapper = shallow(<TrackingDomainRow
+      verifying={[]}
+      updateTrackingDomain={updateMock}
+      listTrackingDomains={listMock}
+      domain='updateme.com'
+      subaccountId={100}
+    />);
+    const instance = wrapper.instance();
+    const data = { some: 'value' };
+
+    return instance.update(data).then(() => {
+      expect(updateMock).toHaveBeenCalledWith({ domain: 'updateme.com', subaccount: 100, some: 'value' });
+      expect(listMock).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  it('should toggle the default value and the modal', () => {
+    const wrapper = shallow(<TrackingDomainRow
+      verifying={[]}
+      domain='updateme.com'
+      subaccountId={100}
+    />);
+    wrapper.setProps({ isDefault: true });
+    const instance = wrapper.instance();
+    instance.update = jest.fn(() => Promise.resolve());
+    jest.spyOn(instance, 'toggleDefaultModal');
+
+    instance.toggleDefaultValue().then(() => {
+      expect(instance.update).toHaveBeenCalledWith({ default: false });
+      // component is unmounted, no need to toggle (will cause errors if attempted)
+      expect(instance.toggleDefaultModal).toHaveBeenCalledTimes(0);
+    });
   });
 
   it('should re-verify a domain', () => {

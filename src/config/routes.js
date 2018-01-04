@@ -6,8 +6,10 @@ import {
   billing,
   DashboardPage,
   ProfilePage,
+  RegisterPage,
   reports,
   recipientLists,
+  suppressions,
   subaccounts,
   templates,
   trackingDomains,
@@ -82,6 +84,11 @@ const routes = [
     component: SSOPage
   },
   {
+    path: '/register',
+    public: true,
+    component: RegisterPage
+  },
+  {
     path: '/dashboard',
     component: DashboardPage,
     layout: App
@@ -103,7 +110,7 @@ const routes = [
   },
   {
     path: '/reports/rejections',
-    component: ComingSoonPage,
+    component: reports.RejectionPage,
     layout: App
   },
   {
@@ -113,7 +120,7 @@ const routes = [
   },
   {
     path: '/reports/delayed',
-    component: ComingSoonPage,
+    component: reports.DelayPage,
     layout: App
   },
   {
@@ -212,7 +219,7 @@ const routes = [
   },
   {
     path: '/lists/suppressions',
-    component: ComingSoonPage,
+    component: suppressions.ListPage,
     condition: hasGrants('suppression_lists/manage'),
     layout: App
   },

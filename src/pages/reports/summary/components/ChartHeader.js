@@ -31,7 +31,7 @@ class ChartHeader extends Component {
         <Grid.Column xs={12} md={7} lg={7}>
           <div className={styles.Controls}>
             <Button size='small' onClick={onMetricsToggle}>Select Metrics</Button>
-            {this.renderTimeMode()}
+            {/* {this.renderTimeMode()} */}
             <Button.Group className={styles.ButtonSpacer}>
               {this.renderScaleButton('linear', 'Linear')}
               {this.renderScaleButton('log', 'Log')}

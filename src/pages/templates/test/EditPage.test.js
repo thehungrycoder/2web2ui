@@ -48,14 +48,14 @@ describe('Template EditPage', () => {
   });
 
   describe('publish', () => {
-    it('should handle success', async () => {
+    it('should handle success', async() => {
       wrapper.setProps({ publish: jest.fn(() => Promise.resolve()) });
       await wrapper.instance().handlePublish('values');
       expect(props.history.push).toHaveBeenCalledWith('/templates/edit/id/published');
       expect(props.showAlert).toHaveBeenCalledWith({ type: 'success', message: 'Template published' });
     });
 
-    it('should handle fail', async () => {
+    it('should handle fail', async() => {
       wrapper.setProps({ publish: jest.fn(() => Promise.reject({ message: 'fail' })) });
       await wrapper.instance().handlePublish('values');
       expect(props.showAlert).toHaveBeenCalledWith({ type: 'error', message: 'Could not publish template', details: 'fail' });
@@ -63,7 +63,7 @@ describe('Template EditPage', () => {
   });
 
   describe('save', () => {
-    it('should handle success', async () => {
+    it('should handle success', async() => {
       wrapper.setProps({ update: jest.fn(() => Promise.resolve()) });
       await wrapper.instance().handleSave('values');
       expect(props.getDraft).toHaveBeenCalledWith('id');
@@ -71,7 +71,7 @@ describe('Template EditPage', () => {
       expect(props.showAlert).toHaveBeenCalledWith({ type: 'success', message: 'Template saved' });
     });
 
-    it('should handle fail', async () => {
+    it('should handle fail', async() => {
       wrapper.setProps({ update: jest.fn(() => Promise.reject({ message: 'fail' })) });
       await wrapper.instance().handleSave('values');
       expect(props.showAlert).toHaveBeenCalledWith({ type: 'error', message: 'Could not save template', details: 'fail' });
@@ -79,14 +79,14 @@ describe('Template EditPage', () => {
   });
 
   describe('delete', () => {
-    it('should handle success', async () => {
+    it('should handle success', async() => {
       wrapper.setProps({ deleteTemplate: jest.fn(() => Promise.resolve()) });
       await wrapper.instance().handleDelete('id');
       expect(props.history.push).toHaveBeenCalledWith('/templates/');
       expect(props.showAlert).toHaveBeenCalledWith({ message: 'Template deleted' });
     });
 
-    it('should handle fail', async () => {
+    it('should handle fail', async() => {
       wrapper.setProps({ deleteTemplate: jest.fn(() => Promise.reject({ message: 'fail' })) });
       await wrapper.instance().handleDelete('id');
       expect(props.showAlert).toHaveBeenCalledWith({ type: 'error', message: 'Could not delete template', details: 'fail' });

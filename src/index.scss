@@ -5,6 +5,7 @@
 // Adjusting the root font size here will scale the UI proportionally
 
 html {
+  background: color(gray, 9);
   font-size: rem(16);
   @media screen and (min-width: breakpoint(medium)) { font-size: rem(18); }
   @media screen and (min-width: breakpoint(larger)) { font-size: rem(20); }

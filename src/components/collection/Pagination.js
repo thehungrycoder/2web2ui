@@ -39,13 +39,13 @@ class CollectionPagination extends Component {
         display: 'inline-block',
         marginRight: '10px'
       }}>Per Page</span>
-        {perPageButtons.map((buttonAmount) => (
-          <Button
-            className={classnames(perPage === buttonAmount && styles.Selected)}
-            key={buttonAmount}
-            onClick={() => onPerPageChange(buttonAmount)}
-          >{buttonAmount}</Button>
-        ))}
+      {perPageButtons.map((buttonAmount) => (
+        <Button
+          className={classnames(perPage === buttonAmount && styles.Selected)}
+          key={buttonAmount}
+          onClick={() => onPerPageChange(buttonAmount)}
+        >{buttonAmount}</Button>
+      ))}
       </Button.Group>
     );
   }

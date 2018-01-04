@@ -21,7 +21,17 @@ export function create(values) {
         data: { ...formatSubaccount(values, getState) }
       }
     })
-  );
+  ).then((res) => {
+    // need to update store for api key creation during subaccount
+    if (res.key) {
+      dispatch({
+        type: 'CREATE_API_KEY_SUCCESS',
+        payload: { key: res.key }
+      });
+    }
+
+    return res;
+  });
 }
 
 export function getSubaccount(id) {

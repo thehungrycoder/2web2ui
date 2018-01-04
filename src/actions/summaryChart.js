@@ -19,6 +19,7 @@ export function refresh(updates = {}) {
 
     // refresh the typeahead cache if the date range has been updated
     const { from, to } = updates;
+
     if (from || to) {
       const params = getQueryFromOptions({ from, to });
       dispatch(refreshTypeaheadCache(params));
@@ -36,24 +37,61 @@ export function refresh(updates = {}) {
     // convert new meta data into query param format
     const params = getQueryFromOptions(options);
 
-    // get new data
-    return dispatch(fetchMetrics({ path: 'deliverability/time-series', params })).then((results) => {
-
-      const summaryData = {
-        data: results,
-        metrics: options.metrics,
-        precision: params.precision
-      };
-
-      // refresh the chart with the new data
-      dispatch(refreshSummaryChart(summaryData));
-    });
+    return Promise.all([
+      dispatch(getChartData({ params, metrics: options.metrics })),
+      dispatch(getTableData({ params, metrics: options.metrics }))
+    ]);
   };
 }
 
-export function refreshSummaryChart(payload) {
-  return {
-    type: 'REFRESH_SUMMARY_CHART',
-    payload
+export function getChartData({ params = {}, metrics }) {
+  const options = {
+    type: 'FETCH_CHART_DATA',
+    path: 'deliverability/time-series',
+    params
+  };
+
+  return (dispatch, getState) => dispatch(fetchMetrics(options)).then((results) => {
+    const payload = {
+      data: results,
+      precision: params.precision,
+      metrics
+    };
+
+    dispatch({ type: 'REFRESH_SUMMARY_CHART', payload });
+  });
+}
+
+export function getTableData({ params, metrics, groupBy }) {
+  return (dispatch, getState) => {
+    const state = getState();
+
+    // The selected grouping
+    const activeGroup = groupBy || state.summaryChart.groupBy;
+
+    // Get selected metrics
+    const activeMetrics = metrics || state.summaryChart.metrics;
+
+    // Gets filters and metrics for params
+    if (!params) {
+      params = getQueryFromOptions({ ...state.summaryChart, ...state.reportFilters });
+    }
+
+    const options = {
+      type: 'FETCH_TABLE_DATA',
+      path: `deliverability/${activeGroup}`,
+      params
+    };
+
+    return dispatch(fetchMetrics(options)).then((results) => {
+      dispatch({
+        type: 'REFRESH_SUMMARY_TABLE',
+        payload: {
+          data: results,
+          groupBy: activeGroup,
+          metrics: activeMetrics
+        }
+      });
+    });
   };
 }

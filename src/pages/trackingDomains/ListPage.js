@@ -5,7 +5,11 @@ import { Page, Panel } from '@sparkpost/matchbox';
 import { Loading, ApiErrorBanner, Collection } from 'src/components';
 import { listTrackingDomains } from 'src/actions/trackingDomains';
 import { list as listSubaccounts } from 'src/actions/subaccounts';
-import { selectTrackingDomainsList, selectUnverifiedTrackingDomains } from 'src/selectors/trackingDomains';
+import {
+  selectTrackingDomainsList,
+  selectUnverifiedTrackingDomains,
+  selectTrackingDomainsAreLoaded
+} from 'src/selectors/trackingDomains';
 import UnverifiedBanner from './components/UnverifiedBanner';
 import TrackingDomainRow from './components/TrackingDomainRow';
 
@@ -40,8 +44,9 @@ export class ListPage extends Component {
       <div>
         <UnverifiedBanner unverifiedDomains={unverified} />
         <Collection
-          rows={trackingDomains}
+          rows={trackingDomains || []}
           rowComponent={(props) => <TrackingDomainRow {...props} verifying={verifying} />}
+          rowKeyName='domain'
           outerWrapper={Panel}
           pagination={true}
           filterBox={{
@@ -55,9 +60,9 @@ export class ListPage extends Component {
   }
 
   render() {
-    const { error, loading, trackingDomains } = this.props;
+    const { error, trackingDomains, trackingDomainsLoaded } = this.props;
 
-    if (loading) {
+    if (!trackingDomainsLoaded) {
       return <Loading />;
     }
 
@@ -66,7 +71,7 @@ export class ListPage extends Component {
         title='Tracking Domains'
         primaryAction={primaryAction}
         empty={{
-          show: trackingDomains.length === 0,
+          show: trackingDomainsLoaded && trackingDomains.length === 0,
           content: <p>Use a custom domain for engagement tracking</p>,
           image: 'Generic'
         }}>
@@ -82,6 +87,7 @@ const mapStateToProps = (state) => {
     error: trackingDomains.error,
     loading: trackingDomains.listLoading,
     trackingDomains: selectTrackingDomainsList(state),
+    trackingDomainsLoaded: selectTrackingDomainsAreLoaded(state),
     unverified: selectUnverifiedTrackingDomains(state),
     verifying: trackingDomains.verifying
   };
