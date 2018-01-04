@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import * as TemplateActions from 'src/actions/templates';
+import { showAlert } from 'src/actions/globalAlert';
+import { getDraftAndPreview, sendPreview } from 'src/actions/templates';
 import PreviewPage from './components/PreviewPage';
 
 export class PreviewDraftPage extends Component {
@@ -19,10 +20,9 @@ export class PreviewDraftPage extends Component {
     return (
       <PreviewPage
         editTemplatePath={`/templates/edit/${this.props.match.params.id}`}
-        label="Draft"
         loading={this.state.loading}
-        preview={this.props.preview}
-        template={this.props.template}
+        mode="draft"
+        {...this.props}
       />
     );
   }
@@ -37,6 +37,6 @@ export const mapStateToProps = (state, props) => {
   };
 };
 
-const mapDispatchToProps = { ...TemplateActions };
+const mapDispatchToProps = { getDraftAndPreview, sendPreview, showAlert };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PreviewDraftPage));

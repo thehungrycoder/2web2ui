@@ -171,3 +171,48 @@ export function getTestData({ id, mode }) {
     });
   };
 }
+
+// @see https://github.com/SparkPost/sparkpost-api-documentation/blob/master/services/transmissions.md#create-a-transmission-post
+export function sendPreview({ id, mode, emails, from }) {
+  const recipients = emails.map((email) => ({
+    address: { email }
+  }));
+
+  return async(dispatch) => {
+    const { payload: testData = {}} = await dispatch(getTestData({ id, mode }));
+
+    return dispatch(sparkpostApiRequest({
+      type: 'SEND_PREVIEW_TRANSMISSION',
+      meta: {
+        method: 'POST',
+        url: '/transmissions',
+        data: {
+          ...testData,
+          content: {
+            template_id: id,
+            use_draft_template: mode === 'draft'
+          },
+          options: {
+            ...testData.options,
+            sandbox: /sparkpostbox.com$/i.test(from)
+          },
+          recipients,
+          return_path: 'test@example.com'
+        }
+      }
+    }))
+      .catch((error) => {
+        const ERRORS = {
+          2101: 'You have reached the maximum number of messages you can send for the hour.',
+          2102: 'You have reached the maximum number of messages you can send for the day.',
+          2103: 'You have reached the maximum number of messages you can send through the sandbox.'
+        };
+
+        if (error.response.status === 420) {
+          throw new Error(ERRORS[error.response.data.errors[0].code]);
+        }
+
+        throw error;
+      });
+  };
+}

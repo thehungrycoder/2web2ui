@@ -12,6 +12,13 @@ exports[`PreviewPage renders preview page 1`] = `
     }
   }
   empty={Object {}}
+  primaryAction={
+    Object {
+      "content": "Send Email",
+      "disabled": false,
+      "onClick": [Function],
+    }
+  }
   title="Test Template (Draft)"
 >
   <Panel
@@ -19,9 +26,11 @@ exports[`PreviewPage renders preview page 1`] = `
   >
     <TextField
       label="To"
-      placeholder="example@domain.com, example@domain.com, ..."
-      required={true}
+      onChange={[Function]}
+      placeholder="Send to recipient email addresses"
+      required={false}
       type="text"
+      value=""
     />
     <TextField
       disabled={true}

@@ -10,18 +10,16 @@ const TEST_CASES = {
   },
   'renders preview page': {
     editTemplatePath: '/path/to/edit',
-    label: 'Draft',
     loading: false,
+    mode: 'draft',
     preview: {
+      from: {
+        email: 'test@example.com'
+      },
       html: '<html />',
       subject: 'Test Subject'
     },
     template: {
-      content: {
-        from: {
-          email: 'test@example.com'
-        }
-      },
       name: 'Test Template'
     }
   }
