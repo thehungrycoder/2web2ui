@@ -46,12 +46,12 @@ describe('Support Component', () => {
     expect(wrapper.state('showPanel')).toBeTruthy();
   });
 
-  it('should create a ticket on submit', async () => {
+  it('should create a ticket on submit', async() => {
     await expect(wrapper.instance().onSubmit(ticket)).resolves.toBeDefined();
     expect(createTicket).toHaveBeenCalled();
   });
 
-  it('should show an alert on submission failure', async () => {
+  it('should show an alert on submission failure', async() => {
     createTicket.mockReturnValueOnce(Promise.reject({}));
     await expect(wrapper.instance().onSubmit(ticket)).rejects.toBeDefined();
     expect(showAlert).toHaveBeenCalled();
