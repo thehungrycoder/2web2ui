@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: Ready For should render bounce as default ready 1`] = `
+<span>
+  <small>
+    Ready For:
+  </small>
+  <Tag
+    color="orange"
+  >
+    Bounce (Default)
+  </Tag>
+</span>
+`;
+
+exports[`Component: Ready For should render bounce ready 1`] = `
+<span>
+  <small>
+    Ready For:
+  </small>
+  <Tag>
+    Bounce
+  </Tag>
+</span>
+`;
+
+exports[`Component: Ready For should render null when all flags are false 1`] = `""`;
+
+exports[`Component: Ready For should render sending and dkim ready 1`] = `
+<span>
+  <small>
+    Ready For:
+  </small>
+  <Tag>
+    Sending
+  </Tag>
+  <Tag>
+    DKIM Signing
+  </Tag>
+</span>
+`;

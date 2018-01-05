@@ -9,6 +9,7 @@ exports[`DeleteButton renders a button 1`] = `
 >
   <Icon
     name="Delete"
+    size={18}
   />
 </Button>
 `;
