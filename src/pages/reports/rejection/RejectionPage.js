@@ -3,15 +3,14 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import _ from 'lodash';
 import qs from 'query-string';
-import { refreshRejectionTableMetrics } from 'src/actions/rejectionReport';
-import { addFilter, refreshTypeaheadCache } from 'src/actions/reportFilters';
-import { getFilterSearchOptions, parseSearch } from 'src/helpers/reports';
+import { getFilterSearchOptions, parseSearch, humanizeTimeRange } from 'src/helpers/reports';
 import { showAlert } from 'src/actions/globalAlert';
 import { TableCollection, Empty, LongTextContainer } from 'src/components';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
 import { Page, Panel, UnstyledLink } from '@sparkpost/matchbox';
 import ShareModal from '../components/ShareModal';
 import Filters from '../components/Filters';
+import MetricsSummary from '../components/MetricsSummary';
 const columns = [{ label: 'Reason', width: '45%' }, 'Domain', 'Category', 'Count'];
 
 export class RejectionPage extends Component {
@@ -21,24 +20,16 @@ export class RejectionPage extends Component {
   }
 
   componentDidMount() {
-    this.handleRefresh(this.parseSearch());
+    this.handleRefresh(parseSearch(this.props.location.search));
     this.props.refreshTypeaheadCache();
   }
 
-  parseSearch() {
-    const { addFilter } = this.props;
-    const { options, filters } = parseSearch(this.props.location.search);
-
-    if (!_.isEmpty(filters)) {
-      filters.forEach(addFilter);
-    }
-
-    return options;
-  }
-
   handleRefresh = (options) => {
-    const { showAlert, refreshRejectionTableMetrics } = this.props;
-    return refreshRejectionTableMetrics(options)
+    const { showAlert, refreshRejectionTableMetrics, loadRejectionMetrics } = this.props;
+    return Promise.all([
+      loadRejectionMetrics(options),
+      refreshRejectionTableMetrics(options)
+    ])
       .then(() => this.updateLink())
       .catch((err) => showAlert({ type: 'error', message: 'Unable to refresh rejection reports.', details: err.message }));
   }
@@ -90,6 +81,21 @@ export class RejectionPage extends Component {
     />;
   }
 
+  renderTopLevelMetrics() {
+    const { aggregatesLoading, aggregates, filters } = this.props;
+
+    if (aggregatesLoading) {
+      return <PanelLoading />;
+    }
+
+    return <MetricsSummary
+      rateValue={(aggregates.count_rejected / aggregates.count_targeted) * 100}
+      rateTitle={'Rejected Rate'}>
+      { aggregates.count_rejected && <span><strong>{aggregates.count_rejected.toLocaleString()}</strong> of your messages were rejected of <strong>{aggregates.count_targeted.toLocaleString()}</strong> messages targeted in the <strong>last {humanizeTimeRange(filters.from, filters.to)}</strong>.</span> }
+    </MetricsSummary>;
+
+  }
+
   render() {
     const { modal, query } = this.state;
     const { loading } = this.props;
@@ -101,6 +107,7 @@ export class RejectionPage extends Component {
           onShare={this.handleModalToggle}
           shareDisabled={loading}
         />
+        { this.renderTopLevelMetrics() }
         <Panel title='Rejection Reasons' className='RejectionTable'>
           { this.renderCollection() }
         </Panel>
@@ -115,12 +122,15 @@ export class RejectionPage extends Component {
 
 const mapStateToProps = ({ reportFilters, rejectionReport }) => ({
   filters: reportFilters,
-  loading: rejectionReport.reasonsLoading,
+  loading: rejectionReport.aggregatesLoading || rejectionReport.reasonsLoading,
+  aggregatesLoading: rejectionReport.aggregatesLoading,
+  aggregates: rejectionReport.aggregates,
   list: rejectionReport.list
 });
 
 const mapDispatchToProps = {
   addFilter,
+  loadRejectionMetrics,
   refreshRejectionTableMetrics,
   refreshTypeaheadCache,
   showAlert

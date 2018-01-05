@@ -1,10 +1,11 @@
+/* eslint max-lines: ["error", 175] */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import qs from 'query-string';
 import { refreshBounceChartMetrics, refreshBounceTableMetrics } from 'src/actions/bounceReport';
 import { addFilter, refreshTypeaheadCache } from 'src/actions/reportFilters';
-import { getFilterSearchOptions, parseSearch } from 'src/helpers/reports';
+import { getFilterSearchOptions, parseSearch, humanizeTimeRange } from 'src/helpers/reports';
 import { showAlert } from 'src/actions/globalAlert';
 import { TableCollection, Empty, LongTextContainer } from 'src/components';
 import { Percent } from 'src/components/formatters';
@@ -13,6 +14,7 @@ import { Page, Panel, UnstyledLink } from '@sparkpost/matchbox';
 import ShareModal from '../components/ShareModal';
 import Filters from '../components/Filters';
 import ChartGroup from './components/ChartGroup';
+import MetricsSummary from '../components/MetricsSummary';
 const columns = [{ label: 'Reason', width: '45%' }, 'Domain', 'Category', 'Classification', 'Count (%)'];
 
 export class BouncePage extends Component {
@@ -34,14 +36,14 @@ export class BouncePage extends Component {
     return options;
   }
 
-  handleRefresh = (options) => {
-    this.props.refreshBounceChartMetrics(options)
-      .then(() => this.updateLink())
-      .then(() => this.props.refreshBounceTableMetrics(options))
-      .catch((err) => {
-        this.props.showAlert({ type: 'error', message: 'Unable to refresh bounce report.', details: err.message });
-      });
-  }
+  handleRefresh = (options) => Promise.all([
+    this.props.refreshBounceChartMetrics(options),
+    this.props.refreshBounceTableMetrics(options)
+  ])
+    .then(() => this.updateLink())
+    .catch((err) => {
+      this.props.showAlert({ type: 'error', message: 'Unable to refresh bounce report.', details: err.message });
+    })
 
   handleModalToggle = (modal) => {
     this.setState({ modal: !this.state.modal });
@@ -99,6 +101,22 @@ export class BouncePage extends Component {
     />;
   }
 
+  renderTopLevelMetrics() {
+    const { aggregatesLoading, aggregates, filters } = this.props;
+
+    if (aggregatesLoading) {
+      return <PanelLoading />;
+    }
+
+    if (aggregates) {
+      return <MetricsSummary
+        rateValue={(aggregates.countBounce / aggregates.countTargeted) * 100}
+        rateTitle={'Bounce Rate'}>
+        { aggregates.countBounce && <span><strong>{aggregates.countBounce.toLocaleString()}</strong> of your messages were bounced of <strong>{aggregates.countTargeted.toLocaleString()}</strong> messages targeted in the <strong>last {humanizeTimeRange(filters.from, filters.to)}</strong>.</span> }
+      </MetricsSummary>;
+    }
+  }
+
   render() {
     const { modal, query } = this.state;
     const { chartLoading } = this.props;
@@ -110,6 +128,7 @@ export class BouncePage extends Component {
           onShare={this.handleModalToggle}
           shareDisabled={chartLoading}
         />
+        { this.renderTopLevelMetrics() }
         { this.renderChart() }
         <Panel title='Bounced Messages' className='ReasonsTable'>
           { this.renderCollection() }
@@ -124,12 +143,14 @@ export class BouncePage extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const chartLoading = state.bounceReport.aggregatesLoading || state.bounceReport.categoriesLoading;
+  const aggregatesLoading = state.bounceReport.aggregatesLoading;
+  const chartLoading = aggregatesLoading || state.bounceReport.categoriesLoading;
   const tableLoading = chartLoading || state.bounceReport.reasonsLoading;
   const aggregates = state.bounceReport.aggregates;
   return {
     filters: state.reportFilters,
     chartLoading,
+    aggregatesLoading,
     aggregates,
     totalBounces: aggregates ? aggregates.countBounce : 1,
     tableLoading,

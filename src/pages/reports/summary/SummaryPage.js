@@ -26,18 +26,8 @@ export class SummaryReportPage extends Component {
   }
 
   componentDidMount() {
-    this.handleRefresh(this.parseSearch());
+    this.handleRefresh(parseSearch(this.props.location.search));
     this.props.refreshTypeaheadCache();
-  }
-
-  parseSearch() {
-    const { options, filters } = parseSearch(this.props.location.search);
-
-    if (filters) {
-      filters.forEach(this.props.addFilter);
-    }
-
-    return options;
   }
 
   handleRefresh = (options) => {

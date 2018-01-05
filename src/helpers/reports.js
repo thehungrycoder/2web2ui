@@ -1,6 +1,11 @@
 import moment from 'moment';
 import qs from 'query-string';
+<<<<<<< HEAD
 import { getRelativeDates } from 'src/helpers/date';
+=======
+import _ from 'lodash';
+import { addFilter } from 'src/actions/reportFilters';
+>>>>>>> FAD-6020 added top level metrics to bounce, rejection, delay pages
 
 /**
  * Creates search options object from shared report options. Page specific options not included (ie. summary chart selected metrics)
@@ -61,6 +66,34 @@ export function parseSearch(search) {
     relativeRange: range
   };
 
-  // Filters are not passed to metrics refresh actions
-  return { options, filters: filtersList };
+  if (filtersList) {
+    filtersList.forEach(addFilter);
+  }
+
+  return { options };
 }
+
+function humanizeTimeRange(from, to) {
+  // need to control how to handle 1 hour/day/month
+  moment.updateLocale('en', {
+    relativeTime: {
+      h: 'hour',
+      d: '24 hours',
+      M: '30 days'
+    }
+  });
+
+  from = moment(from);
+  to = moment(to);
+  return from.to(to, true);
+}
+<<<<<<< HEAD
+=======
+
+export {
+  getFilterSearchOptions,
+  getShareLink,
+  humanizeTimeRange,
+  parseSearch
+};
+>>>>>>> FAD-6020 added top level metrics to bounce, rejection, delay pages

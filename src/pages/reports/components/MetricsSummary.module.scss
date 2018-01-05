@@ -1,0 +1,34 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.Large {
+  @include text-style-display-heading;
+  font-size: rem(36);
+  margin-bottom: 0;
+}
+
+.Caption {
+  color: color(gray, 3);
+  font-weight: 400;
+  margin-bottom: 0;
+}
+
+.Description {
+  font-size: rem(19);
+  color: color(gray, 3);
+  margin-bottom: 0;
+
+  strong {
+    color: color(gray, 1);
+  }
+}
+
+.panelvertical {
+  // display: inline-block;
+  vertical-align: top;
+  height: 100%;
+  padding: rem(30);
+
+  &:first-child {
+    border-right: 1px solid color(gray, 9);
+  }
+}
