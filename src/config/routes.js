@@ -5,6 +5,7 @@ import {
   SSOPage,
   billing,
   DashboardPage,
+  sendingDomains,
   ProfilePage,
   RegisterPage,
   reports,
@@ -286,6 +287,18 @@ const routes = [
   },
   {
     path: '/account/sending-domains',
+    component: sendingDomains.ListPage,
+    condition: hasGrants('sending_domains/manage'),
+    layout: App
+  },
+  {
+    path: '/account/sending-domains/create',
+    component: ComingSoonPage,
+    condition: hasGrants('sending_domains/manage'),
+    layout: App
+  },
+  {
+    path: '/account/sending-domains/edit/:id',
     component: ComingSoonPage,
     condition: hasGrants('sending_domains/manage'),
     layout: App

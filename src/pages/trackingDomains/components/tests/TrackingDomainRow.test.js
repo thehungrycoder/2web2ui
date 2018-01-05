@@ -1,7 +1,7 @@
 /* eslint max-lines: ["error", 300] */
 import React from 'react';
 import { shallow } from 'enzyme';
-import { TrackingDomainRow, IsDefaultTag, SubaccountTag } from '../TrackingDomainRow';
+import { TrackingDomainRow, IsDefaultTag } from '../TrackingDomainRow';
 
 /**
  * Returns whether a given shallow render wrapper
@@ -127,18 +127,10 @@ describe('Component: TrackingDomainRow', () => {
     expect(verifyMock).toHaveBeenCalledWith({ domain: 'verifyme.com', subaccountId: 200 });
   });
 
-  describe('Tag components', () => {
+  describe('Tag component', () => {
 
     it('should render the IsDefaultTag', () => {
       expect(shallow(<IsDefaultTag />)).toMatchSnapshot();
-    });
-
-    it('should render the IsDefaultTag when assigned to a subaccount', () => {
-      expect(shallow(<IsDefaultTag assignedToSubaccount />)).toMatchSnapshot();
-    });
-
-    it('should render the SubaccountTag', () => {
-      expect(shallow(<SubaccountTag id={213} />)).toMatchSnapshot();
     });
 
   });

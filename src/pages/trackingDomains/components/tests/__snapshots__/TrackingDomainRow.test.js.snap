@@ -1,29 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Component: TrackingDomainRow Tag components should render the IsDefaultTag 1`] = `
+exports[`Component: TrackingDomainRow Tag component should render the IsDefaultTag 1`] = `
 <Tag
-  orange={true}
+  color="orange"
 >
   Default
-</Tag>
-`;
-
-exports[`Component: TrackingDomainRow Tag components should render the IsDefaultTag when assigned to a subaccount 1`] = `
-<Tag
-  orange={true}
->
-  Subaccount 
-  Default
-</Tag>
-`;
-
-exports[`Component: TrackingDomainRow Tag components should render the SubaccountTag 1`] = `
-<Tag>
-  <Icon
-    name="Link"
-  />
-   Subaccount 
-  213
 </Tag>
 `;
 
@@ -34,11 +15,11 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
       md={9}
       xs={12}
     >
-      <h3>
+      <span>
         somedomain.com
-      </h3>
+      </span>
       <div>
-        <Component
+        <DomainStatusTag
           status="unverified"
         />
       </div>
@@ -54,6 +35,7 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
         >
           <Icon
             name="Refresh"
+            size={18}
           />
            
           Verifying...
@@ -105,11 +87,11 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
       md={9}
       xs={12}
     >
-      <h3>
+      <span>
         somedomain.com
-      </h3>
+      </span>
       <div>
-        <Component
+        <DomainStatusTag
           status="blocked"
         />
       </div>
@@ -125,6 +107,7 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
         >
           <Icon
             name="Refresh"
+            size={18}
           />
            
           Retry Verification
@@ -169,16 +152,14 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
       md={9}
       xs={12}
     >
-      <h3>
+      <span>
         somedomain.com
-      </h3>
+      </span>
       <div>
-        <Component
+        <DomainStatusTag
           status="unverified"
         />
-        <IsDefaultTag
-          assignedToSubaccount={false}
-        />
+        <IsDefaultTag />
       </div>
     </Grid.Column>
     <Grid.Column
@@ -192,6 +173,7 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
         >
           <Icon
             name="Refresh"
+            size={18}
           />
            
           Retry Verification
@@ -249,16 +231,11 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
       md={9}
       xs={12}
     >
-      <h3>
+      <span>
         somedomain.com
-      </h3>
+      </span>
       <div>
-        <Component
-          status="verified"
-        />
-        <IsDefaultTag
-          assignedToSubaccount={false}
-        />
+        <IsDefaultTag />
       </div>
     </Grid.Column>
     <Grid.Column
@@ -326,11 +303,11 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
       md={9}
       xs={12}
     >
-      <h3>
+      <span>
         somedomain.com
-      </h3>
+      </span>
       <div>
-        <Component
+        <DomainStatusTag
           status="unverified"
         />
       </div>
@@ -346,6 +323,7 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
         >
           <Icon
             name="Refresh"
+            size={18}
           />
            
           Retry Verification
@@ -397,14 +375,10 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
       md={9}
       xs={12}
     >
-      <h3>
+      <span>
         somedomain.com
-      </h3>
-      <div>
-        <Component
-          status="verified"
-        />
-      </div>
+      </span>
+      <div />
     </Grid.Column>
     <Grid.Column
       md={3}
@@ -465,11 +439,11 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
       md={9}
       xs={12}
     >
-      <h3>
+      <span>
         somedomain.com
-      </h3>
+      </span>
       <div>
-        <Component
+        <DomainStatusTag
           status="pending"
         />
       </div>
@@ -485,6 +459,7 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
         >
           <Icon
             name="Refresh"
+            size={18}
           />
            
           Retry Verification
@@ -529,15 +504,16 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
       md={9}
       xs={12}
     >
-      <h3>
+      <span>
         somedomain.com
-      </h3>
+      </span>
       <div>
-        <Component
+        <DomainStatusTag
           status="unverified"
         />
         <SubaccountTag
           id={100}
+          isDefault={false}
         />
       </div>
     </Grid.Column>
@@ -552,6 +528,7 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
         >
           <Icon
             name="Refresh"
+            size={18}
           />
            
           Verifying...
@@ -603,15 +580,16 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
       md={9}
       xs={12}
     >
-      <h3>
+      <span>
         somedomain.com
-      </h3>
+      </span>
       <div>
-        <Component
+        <DomainStatusTag
           status="blocked"
         />
         <SubaccountTag
           id={100}
+          isDefault={false}
         />
       </div>
     </Grid.Column>
@@ -626,6 +604,7 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
         >
           <Icon
             name="Refresh"
+            size={18}
           />
            
           Retry Verification
@@ -670,18 +649,16 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
       md={9}
       xs={12}
     >
-      <h3>
+      <span>
         somedomain.com
-      </h3>
+      </span>
       <div>
-        <Component
+        <DomainStatusTag
           status="unverified"
-        />
-        <IsDefaultTag
-          assignedToSubaccount={true}
         />
         <SubaccountTag
           id={100}
+          isDefault={true}
         />
       </div>
     </Grid.Column>
@@ -696,6 +673,7 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
         >
           <Icon
             name="Refresh"
+            size={18}
           />
            
           Retry Verification
@@ -753,18 +731,13 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
       md={9}
       xs={12}
     >
-      <h3>
+      <span>
         somedomain.com
-      </h3>
+      </span>
       <div>
-        <Component
-          status="verified"
-        />
-        <IsDefaultTag
-          assignedToSubaccount={true}
-        />
         <SubaccountTag
           id={100}
+          isDefault={true}
         />
       </div>
     </Grid.Column>
@@ -833,15 +806,16 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
       md={9}
       xs={12}
     >
-      <h3>
+      <span>
         somedomain.com
-      </h3>
+      </span>
       <div>
-        <Component
+        <DomainStatusTag
           status="unverified"
         />
         <SubaccountTag
           id={100}
+          isDefault={false}
         />
       </div>
     </Grid.Column>
@@ -856,6 +830,7 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
         >
           <Icon
             name="Refresh"
+            size={18}
           />
            
           Retry Verification
@@ -907,15 +882,13 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
       md={9}
       xs={12}
     >
-      <h3>
+      <span>
         somedomain.com
-      </h3>
+      </span>
       <div>
-        <Component
-          status="verified"
-        />
         <SubaccountTag
           id={100}
+          isDefault={false}
         />
       </div>
     </Grid.Column>
@@ -978,15 +951,16 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
       md={9}
       xs={12}
     >
-      <h3>
+      <span>
         somedomain.com
-      </h3>
+      </span>
       <div>
-        <Component
+        <DomainStatusTag
           status="pending"
         />
         <SubaccountTag
           id={100}
+          isDefault={false}
         />
       </div>
     </Grid.Column>
@@ -1001,6 +975,7 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
         >
           <Icon
             name="Refresh"
+            size={18}
           />
            
           Retry Verification

@@ -4,15 +4,12 @@ import { connect } from 'react-redux';
 import { Panel, Grid, Icon, Button, Tag } from '@sparkpost/matchbox';
 import { listTrackingDomains, updateTrackingDomain, deleteTrackingDomain, verifyTrackingDomain } from 'src/actions/trackingDomains';
 import { DeleteModal, ConfirmationModal } from 'src/components/modals';
+import { DomainStatusTag, SubaccountTag } from 'src/components';
 import styles from './TrackingDomainRow.module.scss';
-import StatusTag from './StatusTag';
 import _ from 'lodash';
 
-export function IsDefaultTag({ assignedToSubaccount }) {
-  return <Tag orange className={styles.Tag}>{assignedToSubaccount && 'Subaccount '}Default</Tag>;
-}
-export function SubaccountTag({ id }) {
-  return <Tag><Icon name='Link' /> Subaccount {id}</Tag>;
+export function IsDefaultTag() {
+  return <Tag color='orange' className={styles.Tag}>Default</Tag>;
 }
 
 export class TrackingDomainRow extends Component {
@@ -110,14 +107,14 @@ export class TrackingDomainRow extends Component {
   render() {
     const { domain, subaccountId, status, isDefault } = this.props;
     return (
-      <Panel.Section className={styles.SpacedSection}>
+      <Panel.Section>
         <Grid>
           <Grid.Column xs={12} md={9}>
-            <h3 className={styles.DomainHeading}>{domain}</h3>
+            <span className={styles.DomainHeading}>{domain}</span>
             <div className={styles.TagRow}>
-              <StatusTag status={status} />
-              {isDefault && <IsDefaultTag assignedToSubaccount={!!subaccountId} />}
-              {subaccountId && <SubaccountTag id={subaccountId} />}
+              {status !== 'verified' && <DomainStatusTag className={styles.Tag} status={status} />}
+              {isDefault && !subaccountId && <IsDefaultTag/>}
+              {subaccountId && <SubaccountTag className={styles.Tag} id={subaccountId} isDefault={!!subaccountId && isDefault}/>}
             </div>
           </Grid.Column>
           <Grid.Column xs={12} md={3}>

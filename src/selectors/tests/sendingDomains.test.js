@@ -1,4 +1,4 @@
-import { selectVerifiedDomains, selectReadyForBounce } from '../sendingDomains';
+import { selectVerifiedDomains, selectReadyForBounce, hasUnverifiedDomains } from '../sendingDomains';
 
 describe('Selectors: sendingDomains', () => {
   const state = {
@@ -40,5 +40,35 @@ describe('Selectors: sendingDomains', () => {
     expect(selectReadyForBounce(state)).toMatchSnapshot();
   });
 
-});
+  describe('has unverified domains', () => {
+    it('should return true if there are unverified sending domains', () => {
+      expect(hasUnverifiedDomains(state)).toEqual(true);
+    });
 
+    it('should return false if there are no unverified sending domains', () => {
+      const state = {
+        sendingDomains: {
+          list: [
+            {
+              status: {
+                ownership_verified: true,
+                compliance_status: 'valid'
+              }
+            }
+          ]
+        }
+      };
+      expect(hasUnverifiedDomains(state)).toEqual(false);
+    });
+
+    it('should return false if there are no domains', () => {
+      const state = {
+        sendingDomains: {
+          list: []
+        }
+      };
+      expect(hasUnverifiedDomains(state)).toEqual(false);
+    });
+  });
+
+});

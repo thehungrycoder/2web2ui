@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: SubaccountTag should render a default assigned subaccount 1`] = `
+<Tag
+  color="orange"
+>
+  <Icon
+    name="Link"
+    size={15}
+  />
+   
+  Subaccount 12
+   (Default)
+</Tag>
+`;
+
+exports[`Component: SubaccountTag should render a master account tag 1`] = `
+<Tag
+  color={null}
+>
+  <Icon
+    name="Link"
+    size={15}
+  />
+   
+  Master account
+</Tag>
+`;
+
+exports[`Component: SubaccountTag should render a non-default assigned subaccount 1`] = `
+<Tag
+  color={null}
+>
+  <Icon
+    name="Link"
+    size={15}
+  />
+   
+  Subaccount 12
+</Tag>
+`;
+
+exports[`Component: SubaccountTag should render a non-default assigned subaccount 2`] = `
+<Tag
+  color={null}
+>
+  <Icon
+    name="Link"
+    size={15}
+  />
+   
+  Subaccount 13
+</Tag>
+`;
+
+exports[`Component: SubaccountTag should render a shared with all tag 1`] = `
+<Tag
+  color={null}
+>
+  <Icon
+    name="Link"
+    size={15}
+  />
+   
+  Shared with all
+</Tag>
+`;
