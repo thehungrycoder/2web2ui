@@ -76,3 +76,9 @@ export function fetchDelayReasonsByDomain(params = {}) {
   const path = 'deliverability/delay-reason/domain';
   return fetch({ type, path, params });
 }
+
+export function fetchDeliveriesByAttempt(params = {}) {
+  const type = 'FETCH_METRICS_DELIVERIES_BY_ATTEMPT';
+  const path = 'deliverability/attempt';
+  return fetch({ type, path, params });
+}
