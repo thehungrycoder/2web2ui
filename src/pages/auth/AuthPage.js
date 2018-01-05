@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { authenticate, ssoCheck } from 'src/actions/auth';
+import { authenticate, ssoCheck, login } from 'src/actions/auth';
+import { verifyAndLogin } from 'src/actions/tfa';
 import { SparkPost } from 'src/components';
 import { Panel, Error } from '@sparkpost/matchbox';
+import { SubmissionError } from 'redux-form';
 
 import config from 'src/config';
 import LoginForm from './components/LoginForm';
+import TfaForm from './components/TfaForm';
 import styles from './AuthPage.module.scss';
 
 export class AuthPage extends Component {
@@ -50,13 +53,26 @@ export class AuthPage extends Component {
 
   }
 
-  onClickSubmit = (values) => {
+  loginSubmit = (values) => {
     const { username, password, rememberMe } = values;
     this.state.ssoEnabled ? this.ssoSignIn(username) : this.regularSignIn(username, password, rememberMe);
   };
 
+  tfaSubmit = (values) => {
+    const { code } = values;
+    const { tfaEnabled, ...authData } = this.props.tfa;
+    return this.props.verifyAndLogin({ authData, code }).catch((err) => {
+      if (err.response.status === 400) {
+        throw new SubmissionError({
+          code: 'The code is invalid'
+        });
+      }
+    });
+  };
+
   render() {
     const { errorDescription, loggedIn } = this.props.auth;
+    const { tfaEnabled } = this.props.tfa;
 
     if (loggedIn) {
       return <Redirect to="/dashboard" />;
@@ -73,16 +89,18 @@ export class AuthPage extends Component {
         <Panel sectioned accent title="Log In">
           { errorDescription && this.renderLoginError(errorDescription)}
 
-          <LoginForm onSubmit={this.onClickSubmit} ssoEnabled={this.state.ssoEnabled}/>
+          { tfaEnabled && <TfaForm onSubmit={this.tfaSubmit} /> }
+          { !tfaEnabled && <LoginForm onSubmit={this.loginSubmit} ssoEnabled={this.state.ssoEnabled}/> }
         </Panel>
       </div>
     );
   }
 }
 
-const mapStateToProps = ({ auth }) => ({
-  auth
+const mapStateToProps = ({ auth, tfa }) => ({
+  auth,
+  tfa
 });
 
-export default connect(mapStateToProps, { authenticate, ssoCheck })(AuthPage);
+export default connect(mapStateToProps, { login, verifyAndLogin, authenticate, ssoCheck })(AuthPage);
 
