@@ -264,7 +264,6 @@ Array [
             },
           },
         ],
-        "return_path": "test@example.com",
         "substitution_data": Object {
           "test": "test",
         },

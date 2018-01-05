@@ -197,8 +197,7 @@ export function sendPreview({ id, mode, emails, from }) {
             ...testData.options,
             sandbox: /sparkpostbox.com$/i.test(from)
           },
-          recipients,
-          return_path: 'test@example.com'
+          recipients
         }
       }
     }));
