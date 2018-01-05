@@ -195,13 +195,13 @@ const routes = [
   {
     path: '/templates/preview/:id',
     component: templates.PreviewDraftPage,
-    condition: hasGrants('templates/modify'),
+    condition: hasGrants('templates/view'),
     layout: App
   },
   {
     path: '/templates/preview/:id/published',
     component: templates.PreviewPublishedPage,
-    condition: hasGrants('templates/modify'),
+    condition: hasGrants('templates/view'),
     layout: App
   },
   {
