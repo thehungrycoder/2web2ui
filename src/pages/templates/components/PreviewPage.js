@@ -45,7 +45,8 @@ export default class PreviewPage extends React.Component {
     }).then(this.onSendSuccess).catch(this.onSendFail);
   }
 
-  onSendFail = ({ message }) => {
+  onSendFail = (error) => {
+    const message = _.get(error, 'response.data.errors[0].message', error.message);
     this.props.showAlert({ message, type: 'error' });
     this.setState({ sending: false });
   }

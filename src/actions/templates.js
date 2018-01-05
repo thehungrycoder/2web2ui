@@ -1,9 +1,8 @@
-/* eslint max-lines: ["warn", { "max": 230, "skipComments": true }] */
+/* eslint max-lines: ["warn", { "max": 215, "skipComments": true }] */
 // @see discussion for custom lint rule, https://github.com/SparkPost/2web2ui/issues/230
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 import localforage from 'localforage';
 import config from 'src/config';
-import responseErrorCodes from 'src/config/responseErrorCodes';
 import { getTestDataKey } from './helpers/templates';
 
 export function listTemplates() {
@@ -202,12 +201,6 @@ export function sendPreview({ id, mode, emails, from }) {
           return_path: 'test@example.com'
         }
       }
-    })).catch((error) => {
-      // Translate response error code and re-throw error with comprehensible message
-      const { code } = error.response.data.errors[0];
-      const message = responseErrorCodes[code] || 'Unable to send test email';
-
-      throw new Error(message);
-    });
+    }));
   };
 }

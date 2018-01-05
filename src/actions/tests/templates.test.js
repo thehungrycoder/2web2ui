@@ -118,11 +118,6 @@ describe('Action Creator: Templates', () => {
     expect(mockStore.getActions()).toMatchSnapshot();
   });
 
-  // @todo This is a hack.  The cause is sparkpostApiRequest hands back the
-  //  request object then dispatch should return a promise, but instead redux-mock-store
-  //  logs the action created and returns the request object.  sparkpostApiRequest can't be
-  //  changed to return a Promise.resolve() because redux-mock-store checks if the object has
-  //  a type property.  Either this action needs to be refactored or a more robust test helper is needed.
   it('should dispatch getTestData and sendPreview actions', async() => {
     const action = templates.sendPreview({
       emails: ['test@example.com'],
@@ -130,17 +125,7 @@ describe('Action Creator: Templates', () => {
       id: 'test-template',
       mode: 'draft'
     });
-    const actions = [];
-    const dispatch = (a) => {
-      if (typeof a === 'function') {
-        return a(dispatch, getState);
-      }
-
-      actions.push(a);
-      return Promise.resolve(a);
-    };
-    const getState = () => user;
-    await action(dispatch, getState);
-    expect(actions).toMatchSnapshot();
+    await mockStore.dispatch(action);
+    expect(mockStore.getActions()).toMatchSnapshot();
   });
 });
