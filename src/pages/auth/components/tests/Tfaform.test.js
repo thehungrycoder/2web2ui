@@ -28,8 +28,3 @@ it('calls correct method on submit', () => {
   wrapper.find('form').first().simulate('submit');
   expect(props.handleSubmit).toHaveBeenCalledTimes(1);
 });
-
-it('should display error when form submission fails', () => {
-  wrapper.setProps({ error: { message: 'tfa failed' }});
-  expect(wrapper).toMatchSnapshot();
-});

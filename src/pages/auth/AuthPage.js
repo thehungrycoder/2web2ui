@@ -64,7 +64,7 @@ export class AuthPage extends Component {
     return this.props.verifyAndLogin({ authData, code }).catch((err) => {
       if (err.response.status === 400) {
         throw new SubmissionError({
-          _error: 'The code is invalid'
+          code: 'The code is invalid'
         });
       }
     });

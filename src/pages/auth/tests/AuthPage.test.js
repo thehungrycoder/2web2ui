@@ -60,7 +60,7 @@ it('should throw a submission error when verifyAndLogin fails with 4xx error', (
   const authPage = wrapper.instance();
   authPage.props.verifyAndLogin.mockImplementation(() => Promise.reject({ response: { status: 400 }}));
   return authPage.tfaSubmit({ code: 'code' }).catch((err) => {
-    expect(err.errors._error).toEqual('The code is invalid');
+    expect(err.errors.code).toEqual('The code is invalid');
   });
 });
 
