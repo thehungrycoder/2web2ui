@@ -89,7 +89,7 @@ exports[`token expired 1`] = `
   >
     <Panel.Section>
       <p>
-        This invite has expired, please ask your account administator to re-send your invitation
+        This invite has expired, please ask your account administrator to re-send your invitation
       </p>
     </Panel.Section>
   </Panel>

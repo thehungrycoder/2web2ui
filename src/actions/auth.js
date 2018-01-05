@@ -128,7 +128,13 @@ export function refresh(token, refreshToken) {
 }
 
 export function logout() {
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    const { auth } = getState();
+    // only log out if currently logged in
+    if (!auth.loggedIn) {
+      return;
+    }
+
     authCookie.remove();
     dispatch({
       type: 'LOGOUT'

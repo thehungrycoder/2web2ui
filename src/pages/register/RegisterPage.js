@@ -44,7 +44,7 @@ export class RegisterPage extends Component {
     if (invite.error) {
       return (
         <Panel.Section>
-          <p>This invite has expired, please ask your account administator to re-send your invitation</p>
+          <p>This invite has expired, please ask your account administrator to re-send your invitation</p>
         </Panel.Section>
       );
     }
@@ -90,7 +90,7 @@ function mapStateToProps({ auth, users }, props) {
     token: qs.parse(props.location.search).token,
     loggedIn: auth.loggedIn,
     invite: users.invite,
-    loading: users.loading
+    loading: users.loading || auth.loginPending
   };
 }
 

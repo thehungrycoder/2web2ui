@@ -13,13 +13,10 @@ export class AuthenticationGate extends Component {
       return;
     }
 
-    const { location = {}} = this.props;
-    if (location.pathname !== '/register') {
-      const foundCookie = authCookie.get();
-      if (foundCookie) {
-        this.props.login({ authData: foundCookie });
-        this.props.getGrantsFromCookie(foundCookie);
-      }
+    const foundCookie = authCookie.get();
+    if (foundCookie) {
+      this.props.login({ authData: foundCookie });
+      this.props.getGrantsFromCookie(foundCookie);
     }
   }
 
