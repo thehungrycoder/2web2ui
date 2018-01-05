@@ -4,20 +4,35 @@ import { connect } from 'react-redux';
 import { Page, Panel } from '@sparkpost/matchbox';
 
 import { updateUser } from 'src/actions/users';
+import { get as getCurrentUser } from 'src/actions/currentUser';
 import { confirmPassword } from 'src/actions/auth';
 import { showAlert } from 'src/actions/globalAlert';
 
 import NameForm from './components/NameForm';
 import PasswordForm from './components/PasswordForm';
 import { LabelledValue } from 'src/components';
+import ErrorTracker from 'src/helpers/errorTracker';
 
 export class ProfilePage extends Component {
   updateProfile = (values) => {
+    const { showAlert } = this.props;
     const { username } = this.props.currentUser;
-    return this.props.updateUser(username, { first_name: values.firstName, last_name: values.lastName })
-      .catch(() => {
-        showAlert({ type: 'error', message: 'Unable to update profile' });
-      });
+    const data = { first_name: values.firstName, last_name: values.lastName };
+
+    return this.props.updateUser(username, data)
+      .then(
+        // update success, re-fetch current user but ignore re-fetch errors
+        () => this.props.getCurrentUser().catch((err) => {
+          ErrorTracker.report('silent-ignore-refetch-current-user', err);
+        }),
+        // update failed, show alert
+        (err) => showAlert({
+          type: 'error',
+          message: 'Unable to update profile',
+          details: err.message
+        })
+      );
+
   }
 
   updatePassword = (values) => {
@@ -62,4 +77,4 @@ const mapStateToProps = ({ account, currentUser }) => ({
   currentUser
 });
 
-export default connect(mapStateToProps, { updateUser, confirmPassword, showAlert })(ProfilePage);
+export default connect(mapStateToProps, { updateUser, confirmPassword, showAlert, getCurrentUser })(ProfilePage);

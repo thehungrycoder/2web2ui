@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders correctly 1`] = `
+exports[`ProfilePage renders correctly 1`] = `
 <Page
   empty={Object {}}
   title="Profile"

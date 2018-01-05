@@ -16,11 +16,11 @@ export class NameForm extends Component {
           // for redux-form
           name='firstName'
           component={TextFieldWrapper}
-
           // for the matchbox component
           id='firstName'
           label='First Name'
           validate={required}
+          autoComplete='given-name'
         />
 
         <Field
@@ -29,6 +29,7 @@ export class NameForm extends Component {
           label='Last Name'
           component={TextFieldWrapper}
           validate={required}
+          autoComplete='family-name'
         />
 
         <Button submit disabled={submitting || pristine}>
