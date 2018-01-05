@@ -3,6 +3,7 @@
 exports[`Component: NameForm should render correctly 1`] = `
 <form>
   <Field
+    autoComplete="given-name"
     component={[Function]}
     id="firstName"
     label="First Name"
@@ -10,6 +11,7 @@ exports[`Component: NameForm should render correctly 1`] = `
     validate={[Function]}
   />
   <Field
+    autoComplete="family-name"
     component={[Function]}
     id="lastName"
     label="Last Name"
@@ -21,6 +23,34 @@ exports[`Component: NameForm should render correctly 1`] = `
     submit={true}
   >
     Update Profile
+  </Button>
+</form>
+`;
+
+exports[`Component: NameForm should render correctly when updating 1`] = `
+<form>
+  <Field
+    autoComplete="given-name"
+    component={[Function]}
+    id="firstName"
+    label="First Name"
+    name="firstName"
+    validate={[Function]}
+  />
+  <Field
+    autoComplete="family-name"
+    component={[Function]}
+    id="lastName"
+    label="Last Name"
+    name="lastName"
+    validate={[Function]}
+  />
+  <Button
+    disabled={true}
+    size="default"
+    submit={true}
+  >
+    Updating Profile
   </Button>
 </form>
 `;
