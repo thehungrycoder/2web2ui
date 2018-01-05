@@ -1,0 +1,19 @@
+// Global scoped to target recharts classnames
+.recharts-sector {
+  opacity: 1;
+  transition: opacity 0.3s;
+}
+
+.Chart--hover {
+  .recharts-sector {
+    opacity: 0.4;
+  }
+}
+
+.recharts-sector.Chart--forceOpacity {
+  opacity: 1 !important;
+}
+
+.recharts-sector.Chart--hasChildren {
+  cursor: pointer;
+}

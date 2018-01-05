@@ -1,6 +1,8 @@
 const initialState = {
   aggregatesLoading: false,
-  aggregates: []
+  aggregates: [],
+  deliveriesLoading: false,
+  deliveries: []
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -12,19 +14,12 @@ export default (state = initialState, { type, payload }) => {
     case 'FETCH_METRICS_FAIL':
       return { ...state, aggregatesLoading: false };
 
-    // case 'FETCH_METRICS_BOUNCE_CLASSIFICATIONS_PENDING':
-    //   return { ...state, categoriesLoading: true };
-    //
-    // case 'FETCH_METRICS_BOUNCE_CLASSIFICATIONS_SUCCESS':
-    // case 'FETCH_METRICS_BOUNCE_CLASSIFICATIONS_FAIL':
-    //   return { ...state, categoriesLoading: false };
-    //
-    // case 'FETCH_METRICS_BOUNCE_REASONS_BY_DOMAIN_PENDING':
-    //   return { ...state, reasonsLoading: true };
-    //
-    // case 'FETCH_METRICS_BOUNCE_REASONS_BY_DOMAIN_SUCCESS':
-    // case 'FETCH_METRICS_BOUNCE_REASONS_BY_DOMAIN_FAIL':
-    //   return { ...state, reasonsLoading: false };
+    case 'FETCH_METRICS_DELIVERIES_BY_ATTEMPT_PENDING':
+      return { ...state, deliveriesLoading: true };
+
+    case 'FETCH_METRICS_DELIVERIES_BY_ATTEMPT_SUCCESS':
+    case 'FETCH_METRICS_DELIVERIES_BY_ATTEMPT_FAIL':
+      return { ...state, deliveriesLoading: false };
 
     case 'REFRESH_ACCEPTED_CHART':
       return { ...state, ...payload };

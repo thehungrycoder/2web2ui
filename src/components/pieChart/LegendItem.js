@@ -12,6 +12,7 @@ const LegendItem = ({
   breadcrumb,
   onClick,
   hovered,
+  otherHovered,
   ...props
 }) => {
   const itemClasses = cx(
@@ -19,20 +20,26 @@ const LegendItem = ({
     onClick && styles.enabled,
     children && styles.hasChildren,
     breadcrumb && styles.breadcrumb,
-    hovered && styles.hovered
+    hovered && styles.hovered,
+    otherHovered && styles.otherHovered
   );
 
   const breadcrumbMarkup = breadcrumb
     ? <Icon name='ChevronLeft' />
     : null;
 
+  const expandMarkup = children && children.length
+    ? <Icon name='ChevronRight' />
+    : null;
+
   return (
     <a className={itemClasses} onClick={onClick} title={onClick && `View ${name}`} {...props}>
       { fill && <span className={styles.Color} style={{ backgroundColor: fill }}/> }
-      <span className={styles.Name}>{ breadcrumbMarkup }{name}</span>
+      <span className={styles.Name}>{breadcrumbMarkup}{name}{expandMarkup}</span>
       { count && <span className={styles.Count}>{count.toLocaleString()}</span> }
     </a>
   );
 };
 
+LegendItem.displayName = 'PieChart.LegendItem';
 export default LegendItem;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Grid } from '@sparkpost/matchbox';
 import LegendItem from './LegendItem';
 
@@ -8,19 +9,20 @@ const Legend = ({
   headerData,
   primaryData,
   secondaryData,
-  handleMouseOver,
-  handleMouseOut,
-  handleClick,
+  onMouseOver,
+  onMouseOut,
+  onClick,
   hoveredItem
 }) => {
   const hoveredDataSet = hoveredItem && hoveredItem.dataSet;
 
   const primaryLegend = primaryData.map((item, i) => (
     <LegendItem key={i}
-      onMouseOver={() => handleMouseOver(item, 'primary')}
-      onMouseOut={handleMouseOut}
-      onClick={() => handleClick(item)}
+      onMouseOver={() => onMouseOver(item, 'primary')}
+      onMouseOut={onMouseOut}
+      onClick={() => onClick(item)}
       hovered={hoveredDataSet === 'primary' && hoveredItem.index === i}
+      otherHovered={hoveredItem && ((hoveredDataSet === 'primary' && hoveredItem.index !== i) || hoveredDataSet !== 'primary') }
       {...item} />
   ));
 
@@ -28,10 +30,11 @@ const Legend = ({
     ? <Grid.Column>
       {secondaryData.map((item, i) => (
         <LegendItem key={i}
-          onMouseOver={() => handleMouseOver(item, 'secondary')}
-          onMouseOut={handleMouseOut}
-          onClick={() => handleClick(item)}
+          onMouseOver={() => onMouseOver(item, 'secondary')}
+          onMouseOut={onMouseOut}
+          onClick={() => onClick(item)}
           hovered={hoveredDataSet === 'secondary' && hoveredItem.index === i}
+          otherHovered={hoveredItem && ((hoveredDataSet === 'secondary' && hoveredItem.index !== i) || hoveredDataSet !== 'secondary') }
           {...item} />
       ))}
     </Grid.Column>
@@ -50,4 +53,15 @@ const Legend = ({
   );
 };
 
+Legend.propTypes = {
+  headerData: PropTypes.array,
+  primaryData: PropTypes.array,
+  secondaryData: PropTypes.array,
+  onMouseOver: PropTypes.func,
+  onMouseOut: PropTypes.func,
+  onClick: PropTypes.func,
+  hoveredItem: PropTypes.object
+};
+
+Legend.displayName = 'PieChart.Legend';
 export default Legend;

@@ -2,19 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import { Grid, Panel } from '@sparkpost/matchbox';
-import ActiveLabel from './ActiveLabel';
-import BounceChart from './BounceChart';
-import Legend from './Legend';
-import { Loading } from 'src/components';
+import { Loading, PieChart } from 'src/components';
 import { generateColors } from 'src/helpers/color';
 import styles from './ChartGroup.module.scss';
 
-// Overwrites 'LoadableComponent'
-BounceChart.displayName = 'BounceChart';
-
 // Chart color palette generated from:
-const primaryColor = '#DB2F3D';
-const secondaryColor = '#37aadc';
+const primaryColor = '#0097b3';
 
 export class ChartGroup extends Component {
   state = {
@@ -28,11 +21,11 @@ export class ChartGroup extends Component {
    * @param  {string} hoverSet - 'primary' | 'secondary'
    */
   handleMouseOver = (e, hoverSet) => {
-    const { categories, types } = this.props;
+    const { deliveries } = this.props;
     const { active } = this.state;
     const { name, count } = e;
 
-    let dataSet = hoverSet === 'primary' ? categories : types;
+    let dataSet = deliveries;
 
     if (active) {
       dataSet = active.children;
@@ -72,8 +65,8 @@ export class ChartGroup extends Component {
     const getRate = (n) => `${(100 * n).toFixed(2)}%`;
 
     return hoveredItem
-      ? { name: hoveredItem.name, value: getRate(hoveredItem.count / aggregates.countBounce) }
-      : { name: 'Bounce Rate', value: getRate(aggregates.countBounce / aggregates.countTargeted) };
+      ? { name: hoveredItem.name, value: getRate(hoveredItem.count / aggregates.count_accepted) }
+      : { name: 'Accepted Rate', value: getRate(aggregates.count_accepted / aggregates.count_targeted) };
   }
 
   getLegendHeaderData = () => {
@@ -83,34 +76,32 @@ export class ChartGroup extends Component {
     // Header with breadcrumb & active data
     if (active) {
       return [
-        { name: 'All Bounces', breadcrumb: true, onClick: this.handleBreadcrumb },
+        { name: 'All Accepted', breadcrumb: true, onClick: this.handleBreadcrumb },
+        { name: 'All Targeted', count: aggregates.count_targeted },
         { name: active.name, count: active.count }
       ];
     }
 
     // Default header
     return [
-      { name: 'Targeted', count: aggregates.countTargeted },
-      { name: 'All Bounces', count: aggregates.countBounce }
+      { name: 'Targeted', count: aggregates.count_targeted },
+      { name: 'All Accepted', count: aggregates.count_accepted }
     ];
   }
 
   // Gets primary and secondary data for BounceChart & Legend
   getData = () => {
-    const { categories, types } = this.props;
+    const { deliveries } = this.props;
     const { active } = this.state;
 
-    let primaryData = categories;
-    let secondaryData = types;
+    let primaryData = deliveries;
 
     if (active) {
       primaryData = active.children;
-      secondaryData = null;
     }
 
     return {
-      primaryData: generateColors(primaryData, primaryColor),
-      secondaryData: secondaryData && generateColors(secondaryData, secondaryColor)
+      primaryData: generateColors(primaryData, primaryColor)
     };
   }
 
@@ -118,31 +109,31 @@ export class ChartGroup extends Component {
     const { loading } = this.props;
 
     if (loading) {
-      return <Panel title='Bounce Rates' sectioned className={styles.LoadingPanel}><Loading /></Panel>;
+      return <Panel title='Accepted Attempt Rates' sectioned className={styles.LoadingPanel}><Loading /></Panel>;
     }
 
     return (
-      <Panel title='Bounce Rates' sectioned>
+      <Panel title='Accepted Attempt Rates' sectioned>
         <Grid>
           <Grid.Column xs={12} lg={5}>
             <div className={styles.ChartWrapper}>
-              <BounceChart
+              <PieChart.Chart
                 {...this.getData()}
                 hoveredItem={this.state.hoveredItem}
-                handleMouseOver={this.handleMouseOver}
-                handleMouseOut={this.handleMouseOut}
-                handleClick={this.handleClick} />
-              <ActiveLabel {...this.getLabelProps()}/>
+                onMouseOver={this.handleMouseOver}
+                onMouseOut={this.handleMouseOut}
+                onClick={this.handleClick} />
+              <PieChart.ActiveLabel {...this.getLabelProps()}/>
             </div>
           </Grid.Column>
           <Grid.Column xs={12} lg={7}>
-            <Legend
+            <PieChart.Legend
               headerData={this.getLegendHeaderData()}
               {...this.getData()}
               hoveredItem={this.state.hoveredItem}
-              handleMouseOver={this.handleMouseOver}
-              handleMouseOut={this.handleMouseOut}
-              handleClick={this.handleClick} />
+              onMouseOver={this.handleMouseOver}
+              onMouseOut={this.handleMouseOut}
+              onClick={this.handleClick} />
           </Grid.Column>
         </Grid>
       </Panel>
@@ -150,10 +141,9 @@ export class ChartGroup extends Component {
   }
 }
 
-const mapStateToProps = ({ bounceReport }) => ({
-  loading: bounceReport.aggregatesLoading || bounceReport.categoriesLoading,
-  aggregates: bounceReport.aggregates,
-  categories: bounceReport.categories,
-  types: bounceReport.types
+const mapStateToProps = ({ acceptedReport }) => ({
+  loading: acceptedReport.aggregatesLoading,
+  deliveries: acceptedReport.deliveries,
+  aggregates: acceptedReport.aggregates
 });
 export default connect(mapStateToProps, {})(ChartGroup);
