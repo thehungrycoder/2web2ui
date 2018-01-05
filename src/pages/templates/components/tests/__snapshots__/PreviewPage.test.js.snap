@@ -27,6 +27,7 @@ exports[`clears "To" field error and updates "To" field value 1`] = `
       onChange={[Function]}
       placeholder="Send to recipient email addresses"
       required={false}
+      resize="both"
       type="text"
       value="new@example.com"
     />
@@ -34,6 +35,7 @@ exports[`clears "To" field error and updates "To" field value 1`] = `
       disabled={true}
       label="From"
       required={false}
+      resize="both"
       type="text"
       value="test@example.com"
     />
@@ -41,6 +43,7 @@ exports[`clears "To" field error and updates "To" field value 1`] = `
       disabled={true}
       label="Subject"
       required={false}
+      resize="both"
       type="text"
       value="Test Subject"
     />
@@ -81,6 +84,7 @@ exports[`renders preview page 1`] = `
       onChange={[Function]}
       placeholder="Send to recipient email addresses"
       required={false}
+      resize="both"
       type="text"
       value=""
     />
@@ -88,6 +92,7 @@ exports[`renders preview page 1`] = `
       disabled={true}
       label="From"
       required={false}
+      resize="both"
       type="text"
       value="test@example.com"
     />
@@ -95,6 +100,7 @@ exports[`renders preview page 1`] = `
       disabled={true}
       label="Subject"
       required={false}
+      resize="both"
       type="text"
       value="Test Subject"
     />
