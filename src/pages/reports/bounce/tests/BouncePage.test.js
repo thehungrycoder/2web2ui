@@ -52,11 +52,10 @@ describe('BouncePage: ', () => {
   });
 
   it('should render', () => {
-    const parseSpy = jest.spyOn(wrapper.instance(), 'parseSearch');
     wrapper.instance().componentDidMount();
     expect(props.refreshBounceChartMetrics).toHaveBeenCalled();
     expect(props.refreshBounceTableMetrics).toHaveBeenCalled();
-    expect(parseSpy).toHaveBeenCalled();
+    expect(spyParseSearch).toHaveBeenCalled();
     expect(props.refreshTypeaheadCache).toHaveBeenCalled();
     expect(wrapper).toMatchSnapshot();
   });
