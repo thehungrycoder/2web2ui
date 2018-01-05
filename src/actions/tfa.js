@@ -48,6 +48,8 @@ export function verifyAndLogin({ authData, code }) {
             errorDescription
           }
         });
+
+        throw err;
       });
   };
 }

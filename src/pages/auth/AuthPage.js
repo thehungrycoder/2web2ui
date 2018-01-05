@@ -5,6 +5,7 @@ import { authenticate, ssoCheck, login } from 'src/actions/auth';
 import { verifyAndLogin } from 'src/actions/tfa';
 import { SparkPost } from 'src/components';
 import { Panel, Error } from '@sparkpost/matchbox';
+import { SubmissionError } from 'redux-form';
 
 import config from 'src/config';
 import LoginForm from './components/LoginForm';
@@ -52,7 +53,7 @@ export class AuthPage extends Component {
 
   }
 
-  onClickSubmit = (values) => {
+  loginSubmit = (values) => {
     const { username, password, rememberMe } = values;
     this.state.ssoEnabled ? this.ssoSignIn(username) : this.regularSignIn(username, password, rememberMe);
   };
@@ -60,7 +61,13 @@ export class AuthPage extends Component {
   tfaSubmit = (values) => {
     const { code } = values;
     const { tfaEnabled, ...authData } = this.props.tfa;
-    return this.props.verifyAndLogin({ authData, code });
+    return this.props.verifyAndLogin({ authData, code }).catch((err) => {
+      if (err.response.status === 400) {
+        throw new SubmissionError({
+          _error: 'The code is invalid'
+        });
+      }
+    });
   };
 
   render() {
@@ -83,7 +90,7 @@ export class AuthPage extends Component {
           { errorDescription && this.renderLoginError(errorDescription)}
 
           { tfaEnabled && <TfaForm onSubmit={this.tfaSubmit} /> }
-          { !tfaEnabled && <LoginForm onSubmit={this.onClickSubmit} ssoEnabled={this.state.ssoEnabled}/> }
+          { !tfaEnabled && <LoginForm onSubmit={this.loginSubmit} ssoEnabled={this.state.ssoEnabled}/> }
         </Panel>
       </div>
     );

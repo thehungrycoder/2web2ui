@@ -55,11 +55,9 @@ export function authenticate(username, password, rememberMe = false) {
 
         return Promise.all([ authData, tfaGet({ username, token: authData.access_token })]);
       })
-      .then(([ authData, { data = {}} = {}]) => {
-        const { results: { enabled }} = data;
-
+      .then(([ authData, tfaResponse]) => {
         // if tfa enabled must avoid logging in
-        if (enabled) {
+        if (tfaResponse.data.results.enabled) {
           dispatch({
             type: 'TFA_ENABLED',
             payload: authData

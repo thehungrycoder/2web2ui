@@ -46,8 +46,9 @@ describe('Action Creator: 2FA', () => {
     }));
 
     const thunk = tfaActions.verifyAndLogin({ authData, code: '23432432' });
-    await thunk(dispatchMock);
-    expect(dispatchMock.mock.calls).toMatchSnapshot();
+    await thunk(dispatchMock).catch(() => {
+      expect(dispatchMock.mock.calls).toMatchSnapshot();
+    });
   });
 
 });

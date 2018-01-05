@@ -4,12 +4,12 @@ import { Field, reduxForm } from 'redux-form';
 import { required } from 'src/helpers/validation';
 import { TextFieldWrapper } from 'src/components';
 
-import { Button } from '@sparkpost/matchbox';
+import { Button, Error } from '@sparkpost/matchbox';
 
 export class TfaForm extends Component {
 
   render() {
-    const { tfaPending, pristine, handleSubmit } = this.props;
+    const { error, tfaPending, pristine, handleSubmit } = this.props;
 
     return (
       <div>
@@ -26,6 +26,7 @@ export class TfaForm extends Component {
             component={TextFieldWrapper}
             validate={required}
           />
+          { error && <Error error={error} /> }
 
           <Button primary submit disabled={tfaPending || pristine}>
             { tfaPending ? 'Logging In' : 'Log In' }
