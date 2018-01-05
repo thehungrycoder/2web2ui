@@ -55,3 +55,25 @@ exports[`renders correctly when there is a login error 1`] = `
   </Panel>
 </div>
 `;
+
+exports[`should display tfa form when TFA is enabled 1`] = `
+<div>
+  <div>
+    <a
+      href="https://www.sparkpost.com"
+      title="SparkPost"
+    >
+      <Logo />
+    </a>
+  </div>
+  <Panel
+    accent={true}
+    sectioned={true}
+    title="Log In"
+  >
+    <Connect(ReduxForm)
+      onSubmit={[Function]}
+    />
+  </Panel>
+</div>
+`;
