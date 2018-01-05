@@ -103,7 +103,7 @@ export class ListPage extends Component {
     const primaryAction = {
       content: 'Add a Domain',
       Component: Link,
-      to: '/account/sending-domains/add'
+      to: '/account/sending-domains/create'
     };
 
     return (

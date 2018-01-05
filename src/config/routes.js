@@ -292,7 +292,7 @@ const routes = [
     layout: App
   },
   {
-    path: '/account/sending-domains/add',
+    path: '/account/sending-domains/create',
     component: ComingSoonPage,
     condition: hasGrants('sending_domains/manage'),
     layout: App
