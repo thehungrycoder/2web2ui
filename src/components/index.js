@@ -21,3 +21,4 @@ export * from './formatters';
 export * from './loading/Loading';
 export * from './modals';
 export * from './reduxFormWrappers';
+export * from './tags';

@@ -59,4 +59,9 @@ describe('Page: Message Events tests', () => {
       state: { selectedEventId: 'event' }
     });
   });
+
+  it('renders correctly with too many (1000) records', () => {
+    wrapper.setProps({ events: new Array(1000) });
+    expect(wrapper).toMatchSnapshot();
+  });
 });

@@ -30,14 +30,14 @@ describe('SSOPage', () => {
   it('calls login with correct data (saml)', () => {
     wrapper = shallow(<SSOPage {...props} />);
     expect(props.login).toHaveBeenCalledTimes(1);
-    expect(props.login).toHaveBeenCalledWith({ access_token: 123, username: 'saml_test', refresh_token: '' }, true);
+    expect(props.login).toHaveBeenCalledWith({ authData: { access_token: 123, username: 'saml_test', refresh_token: '' }, saveCookie: true });
   });
 
   it('calls login with correct data (azure)', () => {
     props.location.search = '?token=eyJhY2Nlc3NUb2tlbiI6MTIzLCJ1c2VybmFtZSI6ImF6dXJlX3Rlc3QifQ=='; //{accessToken: 123, username: "azure_test"}
     wrapper = shallow(<SSOPage {...props} />);
     expect(props.login).toHaveBeenCalledTimes(1);
-    expect(props.login).toHaveBeenCalledWith({ access_token: 123, username: 'azure_test', refresh_token: '' }, true);
+    expect(props.login).toHaveBeenCalledWith({ authData: { access_token: 123, username: 'azure_test', refresh_token: '' }, saveCookie: true });
   });
 
   it('redirects to dashboard after login', () => {

@@ -1,0 +1,224 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Sending Domains List Page renders correct columns with subaccounts 1`] = `
+Array [
+  Object {
+    "label": "Domain",
+    "width": "30%",
+  },
+  Object {
+    "label": <WithPositioning(Tooltip)
+      content="Domains can be ready for sending (From), sending with DKIM signing, and bounce (Return Path) usage."
+      dark={true}
+    >
+      Status 
+      <Icon
+        className={undefined}
+        name="Help"
+        size={15}
+      />
+    </WithPositioning(Tooltip)>,
+    "width": "40%",
+  },
+  Object {
+    "label": "Subaccount",
+    "width": "20%",
+  },
+]
+`;
+
+exports[`Sending Domains List Page renders correctly 1`] = `
+<Page
+  empty={
+    Object {
+      "content": <p>
+        Create and configure your sending and bounce domains.
+      </p>,
+      "image": "Setup",
+      "secondaryAction": Object {
+        "content": "Learn more",
+        "external": true,
+        "to": "https://www.sparkpost.com/docs/getting-started/setting-up-domains/",
+      },
+      "show": false,
+      "title": "Manage Your Domains",
+    }
+  }
+  primaryAction={
+    Object {
+      "Component": [Function],
+      "content": "Add a Domain",
+      "to": "/account/sending-domains/create",
+    }
+  }
+  title="Sending Domains"
+>
+  <UnverifiedWarningBanner />
+  <TableCollection
+    columns={
+      Array [
+        Object {
+          "label": "Domain",
+          "width": "30%",
+        },
+        Object {
+          "label": <WithPositioning(Tooltip)
+            content="Domains can be ready for sending (From), sending with DKIM signing, and bounce (Return Path) usage."
+            dark={true}
+          >
+            Status 
+            <Icon
+              className={undefined}
+              name="Help"
+              size={15}
+            />
+          </WithPositioning(Tooltip)>,
+          "width": "40%",
+        },
+      ]
+    }
+    filterBox={
+      Object {
+        "exampleModifiers": Array [
+          "domain",
+          "subaccount_id",
+        ],
+        "itemToStringKeys": Array [
+          "domain",
+        ],
+        "show": true,
+      }
+    }
+    getRowData={[Function]}
+    pagination={true}
+    rows={
+      Array [
+        Object {
+          "domain": "test.com",
+          "is_default_bounce_domain": true,
+          "status": Object {
+            "cname_status": "valid",
+            "compliance_status": "valid",
+            "dkim_status": "valid",
+            "mx_status": "valid",
+            "ownership_verified": true,
+          },
+          "subaccount_id": 3,
+        },
+        Object {
+          "domain": "test2.com",
+          "status": Object {
+            "cname_status": "valid",
+            "compliance_status": "valid",
+            "dkim_status": "valid",
+            "mx_status": "valid",
+            "ownership_verified": false,
+          },
+        },
+      ]
+    }
+  />
+</Page>
+`;
+
+exports[`Sending Domains List Page renders error banner correctly 1`] = `
+<Page
+  empty={
+    Object {
+      "content": <p>
+        Create and configure your sending and bounce domains.
+      </p>,
+      "image": "Setup",
+      "secondaryAction": Object {
+        "content": "Learn more",
+        "external": true,
+        "to": "https://www.sparkpost.com/docs/getting-started/setting-up-domains/",
+      },
+      "show": false,
+      "title": "Manage Your Domains",
+    }
+  }
+  primaryAction={
+    Object {
+      "Component": [Function],
+      "content": "Add a Domain",
+      "to": "/account/sending-domains/create",
+    }
+  }
+  title="Sending Domains"
+>
+  <UnverifiedWarningBanner />
+  <ApiErrorBanner
+    errorDetails="error"
+    message="Sorry, we seem to have had some trouble loading your domains."
+    reload={[Function]}
+  />
+</Page>
+`;
+
+exports[`Sending Domains List Page renders loading correctly 1`] = `<Loading />`;
+
+exports[`Sending Domains List Page renders rows correctly 1`] = `
+Array [
+  Array [
+    <UnstyledLink
+      Component={[Function]}
+      to="/account/sending-domains/edit/test.com"
+    >
+      test.com
+    </UnstyledLink>,
+    <ReadyFor
+      bounce={true}
+      bounceDefault={true}
+      dkim={true}
+      sending={true}
+    />,
+    <SubaccountTag
+      all={undefined}
+      id={3}
+    />,
+  ],
+  Array [
+    <UnstyledLink
+      Component={[Function]}
+      to="/account/sending-domains/edit/test2.com"
+    >
+      test2.com
+    </UnstyledLink>,
+    <DomainStatusTag
+      status="unverified"
+    />,
+    null,
+  ],
+]
+`;
+
+exports[`Sending Domains List Page renders rows correctly with no subaccounts 1`] = `
+Array [
+  Array [
+    <UnstyledLink
+      Component={[Function]}
+      to="/account/sending-domains/edit/test.com"
+    >
+      test.com
+    </UnstyledLink>,
+    <ReadyFor
+      bounce={true}
+      bounceDefault={true}
+      dkim={true}
+      sending={true}
+    />,
+  ],
+  Array [
+    <UnstyledLink
+      Component={[Function]}
+      to="/account/sending-domains/edit/test2.com"
+    >
+      test2.com
+    </UnstyledLink>,
+    <DomainStatusTag
+      status="unverified"
+    />,
+  ],
+]
+`;

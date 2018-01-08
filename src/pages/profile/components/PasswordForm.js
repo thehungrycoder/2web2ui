@@ -8,8 +8,9 @@ import { required, minLength } from 'src/helpers/validation';
 import { TextFieldWrapper } from 'src/components';
 
 export class PasswordForm extends Component {
-  validatePasswords(value, allValues, props) {
-    return value === props.currentPassword ? 'New Password is same as Current Password' : undefined;
+  validatePasswords = (value) => {
+    const { currentPassword } = this.props;
+    return value === currentPassword ? 'New Password is same as Current Password' : undefined;
   }
 
   render() {
@@ -19,6 +20,7 @@ export class PasswordForm extends Component {
       <form onSubmit={handleSubmit}>
         <Field
           type="password"
+          autoComplete="current-password"
           name='currentPassword'
           component={TextFieldWrapper}
           id='currentPassword'
@@ -28,6 +30,7 @@ export class PasswordForm extends Component {
 
         <Field
           type="password"
+          autoComplete="new-password"
           name='newPassword'
           id='newPassword'
           label='New Password'
@@ -35,7 +38,7 @@ export class PasswordForm extends Component {
           validate={[required, minLength(8), this.validatePasswords]}
         />
 
-        <Button submit disabled={submitting || pristine || (currentPassword === newPassword)}>
+        <Button submit disabled={submitting || pristine || !currentPassword || !newPassword || (currentPassword === newPassword)}>
           {submitting ? 'Updating Password' : 'Update Password'}
         </Button>
       </form>
