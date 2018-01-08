@@ -20,6 +20,11 @@ describe('DelayPage: ', () => {
         reason: 'my reason'
       }
     ],
+    aggregates: {
+      count_delayed: 1000,
+      count_delayed_first: 10,
+      count_accepted: 10000
+    },
     totalAccepted: 1000,
     loadDelayReasonsByDomain: jest.fn(() => Promise.resolve()),
     refreshTypeaheadCache: jest.fn(() => Promise.resolve()),
@@ -66,6 +71,11 @@ describe('DelayPage: ', () => {
 
   it('should show empty message when there are no reasons', () => {
     wrapper.setProps({ reasons: null });
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should show loading panel when aggregates are still loading', () => {
+    wrapper.setProps({ aggregatesLoading: true });
     expect(wrapper).toMatchSnapshot();
   });
 

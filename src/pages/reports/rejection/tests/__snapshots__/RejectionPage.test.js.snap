@@ -1,5 +1,28 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`RejectionPage:  getRowData should render row data properly 1`] = `
+Array [
+  <LongTextContainer
+    text="bad delay"
+  >
+    <div>
+      bad delay
+    </div>
+  </LongTextContainer>,
+  <UnstyledLink
+    onClick={[Function]}
+  >
+    <a
+      onClick={[Function]}
+    >
+      gmail.com
+    </a>
+  </UnstyledLink>,
+  "cat1",
+  10,
+]
+`;
+
 exports[`RejectionPage:  renders correctly 1`] = `
 <Page
   empty={Object {}}
@@ -10,6 +33,25 @@ exports[`RejectionPage:  renders correctly 1`] = `
     refresh={[Function]}
     shareDisabled={false}
   />
+  <MetricsSummary
+    rateTitle="Rejected Rate"
+    rateValue={14.000000000000002}
+  >
+    <span>
+      <strong>
+        14
+      </strong>
+       of your messages were rejected of 
+      <strong>
+        100
+      </strong>
+       messages targeted in the 
+      <strong>
+        last 
+      </strong>
+      .
+    </span>
+  </MetricsSummary>
   <Panel
     className="RejectionTable"
     title="Rejection Reasons"
@@ -66,6 +108,25 @@ exports[`RejectionPage:  renders correctly when loading 1`] = `
     refresh={[Function]}
     shareDisabled={true}
   />
+  <MetricsSummary
+    rateTitle="Rejected Rate"
+    rateValue={14.000000000000002}
+  >
+    <span>
+      <strong>
+        14
+      </strong>
+       of your messages were rejected of 
+      <strong>
+        100
+      </strong>
+       messages targeted in the 
+      <strong>
+        last 
+      </strong>
+      .
+    </span>
+  </MetricsSummary>
   <Panel
     className="RejectionTable"
     title="Rejection Reasons"
@@ -89,6 +150,25 @@ exports[`RejectionPage:  renders correctly with no rejections 1`] = `
     refresh={[Function]}
     shareDisabled={false}
   />
+  <MetricsSummary
+    rateTitle="Rejected Rate"
+    rateValue={14.000000000000002}
+  >
+    <span>
+      <strong>
+        14
+      </strong>
+       of your messages were rejected of 
+      <strong>
+        100
+      </strong>
+       messages targeted in the 
+      <strong>
+        last 
+      </strong>
+      .
+    </span>
+  </MetricsSummary>
   <Panel
     className="RejectionTable"
     title="Rejection Reasons"
@@ -99,6 +179,62 @@ exports[`RejectionPage:  renders correctly with no rejections 1`] = `
   </Panel>
   <ShareModal
     handleToggle={[Function]}
+    open={false}
+  />
+</Page>
+`;
+
+exports[`RejectionPage:  renders loading pannel when aggregates are still loading 1`] = `
+<Page
+  empty={Object {}}
+  title="Rejections Report"
+>
+  <Connect(Filters)
+    onShare={[Function]}
+    refresh={[Function]}
+  />
+  <PanelLoading />
+  <Panel
+    className="RejectionTable"
+    title="Rejection Reasons"
+  >
+    <TableCollection
+      columns={
+        Array [
+          Object {
+            "label": "Reason",
+            "width": "45%",
+          },
+          "Domain",
+          "Category",
+          "Count",
+        ]
+      }
+      getRowData={[Function]}
+      pagination={true}
+      rows={
+        Array [
+          Object {
+            "count_rejected": 65,
+            "domain": "gmail.com",
+            "reason": "551 - Cannot Relay 105",
+            "rejection_category_id": 1,
+            "rejection_category_name": "Policy Rejection",
+          },
+          Object {
+            "count_rejected": 62,
+            "domain": "gmail.com",
+            "reason": "550 - Invalid recipient ...@... (#5.1.1)",
+            "rejection_category_id": 1,
+            "rejection_category_name": "Policy Rejection",
+          },
+        ]
+      }
+    />
+  </Panel>
+  <ShareModal
+    handleToggle={[Function]}
+    link="http://an-awesome-link-to-share.com"
     open={false}
   />
 </Page>

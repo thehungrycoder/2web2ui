@@ -1,6 +1,5 @@
 import * as reports from '../reports';
 import * as dateHelpers from 'src/helpers/date';
-import { addFilter } from 'src/actions/reportFilters';
 import cases from 'jest-in-case';
 
 jest.mock('src/actions/reportFilters');

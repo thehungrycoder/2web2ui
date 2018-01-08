@@ -1,0 +1,74 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MetricsSummary:  should render 1`] = `
+<Panel
+  accent={true}
+>
+  <Grid>
+    <Grid.Column
+      lg={3}
+    >
+      <div>
+        <h1>
+          <Percent
+            value="10"
+          />
+        </h1>
+        <h6>
+          Summary Title
+        </h6>
+      </div>
+    </Grid.Column>
+    <Grid.Column>
+      <div>
+        <p>
+          <p
+            key=".0"
+          >
+            child1
+          </p>
+        </p>
+      </div>
+    </Grid.Column>
+  </Grid>
+</Panel>
+`;
+
+exports[`MetricsSummary:  should render 2nd child if it exists 1`] = `
+<Panel
+  accent={true}
+>
+  <Grid>
+    <Grid.Column
+      lg={3}
+    >
+      <div>
+        <h1>
+          <Percent
+            value="10"
+          />
+        </h1>
+        <h6>
+          Summary Title
+        </h6>
+      </div>
+    </Grid.Column>
+    <Grid.Column>
+      <div>
+        <p>
+          <p
+            key=".0"
+          >
+            child1
+          </p>
+        </p>
+        <p
+          key=".1"
+        >
+          child2
+        </p>
+      </div>
+    </Grid.Column>
+  </Grid>
+</Panel>
+`;

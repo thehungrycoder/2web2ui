@@ -22,8 +22,18 @@ export class DelayPage extends Component {
   }
 
   componentDidMount() {
-    this.handleRefresh(parseSearch(this.props.location.search));
+    this.handleRefresh(this.parseSearch());
     this.props.refreshTypeaheadCache();
+  }
+
+  parseSearch() {
+    const { options, filters } = parseSearch(this.props.location.search);
+
+    if (filters) {
+      filters.forEach(this.props.addFilter);
+    }
+
+    return options;
   }
 
   handleRefresh = (options) => Promise.all([
@@ -124,7 +134,6 @@ export class DelayPage extends Component {
 const mapStateToProps = (state) => {
   const loading = state.delayReport.aggregatesLoading || state.delayReport.reasonsLoading;
   const aggregates = state.delayReport.aggregates;
-
   return {
     filters: state.reportFilters,
     loading,
