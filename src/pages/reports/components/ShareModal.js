@@ -43,10 +43,10 @@ export default class ShareModal extends Component {
       <div style={{ marginBottom: '30px' }}>
         <Checkbox
           id='pin-relative-link'
-          label='Pin Dates for this Link'
+          label='Pin dates for this link'
           checked={pinned}
           onChange={() => this.setState({ pinned: !pinned })}
-          helpText={<span>Pin this report's relative time range to its calculated dates (this is usually what you want when sharing a report).</span>}
+          helpText={<span>Pins this report's relative time range to its calculated dates (this is usually what you want when sharing a report).</span>}
         />
       </div>
     );

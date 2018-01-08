@@ -77,9 +77,10 @@ class SummaryReportPage extends Component {
       metrics: chart.metrics.map((metric) => metric.key),
       ...getFilterSearchOptions(filters)
     };
+    const search = qs.stringify(query, { encode: false });
 
     this.setState({ query });
-    history.replace({ pathname: '/reports/summary', search: qs.stringify(query, { encode: false }) });
+    history.replace({ pathname: '/reports/summary', search });
   }
 
   render() {
