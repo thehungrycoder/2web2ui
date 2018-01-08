@@ -17,6 +17,7 @@ import reportFilters from './reportFilters';
 import sendingDomains from './sendingDomains';
 import sendingIps from './sendingIps';
 import subaccounts from './subaccounts';
+import support from './support';
 import summaryChart from './summaryChart';
 import templates from './templates';
 import recipientLists from './recipientLists';
@@ -47,6 +48,7 @@ const appReducer = combineReducers({
   sendingDomains,
   sendingIps,
   subaccounts,
+  support,
   summaryChart,
   suppressions,
   templates,
