@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import _ from 'lodash';
 
 import { Button } from '@sparkpost/matchbox';
 
@@ -40,15 +39,6 @@ export class Results extends Component {
     });
   }
 
-  hideModal = () => {
-    this.setState({
-      modal: {
-        open: false,
-        data: null
-      }
-    });
-  }
-
   getRowData = (row) => {
     const { recipient, type, source, subaccount_id: subaccountId } = row;
     const { subaccounts: allSubaccounts, hasSubaccounts } = this.props;
@@ -63,8 +53,7 @@ export class Results extends Component {
 
     rowData.push(
       <div style={{ textAlign: 'right' }}>
-        {/* <Detail suppression={row} /> */}
-        <Button size='small' onClick={() => this.toggleModal(row)}>View detail</Button> &nbsp;
+        <Button size='small' onClick={() => this.toggleModal(row)}>View Details</Button> &nbsp;
         <Button destructive size='small'>Delete</Button>
       </div>
     );
@@ -85,7 +74,7 @@ export class Results extends Component {
       columns.push({ label: 'Subaccount', width: '18%' });
     }
 
-    columns.push({ label: '', width: '15%' });
+    columns.push({ label: '', width: '21%' });
 
     return columns;
   }
@@ -99,7 +88,7 @@ export class Results extends Component {
     }
 
     return (
-      <Detail suppression={data} open={open} onCancel={this.hideModal} />
+      <Detail suppression={data} open={open} onCancel={this.toggleModal} />
     );
   }
 

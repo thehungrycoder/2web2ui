@@ -27,8 +27,7 @@ LabelledValue.propTypes = {
     PropTypes.node
   ]),
   value: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number
+    PropTypes.node
   ]),
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
