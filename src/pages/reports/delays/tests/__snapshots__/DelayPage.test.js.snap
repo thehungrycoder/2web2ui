@@ -40,8 +40,8 @@ exports[`DelayPage:  should render page 1`] = `
   </Panel>
   <ShareModal
     handleToggle={[Function]}
-    link=""
     open={false}
+    query={Object {}}
   />
 </Page>
 `;
@@ -98,8 +98,8 @@ exports[`DelayPage:  should show empty message when there are no reasons 1`] = `
   </Panel>
   <ShareModal
     handleToggle={[Function]}
-    link=""
     open={false}
+    query={Array []}
   />
 </Page>
 `;
@@ -112,6 +112,7 @@ exports[`DelayPage:  should show loading indicator when loading table 1`] = `
   <Connect(Filters)
     onShare={[Function]}
     refresh={[Function]}
+    shareDisabled={true}
   />
   <Panel
     className="ReasonsTable"
@@ -121,8 +122,8 @@ exports[`DelayPage:  should show loading indicator when loading table 1`] = `
   </Panel>
   <ShareModal
     handleToggle={[Function]}
-    link=""
     open={false}
+    query={Array []}
   />
 </Page>
 `;
