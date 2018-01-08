@@ -31,7 +31,7 @@ it('renders preview page', () => {
   expect(wrapper).toMatchSnapshot();
 });
 
-it('clears "To" field error and updates "To" field value', () => {
+it('resets error message when user starts typing again', () => {
   const event = { currentTarget: { value: 'new@example.com' }};
   const wrapper = shallow(<PreviewPage {...DEFAULT_PROPS} />);
 
