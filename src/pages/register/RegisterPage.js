@@ -58,14 +58,10 @@ export class RegisterPage extends Component {
   }
 
   render() {
-    const { token, loggedIn } = this.props;
+    const { token } = this.props;
 
     if (token === undefined) {
-      if (loggedIn) {
-        return <Redirect to='/dashboard' />;
-      } else {
-        return <Redirect to='/auth' />;
-      }
+      return <Redirect to='/auth' />;
     }
 
     return (
@@ -88,7 +84,6 @@ export class RegisterPage extends Component {
 function mapStateToProps({ auth, users }, props) {
   return {
     token: qs.parse(props.location.search).token,
-    loggedIn: auth.loggedIn,
     invite: users.invite,
     loading: users.loading || auth.loginPending
   };

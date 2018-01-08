@@ -17,7 +17,6 @@ ErrorTracker.default = { report };
 
 const props = {
   token: 'tokerino',
-  loggedIn: false,
   invite: {
     error: null,
     from: 'jose@zamora.io',
@@ -53,8 +52,6 @@ test('loading', () => {
 
 test('no token', () => {
   wrapper.setProps({ token: undefined });
-  expect(wrapper).toMatchSnapshot();
-  wrapper.setProps({ loggedIn: true });
   expect(wrapper).toMatchSnapshot();
 });
 
