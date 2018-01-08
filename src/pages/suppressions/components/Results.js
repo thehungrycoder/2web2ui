@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import _ from 'lodash';
+
 import { Button } from '@sparkpost/matchbox';
 
 import { PanelLoading, TableCollection, Empty } from 'src/components';
 
 import { formatSubaccountDisplay } from '../helpers';
+import { Detail } from './Detail';
+import { DeleteModal } from 'src/components/modals';
+
 
 export class Results extends Component {
   renderPlaceholder() {
@@ -33,7 +38,8 @@ export class Results extends Component {
 
     rowData.push(
       <div style={{ textAlign: 'right' }}>
-        <Button size='small'>...</Button> &nbsp;
+        <Detail suppression={row} />
+        {/* <Button size='small' onClick={() => this.toggleModal(row)}>View detail</Button> &nbsp; */}
         <Button destructive size='small'>Delete</Button>
       </div>
     );
@@ -60,9 +66,10 @@ export class Results extends Component {
   }
 
 
-  renderResults() {
+  renderResults = () => {
     const { results } = this.props;
     return (
+
       <TableCollection
         columns={this.getColumns()}
         rows={results}
