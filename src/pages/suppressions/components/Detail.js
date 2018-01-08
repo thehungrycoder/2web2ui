@@ -3,42 +3,24 @@ import _ from 'lodash';
 
 import { connect } from 'react-redux';
 import { DeleteModal } from 'src/components/modals';
-import { Button } from '@sparkpost/matchbox';
 
 export class Detail extends Component {
-  state = {
-    modalOpen: false
-  }
-
-  componentWillUnmount() {
-    this.setState({
-      modalOpen: false
-    });
-  }
-
-  toggleModal = () => {
-    this.setState({ modalOpen: !this.state.modalOpen });
-  }
-
 
   render() {
-    const { suppression } = this.props;
-    const { modalOpen } = this.state;
+    const { suppression, open, onCancel } = this.props;
 
     return (
       <div>
-        <Button size='small' onClick={() => this.toggleModal()}>View detail</Button> &nbsp;
-        { modalOpen && <DeleteModal
-          open={modalOpen}
+        <DeleteModal
+          open={open}
           title={`Suppression detail ${suppression.recipient}`}
           content={<p>
             Suppression details will be here
           </p>}
           isPending={false}
-          onCancel={this.toggleModal}
+          onCancel={onCancel}
           onConfirm={_.noop}
         />
-        }
       </div>
     );
   }

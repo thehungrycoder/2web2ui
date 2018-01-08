@@ -8,10 +8,15 @@ import { PanelLoading, TableCollection, Empty } from 'src/components';
 
 import { formatSubaccountDisplay } from '../helpers';
 import { Detail } from './Detail';
-import { DeleteModal } from 'src/components/modals';
 
 
 export class Results extends Component {
+  state = {
+    modal: {
+      open: false,
+      data: {}
+    }
+  }
   renderPlaceholder() {
     return (
       <Empty message='Choose some options to see your suppressions' />
@@ -22,6 +27,26 @@ export class Results extends Component {
     return (
       <Empty message='There are no results for your current query' />
     );
+  }
+
+  toggleModal = (row) => {
+    const { modal } = this.state;
+
+    this.setState({
+      modal: {
+        open: !modal.open,
+        data: row
+      }
+    });
+  }
+
+  hideModal = () => {
+    this.setState({
+      modal: {
+        open: false,
+        data: null
+      }
+    });
   }
 
   getRowData = (row) => {
@@ -38,8 +63,8 @@ export class Results extends Component {
 
     rowData.push(
       <div style={{ textAlign: 'right' }}>
-        <Detail suppression={row} />
-        {/* <Button size='small' onClick={() => this.toggleModal(row)}>View detail</Button> &nbsp; */}
+        {/* <Detail suppression={row} /> */}
+        <Button size='small' onClick={() => this.toggleModal(row)}>View detail</Button> &nbsp;
         <Button destructive size='small'>Delete</Button>
       </div>
     );
@@ -65,17 +90,32 @@ export class Results extends Component {
     return columns;
   }
 
+  renderModalView = () => {
+    const { modal } = this.state;
+    const { open, data } = modal;
+
+    if (!data) {
+      return null;
+    }
+
+    return (
+      <Detail suppression={data} open={open} onCancel={this.hideModal} />
+    );
+  }
 
   renderResults = () => {
     const { results } = this.props;
     return (
+      <div>
+        { this.renderModalView() }
 
-      <TableCollection
-        columns={this.getColumns()}
-        rows={results}
-        getRowData={this.getRowData}
-        pagination
-      />
+        <TableCollection
+          columns={this.getColumns()}
+          rows={results}
+          getRowData={this.getRowData}
+          pagination
+        />
+      </div>
     );
   }
 
