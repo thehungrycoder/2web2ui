@@ -22,7 +22,7 @@ A test library for testing React components.  Get started with [using Jest with 
 
 #### Manually Call Component Methods
 
-You can manually call a component function with an [`instance`](http://airbnb.io/enzyme/docs/api/ReactWrapper/instance.html) of the component.  This is not a preferred test pattern.  The preferred way to test event handlers and other methods is to [`simulate`](http://airbnb.io/enzyme/docs/api/ShallowWrapper/simulate.html) user events.  If your component function calls `setState`, you will need to use [`update`](http://airbnb.io/enzyme/docs/api/ShallowWrapper/update.html) to force a re-render.
+You can manually call a component function with an [`instance`](http://airbnb.io/enzyme/docs/api/ReactWrapper/instance.html) of the component.  If your component function calls `setState`, you will need to use [`update`](http://airbnb.io/enzyme/docs/api/ShallowWrapper/update.html) to force a re-render.
 
 ```js
 class ExampleComponent extends Component {
