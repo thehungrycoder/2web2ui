@@ -1,4 +1,4 @@
-import { snakeToFriendly, snakeToCamel, slugify } from '../string';
+import { snakeToFriendly, snakeToCamel, slugify, shrinkToFit } from '../string';
 
 describe('snakeToFrindly', () => {
   it('should properly format a snaked cased string', () => {
@@ -17,3 +17,25 @@ describe('slugify', () => {
     expect(slugify('one Two  3')).toEqual('one-two-3');
   });
 });
+
+describe('shrinkToFit', () => {
+  const shortStr = 'thisisatest';
+  const longStr = 'antidisestablishmentarianism';
+  it('should leave short strings intact', () => {
+    expect(shrinkToFit(shortStr, shortStr.length + 1)).toEqual(shortStr);
+  });
+
+  it('should handle unrealistic target lengths', () => {
+    expect(shrinkToFit(shortStr, 2)).toEqual(shortStr);
+  });
+
+  it('should return a string of the required length', () => {
+    expect(shrinkToFit(longStr, 10)).toHaveLength(10);
+  });
+
+  it('should manage odd and even chunk sizes', () => {
+    expect(shrinkToFit(longStr, 9)).toHaveLength(9);
+    expect(shrinkToFit(longStr, 12)).toHaveLength(12);
+  });
+});
+
