@@ -52,9 +52,16 @@ export default class PreviewFrame extends Component {
     contentDocument.close();
   }
 
+  // The sandboxed iframe enables an extra set of security restriction.
+  // The "allow-same-origin" restriction must be lifted to load the content from the same origin.
+  // The "allow-top-navigation-by-user-activation" restriction must be lifted to work in
+  // conjunction with the target override in .onLoad to avoid loading links in the iframe,
+  // instead loading subsequent pages in the current browser tab for a better user experience.
+  //
   // @todo srcDoc or Shadow DOM would be better solutions if they had better browser support
   // @see https://developer.mozilla.org/en-US/docs/Web/Web_Components/Shadow_DOM
   // @see https://github.com/Wildhoney/ReactShadow
+  // @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe#attr-sandbox
   // @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe#attr-srcdoc
   render() {
     return (
