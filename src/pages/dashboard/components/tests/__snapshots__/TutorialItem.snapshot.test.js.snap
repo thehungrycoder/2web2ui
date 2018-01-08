@@ -16,7 +16,6 @@ exports[`Component: TutorialItem should provide a link on a label 1`] = `
          
         <Icon
           name="ArrowRight"
-          size={18}
         />
       </Link>
     </h6>

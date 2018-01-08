@@ -25,7 +25,7 @@ Object {
 }
 `;
 
-exports[`Should parse search 1`] = `
+exports[`Should parse search with custom range 1`] = `
 Object {
   "filters": Array [
     Object {
@@ -50,30 +50,6 @@ Object {
 }
 `;
 
-exports[`Should parse search with custom range 1`] = `
-Object {
-  "filters": Array [
-    Object {
-      "id": undefined,
-      "type": "Domain",
-      "value": "test.com",
-    },
-    Object {
-      "id": "123",
-      "type": "Subaccount",
-      "value": "test",
-    },
-  ],
-  "options": Object {
-    "from": 2017-11-03T14:43:00.000Z,
-    "metrics": Array [
-      "count-something",
-    ],
-    "to": 2017-11-04T14:43:00.000Z,
-  },
-}
-`;
-
 exports[`Should parse search with missing range (as custom) 1`] = `
 Object {
   "filters": Array [
@@ -93,6 +69,7 @@ Object {
     "metrics": Array [
       "count-something",
     ],
+    "relativeRange": "custom",
     "to": 2017-11-04T14:43:00.000Z,
   },
 }
@@ -123,6 +100,7 @@ Object {
     "metrics": Array [
       "count-something",
     ],
+    "relativeRange": "day",
     "to": "relative-to",
   },
 }

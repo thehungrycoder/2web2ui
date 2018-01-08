@@ -9,7 +9,6 @@ exports[`Navigation Item renders a link correctly 1`] = `
     >
       <span>
         <svg
-          class="Matchbox-Icon"
           fill="currentColor"
           height="18"
           preserveAspectRatio="xMidYMid meet"
@@ -38,7 +37,6 @@ exports[`Navigation Item renders children correctly 1`] = `
     >
       <span>
         <svg
-          class="Matchbox-Icon"
           fill="currentColor"
           height="18"
           preserveAspectRatio="xMidYMid meet"
@@ -55,7 +53,6 @@ exports[`Navigation Item renders children correctly 1`] = `
       </span>
       label
       <svg
-        class="Matchbox-Icon"
         fill="currentColor"
         height="18"
         preserveAspectRatio="xMidYMid meet"

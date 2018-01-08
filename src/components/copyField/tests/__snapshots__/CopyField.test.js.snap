@@ -17,7 +17,6 @@ exports[`CopyField Component should render - no props 1`] = `
   onFocus={[Function]}
   readOnly={true}
   required={false}
-  resize="both"
   type="text"
 />
 `;

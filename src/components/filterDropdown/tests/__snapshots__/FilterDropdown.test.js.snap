@@ -11,11 +11,9 @@ exports[`renders correctly 1`] = `
         prefix={null}
         readOnly={true}
         required={false}
-        resize="both"
         suffix={
           <Icon
             name="CaretDown"
-            size={18}
           />
         }
         type="text"
@@ -86,11 +84,9 @@ exports[`renders selected correctly 1`] = `
         prefix="(1)"
         readOnly={true}
         required={false}
-        resize="both"
         suffix={
           <Icon
             name="CaretDown"
-            size={18}
           />
         }
         type="text"
