@@ -8,6 +8,7 @@ exports[`RejectionPage:  renders correctly 1`] = `
   <Connect(Filters)
     onShare={[Function]}
     refresh={[Function]}
+    shareDisabled={false}
   />
   <Panel
     className="RejectionTable"
@@ -49,8 +50,8 @@ exports[`RejectionPage:  renders correctly 1`] = `
   </Panel>
   <ShareModal
     handleToggle={[Function]}
-    link=""
     open={false}
+    query={Object {}}
   />
 </Page>
 `;
@@ -63,6 +64,7 @@ exports[`RejectionPage:  renders correctly when loading 1`] = `
   <Connect(Filters)
     onShare={[Function]}
     refresh={[Function]}
+    shareDisabled={true}
   />
   <Panel
     className="RejectionTable"
@@ -72,7 +74,6 @@ exports[`RejectionPage:  renders correctly when loading 1`] = `
   </Panel>
   <ShareModal
     handleToggle={[Function]}
-    link="http://an-awesome-link-to-share.com"
     open={false}
   />
 </Page>
@@ -86,6 +87,7 @@ exports[`RejectionPage:  renders correctly with no rejections 1`] = `
   <Connect(Filters)
     onShare={[Function]}
     refresh={[Function]}
+    shareDisabled={false}
   />
   <Panel
     className="RejectionTable"
@@ -97,7 +99,6 @@ exports[`RejectionPage:  renders correctly with no rejections 1`] = `
   </Panel>
   <ShareModal
     handleToggle={[Function]}
-    link="http://an-awesome-link-to-share.com"
     open={false}
   />
 </Page>

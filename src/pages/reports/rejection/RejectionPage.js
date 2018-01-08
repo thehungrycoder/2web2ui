@@ -2,23 +2,22 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import _ from 'lodash';
-
+import qs from 'query-string';
 import { refreshRejectionTableMetrics } from 'src/actions/rejectionReport';
 import { addFilter, refreshTypeaheadCache } from 'src/actions/reportFilters';
-import { getShareLink, getFilterSearchOptions, parseSearch } from 'src/helpers/reports';
+import { getFilterSearchOptions, parseSearch } from 'src/helpers/reports';
 import { showAlert } from 'src/actions/globalAlert';
-
 import { TableCollection, Empty, LongTextContainer } from 'src/components';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
 import { Page, Panel, UnstyledLink } from '@sparkpost/matchbox';
 import ShareModal from '../components/ShareModal';
 import Filters from '../components/Filters';
-
 const columns = [{ label: 'Reason', width: '45%' }, 'Domain', 'Category', 'Count'];
+
 export class RejectionPage extends Component {
   state = {
     modal: false,
-    link: ''
+    query: {}
   }
 
   componentDidMount() {
@@ -42,7 +41,6 @@ export class RejectionPage extends Component {
     return refreshRejectionTableMetrics(options)
       .then(() => this.updateLink())
       .catch((err) => showAlert({ type: 'error', message: 'Unable to refresh rejection reports.', details: err.message }));
-
   }
 
   handleModalToggle = () => {
@@ -51,9 +49,9 @@ export class RejectionPage extends Component {
 
   updateLink = () => {
     const { filters, history } = this.props;
-    const options = getFilterSearchOptions(filters);
-    const { link, search } = getShareLink(options);
-    this.setState({ link });
+    const query = getFilterSearchOptions(filters);
+    const search = qs.stringify(query, { encode: false });
+    this.setState({ query });
     history.replace({ pathname: '/reports/rejections', search });
   }
 
@@ -93,18 +91,23 @@ export class RejectionPage extends Component {
   }
 
   render() {
-    const { modal, link } = this.state;
+    const { modal, query } = this.state;
+    const { loading } = this.props;
 
     return (
       <Page title='Rejections Report'>
-        <Filters refresh={this.handleRefresh} onShare={this.handleModalToggle} />
+        <Filters
+          refresh={this.handleRefresh}
+          onShare={this.handleModalToggle}
+          shareDisabled={loading}
+        />
         <Panel title='Rejection Reasons' className='RejectionTable'>
           { this.renderCollection() }
         </Panel>
         <ShareModal
           open={modal}
           handleToggle={this.handleModalToggle}
-          link={link} />
+          query={query} />
       </Page>
     );
   }
