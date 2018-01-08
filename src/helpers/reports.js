@@ -1,6 +1,5 @@
 import moment from 'moment';
 import qs from 'query-string';
-import _ from 'lodash';
 import { getRelativeDates } from 'src/helpers/date';
 
 /**
@@ -18,21 +17,6 @@ export function getFilterSearchOptions(filters) {
       return `${filter.type}:${filter.value}${subaccount}`;
     })
   };
-}
-
-/**
- * Creates URL information from object
- * @param  {Object} options object of options you wish to stringify
- * @return {Object}
- *   {
- *     search - search string
- *     link - full url
- *   }
- */
-export function getShareLink(options) {
-  const search = _.isEmpty(options) ? '' : `?${qs.stringify(options, { encode: false })}`;
-  const link = `${window.location.href.split('?')[0]}${search}`;
-  return { search, link };
 }
 
 /**

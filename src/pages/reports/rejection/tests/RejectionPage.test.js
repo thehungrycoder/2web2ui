@@ -14,8 +14,6 @@ describe('RejectionPage: ', () => {
     jest.clearAllMocks();
     spyParseSearch = reportHelpers.parseSearch = jest.fn(() => ({ options: {}}));
 
-    reportHelpers.getShareLink.mockReturnValue({ search: 'foo=bar', link: 'http://an-awesome-link-to-share.com' });
-
     props = {
       loading: false,
       filters: {},
