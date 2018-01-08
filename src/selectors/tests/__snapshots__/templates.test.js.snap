@@ -1,5 +1,43 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Templates selectors .selectDraftTemplate returns draft template 1`] = `
+Object {
+  "id": "ape",
+  "name": "Ape",
+  "published": false,
+}
+`;
+
+exports[`Templates selectors .selectDraftTemplate returns undefined when unknown 1`] = `undefined`;
+
+exports[`Templates selectors .selectDraftTemplatePreview returns preview of draft template 1`] = `
+Object {
+  "html": "<h1>Southeastern Asia</h1>",
+  "subject": "New Location: Come visit me",
+}
+`;
+
+exports[`Templates selectors .selectDraftTemplatePreview returns undefined when unknown 1`] = `undefined`;
+
+exports[`Templates selectors .selectPublishedTemplate returns published template 1`] = `
+Object {
+  "id": "ape",
+  "name": "Ape",
+  "published": true,
+}
+`;
+
+exports[`Templates selectors .selectPublishedTemplate returns undefined when unknown 1`] = `undefined`;
+
+exports[`Templates selectors .selectPublishedTemplatePreview returns preview of draft template 1`] = `
+Object {
+  "html": "<h1>Baltimore Zoo</h1>.",
+  "subject": "Come visit me",
+}
+`;
+
+exports[`Templates selectors .selectPublishedTemplatePreview returns undefined when unknown 1`] = `undefined`;
+
 exports[`Templates selectors Templates by id Selector returns empty draft and published 1`] = `
 Object {
   "draft": Object {},

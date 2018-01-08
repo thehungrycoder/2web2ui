@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 
 import { showAlert } from 'src/actions/globalAlert';
 import { getDraftAndPreview, sendPreview } from 'src/actions/templates';
+import { selectDraftTemplate, selectDraftTemplatePreview } from 'src/selectors/templates';
 import PreviewPage from './components/PreviewPage';
 
 export class PreviewDraftPage extends Component {
@@ -28,14 +29,10 @@ export class PreviewDraftPage extends Component {
   }
 }
 
-export const mapStateToProps = (state, props) => {
-  const templates = state.templates.byId[props.match.params.id] || {};
-
-  return {
-    preview: state.templates.contentPreview.draft[props.match.params.id],
-    template: templates.draft
-  };
-};
+export const mapStateToProps = (state, props) => ({
+  preview: selectDraftTemplatePreview(state, props.match.params.id),
+  template: selectDraftTemplate(state, props.match.params.id)
+});
 
 const mapDispatchToProps = { getDraftAndPreview, sendPreview, showAlert };
 

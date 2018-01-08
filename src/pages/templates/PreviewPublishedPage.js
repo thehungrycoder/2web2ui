@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 
 import { showAlert } from 'src/actions/globalAlert';
 import { getPublishedAndPreview, sendPreview } from 'src/actions/templates';
+import { selectPublishedTemplate, selectPublishedTemplatePreview } from 'src/selectors/templates';
 import PreviewPage from './components/PreviewPage';
 
 export class PreviewPublishedPage extends Component {
@@ -28,14 +29,10 @@ export class PreviewPublishedPage extends Component {
   }
 }
 
-export const mapStateToProps = (state, props) => {
-  const templates = state.templates.byId[props.match.params.id] || {};
-
-  return {
-    preview: state.templates.contentPreview.published[props.match.params.id],
-    template: templates.published
-  };
-};
+export const mapStateToProps = (state, props) => ({
+  preview: selectPublishedTemplatePreview(state, props.match.params.id),
+  template: selectPublishedTemplate(state, props.match.params.id)
+});
 
 const mapDispatchToProps = { getPublishedAndPreview, sendPreview, showAlert };
 
