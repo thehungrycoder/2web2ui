@@ -1,8 +1,6 @@
 const initialState = {
   aggregatesLoading: false,
-  aggregates: [],
-  deliveriesLoading: false,
-  deliveries: []
+  attemptsLoading: false
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -15,11 +13,11 @@ export default (state = initialState, { type, payload }) => {
       return { ...state, aggregatesLoading: false };
 
     case 'FETCH_METRICS_DELIVERIES_BY_ATTEMPT_PENDING':
-      return { ...state, deliveriesLoading: true };
+      return { ...state, attemptsLoading: true };
 
     case 'FETCH_METRICS_DELIVERIES_BY_ATTEMPT_SUCCESS':
     case 'FETCH_METRICS_DELIVERIES_BY_ATTEMPT_FAIL':
-      return { ...state, deliveriesLoading: false };
+      return { ...state, attemptsLoading: false };
 
     case 'REFRESH_ACCEPTED_CHART':
       return { ...state, ...payload };

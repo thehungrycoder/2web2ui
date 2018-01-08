@@ -1,7 +1,7 @@
 import { fetchDeliverability, fetchDeliveriesByAttempt } from 'src/actions/metrics';
 import { maybeRefreshTypeaheadCache, refreshReportRange } from 'src/actions/reportFilters';
 import { getQueryFromOptions, buildCommonOptions, getMetricsFromKeys } from 'src/helpers/metrics';
-import { reshapeDeliveries } from 'src/helpers/accepted';
+import { reshapeAttempts } from 'src/helpers/accepted';
 import _ from 'lodash';
 
 // Load new metrics for the accepted chart
@@ -39,18 +39,18 @@ export function refreshAcceptedMetrics(updates = {}) {
         }
 
         return dispatch(fetchDeliveriesByAttempt(deliveryParams))
-          .then((deliveries) => dispatch(refreshAcceptedChart({ aggregates: aggregates[0], deliveries })));
+          .then((attempts) => dispatch(refreshAcceptedChart({ aggregates: aggregates[0], attempts })));
       });
   };
 }
 
 // Refresh the chart with the new data
-export function refreshAcceptedChart({ aggregates, deliveries }) {
+export function refreshAcceptedChart({ aggregates, attempts }) {
   return {
     type: 'REFRESH_ACCEPTED_CHART',
     payload: {
       aggregates,
-      deliveries: reshapeDeliveries(deliveries)
+      attempts: reshapeAttempts(attempts)
     }
   };
 }

@@ -19,7 +19,7 @@ const Chart = ({
     onClick: onClick,
     dataKey: 'count',
     paddingAngle: 0.5,
-    minAngle: 2,
+    minAngle: 3,
     startAngle: 90,
     endAngle: 450,
     animationDuration: 1000
@@ -36,7 +36,7 @@ const Chart = ({
             onMouseOver={(e) => onMouseOver(e, 'primary')}
             data={primaryData}
             innerRadius={100}
-            outerRadius={140}
+            outerRadius={135}
             {...sharedProps} />
           <Pie
             activeIndex={hoveredDataSet === 'secondary' ? hoveredItem.index : null}

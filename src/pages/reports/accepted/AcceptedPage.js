@@ -4,15 +4,21 @@ import { withRouter } from 'react-router-dom';
 
 import { refreshAcceptedMetrics } from 'src/actions/acceptedChart';
 import { addFilter, refreshTypeaheadCache } from 'src/actions/reportFilters';
-import { parseSearch } from 'src/helpers/reports';
+import { getShareLink, getFilterSearchOptions, parseSearch } from 'src/helpers/reports';
+import { showAlert } from 'src/actions/globalAlert';
 
 import { Empty } from 'src/components';
 import { Page } from '@sparkpost/matchbox';
 import Filters from '../components/Filters';
 import ChartGroup from './components/ChartGroup';
-// import ShareModal from '../components/ShareModal';
+import ShareModal from '../components/ShareModal';
 
 export class AcceptedPage extends Component {
+  state = {
+    modal: false,
+    link: ''
+  }
+
   componentDidMount() {
     this.handleRefresh(this.parseSearch());
     this.props.refreshTypeaheadCache();
@@ -29,24 +35,50 @@ export class AcceptedPage extends Component {
   }
 
   handleRefresh = (options) => {
-    this.props.refreshAcceptedMetrics(options);
-    // .then(() => this.updateLink());
+    const { refreshAcceptedMetrics, showAlert } = this.props;
+
+    refreshAcceptedMetrics(options)
+      .then(() => this.updateLink())
+      .catch((err) => {
+        showAlert({ type: 'error', message: 'Unable to refresh report.', details: err.message });
+      });
+  }
+
+  updateLink = () => {
+    const { filters, history } = this.props;
+    const options = getFilterSearchOptions(filters);
+    const { link, search } = getShareLink(options);
+
+    this.setState({ link });
+    history.replace({ pathname: '/reports/accepted', search });
+  }
+
+
+  handleModalToggle = (modal) => {
+    this.setState({ modal: !this.state.modal });
   }
 
   renderChart() {
     const { chartLoading, aggregates } = this.props;
 
     if (!chartLoading && !aggregates) {
-      return <Empty title='Accepted Rates' message='No Acceptance Attempts To Report' />;
+      return <Empty title='Accepted Rates' message='No Accepted Messages To Report' />;
     }
-    return <ChartGroup />;
+
+    return <ChartGroup loading={chartLoading} />;
   }
 
   render() {
+    const { modal, link } = this.state;
+
     return (
       <Page title='Accepted Report'>
         <Filters refresh={this.handleRefresh} onShare={() => this.handleModalToggle('shareModal')} />
         {this.renderChart()}
+        <ShareModal
+          open={modal}
+          handleToggle={this.handleModalToggle}
+          link={link} />
       </Page>
     );
   }
@@ -55,15 +87,16 @@ export class AcceptedPage extends Component {
 
 const mapStateToProps = ({ reportFilters, acceptedReport }) => ({
   filters: reportFilters,
-  deliveries: acceptedReport.deliveries,
+  attempts: acceptedReport.attempts,
   aggregates: acceptedReport.aggregates,
-  chartLoading: acceptedReport.aggregatesLoading || acceptedReport.deliveriesLoading
+  chartLoading: acceptedReport.aggregatesLoading || acceptedReport.attemptsLoading
 });
 
 const mapDispatchToProps = {
   refreshAcceptedMetrics,
   refreshTypeaheadCache,
-  addFilter
+  addFilter,
+  showAlert
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AcceptedPage));

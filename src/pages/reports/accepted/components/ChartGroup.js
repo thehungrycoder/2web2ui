@@ -7,7 +7,7 @@ import { generateColors } from 'src/helpers/color';
 import styles from './ChartGroup.module.scss';
 
 // Chart color palette generated from:
-const primaryColor = '#0097b3';
+const primaryColor = '#8CCA3A';
 
 export class ChartGroup extends Component {
   state = {
@@ -21,11 +21,11 @@ export class ChartGroup extends Component {
    * @param  {string} hoverSet - 'primary' | 'secondary'
    */
   handleMouseOver = (e, hoverSet) => {
-    const { deliveries } = this.props;
+    const { attempts } = this.props;
     const { active } = this.state;
     const { name, count } = e;
 
-    let dataSet = deliveries;
+    let dataSet = attempts;
 
     if (active) {
       dataSet = active.children;
@@ -76,32 +76,32 @@ export class ChartGroup extends Component {
     // Header with breadcrumb & active data
     if (active) {
       return [
-        { name: 'All Accepted', breadcrumb: true, onClick: this.handleBreadcrumb },
-        { name: 'All Targeted', count: aggregates.count_targeted },
+        { name: 'Accepted', breadcrumb: true, onClick: this.handleBreadcrumb, count: aggregates.count_accepted },
+        { name: 'Targeted', count: aggregates.count_targeted },
         { name: active.name, count: active.count }
       ];
     }
 
     // Default header
     return [
-      { name: 'Targeted', count: aggregates.count_targeted },
-      { name: 'All Accepted', count: aggregates.count_accepted }
+      { name: 'Accepted', count: aggregates.count_accepted },
+      { name: 'Targeted', count: aggregates.count_targeted }
     ];
   }
 
   // Gets primary and secondary data for BounceChart & Legend
   getData = () => {
-    const { deliveries } = this.props;
+    const { attempts } = this.props;
     const { active } = this.state;
 
-    let primaryData = deliveries;
+    let data = attempts;
 
     if (active) {
-      primaryData = active.children;
+      data = active.children;
     }
 
     return {
-      primaryData: generateColors(primaryData, primaryColor)
+      primaryData: generateColors(data, { color: primaryColor, saturate: 0, rotate: -40 })
     };
   }
 
@@ -109,11 +109,11 @@ export class ChartGroup extends Component {
     const { loading } = this.props;
 
     if (loading) {
-      return <Panel title='Accepted Attempt Rates' sectioned className={styles.LoadingPanel}><Loading /></Panel>;
+      return <Panel title='Accepted Rates' sectioned className={styles.LoadingPanel}><Loading /></Panel>;
     }
 
     return (
-      <Panel title='Accepted Attempt Rates' sectioned>
+      <Panel title='Accepted Rates' sectioned>
         <Grid>
           <Grid.Column xs={12} lg={5}>
             <div className={styles.ChartWrapper}>
@@ -142,8 +142,8 @@ export class ChartGroup extends Component {
 }
 
 const mapStateToProps = ({ acceptedReport }) => ({
-  loading: acceptedReport.aggregatesLoading,
-  deliveries: acceptedReport.deliveries,
+  loading: acceptedReport.aggregatesLoading || acceptedReport.attemptsLoading,
+  attempts: acceptedReport.attempts,
   aggregates: acceptedReport.aggregates
 });
 export default connect(mapStateToProps, {})(ChartGroup);

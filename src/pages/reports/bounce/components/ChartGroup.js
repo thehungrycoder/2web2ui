@@ -77,15 +77,16 @@ export class ChartGroup extends Component {
     // Header with breadcrumb & active data
     if (active) {
       return [
-        { name: 'All Bounces', breadcrumb: true, onClick: this.handleBreadcrumb },
+        { name: 'Bounces', breadcrumb: true, onClick: this.handleBreadcrumb, count: aggregates.countBounce },
+        { name: 'Targeted', count: aggregates.countTargeted },
         { name: active.name, count: active.count }
       ];
     }
 
     // Default header
     return [
-      { name: 'Targeted', count: aggregates.countTargeted },
-      { name: 'All Bounces', count: aggregates.countBounce }
+      { name: 'Bounces', count: aggregates.countBounce },
+      { name: 'Targeted', count: aggregates.countTargeted }
     ];
   }
 
@@ -103,8 +104,8 @@ export class ChartGroup extends Component {
     }
 
     return {
-      primaryData: generateColors(primaryData, primaryColor),
-      secondaryData: secondaryData && generateColors(secondaryData, secondaryColor)
+      primaryData: generateColors(primaryData, { color: primaryColor, rotate: 80, saturate: 0.06 }),
+      secondaryData: secondaryData && generateColors(secondaryData, { color: secondaryColor })
     };
   }
 
