@@ -8,9 +8,9 @@ describe('Legend: ', () => {
     headerData: [{ name: 'header' }],
     primaryData: [{ name: 'primary' }],
     secondaryData: [{ name: 'secondary' }],
-    handleMouseOver: jest.fn(),
-    handleMouseOut: jest.fn(),
-    handleClick: jest.fn()
+    onMouseOver: jest.fn(),
+    onMouseOut: jest.fn(),
+    onClick: jest.fn()
   };
 
   let wrapper;
@@ -31,21 +31,21 @@ describe('Legend: ', () => {
   it('should handle click', () => {
     wrapper.find('LegendItem').at(1).simulate('click');
     wrapper.find('LegendItem').at(2).simulate('click');
-    expect(props.handleClick).toHaveBeenCalledWith({ name: 'primary' });
-    expect(props.handleClick).toHaveBeenCalledWith({ name: 'secondary' });
+    expect(props.onClick).toHaveBeenCalledWith({ name: 'primary' });
+    expect(props.onClick).toHaveBeenCalledWith({ name: 'secondary' });
   });
 
   it('should handle mouse over', () => {
     wrapper.find('LegendItem').at(1).simulate('mouseover');
     wrapper.find('LegendItem').at(2).simulate('mouseover');
-    expect(props.handleMouseOver).toHaveBeenCalledWith({ name: 'primary' }, 'primary');
-    expect(props.handleMouseOver).toHaveBeenCalledWith({ name: 'secondary' }, 'secondary');
+    expect(props.onMouseOver).toHaveBeenCalledWith({ name: 'primary' }, 'primary');
+    expect(props.onMouseOver).toHaveBeenCalledWith({ name: 'secondary' }, 'secondary');
   });
 
   it('should handle mouse out', () => {
     wrapper.find('LegendItem').at(1).simulate('mouseout');
     wrapper.find('LegendItem').at(2).simulate('mouseout');
-    expect(props.handleMouseOut).toHaveBeenCalledTimes(2);
+    expect(props.onMouseOut).toHaveBeenCalledTimes(2);
   });
 
   it('should handle external hover', () => {

@@ -40,7 +40,7 @@ const Legend = ({
     </Grid.Column>
     : null;
 
-  const header = headerData.map((item, i) => <LegendItem key={i} {...item} />);
+  const header = headerData ? headerData.map((item, i) => <LegendItem key={i} {...item} />) : null;
 
   return (
     <div>
@@ -61,6 +61,10 @@ Legend.propTypes = {
   onMouseOut: PropTypes.func,
   onClick: PropTypes.func,
   hoveredItem: PropTypes.object
+};
+
+Legend.defaultProps = {
+  primaryData: []
 };
 
 Legend.displayName = 'PieChart.Legend';

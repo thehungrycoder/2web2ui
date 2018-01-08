@@ -44,8 +44,8 @@ describe('ChartGroup: ', () => {
   it('should render correctly after click', () => {
     wrapper.instance().handleClick({ name: 'cats', count: 3, children: [{ name: 'child' }]});
     wrapper.update();
-    expect(wrapper.find('Legend')).toMatchSnapshot();
-    expect(wrapper.find('BounceChart')).toMatchSnapshot();
+    expect(wrapper.find('PieChart.Legend')).toMatchSnapshot();
+    expect(wrapper.find('PieChart.Chart')).toMatchSnapshot();
   });
 
   it('should handle breadcrumb', () => {

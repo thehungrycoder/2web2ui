@@ -2,7 +2,7 @@
 
 exports[`ActiveShape:  should render 1`] = `
 <Sector
-  className="BounceChart--forceOpacity BounceChart--hasChildren"
+  className="Chart--forceOpacity Chart--hasChildren"
   cornerRadius={1}
   cx={1}
   cy={2}

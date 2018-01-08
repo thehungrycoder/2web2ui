@@ -3,23 +3,25 @@
 exports[`Legend:  should handle external hover 1`] = `
 <Grid>
   <Grid.Column>
-    <LegendItem
+    <PieChart.LegendItem
       hovered={true}
       key="0"
       name="primary"
       onClick={[Function]}
       onMouseOut={[Function]}
       onMouseOver={[Function]}
+      otherHovered={false}
     />
   </Grid.Column>
   <Grid.Column>
-    <LegendItem
+    <PieChart.LegendItem
       hovered={false}
       key="0"
       name="secondary"
       onClick={[Function]}
       onMouseOut={[Function]}
       onMouseOver={[Function]}
+      otherHovered={true}
     />
   </Grid.Column>
 </Grid>
@@ -28,14 +30,14 @@ exports[`Legend:  should handle external hover 1`] = `
 exports[`Legend:  should render 1`] = `
 <div>
   <div>
-    <LegendItem
+    <PieChart.LegendItem
       key="0"
       name="header"
     />
   </div>
   <Grid>
     <Grid.Column>
-      <LegendItem
+      <PieChart.LegendItem
         hovered={false}
         key="0"
         name="primary"
@@ -51,14 +53,14 @@ exports[`Legend:  should render 1`] = `
 exports[`Legend:  should render with secondaryData 1`] = `
 <div>
   <div>
-    <LegendItem
+    <PieChart.LegendItem
       key="0"
       name="header"
     />
   </div>
   <Grid>
     <Grid.Column>
-      <LegendItem
+      <PieChart.LegendItem
         hovered={false}
         key="0"
         name="primary"
@@ -68,7 +70,7 @@ exports[`Legend:  should render with secondaryData 1`] = `
       />
     </Grid.Column>
     <Grid.Column>
-      <LegendItem
+      <PieChart.LegendItem
         hovered={false}
         key="0"
         name="secondary"

@@ -1,22 +1,21 @@
 import React from 'react';
-import BounceChart from '../async/BounceChart';
+import Chart from '../async/Chart';
 import { shallow } from 'enzyme';
 
-describe('BounceChart: ', () => {
+describe('Chart: ', () => {
 
   const props = {
     primaryData: [{ name: 'primary' }],
     secondaryData: [{ name: 'secondary' }],
     onClick: jest.fn(),
-    handleClick: jest.fn(),
-    handleMouseOver: jest.fn(),
-    handleMouseOut: jest.fn()
+    onMouseOver: jest.fn(),
+    onMouseOut: jest.fn()
   };
 
   let wrapper;
 
   beforeEach(() => {
-    wrapper = shallow(<BounceChart {...props} />);
+    wrapper = shallow(<Chart {...props} />);
   });
 
   it('should render', () => {
@@ -25,17 +24,18 @@ describe('BounceChart: ', () => {
 
   it('should render hovered object', () => {
     wrapper.setProps({ hoveredItem: { dataSet: 'primary', index: 1 }});
+
     const pie = wrapper.find('Pie').at(0);
     expect(pie).toHaveProp('activeIndex', 1);
   });
 
   it('should handle mouse over primary', () => {
     wrapper.find('Pie').at(0).simulate('mouseover');
-    expect(props.handleMouseOver).toHaveBeenCalledWith(undefined, 'primary'); // recharts event passed as first argument
+    expect(props.onMouseOver).toHaveBeenCalledWith(undefined, 'primary'); // recharts event passed as first argument
   });
 
   it('should handle mouse over secondary', () => {
     wrapper.find('Pie').at(1).simulate('mouseover');
-    expect(props.handleMouseOver).toHaveBeenCalledWith(undefined, 'secondary'); // recharts event passed as first argument
+    expect(props.onMouseOver).toHaveBeenCalledWith(undefined, 'secondary'); // recharts event passed as first argument
   });
 });

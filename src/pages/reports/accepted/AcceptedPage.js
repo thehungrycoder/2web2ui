@@ -37,7 +37,7 @@ export class AcceptedPage extends Component {
   handleRefresh = (options) => {
     const { refreshAcceptedMetrics, showAlert } = this.props;
 
-    refreshAcceptedMetrics(options)
+    return refreshAcceptedMetrics(options)
       .then(() => this.updateLink())
       .catch((err) => {
         showAlert({ type: 'error', message: 'Unable to refresh report.', details: err.message });

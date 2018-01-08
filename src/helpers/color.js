@@ -2,13 +2,13 @@ import clr from 'color';
 
 /**
  * Generates a color palette for pie chart data
- * @param  {[type]} arr       array of objects
- * @param  {[type]} baseColor
- * @param  {[type]} rotate    hue rotation multiplier, divided by array length
- * @param  {[type]} saturate  hue saturation multiplier, divided by array length
- * @return {[type]}           array with 'fill' key added
+ * @param  {Array} arr        array of objects
+ * @param  {String} baseColor
+ * @param  {Number} rotate    hue rotation multiplier, divided by array length
+ * @param  {Number} saturate  hue saturation multiplier, divided by array length
+ * @return {Array}            array with 'fill' key added
  */
-export function generateColors(arr, { color = '#000000', rotate = null, saturate = null }) {
+export function generateColors(arr, { color = '#000000', rotate = null, saturate = null } = {}) {
   const base = clr(color);
   const length = arr.length;
   const r = rotate === null ? 60 / length : rotate / length;

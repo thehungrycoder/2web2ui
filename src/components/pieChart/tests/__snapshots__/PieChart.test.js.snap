@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Pie Chart:  renders its children 1`] = `
+<div>
+  <div />
+  <Grid>
+    <Grid.Column />
+  </Grid>
+</div>
+`;
+
+exports[`Pie Chart:  renders its children 2`] = `
+<ChunkLoading
+  error={null}
+  isLoading={true}
+  pastDelay={false}
+  timedOut={false}
+/>
+`;
+
+exports[`Pie Chart:  renders its children 3`] = `
+<div>
+  <div />
+  <div />
+  <div />
+</div>
+`;

@@ -52,11 +52,11 @@ exports[`ChartGroup:  should render 1`] = `
       xs={12}
     >
       <div>
-        <BounceChart
-          handleClick={[Function]}
-          handleMouseOut={[Function]}
-          handleMouseOver={[Function]}
+        <PieChart.Chart
           hoveredItem={null}
+          onClick={[Function]}
+          onMouseOut={[Function]}
+          onMouseOver={[Function]}
           primaryData={
             Array [
               Object {
@@ -86,7 +86,7 @@ exports[`ChartGroup:  should render 1`] = `
             ]
           }
         />
-        <ActiveLabel
+        <PieChart.ActiveLabel
           name="Bounce Rate"
           value="50.00%"
         />
@@ -96,23 +96,23 @@ exports[`ChartGroup:  should render 1`] = `
       lg={7}
       xs={12}
     >
-      <Legend
-        handleClick={[Function]}
-        handleMouseOut={[Function]}
-        handleMouseOver={[Function]}
+      <PieChart.Legend
         headerData={
           Array [
+            Object {
+              "count": 50,
+              "name": "Bounces",
+            },
             Object {
               "count": 100,
               "name": "Targeted",
             },
-            Object {
-              "count": 50,
-              "name": "All Bounces",
-            },
           ]
         }
         hoveredItem={null}
+        onClick={[Function]}
+        onMouseOut={[Function]}
+        onMouseOver={[Function]}
         primaryData={
           Array [
             Object {
@@ -147,57 +147,12 @@ exports[`ChartGroup:  should render 1`] = `
 </Panel>
 `;
 
-exports[`ChartGroup:  should render correctly after click 1`] = `
-<Legend
-  handleClick={[Function]}
-  handleMouseOut={[Function]}
-  handleMouseOver={[Function]}
-  headerData={
-    Array [
-      Object {
-        "breadcrumb": true,
-        "name": "All Bounces",
-        "onClick": [Function],
-      },
-      Object {
-        "count": 3,
-        "name": "cats",
-      },
-    ]
-  }
-  hoveredItem={null}
-  primaryData={
-    Array [
-      Object {
-        "fill": "hsl(355.1, 70.5%, 52.2%)",
-        "name": "child",
-      },
-    ]
-  }
-  secondaryData={null}
-/>
-`;
+exports[`ChartGroup:  should render correctly after click 1`] = `null`;
 
-exports[`ChartGroup:  should render correctly after click 2`] = `
-<BounceChart
-  handleClick={[Function]}
-  handleMouseOut={[Function]}
-  handleMouseOver={[Function]}
-  hoveredItem={null}
-  primaryData={
-    Array [
-      Object {
-        "fill": "hsl(355.1, 70.5%, 52.2%)",
-        "name": "child",
-      },
-    ]
-  }
-  secondaryData={null}
-/>
-`;
+exports[`ChartGroup:  should render correctly after click 2`] = `null`;
 
 exports[`ChartGroup:  should render label when hovering 1`] = `
-<ActiveLabel
+<PieChart.ActiveLabel
   name="cats"
   value="4.00%"
 />
