@@ -1,6 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`stores preview payload as contentPreview.draft 1`] = `
+exports[`Template reducer stores draft 1`] = `
+Object {
+  "byId": Object {
+    "test-draft": Object {
+      "draft": Object {
+        "id": "test-draft",
+      },
+    },
+  },
+  "contentPreview": Object {
+    "draft": Object {},
+    "published": Object {},
+  },
+  "getLoading": false,
+  "list": Array [],
+  "listError": null,
+}
+`;
+
+exports[`Template reducer stores preview of draft 1`] = `
 Object {
   "byId": Object {},
   "contentPreview": Object {
@@ -12,6 +31,25 @@ Object {
     },
     "published": Object {},
   },
+  "list": Array [],
+  "listError": null,
+}
+`;
+
+exports[`Template reducer stores published 1`] = `
+Object {
+  "byId": Object {
+    "test-published": Object {
+      "published": Object {
+        "id": "test-published",
+      },
+    },
+  },
+  "contentPreview": Object {
+    "draft": Object {},
+    "published": Object {},
+  },
+  "getLoading": false,
   "list": Array [],
   "listError": null,
 }
