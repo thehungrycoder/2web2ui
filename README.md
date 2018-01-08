@@ -98,6 +98,7 @@ Before jumping into writing code, here are a few conventions you should be aware
 We have two types of internal docs: general and directory-based. You'll find general docs like testing guides and general redux patterns, etc. in [our top level docs folder](./docs), but component directories will often have their own README.md files or docs folders (similar to tests) where individual docs related to those specific components can be found.
 
 - [Access Control](./docs/access-control.md)
+- [Jest](./docs/jest.md)
 - [Redux Form](./docs/redux-form.md)
 - [Redux](./docs/redux-redux.md)
 - [Styles](./docs/styles.md)
