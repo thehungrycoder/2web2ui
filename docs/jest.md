@@ -46,3 +46,27 @@ it('render when loaded', () => {
   expect(wrapper).toMatchSnapshot();
 });
 ```
+
+## Jest In Case
+
+This is a handy utility for combining similar tests.  Visit the [project website](http://thejameskyle.com/jest-in-case.html) for the full explanation.
+
+Our only recommendation is to define your test cases as an Object, so your test case description doesn't get overlooked or forgotten.
+
+```js
+import cases from 'jest-in-case';
+
+const TEST_CASES = {
+  'case #1': {
+    // args
+  },
+  'case #2': {
+    // args
+  },
+  // ...
+};
+
+cases('description', (args) => {
+  // assertion
+}, TEST_CASES);
+```
