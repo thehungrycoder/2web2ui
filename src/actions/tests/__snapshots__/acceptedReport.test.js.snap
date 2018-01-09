@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Action Creator: Bounce Report should dispatch a chart refresh action 1`] = `
+Array [
+  Array [
+    Object {
+      "from": "2017-02-14T12:02",
+    },
+  ],
+]
+`;
+
+exports[`Action Creator: Bounce Report should dispatch a chart refresh action 2`] = `
+Array [
+  Array [
+    undefined,
+  ],
+  Array [
+    Array [
+      Object {
+        "count_accepted": 1,
+      },
+    ],
+  ],
+  Array [
+    undefined,
+  ],
+  Array [
+    Object {
+      "payload": Object {
+        "aggregates": Object {
+          "count_accepted": 1,
+        },
+        "attempts": undefined,
+      },
+      "type": "REFRESH_ACCEPTED_CHART",
+    },
+  ],
+]
+`;
+
+exports[`Action Creator: Bounce Report should not refresh chart nor update deliveries by attempt if 0 accepted 1`] = `
+Array [
+  Array [
+    Object {
+      "from": "2017-02-14T12:02",
+      "metrics": "count_accepted",
+    },
+  ],
+]
+`;
+
+exports[`Action Creator: Bounce Report should not refresh chart nor update deliveries by attempt if 0 accepted 2`] = `
+Array [
+  Array [
+    undefined,
+  ],
+  Array [
+    Array [
+      Object {
+        "foo": "bar",
+      },
+    ],
+  ],
+]
+`;
