@@ -31,7 +31,8 @@ export class PublishedPage extends Component {
       },
       {
         content: 'Preview & Send',
-        disabled: true
+        Component: Link,
+        to: `/templates/preview/${match.params.id}/published`
       }
     ];
 

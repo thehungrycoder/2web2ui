@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders an iframe 1`] = `
+<PreviewFrame
+  content="<h1>Hello, World!</h1>"
+>
+  <iframe
+    onLoad={[Function]}
+    sandbox="allow-same-origin allow-top-navigation-by-user-activation"
+    title="preview email template frame"
+  />
+</PreviewFrame>
+`;
+
+exports[`sets iframe height after it loads 1`] = `
+<PreviewFrame
+  content="<h1>Hello, World!</h1>"
+>
+  <iframe
+    height="99px"
+    onLoad={[Function]}
+    sandbox="allow-same-origin allow-top-navigation-by-user-activation"
+    title="preview email template frame"
+  />
+</PreviewFrame>
+`;

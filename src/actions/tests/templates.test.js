@@ -2,6 +2,7 @@ import { createMockStore } from 'src/__testHelpers__/mockStore';
 import localforage from 'localforage';
 import * as templates from '../templates';
 import * as templatesHelpers from '../helpers/templates';
+
 import _ from 'lodash';
 
 jest.mock('../helpers/sparkpostApiRequest', () => jest.fn((a) => a));
@@ -92,4 +93,39 @@ describe('Action Creator: Templates', () => {
     expect(mockStore.getActions()).toMatchSnapshot();
   });
 
+  it('should dispatch getDraft, getTestData, and getPreview actions', async() => {
+    const action = templates.getDraftAndPreview('test-template');
+    await mockStore.dispatch(action);
+    expect(mockStore.getActions()).toMatchSnapshot();
+  });
+
+  it('should dispatch getPublished, getTestData, and getPreview actions', async() => {
+    const action = templates.getPublishedAndPreview('test-template');
+    await mockStore.dispatch(action);
+    expect(mockStore.getActions()).toMatchSnapshot();
+  });
+
+  it('should dispatch a getPreview action', async() => {
+    const action = templates.getPreview({
+      content: {
+        html: '<h1>Test Draft</h1>',
+        subject: 'Test Draft'
+      },
+      id: 'test-template',
+      mode: 'draft'
+    });
+    await mockStore.dispatch(action);
+    expect(mockStore.getActions()).toMatchSnapshot();
+  });
+
+  it('should dispatch getTestData and sendPreview actions', async() => {
+    const action = templates.sendPreview({
+      emails: ['test@example.com'],
+      from: 'test@sparkpostbox.com',
+      id: 'test-template',
+      mode: 'draft'
+    });
+    await mockStore.dispatch(action);
+    expect(mockStore.getActions()).toMatchSnapshot();
+  });
 });

@@ -1,7 +1,11 @@
 const initialState = {
   list: [],
   listError: null,
-  byId: {}
+  byId: {},
+  contentPreview: {
+    draft: {},
+    published: {}
+  }
 };
 
 export default (state = initialState, action) => {
@@ -52,6 +56,18 @@ export default (state = initialState, action) => {
 
     case 'GET_TEMPLATE_TEST_DATA':
       return { ...state, testData: action.payload };
+
+    case 'GET_TEMPLATE_PREVIEW_SUCCESS':
+      return {
+        ...state,
+        contentPreview: {
+          ...state.contentPreview,
+          [action.meta.context.mode]: {
+            ...state.contentPreview[action.meta.context.mode],
+            [action.meta.context.id]: action.payload
+          }
+        }
+      };
 
     default:
       return state;

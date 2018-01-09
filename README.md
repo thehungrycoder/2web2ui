@@ -41,6 +41,12 @@ Good resources for learning Redux:
 - https://egghead.io/courses/getting-started-with-redux
 - https://learnredux.com/
 
+A few other things you will want to understand that we make heavy use of in this app:
+
+- [Redux Thunk](https://github.com/gaearon/redux-thunk) - A "middleware" library for redux that lets us dispatch a function instead of a plain object action. Helps with doing async stuff in actions.
+- [React Router](https://reacttraining.com/react-router/web/guides/philosophy) - This is the router we use for the entire application. We add new routes using declarative config but for things like `Link` and `props.location.match` you'll need to understand how RR works on some level.
+- [Reselect](https://github.com/reactjs/reselect) - Selectors are a redux idea that lets us move all logic out of `mapStateToProps` functions so it can be properly tested. The reselect library helps us create selectors that also get a nice memoization benefit.
+
 ## About the project
 
 Before jumping into writing code, here are a few conventions you should be aware of:
@@ -92,6 +98,7 @@ Before jumping into writing code, here are a few conventions you should be aware
 We have two types of internal docs: general and directory-based. You'll find general docs like testing guides and general redux patterns, etc. in [our top level docs folder](./docs), but component directories will often have their own README.md files or docs folders (similar to tests) where individual docs related to those specific components can be found.
 
 - [Access Control](./docs/access-control.md)
+- [Jest](./docs/jest.md)
 - [Redux Form](./docs/redux-form.md)
 - [Redux](./docs/redux-redux.md)
 - [Styles](./docs/styles.md)
@@ -101,3 +108,5 @@ Components:
 - [PlanPicker](./src/components/planPicker/readme.md)
 
 ![](https://media0.giphy.com/media/5y1LH29N3k556/giphy.gif)
+
+*Testing a change to a .md file, should not trigger a bamboo build*

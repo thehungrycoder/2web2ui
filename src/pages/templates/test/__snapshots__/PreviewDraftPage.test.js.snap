@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders preview page 1`] = `
+<PreviewPage
+  match={
+    Object {
+      "params": Object {
+        "id": "test-template",
+      },
+    }
+  }
+  mode="draft"
+  preview={
+    Object {
+      "from": Object {},
+    }
+  }
+  returnPath="/templates/edit/test-template"
+  template={Object {}}
+/>
+`;
