@@ -40,15 +40,13 @@ export default class ShareModal extends Component {
     }
 
     return (
-      <div style={{ marginBottom: '30px' }}>
-        <Checkbox
-          id='pin-relative-link'
-          label='Pin dates for this link'
-          checked={pinned}
-          onChange={() => this.setState({ pinned: !pinned })}
-          helpText={<span>Pins this report's relative time range to its calculated dates (this is usually what you want when sharing a report).</span>}
-        />
-      </div>
+      <Checkbox
+        id='pin-relative-link'
+        label='Pin dates for this link'
+        checked={pinned}
+        onChange={() => this.setState({ pinned: !pinned })}
+        helpText={<span>Pins this report's relative time range to its calculated dates (this is usually what you want when sharing a report).</span>}
+      />
     );
   }
 
@@ -69,6 +67,8 @@ export default class ShareModal extends Component {
           <Panel.Section>
             <CopyField value={this.getLink()} />
             {this.renderPinToggle()}
+          </Panel.Section>
+          <Panel.Section>
             <Button primary onClick={handleToggle}>Done</Button>
           </Panel.Section>
         </Panel>

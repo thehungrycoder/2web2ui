@@ -11,6 +11,8 @@ exports[`Component: ShareModal should render correctly when not open 1`] = `
         hideCopy={false}
         value="http://phoenix.test/?range=custom"
       />
+    </Panel.Section>
+    <Panel.Section>
       <Button
         primary={true}
         size="default"
@@ -39,6 +41,8 @@ exports[`Component: ShareModal should render correctly when open 1`] = `
         hideCopy={false}
         value="http://phoenix.test/?range=custom"
       />
+    </Panel.Section>
+    <Panel.Section>
       <Button
         primary={true}
         size="default"
@@ -68,26 +72,20 @@ exports[`Component: ShareModal should render with a valid relative range 1`] = `
         hideCopy={false}
         value="http://phoenix.test/?range=custom"
       />
-      <div
-        style={
-          Object {
-            "marginBottom": "30px",
-          }
+      <Checkbox
+        checked={true}
+        helpText={
+          <span>
+            Pins this report's relative time range to its calculated dates (this is usually what you want when sharing a report).
+          </span>
         }
-      >
-        <Checkbox
-          checked={true}
-          helpText={
-            <span>
-              Pins this report's relative time range to its calculated dates (this is usually what you want when sharing a report).
-            </span>
-          }
-          id="pin-relative-link"
-          label="Pin dates for this link"
-          onChange={[Function]}
-          required={false}
-        />
-      </div>
+        id="pin-relative-link"
+        label="Pin dates for this link"
+        onChange={[Function]}
+        required={false}
+      />
+    </Panel.Section>
+    <Panel.Section>
       <Button
         onClick={[Function]}
         primary={true}
@@ -118,26 +116,20 @@ exports[`Component: ShareModal should unpin when clicking the checkbox 1`] = `
         hideCopy={false}
         value="http://phoenix.test/?range=valid"
       />
-      <div
-        style={
-          Object {
-            "marginBottom": "30px",
-          }
+      <Checkbox
+        checked={false}
+        helpText={
+          <span>
+            Pins this report's relative time range to its calculated dates (this is usually what you want when sharing a report).
+          </span>
         }
-      >
-        <Checkbox
-          checked={false}
-          helpText={
-            <span>
-              Pins this report's relative time range to its calculated dates (this is usually what you want when sharing a report).
-            </span>
-          }
-          id="pin-relative-link"
-          label="Pin dates for this link"
-          onChange={[Function]}
-          required={false}
-        />
-      </div>
+        id="pin-relative-link"
+        label="Pin dates for this link"
+        onChange={[Function]}
+        required={false}
+      />
+    </Panel.Section>
+    <Panel.Section>
       <Button
         onClick={[Function]}
         primary={true}
