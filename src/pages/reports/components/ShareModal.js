@@ -30,7 +30,7 @@ export default class ShareModal extends Component {
   }
 
   renderPinToggle() {
-    const { query } = this.props;
+    const { query = {}} = this.props;
     const { pinned } = this.state;
     const relativeRange = relativeDateOptions.find((item) => item.value === query.range);
     const isRelative = relativeRange && query.range !== 'custom';
@@ -50,13 +50,6 @@ export default class ShareModal extends Component {
         />
       </div>
     );
-  }
-
-  handleWindowClick = (e) => {
-    const { handleToggle } = this.props;
-    if (!e.modalClick) {
-      handleToggle(e);
-    }
   }
 
   handleKeydown = (e) => {
