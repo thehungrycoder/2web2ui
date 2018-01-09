@@ -1,3 +1,5 @@
+/* eslint max-lines: ["error", 200] */
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 

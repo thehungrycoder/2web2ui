@@ -7,89 +7,129 @@ exports[`Results renders correctly (empty suppressions) 1`] = `
 `;
 
 exports[`Results renders correctly (with suppressions) 1`] = `
-<TableCollection
-  columns={
-    Array [
-      Object {
-        "label": "Recipient",
-      },
-      Object {
-        "label": "Type",
-        "width": "18%",
-      },
-      Object {
-        "label": "Source",
-        "width": "20%",
-      },
-      Object {
-        "label": "",
-        "width": "15%",
-      },
-    ]
-  }
-  getRowData={[Function]}
-  pagination={true}
-  rows={
-    Array [
-      Object {
-        "recipient": "rec1@dom.com",
-        "source": "Manually added",
-        "type": "Transactional",
-      },
-      Object {
-        "recipient": "rec2@dom.com",
-        "source": "Manually added",
-        "subaccount_id": 101,
-        "type": "Non-transactional",
-      },
-    ]
-  }
-/>
+<div>
+  <ConfirmationModal
+    confirmVerb="Confirm"
+    content={
+      <p>
+        Are you sure to delete 
+         from suppression list?
+      </p>
+    }
+    onCancel={[Function]}
+    onConfirm={[Function]}
+    open={false}
+    title="Confirm delete!"
+  />
+  <Detail
+    onCancel={[Function]}
+    open={false}
+    suppression={Object {}}
+  />
+  <TableCollection
+    columns={
+      Array [
+        Object {
+          "label": "Recipient",
+        },
+        Object {
+          "label": "Type",
+          "width": "18%",
+        },
+        Object {
+          "label": "Source",
+          "width": "20%",
+        },
+        Object {
+          "label": "",
+          "width": "21%",
+        },
+      ]
+    }
+    getRowData={[Function]}
+    pagination={true}
+    rows={
+      Array [
+        Object {
+          "recipient": "rec1@dom.com",
+          "source": "Manually added",
+          "type": "Transactional",
+        },
+        Object {
+          "recipient": "rec2@dom.com",
+          "source": "Manually added",
+          "subaccount_id": 101,
+          "type": "Non-transactional",
+        },
+      ]
+    }
+  />
+</div>
 `;
 
 exports[`Results renders correctly (with suppressions, with subaccount) 1`] = `
-<TableCollection
-  columns={
-    Array [
-      Object {
-        "label": "Recipient",
-      },
-      Object {
-        "label": "Type",
-        "width": "18%",
-      },
-      Object {
-        "label": "Source",
-        "width": "20%",
-      },
-      Object {
-        "label": "Subaccount",
-        "width": "18%",
-      },
-      Object {
-        "label": "",
-        "width": "15%",
-      },
-    ]
-  }
-  getRowData={[Function]}
-  pagination={true}
-  rows={
-    Array [
-      Object {
-        "recipient": "rec1@dom.com",
-        "source": "Manually added",
-        "type": "Transactional",
-      },
-      Object {
-        "recipient": "rec2@dom.com",
-        "source": "Manually added",
-        "subaccount_id": 101,
-        "type": "Non-transactional",
-      },
-    ]
-  }
-/>
+<div>
+  <ConfirmationModal
+    confirmVerb="Confirm"
+    content={
+      <p>
+        Are you sure to delete 
+         from suppression list?
+      </p>
+    }
+    onCancel={[Function]}
+    onConfirm={[Function]}
+    open={false}
+    title="Confirm delete!"
+  />
+  <Detail
+    onCancel={[Function]}
+    open={false}
+    suppression={Object {}}
+  />
+  <TableCollection
+    columns={
+      Array [
+        Object {
+          "label": "Recipient",
+        },
+        Object {
+          "label": "Type",
+          "width": "18%",
+        },
+        Object {
+          "label": "Source",
+          "width": "20%",
+        },
+        Object {
+          "label": "Subaccount",
+          "width": "18%",
+        },
+        Object {
+          "label": "",
+          "width": "21%",
+        },
+      ]
+    }
+    getRowData={[Function]}
+    pagination={true}
+    rows={
+      Array [
+        Object {
+          "recipient": "rec1@dom.com",
+          "source": "Manually added",
+          "type": "Transactional",
+        },
+        Object {
+          "recipient": "rec2@dom.com",
+          "source": "Manually added",
+          "subaccount_id": 101,
+          "type": "Non-transactional",
+        },
+      ]
+    }
+  />
+</div>
 `;
 
 exports[`Results renders correctly on initial loading 1`] = `
