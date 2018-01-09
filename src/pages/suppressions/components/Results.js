@@ -37,14 +37,15 @@ export class Results extends Component {
   }
 
   deleteRecipient = () => {
-    const { showAlert } = this.props;
+    const { showAlert, deleteSuppression } = this.props;
     const { data } = this.state.del;
 
-    return this.props.deleteSuppression(data)
+    return deleteSuppression(data)
       .then(() => {
         this.toggleDeleteModal();
         return showAlert({ type: 'success', message: `${data.recipient} was successfully deleted from the suppression list` });
-      });
+      })
+      .catch((e) => showAlert({ type: 'error', message: e.message }));
   }
 
   toggleDetailModal = (row) => {
