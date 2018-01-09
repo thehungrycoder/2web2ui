@@ -1,0 +1,196 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`failed to send email and shows global alert 1`] = `
+Object {
+  "loading": false,
+  "loadingError": undefined,
+  "sending": false,
+  "to": "recipient@example.com",
+  "validationError": undefined,
+}
+`;
+
+exports[`renders loading error 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "Edit Template",
+      "to": "/path/to/return",
+    }
+  }
+  empty={Object {}}
+  primaryAction={
+    Object {
+      "content": "Send Email",
+      "disabled": true,
+      "onClick": [Function],
+    }
+  }
+  title="Test Template (Draft)"
+>
+  <ApiErrorBanner
+    errorDetails="Oh no!"
+    message="Unable to load your template preview"
+    reload={[Function]}
+  />
+  <Panel
+    sectioned={true}
+  >
+    <TextField
+      disabled={true}
+      label="To"
+      onChange={[Function]}
+      placeholder="Send to recipient email addresses"
+      required={false}
+      resize="both"
+      type="text"
+      value=""
+    />
+    <TextField
+      disabled={true}
+      label="From"
+      required={false}
+      resize="both"
+      type="text"
+      value="test@example.com"
+    />
+    <TextField
+      disabled={true}
+      label="Subject"
+      required={false}
+      resize="both"
+      type="text"
+      value="Test Template"
+    />
+    <PreviewPanel
+      html="<h1>Test Template</h1>"
+      text=""
+    />
+  </Panel>
+</Page>
+`;
+
+exports[`renders loading page and makes request for preview 1`] = `<Loading />`;
+
+exports[`renders preview page with template 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "Edit Template",
+      "to": "/path/to/return",
+    }
+  }
+  empty={Object {}}
+  primaryAction={
+    Object {
+      "content": "Send Email",
+      "disabled": false,
+      "onClick": [Function],
+    }
+  }
+  title="Test Template (Draft)"
+>
+  <Panel
+    sectioned={true}
+  >
+    <TextField
+      disabled={false}
+      label="To"
+      onChange={[Function]}
+      placeholder="Send to recipient email addresses"
+      required={false}
+      resize="both"
+      type="text"
+      value=""
+    />
+    <TextField
+      disabled={true}
+      label="From"
+      required={false}
+      resize="both"
+      type="text"
+      value="test@example.com"
+    />
+    <TextField
+      disabled={true}
+      label="Subject"
+      required={false}
+      resize="both"
+      type="text"
+      value="Test Template"
+    />
+    <PreviewPanel
+      html="<h1>Test Template</h1>"
+      text=""
+    />
+  </Panel>
+</Page>
+`;
+
+exports[`resets error message when user starts typing again 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "Edit Template",
+      "to": "/path/to/return",
+    }
+  }
+  empty={Object {}}
+  primaryAction={
+    Object {
+      "content": "Send Email",
+      "disabled": false,
+      "onClick": [Function],
+    }
+  }
+  title="Test Template (Draft)"
+>
+  <Panel
+    sectioned={true}
+  >
+    <TextField
+      disabled={false}
+      label="To"
+      onChange={[Function]}
+      placeholder="Send to recipient email addresses"
+      required={false}
+      resize="both"
+      type="text"
+      value="new@example.com"
+    />
+    <TextField
+      disabled={true}
+      label="From"
+      required={false}
+      resize="both"
+      type="text"
+      value="test@example.com"
+    />
+    <TextField
+      disabled={true}
+      label="Subject"
+      required={false}
+      resize="both"
+      type="text"
+      value="Test Template"
+    />
+    <PreviewPanel
+      html="<h1>Test Template</h1>"
+      text=""
+    />
+  </Panel>
+</Page>
+`;
+
+exports[`successfully sends email and shows global alert 1`] = `
+Object {
+  "loading": false,
+  "loadingError": undefined,
+  "sending": false,
+  "to": "",
+  "validationError": undefined,
+}
+`;
