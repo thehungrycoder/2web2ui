@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders correctly 1`] = `
+exports[`Component: FilterDropdown renders correctly 1`] = `
 <div>
   <Popover
     bottom={true}
@@ -75,7 +75,7 @@ exports[`renders correctly 1`] = `
 </div>
 `;
 
-exports[`renders selected correctly 1`] = `
+exports[`Component: FilterDropdown renders selected correctly 1`] = `
 <div>
   <Popover
     bottom={true}

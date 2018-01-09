@@ -46,8 +46,8 @@ exports[`BouncePage:  should render 1`] = `
   </Panel>
   <ShareModal
     handleToggle={[Function]}
-    link=""
     open={false}
+    query={Object {}}
   />
 </Page>
 `;
@@ -101,8 +101,8 @@ exports[`BouncePage:  should render correctly with no bounces 1`] = `
   </Panel>
   <ShareModal
     handleToggle={[Function]}
-    link=""
     open={false}
+    query={Array []}
   />
 </Page>
 `;

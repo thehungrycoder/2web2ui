@@ -16,7 +16,7 @@ export default (state = initialState, action) => {
       return { ...state, ...action.payload };
 
     case 'REFRESH_REPORT_RANGE': {
-      const { to, from, relativeRange } = action.payload;
+      const { to = state.to, from = state.from, relativeRange = state.relativeRange } = action.payload;
       return { ...state, to, from, relativeRange };
     }
 

@@ -37,7 +37,7 @@ class CopyField extends Component {
   }
 
   render() {
-    const { value, hideCopy } = this.props;
+    const { value, hideCopy, fieldProps = {}} = this.props;
     const { copied } = this.state;
     let connectRight = null;
 
@@ -53,7 +53,9 @@ class CopyField extends Component {
         readOnly
         connectRight={connectRight}
         value={value}
-        onFocus={this.handleFieldFocus} />
+        onFocus={this.handleFieldFocus}
+        {...fieldProps}
+      />
     );
   }
 }
