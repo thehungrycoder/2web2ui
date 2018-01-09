@@ -15,7 +15,7 @@ export class AuthenticationGate extends Component {
 
     const foundCookie = authCookie.get();
     if (foundCookie) {
-      this.props.login(foundCookie);
+      this.props.login({ authData: foundCookie });
       this.props.getGrantsFromCookie(foundCookie);
     }
   }
