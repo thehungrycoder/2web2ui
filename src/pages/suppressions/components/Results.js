@@ -4,13 +4,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { Button } from '@sparkpost/matchbox';
-import { PanelLoading, TableCollection, Empty } from 'src/components';
+import { PanelLoading, TableCollection, Empty, ConfirmationModal } from 'src/components';
 import { deleteSuppression } from 'src/actions/suppressions';
 import { formatSubaccountDisplay } from '../helpers';
 import { Detail } from './Detail';
 import { showAlert } from 'src/actions/globalAlert';
-import { ConfirmationModal } from 'src/components/modals';
-
 
 export class Results extends Component {
   state = {
@@ -18,7 +16,7 @@ export class Results extends Component {
       open: false,
       data: {}
     },
-    del: { // delete modal
+    del: { // delete confirmation modal
       open: false,
       data: {}
     }
@@ -36,7 +34,7 @@ export class Results extends Component {
     );
   }
 
-  deleteRecipient = () => {
+  deleteSuppression = () => {
     const { showAlert, deleteSuppression } = this.props;
     const { data } = this.state.del;
 
@@ -100,8 +98,7 @@ export class Results extends Component {
   }
 
   renderModalView = () => {
-    const { detail } = this.state;
-    const { open, data } = detail;
+    const { open, data } = this.state.detail;
 
     if (!data) {
       return null;
@@ -124,8 +121,7 @@ export class Results extends Component {
   }
 
   renderDeleteModal = () => {
-    const { del } = this.state;
-    const { open, data } = del;
+    const { open, data } = this.state.del;
     const { deleting } = this.props;
 
     return (<ConfirmationModal
@@ -133,7 +129,7 @@ export class Results extends Component {
       title={'Confirm delete!'}
       content={<p>Are you sure to delete {data.recipient} from suppression list?</p>}
       isPending={deleting}
-      onConfirm={this.deleteRecipient}
+      onConfirm={this.deleteSuppression}
       onCancel={this.toggleDeleteModal}
       confirmVerb={'Confirm'}
     />);

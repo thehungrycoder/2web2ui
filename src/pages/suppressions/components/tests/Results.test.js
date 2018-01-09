@@ -63,13 +63,13 @@ describe('Results', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  describe('deleteRecipient', () => {
+  describe('deleteSuppression', () => {
     it('deletes the recipient', async() => {
       const suppression = { recipient: 'foo@bar.com' };
       wrapper.setState({ del: { open: true, data: suppression }});
       instance.toggleDeleteModal = jest.fn();
 
-      await instance.deleteRecipient();
+      await instance.deleteSuppression();
 
       expect(props.deleteSuppression).toHaveBeenCalledTimes(1);
       expect(props.deleteSuppression).toHaveBeenCalledWith(suppression);
@@ -82,7 +82,7 @@ describe('Results', () => {
       instance.toggleDeleteModal = jest.fn();
       props.deleteSuppression.mockReturnValue(Promise.reject(err));
 
-      await instance.deleteRecipient();
+      await instance.deleteSuppression();
 
       expect(props.deleteSuppression).toHaveBeenCalledTimes(1);
       expect(props.showAlert).toHaveBeenCalledWith({ type: 'error', message: 'that error!' });

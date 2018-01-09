@@ -7,7 +7,6 @@ import { BaseModal, LabelledValue, CopyField, LongTextContainer, Loading } from 
 import styles from './Detail.module.scss';
 
 export class Detail extends Component {
-
   renderContents = () => {
     const { suppression } = this.props;
 
@@ -39,4 +38,4 @@ export class Detail extends Component {
   }
 }
 
-export default connect(null, {})(Detail);
+export default connect()(Detail);
