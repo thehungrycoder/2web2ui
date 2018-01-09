@@ -1,10 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`re-renders preview page after preview is loaded 1`] = `
+exports[`renders preview page 1`] = `
 <PreviewPage
-  editTemplatePath="/templates/edit/test-template"
-  getDraftAndPreview={[Function]}
-  loading={false}
   match={
     Object {
       "params": Object {
@@ -13,21 +10,12 @@ exports[`re-renders preview page after preview is loaded 1`] = `
     }
   }
   mode="draft"
-/>
-`;
-
-exports[`renders preview page when loading preview 1`] = `
-<PreviewPage
-  editTemplatePath="/templates/edit/test-template"
-  getDraftAndPreview={[Function]}
-  loading={true}
-  match={
+  preview={
     Object {
-      "params": Object {
-        "id": "test-template",
-      },
+      "from": Object {},
     }
   }
-  mode="draft"
+  returnPath="/templates/edit/test-template"
+  template={Object {}}
 />
 `;

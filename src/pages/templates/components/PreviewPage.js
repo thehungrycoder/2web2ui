@@ -1,41 +1,52 @@
 import _ from 'lodash';
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Page, Panel, TextField } from '@sparkpost/matchbox';
 import emailAddresses from 'email-addresses';
 
-import { Loading } from 'src/components';
+import { ApiErrorBanner, Loading } from 'src/components';
 import PreviewPanel from './PreviewPanel';
 
-export default class PreviewPage extends React.Component {
+export default class PreviewPage extends Component {
   static defaultProps = {
-    loading: true
+    preview: { from: {}},
+    template: {}
   }
 
   state = {
+    loading: true,
     sending: false,
     to: ''
   }
 
-  // Reset input error message and set new value
-  onTextChange = (event) => {
-    this.setState({ error: undefined, to: event.currentTarget.value });
+  componentDidMount() {
+    this.onLoad();
+  }
+
+  onLoad = () => {
+    if (!this.state.loading) {
+      this.setState({ loading: true });
+    }
+
+    return this.props.onLoad(this.props.match.params.id)
+      .then(() => { this.setState({ loadingError: undefined, loading: false }); })
+      .catch((error) => { this.setState({ loadingError: error, loading: false }); });
   }
 
   onSend = () => {
     const emails = emailAddresses.parseAddressList(this.state.to);
 
     if (_.trim(this.state.to) === '') {
-      this.setState({ error: 'At least one email address is required' });
+      this.setState({ validationError: 'At least one email address is required' });
       return;
     }
 
     if (emails === null) {
-      this.setState({ error: 'An email address is invalid' });
+      this.setState({ validationError: 'An email address is invalid' });
       return;
     }
 
-    this.setState({ sending: true });
+    this.setState({ sending: true, validationError: undefined });
 
     return this.props.sendPreview({
       id: this.props.template.id,
@@ -56,8 +67,14 @@ export default class PreviewPage extends React.Component {
     this.setState({ sending: false, to: '' });
   }
 
+  // Reset input error message and set new value
+  onTextChange = (event) => {
+    this.setState({ to: event.currentTarget.value, validationError: undefined });
+  }
+
   render() {
-    const { editTemplatePath, loading, mode, preview, template } = this.props;
+    const { mode, preview, returnPath, template } = this.props;
+    const { loading, loadingError, sending, to, validationError } = this.state;
 
     if (loading) {
       return <Loading />;
@@ -67,27 +84,35 @@ export default class PreviewPage extends React.Component {
       breadcrumbAction: {
         Component: Link,
         content: 'Edit Template',
-        to: editTemplatePath
+        to: returnPath
       },
       primaryAction: {
         content: 'Send Email',
-        disabled: this.state.sending,
+        disabled: sending || !!loadingError,
         onClick: this.onSend
       },
-      title: `${template.name} (${_.capitalize(mode)})`
+      title: `${template.name || ''} (${_.capitalize(mode)})`
     };
 
     const { email, name } = preview.from;
 
     return (
       <Page {...pageProps}>
+        {loadingError && (
+          <ApiErrorBanner
+            errorDetails={loadingError.message}
+            message="Unable to load your template preview"
+            reload={this.onLoad}
+          />
+        )}
         <Panel sectioned>
           <TextField
-            error={this.state.error}
+            disabled={!!loadingError}
+            error={validationError}
             label="To"
             placeholder="Send to recipient email addresses"
             onChange={this.onTextChange}
-            value={this.state.to}
+            value={to}
           />
           <TextField disabled label="From" value={name ? `${name} <${email}>` : email} />
           <TextField disabled label="Subject" value={preview.subject} />

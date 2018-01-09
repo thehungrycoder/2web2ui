@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
@@ -7,26 +7,14 @@ import { getDraftAndPreview, sendPreview } from 'src/actions/templates';
 import { selectDraftTemplate, selectDraftTemplatePreview } from 'src/selectors/templates';
 import PreviewPage from './components/PreviewPage';
 
-export class PreviewDraftPage extends Component {
-  state = {
-    loading: true
-  }
-
-  componentDidMount() {
-    this.props.getDraftAndPreview(this.props.match.params.id)
-      .then(() => { this.setState({ loading: false }); });
-  }
-
-  render() {
-    return (
-      <PreviewPage
-        editTemplatePath={`/templates/edit/${this.props.match.params.id}`}
-        loading={this.state.loading}
-        mode="draft"
-        {...this.props}
-      />
-    );
-  }
+export function PreviewDraftPage(props) {
+  return (
+    <PreviewPage
+      mode="draft"
+      returnPath={`/templates/edit/${props.match.params.id}`}
+      {...props}
+    />
+  );
 }
 
 export const mapStateToProps = (state, props) => ({
@@ -34,6 +22,6 @@ export const mapStateToProps = (state, props) => ({
   template: selectDraftTemplate(state, props.match.params.id)
 });
 
-const mapDispatchToProps = { getDraftAndPreview, sendPreview, showAlert };
+const mapDispatchToProps = { onLoad: getDraftAndPreview, sendPreview, showAlert };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PreviewDraftPage));
