@@ -9,13 +9,13 @@ import DateFilter from './DateFilter';
 import typeaheadCacheSelector from 'src/selectors/reportFilterTypeaheadCache';
 import styles from './Filters.module.scss';
 
-class Filters extends Component {
+export class Filters extends Component {
   renderActiveFilters = () => {
     const { filters } = this.props;
-    return filters.activeList.length
+    return filters.length
       ? <Panel.Section>
         <small>Filters:</small>
-        { filters.activeList.map((item, index) => <Tag key={index} onRemove={() => this.handleFilterRemove(index)} className={styles.TagWrapper}>{ item.type }: { item.value }</Tag>)}
+        { filters.map((item, index) => <Tag key={index} onRemove={() => this.handleFilterRemove(index)} className={styles.TagWrapper}>{ item.type }: { item.value }</Tag>)}
       </Panel.Section>
       : null;
   }
@@ -47,7 +47,7 @@ class Filters extends Component {
                 placeholder='Filter by domain, campaign, etc'
                 onSelect={this.handleTypeaheadSelect}
                 items={typeaheadCache}
-                selected={filters.activeList}
+                selected={filters}
               />
             </Grid.Column>
             <Grid.Column xs={4} md={2} xl={1}>
@@ -62,7 +62,7 @@ class Filters extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  filters: state.reportFilters,
+  filters: state.reportFilters.activeList,
   typeaheadCache: typeaheadCacheSelector(state)
 });
 export default connect(mapStateToProps, { addFilter, removeFilter })(Filters);
