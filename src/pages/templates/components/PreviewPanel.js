@@ -7,11 +7,12 @@ import styles from './PreviewPanel.module.scss';
 
 export default class PreviewPanel extends Component {
   static defaultProps = {
+    html: '',
     text: ''
   }
 
   static propTypes = {
-    html: PropTypes.string.isRequired,
+    html: PropTypes.string,
     text: PropTypes.string
   }
 

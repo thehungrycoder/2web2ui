@@ -27,6 +27,33 @@ exports[`renders HTML by default 1`] = `
 </div>
 `;
 
+exports[`renders blank panel 1`] = `
+<div>
+  <Tabs
+    connectBelow={true}
+    selected={0}
+    tabs={
+      Array [
+        Object {
+          "content": "HTML",
+          "onClick": [Function],
+        },
+        Object {
+          "content": "Text",
+          "onClick": [Function],
+        },
+      ]
+    }
+  />
+  <div>
+    <PreviewFrame
+      content=""
+      key="html"
+    />
+  </div>
+</div>
+`;
+
 exports[`renders text on tab click 1`] = `
 <div>
   <Tabs

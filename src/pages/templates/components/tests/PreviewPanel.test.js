@@ -8,12 +8,17 @@ const props = {
   text: 'Test Template'
 };
 
-test('renders HTML by default', () => {
+it('renders blank panel', () => {
+  const wrapper = shallow(<PreviewPanel />);
+  expect(wrapper).toMatchSnapshot();
+});
+
+it('renders HTML by default', () => {
   const wrapper = shallow(<PreviewPanel {...props} />);
   expect(wrapper).toMatchSnapshot();
 });
 
-test('renders text on tab click', () => {
+it('renders text on tab click', () => {
   const wrapper = shallow(<PreviewPanel {...props} />);
 
   // @todo should be able to .find() the Text tab then .simulate('click')
