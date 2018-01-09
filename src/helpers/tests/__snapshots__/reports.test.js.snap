@@ -11,20 +11,6 @@ Object {
 }
 `;
 
-exports[`Should get share link 1`] = `
-Object {
-  "link": "http://phoenix.test/?one=two&three=four",
-  "search": "?one=two&three=four",
-}
-`;
-
-exports[`Should get share link with no options 1`] = `
-Object {
-  "link": "http://phoenix.test/",
-  "search": "",
-}
-`;
-
 exports[`Should parse search with custom range 1`] = `
 Object {
   "filters": Array [
