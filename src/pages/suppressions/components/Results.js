@@ -2,16 +2,21 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { Button } from '@sparkpost/matchbox';
-
 import { PanelLoading, TableCollection, Empty } from 'src/components';
-
+import { deleteSuppression } from 'src/actions/suppressions';
 import { formatSubaccountDisplay } from '../helpers';
 import { Detail } from './Detail';
+import { showAlert } from 'src/actions/globalAlert';
+import { ConfirmationModal } from 'src/components/modals';
 
 
 export class Results extends Component {
   state = {
-    modal: {
+    detail: {
+      open: false,
+      data: {}
+    },
+    del: {
       open: false,
       data: {}
     }
@@ -28,12 +33,22 @@ export class Results extends Component {
     );
   }
 
-  toggleModal = (row) => {
-    const { modal } = this.state;
+  deleteRecipient = () => {
+    const { showAlert } = this.props;
+    const { data } = this.state.del;
+    return this.props.deleteSuppression(data)
+      .then(() => {
+        this.toggleDeleteModal();
+        return showAlert({ type: 'success', message: `${data.recipient} was successfully deleted from the suppression list` });
+      });
+  }
+
+  toggleDetailModal = (row) => {
+    const { detail } = this.state;
 
     this.setState({
-      modal: {
-        open: !modal.open,
+      detail: {
+        open: !detail.open,
         data: row
       }
     });
@@ -53,8 +68,8 @@ export class Results extends Component {
 
     rowData.push(
       <div style={{ textAlign: 'right' }}>
-        <Button size='small' onClick={() => this.toggleModal(row)}>View Details</Button> &nbsp;
-        <Button destructive size='small'>Delete</Button>
+        <Button size='small' onClick={() => this.toggleDetailModal(row)}>View Details</Button> &nbsp;
+        <Button destructive size='small' onClick={() => this.toggleDeleteModal(row)}>Delete</Button>
       </div>
     );
 
@@ -80,8 +95,8 @@ export class Results extends Component {
   }
 
   renderModalView = () => {
-    const { modal } = this.state;
-    const { open, data } = modal;
+    const { detail } = this.state;
+    const { open, data } = detail;
 
     if (!data) {
       return null;
@@ -92,10 +107,38 @@ export class Results extends Component {
     );
   }
 
+  toggleDeleteModal = (row) => {
+    const { del } = this.state;
+
+    this.setState({
+      del: {
+        open: !del.open,
+        data: row
+      }
+    });
+  }
+
+  renderDeleteModal = () => {
+    const { del } = this.state;
+    const { open, data = {}} = del;
+    const { deleting } = this.props;
+
+    return (<ConfirmationModal
+      open={open}
+      title={'Confirm delete!'}
+      content={<p>Are you sure to delete {data.recipient} from suppression list?</p>}
+      isPending={deleting}
+      onConfirm={this.deleteRecipient}
+      onCancel={this.toggleDeleteModal}
+      confirmVerb={'Confirm'}
+    />);
+  }
+
   renderResults = () => {
     const { results } = this.props;
     return (
       <div>
+        { this.renderDeleteModal() }
         { this.renderModalView() }
 
         <TableCollection
@@ -123,4 +166,8 @@ export class Results extends Component {
   }
 }
 
-export default connect(null)(Results);
+const mapStateToProps = (state) => ({
+  deleting: state.deleting
+});
+
+export default connect(mapStateToProps, { deleteSuppression, showAlert })(Results);

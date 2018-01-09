@@ -1,6 +1,8 @@
 const initialState = { list: null, hasSuppressions: false, listLoading: false };
 
 export default (state = initialState, action) => {
+  const { meta } = action;
+
   switch (action.type) {
     case 'CHECK_SUPPRESSIONS_PENDING':
       return { ...state, listError: null };
@@ -36,6 +38,16 @@ export default (state = initialState, action) => {
         return { ...state, listLoading: false, list: [], listError: action.payload };
       }
     }
+
+    case 'DELETE_SUPPRESSION_PENDING':
+      return { ...state, deleting: true };
+
+    case 'DELETE_SUPPRESSION_SUCCESS':
+      return { ...state, deleting: false, list: state.list.filter((s) => s.recipient !== meta.suppression.recipient) };
+
+    case 'DELETE_SUPPRESSION_FAIL':
+      return { ...state, deleting: false, deleteError: action.payload };
+
 
     //reset results
     case 'RESET_SUPPRESSIONS_RESULTS':
