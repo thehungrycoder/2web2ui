@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-const relativeDateOptions = [
+export const relativeDateOptions = [
   { value: 'hour', label: 'Last Hour' },
   { value: 'day', label: 'Last 24 Hours' },
   { value: '7days', label: 'Last 7 Days' },
@@ -9,14 +9,7 @@ const relativeDateOptions = [
   { value: 'custom', label: 'Custom' }
 ];
 
-export {
-  getEndOfDay,
-  getStartOfDay,
-  getRelativeDates,
-  relativeDateOptions
-};
-
-function getEndOfDay(date) {
+export function getEndOfDay(date) {
   const end = new Date(date);
   end.setHours(23);
   end.setMinutes(59);
@@ -26,7 +19,7 @@ function getEndOfDay(date) {
   return end;
 }
 
-function getStartOfDay(date) {
+export function getStartOfDay(date) {
   const start = new Date(date);
   start.setHours(0);
   start.setMinutes(0);
@@ -36,7 +29,7 @@ function getStartOfDay(date) {
   return start;
 }
 
-function getRelativeDates(range) {
+export function getRelativeDates(range) {
   const now = moment.utc();
   const to = now.toDate();
 

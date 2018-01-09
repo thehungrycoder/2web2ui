@@ -1,0 +1,130 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Page: SummaryPage should render correctly 1`] = `
+<Page
+  empty={Object {}}
+  title="Summary Report"
+>
+  <Connect(Filters)
+    onShare={[Function]}
+    refresh={[Function]}
+  />
+  <Panel>
+    <Panel.Section
+      className=""
+    >
+      <ChartHeader
+        onMetricsToggle={[Function]}
+        onScaleClick={[Function]}
+        onTimeClick={[Function]}
+        selectedMetrics={
+          Array [
+            1,
+            2,
+            3,
+          ]
+        }
+        selectedScale="linear"
+        selectedTime="real"
+      />
+      <ChartGroup
+        metrics={
+          Array [
+            1,
+            2,
+            3,
+          ]
+        }
+        yScale="linear"
+      />
+    </Panel.Section>
+  </Panel>
+  <Connect(Table)
+    refresh={[Function]}
+  />
+  <ShareModal
+    handleToggle={[Function]}
+    open={false}
+    query={Object {}}
+  />
+  <MetricsModal
+    onCancel={[Function]}
+    onSubmit={[Function]}
+    open={false}
+    selectedMetrics={
+      Array [
+        1,
+        2,
+        3,
+      ]
+    }
+  />
+</Page>
+`;
+
+exports[`Page: SummaryPage should render when loading 1`] = `
+<Page
+  empty={Object {}}
+  title="Summary Report"
+>
+  <Connect(Filters)
+    onShare={[Function]}
+    refresh={[Function]}
+    shareDisabled={true}
+  />
+  <Panel>
+    <Panel.Section
+      className=""
+    >
+      <ChartHeader
+        onMetricsToggle={[Function]}
+        onScaleClick={[Function]}
+        onTimeClick={[Function]}
+        selectedMetrics={
+          Array [
+            1,
+            2,
+            3,
+          ]
+        }
+        selectedScale="linear"
+        selectedTime="real"
+      />
+      <ChartGroup
+        chartLoading={true}
+        metrics={
+          Array [
+            1,
+            2,
+            3,
+          ]
+        }
+        yScale="linear"
+      />
+    </Panel.Section>
+    <div>
+      <Loading />
+    </div>
+  </Panel>
+  <Connect(Table)
+    refresh={[Function]}
+  />
+  <ShareModal
+    handleToggle={[Function]}
+    open={false}
+    query={Object {}}
+  />
+  <MetricsModal
+    onCancel={[Function]}
+    onSubmit={[Function]}
+    open={false}
+    selectedMetrics={
+      Array [
+        1,
+        2,
+        3,
+      ]
+    }
+  />
+</Page>
+`;

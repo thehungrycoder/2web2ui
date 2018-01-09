@@ -1,0 +1,143 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: ShareModal should render correctly when not open 1`] = `
+<Modal>
+  <Panel
+    onClick={[Function]}
+    title="Share this report"
+  >
+    <Panel.Section>
+      <CopyField
+        hideCopy={false}
+        value="http://phoenix.test/?range=custom"
+      />
+    </Panel.Section>
+    <Panel.Section>
+      <Button
+        primary={true}
+        size="default"
+      >
+        Done
+      </Button>
+    </Panel.Section>
+  </Panel>
+</Modal>
+`;
+
+exports[`Component: ShareModal should render correctly when open 1`] = `
+<Modal
+  open={true}
+>
+  <WindowEvent
+    event="keydown"
+    handler={[Function]}
+  />
+  <Panel
+    onClick={[Function]}
+    title="Share this report"
+  >
+    <Panel.Section>
+      <CopyField
+        hideCopy={false}
+        value="http://phoenix.test/?range=custom"
+      />
+    </Panel.Section>
+    <Panel.Section>
+      <Button
+        primary={true}
+        size="default"
+      >
+        Done
+      </Button>
+    </Panel.Section>
+  </Panel>
+</Modal>
+`;
+
+exports[`Component: ShareModal should render with a valid relative range 1`] = `
+<Modal
+  onClick={[Function]}
+  open={true}
+>
+  <WindowEvent
+    event="keydown"
+    handler={[Function]}
+  />
+  <Panel
+    onClick={[Function]}
+    title="Share this report"
+  >
+    <Panel.Section>
+      <CopyField
+        hideCopy={false}
+        value="http://phoenix.test/?range=custom"
+      />
+      <Checkbox
+        checked={true}
+        helpText={
+          <span>
+            Pins this report's relative time range to its calculated dates (this is usually what you want when sharing a report).
+          </span>
+        }
+        id="pin-relative-link"
+        label="Pin dates for this link"
+        onChange={[Function]}
+        required={false}
+      />
+    </Panel.Section>
+    <Panel.Section>
+      <Button
+        onClick={[Function]}
+        primary={true}
+        size="default"
+      >
+        Done
+      </Button>
+    </Panel.Section>
+  </Panel>
+</Modal>
+`;
+
+exports[`Component: ShareModal should unpin when clicking the checkbox 1`] = `
+<Modal
+  onClick={[Function]}
+  open={true}
+>
+  <WindowEvent
+    event="keydown"
+    handler={[Function]}
+  />
+  <Panel
+    onClick={[Function]}
+    title="Share this report"
+  >
+    <Panel.Section>
+      <CopyField
+        hideCopy={false}
+        value="http://phoenix.test/?range=valid"
+      />
+      <Checkbox
+        checked={false}
+        helpText={
+          <span>
+            Pins this report's relative time range to its calculated dates (this is usually what you want when sharing a report).
+          </span>
+        }
+        id="pin-relative-link"
+        label="Pin dates for this link"
+        onChange={[Function]}
+        required={false}
+      />
+    </Panel.Section>
+    <Panel.Section>
+      <Button
+        onClick={[Function]}
+        primary={true}
+        size="default"
+      >
+        Done
+      </Button>
+    </Panel.Section>
+  </Panel>
+</Modal>
+`;

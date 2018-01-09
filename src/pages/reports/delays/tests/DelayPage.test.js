@@ -60,7 +60,7 @@ describe('DelayPage: ', () => {
   });
 
   it('should show loading indicator when loading table', () => {
-    wrapper.setProps({ tableLoading: true });
+    wrapper.setProps({ loading: true });
     expect(wrapper).toMatchSnapshot();
   });
 

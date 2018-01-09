@@ -1,24 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import qs from 'query-string';
 import { TableCollection, Empty, LongTextContainer } from 'src/components';
 import { addFilter, refreshTypeaheadCache } from 'src/actions/reportFilters';
 import { loadDelayReasonsByDomain, loadDelayMetrics } from 'src/actions/delayReport';
-import { parseSearch, getFilterSearchOptions, getShareLink } from 'src/helpers/reports';
+import { parseSearch, getFilterSearchOptions } from 'src/helpers/reports';
 import { Percent } from 'src/components/formatters';
 import { showAlert } from 'src/actions/globalAlert';
 import { Page, Panel, UnstyledLink } from '@sparkpost/matchbox';
 import ShareModal from '../components/ShareModal';
 import Filters from '../components/Filters';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
-
-
 const columns = [{ label: 'Reason', width: '45%' }, 'Domain', 'Delayed', 'Delayed First Attempt (%)'];
 
 export class DelayPage extends Component {
   state = {
     modal: false,
-    link: ''
+    query: {}
   }
 
   componentDidMount() {
@@ -49,10 +48,9 @@ export class DelayPage extends Component {
 
   updateLink = () => {
     const { filters, history } = this.props;
-    const options = getFilterSearchOptions(filters);
-    const { link, search } = getShareLink(options);
-
-    this.setState({ link });
+    const query = getFilterSearchOptions(filters);
+    const search = qs.stringify(query, { encode: false });
+    this.setState({ query });
     history.replace({ pathname: '/reports/delayed', search });
   }
 
@@ -73,9 +71,9 @@ export class DelayPage extends Component {
   }
 
   renderCollection() {
-    const { tableLoading, reasons } = this.props;
+    const { loading, reasons } = this.props;
 
-    if (tableLoading) {
+    if (loading) {
       return <PanelLoading />;
     }
 
@@ -92,30 +90,35 @@ export class DelayPage extends Component {
   }
 
   render() {
-    const { modal, link } = this.state;
+    const { modal, query } = this.state;
+    const { loading } = this.props;
 
     return (
       <Page title='Delay Report'>
-        <Filters refresh={this.handleRefresh} onShare={this.handleModalToggle} />
+        <Filters
+          refresh={this.handleRefresh}
+          onShare={this.handleModalToggle}
+          shareDisabled={loading}
+        />
         <Panel title='Delayed Messages' className='ReasonsTable'>
           { this.renderCollection() }
         </Panel>
         <ShareModal
           open={modal}
           handleToggle={this.handleModalToggle}
-          link={link} />
+          query={query} />
       </Page>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  const tableLoading = state.delayReport.aggregatesLoading || state.delayReport.reasonsLoading;
+  const loading = state.delayReport.aggregatesLoading || state.delayReport.reasonsLoading;
   const aggregates = state.delayReport.aggregates;
 
   return {
     filters: state.reportFilters,
-    tableLoading,
+    loading,
     reasons: state.delayReport.reasons,
     totalAccepted: aggregates ? aggregates.count_accepted : 1
   };

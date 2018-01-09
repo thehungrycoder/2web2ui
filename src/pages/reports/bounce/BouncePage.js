@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-
+import qs from 'query-string';
 import { refreshBounceChartMetrics, refreshBounceTableMetrics } from 'src/actions/bounceReport';
 import { addFilter, refreshTypeaheadCache } from 'src/actions/reportFilters';
-import { getShareLink, getFilterSearchOptions, parseSearch } from 'src/helpers/reports';
+import { getFilterSearchOptions, parseSearch } from 'src/helpers/reports';
 import { showAlert } from 'src/actions/globalAlert';
-
 import { TableCollection, Empty, LongTextContainer } from 'src/components';
 import { Percent } from 'src/components/formatters';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
@@ -14,13 +13,12 @@ import { Page, Panel, UnstyledLink } from '@sparkpost/matchbox';
 import ShareModal from '../components/ShareModal';
 import Filters from '../components/Filters';
 import ChartGroup from './components/ChartGroup';
-
 const columns = [{ label: 'Reason', width: '45%' }, 'Domain', 'Category', 'Classification', 'Count (%)'];
 
 export class BouncePage extends Component {
   state = {
     modal: false,
-    link: ''
+    query: {}
   }
 
   componentDidMount() {
@@ -30,7 +28,6 @@ export class BouncePage extends Component {
 
   parseSearch() {
     const { options, filters } = parseSearch(this.props.location.search);
-
     if (filters) {
       filters.forEach(this.props.addFilter);
     }
@@ -52,10 +49,9 @@ export class BouncePage extends Component {
 
   updateLink = () => {
     const { filters, history } = this.props;
-    const options = getFilterSearchOptions(filters);
-    const { link, search } = getShareLink(options);
-
-    this.setState({ link });
+    const query = getFilterSearchOptions(filters);
+    const search = qs.stringify(query, { encode: false });
+    this.setState({ query });
     history.replace({ pathname: '/reports/bounce', search });
   }
 
@@ -78,7 +74,6 @@ export class BouncePage extends Component {
 
   renderChart() {
     const { chartLoading, aggregates } = this.props;
-
     if (!chartLoading && !aggregates) {
       return <Empty title='Bounce Rates' message='No bounces to report' />;
     }
@@ -105,11 +100,16 @@ export class BouncePage extends Component {
   }
 
   render() {
-    const { modal, link } = this.state;
+    const { modal, query } = this.state;
+    const { chartLoading } = this.props;
 
     return (
       <Page title='Bounce Report'>
-        <Filters refresh={this.handleRefresh} onShare={this.handleModalToggle} />
+        <Filters
+          refresh={this.handleRefresh}
+          onShare={this.handleModalToggle}
+          shareDisabled={chartLoading}
+        />
         { this.renderChart() }
         <Panel title='Bounced Messages' className='ReasonsTable'>
           { this.renderCollection() }
@@ -117,7 +117,7 @@ export class BouncePage extends Component {
         <ShareModal
           open={modal}
           handleToggle={this.handleModalToggle}
-          link={link} />
+          query={query} />
       </Page>
     );
   }

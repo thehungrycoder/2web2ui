@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import classnames from 'classnames';
+import qs from 'query-string';
 
 import { refresh as refreshSummaryChart } from 'src/actions/summaryChart';
 import { addFilter, refreshTypeaheadCache } from 'src/actions/reportFilters';
-import { getShareLink, getFilterSearchOptions, parseSearch } from 'src/helpers/reports';
+import { getFilterSearchOptions, parseSearch } from 'src/helpers/reports';
 
 import { Page, Panel } from '@sparkpost/matchbox';
 import { Loading } from 'src/components';
@@ -15,13 +16,13 @@ import { Table, MetricsModal, ChartGroup, ChartHeader } from './components';
 
 import styles from './SummaryPage.module.scss';
 
-class SummaryReportPage extends Component {
+export class SummaryReportPage extends Component {
   state = {
     shareModal: false,
     metricsModal: false,
     eventTime: 'real',
     scale: 'linear',
-    link: ''
+    query: {}
   }
 
   componentDidMount() {
@@ -40,6 +41,8 @@ class SummaryReportPage extends Component {
   }
 
   handleRefresh = (options) => {
+    // TODO: Re-arrange how options are handled here so that updateLink can run
+    // in parallel with refreshSummaryChart instead of having to wait for data to load
     this.props.refreshSummaryChart(options).then(() => this.updateLink());
   }
 
@@ -70,24 +73,23 @@ class SummaryReportPage extends Component {
   updateLink = () => {
     const { filters, chart, history } = this.props;
 
-    const options = {
+    const query = {
       metrics: chart.metrics.map((metric) => metric.key),
       ...getFilterSearchOptions(filters)
     };
+    const search = qs.stringify(query, { encode: false });
 
-    const { link, search } = getShareLink(options);
-
-    this.setState({ link });
+    this.setState({ query });
     history.replace({ pathname: '/reports/summary', search });
   }
 
   render() {
     const { chart } = this.props;
-    const { scale, eventTime, link, metricsModal, shareModal } = this.state;
+    const { scale, eventTime, query, metricsModal, shareModal } = this.state;
 
     return (
       <Page title='Summary Report'>
-        <Filters refresh={this.handleRefresh} onShare={() => this.handleModalToggle('shareModal')} />
+        <Filters refresh={this.handleRefresh} onShare={() => this.handleModalToggle('shareModal')} shareDisabled={chart.chartLoading} />
 
         <Panel>
           <Panel.Section className={classnames(styles.ChartSection, chart.chartLoading && styles.pending)}>
@@ -110,7 +112,8 @@ class SummaryReportPage extends Component {
         <ShareModal
           open={shareModal}
           handleToggle={() => this.handleModalToggle('shareModal')}
-          link={link} />
+          query={query}
+        />
         <MetricsModal
           selectedMetrics={chart.metrics}
           open={metricsModal}
