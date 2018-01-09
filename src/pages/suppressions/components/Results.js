@@ -21,6 +21,7 @@ export class Results extends Component {
       data: {}
     }
   }
+
   renderPlaceholder() {
     return (
       <Empty message='Choose some options to see your suppressions' />
@@ -36,6 +37,7 @@ export class Results extends Component {
   deleteRecipient = () => {
     const { showAlert } = this.props;
     const { data } = this.state.del;
+
     return this.props.deleteSuppression(data)
       .then(() => {
         this.toggleDeleteModal();
@@ -103,7 +105,7 @@ export class Results extends Component {
     }
 
     return (
-      <Detail suppression={data} open={open} onCancel={this.toggleModal} />
+      <Detail suppression={data} open={open} onCancel={ this.toggleDetailModal } />
     );
   }
 
@@ -166,8 +168,4 @@ export class Results extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  deleting: state.deleting
-});
-
-export default connect(mapStateToProps, { deleteSuppression, showAlert })(Results);
+export default connect(null, { deleteSuppression, showAlert })(Results);

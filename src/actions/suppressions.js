@@ -110,12 +110,9 @@ export function deleteSuppression(suppression) {
         method: 'DELETE',
         url: `/suppression-list/${recipient}`,
         headers: setSubaccountHeader(subaccountId),
-        // data: { type },
+        // data: { type }, /* TODO Check if we need to set type as old UI doesn't do it. Also figure out why it's not working if just comment out this line */
         suppression
       }
     }));
 }
 
-
-// curl 'http://api.sparkpost.test/api/v1/suppression-list/9kkpz9c7t7o@comcast.net' -X DELETE -H 'Authorization: 4b9528c5e1965f9cb057356b6c95664679eea9d7'  -H 'x-msys-subaccount: 758' --data-binary '{"type":"non_transactional"}' --compressed
-// curl 'https://api-uat.tst.sparkpost.com/api/v1/suppression-list/000sgd2l75sh2d@yahoo.com' -X DELETE -H 'authorization: 869f3f133f06c7f3d4dcef377d4e6f6c91f21109'  --compressed
