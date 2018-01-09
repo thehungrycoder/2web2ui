@@ -58,6 +58,29 @@ Array [
 ]
 `;
 
+exports[`Action Creator: Templates should dispatch a getPreview action 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "context": Object {
+        "id": "test-template",
+        "mode": "draft",
+      },
+      "data": Object {
+        "content": Object {
+          "html": "<h1>Test Draft</h1>",
+          "subject": "Test Draft",
+        },
+        "substitution_data": Object {},
+      },
+      "method": "POST",
+      "url": "/utils/content-previewer",
+    },
+    "type": "GET_TEMPLATE_PREVIEW",
+  },
+]
+`;
+
 exports[`Action Creator: Templates should dispatch a getTestData action 1`] = `
 Array [
   Object {
@@ -123,6 +146,132 @@ Array [
       "url": "/templates/id",
     },
     "type": "UPDATE_TEMPLATE",
+  },
+]
+`;
+
+exports[`Action Creator: Templates should dispatch getDraft, getTestData, and getPreview actions 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "method": "GET",
+      "params": Object {
+        "draft": true,
+      },
+      "url": "/templates/test-template",
+    },
+    "type": "GET_DRAFT_TEMPLATE",
+  },
+  Object {
+    "payload": Object {
+      "metadata": Object {},
+      "options": Object {},
+      "substitution_data": Object {
+        "test": "test",
+      },
+    },
+    "type": "GET_TEMPLATE_TEST_DATA",
+  },
+  Object {
+    "meta": Object {
+      "context": Object {
+        "id": "test-template",
+        "mode": "draft",
+      },
+      "data": Object {
+        "content": undefined,
+        "substitution_data": Object {
+          "test": "test",
+        },
+      },
+      "method": "POST",
+      "url": "/utils/content-previewer",
+    },
+    "type": "GET_TEMPLATE_PREVIEW",
+  },
+]
+`;
+
+exports[`Action Creator: Templates should dispatch getPublished, getTestData, and getPreview actions 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "method": "GET",
+      "params": Object {
+        "draft": false,
+      },
+      "url": "/templates/test-template",
+    },
+    "type": "GET_PUBLISHED_TEMPLATE",
+  },
+  Object {
+    "payload": Object {
+      "metadata": Object {},
+      "options": Object {},
+      "substitution_data": Object {
+        "test": "test",
+      },
+    },
+    "type": "GET_TEMPLATE_TEST_DATA",
+  },
+  Object {
+    "meta": Object {
+      "context": Object {
+        "id": "test-template",
+        "mode": "published",
+      },
+      "data": Object {
+        "content": undefined,
+        "substitution_data": Object {
+          "test": "test",
+        },
+      },
+      "method": "POST",
+      "url": "/utils/content-previewer",
+    },
+    "type": "GET_TEMPLATE_PREVIEW",
+  },
+]
+`;
+
+exports[`Action Creator: Templates should dispatch getTestData and sendPreview actions 1`] = `
+Array [
+  Object {
+    "payload": Object {
+      "metadata": Object {},
+      "options": Object {},
+      "substitution_data": Object {
+        "test": "test",
+      },
+    },
+    "type": "GET_TEMPLATE_TEST_DATA",
+  },
+  Object {
+    "meta": Object {
+      "data": Object {
+        "content": Object {
+          "template_id": "test-template",
+          "use_draft_template": true,
+        },
+        "metadata": Object {},
+        "options": Object {
+          "sandbox": true,
+        },
+        "recipients": Array [
+          Object {
+            "address": Object {
+              "email": "test@example.com",
+            },
+          },
+        ],
+        "substitution_data": Object {
+          "test": "test",
+        },
+      },
+      "method": "POST",
+      "url": "/transmissions",
+    },
+    "type": "SEND_PREVIEW_TRANSMISSION",
   },
 ]
 `;

@@ -1,0 +1,15 @@
+.PreviewPanel {
+  :global .Matchbox-Tabs { // unset Tab style to fix in Panel.Section
+    border-radius: unset;
+    border-style: none;
+    box-shadow: none;
+    overflow: hidden;
+  }
+}
+
+.PreviewPanelWrapper {
+  border: 1px solid #d2d2d7;
+  border-radius: 2px;
+  min-height: 50vh;
+  position: relative;
+}

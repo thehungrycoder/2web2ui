@@ -1,3 +1,5 @@
+/* eslint max-lines: ["warn", { "max": 215, "skipComments": true }] */
+// @see discussion for custom lint rule, https://github.com/SparkPost/2web2ui/issues/230
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 import localforage from 'localforage';
 import config from 'src/config';
@@ -26,6 +28,31 @@ export function getDraft(id) {
   });
 }
 
+export function getDraftAndPreview(id) {
+  return async(dispatch) => {
+    const { content } = await dispatch(getDraft(id));
+    const { payload = {}} = await dispatch(getTestData({ id, mode: 'draft' }));
+    const substitution_data = payload.substitution_data || {};
+
+    return dispatch(getPreview({ content, id, mode: 'draft', substitution_data }));
+  };
+}
+
+// @todo Switch to the newer preview endpoint
+// @see https://github.com/SparkPost/sparkpost-admin-api-documentation/blob/master/services/content_previewer_api.md#preview-inline-content-post
+// @see https://github.com/SparkPost/sparkpost-api-documentation/blob/master/services/templates.md#preview-templatesidpreviewdraft
+export function getPreview({ content, id, mode, substitution_data = {}}) {
+  return sparkpostApiRequest({
+    type: 'GET_TEMPLATE_PREVIEW',
+    meta: {
+      context: { id, mode },
+      method: 'POST',
+      url: '/utils/content-previewer',
+      data: { content, substitution_data }
+    }
+  });
+}
+
 export function getPublished(id) {
   return sparkpostApiRequest({
     type: 'GET_PUBLISHED_TEMPLATE',
@@ -37,6 +64,16 @@ export function getPublished(id) {
       }
     }
   });
+}
+
+export function getPublishedAndPreview(id) {
+  return async(dispatch) => {
+    const { content } = await dispatch(getPublished(id));
+    const { payload = {}} = await dispatch(getTestData({ id, mode: 'published' }));
+    const substitution_data = payload.substitution_data || {};
+
+    return dispatch(getPreview({ content, id, mode: 'published', substitution_data }));
+  };
 }
 
 export function create(data) {
@@ -133,5 +170,36 @@ export function getTestData({ id, mode }) {
         payload: testData
       });
     });
+  };
+}
+
+// @see https://github.com/SparkPost/sparkpost-api-documentation/blob/master/services/transmissions.md#create-a-transmission-post
+export function sendPreview({ id, mode, emails, from }) {
+  const recipients = emails.map((email) => ({
+    address: { email }
+  }));
+
+  return async(dispatch) => {
+    const { payload: testData = {}} = await dispatch(getTestData({ id, mode }));
+
+    return dispatch(sparkpostApiRequest({
+      type: 'SEND_PREVIEW_TRANSMISSION',
+      meta: {
+        method: 'POST',
+        url: '/transmissions',
+        data: {
+          ...testData,
+          content: {
+            template_id: id,
+            use_draft_template: mode === 'draft'
+          },
+          options: {
+            ...testData.options,
+            sandbox: /sparkpostbox.com$/i.test(from)
+          },
+          recipients
+        }
+      }
+    }));
   };
 }

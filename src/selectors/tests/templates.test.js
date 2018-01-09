@@ -1,3 +1,4 @@
+import cases from 'jest-in-case';
 import * as selector from '../templates';
 
 describe('Templates selectors', () => {
@@ -18,6 +19,20 @@ describe('Templates selectors', () => {
             published: true
           }
         }
+      },
+      contentPreview: {
+        draft: {
+          ape: {
+            html: '<h1>Southeastern Asia</h1>',
+            subject: 'New Location: Come visit me'
+          }
+        },
+        published: {
+          ape: {
+            html: '<h1>Baltimore Zoo</h1>.',
+            subject: 'Come visit me'
+          }
+        }
       }
     }
   };
@@ -32,6 +47,34 @@ describe('Templates selectors', () => {
       const props = { match: { params: { id: 'Nope' }}};
       expect(selector.selectTemplateById(store, props)).toMatchSnapshot();
     });
+  });
+
+  cases('.selectDraftTemplate', ({ id }) => {
+    expect(selector.selectDraftTemplate(store, id)).toMatchSnapshot();
+  }, {
+    'returns draft template': { id: 'ape' },
+    'returns undefined when unknown': { id: 'unknown' }
+  });
+
+  cases('.selectPublishedTemplate', ({ id }) => {
+    expect(selector.selectPublishedTemplate(store, id)).toMatchSnapshot();
+  }, {
+    'returns published template': { id: 'ape' },
+    'returns undefined when unknown': { id: 'unknown' }
+  });
+
+  cases('.selectDraftTemplatePreview', ({ id }) => {
+    expect(selector.selectDraftTemplatePreview(store, id)).toMatchSnapshot();
+  }, {
+    'returns preview of draft template': { id: 'ape' },
+    'returns undefined when unknown': { id: 'unknown' }
+  });
+
+  cases('.selectPublishedTemplatePreview', ({ id }) => {
+    expect(selector.selectPublishedTemplatePreview(store, id)).toMatchSnapshot();
+  }, {
+    'returns preview of draft template': { id: 'ape' },
+    'returns undefined when unknown': { id: 'unknown' }
   });
 
   describe('cloneTemplate', () => {
