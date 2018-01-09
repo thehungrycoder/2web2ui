@@ -23,8 +23,8 @@ beforeEach(() => {
   };
 
   results = [
-    { recipient: 'rec1@dom.com', type: 'Transactional', source: 'Manually added' },
-    { recipient: 'rec2@dom.com', type: 'Non-transactional', source: 'Manually added', subaccount_id: 101 }
+    { recipient: 'rec1@dom.com', type: 'transactional', source: 'Manually added' },
+    { recipient: 'rec2@dom.com', type: 'non_transactional', source: 'Manually added', subaccount_id: 101 }
   ];
 
   wrapper = shallow(<Results {...props} />);
@@ -34,6 +34,11 @@ beforeEach(() => {
 describe('Results', () => {
   it('renders correctly on initial loading', () => {
     wrapper.setProps({ results: null });
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders correctly when list is loading', () => {
+    wrapper.setProps({ loading: true });
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -49,6 +54,12 @@ describe('Results', () => {
 
   it('renders correctly (with suppressions, with subaccount)', () => {
     wrapper.setProps({ results, hasSubaccounts: true });
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders detail modal correctly', () => {
+    wrapper.setProps({ results, hasSubaccounts: true });
+    wrapper.setState({ detail: { open: false, data: null }});
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -109,6 +120,19 @@ describe('Results', () => {
       del = wrapper.state().del;
       expect(del.open).toBe(false);
       expect(del.data).toEqual(undefined);
+    });
+  });
+
+  describe('getRowData', () => {
+    it('renders row correctly', () => {
+      const row = instance.getRowData(results[0]);
+      expect(row).toMatchSnapshot();
+    });
+
+    it('renders row correctly with subaccounts', () => {
+      wrapper.setProps({ hasSubaccounts: true });
+      const row = instance.getRowData(results[1]);
+      expect(row).toMatchSnapshot();
     });
   });
 

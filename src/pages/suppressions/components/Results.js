@@ -14,11 +14,11 @@ import { ConfirmationModal } from 'src/components/modals';
 
 export class Results extends Component {
   state = {
-    detail: {
+    detail: { // detail modal
       open: false,
       data: {}
     },
-    del: {
+    del: { // delete modal
       open: false,
       data: {}
     }
@@ -125,7 +125,7 @@ export class Results extends Component {
 
   renderDeleteModal = () => {
     const { del } = this.state;
-    const { open, data = {}} = del;
+    const { open, data } = del;
     const { deleting } = this.props;
 
     return (<ConfirmationModal

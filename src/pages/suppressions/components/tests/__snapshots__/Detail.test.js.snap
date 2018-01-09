@@ -1,0 +1,109 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Detail renders correctly (hides) on initial loading 1`] = `
+<Modal
+  open={false}
+>
+  <Panel
+    accent={true}
+    sectioned={true}
+    title="Suppression Details"
+  >
+    <LabelledValue
+      key="recipient"
+      label="recipient"
+      value="foo@bar.com"
+    />
+    <LabelledValue
+      key="description"
+      label="description"
+      value={
+        <LongTextContainer
+          text=""
+        />
+      }
+    />
+    <LabelledValue
+      key="raw json"
+      label="raw json"
+      value={
+        <CopyField
+          hideCopy={false}
+          value="{\\"recipient\\":\\"foo@bar.com\\",\\"description\\":\\"\\"}"
+        />
+      }
+    />
+    <Button
+      onClick={[Function]}
+      size="default"
+    >
+      Close
+    </Button>
+  </Panel>
+</Modal>
+`;
+
+exports[`Detail renders correctly (shows loading) when deleting 1`] = `
+<Modal
+  open={false}
+>
+  <Panel
+    accent={true}
+    sectioned={true}
+    title="Suppression Details"
+  >
+    <div>
+      <Loading />
+    </div>
+    <Button
+      onClick={[Function]}
+      size="default"
+    >
+      Close
+    </Button>
+  </Panel>
+</Modal>
+`;
+
+exports[`Detail renders correctly (shows) when open is true  1`] = `
+<Modal
+  open={true}
+>
+  <Panel
+    accent={true}
+    sectioned={true}
+    title="Suppression Details"
+  >
+    <LabelledValue
+      key="recipient"
+      label="recipient"
+      value="foo@bar.com"
+    />
+    <LabelledValue
+      key="description"
+      label="description"
+      value={
+        <LongTextContainer
+          text=""
+        />
+      }
+    />
+    <LabelledValue
+      key="raw json"
+      label="raw json"
+      value={
+        <CopyField
+          hideCopy={false}
+          value="{\\"recipient\\":\\"foo@bar.com\\",\\"description\\":\\"\\"}"
+        />
+      }
+    />
+    <Button
+      onClick={[Function]}
+      size="default"
+    >
+      Close
+    </Button>
+  </Panel>
+</Modal>
+`;

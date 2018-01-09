@@ -39,5 +39,4 @@ export class Detail extends Component {
   }
 }
 
-const mapStateToProps = (state, props) => ({ suppression: props.suppression });
-export default connect(mapStateToProps, {})(Detail);
+export default connect(null, {})(Detail);
