@@ -16,7 +16,7 @@ import { Table, MetricsModal, ChartGroup, ChartHeader } from './components';
 
 import styles from './SummaryPage.module.scss';
 
-class SummaryReportPage extends Component {
+export class SummaryReportPage extends Component {
   state = {
     shareModal: false,
     metricsModal: false,
