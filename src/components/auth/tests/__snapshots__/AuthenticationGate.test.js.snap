@@ -1,3 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Component: Authentication Gate renders correctly 1`] = `""`;
+exports[`Component: AuthenticationGate renders correctly 1`] = `""`;
