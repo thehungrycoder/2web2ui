@@ -14,11 +14,11 @@ export class Results extends Component {
   state = {
     detail: { // detail modal
       open: false,
-      data: {}
+      data: null
     },
     del: { // delete confirmation modal
       open: false,
-      data: {}
+      data: null
     }
   }
 
@@ -97,7 +97,7 @@ export class Results extends Component {
     return columns;
   }
 
-  renderModalView = () => {
+  renderDetailModal = () => {
     const { open, data } = this.state.detail;
 
     if (!data) {
@@ -123,6 +123,9 @@ export class Results extends Component {
   renderDeleteModal = () => {
     const { open, data } = this.state.del;
     const { deleting } = this.props;
+    if (!data) {
+      return null;
+    }
 
     return (<ConfirmationModal
       open={open}
@@ -140,7 +143,7 @@ export class Results extends Component {
     return (
       <div>
         { this.renderDeleteModal() }
-        { this.renderModalView() }
+        { this.renderDetailModal() }
 
         <TableCollection
           columns={this.getColumns()}

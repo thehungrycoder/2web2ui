@@ -14,11 +14,11 @@ beforeEach(() => {
     showAlert: jest.fn(() => Promise.resolve()),
     detail: {
       open: false,
-      data: {}
+      data: null
     },
     del: {
       open: false,
-      data: {}
+      data: null
     }
   };
 
@@ -59,7 +59,13 @@ describe('Results', () => {
 
   it('renders detail modal correctly', () => {
     wrapper.setProps({ results, hasSubaccounts: true });
-    wrapper.setState({ detail: { open: false, data: null }});
+    wrapper.setState({ detail: { open: false, data: {}}});
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders delete confirmatio modal correctly', () => {
+    wrapper.setProps({ results });
+    wrapper.setState({ del: { open: false, data: {}}});
     expect(wrapper).toMatchSnapshot();
   });
 
