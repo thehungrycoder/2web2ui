@@ -17,3 +17,17 @@ export function listRecipientLists({ force } = {}) {
     );
   };
 }
+
+export function createRecipientList(data) {
+  return (dispatch) => dispatch(
+    sparkpostApiRequest({
+      type: 'CREATE_RECIPIENT_LIST',
+      meta: {
+        method: 'POST',
+        url: '/recipient-lists',
+        data
+      }
+    })
+  );
+}
+
