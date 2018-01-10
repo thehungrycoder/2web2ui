@@ -212,7 +212,7 @@ const routes = [
   },
   {
     path: '/lists/recipient-lists/create',
-    component: ComingSoonPage,
+    component: recipientLists.CreatePage,
     condition: hasGrants('recipient_lists/manage'),
     layout: App
   },
