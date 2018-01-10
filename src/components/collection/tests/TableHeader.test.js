@@ -5,24 +5,26 @@ import TableHeader from '../TableHeader';
 
 let props;
 let wrapper;
+let complexColumns;
+let simpleColumns;
 
 describe('Component: TableHeader', () => {
-  const simpleColumns = ['one', 'two'];
-  const complexColumns = [
-    'Simple Column',
-    { label: 'Recipient', sortKey: 'recipient' },
-    { label: 'Type', sortKey: 'type', width: '18%' },
-    { label: 'Source', width: '20%' }
-  ];
-
-  props = {
-    columns: simpleColumns,
-    sortColumn: 'recipient',
-    sortDirection: 'asc',
-    onSort: jest.fn()
-  };
-
   beforeEach(() => {
+    simpleColumns = ['one', 'two'];
+    complexColumns = [
+      'Simple Column',
+      { label: 'Recipient', sortKey: 'recipient' },
+      { label: 'Type', sortKey: 'type', width: '18%' },
+      { label: 'Source', width: '20%' }
+    ];
+
+    props = {
+      columns: simpleColumns,
+      sortColumn: 'recipient',
+      sortDirection: 'asc',
+      onSort: jest.fn()
+    };
+
     wrapper = shallow(<TableHeader {...props} />);
   });
 
