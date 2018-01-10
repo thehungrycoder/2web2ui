@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders engagement report page 1`] = `
+<Page
+  empty={Object {}}
+  title="Engagement Report"
+/>
+`;
