@@ -19,7 +19,9 @@ export class Results extends Component {
     del: { // delete confirmation modal
       open: false,
       data: null
-    }
+    },
+    sortColumn: 'recipient',
+    sortDirection: 'asc'
   }
 
   renderPlaceholder() {
@@ -83,13 +85,13 @@ export class Results extends Component {
     const { hasSubaccounts } = this.props;
 
     const columns = [
-      { label: 'Recipient' },
-      { label: 'Type', width: '18%' },
+      { label: 'Recipient', sortKey: 'recipient' },
+      { label: 'Type', sortKey: 'type', width: '18%' },
       { label: 'Source', width: '20%' }
     ];
 
     if (hasSubaccounts) {
-      columns.push({ label: 'Subaccount', width: '18%' });
+      columns.push({ label: 'Subaccount', width: '18%', sortKey: 'subaccount_id' });
     }
 
     columns.push({ label: '', width: '21%' });
@@ -137,6 +139,7 @@ export class Results extends Component {
       onCancel={this.toggleDeleteModal}
     />);
   }
+
 
   renderResults = () => {
     const { results } = this.props;
