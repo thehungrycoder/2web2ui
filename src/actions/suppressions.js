@@ -103,16 +103,15 @@ export function searchSuppressions(options) {
 export function deleteSuppression(suppression) {
   const { recipient, subaccount_id: subaccountId } = suppression;
 
-  return (dispatch, getState) => dispatch(
-    sparkpostApiRequest({
-      type: 'DELETE_SUPPRESSION',
-      meta: {
-        method: 'DELETE',
-        url: `/suppression-list/${recipient}`,
-        headers: setSubaccountHeader(subaccountId),
-        // data: { type }, /* TODO Check if we need to set type as old UI doesn't do it. Also figure out why it's not working if just comment out this line */
-        suppression
-      }
-    }));
+  return sparkpostApiRequest({
+    type: 'DELETE_SUPPRESSION',
+    meta: {
+      method: 'DELETE',
+      url: `/suppression-list/${recipient}`,
+      headers: setSubaccountHeader(subaccountId),
+      // data: { type }, /* TODO Check if we need to set type as old UI doesn't do it. Also figure out why it's not working if just comment out this line */
+      suppression
+    }
+  });
 }
 
