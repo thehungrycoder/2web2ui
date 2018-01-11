@@ -5,7 +5,6 @@ import TableHeader from './TableHeader';
 
 const TableWrapper = (props) => <Panel><Table>{props.children}</Table></Panel>;
 
-
 const TableBody = (props) => <tbody>{props.children}</tbody>;
 
 const TableCollection = (props) => {

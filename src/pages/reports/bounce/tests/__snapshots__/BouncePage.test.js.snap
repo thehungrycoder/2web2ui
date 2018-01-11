@@ -60,7 +60,7 @@ exports[`BouncePage:  should display loading panel on top level metrics when agg
           },
         ]
       }
-      sortColumn="count"
+      sortColumn="count_bounce"
       sortDirection="desc"
     />
   </Panel>
@@ -142,7 +142,7 @@ exports[`BouncePage:  should render 1`] = `
           },
         ]
       }
-      sortColumn="count"
+      sortColumn="count_bounce"
       sortDirection="desc"
     />
   </Panel>

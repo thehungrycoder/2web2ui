@@ -32,7 +32,7 @@ export class BouncePage extends Component {
   state = {
     modal: false,
     query: {},
-    sortColumn: 'count',
+    sortColumn: 'count_bounce',
     sortDirection: 'desc'
   }
 
