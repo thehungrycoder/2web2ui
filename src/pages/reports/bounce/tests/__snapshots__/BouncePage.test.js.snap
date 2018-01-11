@@ -23,15 +23,29 @@ exports[`BouncePage:  should display loading panel on top level metrics when agg
         Array [
           Object {
             "label": "Reason",
+            "sortKey": "reason",
             "width": "45%",
           },
-          "Domain",
-          "Category",
-          "Classification",
-          "Count (%)",
+          Object {
+            "label": "Domain",
+            "sortKey": "domain",
+          },
+          Object {
+            "label": "Category",
+            "sortKey": "bounce_category_name",
+          },
+          Object {
+            "label": "Classification",
+            "sortKey": "classification_id",
+          },
+          Object {
+            "label": "Count (%)",
+            "sortKey": "count_bounce",
+          },
         ]
       }
       getRowData={[Function]}
+      onSort={[Function]}
       pagination={true}
       rows={
         Array [
@@ -46,6 +60,8 @@ exports[`BouncePage:  should display loading panel on top level metrics when agg
           },
         ]
       }
+      sortColumn="count"
+      sortDirection="desc"
     />
   </Panel>
   <ShareModal
@@ -89,15 +105,29 @@ exports[`BouncePage:  should render 1`] = `
         Array [
           Object {
             "label": "Reason",
+            "sortKey": "reason",
             "width": "45%",
           },
-          "Domain",
-          "Category",
-          "Classification",
-          "Count (%)",
+          Object {
+            "label": "Domain",
+            "sortKey": "domain",
+          },
+          Object {
+            "label": "Category",
+            "sortKey": "bounce_category_name",
+          },
+          Object {
+            "label": "Classification",
+            "sortKey": "classification_id",
+          },
+          Object {
+            "label": "Count (%)",
+            "sortKey": "count_bounce",
+          },
         ]
       }
       getRowData={[Function]}
+      onSort={[Function]}
       pagination={true}
       rows={
         Array [
@@ -112,6 +142,8 @@ exports[`BouncePage:  should render 1`] = `
           },
         ]
       }
+      sortColumn="count"
+      sortDirection="desc"
     />
   </Panel>
   <ShareModal
