@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import qs from 'query-string';
+import _ from 'lodash';
+
 import { refreshBounceChartMetrics, refreshBounceTableMetrics } from 'src/actions/bounceReport';
 import { addFilter, refreshTypeaheadCache } from 'src/actions/reportFilters';
 import { getFilterSearchOptions, parseSearch } from 'src/helpers/reports';
@@ -15,14 +17,23 @@ import ShareModal from '../components/ShareModal';
 import Filters from '../components/Filters';
 import ChartGroup from './components/ChartGroup';
 import MetricsSummary from '../components/MetricsSummary';
-import _ from 'lodash';
 
-const columns = [{ label: 'Reason', width: '45%' }, 'Domain', 'Category', 'Classification', 'Count (%)'];
+import { getSortedCollection, handleSortChange } from 'src/helpers/sort';
+
+const columns = [
+  { label: 'Reason', width: '45%', sortKey: 'reason' },
+  { label: 'Domain', sortKey: 'domain' },
+  { label: 'Category', sortKey: 'bounce_category_name' },
+  { label: 'Classification', sortKey: 'classification_id' },
+  { label: 'Count (%)', sortKey: 'count_bounce' }
+];
 
 export class BouncePage extends Component {
   state = {
     modal: false,
-    query: {}
+    query: {},
+    sortColumn: 'count',
+    sortDirection: 'desc'
   }
 
   componentDidMount() {
@@ -93,6 +104,7 @@ export class BouncePage extends Component {
 
   renderCollection() {
     const { tableLoading, reasons } = this.props;
+    const { sortColumn, sortDirection } = this.state;
 
     if (tableLoading) {
       return <PanelLoading />;
@@ -104,9 +116,12 @@ export class BouncePage extends Component {
 
     return <TableCollection
       columns={columns}
-      rows={reasons}
+      rows={getSortedCollection(reasons, sortColumn, sortDirection)}
       getRowData={this.getRowData}
       pagination={true}
+      sortColumn={sortColumn}
+      sortDirection={sortDirection}
+      onSort={handleSortChange.bind(this)}
     />;
   }
 
@@ -179,4 +194,5 @@ const mapDispatchToProps = {
   refreshTypeaheadCache,
   showAlert
 };
+
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(BouncePage));

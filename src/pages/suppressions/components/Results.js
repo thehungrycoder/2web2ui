@@ -4,11 +4,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { Button } from '@sparkpost/matchbox';
+import { getSortedCollection, handleSortChange } from 'src/helpers/sort';
 import { PanelLoading, TableCollection, Empty, DeleteModal } from 'src/components';
 import { deleteSuppression } from 'src/actions/suppressions';
 import { formatSubaccountDisplay } from '../helpers';
-import Detail from './Detail';
 import { showAlert } from 'src/actions/globalAlert';
+import Detail from './Detail';
+
 
 export class Results extends Component {
   state = {
@@ -143,6 +145,8 @@ export class Results extends Component {
 
   renderResults = () => {
     const { results } = this.props;
+    const { sortColumn, sortDirection } = this.state;
+
     return (
       <div>
         { this.renderDeleteModal() }
@@ -150,8 +154,11 @@ export class Results extends Component {
 
         <TableCollection
           columns={this.getColumns()}
-          rows={results}
+          rows={getSortedCollection(results, sortColumn, sortDirection)}
           getRowData={this.getRowData}
+          sortColumn={sortColumn}
+          sortDirection={sortDirection}
+          onSort={handleSortChange.bind(this)}
           pagination
         />
       </div>
