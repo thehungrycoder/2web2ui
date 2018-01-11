@@ -218,7 +218,7 @@ const routes = [
   },
   {
     path: '/lists/recipient-lists/edit/:id',
-    component: ComingSoonPage,
+    component: recipientLists.EditPage,
     condition: hasGrants('recipient_lists/manage'),
     layout: App
   },

@@ -12,7 +12,7 @@ import RecipientListForm from './components/RecipientListForm';
 
 export class CreatePage extends Component {
 
-  onCreate = (values) => {
+  createRecipientList = (values) => {
     const { createRecipientList, showAlert, history } = this.props;
 
     return createRecipientList(values).then(() => {
@@ -34,7 +34,7 @@ export class CreatePage extends Component {
         Component: Link,
         to: '/lists/recipient-lists' }}>
 
-      <RecipientListForm onSubmit={this.onCreate} />
+      <RecipientListForm onSubmit={this.createRecipientList} />
 
     </Page>;
   }
