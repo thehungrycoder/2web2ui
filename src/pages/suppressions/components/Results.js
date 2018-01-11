@@ -7,7 +7,7 @@ import { Button } from '@sparkpost/matchbox';
 import { PanelLoading, TableCollection, Empty, ConfirmationModal } from 'src/components';
 import { deleteSuppression } from 'src/actions/suppressions';
 import { formatSubaccountDisplay } from '../helpers';
-import { Detail } from './Detail';
+import Detail from './Detail';
 import { showAlert } from 'src/actions/globalAlert';
 
 export class Results extends Component {

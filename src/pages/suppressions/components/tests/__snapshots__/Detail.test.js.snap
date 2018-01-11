@@ -33,12 +33,14 @@ exports[`Detail renders correctly (hides) on initial loading 1`] = `
         />
       }
     />
-    <Button
-      onClick={[Function]}
-      size="default"
-    >
-      Close
-    </Button>
+    <div>
+      <Button
+        onClick={[Function]}
+        size="default"
+      >
+        Close
+      </Button>
+    </div>
   </Panel>
 </Modal>
 `;
@@ -76,12 +78,14 @@ exports[`Detail renders correctly (shows loading) when deleting 1`] = `
         />
       }
     />
-    <Button
-      onClick={[Function]}
-      size="default"
-    >
-      Close
-    </Button>
+    <div>
+      <Button
+        onClick={[Function]}
+        size="default"
+      >
+        Close
+      </Button>
+    </div>
   </Panel>
 </Modal>
 `;
@@ -119,12 +123,14 @@ exports[`Detail renders correctly (shows) when open is true  1`] = `
         />
       }
     />
-    <Button
-      onClick={[Function]}
-      size="default"
-    >
-      Close
-    </Button>
+    <div>
+      <Button
+        onClick={[Function]}
+        size="default"
+      >
+        Close
+      </Button>
+    </div>
   </Panel>
 </Modal>
 `;

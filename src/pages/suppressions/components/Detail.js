@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
-import { connect } from 'react-redux';
 
 import { Panel, Button } from '@sparkpost/matchbox';
 import { BaseModal, LabelledValue, CopyField, LongTextContainer } from 'src/components';
 import styles from './Detail.module.scss';
 
-export class Detail extends Component {
+export default class Detail extends Component {
   renderContents = () => {
     const { suppression } = this.props;
 
@@ -31,11 +30,11 @@ export class Detail extends Component {
       <BaseModal open={open}>
         <Panel title={'Suppression Details'} accent sectioned>
           {this.renderContents()}
-          <Button onClick={() => { onCancel(); }} className={styles.Cancel}>Close</Button>
+          <div className={styles.Buttons}>
+            <Button onClick={() => { onCancel(); }} >Close</Button>
+          </div>
         </Panel>
       </BaseModal>
     );
   }
 }
-
-export default connect()(Detail);

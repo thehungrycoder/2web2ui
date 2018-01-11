@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import { Detail } from '../Detail';
+import Detail from '../Detail';
 
 let props;
 let wrapper;

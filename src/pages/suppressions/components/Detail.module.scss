@@ -1,8 +1,5 @@
-.Cancel {
-  float: right;
-}
-
-.Loading {
-  min-height: 100px;
-  position: relative;
+.Buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
 }
