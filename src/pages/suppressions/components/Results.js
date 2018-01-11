@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { Button } from '@sparkpost/matchbox';
-import { PanelLoading, TableCollection, Empty, ConfirmationModal } from 'src/components';
+import { PanelLoading, TableCollection, Empty, DeleteModal } from 'src/components';
 import { deleteSuppression } from 'src/actions/suppressions';
 import { formatSubaccountDisplay } from '../helpers';
 import Detail from './Detail';
@@ -127,14 +127,13 @@ export class Results extends Component {
       return null;
     }
 
-    return (<ConfirmationModal
+    return (<DeleteModal
       open={open}
-      title={'Confirm delete!'}
-      content={<p>Are you sure to delete {data.recipient} from suppression list?</p>}
+      title={`Are you sure you want to delete ${data.recipient} from suppression list?`}
+      content={<p>This can not be undone!</p>}
       isPending={deleting}
       onConfirm={this.deleteSuppression}
       onCancel={this.toggleDeleteModal}
-      confirmVerb={'Confirm'}
     />);
   }
 

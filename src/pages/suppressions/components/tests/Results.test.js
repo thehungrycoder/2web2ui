@@ -63,7 +63,7 @@ describe('Results', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('renders delete confirmatio modal correctly', () => {
+  it('renders delete confirmation modal correctly', () => {
     wrapper.setProps({ results });
     wrapper.setState({ del: { open: false, data: {}}});
     expect(wrapper).toMatchSnapshot();
