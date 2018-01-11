@@ -1,0 +1,6 @@
+.EngagementChart {
+  // Hide the top grid line
+  :global .recharts-wrapper .recharts-cartesian-grid-horizontal line:last-child {
+    stroke-opacity: 0;
+  }
+}

@@ -4,5 +4,32 @@ exports[`renders engagement report page 1`] = `
 <Page
   empty={Object {}}
   title="Engagement Report"
-/>
+>
+  <Panel
+    sectioned={true}
+  >
+    <LoadableComponent
+      data={
+        Array [
+          Object {
+            "name": "Targeted",
+            "value": 1000,
+          },
+          Object {
+            "name": "Accepted",
+            "value": 500,
+          },
+          Object {
+            "name": "Unique Confirmed Opens",
+            "value": 100,
+          },
+          Object {
+            "name": "Unique Clicks",
+            "value": 1,
+          },
+        ]
+      }
+    />
+  </Panel>
+</Page>
 `;
