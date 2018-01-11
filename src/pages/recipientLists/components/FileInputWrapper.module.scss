@@ -1,3 +1,20 @@
-.FileInputWrapper {
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.Dropzone {
   border: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.Label {
+  font-weight: 400;
+  font-size: rem(13);
+  line-height: rem(15);
+  color: color(gray, 2);
+}
+
+.Tag {
+  margin-bottom: spacing();
 }

@@ -29,26 +29,31 @@ export default class FileInputWrapper extends Component {
       input: { value: file },
       meta: { touched, error }
     } = this.props;
-    if (file && !(touched && error)) {
-      return <Tag>{file.name}</Tag>;
+    if (!(touched && error)) {
+      return <Tag className={styles.Tag}>{file ? file.name : 'No file selected'}</Tag>;
     }
     return null;
   }
 
   render() {
-    return <Dropzone
-      ref={(ref) => this.dropzoneRef = ref}
-      name={this.props.name}
-      multiple={false}
-      accept='.csv'
-      disablePreview
-      disableClick
-      className={styles.FileInputWrapper}
-      onDrop={this.handleDrop}>
-      { this.renderError() }
-      { this.renderFilename() }
-      <Button onClick={() => this.dropzoneRef.open()}>Choose a CSV file</Button>
-    </Dropzone>;
+    const { id, label, name } = this.props;
+
+    return <div>
+      <label id={id} htmlFor={id} className={styles.Label}>{label}</label>
+      <Dropzone
+        ref={(ref) => this.dropzoneRef = ref}
+        name={name}
+        multiple={false}
+        accept='.csv'
+        disablePreview
+        disableClick
+        className={styles.Dropzone}
+        onDrop={this.handleDrop}>
+        { this.renderFilename() }
+        { this.renderError() }
+        <Button onClick={() => this.dropzoneRef.open()}>Choose a CSV file</Button>
+      </Dropzone>
+    </div>;
   }
 }
 
