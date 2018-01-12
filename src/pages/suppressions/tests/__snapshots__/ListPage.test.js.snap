@@ -77,3 +77,41 @@ exports[`ListPage renders correctly with subaccounts 1`] = `
   />
 </Page>
 `;
+
+exports[`ListPage renders filter by email tab correctly when selected 1`] = `
+<Page
+  empty={Object {}}
+  primaryAction={
+    Object {
+      "Component": [Function],
+      "content": "Add Suppressions",
+    }
+  }
+  title="Suppressions"
+>
+  <Tabs
+    connectBelow={true}
+    selected={1}
+    tabs={
+      Array [
+        Object {
+          "content": "Filters",
+          "onClick": [Function],
+        },
+        Object {
+          "content": "Find by Email",
+          "onClick": [Function],
+        },
+      ]
+    }
+  />
+  <Panel>
+    <Panel.Section>
+      <Connect(ReduxForm)
+        onSubmit={[Function]}
+      />
+    </Panel.Section>
+  </Panel>
+  <Connect(Results) />
+</Page>
+`;

@@ -51,11 +51,11 @@ export class ListPage extends Component {
   }
 
   componentDidMount() {
-    const { reportFilters } = this.props;
-    if (this.props.hasSubaccounts) {
-      this.props.listSubaccounts();
+    const { reportFilters, hasSubaccounts, searchSuppressions, listSubaccounts } = this.props;
+    if (hasSubaccounts) {
+      listSubaccounts();
     }
-    this.props.searchSuppressions({ reportFilters });
+    searchSuppressions({ reportFilters });
   }
 
   render() {
