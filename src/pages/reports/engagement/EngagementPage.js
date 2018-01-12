@@ -3,29 +3,35 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import { Page, Panel } from '@sparkpost/matchbox';
+import { getChartData } from 'src/actions/engagementReport';
 import EngagementChart from './components/EngagementChart';
 
 export class EngagementPage extends Component {
+  componentDidMount() {
+    this.props.getChartData();
+  }
+
   render() {
-    // Sample data
-    const data = [
-      { name: 'Targeted', value: 1000 },
-      { name: 'Accepted', value: 500 },
-      { name: 'Unique Confirmed Opens', value: 100 },
-      { name: 'Unique Clicks', value: 1 }
-    ];
+    const { data } = this.props.chart;
 
     return (
       <Page title='Engagement Report'>
         <Panel sectioned>
-          <EngagementChart data={data} />
+          <EngagementChart
+            accepted={data.count_accepted}
+            clicks={data.count_unique_clicked_approx}
+            opens={data.count_unique_confirmed_opened_approx}
+            targeted={data.count_targeted}
+          />
         </Panel>
       </Page>
     );
   }
 }
 
-const mapStateToProps = (state, props) => ({});
-const mapDispatchToProps = {};
+const mapStateToProps = (state, props) => ({
+  chart: state.engagementReport.chart
+});
+const mapDispatchToProps = { getChartData };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(EngagementPage));

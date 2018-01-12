@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`get chart data 1`] = `
+Object {
+  "params": Object {
+    "delimiter": ",",
+    "from": "2018-01-10T15:00",
+    "metrics": "count_accepted,count_targeted,count_unique_clicked_approx,count_unique_confirmed_opened_approx",
+    "to": "2018-01-11T15:40",
+  },
+  "path": "deliverability",
+  "type": "GET_ENGAGEMENT_CHART_DATA",
+}
+`;

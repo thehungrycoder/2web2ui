@@ -1,114 +1,287 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders engagement chart 1`] = `
-<ResponsiveContainer
-  debounce={0}
-  height={350}
-  width="100%"
->
-  <BarChart
-    barCategoryGap="35%"
-    barGap={4}
-    data={Array []}
-    layout="horizontal"
-    margin={
-      Object {
-        "bottom": 5,
-        "left": 5,
-        "right": 5,
-        "top": 25,
-      }
-    }
-    reverseStackOrder={false}
-    stackOffset="none"
+exports[`renders engagement chart with defaults 1`] = `
+<div>
+  <div>
+    <span>
+      0%
+    </span>
+    <label>
+      Completion Rate
+    </label>
+  </div>
+  <ResponsiveContainer
+    debounce={0}
+    height={350}
+    width="99%"
   >
-    <CartesianGrid
-      fill="none"
-      horizontal={true}
-      horizontalPoints={Array []}
-      stroke="#ccc"
-      strokeDasharray="4 1"
-      vertical={false}
-      verticalPoints={Array []}
-    />
-    <XAxis
-      allowDataOverflow={false}
-      allowDecimals={true}
-      dataKey="name"
-      domain={
+    <BarChart
+      barCategoryGap="35%"
+      barGap={4}
+      data={
         Array [
-          0,
-          "auto",
+          Object {
+            "label": "Targeted",
+            "value": 0,
+          },
+          Object {
+            "label": "Accepted",
+            "value": 0,
+          },
+          Object {
+            "label": "Unique Confirmed Opens",
+            "value": 0,
+          },
+          Object {
+            "label": "Unique Clicks",
+            "value": 0,
+          },
         ]
       }
-      height={30}
-      hide={false}
-      mirror={false}
-      orientation="bottom"
-      padding={
+      layout="horizontal"
+      margin={
         Object {
-          "left": 0,
-          "right": 0,
+          "bottom": 5,
+          "left": 5,
+          "right": 5,
+          "top": 25,
         }
       }
-      reversed={false}
-      scale="auto"
-      tickCount={5}
-      tickLine={false}
-      type="category"
-      width={0}
-      xAxisId={0}
-    />
-    <YAxis
-      allowDataOverflow={false}
-      allowDecimals={true}
-      domain={
-        Array [
-          0,
-          "auto",
-        ]
-      }
-      height={0}
-      hide={false}
-      mirror={false}
-      orientation="left"
-      padding={
-        Object {
-          "top": 60,
-        }
-      }
-      reversed={false}
-      scale="auto"
-      tickCount={5}
-      tickLine={false}
-      type="number"
-      width={60}
-      yAxisId={0}
-    />
-    <Bar
-      animationBegin={0}
-      animationDuration={400}
-      animationEasing="ease"
-      data={Array []}
-      dataKey="value"
-      fill="#37aadc"
-      hide={false}
-      isAnimationAction={false}
-      isAnimationActive={true}
-      layout="vertical"
-      legendType="rect"
-      minPointSize={0}
-      onAnimationEnd={[Function]}
-      onAnimationStart={[Function]}
-      xAxisId={0}
-      yAxisId={0}
+      reverseStackOrder={false}
+      stackOffset="none"
     >
-      <LabelList
-        fill="#55555a"
-        position="top"
-        valueAccessor={[Function]}
+      <CartesianGrid
+        fill="none"
+        horizontal={true}
+        horizontalPoints={Array []}
+        stroke="#ccc"
+        strokeDasharray="4 1"
+        vertical={false}
+        verticalPoints={Array []}
       />
-    </Bar>
-  </BarChart>
-</ResponsiveContainer>
+      <XAxis
+        allowDataOverflow={false}
+        allowDecimals={true}
+        dataKey="label"
+        domain={
+          Array [
+            0,
+            "auto",
+          ]
+        }
+        height={30}
+        hide={false}
+        mirror={false}
+        orientation="bottom"
+        padding={
+          Object {
+            "left": 0,
+            "right": 0,
+          }
+        }
+        reversed={false}
+        scale="auto"
+        tickCount={5}
+        tickLine={false}
+        type="category"
+        width={0}
+        xAxisId={0}
+      />
+      <YAxis
+        allowDataOverflow={false}
+        allowDecimals={true}
+        domain={
+          Array [
+            0,
+            "auto",
+          ]
+        }
+        height={0}
+        hide={false}
+        mirror={false}
+        orientation="left"
+        padding={
+          Object {
+            "top": 60,
+          }
+        }
+        reversed={false}
+        scale="auto"
+        tickCount={5}
+        tickFormatter={[Function]}
+        tickLine={false}
+        type="number"
+        width={60}
+        yAxisId={0}
+      />
+      <Bar
+        animationBegin={0}
+        animationDuration={400}
+        animationEasing="ease"
+        data={Array []}
+        dataKey="value"
+        fill="#37aadc"
+        hide={false}
+        isAnimationActive={false}
+        layout="vertical"
+        legendType="rect"
+        minPointSize={0}
+        onAnimationEnd={[Function]}
+        onAnimationStart={[Function]}
+        xAxisId={0}
+        yAxisId={0}
+      >
+        <LabelList
+          fill="#55555a"
+          formatter={[Function]}
+          position="top"
+          valueAccessor={[Function]}
+        />
+      </Bar>
+    </BarChart>
+  </ResponsiveContainer>
+</div>
+`;
+
+exports[`renders engagement chart with metrics 1`] = `
+<div>
+  <div>
+    <span>
+      5.05%
+    </span>
+    <label>
+      Completion Rate
+    </label>
+  </div>
+  <ResponsiveContainer
+    debounce={0}
+    height={350}
+    width="99%"
+  >
+    <BarChart
+      barCategoryGap="35%"
+      barGap={4}
+      data={
+        Array [
+          Object {
+            "label": "Targeted",
+            "value": 50000,
+          },
+          Object {
+            "label": "Accepted",
+            "value": 40000,
+          },
+          Object {
+            "label": "Unique Confirmed Opens",
+            "value": 5000,
+          },
+          Object {
+            "label": "Unique Clicks",
+            "value": 2525,
+          },
+        ]
+      }
+      layout="horizontal"
+      margin={
+        Object {
+          "bottom": 5,
+          "left": 5,
+          "right": 5,
+          "top": 25,
+        }
+      }
+      reverseStackOrder={false}
+      stackOffset="none"
+    >
+      <CartesianGrid
+        fill="none"
+        horizontal={true}
+        horizontalPoints={Array []}
+        stroke="#ccc"
+        strokeDasharray="4 1"
+        vertical={false}
+        verticalPoints={Array []}
+      />
+      <XAxis
+        allowDataOverflow={false}
+        allowDecimals={true}
+        dataKey="label"
+        domain={
+          Array [
+            0,
+            "auto",
+          ]
+        }
+        height={30}
+        hide={false}
+        mirror={false}
+        orientation="bottom"
+        padding={
+          Object {
+            "left": 0,
+            "right": 0,
+          }
+        }
+        reversed={false}
+        scale="auto"
+        tickCount={5}
+        tickLine={false}
+        type="category"
+        width={0}
+        xAxisId={0}
+      />
+      <YAxis
+        allowDataOverflow={false}
+        allowDecimals={true}
+        domain={
+          Array [
+            0,
+            "auto",
+          ]
+        }
+        height={0}
+        hide={false}
+        mirror={false}
+        orientation="left"
+        padding={
+          Object {
+            "top": 60,
+          }
+        }
+        reversed={false}
+        scale="auto"
+        tickCount={5}
+        tickFormatter={[Function]}
+        tickLine={false}
+        type="number"
+        width={60}
+        yAxisId={0}
+      />
+      <Bar
+        animationBegin={0}
+        animationDuration={400}
+        animationEasing="ease"
+        data={Array []}
+        dataKey="value"
+        fill="#37aadc"
+        hide={false}
+        isAnimationActive={false}
+        layout="vertical"
+        legendType="rect"
+        minPointSize={0}
+        onAnimationEnd={[Function]}
+        onAnimationStart={[Function]}
+        xAxisId={0}
+        yAxisId={0}
+      >
+        <LabelList
+          fill="#55555a"
+          formatter={[Function]}
+          position="top"
+          valueAccessor={[Function]}
+        />
+      </Bar>
+    </BarChart>
+  </ResponsiveContainer>
+</div>
 `;

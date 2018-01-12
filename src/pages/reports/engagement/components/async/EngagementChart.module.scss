@@ -1,6 +1,44 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+$font-weight: 500;
+$label-color: color(gray, 5);
+$label-font-size: 13;
+
 .EngagementChart {
-  // Hide the top grid line
+  position: relative; // for the completion rate
+
+  // hide the top grid line
   :global .recharts-wrapper .recharts-cartesian-grid-horizontal line:last-child {
     stroke-opacity: 0;
+  }
+
+  // similar to match summary line  chart
+  :global .recharts-text.recharts-cartesian-axis-tick-value {
+    fill: $label-color;
+    font-size: rem($label-font-size);
+    font-weight: $font-weight;
+  }
+}
+
+.EngagementChartCompletionRate {
+  display: flex;
+  align-items: flex-start; // vertically aligns items to top
+  position: absolute; // to sit on the chart
+  right: 15px;
+  top: 15px;
+
+  label {  // similar to ticks
+    color: $label-color;
+    font-size: rem($label-font-size);
+    font-weight: $font-weight;
+    line-height: rem($label-font-size + 5);  // added space between lines
+    margin-left: spacing(small);
+    width: rem(75);;  // forces to wrap after first word
+  }
+
+  span {
+    font-size: rem($label-font-size * 3);
+    font-weight: $font-weight;
+    line-height: rem($label-font-size * 3);
   }
 }
