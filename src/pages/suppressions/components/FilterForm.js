@@ -73,7 +73,7 @@ export class FilterForm extends Component {
         to: options.to,
         relativeRange: relativeRange
       }
-    }, this.refresh);
+    });
   }
 
   handleTypesSelection = (selected) => {
