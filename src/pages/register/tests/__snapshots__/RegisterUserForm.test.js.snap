@@ -13,22 +13,16 @@ exports[`render 1`] = `
   />
   <Field
     autoComplete="new-password"
+    autoFocus={true}
     component={[Function]}
+    data-lpignore={true}
     disabled={false}
-    helpText="Your password must have at least 8 characters and include 1 letter, 1 number, and 1 non-alphanumeric character."
+    helpText="Passwords must be at least 8 characters long."
     label="Password"
     name="password"
     type="password"
     validate={
       Array [
-        [Function],
-        [Function],
-      ]
-    }
-    warn={
-      Array [
-        [Function],
-        [Function],
         [Function],
         [Function],
       ]
@@ -69,22 +63,16 @@ exports[`submitting 1`] = `
   />
   <Field
     autoComplete="new-password"
+    autoFocus={true}
     component={[Function]}
+    data-lpignore={true}
     disabled={true}
-    helpText="Your password must have at least 8 characters and include 1 letter, 1 number, and 1 non-alphanumeric character."
+    helpText="Passwords must be at least 8 characters long."
     label="Password"
     name="password"
     type="password"
     validate={
       Array [
-        [Function],
-        [Function],
-      ]
-    }
-    warn={
-      Array [
-        [Function],
-        [Function],
         [Function],
         [Function],
       ]
