@@ -37,7 +37,6 @@ export class AuthenticationGate extends Component {
 
   render() {
     return null;
-    // return <p className="text-muted" style={{ padding: '5px 0' }}>You are currently: <strong>{loggedIn ? 'logged in' : 'not logged in'}</strong></p>;
   }
 }
 

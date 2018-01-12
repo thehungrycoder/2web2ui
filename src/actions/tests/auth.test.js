@@ -138,12 +138,20 @@ describe('Action Creator: Auth', () => {
     });
   });
 
-  it('should dispatch a logout when invoking logout, duh', async() => {
+  it('should dispatch a logout when user is logged in', async() => {
+    stateMock.auth.loggedIn = true;
     const thunk = authActions.logout();
-    await thunk(dispatchMock);
+    await thunk(dispatchMock, getStateMock);
     expect(authCookie.remove).toHaveBeenCalledTimes(1);
     expect(dispatchMock.mock.calls).toMatchSnapshot();
+  });
 
+  it('should NOT dispatch a logout when user is already logged out', async() => {
+    stateMock.auth.loggedIn = false;
+    const thunk = authActions.logout();
+    await thunk(dispatchMock, getStateMock);
+    expect(authCookie.remove).not.toHaveBeenCalled();
+    expect(dispatchMock).not.toHaveBeenCalled();
   });
 
 });

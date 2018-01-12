@@ -11,16 +11,26 @@ import RegisterUserForm from './RegisterUserForm';
 import styles from './RegisterPage.module.scss';
 
 import { registerUser, checkInviteToken } from 'src/actions/users';
+import { authenticate, logout } from 'src/actions/auth';
 
 export class RegisterPage extends Component {
 
-  onSubmit = (values) => this.props.registerUser(this.props.token, values)
-    .then(() => <Redirect to='/dashboard' />)
-    .catch((error) => {
-      ErrorTracker.report('register-user', error);
-    });
+  onSubmit = (values) => {
+    const { username, password } = values;
+    return this.props.registerUser(this.props.token, values)
+      .then(() => this.props.authenticate(username, password)
+        .then(() => this.props.history.push('/dashboard'))
+        .catch((error) => {
+          // user was created but auth failed, redirect to /auth
+          this.props.history.push('/auth');
+          ErrorTracker.report('sign-in', error);
+        }))
+      .catch((error) => ErrorTracker.report('register-user', error));
+  }
+
 
   componentDidMount() {
+    this.props.logout();
     this.props.checkInviteToken(this.props.token);
   }
 
@@ -34,7 +44,7 @@ export class RegisterPage extends Component {
     if (invite.error) {
       return (
         <Panel.Section>
-          <p>This invite has expired, please ask your account administator to re-send your invitation</p>
+          <p>This invite has expired, please ask your account administrator to re-send your invitation</p>
         </Panel.Section>
       );
     }
@@ -48,14 +58,10 @@ export class RegisterPage extends Component {
   }
 
   render() {
-    const { token, loggedIn } = this.props;
+    const { token } = this.props;
 
     if (token === undefined) {
-      if (loggedIn) {
-        return <Redirect to='/dashboard' />;
-      } else {
-        return <Redirect to='/auth' />;
-      }
+      return <Redirect to='/auth' />;
     }
 
     return (
@@ -78,10 +84,9 @@ export class RegisterPage extends Component {
 function mapStateToProps({ auth, users }, props) {
   return {
     token: qs.parse(props.location.search).token,
-    loggedIn: auth.loggedIn,
     invite: users.invite,
-    loading: users.loading
+    loading: users.loading || auth.loginPending
   };
 }
 
-export default withRouter(connect(mapStateToProps, { registerUser, checkInviteToken })(RegisterPage));
+export default withRouter(connect(mapStateToProps, { registerUser, checkInviteToken, logout, authenticate })(RegisterPage));
