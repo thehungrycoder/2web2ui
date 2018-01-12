@@ -13,9 +13,11 @@ exports[`render 1`] = `
   />
   <Field
     autoComplete="new-password"
+    autoFocus={true}
     component={[Function]}
+    data-lpignore={true}
     disabled={false}
-    helpText="Your password must have at least 8 characters and include 1 letter, 1 number, and 1 non-alphanumeric character."
+    helpText="Passwords must be at least 8 characters long."
     label="Password"
     name="password"
     type="password"
@@ -25,18 +27,10 @@ exports[`render 1`] = `
         [Function],
       ]
     }
-    warn={
-      Array [
-        [Function],
-        [Function],
-        [Function],
-        [Function],
-      ]
-    }
   />
   <p>
     <small>
-      By joining, you agree to SparPost's 
+      By joining, you agree to SparkPost's 
       <UnstyledLink
         target="_blank"
         to="https://www.sparkpost.com/policies/tou/"
@@ -69,9 +63,11 @@ exports[`submitting 1`] = `
   />
   <Field
     autoComplete="new-password"
+    autoFocus={true}
     component={[Function]}
+    data-lpignore={true}
     disabled={true}
-    helpText="Your password must have at least 8 characters and include 1 letter, 1 number, and 1 non-alphanumeric character."
+    helpText="Passwords must be at least 8 characters long."
     label="Password"
     name="password"
     type="password"
@@ -81,18 +77,10 @@ exports[`submitting 1`] = `
         [Function],
       ]
     }
-    warn={
-      Array [
-        [Function],
-        [Function],
-        [Function],
-        [Function],
-      ]
-    }
   />
   <p>
     <small>
-      By joining, you agree to SparPost's 
+      By joining, you agree to SparkPost's 
       <UnstyledLink
         target="_blank"
         to="https://www.sparkpost.com/policies/tou/"
