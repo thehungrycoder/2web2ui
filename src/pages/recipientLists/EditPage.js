@@ -33,7 +33,7 @@ export class EditPage extends Component {
   ];
 
   deleteRecipientList = () => {
-    const { current, deleteRecipientList, history } = this.props;
+    const { current, deleteRecipientList, showAlert, history } = this.props;
 
     return deleteRecipientList(current.id).then(() => {
       showAlert({

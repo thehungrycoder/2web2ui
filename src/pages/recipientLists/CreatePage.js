@@ -22,6 +22,10 @@ export class CreatePage extends Component {
       });
       history.push('/lists/recipient-lists');
     }).catch((err) => {
+      showAlert({
+        type: 'error',
+        message: 'Failed to recipient list. Please try again.'
+      });
     });
   };
 
