@@ -1,0 +1,193 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EditPage should delete a recipient list 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "Recipient Lists",
+      "to": "/lists/recipient-lists",
+    }
+  }
+  empty={Object {}}
+  secondaryActions={
+    Array [
+      Object {
+        "content": "Delete",
+        "onClick": [Function],
+      },
+    ]
+  }
+  title="Update Recipient List"
+>
+  <Connect(ReduxForm)
+    editMode={true}
+    onSubmit={[Function]}
+  />
+  <DeleteModal
+    content={
+      <p>
+        The recipient list will be immediately and permanently removed. This cannot be undone.
+      </p>
+    }
+    onCancel={[Function]}
+    onDelete={[Function]}
+    open={false}
+    title="Are you sure you want to delete this recipient list?"
+  />
+</Page>
+`;
+
+exports[`EditPage should not preload recipient lists if not required 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "Recipient Lists",
+      "to": "/lists/recipient-lists",
+    }
+  }
+  empty={Object {}}
+  secondaryActions={
+    Array [
+      Object {
+        "content": "Delete",
+        "onClick": [Function],
+      },
+    ]
+  }
+  title="Update Recipient List"
+>
+  <Connect(ReduxForm)
+    editMode={true}
+    onSubmit={[Function]}
+  />
+  <DeleteModal
+    content={
+      <p>
+        The recipient list will be immediately and permanently removed. This cannot be undone.
+      </p>
+    }
+    onCancel={[Function]}
+    onDelete={[Function]}
+    open={false}
+    title="Are you sure you want to delete this recipient list?"
+  />
+</Page>
+`;
+
+exports[`EditPage should preload recipient lists if required 1`] = `<Loading />`;
+
+exports[`EditPage should render correctly 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "Recipient Lists",
+      "to": "/lists/recipient-lists",
+    }
+  }
+  empty={Object {}}
+  secondaryActions={
+    Array [
+      Object {
+        "content": "Delete",
+        "onClick": [Function],
+      },
+    ]
+  }
+  title="Update Recipient List"
+>
+  <Connect(ReduxForm)
+    editMode={true}
+    onSubmit={[Function]}
+  />
+  <DeleteModal
+    content={
+      <p>
+        The recipient list will be immediately and permanently removed. This cannot be undone.
+      </p>
+    }
+    onCancel={[Function]}
+    onDelete={[Function]}
+    open={false}
+    title="Are you sure you want to delete this recipient list?"
+  />
+</Page>
+`;
+
+exports[`EditPage should show a delete modal 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "Recipient Lists",
+      "to": "/lists/recipient-lists",
+    }
+  }
+  empty={Object {}}
+  secondaryActions={
+    Array [
+      Object {
+        "content": "Delete",
+        "onClick": [Function],
+      },
+    ]
+  }
+  title="Update Recipient List"
+>
+  <Connect(ReduxForm)
+    editMode={true}
+    onSubmit={[Function]}
+  />
+  <DeleteModal
+    content={
+      <p>
+        The recipient list will be immediately and permanently removed. This cannot be undone.
+      </p>
+    }
+    onCancel={[Function]}
+    onDelete={[Function]}
+    open={true}
+    title="Are you sure you want to delete this recipient list?"
+  />
+</Page>
+`;
+
+exports[`EditPage should update a recipient list 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "Recipient Lists",
+      "to": "/lists/recipient-lists",
+    }
+  }
+  empty={Object {}}
+  secondaryActions={
+    Array [
+      Object {
+        "content": "Delete",
+        "onClick": [Function],
+      },
+    ]
+  }
+  title="Update Recipient List"
+>
+  <Connect(ReduxForm)
+    editMode={true}
+    onSubmit={[Function]}
+  />
+  <DeleteModal
+    content={
+      <p>
+        The recipient list will be immediately and permanently removed. This cannot be undone.
+      </p>
+    }
+    onCancel={[Function]}
+    onDelete={[Function]}
+    open={false}
+    title="Are you sure you want to delete this recipient list?"
+  />
+</Page>
+`;

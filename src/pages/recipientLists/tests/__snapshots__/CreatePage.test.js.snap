@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CreatePage should render correctly 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "Recipient Lists",
+      "to": "/lists/recipient-lists",
+    }
+  }
+  empty={Object {}}
+  title="Create Recipient List"
+>
+  <Connect(ReduxForm)
+    onSubmit={[Function]}
+  />
+</Page>
+`;
