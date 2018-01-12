@@ -3,7 +3,11 @@ import Dropzone from 'react-dropzone';
 
 import { Button, Error, Tag } from '@sparkpost/matchbox';
 
+import { shrinkToFit } from 'src/helpers/string';
+
 import styles from './FileInputWrapper.module.scss';
+
+const maxLabelLength = 50;
 
 export default class FileInputWrapper extends Component {
   dropzoneRef = null;
@@ -17,26 +21,20 @@ export default class FileInputWrapper extends Component {
   };
 
   renderError() {
-    const { meta: { touched, error }} = this.props;
-    if (touched && error) {
-      return <Error error={error} />;
-    }
-    return null;
+    const { meta: { error }} = this.props;
+    return <Error error={error} />;
   }
 
   renderFilename() {
-    const {
-      input: { value: file },
-      meta: { touched, error }
-    } = this.props;
-    if (!(touched && error)) {
-      return <Tag className={styles.Tag}>{file ? file.name : 'No file selected'}</Tag>;
-    }
-    return null;
+    const { input: { value: file }} = this.props;
+
+    return <Tag className={styles.Tag}>
+      {file ? shrinkToFit(file.name, maxLabelLength) : 'No file selected'}
+    </Tag>;
   }
 
   render() {
-    const { id, label, name } = this.props;
+    const { id, label, name, meta: { touched, error }, disabled } = this.props;
 
     return <div>
       <label id={id} htmlFor={id} className={styles.Label}>{label}</label>
@@ -49,9 +47,10 @@ export default class FileInputWrapper extends Component {
         disableClick
         className={styles.Dropzone}
         onDrop={this.handleDrop}>
-        { this.renderFilename() }
-        { this.renderError() }
-        <Button onClick={() => this.dropzoneRef.open()}>Choose a CSV file</Button>
+        { touched && error ? this.renderError() : this.renderFilename() }
+        <Button
+          disabled={disabled}
+          onClick={() => this.dropzoneRef.open()}>Choose a CSV file</Button>
       </Dropzone>
     </div>;
   }

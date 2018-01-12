@@ -28,7 +28,7 @@ export class RecipientListForm extends Component {
       throw new SubmissionError();
     });
 
-  // `csv` is an internal field. The outer conponent can use the parsed records in `recipients`.
+  // `csv` is an internal field. The outer conponent can access the parsed records in `recipients`.
   formatValues = (values) => _.omit(values, ['csv']);
 
   submitWithRecipients = (values, recipients) => this.props.onSubmit({
@@ -38,8 +38,7 @@ export class RecipientListForm extends Component {
 
   submitWithoutRecipients = (values) => this.props.onSubmit(this.formatValues(values));
 
-  // Parse CSV, store JSON result, collect and show errors
-  // and return a top-level CSV field error to show on the form itself.
+  // Parse CSV, store JSON result, collect and show parsing errors
   preSubmit = (values) => {
     if (values.csv) {
       // CSV upload is optional in edit mode
@@ -92,6 +91,7 @@ export class RecipientListForm extends Component {
               label='Label'
               placeholder='My favorite recipients'
               validate={[required, maxLength(64)]}
+              disabled={submitting}
               component={TextFieldWrapper}
             />
             { ! editMode && <Field
@@ -99,6 +99,7 @@ export class RecipientListForm extends Component {
               label='Identifier'
               placeholder='my-favorite-recipients'
               validate={[required, maxLength(64)]}
+              disabled={submitting}
               component={TextFieldWrapper}
             /> }
             <Field
@@ -106,12 +107,14 @@ export class RecipientListForm extends Component {
               label='Description'
               placeholder='All my favorite recipients'
               validate={[maxLength(1024)]}
+              disabled={submitting}
               component={TextFieldWrapper}
             />
             <Field
               name='csv'
               label={uploadHint}
               validate={uploadValidators}
+              disabled={submitting}
               component={FileInputWrapper}
             />
             <Button submit disabled={submitDisabled}>{actionText} Recipient List</Button>
