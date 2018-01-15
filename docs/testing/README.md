@@ -9,3 +9,13 @@ The types of testing we typically write for the project.
 
 1. [Testing Tools](tools.md)  
 Overview of the tools we are using for tests.
+
+1. Test Patterns  
+   Best practices and common patterns for testing our basic file types
+
+   * [Action Creators](testing-actions.md)
+   * [Helpers](testing-helpers.md)
+   * [Selectors](testing-selectors.md)
+   * [Components](testing-components.md)
+
+
