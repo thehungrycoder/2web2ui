@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Suppressions reducer matches suppressions correctly (excludes deleted one) 1`] = `
+Object {
+  "deleting": false,
+  "list": Array [
+    Object {
+      "description": "554: ",
+      "recipient": "lf4qg05tfq@hotmail.com",
+      "source": "Bounce Rule",
+      "subaccount_id": "101",
+      "type": "transactional",
+    },
+  ],
+}
+`;
+
+exports[`Suppressions reducer matches suppressions with subaccount correctly (excludes deleted one) 1`] = `
+Object {
+  "deleting": false,
+  "list": Array [
+    Object {
+      "description": "503: ",
+      "recipient": "bfle1m90k2@yahoo.com",
+      "source": "Bounce Rule",
+      "type": "non_transactional",
+    },
+  ],
+}
+`;
