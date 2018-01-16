@@ -1,8 +1,9 @@
+/* eslint max-lines: ["error", 175] */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import qs from 'query-string';
-import { getFilterSearchOptions, parseSearch, humanizeTimeRange } from 'src/helpers/reports';
+import { getFilterSearchOptions, parseSearch } from 'src/helpers/reports';
 import { showAlert } from 'src/actions/globalAlert';
 import { addFilter, refreshTypeaheadCache } from 'src/actions/reportFilters';
 import { loadRejectionMetrics, refreshRejectionTableMetrics } from 'src/actions/rejectionReport';
@@ -12,6 +13,8 @@ import { Page, Panel, UnstyledLink } from '@sparkpost/matchbox';
 import ShareModal from '../components/ShareModal';
 import Filters from '../components/Filters';
 import MetricsSummary from '../components/MetricsSummary';
+import _ from 'lodash';
+
 const columns = [{ label: 'Reason', width: '45%' }, 'Domain', 'Category', 'Count'];
 
 export class RejectionPage extends Component {
@@ -99,17 +102,24 @@ export class RejectionPage extends Component {
 
   renderTopLevelMetrics() {
     const { aggregatesLoading, aggregates, filters } = this.props;
+    const { count_rejected, count_targeted } = aggregates;
 
     if (aggregatesLoading) {
-      return <PanelLoading />;
+      return <PanelLoading minHeight='115px' />;
     }
 
-    return <MetricsSummary
-      rateValue={(aggregates.count_rejected / aggregates.count_targeted) * 100}
-      rateTitle={'Rejected Rate'}>
-      { aggregates.count_rejected && <span><strong>{aggregates.count_rejected.toLocaleString()}</strong> of your messages were rejected of <strong>{aggregates.count_targeted.toLocaleString()}</strong> messages targeted in the <strong>last {humanizeTimeRange(filters.from, filters.to)}</strong>.</span> }
-    </MetricsSummary>;
+    if (_.isEmpty(aggregates)) {
+      return null;
+    }
 
+    return (
+      <MetricsSummary
+        rateValue={(count_rejected / count_targeted) * 100}
+        rateTitle='Rejected Rate'
+        {...filters} >
+        <strong>{count_rejected.toLocaleString()}</strong> of your messages were rejected of <strong>{count_targeted.toLocaleString()}</strong> messages targeted
+      </MetricsSummary>
+    );
   }
 
   render() {

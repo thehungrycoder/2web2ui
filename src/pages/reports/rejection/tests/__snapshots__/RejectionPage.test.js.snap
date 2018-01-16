@@ -37,20 +37,14 @@ exports[`RejectionPage:  renders correctly 1`] = `
     rateTitle="Rejected Rate"
     rateValue={14.000000000000002}
   >
-    <span>
-      <strong>
-        14
-      </strong>
-       of your messages were rejected of 
-      <strong>
-        100
-      </strong>
-       messages targeted in the 
-      <strong>
-        last 
-      </strong>
-      .
-    </span>
+    <strong>
+      14
+    </strong>
+     of your messages were rejected of 
+    <strong>
+      100
+    </strong>
+     messages targeted
   </MetricsSummary>
   <Panel
     className="RejectionTable"
@@ -112,26 +106,22 @@ exports[`RejectionPage:  renders correctly when loading 1`] = `
     rateTitle="Rejected Rate"
     rateValue={14.000000000000002}
   >
-    <span>
-      <strong>
-        14
-      </strong>
-       of your messages were rejected of 
-      <strong>
-        100
-      </strong>
-       messages targeted in the 
-      <strong>
-        last 
-      </strong>
-      .
-    </span>
+    <strong>
+      14
+    </strong>
+     of your messages were rejected of 
+    <strong>
+      100
+    </strong>
+     messages targeted
   </MetricsSummary>
   <Panel
     className="RejectionTable"
     title="Rejection Reasons"
   >
-    <PanelLoading />
+    <PanelLoading
+      minHeight="400px"
+    />
   </Panel>
   <ShareModal
     handleToggle={[Function]}
@@ -154,20 +144,14 @@ exports[`RejectionPage:  renders correctly with no rejections 1`] = `
     rateTitle="Rejected Rate"
     rateValue={14.000000000000002}
   >
-    <span>
-      <strong>
-        14
-      </strong>
-       of your messages were rejected of 
-      <strong>
-        100
-      </strong>
-       messages targeted in the 
-      <strong>
-        last 
-      </strong>
-      .
-    </span>
+    <strong>
+      14
+    </strong>
+     of your messages were rejected of 
+    <strong>
+      100
+    </strong>
+     messages targeted
   </MetricsSummary>
   <Panel
     className="RejectionTable"
@@ -192,8 +176,11 @@ exports[`RejectionPage:  renders loading pannel when aggregates are still loadin
   <Connect(Filters)
     onShare={[Function]}
     refresh={[Function]}
+    shareDisabled={false}
   />
-  <PanelLoading />
+  <PanelLoading
+    minHeight="115px"
+  />
   <Panel
     className="RejectionTable"
     title="Rejection Reasons"
@@ -234,7 +221,6 @@ exports[`RejectionPage:  renders loading pannel when aggregates are still loadin
   </Panel>
   <ShareModal
     handleToggle={[Function]}
-    link="http://an-awesome-link-to-share.com"
     open={false}
   />
 </Page>

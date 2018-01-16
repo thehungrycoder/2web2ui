@@ -19,8 +19,7 @@ describe('BouncePage: ', () => {
     },
     totalBounces: 100,
     filters: {
-      from: '2018-01-08 10:00',
-      to: '2018-01-08 11:00'
+      relativeRange: 'hour'
     },
     reasons: [ {
       bounce_category_name: 'Block',
@@ -63,7 +62,6 @@ describe('BouncePage: ', () => {
     expect(props.refreshBounceTableMetrics).toHaveBeenCalled();
     expect(spyParseSearch).toHaveBeenCalled();
     expect(props.refreshTypeaheadCache).toHaveBeenCalled();
-    expect(reportHelpers.humanizeTimeRange).toHaveBeenCalled();
     expect(props.addFilter).not.toHaveBeenCalled();
     expect(wrapper).toMatchSnapshot();
   });
@@ -82,7 +80,7 @@ describe('BouncePage: ', () => {
   });
 
   it('should render correctly with no bounces', () => {
-    wrapper.setProps({ aggregates: null });
+    wrapper.setProps({ aggregates: {}});
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -92,9 +90,13 @@ describe('BouncePage: ', () => {
   });
 
   it('should display loading panel on top level metrics when aggregates are loading', () => {
-    wrapper.setProps({ aggregatesLoading: true });
+    wrapper.setProps({ chartLoading: true });
     expect(wrapper).toMatchSnapshot();
+  });
 
+  it('should not display top level metrics when there are no aggregates', () => {
+    wrapper.setProps({ aggregates: {}});
+    expect(wrapper.find('MetricsSummary')).toHaveLength(0);
   });
 
   it('should show empty reasons table when there are no reasons', () => {

@@ -49,7 +49,9 @@ exports[`loading 1`] = `
     accent={true}
     title="Set Password"
   >
-    <PanelLoading />
+    <PanelLoading
+      minHeight="400px"
+    />
   </Panel>
   <UnstyledLink
     to="/auth"

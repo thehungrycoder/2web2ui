@@ -15,6 +15,8 @@ import ShareModal from '../components/ShareModal';
 import Filters from '../components/Filters';
 import ChartGroup from './components/ChartGroup';
 import MetricsSummary from '../components/MetricsSummary';
+import _ from 'lodash';
+
 const columns = [{ label: 'Reason', width: '45%' }, 'Domain', 'Category', 'Classification', 'Count (%)'];
 
 export class BouncePage extends Component {
@@ -83,7 +85,7 @@ export class BouncePage extends Component {
 
   renderChart() {
     const { chartLoading, aggregates } = this.props;
-    if (!chartLoading && !aggregates) {
+    if (!chartLoading && _.isEmpty(aggregates)) {
       return <Empty title='Bounce Rates' message='No bounces to report' />;
     }
     return <ChartGroup />;
@@ -110,26 +112,25 @@ export class BouncePage extends Component {
 
   renderTopLevelMetrics() {
     const { chartLoading, aggregates, filters } = this.props;
+    const { countBounce, countTargeted } = aggregates;
 
     // Aggregates aren't ready until chart refreshes
     if (chartLoading) {
       return <PanelLoading minHeight='115px' />;
     }
 
-    if (aggregates) {
-      const { countBounce, countTargeted } = aggregates;
-
-      return (
-        <MetricsSummary
-          rateValue={(countBounce / countTargeted) * 100}
-          rateTitle='Bounce Rate'
-          {...filters} >
-          <strong>{countBounce.toLocaleString()}</strong> of your messages were bounced of <strong>{countTargeted.toLocaleString()}</strong> messages targeted
-        </MetricsSummary>
-      );
+    if (_.isEmpty(aggregates)) {
+      return null;
     }
 
-    return null;
+    return (
+      <MetricsSummary
+        rateValue={(countBounce / countTargeted) * 100}
+        rateTitle='Bounce Rate'
+        {...filters} >
+        <strong>{countBounce.toLocaleString()}</strong> of your messages were bounced of <strong>{countTargeted.toLocaleString()}</strong> messages targeted
+      </MetricsSummary>
+    );
   }
 
   render() {

@@ -8,8 +8,11 @@ exports[`BouncePage:  should display loading panel on top level metrics when agg
   <Connect(Filters)
     onShare={[Function]}
     refresh={[Function]}
+    shareDisabled={true}
   />
-  <PanelLoading />
+  <PanelLoading
+    minHeight="115px"
+  />
   <Connect(ChartGroup) />
   <Panel
     className="ReasonsTable"
@@ -47,8 +50,8 @@ exports[`BouncePage:  should display loading panel on top level metrics when agg
   </Panel>
   <ShareModal
     handleToggle={[Function]}
-    link=""
     open={false}
+    query={Array []}
   />
 </Page>
 `;
@@ -65,21 +68,16 @@ exports[`BouncePage:  should render 1`] = `
   <MetricsSummary
     rateTitle="Bounce Rate"
     rateValue={10}
+    relativeRange="hour"
   >
-    <span>
-      <strong>
-        1
-      </strong>
-       of your messages were bounced of 
-      <strong>
-        10
-      </strong>
-       messages targeted in the 
-      <strong>
-        last 
-      </strong>
-      .
-    </span>
+    <strong>
+      1
+    </strong>
+     of your messages were bounced of 
+    <strong>
+      10
+    </strong>
+     messages targeted
   </MetricsSummary>
   <Connect(ChartGroup) />
   <Panel
@@ -224,21 +222,16 @@ exports[`BouncePage:  should show empty reasons table when there are no reasons 
   <MetricsSummary
     rateTitle="Bounce Rate"
     rateValue={10}
+    relativeRange="hour"
   >
-    <span>
-      <strong>
-        1
-      </strong>
-       of your messages were bounced of 
-      <strong>
-        10
-      </strong>
-       messages targeted in the 
-      <strong>
-        last 
-      </strong>
-      .
-    </span>
+    <strong>
+      1
+    </strong>
+     of your messages were bounced of 
+    <strong>
+      10
+    </strong>
+     messages targeted
   </MetricsSummary>
   <Connect(ChartGroup) />
   <Panel
@@ -252,8 +245,8 @@ exports[`BouncePage:  should show empty reasons table when there are no reasons 
   </Panel>
   <ShareModal
     handleToggle={[Function]}
-    link=""
     open={false}
+    query={Array []}
   />
 </Page>
 `;
@@ -270,33 +263,30 @@ exports[`BouncePage:  should show loading panel when table is loading 1`] = `
   <MetricsSummary
     rateTitle="Bounce Rate"
     rateValue={10}
+    relativeRange="hour"
   >
-    <span>
-      <strong>
-        1
-      </strong>
-       of your messages were bounced of 
-      <strong>
-        10
-      </strong>
-       messages targeted in the 
-      <strong>
-        last 
-      </strong>
-      .
-    </span>
+    <strong>
+      1
+    </strong>
+     of your messages were bounced of 
+    <strong>
+      10
+    </strong>
+     messages targeted
   </MetricsSummary>
   <Connect(ChartGroup) />
   <Panel
     className="ReasonsTable"
     title="Bounced Messages"
   >
-    <PanelLoading />
+    <PanelLoading
+      minHeight="400px"
+    />
   </Panel>
   <ShareModal
     handleToggle={[Function]}
-    link=""
     open={false}
+    query={Array []}
   />
 </Page>
 `;

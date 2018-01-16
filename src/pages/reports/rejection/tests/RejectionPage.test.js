@@ -81,6 +81,11 @@ describe('RejectionPage: ', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('should not display top level metrics when there are no aggregates', () => {
+    wrapper.setProps({ aggregates: {}});
+    expect(wrapper.find('MetricsSummary')).toHaveLength(0);
+  });
+
   describe('getRowData', () => {
     it('should render row data properly', () => {
       const rows = wrapper.instance().getRowData({ reason: 'bad delay', rejection_category_name: 'cat1', count_rejected: 10, domain: 'gmail.com' });

@@ -64,18 +64,3 @@ export function parseSearch(search) {
   // filters are used in pages to dispatch updates to Redux store
   return { options, filters: filtersList };
 }
-
-export function humanizeTimeRange(from, to) {
-  // need to control how to handle 1 hour/day/month
-  moment.updateLocale('en', {
-    relativeTime: {
-      h: 'hour',
-      d: '24 hours',
-      M: '30 days'
-    }
-  });
-
-  from = moment(from);
-  to = moment(to);
-  return from.to(to, true);
-}

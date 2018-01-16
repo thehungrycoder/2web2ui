@@ -1,6 +1,5 @@
 import * as reports from '../reports';
 import * as dateHelpers from 'src/helpers/date';
-import cases from 'jest-in-case';
 
 jest.mock('src/actions/reportFilters');
 jest.mock('src/helpers/date');
@@ -60,30 +59,3 @@ it('Should parse search with missing range (as custom)', () => {
 it('Should parse search with no empty value', () => {
   expect(reports.parseSearch('')).toMatchSnapshot();
 });
-
-const TIME_RANGE_TESTS = {
-  'should return hour for 1 hr diff': {
-    from: '2017-10-10 10:00:00',
-    to: '2017-10-10 11:00:00',
-    value: 'hour'
-  },
-  'should return 24 hours for 1 day diff': {
-    from: '2017-10-09 10:00:00',
-    to: '2017-10-10 10:00:00',
-    value: '24 hours'
-  },
-  'should return 30 days for 1 month diff': {
-    from: '2017-09-09 10:00:00',
-    to: '2017-10-09 10:00:00',
-    value: '30 days'
-  },
-  'should return 2 days for 2 dayish diff': {
-    from: '2017-10-07 00:00:00',
-    to: '2017-10-09 07:00:00',
-    value: '2 days'
-  }
-};
-
-cases('human time ranges', ({ from, to, value }) => {
-  expect(reports.humanizeTimeRange(from, to)).toEqual(value);
-}, TIME_RANGE_TESTS);

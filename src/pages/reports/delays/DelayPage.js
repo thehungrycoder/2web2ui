@@ -14,6 +14,8 @@ import ShareModal from '../components/ShareModal';
 import Filters from '../components/Filters';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
 import MetricsSummary from '../components/MetricsSummary';
+import _ from 'lodash';
+
 const columns = [{ label: 'Reason', width: '45%' }, 'Domain', 'Delayed', 'Delayed First Attempt (%)'];
 
 export class DelayPage extends Component {
@@ -95,25 +97,25 @@ export class DelayPage extends Component {
 
   renderTopLevelMetrics() {
     const { aggregatesLoading, aggregates, filters } = this.props;
+    const { count_delayed_first, count_accepted } = aggregates;
 
     if (aggregatesLoading) {
       return <PanelLoading minHeight='115px' />;
     }
 
-    if (aggregates) {
-      const { count_delayed_first, count_accepted } = aggregates;
-      return (
-        <MetricsSummary
-          rateValue={(count_delayed_first / count_accepted) * 100}
-          rateTitle='Delayed Rate'
-          secondaryMessage={`${count_delayed_first.toLocaleString()} were delayed on first attempt.`}
-          {...filters} >
-          <strong>{count_delayed_first.toLocaleString()}</strong> of your messages were delayed of <strong>{count_accepted.toLocaleString()}</strong> messages accepted
-        </MetricsSummary>
-      );
+    if (_.isEmpty(aggregates)) {
+      return null;
     }
 
-    return null;
+    return (
+      <MetricsSummary
+        rateValue={(count_delayed_first / count_accepted) * 100}
+        rateTitle='Delayed Rate'
+        secondaryMessage={`${count_delayed_first.toLocaleString()} were delayed on first attempt.`}
+        {...filters} >
+        <strong>{count_delayed_first.toLocaleString()}</strong> of your messages were delayed of <strong>{count_accepted.toLocaleString()}</strong> messages accepted
+      </MetricsSummary>
+    );
   }
 
   render() {

@@ -74,7 +74,9 @@ exports[`edit path loading 1`] = `
       ]
     }
   />
-  <PanelLoading />
+  <PanelLoading
+    minHeight="400px"
+  />
 </Page>
 `;
 
@@ -152,7 +154,9 @@ exports[`keys path loading 1`] = `
       ]
     }
   />
-  <PanelLoading />
+  <PanelLoading
+    minHeight="400px"
+  />
 </Page>
 `;
 
