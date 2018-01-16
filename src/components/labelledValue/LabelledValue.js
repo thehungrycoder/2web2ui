@@ -1,12 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { formatDateTime } from 'src/helpers/date';
 
 import styles from './LabelledValue.module.scss';
 
-const LabelledValue = ({ label, value, children }) => {
+function handleTypes(value, type) {
+  switch (type) {
+    case 'datetime':
+      return formatDateTime(value);
+    case 'string':
+      return value.toString();
+
+    default:
+      return value;
+  }
+}
+const LabelledValue = ({ label, value, children, type }) => {
   const childrenMarkup = value
-    ? <h6>{ value }</h6>
+    ? <h6>{ handleTypes(value, type) }</h6>
     : children;
+
 
   const labelMarkup = label
     ? <div className={styles.LabelContainer}><small className={styles.Label}>{ label }</small></div>
@@ -29,6 +42,7 @@ LabelledValue.propTypes = {
   value: PropTypes.oneOfType([
     PropTypes.node
   ]),
+  type: PropTypes.string,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
