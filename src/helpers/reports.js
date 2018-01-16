@@ -61,6 +61,6 @@ export function parseSearch(search) {
     relativeRange: range
   };
 
-  // Filters are not passed to metrics refresh actions
+  // filters are used in pages to dispatch updates to Redux store
   return { options, filters: filtersList };
 }

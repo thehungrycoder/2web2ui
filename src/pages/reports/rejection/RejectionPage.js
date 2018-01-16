@@ -1,17 +1,20 @@
+/* eslint max-lines: ["error", 175] */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import _ from 'lodash';
 import qs from 'query-string';
-import { refreshRejectionTableMetrics } from 'src/actions/rejectionReport';
-import { addFilter, refreshTypeaheadCache } from 'src/actions/reportFilters';
 import { getFilterSearchOptions, parseSearch } from 'src/helpers/reports';
 import { showAlert } from 'src/actions/globalAlert';
+import { addFilter, refreshTypeaheadCache } from 'src/actions/reportFilters';
+import { loadRejectionMetrics, refreshRejectionTableMetrics } from 'src/actions/rejectionReport';
 import { TableCollection, Empty, LongTextContainer } from 'src/components';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
 import { Page, Panel, UnstyledLink } from '@sparkpost/matchbox';
 import ShareModal from '../components/ShareModal';
 import Filters from '../components/Filters';
+import MetricsSummary from '../components/MetricsSummary';
+import _ from 'lodash';
+
 const columns = [{ label: 'Reason', width: '45%' }, 'Domain', 'Category', 'Count'];
 
 export class RejectionPage extends Component {
@@ -25,20 +28,27 @@ export class RejectionPage extends Component {
     this.props.refreshTypeaheadCache();
   }
 
+  /**
+   * takes qp's and dispatches filters being added
+   * Note: this has to be done in page because Redux is wired
+   * and not in the helper
+   */
   parseSearch() {
-    const { addFilter } = this.props;
     const { options, filters } = parseSearch(this.props.location.search);
 
-    if (!_.isEmpty(filters)) {
-      filters.forEach(addFilter);
+    if (filters) {
+      filters.forEach(this.props.addFilter);
     }
 
     return options;
   }
 
   handleRefresh = (options) => {
-    const { showAlert, refreshRejectionTableMetrics } = this.props;
-    return refreshRejectionTableMetrics(options)
+    const { showAlert, refreshRejectionTableMetrics, loadRejectionMetrics } = this.props;
+    return Promise.all([
+      loadRejectionMetrics(options),
+      refreshRejectionTableMetrics(options)
+    ])
       .then(() => this.updateLink())
       .catch((err) => showAlert({ type: 'error', message: 'Unable to refresh rejection reports.', details: err.message }));
   }
@@ -90,6 +100,28 @@ export class RejectionPage extends Component {
     />;
   }
 
+  renderTopLevelMetrics() {
+    const { aggregatesLoading, aggregates, filters } = this.props;
+    const { count_rejected, count_targeted } = aggregates;
+
+    if (aggregatesLoading) {
+      return <PanelLoading minHeight='115px' />;
+    }
+
+    if (_.isEmpty(aggregates)) {
+      return null;
+    }
+
+    return (
+      <MetricsSummary
+        rateValue={(count_rejected / count_targeted) * 100}
+        rateTitle='Rejected Rate'
+        {...filters} >
+        <strong>{count_rejected.toLocaleString()}</strong> of your messages were rejected of <strong>{count_targeted.toLocaleString()}</strong> messages targeted
+      </MetricsSummary>
+    );
+  }
+
   render() {
     const { modal, query } = this.state;
     const { loading } = this.props;
@@ -101,6 +133,7 @@ export class RejectionPage extends Component {
           onShare={this.handleModalToggle}
           shareDisabled={loading}
         />
+        { this.renderTopLevelMetrics() }
         <Panel title='Rejection Reasons' className='RejectionTable'>
           { this.renderCollection() }
         </Panel>
@@ -115,12 +148,15 @@ export class RejectionPage extends Component {
 
 const mapStateToProps = ({ reportFilters, rejectionReport }) => ({
   filters: reportFilters,
-  loading: rejectionReport.reasonsLoading,
+  loading: rejectionReport.aggregatesLoading || rejectionReport.reasonsLoading,
+  aggregatesLoading: rejectionReport.aggregatesLoading,
+  aggregates: rejectionReport.aggregates,
   list: rejectionReport.list
 });
 
 const mapDispatchToProps = {
   addFilter,
+  loadRejectionMetrics,
   refreshRejectionTableMetrics,
   refreshTypeaheadCache,
   showAlert

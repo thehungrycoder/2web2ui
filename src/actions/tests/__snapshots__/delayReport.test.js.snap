@@ -43,12 +43,20 @@ Array [
     undefined,
   ],
   Array [
-    undefined,
+    Array [
+      1,
+      2,
+      3,
+    ],
   ],
   Array [
     Object {
       "payload": Object {
-        "reasons": undefined,
+        "reasons": Array [
+          1,
+          2,
+          3,
+        ],
       },
       "type": "REFRESH_DELAY_TABLE",
     },

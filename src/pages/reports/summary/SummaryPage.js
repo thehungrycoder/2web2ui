@@ -30,6 +30,11 @@ export class SummaryReportPage extends Component {
     this.props.refreshTypeaheadCache();
   }
 
+  /**
+   * takes qp's and dispatches filters being added
+   * Note: this has to be done in page because Redux is wired
+   * and not in the helper
+   */
   parseSearch() {
     const { options, filters } = parseSearch(this.props.location.search);
 

@@ -24,7 +24,11 @@ exports[`ApiKeysTab empty 1`] = `
 </Panel>
 `;
 
-exports[`ApiKeysTab loading 1`] = `<PanelLoading />`;
+exports[`ApiKeysTab loading 1`] = `
+<PanelLoading
+  minHeight="400px"
+/>
+`;
 
 exports[`ApiKeysTab normal props 1`] = `
 <Panel>

@@ -1,6 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`EditTab Render loading 1`] = `<PanelLoading />`;
+exports[`EditTab Render loading 1`] = `
+<PanelLoading
+  minHeight="400px"
+/>
+`;
 
 exports[`EditTab Render normal props 1`] = `
 <Panel>

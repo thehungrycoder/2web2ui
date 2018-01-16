@@ -1052,7 +1052,9 @@ exports[`Page: Message Events tests should only render loading component while l
       onSubmit={[Function]}
     />
   </Panel>
-  <PanelLoading />
+  <PanelLoading
+    minHeight="400px"
+  />
 </Page>
 `;
 

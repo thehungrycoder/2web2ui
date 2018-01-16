@@ -3,6 +3,7 @@
 exports[`Panel Loading render 1`] = `
 <div
   class="Matchbox-Panel"
+  style="min-height:400px"
 >
   <svg
     class=""

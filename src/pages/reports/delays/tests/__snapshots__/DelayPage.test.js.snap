@@ -9,6 +9,21 @@ exports[`DelayPage:  should render page 1`] = `
     onShare={[Function]}
     refresh={[Function]}
   />
+  <MetricsSummary
+    rateTitle="Delayed Rate"
+    rateValue={0.1}
+    relativeRange="hour"
+    secondaryMessage="10 were delayed on first attempt."
+  >
+    <strong>
+      10
+    </strong>
+     of your messages were delayed of 
+    <strong>
+      10,000
+    </strong>
+     messages accepted
+  </MetricsSummary>
   <Panel
     className="ReasonsTable"
     title="Delayed Messages"
@@ -87,6 +102,21 @@ exports[`DelayPage:  should show empty message when there are no reasons 1`] = `
     onShare={[Function]}
     refresh={[Function]}
   />
+  <MetricsSummary
+    rateTitle="Delayed Rate"
+    rateValue={0.1}
+    relativeRange="hour"
+    secondaryMessage="10 were delayed on first attempt."
+  >
+    <strong>
+      10
+    </strong>
+     of your messages were delayed of 
+    <strong>
+      10,000
+    </strong>
+     messages accepted
+  </MetricsSummary>
   <Panel
     className="ReasonsTable"
     title="Delayed Messages"
@@ -114,11 +144,77 @@ exports[`DelayPage:  should show loading indicator when loading table 1`] = `
     refresh={[Function]}
     shareDisabled={true}
   />
+  <MetricsSummary
+    rateTitle="Delayed Rate"
+    rateValue={0.1}
+    relativeRange="hour"
+    secondaryMessage="10 were delayed on first attempt."
+  >
+    <strong>
+      10
+    </strong>
+     of your messages were delayed of 
+    <strong>
+      10,000
+    </strong>
+     messages accepted
+  </MetricsSummary>
   <Panel
     className="ReasonsTable"
     title="Delayed Messages"
   >
-    <PanelLoading />
+    <PanelLoading
+      minHeight="400px"
+    />
+  </Panel>
+  <ShareModal
+    handleToggle={[Function]}
+    open={false}
+    query={Array []}
+  />
+</Page>
+`;
+
+exports[`DelayPage:  should show loading panel when aggregates are still loading 1`] = `
+<Page
+  empty={Object {}}
+  title="Delay Report"
+>
+  <Connect(Filters)
+    onShare={[Function]}
+    refresh={[Function]}
+  />
+  <PanelLoading
+    minHeight="115px"
+  />
+  <Panel
+    className="ReasonsTable"
+    title="Delayed Messages"
+  >
+    <TableCollection
+      columns={
+        Array [
+          Object {
+            "label": "Reason",
+            "width": "45%",
+          },
+          "Domain",
+          "Delayed",
+          "Delayed First Attempt (%)",
+        ]
+      }
+      getRowData={[Function]}
+      pagination={true}
+      rows={
+        Array [
+          Object {
+            "count_delayed": 100,
+            "count_delayed_first": 1,
+            "reason": "my reason",
+          },
+        ]
+      }
+    />
   </Panel>
   <ShareModal
     handleToggle={[Function]}
