@@ -24,6 +24,12 @@ describe('Date helpers', () => {
     'for a quarter ago': { range: '90days' },
     'for an invalid range': { range: 'invalid-range' }
   });
+
+  describe('formatDateTime', () => {
+    it('formats date and time correctly', () => {
+      expect(dateHelpers.formatDateTime(new Date('2018-1-15').toISOString())).toMatchSnapshot();
+    });
+  });
 });
 
 

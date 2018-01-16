@@ -1,26 +1,26 @@
 import React, { Component } from 'react';
-import _ from 'lodash';
 
 import { Panel, Button } from '@sparkpost/matchbox';
 import { BaseModal, LabelledValue, CopyField, LongTextContainer } from 'src/components';
+import { formatSubaccountDisplay } from '../helpers';
 import styles from './Detail.module.scss';
 
 export default class Detail extends Component {
   renderContents = () => {
     const { suppression } = this.props;
 
-    const elements = [];
-    _.forEach(suppression, (val, key) => {
-      val = (val || '').toString();
-      if (key === 'description') {
-        val = <LongTextContainer text={val} />;
-      }
-
-      elements.push(<LabelledValue key={key} label={key} value={val}/>);
-    });
-
-    elements.push(<LabelledValue key='raw json' label='raw json' value={<CopyField value={JSON.stringify(suppression)} />}/>);
-    return elements;
+    return (
+      <div>
+        <LabelledValue key='recipient' label='Recipient' value={suppression.recipient} />
+        <LabelledValue key='type' label='Type' value={suppression.type === 'transactional' ? 'Transactional' : 'Non-transactional'} />
+        <LabelledValue key='source' label='Source' value={suppression.source} />
+        <LabelledValue key='updated' label='Updated' value={suppression.updated} type='datetime' />
+        <LabelledValue key='subaccount' label='Subaccount' value={formatSubaccountDisplay(suppression.subaccount_id)} />
+        <LabelledValue key='created' label='Created' value={suppression.created} type='datetime' />
+        <LabelledValue key='description' label='Description' value={<LongTextContainer text={suppression.description} />} />
+        <LabelledValue key='raw json' label='Raw JSON' value={<CopyField value={JSON.stringify(suppression)} /> } />
+      </div>
+    );
   }
 
   render() {

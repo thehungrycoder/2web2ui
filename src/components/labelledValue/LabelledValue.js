@@ -8,9 +8,6 @@ function handleTypes(value, type) {
   switch (type) {
     case 'datetime':
       return formatDateTime(value);
-    case 'string':
-      return value.toString();
-
     default:
       return value;
   }

@@ -12,7 +12,8 @@ beforeEach(() => {
     onCancel: jest.fn(),
     suppression: {
       recipient: 'foo@bar.com',
-      description: ''
+      description: '',
+      updated: '2018-01-16T04:14:18.661Z'
     }
   };
 
@@ -38,6 +39,5 @@ describe('Detail', () => {
     wrapper.setProps({ deleting: true });
     expect(wrapper).toMatchSnapshot();
   });
-
 });
 
