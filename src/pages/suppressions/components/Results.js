@@ -66,7 +66,7 @@ export class Results extends Component {
     ];
 
     if (hasSubaccounts) {
-      rowData.push(formatSubaccountDisplay(parseInt(subaccountId, 10), allSubaccounts));
+      rowData.push(formatSubaccountDisplay(subaccountId, allSubaccounts));
     }
 
     rowData.push(
@@ -99,13 +99,14 @@ export class Results extends Component {
 
   renderDetailModal = () => {
     const { open, data } = this.state.detail;
+    const { subaccounts, hasSubaccounts } = this.props;
 
     if (!data) {
       return null;
     }
 
     return (
-      <Detail suppression={data} open={open} onCancel={ this.toggleDetailModal } />
+      <Detail suppression={data} open={open} onCancel={this.toggleDetailModal} subaccounts={subaccounts} hasSubaccounts={hasSubaccounts} />
     );
   }
 

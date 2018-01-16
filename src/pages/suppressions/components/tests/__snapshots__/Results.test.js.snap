@@ -222,6 +222,7 @@ exports[`Results renders delete confirmation modal correctly 1`] = `
 exports[`Results renders detail modal correctly 1`] = `
 <div>
   <Detail
+    hasSubaccounts={true}
     onCancel={[Function]}
     open={false}
     suppression={Object {}}

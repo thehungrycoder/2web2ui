@@ -8,7 +8,7 @@ import styles from './Detail.module.scss';
 
 export default class Detail extends Component {
   renderContents = () => {
-    const { suppression } = this.props;
+    const { suppression, subaccounts: allSubaccounts, hasSubaccounts } = this.props;
 
     return (
       <div>
@@ -16,7 +16,9 @@ export default class Detail extends Component {
         <LabelledValue key='type' label='Type' value={suppression.type === 'transactional' ? 'Transactional' : 'Non-transactional'} />
         <LabelledValue key='source' label='Source' value={suppression.source} />
         <LabelledValue key='updated' label='Updated' value={formatDateTime(suppression.updated)} />
-        <LabelledValue key='subaccount' label='Subaccount' value={formatSubaccountDisplay(suppression.subaccount_id)} />
+        { hasSubaccounts &&
+          <LabelledValue key='subaccount' label='Subaccount' value={formatSubaccountDisplay(suppression.subaccount_id, allSubaccounts)} />
+        }
         <LabelledValue key='created' label='Created' value={formatDateTime(suppression.created)} />
         <LabelledValue key='description' label='Description' value={<LongTextContainer text={suppression.description} />} />
         <LabelledValue key='raw json' label='Raw JSON' value={<CopyField value={JSON.stringify(suppression)} /> } />
