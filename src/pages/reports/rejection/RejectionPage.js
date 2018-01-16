@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import _ from 'lodash';
 import qs from 'query-string';
 import { getFilterSearchOptions, parseSearch, humanizeTimeRange } from 'src/helpers/reports';
 import { showAlert } from 'src/actions/globalAlert';
+import { addFilter, refreshTypeaheadCache } from 'src/actions/reportFilters';
+import { loadRejectionMetrics, refreshRejectionTableMetrics } from 'src/actions/rejectionReport';
 import { TableCollection, Empty, LongTextContainer } from 'src/components';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
 import { Page, Panel, UnstyledLink } from '@sparkpost/matchbox';

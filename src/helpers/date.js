@@ -9,6 +9,11 @@ export const relativeDateOptions = [
   { value: 'custom', label: 'Custom' }
 ];
 
+export const relativeDateOptionsIndexed = relativeDateOptions.reduce((result, { value, label }) => {
+  result[value] = label;
+  return result;
+}, {});
+
 export function getEndOfDay(date) {
   const end = new Date(date);
   end.setHours(23);

@@ -1,6 +1,5 @@
 import moment from 'moment';
 import qs from 'query-string';
-import _ from 'lodash';
 import { getRelativeDates } from 'src/helpers/date';
 
 /**
