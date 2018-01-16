@@ -7,5 +7,5 @@ it('Should generate colors', () => {
 
 it('Should generate colors, with custom options', () => {
   const arr = [{ name: '1' }, { name: '2' }, { name: '3' }];
-  expect(color.generateColors(arr, { color: '#123456', saturate: 0, rotate: 150 })).toMatchSnapshot();
+  expect(color.generateColors(arr, { color: '#7788aa', saturate: 0.2, rotate: 150 })).toMatchSnapshot();
 });

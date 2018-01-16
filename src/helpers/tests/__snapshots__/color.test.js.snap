@@ -3,11 +3,11 @@
 exports[`Should generate colors 1`] = `
 Array [
   Object {
-    "fill": "hsl(0, 0%, 0%)",
+    "fill": "hsl(210, 65.4%, 20.4%)",
     "name": "1",
   },
   Object {
-    "fill": "hsl(30, 0%, 0%)",
+    "fill": "hsl(240, 68.7%, 20.4%)",
     "name": "2",
   },
 ]
@@ -16,15 +16,15 @@ Array [
 exports[`Should generate colors, with custom options 1`] = `
 Array [
   Object {
-    "fill": "hsl(210, 65.4%, 20.4%)",
+    "fill": "hsl(220, 23.1%, 56.7%)",
     "name": "1",
   },
   Object {
-    "fill": "hsl(260, 65.4%, 20.4%)",
+    "fill": "hsl(270, 24.6%, 56.7%)",
     "name": "2",
   },
   Object {
-    "fill": "hsl(310, 65.4%, 20.4%)",
+    "fill": "hsl(320, 26.2%, 56.7%)",
     "name": "3",
   },
 ]

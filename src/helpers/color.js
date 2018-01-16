@@ -8,11 +8,11 @@ import clr from 'color';
  * @param  {Number} saturate  hue saturation multiplier, divided by array length
  * @return {Array}            array with 'fill' key added
  */
-export function generateColors(arr, { color = '#000000', rotate = null, saturate = null } = {}) {
+export function generateColors(arr, { color = '#123456', rotate = 60, saturate = 0.1 } = {}) {
   const base = clr(color);
   const length = arr.length;
-  const r = rotate === null ? 60 / length : rotate / length;
-  const s = saturate === null ? 0.1 / length : saturate / length;
+  const r = rotate / length;
+  const s = saturate / length;
 
   return arr.map((item, i) => ({
     ...item,
