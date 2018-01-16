@@ -27,8 +27,7 @@ exports[`Detail renders correctly (hides) on initial loading 1`] = `
       <LabelledValue
         key="updated"
         label="Updated"
-        type="datetime"
-        value="2018-01-16T04:14:18.661Z"
+        value="2018/01/15 23:14"
       />
       <LabelledValue
         key="subaccount"
@@ -38,7 +37,7 @@ exports[`Detail renders correctly (hides) on initial loading 1`] = `
       <LabelledValue
         key="created"
         label="Created"
-        type="datetime"
+        value="2018/01/15 23:14"
       />
       <LabelledValue
         key="description"
@@ -55,7 +54,7 @@ exports[`Detail renders correctly (hides) on initial loading 1`] = `
         value={
           <CopyField
             hideCopy={false}
-            value="{\\"recipient\\":\\"foo@bar.com\\",\\"description\\":\\"\\",\\"updated\\":\\"2018-01-16T04:14:18.661Z\\"}"
+            value="{\\"recipient\\":\\"foo@bar.com\\",\\"description\\":\\"\\",\\"updated\\":\\"2018-01-16T04:14:18.661Z\\",\\"created\\":\\"2018-01-16T04:14:18.661Z\\"}"
           />
         }
       />
@@ -99,8 +98,7 @@ exports[`Detail renders correctly (shows loading) when deleting 1`] = `
       <LabelledValue
         key="updated"
         label="Updated"
-        type="datetime"
-        value="2018-01-16T04:14:18.661Z"
+        value="2018/01/15 23:14"
       />
       <LabelledValue
         key="subaccount"
@@ -110,7 +108,7 @@ exports[`Detail renders correctly (shows loading) when deleting 1`] = `
       <LabelledValue
         key="created"
         label="Created"
-        type="datetime"
+        value="2018/01/15 23:14"
       />
       <LabelledValue
         key="description"
@@ -127,7 +125,7 @@ exports[`Detail renders correctly (shows loading) when deleting 1`] = `
         value={
           <CopyField
             hideCopy={false}
-            value="{\\"recipient\\":\\"foo@bar.com\\",\\"description\\":\\"\\",\\"updated\\":\\"2018-01-16T04:14:18.661Z\\"}"
+            value="{\\"recipient\\":\\"foo@bar.com\\",\\"description\\":\\"\\",\\"updated\\":\\"2018-01-16T04:14:18.661Z\\",\\"created\\":\\"2018-01-16T04:14:18.661Z\\"}"
           />
         }
       />
@@ -171,8 +169,7 @@ exports[`Detail renders correctly (shows) when open is true  1`] = `
       <LabelledValue
         key="updated"
         label="Updated"
-        type="datetime"
-        value="2018-01-16T04:14:18.661Z"
+        value="2018/01/15 23:14"
       />
       <LabelledValue
         key="subaccount"
@@ -182,7 +179,7 @@ exports[`Detail renders correctly (shows) when open is true  1`] = `
       <LabelledValue
         key="created"
         label="Created"
-        type="datetime"
+        value="2018/01/15 23:14"
       />
       <LabelledValue
         key="description"
@@ -199,7 +196,7 @@ exports[`Detail renders correctly (shows) when open is true  1`] = `
         value={
           <CopyField
             hideCopy={false}
-            value="{\\"recipient\\":\\"foo@bar.com\\",\\"description\\":\\"\\",\\"updated\\":\\"2018-01-16T04:14:18.661Z\\"}"
+            value="{\\"recipient\\":\\"foo@bar.com\\",\\"description\\":\\"\\",\\"updated\\":\\"2018-01-16T04:14:18.661Z\\",\\"created\\":\\"2018-01-16T04:14:18.661Z\\"}"
           />
         }
       />

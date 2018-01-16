@@ -89,10 +89,10 @@ const mapStateToProps = (state) => {
   return {
     reportFilters: state.reportFilters,
     loading: listLoading,
-    list: list,
+    list,
     hasSubaccounts: hasSubaccounts(state),
     subaccounts: state.subaccounts.list,
-    deleting: deleting
+    deleting
   };
 };
 

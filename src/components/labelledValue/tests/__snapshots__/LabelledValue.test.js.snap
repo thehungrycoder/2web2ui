@@ -1,20 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`LabelledValue Component handles types correctly 1`] = `
-<div>
-  <div>
-    <small>
-      created
-    </small>
-  </div>
-  <div>
-    <h6>
-      2018/01/15 23:14
-    </h6>
-  </div>
-</div>
-`;
-
 exports[`LabelledValue Component should render - no props 1`] = `
 <div>
   <div />

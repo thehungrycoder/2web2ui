@@ -18,10 +18,4 @@ describe('LabelledValue Component', () => {
     const wrapper = shallow(<LabelledValue label='Label'><h5>child</h5></LabelledValue>);
     expect(wrapper).toMatchSnapshot();
   });
-
-  it('handles types correctly', () => {
-    const dateString = '2018-01-16T04:14:18.661Z';
-    const wrapper = shallow(<LabelledValue label='created' type='datetime' value={dateString} />);
-    expect(wrapper).toMatchSnapshot();
-  });
 });

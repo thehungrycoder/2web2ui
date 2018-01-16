@@ -43,9 +43,9 @@ export default (state = initialState, action) => {
       return { ...state, deleting: true };
 
     case 'DELETE_SUPPRESSION_SUCCESS':
-      return { ...state, deleting: false, list: state.list.filter((s) => s.recipient !== meta.suppression.recipient &&
-          // && s.type !== meta.suppression.type
-          s.subaccount_id !== meta.suppression.subaccount_id)
+      return { ...state, deleting: false, list: state.list.filter((s) => !(s.recipient === meta.suppression.recipient &&
+        s.type === meta.suppression.type &&
+        s.subaccount_id === meta.suppression.subaccount_id))
       };
 
     case 'DELETE_SUPPRESSION_FAIL':

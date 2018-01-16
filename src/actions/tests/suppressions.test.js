@@ -17,15 +17,15 @@ describe('Action Creator: Suppressions', () => {
   describe('deleteSuppression', () => {
     it('makes api call with correct parameter', async() => {
       await suppressions.deleteSuppression(mockSuppression);
-      const args = sparkpostApiRequest.mock.calls[0];
       expect(sparkpostApiRequest).toHaveBeenCalledTimes(1);
-      expect(args[0]).toEqual(
+      expect(sparkpostApiRequest).toHaveBeenCalledWith(
         {
           type: 'DELETE_SUPPRESSION',
           meta: {
             method: 'DELETE',
             url: '/suppression-list/foo@bar.com',
             headers: {},
+            data: { type: mockSuppression.type },
             suppression: mockSuppression
           }
         }
@@ -35,15 +35,15 @@ describe('Action Creator: Suppressions', () => {
     it('includes subaccount id in header when exists', async() => {
       mockSuppression.subaccount_id = 101;
       await suppressions.deleteSuppression(mockSuppression);
-      const args = sparkpostApiRequest.mock.calls[0];
       expect(sparkpostApiRequest).toHaveBeenCalledTimes(1);
-      expect(args[0]).toEqual(
+      expect(sparkpostApiRequest).toHaveBeenCalledWith(
         {
           type: 'DELETE_SUPPRESSION',
           meta: {
             method: 'DELETE',
             url: '/suppression-list/foo@bar.com',
             headers: { 'x-msys-subaccount': 101 },
+            data: { type: mockSuppression.type },
             suppression: mockSuppression
           }
         }
