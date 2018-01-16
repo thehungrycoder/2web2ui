@@ -6,7 +6,6 @@ import qs from 'query-string';
 import { refreshBounceChartMetrics, refreshBounceTableMetrics } from 'src/actions/bounceReport';
 import { addFilter, refreshTypeaheadCache } from 'src/actions/reportFilters';
 import { getFilterSearchOptions, parseSearch } from 'src/helpers/reports';
-import { relativeDateOptionsIndexed } from 'src/helpers/date';
 import { showAlert } from 'src/actions/globalAlert';
 import { TableCollection, Empty, LongTextContainer } from 'src/components';
 import { Percent } from 'src/components/formatters';
@@ -110,19 +109,27 @@ export class BouncePage extends Component {
   }
 
   renderTopLevelMetrics() {
-    const { aggregatesLoading, aggregates, filters } = this.props;
+    const { chartLoading, aggregates, filters } = this.props;
 
-    if (aggregatesLoading) {
-      return <PanelLoading />;
+    // Aggregates aren't ready until chart refreshes
+    if (chartLoading) {
+      return <PanelLoading minHeight='115px' />;
     }
 
     if (aggregates) {
-      return <MetricsSummary
-        rateValue={(aggregates.countBounce / aggregates.countTargeted) * 100}
-        rateTitle={'Bounce Rate'}>
-        { <span><strong>{aggregates.countBounce.toLocaleString()}</strong> of your messages were bounced of <strong>{aggregates.countTargeted.toLocaleString()}</strong> messages targeted in the <strong>{ filters.relativeRange && filters.relativeRange !== 'custom' ? relativeDateOptionsIndexed[filters.relativeRange] : `from ${filters.from} to ${filters.to}`}</strong>.</span> }
-      </MetricsSummary>;
+      const { countBounce, countTargeted } = aggregates;
+
+      return (
+        <MetricsSummary
+          rateValue={(countBounce / countTargeted) * 100}
+          rateTitle='Bounce Rate'
+          {...filters} >
+          <strong>{countBounce.toLocaleString()}</strong> of your messages were bounced of <strong>{countTargeted.toLocaleString()}</strong> messages targeted
+        </MetricsSummary>
+      );
     }
+
+    return null;
   }
 
   render() {
@@ -151,14 +158,12 @@ export class BouncePage extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const aggregatesLoading = state.bounceReport.aggregatesLoading;
-  const chartLoading = aggregatesLoading || state.bounceReport.categoriesLoading;
+  const chartLoading = state.bounceReport.aggregatesLoading || state.bounceReport.categoriesLoading;
   const tableLoading = chartLoading || state.bounceReport.reasonsLoading;
   const aggregates = state.bounceReport.aggregates;
   return {
     filters: state.reportFilters,
     chartLoading,
-    aggregatesLoading,
     aggregates,
     totalBounces: aggregates ? aggregates.countBounce : 1,
     tableLoading,

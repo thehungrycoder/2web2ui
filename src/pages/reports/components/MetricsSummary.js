@@ -1,29 +1,42 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import moment from 'moment';
 import { Panel, Grid } from '@sparkpost/matchbox';
-import { Percent } from 'src/components/formatters';
+import { Percent } from 'src/components';
+import { relativeDateOptionsIndexed } from 'src/helpers/date';
 
 import styles from './MetricsSummary.module.scss';
 
 class MetricsSummary extends Component {
+  renderDate() {
+    const { to, from, relativeRange } = this.props;
+    const format = 'MMM D \'YY, h:mma';
+
+    if (relativeRange === 'custom') {
+      return <span> from <strong>{moment(from).format(format)}</strong> to <strong>{moment(to).format(format)}</strong></span>;
+    }
+
+    return <span> in the <strong>{relativeDateOptionsIndexed[relativeRange].toLowerCase()}</strong></span>;
+  }
+
   render() {
-    const { rateValue, rateTitle } = this.props;
-    const children = React.Children.toArray(this.props.children);
+    const { children, rateValue, rateTitle, secondaryMessage } = this.props;
 
     return (
-      <Panel accent>
+      <Panel className={styles.Panel}>
         <Grid>
-          <Grid.Column lg={3}>
+          <Grid.Column xs={12} md={3} xl={2}>
             <div className={styles.panelvertical}>
-              <h1 className={styles.Large}><Percent value={rateValue} /></h1>
-              <h6 className={styles.Caption}>{rateTitle}</h6>
+              <h1 className={styles.RateValue}><Percent value={rateValue} /></h1>
+              <h6 className={styles.RateTitle}>{rateTitle}</h6>
             </div>
           </Grid.Column>
           <Grid.Column>
             <div className={styles.panelvertical}>
               <p className={styles.Description}>
-                {children[0]}
+                {children}{this.renderDate()}.
               </p>
-              {children.length > 1 && children[1]}
+              {secondaryMessage && <p className={styles.Secondary}>{secondaryMessage}</p>}
             </div>
           </Grid.Column>
         </Grid>
@@ -31,5 +44,14 @@ class MetricsSummary extends Component {
     );
   }
 }
+
+MetricsSummary.propTypes = {
+  to: PropTypes.instanceOf(Date),
+  from: PropTypes.instanceOf(Date),
+  relativeRange: PropTypes.string,
+  rateValue: PropTypes.number,
+  rateTitle: PropTypes.string,
+  secondaryMessage: PropTypes.string
+};
 
 export default MetricsSummary;

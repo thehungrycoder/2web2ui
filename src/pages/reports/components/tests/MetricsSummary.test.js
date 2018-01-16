@@ -2,23 +2,26 @@ import React from 'react';
 import MetricsSummary from '../MetricsSummary';
 import { shallow } from 'enzyme';
 
-describe('MetricsSummary: ', () => {
-  it('should render', () => {
-    const props = {
-      rateValue: '10',
-      rateTitle: 'Summary Title'
-    };
+const props = {
+  rateValue: 10,
+  rateTitle: 'Summary Title',
+  to: new Date(1487076708000),
+  from: new Date(1482076708000)
+};
 
-    const wrapper = shallow(<MetricsSummary {...props} ><p>child1</p></MetricsSummary>);
+describe('MetricsSummary: ', () => {
+  it('should render custom date', () => {
+    const wrapper = shallow(<MetricsSummary {...props} relativeRange='custom'><p>message</p></MetricsSummary>);
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should render 2nd child if it exists', () => {
-    const props = {
-      rateValue: '10',
-      rateTitle: 'Summary Title'
-    };
-    const wrapper = shallow(<MetricsSummary {...props} ><p>child1</p><p>child2</p></MetricsSummary>);
+  it('should render relative range', () => {
+    const wrapper = shallow(<MetricsSummary {...props} relativeRange='30days'><p>message</p></MetricsSummary>);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render secondary message', () => {
+    const wrapper = shallow(<MetricsSummary {...props} relativeRange='custom' secondaryMessage='another message'><p>message</p></MetricsSummary>);
     expect(wrapper).toMatchSnapshot();
   });
 });

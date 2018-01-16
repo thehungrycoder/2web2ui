@@ -1,15 +1,19 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 
-.Large {
+.RateValue {
   @include text-style-display-heading;
   font-size: rem(36);
   margin-bottom: 0;
 }
 
-.Caption {
+.RateTitle {
   color: color(gray, 3);
   font-weight: 400;
-  margin-bottom: 0;
+  margin-bottom: spacing();
+
+  @media screen and (min-width: breakpoint(small)) {
+    margin-bottom: 0;
+  }
 }
 
 .Description {
@@ -23,12 +27,15 @@
 }
 
 .panelvertical {
-  // display: inline-block;
-  vertical-align: top;
+  vertical-align: middle;
   height: 100%;
-  padding: rem(30);
+}
 
-  &:first-child {
-    border-right: 1px solid color(gray, 9);
-  }
+.Panel {
+  padding: rem(30);
+}
+
+.Secondary {
+  color: color(gray, 3);
+  margin: 0;
 }

@@ -1,3 +1,4 @@
+/* eslint max-lines: ["error", 175] */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -5,7 +6,7 @@ import qs from 'query-string';
 import { TableCollection, Empty, LongTextContainer } from 'src/components';
 import { addFilter, refreshTypeaheadCache } from 'src/actions/reportFilters';
 import { loadDelayReasonsByDomain, loadDelayMetrics } from 'src/actions/delayReport';
-import { parseSearch, getFilterSearchOptions, humanizeTimeRange } from 'src/helpers/reports';
+import { parseSearch, getFilterSearchOptions } from 'src/helpers/reports';
 import { Percent } from 'src/components/formatters';
 import { showAlert } from 'src/actions/globalAlert';
 import { Page, Panel, UnstyledLink } from '@sparkpost/matchbox';
@@ -96,15 +97,23 @@ export class DelayPage extends Component {
     const { aggregatesLoading, aggregates, filters } = this.props;
 
     if (aggregatesLoading) {
-      return <PanelLoading />;
+      return <PanelLoading minHeight='115px' />;
     }
 
-    return <MetricsSummary
-      rateValue={(aggregates.count_delayed_first / aggregates.count_accepted) * 100}
-      rateTitle={'Delayed Rate'}>
-      { aggregates.count_delayed && <span><strong>{aggregates.count_delayed.toLocaleString()}</strong> of your messages were delayed of <strong>{aggregates.count_accepted.toLocaleString()}</strong> messages accepted in the <strong>last {humanizeTimeRange(filters.from, filters.to)}</strong>.</span> }
-      { aggregates.count_delayed_first && <small>{aggregates.count_delayed_first.toLocaleString()} were delayed on first attempt.</small> }
-    </MetricsSummary>;
+    if (aggregates) {
+      const { count_delayed_first, count_accepted } = aggregates;
+      return (
+        <MetricsSummary
+          rateValue={(count_delayed_first / count_accepted) * 100}
+          rateTitle='Delayed Rate'
+          secondaryMessage={`${count_delayed_first.toLocaleString()} were delayed on first attempt.`}
+          {...filters} >
+          <strong>{count_delayed_first.toLocaleString()}</strong> of your messages were delayed of <strong>{count_accepted.toLocaleString()}</strong> messages accepted
+        </MetricsSummary>
+      );
+    }
+
+    return null;
   }
 
   render() {
