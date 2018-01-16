@@ -8,20 +8,12 @@ import PanelLoading from 'src/components/panelLoading/PanelLoading';
 import EngagementChart from './components/EngagementChart';
 import EngagementFilters from './components/EngagementFilters';
 
-// Experimental alternative to inline JSX conditions
-// @see https://reactjs.org/docs/conditional-rendering.html#inline-if-with-logical--operator
-function If({ children, condition }) {
-  return condition ? children : null;
-}
-
 export function EngagementPage({ chart, getChartData }) {
   return (
     <Page title='Engagement Report'>
       <EngagementFilters disabled={chart.loading} onLoad={getChartData} />
-      <If condition={chart.loading}>
-        <PanelLoading />
-      </If>
-      <If condition={!chart.loading}>
+      {chart.loading && <PanelLoading />}
+      {!chart.loading && (
         <Panel sectioned>
           <EngagementChart
             accepted={chart.data.count_accepted}
@@ -30,7 +22,7 @@ export function EngagementPage({ chart, getChartData }) {
             targeted={chart.data.count_targeted}
           />
         </Panel>
-      </If>
+      )}
     </Page>
   );
 }

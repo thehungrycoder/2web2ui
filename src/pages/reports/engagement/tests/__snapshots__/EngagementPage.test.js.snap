@@ -9,25 +9,16 @@ exports[`EngagementPage renders engagement report page with data 1`] = `
     disabled={false}
     onLoad={[Function]}
   />
-  <If
-    condition={false}
+  <Panel
+    sectioned={true}
   >
-    <PanelLoading />
-  </If>
-  <If
-    condition={true}
-  >
-    <Panel
-      sectioned={true}
-    >
-      <LoadableComponent
-        accepted={1}
-        clicks={3}
-        opens={4}
-        targeted={2}
-      />
-    </Panel>
-  </If>
+    <LoadableComponent
+      accepted={1}
+      clicks={3}
+      opens={4}
+      targeted={2}
+    />
+  </Panel>
 </Page>
 `;
 
@@ -40,19 +31,6 @@ exports[`EngagementPage renders loading panel 1`] = `
     disabled={true}
     onLoad={[Function]}
   />
-  <If
-    condition={true}
-  >
-    <PanelLoading />
-  </If>
-  <If
-    condition={false}
-  >
-    <Panel
-      sectioned={true}
-    >
-      <LoadableComponent />
-    </Panel>
-  </If>
+  <PanelLoading />
 </Page>
 `;
