@@ -1,12 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`displays share modal 1`] = `
-Array [
+<div>
   <Connect(Filters)
     onShare={[Function]}
     refresh={[Function]}
     shareDisabled={false}
-  />,
+  />
   <ShareModal
     handleToggle={[Function]}
     open={true}
@@ -18,17 +18,17 @@ Array [
         "to": "1970-01-02T00:00:00Z",
       }
     }
-  />,
-]
+  />
+</div>
 `;
 
 exports[`renders filters, hydrates with filters from query string, and requests data 1`] = `
-Array [
+<div>
   <Connect(Filters)
     onShare={[Function]}
     refresh={[Function]}
     shareDisabled={false}
-  />,
+  />
   <ShareModal
     handleToggle={[Function]}
     open={false}
@@ -40,6 +40,6 @@ Array [
         "to": "1970-01-02T00:00:00Z",
       }
     }
-  />,
-]
+  />
+</div>
 `;

@@ -42,18 +42,20 @@ export class EngagementFilters extends Component {
   render() {
     const query = getFilterSearchOptions(this.props.filters);
 
-    return [
-      <Filters
-        refresh={this.onFilterChange}
-        onShare={this.onToggleShareModal}
-        shareDisabled={this.props.disabled}
-      />,
-      <ShareModal
-        open={this.state.open}
-        handleToggle={this.onToggleShareModal}
-        query={query}
-      />
-    ];
+    return (
+      <div>
+        <Filters
+          refresh={this.onFilterChange}
+          onShare={this.onToggleShareModal}
+          shareDisabled={this.props.disabled}
+        />
+        <ShareModal
+          open={this.state.open}
+          handleToggle={this.onToggleShareModal}
+          query={query}
+        />
+      </div>
+    );
   }
 }
 
