@@ -30,7 +30,7 @@ Object {
       "count_targeted": 272234,
     },
     "error": null,
-    "loading": true,
+    "loading": false,
   },
 }
 `;

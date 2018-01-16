@@ -1,32 +1,58 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders engagement report page 1`] = `
+exports[`EngagementPage renders engagement report page with data 1`] = `
 <Page
   empty={Object {}}
   title="Engagement Report"
 >
-  <Panel
-    sectioned={true}
+  <withRouter(Connect(EngagementFilters))
+    disabled={false}
+    onLoad={[Function]}
+  />
+  <If
+    condition={false}
   >
-    <LoadableComponent />
-  </Panel>
+    <PanelLoading />
+  </If>
+  <If
+    condition={true}
+  >
+    <Panel
+      sectioned={true}
+    >
+      <LoadableComponent
+        accepted={1}
+        clicks={3}
+        opens={4}
+        targeted={2}
+      />
+    </Panel>
+  </If>
 </Page>
 `;
 
-exports[`renders engagement report page with data 1`] = `
+exports[`EngagementPage renders loading panel 1`] = `
 <Page
   empty={Object {}}
   title="Engagement Report"
 >
-  <Panel
-    sectioned={true}
+  <withRouter(Connect(EngagementFilters))
+    disabled={true}
+    onLoad={[Function]}
+  />
+  <If
+    condition={true}
   >
-    <LoadableComponent
-      accepted={1}
-      clicks={3}
-      opens={4}
-      targeted={2}
-    />
-  </Panel>
+    <PanelLoading />
+  </If>
+  <If
+    condition={false}
+  >
+    <Panel
+      sectioned={true}
+    >
+      <LoadableComponent />
+    </Panel>
+  </If>
 </Page>
 `;

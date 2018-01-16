@@ -1,32 +1,38 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import { Page, Panel } from '@sparkpost/matchbox';
 import { getChartData } from 'src/actions/engagementReport';
+import PanelLoading from 'src/components/panelLoading/PanelLoading';
 import EngagementChart from './components/EngagementChart';
+import EngagementFilters from './components/EngagementFilters';
 
-export class EngagementPage extends Component {
-  componentDidMount() {
-    this.props.getChartData();
-  }
+// Experimental alternative to inline JSX conditions
+// @see https://reactjs.org/docs/conditional-rendering.html#inline-if-with-logical--operator
+function If({ children, condition }) {
+  return condition ? children : null;
+}
 
-  render() {
-    const { data } = this.props.chart;
-
-    return (
-      <Page title='Engagement Report'>
+export function EngagementPage({ chart, getChartData }) {
+  return (
+    <Page title='Engagement Report'>
+      <EngagementFilters disabled={chart.loading} onLoad={getChartData} />
+      <If condition={chart.loading}>
+        <PanelLoading />
+      </If>
+      <If condition={!chart.loading}>
         <Panel sectioned>
           <EngagementChart
-            accepted={data.count_accepted}
-            clicks={data.count_unique_clicked_approx}
-            opens={data.count_unique_confirmed_opened_approx}
-            targeted={data.count_targeted}
+            accepted={chart.data.count_accepted}
+            clicks={chart.data.count_unique_clicked_approx}
+            opens={chart.data.count_unique_confirmed_opened_approx}
+            targeted={chart.data.count_targeted}
           />
         </Panel>
-      </Page>
-    );
-  }
+      </If>
+    </Page>
+  );
 }
 
 const mapStateToProps = (state, props) => ({
