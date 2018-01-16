@@ -1,6 +1,7 @@
 import * as reports from '../reports';
 import * as dateHelpers from 'src/helpers/date';
 
+jest.mock('src/actions/reportFilters');
 jest.mock('src/helpers/date');
 
 beforeEach(() => {

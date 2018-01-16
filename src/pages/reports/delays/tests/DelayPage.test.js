@@ -10,7 +10,7 @@ Date.now = jest.fn(() => 1487076708000);
 
 describe('DelayPage: ', () => {
   const props = {
-    filters: 'new-filter',
+    filters: { relativeRange: 'hour' },
     addFilter: jest.fn(),
     tableLoading: false,
     reasons: [
@@ -20,6 +20,11 @@ describe('DelayPage: ', () => {
         reason: 'my reason'
       }
     ],
+    aggregates: {
+      count_delayed: 1000,
+      count_delayed_first: 10,
+      count_accepted: 10000
+    },
     totalAccepted: 1000,
     loadDelayReasonsByDomain: jest.fn(() => Promise.resolve()),
     refreshTypeaheadCache: jest.fn(() => Promise.resolve()),
@@ -69,6 +74,11 @@ describe('DelayPage: ', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('should show loading panel when aggregates are still loading', () => {
+    wrapper.setProps({ aggregatesLoading: true });
+    expect(wrapper).toMatchSnapshot();
+  });
+
   it('should show an alert when refresh fails', async() => {
     wrapper.setProps({ loadDelayMetrics: jest.fn(() => Promise.reject(new Error('no way jose'))) });
     await wrapper.instance().handleRefresh();
@@ -83,7 +93,6 @@ describe('DelayPage: ', () => {
 
   it('should render row data properly', () => {
     const rows = wrapper.instance().getRowData({ reason: 'bad delay', count_delayed: 1, count_delayed_first: 10, domain: 'gmail.com' });
-
     expect(renderRowData(rows)).toMatchSnapshot();
   });
 
@@ -100,4 +109,8 @@ describe('DelayPage: ', () => {
     expect(stateSpy).toHaveBeenCalled();
   });
 
+  it('should not display top level metrics when there are no aggregates', () => {
+    wrapper.setProps({ aggregates: {}});
+    expect(wrapper.find('MetricsSummary')).toHaveLength(0);
+  });
 });

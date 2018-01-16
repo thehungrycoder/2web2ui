@@ -1,6 +1,7 @@
 const initialState = {
   precision: '',
-  categories: []
+  categories: [],
+  aggregates: {}
 };
 
 export default (state = initialState, { type, payload }) => {

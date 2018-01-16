@@ -21,6 +21,7 @@ describe('Action Creator: Delay Report', () => {
   beforeEach(() => {
     stateMock = {};
     metricsActions.fetchDeliverability = jest.fn(() => [{ count_accepted: 100, count_delay: 1 }]);
+    metricsActions.fetchDelayReasonsByDomain = jest.fn(() => [1,2,3]);
     metricsHelpers.getQueryFromOptions.mockImplementation(() => ({ from }));
 
     dispatchMock = jest.fn((a) => Promise.resolve(a));
