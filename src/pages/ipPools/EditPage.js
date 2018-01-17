@@ -5,7 +5,8 @@ import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 
 import { Page, Panel } from '@sparkpost/matchbox';
-import { Loading, DeleteModal, ApiErrorBanner } from 'src/components';
+import { DeleteModal, ApiErrorBanner } from 'src/components';
+import PanelLoading from 'src/components/panelLoading/PanelLoading';
 import PoolForm from './components/PoolForm';
 
 import { showAlert } from 'src/actions/globalAlert';
@@ -128,13 +129,15 @@ export class EditPage extends React.Component {
   }
 
   render() {
-    if (this.props.loading) {
-      return <Loading />;
+    const { loading, pool } = this.props;
+
+    if (loading) {
+      return <PanelLoading />;
     }
 
     return (
       <Page
-        title="Edit IP Pool"
+        title={`${pool.name} (${pool.id})`}
         breadcrumbAction={breadcrumbAction}
         secondaryActions={this.secondaryActions}>
 
@@ -153,11 +156,12 @@ export class EditPage extends React.Component {
 }
 
 const mapStateToProps = ({ ipPools }) => {
-  const { getLoading, getError, listLoading, listError } = ipPools;
+  const { getLoading, getError, listLoading, listError, pool } = ipPools;
 
   return {
     loading: getLoading || listLoading,
     error: listError || getError,
+    pool,
     listError,
     getError
   };

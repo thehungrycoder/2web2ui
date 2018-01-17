@@ -19,7 +19,6 @@ export class PoolForm extends Component {
     name={encodeIp(ip.external_ip)}
     component={SelectWrapper}
     options={poolOptions}
-    label="IP pool"
     disabled={submitting}/>
   );
 
@@ -34,10 +33,10 @@ export class PoolForm extends Component {
   }
 
   renderCollection() {
-    const { isNew, ips, list } = this.props;
+    const { isNew, ips, list, pool: currentPool } = this.props;
     const poolOptions = list.map((pool) => ({
       value: pool.id,
-      label: pool.name
+      label: (pool.id === currentPool.id) ? '-- Change Pool --' : `${pool.name} (${pool.id})`
     }));
     const getRowDataFunc = this.getRowData.bind(this, poolOptions);
 

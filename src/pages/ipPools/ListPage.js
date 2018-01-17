@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { listPools } from 'src/actions/ipPools';
+import { getOrderedIpPools } from 'src/selectors/ipPools';
 import { Loading, TableCollection, ApiErrorBanner } from 'src/components';
 import { Page } from '@sparkpost/matchbox';
 
@@ -73,9 +74,10 @@ export class IpPoolsList extends Component {
   }
 }
 
-function mapStateToProps({ ipPools }) {
+function mapStateToProps(state) {
+  const { ipPools } = state;
   return {
-    ipPools: ipPools.list,
+    ipPools: getOrderedIpPools(state),
     loading: ipPools.listLoading,
     error: ipPools.listError
   };
