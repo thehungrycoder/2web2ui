@@ -31,6 +31,8 @@ exports[`EngagementPage renders loading panel 1`] = `
     disabled={true}
     onLoad={[Function]}
   />
-  <PanelLoading />
+  <PanelLoading
+    minHeight="400px"
+  />
 </Page>
 `;
