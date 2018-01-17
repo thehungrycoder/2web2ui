@@ -1,5 +1,66 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Results getRowData renders row correctly 1`] = `
+Array [
+  "rec1@dom.com",
+  "Transactional",
+  "Manually added",
+  <div
+    style={
+      Object {
+        "textAlign": "right",
+      }
+    }
+  >
+    <Button
+      onClick={[Function]}
+      size="small"
+    >
+      View Details
+    </Button>
+      
+    <Button
+      destructive={true}
+      onClick={[Function]}
+      size="small"
+    >
+      Delete
+    </Button>
+  </div>,
+]
+`;
+
+exports[`Results getRowData renders row correctly with subaccounts 1`] = `
+Array [
+  "rec2@dom.com",
+  "Non-transactional",
+  "Manually added",
+  "101",
+  <div
+    style={
+      Object {
+        "textAlign": "right",
+      }
+    }
+  >
+    <Button
+      onClick={[Function]}
+      size="small"
+    >
+      View Details
+    </Button>
+      
+    <Button
+      destructive={true}
+      onClick={[Function]}
+      size="small"
+    >
+      Delete
+    </Button>
+  </div>,
+]
+`;
+
 exports[`Results renders correctly (empty suppressions) 1`] = `
 <Empty
   message="There are no results for your current query"
@@ -7,93 +68,210 @@ exports[`Results renders correctly (empty suppressions) 1`] = `
 `;
 
 exports[`Results renders correctly (with suppressions) 1`] = `
-<TableCollection
-  columns={
-    Array [
-      Object {
-        "label": "Recipient",
-      },
-      Object {
-        "label": "Type",
-        "width": "18%",
-      },
-      Object {
-        "label": "Source",
-        "width": "20%",
-      },
-      Object {
-        "label": "",
-        "width": "15%",
-      },
-    ]
-  }
-  getRowData={[Function]}
-  pagination={true}
-  rows={
-    Array [
-      Object {
-        "recipient": "rec1@dom.com",
-        "source": "Manually added",
-        "type": "Transactional",
-      },
-      Object {
-        "recipient": "rec2@dom.com",
-        "source": "Manually added",
-        "subaccount_id": 101,
-        "type": "Non-transactional",
-      },
-    ]
-  }
-/>
+<div>
+  <TableCollection
+    columns={
+      Array [
+        Object {
+          "label": "Recipient",
+        },
+        Object {
+          "label": "Type",
+          "width": "18%",
+        },
+        Object {
+          "label": "Source",
+          "width": "20%",
+        },
+        Object {
+          "label": "",
+          "width": "21%",
+        },
+      ]
+    }
+    getRowData={[Function]}
+    pagination={true}
+    rows={
+      Array [
+        Object {
+          "recipient": "rec1@dom.com",
+          "source": "Manually added",
+          "type": "transactional",
+        },
+        Object {
+          "recipient": "rec2@dom.com",
+          "source": "Manually added",
+          "subaccount_id": 101,
+          "type": "non_transactional",
+        },
+      ]
+    }
+  />
+</div>
 `;
 
 exports[`Results renders correctly (with suppressions, with subaccount) 1`] = `
-<TableCollection
-  columns={
-    Array [
-      Object {
-        "label": "Recipient",
-      },
-      Object {
-        "label": "Type",
-        "width": "18%",
-      },
-      Object {
-        "label": "Source",
-        "width": "20%",
-      },
-      Object {
-        "label": "Subaccount",
-        "width": "18%",
-      },
-      Object {
-        "label": "",
-        "width": "15%",
-      },
-    ]
-  }
-  getRowData={[Function]}
-  pagination={true}
-  rows={
-    Array [
-      Object {
-        "recipient": "rec1@dom.com",
-        "source": "Manually added",
-        "type": "Transactional",
-      },
-      Object {
-        "recipient": "rec2@dom.com",
-        "source": "Manually added",
-        "subaccount_id": 101,
-        "type": "Non-transactional",
-      },
-    ]
-  }
-/>
+<div>
+  <TableCollection
+    columns={
+      Array [
+        Object {
+          "label": "Recipient",
+        },
+        Object {
+          "label": "Type",
+          "width": "18%",
+        },
+        Object {
+          "label": "Source",
+          "width": "20%",
+        },
+        Object {
+          "label": "Subaccount",
+          "width": "18%",
+        },
+        Object {
+          "label": "",
+          "width": "21%",
+        },
+      ]
+    }
+    getRowData={[Function]}
+    pagination={true}
+    rows={
+      Array [
+        Object {
+          "recipient": "rec1@dom.com",
+          "source": "Manually added",
+          "type": "transactional",
+        },
+        Object {
+          "recipient": "rec2@dom.com",
+          "source": "Manually added",
+          "subaccount_id": 101,
+          "type": "non_transactional",
+        },
+      ]
+    }
+  />
+</div>
 `;
 
 exports[`Results renders correctly on initial loading 1`] = `
 <Empty
   message="Choose some options to see your suppressions"
 />
+`;
+
+exports[`Results renders correctly when list is loading 1`] = `
+<PanelLoading
+  minHeight="400px"
+/>
+`;
+
+exports[`Results renders delete confirmation modal correctly 1`] = `
+<div>
+  <DeleteModal
+    content={
+      <p>
+        This can not be undone!
+      </p>
+    }
+    onCancel={[Function]}
+    onConfirm={[Function]}
+    open={false}
+    title="Are you sure you want to delete undefined from suppression list?"
+  />
+  <TableCollection
+    columns={
+      Array [
+        Object {
+          "label": "Recipient",
+        },
+        Object {
+          "label": "Type",
+          "width": "18%",
+        },
+        Object {
+          "label": "Source",
+          "width": "20%",
+        },
+        Object {
+          "label": "",
+          "width": "21%",
+        },
+      ]
+    }
+    getRowData={[Function]}
+    pagination={true}
+    rows={
+      Array [
+        Object {
+          "recipient": "rec1@dom.com",
+          "source": "Manually added",
+          "type": "transactional",
+        },
+        Object {
+          "recipient": "rec2@dom.com",
+          "source": "Manually added",
+          "subaccount_id": 101,
+          "type": "non_transactional",
+        },
+      ]
+    }
+  />
+</div>
+`;
+
+exports[`Results renders detail modal correctly 1`] = `
+<div>
+  <Detail
+    hasSubaccounts={true}
+    onCancel={[Function]}
+    open={false}
+    suppression={Object {}}
+  />
+  <TableCollection
+    columns={
+      Array [
+        Object {
+          "label": "Recipient",
+        },
+        Object {
+          "label": "Type",
+          "width": "18%",
+        },
+        Object {
+          "label": "Source",
+          "width": "20%",
+        },
+        Object {
+          "label": "Subaccount",
+          "width": "18%",
+        },
+        Object {
+          "label": "",
+          "width": "21%",
+        },
+      ]
+    }
+    getRowData={[Function]}
+    pagination={true}
+    rows={
+      Array [
+        Object {
+          "recipient": "rec1@dom.com",
+          "source": "Manually added",
+          "type": "transactional",
+        },
+        Object {
+          "recipient": "rec2@dom.com",
+          "source": "Manually added",
+          "subaccount_id": 101,
+          "type": "non_transactional",
+        },
+      ]
+    }
+  />
+</div>
 `;

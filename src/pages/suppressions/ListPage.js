@@ -51,16 +51,16 @@ export class ListPage extends Component {
   }
 
   componentDidMount() {
-    const { reportFilters } = this.props;
-    if (this.props.hasSubaccounts) {
-      this.props.listSubaccounts();
+    const { reportFilters, hasSubaccounts, searchSuppressions, listSubaccounts } = this.props;
+    if (hasSubaccounts) {
+      listSubaccounts();
     }
-    this.props.searchSuppressions({ reportFilters });
+    searchSuppressions({ reportFilters });
   }
 
   render() {
     const { selectedTab } = this.state;
-    const { loading, list, subaccounts, hasSubaccounts } = this.props;
+    const { loading, deleting, list, subaccounts, hasSubaccounts } = this.props;
 
     return (
       <Page
@@ -78,20 +78,21 @@ export class ListPage extends Component {
             { selectedTab === 1 ? this.renderFindByEmails() : this.renderFilters() }
           </Panel.Section>
         </Panel>
-        <Results results={list} loading={loading} subaccounts={subaccounts} hasSubaccounts={hasSubaccounts}/>
+        <Results results={list} loading={loading} deleting={deleting} subaccounts={subaccounts} hasSubaccounts={hasSubaccounts}/>
       </Page>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  const { listLoading, list } = state.suppressions;
+  const { listLoading, list, deleting } = state.suppressions;
   return {
     reportFilters: state.reportFilters,
     loading: listLoading,
-    list: list,
+    list,
     hasSubaccounts: hasSubaccounts(state),
-    subaccounts: state.subaccounts.list
+    subaccounts: state.subaccounts.list,
+    deleting
   };
 };
 

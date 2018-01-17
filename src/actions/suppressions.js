@@ -2,6 +2,7 @@ import moment from 'moment';
 import config from 'src/config';
 import _ from 'lodash';
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
+import setSubaccountHeader from 'src/actions/helpers/setSubaccountHeader';
 import { refreshReportRange } from 'src/actions/reportFilters';
 import { showAlert } from './globalAlert';
 
@@ -98,3 +99,19 @@ export function searchSuppressions(options) {
       });
   };
 }
+
+export function deleteSuppression(suppression) {
+  const { recipient, subaccount_id: subaccountId, type } = suppression;
+
+  return sparkpostApiRequest({
+    type: 'DELETE_SUPPRESSION',
+    meta: {
+      method: 'DELETE',
+      url: `/suppression-list/${recipient}`,
+      headers: setSubaccountHeader(subaccountId),
+      data: { type },
+      suppression
+    }
+  });
+}
+

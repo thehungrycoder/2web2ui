@@ -15,7 +15,8 @@
       "error",
       {
         "max": 150,
-        "skipComments": true
+        "skipComments": true,
+        "skipBlankLines": true
       }
     ],
     "object-curly-spacing": [

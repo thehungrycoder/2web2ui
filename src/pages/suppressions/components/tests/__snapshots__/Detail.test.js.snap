@@ -1,0 +1,199 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Detail renders correctly (hides) on initial loading 1`] = `
+<Modal
+  open={false}
+>
+  <Panel
+    accent={true}
+    sectioned={true}
+    title="Suppression Details"
+  >
+    <div>
+      <LabelledValue
+        key="recipient"
+        label="Recipient"
+        value="foo@bar.com"
+      />
+      <LabelledValue
+        key="type"
+        label="Type"
+        value="Non-transactional"
+      />
+      <LabelledValue
+        key="source"
+        label="Source"
+      />
+      <LabelledValue
+        key="updated"
+        label="Updated"
+        value="2018/01/15 23:14"
+      />
+      <LabelledValue
+        key="created"
+        label="Created"
+        value="2018/01/15 23:14"
+      />
+      <LabelledValue
+        key="description"
+        label="Description"
+        value={
+          <LongTextContainer
+            text=""
+          />
+        }
+      />
+      <LabelledValue
+        key="raw json"
+        label="Raw JSON"
+        value={
+          <CopyField
+            hideCopy={false}
+            value="{\\"recipient\\":\\"foo@bar.com\\",\\"description\\":\\"\\",\\"updated\\":\\"2018-01-16T04:14:18.661Z\\",\\"created\\":\\"2018-01-16T04:14:18.661Z\\"}"
+          />
+        }
+      />
+    </div>
+    <div>
+      <Button
+        onClick={[Function]}
+        size="default"
+      >
+        Close
+      </Button>
+    </div>
+  </Panel>
+</Modal>
+`;
+
+exports[`Detail renders correctly (shows loading) when deleting 1`] = `
+<Modal
+  open={false}
+>
+  <Panel
+    accent={true}
+    sectioned={true}
+    title="Suppression Details"
+  >
+    <div>
+      <LabelledValue
+        key="recipient"
+        label="Recipient"
+        value="foo@bar.com"
+      />
+      <LabelledValue
+        key="type"
+        label="Type"
+        value="Non-transactional"
+      />
+      <LabelledValue
+        key="source"
+        label="Source"
+      />
+      <LabelledValue
+        key="updated"
+        label="Updated"
+        value="2018/01/15 23:14"
+      />
+      <LabelledValue
+        key="created"
+        label="Created"
+        value="2018/01/15 23:14"
+      />
+      <LabelledValue
+        key="description"
+        label="Description"
+        value={
+          <LongTextContainer
+            text=""
+          />
+        }
+      />
+      <LabelledValue
+        key="raw json"
+        label="Raw JSON"
+        value={
+          <CopyField
+            hideCopy={false}
+            value="{\\"recipient\\":\\"foo@bar.com\\",\\"description\\":\\"\\",\\"updated\\":\\"2018-01-16T04:14:18.661Z\\",\\"created\\":\\"2018-01-16T04:14:18.661Z\\"}"
+          />
+        }
+      />
+    </div>
+    <div>
+      <Button
+        onClick={[Function]}
+        size="default"
+      >
+        Close
+      </Button>
+    </div>
+  </Panel>
+</Modal>
+`;
+
+exports[`Detail renders correctly (shows) when open is true  1`] = `
+<Modal
+  open={true}
+>
+  <Panel
+    accent={true}
+    sectioned={true}
+    title="Suppression Details"
+  >
+    <div>
+      <LabelledValue
+        key="recipient"
+        label="Recipient"
+        value="foo@bar.com"
+      />
+      <LabelledValue
+        key="type"
+        label="Type"
+        value="Non-transactional"
+      />
+      <LabelledValue
+        key="source"
+        label="Source"
+      />
+      <LabelledValue
+        key="updated"
+        label="Updated"
+        value="2018/01/15 23:14"
+      />
+      <LabelledValue
+        key="created"
+        label="Created"
+        value="2018/01/15 23:14"
+      />
+      <LabelledValue
+        key="description"
+        label="Description"
+        value={
+          <LongTextContainer
+            text=""
+          />
+        }
+      />
+      <LabelledValue
+        key="raw json"
+        label="Raw JSON"
+        value={
+          <CopyField
+            hideCopy={false}
+            value="{\\"recipient\\":\\"foo@bar.com\\",\\"description\\":\\"\\",\\"updated\\":\\"2018-01-16T04:14:18.661Z\\",\\"created\\":\\"2018-01-16T04:14:18.661Z\\"}"
+          />
+        }
+      />
+    </div>
+    <div>
+      <Button
+        onClick={[Function]}
+        size="default"
+      >
+        Close
+      </Button>
+    </div>
+  </Panel>
+</Modal>
+`;

@@ -18,7 +18,6 @@ const types = [
     name: 'non_transactional'
   }
 ];
-
 const sources = [
   {
     content: 'Spam Complaint',
@@ -74,7 +73,7 @@ export class FilterForm extends Component {
         to: options.to,
         relativeRange: relativeRange
       }
-    }, this.refresh);
+    });
   }
 
   handleTypesSelection = (selected) => {
@@ -97,6 +96,14 @@ export class FilterForm extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (!_.isEqual(this.state, prevState)) {
+      this.refresh();
+    }
+  }
+
+  componentDidMount() {
+    const { list } = this.props;
+    // Note: This will cause API request each time this section is visited but that's ok
+    if (list && !list.length) {
       this.refresh();
     }
   }
@@ -132,13 +139,11 @@ export class FilterForm extends Component {
 }
 
 const formName = 'filterForm';
-
 const formOptions = {
   form: formName
 };
-
-const mapStateToProps = ({ reportFilters }) => ({
-  reportFilters
+const mapStateToProps = (state) => ({
+  reportFilters: state.reportFilters,
+  list: state.suppressions.list
 });
-
 export default connect(mapStateToProps)(reduxForm(formOptions)(FilterForm));

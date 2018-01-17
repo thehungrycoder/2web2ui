@@ -8,6 +8,7 @@ const LabelledValue = ({ label, value, children }) => {
     ? <h6>{ value }</h6>
     : children;
 
+
   const labelMarkup = label
     ? <div className={styles.LabelContainer}><small className={styles.Label}>{ label }</small></div>
     : null;
@@ -27,8 +28,7 @@ LabelledValue.propTypes = {
     PropTypes.node
   ]),
   value: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number
+    PropTypes.node
   ]),
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),

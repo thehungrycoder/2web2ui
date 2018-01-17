@@ -78,7 +78,9 @@ const config = {
   },
   sso: {
     enabled: false
-  }
+  },
+  dateFormat: 'YYYY/MM/DD',
+  timeFormat: 'HH:mm'
 };
 
 export default config;
