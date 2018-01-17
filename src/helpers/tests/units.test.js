@@ -25,6 +25,21 @@ describe('Formatting helpers', () => {
     });
   });
 
+  describe('formatFullNumber', () => {
+    it('should leave non-numbers alone', () => {
+      const iceCream = 'vanilla';
+      expect(formatting.formatFullNumber(iceCream)).toEqual(iceCream);
+    });
+
+    it('should format floats', () => {
+      expect(formatting.formatFullNumber(23456.78)).toEqual('23,457');
+    });
+
+    it('should format numbers', () => {
+      expect(formatting.formatFullNumber(23456)).toEqual('23,456');
+    });
+  });
+
   describe('formatMilliseconds', () => {
     it('should leave non-numbers alone', () => {
       const iceCream = 'vanilla';

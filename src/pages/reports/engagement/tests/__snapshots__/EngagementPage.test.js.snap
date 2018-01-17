@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`EngagementPage renders engagement report page with data 1`] = `
+exports[`renders engagement report page 1`] = `
 <Page
   empty={Object {}}
   title="Engagement Report"
@@ -9,30 +9,17 @@ exports[`EngagementPage renders engagement report page with data 1`] = `
     onLoad={[Function]}
     shareDisabled={false}
   />
-  <Panel
-    sectioned={true}
-  >
-    <LoadableComponent
-      accepted={1}
-      clicks={3}
-      opens={4}
-      targeted={2}
-    />
-  </Panel>
-</Page>
-`;
-
-exports[`EngagementPage renders loading panel 1`] = `
-<Page
-  empty={Object {}}
-  title="Engagement Report"
->
-  <withRouter(Connect(EngagementFilters))
-    onLoad={[Function]}
-    shareDisabled={true}
+  <Connect(EngagementSummary)
+    clicks={3}
+    loading={false}
+    targeted={2}
   />
-  <PanelLoading
-    minHeight="400px"
+  <LoadableComponent
+    accepted={1}
+    clicks={3}
+    loading={false}
+    opens={4}
+    targeted={2}
   />
 </Page>
 `;
