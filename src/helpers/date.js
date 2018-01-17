@@ -16,33 +16,30 @@ export const relativeDateOptionsIndexed = relativeDateOptions.reduce((result, { 
   return result;
 }, {});
 
-export function getEndOfDay(date) {
+/**
+ * Takes a date string and returns the end of that day (11:59PM)
+ *
+ * If preventFuture is true and the given day IS the current day,
+ * it returns the current time, i.e. the closest to the end
+ * of the day without going into the future.
+ *
+ * @param {String} date - date string to base date on
+ * @return {Date}
+ */
+export function getEndOfDay(date, { preventFuture }) {
+  const now = moment();
   const end = new Date(date);
+
+  if (preventFuture && now.diff(end, 'days') === 0) {
+    return now.toDate();
+  }
+
   end.setHours(23);
   end.setMinutes(59);
   end.setSeconds(59);
   end.setMilliseconds(0);
 
   return end;
-}
-
-/**
- * Takes a date string and, if the day is NOT the current day,
- * returns the end of that day (11:59 PM)
- *
- * If the given day IS the current day, it returns the current time,
- * i.e. the closest to the end of the day without going into the future.
- *
- * @param {String} date - date string to base date on
- * @return {Date}
- */
-export function maybeGetEndOfDay(date) {
-  const now = moment();
-  const end = new Date(date);
-  if (now.diff(end, 'days') === 0) {
-    return now.toDate();
-  }
-  return getEndOfDay(date);
 }
 
 export function getStartOfDay(date) {
