@@ -11,7 +11,7 @@ import EngagementFilters from './components/EngagementFilters';
 export function EngagementPage({ chart, getChartData }) {
   return (
     <Page title='Engagement Report'>
-      <EngagementFilters disabled={chart.loading} onLoad={getChartData} />
+      <EngagementFilters shareDisabled={chart.loading} onLoad={getChartData} />
       {chart.loading && <PanelLoading />}
       {!chart.loading && (
         <Panel sectioned>

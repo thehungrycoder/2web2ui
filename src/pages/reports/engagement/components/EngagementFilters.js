@@ -9,7 +9,7 @@ import ShareModal from '../../components/ShareModal';
 
 export class EngagementFilters extends Component {
   static defaultProps = {
-    disabled: false
+    shareDisabled: false
   }
 
   state = {
@@ -47,7 +47,7 @@ export class EngagementFilters extends Component {
         <Filters
           refresh={this.onFilterChange}
           onShare={this.onToggleShareModal}
-          shareDisabled={this.props.disabled}
+          shareDisabled={this.props.shareDisabled}
         />
         <ShareModal
           open={this.state.open}
