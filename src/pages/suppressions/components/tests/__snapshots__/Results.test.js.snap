@@ -163,7 +163,11 @@ exports[`Results renders correctly on initial loading 1`] = `
 />
 `;
 
-exports[`Results renders correctly when list is loading 1`] = `<PanelLoading />`;
+exports[`Results renders correctly when list is loading 1`] = `
+<PanelLoading
+  minHeight="400px"
+/>
+`;
 
 exports[`Results renders delete confirmation modal correctly 1`] = `
 <div>
