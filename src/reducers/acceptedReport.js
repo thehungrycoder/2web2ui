@@ -1,6 +1,8 @@
 const initialState = {
   aggregatesLoading: false,
-  attemptsLoading: false
+  attemptsLoading: false,
+  aggregates: {},
+  attempts: []
 };
 
 export default (state = initialState, { type, payload }) => {

@@ -29,7 +29,7 @@ const Chart = ({
 
   return (
     <div className={cx('Chart', hoveredItem && 'Chart--hover')}>
-      <ResponsiveContainer width='100%' height={350}>
+      <ResponsiveContainer width='99%' height={350}>
         <PieChart height={350}>
           <Pie
             activeIndex={hoveredDataSet === 'primary' ? hoveredItem.index : null}

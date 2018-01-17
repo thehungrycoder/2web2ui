@@ -1,6 +1,6 @@
 import { fetchDeliverability, fetchDeliveriesByAttempt } from 'src/actions/metrics';
 import { maybeRefreshTypeaheadCache, refreshReportRange } from 'src/actions/reportFilters';
-import { getQueryFromOptions, buildCommonOptions, getMetricsFromKeys } from 'src/helpers/metrics';
+import { getQueryFromOptions, buildCommonOptions, getMetricsFromKeys, transformData } from 'src/helpers/metrics';
 import { reshapeAttempts } from 'src/helpers/accepted';
 import _ from 'lodash';
 
@@ -38,8 +38,12 @@ export function refreshAcceptedMetrics(updates = {}) {
           return;
         }
 
-        return dispatch(fetchDeliveriesByAttempt(deliveryParams))
-          .then((attempts) => dispatch(refreshAcceptedChart({ aggregates: aggregates[0], attempts })));
+        return dispatch(fetchDeliveriesByAttempt(deliveryParams)).then((attempts) => {
+          dispatch(refreshAcceptedChart({
+            aggregates: transformData(aggregates, updates.metrics)[0],
+            attempts
+          }));
+        });
       });
   };
 }
