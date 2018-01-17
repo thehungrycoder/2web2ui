@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactDOM from 'react-dom';
 import { subMonths, format } from 'date-fns';
-import { getStartOfDay, getEndOfDay, relativeDateOptions } from 'src/helpers/date';
+import { getStartOfDay, maybeGetEndOfDay, relativeDateOptions } from 'src/helpers/date';
 import { Button, Datepicker, TextField, Select, Popover } from '@sparkpost/matchbox';
 import DateForm from './DateForm';
 import styles from './DateFilter.module.scss';
@@ -75,7 +75,7 @@ class DateFilter extends Component {
 
   handleDayClick = (clicked) => {
     const { selecting, selected } = this.state;
-    const dates = selecting ? selected : { from: getStartOfDay(clicked), to: getEndOfDay(clicked) };
+    const dates = selecting ? selected : { from: getStartOfDay(clicked), to: maybeGetEndOfDay(clicked) };
 
     this.setState({
       selected: dates,
@@ -94,7 +94,7 @@ class DateFilter extends Component {
 
   getOrderedRange(newDate) {
     const { from, to } = this.state.beforeSelected;
-    return (from.getTime() <= newDate.getTime()) ? { from, to: getEndOfDay(newDate) } : { from: getStartOfDay(newDate), to };
+    return (from.getTime() <= newDate.getTime()) ? { from, to: maybeGetEndOfDay(newDate) } : { from: getStartOfDay(newDate), to };
   }
 
   handleSelectRange = (e) => {
