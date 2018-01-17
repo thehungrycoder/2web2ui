@@ -32,7 +32,7 @@ describe('Formatting helpers', () => {
     });
 
     it('should format floats', () => {
-      expect(formatting.formatFullNumber(23456.78)).toEqual('23,457');
+      expect(formatting.formatFullNumber(23456.78)).toEqual('23,456.78');
     });
 
     it('should format numbers', () => {
