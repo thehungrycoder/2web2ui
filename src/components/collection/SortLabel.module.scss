@@ -1,0 +1,29 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.SortLabel {
+  display: inline-block;
+  position: relative;
+  color: color(gray, 2);
+  padding-right: spacing(large);
+
+  user-select: none; // Prevents highlight when clicking
+  transition: 0.15s;
+}
+
+.Up, .Down {
+  position: absolute;
+  right: 0;
+  opacity: 0.4;
+}
+
+.Up {
+  top: -4%;
+}
+
+.Down {
+  top: 24%;
+}
+
+.SortLabel.asc .Up, .SortLabel.desc .Down {
+  opacity: 1;
+}

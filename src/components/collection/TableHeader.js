@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Table, UnstyledLink, Icon } from '@sparkpost/matchbox';
+import { Table } from '@sparkpost/matchbox';
+import SortLabel from './SortLabel';
 
 export default class TableHeader extends Component {
   handleSorting = (column) => {
@@ -17,16 +18,18 @@ export default class TableHeader extends Component {
 
   renderSortCell = (item) => {
     const { label, sortKey } = item;
-    const { sortColumn, sortDirection = 'asc' } = this.props;
-
-    const icon = sortDirection === 'asc' ? <Icon name='CaretUp'/> : <Icon name='CaretDown'/>;
-    const formattedLabel = sortKey === sortColumn ? <span> { label }{ icon } </span> : label;
+    const { sortColumn, sortDirection } = this.props;
 
     if (sortKey) {
-      return <UnstyledLink onClick={() => this.handleSorting(sortKey)}>{ formattedLabel }</UnstyledLink>;
-    } else {
-      return label;
+      return (
+        <SortLabel
+          onClick={() => this.handleSorting(sortKey)}
+          direction={sortKey === sortColumn && sortDirection}
+          label={label} />
+      );
     }
+
+    return label;
   }
 
   render() {

@@ -40,17 +40,17 @@ describe('Component: TableHeader', () => {
   it('handles sorting correctly', () => {
     wrapper.setProps({ columns: complexColumns });
 
-    wrapper.find('UnstyledLink').first().simulate('click'); // click recipient column
+    wrapper.find('SortLabel').first().simulate('click'); // click recipient column
     expect(props.onSort).toHaveBeenCalledTimes(1);
     expect(props.onSort).toHaveBeenCalledWith('recipient', 'desc');
 
     wrapper.setProps({ sortDirection: 'desc' });
-    wrapper.find('UnstyledLink').first().simulate('click'); // clicks same (recipient) column again
+    wrapper.find('SortLabel').first().simulate('click'); // clicks same (recipient) column again
     expect(props.onSort).toHaveBeenCalledTimes(2);
     expect(props.onSort).toHaveBeenCalledWith('recipient', 'asc');
 
     wrapper.setProps({ sortDirection: 'desc' });
-    wrapper.find('UnstyledLink').last().simulate('click'); // click type column
+    wrapper.find('SortLabel').last().simulate('click'); // click type column
     expect(props.onSort).toHaveBeenCalledTimes(3);
     expect(props.onSort).toHaveBeenCalledWith('type', 'asc');
   });

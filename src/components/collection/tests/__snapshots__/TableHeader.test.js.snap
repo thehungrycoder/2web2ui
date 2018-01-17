@@ -11,29 +11,21 @@ exports[`Component: TableHeader renders header correctly with complex column con
     <Table.HeaderCell
       key="Recipient"
     >
-      <UnstyledLink
+      <SortLabel
+        direction="asc"
+        label="Recipient"
         onClick={[Function]}
-      >
-        <span>
-           
-          Recipient
-          <Icon
-            name="CaretUp"
-            size={18}
-          />
-           
-        </span>
-      </UnstyledLink>
+      />
     </Table.HeaderCell>
     <Table.HeaderCell
       key="Type"
       width="18%"
     >
-      <UnstyledLink
+      <SortLabel
+        direction={false}
+        label="Type"
         onClick={[Function]}
-      >
-        Type
-      </UnstyledLink>
+      />
     </Table.HeaderCell>
     <Table.HeaderCell
       key="Source"
