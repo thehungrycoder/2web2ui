@@ -29,8 +29,7 @@ export function createRecipientList(data) {
   });
 }
 
-export function updateRecipientList(data, params) {
-  const { id, ...updateFields } = data;
+export function updateRecipientList({ id, ...updateFields }, params) {
   return sparkpostApiRequest({
     type: 'UPDATE_RECIPIENT_LIST',
     meta: {
@@ -59,4 +58,3 @@ export function setCurrentRecipientList(id) {
     id
   };
 }
-
