@@ -19,3 +19,16 @@ it('renders engagement report page', () => {
 
   expect(wrapper).toMatchSnapshot();
 });
+
+it('displays global alert when request to fetch data fails', async() => {
+  const props = {
+    chart: { data: {}},
+    getChartData: jest.fn(() => Promise.reject()),
+    showAlert: jest.fn()
+  };
+
+  const wrapper = shallow(<EngagementPage {...props} />);
+  await wrapper.instance().onLoad();
+
+  expect(props.showAlert).toHaveBeenCalledWith(expect.objectContaining({ type: 'error' }));
+});
