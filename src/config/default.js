@@ -54,10 +54,8 @@ const config = {
     projectId: 232588,
     publicKey: '63149b1565df4b7199db939a4410b47a'
   },
-  showThingOnDash: true,
-  showSummaryReport: true,
+  splashPage: '/reports/summary',
   summaryChart: {
-    enabled: false,
     defaultMetrics: ['count_targeted', 'count_rendered', 'count_accepted', 'count_bounce']
   },
   support: {

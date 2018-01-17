@@ -27,6 +27,7 @@ import {
 } from 'src/helpers/conditions';
 
 import App from 'src/components/layout/App';
+import config from 'src/config';
 
 /**
  *  Angular UI Grant List:
@@ -90,8 +91,8 @@ const routes = [
   {
     path: '/dashboard',
     component: DashboardPage,
-    layout: App
-    // do not put any condition here bc all other routes redirect here if their condition is false
+    layout: App,
+    condition: () => config.splashPage === 'dashboard' // want to hide if not a splash page https://jira.int.messagesystems.com/browse/FAD-6046
   },
   {
     path: '/reports',
