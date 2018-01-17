@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-
+import qs from 'query-string';
 import { refreshAcceptedMetrics } from 'src/actions/acceptedReport';
 import { addFilter, refreshTypeaheadCache } from 'src/actions/reportFilters';
-import { getShareLink, getFilterSearchOptions, parseSearch } from 'src/helpers/reports';
+import { getFilterSearchOptions, parseSearch } from 'src/helpers/reports';
 import { showAlert } from 'src/actions/globalAlert';
-
 import { Empty } from 'src/components';
 import { Page } from '@sparkpost/matchbox';
 import Filters from '../components/Filters';
@@ -16,7 +15,7 @@ import ShareModal from '../components/ShareModal';
 export class AcceptedPage extends Component {
   state = {
     modal: false,
-    link: ''
+    query: {}
   }
 
   componentDidMount() {
@@ -46,13 +45,11 @@ export class AcceptedPage extends Component {
 
   updateLink = () => {
     const { filters, history } = this.props;
-    const options = getFilterSearchOptions(filters);
-    const { link, search } = getShareLink(options);
-
-    this.setState({ link });
+    const query = getFilterSearchOptions(filters);
+    const search = qs.stringify(query, { encode: false });
+    this.setState({ query });
     history.replace({ pathname: '/reports/accepted', search });
   }
-
 
   handleModalToggle = (modal) => {
     this.setState({ modal: !this.state.modal });
@@ -69,7 +66,7 @@ export class AcceptedPage extends Component {
   }
 
   render() {
-    const { modal, link } = this.state;
+    const { modal, query } = this.state;
 
     return (
       <Page title='Accepted Report'>
@@ -78,7 +75,7 @@ export class AcceptedPage extends Component {
         <ShareModal
           open={modal}
           handleToggle={this.handleModalToggle}
-          link={link} />
+          query={query} />
       </Page>
     );
   }

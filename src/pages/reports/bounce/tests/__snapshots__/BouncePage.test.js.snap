@@ -13,7 +13,9 @@ exports[`BouncePage:  should display loading panel on top level metrics when agg
   <PanelLoading
     minHeight="115px"
   />
-  <Connect(ChartGroup) />
+  <Connect(ChartGroup)
+    loading={true}
+  />
   <Panel
     className="ReasonsTable"
     title="Bounced Messages"
@@ -285,7 +287,6 @@ exports[`BouncePage:  should show empty reasons table when there are no reasons 
   >
     <Empty
       message="No bounce reasons to report"
-      title="Bounced Messages"
     />
   </Panel>
   <ShareModal

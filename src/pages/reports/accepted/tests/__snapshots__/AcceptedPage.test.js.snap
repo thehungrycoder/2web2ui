@@ -3,8 +3,8 @@
 exports[`AcceptedPage:  should handle modal 1`] = `
 <ShareModal
   handleToggle={[Function]}
-  link=""
   open={true}
+  query={Object {}}
 />
 `;
 
@@ -20,8 +20,8 @@ exports[`AcceptedPage:  should render 1`] = `
   <Connect(ChartGroup) />
   <ShareModal
     handleToggle={[Function]}
-    link=""
     open={false}
+    query={Object {}}
   />
 </Page>
 `;
