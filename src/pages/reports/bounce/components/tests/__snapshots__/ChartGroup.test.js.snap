@@ -78,7 +78,7 @@ exports[`Bounce ChartGroup:  should render 1`] = `
       xs={12}
     >
       <div>
-        <PieChart.Chart
+        <LoadableComponent
           hoveredItem={null}
           onClick={[Function]}
           onMouseOut={[Function]}
@@ -236,7 +236,7 @@ exports[`Bounce ChartGroup:  should render correctly after click 1`] = `
 `;
 
 exports[`Bounce ChartGroup:  should render correctly after click 2`] = `
-<PieChart.Chart
+<LoadableComponent
   hoveredItem={null}
   onClick={[Function]}
   onMouseOut={[Function]}

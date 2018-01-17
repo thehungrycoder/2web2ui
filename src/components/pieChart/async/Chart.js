@@ -51,4 +51,6 @@ const Chart = ({
   );
 };
 
+Chart.displayName = 'PieChart.Chart';
+
 export default Chart;

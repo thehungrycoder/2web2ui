@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 /**
  * Reshapes deliveries by attempt for the accepted pie chart
  * Places 2+ attempts under a "2 or More" group
@@ -12,7 +10,7 @@ export function reshapeAttempts(deliveries) {
   const eightToTen = { name: '8 to 10 Attempts', count: 0 };
   const overEleven = { name: '11 or More Attempts', count: 0 };
 
-  _.each(deliveries, ({ attempt, count_delivered }) => {
+  deliveries.forEach(({ attempt, count_delivered }) => {
     if (attempt === 1) {
       first.count = count_delivered;
     } else {

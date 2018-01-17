@@ -104,8 +104,8 @@ export class ChartGroup extends Component {
     }
 
     return {
-      primaryData: generateColors(primaryData, { color: primaryColor, rotate: 80, saturate: 0.06 }),
-      secondaryData: secondaryData && generateColors(secondaryData, { color: secondaryColor })
+      primaryData: generateColors(primaryData, { baseColor: primaryColor, rotate: 80, saturate: 0.06 }),
+      secondaryData: secondaryData && generateColors(secondaryData, { baseColor: secondaryColor })
     };
   }
 

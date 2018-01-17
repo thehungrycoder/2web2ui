@@ -1,5 +1,6 @@
 import React from 'react';
 import { AcceptedPage } from '../AcceptedPage';
+import Filters from '../../components/Filters';
 import { shallow } from 'enzyme';
 import * as reportHelpers from 'src/helpers/reports';
 
@@ -57,7 +58,7 @@ describe('AcceptedPage: ', () => {
   });
 
   it('should handle modal', () => {
-    wrapper.find('Connect(Filters)').simulate('share');
+    wrapper.find(Filters).simulate('share');
     expect(wrapper).toHaveState('modal', true);
     expect(wrapper.find('ShareModal')).toMatchSnapshot();
   });
