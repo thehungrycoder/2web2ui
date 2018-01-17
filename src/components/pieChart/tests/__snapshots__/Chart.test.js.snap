@@ -7,7 +7,7 @@ exports[`Chart:  should render 1`] = `
   <ResponsiveContainer
     debounce={0}
     height={350}
-    width="100%"
+    width="99%"
   >
     <PieChart
       barCategoryGap="10%"

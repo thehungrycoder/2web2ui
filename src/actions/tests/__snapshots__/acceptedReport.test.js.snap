@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Action Creator: Bounce Report should dispatch a chart refresh action 1`] = `
+exports[`Action Creator: Accepted Report should dispatch a chart refresh action 1`] = `
 Array [
   Array [
     Object {
@@ -10,7 +10,7 @@ Array [
 ]
 `;
 
-exports[`Action Creator: Bounce Report should dispatch a chart refresh action 2`] = `
+exports[`Action Creator: Accepted Report should dispatch a chart refresh action 2`] = `
 Array [
   Array [
     undefined,
@@ -29,9 +29,17 @@ Array [
     Object {
       "payload": Object {
         "aggregates": Object {
-          "count_accepted": 1,
+          "data": "transformed data",
         },
         "attempts": undefined,
+        "metrics": Array [
+          "count_targeted",
+          "count_sent",
+          "count_accepted",
+          "avg_delivery_time_first",
+          "avg_delivery_time_subsequent",
+          "avg_msg_size",
+        ],
       },
       "type": "REFRESH_ACCEPTED_CHART",
     },
@@ -39,7 +47,7 @@ Array [
 ]
 `;
 
-exports[`Action Creator: Bounce Report should not refresh chart nor update deliveries by attempt if 0 accepted 1`] = `
+exports[`Action Creator: Accepted Report should not refresh chart nor update deliveries by attempt if 0 accepted 1`] = `
 Array [
   Array [
     Object {
@@ -50,7 +58,7 @@ Array [
 ]
 `;
 
-exports[`Action Creator: Bounce Report should not refresh chart nor update deliveries by attempt if 0 accepted 2`] = `
+exports[`Action Creator: Accepted Report should not refresh chart nor update deliveries by attempt if 0 accepted 2`] = `
 Array [
   Array [
     undefined,

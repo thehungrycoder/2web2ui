@@ -11,7 +11,7 @@ jest.mock('src/helpers/metrics');
 jest.mock('src/actions/metrics');
 jest.mock('src/actions/reportFilters');
 
-describe('Action Creator: Bounce Report', () => {
+describe('Action Creator: Accepted Report', () => {
 
   const from = moment(new Date(1487076708000)).utc().format('YYYY-MM-DDTHH:MM');
   let dispatchMock;
@@ -22,6 +22,8 @@ describe('Action Creator: Bounce Report', () => {
     const metrics = 'count_accepted';
     metricsActions.fetchDeliverability = jest.fn(() => [{ count_accepted: 1 }]);
     metricsHelpers.getQueryFromOptions.mockImplementation(() => ({ from, metrics }));
+    metricsHelpers.transformData = jest.fn(() => ([{ data: 'transformed data' }]));
+    metricsHelpers.getMetricsFromKeys = jest.fn((a) => a);
 
     stateMock = {};
 

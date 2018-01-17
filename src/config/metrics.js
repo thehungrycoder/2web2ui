@@ -300,7 +300,7 @@ export const list = [
     unit: 'milliseconds',
     computeKeys: ['total_delivery_time_first', 'count_delivered_first'],
     compute: average,
-    description: 'Average delivery time in milliseconds (latency) for messages delivered on the first attempt.',
+    description: 'Average delivery time (latency) for messages delivered on the first attempt.',
     inSummary: true
   },
   {
@@ -309,7 +309,7 @@ export const list = [
     unit: 'milliseconds',
     computeKeys: ['total_delivery_time_subsequent', 'count_delivered_subsequent'],
     compute: average,
-    description: 'Average delivery time in milliseconds (latency) for messages delivered that required more than one attempt.',
+    description: 'Average delivery time (latency) for messages delivered that required more than one attempt.',
     inSummary: true
   },
   {
@@ -318,7 +318,7 @@ export const list = [
     unit: 'bytes',
     computeKeys: ['total_msg_volume', 'count_delivered'],
     compute: average,
-    description: 'Average size of delivered messages, in bytes (including attachments).',
+    description: 'Average size of delivered messages (including attachments).',
     inSummary: true
   },
   {
@@ -326,7 +326,7 @@ export const list = [
     label: 'Delivery Message Volume',
     type: 'total',
     unit: 'bytes',
-    description: 'Total size of delivered messages, in bytes (including attachments).',
+    description: 'Total size of delivered messages (including attachments).',
     inSummary: true
   },
   /* below are metrics that never show in the summary report, but are needed when making API calls from the Metrics service */

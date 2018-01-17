@@ -33,7 +33,7 @@ describe('AcceptedPage: ', () => {
   beforeEach(() => {
     spyFilterListFromSearch = reportHelpers.getFilterSearchOptions = jest.fn(() => []);
     spyParseSearch = reportHelpers.parseSearch = jest.fn(() => ({ options: {}}));
-    spyGetShare = reportHelpers.getShareLink = jest.fn(() => ({ link: '', search: '' }));
+    spyGetShare = reportHelpers.getFilterSearchOptions = jest.fn(() => ({ to: 'to', from: 'from' }));
     wrapper = shallow(<AcceptedPage {...props} />);
   });
 
@@ -55,6 +55,11 @@ describe('AcceptedPage: ', () => {
   it('should render correctly with no accepted results', () => {
     wrapper.setProps({ aggregates: null });
     expect(wrapper.find('Empty')).toMatchSnapshot();
+  });
+
+  it('should render loading correctly over top level metrics', () => {
+    wrapper.setProps({ chartLoading: true });
+    expect(wrapper.find('PanelLoading')).toHaveLength(1);
   });
 
   it('should handle modal', () => {

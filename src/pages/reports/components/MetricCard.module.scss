@@ -1,7 +1,15 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 
+.MetricCard {
+  position: relative;
+  padding-bottom: spacing();
+  height: 100%;
+}
+
 .Panel {
+  height: 100%;
   padding: rem(30);
+  margin-bottom: spacing();
 }
 
 .Value {

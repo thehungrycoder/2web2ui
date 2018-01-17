@@ -40,7 +40,8 @@ export function refreshAcceptedMetrics(updates = {}) {
 
         return dispatch(fetchDeliveriesByAttempt(deliveryParams)).then((attempts) => {
           dispatch(refreshAcceptedChart({
-            aggregates: transformData(aggregates, updates.metrics)[0],
+            metrics: updates.metrics,
+            aggregates,
             attempts
           }));
         });
@@ -49,11 +50,12 @@ export function refreshAcceptedMetrics(updates = {}) {
 }
 
 // Refresh the chart with the new data
-export function refreshAcceptedChart({ aggregates, attempts }) {
+export function refreshAcceptedChart({ aggregates, attempts, metrics }) {
   return {
     type: 'REFRESH_ACCEPTED_CHART',
     payload: {
-      aggregates,
+      metrics,
+      aggregates: transformData(aggregates, metrics)[0],
       attempts: reshapeAttempts(attempts)
     }
   };

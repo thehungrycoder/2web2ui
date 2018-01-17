@@ -6,10 +6,11 @@ import { refreshAcceptedMetrics } from 'src/actions/acceptedReport';
 import { addFilter, refreshTypeaheadCache } from 'src/actions/reportFilters';
 import { getFilterSearchOptions, parseSearch } from 'src/helpers/reports';
 import { showAlert } from 'src/actions/globalAlert';
-import { Size, Duration, Empty, PanelLoading } from 'src/components';
-import { Page, Grid } from '@sparkpost/matchbox';
-import { Filters, ShareModal, MetricCard, MetricsSummary } from '../components/';
+import { Empty, PanelLoading } from 'src/components';
+import { Page } from '@sparkpost/matchbox';
+import { Filters, ShareModal } from '../components/';
 import ChartGroup from './components/ChartGroup';
+import TopLevelMetrics from './components/TopLevelMetrics';
 import _ from 'lodash';
 
 export class AcceptedPage extends Component {
@@ -56,46 +57,17 @@ export class AcceptedPage extends Component {
   }
 
   renderTopLevelMetrics() {
-    const { chartLoading, aggregates, filters } = this.props;
-    const {
-      count_targeted,
-      count_accepted,
-      count_sent,
-      avg_delivery_time_first,
-      avg_delivery_time_subsequent,
-      avg_msg_size
-    } = aggregates;
+    const { chartLoading, aggregates, filters, metrics } = this.props;
 
     if (chartLoading) {
-      return <PanelLoading minHeight='115px' />;
+      return <PanelLoading minHeight='120px' />;
     }
 
     if (_.isEmpty(aggregates)) {
       return null;
     }
 
-    return (
-      <div>
-        <MetricsSummary
-          rateValue={(count_accepted / count_targeted) * 100}
-          rateTitle='Accepted Rate'
-          secondaryMessage={`${count_sent.toLocaleString()} messages were sent.`}
-          {...filters} >
-          <strong>{count_accepted.toLocaleString()}</strong> of <strong>{count_targeted.toLocaleString()}</strong>  targeted messages were accepted
-        </MetricsSummary>
-        <Grid>
-          <Grid.Column xs={12} md={4}>
-            <MetricCard value={<Duration value={avg_delivery_time_first}/>} label='Avg Latency (First)' />
-          </Grid.Column>
-          <Grid.Column xs={12} md={4}>
-            <MetricCard value={<Duration value={avg_delivery_time_subsequent}/>} label='Avg Latency (Subsequent)' />
-          </Grid.Column>
-          <Grid.Column xs={12} md={4}>
-            <MetricCard value={<Size value={avg_msg_size}/>} label='Avg Message Size' />
-          </Grid.Column>
-        </Grid>
-      </div>
-    );
+    return <TopLevelMetrics aggregates={aggregates} filters={filters} metrics={metrics}/>;
   }
 
   renderChart() {
@@ -130,6 +102,7 @@ const mapStateToProps = ({ reportFilters, acceptedReport }) => ({
   filters: reportFilters,
   attempts: acceptedReport.attempts,
   aggregates: acceptedReport.aggregates,
+  metrics: acceptedReport.metrics,
   chartLoading: acceptedReport.aggregatesLoading || acceptedReport.attemptsLoading
 });
 

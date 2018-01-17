@@ -4,7 +4,12 @@ exports[`AcceptedPage:  should handle modal 1`] = `
 <ShareModal
   handleToggle={[Function]}
   open={true}
-  query={Object {}}
+  query={
+    Object {
+      "from": "from",
+      "to": "to",
+    }
+  }
 />
 `;
 
@@ -16,6 +21,13 @@ exports[`AcceptedPage:  should render 1`] = `
   <Connect(Filters)
     onShare={[Function]}
     refresh={[Function]}
+  />
+  <TopLevelMetrics
+    aggregates={
+      Object {
+        "count_accepted": 1,
+      }
+    }
   />
   <Connect(ChartGroup) />
   <ShareModal
