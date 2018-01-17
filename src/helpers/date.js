@@ -26,7 +26,7 @@ export const relativeDateOptionsIndexed = relativeDateOptions.reduce((result, { 
  * @param {String} date - date string to base date on
  * @return {Date}
  */
-export function getEndOfDay(date, { preventFuture }) {
+export function getEndOfDay(date, { preventFuture } = {}) {
   const now = moment();
   const end = new Date(date);
 
@@ -34,21 +34,13 @@ export function getEndOfDay(date, { preventFuture }) {
     return now.toDate();
   }
 
-  end.setHours(23);
-  end.setMinutes(59);
-  end.setSeconds(59);
-  end.setMilliseconds(0);
-
+  end.setHours(23, 59, 59, 999);
   return end;
 }
 
 export function getStartOfDay(date) {
   const start = new Date(date);
-  start.setHours(0);
-  start.setMinutes(0);
-  start.setSeconds(0);
-  start.setMilliseconds(0);
-
+  start.setHours(0, 0, 0, 0);
   return start;
 }
 
