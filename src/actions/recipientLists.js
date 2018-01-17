@@ -55,6 +55,6 @@ export function deleteRecipientList(id) {
 export function setCurrentRecipientList(id) {
   return {
     type: 'SET_CURRENT_RECIPIENT_LIST',
-    id
+    payload: { id }
   };
 }
