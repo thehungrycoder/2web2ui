@@ -18,8 +18,6 @@ import Filters from '../components/Filters';
 import ChartGroup from './components/ChartGroup';
 import MetricsSummary from '../components/MetricsSummary';
 
-import { getSortedCollection, handleSortChange } from 'src/helpers/sort';
-
 const columns = [
   { label: 'Reason', width: '45%', sortKey: 'reason' },
   { label: 'Domain', sortKey: 'domain' },
@@ -31,9 +29,7 @@ const columns = [
 export class BouncePage extends Component {
   state = {
     modal: false,
-    query: {},
-    sortColumn: 'count_bounce',
-    sortDirection: 'desc'
+    query: {}
   }
 
   componentDidMount() {
@@ -104,7 +100,6 @@ export class BouncePage extends Component {
 
   renderCollection() {
     const { tableLoading, reasons } = this.props;
-    const { sortColumn, sortDirection } = this.state;
 
     if (tableLoading) {
       return <PanelLoading />;
@@ -116,12 +111,11 @@ export class BouncePage extends Component {
 
     return <TableCollection
       columns={columns}
-      rows={getSortedCollection(reasons, sortColumn, sortDirection)}
+      rows={reasons}
       getRowData={this.getRowData}
+      sortColumn='count_bounce'
+      sortDirection='desc'
       pagination={true}
-      sortColumn={sortColumn}
-      sortDirection={sortDirection}
-      onSort={handleSortChange.bind(this)}
     />;
   }
 
