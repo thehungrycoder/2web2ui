@@ -19,7 +19,8 @@ describe('TableCollection Component', () => {
     headerComponent: headerComponent,
     columns: columns,
     getRowData: () => {},
-    extraProp: 'plsPassDown'
+    extraProp: 'plsPassDown',
+    rows: []
   };
 
   it('should render with no props', () => {

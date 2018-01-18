@@ -41,7 +41,7 @@ export default class TableHeader extends Component {
       }
       const { label, sortKey, ...rest } = item;
 
-      return (<Table.HeaderCell key={label} {...rest}>{ this.renderSortCell(item) }</Table.HeaderCell>);
+      return <Table.HeaderCell key={label} {...rest}>{ this.renderSortCell(item) }</Table.HeaderCell>;
     });
 
     return (
