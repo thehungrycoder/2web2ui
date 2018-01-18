@@ -32,11 +32,11 @@ describe('Date helpers', () => {
   });
 
   cases('getRelativeDates calculations', ({ range, subtractArgs }) => {
-    const date = moment('2017-12-18').utc().toDate();
+    const date = moment('2017-12-18T12:00').toDate();
     Date.now = jest.fn(() => date);
     const { from, to } = getRelativeDates(range);
     expect(to).toEqual(date);
-    expect(from).toEqual(moment(date).subtract(...subtractArgs).toDate());
+    expect(from).toEqual(moment(date).utc().subtract(...subtractArgs).toDate());
   }, {
     'for an hour ago': { range: 'hour', subtractArgs: [1, 'hours']},
     'for a day ago': { range: 'day', subtractArgs: [1, 'days']},
@@ -49,11 +49,6 @@ describe('Date helpers', () => {
     expect(getRelativeDates('invalid-like-whoa')).toEqual({});
   });
 
-  describe('formatDateTime', () => {
-    it('formats date and time correctly', () => {
-      expect(dateHelpers.formatDateTime(new Date('2018-1-15').toISOString())).toMatchSnapshot();
-    });
-  });
 });
 
 

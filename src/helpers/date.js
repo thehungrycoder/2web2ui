@@ -72,9 +72,11 @@ export function getRelativeDates(range) {
 export function formatDate(date) {
   return moment(date).format(config.dateFormat);
 }
+
 export function formatTime(time) {
   return moment(time).format(config.timeFormat);
 }
+
 export function formatDateTime(datetime) {
   return `${formatDate(datetime)} ${formatTime(datetime)}`;
 }
