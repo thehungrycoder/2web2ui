@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import { ProtectedRoute } from '../ProtectedRoute';
 
 describe('Component: ProtectedRoute', () => {
@@ -13,18 +13,29 @@ describe('Component: ProtectedRoute', () => {
       },
       condition: 'do shit',
       component: jest.fn(),
-      path: '/foo/bar'
+      path: '/foo/bar',
+      location: {
+        pathname: 'path'
+      }
     };
 
-    wrapper = mount(<ProtectedRoute {...props} />);
-
+    wrapper = shallow(<ProtectedRoute {...props} />);
   });
 
-  it('should render component if logged in', () => {
+  it('should render component', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('should render route if logged in', () => {
+    wrapper.instance().renderRoute();
+    expect(wrapper).toMatchSnapshot();
+
+  });
+
   it('should redirect to auth if you are not logged in', () => {
+    wrapper.setProps({ auth: { loggedIn: false }});
+    wrapper.instance().renderRoute();
+    expect(wrapper).toMatchSnapshot();
 
   });
 

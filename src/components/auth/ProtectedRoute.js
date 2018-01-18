@@ -17,20 +17,23 @@ export class ProtectedRoute extends Component {
     );
   }
 
-  render() {
+  renderRoute = () => {
     const { auth } = this.props;
+
+    return auth.loggedIn
+      ? this.renderComponent(this.props)
+      : (
+        <Redirect to={{
+          pathname: '/auth',
+          state: { redirectAfterLogin: this.props.location.pathname }
+        }}/>
+      );
+  }
+
+  render() {
     // can't pass component prop to Route below or it confuses RR
     const routeProps = _.omit(this.props, ['component', 'auth', 'condition']);
-    return (
-      <Route {...routeProps} render={(props) => (
-        auth.loggedIn ? this.renderComponent(props) : (
-          <Redirect to={{
-            pathname: '/auth',
-            state: { redirectAfterLogin: props.location.pathname }
-          }}/>
-        )
-      )}/>
-    );
+    return (<Route {...routeProps} render={this.renderRoute} />);
   }
 }
 
