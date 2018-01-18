@@ -74,13 +74,16 @@ exports[`Results renders correctly (with suppressions) 1`] = `
       Array [
         Object {
           "label": "Recipient",
+          "sortKey": "recipient",
         },
         Object {
           "label": "Type",
+          "sortKey": "type",
           "width": "18%",
         },
         Object {
           "label": "Source",
+          "sortKey": "source",
           "width": "20%",
         },
         Object {
@@ -89,6 +92,8 @@ exports[`Results renders correctly (with suppressions) 1`] = `
         },
       ]
     }
+    defaultSortColumn="recipient"
+    defaultSortDirection="asc"
     getRowData={[Function]}
     pagination={true}
     rows={
@@ -117,17 +122,21 @@ exports[`Results renders correctly (with suppressions, with subaccount) 1`] = `
       Array [
         Object {
           "label": "Recipient",
+          "sortKey": "recipient",
         },
         Object {
           "label": "Type",
+          "sortKey": "type",
           "width": "18%",
         },
         Object {
           "label": "Source",
+          "sortKey": "source",
           "width": "20%",
         },
         Object {
           "label": "Subaccount",
+          "sortKey": "subaccount_id",
           "width": "18%",
         },
         Object {
@@ -136,6 +145,8 @@ exports[`Results renders correctly (with suppressions, with subaccount) 1`] = `
         },
       ]
     }
+    defaultSortColumn="recipient"
+    defaultSortDirection="asc"
     getRowData={[Function]}
     pagination={true}
     rows={
@@ -187,13 +198,16 @@ exports[`Results renders delete confirmation modal correctly 1`] = `
       Array [
         Object {
           "label": "Recipient",
+          "sortKey": "recipient",
         },
         Object {
           "label": "Type",
+          "sortKey": "type",
           "width": "18%",
         },
         Object {
           "label": "Source",
+          "sortKey": "source",
           "width": "20%",
         },
         Object {
@@ -202,6 +216,8 @@ exports[`Results renders delete confirmation modal correctly 1`] = `
         },
       ]
     }
+    defaultSortColumn="recipient"
+    defaultSortDirection="asc"
     getRowData={[Function]}
     pagination={true}
     rows={
@@ -236,17 +252,21 @@ exports[`Results renders detail modal correctly 1`] = `
       Array [
         Object {
           "label": "Recipient",
+          "sortKey": "recipient",
         },
         Object {
           "label": "Type",
+          "sortKey": "type",
           "width": "18%",
         },
         Object {
           "label": "Source",
+          "sortKey": "source",
           "width": "20%",
         },
         Object {
           "label": "Subaccount",
+          "sortKey": "subaccount_id",
           "width": "18%",
         },
         Object {
@@ -255,6 +275,8 @@ exports[`Results renders detail modal correctly 1`] = `
         },
       ]
     }
+    defaultSortColumn="recipient"
+    defaultSortDirection="asc"
     getRowData={[Function]}
     pagination={true}
     rows={

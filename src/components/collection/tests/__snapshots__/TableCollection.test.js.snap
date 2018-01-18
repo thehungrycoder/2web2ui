@@ -1,15 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`TableCollection Component should render with no props 1`] = `
+exports[`TableCollection Component render renders with no props 1`] = `
 <withRouter(Collection)
   bodyWrapper={[Function]}
+  defaultSortColumn={null}
+  defaultSortDirection="asc"
   headerComponent={[Function]}
   outerWrapper={[Function]}
   rowComponent={[Function]}
 />
 `;
 
-exports[`TableCollection Component should render with props 1`] = `
+exports[`TableCollection Component render renders with props 1`] = `
 <withRouter(Collection)
   bodyWrapper={[Function]}
   columns={
@@ -18,6 +20,8 @@ exports[`TableCollection Component should render with props 1`] = `
       "two",
     ]
   }
+  defaultSortColumn={null}
+  defaultSortDirection="asc"
   extraProp="plsPassDown"
   getRowData={[Function]}
   headerComponent={
@@ -34,5 +38,6 @@ exports[`TableCollection Component should render with props 1`] = `
   }
   outerWrapper={[Function]}
   rowComponent={[Function]}
+  rows={Array []}
 />
 `;

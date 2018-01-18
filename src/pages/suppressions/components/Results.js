@@ -7,8 +7,9 @@ import { Button } from '@sparkpost/matchbox';
 import { PanelLoading, TableCollection, Empty, DeleteModal } from 'src/components';
 import { deleteSuppression } from 'src/actions/suppressions';
 import { formatSubaccountDisplay } from '../helpers';
-import Detail from './Detail';
 import { showAlert } from 'src/actions/globalAlert';
+import Detail from './Detail';
+
 
 export class Results extends Component {
   state = {
@@ -83,13 +84,13 @@ export class Results extends Component {
     const { hasSubaccounts } = this.props;
 
     const columns = [
-      { label: 'Recipient' },
-      { label: 'Type', width: '18%' },
-      { label: 'Source', width: '20%' }
+      { label: 'Recipient', sortKey: 'recipient' },
+      { label: 'Type', sortKey: 'type', width: '18%' },
+      { label: 'Source', width: '20%', sortKey: 'source' }
     ];
 
     if (hasSubaccounts) {
-      columns.push({ label: 'Subaccount', width: '18%' });
+      columns.push({ label: 'Subaccount', width: '18%', sortKey: 'subaccount_id' });
     }
 
     columns.push({ label: '', width: '21%' });
@@ -140,6 +141,7 @@ export class Results extends Component {
 
   renderResults = () => {
     const { results } = this.props;
+
     return (
       <div>
         { this.renderDeleteModal() }
@@ -149,6 +151,7 @@ export class Results extends Component {
           columns={this.getColumns()}
           rows={results}
           getRowData={this.getRowData}
+          defaultSortColumn='recipient'
           pagination
         />
       </div>

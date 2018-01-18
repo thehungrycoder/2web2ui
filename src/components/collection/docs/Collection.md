@@ -7,6 +7,8 @@ These are useful when you need to display any list of items. There is a generic 
   * [Collection with Pagination example](#collection-with-pagination)
 * [Using the TableCollection component](#using-tablecollection)
   * [Table Collection props](#tablecollection-props) 
+  * [Table Collection with Sorting example](#table-collection-with-sorting)
+
 * [Using the filterBox prop](#using-the-filterbox-prop)
   * [Filter box props](#filterbox-config)
   * [Filter box examples](#filter-box-examples)
@@ -168,6 +170,38 @@ A function that will be run against each item in the passed in `rows` list and s
 
 _Note: All [Collection props](#collection-props) (except `headerComponent` and `rowComponent`) will be passed through to the underlying `<Collection>` component. 
 
+**defaultSortColumn**
+
+Pass a key name to sort the collection by that key. Default: `null`. Collection won't be sorted unless this prop is passed.
+
+**defaultSortDirection**
+
+Pass sorting direction (`asc` or `desc`). Default: `asc`.
+
+
+### Table Collection with Sorting
+
+```jsx
+function MyTableCollectionComponent() {
+  return (
+    <TableCollection
+      rows={movies}
+      columns={[ 
+        { label: 'Title', sortKey: 'title' },
+        { label: 'Director', sortKey: 'director' }
+        { label: 'Released', sortKey: 'released' }
+        'Actions' //this column won't be sortable. 
+        ]}
+      getRowData={(item) => [item.title, item.director, item.year, '...']}
+      defaultPerPage={5}
+      perPageButtons={[3, 5, 10]}
+      pagination={true}
+      defaultSortColumn='released'
+      defaultSortDirection='desc'
+    />
+  )
+}
+```
 
 ## Using the `filterBox` prop
 

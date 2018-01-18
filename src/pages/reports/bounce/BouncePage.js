@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import qs from 'query-string';
+import _ from 'lodash';
+
 import { refreshBounceChartMetrics, refreshBounceTableMetrics } from 'src/actions/bounceReport';
 import { addFilter, refreshTypeaheadCache } from 'src/actions/reportFilters';
 import { getFilterSearchOptions, parseSearch } from 'src/helpers/reports';
@@ -15,9 +17,14 @@ import ShareModal from '../components/ShareModal';
 import Filters from '../components/Filters';
 import ChartGroup from './components/ChartGroup';
 import MetricsSummary from '../components/MetricsSummary';
-import _ from 'lodash';
 
-const columns = [{ label: 'Reason', width: '45%' }, 'Domain', 'Category', 'Classification', 'Count (%)'];
+const columns = [
+  { label: 'Reason', width: '45%', sortKey: 'reason' },
+  { label: 'Domain', sortKey: 'domain' },
+  { label: 'Category', sortKey: 'bounce_category_name' },
+  { label: 'Classification', sortKey: 'classification_id' },
+  { label: 'Count (%)', sortKey: 'count_bounce' }
+];
 
 export class BouncePage extends Component {
   state = {
@@ -106,6 +113,8 @@ export class BouncePage extends Component {
       columns={columns}
       rows={reasons}
       getRowData={this.getRowData}
+      defaultSortColumn='count_bounce'
+      defaultSortDirection='desc'
       pagination={true}
     />;
   }
@@ -179,4 +188,5 @@ const mapDispatchToProps = {
   refreshTypeaheadCache,
   showAlert
 };
+
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(BouncePage));

@@ -51,6 +51,8 @@ exports[`ApiKeysTab normal props 1`] = `
           },
         ]
       }
+      defaultSortColumn={null}
+      defaultSortDirection="asc"
       filterBox={
         Object {
           "exampleModifiers": Array [

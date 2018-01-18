@@ -145,6 +145,8 @@ exports[`Summary Table  should render with data 1`] = `
     ]
   }
   defaultPerPage={10}
+  defaultSortColumn={null}
+  defaultSortDirection="asc"
   filterBox={
     Object {
       "show": false,

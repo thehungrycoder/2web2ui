@@ -61,6 +61,8 @@ exports[`Users list page renders table and hidden modal 1`] = `
           null,
         ]
       }
+      defaultSortColumn={null}
+      defaultSortDirection="asc"
       filterBox={
         Object {
           "exampleModifiers": Array [

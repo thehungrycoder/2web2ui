@@ -40,6 +40,8 @@ exports[`DelayPage:  should render page 1`] = `
           "Delayed First Attempt (%)",
         ]
       }
+      defaultSortColumn={null}
+      defaultSortDirection="asc"
       getRowData={[Function]}
       pagination={true}
       rows={
@@ -203,6 +205,8 @@ exports[`DelayPage:  should show loading panel when aggregates are still loading
           "Delayed First Attempt (%)",
         ]
       }
+      defaultSortColumn={null}
+      defaultSortDirection="asc"
       getRowData={[Function]}
       pagination={true}
       rows={

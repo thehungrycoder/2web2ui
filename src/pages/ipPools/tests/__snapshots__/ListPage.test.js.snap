@@ -39,6 +39,8 @@ exports[`IP Pools List Page should render the list page correctly 1`] = `
         "Number of IPs Assigned",
       ]
     }
+    defaultSortColumn={null}
+    defaultSortDirection="asc"
     filterBox={
       Object {
         "exampleModifiers": Array [

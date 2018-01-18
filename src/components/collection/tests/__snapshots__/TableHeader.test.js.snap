@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: TableHeader renders header correctly with complex column config 1`] = `
+<thead>
+  <Table.Row>
+    <Table.HeaderCell
+      key="column 0: Simple Column"
+    >
+      Simple Column
+    </Table.HeaderCell>
+    <Table.HeaderCell
+      key="Recipient"
+    >
+      <SortLabel
+        direction="asc"
+        label="Recipient"
+        onClick={[Function]}
+      />
+    </Table.HeaderCell>
+    <Table.HeaderCell
+      key="Type"
+      width="18%"
+    >
+      <SortLabel
+        direction={false}
+        label="Type"
+        onClick={[Function]}
+      />
+    </Table.HeaderCell>
+    <Table.HeaderCell
+      key="Source"
+      width="20%"
+    >
+      Source
+    </Table.HeaderCell>
+  </Table.Row>
+</thead>
+`;
+
+exports[`Component: TableHeader renders header correctly with string only column names 1`] = `
+<thead>
+  <Table.Row>
+    <Table.HeaderCell
+      key="column 0: one"
+    >
+      one
+    </Table.HeaderCell>
+    <Table.HeaderCell
+      key="column 1: two"
+    >
+      two
+    </Table.HeaderCell>
+  </Table.Row>
+</thead>
+`;

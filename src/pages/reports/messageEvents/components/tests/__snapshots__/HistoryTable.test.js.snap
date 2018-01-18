@@ -2,6 +2,8 @@
 
 exports[`HistoryTable Component should render with all props 1`] = `
 <TableCollection
+  defaultSortColumn={null}
+  defaultSortDirection="asc"
   headerComponent={[Function]}
   outerWrapper={[Function]}
   pagination={false}
@@ -37,6 +39,8 @@ exports[`HistoryTable Component should render with no props 1`] = `
     title="Message History"
   >
     <TableCollection
+      defaultSortColumn={null}
+      defaultSortDirection="asc"
       headerComponent={[Function]}
       outerWrapper={[Function]}
       pagination={false}
