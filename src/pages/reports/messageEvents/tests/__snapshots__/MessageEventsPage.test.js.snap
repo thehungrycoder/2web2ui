@@ -29,6 +29,8 @@ exports[`Page: Message Events tests renders correctly with too many (1000) recor
           null,
         ]
       }
+      defaultSortColumn={null}
+      defaultSortDirection="asc"
       getRowData={[Function]}
       pagination={true}
       rows={
@@ -1101,6 +1103,8 @@ exports[`Page: Message Events tests should render page correctly 1`] = `
           null,
         ]
       }
+      defaultSortColumn={null}
+      defaultSortDirection="asc"
       getRowData={[Function]}
       pagination={true}
       rows={

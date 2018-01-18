@@ -43,6 +43,8 @@ exports[`renders correctly 1`] = `
         },
       ]
     }
+    defaultSortColumn={null}
+    defaultSortDirection="asc"
     filterBox={
       Object {
         "exampleModifiers": Array [
@@ -129,6 +131,8 @@ exports[`renders empty state 1`] = `
         },
       ]
     }
+    defaultSortColumn={null}
+    defaultSortDirection="asc"
     filterBox={
       Object {
         "exampleModifiers": Array [

@@ -62,6 +62,8 @@ exports[`RejectionPage:  renders correctly 1`] = `
           "Count",
         ]
       }
+      defaultSortColumn={null}
+      defaultSortDirection="asc"
       getRowData={[Function]}
       pagination={true}
       rows={
@@ -197,6 +199,8 @@ exports[`RejectionPage:  renders loading pannel when aggregates are still loadin
           "Count",
         ]
       }
+      defaultSortColumn={null}
+      defaultSortDirection="asc"
       getRowData={[Function]}
       pagination={true}
       rows={

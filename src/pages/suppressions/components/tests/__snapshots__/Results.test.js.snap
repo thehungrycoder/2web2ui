@@ -92,6 +92,8 @@ exports[`Results renders correctly (with suppressions) 1`] = `
         },
       ]
     }
+    defaultSortColumn="recipient"
+    defaultSortDirection="asc"
     getRowData={[Function]}
     pagination={true}
     rows={
@@ -109,7 +111,6 @@ exports[`Results renders correctly (with suppressions) 1`] = `
         },
       ]
     }
-    sortColumn="recipient"
   />
 </div>
 `;
@@ -144,6 +145,8 @@ exports[`Results renders correctly (with suppressions, with subaccount) 1`] = `
         },
       ]
     }
+    defaultSortColumn="recipient"
+    defaultSortDirection="asc"
     getRowData={[Function]}
     pagination={true}
     rows={
@@ -161,7 +164,6 @@ exports[`Results renders correctly (with suppressions, with subaccount) 1`] = `
         },
       ]
     }
-    sortColumn="recipient"
   />
 </div>
 `;
@@ -214,6 +216,8 @@ exports[`Results renders delete confirmation modal correctly 1`] = `
         },
       ]
     }
+    defaultSortColumn="recipient"
+    defaultSortDirection="asc"
     getRowData={[Function]}
     pagination={true}
     rows={
@@ -231,7 +235,6 @@ exports[`Results renders delete confirmation modal correctly 1`] = `
         },
       ]
     }
-    sortColumn="recipient"
   />
 </div>
 `;
@@ -272,6 +275,8 @@ exports[`Results renders detail modal correctly 1`] = `
         },
       ]
     }
+    defaultSortColumn="recipient"
+    defaultSortDirection="asc"
     getRowData={[Function]}
     pagination={true}
     rows={
@@ -289,7 +294,6 @@ exports[`Results renders detail modal correctly 1`] = `
         },
       ]
     }
-    sortColumn="recipient"
   />
 </div>
 `;
