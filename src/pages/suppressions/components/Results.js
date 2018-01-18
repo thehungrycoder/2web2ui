@@ -4,7 +4,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { Button } from '@sparkpost/matchbox';
-import { getSortedCollection, handleSortChange } from 'src/helpers/sort';
 import { PanelLoading, TableCollection, Empty, DeleteModal } from 'src/components';
 import { deleteSuppression } from 'src/actions/suppressions';
 import { formatSubaccountDisplay } from '../helpers';
@@ -21,9 +20,7 @@ export class Results extends Component {
     del: { // delete confirmation modal
       open: false,
       data: null
-    },
-    sortColumn: 'recipient',
-    sortDirection: 'asc'
+    }
   }
 
   renderPlaceholder() {
@@ -89,7 +86,7 @@ export class Results extends Component {
     const columns = [
       { label: 'Recipient', sortKey: 'recipient' },
       { label: 'Type', sortKey: 'type', width: '18%' },
-      { label: 'Source', width: '20%' }
+      { label: 'Source', width: '20%', sortKey: 'source' }
     ];
 
     if (hasSubaccounts) {
@@ -142,10 +139,8 @@ export class Results extends Component {
     />);
   }
 
-
   renderResults = () => {
     const { results } = this.props;
-    const { sortColumn, sortDirection } = this.state;
 
     return (
       <div>
@@ -154,11 +149,9 @@ export class Results extends Component {
 
         <TableCollection
           columns={this.getColumns()}
-          rows={getSortedCollection(results, sortColumn, sortDirection)}
+          rows={results}
           getRowData={this.getRowData}
-          sortColumn={sortColumn}
-          sortDirection={sortDirection}
-          onSort={handleSortChange.bind(this)}
+          sortColumn='recipient'
           pagination
         />
       </div>
