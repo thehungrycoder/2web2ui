@@ -5,33 +5,82 @@ import { shallow } from 'enzyme';
 import TableCollection from '../TableCollection';
 
 describe('TableCollection Component', () => {
-  const columns = ['one', 'two'];
+  let columns;
+  let headerComponent;
+  let props;
 
-  const headerComponent = (
-    <thead>
-      <Table.Row>
-        {columns.map((title) => <Table.HeaderCell key={title}>{title}</Table.HeaderCell>)}
-      </Table.Row>
-    </thead>
-  );
+  beforeEach(() => {
+    columns = ['one', 'two'];
 
-  const props = {
-    headerComponent: headerComponent,
-    columns: columns,
-    getRowData: () => {},
-    extraProp: 'plsPassDown',
-    rows: []
-  };
+    headerComponent = (
+      <thead>
+        <Table.Row>
+          {columns.map((title) => <Table.HeaderCell key={title}>{title}</Table.HeaderCell>)}
+        </Table.Row>
+      </thead>
+    );
 
-  it('should render with no props', () => {
-    const wrapper = shallow(<TableCollection />);
-
-    expect(wrapper).toMatchSnapshot();
+    props = {
+      headerComponent: headerComponent,
+      columns: columns,
+      getRowData: () => {},
+      extraProp: 'plsPassDown',
+      rows: []
+    };
   });
 
-  it('should render with props', () => {
-    const wrapper = shallow(<TableCollection {...props}/>);
+  describe('render', () => {
+    it('renders with no props', () => {
+      const wrapper = shallow(<TableCollection />);
 
-    expect(wrapper).toMatchSnapshot();
+      expect(wrapper).toMatchSnapshot();
+    });
+
+    it('renders with props', () => {
+      const wrapper = shallow(<TableCollection {...props}/>);
+      expect(wrapper).toMatchSnapshot();
+    });
+  });
+
+  describe('componentDidMount', () => {
+    let wrapper;
+
+    beforeEach(() => {
+      wrapper = shallow(<TableCollection {...props}/>);
+    });
+
+    it('has uses default values for sortColumn and sortDirection if not passed', () => {
+      wrapper = shallow(<TableCollection {...props}/>);
+      expect(wrapper.state().sortColumn).toEqual(null);
+      expect(wrapper.state().sortDirection).toEqual('asc');
+    });
+
+    it('sets default state with sortColumn if passed', () => {
+      expect(wrapper.state().sortColumn).toEqual(null);
+
+      props.sortColumn = 'col1';
+      wrapper = shallow(<TableCollection {...props}/>);
+      expect(wrapper.state().sortColumn).toEqual('col1');
+    });
+
+    it('sets default state with sortDirection if passed', () => {
+      props.sortDirection = 'desc';
+      wrapper = shallow(<TableCollection {...props}/>);
+      expect(wrapper.state().sortDirection).toEqual('desc');
+    });
+  });
+
+  describe('handleSortChange', () => {
+    let wrapper;
+
+    beforeEach(() => {
+      wrapper = shallow(<TableCollection {...props}/>);
+    });
+
+    it('updates state correctly', () => {
+      expect(wrapper.state()).toEqual({ sortColumn: null, sortDirection: 'asc' });
+      wrapper.instance().handleSortChange('col1', 'desc');
+      expect(wrapper.state()).toEqual({ sortColumn: 'col1', sortDirection: 'desc' });
+    });
   });
 });
