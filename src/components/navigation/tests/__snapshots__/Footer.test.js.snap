@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Footer tests should render footer correctly 1`] = `
+<ul>
+  <li>
+    <a
+      className={[Function]}
+      href="https://www.sparkpost.com/docs/"
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      Help & API
+    </a>
+  </li>
+  <li>
+    <a
+      className={[Function]}
+      onClick={[Function]}
+    >
+      Log Out
+    </a>
+  </li>
+</ul>
+`;

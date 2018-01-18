@@ -10,7 +10,7 @@ import selectNavItems from 'src/selectors/navItems';
 import { Icon } from '@sparkpost/matchbox';
 import styles from './Navigation.module.scss';
 
-class Navigation extends Component {
+export class Navigation extends Component {
   state = {
     open: false
   };
