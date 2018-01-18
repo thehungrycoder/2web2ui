@@ -1,6 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Navigation Item renders a link correctly 1`] = `
+exports[`Navigation Footer tests should render footer correctly 1`] = `
+<ul>
+  <li>
+    <a
+      className={[Function]}
+      href="https://www.sparkpost.com/docs/"
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      Help & API
+    </a>
+  </li>
+  <li>
+    <a
+      className={[Function]}
+      onClick={[Function]}
+    >
+      Log Out
+    </a>
+  </li>
+</ul>
+`;
+
+exports[`Navigation Item tests should render a link correctly 1`] = `
 <span>
   <li>
     <a
@@ -30,7 +53,7 @@ exports[`Navigation Item renders a link correctly 1`] = `
 </span>
 `;
 
-exports[`Navigation Item renders children correctly 1`] = `
+exports[`Navigation Item tests should render children correctly 1`] = `
 <span>
   <li>
     <a
