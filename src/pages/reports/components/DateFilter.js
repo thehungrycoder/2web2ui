@@ -8,7 +8,7 @@ import { Button, Datepicker, TextField, Select, Popover } from '@sparkpost/match
 import DateForm from './DateForm';
 import styles from './DateFilter.module.scss';
 
-class DateFilter extends Component {
+export class DateFilter extends Component {
   format = 'MMM DD, YY h:mma';
   state = {
     showDatePicker: false,

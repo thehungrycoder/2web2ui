@@ -1,12 +1,15 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-
+import * as dateHelpers from 'src/helpers/date';
 import Detail from '../Detail';
+
+jest.mock('src/helpers/date');
 
 let props;
 let wrapper;
 
 beforeEach(() => {
+  dateHelpers.formatDateTime = jest.fn(() => 'formatted-date');
   props = {
     open: false,
     onCancel: jest.fn(),
