@@ -1,18 +1,20 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import cases from 'jest-in-case';
 import ChunkLoading from '../ChunkLoading';
 
-describe('LoadableLoading Component', () => {
+const CustomLoading = () => '';
 
-  it('should return null if no props', () => {
-    const wrapper = shallow(<ChunkLoading />);
-
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('should render loading if pastDelay is true', () => {
-    const wrapper = shallow(<ChunkLoading pastDelay={true}/>);
-
-    expect(wrapper).toMatchSnapshot();
-  });
+cases('ChunkLoading', (props) => {
+  const wrapper = shallow(<ChunkLoading {...props} />);
+  expect(wrapper).toMatchSnapshot();
+}, {
+  'should return null': {},
+  'should render loading': {
+    pastDelay: true
+  },
+  'should render custom loading': {
+    LoadingComponent: CustomLoading,
+    pastDelay: true
+  }
 });
