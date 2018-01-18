@@ -1,5 +1,6 @@
 import { getEndOfDay, getStartOfDay, getRelativeDates } from '../date';
 import cases from 'jest-in-case';
+import moment from 'moment';
 
 describe('Date helpers', () => {
 
@@ -30,17 +31,22 @@ describe('Date helpers', () => {
     expect(getStartOfDay('2017-12-18T23:59:59')).toEqual(startOfDay);
   });
 
-  cases('getRelativeDates calculations', ({ range }) => {
-    const date = new Date('2017-12-18');
+  cases('getRelativeDates calculations', ({ range, subtractArgs }) => {
+    const date = moment('2017-12-18').utc().toDate();
     Date.now = jest.fn(() => date);
-    expect(getRelativeDates(range)).toMatchSnapshot();
+    const { from, to } = getRelativeDates(range);
+    expect(to).toEqual(date);
+    expect(from).toEqual(moment(date).subtract(...subtractArgs).toDate());
   }, {
-    'for an hour ago': { range: 'hour' },
-    'for a day ago': { range: 'day' },
-    'for a week ago': { range: '7days' },
-    'for a month': { range: '30days' },
-    'for a quarter ago': { range: '90days' },
-    'for an invalid range': { range: 'invalid-range' }
+    'for an hour ago': { range: 'hour', subtractArgs: [1, 'hours']},
+    'for a day ago': { range: 'day', subtractArgs: [1, 'days']},
+    'for a week ago': { range: '7days', subtractArgs: [7, 'days']},
+    'for a month': { range: '30days', subtractArgs: [30, 'days']},
+    'for a quarter ago': { range: '90days', subtractArgs: [90, 'days']}
+  });
+
+  it('should return an empty object when getting a relative range for an invalid range type', () => {
+    expect(getRelativeDates('invalid-like-whoa')).toEqual({});
   });
 
   describe('formatDateTime', () => {
