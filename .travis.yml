@@ -2,4 +2,6 @@ language: node_js
 node_js:
   - "8"
 install: npm install
-script: npm test && npm run build
+script:
+  - echo "BUILD RUNNING IN $TZ TIMEZONE"
+  - npm test && npm run build
