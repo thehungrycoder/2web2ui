@@ -1,28 +1,50 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Panel, Table } from '@sparkpost/matchbox';
 import Collection from './Collection';
 import TableHeader from './TableHeader';
+import { getSortedCollection } from 'src/helpers/sort';
 
 const TableWrapper = (props) => <Panel><Table>{props.children}</Table></Panel>;
 
 const TableBody = (props) => <tbody>{props.children}</tbody>;
 
-const TableCollection = (props) => {
-  const { rowComponent, headerComponent, columns, getRowData, onSort, sortColumn, sortDirection } = props;
-  const HeaderComponent = headerComponent ? headerComponent : () => <TableHeader columns={columns} onSort={onSort} sortColumn={sortColumn} sortDirection={sortDirection}/>;
-  const TableRow = rowComponent
-    ? rowComponent
-    : (props) => <Table.Row rowData={getRowData(props)} />;
+class TableCollection extends Component {
+  state = {
+    sortColumn: null,
+    sortDirection: 'asc'
+  }
 
-  return (
-    <Collection
-      outerWrapper={TableWrapper}
-      headerComponent={HeaderComponent}
-      bodyWrapper={TableBody}
-      rowComponent={TableRow}
-      {...props}
-    />
-  );
-};
+  componentDidMount() {
+    const { sortColumn, sortDirection } = this.props;
+    const { sortColumn: stateSortColumn, sortDirection: stateSortDirection } = this.state;
+    if (sortColumn || sortDirection) {
+      this.setState({ sortColumn: sortColumn || stateSortColumn, sortDirection: sortDirection || stateSortDirection });
+    }
+  }
+
+  handleSortChange = (column, direction) => {
+    this.setState({ sortColumn: column, sortDirection: direction });
+  }
+
+  render() {
+    const { rowComponent, headerComponent, columns, getRowData, rows } = this.props;
+    const { sortColumn, sortDirection } = this.state;
+
+    const HeaderComponent = headerComponent ? headerComponent : () => <TableHeader columns={columns} onSort={this.handleSortChange} sortColumn={sortColumn} sortDirection={sortDirection}/>;
+    const TableRow = rowComponent
+      ? rowComponent
+      : (props) => <Table.Row rowData={getRowData(props)} />;
+
+    return (
+      <Collection
+        outerWrapper={TableWrapper}
+        headerComponent={HeaderComponent}
+        bodyWrapper={TableBody}
+        rowComponent={TableRow}
+        {...{ ...this.props, rows: getSortedCollection(rows, sortColumn, sortDirection) }}
+      />
+    );
+  }
+}
 
 export default TableCollection;
