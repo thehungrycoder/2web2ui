@@ -44,7 +44,7 @@ class TableCollection extends Component {
         bodyWrapper={TableBody}
         rowComponent={TableRow}
         { ...this.props}
-        rows={getSortedCollection(rows, sortColumn, sortDirection)}
+        rows={sortColumn ? getSortedCollection(rows, sortColumn, sortDirection) : rows }
       />
     );
   }
