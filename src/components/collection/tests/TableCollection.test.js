@@ -49,22 +49,22 @@ describe('TableCollection Component', () => {
       wrapper = shallow(<TableCollection {...props}/>);
     });
 
-    it('has uses default values for sortColumn and sortDirection if not passed', () => {
+    it('uses default if defaultSortColumn and defaultSortDirection are not passed', () => {
       wrapper = shallow(<TableCollection {...props}/>);
       expect(wrapper.state().sortColumn).toEqual(null);
       expect(wrapper.state().sortDirection).toEqual('asc');
     });
 
-    it('sets default state with sortColumn if passed', () => {
+    it('sets state with defaultSortColumn when passed', () => {
       expect(wrapper.state().sortColumn).toEqual(null);
-
-      props.sortColumn = 'col1';
+      props.defaultSortColumn = 'col1';
       wrapper = shallow(<TableCollection {...props}/>);
       expect(wrapper.state().sortColumn).toEqual('col1');
     });
 
-    it('sets default state with sortDirection if passed', () => {
-      props.sortDirection = 'desc';
+    it('sets default with sortDirection when passed', () => {
+      expect(wrapper.state().sortDirection).toEqual('asc');
+      props.defaultSortDirection = 'desc';
       wrapper = shallow(<TableCollection {...props}/>);
       expect(wrapper.state().sortDirection).toEqual('desc');
     });

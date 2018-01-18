@@ -3,6 +3,8 @@
 exports[`TableCollection Component render renders with no props 1`] = `
 <withRouter(Collection)
   bodyWrapper={[Function]}
+  defaultSortColumn={null}
+  defaultSortDirection="asc"
   headerComponent={[Function]}
   outerWrapper={[Function]}
   rowComponent={[Function]}
@@ -19,6 +21,8 @@ exports[`TableCollection Component render renders with props 1`] = `
       "two",
     ]
   }
+  defaultSortColumn={null}
+  defaultSortDirection="asc"
   extraProp="plsPassDown"
   getRowData={[Function]}
   headerComponent={

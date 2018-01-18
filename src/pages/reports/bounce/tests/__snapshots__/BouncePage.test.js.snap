@@ -44,6 +44,8 @@ exports[`BouncePage:  should display loading panel on top level metrics when agg
           },
         ]
       }
+      defaultSortColumn="count_bounce"
+      defaultSortDirection="desc"
       getRowData={[Function]}
       pagination={true}
       rows={
@@ -59,8 +61,6 @@ exports[`BouncePage:  should display loading panel on top level metrics when agg
           },
         ]
       }
-      sortColumn="count_bounce"
-      sortDirection="desc"
     />
   </Panel>
   <ShareModal
@@ -125,6 +125,8 @@ exports[`BouncePage:  should render 1`] = `
           },
         ]
       }
+      defaultSortColumn="count_bounce"
+      defaultSortDirection="desc"
       getRowData={[Function]}
       pagination={true}
       rows={
@@ -140,8 +142,6 @@ exports[`BouncePage:  should render 1`] = `
           },
         ]
       }
-      sortColumn="count_bounce"
-      sortDirection="desc"
     />
   </Panel>
   <ShareModal
@@ -195,6 +195,8 @@ exports[`BouncePage:  should render correctly with no bounces 1`] = `
           },
         ]
       }
+      defaultSortColumn="count_bounce"
+      defaultSortDirection="desc"
       getRowData={[Function]}
       pagination={true}
       rows={
@@ -210,8 +212,6 @@ exports[`BouncePage:  should render correctly with no bounces 1`] = `
           },
         ]
       }
-      sortColumn="count_bounce"
-      sortDirection="desc"
     />
   </Panel>
   <ShareModal

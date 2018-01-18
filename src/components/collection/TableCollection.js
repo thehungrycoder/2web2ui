@@ -11,15 +11,17 @@ const TableBody = (props) => <tbody>{props.children}</tbody>;
 class TableCollection extends Component {
   state = {
     sortColumn: null,
-    sortDirection: 'asc'
+    sortDirection: null
+  }
+
+  static defaultProps = {
+    defaultSortColumn: null,
+    defaultSortDirection: 'asc'
   }
 
   componentDidMount() {
-    const { sortColumn, sortDirection } = this.props;
-    const { sortColumn: stateSortColumn, sortDirection: stateSortDirection } = this.state;
-    if (sortColumn || sortDirection) {
-      this.setState({ sortColumn: sortColumn || stateSortColumn, sortDirection: sortDirection || stateSortDirection });
-    }
+    const { defaultSortColumn, defaultSortDirection } = this.props;
+    this.setState({ sortColumn: defaultSortColumn , sortDirection: defaultSortDirection });
   }
 
   handleSortChange = (column, direction) => {
@@ -41,7 +43,8 @@ class TableCollection extends Component {
         headerComponent={HeaderComponent}
         bodyWrapper={TableBody}
         rowComponent={TableRow}
-        {...{ ...this.props, rows: getSortedCollection(rows, sortColumn, sortDirection) }}
+        { ...this.props}
+        rows={getSortedCollection(rows, sortColumn, sortDirection)}
       />
     );
   }

@@ -151,7 +151,7 @@ export class Results extends Component {
           columns={this.getColumns()}
           rows={results}
           getRowData={this.getRowData}
-          sortColumn='recipient'
+          defaultSortColumn='recipient'
           pagination
         />
       </div>
