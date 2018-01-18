@@ -15,7 +15,7 @@ export class EngagementPage extends Component {
     this.props.getChartData().catch((error) => {
       this.props.showAlert({
         details: _.get(error, 'response.data.errors[0].message'),
-        message: 'Unable to load engagement report data.',
+        message: 'Unable to load engagement data.',
         type: 'error'
       });
     });
