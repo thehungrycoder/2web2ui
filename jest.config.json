@@ -12,7 +12,9 @@
     "<rootDir>/src/index.js",
     "<rootDir>/src/config",
     "<rootDir>/src/helpers/registerServiceWorker",
-    "<rootDir>/src/reducers"
+    "<rootDir>/src/reducers",
+    "<rootDir>/src/**/containers/**/*.js",
+    "<rootDir>/src/**/?(*.)container.js"
   ],
   "coverageThreshold": {
     "global": {

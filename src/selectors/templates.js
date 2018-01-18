@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import qs from 'query-string';
 import config from 'src/config';
 
 export const selectTemplates = (state) => state.templates.list;
@@ -21,3 +22,5 @@ export const selectClonedTemplate = (state, props) => {
     return cloneTemplate(template.draft);
   }
 };
+
+export const selectSubaccountId = (props) => qs.parse(props.location.search).subaccount;

@@ -4,6 +4,7 @@ import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 import localforage from 'localforage';
 import config from 'src/config';
 import { getTestDataKey } from './helpers/templates';
+import setSubaccountHeader from './helpers/setSubaccountHeader';
 
 export function listTemplates() {
   return sparkpostApiRequest({
@@ -15,7 +16,7 @@ export function listTemplates() {
   });
 }
 
-export function getDraft(id) {
+export function getDraft(id, subaccountId) {
   return sparkpostApiRequest({
     type: 'GET_DRAFT_TEMPLATE',
     meta: {
@@ -23,7 +24,8 @@ export function getDraft(id) {
       url: `/templates/${id}`,
       params: {
         draft: true
-      }
+      },
+      headers: setSubaccountHeader(subaccountId)
     }
   });
 }
@@ -53,7 +55,7 @@ export function getPreview({ content, id, mode, substitution_data = {}}) {
   });
 }
 
-export function getPublished(id) {
+export function getPublished(id, subaccountId) {
   return sparkpostApiRequest({
     type: 'GET_PUBLISHED_TEMPLATE',
     meta: {
@@ -61,7 +63,8 @@ export function getPublished(id) {
       url: `/templates/${id}`,
       params: {
         draft: false
-      }
+      },
+      headers: setSubaccountHeader(subaccountId)
     }
   });
 }
@@ -77,7 +80,7 @@ export function getPublishedAndPreview(id) {
 }
 
 export function create(data) {
-  const { id, testData, ...formData } = data;
+  const { id, testData, assignTo, subaccount, ...formData } = data;
 
   return (dispatch) => {
     dispatch(setTestData({ id, mode: 'draft', data: testData }));
@@ -87,13 +90,18 @@ export function create(data) {
       meta: {
         method: 'POST',
         url: '/templates',
-        data: { ...formData, id }
+        headers: setSubaccountHeader(subaccount.id),
+        data: {
+          ...formData,
+          shared_with_subaccounts: assignTo === 'shared',
+          id
+        }
       }
     }));
   };
 }
 
-export function update(data, params = {}) {
+export function update(data, subaccountId, params = {}) {
   const { id, testData, ...formData } = data;
 
   return (dispatch) => {
@@ -105,18 +113,19 @@ export function update(data, params = {}) {
         method: 'PUT',
         url: `/templates/${id}`,
         data: formData,
-        params
+        params,
+        headers: setSubaccountHeader(subaccountId)
       }
     }));
   };
 }
 
-export function publish(data) {
+export function publish(data, subaccountId) {
   return (dispatch) => {
     const { id, testData } = data;
 
     // Save draft first, then publish
-    return dispatch(update(data)).then(() => {
+    return dispatch(update(data, subaccountId)).then(() => {
       dispatch(setTestData({ id, mode: 'published', data: testData }));
 
       return dispatch(sparkpostApiRequest({
@@ -124,19 +133,21 @@ export function publish(data) {
         meta: {
           method: 'PUT',
           url: `/templates/${id}`,
-          data: { published: true }
+          data: { published: true },
+          headers: setSubaccountHeader(subaccountId)
         }
       }));
     });
   };
 }
 
-export function deleteTemplate(id) {
+export function deleteTemplate(id, subaccountId) {
   return sparkpostApiRequest({
     type: 'DELETE_TEMPLATE',
     meta: {
       method: 'DELETE',
-      url: `/templates/${id}`
+      url: `/templates/${id}`,
+      headers: setSubaccountHeader(subaccountId)
     }
   });
 }

@@ -1,38 +1,25 @@
-/* eslint max-lines: ["error", 200] */
 import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { reduxForm } from 'redux-form';
-
+import { Link } from 'react-router-dom';
 import { allSettled } from 'src/helpers/promise';
-
-// Actions
-import { getDraft, getPublished, update, deleteTemplate, publish, getTestData } from 'src/actions/templates';
-import { showAlert } from 'src/actions/globalAlert';
-
-// Selectors
-import { selectTemplateById, selectTemplateTestData } from 'src/selectors/templates';
+import { getSubaccountQuery } from 'src/helpers/templates';
 
 // Components
 import Form from './components/Form';
 import Editor from './components/Editor'; // async
-import { DeleteModal } from 'src/components';
-import { Loading } from 'src/components';
+import { Loading, DeleteModal } from 'src/components';
 import { Page, Grid } from '@sparkpost/matchbox';
 
-const FORM_NAME = 'templateEdit';
-
-export class EditPage extends Component {
+export default class EditPage extends Component {
   state = {
     deleteOpen: false
   };
 
   componentDidMount() {
-    const { match, getDraft, getPublished, getTestData, showAlert, history } = this.props;
+    const { match, getDraft, getPublished, getTestData, showAlert, history, subaccountId } = this.props;
 
     allSettled([
-      getDraft(match.params.id),
-      getPublished(match.params.id)
+      getDraft(match.params.id, subaccountId),
+      getPublished(match.params.id, subaccountId)
     ], { onlyRejected: true }).then((errors) => {
       if (errors.length === 2) {
         history.push('/templates/'); // Redirect if no draft or published found
@@ -44,9 +31,9 @@ export class EditPage extends Component {
   }
 
   handlePublish = (values) => {
-    const { publish, match, showAlert, history } = this.props;
-    return publish(values).then(() => {
-      history.push(`/templates/edit/${match.params.id}/published`);
+    const { publish, match, showAlert, history, subaccountId } = this.props;
+    return publish(values, subaccountId).then(() => {
+      history.push(`/templates/edit/${match.params.id}/published${getSubaccountQuery(subaccountId)}`);
       showAlert({ type: 'success', message: 'Template published' });
     }).catch((err) => {
       showAlert({ type: 'error', message: 'Could not publish template', details: err.message });
@@ -54,8 +41,8 @@ export class EditPage extends Component {
   }
 
   handleSave = (values) => {
-    const { update, match, getDraft, showAlert, getTestData } = this.props;
-    return update(values).then(() => {
+    const { update, match, getDraft, showAlert, getTestData, subaccountId } = this.props;
+    return update(values, subaccountId).then(() => {
       getDraft(match.params.id);
       getTestData({ id: match.params.id, mode: 'draft' });
       showAlert({ type: 'success', message: 'Template saved' });
@@ -65,8 +52,8 @@ export class EditPage extends Component {
   }
 
   handleDelete = () => {
-    const { deleteTemplate, match, showAlert, history } = this.props;
-    return deleteTemplate(match.params.id).then(() => {
+    const { deleteTemplate, match, showAlert, history, subaccountId } = this.props;
+    return deleteTemplate(match.params.id, subaccountId).then(() => {
       history.push('/templates/');
       showAlert({ message: 'Template deleted' });
     }).catch((err) => {
@@ -79,7 +66,7 @@ export class EditPage extends Component {
   }
 
   getPageProps() {
-    const { handleSubmit, template, match, submitting } = this.props;
+    const { handleSubmit, template, match, submitting, subaccountId } = this.props;
     const published = template.published;
 
     const primaryAction = {
@@ -88,16 +75,12 @@ export class EditPage extends Component {
       disabled: submitting
     };
 
-    const viewActions = published ? [
+    const secondaryActions = [
       {
         content: 'View Published',
         Component: Link,
-        to: `/templates/edit/${match.params.id}/published`
-      }
-    ] : [];
-
-    const secondaryActions = [
-      ...viewActions,
+        to: `/templates/edit/${match.params.id}/published${getSubaccountQuery(subaccountId)}`
+      },
       {
         content: 'Save as Draft',
         onClick: handleSubmit(this.handleSave),
@@ -107,6 +90,10 @@ export class EditPage extends Component {
       { content: 'Duplicate', Component: Link, to: `/templates/create/${match.params.id}` },
       { content: 'Preview & Send', Component: Link, to: `/templates/preview/${match.params.id}` }
     ];
+
+    if (!published) {
+      secondaryActions.shift();
+    }
 
     const breadcrumbAction = {
       content: 'Templates',
@@ -123,7 +110,9 @@ export class EditPage extends Component {
   }
 
   render() {
-    if (this.props.loading) {
+    const { loading, formName } = this.props;
+
+    if (loading) {
       return <Loading />;
     }
 
@@ -131,10 +120,10 @@ export class EditPage extends Component {
       <Page {...this.getPageProps()}>
         <Grid>
           <Grid.Column xs={12} lg={4}>
-            <Form name={FORM_NAME} />
+            <Form name={formName} />
           </Grid.Column>
           <Grid.Column xs={12} lg={8}>
-            <Editor name={FORM_NAME} />
+            <Editor name={formName} />
           </Grid.Column>
         </Grid>
         <DeleteModal
@@ -147,30 +136,3 @@ export class EditPage extends Component {
     );
   }
 }
-
-const mapStateToProps = (state, props) => {
-  const template = selectTemplateById(state, props);
-  const values = template.draft || template.published; // For templates with published but no draft, pull in published values
-  return {
-    loading: state.templates.getLoading,
-    template,
-    initialValues: { testData: selectTemplateTestData(state), ...values }
-  };
-};
-
-const formOptions = {
-  form: FORM_NAME,
-  enableReinitialize: true // required to update initial values from redux state
-};
-
-const mapDispatchToProps = {
-  getDraft,
-  getPublished,
-  getTestData,
-  update,
-  deleteTemplate,
-  publish,
-  showAlert
-};
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(reduxForm(formOptions)(EditPage)));
