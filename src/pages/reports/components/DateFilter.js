@@ -124,6 +124,7 @@ export class DateFilter extends Component {
   render() {
     const { selected: { from, to }, showDatePicker } = this.state;
     const selectedRange = showDatePicker ? 'custom' : this.props.filter.relativeRange;
+    const { now = new Date() } = this.props;
 
     const rangeSelect = <Select
       options={relativeDateOptions}
@@ -149,9 +150,9 @@ export class DateFilter extends Component {
           numberOfMonths={2}
           fixedWeeks
           enableOutsideDays={false}
-          initialMonth={subMonths(new Date(), 1)}
-          toMonth={new Date()}
-          disabledDays={{ after: new Date() }}
+          initialMonth={subMonths(now, 1)}
+          toMonth={now}
+          disabledDays={{ after: now }}
           onDayClick={this.handleDayClick}
           onDayMouseEnter={this.handleDayHover}
           onDayFocus={this.handleDayHover}

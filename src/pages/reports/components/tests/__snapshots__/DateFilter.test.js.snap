@@ -1,0 +1,74 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: DateFilter should render ok by default 1`] = `
+<Popover
+  bottom={true}
+  manualTrigger={true}
+  open={false}
+  right={true}
+  trigger={
+    <TextField
+      connectLeft={
+        <Select
+          onChange={[Function]}
+          options={Array []}
+          placeholderValue=""
+          required={false}
+          value="day"
+        />
+      }
+      labelHidden={true}
+      onClick={[Function]}
+      readOnly={true}
+      required={false}
+      resize="both"
+      type="text"
+      value="Jan 15, 18 11:00am - Jan 15, 18 12:00pm"
+    />
+  }
+  wrapper="div"
+>
+  <Datepicker
+    disabledDays={
+      Object {
+        "after": 2018-01-15T17:00:00.000Z,
+      }
+    }
+    enableOutsideDays={false}
+    fixedWeeks={true}
+    initialMonth={2017-12-15T17:00:00.000Z}
+    numberOfMonths={2}
+    onDayClick={[Function]}
+    onDayFocus={[Function]}
+    onDayKeyDown={[Function]}
+    onDayMouseEnter={[Function]}
+    onKeyDown={[Function]}
+    selectedDays={
+      Object {
+        "from": 2018-01-15T16:00:00.000Z,
+        "to": 2018-01-15T17:00:00.000Z,
+      }
+    }
+    toMonth={2018-01-15T17:00:00.000Z}
+  />
+  <DateForm
+    from={2018-01-15T16:00:00.000Z}
+    onEnter={[Function]}
+    selectDates={[Function]}
+    to={2018-01-15T17:00:00.000Z}
+  />
+  <Button
+    onClick={[Function]}
+    primary={true}
+    size="default"
+  >
+    Apply
+  </Button>
+  <Button
+    onClick={[Function]}
+    size="default"
+  >
+    Cancel
+  </Button>
+</Popover>
+`;
