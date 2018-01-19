@@ -64,11 +64,6 @@ describe('Action Creator: Report Filters', () => {
     expect(dispatchMock).toHaveBeenCalledTimes(1);
   });
 
-  it('should create an action to add a filter', () => {
-    const filter = { type: 'Example Domain', value: 'example.com' };
-    expect(reportFilters.addFilter(filter)).toEqual({ payload: filter, type: 'ADD_FILTER' });
-  });
-
   it('should create an action to add multiple filters', () => {
     const filters = [
       { type: 'Example Domain', value: 'one.example.com' },

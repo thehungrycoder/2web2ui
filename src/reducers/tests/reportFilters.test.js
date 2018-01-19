@@ -13,8 +13,8 @@ cases('Report Filters Reducer', (action) => {
   expect(reportFiltersReducer(state, action)).toMatchSnapshot();
 }, {
   'add a filter': {
-    payload: { type: 'Example Domain', value: 'sparkpost.com' },
-    type: 'ADD_FILTER'
+    payload: [{ type: 'Example Domain', value: 'sparkpost.com' }],
+    type: 'ADD_FILTERS'
   },
   'add multiple filters': {
     payload: [

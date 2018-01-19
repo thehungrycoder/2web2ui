@@ -8,7 +8,7 @@ describe('Summary Table ', () => {
   let wrapper;
 
   const props = {
-    addFilter: jest.fn(),
+    addFilters: jest.fn(),
     getTableData: jest.fn(),
     refresh: jest.fn(),
     metrics: [
@@ -66,7 +66,7 @@ describe('Summary Table ', () => {
     expect(snaps).toMatchSnapshot();
 
     snaps[0].find('UnstyledLink').simulate('click');
-    expect(props.addFilter).toHaveBeenCalledWith({ id: 0, type: 'Subaccount', value: 'Master Account (ID 0)' });
+    expect(props.addFilters).toHaveBeenCalledWith([{ id: 0, type: 'Subaccount', value: 'Master Account (ID 0)' }]);
     expect(props.refresh).toHaveBeenCalled();
   });
 

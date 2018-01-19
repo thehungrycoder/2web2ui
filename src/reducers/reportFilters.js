@@ -20,9 +20,6 @@ export default (state = initialState, action) => {
       return { ...state, to, from, relativeRange };
     }
 
-    case 'ADD_FILTER':
-      return { ...state, activeList: [ ...state.activeList, action.payload ]};
-
     case 'ADD_FILTERS':
       return { ...state, activeList: [ ...state.activeList, ...action.payload ]};
 

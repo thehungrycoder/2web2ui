@@ -44,13 +44,6 @@ export function maybeRefreshTypeaheadCache(dispatch, options, updates = {}) {
   }
 }
 
-export function addFilter(payload) {
-  return {
-    type: 'ADD_FILTER',
-    payload
-  };
-}
-
 export function addFilters(payload) {
   return {
     type: 'ADD_FILTERS',

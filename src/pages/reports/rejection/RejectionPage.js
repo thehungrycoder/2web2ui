@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 import qs from 'query-string';
 import { getFilterSearchOptions, parseSearch } from 'src/helpers/reports';
 import { showAlert } from 'src/actions/globalAlert';
-import { addFilter, refreshTypeaheadCache } from 'src/actions/reportFilters';
+import { addFilters, refreshTypeaheadCache } from 'src/actions/reportFilters';
 import { loadRejectionMetrics, refreshRejectionTableMetrics } from 'src/actions/rejectionReport';
 import { TableCollection, Empty, LongTextContainer } from 'src/components';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
@@ -34,12 +34,8 @@ export class RejectionPage extends Component {
    * and not in the helper
    */
   parseSearch() {
-    const { options, filters } = parseSearch(this.props.location.search);
-
-    if (filters) {
-      filters.forEach(this.props.addFilter);
-    }
-
+    const { filters = [], options } = parseSearch(this.props.location.search);
+    this.props.addFilters(filters);
     return options;
   }
 
@@ -66,7 +62,7 @@ export class RejectionPage extends Component {
   }
 
   handleDomainClick = (domain) => {
-    this.props.addFilter({ type: 'Recipient Domain', value: domain });
+    this.props.addFilters([{ type: 'Recipient Domain', value: domain }]);
     this.handleRefresh();
   }
 
@@ -155,7 +151,7 @@ const mapStateToProps = ({ reportFilters, rejectionReport }) => ({
 });
 
 const mapDispatchToProps = {
-  addFilter,
+  addFilters,
   loadRejectionMetrics,
   refreshRejectionTableMetrics,
   refreshTypeaheadCache,

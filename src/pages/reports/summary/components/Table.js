@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import cx from 'classnames';
 
 import { getTableData } from 'src/actions/summaryChart';
-import { addFilter } from 'src/actions/reportFilters';
+import { addFilters } from 'src/actions/reportFilters';
 import typeaheadCacheSelector from 'src/selectors/reportFilterTypeaheadCache';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
 
@@ -21,7 +21,7 @@ export class Table extends Component {
   }
 
   handleRowClick = (item) => {
-    this.props.addFilter(item);
+    this.props.addFilters([item]);
     this.props.refresh();
   }
 
@@ -144,4 +144,4 @@ const mapStateToProps = (state) => ({
   hasSubaccounts: hasSubaccounts(state),
   ...state.summaryChart
 });
-export default connect(mapStateToProps, { getTableData, addFilter })(Table);
+export default connect(mapStateToProps, { getTableData, addFilters })(Table);

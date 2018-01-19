@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import qs from 'query-string';
 import { TableCollection, Empty, LongTextContainer } from 'src/components';
-import { addFilter, refreshTypeaheadCache } from 'src/actions/reportFilters';
+import { addFilters, refreshTypeaheadCache } from 'src/actions/reportFilters';
 import { loadDelayReasonsByDomain, loadDelayMetrics } from 'src/actions/delayReport';
 import { parseSearch, getFilterSearchOptions } from 'src/helpers/reports';
 import { Percent } from 'src/components/formatters';
@@ -30,12 +30,8 @@ export class DelayPage extends Component {
   }
 
   parseSearch() {
-    const { options, filters } = parseSearch(this.props.location.search);
-
-    if (filters) {
-      filters.forEach(this.props.addFilter);
-    }
-
+    const { filters = [], options } = parseSearch(this.props.location.search);
+    this.props.addFilters(filters);
     return options;
   }
 
@@ -61,7 +57,7 @@ export class DelayPage extends Component {
   }
 
   handleDomainClick = (domain) => {
-    this.props.addFilter({ type: 'Recipient Domain', value: domain });
+    this.props.addFilters([{ type: 'Recipient Domain', value: domain }]);
     this.handleRefresh();
   }
 
@@ -156,8 +152,8 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
+  addFilters,
   refreshTypeaheadCache,
-  addFilter,
   loadDelayReasonsByDomain,
   loadDelayMetrics,
   showAlert

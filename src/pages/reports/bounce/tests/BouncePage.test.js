@@ -45,7 +45,7 @@ describe('BouncePage: ', () => {
   let spyParseSearch;
 
   beforeEach(() => {
-    props.addFilter = jest.fn();
+    props.addFilters = jest.fn();
     props.showAlert = jest.fn();
     reportHelpers.getFilterSearchOptions = jest.fn(() => []);
     spyParseSearch = reportHelpers.parseSearch = jest.fn(() => ({ options: {}}));
@@ -62,21 +62,20 @@ describe('BouncePage: ', () => {
     expect(props.refreshBounceTableMetrics).toHaveBeenCalled();
     expect(spyParseSearch).toHaveBeenCalled();
     expect(props.refreshTypeaheadCache).toHaveBeenCalled();
-    expect(props.addFilter).not.toHaveBeenCalled();
+    expect(props.addFilters).toHaveBeenCalledWith([]);
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should call addfilter when there are filters', () => {
+  it('should call addfilters when there are filters', () => {
     reportHelpers.parseSearch = jest.fn(() => ({ options: {}, filters: ['1', '2', '3']}));
     wrapper.instance().parseSearch();
-    expect(props.addFilter).toHaveBeenCalledTimes(3);
+    expect(props.addFilters).toHaveBeenCalledWith(['1', '2', '3']);
   });
 
   it('should show alert when one of the refresh calls fails', async() => {
     wrapper.setProps({ refreshBounceChartMetrics: jest.fn(() => Promise.reject(new Error('failed to load'))) });
     await wrapper.instance().handleRefresh();
     expect(props.showAlert).toHaveBeenCalledWith({ type: 'error', message: 'Unable to refresh bounce report.', details: 'failed to load' });
-
   });
 
   it('should render correctly with no bounces', () => {
@@ -125,7 +124,7 @@ describe('BouncePage: ', () => {
 
     const link = mount(rows[1]);
     link.find('UnstyledLink').simulate('click');
-    expect(props.addFilter).toHaveBeenCalledWith({ type: 'Recipient Domain', value: 'gmail' });
+    expect(props.addFilters).toHaveBeenCalledWith([{ type: 'Recipient Domain', value: 'gmail' }]);
   });
 
   it('should show modal toggle', () => {
