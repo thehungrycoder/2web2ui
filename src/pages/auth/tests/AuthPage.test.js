@@ -27,7 +27,7 @@ beforeEach(() => {
 });
 
 afterEach(() => {
-  jest.resetAllMocks();
+  jest.restoreAllMocks();
 });
 
 it('renders correctly', () => {
@@ -102,15 +102,12 @@ it('should authenticate on submit when sso is disabled', () => {
 });
 
 it('should redirect to sso if there is a sso user', () => {
-  const redirectSpy = jest.spyOn(wrapper.instance(), 'redirectToSSO');
+  const redirectSpy = jest.spyOn(window.location, 'assign').mockImplementation();
   wrapper.setProps({ auth: { ssoUser: 'foo-bar' }});
-  expect(redirectSpy).toHaveBeenCalled();
+  expect(redirectSpy).toHaveBeenCalledWith(expect.stringMatching(/saml\/login$/));
 });
 
 it('should set sso enabled if there ssoUser is null', () => {
-  const redirectSpy = jest.spyOn(wrapper.instance(), 'redirectToSSO');
   wrapper.setProps({ auth: { ssoUser: null }});
-  expect(wrapper.state().ssoEnabled).toEqual(false);
-  expect(redirectSpy).not.toHaveBeenCalled();
+  expect(wrapper.state().ssoEnabled).toBeFalsy();
 });
-

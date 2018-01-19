@@ -20,10 +20,6 @@ export class AuthPage extends Component {
     };
   }
 
-  redirectToSSO() {
-    window.location.href = `${config.apiBase}/users/saml/login`;
-  }
-
   ssoSignIn(username) {
     return this.props.ssoCheck(username).catch((err) => err);
   }
@@ -46,17 +42,16 @@ export class AuthPage extends Component {
     }
 
     if (ssoUser) {
-      this.redirectToSSO();
+      window.location.assign(`${config.apiBase}/users/saml/login`);
     } else {
       this.setState({ ssoEnabled: false });
     }
-
   }
 
   loginSubmit = (values) => {
     const { username, password, rememberMe } = values;
     this.state.ssoEnabled ? this.ssoSignIn(username) : this.regularSignIn(username, password, rememberMe);
-  };
+  }
 
   tfaSubmit = (values) => {
     const { code } = values;
@@ -68,7 +63,7 @@ export class AuthPage extends Component {
         });
       }
     });
-  };
+  }
 
   render() {
     const { errorDescription, loggedIn } = this.props.auth;
@@ -103,4 +98,3 @@ const mapStateToProps = ({ auth, tfa }) => ({
 });
 
 export default connect(mapStateToProps, { login, verifyAndLogin, authenticate, ssoCheck })(AuthPage);
-
