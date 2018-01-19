@@ -1,3 +1,4 @@
+/* eslint max-lines: ["error", 340] */
 import React from 'react';
 import { shallow } from 'enzyme';
 import _ from 'lodash';
@@ -5,6 +6,7 @@ import * as dateHelpers from 'src/helpers/date';
 import { DateFilter } from '../DateFilter';
 
 jest.mock('src/helpers/date');
+jest.mock('react-dom');
 
 describe('Component: DateFilter', () => {
 
@@ -31,6 +33,9 @@ describe('Component: DateFilter', () => {
     instance = wrapper.instance();
     // spy on all instance methods
     _.functions(instance).forEach((f) => jest.spyOn(instance, f));
+
+    dateHelpers.getStartOfDay = jest.fn(() => 'start-of-day');
+    dateHelpers.getEndOfDay = jest.fn(() => 'end-of-day');
   });
 
   afterEach(() => jest.restoreAllMocks());
@@ -39,7 +44,7 @@ describe('Component: DateFilter', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should sync state to props on new props', () => {
+  it('should sync props to state on new props', () => {
     wrapper.setProps({});
     expect(instance.syncPropsToState).toHaveBeenCalledTimes(1);
   });
@@ -74,6 +79,20 @@ describe('Component: DateFilter', () => {
       instance.syncPropsToState({ filter: after });
       expect(wrapper.state('selected')).toEqual(after);
     });
+
+  });
+
+  describe('handleClickOutside', () => {
+
+    it('should hide date picker when no DOM node is found', () => {
+      wrapper.setState({ showDatePicker: true });
+      instance.handleClickOutside();
+      expect(wrapper.state('showDatePicker')).toEqual(false);
+    });
+
+    // Note: can't test other scenarios for this method because you
+    // can't (AFAICT) mock react-dom's findDOMNode method to return
+    // different things in different tests
 
   });
 
@@ -164,8 +183,7 @@ describe('Component: DateFilter', () => {
     it('should handle a day click when not selecting', () => {
       const mockSelected = {};
       const mockClicked = {};
-      dateHelpers.getStartOfDay = jest.fn(() => 'start-of-day');
-      dateHelpers.getEndOfDay = jest.fn(() => 'end-of-day');
+
       wrapper.setState({ selecting: false, selected: mockSelected, beforeSelected: null });
       const mockNewSelected = { from: 'start-of-day', to: 'end-of-day' };
 
@@ -176,6 +194,144 @@ describe('Component: DateFilter', () => {
       expect(wrapper.state('selected')).toEqual(mockNewSelected);
       expect(wrapper.state('beforeSelected')).toEqual(mockNewSelected);
       expect(wrapper.state('selecting')).toEqual(true);
+    });
+
+  });
+
+  describe('handleDayHover', () => {
+
+    it('should handle a day hover while selecting', () => {
+      const mockOrderedRange = { from: 'from', to: 'to' };
+      const mockHovered = {};
+      instance.getOrderedRange = jest.fn(() => mockOrderedRange);
+      wrapper.setState({ selecting: true });
+
+      instance.handleDayHover(mockHovered);
+
+      expect(instance.getOrderedRange).toHaveBeenCalledWith(mockHovered);
+      expect(wrapper.state('selected')).toEqual(mockOrderedRange);
+    });
+
+    it('should handle a day hover when not selecting', () => {
+      const mockHovered = {};
+      const mockSelected = {};
+      instance.getOrderedRange = jest.fn();
+      wrapper.setState({ selecting: false, selected: mockSelected });
+
+      instance.handleDayHover(mockHovered);
+
+      expect(instance.getOrderedRange).not.toHaveBeenCalled();
+      expect(wrapper.state('selected')).toEqual(mockSelected);
+    });
+
+  });
+
+  describe('getOrderedRange', () => {
+
+    it('should return correct range when new date is between from and to', () => {
+      const from = new Date('2018-01-01');
+      const newDate = new Date('2018-01-02');
+      const to = new Date('2018-01-03');
+
+      wrapper.setState({ beforeSelected: { from, to }});
+      const range = instance.getOrderedRange(newDate);
+
+      expect(dateHelpers.getEndOfDay).toHaveBeenCalledWith(newDate, { preventFuture: true });
+      expect(dateHelpers.getStartOfDay).not.toHaveBeenCalled();
+      expect(range).toEqual({ from, to: 'end-of-day' });
+    });
+
+    it('should return correct range when new date is before from and to', () => {
+      const newDate = new Date('2018-01-01');
+      const from = new Date('2018-01-02');
+      const to = new Date('2018-01-03');
+
+      wrapper.setState({ beforeSelected: { from, to }});
+      const range = instance.getOrderedRange(newDate);
+
+      expect(dateHelpers.getEndOfDay).not.toHaveBeenCalled();
+      expect(dateHelpers.getStartOfDay).toHaveBeenCalledWith(newDate);
+      expect(range).toEqual({ from: 'start-of-day', to });
+    });
+
+    it('should return correct range when new date is after from and to', () => {
+      const from = new Date('2018-01-01');
+      const to = new Date('2018-01-02');
+      const newDate = new Date('2018-01-03');
+
+      wrapper.setState({ beforeSelected: { from, to }});
+      const range = instance.getOrderedRange(newDate);
+
+      expect(dateHelpers.getEndOfDay).toHaveBeenCalledWith(newDate, { preventFuture: true });
+      expect(dateHelpers.getStartOfDay).not.toHaveBeenCalled();
+      expect(range).toEqual({ from, to: 'end-of-day' });
+    });
+
+    it('should return correct range when from and newDate are the same', () => {
+      const from = new Date('2018-01-01');
+      const newDate = new Date('2018-01-01');
+      const to = new Date('2018-01-03');
+
+      wrapper.setState({ beforeSelected: { from, to }});
+      const range = instance.getOrderedRange(newDate);
+
+      expect(dateHelpers.getEndOfDay).toHaveBeenCalledWith(newDate, { preventFuture: true });
+      expect(dateHelpers.getStartOfDay).not.toHaveBeenCalled();
+      expect(range).toEqual({ from, to: 'end-of-day' });
+    });
+
+  });
+
+  describe('handleSelectRange', () => {
+
+    let e;
+
+    beforeEach(() => {
+      e = {
+        currentTarget: {}
+      };
+    });
+
+    it('should open date picker for custom value', () => {
+      e.currentTarget.value = 'custom';
+      wrapper.setState({ showDatePicker: false });
+      instance.handleSelectRange(e);
+      expect(wrapper.state('showDatePicker')).toEqual(true);
+      expect(props.refresh).not.toHaveBeenCalled();
+    });
+
+    it('should close date picker and refresh for non-custom value', () => {
+      e.currentTarget.value = 'lasagna';
+      wrapper.setState({ showDatePicker: true });
+      instance.handleSelectRange(e);
+      expect(wrapper.state('showDatePicker')).toEqual(false);
+      expect(props.refresh).toHaveBeenCalledWith({ relativeRange: 'lasagna' });
+    });
+
+  });
+
+  describe('handleFormDates', () => {
+
+    it('should set from and to state and call the passed in callback', () => {
+      wrapper.setState({ selected: false });
+      const mockCallback = jest.fn();
+      const mockSelected = { from: 'from', to: 'to' };
+      instance.handleFormDates(mockSelected, mockCallback);
+      expect(wrapper.state('selected')).toEqual(mockSelected);
+      expect(mockCallback).toHaveBeenCalledTimes(1);
+    });
+
+  });
+
+  describe('handleSubmit', () => {
+
+    it('should reset some state and refresh', () => {
+      const mockSelected = { a: 1, b: 2, c: 3 };
+      wrapper.setState({ showDatePicker: true, selecting: true, selected: mockSelected });
+      instance.handleSubmit();
+      expect(wrapper.state('showDatePicker')).toEqual(false);
+      expect(wrapper.state('selecting')).toEqual(false);
+      expect(props.refresh).toHaveBeenCalledWith({ ...mockSelected, relativeRange: 'custom' });
     });
 
   });
