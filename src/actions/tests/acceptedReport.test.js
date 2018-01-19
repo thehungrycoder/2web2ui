@@ -46,7 +46,7 @@ describe('Action Creator: Accepted Report', () => {
     expect(dispatchMock.mock.calls).toMatchSnapshot();
   });
 
-  it('should not refresh chart nor update deliveries by attempt if 0 accepted', async() => {
+  it('should clear refresh chart nor update deliveries by attempt if 0 accepted', async() => {
     metricsActions.fetchDeliverability = jest.fn(() => [{ foo: 'bar' }]);
     const thunk = acceptedReport.refreshAcceptedMetrics();
     await thunk(dispatchMock, getStateMock);

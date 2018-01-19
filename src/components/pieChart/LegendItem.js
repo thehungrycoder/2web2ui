@@ -25,7 +25,7 @@ const LegendItem = ({
   );
 
   const breadcrumbMarkup = breadcrumb
-    ? <Icon name='ChevronLeft' />
+    ? <Icon name='ChevronLeft' className={styles.BreadcrumbIcon}/>
     : null;
 
   const expandMarkup = children && children.length
@@ -35,7 +35,8 @@ const LegendItem = ({
   return (
     <a className={itemClasses} onClick={onClick} title={onClick && `View ${name}`} {...props}>
       { fill && <span className={styles.Color} style={{ backgroundColor: fill }}/> }
-      <span className={styles.Name}>{breadcrumbMarkup}{name}{expandMarkup}</span>
+      { breadcrumbMarkup }
+      <span className={styles.Name}>{name}{expandMarkup}</span>
       { count && <span className={styles.Count}>{count.toLocaleString()}</span> }
     </a>
   );

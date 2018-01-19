@@ -73,7 +73,7 @@ export class AcceptedPage extends Component {
   renderChart() {
     const { chartLoading, aggregates } = this.props;
 
-    if (!chartLoading && !aggregates) {
+    if (!chartLoading && _.isEmpty(aggregates)) {
       return <Empty title='Accepted Rates' message='No Accepted Messages To Report' />;
     }
 

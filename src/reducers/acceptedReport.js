@@ -24,6 +24,9 @@ export default (state = initialState, { type, payload }) => {
     case 'REFRESH_ACCEPTED_CHART':
       return { ...state, ...payload };
 
+    case 'CLEAR_ACCEPTED_CHART':
+      return { ...state, ...initialState };
+
     default:
       return state;
   }

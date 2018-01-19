@@ -35,7 +35,7 @@ export function refreshAcceptedMetrics(updates = {}) {
     return dispatch(fetchDeliverability(aggregateParams))
       .then((aggregates) => {
         if (!aggregates[0].count_accepted) {
-          return;
+          return dispatch(clearAcceptedChart());
         }
 
         return dispatch(fetchDeliveriesByAttempt(deliveryParams)).then((attempts) => {
@@ -58,5 +58,11 @@ export function refreshAcceptedChart({ aggregates, attempts, metrics }) {
       aggregates: transformData(aggregates, metrics)[0],
       attempts: reshapeAttempts(attempts)
     }
+  };
+}
+
+function clearAcceptedChart() {
+  return {
+    type: 'CLEAR_ACCEPTED_CHART'
   };
 }

@@ -80,4 +80,3 @@ export function refreshBounceTable({ reasons }) {
     payload: { reasons }
   };
 }
-
