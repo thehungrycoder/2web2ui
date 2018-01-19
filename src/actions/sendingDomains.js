@@ -9,3 +9,13 @@ export function list() {
     }
   });
 }
+
+export function get(id) {
+  return sparkpostApiRequest({
+    type: 'GET_SENDING_DOMAIN',
+    meta: {
+      method: 'GET',
+      url: `/sending-domains/${id}`
+    }
+  });
+}

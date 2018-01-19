@@ -303,7 +303,7 @@ const routes = [
   },
   {
     path: '/account/sending-domains/edit/:id',
-    component: ComingSoonPage,
+    component: sendingDomains.EditPage,
     condition: hasGrants('sending_domains/manage'),
     layout: App
   },

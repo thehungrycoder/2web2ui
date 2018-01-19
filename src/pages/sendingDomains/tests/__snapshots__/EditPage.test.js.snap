@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Sending Domains Edit Page renders correctly 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "Sending Domains",
+      "to": "/account/sending-domains",
+    }
+  }
+  empty={Object {}}
+  title="Edit id"
+>
+  Coming soon
+</Page>
+`;
+
+exports[`Sending Domains Edit Page renders error banner correctly 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "Sending Domains",
+      "to": "/account/sending-domains",
+    }
+  }
+  empty={Object {}}
+  title="Edit id"
+>
+  <ApiErrorBanner
+    errorDetails="error"
+    message="Sorry, we seem to have had some trouble loading your Sending Domain."
+    reload={[Function]}
+  />
+</Page>
+`;
+
+exports[`Sending Domains Edit Page renders loading correctly 1`] = `<Loading />`;
