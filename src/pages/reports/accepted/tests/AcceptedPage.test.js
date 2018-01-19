@@ -15,7 +15,7 @@ describe('AcceptedPage: ', () => {
     aggregates: { count_accepted: 1 },
     refreshAcceptedMetrics: jest.fn(() => Promise.resolve()),
     refreshTypeaheadCache: jest.fn(() => Promise.resolve()),
-    addFilter: jest.fn(),
+    addFilters: jest.fn(),
     showAlert: jest.fn(),
     location: {
       search: {}
@@ -74,9 +74,9 @@ describe('AcceptedPage: ', () => {
     expect(props.showAlert).toHaveBeenCalledWith({ type: 'error', message: 'Unable to refresh report.', details: 'no way' });
   });
 
-  it('should call addFilter when there are filters', () => {
+  it('should call addFilters when there are filters', () => {
     reportHelpers.parseSearch = jest.fn(() => ({ options: {}, filters: ['1', '2', '3']}));
     wrapper.instance().parseSearch();
-    expect(props.addFilter).toHaveBeenCalledTimes(3);
+    expect(props.addFilters).toHaveBeenCalledWith(['1', '2', '3']);
   });
 });

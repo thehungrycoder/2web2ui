@@ -10,7 +10,7 @@ exports[`Pie Chart:  renders its children 1`] = `
 `;
 
 exports[`Pie Chart:  renders its children 2`] = `
-<ChunkLoading
+<loading
   error={null}
   isLoading={true}
   pastDelay={false}
