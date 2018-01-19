@@ -1,4 +1,10 @@
-import { getNonDefaultIpPools, getDefaultPool, getOrderedIpPools } from '../ipPools';
+import {
+  getNonDefaultIpPools,
+  getDefaultPool,
+  getOrderedIpPools,
+  selectIpsForCurrentPool,
+  selectCurrentPoolInitialValues
+} from '../ipPools';
 
 describe('Selector: ipPools', () => {
 
@@ -12,7 +18,16 @@ describe('Selector: ipPools', () => {
           { id: 'none', ips: []},
           { id: 'default', ips: [1, 2, 3]},
           { id: 'small', ips: [1, 2]}
-        ]
+        ],
+        pool: {
+          name: 'MY CURRENT POOL',
+          id: 'my_current_pool',
+          ips: [
+            { external_ip: '1.1.1.1' },
+            { external_ip: '2.2.2.2' },
+            { external_ip: '3.3.3.3' }
+          ]
+        }
       }
     };
   });
@@ -33,6 +48,23 @@ describe('Selector: ipPools', () => {
     expect(getOrderedIpPools(state).map((pool) => pool.id)).toEqual([
       'default', 'big', 'none', 'small'
     ]);
+  });
+
+  it('should select IPs for the current pool', () => {
+    expect(selectIpsForCurrentPool(state)).toEqual([
+      { external_ip: '1.1.1.1', id: '1_1_1_1' },
+      { external_ip: '2.2.2.2', id: '2_2_2_2' },
+      { external_ip: '3.3.3.3', id: '3_3_3_3' }
+    ]);
+  });
+
+  it('should return an object of ips assigned to their current pool, for initial values', () => {
+    expect(selectCurrentPoolInitialValues(state)).toEqual({
+      name: 'MY CURRENT POOL',
+      '1_1_1_1': 'my_current_pool',
+      '2_2_2_2': 'my_current_pool',
+      '3_3_3_3': 'my_current_pool'
+    });
   });
 
 });

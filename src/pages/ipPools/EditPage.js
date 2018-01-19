@@ -13,7 +13,7 @@ import { showAlert } from 'src/actions/globalAlert';
 import { listPools, getPool, updatePool, deletePool } from 'src/actions/ipPools';
 import { updateSendingIp } from 'src/actions/sendingIps';
 
-import { decodeIp } from './helpers/ipNames';
+import { decodeIp } from 'src/helpers/ipNames';
 import isDefaultPool from './helpers/defaultPool';
 
 

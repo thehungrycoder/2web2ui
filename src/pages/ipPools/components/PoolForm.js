@@ -1,22 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-
 import { Button } from '@sparkpost/matchbox';
 import { SelectWrapper } from 'src/components/reduxFormWrappers';
-
 import { TableCollection } from 'src/components';
 import { required } from 'src/helpers/validation';
 import { TextFieldWrapper } from 'src/components';
-
-import { encodeIp } from '../helpers/ipNames';
+import { selectCurrentPoolInitialValues, selectCurrentPoolIps } from 'src/selectors/ipPools';
 import isDefaultPool from '../helpers/defaultPool';
 
 const columns = ['Sending IP', 'Hostname', 'IP Pool'];
 
 export class PoolForm extends Component {
   poolSelect = (ip, poolOptions, submitting) => (<Field
-    name={encodeIp(ip.external_ip)}
+    name={ip.id}
     component={SelectWrapper}
     options={poolOptions}
     disabled={submitting}/>
@@ -92,20 +89,16 @@ export class PoolForm extends Component {
   }
 }
 
-const mapStateToProps = ({ ipPools }, { isNew }) => {
+const mapStateToProps = (state, { isNew }) => {
+  const { ipPools } = state;
   const { pool, list = []} = ipPools;
-  const { ips = [], name = null } = pool;
 
-  // Each IP has an IP pool drop down, named for that IP's hostname.
-  // We set each select's initial value to the current pool id:
-  // { ip_1: 'My favorite pool', ... }
-  // The user can then reassign each IP to another pool.
-  const initialValues = ips.reduce((vals, ip) => {
-    vals[encodeIp(ip.external_ip)] = pool.id;
-    return vals;
-  }, {});
-
-  return { list, pool, ips, initialValues: { name, ...initialValues }};
+  return {
+    list,
+    pool,
+    ips: selectCurrentPoolIps(state),
+    initialValues: selectCurrentPoolInitialValues(state)
+  };
 };
 
 const PoolReduxForm = reduxForm({ form: 'poolForm' })(PoolForm);
