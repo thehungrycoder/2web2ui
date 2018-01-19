@@ -51,7 +51,7 @@ export class RecipientListForm extends Component {
 
   renderBanner() {
     return <Banner status='info' title='Recipient List CSV Format'>
-      You can download a <a>CSV template here</a> to use when formatting your recipient list for upload.
+      You can download a <a download href="/static/files/recipient-list-example.csv" target="_self">CSV template here</a> to use when formatting your recipient list for upload.
     </Banner>;
   }
 
@@ -132,4 +132,3 @@ const mapStateToProps = (state, props) => ({
 });
 
 export default connect(mapStateToProps)(WrappedForm);
-
