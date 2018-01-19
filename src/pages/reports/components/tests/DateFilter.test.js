@@ -1,12 +1,14 @@
-/* eslint max-lines: ["error", 340] */
+/* eslint max-lines: ["error", 341] */
 import React from 'react';
 import { shallow } from 'enzyme';
 import _ from 'lodash';
 import * as dateHelpers from 'src/helpers/date';
 import { DateFilter } from '../DateFilter';
+import utc from 'src/__testHelpers__/time';
 
 jest.mock('src/helpers/date');
 jest.mock('react-dom');
+jest.mock('date-fns');
 
 describe('Component: DateFilter', () => {
 
@@ -17,9 +19,8 @@ describe('Component: DateFilter', () => {
   let mockFrom;
 
   beforeEach(() => {
-    mockNow = new Date('2018-01-15T12:00:00');
-    mockFrom = new Date(mockNow);
-    mockFrom.setHours(mockFrom.getHours() - 1);
+    mockNow = utc({ year: 2017, month: 1, day: 15, hour: 12 });
+    mockFrom = utc({ year: 2017, month: 1, day: 15, hour: 11 });
     props = {
       filter: {
         from: mockFrom,
