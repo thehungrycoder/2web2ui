@@ -1,15 +1,17 @@
-import BouncePage from './bounce/BouncePage.js';
-import SummaryPage from './summary/SummaryPage.js';
-import MessageEventsPage from './messageEvents/MessageEventsPage.js';
-import EventPage from './messageEvents/EventPage.js';
+import BouncePage from './bounce/BouncePage';
 import DelayPage from './delays/DelayPage';
+import EngagementPage from './engagement/EngagementPage';
+import EventPage from './messageEvents/EventPage';
+import MessageEventsPage from './messageEvents/MessageEventsPage';
 import RejectionPage from './rejection/RejectionPage';
+import SummaryPage from './summary/SummaryPage';
 
 export default {
   BouncePage,
-  SummaryPage,
-  MessageEventsPage,
-  EventPage,
   DelayPage,
-  RejectionPage
+  EngagementPage,
+  EventPage,
+  MessageEventsPage,
+  RejectionPage,
+  SummaryPage
 };

@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders engagement report page 1`] = `
+<Page
+  empty={Object {}}
+  title="Engagement Report"
+>
+  <withRouter(Connect(EngagementFilters))
+    onLoad={[Function]}
+    shareDisabled={false}
+  />
+  <Connect(EngagementSummary)
+    clicks={3}
+    loading={false}
+    targeted={2}
+  />
+  <LoadableComponent
+    accepted={1}
+    clicks={3}
+    loading={false}
+    opens={4}
+    targeted={2}
+  />
+</Page>
+`;

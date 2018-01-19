@@ -124,7 +124,7 @@ const routes = [
   },
   {
     path: '/reports/engagement',
-    component: ComingSoonPage,
+    component: reports.EngagementPage,
     layout: App
   },
   {

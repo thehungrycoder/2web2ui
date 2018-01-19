@@ -1,5 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`LoadableLoading Component should render loading if pastDelay is true 1`] = `<Loading />`;
+exports[`ChunkLoading should render custom loading 1`] = `<CustomLoading />`;
 
-exports[`LoadableLoading Component should return null if no props 1`] = `""`;
+exports[`ChunkLoading should render loading 1`] = `<Loading />`;
+
+exports[`ChunkLoading should return null 1`] = `""`;

@@ -5,7 +5,7 @@ import classnames from 'classnames';
 import qs from 'query-string';
 
 import { refresh as refreshSummaryChart } from 'src/actions/summaryChart';
-import { addFilter, refreshTypeaheadCache } from 'src/actions/reportFilters';
+import { addFilters, refreshTypeaheadCache } from 'src/actions/reportFilters';
 import { getFilterSearchOptions, parseSearch } from 'src/helpers/reports';
 
 import { Page, Panel } from '@sparkpost/matchbox';
@@ -36,12 +36,8 @@ export class SummaryReportPage extends Component {
    * and not in the helper
    */
   parseSearch() {
-    const { options, filters } = parseSearch(this.props.location.search);
-
-    if (filters) {
-      filters.forEach(this.props.addFilter);
-    }
-
+    const { filters = [], options } = parseSearch(this.props.location.search);
+    this.props.addFilters(filters);
     return options;
   }
 
@@ -135,9 +131,9 @@ const mapStateToProps = ({ reportFilters, summaryChart }) => ({
 });
 
 const mapDispatchToProps = {
+  addFilters,
   refreshSummaryChart,
-  refreshTypeaheadCache,
-  addFilter
+  refreshTypeaheadCache
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SummaryReportPage));

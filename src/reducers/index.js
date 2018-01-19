@@ -8,6 +8,7 @@ import auth from './auth';
 import billing from './billing';
 import bounceReport from './bounceReport';
 import delayReport from './delayReport';
+import engagementReport from './engagementReport';
 import rejectionReport from './rejectionReport';
 import currentUser from './currentUser';
 import globalAlert from './globalAlert';
@@ -35,6 +36,7 @@ const appReducer = combineReducers({
   billing,
   bounceReport,
   delayReport,
+  engagementReport,
   rejectionReport,
   apiKeys,
   currentUser,

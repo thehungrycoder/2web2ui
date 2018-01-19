@@ -13,7 +13,6 @@ describe('RejectionPage: ', () => {
   let spyParseSearch;
 
   beforeEach(() => {
-    jest.clearAllMocks();
     spyParseSearch = reportHelpers.parseSearch = jest.fn(() => ({ options: {}}));
 
     props = {
@@ -42,7 +41,7 @@ describe('RejectionPage: ', () => {
       loadRejectionMetrics: jest.fn(() => Promise.resolve()),
       refreshRejectionTableMetrics: jest.fn(() => Promise.resolve()),
       refreshTypeaheadCache: jest.fn(),
-      addFilter: jest.fn(),
+      addFilters: jest.fn(),
       location: {
         search: {}
       },
@@ -56,9 +55,7 @@ describe('RejectionPage: ', () => {
     wrapper = shallow(<RejectionPage {...props} />);
   });
 
-  afterEach(() => {
-    spyParseSearch.mockRestore();
-  });
+  afterEach(() => { jest.resetAllMocks(); });
 
   it('renders correctly', () => {
     expect(spyParseSearch).toHaveBeenCalledTimes(1);
@@ -97,17 +94,19 @@ describe('RejectionPage: ', () => {
       const rows = wrapper.instance().getRowData({ reason: 'bad delay', rejection_category_name: 'cat1', count_rejected: 10, domain: 'gmail.com' });
       const link = mount(rows[1]);
       link.find('UnstyledLink').simulate('click');
-      expect(props.addFilter).toHaveBeenCalledWith({ type: 'Recipient Domain', value: 'gmail.com' });
+      expect(props.addFilters).toHaveBeenCalledWith([{ type: 'Recipient Domain', value: 'gmail.com' }]);
     });
 
   });
 
   describe('handleDomainClick', () => {
     it('sets the filter and refresh', () => {
-      props.refreshRejectionTableMetrics.mockClear(); //clear any usages by initial rendering (componentDidMount)
-      wrapper.instance().handleDomainClick('abc.com');
-      expect(props.addFilter).toHaveBeenCalledTimes(1);
-      expect(props.refreshRejectionTableMetrics).toHaveBeenCalledTimes(1);
+      const value = 'abc.com';
+
+      wrapper.instance().handleDomainClick(value);
+
+      expect(props.addFilters).toHaveBeenCalledWith([{ type: 'Recipient Domain', value }]);
+      expect(props.refreshRejectionTableMetrics).toHaveBeenCalledTimes(2); // on load and
     });
   });
 
@@ -123,18 +122,19 @@ describe('RejectionPage: ', () => {
 
   describe('handleRefresh', () => {
     it('refresh rejections', async() => {
-      props.refreshRejectionTableMetrics.mockClear(); //clear any usages by initial rendering (componentDidMount)
       const options = { relativeRange: '7days' };
+
       await wrapper.instance().handleRefresh(options);
-      expect(props.refreshRejectionTableMetrics).toHaveBeenCalledTimes(1);
+
+      expect(props.refreshRejectionTableMetrics).toHaveBeenCalledTimes(2);
       expect(props.refreshRejectionTableMetrics).toHaveBeenCalledWith(options);
       expect(props.showAlert).toHaveBeenCalledTimes(0);
     });
 
     it('alerts on error', async() => {
-      props.refreshRejectionTableMetrics.mockClear();
       const err = new Error('dooms day!');
       props.refreshRejectionTableMetrics.mockReturnValue(Promise.reject(err));
+
       await wrapper.instance().handleRefresh();
 
       expect(props.refreshRejectionTableMetrics).toHaveBeenCalledWith(undefined);
@@ -144,8 +144,6 @@ describe('RejectionPage: ', () => {
 
   describe('parseSearch', () => {
     it('parses query params correctly', () => {
-      props.addFilter.mockClear();
-
       const from = new Date('2016');
       const to = new Date();
       const filter = { type: 'Recipient Domain', value: 'gmail.com' };
@@ -156,8 +154,7 @@ describe('RejectionPage: ', () => {
       });
 
       expect(wrapper.instance().parseSearch()).toEqual({ from, to });
-      expect(props.addFilter).toHaveBeenCalledTimes(1);
-      expect(props.addFilter).toHaveBeenCalledWith(filter, expect.anything(), [filter]); //I wish if I could care just about first arg
+      expect(props.addFilters).toHaveBeenCalledWith([filter]);
     });
   });
 });

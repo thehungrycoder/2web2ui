@@ -1,11 +1,11 @@
+import React from 'react';
 import loadable from 'react-loadable';
 import ChunkLoading from './ChunkLoading';
 
-
-export default function asyncComponent(importComponent) {
+export default function asyncComponent(importComponent, LoadingComponent) {
   const LoadableComponent = loadable({
     loader: importComponent,
-    loading: ChunkLoading
+    loading: (props) => <ChunkLoading LoadingComponent={LoadingComponent} {...props} />
   });
 
   return LoadableComponent;
