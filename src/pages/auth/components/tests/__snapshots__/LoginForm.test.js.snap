@@ -2,7 +2,7 @@
 
 exports[`renders correctly 1`] = `
 <form
-  onSubmit={[Function]}
+  onSubmit={[MockFunction]}
 >
   <Field
     autoFocus={true}
@@ -39,7 +39,7 @@ exports[`renders correctly 1`] = `
 
 exports[`renders correctly when logging in 1`] = `
 <form
-  onSubmit={[Function]}
+  onSubmit={[MockFunction]}
 >
   <Field
     autoFocus={true}
@@ -77,7 +77,7 @@ exports[`renders correctly when logging in 1`] = `
 
 exports[`renders correctly when ssoEnabled is true 1`] = `
 <form
-  onSubmit={[Function]}
+  onSubmit={[MockFunction]}
 >
   <Field
     autoFocus={true}

@@ -153,7 +153,13 @@ exports[`Sending Domains List Page renders error banner correctly 1`] = `
   <ApiErrorBanner
     errorDetails="error"
     message="Sorry, we seem to have had some trouble loading your domains."
-    reload={[Function]}
+    reload={
+      [MockFunction] {
+        "calls": Array [
+          Array [],
+        ],
+      }
+    }
   />
 </Page>
 `;

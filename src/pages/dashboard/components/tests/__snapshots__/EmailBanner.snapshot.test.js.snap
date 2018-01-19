@@ -5,7 +5,7 @@ exports[`Component: Email Banner should show default email banner 1`] = `
   action={
     Object {
       "content": "Resend Email",
-      "onClick": [Function],
+      "onClick": [MockFunction],
     }
   }
   status="info"

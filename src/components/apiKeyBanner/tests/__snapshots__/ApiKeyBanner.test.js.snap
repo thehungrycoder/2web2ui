@@ -8,7 +8,7 @@ exports[`ApiKeyBanner Component should change content when key is copied 1`] = `
       "onClick": [Function],
     }
   }
-  onDismiss={[Function]}
+  onDismiss={[MockFunction]}
   status="success"
   title="congrats on your new key"
 >
@@ -29,7 +29,7 @@ exports[`ApiKeyBanner Component should render default success message 1`] = `
       "onClick": [Function],
     }
   }
-  onDismiss={[Function]}
+  onDismiss={[MockFunction]}
   status="success"
   title="congrats on your new key"
 >

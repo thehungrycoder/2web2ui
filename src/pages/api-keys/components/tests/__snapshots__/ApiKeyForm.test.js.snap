@@ -2,7 +2,7 @@
 
 exports[`renders correctly - new and no subaccounts 1`] = `
 <form
-  onSubmit={[Function]}
+  onSubmit={[MockFunction]}
 >
   <Field
     component={[Function]}
@@ -54,7 +54,7 @@ exports[`renders correctly - new and no subaccounts 1`] = `
 
 exports[`renders correctly - update and subaccounts 1`] = `
 <form
-  onSubmit={[Function]}
+  onSubmit={[MockFunction]}
 >
   <Field
     component={[Function]}
@@ -110,7 +110,13 @@ exports[`renders correctly - update and subaccounts 1`] = `
 
 exports[`submits correctly 1`] = `
 <form
-  onSubmit={[Function]}
+  onSubmit={
+    [MockFunction] {
+      "calls": Array [
+        Array [],
+      ],
+    }
+  }
 >
   <Field
     component={[Function]}

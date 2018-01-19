@@ -3,7 +3,7 @@
 exports[`From Email Typeahead Wrapper should render 1`] = `
 <FromEmail
   label="label"
-  onChange={[Function]}
+  onChange={[MockFunction]}
 />
 `;
 
@@ -11,7 +11,7 @@ exports[`From Email Typeahead Wrapper should render error 1`] = `
 <FromEmail
   error="error message"
   label="label"
-  onChange={[Function]}
+  onChange={[MockFunction]}
 />
 `;
 

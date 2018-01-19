@@ -1075,7 +1075,22 @@ exports[`Page: Message Events tests should render error when action fails 1`] = 
   <ApiErrorBanner
     errorDetails="You done f'ed up now"
     message="Sorry, we seem to have had some trouble loading your message events."
-    reload={[Function]}
+    reload={
+      [MockFunction] {
+        "calls": Array [
+          Array [
+            Object {
+              "reportFilters": undefined,
+            },
+          ],
+          Array [
+            Object {
+              "reportFilters": undefined,
+            },
+          ],
+        ],
+      }
+    }
   />
 </Page>
 `;
