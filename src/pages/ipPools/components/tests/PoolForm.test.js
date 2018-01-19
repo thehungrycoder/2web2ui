@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 import { PoolForm } from '../PoolForm';
-//import { renderRowData } from 'src/__testHelpers__';
+import { renderRowData } from 'src/__testHelpers__';
 
 describe('PoolForm tests', () => {
   let props;
@@ -73,11 +73,10 @@ describe('PoolForm tests', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  /* TODO: fix this test, its failing, think the helper needs updated
   it('should render row properly', () => {
-    const rows = wrapper.instance().getRowData('options', { external_ip: 'ext-ip', hostname: 'host' });
+    const rows = wrapper.instance().getRowData('options', { id: '1_1_1_1', external_ip: 'ext-ip', hostname: 'host' });
 
     expect(renderRowData(rows)).toMatchSnapshot();
-  });*/
+  });
 });
 

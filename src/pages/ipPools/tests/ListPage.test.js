@@ -2,7 +2,7 @@ import { shallow } from 'enzyme';
 import React from 'react';
 
 import { IpPoolsList } from '../ListPage';
-//import { renderRowData } from 'src/__testHelpers__';
+import { renderRowData } from 'src/__testHelpers__';
 
 describe('IP Pools List Page', () => {
   let props;
@@ -35,8 +35,7 @@ describe('IP Pools List Page', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  /* TODO: i think the test helper chokes on react-router-dom elements
-   it('should render row properly', () => {
+  it('should render row properly', () => {
     const rows = wrapper.instance().getRowData({
       id: 'my-pool',
       name: 'My Pool',
@@ -44,5 +43,5 @@ describe('IP Pools List Page', () => {
     });
 
     expect(renderRowData(rows)).toMatchSnapshot();
-  });*/
+  });
 });

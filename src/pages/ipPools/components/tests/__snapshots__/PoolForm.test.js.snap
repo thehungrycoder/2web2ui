@@ -138,6 +138,19 @@ exports[`PoolForm tests should render form 1`] = `
 </form>
 `;
 
+exports[`PoolForm tests should render row properly 1`] = `
+Array [
+  "ext-ip",
+  "host",
+  <Field
+    component={[Function]}
+    disabled={false}
+    name="1_1_1_1"
+    options="options"
+  />,
+]
+`;
+
 exports[`PoolForm tests should return a msg if there are no ips 1`] = `
 <form
   onSubmit={[Function]}
