@@ -29,7 +29,7 @@ describe('Page: SummaryPage', () => {
       },
       refreshSummaryChart: jest.fn(() => Promise.resolve()),
       refreshTypeaheadCache: jest.fn(),
-      addFilter: jest.fn()
+      addFilters: jest.fn()
     };
     wrapper = shallow(<SummaryReportPage {...testProps} />);
   });
@@ -50,7 +50,7 @@ describe('Page: SummaryPage', () => {
       filters: [1, 2, 3]
     }));
     wrapper = shallow(<SummaryReportPage {...testProps} />);
-    expect(testProps.addFilter).toHaveBeenCalledTimes(3);
+    expect(testProps.addFilters).toHaveBeenCalledWith([1, 2, 3]);
   });
 
   it('should toggle modals via filters', () => {

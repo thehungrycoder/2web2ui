@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addFilter, removeFilter } from 'src/actions/reportFilters';
+import { addFilters, removeFilter } from 'src/actions/reportFilters';
 
 import { Grid, Button, Panel, Tag } from '@sparkpost/matchbox';
 import Typeahead from './Typeahead';
@@ -26,7 +26,7 @@ export class Filters extends Component {
   }
 
   handleTypeaheadSelect = (item) => {
-    this.props.addFilter(item);
+    this.props.addFilters([item]);
     this.props.refresh();
   }
 
@@ -65,4 +65,4 @@ const mapStateToProps = (state) => ({
   filters: state.reportFilters.activeList,
   typeaheadCache: typeaheadCacheSelector(state)
 });
-export default connect(mapStateToProps, { addFilter, removeFilter })(Filters);
+export default connect(mapStateToProps, { addFilters, removeFilter })(Filters);

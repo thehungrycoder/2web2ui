@@ -11,7 +11,7 @@ Date.now = jest.fn(() => 1487076708000);
 describe('DelayPage: ', () => {
   const props = {
     filters: { relativeRange: 'hour' },
-    addFilter: jest.fn(),
+    addFilters: jest.fn(),
     tableLoading: false,
     reasons: [
       {
@@ -60,7 +60,7 @@ describe('DelayPage: ', () => {
     expect(props.loadDelayReasonsByDomain).toHaveBeenCalled();
     expect(parseSpy).toHaveBeenCalled();
     expect(props.refreshTypeaheadCache).toHaveBeenCalled();
-    expect(props.addFilter).not.toHaveBeenCalled();
+    expect(props.addFilters).toHaveBeenCalledWith([]);
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -85,10 +85,10 @@ describe('DelayPage: ', () => {
     expect(props.showAlert).toHaveBeenCalledWith({ type: 'error', message: 'Unable to refresh delay report.', details: 'no way jose' });
   });
 
-  it('should call addFilter when there are filters', () => {
+  it('should call addFilters when there are filters', () => {
     reportHelpers.parseSearch = jest.fn(() => ({ options: {}, filters: ['1', '2', '3']}));
     wrapper.instance().parseSearch();
-    expect(props.addFilter).toHaveBeenCalledTimes(3);
+    expect(props.addFilters).toHaveBeenCalledWith(['1', '2', '3']);
   });
 
   it('should render row data properly', () => {
@@ -100,7 +100,7 @@ describe('DelayPage: ', () => {
     const rows = wrapper.instance().getRowData({ reason: 'bad delay', count_delayed: 1, count_delayed_first: 10, domain: 'gmail.com' });
     const link = mount(rows[1]);
     link.find('UnstyledLink').simulate('click');
-    expect(props.addFilter).toHaveBeenCalledWith({ type: 'Recipient Domain', value: 'gmail.com' });
+    expect(props.addFilters).toHaveBeenCalledWith([{ type: 'Recipient Domain', value: 'gmail.com' }]);
   });
 
   it('should show modal toggle', () => {

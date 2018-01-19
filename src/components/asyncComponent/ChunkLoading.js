@@ -1,13 +1,13 @@
 import React from 'react';
-import { Loading } from 'src/components/loading/Loading';
+import { Loading } from 'src/components';
 
-const ChunkLoading = ({ pastDelay }) => {
+const ChunkLoading = ({ LoadingComponent = Loading, pastDelay }) => {
   // if loading has taken more than 200 milliseconds
   if (pastDelay) {
-    return <Loading />;
-  } else {
-    return null;
+    return <LoadingComponent />;
   }
+
+  return null;
 };
 
 export default ChunkLoading;

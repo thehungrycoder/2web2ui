@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`get engagement chart data when failed 1`] = `
+Object {
+  "chart": Object {
+    "data": Array [],
+    "error": Object {
+      "message": "Oh no!",
+    },
+    "loading": false,
+  },
+}
+`;
+
+exports[`get engagement chart data when pending 1`] = `
+Object {
+  "chart": Object {
+    "data": Object {},
+    "error": null,
+    "loading": true,
+  },
+}
+`;
+
+exports[`get engagement chart data when succeeds 1`] = `
+Object {
+  "chart": Object {
+    "data": Object {
+      "count_accepted": 237433,
+      "count_targeted": 272234,
+    },
+    "error": null,
+    "loading": false,
+  },
+}
+`;

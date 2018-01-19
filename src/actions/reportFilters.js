@@ -8,6 +8,7 @@ import {
 import { listTemplates } from './templates';
 import { list as listSubaccounts } from './subaccounts';
 import { list as listSendingDomains } from './sendingDomains';
+import { getRelativeDates } from 'src/helpers/date';
 import { getQueryFromOptions } from 'src/helpers/metrics';
 
 // array of all lists that need to be re-filtered when time changes
@@ -43,9 +44,9 @@ export function maybeRefreshTypeaheadCache(dispatch, options, updates = {}) {
   }
 }
 
-export function addFilter(payload) {
+export function addFilters(payload) {
   return {
-    type: 'ADD_FILTER',
+    type: 'ADD_FILTERS',
     payload
   };
 }
@@ -62,5 +63,14 @@ export function refreshReportRange(options) {
   return {
     type: 'REFRESH_REPORT_RANGE',
     payload: options
+  };
+}
+
+export function refreshRelativeRange(options = {}) {
+  const range = { ...options, ...getRelativeDates(options.relativeRange) };
+
+  return {
+    type: 'REFRESH_REPORT_RANGE',
+    payload: range
   };
 }

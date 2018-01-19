@@ -3,7 +3,10 @@ import * as metrics from 'src/actions/metrics';
 import { listTemplates } from 'src/actions/templates';
 import { list as listSubaccounts } from 'src/actions/subaccounts';
 import { list as listSendingDomains } from 'src/actions/sendingDomains';
+import { getRelativeDates } from 'src/helpers/date';
+import time from 'src/__testHelpers__/time';
 
+jest.mock('src/helpers/date');
 jest.mock('src/helpers/metrics');
 jest.mock('src/actions/metrics');
 jest.mock('src/actions/templates');
@@ -61,4 +64,32 @@ describe('Action Creator: Report Filters', () => {
     expect(dispatchMock).toHaveBeenCalledTimes(1);
   });
 
+  it('should create an action to add multiple filters', () => {
+    const filters = [
+      { type: 'Example Domain', value: 'one.example.com' },
+      { type: 'Example Domain', value: 'two.example.com' }
+    ];
+    expect(reportFilters.addFilters(filters)).toEqual({ payload: filters, type: 'ADD_FILTERS' });
+  });
+
+  it('should create an action with custom range to refresh report range', () => {
+    const range = { from: time(), relativeRange: 'custom', to: time({ hour: 2 }) };
+    getRelativeDates.mockImplementation(() => ({}));
+
+    expect(reportFilters.refreshRelativeRange(range)).toEqual({
+      payload: range,
+      type: 'REFRESH_REPORT_RANGE'
+    });
+  });
+
+  it('should create an action with relative range to refresh report range', () => {
+    const relativeRange = { relativeRange: 'day' };
+    const range = { from: time(), to: time({ day: 2 }) };
+    getRelativeDates.mockImplementation(() => range);
+
+    expect(reportFilters.refreshRelativeRange(relativeRange)).toEqual({
+      payload: { ...range, ...relativeRange },
+      type: 'REFRESH_REPORT_RANGE'
+    });
+  });
 });

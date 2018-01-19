@@ -12,7 +12,7 @@ describe('Component: Report filters', () => {
   beforeEach(() => {
     testProps = {
       refresh: jest.fn(),
-      addFilter: jest.fn(),
+      addFilters: jest.fn(),
       removeFilter: jest.fn(),
       typeaheadCache: [],
       filters: [],
@@ -55,8 +55,7 @@ describe('Component: Report filters', () => {
     const typeahead = wrapper.find(Typeahead);
     const item = {};
     typeahead.simulate('select', item);
-    expect(testProps.addFilter).toHaveBeenCalledWith(item);
+    expect(testProps.addFilters).toHaveBeenCalledWith([item]);
     expect(testProps.refresh).toHaveBeenCalledTimes(1);
   });
-
 });

@@ -94,6 +94,15 @@ export const formatNumber = (value) => {
   return `${roundToPlaces(formatted, 2).toLocaleString()}${suffix}`;
 };
 
+// Formats number count to sting with commas
+export const formatFullNumber = (value) => {
+  if (!isNumber(value)) {
+    return value;
+  }
+
+  return value.toLocaleString();
+};
+
 export const formatPercent = (value) => {
   if (!isNumber(value)) {
     return value;
