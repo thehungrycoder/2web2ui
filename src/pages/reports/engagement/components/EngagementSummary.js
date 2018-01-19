@@ -18,7 +18,7 @@ export function EngagementSummary({ clicks = 0, filters, loading = true, targete
   return (
     <MetricsSummary
       {...filters}
-      rateTitle="Completion Rate"
+      rateTitle="Unique Click Rate"
       rateValue={clicks / targeted * 100}
     >
       <strong>{formatFullNumber(clicks)}</strong> of your messages were clicked

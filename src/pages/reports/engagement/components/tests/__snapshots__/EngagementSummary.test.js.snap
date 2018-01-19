@@ -2,7 +2,7 @@
 
 exports[`EngagementSummary redners metric summary 1`] = `
 <MetricsSummary
-  rateTitle="Completion Rate"
+  rateTitle="Unique Click Rate"
   rateValue={0.0999000999000999}
 >
   <strong>
