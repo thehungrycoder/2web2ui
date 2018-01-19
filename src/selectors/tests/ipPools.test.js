@@ -8,8 +8,8 @@ describe('Selector: ipPools', () => {
     state = {
       ipPools: {
         list: [
-          { id: 'none', ips: []},
           { id: 'big', ips: [1, 2, 3, 4, 5, 6]},
+          { id: 'none', ips: []},
           { id: 'default', ips: [1, 2, 3]},
           { id: 'small', ips: [1, 2]}
         ]
@@ -23,15 +23,15 @@ describe('Selector: ipPools', () => {
 
   it('should return a list of non default IP pools', () => {
     expect(getNonDefaultIpPools(state)).toEqual([
-      { id: 'none', ips: []},
       { id: 'big', ips: [1, 2, 3, 4, 5, 6]},
+      { id: 'none', ips: []},
       { id: 'small', ips: [1, 2]}
     ]);
   });
 
-  it('should return a list of ordered pools (default first, then ordered by # of ips descending)', () => {
+  it('should return a list pools (default first, then ordered by id ascending)', () => {
     expect(getOrderedIpPools(state).map((pool) => pool.id)).toEqual([
-      'default', 'big', 'small', 'none'
+      'default', 'big', 'none', 'small'
     ]);
   });
 

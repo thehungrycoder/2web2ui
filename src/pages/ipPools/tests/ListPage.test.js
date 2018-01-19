@@ -2,10 +2,14 @@ import { shallow } from 'enzyme';
 import React from 'react';
 
 import { IpPoolsList } from '../ListPage';
+//import { renderRowData } from 'src/__testHelpers__';
 
 describe('IP Pools List Page', () => {
-  it('should render the list page correctly', () => {
-    const props = {
+  let props;
+  let wrapper;
+
+  beforeEach(() => {
+    props = {
       loading: false,
       ipPools: [
         { name: 'Test Pool 1', id: 101, ips: [{ external_ip: 1111 }, { external_ip: 2222 }]},
@@ -13,20 +17,32 @@ describe('IP Pools List Page', () => {
       ],
       listPools: jest.fn(() => [])
     };
-    const wrapper = shallow(<IpPoolsList {...props} />);
+
+    wrapper = shallow(<IpPoolsList {...props} />);
+  });
+
+  it('should render the list page correctly', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should show alert upon error', () => {
-    const props = {
-      ipPools: [],
-      listPools: jest.fn(() => []),
-      error: {
-        message: 'Uh oh! It broke.' // renders as details
-      },
-      loading: false
-    };
-    const wrapper = shallow(<IpPoolsList {...props} />);
+    wrapper.setProps({ ipPools: [], error: { message: 'Uh oh! It broke.' }});
     expect(wrapper).toMatchSnapshot();
   });
+
+  it('should render loading component when loading data', () => {
+    wrapper.setProps({ loading: true });
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  /* TODO: i think the test helper chokes on react-router-dom elements
+   it('should render row properly', () => {
+    const rows = wrapper.instance().getRowData({
+      id: 'my-pool',
+      name: 'My Pool',
+      ips: [1,2,3]
+    });
+
+    expect(renderRowData(rows)).toMatchSnapshot();
+  });*/
 });

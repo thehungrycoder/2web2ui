@@ -1,5 +1,5 @@
 /* eslint max-lines: ["error", 200] */
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
@@ -23,7 +23,7 @@ const breadcrumbAction = {
   to: '/account/ip-pools'
 };
 
-export class EditPage extends React.Component {
+export class EditPage extends Component {
   constructor(props) {
     super(props);
 
@@ -51,8 +51,10 @@ export class EditPage extends React.Component {
   onUpdatePool = (values) => {
     const { updateSendingIp, updatePool, showAlert, history } = this.props;
 
-    // Pick out the IPs those pool assignment is not the current pool ergo
-    // have been reassigned by the user.
+    /**
+     * Pick out the IPs whose pool assignment is not the current pool ergo
+     * have been reassigned by the user.
+     */
     const changedIpKeys = Object.keys(values).filter((key) =>
       key !== 'name' && values[key] !== this.id);
 
@@ -94,13 +96,13 @@ export class EditPage extends React.Component {
       }));
   };
 
-  loadDependantData = () => {
+  loadDependentData = () => {
     this.props.listPools();
     this.props.getPool(this.id);
   };
 
   componentDidMount() {
-    this.loadDependantData();
+    this.loadDependentData();
   }
 
   renderError() {

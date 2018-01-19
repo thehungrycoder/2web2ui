@@ -7,15 +7,16 @@ import { Loading, TableCollection, ApiErrorBanner } from 'src/components';
 import { Page } from '@sparkpost/matchbox';
 
 const columns = ['Name', 'ID', 'Number of IPs Assigned'];
-const getRowData = ({ id, name, ips }) => {
-  const nameLink = <Link to={`/account/ip-pools/edit/${id}`}>{name}</Link>;
-  return [nameLink, id, ips.length.toString()];
-};
 
 export class IpPoolsList extends Component {
 
   componentDidMount() {
     this.props.listPools();
+  }
+
+  getRowData = ({ id, name, ips }) => {
+    const nameLink = <Link to={`/account/ip-pools/edit/${id}`}>{name}</Link>;
+    return [nameLink, id, ips.length.toString()];
   }
 
   renderError() {
@@ -35,7 +36,7 @@ export class IpPoolsList extends Component {
       <TableCollection
         columns={columns}
         rows={ipPools}
-        getRowData={getRowData}
+        getRowData={this.getRowData}
         pagination={true}
         filterBox={{
           show: true,

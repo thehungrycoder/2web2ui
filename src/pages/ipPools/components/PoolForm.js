@@ -22,7 +22,7 @@ export class PoolForm extends Component {
     disabled={submitting}/>
   );
 
-  getRowData(poolOptions, ip) {
+  getRowData = (poolOptions, ip) => {
     const { submitting } = this.props;
 
     return [

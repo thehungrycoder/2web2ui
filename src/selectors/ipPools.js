@@ -19,7 +19,6 @@ export const getOrderedIpPools = createSelector(
     if (!defaultPool) {
       return initialList;
     }
-    const sorted = others.sort((a, b) => b.ips.length - a.ips.length);
-    return [ defaultPool, ...sorted ];
+    return [ defaultPool, ...others ];
   }
 );
