@@ -2,7 +2,7 @@ import { shallow } from 'enzyme';
 import React from 'react';
 
 import { IpPoolsList } from '../ListPage';
-import { renderRowData } from 'src/__testHelpers__';
+import { renderRowData } from 'src/__testHelpers__/renderHelpers';
 
 describe('IP Pools List Page', () => {
   let props;

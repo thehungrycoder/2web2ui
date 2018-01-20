@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 import { PoolForm } from '../PoolForm';
-import { renderRowData } from 'src/__testHelpers__';
+import { renderRowData } from 'src/__testHelpers__/renderHelpers';
 
 describe('PoolForm tests', () => {
   let props;
