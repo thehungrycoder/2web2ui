@@ -1,4 +1,4 @@
-/* eslint max-lines: ["error", 175] */
+/* eslint max-lines: ["error", 176] */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactDOM from 'react-dom';
@@ -124,6 +124,8 @@ export class DateFilter extends Component {
   render() {
     const { selected: { from, to }, showDatePicker } = this.state;
     const selectedRange = showDatePicker ? 'custom' : this.props.filter.relativeRange;
+
+    // allow for prop-level override of "now" (DI, etc.)
     const { now = new Date() } = this.props;
 
     const rangeSelect = <Select

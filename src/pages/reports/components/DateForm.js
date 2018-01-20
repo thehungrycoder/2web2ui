@@ -54,6 +54,8 @@ export default class DateForm extends Component {
     const format = `${this.dayFormat} ${this.timeFormat}`;
     const to = moment(`${this.state.toDate} ${this.state.toTime}`, format, true);
     const from = moment(`${this.state.fromDate} ${this.state.fromTime}`, format, true);
+
+    // allow for prop-level override of "now" (DI, etc.)
     const { now = moment() } = this.props;
 
     if (to.isValid() && from.isValid() && from.isBefore(to) && to.isBefore(now)) {

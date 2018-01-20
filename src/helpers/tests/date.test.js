@@ -1,4 +1,11 @@
-import { getEndOfDay, getStartOfDay, getRelativeDates } from '../date';
+import {
+  getEndOfDay,
+  getStartOfDay,
+  getRelativeDates,
+  formatDate,
+  formatTime,
+  formatDateTime
+} from '../date';
 import cases from 'jest-in-case';
 import moment from 'moment';
 
@@ -32,11 +39,11 @@ describe('Date helpers', () => {
   });
 
   cases('getRelativeDates calculations', ({ range, subtractArgs }) => {
-    const date = moment('2017-12-18T12:00').toDate();
+    const date = moment(new Date('2017-12-17T12:00:00')).utc().toDate();
     Date.now = jest.fn(() => date);
     const { from, to } = getRelativeDates(range);
     expect(to).toEqual(date);
-    expect(from).toEqual(moment(date).utc().subtract(...subtractArgs).toDate());
+    expect(from).toEqual(moment(date).subtract(...subtractArgs).toDate());
   }, {
     'for an hour ago': { range: 'hour', subtractArgs: [1, 'hours']},
     'for a day ago': { range: 'day', subtractArgs: [1, 'days']},
@@ -47,6 +54,30 @@ describe('Date helpers', () => {
 
   it('should return an empty object when getting a relative range for an invalid range type', () => {
     expect(getRelativeDates('invalid-like-whoa')).toEqual({});
+  });
+
+  describe('date formatting', () => {
+
+    let testDate;
+
+    beforeEach(() => {
+      testDate = new Date('2017-10-15T08:55:00');
+    });
+
+    it('should format a date consistently', () => {
+      expect(formatDate(testDate)).toEqual('2017/10/15');
+    });
+
+    it('should format a time consistently', () => {
+      expect(formatTime(testDate)).toEqual('08:55');
+      testDate.setHours(15);
+      expect(formatTime(testDate)).toEqual('15:55');
+    });
+
+    it('should format a date-time consistently', () => {
+      expect(formatDateTime(testDate)).toEqual('2017/10/15 08:55');
+    });
+
   });
 
 });

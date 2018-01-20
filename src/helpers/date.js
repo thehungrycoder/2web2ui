@@ -62,7 +62,7 @@ export function getRelativeDates(range) {
       return { to, from: moment(to).subtract(30, 'day').toDate() };
 
     case '90days':
-      return { to, from: now.clone().subtract(90, 'day').toDate() };
+      return { to, from: moment(to).subtract(90, 'day').toDate() };
 
     default:
       return {};
