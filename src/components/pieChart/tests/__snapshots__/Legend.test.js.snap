@@ -8,14 +8,7 @@ exports[`Legend:  should handle external hover 1`] = `
       key="0"
       name="primary"
       onClick={[Function]}
-      onMouseOut={
-        [MockFunction] {
-          "calls": Array [
-            Array [],
-            Array [],
-          ],
-        }
-      }
+      onMouseOut={[MockFunction]}
       onMouseOver={[Function]}
       otherHovered={false}
     />
@@ -26,14 +19,7 @@ exports[`Legend:  should handle external hover 1`] = `
       key="0"
       name="secondary"
       onClick={[Function]}
-      onMouseOut={
-        [MockFunction] {
-          "calls": Array [
-            Array [],
-            Array [],
-          ],
-        }
-      }
+      onMouseOut={[MockFunction]}
       onMouseOver={[Function]}
       otherHovered={true}
     />

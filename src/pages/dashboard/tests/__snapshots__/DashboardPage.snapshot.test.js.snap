@@ -24,7 +24,6 @@ exports[`Page: Dashboard tests should correctly render page when user is not ver
       [MockFunction] {
         "calls": Array [
           Array [],
-          Array [],
         ],
       }
     }
@@ -42,18 +41,12 @@ exports[`Page: Dashboard tests should correctly render page when user is not ver
               "id": 0,
             },
           ],
-          Array [
-            Object {
-              "id": 0,
-            },
-          ],
         ],
       }
     }
     listSendingDomains={
       [MockFunction] {
         "calls": Array [
-          Array [],
           Array [],
         ],
       }
@@ -82,9 +75,6 @@ exports[`Page: Dashboard tests should display upgrade CTA when account is free a
       [MockFunction] {
         "calls": Array [
           Array [],
-          Array [],
-          Array [],
-          Array [],
         ],
       }
     }
@@ -102,30 +92,12 @@ exports[`Page: Dashboard tests should display upgrade CTA when account is free a
               "id": 0,
             },
           ],
-          Array [
-            Object {
-              "id": 0,
-            },
-          ],
-          Array [
-            Object {
-              "id": 0,
-            },
-          ],
-          Array [
-            Object {
-              "id": 0,
-            },
-          ],
         ],
       }
     }
     listSendingDomains={
       [MockFunction] {
         "calls": Array [
-          Array [],
-          Array [],
-          Array [],
           Array [],
         ],
       }
@@ -170,8 +142,6 @@ exports[`Page: Dashboard tests should render import suppression list when 0 supp
       [MockFunction] {
         "calls": Array [
           Array [],
-          Array [],
-          Array [],
         ],
       }
     }
@@ -189,24 +159,12 @@ exports[`Page: Dashboard tests should render import suppression list when 0 supp
               "id": 0,
             },
           ],
-          Array [
-            Object {
-              "id": 0,
-            },
-          ],
-          Array [
-            Object {
-              "id": 0,
-            },
-          ],
         ],
       }
     }
     listSendingDomains={
       [MockFunction] {
         "calls": Array [
-          Array [],
-          Array [],
           Array [],
         ],
       }

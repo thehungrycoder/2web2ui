@@ -1083,11 +1083,6 @@ exports[`Page: Message Events tests should render error when action fails 1`] = 
               "reportFilters": undefined,
             },
           ],
-          Array [
-            Object {
-              "reportFilters": undefined,
-            },
-          ],
         ],
       }
     }
