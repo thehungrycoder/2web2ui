@@ -7,13 +7,11 @@ exports[`RecipientListForm defaults to create mode 1`] = `
     title="Recipient List CSV Format"
   >
     You can download a 
-    <a
-      download={true}
-      href="/static/files/recipient-list-example.csv"
-      target="_self"
+    <DownloadLink
+      href="example-recipient-list.csv"
     >
       CSV template here
-    </a>
+    </DownloadLink>
      to use when formatting your recipient list for upload.
   </Banner>
   <Panel>
@@ -164,13 +162,11 @@ exports[`RecipientListForm renders correctly in create mode 1`] = `
     title="Recipient List CSV Format"
   >
     You can download a 
-    <a
-      download={true}
-      href="/static/files/recipient-list-example.csv"
-      target="_self"
+    <DownloadLink
+      href="example-recipient-list.csv"
     >
       CSV template here
-    </a>
+    </DownloadLink>
      to use when formatting your recipient list for upload.
   </Banner>
   <Panel>
@@ -243,13 +239,11 @@ exports[`RecipientListForm renders correctly in edit mode 1`] = `
     title="Recipient List CSV Format"
   >
     You can download a 
-    <a
-      download={true}
-      href="/static/files/recipient-list-example.csv"
-      target="_self"
+    <DownloadLink
+      href="example-recipient-list.csv"
     >
       CSV template here
-    </a>
+    </DownloadLink>
      to use when formatting your recipient list for upload.
   </Banner>
   <Panel>
@@ -309,13 +303,11 @@ exports[`RecipientListForm should disable form elements on submit 1`] = `
     title="Recipient List CSV Format"
   >
     You can download a 
-    <a
-      download={true}
-      href="/static/files/recipient-list-example.csv"
-      target="_self"
+    <DownloadLink
+      href="example-recipient-list.csv"
     >
       CSV template here
-    </a>
+    </DownloadLink>
      to use when formatting your recipient list for upload.
   </Banner>
   <Panel>

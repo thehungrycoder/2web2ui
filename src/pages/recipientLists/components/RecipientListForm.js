@@ -5,7 +5,7 @@ import { Field, SubmissionError, reduxForm } from 'redux-form';
 import _ from 'lodash';
 
 import { Panel, Banner, Button, Error } from '@sparkpost/matchbox';
-import { TextFieldWrapper } from 'src/components';
+import { DownloadLink, TextFieldWrapper } from 'src/components';
 import { required, maxLength, maxFileSize } from 'src/helpers/validation';
 
 import FileInputWrapper from './FileInputWrapper';
@@ -13,6 +13,8 @@ import FileInputWrapper from './FileInputWrapper';
 import parseRecipientListCsv from '../helpers/csv';
 
 import config from 'src/config';
+
+import exampleRecipientListPath from './example-recipient-list.csv';
 
 const formName = 'recipientListForm';
 
@@ -49,9 +51,12 @@ export class RecipientListForm extends Component {
   };
 
   renderBanner() {
-    return <Banner status='info' title='Recipient List CSV Format'>
-      You can download a <a download href="/static/files/recipient-list-example.csv" target="_self">CSV template here</a> to use when formatting your recipient list for upload.
-    </Banner>;
+    return (
+      <Banner status='info' title='Recipient List CSV Format'>
+        You can download a <DownloadLink href={exampleRecipientListPath}>CSV template here</DownloadLink> to
+        use when formatting your recipient list for upload.
+      </Banner>
+    );
   }
 
   renderCsvErrors() {
