@@ -3,12 +3,7 @@
 exports[`LegendItem:  should render 1`] = `
 <a
   className=""
-<<<<<<< HEAD:src/components/pieChart/tests/__snapshots__/LegendItem.test.js.snap
-  onClick={[Function]}
-=======
-  handleClick={[MockFunction]}
   onClick={[MockFunction]}
->>>>>>> Updated snapshots affected by Jest v22 upgrade with Function ~> MockFunction:src/pages/reports/bounce/components/tests/__snapshots__/LegendItem.test.js.snap
   title="View name"
 >
   <span
@@ -34,12 +29,7 @@ exports[`LegendItem:  should render 1`] = `
 exports[`LegendItem:  should render breadcrumb 1`] = `
 <a
   className=""
-<<<<<<< HEAD:src/components/pieChart/tests/__snapshots__/LegendItem.test.js.snap
-  onClick={[Function]}
-=======
-  handleClick={[MockFunction]}
   onClick={[MockFunction]}
->>>>>>> Updated snapshots affected by Jest v22 upgrade with Function ~> MockFunction:src/pages/reports/bounce/components/tests/__snapshots__/LegendItem.test.js.snap
   title="View name"
 >
   <span
