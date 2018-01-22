@@ -1,0 +1,232 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: Date Form should render correctly by default 1`] = `
+<form
+  onKeyDown={[Function]}
+>
+  <Grid
+    middle="xs"
+  >
+    <Grid.Column>
+      <TextField
+        id="fieldFromDate"
+        label="From Date"
+        labelHidden={true}
+        onBlur={[Function]}
+        onChange={[Function]}
+        placeholder="YYYY-MM-DD"
+        required={false}
+        resize="both"
+        type="text"
+        value=""
+      />
+    </Grid.Column>
+    <Grid.Column>
+      <TextField
+        id="fieldFromTime"
+        label="From Time"
+        labelHidden={true}
+        onBlur={[Function]}
+        onChange={[Function]}
+        placeholder="12:00am"
+        required={false}
+        resize="both"
+        type="text"
+        value=""
+      />
+    </Grid.Column>
+    <Grid.Column
+      xs={1}
+    >
+      <div>
+        <Icon
+          name="ArrowRight"
+          size={18}
+        />
+      </div>
+    </Grid.Column>
+    <Grid.Column>
+      <TextField
+        id="fieldToDate"
+        label="To Date"
+        labelHidden={true}
+        onBlur={[Function]}
+        onChange={[Function]}
+        placeholder="YYYY-MM-DD"
+        required={false}
+        resize="both"
+        type="text"
+        value=""
+      />
+    </Grid.Column>
+    <Grid.Column>
+      <TextField
+        id="fieldToTime"
+        label="To Time"
+        labelHidden={true}
+        onBlur={[Function]}
+        onChange={[Function]}
+        placeholder="12:00am"
+        required={false}
+        resize="both"
+        type="text"
+        value=""
+      />
+    </Grid.Column>
+  </Grid>
+</form>
+`;
+
+exports[`Component: Date Form should sync props to state 1`] = `
+<form
+  onKeyDown={[Function]}
+>
+  <Grid
+    middle="xs"
+  >
+    <Grid.Column>
+      <TextField
+        id="fieldFromDate"
+        label="From Date"
+        labelHidden={true}
+        onBlur={[Function]}
+        onChange={[Function]}
+        placeholder="YYYY-MM-DD"
+        required={false}
+        resize="both"
+        type="text"
+        value="2018-1-10"
+      />
+    </Grid.Column>
+    <Grid.Column>
+      <TextField
+        id="fieldFromTime"
+        label="From Time"
+        labelHidden={true}
+        onBlur={[Function]}
+        onChange={[Function]}
+        placeholder="12:00am"
+        required={false}
+        resize="both"
+        type="text"
+        value="10:00am"
+      />
+    </Grid.Column>
+    <Grid.Column
+      xs={1}
+    >
+      <div>
+        <Icon
+          name="ArrowRight"
+          size={18}
+        />
+      </div>
+    </Grid.Column>
+    <Grid.Column>
+      <TextField
+        id="fieldToDate"
+        label="To Date"
+        labelHidden={true}
+        onBlur={[Function]}
+        onChange={[Function]}
+        placeholder="YYYY-MM-DD"
+        required={false}
+        resize="both"
+        type="text"
+        value="2018-1-15"
+      />
+    </Grid.Column>
+    <Grid.Column>
+      <TextField
+        id="fieldToTime"
+        label="To Time"
+        labelHidden={true}
+        onBlur={[Function]}
+        onChange={[Function]}
+        placeholder="12:00am"
+        required={false}
+        resize="both"
+        type="text"
+        value="2:00pm"
+      />
+    </Grid.Column>
+  </Grid>
+</form>
+`;
+
+exports[`Component: Date Form should update state from new props 1`] = `
+<form
+  onKeyDown={[Function]}
+>
+  <Grid
+    middle="xs"
+  >
+    <Grid.Column>
+      <TextField
+        id="fieldFromDate"
+        label="From Date"
+        labelHidden={true}
+        onBlur={[Function]}
+        onChange={[Function]}
+        placeholder="YYYY-MM-DD"
+        required={false}
+        resize="both"
+        type="text"
+        value="2018-1-10"
+      />
+    </Grid.Column>
+    <Grid.Column>
+      <TextField
+        id="fieldFromTime"
+        label="From Time"
+        labelHidden={true}
+        onBlur={[Function]}
+        onChange={[Function]}
+        placeholder="12:00am"
+        required={false}
+        resize="both"
+        type="text"
+        value="10:00am"
+      />
+    </Grid.Column>
+    <Grid.Column
+      xs={1}
+    >
+      <div>
+        <Icon
+          name="ArrowRight"
+          size={18}
+        />
+      </div>
+    </Grid.Column>
+    <Grid.Column>
+      <TextField
+        id="fieldToDate"
+        label="To Date"
+        labelHidden={true}
+        onBlur={[Function]}
+        onChange={[Function]}
+        placeholder="YYYY-MM-DD"
+        required={false}
+        resize="both"
+        type="text"
+        value="2018-1-15"
+      />
+    </Grid.Column>
+    <Grid.Column>
+      <TextField
+        id="fieldToTime"
+        label="To Time"
+        labelHidden={true}
+        onBlur={[Function]}
+        onChange={[Function]}
+        placeholder="12:00am"
+        required={false}
+        resize="both"
+        type="text"
+        value="2:00pm"
+      />
+    </Grid.Column>
+  </Grid>
+</form>
+`;
