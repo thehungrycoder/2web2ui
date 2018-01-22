@@ -5,8 +5,8 @@ import * as dateHelpers from 'src/helpers/date';
 describe('metrics helpers', () => {
   it('should build return correct options from updates', () => {
     const actual = metricsHelpers.getQueryFromOptions({
-      from: '2017-12-18T00:00',
-      to: '2017-12-18T11:00',
+      from: '2017-12-18T00:00Z',
+      to: '2017-12-18T11:00Z',
       metrics: [
         { key: 'count_bounce' },
         { key: 'foo_bar', computeKeys: 'test + last' }
