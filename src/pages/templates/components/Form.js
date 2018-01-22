@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, change } from 'redux-form';
 import { list as listDomains } from 'src/actions/sendingDomains';
-import { selectVerifiedDomainsBySubaccount } from 'src/selectors/sendingDomains';
+import { selectDomainsBySubaccount } from 'src/selectors/templates';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
 import config from 'src/config';
 
@@ -174,7 +174,7 @@ export class Form extends Component {
 }
 
 const mapStateToProps = (state, props) => ({
-  domains: selectVerifiedDomainsBySubaccount(state, props),
+  domains: selectDomainsBySubaccount(state, props),
   hasSubaccounts: hasSubaccounts(state)
 });
 

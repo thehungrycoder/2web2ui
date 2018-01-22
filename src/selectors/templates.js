@@ -1,6 +1,8 @@
 import _ from 'lodash';
 import qs from 'query-string';
 import config from 'src/config';
+import { createSelector } from 'reselect';
+import { getDomains, isVerified } from 'src/selectors/sendingDomains';
 
 export const selectTemplates = (state) => state.templates.list;
 export const selectTemplateById = (state, props) => state.templates.byId[props.match.params.id] || { draft: {}, published: {}};
@@ -23,4 +25,20 @@ export const selectClonedTemplate = (state, props) => {
   }
 };
 
-export const selectSubaccountId = (props) => qs.parse(props.location.search).subaccount;
+export const selectSubaccountIdFromQuery = (props) => qs.parse(props.location.search).subaccount;
+const selectSubaccountIdFromProps = (state, props) => props.subaccountId;
+
+// Selects sending domains for From Email typeahead
+export const selectDomainsBySubaccount = createSelector(
+  [getDomains, selectSubaccountIdFromProps],
+  (domains, subaccountId) => _.filter(domains, (domain) => {
+
+    if (!isVerified(domain)) {
+      return false;
+    }
+
+    return subaccountId
+      ? domain.shared_with_subaccounts || domain.subaccount_id === Number(subaccountId)
+      : !domain.subaccount_id;
+  })
+);

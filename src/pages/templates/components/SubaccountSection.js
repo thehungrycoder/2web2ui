@@ -14,11 +14,11 @@ const createOptions = [
 
 /**
  * Component produces the follow redux form fields
- * If `newTemplate` is true
+ * If newTemplate
  * - assignTo 'master' | 'shared' | 'subaccount'
  * - subaccount if assignTo === 'subaccount'
  *
- * If `newTemplate` is false
+ * If !newTemplate
  * - shared_with_subaccounts
  * - subaccount_id (disabled)
  */
@@ -26,7 +26,8 @@ class SubaccountSection extends Component {
   componentDidUpdate(prevProps) {
     const { assignTo, formName, change } = this.props;
 
-    // Clear subaccount value if switching away from subaccount, also refreshes sending domain list
+    // Clear subaccount value if switching away from subaccount
+    // The value change also refreshes sending domain list
     if (assignTo !== 'subaccount' && prevProps.assignTo === 'subaccount') {
       change(formName, 'subaccount', null);
     }
@@ -60,8 +61,7 @@ class SubaccountSection extends Component {
           component={TextFieldWrapper}
           name='subaccount_id'
           label='Subaccount'
-          disabled
-        />
+          disabled />
       );
     }
 

@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 
 import { showAlert } from 'src/actions/globalAlert';
 import { getDraftAndPreview, sendPreview } from 'src/actions/templates';
-import { selectDraftTemplate, selectDraftTemplatePreview, selectSubaccountId } from 'src/selectors/templates';
+import { selectDraftTemplate, selectDraftTemplatePreview, selectSubaccountIdFromQuery } from 'src/selectors/templates';
 import { getSubaccountQuery } from 'src/helpers/templates';
 import PreviewPage from './components/PreviewPage';
 
@@ -21,7 +21,7 @@ export function PreviewDraftPage(props) {
 export const mapStateToProps = (state, props) => ({
   preview: selectDraftTemplatePreview(state, props.match.params.id),
   template: selectDraftTemplate(state, props.match.params.id),
-  subaccountId: selectSubaccountId(props)
+  subaccountId: selectSubaccountIdFromQuery(props)
 });
 
 const mapDispatchToProps = { onLoad: getDraftAndPreview, sendPreview, showAlert };

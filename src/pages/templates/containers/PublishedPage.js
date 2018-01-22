@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 
 import { getPublished, getTestData } from 'src/actions/templates';
-import { selectTemplateById, selectTemplateTestData, selectSubaccountId } from 'src/selectors/templates';
+import { selectTemplateById, selectTemplateTestData, selectSubaccountIdFromQuery } from 'src/selectors/templates';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
 
 import PublishedPage from '../PublishedPage';
@@ -12,7 +12,7 @@ const FORM_NAME = 'templatePublished';
 
 const mapStateToProps = (state, props) => ({
   loading: state.templates.getLoading,
-  subaccountId: selectSubaccountId(props),
+  subaccountId: selectSubaccountIdFromQuery(props),
   hasSubaccounts: hasSubaccounts(state),
   formName: FORM_NAME,
   initialValues: {
