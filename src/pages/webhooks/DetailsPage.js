@@ -10,6 +10,7 @@ import { Loading, DeleteModal } from 'src/components';
 import { Page, Tabs } from '@sparkpost/matchbox';
 import TestTab from './components/TestTab';
 import EditTab from './components/EditTab';
+import BatchTab from './components/BatchTab';
 
 class WebhooksDetails extends Component {
   constructor(props) {
@@ -24,6 +25,7 @@ class WebhooksDetails extends Component {
     this.id = id;
     this.editPath = `/webhooks/details/${id}`;
     this.testPath = `/webhooks/details/${id}/test`;
+    this.batchPath = `/webhooks/details/${id}/batches`;
 
     this.secondaryActions = [
       {
@@ -42,6 +44,11 @@ class WebhooksDetails extends Component {
         content: 'Test',
         Component: Link,
         to: this.testPath
+      },
+      {
+        content: 'Batch Status',
+        Component: Link,
+        to: this.batchPath
       }
     ];
   }
@@ -70,7 +77,7 @@ class WebhooksDetails extends Component {
   render() {
     const { webhook, location } = this.props;
     const webhookId = this.id;
-    const selectedTab = location.pathname.endsWith('test') ? 1 : 0;
+    const selectedTab = this.tabs.findIndex(({ to }) => location.pathname === to);
 
     /*
       Check .events to guard from the create page redirect,
@@ -93,6 +100,7 @@ class WebhooksDetails extends Component {
         />
         <Route exact path={this.editPath} render={() => <EditTab id={webhookId}/> } />
         <Route path={this.testPath} render={() => <TestTab webhook={webhook}/>} />
+        <Route path={this.batchPath} render={() => <BatchTab id={webhookId}/>} />
         <DeleteModal
           open={this.state.showDelete}
           title='Are you sure you want to delete this webhook?'
