@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styles from './ActiveLabel.module.scss';
 
 /**
@@ -15,4 +16,10 @@ const ActiveLabel = ({
   </div>
 );
 
+ActiveLabel.propTypes = {
+  name: PropTypes.string,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+};
+
+ActiveLabel.displayName = 'PieChart.ActiveLabel';
 export default ActiveLabel;

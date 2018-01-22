@@ -91,7 +91,8 @@ export class BouncePage extends Component {
     if (!chartLoading && _.isEmpty(aggregates)) {
       return <Empty title='Bounce Rates' message='No bounces to report' />;
     }
-    return <ChartGroup />;
+
+    return <ChartGroup loading={chartLoading} />;
   }
 
   renderCollection() {
@@ -101,8 +102,8 @@ export class BouncePage extends Component {
       return <PanelLoading />;
     }
 
-    if (!reasons) {
-      return <Empty title={'Bounced Messages'} message={'No bounce reasons to report'} />;
+    if (!reasons.length) {
+      return <Empty message={'No bounce reasons to report'} />;
     }
 
     return <TableCollection

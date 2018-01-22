@@ -1,5 +1,4 @@
 import { snakeToCamel } from 'src/helpers/string';
-import color from 'color';
 import fp from 'lodash/fp';
 
 /**
@@ -54,19 +53,6 @@ function reshapeCategories(data) {
 }
 
 /**
- * Generates a color palette for bounce chart data
- */
-function generateColors(arr, base) {
-  const baseColor = color(base);
-  const rotate = 60 / arr.length;
-  const saturate = 0.1 / arr.length;
-  return arr.map((item, i) => ({
-    ...item,
-    fill: baseColor.rotate(rotate * i).saturate(saturate * i).string()
-  }));
-}
-
-/**
  * Creates band type data for bounce chart from aggregates
  */
 function getBandTypes({ countInbandBounce, countOutofbandBounce }) {
@@ -79,6 +65,5 @@ function getBandTypes({ countInbandBounce, countOutofbandBounce }) {
 export {
   formatAggregates,
   reshapeCategories,
-  generateColors,
   getBandTypes
 };

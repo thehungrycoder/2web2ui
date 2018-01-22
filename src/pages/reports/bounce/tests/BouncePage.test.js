@@ -99,7 +99,7 @@ describe('BouncePage: ', () => {
   });
 
   it('should show empty reasons table when there are no reasons', () => {
-    wrapper.setProps({ reasons: null });
+    wrapper.setProps({ reasons: []});
     expect(wrapper).toMatchSnapshot();
   });
 

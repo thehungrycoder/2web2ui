@@ -114,7 +114,7 @@ const routes = [
   },
   {
     path: '/reports/accepted',
-    component: ComingSoonPage,
+    component: reports.AcceptedPage,
     layout: App
   },
   {

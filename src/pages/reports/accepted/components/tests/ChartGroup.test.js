@@ -4,20 +4,16 @@ import { PieChart } from 'src/components';
 
 import { shallow } from 'enzyme';
 
-describe('Bounce ChartGroup: ', () => {
+describe('Accepted ChartGroup: ', () => {
 
   const props = {
-    categories: [
-      { name: 'hard', count: 5 },
-      { name: 'soft', count: 1, children: [{ name: 'softchild1', count: 2 }, { name: 'softchild2', count: 3 }]}
-    ],
-    types: [
-      { name: 'in', count: 20 },
-      { name: 'out', count: 30 }
+    attempts: [
+      { name: 'first attempt', count: 5 },
+      { name: '2 or more attempts', count: 1, children: [{ name: '2-4', count: 2 }, { name: '5+', count: 3 }]}
     ],
     aggregates: {
-      countTargeted: 100,
-      countBounce: 50
+      count_targeted: 100,
+      count_accepted: 50
     }
   };
 
@@ -37,7 +33,7 @@ describe('Bounce ChartGroup: ', () => {
   });
 
   it('should handle mouse in and out', () => {
-    wrapper.instance().handleMouseOver(props.types[0], 'secondary');
+    wrapper.instance().handleMouseOver(props.attempts[0]);
     wrapper.update();
     expect(wrapper.instance().state).toMatchSnapshot();
     expect(wrapper.find(PieChart.ActiveLabel)).toMatchSnapshot();
@@ -49,26 +45,26 @@ describe('Bounce ChartGroup: ', () => {
   });
 
   it('should render label when hovering over a child', () => {
-    wrapper.instance().handleClick(props.categories[1]);
-    wrapper.instance().handleMouseOver({ name: 'softchild1', count: 2 }, 'primary');
+    wrapper.instance().handleClick(props.attempts[1]);
+    wrapper.instance().handleMouseOver({ name: '2-4', count: 2 });
     wrapper.update();
     expect(wrapper.find(PieChart.ActiveLabel)).toMatchSnapshot();
   });
 
   it('should render correctly after click', () => {
-    wrapper.instance().handleClick(props.categories[1]);
+    wrapper.instance().handleClick(props.attempts[1]);
     wrapper.update();
     expect(wrapper.find(PieChart.Legend)).toMatchSnapshot();
     expect(wrapper.find(PieChart.Chart)).toMatchSnapshot();
   });
 
   it('should not do anything if clicking on an item without children', () => {
-    wrapper.instance().handleClick(props.types[0]);
+    wrapper.instance().handleClick(props.attempts[0]);
     expect(wrapper.instance().state).toMatchSnapshot();
   });
 
   it('should handle breadcrumb', () => {
-    wrapper.instance().handleClick(props.categories[1]);
+    wrapper.instance().handleClick(props.attempts[1]);
     expect(wrapper.instance().state).toMatchSnapshot();
     wrapper.instance().handleBreadcrumb();
     expect(wrapper.instance().state).toMatchSnapshot();

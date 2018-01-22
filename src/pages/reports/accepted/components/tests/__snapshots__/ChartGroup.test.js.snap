@@ -1,76 +1,76 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Bounce ChartGroup:  should handle breadcrumb 1`] = `
+exports[`Accepted ChartGroup:  should handle breadcrumb 1`] = `
 Object {
   "active": Object {
     "children": Array [
       Object {
         "count": 2,
-        "name": "softchild1",
+        "name": "2-4",
       },
       Object {
         "count": 3,
-        "name": "softchild2",
+        "name": "5+",
       },
     ],
     "count": 1,
-    "name": "soft",
+    "name": "2 or more attempts",
   },
   "hoveredItem": null,
 }
 `;
 
-exports[`Bounce ChartGroup:  should handle breadcrumb 2`] = `
+exports[`Accepted ChartGroup:  should handle breadcrumb 2`] = `
 Object {
   "active": null,
   "hoveredItem": null,
 }
 `;
 
-exports[`Bounce ChartGroup:  should handle mouse in and out 1`] = `
+exports[`Accepted ChartGroup:  should handle mouse in and out 1`] = `
 Object {
   "active": null,
   "hoveredItem": Object {
-    "count": 20,
-    "dataSet": "secondary",
+    "count": 5,
+    "dataSet": undefined,
     "index": 0,
-    "name": "in",
+    "name": "first attempt",
   },
 }
 `;
 
-exports[`Bounce ChartGroup:  should handle mouse in and out 2`] = `
+exports[`Accepted ChartGroup:  should handle mouse in and out 2`] = `
 <PieChart.ActiveLabel
-  name="in"
-  value="40.00%"
+  name="first attempt"
+  value="10.00%"
 />
 `;
 
-exports[`Bounce ChartGroup:  should handle mouse in and out 3`] = `
+exports[`Accepted ChartGroup:  should handle mouse in and out 3`] = `
 <PieChart.ActiveLabel
-  name="Bounce Rate"
+  name="Accepted Rate"
   value="50.00%"
 />
 `;
 
-exports[`Bounce ChartGroup:  should handle mouse in and out 4`] = `
+exports[`Accepted ChartGroup:  should handle mouse in and out 4`] = `
 Object {
   "active": null,
   "hoveredItem": null,
 }
 `;
 
-exports[`Bounce ChartGroup:  should not do anything if clicking on an item without children 1`] = `
+exports[`Accepted ChartGroup:  should not do anything if clicking on an item without children 1`] = `
 Object {
   "active": null,
   "hoveredItem": null,
 }
 `;
 
-exports[`Bounce ChartGroup:  should render 1`] = `
+exports[`Accepted ChartGroup:  should render 1`] = `
 <Panel
   sectioned={true}
-  title="Bounce Rates"
+  title="Accepted Rates"
 >
   <Grid>
     <Grid.Column
@@ -87,43 +87,29 @@ exports[`Bounce ChartGroup:  should render 1`] = `
             Array [
               Object {
                 "count": 5,
-                "fill": "hsl(355.1, 70.5%, 52.2%)",
-                "name": "hard",
+                "fill": "hsl(85.80000000000001, 57.6%, 51%)",
+                "name": "first attempt",
               },
               Object {
                 "children": Array [
                   Object {
                     "count": 2,
-                    "name": "softchild1",
+                    "name": "2-4",
                   },
                   Object {
                     "count": 3,
-                    "name": "softchild2",
+                    "name": "5+",
                   },
                 ],
                 "count": 1,
-                "fill": "hsl(35.10000000000002, 72.6%, 52.2%)",
-                "name": "soft",
-              },
-            ]
-          }
-          secondaryData={
-            Array [
-              Object {
-                "count": 20,
-                "fill": "hsl(198.20000000000005, 70.2%, 53.9%)",
-                "name": "in",
-              },
-              Object {
-                "count": 30,
-                "fill": "hsl(228.20000000000005, 73.7%, 53.9%)",
-                "name": "out",
+                "fill": "hsl(65.80000000000001, 57.6%, 51%)",
+                "name": "2 or more attempts",
               },
             ]
           }
         />
         <PieChart.ActiveLabel
-          name="Bounce Rate"
+          name="Accepted Rate"
           value="50.00%"
         />
       </div>
@@ -137,7 +123,7 @@ exports[`Bounce ChartGroup:  should render 1`] = `
           Array [
             Object {
               "count": 50,
-              "name": "Bounces",
+              "name": "Accepted",
             },
             Object {
               "count": 100,
@@ -153,37 +139,23 @@ exports[`Bounce ChartGroup:  should render 1`] = `
           Array [
             Object {
               "count": 5,
-              "fill": "hsl(355.1, 70.5%, 52.2%)",
-              "name": "hard",
+              "fill": "hsl(85.80000000000001, 57.6%, 51%)",
+              "name": "first attempt",
             },
             Object {
               "children": Array [
                 Object {
                   "count": 2,
-                  "name": "softchild1",
+                  "name": "2-4",
                 },
                 Object {
                   "count": 3,
-                  "name": "softchild2",
+                  "name": "5+",
                 },
               ],
               "count": 1,
-              "fill": "hsl(35.10000000000002, 72.6%, 52.2%)",
-              "name": "soft",
-            },
-          ]
-        }
-        secondaryData={
-          Array [
-            Object {
-              "count": 20,
-              "fill": "hsl(198.20000000000005, 70.2%, 53.9%)",
-              "name": "in",
-            },
-            Object {
-              "count": 30,
-              "fill": "hsl(228.20000000000005, 73.7%, 53.9%)",
-              "name": "out",
+              "fill": "hsl(65.80000000000001, 57.6%, 51%)",
+              "name": "2 or more attempts",
             },
           ]
         }
@@ -193,14 +165,14 @@ exports[`Bounce ChartGroup:  should render 1`] = `
 </Panel>
 `;
 
-exports[`Bounce ChartGroup:  should render correctly after click 1`] = `
+exports[`Accepted ChartGroup:  should render correctly after click 1`] = `
 <PieChart.Legend
   headerData={
     Array [
       Object {
         "breadcrumb": true,
         "count": 50,
-        "name": "Bounces",
+        "name": "Accepted",
         "onClick": [Function],
       },
       Object {
@@ -209,7 +181,7 @@ exports[`Bounce ChartGroup:  should render correctly after click 1`] = `
       },
       Object {
         "count": 1,
-        "name": "soft",
+        "name": "2 or more attempts",
       },
     ]
   }
@@ -221,21 +193,20 @@ exports[`Bounce ChartGroup:  should render correctly after click 1`] = `
     Array [
       Object {
         "count": 2,
-        "fill": "hsl(355.1, 70.5%, 52.2%)",
-        "name": "softchild1",
+        "fill": "hsl(85.80000000000001, 57.6%, 51%)",
+        "name": "2-4",
       },
       Object {
         "count": 3,
-        "fill": "hsl(35.10000000000002, 72.6%, 52.2%)",
-        "name": "softchild2",
+        "fill": "hsl(65.80000000000001, 57.6%, 51%)",
+        "name": "5+",
       },
     ]
   }
-  secondaryData={null}
 />
 `;
 
-exports[`Bounce ChartGroup:  should render correctly after click 2`] = `
+exports[`Accepted ChartGroup:  should render correctly after click 2`] = `
 <LoadableComponent
   hoveredItem={null}
   onClick={[Function]}
@@ -245,31 +216,30 @@ exports[`Bounce ChartGroup:  should render correctly after click 2`] = `
     Array [
       Object {
         "count": 2,
-        "fill": "hsl(355.1, 70.5%, 52.2%)",
-        "name": "softchild1",
+        "fill": "hsl(85.80000000000001, 57.6%, 51%)",
+        "name": "2-4",
       },
       Object {
         "count": 3,
-        "fill": "hsl(35.10000000000002, 72.6%, 52.2%)",
-        "name": "softchild2",
+        "fill": "hsl(65.80000000000001, 57.6%, 51%)",
+        "name": "5+",
       },
     ]
   }
-  secondaryData={null}
 />
 `;
 
-exports[`Bounce ChartGroup:  should render label when hovering over a child 1`] = `
+exports[`Accepted ChartGroup:  should render label when hovering over a child 1`] = `
 <PieChart.ActiveLabel
-  name="softchild1"
+  name="2-4"
   value="4.00%"
 />
 `;
 
-exports[`Bounce ChartGroup:  should render loading 1`] = `
+exports[`Accepted ChartGroup:  should render loading 1`] = `
 <Panel
   sectioned={true}
-  title="Bounce Rates"
+  title="Accepted Rates"
 >
   <Loading />
 </Panel>
