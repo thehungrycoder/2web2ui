@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AcceptedPage:  should handle modal 1`] = `
+<ShareModal
+  handleToggle={[Function]}
+  open={true}
+  query={
+    Object {
+      "from": "from",
+      "to": "to",
+    }
+  }
+/>
+`;
+
+exports[`AcceptedPage:  should render 1`] = `
+<Page
+  empty={Object {}}
+  title="Accepted Report"
+>
+  <Connect(Filters)
+    onShare={[Function]}
+    refresh={[Function]}
+  />
+  <TopLevelMetrics
+    aggregates={
+      Object {
+        "count_accepted": 1,
+      }
+    }
+  />
+  <Connect(ChartGroup) />
+  <ShareModal
+    handleToggle={[Function]}
+    open={false}
+    query={Object {}}
+  />
+</Page>
+`;
+
+exports[`AcceptedPage:  should render correctly with no accepted results 1`] = `
+<Empty
+  message="No Accepted Messages To Report"
+  title="Accepted Rates"
+/>
+`;

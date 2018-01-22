@@ -9,11 +9,12 @@
 }
 
 .Label {
-  font-size: rem(18);
+  font-size: rem(15);
 }
 
 .Value {
-  @include text-style-heading;
+  font-size: rem(21);
+  font-weight: 600;
 }
 
 .Line {

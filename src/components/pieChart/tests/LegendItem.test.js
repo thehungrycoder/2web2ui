@@ -11,7 +11,8 @@ describe('LegendItem: ', () => {
     children: ['children'],
     breadcrumb: false,
     onClick: jest.fn(),
-    handleClick: jest.fn()
+    hovered: true,
+    otherHovered: true
   };
 
   let wrapper;
@@ -27,5 +28,10 @@ describe('LegendItem: ', () => {
   it('should render breadcrumb', () => {
     wrapper.setProps({ breadcrumb: true });
     expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should not render chevron without children', () => {
+    wrapper.setProps({ children: null });
+    expect(wrapper.find('Icon')).toHaveLength(0);
   });
 });

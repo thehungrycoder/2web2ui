@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Action Creator: Accepted Report should clear refresh chart nor update deliveries by attempt if 0 accepted 1`] = `
+Array [
+  Array [
+    Object {
+      "from": "2017-02-14T12:02",
+      "metrics": "count_accepted",
+    },
+  ],
+]
+`;
+
+exports[`Action Creator: Accepted Report should clear refresh chart nor update deliveries by attempt if 0 accepted 2`] = `
+Array [
+  Array [
+    undefined,
+  ],
+  Array [
+    Array [
+      Object {
+        "foo": "bar",
+      },
+    ],
+  ],
+  Array [
+    Object {
+      "type": "CLEAR_ACCEPTED_CHART",
+    },
+  ],
+]
+`;
+
+exports[`Action Creator: Accepted Report should dispatch a chart refresh action 1`] = `
+Array [
+  Array [
+    Object {
+      "from": "2017-02-14T12:02",
+    },
+  ],
+]
+`;
+
+exports[`Action Creator: Accepted Report should dispatch a chart refresh action 2`] = `
+Array [
+  Array [
+    undefined,
+  ],
+  Array [
+    Array [
+      Object {
+        "count_accepted": 1,
+      },
+    ],
+  ],
+  Array [
+    undefined,
+  ],
+  Array [
+    Object {
+      "payload": Object {
+        "aggregates": Object {
+          "data": "transformed data",
+        },
+        "attempts": undefined,
+        "metrics": Array [
+          "count_targeted",
+          "count_sent",
+          "count_accepted",
+          "avg_delivery_time_first",
+          "avg_delivery_time_subsequent",
+          "avg_msg_size",
+        ],
+      },
+      "type": "REFRESH_ACCEPTED_CHART",
+    },
+  ],
+]
+`;

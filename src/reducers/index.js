@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import { reducer as form } from 'redux-form';
 
+import acceptedReport from './acceptedReport';
 import accessControlReady from './accessControlReady';
 import account from './account';
 import apiKeys from './api-keys';
@@ -30,6 +31,7 @@ import suppressions from './suppressions';
 import tfa from './tfa';
 
 const appReducer = combineReducers({
+  acceptedReport,
   accessControlReady,
   account,
   auth,

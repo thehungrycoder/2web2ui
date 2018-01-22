@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MetricCard Component:  should render correctly with all props 1`] = `
+<div>
+  <Panel
+    primary={true}
+  >
+    <h1>
+      Card Value
+    </h1>
+    <h6>
+      Card Label
+       
+      <WithPositioning(Tooltip)
+        content="Tooltip Content"
+        dark={true}
+        horizontalOffset="-1.1rem"
+      >
+        <Icon
+          name="InfoOutline"
+          size={18}
+        />
+      </WithPositioning(Tooltip)>
+    </h6>
+  </Panel>
+</div>
+`;
+
+exports[`MetricCard Component:  should render without tooltip 1`] = `
+<div>
+  <Panel
+    primary={true}
+  >
+    <h1>
+      Card Value
+    </h1>
+    <h6>
+      Card Label
+       
+    </h6>
+  </Panel>
+</div>
+`;

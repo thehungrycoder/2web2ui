@@ -1,3 +1,3 @@
 import asyncComponent from 'src/components/asyncComponent/asyncComponent';
 
-export default asyncComponent(() => import('./async/BounceChart'));
+export default asyncComponent(() => import('./async/Chart'));

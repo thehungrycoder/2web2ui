@@ -1,6 +1,7 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 
 .LegendItem {
+  position: relative;
   display: block;
   padding: spacing(small);
   color: color(gray, 1);
@@ -16,6 +17,11 @@
 .enabled.LegendItem:hover, .enabled.LegendItem.hovered {
   color: color(gray, 0);
   background: color(gray, 9);
+  border-radius: border-radius(large);
+}
+
+.enabled.LegendItem.otherHovered {
+  opacity: 0.7;
 }
 
 .breadcrumb, .hasChildren {
@@ -41,4 +47,11 @@
 .Count {
   float: right;
   font-weight: 500;
+}
+
+.BreadcrumbIcon {
+  position: absolute;
+  top: 50%;
+  left: rem(-16);
+  transform: translate(0, -50%);
 }

@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`BounceChart:  should render 1`] = `
+exports[`Chart:  should render 1`] = `
 <div
-  className="BounceChart"
+  className="Chart"
 >
   <ResponsiveContainer
     debounce={0}
     height={350}
-    width="100%"
+    width="99%"
   >
     <PieChart
       barCategoryGap="10%"
@@ -54,12 +54,12 @@ exports[`BounceChart:  should render 1`] = `
         isAnimationActive={true}
         labelLine={true}
         legendType="rect"
-        minAngle={2}
+        minAngle={3}
         nameKey="name"
         onClick={[Function]}
         onMouseOut={[Function]}
         onMouseOver={[Function]}
-        outerRadius={140}
+        outerRadius={135}
         paddingAngle={0.5}
         startAngle={90}
         stroke="#fff"
@@ -87,7 +87,7 @@ exports[`BounceChart:  should render 1`] = `
         isAnimationActive={true}
         labelLine={true}
         legendType="rect"
-        minAngle={2}
+        minAngle={3}
         nameKey="name"
         onClick={[Function]}
         onMouseOut={[Function]}

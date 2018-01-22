@@ -30,11 +30,6 @@ it('Should reshape categories', () => {
   expect(bounce.reshapeCategories(categories)).toMatchSnapshot();
 });
 
-it('Should generate colors', () => {
-  const arr = [{ name: '1' }, { name: '2' }];
-  expect(bounce.generateColors(arr, '#123456')).toMatchSnapshot();
-});
-
 it('Should get band types from aggregates', () => {
   const aggregates = {
     countInbandBounce: 1,

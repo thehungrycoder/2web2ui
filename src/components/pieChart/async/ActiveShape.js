@@ -1,7 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
 import { Sector } from 'recharts';
-import './BounceChart.scss';
+import './Chart.scss';
 
 /**
  * Custom pie chart sector that appears on hover
@@ -23,8 +23,9 @@ const ActiveShape = ({
     outerRadius={outerRadius + 3}
     fill={fill}
     opacity={1}
-    className={classnames('BounceChart--forceOpacity', children && 'BounceChart--hasChildren')}
+    className={classnames('Chart--forceOpacity', children && 'Chart--hasChildren')}
   />
 );
 
+ActiveShape.displayName = 'PieChart.ActiveShape';
 export default ActiveShape;
