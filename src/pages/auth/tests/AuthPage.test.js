@@ -67,7 +67,7 @@ it('should throw a submission error when verifyAndLogin fails with 4xx error', (
 it('should not throw an error when verifySpy fails with non 4xx error', async() => {
   const authPage = wrapper.instance();
   authPage.props.verifyAndLogin.mockImplementation(() => Promise.reject({ response: { status: 500 }}));
-  await expect(authPage.tfaSubmit({ code: 'code' })).resolves;
+  await expect(authPage.tfaSubmit({ code: 'code' })).resolves.toBeUndefined();
 });
 
 it('should bind tfaSubmit to the submit handler of TfaForm', () => {
