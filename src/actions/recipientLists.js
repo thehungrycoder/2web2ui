@@ -36,6 +36,7 @@ export function updateRecipientList({ id, ...updateFields }, params) {
       method: 'PUT',
       url: `/recipient-lists/${id}`,
       data: updateFields,
+      id,
       params
     }
   });
@@ -52,9 +53,13 @@ export function deleteRecipientList(id) {
   });
 }
 
-export function setCurrentRecipientList(id) {
-  return {
-    type: 'SET_CURRENT_RECIPIENT_LIST',
-    payload: { id }
-  };
+export function getRecipientList(id, params) {
+  return sparkpostApiRequest({
+    type: 'GET_RECIPIENT_LIST',
+    meta: {
+      method: 'GET',
+      url: `/recipient-lists/${id}`,
+      params
+    }
+  });
 }

@@ -7,7 +7,6 @@ import _ from 'lodash';
 import { Panel, Banner, Button, Error } from '@sparkpost/matchbox';
 import { TextFieldWrapper } from 'src/components';
 import { required, maxLength, maxFileSize } from 'src/helpers/validation';
-import currentRecipientList from 'src/selectors/recipientLists';
 
 import FileInputWrapper from './FileInputWrapper';
 
@@ -128,7 +127,7 @@ export class RecipientListForm extends Component {
 const WrappedForm = reduxForm({ form: formName })(RecipientListForm);
 
 const mapStateToProps = (state, props) => ({
-  initialValues: props.editMode ? currentRecipientList(state) : {}
+  initialValues: props.editMode ? state.recipientLists.current : {}
 });
 
 export default connect(mapStateToProps)(WrappedForm);

@@ -1,6 +1,7 @@
 const initialState = {
   list: [],
-  currentId: null,
+  current: null,
+  currentLoading: false,
   error: null,
   listLoaded: false,
   listLoading: false
@@ -35,9 +36,6 @@ export default (state = initialState, { meta, payload, type }) => {
     case 'CREATE_RECIPIENT_LIST_FAIL':
       return { ...state, loading: false };
 
-    case 'SET_CURRENT_RECIPIENT_LIST':
-      return { ...state, currentId: payload.id };
-
     case 'UPDATE_RECIPIENT_LIST_SUCCESS':
       return {
         ...state,
@@ -49,6 +47,19 @@ export default (state = initialState, { meta, payload, type }) => {
       return {
         ...state,
         list: state.list.filter((item) => item.id !== meta.id)
+      };
+
+    case 'GET_RECIPIENT_LIST_PENDING':
+      return { ...state, currentLoading: true };
+
+    case 'GET_RECIPIENT_LIST_FAIL':
+      return { ...state, currentLoading: false };
+
+    case 'GET_RECIPIENT_LIST_SUCCESS':
+      return {
+        ...state,
+        currentLoading: false,
+        current: payload
       };
 
     default:

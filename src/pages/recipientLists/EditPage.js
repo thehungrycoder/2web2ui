@@ -6,14 +6,12 @@ import { Link, withRouter } from 'react-router-dom';
 import { Page } from '@sparkpost/matchbox';
 
 import {
-  listRecipientLists,
-  setCurrentRecipientList,
+  getRecipientList,
   updateRecipientList,
   deleteRecipientList
 } from 'src/actions/recipientLists';
 
 import { showAlert } from 'src/actions/globalAlert';
-import currentRecipientList from 'src/selectors/recipientLists';
 import { Loading, DeleteModal } from 'src/components';
 
 import RecipientListForm from './components/RecipientListForm';
@@ -65,17 +63,17 @@ export class EditPage extends Component {
   componentDidMount() {
     const {
       match: { params: { id }},
-      list,
-      listRecipientLists,
-      setCurrentRecipientList
+      getRecipientList,
+      showAlert,
+      history
     } = this.props;
-    if (list.length === 0) {
-      // Load the whole list if we haven't yet
-      return listRecipientLists().then(() => setCurrentRecipientList(id));
-    } else {
-      // We have the list in store. Just select the current one.
-      return setCurrentRecipientList(id);
-    }
+    return getRecipientList(id).catch((err) => {
+      showAlert({
+        type: 'error',
+        message: 'Could not find recipient list'
+      });
+      history.push('/lists/recipient-lists');
+    });
   }
 
   render() {
@@ -107,15 +105,14 @@ export class EditPage extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  current: currentRecipientList(state),
+  current: state.recipientLists.current,
+  loading: state.recipientLists.currentLoading,
   list: state.recipientLists.list,
-  error: state.recipientLists.error,
-  loading: state.recipientLists.listLoading
+  error: state.recipientLists.error
 });
 
 const mapDispatchToProps = {
-  listRecipientLists,
-  setCurrentRecipientList,
+  getRecipientList,
   updateRecipientList,
   deleteRecipientList,
   showAlert
