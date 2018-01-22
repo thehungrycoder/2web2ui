@@ -5,6 +5,3 @@ install: npm install
 script:
   - echo "BUILD RUNNING IN $TZ TIMEZONE"
   - npm test && npm run build
-
-addons:
-  artifacts: true
