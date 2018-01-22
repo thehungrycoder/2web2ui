@@ -14,30 +14,24 @@ const breadcrumbAction = {
 };
 
 export class EditPage extends Component {
-  constructor(props) {
-    super(props);
-
-    this.id = props.match.params.id;
-  }
-
   componentDidMount() {
-    this.props.getDomain(this.id);
+    this.loadDomainProps();
   }
 
-  loadDependantData = () => {
-    this.props.getDomain(this.id);
+  loadDomainProps = () => {
+    this.props.getDomain(this.props.match.params.id);
   };
 
   renderError() {
     return <ApiErrorBanner
       errorDetails={this.props.getError.message}
       message="Sorry, we seem to have had some trouble loading your Sending Domain."
-      reload={this.loadDependantData}
+      reload={this.loadDomainProps}
     />;
   }
 
   render() {
-    const { getLoading, getError } = this.props;
+    const { getLoading, getError, match: { params: { id }}} = this.props;
 
     if (getLoading) {
       return <Loading />;
@@ -45,7 +39,7 @@ export class EditPage extends Component {
 
     return (
       <Page
-        title={`Edit ${this.id}`}
+        title={`Edit ${id}`}
         breadcrumbAction={breadcrumbAction}
       >
         {getError ? this.renderError() : 'Coming soon'}
@@ -55,10 +49,10 @@ export class EditPage extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  domain: state.sendingDomains.domain,
-  getError: state.sendingDomains.getError,
-  getLoading: state.sendingDomains.getLoading
+const mapStateToProps = ({ sendingDomains: { domain, getError, getLoading }}) => ({
+  domain,
+  getError,
+  getLoading
 });
 
 export default withRouter(connect(mapStateToProps, { getDomain })(EditPage));
