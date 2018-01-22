@@ -19,11 +19,15 @@ describe('EditPage', () => {
         num_accepted_recipients: 23
       }],
       loading: false,
-      current: id,
-      listRecipientLists: jest.fn(() => Promise.resolve()),
-      setCurrentRecipientList: jest.fn(),
+      current: {
+        id,
+        name: 'Favorites',
+        description: 'The creme de la creme',
+        num_accepted_recipients: 23
+      },
       updateRecipientList: jest.fn(() => Promise.resolve()),
       deleteRecipientList: jest.fn(() => Promise.resolve()),
+      getRecipientList: jest.fn(() => Promise.resolve()),
       showAlert: jest.fn(),
       history: {
         push: jest.fn()
@@ -36,24 +40,29 @@ describe('EditPage', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should not preload recipient lists if not required', () => {
-    expect(shallow(<EditPage {...props} />)).toMatchSnapshot();
-    expect(props.listRecipientLists).not.toHaveBeenCalled();
-  });
-
-  it('should preload recipient lists if required', () => {
-    const propsNoList = {
+  it('should load a recipient list', () => {
+    const propsLoading = {
       ...props,
-      list: [],
-      loading: true // not strictly correct - listRecipientLists sets that then makes its API call
+      current: null,
+      loading: true
     };
 
-    const wrapper = shallow(<EditPage {...propsNoList} />);
+    const wrapper = shallow(<EditPage {...propsLoading} />);
     expect(wrapper).toMatchSnapshot();
-    expect(props.listRecipientLists).toHaveBeenCalled();
+    expect(props.getRecipientList).toHaveBeenCalled();
   });
 
-  //  it('should handle a missing list id');
+  it('should handle a missing list id', async() => {
+    props.getRecipientList.mockImplementationOnce(() => Promise.reject());
+    const propsLoading = {
+      ...props,
+      current: null,
+      loading: true
+    };
+    const wrapper = shallow(<EditPage {...propsLoading} />);
+    await wrapper.instance().componentDidMount();
+    expect(props.history.push).toHaveBeenCalledWith('/lists/recipient-lists');
+  });
 
   it('should show a delete modal', () => {
     wrapper.instance().toggleDelete();
