@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import { IpPoolsList } from '../ListPage';
+import { IpPoolsList, getRowData } from '../ListPage';
 import { renderRowData } from 'src/__testHelpers__/renderHelpers';
 
 describe('IP Pools List Page', () => {
@@ -36,7 +36,7 @@ describe('IP Pools List Page', () => {
   });
 
   it('should render row properly', () => {
-    const rows = wrapper.instance().getRowData({
+    const rows = getRowData({
       id: 'my-pool',
       name: 'My Pool',
       ips: [1,2,3]

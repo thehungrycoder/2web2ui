@@ -6,7 +6,7 @@ import { SelectWrapper } from 'src/components/reduxFormWrappers';
 import { TableCollection } from 'src/components';
 import { required } from 'src/helpers/validation';
 import { TextFieldWrapper } from 'src/components';
-import { selectCurrentPoolInitialValues, selectCurrentPoolIps } from 'src/selectors/ipPools';
+import { selectCurrentPoolInitialValues, selectIpsForCurrentPool } from 'src/selectors/ipPools';
 import isDefaultPool from '../helpers/defaultPool';
 
 const columns = ['Sending IP', 'Hostname', 'IP Pool'];
@@ -96,7 +96,7 @@ const mapStateToProps = (state, { isNew }) => {
   return {
     list,
     pool,
-    ips: selectCurrentPoolIps(state),
+    ips: selectIpsForCurrentPool(state),
     initialValues: selectCurrentPoolInitialValues(state)
   };
 };
