@@ -20,6 +20,8 @@ exports[`PoolForm tests should not disable button if form is not pristine or not
         "IP Pool",
       ]
     }
+    defaultSortColumn={null}
+    defaultSortDirection="asc"
     getRowData={[Function]}
     pagination={false}
     rows={
@@ -112,6 +114,8 @@ exports[`PoolForm tests should render form 1`] = `
         "IP Pool",
       ]
     }
+    defaultSortColumn={null}
+    defaultSortDirection="asc"
     getRowData={[Function]}
     pagination={false}
     rows={
@@ -197,6 +201,8 @@ exports[`PoolForm tests should show help text when editing default pool 1`] = `
         "IP Pool",
       ]
     }
+    defaultSortColumn={null}
+    defaultSortDirection="asc"
     getRowData={[Function]}
     pagination={false}
     rows={
@@ -243,6 +249,8 @@ exports[`PoolForm tests should update button text to Saving and disable button w
         "IP Pool",
       ]
     }
+    defaultSortColumn={null}
+    defaultSortDirection="asc"
     getRowData={[Function]}
     pagination={false}
     rows={
