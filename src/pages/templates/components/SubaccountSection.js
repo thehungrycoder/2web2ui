@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Field, formValueSelector } from 'redux-form';
+import { Field, formValueSelector, change } from 'redux-form';
 import { Panel } from '@sparkpost/matchbox';
 import { RadioGroup, SubaccountTypeaheadWrapper, TextFieldWrapper } from 'src/components';
 import ToggleBlock from './ToggleBlock';
@@ -15,21 +15,28 @@ const createOptions = [
 /**
  * Component produces the follow redux form fields
  * If `newTemplate` is true
- * - assignTo
- * - subaccount (if assignTo === 'subaccount')
+ * - assignTo 'master' | 'shared' | 'subaccount'
+ * - subaccount if assignTo === 'subaccount'
  *
  * If `newTemplate` is false
  * - shared_with_subaccounts
  * - subaccount_id (disabled)
  */
 class SubaccountSection extends Component {
+  componentDidUpdate(prevProps) {
+    const { assignTo, formName, change } = this.props;
+
+    // Clear subaccount value if switching away from subaccount, also refreshes sending domain list
+    if (assignTo !== 'subaccount' && prevProps.assignTo === 'subaccount') {
+      change(formName, 'subaccount', null);
+    }
+  }
+
   renderCreate() {
     const { assignTo } = this.props;
 
     const typeahead = assignTo === 'subaccount'
-      ? <Field
-        name='subaccount'
-        component={SubaccountTypeaheadWrapper} />
+      ? <Field name='subaccount' component={SubaccountTypeaheadWrapper} />
       : null;
 
     return (
@@ -45,7 +52,7 @@ class SubaccountSection extends Component {
   }
 
   renderEdit() {
-    const { subaccountId } = this.props;
+    const { subaccountId, disabled } = this.props;
 
     if (subaccountId) {
       return (
@@ -64,7 +71,8 @@ class SubaccountSection extends Component {
         type='checkbox'
         parse={(value) => !!value} // Prevents unchecked value from equaling ""
         name='shared_with_subaccounts'
-        label='Share with all subaccounts' />
+        label='Share with all subaccounts'
+        disabled={disabled} />
     );
   }
 
@@ -92,4 +100,4 @@ const mapStateToProps = (state, props) => {
   };
 };
 
-export default connect(mapStateToProps, null)(SubaccountSection);
+export default connect(mapStateToProps, { change })(SubaccountSection);

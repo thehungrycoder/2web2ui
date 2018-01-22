@@ -88,7 +88,7 @@ export default class EditPage extends Component {
       },
       { content: 'Delete', onClick: this.handleDeleteModalToggle },
       { content: 'Duplicate', Component: Link, to: `/templates/create/${match.params.id}` },
-      { content: 'Preview & Send', Component: Link, to: `/templates/preview/${match.params.id}` }
+      { content: 'Preview & Send', Component: Link, to: `/templates/preview/${match.params.id}${getSubaccountQuery(subaccountId)}` }
     ];
 
     if (!published) {
@@ -110,7 +110,7 @@ export default class EditPage extends Component {
   }
 
   render() {
-    const { loading, formName } = this.props;
+    const { loading, formName, subaccountId } = this.props;
 
     if (loading) {
       return <Loading />;
@@ -120,7 +120,7 @@ export default class EditPage extends Component {
       <Page {...this.getPageProps()}>
         <Grid>
           <Grid.Column xs={12} lg={4}>
-            <Form name={formName} />
+            <Form name={formName} subaccountId={subaccountId} />
           </Grid.Column>
           <Grid.Column xs={12} lg={8}>
             <Editor name={formName} />

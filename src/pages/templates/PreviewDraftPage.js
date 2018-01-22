@@ -5,13 +5,14 @@ import { withRouter } from 'react-router-dom';
 import { showAlert } from 'src/actions/globalAlert';
 import { getDraftAndPreview, sendPreview } from 'src/actions/templates';
 import { selectDraftTemplate, selectDraftTemplatePreview, selectSubaccountId } from 'src/selectors/templates';
+import { getSubaccountQuery } from 'src/helpers/templates';
 import PreviewPage from './components/PreviewPage';
 
 export function PreviewDraftPage(props) {
   return (
     <PreviewPage
       mode="draft"
-      returnPath={`/templates/edit/${props.match.params.id}`}
+      returnPath={`/templates/edit/${props.match.params.id}${getSubaccountQuery(props.subaccountId)}`}
       {...props}
     />
   );

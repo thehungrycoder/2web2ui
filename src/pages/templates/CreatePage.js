@@ -18,10 +18,10 @@ export default class CreatePage extends Component {
   }
 
   handleCreate(values) {
-    const { create, showAlert, id, history } = this.props;
+    const { create, showAlert, id, history, subaccountId } = this.props;
 
     return create(values)
-      .then(() => history.push(`/templates/edit/${id}${getSubaccountQuery(values.subaccount.id)}`))
+      .then(() => history.push(`/templates/edit/${id}${getSubaccountQuery(subaccountId)}`))
       .catch((err) => {
         const details = _.get(err, 'response.data.errors[0].description') || err.message;
         return showAlert({ type: 'error', message: 'Could not create template', details: details });
@@ -29,7 +29,7 @@ export default class CreatePage extends Component {
   }
 
   render() {
-    const { cloneId, handleSubmit, submitting, loading, formName } = this.props;
+    const { cloneId, handleSubmit, submitting, loading, formName, subaccountId } = this.props;
 
     if (loading) {
       return <Loading />;
@@ -55,7 +55,7 @@ export default class CreatePage extends Component {
 
         <Grid>
           <Grid.Column xs={12} lg={4}>
-            <Form newTemplate name={formName}/>
+            <Form newTemplate name={formName} subaccountId={subaccountId}/>
           </Grid.Column>
           <Grid.Column xs={12} lg={8}>
             <Editor name={formName} />

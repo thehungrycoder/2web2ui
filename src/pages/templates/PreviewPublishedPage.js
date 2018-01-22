@@ -5,13 +5,14 @@ import { withRouter } from 'react-router-dom';
 import { showAlert } from 'src/actions/globalAlert';
 import { getPublishedAndPreview, sendPreview } from 'src/actions/templates';
 import { selectPublishedTemplate, selectPublishedTemplatePreview, selectSubaccountId } from 'src/selectors/templates';
+import { getSubaccountQuery } from 'src/helpers/templates';
 import PreviewPage from './components/PreviewPage';
 
 export function PreviewPublishedPage(props) {
   return (
     <PreviewPage
       mode="published"
-      returnPath={`/templates/edit/${props.match.params.id}/published`}
+      returnPath={`/templates/edit/${props.match.params.id}/published${getSubaccountQuery(props.subaccountId)}`}
       {...props}
     />
   );

@@ -1,1 +1,3 @@
-export const getSubaccountQuery = (id) => id ? `?subaccount=${id}` : '';
+export function getSubaccountQuery(id) {
+  return id ? `?subaccount=${id}` : '';
+}

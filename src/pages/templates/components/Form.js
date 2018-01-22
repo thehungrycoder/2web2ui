@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, change } from 'redux-form';
 import { list as listDomains } from 'src/actions/sendingDomains';
-import { selectVerifiedDomains } from 'src/selectors/sendingDomains';
+import { selectVerifiedDomainsBySubaccount } from 'src/selectors/sendingDomains';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
 import config from 'src/config';
 
@@ -17,7 +17,7 @@ import FromEmailWrapper from './FromEmail';
 // Helpers & Validation
 import { required } from 'src/helpers/validation';
 import { slugify } from 'src/helpers/string';
-import { ID_ALLOWED_CHARS, idSyntax, substitution, emailOrSubstitution } from './validation';
+import { ID_ALLOWED_CHARS, idSyntax, emailOrSubstitution, substitution } from './validation';
 
 import styles from './FormEditor.module.scss';
 
@@ -47,13 +47,15 @@ export class Form extends Component {
     }
   }
 
-  verifiedDomain = (value) => {
+  validateDomain = (value) => {
     const { domains } = this.props;
+
     const parts = value.split('@');
 
     if (parts.length > 1) {
       const validSandbox = value === `${config.sandbox.localpart}@${config.sandbox.domain}`;
       const validDomain = parts[1] && (domains.map(({ domain }) => domain).includes(parts[1]) || !substitution(parts[1]));
+
       return validSandbox || validDomain ? undefined : 'Must use a verified sending domain';
     }
 
@@ -85,7 +87,7 @@ export class Form extends Component {
               validate={[required, idSyntax]}
             />
           </Panel.Section>
-          { hasSubaccounts && <SubaccountSection newTemplate={newTemplate} formName={name} /> }
+          { hasSubaccounts && <SubaccountSection newTemplate={newTemplate} formName={name} disabled={published} /> }
         </Panel>
         <Panel>
           <Panel.Section>
@@ -103,7 +105,7 @@ export class Form extends Component {
               placeholder='example@email.com'
               label='From Email'
               disabled={!domains.length || published}
-              validate={[required, emailOrSubstitution, this.verifiedDomain]}
+              validate={[required, emailOrSubstitution, this.validateDomain]}
               domains={domains}
             />
 
@@ -172,7 +174,7 @@ export class Form extends Component {
 }
 
 const mapStateToProps = (state, props) => ({
-  domains: selectVerifiedDomains(state),
+  domains: selectVerifiedDomainsBySubaccount(state, props),
   hasSubaccounts: hasSubaccounts(state)
 });
 
