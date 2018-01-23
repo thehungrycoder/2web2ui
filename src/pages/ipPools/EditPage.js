@@ -24,81 +24,65 @@ const breadcrumbAction = {
 };
 
 export class EditPage extends Component {
-  constructor(props) {
-    super(props);
-
-    this.id = props.match.params.id;
-
-    this.state = {
-      showDelete: false
-    };
-
-    this.secondaryActions = [];
-    if (!isDefaultPool(this.id)) {
-      this.secondaryActions.push(
-        {
-          content: 'Delete',
-          onClick: this.toggleDelete
-        }
-      );
-    }
-  }
+  state = {
+    showDelete: false
+  };
 
   toggleDelete = () => {
     this.setState({ showDelete: !this.state.showDelete });
   };
 
   onUpdatePool = (values) => {
-    const { updateSendingIp, updatePool, showAlert, history } = this.props;
+    const { updateSendingIp, updatePool, showAlert, history, match: { params: { id }}} = this.props;
 
     /**
      * Pick out the IPs whose pool assignment is not the current pool ergo
      * have been reassigned by the user.
      */
     const changedIpKeys = Object.keys(values).filter((key) =>
-      key !== 'name' && values[key] !== this.id);
+      key !== 'name' && values[key] !== id);
 
     // Update each changed sending IP
     return Promise.all(changedIpKeys.map((ipKey) =>
       updateSendingIp(decodeIp(ipKey), values[ipKey])))
       .then(() => {
         // Update the pool itself
-        if (!isDefaultPool(this.id)) {
-          return updatePool(this.id, values);
+        if (!isDefaultPool(id)) {
+          return updatePool(id, values);
         }
       })
       .then((res) => {
         showAlert({
           type: 'success',
-          message: `Updated IP pool ${this.id}.`
+          message: `Updated IP pool ${id}.`
         });
         history.push('/account/ip-pools');
       })
       .catch(() => showAlert({
         type: 'error',
-        message: `Unable to update IP pool ${this.id}.`
+        message: `Unable to update IP pool ${id}.`
       }));
   };
 
   onDeletePool = () => {
-    const { deletePool, showAlert, history } = this.props;
+    const { deletePool, showAlert, history, match: { params: { id }}} = this.props;
 
-    return deletePool(this.id).then(() => {
+    return deletePool(id).then(() => {
       showAlert({
         type: 'success',
-        message: `Deleted IP pool ${this.id}.`
+        message: `Deleted IP pool ${id}.`
       });
       history.push('/account/ip-pools');
     })
       .catch(() => showAlert({
         type: 'error',
-        message: `Unable to delete IP pool ${this.id}.`
+        message: `Unable to delete IP pool ${id}.`
       }));
   };
 
   loadDependentData = () => {
     this.props.listPools();
-    this.props.getPool(this.id);
+    this.props.getPool(this.props.match.params.id);
   };
 
   componentDidMount() {
@@ -141,7 +125,13 @@ export class EditPage extends Component {
       <Page
         title={`${pool.name} (${pool.id})`}
         breadcrumbAction={breadcrumbAction}
-        secondaryActions={this.secondaryActions}>
+        secondaryActions={!isDefaultPool(this.props.match.params.id)
+          ? [{
+            content: 'Delete',
+            onClick: this.toggleDelete
+          }]
+          : []
+        }>
 
         { this.renderForm() }
 

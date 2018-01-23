@@ -1,4 +1,4 @@
-const initialState = { list: [], listError: null };
+const initialState = { list: [], listError: null, getError: null };
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
@@ -11,6 +11,15 @@ export default (state = initialState, { type, payload }) => {
 
     case 'LIST_SENDING_DOMAINS_FAIL':
       return { ...state, listError: payload, listLoading: false };
+
+    case 'GET_SENDING_DOMAIN_PENDING':
+      return { ...state, getLoading: true, getError: null };
+
+    case 'GET_SENDING_DOMAIN_SUCCESS':
+      return { ...state, domain: payload, getLoading: false };
+
+    case 'GET_SENDING_DOMAIN_FAIL':
+      return { ...state, getError: payload, getLoading: false };
 
     default:
       return state;

@@ -84,7 +84,7 @@ describe('IP Pools Edit Page', () => {
     });
 
     it('should not update pool if editing default pool', async() => {
-      wrapper.instance().id = 'default';
+      wrapper.setProps({ match: { params: { id: 'default' }}});
       await wrapper.instance().onUpdatePool({ name: 'default', '127_0_0_1': 'other_pool', '127_0_0_2': 'default' });
       expect(wrapper.instance().props.showAlert).toHaveBeenCalledWith({
         type: 'success',
