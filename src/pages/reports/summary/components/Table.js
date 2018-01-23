@@ -30,13 +30,15 @@ export class Table extends Component {
 
     const primaryCol = {
       label: GROUP_CONFIG[groupBy].label,
-      className: styles.HeaderCell
+      className: styles.HeaderCell,
+      sortKey: GROUP_CONFIG[groupBy].keyName
     };
 
     const metricCols = metrics.map(({ label, key }) => ({
       key,
       label: <div className={styles.RightAlign}>{ label }</div>,
-      className: cx(styles.HeaderCell, styles.NumericalHeader)
+      className: cx(styles.HeaderCell, styles.NumericalHeader),
+      sortKey: key
     }));
 
     return [primaryCol, ...metricCols];
@@ -113,6 +115,8 @@ export class Table extends Component {
         defaultPerPage={10}
         rows={tableData}
         filterBox={{ show: false }}
+        defaultSortColumn='count_targeted'
+        defaultSortDirection='desc'
       />
     );
   }
