@@ -1,0 +1,100 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FileInputWrapper events should render selected filename 1`] = `
+<div>
+  <label
+    htmlFor="uploadem"
+    id="uploadem"
+  >
+    Upload them all here
+  </label>
+  <Dropzone
+    accept=".csv"
+    disableClick={true}
+    disablePreview={true}
+    disabled={false}
+    maxSize={Infinity}
+    minSize={0}
+    multiple={false}
+    name="uploadem"
+    onDrop={[Function]}
+    preventDropOnDocument={true}
+  >
+    <Tag>
+      all-the-stuff.csv
+    </Tag>
+    <Button
+      onClick={[Function]}
+      size="default"
+    >
+      Choose a CSV file
+    </Button>
+  </Dropzone>
+</div>
+`;
+
+exports[`FileInputWrapper rendering should render correctly 1`] = `
+<div>
+  <label
+    htmlFor="uploadem"
+    id="uploadem"
+  >
+    Upload them all here
+  </label>
+  <Dropzone
+    accept=".csv"
+    disableClick={true}
+    disablePreview={true}
+    disabled={false}
+    maxSize={Infinity}
+    minSize={0}
+    multiple={false}
+    name="uploadem"
+    onDrop={[Function]}
+    preventDropOnDocument={true}
+  >
+    <Tag>
+      No file selected
+    </Tag>
+    <Button
+      onClick={[Function]}
+      size="default"
+    >
+      Choose a CSV file
+    </Button>
+  </Dropzone>
+</div>
+`;
+
+exports[`FileInputWrapper rendering should render errors 1`] = `
+<div>
+  <label
+    htmlFor="uploadem"
+    id="uploadem"
+  >
+    Upload them all here
+  </label>
+  <Dropzone
+    accept=".csv"
+    disableClick={true}
+    disablePreview={true}
+    disabled={false}
+    maxSize={Infinity}
+    minSize={0}
+    multiple={false}
+    name="uploadem"
+    onDrop={[Function]}
+    preventDropOnDocument={true}
+  >
+    <Error
+      error="One at a time please"
+    />
+    <Button
+      onClick={[Function]}
+      size="default"
+    >
+      Choose a CSV file
+    </Button>
+  </Dropzone>
+</div>
+`;

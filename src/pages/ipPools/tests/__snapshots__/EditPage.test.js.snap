@@ -1,0 +1,125 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`IP Pools Edit Page render tests should render the edit page correctly 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "IP Pools",
+      "to": "/account/ip-pools",
+    }
+  }
+  empty={Object {}}
+  secondaryActions={
+    Array [
+      Object {
+        "content": "Delete",
+        "onClick": [Function],
+      },
+    ]
+  }
+  title="My Pool (my-pool)"
+>
+  <Panel>
+    <Panel.Section>
+      <Connect(ReduxForm)
+        isNew={false}
+        onSubmit={[Function]}
+      />
+    </Panel.Section>
+  </Panel>
+  <DeleteModal
+    content={
+      <p>
+        IPs in this pool will be re-assigned to your Default pool.
+      </p>
+    }
+    onCancel={[Function]}
+    onDelete={[Function]}
+    open={false}
+    title="Are you sure you want to delete this IP Pool?"
+  />
+</Page>
+`;
+
+exports[`IP Pools Edit Page render tests should show loading panel when data is loading 1`] = `
+<PanelLoading
+  minHeight="400px"
+/>
+`;
+
+exports[`IP Pools Edit Page renderForm tests should show get error msg on error 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "IP Pools",
+      "to": "/account/ip-pools",
+    }
+  }
+  empty={Object {}}
+  secondaryActions={
+    Array [
+      Object {
+        "content": "Delete",
+        "onClick": [Function],
+      },
+    ]
+  }
+  title="My Pool (my-pool)"
+>
+  <ApiErrorBanner
+    errorDetails="failed getting pools"
+    message="Sorry, we seem to have had some trouble loading your IP pool."
+  />
+  <DeleteModal
+    content={
+      <p>
+        IPs in this pool will be re-assigned to your Default pool.
+      </p>
+    }
+    onCancel={[Function]}
+    onDelete={[Function]}
+    open={false}
+    title="Are you sure you want to delete this IP Pool?"
+  />
+</Page>
+`;
+
+exports[`IP Pools Edit Page renderForm tests should show list error msg on error 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "IP Pools",
+      "to": "/account/ip-pools",
+    }
+  }
+  empty={Object {}}
+  secondaryActions={
+    Array [
+      Object {
+        "content": "Delete",
+        "onClick": [Function],
+      },
+    ]
+  }
+  title="My Pool (my-pool)"
+>
+  <ApiErrorBanner
+    errorDetails="failed listing pools"
+    message="Sorry, we seem to have had some trouble loading your IP pool."
+  />
+  <DeleteModal
+    content={
+      <p>
+        IPs in this pool will be re-assigned to your Default pool.
+      </p>
+    }
+    onCancel={[Function]}
+    onDelete={[Function]}
+    open={false}
+    title="Are you sure you want to delete this IP Pool?"
+  />
+</Page>
+`;

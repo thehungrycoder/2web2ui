@@ -212,13 +212,13 @@ const routes = [
   },
   {
     path: '/lists/recipient-lists/create',
-    component: ComingSoonPage,
+    component: recipientLists.CreatePage,
     condition: hasGrants('recipient_lists/manage'),
     layout: App
   },
   {
     path: '/lists/recipient-lists/edit/:id',
-    component: ComingSoonPage,
+    component: recipientLists.EditPage,
     condition: hasGrants('recipient_lists/manage'),
     layout: App
   },

@@ -41,6 +41,15 @@ it('renders correctly', () => {
   expect(wrapper).toMatchSnapshot();
 });
 
+it('renders loading', () => {
+  const loadingProps = {
+    ...props,
+    loading: true
+  };
+
+  expect(shallow(<ListPage {...loadingProps} />)).toMatchSnapshot();
+});
+
 it('renders empty state', () => {
   const emptyprops = {
     loading: false,
@@ -53,6 +62,11 @@ it('renders empty state', () => {
 });
 
 it('renders errors when present', () => {
-  wrapper.setProps({ payload: { message: 'Uh oh! It broke.' }});
+  wrapper.setProps({ error: true, payload: { message: 'Uh oh! It broke.' }});
   expect(wrapper).toMatchSnapshot();
+});
+
+it('should reload after an error', () => {
+  wrapper.instance().onReloadApiBanner();
+  expect(props.listRecipientLists).toHaveBeenCalled();
 });
