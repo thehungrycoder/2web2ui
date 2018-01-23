@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { listPools } from 'src/actions/ipPools';
+import { getOrderedIpPools } from 'src/selectors/ipPools';
 import { Loading, TableCollection, ApiErrorBanner } from 'src/components';
 import { Page } from '@sparkpost/matchbox';
 
 const columns = ['Name', 'ID', 'Number of IPs Assigned'];
-const getRowData = ({ id, name, ips }) => {
+export const getRowData = ({ id, name, ips }) => {
   const nameLink = <Link to={`/account/ip-pools/edit/${id}`}>{name}</Link>;
   return [nameLink, id, ips.length.toString()];
 };
@@ -16,6 +17,7 @@ export class IpPoolsList extends Component {
   componentDidMount() {
     this.props.listPools();
   }
+
 
   renderError() {
     const { error, listPools } = this.props;
@@ -73,9 +75,10 @@ export class IpPoolsList extends Component {
   }
 }
 
-function mapStateToProps({ ipPools }) {
+function mapStateToProps(state) {
+  const { ipPools } = state;
   return {
-    ipPools: ipPools.list,
+    ipPools: getOrderedIpPools(state),
     loading: ipPools.listLoading,
     error: ipPools.listError
   };

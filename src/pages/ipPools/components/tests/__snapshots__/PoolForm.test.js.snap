@@ -1,0 +1,278 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PoolForm tests should not disable button if form is not pristine or not submitting 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <Field
+    component={[Function]}
+    disabled={false}
+    helpText=""
+    label="Pool Name"
+    name="name"
+    validate={[Function]}
+  />
+  <TableCollection
+    columns={
+      Array [
+        "Sending IP",
+        "Hostname",
+        "IP Pool",
+      ]
+    }
+    defaultSortColumn={null}
+    defaultSortDirection="asc"
+    getRowData={[Function]}
+    pagination={false}
+    rows={
+      Array [
+        Object {
+          "external_ip": "external",
+          "hostname": "hostname",
+        },
+        Object {
+          "external_ip": "external-2",
+          "hostname": "hostname-2",
+        },
+      ]
+    }
+  />
+  <Button
+    disabled={false}
+    primary={true}
+    size="default"
+    submit={true}
+  >
+    Update IP Pool
+  </Button>
+</form>
+`;
+
+exports[`PoolForm tests should not render table if no ips exist 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <Field
+    component={[Function]}
+    disabled={false}
+    helpText=""
+    label="Pool Name"
+    name="name"
+    validate={[Function]}
+  />
+  <Button
+    disabled={true}
+    primary={true}
+    size="default"
+    submit={true}
+  >
+    Update IP Pool
+  </Button>
+</form>
+`;
+
+exports[`PoolForm tests should not render table if pool is new 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <Field
+    component={[Function]}
+    disabled={false}
+    helpText=""
+    label="Pool Name"
+    name="name"
+    validate={[Function]}
+  />
+  <Button
+    disabled={true}
+    primary={true}
+    size="default"
+    submit={true}
+  >
+    Create IP Pool
+  </Button>
+</form>
+`;
+
+exports[`PoolForm tests should render form 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <Field
+    component={[Function]}
+    disabled={false}
+    helpText=""
+    label="Pool Name"
+    name="name"
+    validate={[Function]}
+  />
+  <TableCollection
+    columns={
+      Array [
+        "Sending IP",
+        "Hostname",
+        "IP Pool",
+      ]
+    }
+    defaultSortColumn={null}
+    defaultSortDirection="asc"
+    getRowData={[Function]}
+    pagination={false}
+    rows={
+      Array [
+        Object {
+          "external_ip": "external",
+          "hostname": "hostname",
+        },
+        Object {
+          "external_ip": "external-2",
+          "hostname": "hostname-2",
+        },
+      ]
+    }
+  />
+  <Button
+    disabled={true}
+    primary={true}
+    size="default"
+    submit={true}
+  >
+    Update IP Pool
+  </Button>
+</form>
+`;
+
+exports[`PoolForm tests should render row properly 1`] = `
+Array [
+  "ext-ip",
+  "host",
+  <Field
+    component={[Function]}
+    disabled={false}
+    name="1_1_1_1"
+    options="options"
+  />,
+]
+`;
+
+exports[`PoolForm tests should return a msg if there are no ips 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <Field
+    component={[Function]}
+    disabled={false}
+    helpText=""
+    label="Pool Name"
+    name="name"
+    validate={[Function]}
+  />
+  <p>
+    Add sending IPs to this poll by moving them from their current pool.
+  </p>
+  <Button
+    disabled={true}
+    primary={true}
+    size="default"
+    submit={true}
+  >
+    Update IP Pool
+  </Button>
+</form>
+`;
+
+exports[`PoolForm tests should show help text when editing default pool 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <Field
+    component={[Function]}
+    disabled={true}
+    helpText="Sorry, you can't edit the default pool's name. Then it wouldn't be the default!"
+    label="Pool Name"
+    name="name"
+    validate={[Function]}
+  />
+  <TableCollection
+    columns={
+      Array [
+        "Sending IP",
+        "Hostname",
+        "IP Pool",
+      ]
+    }
+    defaultSortColumn={null}
+    defaultSortDirection="asc"
+    getRowData={[Function]}
+    pagination={false}
+    rows={
+      Array [
+        Object {
+          "external_ip": "external",
+          "hostname": "hostname",
+        },
+        Object {
+          "external_ip": "external-2",
+          "hostname": "hostname-2",
+        },
+      ]
+    }
+  />
+  <Button
+    disabled={true}
+    primary={true}
+    size="default"
+    submit={true}
+  >
+    Update IP Pool
+  </Button>
+</form>
+`;
+
+exports[`PoolForm tests should update button text to Saving and disable button when submitting form 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <Field
+    component={[Function]}
+    disabled={true}
+    helpText=""
+    label="Pool Name"
+    name="name"
+    validate={[Function]}
+  />
+  <TableCollection
+    columns={
+      Array [
+        "Sending IP",
+        "Hostname",
+        "IP Pool",
+      ]
+    }
+    defaultSortColumn={null}
+    defaultSortDirection="asc"
+    getRowData={[Function]}
+    pagination={false}
+    rows={
+      Array [
+        Object {
+          "external_ip": "external",
+          "hostname": "hostname",
+        },
+        Object {
+          "external_ip": "external-2",
+          "hostname": "hostname-2",
+        },
+      ]
+    }
+  />
+  <Button
+    disabled={true}
+    primary={true}
+    size="default"
+    submit={true}
+  >
+    Saving
+  </Button>
+</form>
+`;

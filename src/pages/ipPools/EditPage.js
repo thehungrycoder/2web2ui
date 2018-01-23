@@ -1,18 +1,19 @@
 /* eslint max-lines: ["error", 200] */
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 
 import { Page, Panel } from '@sparkpost/matchbox';
-import { Loading, DeleteModal, ApiErrorBanner } from 'src/components';
+import { DeleteModal, ApiErrorBanner } from 'src/components';
+import PanelLoading from 'src/components/panelLoading/PanelLoading';
 import PoolForm from './components/PoolForm';
 
 import { showAlert } from 'src/actions/globalAlert';
 import { listPools, getPool, updatePool, deletePool } from 'src/actions/ipPools';
 import { updateSendingIp } from 'src/actions/sendingIps';
 
-import { decodeIp } from './helpers/ipNames';
+import { decodeIp } from 'src/helpers/ipNames';
 import isDefaultPool from './helpers/defaultPool';
 
 
@@ -22,7 +23,7 @@ const breadcrumbAction = {
   to: '/account/ip-pools'
 };
 
-export class EditPage extends React.Component {
+export class EditPage extends Component {
   constructor(props) {
     super(props);
 
@@ -50,8 +51,10 @@ export class EditPage extends React.Component {
   onUpdatePool = (values) => {
     const { updateSendingIp, updatePool, showAlert, history } = this.props;
 
-    // Pick out the IPs those pool assignment is not the current pool ergo
-    // have been reassigned by the user.
+    /**
+     * Pick out the IPs whose pool assignment is not the current pool ergo
+     * have been reassigned by the user.
+     */
     const changedIpKeys = Object.keys(values).filter((key) =>
       key !== 'name' && values[key] !== this.id);
 
@@ -93,13 +96,13 @@ export class EditPage extends React.Component {
       }));
   };
 
-  loadDependantData = () => {
+  loadDependentData = () => {
     this.props.listPools();
     this.props.getPool(this.id);
   };
 
   componentDidMount() {
-    this.loadDependantData();
+    this.loadDependentData();
   }
 
   renderError() {
@@ -128,13 +131,15 @@ export class EditPage extends React.Component {
   }
 
   render() {
-    if (this.props.loading) {
-      return <Loading />;
+    const { loading, pool } = this.props;
+
+    if (loading) {
+      return <PanelLoading />;
     }
 
     return (
       <Page
-        title="Edit IP Pool"
+        title={`${pool.name} (${pool.id})`}
         breadcrumbAction={breadcrumbAction}
         secondaryActions={this.secondaryActions}>
 
@@ -153,11 +158,12 @@ export class EditPage extends React.Component {
 }
 
 const mapStateToProps = ({ ipPools }) => {
-  const { getLoading, getError, listLoading, listError } = ipPools;
+  const { getLoading, getError, listLoading, listError, pool } = ipPools;
 
   return {
     loading: getLoading || listLoading,
     error: listError || getError,
+    pool,
     listError,
     getError
   };
