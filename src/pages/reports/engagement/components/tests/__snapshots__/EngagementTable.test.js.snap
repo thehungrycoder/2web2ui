@@ -24,14 +24,17 @@ exports[`EngagementTable when renders table 1`] = `
       Object {
         "label": "Unique Clicks Per Recipient",
         "sortKey": "count_raw_clicked_approx",
+        "width": "145px",
       },
       Object {
         "label": "Total Clicks",
         "sortKey": "count_clicked",
+        "width": "130px",
       },
       Object {
         "label": "Percent of Total",
         "sortKey": "percentage_clicked",
+        "width": "160px",
       },
     ]
   }

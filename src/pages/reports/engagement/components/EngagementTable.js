@@ -6,9 +6,9 @@ import { formatNumber, formatPercent } from 'src/helpers/units';
 
 const COLUMNS = [
   { label: 'Links', sortKey: 'link_name', width: '45%' },
-  { label: 'Unique Clicks Per Recipient', sortKey: 'count_raw_clicked_approx' },
-  { label: 'Total Clicks', sortKey: 'count_clicked' },
-  { label: 'Percent of Total', sortKey: 'percentage_clicked' }
+  { label: 'Unique Clicks Per Recipient', sortKey: 'count_raw_clicked_approx', width: '145px' },
+  { label: 'Total Clicks', sortKey: 'count_clicked', width: '130px' },
+  { label: 'Percent of Total', sortKey: 'percentage_clicked', width: '160px' }
 ];
 
 const DataRow = (row) => [
