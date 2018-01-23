@@ -1,26 +1,19 @@
-/* eslint max-lines: ["error", 175] */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import qs from 'query-string';
+import _ from 'lodash';
+
 import { getFilterSearchOptions, parseSearch } from 'src/helpers/reports';
 import { showAlert } from 'src/actions/globalAlert';
 import { addFilters, refreshTypeaheadCache } from 'src/actions/reportFilters';
 import { loadRejectionMetrics, refreshRejectionTableMetrics } from 'src/actions/rejectionReport';
-import { TableCollection, Empty, LongTextContainer } from 'src/components';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
-import { Page, Panel, UnstyledLink } from '@sparkpost/matchbox';
+import { Page, Panel } from '@sparkpost/matchbox';
 import ShareModal from '../components/ShareModal';
 import Filters from '../components/Filters';
 import MetricsSummary from '../components/MetricsSummary';
-import _ from 'lodash';
-
-const columns = [
-  { label: 'Reason', width: '45%', sortKey: 'reason' },
-  { label: 'Domain', sortKey: 'domain' },
-  { label: 'Category', sortKey: 'rejection_category_name' },
-  { label: 'Count', sortKey: 'count_rejected' }
-];
+import DataTable from './components/DataTable';
 
 export class RejectionPage extends Component {
   state = {
@@ -71,36 +64,14 @@ export class RejectionPage extends Component {
     this.handleRefresh();
   }
 
-  getRowData = (rowData) => {
-    const { reason, domain, rejection_category_name,count_rejected } = rowData;
-    return [
-      <LongTextContainer text={reason} />,
-      <UnstyledLink onClick={() => this.handleDomainClick(domain)}>{ domain }</UnstyledLink>,
-      rejection_category_name,
-      count_rejected
-    ];
-  };
-
   renderCollection() {
-
     const { loading, list } = this.props;
 
     if (loading) {
       return <PanelLoading />;
     }
 
-    if (!list.length) {
-      return <Empty message={'There are no rejection messages for your current query'} />;
-    }
-
-    return <TableCollection
-      columns={columns}
-      rows={list}
-      getRowData={this.getRowData}
-      pagination={true}
-      defaultSortColumn='reason'
-      defaultSortDirection='desc'
-    />;
+    return <DataTable list={list} onDomainClick={this.handleDomainClick} />;
   }
 
   renderTopLevelMetrics() {

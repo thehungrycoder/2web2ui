@@ -1,0 +1,78 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Rejection Data Table:  getRowData should render row data properly 1`] = `
+Array [
+  <LongTextContainer
+    text="bad delay"
+  >
+    <div>
+      bad delay
+    </div>
+  </LongTextContainer>,
+  <UnstyledLink
+    onClick={[Function]}
+  >
+    <a
+      onClick={[Function]}
+    >
+      gmail.com
+    </a>
+  </UnstyledLink>,
+  "cat1",
+  10,
+]
+`;
+
+exports[`Rejection Data Table:  renders correctly 1`] = `
+<TableCollection
+  columns={
+    Array [
+      Object {
+        "label": "Reason",
+        "sortKey": "reason",
+        "width": "45%",
+      },
+      Object {
+        "label": "Domain",
+        "sortKey": "domain",
+      },
+      Object {
+        "label": "Category",
+        "sortKey": "rejection_category_name",
+      },
+      Object {
+        "label": "Count",
+        "sortKey": "count_rejected",
+      },
+    ]
+  }
+  defaultSortColumn="reason"
+  defaultSortDirection="desc"
+  getRowData={[Function]}
+  pagination={true}
+  rows={
+    Array [
+      Object {
+        "count_rejected": 65,
+        "domain": "gmail.com",
+        "reason": "551 - Cannot Relay 105",
+        "rejection_category_id": 1,
+        "rejection_category_name": "Policy Rejection",
+      },
+      Object {
+        "count_rejected": 62,
+        "domain": "gmail.com",
+        "reason": "550 - Invalid recipient ...@... (#5.1.1)",
+        "rejection_category_id": 1,
+        "rejection_category_name": "Policy Rejection",
+      },
+    ]
+  }
+/>
+`;
+
+exports[`Rejection Data Table:  renders correctly with no rejections 1`] = `
+<Empty
+  message="There are no rejection messages for your current query"
+/>
+`;
