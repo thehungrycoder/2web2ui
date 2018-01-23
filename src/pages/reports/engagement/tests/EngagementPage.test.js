@@ -13,7 +13,14 @@ it('renders engagement report page', () => {
       },
       loading: false
     },
-    getChartData: jest.fn()
+    table: {
+      data: [
+        { count_clicked: 1776, count_raw_clicked_approx: 1657, link_name: 'Raw URL' }
+      ],
+      loading: false
+    },
+    getChartData: jest.fn(),
+    getTableData: jest.fn()
   };
   const wrapper = shallow(<EngagementPage {...props} />);
 
@@ -23,12 +30,22 @@ it('renders engagement report page', () => {
 it('displays global alert when request to fetch data fails', async() => {
   const props = {
     chart: { data: {}},
+    table: { data: []},
     getChartData: jest.fn(() => Promise.reject()),
+    getTableData: jest.fn(() => Promise.reject()),
     showAlert: jest.fn()
   };
 
   const wrapper = shallow(<EngagementPage {...props} />);
   await wrapper.instance().onLoad();
 
-  expect(props.showAlert).toHaveBeenCalledWith(expect.objectContaining({ type: 'error' }));
+  expect(props.showAlert).toHaveBeenCalledWith(expect.objectContaining({
+    message: expect.stringMatching(/engagement data/),
+    type: 'error'
+  }));
+
+  expect(props.showAlert).toHaveBeenCalledWith(expect.objectContaining({
+    message: expect.stringMatching(/click data/),
+    type: 'error'
+  }));
 });

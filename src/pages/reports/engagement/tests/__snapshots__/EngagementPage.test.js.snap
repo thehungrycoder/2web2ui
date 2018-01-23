@@ -21,5 +21,17 @@ exports[`renders engagement report page 1`] = `
     opens={4}
     targeted={2}
   />
+  <EngagementTable
+    data={
+      Array [
+        Object {
+          "count_clicked": 1776,
+          "count_raw_clicked_approx": 1657,
+          "link_name": "Raw URL",
+        },
+      ]
+    }
+    loading={false}
+  />
 </Page>
 `;

@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EngagementTable when loading 1`] = `
+<PanelLoading
+  minHeight="400px"
+/>
+`;
+
+exports[`EngagementTable when no results 1`] = `
+<Empty
+  message="No clicks to report"
+/>
+`;
+
+exports[`EngagementTable when renders table 1`] = `
+<TableCollection
+  columns={
+    Array [
+      Object {
+        "label": "Links",
+        "sortKey": "link_name",
+        "width": "45%",
+      },
+      Object {
+        "label": "Unique Clicks Per Recipient",
+        "sortKey": "count_raw_clicked_approx",
+      },
+      Object {
+        "label": "Total Clicks",
+        "sortKey": "count_clicked",
+      },
+      Object {
+        "label": "Percent of Total",
+        "sortKey": "percentage_clicked",
+      },
+    ]
+  }
+  defaultSortColumn="count_clicked"
+  defaultSortDirection="desc"
+  getRowData={[Function]}
+  pagination={true}
+  rows={
+    Array [
+      Object {
+        "count_clicked": 10,
+        "count_raw_clicked_approx": 1,
+        "link_name": "Raw URL",
+        "percentage_clicked": 33.33333333333333,
+      },
+      Object {
+        "count_clicked": 20,
+        "count_raw_clicked_approx": 2,
+        "link_name": "Nintendo",
+        "percentage_clicked": 66.66666666666666,
+      },
+    ]
+  }
+/>
+`;
