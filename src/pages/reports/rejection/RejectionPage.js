@@ -15,7 +15,12 @@ import Filters from '../components/Filters';
 import MetricsSummary from '../components/MetricsSummary';
 import _ from 'lodash';
 
-const columns = [{ label: 'Reason', width: '45%' }, 'Domain', 'Category', 'Count'];
+const columns = [
+  { label: 'Reason', width: '45%', sortKey: 'reason' },
+  { label: 'Domain', sortKey: 'domain' },
+  { label: 'Category', sortKey: 'rejection_category_name' },
+  { label: 'Count', sortKey: 'count_rejected' }
+];
 
 export class RejectionPage extends Component {
   state = {
@@ -93,6 +98,8 @@ export class RejectionPage extends Component {
       rows={list}
       getRowData={this.getRowData}
       pagination={true}
+      defaultSortColumn='reason'
+      defaultSortDirection='desc'
     />;
   }
 

@@ -55,15 +55,25 @@ exports[`RejectionPage:  renders correctly 1`] = `
         Array [
           Object {
             "label": "Reason",
+            "sortKey": "reason",
             "width": "45%",
           },
-          "Domain",
-          "Category",
-          "Count",
+          Object {
+            "label": "Domain",
+            "sortKey": "domain",
+          },
+          Object {
+            "label": "Category",
+            "sortKey": "rejection_category_name",
+          },
+          Object {
+            "label": "Count",
+            "sortKey": "count_rejected",
+          },
         ]
       }
-      defaultSortColumn={null}
-      defaultSortDirection="asc"
+      defaultSortColumn="reason"
+      defaultSortDirection="desc"
       getRowData={[Function]}
       pagination={true}
       rows={
@@ -192,15 +202,25 @@ exports[`RejectionPage:  renders loading pannel when aggregates are still loadin
         Array [
           Object {
             "label": "Reason",
+            "sortKey": "reason",
             "width": "45%",
           },
-          "Domain",
-          "Category",
-          "Count",
+          Object {
+            "label": "Domain",
+            "sortKey": "domain",
+          },
+          Object {
+            "label": "Category",
+            "sortKey": "rejection_category_name",
+          },
+          Object {
+            "label": "Count",
+            "sortKey": "count_rejected",
+          },
         ]
       }
-      defaultSortColumn={null}
-      defaultSortDirection="asc"
+      defaultSortColumn="reason"
+      defaultSortDirection="desc"
       getRowData={[Function]}
       pagination={true}
       rows={
