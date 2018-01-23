@@ -16,6 +16,7 @@ export { default as PanelLoading } from './panelLoading/PanelLoading';
 export { default as RouteWatch } from './routeWatch/RouteWatch';
 export { default as LongTextContainer } from './longTextContainer/LongTextContainer';
 export { default as DownloadLink } from './downloadLink/DownloadLink';
+export { default as PieChart } from './pieChart/PieChart';
 
 export * from './collection';
 export * from './formatters';

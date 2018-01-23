@@ -5,8 +5,8 @@ import { shallow } from 'enzyme';
 const props = {
   rateValue: 10,
   rateTitle: 'Summary Title',
-  to: new Date(1487076708000),
-  from: new Date(1482076708000)
+  to: new Date('2018-01-12T12:00'),
+  from: new Date('2017-12-25T05:30')
 };
 
 describe('MetricsSummary: ', () => {

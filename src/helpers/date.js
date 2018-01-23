@@ -16,23 +16,31 @@ export const relativeDateOptionsIndexed = relativeDateOptions.reduce((result, { 
   return result;
 }, {});
 
-export function getEndOfDay(date) {
+/**
+ * Takes a date string and returns the end of that day (11:59PM)
+ *
+ * If preventFuture is true and the given day IS the current day,
+ * it returns the current time, i.e. the closest to the end
+ * of the day without going into the future.
+ *
+ * @param {String} date - date string to base date on
+ * @return {Date}
+ */
+export function getEndOfDay(date, { preventFuture } = {}) {
+  const now = moment();
   const end = new Date(date);
-  end.setHours(23);
-  end.setMinutes(59);
-  end.setSeconds(59);
-  end.setMilliseconds(0);
 
+  if (preventFuture && now.diff(end, 'days') === 0) {
+    return now.toDate();
+  }
+
+  end.setHours(23, 59, 59, 999);
   return end;
 }
 
 export function getStartOfDay(date) {
   const start = new Date(date);
-  start.setHours(0);
-  start.setMinutes(0);
-  start.setSeconds(0);
-  start.setMilliseconds(0);
-
+  start.setHours(0, 0, 0, 0);
   return start;
 }
 
@@ -64,9 +72,11 @@ export function getRelativeDates(range) {
 export function formatDate(date) {
   return moment(date).format(config.dateFormat);
 }
+
 export function formatTime(time) {
   return moment(time).format(config.timeFormat);
 }
+
 export function formatDateTime(datetime) {
   return `${formatDate(datetime)} ${formatTime(datetime)}`;
 }

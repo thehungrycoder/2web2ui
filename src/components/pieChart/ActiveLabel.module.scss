@@ -1,0 +1,25 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.ActiveLabel {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.Label {
+  font-size: rem(15);
+}
+
+.Value {
+  font-size: rem(21);
+  font-weight: 600;
+}
+
+.Line {
+  margin: spacing(small) 0;
+  height: 1px;
+  width: 100%;
+  background: color(gray, 8);
+}

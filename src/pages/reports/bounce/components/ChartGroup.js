@@ -2,15 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import { Grid, Panel } from '@sparkpost/matchbox';
-import ActiveLabel from './ActiveLabel';
-import BounceChart from './BounceChart';
-import Legend from './Legend';
-import { Loading } from 'src/components';
-import { generateColors } from 'src/helpers/bounce';
+import { Loading, PieChart } from 'src/components';
+import { generateColors } from 'src/helpers/color';
 import styles from './ChartGroup.module.scss';
-
-// Overwrites 'LoadableComponent'
-BounceChart.displayName = 'BounceChart';
 
 // Chart color palette generated from:
 const primaryColor = '#DB2F3D';
@@ -83,15 +77,16 @@ export class ChartGroup extends Component {
     // Header with breadcrumb & active data
     if (active) {
       return [
-        { name: 'All Bounces', breadcrumb: true, onClick: this.handleBreadcrumb },
+        { name: 'Bounces', breadcrumb: true, onClick: this.handleBreadcrumb, count: aggregates.countBounce },
+        { name: 'Targeted', count: aggregates.countTargeted },
         { name: active.name, count: active.count }
       ];
     }
 
     // Default header
     return [
-      { name: 'Targeted', count: aggregates.countTargeted },
-      { name: 'All Bounces', count: aggregates.countBounce }
+      { name: 'Bounces', count: aggregates.countBounce },
+      { name: 'Targeted', count: aggregates.countTargeted }
     ];
   }
 
@@ -109,8 +104,8 @@ export class ChartGroup extends Component {
     }
 
     return {
-      primaryData: generateColors(primaryData, primaryColor),
-      secondaryData: secondaryData && generateColors(secondaryData, secondaryColor)
+      primaryData: generateColors(primaryData, { baseColor: primaryColor, rotate: 80, saturate: 0.06 }),
+      secondaryData: secondaryData && generateColors(secondaryData, { baseColor: secondaryColor })
     };
   }
 
@@ -126,23 +121,23 @@ export class ChartGroup extends Component {
         <Grid>
           <Grid.Column xs={12} lg={5}>
             <div className={styles.ChartWrapper}>
-              <BounceChart
+              <PieChart.Chart
                 {...this.getData()}
                 hoveredItem={this.state.hoveredItem}
-                handleMouseOver={this.handleMouseOver}
-                handleMouseOut={this.handleMouseOut}
-                handleClick={this.handleClick} />
-              <ActiveLabel {...this.getLabelProps()}/>
+                onMouseOver={this.handleMouseOver}
+                onMouseOut={this.handleMouseOut}
+                onClick={this.handleClick} />
+              <PieChart.ActiveLabel {...this.getLabelProps()}/>
             </div>
           </Grid.Column>
           <Grid.Column xs={12} lg={7}>
-            <Legend
+            <PieChart.Legend
               headerData={this.getLegendHeaderData()}
               {...this.getData()}
               hoveredItem={this.state.hoveredItem}
-              handleMouseOver={this.handleMouseOver}
-              handleMouseOut={this.handleMouseOut}
-              handleClick={this.handleClick} />
+              onMouseOver={this.handleMouseOver}
+              onMouseOut={this.handleMouseOut}
+              onClick={this.handleClick} />
           </Grid.Column>
         </Grid>
       </Panel>

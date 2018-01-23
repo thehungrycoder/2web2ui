@@ -1,4 +1,4 @@
-/* eslint max-lines: ["error", 175] */
+/* eslint max-lines: ["error", 176] */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactDOM from 'react-dom';
@@ -8,7 +8,7 @@ import { Button, Datepicker, TextField, Select, Popover } from '@sparkpost/match
 import DateForm from './DateForm';
 import styles from './DateFilter.module.scss';
 
-class DateFilter extends Component {
+export class DateFilter extends Component {
   format = 'MMM DD, YY h:mma';
   state = {
     showDatePicker: false,
@@ -75,7 +75,9 @@ class DateFilter extends Component {
 
   handleDayClick = (clicked) => {
     const { selecting, selected } = this.state;
-    const dates = selecting ? selected : { from: getStartOfDay(clicked), to: getEndOfDay(clicked) };
+    const dates = selecting
+      ? selected
+      : { from: getStartOfDay(clicked), to: getEndOfDay(clicked, { preventFuture: true }) };
 
     this.setState({
       selected: dates,
@@ -94,7 +96,9 @@ class DateFilter extends Component {
 
   getOrderedRange(newDate) {
     const { from, to } = this.state.beforeSelected;
-    return (from.getTime() <= newDate.getTime()) ? { from, to: getEndOfDay(newDate) } : { from: getStartOfDay(newDate), to };
+    return (from.getTime() <= newDate.getTime())
+      ? { from, to: getEndOfDay(newDate, { preventFuture: true }) }
+      : { from: getStartOfDay(newDate), to };
   }
 
   handleSelectRange = (e) => {
@@ -121,6 +125,9 @@ class DateFilter extends Component {
     const { selected: { from, to }, showDatePicker } = this.state;
     const selectedRange = showDatePicker ? 'custom' : this.props.filter.relativeRange;
 
+    // allow for prop-level override of "now" (DI, etc.)
+    const { now = new Date() } = this.props;
+
     const rangeSelect = <Select
       options={relativeDateOptions}
       onChange={this.handleSelectRange}
@@ -145,9 +152,9 @@ class DateFilter extends Component {
           numberOfMonths={2}
           fixedWeeks
           enableOutsideDays={false}
-          initialMonth={subMonths(new Date(), 1)}
-          toMonth={new Date()}
-          disabledDays={{ after: new Date() }}
+          initialMonth={subMonths(now, 1)}
+          toMonth={now}
+          disabledDays={{ after: now }}
           onDayClick={this.handleDayClick}
           onDayMouseEnter={this.handleDayHover}
           onDayFocus={this.handleDayHover}

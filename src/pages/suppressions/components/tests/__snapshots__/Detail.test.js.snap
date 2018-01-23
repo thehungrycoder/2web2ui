@@ -27,12 +27,12 @@ exports[`Detail renders correctly (hides) on initial loading 1`] = `
       <LabelledValue
         key="updated"
         label="Updated"
-        value="2018/01/15 23:14"
+        value="formatted-date"
       />
       <LabelledValue
         key="created"
         label="Created"
-        value="2018/01/15 23:14"
+        value="formatted-date"
       />
       <LabelledValue
         key="description"
@@ -93,12 +93,12 @@ exports[`Detail renders correctly (shows loading) when deleting 1`] = `
       <LabelledValue
         key="updated"
         label="Updated"
-        value="2018/01/15 23:14"
+        value="formatted-date"
       />
       <LabelledValue
         key="created"
         label="Created"
-        value="2018/01/15 23:14"
+        value="formatted-date"
       />
       <LabelledValue
         key="description"
@@ -159,12 +159,12 @@ exports[`Detail renders correctly (shows) when open is true  1`] = `
       <LabelledValue
         key="updated"
         label="Updated"
-        value="2018/01/15 23:14"
+        value="formatted-date"
       />
       <LabelledValue
         key="created"
         label="Created"
-        value="2018/01/15 23:14"
+        value="formatted-date"
       />
       <LabelledValue
         key="description"

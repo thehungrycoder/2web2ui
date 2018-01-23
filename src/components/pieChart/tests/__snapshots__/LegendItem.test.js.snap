@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LegendItem:  should render 1`] = `
+<a
+  className=""
+  onClick={[Function]}
+  title="View name"
+>
+  <span
+    style={
+      Object {
+        "backgroundColor": "#000",
+      }
+    }
+  />
+  <span>
+    name
+    <Icon
+      name="ChevronRight"
+      size={18}
+    />
+  </span>
+  <span>
+    2
+  </span>
+</a>
+`;
+
+exports[`LegendItem:  should render breadcrumb 1`] = `
+<a
+  className=""
+  onClick={[Function]}
+  title="View name"
+>
+  <span
+    style={
+      Object {
+        "backgroundColor": "#000",
+      }
+    }
+  />
+  <Icon
+    name="ChevronLeft"
+    size={18}
+  />
+  <span>
+    name
+    <Icon
+      name="ChevronRight"
+      size={18}
+    />
+  </span>
+  <span>
+    2
+  </span>
+</a>
+`;
