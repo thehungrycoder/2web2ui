@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`IP Pools Create Page should render the list page correctly 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "IP Pools",
+      "to": "/account/ip-pools",
+    }
+  }
+  empty={Object {}}
+  title="Create IP Pool"
+>
+  <Panel>
+    <Panel.Section>
+      <Connect(ReduxForm)
+        isNew={true}
+        onSubmit={[Function]}
+      />
+    </Panel.Section>
+  </Panel>
+</Page>
+`;
+
+exports[`IP Pools Create Page should show loading component when data is loading 1`] = `<Loading />`;

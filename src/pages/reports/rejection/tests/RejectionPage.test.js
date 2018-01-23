@@ -3,7 +3,7 @@ import React from 'react';
 import { RejectionPage } from '../RejectionPage';
 import { shallow, mount } from 'enzyme';
 import * as reportHelpers from 'src/helpers/reports';
-import { renderRowData } from 'src/__testHelpers__';
+import { renderRowData } from 'src/__testHelpers__/renderHelpers';
 
 jest.mock('src/helpers/reports');
 

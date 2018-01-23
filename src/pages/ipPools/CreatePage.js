@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { Loading, Page, Panel } from '@sparkpost/matchbox';
+import { Page, Panel } from '@sparkpost/matchbox';
+import { Loading } from 'src/components';
 import PoolForm from './components/PoolForm';
 
 import { showAlert } from 'src/actions/globalAlert';
@@ -15,11 +16,11 @@ const breadcrumbAction = {
   to: '/account/ip-pools'
 };
 
-export class CreatePage extends React.Component {
+export class CreatePage extends Component {
   createPool = (values) => {
     const { createPool, showAlert, history } = this.props;
 
-    return createPool(values).then((res) => {
+    return createPool(values).then(() => {
       showAlert({
         type: 'success',
         message: `Created IP pool ${values.name}.`
