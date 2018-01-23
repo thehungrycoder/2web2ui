@@ -31,6 +31,7 @@ const config = {
     billingEmail: 'billing@sparkpost.com'
   },
   gaTag: 'no-default-set',
+  maxUploadSizeBytes: 20000000,
   metricsPrecisionMap: [
     { time: 60, value: '1min', format: 'ha' },
     { time: 60 * 2, value: '5min', format: 'ha' },

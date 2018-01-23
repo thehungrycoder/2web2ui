@@ -166,59 +166,11 @@ exports[`renders errors when present 1`] = `
   }
   title="Recipient Lists"
 >
-  <TableCollection
-    columns={
-      Array [
-        "Name",
-        "ID",
-        "Recipients",
-      ]
-    }
-    defaultSortColumn={null}
-    defaultSortDirection="asc"
-    filterBox={
-      Object {
-        "exampleModifiers": Array [
-          "name",
-          "id",
-          "count",
-        ],
-        "itemToStringKeys": Array [
-          "name",
-          "id",
-        ],
-        "keyMap": Object {
-          "count": "total_accepted_recipients",
-        },
-        "show": true,
-      }
-    }
-    getRowData={[Function]}
-    pagination={true}
-    rows={
-      Array [
-        Object {
-          "attributes": Object {
-            "internal_id": 112,
-            "list_group_id": 12321,
-          },
-          "description": "An email list of graduate students at UMD",
-          "id": "unique_id_4_graduate_students_list",
-          "name": "graduate_students",
-          "total_accepted_recipients": 3,
-        },
-        Object {
-          "attributes": Object {
-            "internal_id": 111,
-            "list_group_id": 11321,
-          },
-          "description": "An email list of undergraduate students at UMBC",
-          "id": "unique_id_4_undergraduates",
-          "name": "undergraduate_students",
-          "total_accepted_recipients": 8,
-        },
-      ]
-    }
+  <ApiErrorBanner
+    message="Sorry, we ran into an error loading your Recipient Lists"
+    reload={[Function]}
   />
 </Page>
 `;
+
+exports[`renders loading 1`] = `<Loading />`;

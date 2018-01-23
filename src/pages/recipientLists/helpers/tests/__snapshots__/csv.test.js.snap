@@ -1,0 +1,109 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Recipient list CSV parser accepts JSON fields case: 1 1`] = `
+Array [
+  Object {
+    "address": Object {
+      "email": "scratch@example.com",
+    },
+    "metadata": Object {
+      "flavor": "vanilla",
+    },
+  },
+]
+`;
+
+exports[`Recipient list CSV parser accepts JSON fields case: 2 1`] = `
+Array [
+  Object {
+    "address": Object {
+      "email": "scratch@example.com",
+    },
+    "substitution_data": Object {
+      "firstname": "Scratchy",
+    },
+  },
+]
+`;
+
+exports[`Recipient list CSV parser accepts JSON fields case: 3 1`] = `
+Array [
+  Object {
+    "address": Object {
+      "email": "scratch@example.com",
+    },
+    "tags": Array [
+      "vanilla",
+      "ice-cream",
+    ],
+  },
+]
+`;
+
+exports[`Recipient list CSV parser accepts minimal CSV and produces JSON 1`] = `
+Array [
+  Object {
+    "address": Object {
+      "email": "scratch@example.com",
+    },
+  },
+]
+`;
+
+exports[`Recipient list CSV parser accepts optional text fields case: 1 1`] = `
+Array [
+  Object {
+    "address": Object {
+      "email": "scratch@example.com",
+      "name": "Scratchy",
+    },
+  },
+]
+`;
+
+exports[`Recipient list CSV parser accepts optional text fields case: 2 1`] = `
+Array [
+  Object {
+    "address": Object {
+      "email": "scratch@example.com",
+    },
+    "return_path": "scratchy@bounces.examples.com",
+  },
+]
+`;
+
+exports[`Recipient list CSV parser collects multiple errors 1`] = `
+Array [
+  "Error parsing line #3: email field is missing",
+  "Error parsing substitution_data on line #'3: invalid JSON: Unexpected end of JSON input",
+  "Error parsing metadata on line #'4: invalid JSON: Unexpected token m in JSON at position 1",
+]
+`;
+
+exports[`Recipient list CSV parser ignores unexpected fields 1`] = `
+Array [
+  Object {
+    "address": Object {
+      "email": "scratch@example.com",
+      "name": "Scratchy",
+    },
+  },
+]
+`;
+
+exports[`Recipient list CSV parser is not sensitive to field order 1`] = `
+Array [
+  Object {
+    "address": Object {
+      "email": "scratch@example.com",
+      "name": "Scratchy",
+    },
+  },
+]
+`;
+
+exports[`Recipient list CSV parser requires an email field 1`] = `
+Array [
+  "Error parsing line #2: email field is missing",
+]
+`;
