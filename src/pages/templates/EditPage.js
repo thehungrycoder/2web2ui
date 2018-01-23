@@ -4,7 +4,7 @@ import { allSettled } from 'src/helpers/promise';
 import { getSubaccountQuery } from 'src/helpers/templates';
 
 // Components
-import Form from './components/Form';
+import Form from './components/containers/Form.container';
 import Editor from './components/Editor'; // async
 import { Loading, DeleteModal } from 'src/components';
 import { Page, Grid } from '@sparkpost/matchbox';
@@ -14,13 +14,18 @@ export default class EditPage extends Component {
     deleteOpen: false
   };
 
-  componentDidMount() {
-    const { match, getDraft, getPublished, getTestData, showAlert, history, subaccountId } = this.props;
-
-    allSettled([
+  getTemplate() {
+    const { match, getDraft, getPublished, subaccountId } = this.props;
+    return allSettled([
       getDraft(match.params.id, subaccountId),
       getPublished(match.params.id, subaccountId)
-    ], { onlyRejected: true }).then((errors) => {
+    ], { onlyRejected: true });
+  }
+
+  componentDidMount() {
+    const { match, getTestData, showAlert, history } = this.props;
+
+    this.getTemplate().then((errors) => {
       if (errors.length === 2) {
         history.push('/templates/'); // Redirect if no draft or published found
         showAlert({ type: 'error', message: 'Could not find template' });

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Panel, Grid, Icon, Button, Tag } from '@sparkpost/matchbox';
 import { listTrackingDomains, updateTrackingDomain, deleteTrackingDomain, verifyTrackingDomain } from 'src/actions/trackingDomains';
 import { DeleteModal, ConfirmationModal } from 'src/components/modals';
-import { DomainStatusTag, SubaccountTag } from 'src/components';
+import { DomainStatusTag, SubaccountTag } from 'src/components/tags';
 import styles from './TrackingDomainRow.module.scss';
 import _ from 'lodash';
 

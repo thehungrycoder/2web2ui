@@ -52,7 +52,7 @@ export default class ListPage extends Component {
     const { hasSubaccounts } = this.props;
 
     const columns = [
-      { label: 'Name (ID)', width: '22%' },
+      { label: 'Name', width: '22%' },
       { label: 'ID', width: '22%' },
       { label: 'Status', width: '15%' },
       { label: 'Updated' }

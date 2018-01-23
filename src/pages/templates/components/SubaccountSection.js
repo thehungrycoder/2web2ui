@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Field, formValueSelector, change } from 'redux-form';
+import { Field } from 'redux-form';
 import { Panel } from '@sparkpost/matchbox';
 import { RadioGroup, SubaccountTypeaheadWrapper, TextFieldWrapper } from 'src/components';
-import ToggleBlock from './ToggleBlock';
+import ToggleBlock from 'src/components/toggleBlock/ToggleBlock';
 
 const createOptions = [
   { label: 'Assign to Master Account', value: 'master' },
@@ -22,7 +21,7 @@ const createOptions = [
  * - shared_with_subaccounts
  * - subaccount_id (disabled)
  */
-class SubaccountSection extends Component {
+export default class SubaccountSection extends Component {
   componentDidUpdate(prevProps) {
     const { assignTo, formName, change } = this.props;
 
@@ -41,14 +40,14 @@ class SubaccountSection extends Component {
       : null;
 
     return (
-      <React.Fragment>
+      <div>
         <Field
           component={RadioGroup}
           name='assignTo'
           title='Subaccount Assignment'
           options={createOptions} />
         {typeahead}
-      </React.Fragment>
+      </div>
     );
   }
 
@@ -89,15 +88,6 @@ class SubaccountSection extends Component {
 
 SubaccountSection.propTypes = {
   newTemplate: PropTypes.bool,
-  assignTo: PropTypes.oneOf(['master', 'shared', 'subaccount', null])
+  assignTo: PropTypes.oneOf(['master', 'shared', 'subaccount', null]),
+  change: PropTypes.func
 };
-
-const mapStateToProps = (state, props) => {
-  const selector = formValueSelector(props.formName);
-  return {
-    assignTo: selector(state, 'assignTo'),
-    subaccountId: selector(state, 'subaccount_id')
-  };
-};
-
-export default connect(mapStateToProps, { change })(SubaccountSection);

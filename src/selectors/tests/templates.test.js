@@ -34,6 +34,28 @@ describe('Templates selectors', () => {
           }
         }
       }
+    },
+    sendingDomains: {
+      list: [
+        {
+          domain: 'shared.com',
+          shared_with_subaccounts: true,
+          status: { ownership_verified: true, compliance_status: 'valid' }
+        },
+        {
+          domain: 'masterOnly.com',
+          status: { ownership_verified: true, compliance_status: 'valid' }
+        },
+        {
+          domain: 'assignedToSub.com',
+          subaccount_id: 101,
+          status: { ownership_verified: true, compliance_status: 'valid' }
+        },
+        {
+          domain: 'notvalid.com',
+          status: { ownership_verified: false, compliance_status: 'valid' }
+        }
+      ]
     }
   };
 
@@ -121,6 +143,23 @@ describe('Templates selectors', () => {
 
     it('should return default data', () => {
       expect(selector.selectTemplateTestData({ templates: {}})).toMatchSnapshot();
+    });
+  });
+
+  describe('selectSubaccountIdFromQuery', () => {
+    it('should return subaccount id from query params', () => {
+      const props = { location: { search: '?subaccount=101' }};
+      expect(selector.selectSubaccountIdFromQuery(props)).toEqual('101');
+    });
+  });
+
+  describe('selectDomainsBySubaccount', () => {
+    it('should return domains with no subaccount filter', () => {
+      expect(selector.selectDomainsBySubaccount(store, {})).toMatchSnapshot();
+    });
+
+    it('should return domains for a specific subaccount', () => {
+      expect(selector.selectDomainsBySubaccount(store, { subaccountId: 101 })).toMatchSnapshot();
     });
   });
 });

@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import { CreatePage } from '../CreatePage';
+import CreatePage from '../CreatePage';
 
 let wrapper;
 let props;
@@ -23,7 +23,8 @@ describe('Template CreatePage', () => {
       history: {
         push: jest.fn()
       },
-      showAlert: jest.fn()
+      showAlert: jest.fn(),
+      formName: 'templateCreate'
     };
   });
 
@@ -34,6 +35,11 @@ describe('Template CreatePage', () => {
 
     it('should render correctly', () => {
       expect(wrapper).toMatchSnapshot();
+    });
+
+    it('should render loading correctly', () => {
+      wrapper.setProps({ loading: true });
+      expect(wrapper.find('Loading')).toHaveLength(1);
     });
 
     it('should not call getDraft (load template)', () => {

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import _ from 'lodash';
 
 // Components
-import Form from './components/Form';
+import Form from './components/containers/Form.container';
 import Editor from './components/Editor'; // async
 import { Page, Grid } from '@sparkpost/matchbox';
 import { Loading } from 'src/components';
@@ -37,7 +37,7 @@ export default class CreatePage extends Component {
 
     const primaryAction = {
       content: 'Save Template',
-      onClick: handleSubmit((values) => this.handleCreate(values)),
+      onClick: handleSubmit(this.handleCreate),
       disabled: submitting
     };
 

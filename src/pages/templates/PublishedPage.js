@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { getSubaccountQuery } from 'src/helpers/templates';
-import Form from './components/Form';
+import Form from './components/containers/Form.container';
 import Editor from './components/Editor'; // async
 import { Loading } from 'src/components';
 import { Page, Grid } from '@sparkpost/matchbox';

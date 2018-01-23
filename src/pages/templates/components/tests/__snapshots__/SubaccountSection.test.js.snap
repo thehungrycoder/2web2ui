@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Templates SubaccountSection on create should render radio group 1`] = `
+<Panel.Section>
+  <div>
+    <Field
+      component={[Function]}
+      name="assignTo"
+      options={
+        Array [
+          Object {
+            "label": "Assign to Master Account",
+            "value": "master",
+          },
+          Object {
+            "label": "Share with all Subaccounts",
+            "value": "shared",
+          },
+          Object {
+            "label": "Assign to Subaccount",
+            "value": "subaccount",
+          },
+        ]
+      }
+      title="Subaccount Assignment"
+    />
+  </div>
+</Panel.Section>
+`;
+
+exports[`Templates SubaccountSection on create should render subaccount typeahead 1`] = `
+<Field
+  component={[Function]}
+  name="subaccount"
+/>
+`;
+
+exports[`Templates SubaccountSection on edit should render a disabled subaccount field 1`] = `
+<Panel.Section>
+  <Field
+    component={[Function]}
+    disabled={true}
+    label="Subaccount"
+    name="subaccount_id"
+  />
+</Panel.Section>
+`;
+
+exports[`Templates SubaccountSection on edit should render toggle block if not assigned to subaccount 1`] = `
+<Panel.Section>
+  <Field
+    component={[Function]}
+    label="Share with all subaccounts"
+    name="shared_with_subaccounts"
+    parse={[Function]}
+    type="checkbox"
+  />
+</Panel.Section>
+`;

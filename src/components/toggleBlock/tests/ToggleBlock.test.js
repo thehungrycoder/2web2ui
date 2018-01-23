@@ -19,11 +19,12 @@ describe('ToggleBlock', () => {
     wrapper = shallow(<ToggleBlock {...props} />);
   });
 
-  afterEach(() => {
-    wrapper.unmount();
-  });
-
   it('should render', () => {
     expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should not render helptext if it is not provided', () => {
+    wrapper.setProps({ helpText: null });
+    expect(wrapper.find('p')).toHaveLength(0);
   });
 });

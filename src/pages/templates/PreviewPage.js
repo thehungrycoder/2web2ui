@@ -5,7 +5,7 @@ import { Page, Panel, TextField } from '@sparkpost/matchbox';
 import emailAddresses from 'email-addresses';
 
 import { ApiErrorBanner, Loading } from 'src/components';
-import PreviewPanel from './PreviewPanel';
+import PreviewPanel from './components/PreviewPanel';
 
 export default class PreviewPage extends Component {
   static defaultProps = {

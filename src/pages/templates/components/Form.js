@@ -1,16 +1,12 @@
 /* eslint max-lines: ["error", 200] */
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Field, change } from 'redux-form';
-import { list as listDomains } from 'src/actions/sendingDomains';
-import { selectDomainsBySubaccount } from 'src/selectors/templates';
-import { hasSubaccounts } from 'src/selectors/subaccounts';
+import { Field } from 'redux-form';
 import config from 'src/config';
 
 // Components
 import { Panel } from '@sparkpost/matchbox';
-import ToggleBlock from './ToggleBlock';
-import SubaccountSection from './SubaccountSection';
+import ToggleBlock from 'src/components/toggleBlock/ToggleBlock';
+import SubaccountSection from './containers/SubaccountSection.container';
 import { TextFieldWrapper } from 'src/components';
 import FromEmailWrapper from './FromEmail';
 
@@ -21,7 +17,7 @@ import { ID_ALLOWED_CHARS, idSyntax, emailOrSubstitution, substitution } from '.
 
 import styles from './FormEditor.module.scss';
 
-export class Form extends Component {
+export default class Form extends Component {
   // Fills in ID based on Name
   handleIdFill = (e) => {
     const { newTemplate, change, name } = this.props;
@@ -62,6 +58,9 @@ export class Form extends Component {
     return undefined;
   }
 
+  // Prevents unchecked value from equaling ""
+  parseToggle = (value) => !!value
+
   render() {
     const { newTemplate, published, domains, hasSubaccounts, name } = this.props;
 
@@ -92,11 +91,11 @@ export class Form extends Component {
         <Panel>
           <Panel.Section>
             <Field
-              name='content.from.name'
+              name='content.subject'
               component={TextFieldWrapper}
-              label='From Name'
-              helpText='A friendly from for your recipients.'
+              label='Subject'
               disabled={published}
+              validate={required}
             />
 
             <Field
@@ -110,20 +109,20 @@ export class Form extends Component {
             />
 
             <Field
+              name='content.from.name'
+              component={TextFieldWrapper}
+              label='From Name'
+              helpText='A friendly from for your recipients.'
+              disabled={published}
+            />
+
+            <Field
               name='reply_to'
               component={TextFieldWrapper}
               label='Reply To'
               helpText='An email address recipients can reply to.'
               disabled={published}
               validate={emailOrSubstitution}
-            />
-
-            <Field
-              name='content.subject'
-              component={TextFieldWrapper}
-              label='Subject'
-              disabled={published}
-              validate={required}
             />
 
             <Field
@@ -142,7 +141,7 @@ export class Form extends Component {
               component={ToggleBlock}
               label='Track Opens'
               type='checkbox'
-              parse={(value) => !!value} // Prevents unchecked value from equaling ""
+              parse={this.parseToggle}
               disabled={published}
             />
 
@@ -151,7 +150,7 @@ export class Form extends Component {
               component={ToggleBlock}
               label='Track Clicks'
               type='checkbox'
-              parse={(value) => !!value}
+              parse={this.parseToggle}
               disabled={published}
             />
           </Panel.Section>
@@ -162,7 +161,7 @@ export class Form extends Component {
               component={ToggleBlock}
               label='Transactional'
               type='checkbox'
-              parse={(value) => !!value}
+              parse={this.parseToggle}
               helpText='Transactional messages are triggered by a user’s actions on the website, like requesting a password reset, signing up, or making a purchase.'
               disabled={published}
             />
@@ -172,10 +171,3 @@ export class Form extends Component {
     );
   }
 }
-
-const mapStateToProps = (state, props) => ({
-  domains: selectDomainsBySubaccount(state, props),
-  hasSubaccounts: hasSubaccounts(state)
-});
-
-export default connect(mapStateToProps, { change, listDomains })(Form);
