@@ -1,8 +1,7 @@
 import React from 'react';
 import { DelayPage } from '../DelayPage';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import * as reportHelpers from 'src/helpers/reports';
-import { renderRowData } from 'src/__testHelpers__/renderHelpers';
 
 jest.mock('src/helpers/reports');
 
@@ -69,11 +68,6 @@ describe('DelayPage: ', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should show empty message when there are no reasons', () => {
-    wrapper.setProps({ reasons: null });
-    expect(wrapper).toMatchSnapshot();
-  });
-
   it('should show loading panel when aggregates are still loading', () => {
     wrapper.setProps({ aggregatesLoading: true });
     expect(wrapper).toMatchSnapshot();
@@ -89,18 +83,6 @@ describe('DelayPage: ', () => {
     reportHelpers.parseSearch = jest.fn(() => ({ options: {}, filters: ['1', '2', '3']}));
     wrapper.instance().parseSearch();
     expect(props.addFilters).toHaveBeenCalledWith(['1', '2', '3']);
-  });
-
-  it('should render row data properly', () => {
-    const rows = wrapper.instance().getRowData({ reason: 'bad delay', count_delayed: 1, count_delayed_first: 10, domain: 'gmail.com' });
-    expect(renderRowData(rows)).toMatchSnapshot();
-  });
-
-  it('should filter by domain', () => {
-    const rows = wrapper.instance().getRowData({ reason: 'bad delay', count_delayed: 1, count_delayed_first: 10, domain: 'gmail.com' });
-    const link = mount(rows[1]);
-    link.find('UnstyledLink').simulate('click');
-    expect(props.addFilters).toHaveBeenCalledWith([{ type: 'Recipient Domain', value: 'gmail.com' }]);
   });
 
   it('should show modal toggle', () => {

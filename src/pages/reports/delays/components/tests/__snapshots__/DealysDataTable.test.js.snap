@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DelaysDataTable:  should render page 1`] = `
+<Empty
+  message="No delay reasons to report"
+  title="Delayed Messages"
+/>
+`;
+
+exports[`DelaysDataTable:  should render row data properly 1`] = `
+Array [
+  <LongTextContainer
+    text="bad delay"
+  >
+    <div>
+      bad delay
+    </div>
+  </LongTextContainer>,
+  <UnstyledLink
+    onClick={[Function]}
+  >
+    <a
+      onClick={[Function]}
+    >
+      gmail.com
+    </a>
+  </UnstyledLink>,
+  1,
+  <span>
+    10
+     (
+    <Percent
+      value={20}
+    >
+      20%
+    </Percent>
+    )
+  </span>,
+]
+`;
+
+exports[`DelaysDataTable:  should show empty message when there are no reasons 1`] = `
+<Empty
+  message="No delay reasons to report"
+  title="Delayed Messages"
+/>
+`;
