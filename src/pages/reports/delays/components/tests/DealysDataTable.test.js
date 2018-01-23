@@ -7,7 +7,7 @@ describe('DelaysDataTable: ', () => {
   let wrapper;
 
   const props = {
-    list: [
+    rows: [
       {
         count_delayed: 100,
         count_delayed_first: 1,
@@ -32,7 +32,9 @@ describe('DelaysDataTable: ', () => {
   });
 
   it('should show empty message when there are no reasons', () => {
-    wrapper.setProps({ list: null });
+    wrapper.setProps({ rows: null });
+    expect(wrapper).toMatchSnapshot();
+    wrapper.setProps({ rows: []});
     expect(wrapper).toMatchSnapshot();
   });
 

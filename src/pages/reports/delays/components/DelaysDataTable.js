@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 import { TableCollection, Empty, LongTextContainer } from 'src/components';
 import { UnstyledLink } from '@sparkpost/matchbox';
 import { Percent } from 'src/components/formatters';
 
-const columns = [{ label: 'Reason', width: '45%' }, 'Domain', 'Delayed', 'Delayed First Attempt (%)'];
+const columns = [
+  { label: 'Reason', sortKey: 'reason', width: '45%' },
+  { label: 'Domain', sortKey: 'domain' },
+  { label: 'Delayed', sortKey: 'count_delayed' },
+  { label: 'Delayed First Attempt (%)', sortKey: 'count_delayed_first' }
+];
 
 export class DelaysDataTable extends Component {
   getRowData = (rowData) => {
@@ -20,7 +26,7 @@ export class DelaysDataTable extends Component {
   render() {
     const { rows } = this.props;
 
-    if (!rows) {
+    if (_.isEmpty(rows)) {
       return <Empty title={'Delayed Messages'} message={'No delay reasons to report'} />;
     }
 
@@ -29,6 +35,8 @@ export class DelaysDataTable extends Component {
       rows={rows}
       getRowData={this.getRowData}
       pagination={true}
+      defaultSortColumn='count_delayed'
+      defaultSortDirection='desc'
     />;
   }
 }
