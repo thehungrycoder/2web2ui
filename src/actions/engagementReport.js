@@ -15,3 +15,18 @@ export function getChartData({ getMetrics = metrics.fetch } = {}) {
     }));
   };
 }
+
+export function getTableData({ getMetrics = metrics.fetch } = {}) {
+  return (dispatch, getState) => {
+    const params = getQueryFromOptions(getState().reportFilters);
+
+    return dispatch(getMetrics({
+      params: {
+        ...params,
+        metrics: 'count_clicked,count_raw_clicked_approx'
+      },
+      path: 'deliverability/link-name',
+      type: 'GET_ENGAGEMENT_TABLE_DATA'
+    }));
+  };
+}

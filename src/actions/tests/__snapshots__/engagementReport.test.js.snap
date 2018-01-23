@@ -13,3 +13,17 @@ Object {
   "type": "GET_ENGAGEMENT_CHART_DATA",
 }
 `;
+
+exports[`params to get engagement table data 1`] = `
+Object {
+  "params": Object {
+    "delimiter": ",",
+    "from": "1970-01-01T00:00",
+    "metrics": "count_clicked,count_raw_clicked_approx",
+    "precision": "hour",
+    "to": "1970-01-02T00:00",
+  },
+  "path": "deliverability/link-name",
+  "type": "GET_ENGAGEMENT_TABLE_DATA",
+}
+`;
