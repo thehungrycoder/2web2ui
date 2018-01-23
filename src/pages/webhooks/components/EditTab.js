@@ -43,10 +43,10 @@ class EditTab extends Component {
     const update = prepareWebhookUpdate(values, webhook, allEvents);
 
     if (Object.keys(update).length !== 0) {
-      return this.props.updateWebhook(webhook.id, update)
+      return this.props.updateWebhook({ id: webhook.id, subaccount: update.subaccount_id, ...update })
         .then(() => {
           this.setState({ showBanner: true });
-          this.props.getWebhook(webhook.id);
+          this.props.getWebhook({ id: webhook.id, subaccountId: update.subaccount_id });
         })
         .catch((err) => {
           this.setState({ showBanner: true });

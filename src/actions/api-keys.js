@@ -29,6 +29,20 @@ export function createApiKey(key) {
       );
 }
 
+export function getApiKey({ id, subaccountId }) {
+  const headers = setSubaccountHeader(subaccountId);
+
+  return sparkpostApiRequest({
+    type: 'GET_API_KEY',
+    meta: {
+      method: 'GET',
+      url: `/api-keys/${id}`,
+      headers
+    }
+  });
+
+}
+
 export function deleteApiKey(id) {
   return (dispatch) =>
     dispatch(

@@ -5,6 +5,7 @@ const initialState = {
   subaccountGrantsLoading: false,
   keys: [],
   keysLoading: false,
+  key: {},
   error: null,
   newKey: null
 };
@@ -23,6 +24,15 @@ export default (state = initialState, { payload, type }) => {
     case 'LIST_API_KEYS_FAIL': {
       return { ...state, keysLoading: false, error: payload };
     }
+
+    case 'GET_API_KEY_PENDING':
+      return { ...state, keyLoading: true };
+
+    case 'GET_API_KEY_SUCCESS':
+      return { ...state, keyLoading: false, key: payload };
+
+    case 'GET_API_KEY_FAIL':
+      return { ...state, error: payload, keyLoading: false };
 
     // LIST_GRANTS
     case 'LIST_GRANTS_PENDING': {

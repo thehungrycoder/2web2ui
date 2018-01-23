@@ -70,6 +70,7 @@ export const CheckboxWrapper = ({ input, meta, ...rest }) => {
  *   subaccounts={subaccountsFromReduxStore}
  * />
  */
+// TODO Pass through disabled
 export const SubaccountTypeaheadWrapper = ({ input, subaccounts, label, placeholder, meta }) => {
   const { active, error, touched } = meta;
   return (

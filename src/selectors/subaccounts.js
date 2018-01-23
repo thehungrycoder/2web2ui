@@ -37,3 +37,5 @@ export const selectDetailTabs = createSelector(
     }
   ])
 );
+
+export const selectSubaccountIdFromQuery = (props) => qs.parse(props.location.search).subaccount;

@@ -2,11 +2,12 @@ import _ from 'lodash';
 import resolveAuthUpdates from './resolveAuthUpdates';
 
 export default function(values, webhook, allEvents) {
-  const { name, target } = values;
+  const { name, target, subaccount_id } = values;
   const update = {
     ...resolveAuthUpdates(values, webhook),
     name,
-    target
+    target,
+    subaccount_id
   };
 
   const checkedEvents = _.concat(

@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 
 import { createApiKey, listGrants, listSubaccountGrants } from 'src/actions/api-keys';
-import { list as listSubaccounts } from 'src/actions/subaccounts';
 import { getFormLoading } from 'src/selectors/api-keys';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
 
@@ -22,7 +21,6 @@ export class CreatePage extends React.Component {
     this.props.listGrants();
     if (this.props.hasSubaccounts) {
       this.props.listSubaccountGrants();
-      this.props.listSubaccounts();
     }
   }
 
@@ -58,5 +56,5 @@ const mapStateToProps = (state, props) => ({
 });
 
 export default withRouter(
-  connect(mapStateToProps, { createApiKey, listGrants, listSubaccountGrants, listSubaccounts })(CreatePage)
+  connect(mapStateToProps, { createApiKey, listGrants, listSubaccountGrants })(CreatePage)
 );

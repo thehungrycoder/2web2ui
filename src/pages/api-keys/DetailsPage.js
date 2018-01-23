@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import { Page, Panel } from '@sparkpost/matchbox';
 
-import { deleteApiKey, listApiKeys, updateApiKey, listGrants, listSubaccountGrants } from 'src/actions/api-keys';
-import { list as listSubaccounts } from 'src/actions/subaccounts';
+import { deleteApiKey, getApiKey, updateApiKey, listGrants, listSubaccountGrants } from 'src/actions/api-keys';
 
 import { hasSubaccounts } from 'src/selectors/subaccounts';
-import { getApiKey, getFormLoading } from 'src/selectors/api-keys';
+import { getFormLoading, selectApiKeyId } from 'src/selectors/api-keys';
+import { selectSubaccountIdFromQuery } from 'src/selectors/subaccounts';
 
 import { Loading, DeleteModal } from 'src/components';
 import ApiKeyForm from './components/ApiKeyForm';
@@ -35,11 +35,11 @@ export class ApiKeysDetailsPage extends Component {
   }
 
   componentDidMount() {
-    this.props.listApiKeys();
-    this.props.listGrants();
+    const { subaccountId, id } = this.props;
+    this.props.getApiKey({ id, subaccountId });
+
     if (this.props.hasSubaccounts) {
       this.props.listSubaccountGrants();
-      this.props.listSubaccounts();
     }
   }
 
@@ -96,27 +96,16 @@ const mapStateToProps = (state, props) => {
   const { error, grants } = state.apiKeys;
 
   return {
-    apiKey: getApiKey(state, props),
+    apiKey: state.apiKeys.key,
+    id: selectApiKeyId(props),
     error,
     grants,
     hasSubaccounts: hasSubaccounts(state),
-    loading: getFormLoading(state) || state.apiKeys.keysLoading
-  };
-};
-
-const mapDispatchToProps = (dispatch, props) => {
-  const { id } = props.match.params;
-
-  return {
-    deleteApiKey: () => dispatch(deleteApiKey(id)),
-    listApiKeys: () => dispatch(listApiKeys()),
-    updateApiKey: (values) => dispatch(updateApiKey(id, values)),
-    listGrants: () => dispatch(listGrants()),
-    listSubaccountGrants: () => dispatch(listSubaccountGrants()),
-    listSubaccounts: () => dispatch(listSubaccounts())
+    loading: getFormLoading(state) || state.apiKeys.keysLoading,
+    subaccountId: selectSubaccountIdFromQuery(props)
   };
 };
 
 export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(ApiKeysDetailsPage)
+  connect(mapStateToProps, { getApiKey, updateApiKey, listGrants, listSubaccountGrants, deleteApiKey })(ApiKeysDetailsPage)
 );

@@ -2,6 +2,7 @@ import React from 'react';
 import { Field } from 'redux-form';
 import { required, maxLength } from 'src/helpers/validation';
 import { TextFieldWrapper, SelectWrapper, RadioGroup } from 'src/components';
+import { SubaccountTypeaheadWrapper } from 'src/components/reduxFormWrappers';
 
 const BasicAuthFields = () => (
   <div>
@@ -61,6 +62,12 @@ const AuthDropDown = () => (
   />
 );
 
+const SubaccountField = ({ disabled }) => (<Field
+  component={SubaccountTypeaheadWrapper}
+  name='subaccount'
+  disabled={disabled}
+/>);
+
 
 export {
   NameField,
@@ -68,5 +75,6 @@ export {
   EventsRadioGroup,
   AuthDropDown,
   BasicAuthFields,
-  OAuth2Fields
+  OAuth2Fields,
+  SubaccountField
 };

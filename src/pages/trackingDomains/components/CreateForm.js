@@ -23,7 +23,6 @@ export class CreateForm extends Component {
             />
             <Field
               component={SubaccountTypeaheadWrapper}
-              label='Assign to Subaccount'
               name='subaccount'
               disabled={submitting}
             />
@@ -38,5 +37,6 @@ export class CreateForm extends Component {
 const formOptions = {
   form: 'createTrackingDomain'
 };
+
 
 export default reduxForm(formOptions)(CreateForm);

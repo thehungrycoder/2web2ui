@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { list as getSubaccountsList } from 'src/actions/subaccounts';
 import { ActionList, Button, TextField } from '@sparkpost/matchbox';
+import { hasSubaccounts } from 'src/selectors/subaccounts';
 
 import sortMatch from 'src/helpers/sortMatch';
 import Item from './SubaccountTypeaheadItem';
@@ -103,7 +104,7 @@ SubaccountTypeahead.defaultProps = {
 };
 
 const mapStateToProps = (state) => ({
-  hasSubaccounts: state.currentUser.has_subaccounts,
+  hasSubaccounts: hasSubaccounts(state),
   subaccounts: state.subaccounts.list
 });
 export default connect(mapStateToProps, { getSubaccountsList })(SubaccountTypeahead);

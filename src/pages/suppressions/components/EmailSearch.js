@@ -36,7 +36,7 @@ export class FilterForm extends Component {
   }
 
   render() {
-    const { subaccounts, hasSubaccounts } = this.props;
+    const { hasSubaccounts } = this.props;
 
     return (
       <Grid>
@@ -53,20 +53,17 @@ export class FilterForm extends Component {
             />
           </div>
         </Grid.Column>
-        { hasSubaccounts &&
         <Grid.Column xs={12} md={6}>
           <div>
             <Field
               name="subaccount"
               component={SubaccountTypeaheadWrapper}
-              subaccounts={subaccounts}
               label=''
               onChange={this.handleSubaccountSelect}
               placeholder='Subaccount'
             />
           </div>
         </Grid.Column>
-        }
       </Grid>
     );
   }

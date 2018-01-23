@@ -4,6 +4,7 @@ import { withRouter, Link, Route } from 'react-router-dom';
 
 // Actions
 import { getWebhook, deleteWebhook } from '../../actions/webhooks';
+import { selectSubaccountIdFromQuery } from 'src/selectors/subaccounts';
 
 // Components
 import { Loading, DeleteModal } from 'src/components';
@@ -21,7 +22,8 @@ export class WebhooksDetails extends Component {
     Dispatches getWebhook action
   */
   componentDidMount() {
-    this.props.getWebhook(this.props.match.params.id);
+    const { subaccountId } = this.props;
+    this.props.getWebhook({ id: this.props.match.params.id, subaccountId });
   }
 
   /*
@@ -101,10 +103,11 @@ export class WebhooksDetails extends Component {
   }
 }
 
-const mapStateToProps = ({ webhooks }) => ({
+const mapStateToProps = ({ webhooks }, props) => ({
   webhook: webhooks.webhook,
   getLoading: webhooks.getLoading,
-  eventDocs: webhooks.docs
+  eventDocs: webhooks.docs,
+  subaccountId: selectSubaccountIdFromQuery(props)
 });
 
 export default withRouter(connect(mapStateToProps, { getWebhook, deleteWebhook })(WebhooksDetails));

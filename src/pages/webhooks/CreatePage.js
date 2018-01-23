@@ -23,11 +23,12 @@ export class WebhooksCreate extends Component {
     with it. Invoked in the form's onSubmit func
   */
   createWebhook(values, eventsTree) {
-    const { name, target, eventsRadio, auth } = values;
+    const { name, target, subaccount, eventsRadio, auth } = values;
 
     const webhook = {
-      name: name,
-      target: target
+      name,
+      target,
+      subaccount
     };
 
     let events;
@@ -64,7 +65,9 @@ export class WebhooksCreate extends Component {
         break;
     }
 
-    return this.props.createWebhook(webhook).then(() => this.props.history.push('/webhooks'));
+    return this.props.createWebhook(webhook).then(() => {
+      history.push('/webhooks');
+    });
   }
 
   /*
@@ -85,7 +88,7 @@ export class WebhooksCreate extends Component {
   }
 
   render() {
-    const { eventDocs, eventsLoading } = this.props;
+    const { eventDocs, eventsLoading } = this.props; // Form doesn't load until we have events
     const eventsTree = this.buildEventsData(eventDocs);
 
     if (eventsLoading) {

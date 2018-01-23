@@ -16,7 +16,6 @@ import {
   getInitialSubaccount,
   getInitialValues
 } from 'src/selectors/api-keys';
-import { hasSubaccounts } from 'src/selectors/subaccounts';
 import validIpList from '../helpers/validIpList';
 import { required } from 'src/helpers/validation';
 import GrantsCheckboxes from './GrantsCheckboxes';
@@ -32,10 +31,8 @@ export class ApiKeyForm extends Component {
     const {
       grants,
       subaccountGrants,
-      subaccounts,
       isNew,
       handleSubmit,
-      hasSubaccounts,
       pristine,
       showGrants,
       showSubaccountGrants,
@@ -47,31 +44,29 @@ export class ApiKeyForm extends Component {
     return (
       <form onSubmit={handleSubmit}>
         <Field
-          name="label"
+          name='label'
           component={TextFieldWrapper}
           validate={required}
-          label="API Key Name"
+          label='API Key Name'
         />
-        { hasSubaccounts &&
-          <Field
-            name="subaccount"
-            component={SubaccountTypeaheadWrapper}
-            subaccounts={subaccounts}
-          />
-        }
         <Field
-          name="grantsRadio"
+          name='subaccount'
+          component={SubaccountTypeaheadWrapper}
+          disabled={!isNew}
+        />
+        <Field
+          name='grantsRadio'
           component={RadioGroup}
-          title="API Permissions"
+          title='API Permissions'
           options={grantsOptions}
         />
         <GrantsCheckboxes grants={showSubaccountGrants ? subaccountGrants : grants} show={showGrants} />
         <Field
-          name="validIps"
+          name='validIps'
           component={TextFieldWrapper}
-          label="Allowed IPs"
-          helpText="Leaving the field blank will allow access by valid API keys from any IP address."
-          placeholder="10.20.30.40, 10.20.30.0/24"
+          label='Allowed IPs'
+          helpText='Leaving the field blank will allow access by valid API keys from any IP address.'
+          placeholder='10.20.30.40, 10.20.30.0/24'
           validate={validIpList}
         />
 
@@ -86,9 +81,7 @@ export class ApiKeyForm extends Component {
 const valueSelector = formValueSelector(formName);
 const mapStateToProps = (state, props) => ({
   grants: getGrants(state),
-  hasSubaccounts: hasSubaccounts(state),
   subaccountGrants: getSubaccountGrants(state),
-  subaccounts: state.subaccounts.list,
   showSubaccountGrants: !!valueSelector(state, 'subaccount'),
   showGrants: valueSelector(state, 'grantsRadio') === 'select',
   isNew: getIsNew(state, props),

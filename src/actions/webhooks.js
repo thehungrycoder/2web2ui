@@ -1,4 +1,5 @@
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
+import setSubaccountHeader from './helpers/setSubaccountHeader';
 
 // TODO: support timezone param?
 export function listWebhooks() {
@@ -11,55 +12,66 @@ export function listWebhooks() {
   });
 }
 
-export function getWebhook(id) {
+export function getWebhook({ id, subaccountId = null }) {
+  const headers = setSubaccountHeader(subaccountId);
+
   return sparkpostApiRequest({
     type: 'GET_WEBHOOK',
     meta: {
       method: 'GET',
-      url: `/webhooks/${id}`
+      url: `/webhooks/${id}`,
+      headers
     }
   });
 }
 
-export function createWebhook(webhook) {
+export function createWebhook({ subaccount, ...data }) {
+  const headers = setSubaccountHeader(subaccount);
   return sparkpostApiRequest({
     type: 'CREATE_WEBHOOK',
     meta: {
       method: 'POST',
       url: '/webhooks',
-      data: webhook
+      data,
+      headers
     }
   });
 }
 
-export function updateWebhook(id, update) {
+export function updateWebhook({ id, subaccount = null, ...data }) {
+  const headers = setSubaccountHeader(subaccount);
   return sparkpostApiRequest({
     type: 'UPDATE_WEBHOOK',
     meta: {
       method: 'PUT',
       url: `/webhooks/${id}`,
-      data: update
+      data,
+      headers
     }
   });
 }
 
-export function deleteWebhook(id) {
+export function deleteWebhook({ id, subaccount }) {
+  const headers = setSubaccountHeader(subaccount);
   return sparkpostApiRequest({
     type: 'DELETE_WEBHOOK',
     meta: {
       method: 'DELETE',
-      url: `/webhooks/${id}`
+      url: `/webhooks/${id}`,
+      headers
     }
   });
 }
 
-export function testWebhook(id, payload) {
+export function testWebhook({ id, subaccount, ...data }) {
+  const headers = setSubaccountHeader(subaccount);
   return sparkpostApiRequest({
     type: 'TEST_WEBHOOK',
     meta: {
       method: 'POST',
       url: `/webhooks/${id}/validate`,
-      data: { message: payload }
+      data,
+      headers
     }
   });
 }
