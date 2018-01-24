@@ -19,7 +19,7 @@ const columns = [
 
 const getRowData = (batch) => [batch.formatted_time, batch.batch_id, batch.status, batch.attempts, batch.response_code];
 
-class BatchTab extends Component {
+export class BatchTab extends Component {
   state = {
     refreshing: false
   };
