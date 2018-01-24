@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
+import { reduxForm } from 'redux-form';
 
 import { get as getDomain } from 'src/actions/sendingDomains';
 import { Loading, ApiErrorBanner } from 'src/components';
 import { Page } from '@sparkpost/matchbox';
+import { EditBounce } from './components/EditBounce';
 
 const breadcrumbAction = {
   content: 'Sending Domains',
@@ -30,6 +32,12 @@ export class EditPage extends Component {
     />;
   }
 
+  renderPage() {
+    return (
+      <EditBounce domain={this.props.match.params.id} />
+    );
+  }
+
   render() {
     const { getLoading, getError, match: { params: { id }}} = this.props;
 
@@ -42,7 +50,7 @@ export class EditPage extends Component {
         title={`Edit ${id}`}
         breadcrumbAction={breadcrumbAction}
       >
-        {getError ? this.renderError() : 'Coming soon'}
+        {getError ? this.renderError() : this.renderPage()}
 
       </Page>
     );
@@ -55,4 +63,11 @@ const mapStateToProps = ({ sendingDomains: { domain, getError, getLoading }}) =>
   getLoading
 });
 
-export default withRouter(connect(mapStateToProps, { getDomain })(EditPage));
+const FORM_NAME = 'templateEdit';
+
+const formOptions = {
+  form: FORM_NAME,
+  enableReinitialize: true // required to update initial values from redux state
+};
+
+export default withRouter(connect(mapStateToProps, { getDomain })(reduxForm(formOptions)(EditPage)));
