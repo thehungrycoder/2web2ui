@@ -1,4 +1,4 @@
-const initialState = { list: null, hasSuppressions: false, listLoading: false };
+const initialState = { list: null, hasSuppressions: null, listLoading: false };
 
 export default (state = initialState, action) => {
   const { meta } = action;

@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-
 import { Panel } from '@sparkpost/matchbox';
 import TutorialItem from './TutorialItem';
 
-// TODO: update when page is built
-const sendingDomainUrl = 'account/profile';
+const sendingDomainUrl = 'account/sending-domains';
 
 export class Tutorial extends Component {
   render() {
@@ -13,11 +11,12 @@ export class Tutorial extends Component {
       hasSendingDomains,
       hasVerifiedDomains,
       hasApiKeysForSending,
-      hasBounceDomains
+      hasBounceDomains,
+      hasSentThisMonth
     } = this.props;
 
     return (
-      <Panel title='Getting Started'>
+      <Panel title='Getting Started Checklist'>
         <Panel.Section>
           <TutorialItem
             label='Verify your email address'
@@ -59,6 +58,14 @@ export class Tutorial extends Component {
             labelLink='account/api-keys'
             completed={hasApiKeysForSending}>
             <p>You'll need to create an API key to use our API or SMTP integration.</p>
+          </TutorialItem>
+        </Panel.Section>
+
+        <Panel.Section>
+          <TutorialItem
+            label='Send an email this month'
+            completed={hasSentThisMonth}>
+            <p>Get sending!</p>
           </TutorialItem>
         </Panel.Section>
       </Panel>

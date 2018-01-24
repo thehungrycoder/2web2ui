@@ -6,6 +6,7 @@ import TutorialItem from '../TutorialItem';
 describe('Component: TutorialItem', () => {
   const props = {
     label: 'my item',
+    completed: false,
     children: ['Evie', 'Levon']
   };
 
@@ -15,7 +16,7 @@ describe('Component: TutorialItem', () => {
     wrapper = shallow(<TutorialItem {...props} />);
   });
 
-  it('should show default email banner', () => {
+  it('should render correctly by default', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -24,10 +25,14 @@ describe('Component: TutorialItem', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should provide a link on a label', () => {
+  it('should ignore a label link and children when the item is completed', () => {
+    wrapper.setProps({ labelLink: '/go/to/here', completed: true });
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render the link and children when not completed', () => {
     wrapper.setProps({ labelLink: '/go/to/here' });
     expect(wrapper).toMatchSnapshot();
-
   });
 
 });
