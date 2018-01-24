@@ -31,10 +31,6 @@ describe('Action Creator: Accepted Report', () => {
     getStateMock = jest.fn(() => stateMock);
   });
 
-  afterEach(() => {
-    jest.resetAllMocks();
-  });
-
   it('should dispatch a chart refresh action', async() => {
     const thunk = acceptedReport.refreshAcceptedMetrics();
     await thunk(dispatchMock, getStateMock);

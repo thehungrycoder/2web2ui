@@ -53,10 +53,6 @@ describe('BouncePage: ', () => {
     wrapper = shallow(<BouncePage {...props} />);
   });
 
-  afterEach(() => {
-    jest.resetAllMocks();
-  });
-
   it('should render', () => {
     expect(props.refreshBounceChartMetrics).toHaveBeenCalled();
     expect(props.refreshBounceTableMetrics).toHaveBeenCalled();

@@ -55,8 +55,6 @@ describe('RejectionPage: ', () => {
     wrapper = shallow(<RejectionPage {...props} />);
   });
 
-  afterEach(() => { jest.resetAllMocks(); });
-
   it('renders correctly', () => {
     expect(spyParseSearch).toHaveBeenCalledTimes(1);
     expect(props.refreshTypeaheadCache).toHaveBeenCalled();

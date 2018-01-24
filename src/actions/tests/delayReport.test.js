@@ -28,10 +28,6 @@ describe('Action Creator: Delay Report', () => {
     getStateMock = jest.fn(() => stateMock);
   });
 
-  afterEach(() => {
-    jest.resetAllMocks();
-  });
-
   it('should dispatch delay reasons by domain and refresh table', async() => {
     const thunk = delayReport.loadDelayReasonsByDomain();
     await thunk(dispatchMock, getStateMock);
