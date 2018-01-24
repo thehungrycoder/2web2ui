@@ -16,8 +16,8 @@ exports[`EmailSearch renders correctly 1`] = `
         title="Email"
         validate={
           Array [
-            [Function],
-            [Function],
+            [MockFunction],
+            [MockFunction],
           ]
         }
       />
@@ -42,8 +42,8 @@ exports[`EmailSearch renders correctly with subaccounts 1`] = `
         title="Email"
         validate={
           Array [
-            [Function],
-            [Function],
+            [MockFunction],
+            [MockFunction],
           ]
         }
       />

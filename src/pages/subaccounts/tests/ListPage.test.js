@@ -32,7 +32,6 @@ const props = {
 let wrapper;
 
 beforeEach(() => {
-  jest.clearAllMocks();
   wrapper = shallow(<ListPage {...props} />);
 });
 

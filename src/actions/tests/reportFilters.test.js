@@ -19,7 +19,6 @@ describe('Action Creator: Report Filters', () => {
 
   beforeEach(() => {
     dispatchMock = jest.fn((a) => Promise.resolve(a));
-    jest.resetAllMocks();
   });
 
   it('should call all requests on refresh', async() => {

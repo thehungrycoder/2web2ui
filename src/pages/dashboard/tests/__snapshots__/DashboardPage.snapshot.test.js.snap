@@ -20,15 +20,37 @@ exports[`Page: Dashboard tests should correctly render page when user is not ver
       }
     }
     accountAgeInWeeks={0}
-    checkSuppression={[Function]}
+    checkSuppression={
+      [MockFunction] {
+        "calls": Array [
+          Array [],
+        ],
+      }
+    }
     currentUser={
       Object {
         "email_verfied": false,
       }
     }
     hasSuppressions={true}
-    listApiKeys={[Function]}
-    listSendingDomains={[Function]}
+    listApiKeys={
+      [MockFunction] {
+        "calls": Array [
+          Array [
+            Object {
+              "id": 0,
+            },
+          ],
+        ],
+      }
+    }
+    listSendingDomains={
+      [MockFunction] {
+        "calls": Array [
+          Array [],
+        ],
+      }
+    }
   />
 </Page>
 `;
@@ -49,15 +71,37 @@ exports[`Page: Dashboard tests should display upgrade CTA when account is free a
       }
     }
     accountAgeInWeeks={0}
-    checkSuppression={[Function]}
+    checkSuppression={
+      [MockFunction] {
+        "calls": Array [
+          Array [],
+        ],
+      }
+    }
     currentUser={
       Object {
         "email_verified": true,
       }
     }
     hasSuppressions={true}
-    listApiKeys={[Function]}
-    listSendingDomains={[Function]}
+    listApiKeys={
+      [MockFunction] {
+        "calls": Array [
+          Array [
+            Object {
+              "id": 0,
+            },
+          ],
+        ],
+      }
+    }
+    listSendingDomains={
+      [MockFunction] {
+        "calls": Array [
+          Array [],
+        ],
+      }
+    }
   />
 </Page>
 `;
@@ -94,15 +138,37 @@ exports[`Page: Dashboard tests should render import suppression list when 0 supp
       }
     }
     accountAgeInWeeks={40}
-    checkSuppression={[Function]}
+    checkSuppression={
+      [MockFunction] {
+        "calls": Array [
+          Array [],
+        ],
+      }
+    }
     currentUser={
       Object {
         "email_verified": true,
       }
     }
     hasSuppressions={false}
-    listApiKeys={[Function]}
-    listSendingDomains={[Function]}
+    listApiKeys={
+      [MockFunction] {
+        "calls": Array [
+          Array [
+            Object {
+              "id": 0,
+            },
+          ],
+        ],
+      }
+    }
+    listSendingDomains={
+      [MockFunction] {
+        "calls": Array [
+          Array [],
+        ],
+      }
+    }
   />
 </Page>
 `;
@@ -123,15 +189,37 @@ exports[`Page: Dashboard tests should render page correctly with defaults 1`] = 
       }
     }
     accountAgeInWeeks={0}
-    checkSuppression={[Function]}
+    checkSuppression={
+      [MockFunction] {
+        "calls": Array [
+          Array [],
+        ],
+      }
+    }
     currentUser={
       Object {
         "email_verified": true,
       }
     }
     hasSuppressions={true}
-    listApiKeys={[Function]}
-    listSendingDomains={[Function]}
+    listApiKeys={
+      [MockFunction] {
+        "calls": Array [
+          Array [
+            Object {
+              "id": 0,
+            },
+          ],
+        ],
+      }
+    }
+    listSendingDomains={
+      [MockFunction] {
+        "calls": Array [
+          Array [],
+        ],
+      }
+    }
   />
 </Page>
 `;

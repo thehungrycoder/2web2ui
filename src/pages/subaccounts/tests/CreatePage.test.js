@@ -22,7 +22,6 @@ const props = {
 let wrapper;
 
 beforeEach(() => {
-  jest.clearAllMocks();
   wrapper = shallow(<CreatePage {...props} />);
 });
 

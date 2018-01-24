@@ -18,7 +18,6 @@ let wrapper;
 describe('RouteWatch', () => {
 
   beforeEach(() => {
-    jest.clearAllMocks();
     wrapper = shallow(<RouteWatch {...props} />);
   });
 

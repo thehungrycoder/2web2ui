@@ -130,7 +130,13 @@ exports[`IP Pools List Page should show alert upon error 1`] = `
   <ApiErrorBanner
     errorDetails="Uh oh! It broke."
     message="Sorry, we seem to have had some trouble loading your ip pools."
-    reload={[Function]}
+    reload={
+      [MockFunction] {
+        "calls": Array [
+          Array [],
+        ],
+      }
+    }
   />
 </Page>
 `;

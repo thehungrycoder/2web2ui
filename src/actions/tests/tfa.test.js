@@ -17,10 +17,6 @@ describe('Action Creator: 2FA', () => {
     dispatchMock = jest.fn((a) => Promise.resolve(a));
   });
 
-  afterEach(() => {
-    jest.resetAllMocks();
-  });
-
   it('should verify tfa and dispatch a login', async() => {
     const loginSpy = jest.spyOn(authActions, 'login');
     const thunk = tfaActions.verifyAndLogin({ authData, code: '23432432' });

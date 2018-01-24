@@ -2,7 +2,7 @@
 
 exports[`render 1`] = `
 <form
-  onSubmit={[Function]}
+  onSubmit={[MockFunction]}
 >
   <Field
     component={[Function]}
@@ -52,7 +52,7 @@ exports[`render 1`] = `
 
 exports[`submitting 1`] = `
 <form
-  onSubmit={[Function]}
+  onSubmit={[MockFunction]}
 >
   <Field
     component={[Function]}

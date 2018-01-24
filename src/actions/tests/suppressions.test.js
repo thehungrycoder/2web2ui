@@ -10,10 +10,6 @@ describe('Action Creator: Suppressions', () => {
     mockSuppression = { recipient: 'foo@bar.com', type: 'non_transactional' } ;
   });
 
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
-
   describe('deleteSuppression', () => {
     it('makes api call with correct parameter', async() => {
       await suppressions.deleteSuppression(mockSuppression);

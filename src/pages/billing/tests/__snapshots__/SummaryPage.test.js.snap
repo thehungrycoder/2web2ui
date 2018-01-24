@@ -45,7 +45,7 @@ exports[`Page: SummaryPage should handle modal toggle 1`] = `
         handler={[Function]}
       />
       <Connect(ReduxForm)
-        onCancel={[Function]}
+        onCancel={[MockFunction]}
       />
     </Modal>
   </div>

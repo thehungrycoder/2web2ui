@@ -23,7 +23,7 @@ exports[`Header Component should render 1`] = `
 exports[`Row Component should render 1`] = `
 <Table.Row
   className=""
-  onClick={[Function]}
+  onClick={[MockFunction]}
 >
   <td />
   <Table.Cell>

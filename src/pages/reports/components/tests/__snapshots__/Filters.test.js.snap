@@ -10,7 +10,7 @@ exports[`Component: Report filters should render correctly 1`] = `
       >
         <div>
           <Connect(DateFilter)
-            refresh={[Function]}
+            refresh={[MockFunction]}
           />
         </div>
       </Grid.Column>
@@ -33,7 +33,7 @@ exports[`Component: Report filters should render correctly 1`] = `
       >
         <Button
           fullWidth={true}
-          onClick={[Function]}
+          onClick={[MockFunction]}
           size="default"
         >
           Share
@@ -54,7 +54,7 @@ exports[`Component: Report filters with active tags should render 1`] = `
       >
         <div>
           <Connect(DateFilter)
-            refresh={[Function]}
+            refresh={[MockFunction]}
           />
         </div>
       </Grid.Column>
@@ -92,7 +92,7 @@ exports[`Component: Report filters with active tags should render 1`] = `
       >
         <Button
           fullWidth={true}
-          onClick={[Function]}
+          onClick={[MockFunction]}
           size="default"
         >
           Share

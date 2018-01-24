@@ -18,7 +18,7 @@ exports[`renders correctly 1`] = `
     </p>
   </div>
   <form
-    onSubmit={[Function]}
+    onSubmit={[MockFunction]}
   >
     <Field
       autoFocus={true}
@@ -58,7 +58,7 @@ exports[`renders correctly verifying tfa 1`] = `
     </p>
   </div>
   <form
-    onSubmit={[Function]}
+    onSubmit={[MockFunction]}
   >
     <Field
       autoFocus={true}

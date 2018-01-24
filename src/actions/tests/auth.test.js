@@ -22,7 +22,6 @@ describe('Action Creator: Auth', () => {
   };
 
   beforeEach(() => {
-    jest.resetAllMocks();
     dispatchMock = jest.fn((a) => Promise.resolve(a));
 
     stateMock = {
