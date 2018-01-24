@@ -22,15 +22,27 @@ exports[`Page: Message Events tests renders correctly with too many (1000) recor
     <TableCollection
       columns={
         Array [
-          "Time",
-          "Event",
-          "Recipient",
-          "Friendly From",
+          Object {
+            "label": "Time",
+            "sortKey": "timestamp",
+          },
+          Object {
+            "label": "Event",
+            "sortKey": "type",
+          },
+          Object {
+            "label": "Recipient",
+            "sortKey": "rcpt_to",
+          },
+          Object {
+            "label": "Friendly From",
+            "sortKey": "friendly_from",
+          },
           null,
         ]
       }
-      defaultSortColumn={null}
-      defaultSortDirection="asc"
+      defaultSortColumn="timestamp"
+      defaultSortDirection="desc"
       getRowData={[Function]}
       pagination={true}
       rows={
@@ -1106,15 +1118,27 @@ exports[`Page: Message Events tests should render page correctly 1`] = `
     <TableCollection
       columns={
         Array [
-          "Time",
-          "Event",
-          "Recipient",
-          "Friendly From",
+          Object {
+            "label": "Time",
+            "sortKey": "timestamp",
+          },
+          Object {
+            "label": "Event",
+            "sortKey": "type",
+          },
+          Object {
+            "label": "Recipient",
+            "sortKey": "rcpt_to",
+          },
+          Object {
+            "label": "Friendly From",
+            "sortKey": "friendly_from",
+          },
           null,
         ]
       }
-      defaultSortColumn={null}
-      defaultSortDirection="asc"
+      defaultSortColumn="timestamp"
+      defaultSortDirection="desc"
       getRowData={[Function]}
       pagination={true}
       rows={

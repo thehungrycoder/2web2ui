@@ -16,7 +16,13 @@ const maxResults = 1000;
 const maxResultsTitle = 'Note: A maximum of 1,000 results displayed';
 const maxResultsText = 'SparkPost retains message event data for 10 days.';
 
-const columns = ['Time', 'Event', 'Recipient', 'Friendly From', null];
+const columns = [
+  { label: 'Time', sortKey: 'timestamp' },
+  { label: 'Event', sortKey: 'type' },
+  { label: 'Recipient', sortKey: 'rcpt_to' },
+  { label: 'Friendly From', sortKey: 'friendly_from' },
+  null
+];
 
 export class MessageEventsPage extends Component {
 
@@ -81,6 +87,8 @@ export class MessageEventsPage extends Component {
             rows={events}
             getRowData={this.getRowData}
             pagination={true}
+            defaultSortColumn='timestamp'
+            defaultSortDirection='desc'
           />
         </div>
       );
