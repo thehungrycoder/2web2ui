@@ -60,14 +60,26 @@ exports[`Users list page renders table and hidden modal 1`] = `
     <TableCollection
       columns={
         Array [
-          "Name",
-          "Role",
-          "Email",
-          "Last Login",
+          Object {
+            "label": "Name",
+            "sortKey": "name",
+          },
+          Object {
+            "label": "Role",
+            "sortKey": "access",
+          },
+          Object {
+            "label": "Email",
+            "sortKey": "email",
+          },
+          Object {
+            "label": "Last Login",
+            "sortKey": "last_login",
+          },
           null,
         ]
       }
-      defaultSortColumn={null}
+      defaultSortColumn="name"
       defaultSortDirection="asc"
       filterBox={
         Object {
