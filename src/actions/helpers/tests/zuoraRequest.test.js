@@ -11,7 +11,6 @@ describe('Helper: Zuora API Request', () => {
   let expectedResponse;
 
   beforeEach(() => {
-    jest.clearAllMocks();
     mockStore = createMockStore({});
     action = { type: 'ZUORA_REQUEST', meta: {}};
     expectedResponse = { data: { success: true }};

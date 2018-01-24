@@ -19,10 +19,6 @@ beforeEach(() => {
   dateHelpers.getRelativeDates = jest.fn();
 });
 
-afterEach(() => {
-  jest.clearAllMocks();
-});
-
 describe('FilterForm', () => {
   it('renders correctly', () => {
     expect(wrapper).toMatchSnapshot();

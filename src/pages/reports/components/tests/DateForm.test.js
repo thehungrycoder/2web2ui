@@ -135,19 +135,13 @@ describe('Component: Date Form', () => {
       mockTo = new Date('2017-12-15');
       mockNow = new Date('2018-01-15');
       wrapper.setProps({ to: mockTo, from: mockFrom, now: mockNow });
-      jest.clearAllMocks();
     });
 
     cases('with invalid dates', ({ state, shouldReset }) => {
       wrapper.setState(state);
       instance.validate({}, shouldReset);
       expect(props.selectDates).not.toHaveBeenCalled();
-      if (shouldReset) {
-        expect(instance.syncPropsToState).toHaveBeenCalledTimes(1);
-        expect(instance.syncPropsToState).toHaveBeenCalledWith(instance.props);
-      } else {
-        expect(instance.syncPropsToState).not.toHaveBeenCalled();
-      }
+      expect(instance.syncPropsToState).toHaveBeenCalledTimes(shouldReset ? 2 : 1);
     }, [ ...shouldResetCases, ...shouldNotResetCases ]);
 
     describe('with valid dates', () => {

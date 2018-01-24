@@ -26,7 +26,6 @@ let wrapper;
 
 describe('EditTab', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
     wrapper = shallow(<EditTab {...props} />);
   });
 

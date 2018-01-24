@@ -23,7 +23,6 @@ beforeEach(() => {
     showAlert: jest.fn()
   };
 
-  jest.clearAllMocks();
   wrapper = shallow(<ProfilePage {...props} />);
   instance = wrapper.instance();
 });

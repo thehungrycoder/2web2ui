@@ -24,8 +24,6 @@ describe('Helper: SparkPost API Request', () => {
   expect.hasAssertions();
 
   beforeEach(() => {
-    jest.clearAllMocks();
-
     state = { auth: { loggedIn: true, token: 'TEST-TOKEN' }};
     mockStore = createMockStore(state);
 
@@ -39,6 +37,7 @@ describe('Helper: SparkPost API Request', () => {
 
   it('should successfully call the API', async() => {
     const actualResults = await mockStore.dispatch(sparkpostApiRequest(action));
+
     expect(actualResults).toBe(results);
     expect(mockStore.getActions()).toMatchSnapshot();
     expect(axiosMocks.sparkpost).toHaveBeenCalledWith(expect.objectContaining({
