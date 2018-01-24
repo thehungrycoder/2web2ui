@@ -1,7 +1,7 @@
 import React from 'react';
 import { DelaysDataTable } from '../DelaysDataTable';
 import { shallow, mount } from 'enzyme';
-import { renderRowData } from 'src/__testHelpers__';
+import { renderRowData } from 'src/__testHelpers__/renderHelpers';
 
 describe('DelaysDataTable: ', () => {
   let wrapper;

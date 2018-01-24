@@ -1,7 +1,7 @@
 import React from 'react';
 import { DataTable } from '../DataTable';
 import { shallow, mount } from 'enzyme';
-import { renderRowData } from 'src/__testHelpers__';
+import { renderRowData } from 'src/__testHelpers__/renderHelpers';
 
 jest.mock('src/helpers/reports');
 

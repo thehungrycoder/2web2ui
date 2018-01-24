@@ -28,12 +28,22 @@ exports[`renders correctly 1`] = `
   <TableCollection
     columns={
       Array [
-        "Name",
-        "ID",
-        "Recipients",
+        Object {
+          "label": "Name",
+          "sortKey": "name",
+        },
+        Object {
+          "label": "ID",
+          "sortKey": "id",
+        },
+        Object {
+          "label": "Recipients",
+          "sortKey": "total_accepted_recipients",
+          "width": "20%",
+        },
       ]
     }
-    defaultSortColumn={null}
+    defaultSortColumn="name"
     defaultSortDirection="asc"
     filterBox={
       Object {
@@ -110,12 +120,22 @@ exports[`renders empty state 1`] = `
   <TableCollection
     columns={
       Array [
-        "Name",
-        "ID",
-        "Recipients",
+        Object {
+          "label": "Name",
+          "sortKey": "name",
+        },
+        Object {
+          "label": "ID",
+          "sortKey": "id",
+        },
+        Object {
+          "label": "Recipients",
+          "sortKey": "total_accepted_recipients",
+          "width": "20%",
+        },
       ]
     }
-    defaultSortColumn={null}
+    defaultSortColumn="name"
     defaultSortDirection="asc"
     filterBox={
       Object {
