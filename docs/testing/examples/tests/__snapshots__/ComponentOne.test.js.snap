@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ComponentOne should change the message on click 1`] = `
+<div>
+  <button
+    id="change-message"
+    onClick={[Function]}
+  >
+    Change the message
+  </button>
+  <h2>
+    A very new message
+  </h2>
+  <ComponentTwo
+    onSubmit={[Function]}
+  />
+</div>
+`;
+
+exports[`ComponentOne should render correctly 1`] = `
+<div>
+  <button
+    id="change-message"
+    onClick={[Function]}
+  >
+    Change the message
+  </button>
+  <h2>
+    what a cool message
+  </h2>
+  <ComponentTwo
+    onSubmit={[Function]}
+  />
+</div>
+`;
+
+exports[`ComponentOne should render when not visible 1`] = `""`;

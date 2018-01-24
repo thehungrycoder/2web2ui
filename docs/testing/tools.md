@@ -27,4 +27,4 @@ Enzyme is a tool built by Airbnb that we use to mimic rendering and mounting for
 
 [placeholder]
 
-I have some opinions on if/when we should really use this lib. More to come.
+I have some thoughts and opinions on if/when we should use this lib. More to come.

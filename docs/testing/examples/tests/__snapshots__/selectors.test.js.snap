@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Selectors should select a summary 1`] = `
+Object {
+  "nAccounts": 5,
+  "nUsers": 3,
+  "totalBills": 349.35,
+}
+`;

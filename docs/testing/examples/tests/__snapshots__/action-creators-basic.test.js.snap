@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Action creators that return basic JSON should return a basic action 1`] = `
+Object {
+  "payload": Object {
+    "name": "Jo",
+  },
+  "type": "BASIC_ACTION",
+}
+`;

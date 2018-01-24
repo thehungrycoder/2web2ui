@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Manually mocked async action creators should dispatch 2 async calls 1`] = `
+Array [
+  Array [
+    Object {
+      "method": "GET",
+      "url": "/account",
+    },
+  ],
+  Array [
+    Object {
+      "method": "PUT",
+      "url": "/other",
+    },
+  ],
+]
+`;
+
+exports[`Manually mocked async action creators should dispatch multiple dependent calls 1`] = `
+Array [
+  Array [
+    Object {
+      "method": "GET",
+      "url": "/account",
+    },
+  ],
+  Array [
+    Object {
+      "body": Object {
+        "name": "Bobbi",
+      },
+      "method": "PUT",
+      "url": "/account/5",
+    },
+  ],
+  Array [
+    Object {
+      "payload": Object {
+        "updated": true,
+      },
+      "type": "UPDATE_ACCOUNT_SUCCESS",
+    },
+  ],
+]
+`;
