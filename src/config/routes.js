@@ -27,6 +27,7 @@ import {
 } from 'src/helpers/conditions';
 
 import App from 'src/components/layout/App';
+import config from 'src/config';
 
 /**
  *  Angular UI Grant List:
@@ -90,8 +91,8 @@ const routes = [
   {
     path: '/dashboard',
     component: DashboardPage,
-    layout: App
-    // do not put any condition here bc all other routes redirect here if their condition is false
+    layout: App,
+    condition: composeConditions(hasGrants('api_keys/manage', 'templates/modify', 'sending_domains/manage'), () => config.splashPage === '/dashboard') // want to hide if not a splash page https://jira.int.messagesystems.com/browse/FAD-6046
   },
   {
     path: '/reports',
@@ -140,19 +141,19 @@ const routes = [
   {
     path: '/account/subaccounts',
     component: subaccounts.ListPage,
-    condition: hasGrants('subaccount/manage'),
+    condition: hasGrants('subaccount/manage', 'api_keys/manage', 'sending_domains/manage'),
     layout: App
   },
   {
     path: '/account/subaccounts/create',
     component: subaccounts.CreatePage,
-    condition: hasGrants('subaccount/manage'),
+    condition: hasGrants('subaccount/manage', 'api_keys/manage', 'sending_domains/manage'),
     layout: App
   },
   {
     path: '/account/subaccounts/:id',
     component: subaccounts.DetailsPage,
-    condition: hasGrants('subaccount/manage'),
+    condition: hasGrants('subaccount/manage', 'api_keys/manage', 'sending_domains/manage'),
     layout: App,
     exact: false
   },

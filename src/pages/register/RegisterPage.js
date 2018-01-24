@@ -12,6 +12,7 @@ import styles from './RegisterPage.module.scss';
 
 import { registerUser, checkInviteToken } from 'src/actions/users';
 import { authenticate, logout } from 'src/actions/auth';
+import config from 'src/config';
 
 export class RegisterPage extends Component {
 
@@ -19,7 +20,7 @@ export class RegisterPage extends Component {
     const { username, password } = values;
     return this.props.registerUser(this.props.token, values)
       .then(() => this.props.authenticate(username, password)
-        .then(() => this.props.history.push('/dashboard'))
+        .then(() => this.props.history.push(config.splashPage))
         .catch((error) => {
           // user was created but auth failed, redirect to /auth
           this.props.history.push('/auth');

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import { login } from 'src/actions/auth';
+import config from 'src/config';
 
 const authPath = '/auth';
 
@@ -26,7 +27,8 @@ export class SSOPage extends Component {
           },
           saveCookie: true
         });
-        return this.props.history.push('/dashboard');
+
+        return this.props.history.push(config.splashPage);
 
         //Heroku.barMe(); TODO: copied from old ui, fix it when heroku specific behaviors are implemented
 

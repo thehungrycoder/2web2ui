@@ -1,42 +1,66 @@
 import React from 'react';
-import Item from '../Item';
-import { render } from 'enzyme';
-import { MemoryRouter } from 'react-router-dom';
-
+import { Navigation } from '../Navigation';
+import { shallow } from 'enzyme';
 
 describe('Navigation', () => {
 
-  test('Item renders a link correctly', () => {
-    const item = render(
-      <MemoryRouter>
-        <Item
-          to='/to'
-          icon='Mail'
-          label='label'
-          location={ { pathname: 'to' } }
-        />
-      </MemoryRouter>
-    );
-    expect(item).toMatchSnapshot();
+  describe('Navigation tests', () => {
+    let props;
+    let wrapper;
+    let stateSpy;
+
+    beforeEach(() => {
+      props = {
+        location: '/foo/bar',
+        navItems: [
+          {
+            key: 'value'
+          },
+          {
+            key: 'value2'
+          },
+          {
+            key: 'value3'
+
+          }
+        ]
+      };
+
+      wrapper = shallow(<Navigation {...props} />);
+      stateSpy = jest.spyOn(wrapper.instance(), 'setState');
+    });
+
+    afterEach(() => {
+      jest.restoreAllMocks();
+    });
+
+    it('should render full nav', () => {
+      expect(wrapper).toMatchSnapshot();
+    });
+
+    it('should open when clicking div', () => {
+      wrapper.find('div').at('1').simulate('click');
+      expect(stateSpy).toHaveBeenCalledWith({ open: true });
+    });
+
+    it('should open nav when clicking hamburger', () => {
+      wrapper.find('a').simulate('click');
+      expect(stateSpy).toHaveBeenCalledWith({ open: true });
+    });
+
+    it('should close nav when clicking x', () => {
+      wrapper.find('Icon').simulate('click');
+      expect(stateSpy).toHaveBeenCalledWith({ open: true });
+    });
+
+    it('should toggle open state', () => {
+      wrapper.instance().handleClick();
+      expect(stateSpy).toHaveBeenCalledWith({ open: true });
+      wrapper.instance().handleClick();
+      expect(stateSpy).toHaveBeenCalledWith({ open: false });
+    });
+
   });
 
-  test('Item renders children correctly', () => {
-    const location = { pathname: 'to' };
-    const children = [
-      { to: '/child1', label: 'child 1', location },
-      { to: '/child2', label: 'child 2', location }
-    ];
-    const item = render(
-      <MemoryRouter>
-        <Item
-          to='/to'
-          icon='Mail'
-          label='label'
-          children={children}
-          location={location}
-        />
-      </MemoryRouter>
-    );
-    expect(item).toMatchSnapshot();
-  });
+
 });
