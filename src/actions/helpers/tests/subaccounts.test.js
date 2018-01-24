@@ -64,7 +64,6 @@ test('with api key - select grants', () => {
     'message_events/view',
     'smtp/inject'
   ]);
-  expect(getState).toHaveBeenCalled();
 });
 
 test('with api key - valid ips', () => {

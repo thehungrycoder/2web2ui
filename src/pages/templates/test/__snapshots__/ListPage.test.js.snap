@@ -178,7 +178,13 @@ exports[`renders errors when present 1`] = `
   <ApiErrorBanner
     errorDetails="Uh oh! It broke. "
     message="Sorry, we seem to have had some trouble loading your templates."
-    reload={[Function]}
+    reload={
+      [MockFunction] {
+        "calls": Array [
+          Array [],
+        ],
+      }
+    }
   />
 </Page>
 `;

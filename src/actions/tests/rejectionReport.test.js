@@ -39,10 +39,6 @@ describe('Action Creator: Rejection Report', () => {
     getStateMock = jest.fn((a) => Promise.resolve(a));
   });
 
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
-
   describe('refreshRejectionTableMetrics', () => {
     it('dispatchs a refresh action', async() => {
       const thunk = rejectionReport.refreshRejectionTableMetrics();

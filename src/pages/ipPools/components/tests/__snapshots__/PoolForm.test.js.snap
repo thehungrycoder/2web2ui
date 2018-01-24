@@ -2,7 +2,7 @@
 
 exports[`PoolForm tests should not disable button if form is not pristine or not submitting 1`] = `
 <form
-  onSubmit={[Function]}
+  onSubmit={[MockFunction]}
 >
   <Field
     component={[Function]}
@@ -50,7 +50,7 @@ exports[`PoolForm tests should not disable button if form is not pristine or not
 
 exports[`PoolForm tests should not render table if no ips exist 1`] = `
 <form
-  onSubmit={[Function]}
+  onSubmit={[MockFunction]}
 >
   <Field
     component={[Function]}
@@ -73,7 +73,7 @@ exports[`PoolForm tests should not render table if no ips exist 1`] = `
 
 exports[`PoolForm tests should not render table if pool is new 1`] = `
 <form
-  onSubmit={[Function]}
+  onSubmit={[MockFunction]}
 >
   <Field
     component={[Function]}
@@ -96,7 +96,7 @@ exports[`PoolForm tests should not render table if pool is new 1`] = `
 
 exports[`PoolForm tests should render form 1`] = `
 <form
-  onSubmit={[Function]}
+  onSubmit={[MockFunction]}
 >
   <Field
     component={[Function]}
@@ -157,7 +157,7 @@ Array [
 
 exports[`PoolForm tests should return a msg if there are no ips 1`] = `
 <form
-  onSubmit={[Function]}
+  onSubmit={[MockFunction]}
 >
   <Field
     component={[Function]}
@@ -183,7 +183,7 @@ exports[`PoolForm tests should return a msg if there are no ips 1`] = `
 
 exports[`PoolForm tests should show help text when editing default pool 1`] = `
 <form
-  onSubmit={[Function]}
+  onSubmit={[MockFunction]}
 >
   <Field
     component={[Function]}
@@ -231,7 +231,7 @@ exports[`PoolForm tests should show help text when editing default pool 1`] = `
 
 exports[`PoolForm tests should update button text to Saving and disable button when submitting form 1`] = `
 <form
-  onSubmit={[Function]}
+  onSubmit={[MockFunction]}
 >
   <Field
     component={[Function]}

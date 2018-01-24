@@ -24,7 +24,6 @@ describe('Helper: chart', () => {
   let data;
 
   beforeEach(() => {
-    jest.resetAllMocks();
     data = [
       { ts: getTimestampWithFixedHour('2017-01-01T12:00', 12) },
       { ts: getTimestampWithFixedHour('2017-01-02T00:00', 0) },

@@ -8,7 +8,7 @@ exports[`Legend:  should handle external hover 1`] = `
       key="0"
       name="primary"
       onClick={[Function]}
-      onMouseOut={[Function]}
+      onMouseOut={[MockFunction]}
       onMouseOver={[Function]}
       otherHovered={false}
     />
@@ -19,7 +19,7 @@ exports[`Legend:  should handle external hover 1`] = `
       key="0"
       name="secondary"
       onClick={[Function]}
-      onMouseOut={[Function]}
+      onMouseOut={[MockFunction]}
       onMouseOver={[Function]}
       otherHovered={true}
     />
@@ -42,7 +42,7 @@ exports[`Legend:  should render 1`] = `
         key="0"
         name="primary"
         onClick={[Function]}
-        onMouseOut={[Function]}
+        onMouseOut={[MockFunction]}
         onMouseOver={[Function]}
       />
     </Grid.Column>
@@ -65,7 +65,7 @@ exports[`Legend:  should render with secondaryData 1`] = `
         key="0"
         name="primary"
         onClick={[Function]}
-        onMouseOut={[Function]}
+        onMouseOut={[MockFunction]}
         onMouseOver={[Function]}
       />
     </Grid.Column>
@@ -75,7 +75,7 @@ exports[`Legend:  should render with secondaryData 1`] = `
         key="0"
         name="secondary"
         onClick={[Function]}
-        onMouseOut={[Function]}
+        onMouseOut={[MockFunction]}
         onMouseOver={[Function]}
       />
     </Grid.Column>

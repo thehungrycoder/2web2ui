@@ -29,10 +29,6 @@ describe('Action Creator: Bounce Report', () => {
     getStateMock = jest.fn(() => stateMock);
   });
 
-  afterEach(() => {
-    jest.resetAllMocks();
-  });
-
   it('should dispatch a chart refresh action', async() => {
     const thunk = bounceReport.refreshBounceChartMetrics();
     await thunk(dispatchMock, getStateMock);

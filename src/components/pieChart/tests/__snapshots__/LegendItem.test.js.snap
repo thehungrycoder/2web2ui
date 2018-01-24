@@ -3,7 +3,7 @@
 exports[`LegendItem:  should render 1`] = `
 <a
   className=""
-  onClick={[Function]}
+  onClick={[MockFunction]}
   title="View name"
 >
   <span
@@ -29,7 +29,7 @@ exports[`LegendItem:  should render 1`] = `
 exports[`LegendItem:  should render breadcrumb 1`] = `
 <a
   className=""
-  onClick={[Function]}
+  onClick={[MockFunction]}
   title="View name"
 >
   <span

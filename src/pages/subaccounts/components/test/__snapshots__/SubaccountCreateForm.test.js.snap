@@ -2,7 +2,7 @@
 
 exports[`api key form 1`] = `
 <form
-  onSubmit={[Function]}
+  onSubmit={[MockFunction]}
 >
   <Panel.Section>
     <NameField />
@@ -35,7 +35,7 @@ exports[`api key form 1`] = `
 
 exports[`base case 1`] = `
 <form
-  onSubmit={[Function]}
+  onSubmit={[MockFunction]}
 >
   <Panel.Section>
     <NameField />
@@ -68,7 +68,7 @@ exports[`base case 1`] = `
 
 exports[`has ip pools 1`] = `
 <form
-  onSubmit={[Function]}
+  onSubmit={[MockFunction]}
 >
   <Panel.Section>
     <NameField />
@@ -110,7 +110,7 @@ exports[`has ip pools 1`] = `
 
 exports[`ip pools checked  1`] = `
 <form
-  onSubmit={[Function]}
+  onSubmit={[MockFunction]}
 >
   <Panel.Section>
     <NameField />
@@ -152,7 +152,13 @@ exports[`ip pools checked  1`] = `
 
 exports[`submits correctly 1`] = `
 <form
-  onSubmit={[Function]}
+  onSubmit={
+    [MockFunction] {
+      "calls": Array [
+        Array [],
+      ],
+    }
+  }
 >
   <Panel.Section>
     <NameField

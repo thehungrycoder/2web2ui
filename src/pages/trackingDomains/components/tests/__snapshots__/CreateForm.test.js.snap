@@ -5,7 +5,7 @@ exports[`Component: Tracking Domains Create Form should render correctly when su
   sectioned={true}
 >
   <form
-    onSubmit={[Function]}
+    onSubmit={[MockFunction]}
   >
     <Panel.Section>
       <Field
@@ -44,7 +44,7 @@ exports[`Component: Tracking Domains Create Form should render correctly when su
   sectioned={true}
 >
   <form
-    onSubmit={[Function]}
+    onSubmit={[MockFunction]}
   >
     <Panel.Section>
       <Field

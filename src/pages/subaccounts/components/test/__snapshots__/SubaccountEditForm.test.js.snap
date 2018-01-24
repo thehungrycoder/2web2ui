@@ -2,7 +2,7 @@
 
 exports[`base case 1`] = `
 <form
-  onSubmit={[Function]}
+  onSubmit={[MockFunction]}
 >
   <Panel.Section>
     <NameField
@@ -36,7 +36,7 @@ exports[`base case 1`] = `
 
 exports[`cancel button 1`] = `
 <form
-  onSubmit={[Function]}
+  onSubmit={[MockFunction]}
 >
   <Panel.Section>
     <NameField
@@ -81,7 +81,7 @@ exports[`cancel button 1`] = `
 
 exports[`no ip pools 1`] = `
 <form
-  onSubmit={[Function]}
+  onSubmit={[MockFunction]}
 >
   <Panel.Section>
     <NameField
@@ -107,7 +107,7 @@ exports[`no ip pools 1`] = `
 
 exports[`should disable all fields when compliance is true 1`] = `
 <form
-  onSubmit={[Function]}
+  onSubmit={[MockFunction]}
 >
   <Panel.Section>
     <NameField
@@ -141,7 +141,13 @@ exports[`should disable all fields when compliance is true 1`] = `
 
 exports[`submits correctly 1`] = `
 <form
-  onSubmit={[Function]}
+  onSubmit={
+    [MockFunction] {
+      "calls": Array [
+        Array [],
+      ],
+    }
+  }
 >
   <Panel.Section>
     <NameField

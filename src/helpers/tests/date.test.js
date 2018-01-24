@@ -10,9 +10,6 @@ import cases from 'jest-in-case';
 import moment from 'moment';
 
 describe('Date helpers', () => {
-
-  afterEach(() => jest.restoreAllMocks());
-
   it('should get end of day', () => {
     const endOfDay = new Date('2017-12-18T23:59:59.999');
     expect(getEndOfDay('2017-12-18T00:00:00')).toEqual(endOfDay);

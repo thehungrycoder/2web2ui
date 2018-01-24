@@ -16,7 +16,6 @@ const props = {
 let wrapper;
 
 beforeEach(() => {
-  jest.clearAllMocks();
   wrapper = shallow(<SubaccountEditForm {...props} />);
 });
 
@@ -45,4 +44,3 @@ it('should disable all fields when compliance is true', () => {
   wrapper.setProps({ compliance: true });
   expect(wrapper).toMatchSnapshot();
 });
-

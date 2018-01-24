@@ -14,7 +14,6 @@ const props = {
 let wrapper;
 
 beforeEach(() => {
-  jest.clearAllMocks();
   wrapper = shallow(<RegisterUserForm {...props} />);
 });
 

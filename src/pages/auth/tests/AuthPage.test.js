@@ -26,10 +26,6 @@ beforeEach(() => {
   wrapper = shallow(<AuthPage {...props} />);
 });
 
-afterEach(() => {
-  jest.resetAllMocks();
-});
-
 it('renders correctly', () => {
   expect(wrapper).toMatchSnapshot();
 });
@@ -67,7 +63,7 @@ it('should throw a submission error when verifyAndLogin fails with 4xx error', (
 it('should not throw an error when verifySpy fails with non 4xx error', async() => {
   const authPage = wrapper.instance();
   authPage.props.verifyAndLogin.mockImplementation(() => Promise.reject({ response: { status: 500 }}));
-  await expect(authPage.tfaSubmit({ code: 'code' })).resolves;
+  await expect(authPage.tfaSubmit({ code: 'code' })).resolves.toBeUndefined();
 });
 
 it('should bind tfaSubmit to the submit handler of TfaForm', () => {
@@ -102,15 +98,12 @@ it('should authenticate on submit when sso is disabled', () => {
 });
 
 it('should redirect to sso if there is a sso user', () => {
-  const redirectSpy = jest.spyOn(wrapper.instance(), 'redirectToSSO');
+  const redirectSpy = jest.spyOn(window.location, 'assign').mockImplementation();
   wrapper.setProps({ auth: { ssoUser: 'foo-bar' }});
-  expect(redirectSpy).toHaveBeenCalled();
+  expect(redirectSpy).toHaveBeenCalledWith(expect.stringMatching(/saml\/login$/));
 });
 
 it('should set sso enabled if there ssoUser is null', () => {
-  const redirectSpy = jest.spyOn(wrapper.instance(), 'redirectToSSO');
   wrapper.setProps({ auth: { ssoUser: null }});
-  expect(wrapper.state().ssoEnabled).toEqual(false);
-  expect(redirectSpy).not.toHaveBeenCalled();
+  expect(wrapper.state().ssoEnabled).toBeFalsy();
 });
-

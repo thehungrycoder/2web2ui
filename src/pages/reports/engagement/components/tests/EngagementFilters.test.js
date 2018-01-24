@@ -17,8 +17,6 @@ const defaultProps = {
   refreshTypeaheadCache: jest.fn()
 };
 
-afterEach(() => jest.clearAllMocks()); // for defaultProps
-
 it('renders filters, hydrates with filters from query string, and requests data', () => {
   const props = {
     ...defaultProps,

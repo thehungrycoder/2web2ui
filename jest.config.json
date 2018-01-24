@@ -46,5 +46,7 @@
   ],
   "modulePaths": [
     ""
-  ]
+  ],
+  "clearMocks": true,
+  "restoreMocks": true
 }

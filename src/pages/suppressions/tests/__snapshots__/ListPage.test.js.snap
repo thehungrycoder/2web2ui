@@ -30,7 +30,17 @@ exports[`ListPage renders correctly 1`] = `
   <Panel>
     <Panel.Section>
       <Connect(ReduxForm)
-        onSubmit={[Function]}
+        onSubmit={
+          [MockFunction] {
+            "calls": Array [
+              Array [
+                Object {
+                  "reportFilters": undefined,
+                },
+              ],
+            ],
+          }
+        }
       />
     </Panel.Section>
   </Panel>
@@ -68,7 +78,22 @@ exports[`ListPage renders correctly with subaccounts 1`] = `
   <Panel>
     <Panel.Section>
       <Connect(ReduxForm)
-        onSubmit={[Function]}
+        onSubmit={
+          [MockFunction] {
+            "calls": Array [
+              Array [
+                Object {
+                  "reportFilters": undefined,
+                },
+              ],
+              Array [
+                Object {
+                  "reportFilters": undefined,
+                },
+              ],
+            ],
+          }
+        }
       />
     </Panel.Section>
   </Panel>
