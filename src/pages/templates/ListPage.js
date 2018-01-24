@@ -52,14 +52,14 @@ export default class ListPage extends Component {
     const { hasSubaccounts } = this.props;
 
     const columns = [
-      { label: 'Name', width: '22%' },
-      { label: 'ID', width: '22%' },
-      { label: 'Status', width: '15%' },
-      { label: 'Updated' }
+      { label: 'Name', width: '22%', sortKey: 'name' },
+      { label: 'ID', width: '22%', sortKey: 'id' },
+      { label: 'Status', width: '15%', sortKey: 'published' },
+      { label: 'Updated', sortKey: 'last_update_time' }
     ];
 
     if (hasSubaccounts) {
-      columns.push({ label: 'Subaccount', width: '20%' });
+      columns.push({ label: 'Subaccount', width: '20%', sortKey: 'subaccount_id' });
     }
 
     return columns;
