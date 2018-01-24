@@ -32,8 +32,6 @@ describe('Component: Date Form', () => {
     jest.spyOn(instance, 'syncPropsToState');
   });
 
-  afterEach(() => jest.restoreAllMocks());
-
   it('should render correctly by default', () => {
     expect(wrapper).toMatchSnapshot();
   });

@@ -39,8 +39,6 @@ describe('Component: DateFilter', () => {
     dateHelpers.getEndOfDay = jest.fn(() => 'end-of-day');
   });
 
-  afterEach(() => jest.restoreAllMocks());
-
   it('should render ok by default', () => {
     expect(wrapper).toMatchSnapshot();
   });

@@ -26,10 +26,6 @@ beforeEach(() => {
   wrapper = shallow(<AuthPage {...props} />);
 });
 
-afterEach(() => {
-  jest.restoreAllMocks();
-});
-
 it('renders correctly', () => {
   expect(wrapper).toMatchSnapshot();
 });

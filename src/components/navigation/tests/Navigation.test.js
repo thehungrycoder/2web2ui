@@ -30,10 +30,6 @@ describe('Navigation', () => {
       stateSpy = jest.spyOn(wrapper.instance(), 'setState');
     });
 
-    afterEach(() => {
-      jest.restoreAllMocks();
-    });
-
     it('should render full nav', () => {
       expect(wrapper).toMatchSnapshot();
     });
