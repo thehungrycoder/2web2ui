@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Redirect, Route } from 'react-router-dom';
 import { AccessControl } from 'src/components/auth';
 import _ from 'lodash';
+import config from 'src/config';
 
 export class ProtectedRoute extends Component {
 
@@ -10,26 +11,29 @@ export class ProtectedRoute extends Component {
     const { component: Component, condition } = this.props;
 
     return (
-      <AccessControl condition={condition} redirect='/dashboard'>
+      <AccessControl condition={condition} redirect={config.splashPage}>
         <Component {...propsFromRoute} />
       </AccessControl>
     );
   }
 
-  render() {
+  renderRoute = () => {
     const { auth } = this.props;
+
+    return auth.loggedIn
+      ? this.renderComponent(this.props)
+      : (
+        <Redirect to={{
+          pathname: '/auth',
+          state: { redirectAfterLogin: this.props.location.pathname }
+        }}/>
+      );
+  }
+
+  render() {
     // can't pass component prop to Route below or it confuses RR
     const routeProps = _.omit(this.props, ['component', 'auth', 'condition']);
-    return (
-      <Route {...routeProps} render={(props) => (
-        auth.loggedIn ? this.renderComponent(props) : (
-          <Redirect to={{
-            pathname: '/auth',
-            state: { redirectAfterLogin: props.location.pathname }
-          }}/>
-        )
-      )}/>
-    );
+    return (<Route {...routeProps} render={this.renderRoute} />);
   }
 }
 

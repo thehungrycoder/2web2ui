@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Action creators using thunks should dispatch correctly 1`] = `
+Array [
+  Object {
+    "payload": Object {
+      "loading": true,
+    },
+    "type": "ACTION_ONE",
+  },
+  Object {
+    "payload": Object {
+      "value": 123,
+    },
+    "type": "ACTION_TWO",
+  },
+]
+`;
+
+exports[`Action creators using thunks should use mock state 1`] = `
+Array [
+  Object {
+    "payload": Object {
+      "name": "Bob",
+    },
+    "type": "ACTION_FOR_NAME",
+  },
+]
+`;

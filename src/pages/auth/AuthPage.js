@@ -75,7 +75,7 @@ export class AuthPage extends Component {
     const { tfaEnabled } = this.props.tfa;
 
     if (loggedIn) {
-      return <Redirect to="/dashboard" />;
+      return <Redirect to={config.splashPage} />;
     }
 
     return (

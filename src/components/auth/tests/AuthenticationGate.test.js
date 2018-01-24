@@ -21,8 +21,10 @@ describe('Component: AuthenticationGate', () => {
         loggedIn: false
       },
       login: jest.fn(),
-      getGrantsFromCookie: jest.fn()
-
+      getGrantsFromCookie: jest.fn(),
+      history: {
+        push: jest.fn()
+      }
     };
 
     wrapper = shallow(<AuthenticationGate {...props} />);
@@ -62,6 +64,32 @@ describe('Component: AuthenticationGate', () => {
       expect(authCookie.get).toHaveBeenCalledTimes(0);
       expect(props.login).toHaveBeenCalledTimes(0);
       expect(props.getGrantsFromCookie).toHaveBeenCalledTimes(0);
+    });
+  });
+
+  describe('componentDidUpdate', () => {
+    it('should redirect to redirect path if you have logged in', () => {
+      wrapper.setProps({ location: { pathname: '/auth', state: { redirectAfterLogin: '/foo' }}, auth: { loggedIn: true }});
+      wrapper.instance().componentDidUpdate({ auth: { loggedIn: false }});
+      expect(wrapper.instance().props.history.push).toHaveBeenCalledWith('/foo');
+    });
+
+    it('should redirect to splashPage if you have logged in and no redirectAfterLogin set', () => {
+      wrapper.setProps({ location: { pathname: '/auth' }, auth: { loggedIn: true }});
+      wrapper.instance().componentDidUpdate({ auth: { loggedIn: false }});
+      expect(wrapper.instance().props.history.push).toHaveBeenCalledWith('/dashboard');
+    });
+
+    it('should redirect to auth on logout', () => {
+      wrapper.setProps({ location: { pathname: '/report/summary' }, auth: { loggedIn: false }});
+      wrapper.instance().componentDidUpdate({ auth: { loggedIn: true }});
+      expect(wrapper.instance().props.history.push).toHaveBeenCalledWith('/auth');
+    });
+
+    it('should do nothing you aren\'t on auth and logged in', () => {
+      wrapper.setProps({ location: { pathname: '/report/summary' }, auth: { loggedIn: true }});
+      wrapper.instance().componentDidUpdate({ auth: { loggedIn: true }});
+      expect(wrapper.instance().props.history.push).not.toHaveBeenCalled();
     });
   });
 });
