@@ -39,7 +39,7 @@ export default class TableHeader extends Component {
       if (typeof item === 'string' || item === null) {
         return <Table.HeaderCell key={`column ${i}: ${item}`}>{item}</Table.HeaderCell>;
       }
-      const { label, sortKey, ...rest } = item;
+      const { label, sortKey, comparator, ...rest } = item;
 
       return <Table.HeaderCell key={label} {...rest}>{ this.renderSortCell(item) }</Table.HeaderCell>;
     });

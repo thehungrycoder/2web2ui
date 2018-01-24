@@ -1,5 +1,6 @@
 import _ from 'lodash';
 
-export function getSortedCollection(collection, sortColumn, sortDirection) {
-  return _.orderBy(collection, sortColumn, sortDirection);
+export function getSortedCollection(collection, sortColumn, sortDirection, columns = []) {
+  const { comparator } = _.find(columns, { sortKey: sortColumn }) || {};
+  return _.orderBy(collection, comparator || sortColumn, sortDirection);
 }

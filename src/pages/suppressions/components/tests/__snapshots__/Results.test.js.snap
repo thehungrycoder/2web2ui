@@ -135,6 +135,7 @@ exports[`Results renders correctly (with suppressions, with subaccount) 1`] = `
           "width": "20%",
         },
         Object {
+          "comparator": [Function],
           "label": "Subaccount",
           "sortKey": "subaccount_id",
           "width": "18%",
@@ -265,6 +266,7 @@ exports[`Results renders detail modal correctly 1`] = `
           "width": "20%",
         },
         Object {
+          "comparator": [Function],
           "label": "Subaccount",
           "sortKey": "subaccount_id",
           "width": "18%",
