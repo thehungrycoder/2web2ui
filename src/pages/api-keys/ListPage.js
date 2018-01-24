@@ -46,6 +46,8 @@ export class ListPage extends Component {
         pagination={true}
         rows={keys}
         filterBox={filterBoxConfig}
+        defaultSortColumn='label'
+        defaultSortDirection='desc'
       />
     );
   }
