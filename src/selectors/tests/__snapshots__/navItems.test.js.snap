@@ -79,99 +79,9 @@ Array [
   Object {
     "children": Array [
       Object {
-        "label": "Billing",
-        "route": Object {
-          "component": [Function],
-          "condition": [Function],
-          "layout": [Function],
-          "path": "/account/billing",
-        },
-        "to": "/account/billing",
-      },
-      Object {
-        "label": "API Keys",
-        "route": Object {
-          "component": [Function],
-          "condition": [Function],
-          "layout": [Function],
-          "path": "/account/api-keys",
-        },
-        "to": "/account/api-keys",
-      },
-      Object {
-        "label": "Profile",
-        "route": Object {
-          "component": [Function],
-          "condition": [Function],
-          "layout": [Function],
-          "path": "/account/profile",
-        },
-        "to": "/account/profile",
-      },
-      Object {
-        "label": "Security",
-        "route": Object {
-          "component": [Function],
-          "condition": [Function],
-          "layout": [Function],
-          "path": "/account/security",
-        },
-        "to": "/account/security",
-      },
-      Object {
-        "label": "Sending Domains",
-        "route": Object {
-          "component": [Function],
-          "condition": [Function],
-          "layout": [Function],
-          "path": "/account/sending-domains",
-        },
-        "to": "/account/sending-domains",
-      },
-      Object {
-        "label": "SMTP Relay",
-        "route": Object {
-          "component": [Function],
-          "condition": [Function],
-          "layout": [Function],
-          "path": "/account/smtp",
-        },
-        "to": "/account/smtp",
-      },
-      Object {
-        "label": "Subaccounts",
-        "route": Object {
-          "component": [Function],
-          "condition": [Function],
-          "layout": [Function],
-          "path": "/account/subaccounts",
-        },
-        "to": "/account/subaccounts",
-      },
-      Object {
-        "label": "Users",
-        "route": Object {
-          "component": [Function],
-          "condition": [Function],
-          "layout": [Function],
-          "path": "/account/users",
-        },
-        "to": "/account/users",
-      },
-      Object {
         "label": "Tracking Domains",
         "route": undefined,
         "to": "/account/tracking-domains",
-      },
-      Object {
-        "label": "IP Pools",
-        "route": Object {
-          "component": [Function],
-          "condition": [Function],
-          "layout": [Function],
-          "path": "/account/ip-pools",
-        },
-        "to": "/account/ip-pools",
       },
     ],
     "icon": "Settings",
