@@ -33,8 +33,13 @@ export class EditPage extends Component {
   }
 
   renderPage() {
+    const { domain } = this.props;
+
+    if (!domain) {
+      return null;
+    }
     return (
-      <EditBounce domain={this.props.match.params.id} />
+      <EditBounce name={this.props.match.params.id} domain={domain} />
     );
   }
 
@@ -50,7 +55,7 @@ export class EditPage extends Component {
         title={`Edit ${id}`}
         breadcrumbAction={breadcrumbAction}
       >
-        {getError ? this.renderError() : this.renderPage()}
+        {getError ? this.renderError() : this.renderPage(id)}
 
       </Page>
     );
