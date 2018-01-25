@@ -12,7 +12,7 @@ exports[`Sending Domains Edit Page renders correctly 1`] = `
   empty={Object {}}
   title="Edit id"
 >
-  <EditBounce
+  <Connect(EditBounce)
     domain={
       Object {
         "dkim": Object {
@@ -35,7 +35,8 @@ exports[`Sending Domains Edit Page renders correctly 1`] = `
         },
       }
     }
-    name="id"
+    form="sendingDomainEdit"
+    id="id"
   />
 </Page>
 `;
