@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders a create suppression list page 1`] = `
+<Page
+  empty={Object {}}
+  title="Create Suppression List"
+>
+  Hi
+</Page>
+`;
