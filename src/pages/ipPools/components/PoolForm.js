@@ -49,7 +49,7 @@ export class PoolForm extends Component {
 
     // Empty pool
     if (ips.length === 0) {
-      return <p>Add sending IPs to this poll by moving them from their current pool.</p>;
+      return <p>Add sending IPs to this pool by moving them from their current pool.</p>;
     }
 
     return (

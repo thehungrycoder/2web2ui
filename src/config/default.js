@@ -30,6 +30,9 @@ const config = {
     supportEmail: 'support@sparkpost.com',
     billingEmail: 'billing@sparkpost.com'
   },
+  featureFlags: {
+    allow_mailbox_verification: true
+  },
   gaTag: 'no-default-set',
   maxUploadSizeBytes: 20000000,
   metricsPrecisionMap: [
