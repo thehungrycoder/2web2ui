@@ -35,8 +35,8 @@ it('renders correctly when there is a login error', () => {
   expect(wrapper).toMatchSnapshot();
 });
 
-it('redirects when logged in', () => {
-  wrapper.setProps({ auth: { loggedIn: true }});
+it('redirects when logged in and access control is ready', () => {
+  wrapper.setProps({ auth: { loggedIn: true }, ready: true, currentUser: { access_level: 'admin' }});
   expect(wrapper).toMatchSnapshot();
 });
 

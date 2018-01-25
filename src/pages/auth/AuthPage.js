@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import _ from 'lodash';
 import { authenticate, ssoCheck, login } from 'src/actions/auth';
 import { verifyAndLogin } from 'src/actions/tfa';
 import { SparkPost } from 'src/components';
 import { Panel, Error } from '@sparkpost/matchbox';
 import { SubmissionError } from 'redux-form';
+import selectAccessConditionState from 'src/selectors/accessConditionState';
 
 import config from 'src/config';
 import LoginForm from './components/LoginForm';
@@ -66,11 +68,14 @@ export class AuthPage extends Component {
   }
 
   render() {
+    const { ready, location, currentUser } = this.props;
     const { errorDescription, loggedIn } = this.props.auth;
     const { tfaEnabled } = this.props.tfa;
 
-    if (loggedIn) {
-      return <Redirect to={config.splashPage} />;
+    if (ready && loggedIn) {
+      const redirectAfterLogin = _.get(location, 'state.redirectAfterLogin');
+      const redirectTo = redirectAfterLogin || _.get(config, `entryPoints.${currentUser.access_level}`, config.splashPage);
+      return <Redirect to={redirectTo} />;
     }
 
     return (
@@ -92,9 +97,13 @@ export class AuthPage extends Component {
   }
 }
 
-const mapStateToProps = ({ auth, tfa }) => ({
-  auth,
-  tfa
-});
+const mapStateToProps = (state) => {
+  const { auth, tfa } = state;
+  return {
+    auth,
+    tfa,
+    ...selectAccessConditionState(state)
+  };
+};
 
 export default connect(mapStateToProps, { login, verifyAndLogin, authenticate, ssoCheck })(AuthPage);
