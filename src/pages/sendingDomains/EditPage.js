@@ -15,6 +15,8 @@ const breadcrumbAction = {
   to: '/account/sending-domains'
 };
 
+const FORM_NAME = 'sendingDomainEdit';
+
 export class EditPage extends Component {
   componentDidMount() {
     this.loadDomainProps();
@@ -39,7 +41,7 @@ export class EditPage extends Component {
       return null;
     }
     return (
-      <EditBounce name={this.props.match.params.id} domain={domain} />
+      <EditBounce form={FORM_NAME} id={this.props.match.params.id} domain={domain} />
     );
   }
 
@@ -65,10 +67,12 @@ export class EditPage extends Component {
 const mapStateToProps = ({ sendingDomains: { domain, getError, getLoading }}) => ({
   domain,
   getError,
-  getLoading
+  getLoading,
+  initialValues: {
+    ...domain
+  }
 });
 
-const FORM_NAME = 'sendingDomainEdit';
 
 const formOptions = {
   form: FORM_NAME,

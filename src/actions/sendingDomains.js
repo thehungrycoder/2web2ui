@@ -49,3 +49,14 @@ export function verify(id, type) {
     }
   });
 }
+
+export function update(id, data) {
+  return sparkpostApiRequest({
+    type: 'UPDATE_SENDING_DOMAIN',
+    meta: {
+      method: 'PUT',
+      url: `/sending-domains/${id}`,
+      data
+    }
+  });
+}
