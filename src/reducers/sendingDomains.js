@@ -21,6 +21,27 @@ export default (state = initialState, { type, payload }) => {
     case 'GET_SENDING_DOMAIN_FAIL':
       return { ...state, getError: payload, getLoading: false };
 
+    case 'VERIFY_SENDING_DOMAIN_PENDING':
+      return { ...state, verifyLoading: true, getError: null };
+
+    case 'VERIFY_SENDING_DOMAIN_SUCCESS':
+      // augment current domain's status property
+      return { ...state, verifyLoading: false, domain: { ...state.domain, status: payload }}; //augment current domain's status property
+      // return {
+      //   ...state, verifyLoading: false, domain: {
+      //     ...state.domain, status: {
+      //       'mx_status': 'valid',
+      //       'spf_status': 'invalid',
+      //       'cname_status': 'unverified', 'ownership_verified': true,
+      //       'abuse_at_status': 'unverified', 'compliance_status': 'valid', 'verification_mailbox_status': 'valid',
+      //       'dkim_status': 'invalid', 'postmaster_at_status': 'unverified'
+      //     }
+      //   }
+      // };
+
+    case 'VERIFY_SENDING_DOMAIN_FAIL':
+      return { ...state, verifyLoading: false, getError: null };
+
     default:
       return state;
   }

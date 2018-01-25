@@ -1,15 +1,35 @@
 import React, { Component } from 'react';
 import { Field } from 'redux-form';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+import { verify } from 'src/actions/sendingDomains';
 
 import { Panel, Grid, Banner, Button } from '@sparkpost/matchbox';
 import ToggleBlock from 'src/pages/templates/components/ToggleBlock';
+import { showAlert } from 'src/actions/globalAlert';
 import { SendingDomainSection } from './SendingDomainSection';
 import { resolveReadyFor } from 'src/helpers/domains';
 import config from 'src/config';
 import styles from './EditBounce.module.scss';
 
 export class EditBounce extends Component {
+
+  verifyDomain = () => {
+    const { name, verify, showAlert } = this.props;
+    return verify(name, 'cname')
+      .then((results) => {
+        const readyFor = resolveReadyFor(results);
+        if (readyFor.bounce) {
+          showAlert({ type: 'success', message: `You have successfully verified CNAME record of ${name}` });
+        } else {
+          showAlert({ type: 'error', message: `Unable to verify CNAME record of ${name}. ${results.dns.cname_error}` });
+        }
+      })
+      .catch((err) => {
+        showAlert({ type: 'error', message: `Unable to verify CNAME record of ${name}. ${err.message}` });
+      });
+  }
 
   renderRootDomainWarning() {
     const { name } = this.props;
@@ -66,7 +86,7 @@ export class EditBounce extends Component {
 
           <Grid>
             <Grid.Column xs={12} md={12} className={styles.Center}>
-              <Button >Verify CNAME Record</Button>
+              <Button onClick={this.verifyDomain}>Verify CNAME Record</Button>
             </Grid.Column>
           </Grid>
         </Panel>
@@ -108,3 +128,6 @@ export class EditBounce extends Component {
     );
   }
 }
+
+
+export default connect(null, { verify, showAlert })(EditBounce);

@@ -7,7 +7,7 @@ import { reduxForm } from 'redux-form';
 import { get as getDomain } from 'src/actions/sendingDomains';
 import { Loading, ApiErrorBanner } from 'src/components';
 import { Page } from '@sparkpost/matchbox';
-import { EditBounce } from './components/EditBounce';
+import EditBounce from './components/EditBounce';
 
 const breadcrumbAction = {
   content: 'Sending Domains',
@@ -27,7 +27,7 @@ export class EditPage extends Component {
   renderError() {
     return <ApiErrorBanner
       errorDetails={this.props.getError.message}
-      message="Sorry, we seem to have had some trouble loading your Sending Domain."
+      message='Sorry, we seem to have had some trouble loading your Sending Domain.'
       reload={this.loadDomainProps}
     />;
   }
@@ -68,7 +68,7 @@ const mapStateToProps = ({ sendingDomains: { domain, getError, getLoading }}) =>
   getLoading
 });
 
-const FORM_NAME = 'templateEdit';
+const FORM_NAME = 'sendingDomainEdit';
 
 const formOptions = {
   form: FORM_NAME,
