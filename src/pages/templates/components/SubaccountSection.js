@@ -4,6 +4,7 @@ import { Field } from 'redux-form';
 import { Panel } from '@sparkpost/matchbox';
 import { RadioGroup, SubaccountTypeaheadWrapper, TextFieldWrapper } from 'src/components';
 import ToggleBlock from 'src/components/toggleBlock/ToggleBlock';
+import { required } from 'src/helpers/validation';
 
 const createOptions = [
   { label: 'Assign to Master Account', value: 'master' },
@@ -36,7 +37,7 @@ export default class SubaccountSection extends Component {
     const { assignTo } = this.props;
 
     const typeahead = assignTo === 'subaccount'
-      ? <Field name='subaccount' component={SubaccountTypeaheadWrapper} />
+      ? <Field name='subaccount' component={SubaccountTypeaheadWrapper} validate={required} />
       : null;
 
     return (

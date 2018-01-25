@@ -17,7 +17,7 @@ export default class CreatePage extends Component {
     }
   }
 
-  handleCreate(values) {
+  handleCreate = (values) => {
     const { create, showAlert, id, history, subaccountId } = this.props;
 
     return create(values)

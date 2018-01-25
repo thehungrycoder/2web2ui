@@ -3,14 +3,12 @@ import ScrollToTop from '../ScrollToTop';
 import { shallow } from 'enzyme';
 
 describe('ScrollToTop', () => {
-  let scrollSpy;
-
   beforeEach(() => {
-    scrollSpy = jest.spyOn(window, 'scrollTo');
+    window.scrollTo = jest.fn();
   });
 
   afterEach(() => {
-    scrollSpy.mockReset();
+    jest.resetAllMocks();
   });
 
   it('renders nothing', () => {
@@ -20,7 +18,7 @@ describe('ScrollToTop', () => {
 
   it('scrolls to top once on mount', () => {
     shallow(<ScrollToTop/>);
-    expect(scrollSpy).toHaveBeenCalledWith(0, 0);
-    expect(scrollSpy).toHaveBeenCalledTimes(1);
+    expect(window.scrollTo).toHaveBeenCalledWith(0, 0);
+    expect(window.scrollTo).toHaveBeenCalledTimes(1);
   });
 });
