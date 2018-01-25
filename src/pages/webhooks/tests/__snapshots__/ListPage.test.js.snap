@@ -24,7 +24,13 @@ exports[`Page: Webhook List should render error when it fails 1`] = `
   <ApiErrorBanner
     errorDetails="this hook failed"
     message="Sorry, we seem to have had some trouble loading your webhooks."
-    reload={[Function]}
+    reload={
+      [MockFunction] {
+        "calls": Array [
+          Array [],
+        ],
+      }
+    }
   />
 </Page>
 `;
@@ -91,3 +97,16 @@ exports[`Page: Webhook List should render happy path 1`] = `
 `;
 
 exports[`Page: Webhook List should render loading component when loading data 1`] = `<Loading />`;
+
+exports[`Page: Webhook List should render row data properly 1`] = `
+Array [
+  <Link
+    replace={false}
+    to="/webhooks/details/id"
+  >
+    my webby hook
+  </Link>,
+  "id",
+  "go here",
+]
+`;
