@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Sending Domains Create Form renders correctly 1`] = `
+<form
+  onSubmit={[MockFunction]}
+>
+  <Panel.Section>
+    <p>
+      We recommend using a subdomain e.g. 
+      <em>
+        mail.mydomain.com
+      </em>
+      . Depending on how you want to use your domain, you many not be able to completely configure your DNS records if you use your organizational domain.
+    </p>
+    <Field
+      component={[Function]}
+      disabled={false}
+      label="Domain Name"
+      name="domain"
+      placeholder="email.example.com"
+      validate={
+        Array [
+          [Function],
+          [Function],
+        ]
+      }
+    />
+  </Panel.Section>
+  <Panel.Section>
+    <Button
+      disabled={false}
+      primary={true}
+      size="default"
+      submit={true}
+    >
+      Add Domain
+    </Button>
+  </Panel.Section>
+</form>
+`;
+
+exports[`Sending Domains Create Form renders submitting state correctly 1`] = `
+<form
+  onSubmit={[MockFunction]}
+>
+  <Panel.Section>
+    <p>
+      We recommend using a subdomain e.g. 
+      <em>
+        mail.mydomain.com
+      </em>
+      . Depending on how you want to use your domain, you many not be able to completely configure your DNS records if you use your organizational domain.
+    </p>
+    <Field
+      component={[Function]}
+      disabled={true}
+      label="Domain Name"
+      name="domain"
+      placeholder="email.example.com"
+      validate={
+        Array [
+          [Function],
+          [Function],
+        ]
+      }
+    />
+  </Panel.Section>
+  <Panel.Section>
+    <Button
+      disabled={true}
+      primary={true}
+      size="default"
+      submit={true}
+    >
+      Submitting...
+    </Button>
+  </Panel.Section>
+</form>
+`;
