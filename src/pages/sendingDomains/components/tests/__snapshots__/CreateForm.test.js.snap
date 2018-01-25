@@ -2,7 +2,7 @@
 
 exports[`Sending Domains Create Form renders correctly 1`] = `
 <form
-  onSubmit={[Function]}
+  onSubmit={[MockFunction]}
 >
   <Panel.Section>
     <p>
@@ -44,7 +44,7 @@ exports[`Sending Domains Create Form renders correctly 1`] = `
 
 exports[`Sending Domains Create Form renders submitting state correctly 1`] = `
 <form
-  onSubmit={[Function]}
+  onSubmit={[MockFunction]}
 >
   <Panel.Section>
     <p>
