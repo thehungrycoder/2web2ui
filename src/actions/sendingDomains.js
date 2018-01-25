@@ -21,13 +21,13 @@ export function get(id) {
     }
   });
 }
-
-export function remove(id) {
+export function update({ id, ...updateFields }) {
   return sparkpostApiRequest({
-    type: 'DELETE_SENDING_DOMAIN',
+    type: 'UPDATE_SENDING_DOMAIN',
     meta: {
-      method: 'DELETE',
-      url: `/sending-domains/${id}`
+      method: 'PUT',
+      url: `/sending-domains/${id}`,
+      data: updateFields
     }
   });
 }
@@ -46,13 +46,14 @@ export function create(data) {
   });
 };
 
-export function update({ id, ...updateFields }) {
+export function remove(id, subaccount) {
   return sparkpostApiRequest({
-    type: 'UPDATE_SENDING_DOMAIN',
+    type: 'DELETE_SENDING_DOMAIN',
     meta: {
-      method: 'PUT',
+      method: 'DELETE',
       url: `/sending-domains/${id}`,
-      data: updateFields
+      headers: setSubaccountHeader(subaccount)
     }
   });
 }
+

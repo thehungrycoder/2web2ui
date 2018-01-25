@@ -10,9 +10,37 @@ exports[`Sending Domains Edit Page renders correctly 1`] = `
     }
   }
   empty={Object {}}
+  secondaryActions={
+    Array [
+      Object {
+        "content": "Delete",
+        "onClick": [Function],
+      },
+    ]
+  }
   title="Edit id"
 >
-  Coming soon
+  <Panel
+    sectioned={true}
+  >
+    <Panel.Section>
+      <DomainStatus />
+    </Panel.Section>
+    <Panel.Section />
+    <Panel.Section />
+    <Panel.Section />
+  </Panel>
+  <DeleteModal
+    content={
+      <p>
+        Any future transmission that uses this domain will be rejected.
+      </p>
+    }
+    onCancel={[Function]}
+    onDelete={[Function]}
+    open={false}
+    title="Are you sure you want to delete this sending domain?"
+  />
 </Page>
 `;
 
@@ -26,6 +54,14 @@ exports[`Sending Domains Edit Page renders error banner correctly 1`] = `
     }
   }
   empty={Object {}}
+  secondaryActions={
+    Array [
+      Object {
+        "content": "Delete",
+        "onClick": [Function],
+      },
+    ]
+  }
   title="Edit id"
 >
   <ApiErrorBanner
@@ -33,7 +69,62 @@ exports[`Sending Domains Edit Page renders error banner correctly 1`] = `
     message="Sorry, we seem to have had some trouble loading your Sending Domain."
     reload={[Function]}
   />
+  <DeleteModal
+    content={
+      <p>
+        Any future transmission that uses this domain will be rejected.
+      </p>
+    }
+    onCancel={[Function]}
+    onDelete={[Function]}
+    open={false}
+    title="Are you sure you want to delete this sending domain?"
+  />
 </Page>
 `;
 
 exports[`Sending Domains Edit Page renders loading correctly 1`] = `<Loading />`;
+
+exports[`Sending Domains Edit Page should show a delete modal 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "Sending Domains",
+      "to": "/account/sending-domains",
+    }
+  }
+  empty={Object {}}
+  secondaryActions={
+    Array [
+      Object {
+        "content": "Delete",
+        "onClick": [Function],
+      },
+    ]
+  }
+  title="Edit id"
+>
+  <Panel
+    sectioned={true}
+  >
+    <Panel.Section>
+      <DomainStatus />
+    </Panel.Section>
+    <Panel.Section />
+    <Panel.Section />
+    <Panel.Section />
+  </Panel>
+  <DeleteModal
+    content={
+      <p>
+        Any future transmission that uses this domain will be rejected.
+      </p>
+    }
+    onCancel={[Function]}
+    onDelete={[Function]}
+    open={true}
+    title="Are you sure you want to delete this sending domain?"
+  />
+</Page>
+`;

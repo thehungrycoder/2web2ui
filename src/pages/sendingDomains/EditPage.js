@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
-import { get as getDomain } from 'src/actions/sendingDomains';
-import { Loading, ApiErrorBanner } from 'src/components';
+import { get as getDomain, remove as deleteDomain, update as updateDomain } from 'src/actions/sendingDomains';
+import { showAlert } from 'src/actions/globalAlert';
+
+import { Loading, ApiErrorBanner, DeleteModal } from 'src/components';
 import { Page } from '@sparkpost/matchbox';
+
+import { apiCallMessage } from 'src/helpers/apiMessages';
+
+import { DomainStatus } from './components/DomainStatus';
 
 const breadcrumbAction = {
   content: 'Sending Domains',
@@ -14,13 +19,64 @@ const breadcrumbAction = {
 };
 
 export class EditPage extends Component {
-  componentDidMount() {
-    this.loadDomainProps();
+  state = {
+    showDelete: false
+  };
+
+  toggleDelete = () => this.setState({ showDelete: !this.state.showDelete });
+
+  secondaryActions = [
+    {
+      content: 'Delete',
+      onClick: this.toggleDelete
+    }
+  ];
+
+  deleteDomain = () => {
+    const {
+      deleteDomain,
+      showAlert,
+      history,
+      match: { params: { id }}
+    } = this.props;
+
+    return deleteDomain(id)
+      .then(() => {
+        showAlert({
+          type: 'success',
+          message: `Domain ${id} deleted.`
+        });
+        history.push('/account/sending-domains');
+      })
+      .catch((err) => showAlert({
+        type: 'error',
+        message: 'Could not delete domain',
+        details: apiCallMessage(err)
+      }));
+  };
+
+  shareDomainChange = () => {
+    const {
+      match: { params: { id }},
+      domain: { shared_with_subaccounts },
+      updateDomain,
+      showAlert
+    } = this.props;
+    return updateDomain({
+      id,
+      shared_with_subaccounts: !shared_with_subaccounts
+    }).catch((err) => showAlert({
+      type: 'error',
+      message: 'Could not update domain',
+      details: apiCallMessage(err)
+    }));
   }
 
-  loadDomainProps = () => {
-    this.props.getDomain(this.props.match.params.id);
-  };
+  componentDidMount() {
+    return this.loadDomainProps();
+  }
+
+  loadDomainProps = () => this.props.getDomain(this.props.match.params.id);
 
   renderError() {
     return <ApiErrorBanner
@@ -30,29 +86,53 @@ export class EditPage extends Component {
     />;
   }
 
-  render() {
-    const { getLoading, getError, match: { params: { id }}} = this.props;
+  renderPage() {
+    const {
+      domain
+    } = this.props;
 
-    if (getLoading) {
+    return <DomainStatus
+      domain={domain}
+      onShareDomainChange={this.shareDomainChange} />;
+  }
+
+  render() {
+    const { domain, getError, match: { params: { id }}} = this.props;
+
+    if (domain.id !== id) {
       return <Loading />;
     }
 
     return (
       <Page
         title={`Edit ${id}`}
+        secondaryActions={this.secondaryActions}
         breadcrumbAction={breadcrumbAction}
       >
-        {getError ? this.renderError() : 'Coming soon'}
+        { getError ? this.renderError() : this.renderPage() }
 
+        <DeleteModal
+          open={this.state.showDelete}
+          title='Are you sure you want to delete this sending domain?'
+          content={<p>Any future transmission that uses this domain will be rejected.</p>}
+          onCancel={this.toggleDelete}
+          onDelete={this.deleteDomain}
+        />
       </Page>
     );
   }
 }
 
-const mapStateToProps = ({ sendingDomains: { domain, getError, getLoading }}) => ({
+const mapStateToProps = ({ sendingDomains: { domain, getError }}) => ({
   domain,
-  getError,
-  getLoading
+  getError
 });
 
-export default withRouter(connect(mapStateToProps, { getDomain })(EditPage));
+const mapDispatchToProps = {
+  getDomain,
+  deleteDomain,
+  updateDomain,
+  showAlert
+};
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(EditPage));
