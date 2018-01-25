@@ -1,0 +1,93 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Page: Webhook List should render error when it fails 1`] = `
+<Page
+  empty={
+    Object {
+      "content": <p>
+        Push message events directly to your own endpoints
+      </p>,
+      "image": "Setup",
+      "show": false,
+      "title": "Create a Webhook",
+    }
+  }
+  primaryAction={
+    Object {
+      "Component": [Function],
+      "content": "Create Webhook",
+      "to": "/webhooks/create",
+    }
+  }
+  title="Webhooks"
+>
+  <ApiErrorBanner
+    errorDetails="this hook failed"
+    message="Sorry, we seem to have had some trouble loading your webhooks."
+    reload={[Function]}
+  />
+</Page>
+`;
+
+exports[`Page: Webhook List should render happy path 1`] = `
+<Page
+  empty={
+    Object {
+      "content": <p>
+        Push message events directly to your own endpoints
+      </p>,
+      "image": "Setup",
+      "show": false,
+      "title": "Create a Webhook",
+    }
+  }
+  primaryAction={
+    Object {
+      "Component": [Function],
+      "content": "Create Webhook",
+      "to": "/webhooks/create",
+    }
+  }
+  title="Webhooks"
+>
+  <TableCollection
+    columns={
+      Array [
+        "Name",
+        "ID",
+        "Target",
+      ]
+    }
+    defaultSortColumn={null}
+    defaultSortDirection="asc"
+    filterBox={
+      Object {
+        "itemToStringKeys": Array [
+          "name",
+          "id",
+          "target",
+        ],
+        "show": true,
+      }
+    }
+    getRowData={[Function]}
+    pagination={true}
+    rows={
+      Array [
+        Object {
+          "id": "id",
+          "name": "my webby hook",
+          "target": "go here",
+        },
+        Object {
+          "id": "id-2",
+          "name": "my webby hooki 2",
+          "target": "go there",
+        },
+      ]
+    }
+  />
+</Page>
+`;
+
+exports[`Page: Webhook List should render loading component when loading data 1`] = `<Loading />`;
