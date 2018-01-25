@@ -1,4 +1,5 @@
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
+import setSubaccountHeader from './helpers/setSubaccountHeader';
 
 export function list() {
   return sparkpostApiRequest({
@@ -16,6 +17,20 @@ export function get(id) {
     meta: {
       method: 'GET',
       url: `/sending-domains/${id}`
+    }
+  });
+}
+
+export function create(data) {
+  const { assignTo, subaccount, ...formData } = data;
+
+  return sparkpostApiRequest({
+    type: 'CREATE_SENDING_DOMAIN',
+    meta: {
+      method: 'POST',
+      url: '/sending-domains',
+      headers: setSubaccountHeader(subaccount),
+      data: { ...formData, shared_with_subaccounts: assignTo === 'shared' }
     }
   });
 }

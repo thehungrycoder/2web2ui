@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Sending Domains Subaccount Form renders correctly 1`] = `
+<div>
+  <Field
+    component={[Function]}
+    name="assignTo"
+    options={
+      Array [
+        Object {
+          "label": "Assign to Master Account",
+          "value": "master",
+        },
+        Object {
+          "label": "Share with all Subaccounts",
+          "value": "shared",
+        },
+        Object {
+          "label": "Assign to Subaccount",
+          "value": "subaccount",
+        },
+      ]
+    }
+    title="Subaccount Assignment"
+  />
+</div>
+`;
+
+exports[`Sending Domains Subaccount Form renders typeahead if subaccount is selected 1`] = `
+<Field
+  component={[Function]}
+  name="subaccount"
+  validate={[Function]}
+/>
+`;
