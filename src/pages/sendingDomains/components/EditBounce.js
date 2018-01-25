@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Field, change } from 'redux-form';
+import { Field } from 'redux-form';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
@@ -10,36 +10,9 @@ import ToggleBlock from 'src/pages/templates/components/ToggleBlock';
 import { showAlert } from 'src/actions/globalAlert';
 import { SendingDomainSection } from './SendingDomainSection';
 import { resolveReadyFor } from 'src/helpers/domains';
+import SimpleTable from './SimpleTable';
 import config from 'src/config';
-import styles from './EditBounce.module.scss';
 
-const renderVerificationData = (name) => (
-  <div>
-    <Grid>
-      <Grid.Column xs={12} md={2}>
-        <strong>Type</strong>
-      </Grid.Column>
-      <Grid.Column xs={12} md={4}>
-        <strong>Hostname</strong>
-      </Grid.Column>
-      <Grid.Column xs={12} md={6}>
-        <strong>Value</strong>
-      </Grid.Column>
-    </Grid>
-    <div className={styles.GridSpacer} />
-    <Grid>
-      <Grid.Column xs={12} md={2}>
-        <p>CNAME</p>
-      </Grid.Column>
-      <Grid.Column xs={12} md={4}>
-        <p>{ name }</p>
-      </Grid.Column>
-      <Grid.Column xs={12} md={6}>
-        <p>{ config.bounceDomains.cnameValue }</p>
-      </Grid.Column>
-    </Grid>
-  </div>
-);
 export class EditBounce extends Component {
 
   verifyDomain = () => {
@@ -59,14 +32,13 @@ export class EditBounce extends Component {
   }
 
   toggleDefaultBounce = () => {
-    const { id, update, domain, change, form } = this.props;
+    const { id, update, domain, showAlert } = this.props;
 
     return update(id, {
       is_default_bounce_domain: !domain.is_default_bounce_domain
     })
       .catch((err) => {
-        //restore previous value
-        change(form, 'is_default_bounce_domain', domain.is_default_bounce_domain);
+        showAlert({ type: 'error', message: `Failed to update default bounce option. ${err.message}` });
       });
   }
 
@@ -99,11 +71,15 @@ export class EditBounce extends Component {
       </Grid.Column>
       <Grid.Column xs={12} md={7}>
         <Panel>
-          <Panel.Section
+          <Panel
+            title='DNS Settings'
             actions={[{ content: 'Verify CNAME Record', onClick: this.verifyDomain }]}
           >
-            { renderVerificationData(id)}
-          </Panel.Section>
+            <SimpleTable
+              header={['Type', 'Hostname', 'Value']}
+              rows={[['CNAME', id, config.bounceDomains.cnameValue]]}
+            />
+          </Panel>
         </Panel>
       </Grid.Column>
     </Grid>);
@@ -147,4 +123,4 @@ export class EditBounce extends Component {
 }
 
 
-export default connect(null, { verify, update, change, showAlert })(EditBounce);
+export default connect(null, { verify, update, showAlert })(EditBounce);
