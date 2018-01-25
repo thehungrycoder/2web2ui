@@ -4,6 +4,7 @@ import { reduxForm, Field } from 'redux-form';
 import { Panel, Button } from '@sparkpost/matchbox';
 import { TextFieldWrapper } from 'src/components';
 import { required, domain } from 'src/helpers/validation';
+import { hasSubaccounts } from 'src/selectors/subaccounts';
 
 import SubaccountForm from './SubaccountForm';
 
@@ -11,7 +12,7 @@ const FORM_NAME = 'createSendingDomain';
 
 export class CreateForm extends Component {
   render() {
-    const { submitting, handleSubmit } = this.props;
+    const { submitting, handleSubmit, hasSubaccounts } = this.props;
 
     return (
       <form onSubmit={handleSubmit}>
@@ -25,7 +26,7 @@ export class CreateForm extends Component {
             validate={[required, domain]}
             disabled={submitting}
           />
-          <SubaccountForm formName={FORM_NAME} />
+          {hasSubaccounts && <SubaccountForm formName={FORM_NAME} />}
         </Panel.Section>
         <Panel.Section>
           <Button submit primary disabled={submitting}>{submitting ? 'Submitting...' : 'Add Domain'}</Button>
@@ -35,7 +36,8 @@ export class CreateForm extends Component {
   }
 }
 
-const mapStateToProps = () => ({
+const mapStateToProps = (state) => ({
+  hasSubaccounts: hasSubaccounts(state),
   initialValues: {
     assignTo: 'master'
   }

@@ -25,9 +25,6 @@ exports[`Sending Domains Create Form renders correctly 1`] = `
         ]
       }
     />
-    <Connect(SubaccountForm)
-      formName="createSendingDomain"
-    />
   </Panel.Section>
   <Panel.Section>
     <Button
@@ -66,9 +63,6 @@ exports[`Sending Domains Create Form renders submitting state correctly 1`] = `
           [Function],
         ]
       }
-    />
-    <Connect(SubaccountForm)
-      formName="createSendingDomain"
     />
   </Panel.Section>
   <Panel.Section>

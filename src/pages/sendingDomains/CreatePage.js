@@ -14,7 +14,7 @@ export class CreatePage extends Component {
     return createDomain(values)
       .then(() => history.push(`/account/sending-domains/edit/${values.domain}`))
       .catch((err) => {
-        showAlert({ type: 'error', message: 'Could not create template', details: err.message });
+        showAlert({ type: 'error', message: 'Could not add domain', details: err.message });
       });
   }
 

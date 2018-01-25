@@ -31,7 +31,7 @@ describe('Sending Domains Create Page', () => {
   it('on error - shows and error', async() => {
     wrapper.setProps({ createDomain: jest.fn(() => Promise.reject({ message: 'error' })) });
     await wrapper.instance().handleCreate({ domain: 'domain.com' });
-    expect(wrapper.instance().props.showAlert).toHaveBeenCalledWith({ details: 'error', message: 'Could not create template', type: 'error' });
+    expect(wrapper.instance().props.showAlert).toHaveBeenCalledWith({ details: 'error', message: 'Could not add domain', type: 'error' });
     expect(wrapper.instance().props.history.push).not.toHaveBeenCalled();
   });
 });

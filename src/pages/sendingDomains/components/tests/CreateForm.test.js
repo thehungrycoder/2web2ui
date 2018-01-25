@@ -1,13 +1,15 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 import { CreateForm } from '../CreateForm';
+import SubaccountForm from '../SubaccountForm';
 
 describe('Sending Domains Create Form', () => {
   let wrapper;
 
   const props = {
     submitting: false,
-    handleSubmit: jest.fn()
+    handleSubmit: jest.fn(),
+    hasSubaccounts: false
   };
 
   beforeEach(() => {
@@ -16,6 +18,12 @@ describe('Sending Domains Create Form', () => {
 
   it('renders correctly', () => {
     expect(wrapper).toMatchSnapshot();
+    expect(wrapper.find(SubaccountForm)).toHaveLength(0);
+  });
+
+  it('renders subaccount section if account has subaccounts', () => {
+    wrapper.setProps({ hasSubaccounts: true });
+    expect(wrapper.find(SubaccountForm)).toHaveLength(1);
   });
 
   it('submits correctly', () => {
