@@ -1,9 +1,9 @@
 import React from 'react';
 import { Select } from '@sparkpost/matchbox';
-import fp from 'lodash/fp';
+import _ from 'lodash';
 
-const OPTIONS = [
-  { label: 'Administrator', value: 'admin' },
+const DEFAULT_OPTIONS = [
+  { label: 'Admin', value: 'admin' },
   { label: 'Reporting', value: 'reporting' }
 ];
 
@@ -16,26 +16,35 @@ const OPTIONS = [
  * @param {null, string} value
  * @param {Object} input - redux-form <Field /> props
  */
-export default function AccessSelect({
-  disabled = false, name = null, onChange = fp.noop, value = null, input = {}, ...rest
+export default function RoleSelect({
+  disabled = false,
+  name = null,
+  onChange = _.noop,
+  value = null,
+  input = {},
+  allowSuperUser = false,
+  selectOptions = [ ...DEFAULT_OPTIONS ],
+  ...rest
 }) {
-  // Only return text to match the current style
+
+  if (allowSuperUser) {
+    selectOptions.push({ label: 'Super User', value: 'superuser' });
+  }
+
+  // Only return text instead of select box
   // TODO: won't need the span tags with v16
   if (disabled) {
-    const label = OPTIONS.find((option) => option.value === value).label;
+    const label = selectOptions.find((option) => option.value === value).label;
     return <span>{label}</span>;
   }
 
-  // Merge new access value and return updated user object
-  const handleChange = (event) => {
-    onChange(fp.pick(['name', 'value'])(event.target));
-  };
+  const handleChange = ({ target }) => onChange(target);
 
   return (
     <Select
       name={name}
       onChange={handleChange}
-      options={OPTIONS}
+      options={selectOptions}
       value={value}
       {...input}
       {...rest}

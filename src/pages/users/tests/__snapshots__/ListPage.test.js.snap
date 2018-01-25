@@ -108,7 +108,7 @@ exports[`Users list page renders table and hidden modal 1`] = `
       content={
         <p>
           User "
-          " will no longer be able to log in or access this SparkPost account.
+          " will no longer be able to log in or access this SparkPost account and all API keys associated with this user will be immediately deleted.
         </p>
       }
       onCancel={[Function]}

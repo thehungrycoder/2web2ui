@@ -1,19 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AccessSelect renders access label when disabled 1`] = `
-<span>
-  Administrator
-</span>
-`;
-
-exports[`AccessSelect renders select 1`] = `
+exports[`Component: RoleSelect should render the select 1`] = `
 <Select
-  name="renders select"
+  name={null}
   onChange={[Function]}
   options={
     Array [
       Object {
-        "label": "Administrator",
+        "label": "Admin",
         "value": "admin",
       },
       Object {
@@ -26,4 +20,10 @@ exports[`AccessSelect renders select 1`] = `
   required={false}
   value="admin"
 />
+`;
+
+exports[`Component: RoleSelect should render when disabled 1`] = `
+<span>
+  Admin
+</span>
 `;

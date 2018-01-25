@@ -3,12 +3,13 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import fp from 'lodash/fp';
 import { Page } from '@sparkpost/matchbox';
+import TimeAgo from 'react-timeago';
 
 import * as usersActions from 'src/actions/users';
 import { selectUsers } from 'src/selectors/users';
 
 import { Loading, ApiErrorBanner, DeleteModal, TableCollection } from 'src/components';
-import AccessSelect from './components/AccessSelect';
+import RoleSelect from './components/RoleSelect';
 import DeleteButton from './components/DeleteButton';
 
 const COLUMNS = ['Name', 'Role', 'Email', 'Last Login', null];
@@ -32,14 +33,15 @@ export class ListPage extends Component {
   // Do not allow current user to change their access/role or delete their account
   getRowData = (user) => [
     user.name,
-    <AccessSelect
+    <RoleSelect
       disabled={user.isCurrentUser}
       name={user.username}
       onChange={this.handleAccessChange}
       value={user.access}
+      allowSuperUser={user.access === 'superuser'}
     />,
     user.email,
-    user.last_login,
+    user.last_login ? <TimeAgo date={user.last_login} live={false} /> : 'Never',
     <DeleteButton
       disabled={user.isCurrentUser}
       name={user.username}
@@ -89,7 +91,7 @@ export class ListPage extends Component {
         onDelete={this.handleDelete}
         onCancel={this.handleCancel}
         open={isOpen}
-        content={<p>User "{name}" will no longer be able to log in or access this SparkPost account.</p>}
+        content={<p>User "{name}" will no longer be able to log in or access this SparkPost account and all API keys associated with this user will be immediately deleted.</p>}
         title="Are you sure you want to delete this user?"
       />
     );

@@ -1,0 +1,151 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Page: User Create Page should render correctly by default 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "Users",
+      "to": "/account/users",
+    }
+  }
+  empty={Object {}}
+  title="Add User"
+>
+  <Panel>
+    <Panel.Section>
+      <form
+        onSubmit={[Function]}
+      >
+        <p>
+          An invitation will be sent to the email address you supply
+        </p>
+        <Field
+          component={[Function]}
+          label="Email address"
+          name="email"
+          validate={
+            Array [
+              [Function],
+              [Function],
+            ]
+          }
+        />
+        <Field
+          component={[Function]}
+          label="Role"
+          name="access"
+        />
+        <Button
+          disabled={false}
+          primary={true}
+          size="default"
+          submit={true}
+        >
+          Add User
+        </Button>
+      </form>
+    </Panel.Section>
+  </Panel>
+</Page>
+`;
+
+exports[`Page: User Create Page should render when pristine 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "Users",
+      "to": "/account/users",
+    }
+  }
+  empty={Object {}}
+  title="Add User"
+>
+  <Panel>
+    <Panel.Section>
+      <form
+        onSubmit={[Function]}
+      >
+        <p>
+          An invitation will be sent to the email address you supply
+        </p>
+        <Field
+          component={[Function]}
+          label="Email address"
+          name="email"
+          validate={
+            Array [
+              [Function],
+              [Function],
+            ]
+          }
+        />
+        <Field
+          component={[Function]}
+          label="Role"
+          name="access"
+        />
+        <Button
+          disabled={true}
+          primary={true}
+          size="default"
+          submit={true}
+        >
+          Add User
+        </Button>
+      </form>
+    </Panel.Section>
+  </Panel>
+</Page>
+`;
+
+exports[`Page: User Create Page should render when submitting 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "Users",
+      "to": "/account/users",
+    }
+  }
+  empty={Object {}}
+  title="Add User"
+>
+  <Panel>
+    <Panel.Section>
+      <form
+        onSubmit={[Function]}
+      >
+        <p>
+          An invitation will be sent to the email address you supply
+        </p>
+        <Field
+          component={[Function]}
+          label="Email address"
+          name="email"
+          validate={
+            Array [
+              [Function],
+              [Function],
+            ]
+          }
+        />
+        <Field
+          component={[Function]}
+          label="Role"
+          name="access"
+        />
+        <Button
+          disabled={true}
+          primary={true}
+          size="default"
+          submit={true}
+        >
+          Loading
+        </Button>
+      </form>
+    </Panel.Section>
+  </Panel>
+</Page>
+`;

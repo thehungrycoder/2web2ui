@@ -1,17 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`DeleteButton renders a button 1`] = `
+exports[`Component: User Page DeleteButton should render correctly by default 1`] = `
 <Button
-  name="renders a button"
+  name="delete-button-name"
   onClick={[Function]}
-  plain={true}
   size="default"
 >
-  <Icon
-    name="Delete"
-    size={18}
-  />
+  Delete
 </Button>
 `;
 
-exports[`DeleteButton renders null 1`] = `""`;
+exports[`Component: User Page DeleteButton should render when disabled 1`] = `""`;
