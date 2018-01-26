@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-const initialState = { list: [], webhook: {}, getLoading: true, docsLoading: true };
+const initialState = { batches: [], list: [], webhook: {}, getLoading: true, docsLoading: true };
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -91,6 +91,15 @@ export default (state = initialState, action) => {
 
     case 'GET_EVENT_SAMPLES_FAIL':
       return { ...state, docsLoading: false };
+
+    case 'GET_WEBHOOK_BATCHES_PENDING':
+      return { ...state, batchesLoading: true };
+
+    case 'GET_WEBHOOK_BATCHES_SUCCESS':
+      return { ...state, batches: action.payload, batchesLoading: false };
+
+    case 'GET_WEBHOOK_BATCHES_FAIL':
+      return { ...state, batchesLoading: false };
 
     default:
       return state;

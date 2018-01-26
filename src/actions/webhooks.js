@@ -84,3 +84,13 @@ export function getEventSamples(events) {
     }
   });
 }
+
+export function getBatches(id) {
+  return sparkpostApiRequest({
+    type: 'GET_WEBHOOK_BATCHES',
+    meta: {
+      method: 'GET',
+      url: `/webhooks/${id}/batch-status`
+    }
+  });
+}
