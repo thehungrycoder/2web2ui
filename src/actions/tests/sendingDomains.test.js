@@ -17,4 +17,16 @@ describe('Action Creator: Sending Domains', () => {
       expect(sendingDomains.create({ domain: 'domain.com', assignTo: 'shared' })).toMatchSnapshot();
     });
   });
+
+  describe('Verify', () => {
+    it('it should request with correct post data', () => {
+      expect(sendingDomains.verify('domain.com', 'cname')).toMatchSnapshot();
+    });
+  });
+
+  describe('Update', () => {
+    it('it should request with correct post data', () => {
+      expect(sendingDomains.update('domain.com', { is_default_bounce_domain: true })).toMatchSnapshot();
+    });
+  });
 });

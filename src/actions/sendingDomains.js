@@ -35,7 +35,6 @@ export function create(data) {
   });
 }
 
-
 export function verify(id, type) {
   const data = {};
   data[`${type}_verify`] = true;

@@ -46,3 +46,29 @@ Object {
   "type": "CREATE_SENDING_DOMAIN",
 }
 `;
+
+exports[`Action Creator: Sending Domains Update it should request with correct post data 1`] = `
+Object {
+  "meta": Object {
+    "data": Object {
+      "is_default_bounce_domain": true,
+    },
+    "method": "PUT",
+    "url": "/sending-domains/domain.com",
+  },
+  "type": "UPDATE_SENDING_DOMAIN",
+}
+`;
+
+exports[`Action Creator: Sending Domains Verify it should request with correct post data 1`] = `
+Object {
+  "meta": Object {
+    "data": Object {
+      "cname_verify": true,
+    },
+    "method": "POST",
+    "url": "/sending-domains/domain.com/verify",
+  },
+  "type": "VERIFY_SENDING_DOMAIN",
+}
+`;
