@@ -35,7 +35,6 @@ exports[`renders correctly 1`] = `
         },
         Object {
           "label": "Key",
-          "sortKey": "short_key",
           "width": "20%",
         },
         Object {
@@ -161,7 +160,6 @@ exports[`should show api key banner on successful create 1`] = `
         },
         Object {
           "label": "Key",
-          "sortKey": "short_key",
           "width": "20%",
         },
         Object {
