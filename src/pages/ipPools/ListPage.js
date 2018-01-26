@@ -6,7 +6,12 @@ import { getOrderedIpPools } from 'src/selectors/ipPools';
 import { Loading, TableCollection, ApiErrorBanner } from 'src/components';
 import { Page } from '@sparkpost/matchbox';
 
-const columns = ['Name', 'ID', 'Number of IPs Assigned'];
+const columns = [
+  { label: 'Name', sortKey: 'name' },
+  { label: 'ID', sortKey: 'id' },
+  { label: 'Number of IPs Assigned', sortKey: (pool) => pool.ips.length }
+];
+
 export const getRowData = ({ id, name, ips }) => {
   const nameLink = <Link to={`/account/ip-pools/edit/${id}`}>{name}</Link>;
   return [nameLink, id, ips.length.toString()];
