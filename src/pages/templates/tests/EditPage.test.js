@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import { EditPage } from '../EditPage';
+import EditPage from '../EditPage';
 
 describe('Template EditPage', () => {
   let wrapper;
@@ -23,22 +23,45 @@ describe('Template EditPage', () => {
       showAlert: jest.fn(),
       history: {
         push: jest.fn()
-      }
+      },
+      subaccountId: 101,
+      formName: 'templateEdit'
     };
 
     wrapper = shallow(<EditPage {...props} />);
   });
 
+  afterEach(() => {
+    jest.resetAllMocks();
+  });
+
   it('should render correctly', () => {
     expect(wrapper).toMatchSnapshot();
     expect(props.getTestData).toHaveBeenCalledWith({ id: 'id', mode: 'draft' });
-    expect(props.getDraft).toHaveBeenCalledWith('id');
-    expect(props.getPublished).toHaveBeenCalledWith('id');
+    expect(props.getDraft).toHaveBeenCalledWith('id', props.subaccountId);
+    expect(props.getPublished).toHaveBeenCalledWith('id', props.subaccountId);
+  });
+
+  it('should catch 404s on both published and draft', async() => {
+    wrapper.setProps({
+      getDraft: jest.fn(() => Promise.reject()),
+      getPublished: jest.fn(() => Promise.reject())
+    });
+    wrapper.instance().componentDidMount(); // Re-run cDM as it's already been mounted
+    await wrapper.instance().getTemplate();
+
+    expect(props.history.push).toHaveBeenCalledWith('/templates/');
+    expect(props.showAlert).toHaveBeenCalledWith({ type: 'error', message: 'Could not find template' });
   });
 
   it('should render loading', () => {
     wrapper.setProps({ loading: true });
     expect(wrapper.find('Loading')).toHaveLength(1);
+  });
+
+  it('should not show View Published link if template is not published', () => {
+    wrapper.setProps({ template: { published: false }});
+    expect(wrapper.find('Page').props().secondaryActions).toMatchSnapshot();
   });
 
   it('should handle modal toggle', () => {
@@ -51,7 +74,7 @@ describe('Template EditPage', () => {
     it('should handle success', async() => {
       wrapper.setProps({ publish: jest.fn(() => Promise.resolve()) });
       await wrapper.instance().handlePublish('values');
-      expect(props.history.push).toHaveBeenCalledWith('/templates/edit/id/published');
+      expect(props.history.push).toHaveBeenCalledWith('/templates/edit/id/published?subaccount=101');
       expect(props.showAlert).toHaveBeenCalledWith({ type: 'success', message: 'Template published' });
     });
 

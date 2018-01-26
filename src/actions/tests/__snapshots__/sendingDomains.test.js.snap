@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Action Creator: Sending Domains Create domain should be assigned a subaccount 1`] = `
+Object {
+  "meta": Object {
+    "data": Object {
+      "domain": "domain.com",
+      "shared_with_subaccounts": false,
+    },
+    "headers": Object {
+      "x-msys-subaccount": 101,
+    },
+    "method": "POST",
+    "url": "/sending-domains",
+  },
+  "type": "CREATE_SENDING_DOMAIN",
+}
+`;
+
+exports[`Action Creator: Sending Domains Create domain should be assigned to master 1`] = `
+Object {
+  "meta": Object {
+    "data": Object {
+      "domain": "domain.com",
+      "shared_with_subaccounts": false,
+    },
+    "headers": Object {},
+    "method": "POST",
+    "url": "/sending-domains",
+  },
+  "type": "CREATE_SENDING_DOMAIN",
+}
+`;
+
+exports[`Action Creator: Sending Domains Create domain should be shared with all subaccount 1`] = `
+Object {
+  "meta": Object {
+    "data": Object {
+      "domain": "domain.com",
+      "shared_with_subaccounts": true,
+    },
+    "headers": Object {},
+    "method": "POST",
+    "url": "/sending-domains",
+  },
+  "type": "CREATE_SENDING_DOMAIN",
+}
+`;

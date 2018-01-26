@@ -70,16 +70,20 @@ export const CheckboxWrapper = ({ input, meta, ...rest }) => {
  *   subaccounts={subaccountsFromReduxStore}
  * />
  */
-export const SubaccountTypeaheadWrapper = ({ input, subaccounts, label, placeholder }) => (
-  <SubaccountTypeahead
-    name={input.name}
-    onChange={input.onChange}
-    selectedItem={input.value}
-    subaccounts={subaccounts}
-    label={label}
-    placeholder={placeholder}
-  />
-);
+export const SubaccountTypeaheadWrapper = ({ input, subaccounts, label, placeholder, meta }) => {
+  const { active, error, touched } = meta;
+  return (
+    <SubaccountTypeahead
+      name={input.name}
+      onChange={input.onChange}
+      selectedItem={input.value}
+      subaccounts={subaccounts}
+      label={label}
+      placeholder={placeholder}
+      error={!active && touched && error ? error : undefined}
+    />
+  );
+};
 
 
 export const PoolTypeaheadWrapper = ({ input, pools }) => (

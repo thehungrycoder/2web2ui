@@ -1,6 +1,6 @@
 import React from 'react';
 import ScrollToTop from './ScrollToTop';
-import { Navigation } from 'src/components';
+import Navigation from 'src/components/navigation/Navigation';
 import styles from './Layout.module.scss';
 
 const App = ({ children }) => (

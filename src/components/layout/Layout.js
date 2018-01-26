@@ -9,7 +9,7 @@ import routes from 'src/config/routes';
 /**
  * Returns layout component from routes config
  */
-const Layout = ({ children, location }) => {
+export const Layout = ({ children, location }) => {
 
   // matchPath uses the same matching that <Route> uses
   const route = _.find(routes, ({ path, exact = true }) => matchPath(location.pathname, {

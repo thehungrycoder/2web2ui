@@ -1,25 +1,23 @@
 /* eslint max-lines: ["error", 200] */
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Field, change } from 'redux-form';
-import { list as listDomains } from 'src/actions/sendingDomains';
-import { selectVerifiedDomains } from 'src/selectors/sendingDomains';
+import { Field } from 'redux-form';
 import config from 'src/config';
 
 // Components
 import { Panel } from '@sparkpost/matchbox';
-import ToggleBlock from './ToggleBlock';
+import ToggleBlock from 'src/components/toggleBlock/ToggleBlock';
+import SubaccountSection from './containers/SubaccountSection.container';
 import { TextFieldWrapper } from 'src/components';
 import FromEmailWrapper from './FromEmail';
 
 // Helpers & Validation
 import { required } from 'src/helpers/validation';
 import { slugify } from 'src/helpers/string';
-import { ID_ALLOWED_CHARS, idSyntax, substitution, emailOrSubstitution } from './validation';
+import { ID_ALLOWED_CHARS, idSyntax, emailOrSubstitution, substitution } from './validation';
 
 import styles from './FormEditor.module.scss';
 
-export class Form extends Component {
+export default class Form extends Component {
   // Fills in ID based on Name
   handleIdFill = (e) => {
     const { newTemplate, change, name } = this.props;
@@ -45,127 +43,131 @@ export class Form extends Component {
     }
   }
 
-  verifiedDomain = (value) => {
+  validateDomain = (value) => {
     const { domains } = this.props;
+
     const parts = value.split('@');
 
     if (parts.length > 1) {
       const validSandbox = value === `${config.sandbox.localpart}@${config.sandbox.domain}`;
       const validDomain = parts[1] && (domains.map(({ domain }) => domain).includes(parts[1]) || !substitution(parts[1]));
+
       return validSandbox || validDomain ? undefined : 'Must use a verified sending domain';
     }
 
     return undefined;
   }
 
+  // Prevents unchecked value from equaling ""
+  parseToggle = (value) => !!value
+
   render() {
-    const { newTemplate, published, domains } = this.props;
+    const { newTemplate, published, domains, hasSubaccounts, name } = this.props;
 
     return (
-      <Panel className={styles.FormPanel}>
-        <Panel.Section>
-          <Field
-            name='name'
-            component={TextFieldWrapper}
-            label='Template Name'
-            onChange={this.handleIdFill}
-            disabled={published}
-            validate={required}
-          />
+      <div>
+        <Panel className={styles.FormPanel}>
+          <Panel.Section>
+            <Field
+              name='name'
+              component={TextFieldWrapper}
+              label='Template Name'
+              onChange={this.handleIdFill}
+              disabled={published}
+              validate={required}
+            />
 
-          <Field
-            name='id'
-            component={TextFieldWrapper}
-            label='Template ID'
-            helpText={'A Unique ID for your template, we\'ll fill this in for you.'}
-            disabled={!newTemplate || published}
-            validate={[required, idSyntax]}
-          />
-        </Panel.Section>
+            <Field
+              name='id'
+              component={TextFieldWrapper}
+              label='Template ID'
+              helpText={'A Unique ID for your template, we\'ll fill this in for you.'}
+              disabled={!newTemplate || published}
+              validate={[required, idSyntax]}
+            />
+          </Panel.Section>
+          { hasSubaccounts && <SubaccountSection newTemplate={newTemplate} formName={name} disabled={published} /> }
+        </Panel>
+        <Panel>
+          <Panel.Section>
+            <Field
+              name='content.subject'
+              component={TextFieldWrapper}
+              label='Subject'
+              disabled={published}
+              validate={required}
+            />
 
-        <Panel.Section>
-          <Field
-            name='content.from.name'
-            component={TextFieldWrapper}
-            label='From Name'
-            helpText='A friendly from for your recipients.'
-            disabled={published}
-          />
+            <Field
+              name='content.from.email'
+              component={FromEmailWrapper}
+              placeholder='example@email.com'
+              label='From Email'
+              disabled={!domains.length || published}
+              validate={[required, emailOrSubstitution, this.validateDomain]}
+              domains={domains}
+            />
 
-          <Field
-            name='content.from.email'
-            component={FromEmailWrapper}
-            placeholder='example@email.com'
-            label='From Email'
-            disabled={!domains.length || published}
-            validate={[required, emailOrSubstitution, this.verifiedDomain]}
-            domains={domains}
-          />
+            <Field
+              name='content.from.name'
+              component={TextFieldWrapper}
+              label='From Name'
+              helpText='A friendly from for your recipients.'
+              disabled={published}
+            />
 
-          <Field
-            name='reply_to'
-            component={TextFieldWrapper}
-            label='Reply To'
-            helpText='An email address recipients can reply to.'
-            disabled={published}
-            validate={emailOrSubstitution}
-          />
+            <Field
+              name='reply_to'
+              component={TextFieldWrapper}
+              label='Reply To'
+              helpText='An email address recipients can reply to.'
+              disabled={published}
+              validate={emailOrSubstitution}
+            />
 
-          <Field
-            name='content.subject'
-            component={TextFieldWrapper}
-            label='Subject'
-            disabled={published}
-            validate={required}
-          />
+            <Field
+              name='description'
+              component={TextFieldWrapper}
+              label='Description'
+              helpText='Not visible to recipients.'
+              disabled={published}
+            />
+          </Panel.Section>
+        </Panel>
+        <Panel>
+          <Panel.Section>
+            <Field
+              name='options.open_tracking'
+              component={ToggleBlock}
+              label='Track Opens'
+              type='checkbox'
+              parse={this.parseToggle}
+              disabled={published}
+            />
 
-          <Field
-            name='description'
-            component={TextFieldWrapper}
-            label='Description'
-            helpText='Not visible to recipients.'
-            disabled={published}
-          />
-        </Panel.Section>
+            <Field
+              name='options.click_tracking'
+              component={ToggleBlock}
+              label='Track Clicks'
+              type='checkbox'
+              parse={this.parseToggle}
+              disabled={published}
+            />
+          </Panel.Section>
 
-        <Panel.Section>
-          <Field
-            name='options.open_tracking'
-            component={ToggleBlock}
-            label='Track Opens'
-            type='checkbox'
-            parse={(value) => !!value} // Prevents unchecked value from equaling ""
-            disabled={published}
-          />
-
-          <Field
-            name='options.click_tracking'
-            component={ToggleBlock}
-            label='Track Clicks'
-            type='checkbox'
-            parse={(value) => !!value}
-            disabled={published}
-          />
-        </Panel.Section>
-
-        <Panel.Section>
-          <Field
-            name='options.transactional'
-            component={ToggleBlock}
-            label='Transactional'
-            type='checkbox'
-            parse={(value) => !!value}
-            helpText='Transactional messages are triggered by a user’s actions on the website, like requesting a password reset, signing up, or making a purchase.'
-            disabled={published}
-          />
-        </Panel.Section>
-      </Panel>
+          <Panel.Section>
+            <Field
+              name='options.transactional'
+              component={ToggleBlock}
+              label='Transactional'
+              type='checkbox'
+              parse={this.parseToggle}
+              helpText='Transactional messages are triggered by a user’s actions on the website, like requesting a password reset, signing up, or making a purchase.'
+              disabled={published}
+            />
+          </Panel.Section>
+        </Panel>
+      </div>
     );
   }
 }
-
-const mapStateToProps = (state) => ({
-  domains: selectVerifiedDomains(state)
-});
-
-export default connect(mapStateToProps, { change, listDomains })(Form);

@@ -298,7 +298,7 @@ const routes = [
   },
   {
     path: '/account/sending-domains/create',
-    component: ComingSoonPage,
+    component: sendingDomains.CreatePage,
     condition: hasGrants('sending_domains/manage'),
     layout: App
   },
