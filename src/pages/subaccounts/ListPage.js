@@ -11,9 +11,9 @@ import getRowData from './helpers/getRowData';
 // const columns = ['Name', 'ID', 'Status', null];
 
 const columns = [
-  { label: 'Name', width: '40%' },
-  { label: 'ID', width: '20%' },
-  { label: 'Status', width: '20%' }
+  { label: 'Name', width: '40%', sortKey: 'name' },
+  { label: 'ID', width: '20%', sortKey: 'id' },
+  { label: 'Status', width: '20%', sortKey: 'status' }
 ];
 
 const primaryAction = {
@@ -43,6 +43,8 @@ export class ListPage extends Component {
           exampleModifiers: ['name', 'id', 'status'],
           itemToStringKeys: ['name', 'id']
         }}
+        defaultSortColumn='id'
+        defaultSortDirection='desc'
       />
     );
   }
