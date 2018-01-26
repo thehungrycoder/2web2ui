@@ -1,3 +1,3 @@
-export function getSubaccountQuery(id) {
+export function setSubaccountQuery(id) {
   return id ? `?subaccount=${id}` : '';
 }

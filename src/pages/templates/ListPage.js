@@ -5,7 +5,7 @@ import { Page } from '@sparkpost/matchbox';
 import Editor from './components/Editor'; // async, for preload
 
 import { format } from 'date-fns';
-import { getSubaccountQuery } from 'src/helpers/templates';
+import { setSubaccountQuery } from 'src/helpers/subaccounts';
 
 const primaryAction = {
   content: 'Create Template',
@@ -32,7 +32,7 @@ export default class ListPage extends Component {
 
   getRowData = ({ published, id, name, last_update_time, subaccount_id, shared_with_subaccounts }) => {
     const row = [
-      <Link to={`/templates/edit/${id}${getSubaccountQuery(subaccount_id)}`}>{name}</Link>,
+      <Link to={`/templates/edit/${id}${setSubaccountQuery(subaccount_id)}`}>{name}</Link>,
       id,
       published ? 'Published' : 'Draft',
       format(last_update_time, 'MMM D, YYYY [at] h:mma')

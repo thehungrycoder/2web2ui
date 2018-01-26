@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { getSubaccountQuery } from 'src/helpers/templates';
+import { setSubaccountQuery } from 'src/helpers/subaccounts';
 import Form from './components/containers/Form.container';
 import Editor from './components/Editor'; // async
 import { Loading } from 'src/components';
@@ -15,7 +15,7 @@ export default class PublishedPage extends Component {
 
   getPageProps() {
     const { match, subaccountId } = this.props;
-    const query = getSubaccountQuery(subaccountId);
+    const query = setSubaccountQuery(subaccountId);
 
     const secondaryActions = [
       {

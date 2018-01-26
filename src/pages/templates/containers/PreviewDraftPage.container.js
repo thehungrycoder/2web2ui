@@ -3,15 +3,16 @@ import { withRouter } from 'react-router-dom';
 
 import { showAlert } from 'src/actions/globalAlert';
 import { getDraftAndPreview, sendPreview } from 'src/actions/templates';
-import { selectDraftTemplate, selectDraftTemplatePreview, selectSubaccountIdFromQuery } from 'src/selectors/templates';
-import { getSubaccountQuery } from 'src/helpers/templates';
+import { selectDraftTemplate, selectDraftTemplatePreview } from 'src/selectors/templates';
+import { getSubaccountIdFromQuery } from 'src/selectors/subaccounts';
+import { setSubaccountQuery } from 'src/helpers/subaccounts';
 import PreviewPage from '../PreviewPage';
 
 export const mapStateToProps = (state, props) => {
-  const subaccountId = selectSubaccountIdFromQuery(props);
+  const subaccountId = getSubaccountIdFromQuery(props);
   return {
     mode: 'draft',
-    returnPath: `/templates/edit/${props.match.params.id}${getSubaccountQuery(subaccountId)}`,
+    returnPath: `/templates/edit/${props.match.params.id}${setSubaccountQuery(subaccountId)}`,
     preview: selectDraftTemplatePreview(state, props.match.params.id),
     template: selectDraftTemplate(state, props.match.params.id),
     subaccountId

@@ -7,7 +7,7 @@ import Form from './components/containers/Form.container';
 import Editor from './components/Editor'; // async
 import { Page, Grid } from '@sparkpost/matchbox';
 import { Loading } from 'src/components';
-import { getSubaccountQuery } from 'src/helpers/templates';
+import { setSubaccountQuery } from 'src/helpers/subaccounts';
 
 export default class CreatePage extends Component {
   componentDidMount() {
@@ -21,7 +21,7 @@ export default class CreatePage extends Component {
     const { create, showAlert, id, history, subaccountId } = this.props;
 
     return create(values)
-      .then(() => history.push(`/templates/edit/${id}${getSubaccountQuery(subaccountId)}`))
+      .then(() => history.push(`/templates/edit/${id}${setSubaccountQuery(subaccountId)}`))
       .catch((err) => {
         const details = _.get(err, 'response.data.errors[0].description') || err.message;
         return showAlert({ type: 'error', message: 'Could not create template', details: details });

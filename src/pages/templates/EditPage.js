@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { allSettled } from 'src/helpers/promise';
-import { getSubaccountQuery } from 'src/helpers/templates';
+import { setSubaccountQuery } from 'src/helpers/subaccounts';
 
 // Components
 import Form from './components/containers/Form.container';
@@ -38,7 +38,7 @@ export default class EditPage extends Component {
   handlePublish = (values) => {
     const { publish, match, showAlert, history, subaccountId } = this.props;
     return publish(values, subaccountId).then(() => {
-      history.push(`/templates/edit/${match.params.id}/published${getSubaccountQuery(subaccountId)}`);
+      history.push(`/templates/edit/${match.params.id}/published${setSubaccountQuery(subaccountId)}`);
       showAlert({ type: 'success', message: 'Template published' });
     }).catch((err) => {
       showAlert({ type: 'error', message: 'Could not publish template', details: err.message });
@@ -84,7 +84,7 @@ export default class EditPage extends Component {
       {
         content: 'View Published',
         Component: Link,
-        to: `/templates/edit/${match.params.id}/published${getSubaccountQuery(subaccountId)}`
+        to: `/templates/edit/${match.params.id}/published${setSubaccountQuery(subaccountId)}`
       },
       {
         content: 'Save as Draft',
@@ -93,7 +93,7 @@ export default class EditPage extends Component {
       },
       { content: 'Delete', onClick: this.handleDeleteModalToggle },
       { content: 'Duplicate', Component: Link, to: `/templates/create/${match.params.id}` },
-      { content: 'Preview & Send', Component: Link, to: `/templates/preview/${match.params.id}${getSubaccountQuery(subaccountId)}` }
+      { content: 'Preview & Send', Component: Link, to: `/templates/preview/${match.params.id}${setSubaccountQuery(subaccountId)}` }
     ];
 
     if (!published) {

@@ -4,8 +4,8 @@ import { reduxForm } from 'redux-form';
 
 import { getDraft, getPublished, update, deleteTemplate, publish, getTestData } from 'src/actions/templates';
 import { showAlert } from 'src/actions/globalAlert';
-import { selectTemplateById, selectTemplateTestData, selectSubaccountIdFromQuery } from 'src/selectors/templates';
-import { hasSubaccounts } from 'src/selectors/subaccounts';
+import { selectTemplateById, selectTemplateTestData } from 'src/selectors/templates';
+import { getSubaccountIdFromQuery, hasSubaccounts } from 'src/selectors/subaccounts';
 
 import EditPage from '../EditPage';
 
@@ -18,7 +18,7 @@ const mapStateToProps = (state, props) => {
   return {
     loading: state.templates.getLoading,
     template,
-    subaccountId: selectSubaccountIdFromQuery(props),
+    subaccountId: getSubaccountIdFromQuery(props),
     hasSubaccounts: hasSubaccounts(state),
 
     // Redux Form

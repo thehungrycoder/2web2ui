@@ -1,5 +1,4 @@
 import _ from 'lodash';
-import qs from 'query-string';
 import config from 'src/config';
 import { createSelector } from 'reselect';
 import { getDomains, isVerified } from 'src/selectors/sendingDomains';
@@ -25,7 +24,6 @@ export const selectClonedTemplate = (state, props) => {
   }
 };
 
-export const selectSubaccountIdFromQuery = (props) => qs.parse(props.location.search).subaccount;
 const selectSubaccountIdFromProps = (state, props) => props.subaccountId;
 
 // Selects sending domains for From Email typeahead

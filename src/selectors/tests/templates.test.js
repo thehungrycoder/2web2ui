@@ -146,13 +146,6 @@ describe('Templates selectors', () => {
     });
   });
 
-  describe('selectSubaccountIdFromQuery', () => {
-    it('should return subaccount id from query params', () => {
-      const props = { location: { search: '?subaccount=101' }};
-      expect(selector.selectSubaccountIdFromQuery(props)).toEqual('101');
-    });
-  });
-
   describe('selectDomainsBySubaccount', () => {
     it('should return domains with no subaccount filter', () => {
       expect(selector.selectDomainsBySubaccount(store, {})).toMatchSnapshot();
