@@ -23,7 +23,7 @@ Array [
   },
   Object {
     "label": "Subaccount",
-    "sortKey": "subaccount_id",
+    "sortKey": [Function],
     "width": "20%",
   },
 ]

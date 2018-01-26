@@ -59,7 +59,7 @@ export default class ListPage extends Component {
     ];
 
     if (hasSubaccounts) {
-      columns.push({ label: 'Subaccount', width: '20%', sortKey: 'subaccount_id' });
+      columns.push({ label: 'Subaccount', width: '20%', sortKey: (template) => [template.subaccount_id, template.shared_with_subaccounts]});
     }
 
     return columns;
