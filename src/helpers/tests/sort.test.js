@@ -24,17 +24,10 @@ describe('Sort helpers', () => {
     expect(_.orderBy).toHaveBeenCalledWith(collection, 'name', 'asc');
   });
 
-  it('calls orderBy with column name if comparator does not exist', () => {
-    sortHelpers.getSortedCollection(collection, 'id', 'asc', columns);
-    expect(_.orderBy).toHaveBeenCalledWith(collection, 'id', 'asc');
-  });
-
-  it('calls comparator function when provided', () => {
-    const idComparator = jest.fn((row) => parseInt(row.id, 10));
-    columns[1].comparator = idComparator;
-
-    sortHelpers.getSortedCollection(collection, 'id', 'asc', columns);
-    expect(_.orderBy).toHaveBeenCalledWith(collection, idComparator, 'asc');
+  it('calls orderBy correctly when sortColumn is a function', () => {
+    const mockFunction = jest.fn();
+    sortHelpers.getSortedCollection(collection, mockFunction, 'asc', columns);
+    expect(_.orderBy).toHaveBeenCalledWith(collection, mockFunction, 'asc');
   });
 });
 
