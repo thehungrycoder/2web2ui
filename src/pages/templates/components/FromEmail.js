@@ -23,7 +23,9 @@ export class FromEmail extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({ value: nextProps.value });
+    if (nextProps.value !== this.props.value) {
+      this.setState({ value: nextProps.value });
+    }
   }
 
   handleInputValueChange = (value) => {
