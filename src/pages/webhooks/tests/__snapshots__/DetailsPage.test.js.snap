@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Page: Webhook Details should render happy path 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "Webhooks",
+      "to": "/webhooks/",
+    }
+  }
+  empty={Object {}}
+  secondaryActions={
+    Array [
+      Object {
+        "content": "Delete",
+        "onClick": [Function],
+      },
+    ]
+  }
+  title="My Hooky"
+>
+  <Tabs
+    connectBelow={true}
+    selected={1}
+    tabs={
+      Array [
+        Object {
+          "Component": [Function],
+          "content": "Settings",
+          "to": "/webhooks/details/my-id",
+        },
+        Object {
+          "Component": [Function],
+          "content": "Test",
+          "to": "/webhooks/details/my-id/test",
+        },
+        Object {
+          "Component": [Function],
+          "content": "Batch Status",
+          "to": "/webhooks/details/my-id/batches",
+        },
+      ]
+    }
+  />
+  <Route
+    exact={true}
+    path="/webhooks/details/my-id"
+    render={[Function]}
+  />
+  <Route
+    path="/webhooks/details/my-id/test"
+    render={[Function]}
+  />
+  <Route
+    path="/webhooks/details/my-id/batches"
+    render={[Function]}
+  />
+  <DeleteModal
+    content={
+      <p>
+        The webhook will be permanently removed and send no further events. This cannot be undone.
+      </p>
+    }
+    onCancel={[Function]}
+    onDelete={[Function]}
+    open={false}
+    title="Are you sure you want to delete this webhook?"
+  />
+</Page>
+`;
+
+exports[`Page: Webhook Details should return loading component if no events in redux store 1`] = `<Loading />`;
+
+exports[`Page: Webhook Details should return loading component when id in route is diff than in redux store 1`] = `<Loading />`;

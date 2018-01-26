@@ -105,3 +105,13 @@ exports[`should render OAuth2Fields 1`] = `
   />
 </div>
 `;
+
+exports[`should render TargetField 1`] = `
+<Field
+  component={[Function]}
+  label="Target"
+  name="target"
+  placeholder="https://example.com/webhook-target"
+  validate={[Function]}
+/>
+`;

@@ -10,7 +10,7 @@ import { Loading, TableCollection, ApiErrorBanner } from 'src/components';
 import { Page } from '@sparkpost/matchbox';
 
 const columns = ['Name', 'ID', 'Target'];
-const getRowData = ({ id, name, target }) => {
+export const getRowData = ({ id, name, target }) => {
   const nameLink = <Link to={`/webhooks/details/${id}`}>{name}</Link>;
   return [nameLink, id, target];
 };
@@ -20,7 +20,7 @@ const filterBoxConfig = {
 };
 
 
-class WebhooksList extends Component {
+export class WebhooksList extends Component {
 
   componentDidMount() {
     this.props.listWebhooks();

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import _ from 'lodash';
 
 // Actions
@@ -11,9 +11,7 @@ import { Loading } from 'src/components';
 import { Page, Panel } from '@sparkpost/matchbox';
 import WebhookForm from './components/WebhookForm';
 
-class WebhooksCreate extends Component {
-  state = {}
-
+export class WebhooksCreate extends Component {
   componentDidMount() {
     if (!this.props.eventDocs) {
       this.props.getEventDocs();
@@ -35,8 +33,7 @@ class WebhooksCreate extends Component {
     let events;
 
     if (eventsRadio === 'select') {
-      const checkedEvents = _.concat(values.message_event, values.track_event, values.gen_event, values.unsubscribe_event, values.relay_event);
-      events = _.filter(checkedEvents, (event) => (event)); // filter for truthy
+      events = _.compact(_.concat(values.message_event, values.track_event, values.gen_event, values.unsubscribe_event, values.relay_event));
     } else {
       // all events
       events = _.flatten(_.map(eventsTree, ({ events }) => _.map(events, ({ key }) => (key))));
@@ -67,7 +64,7 @@ class WebhooksCreate extends Component {
         break;
     }
 
-    return this.props.createWebhook(webhook).then(() => this.setState({ redirectTo: '/webhooks' }));
+    return this.props.createWebhook(webhook).then(() => this.props.history.push('/webhooks'));
   }
 
   /*
@@ -76,25 +73,19 @@ class WebhooksCreate extends Component {
   */
   buildEventsData(eventGroups) {
     return _.map(eventGroups, ({ display_name, description, events }, key) => ({
-      key: key,
+      key,
       label: display_name,
-      description: description,
+      description,
       events: _.map(events, ({ display_name, description }, eventKey) => ({
         key: eventKey,
         label: display_name,
-        description: description
+        description
       }))
     }));
   }
 
   render() {
-    const { redirectTo } = this.state;
-
-    if (redirectTo) {
-      return <Redirect to={redirectTo} />; // TODO use history.push
-    }
-
-    const { eventDocs, eventsLoading } = this.props; // Form doesn't load until we have events
+    const { eventDocs, eventsLoading } = this.props;
     const eventsTree = this.buildEventsData(eventDocs);
 
     if (eventsLoading) {

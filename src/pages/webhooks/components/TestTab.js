@@ -59,7 +59,7 @@ class TestTab extends Component {
     const { webhook, samples, testResponse, testLoading } = this.props;
     const { testSent, buildRequest } = this.state;
 
-    const buttonText = testSent ? testLoading ? 'Sending...' : 'Re-send batch' : 'Send Test Batch';
+    const buttonText = testSent ? (testLoading ? 'Sending...' : 'Re-send batch') : 'Send Test Batch';
     const testRequest = buildRequest(webhook, samples);
 
     return (

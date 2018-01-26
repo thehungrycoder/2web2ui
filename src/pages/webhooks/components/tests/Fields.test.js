@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import {
   NameField,
+  TargetField,
   EventsRadioGroup,
   AuthDropDown,
   BasicAuthFields,
@@ -10,6 +11,12 @@ import {
 
 it('should render NameField', () => {
   const wrapper = shallow(<NameField />);
+
+  expect(wrapper).toMatchSnapshot();
+});
+
+it('should render TargetField', () => {
+  const wrapper = shallow(<TargetField />);
 
   expect(wrapper).toMatchSnapshot();
 });
