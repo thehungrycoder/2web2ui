@@ -26,27 +26,17 @@ export default (state = initialState, { type, payload, meta }) => {
 
     case 'VERIFY_SENDING_DOMAIN_SUCCESS':
       // augment current domain's status property
-      return { ...state, verifyLoading: false, domain: { ...state.domain, status: payload }}; //augment current domain's status property
-      // return {
-      //   ...state, verifyLoading: false, domain: {
-      //     ...state.domain, status: {
-      //       'mx_status': 'valid',
-      //       'spf_status': 'invalid',
-      //       'cname_status': 'unverified', 'ownership_verified': true,
-      //       'abuse_at_status': 'unverified', 'compliance_status': 'valid', 'verification_mailbox_status': 'valid',
-      //       'dkim_status': 'invalid', 'postmaster_at_status': 'unverified'
-      //     }
-      //   }
-      // };
+      return { ...state, verifyLoading: false, domain: { ...state.domain, status: payload }};
 
     case 'VERIFY_SENDING_DOMAIN_FAIL':
-      return { ...state, verifyLoading: false, verifyError: null };
+      return { ...state, verifyLoading: false, verifyError: payload };
 
     case 'UPDATE_SENDING_DOMAIN_PENDING':
       return { ...state, updateLoading: true, updateError: null };
 
     case 'UPDATE_SENDING_DOMAIN_SUCCESS':
-      return { ...state, updateLoading: false, ...meta.data };
+    // augment current domain property with update values
+      return { ...state, updateLoading: false, domain: { ...state.domain, ...meta.data }};
 
     case 'UPDATE_SENDING_DOMAIN_FAIL':
       return { ...state, updateLoading: false, updateError: payload };

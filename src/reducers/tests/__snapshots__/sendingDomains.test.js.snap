@@ -1,0 +1,100 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Sending Domain Update reducer update domain 1`] = `
+Object {
+  "domain": Object {
+    "is_default_bounce_domain": true,
+    "status": Object {
+      "cname_status": null,
+      "mx_status": null,
+      "ownership_verified": 1,
+    },
+  },
+  "updateLoading": false,
+}
+`;
+
+exports[`Sending Domain Update reducer update domain fail 1`] = `
+Object {
+  "domain": Object {
+    "is_default_bounce_domain": false,
+    "status": Object {
+      "cname_status": null,
+      "mx_status": null,
+      "ownership_verified": 1,
+    },
+  },
+  "updateError": Object {
+    "errors": Array [
+      Object {
+        "message": "Some error occurred",
+      },
+    ],
+  },
+  "updateLoading": false,
+}
+`;
+
+exports[`Sending Domain Update reducer update pending 1`] = `
+Object {
+  "domain": Object {
+    "is_default_bounce_domain": false,
+    "status": Object {
+      "cname_status": null,
+      "mx_status": null,
+      "ownership_verified": 1,
+    },
+  },
+  "updateError": null,
+  "updateLoading": true,
+}
+`;
+
+exports[`Sending Domain reducer verify domain 1`] = `
+Object {
+  "domain": Object {
+    "is_default_bounce_domain": false,
+    "status": Object {
+      "cname_status": "valid",
+      "ownership_verified": 1,
+    },
+  },
+  "verifyLoading": false,
+}
+`;
+
+exports[`Sending Domain reducer verify domain fail 1`] = `
+Object {
+  "domain": Object {
+    "is_default_bounce_domain": false,
+    "status": Object {
+      "cname_status": null,
+      "mx_status": null,
+      "ownership_verified": 1,
+    },
+  },
+  "verifyError": Object {
+    "errors": Array [
+      Object {
+        "message": "Some error occurred",
+      },
+    ],
+  },
+  "verifyLoading": false,
+}
+`;
+
+exports[`Sending Domain reducer verify pending 1`] = `
+Object {
+  "domain": Object {
+    "is_default_bounce_domain": false,
+    "status": Object {
+      "cname_status": null,
+      "mx_status": null,
+      "ownership_verified": 1,
+    },
+  },
+  "verifyError": null,
+  "verifyLoading": true,
+}
+`;
