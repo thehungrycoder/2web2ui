@@ -1,7 +1,8 @@
 import { shallow } from 'enzyme';
 import React from 'react';
+import SubaccountSection from '../containers/SubaccountSection.container';
 
-import { Form } from '../Form';
+import Form from '../Form';
 
 describe('Template Form', () => {
   let wrapper;
@@ -16,7 +17,8 @@ describe('Template Form', () => {
       change: jest.fn(),
       newTemplate: false,
       published: false,
-      name: 'form-name'
+      name: 'form-name',
+      hasSubaccounts: false
     };
 
     wrapper = shallow(<Form {...props} />);
@@ -29,6 +31,13 @@ describe('Template Form', () => {
   it('should render', () => {
     expect(wrapper).toMatchSnapshot();
     expect(wrapper.instance().props.listDomains).toHaveBeenCalled();
+    expect(wrapper.find(SubaccountSection)).toHaveLength(0);
+  });
+
+  it('should render subaccount fields if has subaccounts', () => {
+    wrapper.setProps({ hasSubaccounts: true });
+    wrapper.update();
+    expect(wrapper.find(SubaccountSection)).toMatchSnapshot();
   });
 
   it('should disable fields on published', () => {
@@ -53,26 +62,41 @@ describe('Template Form', () => {
     expect(wrapper.instance().props.change).toHaveBeenCalledWith(wrapper.instance().props.name, 'id', 'test-1-2');
   });
 
-  it('should validate verified domain', () => {
-    wrapper.setProps({ domains: [{ domain: 'valid.com' }]});
-    const result = wrapper.instance().verifiedDomain('email@valid.com');
-    expect(result).toEqual(undefined);
+  it('correctly parses toggle value into boolean', () => {
+    const parse = wrapper.instance().parseToggle;
+    expect(parse('')).toEqual(false);
+    expect(parse(false)).toEqual(false);
+    expect(parse('true')).toEqual(true);
+    expect(parse(true)).toEqual(true);
   });
 
-  it('should validate sandbox domain', () => {
-    const result = wrapper.instance().verifiedDomain('sandbox@sparkpostbox.com');
-    expect(result).toEqual(undefined);
-  });
+  describe('domain validator', () => {
+    it('should not validate if input has no domain part', () => {
+      const result = wrapper.instance().validateDomain('email');
+      expect(result).toEqual(undefined);
+    });
 
-  it('should validate unverified domain', () => {
-    wrapper.setProps({ domains: [{ domain: 'valid.com' }]});
-    const result = wrapper.instance().verifiedDomain('email@notvalid.com');
-    expect(result).toEqual('Must use a verified sending domain');
-  });
+    it('should validate verified domain', () => {
+      wrapper.setProps({ domains: [{ domain: 'valid.com' }]});
+      const result = wrapper.instance().validateDomain('email@valid.com');
+      expect(result).toEqual(undefined);
+    });
 
-  it('should validate substituted domain', () => {
-    wrapper.setProps({ domains: [{ domain: 'valid.com' }]});
-    const result = wrapper.instance().verifiedDomain('email@{{domain}}');
-    expect(result).toEqual(undefined);
+    it('should validate sandbox domain', () => {
+      const result = wrapper.instance().validateDomain('sandbox@sparkpostbox.com');
+      expect(result).toEqual(undefined);
+    });
+
+    it('should validate unverified domain', () => {
+      wrapper.setProps({ domains: [{ domain: 'valid.com' }]});
+      const result = wrapper.instance().validateDomain('email@notvalid.com');
+      expect(result).toEqual('Must use a verified sending domain');
+    });
+
+    it('should validate substituted domain', () => {
+      wrapper.setProps({ domains: [{ domain: 'valid.com' }]});
+      const result = wrapper.instance().validateDomain('email@{{domain}}');
+      expect(result).toEqual(undefined);
+    });
   });
 });

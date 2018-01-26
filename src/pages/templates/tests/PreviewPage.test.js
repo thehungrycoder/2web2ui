@@ -46,8 +46,33 @@ it('renders loading page and makes request for preview', () => {
   };
   const wrapper = shallow(<PreviewPage {...props} />);
 
-  expect(props.onLoad).toHaveBeenCalledWith(id);
+  expect(props.onLoad).toHaveBeenCalledWith(id, undefined);
   expect(wrapper).toMatchSnapshot();
+});
+
+it('correctly sets loading state on subsequent load', () => {
+  const id = 'test-template';
+  const props = {
+    match: { params: { id }},
+    onLoad: jest.fn(() => Promise.resolve())
+  };
+  const wrapper = shallow(<PreviewPage {...props} />);
+  wrapper.setState({ loading: false });
+  expect(wrapper.state().loading).toEqual(false);
+  wrapper.instance().componentDidMount(); // Rerun cDM as its already mounted
+  expect(wrapper.state().loading).toEqual(true);
+  expect(props.onLoad).toHaveBeenCalledTimes(2);
+});
+
+it('makes request for preview with subaccount', () => {
+  const id = 'test-template';
+  const props = {
+    match: { params: { id }},
+    subaccountId: 101,
+    onLoad: jest.fn(() => Promise.resolve())
+  };
+  shallow(<PreviewPage {...props} />);
+  expect(props.onLoad).toHaveBeenCalledWith(id, 101);
 });
 
 it('renders loading error', async() => {

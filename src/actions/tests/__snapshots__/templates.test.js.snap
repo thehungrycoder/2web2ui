@@ -7,7 +7,9 @@ Array [
       "data": Object {
         "form": "data",
         "id": "id",
+        "shared_with_subaccounts": false,
       },
+      "headers": Object {},
       "method": "POST",
       "url": "/templates",
     },
@@ -20,6 +22,7 @@ exports[`Action Creator: Templates should dispatch a delete action 1`] = `
 Array [
   Object {
     "meta": Object {
+      "headers": Object {},
       "method": "DELETE",
       "url": "/templates/three",
     },
@@ -32,6 +35,7 @@ exports[`Action Creator: Templates should dispatch a get draft action 1`] = `
 Array [
   Object {
     "meta": Object {
+      "headers": Object {},
       "method": "GET",
       "params": Object {
         "draft": true,
@@ -47,6 +51,7 @@ exports[`Action Creator: Templates should dispatch a get published action 1`] = 
 Array [
   Object {
     "meta": Object {
+      "headers": Object {},
       "method": "GET",
       "params": Object {
         "draft": false,
@@ -73,6 +78,7 @@ Array [
         },
         "substitution_data": Object {},
       },
+      "headers": Object {},
       "method": "POST",
       "url": "/utils/content-previewer",
     },
@@ -117,6 +123,7 @@ Array [
       "data": Object {
         "published": true,
       },
+      "headers": Object {},
       "method": "PUT",
       "url": "/templates/id",
     },
@@ -141,6 +148,7 @@ Array [
       "data": Object {
         "form": "data",
       },
+      "headers": Object {},
       "method": "PUT",
       "params": Object {},
       "url": "/templates/id",
@@ -154,6 +162,7 @@ exports[`Action Creator: Templates should dispatch getDraft, getTestData, and ge
 Array [
   Object {
     "meta": Object {
+      "headers": Object {},
       "method": "GET",
       "params": Object {
         "draft": true,
@@ -184,6 +193,7 @@ Array [
           "test": "test",
         },
       },
+      "headers": Object {},
       "method": "POST",
       "url": "/utils/content-previewer",
     },
@@ -196,6 +206,7 @@ exports[`Action Creator: Templates should dispatch getPublished, getTestData, an
 Array [
   Object {
     "meta": Object {
+      "headers": Object {},
       "method": "GET",
       "params": Object {
         "draft": false,
@@ -226,6 +237,7 @@ Array [
           "test": "test",
         },
       },
+      "headers": Object {},
       "method": "POST",
       "url": "/utils/content-previewer",
     },
@@ -268,6 +280,7 @@ Array [
           "test": "test",
         },
       },
+      "headers": Object {},
       "method": "POST",
       "url": "/transmissions",
     },

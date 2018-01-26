@@ -1,9 +1,9 @@
-import CreatePage from './CreatePage';
-import EditPage from './EditPage';
-import ListPage from './ListPage';
-import PreviewDraftPage from './PreviewDraftPage';
-import PreviewPublishedPage from './PreviewPublishedPage';
-import PublishedPage from './PublishedPage';
+import CreatePage from './containers/CreatePage.container';
+import EditPage from './containers/EditPage.container';
+import ListPage from './containers/ListPage.container';
+import PreviewDraftPage from './containers/PreviewDraftPage.container';
+import PreviewPublishedPage from './containers/PreviewPublishedPage.container';
+import PublishedPage from './containers/PublishedPage.container';
 
 export default {
   CreatePage,

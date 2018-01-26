@@ -5,7 +5,7 @@ import { Page, Panel, TextField } from '@sparkpost/matchbox';
 import emailAddresses from 'email-addresses';
 
 import { ApiErrorBanner, Loading } from 'src/components';
-import PreviewPanel from './PreviewPanel';
+import PreviewPanel from './components/PreviewPanel';
 
 export default class PreviewPage extends Component {
   static defaultProps = {
@@ -28,7 +28,7 @@ export default class PreviewPage extends Component {
       this.setState({ loading: true });
     }
 
-    return this.props.onLoad(this.props.match.params.id)
+    return this.props.onLoad(this.props.match.params.id, this.props.subaccountId)
       .then(() => { this.setState({ loadingError: undefined, loading: false }); })
       .catch((error) => { this.setState({ loadingError: error, loading: false }); });
   }
@@ -52,7 +52,8 @@ export default class PreviewPage extends Component {
       id: this.props.template.id,
       mode: this.props.mode,
       emails: emails.map((e) => e.address),
-      from: this.props.preview.from.email
+      from: this.props.preview.from.email,
+      subaccountId: this.props.subaccountId
     }).then(this.onSendSuccess).catch(this.onSendFail);
   }
 

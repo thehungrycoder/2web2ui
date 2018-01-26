@@ -2,8 +2,8 @@ import { createSelector } from 'reselect';
 import { resolveReadyFor } from 'src/helpers/domains';
 import _ from 'lodash';
 
-const isVerified = (domain) => domain.status.ownership_verified && domain.status.compliance_status === 'valid';
-const getDomains = (state) => state.sendingDomains.list;
+export const isVerified = (domain) => domain.status.ownership_verified && domain.status.compliance_status === 'valid';
+export const getDomains = (state) => state.sendingDomains.list;
 
 export const selectVerifiedDomains = createSelector(
   [getDomains],

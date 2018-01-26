@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect';
 import { Link } from 'react-router-dom';
+import qs from 'query-string';
 
 const formatSubaccount = ({ compliance_status = 'active', status = 'active', ...rest }) => {
   const compliance = compliance_status !== 'active';
@@ -19,6 +20,7 @@ export const selectSubaccount = ({ subaccounts }) => (formatSubaccount(subaccoun
 
 export const getSubaccountIdFromProps = (state, props) => props.id;
 export const getSubaccountIdFromParams = (state, props) => props.match.params.id;
+export const getSubaccountIdFromQuery = (props) => qs.parse(props.location.search).subaccount;
 
 export const selectDetailTabs = createSelector(
   [getSubaccountIdFromParams],

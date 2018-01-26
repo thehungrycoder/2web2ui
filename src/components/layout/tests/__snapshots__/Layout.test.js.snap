@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Layout Tests Layout renders App layout 1`] = `
+exports[`Layout App renders correctly 1`] = `
 <div
   className="undefined undefined undefined"
 >
@@ -18,7 +18,7 @@ exports[`Layout Tests Layout renders App layout 1`] = `
 </div>
 `;
 
-exports[`Layout Tests Layout renders Form layout 1`] = `
+exports[`Layout Form renders correctly 1`] = `
 <div
   className="undefined undefined"
 >
@@ -31,4 +31,16 @@ exports[`Layout Tests Layout renders Form layout 1`] = `
   </main>
   <ScrollToTop />
 </div>
+`;
+
+exports[`Layout renders the correct default layout 1`] = `
+<Form>
+  Default
+</Form>
+`;
+
+exports[`Layout renders the specified layout 1`] = `
+<AppMock>
+  AppMock
+</AppMock>
 `;
