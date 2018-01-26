@@ -1,5 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Template EditPage should not show View Published link if template is not published 1`] = `
+Array [
+  Object {
+    "content": "Save as Draft",
+    "disabled": undefined,
+    "onClick": undefined,
+  },
+  Object {
+    "content": "Delete",
+    "onClick": [Function],
+  },
+  Object {
+    "Component": [Function],
+    "content": "Duplicate",
+    "to": "/templates/create/id",
+  },
+  Object {
+    "Component": [Function],
+    "content": "Preview & Send",
+    "to": "/templates/preview/id?subaccount=101",
+  },
+]
+`;
+
 exports[`Template EditPage should render correctly 1`] = `
 <Page
   breadcrumbAction={
@@ -22,7 +46,7 @@ exports[`Template EditPage should render correctly 1`] = `
       Object {
         "Component": [Function],
         "content": "View Published",
-        "to": "/templates/edit/id/published",
+        "to": "/templates/edit/id/published?subaccount=101",
       },
       Object {
         "content": "Save as Draft",
@@ -41,7 +65,7 @@ exports[`Template EditPage should render correctly 1`] = `
       Object {
         "Component": [Function],
         "content": "Preview & Send",
-        "to": "/templates/preview/id",
+        "to": "/templates/preview/id?subaccount=101",
       },
     ]
   }
@@ -54,6 +78,7 @@ exports[`Template EditPage should render correctly 1`] = `
     >
       <Connect(Form)
         name="templateEdit"
+        subaccountId={101}
       />
     </Grid.Column>
     <Grid.Column

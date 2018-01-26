@@ -41,6 +41,10 @@ describe('substitution', () => {
 });
 
 describe('emailOrSubstitution', () => {
+  it('should skip if not provided a value', () => {
+    expect(validation.emailOrSubstitution('')).toBe(undefined);
+  });
+
   it('should handle invalid email', () => {
     expect(validation.emailOrSubstitution('not an email')).toEqual('Invalid email or substitution value');
   });

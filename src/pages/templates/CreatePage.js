@@ -1,25 +1,15 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { reduxForm, formValueSelector } from 'redux-form';
+import { Link } from 'react-router-dom';
 import _ from 'lodash';
 
-// Actions
-import { create, getDraft } from 'src/actions/templates';
-import { showAlert } from 'src/actions/globalAlert';
-
-// Selectors
-import { selectClonedTemplate, selectDefaultTestData } from 'src/selectors/templates';
-
 // Components
-import Form from './components/Form';
+import Form from './components/containers/Form.container';
 import Editor from './components/Editor'; // async
 import { Page, Grid } from '@sparkpost/matchbox';
 import { Loading } from 'src/components';
+import { setSubaccountQuery } from 'src/helpers/subaccounts';
 
-const FORM_NAME = 'templateCreate';
-
-export class CreatePage extends Component {
+export default class CreatePage extends Component {
   componentDidMount() {
     if (this.props.cloneId) {
       const { getDraft } = this.props;
@@ -27,10 +17,11 @@ export class CreatePage extends Component {
     }
   }
 
-  handleCreate(values) {
-    const { create, showAlert, id, history } = this.props;
+  handleCreate = (values) => {
+    const { create, showAlert, id, history, subaccountId } = this.props;
+
     return create(values)
-      .then(() => history.push(`/templates/edit/${id}`))
+      .then(() => history.push(`/templates/edit/${id}${setSubaccountQuery(subaccountId)}`))
       .catch((err) => {
         const details = _.get(err, 'response.data.errors[0].description') || err.message;
         return showAlert({ type: 'error', message: 'Could not create template', details: details });
@@ -38,7 +29,7 @@ export class CreatePage extends Component {
   }
 
   render() {
-    const { cloneId, handleSubmit, submitting, loading } = this.props;
+    const { cloneId, handleSubmit, submitting, loading, formName, subaccountId } = this.props;
 
     if (loading) {
       return <Loading />;
@@ -46,7 +37,7 @@ export class CreatePage extends Component {
 
     const primaryAction = {
       content: 'Save Template',
-      onClick: handleSubmit((values) => this.handleCreate(values)),
+      onClick: handleSubmit(this.handleCreate),
       disabled: submitting
     };
 
@@ -64,31 +55,13 @@ export class CreatePage extends Component {
 
         <Grid>
           <Grid.Column xs={12} lg={4}>
-            <Form newTemplate name={FORM_NAME} />
+            <Form newTemplate name={formName} subaccountId={subaccountId}/>
           </Grid.Column>
           <Grid.Column xs={12} lg={8}>
-            <Editor name={FORM_NAME} />
+            <Editor name={formName} />
           </Grid.Column>
         </Grid>
       </Page>
     );
   }
 }
-
-const selector = formValueSelector(FORM_NAME);
-const mapStateToProps = (state, props) => ({
-  id: selector(state, 'id'),
-  loading: state.templates.getLoading,
-  cloneId: props.match.params.id, //ID of the template it's cloning from
-  initialValues: {
-    testData: selectDefaultTestData(),
-    ...selectClonedTemplate(state, props)
-  }
-});
-
-const formOptions = {
-  form: FORM_NAME,
-  enableReinitialize: true // required to update initial values from redux state
-};
-
-export default withRouter(connect(mapStateToProps, { create, getDraft, showAlert })(reduxForm(formOptions)(CreatePage)));

@@ -1,7 +1,9 @@
 import React from 'react';
 import { ProtectedRoute, AuthenticationGate } from 'src/components/auth';
-import { Layout, Support, GlobalAlertWrapper, RouteWatch } from 'src/components';
+import { Support, GlobalAlertWrapper, RouteWatch } from 'src/components';
+import Layout from 'src/components/layout/Layout';
 import routes from 'src/config/routes';
+
 import {
   BrowserRouter as Router,
   Route,

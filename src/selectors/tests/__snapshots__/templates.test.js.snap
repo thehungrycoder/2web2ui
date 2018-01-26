@@ -79,6 +79,47 @@ exports[`Templates selectors selectDefaultTestData should return default test da
 }"
 `;
 
+exports[`Templates selectors selectDomainsBySubaccount should return domains for a specific subaccount 1`] = `
+Array [
+  Object {
+    "domain": "shared.com",
+    "shared_with_subaccounts": true,
+    "status": Object {
+      "compliance_status": "valid",
+      "ownership_verified": true,
+    },
+  },
+  Object {
+    "domain": "assignedToSub.com",
+    "status": Object {
+      "compliance_status": "valid",
+      "ownership_verified": true,
+    },
+    "subaccount_id": 101,
+  },
+]
+`;
+
+exports[`Templates selectors selectDomainsBySubaccount should return domains with no subaccount filter 1`] = `
+Array [
+  Object {
+    "domain": "shared.com",
+    "shared_with_subaccounts": true,
+    "status": Object {
+      "compliance_status": "valid",
+      "ownership_verified": true,
+    },
+  },
+  Object {
+    "domain": "masterOnly.com",
+    "status": Object {
+      "compliance_status": "valid",
+      "ownership_verified": true,
+    },
+  },
+]
+`;
+
 exports[`Templates selectors selectTemplateTestData should return default data 1`] = `
 "{
   \\"substitution_data\\": {},

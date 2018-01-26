@@ -4,6 +4,7 @@ import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 import localforage from 'localforage';
 import config from 'src/config';
 import { getTestDataKey } from './helpers/templates';
+import setSubaccountHeader from './helpers/setSubaccountHeader';
 
 export function listTemplates() {
   return sparkpostApiRequest({
@@ -15,7 +16,7 @@ export function listTemplates() {
   });
 }
 
-export function getDraft(id) {
+export function getDraft(id, subaccountId) {
   return sparkpostApiRequest({
     type: 'GET_DRAFT_TEMPLATE',
     meta: {
@@ -23,61 +24,62 @@ export function getDraft(id) {
       url: `/templates/${id}`,
       params: {
         draft: true
-      }
+      },
+      headers: setSubaccountHeader(subaccountId)
     }
   });
 }
 
-export function getDraftAndPreview(id) {
+export function getDraftAndPreview(id, subaccountId) {
   return async(dispatch) => {
-    const { content } = await dispatch(getDraft(id));
+    const { content } = await dispatch(getDraft(id, subaccountId));
     const { payload = {}} = await dispatch(getTestData({ id, mode: 'draft' }));
     const substitution_data = payload.substitution_data || {};
 
-    return dispatch(getPreview({ content, id, mode: 'draft', substitution_data }));
+    return dispatch(getPreview({ content, id, mode: 'draft', substitution_data, subaccountId }));
   };
 }
 
 // @todo Switch to the newer preview endpoint
 // @see https://github.com/SparkPost/sparkpost-admin-api-documentation/blob/master/services/content_previewer_api.md#preview-inline-content-post
 // @see https://github.com/SparkPost/sparkpost-api-documentation/blob/master/services/templates.md#preview-templatesidpreviewdraft
-export function getPreview({ content, id, mode, substitution_data = {}}) {
+export function getPreview({ content, id, mode, subaccountId, substitution_data = {}}) {
   return sparkpostApiRequest({
     type: 'GET_TEMPLATE_PREVIEW',
     meta: {
       context: { id, mode },
       method: 'POST',
       url: '/utils/content-previewer',
-      data: { content, substitution_data }
+      data: { content, substitution_data },
+      headers: setSubaccountHeader(subaccountId)
     }
   });
 }
 
-export function getPublished(id) {
+export function getPublished(id, subaccountId) {
   return sparkpostApiRequest({
     type: 'GET_PUBLISHED_TEMPLATE',
     meta: {
       method: 'GET',
       url: `/templates/${id}`,
-      params: {
-        draft: false
-      }
+      params: { draft: false },
+      headers: setSubaccountHeader(subaccountId)
     }
   });
 }
 
-export function getPublishedAndPreview(id) {
+export function getPublishedAndPreview(id, subaccountId) {
   return async(dispatch) => {
-    const { content } = await dispatch(getPublished(id));
+    const { content } = await dispatch(getPublished(id, subaccountId));
     const { payload = {}} = await dispatch(getTestData({ id, mode: 'published' }));
     const substitution_data = payload.substitution_data || {};
 
-    return dispatch(getPreview({ content, id, mode: 'published', substitution_data }));
+    return dispatch(getPreview({ content, id, mode: 'published', substitution_data, subaccountId }));
   };
 }
 
 export function create(data) {
-  const { id, testData, ...formData } = data;
+  const { id, testData, assignTo, subaccount, ...formData } = data;
 
   return (dispatch) => {
     dispatch(setTestData({ id, mode: 'draft', data: testData }));
@@ -87,13 +89,18 @@ export function create(data) {
       meta: {
         method: 'POST',
         url: '/templates',
-        data: { ...formData, id }
+        headers: setSubaccountHeader(subaccount),
+        data: {
+          ...formData,
+          id,
+          shared_with_subaccounts: assignTo === 'shared'
+        }
       }
     }));
   };
 }
 
-export function update(data, params = {}) {
+export function update(data, subaccountId, params = {}) {
   const { id, testData, ...formData } = data;
 
   return (dispatch) => {
@@ -105,18 +112,19 @@ export function update(data, params = {}) {
         method: 'PUT',
         url: `/templates/${id}`,
         data: formData,
-        params
+        params,
+        headers: setSubaccountHeader(subaccountId)
       }
     }));
   };
 }
 
-export function publish(data) {
+export function publish(data, subaccountId) {
   return (dispatch) => {
     const { id, testData } = data;
 
     // Save draft first, then publish
-    return dispatch(update(data)).then(() => {
+    return dispatch(update(data, subaccountId)).then(() => {
       dispatch(setTestData({ id, mode: 'published', data: testData }));
 
       return dispatch(sparkpostApiRequest({
@@ -124,19 +132,21 @@ export function publish(data) {
         meta: {
           method: 'PUT',
           url: `/templates/${id}`,
-          data: { published: true }
+          data: { published: true },
+          headers: setSubaccountHeader(subaccountId)
         }
       }));
     });
   };
 }
 
-export function deleteTemplate(id) {
+export function deleteTemplate(id, subaccountId) {
   return sparkpostApiRequest({
     type: 'DELETE_TEMPLATE',
     meta: {
       method: 'DELETE',
-      url: `/templates/${id}`
+      url: `/templates/${id}`,
+      headers: setSubaccountHeader(subaccountId)
     }
   });
 }
@@ -174,7 +184,7 @@ export function getTestData({ id, mode }) {
 }
 
 // @see https://github.com/SparkPost/sparkpost-api-documentation/blob/master/services/transmissions.md#create-a-transmission-post
-export function sendPreview({ id, mode, emails, from }) {
+export function sendPreview({ id, mode, emails, from, subaccountId }) {
   const recipients = emails.map((email) => ({
     address: { email }
   }));
@@ -187,6 +197,7 @@ export function sendPreview({ id, mode, emails, from }) {
       meta: {
         method: 'POST',
         url: '/transmissions',
+        headers: setSubaccountHeader(subaccountId),
         data: {
           ...testData,
           content: {

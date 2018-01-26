@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { withRouter, Link } from 'react-router-dom';
-import { listTemplates } from 'src/actions/templates';
-import { selectTemplates } from 'src/selectors/templates';
-import { getRowData, columns, filterBoxConfig } from './tableConfig';
-import { TableCollection, ApiErrorBanner, Loading } from 'src/components';
+import { Link } from 'react-router-dom';
+import { TableCollection, ApiErrorBanner, Loading, SubaccountTag } from 'src/components';
 import { Page } from '@sparkpost/matchbox';
 import Editor from './components/Editor'; // async, for preload
+
+import { format } from 'date-fns';
+import { setSubaccountQuery } from 'src/helpers/subaccounts';
 
 const primaryAction = {
   content: 'Create Template',
@@ -14,7 +13,7 @@ const primaryAction = {
   Component: Link
 };
 
-export class ListPage extends Component {
+export default class ListPage extends Component {
 
   componentDidMount() {
     this.props.listTemplates();
@@ -31,14 +30,53 @@ export class ListPage extends Component {
     );
   }
 
+  getRowData = ({ published, id, name, last_update_time, subaccount_id, shared_with_subaccounts }) => {
+    const row = [
+      <Link to={`/templates/edit/${id}${setSubaccountQuery(subaccount_id)}`}>{name}</Link>,
+      id,
+      published ? 'Published' : 'Draft',
+      format(last_update_time, 'MMM D, YYYY [at] h:mma')
+    ];
+
+    if (this.props.hasSubaccounts) {
+      const tag = subaccount_id || shared_with_subaccounts
+        ? <SubaccountTag all={shared_with_subaccounts} id={subaccount_id} />
+        : null;
+      row.push(tag);
+    }
+
+    return row;
+  }
+
+  getColumns() {
+    const { hasSubaccounts } = this.props;
+
+    const columns = [
+      { label: 'Name', width: '22%' },
+      { label: 'ID', width: '22%' },
+      { label: 'Status', width: '15%' },
+      { label: 'Updated' }
+    ];
+
+    if (hasSubaccounts) {
+      columns.push({ label: 'Subaccount', width: '20%' });
+    }
+
+    return columns;
+  }
+
   renderCollection() {
     return (
       <TableCollection
-        columns={columns}
+        columns={this.getColumns()}
         rows={this.props.templates}
-        getRowData={getRowData}
+        getRowData={this.getRowData}
         pagination
-        filterBox={filterBoxConfig}
+        filterBox={{
+          show: true,
+          exampleModifiers: ['id', 'name'],
+          itemToStringKeys: ['name', 'id', 'subaccount_id']
+        }}
       />
     );
   }
@@ -65,15 +103,3 @@ export class ListPage extends Component {
     );
   }
 }
-
-function mapStateToProps(state) {
-  const templates = selectTemplates(state);
-  return {
-    count: templates.length,
-    templates,
-    loading: state.templates.listLoading,
-    error: state.templates.listError
-  };
-}
-
-export default withRouter(connect(mapStateToProps, { listTemplates })(ListPage));
