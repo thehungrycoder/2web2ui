@@ -22,6 +22,10 @@ export class FromEmail extends Component {
     this.setState({ value: this.props.value });
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({ value: nextProps.value });
+  }
+
   handleInputValueChange = (value) => {
     this.setState({ value });
   }

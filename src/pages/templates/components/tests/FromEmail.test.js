@@ -70,6 +70,11 @@ describe('From Email Typeahead', () => {
     expect(result).toMatchSnapshot();
   });
 
+  it('should update value if given a new prop value', () => {
+    wrapper.setProps({ value: 'new value through prop' });
+    expect(wrapper).toHaveState('value', 'new value through prop');
+  });
+
   it('should handle input value', () => {
     wrapper.instance().handleInputValueChange('new value');
     expect(wrapper).toHaveState('value', 'new value');

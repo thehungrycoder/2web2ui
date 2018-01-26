@@ -18,12 +18,7 @@ exports[`Template Form should disable fields on published 1`] = `
         helpText="A Unique ID for your template, we'll fill this in for you."
         label="Template ID"
         name="id"
-        validate={
-          Array [
-            [Function],
-            [Function],
-          ]
-        }
+        validate={null}
       />
     </Panel.Section>
   </Panel>
@@ -49,6 +44,7 @@ exports[`Template Form should disable fields on published 1`] = `
             },
           ]
         }
+        helpText={null}
         label="From Email"
         name="content.from.email"
         placeholder="example@email.com"
@@ -118,6 +114,13 @@ exports[`Template Form should disable fields on published 1`] = `
 </div>
 `;
 
+exports[`Template Form should handle id validating correctly 1`] = `
+Array [
+  [Function],
+  [Function],
+]
+`;
+
 exports[`Template Form should render 1`] = `
 <div>
   <Panel>
@@ -136,12 +139,7 @@ exports[`Template Form should render 1`] = `
         helpText="A Unique ID for your template, we'll fill this in for you."
         label="Template ID"
         name="id"
-        validate={
-          Array [
-            [Function],
-            [Function],
-          ]
-        }
+        validate={null}
       />
     </Panel.Section>
   </Panel>
@@ -167,6 +165,7 @@ exports[`Template Form should render 1`] = `
             },
           ]
         }
+        helpText={null}
         label="From Email"
         name="content.from.email"
         placeholder="example@email.com"

@@ -62,6 +62,28 @@ describe('Template Form', () => {
     expect(wrapper.instance().props.change).toHaveBeenCalledWith(wrapper.instance().props.name, 'id', 'test-1-2');
   });
 
+  it('should produce the right help text values for the email typeahead', () => {
+    // Domains are available
+    expect(wrapper.find('Field').at(3).props().helpText).toEqual(null);
+
+    // No domains available
+    wrapper.setProps({ domains: []});
+    expect(wrapper.find('Field').at(3).props().helpText).toEqual('You do not have any verified sending domains to use.');
+
+    // No domains available for subaccount
+    wrapper.setProps({ domains: [], subaccountId: 101 });
+    expect(wrapper.find('Field').at(3).props().helpText).toEqual('The selected subaccount does not have any verified sending domains.');
+  });
+
+  it('should handle id validating correctly', () => {
+    // Should not validate on edit/published
+    expect(wrapper.find('Field').at(1).props().validate).toEqual(null);
+
+    // Should validate on create
+    wrapper.setProps({ newTemplate: true });
+    expect(wrapper.find('Field').at(1).props().validate).toMatchSnapshot();
+  });
+
   it('correctly parses toggle value into boolean', () => {
     const parse = wrapper.instance().parseToggle;
     expect(parse('')).toEqual(false);
