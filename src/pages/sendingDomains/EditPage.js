@@ -6,7 +6,7 @@ import { reduxForm } from 'redux-form';
 
 import { get as getDomain } from 'src/actions/sendingDomains';
 import { Loading, ApiErrorBanner } from 'src/components';
-import { SetupSending } from './components/SetupSending';
+import SetupSending from './components/SetupSending';
 import { Page } from '@sparkpost/matchbox';
 
 const breadcrumbAction = {

@@ -35,14 +35,15 @@ export function create(data) {
   });
 }
 
-export function verifyDNS(id, type) {
+export function verify(id, type) {
   const data = {};
   data[`${type}_verify`] = true;
   return sparkpostApiRequest({
     type: 'VERIFY_SENDING_DOMAIN',
     meta: {
       method: 'POST',
-      url: `/sending-domains/${id}/verify`
+      url: `/sending-domains/${id}/verify`,
+      data
     }
   });
 }

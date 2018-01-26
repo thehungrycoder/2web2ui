@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-// import { Field } from 'redux-form';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
-import { Panel, Grid, Banner, Table, Icon } from '@sparkpost/matchbox';
+import { Panel, Grid, Banner, Table, Icon, Button } from '@sparkpost/matchbox';
 import { SendingDomainSection } from './SendingDomainSection';
 import { showAlert } from 'src/actions/globalAlert';
 import { resolveReadyFor } from 'src/helpers/domains';
-import { verifyDNS, update } from 'src/actions/sendingDomains';
+import { verify } from 'src/actions/sendingDomains';
 import config from 'src/config';
 import styles from './SendingDomainSection.module.scss';
 
@@ -17,6 +17,22 @@ import styles from './SendingDomainSection.module.scss';
 // };
 
 export class SetupSending extends Component {
+  verifyDomain = () => {
+    const { id, verify } = this.props;
+
+    return verify(id, 'dkim')
+      .then((results) => {
+        const readyFor = resolveReadyFor(results);
+        if (readyFor.dkim) {
+          showAlert({ type: 'success', message: `You have successfully verified DKIM record of ${id}` });
+        } else {
+          showAlert({ type: 'error', message: `Unable to verify DKIM record of ${id}. ${results.dns.dkim_error}` });
+        }
+      }).catch((err) => {
+        showAlert({ type: 'error', message: `Unable to verify DKIM record of ${id}. ${err.message}` });
+      });
+  }
+
   renderBanner() {
     const { domain } = this.props;
     const readyFor = resolveReadyFor(domain.status);
@@ -36,12 +52,24 @@ export class SetupSending extends Component {
     }
   }
 
-  renderIcon() {
-    // const { domain } = this.props;
-    // const readyFor = resolveReadyFor(domain.status);
+  renderVerifyButton() {
+    const { verifyLoading } = this.props;
 
     return (
-      <Icon name="Error"/>
+      verifyLoading
+        ? <Button plain disabled={true}>Verifying...</Button>
+        : <Button plain onClick={this.verifyDomain}>Verify TXT Record</Button>
+    );
+  }
+
+  renderIcon() {
+    const { domain } = this.props;
+    const readyFor = resolveReadyFor(domain.status);
+
+    return (
+      readyFor.dkim
+        ? <Icon name="Check"/>
+        : <Icon name="Error"/>
     );
   }
 
@@ -61,7 +89,7 @@ export class SetupSending extends Component {
               Hostname
               </Table.HeaderCell>
               <Table.HeaderCell className={styles.SendingDomainSection}>
-              Value
+              Value { this.renderVerifyButton() }
               </Table.HeaderCell>
             </Table.Row>
             <Table.Row>
@@ -104,4 +132,9 @@ export class SetupSending extends Component {
 
 }
 
-export default connect(null, { verifyDNS, update, showAlert })(SetupSending);
+const mapStateToProps = ({ sendingDomains: { verifyError, verifyLoading }}) => ({
+  verifyError,
+  verifyLoading
+});
+
+export default withRouter(connect(mapStateToProps, { verify, showAlert })(SetupSending));
