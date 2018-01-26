@@ -77,6 +77,7 @@ export default class ListPage extends Component {
           exampleModifiers: ['id', 'name'],
           itemToStringKeys: ['name', 'id', 'subaccount_id']
         }}
+        defaultSortColumn='name'
       />
     );
   }

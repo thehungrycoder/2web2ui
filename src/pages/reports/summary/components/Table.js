@@ -80,6 +80,11 @@ export class Table extends Component {
     };
   }
 
+  getDefaultSortColumn = () => {
+    const { metrics } = this.props;
+    return metrics[0].key;
+  }
+
   getSelectOptions = () => {
     const options = _.keys(GROUP_CONFIG).map((key) => ({ value: key, label: GROUP_CONFIG[key].label }));
 
@@ -115,7 +120,7 @@ export class Table extends Component {
         defaultPerPage={10}
         rows={tableData}
         filterBox={{ show: false }}
-        defaultSortColumn='count_targeted'
+        defaultSortColumn={this.getDefaultSortColumn()}
         defaultSortDirection='desc'
       />
     );

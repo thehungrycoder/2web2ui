@@ -148,7 +148,7 @@ exports[`Summary Table  should render with data 1`] = `
     ]
   }
   defaultPerPage={10}
-  defaultSortColumn="count_targeted"
+  defaultSortColumn="metric_1"
   defaultSortDirection="desc"
   filterBox={
     Object {
