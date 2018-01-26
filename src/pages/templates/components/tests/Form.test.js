@@ -59,6 +59,7 @@ describe('Template Form', () => {
   it('should handle ID fill', () => {
     wrapper.setProps({ newTemplate: true });
     wrapper.find('Field').at(0).simulate('change', { target: { value: 'test 1 2!' }});
+    expect(wrapper.find('Field').at(1).props().helpText).toEqual('A Unique ID for your template, we\'ll fill this in for you.');
     expect(wrapper.instance().props.change).toHaveBeenCalledWith(wrapper.instance().props.name, 'id', 'test-1-2');
   });
 

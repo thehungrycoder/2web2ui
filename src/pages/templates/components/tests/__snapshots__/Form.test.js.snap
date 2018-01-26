@@ -15,7 +15,7 @@ exports[`Template Form should disable fields on published 1`] = `
       <Field
         component={[Function]}
         disabled={true}
-        helpText="A Unique ID for your template, we'll fill this in for you."
+        helpText={null}
         label="Template ID"
         name="id"
         validate={null}
@@ -136,7 +136,7 @@ exports[`Template Form should render 1`] = `
       <Field
         component={[Function]}
         disabled={true}
-        helpText="A Unique ID for your template, we'll fill this in for you."
+        helpText={null}
         label="Template ID"
         name="id"
         validate={null}

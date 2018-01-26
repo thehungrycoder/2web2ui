@@ -93,7 +93,7 @@ export default class Form extends Component {
               name='id'
               component={TextFieldWrapper}
               label='Template ID'
-              helpText={'A Unique ID for your template, we\'ll fill this in for you.'}
+              helpText={newTemplate ? 'A Unique ID for your template, we\'ll fill this in for you.' : null}
               disabled={!newTemplate || published}
               validate={newTemplate ? [required, idSyntax] : null}
             />
