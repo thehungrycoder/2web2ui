@@ -36,6 +36,20 @@ export class AuthPage extends Component {
     );
   }
 
+  renderRedirect() {
+    const { location, currentUser } = this.props;
+    const redirectAfterLogin = _.get(location, 'state.redirectAfterLogin');
+
+    if (redirectAfterLogin) {
+      return <Redirect to={redirectAfterLogin} />;
+    }
+
+    // TODO: create a universally accessible dashboard and redirect everyone there,
+    // then handle access in an in-page modular way on that dashboard
+    const redirectTo = (currentUser.access_level === 'reporting') ? '/reports/summary' : config.splashPage;
+    return <Redirect to={redirectTo} />;
+  }
+
   componentWillReceiveProps(nextProps) {
     const { ssoUser } = nextProps.auth;
 
@@ -68,14 +82,12 @@ export class AuthPage extends Component {
   }
 
   render() {
-    const { ready, location, currentUser } = this.props;
+    const { ready } = this.props;
     const { errorDescription, loggedIn } = this.props.auth;
     const { tfaEnabled } = this.props.tfa;
 
     if (ready && loggedIn) {
-      const redirectAfterLogin = _.get(location, 'state.redirectAfterLogin');
-      const redirectTo = redirectAfterLogin || _.get(config, `entryPoints.${currentUser.access_level}`, config.splashPage);
-      return <Redirect to={redirectTo} />;
+      return this.renderRedirect();
     }
 
     return (

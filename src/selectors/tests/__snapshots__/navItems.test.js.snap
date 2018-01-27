@@ -76,18 +76,5 @@ Array [
     },
     "to": "/reports",
   },
-  Object {
-    "children": Array [
-      Object {
-        "label": "Tracking Domains",
-        "route": undefined,
-        "to": "/account/tracking-domains",
-      },
-    ],
-    "icon": "Settings",
-    "label": "Account",
-    "route": undefined,
-    "to": "/account",
-  },
 ]
 `;

@@ -1,41 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Users list page renders error banner, table, and hidden modal 1`] = `
-<Page
-  empty={
-    Object {
-      "content": <p>
-        Manage your team's accounts and roles.
-      </p>,
-      "image": "Users",
-      "show": false,
-      "title": "Invite Your Team to SparkPost",
-    }
-  }
-  primaryAction={
-    Object {
-      "Component": [Function],
-      "content": "Invite User",
-      "to": "/account/users/create",
-    }
-  }
-  title="Users"
->
-  <ApiErrorBanner
-    errorDetails="Uh oh! It broke."
-    message="Sorry, we seem to have had some trouble loading your users."
-    reload={
-      [MockFunction] {
-        "calls": Array [
-          Array [],
-        ],
-      }
-    }
-  />
-</Page>
-`;
-
-exports[`Users list page renders table and hidden modal 1`] = `
+exports[`Page: Users List should render correctly by default 1`] = `
 <Page
   empty={
     Object {
@@ -118,4 +83,187 @@ exports[`Users list page renders table and hidden modal 1`] = `
     />
   </div>
 </Page>
+`;
+
+exports[`Page: Users List should render with an error 1`] = `
+<Page
+  empty={
+    Object {
+      "content": <p>
+        Manage your team's accounts and roles.
+      </p>,
+      "image": "Users",
+      "show": false,
+      "title": "Invite Your Team to SparkPost",
+    }
+  }
+  primaryAction={
+    Object {
+      "Component": [Function],
+      "content": "Invite User",
+      "to": "/account/users/create",
+    }
+  }
+  title="Users"
+>
+  <ApiErrorBanner
+    errorDetails="Uh oh! It broke."
+    message="Sorry, we seem to have had some trouble loading your users."
+    reload={
+      [MockFunction] {
+        "calls": Array [
+          Array [],
+        ],
+      }
+    }
+  />
+</Page>
+`;
+
+exports[`Page: Users List should transform row data for the table collection 1`] = `
+Array [
+  "test-name",
+  <RoleSelect
+    allowSuperUser={false}
+    disabled={false}
+    onChange={[Function]}
+    value="admin"
+  >
+    <Select
+      name={null}
+      onChange={[Function]}
+      options={
+        Array [
+          Object {
+            "label": "Admin",
+            "value": "admin",
+          },
+          Object {
+            "label": "Reporting",
+            "value": "reporting",
+          },
+        ]
+      }
+      placeholderValue=""
+      required={false}
+      value="admin"
+    >
+      <fieldset
+        className="Matchbox-Select"
+      >
+        <select
+          className="Matchbox-Select__Input"
+          name={null}
+          onChange={[Function]}
+          value="admin"
+        >
+          <Option
+            key="0"
+            option={
+              Object {
+                "label": "Admin",
+                "value": "admin",
+              }
+            }
+          >
+            <option
+              value="admin"
+            >
+              Admin
+            </option>
+          </Option>
+          <Option
+            key="1"
+            option={
+              Object {
+                "label": "Reporting",
+                "value": "reporting",
+              }
+            }
+          >
+            <option
+              value="reporting"
+            >
+              Reporting
+            </option>
+          </Option>
+        </select>
+        <Icon
+          className="Matchbox-Select__Dropdown Matchbox-Select--labelHidden"
+          name="CaretDown"
+          size={18}
+        >
+          <MdArrowDropDown
+            className="Matchbox-Icon Matchbox-Select__Dropdown Matchbox-Select--labelHidden"
+            size={18}
+          >
+            <IconBase
+              className="Matchbox-Icon Matchbox-Select__Dropdown Matchbox-Select--labelHidden"
+              size={18}
+              viewBox="0 0 40 40"
+            >
+              <svg
+                className="Matchbox-Icon Matchbox-Select__Dropdown Matchbox-Select--labelHidden"
+                fill="currentColor"
+                height={18}
+                preserveAspectRatio="xMidYMid meet"
+                style={
+                  Object {
+                    "color": undefined,
+                    "verticalAlign": "middle",
+                  }
+                }
+                viewBox="0 0 40 40"
+                width={18}
+              >
+                <g>
+                  <path
+                    d="m11.6 16.6h16.8l-8.4 8.4z"
+                  />
+                </g>
+              </svg>
+            </IconBase>
+          </MdArrowDropDown>
+        </Icon>
+      </fieldset>
+    </Select>
+  </RoleSelect>,
+  "testemail",
+  <TimeAgo
+    component="time"
+    date="2017-05-05T12:00:00"
+    formatter={[Function]}
+    live={false}
+    maxPeriod={Infinity}
+    minPeriod={0}
+    now={[Function]}
+  >
+    <time
+      dateTime="2017-05-05T16:00:00.000Z"
+      title="2017-05-05T12:00:00"
+    >
+      9 months ago
+    </time>
+  </TimeAgo>,
+  <DeleteButton
+    disabled={false}
+    onClick={[Function]}
+  >
+    <Button
+      name={null}
+      onClick={[Function]}
+      size="default"
+    >
+      <button
+        className="Matchbox-Button"
+        name={null}
+        onClick={[Function]}
+        onMouseUp={[Function]}
+        type="button"
+      >
+        Delete
+      </button>
+    </Button>
+  </DeleteButton>,
+]
 `;

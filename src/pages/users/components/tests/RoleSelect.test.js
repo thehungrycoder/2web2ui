@@ -9,7 +9,7 @@ describe('Component: RoleSelect', () => {
   let wrapper;
 
   beforeEach(() => {
-    props = { value: 'admin' };
+    props = { value: 'admin', name: 'test-role-select' };
     wrapper = shallow(<RoleSelect {...props} />);
   });
 

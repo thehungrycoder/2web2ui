@@ -2,7 +2,7 @@
 
 exports[`Component: RoleSelect should render the select 1`] = `
 <Select
-  name={null}
+  name="test-role-select"
   onChange={[Function]}
   options={
     Array [
