@@ -231,7 +231,7 @@ Array [
   "testemail",
   <TimeAgo
     component="time"
-    date="2017-05-05T12:00:00"
+    date={2017-12-15T12:00:00.000Z}
     formatter={[Function]}
     live={false}
     maxPeriod={Infinity}
@@ -239,10 +239,10 @@ Array [
     now={[Function]}
   >
     <time
-      dateTime="2017-05-05T16:00:00.000Z"
-      title="2017-05-05T12:00:00"
+      dateTime="2017-12-15T12:00:00.000Z"
+      title="2017-12-15 12:00"
     >
-      9 months ago
+      1 month ago
     </time>
   </TimeAgo>,
   <DeleteButton

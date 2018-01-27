@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
-import _ from 'lodash';
 import { authenticate, ssoCheck, login } from 'src/actions/auth';
 import { verifyAndLogin } from 'src/actions/tfa';
 import { SparkPost } from 'src/components';
 import { Panel, Error } from '@sparkpost/matchbox';
 import { SubmissionError } from 'redux-form';
-import selectAccessConditionState from 'src/selectors/accessConditionState';
 
 import config from 'src/config';
+import { DEFAULT_REDIRECT_ROUTE } from 'src/constants';
 import LoginForm from './components/LoginForm';
 import TfaForm from './components/TfaForm';
 import styles from './AuthPage.module.scss';
@@ -20,6 +18,36 @@ export class AuthPage extends Component {
     this.state = {
       ssoEnabled: config.sso.enabled
     };
+  }
+
+  componentDidMount() {
+    if (this.props.auth.loggedIn) {
+      this.redirect();
+      return;
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { ssoUser, loggedIn } = nextProps.auth;
+
+    if (loggedIn) {
+      this.redirect();
+      return;
+    }
+
+    if (typeof ssoUser === 'undefined') { // we don't know if you're an ssoUser yet
+      return;
+    }
+
+    if (ssoUser) {
+      window.location.assign(`${config.apiBase}/users/saml/login`);
+    } else {
+      this.setState({ ssoEnabled: false });
+    }
+  }
+
+  redirect() {
+    this.props.history.push(DEFAULT_REDIRECT_ROUTE);
   }
 
   ssoSignIn(username) {
@@ -34,34 +62,6 @@ export class AuthPage extends Component {
     return (
       <Error error={errorDescription} />
     );
-  }
-
-  renderRedirect() {
-    const { location, currentUser } = this.props;
-    const redirectAfterLogin = _.get(location, 'state.redirectAfterLogin');
-
-    if (redirectAfterLogin) {
-      return <Redirect to={redirectAfterLogin} />;
-    }
-
-    // TODO: create a universally accessible dashboard and redirect everyone there,
-    // then handle access in an in-page modular way on that dashboard
-    const redirectTo = (currentUser.access_level === 'reporting') ? '/reports/summary' : config.splashPage;
-    return <Redirect to={redirectTo} />;
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const { ssoUser } = nextProps.auth;
-
-    if (typeof ssoUser === 'undefined') { //anytime before action is dispatched
-      return;
-    }
-
-    if (ssoUser) {
-      window.location.assign(`${config.apiBase}/users/saml/login`);
-    } else {
-      this.setState({ ssoEnabled: false });
-    }
   }
 
   loginSubmit = (values) => {
@@ -82,13 +82,8 @@ export class AuthPage extends Component {
   }
 
   render() {
-    const { ready } = this.props;
-    const { errorDescription, loggedIn } = this.props.auth;
+    const { errorDescription } = this.props.auth;
     const { tfaEnabled } = this.props.tfa;
-
-    if (ready && loggedIn) {
-      return this.renderRedirect();
-    }
 
     return (
       <div>
@@ -113,8 +108,7 @@ const mapStateToProps = (state) => {
   const { auth, tfa } = state;
   return {
     auth,
-    tfa,
-    ...selectAccessConditionState(state)
+    tfa
   };
 };
 

@@ -18,7 +18,8 @@ import {
   webhooks,
   ipPools,
   ComingSoonPage,
-  PageNotFound
+  PageNotFound,
+  DefaultRedirect
 } from 'src/pages';
 
 import {
@@ -28,6 +29,8 @@ import {
 
 import App from 'src/components/layout/App';
 import config from 'src/config';
+
+import { DEFAULT_REDIRECT_ROUTE } from 'src/constants';
 
 /**
  *  Angular UI Grant List:
@@ -88,11 +91,29 @@ const routes = [
     public: true,
     component: RegisterPage
   },
+
+  /**
+   * This "DefaultRedirect" route is where we send _everyone_ once they first
+   * log in, through Auth or Register or SSO or anything else. It will display
+   * a loading icon until the access control state is loaded, then make a decision
+   * on where to send them based on config, role, etc.
+   *
+   * TODO: Once the Dashboard is universally accessible, this can probably go away
+   */
+  {
+    path: DEFAULT_REDIRECT_ROUTE,
+    component: DefaultRedirect,
+    condition: () => true // this route MUST be accessible to all logged-in app users
+  },
+
   {
     path: '/dashboard',
     component: DashboardPage,
     layout: App,
     condition: composeConditions(hasGrants('api_keys/manage', 'templates/modify', 'sending_domains/manage'), () => config.splashPage === '/dashboard') // want to hide if not a splash page https://jira.int.messagesystems.com/browse/FAD-6046
+    // TODO: implement some kind of blockedRoutes check that runs on every route so we can
+    // hide routes based on config, account/user settings, etc. without having to mess
+    // around with grants in the web UI keys
   },
   {
     path: '/reports',

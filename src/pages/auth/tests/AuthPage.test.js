@@ -4,6 +4,7 @@ import React from 'react';
 import { AuthPage } from '../AuthPage';
 import LoginForm from '../components/LoginForm';
 import TfaForm from '../components/TfaForm';
+import { DEFAULT_REDIRECT_ROUTE } from 'src/constants';
 
 const props = {
   auth: {
@@ -15,7 +16,10 @@ const props = {
     username: 'bertha',
     token: 'tokey-token'
   },
-  authenticate: jest.fn()
+  authenticate: jest.fn(),
+  history: {
+    push: jest.fn()
+  }
 };
 
 let wrapper;
@@ -24,6 +28,10 @@ beforeEach(() => {
   props.ssoCheck = jest.fn(() => Promise.resolve());
   props.verifyAndLogin = jest.fn(() => Promise.resolve());
   wrapper = shallow(<AuthPage {...props} />);
+});
+
+afterEach(() => {
+  jest.resetAllMocks();
 });
 
 it('renders correctly', () => {
@@ -35,9 +43,9 @@ it('renders correctly when there is a login error', () => {
   expect(wrapper).toMatchSnapshot();
 });
 
-it('redirects when logged in and access control is ready', () => {
-  wrapper.setProps({ auth: { loggedIn: true }, ready: true, currentUser: { access_level: 'admin' }});
-  expect(wrapper).toMatchSnapshot();
+it('redirects when logged in', () => {
+  wrapper.setProps({ auth: { loggedIn: true }});
+  expect(props.history.push).toHaveBeenCalledWith(DEFAULT_REDIRECT_ROUTE);
 });
 
 it('should display tfa form when TFA is enabled', () => {
