@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SelectWrapper renders checkbox with an error 1`] = `
+<Select
+  error="Oh no!"
+  id="example"
+  name="example"
+  options={
+    Array [
+      Object {
+        "label": "Option One",
+        "value": "one",
+      },
+      Object {
+        "label": "Option Two",
+        "value": "two",
+      },
+    ]
+  }
+  placeholderValue=""
+  required={false}
+/>
+`;
+
+exports[`SelectWrapper renders select 1`] = `
+<Select
+  id="example"
+  name="example"
+  options={
+    Array [
+      Object {
+        "label": "Option One",
+        "value": "one",
+      },
+      Object {
+        "label": "Option Two",
+        "value": "two",
+      },
+    ]
+  }
+  placeholderValue=""
+  required={false}
+/>
+`;

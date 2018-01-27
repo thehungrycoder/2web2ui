@@ -5,11 +5,11 @@ import { Button, Error, Tag } from '@sparkpost/matchbox';
 
 import { shrinkToFit } from 'src/helpers/string';
 
-import styles from './FileInputWrapper.module.scss';
+import styles from './FileFieldWrapper.module.scss';
 
 const maxLabelLength = 50;
 
-export default class FileInputWrapper extends Component {
+export default class FileFieldWrapper extends Component {
   dropzoneRef = null;
 
   handleDrop = (files, errors) => {
@@ -55,4 +55,3 @@ export default class FileInputWrapper extends Component {
     </div>;
   }
 }
-

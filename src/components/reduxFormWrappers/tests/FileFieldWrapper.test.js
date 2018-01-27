@@ -1,9 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import FileInputWrapper from '../FileInputWrapper';
+import FileFieldWrapper from '../FileFieldWrapper';
 
-describe('FileInputWrapper', () => {
+describe('FileFieldWrapper', () => {
   let wrapper;
   let props;
 
@@ -19,7 +19,7 @@ describe('FileInputWrapper', () => {
   }
 
   function createWrapper(props) {
-    return shallow(<FileInputWrapper {...props} />);
+    return shallow(<FileFieldWrapper {...props} />);
   }
 
   describe('rendering', () => {
@@ -37,7 +37,7 @@ describe('FileInputWrapper', () => {
         ...props,
         meta: { touched: true, error: 'One at a time please' }
       };
-      expect(shallow(<FileInputWrapper {...errProps} />)).toMatchSnapshot();
+      expect(shallow(<FileFieldWrapper {...errProps} />)).toMatchSnapshot();
     });
   });
 
@@ -69,4 +69,3 @@ describe('FileInputWrapper', () => {
     });
   });
 });
-

@@ -8,7 +8,7 @@ import { Panel, Banner, Button, Error } from '@sparkpost/matchbox';
 import { DownloadLink, TextFieldWrapper } from 'src/components';
 import { required, maxLength, maxFileSize } from 'src/helpers/validation';
 
-import FileInputWrapper from './FileInputWrapper';
+import FileFieldWrapper from 'src/components/reduxFormWrappers/FileFieldWrapper';
 
 import parseRecipientListCsv from '../helpers/csv';
 
@@ -119,7 +119,7 @@ export class RecipientListForm extends Component {
               label={uploadHint}
               validate={uploadValidators}
               disabled={submitting}
-              component={FileInputWrapper}
+              component={FileFieldWrapper}
             />
             <Button submit disabled={submitDisabled}>{actionText} Recipient List</Button>
           </form>
