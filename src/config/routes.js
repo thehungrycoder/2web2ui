@@ -103,6 +103,7 @@ const routes = [
   {
     path: DEFAULT_REDIRECT_ROUTE,
     component: DefaultRedirect,
+    layout: App,
     condition: () => true // this route MUST be accessible to all logged-in app users
   },
 
