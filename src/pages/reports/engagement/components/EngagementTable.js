@@ -6,8 +6,8 @@ import { formatNumber, formatPercent } from 'src/helpers/units';
 
 const COLUMNS = [
   { label: 'Links', sortKey: 'link_name', width: '45%' },
-  { label: 'Unique Clicks Per Recipient', sortKey: 'count_raw_clicked_approx', width: '145px' },
-  { label: 'Total Clicks', sortKey: 'count_clicked', width: '130px' },
+  { label: 'Unique Clicks', sortKey: 'count_raw_clicked_approx', width: '145px' },
+  { label: 'Clicks', sortKey: 'count_clicked', width: '130px' },
   { label: 'Percent of Total', sortKey: 'percentage_clicked', width: '160px' }
 ];
 
