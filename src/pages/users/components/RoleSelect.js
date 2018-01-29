@@ -32,7 +32,6 @@ export default function RoleSelect({
   }
 
   // Only return text instead of select box
-  // TODO: won't need the span tags with v16
   if (disabled) {
     const label = selectOptions.find((option) => option.value === value).label;
     return <span>{label}</span>;
