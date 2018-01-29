@@ -41,7 +41,7 @@
     "url": "https://github.com/SparkPost/2web2ui/issues"
   },
   "dependencies": {
-    "@sparkpost/matchbox": "^1.8.17",
+    "@sparkpost/matchbox": "^1.8.19",
     "axios": "^0.16.1",
     "chart.js": "^2.6.0",
     "classnames": "^2.2.5",
