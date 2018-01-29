@@ -45,9 +45,10 @@ export const getInitialGrantsRadio = createSelector(
     isNew || _.size(grants) <= _.size(apiKey.grants) ? 'all' : 'select'
 );
 
+const selectSubaccountIdFromProps = (state, props) => props.subaccountId;
 export const getInitialSubaccount = createSelector(
-  [getSubaccounts, getFormApiKey],
-  (subaccounts, apiKey) => _.find(subaccounts, { id: apiKey.subaccount_id })
+  [getSubaccounts, selectSubaccountIdFromProps],
+  (subaccounts, id) => _.find(subaccounts, { id: Number(id) })
 );
 
 export const getInitialValues = createSelector(getFormApiKey, (apiKey) => {

@@ -27,26 +27,20 @@ export class ApiKeysDetailsPage extends Component {
     showDeleteModal: false
   };
 
-  constructor(props) {
-    super(props);
-    this.secondaryActions = [
-      { content: 'Delete', onClick: this.onToggleDelete }
-    ];
-  }
-
   componentDidMount() {
     const { subaccountId, id } = this.props;
     this.props.getApiKey({ id, subaccountId });
 
+    this.props.listGrants();
     if (this.props.hasSubaccounts) {
       this.props.listSubaccountGrants();
     }
   }
 
   handleDelete = () => {
-    const { deleteApiKey, history } = this.props;
+    const { deleteApiKey, history, subaccountId, id } = this.props;
 
-    deleteApiKey().then(() => {
+    deleteApiKey({ id, subaccountId }).then(() => {
       history.push('/account/api-keys');
     });
   };
@@ -56,15 +50,12 @@ export class ApiKeysDetailsPage extends Component {
   };
 
   onSubmit = (values) => {
-    const { updateApiKey, history } = this.props;
-
-    return updateApiKey(values).then((res) => {
-      history.push('/account/api-keys');
-    });
+    const { updateApiKey, id, subaccountId } = this.props;
+    return updateApiKey({ id, key: values, subaccountId });
   };
 
   render() {
-    const { apiKey, loading } = this.props;
+    const { apiKey, loading, subaccountId } = this.props;
 
     if (loading) {
       return <Loading />;
@@ -74,11 +65,9 @@ export class ApiKeysDetailsPage extends Component {
       <Page
         title={apiKey.label}
         breadcrumbAction={breadcrumbAction}
-        secondaryActions={this.secondaryActions}>
+        secondaryActions={[{ content: 'Delete', onClick: this.onToggleDelete }]}>
         <Panel>
-          <Panel.Section>
-            <ApiKeyForm apiKey={apiKey} onSubmit={this.onSubmit} />
-          </Panel.Section>
+          <ApiKeyForm apiKey={apiKey} onSubmit={this.onSubmit} subaccountId={subaccountId} />
         </Panel>
         <DeleteModal
           open={this.state.showDeleteModal}
@@ -101,7 +90,7 @@ const mapStateToProps = (state, props) => {
     error,
     grants,
     hasSubaccounts: hasSubaccounts(state),
-    loading: getFormLoading(state) || state.apiKeys.keysLoading,
+    loading: getFormLoading(state) || state.apiKeys.keyLoading,
     subaccountId: selectSubaccountIdFromQuery(props)
   };
 };

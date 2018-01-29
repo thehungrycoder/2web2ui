@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
-import { Button } from '@sparkpost/matchbox';
+import { Button, Panel } from '@sparkpost/matchbox';
 
 import {
   RadioGroup,
@@ -43,36 +43,42 @@ export class ApiKeyForm extends Component {
 
     return (
       <form onSubmit={handleSubmit}>
-        <Field
-          name='label'
-          component={TextFieldWrapper}
-          validate={required}
-          label='API Key Name'
-        />
-        <Field
-          name='subaccount'
-          component={SubaccountTypeaheadWrapper}
-          disabled={!isNew}
-        />
-        <Field
-          name='grantsRadio'
-          component={RadioGroup}
-          title='API Permissions'
-          options={grantsOptions}
-        />
-        <GrantsCheckboxes grants={showSubaccountGrants ? subaccountGrants : grants} show={showGrants} />
-        <Field
-          name='validIps'
-          component={TextFieldWrapper}
-          label='Allowed IPs'
-          helpText='Leaving the field blank will allow access by valid API keys from any IP address.'
-          placeholder='10.20.30.40, 10.20.30.0/24'
-          validate={validIpList}
-        />
-
-        <Button submit primary disabled={submitting || pristine}>
-          {submitting ? 'Loading...' : submitText}
-        </Button>
+        <Panel.Section>
+          <Field
+            name='label'
+            component={TextFieldWrapper}
+            validate={required}
+            label='API Key Name'
+          />
+          <Field
+            name='subaccount'
+            helpText='This assigment is permanent.'
+            component={SubaccountTypeaheadWrapper}
+            disabled={!isNew}
+          />
+        </Panel.Section>
+        <Panel.Section>
+          <Field
+            name='grantsRadio'
+            component={RadioGroup}
+            title='API Permissions'
+            options={grantsOptions}
+          />
+          <GrantsCheckboxes grants={showSubaccountGrants ? subaccountGrants : grants} show={showGrants} />
+          <Field
+            name='validIps'
+            component={TextFieldWrapper}
+            label='Allowed IPs'
+            helpText='Leaving the field blank will allow access by valid API keys from any IP address.'
+            placeholder='10.20.30.40, 10.20.30.0/24'
+            validate={validIpList}
+          />
+        </Panel.Section>
+        <Panel.Section>
+          <Button submit primary disabled={submitting || pristine}>
+            {submitting ? 'Loading...' : submitText}
+          </Button>
+        </Panel.Section>
       </form>
     );
   }
@@ -92,5 +98,8 @@ const mapStateToProps = (state, props) => ({
   }
 });
 
-const formOptions = { form: formName };
+const formOptions = {
+  form: formName,
+  enableReinitialize: true
+};
 export default connect(mapStateToProps, {})(reduxForm(formOptions)(ApiKeyForm));

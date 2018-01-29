@@ -12,7 +12,7 @@ import styles from './SubaccountTypeahead.module.scss';
 
 const cx = classnames.bind(styles);
 
-const itemToString = (item) => (item ? item.name : '');
+const itemToString = (item) => (item ? `${item.name} (${item.id})` : '');
 
 export class SubaccountTypeahead extends Component {
   static defaultProps = {
@@ -30,7 +30,7 @@ export class SubaccountTypeahead extends Component {
     clearSelection,
     isOpen
   }) => {
-    const { name, subaccounts, disabled, label = 'Subaccount', placeholder = (isOpen ? 'Type to search' : 'None'), error } = this.props;
+    const { name, subaccounts, disabled, label = 'Subaccount', placeholder = (isOpen ? 'Type to search' : 'None'), error, helpText } = this.props;
 
     const matches = sortMatch(
       subaccounts,
@@ -45,17 +45,19 @@ export class SubaccountTypeahead extends Component {
     }));
 
     const listClasses = cx('List', {
-      open: isOpen && (!inputValue || matches.length)
+      open: isOpen && (!inputValue || matches.length),
+      hasHelp: !!helpText
     });
 
     const textFieldProps = getInputProps({
-      connectRight: selectedItem && this.renderClearButton(clearSelection),
+      connectRight: selectedItem && !disabled ? this.renderClearButton(clearSelection) : null,
       readOnly: !!selectedItem,
       disabled,
       id: name,
       label,
       name,
       placeholder,
+      helpText,
       error: (!isOpen && error) ? error : null
     });
 

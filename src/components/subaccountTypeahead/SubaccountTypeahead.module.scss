@@ -23,14 +23,18 @@
   position: absolute;
   right: 0;
   top: 100%;
-  transform: scale(0.96);
-  transition: 0.06s ease-out;
+  transform: scale(0.97);
+  transition: 0.1s ease-out;
   z-index: 1;
 
   &.open {
     opacity: 1;
     pointer-events: auto;
     transform: scale(1);
+  }
+
+  &.hasHelp {
+    margin-top: rem(-18)
   }
 }
 

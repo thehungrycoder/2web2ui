@@ -3,6 +3,9 @@ import sparkpostApiRequest from './helpers/sparkpostApiRequest';
 import { showAlert } from './globalAlert';
 import setSubaccountHeader from './helpers/setSubaccountHeader';
 
+// BUG these showAlerts will need to be moved to their pages
+// any subsequent history.push() will still fire on error
+
 export function createApiKey(key) {
   return (dispatch, getState) =>
     dispatch(
@@ -43,14 +46,17 @@ export function getApiKey({ id, subaccountId }) {
 
 }
 
-export function deleteApiKey(id) {
+export function deleteApiKey({ id, subaccountId }) {
+  const headers = setSubaccountHeader(subaccountId);
+
   return (dispatch) =>
     dispatch(
       sparkpostApiRequest({
         type: 'DELETE_API_KEY',
         meta: {
           method: 'DELETE',
-          url: `/api-keys/${id}`
+          url: `/api-keys/${id}`,
+          headers
         }
       })
     )
@@ -68,7 +74,8 @@ export function deleteApiKey(id) {
       );
 }
 
-export function updateApiKey(id, key) {
+export function updateApiKey({ id, key, subaccountId }) {
+  const headers = setSubaccountHeader(subaccountId);
   return (dispatch, getState) =>
     dispatch(
       sparkpostApiRequest({
@@ -76,7 +83,8 @@ export function updateApiKey(id, key) {
         meta: {
           method: 'PUT',
           url: `/api-keys/${id}`,
-          ...formatKeyForRequest(key, getState)
+          ...formatKeyForRequest(key, getState),
+          headers
         }
       })
     )
