@@ -59,7 +59,30 @@ describe('Template Form', () => {
   it('should handle ID fill', () => {
     wrapper.setProps({ newTemplate: true });
     wrapper.find('Field').at(0).simulate('change', { target: { value: 'test 1 2!' }});
+    expect(wrapper.find('Field').at(1).props().helpText).toEqual('A Unique ID for your template, we\'ll fill this in for you.');
     expect(wrapper.instance().props.change).toHaveBeenCalledWith(wrapper.instance().props.name, 'id', 'test-1-2');
+  });
+
+  it('should produce the right help text values for the email typeahead', () => {
+    // Domains are available
+    expect(wrapper.find('Field').at(3).props().helpText).toEqual(null);
+
+    // No domains available
+    wrapper.setProps({ domains: []});
+    expect(wrapper.find('Field').at(3).props().helpText).toEqual('You do not have any verified sending domains to use.');
+
+    // No domains available for subaccount
+    wrapper.setProps({ domains: [], subaccountId: 101 });
+    expect(wrapper.find('Field').at(3).props().helpText).toEqual('The selected subaccount does not have any verified sending domains.');
+  });
+
+  it('should handle id validating correctly', () => {
+    // Should not validate on edit/published
+    expect(wrapper.find('Field').at(1).props().validate).toEqual(null);
+
+    // Should validate on create
+    wrapper.setProps({ newTemplate: true });
+    expect(wrapper.find('Field').at(1).props().validate).toMatchSnapshot();
   });
 
   it('correctly parses toggle value into boolean', () => {

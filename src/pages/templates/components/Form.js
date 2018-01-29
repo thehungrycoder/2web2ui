@@ -61,6 +61,18 @@ export default class Form extends Component {
   // Prevents unchecked value from equaling ""
   parseToggle = (value) => !!value
 
+  fromEmailWarning() {
+    const { domains, subaccountId } = this.props;
+
+    if (!domains.length) {
+      return subaccountId
+        ? 'The selected subaccount does not have any verified sending domains.'
+        : 'You do not have any verified sending domains to use.';
+    }
+
+    return null;
+  }
+
   render() {
     const { newTemplate, published, domains, hasSubaccounts, name } = this.props;
 
@@ -81,9 +93,9 @@ export default class Form extends Component {
               name='id'
               component={TextFieldWrapper}
               label='Template ID'
-              helpText={'A Unique ID for your template, we\'ll fill this in for you.'}
+              helpText={newTemplate ? 'A Unique ID for your template, we\'ll fill this in for you.' : null}
               disabled={!newTemplate || published}
-              validate={[required, idSyntax]}
+              validate={newTemplate ? [required, idSyntax] : null}
             />
           </Panel.Section>
           { hasSubaccounts && <SubaccountSection newTemplate={newTemplate} formName={name} disabled={published} /> }
@@ -106,6 +118,7 @@ export default class Form extends Component {
               disabled={!domains.length || published}
               validate={[required, emailOrSubstitution, this.validateDomain]}
               domains={domains}
+              helpText={this.fromEmailWarning()}
             />
 
             <Field

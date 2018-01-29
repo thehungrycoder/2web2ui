@@ -70,6 +70,17 @@ describe('From Email Typeahead', () => {
     expect(result).toMatchSnapshot();
   });
 
+  it('should update value if given a new prop value', () => {
+    wrapper.setProps({ value: 'new value through prop' });
+    expect(wrapper).toHaveState('value', 'new value through prop');
+  });
+
+  it('should not call set state if a prop other than value is updated', () => {
+    const stateSpy = jest.spyOn(wrapper.instance(), 'setState');
+    wrapper.setProps({ some: 'prop' });
+    expect(stateSpy).not.toHaveBeenCalled();
+  });
+
   it('should handle input value', () => {
     wrapper.instance().handleInputValueChange('new value');
     expect(wrapper).toHaveState('value', 'new value');
