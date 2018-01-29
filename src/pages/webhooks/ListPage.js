@@ -9,7 +9,7 @@ import { listWebhooks } from 'src/actions/webhooks';
 import { Loading, TableCollection, ApiErrorBanner } from 'src/components';
 import { Page } from '@sparkpost/matchbox';
 
-const columns = ['Name', 'ID', 'Target'];
+const columns = [{ label: 'Name', sortKey: 'name' }, 'ID', 'Target'];
 export const getRowData = ({ id, name, target }) => {
   const nameLink = <Link to={`/webhooks/details/${id}`}>{name}</Link>;
   return [nameLink, id, target];
@@ -46,6 +46,7 @@ export class WebhooksList extends Component {
         getRowData={getRowData}
         pagination={true}
         filterBox={filterBoxConfig}
+        defaultSortColumn='name'
       />
     );
   }

@@ -37,6 +37,8 @@ class TableCollection extends Component {
       ? rowComponent
       : (props) => <Table.Row rowData={getRowData(props)} />;
 
+    const sortedRows = sortColumn ? getSortedCollection(rows, sortColumn, sortDirection, columns) : rows ;
+
     return (
       <Collection
         outerWrapper={TableWrapper}
@@ -44,7 +46,7 @@ class TableCollection extends Component {
         bodyWrapper={TableBody}
         rowComponent={TableRow}
         { ...this.props}
-        rows={sortColumn ? getSortedCollection(rows, sortColumn, sortDirection) : rows }
+        rows={sortedRows}
       />
     );
   }

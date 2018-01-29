@@ -1,22 +1,19 @@
-/* eslint max-lines: ["error", 175] */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import qs from 'query-string';
-import { TableCollection, Empty, LongTextContainer } from 'src/components';
+import _ from 'lodash';
+
 import { addFilters, refreshTypeaheadCache } from 'src/actions/reportFilters';
 import { loadDelayReasonsByDomain, loadDelayMetrics } from 'src/actions/delayReport';
 import { parseSearch, getFilterSearchOptions } from 'src/helpers/reports';
-import { Percent } from 'src/components/formatters';
 import { showAlert } from 'src/actions/globalAlert';
-import { Page, Panel, UnstyledLink } from '@sparkpost/matchbox';
+import { Page, Panel } from '@sparkpost/matchbox';
 import ShareModal from '../components/ShareModal';
 import Filters from '../components/Filters';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
 import MetricsSummary from '../components/MetricsSummary';
-import _ from 'lodash';
-
-const columns = [{ label: 'Reason', width: '45%' }, 'Domain', 'Delayed', 'Delayed First Attempt (%)'];
+import DelaysDataTable from './components/DelaysDataTable';
 
 export class DelayPage extends Component {
   state = {
@@ -61,34 +58,13 @@ export class DelayPage extends Component {
     this.handleRefresh();
   }
 
-  getRowData = (rowData) => {
-    const { totalAccepted } = this.props;
-    const { reason, domain, count_delayed, count_delayed_first } = rowData;
-    return [
-      <LongTextContainer text={reason} />,
-      <UnstyledLink onClick={() => this.handleDomainClick(domain)}>{domain}</UnstyledLink>,
-      count_delayed,
-      <span>{count_delayed_first} (<Percent value={(count_delayed_first / totalAccepted) * 100} />)</span>
-    ];
-  }
-
   renderCollection() {
-    const { loading, reasons } = this.props;
+    const { loading, reasons, totalAccepted } = this.props;
 
     if (loading) {
       return <PanelLoading />;
     }
-
-    if (!reasons) {
-      return <Empty title={'Delayed Messages'} message={'No delay reasons to report'} />;
-    }
-
-    return <TableCollection
-      columns={columns}
-      rows={reasons}
-      getRowData={this.getRowData}
-      pagination={true}
-    />;
+    return <DelaysDataTable totalAccepted={totalAccepted} rows={reasons} onDomainClick={this.handleDomainClick} />;
   }
 
   renderTopLevelMetrics() {

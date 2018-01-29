@@ -8,9 +8,9 @@ export const getRowData = (key) => [
 ];
 
 export const columns = [
-  { label: 'Name', width: '40%' },
+  { label: 'Name', width: '40%', sortKey: 'label' },
   { label: 'Key', width: '20%' },
-  { label: 'Subaccount', width: '20%' }
+  { label: 'Subaccount', width: '20%', sortKey: 'subaccount_id' }
 ];
 
 export const filterBoxConfig = {

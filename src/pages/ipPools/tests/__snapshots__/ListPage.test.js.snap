@@ -49,9 +49,18 @@ exports[`IP Pools List Page should render the list page correctly 1`] = `
   <TableCollection
     columns={
       Array [
-        "Name",
-        "ID",
-        "Number of IPs Assigned",
+        Object {
+          "label": "Name",
+          "sortKey": "name",
+        },
+        Object {
+          "label": "ID",
+          "sortKey": "id",
+        },
+        Object {
+          "label": "Number of IPs Assigned",
+          "sortKey": [Function],
+        },
       ]
     }
     defaultSortColumn={null}

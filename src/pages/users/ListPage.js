@@ -11,7 +11,13 @@ import { Loading, ApiErrorBanner, DeleteModal, TableCollection } from 'src/compo
 import AccessSelect from './components/AccessSelect';
 import DeleteButton from './components/DeleteButton';
 
-const COLUMNS = ['Name', 'Role', 'Email', 'Last Login', null];
+const COLUMNS = [
+  { label: 'Name', sortKey: 'name' },
+  { label: 'Role', sortKey: 'access' },
+  { label: 'Email', sortKey: 'email' },
+  { label: 'Last Login', sortKey: 'last_login' },
+  null
+];
 const DEFAULT_STATE = {
   userToDelete: {}
 };
@@ -109,6 +115,7 @@ export class ListPage extends Component {
             exampleModifiers: ['name', 'email', 'role'],
             itemToStringKeys: ['username', 'name', 'email']
           }}
+          defaultSortColumn='name'
         />
         { this.renderDeleteModal() }
       </div>

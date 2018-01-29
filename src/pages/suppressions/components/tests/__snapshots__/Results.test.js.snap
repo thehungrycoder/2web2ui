@@ -136,7 +136,7 @@ exports[`Results renders correctly (with suppressions, with subaccount) 1`] = `
         },
         Object {
           "label": "Subaccount",
-          "sortKey": "subaccount_id",
+          "sortKey": [Function],
           "width": "18%",
         },
         Object {
@@ -266,7 +266,7 @@ exports[`Results renders detail modal correctly 1`] = `
         },
         Object {
           "label": "Subaccount",
-          "sortKey": "subaccount_id",
+          "sortKey": [Function],
           "width": "18%",
         },
         Object {
