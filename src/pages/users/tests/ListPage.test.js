@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { ListPage } from '../ListPage';
 import { renderRowData } from 'src/__testHelpers__/renderHelpers';
+import TimeAgo from 'react-timeago';
 
 describe('Page: Users List', () => {
 
@@ -44,6 +45,21 @@ describe('Page: Users List', () => {
     });
 
     expect(renderRowData(row)).toMatchSnapshot();
+  });
+
+  it('should transform row data for the table collection, with a last login date', () => {
+    const row = instance.getRowData({
+      name: 'test-name',
+      isCurrentUser: false,
+      access: 'admin',
+      email: 'testemail',
+      last_login: new Date()
+    });
+
+    const wrapper = shallow(<div>{row[3]}</div>);
+    const timeAgoProps = wrapper.find(TimeAgo).props();
+    expect(timeAgoProps.date).toBeInstanceOf(Date);
+    expect(timeAgoProps.live).toEqual(false);
   });
 
 });
