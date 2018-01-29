@@ -1,16 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
 import { Portal, Icon, Popover } from '@sparkpost/matchbox';
-
-import { fetch as fetchAccount } from 'src/actions/account';
-
 import entitledToSupport from 'src/selectors/support';
-
 import { createTicket, clearSupportForm } from 'src/actions/support';
 import { showAlert } from 'src/actions/globalAlert';
 import SupportForm from './components/SupportForm';
-
 import styles from './Support.module.scss';
 
 export class Support extends Component {
@@ -18,10 +12,6 @@ export class Support extends Component {
   state = {
     showPanel: false
   };
-
-  componentWillMount() {
-    this.props.fetchAccount();
-  }
 
   onSubmit = (values) => {
     const { createTicket, showAlert } = this.props;
@@ -88,6 +78,6 @@ const mapStateToProps = (state) => ({
   entitledToSupport: entitledToSupport(state)
 });
 
-const mapDispatchToProps = { fetchAccount, createTicket, clearSupportForm, showAlert };
+const mapDispatchToProps = { createTicket, clearSupportForm, showAlert };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Support);

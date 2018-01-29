@@ -16,4 +16,5 @@ export { default as webhooks } from './webhooks';
 export { default as ipPools } from './ipPools';
 export { default as SSOPage } from './sso/SSOPage';
 export { default as ComingSoonPage } from './comingSoon/ComingSoonPage';
-export { default as PageNotFound } from './pageNotFound';
+export { default as PageNotFound } from './pageNotFound/PageNotFound';
+export { default as DefaultRedirect } from './defaultRedirect/DefaultRedirect';

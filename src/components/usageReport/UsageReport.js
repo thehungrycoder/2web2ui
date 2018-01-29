@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { format } from 'date-fns';
 import classnames from 'classnames';
+import { fetch as getAccount } from 'src/actions/account';
+import PanelLoading from 'src/components/panelLoading/PanelLoading';
 
 import { Panel, ProgressBar } from '@sparkpost/matchbox';
 import styles from './UsageReport.module.scss';
@@ -31,11 +33,14 @@ const ProgressLabel = ({ title, secondaryTitle }) => (
 );
 
 export class UsageReport extends Component {
+  componentDidMount() {
+    this.props.getAccount({ include: 'usage' });
+  }
   render() {
     const { subscription, usage } = this.props;
 
     if (!subscription || !usage) {
-      return null; // TODO figure out loading state or is this ok
+      return <PanelLoading />;
     }
 
     const remaining = subscription.plan_volume - usage.month.used;
@@ -90,4 +95,4 @@ export class UsageReport extends Component {
 }
 
 const mapStateToProps = ({ account: { usage, subscription }}) => ({ usage, subscription });
-export default connect(mapStateToProps)(UsageReport);
+export default connect(mapStateToProps, { getAccount })(UsageReport);

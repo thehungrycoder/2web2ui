@@ -36,7 +36,6 @@ describe('Component: ProtectedRoute', () => {
     wrapper.setProps({ auth: { loggedIn: false }});
     wrapper.instance().renderRoute();
     expect(wrapper).toMatchSnapshot();
-
   });
 
 

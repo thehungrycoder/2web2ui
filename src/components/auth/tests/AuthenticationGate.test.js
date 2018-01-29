@@ -68,18 +68,6 @@ describe('Component: AuthenticationGate', () => {
   });
 
   describe('componentDidUpdate', () => {
-    it('should redirect to redirect path if you have logged in', () => {
-      wrapper.setProps({ location: { pathname: '/auth', state: { redirectAfterLogin: '/foo' }}, auth: { loggedIn: true }});
-      wrapper.instance().componentDidUpdate({ auth: { loggedIn: false }});
-      expect(wrapper.instance().props.history.push).toHaveBeenCalledWith('/foo');
-    });
-
-    it('should redirect to splashPage if you have logged in and no redirectAfterLogin set', () => {
-      wrapper.setProps({ location: { pathname: '/auth' }, auth: { loggedIn: true }});
-      wrapper.instance().componentDidUpdate({ auth: { loggedIn: false }});
-      expect(wrapper.instance().props.history.push).toHaveBeenCalledWith('/dashboard');
-    });
-
     it('should redirect to auth on logout', () => {
       wrapper.setProps({ location: { pathname: '/report/summary' }, auth: { loggedIn: false }});
       wrapper.instance().componentDidUpdate({ auth: { loggedIn: true }});

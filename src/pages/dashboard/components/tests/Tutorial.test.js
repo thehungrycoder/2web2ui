@@ -20,7 +20,7 @@ describe('Component: Tutorial', () => {
     wrapper = shallow(<Tutorial {...props} />);
   });
 
-  it('should show default email banner', () => {
+  it('should render correctly by default', () => {
     expect(wrapper).toMatchSnapshot();
   });
 

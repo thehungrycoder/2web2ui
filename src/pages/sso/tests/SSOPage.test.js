@@ -1,26 +1,25 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-
 import { SSOPage } from '../SSOPage';
-
-let props;
-
-let wrapper;
-
-beforeEach(() => {
-  props = {
-    login: jest.fn(),
-    location: {
-      search: '?ad=eyJhY2Nlc3NUb2tlbiI6MTIzLCJ1c2VybmFtZSI6InNhbWxfdGVzdCJ9' //{accessToken: 123, username: "saml_test"}
-    },
-    history: {
-      push: jest.fn()
-    }
-  };
-
-});
+import { DEFAULT_REDIRECT_ROUTE } from 'src/constants';
 
 describe('SSOPage', () => {
+
+  let props;
+  let wrapper;
+
+  beforeEach(() => {
+    props = {
+      login: jest.fn(),
+      location: {
+        search: '?ad=eyJhY2Nlc3NUb2tlbiI6MTIzLCJ1c2VybmFtZSI6InNhbWxfdGVzdCJ9' //{accessToken: 123, username: "saml_test"}
+      },
+      history: {
+        push: jest.fn()
+      }
+    };
+  });
+
   it('renders correctly', () => {
     wrapper = shallow(<SSOPage {...props} />);
     expect(wrapper).toMatchSnapshot();
@@ -40,9 +39,9 @@ describe('SSOPage', () => {
     expect(props.login).toHaveBeenCalledWith({ authData: { access_token: 123, username: 'azure_test', refresh_token: '' }, saveCookie: true });
   });
 
-  it('redirects to dashboard after login', () => {
+  it('redirects correctly after login', () => {
     wrapper = shallow(<SSOPage {...props} />);
-    expect(props.history.push).toHaveBeenCalledWith('/dashboard');
+    expect(props.history.push).toHaveBeenCalledWith(DEFAULT_REDIRECT_ROUTE);
   });
 
   it('redirects to auth after login fail (unknown payload)', () => {

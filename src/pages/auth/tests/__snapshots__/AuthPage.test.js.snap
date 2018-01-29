@@ -1,12 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`redirects when logged in 1`] = `
-<Redirect
-  push={false}
-  to="/dashboard"
-/>
-`;
-
 exports[`renders correctly 1`] = `
 <div>
   <div>
