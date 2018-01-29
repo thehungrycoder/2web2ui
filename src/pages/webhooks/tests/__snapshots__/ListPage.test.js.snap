@@ -59,12 +59,15 @@ exports[`Page: Webhook List should render happy path 1`] = `
   <TableCollection
     columns={
       Array [
-        "Name",
+        Object {
+          "label": "Name",
+          "sortKey": "name",
+        },
         "ID",
         "Target",
       ]
     }
-    defaultSortColumn={null}
+    defaultSortColumn="name"
     defaultSortDirection="asc"
     filterBox={
       Object {

@@ -4,21 +4,26 @@ exports[`renders columns correctly with subaccounts 1`] = `
 Array [
   Object {
     "label": "Name",
+    "sortKey": "name",
     "width": "22%",
   },
   Object {
     "label": "ID",
+    "sortKey": "id",
     "width": "22%",
   },
   Object {
     "label": "Status",
+    "sortKey": "published",
     "width": "15%",
   },
   Object {
     "label": "Updated",
+    "sortKey": "last_update_time",
   },
   Object {
     "label": "Subaccount",
+    "sortKey": [Function],
     "width": "20%",
   },
 ]
@@ -50,22 +55,26 @@ exports[`renders correctly 1`] = `
       Array [
         Object {
           "label": "Name",
+          "sortKey": "name",
           "width": "22%",
         },
         Object {
           "label": "ID",
+          "sortKey": "id",
           "width": "22%",
         },
         Object {
           "label": "Status",
+          "sortKey": "published",
           "width": "15%",
         },
         Object {
           "label": "Updated",
+          "sortKey": "last_update_time",
         },
       ]
     }
-    defaultSortColumn={null}
+    defaultSortColumn="name"
     defaultSortDirection="asc"
     filterBox={
       Object {

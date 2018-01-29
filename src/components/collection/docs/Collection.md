@@ -172,7 +172,8 @@ _Note: All [Collection props](#collection-props) (except `headerComponent` and `
 
 **defaultSortColumn**
 
-Pass a key name to sort the collection by that key. Default: `null`. Collection won't be sorted unless this prop is passed.
+Pass a key name to sort the collection by that key. Default: `null`. Collection won't be sorted unless this prop is passed. 
+This parameter can be a function too. If a function is passed, it'll be called with the row object and should return value to be sorted on. Basically it can be anything lodash's [orderBy function](https://lodash.com/docs/4.17.4#orderBy) accepts as iteratee. 
 
 **defaultSortDirection**
 
@@ -189,13 +190,10 @@ function MyTableCollectionComponent() {
       columns={[ 
         { label: 'Title', sortKey: 'title' },
         { label: 'Director', sortKey: 'director' }
-        { label: 'Released', sortKey: 'released' }
+        { label: 'Released', sortKey: (movie) => parseInt(movie.year, 10) }
         'Actions' //this column won't be sortable. 
         ]}
       getRowData={(item) => [item.title, item.director, item.year, '...']}
-      defaultPerPage={5}
-      perPageButtons={[3, 5, 10]}
-      pagination={true}
       defaultSortColumn='released'
       defaultSortDirection='desc'
     />

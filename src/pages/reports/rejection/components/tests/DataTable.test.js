@@ -1,0 +1,61 @@
+import React from 'react';
+import { DataTable } from '../DataTable';
+import { shallow, mount } from 'enzyme';
+import { renderRowData } from 'src/__testHelpers__/renderHelpers';
+
+jest.mock('src/helpers/reports');
+
+describe('Rejection Data Table: ', () => {
+  let props;
+  let wrapper;
+
+  beforeEach(() => {
+    props = {
+      list: [
+        {
+          count_rejected: 65,
+          rejection_category_name: 'Policy Rejection',
+          rejection_category_id: 1,
+          reason: '551 - Cannot Relay 105',
+          domain: 'gmail.com'
+        },
+        {
+          count_rejected: 62,
+          rejection_category_name: 'Policy Rejection',
+          rejection_category_id: 1,
+          reason: '550 - Invalid recipient ...@... (#5.1.1)',
+          domain: 'gmail.com'
+        }
+      ],
+      onDomainClick: jest.fn()
+    };
+    wrapper = shallow(<DataTable {...props} />);
+  });
+
+  afterEach(() => { jest.resetAllMocks(); });
+
+  it('renders correctly', () => {
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders correctly with no rejections', () => {
+    wrapper.setProps({ list: []});
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  describe('getRowData', () => {
+    it('should render row data properly', () => {
+      const rows = wrapper.instance().getRowData({ reason: 'bad delay', rejection_category_name: 'cat1', count_rejected: 10, domain: 'gmail.com' });
+
+      expect(renderRowData(rows)).toMatchSnapshot();
+    });
+
+    it('should filter by domain', () => {
+      const rows = wrapper.instance().getRowData({ reason: 'bad delay', rejection_category_name: 'cat1', count_rejected: 10, domain: 'gmail.com' });
+      const link = mount(rows[1]);
+      link.find('UnstyledLink').simulate('click');
+      expect(props.onDomainClick).toHaveBeenCalledWith('gmail.com');
+    });
+
+  });
+});

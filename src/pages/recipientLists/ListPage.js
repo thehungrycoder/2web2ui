@@ -7,7 +7,11 @@ import { Loading, ApiErrorBanner, TableCollection } from 'src/components';
 
 import { listRecipientLists } from 'src/actions/recipientLists';
 
-const columns = ['Name', 'ID', 'Recipients'];
+const columns = [
+  { label: 'Name', sortKey: 'name' },
+  { label: 'ID', sortKey: 'id' },
+  { label: 'Recipients', sortKey: 'total_accepted_recipients', width: '20%' }
+];
 
 const primaryAction = {
   content: 'Create Recipient List',
@@ -52,6 +56,7 @@ export class ListPage extends Component {
           exampleModifiers: ['name', 'id', 'count'],
           itemToStringKeys: ['name', 'id']
         }}
+        defaultSortColumn='name'
       />
     );
   }

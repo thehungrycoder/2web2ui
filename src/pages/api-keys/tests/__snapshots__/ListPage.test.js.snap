@@ -30,6 +30,7 @@ exports[`renders correctly 1`] = `
       Array [
         Object {
           "label": "Name",
+          "sortKey": "label",
           "width": "40%",
         },
         Object {
@@ -38,12 +39,13 @@ exports[`renders correctly 1`] = `
         },
         Object {
           "label": "Subaccount",
+          "sortKey": "subaccount_id",
           "width": "20%",
         },
       ]
     }
-    defaultSortColumn={null}
-    defaultSortDirection="asc"
+    defaultSortColumn="label"
+    defaultSortDirection="desc"
     filterBox={
       Object {
         "exampleModifiers": Array [
@@ -153,6 +155,7 @@ exports[`should show api key banner on successful create 1`] = `
       Array [
         Object {
           "label": "Name",
+          "sortKey": "label",
           "width": "40%",
         },
         Object {
@@ -161,12 +164,13 @@ exports[`should show api key banner on successful create 1`] = `
         },
         Object {
           "label": "Subaccount",
+          "sortKey": "subaccount_id",
           "width": "20%",
         },
       ]
     }
-    defaultSortColumn={null}
-    defaultSortDirection="asc"
+    defaultSortColumn="label"
+    defaultSortDirection="desc"
     filterBox={
       Object {
         "exampleModifiers": Array [

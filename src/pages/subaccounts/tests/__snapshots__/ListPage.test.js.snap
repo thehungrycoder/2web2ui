@@ -31,20 +31,23 @@ exports[`renders correctly 1`] = `
       Array [
         Object {
           "label": "Name",
+          "sortKey": "name",
           "width": "40%",
         },
         Object {
           "label": "ID",
+          "sortKey": "id",
           "width": "20%",
         },
         Object {
           "label": "Status",
+          "sortKey": "status",
           "width": "20%",
         },
       ]
     }
-    defaultSortColumn={null}
-    defaultSortDirection="asc"
+    defaultSortColumn="id"
+    defaultSortDirection="desc"
     filterBox={
       Object {
         "exampleModifiers": Array [
@@ -119,20 +122,23 @@ exports[`renders empty state 1`] = `
       Array [
         Object {
           "label": "Name",
+          "sortKey": "name",
           "width": "40%",
         },
         Object {
           "label": "ID",
+          "sortKey": "id",
           "width": "20%",
         },
         Object {
           "label": "Status",
+          "sortKey": "status",
           "width": "20%",
         },
       ]
     }
-    defaultSortColumn={null}
-    defaultSortDirection="asc"
+    defaultSortColumn="id"
+    defaultSortDirection="desc"
     filterBox={
       Object {
         "exampleModifiers": Array [

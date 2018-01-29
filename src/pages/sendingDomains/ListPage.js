@@ -26,12 +26,12 @@ export class ListPage extends Component {
     const tooltip = <Tooltip dark content={tooltipContent}>Status <Icon name='Help' size={15} className={styles.StatusTooltip}/></Tooltip>;
 
     const columns = [
-      { label: 'Domain', width: '30%' },
+      { label: 'Domain', width: '30%', sortKey: 'domain' },
       { label: tooltip, width: '40%' }
     ];
 
     if (hasSubaccounts) {
-      columns.push({ label: 'Subaccount', width: '20%' });
+      columns.push({ label: 'Subaccount', width: '20%', sortKey: (sd) => [sd.subaccount_id, sd.shared_with_subaccounts]});
     }
 
     return columns;
@@ -79,6 +79,7 @@ export class ListPage extends Component {
           itemToStringKeys: ['domain'],
           exampleModifiers: ['domain', 'subaccount_id']
         }}
+        defaultSortColumn='domain'
       />
     );
   }

@@ -90,7 +90,7 @@ export class Results extends Component {
     ];
 
     if (hasSubaccounts) {
-      columns.push({ label: 'Subaccount', width: '18%', sortKey: 'subaccount_id' });
+      columns.push({ label: 'Subaccount', width: '18%', sortKey: (row) => parseInt(row.subaccount_id, 10) });
     }
 
     columns.push({ label: '', width: '21%' });

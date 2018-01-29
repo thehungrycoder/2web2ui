@@ -1,9 +1,8 @@
 /* eslint max-lines: ["error", 200] */
 import React from 'react';
 import { RejectionPage } from '../RejectionPage';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import * as reportHelpers from 'src/helpers/reports';
-import { renderRowData } from 'src/__testHelpers__/renderHelpers';
 
 jest.mock('src/helpers/reports');
 
@@ -66,11 +65,6 @@ describe('RejectionPage: ', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('renders correctly with no rejections', () => {
-    wrapper.setProps({ list: []});
-    expect(wrapper).toMatchSnapshot();
-  });
-
   it('renders loading pannel when aggregates are still loading', () => {
     wrapper.setProps({ aggregatesLoading: true });
     expect(wrapper).toMatchSnapshot();
@@ -79,22 +73,6 @@ describe('RejectionPage: ', () => {
   it('should not display top level metrics when there are no aggregates', () => {
     wrapper.setProps({ aggregates: {}});
     expect(wrapper.find('MetricsSummary')).toHaveLength(0);
-  });
-
-  describe('getRowData', () => {
-    it('should render row data properly', () => {
-      const rows = wrapper.instance().getRowData({ reason: 'bad delay', rejection_category_name: 'cat1', count_rejected: 10, domain: 'gmail.com' });
-
-      expect(renderRowData(rows)).toMatchSnapshot();
-    });
-
-    it('should filter by domain', () => {
-      const rows = wrapper.instance().getRowData({ reason: 'bad delay', rejection_category_name: 'cat1', count_rejected: 10, domain: 'gmail.com' });
-      const link = mount(rows[1]);
-      link.find('UnstyledLink').simulate('click');
-      expect(props.addFilters).toHaveBeenCalledWith([{ type: 'Recipient Domain', value: 'gmail.com' }]);
-    });
-
   });
 
   describe('handleDomainClick', () => {

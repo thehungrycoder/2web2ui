@@ -4,6 +4,7 @@ exports[`Sending Domains List Page renders correct columns with subaccounts 1`] 
 Array [
   Object {
     "label": "Domain",
+    "sortKey": "domain",
     "width": "30%",
   },
   Object {
@@ -22,6 +23,7 @@ Array [
   },
   Object {
     "label": "Subaccount",
+    "sortKey": [Function],
     "width": "20%",
   },
 ]
@@ -59,6 +61,7 @@ exports[`Sending Domains List Page renders correctly 1`] = `
       Array [
         Object {
           "label": "Domain",
+          "sortKey": "domain",
           "width": "30%",
         },
         Object {
@@ -77,7 +80,7 @@ exports[`Sending Domains List Page renders correctly 1`] = `
         },
       ]
     }
-    defaultSortColumn={null}
+    defaultSortColumn="domain"
     defaultSortDirection="asc"
     filterBox={
       Object {
