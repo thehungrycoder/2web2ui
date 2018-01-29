@@ -2,7 +2,6 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { ListPage } from '../ListPage';
 import { renderRowData } from 'src/__testHelpers__/renderHelpers';
-import utc from 'src/__testHelpers__/time';
 
 describe('Page: Users List', () => {
 
@@ -41,8 +40,7 @@ describe('Page: Users List', () => {
       name: 'test-name',
       isCurrentUser: false,
       access: 'admin',
-      email: 'testemail',
-      last_login: utc({ year: 2017, month: 12, day: 15, hour: 12 })
+      email: 'testemail'
     });
 
     expect(renderRowData(row)).toMatchSnapshot();

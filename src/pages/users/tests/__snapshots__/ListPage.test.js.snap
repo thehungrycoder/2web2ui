@@ -229,22 +229,7 @@ Array [
     </Select>
   </RoleSelect>,
   "testemail",
-  <TimeAgo
-    component="time"
-    date={2017-12-15T12:00:00.000Z}
-    formatter={[Function]}
-    live={false}
-    maxPeriod={Infinity}
-    minPeriod={0}
-    now={[Function]}
-  >
-    <time
-      dateTime="2017-12-15T12:00:00.000Z"
-      title="2017-12-15 12:00"
-    >
-      1 month ago
-    </time>
-  </TimeAgo>,
+  "Never",
   <DeleteButton
     disabled={false}
     onClick={[Function]}
