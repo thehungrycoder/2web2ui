@@ -1,80 +1,165 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`NavItems Selectors should filter nav by access of user 1`] = `
+exports[`NavItems Selectors should not mutate items 1`] = `
+Array [
+  Object {
+    "label": "No Children",
+    "route": Object {
+      "condition": [Function],
+      "path": "/no/children",
+    },
+    "to": "/no/children",
+  },
+]
+`;
+
+exports[`NavItems Selectors should not mutate items 2`] = `
+Array [
+  Object {
+    "label": "No Children",
+    "route": Object {
+      "condition": [Function],
+      "path": "/no/children",
+    },
+    "to": "/no/children",
+  },
+  Object {
+    "children": Array [
+      Object {
+        "label": "Child A",
+        "route": Object {
+          "condition": [Function],
+          "path": "/child/a",
+        },
+        "to": "/child/a",
+      },
+      Object {
+        "label": "Child B",
+        "route": Object {
+          "condition": [Function],
+          "path": "/child/b",
+        },
+        "to": "/child/b",
+      },
+      Object {
+        "label": "Child C",
+        "route": Object {
+          "condition": [Function],
+          "path": "/child/c",
+        },
+        "to": "/child/c",
+      },
+    ],
+    "label": "With Children",
+    "route": Object {
+      "condition": [Function],
+      "path": "/with/children",
+    },
+    "to": "/with/children",
+  },
+]
+`;
+
+exports[`NavItems Selectors should remove a parent and all of its children if parent is blocked 1`] = `
+Array [
+  Object {
+    "label": "No Children",
+    "route": Object {
+      "condition": [Function],
+      "path": "/no/children",
+    },
+    "to": "/no/children",
+  },
+]
+`;
+
+exports[`NavItems Selectors should remove a parent if all children are blocked 1`] = `
+Array [
+  Object {
+    "label": "No Children",
+    "route": Object {
+      "condition": [Function],
+      "path": "/no/children",
+    },
+    "to": "/no/children",
+  },
+]
+`;
+
+exports[`NavItems Selectors should remove blocked parents and children 1`] = `
 Array [
   Object {
     "children": Array [
       Object {
-        "label": "Summary",
+        "label": "Child A",
         "route": Object {
-          "component": [Function],
-          "layout": [Function],
-          "path": "/reports/summary",
+          "condition": [Function],
+          "path": "/child/a",
         },
-        "to": "/reports/summary",
+        "to": "/child/a",
       },
       Object {
-        "label": "Bounce",
+        "label": "Child C",
         "route": Object {
-          "component": [Function],
-          "layout": [Function],
-          "path": "/reports/bounce",
+          "condition": [Function],
+          "path": "/child/c",
         },
-        "to": "/reports/bounce",
-      },
-      Object {
-        "label": "Rejections",
-        "route": Object {
-          "component": [Function],
-          "layout": [Function],
-          "path": "/reports/rejections",
-        },
-        "to": "/reports/rejections",
-      },
-      Object {
-        "label": "Accepted",
-        "route": Object {
-          "component": [Function],
-          "layout": [Function],
-          "path": "/reports/accepted",
-        },
-        "to": "/reports/accepted",
-      },
-      Object {
-        "label": "Delayed",
-        "route": Object {
-          "component": [Function],
-          "layout": [Function],
-          "path": "/reports/delayed",
-        },
-        "to": "/reports/delayed",
-      },
-      Object {
-        "label": "Engagement",
-        "route": Object {
-          "component": [Function],
-          "layout": [Function],
-          "path": "/reports/engagement",
-        },
-        "to": "/reports/engagement",
-      },
-      Object {
-        "label": "Message Events",
-        "route": Object {
-          "component": [Function],
-          "layout": [Function],
-          "path": "/reports/message-events",
-        },
-        "to": "/reports/message-events",
+        "to": "/child/c",
       },
     ],
-    "icon": "ReportBox",
-    "label": "Reports",
+    "label": "With Children",
     "route": Object {
-      "path": "/reports",
-      "redirect": "/reports/summary",
+      "condition": [Function],
+      "path": "/with/children",
     },
-    "to": "/reports",
+    "to": "/with/children",
+  },
+]
+`;
+
+exports[`NavItems Selectors should select all nav items if none are blocked 1`] = `
+Array [
+  Object {
+    "label": "No Children",
+    "route": Object {
+      "condition": [Function],
+      "path": "/no/children",
+    },
+    "to": "/no/children",
+  },
+  Object {
+    "children": Array [
+      Object {
+        "label": "Child A",
+        "route": Object {
+          "condition": [Function],
+          "path": "/child/a",
+        },
+        "to": "/child/a",
+      },
+      Object {
+        "label": "Child B",
+        "route": Object {
+          "condition": [Function],
+          "path": "/child/b",
+        },
+        "to": "/child/b",
+      },
+      Object {
+        "label": "Child C",
+        "route": Object {
+          "condition": [Function],
+          "path": "/child/c",
+        },
+        "to": "/child/c",
+      },
+    ],
+    "label": "With Children",
+    "route": Object {
+      "condition": [Function],
+      "path": "/with/children",
+    },
+    "to": "/with/children",
   },
 ]
 `;

@@ -9,7 +9,7 @@ export const mapNavToRoutes = _.memoize((items) => {
   return items.map((item) => {
     item.route = routesByPath[item.to];
     if (item.children) {
-      item.children = mapNavToRoutes(item.children);
+      item = { ...item, children: mapNavToRoutes(item.children) };
     }
     return item;
   });
@@ -23,7 +23,7 @@ export function filterNavByAccess(items, accessConditionState) {
 
   const childrenFiltered = firstLevelFiltered.map((item) => {
     if (item.children) {
-      item.children = filterNavByAccess(item.children, accessConditionState);
+      item = { ...item, children: filterNavByAccess(item.children, accessConditionState) };
     }
     return item;
   });
