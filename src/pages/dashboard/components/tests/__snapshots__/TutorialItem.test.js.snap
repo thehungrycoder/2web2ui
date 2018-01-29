@@ -1,6 +1,38 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Component: TutorialItem should provide a link on a label 1`] = `
+exports[`Component: TutorialItem should ignore a label link and children when the item is completed 1`] = `
+<div
+  className=""
+>
+  <Icon
+    name="Check"
+    size={24}
+  />
+  <div>
+    <h6>
+      my item
+    </h6>
+  </div>
+</div>
+`;
+
+exports[`Component: TutorialItem should render correctly by default 1`] = `
+<div
+  className=""
+>
+  <div>
+    <h6>
+      my item
+    </h6>
+    <div>
+      Evie
+      Levon
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Component: TutorialItem should render the link and children when not completed 1`] = `
 <div
   className=""
 >
@@ -40,26 +72,6 @@ exports[`Component: TutorialItem should show checkmark when task is completed 1`
     <h6>
       my item
     </h6>
-    <div>
-      Evie
-      Levon
-    </div>
-  </div>
-</div>
-`;
-
-exports[`Component: TutorialItem should show default email banner 1`] = `
-<div
-  className=""
->
-  <div>
-    <h6>
-      my item
-    </h6>
-    <div>
-      Evie
-      Levon
-    </div>
   </div>
 </div>
 `;

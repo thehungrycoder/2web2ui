@@ -2,9 +2,8 @@ import { Component } from 'react';
 import qs from 'query-string';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-
 import { login } from 'src/actions/auth';
-import config from 'src/config';
+import { DEFAULT_REDIRECT_ROUTE } from 'src/constants';
 
 const authPath = '/auth';
 
@@ -28,7 +27,7 @@ export class SSOPage extends Component {
           saveCookie: true
         });
 
-        return this.props.history.push(config.splashPage);
+        return this.props.history.push(DEFAULT_REDIRECT_ROUTE);
 
         //Heroku.barMe(); TODO: copied from old ui, fix it when heroku specific behaviors are implemented
 

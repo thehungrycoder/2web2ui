@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 import { authenticate, ssoCheck, login } from 'src/actions/auth';
 import { verifyAndLogin } from 'src/actions/tfa';
 import { SparkPost } from 'src/components';
@@ -8,6 +7,7 @@ import { Panel, Error } from '@sparkpost/matchbox';
 import { SubmissionError } from 'redux-form';
 
 import config from 'src/config';
+import { DEFAULT_REDIRECT_ROUTE } from 'src/constants';
 import LoginForm from './components/LoginForm';
 import TfaForm from './components/TfaForm';
 import styles from './AuthPage.module.scss';
@@ -18,6 +18,36 @@ export class AuthPage extends Component {
     this.state = {
       ssoEnabled: config.sso.enabled
     };
+  }
+
+  componentDidMount() {
+    if (this.props.auth.loggedIn) {
+      this.redirect();
+      return;
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { ssoUser, loggedIn } = nextProps.auth;
+
+    if (loggedIn) {
+      this.redirect();
+      return;
+    }
+
+    if (typeof ssoUser === 'undefined') { // we don't know if you're an ssoUser yet
+      return;
+    }
+
+    if (ssoUser) {
+      window.location.assign(`${config.apiBase}/users/saml/login`);
+    } else {
+      this.setState({ ssoEnabled: false });
+    }
+  }
+
+  redirect() {
+    this.props.history.push(DEFAULT_REDIRECT_ROUTE);
   }
 
   ssoSignIn(username) {
@@ -32,20 +62,6 @@ export class AuthPage extends Component {
     return (
       <Error error={errorDescription} />
     );
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const { ssoUser } = nextProps.auth;
-
-    if (typeof ssoUser === 'undefined') { //anytime before action is dispatched
-      return;
-    }
-
-    if (ssoUser) {
-      window.location.assign(`${config.apiBase}/users/saml/login`);
-    } else {
-      this.setState({ ssoEnabled: false });
-    }
   }
 
   loginSubmit = (values) => {
@@ -66,12 +82,8 @@ export class AuthPage extends Component {
   }
 
   render() {
-    const { errorDescription, loggedIn } = this.props.auth;
+    const { errorDescription } = this.props.auth;
     const { tfaEnabled } = this.props.tfa;
-
-    if (loggedIn) {
-      return <Redirect to={config.splashPage} />;
-    }
 
     return (
       <div>
@@ -92,9 +104,12 @@ export class AuthPage extends Component {
   }
 }
 
-const mapStateToProps = ({ auth, tfa }) => ({
-  auth,
-  tfa
-});
+const mapStateToProps = (state) => {
+  const { auth, tfa } = state;
+  return {
+    auth,
+    tfa
+  };
+};
 
 export default connect(mapStateToProps, { login, verifyAndLogin, authenticate, ssoCheck })(AuthPage);

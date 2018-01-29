@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`happy path render 1`] = `
+exports[`Page: RegisterPage happy path render 1`] = `
 <div>
   <div>
     <a
@@ -35,7 +35,7 @@ exports[`happy path render 1`] = `
 </div>
 `;
 
-exports[`loading 1`] = `
+exports[`Page: RegisterPage loading 1`] = `
 <div>
   <div>
     <a
@@ -61,14 +61,14 @@ exports[`loading 1`] = `
 </div>
 `;
 
-exports[`no token 1`] = `
+exports[`Page: RegisterPage no token 1`] = `
 <Redirect
   push={false}
   to="/auth"
 />
 `;
 
-exports[`token expired 1`] = `
+exports[`Page: RegisterPage token expired 1`] = `
 <div>
   <div>
     <a

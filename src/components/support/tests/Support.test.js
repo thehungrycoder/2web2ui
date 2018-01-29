@@ -12,20 +12,17 @@ describe('Support Component', () => {
     ticket_id: 103339
   };
   let wrapper;
-  let fetchAccount;
   let createTicket;
   let clearSupportForm;
   let showAlert;
   let props;
 
   beforeEach(() => {
-    fetchAccount = jest.fn();
     createTicket = jest.fn().mockImplementation(() => Promise.resolve(createTicketResult));
-
     clearSupportForm = jest.fn();
     showAlert = jest.fn();
 
-    props = { fetchAccount, createTicket, clearSupportForm, showAlert, entitledToSupport: true, loggedIn: true };
+    props = { createTicket, clearSupportForm, showAlert, entitledToSupport: true, loggedIn: true };
     wrapper = shallow(<Support {...props} />);
   });
 

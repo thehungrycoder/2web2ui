@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import _ from 'lodash';
 
 import { Page, Banner } from '@sparkpost/matchbox';
 import { UsageReport } from 'src/components';
@@ -51,7 +52,7 @@ export class DashboardPage extends Component {
   renderSuppressionBanner() {
     const { accountAgeInWeeks, hasSuppressions } = this.props;
 
-    if (accountAgeInWeeks > 1 && !hasSuppressions) {
+    if (accountAgeInWeeks > 1 && hasSuppressions === false) {
       return (
         <Banner title="Coming from another email service?">
           <p>Welcome! Make sure you import your suppression list from your previous provider to avoid sending to people who have previously opted out, consistently bounced, etc. Learn more about migrating from Mailgun, Mandrill, or SendGrid. <a href="https://www.sparkpost.com/docs/getting-started/getting-started-sparkpost/#important-coming-from-other-email-services" target="_blank" rel="noopener noreferrer">Import your suppressions</a>.</p>
@@ -90,7 +91,7 @@ function mapStateToProps(state) {
     hasVerifiedDomains: verifiedDomains.length > 0,
     hasApiKeysForSending: apiKeysForSending.length > 0,
     hasBounceDomains: readyForBounce.length > 0,
-    hasSentThisMonth: state.account.usage.month.used > 0
+    hasSentThisMonth: _.get(state, 'account.usage.month.used', 0) > 0
   };
 }
 

@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Redirect, Route } from 'react-router-dom';
 import { AccessControl } from 'src/components/auth';
 import _ from 'lodash';
-import config from 'src/config';
 
 export class ProtectedRoute extends Component {
 
@@ -11,7 +10,7 @@ export class ProtectedRoute extends Component {
     const { component: Component, condition } = this.props;
 
     return (
-      <AccessControl condition={condition} redirect={config.splashPage}>
+      <AccessControl condition={condition} redirect='/404'>
         <Component {...propsFromRoute} />
       </AccessControl>
     );

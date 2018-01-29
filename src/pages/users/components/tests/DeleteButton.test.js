@@ -1,19 +1,35 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import cases from 'jest-in-case';
-
+import { Button } from '@sparkpost/matchbox';
 import DeleteButton from '../DeleteButton';
 
-const defaultProps = {
-  user: {}
-};
+describe('Component: User Page DeleteButton', () => {
 
-const TEST_CASES = {
-  'renders a button': { ...defaultProps },
-  'renders null': { disabled: true }
-};
+  let props;
+  let wrapper;
 
-cases('DeleteButton', (props) => {
-  const wrapper = shallow(<DeleteButton {...props} />);
-  expect(wrapper).toMatchSnapshot();
-}, TEST_CASES);
+  beforeEach(() => {
+    props = {
+      name: 'delete-button-name'
+    };
+    wrapper = shallow(<DeleteButton {...props} />);
+  });
+
+  it('should render correctly by default', () => {
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render when disabled', () => {
+    wrapper.setProps({ disabled: true });
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should handle a click', () => {
+    const e = {};
+    const onClick = jest.fn();
+    wrapper.setProps({ onClick });
+    wrapper.find(Button).simulate('click', e);
+    expect(onClick).toHaveBeenCalledWith('delete-button-name');
+  });
+
+});

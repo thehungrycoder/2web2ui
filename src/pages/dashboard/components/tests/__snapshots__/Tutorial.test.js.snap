@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Component: Tutorial should show default email banner 1`] = `
+exports[`Component: Tutorial should render correctly by default 1`] = `
 <Panel
-  title="Getting Started"
+  title="Getting Started Checklist"
 >
   <Panel.Section>
     <TutorialItem
@@ -18,7 +18,7 @@ exports[`Component: Tutorial should show default email banner 1`] = `
     <TutorialItem
       completed={false}
       label="Add a sending domain"
-      labelLink="account/profile"
+      labelLink="account/sending-domains"
     >
       <p>
         Add a sending domain to send email from your own domain
@@ -29,7 +29,7 @@ exports[`Component: Tutorial should show default email banner 1`] = `
     <TutorialItem
       completed={true}
       label="Verify your sending domain"
-      labelLink="account/profile"
+      labelLink="account/sending-domains"
     >
       <p>
         You'll need to verify your domain before you can use it
@@ -40,7 +40,7 @@ exports[`Component: Tutorial should show default email banner 1`] = `
     <TutorialItem
       completed={true}
       label="Create bounce domain"
-      labelLink="account/profile"
+      labelLink="account/sending-domains"
     >
       <p>
         Create a bounce domain to track email engagement
@@ -55,6 +55,15 @@ exports[`Component: Tutorial should show default email banner 1`] = `
     >
       <p>
         You'll need to create an API key to use our API or SMTP integration.
+      </p>
+    </TutorialItem>
+  </Panel.Section>
+  <Panel.Section>
+    <TutorialItem
+      label="Send an email this month"
+    >
+      <p>
+        Get sending!
       </p>
     </TutorialItem>
   </Panel.Section>

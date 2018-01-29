@@ -1,28 +1,65 @@
-import cases from 'jest-in-case';
 import React from 'react';
 import { shallow } from 'enzyme';
 import { ListPage } from '../ListPage';
+import { renderRowData } from 'src/__testHelpers__/renderHelpers';
+import TimeAgo from 'react-timeago';
 
-const TEST_CASES = {
-  'renders table and hidden modal': {
-    loading: false,
-    listUsers: jest.fn(),
-    users: [
-      { name: 'Test User 1', access: 'admin', email: 'user1@test.com' },
-      { name: 'Test User 2', access: 'admin', email: 'user2@test.com' }
-    ]
-  },
-  'renders error banner, table, and hidden modal': {
-    error: {
-      message: 'Uh oh! It broke.' // renders as details
-    },
-    listUsers: jest.fn(),
-    users: [],
-    loading: false
-  }
-};
+describe('Page: Users List', () => {
 
-cases('Users list page', (props) => {
-  const wrapper = shallow(<ListPage {...props} />);
-  expect(wrapper).toMatchSnapshot();
-}, TEST_CASES);
+  let props;
+  let wrapper;
+  let instance;
+
+  beforeEach(() => {
+    props = {
+      loading: false,
+      listUsers: jest.fn(),
+      users: [
+        { name: 'Test User 1', access: 'admin', email: 'user1@test.com' },
+        { name: 'Test User 2', access: 'admin', email: 'user2@test.com' }
+      ]
+    };
+    wrapper = shallow(<ListPage {...props} />);
+    instance = wrapper.instance();
+  });
+
+  it('should render correctly by default', () => {
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render with an error', () => {
+    wrapper.setProps({
+      error: {
+        message: 'Uh oh! It broke.'
+      }
+    });
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should transform row data for the table collection', () => {
+    const row = instance.getRowData({
+      name: 'test-name',
+      isCurrentUser: false,
+      access: 'admin',
+      email: 'testemail'
+    });
+
+    expect(renderRowData(row)).toMatchSnapshot();
+  });
+
+  it('should transform row data for the table collection, with a last login date', () => {
+    const row = instance.getRowData({
+      name: 'test-name',
+      isCurrentUser: false,
+      access: 'admin',
+      email: 'testemail',
+      last_login: new Date()
+    });
+
+    const wrapper = shallow(<div>{row[3]}</div>);
+    const timeAgoProps = wrapper.find(TimeAgo).props();
+    expect(timeAgoProps.date).toBeInstanceOf(Date);
+    expect(timeAgoProps.live).toEqual(false);
+  });
+
+});
