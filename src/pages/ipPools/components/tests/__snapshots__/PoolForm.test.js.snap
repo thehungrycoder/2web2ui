@@ -168,7 +168,7 @@ exports[`PoolForm tests should return a msg if there are no ips 1`] = `
     validate={[Function]}
   />
   <p>
-    Add sending IPs to this poll by moving them from their current pool.
+    Add sending IPs to this pool by moving them from their current pool.
   </p>
   <Button
     disabled={true}

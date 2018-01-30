@@ -18,7 +18,7 @@ import styles from './SendingDomainSection.module.scss';
 
 export class SetupSending extends Component {
   verifyDomain = () => {
-    const { id, verify } = this.props;
+    const { id, verify, showAlert } = this.props;
 
     return verify(id, 'dkim')
       .then((results) => {
@@ -39,9 +39,9 @@ export class SetupSending extends Component {
 
     if (readyFor.sending && readyFor.dkim) {
       return (<p>This domain is all set up to send with DKIM-signing. Nice work!</p>);
-    } else if (!readyFor.sending && !readyFor.dkim) {
+    } else if (!readyFor.sending && !readyFor.dkim && !config.featureFlags.allow_mailbox_verification) {
       return (<p><strong>To use this domain for sending</strong>, add this TXT record to your DNS settings, paying close attention to the specified hostname.</p>);
-    } else if (!readyFor.sending && config.featureFlags.allow_mailbox_verification) {
+    } else if (!readyFor.sending && !readyFor.dkim && config.featureFlags.allow_mailbox_verification) {
       return (<p>We recommend DNS verification, but if you don't have DNS access, you can <a>set this domain up for sending via email</a>.</p>);
     } else if (readyFor.sending && !readyFor.dkim) {
       return (
@@ -50,6 +50,7 @@ export class SetupSending extends Component {
         </Banner>
       );
     }
+    // TODO: what about (!readyFor.sending && readyFor.dkim)?
   }
 
   renderVerifyButton() {
@@ -68,8 +69,8 @@ export class SetupSending extends Component {
 
     return (
       readyFor.dkim
-        ? <Icon name="Check"/>
-        : <Icon name="Error"/>
+        ? <Icon name="Check" style={{ color: 'green' }}/>
+        : <Icon name="Error" style={{ color: 'red' }}/>
     );
   }
 
@@ -81,15 +82,15 @@ export class SetupSending extends Component {
         <Table>
           <tbody>
             <Table.Row>
-              <Table.HeaderCell/>
-              <Table.HeaderCell className={styles.SendingDomainSection}>
+              <Table.HeaderCell style={{ width: 8 }}/>
+              <Table.HeaderCell style={{ width: 70 }} className={styles.SendingDomainSection}>
               Type
               </Table.HeaderCell>
-              <Table.HeaderCell className={styles.SendingDomainSection}>
+              <Table.HeaderCell style={{ width: 160 }} className={styles.SendingDomainSection}>
               Hostname
               </Table.HeaderCell>
-              <Table.HeaderCell className={styles.SendingDomainSection}>
-              Value { this.renderVerifyButton() }
+              <Table.HeaderCell style={{ width: 220 }} className={styles.SendingDomainSection}>
+                Value <div style={{ float: 'right' }}> { this.renderVerifyButton() } </div>
               </Table.HeaderCell>
             </Table.Row>
             <Table.Row>
@@ -99,10 +100,10 @@ export class SetupSending extends Component {
               <Table.Cell className={styles.SendingDomainSection}>
                 TXT
               </Table.Cell>
-              <Table.Cell>
+              <Table.Cell className={styles.SendingDomainSection}>
                 {`${domain.dkim.selector}._domainkey.${id}`}
               </Table.Cell>
-              <Table.Cell>
+              <Table.Cell className={styles.SendingDomainSection}>
                 {`v=DKIM1; k=rsa; h=sha256; p=${domain.dkim.public}`}
               </Table.Cell>
             </Table.Row>
@@ -120,10 +121,10 @@ export class SetupSending extends Component {
         sectioned
       >
         <Grid>
-          <Grid.Column xs={12} md={5}>
+          <Grid.Column xs={12} md={4}>
             {this.renderBanner()}
           </Grid.Column>
-          <Grid.Column xs={12} md={7}>
+          <Grid.Column xs={12} md={8}>
             {this.renderTxtRecordPanel()}
           </Grid.Column>
         </Grid>
