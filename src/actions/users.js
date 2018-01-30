@@ -97,6 +97,9 @@ export function registerUser(token, data) {
         type: 'error',
         message: 'Unable to register user.',
         details: error.message
-      })).then(() => { throw error; });
-    });
+      }));
+
+      return error;
+    })
+    .then((error) => { throw error; });
 }

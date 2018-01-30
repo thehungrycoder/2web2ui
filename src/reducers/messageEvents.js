@@ -28,6 +28,7 @@ export default (state = initialState, { type, payload }) => {
       return {
         ...state,
         historyLoading: false,
+        // TODO: fix this https://sentry.io/sparkpost/alpha-web-ui-production/issues/435911822/
         history: { ...state.history, [payload[0].message_id]: payload }
       };
 
