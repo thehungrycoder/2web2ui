@@ -12,7 +12,7 @@ exports[`Sending Domains Edit Page renders correctly 1`] = `
   empty={Object {}}
   title="Edit id"
 >
-  <Connect(EditBounce)
+  <Connect(ReduxForm)
     domain={
       Object {
         "dkim": Object {
@@ -35,7 +35,6 @@ exports[`Sending Domains Edit Page renders correctly 1`] = `
         },
       }
     }
-    form="sendingDomainEdit"
     id="id"
   />
 </Page>

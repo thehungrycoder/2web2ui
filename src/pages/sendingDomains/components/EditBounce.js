@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Field } from 'redux-form';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-
+import { reduxForm } from 'redux-form';
 import { verify, update } from 'src/actions/sendingDomains';
 
 import { Panel, Grid, Banner } from '@sparkpost/matchbox';
@@ -123,4 +123,10 @@ export class EditBounce extends Component {
 }
 
 
-export default connect(null, { verify, update, showAlert })(EditBounce);
+
+const formOptions = {
+  form: 'sendingDomainBounce',
+  enableReinitialize: true // required to update initial values from redux state
+};
+
+export default connect(null, { verify, update, showAlert })(reduxForm(formOptions)(EditBounce));

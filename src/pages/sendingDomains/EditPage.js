@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
-import { reduxForm } from 'redux-form';
 
 import { get as getDomain } from 'src/actions/sendingDomains';
 import { Loading, ApiErrorBanner } from 'src/components';
@@ -14,8 +13,6 @@ const breadcrumbAction = {
   Component: Link,
   to: '/account/sending-domains'
 };
-
-const FORM_NAME = 'sendingDomainEdit';
 
 export class EditPage extends Component {
   componentDidMount() {
@@ -40,8 +37,9 @@ export class EditPage extends Component {
     if (!domain) {
       return null;
     }
+
     return (
-      <EditBounce form={FORM_NAME} id={this.props.match.params.id} domain={domain} />
+      <EditBounce id={this.props.match.params.id} domain={domain} />
     );
   }
 
@@ -74,9 +72,4 @@ const mapStateToProps = ({ sendingDomains: { domain, getError, getLoading }}) =>
 });
 
 
-const formOptions = {
-  form: FORM_NAME,
-  enableReinitialize: true // required to update initial values from redux state
-};
-
-export default withRouter(connect(mapStateToProps, { getDomain })(reduxForm(formOptions)(EditPage)));
+export default withRouter(connect(mapStateToProps, { getDomain })(EditPage));
