@@ -2,6 +2,7 @@ import { shallow } from 'enzyme';
 import React from 'react';
 
 import { EditBounce } from '../EditBounce';
+let instance;
 
 describe('Component: EditBounce', () => {
   let wrapper;
@@ -17,13 +18,18 @@ describe('Component: EditBounce', () => {
     props = {
       id: 'xyz.com',
       domain: {
-        status
+        status,
+        is_default_bounce_domain: false
       },
       verify: jest.fn(() => Promise.resolve()),
+      update: jest.fn(() => Promise.resolve()),
       showAlert: jest.fn()
     };
 
     wrapper = shallow(<EditBounce {...props}/>);
+
+    instance = wrapper.instance();
+
   });
 
   it('renders ready correctly', () => {
@@ -41,11 +47,6 @@ describe('Component: EditBounce', () => {
   });
 
   describe('verifyDomain', () => {
-    let instance;
-    beforeEach(() => {
-      instance = wrapper.instance();
-    });
-
     it('verifies domain and alerts when verification successful', async() => {
       props.verify.mockReturnValue(Promise.resolve({ cname_status: 'valid' }));
       await instance.verifyDomain();
@@ -57,6 +58,7 @@ describe('Component: EditBounce', () => {
     });
 
     it('alerts error when verification req is successful but verification is failed', async() => {
+      props.verify.mockReturnValue(Promise.resolve({ cname_status: 'invalid' }));
       await instance.verifyDomain();
       expect(props.verify).toHaveBeenCalledOnceWith('xyz.com', 'cname');
       const arg = props.showAlert.mock.calls[0][0];
@@ -75,6 +77,26 @@ describe('Component: EditBounce', () => {
       expect(arg.type).toEqual('error');
       expect(arg.message).toMatch(/Request failed/);
     });
+  });
 
+  describe('toggleDefaultBounce', () => {
+    it('calls update with toggled value', async() => {
+      await instance.toggleDefaultBounce();
+      expect(props.update).toHaveBeenCalledWith(props.id, { is_default_bounce_domain: true });
+
+      props.domain.is_default_bounce_domain = true;
+      await instance.toggleDefaultBounce();
+      expect(props.update).toHaveBeenCalledWith(props.id, { is_default_bounce_domain: false });
+    });
+
+    it('alerts on error', async() => {
+      const err = new Error('Request failed!');
+      props.update.mockReturnValue(Promise.reject(err));
+
+      await instance.toggleDefaultBounce();
+      expect(props.update).toHaveBeenCalledOnceWith(props.id, { is_default_bounce_domain: true });
+      expect(props.showAlert).toHaveBeenCalledTimes(1);
+      expect(props.showAlert.mock.calls[0][0].type).toEqual('error');
+    });
   });
 });

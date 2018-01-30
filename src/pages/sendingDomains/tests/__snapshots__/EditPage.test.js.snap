@@ -10,7 +10,7 @@ exports[`Sending Domains Edit Page renders correctly 1`] = `
     }
   }
   empty={Object {}}
-  title="Edit id"
+  title="Edit abcd.com"
 >
   <Connect(ReduxForm)
     domain={
@@ -35,9 +35,23 @@ exports[`Sending Domains Edit Page renders correctly 1`] = `
         },
       }
     }
-    id="id"
+    id="abcd.com"
   />
 </Page>
+`;
+
+exports[`Sending Domains Edit Page renders correctly when props.domain is undefined 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "Sending Domains",
+      "to": "/account/sending-domains",
+    }
+  }
+  empty={Object {}}
+  title="Edit abcd.com"
+/>
 `;
 
 exports[`Sending Domains Edit Page renders error banner correctly 1`] = `
@@ -50,7 +64,7 @@ exports[`Sending Domains Edit Page renders error banner correctly 1`] = `
     }
   }
   empty={Object {}}
-  title="Edit id"
+  title="Edit abcd.com"
 >
   <ApiErrorBanner
     errorDetails="error"

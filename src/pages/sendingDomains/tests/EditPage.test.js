@@ -34,7 +34,7 @@ describe('Sending Domains Edit Page', () => {
       getLoading: false,
       getDomain: jest.fn(),
       match: {
-        params: { id: 'id' }
+        params: { id: 'abcd.com' }
       }
     };
 
@@ -53,6 +53,11 @@ describe('Sending Domains Edit Page', () => {
 
   it('renders error banner correctly', () => {
     wrapper.setProps({ getError: { message: 'error' }});
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders correctly when props.domain is undefined', () => {
+    wrapper.setProps({ domain: undefined });
     expect(wrapper).toMatchSnapshot();
   });
 });

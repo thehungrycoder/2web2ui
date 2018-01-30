@@ -15,7 +15,7 @@ const Row = (row, idx) => (<Table.Row key={idx}>
   {row.map(DataCell)}
 </Table.Row>);
 
-export default ({ header = [], rows = []}) => (
+export default ({ header, rows }) => (
   <Table>
     <tbody>
       <Table.Row key='header'>
