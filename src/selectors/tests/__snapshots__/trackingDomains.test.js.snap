@@ -44,23 +44,6 @@ Array [
 ]
 `;
 
-exports[`Selectors: Tracking Domains selectTrackingDomainsOptions should return default and all trackign domain options 1`] = `
-Array [
-  Object {
-    "label": "Always Use Default (Currently 4.com)",
-    "value": "",
-  },
-  Object {
-    "label": "1.com",
-    "value": "1.com",
-  },
-  Object {
-    "label": "4.com",
-    "value": "4.com",
-  },
-]
-`;
-
 exports[`Selectors: Tracking Domains selectTrackingDomainsOptions should return default and all verified tracking domain options 1`] = `
 Array [
   Object {
