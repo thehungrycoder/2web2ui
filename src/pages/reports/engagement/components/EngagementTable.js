@@ -1,14 +1,50 @@
 import _ from 'lodash';
 import React from 'react';
+import { Icon, Tooltip } from '@sparkpost/matchbox';
 
 import { Empty, PanelLoading, TableCollection } from 'src/components';
+import { map as metrics } from 'src/config/metrics';
 import { formatNumber, formatPercent } from 'src/helpers/units';
 
 const COLUMNS = [
-  { label: 'Links', sortKey: 'link_name', width: '45%' },
-  { label: 'Unique Clicks', sortKey: 'count_raw_clicked_approx', width: '145px' },
-  { label: 'Clicks', sortKey: 'count_clicked', width: '130px' },
-  { label: 'Percent of Total', sortKey: 'percentage_clicked', width: '160px' }
+  {
+    key: 'link_name',
+    label: 'Link',
+    sortKey: 'link_name',
+    width: '40%'
+  },
+  {
+    key: 'count_raw_clicked_approx',
+    label: (
+      <span>
+        Unique Clicks
+        <Tooltip dark top content={metrics.count_raw_clicked_approx.description}>
+          <Icon name="InfoOutline" style={{ marginLeft: '5px' }} />
+        </Tooltip>
+      </span>
+    ),
+    sortKey: 'count_raw_clicked_approx',
+    width: '20%'
+  },
+  {
+    key: 'count_clicked',
+    label: (
+      <span>
+        Clicks
+        <Tooltip dark top content={metrics.count_clicked.description}>
+          <Icon name="InfoOutline" style={{ marginLeft: '5px' }} />
+        </Tooltip>
+      </span>
+    ),
+    sortKey: 'count_clicked',
+    width: '20%'
+  },
+  {
+    key: 'percentage_clicked',
+    label: 'Percent of Total',
+    sortKey: 'percentage_clicked',
+    width: '20%'
+  }
 ];
 
 const DataRow = (row) => [
