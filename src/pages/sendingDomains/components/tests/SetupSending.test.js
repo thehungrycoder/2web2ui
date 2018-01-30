@@ -18,6 +18,7 @@ describe('Component: SetupSending', () => {
     };
     props = {
       id: 'xyz.com',
+      subaccount: 999,
       domain: {
         dkim: {
           selector: 'scph0118',
@@ -65,7 +66,7 @@ describe('Component: SetupSending', () => {
       props.verify.mockReturnValue(Promise.resolve({ dkim_status: 'valid' }));
       await instance.verifyDomain();
       expect(props.verify).toHaveBeenCalledTimes(1);
-      expect(props.verify).toHaveBeenCalledWith('xyz.com', 'dkim');
+      expect(props.verify).toHaveBeenCalledWith('xyz.com', 'dkim', 999);
       const arg = props.showAlert.mock.calls[0][0];
       expect(props.showAlert).toHaveBeenCalledTimes(1);
       expect(arg.type).toEqual('success');
@@ -76,7 +77,7 @@ describe('Component: SetupSending', () => {
       props.verify.mockReturnValue(Promise.resolve({ dkim_status: 'invalid' }));
       await instance.verifyDomain();
       expect(props.verify).toHaveBeenCalledTimes(1);
-      expect(props.verify).toHaveBeenCalledWith('xyz.com', 'dkim');
+      expect(props.verify).toHaveBeenCalledWith('xyz.com', 'dkim', 999);
       const arg = props.showAlert.mock.calls[0][0];
       expect(props.showAlert).toHaveBeenCalledTimes(1);
       expect(arg.type).toEqual('error');
@@ -88,7 +89,7 @@ describe('Component: SetupSending', () => {
       props.verify.mockReturnValue(Promise.reject(err));
       await instance.verifyDomain();
       expect(props.verify).toHaveBeenCalledTimes(1);
-      expect(props.verify).toHaveBeenCalledWith('xyz.com', 'dkim');
+      expect(props.verify).toHaveBeenCalledWith('xyz.com', 'dkim', 999);
       const arg = props.showAlert.mock.calls[0][0];
       expect(props.showAlert).toHaveBeenCalledTimes(1);
       expect(arg.type).toEqual('error');

@@ -35,26 +35,18 @@ export function create(data) {
   });
 }
 
-export function verify(id, type) {
+export function verify(id, type, subaccount) {
+  const headers = setSubaccountHeader(subaccount);
   const data = {};
+
   data[`${type}_verify`] = true;
   return sparkpostApiRequest({
     type: 'VERIFY_SENDING_DOMAIN',
     meta: {
       method: 'POST',
       url: `/sending-domains/${id}/verify`,
-      data
-    }
-  });
-}
-
-export function update(id, data) {
-  return sparkpostApiRequest({
-    type: 'UPDATE_SENDING_DOMAIN',
-    meta: {
-      method: 'PUT',
-      url: `/sending-domains/${id}`,
-      data
+      data,
+      headers
     }
   });
 }

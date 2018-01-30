@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
-import { reduxForm } from 'redux-form';
 
 import { get as getDomain } from 'src/actions/sendingDomains';
 import { Loading, ApiErrorBanner } from 'src/components';
@@ -15,8 +14,6 @@ const breadcrumbAction = {
   to: '/account/sending-domains'
 };
 
-const FORM_NAME = 'sendingDomainEdit';
-
 export class EditPage extends Component {
   componentDidMount() {
     this.loadDomainProps();
@@ -26,7 +23,7 @@ export class EditPage extends Component {
     this.props.getDomain(this.props.match.params.id);
   };
 
-  renderSections = () => {
+  renderPage = () => {
     const { domain, match: { params: { id }}} = this.props;
 
     if (!domain) {
@@ -34,7 +31,7 @@ export class EditPage extends Component {
     }
 
     return (
-      <SetupSending form={FORM_NAME} id={id} domain={domain}/>
+      <SetupSending subaccount={domain.subaccount_id} id={id} domain={domain}/>
     );
   };
 
@@ -47,7 +44,7 @@ export class EditPage extends Component {
   }
 
   render() {
-    const { getLoading, getError, domain, match: { params: { id }}} = this.props;
+    const { getLoading, getError, match: { params: { id }}} = this.props;
 
     if (getLoading) {
       return <Loading />;
@@ -58,7 +55,7 @@ export class EditPage extends Component {
         title={`Edit ${id}`}
         breadcrumbAction={breadcrumbAction}
       >
-        {getError ? this.renderError() : this.renderSections(domain)}
+        {getError ? this.renderError() : this.renderPage()}
 
       </Page>
     );
@@ -68,15 +65,7 @@ export class EditPage extends Component {
 const mapStateToProps = ({ sendingDomains: { domain, getError, getLoading }}) => ({
   domain,
   getError,
-  getLoading,
-  initialValues: {
-    ...domain
-  }
+  getLoading
 });
 
-const formOptions = {
-  form: FORM_NAME,
-  enableReinitialize: true // required to update initial values from the redux store
-};
-
-export default withRouter(connect(mapStateToProps, { getDomain })(reduxForm(formOptions)(EditPage)));
+export default withRouter(connect(mapStateToProps, { getDomain })(EditPage));

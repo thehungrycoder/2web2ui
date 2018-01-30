@@ -10,17 +10,11 @@ import { verify } from 'src/actions/sendingDomains';
 import config from 'src/config';
 import styles from './SendingDomainSection.module.scss';
 
-// const domain = {
-//   dkim_domain: 'test.wut.com',
-//   dkim_value: 'v=DKIM1; k=rsa; h=sha256; p=MIGtMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCoEKWShZbbYJ4QmPtAihUewvI0llWSPr2dcdYNLcw39VEyyCrQr/OTFeFGWX6iWB3srTvVNYiZQWt160GBvWPvr9LRmnqq/AYG/7jkXuWr0ZGa0T+Eu4elmRL/sSz4/m5fYaM/kxU1+0fW0gkuUinz+XCQLa44naFa72q7xvivNQIDAQAB',
-//   status: { ownership_verified: false, cname_status: 'verified', dkim_status: 'verified', mx_status: 'verified' }
-// };
-
 export class SetupSending extends Component {
   verifyDomain = () => {
-    const { id, verify, showAlert } = this.props;
+    const { id, subaccount, verify, showAlert } = this.props;
 
-    return verify(id, 'dkim')
+    return verify(id, 'dkim', subaccount)
       .then((results) => {
         const readyFor = resolveReadyFor(results);
         if (readyFor.dkim) {
