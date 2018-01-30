@@ -139,6 +139,51 @@ exports[`EngagementChart renders engagement chart 1`] = `
             valueAccessor={[Function]}
           />
         </Bar>
+        <ReferenceArea
+          alwaysShow={false}
+          fill="#ccc"
+          fillOpacity={0.5}
+          isFront={false}
+          percentage="80%"
+          r={10}
+          shape={[Function]}
+          stroke="none"
+          strokeWidth={1}
+          x1="Targeted"
+          x2="Accepted"
+          xAxisId={0}
+          yAxisId={0}
+        />
+        <ReferenceArea
+          alwaysShow={false}
+          fill="#ccc"
+          fillOpacity={0.5}
+          isFront={false}
+          percentage="12.5%"
+          r={10}
+          shape={[Function]}
+          stroke="none"
+          strokeWidth={1}
+          x1="Accepted"
+          x2="Unique Confirmed Opens"
+          xAxisId={0}
+          yAxisId={0}
+        />
+        <ReferenceArea
+          alwaysShow={false}
+          fill="#ccc"
+          fillOpacity={0.5}
+          isFront={false}
+          percentage="50.5%"
+          r={10}
+          shape={[Function]}
+          stroke="none"
+          strokeWidth={1}
+          x1="Unique Confirmed Opens"
+          x2="Unique Clicks"
+          xAxisId={0}
+          yAxisId={0}
+        />
       </BarChart>
     </ResponsiveContainer>
   </div>
