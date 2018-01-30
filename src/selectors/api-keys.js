@@ -7,7 +7,6 @@ import { getSubaccountIdFromProps } from './subaccounts';
 const getApiKeys = (state) => state.apiKeys.keys;
 const getGrantsArray = (state) => state.apiKeys.grants;
 const getSubaccountGrantsArray = (state) => state.apiKeys.subaccountGrants;
-const getSubaccounts = (state) => state.subaccounts.list;
 export const selectApiKeyId = (props) => props.match.params.id;
 
 
@@ -43,12 +42,6 @@ export const getInitialGrantsRadio = createSelector(
   [getGrants, getFormApiKey, getIsNew],
   (grants, apiKey, isNew) =>
     isNew || _.size(grants) <= _.size(apiKey.grants) ? 'all' : 'select'
-);
-
-const selectSubaccountIdFromProps = (state, props) => props.subaccountId;
-export const getInitialSubaccount = createSelector(
-  [getSubaccounts, selectSubaccountIdFromProps],
-  (subaccounts, id) => _.find(subaccounts, { id: Number(id) })
 );
 
 export const getInitialValues = createSelector(getFormApiKey, (apiKey) => {

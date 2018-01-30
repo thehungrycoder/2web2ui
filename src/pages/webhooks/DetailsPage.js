@@ -3,8 +3,11 @@ import { connect } from 'react-redux';
 import { withRouter, Link, Route } from 'react-router-dom';
 
 // Actions
-import { getWebhook, deleteWebhook } from '../../actions/webhooks';
+import { getWebhook, deleteWebhook } from 'src/actions/webhooks';
+import { showAlert } from 'src/actions/globalAlert';
 import { selectSubaccountIdFromQuery } from 'src/selectors/subaccounts';
+import { list as getSubaccountsList } from 'src/actions/subaccounts';
+import { hasSubaccounts } from 'src/selectors/subaccounts';
 
 // Components
 import { Loading, DeleteModal } from 'src/components';
@@ -12,26 +15,42 @@ import { Page, Tabs } from '@sparkpost/matchbox';
 import TestTab from './components/TestTab';
 import EditTab from './components/EditTab';
 import BatchTab from './components/BatchTab';
+import { setSubaccountQuery } from 'src/helpers/subaccounts';
 
 export class WebhooksDetails extends Component {
   state = {
     showDelete: false
   };
 
-  /*
-    Dispatches getWebhook action
-  */
   componentDidMount() {
-    const { subaccountId } = this.props;
-    this.props.getWebhook({ id: this.props.match.params.id, subaccountId });
+    const { showAlert, getWebhook, hasSubaccounts, subaccounts, getSubaccountsList, match, history, subaccountId: subaccount } = this.props;
+
+    getWebhook({ id: match.params.id, subaccount }).catch((err) => {
+      history.push('/webhooks/');
+      showAlert({ type: 'error', message: 'Unable to find webhook', details: err.message });
+    });
+
+    // Get subaccounts list here, so page doesn't rely on SubaccountTypeahead to pull the list
+    if (hasSubaccounts && subaccounts.length === 0) {
+      getSubaccountsList();
+    }
   }
 
   /*
     Calls deleteWebhook action then redirects to list page.
   */
-  deleteWebhook = () => this.props.deleteWebhook(this.props.match.params.id).then(() => {
-    this.props.history.push('/webhooks/');
-  })
+  deleteWebhook = () => {
+    const { deleteWebhook, showAlert, history, match, webhook } = this.props;
+
+    return deleteWebhook({ id: match.params.id, subaccount: webhook.subaccount })
+      .then(() => {
+        history.push('/webhooks/');
+        showAlert({ type: 'success', message: 'Webhook deleted' });
+      })
+      .catch((err) => {
+        showAlert({ type: 'error', message: 'Unable to delete webhook', details: err.message });
+      });
+  }
 
   /*
     for delete modal
@@ -41,8 +60,9 @@ export class WebhooksDetails extends Component {
   }
 
   render() {
-    const { webhook, location, match } = this.props;
+    const { webhook, location, match, subaccountId } = this.props;
     const webhookId = match.params.id;
+    const query = setSubaccountQuery(subaccountId);
     const editPath = `/webhooks/details/${webhookId}`;
     const testPath = `/webhooks/details/${webhookId}/test`;
     const batchPath = `/webhooks/details/${webhookId}/batches`;
@@ -56,20 +76,21 @@ export class WebhooksDetails extends Component {
       {
         content: 'Settings',
         Component: Link,
-        to: editPath
+        to: `${editPath}${query}`
       },
       {
         content: 'Test',
         Component: Link,
-        to: testPath
+        to: `${testPath}${query}`
       },
       {
         content: 'Batch Status',
         Component: Link,
-        to: batchPath
+        to: `${batchPath}${query}`
       }
     ];
-    const selectedTab = tabs.findIndex(({ to }) => location.pathname === to);
+
+    const selectedTab = tabs.findIndex(({ to }) => location.pathname === to.split('?')[0]);
 
     /*
       Check .events to guard from the create page redirect,
@@ -103,11 +124,17 @@ export class WebhooksDetails extends Component {
   }
 }
 
-const mapStateToProps = ({ webhooks }, props) => ({
-  webhook: webhooks.webhook,
-  getLoading: webhooks.getLoading,
-  eventDocs: webhooks.docs,
-  subaccountId: selectSubaccountIdFromQuery(props)
+WebhooksDetails.defaultProps = {
+  subaccounts: []
+};
+
+const mapStateToProps = (state, props) => ({
+  hasSubaccounts: hasSubaccounts(state),
+  subaccounts: state.subaccounts.list,
+  webhook: state.webhooks.webhook,
+  getLoading: state.webhooks.getLoading,
+  eventDocs: state.webhooks.docs,
+  subaccountId: selectSubaccountIdFromQuery(state, props)
 });
 
-export default withRouter(connect(mapStateToProps, { getWebhook, deleteWebhook })(WebhooksDetails));
+export default withRouter(connect(mapStateToProps, { getWebhook, deleteWebhook, getSubaccountsList, showAlert })(WebhooksDetails));

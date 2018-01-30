@@ -1,38 +1,57 @@
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 import setSubaccountHeader from './helpers/setSubaccountHeader';
+import { allSettled } from 'src/helpers/promise';
+import { mergeWebhooks } from 'src/helpers/webhooks';
 
 // TODO: support timezone param?
-export function listWebhooks() {
+export function listWebhooks({ subaccount = null, type = 'LIST_WEBHOOKS' } = {}) {
+  const headers = setSubaccountHeader(subaccount);
   return sparkpostApiRequest({
-    type: 'LIST_WEBHOOKS',
+    type,
     meta: {
       method: 'GET',
-      url: '/webhooks'
+      url: '/webhooks',
+      headers
     }
   });
 }
 
-export function getWebhook({ id, subaccountId = null }) {
-  const headers = setSubaccountHeader(subaccountId);
+export function listAllWebhooks() {
+  return (dispatch) => allSettled([
+    dispatch(listWebhooks({ type: 'LIST_MASTER_ONLY_WEBHOOKS', subaccount: 0 })),
+    dispatch(listWebhooks())
+  ], { onlyFulfilled: true })
+    .then(([masterAccountWebhooks, webhooks]) => (
+      dispatch({
+        type: 'LIST_ALL_WEBHOOKS_SUCCESS',
+        payload: mergeWebhooks(masterAccountWebhooks, webhooks)
+      })
+    ));
+}
+
+export function getWebhook({ id, subaccount = null }) {
+  const headers = setSubaccountHeader(subaccount);
 
   return sparkpostApiRequest({
     type: 'GET_WEBHOOK',
     meta: {
       method: 'GET',
       url: `/webhooks/${id}`,
+      subaccount,
       headers
     }
   });
 }
 
-export function createWebhook({ subaccount, ...data }) {
+export function createWebhook({ webhook, subaccount }) {
   const headers = setSubaccountHeader(subaccount);
   return sparkpostApiRequest({
     type: 'CREATE_WEBHOOK',
     meta: {
       method: 'POST',
       url: '/webhooks',
-      data,
+      data: webhook,
+      subaccount, // Pass through subaccount to redirect
       headers
     }
   });
@@ -70,7 +89,7 @@ export function testWebhook({ id, subaccount, ...data }) {
     meta: {
       method: 'POST',
       url: `/webhooks/${id}/validate`,
-      data,
+      data: { message: data },
       headers
     }
   });

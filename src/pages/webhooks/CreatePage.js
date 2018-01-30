@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import _ from 'lodash';
 
 // Actions
-import { createWebhook, getEventDocs } from '../../actions/webhooks';
-
+import { createWebhook, getEventDocs } from 'src/actions/webhooks';
+import { showAlert } from 'src/actions/globalAlert';
 // Components
 import { Loading } from 'src/components';
 import { Page, Panel } from '@sparkpost/matchbox';
 import WebhookForm from './components/WebhookForm';
+import { setSubaccountQuery } from 'src/helpers/subaccounts';
 
 export class WebhooksCreate extends Component {
   componentDidMount() {
@@ -23,7 +24,8 @@ export class WebhooksCreate extends Component {
     with it. Invoked in the form's onSubmit func
   */
   createWebhook(values, eventsTree) {
-    const { name, target, subaccount, eventsRadio, auth } = values;
+    const { createWebhook, showAlert } = this.props;
+    const { name, target, subaccount, eventsRadio, auth, assignTo } = values;
 
     const webhook = {
       name,
@@ -32,6 +34,7 @@ export class WebhooksCreate extends Component {
     };
 
     let events;
+    let subaccountId;
 
     if (eventsRadio === 'select') {
       events = _.compact(_.concat(values.message_event, values.track_event, values.gen_event, values.unsubscribe_event, values.relay_event));
@@ -65,9 +68,28 @@ export class WebhooksCreate extends Component {
         break;
     }
 
-    return this.props.createWebhook(webhook).then(() => {
-      history.push('/webhooks');
+    if (assignTo === 'master') {
+      subaccountId = 0;
+    }
+
+    if (assignTo === 'subaccount') {
+      subaccountId = subaccount.id;
+    }
+
+    return createWebhook({ webhook, subaccount: subaccountId }).then(() => {
+      showAlert({ type: 'success', message: 'Webhook created' });
+    }).catch((err) => {
+      showAlert({ type: 'error', message: 'Unable to create webhook', details: err.message });
     });
+  }
+
+  componentDidUpdate(prevProps) {
+    const { webhook, history } = this.props;
+
+    // Handles the history push after create
+    if (_.isEmpty(prevProps.webhook) && !_.isEmpty(webhook)) {
+      history.push(`/webhooks/details/${webhook.id}${setSubaccountQuery(webhook.subaccount)}`);
+    }
   }
 
   /*
@@ -98,9 +120,7 @@ export class WebhooksCreate extends Component {
     return (
       <Page title='Create Webhook' breadcrumbAction={{ content: 'Webhooks', Component: Link, to: '/webhooks' }} >
         <Panel>
-          <Panel.Section>
-            <WebhookForm eventsTree={eventsTree} newWebhook={true} onSubmit={(values) => this.createWebhook(values, eventsTree)}/>
-          </Panel.Section>
+          <WebhookForm eventsTree={eventsTree} newWebhook={true} onSubmit={(values) => this.createWebhook(values, eventsTree)}/>
         </Panel>
       </Page>
     );
@@ -108,8 +128,9 @@ export class WebhooksCreate extends Component {
 }
 
 const mapStateToProps = ({ webhooks }) => ({
+  webhook: webhooks.webhook,
   eventsLoading: webhooks.docsLoading,
   eventDocs: webhooks.docs
 });
 
-export default connect(mapStateToProps, { createWebhook, getEventDocs })(WebhooksCreate);
+export default withRouter(connect(mapStateToProps, { createWebhook, getEventDocs, showAlert })(WebhooksCreate));

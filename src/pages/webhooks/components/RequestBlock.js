@@ -1,20 +1,11 @@
 import React from 'react';
+import { TextField } from '@sparkpost/matchbox';
 
-const RequestBlock = ({ testRequest, testSent, targetURL }) => {
-  const requestText = `The test sends the following request to this webhook's target URL (${targetURL}):`;
-
-  return (
-    <div>
-      <p>
-        {requestText}
-      </p>
-      <pre>
-        <code>
-          <textarea readOnly value={testRequest} rows={10} cols={100}/>
-        </code>
-      </pre>
-    </div>
-  );
-};
+const RequestBlock = ({ testRequest, testSent, targetURL }) => (
+  <div>
+    <p>The test sends the following request to this webhook's target URL ({targetURL})</p>
+    <code><TextField multiline readOnly value={testRequest} rows={6} /></code>
+  </div>
+);
 
 export default RequestBlock;

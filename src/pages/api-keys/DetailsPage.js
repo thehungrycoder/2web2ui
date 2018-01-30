@@ -55,7 +55,7 @@ export class ApiKeysDetailsPage extends Component {
   };
 
   render() {
-    const { apiKey, loading, subaccountId } = this.props;
+    const { apiKey, loading } = this.props;
 
     if (loading) {
       return <Loading />;
@@ -67,7 +67,7 @@ export class ApiKeysDetailsPage extends Component {
         breadcrumbAction={breadcrumbAction}
         secondaryActions={[{ content: 'Delete', onClick: this.onToggleDelete }]}>
         <Panel>
-          <ApiKeyForm apiKey={apiKey} onSubmit={this.onSubmit} subaccountId={subaccountId} />
+          <ApiKeyForm apiKey={apiKey} onSubmit={this.onSubmit} />
         </Panel>
         <DeleteModal
           open={this.state.showDeleteModal}
@@ -91,7 +91,7 @@ const mapStateToProps = (state, props) => {
     grants,
     hasSubaccounts: hasSubaccounts(state),
     loading: getFormLoading(state) || state.apiKeys.keyLoading,
-    subaccountId: selectSubaccountIdFromQuery(props)
+    subaccountId: selectSubaccountIdFromQuery(state, props)
   };
 };
 

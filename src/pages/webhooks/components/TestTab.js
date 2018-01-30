@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
-import { getEventSamples, testWebhook } from '../../../actions/webhooks';
+import { getEventSamples, testWebhook } from 'src/actions/webhooks';
+import { showAlert } from 'src/actions/globalAlert';
 
 import { Button, Panel } from '@sparkpost/matchbox';
+import { PanelLoading } from 'src/components';
 import ResponseBlock from './ResponseBlock';
 import RequestBlock from './RequestBlock';
 
@@ -46,36 +48,35 @@ class TestTab extends Component {
     return requestLines.join('\n');
   }
 
-  testWebhook(id, payload) {
-    this.props.testWebhook(id, payload);
+  testWebhook = () => {
+    const { testWebhook, webhook, samples, showAlert } = this.props;
+    const { buildRequest } = this.state;
+
+    testWebhook({ id: webhook.id, subaccount: webhook.subaccount, ...buildRequest(webhook, samples) }).then(() => {
+      showAlert({ type: 'success', message: 'The test was successful!' });
+    }).catch((err) => {
+      showAlert({ type: 'error', message: 'The test failed', details: err.message });
+    });
     this.setState({ testSent: true });
   }
 
   render() {
     if (this.props.samplesLoading) {
-      return (<div>Loading...</div>);
+      return <PanelLoading />;
     }
 
     const { webhook, samples, testResponse, testLoading } = this.props;
     const { testSent, buildRequest } = this.state;
 
     const buttonText = testSent ? (testLoading ? 'Sending...' : 'Re-send batch') : 'Send Test Batch';
-    const testRequest = buildRequest(webhook, samples);
 
     return (
-      <Panel sectioned>
+      <Panel>
         <Panel.Section>
-          <div>
-            <Button primary disabled={testLoading} onClick={() => { this.testWebhook(webhook.id, testRequest); }}>
-              {buttonText}
-            </Button>
-            <br/>
-            <br/>
-          </div>
-          { testLoading && <div>Sending test...</div> }
-          { !testLoading && <ResponseBlock testSent={testSent} testResponse={testResponse}/> }
-          <RequestBlock testSent={testSent} testRequest={testRequest} targetURL={webhook.target}/>
+          <p><Button primary size='small' disabled={testLoading} onClick={this.testWebhook}>{buttonText}</Button></p>
+          <RequestBlock testSent={testSent} testRequest={buildRequest(webhook, samples)} targetURL={webhook.target}/>
         </Panel.Section>
+        { !testLoading && <ResponseBlock testSent={testSent} testResponse={testResponse} /> }
       </Panel>
     );
   }
@@ -88,4 +89,4 @@ const mapStateToProps = ({ webhooks }) => ({
   testResponse: webhooks.testResponse
 });
 
-export default connect(mapStateToProps, { getEventSamples, testWebhook })(TestTab);
+export default connect(mapStateToProps, { getEventSamples, testWebhook, showAlert })(TestTab);

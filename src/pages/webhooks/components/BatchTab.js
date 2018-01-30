@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
-import { getBatches } from '../../../actions/webhooks';
+import { getBatches } from 'src/actions/webhooks';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
 
 import { Button, Panel } from '@sparkpost/matchbox';
@@ -65,17 +65,11 @@ export class BatchTab extends Component {
     const buttonText = (refreshing && batchesLoading) ? 'Refreshing...' : 'Refresh Batches';
 
     return (
-      <Panel sectioned>
-        <Panel.Section>
-          <div>
-            <Button primary disabled={batchesLoading} onClick={this.refreshBatches}>
-              {buttonText}
-            </Button>
-            <br/>
-            <br/>
-          </div>
-          { this.renderBatches() }
+      <Panel>
+        <Panel.Section >
+          <Button primary size='small' disabled={batchesLoading} onClick={this.refreshBatches}>{buttonText}</Button>
         </Panel.Section>
+        { this.renderBatches() }
       </Panel>
     );
   }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 import { Button, Panel } from '@sparkpost/matchbox';
 
@@ -13,9 +14,9 @@ import {
   getSubaccountGrants,
   getIsNew,
   getInitialGrantsRadio,
-  getInitialSubaccount,
   getInitialValues
 } from 'src/selectors/api-keys';
+import { selectSubaccountFromQuery } from 'src/selectors/subaccounts';
 import validIpList from '../helpers/validIpList';
 import { required } from 'src/helpers/validation';
 import GrantsCheckboxes from './GrantsCheckboxes';
@@ -93,7 +94,7 @@ const mapStateToProps = (state, props) => ({
   isNew: getIsNew(state, props),
   initialValues: {
     grantsRadio: getInitialGrantsRadio(state, props),
-    subaccount: getInitialSubaccount(state, props),
+    subaccount: selectSubaccountFromQuery(state, props),
     ...getInitialValues(state, props)
   }
 });
@@ -102,4 +103,4 @@ const formOptions = {
   form: formName,
   enableReinitialize: true
 };
-export default connect(mapStateToProps, {})(reduxForm(formOptions)(ApiKeyForm));
+export default withRouter(connect(mapStateToProps, {})(reduxForm(formOptions)(ApiKeyForm)));

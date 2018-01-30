@@ -4,10 +4,11 @@ import { withRouter } from 'react-router-dom';
 import _ from 'lodash';
 
 // Actions
-import { getWebhook, getEventDocs, updateWebhook } from '../../../actions/webhooks';
-
+import { getWebhook, getEventDocs, updateWebhook } from 'src/actions/webhooks';
+import { showAlert } from 'src/actions/globalAlert';
 // Components
-import { Panel, Banner } from '@sparkpost/matchbox';
+import { Panel } from '@sparkpost/matchbox';
+import { PanelLoading } from 'src/components';
 import WebhookForm from './WebhookForm';
 
 import prepareWebhookUpdate from '../helpers/prepareWebhookUpdate';
@@ -18,8 +19,7 @@ class EditTab extends Component {
     super(props);
 
     this.state = {
-      updated: false,
-      showBanner: false
+      updated: false
     };
 
     this.buildEventsTree = _.memoize(buildEventsTree);
@@ -40,17 +40,18 @@ class EditTab extends Component {
     to the updateWebhook action.
   */
   handleSubmit = (values, webhook, allEvents) => {
+    const { getWebhook, updateWebhook, showAlert } = this.props;
+
     const update = prepareWebhookUpdate(values, webhook, allEvents);
 
     if (Object.keys(update).length !== 0) {
-      return this.props.updateWebhook({ id: webhook.id, subaccount: update.subaccount_id, ...update })
+      return updateWebhook({ id: webhook.id, subaccount: webhook.subaccount, ...update })
         .then(() => {
-          this.setState({ showBanner: true });
-          this.props.getWebhook({ id: webhook.id, subaccountId: update.subaccount_id });
+          showAlert({ type: 'success', message: 'Update Successful' });
+          getWebhook({ id: webhook.id, subaccount: webhook.subaccount });
         })
         .catch((err) => {
-          this.setState({ showBanner: true });
-          throw err;
+          showAlert({ type: 'error', message: 'Update Failed', details: err.message });
         });
     }
   }
@@ -61,23 +62,6 @@ class EditTab extends Component {
   */
   getAllEvents(eventsTree) {
     return _.flatten(_.map(eventsTree, ({ events }) => _.map(events, ({ key }) => (key))));
-  }
-
-  dismissBanner = () => {
-    this.setState({ showBanner: false });
-  }
-
-  /*
-    Renders a banner based on whether the update succeded or failed
-    TODO: Make a global wrapper for banner that behaves like this.
-  */
-  renderBanner = () => {
-    const { updateSuccess, updateError } = this.props;
-    const title = updateSuccess ? 'Update Successful' : 'Update Failed';
-    const status = updateSuccess ? 'success' : 'danger';
-    const message = _.get(updateError, 'response.data.errors[0].message', null);
-
-    return <Banner title={title} status={status} onDismiss={this.dismissBanner}>{message}</Banner>;
   }
 
   render() {
@@ -100,16 +84,18 @@ class EditTab extends Component {
       delete webhook.auth_type;
     }
 
-    const { showBanner } = this.state;
+    if (eventsLoading) {
+      return <PanelLoading />;
+    }
 
     return (
-      <Panel sectioned>
-        {showBanner && this.renderBanner()}
-        <Panel.Section>
-          {eventsLoading ? 'Loading...' : (
-            <WebhookForm eventsTree={eventsTree} allChecked={allChecked} newWebhook={false} checkedEvents={checkedEvents} onSubmit={(values) => this.handleSubmit(values, webhook, allEvents)}/>
-          )}
-        </Panel.Section>
+      <Panel>
+        <WebhookForm
+          eventsTree={eventsTree}
+          allChecked={allChecked}
+          newWebhook={false}
+          checkedEvents={checkedEvents}
+          onSubmit={(values) => this.handleSubmit(values, webhook, allEvents)}/>
       </Panel>
     );
   }
@@ -123,4 +109,4 @@ const mapStateToProps = ({ webhooks, form }) => ({
   updateError: webhooks.updateError
 });
 
-export default withRouter(connect(mapStateToProps, { getWebhook, getEventDocs, updateWebhook })(EditTab));
+export default withRouter(connect(mapStateToProps, { getWebhook, getEventDocs, updateWebhook, showAlert })(EditTab));

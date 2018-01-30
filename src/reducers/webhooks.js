@@ -1,6 +1,10 @@
-import _ from 'lodash';
-
-const initialState = { batches: [], list: [], webhook: {}, getLoading: true, docsLoading: true };
+const initialState = {
+  batches: [],
+  list: [],
+  webhook: {},
+  getLoading: true,
+  docsLoading: true
+};
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -9,11 +13,11 @@ export default (state = initialState, action) => {
     case 'LIST_WEBHOOKS_PENDING':
       return { ...state, listLoading: true, listError: null };
 
-    case 'LIST_WEBHOOKS_SUCCESS':
-      return { ...state, list: _.sortBy(action.payload, ['name']), listLoading: false };
-
     case 'LIST_WEBHOOKS_FAIL':
-      return { ...state, listError: action.payload, listLoading: false };
+      return { ...state, listError: action.payload };
+
+    case 'LIST_ALL_WEBHOOKS_SUCCESS':
+      return { ...state, list: action.payload, listLoading: false };
 
     /* GET */
 
@@ -21,7 +25,7 @@ export default (state = initialState, action) => {
       return { ...state, getLoading: true };
 
     case 'GET_WEBHOOK_SUCCESS':
-      return { ...state, webhook: action.payload, getLoading: false };
+      return { ...state, webhook: { ...action.payload, subaccount: action.meta.subaccount }, getLoading: false };
 
     case 'GET_WEBHOOK_FAIL':
       return { ...state, webhook: {}, getLoading: false };
@@ -32,7 +36,7 @@ export default (state = initialState, action) => {
       return { ...state, webhook: {}, createError: null };
 
     case 'CREATE_WEBHOOK_SUCCESS':
-      return { ...state, webhook: { id: action.payload.id }};
+      return { ...state, webhook: { id: action.payload.id, subaccount: action.meta.subaccount }};
 
     case 'CREATE_WEBHOOK_FAIL':
       return { ...state, webhook: {}, createError: action.payload };

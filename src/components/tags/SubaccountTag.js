@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Tag, Icon } from '@sparkpost/matchbox';
 
-const SubaccountTag = ({ id, all, master, isDefault }) => {
+const SubaccountTag = ({ id, all, receiveAll, master, isDefault }) => {
   let content = `Subaccount ${id}`;
   let color = null;
   let defaultContent = null;
@@ -16,6 +16,11 @@ const SubaccountTag = ({ id, all, master, isDefault }) => {
     content = 'Shared with all';
   }
 
+  // Used for webhooks
+  if (receiveAll) {
+    content = 'All';
+  }
+
   if (master) {
     content = 'Master account';
   }
@@ -27,7 +32,8 @@ SubaccountTag.propTypes = {
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   all: PropTypes.bool,
   master: PropTypes.bool,
-  isDefault: PropTypes.bool
+  isDefault: PropTypes.bool,
+  receiveAll: PropTypes.bool
 };
 
 export default SubaccountTag;

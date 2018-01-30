@@ -2,7 +2,7 @@ import React from 'react';
 import { Field } from 'redux-form';
 import { required, maxLength } from 'src/helpers/validation';
 import { TextFieldWrapper, SelectWrapper, RadioGroup } from 'src/components';
-import { SubaccountTypeaheadWrapper } from 'src/components/reduxFormWrappers';
+import { UnstyledLink } from '@sparkpost/matchbox';
 
 const BasicAuthFields = () => (
   <div>
@@ -28,6 +28,7 @@ const NameField = () => (
     validate={[required, maxLength(24)]}
     label='Webhook Name'
     placeholder='e.g. My Opens and Clicks Webhook'
+    helpText='A friendly label for your webhook, only used for display'
   />
 );
 
@@ -38,6 +39,7 @@ const TargetField = () => (
     validate={required}
     label='Target'
     placeholder='https://example.com/webhook-target'
+    helpText="This is the URL we'll send data to. We recommend the use of https."
   />
 );
 
@@ -45,7 +47,7 @@ const EventsRadioGroup = () => (
   <Field
     name='eventsRadio'
     component={RadioGroup}
-    title='Events'
+    title='Events:'
     options={[
       { value: 'all', label: 'All' },
       { value: 'select', label: 'Select' }
@@ -59,14 +61,9 @@ const AuthDropDown = () => (
     label='Authentication'
     component={SelectWrapper}
     options={[{ value: '', label: 'None' }, { value: 'basic', label: 'Basic Auth' }, { value: 'oauth2', label: 'OAuth 2.0' }]}
+    helpText={<span>Select "None" if your target URL has no authentication scheme. <UnstyledLink external to='https://support.sparkpost.com/customer/portal/articles/2112385'>More information</UnstyledLink>.</span>}
   />
 );
-
-const SubaccountField = ({ disabled }) => (<Field
-  component={SubaccountTypeaheadWrapper}
-  name='subaccount'
-  disabled={disabled}
-/>);
 
 
 export {
@@ -75,6 +72,5 @@ export {
   EventsRadioGroup,
   AuthDropDown,
   BasicAuthFields,
-  OAuth2Fields,
-  SubaccountField
+  OAuth2Fields
 };

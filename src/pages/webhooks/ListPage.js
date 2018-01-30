@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 
 // Actions
-import { listWebhooks } from 'src/actions/webhooks';
+import { listAllWebhooks } from 'src/actions/webhooks';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
 
@@ -21,22 +21,22 @@ export const getRowData = ({ id, name, target }) => {
 >>>>>>> c5153a94... FAD-6110 started fixing subaccount support in api keys, webhooks
 const filterBoxConfig = {
   show: true,
-  itemToStringKeys: ['name', 'id', 'target']
+  itemToStringKeys: ['name', 'target']
 };
 
 
 export class WebhooksList extends Component {
 
   componentDidMount() {
-    this.props.listWebhooks();
+    this.props.listAllWebhooks();
   }
 
   getColumns = () => {
     const { hasSubaccounts } = this.props;
-    const columns = ['Name', 'ID', 'Target'];
+    const columns = ['Name', 'Target'];
 
     if (hasSubaccounts) {
-      columns.push('Subaccount');
+      columns.push('Events For');
     }
 
     return columns;
@@ -45,17 +45,29 @@ export class WebhooksList extends Component {
   getRowData = ({ id, name, target, subaccount_id }) => {
     const { hasSubaccounts } = this.props;
     const nameLink = <Link to={`/webhooks/details/${id}${setSubaccountQuery(subaccount_id)}`}>{name}</Link>;
-    const subaccountTag = (hasSubaccounts && subaccount_id) ? <SubaccountTag id={subaccount_id} /> : null;
-    return [nameLink, id, target, subaccountTag];
+    const row = [nameLink, target];
+
+    if (hasSubaccounts) {
+      let subaccountTag = null;
+
+      if (subaccount_id) {
+        subaccountTag = <SubaccountTag id={subaccount_id} />;
+      } else if (subaccount_id !== 0) {
+        subaccountTag = <SubaccountTag receiveAll />;
+      }
+      row.push(subaccountTag);
+    }
+
+    return row;
   };
 
   renderError() {
-    const { error, listWebhooks } = this.props;
+    const { error, listAllWebhooks } = this.props;
     return (
       <ApiErrorBanner
         message={'Sorry, we seem to have had some trouble loading your webhooks.'}
         errorDetails={error.message}
-        reload={listWebhooks}
+        reload={listAllWebhooks}
       />
     );
   }
@@ -106,4 +118,4 @@ function mapStateToProps({ webhooks, ...state }) {
   };
 }
 
-export default withRouter(connect(mapStateToProps, { listWebhooks })(WebhooksList));
+export default withRouter(connect(mapStateToProps, { listAllWebhooks })(WebhooksList));
