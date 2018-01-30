@@ -1,4 +1,5 @@
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
+import setSubaccountHeader from './helpers/setSubaccountHeader';
 
 export function list() {
   return sparkpostApiRequest({
@@ -20,14 +21,15 @@ export function get(id) {
   });
 }
 
-// TODO: wire up for subaccount support
-export function update(id, data) {
+export function update({ sendingDomain, subaccount, ...data }) {
+  const headers = setSubaccountHeader(subaccount);
   return sparkpostApiRequest({
     type: 'UPDATE_SENDING_DOMAIN',
     meta: {
       method: 'PUT',
-      url: `/sending-domains/${id}`,
-      data
+      url: `/sending-domains/${sendingDomain}`,
+      data,
+      headers
     }
   });
 }
