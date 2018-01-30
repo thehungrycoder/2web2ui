@@ -99,7 +99,6 @@ export function registerUser(token, data) {
         details: error.message
       }));
 
-      return error;
-    })
-    .then((error) => { throw error; });
+      throw error;
+    });
 }
