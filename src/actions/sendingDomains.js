@@ -21,7 +21,6 @@ export function get(id) {
   });
 }
 
-<<<<<<< HEAD
 export function create(data) {
   const { assignTo, subaccount, ...formData } = data;
 
