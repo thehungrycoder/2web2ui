@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ShareWithSubaccounts component does not render for subaccount domains 1`] = `""`;
+
+exports[`ShareWithSubaccounts component renders correctly 1`] = `
+<Panel.Section>
+  <Grid>
+    <Grid.Column
+      md={8}
+      xs={12}
+    >
+      <label
+        htmlFor="shareWithSubaccounts"
+      >
+        Share this domain with subaccounts?
+      </label>
+    </Grid.Column>
+    <Grid.Column
+      md={4}
+      xs={12}
+    >
+      <div>
+        <Toggle
+          checked={false}
+          id="shareWithSubaccounts"
+          onChange={[MockFunction]}
+        />
+      </div>
+    </Grid.Column>
+  </Grid>
+</Panel.Section>
+`;
+
+exports[`ShareWithSubaccounts component renders subaccount sharing state 1`] = `
+<Panel.Section>
+  <Grid>
+    <Grid.Column
+      md={8}
+      xs={12}
+    >
+      <label
+        htmlFor="shareWithSubaccounts"
+      >
+        Share this domain with subaccounts?
+      </label>
+    </Grid.Column>
+    <Grid.Column
+      md={4}
+      xs={12}
+    >
+      <div>
+        <Toggle
+          checked={true}
+          id="shareWithSubaccounts"
+          onChange={[MockFunction]}
+        />
+      </div>
+    </Grid.Column>
+  </Grid>
+</Panel.Section>
+`;

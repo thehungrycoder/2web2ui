@@ -4,19 +4,9 @@ import { Grid, Panel } from '@sparkpost/matchbox';
 
 import { resolveStatus, resolveReadyFor } from 'src/helpers/domains';
 
+import VerificationHelp from './VerificationHelp';
 import StatusDescription from './StatusDescription';
 import ShareWithSubaccounts from './ShareWithSubaccounts';
-
-const VerificationHelp = ({ status }) => {
-  if (status === 'verified') {
-    return null;
-  }
-
-  return <p>
-    Need help verifying your domain?
-    <a href="https://www.sparkpost.com/docs/getting-started/getting-started-sparkpost/#step-2-verifying-domain-ownership" rel="noopener noreferrer" target="_blank"> Follow this guide.</a>
-  </p>;
-};
 
 export const DomainStatus = ({ domain, onShareDomainChange }) => {
   const status = resolveStatus(domain.status);
