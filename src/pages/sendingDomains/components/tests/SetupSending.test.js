@@ -73,6 +73,7 @@ describe('Component: SetupSending', () => {
     });
 
     it('alerts error when verification req is successful but verification is failed', async() => {
+      props.verify.mockReturnValue(Promise.resolve({ dkim_status: 'invalid' }));
       await instance.verifyDomain();
       expect(props.verify).toHaveBeenCalledTimes(1);
       expect(props.verify).toHaveBeenCalledWith('xyz.com', 'dkim');
