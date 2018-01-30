@@ -16,6 +16,17 @@ export function get(id) {
     type: 'GET_SENDING_DOMAIN',
     meta: {
       method: 'GET',
+      url: `/sending-domains/${id}`,
+      id
+    }
+  });
+}
+
+export function remove(id) {
+  return sparkpostApiRequest({
+    type: 'DELETE_SENDING_DOMAIN',
+    meta: {
+      method: 'DELETE',
       url: `/sending-domains/${id}`
     }
   });
@@ -31,6 +42,17 @@ export function create(data) {
       url: '/sending-domains',
       headers: setSubaccountHeader(subaccount),
       data: { ...formData, shared_with_subaccounts: assignTo === 'shared' }
+    }
+  });
+};
+
+export function update({ id, ...updateFields }) {
+  return sparkpostApiRequest({
+    type: 'UPDATE_SENDING_DOMAIN',
+    meta: {
+      method: 'PUT',
+      url: `/sending-domains/${id}`,
+      data: updateFields
     }
   });
 }
