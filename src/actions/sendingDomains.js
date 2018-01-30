@@ -34,3 +34,15 @@ export function create(data) {
     }
   });
 }
+
+// TODO: wire up for subaccount support
+export function update(id, data) {
+  return sparkpostApiRequest({
+    type: 'UPDATE_SENDING_DOMAIN',
+    meta: {
+      method: 'PUT',
+      url: `/sending-domains/${id}`,
+      data
+    }
+  });
+}

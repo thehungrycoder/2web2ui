@@ -6,6 +6,7 @@ import { withRouter } from 'react-router-dom';
 import { get as getDomain } from 'src/actions/sendingDomains';
 import { Loading, ApiErrorBanner } from 'src/components';
 import { Page } from '@sparkpost/matchbox';
+import AssignTrackingDomain from './components/AssignTrackingDomain';
 
 const breadcrumbAction = {
   content: 'Sending Domains',
@@ -21,6 +22,13 @@ export class EditPage extends Component {
   loadDomainProps = () => {
     this.props.getDomain(this.props.match.params.id);
   };
+
+  renderPage() {
+    const { domain, match: { params: { id }}} = this.props;
+    return (
+      <AssignTrackingDomain sendingDomain={id} trackingDomain={domain.tracking_domain} />
+    );
+  }
 
   renderError() {
     return <ApiErrorBanner
@@ -42,7 +50,7 @@ export class EditPage extends Component {
         title={`Edit ${id}`}
         breadcrumbAction={breadcrumbAction}
       >
-        {getError ? this.renderError() : 'Coming soon'}
+        {getError ? this.renderError() : this.renderPage()}
 
       </Page>
     );
