@@ -10,7 +10,7 @@ it('params to get engagement chart data', () => {
       to: time({ day: 2 })
     }
   }));
-  const thunk = actionCreators.getChartData({ getMetrics: jest.fn((a) => a) });
+  const thunk = actionCreators.getAggregateMetrics({ getMetrics: jest.fn((a) => a) });
 
   expect(thunk(mockDispatch, mockGetState)).toMatchSnapshot();
 });
@@ -24,7 +24,7 @@ it('params to get engagement table data', () => {
       to: time({ day: 2 })
     }
   }));
-  const thunk = actionCreators.getTableData({ getMetrics: jest.fn((a) => a) });
+  const thunk = actionCreators.getLinkMetrics({ getMetrics: jest.fn((a) => a) });
 
   expect(thunk(mockDispatch, mockGetState)).toMatchSnapshot();
 });

@@ -4,7 +4,7 @@ import { EngagementPage } from '../EngagementPage';
 
 it('renders engagement report page', () => {
   const props = {
-    chart: {
+    aggregateMetrics: {
       data: {
         count_accepted: 1,
         count_targeted: 2,
@@ -13,14 +13,14 @@ it('renders engagement report page', () => {
       },
       loading: false
     },
-    table: {
+    linkMetrics: {
       data: [
         { count_clicked: 1776, count_raw_clicked_approx: 1657, link_name: 'Raw URL' }
       ],
       loading: false
     },
-    getChartData: jest.fn(),
-    getTableData: jest.fn()
+    getAggregateMetrics: jest.fn(),
+    getLinkMetrics: jest.fn()
   };
   const wrapper = shallow(<EngagementPage {...props} />);
 
@@ -29,10 +29,10 @@ it('renders engagement report page', () => {
 
 it('displays global alert when request to fetch data fails', async() => {
   const props = {
-    chart: { data: {}},
-    table: { data: []},
-    getChartData: jest.fn(() => Promise.reject()),
-    getTableData: jest.fn(() => Promise.reject()),
+    aggregateMetrics: { data: {}},
+    linkMetrics: { data: []},
+    getAggregateMetrics: jest.fn(() => Promise.reject()),
+    getLinkMetrics: jest.fn(() => Promise.reject()),
     showAlert: jest.fn()
   };
 

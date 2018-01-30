@@ -2,14 +2,14 @@
 
 exports[`Engagement Report Reducer when failed to get chart data 1`] = `
 Object {
-  "chart": Object {
+  "aggregateMetrics": Object {
     "data": Array [],
     "error": Object {
       "message": "Oh no!",
     },
     "loading": false,
   },
-  "table": Object {
+  "linkMetrics": Object {
     "data": Array [],
     "error": null,
     "loading": false,
@@ -19,12 +19,12 @@ Object {
 
 exports[`Engagement Report Reducer when failed to get table data 1`] = `
 Object {
-  "chart": Object {
+  "aggregateMetrics": Object {
     "data": Object {},
     "error": null,
     "loading": false,
   },
-  "table": Object {
+  "linkMetrics": Object {
     "data": Array [],
     "error": Object {
       "message": "Oh no!",
@@ -36,12 +36,12 @@ Object {
 
 exports[`Engagement Report Reducer when pending to get chart data 1`] = `
 Object {
-  "chart": Object {
+  "aggregateMetrics": Object {
     "data": Object {},
     "error": null,
     "loading": true,
   },
-  "table": Object {
+  "linkMetrics": Object {
     "data": Array [],
     "error": null,
     "loading": false,
@@ -51,12 +51,12 @@ Object {
 
 exports[`Engagement Report Reducer when pending to get table data 1`] = `
 Object {
-  "chart": Object {
+  "aggregateMetrics": Object {
     "data": Object {},
     "error": null,
     "loading": false,
   },
-  "table": Object {
+  "linkMetrics": Object {
     "data": Array [],
     "error": null,
     "loading": true,
@@ -66,7 +66,7 @@ Object {
 
 exports[`Engagement Report Reducer when succeeds to get chart data 1`] = `
 Object {
-  "chart": Object {
+  "aggregateMetrics": Object {
     "data": Object {
       "count_accepted": 237433,
       "count_targeted": 272234,
@@ -74,7 +74,7 @@ Object {
     "error": null,
     "loading": false,
   },
-  "table": Object {
+  "linkMetrics": Object {
     "data": Array [],
     "error": null,
     "loading": false,
@@ -84,12 +84,12 @@ Object {
 
 exports[`Engagement Report Reducer when succeeds to get table data 1`] = `
 Object {
-  "chart": Object {
+  "aggregateMetrics": Object {
     "data": Object {},
     "error": null,
     "loading": false,
   },
-  "table": Object {
+  "linkMetrics": Object {
     "data": Array [
       Object {
         "count_clicked": 1802,

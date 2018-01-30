@@ -10,7 +10,7 @@ Object {
     "to": "1970-01-02T00:00",
   },
   "path": "deliverability",
-  "type": "GET_ENGAGEMENT_CHART_DATA",
+  "type": "GET_ENGAGEMENT_AGGREGATE_METRICS",
 }
 `;
 
@@ -24,6 +24,6 @@ Object {
     "to": "1970-01-02T00:00",
   },
   "path": "deliverability/link-name",
-  "type": "GET_ENGAGEMENT_TABLE_DATA",
+  "type": "GET_ENGAGEMENT_LINK_METRICS",
 }
 `;

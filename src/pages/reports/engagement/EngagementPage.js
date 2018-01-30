@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Page } from '@sparkpost/matchbox';
 
-import { getChartData, getTableData } from 'src/actions/engagementReport';
+import { getAggregateMetrics, getLinkMetrics } from 'src/actions/engagementReport';
 import { showAlert } from 'src/actions/globalAlert';
 import EngagementChart from './components/EngagementChart';
 import EngagementFilters from './components/EngagementFilters';
@@ -13,8 +13,8 @@ import EngagementTable from './components/EngagementTable';
 
 export class EngagementPage extends Component {
   onLoad = () => {
-    this.props.getChartData().catch(this.onLoadFail('Unable to load engagement data.'));
-    this.props.getTableData().catch(this.onLoadFail('Unable to load click data.'));
+    this.props.getAggregateMetrics().catch(this.onLoadFail('Unable to load engagement data.'));
+    this.props.getLinkMetrics().catch(this.onLoadFail('Unable to load click data.'));
   }
 
   onLoadFail = (message) => (error) => {
@@ -23,33 +23,33 @@ export class EngagementPage extends Component {
   }
 
   render() {
-    const { chart, table } = this.props;
+    const { aggregateMetrics, linkMetrics } = this.props;
 
     return (
       <Page title='Engagement Report'>
-        <EngagementFilters shareDisabled={chart.loading} onLoad={this.onLoad} />
+        <EngagementFilters shareDisabled={aggregateMetrics.loading} onLoad={this.onLoad} />
         <EngagementSummary
-          clicks={chart.data.count_unique_clicked_approx}
-          loading={chart.loading}
-          targeted={chart.data.count_targeted}
+          clicks={aggregateMetrics.data.count_unique_clicked_approx}
+          loading={aggregateMetrics.loading}
+          targeted={aggregateMetrics.data.count_targeted}
         />
         <EngagementChart
-          accepted={chart.data.count_accepted}
-          clicks={chart.data.count_unique_clicked_approx}
-          loading={chart.loading}
-          opens={chart.data.count_unique_confirmed_opened_approx}
-          targeted={chart.data.count_targeted}
+          accepted={aggregateMetrics.data.count_accepted}
+          clicks={aggregateMetrics.data.count_unique_clicked_approx}
+          loading={aggregateMetrics.loading}
+          opens={aggregateMetrics.data.count_unique_confirmed_opened_approx}
+          targeted={aggregateMetrics.data.count_targeted}
         />
-        <EngagementTable data={table.data} loading={table.loading} />
+        <EngagementTable data={linkMetrics.data} loading={linkMetrics.loading} />
       </Page>
     );
   }
 }
 
 const mapStateToProps = (state, props) => ({
-  chart: state.engagementReport.chart,
-  table: state.engagementReport.table
+  aggregateMetrics: state.engagementReport.aggregateMetrics,
+  linkMetrics: state.engagementReport.linkMetrics
 });
-const mapDispatchToProps = { getChartData, getTableData, showAlert };
+const mapDispatchToProps = { getAggregateMetrics, getLinkMetrics, showAlert };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(EngagementPage));
