@@ -21,6 +21,7 @@ export function get(id) {
   });
 }
 
+<<<<<<< HEAD
 export function create(data) {
   const { assignTo, subaccount, ...formData } = data;
 
@@ -35,14 +36,15 @@ export function create(data) {
   });
 }
 
-// TODO: wire up for subaccount support
-export function update(id, data) {
+export function update({ sendingDomain, subaccount, ...data }) {
+  const headers = setSubaccountHeader(subaccount);
   return sparkpostApiRequest({
     type: 'UPDATE_SENDING_DOMAIN',
     meta: {
       method: 'PUT',
-      url: `/sending-domains/${id}`,
-      data
+      url: `/sending-domains/${sendingDomain}`,
+      data,
+      headers
     }
   });
 }

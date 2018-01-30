@@ -26,7 +26,7 @@ export class EditPage extends Component {
   renderPage() {
     const { domain, match: { params: { id }}} = this.props;
     return (
-      <AssignTrackingDomain sendingDomain={id} trackingDomain={domain.tracking_domain} />
+      <AssignTrackingDomain sendingDomain={id} subaccount={domain.subaccount_id} trackingDomain={domain.tracking_domain} />
     );
   }
 

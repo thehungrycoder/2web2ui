@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { Panel, Grid, Button } from '@sparkpost/matchbox';
+import { showAlert } from 'src/actions/globalAlert';
 import { SendingDomainSection } from './SendingDomainSection';
 import { update as updateSendingDomain } from 'src/actions/sendingDomains';
 import { listTrackingDomains } from 'src/actions/trackingDomains';
@@ -13,14 +14,22 @@ import { SelectWrapper } from 'src/components/reduxFormWrappers';
 
 export class AssignTrackingDomain extends Component {
   componentDidMount() {
-    if (!this.props.submitting) {
-      this.props.listTrackingDomains();
-    }
+    const { subaccount } = this.props;
+    this.props.listTrackingDomains(subaccount);
   }
 
   updateTrackingDomain = ({ trackingDomain: tracking_domain }) => {
-    const { sendingDomain } = this.props;
-    return this.props.updateSendingDomain(sendingDomain, { tracking_domain });
+    const { sendingDomain, subaccount, showAlert } = this.props;
+    return this.props.updateSendingDomain({ sendingDomain, subaccount, tracking_domain })
+      .then(() => showAlert({
+        type: 'success',
+        message: 'Tracking domain assignment updated.'
+      }))
+      .catch((err) => showAlert({
+        error: 'error',
+        message: 'Could not update tracking domain assignment',
+        details: err.message
+      }));
   };
 
   renderSection() {
@@ -85,4 +94,4 @@ const formOptions = {
   form: 'AssignTrackingDomain'
 };
 
-export default connect(mapStateToProps, { listTrackingDomains, updateSendingDomain })(reduxForm(formOptions)(AssignTrackingDomain));
+export default connect(mapStateToProps, { showAlert, listTrackingDomains, updateSendingDomain })(reduxForm(formOptions)(AssignTrackingDomain));
