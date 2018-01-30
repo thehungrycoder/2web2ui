@@ -26,8 +26,8 @@ export class AssignTrackingDomain extends Component {
         message: 'Tracking domain assignment updated.'
       }))
       .catch((err) => showAlert({
-        error: 'error',
-        message: 'Could not update tracking domain assignment',
+        type: 'error',
+        message: 'Could not update tracking domain assignment.',
         details: err.message
       }));
   };
