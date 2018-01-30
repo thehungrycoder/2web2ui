@@ -52,7 +52,7 @@ exports[`Component: EditBounce does not show root domain warning for 3rd level d
                 Array [
                   "CNAME",
                   "c.b.a.com",
-                  "uat-public.mail.e.sparkpost.com",
+                  "sparkpostmail.com",
                 ],
               ]
             }
@@ -139,7 +139,7 @@ exports[`Component: EditBounce renders not ready correctly 1`] = `
                 Array [
                   "CNAME",
                   "xyz.com",
-                  "uat-public.mail.e.sparkpost.com",
+                  "sparkpostmail.com",
                 ],
               ]
             }

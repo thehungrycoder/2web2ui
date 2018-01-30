@@ -6,7 +6,7 @@ import { reduxForm } from 'redux-form';
 import { verify, update } from 'src/actions/sendingDomains';
 
 import { Panel, Grid, Banner } from '@sparkpost/matchbox';
-import ToggleBlock from 'src/pages/templates/components/ToggleBlock';
+import ToggleBlock from 'src/components/toggleBlock/ToggleBlock';
 import { showAlert } from 'src/actions/globalAlert';
 import { SendingDomainSection } from './SendingDomainSection';
 import { resolveReadyFor } from 'src/helpers/domains';
