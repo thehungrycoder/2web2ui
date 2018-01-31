@@ -14,6 +14,7 @@ exports[`renders engagement report page 1`] = `
     clicks={3}
     loading={false}
     opens={4}
+    targeted={2}
   />
   <LoadableComponent
     accepted={1}

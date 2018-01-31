@@ -74,12 +74,12 @@ export default function EngagementChart({ accepted = 0, clicks = 0, loading, ope
             />
             <ReferenceArea
               x1="Accepted" x2="Unique Confirmed Opens"
-              percentage={formatPercent(opens / accepted * 100)}
+              percentage={formatPercent(opens / targeted * 100)}
               shape={PercentLabel}
             />
             <ReferenceArea
               x1="Unique Confirmed Opens" x2="Unique Clicks"
-              percentage={formatPercent(clicks / opens * 100)}
+              percentage={formatPercent(clicks / targeted * 100)}
               shape={PercentLabel}
             />
           </BarChart>

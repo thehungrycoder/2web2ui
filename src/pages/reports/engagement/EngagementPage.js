@@ -33,6 +33,7 @@ export class EngagementPage extends Component {
           clicks={aggregateMetrics.data.count_unique_clicked_approx}
           loading={aggregateMetrics.loading}
           opens={aggregateMetrics.data.count_unique_confirmed_opened_approx}
+          targeted={aggregateMetrics.data.count_targeted}
         />
         <EngagementChart
           accepted={aggregateMetrics.data.count_accepted}

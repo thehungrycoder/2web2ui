@@ -54,7 +54,6 @@ describe('Date helpers', () => {
   });
 
   describe('date formatting', () => {
-
     let testDate;
 
     beforeEach(() => {
@@ -62,21 +61,17 @@ describe('Date helpers', () => {
     });
 
     it('should format a date consistently', () => {
-      expect(formatDate(testDate)).toEqual('2017/10/15');
+      expect(formatDate(testDate)).toEqual('Oct 15 2017');
     });
 
     it('should format a time consistently', () => {
-      expect(formatTime(testDate)).toEqual('08:55');
+      expect(formatTime(testDate)).toEqual('8:55am');
       testDate.setHours(15);
-      expect(formatTime(testDate)).toEqual('15:55');
+      expect(formatTime(testDate)).toEqual('3:55pm');
     });
 
     it('should format a date-time consistently', () => {
-      expect(formatDateTime(testDate)).toEqual('2017/10/15 08:55');
+      expect(formatDateTime(testDate)).toEqual('Oct 15 2017, 8:55am');
     });
-
   });
-
 });
-
-
