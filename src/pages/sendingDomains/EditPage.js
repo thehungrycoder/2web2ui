@@ -8,7 +8,7 @@ import { showAlert } from 'src/actions/globalAlert';
 import { Loading, ApiErrorBanner, DeleteModal } from 'src/components';
 import { Page } from '@sparkpost/matchbox';
 
-import { apiCallMessage } from 'src/helpers/apiMessages';
+import { apiResponseToAlert } from 'src/helpers/apiMessages';
 
 import { DomainStatus } from './components/DomainStatus';
 
@@ -32,12 +32,16 @@ export class EditPage extends Component {
     }
   ];
 
+  afterDelete = () => {
+    this.toggleDelete();
+    this.props.history.push('/account/sending-domains');
+  };
+
   deleteDomain = () => {
     const {
       domain: { id, subaccount_id: subaccountId = null },
       deleteDomain,
-      showAlert,
-      history
+      showAlert
     } = this.props;
 
     return deleteDomain(id, subaccountId)
@@ -46,30 +50,24 @@ export class EditPage extends Component {
           type: 'success',
           message: `Domain ${id} deleted.`
         });
-        history.push('/account/sending-domains');
-      })
-      .catch((err) => showAlert({
-        type: 'error',
-        message: 'Could not delete domain',
-        details: apiCallMessage(err)
-      }));
+        this.afterDelete();
+      }).catch((err) => {
+        showAlert(apiResponseToAlert(err, 'Could not delete domain'));
+        this.afterDelete();
+      });
   };
 
   shareDomainChange = () => {
     const {
-      match: { params: { id }},
-      domain: { shared_with_subaccounts },
+      domain: { id, shared_with_subaccounts },
       updateDomain,
       showAlert
     } = this.props;
     return updateDomain({
       id,
       shared_with_subaccounts: !shared_with_subaccounts
-    }).catch((err) => showAlert({
-      type: 'error',
-      message: 'Could not update domain',
-      details: apiCallMessage(err)
-    }));
+    }).catch((err) =>
+      showAlert(apiResponseToAlert(err, 'Could not update domain')));
   }
 
   componentDidMount() {

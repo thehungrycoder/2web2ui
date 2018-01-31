@@ -6,14 +6,14 @@ const firstError = (resp) => {
   return null;
 };
 
-// Extract an informative status description from a SparkPost API response.
-// May be used with success and failure response objects from sparkpostApiRequest().
+const unpackResponse = (rawResponse) => rawResponse.response.data;
+const errorDesc = (error) => error.description ? error.description : error.message;
+
+// Convert an API response into a global alert for the showAlert() action creator.
 // @param {Object} SparkPost API success or error response
-export const apiCallMessage = (response) => {
-  const respData = response.response.data;
-  const first = firstError(respData);
-  if (first) {
-    return first.description ? first.description : first.message;
-  }
-  return respData.message;
+// from sparkpostApiRequest()
+export const apiResponseToAlert = (response, message) => {
+  const unpacked = unpackResponse(response);
+  const details = errorDesc(firstError(unpacked));
+  return { type: 'error', message, details };
 };
