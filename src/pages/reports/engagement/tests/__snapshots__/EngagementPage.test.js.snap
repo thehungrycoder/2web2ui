@@ -10,9 +10,10 @@ exports[`renders engagement report page 1`] = `
     shareDisabled={false}
   />
   <Connect(EngagementSummary)
+    accepted={1}
     clicks={3}
     loading={false}
-    targeted={2}
+    opens={4}
   />
   <LoadableComponent
     accepted={1}

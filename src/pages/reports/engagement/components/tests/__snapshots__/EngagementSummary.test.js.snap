@@ -1,19 +1,58 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`EngagementSummary redners metric summary 1`] = `
-<MetricsSummary
-  rateTitle="Unique Click Rate"
-  rateValue={0.0999000999000999}
->
-  <strong>
-    123
-  </strong>
-   of your messages were clicked of 
-  <strong>
-    123,123
-  </strong>
-   messages targeted
-</MetricsSummary>
+<Panel>
+  <Grid>
+    <Grid.Column
+      md={3}
+      xl={2}
+      xs={12}
+    >
+      <h1>
+        0.42%
+      </h1>
+      <h6>
+        Unique Open Rate
+      </h6>
+    </Grid.Column>
+    <Grid.Column
+      md={3}
+      xl={2}
+      xs={12}
+    >
+      <h1>
+        23.52%
+      </h1>
+      <h6>
+        Unique Click Rate
+      </h6>
+    </Grid.Column>
+    <Grid.Column
+      md={6}
+      xl={8}
+      xs={12}
+    >
+      <p>
+        <strong>
+          523
+        </strong>
+         of your 
+        <strong>
+          123,123
+        </strong>
+         accepted messages were opened and 
+        <strong>
+          123
+        </strong>
+         of your 
+        <strong>
+          523
+        </strong>
+         opened messages were clicked
+      </p>
+    </Grid.Column>
+  </Grid>
+</Panel>
 `;
 
 exports[`EngagementSummary renders loading panel 1`] = `

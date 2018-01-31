@@ -29,9 +29,10 @@ export class EngagementPage extends Component {
       <Page title='Engagement Report'>
         <EngagementFilters shareDisabled={aggregateMetrics.loading} onLoad={this.onLoad} />
         <EngagementSummary
+          accepted={aggregateMetrics.data.count_accepted}
           clicks={aggregateMetrics.data.count_unique_clicked_approx}
           loading={aggregateMetrics.loading}
-          targeted={aggregateMetrics.data.count_targeted}
+          opens={aggregateMetrics.data.count_unique_confirmed_opened_approx}
         />
         <EngagementChart
           accepted={aggregateMetrics.data.count_accepted}

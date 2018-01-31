@@ -11,8 +11,9 @@ cases('EngagementSummary', (props) => {
   'renders loading panel': { loading: true },
   'returns null': { loading: false },
   'redners metric summary': {
+    accepted: 123123,
     clicks: 123,
     loading: false,
-    targeted: 123123
+    opens: 523
   }
 });
