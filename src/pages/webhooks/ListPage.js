@@ -48,14 +48,12 @@ export class WebhooksList extends Component {
     const row = [nameLink, target];
 
     if (hasSubaccounts) {
-      let subaccountTag = null;
-
-      if (subaccount_id) {
-        subaccountTag = <SubaccountTag id={subaccount_id} />;
-      } else if (subaccount_id !== 0) {
-        subaccountTag = <SubaccountTag receiveAll />;
-      }
-      row.push(subaccountTag);
+      row.push(
+        <SubaccountTag
+          id={subaccount_id}
+          master={subaccount_id === 0}
+          receiveAll={!subaccount_id && subaccount_id !== 0}/>
+      );
     }
 
     return row;

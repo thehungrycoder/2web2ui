@@ -35,11 +35,7 @@ export class ListPage extends Component {
     ];
 
     if (hasSubaccounts) {
-      const subaccountTag = (hasSubaccounts && subaccount_id)
-        ? <SubaccountTag id={subaccount_id} />
-        : null;
-
-      rowData.push(subaccountTag);
+      rowData.push(<SubaccountTag id={subaccount_id} />);
     }
 
     return rowData;

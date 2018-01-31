@@ -41,12 +41,10 @@ export class ApiKeysDetailsPage extends Component {
   handleDelete = () => {
     const { deleteApiKey, history, subaccount, id, showAlert } = this.props;
 
-    deleteApiKey({ id, subaccount }).then(() => {
+    return deleteApiKey({ id, subaccount }).then(() => {
       history.push('/account/api-keys');
-      showAlert({ type: 'success', message: 'API key deleted' });
-    }).catch((err) => {
-      showAlert({ type: 'error', message: 'Could not delete API key', details: err.message });
-    });
+      return showAlert({ type: 'success', message: 'API key deleted' });
+    }).catch((err) => showAlert({ type: 'error', message: 'Could not delete API key', details: err.message }));
   };
 
   onToggleDelete = () => {
@@ -54,8 +52,8 @@ export class ApiKeysDetailsPage extends Component {
   };
 
   onSubmit = (values) => {
-    const { updateApiKey, id, subaccount } = this.props;
-    return updateApiKey({ id, key: values, subaccount });
+    const { updateApiKey, id, subaccount, showAlert } = this.props;
+    return updateApiKey({ id, key: values, subaccount }).then(() => showAlert({ type: 'success', message: 'API key updated' })).catch((err) => showAlert({ type: 'error', message: 'Could not update API key', details: err.message }));
   };
 
   render() {

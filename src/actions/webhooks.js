@@ -3,7 +3,6 @@ import setSubaccountHeader from './helpers/setSubaccountHeader';
 import { allSettled } from 'src/helpers/promise';
 import { mergeWebhooks } from 'src/helpers/webhooks';
 
-// TODO: support timezone param?
 export function listWebhooks({ subaccount = null, type = 'LIST_WEBHOOKS' } = {}) {
   const headers = setSubaccountHeader(subaccount);
   return sparkpostApiRequest({
@@ -32,6 +31,9 @@ export function listAllWebhooks() {
 export function getWebhook({ id, subaccount = null }) {
   const headers = setSubaccountHeader(subaccount);
 
+  // Subaccount is passed through from qp because:
+  // - 'subaccount_id: 0' is not returned from this call
+  // - don't have to read qp again
   return sparkpostApiRequest({
     type: 'GET_WEBHOOK',
     meta: {
@@ -45,13 +47,16 @@ export function getWebhook({ id, subaccount = null }) {
 
 export function createWebhook({ webhook, subaccount }) {
   const headers = setSubaccountHeader(subaccount);
+
+  // Subaccount is passed through to be used in the redirect in componentDidMount
+  // webhook ID for the target url is only available after this action succeeds
   return sparkpostApiRequest({
     type: 'CREATE_WEBHOOK',
     meta: {
       method: 'POST',
       url: '/webhooks',
       data: webhook,
-      subaccount, // Pass through subaccount to redirect
+      subaccount,
       headers
     }
   });

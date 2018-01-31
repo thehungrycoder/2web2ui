@@ -28,17 +28,17 @@ exports[`Page: Webhook Details should render happy path 1`] = `
         Object {
           "Component": [Function],
           "content": "Settings",
-          "to": "/webhooks/details/my-id",
+          "to": "/webhooks/details/my-id?subaccount=101",
         },
         Object {
           "Component": [Function],
           "content": "Test",
-          "to": "/webhooks/details/my-id/test",
+          "to": "/webhooks/details/my-id/test?subaccount=101",
         },
         Object {
           "Component": [Function],
           "content": "Batch Status",
-          "to": "/webhooks/details/my-id/batches",
+          "to": "/webhooks/details/my-id/batches?subaccount=101",
         },
       ]
     }
@@ -69,7 +69,3 @@ exports[`Page: Webhook Details should render happy path 1`] = `
   />
 </Page>
 `;
-
-exports[`Page: Webhook Details should return loading component if no events in redux store 1`] = `<Loading />`;
-
-exports[`Page: Webhook Details should return loading component when id in route is diff than in redux store 1`] = `<Loading />`;

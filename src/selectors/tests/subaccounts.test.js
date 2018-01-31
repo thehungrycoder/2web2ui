@@ -8,3 +8,7 @@ describe('Subaccount selectors', () => {
     });
   });
 });
+
+// it('gets initial subaccount', () => {
+//   expect(apiKeys.getInitialSubaccount(store, { apiKey: { subaccount_id: 'subId' }})).toMatchSnapshot();
+// });

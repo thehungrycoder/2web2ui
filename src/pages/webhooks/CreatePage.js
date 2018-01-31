@@ -29,8 +29,7 @@ export class WebhooksCreate extends Component {
 
     const webhook = {
       name,
-      target,
-      subaccount
+      target
     };
 
     let events;
@@ -68,19 +67,17 @@ export class WebhooksCreate extends Component {
         break;
     }
 
+    // Value from the radio group
     if (assignTo === 'master') {
       subaccountId = 0;
     }
 
+    // 'values.subaccount' only available if assignTo = 'subaccount'
     if (assignTo === 'subaccount') {
       subaccountId = subaccount.id;
     }
 
-    return createWebhook({ webhook, subaccount: subaccountId }).then(() => {
-      showAlert({ type: 'success', message: 'Webhook created' });
-    }).catch((err) => {
-      showAlert({ type: 'error', message: 'Unable to create webhook', details: err.message });
-    });
+    return createWebhook({ webhook, subaccount: subaccountId }).then(() => showAlert({ type: 'success', message: 'Webhook created' })).catch((err) => showAlert({ type: 'error', message: 'Unable to create webhook', details: err.message }));
   }
 
   componentDidUpdate(prevProps) {
