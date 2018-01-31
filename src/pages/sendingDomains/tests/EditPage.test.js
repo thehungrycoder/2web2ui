@@ -60,9 +60,15 @@ describe('Sending Domains Edit Page', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should delete a sending domain', async() => {
+  it('should delete a master account sending domain', async() => {
     await wrapper.instance().deleteDomain();
-    expect(props.deleteDomain).toHaveBeenCalledTimes(1);
+    expect(props.deleteDomain).toHaveBeenCalledWith(domain.id, null);
+  });
+
+  it('should delete a subaccount sending domain', async() => {
+    wrapper.setProps({ domain: { ...domain, subaccount_id: 101 }});
+    await wrapper.instance().deleteDomain();
+    expect(props.deleteDomain).toHaveBeenCalledWith(domain.id, 101);
   });
 
   it('should show errors on delete', async() => {

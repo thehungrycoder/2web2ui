@@ -34,13 +34,13 @@ export class EditPage extends Component {
 
   deleteDomain = () => {
     const {
+      domain: { id, subaccount_id: subaccountId = null },
       deleteDomain,
       showAlert,
-      history,
-      match: { params: { id }}
+      history
     } = this.props;
 
-    return deleteDomain(id)
+    return deleteDomain(id, subaccountId)
       .then(() => {
         showAlert({
           type: 'success',

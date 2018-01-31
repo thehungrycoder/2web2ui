@@ -1,5 +1,5 @@
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
-import setSubaccountHeader from './helpers/setSubaccountHeader';
+import setSubaccountHeader from 'src/actions/helpers/setSubaccountHeader';
 
 export function list() {
   return sparkpostApiRequest({
@@ -46,13 +46,13 @@ export function create(data) {
   });
 };
 
-export function remove(id, subaccount) {
+export function remove(id, subaccountId) {
   return sparkpostApiRequest({
     type: 'DELETE_SENDING_DOMAIN',
     meta: {
       method: 'DELETE',
       url: `/sending-domains/${id}`,
-      headers: setSubaccountHeader(subaccount)
+      headers: setSubaccountHeader(subaccountId)
     }
   });
 }
