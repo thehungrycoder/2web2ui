@@ -81,6 +81,7 @@ const config = {
   dateFormat: 'YYYY/MM/DD',
   timeFormat: 'HH:mm',
   bounceDomains: {
+    allowDefault: true,
     cnameValue: 'sparkpostmail.com'
   }
 };

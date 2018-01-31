@@ -1,7 +1,17 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-
 import { EditBounce } from '../EditBounce';
+import config from 'src/config';
+
+jest.mock('src/config', () => ({
+  zuora: {}, //axiosInstance throws without this
+  authentication: { cookie: {}}, //authCookie throws without this
+  bounceDomains: {
+    allowDefault: false,
+    cnameValue: 'sparkpostmail.com'
+  }
+}));
+
 let instance;
 
 describe('Component: EditBounce', () => {
@@ -23,13 +33,13 @@ describe('Component: EditBounce', () => {
       },
       verify: jest.fn(() => Promise.resolve()),
       update: jest.fn(() => Promise.resolve()),
-      showAlert: jest.fn()
+      showAlert: jest.fn(),
+      reset: jest.fn()
     };
 
     wrapper = shallow(<EditBounce {...props}/>);
 
     instance = wrapper.instance();
-
   });
 
   it('renders ready correctly', () => {
@@ -43,6 +53,12 @@ describe('Component: EditBounce', () => {
 
   it('does not show root domain warning for 3rd level domain', () => {
     wrapper.setProps({ id: 'c.b.a.com' });
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders correctly when allowDefault is true', () => {
+    config.bounceDomains.allowDefault = true;
+    wrapper.setProps({ domain: { status: { ...status, cname_status: 'valid' }}});
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -89,7 +105,7 @@ describe('Component: EditBounce', () => {
       expect(props.update).toHaveBeenCalledWith(props.id, { is_default_bounce_domain: false });
     });
 
-    it('alerts on error', async() => {
+    it('alerts on error and reset form', async() => {
       const err = new Error('Request failed!');
       props.update.mockReturnValue(Promise.reject(err));
 
@@ -97,6 +113,7 @@ describe('Component: EditBounce', () => {
       expect(props.update).toHaveBeenCalledOnceWith(props.id, { is_default_bounce_domain: true });
       expect(props.showAlert).toHaveBeenCalledTimes(1);
       expect(props.showAlert.mock.calls[0][0].type).toEqual('error');
+      expect(props.reset).toHaveBeenCalledTimes(1);
     });
   });
 });

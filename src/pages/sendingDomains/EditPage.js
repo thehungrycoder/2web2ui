@@ -65,10 +65,7 @@ export class EditPage extends Component {
 const mapStateToProps = ({ sendingDomains: { domain, getError, getLoading }}) => ({
   domain,
   getError,
-  getLoading,
-  initialValues: {
-    ...domain
-  }
+  getLoading
 });
 
 

@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Field } from 'redux-form';
+import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { reduxForm } from 'redux-form';
 import { verify, update } from 'src/actions/sendingDomains';
 
 import { Panel, Grid, Banner } from '@sparkpost/matchbox';
@@ -17,28 +16,33 @@ export class EditBounce extends Component {
 
   verifyDomain = () => {
     const { id, verify, showAlert } = this.props;
+    function alertError(error) {
+      showAlert({ type: 'error', message: `Unable to verify CNAME record of ${id}. ${error}` });
+    }
+
     return verify(id, 'cname')
       .then((results) => {
         const readyFor = resolveReadyFor(results);
         if (readyFor.bounce) {
           showAlert({ type: 'success', message: `You have successfully verified CNAME record of ${id}` });
         } else {
-          showAlert({ type: 'error', message: `Unable to verify CNAME record of ${id}. ${results.dns.cname_error}` });
+          alertError(results.dns.cname_error);
         }
       })
       .catch((err) => {
-        showAlert({ type: 'error', message: `Unable to verify CNAME record of ${id}. ${err.message}` });
+        alertError(err.message);
       });
   }
 
   toggleDefaultBounce = () => {
-    const { id, update, domain, showAlert } = this.props;
+    const { id, update, domain, showAlert, reset } = this.props;
 
     return update(id, {
       is_default_bounce_domain: !domain.is_default_bounce_domain
     })
       .catch((err) => {
         showAlert({ type: 'error', message: `Failed to update default bounce option. ${err.message}` });
+        reset();
       });
   }
 
@@ -86,6 +90,9 @@ export class EditBounce extends Component {
   }
 
   renderReady() {
+    const { updateLoading } = this.props;
+    const { allowDefault } = config.bounceDomains;
+
     return (<Grid>
       <Grid.Column xs={12} md={6}>
         <div>This domain is all set up and ready to be used as a bounce domain. Such alignment, wow!</div>
@@ -94,18 +101,19 @@ export class EditBounce extends Component {
         <Panel sectioned>
           <div>Your domain is ready to be used as a bounce domain.</div>
         </Panel>
-        <Panel sectioned
-        >
+        { allowDefault &&
+        <Panel sectioned>
           <Field
             name='is_default_bounce_domain'
             component={ToggleBlock}
             label='Use this domain as your default bounce domain?'
             type='checkbox'
             parse={(value) => !!value} // Prevents unchecked value from equaling ""
-            disabled={false}
+            disabled={updateLoading}
             onChange={this.toggleDefaultBounce}
           />
         </Panel>
+        }
       </Grid.Column>
     </Grid>);
   }
@@ -122,11 +130,16 @@ export class EditBounce extends Component {
   }
 }
 
-
-
 const formOptions = {
   form: 'sendingDomainBounce',
   enableReinitialize: true // required to update initial values from redux state
 };
 
-export default connect(null, { verify, update, showAlert })(reduxForm(formOptions)(EditBounce));
+const mapStateToProps = ({ sendingDomains }, { domain }) => ({
+  updateLoading: sendingDomains.updateLoading,
+  initialValues: {
+    ...domain
+  }
+});
+
+export default connect(mapStateToProps, { verify, update, showAlert })(reduxForm(formOptions)(EditBounce));

@@ -64,6 +64,70 @@ exports[`Component: EditBounce does not show root domain warning for 3rd level d
 </Component>
 `;
 
+exports[`Component: EditBounce renders correctly when allowDefault is true 1`] = `
+<Component
+  title="Set Up For Bounce"
+>
+  <Grid>
+    <Grid.Column
+      md={12}
+      xs={12}
+    >
+      <Banner
+        status="warning"
+      >
+        We strongly recommend using a subdomain such as 
+        <strong>
+          bounces.
+          xyz.com
+        </strong>
+         for bounce domains. 
+        <Link
+          replace={false}
+          to="/account/sending-domains/create"
+        >
+          Create a new domain now.
+        </Link>
+      </Banner>
+    </Grid.Column>
+  </Grid>
+  <Grid>
+    <Grid.Column
+      md={6}
+      xs={12}
+    >
+      <div>
+        This domain is all set up and ready to be used as a bounce domain. Such alignment, wow!
+      </div>
+    </Grid.Column>
+    <Grid.Column
+      md={6}
+      xs={12}
+    >
+      <Panel
+        sectioned={true}
+      >
+        <div>
+          Your domain is ready to be used as a bounce domain.
+        </div>
+      </Panel>
+      <Panel
+        sectioned={true}
+      >
+        <Field
+          component={[Function]}
+          label="Use this domain as your default bounce domain?"
+          name="is_default_bounce_domain"
+          onChange={[Function]}
+          parse={[Function]}
+          type="checkbox"
+        />
+      </Panel>
+    </Grid.Column>
+  </Grid>
+</Component>
+`;
+
 exports[`Component: EditBounce renders not ready correctly 1`] = `
 <Component
   title="Set Up For Bounce"
@@ -197,19 +261,6 @@ exports[`Component: EditBounce renders ready correctly 1`] = `
         <div>
           Your domain is ready to be used as a bounce domain.
         </div>
-      </Panel>
-      <Panel
-        sectioned={true}
-      >
-        <Field
-          component={[Function]}
-          disabled={false}
-          label="Use this domain as your default bounce domain?"
-          name="is_default_bounce_domain"
-          onChange={[Function]}
-          parse={[Function]}
-          type="checkbox"
-        />
       </Panel>
     </Grid.Column>
   </Grid>
