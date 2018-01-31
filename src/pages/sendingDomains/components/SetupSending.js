@@ -28,8 +28,7 @@ export class SetupSending extends Component {
   }
 
   renderBanner() {
-    const { domain } = this.props;
-    const readyFor = resolveReadyFor(domain.status);
+    const readyFor = resolveReadyFor(this.props.domain.status);
 
     if (readyFor.sending && readyFor.dkim) {
       return (<p>This domain is all set up to send with DKIM-signing. Nice work!</p>);
@@ -44,7 +43,7 @@ export class SetupSending extends Component {
         </Banner>
       );
     }
-    // TODO: what about (!readyFor.sending && readyFor.dkim)?
+    return null;
   }
 
   renderVerifyButton() {

@@ -26,10 +26,6 @@ export class EditPage extends Component {
   renderPage = () => {
     const { domain, match: { params: { id }}} = this.props;
 
-    if (!domain) {
-      return null;
-    }
-
     return (
       <SetupSending subaccount={domain.subaccount_id} id={id} domain={domain}/>
     );
