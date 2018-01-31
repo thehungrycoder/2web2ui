@@ -44,7 +44,7 @@ export function create(data) {
       data: { ...formData, shared_with_subaccounts: assignTo === 'shared' }
     }
   });
-};
+}
 
 export function remove(id, subaccountId) {
   return sparkpostApiRequest({
