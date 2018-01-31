@@ -12,13 +12,13 @@ import EngagementSummary from './components/EngagementSummary';
 import EngagementTable from './components/EngagementTable';
 
 export class EngagementPage extends Component {
-  onLoad = () => {
-    this.props.getAggregateMetrics().catch(this.onLoadFail('Unable to load engagement data.'));
-    this.props.getLinkMetrics().catch(this.onLoadFail('Unable to load click data.'));
-  }
+  onLoad = () => Promise.all([
+    this.props.getAggregateMetrics().catch(this.onLoadFail('Unable to load engagement data.')),
+    this.props.getLinkMetrics().catch(this.onLoadFail('Unable to load click data.'))
+  ])
 
   onLoadFail = (message) => (error) => {
-    const details = _.get(error, 'response.data.errors[0].message');
+    const details = _.get(error, 'response.data.errors[0].message', error.message);
     this.props.showAlert({ details, message, type: 'error' });
   }
 

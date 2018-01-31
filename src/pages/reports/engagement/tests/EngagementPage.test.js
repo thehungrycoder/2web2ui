@@ -31,8 +31,8 @@ it('displays global alert when request to fetch data fails', async() => {
   const props = {
     aggregateMetrics: { data: {}},
     linkMetrics: { data: []},
-    getAggregateMetrics: jest.fn(() => Promise.reject()),
-    getLinkMetrics: jest.fn(() => Promise.reject()),
+    getAggregateMetrics: jest.fn(() => Promise.reject({})),
+    getLinkMetrics: jest.fn(() => Promise.reject({})),
     showAlert: jest.fn()
   };
 
