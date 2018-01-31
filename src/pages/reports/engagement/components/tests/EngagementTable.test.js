@@ -8,7 +8,7 @@ cases('EngagementTable', (props) => {
   const wrapper = shallow(<EngagementTable {...props} />);
   expect(wrapper).toMatchSnapshot();
 }, {
-  'when loading': {},
+  'when loading': { loading: true },
   'when no results': { data: [], loading: false },
   'when renders table': {
     data: [

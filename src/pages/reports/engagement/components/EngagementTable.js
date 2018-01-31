@@ -54,7 +54,7 @@ const DataRow = (row) => [
   formatPercent(row.percentage_clicked)
 ];
 
-export default function EngagementTable({ data = [], loading = true }) {
+export default function EngagementTable({ data, loading }) {
   if (loading) {
     return <PanelLoading />;
   }

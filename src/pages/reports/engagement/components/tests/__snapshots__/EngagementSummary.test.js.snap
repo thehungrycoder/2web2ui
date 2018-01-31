@@ -16,7 +16,7 @@ exports[`EngagementSummary redners metric summary 1`] = `
 </MetricsSummary>
 `;
 
-exports[`EngagementSummary renders loading panel by default 1`] = `
+exports[`EngagementSummary renders loading panel 1`] = `
 <PanelLoading
   minHeight="115px"
 />

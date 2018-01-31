@@ -190,7 +190,7 @@ exports[`EngagementChart renders engagement chart 1`] = `
 </Panel>
 `;
 
-exports[`EngagementChart renders loading by default 1`] = `
+exports[`EngagementChart renders loading 1`] = `
 <PanelLoading
   minHeight="400px"
 />

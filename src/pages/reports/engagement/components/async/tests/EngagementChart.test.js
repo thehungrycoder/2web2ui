@@ -7,7 +7,7 @@ cases('EngagementChart', (props) => {
   const wrapper = shallow(<EngagementChart {...props} />);
   expect(wrapper).toMatchSnapshot();
 }, {
-  'renders loading by default': {},
+  'renders loading': { loading: true },
   'renders empty panel': { loading: false },
   'renders engagement chart': {
     accepted: 40000,

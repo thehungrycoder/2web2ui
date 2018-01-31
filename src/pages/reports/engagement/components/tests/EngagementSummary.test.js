@@ -8,7 +8,7 @@ cases('EngagementSummary', (props) => {
   const wrapper = shallow(<EngagementSummary {...props} />);
   expect(wrapper).toMatchSnapshot();
 }, {
-  'renders loading panel by default': {},
+  'renders loading panel': { loading: true },
   'returns null': { loading: false },
   'redners metric summary': {
     clicks: 123,

@@ -39,7 +39,7 @@ function PercentLabel({ percentage, width, x, yAxis }) {
   );
 }
 
-export default function EngagementChart({ accepted = 0, clicks = 0, loading = true, opens = 0, targeted = 0 }) {
+export default function EngagementChart({ accepted = 0, clicks = 0, loading, opens = 0, targeted = 0 }) {
   const data = [
     { label: 'Targeted', value: targeted },
     { label: 'Accepted', value: accepted },

@@ -5,7 +5,7 @@ import { PanelLoading } from 'src/components';
 import { formatFullNumber } from 'src/helpers/units';
 import MetricsSummary from '../../components/MetricsSummary';
 
-export function EngagementSummary({ clicks = 0, filters, loading = true, targeted = 0 }) {
+export function EngagementSummary({ clicks = 0, filters, loading, targeted = 0 }) {
   if (loading) {
     return <PanelLoading minHeight="115px" />;
   }
