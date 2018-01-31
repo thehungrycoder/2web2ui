@@ -53,7 +53,7 @@ export class ApiKeyForm extends Component {
           />
           <Field
             name='subaccount'
-            helpText='This assigment is permanent.'
+            helpText='This assigment is permanent. Leave blank to assign to master account.'
             component={SubaccountTypeaheadWrapper}
             disabled={!isNew}
           />

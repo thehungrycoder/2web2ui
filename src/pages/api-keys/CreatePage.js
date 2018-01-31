@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 
 import { createApiKey, listGrants, listSubaccountGrants } from 'src/actions/api-keys';
+import { showAlert } from 'src/actions/globalAlert';
 import { getFormLoading } from 'src/selectors/api-keys';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
 
@@ -25,10 +26,13 @@ export class CreatePage extends React.Component {
   }
 
   onSubmit = (values) => {
-    const { createApiKey, history } = this.props;
+    const { createApiKey, history, showAlert } = this.props;
 
     return createApiKey(values).then((res) => {
+      showAlert({ type: 'success', message: 'API key created' });
       history.push('/account/api-keys');
+    }).catch((err) => {
+      showAlert({ type: 'error', message: 'Could not create API key', details: err.message });
     });
   };
 
@@ -54,5 +58,5 @@ const mapStateToProps = (state, props) => ({
 });
 
 export default withRouter(
-  connect(mapStateToProps, { createApiKey, listGrants, listSubaccountGrants })(CreatePage)
+  connect(mapStateToProps, { createApiKey, listGrants, listSubaccountGrants, showAlert })(CreatePage)
 );

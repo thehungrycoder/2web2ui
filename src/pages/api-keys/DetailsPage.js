@@ -4,6 +4,7 @@ import { Link, withRouter } from 'react-router-dom';
 import { Page, Panel } from '@sparkpost/matchbox';
 
 import { deleteApiKey, getApiKey, updateApiKey, listGrants, listSubaccountGrants } from 'src/actions/api-keys';
+import { showAlert } from 'src/actions/globalAlert';
 
 import { hasSubaccounts } from 'src/selectors/subaccounts';
 import { getFormLoading, selectApiKeyId } from 'src/selectors/api-keys';
@@ -28,8 +29,8 @@ export class ApiKeysDetailsPage extends Component {
   };
 
   componentDidMount() {
-    const { subaccountId, id } = this.props;
-    this.props.getApiKey({ id, subaccountId });
+    const { subaccount, id } = this.props;
+    this.props.getApiKey({ id, subaccount });
 
     this.props.listGrants();
     if (this.props.hasSubaccounts) {
@@ -38,10 +39,13 @@ export class ApiKeysDetailsPage extends Component {
   }
 
   handleDelete = () => {
-    const { deleteApiKey, history, subaccountId, id } = this.props;
+    const { deleteApiKey, history, subaccount, id, showAlert } = this.props;
 
-    deleteApiKey({ id, subaccountId }).then(() => {
+    deleteApiKey({ id, subaccount }).then(() => {
       history.push('/account/api-keys');
+      showAlert({ type: 'success', message: 'API key deleted' });
+    }).catch((err) => {
+      showAlert({ type: 'error', message: 'Could not delete API key', details: err.message });
     });
   };
 
@@ -50,8 +54,8 @@ export class ApiKeysDetailsPage extends Component {
   };
 
   onSubmit = (values) => {
-    const { updateApiKey, id, subaccountId } = this.props;
-    return updateApiKey({ id, key: values, subaccountId });
+    const { updateApiKey, id, subaccount } = this.props;
+    return updateApiKey({ id, key: values, subaccount });
   };
 
   render() {
@@ -91,10 +95,10 @@ const mapStateToProps = (state, props) => {
     grants,
     hasSubaccounts: hasSubaccounts(state),
     loading: getFormLoading(state) || state.apiKeys.keyLoading,
-    subaccountId: selectSubaccountIdFromQuery(state, props)
+    subaccount: selectSubaccountIdFromQuery(state, props)
   };
 };
 
 export default withRouter(
-  connect(mapStateToProps, { getApiKey, updateApiKey, listGrants, listSubaccountGrants, deleteApiKey })(ApiKeysDetailsPage)
+  connect(mapStateToProps, { getApiKey, updateApiKey, listGrants, listSubaccountGrants, deleteApiKey, showAlert })(ApiKeysDetailsPage)
 );

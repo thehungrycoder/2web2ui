@@ -7,33 +7,20 @@ import setSubaccountHeader from './helpers/setSubaccountHeader';
 // any subsequent history.push() will still fire on error
 
 export function createApiKey(key) {
-  return (dispatch, getState) =>
-    dispatch(
-      sparkpostApiRequest({
-        type: 'CREATE_API_KEY',
-        meta: {
-          method: 'POST',
-          url: '/api-keys',
-          ...formatKeyForRequest(key, getState)
-        }
-      })
-    )
-      .then(() =>
-        dispatch(showAlert({ type: 'success', message: 'API key created' }))
-      )
-      .catch((err) =>
-        dispatch(
-          showAlert({
-            type: 'error',
-            message: 'Could not create API key',
-            details: err.message
-          })
-        )
-      );
+  return (dispatch, getState) => dispatch(
+    sparkpostApiRequest({
+      type: 'CREATE_API_KEY',
+      meta: {
+        method: 'POST',
+        url: '/api-keys',
+        ...formatKeyForRequest(key, getState)
+      }
+    })
+  );
 }
 
-export function getApiKey({ id, subaccountId }) {
-  const headers = setSubaccountHeader(subaccountId);
+export function getApiKey({ id, subaccount }) {
+  const headers = setSubaccountHeader(subaccount);
 
   return sparkpostApiRequest({
     type: 'GET_API_KEY',
@@ -46,36 +33,21 @@ export function getApiKey({ id, subaccountId }) {
 
 }
 
-export function deleteApiKey({ id, subaccountId }) {
-  const headers = setSubaccountHeader(subaccountId);
+export function deleteApiKey({ id, subaccount }) {
+  const headers = setSubaccountHeader(subaccount);
 
-  return (dispatch) =>
-    dispatch(
-      sparkpostApiRequest({
-        type: 'DELETE_API_KEY',
-        meta: {
-          method: 'DELETE',
-          url: `/api-keys/${id}`,
-          headers
-        }
-      })
-    )
-      .then(() =>
-        dispatch(showAlert({ type: 'success', message: 'API key deleted' }))
-      )
-      .catch((err) =>
-        dispatch(
-          showAlert({
-            type: 'error',
-            message: 'Could not delete API key',
-            details: err.message
-          })
-        )
-      );
+  return sparkpostApiRequest({
+    type: 'DELETE_API_KEY',
+    meta: {
+      method: 'DELETE',
+      url: `/api-keys/${id}`,
+      headers
+    }
+  });
 }
 
-export function updateApiKey({ id, key, subaccountId }) {
-  const headers = setSubaccountHeader(subaccountId);
+export function updateApiKey({ id, key, subaccount }) {
+  const headers = setSubaccountHeader(subaccount);
   return (dispatch, getState) =>
     dispatch(
       sparkpostApiRequest({

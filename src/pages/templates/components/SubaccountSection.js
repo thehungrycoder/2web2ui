@@ -37,7 +37,7 @@ export default class SubaccountSection extends Component {
     const { assignTo } = this.props;
 
     const typeahead = assignTo === 'subaccount'
-      ? <Field name='subaccount' component={SubaccountTypeaheadWrapper} validate={required} />
+      ? <Field name='subaccount' component={SubaccountTypeaheadWrapper} validate={required} helpText='This assignment is permanent.'/>
       : null;
 
     return (
