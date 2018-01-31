@@ -1,12 +1,13 @@
 import React from 'react';
 import MetricsSummary from '../MetricsSummary';
 import { shallow } from 'enzyme';
+import moment from 'moment';
 
 const props = {
   rateValue: 10,
   rateTitle: 'Summary Title',
-  to: new Date('2018-01-12T12:00'),
-  from: new Date('2017-12-25T05:30')
+  to: moment('2018-01-12T12:00').toDate(),
+  from: moment('2017-12-25T05:30').toDate()
 };
 
 describe('MetricsSummary: ', () => {

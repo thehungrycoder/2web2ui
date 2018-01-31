@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import cases from 'jest-in-case';
-import time from 'src/__testHelpers__/time';
+import moment from 'moment';
 
 import { EngagementSummary } from '../EngagementSummary';
 
@@ -21,9 +21,9 @@ cases('EngagementSummary', (props) => {
   'renders metric summary with custom time range': {
     clicks: 123,
     filters: {
-      from: time({ day: 1 }),
+      from: moment('2018-01-31T20:00:00'),
       relativeRange: 'custom',
-      to: time({ day: 3 })
+      to: moment('2018-02-01T20:00:00')
     },
     loading: false,
     opens: 523,

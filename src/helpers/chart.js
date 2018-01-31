@@ -11,7 +11,7 @@ function getDayLines(data, precision = 'day') {
     if (i === 0 || i === lastIndex) {
       return false;
     }
-    if (new Date(ts).getHours() !== 0) {
+    if (moment(ts).hours() !== 0) {
       return false;
     }
     return true;

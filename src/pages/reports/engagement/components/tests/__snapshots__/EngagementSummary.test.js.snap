@@ -122,11 +122,11 @@ exports[`EngagementSummary renders metric summary with custom time range 1`] = `
         <span>
           from 
           <strong>
-            Dec 31 1969, 7:00pm
+            Jan 31 2018, 8:00pm
           </strong>
            to 
           <strong>
-            Jan 2 1970, 7:00pm
+            Feb 1 2018, 8:00pm
           </strong>
         </span>
         .

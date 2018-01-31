@@ -57,7 +57,7 @@ describe('Date helpers', () => {
     let testDate;
 
     beforeEach(() => {
-      testDate = new Date('2017-10-15T08:55:00');
+      testDate = moment('2017-10-15T08:55:00');
     });
 
     it('should format a date consistently', () => {
@@ -66,7 +66,7 @@ describe('Date helpers', () => {
 
     it('should format a time consistently', () => {
       expect(formatTime(testDate)).toEqual('8:55am');
-      testDate.setHours(15);
+      testDate.hours(15);
       expect(formatTime(testDate)).toEqual('3:55pm');
     });
 
