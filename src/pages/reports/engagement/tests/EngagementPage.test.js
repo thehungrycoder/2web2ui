@@ -40,12 +40,12 @@ it('displays global alert when request to fetch data fails', async() => {
   await wrapper.instance().onLoad();
 
   expect(props.showAlert).toHaveBeenCalledWith(expect.objectContaining({
-    message: expect.stringMatching(/engagement data/),
+    message: expect.stringMatching(/engagement chart/),
     type: 'error'
   }));
 
   expect(props.showAlert).toHaveBeenCalledWith(expect.objectContaining({
-    message: expect.stringMatching(/click data/),
+    message: expect.stringMatching(/link metrics/),
     type: 'error'
   }));
 });

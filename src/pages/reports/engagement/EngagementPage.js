@@ -13,8 +13,8 @@ import EngagementTable from './components/EngagementTable';
 
 export class EngagementPage extends Component {
   onLoad = () => Promise.all([
-    this.props.getAggregateMetrics().catch(this.onLoadFail('Unable to load engagement data.')),
-    this.props.getLinkMetrics().catch(this.onLoadFail('Unable to load click data.'))
+    this.props.getAggregateMetrics().catch(this.onLoadFail('Unable to load engagement chart.')),
+    this.props.getLinkMetrics().catch(this.onLoadFail('Unable to load link metrics.'))
   ])
 
   onLoadFail = (message) => (error) => {
