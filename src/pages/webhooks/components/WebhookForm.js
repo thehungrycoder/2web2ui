@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
 import { reduxForm, formValueSelector } from 'redux-form';
 import { selectInitialSubaccountValue } from 'src/selectors/webhooks';
+import { hasSubaccounts } from 'src/selectors/subaccounts';
 import { withRouter } from 'react-router-dom';
 import { Button, Panel } from '@sparkpost/matchbox';
 import { NameField, TargetField, EventsRadioGroup, AuthDropDown, BasicAuthFields, OAuth2Fields } from './Fields';
@@ -19,7 +19,8 @@ const WebhookForm = ({
   eventsRadio,
   eventsTree,
   pristine,
-  newWebhook /* passed from CreatePage */
+  newWebhook, /* passed from CreatePage */
+  hasSubaccounts
 }) => {
   const submitText = submitting ? 'Submitting...' : (newWebhook ? 'Create Webhook' : 'Update Webhook');
   const AuthFields = auth && auth === 'basic' ? BasicAuthFields : OAuth2Fields;
@@ -33,9 +34,7 @@ const WebhookForm = ({
         <NameField />
         <TargetField />
       </Panel.Section>
-      <Panel.Section>
-        <SubaccountSection newWebhook={newWebhook} formName={formName} />
-      </Panel.Section>
+      { hasSubaccounts && <Panel.Section><SubaccountSection newWebhook={newWebhook} formName={formName} /></Panel.Section> }
       <Panel.Section>
         <EventsRadioGroup />
         { showEvents && eventBoxes }
@@ -60,7 +59,7 @@ const mapStateToProps = (state, props) => {
   return {
     eventsRadio,
     auth,
-    // subaccountId: selectSubaccountIdFromQuery(state, props),
+    hasSubaccounts: hasSubaccounts(state),
     initialValues: {
       assignTo: 'master',
       eventsRadio: props.allChecked || props.newWebhook ? 'all' : 'select',

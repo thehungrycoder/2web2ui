@@ -27,27 +27,29 @@ export class ListPage extends Component {
     this.props.listApiKeys();
   }
 
-    getRowData = ({ id, label, short_key, subaccount_id }) => {
-      const { hasSubaccounts } = this.props;
-      const rowData = [
-        <Link to={`/account/api-keys/details/${id}${setSubaccountQuery(subaccount_id)}`}>{label}</Link>,
-        <code>{short_key}••••••••</code>
-      ];
+  getRowData = ({ id, label, short_key, subaccount_id }) => {
+    const { hasSubaccounts } = this.props;
+    const rowData = [
+      <Link to={`/account/api-keys/details/${id}${setSubaccountQuery(subaccount_id)}`}>{label}</Link>,
+      <code>{short_key}••••••••</code>
+    ];
 
+    if (hasSubaccounts) {
       const subaccountTag = (hasSubaccounts && subaccount_id)
         ? <SubaccountTag id={subaccount_id} />
         : null;
 
       rowData.push(subaccountTag);
+    }
 
-      return rowData;
-    };
+    return rowData;
+  };
 
   getColumns = () => {
     const { hasSubaccounts } = this.props;
     const columns = [
       { label: 'Name', width: '40%', sortKey: 'label' },
-      { label: 'Key', width: '20%' }
+      { label: 'Key' }
     ];
 
     if (hasSubaccounts) {
