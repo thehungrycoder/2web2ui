@@ -6,8 +6,6 @@ import { withRouter, Link, Route } from 'react-router-dom';
 import { getWebhook, deleteWebhook } from 'src/actions/webhooks';
 import { showAlert } from 'src/actions/globalAlert';
 import { selectSubaccountIdFromQuery } from 'src/selectors/subaccounts';
-import { list as getSubaccountsList } from 'src/actions/subaccounts';
-import { hasSubaccounts } from 'src/selectors/subaccounts';
 
 // Components
 import { Loading, DeleteModal } from 'src/components';
@@ -23,17 +21,12 @@ export class WebhooksDetails extends Component {
   };
 
   componentDidMount() {
-    const { showAlert, getWebhook, hasSubaccounts, subaccounts, getSubaccountsList, match, history, subaccountId: subaccount } = this.props;
+    const { showAlert, getWebhook, match, history, subaccountId: subaccount } = this.props;
 
     getWebhook({ id: match.params.id, subaccount }).catch((err) => {
       history.push('/webhooks/');
       showAlert({ type: 'error', message: 'Unable to find webhook', details: err.message });
     });
-
-    // Get subaccounts list here, so page doesn't rely on SubaccountTypeahead to pull the list
-    if (hasSubaccounts && subaccounts.length === 0) {
-      getSubaccountsList();
-    }
   }
 
   /*
@@ -109,9 +102,9 @@ export class WebhooksDetails extends Component {
           selected={selectedTab}
           tabs={tabs}
         />
-        <Route exact path={editPath} render={() => <EditTab id={webhookId}/> } />
+        <Route exact path={editPath} render={() => <EditTab webhook={webhook}/> } />
         <Route path={testPath} render={() => <TestTab webhook={webhook}/>} />
-        <Route path={batchPath} render={() => <BatchTab id={webhookId}/>} />
+        <Route path={batchPath} render={() => <BatchTab webhook={webhook}/>} />
         <DeleteModal
           open={this.state.showDelete}
           title='Are you sure you want to delete this webhook?'
@@ -124,17 +117,11 @@ export class WebhooksDetails extends Component {
   }
 }
 
-WebhooksDetails.defaultProps = {
-  subaccounts: []
-};
-
 const mapStateToProps = (state, props) => ({
-  hasSubaccounts: hasSubaccounts(state),
-  subaccounts: state.subaccounts.list,
   webhook: state.webhooks.webhook,
   getLoading: state.webhooks.getLoading,
   eventDocs: state.webhooks.docs,
   subaccountId: selectSubaccountIdFromQuery(state, props)
 });
 
-export default withRouter(connect(mapStateToProps, { getWebhook, deleteWebhook, getSubaccountsList, showAlert })(WebhooksDetails));
+export default withRouter(connect(mapStateToProps, { getWebhook, deleteWebhook, showAlert })(WebhooksDetails));

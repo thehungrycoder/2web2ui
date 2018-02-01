@@ -5,7 +5,7 @@ import { reduxForm } from 'redux-form';
 import { getDraft, getPublished, update, deleteTemplate, publish, getTestData } from 'src/actions/templates';
 import { showAlert } from 'src/actions/globalAlert';
 import { selectTemplateById, selectTemplateTestData } from 'src/selectors/templates';
-import { selectSubaccountIdFromQuery, hasSubaccounts } from 'src/selectors/subaccounts';
+import { selectSubaccountIdFromQuery, hasSubaccounts, selectSubaccountFromQuery } from 'src/selectors/subaccounts';
 
 import EditPage from '../EditPage';
 
@@ -25,7 +25,8 @@ const mapStateToProps = (state, props) => {
     formName: FORM_NAME,
     initialValues: {
       testData: selectTemplateTestData(state),
-      ...values
+      ...values,
+      subaccount: selectSubaccountFromQuery(state, props)
     }
   };
 };

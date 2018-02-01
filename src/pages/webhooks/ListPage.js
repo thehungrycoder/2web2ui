@@ -96,7 +96,7 @@ export class WebhooksList extends Component {
         primaryAction={{ content: 'Create Webhook', Component: Link, to: '/webhooks/create' }}
         title='Webhooks'
         empty={{
-          show: webhooks.length === 0,
+          show: !error && webhooks.length === 0,
           image: 'Setup',
           title: 'Create a Webhook',
           content: <p>Push message events directly to your own endpoints</p>

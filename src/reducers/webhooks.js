@@ -10,14 +10,19 @@ export default (state = initialState, action) => {
   switch (action.type) {
     /* LIST */
 
+    case 'LIST_MASTER_ONLY_WEBHOOKS_PENDING':
     case 'LIST_WEBHOOKS_PENDING':
       return { ...state, listLoading: true, listError: null };
 
+    case 'LIST_MASTER_ONLY_WEBHOOKS_FAIL':
     case 'LIST_WEBHOOKS_FAIL':
       return { ...state, listError: action.payload };
 
     case 'LIST_ALL_WEBHOOKS_SUCCESS':
       return { ...state, list: action.payload, listLoading: false };
+
+    case 'LIST_ALL_WEBHOOKS_SUCCESS_FAIL':
+      return { ...state, listError: action.payload, listLoading: false };
 
     /* GET */
 
@@ -97,7 +102,7 @@ export default (state = initialState, action) => {
       return { ...state, docsLoading: false };
 
     case 'GET_WEBHOOK_BATCHES_PENDING':
-      return { ...state, batchesLoading: true };
+      return { ...state, batchesLoading: true, batches: []};
 
     case 'GET_WEBHOOK_BATCHES_SUCCESS':
       return { ...state, batches: action.payload, batchesLoading: false };

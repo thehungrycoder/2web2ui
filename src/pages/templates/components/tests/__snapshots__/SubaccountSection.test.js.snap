@@ -42,8 +42,9 @@ exports[`Templates SubaccountSection on edit should render a disabled subaccount
   <Field
     component={[Function]}
     disabled={true}
+    helpText="This assignment is permanent."
     label="Subaccount"
-    name="subaccount_id"
+    name="subaccount"
   />
 </Panel.Section>
 `;

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 
 import { getBatches } from 'src/actions/webhooks';
+import { showAlert } from 'src/actions/globalAlert';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
 
 import { Button, Panel } from '@sparkpost/matchbox';
@@ -20,19 +21,15 @@ const columns = [
 const getRowData = (batch) => [batch.formatted_time, batch.batch_id, batch.status, batch.attempts, batch.response_code];
 
 export class BatchTab extends Component {
-  state = {
-    refreshing: false
-  };
-
   componentDidMount() {
-    this.props.getBatches(this.props.id);
+    this.refreshBatches();
   }
 
   refreshBatches = () => {
-    const { id } = this.props;
+    const { webhook, getBatches, showAlert } = this.props;
+    const { id, subaccount } = webhook;
 
-    this.props.getBatches(id);
-    this.setState({ refreshing: true });
+    return getBatches({ id, subaccount }).catch((err) => showAlert({ type: 'error', message: 'Unable to refresh webhook batches', details: err.message }));
   };
 
   renderBatches() {
@@ -60,9 +57,7 @@ export class BatchTab extends Component {
 
   render() {
     const { batchesLoading } = this.props;
-    const { refreshing } = this.state;
-
-    const buttonText = (refreshing && batchesLoading) ? 'Refreshing...' : 'Refresh Batches';
+    const buttonText = batchesLoading ? 'Refreshing...' : 'Refresh Batches';
 
     return (
       <Panel>
@@ -80,4 +75,4 @@ const mapStateToProps = (state) => ({
   batchesLoading: state.webhooks.batchesLoading
 });
 
-export default connect(mapStateToProps, { getBatches })(BatchTab);
+export default connect(mapStateToProps, { getBatches, showAlert })(BatchTab);

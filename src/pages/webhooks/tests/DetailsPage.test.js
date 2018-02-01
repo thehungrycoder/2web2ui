@@ -30,7 +30,6 @@ describe('Page: Webhook Details', () => {
       },
       hasSubaccounts: false,
       subaccountId: 101,
-      getSubaccountsList: jest.fn(),
       showAlert: jest.fn()
     };
 
@@ -60,13 +59,6 @@ describe('Page: Webhook Details', () => {
     const instance = wrapper.instance();
     instance.componentDidMount();
     expect(instance.props.getWebhook).toHaveBeenCalledWith({ id: 'my-id', subaccount: 101 });
-  });
-
-  it('should call get subaccounts on component mount if they arent loaded', () => {
-    wrapper.setProps({ hasSubaccounts: true });
-    const instance = wrapper.instance();
-    instance.componentDidMount();
-    expect(instance.props.getSubaccountsList).toHaveBeenCalledWith();
   });
 
   it('should catch a getWebhook error', async() => {

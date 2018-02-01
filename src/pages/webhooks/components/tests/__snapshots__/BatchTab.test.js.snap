@@ -98,21 +98,3 @@ exports[`Webhook Component: Batch Status Tab should show empty message when no b
   />
 </Panel>
 `;
-
-exports[`Webhook Component: Batch Status Tab should show panel loading when batches are loading 1`] = `
-<Panel>
-  <Panel.Section>
-    <Button
-      disabled={true}
-      onClick={[Function]}
-      primary={true}
-      size="small"
-    >
-      Refresh Batches
-    </Button>
-  </Panel.Section>
-  <PanelLoading
-    minHeight="400px"
-  />
-</Panel>
-`;

@@ -102,7 +102,6 @@ class EditTab extends Component {
 }
 
 const mapStateToProps = ({ webhooks, form }) => ({
-  webhook: webhooks.webhook,
   eventsLoading: webhooks.docsLoading,
   eventDocs: webhooks.docs,
   updateSuccess: webhooks.updateSuccess,
