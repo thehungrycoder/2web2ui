@@ -2,14 +2,12 @@ import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 import setSubaccountHeader from './helpers/setSubaccountHeader';
 import { showAlert } from './globalAlert';
 
-export function listTrackingDomains(subaccount = null) {
-  const headers = setSubaccountHeader(subaccount);
+export function listTrackingDomains() {
   return sparkpostApiRequest({
     type: 'LIST_TRACKING_DOMAINS',
     meta: {
       method: 'GET',
-      url: '/tracking-domains',
-      headers
+      url: '/tracking-domains'
     }
   });
 }

@@ -2,6 +2,7 @@ import { createSelector } from 'reselect';
 import _ from 'lodash';
 
 const getTrackingDomains = (state) => state.trackingDomains.list;
+const selectSubaccountFromProps = (state, props) => props.subaccount;
 
 export const convertStatus = ({ verified, compliance_status }) => {
   if (compliance_status !== 'valid') {
@@ -32,9 +33,18 @@ export const selectUnverifiedTrackingDomains = createSelector(
   (trackingDomains) => trackingDomains.filter((item) => !item.verified)
 );
 
+// currently used to just get domains owned by a subaccount/master account
 export const selectVerifiedTrackingDomains = createSelector(
-  [selectTrackingDomainsList],
-  (trackingDomains) => trackingDomains.filter((item) => item.verified)
+  [selectTrackingDomainsList, selectSubaccountFromProps],
+  (trackingDomains, subaccount) => trackingDomains.filter((domain) => {
+    if (!domain.verified) {
+      return false;
+    }
+
+    return subaccount
+      ? domain.subaccount_id === Number(subaccount)
+      : !domain.subaccount_id;
+  })
 );
 
 export const selectVerifiedTrackingDomainsOptions = createSelector(

@@ -14,8 +14,7 @@ import { SelectWrapper } from 'src/components/reduxFormWrappers';
 
 export class AssignTrackingDomain extends Component {
   componentDidMount() {
-    const { subaccount } = this.props;
-    this.props.listTrackingDomains(subaccount);
+    this.props.listTrackingDomains();
   }
 
   updateTrackingDomain = ({ trackingDomain: tracking_domain }) => {
@@ -36,7 +35,7 @@ export class AssignTrackingDomain extends Component {
     return (<Grid>
       <Grid.Column xs={12} md={6}>
         <div>Link to a tracking domain to track opens, clicks, and unsubscribes.</div>
-        <Link to={'/account/tracking-domains'}>Create a tracking domain.</Link>
+        <Link to={'/account/tracking-domains/create'}>Create a tracking domain.</Link>
       </Grid.Column>
       <Grid.Column xs={12} md={6}>
         { this.renderTrackingDomains() }
@@ -83,7 +82,7 @@ export class AssignTrackingDomain extends Component {
 
 function mapStateToProps(state, props) {
   return {
-    trackingDomains: selectTrackingDomainsOptions(state),
+    trackingDomains: selectTrackingDomainsOptions(state, props),
     initialValues: {
       trackingDomain: props.trackingDomain
     }
