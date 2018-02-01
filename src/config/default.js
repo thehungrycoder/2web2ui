@@ -78,6 +78,11 @@ const config = {
     baseUrl: 'https://rest.apisandbox.zuora.com/v1',
     timeout: 15000
   },
+  smtpAuth: {
+    host: 'no-default-set',
+    port: 587,
+    username: 'SMTP_Injection'
+  },
   sso: {
     enabled: false
   },
