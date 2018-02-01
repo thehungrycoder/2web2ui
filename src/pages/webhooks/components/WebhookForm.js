@@ -12,7 +12,7 @@ import buildCheckBoxes from '../helpers/buildCheckBoxes';
 
 const formName = 'webhookForm';
 
-const WebhookForm = ({
+export const WebhookForm = ({
   handleSubmit,
   submitting,
   auth,

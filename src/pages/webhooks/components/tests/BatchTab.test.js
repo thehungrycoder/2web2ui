@@ -28,7 +28,8 @@ describe('Webhook Component: Batch Status Tab', () => {
           response_code: 500
         }
       ],
-      batchesLoading: false
+      batchesLoading: false,
+      showAlert: jest.fn()
     };
 
     wrapper = shallow(<BatchTab {...props} />);
@@ -71,6 +72,14 @@ describe('Webhook Component: Batch Status Tab', () => {
       id: instance.props.webhook.id,
       subaccount: instance.props.webhook.subaccount
     });
+  });
+
+  it('should fail getBatches correctly', async() => {
+    wrapper.setProps({ getBatches: jest.fn(() => Promise.reject({ message: 'error' })) });
+    const instance = wrapper.instance();
+    await instance.refreshBatches();
+    expect(instance.props.getBatches).toHaveBeenCalled();
+    expect(instance.props.showAlert).toHaveBeenCalledWith({ details: 'error', message: 'Unable to refresh webhook batches', type: 'error' });
   });
 
 });

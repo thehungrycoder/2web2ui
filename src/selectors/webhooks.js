@@ -31,7 +31,7 @@ export const selectInitialSubaccountValue = createSelector(
     }
 
     if (id === undefined) {
-      return 'Master and all subacconts';
+      return 'Master and all subaccounts';
     }
 
     return _.find(subaccounts, { id: Number(id) });

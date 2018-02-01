@@ -92,14 +92,14 @@ export function deleteWebhook({ id, subaccount = null }) {
   });
 }
 
-export function testWebhook({ id, subaccount = null, ...data }) {
+export function testWebhook({ id, subaccount = null, message }) {
   const headers = setSubaccountHeader(subaccount);
   return sparkpostApiRequest({
     type: 'TEST_WEBHOOK',
     meta: {
       method: 'POST',
       url: `/webhooks/${id}/validate`,
-      data: { message: data },
+      data: { message },
       headers
     }
   });

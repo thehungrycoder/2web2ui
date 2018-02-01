@@ -14,11 +14,11 @@ const createOptions = [
 
 /**
  * Component produces the follow redux form fields
- * If new
+ * If newWebhook
  * - assignTo 'master' | 'all' | 'subaccount'
  * - subaccount if assignTo === 'subaccount'
  *
- * If !new
+ * If !newWebhook
  * - subaccount TextField | typeahead (disabled)
  */
 export class SubaccountSection extends Component {
@@ -75,7 +75,7 @@ export class SubaccountSection extends Component {
 }
 
 SubaccountSection.propTypes = {
-  new: PropTypes.bool,
+  newWebhook: PropTypes.bool,
   assignTo: PropTypes.oneOf(['master', 'all', 'subaccount', null]),
   change: PropTypes.func
 };

@@ -10,7 +10,7 @@ import { PanelLoading } from 'src/components';
 import ResponseBlock from './ResponseBlock';
 import RequestBlock from './RequestBlock';
 
-class TestTab extends Component {
+export class TestTab extends Component {
   state = {
     testSent: false,
     buildRequest: _.once(this.buildTestRequest)
@@ -52,12 +52,12 @@ class TestTab extends Component {
     const { testWebhook, webhook, samples, showAlert } = this.props;
     const { buildRequest } = this.state;
 
-    testWebhook({ id: webhook.id, subaccount: webhook.subaccount, ...buildRequest(webhook, samples) }).then(() => {
+    return testWebhook({ id: webhook.id, subaccount: webhook.subaccount, message: buildRequest(webhook, samples) }).then(() => {
       showAlert({ type: 'success', message: 'The test was successful!' });
+      this.setState({ testSent: true });
     }).catch((err) => {
       showAlert({ type: 'error', message: 'The test failed', details: err.message });
     });
-    this.setState({ testSent: true });
   }
 
   render() {

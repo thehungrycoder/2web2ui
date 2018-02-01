@@ -14,13 +14,9 @@ import WebhookForm from './WebhookForm';
 import prepareWebhookUpdate from '../helpers/prepareWebhookUpdate';
 import buildEventsTree from '../helpers/buildEventsTree';
 
-class EditTab extends Component {
+export class EditTab extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      updated: false
-    };
 
     this.buildEventsTree = _.memoize(buildEventsTree);
     this.getAllEvents = _.memoize(this.getAllEvents);
@@ -44,16 +40,14 @@ class EditTab extends Component {
 
     const update = prepareWebhookUpdate(values, webhook, allEvents);
 
-    if (Object.keys(update).length !== 0) {
-      return updateWebhook({ id: webhook.id, subaccount: webhook.subaccount, ...update })
-        .then(() => {
-          showAlert({ type: 'success', message: 'Update Successful' });
-          getWebhook({ id: webhook.id, subaccount: webhook.subaccount });
-        })
-        .catch((err) => {
-          showAlert({ type: 'error', message: 'Update Failed', details: err.message });
-        });
-    }
+    return updateWebhook({ id: webhook.id, subaccount: webhook.subaccount, ...update })
+      .then(() => {
+        showAlert({ type: 'success', message: 'Update Successful' });
+        getWebhook({ id: webhook.id, subaccount: webhook.subaccount });
+      })
+      .catch((err) => {
+        showAlert({ type: 'error', message: 'Update Failed', details: err.message });
+      });
   }
 
   /*
@@ -103,9 +97,7 @@ class EditTab extends Component {
 
 const mapStateToProps = ({ webhooks, form }) => ({
   eventsLoading: webhooks.docsLoading,
-  eventDocs: webhooks.docs,
-  updateSuccess: webhooks.updateSuccess,
-  updateError: webhooks.updateError
+  eventDocs: webhooks.docs
 });
 
 export default withRouter(connect(mapStateToProps, { getWebhook, getEventDocs, updateWebhook, showAlert })(EditTab));
