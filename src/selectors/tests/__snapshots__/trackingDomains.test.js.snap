@@ -21,6 +21,13 @@ Array [
 exports[`Selectors: Tracking Domains selectTrackingDomainsList should return a transformed array if list is present 1`] = `
 Array [
   Object {
+    "default": true,
+    "domain": "0.com",
+    "status": "verified",
+    "subaccount_id": 101,
+    "verified": true,
+  },
+  Object {
     "domain": "1.com",
     "status": "verified",
     "verified": true,
@@ -87,6 +94,17 @@ Array [
     "default": true,
     "domain": "4.com",
     "status": "verified",
+    "verified": true,
+  },
+]
+`;
+
+exports[`Selectors: Tracking Domains selectVerifiedTrackingDomains should return only tracking domains assigned to subaccount 1`] = `
+Array [
+  Object {
+    "domain": "1.com",
+    "status": "verified",
+    "subaccount_id": 101,
     "verified": true,
   },
 ]

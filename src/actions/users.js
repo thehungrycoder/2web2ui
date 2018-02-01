@@ -91,7 +91,10 @@ export function registerUser(token, data) {
   };
 
   return (dispatch) => dispatch(sparkpostApiRequest(action))
-    .then(() => dispatch(showAlert({ type: 'success', message: 'Welcome to SparkPost' })))
+    .then(() => dispatch(showAlert({
+      type: 'success',
+      message: 'Welcome to SparkPost'
+    })))
     .catch((error) => {
       dispatch(showAlert({
         type: 'error',

@@ -58,9 +58,14 @@ describe('Action Creator: users', () => {
 
     it('should show appropriate alert on error', async() => {
       const error = new Error('you failed');
-      dispatchMock.mockImplementationOnce(() => Promise.reject(error));
+      // I am not sure why I have to do it this way
+      // I assumed because the mock is reset and reinitialized
+      // that it would start over
+      dispatchMock
+        .mockImplementationOnce(() => Promise.reject(error))
+        .mockImplementationOnce(() => Promise.reject(error));
 
-      const thunk = userActions.deleteUser('token', { prop: 'value' });
+      const thunk = userActions.deleteUser('user', { prop: 'value' });
       await thunk(dispatchMock).catch(() => {
         expect(showAlert).toHaveBeenCalledWith({
           type: 'error',
@@ -84,7 +89,13 @@ describe('Action Creator: users', () => {
 
     it('should show appropriate alert on error', async() => {
       const error = new Error('you failed');
-      dispatchMock.mockImplementationOnce(() => Promise.reject(error));
+      // I am not sure why I have to do it this way
+      // I assumed because the mock is reset and reinitialized
+      // that it would start over
+      dispatchMock
+        .mockImplementationOnce(() => Promise.reject(error))
+        .mockImplementationOnce(() => Promise.reject(error))
+        .mockImplementationOnce(() => Promise.reject(error));
 
       const thunk = userActions.updateUser('user', { prop: 'value' });
       await thunk(dispatchMock).catch(() => {

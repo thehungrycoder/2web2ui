@@ -14,7 +14,7 @@ exports[`Component: AssignTrackingDomain form should have button disabled when f
       </div>
       <Link
         replace={false}
-        to="/account/tracking-domains"
+        to="/account/tracking-domains/create"
       >
         Create a tracking domain.
       </Link>
@@ -77,7 +77,7 @@ exports[`Component: AssignTrackingDomain form should have button disabled when s
       </div>
       <Link
         replace={false}
-        to="/account/tracking-domains"
+        to="/account/tracking-domains/create"
       >
         Create a tracking domain.
       </Link>
@@ -140,7 +140,7 @@ exports[`Component: AssignTrackingDomain form should render form with initial va
       </div>
       <Link
         replace={false}
-        to="/account/tracking-domains"
+        to="/account/tracking-domains/create"
       >
         Create a tracking domain.
       </Link>
@@ -203,7 +203,7 @@ exports[`Component: AssignTrackingDomain form should render panel loading compon
       </div>
       <Link
         replace={false}
-        to="/account/tracking-domains"
+        to="/account/tracking-domains/create"
       >
         Create a tracking domain.
       </Link>

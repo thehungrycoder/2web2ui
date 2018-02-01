@@ -1,4 +1,4 @@
-/* eslint max-lines: ["error", 180] */
+/* eslint max-lines: ["error", 200] */
 import {
   convertStatus,
   selectTrackingDomainsAreLoaded,
@@ -15,6 +15,7 @@ describe('Selectors: Tracking Domains', () => {
 
   beforeEach(() => {
     testDomains = [
+      { domain: '0.com', status: { verified: true, compliance_status: 'valid' }, default: true, subaccount_id: 101 },
       { domain: '1.com', status: { verified: true, compliance_status: 'valid' }},
       { domain: '2.com', status: { verified: false, compliance_status: 'blocked' }},
       { domain: '3.com', status: { verified: false, compliance_status: 'valid' }},
@@ -121,14 +122,29 @@ describe('Selectors: Tracking Domains', () => {
           list: testDomains
         }
       };
-      expect(selectVerifiedTrackingDomains(state)).toMatchSnapshot();
+      expect(selectVerifiedTrackingDomains(state, {})).toMatchSnapshot();
     });
 
     it('should return an empty array when the list is absent', () => {
       const state = {
         trackingDomains: {}
       };
-      expect(selectVerifiedTrackingDomains(state)).toEqual([]);
+      expect(selectVerifiedTrackingDomains(state, {})).toEqual([]);
+    });
+
+    it('should return only tracking domains assigned to subaccount', () => {
+      testDomains[0].subaccount_id = 100;
+      testDomains[1].subaccount_id = 101;
+      testDomains[3].subaccount_id = 101;
+
+      const state = {
+        trackingDomains: {
+          list: testDomains
+        }
+      };
+
+      expect(selectVerifiedTrackingDomains(state, { subaccount: 101 })).toMatchSnapshot();
+
     });
   });
 
@@ -139,8 +155,9 @@ describe('Selectors: Tracking Domains', () => {
           list: testDomains
         }
       };
-      expect(selectVerifiedTrackingDomainsOptions(state)).toMatchSnapshot();
+      expect(selectVerifiedTrackingDomainsOptions(state, {})).toMatchSnapshot();
     });
+
   });
 
   describe('selectDefaultTrackingDomainsOptions', () => {
@@ -150,7 +167,7 @@ describe('Selectors: Tracking Domains', () => {
           list: testDomains
         }
       };
-      expect(selectDefaultTrackingDomainOption(state)).toMatchSnapshot();
+      expect(selectDefaultTrackingDomainOption(state, {})).toMatchSnapshot();
     });
 
     it('should return system default when no default options', () => {
@@ -160,7 +177,7 @@ describe('Selectors: Tracking Domains', () => {
           list: testDomains
         }
       };
-      expect(selectDefaultTrackingDomainOption(state)).toMatchSnapshot();
+      expect(selectDefaultTrackingDomainOption(state, {})).toMatchSnapshot();
     });
   });
 
@@ -171,7 +188,7 @@ describe('Selectors: Tracking Domains', () => {
           list: testDomains
         }
       };
-      expect(selectTrackingDomainsOptions(state)).toMatchSnapshot();
+      expect(selectTrackingDomainsOptions(state, {})).toMatchSnapshot();
     });
   });
 });

@@ -83,7 +83,7 @@ describe('Component: AssignTrackingDomain form', () => {
 
   it('should load tracking domain list on mount', () => {
     wrapper.instance().componentDidMount();
-    expect(wrapper.instance().props.listTrackingDomains).toHaveBeenCalledWith(100);
+    expect(wrapper.instance().props.listTrackingDomains).toHaveBeenCalledWith();
   });
 
 });
