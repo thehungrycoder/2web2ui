@@ -15,12 +15,12 @@ import config from 'src/config';
 export class EditBounce extends Component {
 
   verifyDomain = () => {
-    const { id, verify, showAlert } = this.props;
+    const { id, verify, showAlert, domain } = this.props;
     function alertError(error) {
       showAlert({ type: 'error', message: `Unable to verify CNAME record of ${id}. ${error}` });
     }
 
-    return verify(id, 'cname')
+    return verify(id, 'cname', domain.subaccount_id)
       .then((results) => {
         const readyFor = resolveReadyFor(results);
         if (readyFor.bounce) {
@@ -39,7 +39,7 @@ export class EditBounce extends Component {
 
     return update(id, {
       is_default_bounce_domain: !domain.is_default_bounce_domain
-    })
+    }, domain.subaccount_id)
       .catch((err) => {
         showAlert({ type: 'error', message: `Failed to update default bounce option. ${err.message}` });
         reset();
@@ -120,6 +120,7 @@ export class EditBounce extends Component {
 
   render() {
     const { domain } = this.props;
+
     const readyFor = resolveReadyFor(domain.status);
     return (
       <SendingDomainSection title='Set Up For Bounce'>

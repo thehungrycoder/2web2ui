@@ -29,7 +29,8 @@ describe('Component: EditBounce', () => {
       id: 'xyz.com',
       domain: {
         status,
-        is_default_bounce_domain: false
+        is_default_bounce_domain: false,
+        subaccount_id: 100
       },
       verify: jest.fn(() => Promise.resolve()),
       update: jest.fn(() => Promise.resolve()),
@@ -66,7 +67,8 @@ describe('Component: EditBounce', () => {
     it('verifies domain and alerts when verification successful', async() => {
       props.verify.mockReturnValue(Promise.resolve({ cname_status: 'valid' }));
       await instance.verifyDomain();
-      expect(props.verify).toHaveBeenCalledOnceWith('xyz.com', 'cname');
+      expect(props.verify).toHaveBeenCalledTimes(1);
+      expect(props.verify).toHaveBeenCalledWith('xyz.com', 'cname', 100);
       const arg = props.showAlert.mock.calls[0][0];
       expect(props.showAlert).toHaveBeenCalledTimes(1);
       expect(arg.type).toEqual('success');
@@ -76,7 +78,8 @@ describe('Component: EditBounce', () => {
     it('alerts error when verification req is successful but verification is failed', async() => {
       props.verify.mockReturnValue(Promise.resolve({ cname_status: 'invalid' }));
       await instance.verifyDomain();
-      expect(props.verify).toHaveBeenCalledOnceWith('xyz.com', 'cname');
+      expect(props.verify).toHaveBeenCalledTimes(1);
+      expect(props.verify).toHaveBeenCalledWith('xyz.com', 'cname', 100);
       const arg = props.showAlert.mock.calls[0][0];
       expect(props.showAlert).toHaveBeenCalledTimes(1);
       expect(arg.type).toEqual('error');
@@ -87,7 +90,8 @@ describe('Component: EditBounce', () => {
       const err = new Error('Request failed!');
       props.verify.mockReturnValue(Promise.reject(err));
       await instance.verifyDomain();
-      expect(props.verify).toHaveBeenCalledOnceWith('xyz.com', 'cname');
+      expect(props.verify).toHaveBeenCalledTimes(1);
+      expect(props.verify).toHaveBeenCalledWith('xyz.com', 'cname', 100);
       const arg = props.showAlert.mock.calls[0][0];
       expect(props.showAlert).toHaveBeenCalledTimes(1);
       expect(arg.type).toEqual('error');
@@ -98,11 +102,11 @@ describe('Component: EditBounce', () => {
   describe('toggleDefaultBounce', () => {
     it('calls update with toggled value', async() => {
       await instance.toggleDefaultBounce();
-      expect(props.update).toHaveBeenCalledWith(props.id, { is_default_bounce_domain: true });
+      expect(props.update).toHaveBeenCalledWith(props.id, { is_default_bounce_domain: true }, 100);
 
       props.domain.is_default_bounce_domain = true;
       await instance.toggleDefaultBounce();
-      expect(props.update).toHaveBeenCalledWith(props.id, { is_default_bounce_domain: false });
+      expect(props.update).toHaveBeenCalledWith(props.id, { is_default_bounce_domain: false }, 100);
     });
 
     it('alerts on error and reset form', async() => {
@@ -110,7 +114,8 @@ describe('Component: EditBounce', () => {
       props.update.mockReturnValue(Promise.reject(err));
 
       await instance.toggleDefaultBounce();
-      expect(props.update).toHaveBeenCalledOnceWith(props.id, { is_default_bounce_domain: true });
+      expect(props.update).toHaveBeenCalledTimes(1);
+      expect(props.update).toHaveBeenCalledWith(props.id, { is_default_bounce_domain: true }, 100);
       expect(props.showAlert).toHaveBeenCalledTimes(1);
       expect(props.showAlert.mock.calls[0][0].type).toEqual('error');
       expect(props.reset).toHaveBeenCalledTimes(1);

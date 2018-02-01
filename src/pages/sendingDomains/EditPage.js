@@ -55,7 +55,7 @@ export class EditPage extends Component {
         title={`Edit ${id}`}
         breadcrumbAction={breadcrumbAction}
       >
-        {getError ? this.renderError() : this.renderPage(id)}
+        {getError ? this.renderError() : this.renderPage()}
 
       </Page>
     );

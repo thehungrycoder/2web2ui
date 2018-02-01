@@ -21,32 +21,3 @@ beforeEach(() => {
   // See https://facebook.github.io/jest/docs/en/expect.html#expecthasassertions
   expect.hasAssertions();
 });
-
-expect.extend({
-  toHaveBeenCalledOnceWith(received, ...rest) {
-    try {
-      expect(received).toHaveBeenCalledTimes(1);
-    } catch (e) {
-      return {
-        message: () =>
-          e.message,
-        pass: false
-      };
-    }
-    try {
-      expect(received).toHaveBeenCalledWith(...rest);
-    } catch (e) {
-      return {
-        message: () =>
-          e.message,
-        pass: false
-      };
-    }
-
-    return {
-      message: () =>
-        `expected ${received} to be called once with ${rest}`,
-      pass: true
-    };
-  }
-});
