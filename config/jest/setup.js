@@ -20,3 +20,11 @@ beforeEach(() => {
   // See https://facebook.github.io/jest/docs/en/expect.html#expecthasassertions
   expect.hasAssertions();
 });
+
+// Mock moment to set a default timezone
+jest.mock('moment', () => {
+  jest.unmock('moment'); // must unmock, so moment-timezone can require
+  const momentTimezone = require.requireActual('moment-timezone');
+  momentTimezone.tz.setDefault('America/New_York');
+  return momentTimezone;
+});

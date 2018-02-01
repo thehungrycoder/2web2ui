@@ -1,19 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import moment from 'moment';
 import { Panel, Grid } from '@sparkpost/matchbox';
 import { Percent } from 'src/components';
-import { relativeDateOptionsIndexed } from 'src/helpers/date';
+import { formatDateTime, relativeDateOptionsIndexed } from 'src/helpers/date';
 
 import styles from './MetricsSummary.module.scss';
 
 class MetricsSummary extends Component {
   renderDate() {
     const { to, from, relativeRange } = this.props;
-    const format = 'MMM D \'YY, h:mma';
 
     if (relativeRange === 'custom') {
-      return <span> from <strong>{moment(from).format(format)}</strong> to <strong>{moment(to).format(format)}</strong></span>;
+      return <span> from <strong>{formatDateTime(from)}</strong> to <strong>{formatDateTime(to)}</strong></span>;
     }
 
     return <span> in the <strong>{relativeDateOptionsIndexed[relativeRange].toLowerCase()}</strong></span>;

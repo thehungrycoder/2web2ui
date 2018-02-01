@@ -5,18 +5,19 @@ import {
   getLineChartFormatters
 } from '../chart';
 import * as metrics from '../metrics';
+import moment from 'moment';
 
 jest.mock('../metrics');
 
 function getDate(hours, date = '2017-06-15T12:00') {
-  const d = new Date(date);
-  d.setHours(hours);
+  const d = moment(date);
+  d.hours(hours);
   return d;
 }
 
 function getTimestampWithFixedHour(date, hour) {
   const d = getDate(hour, date);
-  return d.getTime();
+  return d.valueOf();
 }
 
 describe('Helper: chart', () => {

@@ -28,11 +28,11 @@ exports[`MetricsSummary:  should render custom date 1`] = `
           <span>
              from 
             <strong>
-              Dec 25 '17, 5:30am
+              Dec 25 2017, 5:30am
             </strong>
              to 
             <strong>
-              Jan 12 '18, 12:00pm
+              Jan 12 2018, 12:00pm
             </strong>
           </span>
           .
@@ -110,11 +110,11 @@ exports[`MetricsSummary:  should render secondary message 1`] = `
           <span>
              from 
             <strong>
-              Dec 25 '17, 5:30am
+              Dec 25 2017, 5:30am
             </strong>
              to 
             <strong>
-              Jan 12 '18, 12:00pm
+              Jan 12 2018, 12:00pm
             </strong>
           </span>
           .

@@ -78,6 +78,5 @@ export function formatTime(time) {
 }
 
 export function formatDateTime(datetime) {
-  return `${formatDate(datetime)} ${formatTime(datetime)}`;
+  return `${formatDate(datetime)}, ${formatTime(datetime)}`;
 }
-
