@@ -5,6 +5,7 @@ import _ from 'lodash';
 import cases from 'jest-in-case';
 import DateForm from '../DateForm';
 import { delay } from 'src/__testHelpers__';
+import moment from 'moment';
 
 describe('Component: Date Form', () => {
 
@@ -18,7 +19,7 @@ describe('Component: Date Form', () => {
   beforeEach(() => {
     selectDates = jest.fn();
     onEnter = jest.fn();
-    mockNow = new Date('2018-01-15T12:00:00');
+    mockNow = moment('2018-01-15T12:00:00');
 
     props = {
       selectDates,
@@ -38,8 +39,8 @@ describe('Component: Date Form', () => {
 
   it('should sync props to state', () => {
     instance.syncPropsToState({
-      from: new Date('2018-01-10T10:00:00'),
-      to: new Date('2018-01-15T14:00:00')
+      from: moment('2018-01-10T10:00:00'),
+      to: moment('2018-01-15T14:00:00')
     });
     wrapper.update();
     expect(wrapper).toMatchSnapshot();
@@ -47,8 +48,8 @@ describe('Component: Date Form', () => {
 
   it('should update state from new props', () => {
     wrapper.setProps({
-      from: new Date('2018-01-10T10:00:00'),
-      to: new Date('2018-01-15T14:00:00')
+      from: moment('2018-01-10T10:00:00'),
+      to: moment('2018-01-15T14:00:00')
     });
     wrapper.update();
     expect(wrapper).toMatchSnapshot();
@@ -129,9 +130,9 @@ describe('Component: Date Form', () => {
     }));
 
     beforeEach(() => {
-      mockFrom = new Date('2017-11-15');
-      mockTo = new Date('2017-12-15');
-      mockNow = new Date('2018-01-15');
+      mockFrom = moment('2017-11-15');
+      mockTo = moment('2017-12-15');
+      mockNow = moment('2018-01-15');
       wrapper.setProps({ to: mockTo, from: mockFrom, now: mockNow });
     });
 
@@ -146,7 +147,10 @@ describe('Component: Date Form', () => {
 
       it('should select dates', () => {
         instance.validate({}, true);
-        expect(props.selectDates).toHaveBeenCalledWith({ from: mockFrom, to: mockTo }, expect.any(Function));
+        expect(props.selectDates).toHaveBeenCalledWith({
+          from: mockFrom.toDate(),
+          to: mockTo.toDate()
+        }, expect.any(Function));
         expect(props.onEnter).not.toHaveBeenCalled();
       });
 
@@ -158,7 +162,10 @@ describe('Component: Date Form', () => {
 
         instance.validate(e, true);
 
-        expect(selectDates).toHaveBeenCalledWith({ from: mockFrom, to: mockTo }, expect.any(Function));
+        expect(selectDates).toHaveBeenCalledWith({
+          from: mockFrom.toDate(),
+          to: mockTo.toDate()
+        }, expect.any(Function));
         expect(onEnter).toHaveBeenCalledWith(e);
       });
 

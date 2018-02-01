@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import { format } from 'date-fns';
 import _ from 'lodash';
 
 import { Grid, TextField, Icon } from '@sparkpost/matchbox';
@@ -24,10 +23,10 @@ export default class DateForm extends Component {
 
   syncPropsToState({ to, from }) {
     this.setState({
-      toDate: format(to, this.dayFormat),
-      toTime: format(to, this.timeFormat),
-      fromDate: format(from, this.dayFormat),
-      fromTime: format(from, this.timeFormat)
+      toDate: moment(to).format(this.dayFormat),
+      toTime: moment(to).format(this.timeFormat),
+      fromDate: moment(from).format(this.dayFormat),
+      fromTime: moment(from).format(this.timeFormat)
     });
   }
 
