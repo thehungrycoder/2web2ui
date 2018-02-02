@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DomainStatus component renders correctly 1`] = `
+<Grid>
+  <Grid.Column
+    md={4}
+    xs={12}
+  >
+    <h1>
+      Status
+    </h1>
+    <VerificationHelp
+      status="verified"
+    />
+  </Grid.Column>
+  <Grid.Column
+    md={8}
+    xs={12}
+  >
+    <Panel>
+      <StatusDescription
+        domain={
+          Object {
+            "dkim": Object {
+              "headers": "from:to:subject:date",
+              "public": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCH3n8S0ApNBowLfcKzQMK2KamxMC2TmMTVwwh9E0DQihCUxjieg9OdWwPP16osG95XoawSFCg114qTXX+UsPE40YpURpntKKa2XPLhEJYb5690yf7h0MmrqCkMTJbW23783gqZ/OUO6DGjTcNcvfWw4gn3t1jLyGl8Nk6EdAXVlQIDAQAB",
+              "selector": "scph0116",
+            },
+            "id": "example.com",
+            "is_default_bounce_domain": true,
+            "shared_with_subaccounts": false,
+            "status": Object {
+              "abuse_at_status": "unverified",
+              "cname_status": "unverified",
+              "compliance_status": "valid",
+              "dkim_status": "invalid",
+              "mx_status": "valid",
+              "ownership_verified": true,
+              "postmaster_at_status": "unverified",
+              "spf_status": "invalid",
+              "verification_mailbox_status": "valid",
+            },
+            "subaccount_id": 100,
+          }
+        }
+        readyFor={
+          Object {
+            "bounce": true,
+            "dkim": false,
+            "sending": true,
+          }
+        }
+        status="verified"
+      />
+      <ShareWithSubaccounts
+        domain={
+          Object {
+            "dkim": Object {
+              "headers": "from:to:subject:date",
+              "public": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCH3n8S0ApNBowLfcKzQMK2KamxMC2TmMTVwwh9E0DQihCUxjieg9OdWwPP16osG95XoawSFCg114qTXX+UsPE40YpURpntKKa2XPLhEJYb5690yf7h0MmrqCkMTJbW23783gqZ/OUO6DGjTcNcvfWw4gn3t1jLyGl8Nk6EdAXVlQIDAQAB",
+              "selector": "scph0116",
+            },
+            "id": "example.com",
+            "is_default_bounce_domain": true,
+            "shared_with_subaccounts": false,
+            "status": Object {
+              "abuse_at_status": "unverified",
+              "cname_status": "unverified",
+              "compliance_status": "valid",
+              "dkim_status": "invalid",
+              "mx_status": "valid",
+              "ownership_verified": true,
+              "postmaster_at_status": "unverified",
+              "spf_status": "invalid",
+              "verification_mailbox_status": "valid",
+            },
+            "subaccount_id": 100,
+          }
+        }
+        onChange={[MockFunction]}
+      />
+    </Panel>
+  </Grid.Column>
+</Grid>
+`;

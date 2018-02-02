@@ -1,0 +1,151 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`StatusDescription component Shallow tests does not render subaccount details on master account domains 1`] = `
+<React.Fragment>
+  <Panel.Section>
+    <LabelledValue
+      label={
+        <StatusTooltip>
+          Status
+        </StatusTooltip>
+      }
+    >
+      <DomainStatusTag
+        status="unverified"
+      />
+      <ReadyFor
+        bounce={false}
+        bounceDefault={false}
+        dkim={false}
+        sending={false}
+      />
+    </LabelledValue>
+  </Panel.Section>
+</React.Fragment>
+`;
+
+exports[`StatusDescription component Shallow tests renders subaccount details 1`] = `
+<React.Fragment>
+  <Panel.Section>
+    <LabelledValue
+      label={
+        <StatusTooltip>
+          Status
+        </StatusTooltip>
+      }
+    >
+      <DomainStatusTag
+        status="unverified"
+      />
+      <ReadyFor
+        bounce={false}
+        bounceDefault={false}
+        dkim={false}
+        sending={false}
+      />
+    </LabelledValue>
+  </Panel.Section>
+  <Panel.Section>
+    <LabelledValue
+      label="Subaccount"
+    >
+      <SubaccountTag
+        id={101}
+      />
+    </LabelledValue>
+  </Panel.Section>
+</React.Fragment>
+`;
+
+exports[`StatusDescription component Shallow tests renders verification status correctly blocked 1`] = `
+<React.Fragment>
+  <Panel.Section>
+    <LabelledValue
+      label={
+        <StatusTooltip>
+          Status
+        </StatusTooltip>
+      }
+    >
+      <DomainStatusTag
+        status="blocked"
+      />
+      <ReadyFor
+        bounce={false}
+        bounceDefault={false}
+        dkim={false}
+        sending={false}
+      />
+    </LabelledValue>
+  </Panel.Section>
+</React.Fragment>
+`;
+
+exports[`StatusDescription component Shallow tests renders verification status correctly pending 1`] = `
+<React.Fragment>
+  <Panel.Section>
+    <LabelledValue
+      label={
+        <StatusTooltip>
+          Status
+        </StatusTooltip>
+      }
+    >
+      <DomainStatusTag
+        status="pending"
+      />
+      <ReadyFor
+        bounce={false}
+        bounceDefault={false}
+        dkim={false}
+        sending={false}
+      />
+    </LabelledValue>
+  </Panel.Section>
+</React.Fragment>
+`;
+
+exports[`StatusDescription component Shallow tests renders verification status correctly unverified 1`] = `
+<React.Fragment>
+  <Panel.Section>
+    <LabelledValue
+      label={
+        <StatusTooltip>
+          Status
+        </StatusTooltip>
+      }
+    >
+      <DomainStatusTag
+        status="unverified"
+      />
+      <ReadyFor
+        bounce={false}
+        bounceDefault={false}
+        dkim={false}
+        sending={false}
+      />
+    </LabelledValue>
+  </Panel.Section>
+</React.Fragment>
+`;
+
+exports[`StatusDescription component Shallow tests renders verification status correctly verified 1`] = `
+<React.Fragment>
+  <Panel.Section>
+    <LabelledValue
+      label={
+        <StatusTooltip>
+          Status
+        </StatusTooltip>
+      }
+    >
+      <ReadyFor
+        bounce={false}
+        bounceDefault={false}
+        dkim={false}
+        sending={false}
+      />
+    </LabelledValue>
+  </Panel.Section>
+</React.Fragment>
+`;

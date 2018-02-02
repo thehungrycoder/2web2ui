@@ -47,6 +47,30 @@ Object {
 }
 `;
 
+exports[`Action Creator: Sending Domains Remove remove calls API 1`] = `
+Object {
+  "meta": Object {
+    "headers": Object {},
+    "method": "DELETE",
+    "url": "/sending-domains/example.com",
+  },
+  "type": "DELETE_SENDING_DOMAIN",
+}
+`;
+
+exports[`Action Creator: Sending Domains Remove remove includes subaccount header with required 1`] = `
+Object {
+  "meta": Object {
+    "headers": Object {
+      "x-msys-subaccount": 101,
+    },
+    "method": "DELETE",
+    "url": "/sending-domains/example.com",
+  },
+  "type": "DELETE_SENDING_DOMAIN",
+}
+`;
+
 exports[`Action Creator: Sending Domains Update it should request with correct post data 1`] = `
 Object {
   "meta": Object {

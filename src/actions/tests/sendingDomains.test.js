@@ -1,7 +1,5 @@
 import * as sendingDomains from '../sendingDomains';
 
-jest.mock('../helpers/sparkpostApiRequest', () => jest.fn((a) => a));
-
 describe('Action Creator: Sending Domains', () => {
 
   describe('Create', () => {
@@ -35,6 +33,19 @@ describe('Action Creator: Sending Domains', () => {
 
     it('it update domain owned by subaccount', () => {
       expect(sendingDomains.update({ id: 'domain.com', subaccount: 101, is_default_bounce_domain: true })).toMatchSnapshot();
+    });
+  });
+
+  describe('Remove', () => {
+    const domain = 'example.com';
+    const subaccount = 101;
+
+    it('remove calls API', () => {
+      expect(sendingDomains.remove({ id: domain })).toMatchSnapshot();
+    });
+
+    it('remove includes subaccount header with required', async() => {
+      expect(sendingDomains.remove({ id: domain, subaccount })).toMatchSnapshot();
     });
   });
 });

@@ -1,6 +1,13 @@
-const initialState = { list: [], listError: null, getError: null, verifyError: null, domain: { dkim: {}, status: {}}};
+const initialState = {
+  list: [],
+  domain: { dkim: {}, status: {}},
+  listError: null,
+  getError: null,
+  verifyError: null
+};
 
 export default (state = initialState, { type, payload, meta }) => {
+
   switch (type) {
 
     case 'LIST_SENDING_DOMAINS_PENDING':
