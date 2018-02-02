@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: SimpleTable renders table correctly 1`] = `
+<Table>
+  <tbody>
+    <Table.Row
+      key="header"
+    >
+      <Table.HeaderCell
+        key="0"
+      >
+        Column 1
+      </Table.HeaderCell>
+      <Table.HeaderCell
+        key="1"
+      >
+        Column 2
+      </Table.HeaderCell>
+    </Table.Row>
+    <Table.Row
+      key="0"
+    >
+      <Table.Cell
+        key="0"
+      >
+        val1
+      </Table.Cell>
+      <Table.Cell
+        key="1"
+      >
+        val2
+      </Table.Cell>
+    </Table.Row>
+  </tbody>
+</Table>
+`;

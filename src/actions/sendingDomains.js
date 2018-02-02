@@ -16,7 +16,8 @@ export function get(id) {
     type: 'GET_SENDING_DOMAIN',
     meta: {
       method: 'GET',
-      url: `/sending-domains/${id}`
+      url: `/sending-domains/${id}`,
+      id
     }
   });
 }
@@ -35,13 +36,31 @@ export function create(data) {
   });
 }
 
-export function update({ sendingDomain, subaccount, ...data }) {
+export function update({ id, subaccount, ...data }) {
   const headers = setSubaccountHeader(subaccount);
+
   return sparkpostApiRequest({
     type: 'UPDATE_SENDING_DOMAIN',
     meta: {
       method: 'PUT',
-      url: `/sending-domains/${sendingDomain}`,
+      url: `/sending-domains/${id}`,
+      data,
+      headers
+    }
+  });
+}
+
+export function verify({ id, subaccount, type }) {
+  const headers = setSubaccountHeader(subaccount);
+
+  const data = {};
+  data[`${type}_verify`] = true;
+
+  return sparkpostApiRequest({
+    type: 'VERIFY_SENDING_DOMAIN',
+    meta: {
+      method: 'POST',
+      url: `/sending-domains/${id}/verify`,
       data,
       headers
     }

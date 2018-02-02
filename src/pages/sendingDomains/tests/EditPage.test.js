@@ -7,6 +7,7 @@ describe('Sending Domains Edit Page', () => {
   let wrapper;
 
   const domain = {
+    id: 'abcd.com',
     tracking_domain: 'track.me',
     subaccount_id: 100
   };
@@ -18,7 +19,7 @@ describe('Sending Domains Edit Page', () => {
       getLoading: false,
       getDomain: jest.fn(),
       match: {
-        params: { id: 'id' }
+        params: { id: 'abcd.com' }
       }
     };
 
@@ -31,7 +32,7 @@ describe('Sending Domains Edit Page', () => {
   });
 
   it('renders loading correctly', () => {
-    wrapper.setProps({ getLoading: true });
+    wrapper.setProps({ domain: { id: 'foobar.com' }});
     expect(wrapper).toMatchSnapshot();
   });
 

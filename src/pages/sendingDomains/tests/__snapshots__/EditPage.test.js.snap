@@ -10,13 +10,29 @@ exports[`Sending Domains Edit Page renders correctly 1`] = `
     }
   }
   empty={Object {}}
-  title="Edit id"
+  title="Edit abcd.com"
 >
-  <Connect(ReduxForm)
-    sendingDomain="id"
-    subaccount={100}
-    trackingDomain="track.me"
-  />
+  <div>
+    <Connect(ReduxForm)
+      domain={
+        Object {
+          "id": "abcd.com",
+          "subaccount_id": 100,
+          "tracking_domain": "track.me",
+        }
+      }
+      id="abcd.com"
+    />
+    <Connect(ReduxForm)
+      domain={
+        Object {
+          "id": "abcd.com",
+          "subaccount_id": 100,
+          "tracking_domain": "track.me",
+        }
+      }
+    />
+  </div>
 </Page>
 `;
 
@@ -30,7 +46,7 @@ exports[`Sending Domains Edit Page renders error banner correctly 1`] = `
     }
   }
   empty={Object {}}
-  title="Edit id"
+  title="Edit abcd.com"
 >
   <ApiErrorBanner
     errorDetails="error"

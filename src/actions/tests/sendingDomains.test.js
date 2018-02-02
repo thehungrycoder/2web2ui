@@ -17,4 +17,24 @@ describe('Action Creator: Sending Domains', () => {
       expect(sendingDomains.create({ domain: 'domain.com', assignTo: 'shared' })).toMatchSnapshot();
     });
   });
+
+  describe('Verify', () => {
+    it('it should request with correct post data', () => {
+      expect(sendingDomains.verify({ id: 'domain.com', type: 'cname' })).toMatchSnapshot();
+    });
+
+    it('it should verify domain owned by subaccount', () => {
+      expect(sendingDomains.verify({ id: 'sub.com', subaccount: 101, type: 'cname' })).toMatchSnapshot();
+    });
+  });
+
+  describe('Update', () => {
+    it('it should request with correct post data', () => {
+      expect(sendingDomains.update({ id: 'domain.com', is_default_bounce_domain: true })).toMatchSnapshot();
+    });
+
+    it('it update domain owned by subaccount', () => {
+      expect(sendingDomains.update({ id: 'domain.com', subaccount: 101, is_default_bounce_domain: true })).toMatchSnapshot();
+    });
+  });
 });

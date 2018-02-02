@@ -2,7 +2,7 @@ import { createSelector } from 'reselect';
 import _ from 'lodash';
 
 const getTrackingDomains = (state) => state.trackingDomains.list;
-const selectSubaccountFromProps = (state, props) => props.subaccount;
+const selectSubaccountFromProps = (state, props) => _.get(props, 'domain.subaccount_id', null);
 
 export const convertStatus = ({ verified, compliance_status }) => {
   if (compliance_status !== 'valid') {

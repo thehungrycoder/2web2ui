@@ -18,8 +18,8 @@ export class AssignTrackingDomain extends Component {
   }
 
   updateTrackingDomain = ({ trackingDomain: tracking_domain }) => {
-    const { sendingDomain, subaccount, showAlert } = this.props;
-    return this.props.updateSendingDomain({ sendingDomain, subaccount, tracking_domain })
+    const { domain: { id, subaccount_id: subaccount }, showAlert } = this.props;
+    return this.props.updateSendingDomain({ id, subaccount, tracking_domain })
       .then(() => showAlert({
         type: 'success',
         message: 'Tracking domain assignment updated.'
@@ -84,7 +84,7 @@ function mapStateToProps(state, props) {
   return {
     trackingDomains: selectTrackingDomainsOptions(state, props),
     initialValues: {
-      trackingDomain: props.trackingDomain
+      trackingDomain: props.domain.tracking_domain
     }
   };
 }

@@ -8,10 +8,12 @@ describe('Component: AssignTrackingDomain form', () => {
 
   beforeEach(() => {
     const props = {
-      subaccount: 100,
       handleSubmit: jest.fn(),
       listTrackingDomains: jest.fn(),
-      sendingDomain: 'send.to.me',
+      domain: {
+        id: 'send.to.me',
+        subaccount_id: 100
+      },
       showAlert: jest.fn(),
       updateSendingDomain: jest.fn(() => Promise.resolve()),
       pristine: false,
@@ -60,7 +62,7 @@ describe('Component: AssignTrackingDomain form', () => {
     const form = wrapper.instance();
     await form.updateTrackingDomain({ trackingDomain: 'trackme.com' });
     expect(form.props.updateSendingDomain).toHaveBeenCalledWith({
-      sendingDomain: 'send.to.me',
+      id: 'send.to.me',
       subaccount: 100,
       tracking_domain: 'trackme.com'
     });

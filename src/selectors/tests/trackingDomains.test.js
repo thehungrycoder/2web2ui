@@ -143,7 +143,7 @@ describe('Selectors: Tracking Domains', () => {
         }
       };
 
-      expect(selectVerifiedTrackingDomains(state, { subaccount: 101 })).toMatchSnapshot();
+      expect(selectVerifiedTrackingDomains(state, { domain: { subaccount_id: 101 }})).toMatchSnapshot();
 
     });
   });

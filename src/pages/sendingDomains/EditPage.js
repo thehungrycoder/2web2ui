@@ -7,6 +7,7 @@ import { get as getDomain } from 'src/actions/sendingDomains';
 import { Loading, ApiErrorBanner } from 'src/components';
 import { Page } from '@sparkpost/matchbox';
 import AssignTrackingDomain from './components/AssignTrackingDomain';
+import EditBounce from './components/EditBounce';
 
 const breadcrumbAction = {
   content: 'Sending Domains',
@@ -25,23 +26,28 @@ export class EditPage extends Component {
 
   renderPage() {
     const { domain, match: { params: { id }}} = this.props;
+
+
     return (
-      <AssignTrackingDomain sendingDomain={id} subaccount={domain.subaccount_id} trackingDomain={domain.tracking_domain} />
+      <div>
+        <EditBounce id={id} domain={domain} />
+        <AssignTrackingDomain domain={domain} />
+      </div>
     );
   }
 
   renderError() {
     return <ApiErrorBanner
       errorDetails={this.props.getError.message}
-      message="Sorry, we seem to have had some trouble loading your Sending Domain."
+      message='Sorry, we seem to have had some trouble loading your Sending Domain.'
       reload={this.loadDomainProps}
     />;
   }
 
   render() {
-    const { getLoading, getError, match: { params: { id }}} = this.props;
+    const { domain, getError, match: { params: { id }}} = this.props;
 
-    if (getLoading) {
+    if (domain.id !== id) {
       return <Loading />;
     }
 
@@ -57,10 +63,10 @@ export class EditPage extends Component {
   }
 }
 
-const mapStateToProps = ({ sendingDomains: { domain, getError, getLoading }}) => ({
+const mapStateToProps = ({ sendingDomains: { domain, getError }}) => ({
   domain,
-  getError,
-  getLoading
+  getError
 });
+
 
 export default withRouter(connect(mapStateToProps, { getDomain })(EditPage));
