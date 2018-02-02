@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 
 import VerificationHelp from '../VerificationHelp';
 
-import { verificationCases } from '../../tests/domain';
+import { verificationCases } from '../../tests/helpers/domain';
 
 describe('VerificationHelp component', () => {
   cases('renders for non-verified domains', (status) => {

@@ -4,58 +4,30 @@ exports[`ShareWithSubaccounts component does not render for subaccount domains 1
 
 exports[`ShareWithSubaccounts component renders correctly 1`] = `
 <Panel.Section>
-  <Grid>
-    <Grid.Column
-      md={8}
-      xs={12}
-    >
-      <label
-        htmlFor="shareWithSubaccounts"
-      >
-        Share this domain with subaccounts?
-      </label>
-    </Grid.Column>
-    <Grid.Column
-      md={4}
-      xs={12}
-    >
-      <div>
-        <Toggle
-          checked={false}
-          id="shareWithSubaccounts"
-          onChange={[MockFunction]}
-        />
-      </div>
-    </Grid.Column>
-  </Grid>
+  <ToggleBlock
+    checked={false}
+    input={
+      Object {
+        "name": "shareWithSubaccounts",
+      }
+    }
+    label="Share this domain with all subaccounts?"
+    onChange={[MockFunction]}
+  />
 </Panel.Section>
 `;
 
 exports[`ShareWithSubaccounts component renders subaccount sharing state 1`] = `
 <Panel.Section>
-  <Grid>
-    <Grid.Column
-      md={8}
-      xs={12}
-    >
-      <label
-        htmlFor="shareWithSubaccounts"
-      >
-        Share this domain with subaccounts?
-      </label>
-    </Grid.Column>
-    <Grid.Column
-      md={4}
-      xs={12}
-    >
-      <div>
-        <Toggle
-          checked={true}
-          id="shareWithSubaccounts"
-          onChange={[MockFunction]}
-        />
-      </div>
-    </Grid.Column>
-  </Grid>
+  <ToggleBlock
+    checked={true}
+    input={
+      Object {
+        "name": "shareWithSubaccounts",
+      }
+    }
+    label="Share this domain with all subaccounts?"
+    onChange={[MockFunction]}
+  />
 </Panel.Section>
 `;

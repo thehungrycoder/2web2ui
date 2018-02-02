@@ -3,7 +3,7 @@ import React from 'react';
 
 import { EditPage } from '../EditPage';
 
-import { domain as domainRecord } from './domain';
+import { domain as domainRecord } from './helpers/domain';
 
 describe('Sending Domains Edit Page', () => {
   let wrapper;
@@ -84,7 +84,7 @@ describe('Sending Domains Edit Page', () => {
 
   it('should toggle subaccount sharing', async() => {
     await wrapper.instance().shareDomainChange();
-    expect(props.updateDomain).toHaveBeenCalledWith(expect.objectContaining({
+    expect(props.updateDomain).toHaveBeenCalledWith(domain.id, expect.objectContaining({
       shared_with_subaccounts: !domain.shared_with_subaccounts
     }));
   });

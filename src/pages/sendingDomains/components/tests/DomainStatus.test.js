@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 
 import { DomainStatus } from '../DomainStatus';
 
-import { domain as domainRecord } from '../../tests/domain';
+import { domain as domainRecord } from '../../tests/helpers/domain';
 
 describe('DomainStatus component', () => {
   it('renders correctly', () => {

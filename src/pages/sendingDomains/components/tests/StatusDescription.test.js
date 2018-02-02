@@ -4,7 +4,7 @@ import cases from 'jest-in-case';
 
 import StatusDescription from '../StatusDescription';
 
-import { verificationCases } from '../../tests/domain';
+import { verificationCases } from '../../tests/helpers/domain';
 
 describe('StatusDescription component', () => {
   let props;
@@ -13,15 +13,16 @@ describe('StatusDescription component', () => {
   describe('Shallow tests', () => {
     beforeEach(() => {
       props = {
-        name: 'example.com',
         status: 'unverified',
         readyFor: {
           sending: false,
           bounce: false,
           dkim: false
         },
-        shared: false,
-        bounceDefault: false
+        domain: {
+          shared_with_subaccounts: false,
+          is_default_bounce_domain: false
+        }
       };
       wrapper = shallow(<StatusDescription {...props} />);
     });
@@ -36,12 +37,7 @@ describe('StatusDescription component', () => {
     });
 
     it('renders subaccount details', () => {
-      wrapper.setProps({ subaccount: 101 });
-      expect(wrapper).toMatchSnapshot();
-    });
-
-    it('renders subaccount sharing details', () => {
-      wrapper.setProps({ shared: true });
+      wrapper.setProps({ domain: { ...props.domain, subaccount_id: 101 }});
       expect(wrapper).toMatchSnapshot();
     });
   });

@@ -4,7 +4,11 @@ exports[`StatusDescription component Shallow tests does not render subaccount de
 <React.Fragment>
   <Panel.Section>
     <LabelledValue
-      label="Status"
+      label={
+        <StatusTooltip>
+          Status
+        </StatusTooltip>
+      }
     >
       <DomainStatusTag
         status="unverified"
@@ -24,7 +28,11 @@ exports[`StatusDescription component Shallow tests renders subaccount details 1`
 <React.Fragment>
   <Panel.Section>
     <LabelledValue
-      label="Status"
+      label={
+        <StatusTooltip>
+          Status
+        </StatusTooltip>
+      }
     >
       <DomainStatusTag
         status="unverified"
@@ -42,37 +50,7 @@ exports[`StatusDescription component Shallow tests renders subaccount details 1`
       label="Subaccount"
     >
       <SubaccountTag
-        all={false}
         id={101}
-      />
-    </LabelledValue>
-  </Panel.Section>
-</React.Fragment>
-`;
-
-exports[`StatusDescription component Shallow tests renders subaccount sharing details 1`] = `
-<React.Fragment>
-  <Panel.Section>
-    <LabelledValue
-      label="Status"
-    >
-      <DomainStatusTag
-        status="unverified"
-      />
-      <ReadyFor
-        bounce={false}
-        bounceDefault={false}
-        dkim={false}
-        sending={false}
-      />
-    </LabelledValue>
-  </Panel.Section>
-  <Panel.Section>
-    <LabelledValue
-      label="Subaccount"
-    >
-      <SubaccountTag
-        all={true}
       />
     </LabelledValue>
   </Panel.Section>
@@ -83,7 +61,11 @@ exports[`StatusDescription component Shallow tests renders verification status c
 <React.Fragment>
   <Panel.Section>
     <LabelledValue
-      label="Status"
+      label={
+        <StatusTooltip>
+          Status
+        </StatusTooltip>
+      }
     >
       <DomainStatusTag
         status="blocked"
@@ -103,7 +85,11 @@ exports[`StatusDescription component Shallow tests renders verification status c
 <React.Fragment>
   <Panel.Section>
     <LabelledValue
-      label="Status"
+      label={
+        <StatusTooltip>
+          Status
+        </StatusTooltip>
+      }
     >
       <DomainStatusTag
         status="pending"
@@ -123,7 +109,11 @@ exports[`StatusDescription component Shallow tests renders verification status c
 <React.Fragment>
   <Panel.Section>
     <LabelledValue
-      label="Status"
+      label={
+        <StatusTooltip>
+          Status
+        </StatusTooltip>
+      }
     >
       <DomainStatusTag
         status="unverified"
@@ -143,7 +133,11 @@ exports[`StatusDescription component Shallow tests renders verification status c
 <React.Fragment>
   <Panel.Section>
     <LabelledValue
-      label="Status"
+      label={
+        <StatusTooltip>
+          Status
+        </StatusTooltip>
+      }
     >
       <ReadyFor
         bounce={false}
