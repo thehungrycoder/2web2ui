@@ -37,9 +37,11 @@ export class EditBounce extends Component {
   toggleDefaultBounce = () => {
     const { id, update, domain, showAlert, reset } = this.props;
 
-    return update(id, {
+    return update({
+      id,
+      subaccount: domain.subaccount_id,
       is_default_bounce_domain: !domain.is_default_bounce_domain
-    }, domain.subaccount_id)
+    })
       .catch((err) => {
         showAlert({ type: 'error', message: `Failed to update default bounce option. ${err.message}` });
         reset();

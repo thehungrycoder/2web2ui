@@ -102,11 +102,11 @@ describe('Component: EditBounce', () => {
   describe('toggleDefaultBounce', () => {
     it('calls update with toggled value', async() => {
       await instance.toggleDefaultBounce();
-      expect(props.update).toHaveBeenCalledWith(props.id, { is_default_bounce_domain: true }, 100);
+      expect(props.update).toHaveBeenCalledWith({ id: props.id, subaccount: 100, is_default_bounce_domain: true });
 
       props.domain.is_default_bounce_domain = true;
       await instance.toggleDefaultBounce();
-      expect(props.update).toHaveBeenCalledWith(props.id, { is_default_bounce_domain: false }, 100);
+      expect(props.update).toHaveBeenCalledWith({ id: props.id, subaccount: 100, is_default_bounce_domain: false });
     });
 
     it('alerts on error and reset form', async() => {
@@ -115,7 +115,7 @@ describe('Component: EditBounce', () => {
 
       await instance.toggleDefaultBounce();
       expect(props.update).toHaveBeenCalledTimes(1);
-      expect(props.update).toHaveBeenCalledWith(props.id, { is_default_bounce_domain: true }, 100);
+      expect(props.update).toHaveBeenCalledWith({ id: props.id, subaccount: 100, is_default_bounce_domain: true });
       expect(props.showAlert).toHaveBeenCalledTimes(1);
       expect(props.showAlert.mock.calls[0][0].type).toEqual('error');
       expect(props.reset).toHaveBeenCalledTimes(1);
