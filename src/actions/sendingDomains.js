@@ -35,7 +35,7 @@ export function create(data) {
   });
 }
 
-export function verify(id, type, subaccount) {
+export function verify({ id, type, subaccount }) {
   const headers = setSubaccountHeader(subaccount);
   const data = {};
 

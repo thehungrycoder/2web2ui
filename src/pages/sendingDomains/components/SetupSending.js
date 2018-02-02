@@ -2,28 +2,40 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import { Panel, Grid, Banner, Table, Icon, Button } from '@sparkpost/matchbox';
+// components
+import { Panel, Grid, Banner, Icon, Button } from '@sparkpost/matchbox';
+import { LongTextContainer } from 'src/components';
+import SimpleTable from './SimpleTable';
 import { SendingDomainSection } from './SendingDomainSection';
+
+// actions
 import { showAlert } from 'src/actions/globalAlert';
-import { resolveReadyFor } from 'src/helpers/domains';
 import { verify } from 'src/actions/sendingDomains';
+
+import { resolveReadyFor } from 'src/helpers/domains';
 import config from 'src/config';
-import styles from './SendingDomainSection.module.scss';
+import styles from './SetupSending.module.scss';
 
 export class SetupSending extends Component {
+  showErrorAlert = ({ message }) => {
+    const { id, showAlert } = this.props;
+
+    showAlert({ type: 'error', message: `Unable to verify DKIM record of ${id}. ${message}` });
+  };
+
   verifyDomain = () => {
     const { id, subaccount, verify, showAlert } = this.props;
 
-    return verify(id, 'dkim', subaccount)
+    return verify({ id, type: 'dkim', subaccount })
       .then((results) => {
         const readyFor = resolveReadyFor(results);
         if (readyFor.dkim) {
           showAlert({ type: 'success', message: `You have successfully verified DKIM record of ${id}` });
         } else {
-          showAlert({ type: 'error', message: `Unable to verify DKIM record of ${id}. ${results.dns.dkim_error}` });
+          this.showErrorAlert({ message: results.dns.dkim_error });
         }
       }).catch((err) => {
-        showAlert({ type: 'error', message: `Unable to verify DKIM record of ${id}. ${err.message}` });
+        this.showErrorAlert({ message: err.message });
       });
   }
 
@@ -48,11 +60,10 @@ export class SetupSending extends Component {
 
   renderVerifyButton() {
     const { verifyLoading } = this.props;
+    const buttonText = verifyLoading ? 'Verifying...' : 'Verify TXT Record';
 
     return (
-      verifyLoading
-        ? <Button plain disabled={true}>Verifying...</Button>
-        : <Button plain onClick={this.verifyDomain}>Verify TXT Record</Button>
+      <Button plain disabled={verifyLoading} onClick={this.verifyDomain}>{buttonText}</Button>
     );
   }
 
@@ -62,50 +73,31 @@ export class SetupSending extends Component {
 
     return (
       readyFor.dkim
-        ? <Icon name="Check" style={{ color: 'green' }}/>
-        : <Icon name="Error" style={{ color: 'red' }}/>
+        ? <Icon name="Check" className={styles.GreenCheck}/>
+        : <Icon name="Error" className={styles.RedError}/>
     );
   }
 
   renderTxtRecordPanel() {
-    const { domain, id } = this.props;
+    const { domain: { dkimHostname, dkimValue }} = this.props;
+
+    // Headers
+    const typeHeader = <div style={{ width: 40 }}> Type </div>;
+    const hostnameHeader = <div style={{ width: 160 }}> Hostname </div>;
+    const valueHeader = <div style={{ width: 220 }}> Value <div style={{ float: 'right' }}> { this.renderVerifyButton() } </div></div>;
+    // Rows
+    const hostnameRow = <LongTextContainer text={dkimHostname}/>;
+    const valueRow = <LongTextContainer text={dkimValue}/>;
 
     return (
       <Panel sectioned>
-        <Table>
-          <tbody>
-            <Table.Row>
-              <Table.HeaderCell style={{ width: 8 }}/>
-              <Table.HeaderCell style={{ width: 70 }} className={styles.SendingDomainSection}>
-              Type
-              </Table.HeaderCell>
-              <Table.HeaderCell style={{ width: 160 }} className={styles.SendingDomainSection}>
-              Hostname
-              </Table.HeaderCell>
-              <Table.HeaderCell style={{ width: 220 }} className={styles.SendingDomainSection}>
-                Value <div style={{ float: 'right' }}> { this.renderVerifyButton() } </div>
-              </Table.HeaderCell>
-            </Table.Row>
-            <Table.Row>
-              <Table.Cell className={styles.SendingDomainSection}>
-                {this.renderIcon()}
-              </Table.Cell>
-              <Table.Cell className={styles.SendingDomainSection}>
-                TXT
-              </Table.Cell>
-              <Table.Cell className={styles.SendingDomainSection}>
-                {`${domain.dkim.selector}._domainkey.${id}`}
-              </Table.Cell>
-              <Table.Cell className={styles.SendingDomainSection}>
-                {`v=DKIM1; k=rsa; h=sha256; p=${domain.dkim.public}`}
-              </Table.Cell>
-            </Table.Row>
-          </tbody>
-        </Table>
+        <SimpleTable
+          header={[null, typeHeader, hostnameHeader, valueHeader]}
+          rows={ [[this.renderIcon(), 'TXT', hostnameRow, valueRow ]]}
+        />
       </Panel>
     );
   }
-
 
   render() {
     return (
@@ -123,7 +115,6 @@ export class SetupSending extends Component {
         </Grid>
       </SendingDomainSection>);
   }
-
 }
 
 const mapStateToProps = ({ sendingDomains: { verifyError, verifyLoading }}) => ({

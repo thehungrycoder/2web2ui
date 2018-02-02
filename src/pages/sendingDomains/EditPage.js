@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 
+import { selectDomain } from 'src/selectors/sendingDomains';
 import { get as getDomain } from 'src/actions/sendingDomains';
 import { Loading, ApiErrorBanner } from 'src/components';
 import SetupSending from './components/SetupSending';
@@ -58,10 +59,10 @@ export class EditPage extends Component {
   }
 }
 
-const mapStateToProps = ({ sendingDomains: { domain, getError, getLoading }}) => ({
-  domain,
-  getError,
-  getLoading
+const mapStateToProps = (state, props) => ({
+  getError: state.getError,
+  getLoading: state.getLoading,
+  domain: selectDomain(state, props)
 });
 
 export default withRouter(connect(mapStateToProps, { getDomain })(EditPage));

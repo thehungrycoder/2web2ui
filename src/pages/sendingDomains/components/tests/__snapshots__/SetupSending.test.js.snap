@@ -1,5 +1,106 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Component: SetupSending disables the verification button while submitting 1`] = `
+<Component
+  sectioned={true}
+  title="Set Up For Sending"
+>
+  <Grid>
+    <Grid.Column
+      md={4}
+      xs={12}
+    >
+      <p>
+        We recommend DNS verification, but if you don't have DNS access, you can 
+        <a>
+          set this domain up for sending via email
+        </a>
+        .
+      </p>
+    </Grid.Column>
+    <Grid.Column
+      md={8}
+      xs={12}
+    >
+      <Panel
+        sectioned={true}
+      >
+        <Component
+          header={
+            Array [
+              null,
+              <div
+                style={
+                  Object {
+                    "width": 40,
+                  }
+                }
+              >
+                 Type 
+              </div>,
+              <div
+                style={
+                  Object {
+                    "width": 160,
+                  }
+                }
+              >
+                 Hostname 
+              </div>,
+              <div
+                style={
+                  Object {
+                    "width": 220,
+                  }
+                }
+              >
+                 Value 
+                <div
+                  style={
+                    Object {
+                      "float": "right",
+                    }
+                  }
+                >
+                   
+                  <Button
+                    disabled={true}
+                    onClick={[Function]}
+                    plain={true}
+                    size="default"
+                  >
+                    Verifying...
+                  </Button>
+                   
+                </div>
+              </div>,
+            ]
+          }
+          rows={
+            Array [
+              Array [
+                <Icon
+                  className={undefined}
+                  name="Error"
+                  size={18}
+                />,
+                "TXT",
+                <LongTextContainer
+                  text="scph0118._domainkey.xyz.com"
+                />,
+                <LongTextContainer
+                  text="v=DKIM1; k=rsa; h=sha256; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC7J/mQAVP9pynvD79opV/GD495pJWTWmHaEMymBO55y52gu2D23/CHbLys0KXszTAPOVS9x3HdRByeE1jIx41sZkWwDzxcyZH2NP5Mw3zNQWO4CqSGqrVPuukjIy5N3jmZnJ/V3IOkKnC3A+j76iIG42cVOgzoekbM3ZXSfwag+wIDAQAB"
+                />,
+              ],
+            ]
+          }
+        />
+      </Panel>
+    </Grid.Column>
+  </Grid>
+</Component>
+`;
+
 exports[`Component: SetupSending renders correctly for unverified DKIM and invalid ownership with mailbox verification disabled 1`] = `
 <Component
   sectioned={true}
@@ -24,42 +125,36 @@ exports[`Component: SetupSending renders correctly for unverified DKIM and inval
       <Panel
         sectioned={true}
       >
-        <Table>
-          <tbody>
-            <Table.Row>
-              <Table.HeaderCell
+        <Component
+          header={
+            Array [
+              null,
+              <div
                 style={
                   Object {
-                    "width": 8,
-                  }
-                }
-              />
-              <Table.HeaderCell
-                style={
-                  Object {
-                    "width": 70,
+                    "width": 40,
                   }
                 }
               >
-                Type
-              </Table.HeaderCell>
-              <Table.HeaderCell
+                 Type 
+              </div>,
+              <div
                 style={
                   Object {
                     "width": 160,
                   }
                 }
               >
-                Hostname
-              </Table.HeaderCell>
-              <Table.HeaderCell
+                 Hostname 
+              </div>,
+              <div
                 style={
                   Object {
                     "width": 220,
                   }
                 }
               >
-                Value 
+                 Value 
                 <div
                   style={
                     Object {
@@ -69,6 +164,7 @@ exports[`Component: SetupSending renders correctly for unverified DKIM and inval
                 >
                    
                   <Button
+                    disabled={false}
                     onClick={[Function]}
                     plain={true}
                     size="default"
@@ -77,32 +173,28 @@ exports[`Component: SetupSending renders correctly for unverified DKIM and inval
                   </Button>
                    
                 </div>
-              </Table.HeaderCell>
-            </Table.Row>
-            <Table.Row>
-              <Table.Cell>
+              </div>,
+            ]
+          }
+          rows={
+            Array [
+              Array [
                 <Icon
+                  className={undefined}
                   name="Error"
                   size={18}
-                  style={
-                    Object {
-                      "color": "red",
-                    }
-                  }
-                />
-              </Table.Cell>
-              <Table.Cell>
-                TXT
-              </Table.Cell>
-              <Table.Cell>
-                scph0118._domainkey.xyz.com
-              </Table.Cell>
-              <Table.Cell>
-                v=DKIM1; k=rsa; h=sha256; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC7J/mQAVP9pynvD79opV/GD495pJWTWmHaEMymBO55y52gu2D23/CHbLys0KXszTAPOVS9x3HdRByeE1jIx41sZkWwDzxcyZH2NP5Mw3zNQWO4CqSGqrVPuukjIy5N3jmZnJ/V3IOkKnC3A+j76iIG42cVOgzoekbM3ZXSfwag+wIDAQAB
-              </Table.Cell>
-            </Table.Row>
-          </tbody>
-        </Table>
+                />,
+                "TXT",
+                <LongTextContainer
+                  text="scph0118._domainkey.xyz.com"
+                />,
+                <LongTextContainer
+                  text="v=DKIM1; k=rsa; h=sha256; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC7J/mQAVP9pynvD79opV/GD495pJWTWmHaEMymBO55y52gu2D23/CHbLys0KXszTAPOVS9x3HdRByeE1jIx41sZkWwDzxcyZH2NP5Mw3zNQWO4CqSGqrVPuukjIy5N3jmZnJ/V3IOkKnC3A+j76iIG42cVOgzoekbM3ZXSfwag+wIDAQAB"
+                />,
+              ],
+            ]
+          }
+        />
       </Panel>
     </Grid.Column>
   </Grid>
@@ -134,42 +226,36 @@ exports[`Component: SetupSending renders correctly for unverified DKIM and inval
       <Panel
         sectioned={true}
       >
-        <Table>
-          <tbody>
-            <Table.Row>
-              <Table.HeaderCell
+        <Component
+          header={
+            Array [
+              null,
+              <div
                 style={
                   Object {
-                    "width": 8,
-                  }
-                }
-              />
-              <Table.HeaderCell
-                style={
-                  Object {
-                    "width": 70,
+                    "width": 40,
                   }
                 }
               >
-                Type
-              </Table.HeaderCell>
-              <Table.HeaderCell
+                 Type 
+              </div>,
+              <div
                 style={
                   Object {
                     "width": 160,
                   }
                 }
               >
-                Hostname
-              </Table.HeaderCell>
-              <Table.HeaderCell
+                 Hostname 
+              </div>,
+              <div
                 style={
                   Object {
                     "width": 220,
                   }
                 }
               >
-                Value 
+                 Value 
                 <div
                   style={
                     Object {
@@ -179,6 +265,7 @@ exports[`Component: SetupSending renders correctly for unverified DKIM and inval
                 >
                    
                   <Button
+                    disabled={false}
                     onClick={[Function]}
                     plain={true}
                     size="default"
@@ -187,32 +274,28 @@ exports[`Component: SetupSending renders correctly for unverified DKIM and inval
                   </Button>
                    
                 </div>
-              </Table.HeaderCell>
-            </Table.Row>
-            <Table.Row>
-              <Table.Cell>
+              </div>,
+            ]
+          }
+          rows={
+            Array [
+              Array [
                 <Icon
+                  className={undefined}
                   name="Error"
                   size={18}
-                  style={
-                    Object {
-                      "color": "red",
-                    }
-                  }
-                />
-              </Table.Cell>
-              <Table.Cell>
-                TXT
-              </Table.Cell>
-              <Table.Cell>
-                scph0118._domainkey.xyz.com
-              </Table.Cell>
-              <Table.Cell>
-                v=DKIM1; k=rsa; h=sha256; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC7J/mQAVP9pynvD79opV/GD495pJWTWmHaEMymBO55y52gu2D23/CHbLys0KXszTAPOVS9x3HdRByeE1jIx41sZkWwDzxcyZH2NP5Mw3zNQWO4CqSGqrVPuukjIy5N3jmZnJ/V3IOkKnC3A+j76iIG42cVOgzoekbM3ZXSfwag+wIDAQAB
-              </Table.Cell>
-            </Table.Row>
-          </tbody>
-        </Table>
+                />,
+                "TXT",
+                <LongTextContainer
+                  text="scph0118._domainkey.xyz.com"
+                />,
+                <LongTextContainer
+                  text="v=DKIM1; k=rsa; h=sha256; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC7J/mQAVP9pynvD79opV/GD495pJWTWmHaEMymBO55y52gu2D23/CHbLys0KXszTAPOVS9x3HdRByeE1jIx41sZkWwDzxcyZH2NP5Mw3zNQWO4CqSGqrVPuukjIy5N3jmZnJ/V3IOkKnC3A+j76iIG42cVOgzoekbM3ZXSfwag+wIDAQAB"
+                />,
+              ],
+            ]
+          }
+        />
       </Panel>
     </Grid.Column>
   </Grid>
@@ -240,42 +323,36 @@ exports[`Component: SetupSending renders correctly when ownership and DKIM are v
       <Panel
         sectioned={true}
       >
-        <Table>
-          <tbody>
-            <Table.Row>
-              <Table.HeaderCell
+        <Component
+          header={
+            Array [
+              null,
+              <div
                 style={
                   Object {
-                    "width": 8,
-                  }
-                }
-              />
-              <Table.HeaderCell
-                style={
-                  Object {
-                    "width": 70,
+                    "width": 40,
                   }
                 }
               >
-                Type
-              </Table.HeaderCell>
-              <Table.HeaderCell
+                 Type 
+              </div>,
+              <div
                 style={
                   Object {
                     "width": 160,
                   }
                 }
               >
-                Hostname
-              </Table.HeaderCell>
-              <Table.HeaderCell
+                 Hostname 
+              </div>,
+              <div
                 style={
                   Object {
                     "width": 220,
                   }
                 }
               >
-                Value 
+                 Value 
                 <div
                   style={
                     Object {
@@ -285,6 +362,7 @@ exports[`Component: SetupSending renders correctly when ownership and DKIM are v
                 >
                    
                   <Button
+                    disabled={false}
                     onClick={[Function]}
                     plain={true}
                     size="default"
@@ -293,32 +371,28 @@ exports[`Component: SetupSending renders correctly when ownership and DKIM are v
                   </Button>
                    
                 </div>
-              </Table.HeaderCell>
-            </Table.Row>
-            <Table.Row>
-              <Table.Cell>
+              </div>,
+            ]
+          }
+          rows={
+            Array [
+              Array [
                 <Icon
+                  className={undefined}
                   name="Check"
                   size={18}
-                  style={
-                    Object {
-                      "color": "green",
-                    }
-                  }
-                />
-              </Table.Cell>
-              <Table.Cell>
-                TXT
-              </Table.Cell>
-              <Table.Cell>
-                scph0118._domainkey.xyz.com
-              </Table.Cell>
-              <Table.Cell>
-                v=DKIM1; k=rsa; h=sha256; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC7J/mQAVP9pynvD79opV/GD495pJWTWmHaEMymBO55y52gu2D23/CHbLys0KXszTAPOVS9x3HdRByeE1jIx41sZkWwDzxcyZH2NP5Mw3zNQWO4CqSGqrVPuukjIy5N3jmZnJ/V3IOkKnC3A+j76iIG42cVOgzoekbM3ZXSfwag+wIDAQAB
-              </Table.Cell>
-            </Table.Row>
-          </tbody>
-        </Table>
+                />,
+                "TXT",
+                <LongTextContainer
+                  text="scph0118._domainkey.xyz.com"
+                />,
+                <LongTextContainer
+                  text="v=DKIM1; k=rsa; h=sha256; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC7J/mQAVP9pynvD79opV/GD495pJWTWmHaEMymBO55y52gu2D23/CHbLys0KXszTAPOVS9x3HdRByeE1jIx41sZkWwDzxcyZH2NP5Mw3zNQWO4CqSGqrVPuukjIy5N3jmZnJ/V3IOkKnC3A+j76iIG42cVOgzoekbM3ZXSfwag+wIDAQAB"
+                />,
+              ],
+            ]
+          }
+        />
       </Panel>
     </Grid.Column>
   </Grid>
@@ -348,42 +422,36 @@ exports[`Component: SetupSending renders correctly when ownership is valid and D
       <Panel
         sectioned={true}
       >
-        <Table>
-          <tbody>
-            <Table.Row>
-              <Table.HeaderCell
+        <Component
+          header={
+            Array [
+              null,
+              <div
                 style={
                   Object {
-                    "width": 8,
-                  }
-                }
-              />
-              <Table.HeaderCell
-                style={
-                  Object {
-                    "width": 70,
+                    "width": 40,
                   }
                 }
               >
-                Type
-              </Table.HeaderCell>
-              <Table.HeaderCell
+                 Type 
+              </div>,
+              <div
                 style={
                   Object {
                     "width": 160,
                   }
                 }
               >
-                Hostname
-              </Table.HeaderCell>
-              <Table.HeaderCell
+                 Hostname 
+              </div>,
+              <div
                 style={
                   Object {
                     "width": 220,
                   }
                 }
               >
-                Value 
+                 Value 
                 <div
                   style={
                     Object {
@@ -393,6 +461,7 @@ exports[`Component: SetupSending renders correctly when ownership is valid and D
                 >
                    
                   <Button
+                    disabled={false}
                     onClick={[Function]}
                     plain={true}
                     size="default"
@@ -401,32 +470,28 @@ exports[`Component: SetupSending renders correctly when ownership is valid and D
                   </Button>
                    
                 </div>
-              </Table.HeaderCell>
-            </Table.Row>
-            <Table.Row>
-              <Table.Cell>
+              </div>,
+            ]
+          }
+          rows={
+            Array [
+              Array [
                 <Icon
+                  className={undefined}
                   name="Error"
                   size={18}
-                  style={
-                    Object {
-                      "color": "red",
-                    }
-                  }
-                />
-              </Table.Cell>
-              <Table.Cell>
-                TXT
-              </Table.Cell>
-              <Table.Cell>
-                scph0118._domainkey.xyz.com
-              </Table.Cell>
-              <Table.Cell>
-                v=DKIM1; k=rsa; h=sha256; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC7J/mQAVP9pynvD79opV/GD495pJWTWmHaEMymBO55y52gu2D23/CHbLys0KXszTAPOVS9x3HdRByeE1jIx41sZkWwDzxcyZH2NP5Mw3zNQWO4CqSGqrVPuukjIy5N3jmZnJ/V3IOkKnC3A+j76iIG42cVOgzoekbM3ZXSfwag+wIDAQAB
-              </Table.Cell>
-            </Table.Row>
-          </tbody>
-        </Table>
+                />,
+                "TXT",
+                <LongTextContainer
+                  text="scph0118._domainkey.xyz.com"
+                />,
+                <LongTextContainer
+                  text="v=DKIM1; k=rsa; h=sha256; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC7J/mQAVP9pynvD79opV/GD495pJWTWmHaEMymBO55y52gu2D23/CHbLys0KXszTAPOVS9x3HdRByeE1jIx41sZkWwDzxcyZH2NP5Mw3zNQWO4CqSGqrVPuukjIy5N3jmZnJ/V3IOkKnC3A+j76iIG42cVOgzoekbM3ZXSfwag+wIDAQAB"
+                />,
+              ],
+            ]
+          }
+        />
       </Panel>
     </Grid.Column>
   </Grid>
