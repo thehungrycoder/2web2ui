@@ -169,6 +169,9 @@ Array [
     <SubaccountTag
       all={false}
       id={101}
+      isDefault={false}
+      master={false}
+      receiveAll={false}
     />,
   ],
   Array [
@@ -183,7 +186,10 @@ Array [
     "2017-08-10T14:15:16+00:00",
     <SubaccountTag
       all={true}
-      id={undefined}
+      id={null}
+      isDefault={false}
+      master={false}
+      receiveAll={false}
     />,
   ],
   Array [

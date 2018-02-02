@@ -1,6 +1,7 @@
 import { createSelector } from 'reselect';
 import { Link } from 'react-router-dom';
 import qs from 'query-string';
+import _ from 'lodash';
 
 const formatSubaccount = ({ compliance_status = 'active', status = 'active', ...rest }) => {
   const compliance = compliance_status !== 'active';
@@ -20,7 +21,7 @@ export const selectSubaccount = ({ subaccounts }) => (formatSubaccount(subaccoun
 
 export const getSubaccountIdFromProps = (state, props) => props.id;
 export const getSubaccountIdFromParams = (state, props) => props.match.params.id;
-export const getSubaccountIdFromQuery = (props) => qs.parse(props.location.search).subaccount;
+export const selectSubaccountIdFromQuery = (state, props) => qs.parse(props.location.search).subaccount;
 
 export const selectDetailTabs = createSelector(
   [getSubaccountIdFromParams],
@@ -36,4 +37,14 @@ export const selectDetailTabs = createSelector(
       to: `/account/subaccounts/${id}/api-keys`
     }
   ])
+);
+
+/*
+ * Selects subaccount object from qp
+ * Used to fill in initial values for the subaccount typeahead
+ */
+export const getSubaccounts = (state) => state.subaccounts.list;
+export const selectSubaccountFromQuery = createSelector(
+  [getSubaccounts, selectSubaccountIdFromQuery],
+  (subaccounts, id) => _.find(subaccounts, { id: Number(id) })
 );

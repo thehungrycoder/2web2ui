@@ -3,14 +3,17 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Page } from '@sparkpost/matchbox';
 import { listApiKeys, hideNewApiKey } from 'src/actions/api-keys';
-import { Loading, TableCollection, ApiErrorBanner, ApiKeySuccessBanner } from 'src/components';
-import { getRowData, columns, filterBoxConfig } from './tableConfig';
+import { Loading, SubaccountTag, TableCollection, ApiErrorBanner, ApiKeySuccessBanner } from 'src/components';
+import { filterBoxConfig } from './tableConfig';
+import { hasSubaccounts } from 'src/selectors/subaccounts';
+import { setSubaccountQuery } from 'src/helpers/subaccounts';
 
 const primaryAction = {
   content: 'Create API Key',
   Component: Link,
   to: '/account/api-keys/create'
 };
+
 
 export class ListPage extends Component {
   state = { copied: false };
@@ -22,6 +25,34 @@ export class ListPage extends Component {
 
   componentDidMount() {
     this.props.listApiKeys();
+  }
+
+  getRowData = ({ id, label, short_key, subaccount_id }) => {
+    const { hasSubaccounts } = this.props;
+    const rowData = [
+      <Link to={`/account/api-keys/details/${id}${setSubaccountQuery(subaccount_id)}`}>{label}</Link>,
+      <code>{short_key}••••••••</code>
+    ];
+
+    if (hasSubaccounts) {
+      rowData.push(<SubaccountTag id={subaccount_id} />);
+    }
+
+    return rowData;
+  };
+
+  getColumns = () => {
+    const { hasSubaccounts } = this.props;
+    const columns = [
+      { label: 'Name', width: '40%', sortKey: 'label' },
+      { label: 'Key' }
+    ];
+
+    if (hasSubaccounts) {
+      columns.push({ label: 'Subaccount', width: '20%', sortKey: 'subaccount_id' });
+    }
+
+    return columns;
   }
 
   onReloadApiBanner = () => {
@@ -41,8 +72,8 @@ export class ListPage extends Component {
 
     return (
       <TableCollection
-        columns={columns}
-        getRowData={getRowData}
+        columns={this.getColumns()}
+        getRowData={this.getRowData}
         pagination={true}
         rows={keys}
         filterBox={filterBoxConfig}
@@ -90,6 +121,7 @@ const mapStateToProps = (state) => {
   const { error, keys, newKey, keysLoading } = state.apiKeys;
   return {
     count: keys.length,
+    hasSubaccounts: hasSubaccounts(state),
     keys,
     error,
     newKey,

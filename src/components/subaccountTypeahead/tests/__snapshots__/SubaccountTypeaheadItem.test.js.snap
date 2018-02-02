@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Subaccount Typeahead Item should render correctly 1`] = `
+<div>
+  a name
+  <span>
+    101
+  </span>
+</div>
+`;

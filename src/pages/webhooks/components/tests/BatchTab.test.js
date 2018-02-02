@@ -4,32 +4,39 @@ import React from 'react';
 import { BatchTab } from '../BatchTab';
 
 describe('Webhook Component: Batch Status Tab', () => {
-  const props = {
-    getBatches: jest.fn(),
-    id: 'my-id',
-    batches: [
-      {
-        formatted_time: 'so-formatted',
-        batch_id: '243423423423',
-        status: 'p',
-        attempts: 1,
-        response_code: 200
-      },
-      {
-        formatted_time: 'so-formatted-2',
-        batch_id: '996969545',
-        status: 'f',
-        attempts: 4,
-        response_code: 500
-      }
-    ],
-    batchesLoading: false
-  };
-
   let wrapper;
 
   beforeEach(() => {
+    const props = {
+      getBatches: jest.fn(() => Promise.resolve()),
+      webhook: {
+        id: 'webhook-id'
+      },
+      batches: [
+        {
+          formatted_time: 'so-formatted',
+          batch_id: '243423423423',
+          status: 'p',
+          attempts: 1,
+          response_code: 200
+        },
+        {
+          formatted_time: 'so-formatted-2',
+          batch_id: '996969545',
+          status: 'f',
+          attempts: 4,
+          response_code: 500
+        }
+      ],
+      batchesLoading: false,
+      showAlert: jest.fn()
+    };
+
     wrapper = shallow(<BatchTab {...props} />);
+  });
+
+  afterEach(() => {
+    jest.resetAllMocks();
   });
 
   it('should render batch status tab with table data', () => {
@@ -37,7 +44,6 @@ describe('Webhook Component: Batch Status Tab', () => {
   });
 
   it('should show button text as Refreshing while refreshing data', () => {
-    wrapper.setState({ refreshing: true });
     wrapper.setProps({ batchesLoading: true });
     expect(wrapper).toMatchSnapshot();
   });
@@ -47,23 +53,33 @@ describe('Webhook Component: Batch Status Tab', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should show panel loading when batches are loading', () => {
-    wrapper.setProps({ batchesLoading: true });
-    expect(wrapper).toMatchSnapshot();
-  });
-
   it('should call getBatches in mounting', () => {
     const instance = wrapper.instance();
-    instance.componentDidMount();
-    expect(instance.props.getBatches).toHaveBeenCalledWith('my-id');
+    expect(instance.props.getBatches).toHaveBeenCalledWith({ id: instance.props.webhook.id, subaccount: undefined });
   });
 
   it('should getBatches when refreshing', () => {
     const instance = wrapper.instance();
-    const stateSpy = jest.spyOn(instance, 'setState');
     instance.refreshBatches();
-    expect(instance.props.getBatches).toHaveBeenCalledWith('my-id');
-    expect(stateSpy).toHaveBeenCalledWith({ refreshing: true });
+    expect(instance.props.getBatches).toHaveBeenCalledWith({ id: instance.props.webhook.id, subaccount: undefined });
+  });
+
+  it('should getBatches with a subaccount', () => {
+    wrapper.setProps({ webhook: { id: 'id-with-sub', subaccount: 101 }});
+    const instance = wrapper.instance();
+    instance.refreshBatches();
+    expect(instance.props.getBatches).toHaveBeenCalledWith({
+      id: instance.props.webhook.id,
+      subaccount: instance.props.webhook.subaccount
+    });
+  });
+
+  it('should fail getBatches correctly', async() => {
+    wrapper.setProps({ getBatches: jest.fn(() => Promise.reject({ message: 'error' })) });
+    const instance = wrapper.instance();
+    await instance.refreshBatches();
+    expect(instance.props.getBatches).toHaveBeenCalled();
+    expect(instance.props.showAlert).toHaveBeenCalledWith({ details: 'error', message: 'Unable to refresh webhook batches', type: 'error' });
   });
 
 });

@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Webhooks ResponseBlock Component should render correctly with a response 1`] = `
+<Panel.Section>
+  <p>
+    The server responded like this:
+  </p>
+  <code>
+    <TextField
+      multiline={true}
+      readOnly={true}
+      required={false}
+      resize="both"
+      rows={12}
+      type="text"
+      value="{
+  \\"status\\": 200
+}"
+    />
+  </code>
+</Panel.Section>
+`;

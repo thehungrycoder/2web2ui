@@ -23,8 +23,8 @@ export class CreateForm extends Component {
             />
             <Field
               component={SubaccountTypeaheadWrapper}
-              label='Assign to Subaccount'
               name='subaccount'
+              helpText='Leaving this field blank will permanently assign the tracking domain to the master account.'
               disabled={submitting}
             />
             <Button submit primary={true} disabled={submitting}>{submitting ? 'Submitting...' : 'Add Tracking Domain'}</Button>
@@ -38,5 +38,6 @@ export class CreateForm extends Component {
 const formOptions = {
   form: 'createTrackingDomain'
 };
+
 
 export default reduxForm(formOptions)(CreateForm);

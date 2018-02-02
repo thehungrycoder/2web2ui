@@ -512,8 +512,11 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
           status="unverified"
         />
         <SubaccountTag
+          all={false}
           id={100}
           isDefault={false}
+          master={false}
+          receiveAll={false}
         />
       </div>
     </Grid.Column>
@@ -588,8 +591,11 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
           status="blocked"
         />
         <SubaccountTag
+          all={false}
           id={100}
           isDefault={false}
+          master={false}
+          receiveAll={false}
         />
       </div>
     </Grid.Column>
@@ -657,8 +663,11 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
           status="unverified"
         />
         <SubaccountTag
+          all={false}
           id={100}
           isDefault={true}
+          master={false}
+          receiveAll={false}
         />
       </div>
     </Grid.Column>
@@ -736,8 +745,11 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
       </span>
       <div>
         <SubaccountTag
+          all={false}
           id={100}
           isDefault={true}
+          master={false}
+          receiveAll={false}
         />
       </div>
     </Grid.Column>
@@ -814,8 +826,11 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
           status="unverified"
         />
         <SubaccountTag
+          all={false}
           id={100}
           isDefault={false}
+          master={false}
+          receiveAll={false}
         />
       </div>
     </Grid.Column>
@@ -887,8 +902,11 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
       </span>
       <div>
         <SubaccountTag
+          all={false}
           id={100}
           isDefault={false}
+          master={false}
+          receiveAll={false}
         />
       </div>
     </Grid.Column>
@@ -959,8 +977,11 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
           status="pending"
         />
         <SubaccountTag
+          all={false}
           id={100}
           isDefault={false}
+          master={false}
+          receiveAll={false}
         />
       </div>
     </Grid.Column>

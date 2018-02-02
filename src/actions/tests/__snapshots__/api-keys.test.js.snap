@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`listApiKeys() dispatches the correct action 1`] = `
+exports[`Action Creator: Api Keys listApiKeys() dispatches the correct action 1`] = `
 Array [
   Object {
     "meta": Object {
@@ -13,7 +13,7 @@ Array [
 ]
 `;
 
-exports[`listGrants() dispatches the correct action 1`] = `
+exports[`Action Creator: Api Keys listGrants() dispatches the correct action 1`] = `
 Array [
   Object {
     "meta": Object {

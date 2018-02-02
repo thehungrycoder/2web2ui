@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Webhooks RequestBlock Component should render correctly 1`] = `
+<div>
+  <p>
+    The test sends the following request to this webhook's target URL (
+    www.phoenix.co
+    )
+  </p>
+  <code>
+    <TextField
+      multiline={true}
+      readOnly={true}
+      required={false}
+      resize="both"
+      rows={6}
+      type="text"
+      value="value"
+    />
+  </code>
+</div>
+`;

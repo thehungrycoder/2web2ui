@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Webhooks SubaccountSection on create should render radio group 1`] = `
+<div>
+  <Field
+    component={[Function]}
+    name="assignTo"
+    options={
+      Array [
+        Object {
+          "label": "Master account only",
+          "value": "master",
+        },
+        Object {
+          "label": "Master and all subaccounts",
+          "value": "all",
+        },
+        Object {
+          "label": "Single Subaccount",
+          "value": "subaccount",
+        },
+      ]
+    }
+    title="Receive events from:"
+  />
+</div>
+`;
+
+exports[`Webhooks SubaccountSection on create should render subaccount typeahead 1`] = `
+<Field
+  component={[Function]}
+  name="subaccount"
+  validate={[Function]}
+/>
+`;
+
+exports[`Webhooks SubaccountSection on edit should render a disabled subaccount field 1`] = `
+<Field
+  component={[Function]}
+  disabled={true}
+  helpText="This assignment is permanent."
+  label="Receive events from"
+  name="subaccount"
+/>
+`;
+
+exports[`Webhooks SubaccountSection on edit should render toggle block if subaccount is a string 1`] = `
+<Field
+  component={[Function]}
+  disabled={true}
+  helpText="This assignment is permanent."
+  label="Receive events from"
+  name="subaccount"
+/>
+`;
