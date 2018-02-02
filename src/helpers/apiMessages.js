@@ -14,6 +14,10 @@ const errorDesc = (error) => error.description ? error.description : error.messa
 // from sparkpostApiRequest()
 export const apiResponseToAlert = (response, message) => {
   const unpacked = unpackResponse(response);
-  const details = errorDesc(firstError(unpacked));
-  return { type: 'error', message, details };
+  const err = firstError(unpacked);
+  if (err) {
+    const details = errorDesc(firstError(unpacked));
+    return { type: 'error', message, details };
+  }
+  return { type: 'success', message };
 };
