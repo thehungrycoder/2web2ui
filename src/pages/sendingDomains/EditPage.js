@@ -3,11 +3,13 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 
+import { selectDomain } from 'src/selectors/sendingDomains';
 import { get as getDomain } from 'src/actions/sendingDomains';
 import { Loading, ApiErrorBanner } from 'src/components';
 import { Page } from '@sparkpost/matchbox';
 import AssignTrackingDomain from './components/AssignTrackingDomain';
 import EditBounce from './components/EditBounce';
+import SetupSending from './components/SetupSending';
 
 const breadcrumbAction = {
   content: 'Sending Domains',
@@ -30,6 +32,7 @@ export class EditPage extends Component {
 
     return (
       <div>
+        <SetupSending domain={domain} />
         <EditBounce id={id} domain={domain} />
         <AssignTrackingDomain domain={domain} />
       </div>
@@ -63,9 +66,9 @@ export class EditPage extends Component {
   }
 }
 
-const mapStateToProps = ({ sendingDomains: { domain, getError }}) => ({
-  domain,
-  getError
+const mapStateToProps = (state, props) => ({
+  getError: state.sendingDomains.getError,
+  domain: selectDomain(state, props)
 });
 
 

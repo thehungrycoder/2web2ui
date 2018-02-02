@@ -1,4 +1,4 @@
-const initialState = { list: [], listError: null, getError: null, domain: {}};
+const initialState = { list: [], listError: null, getError: null, verifyError: null, domain: { dkim: {}, status: {}}};
 
 export default (state = initialState, { type, payload, meta }) => {
   switch (type) {

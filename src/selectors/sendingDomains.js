@@ -4,6 +4,16 @@ import _ from 'lodash';
 
 export const isVerified = (domain) => domain.status.ownership_verified && domain.status.compliance_status === 'valid';
 export const getDomains = (state) => state.sendingDomains.list;
+export const getDomain = (state, props) => ({ ...state.sendingDomains.domain, id: props.match.params.id });
+
+export const selectDomain = createSelector(
+  [getDomain],
+  (domain) => ({
+    ...domain,
+    dkimHostname: `${domain.dkim.selector}._domainkey.${domain.id}`,
+    dkimValue: `v=DKIM1; k=rsa; h=sha256; p=${domain.dkim.public}`
+  })
+);
 
 export const selectVerifiedDomains = createSelector(
   [getDomains],

@@ -1,8 +1,14 @@
-import { selectVerifiedDomains, selectReadyForBounce, hasUnverifiedDomains } from '../sendingDomains';
+import { selectVerifiedDomains, selectReadyForBounce, hasUnverifiedDomains, selectDomain } from '../sendingDomains';
 
 describe('Selectors: sendingDomains', () => {
   const state = {
     sendingDomains: {
+      domain: {
+        dkim: {
+          selector: 'scph0118',
+          public: '123456789A'
+        }
+      },
       list: [
         {
           status: {
@@ -31,6 +37,14 @@ describe('Selectors: sendingDomains', () => {
       ]
     }
   };
+
+  const props = {
+    match: { params: { id: 'xyz.com' }}
+  };
+
+  it('should append DKIM keys to domain object', () => {
+    expect(selectDomain(state, props)).toMatchSnapshot();
+  });
 
   it('should return all verified domains', () => {
     expect(selectVerifiedDomains(state)).toMatchSnapshot();

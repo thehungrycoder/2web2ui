@@ -13,6 +13,15 @@ exports[`Sending Domains Edit Page renders correctly 1`] = `
   title="Edit abcd.com"
 >
   <div>
+    <withRouter(Connect(SetupSending))
+      domain={
+        Object {
+          "id": "abcd.com",
+          "subaccount_id": 100,
+          "tracking_domain": "track.me",
+        }
+      }
+    />
     <Connect(ReduxForm)
       domain={
         Object {
