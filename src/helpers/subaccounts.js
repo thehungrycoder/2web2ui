@@ -1,3 +1,3 @@
 export function setSubaccountQuery(id) {
-  return id ? `?subaccount=${id}` : '';
+  return typeof id !== 'undefined' ? `?subaccount=${id}` : '';
 }

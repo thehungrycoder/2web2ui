@@ -1,4 +1,4 @@
-/* eslint max-lines: ["error", 200] */
+/* eslint max-lines: ["error", 225] */
 import { shallow } from 'enzyme';
 import React from 'react';
 
@@ -12,7 +12,9 @@ describe('Page: Webhook Create', () => {
     history: {
       push: jest.fn()
     },
-    eventsLoading: false
+    eventsLoading: false,
+    showAlert: jest.fn(),
+    webhook: {}
   };
 
   let wrapper;
@@ -68,17 +70,29 @@ describe('Page: Webhook Create', () => {
   it('should call createWebhook on submit of form', () => {
     const createSpy = jest.spyOn(wrapper.instance(), 'createWebhook');
     wrapper.instance().createWebhook.mockImplementation(jest.fn());
-    wrapper.find('Connect(ReduxForm)').simulate('submit');
+    wrapper.find('withRouter(Connect(ReduxForm))').simulate('submit');
     expect(createSpy).toHaveBeenCalled();
   });
 
   describe('createWebhook tests', () => {
+    it('should handle create fail', async() => {
+      wrapper.setProps({ createWebhook: jest.fn(() => Promise.reject({ message: 'error' })) });
+      await wrapper.instance().createWebhook({
+        name: 'my webhook',
+        target: 'http://url.com'
+      }, [
+        { events: [{ key: 'event1' }]}
+      ]);
 
-    it('should redirect to a diff url on render', async() => {
+      expect(props.showAlert).toHaveBeenCalledWith({ 'details': 'error', 'message': 'Unable to create webhook', 'type': 'error' });
+    });
+
+    it('should redirect on create success, and receive events from only master', async() => {
       const instance = wrapper.instance();
       await instance.createWebhook({
         name: 'my webhook',
-        target: 'http://url.com'
+        target: 'http://url.com',
+        assignTo: 'master'
       }, [
         {
           events: [
@@ -89,15 +103,20 @@ describe('Page: Webhook Create', () => {
         }
       ]);
 
-      expect(instance.props.createWebhook).toHaveBeenCalledWith({
-        name: 'my webhook',
-        target: 'http://url.com',
-        events: ['event1', 'event2', 'event3']
+      expect(props.createWebhook).toHaveBeenCalledWith({
+        subaccount: 0,
+        webhook: {
+          name: 'my webhook',
+          target: 'http://url.com',
+          events: ['event1', 'event2', 'event3']
+        }
       });
-      expect(instance.props.history.push).toHaveBeenCalledWith('/webhooks');
+      expect(props.showAlert).toHaveBeenCalledWith({ type: 'success', message: 'Webhook created' });
+      wrapper.setProps({ webhook: { id: 'webhook-updated-in-store', subaccount: 0 }}); // simulate redux updating the store
+      expect(props.history.push).toHaveBeenCalledWith('/webhooks/details/webhook-updated-in-store?subaccount=0');
     });
 
-    it('should only pass in checked events', async() => {
+    it('should only pass in checked events, and receive events from all', async() => {
       const instance = wrapper.instance();
       await instance.createWebhook({
         name: 'my webhook',
@@ -105,18 +124,22 @@ describe('Page: Webhook Create', () => {
         eventsRadio: 'select',
         message_event: ['foo', 'bar'],
         track_event: ['open', 'click'],
-        relay_event: ['relay']
+        relay_event: ['relay'],
+        assignTo: 'all'
       });
 
-      expect(instance.props.createWebhook).toHaveBeenCalledWith({
-        name: 'my webhook',
-        target: 'http://url.com',
-        events: ['foo', 'bar', 'open', 'click', 'relay']
+      expect(props.createWebhook).toHaveBeenCalledWith({
+        subaccount: undefined,
+        webhook: {
+          name: 'my webhook',
+          target: 'http://url.com',
+          events: ['foo', 'bar', 'open', 'click', 'relay']
+        }
       });
-      expect(instance.props.history.push).toHaveBeenCalledWith('/webhooks');
+      expect(props.showAlert).toHaveBeenCalledWith({ type: 'success', message: 'Webhook created' });
     });
 
-    it('should set appropriate values for basic auth webhook', async() => {
+    it('should set appropriate values for basic auth webhook, and receive events from single sub', async() => {
       const instance = wrapper.instance();
       await instance.createWebhook({
         name: 'my webhook',
@@ -125,20 +148,25 @@ describe('Page: Webhook Create', () => {
         message_event: ['event'],
         auth: 'basic',
         basicUser: 'user',
-        basicPass: 'pw'
+        basicPass: 'pw',
+        assignTo: 'subaccount',
+        subaccount: { id: 101 } // subaccount object from typeahead
       });
 
-      expect(instance.props.createWebhook).toHaveBeenCalledWith({
-        name: 'my webhook',
-        target: 'http://url.com',
-        events: ['event'],
-        auth_type: 'basic',
-        auth_credentials: {
-          username: 'user',
-          password: 'pw'
+      expect(props.createWebhook).toHaveBeenCalledWith({
+        subaccount: 101,
+        webhook: {
+          name: 'my webhook',
+          target: 'http://url.com',
+          events: ['event'],
+          auth_type: 'basic',
+          auth_credentials: {
+            username: 'user',
+            password: 'pw'
+          }
         }
       });
-      expect(instance.props.history.push).toHaveBeenCalledWith('/webhooks');
+      expect(props.showAlert).toHaveBeenCalledWith({ type: 'success', message: 'Webhook created' });
     });
 
     it('should set appropriate values for oauth2 webhook', async() => {
@@ -154,21 +182,22 @@ describe('Page: Webhook Create', () => {
         clientSecret: 'shhhh'
       });
 
-      expect(instance.props.createWebhook).toHaveBeenCalledWith({
-        name: 'my webhook',
-        target: 'http://url.com',
-        events: ['event'],
-        auth_type: 'oauth2',
-        auth_request_details: {
-          url: 'token',
-          body: {
-            client_id: 'client',
-            client_secret: 'shhhh'
+      expect(props.createWebhook).toHaveBeenCalledWith({
+        webhook: {
+          name: 'my webhook',
+          target: 'http://url.com',
+          events: ['event'],
+          auth_type: 'oauth2',
+          auth_request_details: {
+            url: 'token',
+            body: {
+              client_id: 'client',
+              client_secret: 'shhhh'
+            }
           }
         }
       });
-      expect(instance.props.history.push).toHaveBeenCalledWith('/webhooks');
-
+      expect(props.showAlert).toHaveBeenCalledWith({ type: 'success', message: 'Webhook created' });
     });
   });
 

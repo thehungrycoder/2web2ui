@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
 import { Panel } from '@sparkpost/matchbox';
-import { RadioGroup, SubaccountTypeaheadWrapper, TextFieldWrapper } from 'src/components';
+import { RadioGroup, SubaccountTypeaheadWrapper } from 'src/components';
 import ToggleBlock from 'src/components/toggleBlock/ToggleBlock';
 import { required } from 'src/helpers/validation';
 
@@ -37,7 +37,7 @@ export default class SubaccountSection extends Component {
     const { assignTo } = this.props;
 
     const typeahead = assignTo === 'subaccount'
-      ? <Field name='subaccount' component={SubaccountTypeaheadWrapper} validate={required} />
+      ? <Field name='subaccount' component={SubaccountTypeaheadWrapper} validate={required} helpText='This assignment is permanent.'/>
       : null;
 
     return (
@@ -58,9 +58,10 @@ export default class SubaccountSection extends Component {
     if (subaccountId) {
       return (
         <Field
-          component={TextFieldWrapper}
-          name='subaccount_id'
+          component={SubaccountTypeaheadWrapper}
+          name='subaccount'
           label='Subaccount'
+          helpText='This assignment is permanent.'
           disabled />
       );
     }

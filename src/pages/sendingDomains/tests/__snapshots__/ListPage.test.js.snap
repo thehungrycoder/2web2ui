@@ -185,8 +185,11 @@ Array [
       sending={true}
     />,
     <SubaccountTag
-      all={undefined}
+      all={false}
       id={3}
+      isDefault={false}
+      master={false}
+      receiveAll={false}
     />,
   ],
   Array [

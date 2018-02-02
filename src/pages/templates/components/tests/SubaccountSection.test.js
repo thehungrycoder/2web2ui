@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { RadioGroup, SubaccountTypeaheadWrapper, TextFieldWrapper } from 'src/components';
+import { RadioGroup, SubaccountTypeaheadWrapper } from 'src/components';
 import { Field } from 'redux-form';
 import SubaccountSection from '../SubaccountSection';
 import ToggleBlock from 'src/components/toggleBlock/ToggleBlock';
@@ -52,7 +52,7 @@ describe('Templates SubaccountSection', () => {
       wrapper = shallow(<SubaccountSection subaccountId={101} />);
 
       expect(wrapper).toMatchSnapshot();
-      expect(wrapper.find(Field).props().component).toEqual(TextFieldWrapper);
+      expect(wrapper.find(Field).props().component).toEqual(SubaccountTypeaheadWrapper);
     });
 
     it('should render toggle block if not assigned to subaccount', () => {

@@ -11,12 +11,6 @@ Object {
 }
 `;
 
-exports[`ApiKey Selectors gets initial subaccount 1`] = `
-Object {
-  "id": "subId",
-}
-`;
-
 exports[`ApiKey Selectors gets initial values 1`] = `
 Object {
   "grants": Object {
@@ -58,12 +52,6 @@ Array [
     "name": "key2",
   },
 ]
-`;
-
-exports[`ApiKey Selectors returns single api key 1`] = `
-Object {
-  "id": "Ape",
-}
 `;
 
 exports[`ApiKey Selectors should get all subaccount api keys 1`] = `Array []`;

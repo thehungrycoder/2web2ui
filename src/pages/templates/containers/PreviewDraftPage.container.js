@@ -4,12 +4,12 @@ import { withRouter } from 'react-router-dom';
 import { showAlert } from 'src/actions/globalAlert';
 import { getDraftAndPreview, sendPreview } from 'src/actions/templates';
 import { selectDraftTemplate, selectDraftTemplatePreview } from 'src/selectors/templates';
-import { getSubaccountIdFromQuery } from 'src/selectors/subaccounts';
+import { selectSubaccountIdFromQuery } from 'src/selectors/subaccounts';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
 import PreviewPage from '../PreviewPage';
 
 export const mapStateToProps = (state, props) => {
-  const subaccountId = getSubaccountIdFromQuery(props);
+  const subaccountId = selectSubaccountIdFromQuery(state, props);
   return {
     mode: 'draft',
     returnPath: `/templates/edit/${props.match.params.id}${setSubaccountQuery(subaccountId)}`,

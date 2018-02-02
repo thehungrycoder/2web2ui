@@ -1,5 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Webhooks selectors selectInitialSubaccountValue should get initial subaccount object 1`] = `
+Object {
+  "id": 501,
+  "name": "sub 2",
+}
+`;
+
 exports[`Webhooks selectors should add formatted_time and status to batches store 1`] = `
 Array [
   Object {

@@ -13,50 +13,48 @@ exports[`Page: Webhook Create should build proper events tree 1`] = `
   title="Create Webhook"
 >
   <Panel>
-    <Panel.Section>
-      <Connect(ReduxForm)
-        eventsTree={
-          Array [
-            Object {
-              "description": "desc for key 1",
-              "events": Array [
-                Object {
-                  "description": "desc for event 1",
-                  "key": "event1",
-                  "label": "Event 1",
-                },
-                Object {
-                  "description": "desc for event 2",
-                  "key": "event2",
-                  "label": "Event 2",
-                },
-              ],
-              "key": "key1",
-              "label": "Key 1",
-            },
-            Object {
-              "description": "desc for key 2",
-              "events": Array [
-                Object {
-                  "description": "desc for event 3",
-                  "key": "event3",
-                  "label": "Event 3",
-                },
-                Object {
-                  "description": "desc for event 4",
-                  "key": "event4",
-                  "label": "Event 4",
-                },
-              ],
-              "key": "key2",
-              "label": "Key 2",
-            },
-          ]
-        }
-        newWebhook={true}
-        onSubmit={[Function]}
-      />
-    </Panel.Section>
+    <withRouter(Connect(ReduxForm))
+      eventsTree={
+        Array [
+          Object {
+            "description": "desc for key 1",
+            "events": Array [
+              Object {
+                "description": "desc for event 1",
+                "key": "event1",
+                "label": "Event 1",
+              },
+              Object {
+                "description": "desc for event 2",
+                "key": "event2",
+                "label": "Event 2",
+              },
+            ],
+            "key": "key1",
+            "label": "Key 1",
+          },
+          Object {
+            "description": "desc for key 2",
+            "events": Array [
+              Object {
+                "description": "desc for event 3",
+                "key": "event3",
+                "label": "Event 3",
+              },
+              Object {
+                "description": "desc for event 4",
+                "key": "event4",
+                "label": "Event 4",
+              },
+            ],
+            "key": "key2",
+            "label": "Key 2",
+          },
+        ]
+      }
+      newWebhook={true}
+      onSubmit={[Function]}
+    />
   </Panel>
 </Page>
 `;
@@ -74,13 +72,11 @@ exports[`Page: Webhook Create should render happy path 1`] = `
   title="Create Webhook"
 >
   <Panel>
-    <Panel.Section>
-      <Connect(ReduxForm)
-        eventsTree={Array []}
-        newWebhook={true}
-        onSubmit={[Function]}
-      />
-    </Panel.Section>
+    <withRouter(Connect(ReduxForm))
+      eventsTree={Array []}
+      newWebhook={true}
+      onSubmit={[Function]}
+    />
   </Panel>
 </Page>
 `;

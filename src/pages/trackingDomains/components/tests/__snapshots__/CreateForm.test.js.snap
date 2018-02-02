@@ -23,7 +23,7 @@ exports[`Component: Tracking Domains Create Form should render correctly when su
       <Field
         component={[Function]}
         disabled={false}
-        label="Assign to Subaccount"
+        helpText="Leaving this field blank will permanently assign the tracking domain to the master account."
         name="subaccount"
       />
       <Button
@@ -62,7 +62,7 @@ exports[`Component: Tracking Domains Create Form should render correctly when su
       <Field
         component={[Function]}
         disabled={true}
-        label="Assign to Subaccount"
+        helpText="Leaving this field blank will permanently assign the tracking domain to the master account."
         name="subaccount"
       />
       <Button
