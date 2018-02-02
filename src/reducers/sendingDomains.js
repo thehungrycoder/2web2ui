@@ -20,7 +20,7 @@ export default (state = initialState, { type, payload, meta }) => {
       return { ...state, listError: payload, listLoading: false };
 
     case 'GET_SENDING_DOMAIN_PENDING':
-      return { ...state, getLoading: true, getError: null, domain: initialState.domain };
+      return { ...state, getLoading: true, getError: null };
 
     case 'GET_SENDING_DOMAIN_SUCCESS':
       return { ...state, domain: { id: meta.id, ...payload }, getLoading: false };

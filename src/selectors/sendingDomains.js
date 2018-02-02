@@ -4,7 +4,7 @@ import _ from 'lodash';
 
 export const isVerified = (domain) => domain.status.ownership_verified && domain.status.compliance_status === 'valid';
 export const getDomains = (state) => state.sendingDomains.list;
-export const getDomain = (state, props) => ({ ...state.sendingDomains.domain, id: props.match.params.id });
+export const getDomain = (state) => state.sendingDomains.domain;
 
 export const selectDomain = createSelector(
   [getDomain],

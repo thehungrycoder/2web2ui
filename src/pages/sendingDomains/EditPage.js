@@ -126,9 +126,9 @@ export class EditPage extends Component {
   }
 }
 
-const mapStateToProps = (state, props) => ({
+const mapStateToProps = (state) => ({
   getError: state.sendingDomains.getError,
-  domain: selectDomain(state, props)
+  domain: selectDomain(state)
 });
 
 

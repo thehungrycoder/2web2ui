@@ -4,6 +4,7 @@ describe('Selectors: sendingDomains', () => {
   const state = {
     sendingDomains: {
       domain: {
+        id: 'xyz.com',
         dkim: {
           selector: 'scph0118',
           public: '123456789A'
@@ -38,12 +39,8 @@ describe('Selectors: sendingDomains', () => {
     }
   };
 
-  const props = {
-    match: { params: { id: 'xyz.com' }}
-  };
-
   it('should append DKIM keys to domain object', () => {
-    expect(selectDomain(state, props)).toMatchSnapshot();
+    expect(selectDomain(state)).toMatchSnapshot();
   });
 
   it('should return all verified domains', () => {
