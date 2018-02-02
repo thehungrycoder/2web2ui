@@ -4,7 +4,7 @@ import { Tag } from '@sparkpost/matchbox';
 
 import styles from './ReadyFor.module.scss';
 
-const ReadyFor = ({ bounce, dkim, sending, bounceDefault, showLabel = true }) => {
+const ReadyFor = ({ bounce, dkim, sending, bounceDefault }) => {
   let bounceMarkup = null;
 
   if (!bounce && !dkim && !sending) {
@@ -27,7 +27,7 @@ const ReadyFor = ({ bounce, dkim, sending, bounceDefault, showLabel = true }) =>
 
   return (
     <span className={styles.ReadyFor}>
-      { showLabel && <small>Ready For:</small> }
+      <small>Ready For:</small>
       {sendingMarkup}{bounceMarkup}{dkimMarkup}
     </span>
   );

@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { Panel, Grid, Toggle } from '@sparkpost/matchbox';
+import { Panel } from '@sparkpost/matchbox';
 
-import styles from './DomainStatus.module.scss';
+import ToggleBlock from 'src/components/toggleBlock/ToggleBlock';
 
 const ShareWithSubaccounts = ({ domain, onChange }) => {
   // If the subaccount_id is set on the domain object, this is a
@@ -13,20 +13,12 @@ const ShareWithSubaccounts = ({ domain, onChange }) => {
   }
 
   return <Panel.Section>
-    <Grid>
-      <Grid.Column xs={12} md={8}>
-        <label className={styles.ShareLabel} htmlFor='shareWithSubaccounts'>Share this domain with subaccounts?</label>
-      </Grid.Column>
-      <Grid.Column xs={12} md={4}>
-        <div className={styles.Toggle}>
-          <Toggle
-            id='shareWithSubaccounts'
-            checked={domain.shared_with_subaccounts}
-            onChange={onChange}
-          />
-        </div>
-      </Grid.Column>
-    </Grid>
+    <ToggleBlock
+      input={{ name: 'shareWithSubaccounts' }}
+      label='Share this domain with all subaccounts?'
+      checked={domain.shared_with_subaccounts}
+      onChange={onChange}
+    />
   </Panel.Section>;
 };
 

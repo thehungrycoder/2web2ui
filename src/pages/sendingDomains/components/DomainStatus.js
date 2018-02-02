@@ -20,11 +20,8 @@ export const DomainStatus = ({ domain, onShareDomainChange }) => {
     <Grid.Column xs={12} md={8}>
       <Panel accent>
         <StatusDescription
-          name={domain.id}
+          domain={domain}
           readyFor={readyFor}
-          subaccount={domain.subaccount_id}
-          shared={domain.shared_with_subaccounts}
-          bounceDefault={domain.is_default_bounce_domain}
           status={status} />
         <ShareWithSubaccounts
           domain={domain}
