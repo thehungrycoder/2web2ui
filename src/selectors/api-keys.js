@@ -65,3 +65,8 @@ export const selectApiKeysForSending = createSelector(
   [getApiKeys],
   (apiKeys) => apiKeys.filter((key) => key.grants.includes('smtp/inject') || key.grants.includes('transmissions/modify'))
 );
+
+export const selectApiKeysForSmtp = createSelector(
+  [getApiKeys],
+  (apiKeys) => apiKeys.filter((key) => key.grants.includes('smtp/inject'))
+);
