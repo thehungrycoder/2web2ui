@@ -1,5 +1,7 @@
 import * as sendingDomains from '../sendingDomains';
 
+jest.mock('../helpers/sparkpostApiRequest', () => jest.fn((a) => a));
+
 describe('Action Creator: Sending Domains', () => {
 
   describe('Create', () => {
