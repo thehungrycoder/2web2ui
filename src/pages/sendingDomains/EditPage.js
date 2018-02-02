@@ -63,11 +63,9 @@ export class EditPage extends Component {
       updateDomain,
       showAlert
     } = this.props;
-    return updateDomain({
-      id,
-      shared_with_subaccounts: !shared_with_subaccounts
-    }).catch((err) =>
-      showAlert(apiResponseToAlert(err, 'Could not update domain')));
+    return updateDomain(id, { shared_with_subaccounts: !shared_with_subaccounts })
+      .catch((err) =>
+        showAlert(apiResponseToAlert(err, 'Could not update domain')));
   }
 
   componentDidMount() {

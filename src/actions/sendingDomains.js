@@ -21,13 +21,16 @@ export function get(id) {
     }
   });
 }
-export function update({ id, ...updateFields }) {
+
+export function update(id, data, subaccount) {
+  const headers = setSubaccountHeader(subaccount);
   return sparkpostApiRequest({
     type: 'UPDATE_SENDING_DOMAIN',
     meta: {
       method: 'PUT',
       url: `/sending-domains/${id}`,
-      data: updateFields
+      data,
+      headers
     }
   });
 }
