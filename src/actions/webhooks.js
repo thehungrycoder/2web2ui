@@ -17,20 +17,18 @@ export function listWebhooks({ subaccount = null, type = 'LIST_WEBHOOKS' } = {})
 // Gets all webhooks & master-only webhooks
 // Then rewrites subaccount_id for webhooks assigned to master
 export function listAllWebhooks() {
-  return (dispatch) => {
-    Promise.all([
-      dispatch(listWebhooks({ type: 'LIST_MASTER_ONLY_WEBHOOKS', subaccount: 0 })),
-      dispatch(listWebhooks())
-    ])
-      .then(([masterOnlyWebhooks, webhooks]) => dispatch({
-        type: 'LIST_ALL_WEBHOOKS_SUCCESS',
-        payload: mergeWebhooks(masterOnlyWebhooks, webhooks)
-      }))
-      .catch((err) => dispatch({
-        type: 'LIST_ALL_WEBHOOKS_SUCCESS_FAIL',
-        payload: err
-      }));
-  };
+  return (dispatch) => Promise.all([
+    dispatch(listWebhooks({ type: 'LIST_MASTER_ONLY_WEBHOOKS', subaccount: 0 })),
+    dispatch(listWebhooks())
+  ])
+    .then(([masterOnlyWebhooks, webhooks]) => dispatch({
+      type: 'LIST_ALL_WEBHOOKS_SUCCESS',
+      payload: mergeWebhooks(masterOnlyWebhooks, webhooks)
+    }))
+    .catch((err) => dispatch({
+      type: 'LIST_ALL_WEBHOOKS_SUCCESS_FAIL',
+      payload: err
+    }));
 }
 
 export function getWebhook({ id, subaccount = null }) {
@@ -50,7 +48,7 @@ export function getWebhook({ id, subaccount = null }) {
   });
 }
 
-export function createWebhook({ webhook, subaccount }) {
+export function createWebhook({ webhook, subaccount = null }) {
   const headers = setSubaccountHeader(subaccount);
 
   // Subaccount is passed through to be used in the redirect in componentDidMount

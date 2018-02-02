@@ -15,7 +15,7 @@ export function createApiKey(key) {
   );
 }
 
-export function getApiKey({ id, subaccount }) {
+export function getApiKey({ id, subaccount = null }) {
   const headers = setSubaccountHeader(subaccount);
 
   return sparkpostApiRequest({
@@ -29,7 +29,7 @@ export function getApiKey({ id, subaccount }) {
 
 }
 
-export function deleteApiKey({ id, subaccount }) {
+export function deleteApiKey({ id, subaccount = null }) {
   const headers = setSubaccountHeader(subaccount);
 
   return sparkpostApiRequest({
@@ -42,7 +42,7 @@ export function deleteApiKey({ id, subaccount }) {
   });
 }
 
-export function updateApiKey({ id, key, subaccount }) {
+export function updateApiKey({ id, key, subaccount = null }) {
   const headers = setSubaccountHeader(subaccount);
   return (dispatch, getState) => dispatch(
     sparkpostApiRequest({

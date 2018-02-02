@@ -1,0 +1,210 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Action Creator: Webhooks should catch dispatch a list all webhooks failure 1`] = `
+Array [
+  Array [
+    Object {
+      "meta": Object {
+        "headers": Object {
+          "x-msys-subaccount": 0,
+        },
+        "method": "GET",
+        "url": "/webhooks",
+      },
+      "type": "LIST_MASTER_ONLY_WEBHOOKS",
+    },
+  ],
+  Array [
+    Object {
+      "meta": Object {
+        "headers": Object {},
+        "method": "GET",
+        "url": "/webhooks",
+      },
+      "type": "LIST_WEBHOOKS",
+    },
+  ],
+  Array [
+    Object {
+      "payload": "error",
+      "type": "LIST_ALL_WEBHOOKS_SUCCESS_FAIL",
+    },
+  ],
+]
+`;
+
+exports[`Action Creator: Webhooks should dispatch a create action 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "data": undefined,
+      "headers": Object {},
+      "method": "POST",
+      "subaccount": null,
+      "url": "/webhooks",
+    },
+    "type": "CREATE_WEBHOOK",
+  },
+]
+`;
+
+exports[`Action Creator: Webhooks should dispatch a delete action 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "headers": Object {},
+      "method": "DELETE",
+      "url": "/webhooks/123",
+    },
+    "type": "DELETE_WEBHOOK",
+  },
+]
+`;
+
+exports[`Action Creator: Webhooks should dispatch a get action 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "headers": Object {},
+      "method": "GET",
+      "subaccount": null,
+      "url": "/webhooks/100",
+    },
+    "type": "GET_WEBHOOK",
+  },
+]
+`;
+
+exports[`Action Creator: Webhooks should dispatch a get action with sub 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "headers": Object {
+        "x-msys-subaccount": 101,
+      },
+      "method": "GET",
+      "subaccount": 101,
+      "url": "/webhooks/100",
+    },
+    "type": "GET_WEBHOOK",
+  },
+]
+`;
+
+exports[`Action Creator: Webhooks should dispatch a get batches action 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "headers": Object {},
+      "method": "GET",
+      "url": "/webhooks/123/batch-status",
+    },
+    "type": "GET_WEBHOOK_BATCHES",
+  },
+]
+`;
+
+exports[`Action Creator: Webhooks should dispatch a getEventDocs action 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "method": "GET",
+      "url": "webhooks/events/documentation",
+    },
+    "type": "GET_EVENT_DOCS",
+  },
+]
+`;
+
+exports[`Action Creator: Webhooks should dispatch a getEventSamples action 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "method": "GET",
+      "params": Object {
+        "events": "event1,event2",
+      },
+      "url": "webhooks/events/samples",
+    },
+    "type": "GET_EVENT_SAMPLES",
+  },
+]
+`;
+
+exports[`Action Creator: Webhooks should dispatch a list action 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "headers": Object {},
+      "method": "GET",
+      "url": "/webhooks",
+    },
+    "type": "LIST_WEBHOOKS",
+  },
+]
+`;
+
+exports[`Action Creator: Webhooks should dispatch a list all webhooks action 1`] = `
+Array [
+  Array [
+    Object {
+      "meta": Object {
+        "headers": Object {
+          "x-msys-subaccount": 0,
+        },
+        "method": "GET",
+        "url": "/webhooks",
+      },
+      "type": "LIST_MASTER_ONLY_WEBHOOKS",
+    },
+  ],
+  Array [
+    Object {
+      "meta": Object {
+        "headers": Object {},
+        "method": "GET",
+        "url": "/webhooks",
+      },
+      "type": "LIST_WEBHOOKS",
+    },
+  ],
+  Array [
+    Object {
+      "payload": undefined,
+      "type": "LIST_ALL_WEBHOOKS_SUCCESS",
+    },
+  ],
+]
+`;
+
+exports[`Action Creator: Webhooks should dispatch a test action 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "data": Object {
+        "message": "request message",
+      },
+      "headers": Object {},
+      "method": "POST",
+      "url": "/webhooks/123/validate",
+    },
+    "type": "TEST_WEBHOOK",
+  },
+]
+`;
+
+exports[`Action Creator: Webhooks should dispatch an update action 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "data": Object {
+        "name": "another webhook",
+      },
+      "headers": Object {},
+      "method": "PUT",
+      "url": "/webhooks/123",
+    },
+    "type": "UPDATE_WEBHOOK",
+  },
+]
+`;
