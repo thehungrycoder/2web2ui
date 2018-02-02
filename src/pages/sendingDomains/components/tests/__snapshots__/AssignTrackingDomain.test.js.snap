@@ -6,7 +6,7 @@ exports[`Component: AssignTrackingDomain form should have button disabled when f
 >
   <Grid>
     <Grid.Column
-      md={6}
+      md={4}
       xs={12}
     >
       <div>
@@ -20,7 +20,7 @@ exports[`Component: AssignTrackingDomain form should have button disabled when f
       </Link>
     </Grid.Column>
     <Grid.Column
-      md={6}
+      md={8}
       xs={12}
     >
       <Panel
@@ -69,7 +69,7 @@ exports[`Component: AssignTrackingDomain form should have button disabled when s
 >
   <Grid>
     <Grid.Column
-      md={6}
+      md={4}
       xs={12}
     >
       <div>
@@ -83,7 +83,7 @@ exports[`Component: AssignTrackingDomain form should have button disabled when s
       </Link>
     </Grid.Column>
     <Grid.Column
-      md={6}
+      md={8}
       xs={12}
     >
       <Panel
@@ -132,7 +132,7 @@ exports[`Component: AssignTrackingDomain form should render form with initial va
 >
   <Grid>
     <Grid.Column
-      md={6}
+      md={4}
       xs={12}
     >
       <div>
@@ -146,7 +146,7 @@ exports[`Component: AssignTrackingDomain form should render form with initial va
       </Link>
     </Grid.Column>
     <Grid.Column
-      md={6}
+      md={8}
       xs={12}
     >
       <Panel
@@ -195,7 +195,7 @@ exports[`Component: AssignTrackingDomain form should render panel loading compon
 >
   <Grid>
     <Grid.Column
-      md={6}
+      md={4}
       xs={12}
     >
       <div>
@@ -209,7 +209,7 @@ exports[`Component: AssignTrackingDomain form should render panel loading compon
       </Link>
     </Grid.Column>
     <Grid.Column
-      md={6}
+      md={8}
       xs={12}
     >
       <PanelLoading

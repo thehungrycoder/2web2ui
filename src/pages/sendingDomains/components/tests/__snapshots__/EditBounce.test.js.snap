@@ -6,7 +6,7 @@ exports[`Component: EditBounce does not show root domain warning for 3rd level d
 >
   <Grid>
     <Grid.Column
-      md={5}
+      md={4}
       xs={12}
     >
       <div>
@@ -24,7 +24,7 @@ exports[`Component: EditBounce does not show root domain warning for 3rd level d
       </div>
     </Grid.Column>
     <Grid.Column
-      md={7}
+      md={8}
       xs={12}
     >
       <Panel>
@@ -157,7 +157,7 @@ exports[`Component: EditBounce renders not ready correctly 1`] = `
   </Grid>
   <Grid>
     <Grid.Column
-      md={5}
+      md={4}
       xs={12}
     >
       <div>
@@ -175,7 +175,7 @@ exports[`Component: EditBounce renders not ready correctly 1`] = `
       </div>
     </Grid.Column>
     <Grid.Column
-      md={7}
+      md={8}
       xs={12}
     >
       <Panel>

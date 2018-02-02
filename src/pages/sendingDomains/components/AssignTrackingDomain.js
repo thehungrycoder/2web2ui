@@ -33,11 +33,11 @@ export class AssignTrackingDomain extends Component {
 
   renderSection() {
     return (<Grid>
-      <Grid.Column xs={12} md={6}>
+      <Grid.Column xs={12} md={4}>
         <div>Link to a tracking domain to track opens, clicks, and unsubscribes.</div>
         <Link to={'/account/tracking-domains/create'}>Create a tracking domain.</Link>
       </Grid.Column>
-      <Grid.Column xs={12} md={6}>
+      <Grid.Column xs={12} md={8}>
         { this.renderTrackingDomains() }
       </Grid.Column>
     </Grid>);

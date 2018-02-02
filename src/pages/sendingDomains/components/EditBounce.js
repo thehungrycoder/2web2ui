@@ -67,13 +67,13 @@ export class EditBounce extends Component {
   renderNotReady() {
     const { id } = this.props;
     return (<Grid>
-      <Grid.Column xs={12} md={5}>
+      <Grid.Column xs={12} md={4}>
         <div>
           <p><strong>To use this domain for bounces</strong>, add this CNAME record to your DNS settings.</p>
           <p><em>Note: Bounce domains must be verified via DNS.</em></p>
         </div>
       </Grid.Column>
-      <Grid.Column xs={12} md={7}>
+      <Grid.Column xs={12} md={8}>
         <Panel>
           <Panel
             title='DNS Settings'

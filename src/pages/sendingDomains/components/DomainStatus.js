@@ -14,7 +14,7 @@ export const DomainStatus = ({ domain, onShareDomainChange }) => {
 
   return <Grid>
     <Grid.Column xs={12} md={4}>
-      <h1>Status</h1>
+      <h3>Status</h3>
       <VerificationHelp status={status} />
     </Grid.Column>
     <Grid.Column xs={12} md={8}>
