@@ -11,19 +11,10 @@ import { hasSubaccounts } from 'src/selectors/subaccounts';
 import { Loading, TableCollection, SubaccountTag, ApiErrorBanner } from 'src/components';
 import { Page } from '@sparkpost/matchbox';
 
-<<<<<<< HEAD
-const columns = [{ label: 'Name', sortKey: 'name' }, 'ID', 'Target'];
-export const getRowData = ({ id, name, target }) => {
-  const nameLink = <Link to={`/webhooks/details/${id}`}>{name}</Link>;
-  return [nameLink, id, target];
-};
-=======
->>>>>>> c5153a94... FAD-6110 started fixing subaccount support in api keys, webhooks
 const filterBoxConfig = {
   show: true,
   itemToStringKeys: ['name', 'target']
 };
-
 
 export class WebhooksList extends Component {
 
@@ -33,7 +24,7 @@ export class WebhooksList extends Component {
 
   getColumns = () => {
     const { hasSubaccounts } = this.props;
-    const columns = ['Name', 'Target'];
+    const columns = [{ label: 'Name', sortKey: 'name' }, 'Target'];
 
     if (hasSubaccounts) {
       columns.push('Events For');

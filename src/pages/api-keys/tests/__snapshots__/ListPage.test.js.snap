@@ -122,6 +122,7 @@ exports[`Api Keys List Page should render correctly with subaccounts 1`] = `
 Array [
   Object {
     "label": "Name",
+    "sortKey": "label",
     "width": "40%",
   },
   Object {
@@ -129,6 +130,7 @@ Array [
   },
   Object {
     "label": "Subaccount",
+    "sortKey": "subaccount_id",
     "width": "20%",
   },
 ]
@@ -194,15 +196,6 @@ exports[`Api Keys List Page should show api key banner on successful create 1`] 
         },
         Object {
           "label": "Key",
-<<<<<<< HEAD
-          "width": "20%",
-        },
-        Object {
-          "label": "Subaccount",
-          "sortKey": "subaccount_id",
-          "width": "20%",
-=======
->>>>>>> 4c89509d... FAD-6110 Fix existing tests & address some feedback
         },
       ]
     }
