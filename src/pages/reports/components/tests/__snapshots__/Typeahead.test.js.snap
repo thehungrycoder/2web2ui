@@ -18,5 +18,6 @@ exports[`Component: Typeahead should render ok by default 1`] = `
   onStateChange={[Function]}
   onUserAction={[Function]}
   selectedItemChanged={[Function]}
+  stateReducer={[Function]}
 />
 `;

@@ -8,7 +8,7 @@ exports[`FileInputWrapper events should render selected filename 1`] = `
   >
     Upload them all here
   </label>
-  <Dropzone
+  <t
     accept=".csv"
     disableClick={true}
     disablePreview={true}
@@ -29,7 +29,7 @@ exports[`FileInputWrapper events should render selected filename 1`] = `
     >
       Choose a CSV file
     </Button>
-  </Dropzone>
+  </t>
 </div>
 `;
 
@@ -41,7 +41,7 @@ exports[`FileInputWrapper rendering should render correctly 1`] = `
   >
     Upload them all here
   </label>
-  <Dropzone
+  <t
     accept=".csv"
     disableClick={true}
     disablePreview={true}
@@ -62,7 +62,7 @@ exports[`FileInputWrapper rendering should render correctly 1`] = `
     >
       Choose a CSV file
     </Button>
-  </Dropzone>
+  </t>
 </div>
 `;
 
@@ -74,7 +74,7 @@ exports[`FileInputWrapper rendering should render errors 1`] = `
   >
     Upload them all here
   </label>
-  <Dropzone
+  <t
     accept=".csv"
     disableClick={true}
     disablePreview={true}
@@ -95,6 +95,6 @@ exports[`FileInputWrapper rendering should render errors 1`] = `
     >
       Choose a CSV file
     </Button>
-  </Dropzone>
+  </t>
 </div>
 `;

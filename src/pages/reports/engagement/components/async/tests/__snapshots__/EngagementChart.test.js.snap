@@ -54,15 +54,18 @@ exports[`EngagementChart renders engagement chart 1`] = `
         <CartesianGrid
           fill="none"
           horizontal={true}
+          horizontalFill={Array []}
           horizontalPoints={Array []}
           stroke="#ccc"
           strokeDasharray="4 1"
           vertical={false}
+          verticalFill={Array []}
           verticalPoints={Array []}
         />
         <XAxis
           allowDataOverflow={false}
           allowDecimals={true}
+          allowDuplicatedCategory={true}
           dataKey="label"
           domain={
             Array [
@@ -91,6 +94,7 @@ exports[`EngagementChart renders engagement chart 1`] = `
         <YAxis
           allowDataOverflow={false}
           allowDecimals={true}
+          allowDuplicatedCategory={true}
           domain={
             Array [
               0,
