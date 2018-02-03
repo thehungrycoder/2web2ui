@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 import { Panel, Table } from '@sparkpost/matchbox';
 import Collection from './Collection';
 import TableHeader from './TableHeader';
-import { getSortedCollection } from 'src/helpers/sort';
 
 const TableWrapper = (props) => <Panel><Table>{props.children}</Table></Panel>;
 
@@ -37,7 +37,7 @@ class TableCollection extends Component {
       ? rowComponent
       : (props) => <Table.Row rowData={getRowData(props)} />;
 
-    const sortedRows = sortColumn ? getSortedCollection(rows, sortColumn, sortDirection, columns) : rows ;
+    const sortedRows = sortColumn ? _.orderBy(rows, sortColumn, sortDirection) : rows ;
 
     return (
       <Collection
