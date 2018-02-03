@@ -5,7 +5,7 @@ const parseRawRecords = (results, resolve, reject) => {
   const mapped = [];
   const errors = [];
 
-  const parseJSONField = (field, datum, out, line, errors) => {
+  const parseJSONField = ({ field, datum, out, line, errors }) => {
     if (datum[field]) {
       try {
         out[field] = JSON.parse(datum[field]);
@@ -30,9 +30,9 @@ const parseRawRecords = (results, resolve, reject) => {
     }
 
     // these fields are optional, but should display errors if invalid parsing
-    parseJSONField('metadata', datum, out, line, errors);
-    parseJSONField('substitution_data', datum, out, line, errors);
-    parseJSONField('tags', datum, out, line, errors);
+    parseJSONField({ field: 'metadata', datum, out, line, errors });
+    parseJSONField({ field: 'substitution_data', datum, out, line, errors });
+    parseJSONField({ field: 'tags', datum, out, line, errors });
 
     // NOTE: the old UI stopped parsing after a single error here.
     // We continue to collect errors
