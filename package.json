@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "REACT_APP_VERSION=local-$USER-$(git rev-parse HEAD) node scripts/start.js",
-    "build": "npm run lint && node scripts/build.js",
+    "build": "node scripts/build.js",
     "analyze": "source-map-explorer build/static/js/main.*",
     "test": "node scripts/test.js --env=jsdom --config=./jest.config.json",
     "test-coverage": "npm test -- --coverage",
@@ -19,7 +19,7 @@
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "*.js": [
+    "src/**/*.js": [
       "eslint --fix",
       "git add"
     ]
