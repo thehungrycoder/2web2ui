@@ -14,7 +14,8 @@
     "<rootDir>/src/index.js",
     "<rootDir>/src/config",
     "<rootDir>/src/helpers/registerServiceWorker",
-    "<rootDir>/src/reducers"
+    "<rootDir>/src/reducers",
+    "tests/helpers/"
   ],
   "coverageThreshold": {
     "global": {

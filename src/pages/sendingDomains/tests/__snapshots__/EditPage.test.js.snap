@@ -10,9 +10,135 @@ exports[`Sending Domains Edit Page renders correctly 1`] = `
     }
   }
   empty={Object {}}
-  title="Edit id"
+  secondaryActions={
+    Array [
+      Object {
+        "content": "Delete",
+        "onClick": [Function],
+      },
+    ]
+  }
+  title="Edit example.com"
 >
-  Coming soon
+  <div>
+    <Component
+      domain={
+        Object {
+          "dkim": Object {
+            "headers": "from:to:subject:date",
+            "public": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCH3n8S0ApNBowLfcKzQMK2KamxMC2TmMTVwwh9E0DQihCUxjieg9OdWwPP16osG95XoawSFCg114qTXX+UsPE40YpURpntKKa2XPLhEJYb5690yf7h0MmrqCkMTJbW23783gqZ/OUO6DGjTcNcvfWw4gn3t1jLyGl8Nk6EdAXVlQIDAQAB",
+            "selector": "scph0116",
+          },
+          "id": "example.com",
+          "is_default_bounce_domain": true,
+          "shared_with_subaccounts": false,
+          "status": Object {
+            "abuse_at_status": "unverified",
+            "cname_status": "unverified",
+            "compliance_status": "valid",
+            "dkim_status": "invalid",
+            "mx_status": "valid",
+            "ownership_verified": true,
+            "postmaster_at_status": "unverified",
+            "spf_status": "invalid",
+            "verification_mailbox_status": "valid",
+          },
+          "subaccount_id": 100,
+        }
+      }
+      onShareDomainChange={[Function]}
+    />
+    <withRouter(Connect(SetupSending))
+      domain={
+        Object {
+          "dkim": Object {
+            "headers": "from:to:subject:date",
+            "public": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCH3n8S0ApNBowLfcKzQMK2KamxMC2TmMTVwwh9E0DQihCUxjieg9OdWwPP16osG95XoawSFCg114qTXX+UsPE40YpURpntKKa2XPLhEJYb5690yf7h0MmrqCkMTJbW23783gqZ/OUO6DGjTcNcvfWw4gn3t1jLyGl8Nk6EdAXVlQIDAQAB",
+            "selector": "scph0116",
+          },
+          "id": "example.com",
+          "is_default_bounce_domain": true,
+          "shared_with_subaccounts": false,
+          "status": Object {
+            "abuse_at_status": "unverified",
+            "cname_status": "unverified",
+            "compliance_status": "valid",
+            "dkim_status": "invalid",
+            "mx_status": "valid",
+            "ownership_verified": true,
+            "postmaster_at_status": "unverified",
+            "spf_status": "invalid",
+            "verification_mailbox_status": "valid",
+          },
+          "subaccount_id": 100,
+        }
+      }
+    />
+    <Connect(ReduxForm)
+      domain={
+        Object {
+          "dkim": Object {
+            "headers": "from:to:subject:date",
+            "public": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCH3n8S0ApNBowLfcKzQMK2KamxMC2TmMTVwwh9E0DQihCUxjieg9OdWwPP16osG95XoawSFCg114qTXX+UsPE40YpURpntKKa2XPLhEJYb5690yf7h0MmrqCkMTJbW23783gqZ/OUO6DGjTcNcvfWw4gn3t1jLyGl8Nk6EdAXVlQIDAQAB",
+            "selector": "scph0116",
+          },
+          "id": "example.com",
+          "is_default_bounce_domain": true,
+          "shared_with_subaccounts": false,
+          "status": Object {
+            "abuse_at_status": "unverified",
+            "cname_status": "unverified",
+            "compliance_status": "valid",
+            "dkim_status": "invalid",
+            "mx_status": "valid",
+            "ownership_verified": true,
+            "postmaster_at_status": "unverified",
+            "spf_status": "invalid",
+            "verification_mailbox_status": "valid",
+          },
+          "subaccount_id": 100,
+        }
+      }
+      id="example.com"
+    />
+    <Connect(ReduxForm)
+      domain={
+        Object {
+          "dkim": Object {
+            "headers": "from:to:subject:date",
+            "public": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCH3n8S0ApNBowLfcKzQMK2KamxMC2TmMTVwwh9E0DQihCUxjieg9OdWwPP16osG95XoawSFCg114qTXX+UsPE40YpURpntKKa2XPLhEJYb5690yf7h0MmrqCkMTJbW23783gqZ/OUO6DGjTcNcvfWw4gn3t1jLyGl8Nk6EdAXVlQIDAQAB",
+            "selector": "scph0116",
+          },
+          "id": "example.com",
+          "is_default_bounce_domain": true,
+          "shared_with_subaccounts": false,
+          "status": Object {
+            "abuse_at_status": "unverified",
+            "cname_status": "unverified",
+            "compliance_status": "valid",
+            "dkim_status": "invalid",
+            "mx_status": "valid",
+            "ownership_verified": true,
+            "postmaster_at_status": "unverified",
+            "spf_status": "invalid",
+            "verification_mailbox_status": "valid",
+          },
+          "subaccount_id": 100,
+        }
+      }
+    />
+  </div>
+  <DeleteModal
+    content={
+      <p>
+        Any future transmission that uses this domain will be rejected.
+      </p>
+    }
+    onCancel={[Function]}
+    onDelete={[Function]}
+    open={false}
+    title="Are you sure you want to delete this sending domain?"
+  />
 </Page>
 `;
 
@@ -26,14 +152,175 @@ exports[`Sending Domains Edit Page renders error banner correctly 1`] = `
     }
   }
   empty={Object {}}
-  title="Edit id"
+  secondaryActions={
+    Array [
+      Object {
+        "content": "Delete",
+        "onClick": [Function],
+      },
+    ]
+  }
+  title="Edit example.com"
 >
   <ApiErrorBanner
     errorDetails="error"
     message="Sorry, we seem to have had some trouble loading your Sending Domain."
     reload={[Function]}
   />
+  <DeleteModal
+    content={
+      <p>
+        Any future transmission that uses this domain will be rejected.
+      </p>
+    }
+    onCancel={[Function]}
+    onDelete={[Function]}
+    open={false}
+    title="Are you sure you want to delete this sending domain?"
+  />
 </Page>
 `;
 
 exports[`Sending Domains Edit Page renders loading correctly 1`] = `<Loading />`;
+
+exports[`Sending Domains Edit Page should show a delete modal 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "Sending Domains",
+      "to": "/account/sending-domains",
+    }
+  }
+  empty={Object {}}
+  secondaryActions={
+    Array [
+      Object {
+        "content": "Delete",
+        "onClick": [Function],
+      },
+    ]
+  }
+  title="Edit example.com"
+>
+  <div>
+    <Component
+      domain={
+        Object {
+          "dkim": Object {
+            "headers": "from:to:subject:date",
+            "public": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCH3n8S0ApNBowLfcKzQMK2KamxMC2TmMTVwwh9E0DQihCUxjieg9OdWwPP16osG95XoawSFCg114qTXX+UsPE40YpURpntKKa2XPLhEJYb5690yf7h0MmrqCkMTJbW23783gqZ/OUO6DGjTcNcvfWw4gn3t1jLyGl8Nk6EdAXVlQIDAQAB",
+            "selector": "scph0116",
+          },
+          "id": "example.com",
+          "is_default_bounce_domain": true,
+          "shared_with_subaccounts": false,
+          "status": Object {
+            "abuse_at_status": "unverified",
+            "cname_status": "unverified",
+            "compliance_status": "valid",
+            "dkim_status": "invalid",
+            "mx_status": "valid",
+            "ownership_verified": true,
+            "postmaster_at_status": "unverified",
+            "spf_status": "invalid",
+            "verification_mailbox_status": "valid",
+          },
+          "subaccount_id": 100,
+        }
+      }
+      onShareDomainChange={[Function]}
+    />
+    <withRouter(Connect(SetupSending))
+      domain={
+        Object {
+          "dkim": Object {
+            "headers": "from:to:subject:date",
+            "public": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCH3n8S0ApNBowLfcKzQMK2KamxMC2TmMTVwwh9E0DQihCUxjieg9OdWwPP16osG95XoawSFCg114qTXX+UsPE40YpURpntKKa2XPLhEJYb5690yf7h0MmrqCkMTJbW23783gqZ/OUO6DGjTcNcvfWw4gn3t1jLyGl8Nk6EdAXVlQIDAQAB",
+            "selector": "scph0116",
+          },
+          "id": "example.com",
+          "is_default_bounce_domain": true,
+          "shared_with_subaccounts": false,
+          "status": Object {
+            "abuse_at_status": "unverified",
+            "cname_status": "unverified",
+            "compliance_status": "valid",
+            "dkim_status": "invalid",
+            "mx_status": "valid",
+            "ownership_verified": true,
+            "postmaster_at_status": "unverified",
+            "spf_status": "invalid",
+            "verification_mailbox_status": "valid",
+          },
+          "subaccount_id": 100,
+        }
+      }
+    />
+    <Connect(ReduxForm)
+      domain={
+        Object {
+          "dkim": Object {
+            "headers": "from:to:subject:date",
+            "public": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCH3n8S0ApNBowLfcKzQMK2KamxMC2TmMTVwwh9E0DQihCUxjieg9OdWwPP16osG95XoawSFCg114qTXX+UsPE40YpURpntKKa2XPLhEJYb5690yf7h0MmrqCkMTJbW23783gqZ/OUO6DGjTcNcvfWw4gn3t1jLyGl8Nk6EdAXVlQIDAQAB",
+            "selector": "scph0116",
+          },
+          "id": "example.com",
+          "is_default_bounce_domain": true,
+          "shared_with_subaccounts": false,
+          "status": Object {
+            "abuse_at_status": "unverified",
+            "cname_status": "unverified",
+            "compliance_status": "valid",
+            "dkim_status": "invalid",
+            "mx_status": "valid",
+            "ownership_verified": true,
+            "postmaster_at_status": "unverified",
+            "spf_status": "invalid",
+            "verification_mailbox_status": "valid",
+          },
+          "subaccount_id": 100,
+        }
+      }
+      id="example.com"
+    />
+    <Connect(ReduxForm)
+      domain={
+        Object {
+          "dkim": Object {
+            "headers": "from:to:subject:date",
+            "public": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCH3n8S0ApNBowLfcKzQMK2KamxMC2TmMTVwwh9E0DQihCUxjieg9OdWwPP16osG95XoawSFCg114qTXX+UsPE40YpURpntKKa2XPLhEJYb5690yf7h0MmrqCkMTJbW23783gqZ/OUO6DGjTcNcvfWw4gn3t1jLyGl8Nk6EdAXVlQIDAQAB",
+            "selector": "scph0116",
+          },
+          "id": "example.com",
+          "is_default_bounce_domain": true,
+          "shared_with_subaccounts": false,
+          "status": Object {
+            "abuse_at_status": "unverified",
+            "cname_status": "unverified",
+            "compliance_status": "valid",
+            "dkim_status": "invalid",
+            "mx_status": "valid",
+            "ownership_verified": true,
+            "postmaster_at_status": "unverified",
+            "spf_status": "invalid",
+            "verification_mailbox_status": "valid",
+          },
+          "subaccount_id": 100,
+        }
+      }
+    />
+  </div>
+  <DeleteModal
+    content={
+      <p>
+        Any future transmission that uses this domain will be rejected.
+      </p>
+    }
+    onCancel={[Function]}
+    onDelete={[Function]}
+    open={true}
+    title="Are you sure you want to delete this sending domain?"
+  />
+</Page>
+`;

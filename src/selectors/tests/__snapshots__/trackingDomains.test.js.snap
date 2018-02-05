@@ -1,7 +1,32 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Selectors: Tracking Domains selectDefaultTrackingDomainsOptions should return system default when no default options 1`] = `
+Array [
+  Object {
+    "label": "Always Use Default (Currently System Default)",
+    "value": "",
+  },
+]
+`;
+
+exports[`Selectors: Tracking Domains selectDefaultTrackingDomainsOptions should return the default domain when specified 1`] = `
+Array [
+  Object {
+    "label": "Always Use Default (Currently 4.com)",
+    "value": "",
+  },
+]
+`;
+
 exports[`Selectors: Tracking Domains selectTrackingDomainsList should return a transformed array if list is present 1`] = `
 Array [
+  Object {
+    "default": true,
+    "domain": "0.com",
+    "status": "verified",
+    "subaccount_id": 101,
+    "verified": true,
+  },
   Object {
     "domain": "1.com",
     "status": "verified",
@@ -17,6 +42,29 @@ Array [
     "status": "unverified",
     "verified": false,
   },
+  Object {
+    "default": true,
+    "domain": "4.com",
+    "status": "verified",
+    "verified": true,
+  },
+]
+`;
+
+exports[`Selectors: Tracking Domains selectTrackingDomainsOptions should return default and all verified tracking domain options 1`] = `
+Array [
+  Object {
+    "label": "Always Use Default (Currently 4.com)",
+    "value": "",
+  },
+  Object {
+    "label": "1.com",
+    "value": "1.com",
+  },
+  Object {
+    "label": "4.com",
+    "value": "4.com",
+  },
 ]
 `;
 
@@ -31,6 +79,46 @@ Array [
     "domain": "3.com",
     "status": "unverified",
     "verified": false,
+  },
+]
+`;
+
+exports[`Selectors: Tracking Domains selectVerifiedTrackingDomains should return a list of verified domains 1`] = `
+Array [
+  Object {
+    "domain": "1.com",
+    "status": "verified",
+    "verified": true,
+  },
+  Object {
+    "default": true,
+    "domain": "4.com",
+    "status": "verified",
+    "verified": true,
+  },
+]
+`;
+
+exports[`Selectors: Tracking Domains selectVerifiedTrackingDomains should return only tracking domains assigned to subaccount 1`] = `
+Array [
+  Object {
+    "domain": "1.com",
+    "status": "verified",
+    "subaccount_id": 101,
+    "verified": true,
+  },
+]
+`;
+
+exports[`Selectors: Tracking Domains selectVerifiedTrackingDomainsOptions should return a list of tracking domains formatted as options 1`] = `
+Array [
+  Object {
+    "label": "1.com",
+    "value": "1.com",
+  },
+  Object {
+    "label": "4.com",
+    "value": "4.com",
   },
 ]
 `;

@@ -1,19 +1,25 @@
+/* eslint max-lines: ["error", 200] */
 import {
   convertStatus,
   selectTrackingDomainsAreLoaded,
   selectTrackingDomainsList,
-  selectUnverifiedTrackingDomains
+  selectUnverifiedTrackingDomains,
+  selectVerifiedTrackingDomains,
+  selectVerifiedTrackingDomainsOptions,
+  selectDefaultTrackingDomainOption,
+  selectTrackingDomainsOptions
 } from '../trackingDomains';
 
 describe('Selectors: Tracking Domains', () => {
-
   let testDomains;
 
   beforeEach(() => {
     testDomains = [
+      { domain: '0.com', status: { verified: true, compliance_status: 'valid' }, default: true, subaccount_id: 101 },
       { domain: '1.com', status: { verified: true, compliance_status: 'valid' }},
       { domain: '2.com', status: { verified: false, compliance_status: 'blocked' }},
-      { domain: '3.com', status: { verified: false, compliance_status: 'valid' }}
+      { domain: '3.com', status: { verified: false, compliance_status: 'valid' }},
+      { domain: '4.com', status: { verified: true, compliance_status: 'valid' }, default: true }
     ];
   });
 
@@ -98,9 +104,7 @@ describe('Selectors: Tracking Domains', () => {
           list: testDomains
         }
       };
-      const unverified = selectUnverifiedTrackingDomains(state);
-      expect(unverified).toHaveLength(2);
-      expect(unverified).toMatchSnapshot();
+      expect(selectUnverifiedTrackingDomains(state)).toMatchSnapshot();
     });
 
     it('should return an empty array when the list is absent', () => {
@@ -108,6 +112,83 @@ describe('Selectors: Tracking Domains', () => {
         trackingDomains: {}
       };
       expect(selectUnverifiedTrackingDomains(state)).toEqual([]);
+    });
+  });
+
+  describe('selectVerifiedTrackingDomains', () => {
+    it('should return a list of verified domains', () => {
+      const state = {
+        trackingDomains: {
+          list: testDomains
+        }
+      };
+      expect(selectVerifiedTrackingDomains(state, {})).toMatchSnapshot();
+    });
+
+    it('should return an empty array when the list is absent', () => {
+      const state = {
+        trackingDomains: {}
+      };
+      expect(selectVerifiedTrackingDomains(state, {})).toEqual([]);
+    });
+
+    it('should return only tracking domains assigned to subaccount', () => {
+      testDomains[0].subaccount_id = 100;
+      testDomains[1].subaccount_id = 101;
+      testDomains[3].subaccount_id = 101;
+
+      const state = {
+        trackingDomains: {
+          list: testDomains
+        }
+      };
+
+      expect(selectVerifiedTrackingDomains(state, { domain: { subaccount_id: 101 }})).toMatchSnapshot();
+
+    });
+  });
+
+  describe('selectVerifiedTrackingDomainsOptions', () => {
+    it('should return a list of tracking domains formatted as options', () => {
+      const state = {
+        trackingDomains: {
+          list: testDomains
+        }
+      };
+      expect(selectVerifiedTrackingDomainsOptions(state, {})).toMatchSnapshot();
+    });
+
+  });
+
+  describe('selectDefaultTrackingDomainsOptions', () => {
+    it('should return the default domain when specified', () => {
+      const state = {
+        trackingDomains: {
+          list: testDomains
+        }
+      };
+      expect(selectDefaultTrackingDomainOption(state, {})).toMatchSnapshot();
+    });
+
+    it('should return system default when no default options', () => {
+      testDomains.pop(); // remove the default domain
+      const state = {
+        trackingDomains: {
+          list: testDomains
+        }
+      };
+      expect(selectDefaultTrackingDomainOption(state, {})).toMatchSnapshot();
+    });
+  });
+
+  describe('selectTrackingDomainsOptions', () => {
+    it('should return default and all verified tracking domain options', () => {
+      const state = {
+        trackingDomains: {
+          list: testDomains
+        }
+      };
+      expect(selectTrackingDomainsOptions(state, {})).toMatchSnapshot();
     });
   });
 });

@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`StatusTooltip component renders 1`] = `
+<WithPositioning(Tooltip)
+  content="Domains can be ready for sending (From), sending with DKIM signing, and bounce (Return Path) usage."
+  dark={true}
+>
+   
+  <Icon
+    name="Help"
+    size={15}
+  />
+</WithPositioning(Tooltip)>
+`;
+
+exports[`StatusTooltip component renders children 1`] = `
+<WithPositioning(Tooltip)
+  content="Domains can be ready for sending (From), sending with DKIM signing, and bounce (Return Path) usage."
+  dark={true}
+>
+  Hi there
+   
+  <Icon
+    name="Help"
+    size={15}
+  />
+</WithPositioning(Tooltip)>
+`;

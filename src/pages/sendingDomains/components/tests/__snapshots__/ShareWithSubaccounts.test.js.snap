@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ShareWithSubaccounts component does not render for subaccount domains 1`] = `""`;
+
+exports[`ShareWithSubaccounts component renders correctly 1`] = `
+<Panel.Section>
+  <ToggleBlock
+    checked={false}
+    input={
+      Object {
+        "name": "shareWithSubaccounts",
+      }
+    }
+    label="Share this domain with all subaccounts?"
+    onChange={[MockFunction]}
+  />
+</Panel.Section>
+`;
+
+exports[`ShareWithSubaccounts component renders subaccount sharing state 1`] = `
+<Panel.Section>
+  <ToggleBlock
+    checked={true}
+    input={
+      Object {
+        "name": "shareWithSubaccounts",
+      }
+    }
+    label="Share this domain with all subaccounts?"
+    onChange={[MockFunction]}
+  />
+</Panel.Section>
+`;

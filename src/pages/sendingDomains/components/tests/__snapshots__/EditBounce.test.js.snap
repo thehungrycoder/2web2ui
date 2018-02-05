@@ -1,0 +1,288 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: EditBounce does not show root domain warning for 3rd level domain 1`] = `
+<Component
+  title="Set Up For Bounce"
+>
+  <Grid>
+    <Grid.Column
+      md={4}
+      xs={12}
+    >
+      <div>
+        <p>
+          <strong>
+            To use this domain for bounces
+          </strong>
+          , add this CNAME record to your DNS settings.
+        </p>
+        <p>
+          <em>
+            Note: Bounce domains must be verified via DNS.
+          </em>
+        </p>
+      </div>
+    </Grid.Column>
+    <Grid.Column
+      md={8}
+      xs={12}
+    >
+      <Panel>
+        <Panel
+          actions={
+            Array [
+              Object {
+                "content": "Verify CNAME Record",
+                "onClick": [Function],
+              },
+            ]
+          }
+          title="DNS Settings"
+        >
+          <Component
+            header={
+              Array [
+                null,
+                "Type",
+                "Hostname",
+                "Value",
+              ]
+            }
+            rows={
+              Array [
+                Array [
+                  <ReadyForIcon
+                    readyFor={
+                      Object {
+                        "bounce": false,
+                        "dkim": false,
+                        "sending": undefined,
+                      }
+                    }
+                  />,
+                  "CNAME",
+                  "c.b.a.com",
+                  "sparkpostmail.com",
+                ],
+              ]
+            }
+          />
+        </Panel>
+      </Panel>
+    </Grid.Column>
+  </Grid>
+</Component>
+`;
+
+exports[`Component: EditBounce renders correctly when allowDefault is true 1`] = `
+<Component
+  title="Set Up For Bounce"
+>
+  <Grid>
+    <Grid.Column
+      md={12}
+      xs={12}
+    >
+      <Banner
+        status="warning"
+      >
+        We strongly recommend using a subdomain such as 
+        <strong>
+          bounces.
+          xyz.com
+        </strong>
+         for bounce domains. 
+        <Link
+          replace={false}
+          to="/account/sending-domains/create"
+        >
+          Create a new domain now.
+        </Link>
+      </Banner>
+    </Grid.Column>
+  </Grid>
+  <Grid>
+    <Grid.Column
+      md={4}
+      xs={12}
+    >
+      <div>
+        This domain is all set up and ready to be used as a bounce domain. Such alignment, wow!
+      </div>
+    </Grid.Column>
+    <Grid.Column
+      md={8}
+      xs={12}
+    >
+      <Panel
+        sectioned={true}
+      >
+        <div>
+          Your domain is ready to be used as a bounce domain.
+        </div>
+      </Panel>
+      <Panel
+        sectioned={true}
+      >
+        <Field
+          component={[Function]}
+          label="Use this domain as your default bounce domain?"
+          name="is_default_bounce_domain"
+          onChange={[Function]}
+          parse={[Function]}
+          type="checkbox"
+        />
+      </Panel>
+    </Grid.Column>
+  </Grid>
+</Component>
+`;
+
+exports[`Component: EditBounce renders not ready correctly 1`] = `
+<Component
+  title="Set Up For Bounce"
+>
+  <Grid>
+    <Grid.Column
+      md={12}
+      xs={12}
+    >
+      <Banner
+        status="warning"
+      >
+        We strongly recommend using a subdomain such as 
+        <strong>
+          bounces.
+          xyz.com
+        </strong>
+         for bounce domains. 
+        <Link
+          replace={false}
+          to="/account/sending-domains/create"
+        >
+          Create a new domain now.
+        </Link>
+      </Banner>
+    </Grid.Column>
+  </Grid>
+  <Grid>
+    <Grid.Column
+      md={4}
+      xs={12}
+    >
+      <div>
+        <p>
+          <strong>
+            To use this domain for bounces
+          </strong>
+          , add this CNAME record to your DNS settings.
+        </p>
+        <p>
+          <em>
+            Note: Bounce domains must be verified via DNS.
+          </em>
+        </p>
+      </div>
+    </Grid.Column>
+    <Grid.Column
+      md={8}
+      xs={12}
+    >
+      <Panel>
+        <Panel
+          actions={
+            Array [
+              Object {
+                "content": "Verify CNAME Record",
+                "onClick": [Function],
+              },
+            ]
+          }
+          title="DNS Settings"
+        >
+          <Component
+            header={
+              Array [
+                null,
+                "Type",
+                "Hostname",
+                "Value",
+              ]
+            }
+            rows={
+              Array [
+                Array [
+                  <ReadyForIcon
+                    readyFor={
+                      Object {
+                        "bounce": false,
+                        "dkim": false,
+                        "sending": undefined,
+                      }
+                    }
+                  />,
+                  "CNAME",
+                  "xyz.com",
+                  "sparkpostmail.com",
+                ],
+              ]
+            }
+          />
+        </Panel>
+      </Panel>
+    </Grid.Column>
+  </Grid>
+</Component>
+`;
+
+exports[`Component: EditBounce renders ready correctly 1`] = `
+<Component
+  title="Set Up For Bounce"
+>
+  <Grid>
+    <Grid.Column
+      md={12}
+      xs={12}
+    >
+      <Banner
+        status="warning"
+      >
+        We strongly recommend using a subdomain such as 
+        <strong>
+          bounces.
+          xyz.com
+        </strong>
+         for bounce domains. 
+        <Link
+          replace={false}
+          to="/account/sending-domains/create"
+        >
+          Create a new domain now.
+        </Link>
+      </Banner>
+    </Grid.Column>
+  </Grid>
+  <Grid>
+    <Grid.Column
+      md={4}
+      xs={12}
+    >
+      <div>
+        This domain is all set up and ready to be used as a bounce domain. Such alignment, wow!
+      </div>
+    </Grid.Column>
+    <Grid.Column
+      md={8}
+      xs={12}
+    >
+      <Panel
+        sectioned={true}
+      >
+        <div>
+          Your domain is ready to be used as a bounce domain.
+        </div>
+      </Panel>
+    </Grid.Column>
+  </Grid>
+</Component>
+`;

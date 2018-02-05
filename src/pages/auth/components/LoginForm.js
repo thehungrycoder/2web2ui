@@ -18,7 +18,7 @@ export class LoginForm extends Component {
           name='username'
           id='username'
           label='Email or Username'
-          placeholder="Leslie Knope"
+          placeholder='leslie.knope@pawnee.indiana.state.gov'
           component={TextFieldWrapper}
           validate={required}
         />
@@ -29,7 +29,7 @@ export class LoginForm extends Component {
           name='password'
           id='password'
           label='Password'
-          placeholder='Your Password'
+          placeholder='IheartLilSebastian'
           component={TextFieldWrapper}
         />
         }
