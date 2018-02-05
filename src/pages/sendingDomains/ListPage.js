@@ -6,14 +6,13 @@ import { list as listDomains } from 'src/actions/sendingDomains';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
 import { hasUnverifiedDomains } from 'src/selectors/sendingDomains';
 import { Loading, TableCollection, SubaccountTag, DomainStatusTag, ApiErrorBanner } from 'src/components';
-import { Page, Tooltip, Icon, UnstyledLink } from '@sparkpost/matchbox';
+import { Page, UnstyledLink } from '@sparkpost/matchbox';
 import ReadyFor from './components/ReadyFor';
 import UnverifiedWarningBanner from './components/UnverifiedWarningBanner';
+import StatusTooltip from './components/StatusTooltip';
 import { resolveStatus, resolveReadyFor } from 'src/helpers/domains';
 
-import styles from './ListPage.module.scss';
-
-const tooltipContent = 'Domains can be ready for sending (From), sending with DKIM signing, and bounce (Return Path) usage.';
+const StatusHeader = <StatusTooltip>Status</StatusTooltip>;
 
 export class ListPage extends Component {
   componentDidMount() {
@@ -23,11 +22,9 @@ export class ListPage extends Component {
   getColumns = () => {
     const { hasSubaccounts } = this.props;
 
-    const tooltip = <Tooltip dark content={tooltipContent}>Status <Icon name='Help' size={15} className={styles.StatusTooltip}/></Tooltip>;
-
     const columns = [
       { label: 'Domain', width: '30%', sortKey: 'domain' },
-      { label: tooltip, width: '40%' }
+      { label: StatusHeader, width: '40%' }
     ];
 
     if (hasSubaccounts) {

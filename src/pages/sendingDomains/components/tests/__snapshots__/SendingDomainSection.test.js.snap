@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: SendingDomainSection should render sending domain section 1`] = `
+<div>
+  <h3>
+    Title
+  </h3>
+  Bill
+  Brasky
+</div>
+`;

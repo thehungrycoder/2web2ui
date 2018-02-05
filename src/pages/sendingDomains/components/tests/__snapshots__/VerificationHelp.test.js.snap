@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VerificationHelp component does not render otherwise 1`] = `""`;
+
+exports[`VerificationHelp component renders for non-verified domains blocked 1`] = `
+<p>
+  Need help verifying your domain? 
+  <a
+    href="https://www.sparkpost.com/docs/getting-started/getting-started-sparkpost/#sending-domain-step-2-verifying-domain-ownership"
+    rel="noopener noreferrer"
+    target="_blank"
+  >
+    Follow this guide.
+  </a>
+</p>
+`;
+
+exports[`VerificationHelp component renders for non-verified domains pending 1`] = `
+<p>
+  Need help verifying your domain? 
+  <a
+    href="https://www.sparkpost.com/docs/getting-started/getting-started-sparkpost/#sending-domain-step-2-verifying-domain-ownership"
+    rel="noopener noreferrer"
+    target="_blank"
+  >
+    Follow this guide.
+  </a>
+</p>
+`;
+
+exports[`VerificationHelp component renders for non-verified domains unverified 1`] = `
+<p>
+  Need help verifying your domain? 
+  <a
+    href="https://www.sparkpost.com/docs/getting-started/getting-started-sparkpost/#sending-domain-step-2-verifying-domain-ownership"
+    rel="noopener noreferrer"
+    target="_blank"
+  >
+    Follow this guide.
+  </a>
+</p>
+`;
+
+exports[`VerificationHelp component renders for non-verified domains verified 1`] = `
+<p>
+  Need help verifying your domain? 
+  <a
+    href="https://www.sparkpost.com/docs/getting-started/getting-started-sparkpost/#sending-domain-step-2-verifying-domain-ownership"
+    rel="noopener noreferrer"
+    target="_blank"
+  >
+    Follow this guide.
+  </a>
+</p>
+`;

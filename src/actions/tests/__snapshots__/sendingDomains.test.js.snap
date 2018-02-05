@@ -46,3 +46,87 @@ Object {
   "type": "CREATE_SENDING_DOMAIN",
 }
 `;
+
+exports[`Action Creator: Sending Domains Remove remove calls API 1`] = `
+Object {
+  "meta": Object {
+    "headers": Object {},
+    "method": "DELETE",
+    "url": "/sending-domains/example.com",
+  },
+  "type": "DELETE_SENDING_DOMAIN",
+}
+`;
+
+exports[`Action Creator: Sending Domains Remove remove includes subaccount header with required 1`] = `
+Object {
+  "meta": Object {
+    "headers": Object {
+      "x-msys-subaccount": 101,
+    },
+    "method": "DELETE",
+    "url": "/sending-domains/example.com",
+  },
+  "type": "DELETE_SENDING_DOMAIN",
+}
+`;
+
+exports[`Action Creator: Sending Domains Update it should request with correct post data 1`] = `
+Object {
+  "meta": Object {
+    "data": Object {
+      "is_default_bounce_domain": true,
+    },
+    "headers": Object {},
+    "method": "PUT",
+    "url": "/sending-domains/domain.com",
+  },
+  "type": "UPDATE_SENDING_DOMAIN",
+}
+`;
+
+exports[`Action Creator: Sending Domains Update it update domain owned by subaccount 1`] = `
+Object {
+  "meta": Object {
+    "data": Object {
+      "is_default_bounce_domain": true,
+    },
+    "headers": Object {
+      "x-msys-subaccount": 101,
+    },
+    "method": "PUT",
+    "url": "/sending-domains/domain.com",
+  },
+  "type": "UPDATE_SENDING_DOMAIN",
+}
+`;
+
+exports[`Action Creator: Sending Domains Verify it should request with correct post data 1`] = `
+Object {
+  "meta": Object {
+    "data": Object {
+      "cname_verify": true,
+    },
+    "headers": Object {},
+    "method": "POST",
+    "url": "/sending-domains/domain.com/verify",
+  },
+  "type": "VERIFY_SENDING_DOMAIN",
+}
+`;
+
+exports[`Action Creator: Sending Domains Verify it should verify domain owned by subaccount 1`] = `
+Object {
+  "meta": Object {
+    "data": Object {
+      "cname_verify": true,
+    },
+    "headers": Object {
+      "x-msys-subaccount": 101,
+    },
+    "method": "POST",
+    "url": "/sending-domains/sub.com/verify",
+  },
+  "type": "VERIFY_SENDING_DOMAIN",
+}
+`;

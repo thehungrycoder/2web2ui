@@ -1,5 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Selectors: sendingDomains should append DKIM keys to domain object 1`] = `
+Object {
+  "dkim": Object {
+    "public": "123456789A",
+    "selector": "scph0118",
+  },
+  "dkimHostname": "scph0118._domainkey.xyz.com",
+  "dkimValue": "v=DKIM1; k=rsa; h=sha256; p=123456789A",
+  "id": "xyz.com",
+}
+`;
+
 exports[`Selectors: sendingDomains should return all domains ready for bounce domains 1`] = `
 Array [
   Object {
