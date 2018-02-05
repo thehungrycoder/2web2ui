@@ -6,7 +6,7 @@ const VerificationHelp = ({ status }) => {
   }
 
   return <p>
-    Need help verifying your domain? <a href="https://www.sparkpost.com/docs/getting-started/getting-started-sparkpost/#step-2-verifying-domain-ownership" rel="noopener noreferrer" target="_blank">Follow this guide.</a>
+    Need help verifying your domain? <a href="https://www.sparkpost.com/docs/getting-started/getting-started-sparkpost/#sending-domain-step-2-verifying-domain-ownership" rel="noopener noreferrer" target="_blank">Follow this guide.</a>
   </p>;
 };
 
