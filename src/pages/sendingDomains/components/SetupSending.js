@@ -3,9 +3,10 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 // components
-import { Panel, Grid, Banner, Icon, Button } from '@sparkpost/matchbox';
+import { Panel, Grid, Banner, Button } from '@sparkpost/matchbox';
 import { LongTextContainer } from 'src/components';
 import SimpleTable from './SimpleTable';
+import ReadyForIcon from './ReadyForIcon';
 import { SendingDomainSection } from './SendingDomainSection';
 
 // actions
@@ -14,7 +15,6 @@ import { verify } from 'src/actions/sendingDomains';
 
 import { resolveReadyFor } from 'src/helpers/domains';
 import config from 'src/config';
-import styles from './SetupSending.module.scss';
 
 export class SetupSending extends Component {
   showErrorAlert = ({ message }) => {
@@ -67,19 +67,9 @@ export class SetupSending extends Component {
     );
   }
 
-  renderIcon() {
-    const { domain } = this.props;
-    const readyFor = resolveReadyFor(domain.status);
-
-    return (
-      readyFor.dkim
-        ? <Icon name="Check" className={styles.GreenCheck}/>
-        : <Icon name="Error" className={styles.RedError}/>
-    );
-  }
-
   renderTxtRecordPanel() {
-    const { domain: { dkimHostname, dkimValue }} = this.props;
+    const { domain: { dkimHostname, dkimValue, status }} = this.props;
+    const readyFor = resolveReadyFor(status);
 
     // Headers
     const typeHeader = <div style={{ width: 40 }}> Type </div>;
@@ -93,7 +83,7 @@ export class SetupSending extends Component {
       <Panel sectioned>
         <SimpleTable
           header={[null, typeHeader, hostnameHeader, valueHeader]}
-          rows={ [[this.renderIcon(), 'TXT', hostnameRow, valueRow ]]}
+          rows={ [[<ReadyForIcon readyFor={readyFor} />, 'TXT', hostnameRow, valueRow ]]}
         />
       </Panel>
     );

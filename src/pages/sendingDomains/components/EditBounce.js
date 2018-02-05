@@ -8,6 +8,7 @@ import { Panel, Grid, Banner } from '@sparkpost/matchbox';
 import ToggleBlock from 'src/components/toggleBlock/ToggleBlock';
 import { showAlert } from 'src/actions/globalAlert';
 import { SendingDomainSection } from './SendingDomainSection';
+import ReadyForIcon from './ReadyForIcon';
 import { resolveReadyFor } from 'src/helpers/domains';
 import SimpleTable from './SimpleTable';
 import config from 'src/config';
@@ -67,7 +68,8 @@ export class EditBounce extends Component {
   }
 
   renderNotReady() {
-    const { id } = this.props;
+    const { id, domain } = this.props;
+    const readyFor = resolveReadyFor(domain);
     return (<Grid>
       <Grid.Column xs={12} md={4}>
         <div>
@@ -82,8 +84,8 @@ export class EditBounce extends Component {
             actions={[{ content: 'Verify CNAME Record', onClick: this.verifyDomain }]}
           >
             <SimpleTable
-              header={['Type', 'Hostname', 'Value']}
-              rows={[['CNAME', id, config.bounceDomains.cnameValue]]}
+              header={[null, 'Type', 'Hostname', 'Value']}
+              rows={[[<ReadyForIcon readyFor={readyFor} />, 'CNAME', id, config.bounceDomains.cnameValue]]}
             />
           </Panel>
         </Panel>
@@ -96,10 +98,10 @@ export class EditBounce extends Component {
     const { allowDefault } = config.bounceDomains;
 
     return (<Grid>
-      <Grid.Column xs={12} md={6}>
+      <Grid.Column xs={12} md={4}>
         <div>This domain is all set up and ready to be used as a bounce domain. Such alignment, wow!</div>
       </Grid.Column>
-      <Grid.Column xs={12} md={6}>
+      <Grid.Column xs={12} md={8}>
         <Panel sectioned>
           <div>Your domain is ready to be used as a bounce domain.</div>
         </Panel>
