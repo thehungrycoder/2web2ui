@@ -42,6 +42,7 @@ exports[`Component: EditBounce does not show root domain warning for 3rd level d
           <Component
             header={
               Array [
+                null,
                 "Type",
                 "Hostname",
                 "Value",
@@ -50,6 +51,15 @@ exports[`Component: EditBounce does not show root domain warning for 3rd level d
             rows={
               Array [
                 Array [
+                  <ReadyForIcon
+                    readyFor={
+                      Object {
+                        "bounce": false,
+                        "dkim": false,
+                        "sending": undefined,
+                      }
+                    }
+                  />,
                   "CNAME",
                   "c.b.a.com",
                   "sparkpostmail.com",
@@ -93,7 +103,7 @@ exports[`Component: EditBounce renders correctly when allowDefault is true 1`] =
   </Grid>
   <Grid>
     <Grid.Column
-      md={6}
+      md={4}
       xs={12}
     >
       <div>
@@ -101,7 +111,7 @@ exports[`Component: EditBounce renders correctly when allowDefault is true 1`] =
       </div>
     </Grid.Column>
     <Grid.Column
-      md={6}
+      md={8}
       xs={12}
     >
       <Panel
@@ -193,6 +203,7 @@ exports[`Component: EditBounce renders not ready correctly 1`] = `
           <Component
             header={
               Array [
+                null,
                 "Type",
                 "Hostname",
                 "Value",
@@ -201,6 +212,15 @@ exports[`Component: EditBounce renders not ready correctly 1`] = `
             rows={
               Array [
                 Array [
+                  <ReadyForIcon
+                    readyFor={
+                      Object {
+                        "bounce": false,
+                        "dkim": false,
+                        "sending": undefined,
+                      }
+                    }
+                  />,
                   "CNAME",
                   "xyz.com",
                   "sparkpostmail.com",
@@ -244,7 +264,7 @@ exports[`Component: EditBounce renders ready correctly 1`] = `
   </Grid>
   <Grid>
     <Grid.Column
-      md={6}
+      md={4}
       xs={12}
     >
       <div>
@@ -252,7 +272,7 @@ exports[`Component: EditBounce renders ready correctly 1`] = `
       </div>
     </Grid.Column>
     <Grid.Column
-      md={6}
+      md={8}
       xs={12}
     >
       <Panel

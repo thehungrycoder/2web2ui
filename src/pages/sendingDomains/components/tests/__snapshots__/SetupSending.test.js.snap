@@ -79,10 +79,14 @@ exports[`Component: SetupSending disables the verification button while submitti
           rows={
             Array [
               Array [
-                <Icon
-                  className={undefined}
-                  name="Error"
-                  size={18}
+                <ReadyForIcon
+                  readyFor={
+                    Object {
+                      "bounce": false,
+                      "dkim": false,
+                      "sending": false,
+                    }
+                  }
                 />,
                 "TXT",
                 <LongTextContainer
@@ -179,10 +183,14 @@ exports[`Component: SetupSending renders correctly for unverified DKIM and inval
           rows={
             Array [
               Array [
-                <Icon
-                  className={undefined}
-                  name="Error"
-                  size={18}
+                <ReadyForIcon
+                  readyFor={
+                    Object {
+                      "bounce": false,
+                      "dkim": false,
+                      "sending": false,
+                    }
+                  }
                 />,
                 "TXT",
                 <LongTextContainer
@@ -280,10 +288,14 @@ exports[`Component: SetupSending renders correctly for unverified DKIM and inval
           rows={
             Array [
               Array [
-                <Icon
-                  className={undefined}
-                  name="Error"
-                  size={18}
+                <ReadyForIcon
+                  readyFor={
+                    Object {
+                      "bounce": false,
+                      "dkim": false,
+                      "sending": false,
+                    }
+                  }
                 />,
                 "TXT",
                 <LongTextContainer
@@ -377,10 +389,14 @@ exports[`Component: SetupSending renders correctly when ownership and DKIM are v
           rows={
             Array [
               Array [
-                <Icon
-                  className={undefined}
-                  name="Check"
-                  size={18}
+                <ReadyForIcon
+                  readyFor={
+                    Object {
+                      "bounce": false,
+                      "dkim": true,
+                      "sending": true,
+                    }
+                  }
                 />,
                 "TXT",
                 <LongTextContainer
@@ -476,10 +492,14 @@ exports[`Component: SetupSending renders correctly when ownership is valid and D
           rows={
             Array [
               Array [
-                <Icon
-                  className={undefined}
-                  name="Error"
-                  size={18}
+                <ReadyForIcon
+                  readyFor={
+                    Object {
+                      "bounce": false,
+                      "dkim": false,
+                      "sending": true,
+                    }
+                  }
                 />,
                 "TXT",
                 <LongTextContainer

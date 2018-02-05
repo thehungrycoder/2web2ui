@@ -6,7 +6,7 @@ exports[`VerificationHelp component renders for non-verified domains blocked 1`]
 <p>
   Need help verifying your domain? 
   <a
-    href="https://www.sparkpost.com/docs/getting-started/getting-started-sparkpost/#step-2-verifying-domain-ownership"
+    href="https://www.sparkpost.com/docs/getting-started/getting-started-sparkpost/#sending-domain-step-2-verifying-domain-ownership"
     rel="noopener noreferrer"
     target="_blank"
   >
@@ -19,7 +19,7 @@ exports[`VerificationHelp component renders for non-verified domains pending 1`]
 <p>
   Need help verifying your domain? 
   <a
-    href="https://www.sparkpost.com/docs/getting-started/getting-started-sparkpost/#step-2-verifying-domain-ownership"
+    href="https://www.sparkpost.com/docs/getting-started/getting-started-sparkpost/#sending-domain-step-2-verifying-domain-ownership"
     rel="noopener noreferrer"
     target="_blank"
   >
@@ -32,7 +32,7 @@ exports[`VerificationHelp component renders for non-verified domains unverified 
 <p>
   Need help verifying your domain? 
   <a
-    href="https://www.sparkpost.com/docs/getting-started/getting-started-sparkpost/#step-2-verifying-domain-ownership"
+    href="https://www.sparkpost.com/docs/getting-started/getting-started-sparkpost/#sending-domain-step-2-verifying-domain-ownership"
     rel="noopener noreferrer"
     target="_blank"
   >
@@ -45,7 +45,7 @@ exports[`VerificationHelp component renders for non-verified domains verified 1`
 <p>
   Need help verifying your domain? 
   <a
-    href="https://www.sparkpost.com/docs/getting-started/getting-started-sparkpost/#step-2-verifying-domain-ownership"
+    href="https://www.sparkpost.com/docs/getting-started/getting-started-sparkpost/#sending-domain-step-2-verifying-domain-ownership"
     rel="noopener noreferrer"
     target="_blank"
   >
