@@ -210,9 +210,9 @@ module.exports = {
               modules: true,
               importLoaders: 2,
               sourceMap: true,
-              // Default class name template
-              // localIdentName: '[name]__[local]___[hash:base64:5]'
-              getLocalIdent: (context, localIdentName, localName) => generateScopedName(localName, context.resourcePath)
+              localIdentName: '[name]__[local]___[hash:base64:5]'
+              // Class name reducer
+              // getLocalIdent: (context, localIdentName, localName) => generateScopedName(localName, context.resourcePath)
             },
           },
           { loader: require.resolve('postcss-loader'), options: postCssOptions },
