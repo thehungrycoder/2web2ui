@@ -1,0 +1,111 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Subaccount Typeahead render function should render the list 1`] = `
+<div
+  className="Typeahead"
+>
+  <ActionList
+    actions={
+      Array [
+        Object {
+          "content": <SubaccountTypeaheadItem
+            id={1}
+            name="Subaccount 1"
+          />,
+          "highlighted": true,
+          "index": 0,
+          "item": Object {
+            "id": 1,
+            "name": "Subaccount 1",
+          },
+        },
+        Object {
+          "content": <SubaccountTypeaheadItem
+            id={2}
+            name="Subaccount 2"
+          />,
+          "highlighted": false,
+          "index": 1,
+          "item": Object {
+            "id": 2,
+            "name": "Subaccount 2",
+          },
+        },
+        Object {
+          "content": <SubaccountTypeaheadItem
+            id={3}
+            name="Subaccount 3"
+          />,
+          "highlighted": false,
+          "index": 2,
+          "item": Object {
+            "id": 3,
+            "name": "Subaccount 3",
+          },
+        },
+        Object {
+          "content": <SubaccountTypeaheadItem
+            id={4}
+            name="Subaccount 4"
+          />,
+          "highlighted": false,
+          "index": 3,
+          "item": Object {
+            "id": 4,
+            "name": "Subaccount 4",
+          },
+        },
+        Object {
+          "content": <SubaccountTypeaheadItem
+            id={5}
+            name="Subaccount 5"
+          />,
+          "highlighted": false,
+          "index": 4,
+          "item": Object {
+            "id": 5,
+            "name": "Subaccount 5",
+          },
+        },
+        Object {
+          "content": <SubaccountTypeaheadItem
+            id={6}
+            name="Subaccount 6"
+          />,
+          "highlighted": false,
+          "index": 5,
+          "item": Object {
+            "id": 6,
+            "name": "Subaccount 6",
+          },
+        },
+      ]
+    }
+    className="List hasHelp"
+  />
+  <TextField
+    connectRight={null}
+    data-lpignore={true}
+    disabled={false}
+    error={null}
+    helpText="help text"
+    id="redux form name"
+    label="Subaccount"
+    name="redux form name"
+    placeholder="None"
+    readOnly={false}
+    required={false}
+    resize="both"
+    type="text"
+  />
+</div>
+`;
+
+exports[`Subaccount Typeahead render function should render with selected item and not disabled 1`] = `
+<Button
+  onClick={[MockFunction]}
+  size="default"
+>
+  Clear
+</Button>
+`;

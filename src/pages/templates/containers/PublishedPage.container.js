@@ -4,7 +4,7 @@ import { reduxForm } from 'redux-form';
 
 import { getPublished, getTestData } from 'src/actions/templates';
 import { selectTemplateById, selectTemplateTestData } from 'src/selectors/templates';
-import { getSubaccountIdFromQuery } from 'src/selectors/subaccounts';
+import { selectSubaccountIdFromQuery, selectSubaccountFromQuery } from 'src/selectors/subaccounts';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
 
 import PublishedPage from '../PublishedPage';
@@ -13,12 +13,13 @@ const FORM_NAME = 'templatePublished';
 
 const mapStateToProps = (state, props) => ({
   loading: state.templates.getLoading,
-  subaccountId: getSubaccountIdFromQuery(props),
+  subaccountId: selectSubaccountIdFromQuery(state, props),
   hasSubaccounts: hasSubaccounts(state),
   formName: FORM_NAME,
   initialValues: {
     testData: selectTemplateTestData(state),
-    ...selectTemplateById(state, props).published
+    ...selectTemplateById(state, props).published,
+    subaccount: selectSubaccountFromQuery(state, props)
   }
 });
 

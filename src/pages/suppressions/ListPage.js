@@ -42,8 +42,8 @@ export class ListPage extends Component {
   }
 
   renderFindByEmails() {
-    const { subaccounts, hasSubaccounts } = this.props;
-    return <EmailSearch onSubmit={this.handleSearchByEmail} subaccounts={subaccounts} hasSubaccounts={hasSubaccounts} />;
+    const { hasSubaccounts } = this.props;
+    return <EmailSearch onSubmit={this.handleSearchByEmail} hasSubaccounts={hasSubaccounts} />;
   }
 
   handleTabs(tabIdx) {

@@ -1,5 +1,7 @@
 # SparkPost App
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/SparkPost/2web2ui.svg)](https://greenkeeper.io/)
+
 A re-build of the current SparkPost web app using React and Redux.
 
 ## Installing dependencies

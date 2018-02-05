@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Webhooks Form Component auth should render basic auth fields 1`] = `
+Array [
+  <AuthDropDown />,
+  <BasicAuthFields />,
+]
+`;
+
+exports[`Webhooks Form Component auth should render basic oauth2 fields 1`] = `
+Array [
+  <AuthDropDown />,
+  <OAuth2Fields />,
+]
+`;
+
+exports[`Webhooks Form Component should render correctly 1`] = `
+<form
+  onSubmit={[MockFunction]}
+>
+  <Panel.Section>
+    <NameField />
+    <TargetField />
+  </Panel.Section>
+  <Panel.Section>
+    <EventsRadioGroup />
+  </Panel.Section>
+  <Panel.Section>
+    <AuthDropDown />
+  </Panel.Section>
+  <Panel.Section>
+    <Button
+      disabled={true}
+      primary={true}
+      size="default"
+      submit={true}
+    >
+      Update Webhook
+    </Button>
+  </Panel.Section>
+</form>
+`;
+
+exports[`Webhooks Form Component should show events checkboxes 1`] = `
+Array [
+  <EventsRadioGroup />,
+  <Grid />,
+]
+`;
+
+exports[`Webhooks Form Component should subaccount section if subaccounts exist 1`] = `
+<Connect(SubaccountSection)
+  formName="webhookForm"
+  newWebhook={false}
+/>
+`;

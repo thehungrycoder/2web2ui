@@ -4,51 +4,63 @@ exports[`renders correctly - new and no subaccounts 1`] = `
 <form
   onSubmit={[MockFunction]}
 >
-  <Field
-    component={[Function]}
-    label="API Key Name"
-    name="label"
-    validate={[Function]}
-  />
-  <Field
-    component={[Function]}
-    name="grantsRadio"
-    options={
-      Array [
-        Object {
-          "label": "All",
-          "value": "all",
-        },
-        Object {
-          "label": "Select",
-          "value": "select",
-        },
-      ]
-    }
-    title="API Permissions"
-  />
-  <GrantsCheckboxes
-    grants={
-      Array [
-        "all grants",
-      ]
-    }
-  />
-  <Field
-    component={[Function]}
-    helpText="Leaving the field blank will allow access by valid API keys from any IP address."
-    label="Allowed IPs"
-    name="validIps"
-    placeholder="10.20.30.40, 10.20.30.0/24"
-    validate={[Function]}
-  />
-  <Button
-    primary={true}
-    size="default"
-    submit={true}
-  >
-    Create API Key
-  </Button>
+  <Panel.Section>
+    <Field
+      component={[Function]}
+      label="API Key Name"
+      name="label"
+      validate={[Function]}
+    />
+    <Field
+      component={[Function]}
+      disabled={false}
+      helpText="This assigment is permanent. Leave blank to assign to master account."
+      name="subaccount"
+    />
+  </Panel.Section>
+  <Panel.Section>
+    <Field
+      component={[Function]}
+      name="grantsRadio"
+      options={
+        Array [
+          Object {
+            "label": "All",
+            "value": "all",
+          },
+          Object {
+            "label": "Select",
+            "value": "select",
+          },
+        ]
+      }
+      title="API Permissions"
+    />
+    <GrantsCheckboxes
+      grants={
+        Array [
+          "all grants",
+        ]
+      }
+    />
+    <Field
+      component={[Function]}
+      helpText="Leaving the field blank will allow access by valid API keys from any IP address."
+      label="Allowed IPs"
+      name="validIps"
+      placeholder="10.20.30.40, 10.20.30.0/24"
+      validate={[Function]}
+    />
+  </Panel.Section>
+  <Panel.Section>
+    <Button
+      primary={true}
+      size="default"
+      submit={true}
+    >
+      Create API Key
+    </Button>
+  </Panel.Section>
 </form>
 `;
 
@@ -56,55 +68,63 @@ exports[`renders correctly - update and subaccounts 1`] = `
 <form
   onSubmit={[MockFunction]}
 >
-  <Field
-    component={[Function]}
-    label="API Key Name"
-    name="label"
-    validate={[Function]}
-  />
-  <Field
-    component={[Function]}
-    name="subaccount"
-  />
-  <Field
-    component={[Function]}
-    name="grantsRadio"
-    options={
-      Array [
-        Object {
-          "label": "All",
-          "value": "all",
-        },
-        Object {
-          "label": "Select",
-          "value": "select",
-        },
-      ]
-    }
-    title="API Permissions"
-  />
-  <GrantsCheckboxes
-    grants={
-      Array [
-        "subaccount grants",
-      ]
-    }
-  />
-  <Field
-    component={[Function]}
-    helpText="Leaving the field blank will allow access by valid API keys from any IP address."
-    label="Allowed IPs"
-    name="validIps"
-    placeholder="10.20.30.40, 10.20.30.0/24"
-    validate={[Function]}
-  />
-  <Button
-    primary={true}
-    size="default"
-    submit={true}
-  >
-    Update API Key
-  </Button>
+  <Panel.Section>
+    <Field
+      component={[Function]}
+      label="API Key Name"
+      name="label"
+      validate={[Function]}
+    />
+    <Field
+      component={[Function]}
+      disabled={true}
+      helpText="This assigment is permanent. Leave blank to assign to master account."
+      name="subaccount"
+    />
+  </Panel.Section>
+  <Panel.Section>
+    <Field
+      component={[Function]}
+      name="grantsRadio"
+      options={
+        Array [
+          Object {
+            "label": "All",
+            "value": "all",
+          },
+          Object {
+            "label": "Select",
+            "value": "select",
+          },
+        ]
+      }
+      title="API Permissions"
+    />
+    <GrantsCheckboxes
+      grants={
+        Array [
+          "subaccount grants",
+        ]
+      }
+    />
+    <Field
+      component={[Function]}
+      helpText="Leaving the field blank will allow access by valid API keys from any IP address."
+      label="Allowed IPs"
+      name="validIps"
+      placeholder="10.20.30.40, 10.20.30.0/24"
+      validate={[Function]}
+    />
+  </Panel.Section>
+  <Panel.Section>
+    <Button
+      primary={true}
+      size="default"
+      submit={true}
+    >
+      Update API Key
+    </Button>
+  </Panel.Section>
 </form>
 `;
 
@@ -118,51 +138,63 @@ exports[`submits correctly 1`] = `
     }
   }
 >
-  <Field
-    component={[Function]}
-    label="API Key Name"
-    name="label"
-    validate={[Function]}
-  />
-  <Field
-    component={[Function]}
-    name="grantsRadio"
-    options={
-      Array [
-        Object {
-          "label": "All",
-          "value": "all",
-        },
-        Object {
-          "label": "Select",
-          "value": "select",
-        },
-      ]
-    }
-    title="API Permissions"
-  />
-  <GrantsCheckboxes
-    grants={
-      Array [
-        "all grants",
-      ]
-    }
-  />
-  <Field
-    component={[Function]}
-    helpText="Leaving the field blank will allow access by valid API keys from any IP address."
-    label="Allowed IPs"
-    name="validIps"
-    placeholder="10.20.30.40, 10.20.30.0/24"
-    validate={[Function]}
-  />
-  <Button
-    disabled={true}
-    primary={true}
-    size="default"
-    submit={true}
-  >
-    Loading...
-  </Button>
+  <Panel.Section>
+    <Field
+      component={[Function]}
+      label="API Key Name"
+      name="label"
+      validate={[Function]}
+    />
+    <Field
+      component={[Function]}
+      disabled={false}
+      helpText="This assigment is permanent. Leave blank to assign to master account."
+      name="subaccount"
+    />
+  </Panel.Section>
+  <Panel.Section>
+    <Field
+      component={[Function]}
+      name="grantsRadio"
+      options={
+        Array [
+          Object {
+            "label": "All",
+            "value": "all",
+          },
+          Object {
+            "label": "Select",
+            "value": "select",
+          },
+        ]
+      }
+      title="API Permissions"
+    />
+    <GrantsCheckboxes
+      grants={
+        Array [
+          "all grants",
+        ]
+      }
+    />
+    <Field
+      component={[Function]}
+      helpText="Leaving the field blank will allow access by valid API keys from any IP address."
+      label="Allowed IPs"
+      name="validIps"
+      placeholder="10.20.30.40, 10.20.30.0/24"
+      validate={[Function]}
+    />
+  </Panel.Section>
+  <Panel.Section>
+    <Button
+      disabled={true}
+      primary={true}
+      size="default"
+      submit={true}
+    >
+      Loading...
+    </Button>
+  </Panel.Section>
 </form>
 `;

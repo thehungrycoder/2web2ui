@@ -26,10 +26,6 @@ describe('ApiKey Selectors', () => {
     }
   };
 
-  it('returns single api key', () => {
-    expect(apiKeys.getApiKey(store, { match: { params: { id: 'Ape' }}})).toMatchSnapshot();
-  });
-
   it('gets grants', () => {
     expect(apiKeys.getGrants(store)).toMatchSnapshot();
   });
@@ -56,10 +52,6 @@ describe('ApiKey Selectors', () => {
 
   it('gets form grants radio value - select', () => {
     expect(apiKeys.getInitialGrantsRadio(store, { apiKey: { grants: ['grant']}})).toEqual('select');
-  });
-
-  it('gets initial subaccount', () => {
-    expect(apiKeys.getInitialSubaccount(store, { apiKey: { subaccount_id: 'subId' }})).toMatchSnapshot();
   });
 
   it('gets initial values', () => {

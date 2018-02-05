@@ -1,4 +1,4 @@
-import { selectWebhookBatches } from '../webhooks';
+import { selectWebhookBatches, selectInitialSubaccountValue } from '../webhooks';
 
 describe('Webhooks selectors', () => {
   const state = {
@@ -20,5 +20,30 @@ describe('Webhooks selectors', () => {
 
   it('should add formatted_time and status to batches store', () => {
     expect(selectWebhookBatches(state)).toMatchSnapshot();
+  });
+
+  describe('selectInitialSubaccountValue', () => {
+    const subaccounts = [
+      { name: 'sub 1', id: 101 },
+      { name: 'sub 2', id: 501 }
+    ];
+
+    it('should get initial subaccount object', () => {
+      const location = { search: '?subaccount=501' };
+      const result = selectInitialSubaccountValue({ ...state, subaccounts: { list: subaccounts }}, { location });
+      expect(result).toMatchSnapshot();
+    });
+
+    it('should overwrite master-only webhooks', () => {
+      const location = { search: '?subaccount=0' };
+      const result = selectInitialSubaccountValue({ ...state, subaccounts: { list: subaccounts }}, { location });
+      expect(result).toEqual('Master account only');
+    });
+
+    it('should overwrite master-and-all-subaccount webhooks', () => {
+      const location = { search: null };
+      const result = selectInitialSubaccountValue({ ...state, subaccounts: { list: subaccounts }}, { location });
+      expect(result).toEqual('Master and all subaccounts');
+    });
   });
 });

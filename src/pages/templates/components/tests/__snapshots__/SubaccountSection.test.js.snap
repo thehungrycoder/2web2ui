@@ -31,6 +31,7 @@ exports[`Templates SubaccountSection on create should render radio group 1`] = `
 exports[`Templates SubaccountSection on create should render subaccount typeahead 1`] = `
 <Field
   component={[Function]}
+  helpText="This assignment is permanent."
   name="subaccount"
   validate={[Function]}
 />
@@ -41,8 +42,9 @@ exports[`Templates SubaccountSection on edit should render a disabled subaccount
   <Field
     component={[Function]}
     disabled={true}
+    helpText="This assignment is permanent."
     label="Subaccount"
-    name="subaccount_id"
+    name="subaccount"
   />
 </Panel.Section>
 `;

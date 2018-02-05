@@ -40,3 +40,4 @@ export function formatSubaccount(values, getState) {
 
   return subaccount;
 }
+

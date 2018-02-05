@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Webhooks Helpers mergeWebhooks should reassign master account webhooks 1`] = `
+Array [
+  Object {
+    "id": "master1",
+    "name": "master1name",
+    "subaccount_id": 0,
+  },
+  Object {
+    "id": "2",
+    "name": "2name",
+  },
+  Object {
+    "id": "3",
+    "name": "3name",
+    "subaccount_id": 101,
+  },
+]
+`;

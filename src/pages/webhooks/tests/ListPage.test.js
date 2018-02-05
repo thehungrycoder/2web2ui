@@ -2,25 +2,33 @@ import { shallow } from 'enzyme';
 import React from 'react';
 import { renderRowData } from 'src/__testHelpers__/renderHelpers';
 
-import { WebhooksList, getRowData } from '../ListPage';
+import { WebhooksList } from '../ListPage';
 
 describe('Page: Webhook List', () => {
   const props = {
-    listWebhooks: jest.fn(),
+    listAllWebhooks: jest.fn(),
     error: null,
     webhooks: [
       {
         id: 'id',
         name: 'my webby hook',
-        target: 'go here'
+        target: 'go here',
+        subaccount_id: 0
       },
       {
         id: 'id-2',
         name: 'my webby hooki 2',
-        target: 'go there'
+        target: 'go there',
+        subaccount_id: 101
+      },
+      {
+        id: 'id-3',
+        name: 'my webby hooki 3',
+        target: 'go nowhere'
       }
     ],
-    loading: false
+    loading: false,
+    showAlert: jest.fn()
   };
 
   let wrapper;
@@ -31,6 +39,13 @@ describe('Page: Webhook List', () => {
 
   it('should render happy path', () => {
     expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render correctly with subaccounts', () => {
+    wrapper.setProps({ hasSubaccounts: true });
+    expect(wrapper.find('TableCollection').props().columns).toMatchSnapshot();
+    const rows = props.webhooks.map(wrapper.instance().getRowData);
+    expect(rows).toMatchSnapshot();
   });
 
   it('should render loading component when loading data', () => {
@@ -44,8 +59,7 @@ describe('Page: Webhook List', () => {
   });
 
   it('should render row data properly', () => {
-    const row = getRowData(props.webhooks[0]);
+    const row = wrapper.instance().getRowData(props.webhooks[0]);
     expect(renderRowData(row)).toMatchSnapshot();
   });
 });
-

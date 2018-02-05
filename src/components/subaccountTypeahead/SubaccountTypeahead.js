@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { list as getSubaccountsList } from 'src/actions/subaccounts';
 import { ActionList, Button, TextField } from '@sparkpost/matchbox';
+import { hasSubaccounts } from 'src/selectors/subaccounts';
 
 import sortMatch from 'src/helpers/sortMatch';
 import Item from './SubaccountTypeaheadItem';
@@ -11,7 +12,7 @@ import styles from './SubaccountTypeahead.module.scss';
 
 const cx = classnames.bind(styles);
 
-const itemToString = (item) => (item ? item.name : '');
+const itemToString = (item) => (item ? `${item.name} (${item.id})` : '');
 
 export class SubaccountTypeahead extends Component {
   static defaultProps = {
@@ -29,7 +30,7 @@ export class SubaccountTypeahead extends Component {
     clearSelection,
     isOpen
   }) => {
-    const { name, subaccounts, disabled, label = 'Subaccount', placeholder = (isOpen ? 'Type to search' : 'None'), error } = this.props;
+    const { name, subaccounts, disabled, label = 'Subaccount', placeholder = (isOpen ? 'Type to search' : 'None'), error, helpText } = this.props;
 
     const matches = sortMatch(
       subaccounts,
@@ -44,17 +45,19 @@ export class SubaccountTypeahead extends Component {
     }));
 
     const listClasses = cx('List', {
-      open: isOpen && (!inputValue || matches.length)
+      open: isOpen && (!inputValue || matches.length),
+      hasHelp: !!helpText
     });
 
     const textFieldProps = getInputProps({
-      connectRight: selectedItem && this.renderClearButton(clearSelection),
+      connectRight: selectedItem && !disabled ? this.renderClearButton(clearSelection) : null,
       readOnly: !!selectedItem,
       disabled,
       id: name,
       label,
       name,
       placeholder,
+      helpText,
       error: (!isOpen && error) ? error : null
     });
 
@@ -103,7 +106,7 @@ SubaccountTypeahead.defaultProps = {
 };
 
 const mapStateToProps = (state) => ({
-  hasSubaccounts: state.currentUser.has_subaccounts,
+  hasSubaccounts: hasSubaccounts(state),
   subaccounts: state.subaccounts.list
 });
 export default connect(mapStateToProps, { getSubaccountsList })(SubaccountTypeahead);

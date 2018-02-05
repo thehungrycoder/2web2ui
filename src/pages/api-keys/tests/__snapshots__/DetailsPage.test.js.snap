@@ -20,12 +20,10 @@ exports[`renders correctly with no subaccounts 1`] = `
   }
 >
   <Panel>
-    <Panel.Section>
-      <Connect(ReduxForm)
-        apiKey={Object {}}
-        onSubmit={[Function]}
-      />
-    </Panel.Section>
+    <withRouter(Connect(ReduxForm))
+      apiKey={Object {}}
+      onSubmit={[Function]}
+    />
   </Panel>
   <DeleteModal
     content={

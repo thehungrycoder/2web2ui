@@ -343,6 +343,9 @@ export const list = [
   {
     key: 'count_raw_clicked_approx',
     type: 'total',
-    unit: 'number'
+    unit: 'number',
+    description: 'Total number of messages which had at least one link selected one or more times.'
   }
 ];
+
+export const map = list.reduce((accumulator = {}, metric) => ({ ...accumulator, [metric.key]: metric }));

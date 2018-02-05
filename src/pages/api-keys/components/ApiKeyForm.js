@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
-import { Button } from '@sparkpost/matchbox';
+import { Button, Panel } from '@sparkpost/matchbox';
 
 import {
   RadioGroup,
@@ -13,10 +14,9 @@ import {
   getSubaccountGrants,
   getIsNew,
   getInitialGrantsRadio,
-  getInitialSubaccount,
   getInitialValues
 } from 'src/selectors/api-keys';
-import { hasSubaccounts } from 'src/selectors/subaccounts';
+import { selectSubaccountFromQuery } from 'src/selectors/subaccounts';
 import validIpList from '../helpers/validIpList';
 import { required } from 'src/helpers/validation';
 import GrantsCheckboxes from './GrantsCheckboxes';
@@ -32,10 +32,8 @@ export class ApiKeyForm extends Component {
     const {
       grants,
       subaccountGrants,
-      subaccounts,
       isNew,
       handleSubmit,
-      hasSubaccounts,
       pristine,
       showGrants,
       showSubaccountGrants,
@@ -46,38 +44,42 @@ export class ApiKeyForm extends Component {
 
     return (
       <form onSubmit={handleSubmit}>
-        <Field
-          name="label"
-          component={TextFieldWrapper}
-          validate={required}
-          label="API Key Name"
-        />
-        { hasSubaccounts &&
+        <Panel.Section>
           <Field
-            name="subaccount"
-            component={SubaccountTypeaheadWrapper}
-            subaccounts={subaccounts}
+            name='label'
+            component={TextFieldWrapper}
+            validate={required}
+            label='API Key Name'
           />
-        }
-        <Field
-          name="grantsRadio"
-          component={RadioGroup}
-          title="API Permissions"
-          options={grantsOptions}
-        />
-        <GrantsCheckboxes grants={showSubaccountGrants ? subaccountGrants : grants} show={showGrants} />
-        <Field
-          name="validIps"
-          component={TextFieldWrapper}
-          label="Allowed IPs"
-          helpText="Leaving the field blank will allow access by valid API keys from any IP address."
-          placeholder="10.20.30.40, 10.20.30.0/24"
-          validate={validIpList}
-        />
-
-        <Button submit primary disabled={submitting || pristine}>
-          {submitting ? 'Loading...' : submitText}
-        </Button>
+          <Field
+            name='subaccount'
+            helpText='This assigment is permanent. Leave blank to assign to master account.'
+            component={SubaccountTypeaheadWrapper}
+            disabled={!isNew}
+          />
+        </Panel.Section>
+        <Panel.Section>
+          <Field
+            name='grantsRadio'
+            component={RadioGroup}
+            title='API Permissions'
+            options={grantsOptions}
+          />
+          <GrantsCheckboxes grants={showSubaccountGrants ? subaccountGrants : grants} show={showGrants} />
+          <Field
+            name='validIps'
+            component={TextFieldWrapper}
+            label='Allowed IPs'
+            helpText='Leaving the field blank will allow access by valid API keys from any IP address.'
+            placeholder='10.20.30.40, 10.20.30.0/24'
+            validate={validIpList}
+          />
+        </Panel.Section>
+        <Panel.Section>
+          <Button submit primary disabled={submitting || pristine}>
+            {submitting ? 'Loading...' : submitText}
+          </Button>
+        </Panel.Section>
       </form>
     );
   }
@@ -86,18 +88,19 @@ export class ApiKeyForm extends Component {
 const valueSelector = formValueSelector(formName);
 const mapStateToProps = (state, props) => ({
   grants: getGrants(state),
-  hasSubaccounts: hasSubaccounts(state),
   subaccountGrants: getSubaccountGrants(state),
-  subaccounts: state.subaccounts.list,
   showSubaccountGrants: !!valueSelector(state, 'subaccount'),
   showGrants: valueSelector(state, 'grantsRadio') === 'select',
   isNew: getIsNew(state, props),
   initialValues: {
     grantsRadio: getInitialGrantsRadio(state, props),
-    subaccount: getInitialSubaccount(state, props),
+    subaccount: selectSubaccountFromQuery(state, props),
     ...getInitialValues(state, props)
   }
 });
 
-const formOptions = { form: formName };
-export default connect(mapStateToProps, {})(reduxForm(formOptions)(ApiKeyForm));
+const formOptions = {
+  form: formName,
+  enableReinitialize: true
+};
+export default withRouter(connect(mapStateToProps, {})(reduxForm(formOptions)(ApiKeyForm)));

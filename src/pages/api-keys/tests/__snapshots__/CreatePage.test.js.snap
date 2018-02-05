@@ -13,11 +13,9 @@ exports[`renders correctly with no subaccounts 1`] = `
   title="Create API Key"
 >
   <Panel>
-    <Panel.Section>
-      <Connect(ReduxForm)
-        onSubmit={[Function]}
-      />
-    </Panel.Section>
+    <withRouter(Connect(ReduxForm))
+      onSubmit={[Function]}
+    />
   </Panel>
 </Page>
 `;
