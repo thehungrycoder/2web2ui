@@ -1,16 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { verify, update } from 'src/actions/sendingDomains';
 
-import { Panel, Grid, Banner } from '@sparkpost/matchbox';
+import { Panel, Banner, Tooltip, Icon } from '@sparkpost/matchbox';
 import ToggleBlock from 'src/components/toggleBlock/ToggleBlock';
+import { LabelledValue } from 'src/components';
 import { showAlert } from 'src/actions/globalAlert';
 import { SendingDomainSection } from './SendingDomainSection';
-import ReadyForIcon from './ReadyForIcon';
 import { resolveReadyFor } from 'src/helpers/domains';
-import SimpleTable from './SimpleTable';
 import config from 'src/config';
 
 export class EditBounce extends Component {
@@ -57,69 +56,65 @@ export class EditBounce extends Component {
     }
 
     return (
-      <Grid>
-        <Grid.Column xs={12} md={12}>
-          <Banner status="warning">
-            We strongly recommend using a subdomain such as <strong>bounces.{id}</strong> for bounce domains. <Link to={'/account/sending-domains/create'}>Create a new domain now.</Link>
-          </Banner>
-        </Grid.Column>
-      </Grid>
+      <Banner status="warning">
+        We strongly recommend using a subdomain such as <strong>bounces.{id}</strong> for bounce domains. <Link to={'/account/sending-domains/create'}>Create a new domain now.</Link>
+      </Banner>
     );
   }
 
   renderNotReady() {
-    const { id, domain } = this.props;
-    const readyFor = resolveReadyFor(domain);
-    return (<Grid>
-      <Grid.Column xs={12} md={4}>
-        <div>
+    const { id } = this.props;
+
+    return (
+      <Fragment>
+        <SendingDomainSection.Left>
           <p><strong>To use this domain for bounces</strong>, add this CNAME record to your DNS settings.</p>
           <p><em>Note: Bounce domains must be verified via DNS.</em></p>
-        </div>
-      </Grid.Column>
-      <Grid.Column xs={12} md={8}>
-        <Panel>
-          <Panel
-            title='DNS Settings'
-            actions={[{ content: 'Verify CNAME Record', onClick: this.verifyDomain }]}
-          >
-            <SimpleTable
-              header={[null, 'Type', 'Hostname', 'Value']}
-              rows={[[<ReadyForIcon readyFor={readyFor} />, 'CNAME', id, config.bounceDomains.cnameValue]]}
-            />
+        </SendingDomainSection.Left>
+        <SendingDomainSection.Right>
+          { this.renderRootDomainWarning() }
+          <Panel title='DNS Settings' sectioned
+            actions={[{ content: 'Verify CNAME Record', onClick: this.verifyDomain }]} >
+            <LabelledValue label='Type'><p>CNAME</p></LabelledValue>
+            <LabelledValue label='Hostname'><p>{id}</p></LabelledValue>
+            <LabelledValue label='Value'><p>{config.bounceDomains.cnameValue}</p></LabelledValue>
           </Panel>
-        </Panel>
-      </Grid.Column>
-    </Grid>);
+        </SendingDomainSection.Right>
+      </Fragment>
+    );
   }
 
   renderReady() {
-    const { updateLoading } = this.props;
+    const { updateLoading, id } = this.props;
     const { allowDefault } = config.bounceDomains;
+    const tooltip = (
+      <Tooltip dark content={`When this is set to "ON", all future transmissions will use ${id} as their bounce domain (unless otherwise specified).`}>Use this domain as your default bounce domain? <Icon name='Help' size={15}/></Tooltip>
+    );
 
-    return (<Grid>
-      <Grid.Column xs={12} md={4}>
-        <div>This domain is all set up and ready to be used as a bounce domain. Such alignment, wow!</div>
-      </Grid.Column>
-      <Grid.Column xs={12} md={8}>
-        <Panel sectioned>
-          <div>Your domain is ready to be used as a bounce domain.</div>
-        </Panel>
-        { allowDefault &&
-        <Panel sectioned>
-          <Field
-            name='is_default_bounce_domain'
-            component={ToggleBlock}
-            label='Use this domain as your default bounce domain?'
-            type='checkbox'
-            parse={(value) => !!value} // Prevents unchecked value from equaling ""
-            disabled={updateLoading}
-            onChange={this.toggleDefaultBounce}
-          />
-        </Panel>
-        }
-      </Grid.Column>
-    </Grid>);
+    return (
+      <Fragment>
+        <SendingDomainSection.Left/>
+        <SendingDomainSection.Right>
+          { this.renderRootDomainWarning() }
+          <Panel sectioned>
+            <p>This domain is ready to be used as a bounce domain.</p>
+          </Panel>
+          <Panel sectioned>
+            { allowDefault &&
+                <Field
+                  name='is_default_bounce_domain'
+                  component={ToggleBlock}
+                  label={tooltip}
+                  type='checkbox'
+                  parse={(value) => !!value} // Prevents unchecked value from equaling ""
+                  disabled={updateLoading}
+                  onChange={this.toggleDefaultBounce}
+                />
+            }
+          </Panel>
+        </SendingDomainSection.Right>
+      </Fragment>
+    );
   }
 
   render() {
@@ -128,7 +123,6 @@ export class EditBounce extends Component {
     const readyFor = resolveReadyFor(domain.status);
     return (
       <SendingDomainSection title='Set Up For Bounce'>
-        { this.renderRootDomainWarning() }
         { readyFor.bounce ? this.renderReady() : this.renderNotReady() }
       </SendingDomainSection>
     );

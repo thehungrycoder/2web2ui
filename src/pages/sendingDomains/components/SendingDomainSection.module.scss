@@ -1,0 +1,9 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.Right {
+  margin-top: rem(-42);
+}
+
+.Left {
+  margin-bottom: rem(42) + spacing(large);
+}
