@@ -33,7 +33,7 @@ export class SmtpPage extends Component {
     return (
       <Page title='SMTP Relay'>
         <SmtpDetails />
-        <DefaultTrackingForm onChange={this.toggleTracking} />
+        <DefaultTrackingForm toggle={this.toggleTracking} />
       </Page>
     );
 

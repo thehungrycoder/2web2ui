@@ -13,7 +13,7 @@ describe('Page: Smtp tests', () => {
         }
       }
     },
-    onChange: jest.fn()
+    toggle: jest.fn()
   };
 
   let wrapper;
@@ -33,6 +33,6 @@ describe('Page: Smtp tests', () => {
 
   it('should call onChange when form changes', () => {
     wrapper.find('Field').simulate('change');
-    expect(wrapper.instance().props.onChange).toHaveBeenCalled();
+    expect(wrapper.instance().props.toggle).toHaveBeenCalled();
   });
 });

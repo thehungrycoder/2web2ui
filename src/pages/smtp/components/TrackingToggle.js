@@ -7,7 +7,7 @@ import ToggleBlock from 'src/components/toggleBlock/ToggleBlock';
 
 export class DefaultTrackingForm extends Component {
   render() {
-    const { updateLoading, onChange } = this.props;
+    const { updateLoading, toggle } = this.props;
     return (
       <Panel sectioned title='Engagement Tracking'>
         <p>Engagement tracking allows the ability to show how many recipients opened messages or clicked links. This is the default setting for engagement tracking for SMTP.</p>
@@ -17,7 +17,7 @@ export class DefaultTrackingForm extends Component {
           label='SMTP Engagement Tracking'
           type='checkbox'
           disabled={updateLoading}
-          onChange={onChange}
+          onChange={toggle}
         />
       </Panel>
     );

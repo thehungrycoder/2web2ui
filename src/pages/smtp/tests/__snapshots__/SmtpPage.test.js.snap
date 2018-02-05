@@ -7,7 +7,7 @@ exports[`Page: Smtp tests should render page correctly with defaults 1`] = `
 >
   <SmtpDetails />
   <Connect(ReduxForm)
-    onChange={[Function]}
+    toggle={[Function]}
   />
 </Page>
 `;
