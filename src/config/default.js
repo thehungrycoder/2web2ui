@@ -90,6 +90,8 @@ const config = {
     allowDefault: true,
     cnameValue: 'sparkpostmail.com'
   },
+  trackingDomains: {
+    cnameValue: 'spgo.io'
   dateFormat: 'MMM D YYYY',
   timeFormat: 'h:mma',
   messageEvents: {
