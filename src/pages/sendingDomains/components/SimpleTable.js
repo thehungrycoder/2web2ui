@@ -1,5 +1,6 @@
 import React from 'react';
 import { Table } from '@sparkpost/matchbox';
+import styles from './SimpleTable.module.scss';
 
 const HeaderCell = (label, idx) => (<Table.HeaderCell key={idx}>
   {label}
@@ -11,7 +12,7 @@ const DataCell = (data, idx) => (
   </Table.Cell>
 );
 
-const Row = (row, idx) => (<Table.Row key={idx}>
+const Row = (row, idx) => (<Table.Row key={idx} className={styles.Row}>
   {row.map(DataCell)}
 </Table.Row>);
 
