@@ -50,7 +50,11 @@ exports[`StatusDescription component Shallow tests renders subaccount details 1`
       label="Subaccount"
     >
       <SubaccountTag
+        all={false}
         id={101}
+        isDefault={false}
+        master={false}
+        receiveAll={false}
       />
     </LabelledValue>
   </Panel.Section>
