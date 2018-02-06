@@ -57,11 +57,38 @@ describe('Component: EditBounce', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('renders correctly when allowDefault is true', () => {
-    config.bounceDomains.allowDefault = true;
-    wrapper.setProps({ domain: { status: { ...status, cname_status: 'valid' }}});
-    expect(wrapper).toMatchSnapshot();
+  describe('default bounce toggle', () => {
+    it('renders correctly toggle when all conditions are true', () => {
+      config.bounceDomains.allowDefault = true;
+      wrapper.setProps({ domain: { status: { ...status, ownership_verified: true, cname_status: 'valid' }}});
+      expect(wrapper.find('Field')).toMatchSnapshot();
+    });
+
+    it('does not render if config is false', () => {
+      config.bounceDomains.allowDefault = false;
+      wrapper.setProps({ domain: { status: { ...status, ownership_verified: true, cname_status: 'valid' }}});
+      expect(wrapper.find('Field')).toHaveLength(0);
+    });
+
+    it('does not render if not ownership verified', () => {
+      config.bounceDomains.allowDefault = true;
+      wrapper.setProps({ domain: { status: { ...status, ownership_verified: false, cname_status: 'valid' }}});
+      expect(wrapper.find('Field')).toHaveLength(0);
+    });
+
+    it('does not render if assigned to subaccount', () => {
+      config.bounceDomains.allowDefault = true;
+      wrapper.setProps({ domain: { subaccount_id: 101, status: { ...status, ownership_verified: true, cname_status: 'valid' }}});
+      expect(wrapper.find('Field')).toHaveLength(0);
+    });
+
+    it('does not render if not ready for bounce', () => {
+      config.bounceDomains.allowDefault = true;
+      wrapper.setProps({ domain: { status: { ...status, ownership_verified: true, cname_status: 'invalid' }}});
+      expect(wrapper.find('Field')).toHaveLength(0);
+    });
   });
+
 
   describe('verifyDomain', () => {
     it('verifies domain and alerts when verification successful', async() => {

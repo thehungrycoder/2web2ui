@@ -37,17 +37,29 @@ export class SetupSending extends Component {
       });
   }
 
-  renderBanner() {
+  renderText() {
     const readyFor = resolveReadyFor(this.props.domain.status);
+    let content = null;
 
-    if (!readyFor.sending && !readyFor.dkim && !config.featureFlags.allow_mailbox_verification) {
-      return (<p><strong>To use this domain for sending</strong>, add this TXT record to your DNS settings, paying close attention to the specified hostname.</p>);
-    } else if (!readyFor.sending && !readyFor.dkim && config.featureFlags.allow_mailbox_verification) {
-      return (<p>We recommend DNS verification, but if you don't have DNS access, you can <a>set this domain up for sending via email</a>.</p>);
-    } else if (readyFor.sending && !readyFor.dkim) {
-      return <p>This domain is <strong>ready for sending</strong>, but if you plan to use it for sending, we still recommend that you add this TXT record to make it <strong>ready for DKIM</strong> as well.</p>;
+    if (!readyFor.sending && !readyFor.dkim) {
+      content = <p><strong>To use this domain for sending</strong>, add this TXT record to your DNS settings, paying close attention to the specified hostname.</p>;
+
+      // Append second paragraph for mailbox verification
+      if (config.featureFlags.allow_mailbox_verification) {
+        content = (
+          <React.Fragment>
+            {content}
+            <p>We recommend DNS verification, but if you don't have DNS access, you can <a>set this domain up for sending via email</a>.</p>
+          </React.Fragment>
+        );
+      }
     }
-    return null;
+
+    if (readyFor.sending && !readyFor.dkim) {
+      content = <p>This domain is <strong>ready for sending</strong>, but if you plan to use it for sending, we still recommend that you add this TXT record to make it <strong>ready for DKIM</strong> as well.</p>;
+    }
+
+    return content;
   }
 
   getVerifyAction() {
@@ -86,7 +98,7 @@ export class SetupSending extends Component {
     return (
       <SendingDomainSection title="Set Up For Sending">
         <SendingDomainSection.Left>
-          {this.renderBanner()}
+          {this.renderText()}
         </SendingDomainSection.Left>
         <SendingDomainSection.Right>
           {this.renderTxtRecordPanel()}
