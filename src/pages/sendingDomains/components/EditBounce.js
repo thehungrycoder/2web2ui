@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { verify, update } from 'src/actions/sendingDomains';
 
+import { VerifiedIcon } from './Icons';
 import { Panel, Banner, Tooltip, Icon } from '@sparkpost/matchbox';
 import ToggleBlock from 'src/components/toggleBlock/ToggleBlock';
 import { LabelledValue } from 'src/components';
@@ -116,7 +117,7 @@ export class EditBounce extends Component {
         <SendingDomainSection.Right>
           { this.renderRootDomainWarning() }
           <Panel sectioned>
-            <p>This domain is ready to be used as a bounce domain.</p>
+            <p><VerifiedIcon/> This domain is ready to be used as a bounce domain.</p>
           </Panel>
           { showToggle &&
               <Panel sectioned>

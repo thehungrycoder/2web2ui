@@ -133,7 +133,8 @@ exports[`Component: SetupSending renders correctly when ownership and DKIM are v
       sectioned={true}
     >
       <p>
-        This domain is all set up to send with DKIM-signing. Nice work!
+        <VerifiedIcon />
+         This domain is all set up to send with DKIM-signing. Nice work!
       </p>
     </Panel>
   </Right>

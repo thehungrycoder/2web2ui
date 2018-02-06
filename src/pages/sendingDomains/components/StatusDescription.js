@@ -7,6 +7,7 @@ import { LabelledValue } from 'src/components';
 
 import ReadyFor from './ReadyFor';
 import StatusTooltip from './StatusTooltip';
+import { VerifiedIcon } from './Icons';
 
 const StatusDescription = ({ domain, readyFor, status }) => {
   const {
@@ -17,7 +18,7 @@ const StatusDescription = ({ domain, readyFor, status }) => {
   return <Fragment>
     <Panel.Section>
       <LabelledValue label={<StatusTooltip>Status</StatusTooltip>}>
-        { status === 'verified' && <div><strong>Verified</strong></div> }
+        { status === 'verified' && <div><VerifiedIcon/> <strong>Verified</strong></div> }
         { status !== 'verified' && <DomainStatusTag status={status} /> }
         <ReadyFor {...readyFor} bounceDefault={is_default_bounce_domain} />
       </LabelledValue>

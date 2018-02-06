@@ -144,6 +144,8 @@ exports[`StatusDescription component Shallow tests renders verification status c
       }
     >
       <div>
+        <VerifiedIcon />
+         
         <strong>
           Verified
         </strong>

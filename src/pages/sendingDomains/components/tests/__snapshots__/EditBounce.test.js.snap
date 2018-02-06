@@ -183,7 +183,8 @@ exports[`Component: EditBounce renders ready correctly 1`] = `
         sectioned={true}
       >
         <p>
-          This domain is ready to be used as a bounce domain.
+          <VerifiedIcon />
+           This domain is ready to be used as a bounce domain.
         </p>
       </Panel>
     </Right>

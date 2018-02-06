@@ -6,6 +6,7 @@ import { withRouter } from 'react-router-dom';
 import { Panel } from '@sparkpost/matchbox';
 import { LabelledValue } from 'src/components';
 import { SendingDomainSection } from './SendingDomainSection';
+import { VerifiedIcon } from './Icons';
 
 // actions
 import { showAlert } from 'src/actions/globalAlert';
@@ -80,7 +81,7 @@ export class SetupSending extends Component {
     if (readyFor.sending && readyFor.dkim) {
       return (
         <Panel sectioned>
-          <p>This domain is all set up to send with DKIM-signing. Nice work!</p>
+          <p><VerifiedIcon/> This domain is all set up to send with DKIM-signing. Nice work!</p>
         </Panel>
       );
     }
