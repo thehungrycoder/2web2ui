@@ -26,7 +26,7 @@ describe('Component: SendingDomainSection', () => {
     const props = {
       children: ['Bill', 'Brasky']
     };
-    const wrapper = shallow(<SendingDomainSection.Left {...props} />);
+    const wrapper = shallow(<SendingDomainSection.Right {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 

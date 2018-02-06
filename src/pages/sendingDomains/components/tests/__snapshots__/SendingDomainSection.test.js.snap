@@ -14,7 +14,7 @@ exports[`Component: SendingDomainSection should render Left section 1`] = `
 
 exports[`Component: SendingDomainSection should render Right section 1`] = `
 <Grid.Column
-  lg={5}
+  lg={7}
   xs={12}
 >
   <div>
