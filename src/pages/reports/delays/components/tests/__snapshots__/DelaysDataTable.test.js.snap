@@ -41,31 +41,21 @@ exports[`DelaysDataTable:  should render page 1`] = `
 
 exports[`DelaysDataTable:  should render row data properly 1`] = `
 Array [
-  <LongTextContainer
-    text="bad delay"
-  >
-    <div>
-      bad delay
-    </div>
-  </LongTextContainer>,
-  <UnstyledLink
+  <div>
+    bad delay
+  </div>,
+  <a
     onClick={[Function]}
   >
-    <a
-      onClick={[Function]}
-    >
-      gmail.com
-    </a>
-  </UnstyledLink>,
+    gmail.com
+  </a>,
   1,
   <span>
     10
      (
     <Percent
       value={20}
-    >
-      20%
-    </Percent>
+    />
     )
   </span>,
 ]
