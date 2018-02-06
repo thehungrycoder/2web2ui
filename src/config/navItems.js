@@ -70,37 +70,34 @@ export default [
     icon: 'Settings',
     children: [
       {
+        label: 'Profile',
+        to: '/account/profile'
+      },
+      {
         label: 'Billing',
         to: '/account/billing'
+      },
+      {
+        label: 'Users',
+        to: '/account/users'
       },
       {
         label: 'API Keys',
         to: '/account/api-keys'
       },
       {
-        label: 'Profile',
-        to: '/account/profile'
+        label: 'Subaccounts',
+        to: '/account/subaccounts'
       },
       {
-        label: 'Security',
-        to: '/account/security'
+        label: 'SMTP Settings',
+        to: '/account/smtp'
       },
       {
         label: 'Sending Domains',
         to: '/account/sending-domains'
       },
-      {
-        label: 'SMTP Relay',
-        to: '/account/smtp'
-      },
-      {
-        label: 'Subaccounts',
-        to: '/account/subaccounts'
-      },
-      {
-        label: 'Users',
-        to: '/account/users'
-      },
+
       {
         label: 'Tracking Domains',
         to: '/account/tracking-domains'

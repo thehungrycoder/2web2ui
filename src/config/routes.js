@@ -308,12 +308,6 @@ const routes = [
     layout: App
   },
   {
-    path: '/account/security',
-    component: ComingSoonPage,
-    condition: hasGrants('users/self-manage'),
-    layout: App
-  },
-  {
     path: '/account/sending-domains',
     component: sendingDomains.ListPage,
     condition: hasGrants('sending_domains/manage'),
