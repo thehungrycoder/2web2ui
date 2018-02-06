@@ -1,57 +1,69 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
-
-import { Button, Error, Tag } from '@sparkpost/matchbox';
-
-import { shrinkToFit } from 'src/helpers/string';
+import { Button, Error, Label } from '@sparkpost/matchbox';
 
 import styles from './FileFieldWrapper.module.scss';
 
-const maxLabelLength = 50;
-
+// TODO: Integrate in Matchbox if Dropzone isn't too big of a dependency
+// TODO: Need a clear button
 export default class FileFieldWrapper extends Component {
-  dropzoneRef = null;
-
-  handleDrop = (files, errors) => {
-    const { input: { onChange, onBlur }} = this.props;
-    if (files.length) {
-      onChange(files[0]);
-      onBlur(); // Fake up onBlur to update redux-form validation and error state
-    }
-  };
-
-  renderError() {
-    const { meta: { error }} = this.props;
-    return <Error error={error} />;
+  handleCancel = () => {
+    this.props.input.onBlur(); // run validation
   }
 
-  renderFilename() {
-    const { input: { value: file }} = this.props;
+  // Always set value to dropped file even if rejected for validate functions to set error
+  handleDrop = (acceptedFiles, rejectedFiles) => {
+    const files = [...acceptedFiles, ...rejectedFiles];
+    this.props.input.onChange(files[0]);
+    this.props.input.onBlur(); // run validation
+  }
 
-    return <Tag className={styles.Tag}>
-      {file ? shrinkToFit(file.name, maxLabelLength) : 'No file selected'}
-    </Tag>;
+  handleOpen = () => {
+    this.dropzoneRef.open();
+  }
+
+  setDropzoneRef = (ref) => {
+    this.dropzoneRef = ref;
   }
 
   render() {
-    const { id, label, name, meta: { touched, error }, disabled } = this.props;
+    const { disabled, fileType, helpText, input, label, meta, required } = this.props;
+    const filename = _.get(input, 'value.name');
 
-    return <div>
-      <label id={id} htmlFor={id} className={styles.Label}>{label}</label>
-      <Dropzone
-        ref={(ref) => this.dropzoneRef = ref}
-        name={name}
-        multiple={false}
-        accept='.csv'
-        disablePreview
-        disableClick
-        className={styles.Dropzone}
-        onDrop={this.handleDrop}>
-        { touched && error ? this.renderError() : this.renderFilename() }
-        <Button
-          disabled={disabled}
-          onClick={() => this.dropzoneRef.open()}>Choose a CSV file</Button>
-      </Dropzone>
-    </div>;
+    return (
+      <fieldset className={styles.Field}>
+        <Label id={input.id}>{label}{required && '*'}</Label>
+        <div className={styles.InputWrapper}>
+          <Dropzone
+            accept={`.${fileType}`}
+            activeClassName={styles.DropzoneActive}
+            className={styles.Dropzone}
+            disabledClassName={styles.DropzoneDisabled}
+            disablePreview
+            disabled={disabled}
+            id={input.id}
+            multiple={false}
+            name={input.name}
+            onDrop={this.handleDrop}
+            onFileDialogCancel={this.handleCancel}
+            ref={this.setDropzoneRef}
+          >
+            {filename
+              ? <span>{filename}</span>
+              : <span className={styles.Placeholder}>example.{fileType}</span>}
+          </Dropzone>
+          <Button
+            className={styles.Button}
+            disabled={disabled}
+            onClick={this.handleOpen}
+          >
+            Choose File
+          </Button>
+        </div>
+        {helpText && <div className={styles.Help}>{helpText}</div>}
+        {meta.touched && meta.error && <Error error={meta.error} />}
+      </fieldset>
+    );
   }
 }

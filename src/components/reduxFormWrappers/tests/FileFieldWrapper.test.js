@@ -1,71 +1,84 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import cases from 'jest-in-case';
 
 import FileFieldWrapper from '../FileFieldWrapper';
 
-describe('FileFieldWrapper', () => {
-  let wrapper;
-  let props;
 
-  function createProps(extraProps = {}) {
-    return {
-      id: 'uploadem',
-      label: 'Upload them all here',
-      name: 'uploadem',
-      meta: { touched: false, error: false },
-      input: { value: null, onChange: jest.fn(), onBlur: jest.fn() },
-      ...extraProps
-    };
+cases('FileFieldWrapper', (props) => {
+  const defaults = {
+    fileType: 'csv',
+    input: {},
+    label: 'Test File Input',
+    meta: {
+      touched: false
+    },
+    required: true
+  };
+  const wrapper = shallow(<FileFieldWrapper {...defaults} {...props} />);
+  expect(wrapper).toMatchSnapshot();
+}, {
+  'renders file input': {},
+  'renders file input with selected filename': {
+    input: {
+      value: {
+        name: 'test.csv',
+        size: 999
+      }
+    }
+  },
+  'renders disabled file input': {
+    disabled: true
+  },
+  'renders file input with error message': {
+    meta: {
+      error: 'Oh no!',
+      touched: true
+    }
+  },
+  'renders file input with help message': {
+    helpText: 'Ask Google!'
   }
+});
 
-  function createWrapper(props) {
-    return shallow(<FileFieldWrapper {...props} />);
-  }
+// This is ugly.  It would be better to test the behavior and not the implementation
+it('FileFieldWrapper.handleCancel', () => {
+  const props = {
+    input: {
+      onBlur: jest.fn()
+    }
+  };
+  const instance = new FileFieldWrapper(props);
 
-  describe('rendering', () => {
-    beforeEach(() => {
-      props = createProps();
-      wrapper = createWrapper(props);
-    });
+  instance.handleCancel();
+  expect(props.input.onBlur).toHaveBeenCalled();
+});
 
-    it('should render correctly', () => {
-      expect(wrapper).toMatchSnapshot();
-    });
+// This is ugly.  It would be better to test the behavior and not the implementation
+it('FileFieldWrapper.handleDrop', () => {
+  const props = {
+    input: {
+      onBlur: jest.fn(),
+      onChange: jest.fn()
+    }
+  };
+  const file = { name: 'test.csv' };
+  const instance = new FileFieldWrapper(props);
 
-    it('should render errors', () => {
-      const errProps = {
-        ...props,
-        meta: { touched: true, error: 'One at a time please' }
-      };
-      expect(shallow(<FileFieldWrapper {...errProps} />)).toMatchSnapshot();
-    });
-  });
+  instance.handleDrop([file], []);
 
-  describe('events', () => {
-    let file;
-    beforeEach(() => {
-      file = { name: 'all-the-stuff.csv' };
-      props = createProps();
-      wrapper = createWrapper(props);
-    });
+  expect(props.input.onChange).toHaveBeenCalledWith(file);
+  expect(props.input.onBlur).toHaveBeenCalled();
+});
 
-    it('should render selected filename', () => {
-      const fileProps = {
-        input: { ...props.input, value: file }
-      };
-      props = createProps(fileProps);
-      wrapper = createWrapper(props);
-      expect(wrapper).toMatchSnapshot();
-    });
+// This is ugly.  It would be better to test the behavior and not the implementation
+it('FileFieldWrapper.handleOpen', () => {
+  const dropzone = {
+    open: jest.fn()
+  };
+  const instance = new FileFieldWrapper({});
+  instance.dropzoneRef = dropzone;
 
-    it('should fire props.onChange', () => {
-      wrapper.instance().handleDrop([file]);
-      expect(props.input.onChange).toHaveBeenCalled();
-    });
-
-    it('should not fire onChange if no valid files were dropped', () => {
-      wrapper.instance().handleDrop([]);
-      expect(props.input.onChange).not.toHaveBeenCalled();
-    });
-  });
+  instance.handleOpen();
+  expect(dropzone.open).toHaveBeenCalled();
 });

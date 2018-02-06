@@ -2,21 +2,9 @@
 
 exports[`RecipientListForm defaults to create mode 1`] = `
 <div>
-  <Banner
-    status="info"
-    title="Recipient List CSV Format"
-  >
-    You can download a 
-    <DownloadLink
-      href="example-recipient-list.csv"
-    >
-      CSV template here
-    </DownloadLink>
-     to use when formatting your recipient list for upload.
-  </Banner>
-  <Panel>
-    <Panel.Section>
-      <form>
+  <form>
+    <Panel>
+      <Panel.Section>
         <Field
           component={[Function]}
           label="Label"
@@ -54,6 +42,18 @@ exports[`RecipientListForm defaults to create mode 1`] = `
         />
         <Field
           component={[Function]}
+          fileType="csv"
+          helpText={
+            <span>
+              You can download a 
+              <DownloadLink
+                href="example-recipient-list.csv"
+              >
+                CSV template here
+              </DownloadLink>
+               to use when formatting your recipient list for upload.
+            </span>
+          }
           label="Upload a CSV file of recipients"
           name="csv"
           validate={
@@ -63,17 +63,20 @@ exports[`RecipientListForm defaults to create mode 1`] = `
             ]
           }
         />
+      </Panel.Section>
+      <Panel.Section>
         <Button
           disabled={true}
+          primary={true}
           size="default"
           submit={true}
         >
           Create
            Recipient List
         </Button>
-      </form>
-    </Panel.Section>
-  </Panel>
+      </Panel.Section>
+    </Panel>
+  </form>
 </div>
 `;
 
@@ -92,9 +95,9 @@ exports[`RecipientListForm renders CSV errors 1`] = `
       key="1"
     />
   </Banner>
-  <Panel>
-    <Panel.Section>
-      <form>
+  <form>
+    <Panel>
+      <Panel.Section>
         <Field
           component={[Function]}
           label="Label"
@@ -132,6 +135,18 @@ exports[`RecipientListForm renders CSV errors 1`] = `
         />
         <Field
           component={[Function]}
+          fileType="csv"
+          helpText={
+            <span>
+              You can download a 
+              <DownloadLink
+                href="example-recipient-list.csv"
+              >
+                CSV template here
+              </DownloadLink>
+               to use when formatting your recipient list for upload.
+            </span>
+          }
           label="Upload a CSV file of recipients"
           name="csv"
           validate={
@@ -141,37 +156,28 @@ exports[`RecipientListForm renders CSV errors 1`] = `
             ]
           }
         />
+      </Panel.Section>
+      <Panel.Section>
         <Button
           disabled={true}
+          primary={true}
           size="default"
           submit={true}
         >
           Create
            Recipient List
         </Button>
-      </form>
-    </Panel.Section>
-  </Panel>
+      </Panel.Section>
+    </Panel>
+  </form>
 </div>
 `;
 
 exports[`RecipientListForm renders correctly in create mode 1`] = `
 <div>
-  <Banner
-    status="info"
-    title="Recipient List CSV Format"
-  >
-    You can download a 
-    <DownloadLink
-      href="example-recipient-list.csv"
-    >
-      CSV template here
-    </DownloadLink>
-     to use when formatting your recipient list for upload.
-  </Banner>
-  <Panel>
-    <Panel.Section>
-      <form>
+  <form>
+    <Panel>
+      <Panel.Section>
         <Field
           component={[Function]}
           label="Label"
@@ -209,6 +215,18 @@ exports[`RecipientListForm renders correctly in create mode 1`] = `
         />
         <Field
           component={[Function]}
+          fileType="csv"
+          helpText={
+            <span>
+              You can download a 
+              <DownloadLink
+                href="example-recipient-list.csv"
+              >
+                CSV template here
+              </DownloadLink>
+               to use when formatting your recipient list for upload.
+            </span>
+          }
           label="Upload a CSV file of recipients"
           name="csv"
           validate={
@@ -218,37 +236,28 @@ exports[`RecipientListForm renders correctly in create mode 1`] = `
             ]
           }
         />
+      </Panel.Section>
+      <Panel.Section>
         <Button
           disabled={true}
+          primary={true}
           size="default"
           submit={true}
         >
           Create
            Recipient List
         </Button>
-      </form>
-    </Panel.Section>
-  </Panel>
+      </Panel.Section>
+    </Panel>
+  </form>
 </div>
 `;
 
 exports[`RecipientListForm renders correctly in edit mode 1`] = `
 <div>
-  <Banner
-    status="info"
-    title="Recipient List CSV Format"
-  >
-    You can download a 
-    <DownloadLink
-      href="example-recipient-list.csv"
-    >
-      CSV template here
-    </DownloadLink>
-     to use when formatting your recipient list for upload.
-  </Banner>
-  <Panel>
-    <Panel.Section>
-      <form>
+  <form>
+    <Panel>
+      <Panel.Section>
         <Field
           component={[Function]}
           label="Label"
@@ -274,6 +283,18 @@ exports[`RecipientListForm renders correctly in edit mode 1`] = `
         />
         <Field
           component={[Function]}
+          fileType="csv"
+          helpText={
+            <span>
+              You can download a 
+              <DownloadLink
+                href="example-recipient-list.csv"
+              >
+                CSV template here
+              </DownloadLink>
+               to use when formatting your recipient list for upload.
+            </span>
+          }
           label="Optional: Upload a CSV file of recipients to replace the existing recipients in this list"
           name="csv"
           validate={
@@ -282,37 +303,28 @@ exports[`RecipientListForm renders correctly in edit mode 1`] = `
             ]
           }
         />
+      </Panel.Section>
+      <Panel.Section>
         <Button
           disabled={true}
+          primary={true}
           size="default"
           submit={true}
         >
           Update
            Recipient List
         </Button>
-      </form>
-    </Panel.Section>
-  </Panel>
+      </Panel.Section>
+    </Panel>
+  </form>
 </div>
 `;
 
 exports[`RecipientListForm should disable form elements on submit 1`] = `
 <div>
-  <Banner
-    status="info"
-    title="Recipient List CSV Format"
-  >
-    You can download a 
-    <DownloadLink
-      href="example-recipient-list.csv"
-    >
-      CSV template here
-    </DownloadLink>
-     to use when formatting your recipient list for upload.
-  </Banner>
-  <Panel>
-    <Panel.Section>
-      <form>
+  <form>
+    <Panel>
+      <Panel.Section>
         <Field
           component={[Function]}
           disabled={true}
@@ -354,6 +366,18 @@ exports[`RecipientListForm should disable form elements on submit 1`] = `
         <Field
           component={[Function]}
           disabled={true}
+          fileType="csv"
+          helpText={
+            <span>
+              You can download a 
+              <DownloadLink
+                href="example-recipient-list.csv"
+              >
+                CSV template here
+              </DownloadLink>
+               to use when formatting your recipient list for upload.
+            </span>
+          }
           label="Upload a CSV file of recipients"
           name="csv"
           validate={
@@ -363,17 +387,20 @@ exports[`RecipientListForm should disable form elements on submit 1`] = `
             ]
           }
         />
+      </Panel.Section>
+      <Panel.Section>
         <Button
           disabled={true}
+          primary={true}
           size="default"
           submit={true}
         >
           Create
            Recipient List
         </Button>
-      </form>
-    </Panel.Section>
-  </Panel>
+      </Panel.Section>
+    </Panel>
+  </form>
 </div>
 `;
 

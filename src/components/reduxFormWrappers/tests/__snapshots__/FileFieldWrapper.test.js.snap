@@ -1,100 +1,177 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`FileFieldWrapper events should render selected filename 1`] = `
-<div>
-  <label
-    htmlFor="uploadem"
-    id="uploadem"
-  >
-    Upload them all here
-  </label>
-  <Dropzone
-    accept=".csv"
-    disableClick={true}
-    disablePreview={true}
-    disabled={false}
-    maxSize={Infinity}
-    minSize={0}
-    multiple={false}
-    name="uploadem"
-    onDrop={[Function]}
-    preventDropOnDocument={true}
-  >
-    <Tag>
-      all-the-stuff.csv
-    </Tag>
+exports[`FileFieldWrapper renders disabled file input 1`] = `
+<fieldset>
+  <Label>
+    Test File Input
+    *
+  </Label>
+  <div>
+    <Dropzone
+      accept=".csv"
+      disableClick={false}
+      disablePreview={true}
+      disabled={true}
+      maxSize={Infinity}
+      minSize={0}
+      multiple={false}
+      onDrop={[Function]}
+      onFileDialogCancel={[Function]}
+      preventDropOnDocument={true}
+    >
+      <span>
+        example.
+        csv
+      </span>
+    </Dropzone>
     <Button
+      disabled={true}
       onClick={[Function]}
       size="default"
     >
-      Choose a CSV file
+      Choose File
     </Button>
-  </Dropzone>
-</div>
+  </div>
+</fieldset>
 `;
 
-exports[`FileFieldWrapper rendering should render correctly 1`] = `
-<div>
-  <label
-    htmlFor="uploadem"
-    id="uploadem"
-  >
-    Upload them all here
-  </label>
-  <Dropzone
-    accept=".csv"
-    disableClick={true}
-    disablePreview={true}
-    disabled={false}
-    maxSize={Infinity}
-    minSize={0}
-    multiple={false}
-    name="uploadem"
-    onDrop={[Function]}
-    preventDropOnDocument={true}
-  >
-    <Tag>
-      No file selected
-    </Tag>
+exports[`FileFieldWrapper renders file input 1`] = `
+<fieldset>
+  <Label>
+    Test File Input
+    *
+  </Label>
+  <div>
+    <Dropzone
+      accept=".csv"
+      disableClick={false}
+      disablePreview={true}
+      disabled={false}
+      maxSize={Infinity}
+      minSize={0}
+      multiple={false}
+      onDrop={[Function]}
+      onFileDialogCancel={[Function]}
+      preventDropOnDocument={true}
+    >
+      <span>
+        example.
+        csv
+      </span>
+    </Dropzone>
     <Button
       onClick={[Function]}
       size="default"
     >
-      Choose a CSV file
+      Choose File
     </Button>
-  </Dropzone>
-</div>
+  </div>
+</fieldset>
 `;
 
-exports[`FileFieldWrapper rendering should render errors 1`] = `
-<div>
-  <label
-    htmlFor="uploadem"
-    id="uploadem"
-  >
-    Upload them all here
-  </label>
-  <Dropzone
-    accept=".csv"
-    disableClick={true}
-    disablePreview={true}
-    disabled={false}
-    maxSize={Infinity}
-    minSize={0}
-    multiple={false}
-    name="uploadem"
-    onDrop={[Function]}
-    preventDropOnDocument={true}
-  >
-    <Error
-      error="One at a time please"
-    />
+exports[`FileFieldWrapper renders file input with error message 1`] = `
+<fieldset>
+  <Label>
+    Test File Input
+    *
+  </Label>
+  <div>
+    <Dropzone
+      accept=".csv"
+      disableClick={false}
+      disablePreview={true}
+      disabled={false}
+      maxSize={Infinity}
+      minSize={0}
+      multiple={false}
+      onDrop={[Function]}
+      onFileDialogCancel={[Function]}
+      preventDropOnDocument={true}
+    >
+      <span>
+        example.
+        csv
+      </span>
+    </Dropzone>
     <Button
       onClick={[Function]}
       size="default"
     >
-      Choose a CSV file
+      Choose File
     </Button>
-  </Dropzone>
-</div>
+  </div>
+  <Error
+    error="Oh no!"
+  />
+</fieldset>
+`;
+
+exports[`FileFieldWrapper renders file input with help message 1`] = `
+<fieldset>
+  <Label>
+    Test File Input
+    *
+  </Label>
+  <div>
+    <Dropzone
+      accept=".csv"
+      disableClick={false}
+      disablePreview={true}
+      disabled={false}
+      maxSize={Infinity}
+      minSize={0}
+      multiple={false}
+      onDrop={[Function]}
+      onFileDialogCancel={[Function]}
+      preventDropOnDocument={true}
+    >
+      <span>
+        example.
+        csv
+      </span>
+    </Dropzone>
+    <Button
+      onClick={[Function]}
+      size="default"
+    >
+      Choose File
+    </Button>
+  </div>
+  <div>
+    Ask Google!
+  </div>
+</fieldset>
+`;
+
+exports[`FileFieldWrapper renders file input with selected filename 1`] = `
+<fieldset>
+  <Label>
+    Test File Input
+    *
+  </Label>
+  <div>
+    <Dropzone
+      accept=".csv"
+      disableClick={false}
+      disablePreview={true}
+      disabled={false}
+      maxSize={Infinity}
+      minSize={0}
+      multiple={false}
+      onDrop={[Function]}
+      onFileDialogCancel={[Function]}
+      preventDropOnDocument={true}
+    >
+      <span>
+        test.csv
+      </span>
+    </Dropzone>
+    <Button
+      onClick={[Function]}
+      size="default"
+    >
+      Choose File
+    </Button>
+  </div>
+</fieldset>
 `;

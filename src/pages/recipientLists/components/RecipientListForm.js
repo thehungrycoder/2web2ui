@@ -50,15 +50,6 @@ export class RecipientListForm extends Component {
     }
   };
 
-  renderBanner() {
-    return (
-      <Banner status='info' title='Recipient List CSV Format'>
-        You can download a <DownloadLink href={exampleRecipientListPath}>CSV template here</DownloadLink> to
-        use when formatting your recipient list for upload.
-      </Banner>
-    );
-  }
-
   renderCsvErrors() {
     return <Banner status='danger' title='CSV Format Errors'>
       {this.state.csvErrors.map((err, idx) => <Error key={idx} error={err}/>)}
@@ -82,14 +73,10 @@ export class RecipientListForm extends Component {
     }
 
     return <div>
-
-      { !csvErrors && this.renderBanner() }
-
       { csvErrors && this.renderCsvErrors() }
-
-      <Panel>
-        <Panel.Section>
-          <form onSubmit={handleSubmit(this.preSubmit)}>
+      <form onSubmit={handleSubmit(this.preSubmit)}>
+        <Panel>
+          <Panel.Section>
             <Field
               name='name'
               label='Label'
@@ -115,16 +102,26 @@ export class RecipientListForm extends Component {
               component={TextFieldWrapper}
             />
             <Field
-              name='csv'
-              label={uploadHint}
-              validate={uploadValidators}
-              disabled={submitting}
               component={FileFieldWrapper}
+              disabled={submitting}
+              fileType="csv"
+              helpText={
+                <span>
+                  You can download
+                  a <DownloadLink href={exampleRecipientListPath}>CSV template here</DownloadLink> to
+                  use when formatting your recipient list for upload.
+                </span>
+              }
+              label={uploadHint}
+              name="csv"
+              validate={uploadValidators}
             />
-            <Button submit disabled={submitDisabled}>{actionText} Recipient List</Button>
-          </form>
-        </Panel.Section>
-      </Panel>
+          </Panel.Section>
+          <Panel.Section>
+            <Button primary submit disabled={submitDisabled}>{actionText} Recipient List</Button>
+          </Panel.Section>
+        </Panel>
+      </form>
     </div>;
   }
 }
