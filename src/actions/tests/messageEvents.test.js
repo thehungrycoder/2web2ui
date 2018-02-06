@@ -18,7 +18,15 @@ describe('Action Creator: MessageEvents', () => {
     });
 
     it('allows overriding "to" param', () => {
-      expect(messageEvents.getMessageHistory({ messageId: 'abcd,efgh', params: { to: 'OVERRIDDEN_TO' }})).toMatchSnapshot();
+      expect(messageEvents.getMessageHistory({ messageId: 'abcd', to: 'OVERRIDDEN_TO' })).toMatchSnapshot();
+    });
+
+    it('allows custom params', () => {
+      expect(messageEvents.getMessageHistory({ messageId: 'abcd', foo: 'bar', foo2: 'bar2' })).toMatchSnapshot();
+    });
+
+    it('does not allow to override message_ids and from params', () => {
+      expect(messageEvents.getMessageHistory({ messageId: 'abcd', message_ids: 'wxyz', from: 'OVERRIDDEN_FROM' })).toMatchSnapshot();
     });
   });
 });

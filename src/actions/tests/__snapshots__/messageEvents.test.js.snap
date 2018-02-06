@@ -1,13 +1,45 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Action Creator: MessageEvents getMessageHistory allows custom params 1`] = `
+Object {
+  "meta": Object {
+    "method": "GET",
+    "params": Object {
+      "foo": "bar",
+      "foo2": "bar2",
+      "from": "2018-02-01T10:10",
+      "message_ids": "abcd",
+      "to": "2018-02-01T10:10",
+    },
+    "url": "/message-events",
+  },
+  "type": "GET_MESSAGE_HISTORY",
+}
+`;
+
 exports[`Action Creator: MessageEvents getMessageHistory allows overriding "to" param 1`] = `
 Object {
   "meta": Object {
     "method": "GET",
     "params": Object {
       "from": "2018-02-01T10:10",
-      "message_ids": "abcd,efgh",
+      "message_ids": "abcd",
       "to": "OVERRIDDEN_TO",
+    },
+    "url": "/message-events",
+  },
+  "type": "GET_MESSAGE_HISTORY",
+}
+`;
+
+exports[`Action Creator: MessageEvents getMessageHistory does not allow to override message_ids and from params 1`] = `
+Object {
+  "meta": Object {
+    "method": "GET",
+    "params": Object {
+      "from": "2018-02-01T10:10",
+      "message_ids": "abcd",
+      "to": "2018-02-01T10:10",
     },
     "url": "/message-events",
   },

@@ -50,7 +50,7 @@ export function getMessageEvents(options = {}) {
   };
 }
 
-export function getMessageHistory({ messageId, params = {}}) {
+export function getMessageHistory({ messageId, ...rest }) {
   return sparkpostApiRequest({
     type: 'GET_MESSAGE_HISTORY',
     meta: {
@@ -58,7 +58,7 @@ export function getMessageHistory({ messageId, params = {}}) {
       url: '/message-events',
       params: {
         to: moment().utc().format(apiDateFormat),
-        ...params,
+        ...rest,
         message_ids: messageId,
         from: moment().subtract(10, 'days').utc().format(apiDateFormat)
       }
