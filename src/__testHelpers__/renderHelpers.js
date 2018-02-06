@@ -28,7 +28,8 @@ export function tryShallow(item) {
     } else if (err.message === 'You should not use <Link> outside a <Router>') {
       result = renderReactRouterLink(item);
     } else {
-      result = item;
+      // eslint-disable-next-line no-console
+      console.log('\n===\n\n UNKNOWN RENDER ROW DATA ERROR\n', err.message, '\n\n===');
     }
   }
 
@@ -37,10 +38,10 @@ export function tryShallow(item) {
 
 /**
  * Takes a list of items (usually produced by a getRowData function)
- * and attempts to shallow render any react elements with the right context
+ * and mounts any react elements inside using enzyme's mount method
  *
  * @param {Array} row - list of items that may or may not be React elements
  */
 export function renderRowData(row) {
-  return row.map((item) => React.isValidElement(item) ? tryShallow(item) : item);
+  return row.map((item) => React.isValidElement(item) ? tryMount(item) : item);
 }

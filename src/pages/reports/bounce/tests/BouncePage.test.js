@@ -2,7 +2,6 @@ import React from 'react';
 import { BouncePage } from '../BouncePage';
 import { shallow, mount } from 'enzyme';
 import * as reportHelpers from 'src/helpers/reports';
-import { renderRowData } from 'src/__testHelpers__/renderHelpers';
 import Filters from 'src/pages/reports/components/Filters';
 
 jest.mock('src/helpers/reports');
@@ -107,7 +106,7 @@ describe('BouncePage: ', () => {
       count_bounce: 10
     });
 
-    expect(renderRowData(rows)).toMatchSnapshot();
+    expect(rows).toMatchSnapshot();
   });
 
   it('should filter by domain', () => {

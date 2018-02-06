@@ -135,33 +135,19 @@ exports[`Page: Users List should render with an error 1`] = `
 exports[`Page: Users List should transform row data for the table collection 1`] = `
 Array [
   "test-name",
-  <Select
-    name={null}
+  <RoleSelect
+    allowSuperUser={false}
+    disabled={false}
+    name={undefined}
     onChange={[Function]}
-    options={
-      Array [
-        Object {
-          "label": "Admin",
-          "value": "admin",
-        },
-        Object {
-          "label": "Reporting",
-          "value": "reporting",
-        },
-      ]
-    }
-    placeholderValue=""
-    required={false}
     value="admin"
   />,
   "testemail",
   "Never",
-  <Button
-    name={null}
+  <DeleteButton
+    disabled={false}
+    name={undefined}
     onClick={[Function]}
-    size="default"
-  >
-    Delete
-  </Button>,
+  />,
 ]
 `;

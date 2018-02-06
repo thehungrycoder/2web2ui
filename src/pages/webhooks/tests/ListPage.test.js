@@ -1,7 +1,5 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import { renderRowData } from 'src/__testHelpers__/renderHelpers';
-
 import { WebhooksList } from '../ListPage';
 
 describe('Page: Webhook List', () => {
@@ -60,6 +58,6 @@ describe('Page: Webhook List', () => {
 
   it('should render row data properly', () => {
     const row = wrapper.instance().getRowData(props.webhooks[0]);
-    expect(renderRowData(row)).toMatchSnapshot();
+    expect(row).toMatchSnapshot();
   });
 });

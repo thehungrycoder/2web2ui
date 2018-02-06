@@ -2,14 +2,14 @@
 
 exports[`Rejection Data Table:  getRowData should render row data properly 1`] = `
 Array [
-  <div>
-    bad delay
-  </div>,
-  <a
+  <LongTextContainer
+    text="bad delay"
+  />,
+  <UnstyledLink
     onClick={[Function]}
   >
     gmail.com
-  </a>,
+  </UnstyledLink>,
   "cat1",
   10,
 ]

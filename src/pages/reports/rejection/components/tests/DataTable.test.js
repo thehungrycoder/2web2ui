@@ -1,7 +1,6 @@
 import React from 'react';
 import { DataTable } from '../DataTable';
 import { shallow, mount } from 'enzyme';
-import { renderRowData } from 'src/__testHelpers__/renderHelpers';
 
 jest.mock('src/helpers/reports');
 
@@ -47,7 +46,7 @@ describe('Rejection Data Table: ', () => {
     it('should render row data properly', () => {
       const rows = wrapper.instance().getRowData({ reason: 'bad delay', rejection_category_name: 'cat1', count_rejected: 10, domain: 'gmail.com' });
 
-      expect(renderRowData(rows)).toMatchSnapshot();
+      expect(rows).toMatchSnapshot();
     });
 
     it('should filter by domain', () => {
