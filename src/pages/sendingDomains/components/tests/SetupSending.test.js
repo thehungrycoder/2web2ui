@@ -24,7 +24,7 @@ describe('Component: SetupSending', () => {
         dkimValue: 'v=DKIM1; k=rsa; h=sha256; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC7J/mQAVP9pynvD79opV/GD495pJWTWmHaEMymBO55y52gu2D23/CHbLys0KXszTAPOVS9x3HdRByeE1jIx41sZkWwDzxcyZH2NP5Mw3zNQWO4CqSGqrVPuukjIy5N3jmZnJ/V3IOkKnC3A+j76iIG42cVOgzoekbM3ZXSfwag+wIDAQAB',
         status
       },
-      verifyLoading: false,
+      verifyDkimLoading: false,
       verify: jest.fn(() => Promise.resolve()),
       showAlert: jest.fn()
     };
@@ -56,8 +56,8 @@ describe('Component: SetupSending', () => {
   });
 
   it('disables the verification button while submitting', async() => {
-    wrapper.setProps({ verifyLoading: true });
-    expect(wrapper).toMatchSnapshot();
+    wrapper.setProps({ verifyDkimLoading: true });
+    expect(wrapper.find('Panel').props().actions).toMatchSnapshot();
   });
 
   it('should call updateTrackingDomain on submit', () => {

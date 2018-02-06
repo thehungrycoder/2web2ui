@@ -111,7 +111,7 @@ Object {
     "method": "POST",
     "url": "/sending-domains/domain.com/verify",
   },
-  "type": "VERIFY_SENDING_DOMAIN",
+  "type": "VERIFY_SENDING_DOMAIN_CNAME",
 }
 `;
 
@@ -127,6 +127,6 @@ Object {
     "method": "POST",
     "url": "/sending-domains/sub.com/verify",
   },
-  "type": "VERIFY_SENDING_DOMAIN",
+  "type": "VERIFY_SENDING_DOMAIN_CNAME",
 }
 `;

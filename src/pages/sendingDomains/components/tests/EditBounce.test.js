@@ -35,7 +35,8 @@ describe('Component: EditBounce', () => {
       verify: jest.fn(() => Promise.resolve()),
       update: jest.fn(() => Promise.resolve()),
       showAlert: jest.fn(),
-      reset: jest.fn()
+      reset: jest.fn(),
+      verifyCnameLoading: false
     };
 
     wrapper = shallow(<EditBounce {...props}/>);
@@ -91,6 +92,11 @@ describe('Component: EditBounce', () => {
 
 
   describe('verifyDomain', () => {
+    it('renders loading state correctly', async() => {
+      wrapper.setProps({ verifyCnameLoading: true });
+      expect(wrapper.find('Panel').props().actions).toMatchSnapshot();
+    });
+
     it('verifies domain and alerts when verification successful', async() => {
       props.verify.mockReturnValue(Promise.resolve({ cname_status: 'valid' }));
       await instance.verifyDomain();

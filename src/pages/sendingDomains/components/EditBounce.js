@@ -62,6 +62,17 @@ export class EditBounce extends Component {
     );
   }
 
+  getVerifyAction() {
+    const { verifyCnameLoading } = this.props;
+    const buttonText = verifyCnameLoading ? 'Verifying...' : 'Verify CNAME Record';
+
+    return {
+      content: buttonText,
+      onClick: this.verifyDomain,
+      disabled: verifyCnameLoading
+    };
+  }
+
   renderNotReady() {
     const { id } = this.props;
 
@@ -74,7 +85,7 @@ export class EditBounce extends Component {
         <SendingDomainSection.Right>
           { this.renderRootDomainWarning() }
           <Panel title='DNS Settings' sectioned
-            actions={[{ content: 'Verify CNAME Record', onClick: this.verifyDomain }]} >
+            actions={[this.getVerifyAction()]} >
             <LabelledValue label='Type'><p>CNAME</p></LabelledValue>
             <LabelledValue label='Hostname'><p>{id}</p></LabelledValue>
             <LabelledValue label='Value'><p>{config.bounceDomains.cnameValue}</p></LabelledValue>
@@ -144,6 +155,7 @@ const formOptions = {
 
 const mapStateToProps = ({ sendingDomains }, { domain }) => ({
   updateLoading: sendingDomains.updateLoading,
+  verifyCnameLoading: sendingDomains.verifyCnameLoading,
   initialValues: {
     ...domain
   }

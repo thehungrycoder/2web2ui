@@ -63,13 +63,13 @@ export class SetupSending extends Component {
   }
 
   getVerifyAction() {
-    const { verifyLoading } = this.props;
-    const buttonText = verifyLoading ? 'Verifying...' : 'Verify TXT Record';
+    const { verifyDkimLoading } = this.props;
+    const buttonText = verifyDkimLoading ? 'Verifying...' : 'Verify TXT Record';
 
     return {
       content: buttonText,
       onClick: this.verifyDomain,
-      disabled: verifyLoading
+      disabled: verifyDkimLoading
     };
   }
 
@@ -108,9 +108,9 @@ export class SetupSending extends Component {
   }
 }
 
-const mapStateToProps = ({ sendingDomains: { verifyError, verifyLoading }}) => ({
-  verifyError,
-  verifyLoading
+const mapStateToProps = ({ sendingDomains: { verifyDkimError, verifyDkimLoading }}) => ({
+  verifyDkimError,
+  verifyDkimLoading
 });
 
 export default withRouter(connect(mapStateToProps, { verify, showAlert })(SetupSending));

@@ -1,64 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Component: SetupSending disables the verification button while submitting 1`] = `
-<SendingDomainSection
-  title="Set Up For Sending"
->
-  <Left>
-    <React.Fragment>
-      <p>
-        <strong>
-          To use this domain for sending
-        </strong>
-        , add this TXT record to your DNS settings, paying close attention to the specified hostname.
-      </p>
-      <p>
-        We recommend DNS verification, but if you don't have DNS access, you can 
-        <a>
-          set this domain up for sending via email
-        </a>
-        .
-      </p>
-    </React.Fragment>
-  </Left>
-  <Right>
-    <Panel
-      actions={
-        Array [
-          Object {
-            "content": "Verifying...",
-            "disabled": true,
-            "onClick": [Function],
-          },
-        ]
-      }
-      sectioned={true}
-      title="DNS Settings"
-    >
-      <LabelledValue
-        label="Type"
-      >
-        <p>
-          TXT
-        </p>
-      </LabelledValue>
-      <LabelledValue
-        label="Hostname"
-      >
-        <p>
-          scph0118._domainkey.xyz.com
-        </p>
-      </LabelledValue>
-      <LabelledValue
-        label="Value"
-      >
-        <p>
-          v=DKIM1; k=rsa; h=sha256; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC7J/mQAVP9pynvD79opV/GD495pJWTWmHaEMymBO55y52gu2D23/CHbLys0KXszTAPOVS9x3HdRByeE1jIx41sZkWwDzxcyZH2NP5Mw3zNQWO4CqSGqrVPuukjIy5N3jmZnJ/V3IOkKnC3A+j76iIG42cVOgzoekbM3ZXSfwag+wIDAQAB
-        </p>
-      </LabelledValue>
-    </Panel>
-  </Right>
-</SendingDomainSection>
+Array [
+  Object {
+    "content": "Verifying...",
+    "disabled": true,
+    "onClick": [Function],
+  },
+]
 `;
 
 exports[`Component: SetupSending renders correctly for unverified DKIM and invalid ownership with mailbox verification disabled 1`] = `

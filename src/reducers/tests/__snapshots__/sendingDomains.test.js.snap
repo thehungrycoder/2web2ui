@@ -59,7 +59,7 @@ Object {
       "ownership_verified": 1,
     },
   },
-  "verifyLoading": false,
+  "verifyCnameLoading": false,
 }
 `;
 
@@ -73,14 +73,14 @@ Object {
       "ownership_verified": 1,
     },
   },
-  "verifyError": Object {
+  "verifyCnameError": Object {
     "errors": Array [
       Object {
         "message": "Some error occurred",
       },
     ],
   },
-  "verifyLoading": false,
+  "verifyCnameLoading": false,
 }
 `;
 
@@ -94,7 +94,7 @@ Object {
       "ownership_verified": 1,
     },
   },
-  "verifyError": null,
-  "verifyLoading": true,
+  "verifyCnameError": null,
+  "verifyCnameLoading": true,
 }
 `;

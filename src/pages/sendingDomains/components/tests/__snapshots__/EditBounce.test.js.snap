@@ -46,6 +46,7 @@ exports[`Component: EditBounce does not show root domain warning for 3rd level d
           Array [
             Object {
               "content": "Verify CNAME Record",
+              "disabled": false,
               "onClick": [Function],
             },
           ]
@@ -120,6 +121,7 @@ exports[`Component: EditBounce renders not ready correctly 1`] = `
           Array [
             Object {
               "content": "Verify CNAME Record",
+              "disabled": false,
               "onClick": [Function],
             },
           ]
@@ -187,4 +189,14 @@ exports[`Component: EditBounce renders ready correctly 1`] = `
     </Right>
   </React.Fragment>
 </SendingDomainSection>
+`;
+
+exports[`Component: EditBounce verifyDomain renders loading state correctly 1`] = `
+Array [
+  Object {
+    "content": "Verifying...",
+    "disabled": true,
+    "onClick": [Function],
+  },
+]
 `;

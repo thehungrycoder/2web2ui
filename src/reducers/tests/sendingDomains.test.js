@@ -14,15 +14,15 @@ const state = {
 
 const VERIFY_TEST_CASES = {
   'verify pending': {
-    type: 'VERIFY_SENDING_DOMAIN_PENDING'
+    type: 'VERIFY_SENDING_DOMAIN_CNAME_PENDING'
   },
   'verify domain': {
     payload: { cname_status: 'valid', ownership_verified: 1 },
-    type: 'VERIFY_SENDING_DOMAIN_SUCCESS'
+    type: 'VERIFY_SENDING_DOMAIN_CNAME_SUCCESS'
   },
   'verify domain fail': {
     payload: { errors: [ { message: 'Some error occurred' }]},
-    type: 'VERIFY_SENDING_DOMAIN_FAIL'
+    type: 'VERIFY_SENDING_DOMAIN_CNAME_FAIL'
   }
 };
 
