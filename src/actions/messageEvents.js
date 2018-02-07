@@ -6,7 +6,7 @@ import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 import { refreshReportRange } from 'src/actions/reportFilters';
 import { showAlert } from './globalAlert';
 
-const { apiDateFormat } = config;
+const { apiDateFormat, messageEvents } = config;
 
 export function getMessageEvents(options = {}) {
   const { reportFilters, recipients } = options;
@@ -57,10 +57,10 @@ export function getMessageHistory({ messageId, ...rest }) {
       method: 'GET',
       url: '/message-events',
       params: {
-        to: moment().utc().format(apiDateFormat),
+        to: moment().utc().format(apiDateFormat), // it's above ...rest so it can be overriden when needed
         ...rest,
         message_ids: messageId,
-        from: moment().subtract(10, 'days').utc().format(apiDateFormat)
+        from: moment().subtract(messageEvents.retentionPeriodDays, 'days').utc().format(apiDateFormat)
       }
     }
   });
