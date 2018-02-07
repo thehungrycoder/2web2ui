@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Field, formValueSelector, reduxForm } from 'redux-form';
+import { Field, formValueSelector, reduxForm, SubmissionError } from 'redux-form';
 import { Button, Page, Panel } from '@sparkpost/matchbox';
 
 import { showAlert } from 'src/actions/globalAlert';
@@ -18,9 +18,11 @@ import exampleSuppressionsListPath from './example-suppressions-list.csv';
 
 export class CreatePage extends Component {
 
-  // Redux Form will swallow uncaught errors
+  // Must re-throw Error as SubmissionError for redux form
   handleSubmit = ({ subaccount, suppressionsFile }) => (
-    this.props.uploadSuppressions(suppressionsFile, subaccount).then(this.handleSubmitSuccess)
+    this.props.uploadSuppressions(suppressionsFile, subaccount)
+      .then(this.handleSubmitSuccess)
+      .catch((error) => { throw new SubmissionError(error); })
   )
 
   handleSubmitSuccess = () => {

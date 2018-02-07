@@ -2,6 +2,8 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import cases from 'jest-in-case';
 
+import { SubmissionError } from 'redux-form';
+
 import { CreatePage } from '../CreatePage';
 
 cases('CreatePage', ({ name, ...props }) => {
@@ -47,5 +49,18 @@ describe('CreatePage.handleSubmit', async() => {
 
     expect(props.showAlert).toHaveBeenCalledWith(expect.objectContaining({ type: 'success' }));
     expect(props.history.push).toHaveBeenCalled();
+  });
+
+  it('rethrows unexpected errors as SubmissionError', async() => {
+    const props = {
+      uploadSuppressions: jest.fn(() => Promise.reject(new Error('Oh no!')))
+    };
+    const instance = new CreatePage(props);
+    const args = {
+      subaccount: 999,
+      suppressionsFile: { name: 'example.csv' }
+    };
+
+    await expect(instance.handleSubmit(args)).rejects.toThrowError(SubmissionError);
   });
 });
