@@ -2,14 +2,13 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Field, formValueSelector, reduxForm, SubmissionError } from 'redux-form';
+import { Field, reduxForm, SubmissionError } from 'redux-form';
 import { Button, Page, Panel } from '@sparkpost/matchbox';
 
 import { showAlert } from 'src/actions/globalAlert';
 import { uploadSuppressions } from 'src/actions/suppressions';
 import ApiErrorBanner from 'src/components/apiErrorBanner/ApiErrorBanner';
 import DownloadLink from 'src/components/downloadLink/DownloadLink';
-import CheckboxWrapper from 'src/components/reduxFormWrappers/CheckboxWrapper';
 import FileFieldWrapper from 'src/components/reduxFormWrappers/FileFieldWrapper';
 import SubaccountTypeaheadWrapper from 'src/components/reduxFormWrappers/SubaccountTypeaheadWrapper';
 import config from 'src/config';
@@ -80,19 +79,11 @@ export class CreatePage extends Component {
                 ]}
               />
               <Field
-                component={CheckboxWrapper}
+                component={SubaccountTypeaheadWrapper}
                 disabled={submitting}
-                name='forSubaccount'
-                label='Only for a single subaccount'
+                helpText="Leaving this field blank will add the suppressions to the master account."
+                name="subaccount"
               />
-              {this.props.forSubaccount && (
-                <Field
-                  component={SubaccountTypeaheadWrapper}
-                  disabled={submitting}
-                  name="subaccount"
-                  validate={required}
-                />
-              )}
             </Panel.Section>
             <Panel.Section>
               <Button primary disabled={submitting} type="submit">Upload</Button>
@@ -106,7 +97,6 @@ export class CreatePage extends Component {
 
 const FORM_NAME = 'uploadSuppressions';
 const mapStateToProps = (state) => ({
-  forSubaccount: formValueSelector(FORM_NAME)(state, 'forSubaccount'),
   persistError: state.suppressions.persistError,
   parseError: state.suppressions.parseError
 });

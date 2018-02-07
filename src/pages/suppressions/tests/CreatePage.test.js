@@ -25,9 +25,6 @@ cases('CreatePage', ({ name, ...props }) => {
     submitting: false,
     submitFailed: true
   },
-  'renders upload form with subaccount typeahead': {
-    forSubaccount: true
-  },
   'renders disabled upload form when submitting': {
     submitting: true
   }
