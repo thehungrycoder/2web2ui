@@ -44,12 +44,14 @@ describe('CreatePage.handleSubmit', async() => {
       uploadSuppressions: jest.fn(() => Promise.resolve())
     };
     const instance = new CreatePage(props);
-
-    await instance.handleSubmit({
+    const args = {
       subaccount: 999,
       suppressionsFile: { name: 'example.csv' }
-    });
+    };
 
+    await instance.handleSubmit(args);
+
+    expect(props.uploadSuppressions).toHaveBeenCalledWith(args.suppressionsFile, args.subaccount);
     expect(props.showAlert).toHaveBeenCalledWith(expect.objectContaining({ type: 'success' }));
     expect(props.history.push).toHaveBeenCalled();
   });
