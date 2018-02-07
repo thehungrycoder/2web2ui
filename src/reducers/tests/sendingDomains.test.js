@@ -13,16 +13,27 @@ const state = {
 };
 
 const VERIFY_TEST_CASES = {
-  'verify pending': {
+  'verify cname pending': {
     type: 'VERIFY_SENDING_DOMAIN_CNAME_PENDING'
   },
-  'verify domain': {
+  'verify cname': {
     payload: { cname_status: 'valid', ownership_verified: 1 },
     type: 'VERIFY_SENDING_DOMAIN_CNAME_SUCCESS'
   },
-  'verify domain fail': {
+  'verify cname fail': {
     payload: { errors: [ { message: 'Some error occurred' }]},
     type: 'VERIFY_SENDING_DOMAIN_CNAME_FAIL'
+  },
+  'verify dkim pending': {
+    type: 'VERIFY_SENDING_DOMAIN_DKIM_PENDING'
+  },
+  'verify dkim': {
+    payload: { dkim_status: 'valid', ownership_verified: 1 },
+    type: 'VERIFY_SENDING_DOMAIN_DKIM_SUCCESS'
+  },
+  'verify dkim fail': {
+    payload: { errors: [ { message: 'Some error occurred' }]},
+    type: 'VERIFY_SENDING_DOMAIN_DKIM_FAIL'
   }
 };
 

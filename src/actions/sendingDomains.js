@@ -67,7 +67,7 @@ export function verify({ id, subaccount, type }) {
   const data = {};
   data[`${type}_verify`] = true;
 
-  const actionType = type ? `_${type.toUpperCase()}` : null;
+  const actionType = type ? `_${type.toUpperCase()}` : '';
 
   return sparkpostApiRequest({
     type: `VERIFY_SENDING_DOMAIN${actionType}`,

@@ -26,6 +26,10 @@ describe('Action Creator: Sending Domains', () => {
     it('it should verify domain owned by subaccount', () => {
       expect(sendingDomains.verify({ id: 'sub.com', subaccount: 101, type: 'cname' })).toMatchSnapshot();
     });
+
+    it('it should not append action type if type is not provided', () => {
+      expect(sendingDomains.verify({ id: 'sub.com' })).toMatchSnapshot();
+    });
   });
 
   describe('Update', () => {

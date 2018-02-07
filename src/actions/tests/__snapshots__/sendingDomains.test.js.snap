@@ -101,6 +101,20 @@ Object {
 }
 `;
 
+exports[`Action Creator: Sending Domains Verify it should not append action type if type is not provided 1`] = `
+Object {
+  "meta": Object {
+    "data": Object {
+      "undefined_verify": true,
+    },
+    "headers": Object {},
+    "method": "POST",
+    "url": "/sending-domains/sub.com/verify",
+  },
+  "type": "VERIFY_SENDING_DOMAIN",
+}
+`;
+
 exports[`Action Creator: Sending Domains Verify it should request with correct post data 1`] = `
 Object {
   "meta": Object {
