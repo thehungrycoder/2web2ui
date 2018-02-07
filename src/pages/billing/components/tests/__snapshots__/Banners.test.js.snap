@@ -12,11 +12,11 @@ exports[`Billing Banners:  ManuallyBilledBanner should render with pending subsc
      plan on 
     Oct 05, 2020
     . If you have any questions, please 
-    <a
-      href="mailto:support@sparkpost.com"
+    <UnstyledLink
+      to="mailto:support@sparkpost.com"
     >
       contact support
-    </a>
+    </UnstyledLink>
     .
   </p>
 </Banner>
@@ -36,11 +36,11 @@ exports[`Billing Banners:  ManuallyBilledBanner should render with subscription 
 >
   <p>
     To make changes to your plan, billing information, or addons, 
-    <a
-      href="mailto:support@sparkpost.com"
+    <UnstyledLink
+      to="mailto:support@sparkpost.com"
     >
       contact support
-    </a>
+    </UnstyledLink>
     .
   </p>
   <p>
@@ -62,11 +62,11 @@ exports[`Billing Banners:  PendingPlanBanner should render with pending_subscrip
   </p>
   <p>
     If you have any questions, please 
-    <a
-      href="mailto:support@sparkpost.com"
+    <UnstyledLink
+      to="mailto:support@sparkpost.com"
     >
       contact support
-    </a>
+    </UnstyledLink>
     .
   </p>
 </Banner>
@@ -84,11 +84,11 @@ exports[`Billing Banners:  SuspendedBanner should render with isSuspendedForBill
   </p>
   <p>
     If you have any questions, please 
-    <a
-      href="mailto:billing@sparkpost.com"
+    <UnstyledLink
+      to="mailto:billing@sparkpost.com"
     >
       contact us
-    </a>
+    </UnstyledLink>
     .
   </p>
 </Banner>
@@ -100,7 +100,7 @@ exports[`Billing Banners:  renders Enterprise banner 1`] = `
     Object {
       "content": "Contact Us",
       "external": true,
-      "to": "https://www.sparkpost.com/contact-enterprise/",
+      "to": "https://www.sparkpost.com/contact-enterprise",
     }
   }
   status="default"
@@ -135,7 +135,7 @@ exports[`Billing Banners:  renders Premium banner 1`] = `
     Object {
       "content": "Contact Us",
       "external": true,
-      "to": "https://www.sparkpost.com/contact-premium/",
+      "to": "https://www.sparkpost.com/contact-premium",
     }
   }
   status="default"

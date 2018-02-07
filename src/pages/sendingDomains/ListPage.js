@@ -11,6 +11,7 @@ import ReadyFor from './components/ReadyFor';
 import UnverifiedWarningBanner from './components/UnverifiedWarningBanner';
 import StatusTooltip from './components/StatusTooltip';
 import { resolveStatus, resolveReadyFor } from 'src/helpers/domains';
+import { LINKS } from 'src/constants';
 
 const StatusHeader = <StatusTooltip>Status</StatusTooltip>;
 
@@ -115,7 +116,7 @@ export class ListPage extends Component {
           image: 'Setup',
           secondaryAction: {
             content: 'Learn more',
-            to: 'https://www.sparkpost.com/docs/getting-started/setting-up-domains/',
+            to: LINKS.SENDING_SETUP,
             external: true
           }
         }}>

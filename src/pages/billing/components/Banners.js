@@ -1,8 +1,9 @@
 import React from 'react';
 import config from 'src/config';
 import { format } from 'date-fns';
-import { Banner } from '@sparkpost/matchbox';
+import { Banner, UnstyledLink } from '@sparkpost/matchbox';
 import { Link } from 'react-router-dom';
+import { LINKS } from 'src/constants';
 
 const dateFormat = (date) => format(date, 'MMM DD, YYYY');
 
@@ -13,7 +14,7 @@ const dateFormat = (date) => format(date, 'MMM DD, YYYY');
 export const PendingPlanBanner = ({ account }) => account.pending_subscription
   ? <Banner status='info' title='Pending Plan Change' >
     <p>You're scheduled to switch to the { account.pending_subscription.name } plan on { dateFormat(account.pending_subscription.effective_date) }, and can't update your plan until that switch happens.</p>
-    <p>If you have any questions, please <a href={`mailto:${config.contact.supportEmail}`}>contact support</a>.</p>
+    <p>If you have any questions, please <UnstyledLink to={`mailto:${config.contact.supportEmail}`}>contact support</UnstyledLink>.</p>
   </Banner>
   : null;
 
@@ -24,7 +25,7 @@ export const PendingPlanBanner = ({ account }) => account.pending_subscription
 export const SuspendedBanner = ({ account }) => account.isSuspendedForBilling
   ? <Banner status='danger' title='Your account has been suspended due to a billing problem' >
     <p>We sent an email notification to your current billing contact email address ({ account.billing.email }). To reactivate your account and pay your outstanding balance due, please update your payment information below.</p>
-    <p>If you have any questions, please <a href={`mailto:${config.contact.billingEmail}`}>contact us</a>.</p>
+    <p>If you have any questions, please <UnstyledLink to={`mailto:${config.contact.billingEmail}`}>contact us</UnstyledLink>.</p>
   </Banner>
   : null;
 
@@ -39,9 +40,9 @@ export const ManuallyBilledBanner = ({ account, ...rest }) => {
 
   const content = account.pending_subscription // Is this even possible??
     ? <p>
-        You're scheduled to switch to the { account.pending_subscription.name } plan on { dateFormat(account.pending_subscription.effective_date) }. If you have any questions, please <a href={`mailto:${config.contact.supportEmail}`}>contact support</a>.
+        You're scheduled to switch to the { account.pending_subscription.name } plan on { dateFormat(account.pending_subscription.effective_date) }. If you have any questions, please <UnstyledLink to={`mailto:${config.contact.supportEmail}`}>contact support</UnstyledLink>.
     </p>
-    : <p>To make changes to your plan, billing information, or addons, <a href={`mailto:${config.contact.supportEmail}`}>contact support</a>.</p>;
+    : <p>To make changes to your plan, billing information, or addons, <UnstyledLink to={`mailto:${config.contact.supportEmail}`}>contact support</UnstyledLink>.</p>;
 
   const convertAction = !account.pending_subscription
     ? { content: 'Enable Automatic Billing', to: '/account/billing/plan', Component: Link }
@@ -66,7 +67,7 @@ export const ManuallyBilledBanner = ({ account, ...rest }) => {
  * Premium Addon Plan CTA
  */
 export const PremiumBanner = () => (
-  <Banner title='Premium Addon Plan' action={{ content: 'Contact Us', to: 'https://www.sparkpost.com/contact-premium/', external: true }}>
+  <Banner title='Premium Addon Plan' action={{ content: 'Contact Us', to: LINKS.PREMIUM_SUPPORT, external: true }}>
     <p>Technical and deliverability account management - full service support on a first name basis.</p>
     <ul>
       <li>Dedicated Technical Account Manager</li>
@@ -81,7 +82,7 @@ export const PremiumBanner = () => (
  * Enterprise CTA
  */
 export const EnterpriseBanner = () => (
-  <Banner title='Enterprise' action={{ content: 'Contact Us', to: 'https://www.sparkpost.com/contact-enterprise/', external: true }}>
+  <Banner title='Enterprise' action={{ content: 'Contact Us', to: LINKS.ENTERPRISE_SUPPORT, external: true }}>
     <p>Enterprise-grade guarantees and SLAs across email, push, and SMS - manage, analyzed, and reported from a single console.</p>
     <ul>
       <li>The industry's best uptime SLAs with service credits</li>

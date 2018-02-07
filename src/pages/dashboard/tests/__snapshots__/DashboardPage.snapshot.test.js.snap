@@ -118,13 +118,12 @@ exports[`Page: Dashboard tests should render import suppression list when 0 supp
   >
     <p>
       Welcome! Make sure you import your suppression list from your previous provider to avoid sending to people who have previously opted out, consistently bounced, etc. Learn more about migrating from Mailgun, Mandrill, or SendGrid. 
-      <a
-        href="https://www.sparkpost.com/docs/getting-started/getting-started-sparkpost/#important-coming-from-other-email-services"
-        rel="noopener noreferrer"
-        target="_blank"
+      <UnstyledLink
+        external={true}
+        to="https://www.sparkpost.com/docs/getting-started/getting-started-sparkpost/#important-coming-from-other-email-services"
       >
         Import your suppressions
-      </a>
+      </UnstyledLink>
       .
     </p>
   </Banner>

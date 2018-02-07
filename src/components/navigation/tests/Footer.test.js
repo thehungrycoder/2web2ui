@@ -21,7 +21,7 @@ describe('Footer tests', () => {
   });
 
   it('should call logout on click', () => {
-    wrapper.find('a').at(1).simulate('click');
+    wrapper.find('UnstyledLink').at(1).simulate('click');
     expect(wrapper.instance().props.logout).toHaveBeenCalled();
   });
 });

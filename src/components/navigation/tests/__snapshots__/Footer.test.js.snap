@@ -3,20 +3,21 @@
 exports[`Footer tests should render footer correctly 1`] = `
 <ul>
   <li>
-    <a
-      href="https://www.sparkpost.com/docs/"
-      rel="noopener noreferrer"
-      target="_blank"
+    <UnstyledLink
+      className={[Function]}
+      external={true}
+      to="https://www.sparkpost.com/docs"
     >
       Help & API
-    </a>
+    </UnstyledLink>
   </li>
   <li>
-    <a
+    <UnstyledLink
+      className={[Function]}
       onClick={[MockFunction]}
     >
       Log Out
-    </a>
+    </UnstyledLink>
   </li>
 </ul>
 `;

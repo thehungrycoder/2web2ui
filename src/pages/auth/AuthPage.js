@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import { authenticate, ssoCheck, login } from 'src/actions/auth';
 import { verifyAndLogin } from 'src/actions/tfa';
 import { SparkPost } from 'src/components';
-import { Panel, Error } from '@sparkpost/matchbox';
+import { Panel, Error, UnstyledLink } from '@sparkpost/matchbox';
 import { SubmissionError } from 'redux-form';
 
 import config from 'src/config';
-import { DEFAULT_REDIRECT_ROUTE } from 'src/constants';
+import { DEFAULT_REDIRECT_ROUTE, LINKS } from 'src/constants';
 import LoginForm from './components/LoginForm';
 import TfaForm from './components/TfaForm';
 import styles from './AuthPage.module.scss';
@@ -88,9 +88,9 @@ export class AuthPage extends Component {
     return (
       <div>
         <div className={styles.LogoWrapper}>
-          <a href="https://www.sparkpost.com" title="SparkPost">
+          <UnstyledLink to={LINKS.SP_HOME_PAGE} title="SparkPost">
             <SparkPost.Logo />
-          </a>
+          </UnstyledLink>
         </div>
 
         <Panel sectioned accent title="Log In">

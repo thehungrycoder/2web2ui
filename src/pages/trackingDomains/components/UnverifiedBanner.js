@@ -1,6 +1,7 @@
 import React from 'react';
 import { Banner, Button } from '@sparkpost/matchbox';
 import config from 'src/config';
+import { LINKS } from 'src/constants';
 const cname = config.trackingDomains.cnameValue;
 
 const UnverifiedBanner = ({ unverifiedDomains }) => {
@@ -17,7 +18,7 @@ const UnverifiedBanner = ({ unverifiedDomains }) => {
       status='warning'
       title={title}>
       <p>To verify a tracking domain, edit its DNS settings to <strong>add a CNAME record</strong> with the value of <strong>{cname}</strong>.</p>
-      <Button outline external to="https://www.sparkpost.com/docs/tech-resources/enabling-multiple-custom-tracking-domains/">Learn more</Button>
+      <Button outline external to={LINKS.DOMAIN_VERIFICATION}>Learn more</Button>
     </Banner>
   );
 };

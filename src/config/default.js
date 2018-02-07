@@ -73,7 +73,6 @@ const config = {
     }
   },
   tenant: 'local',
-  touLink: 'https://www.sparkpost.com/policies/tou/',
   zuora: {
     baseUrl: 'https://rest.apisandbox.zuora.com/v1',
     timeout: 15000
@@ -92,6 +91,7 @@ const config = {
   },
   trackingDomains: {
     cnameValue: 'spgo.io'
+  },
   dateFormat: 'MMM D YYYY',
   timeFormat: 'h:mma',
   messageEvents: {

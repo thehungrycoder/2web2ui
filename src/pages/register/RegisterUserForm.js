@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 
-import config from 'src/config';
+import { LINKS } from 'src/constants';
 import { TextFieldWrapper } from 'src/components/reduxFormWrappers';
 import { Button, UnstyledLink } from '@sparkpost/matchbox';
 import { required, minLength } from 'src/helpers/validation';
@@ -36,7 +36,7 @@ export class RegisterUserForm extends Component {
           autoComplete='new-password'
           data-lpignore={true} // removes inaccurate LastPass password management behavior
         />
-        <p><small>By joining, you agree to SparkPost's <UnstyledLink target='_blank' to={config.touLink}>Terms of Use</UnstyledLink></small></p>
+        <p><small>By joining, you agree to SparkPost's <UnstyledLink to={LINKS.TOU} external>Terms of Use</UnstyledLink></small></p>
         <Button primary submit disabled={submitting}>{ submitting ? 'Loading' : 'Confirm' }</Button>
       </form>
     );

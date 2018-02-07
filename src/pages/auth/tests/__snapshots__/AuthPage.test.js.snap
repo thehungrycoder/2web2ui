@@ -3,12 +3,12 @@
 exports[`renders correctly 1`] = `
 <div>
   <div>
-    <a
-      href="https://www.sparkpost.com"
+    <UnstyledLink
       title="SparkPost"
+      to="https://www.sparkpost.com"
     >
       <Logo />
-    </a>
+    </UnstyledLink>
   </div>
   <Panel
     accent={true}
@@ -26,12 +26,12 @@ exports[`renders correctly 1`] = `
 exports[`renders correctly when there is a login error 1`] = `
 <div>
   <div>
-    <a
-      href="https://www.sparkpost.com"
+    <UnstyledLink
       title="SparkPost"
+      to="https://www.sparkpost.com"
     >
       <Logo />
-    </a>
+    </UnstyledLink>
   </div>
   <Panel
     accent={true}
@@ -52,12 +52,12 @@ exports[`renders correctly when there is a login error 1`] = `
 exports[`should display tfa form when TFA is enabled 1`] = `
 <div>
   <div>
-    <a
-      href="https://www.sparkpost.com"
+    <UnstyledLink
       title="SparkPost"
+      to="https://www.sparkpost.com"
     >
       <Logo />
-    </a>
+    </UnstyledLink>
   </div>
   <Panel
     accent={true}

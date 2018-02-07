@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { logout } from '../../actions/auth';
+import { UnstyledLink } from '@sparkpost/matchbox';
+import { LINKS } from 'src/constants';
 
 import styles from './Navigation.module.scss';
 
@@ -10,8 +12,8 @@ export class Footer extends Component {
 
     return (
       <ul className={styles.footer}>
-        <li><a className={styles.link} href='https://www.sparkpost.com/docs/' target='_blank' rel='noopener noreferrer'>Help &amp; API</a></li>
-        <li><a className={styles.link} onClick={logout}>Log Out</a></li>
+        <li><UnstyledLink className={styles.link} to={LINKS.DOCS} external>Help &amp; API</UnstyledLink></li>
+        <li><UnstyledLink className={styles.link} onClick={logout}>Log Out</UnstyledLink></li>
       </ul>
     );
   }

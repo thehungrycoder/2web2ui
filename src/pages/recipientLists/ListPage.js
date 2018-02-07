@@ -6,6 +6,7 @@ import { Page } from '@sparkpost/matchbox';
 import { Loading, ApiErrorBanner, TableCollection } from 'src/components';
 
 import { listRecipientLists } from 'src/actions/recipientLists';
+import { LINKS } from 'src/constants';
 
 const columns = [
   { label: 'Name', sortKey: 'name' },
@@ -78,7 +79,7 @@ export class ListPage extends Component {
           content: <p>Manage your recipient lists</p>,
           secondaryAction: {
             content: 'Learn More',
-            to: 'https://developers.sparkpost.com/api/recipient-lists.html',
+            to: LINKS.RECIP_API,
             external: true
           }}}>
         { error ? this.renderError() : this.renderCollection() }

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
-import { Button, Error, Panel } from '@sparkpost/matchbox';
+import { Button, Error, Panel, UnstyledLink } from '@sparkpost/matchbox';
 
 import { addDedicatedIps } from 'src/actions/billing';
 import { showAlert } from 'src/actions/globalAlert';
@@ -14,18 +14,18 @@ import ErrorTracker from 'src/helpers/errorTracker';
 import { required, minNumber, maxNumber } from 'src/helpers/validation';
 import { currentPlanSelector } from 'src/selectors/accountBillingInfo';
 import DedicatedIpCost from '../components/DedicatedIpCost';
+import { LINKS } from 'src/constants';
 
 import styles from './Forms.module.scss';
 
 const FORM_NAME = 'add-sending-ips';
 const WarmUpArticleLink = () => (
-  <a
-    href='https://support.sparkpost.com/customer/portal/articles/1972209-ip-warm-up-overview'
-    rel='noopener noreferrer'
-    target='_blank'
+  <UnstyledLink
+    to={LINKS.IP_WARM_UP}
+    external
   >
     IP Warm-up Overview article
-  </a>
+  </UnstyledLink>
 );
 
 class AddIps extends Component {

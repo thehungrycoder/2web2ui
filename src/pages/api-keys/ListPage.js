@@ -3,10 +3,11 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Page } from '@sparkpost/matchbox';
 import { listApiKeys, hideNewApiKey } from 'src/actions/api-keys';
-import { Loading, SubaccountTag, TableCollection, ApiErrorBanner, ApiKeySuccessBanner } from 'src/components';
+import { Loading, SubaccountTag, TableCollection, ApiErrorBanner, ApiKeySuccessBanner, ShortKeyCode } from 'src/components';
 import { filterBoxConfig } from './tableConfig';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
+import { LINKS } from 'src/constants';
 
 const primaryAction = {
   content: 'Create API Key',
@@ -31,7 +32,7 @@ export class ListPage extends Component {
     const { hasSubaccounts } = this.props;
     const rowData = [
       <Link to={`/account/api-keys/details/${id}${setSubaccountQuery(subaccount_id)}`}>{label}</Link>,
-      <code>{short_key}••••••••</code>
+      <ShortKeyCode shortKey={short_key} />
     ];
 
     if (hasSubaccounts) {
@@ -108,7 +109,7 @@ export class ListPage extends Component {
         secondaryAction: {
           content: 'View our API Docs',
           external: true,
-          to: 'https://developers.sparkpost.com/api'
+          to: LINKS.API_DOCS
         }}}>
         { newKey && this.renderBanner() }
         { error ? this.renderError() : this.renderCollection() }

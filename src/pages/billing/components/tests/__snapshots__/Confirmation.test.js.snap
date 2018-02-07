@@ -45,11 +45,11 @@ exports[`Confirmation:  should render correctly with a downgrade 1`] = `
       </p>
       <p>
         To remove dedicated IPs from your account, please 
-        <a
-          href="mailto:support@sparkpost.com"
+        <UnstyledLink
+          to="mailto:support@sparkpost.com"
         >
           contact our support team
-        </a>
+        </UnstyledLink>
         .
       </p>
     </div>
@@ -161,11 +161,11 @@ exports[`Confirmation:  should render correctly with an upgrade 1`] = `
       </p>
       <p>
         To remove dedicated IPs from your account, please 
-        <a
-          href="mailto:support@sparkpost.com"
+        <UnstyledLink
+          to="mailto:support@sparkpost.com"
         >
           contact our support team
-        </a>
+        </UnstyledLink>
         .
       </p>
     </div>
