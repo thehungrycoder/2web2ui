@@ -31,9 +31,7 @@ const createUniqueIdGenerator = () => {
 const uniqueIdGenerator = createUniqueIdGenerator();
 
 module.exports = function(localName, filePath) {
-  const componentName = filePath.split('/').slice(-2, -1);
-
   // Matchbox uses the same generator to reduce class names
   // Prefix classes with APP_ to not overlap
-  return `APP_${uniqueIdGenerator(componentName)}_${uniqueIdGenerator(localName)}`;
+  return `APP_${uniqueIdGenerator(filePath)}_${uniqueIdGenerator(localName)}`;
 };
