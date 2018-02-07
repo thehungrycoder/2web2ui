@@ -1,10 +1,11 @@
 import React from 'react';
 import { Banner } from '@sparkpost/matchbox';
+import { LINKS } from 'src/constants';
 
 const UnverifiedWarningBanner = () => {
   const action = {
     content: 'Learn more about review requirements',
-    to: 'https://www.sparkpost.com/docs/getting-started/requirements-for-sending-domains/',
+    to: LINKS.SENDING_REQS,
     external: true
   };
 

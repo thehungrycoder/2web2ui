@@ -20,3 +20,14 @@ export function getPlans() {
     }
   });
 }
+
+export function update(data) {
+  return sparkpostApiRequest({
+    type: 'UPDATE_ACCOUNT',
+    meta: {
+      method: 'PUT',
+      url: '/account',
+      data
+    }
+  });
+}

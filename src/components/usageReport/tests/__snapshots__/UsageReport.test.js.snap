@@ -13,7 +13,7 @@ exports[`UsageReport Component should render with overages 1`] = `
       Object {
         "content": "What counts towards usage?",
         "external": true,
-        "to": "https://support.sparkpost.com/customer/portal/articles/2750871",
+        "to": "https://www.sparkpost.com/docs/getting-started/what-counts-daily-monthly-usage",
       },
     ]
   }
@@ -73,7 +73,7 @@ exports[`UsageReport Component should render with regular usage 1`] = `
       Object {
         "content": "What counts towards usage?",
         "external": true,
-        "to": "https://support.sparkpost.com/customer/portal/articles/2750871",
+        "to": "https://www.sparkpost.com/docs/getting-started/what-counts-daily-monthly-usage",
       },
     ]
   }

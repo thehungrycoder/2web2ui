@@ -1,5 +1,5 @@
 import React from 'react';
-import { Panel, Button } from '@sparkpost/matchbox';
+import { Panel, Button, UnstyledLink } from '@sparkpost/matchbox';
 import config from 'src/config';
 
 const Confirmation = ({ current = {}, selected = {}, disableSubmit, selfServe }) => {
@@ -48,7 +48,7 @@ const Confirmation = ({ current = {}, selected = {}, disableSubmit, selfServe })
         <div>
           <p>Note: your current plan includes a free dedicated IP address.</p>
           <p>If you downgrade to the selected plan, you will lose that discount and will be charged the standard ${ config.sendingIps.pricePerIp } / month price for each dedicated IP on your next statement.</p>
-          <p>To remove dedicated IPs from your account, please <a href={`mailto:${config.contact.supportEmail}`}>contact our support team</a>.</p>
+          <p>To remove dedicated IPs from your account, please <UnstyledLink to={`mailto:${config.contact.supportEmail}`}>contact our support team</UnstyledLink>.</p>
         </div>
       );
     }

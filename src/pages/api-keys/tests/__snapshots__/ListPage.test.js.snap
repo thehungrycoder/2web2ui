@@ -144,10 +144,9 @@ Array [
   >
     Test Key 1
   </Link>,
-  <code>
-    ab01
-    ••••••••
-  </code>,
+  <ShortKeyCode
+    shortKey="ab01"
+  />,
   <SubaccountTag
     all={false}
     id={101}

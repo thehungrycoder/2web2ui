@@ -7,6 +7,7 @@ import { Loading, TableCollection, ApiErrorBanner } from 'src/components';
 import { list as listSubaccounts } from 'src/actions/subaccounts';
 import { selectSubaccounts } from 'src/selectors/subaccounts';
 import getRowData from './helpers/getRowData';
+import { LINKS } from 'src/constants';
 
 // const columns = ['Name', 'ID', 'Status', null];
 
@@ -77,7 +78,7 @@ export class ListPage extends Component {
           content: <p>Subaccounts are a good way of managing external client accounts.</p>,
           secondaryAction: {
             content: 'Learn more',
-            to: 'https://developers.sparkpost.com/api/subaccounts.html',
+            to: LINKS.SUBACCOUNTS_API,
             external: true
           }
         }}>

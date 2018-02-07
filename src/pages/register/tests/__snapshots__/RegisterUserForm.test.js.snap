@@ -32,8 +32,8 @@ exports[`render 1`] = `
     <small>
       By joining, you agree to SparkPost's 
       <UnstyledLink
-        target="_blank"
-        to="https://www.sparkpost.com/policies/tou/"
+        external={true}
+        to="https://www.sparkpost.com/policies/tou"
       >
         Terms of Use
       </UnstyledLink>
@@ -82,8 +82,8 @@ exports[`submitting 1`] = `
     <small>
       By joining, you agree to SparkPost's 
       <UnstyledLink
-        target="_blank"
-        to="https://www.sparkpost.com/policies/tou/"
+        external={true}
+        to="https://www.sparkpost.com/policies/tou"
       >
         Terms of Use
       </UnstyledLink>
