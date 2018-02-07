@@ -55,13 +55,13 @@ export class CreatePage extends Component {
               status="danger"
             />
           )}
-          <Panel title="Upload a List of Suppressions">
+          <Panel>
             <Panel.Section>
               <Field
                 component={FileFieldWrapper}
                 disabled={submitting}
                 name="suppressionsFile"
-                label="Comma Separated Values (CSV) File of Suppressions"
+                label="CSV File of Suppressions"
                 fileType="csv"
                 helpText={
                   <span>
