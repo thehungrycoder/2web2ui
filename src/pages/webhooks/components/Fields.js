@@ -1,7 +1,7 @@
 import React from 'react';
 import { Field } from 'redux-form';
 import { required, maxLength } from 'src/helpers/validation';
-import { TextFieldWrapper, SelectWrapper, RadioGroup } from 'src/components';
+import { TextFieldWrapper, SelectWrapper, RadioGroup, CheckboxWrapper } from 'src/components';
 import { UnstyledLink } from '@sparkpost/matchbox';
 
 const BasicAuthFields = () => (
@@ -65,6 +65,14 @@ const AuthDropDown = () => (
   />
 );
 
+const ActiveField = () => (
+  <Field
+    name='active'
+    label='Active'
+    component={CheckboxWrapper}
+    helpText='An inactive webhook will not transmit any data.'
+  />
+);
 
 export {
   NameField,
@@ -72,5 +80,6 @@ export {
   EventsRadioGroup,
   AuthDropDown,
   BasicAuthFields,
-  OAuth2Fields
+  OAuth2Fields,
+  ActiveField
 };
