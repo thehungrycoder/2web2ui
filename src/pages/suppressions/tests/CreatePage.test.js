@@ -20,7 +20,13 @@ cases('CreatePage', ({ name, ...props }) => {
   },
   'renders upload form with persist error': {
     persistError: {
-      message: 'Oh no, creating!'
+      response: {
+        data: {
+          errors: [
+            { message: 'Oh no, creating!' }
+          ]
+        }
+      }
     },
     submitting: false,
     submitFailed: true
