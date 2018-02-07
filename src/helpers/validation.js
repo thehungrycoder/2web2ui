@@ -34,8 +34,8 @@ export function endsWithWhitespace(value) {
   return /[\S]$/.test(value) ? undefined : 'Can\'t end in a whitespace character';
 }
 
-export function fileWithContents(file) {
-  return !file || file.size > 0 ? undefined : 'Must have contents';
+export function nonEmptyFile(file) {
+  return !file || file.size > 0 ? undefined : 'File must be non-empty';
 }
 
 export const fileExtension = _.memoize(function fileExtension(extension) {

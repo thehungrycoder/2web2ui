@@ -27,7 +27,7 @@ const cases = {
     good: ['example.com', 'xo.co'],
     bad: ['101', 'no_capes']
   },
-  fileWithContents: {
+  nonEmptyFile: {
     good: [{ size: 1 }, null],
     bad: [{ size: 0 }]
   }

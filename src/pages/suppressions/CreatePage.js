@@ -12,7 +12,7 @@ import DownloadLink from 'src/components/downloadLink/DownloadLink';
 import FileFieldWrapper from 'src/components/reduxFormWrappers/FileFieldWrapper';
 import SubaccountTypeaheadWrapper from 'src/components/reduxFormWrappers/SubaccountTypeaheadWrapper';
 import config from 'src/config';
-import { fileExtension, fileWithContents, maxFileSize, required } from 'src/helpers/validation';
+import { fileExtension, maxFileSize, nonEmptyFile, required } from 'src/helpers/validation';
 import exampleSuppressionsListPath from './example-suppressions-list.csv';
 
 export class CreatePage extends Component {
@@ -75,7 +75,7 @@ export class CreatePage extends Component {
                   required,
                   fileExtension('csv'),
                   maxFileSize(config.maxUploadSizeBytes),
-                  fileWithContents
+                  nonEmptyFile
                 ]}
               />
               <Field
