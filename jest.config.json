@@ -42,7 +42,8 @@
     "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"
   ],
   "moduleNameMapper": {
-    "^react-native$": "react-native-web"
+    "^react-native$": "react-native-web",
+     "\\.(css|scss)$": "<rootDir>/config/jest/styleMock.js"
   },
   "snapshotSerializers": [
     "<rootDir>/node_modules/enzyme-to-json/serializer"

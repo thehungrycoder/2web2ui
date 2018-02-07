@@ -1,7 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { ListPage } from '../ListPage';
-import { renderRowData } from 'src/__testHelpers__/renderHelpers';
 import TimeAgo from 'react-timeago';
 
 describe('Page: Users List', () => {
@@ -44,7 +43,7 @@ describe('Page: Users List', () => {
       email: 'testemail'
     });
 
-    expect(renderRowData(row)).toMatchSnapshot();
+    expect(row).toMatchSnapshot();
   });
 
   it('should transform row data for the table collection, with a last login date', () => {

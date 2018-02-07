@@ -228,19 +228,11 @@ exports[`BouncePage:  should render row data properly 1`] = `
 Array [
   <LongTextContainer
     text="u y bounce?"
-  >
-    <div>
-      u y bounce?
-    </div>
-  </LongTextContainer>,
+  />,
   <UnstyledLink
     onClick={[Function]}
   >
-    <a
-      onClick={[Function]}
-    >
-      gmail
-    </a>
+    gmail
   </UnstyledLink>,
   "bouncy",
   undefined,
@@ -249,9 +241,7 @@ Array [
     (
     <Percent
       value={10}
-    >
-      10%
-    </Percent>
+    />
     )
   </span>,
 ]

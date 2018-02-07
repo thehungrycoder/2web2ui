@@ -2,7 +2,6 @@ import { shallow } from 'enzyme';
 import React from 'react';
 
 import { IpPoolsList, getRowData } from '../ListPage';
-import { renderRowData } from 'src/__testHelpers__/renderHelpers';
 
 describe('IP Pools List Page', () => {
   let props;
@@ -42,6 +41,6 @@ describe('IP Pools List Page', () => {
       ips: [1,2,3]
     });
 
-    expect(renderRowData(rows)).toMatchSnapshot();
+    expect(rows).toMatchSnapshot();
   });
 });
