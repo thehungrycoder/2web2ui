@@ -86,7 +86,10 @@ const config = {
     cnameValue: 'sparkpostmail.com'
   },
   dateFormat: 'MMM D YYYY',
-  timeFormat: 'h:mma'
+  timeFormat: 'h:mma',
+  messageEvents: {
+    retentionPeriodDays: 10
+  }
 };
 
 export default config;
