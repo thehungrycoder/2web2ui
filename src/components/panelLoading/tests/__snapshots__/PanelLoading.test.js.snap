@@ -1,21 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Panel Loading render 1`] = `
-<div
-  class="Matchbox-Panel"
-  style="min-height:400px"
+<Panel
+  style={
+    Object {
+      "minHeight": "400px",
+    }
+  }
 >
-  <svg
-    class=""
-    viewBox="25 25 50 50"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <circle
-      cx="50"
-      cy="50"
-      r="20"
-      vector-effect="non-scaling-stroke"
-    />
-  </svg>
-</div>
+  <Loading />
+</Panel>
 `;

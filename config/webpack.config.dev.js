@@ -13,6 +13,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const StyleExtHtmlWebpackPlugin = require('style-ext-html-webpack-plugin');
 const getClientEnvironment = require('./env');
 const paths = require('./paths');
+const generateScopedName = require('./generateScopedName');
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // In development, we always serve from the root. This makes config easier.
@@ -210,6 +211,8 @@ module.exports = {
               importLoaders: 2,
               sourceMap: true,
               localIdentName: '[name]__[local]___[hash:base64:5]'
+              // Class name reducer
+              // getLocalIdent: (context, localIdentName, localName) => generateScopedName(localName, context.resourcePath)
             },
           },
           { loader: require.resolve('postcss-loader'), options: postCssOptions },

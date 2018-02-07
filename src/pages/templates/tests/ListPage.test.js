@@ -1,6 +1,5 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import { renderRowData } from 'src/__testHelpers__/renderHelpers';
 import dateMock from 'date-fns';
 import ListPage from '../ListPage';
 
@@ -69,7 +68,7 @@ it('renders rows correctly with subaccounts', () => {
   ];
 
   wrapper.setProps({ hasSubaccounts: true });
-  const rowData = renderRowData(rows.map(wrapper.instance().getRowData));
+  const rowData = rows.map(wrapper.instance().getRowData);
   expect(rowData).toMatchSnapshot();
 });
 
@@ -83,7 +82,7 @@ it('renders rows correctly with NO subaccounts', () => {
     }
   ];
 
-  const rowData = renderRowData(rows.map(wrapper.instance().getRowData));
+  const rowData = rows.map(wrapper.instance().getRowData);
   expect(rowData).toMatchSnapshot();
 });
 

@@ -14,6 +14,7 @@ const eslintFormatter = require('react-dev-utils/eslintFormatter');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const paths = require('./paths');
 const getClientEnvironment = require('./env');
+const generateScopedName = require('./generateScopedName');
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // It requires a trailing slash, or the file assets will get an incorrect path.
@@ -214,7 +215,11 @@ module.exports = {
                     modules: true,
                     importLoaders: 2,
                     sourceMap: true,
-                    localIdentName: '[name]__[local]___[hash:base64:5]'
+                    // Default class name template
+                    // localIdentName: '[name]__[local]___[hash:base64:5]'
+                    getLocalIdent: (context, localIdentName, localName) => {
+                      return generateScopedName(localName, context.resourcePath);
+                    },
                   },
                 },
                 { loader: require.resolve('postcss-loader'), options: postCssOptions },

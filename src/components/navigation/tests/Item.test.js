@@ -1,19 +1,16 @@
 import React from 'react';
 import Item from '../Item';
-import { render, shallow } from 'enzyme';
-import { MemoryRouter } from 'react-router-dom';
+import { shallow } from 'enzyme';
 
 describe('Item tests', () => {
   it('should render a link correctly', () => {
-    const item = render(
-      <MemoryRouter>
-        <Item
-          to='/to'
-          icon='Mail'
-          label='label'
-          location={ { pathname: 'to' } }
-        />
-      </MemoryRouter>
+    const item = shallow(
+      <Item
+        to='/to'
+        icon='Mail'
+        label='label'
+        location={ { pathname: 'to' } }
+      />
     );
     expect(item).toMatchSnapshot();
   });
@@ -24,16 +21,14 @@ describe('Item tests', () => {
       { to: '/child1', label: 'child 1', location },
       { to: '/child2', label: 'child 2', location }
     ];
-    const item = render(
-      <MemoryRouter>
-        <Item
-          to='/to'
-          icon='Mail'
-          label='label'
-          children={children}
-          location={location}
-        />
-      </MemoryRouter>
+    const item = shallow(
+      <Item
+        to='/to'
+        icon='Mail'
+        label='label'
+        children={children}
+        location={location}
+      />
     );
     expect(item).toMatchSnapshot();
   });
