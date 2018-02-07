@@ -1,7 +1,8 @@
 import { sparkpost as sparkpostRequest } from 'src/helpers/axiosInstances';
+import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 import { login } from 'src/actions/auth';
 
-export function get({ username, token }) {
+export function getTfaStatusBeforeLoggedIn({ username, token }) {
   return sparkpostRequest({
     method: 'GET',
     url: `/users/${username}/two-factor`,
@@ -9,6 +10,41 @@ export function get({ username, token }) {
       Authorization: token
     }
   });
+}
+
+export function getTfaStatus() {
+  return (dispatch, getState) => {
+    const { currentUser } = getState();
+    return dispatch(sparkpostApiRequest({
+      type: 'GET_TFA_STATUS',
+      meta: {
+        method: 'GET',
+        url: `/users/${currentUser.username}/two-factor`
+      }
+    }));
+  };
+}
+
+export function generateBackupCodes(password) {
+  return (dispatch, getState) => {
+    const { currentUser } = getState();
+    return dispatch(sparkpostApiRequest({
+      type: 'TFA_GENERATE_BACKUP_CODES',
+      meta: {
+        method: 'POST',
+        url: `/users/${currentUser.username}/two-factor/backup`,
+        data: {
+          password
+        }
+      }
+    }));
+  };
+}
+
+export function clearBackupCodes() {
+  return {
+    type: 'TFA_CLEAR_BACKUP_CODES'
+  };
 }
 
 export function verifyAndLogin({ authData, code }) {
