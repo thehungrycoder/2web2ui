@@ -1,6 +1,6 @@
 import React from 'react';
 import Modal from 'src/components/modals/Modal';
-import { Panel, Button } from '@sparkpost/matchbox';
+import { Panel } from '@sparkpost/matchbox';
 
 export default function BackupCodesModal({
   open,
@@ -12,9 +12,8 @@ export default function BackupCodesModal({
 }) {
   return (
     <Modal open={open}>
-      <Panel title='Generate 2FA Backup Codes' accent sectioned>
-        back up codes dance woo
-        <Button onClick={onClose}>Cancel</Button>
+      <Panel title='Generate 2FA Backup Codes' accent actions={[{ content: 'Cancel', onClick: onClose }]}>
+        <Panel.Section>back up codes dance woo</Panel.Section>
       </Panel>
     </Modal>
   );

@@ -59,7 +59,7 @@ export function authenticate(username, password, rememberMe = false) {
         // if tfa enabled must avoid logging in
         if (tfaResponse.data.results.enabled) {
           dispatch({
-            type: 'TFA_ENABLED',
+            type: 'TFA_ENABLED_ON_LOGIN',
             payload: authData
           });
         } else {

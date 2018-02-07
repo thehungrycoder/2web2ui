@@ -14,21 +14,22 @@ import rejectionReport from './rejectionReport';
 import currentUser from './currentUser';
 import globalAlert from './globalAlert';
 import ipPools from './ipPools';
+import messageEvents from './messageEvents';
 import metrics from './metrics';
+import recipientLists from './recipientLists';
 import reportFilters from './reportFilters';
 import sendingDomains from './sendingDomains';
 import sendingIps from './sendingIps';
 import subaccounts from './subaccounts';
-import support from './support';
 import summaryChart from './summaryChart';
+import support from './support';
+import suppressions from './suppressions';
 import templates from './templates';
-import recipientLists from './recipientLists';
 import users from './users';
+import tfa from './tfa';
+import tfaBackupCodes from './tfaBackupCodes';
 import trackingDomains from './trackingDomains';
 import webhooks from './webhooks';
-import messageEvents from './messageEvents';
-import suppressions from './suppressions';
-import tfa from './tfa';
 
 const appReducer = combineReducers({
   acceptedReport,
@@ -57,6 +58,7 @@ const appReducer = combineReducers({
   suppressions,
   templates,
   tfa,
+  tfaBackupCodes,
   trackingDomains,
   users,
   webhooks

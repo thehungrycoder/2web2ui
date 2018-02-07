@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Panel } from '@sparkpost/matchbox';
 import { PanelLoading } from 'src/components';
-import { getTfaStatus, generateBackupCodes, clearBackupCodes } from 'src/actions/tfa';
+import * as tfaActions from 'src/actions/tfa';
 import BackupCodesModal from './BackupCodesModal';
+import EnableTfaModal from './EnableTfaModal';
+import DisableTfaModal from './DisableTfaModal';
+import { LINKS } from 'src/constants';
 
 export class TfaManager extends Component {
 
@@ -15,6 +18,9 @@ export class TfaManager extends Component {
     if (this.props.statusUnknown) {
       this.props.getTfaStatus();
     }
+    if (!this.props.secret) {
+      this.props.getTfaSecret();
+    }
   }
 
   closeModals = () => this.setState({ openModal: null });
@@ -24,26 +30,26 @@ export class TfaManager extends Component {
     this.props.clearBackupCodes();
   };
 
-  render() {
-    const {
-      statusUnknown,
-      enabled,
-      generateBackupCodes,
-      backupCodes,
-      backupCodesPending,
-      backupCodesError
-    } = this.props;
+  enable = (code) => this.props.toggleTfa({ enabled: true, code });
+  disable = (password) => this.props.toggleTfa({ enabled: false, password });
 
-    if (statusUnknown) {
+  render() {
+    const { enabled } = this.props;
+
+    if (this.props.statusUnknown) {
       return <PanelLoading minHeight='100px' />;
     }
 
-    const enabledActions = [{
+    const disabledActions = [{
       content: 'Enable 2FA',
       onClick: () => this.setState({ openModal: 'enable' })
+    }, {
+      content: 'Learn More',
+      to: LINKS.LEARN_MORE_TFA,
+      external: true
     }];
 
-    const disabledActions = [{
+    const enabledActions = [{
       content: 'Generate New Backup Codes',
       onClick: () => this.setState({ openModal: 'backupCodes' })
     }, {
@@ -57,10 +63,28 @@ export class TfaManager extends Component {
         <BackupCodesModal
           open={this.state.openModal === 'backupCodes'}
           onClose={this.closeModals}
-          generate={generateBackupCodes}
-          codes={backupCodes}
-          pending={backupCodesPending}
-          error={backupCodesError}
+          generate={this.props.generateBackupCodes}
+          codes={this.props.backupCodes}
+          pending={this.props.backupCodesPending}
+          error={this.props.backupCodesError}
+        />
+        <EnableTfaModal
+          open={this.state.openModal === 'enable'}
+          onClose={this.closeModals}
+          enable={this.enable}
+          secret={this.props.secret}
+          username={this.props.username}
+          togglePending={this.props.togglePending}
+          toggleError={this.props.toggleError}
+          enabled={enabled}
+        />
+        <DisableTfaModal
+          open={this.state.openModal === 'disable'}
+          onClose={this.closeModals}
+          disable={this.disable}
+          togglePending={this.props.togglePending}
+          toggleError={this.props.toggleError}
+          enabled={enabled}
         />
       </Panel>
     );
@@ -68,12 +92,14 @@ export class TfaManager extends Component {
 
 }
 
-const mapStateToProps = ({ currentUser, tfa: { backupCodes, backupCodesPending, backupCodesError }}) => ({
-  statusUnknown: currentUser.tfa === 'unknown',
-  enabled: currentUser.tfa === 'enabled',
-  backupCodes,
-  backupCodesPending,
-  backupCodesError
+const mapStateToProps = ({ currentUser, tfa, tfaBackupCodes: { codes, error, pending }}) => ({
+  ...tfa,
+  username: currentUser.username,
+  statusUnknown: tfa.enabled === null,
+  enabled: tfa.enabled === true,
+  backupCodes: codes,
+  backupCodesPending: pending,
+  backupCodesError: error
 });
 
-export default connect(mapStateToProps, { getTfaStatus, generateBackupCodes, clearBackupCodes })(TfaManager);
+export default connect(mapStateToProps, tfaActions)(TfaManager);

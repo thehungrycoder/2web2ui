@@ -71,7 +71,7 @@ export class AuthPage extends Component {
 
   tfaSubmit = (values) => {
     const { code } = values;
-    const { tfaEnabled, ...authData } = this.props.tfa;
+    const { enabled, ...authData } = this.props.tfa;
     return this.props.verifyAndLogin({ authData, code }).catch((err) => {
       if (err.response.status === 400) {
         throw new SubmissionError({
@@ -83,7 +83,7 @@ export class AuthPage extends Component {
 
   render() {
     const { errorDescription } = this.props.auth;
-    const { tfaEnabled } = this.props.tfa;
+    const { tfa } = this.props;
 
     return (
       <div>
@@ -96,8 +96,8 @@ export class AuthPage extends Component {
         <Panel sectioned accent title="Log In">
           { errorDescription && this.renderLoginError(errorDescription)}
 
-          { tfaEnabled && <TfaForm onSubmit={this.tfaSubmit} /> }
-          { !tfaEnabled && <LoginForm onSubmit={this.loginSubmit} ssoEnabled={this.state.ssoEnabled}/> }
+          { tfa.enabled && <TfaForm onSubmit={this.tfaSubmit} /> }
+          { !tfa.enabled && <LoginForm onSubmit={this.loginSubmit} ssoEnabled={this.state.ssoEnabled}/> }
         </Panel>
       </div>
     );

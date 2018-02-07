@@ -1,6 +1,5 @@
 const initialState = {
-  grants: [],
-  tfa: 'unknown'
+  grants: []
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -10,14 +9,6 @@ export default (state = initialState, { type, payload }) => {
 
     case 'GET_GRANTS_SUCCESS':
       return { ...state, grants: payload };
-
-    case 'TFA_ENABLED': {
-      return { ...state, tfa: 'enabled' };
-    }
-
-    case 'GET_TFA_STATUS_SUCCESS': {
-      return { ...state, tfa: payload.enabled ? 'enabled' : 'disabled' };
-    }
 
     default:
       return state;
