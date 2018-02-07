@@ -3,12 +3,12 @@
 exports[`Page: RegisterPage happy path render 1`] = `
 <div>
   <div>
-    <a
-      href="https://www.sparkpost.com"
+    <UnstyledLink
       title="SparkPost"
+      to="https://www.sparkpost.com"
     >
       <Logo />
-    </a>
+    </UnstyledLink>
   </div>
   <Panel
     accent={true}
@@ -28,6 +28,7 @@ exports[`Page: RegisterPage happy path render 1`] = `
     </Panel.Section>
   </Panel>
   <UnstyledLink
+    Component={[Function]}
     to="/auth"
   >
     Already signed up?
@@ -38,12 +39,12 @@ exports[`Page: RegisterPage happy path render 1`] = `
 exports[`Page: RegisterPage loading 1`] = `
 <div>
   <div>
-    <a
-      href="https://www.sparkpost.com"
+    <UnstyledLink
       title="SparkPost"
+      to="https://www.sparkpost.com"
     >
       <Logo />
-    </a>
+    </UnstyledLink>
   </div>
   <Panel
     accent={true}
@@ -54,6 +55,7 @@ exports[`Page: RegisterPage loading 1`] = `
     />
   </Panel>
   <UnstyledLink
+    Component={[Function]}
     to="/auth"
   >
     Already signed up?
@@ -71,12 +73,12 @@ exports[`Page: RegisterPage no token 1`] = `
 exports[`Page: RegisterPage token expired 1`] = `
 <div>
   <div>
-    <a
-      href="https://www.sparkpost.com"
+    <UnstyledLink
       title="SparkPost"
+      to="https://www.sparkpost.com"
     >
       <Logo />
-    </a>
+    </UnstyledLink>
   </div>
   <Panel
     accent={true}
@@ -89,6 +91,7 @@ exports[`Page: RegisterPage token expired 1`] = `
     </Panel.Section>
   </Panel>
   <UnstyledLink
+    Component={[Function]}
     to="/auth"
   >
     Already signed up?

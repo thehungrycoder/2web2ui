@@ -7,11 +7,12 @@ import PanelLoading from 'src/components/panelLoading/PanelLoading';
 
 import { Panel, ProgressBar } from '@sparkpost/matchbox';
 import styles from './UsageReport.module.scss';
+import { LINKS } from 'src/constants';
 
 const actions = [
   {
     content: 'What counts towards usage?',
-    to: 'https://support.sparkpost.com/customer/portal/articles/2750871',
+    to: LINKS.DAILY_USAGE,
     external: true
   }
 ];

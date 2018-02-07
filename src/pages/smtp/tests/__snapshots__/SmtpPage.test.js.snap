@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Page: Smtp tests should render page correctly with defaults 1`] = `
+<Page
+  empty={Object {}}
+  title="SMTP Relay"
+>
+  <SmtpDetails />
+  <Connect(ReduxForm)
+    toggle={[Function]}
+  />
+</Page>
+`;

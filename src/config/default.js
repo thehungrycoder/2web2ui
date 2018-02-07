@@ -73,10 +73,14 @@ const config = {
     }
   },
   tenant: 'local',
-  touLink: 'https://www.sparkpost.com/policies/tou/',
   zuora: {
     baseUrl: 'https://rest.apisandbox.zuora.com/v1',
     timeout: 15000
+  },
+  smtpAuth: {
+    host: 'no-default-set',
+    port: 587,
+    username: 'SMTP_Injection'
   },
   sso: {
     enabled: false
@@ -84,6 +88,9 @@ const config = {
   bounceDomains: {
     allowDefault: true,
     cnameValue: 'sparkpostmail.com'
+  },
+  trackingDomains: {
+    cnameValue: 'spgo.io'
   },
   dateFormat: 'MMM D YYYY',
   timeFormat: 'h:mma',

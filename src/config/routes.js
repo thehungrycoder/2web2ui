@@ -10,6 +10,7 @@ import {
   RegisterPage,
   reports,
   recipientLists,
+  SmtpPage,
   suppressions,
   subaccounts,
   templates,
@@ -332,7 +333,7 @@ const routes = [
   },
   {
     path: '/account/smtp',
-    component: ComingSoonPage,
+    component: SmtpPage,
     condition: hasGrants('api_keys/manage'),
     layout: App
   },

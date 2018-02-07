@@ -18,6 +18,8 @@ export { default as RouteWatch } from './routeWatch/RouteWatch';
 export { default as SparkPost } from './sparkPost/SparkPost';
 export { default as Support } from './support/Support';
 export { default as UsageReport } from './usageReport/UsageReport';
+export { default as ShortKeyCode } from './shortKeyCode/ShortKeyCode';
+
 
 export * from './collection';
 export * from './formatters';

@@ -6,7 +6,7 @@ exports[`Component: Unverified Domain Warning Banner renders correctly 1`] = `
     Object {
       "content": "Learn more about review requirements",
       "external": true,
-      "to": "https://www.sparkpost.com/docs/getting-started/requirements-for-sending-domains/",
+      "to": "https://www.sparkpost.com/docs/getting-started/requirements-for-sending-domains",
     }
   }
   status="warning"

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter, Redirect } from 'react-router-dom';
+import { withRouter, Redirect, Link } from 'react-router-dom';
 import qs from 'query-string';
 import ErrorTracker from 'src/helpers/errorTracker';
 
@@ -12,7 +12,7 @@ import styles from './RegisterPage.module.scss';
 
 import { registerUser, checkInviteToken } from 'src/actions/users';
 import { authenticate, logout } from 'src/actions/auth';
-import { DEFAULT_REDIRECT_ROUTE } from 'src/constants';
+import { DEFAULT_REDIRECT_ROUTE, LINKS } from 'src/constants';
 
 export class RegisterPage extends Component {
 
@@ -68,15 +68,15 @@ export class RegisterPage extends Component {
     return (
       <div>
         <div className={styles.LogoWrapper}>
-          <a href='https://www.sparkpost.com' title='SparkPost'>
+          <UnstyledLink to={LINKS.SP_HOME_PAGE} title='SparkPost'>
             <SparkPost.Logo />
-          </a>
+          </UnstyledLink>
         </div>
 
         <Panel accent title='Set Password'>
           { this.renderRegisterPanel() }
         </Panel>
-        <UnstyledLink to='/auth'>Already signed up?</UnstyledLink>
+        <UnstyledLink Component={Link} to='/auth'>Already signed up?</UnstyledLink>
       </div>
     );
   }
