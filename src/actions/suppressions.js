@@ -116,7 +116,7 @@ export function deleteSuppression(suppression) {
   });
 }
 
-// SEE: https://github.com/SparkPost/sparkpost-api-documentation/blob/master/services/suppression-list.md#insert-or-update-list-entries-put
+// SEE: https://developers.sparkpost.com/api/suppression-list.html#suppression-list-bulk-insert-update-put
 export function createOrUpdateSuppressions(recipients, subaccount) {
   const sanitizedRecipients = recipients.map((r) => _.mapValues(r, _.trim)); // for FAD-5095
 
