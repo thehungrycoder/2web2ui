@@ -56,6 +56,16 @@ export default (state = initialState, action) => {
     case 'RESET_SUPPRESSIONS_RESULTS':
       return { ...state, list: null };
 
+    case 'CREATE_OR_UPDATE_SUPPRESSIONS_FAIL':
+      return { ...state, persistError: action.payload };
+    case 'CREATE_OR_UPDATE_SUPPRESSIONS_SUCCESS':
+      return { ...state, persistError: null };
+
+    case 'PARSE_SUPPRESSIONS_FILE_FAIL':
+      return { ...state, parseError: action.payload };
+    case 'PARSE_SUPPRESSIONS_FILE_SUCCESS':
+      return { ...state, parseError: null };
+
     default:
       return state;
   }

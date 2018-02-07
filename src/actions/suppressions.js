@@ -1,6 +1,7 @@
 import moment from 'moment';
 import config from 'src/config';
 import _ from 'lodash';
+import localFileParseRequest from 'src/actions/helpers/localFileParseRequest';
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 import setSubaccountHeader from 'src/actions/helpers/setSubaccountHeader';
 import { refreshReportRange } from 'src/actions/reportFilters';
@@ -115,3 +116,35 @@ export function deleteSuppression(suppression) {
   });
 }
 
+// SEE: https://github.com/SparkPost/sparkpost-api-documentation/blob/master/services/suppression-list.md#insert-or-update-list-entries-put
+export function createOrUpdateSuppressions(recipients, subaccount) {
+  const sanitizedRecipients = recipients.map((r) => _.mapValues(r, _.trim)); // for FAD-5095
+
+  return sparkpostApiRequest({
+    type: 'CREATE_OR_UPDATE_SUPPRESSIONS',
+    meta: {
+      method: 'PUT',
+      url: '/suppression-list',
+      headers: setSubaccountHeader(subaccount),
+      data: {
+        recipients: sanitizedRecipients
+      }
+    }
+  });
+}
+
+export function parseSuppressionsFile(file) {
+  return localFileParseRequest({
+    type: 'PARSE_SUPPRESSIONS_FILE',
+    meta: {
+      file
+    }
+  });
+}
+
+export function uploadSuppressions(file, subaccount) {
+  return async(dispatch) => {
+    const recipients = await dispatch(parseSuppressionsFile(file));
+    return dispatch(createOrUpdateSuppressions(recipients, subaccount));
+  };
+}

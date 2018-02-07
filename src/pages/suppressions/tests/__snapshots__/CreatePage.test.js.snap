@@ -1,10 +1,340 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders a create suppression list page 1`] = `
+exports[`CreatePage renders disabled upload form when submitting 1`] = `
 <Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "Suppressions",
+      "to": "/lists/suppressions",
+    }
+  }
   empty={Object {}}
-  title="Create Suppression List"
+  title="Add Suppressions"
 >
-  Hi
+  <form>
+    <Panel
+      title="Upload a List of Suppressions"
+    >
+      <Panel.Section>
+        <Field
+          component={[Function]}
+          disabled={true}
+          fileType="csv"
+          helpText={
+            <span>
+              You can download an 
+              <DownloadLink
+                href="example-suppressions-list.csv"
+              >
+                example file here
+              </DownloadLink>
+               to use when formatting your list of suppressions for upload.
+            </span>
+          }
+          label="Comma Separated Values (CSV) File of Suppressions"
+          name="suppressionsFile"
+          required={true}
+          validate={
+            Array [
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+            ]
+          }
+        />
+        <Field
+          component={[Function]}
+          disabled={true}
+          label="Only for a single subaccount"
+          name="forSubaccount"
+        />
+      </Panel.Section>
+      <Panel.Section>
+        <Button
+          disabled={true}
+          primary={true}
+          size="default"
+          type="submit"
+        >
+          Upload
+        </Button>
+      </Panel.Section>
+    </Panel>
+  </form>
+</Page>
+`;
+
+exports[`CreatePage renders upload form 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "Suppressions",
+      "to": "/lists/suppressions",
+    }
+  }
+  empty={Object {}}
+  title="Add Suppressions"
+>
+  <form>
+    <Panel
+      title="Upload a List of Suppressions"
+    >
+      <Panel.Section>
+        <Field
+          component={[Function]}
+          fileType="csv"
+          helpText={
+            <span>
+              You can download an 
+              <DownloadLink
+                href="example-suppressions-list.csv"
+              >
+                example file here
+              </DownloadLink>
+               to use when formatting your list of suppressions for upload.
+            </span>
+          }
+          label="Comma Separated Values (CSV) File of Suppressions"
+          name="suppressionsFile"
+          required={true}
+          validate={
+            Array [
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+            ]
+          }
+        />
+        <Field
+          component={[Function]}
+          label="Only for a single subaccount"
+          name="forSubaccount"
+        />
+      </Panel.Section>
+      <Panel.Section>
+        <Button
+          primary={true}
+          size="default"
+          type="submit"
+        >
+          Upload
+        </Button>
+      </Panel.Section>
+    </Panel>
+  </form>
+</Page>
+`;
+
+exports[`CreatePage renders upload form with parsing error 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "Suppressions",
+      "to": "/lists/suppressions",
+    }
+  }
+  empty={Object {}}
+  title="Add Suppressions"
+>
+  <form>
+    <ApiErrorBanner
+      errorDetails="Oh no, parsing!"
+      message="Unable to upload your list of suppressions"
+      status="danger"
+    />
+    <Panel
+      title="Upload a List of Suppressions"
+    >
+      <Panel.Section>
+        <Field
+          component={[Function]}
+          disabled={false}
+          fileType="csv"
+          helpText={
+            <span>
+              You can download an 
+              <DownloadLink
+                href="example-suppressions-list.csv"
+              >
+                example file here
+              </DownloadLink>
+               to use when formatting your list of suppressions for upload.
+            </span>
+          }
+          label="Comma Separated Values (CSV) File of Suppressions"
+          name="suppressionsFile"
+          required={true}
+          validate={
+            Array [
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+            ]
+          }
+        />
+        <Field
+          component={[Function]}
+          disabled={false}
+          label="Only for a single subaccount"
+          name="forSubaccount"
+        />
+      </Panel.Section>
+      <Panel.Section>
+        <Button
+          disabled={false}
+          primary={true}
+          size="default"
+          type="submit"
+        >
+          Upload
+        </Button>
+      </Panel.Section>
+    </Panel>
+  </form>
+</Page>
+`;
+
+exports[`CreatePage renders upload form with persist error 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "Suppressions",
+      "to": "/lists/suppressions",
+    }
+  }
+  empty={Object {}}
+  title="Add Suppressions"
+>
+  <form>
+    <ApiErrorBanner
+      errorDetails="Oh no, creating!"
+      message="Unable to upload your list of suppressions"
+      status="danger"
+    />
+    <Panel
+      title="Upload a List of Suppressions"
+    >
+      <Panel.Section>
+        <Field
+          component={[Function]}
+          disabled={false}
+          fileType="csv"
+          helpText={
+            <span>
+              You can download an 
+              <DownloadLink
+                href="example-suppressions-list.csv"
+              >
+                example file here
+              </DownloadLink>
+               to use when formatting your list of suppressions for upload.
+            </span>
+          }
+          label="Comma Separated Values (CSV) File of Suppressions"
+          name="suppressionsFile"
+          required={true}
+          validate={
+            Array [
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+            ]
+          }
+        />
+        <Field
+          component={[Function]}
+          disabled={false}
+          label="Only for a single subaccount"
+          name="forSubaccount"
+        />
+      </Panel.Section>
+      <Panel.Section>
+        <Button
+          disabled={false}
+          primary={true}
+          size="default"
+          type="submit"
+        >
+          Upload
+        </Button>
+      </Panel.Section>
+    </Panel>
+  </form>
+</Page>
+`;
+
+exports[`CreatePage renders upload form with subaccount typeahead 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "Suppressions",
+      "to": "/lists/suppressions",
+    }
+  }
+  empty={Object {}}
+  title="Add Suppressions"
+>
+  <form>
+    <Panel
+      title="Upload a List of Suppressions"
+    >
+      <Panel.Section>
+        <Field
+          component={[Function]}
+          fileType="csv"
+          helpText={
+            <span>
+              You can download an 
+              <DownloadLink
+                href="example-suppressions-list.csv"
+              >
+                example file here
+              </DownloadLink>
+               to use when formatting your list of suppressions for upload.
+            </span>
+          }
+          label="Comma Separated Values (CSV) File of Suppressions"
+          name="suppressionsFile"
+          required={true}
+          validate={
+            Array [
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+            ]
+          }
+        />
+        <Field
+          component={[Function]}
+          label="Only for a single subaccount"
+          name="forSubaccount"
+        />
+        <Field
+          component={[Function]}
+          name="subaccount"
+          validate={[Function]}
+        />
+      </Panel.Section>
+      <Panel.Section>
+        <Button
+          primary={true}
+          size="default"
+          type="submit"
+        >
+          Upload
+        </Button>
+      </Panel.Section>
+    </Panel>
+  </form>
 </Page>
 `;

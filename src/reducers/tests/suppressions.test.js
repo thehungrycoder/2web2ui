@@ -16,6 +16,20 @@ const TEST_CASES = {
   'matches suppressions with subaccount correctly (excludes deleted one)': {
     type: 'DELETE_SUPPRESSION_SUCCESS',
     meta: { suppression: { recipient: 'lf4qg05tfq@hotmail.com', type: 'transactional', subaccount_id: '101' }}
+  },
+  'when failed to create or update suppressions': {
+    type: 'CREATE_OR_UPDATE_SUPPRESSIONS_FAIL',
+    payload: { message: 'Oh no!' }
+  },
+  'when created suppressions': {
+    type: 'CREATE_OR_UPDATE_SUPPRESSIONS_SUCCESS'
+  },
+  'when failed to parse suppressions file': {
+    type: 'PARSE_SUPPRESSIONS_FILE_FAIL',
+    payload: { message: 'Oh no!' }
+  },
+  'when parsed suppressions file': {
+    type: 'PARSE_SUPPRESSIONS_FILE_SUCCESS'
   }
 };
 
