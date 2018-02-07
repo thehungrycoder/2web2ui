@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`localFileParseRequest fails to parse 1`] = `
+Array [
+  Object {
+    "type": "PARSE_CSV_PENDING",
+  },
+  Object {
+    "payload": Object {
+      "details": "On line 2, oh no. On line 3, oh no.",
+      "message": "An error occurred while parsing your file.",
+    },
+    "type": "PARSE_CSV_FAIL",
+  },
+]
+`;
+
+exports[`localFileParseRequest fails to read file 1`] = `
+Array [
+  Object {
+    "type": "PARSE_CSV_PENDING",
+  },
+  Object {
+    "payload": Object {
+      "message": "Oh no!",
+    },
+    "type": "PARSE_CSV_FAIL",
+  },
+]
+`;
+
+exports[`localFileParseRequest parses successfully 1`] = `
+Array [
+  Object {
+    "type": "PARSE_CSV_PENDING",
+  },
+  Object {
+    "payload": Object {
+      "data": Array [
+        Object {
+          "a": 1,
+          "b": 2,
+          "c": 3,
+        },
+      ],
+    },
+    "type": "PARSE_CSV_SUCCESS",
+  },
+]
+`;
