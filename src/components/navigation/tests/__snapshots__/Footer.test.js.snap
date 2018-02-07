@@ -4,7 +4,6 @@ exports[`Footer tests should render footer correctly 1`] = `
 <ul>
   <li>
     <UnstyledLink
-      className={[Function]}
       external={true}
       to="https://www.sparkpost.com/docs"
     >
@@ -13,7 +12,6 @@ exports[`Footer tests should render footer correctly 1`] = `
   </li>
   <li>
     <UnstyledLink
-      className={[Function]}
       onClick={[MockFunction]}
     >
       Log Out
