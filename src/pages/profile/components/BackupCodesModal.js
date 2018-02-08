@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Modal from 'src/components/modals/Modal';
+import BackupCodesList from './BackupCodesList';
 import { Icon, Panel, TextField, Banner, Button, Grid, Tooltip } from '@sparkpost/matchbox';
 import styles from './TfaModals.module.scss';
 import copy from 'copy-to-clipboard';
@@ -41,15 +42,13 @@ export default class BackupCodesModal extends Component {
     const { copied } = this.state;
     const button = <Button onClick={this.copyToClipboard}><Icon name='Copy' size={14}/>Copy</Button>;
     const copyField = copied
-      ? <Tooltip content='Copied to clipboard!'>{ button }</Tooltip>
+      ? <Tooltip dark content='Copied to clipboard!'>{ button }</Tooltip>
       : button;
 
     return (
       <div>
         <p><strong>Your shiny new backup codes:</strong></p>
-        <ul class="2fa-backup-codes">
-          { this.props.codes.map((code) => <li>{code}</li>) }
-        </ul>
+        <BackupCodesList codes={this.props.codes} />
         { copyField }
       </div>
     );
