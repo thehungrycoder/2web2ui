@@ -3,10 +3,8 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 // components
-import { Panel, Grid, Banner, Button } from '@sparkpost/matchbox';
-import { LongTextContainer } from 'src/components';
-import SimpleTable from './SimpleTable';
-import ReadyForIcon from './ReadyForIcon';
+import { Panel, UnstyledLink } from '@sparkpost/matchbox';
+import { LabelledValue } from 'src/components';
 import VerifyEmail from './VerifyEmail';
 import { SendingDomainSection } from './SendingDomainSection';
 import { VerifiedIcon } from './Icons';
