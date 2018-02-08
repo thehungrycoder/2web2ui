@@ -1,7 +1,7 @@
 import moment from 'moment';
 import config from 'src/config';
 import _ from 'lodash';
-import localFileParseRequest from 'src/actions/helpers/localFileParseRequest';
+import localFileParseRequest, { hasData, hasField } from 'src/actions/helpers/localFileParseRequest';
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 import setSubaccountHeader from 'src/actions/helpers/setSubaccountHeader';
 import { refreshReportRange } from 'src/actions/reportFilters';
@@ -158,7 +158,12 @@ export function parseSuppressionsFile(file) {
   return localFileParseRequest({
     type: 'PARSE_SUPPRESSIONS_FILE',
     meta: {
-      file
+      file,
+      validate: [
+        hasData,
+        hasField('recipient', 'email'),
+        hasField('type', 'non_transactional', 'transactional')
+      ]
     }
   });
 }

@@ -1,5 +1,5 @@
 import { mockStore } from 'src/__testHelpers__';
-import localFileParseRequest from '../localFileParseRequest';
+import localFileParseRequest, { hasData, hasField } from '../localFileParseRequest';
 
 describe('localFileParseRequest', () => {
   const dispatchThunk = (parse) => mockStore.dispatch(
@@ -17,7 +17,7 @@ describe('localFileParseRequest', () => {
   });
 
   it('fails to parse', async() => {
-    const mockParse = (_file, options) => options.complete({
+    const mockParse = (file, options) => options.complete({
       errors: [
         { message: 'Oh no', row: 1 },
         { message: 'Oh no', row: 2 }
@@ -30,9 +30,44 @@ describe('localFileParseRequest', () => {
 
   it('fails to read file', async() => {
     const error = new Error('Oh no!');
-    const mockParse = (_file, options) => options.error(error);
+    const mockParse = (file, options) => options.error(error);
 
     await expect(dispatchThunk(mockParse)).rejects.toThrowError(error);
     expect(mockStore.getActions()).toMatchSnapshot();
+  });
+});
+
+describe('localFileParseRequest.hasData', () => {
+  it('returns error message', () => {
+    const data = [];
+    expect(hasData({ data })).toMatch(/no data/i);
+  });
+
+  it('returns undefined', () => {
+    const data = [{ a: 1, b: 2, c: 3 }];
+    expect(hasData({ data })).toBeUndefined();
+  });
+});
+
+describe('localFileParseRequest.hasField', () => {
+  it('returns error message', () => {
+    const meta = {
+      fields: ['email', 'type']
+    };
+    expect(hasField('recipient')({ meta })).toMatch(/missing .* recipient/i);
+  });
+
+  it('returns undefined when field is found', () => {
+    const meta = {
+      fields: ['email', 'type']
+    };
+    expect(hasField('email')({ meta })).toBeUndefined();
+  });
+
+  it('returns undefined when optional field is found', () => {
+    const meta = {
+      fields: ['email', 'type']
+    };
+    expect(hasField('recipient', 'email')({ meta })).toBeUndefined();
   });
 });

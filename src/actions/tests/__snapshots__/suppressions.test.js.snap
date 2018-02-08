@@ -119,6 +119,11 @@ Object {
       "name": "example.csv",
       "size": 123,
     },
+    "validate": Array [
+      [MockFunction],
+      [MockFunction],
+      [MockFunction],
+    ],
   },
   "type": "PARSE_SUPPRESSIONS_FILE",
 }
@@ -133,6 +138,11 @@ Array [
           "name": "example.csv",
           "size": 123,
         },
+        "validate": Array [
+          [MockFunction],
+          [MockFunction],
+          [MockFunction],
+        ],
       },
       "type": "PARSE_SUPPRESSIONS_FILE",
     },

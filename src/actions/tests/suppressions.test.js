@@ -1,8 +1,13 @@
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 import * as suppressions from '../suppressions';
+import localFileParseRequest, { hasField } from 'src/actions/helpers/localFileParseRequest';
 
 jest.mock('src/actions/helpers/sparkpostApiRequest', () => jest.fn((a) => a));
-jest.mock('src/actions/helpers/localFileParseRequest', () => jest.fn((a) => a));
+jest.mock('src/actions/helpers/localFileParseRequest');
+
+// Have to manually mock to avoid overrite of named exports
+localFileParseRequest.mockImplementation((a) => a);
+hasField.mockImplementation((a) => jest.fn(a));
 
 describe('Action Creator: Suppressions', () => {
   describe('deleteSuppression', () => {
@@ -98,6 +103,9 @@ describe('Action Creator: Suppressions', () => {
     it('request to parse local file', () => {
       const localFile = { name: 'example.csv', size: 123 };
       const action = suppressions.parseSuppressionsFile(localFile);
+
+      expect(hasField).toHaveBeenCalledWith('recipient', 'email');
+      expect(hasField).toHaveBeenCalledWith('type', 'non_transactional', 'transactional');
       expect(action).toMatchSnapshot();
     });
   });

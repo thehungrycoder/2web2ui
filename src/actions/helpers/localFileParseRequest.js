@@ -1,6 +1,18 @@
 import Papa from 'papaparse';
 
-export default ({ meta, type, parser = Papa }) => async(dispatch) => {
+export const hasData = ({ data }) => {
+  if (data.length === 0) {
+    return 'No data was found.';
+  }
+};
+
+export const hasField = (...expectedFields) => ({ meta: { fields }}) => {
+  if (!expectedFields.some((field) => fields.includes(field))) {
+    return `Missing required field, ${expectedFields[0]}.`;
+  }
+};
+
+export default ({ meta: { file, validate }, type, parser = Papa }) => async(dispatch) => {
   const types = {
     PENDING: `${type}_PENDING`,
     SUCCESS: `${type}_SUCCESS`,
@@ -9,10 +21,13 @@ export default ({ meta, type, parser = Papa }) => async(dispatch) => {
 
   dispatch({ type: types.PENDING });
 
-  return await new Promise((resolve, reject) => parser.parse(meta.file, {
-    complete: ({ data, errors }) => {
+  return await new Promise((resolve, reject) => parser.parse(file, {
+    complete: ({ data, errors, meta }) => {
+      let error;
+      let message;
+
       if (errors.length > 0) {
-        const error = new Error('An error occurred while parsing your file.');
+        error = new Error('An error occurred while parsing your file.');
 
         dispatch({
           type: types.FAIL,
@@ -23,10 +38,21 @@ export default ({ meta, type, parser = Papa }) => async(dispatch) => {
         });
 
         reject(error);
-      } else {
-        dispatch({ type: types.SUCCESS, payload: { data }});
-        resolve(data);
+        return;
       }
+
+      // Custom validation of data
+      if (validate && (message = validate({ data, meta }))) {
+        error = new Error(message);
+
+        dispatch({ type: types.FAIL, payload: { message }});
+        reject(error);
+
+        return;
+      }
+
+      dispatch({ type: types.SUCCESS, payload: { data }});
+      resolve(data);
     },
     error: (error) => {
       dispatch({ type: types.FAIL, payload: { message: error.message }});
