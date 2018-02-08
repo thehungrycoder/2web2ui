@@ -38,6 +38,12 @@ export default class BackupCodesModal extends Component {
     this.timeout = setTimeout(() => this.setState({ copied: false }), 3000);
   }
 
+  downloadCodes = () => {
+    const codesb64 = btoa(this.props.codes.join('\n'));
+    return `data:text/plain;base64,${codesb64}`;
+
+  }
+
   showBackupCodes() {
     const { copied } = this.state;
     const button = <Button onClick={this.copyToClipboard}><Icon name='Copy' size={14}/>Copy</Button>;
@@ -49,6 +55,7 @@ export default class BackupCodesModal extends Component {
       <div>
         <p><strong>Your shiny new backup codes:</strong></p>
         <BackupCodesList codes={this.props.codes} />
+        <Button download={'backup-codes.txt'} to={this.downloadCodes()}><Icon name='Download' size={14}/>Download</Button>
         { copyField }
       </div>
     );
