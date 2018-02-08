@@ -147,3 +147,147 @@ Object {
   "verifyDkimLoading": true,
 }
 `;
+
+exports[`Sending Domain reducer verify with abuse 1`] = `
+Object {
+  "domain": Object {
+    "is_default_bounce_domain": false,
+    "status": Object {
+      "abuse_at_status": "valid",
+    },
+  },
+  "verifyEmailLoading": false,
+}
+`;
+
+exports[`Sending Domain reducer verify with abuse fail 1`] = `
+Object {
+  "domain": Object {
+    "is_default_bounce_domain": false,
+    "status": Object {
+      "cname_status": null,
+      "mx_status": null,
+      "ownership_verified": 1,
+    },
+  },
+  "verifyEmailError": Object {
+    "errors": Array [
+      Object {
+        "message": "Some error occurred",
+      },
+    ],
+  },
+  "verifyEmailLoading": false,
+}
+`;
+
+exports[`Sending Domain reducer verify with abuse pending 1`] = `
+Object {
+  "domain": Object {
+    "is_default_bounce_domain": false,
+    "status": Object {
+      "cname_status": null,
+      "mx_status": null,
+      "ownership_verified": 1,
+    },
+  },
+  "verifyEmailError": null,
+  "verifyEmailLoading": true,
+}
+`;
+
+exports[`Sending Domain reducer verify with mailbox 1`] = `
+Object {
+  "domain": Object {
+    "is_default_bounce_domain": false,
+    "status": Object {
+      "verification_mailbox_status": "valid",
+    },
+  },
+  "verifyEmailLoading": false,
+}
+`;
+
+exports[`Sending Domain reducer verify with mailbox fail 1`] = `
+Object {
+  "domain": Object {
+    "is_default_bounce_domain": false,
+    "status": Object {
+      "cname_status": null,
+      "mx_status": null,
+      "ownership_verified": 1,
+    },
+  },
+  "verifyEmailError": Object {
+    "errors": Array [
+      Object {
+        "message": "Some error occurred",
+      },
+    ],
+  },
+  "verifyEmailLoading": false,
+}
+`;
+
+exports[`Sending Domain reducer verify with mailbox pending 1`] = `
+Object {
+  "domain": Object {
+    "is_default_bounce_domain": false,
+    "status": Object {
+      "cname_status": null,
+      "mx_status": null,
+      "ownership_verified": 1,
+    },
+  },
+  "verifyEmailError": null,
+  "verifyEmailLoading": true,
+}
+`;
+
+exports[`Sending Domain reducer verify with postmaster 1`] = `
+Object {
+  "domain": Object {
+    "is_default_bounce_domain": false,
+    "status": Object {
+      "postmaster_at_status": "valid",
+    },
+  },
+  "verifyEmailLoading": false,
+}
+`;
+
+exports[`Sending Domain reducer verify with postmaster fail 1`] = `
+Object {
+  "domain": Object {
+    "is_default_bounce_domain": false,
+    "status": Object {
+      "cname_status": null,
+      "mx_status": null,
+      "ownership_verified": 1,
+    },
+  },
+  "verifyEmailError": Object {
+    "errors": Array [
+      Object {
+        "message": "Some error occurred",
+      },
+    ],
+  },
+  "verifyEmailLoading": false,
+}
+`;
+
+exports[`Sending Domain reducer verify with postmaster pending 1`] = `
+Object {
+  "domain": Object {
+    "is_default_bounce_domain": false,
+    "status": Object {
+      "cname_status": null,
+      "mx_status": null,
+      "ownership_verified": 1,
+    },
+  },
+  "verifyEmailError": null,
+  "verifyEmailLoading": true,
+}
+`;
