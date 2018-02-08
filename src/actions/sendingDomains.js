@@ -61,7 +61,7 @@ export function remove({ id, subaccount }) {
   });
 }
 
-export function verify({ id, subaccount, type, options = {}}) {
+function verify({ id, subaccount, type, ...rest }) {
   return sparkpostApiRequest({
     type: `VERIFY_SENDING_DOMAIN_${type.toUpperCase()}`,
     meta: {
@@ -69,7 +69,7 @@ export function verify({ id, subaccount, type, options = {}}) {
       url: `/sending-domains/${id}/verify`,
       headers: setSubaccountHeader(subaccount),
       data: {
-        ...options,
+        ...rest,
         [`${type}_verify`]: true
       }
     }
@@ -88,14 +88,8 @@ export function verifyDkim({ id, subaccount }) {
   return verify({ id, subaccount, type: 'dkim' });
 }
 
-export function verifyMailbox({ id, mailbox, subaccount }) {
-  return verify({
-    id, subaccount,
-    type: 'verification_mailbox',
-    options: {
-      verification_mailbox: mailbox
-    }
-  });
+export function verifyMailbox({ id, mailbox: verification_mailbox, subaccount }) {
+  return verify({ id, subaccount, type: 'verification_mailbox', verification_mailbox });
 }
 
 export function verifyPostmaster({ id, subaccount }) {
