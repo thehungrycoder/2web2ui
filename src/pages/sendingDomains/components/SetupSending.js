@@ -3,8 +3,11 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 // components
-import { Panel } from '@sparkpost/matchbox';
-import { LabelledValue } from 'src/components';
+import { Panel, Grid, Banner, Button } from '@sparkpost/matchbox';
+import { LongTextContainer } from 'src/components';
+import SimpleTable from './SimpleTable';
+import ReadyForIcon from './ReadyForIcon';
+import VerifyEmail from './VerifyEmail';
 import { SendingDomainSection } from './SendingDomainSection';
 import { VerifiedIcon } from './Icons';
 
@@ -16,6 +19,11 @@ import { resolveReadyFor } from 'src/helpers/domains';
 import config from 'src/config';
 
 export class SetupSending extends Component {
+  state = {
+    // verify via email modal
+    open: false
+  };
+
   showErrorAlert = ({ message }) => {
     const { domain: { id }, showAlert } = this.props;
 
@@ -50,7 +58,12 @@ export class SetupSending extends Component {
         content = (
           <React.Fragment>
             {content}
-            <p>We recommend DNS verification, but if you don't have DNS access, you can <a>set this domain up for sending via email</a>.</p>
+            <p>
+              We recommend DNS verification, but if you don't have DNS access, you
+              can <UnstyledLink onClick={this.toggleVerifyViaEmailModal}> set this domain up for
+              sending via email.</UnstyledLink>
+            </p>
+            {this.renderVerifyViaEmailModal()}
           </React.Fragment>
         );
       }
@@ -72,6 +85,27 @@ export class SetupSending extends Component {
       onClick: this.verifyDomain,
       disabled: verifyDkimLoading
     };
+  }
+
+  toggleVerifyViaEmailModal = () => {
+    const { open } = this.state;
+
+    this.setState({
+      open: !open
+    });
+  }
+
+  renderVerifyViaEmailModal = () => {
+    const { open } = this.state;
+    const { domain } = this.props;
+
+    if (!domain) {
+      return null;
+    }
+
+    return (
+      <VerifyEmail domain={domain} open={open} onCancel={this.toggleVerifyViaEmailModal}/>
+    );
   }
 
   renderTxtRecordPanel() {

@@ -39,7 +39,7 @@ export default class Form extends Component {
 
     // If no verified sending domains, use sandbox
     if (newTemplate && !domains.length) {
-      change(name, 'content.from.email', `${config.sandbox.localpart}@${config.sandbox.domain}`);
+      change(name, 'content.from.email', `${config.sandbox.localPart}@${config.sandbox.domain}`);
     }
   }
 
@@ -49,7 +49,7 @@ export default class Form extends Component {
     const parts = value.split('@');
 
     if (parts.length > 1) {
-      const validSandbox = value === `${config.sandbox.localpart}@${config.sandbox.domain}`;
+      const validSandbox = value === `${config.sandbox.localPart}@${config.sandbox.domain}`;
       const validDomain = parts[1] && (domains.map(({ domain }) => domain).includes(parts[1]) || !substitution(parts[1]));
 
       return validSandbox || validDomain ? undefined : 'Must use a verified sending domain';
