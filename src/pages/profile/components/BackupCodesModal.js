@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Modal from 'src/components/modals/Modal';
 import { Icon, Panel, TextField, Banner, Button, Grid, Tooltip } from '@sparkpost/matchbox';
 import styles from './TfaModals.module.scss';
+import print from 'print-js';
 import copy from 'copy-to-clipboard';
 const initialState = {
   password: '',
@@ -43,6 +44,11 @@ export default class BackupCodesModal extends Component {
 
   }
 
+  printCodes = () => {
+    const codes = this.props.codes.map((code) => ({ code }));
+    print({ printable: codes, properties: ['code'], type: 'json' });
+  }
+
   showBackupCodes() {
     const { copied } = this.state;
     const button = <Button onClick={this.copyToClipboard}><Icon name='Copy' size={14}/>Copy</Button>;
@@ -53,11 +59,12 @@ export default class BackupCodesModal extends Component {
     return (
       <div>
         <p><strong>Your shiny new backup codes:</strong></p>
-        <ul className="2fa-backup-codes">
+        <ul>
           { this.props.codes.map((code) => <li>{code}</li>) }
         </ul>
         <Button download={'backup-codes.txt'} to={this.downloadCodes()}><Icon name='Download' size={14}/>Download</Button>
         { copyField }
+        <Button onClick={this.printCodes}>Print</Button>
       </div>
     );
   }
