@@ -3,7 +3,7 @@ import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { Panel, Grid, Button } from '@sparkpost/matchbox';
+import { Panel, Button } from '@sparkpost/matchbox';
 import { showAlert } from 'src/actions/globalAlert';
 import { SendingDomainSection } from './SendingDomainSection';
 import { update as updateSendingDomain } from 'src/actions/sendingDomains';
@@ -31,18 +31,6 @@ export class AssignTrackingDomain extends Component {
       }));
   };
 
-  renderSection() {
-    return (<Grid>
-      <Grid.Column xs={12} md={4}>
-        <div>Link to a tracking domain to track opens, clicks, and unsubscribes.</div>
-        <Link to={'/account/tracking-domains/create'}>Create a tracking domain.</Link>
-      </Grid.Column>
-      <Grid.Column xs={12} md={8}>
-        { this.renderTrackingDomains() }
-      </Grid.Column>
-    </Grid>);
-  }
-
   renderTrackingDomains() {
     const { listLoading, trackingDomains, pristine, submitting } = this.props;
 
@@ -52,13 +40,13 @@ export class AssignTrackingDomain extends Component {
 
     return (
       <Panel sectioned>
-        <h5>Linked tracking domain</h5>
         <form onSubmit={this.props.handleSubmit(this.updateTrackingDomain)}>
           <Field
             component={SelectWrapper}
             name='trackingDomain'
             options={trackingDomains}
             disabled={submitting}
+            label='Linked Tracking Domain'
             helpText='Domains must be verified to be linked to a sending domain.'
           />
           <Button submit primary disabled={submitting || pristine}>
@@ -73,10 +61,15 @@ export class AssignTrackingDomain extends Component {
   render() {
     return (
       <SendingDomainSection title='Select a Tracking Domain'>
-        { this.renderSection() }
+        <SendingDomainSection.Left>
+          <p>Link to a tracking domain to track opens, clicks, and unsubscribes.</p>
+          <Link to={'/account/tracking-domains/create'}>Create a tracking domain.</Link>
+        </SendingDomainSection.Left>
+        <SendingDomainSection.Right>
+          { this.renderTrackingDomains() }
+        </SendingDomainSection.Right>
       </SendingDomainSection>
     );
-
   }
 }
 

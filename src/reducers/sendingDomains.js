@@ -28,15 +28,25 @@ export default (state = initialState, { type, payload, meta }) => {
     case 'GET_SENDING_DOMAIN_FAIL':
       return { ...state, getError: payload, getLoading: false };
 
-    case 'VERIFY_SENDING_DOMAIN_PENDING':
-      return { ...state, verifyLoading: true, verifyError: null };
+    case 'VERIFY_SENDING_DOMAIN_CNAME_PENDING':
+      return { ...state, verifyCnameLoading: true, verifyCnameError: null };
 
-    case 'VERIFY_SENDING_DOMAIN_SUCCESS':
+    case 'VERIFY_SENDING_DOMAIN_CNAME_SUCCESS':
       // augment current domain's status property
-      return { ...state, verifyLoading: false, domain: { ...state.domain, status: payload }};
+      return { ...state, verifyCnameLoading: false, domain: { ...state.domain, status: payload }};
 
-    case 'VERIFY_SENDING_DOMAIN_FAIL':
-      return { ...state, verifyLoading: false, verifyError: payload };
+    case 'VERIFY_SENDING_DOMAIN_CNAME_FAIL':
+      return { ...state, verifyCnameLoading: false, verifyCnameError: payload };
+
+    case 'VERIFY_SENDING_DOMAIN_DKIM_PENDING':
+      return { ...state, verifyDkimLoading: true, verifyDkimError: null };
+
+    case 'VERIFY_SENDING_DOMAIN_DKIM_SUCCESS':
+      // augment current domain's status property
+      return { ...state, verifyDkimLoading: false, domain: { ...state.domain, status: payload }};
+
+    case 'VERIFY_SENDING_DOMAIN_DKIM_FAIL':
+      return { ...state, verifyDkimLoading: false, verifyDkimError: payload };
 
     case 'UPDATE_SENDING_DOMAIN_PENDING':
       return { ...state, updateLoading: true, updateError: null };

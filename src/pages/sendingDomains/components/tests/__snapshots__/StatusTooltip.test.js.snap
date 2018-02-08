@@ -8,7 +8,7 @@ exports[`StatusTooltip component renders 1`] = `
    
   <Icon
     name="Help"
-    size={15}
+    size={14}
   />
 </WithPositioning(Tooltip)>
 `;
@@ -22,7 +22,7 @@ exports[`StatusTooltip component renders children 1`] = `
    
   <Icon
     name="Help"
-    size={15}
+    size={14}
   />
 </WithPositioning(Tooltip)>
 `;

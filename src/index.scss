@@ -29,3 +29,11 @@ html {
   opacity: 0 !important;
   pointer-events: none !important;
 }
+
+
+hr {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid color(gray, 8);
+}
