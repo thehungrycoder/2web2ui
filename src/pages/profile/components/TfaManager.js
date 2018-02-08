@@ -54,7 +54,7 @@ export class TfaManager extends Component {
   }
 
   render() {
-    const { enabled } = this.props;
+    const { enabled, generateBackupCodes } = this.props;
 
     if (this.props.statusUnknown) {
       return <PanelLoading minHeight='100px' />;
@@ -86,8 +86,8 @@ export class TfaManager extends Component {
         <BackupCodesModal
           open={this.state.openModal === 'backupCodes'}
           onClose={this.closeModals}
-          generate={this.props.generateBackupCodes}
           {...this.props.backupCodes}
+          generate={generateBackupCodes}
         />
         <EnableTfaModal
           open={this.state.openModal === 'enable'}
