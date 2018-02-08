@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import Modal from 'src/components/modals/Modal';
-import { Icon, Panel, TextField, Banner, Button, Grid, Tooltip } from '@sparkpost/matchbox';
+import BackupCodes from './BackupCodes';
+import { Panel, TextField, Banner, Button, Grid } from '@sparkpost/matchbox';
 import styles from './TfaModals.module.scss';
-import print from 'print-js';
-import copy from 'copy-to-clipboard';
 const initialState = {
   password: '',
   showErrors: false
@@ -11,7 +10,6 @@ const initialState = {
 
 export default class BackupCodesModal extends Component {
   state = initialState;
-  timeout = null;
 
   componentDidUpdate(oldProps) {
     if (oldProps.open && !this.props.open) {
@@ -31,58 +29,32 @@ export default class BackupCodesModal extends Component {
     this.props.generate(this.state.password);
   }
 
-  copyToClipboard = () => {
-    copy(this.props.codes.join('\n'));
-    this.setState({ copied: true });
-    clearTimeout(this.timeout);
-    this.timeout = setTimeout(() => this.setState({ copied: false }), 3000);
-  }
-
-  downloadCodes = () => {
-    const codesb64 = btoa(this.props.codes.join('\n'));
-    return `data:text/plain;base64,${codesb64}`;
-
-  }
-
-  printCodes = () => {
-    const codes = this.props.codes.map((code) => ({ code }));
-    print({ printable: codes, properties: ['code'], type: 'json' });
-  }
-
-  showBackupCodes() {
-    const { copied } = this.state;
-    const button = <Button onClick={this.copyToClipboard}><Icon name='Copy' size={14}/>Copy</Button>;
-    const copyField = copied
-      ? <Tooltip content='Copied to clipboard!'>{ button }</Tooltip>
-      : button;
-
+  renderButtons = () => {
+    const { pending, onClose } = this.props;
+    const hasCodes = this.props.codes.length > 0;
     return (
       <div>
-        <p><strong>Your shiny new backup codes:</strong></p>
-        <ul>
-          { this.props.codes.map((code) => <li>{code}</li>) }
-        </ul>
-        <Button download={'backup-codes.txt'} to={this.downloadCodes()}><Icon name='Download' size={14}/>Download</Button>
-        { copyField }
-        <Button onClick={this.printCodes}>Print</Button>
+        { !hasCodes && <Button type='submit' primary onClick={this.generateCodes}>
+          { pending ? 'Generating...' : 'Generate' }
+        </Button> }
+        { hasCodes && <Button primary onClick={onClose}>Close</Button> }
+        { !hasCodes && <Button onClick={onClose} className={styles.Cancel}>Cancel</Button> }
       </div>
     );
   }
 
   render() {
     const {
-      onClose,
       open,
       activeCodes,
       error,
-      pending,
       codes
     } = this.props;
     const hasCodes = codes.length > 0;
 
     return (
       <Modal open={open}>
-        <Panel title='Generate 2FA Backup Codes' accent>
+        <Panel title='Generate Two-factor Backup Codes' accent>
           <form onSubmit={(e) => e.preventDefault()}>
             <Panel.Section>
               { !hasCodes && <Banner status="warning" >
@@ -94,16 +66,12 @@ export default class BackupCodesModal extends Component {
               <Grid>
                 <Grid.Column xs={12} md={6}>
                   { !hasCodes && <TextField required type='password' onChange={this.handleInputChange} placeholder='Password' value={this.state.password} error={(this.state.showErrors && error) ? 'Incorrect Password' : ''} /> }
-                  { hasCodes && this.showBackupCodes() }
+                  { hasCodes && <BackupCodes codes={codes} /> }
                 </Grid.Column>
               </Grid>
             </Panel.Section>
             <Panel.Section>
-              {! hasCodes && <Button type='submit' primary onClick={this.generateCodes}>
-                { pending ? 'Generating...' : 'Generate' }
-              </Button> }
-              { hasCodes && <Button primary onClick={onClose}>Close</Button> }
-              { !hasCodes && <Button onClick={onClose} className={styles.Cancel}>Cancel</Button> }
+              { this.renderButtons() }
             </Panel.Section>
           </form>
         </Panel>
