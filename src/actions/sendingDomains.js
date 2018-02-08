@@ -61,11 +61,12 @@ export function remove({ id, subaccount }) {
   });
 }
 
-function verify({ id, subaccount, type }) {
+export function verify({ id, subaccount, type, mailbox }) {
   const headers = setSubaccountHeader(subaccount);
 
   const data = {};
   data[`${type}_verify`] = true;
+  if (type === 'verification_mailbox') { data.verification_mailbox = mailbox; }
 
   const actionType = type ? `_${type.toUpperCase()}` : '';
 
