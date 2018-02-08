@@ -50,7 +50,7 @@ Object {
 }
 `;
 
-exports[`Sending Domain reducer verify domain 1`] = `
+exports[`Sending Domain reducer verify cname 1`] = `
 Object {
   "domain": Object {
     "is_default_bounce_domain": false,
@@ -59,11 +59,11 @@ Object {
       "ownership_verified": 1,
     },
   },
-  "verifyLoading": false,
+  "verifyCnameLoading": false,
 }
 `;
 
-exports[`Sending Domain reducer verify domain fail 1`] = `
+exports[`Sending Domain reducer verify cname fail 1`] = `
 Object {
   "domain": Object {
     "is_default_bounce_domain": false,
@@ -73,18 +73,18 @@ Object {
       "ownership_verified": 1,
     },
   },
-  "verifyError": Object {
+  "verifyCnameError": Object {
     "errors": Array [
       Object {
         "message": "Some error occurred",
       },
     ],
   },
-  "verifyLoading": false,
+  "verifyCnameLoading": false,
 }
 `;
 
-exports[`Sending Domain reducer verify pending 1`] = `
+exports[`Sending Domain reducer verify cname pending 1`] = `
 Object {
   "domain": Object {
     "is_default_bounce_domain": false,
@@ -94,7 +94,56 @@ Object {
       "ownership_verified": 1,
     },
   },
-  "verifyError": null,
-  "verifyLoading": true,
+  "verifyCnameError": null,
+  "verifyCnameLoading": true,
+}
+`;
+
+exports[`Sending Domain reducer verify dkim 1`] = `
+Object {
+  "domain": Object {
+    "is_default_bounce_domain": false,
+    "status": Object {
+      "dkim_status": "valid",
+      "ownership_verified": 1,
+    },
+  },
+  "verifyDkimLoading": false,
+}
+`;
+
+exports[`Sending Domain reducer verify dkim fail 1`] = `
+Object {
+  "domain": Object {
+    "is_default_bounce_domain": false,
+    "status": Object {
+      "cname_status": null,
+      "mx_status": null,
+      "ownership_verified": 1,
+    },
+  },
+  "verifyDkimError": Object {
+    "errors": Array [
+      Object {
+        "message": "Some error occurred",
+      },
+    ],
+  },
+  "verifyDkimLoading": false,
+}
+`;
+
+exports[`Sending Domain reducer verify dkim pending 1`] = `
+Object {
+  "domain": Object {
+    "is_default_bounce_domain": false,
+    "status": Object {
+      "cname_status": null,
+      "mx_status": null,
+      "ownership_verified": 1,
+    },
+  },
+  "verifyDkimError": null,
+  "verifyDkimLoading": true,
 }
 `;

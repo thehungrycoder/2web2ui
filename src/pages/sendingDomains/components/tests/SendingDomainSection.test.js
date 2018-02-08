@@ -14,4 +14,20 @@ describe('Component: SendingDomainSection', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('should render Left section', () => {
+    const props = {
+      children: ['Bill', 'Brasky']
+    };
+    const wrapper = shallow(<SendingDomainSection.Left {...props} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render Right section', () => {
+    const props = {
+      children: ['Bill', 'Brasky']
+    };
+    const wrapper = shallow(<SendingDomainSection.Right {...props} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
 });

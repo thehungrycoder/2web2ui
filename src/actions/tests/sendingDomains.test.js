@@ -19,21 +19,21 @@ describe('Action Creator: Sending Domains', () => {
   });
 
   describe('Verify', () => {
-    it('it should request with correct post data', () => {
-      expect(sendingDomains.verify({ id: 'domain.com', type: 'cname' })).toMatchSnapshot();
+    it('should dispatch verify cname action', () => {
+      expect(sendingDomains.verifyCname({ id: 'domain.com' })).toMatchSnapshot();
     });
 
-    it('it should verify domain owned by subaccount', () => {
-      expect(sendingDomains.verify({ id: 'sub.com', subaccount: 101, type: 'cname' })).toMatchSnapshot();
+    it('should dispatch verify dkim action', () => {
+      expect(sendingDomains.verifyDkim({ id: 'sub.com', subaccount: 101 })).toMatchSnapshot();
     });
   });
 
   describe('Update', () => {
-    it('it should request with correct post data', () => {
+    it('should request with correct post data', () => {
       expect(sendingDomains.update({ id: 'domain.com', is_default_bounce_domain: true })).toMatchSnapshot();
     });
 
-    it('it update domain owned by subaccount', () => {
+    it('should update domain owned by subaccount', () => {
       expect(sendingDomains.update({ id: 'domain.com', subaccount: 101, is_default_bounce_domain: true })).toMatchSnapshot();
     });
   });

@@ -24,8 +24,8 @@ describe('Component: SetupSending', () => {
         dkimValue: 'v=DKIM1; k=rsa; h=sha256; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC7J/mQAVP9pynvD79opV/GD495pJWTWmHaEMymBO55y52gu2D23/CHbLys0KXszTAPOVS9x3HdRByeE1jIx41sZkWwDzxcyZH2NP5Mw3zNQWO4CqSGqrVPuukjIy5N3jmZnJ/V3IOkKnC3A+j76iIG42cVOgzoekbM3ZXSfwag+wIDAQAB',
         status
       },
-      verifyLoading: false,
-      verify: jest.fn(() => Promise.resolve()),
+      verifyDkimLoading: false,
+      verifyDkim: jest.fn(() => Promise.resolve()),
       showAlert: jest.fn()
     };
 
@@ -56,15 +56,15 @@ describe('Component: SetupSending', () => {
   });
 
   it('disables the verification button while submitting', async() => {
-    wrapper.setProps({ verifyLoading: true });
-    expect(wrapper).toMatchSnapshot();
+    wrapper.setProps({ verifyDkimLoading: true });
+    expect(wrapper.find('Panel').props().actions).toMatchSnapshot();
   });
 
   it('should call updateTrackingDomain on submit', () => {
     const wrapper = mount(<SetupSending {...props}/>);
 
     wrapper.find('Button').simulate('click');
-    expect(props.verify).toHaveBeenCalledTimes(1);
+    expect(props.verifyDkim).toHaveBeenCalledTimes(1);
   });
 
   describe('verifyDomain', () => {
@@ -74,29 +74,29 @@ describe('Component: SetupSending', () => {
     });
 
     it('verifies domain and alerts when verification successful', async() => {
-      props.verify.mockReturnValue(Promise.resolve({ dkim_status: 'valid' }));
+      props.verifyDkim.mockReturnValue(Promise.resolve({ dkim_status: 'valid' }));
       await instance.verifyDomain();
-      expect(props.verify).toHaveBeenCalledTimes(1);
-      expect(props.verify).toHaveBeenCalledWith({ id: 'xyz.com', type: 'dkim', subaccount: 999 });
+      expect(props.verifyDkim).toHaveBeenCalledTimes(1);
+      expect(props.verifyDkim).toHaveBeenCalledWith({ id: 'xyz.com', subaccount: 999 });
       expect(props.showAlert).toHaveBeenCalledTimes(1);
       expect(props.showAlert).toHaveBeenCalledWith({ type: 'success', message: 'You have successfully verified DKIM record of xyz.com' });
     });
 
     it('alerts error when verification req is successful but verification is failed', async() => {
-      props.verify.mockReturnValue(Promise.resolve({ dkim_status: 'invalid', dns: { dkim_error: 'nope!' }}));
+      props.verifyDkim.mockReturnValue(Promise.resolve({ dkim_status: 'invalid', dns: { dkim_error: 'nope!' }}));
       await instance.verifyDomain();
-      expect(props.verify).toHaveBeenCalledTimes(1);
-      expect(props.verify).toHaveBeenCalledWith({ id: 'xyz.com', type: 'dkim', subaccount: 999 });
+      expect(props.verifyDkim).toHaveBeenCalledTimes(1);
+      expect(props.verifyDkim).toHaveBeenCalledWith({ id: 'xyz.com', subaccount: 999 });
       expect(props.showAlert).toHaveBeenCalledTimes(1);
       expect(props.showAlert).toHaveBeenCalledWith({ type: 'error', message: 'Unable to verify DKIM record of xyz.com. nope!' });
     });
 
     it('alerts when request is errored', async() => {
       const err = new Error('Request failed!');
-      props.verify.mockReturnValue(Promise.reject(err));
+      props.verifyDkim.mockReturnValue(Promise.reject(err));
       await instance.verifyDomain();
-      expect(props.verify).toHaveBeenCalledTimes(1);
-      expect(props.verify).toHaveBeenCalledWith({ id: 'xyz.com', type: 'dkim', subaccount: 999 });
+      expect(props.verifyDkim).toHaveBeenCalledTimes(1);
+      expect(props.verifyDkim).toHaveBeenCalledWith({ id: 'xyz.com', subaccount: 999 });
       expect(props.showAlert).toHaveBeenCalledTimes(1);
       expect(props.showAlert).toHaveBeenCalledWith({ type: 'error', message: 'Unable to verify DKIM record of xyz.com. Request failed!' });
     });

@@ -143,6 +143,13 @@ exports[`StatusDescription component Shallow tests renders verification status c
         </StatusTooltip>
       }
     >
+      <div>
+        <VerifiedIcon />
+         
+        <strong>
+          Verified
+        </strong>
+      </div>
       <ReadyFor
         bounce={false}
         bounceDefault={false}
