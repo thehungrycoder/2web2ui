@@ -37,7 +37,7 @@ class CopyField extends Component {
   }
 
   render() {
-    const { value, hideCopy, fieldProps = {}} = this.props;
+    const { value, hideCopy, ...fieldProps } = this.props;
     const { copied } = this.state;
     let connectRight = null;
 

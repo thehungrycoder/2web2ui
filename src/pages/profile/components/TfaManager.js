@@ -85,7 +85,7 @@ export class TfaManager extends Component {
         {this.renderStatusMessage()}
         <BackupCodesModal
           open={this.state.openModal === 'backupCodes'}
-          onClose={this.closeModals}
+          onClose={this.closeBackupModal}
           {...this.props.backupCodes}
           generate={generateBackupCodes}
         />
