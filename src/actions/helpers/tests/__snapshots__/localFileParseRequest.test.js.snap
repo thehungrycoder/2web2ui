@@ -7,7 +7,16 @@ Array [
   },
   Object {
     "payload": Object {
-      "details": "On line 2, oh no. On line 3, oh no.",
+      "details": Array [
+        Object {
+          "message": "Oh no",
+          "row": 1,
+        },
+        Object {
+          "message": "Oh no",
+          "row": 2,
+        },
+      ],
       "message": "An error occurred while parsing your file.",
     },
     "type": "PARSE_CSV_FAIL",

@@ -59,12 +59,12 @@ export default (state = initialState, action) => {
     case 'CREATE_OR_UPDATE_SUPPRESSIONS_FAIL':
       return { ...state, persistError: action.payload };
     case 'CREATE_OR_UPDATE_SUPPRESSIONS_SUCCESS':
-      return { ...state, persistError: null };
+      return { ...state, persistError: undefined };
 
     case 'PARSE_SUPPRESSIONS_FILE_FAIL':
       return { ...state, parseError: action.payload };
     case 'PARSE_SUPPRESSIONS_FILE_SUCCESS':
-      return { ...state, parseError: null };
+      return { ...state, parseError: undefined };
 
     default:
       return state;

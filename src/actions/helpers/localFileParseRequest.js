@@ -1,18 +1,4 @@
-import _ from 'lodash';
 import Papa from 'papaparse';
-
-function combineErrors(errors) {
-  const messages = _.reduce(errors, (result, { message, row }) => {
-    // Ignore ugly top-level errors
-    if (!row) {
-      return result;
-    }
-
-    return [...result, `On line ${row + 1}, ${message.toLowerCase()}.`];
-  }, []);
-
-  return _.join(messages, ' ');
-}
 
 export default ({ meta, type, parser = Papa }) => async(dispatch) => {
   const types = {
@@ -32,7 +18,7 @@ export default ({ meta, type, parser = Papa }) => async(dispatch) => {
           type: types.FAIL,
           payload: {
             message: error.message,
-            details: combineErrors(errors)
+            details: errors
           }
         });
 

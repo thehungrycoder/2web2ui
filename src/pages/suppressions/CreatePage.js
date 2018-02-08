@@ -15,6 +15,8 @@ import { apiResponseToAlert } from 'src/helpers/apiMessages';
 import { fileExtension, maxFileSize, nonEmptyFile, required } from 'src/helpers/validation';
 import exampleSuppressionsListPath from './example-suppressions-list.csv';
 
+const MAX_ERROR_DETAILS = 25;
+
 export class CreatePage extends Component {
 
   // Must re-throw Error as SubmissionError for redux form
@@ -32,11 +34,26 @@ export class CreatePage extends Component {
   }
 
   get errorDetails() {
-    const { parseError, persistError } = this.props;
+    const { parseError = {}, persistError } = this.props;
 
-    return parseError
-      ? parseError.details || parseError.message
-      : apiResponseToAlert(persistError).details;
+    if (parseError.details) {
+      return (
+        <ul>
+          {parseError.details.slice(0, MAX_ERROR_DETAILS).map((detail, index) =>
+            <li key={index}>
+              {detail.row !== undefined
+                ? `On line ${detail.row + 1}, ${detail.message.toLowerCase()}.`
+                : detail.message}
+            </li>
+          )}
+          {parseError.details.length > MAX_ERROR_DETAILS && (
+            <li key={MAX_ERROR_DETAILS}>And more...</li>
+          )}
+        </ul>
+      );
+    }
+
+    return parseError.message || apiResponseToAlert(persistError).details;
   }
 
   render() {

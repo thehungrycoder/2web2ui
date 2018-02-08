@@ -125,7 +125,88 @@ exports[`CreatePage renders upload form 1`] = `
 </Page>
 `;
 
-exports[`CreatePage renders upload form with parsing error 1`] = `
+exports[`CreatePage renders upload form with parsing error details 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "Suppressions",
+      "to": "/lists/suppressions",
+    }
+  }
+  empty={Object {}}
+  title="Add Suppressions"
+>
+  <form>
+    <ApiErrorBanner
+      errorDetails={
+        <ul>
+          <li>
+            Unable to auto detect delimiter
+          </li>
+          <li>
+            On line 1, wrong number of columns.
+          </li>
+          <li>
+            On line 2, wrong number of columns.
+          </li>
+        </ul>
+      }
+      message="Unable to upload your list of suppressions"
+      status="danger"
+    />
+    <Panel>
+      <Panel.Section>
+        <Field
+          component={[Function]}
+          disabled={false}
+          fileType="csv"
+          helpText={
+            <span>
+              You can download an 
+              <DownloadLink
+                href="example-suppressions-list.csv"
+              >
+                example file here
+              </DownloadLink>
+               to use when formatting your list of suppressions for upload.
+            </span>
+          }
+          label="CSV File of Suppressions"
+          name="suppressionsFile"
+          required={true}
+          validate={
+            Array [
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+            ]
+          }
+        />
+        <Field
+          component={[Function]}
+          disabled={false}
+          helpText="Leaving this field blank will add the suppressions to the master account."
+          name="subaccount"
+        />
+      </Panel.Section>
+      <Panel.Section>
+        <Button
+          disabled={false}
+          primary={true}
+          size="default"
+          type="submit"
+        >
+          Upload
+        </Button>
+      </Panel.Section>
+    </Panel>
+  </form>
+</Page>
+`;
+
+exports[`CreatePage renders upload form with parsing error message 1`] = `
 <Page
   breadcrumbAction={
     Object {
@@ -140,6 +221,156 @@ exports[`CreatePage renders upload form with parsing error 1`] = `
   <form>
     <ApiErrorBanner
       errorDetails="Oh no, parsing!"
+      message="Unable to upload your list of suppressions"
+      status="danger"
+    />
+    <Panel>
+      <Panel.Section>
+        <Field
+          component={[Function]}
+          disabled={false}
+          fileType="csv"
+          helpText={
+            <span>
+              You can download an 
+              <DownloadLink
+                href="example-suppressions-list.csv"
+              >
+                example file here
+              </DownloadLink>
+               to use when formatting your list of suppressions for upload.
+            </span>
+          }
+          label="CSV File of Suppressions"
+          name="suppressionsFile"
+          required={true}
+          validate={
+            Array [
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+            ]
+          }
+        />
+        <Field
+          component={[Function]}
+          disabled={false}
+          helpText="Leaving this field blank will add the suppressions to the master account."
+          name="subaccount"
+        />
+      </Panel.Section>
+      <Panel.Section>
+        <Button
+          disabled={false}
+          primary={true}
+          size="default"
+          type="submit"
+        >
+          Upload
+        </Button>
+      </Panel.Section>
+    </Panel>
+  </form>
+</Page>
+`;
+
+exports[`CreatePage renders upload form with parsing error too many details 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "Suppressions",
+      "to": "/lists/suppressions",
+    }
+  }
+  empty={Object {}}
+  title="Add Suppressions"
+>
+  <form>
+    <ApiErrorBanner
+      errorDetails={
+        <ul>
+          <li>
+            On line 1, oh no!.
+          </li>
+          <li>
+            On line 2, oh no!.
+          </li>
+          <li>
+            On line 3, oh no!.
+          </li>
+          <li>
+            On line 4, oh no!.
+          </li>
+          <li>
+            On line 5, oh no!.
+          </li>
+          <li>
+            On line 6, oh no!.
+          </li>
+          <li>
+            On line 7, oh no!.
+          </li>
+          <li>
+            On line 8, oh no!.
+          </li>
+          <li>
+            On line 9, oh no!.
+          </li>
+          <li>
+            On line 10, oh no!.
+          </li>
+          <li>
+            On line 11, oh no!.
+          </li>
+          <li>
+            On line 12, oh no!.
+          </li>
+          <li>
+            On line 13, oh no!.
+          </li>
+          <li>
+            On line 14, oh no!.
+          </li>
+          <li>
+            On line 15, oh no!.
+          </li>
+          <li>
+            On line 16, oh no!.
+          </li>
+          <li>
+            On line 17, oh no!.
+          </li>
+          <li>
+            On line 18, oh no!.
+          </li>
+          <li>
+            On line 19, oh no!.
+          </li>
+          <li>
+            On line 20, oh no!.
+          </li>
+          <li>
+            On line 21, oh no!.
+          </li>
+          <li>
+            On line 22, oh no!.
+          </li>
+          <li>
+            On line 23, oh no!.
+          </li>
+          <li>
+            On line 24, oh no!.
+          </li>
+          <li>
+            On line 25, oh no!.
+          </li>
+          <li>
+            And more...
+          </li>
+        </ul>
+      }
       message="Unable to upload your list of suppressions"
       status="danger"
     />

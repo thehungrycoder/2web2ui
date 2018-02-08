@@ -11,7 +11,27 @@ cases('CreatePage', ({ name, ...props }) => {
   expect(wrapper).toMatchSnapshot();
 }, {
   'renders upload form': {},
-  'renders upload form with parsing error': {
+  'renders upload form with parsing error details': {
+    parseError: {
+      details: [
+        { row: undefined, message: 'Unable to auto detect delimiter' },
+        { row: 0, message: 'Wrong number of columns' },
+        { row: 1, message: 'Wrong number of columns' }
+      ]
+    },
+    submitting: false,
+    submitFailed: true
+  },
+  'renders upload form with parsing error too many details': {
+    parseError: {
+      details: [
+        ...Array.from(Array(100), (v, i) => ({ row: i, message: 'Oh no!' }))
+      ]
+    },
+    submitting: false,
+    submitFailed: true
+  },
+  'renders upload form with parsing error message': {
     parseError: {
       message: 'Oh no, parsing!'
     },
