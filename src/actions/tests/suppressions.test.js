@@ -66,6 +66,32 @@ describe('Action Creator: Suppressions', () => {
 
       expect(action).toMatchSnapshot();
     });
+
+    it('with deprecated email field', () => {
+      const action = suppressions.createOrUpdateSuppressions([
+        { email: 'example@test.com', type: 'transactional' }
+      ]);
+
+      expect(action).toMatchSnapshot();
+    });
+
+    it('with deprecated non_transactional and transactional field', () => {
+      const action = suppressions.createOrUpdateSuppressions([
+        { recipient: 'example@test.com', non_transactional: 'true', transactional: 'false' },
+        { recipient: 'example@test.com', non_transactional: 'false', transactional: 'true' }
+      ]);
+
+      expect(action).toMatchSnapshot();
+    });
+
+    it('with typo in type field', () => {
+      const action = suppressions.createOrUpdateSuppressions([
+        { recipient: 'example@test.com', type: 'non_marketing' },
+        { recipient: 'example@test.com', type: 'marketing' }
+      ]);
+
+      expect(action).toMatchSnapshot();
+    });
   });
 
   describe('parseSuppressionsFile', () => {

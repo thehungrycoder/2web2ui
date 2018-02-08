@@ -116,9 +116,30 @@ export function deleteSuppression(suppression) {
   });
 }
 
+const LIKE_NON = new RegExp('non', 'i');
+const LIKE_TRUE = new RegExp('true', 'i');
+
 // SEE: https://developers.sparkpost.com/api/suppression-list.html#suppression-list-bulk-insert-update-put
 export function createOrUpdateSuppressions(recipients, subaccount) {
-  const sanitizedRecipients = recipients.map((r) => _.mapValues(r, _.trim)); // for FAD-5095
+  const sanitizedRecipients = recipients.map(({
+    description, email, non_transactional, recipient, transactional, type
+  }) => {
+    // Convert deprecated type fields
+    if (!type && LIKE_TRUE.test(transactional)) { type = 'transactional'; }
+    if (!type && LIKE_TRUE.test(non_transactional)) { type = 'non_transactional'; }
+
+    // Format type value to provide a better user experience
+    if (type && LIKE_NON.test(type)) { type = 'non_transactional'; }
+    if (type && !LIKE_NON.test(type)) { type = 'transactional'; }
+
+    // Convert deprecated recipient fields
+    if (email) { recipient = email; }
+
+    // Trim whitespace from recipient email
+    if (recipient) { recipient = _.trim(recipient); } // for FAD-5095
+
+    return { description, recipient, type };
+  });
 
   return sparkpostApiRequest({
     type: 'CREATE_OR_UPDATE_SUPPRESSIONS',
