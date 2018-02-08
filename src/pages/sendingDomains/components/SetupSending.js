@@ -10,7 +10,7 @@ import { VerifiedIcon } from './Icons';
 
 // actions
 import { showAlert } from 'src/actions/globalAlert';
-import { verify } from 'src/actions/sendingDomains';
+import { verifyDkim } from 'src/actions/sendingDomains';
 
 import { resolveReadyFor } from 'src/helpers/domains';
 import config from 'src/config';
@@ -23,9 +23,9 @@ export class SetupSending extends Component {
   };
 
   verifyDomain = () => {
-    const { domain: { id, subaccount_id: subaccount }, verify, showAlert } = this.props;
+    const { domain: { id, subaccount_id: subaccount }, verifyDkim, showAlert } = this.props;
 
-    return verify({ id, type: 'dkim', subaccount })
+    return verifyDkim({ id, subaccount })
       .then((results) => {
         const readyFor = resolveReadyFor(results);
         if (readyFor.dkim) {
@@ -114,4 +114,4 @@ const mapStateToProps = ({ sendingDomains: { verifyDkimError, verifyDkimLoading 
   verifyDkimLoading
 });
 
-export default withRouter(connect(mapStateToProps, { verify, showAlert })(SetupSending));
+export default withRouter(connect(mapStateToProps, { verifyDkim, showAlert })(SetupSending));

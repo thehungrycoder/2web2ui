@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { verify, update } from 'src/actions/sendingDomains';
+import { verifyCname, update } from 'src/actions/sendingDomains';
 
 import { VerifiedIcon } from './Icons';
 import { Panel, Banner, Tooltip, Icon } from '@sparkpost/matchbox';
@@ -16,12 +16,12 @@ import config from 'src/config';
 export class EditBounce extends Component {
 
   verifyDomain = () => {
-    const { id, verify, showAlert, domain: { subaccount_id: subaccount }} = this.props;
+    const { id, verifyCname, showAlert, domain: { subaccount_id: subaccount }} = this.props;
     function alertError(error) {
       showAlert({ type: 'error', message: `Unable to verify CNAME record of ${id}. ${error}` });
     }
 
-    return verify({ id, subaccount, type: 'cname' })
+    return verifyCname({ id, subaccount })
       .then((results) => {
         const readyFor = resolveReadyFor(results);
         if (readyFor.bounce) {
@@ -105,7 +105,7 @@ export class EditBounce extends Component {
     // Domain is verified
     // Domain is ready for bounce
     // Domain is not assigned to subaccount
-    const showToggle = config.bounceDomains.allowDefault && readyFor.sending && readyFor.bounce && !domain.subaccount_id;
+    const showDefaultBounceToggle = config.bounceDomains.allowDefault && readyFor.sending && readyFor.bounce && !domain.subaccount_id;
 
     const tooltip = (
       <Tooltip dark content={`When this is set to "ON", all future transmissions will use ${id} as their bounce domain (unless otherwise specified).`}>Use this domain as your default bounce domain? <Icon name='Help' size={15}/></Tooltip>
@@ -119,7 +119,7 @@ export class EditBounce extends Component {
           <Panel sectioned>
             <p><VerifiedIcon/> This domain is ready to be used as a bounce domain.</p>
           </Panel>
-          { showToggle &&
+          { showDefaultBounceToggle &&
               <Panel sectioned>
                 <Field
                   name='is_default_bounce_domain'
@@ -162,4 +162,4 @@ const mapStateToProps = ({ sendingDomains }, { domain }) => ({
   }
 });
 
-export default connect(mapStateToProps, { verify, update, showAlert })(reduxForm(formOptions)(EditBounce));
+export default connect(mapStateToProps, { verifyCname, update, showAlert })(reduxForm(formOptions)(EditBounce));

@@ -32,7 +32,7 @@ describe('Component: EditBounce', () => {
         is_default_bounce_domain: false,
         subaccount_id: 100
       },
-      verify: jest.fn(() => Promise.resolve()),
+      verifyCname: jest.fn(() => Promise.resolve()),
       update: jest.fn(() => Promise.resolve()),
       showAlert: jest.fn(),
       reset: jest.fn(),
@@ -98,10 +98,10 @@ describe('Component: EditBounce', () => {
     });
 
     it('verifies domain and alerts when verification successful', async() => {
-      props.verify.mockReturnValue(Promise.resolve({ cname_status: 'valid' }));
+      props.verifyCname.mockReturnValue(Promise.resolve({ cname_status: 'valid' }));
       await instance.verifyDomain();
-      expect(props.verify).toHaveBeenCalledTimes(1);
-      expect(props.verify).toHaveBeenCalledWith({ id: 'xyz.com', type: 'cname', subaccount: 100 });
+      expect(props.verifyCname).toHaveBeenCalledTimes(1);
+      expect(props.verifyCname).toHaveBeenCalledWith({ id: 'xyz.com', subaccount: 100 });
       const arg = props.showAlert.mock.calls[0][0];
       expect(props.showAlert).toHaveBeenCalledTimes(1);
       expect(arg.type).toEqual('success');
@@ -109,10 +109,10 @@ describe('Component: EditBounce', () => {
     });
 
     it('alerts error when verification req is successful but verification is failed', async() => {
-      props.verify.mockReturnValue(Promise.resolve({ cname_status: 'invalid' }));
+      props.verifyCname.mockReturnValue(Promise.resolve({ cname_status: 'invalid' }));
       await instance.verifyDomain();
-      expect(props.verify).toHaveBeenCalledTimes(1);
-      expect(props.verify).toHaveBeenCalledWith({ id: 'xyz.com', type: 'cname', subaccount: 100 });
+      expect(props.verifyCname).toHaveBeenCalledTimes(1);
+      expect(props.verifyCname).toHaveBeenCalledWith({ id: 'xyz.com', subaccount: 100 });
       const arg = props.showAlert.mock.calls[0][0];
       expect(props.showAlert).toHaveBeenCalledTimes(1);
       expect(arg.type).toEqual('error');
@@ -121,10 +121,10 @@ describe('Component: EditBounce', () => {
 
     it('alerts when request is errored', async() => {
       const err = new Error('Request failed!');
-      props.verify.mockReturnValue(Promise.reject(err));
+      props.verifyCname.mockReturnValue(Promise.reject(err));
       await instance.verifyDomain();
-      expect(props.verify).toHaveBeenCalledTimes(1);
-      expect(props.verify).toHaveBeenCalledWith({ id: 'xyz.com', type: 'cname', subaccount: 100 });
+      expect(props.verifyCname).toHaveBeenCalledTimes(1);
+      expect(props.verifyCname).toHaveBeenCalledWith({ id: 'xyz.com', subaccount: 100 });
       const arg = props.showAlert.mock.calls[0][0];
       expect(props.showAlert).toHaveBeenCalledTimes(1);
       expect(arg.type).toEqual('error');

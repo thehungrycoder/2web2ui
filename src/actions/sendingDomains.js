@@ -61,7 +61,7 @@ export function remove({ id, subaccount }) {
   });
 }
 
-export function verify({ id, subaccount, type }) {
+function verify({ id, subaccount, type }) {
   const headers = setSubaccountHeader(subaccount);
 
   const data = {};
@@ -78,4 +78,12 @@ export function verify({ id, subaccount, type }) {
       headers
     }
   });
+}
+
+export function verifyDkim({ id, subaccount }) {
+  return verify({ id, subaccount, type: 'dkim' });
+}
+
+export function verifyCname({ id, subaccount }) {
+  return verify({ id, subaccount, type: 'cname' });
 }

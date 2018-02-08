@@ -71,7 +71,7 @@ Object {
 }
 `;
 
-exports[`Action Creator: Sending Domains Update it should request with correct post data 1`] = `
+exports[`Action Creator: Sending Domains Update should request with correct post data 1`] = `
 Object {
   "meta": Object {
     "data": Object {
@@ -85,7 +85,7 @@ Object {
 }
 `;
 
-exports[`Action Creator: Sending Domains Update it update domain owned by subaccount 1`] = `
+exports[`Action Creator: Sending Domains Update should update domain owned by subaccount 1`] = `
 Object {
   "meta": Object {
     "data": Object {
@@ -101,21 +101,7 @@ Object {
 }
 `;
 
-exports[`Action Creator: Sending Domains Verify it should not append action type if type is not provided 1`] = `
-Object {
-  "meta": Object {
-    "data": Object {
-      "undefined_verify": true,
-    },
-    "headers": Object {},
-    "method": "POST",
-    "url": "/sending-domains/sub.com/verify",
-  },
-  "type": "VERIFY_SENDING_DOMAIN",
-}
-`;
-
-exports[`Action Creator: Sending Domains Verify it should request with correct post data 1`] = `
+exports[`Action Creator: Sending Domains Verify should dispatch verify cname action 1`] = `
 Object {
   "meta": Object {
     "data": Object {
@@ -129,11 +115,11 @@ Object {
 }
 `;
 
-exports[`Action Creator: Sending Domains Verify it should verify domain owned by subaccount 1`] = `
+exports[`Action Creator: Sending Domains Verify should dispatch verify dkim action 1`] = `
 Object {
   "meta": Object {
     "data": Object {
-      "cname_verify": true,
+      "dkim_verify": true,
     },
     "headers": Object {
       "x-msys-subaccount": 101,
@@ -141,6 +127,6 @@ Object {
     "method": "POST",
     "url": "/sending-domains/sub.com/verify",
   },
-  "type": "VERIFY_SENDING_DOMAIN_CNAME",
+  "type": "VERIFY_SENDING_DOMAIN_DKIM",
 }
 `;
