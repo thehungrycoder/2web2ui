@@ -18,7 +18,6 @@ import {
   users,
   webhooks,
   ipPools,
-  ComingSoonPage,
   PageNotFound,
   DefaultRedirect
 } from 'src/pages';
@@ -160,6 +159,10 @@ const routes = [
     path: '/reports/message-events/details/:messageId',
     component: reports.EventPage,
     layout: App
+  },
+  {
+    path: '/account/security',
+    redirect: '/account/profile'
   },
   {
     path: '/account/subaccounts',

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Modal from 'src/components/modals/Modal';
+import styles from './TfaModals.module.scss';
 import { Panel, Button, TextField, Grid } from '@sparkpost/matchbox';
 
 export default class EnableTfaModal extends Component {
@@ -35,7 +36,7 @@ export default class EnableTfaModal extends Component {
 
     return (
       <Modal open={open}>
-        <Panel title='Disable Two-Factor Authentication' accent actions={[{ content: 'Close', onClick: onClose }]}>
+        <Panel title='Disable Two-Factor Authentication' accent>
           <Panel.Section>
             <p>Enter your SparkPost password to disable two-factor authentication.</p>
             <Grid>
@@ -48,6 +49,7 @@ export default class EnableTfaModal extends Component {
             <Button primary onClick={() => this.props.disable(this.state.password)}>
               {togglePending ? 'Disabling...' : 'Disable 2FA'}
             </Button>
+            <Button onClick={onClose} className={styles.Cancel}>Cancel</Button>
           </Panel.Section>
         </Panel>
       </Modal>

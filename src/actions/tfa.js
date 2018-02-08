@@ -25,6 +25,19 @@ export function getTfaStatus() {
   };
 }
 
+export function getTfaBackupStatus() {
+  return (dispatch, getState) => {
+    const { currentUser } = getState();
+    return dispatch(sparkpostApiRequest({
+      type: 'GET_TFA_BACKUP_STATUS',
+      meta: {
+        method: 'GET',
+        url: `/users/${currentUser.username}/two-factor/backup`
+      }
+    }));
+  };
+}
+
 export function generateBackupCodes(password) {
   return (dispatch, getState) => {
     const { currentUser } = getState();

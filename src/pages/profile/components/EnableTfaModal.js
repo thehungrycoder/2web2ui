@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { QRCode } from 'react-qr-svg';
 import Modal from 'src/components/modals/Modal';
-import { Panel, Button, TextField, Grid } from '@sparkpost/matchbox';
+import styles from './TfaModals.module.scss';
+import { Panel, Button, TextField, Grid, Icon } from '@sparkpost/matchbox';
 
 export default class EnableTfaModal extends Component {
 
@@ -42,27 +43,26 @@ export default class EnableTfaModal extends Component {
       return null;
     }
 
+    // TODO: move to selector?
     const qrData = `otpauth://totp/${username}?secret=${encodeURIComponent(secret)}&issuer=SparkPost`;
 
     return (
       <Modal open={open}>
-        <Panel title='Enable Two-Factor Authentication' accent actions={[{ content: 'Close', onClick: onClose }]}>
-          <Panel.Section>
-            To enable 2FA, you'll need to have a 2FA auth app installed on your phone or tablet (examples include Google Authenticator, Duo Mobile, and Authy).
-          </Panel.Section>
+        <Panel title='Enable Two-Factor Authentication' accent>
           <Panel.Section>
             <Grid>
-              <Grid.Column xs={12} md={6}>
-                <p><strong>Step 1: Configure your 2FA app</strong></p>
+              <Grid.Column xs={12} md={7}>
+                <h6>Step 1: Configure your 2FA app</h6>
+                <p>To enable 2FA, you'll need to have a 2FA auth app installed on your phone or tablet (examples include Google Authenticator, Duo Mobile, and Authy).</p>
                 <p>Most apps will let you get set up by scanning our QR code from within the app. If you prefer, you can type in the key manually.</p>
-                <p><code>KEY: {secret}</code></p>
+                <p><strong><Icon name="Key"/> <code>{secret}</code></strong></p>
               </Grid.Column>
-              <Grid.Column xs={12} md={6} style={{ textAlign: 'center' }}>
+              <Grid.Column xs={12} md={5} style={{ textAlign: 'center' }}>
                 <QRCode
                   bgColor="#FFFFFF"
                   fgColor="#000000"
                   level="Q"
-                  style={{ width: 256 }}
+                  style={{ width: 230 }}
                   value={qrData}
                 />
               </Grid.Column>
@@ -70,8 +70,8 @@ export default class EnableTfaModal extends Component {
           </Panel.Section>
           <Panel.Section>
             <Grid>
-              <Grid.Column xs={12} md={6}>
-                <p><strong>Step 2: Enter a 2FA code</strong></p>
+              <Grid.Column xs={12} md={7}>
+                <h6>Step 2: Enter a 2FA code</h6>
                 <p>Generate a code from your newly-activated 2FA app to confirm that you're all set up.</p>
                 <TextField error={(this.state.showErrors && toggleError) ? 'Problem verifying your code, please try again' : ''} placeholder='Enter your code' onChange={this.handleInputChange} value={this.state.code} />
               </Grid.Column>
@@ -81,6 +81,7 @@ export default class EnableTfaModal extends Component {
             <Button primary onClick={this.enable}>
               {togglePending ? 'Verifying Code...' : 'Enable 2FA'}
             </Button>
+            <Button onClick={onClose} className={styles.Cancel}>Cancel</Button>
           </Panel.Section>
         </Panel>
       </Modal>

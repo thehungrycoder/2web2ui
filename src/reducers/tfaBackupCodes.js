@@ -1,4 +1,4 @@
-const initialState = { codes: [], error: null, pending: false };
+const initialState = { codes: [], error: null, pending: false, hasCodes: false, activeCodes: 0 };
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
@@ -17,6 +17,10 @@ export default (state = initialState, { type, payload }) => {
 
     case 'TFA_CLEAR_BACKUP_CODES': {
       return { ...state, codes: []};
+    }
+
+    case 'GET_TFA_BACKUP_STATUS_SUCCESS': {
+      return { ...state, hasCodes: payload.enabled, activeCodes: payload.active || state.activeCodes };
     }
 
     default: {

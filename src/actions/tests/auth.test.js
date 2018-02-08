@@ -3,7 +3,7 @@ import * as authActions from '../auth';
 import authCookie from 'src/helpers/authCookie';
 import { initializeAccessControl } from 'src/actions/accessControl';
 import { sparkpostLogin } from 'src/helpers/http';
-import { get as tfaGet } from 'src/actions/tfa';
+import { getTfaStatusBeforeLoggedIn } from 'src/actions/tfa';
 
 jest.mock('src/helpers/authCookie');
 jest.mock('src/actions/accessControl');
@@ -71,7 +71,7 @@ describe('Action Creator: Auth', () => {
     });
 
     it('should update TFA to enabled if user is TFA', async() => {
-      tfaGet.mockImplementation(() => Promise.resolve({
+      getTfaStatusBeforeLoggedIn.mockImplementation(() => Promise.resolve({
         data: {
           results: {
             enabled: true
@@ -85,7 +85,7 @@ describe('Action Creator: Auth', () => {
     });
 
     it('should login if user is not TFA', async() => {
-      tfaGet.mockImplementation(() => Promise.resolve({
+      getTfaStatusBeforeLoggedIn.mockImplementation(() => Promise.resolve({
         data: {
           results: {
             enabled: false
