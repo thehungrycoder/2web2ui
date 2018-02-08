@@ -33,7 +33,7 @@ export class WebhooksList extends Component {
     ];
 
     if (hasSubaccounts) {
-      columns.push({ label: 'Events For', width: '18%' });
+      columns.push({ label: 'Events For', width: '18%', sortKey: 'subaccount_id' });
     }
 
     return columns;
@@ -45,8 +45,8 @@ export class WebhooksList extends Component {
     const row = [
       nameLink,
       target,
-      last_successful && formatDateTime(last_successful),
-      last_failure && formatDateTime(last_failure)
+      last_successful ? formatDateTime(last_successful) : null,
+      last_failure ? formatDateTime(last_failure) : null
     ];
 
     if (hasSubaccounts) {

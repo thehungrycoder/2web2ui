@@ -6,7 +6,8 @@ import {
   EventsRadioGroup,
   AuthDropDown,
   BasicAuthFields,
-  OAuth2Fields
+  OAuth2Fields,
+  ActiveField
 } from '../Fields.js';
 
 it('should render NameField', () => {
@@ -42,5 +43,10 @@ it('should render BasicAuthFields', () => {
 it('should render OAuth2Fields', () => {
   const wrapper = shallow(<OAuth2Fields />);
 
+  expect(wrapper).toMatchSnapshot();
+});
+
+it('should render ActiveField', () => {
+  const wrapper = shallow(<ActiveField />);
   expect(wrapper).toMatchSnapshot();
 });

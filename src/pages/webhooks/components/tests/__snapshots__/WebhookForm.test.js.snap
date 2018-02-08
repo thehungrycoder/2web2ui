@@ -29,6 +29,9 @@ exports[`Webhooks Form Component should render correctly 1`] = `
     <AuthDropDown />
   </Panel.Section>
   <Panel.Section>
+    <ActiveField />
+  </Panel.Section>
+  <Panel.Section>
     <Button
       disabled={true}
       primary={true}
