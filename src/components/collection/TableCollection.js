@@ -3,8 +3,9 @@ import _ from 'lodash';
 import { Panel, Table } from '@sparkpost/matchbox';
 import Collection from './Collection';
 import TableHeader from './TableHeader';
+import styles from './TableCollection.module.scss';
 
-const TableWrapper = (props) => <Panel><Table>{props.children}</Table></Panel>;
+const TableWrapper = (props) => <Panel className={styles.TableWrapper}><Table>{props.children}</Table></Panel>;
 
 const TableBody = (props) => <tbody>{props.children}</tbody>;
 

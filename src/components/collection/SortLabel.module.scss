@@ -13,15 +13,17 @@
 .Up, .Down {
   position: absolute;
   right: 0;
+  top: 50%;
   opacity: 0.4;
+  transform: translate(0, -50%);
 }
 
 .Up {
-  top: -4%;
+  margin-top: -4px;
 }
 
 .Down {
-  top: 24%;
+  margin-top: 4px;
 }
 
 .SortLabel.asc .Up, .SortLabel.desc .Down {
