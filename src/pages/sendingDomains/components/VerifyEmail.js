@@ -63,7 +63,7 @@ export class VerifyEmail extends Component {
         <p>Start sending email from this domain by sending a verification email to any mailbox on your domain using the form below.</p>
         <Grid>
           <Grid.Column xs={6}>
-            <p>
+            <div>
               <TextField
                 id="localPart"
                 onChange={this.onChange}
@@ -72,7 +72,7 @@ export class VerifyEmail extends Component {
                 value={localPart}
                 error={this.state.error}
               />
-            </p>
+            </div>
           </Grid.Column>
           <Grid.Column xs={6}>
             <div className={styles.ButtonColumn}>{ this.renderVerifyButton(this.verifyWithCustom) }</div>
