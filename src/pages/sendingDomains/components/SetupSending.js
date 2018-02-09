@@ -45,7 +45,8 @@ export class SetupSending extends Component {
   }
 
   renderText() {
-    const readyFor = resolveReadyFor(this.props.domain.status);
+    const { domain } = this.props;
+    const readyFor = resolveReadyFor(domain.status);
     let content = null;
 
     if (!readyFor.sending && !readyFor.dkim) {
@@ -61,7 +62,11 @@ export class SetupSending extends Component {
               can <UnstyledLink onClick={this.toggleVerifyViaEmailModal}> set this domain up for
               sending via email.</UnstyledLink>
             </p>
-            {this.renderVerifyViaEmailModal()}
+            <VerifyEmail
+              id={domain.id}
+              open={this.state.open}
+              onCancel={this.toggleVerifyViaEmailModal}
+            />
           </React.Fragment>
         );
       }
@@ -75,24 +80,7 @@ export class SetupSending extends Component {
   }
 
   toggleVerifyViaEmailModal = () => {
-    const { open } = this.state;
-
-    this.setState({
-      open: !open
-    });
-  }
-
-  renderVerifyViaEmailModal = () => {
-    const { open } = this.state;
-    const { domain } = this.props;
-
-    if (!domain) {
-      return null;
-    }
-
-    return (
-      <VerifyEmail id={domain.id} open={open} onCancel={this.toggleVerifyViaEmailModal}/>
-    );
+    this.setState({ open: !this.state.open });
   }
 
   renderTxtRecordPanel() {

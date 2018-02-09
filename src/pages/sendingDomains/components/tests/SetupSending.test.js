@@ -68,6 +68,12 @@ describe('Component: SetupSending', () => {
     expect(props.verifyDkim).toHaveBeenCalledTimes(1);
   });
 
+  it('should close verify by email modal', () => {
+    const wrapper = shallow(<SetupSending {...props}/>);
+    wrapper.find('Connect(VerifyEmail)').simulate('cancel');
+    expect(wrapper.state('open')).toEqual(true);
+  });
+
   describe('verifyDomain', () => {
     let instance;
     beforeEach(() => {
