@@ -27,9 +27,9 @@ import {
   hasGrants,
   composeConditions
 } from 'src/helpers/conditions';
-
+import { notEnterprise } from 'src/helpers/conditions/account';
+import { configEquals } from 'src/helpers/conditions/config';
 import App from 'src/components/layout/App';
-import config from 'src/config';
 
 import { DEFAULT_REDIRECT_ROUTE } from 'src/constants';
 
@@ -112,7 +112,10 @@ const routes = [
     path: '/dashboard',
     component: DashboardPage,
     layout: App,
-    condition: composeConditions(hasGrants('api_keys/manage', 'templates/modify', 'sending_domains/manage'), () => config.splashPage === '/dashboard') // want to hide if not a splash page https://jira.int.messagesystems.com/browse/FAD-6046
+    condition: composeConditions(
+      hasGrants('api_keys/manage', 'templates/modify', 'sending_domains/manage'),
+      configEquals('splashPage', '/dashboard') // want to hide if not a splash page https://jira.int.messagesystems.com/browse/FAD-6046
+    )
     // TODO: implement some kind of blockedRoutes check that runs on every route so we can
     // hide routes based on config, account/user settings, etc. without having to mess
     // around with grants in the web UI keys
@@ -340,13 +343,13 @@ const routes = [
   {
     path: '/account/billing',
     component: billing.SummaryPage,
-    condition: hasGrants('account/manage'),
+    condition: composeConditions(hasGrants('account/manage'), notEnterprise()),
     layout: App
   },
   {
     path: '/account/billing/plan',
     component: billing.ChangePlanPage,
-    condition: hasGrants('account/manage'),
+    condition: composeConditions(hasGrants('account/manage'), notEnterprise()),
     layout: App
   },
   {
