@@ -1,3 +1,7 @@
 .TableWrapper {
-  overflow: auto;
+  overflow-x: auto;
+
+  & > * {
+    margin-bottom: 0;
+  }
 }

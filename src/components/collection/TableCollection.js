@@ -5,7 +5,13 @@ import Collection from './Collection';
 import TableHeader from './TableHeader';
 import styles from './TableCollection.module.scss';
 
-const TableWrapper = (props) => <Panel className={styles.TableWrapper}><Table>{props.children}</Table></Panel>;
+const TableWrapper = (props) => (
+  <Panel>
+    <div className={styles.TableWrapper}>
+      <Table>{props.children}</Table>
+    </div>
+  </Panel>
+);
 
 const TableBody = (props) => <tbody>{props.children}</tbody>;
 
