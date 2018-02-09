@@ -61,29 +61,37 @@ export function remove({ id, subaccount }) {
   });
 }
 
-function verify({ id, subaccount, type }) {
-  const headers = setSubaccountHeader(subaccount);
-
-  const data = {};
-  data[`${type}_verify`] = true;
-
-  const actionType = type ? `_${type.toUpperCase()}` : '';
-
+function verify({ id, subaccount, type, ...rest }) {
   return sparkpostApiRequest({
-    type: `VERIFY_SENDING_DOMAIN${actionType}`,
+    type: `VERIFY_SENDING_DOMAIN_${type.toUpperCase()}`,
     meta: {
       method: 'POST',
       url: `/sending-domains/${id}/verify`,
-      data,
-      headers
+      headers: setSubaccountHeader(subaccount),
+      data: {
+        ...rest,
+        [`${type}_verify`]: true
+      }
     }
   });
+}
+
+export function verifyAbuse({ id, subaccount }) {
+  return verify({ id, subaccount, type: 'abuse_at' });
+}
+
+export function verifyCname({ id, subaccount }) {
+  return verify({ id, subaccount, type: 'cname' });
 }
 
 export function verifyDkim({ id, subaccount }) {
   return verify({ id, subaccount, type: 'dkim' });
 }
 
-export function verifyCname({ id, subaccount }) {
-  return verify({ id, subaccount, type: 'cname' });
+export function verifyMailbox({ id, mailbox: verification_mailbox, subaccount }) {
+  return verify({ id, subaccount, type: 'verification_mailbox', verification_mailbox });
+}
+
+export function verifyPostmaster({ id, subaccount }) {
+  return verify({ id, subaccount, type: 'postmaster_at' });
 }

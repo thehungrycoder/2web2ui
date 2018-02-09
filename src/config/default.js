@@ -31,7 +31,8 @@ const config = {
     billingEmail: 'billing@sparkpost.com'
   },
   featureFlags: {
-    allow_mailbox_verification: true
+    allow_mailbox_verification: true,
+    allow_anyone_at_verification: false
   },
   gaTag: 'no-default-set',
   maxUploadSizeBytes: 20000000,
