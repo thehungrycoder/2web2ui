@@ -35,6 +35,39 @@ describe('csvFileParseRequest', () => {
     await expect(dispatchThunk(mockParse)).rejects.toThrowError(error);
     expect(mockStore.getActions()).toMatchSnapshot();
   });
+
+  it('fails validation', async() => {
+    const thunk = csvFileParseRequest({
+      type: 'PARSE_CSV',
+      meta: {
+        validate: [({ data }) => data.length === 0 && 'No data']
+      },
+      parser: {
+        parse: (file, options) => options.complete({ data: [], errors: []})
+      }
+    });
+
+    await expect(mockStore.dispatch(thunk)).rejects.toThrowError(/no data/i);
+    expect(mockStore.getActions()).toMatchSnapshot();
+  });
+
+  it('fails on first validation error', async() => {
+    const thunk = csvFileParseRequest({
+      type: 'PARSE_CSV',
+      meta: {
+        validate: [
+          () => 'Oh no!',
+          () => 'You should not have.'
+        ]
+      },
+      parser: {
+        parse: (file, options) => options.complete({ data: [], errors: []})
+      }
+    });
+
+    await expect(mockStore.dispatch(thunk)).rejects.toThrowError(/oh no/i);
+    expect(mockStore.getActions()).toMatchSnapshot();
+  });
 });
 
 describe('csvFileParseRequest.hasData', () => {

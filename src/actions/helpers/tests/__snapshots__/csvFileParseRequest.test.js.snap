@@ -1,5 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`csvFileParseRequest fails on first validation error 1`] = `
+Array [
+  Object {
+    "type": "PARSE_CSV_PENDING",
+  },
+  Object {
+    "payload": Object {
+      "message": [Function],
+    },
+    "type": "PARSE_CSV_FAIL",
+  },
+]
+`;
+
 exports[`csvFileParseRequest fails to parse 1`] = `
 Array [
   Object {
@@ -32,6 +46,20 @@ Array [
   Object {
     "payload": Object {
       "message": "Oh no!",
+    },
+    "type": "PARSE_CSV_FAIL",
+  },
+]
+`;
+
+exports[`csvFileParseRequest fails validation 1`] = `
+Array [
+  Object {
+    "type": "PARSE_CSV_PENDING",
+  },
+  Object {
+    "payload": Object {
+      "message": [Function],
     },
     "type": "PARSE_CSV_FAIL",
   },

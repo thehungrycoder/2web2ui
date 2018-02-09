@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import Papa from 'papaparse';
 
 export const hasData = ({ data }) => {
@@ -24,7 +25,6 @@ export default ({ meta: { file, validate }, type, parser = Papa }) => async(disp
   return await new Promise((resolve, reject) => parser.parse(file, {
     complete: ({ data, errors, meta }) => {
       let error;
-      let message;
 
       if (errors.length > 0) {
         error = new Error('An error occurred while parsing your file.');
@@ -41,8 +41,10 @@ export default ({ meta: { file, validate }, type, parser = Papa }) => async(disp
         return;
       }
 
-      // Custom validation of data
-      if (validate && (message = validate({ data, meta }))) {
+      // Return the first validation error message
+      const message = _.find(validate, (v) => v({ data, meta }));
+
+      if (message) {
         error = new Error(message);
 
         dispatch({ type: types.FAIL, payload: { message }});
