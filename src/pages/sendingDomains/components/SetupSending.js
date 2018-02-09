@@ -3,8 +3,9 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 // components
-import { Panel } from '@sparkpost/matchbox';
+import { Panel, UnstyledLink } from '@sparkpost/matchbox';
 import { LabelledValue } from 'src/components';
+import VerifyEmail from './VerifyEmail';
 import { SendingDomainSection } from './SendingDomainSection';
 import { VerifiedIcon } from './Icons';
 
@@ -16,6 +17,11 @@ import { resolveReadyFor } from 'src/helpers/domains';
 import config from 'src/config';
 
 export class SetupSending extends Component {
+  state = {
+    // verify via email modal
+    open: false
+  };
+
   showErrorAlert = ({ message }) => {
     const { domain: { id }, showAlert } = this.props;
 
@@ -39,7 +45,8 @@ export class SetupSending extends Component {
   }
 
   renderText() {
-    const readyFor = resolveReadyFor(this.props.domain.status);
+    const { domain } = this.props;
+    const readyFor = resolveReadyFor(domain.status);
     let content = null;
 
     if (!readyFor.sending && !readyFor.dkim) {
@@ -50,7 +57,18 @@ export class SetupSending extends Component {
         content = (
           <React.Fragment>
             {content}
-            <p>We recommend DNS verification, but if you don't have DNS access, you can <a>set this domain up for sending via email</a>.</p>
+            <p>
+              We recommend DNS verification, but if you don't have DNS access, you
+              can <UnstyledLink id="verify-with-email" onClick={this.toggleVerifyViaEmailModal}> set
+              this domain up for sending via email.</UnstyledLink>
+            </p>
+            {this.state.open && (
+              <VerifyEmail
+                id={domain.id}
+                open={this.state.open}
+                onCancel={this.toggleVerifyViaEmailModal}
+              />
+            )}
           </React.Fragment>
         );
       }
@@ -63,19 +81,20 @@ export class SetupSending extends Component {
     return content;
   }
 
-  getVerifyAction() {
-    const { verifyDkimLoading } = this.props;
-    const buttonText = verifyDkimLoading ? 'Verifying...' : 'Verify TXT Record';
+  toggleVerifyViaEmailModal = () => {
+    this.setState({ open: !this.state.open });
+  }
 
-    return {
-      content: buttonText,
-      onClick: this.verifyDomain,
-      disabled: verifyDkimLoading
-    };
+  toggleVerifyViaEmailModal = () => {
+    const { open } = this.state;
+
+    this.setState({
+      open: !open
+    });
   }
 
   renderTxtRecordPanel() {
-    const { domain: { dkimHostname, dkimValue, status }} = this.props;
+    const { domain: { dkimHostname, dkimValue, status }, verifyDkimLoading } = this.props;
     const readyFor = resolveReadyFor(status);
 
     if (readyFor.sending && readyFor.dkim) {
@@ -87,7 +106,16 @@ export class SetupSending extends Component {
     }
 
     return (
-      <Panel title='DNS Settings' sectioned actions={[this.getVerifyAction()]}>
+      <Panel
+        actions={[{
+          id: 'verify-dkim',
+          content: verifyDkimLoading ? 'Verifying...' : 'Verify TXT Record',
+          onClick: this.verifyDomain,
+          disabled: verifyDkimLoading
+        }]}
+        sectioned
+        title="DNS Settings"
+      >
         <LabelledValue label='Type'><p>TXT</p></LabelledValue>
         <LabelledValue label='Hostname'><p>{dkimHostname}</p></LabelledValue>
         <LabelledValue label='Value'><p>{dkimValue}</p></LabelledValue>

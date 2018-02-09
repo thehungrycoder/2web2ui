@@ -1,0 +1,631 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VerifyEmail component should disable the send button while sending 1`] = `
+<Modal>
+  <Panel
+    accent={true}
+    actions={
+      Array [
+        Object {
+          "content": "Close",
+          "onClick": undefined,
+        },
+      ]
+    }
+    sectioned={true}
+    title="Verify through Email"
+  >
+    <Panel.Section>
+      <p>
+        Start sending email from this domain by sending a verification email to one of the addresses below.
+      </p>
+      <Grid>
+        <Grid.Column
+          xs={6}
+        >
+          <p>
+            <strong>
+              postmaster@xyz.com
+            </strong>
+          </p>
+        </Grid.Column>
+        <Grid.Column
+          xs={6}
+        >
+          <div>
+             
+            <Button
+              disabled={true}
+              onClick={[Function]}
+              plain={true}
+              size="default"
+            >
+              Sending Email...
+            </Button>
+             
+          </div>
+        </Grid.Column>
+      </Grid>
+      <Grid>
+        <Grid.Column
+          xs={6}
+        >
+          <p>
+            <strong>
+              abuse@xyz.com
+            </strong>
+          </p>
+        </Grid.Column>
+        <Grid.Column
+          xs={6}
+        >
+          <div>
+            <Button
+              disabled={true}
+              onClick={[Function]}
+              plain={true}
+              size="default"
+            >
+              Sending Email...
+            </Button>
+          </div>
+        </Grid.Column>
+      </Grid>
+    </Panel.Section>
+  </Panel>
+</Modal>
+`;
+
+exports[`VerifyEmail component should error if custom mailbox field is invalid 1`] = `
+<Modal>
+  <Panel
+    accent={true}
+    actions={
+      Array [
+        Object {
+          "content": "Close",
+          "onClick": undefined,
+        },
+      ]
+    }
+    sectioned={true}
+    title="Verify through Email"
+  >
+    <Panel.Section>
+      <p>
+        Start sending email from this domain by sending a verification email to any mailbox on your domain using the form below.
+      </p>
+      <Grid>
+        <Grid.Column
+          xs={6}
+        >
+          <div>
+            <TextField
+              connectRight={
+                <strong
+                  className={undefined}
+                >
+                  @xyz.com
+                </strong>
+              }
+              error="Required"
+              id="localPart"
+              onBlur={[Function]}
+              onChange={[Function]}
+              required={false}
+              resize="both"
+              type="text"
+              value=""
+            />
+          </div>
+        </Grid.Column>
+        <Grid.Column
+          xs={6}
+        >
+          <div>
+            <Button
+              onClick={[Function]}
+              plain={true}
+              size="default"
+            >
+              Send Email
+            </Button>
+          </div>
+        </Grid.Column>
+      </Grid>
+    </Panel.Section>
+  </Panel>
+</Modal>
+`;
+
+exports[`VerifyEmail component should render error message 1`] = `
+<Modal>
+  <Panel
+    accent={true}
+    actions={
+      Array [
+        Object {
+          "content": "Close",
+          "onClick": undefined,
+        },
+      ]
+    }
+    sectioned={true}
+    title="Verify through Email"
+  >
+    <Panel.Section>
+      <p>
+        Start sending email from this domain by sending a verification email to one of the addresses below.
+      </p>
+      <Grid>
+        <Grid.Column
+          xs={6}
+        >
+          <p>
+            <strong>
+              postmaster@xyz.com
+            </strong>
+          </p>
+        </Grid.Column>
+        <Grid.Column
+          xs={6}
+        >
+          <div>
+             
+            <Button
+              onClick={[Function]}
+              plain={true}
+              size="default"
+            >
+              Send Email
+            </Button>
+             
+          </div>
+        </Grid.Column>
+      </Grid>
+      <Grid>
+        <Grid.Column
+          xs={6}
+        >
+          <p>
+            <strong>
+              abuse@xyz.com
+            </strong>
+          </p>
+        </Grid.Column>
+        <Grid.Column
+          xs={6}
+        >
+          <div>
+            <Button
+              onClick={[Function]}
+              plain={true}
+              size="default"
+            >
+              Send Email
+            </Button>
+          </div>
+        </Grid.Column>
+      </Grid>
+    </Panel.Section>
+  </Panel>
+</Modal>
+`;
+
+exports[`VerifyEmail component should render success message 1`] = `
+<Modal>
+  <Panel
+    accent={true}
+    actions={
+      Array [
+        Object {
+          "content": "Close",
+          "onClick": undefined,
+        },
+      ]
+    }
+    sectioned={true}
+    title="Verify through Email"
+  >
+    <Panel.Section>
+      <p>
+        Start sending email from this domain by sending a verification email to one of the addresses below.
+      </p>
+      <Grid>
+        <Grid.Column
+          xs={6}
+        >
+          <p>
+            <strong>
+              postmaster@xyz.com
+            </strong>
+          </p>
+        </Grid.Column>
+        <Grid.Column
+          xs={6}
+        >
+          <div>
+             
+            <Button
+              onClick={[Function]}
+              plain={true}
+              size="default"
+            >
+              Send Email
+            </Button>
+             
+          </div>
+        </Grid.Column>
+      </Grid>
+      <Grid>
+        <Grid.Column
+          xs={6}
+        >
+          <p>
+            <strong>
+              abuse@xyz.com
+            </strong>
+          </p>
+        </Grid.Column>
+        <Grid.Column
+          xs={6}
+        >
+          <div>
+            <Button
+              onClick={[Function]}
+              plain={true}
+              size="default"
+            >
+              Send Email
+            </Button>
+          </div>
+        </Grid.Column>
+      </Grid>
+    </Panel.Section>
+  </Panel>
+</Modal>
+`;
+
+exports[`VerifyEmail component should render with mailbox verification 1`] = `
+<Modal>
+  <Panel
+    accent={true}
+    actions={
+      Array [
+        Object {
+          "content": "Close",
+          "onClick": undefined,
+        },
+      ]
+    }
+    sectioned={true}
+    title="Verify through Email"
+  >
+    <Panel.Section>
+      <p>
+        Start sending email from this domain by sending a verification email to any mailbox on your domain using the form below.
+      </p>
+      <Grid>
+        <Grid.Column
+          xs={6}
+        >
+          <div>
+            <TextField
+              connectRight={
+                <strong
+                  className={undefined}
+                >
+                  @xyz.com
+                </strong>
+              }
+              id="localPart"
+              onBlur={[Function]}
+              onChange={[Function]}
+              required={false}
+              resize="both"
+              type="text"
+              value=""
+            />
+          </div>
+        </Grid.Column>
+        <Grid.Column
+          xs={6}
+        >
+          <div>
+            <Button
+              onClick={[Function]}
+              plain={true}
+              size="default"
+            >
+              Send Email
+            </Button>
+          </div>
+        </Grid.Column>
+      </Grid>
+    </Panel.Section>
+  </Panel>
+</Modal>
+`;
+
+exports[`VerifyEmail component should render with postmaster and abuse email verification 1`] = `
+<Modal>
+  <Panel
+    accent={true}
+    actions={
+      Array [
+        Object {
+          "content": "Close",
+          "onClick": undefined,
+        },
+      ]
+    }
+    sectioned={true}
+    title="Verify through Email"
+  >
+    <Panel.Section>
+      <p>
+        Start sending email from this domain by sending a verification email to one of the addresses below.
+      </p>
+      <Grid>
+        <Grid.Column
+          xs={6}
+        >
+          <p>
+            <strong>
+              postmaster@xyz.com
+            </strong>
+          </p>
+        </Grid.Column>
+        <Grid.Column
+          xs={6}
+        >
+          <div>
+             
+            <Button
+              onClick={[Function]}
+              plain={true}
+              size="default"
+            >
+              Send Email
+            </Button>
+             
+          </div>
+        </Grid.Column>
+      </Grid>
+      <Grid>
+        <Grid.Column
+          xs={6}
+        >
+          <p>
+            <strong>
+              abuse@xyz.com
+            </strong>
+          </p>
+        </Grid.Column>
+        <Grid.Column
+          xs={6}
+        >
+          <div>
+            <Button
+              onClick={[Function]}
+              plain={true}
+              size="default"
+            >
+              Send Email
+            </Button>
+          </div>
+        </Grid.Column>
+      </Grid>
+    </Panel.Section>
+  </Panel>
+</Modal>
+`;
+
+exports[`VerifyEmail component should send abuse-at email 1`] = `
+<Modal>
+  <Panel
+    accent={true}
+    actions={
+      Array [
+        Object {
+          "content": "Close",
+          "onClick": undefined,
+        },
+      ]
+    }
+    sectioned={true}
+    title="Verify through Email"
+  >
+    <Panel.Section>
+      <p>
+        Start sending email from this domain by sending a verification email to one of the addresses below.
+      </p>
+      <Grid>
+        <Grid.Column
+          xs={6}
+        >
+          <p>
+            <strong>
+              postmaster@xyz.com
+            </strong>
+          </p>
+        </Grid.Column>
+        <Grid.Column
+          xs={6}
+        >
+          <div>
+             
+            <Button
+              onClick={[Function]}
+              plain={true}
+              size="default"
+            >
+              Send Email
+            </Button>
+             
+          </div>
+        </Grid.Column>
+      </Grid>
+      <Grid>
+        <Grid.Column
+          xs={6}
+        >
+          <p>
+            <strong>
+              abuse@xyz.com
+            </strong>
+          </p>
+        </Grid.Column>
+        <Grid.Column
+          xs={6}
+        >
+          <div>
+            <Button
+              onClick={[Function]}
+              plain={true}
+              size="default"
+            >
+              Send Email
+            </Button>
+          </div>
+        </Grid.Column>
+      </Grid>
+    </Panel.Section>
+  </Panel>
+</Modal>
+`;
+
+exports[`VerifyEmail component should send custom mailbox email 1`] = `
+<Modal>
+  <Panel
+    accent={true}
+    actions={
+      Array [
+        Object {
+          "content": "Close",
+          "onClick": undefined,
+        },
+      ]
+    }
+    sectioned={true}
+    title="Verify through Email"
+  >
+    <Panel.Section>
+      <p>
+        Start sending email from this domain by sending a verification email to any mailbox on your domain using the form below.
+      </p>
+      <Grid>
+        <Grid.Column
+          xs={6}
+        >
+          <div>
+            <TextField
+              connectRight={
+                <strong
+                  className={undefined}
+                >
+                  @xyz.com
+                </strong>
+              }
+              id="localPart"
+              onBlur={[Function]}
+              onChange={[Function]}
+              required={false}
+              resize="both"
+              type="text"
+              value="krombopulos.michael"
+            />
+          </div>
+        </Grid.Column>
+        <Grid.Column
+          xs={6}
+        >
+          <div>
+            <Button
+              onClick={[Function]}
+              plain={true}
+              size="default"
+            >
+              Send Email
+            </Button>
+          </div>
+        </Grid.Column>
+      </Grid>
+    </Panel.Section>
+  </Panel>
+</Modal>
+`;
+
+exports[`VerifyEmail component should send postmaster-at email 1`] = `
+<Modal>
+  <Panel
+    accent={true}
+    actions={
+      Array [
+        Object {
+          "content": "Close",
+          "onClick": undefined,
+        },
+      ]
+    }
+    sectioned={true}
+    title="Verify through Email"
+  >
+    <Panel.Section>
+      <p>
+        Start sending email from this domain by sending a verification email to one of the addresses below.
+      </p>
+      <Grid>
+        <Grid.Column
+          xs={6}
+        >
+          <p>
+            <strong>
+              postmaster@xyz.com
+            </strong>
+          </p>
+        </Grid.Column>
+        <Grid.Column
+          xs={6}
+        >
+          <div>
+             
+            <Button
+              onClick={[Function]}
+              plain={true}
+              size="default"
+            >
+              Send Email
+            </Button>
+             
+          </div>
+        </Grid.Column>
+      </Grid>
+      <Grid>
+        <Grid.Column
+          xs={6}
+        >
+          <p>
+            <strong>
+              abuse@xyz.com
+            </strong>
+          </p>
+        </Grid.Column>
+        <Grid.Column
+          xs={6}
+        >
+          <div>
+            <Button
+              onClick={[Function]}
+              plain={true}
+              size="default"
+            >
+              Send Email
+            </Button>
+          </div>
+        </Grid.Column>
+      </Grid>
+    </Panel.Section>
+  </Panel>
+</Modal>
+`;

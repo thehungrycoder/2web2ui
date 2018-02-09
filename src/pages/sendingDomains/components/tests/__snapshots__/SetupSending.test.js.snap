@@ -5,6 +5,7 @@ Array [
   Object {
     "content": "Verifying...",
     "disabled": true,
+    "id": "verify-dkim",
     "onClick": [Function],
   },
 ]
@@ -29,6 +30,7 @@ exports[`Component: SetupSending renders correctly for unverified DKIM and inval
           Object {
             "content": "Verify TXT Record",
             "disabled": false,
+            "id": "verify-dkim",
             "onClick": [Function],
           },
         ]
@@ -76,10 +78,12 @@ exports[`Component: SetupSending renders correctly for unverified DKIM and inval
       </p>
       <p>
         We recommend DNS verification, but if you don't have DNS access, you can 
-        <a>
-          set this domain up for sending via email
-        </a>
-        .
+        <UnstyledLink
+          id="verify-with-email"
+          onClick={[Function]}
+        >
+           set this domain up for sending via email.
+        </UnstyledLink>
       </p>
     </React.Fragment>
   </Left>
@@ -90,6 +94,7 @@ exports[`Component: SetupSending renders correctly for unverified DKIM and inval
           Object {
             "content": "Verify TXT Record",
             "disabled": false,
+            "id": "verify-dkim",
             "onClick": [Function],
           },
         ]
@@ -165,6 +170,7 @@ exports[`Component: SetupSending renders correctly when ownership is valid and D
           Object {
             "content": "Verify TXT Record",
             "disabled": false,
+            "id": "verify-dkim",
             "onClick": [Function],
           },
         ]

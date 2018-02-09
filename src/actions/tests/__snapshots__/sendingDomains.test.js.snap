@@ -101,6 +101,22 @@ Object {
 }
 `;
 
+exports[`Action Creator: Sending Domains Verify should dispatch verify abuse action 1`] = `
+Object {
+  "meta": Object {
+    "data": Object {
+      "abuse_at_verify": true,
+    },
+    "headers": Object {
+      "x-msys-subaccount": 101,
+    },
+    "method": "POST",
+    "url": "/sending-domains/sub.com/verify",
+  },
+  "type": "VERIFY_SENDING_DOMAIN_ABUSE_AT",
+}
+`;
+
 exports[`Action Creator: Sending Domains Verify should dispatch verify cname action 1`] = `
 Object {
   "meta": Object {
@@ -128,5 +144,38 @@ Object {
     "url": "/sending-domains/sub.com/verify",
   },
   "type": "VERIFY_SENDING_DOMAIN_DKIM",
+}
+`;
+
+exports[`Action Creator: Sending Domains Verify should dispatch verify mailbox action 1`] = `
+Object {
+  "meta": Object {
+    "data": Object {
+      "verification_mailbox": "example@test.com",
+      "verification_mailbox_verify": true,
+    },
+    "headers": Object {
+      "x-msys-subaccount": 101,
+    },
+    "method": "POST",
+    "url": "/sending-domains/sub.com/verify",
+  },
+  "type": "VERIFY_SENDING_DOMAIN_VERIFICATION_MAILBOX",
+}
+`;
+
+exports[`Action Creator: Sending Domains Verify should dispatch verify postmaster action 1`] = `
+Object {
+  "meta": Object {
+    "data": Object {
+      "postmaster_at_verify": true,
+    },
+    "headers": Object {
+      "x-msys-subaccount": 101,
+    },
+    "method": "POST",
+    "url": "/sending-domains/sub.com/verify",
+  },
+  "type": "VERIFY_SENDING_DOMAIN_POSTMASTER_AT",
 }
 `;

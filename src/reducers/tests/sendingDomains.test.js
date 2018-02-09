@@ -34,6 +34,39 @@ const VERIFY_TEST_CASES = {
   'verify dkim fail': {
     payload: { errors: [ { message: 'Some error occurred' }]},
     type: 'VERIFY_SENDING_DOMAIN_DKIM_FAIL'
+  },
+  'verify with abuse pending': {
+    type: 'VERIFY_SENDING_DOMAIN_ABUSE_AT_PENDING'
+  },
+  'verify with abuse': {
+    payload: { abuse_at_status: 'valid' },
+    type: 'VERIFY_SENDING_DOMAIN_ABUSE_AT_SUCCESS'
+  },
+  'verify with abuse fail': {
+    payload: { errors: [ { message: 'Some error occurred' }]},
+    type: 'VERIFY_SENDING_DOMAIN_ABUSE_AT_FAIL'
+  },
+  'verify with mailbox pending': {
+    type: 'VERIFY_SENDING_DOMAIN_VERIFICATION_MAILBOX_PENDING'
+  },
+  'verify with mailbox': {
+    payload: { verification_mailbox_status: 'valid' },
+    type: 'VERIFY_SENDING_DOMAIN_VERIFICATION_MAILBOX_SUCCESS'
+  },
+  'verify with mailbox fail': {
+    payload: { errors: [ { message: 'Some error occurred' }]},
+    type: 'VERIFY_SENDING_DOMAIN_VERIFICATION_MAILBOX_FAIL'
+  },
+  'verify with postmaster pending': {
+    type: 'VERIFY_SENDING_DOMAIN_POSTMASTER_AT_PENDING'
+  },
+  'verify with postmaster': {
+    payload: { postmaster_at_status: 'valid' },
+    type: 'VERIFY_SENDING_DOMAIN_POSTMASTER_AT_SUCCESS'
+  },
+  'verify with postmaster fail': {
+    payload: { errors: [ { message: 'Some error occurred' }]},
+    type: 'VERIFY_SENDING_DOMAIN_POSTMASTER_AT_FAIL'
   }
 };
 

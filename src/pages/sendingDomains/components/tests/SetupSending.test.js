@@ -60,11 +60,23 @@ describe('Component: SetupSending', () => {
     expect(wrapper.find('Panel').props().actions).toMatchSnapshot();
   });
 
-  it('should call updateTrackingDomain on submit', () => {
+  it('should call verifyDkim on click', () => {
     const wrapper = mount(<SetupSending {...props}/>);
-
-    wrapper.find('Button').simulate('click');
+    wrapper.find('button#verify-dkim').simulate('click');
     expect(props.verifyDkim).toHaveBeenCalledTimes(1);
+  });
+
+  it('should open verify with email modal', () => {
+    const wrapper = shallow(<SetupSending {...props}/>);
+    wrapper.find('#verify-with-email').simulate('click');
+    expect(wrapper.state('open')).toEqual(true);
+  });
+
+  it('should close verify by email modal', () => {
+    const wrapper = shallow(<SetupSending {...props}/>);
+    wrapper.setState({ open: true }); // open modal
+    wrapper.find('Connect(VerifyEmail)').simulate('cancel');
+    expect(wrapper.state('open')).toEqual(false);
   });
 
   describe('verifyDomain', () => {
