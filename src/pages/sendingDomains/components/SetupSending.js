@@ -45,7 +45,8 @@ export class SetupSending extends Component {
   }
 
   renderText() {
-    const readyFor = resolveReadyFor(this.props.domain.status);
+    const { domain } = this.props;
+    const readyFor = resolveReadyFor(domain.status);
     let content = null;
 
     if (!readyFor.sending && !readyFor.dkim) {
@@ -61,7 +62,11 @@ export class SetupSending extends Component {
               can <UnstyledLink onClick={this.toggleVerifyViaEmailModal}> set this domain up for
               sending via email.</UnstyledLink>
             </p>
-            {this.renderVerifyViaEmailModal()}
+            <VerifyEmail
+              id={domain.id}
+              open={this.state.open}
+              onCancel={this.toggleVerifyViaEmailModal}
+            />
           </React.Fragment>
         );
       }
@@ -74,15 +79,8 @@ export class SetupSending extends Component {
     return content;
   }
 
-  getVerifyAction() {
-    const { verifyDkimLoading } = this.props;
-    const buttonText = verifyDkimLoading ? 'Verifying...' : 'Verify TXT Record';
-
-    return {
-      content: buttonText,
-      onClick: this.verifyDomain,
-      disabled: verifyDkimLoading
-    };
+  toggleVerifyViaEmailModal = () => {
+    this.setState({ open: !this.state.open });
   }
 
   toggleVerifyViaEmailModal = () => {
@@ -93,21 +91,8 @@ export class SetupSending extends Component {
     });
   }
 
-  renderVerifyViaEmailModal = () => {
-    const { open } = this.state;
-    const { domain } = this.props;
-
-    if (!domain) {
-      return null;
-    }
-
-    return (
-      <VerifyEmail id={domain.id} open={open} onCancel={this.toggleVerifyViaEmailModal}/>
-    );
-  }
-
   renderTxtRecordPanel() {
-    const { domain: { dkimHostname, dkimValue, status }} = this.props;
+    const { domain: { dkimHostname, dkimValue, status }, verifyDkimLoading } = this.props;
     const readyFor = resolveReadyFor(status);
 
     if (readyFor.sending && readyFor.dkim) {
@@ -119,7 +104,16 @@ export class SetupSending extends Component {
     }
 
     return (
-      <Panel title='DNS Settings' sectioned actions={[this.getVerifyAction()]}>
+      <Panel
+        actions={[{
+          id: 'verify-dkim',
+          content: verifyDkimLoading ? 'Verifying...' : 'Verify TXT Record',
+          onClick: this.verifyDomain,
+          disabled: verifyDkimLoading
+        }]}
+        sectioned
+        title="DNS Settings"
+      >
         <LabelledValue label='Type'><p>TXT</p></LabelledValue>
         <LabelledValue label='Hostname'><p>{dkimHostname}</p></LabelledValue>
         <LabelledValue label='Value'><p>{dkimValue}</p></LabelledValue>

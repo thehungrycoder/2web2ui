@@ -233,7 +233,7 @@ exports[`VerifyEmail component should render with mailbox verification 1`] = `
         <Grid.Column
           xs={6}
         >
-          <p>
+          <div>
             <TextField
               connectRight={
                 <strong
@@ -250,7 +250,7 @@ exports[`VerifyEmail component should render with mailbox verification 1`] = `
               type="text"
               value=""
             />
-          </p>
+          </div>
         </Grid.Column>
         <Grid.Column
           xs={6}
@@ -442,7 +442,7 @@ exports[`VerifyEmail component should send custom mailbox email 1`] = `
         <Grid.Column
           xs={6}
         >
-          <p>
+          <div>
             <TextField
               connectRight={
                 <strong
@@ -459,7 +459,7 @@ exports[`VerifyEmail component should send custom mailbox email 1`] = `
               type="text"
               value="krombopulos.michael"
             />
-          </p>
+          </div>
         </Grid.Column>
         <Grid.Column
           xs={6}
