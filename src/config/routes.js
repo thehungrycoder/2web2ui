@@ -25,12 +25,10 @@ import {
 
 import {
   hasGrants,
-  notOnPlan,
   composeConditions
 } from 'src/helpers/conditions';
-
+import { notEnterprise } from 'src/helpers/conditions/account';
 import App from 'src/components/layout/App';
-import config from 'src/config';
 
 import { DEFAULT_REDIRECT_ROUTE } from 'src/constants';
 
@@ -113,10 +111,10 @@ const routes = [
     path: '/dashboard',
     component: DashboardPage,
     layout: App,
-    condition: composeConditions(hasGrants('api_keys/manage', 'templates/modify', 'sending_domains/manage'), () => config.splashPage === '/dashboard') // want to hide if not a splash page https://jira.int.messagesystems.com/browse/FAD-6046
-    // TODO: implement some kind of blockedRoutes check that runs on every route so we can
-    // hide routes based on config, account/user settings, etc. without having to mess
-    // around with grants in the web UI keys
+    condition: composeConditions(
+      hasGrants('api_keys/manage', 'templates/modify', 'sending_domains/manage'),
+      notEnterprise()
+    )
   },
   {
     path: '/reports',
@@ -341,31 +339,31 @@ const routes = [
   {
     path: '/account/billing',
     component: billing.SummaryPage,
-    condition: composeConditions(hasGrants('account/manage'), notOnPlan('ent1')),
+    condition: composeConditions(hasGrants('account/manage'), notEnterprise()),
     layout: App
   },
   {
     path: '/account/billing/plan',
     component: billing.ChangePlanPage,
-    condition: composeConditions(hasGrants('account/manage'), notOnPlan('ent1')),
+    condition: composeConditions(hasGrants('account/manage'), notEnterprise()),
     layout: App
   },
   {
     path: '/account/ip-pools',
     component: ipPools.ListPage,
-    condition: hasGrants('ip_pools/manage'),
+    condition: composeConditions(hasGrants('ip_pools/manage'), notEnterprise()),
     layout: App
   },
   {
     path: '/account/ip-pools/create',
     component: ipPools.CreatePage,
-    condition: hasGrants('ip_pools/manage'),
+    condition: composeConditions(hasGrants('ip_pools/manage'), notEnterprise()),
     layout: App
   },
   {
     path: '/account/ip-pools/edit/:id',
     component: ipPools.EditPage,
-    condition: hasGrants('ip_pools/manage'),
+    condition: composeConditions(hasGrants('ip_pools/manage'), notEnterprise()),
     layout: App
   }
 ];
