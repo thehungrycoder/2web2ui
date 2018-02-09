@@ -89,7 +89,7 @@ describe('Action Creator: Suppressions', () => {
       expect(action).toMatchSnapshot();
     });
 
-    it('with typo in type field', () => {
+    it('transform non-standard type field values', () => {
       const action = suppressions.createOrUpdateSuppressions([
         { recipient: 'example@test.com', type: 'non_marketing' },
         { recipient: 'example@test.com', type: 'marketing' }

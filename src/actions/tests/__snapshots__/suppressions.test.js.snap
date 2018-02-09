@@ -1,5 +1,30 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Action Creator: Suppressions createOrUpdateSuppressions transform non-standard type field values 1`] = `
+Object {
+  "meta": Object {
+    "data": Object {
+      "recipients": Array [
+        Object {
+          "description": undefined,
+          "recipient": "example@test.com",
+          "type": "non_transactional",
+        },
+        Object {
+          "description": undefined,
+          "recipient": "example@test.com",
+          "type": "transactional",
+        },
+      ],
+    },
+    "headers": Object {},
+    "method": "PUT",
+    "url": "/suppression-list",
+  },
+  "type": "CREATE_OR_UPDATE_SUPPRESSIONS",
+}
+`;
+
 exports[`Action Creator: Suppressions createOrUpdateSuppressions with a subaccount 1`] = `
 Object {
   "meta": Object {
@@ -43,31 +68,6 @@ Object {
 `;
 
 exports[`Action Creator: Suppressions createOrUpdateSuppressions with deprecated non_transactional and transactional field 1`] = `
-Object {
-  "meta": Object {
-    "data": Object {
-      "recipients": Array [
-        Object {
-          "description": undefined,
-          "recipient": "example@test.com",
-          "type": "non_transactional",
-        },
-        Object {
-          "description": undefined,
-          "recipient": "example@test.com",
-          "type": "transactional",
-        },
-      ],
-    },
-    "headers": Object {},
-    "method": "PUT",
-    "url": "/suppression-list",
-  },
-  "type": "CREATE_OR_UPDATE_SUPPRESSIONS",
-}
-`;
-
-exports[`Action Creator: Suppressions createOrUpdateSuppressions with typo in type field 1`] = `
 Object {
   "meta": Object {
     "data": Object {
