@@ -5,7 +5,7 @@ import { selectInitialSubaccountValue } from 'src/selectors/webhooks';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
 import { withRouter } from 'react-router-dom';
 import { Button, Panel } from '@sparkpost/matchbox';
-import { NameField, TargetField, EventsRadioGroup, AuthDropDown, BasicAuthFields, OAuth2Fields } from './Fields';
+import { NameField, TargetField, EventsRadioGroup, AuthDropDown, BasicAuthFields, OAuth2Fields, ActiveField } from './Fields';
 import SubaccountSection from './SubaccountSection';
 import formatEditValues from '../helpers/formatEditValues';
 import buildCheckBoxes from '../helpers/buildCheckBoxes';
@@ -43,6 +43,7 @@ export const WebhookForm = ({
         <AuthDropDown />
         { auth && <AuthFields /> }
       </Panel.Section>
+      { !newWebhook && <Panel.Section><ActiveField /></Panel.Section>}
       <Panel.Section>
         <Button submit primary disabled={disabled}>{submitText}</Button>
       </Panel.Section>

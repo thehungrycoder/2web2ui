@@ -11,18 +11,22 @@ describe('Page: Webhook List', () => {
         id: 'id',
         name: 'my webby hook',
         target: 'go here',
-        subaccount_id: 0
+        subaccount_id: 0,
+        last_successful: '2018-02-08T15:20:25Z',
+        last_failure: '2018-01-08T15:20:25Z'
       },
       {
         id: 'id-2',
         name: 'my webby hooki 2',
         target: 'go there',
-        subaccount_id: 101
+        subaccount_id: 101,
+        last_successful: '2018-02-08T15:20:25Z'
       },
       {
         id: 'id-3',
         name: 'my webby hooki 3',
-        target: 'go nowhere'
+        target: 'go nowhere',
+        last_failure: '2018-01-08T15:20:25Z'
       }
     ],
     loading: false,

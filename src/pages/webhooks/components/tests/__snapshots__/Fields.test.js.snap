@@ -1,5 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`should render ActiveField 1`] = `
+<Field
+  component={[Function]}
+  helpText="An inactive webhook will not transmit any data."
+  label="Active"
+  name="active"
+/>
+`;
+
 exports[`should render AuthDropDown 1`] = `
 <Field
   component={[Function]}

@@ -7,7 +7,21 @@ Array [
     "sortKey": "name",
   },
   "Target",
-  "Events For",
+  Object {
+    "label": "Last Success",
+    "sortKey": "last_successful",
+    "width": "18%",
+  },
+  Object {
+    "label": "Last Failure",
+    "sortKey": "last_failure",
+    "width": "18%",
+  },
+  Object {
+    "label": "Events For",
+    "sortKey": "subaccount_id",
+    "width": "18%",
+  },
 ]
 `;
 
@@ -21,6 +35,8 @@ Array [
       my webby hook
     </Link>,
     "go here",
+    "Feb 8 2018, 10:20am",
+    "Jan 8 2018, 10:20am",
     <SubaccountTag
       all={false}
       id={0}
@@ -37,6 +53,8 @@ Array [
       my webby hooki 2
     </Link>,
     "go there",
+    "Feb 8 2018, 10:20am",
+    null,
     <SubaccountTag
       all={false}
       id={101}
@@ -53,6 +71,8 @@ Array [
       my webby hooki 3
     </Link>,
     "go nowhere",
+    null,
+    "Jan 8 2018, 10:20am",
     <SubaccountTag
       all={false}
       id={null}
@@ -128,6 +148,16 @@ exports[`Page: Webhook List should render happy path 1`] = `
           "sortKey": "name",
         },
         "Target",
+        Object {
+          "label": "Last Success",
+          "sortKey": "last_successful",
+          "width": "18%",
+        },
+        Object {
+          "label": "Last Failure",
+          "sortKey": "last_failure",
+          "width": "18%",
+        },
       ]
     }
     defaultSortColumn="name"
@@ -147,18 +177,22 @@ exports[`Page: Webhook List should render happy path 1`] = `
       Array [
         Object {
           "id": "id",
+          "last_failure": "2018-01-08T15:20:25Z",
+          "last_successful": "2018-02-08T15:20:25Z",
           "name": "my webby hook",
           "subaccount_id": 0,
           "target": "go here",
         },
         Object {
           "id": "id-2",
+          "last_successful": "2018-02-08T15:20:25Z",
           "name": "my webby hooki 2",
           "subaccount_id": 101,
           "target": "go there",
         },
         Object {
           "id": "id-3",
+          "last_failure": "2018-01-08T15:20:25Z",
           "name": "my webby hooki 3",
           "target": "go nowhere",
         },
@@ -179,5 +213,7 @@ Array [
     my webby hook
   </Link>,
   "go here",
+  "Feb 8 2018, 10:20am",
+  "Jan 8 2018, 10:20am",
 ]
 `;
