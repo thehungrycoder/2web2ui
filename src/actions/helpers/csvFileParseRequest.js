@@ -1,19 +1,18 @@
-import _ from 'lodash';
 import Papa from 'papaparse';
 
 export const hasData = ({ data }) => {
   if (data.length === 0) {
-    return 'No data was found.';
+    return 'No data was found';
   }
 };
 
 export const hasField = (...expectedFields) => ({ meta: { fields }}) => {
   if (!expectedFields.some((field) => fields.includes(field))) {
-    return `Missing required field, ${expectedFields[0]}.`;
+    return `Missing required field: ${expectedFields[0]}`;
   }
 };
 
-export default ({ meta: { file, validate }, type, parser = Papa }) => async(dispatch) => {
+export default ({ meta: { file, validate = []}, type, parser = Papa }) => async(dispatch) => {
   const types = {
     PENDING: `${type}_PENDING`,
     SUCCESS: `${type}_SUCCESS`,
@@ -24,10 +23,8 @@ export default ({ meta: { file, validate }, type, parser = Papa }) => async(disp
 
   return await new Promise((resolve, reject) => parser.parse(file, {
     complete: ({ data, errors, meta }) => {
-      let error;
-
       if (errors.length > 0) {
-        error = new Error('An error occurred while parsing your file.');
+        const error = new Error('An error occurred while parsing your file.');
 
         dispatch({
           type: types.FAIL,
@@ -41,13 +38,13 @@ export default ({ meta: { file, validate }, type, parser = Papa }) => async(disp
         return;
       }
 
-      // Return the first validation error message
-      const message = _.find(validate, (v) => v({ data, meta }));
+      // Return validation error messages as array
+      const validationErrors = validate.map((v) => v({ data, meta })).filter((message) => !!message);
 
-      if (message) {
-        error = new Error(message);
+      if (validationErrors.length) {
+        const error = new Error(validationErrors.join(' / '));
 
-        dispatch({ type: types.FAIL, payload: { message }});
+        dispatch({ type: types.FAIL, payload: { message: error.message }});
         reject(error);
 
         return;

@@ -7,7 +7,7 @@ Array [
   },
   Object {
     "payload": Object {
-      "message": [Function],
+      "message": "Oh no! / You should not have.",
     },
     "type": "PARSE_CSV_FAIL",
   },
@@ -59,7 +59,7 @@ Array [
   },
   Object {
     "payload": Object {
-      "message": [Function],
+      "message": "No data",
     },
     "type": "PARSE_CSV_FAIL",
   },
