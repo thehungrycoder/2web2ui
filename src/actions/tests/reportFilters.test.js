@@ -16,14 +16,20 @@ jest.mock('src/actions/sendingDomains');
 
 describe('Action Creator: Report Filters', () => {
   let dispatchMock;
+  let mockState;
+  let getStateMock;
 
   beforeEach(() => {
+    mockState = {
+      metrics: {}
+    };
     dispatchMock = jest.fn((a) => Promise.resolve(a));
+    getStateMock = jest.fn(() => mockState);
   });
 
   it('should call all requests on refresh', async() => {
-    const thunk = reportFilters.refreshTypeaheadCache({ foo: 'bar' });
-    await thunk(dispatchMock);
+    const thunk = reportFilters.initTypeaheadCache({ foo: 'bar' });
+    await thunk(dispatchMock, getStateMock);
     expect(metrics.fetchMetricsDomains).toHaveBeenCalledTimes(1);
     expect(metrics.fetchMetricsCampaigns).toHaveBeenCalledTimes(1);
     expect(metrics.fetchMetricsSendingIps).toHaveBeenCalledTimes(1);
@@ -31,11 +37,23 @@ describe('Action Creator: Report Filters', () => {
     expect(listTemplates).toHaveBeenCalledTimes(1);
     expect(listSubaccounts).toHaveBeenCalledTimes(1);
     expect(listSendingDomains).toHaveBeenCalledTimes(1);
-
   });
 
-  it('should call the metrics lists on refresh lists by time', async() => {
-    const thunk = reportFilters.refreshListsByTime({ foo: 'bar' });
+  it('should make no calls if the cache is already initialized', async() => {
+    const thunk = reportFilters.initTypeaheadCache({ foo: 'bar' });
+    mockState.metrics.domains = [];
+    await thunk(dispatchMock, getStateMock);
+    expect(metrics.fetchMetricsDomains).not.toHaveBeenCalled();
+    expect(metrics.fetchMetricsCampaigns).not.toHaveBeenCalled();
+    expect(metrics.fetchMetricsSendingIps).not.toHaveBeenCalled();
+    expect(metrics.fetchMetricsIpPools).not.toHaveBeenCalled();
+    expect(listTemplates).not.toHaveBeenCalled();
+    expect(listSubaccounts).not.toHaveBeenCalled();
+    expect(listSendingDomains).not.toHaveBeenCalled();
+  });
+
+  it('should refresh the metrics lists', async() => {
+    const thunk = reportFilters.refreshTypeaheadCache({ foo: 'bar' });
     await thunk(dispatchMock);
     expect(metrics.fetchMetricsDomains).toHaveBeenCalledTimes(1);
     expect(metrics.fetchMetricsCampaigns).toHaveBeenCalledTimes(1);

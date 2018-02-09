@@ -14,7 +14,7 @@ describe('AcceptedPage: ', () => {
     loading: false,
     aggregates: { count_accepted: 1 },
     refreshAcceptedMetrics: jest.fn(() => Promise.resolve()),
-    refreshTypeaheadCache: jest.fn(() => Promise.resolve()),
+    initTypeaheadCache: jest.fn(() => Promise.resolve()),
     addFilters: jest.fn(),
     showAlert: jest.fn(),
     location: {
@@ -48,7 +48,7 @@ describe('AcceptedPage: ', () => {
     wrapper.instance().componentDidMount();
     expect(props.refreshAcceptedMetrics).toHaveBeenCalled();
     expect(parseSpy).toHaveBeenCalled();
-    expect(props.refreshTypeaheadCache).toHaveBeenCalled();
+    expect(props.initTypeaheadCache).toHaveBeenCalled();
     expect(wrapper).toMatchSnapshot();
   });
 

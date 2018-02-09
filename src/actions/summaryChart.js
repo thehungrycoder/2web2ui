@@ -1,5 +1,5 @@
 import { fetch as fetchMetrics } from 'src/actions/metrics';
-import { refreshTypeaheadCache, refreshReportRange } from 'src/actions/reportFilters';
+import { initTypeaheadCache, refreshReportRange } from 'src/actions/reportFilters';
 import { getQueryFromOptions, getMetricsFromKeys } from 'src/helpers/metrics';
 import { getRelativeDates } from 'src/helpers/date';
 
@@ -22,7 +22,7 @@ export function refresh(updates = {}) {
 
     if (from || to) {
       const params = getQueryFromOptions({ from, to });
-      dispatch(refreshTypeaheadCache(params));
+      dispatch(initTypeaheadCache(params));
     }
 
     // merge in existing state

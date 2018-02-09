@@ -26,7 +26,7 @@ describe('DelayPage: ', () => {
     },
     totalAccepted: 1000,
     loadDelayReasonsByDomain: jest.fn(() => Promise.resolve()),
-    refreshTypeaheadCache: jest.fn(() => Promise.resolve()),
+    initTypeaheadCache: jest.fn(() => Promise.resolve()),
     location: { search: {}},
     loadDelayMetrics: jest.fn(() => Promise.resolve()),
     showAlert: jest.fn(),
@@ -58,7 +58,7 @@ describe('DelayPage: ', () => {
     expect(props.loadDelayMetrics).toHaveBeenCalled();
     expect(props.loadDelayReasonsByDomain).toHaveBeenCalled();
     expect(parseSpy).toHaveBeenCalled();
-    expect(props.refreshTypeaheadCache).toHaveBeenCalled();
+    expect(props.initTypeaheadCache).toHaveBeenCalled();
     expect(props.addFilters).toHaveBeenCalledWith([]);
     expect(wrapper).toMatchSnapshot();
   });
