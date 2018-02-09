@@ -23,7 +23,7 @@ export class EngagementFilters extends Component {
     this.props.addFilters(filters);
     this.props.refreshRelativeRange(range);
     this.props.onLoad();
-    this.props.refreshTypeaheadCache(); // this should wait until after onLoad
+    this.props.initTypeaheadCache(); // this should wait until after onLoad
   }
 
   // This event handler is called on every date range and filter change, however only the next

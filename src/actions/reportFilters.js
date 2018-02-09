@@ -19,8 +19,14 @@ const metricLists = [
   fetchMetricsIpPools
 ];
 
-// TODO: rename initTypeaheadCache
-export function refreshTypeaheadCache(params) {
+/**
+ * Returns a thunk that gets the metrics filter lists to populate cache,
+ * plus templates, subaccounts, and sending domains
+ *
+ * The thunk is a no-op if the cache has already been initialized, i.e.
+ * metrics.domains is an array and not undefined
+ */
+export function initTypeaheadCache(params) {
   return (dispatch, getState) => {
     const { metrics } = getState();
     if (Array.isArray(metrics.domains)) {
@@ -33,7 +39,7 @@ export function refreshTypeaheadCache(params) {
 }
 
 // TODO: rename refreshTypeaheadCache
-export function refreshListsByTime(params) {
+export function refreshTypeaheadCache(params) {
   return (dispatch) => {
     const requests = metricLists.map((list) => dispatch(list(params)));
     return Promise.all(requests);
@@ -46,7 +52,7 @@ export function maybeRefreshTypeaheadCache(dispatch, options, updates = {}) {
 
   if (relativeRange || from || to) {
     const params = getQueryFromOptions({ from: options.from, to: options.to });
-    dispatch(refreshListsByTime(params));
+    dispatch(refreshTypeaheadCache(params));
   }
 }
 

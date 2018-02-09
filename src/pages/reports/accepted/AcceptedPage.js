@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import qs from 'query-string';
 import { refreshAcceptedMetrics } from 'src/actions/acceptedReport';
-import { addFilters, refreshTypeaheadCache } from 'src/actions/reportFilters';
+import { addFilters, initTypeaheadCache } from 'src/actions/reportFilters';
 import { getFilterSearchOptions, parseSearch } from 'src/helpers/reports';
 import { showAlert } from 'src/actions/globalAlert';
 import { Empty, PanelLoading } from 'src/components';
@@ -21,7 +21,7 @@ export class AcceptedPage extends Component {
 
   componentDidMount() {
     this.handleRefresh(this.parseSearch());
-    this.props.refreshTypeaheadCache();
+    this.props.initTypeaheadCache();
   }
 
   parseSearch() {
@@ -108,7 +108,7 @@ const mapStateToProps = ({ reportFilters, acceptedReport }) => ({
 
 const mapDispatchToProps = {
   refreshAcceptedMetrics,
-  refreshTypeaheadCache,
+  initTypeaheadCache,
   addFilters,
   showAlert
 };

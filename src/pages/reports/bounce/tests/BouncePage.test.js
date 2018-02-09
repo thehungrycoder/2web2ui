@@ -31,7 +31,7 @@ describe('BouncePage: ', () => {
     } ],
     refreshBounceChartMetrics: jest.fn((a) => Promise.resolve()),
     refreshBounceTableMetrics: jest.fn((a) => Promise.resolve()),
-    refreshTypeaheadCache: jest.fn((a) => Promise.resolve()),
+    initTypeaheadCache: jest.fn((a) => Promise.resolve()),
     location: {
       search: {}
     },
@@ -56,7 +56,7 @@ describe('BouncePage: ', () => {
     expect(props.refreshBounceChartMetrics).toHaveBeenCalled();
     expect(props.refreshBounceTableMetrics).toHaveBeenCalled();
     expect(spyParseSearch).toHaveBeenCalled();
-    expect(props.refreshTypeaheadCache).toHaveBeenCalled();
+    expect(props.initTypeaheadCache).toHaveBeenCalled();
     expect(props.addFilters).toHaveBeenCalledWith([]);
     expect(wrapper).toMatchSnapshot();
   });

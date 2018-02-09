@@ -14,7 +14,7 @@ const defaultProps = {
   location: { search: '' },
   onLoad: jest.fn(),
   refreshRelativeRange: jest.fn(),
-  refreshTypeaheadCache: jest.fn()
+  initTypeaheadCache: jest.fn()
 };
 
 it('renders filters, hydrates with filters from query string, and requests data', () => {
@@ -32,7 +32,7 @@ it('renders filters, hydrates with filters from query string, and requests data'
     to: time({ year: 2018, month: 1, day: 16 })
   });
   expect(props.onLoad).toHaveBeenCalled();
-  expect(props.refreshTypeaheadCache).toHaveBeenCalled();
+  expect(props.initTypeaheadCache).toHaveBeenCalled();
   expect(wrapper).toMatchSnapshot();
 });
 
