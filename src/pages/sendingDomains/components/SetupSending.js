@@ -59,14 +59,16 @@ export class SetupSending extends Component {
             {content}
             <p>
               We recommend DNS verification, but if you don't have DNS access, you
-              can <UnstyledLink onClick={this.toggleVerifyViaEmailModal}> set this domain up for
-              sending via email.</UnstyledLink>
+              can <UnstyledLink id="verify-with-email" onClick={this.toggleVerifyViaEmailModal}> set
+              this domain up for sending via email.</UnstyledLink>
             </p>
-            <VerifyEmail
-              id={domain.id}
-              open={this.state.open}
-              onCancel={this.toggleVerifyViaEmailModal}
-            />
+            {this.state.open && (
+              <VerifyEmail
+                id={domain.id}
+                open={this.state.open}
+                onCancel={this.toggleVerifyViaEmailModal}
+              />
+            )}
           </React.Fragment>
         );
       }

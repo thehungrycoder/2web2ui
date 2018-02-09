@@ -79,16 +79,12 @@ exports[`Component: SetupSending renders correctly for unverified DKIM and inval
       <p>
         We recommend DNS verification, but if you don't have DNS access, you can 
         <UnstyledLink
+          id="verify-with-email"
           onClick={[Function]}
         >
            set this domain up for sending via email.
         </UnstyledLink>
       </p>
-      <Connect(VerifyEmail)
-        id="xyz.com"
-        onCancel={[Function]}
-        open={false}
-      />
     </React.Fragment>
   </Left>
   <Right>
