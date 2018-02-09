@@ -1,5 +1,5 @@
 import { fetch as fetchMetrics } from 'src/actions/metrics';
-import { initTypeaheadCache, refreshReportRange } from 'src/actions/reportFilters';
+import { refreshReportRange } from 'src/actions/reportFilters';
 import { getQueryFromOptions, getMetricsFromKeys } from 'src/helpers/metrics';
 import { getRelativeDates } from 'src/helpers/date';
 
@@ -15,14 +15,6 @@ export function refresh(updates = {}) {
     // if relativeRange is included, merge in the calculated from/to values
     if (updates.relativeRange) {
       Object.assign(updates, getRelativeDates(updates.relativeRange) || {});
-    }
-
-    // refresh the typeahead cache if the date range has been updated
-    const { from, to } = updates;
-
-    if (from || to) {
-      const params = getQueryFromOptions({ from, to });
-      dispatch(initTypeaheadCache(params));
     }
 
     // merge in existing state

@@ -7,7 +7,7 @@ import _ from 'lodash';
 import { getFilterSearchOptions, parseSearch } from 'src/helpers/reports';
 import { showAlert } from 'src/actions/globalAlert';
 import { addFilters, initTypeaheadCache } from 'src/actions/reportFilters';
-import { loadRejectionMetrics, refreshRejectionTableMetrics } from 'src/actions/rejectionReport';
+import { refreshRejections } from 'src/actions/rejectionReport';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
 import { Page, Panel } from '@sparkpost/matchbox';
 import ShareModal from '../components/ShareModal';
@@ -38,11 +38,8 @@ export class RejectionPage extends Component {
   }
 
   handleRefresh = (options) => {
-    const { showAlert, refreshRejectionTableMetrics, loadRejectionMetrics } = this.props;
-    return Promise.all([
-      loadRejectionMetrics(options),
-      refreshRejectionTableMetrics(options)
-    ])
+    const { showAlert } = this.props;
+    return this.props.refreshRejections(options)
       .then(() => this.updateLink())
       .catch((err) => showAlert({ type: 'error', message: 'Unable to refresh rejection reports.', details: err.message }));
   }
@@ -130,8 +127,7 @@ const mapStateToProps = ({ reportFilters, rejectionReport }) => ({
 
 const mapDispatchToProps = {
   addFilters,
-  loadRejectionMetrics,
-  refreshRejectionTableMetrics,
+  refreshRejections,
   initTypeaheadCache,
   showAlert
 };

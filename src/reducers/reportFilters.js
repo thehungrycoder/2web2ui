@@ -1,9 +1,4 @@
-import { getRelativeDates } from 'src/helpers/date';
-
-const DEFAULT_RANGE = 'day';
 const initialState = {
-  ...getRelativeDates(DEFAULT_RANGE),
-  relativeRange: DEFAULT_RANGE,
   activeList: []
 };
 
