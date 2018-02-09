@@ -72,9 +72,17 @@ describe('Action Creator: Suppressions', () => {
       expect(action).toMatchSnapshot();
     });
 
-    it('with deprecated email field', () => {
+    it('transforms deprecated email to recipient field', () => {
       const action = suppressions.createOrUpdateSuppressions([
         { email: 'example@test.com', type: 'transactional' }
+      ]);
+
+      expect(action).toMatchSnapshot();
+    });
+
+    it('ignores deprecated email field when recipient field is present', () => {
+      const action = suppressions.createOrUpdateSuppressions([
+        { email: 'old@test.com', recipient: 'example@test.com', type: 'transactional' }
       ]);
 
       expect(action).toMatchSnapshot();

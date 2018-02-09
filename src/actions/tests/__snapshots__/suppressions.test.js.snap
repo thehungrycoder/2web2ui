@@ -1,5 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Action Creator: Suppressions createOrUpdateSuppressions ignores deprecated email field when recipient field is present 1`] = `
+Object {
+  "meta": Object {
+    "data": Object {
+      "recipients": Array [
+        Object {
+          "description": undefined,
+          "recipient": "example@test.com",
+          "type": "transactional",
+        },
+      ],
+    },
+    "headers": Object {},
+    "method": "PUT",
+    "url": "/suppression-list",
+  },
+  "type": "CREATE_OR_UPDATE_SUPPRESSIONS",
+}
+`;
+
 exports[`Action Creator: Suppressions createOrUpdateSuppressions transform non-standard type field values 1`] = `
 Object {
   "meta": Object {
@@ -10,6 +30,26 @@ Object {
           "recipient": "example@test.com",
           "type": "non_transactional",
         },
+        Object {
+          "description": undefined,
+          "recipient": "example@test.com",
+          "type": "transactional",
+        },
+      ],
+    },
+    "headers": Object {},
+    "method": "PUT",
+    "url": "/suppression-list",
+  },
+  "type": "CREATE_OR_UPDATE_SUPPRESSIONS",
+}
+`;
+
+exports[`Action Creator: Suppressions createOrUpdateSuppressions transforms deprecated email to recipient field 1`] = `
+Object {
+  "meta": Object {
+    "data": Object {
+      "recipients": Array [
         Object {
           "description": undefined,
           "recipient": "example@test.com",
@@ -40,26 +80,6 @@ Object {
     "headers": Object {
       "x-msys-subaccount": 999,
     },
-    "method": "PUT",
-    "url": "/suppression-list",
-  },
-  "type": "CREATE_OR_UPDATE_SUPPRESSIONS",
-}
-`;
-
-exports[`Action Creator: Suppressions createOrUpdateSuppressions with deprecated email field 1`] = `
-Object {
-  "meta": Object {
-    "data": Object {
-      "recipients": Array [
-        Object {
-          "description": undefined,
-          "recipient": "example@test.com",
-          "type": "transactional",
-        },
-      ],
-    },
-    "headers": Object {},
     "method": "PUT",
     "url": "/suppression-list",
   },

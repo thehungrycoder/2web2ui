@@ -133,7 +133,7 @@ export function createOrUpdateSuppressions(recipients, subaccount) {
     if (type && !LIKE_NON.test(type)) { type = 'transactional'; }
 
     // Convert deprecated recipient fields
-    if (email) { recipient = email; }
+    if (email && !recipient) { recipient = email; }
 
     // Trim whitespace from recipient email
     if (recipient) { recipient = _.trim(recipient); } // for FAD-5095
