@@ -1,5 +1,81 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`VerifyEmail component should disable the send button while sending 1`] = `
+<Modal>
+  <Panel
+    accent={true}
+    actions={
+      Array [
+        Object {
+          "content": "Close",
+          "onClick": undefined,
+        },
+      ]
+    }
+    sectioned={true}
+    title="Verify through Email"
+  >
+    <Panel.Section>
+      <p>
+        Start sending email from this domain by sending a verification email to one of the addresses below.
+      </p>
+      <Grid>
+        <Grid.Column
+          xs={6}
+        >
+          <p>
+            <strong>
+              postmaster@xyz.com
+            </strong>
+          </p>
+        </Grid.Column>
+        <Grid.Column
+          xs={6}
+        >
+          <div>
+             
+            <Button
+              disabled={true}
+              onClick={[Function]}
+              plain={true}
+              size="default"
+            >
+              Sending Email...
+            </Button>
+             
+          </div>
+        </Grid.Column>
+      </Grid>
+      <Grid>
+        <Grid.Column
+          xs={6}
+        >
+          <p>
+            <strong>
+              abuse@xyz.com
+            </strong>
+          </p>
+        </Grid.Column>
+        <Grid.Column
+          xs={6}
+        >
+          <div>
+            <Button
+              disabled={true}
+              onClick={[Function]}
+              plain={true}
+              size="default"
+            >
+              Sending Email...
+            </Button>
+          </div>
+        </Grid.Column>
+      </Grid>
+    </Panel.Section>
+  </Panel>
+</Modal>
+`;
+
 exports[`VerifyEmail component should error if custom mailbox field is invalid 1`] = `
 <Modal>
   <Panel
@@ -23,7 +99,7 @@ exports[`VerifyEmail component should error if custom mailbox field is invalid 1
         <Grid.Column
           xs={6}
         >
-          <p>
+          <div>
             <TextField
               connectRight={
                 <strong
@@ -41,7 +117,7 @@ exports[`VerifyEmail component should error if custom mailbox field is invalid 1
               type="text"
               value=""
             />
-          </p>
+          </div>
         </Grid.Column>
         <Grid.Column
           xs={6}

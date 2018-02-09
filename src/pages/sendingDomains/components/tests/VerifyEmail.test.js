@@ -69,6 +69,12 @@ describe('VerifyEmail component', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('should disable the send button while sending', async() => {
+    wrapper.setProps({ submitting: true });
+
+    expect(wrapper).toMatchSnapshot();
+  });
+
   it('should render success message', async() => {
     await wrapper.instance().verifyWithPostmaster();
 
@@ -86,5 +92,4 @@ describe('VerifyEmail component', () => {
     expect(props.showAlert).toHaveBeenCalledWith({ type: 'error', message: 'Email verification error: can\'t send!' });
     expect(wrapper).toMatchSnapshot();
   });
-
 });
