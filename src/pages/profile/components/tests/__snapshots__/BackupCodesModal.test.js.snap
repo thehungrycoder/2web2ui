@@ -1,0 +1,267 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: BackupCodesModal should change button text to Generating... when submitting 1`] = `
+<Modal
+  open={true}
+>
+  <Panel
+    accent={true}
+    title="Generate Two-factor Backup Codes"
+  >
+    <form
+      onSubmit={[Function]}
+    >
+      <Panel.Section>
+        <Banner
+          status="warning"
+        >
+          Clicking Generate will overwrite the 
+          10
+           backup codes
+        </Banner>
+        <p>
+          Keep these single-use backup codes somewhere safe but accessible. They can be used if your authentication app is unavailable (
+          <span
+            aria-label="phone in toilet emojis"
+            role="img"
+          >
+            📱  ➡︎🚽
+          </span>
+           , etc).
+        </p>
+        <Grid>
+          <Grid.Column
+            md={6}
+            xs={12}
+          >
+            <TextField
+              error=""
+              onChange={[MockFunction]}
+              placeholder="Password"
+              required={true}
+              resize="both"
+              type="password"
+              value=""
+            />
+          </Grid.Column>
+        </Grid>
+      </Panel.Section>
+      <Panel.Section>
+        <div>
+          <Button
+            disabled={true}
+            onClick={[MockFunction]}
+            primary={true}
+            size="default"
+            type="submit"
+          >
+            Generating...
+          </Button>
+          <Button
+            onClick={[MockFunction]}
+            size="default"
+          >
+            Cancel
+          </Button>
+        </div>
+      </Panel.Section>
+    </form>
+  </Panel>
+</Modal>
+`;
+
+exports[`Component: BackupCodesModal should render correctly 1`] = `
+<Modal
+  open={true}
+>
+  <Panel
+    accent={true}
+    title="Generate Two-factor Backup Codes"
+  >
+    <form
+      onSubmit={[Function]}
+    >
+      <Panel.Section>
+        <Banner
+          status="warning"
+        >
+          Clicking Generate will overwrite the 
+          10
+           backup codes
+        </Banner>
+        <p>
+          Keep these single-use backup codes somewhere safe but accessible. They can be used if your authentication app is unavailable (
+          <span
+            aria-label="phone in toilet emojis"
+            role="img"
+          >
+            📱  ➡︎🚽
+          </span>
+           , etc).
+        </p>
+        <Grid>
+          <Grid.Column
+            md={6}
+            xs={12}
+          >
+            <TextField
+              error=""
+              onChange={[Function]}
+              placeholder="Password"
+              required={true}
+              resize="both"
+              type="password"
+              value=""
+            />
+          </Grid.Column>
+        </Grid>
+      </Panel.Section>
+      <Panel.Section>
+        <div>
+          <Button
+            disabled={false}
+            onClick={[Function]}
+            primary={true}
+            size="default"
+            type="submit"
+          >
+            Generate
+          </Button>
+          <Button
+            onClick={[MockFunction]}
+            size="default"
+          >
+            Cancel
+          </Button>
+        </div>
+      </Panel.Section>
+    </form>
+  </Panel>
+</Modal>
+`;
+
+exports[`Component: BackupCodesModal should show new codes when they exist 1`] = `
+<Modal
+  open={true}
+>
+  <Panel
+    accent={true}
+    title="Generate Two-factor Backup Codes"
+  >
+    <form
+      onSubmit={[Function]}
+    >
+      <Panel.Section>
+        <p>
+          Keep these single-use backup codes somewhere safe but accessible. They can be used if your authentication app is unavailable (
+          <span
+            aria-label="phone in toilet emojis"
+            role="img"
+          >
+            📱  ➡︎🚽
+          </span>
+           , etc).
+        </p>
+        <Grid>
+          <Grid.Column
+            md={6}
+            xs={12}
+          >
+            <BackupCodes
+              codes={
+                Array [
+                  1,
+                  2,
+                  3,
+                  4,
+                ]
+              }
+            />
+          </Grid.Column>
+        </Grid>
+      </Panel.Section>
+      <Panel.Section>
+        <div>
+          <Button
+            onClick={[MockFunction]}
+            primary={true}
+            size="default"
+          >
+            Close
+          </Button>
+        </div>
+      </Panel.Section>
+    </form>
+  </Panel>
+</Modal>
+`;
+
+exports[`Component: BackupCodesModal should show password error when exists 1`] = `
+<Modal
+  open={true}
+>
+  <Panel
+    accent={true}
+    title="Generate Two-factor Backup Codes"
+  >
+    <form
+      onSubmit={[Function]}
+    >
+      <Panel.Section>
+        <Banner
+          status="warning"
+        >
+          Clicking Generate will overwrite the 
+          10
+           backup codes
+        </Banner>
+        <p>
+          Keep these single-use backup codes somewhere safe but accessible. They can be used if your authentication app is unavailable (
+          <span
+            aria-label="phone in toilet emojis"
+            role="img"
+          >
+            📱  ➡︎🚽
+          </span>
+           , etc).
+        </p>
+        <Grid>
+          <Grid.Column
+            md={6}
+            xs={12}
+          >
+            <TextField
+              error="Incorrect Password"
+              onChange={[MockFunction]}
+              placeholder="Password"
+              required={true}
+              resize="both"
+              type="password"
+              value=""
+            />
+          </Grid.Column>
+        </Grid>
+      </Panel.Section>
+      <Panel.Section>
+        <div>
+          <Button
+            disabled={false}
+            onClick={[MockFunction]}
+            primary={true}
+            size="default"
+            type="submit"
+          >
+            Generate
+          </Button>
+          <Button
+            onClick={[MockFunction]}
+            size="default"
+          >
+            Cancel
+          </Button>
+        </div>
+      </Panel.Section>
+    </form>
+  </Panel>
+</Modal>
+`;

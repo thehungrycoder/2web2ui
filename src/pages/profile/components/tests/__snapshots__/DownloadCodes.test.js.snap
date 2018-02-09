@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DownloadCodes component should render download button 1`] = `
+<Button
+  download="sparkpost-backup-codes.txt"
+  size="default"
+  to="data:text/plain;base64,Y29kZTEKY29kZTI="
+>
+  <Icon
+    name="Download"
+    size={14}
+  />
+  Download
+</Button>
+`;

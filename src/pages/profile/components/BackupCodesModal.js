@@ -34,7 +34,7 @@ export default class BackupCodesModal extends Component {
     const hasCodes = this.props.codes.length > 0;
     return (
       <div>
-        { !hasCodes && <Button type='submit' primary onClick={this.generateCodes}>
+        { !hasCodes && <Button type='submit' disabled={pending} primary onClick={this.generateCodes}>
           { pending ? 'Generating...' : 'Generate' }
         </Button> }
         { hasCodes && <Button primary onClick={onClose}>Close</Button> }
