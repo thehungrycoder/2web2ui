@@ -135,10 +135,8 @@ export function createOrUpdateSuppressions(recipients, subaccount) {
     // Convert deprecated recipient fields
     if (email && !recipient) { recipient = email; }
 
-    // Trim whitespace from recipient email
-    if (recipient) { recipient = _.trim(recipient); } // for FAD-5095
-
-    return { description, recipient, type };
+    // Trim whitespace from recipient email (FAD-5095)
+    return { description, recipient: _.trim(recipient), type };
   });
 
   return sparkpostApiRequest({
