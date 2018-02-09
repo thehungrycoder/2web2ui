@@ -74,17 +74,6 @@ export class SetupSending extends Component {
     return content;
   }
 
-  getVerifyAction() {
-    const { verifyDkimLoading } = this.props;
-    const buttonText = verifyDkimLoading ? 'Verifying...' : 'Verify TXT Record';
-
-    return {
-      content: buttonText,
-      onClick: this.verifyDomain,
-      disabled: verifyDkimLoading
-    };
-  }
-
   toggleVerifyViaEmailModal = () => {
     const { open } = this.state;
 
@@ -107,7 +96,7 @@ export class SetupSending extends Component {
   }
 
   renderTxtRecordPanel() {
-    const { domain: { dkimHostname, dkimValue, status }} = this.props;
+    const { domain: { dkimHostname, dkimValue, status }, verifyDkimLoading } = this.props;
     const readyFor = resolveReadyFor(status);
 
     if (readyFor.sending && readyFor.dkim) {
@@ -119,7 +108,16 @@ export class SetupSending extends Component {
     }
 
     return (
-      <Panel title='DNS Settings' sectioned actions={[this.getVerifyAction()]}>
+      <Panel
+        actions={[{
+          id: 'verify-dkim',
+          content: verifyDkimLoading ? 'Verifying...' : 'Verify TXT Record',
+          onClick: this.verifyDomain,
+          disabled: verifyDkimLoading
+        }]}
+        sectioned
+        title="DNS Settings"
+      >
         <LabelledValue label='Type'><p>TXT</p></LabelledValue>
         <LabelledValue label='Hostname'><p>{dkimHostname}</p></LabelledValue>
         <LabelledValue label='Value'><p>{dkimValue}</p></LabelledValue>
