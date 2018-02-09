@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`localFileParseRequest fails to parse 1`] = `
+exports[`csvFileParseRequest fails to parse 1`] = `
 Array [
   Object {
     "type": "PARSE_CSV_PENDING",
@@ -24,7 +24,7 @@ Array [
 ]
 `;
 
-exports[`localFileParseRequest fails to read file 1`] = `
+exports[`csvFileParseRequest fails to read file 1`] = `
 Array [
   Object {
     "type": "PARSE_CSV_PENDING",
@@ -38,7 +38,7 @@ Array [
 ]
 `;
 
-exports[`localFileParseRequest parses successfully 1`] = `
+exports[`csvFileParseRequest parses successfully 1`] = `
 Array [
   Object {
     "type": "PARSE_CSV_PENDING",

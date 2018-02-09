@@ -1,9 +1,9 @@
 import { mockStore } from 'src/__testHelpers__';
-import localFileParseRequest, { hasData, hasField } from '../localFileParseRequest';
+import csvFileParseRequest, { hasData, hasField } from '../csvFileParseRequest';
 
-describe('localFileParseRequest', () => {
+describe('csvFileParseRequest', () => {
   const dispatchThunk = (parse) => mockStore.dispatch(
-    localFileParseRequest({ type: 'PARSE_CSV', meta: {}, parser: { parse }})
+    csvFileParseRequest({ type: 'PARSE_CSV', meta: {}, parser: { parse }})
   );
 
   beforeEach(() => { mockStore.clearActions(); });
@@ -37,7 +37,7 @@ describe('localFileParseRequest', () => {
   });
 });
 
-describe('localFileParseRequest.hasData', () => {
+describe('csvFileParseRequest.hasData', () => {
   it('returns error message', () => {
     const data = [];
     expect(hasData({ data })).toMatch(/no data/i);
@@ -49,7 +49,7 @@ describe('localFileParseRequest.hasData', () => {
   });
 });
 
-describe('localFileParseRequest.hasField', () => {
+describe('csvFileParseRequest.hasField', () => {
   it('returns error message', () => {
     const meta = {
       fields: ['email', 'type']

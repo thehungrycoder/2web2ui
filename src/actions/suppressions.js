@@ -1,7 +1,7 @@
 import moment from 'moment';
 import config from 'src/config';
 import _ from 'lodash';
-import localFileParseRequest, { hasData, hasField } from 'src/actions/helpers/localFileParseRequest';
+import csvFileParseRequest, { hasData, hasField } from 'src/actions/helpers/csvFileParseRequest';
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 import setSubaccountHeader from 'src/actions/helpers/setSubaccountHeader';
 import { refreshReportRange } from 'src/actions/reportFilters';
@@ -153,7 +153,7 @@ export function createOrUpdateSuppressions(recipients, subaccount) {
 }
 
 export function parseSuppressionsFile(file) {
-  return localFileParseRequest({
+  return csvFileParseRequest({
     type: 'PARSE_SUPPRESSIONS_FILE',
     meta: {
       file,

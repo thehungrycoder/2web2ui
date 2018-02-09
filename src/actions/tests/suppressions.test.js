@@ -1,12 +1,12 @@
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 import * as suppressions from '../suppressions';
-import localFileParseRequest, { hasField } from 'src/actions/helpers/localFileParseRequest';
+import csvFileParseRequest, { hasField } from 'src/actions/helpers/csvFileParseRequest';
 
 jest.mock('src/actions/helpers/sparkpostApiRequest', () => jest.fn((a) => a));
-jest.mock('src/actions/helpers/localFileParseRequest');
+jest.mock('src/actions/helpers/csvFileParseRequest');
 
 // Have to manually mock to avoid overrite of named exports
-localFileParseRequest.mockImplementation((a) => a);
+csvFileParseRequest.mockImplementation((a) => a);
 hasField.mockImplementation((a) => jest.fn(a));
 
 describe('Action Creator: Suppressions', () => {
