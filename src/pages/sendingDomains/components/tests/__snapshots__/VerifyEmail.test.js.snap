@@ -23,7 +23,7 @@ exports[`VerifyEmail component should error if custom mailbox field is invalid 1
         <Grid.Column
           xs={6}
         >
-          <p>
+          <div>
             <TextField
               connectRight={
                 <strong
@@ -41,7 +41,7 @@ exports[`VerifyEmail component should error if custom mailbox field is invalid 1
               type="text"
               value=""
             />
-          </p>
+          </div>
         </Grid.Column>
         <Grid.Column
           xs={6}
