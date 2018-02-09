@@ -28,6 +28,7 @@ import {
   composeConditions
 } from 'src/helpers/conditions';
 import { notEnterprise } from 'src/helpers/conditions/account';
+import { configEquals } from 'src/helpers/conditions/config';
 import App from 'src/components/layout/App';
 
 import { DEFAULT_REDIRECT_ROUTE } from 'src/constants';
@@ -113,8 +114,11 @@ const routes = [
     layout: App,
     condition: composeConditions(
       hasGrants('api_keys/manage', 'templates/modify', 'sending_domains/manage'),
-      notEnterprise()
+      configEquals('splashPage', '/dashboard') // want to hide if not a splash page https://jira.int.messagesystems.com/browse/FAD-6046
     )
+    // TODO: implement some kind of blockedRoutes check that runs on every route so we can
+    // hide routes based on config, account/user settings, etc. without having to mess
+    // around with grants in the web UI keys
   },
   {
     path: '/reports',
@@ -194,7 +198,7 @@ const routes = [
   {
     path: '/templates',
     component: templates.ListPage,
-    condition: hasGrants('templates/modify'),
+    condition: composeConditions(hasGrants('templates/modify'), ({ account }) => account.status === 'active'),
     layout: App
   },
   {
@@ -351,19 +355,19 @@ const routes = [
   {
     path: '/account/ip-pools',
     component: ipPools.ListPage,
-    condition: composeConditions(hasGrants('ip_pools/manage'), notEnterprise()),
+    condition: hasGrants('ip_pools/manage'),
     layout: App
   },
   {
     path: '/account/ip-pools/create',
     component: ipPools.CreatePage,
-    condition: composeConditions(hasGrants('ip_pools/manage'), notEnterprise()),
+    condition: hasGrants('ip_pools/manage'),
     layout: App
   },
   {
     path: '/account/ip-pools/edit/:id',
     component: ipPools.EditPage,
-    condition: composeConditions(hasGrants('ip_pools/manage'), notEnterprise()),
+    condition: hasGrants('ip_pools/manage'),
     layout: App
   }
 ];
