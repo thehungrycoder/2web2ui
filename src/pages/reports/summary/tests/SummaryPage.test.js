@@ -28,7 +28,7 @@ describe('Page: SummaryPage', () => {
         replace: jest.fn()
       },
       refreshSummaryChart: jest.fn(() => Promise.resolve()),
-      refreshTypeaheadCache: jest.fn(),
+      initTypeaheadCache: jest.fn(),
       addFilters: jest.fn()
     };
     wrapper = shallow(<SummaryReportPage {...testProps} />);

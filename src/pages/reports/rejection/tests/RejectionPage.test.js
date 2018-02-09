@@ -39,7 +39,7 @@ describe('RejectionPage: ', () => {
       },
       loadRejectionMetrics: jest.fn(() => Promise.resolve()),
       refreshRejectionTableMetrics: jest.fn(() => Promise.resolve()),
-      refreshTypeaheadCache: jest.fn(),
+      initTypeaheadCache: jest.fn(),
       addFilters: jest.fn(),
       location: {
         search: {}
@@ -56,7 +56,7 @@ describe('RejectionPage: ', () => {
 
   it('renders correctly', () => {
     expect(spyParseSearch).toHaveBeenCalledTimes(1);
-    expect(props.refreshTypeaheadCache).toHaveBeenCalled();
+    expect(props.initTypeaheadCache).toHaveBeenCalled();
     expect(wrapper).toMatchSnapshot();
   });
 

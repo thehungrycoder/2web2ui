@@ -6,7 +6,7 @@ import _ from 'lodash';
 
 import { getFilterSearchOptions, parseSearch } from 'src/helpers/reports';
 import { showAlert } from 'src/actions/globalAlert';
-import { addFilters, refreshTypeaheadCache } from 'src/actions/reportFilters';
+import { addFilters, initTypeaheadCache } from 'src/actions/reportFilters';
 import { loadRejectionMetrics, refreshRejectionTableMetrics } from 'src/actions/rejectionReport';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
 import { Page, Panel } from '@sparkpost/matchbox';
@@ -23,7 +23,7 @@ export class RejectionPage extends Component {
 
   componentDidMount() {
     this.handleRefresh(this.parseSearch());
-    this.props.refreshTypeaheadCache();
+    this.props.initTypeaheadCache();
   }
 
   /**
@@ -132,7 +132,7 @@ const mapDispatchToProps = {
   addFilters,
   loadRejectionMetrics,
   refreshRejectionTableMetrics,
-  refreshTypeaheadCache,
+  initTypeaheadCache,
   showAlert
 };
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(RejectionPage));

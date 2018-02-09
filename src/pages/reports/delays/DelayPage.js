@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import qs from 'query-string';
 import _ from 'lodash';
 
-import { addFilters, refreshTypeaheadCache } from 'src/actions/reportFilters';
+import { addFilters, initTypeaheadCache } from 'src/actions/reportFilters';
 import { loadDelayReasonsByDomain, loadDelayMetrics } from 'src/actions/delayReport';
 import { parseSearch, getFilterSearchOptions } from 'src/helpers/reports';
 import { showAlert } from 'src/actions/globalAlert';
@@ -23,7 +23,7 @@ export class DelayPage extends Component {
 
   componentDidMount() {
     this.handleRefresh(this.parseSearch());
-    this.props.refreshTypeaheadCache();
+    this.props.initTypeaheadCache();
   }
 
   parseSearch() {
@@ -129,7 +129,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   addFilters,
-  refreshTypeaheadCache,
+  initTypeaheadCache,
   loadDelayReasonsByDomain,
   loadDelayMetrics,
   showAlert

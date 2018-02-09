@@ -6,7 +6,7 @@ import qs from 'query-string';
 import _ from 'lodash';
 
 import { refreshBounceChartMetrics, refreshBounceTableMetrics } from 'src/actions/bounceReport';
-import { addFilters, refreshTypeaheadCache } from 'src/actions/reportFilters';
+import { addFilters, initTypeaheadCache } from 'src/actions/reportFilters';
 import { getFilterSearchOptions, parseSearch } from 'src/helpers/reports';
 import { showAlert } from 'src/actions/globalAlert';
 import { TableCollection, Empty, LongTextContainer } from 'src/components';
@@ -34,7 +34,7 @@ export class BouncePage extends Component {
 
   componentDidMount() {
     this.handleRefresh(this.parseSearch());
-    this.props.refreshTypeaheadCache();
+    this.props.initTypeaheadCache();
   }
 
   /**
@@ -182,7 +182,7 @@ const mapDispatchToProps = {
   addFilters,
   refreshBounceChartMetrics,
   refreshBounceTableMetrics,
-  refreshTypeaheadCache,
+  initTypeaheadCache,
   showAlert
 };
 
