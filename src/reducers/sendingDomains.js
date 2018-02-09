@@ -50,18 +50,18 @@ export default (state = initialState, { type, payload, meta }) => {
 
     case 'VERIFY_SENDING_DOMAIN_ABUSE_AT_PENDING':
     case 'VERIFY_SENDING_DOMAIN_POSTMASTER_AT_PENDING':
-    case 'VERIFY_SENDING_DOMAIN_VERIFICAITON_MAILBOX_PENDING':
+    case 'VERIFY_SENDING_DOMAIN_VERIFICATION_MAILBOX_PENDING':
       return { ...state, verifyEmailLoading: true, verifyEmailError: null };
 
     case 'VERIFY_SENDING_DOMAIN_ABUSE_AT_SUCCESS':
     case 'VERIFY_SENDING_DOMAIN_POSTMASTER_AT_SUCCESS':
-    case 'VERIFY_SENDING_DOMAIN_VERIFICAITON_MAILBOX_SUCCESS':
+    case 'VERIFY_SENDING_DOMAIN_VERIFICATION_MAILBOX_SUCCESS':
       // augment current domain's status property
       return { ...state, verifyEmailLoading: false, domain: { ...state.domain, status: payload }};
 
     case 'VERIFY_SENDING_DOMAIN_ABUSE_AT_FAIL':
     case 'VERIFY_SENDING_DOMAIN_POSTMASTER_AT_FAIL':
-    case 'VERIFY_SENDING_DOMAIN_VERIFICAITON_MAILBOX_FAIL':
+    case 'VERIFY_SENDING_DOMAIN_VERIFICATION_MAILBOX_FAIL':
       return { ...state, verifyEmailLoading: false, verifyEmailError: payload };
 
     case 'UPDATE_SENDING_DOMAIN_PENDING':
