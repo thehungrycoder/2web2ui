@@ -27,6 +27,13 @@ describe('VerifyEmail component', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('validates localpart onblur', () => {
+    config.featureFlags.allow_anyone_at_verification = true;
+    wrapper = shallow(<VerifyEmail {...props}/>);
+    wrapper.find('#localPart').simulate('blur', { currentTarget: { value: '' }});
+    expect(wrapper.state('error')).toEqual('Required');
+  });
+
   it('should render with mailbox verification', () => {
     config.featureFlags.allow_anyone_at_verification = true;
     wrapper = shallow(<VerifyEmail {...props}/>);
