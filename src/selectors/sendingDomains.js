@@ -5,6 +5,7 @@ import _ from 'lodash';
 export const isVerified = (domain) => domain.status.ownership_verified && domain.status.compliance_status === 'valid';
 export const getDomains = (state) => state.sendingDomains.list;
 export const getDomain = (state) => state.sendingDomains.domain;
+const selectSubaccountFromProps = (state, props) => _.get(props, 'id', null);
 
 export const selectDomain = createSelector(
   [getDomain],
@@ -29,3 +30,9 @@ export const hasUnverifiedDomains = createSelector(
   [getDomains],
   (domains) => _.reduce(domains, (acc, domain) => acc || !isVerified(domain), false)
 );
+
+export const selectSendingDomainsForSubaccount = createSelector(
+  [getDomains, selectSubaccountFromProps],
+  (domains, subaccount) => domains.filter((domain) => domain.subaccount_id === Number(subaccount))
+);
+

@@ -5,12 +5,13 @@ import { Page, Tabs } from '@sparkpost/matchbox';
 
 import { getSubaccount } from 'src/actions/subaccounts';
 import { ApiKeySuccessBanner } from 'src/components';
-import { selectSubaccount, selectDetailTabs } from 'src/selectors/subaccounts';
+import { selectSubaccount } from 'src/selectors/subaccounts';
 import { listPools } from 'src/actions/ipPools';
 import { listApiKeys, hideNewApiKey } from 'src/actions/api-keys';
 
 import ApiKeysTab from './components/ApiKeysTab';
 import EditTab from './components/EditTab';
+import SendingDomainsTab from './components/SendingDomainsTab';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
 
 const breadcrumbAction = {
@@ -18,6 +19,25 @@ const breadcrumbAction = {
   Component: Link,
   to: '/account/subaccounts'
 };
+
+
+const buildTabs = (id) => [
+  {
+    content: 'Details',
+    Component: Link,
+    to: `/account/subaccounts/${id}`
+  },
+  {
+    content: 'API Keys',
+    Component: Link,
+    to: `/account/subaccounts/${id}/api-keys`
+  },
+  {
+    content: 'Sending Domains',
+    Component: Link,
+    to: `/account/subaccounts/${id}/sending-domains`
+  }
+];
 
 export class DetailsPage extends Component {
 
@@ -41,8 +61,9 @@ export class DetailsPage extends Component {
   }
 
   render() {
-    const { loading, location, tabs } = this.props;
-    const selectedTab = location.pathname.endsWith('keys') ? 1 : 0;
+    const { loading, location, id } = this.props;
+    const tabs = buildTabs(id);
+    const selectedTab = tabs.findIndex(({ to }) => location.pathname === to);
 
     if (loading) {
       return (
@@ -62,6 +83,7 @@ export class DetailsPage extends Component {
         <Switch>
           <Route exact path={match.url} render={() => <EditTab subaccount={subaccount} />} />
           <Route path={`${match.url}/api-keys`} render={() => <ApiKeysTab id={subaccount.id}/>} />
+          <Route path={`${match.url}/sending-domains`} render={() => <SendingDomainsTab id={subaccount.id}/>} />
         </Switch>
       </Page>
     );
@@ -74,7 +96,6 @@ const mapStateToProps = (state, props) => {
     id: props.match.params.id,
     loading: subaccounts.getLoading,
     subaccount: selectSubaccount(state),
-    tabs: selectDetailTabs(state, props),
     newKey: apiKeys.newKey
   };
 };
