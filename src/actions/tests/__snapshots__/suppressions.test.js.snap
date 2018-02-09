@@ -20,6 +20,31 @@ Object {
 }
 `;
 
+exports[`Action Creator: Suppressions createOrUpdateSuppressions ignores non_transactional and transactional fields when type is present 1`] = `
+Object {
+  "meta": Object {
+    "data": Object {
+      "recipients": Array [
+        Object {
+          "description": undefined,
+          "recipient": "transactional@test.com",
+          "type": "transactional",
+        },
+        Object {
+          "description": undefined,
+          "recipient": "non_transactional@test.com",
+          "type": "non_transactional",
+        },
+      ],
+    },
+    "headers": Object {},
+    "method": "PUT",
+    "url": "/suppression-list",
+  },
+  "type": "CREATE_OR_UPDATE_SUPPRESSIONS",
+}
+`;
+
 exports[`Action Creator: Suppressions createOrUpdateSuppressions transform non-standard type field values 1`] = `
 Object {
   "meta": Object {
@@ -65,29 +90,7 @@ Object {
 }
 `;
 
-exports[`Action Creator: Suppressions createOrUpdateSuppressions with a subaccount 1`] = `
-Object {
-  "meta": Object {
-    "data": Object {
-      "recipients": Array [
-        Object {
-          "description": undefined,
-          "recipient": "example@test.com",
-          "type": "transactional",
-        },
-      ],
-    },
-    "headers": Object {
-      "x-msys-subaccount": 999,
-    },
-    "method": "PUT",
-    "url": "/suppression-list",
-  },
-  "type": "CREATE_OR_UPDATE_SUPPRESSIONS",
-}
-`;
-
-exports[`Action Creator: Suppressions createOrUpdateSuppressions with deprecated non_transactional and transactional field 1`] = `
+exports[`Action Creator: Suppressions createOrUpdateSuppressions transforms deprecated non_transactional and transactional fields to type 1`] = `
 Object {
   "meta": Object {
     "data": Object {
@@ -105,6 +108,28 @@ Object {
       ],
     },
     "headers": Object {},
+    "method": "PUT",
+    "url": "/suppression-list",
+  },
+  "type": "CREATE_OR_UPDATE_SUPPRESSIONS",
+}
+`;
+
+exports[`Action Creator: Suppressions createOrUpdateSuppressions with a subaccount 1`] = `
+Object {
+  "meta": Object {
+    "data": Object {
+      "recipients": Array [
+        Object {
+          "description": undefined,
+          "recipient": "example@test.com",
+          "type": "transactional",
+        },
+      ],
+    },
+    "headers": Object {
+      "x-msys-subaccount": 999,
+    },
     "method": "PUT",
     "url": "/suppression-list",
   },

@@ -88,10 +88,29 @@ describe('Action Creator: Suppressions', () => {
       expect(action).toMatchSnapshot();
     });
 
-    it('with deprecated non_transactional and transactional field', () => {
+    it('transforms deprecated non_transactional and transactional fields to type', () => {
       const action = suppressions.createOrUpdateSuppressions([
         { recipient: 'example@test.com', non_transactional: 'true', transactional: 'false' },
         { recipient: 'example@test.com', non_transactional: 'false', transactional: 'true' }
+      ]);
+
+      expect(action).toMatchSnapshot();
+    });
+
+    it('ignores non_transactional and transactional fields when type is present', () => {
+      const action = suppressions.createOrUpdateSuppressions([
+        {
+          recipient: 'transactional@test.com',
+          non_transactional: 'true',
+          transactional: 'false',
+          type: 'transactional'
+        },
+        {
+          recipient: 'non_transactional@test.com',
+          non_transactional: 'false',
+          transactional: 'true',
+          type: 'non_transactional'
+        }
       ]);
 
       expect(action).toMatchSnapshot();
