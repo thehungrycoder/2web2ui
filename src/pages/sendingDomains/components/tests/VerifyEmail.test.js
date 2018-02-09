@@ -47,6 +47,9 @@ describe('VerifyEmail component', () => {
   });
 
   it('should send custom mailbox email', () => {
+    config.featureFlags.allow_anyone_at_verification = true;
+    wrapper = shallow(<VerifyEmail {...props}/>);
+
     wrapper.setState({ localPart: 'krombopulos.michael' });
 
     wrapper.find('Button').at(0).simulate('click');
@@ -60,14 +63,30 @@ describe('VerifyEmail component', () => {
   });
 
   it('should error if custom mailbox field is invalid', () => {
+    config.featureFlags.allow_anyone_at_verification = true;
+    wrapper = shallow(<VerifyEmail {...props}/>);
+
+    wrapper.find('Button').at(0).simulate('click');
+    expect(props.verifyMailbox).not.toHaveBeenCalled();
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should render error message', () => {
+  it('should render success message', async() => {
+    await wrapper.instance().verifyWithPostmaster();
+
+    expect(props.verifyPostmaster).toHaveBeenCalledTimes(1);
+    expect(props.showAlert).toHaveBeenCalledWith({ type: 'success', message: `Email sent to postmaster@${props.id}` });
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should render success message', () => {
+  it('should render error message', async() => {
+    const verifyFail = jest.fn(() => Promise.reject(new Error('can\'t send!')));
+    wrapper.setProps({ verifyPostmaster: verifyFail });
+
+    await wrapper.instance().verifyWithPostmaster();
+    expect(verifyFail).toHaveBeenCalledTimes(1);
+    expect(props.showAlert).toHaveBeenCalledWith({ type: 'error', message: 'Email verification error: can\'t send!' });
     expect(wrapper).toMatchSnapshot();
   });
+
 });

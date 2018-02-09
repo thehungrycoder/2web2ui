@@ -17,42 +17,30 @@ exports[`VerifyEmail component should error if custom mailbox field is invalid 1
   >
     <Panel.Section>
       <p>
-        Start sending email from this domain by sending a verification email to one of the addresses below.
+        Start sending email from this domain by sending a verification email to any mailbox on your domain using the form below.
       </p>
       <Grid>
         <Grid.Column
           xs={6}
         >
           <p>
-            <strong>
-              postmaster@xyz.com
-            </strong>
-          </p>
-        </Grid.Column>
-        <Grid.Column
-          xs={6}
-        >
-          <div>
-             
-            <Button
-              onClick={[Function]}
-              plain={true}
-              size="default"
-            >
-              Send Email
-            </Button>
-             
-          </div>
-        </Grid.Column>
-      </Grid>
-      <Grid>
-        <Grid.Column
-          xs={6}
-        >
-          <p>
-            <strong>
-              abuse@xyz.com
-            </strong>
+            <TextField
+              connectRight={
+                <strong
+                  className={undefined}
+                >
+                  @xyz.com
+                </strong>
+              }
+              error="Required"
+              id="localPart"
+              onBlur={[Function]}
+              onChange={[Function]}
+              required={false}
+              resize="both"
+              type="text"
+              value=""
+            />
           </p>
         </Grid.Column>
         <Grid.Column
@@ -448,42 +436,29 @@ exports[`VerifyEmail component should send custom mailbox email 1`] = `
   >
     <Panel.Section>
       <p>
-        Start sending email from this domain by sending a verification email to one of the addresses below.
+        Start sending email from this domain by sending a verification email to any mailbox on your domain using the form below.
       </p>
       <Grid>
         <Grid.Column
           xs={6}
         >
           <p>
-            <strong>
-              postmaster@xyz.com
-            </strong>
-          </p>
-        </Grid.Column>
-        <Grid.Column
-          xs={6}
-        >
-          <div>
-             
-            <Button
-              onClick={[Function]}
-              plain={true}
-              size="default"
-            >
-              Send Email
-            </Button>
-             
-          </div>
-        </Grid.Column>
-      </Grid>
-      <Grid>
-        <Grid.Column
-          xs={6}
-        >
-          <p>
-            <strong>
-              abuse@xyz.com
-            </strong>
+            <TextField
+              connectRight={
+                <strong
+                  className={undefined}
+                >
+                  @xyz.com
+                </strong>
+              }
+              id="localPart"
+              onBlur={[Function]}
+              onChange={[Function]}
+              required={false}
+              resize="both"
+              type="text"
+              value="krombopulos.michael"
+            />
           </p>
         </Grid.Column>
         <Grid.Column
