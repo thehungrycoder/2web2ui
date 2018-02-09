@@ -25,6 +25,7 @@ import {
 
 import {
   hasGrants,
+  notOnPlan,
   composeConditions
 } from 'src/helpers/conditions';
 
@@ -195,7 +196,7 @@ const routes = [
   {
     path: '/templates',
     component: templates.ListPage,
-    condition: composeConditions(hasGrants('templates/modify'), ({ account }) => account.status === 'active'),
+    condition: hasGrants('templates/modify'),
     layout: App
   },
   {
@@ -340,13 +341,13 @@ const routes = [
   {
     path: '/account/billing',
     component: billing.SummaryPage,
-    condition: hasGrants('account/manage'),
+    condition: composeConditions(hasGrants('account/manage'), notOnPlan('ent1')),
     layout: App
   },
   {
     path: '/account/billing/plan',
     component: billing.ChangePlanPage,
-    condition: hasGrants('account/manage'),
+    condition: composeConditions(hasGrants('account/manage'), notOnPlan('ent1')),
     layout: App
   },
   {
