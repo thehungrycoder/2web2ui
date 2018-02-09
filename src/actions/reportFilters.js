@@ -19,14 +19,20 @@ const metricLists = [
   fetchMetricsIpPools
 ];
 
+// TODO: rename initTypeaheadCache
 export function refreshTypeaheadCache(params) {
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    const { metrics } = getState();
+    if (Array.isArray(metrics.domains)) {
+      return;
+    }
     const requests = metricLists.map((list) => dispatch(list(params)));
     requests.push(dispatch(listTemplates()), dispatch(listSubaccounts()), dispatch(listSendingDomains()));
     return Promise.all(requests);
   };
 }
 
+// TODO: rename refreshTypeaheadCache
 export function refreshListsByTime(params) {
   return (dispatch) => {
     const requests = metricLists.map((list) => dispatch(list(params)));
