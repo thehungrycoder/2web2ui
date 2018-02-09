@@ -1,5 +1,5 @@
-export default function({ id, name, target, auth_type, auth_credentials = {}, auth_request_details = {}}) {
-  const values = { id, name, target };
+export default function({ id, name, target, active, auth_type, auth_credentials = {}, auth_request_details = {}}) {
+  const values = { id, name, target, active };
 
   switch (auth_type) {
     case 'basic':

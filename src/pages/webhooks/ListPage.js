@@ -10,6 +10,7 @@ import { hasSubaccounts } from 'src/selectors/subaccounts';
 // Components
 import { Loading, TableCollection, SubaccountTag, ApiErrorBanner } from 'src/components';
 import { Page } from '@sparkpost/matchbox';
+import { formatDateTime } from 'src/helpers/date';
 
 const filterBoxConfig = {
   show: true,
@@ -24,26 +25,36 @@ export class WebhooksList extends Component {
 
   getColumns = () => {
     const { hasSubaccounts } = this.props;
-    const columns = [{ label: 'Name', sortKey: 'name' }, 'Target'];
+    const columns = [
+      { label: 'Name', sortKey: 'name' },
+      'Target',
+      { label: 'Last Success', sortKey: 'last_successful', width: '18%' },
+      { label: 'Last Failure', sortKey: 'last_failure', width: '18%' }
+    ];
 
     if (hasSubaccounts) {
-      columns.push('Events For');
+      columns.push({ label: 'Events For', width: '18%', sortKey: 'subaccount_id' });
     }
 
     return columns;
   };
 
-  getRowData = ({ id, name, target, subaccount_id }) => {
+  getRowData = ({ id, name, target, subaccount_id, last_successful, last_failure }) => {
     const { hasSubaccounts } = this.props;
     const nameLink = <Link to={`/webhooks/details/${id}${setSubaccountQuery(subaccount_id)}`}>{name}</Link>;
-    const row = [nameLink, target];
+    const row = [
+      nameLink,
+      target,
+      last_successful ? formatDateTime(last_successful) : null,
+      last_failure ? formatDateTime(last_failure) : null
+    ];
 
     if (hasSubaccounts) {
       row.push(
         <SubaccountTag
           id={subaccount_id}
           master={subaccount_id === 0}
-          receiveAll={!subaccount_id && subaccount_id !== 0}/>
+          receiveAll={!subaccount_id && subaccount_id !== 0} />
       );
     }
 
