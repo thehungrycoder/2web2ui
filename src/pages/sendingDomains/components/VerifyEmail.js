@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 
 import { BaseModal } from 'src/components';
 import { Panel, Button, TextField, Grid } from '@sparkpost/matchbox';
@@ -153,4 +152,4 @@ const mapStateToProps = (state) => ({
   submitting: state.sendingDomains.verifyEmailLoading
 });
 
-export default withRouter(connect(mapStateToProps, { ...sendingDomainsActions, showAlert })(VerifyEmail));
+export default connect(mapStateToProps, { ...sendingDomainsActions, showAlert })(VerifyEmail);

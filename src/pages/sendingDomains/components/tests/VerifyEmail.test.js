@@ -7,6 +7,7 @@ import { VerifyEmail } from '../VerifyEmail';
 describe('VerifyEmail component', () => {
   let wrapper;
   let props;
+
   beforeEach(() => {
     props = {
       id: 'xyz.com',
@@ -17,7 +18,6 @@ describe('VerifyEmail component', () => {
       verifyEmailLoading: false,
       subaccount: 'submarine'
     };
-
 
     config.featureFlags.allow_anyone_at_verification = false;
     wrapper = shallow(<VerifyEmail {...props}/>);
@@ -47,6 +47,7 @@ describe('VerifyEmail component', () => {
   });
 
   it('should send custom mailbox email', () => {
+    config.featureFlags.allow_anyone_at_verification = true;
     wrapper.setState({ localPart: 'krombopulos.michael' });
 
     wrapper.find('Button').at(0).simulate('click');

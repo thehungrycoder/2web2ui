@@ -82,7 +82,7 @@ exports[`Component: SetupSending renders correctly for unverified DKIM and inval
            set this domain up for sending via email.
         </UnstyledLink>
       </p>
-      <withRouter(Connect(VerifyEmail))
+      <Connect(VerifyEmail)
         id="xyz.com"
         onCancel={[Function]}
         open={false}
