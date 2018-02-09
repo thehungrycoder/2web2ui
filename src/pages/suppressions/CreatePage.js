@@ -33,7 +33,7 @@ export class CreatePage extends Component {
     history.push('/lists/suppressions');
   }
 
-  get errorDetails() {
+  renderErrorDetails() {
     const { parseError = {}, persistError } = this.props;
 
     if (parseError.details) {
@@ -67,7 +67,7 @@ export class CreatePage extends Component {
         <form onSubmit={reduxFormSubmit(this.handleSubmit)}>
           {!submitting && submitFailed && (
             <ApiErrorBanner
-              errorDetails={this.errorDetails}
+              errorDetails={this.renderErrorDetails()}
               message="Unable to upload your list of suppressions"
               status="danger"
             />
