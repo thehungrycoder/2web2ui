@@ -18,45 +18,45 @@ export class VerifyEmail extends Component {
   }
 
   verifyWithAbuse = () => {
-    const { domain: id, subaccount, verifyPostmaster } = this.props;
+    const { id, subaccount, verifyAbuse } = this.props;
 
-    return verifyPostmaster({ id, subaccount })
+    return verifyAbuse({ id, subaccount })
       .then(this.onVerifySuccess(`abuse@${id}`))
       .catch(this.onVerifyFail);
   }
 
   verifyWithCustom = () => {
-    const { domain: id, subaccount, verifyMailbox } = this.props;
-    const { localpart } = this.state;
-    const error = required(this.state.localPart);
+    const { id, subaccount, verifyMailbox } = this.props;
+    const { localPart } = this.state;
+    const error = required(localPart);
 
     if (error) {
       return this.setState({ error });
     }
 
-    return verifyMailbox({ id, mailbox: localpart, subaccount })
-      .then(this.onVerifySuccess(`${localpart}@${id}`))
+    return verifyMailbox({ id, mailbox: localPart, subaccount })
+      .then(this.onVerifySuccess(`${localPart}@${id}`))
       .catch(this.onVerifyFail);
   }
 
   verifyWithPostmaster = () => {
-    const { domain: id, subaccount, verifyPostmaster } = this.props;
+    const { id, subaccount, verifyPostmaster } = this.props;
 
     return verifyPostmaster({ id, subaccount })
       .then(this.onVerifySuccess(`postmaster@${id}`))
       .catch(this.onVerifyFail);
   }
 
-  onVerifyFail = (email) => () => {
+  onVerifySuccess = (email) => () => {
     this.props.showAlert({ type: 'success', message: `Email sent to ${email}` });
   }
 
-  onVerifySuccess = (error) => {
+  onVerifyFail = (error) => {
     this.props.showAlert({ type: 'error', message: `Email verification error: ${error.message}` });
   }
 
   renderAllowAnyoneAt = () => {
-    const { domain } = this.props;
+    const { id } = this.props;
     const { localPart } = this.state;
 
     return (
@@ -66,10 +66,10 @@ export class VerifyEmail extends Component {
           <Grid.Column xs={6}>
             <p>
               <TextField
-                id="localpart"
+                id="localPart"
                 onChange={this.onChange}
                 onBlur={this.onBlur}
-                connectRight={<strong className={styles.Domain}>{`@${domain.id}`}</strong>}
+                connectRight={<strong className={styles.Domain}>{`@${id}`}</strong>}
                 value={localPart}
                 error={this.state.error}
               />
@@ -94,14 +94,14 @@ export class VerifyEmail extends Component {
   }
 
   renderAllowMailboxVerification = () => {
-    const { domain } = this.props;
+    const { id } = this.props;
 
     return (
       <Panel.Section>
         <p>Start sending email from this domain by sending a verification email to one of the addresses below.</p>
         <Grid>
           <Grid.Column xs={6}>
-            <p><strong>{`postmaster@${domain.id}`}</strong></p>
+            <p><strong>{`postmaster@${id}`}</strong></p>
           </Grid.Column>
           <Grid.Column xs={6}>
             <div className={styles.ButtonColumn}> {this.renderVerifyButton(this.verifyWithPostmaster) } </div>
@@ -109,7 +109,7 @@ export class VerifyEmail extends Component {
         </Grid>
         <Grid>
           <Grid.Column xs={6}>
-            <p><strong>{`abuse@${domain.id}`}</strong></p>
+            <p><strong>{`abuse@${id}`}</strong></p>
           </Grid.Column>
           <Grid.Column xs={6}>
             <div className={styles.ButtonColumn}>{this.renderVerifyButton(this.verifyWithAbuse)}</div>

@@ -102,7 +102,7 @@ export class SetupSending extends Component {
     }
 
     return (
-      <VerifyEmail domain={domain} open={open} onCancel={this.toggleVerifyViaEmailModal}/>
+      <VerifyEmail id={domain.id} open={open} onCancel={this.toggleVerifyViaEmailModal}/>
     );
   }
 
