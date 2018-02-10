@@ -1,5 +1,16 @@
+import { getMetricsFromKeys } from 'src/helpers/metrics';
+
 export const DEFAULT_REDIRECT_ROUTE = '/landing';
 export const AFTER_JOIN_REDIRECT_ROUTE = '/onboarding/plan';
+
+export const ACCEPTED_METRICS = getMetricsFromKeys([
+  'count_targeted',
+  'count_sent',
+  'count_accepted',
+  'avg_delivery_time_first',
+  'avg_delivery_time_subsequent',
+  'avg_msg_size'
+]);
 
 export const LINKS = {
   SP_HOME_PAGE: 'https://www.sparkpost.com',

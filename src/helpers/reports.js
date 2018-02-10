@@ -33,7 +33,7 @@ export function parseSearch(search) {
     return { options: {}};
   }
 
-  const { from, to, range = 'custom', metrics = [], filters = []} = qs.parse(search);
+  const { from, to, range, metrics = [], filters = []} = qs.parse(search);
   const metricsList = typeof metrics === 'string' ? [metrics] : metrics;
   const filtersList = (typeof filters === 'string' ? [filters] : filters).map((filter) => {
     const parts = filter.split(':');
@@ -53,13 +53,22 @@ export function parseSearch(search) {
     return { value, type, id };
   });
 
-  const options = {
-    metrics: metricsList,
-    from: new Date(from),
-    to: new Date(to),
-    ...getRelativeDates(range), // invalid or custom ranges produce {} here
-    relativeRange: range
+
+  let options = {
+    metrics: metricsList
   };
+
+  if (from) {
+    options.from = new Date(from);
+  }
+
+  if (to) {
+    options.to = new Date(to);
+  }
+
+  if (range) {
+    options = { ...options, ...getRelativeDates(range), relativeRange: range };
+  }
 
   // filters are used in pages to dispatch updates to Redux store
   return { options, filters: filtersList };

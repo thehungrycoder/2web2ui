@@ -1,4 +1,5 @@
 const initialState = {
+  relativeRange: 'day',
   activeList: []
 };
 

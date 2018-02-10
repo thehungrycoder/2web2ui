@@ -13,8 +13,8 @@ import './index.scss';
 import App from './App';
 
 const debug = () => (next) => (action) => {
-  console.log(`=== ACTION: ${action.type} ===`); // eslint-disable-line no-console
-  console.log(action); // eslint-disable-line no-console
+  // console.log(`=== ACTION: ${action.type} ===`); // eslint-disable-line no-console
+  // console.log(action); // eslint-disable-line no-console
   next(action);
 };
 

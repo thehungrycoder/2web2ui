@@ -1,8 +1,11 @@
+import { ACCEPTED_METRICS } from 'src/constants';
+
 const initialState = {
   aggregatesLoading: false,
   attemptsLoading: false,
   aggregates: {},
-  attempts: []
+  attempts: [],
+  metrics: ACCEPTED_METRICS
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -21,11 +24,9 @@ export default (state = initialState, { type, payload }) => {
     case 'FETCH_METRICS_DELIVERIES_BY_ATTEMPT_FAIL':
       return { ...state, attemptsLoading: false };
 
-    case 'REFRESH_ACCEPTED_CHART':
+    case 'REFRESH_ACCEPTED_CHART': {
       return { ...state, ...payload };
-
-    case 'CLEAR_ACCEPTED_CHART':
-      return { ...state, ...initialState };
+    }
 
     default:
       return state;

@@ -112,6 +112,7 @@ export function buildCommonOptions(reportFilters, updates = {}) {
   return {
     ...reportFilters,
     ...updates,
+    ...getRelativeDates(reportFilters.relativeRange),
     ...getRelativeDates(updates.relativeRange)
   };
 }
