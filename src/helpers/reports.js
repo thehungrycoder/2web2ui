@@ -1,6 +1,16 @@
 import moment from 'moment';
+import _ from 'lodash';
 import qs from 'query-string';
 import { getRelativeDates } from 'src/helpers/date';
+
+export function stringifyFilter(filter) {
+  const subaccount = filter.type === 'Subaccount' ? `:${filter.id}` : '';
+  return `${filter.type}:${filter.value}${subaccount}`;
+}
+
+export function dedupeFilters(filters) {
+  return _.uniqBy(filters, stringifyFilter);
+}
 
 /**
  * Creates search options object from shared report options. Page specific options not included (ie. summary chart selected metrics)
@@ -12,10 +22,7 @@ export function getFilterSearchOptions(filters) {
     from: moment(filters.from).utc().format(),
     to: moment(filters.to).utc().format(),
     range: filters.relativeRange,
-    filters: filters.activeList.map((filter) => {
-      const subaccount = filter.type === 'Subaccount' ? `:${filter.id}` : '';
-      return `${filter.type}:${filter.value}${subaccount}`;
-    })
+    filters: filters.activeList.map(stringifyFilter)
   };
 }
 

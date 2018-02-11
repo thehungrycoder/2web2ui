@@ -1,3 +1,5 @@
+import { dedupeFilters } from 'src/helpers/reports';
+
 const initialState = {
   relativeRange: 'day',
   activeList: []
@@ -17,7 +19,7 @@ export default (state = initialState, action) => {
     }
 
     case 'ADD_FILTERS':
-      return { ...state, activeList: [ ...state.activeList, ...action.payload ]};
+      return { ...state, activeList: dedupeFilters([ ...state.activeList, ...action.payload ]) };
 
     case 'REMOVE_FILTER':
       return {
