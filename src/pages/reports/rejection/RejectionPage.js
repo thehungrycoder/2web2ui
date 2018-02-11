@@ -11,11 +11,6 @@ import MetricsSummary from '../components/MetricsSummary';
 import DataTable from './components/DataTable';
 
 export class RejectionPage extends Component {
-  handleDomainClick = (domain) => {
-    this.props.addFilters([{ type: 'Recipient Domain', value: domain }]);
-    this.props.refreshRejections();
-  }
-
   renderCollection() {
     const { loading, list } = this.props;
 
@@ -23,7 +18,7 @@ export class RejectionPage extends Component {
       return <PanelLoading />;
     }
 
-    return <DataTable list={list} onDomainClick={this.handleDomainClick} />;
+    return <DataTable list={list} addFilters={this.props.addFilters} />;
   }
 
   renderTopLevelMetrics() {
