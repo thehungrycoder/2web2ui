@@ -9,7 +9,7 @@ import DateForm from './DateForm';
 import styles from './DateFilter.module.scss';
 
 export class DateFilter extends Component {
-  format = 'MMM DD, YY h:mma';
+  format = 'D MMM YYYY h:mma';
   state = {
     showDatePicker: false,
     selecting: false,

@@ -6,7 +6,7 @@ import { Grid, TextField, Icon } from '@sparkpost/matchbox';
 import styles from './DateForm.module.scss';
 
 export default class DateForm extends Component {
-  dayFormat = 'YYYY-M-D';
+  dayFormat = 'YYYY-MM-DD';
   timeFormat = 'h:mma';
   DEBOUNCE = 500;
 
