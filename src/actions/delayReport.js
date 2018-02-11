@@ -1,63 +1,35 @@
 import _ from 'lodash';
-import { fetchDelayReasonsByDomain, fetchDeliverability } from 'src/actions/metrics';
-import { maybeRefreshTypeaheadCache, refreshReportRange } from 'src/actions/reportFilters';
-
+import { fetch as getMetrics } from 'src/actions/metrics';
+import { refreshReportRange } from 'src/actions/reportFilters';
 import { getQueryFromOptions, buildCommonOptions, getMetricsFromKeys } from 'src/helpers/metrics';
 
-export function refreshDelayTable({ reasons }) {
-  return {
-    type: 'REFRESH_DELAY_TABLE',
-    payload: { reasons }
-  };
-}
+const DELAY_METRICS = getMetricsFromKeys([
+  'count_accepted',
+  'count_delayed',
+  'count_delayed_first'
+]);
 
-export function loadDelayReasonsByDomain(updates = {}) {
+export function getDelayMetrics({ precision, ...updates } = {}) {
   return (dispatch, getState) => {
-    const { reportFilters } = getState();
-    const options = buildCommonOptions(reportFilters, updates);
-    const query = getQueryFromOptions(options);
-    const params = _.omit(query, ['precision', 'metrics']);
+    const options = buildCommonOptions(getState().reportFilters, updates);
 
-    maybeRefreshTypeaheadCache(dispatch, options, updates);
+    const reasonParams = _.omit(getQueryFromOptions(options), ['precision', 'metrics']);
+    const aggregateParams = _.omit(getQueryFromOptions({ ...options, metrics: DELAY_METRICS }), 'precision');
+
     dispatch(refreshReportRange(options));
 
-    return dispatch(fetchDelayReasonsByDomain(params))
-      .then((reasons) => {
-        dispatch(refreshDelayTable({ reasons }));
-      });
-  };
-}
-
-export function loadDelayMetrics(updates = {}) {
-  return (dispatch, getState) => {
-    const { reportFilters } = getState();
-
-    const delayMetrics = [
-      'count_accepted',
-      'count_delayed',
-      'count_delayed_first'
-    ];
-
-    updates.metrics = getMetricsFromKeys(delayMetrics);
-    const options = buildCommonOptions(reportFilters, updates);
-    const params = _.omit(getQueryFromOptions(options), 'precision');
-
-    maybeRefreshTypeaheadCache(dispatch, options, updates);
-    dispatch(refreshReportRange(options));
-
-    return dispatch(fetchDeliverability(params))
-      .then((aggregates) => {
-        dispatch(refreshDelayMetrics({ aggregates }));
-      });
+    return Promise.all([
+      dispatch(getMetrics({
+        type: 'GET_DELAY_REPORT_AGGREGATES',
+        path: 'deliverability',
+        params: aggregateParams
+      })),
+      dispatch(getMetrics({
+        type: 'GET_DELAY_REPORT_REASONS_BY_DOMAIN',
+        path: 'deliverability/delay-reason/domain',
+        params: reasonParams
+      }))
+    ]);
   };
 
-}
-
-export function refreshDelayMetrics({ aggregates }) {
-  return {
-    type: 'REFRESH_DELAY_AGGREGATES',
-    payload: {
-      aggregates: aggregates[0]
-    }
-  };
 }
