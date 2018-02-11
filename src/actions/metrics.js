@@ -37,9 +37,9 @@ export function fetchMetricsIpPools(params = {}) {
   return fetch({ type, path, params });
 }
 
-export function fetchDeliverability(params = {}) {
+export function fetchDeliverability({ params, type }) {
   const path = 'deliverability';
-  return fetch({ path, params });
+  return fetch({ path, params, type });
 }
 
 export function getTimeSeries(params = {}) {

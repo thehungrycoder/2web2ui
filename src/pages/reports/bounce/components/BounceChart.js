@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import _ from 'lodash';
 import { Grid, Panel } from '@sparkpost/matchbox';
 import { Loading, PieChart } from 'src/components';
 import { generateColors } from 'src/helpers/color';
-import styles from './ChartGroup.module.scss';
+import styles from './BounceChart.module.scss';
 
 // Chart color palette generated from:
 const primaryColor = '#DB2F3D';
 const secondaryColor = '#37aadc';
 
-export class ChartGroup extends Component {
+export default class BounceChart extends Component {
   state = {
     hoveredItem: null,
     active: null
@@ -144,11 +143,3 @@ export class ChartGroup extends Component {
     );
   }
 }
-
-const mapStateToProps = ({ bounceReport }) => ({
-  loading: bounceReport.aggregatesLoading || bounceReport.categoriesLoading,
-  aggregates: bounceReport.aggregates,
-  categories: bounceReport.categories,
-  types: bounceReport.types
-});
-export default connect(mapStateToProps, {})(ChartGroup);
