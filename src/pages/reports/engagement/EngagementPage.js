@@ -1,33 +1,20 @@
-import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import { Page } from '@sparkpost/matchbox';
-
-import { getAggregateMetrics, getLinkMetrics } from 'src/actions/engagementReport';
-import { showAlert } from 'src/actions/globalAlert';
+import { getEngagementMetrics } from 'src/actions/engagementReport';
+import Filters from 'src/pages/reports/components/Filters';
 import EngagementChart from './components/EngagementChart';
-import EngagementFilters from './components/EngagementFilters';
 import EngagementSummary from './components/EngagementSummary';
 import EngagementTable from './components/EngagementTable';
 
 export class EngagementPage extends Component {
-  onLoad = () => Promise.all([
-    this.props.getAggregateMetrics().catch(this.onLoadFail('Unable to load engagement chart.')),
-    this.props.getLinkMetrics().catch(this.onLoadFail('Unable to load link metrics.'))
-  ])
-
-  onLoadFail = (message) => (error) => {
-    const details = _.get(error, 'response.data.errors[0].message', error.message);
-    this.props.showAlert({ details, message, type: 'error' });
-  }
 
   render() {
-    const { aggregateMetrics, linkMetrics } = this.props;
+    const { aggregateMetrics, linkMetrics, getEngagementMetrics } = this.props;
 
     return (
       <Page title='Engagement Report'>
-        <EngagementFilters shareDisabled={aggregateMetrics.loading} onLoad={this.onLoad} />
+        <Filters refresh={getEngagementMetrics} />
         <EngagementSummary
           accepted={aggregateMetrics.data.count_accepted}
           clicks={aggregateMetrics.data.count_unique_clicked_approx}
@@ -52,6 +39,6 @@ const mapStateToProps = (state, props) => ({
   aggregateMetrics: state.engagementReport.aggregateMetrics,
   linkMetrics: state.engagementReport.linkMetrics
 });
-const mapDispatchToProps = { getAggregateMetrics, getLinkMetrics, showAlert };
+const mapDispatchToProps = { getEngagementMetrics };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(EngagementPage));
+export default connect(mapStateToProps, mapDispatchToProps)(EngagementPage);
