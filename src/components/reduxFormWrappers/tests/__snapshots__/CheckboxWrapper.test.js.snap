@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CheckboxWrapper renders checkbox with an error 1`] = `
+<Checkbox
+  error="Oh no!"
+  id="example"
+  name="example"
+  required={false}
+/>
+`;
+
+exports[`CheckboxWrapper renders checked checkbox 1`] = `
+<Checkbox
+  checked={true}
+  id="example"
+  name="example"
+  required={false}
+/>
+`;
+
+exports[`CheckboxWrapper renders unchecked checkbox 1`] = `
+<Checkbox
+  checked={false}
+  id="example"
+  name="example"
+  required={false}
+/>
+`;

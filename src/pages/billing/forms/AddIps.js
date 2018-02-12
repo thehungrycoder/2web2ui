@@ -8,6 +8,7 @@ import { addDedicatedIps } from 'src/actions/billing';
 import { showAlert } from 'src/actions/globalAlert';
 import { createPool } from 'src/actions/ipPools';
 import { TextFieldWrapper } from 'src/components';
+import Note from 'src/components/note/Note';
 import config from 'src/config';
 import IpPoolSelect from './fields/IpPoolSelect';
 import ErrorTracker from 'src/helpers/errorTracker';
@@ -119,10 +120,10 @@ class AddIps extends Component {
               validate={[required, minNumber(1), maxNumber(remainingCount)]}
             />
             <IpPoolSelect disabled={isDisabled} formName={FORM_NAME} />
-            <p className={styles.AddInfo}>
+            <Note>
               New dedicated IP addresses will need to be warmed up, so we suggest adding them to
               an isolated pool.  Read the <WarmUpArticleLink /> for more information.
-            </p>
+            </Note>
           </Panel.Section>
           <Panel.Section>
             <Button type='submit' primary disabled={isDisabled}>Add Dedicated IPs</Button>

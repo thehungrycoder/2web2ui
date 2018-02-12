@@ -34,6 +34,15 @@ export function endsWithWhitespace(value) {
   return /[\S]$/.test(value) ? undefined : 'Can\'t end in a whitespace character';
 }
 
+export function nonEmptyFile(file) {
+  return !file || file.size > 0 ? undefined : 'File must be non-empty';
+}
+
+export const fileExtension = _.memoize(function fileExtension(extension) {
+  const regex = RegExp(`.${extension}$`);
+  return (file) => !file || regex.test(file.name) ? undefined : `Must be a .${extension} file`;
+});
+
 export const maxLength = _.memoize(function maxLength(length) {
   return (value) => (value && value.length > length) ? `Must be ${length} characters or less` : undefined;
 });
@@ -58,4 +67,3 @@ export const maxFileSize = _.memoize(function maxFilesSize(maxSize) {
     return (file.size < maxSize) ? undefined : `Please keep file size under ${formatBytes(maxSize)}`;
   };
 });
-

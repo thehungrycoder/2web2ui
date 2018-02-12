@@ -26,10 +26,18 @@ const cases = {
   domain: {
     good: ['example.com', 'xo.co'],
     bad: ['101', 'no_capes']
+  },
+  nonEmptyFile: {
+    good: [{ size: 1 }, null],
+    bad: [{ size: 0 }]
   }
 };
 
 const memoizedCases = {
+  fileExtension: {
+    good: [['csv', { name: 'test.csv' }], ['csv', null]],
+    bad: [['csv', { name: 'test.txt' }]]
+  },
   maxLength: {
     good: [[1, '1'], [2, '12']],
     bad: [[1, '123']]
@@ -92,4 +100,3 @@ describe('Memoized validation helpers', () => {
     });
   });
 });
-
