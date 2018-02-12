@@ -19,8 +19,8 @@ cases('CreatePage', ({ name, ...props }) => {
         { row: 1, message: 'Wrong number of columns' }
       ]
     },
-    submitting: false,
-    submitFailed: true
+    submitFailed: true,
+    submitting: false
   },
   'renders upload form with parsing error too many details': {
     parseError: {
@@ -28,15 +28,15 @@ cases('CreatePage', ({ name, ...props }) => {
         ...Array.from(Array(100), (v, i) => ({ row: i, message: 'Oh no!' }))
       ]
     },
-    submitting: false,
-    submitFailed: true
+    submitFailed: true,
+    submitting: false
   },
   'renders upload form with parsing error message': {
     parseError: {
       message: 'Oh no, parsing!'
     },
-    submitting: false,
-    submitFailed: true
+    submitFailed: true,
+    submitting: false
   },
   'renders upload form with persist error': {
     persistError: {
@@ -48,8 +48,8 @@ cases('CreatePage', ({ name, ...props }) => {
         }
       }
     },
-    submitting: false,
-    submitFailed: true
+    submitFailed: true,
+    submitting: false
   },
   'renders disabled upload form when submitting': {
     submitting: true
