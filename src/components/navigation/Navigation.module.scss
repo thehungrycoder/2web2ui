@@ -95,12 +95,21 @@
     }
   }
 
+  &:focus {
+    color: color(gray, 10);
+    outline: none;
+  }
+
   &.isActive {
     color: color(gray, 10);
     background: color(gray, 2);
 
     .icon {
       fill: color(gray, 9);
+    }
+
+    .chevron {
+      fill: color(gray, 10);
     }
   }
 
@@ -114,17 +123,18 @@
     background: color(gray, 1);
 
     .chevron {
-      transform: translate(0, -50%) rotate(-90deg);
+      transform: translate(0, -50%) rotate(0);
     }
 
     & + .nestedList {
       display: block;
+      background: darken(color(gray, 1), 2);
     }
   }
 }
 
 .nestedList {
-  margin-bottom: spacing(small);
+  margin-bottom: 0;
 }
 
 .nestedList .link {
@@ -147,7 +157,7 @@
   right: rem(15);
   width: rem(24);
   height: rem(24);
-  transform: translate(0, -50%);
+  transform: translate(0, -50%) rotate(-90deg);
   fill: color(gray, 4);
   transition: 0.1s;
 }

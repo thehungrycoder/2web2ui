@@ -33,7 +33,8 @@
 
 .content {
   position: relative;
-  padding: spacing(larger);
+  padding: spacing();
+  overflow: hidden;
 
   .app & {
     flex: 1 0 0;
@@ -41,6 +42,7 @@
 
     @media screen and (min-width: breakpoint(medium)) {
       margin-top: rem(0);
+      padding: spacing(larger);
     }
   }
 
