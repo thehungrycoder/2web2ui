@@ -57,7 +57,7 @@ export class CreatePage extends Component {
   }
 
   render() {
-    const { handleSubmit: reduxFormSubmit, parseError, persistError, submitting } = this.props;
+    const { handleSubmit: reduxFormSubmit, parseError, persistError, submitFailed, submitting } = this.props;
 
     return (
       <Page
@@ -65,7 +65,7 @@ export class CreatePage extends Component {
         breadcrumbAction={{ content: 'Suppressions', Component: Link, to: '/lists/suppressions' }}
       >
         <form onSubmit={reduxFormSubmit(this.handleSubmit)}>
-          {(parseError || persistError) && !submitting && (
+          {(parseError || persistError) && submitFailed && !submitting && (
             <ApiErrorBanner
               errorDetails={this.renderErrorDetails()}
               message="Unable to upload your list of suppressions"
