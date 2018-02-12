@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
-import { refresh as refreshSummaryChart } from 'src/actions/summaryChart';
+import { refreshSummaryReport } from 'src/actions/summaryChart';
 import { addFilters } from 'src/actions/reportFilters';
 import { Page, Panel } from '@sparkpost/matchbox';
 import { Loading } from 'src/components';
@@ -26,7 +26,7 @@ export class SummaryReportPage extends Component {
 
   handleMetricsApply = (selectedMetrics) => {
     this.setState({ metricsModal: false });
-    this.props.refreshSummaryChart({ metrics: selectedMetrics });
+    this.props.refreshSummaryReport({ metrics: selectedMetrics });
   }
 
   handleModalToggle = (modal) => {
@@ -42,7 +42,7 @@ export class SummaryReportPage extends Component {
   }
 
   render() {
-    const { chart, refreshSummaryChart } = this.props;
+    const { chart, refreshSummaryReport } = this.props;
     const { scale, eventTime, metricsModal } = this.state;
 
     const selectedMetrics = chart.metrics.map((metric) => metric.key);
@@ -50,7 +50,7 @@ export class SummaryReportPage extends Component {
     return (
       <Page title='Summary Report'>
         <Filters
-          refresh={refreshSummaryChart}
+          refresh={refreshSummaryReport}
           reportLoading={chart.chartLoading}
           dynamicMetrics={selectedMetrics}
         />
@@ -89,7 +89,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   addFilters,
-  refreshSummaryChart
+  refreshSummaryReport
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SummaryReportPage);

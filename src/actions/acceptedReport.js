@@ -4,7 +4,7 @@ import { getQueryFromOptions, buildCommonOptions } from 'src/helpers/metrics';
 import { ACCEPTED_METRICS } from 'src/constants';
 
 // Load new metrics for the accepted chart
-export function refreshAcceptedMetrics(updates = {}) {
+export function refreshAcceptedReport(updates = {}) {
   return (dispatch, getState) => {
     // TODO: consider having action creators that already pre-load their hard-coded metrics or as a selector
     updates.metrics = ACCEPTED_METRICS;

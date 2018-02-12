@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import _ from 'lodash';
 import { addFilters } from 'src/actions/reportFilters';
-import { getDelayMetrics } from 'src/actions/delayReport';
+import { refreshDelayReport } from 'src/actions/delayReport';
 import { Page, Panel } from '@sparkpost/matchbox';
 import Filters from '../components/Filters';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
@@ -50,7 +50,7 @@ export class DelayPage extends Component {
 
     return (
       <Page title='Delay Report'>
-        <Filters refresh={this.props.getDelayMetrics} reportLoading={loading} />
+        <Filters refresh={this.props.refreshDelayReport} reportLoading={loading} />
         { this.renderTopLevelMetrics() }
         <Panel title='Delayed Messages' className='ReasonsTable'>
           { this.renderDataTable() }
@@ -73,7 +73,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   addFilters,
-  getDelayMetrics
+  refreshDelayReport
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(DelayPage));

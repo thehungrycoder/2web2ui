@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { refreshAcceptedMetrics } from 'src/actions/acceptedReport';
+import { refreshAcceptedReport } from 'src/actions/acceptedReport';
 import { selectAcceptedAggregates, selectAcceptedAttempts } from 'src/selectors/acceptedReport';
 import { Empty, PanelLoading } from 'src/components';
 import { Page } from '@sparkpost/matchbox';
@@ -41,7 +41,7 @@ export class AcceptedPage extends Component {
     const { loading } = this.props;
     return (
       <Page title='Accepted Report'>
-        <Filters refresh={this.props.refreshAcceptedMetrics} reportLoading={loading} />
+        <Filters refresh={this.props.refreshAcceptedReport} reportLoading={loading} />
         {this.renderTopLevelMetrics()}
         {this.renderChart()}
       </Page>
@@ -57,7 +57,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  refreshAcceptedMetrics
+  refreshAcceptedReport
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AcceptedPage);

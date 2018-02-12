@@ -7,7 +7,7 @@ const REJECTION_METRICS = getMetricsFromKeys([
   'count_targeted'
 ]);
 
-export function refreshRejections(updates = {}) {
+export function refreshRejectionReport(updates = {}) {
   return (dispatch, getState) => {
     const { reportFilters } = getState();
 

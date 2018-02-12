@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import _ from 'lodash';
 import { addFilters } from 'src/actions/reportFilters';
-import { refreshRejections } from 'src/actions/rejectionReport';
+import { refreshRejectionReport } from 'src/actions/rejectionReport';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
 import { Page, Panel } from '@sparkpost/matchbox';
 import Filters from '../components/Filters';
@@ -43,12 +43,12 @@ export class RejectionPage extends Component {
   }
 
   render() {
-    const { loading, refreshRejections } = this.props;
+    const { loading, refreshRejectionReport } = this.props;
 
     return (
       <Page title='Rejections Report'>
         <Filters
-          refresh={refreshRejections}
+          refresh={refreshRejectionReport}
           shareDisabled={loading}
         />
         { this.renderTopLevelMetrics() }
@@ -69,6 +69,6 @@ const mapStateToProps = ({ reportFilters, rejectionReport }) => ({
 
 const mapDispatchToProps = {
   addFilters,
-  refreshRejections
+  refreshRejectionReport
 };
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(RejectionPage));

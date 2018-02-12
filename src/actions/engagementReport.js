@@ -2,7 +2,7 @@ import * as metrics from 'src/actions/metrics';
 import { refreshReportRange } from 'src/actions/reportFilters';
 import { getQueryFromOptions, buildCommonOptions } from 'src/helpers/metrics';
 
-export function getEngagementMetrics(updates = {}, { getMetrics = metrics.fetch } = {}) {
+export function refreshEngagementReport(updates = {}, { getMetrics = metrics.fetch } = {}) {
   return (dispatch, getState) => {
     const options = buildCommonOptions(getState().reportFilters, updates);
     const params = getQueryFromOptions(options);

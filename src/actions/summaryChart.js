@@ -2,7 +2,7 @@ import { fetch as fetchMetrics } from 'src/actions/metrics';
 import { refreshReportRange } from 'src/actions/reportFilters';
 import { getQueryFromOptions, getMetricsFromKeys, buildCommonOptions } from 'src/helpers/metrics';
 
-export function refresh(updates = {}) {
+export function refreshSummaryReport(updates = {}) {
   return (dispatch, getState) => {
     const { reportFilters, summaryChart } = getState();
 

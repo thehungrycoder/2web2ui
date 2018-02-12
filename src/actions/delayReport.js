@@ -2,7 +2,7 @@ import { fetchDeliverability, fetchDelayReasonsByDomain } from 'src/actions/metr
 import { refreshReportRange } from 'src/actions/reportFilters';
 import { getQueryFromOptions, buildCommonOptions } from 'src/helpers/metrics';
 
-export function getDelayMetrics(updates = {}) {
+export function refreshDelayReport(updates = {}) {
   return (dispatch, getState) => {
     const options = buildCommonOptions(getState().reportFilters, updates);
     const params = getQueryFromOptions(options);
