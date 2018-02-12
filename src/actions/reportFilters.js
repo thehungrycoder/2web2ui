@@ -46,16 +46,6 @@ export function refreshTypeaheadCache(options) {
   };
 }
 
-export function maybeRefreshTypeaheadCache(dispatch, options, updates = {}) {
-  // refresh the typeahead cache if the date range has been updated
-  // const { relativeRange, from, to } = updates;
-
-  // if (relativeRange || from || to) {
-  //   const params = getQueryFromOptions({ from: options.from, to: options.to });
-  //   dispatch(refreshTypeaheadCache(params));
-  // }
-}
-
 export function addFilters(payload) {
   return {
     type: 'ADD_FILTERS',
@@ -71,9 +61,13 @@ export function removeFilter(payload) {
 }
 
 // refresh the date range
-export function refreshReportRange(options) {
+export function refreshReportRange({ relativeRange, ...options }) {
   return (dispatch, getState) => {
     const { reportFilters } = getState();
+
+    if (relativeRange && relativeRange !== 'custom') {
+      options = { ...options, ...getRelativeDates(relativeRange) };
+    }
 
     // do nothing if there is no change
     if (reportFilters.from === options.from, reportFilters.to === options.to) {
@@ -81,24 +75,7 @@ export function refreshReportRange(options) {
     }
 
     dispatch(refreshTypeaheadCache(options));
-    return dispatch({
-      type: 'REFRESH_REPORT_RANGE',
-      payload: options
-    });
-  };
-}
 
-export function refreshRelativeRange(options = {}) {
-  options = { ...options, ...getRelativeDates(options.relativeRange) };
-  return (dispatch, getState) => {
-    const { reportFilters } = getState();
-
-    // do nothing if there is no change
-    if (reportFilters.from === options.from, reportFilters.to === options.to) {
-      return;
-    }
-
-    dispatch(refreshTypeaheadCache(options));
     return dispatch({
       type: 'REFRESH_REPORT_RANGE',
       payload: options
