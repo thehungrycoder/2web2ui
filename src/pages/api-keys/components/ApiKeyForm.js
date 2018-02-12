@@ -19,7 +19,7 @@ import {
 import { selectSubaccountFromQuery } from 'src/selectors/subaccounts';
 import validIpList from '../helpers/validIpList';
 import { required } from 'src/helpers/validation';
-import GrantsCheckboxes from './GrantsCheckboxes';
+import GrantsCheckboxes from 'src/components/grantBoxes/GrantsCheckboxes';
 
 const formName = 'apiKeyForm';
 const grantsOptions = [

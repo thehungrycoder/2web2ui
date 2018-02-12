@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DomainStatusCell component renders domain status tag if not verified 1`] = `
+<DomainStatusTag
+  status="unverified"
+/>
+`;
+
+exports[`DomainStatusCell component renders ready for tag when verified 1`] = `
+<ReadyFor
+  bounce={false}
+  dkim={false}
+  sending={true}
+/>
+`;

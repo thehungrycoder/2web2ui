@@ -2,17 +2,19 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import { Panel, Button } from '@sparkpost/matchbox';
-import { TableCollection } from 'src/components';
+import { TableCollection, DomainStatusCell, StatusTooltipHeader } from 'src/components';
 import { selectSendingDomainsForSubaccount } from 'src/selectors/sendingDomains';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
 import { list as listDomains } from 'src/actions/sendingDomains';
 
 const columns = [
-  { label: 'Domain', width: '30%', sortKey: 'domain' }
+  { label: 'Domain', width: '30%', sortKey: 'domain' },
+  { label: <StatusTooltipHeader />, width: '40%' }
 ];
 
-export const getRowData = ({ domain }) => [
-  <Link to={`/account/sending-domains/edit/${domain}`}>{domain}</Link>
+export const getRowData = (row) => [
+  <Link to={`/account/sending-domains/edit/${row.domain}`}>{row.domain}</Link>,
+  <DomainStatusCell domain={row} />
 ];
 
 export class SendingDomainsTab extends Component {

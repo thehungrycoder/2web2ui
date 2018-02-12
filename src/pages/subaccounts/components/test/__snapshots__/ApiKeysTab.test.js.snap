@@ -18,7 +18,7 @@ exports[`ApiKeysTab empty 1`] = `
       size="default"
       to="/account/api-keys"
     >
-      Go to API Keys
+      Manage API Keys
     </Button>
   </Panel.Section>
 </Panel>
@@ -43,6 +43,7 @@ exports[`ApiKeysTab normal props 1`] = `
         Array [
           Object {
             "label": "Name",
+            "sortKey": "label",
             "width": "40%",
           },
           Object {
