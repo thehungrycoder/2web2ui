@@ -33,26 +33,39 @@ export class Filters extends Component {
   }
 
   componentDidUpdate(oldProps) {
+    let shouldRefresh = false;
+    let refreshOptions = {};
+
     if (oldProps.filters.activeList !== this.props.filters.activeList) {
-      this.refreshReport();
+      shouldRefresh = true;
     }
+
+    // TODO: figure out how to better handle summary custom refresh logic
+    if (oldProps.dynamicMetrics.join('') !== this.props.dynamicMetrics.join('')) {
+      shouldRefresh = true;
+      refreshOptions = { metrics: this.props.dynamicMetrics };
+    }
+
+    shouldRefresh && this.refreshReport(refreshOptions);
   }
 
+  // TODO: stop refreshing reports here, instead refresh report range and
+  // let reports listen for range/filter changes and refresh themselves
   refreshReport = (options) => {
     this.props.refresh(options)
       .then(
         this.updateLink,
-        (err) => this._mounted && this.props.showAlert({ type: 'error', message: 'Unable to refresh report', details: err.message })
+        (err) => this._mounted && this.props.showAlert({
+          type: 'error',
+          message: 'Unable to refresh report',
+          details: err.message
+        })
       );
   }
 
   parseSearch() {
-    const { options, filters } = parseSearch(this.props.location.search);
-
-    if (filters) {
-      this.props.addFilters(filters);
-    }
-
+    const { options, filters = []} = parseSearch(this.props.location.search);
+    this.props.addFilters(filters);
     return options;
   }
 
@@ -60,8 +73,14 @@ export class Filters extends Component {
     if (!this._mounted) {
       return;
     }
-    const { filters, history, location } = this.props;
+    const { filters, dynamicMetrics, history, location } = this.props;
     const query = getFilterSearchOptions(filters);
+
+    // TODO: figure out how to better handle summary custom refresh logic
+    if (Array.isArray(dynamicMetrics) && dynamicMetrics.length > 0) {
+      query.metrics = dynamicMetrics;
+    }
+
     const search = qs.stringify(query, { encode: false });
     this.setState({ query });
     history.replace({ pathname: location.pathname, search });

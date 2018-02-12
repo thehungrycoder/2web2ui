@@ -1,50 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import classnames from 'classnames';
-import qs from 'query-string';
-
 import { refresh as refreshSummaryChart } from 'src/actions/summaryChart';
-import { addFilters, initTypeaheadCache } from 'src/actions/reportFilters';
-import { getFilterSearchOptions, parseSearch } from 'src/helpers/reports';
-
+import { addFilters } from 'src/actions/reportFilters';
 import { Page, Panel } from '@sparkpost/matchbox';
 import { Loading } from 'src/components';
 import Filters from '../components/Filters';
-import ShareModal from '../components/ShareModal';
 import { Table, MetricsModal, ChartGroup, ChartHeader } from './components';
 
 import styles from './SummaryPage.module.scss';
 
 export class SummaryReportPage extends Component {
   state = {
-    shareModal: false,
     metricsModal: false,
     eventTime: 'real',
-    scale: 'linear',
-    query: {}
-  }
-
-  componentDidMount() {
-    this.handleRefresh(this.parseSearch());
-    this.props.initTypeaheadCache();
-  }
-
-  /**
-   * takes qp's and dispatches filters being added
-   * Note: this has to be done in page because Redux is wired
-   * and not in the helper
-   */
-  parseSearch() {
-    const { filters = [], options } = parseSearch(this.props.location.search);
-    this.props.addFilters(filters);
-    return options;
-  }
-
-  handleRefresh = (options) => {
-    // TODO: Re-arrange how options are handled here so that updateLink can run
-    // in parallel with refreshSummaryChart instead of having to wait for data to load
-    this.props.refreshSummaryChart(options).then(() => this.updateLink());
+    scale: 'linear'
   }
 
   renderLoading() {
@@ -56,7 +26,7 @@ export class SummaryReportPage extends Component {
 
   handleMetricsApply = (selectedMetrics) => {
     this.setState({ metricsModal: false });
-    this.handleRefresh({ metrics: selectedMetrics });
+    this.props.refreshSummaryChart({ metrics: selectedMetrics });
   }
 
   handleModalToggle = (modal) => {
@@ -71,26 +41,19 @@ export class SummaryReportPage extends Component {
     this.setState({ scale });
   }
 
-  updateLink = () => {
-    const { filters, chart, history } = this.props;
-
-    const query = {
-      metrics: chart.metrics.map((metric) => metric.key),
-      ...getFilterSearchOptions(filters)
-    };
-    const search = qs.stringify(query, { encode: false });
-
-    this.setState({ query });
-    history.replace({ pathname: '/reports/summary', search });
-  }
-
   render() {
-    const { chart } = this.props;
-    const { scale, eventTime, query, metricsModal, shareModal } = this.state;
+    const { chart, refreshSummaryChart } = this.props;
+    const { scale, eventTime, metricsModal } = this.state;
+
+    const selectedMetrics = chart.metrics.map((metric) => metric.key);
 
     return (
       <Page title='Summary Report'>
-        <Filters refresh={this.handleRefresh} onShare={() => this.handleModalToggle('shareModal')} shareDisabled={chart.chartLoading} />
+        <Filters
+          refresh={refreshSummaryChart}
+          reportLoading={chart.chartLoading}
+          dynamicMetrics={selectedMetrics}
+        />
 
         <Panel>
           <Panel.Section className={classnames(styles.ChartSection, chart.chartLoading && styles.pending)}>
@@ -108,13 +71,8 @@ export class SummaryReportPage extends Component {
           {this.renderLoading()}
         </Panel>
 
-        <Table refresh={this.handleRefresh} />
+        <Table />
 
-        <ShareModal
-          open={shareModal}
-          handleToggle={() => this.handleModalToggle('shareModal')}
-          query={query}
-        />
         <MetricsModal
           selectedMetrics={chart.metrics}
           open={metricsModal}
@@ -125,15 +83,13 @@ export class SummaryReportPage extends Component {
   }
 }
 
-const mapStateToProps = ({ reportFilters, summaryChart }) => ({
-  filters: reportFilters,
-  chart: summaryChart
+const mapStateToProps = (state) => ({
+  chart: state.summaryChart
 });
 
 const mapDispatchToProps = {
   addFilters,
-  refreshSummaryChart,
-  initTypeaheadCache
+  refreshSummaryChart
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SummaryReportPage));
+export default connect(mapStateToProps, mapDispatchToProps)(SummaryReportPage);

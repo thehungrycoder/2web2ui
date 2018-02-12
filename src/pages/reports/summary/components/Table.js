@@ -22,7 +22,6 @@ export class Table extends Component {
 
   handleRowClick = (item) => {
     this.props.addFilters([item]);
-    this.props.refresh();
   }
 
   getColumnHeaders() {
