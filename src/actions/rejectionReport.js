@@ -2,7 +2,7 @@ import { fetchRejectionReasonsByDomain, fetchDeliverability } from 'src/actions/
 import { refreshReportRange } from 'src/actions/reportFilters';
 import { getQueryFromOptions, buildCommonOptions, getMetricsFromKeys } from 'src/helpers/metrics';
 
-const rejectionMetrics = getMetricsFromKeys([
+const REJECTION_METRICS = getMetricsFromKeys([
   'count_rejected',
   'count_targeted'
 ]);
@@ -11,25 +11,18 @@ export function refreshRejections(updates = {}) {
   return (dispatch, getState) => {
     const { reportFilters } = getState();
 
-    updates.metrics = rejectionMetrics;
+    updates.metrics = REJECTION_METRICS;
     const options = buildCommonOptions(reportFilters, updates);
-    const query = getQueryFromOptions(options);
+    const params = getQueryFromOptions(options);
 
     dispatch(refreshReportRange(options));
 
     return Promise.all([
-      dispatch(fetchRejectionReasonsByDomain(query)),
-      dispatch(fetchDeliverability(query))
-    ])
-      .then(([reasons, [aggregates]]) => {
-        dispatch({
-          type: 'REFRESH_REJECTION_BY_DOMAIN_TABLE',
-          payload: { reasons }
-        });
-        dispatch({
-          type: 'REFRESH_REJECTION_AGGREGATES',
-          payload: { aggregates }
-        });
-      });
+      dispatch(fetchRejectionReasonsByDomain(params)),
+      dispatch(fetchDeliverability({
+        type: 'GET_REJECTION_AGGREGATES',
+        params
+      }))
+    ]);
   };
 }

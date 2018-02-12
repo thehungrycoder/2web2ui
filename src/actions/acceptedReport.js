@@ -4,27 +4,23 @@ import { getQueryFromOptions, buildCommonOptions } from 'src/helpers/metrics';
 import { ACCEPTED_METRICS } from 'src/constants';
 
 // Load new metrics for the accepted chart
-// Dispatches refreshAcceptedChart() on completion.
 export function refreshAcceptedMetrics(updates = {}) {
   return (dispatch, getState) => {
+    // TODO: consider having action creators that already pre-load their hard-coded metrics or as a selector
     updates.metrics = ACCEPTED_METRICS;
+
+    // TODO: Remove this and watch for changes in Filters component
     const state = getState();
     const options = buildCommonOptions(state.reportFilters, updates);
-    const query = getQueryFromOptions(options);
-
     dispatch(refreshReportRange(options));
 
-    // get new data
+    // TODO: This can probably become a selector for each query
+    const params = getQueryFromOptions(options);
+
     return Promise.all([
-      dispatch(fetchDeliverability(query)),
-      dispatch(fetchDeliveriesByAttempt(query))
-    ])
-      .then(([[aggregates], attempts]) => dispatch({
-        type: 'REFRESH_ACCEPTED_CHART',
-        payload: {
-          aggregates,
-          attempts
-        }
-      }));
+      // TODO: Should this just be an action like getAcceptedAggregates with hard-coded metrics and type?
+      dispatch(fetchDeliverability({ type: 'GET_ACCEPTED_AGGREGATES', params })),
+      dispatch(fetchDeliveriesByAttempt(params))
+    ]);
   };
 }

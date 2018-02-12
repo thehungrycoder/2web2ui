@@ -3,6 +3,8 @@ import { getMetricsFromKeys } from 'src/helpers/metrics';
 export const DEFAULT_REDIRECT_ROUTE = '/landing';
 export const AFTER_JOIN_REDIRECT_ROUTE = '/onboarding/plan';
 
+// These metrics are here because they are shared between action,
+// reducer, and selector and they involve computation
 export const ACCEPTED_METRICS = getMetricsFromKeys([
   'count_targeted',
   'count_sent',
