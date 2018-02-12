@@ -7,6 +7,7 @@ exports[`ListPage renders correctly 1`] = `
     Object {
       "Component": [Function],
       "content": "Add Suppressions",
+      "to": "/lists/suppressions/create",
     }
   }
   title="Suppressions"
@@ -55,6 +56,7 @@ exports[`ListPage renders correctly with subaccounts 1`] = `
     Object {
       "Component": [Function],
       "content": "Add Suppressions",
+      "to": "/lists/suppressions/create",
     }
   }
   title="Suppressions"
@@ -110,6 +112,7 @@ exports[`ListPage renders filter by email tab correctly when selected 1`] = `
     Object {
       "Component": [Function],
       "content": "Add Suppressions",
+      "to": "/lists/suppressions/create",
     }
   }
   title="Suppressions"

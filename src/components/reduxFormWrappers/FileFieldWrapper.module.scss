@@ -1,0 +1,46 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+@import '~@sparkpost/matchbox/src/components/TextField/TextField.module.scss';
+
+.Field {
+  border: none;
+  margin-left: 0;
+  margin-right: 0;
+  padding: 0;
+}
+
+.Button {
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.Dropzone {
+  @extend .Input;
+  border-right-style: none;
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+  cursor: pointer;
+}
+
+.DropzoneActive {
+  border-color: color(blue, light);
+  border-right-style: solid;
+  box-shadow: 0 0 0 1px color(blue, light);
+}
+
+.DropzoneDisabled {
+  background-color: color(grey, 9);
+  cursor: not-allowed;
+}
+
+.Help {
+  @extend .HelpText;
+}
+
+.InputWrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.Placeholder {
+  color: color(grey, 5);
+}

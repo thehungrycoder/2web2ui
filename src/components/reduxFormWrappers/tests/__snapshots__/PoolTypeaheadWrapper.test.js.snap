@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PoolTypeaheadWrapper renders pool typeahead 1`] = `
+<PoolTypeahead
+  name="example"
+  onChange={[MockFunction]}
+  pools={Array []}
+  selectedItem="Example Value"
+/>
+`;

@@ -28,3 +28,91 @@ Object {
   ],
 }
 `;
+
+exports[`Suppressions reducer when created suppressions 1`] = `
+Object {
+  "list": Array [
+    Object {
+      "description": "503: ",
+      "recipient": "bfle1m90k2@yahoo.com",
+      "source": "Bounce Rule",
+      "type": "non_transactional",
+    },
+    Object {
+      "description": "554: ",
+      "recipient": "lf4qg05tfq@hotmail.com",
+      "source": "Bounce Rule",
+      "subaccount_id": "101",
+      "type": "transactional",
+    },
+  ],
+  "persistError": undefined,
+}
+`;
+
+exports[`Suppressions reducer when failed to create or update suppressions 1`] = `
+Object {
+  "list": Array [
+    Object {
+      "description": "503: ",
+      "recipient": "bfle1m90k2@yahoo.com",
+      "source": "Bounce Rule",
+      "type": "non_transactional",
+    },
+    Object {
+      "description": "554: ",
+      "recipient": "lf4qg05tfq@hotmail.com",
+      "source": "Bounce Rule",
+      "subaccount_id": "101",
+      "type": "transactional",
+    },
+  ],
+  "persistError": Object {
+    "message": "Oh no!",
+  },
+}
+`;
+
+exports[`Suppressions reducer when failed to parse suppressions file 1`] = `
+Object {
+  "list": Array [
+    Object {
+      "description": "503: ",
+      "recipient": "bfle1m90k2@yahoo.com",
+      "source": "Bounce Rule",
+      "type": "non_transactional",
+    },
+    Object {
+      "description": "554: ",
+      "recipient": "lf4qg05tfq@hotmail.com",
+      "source": "Bounce Rule",
+      "subaccount_id": "101",
+      "type": "transactional",
+    },
+  ],
+  "parseError": Object {
+    "message": "Oh no!",
+  },
+}
+`;
+
+exports[`Suppressions reducer when parsed suppressions file 1`] = `
+Object {
+  "list": Array [
+    Object {
+      "description": "503: ",
+      "recipient": "bfle1m90k2@yahoo.com",
+      "source": "Bounce Rule",
+      "type": "non_transactional",
+    },
+    Object {
+      "description": "554: ",
+      "recipient": "lf4qg05tfq@hotmail.com",
+      "source": "Bounce Rule",
+      "subaccount_id": "101",
+      "type": "transactional",
+    },
+  ],
+  "parseError": undefined,
+}
+`;

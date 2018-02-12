@@ -256,6 +256,12 @@ const routes = [
     layout: App
   },
   {
+    path: '/lists/suppressions/create',
+    component: suppressions.CreatePage,
+    condition: hasGrants('suppression_lists/manage'),
+    layout: App
+  },
+  {
     path: '/webhooks',
     component: webhooks.ListPage,
     condition: hasGrants('webhooks/view'),

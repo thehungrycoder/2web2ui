@@ -1,6 +1,7 @@
 import moment from 'moment';
 import config from 'src/config';
 import _ from 'lodash';
+import csvFileParseRequest, { hasData, hasField } from 'src/actions/helpers/csvFileParseRequest';
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 import setSubaccountHeader from 'src/actions/helpers/setSubaccountHeader';
 import { refreshReportRange } from 'src/actions/reportFilters';
@@ -115,3 +116,59 @@ export function deleteSuppression(suppression) {
   });
 }
 
+const LIKE_NON = new RegExp('non', 'i');
+const LIKE_TRUE = new RegExp('true', 'i');
+
+// SEE: https://developers.sparkpost.com/api/suppression-list.html#suppression-list-bulk-insert-update-put
+export function createOrUpdateSuppressions(recipients, subaccount) {
+  const sanitizedRecipients = recipients.map(({
+    description, email, non_transactional, recipient, transactional, type
+  }) => {
+    // Convert deprecated type fields
+    if (!type && LIKE_TRUE.test(transactional)) { type = 'transactional'; }
+    if (!type && LIKE_TRUE.test(non_transactional)) { type = 'non_transactional'; }
+
+    // Format type value to provide a better user experience
+    if (type && LIKE_NON.test(type)) { type = 'non_transactional'; }
+    if (type && !LIKE_NON.test(type)) { type = 'transactional'; }
+
+    // Convert deprecated recipient fields
+    if (email && !recipient) { recipient = email; }
+
+    // Trim whitespace from recipient email (FAD-5095)
+    return { description, recipient: _.trim(recipient), type };
+  });
+
+  return sparkpostApiRequest({
+    type: 'CREATE_OR_UPDATE_SUPPRESSIONS',
+    meta: {
+      method: 'PUT',
+      url: '/suppression-list',
+      headers: setSubaccountHeader(subaccount),
+      data: {
+        recipients: sanitizedRecipients
+      }
+    }
+  });
+}
+
+export function parseSuppressionsFile(file) {
+  return csvFileParseRequest({
+    type: 'PARSE_SUPPRESSIONS_FILE',
+    meta: {
+      file,
+      validate: [
+        hasData,
+        hasField('recipient', 'email'),
+        hasField('type', 'non_transactional', 'transactional')
+      ]
+    }
+  });
+}
+
+export function uploadSuppressions(file, subaccount) {
+  return async(dispatch) => {
+    const recipients = await dispatch(parseSuppressionsFile(file));
+    return dispatch(createOrUpdateSuppressions(recipients, subaccount));
+  };
+}

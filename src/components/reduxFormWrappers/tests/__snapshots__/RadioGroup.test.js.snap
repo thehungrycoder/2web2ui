@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RadioGroup renders radio buttons 1`] = `
+<Radio.Group>
+  Choose one
+  <Radio
+    checked={false}
+    disabled={false}
+    id="Option One"
+    key="Option One"
+    label="Option One"
+    name="example"
+    value="one"
+  />
+  <Radio
+    checked={false}
+    disabled={false}
+    id="Option Two"
+    key="Option Two"
+    label="Option Two"
+    name="example"
+    value="two"
+  />
+</Radio.Group>
+`;
+
+exports[`RadioGroup renders radio buttons with first option checked 1`] = `
+<Radio.Group>
+  Choose one
+  <Radio
+    checked={true}
+    disabled={false}
+    id="Option One"
+    key="Option One"
+    label="Option One"
+    name="example"
+    value="one"
+  />
+  <Radio
+    checked={false}
+    disabled={false}
+    id="Option Two"
+    key="Option Two"
+    label="Option Two"
+    name="example"
+    value="two"
+  />
+</Radio.Group>
+`;
+
+exports[`RadioGroup renders radio buttons with second option disabled 1`] = `
+<Radio.Group>
+  Choose one
+  <Radio
+    checked={false}
+    disabled={false}
+    id="Option One"
+    key="Option One"
+    label="Option One"
+    name="example"
+    value="one"
+  />
+  <Radio
+    checked={false}
+    disabled={true}
+    id="Option Two"
+    key="Option Two"
+    label="Option Two"
+    name="example"
+    value="two"
+  />
+</Radio.Group>
+`;

@@ -13,12 +13,6 @@ import FilterForm from './components/FilterForm';
 import EmailSearch from './components/EmailSearch';
 import Results from './components/Results';
 
-const primaryAction = {
-  content: 'Add Suppressions',
-  Component: Link
-  // to: '/lists/suppressions/upload'
-};
-
 const tabs = [
   {
     content: 'Filters'
@@ -65,7 +59,11 @@ export class ListPage extends Component {
     return (
       <Page
         title='Suppressions'
-        primaryAction={primaryAction}
+        primaryAction={{
+          Component: Link,
+          content: 'Add Suppressions',
+          to: '/lists/suppressions/create'
+        }}
       >
         <Tabs
           selected={selectedTab}
