@@ -1,27 +1,20 @@
 import { fetch as fetchMetrics } from 'src/actions/metrics';
 import { refreshReportRange } from 'src/actions/reportFilters';
-import { getQueryFromOptions, getMetricsFromKeys } from 'src/helpers/metrics';
-import { getRelativeDates } from 'src/helpers/date';
+import { getQueryFromOptions, getMetricsFromKeys, buildCommonOptions } from 'src/helpers/metrics';
 
 export function refresh(updates = {}) {
   return (dispatch, getState) => {
-    const state = getState();
+    const { reportFilters, summaryChart } = getState();
 
     // if new metrics are included, convert them to their full representation from config
     if (updates.metrics) {
       updates.metrics = getMetricsFromKeys(updates.metrics);
     }
 
-    // if relativeRange is included, merge in the calculated from/to values
-    if (updates.relativeRange) {
-      Object.assign(updates, getRelativeDates(updates.relativeRange) || {});
-    }
-
     // merge in existing state
     const options = {
-      ...state.summaryChart,
-      ...state.reportFilters,
-      ...updates
+      ...summaryChart,
+      ...buildCommonOptions(reportFilters, updates)
     };
 
     dispatch(refreshReportRange(options));

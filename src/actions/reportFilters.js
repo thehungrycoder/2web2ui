@@ -61,12 +61,12 @@ export function removeFilter(payload) {
 }
 
 // refresh the date range
-export function refreshReportRange({ relativeRange, ...options }) {
+export function refreshReportRange(options) {
   return (dispatch, getState) => {
     const { reportFilters } = getState();
 
-    if (relativeRange && relativeRange !== 'custom') {
-      options = { ...options, ...getRelativeDates(relativeRange) };
+    if (options.relativeRange && options.relativeRange !== 'custom') {
+      options = { ...options, ...getRelativeDates(options.relativeRange) };
     }
 
     // do nothing if there is no change
