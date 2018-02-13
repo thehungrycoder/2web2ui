@@ -11,6 +11,12 @@ import _ from 'lodash';
 
 export class AcceptedPage extends Component {
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.reportFilters !== this.props.reportFilters) {
+      this.props.refreshAcceptedReport(nextProps.reportFilters);
+    }
+  }
+
   // TODO: move this logic into <TopLevelMetrics>
   renderTopLevelMetrics() {
     const { loading, aggregates, metrics } = this.props;
@@ -41,7 +47,7 @@ export class AcceptedPage extends Component {
     const { loading } = this.props;
     return (
       <Page title='Accepted Report'>
-        <Filters refresh={this.props.refreshAcceptedReport} reportLoading={loading} />
+        <Filters reportLoading={loading} />
         {this.renderTopLevelMetrics()}
         {this.renderChart()}
       </Page>
@@ -53,7 +59,8 @@ const mapStateToProps = (state) => ({
   attempts: selectAcceptedAttempts(state),
   aggregates: selectAcceptedAggregates(state),
   metrics: state.acceptedReport.metrics,
-  loading: state.acceptedReport.aggregatesLoading || state.acceptedReport.attemptsLoading
+  loading: state.acceptedReport.aggregatesLoading || state.acceptedReport.attemptsLoading,
+  reportFilters: state.reportFilters
 });
 
 const mapDispatchToProps = {

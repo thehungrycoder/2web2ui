@@ -1,6 +1,7 @@
 import { createSelector, createStructuredSelector } from 'reselect';
 import { getBandTypes, reshapeCategories, formatAggregates } from 'src/helpers/bounce';
 
+const selectReportFilters = (state) => state.reportFilters;
 const selectChartLoading = ({ bounceReport }) => bounceReport.aggregatesLoading || bounceReport.categoriesLoading;
 const selectReasonsLoading = ({ bounceReport }) => bounceReport.reasonsLoading;
 const selectTableLoading = createSelector(
@@ -31,5 +32,6 @@ export const mapStateToProps = createStructuredSelector({
   reasons: selectReasons,
   aggregates: selectFormattedAggregates,
   categories: selectReshapedClassifications,
-  types: selectBandTypes
+  types: selectBandTypes,
+  reportFilters: selectReportFilters
 });

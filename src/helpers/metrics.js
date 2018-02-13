@@ -73,12 +73,14 @@ export function getPrecisionType(precision) {
   return (indexedPrecisions[precision].time <= (60 * 24 * 2)) ? 'hours' : 'days';
 }
 
-export function getMetricsFromKeys(keys = []) {
+export function _getMetricsFromKeys(keys = []) {
   return keys.map((metric, i) => {
     const found = METRICS_LIST.find((M) => M.key === metric);
     return { ...found, name: found.key, stroke: chartColors[i] };
   });
 }
+
+export const getMetricsFromKeys = _.memoize(_getMetricsFromKeys, (keys = []) => keys.join(''));
 
 export function getKeysFromMetrics(metrics = []) {
   const flattened = _.flatMap(metrics, ({ key, computeKeys }) => computeKeys ? computeKeys : key);

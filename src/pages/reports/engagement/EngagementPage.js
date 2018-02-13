@@ -9,12 +9,18 @@ import EngagementTable from './components/EngagementTable';
 
 export class EngagementPage extends Component {
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.reportFilters !== this.props.reportFilters) {
+      this.props.refreshEngagementReport(nextProps.reportFilters);
+    }
+  }
+
   render() {
-    const { aggregateMetrics, linkMetrics, refreshEngagementReport } = this.props;
+    const { loading, aggregateMetrics, linkMetrics } = this.props;
 
     return (
       <Page title='Engagement Report'>
-        <Filters refresh={refreshEngagementReport} />
+        <Filters reportLoading={loading} />
         <EngagementSummary
           accepted={aggregateMetrics.data.count_accepted}
           clicks={aggregateMetrics.data.count_unique_clicked_approx}
@@ -35,9 +41,11 @@ export class EngagementPage extends Component {
   }
 }
 
-const mapStateToProps = (state, props) => ({
+const mapStateToProps = (state) => ({
+  loading: state.engagementReport.loading,
   aggregateMetrics: state.engagementReport.aggregateMetrics,
-  linkMetrics: state.engagementReport.linkMetrics
+  linkMetrics: state.engagementReport.linkMetrics,
+  reportFilters: state.reportFilters
 });
 const mapDispatchToProps = { refreshEngagementReport };
 

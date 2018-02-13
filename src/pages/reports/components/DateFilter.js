@@ -109,8 +109,6 @@ export class DateFilter extends Component {
       this.setState({ showDatePicker: true });
     } else {
       this.setState({ showDatePicker: false });
-      this.props.refresh({ relativeRange: value });
-
       this.props.refreshReportRange({ relativeRange: value });
     }
   }
@@ -121,8 +119,6 @@ export class DateFilter extends Component {
 
   handleSubmit = () => {
     this.setState({ showDatePicker: false, selecting: false });
-    this.props.refresh({ ...this.state.selected, relativeRange: 'custom' });
-
     this.props.refreshReportRange({ ...this.state.selected, relativeRange: 'custom' });
   }
 
@@ -136,7 +132,8 @@ export class DateFilter extends Component {
     const rangeSelect = <Select
       options={relativeDateOptions}
       onChange={this.handleSelectRange}
-      value={selectedRange} />;
+      value={selectedRange}
+      disabled={this.props.reportLoading} />;
 
     const dateField = <TextField
       labelHidden={true}

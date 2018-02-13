@@ -7,6 +7,7 @@ import { Page, Panel } from '@sparkpost/matchbox';
 import { Loading } from 'src/components';
 import Filters from '../components/Filters';
 import { Table, MetricsModal, ChartGroup, ChartHeader } from './components';
+import { selectSummaryReportState, selectSelectedMetrics } from 'src/selectors/summaryReport';
 
 import styles from './SummaryPage.module.scss';
 
@@ -15,6 +16,12 @@ export class SummaryReportPage extends Component {
     metricsModal: false,
     eventTime: 'real',
     scale: 'linear'
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.reportFilters !== this.props.reportFilters) {
+      this.props.refreshSummaryReport(nextProps.reportFilters);
+    }
   }
 
   renderLoading() {
@@ -42,15 +49,12 @@ export class SummaryReportPage extends Component {
   }
 
   render() {
-    const { chart, refreshSummaryReport } = this.props;
+    const { chart, selectedMetrics } = this.props;
     const { scale, eventTime, metricsModal } = this.state;
-
-    const selectedMetrics = chart.metrics.map((metric) => metric.key);
 
     return (
       <Page title='Summary Report'>
         <Filters
-          refresh={refreshSummaryReport}
           reportLoading={chart.chartLoading}
           dynamicMetrics={selectedMetrics}
         />
@@ -84,7 +88,9 @@ export class SummaryReportPage extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  chart: state.summaryChart
+  chart: selectSummaryReportState(state),
+  selectedMetrics: selectSelectedMetrics(state),
+  reportFilters: state.reportFilters
 });
 
 const mapDispatchToProps = {

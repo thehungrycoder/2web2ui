@@ -1,10 +1,9 @@
 import * as metrics from 'src/actions/metrics';
-import { getQueryFromOptions, buildCommonOptions } from 'src/helpers/metrics';
+import { getQueryFromOptions } from 'src/helpers/metrics';
 
 export function refreshEngagementReport(updates = {}, { getMetrics = metrics.fetch } = {}) {
-  return (dispatch, getState) => {
-    const options = buildCommonOptions(getState().reportFilters, updates);
-    const params = getQueryFromOptions(options);
+  return (dispatch) => {
+    const params = getQueryFromOptions(updates);
 
     return Promise.all([
       dispatch(getMetrics({

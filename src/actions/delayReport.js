@@ -1,10 +1,9 @@
 import { fetchDeliverability, fetchDelayReasonsByDomain } from 'src/actions/metrics';
-import { getQueryFromOptions, buildCommonOptions } from 'src/helpers/metrics';
+import { getQueryFromOptions } from 'src/helpers/metrics';
 
 export function refreshDelayReport(updates = {}) {
-  return (dispatch, getState) => {
-    const options = buildCommonOptions(getState().reportFilters, updates);
-    const params = getQueryFromOptions(options);
+  return (dispatch) => {
+    const params = getQueryFromOptions(updates);
 
     return Promise.all([
       dispatch(fetchDeliverability({

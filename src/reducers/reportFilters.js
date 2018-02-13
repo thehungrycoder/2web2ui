@@ -7,11 +7,11 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case 'SET_EXACT_TIME':
-      return { ...state, ...action.payload };
+    // case 'SET_EXACT_TIME':
+    //   return { ...state, ...action.payload };
 
-    case 'SET_RELATIVE_TIME':
-      return { ...state, ...action.payload };
+    // case 'SET_RELATIVE_TIME':
+    //   return { ...state, ...action.payload };
 
     case 'REFRESH_REPORT_RANGE': {
       const { to = state.to, from = state.from, relativeRange = state.relativeRange } = action.payload;

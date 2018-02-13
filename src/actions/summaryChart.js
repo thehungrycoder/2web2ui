@@ -1,27 +1,27 @@
 import { fetch as fetchMetrics } from 'src/actions/metrics';
-import { getQueryFromOptions, getMetricsFromKeys, buildCommonOptions } from 'src/helpers/metrics';
+import { getQueryFromOptions, getMetricsFromKeys } from 'src/helpers/metrics';
 
 export function refreshSummaryReport(updates = {}) {
   return (dispatch, getState) => {
-    const { reportFilters, summaryChart } = getState();
+    const { summaryChart } = getState();
 
     // if new metrics are included, convert them to their full representation from config
     if (updates.metrics) {
-      updates.metrics = getMetricsFromKeys(updates.metrics);
+      updates = { ...updates, metrics: getMetricsFromKeys(updates.metrics) };
     }
 
     // merge in existing state
-    const options = {
+    const merged = {
       ...summaryChart,
-      ...buildCommonOptions(reportFilters, updates)
+      ...updates
     };
 
     // convert new meta data into query param format
-    const params = getQueryFromOptions(options);
+    const params = getQueryFromOptions(merged);
 
     return Promise.all([
-      dispatch(getChartData({ params, metrics: options.metrics })),
-      dispatch(getTableData({ params, metrics: options.metrics }))
+      dispatch(getChartData({ params, metrics: merged.metrics })),
+      dispatch(getTableData({ params, metrics: merged.metrics }))
     ]);
   };
 }

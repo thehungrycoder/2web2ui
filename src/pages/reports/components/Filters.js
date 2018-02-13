@@ -24,8 +24,6 @@ export class Filters extends Component {
     // initial report load
     const { options, filters = []} = parseSearch(this.props.location.search);
     this.props.addFilters(filters);
-    this.refreshReport(options);
-
     this.props.refreshReportRange(options);
 
     // initial typeahead cache load
@@ -36,35 +34,19 @@ export class Filters extends Component {
     this._mounted = false;
   }
 
-  componentDidUpdate(oldProps) {
-    let shouldRefresh = false;
-    let refreshOptions = {};
+  componentDidUpdate(previousProps) {
+    let shouldUpdate = false;
 
-    if (oldProps.filters.activeList !== this.props.filters.activeList) {
-      shouldRefresh = true;
+    if (previousProps.filters !== this.props.filters) {
+      shouldUpdate = true;
     }
 
     // TODO: figure out how to better handle summary custom refresh logic
-    if (oldProps.dynamicMetrics.join('') !== this.props.dynamicMetrics.join('')) {
-      shouldRefresh = true;
-      refreshOptions = { metrics: this.props.dynamicMetrics };
+    if (previousProps.dynamicMetrics !== this.props.dynamicMetrics) {
+      shouldUpdate = true;
     }
 
-    shouldRefresh && this.refreshReport(refreshOptions);
-  }
-
-  // TODO: stop refreshing reports here, instead refresh report range and
-  // let reports listen for range/filter changes and refresh themselves
-  refreshReport = (options) => {
-    this.props.refresh(options)
-      .then(
-        this.updateLink,
-        (err) => this._mounted && this.props.showAlert({
-          type: 'error',
-          message: 'Unable to refresh report',
-          details: err.message
-        })
-      );
+    shouldUpdate && this.updateLink();
   }
 
   updateLink = () => {
@@ -116,7 +98,7 @@ export class Filters extends Component {
           <Grid>
             <Grid.Column xs={12} md={6}>
               <div className={styles.FieldWrapper}>
-                <DateFilter refresh={this.refreshReport} />
+                <DateFilter reportLoading={reportLoading} />
               </div>
             </Grid.Column>
             <Grid.Column xs={8} md={4} xl={5}>

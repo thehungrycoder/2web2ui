@@ -60,25 +60,39 @@ export function removeFilter(payload) {
   };
 }
 
-// refresh the date range
-export function refreshReportRange(options) {
+/**
+ * Refreshes the date range for all reports
+ *
+ * Calculates relative ranges if a non-custom relativeRange value is present,
+ * which will override passed in from/to dates
+ *
+ * Will also conditionally refresh the typeahead cache if the
+ * from and to values changed
+ *
+ * @param {Object} update
+ * @param {Date} update.from
+ * @param {Date} update.to
+ * @param {String} update.relativeRange
+ */
+export function refreshReportRange(update) {
   return (dispatch, getState) => {
     const { reportFilters } = getState();
+    update = { ...reportFilters, ...update };
 
-    if (options.relativeRange && options.relativeRange !== 'custom') {
-      options = { ...options, ...getRelativeDates(options.relativeRange) };
+    if (update.relativeRange && update.relativeRange !== 'custom') {
+      update = { ...update, ...getRelativeDates(update.relativeRange) };
     }
 
-    // do nothing if there is no change
-    if (reportFilters.from === options.from, reportFilters.to === options.to) {
+    // do nothing if there is no change (this may be unnecessary later)
+    if (reportFilters.from === update.from && reportFilters.to === update.to) {
       return;
     }
 
-    dispatch(refreshTypeaheadCache(options));
+    dispatch(refreshTypeaheadCache(update));
 
     return dispatch({
       type: 'REFRESH_REPORT_RANGE',
-      payload: options
+      payload: update
     });
   };
 }

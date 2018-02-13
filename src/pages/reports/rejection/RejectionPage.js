@@ -11,6 +11,13 @@ import MetricsSummary from '../components/MetricsSummary';
 import DataTable from './components/DataTable';
 
 export class RejectionPage extends Component {
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.reportFilters !== this.props.reportFilters) {
+      this.props.refreshRejectionReport(nextProps.reportFilters);
+    }
+  }
+
   renderCollection() {
     const { loading, list } = this.props;
 
@@ -43,17 +50,14 @@ export class RejectionPage extends Component {
   }
 
   render() {
-    const { loading, refreshRejectionReport } = this.props;
+    const { loading } = this.props;
 
     return (
       <Page title='Rejections Report'>
-        <Filters
-          refresh={refreshRejectionReport}
-          shareDisabled={loading}
-        />
-        { this.renderTopLevelMetrics() }
+        <Filters reportLoading={loading} />
+        {this.renderTopLevelMetrics()}
         <Panel title='Rejection Reasons' className='RejectionTable'>
-          { this.renderCollection() }
+          {this.renderCollection()}
         </Panel>
       </Page>
     );
@@ -64,7 +68,8 @@ const mapStateToProps = ({ reportFilters, rejectionReport }) => ({
   loading: rejectionReport.aggregatesLoading || rejectionReport.reasonsLoading,
   aggregatesLoading: rejectionReport.aggregatesLoading,
   aggregates: rejectionReport.aggregates,
-  list: rejectionReport.list
+  list: rejectionReport.list,
+  reportFilters
 });
 
 const mapDispatchToProps = {

@@ -12,6 +12,12 @@ import DelaysDataTable from './components/DelaysDataTable';
 
 export class DelayPage extends Component {
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.reportFilters !== this.props.reportFilters) {
+      this.props.refreshDelayReport(nextProps.reportFilters);
+    }
+  }
+
   renderDataTable() {
     const { loading, reasons, totalAccepted } = this.props;
 
@@ -50,7 +56,7 @@ export class DelayPage extends Component {
 
     return (
       <Page title='Delay Report'>
-        <Filters refresh={this.props.refreshDelayReport} reportLoading={loading} />
+        <Filters reportLoading={loading} />
         { this.renderTopLevelMetrics() }
         <Panel title='Delayed Messages' className='ReasonsTable'>
           { this.renderDataTable() }
@@ -67,7 +73,8 @@ const mapStateToProps = (state) => {
     reasons: state.delayReport.reasons,
     totalAccepted: aggregates ? aggregates.count_accepted : 1,
     aggregates,
-    aggregatesLoading: state.delayReport.aggregatesLoading
+    aggregatesLoading: state.delayReport.aggregatesLoading,
+    reportFilters: state.reportFilters
   };
 };
 

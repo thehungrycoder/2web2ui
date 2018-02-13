@@ -23,6 +23,13 @@ const columns = [
 ];
 
 export class BouncePage extends Component {
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.reportFilters !== this.props.reportFilters) {
+      this.props.refreshBounceReport(nextProps.reportFilters);
+    }
+  }
+
   getRowData = (item) => {
     const { aggregates = {}, addFilters } = this.props;
     const { reason, domain, bounce_category_name, bounce_class_name } = item;
@@ -98,7 +105,7 @@ export class BouncePage extends Component {
 
     return (
       <Page title='Bounce Report'>
-        <Filters refresh={this.props.refreshBounceReport} reportLoading={chartLoading} />
+        <Filters reportLoading={chartLoading} />
         { this.renderTopLevelMetrics() }
         { this.renderChart() }
         <Panel title='Bounced Messages' className='ReasonsTable'>
