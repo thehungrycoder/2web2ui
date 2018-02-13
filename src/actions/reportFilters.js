@@ -32,7 +32,7 @@ export function initTypeaheadCache(params) {
     if (Array.isArray(metrics.domains)) {
       return;
     }
-    const requests = []; //metricLists.map((list) => dispatch(list(params)));
+    const requests = [];//metricLists.map((list) => dispatch(list(params)));
     requests.push(dispatch(listTemplates()), dispatch(listSubaccounts()), dispatch(listSendingDomains()));
     return Promise.all(requests);
   };
@@ -43,6 +43,27 @@ export function refreshTypeaheadCache(options) {
   return (dispatch) => {
     const requests = metricLists.map((list) => dispatch(list(params)));
     return Promise.all(requests);
+  };
+}
+
+export function maybeRefreshTypeaheadCache(update) {
+  return (dispatch, getState) => {
+    const { reportFilters } = getState();
+
+    // do nothing if there is no change in from or to
+    if (reportFilters.from === update.from && reportFilters.to === update.to) {
+      return;
+    }
+
+    // refresh if the range is "custom"
+    if (update.relativeRange === 'custom') {
+      return dispatch(refreshTypeaheadCache(update));
+    }
+
+    // refresh if relative range is changing
+    if (update.relativeRange !== reportFilters.relativeRange) {
+      return dispatch(refreshTypeaheadCache(update));
+    }
   };
 }
 
@@ -79,16 +100,17 @@ export function refreshReportOptions(update) {
     const { reportFilters } = getState();
     update = { ...reportFilters, ...update };
 
+    // calculate relative dates if range is not "custom"
     if (update.relativeRange && update.relativeRange !== 'custom') {
       update = { ...update, ...getRelativeDates(update.relativeRange) };
     }
 
-    // do nothing if there is no change (this may be unnecessary later)
+    // do nothing if there is no change in from or to
     if (reportFilters.from === update.from && reportFilters.to === update.to) {
       return;
     }
 
-    dispatch(refreshTypeaheadCache(update));
+    dispatch(maybeRefreshTypeaheadCache(update));
 
     return dispatch({
       type: 'REFRESH_REPORT_OPTIONS',
