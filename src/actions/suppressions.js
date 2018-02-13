@@ -4,7 +4,7 @@ import _ from 'lodash';
 import csvFileParseRequest, { hasData, hasField } from 'src/actions/helpers/csvFileParseRequest';
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 import setSubaccountHeader from 'src/actions/helpers/setSubaccountHeader';
-import { refreshReportRange } from 'src/actions/reportFilters';
+import { refreshReportOptions } from 'src/actions/reportFilters';
 import { showAlert } from './globalAlert';
 
 const { apiDateFormat } = config;
@@ -78,7 +78,7 @@ export function searchSuppressions(options) {
   }
 
   return (dispatch, getState) => {
-    dispatch(refreshReportRange(reportFilters));
+    dispatch(refreshReportOptions(reportFilters));
 
     return dispatch(
       sparkpostApiRequest({

@@ -1,19 +1,23 @@
 import { fetch as fetchMetrics } from 'src/actions/metrics';
 import { getQueryFromOptions, getMetricsFromKeys } from 'src/helpers/metrics';
+import { getRelativeDates } from 'src/helpers/date';
 
 export function refreshSummaryReport(updates = {}) {
   return (dispatch, getState) => {
-    const { summaryChart } = getState();
+    const { summaryChart, reportFilters } = getState();
 
     // if new metrics are included, convert them to their full representation from config
     if (updates.metrics) {
       updates = { ...updates, metrics: getMetricsFromKeys(updates.metrics) };
     }
 
-    // merge in existing state
+    // merge together states
     const merged = {
       ...summaryChart,
-      ...updates
+      ...reportFilters,
+      ...getRelativeDates(reportFilters.relativeRange),
+      ...updates,
+      ...getRelativeDates(updates.relativeRange)
     };
 
     // convert new meta data into query param format

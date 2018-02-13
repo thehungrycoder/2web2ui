@@ -74,7 +74,7 @@ export function removeFilter(payload) {
  * @param {Date} update.to
  * @param {String} update.relativeRange
  */
-export function refreshReportRange(update) {
+export function refreshReportOptions(update) {
   return (dispatch, getState) => {
     const { reportFilters } = getState();
     update = { ...reportFilters, ...update };
@@ -91,7 +91,7 @@ export function refreshReportRange(update) {
     dispatch(refreshTypeaheadCache(update));
 
     return dispatch({
-      type: 'REFRESH_REPORT_RANGE',
+      type: 'REFRESH_REPORT_OPTIONS',
       payload: update
     });
   };

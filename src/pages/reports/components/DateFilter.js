@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import ReactDOM from 'react-dom';
 import { subMonths, format } from 'date-fns';
 import { getStartOfDay, getEndOfDay, relativeDateOptions } from 'src/helpers/date';
-import { refreshReportRange } from 'src/actions/reportFilters';
+import { refreshReportOptions } from 'src/actions/reportFilters';
 import { Button, Datepicker, TextField, Select, Popover } from '@sparkpost/matchbox';
 import DateForm from './DateForm';
 import styles from './DateFilter.module.scss';
@@ -109,7 +109,7 @@ export class DateFilter extends Component {
       this.setState({ showDatePicker: true });
     } else {
       this.setState({ showDatePicker: false });
-      this.props.refreshReportRange({ relativeRange: value });
+      this.props.refreshReportOptions({ relativeRange: value });
     }
   }
 
@@ -119,7 +119,7 @@ export class DateFilter extends Component {
 
   handleSubmit = () => {
     this.setState({ showDatePicker: false, selecting: false });
-    this.props.refreshReportRange({ ...this.state.selected, relativeRange: 'custom' });
+    this.props.refreshReportOptions({ ...this.state.selected, relativeRange: 'custom' });
   }
 
   render() {
@@ -174,4 +174,4 @@ export class DateFilter extends Component {
 }
 
 const mapStateToProps = ({ reportFilters }) => ({ filter: reportFilters });
-export default connect(mapStateToProps, { refreshReportRange })(DateFilter);
+export default connect(mapStateToProps, { refreshReportOptions })(DateFilter);

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
 import { refreshSummaryReport } from 'src/actions/summaryChart';
-import { addFilters } from 'src/actions/reportFilters';
+import { addFilters, refreshReportOptions } from 'src/actions/reportFilters';
 import { Page, Panel } from '@sparkpost/matchbox';
 import { Loading } from 'src/components';
 import Filters from '../components/Filters';
@@ -33,7 +33,7 @@ export class SummaryReportPage extends Component {
 
   handleMetricsApply = (selectedMetrics) => {
     this.setState({ metricsModal: false });
-    this.props.refreshSummaryReport({ metrics: selectedMetrics });
+    this.props.refreshReportOptions({ metrics: selectedMetrics });
   }
 
   handleModalToggle = (modal) => {
@@ -49,14 +49,14 @@ export class SummaryReportPage extends Component {
   }
 
   render() {
-    const { chart, selectedMetrics } = this.props;
+    const { chart } = this.props;
     const { scale, eventTime, metricsModal } = this.state;
 
     return (
       <Page title='Summary Report'>
         <Filters
           reportLoading={chart.chartLoading}
-          dynamicMetrics={selectedMetrics}
+          extraLinkParams={['metrics']}
         />
 
         <Panel>
@@ -95,6 +95,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   addFilters,
+  refreshReportOptions,
   refreshSummaryReport
 };
 

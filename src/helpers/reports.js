@@ -3,6 +3,13 @@ import _ from 'lodash';
 import qs from 'query-string';
 import { getRelativeDates } from 'src/helpers/date';
 
+const DEFAULT_LINK_PARAMS = [
+  'from',
+  'to',
+  'range',
+  'filters'
+];
+
 export function stringifyFilter(filter) {
   const subaccount = filter.type === 'Subaccount' ? `:${filter.id}` : '';
   return `${filter.type}:${filter.value}${subaccount}`;
@@ -13,17 +20,23 @@ export function dedupeFilters(filters) {
 }
 
 /**
- * Creates search options object from shared report options. Page specific options not included (ie. summary chart selected metrics)
+ * Creates search options object from all possible query string params.
+ * By default, only returns the DEFAULT_LINK_PARAMS, but report-specific
+ * params may be included with extraLinkParams (ie. summary chart selected metrics)
+ *
  * @param  {Object} filters - reportFilters state
+ * @param {Array} extraLinkParams - optional array of keys to include, on top of default keys
  * @return {Object} - formatted search options object
  */
-export function getFilterSearchOptions(filters) {
-  return {
+export function getReportSearchOptions(filters, extraLinkParams = []) {
+  const options = {
     from: moment(filters.from).utc().format(),
     to: moment(filters.to).utc().format(),
     range: filters.relativeRange,
-    filters: filters.activeList.map(stringifyFilter)
+    filters: filters.activeList.map(stringifyFilter),
+    metrics: filters.metrics.map((metric) => typeof metric === 'string' ? metric : metric.key)
   };
+  return _.pick(options, [ ...DEFAULT_LINK_PARAMS, ...extraLinkParams ]);
 }
 
 /**
@@ -40,8 +53,7 @@ export function parseSearch(search) {
     return { options: {}};
   }
 
-  const { from, to, range, metrics = [], filters = []} = qs.parse(search);
-  const metricsList = typeof metrics === 'string' ? [metrics] : metrics;
+  const { from, to, range, metrics, filters = []} = qs.parse(search);
   const filtersList = (typeof filters === 'string' ? [filters] : filters).map((filter) => {
     const parts = filter.split(':');
     const type = parts.shift();
@@ -61,9 +73,11 @@ export function parseSearch(search) {
   });
 
 
-  let options = {
-    metrics: metricsList
-  };
+  let options = {};
+
+  if (metrics) {
+    options.metrics = (typeof metrics === 'string') ? [metrics] : metrics;
+  }
 
   if (from) {
     options.from = new Date(from);

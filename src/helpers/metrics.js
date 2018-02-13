@@ -75,7 +75,12 @@ export function getPrecisionType(precision) {
 
 export function _getMetricsFromKeys(keys = []) {
   return keys.map((metric, i) => {
-    const found = METRICS_LIST.find((M) => M.key === metric);
+    const found = METRICS_LIST.find((M) => M.key === metric || M.key === metric.key);
+
+    if (!found) {
+      throw new Error(`Cannot find metric: ${JSON.stringify(metric)}`);
+    }
+
     return { ...found, name: found.key, stroke: chartColors[i] };
   });
 }

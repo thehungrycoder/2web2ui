@@ -2,15 +2,17 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import qs from 'query-string';
-import { addFilters, removeFilter, refreshReportRange, initTypeaheadCache } from 'src/actions/reportFilters';
+import { addFilters, removeFilter, refreshReportOptions, initTypeaheadCache } from 'src/actions/reportFilters';
 import ShareModal from './ShareModal';
-import { parseSearch, getFilterSearchOptions } from 'src/helpers/reports';
+import { parseSearch, getReportSearchOptions } from 'src/helpers/reports';
 import { Grid, Button, Panel, Tag } from '@sparkpost/matchbox';
 import Typeahead from './Typeahead';
 import DateFilter from './DateFilter';
 import typeaheadCacheSelector from 'src/selectors/reportFilterTypeaheadCache';
 import { showAlert } from 'src/actions/globalAlert';
 import styles from './Filters.module.scss';
+
+
 
 export class Filters extends Component {
   state = {
@@ -24,7 +26,7 @@ export class Filters extends Component {
     // initial report load
     const { options, filters = []} = parseSearch(this.props.location.search);
     this.props.addFilters(filters);
-    this.props.refreshReportRange(options);
+    this.props.refreshReportOptions(options);
 
     // initial typeahead cache load
     this.props.initTypeaheadCache();
@@ -35,33 +37,19 @@ export class Filters extends Component {
   }
 
   componentDidUpdate(previousProps) {
-    let shouldUpdate = false;
-
     if (previousProps.filters !== this.props.filters) {
-      shouldUpdate = true;
+      this.updateLink();
     }
-
-    // TODO: figure out how to better handle summary custom refresh logic
-    if (previousProps.dynamicMetrics !== this.props.dynamicMetrics) {
-      shouldUpdate = true;
-    }
-
-    shouldUpdate && this.updateLink();
   }
 
   updateLink = () => {
     if (!this._mounted) {
       return;
     }
-    const { filters, dynamicMetrics, history, location } = this.props;
-    const query = getFilterSearchOptions(filters);
-
-    // TODO: figure out how to better handle summary custom refresh logic
-    if (Array.isArray(dynamicMetrics) && dynamicMetrics.length > 0) {
-      query.metrics = dynamicMetrics;
-    }
-
+    const { filters, history, location, extraLinkParams = []} = this.props;
+    const query = getReportSearchOptions(filters, extraLinkParams);
     const search = qs.stringify(query, { encode: false });
+
     this.setState({ query });
     history.replace({ pathname: location.pathname, search });
   }
@@ -131,7 +119,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
   addFilters,
   removeFilter,
-  refreshReportRange,
+  refreshReportOptions,
   showAlert,
   initTypeaheadCache
 };

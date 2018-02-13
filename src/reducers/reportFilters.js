@@ -1,21 +1,19 @@
 import { dedupeFilters } from 'src/helpers/reports';
+import { getMetricsFromKeys } from 'src/helpers/metrics';
+import config from 'src/config';
 
 const initialState = {
   relativeRange: 'day',
-  activeList: []
+  activeList: [],
+  metrics: getMetricsFromKeys(config.summaryChart.defaultMetrics)
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    // case 'SET_EXACT_TIME':
-    //   return { ...state, ...action.payload };
 
-    // case 'SET_RELATIVE_TIME':
-    //   return { ...state, ...action.payload };
-
-    case 'REFRESH_REPORT_RANGE': {
-      const { to = state.to, from = state.from, relativeRange = state.relativeRange } = action.payload;
-      return { ...state, to, from, relativeRange };
+    case 'REFRESH_REPORT_OPTIONS': {
+      const { to = state.to, from = state.from, relativeRange = state.relativeRange, metrics = state.metrics } = action.payload;
+      return { ...state, to, from, relativeRange, metrics };
     }
 
     case 'ADD_FILTERS':
