@@ -1,5 +1,4 @@
 /* eslint-disable max-lines */
-import React from 'react';
 import {
   apiKeys,
   AuthPage,
@@ -77,11 +76,6 @@ const routes = [
     path: '/',
     public: true,
     redirect: '/auth'
-  },
-  {
-    path: '/routeprops',
-    public: true,
-    component: (props) => <pre><code>{JSON.stringify(props, null, 2)}</code></pre>
   },
   {
     path: '/auth',
