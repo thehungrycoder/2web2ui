@@ -1,5 +1,4 @@
 import { fetchDeliverability, fetchDeliveriesByAttempt } from 'src/actions/metrics';
-import { refreshReportRange } from 'src/actions/reportFilters';
 import { getQueryFromOptions, buildCommonOptions } from 'src/helpers/metrics';
 import { ACCEPTED_METRICS } from 'src/constants';
 
@@ -12,7 +11,6 @@ export function refreshAcceptedReport(updates = {}) {
     // TODO: Remove this and watch for changes in Filters component
     const state = getState();
     const options = buildCommonOptions(state.reportFilters, updates);
-    dispatch(refreshReportRange(options));
 
     // TODO: This can probably become a selector for each query
     const params = getQueryFromOptions(options);

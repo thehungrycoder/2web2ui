@@ -1,12 +1,9 @@
 import { fetchDeliverability, fetchBounceClassifications, fetchBounceReasonsByDomain } from 'src/actions/metrics';
-import { refreshReportRange } from 'src/actions/reportFilters';
 import { getQueryFromOptions, buildCommonOptions } from 'src/helpers/metrics';
 
 export function refreshBounceReport(updates = {}) {
   return (dispatch, getState) => {
     const options = buildCommonOptions(getState().reportFilters, updates);
-    dispatch(refreshReportRange(options));
-
     const params = getQueryFromOptions(options);
     delete params.precision;
 

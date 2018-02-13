@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import qs from 'query-string';
-import { addFilters, removeFilter, initTypeaheadCache } from 'src/actions/reportFilters';
+import { addFilters, removeFilter, refreshReportRange, initTypeaheadCache } from 'src/actions/reportFilters';
 import ShareModal from './ShareModal';
 import { parseSearch, getFilterSearchOptions } from 'src/helpers/reports';
 import { Grid, Button, Panel, Tag } from '@sparkpost/matchbox';
@@ -22,7 +22,11 @@ export class Filters extends Component {
     this._mounted = true;
 
     // initial report load
-    this.refreshReport(this.parseSearch());
+    const { options, filters = []} = parseSearch(this.props.location.search);
+    this.props.addFilters(filters);
+    this.refreshReport(options);
+
+    this.props.refreshReportRange(options);
 
     // initial typeahead cache load
     this.props.initTypeaheadCache();
@@ -61,12 +65,6 @@ export class Filters extends Component {
           details: err.message
         })
       );
-  }
-
-  parseSearch() {
-    const { options, filters = []} = parseSearch(this.props.location.search);
-    this.props.addFilters(filters);
-    return options;
   }
 
   updateLink = () => {
@@ -148,4 +146,11 @@ const mapStateToProps = (state) => ({
   filters: state.reportFilters,
   typeaheadCache: typeaheadCacheSelector(state)
 });
-export default withRouter(connect(mapStateToProps, { addFilters, removeFilter, showAlert, initTypeaheadCache })(Filters));
+const mapDispatchToProps = {
+  addFilters,
+  removeFilter,
+  refreshReportRange,
+  showAlert,
+  initTypeaheadCache
+};
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Filters));

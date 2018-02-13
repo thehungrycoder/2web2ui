@@ -1,5 +1,4 @@
 import { fetch as fetchMetrics } from 'src/actions/metrics';
-import { refreshReportRange } from 'src/actions/reportFilters';
 import { getQueryFromOptions, getMetricsFromKeys, buildCommonOptions } from 'src/helpers/metrics';
 
 export function refreshSummaryReport(updates = {}) {
@@ -16,8 +15,6 @@ export function refreshSummaryReport(updates = {}) {
       ...summaryChart,
       ...buildCommonOptions(reportFilters, updates)
     };
-
-    dispatch(refreshReportRange(options));
 
     // convert new meta data into query param format
     const params = getQueryFromOptions(options);
