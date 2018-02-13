@@ -18,7 +18,7 @@ class CollectionPagination extends Component {
       <Pagination
         pages={Math.ceil(data.length / perPage)}
         pageRange={pageRange}
-        initialIndex={(currentPage - 1)}
+        currentPage={currentPage}
         onChange={onPageChange}
       />
     );
