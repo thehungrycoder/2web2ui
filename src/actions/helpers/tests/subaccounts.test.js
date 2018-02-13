@@ -91,11 +91,12 @@ describe('formatSubaccount helper tests', () => {
   });
 
   it('should not set ip pool if default', () => {
-    expect(formatSubaccount({
+    const result = formatSubaccount({
       name: 'subby',
       ipPool: 'default'
     },
     getState
-    )).toMatchSnapshot();
+    );
+    expect(result).toMatchSnapshot();
   });
 });
