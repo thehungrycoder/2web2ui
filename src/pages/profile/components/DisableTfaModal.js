@@ -3,7 +3,7 @@ import Modal from 'src/components/modals/Modal';
 import styles from './TfaModals.module.scss';
 import { Panel, Button, TextField, Grid } from '@sparkpost/matchbox';
 
-export default class EnableTfaModal extends Component {
+export default class DisableTfaModal extends Component {
 
   state = {
     password: '',

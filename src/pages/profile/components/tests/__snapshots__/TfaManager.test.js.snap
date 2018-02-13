@@ -1,0 +1,183 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EnableTfaModal tests should render correctly 1`] = `
+<Panel
+  actions={
+    Array [
+      Object {
+        "content": "Enable 2FA",
+        "onClick": [Function],
+      },
+      Object {
+        "content": "Learn More",
+        "external": true,
+        "to": "https://www.sparkpost.com/docs/my-account-and-profile/enabling-two-factor-authentication",
+      },
+    ]
+  }
+  sectioned={true}
+  title="Two-factor Authentication"
+>
+  <LabelledValue
+    label="Status"
+  >
+    <h6>
+      Disabled
+    </h6>
+  </LabelledValue>
+  <BackupCodesModal
+    activeCount={1}
+    generate={[MockFunction]}
+    onClose={[Function]}
+    open={false}
+  />
+  <EnableTfaModal
+    enable={[Function]}
+    enabled={false}
+    getSecret={[MockFunction]}
+    onClose={[Function]}
+    open={false}
+    secret="shhh"
+    toggleError={false}
+    togglePending={false}
+    username="kevin-mitnick"
+  />
+  <DisableTfaModal
+    disable={[Function]}
+    enabled={false}
+    onClose={[Function]}
+    open={false}
+    toggleError={false}
+    togglePending={false}
+  />
+</Panel>
+`;
+
+exports[`EnableTfaModal tests should show a message about 0 codes 1`] = `
+<Panel
+  actions={
+    Array [
+      Object {
+        "content": "Generate New Backup Codes",
+        "onClick": [Function],
+      },
+      Object {
+        "content": "Disable 2FA",
+        "onClick": [Function],
+      },
+    ]
+  }
+  sectioned={true}
+  title="Two-factor Authentication"
+>
+  <LabelledValue
+    label="Status"
+  >
+    <h6>
+      Enabled
+    </h6>
+  </LabelledValue>
+  <LabelledValue
+    label="Active Codes"
+  >
+    <h6>
+      0
+    </h6>
+    <p>
+      <small>
+        We recommend saving a set of backup codes in case you lose or misplace your current device.
+      </small>
+    </p>
+  </LabelledValue>
+  <BackupCodesModal
+    activeCount={0}
+    generate={[MockFunction]}
+    onClose={[MockFunction]}
+    open={false}
+  />
+  <EnableTfaModal
+    enable={[MockFunction]}
+    enabled={true}
+    getSecret={[MockFunction]}
+    onClose={[MockFunction]}
+    open={false}
+    secret="shhh"
+    toggleError={false}
+    togglePending={false}
+    username="kevin-mitnick"
+  />
+  <DisableTfaModal
+    disable={[MockFunction]}
+    enabled={true}
+    onClose={[MockFunction]}
+    open={false}
+    toggleError={false}
+    togglePending={false}
+  />
+</Panel>
+`;
+
+exports[`EnableTfaModal tests should show panel loading while status uknown 1`] = `
+<PanelLoading
+  minHeight="100px"
+/>
+`;
+
+exports[`EnableTfaModal tests should toggle status text when enabled 1`] = `
+<Panel
+  actions={
+    Array [
+      Object {
+        "content": "Generate New Backup Codes",
+        "onClick": [Function],
+      },
+      Object {
+        "content": "Disable 2FA",
+        "onClick": [Function],
+      },
+    ]
+  }
+  sectioned={true}
+  title="Two-factor Authentication"
+>
+  <LabelledValue
+    label="Status"
+  >
+    <h6>
+      Enabled
+    </h6>
+  </LabelledValue>
+  <LabelledValue
+    label="Active Codes"
+  >
+    <h6>
+      1
+    </h6>
+  </LabelledValue>
+  <BackupCodesModal
+    activeCount={1}
+    generate={[MockFunction]}
+    onClose={[MockFunction]}
+    open={false}
+  />
+  <EnableTfaModal
+    enable={[MockFunction]}
+    enabled={true}
+    getSecret={[MockFunction]}
+    onClose={[MockFunction]}
+    open={false}
+    secret="shhh"
+    toggleError={false}
+    togglePending={false}
+    username="kevin-mitnick"
+  />
+  <DisableTfaModal
+    disable={[MockFunction]}
+    enabled={true}
+    onClose={[MockFunction]}
+    open={false}
+    toggleError={false}
+    togglePending={false}
+  />
+</Panel>
+`;
