@@ -31,63 +31,71 @@ const keyFieldsSelect = {
   }
 };
 
-test('name only', () => {
-  const result = formatSubaccount({ name: 'mySubAccount' }, getState);
-  expect(result).toMatchSnapshot();
-});
+describe('formatSubaccount helper tests', () => {
+  it('should return name only', () => {
+    const result = formatSubaccount({ name: 'mySubAccount' }, getState);
+    expect(result).toMatchSnapshot();
+  });
 
-test('with api key - all grants', () => {
-  const subaccount = {
-    name: 'allThePerms',
-    ...keyFieldsAll
-  };
-  const result = formatSubaccount(subaccount, getState);
-  expect(result).toMatchSnapshot();
-  expect(result).toHaveProperty('key_grants', [
-    'message_events/view',
-    'message_events/write',
-    'relay_webhooks/view',
-    'relay_webhooks/write',
-    'smtp/inject'
-  ]);
-  expect(getState).toHaveBeenCalled();
-});
+  it('should return api key - all grants', () => {
+    const subaccount = {
+      name: 'allThePerms',
+      ...keyFieldsAll
+    };
+    const result = formatSubaccount(subaccount, getState);
+    expect(result).toMatchSnapshot();
+    expect(result).toHaveProperty('key_grants', [
+      'message_events/view',
+      'message_events/write',
+      'relay_webhooks/view',
+      'relay_webhooks/write',
+      'smtp/inject'
+    ]);
+    expect(getState).toHaveBeenCalled();
+  });
 
-test('with api key - select grants', () => {
-  const subaccount = {
-    name: 'selectPerms',
-    ...keyFieldsSelect
-  };
-  const result = formatSubaccount(subaccount, getState);
-  expect(result).toMatchSnapshot();
-  expect(result).toHaveProperty('key_grants', [
-    'message_events/view',
-    'smtp/inject'
-  ]);
-});
+  it('should return api key - select grants', () => {
+    const subaccount = {
+      name: 'selectPerms',
+      ...keyFieldsSelect
+    };
+    const result = formatSubaccount(subaccount, getState);
+    expect(result).toMatchSnapshot();
+    expect(result).toHaveProperty('key_grants', [
+      'message_events/view',
+      'smtp/inject'
+    ]);
+  });
 
-test('with api key - valid ips', () => {
-  const result = formatSubaccount(
-    {
-      name: 'mySubAccount',
-      ...keyFieldsAll,
-      validIps: '10.20.30.40, 10.20.30.0/24'
+  it('should return api key - valid ips', () => {
+    const result = formatSubaccount(
+      {
+        name: 'mySubAccount',
+        ...keyFieldsAll,
+        validIps: '10.20.30.40, 10.20.30.0/24'
+      },
+      getState
+    );
+    expect(result).toMatchSnapshot();
+  });
+
+  it('should return subaccount with ip pool', () => {
+    const result = formatSubaccount(
+      {
+        name: 'pool account',
+        ipPool: 'marketing_ip_pool'
+      },
+      getState
+    );
+    expect(result).toMatchSnapshot();
+  });
+
+  it('should not set ip pool if default', () => {
+    expect(formatSubaccount({
+      name: 'subby',
+      ipPool: 'default'
     },
     getState
-  );
-  expect(result).toMatchSnapshot();
-});
-
-test('with ip pool', () => {
-  const result = formatSubaccount(
-    {
-      name: 'pool account',
-      ipPool: {
-        id: 'marketing_ip_pool',
-        name: 'Marketing IP Pool'
-      }
-    },
-    getState
-  );
-  expect(result).toMatchSnapshot();
+    )).toMatchSnapshot();
+  });
 });

@@ -55,7 +55,7 @@ export const CheckboxWrapper = ({ input, meta, ...rest }) => {
     <Checkbox
       id={input.name}
       {...input}
-      checked={input.value}
+      checked={input.value || false}
       error={!active && touched && error ? error : undefined}
       {...rest}
     />

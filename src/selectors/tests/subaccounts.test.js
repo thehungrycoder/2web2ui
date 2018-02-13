@@ -86,15 +86,15 @@ describe('Subaccount selectors', () => {
     });
   });
 
-  describe('selectSubaccountStatus', () => {
+  describe('selectInitialSubaccountValues', () => {
     it('should return status if not set by compliance', () => {
-      const state = { subaccount: { compliance: false, status: 'valid' }};
-      expect(selector.selectSubaccountStatus(state)).toEqual('valid');
+      const state = { name: 'subby', ip_pool: 'pool-id', compliance: false, status: 'valid' };
+      expect(selector.selectInitialSubaccountValues(state)).toMatchSnapshot();
     });
 
     it('should return status + by SparkPost if set by compliance', () => {
-      const state = { subaccount: { compliance: true, status: 'terminated' }};
-      expect(selector.selectSubaccountStatus(state)).toEqual('terminated by SparkPost');
+      const state = { name: 'subby', compliance: true, status: 'terminated' };
+      expect(selector.selectInitialSubaccountValues(state)).toMatchSnapshot();
     });
   });
 

@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Subaccount selectors selectInitialSubaccountValues should return status + by SparkPost if set by compliance 1`] = `
+Object {
+  "ipPool": "default",
+  "name": "subby",
+  "status": "terminated by SparkPost",
+}
+`;
+
+exports[`Subaccount selectors selectInitialSubaccountValues should return status if not set by compliance 1`] = `
+Object {
+  "ipPool": "pool-id",
+  "name": "subby",
+  "status": "valid",
+}
+`;

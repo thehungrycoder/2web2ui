@@ -243,3 +243,56 @@ exports[`on create scenario should show api key banner on new key 1`] = `
   </Switch>
 </Page>
 `;
+
+exports[`should select sending domains tab 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "Subaccounts",
+      "to": "/account/subaccounts",
+    }
+  }
+  empty={Object {}}
+  title="Bob Evans, the restaurant. (123)"
+>
+  <Tabs
+    connectBelow={true}
+    selected={2}
+    tabs={
+      Array [
+        Object {
+          "Component": [Function],
+          "content": "Details",
+          "to": "/account/subaccounts/123",
+        },
+        Object {
+          "Component": [Function],
+          "content": "API Keys",
+          "to": "/account/subaccounts/123/api-keys",
+        },
+        Object {
+          "Component": [Function],
+          "content": "Sending Domains",
+          "to": "/account/subaccounts/123/sending-domains",
+        },
+      ]
+    }
+  />
+  <Switch>
+    <Route
+      exact={true}
+      path="/account/subaccounts/123"
+      render={[Function]}
+    />
+    <Route
+      path="/account/subaccounts/123/api-keys"
+      render={[Function]}
+    />
+    <Route
+      path="/account/subaccounts/123/sending-domains"
+      render={[Function]}
+    />
+  </Switch>
+</Page>
+`;

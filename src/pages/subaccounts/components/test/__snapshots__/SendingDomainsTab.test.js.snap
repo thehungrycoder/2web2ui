@@ -18,47 +18,6 @@ Array [
 ]
 `;
 
-exports[`SendingDomainsTab should domains in tab 1`] = `
-<Panel>
-  <div>
-    <Panel.Section>
-      <p>
-        Sending Domains assigned to this subaccount.
-      </p>
-    </Panel.Section>
-    <TableCollection
-      columns={
-        Array [
-          Object {
-            "label": "Domain",
-            "sortKey": "domain",
-            "width": "30%",
-          },
-          Object {
-            "label": <StatusTooltipHeader />,
-            "width": "40%",
-          },
-        ]
-      }
-      defaultSortColumn={null}
-      defaultSortDirection="asc"
-      getRowData={[Function]}
-      pagination={true}
-      rows={
-        Array [
-          Object {
-            "domain": "foo.com",
-          },
-          Object {
-            "domain": "bar.com",
-          },
-        ]
-      }
-    />
-  </div>
-</Panel>
-`;
-
 exports[`SendingDomainsTab should load domains in tab 1`] = `
 <Panel>
   <div>
