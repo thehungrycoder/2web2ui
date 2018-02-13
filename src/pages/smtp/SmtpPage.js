@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Page } from '@sparkpost/matchbox';
-import SmtpDetails from './components/SmtpDetails';
+import { Page, Panel } from '@sparkpost/matchbox';
+import SmtpDetails from 'src/components/smtpDetails/SmtpDetails';
 import DefaultTrackingForm from './components/TrackingToggle';
 import { update as updateAccount } from 'src/actions/account';
 import { showAlert } from 'src/actions/globalAlert';
@@ -32,7 +32,7 @@ export class SmtpPage extends Component {
   render() {
     return (
       <Page title='SMTP Relay'>
-        <SmtpDetails />
+        <Panel sectioned accent><SmtpDetails /></Panel>
         <DefaultTrackingForm toggle={this.toggleTracking} />
       </Page>
     );

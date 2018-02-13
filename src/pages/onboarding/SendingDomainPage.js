@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { Panel, UnstyledLink, TextField, Button, Icon } from '@sparkpost/matchbox';
-import { SparkPost } from 'src/components';
+import { CenteredLogo } from 'src/components';
 import { LINKS } from 'src/constants';
 
 import styles from './Onboarding.module.scss';
@@ -10,11 +10,7 @@ class SendingDomainPage extends Component {
   render() {
     return (
       <Fragment>
-        <div className={styles.LogoWrapper}>
-          <UnstyledLink to={LINKS.SP_HOME_PAGE} title="SparkPost">
-            <SparkPost.Logo />
-          </UnstyledLink>
-        </div>
+        <CenteredLogo />
         <Panel accent title='Welcome to SparkPost!'>
           <Panel.Section>
             <p>Let's get you set up to send some email!</p>

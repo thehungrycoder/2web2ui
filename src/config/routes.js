@@ -385,7 +385,7 @@ const routes = [
   },
   {
     path: '/super-hidden-route/smtp',
-    component: onboarding.SendingDomainPage
+    component: onboarding.SmtpPage
   },
   {
     path: '/super-hidden-route/api',
