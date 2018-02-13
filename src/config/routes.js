@@ -380,16 +380,16 @@ const routes = [
     component: onboarding.SendingDomainPage
   },
   {
-    path: '/super-hidden-route/smtp-api',
-    component: onboarding.SmtpApiPage
+    path: '/super-hidden-route/email',
+    component: onboarding.SmtpOrApiPage
   },
   {
-    path: '/super-hidden-route/smtp',
+    path: '/super-hidden-route/email/smtp',
     component: onboarding.SmtpPage
   },
   {
-    path: '/super-hidden-route/api',
-    component: onboarding.SendingDomainPage
+    path: '/super-hidden-route/email/api',
+    component: onboarding.ApiPage
   }
 ];
 

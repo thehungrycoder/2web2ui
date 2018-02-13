@@ -1,9 +1,11 @@
 import SendingDomainPage from './SendingDomainPage';
-import SmtpApiPage from './SmtpApiPage';
+import SmtpOrApiPage from './SmtpOrApiPage';
 import SmtpPage from './SmtpPage';
+import ApiPage from './ApiPage';
 
 export default {
   SendingDomainPage,
-  SmtpApiPage,
-  SmtpPage
+  SmtpOrApiPage,
+  SmtpPage,
+  ApiPage
 };

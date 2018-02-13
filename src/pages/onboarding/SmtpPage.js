@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { CenteredLogo } from 'src/components';
 import SmtpDetails from 'src/components/smtpDetails/SmtpDetails';
 import { Panel, UnstyledLink, Icon } from '@sparkpost/matchbox';
+import Steps from './components/Steps';
 
 import styles from './Onboarding.module.scss';
 
@@ -23,6 +24,7 @@ class SmtpPage extends Component {
                 Continue to dashboard <Icon name='ArrowRight'/>
             </UnstyledLink>
           </Panel.Section>
+          <Steps />
         </Panel>
       </Fragment>
     );

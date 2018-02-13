@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { Panel, UnstyledLink, TextField, Button, Icon } from '@sparkpost/matchbox';
 import { CenteredLogo } from 'src/components';
+import Steps from './components/Steps';
 import { LINKS } from 'src/constants';
 
 import styles from './Onboarding.module.scss';
@@ -22,12 +23,13 @@ class SendingDomainPage extends Component {
           <Panel.Section>
             <Button primary>Add Domain</Button>
             <UnstyledLink
-              to='/super-hidden-route/smtp-api'
+              to='/super-hidden-route/email'
               Component={Link}
               className={styles.SkipLink}>
                 Skip for now <Icon name='ArrowRight'/>
             </UnstyledLink>
           </Panel.Section>
+          <Steps />
         </Panel>
       </Fragment>
     );
