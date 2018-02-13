@@ -4,11 +4,11 @@ import * as mockRaven from 'raven-js';
 jest.mock('raven-js');
 
 describe('.breadcrumbCallback', () => {
-  test('returns false with blacklisted breadcrumb', () => {
+  it('returns false with blacklisted breadcrumb', () => {
     expect(breadcrumbCallback({ message: '@@redux-form/CHANGE' })).toBeFalsy();
   });
 
-  test('returns breadcrumb', () => {
+  it('returns breadcrumb', () => {
     const breadcrumb = { message: 'RECORD_ME' };
     expect(breadcrumbCallback(breadcrumb)).toEqual(breadcrumb);
   });
@@ -20,16 +20,22 @@ describe('.getEnricherOrDieTryin', () => {
 
   beforeEach(() => { getState.mockReset(); });
 
-  test('with current user', () => {
+  it('with current user', () => {
     const currentUser = { access_level: 'admin', customer: '123', username: 'test-user' };
     getState.mockReturnValue({ currentUser });
-    expect(enrich({ logger: 'test' })).toEqual({ logger: 'test', user: currentUser });
+    expect(enrich({ logger: 'test' })).toMatchSnapshot();
   });
 
-  test('without current user', () => {
+  it('without current user', () => {
     const currentUser = {};
     getState.mockReturnValue({ currentUser });
-    expect(enrich({ logger: 'test' })).toEqual({ logger: 'test', user: currentUser });
+    expect(enrich({ logger: 'test' })).toMatchSnapshot();
+  });
+
+  it('with tags', () => {
+    const currentUser = { customer: '123' };
+    getState.mockReturnValue({ currentUser });
+    expect(enrich({ logger: 'test', tags: { tenant: 'test' }})).toMatchSnapshot();
   });
 });
 
@@ -48,12 +54,12 @@ describe('.install', () => {
     install.mockRestore();
   });
 
-  test('does nothing when not configured', () => {
+  it('does nothing when not configured', () => {
     ErrorTracker.install({}, store);
     expect(config).not.toHaveBeenCalled();
   });
 
-  test('installs error tracking service with configuration', () => {
+  it('installs error tracking service with configuration', () => {
     ErrorTracker.install({ sentry: {}}, store);
     expect(config).toHaveBeenCalled();
   });
@@ -74,13 +80,13 @@ describe('.report', () => {
     isSetup.mockRestore();
   });
 
-  test('does nothing when not setup', () => {
+  it('does nothing when not setup', () => {
     isSetup.mockReturnValue(false);
     ErrorTracker.report('test-logger', error);
     expect(captureException).not.toHaveBeenCalled();
   });
 
-  test('sends error when setup', () => {
+  it('sends error when setup', () => {
     isSetup.mockReturnValue(true);
     ErrorTracker.report('test-logger', error);
     expect(captureException).toHaveBeenCalledWith(error, { logger: 'test-logger' });
