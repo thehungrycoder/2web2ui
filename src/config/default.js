@@ -98,7 +98,18 @@ const config = {
   timeFormat: 'h:mma',
   messageEvents: {
     retentionPeriodDays: 10
-  }
+  },
+  recaptcha: {
+    key: '6LeFZQETAAAAACWJfxw_DKHgEPnop3brlj9IsHrY',
+    invisibleKey: '6LekChoUAAAAAJZouMPHnhRss2t7-ZetbAABfsOZ'
+  },
+  attribution: {
+    cookieName: 'attribution',
+    cookieDuration: 60 * 24 * 30,
+    // cookieDomain: '.sparkpost.com' //TODO change it before merge
+    cookieDomain: 'localhost'
+  },
+  salesforceDataParams: ['sfdcid', 'src', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term']
 };
 
 export default config;
