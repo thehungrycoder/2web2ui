@@ -1,0 +1,22 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.LogoWrapper {
+  text-align: center;
+  margin-bottom: spacing()
+}
+
+.spacer { 
+  margin-bottom: 16px;
+}
+
+.inline {
+  fieldset {
+    display: inline-block;
+  }
+
+  div.touLabel {
+    display: inline-block;
+    margin-left: 5px;
+  }
+  
+}
