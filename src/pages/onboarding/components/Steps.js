@@ -12,13 +12,14 @@ const steps = [
 ];
 
 class Steps extends Component {
+
+  // TODO this can probably be in render
   state = {
     currentStep: 0
   }
 
   componentDidMount() {
     const { location } = this.props;
-
 
     steps.forEach((step, i) => {
       if (location.pathname.includes(step.path)) {
@@ -45,11 +46,7 @@ class Steps extends Component {
       );
     });
 
-    return (
-      <ul className={styles.Steps}>
-        {items}
-      </ul>
-    );
+    return <ul className={styles.Steps}>{items}</ul>;
   }
 }
 
