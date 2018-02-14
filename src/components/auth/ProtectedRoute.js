@@ -6,21 +6,21 @@ import _ from 'lodash';
 
 export class ProtectedRoute extends Component {
 
-  renderComponent(propsFromRoute) {
+  renderComponent(reactRouterProps) {
     const { component: Component, condition } = this.props;
 
     return (
       <AccessControl condition={condition} redirect='/404'>
-        <Component {...propsFromRoute} />
+        <Component {...reactRouterProps} />
       </AccessControl>
     );
   }
 
-  renderRoute = () => {
+  renderRoute = (reactRouterProps) => {
     const { auth } = this.props;
 
     return auth.loggedIn
-      ? this.renderComponent(this.props)
+      ? this.renderComponent(reactRouterProps)
       : (
         <Redirect to={{
           pathname: '/auth',
@@ -31,8 +31,8 @@ export class ProtectedRoute extends Component {
 
   render() {
     // can't pass component prop to Route below or it confuses RR
-    const routeProps = _.omit(this.props, ['component', 'auth', 'condition']);
-    return (<Route {...routeProps} render={this.renderRoute} />);
+    const protectedRouteProps = _.omit(this.props, ['component', 'auth', 'condition']);
+    return (<Route {...protectedRouteProps} render={this.renderRoute} />);
   }
 }
 
