@@ -1,7 +1,7 @@
-import * as metrics from 'src/actions/metrics';
+import { fetch as getMetrics } from 'src/actions/metrics';
 import { getQueryFromOptions } from 'src/helpers/metrics';
 
-export function refreshEngagementReport(updates = {}, { getMetrics = metrics.fetch } = {}) {
+export function refreshEngagementReport(updates = {}) {
   return (dispatch) => {
     const params = getQueryFromOptions(updates);
 

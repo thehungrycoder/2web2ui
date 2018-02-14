@@ -2,7 +2,8 @@ import { fetch as fetchMetrics } from 'src/actions/metrics';
 import { getQueryFromOptions, getMetricsFromKeys } from 'src/helpers/metrics';
 import { getRelativeDates } from 'src/helpers/date';
 
-export function refreshSummaryReport(updates = {}) {
+// second argument is only for mocking local functions that can't be otherwise mocked or spied on in jest-land
+export function refreshSummaryReport(updates = {}, { getChartData = _getChartData, getTableData = _getTableData } = {}) {
   return (dispatch, getState) => {
     const { summaryChart, reportFilters } = getState();
 
@@ -30,14 +31,14 @@ export function refreshSummaryReport(updates = {}) {
   };
 }
 
-export function getChartData({ params = {}, metrics }) {
+export function _getChartData({ params, metrics }) {
   const options = {
     type: 'FETCH_CHART_DATA',
     path: 'deliverability/time-series',
     params
   };
 
-  return (dispatch, getState) => dispatch(fetchMetrics(options)).then((results) => {
+  return (dispatch) => dispatch(fetchMetrics(options)).then((results) => {
     const payload = {
       data: results,
       precision: params.precision,
@@ -48,7 +49,7 @@ export function getChartData({ params = {}, metrics }) {
   });
 }
 
-export function getTableData({ params, metrics, groupBy }) {
+export function _getTableData({ params, metrics, groupBy }) {
   return (dispatch, getState) => {
     const state = getState();
 

@@ -1,30 +1,51 @@
-import * as actionCreators from '../engagementReport';
-import time from 'src/__testHelpers__/time';
+import { refreshEngagementReport } from '../engagementReport';
+import * as metricsActions from 'src/actions/metrics';
+import * as metricsHelpers from 'src/helpers/metrics';
 
-it('params to get engagement chart data', () => {
-  const mockDispatch = jest.fn((a) => a);
-  const mockGetState = jest.fn(() => ({
-    reportFilters: {
-      from: time({ day: 1 }),
-      relativeRange: 'day',
-      to: time({ day: 2 })
-    }
-  }));
-  const thunk = actionCreators.getAggregateMetrics({ getMetrics: jest.fn((a) => a) });
+jest.mock('src/helpers/metrics');
+jest.mock('src/actions/metrics');
 
-  expect(thunk(mockDispatch, mockGetState)).toMatchSnapshot();
-});
+describe('Action Creator: Refresh Engagement Report', () => {
 
-it('params to get engagement table data', () => {
-  const mockDispatch = jest.fn((a) => a);
-  const mockGetState = jest.fn(() => ({
-    reportFilters: {
-      from: time({ day: 1 }),
-      relativeRange: 'day',
-      to: time({ day: 2 })
-    }
-  }));
-  const thunk = actionCreators.getLinkMetrics({ getMetrics: jest.fn((a) => a) });
+  let dispatchMock;
+  let queryMock;
+  let updates;
+  let result;
 
-  expect(thunk(mockDispatch, mockGetState)).toMatchSnapshot();
+  beforeEach(() => {
+    queryMock = {};
+    updates = { abc: 'cool' };
+    metricsHelpers.getQueryFromOptions = jest.fn(() => queryMock);
+    dispatchMock = jest.fn((a) => Promise.resolve(a));
+    result = refreshEngagementReport(updates)(dispatchMock);
+  });
+
+  it('should return a promise', () => {
+    expect(result).toBeInstanceOf(Promise);
+  });
+
+  it('should get query options, passing in updates', () => {
+    expect(metricsHelpers.getQueryFromOptions).toHaveBeenCalledWith(updates);
+  });
+
+  it('should dispatch actions', () => {
+    expect(dispatchMock).toHaveBeenCalledTimes(2);
+    expect(metricsActions.fetch).toHaveBeenCalledWith({
+      params: {
+        ...queryMock,
+        metrics: 'count_accepted,count_targeted,count_unique_clicked_approx,count_unique_confirmed_opened_approx'
+      },
+      path: 'deliverability',
+      type: 'GET_ENGAGEMENT_AGGREGATE_METRICS'
+    });
+    expect(metricsActions.fetch).toHaveBeenCalledWith({
+      params: {
+        ...queryMock,
+        metrics: 'count_clicked,count_raw_clicked_approx'
+      },
+      path: 'deliverability/link-name',
+      type: 'GET_ENGAGEMENT_LINK_METRICS'
+    });
+  });
+
 });

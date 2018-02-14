@@ -27,11 +27,11 @@ describe('Action Creator: Refresh Accepted Report', () => {
     expect(result).toBeInstanceOf(Promise);
   });
 
-  it('should call for query options with combined updates and accepted metrics constant', () => {
+  it('should get query options, passing in combined updates and metrics constant', () => {
     expect(metricsHelpers.getQueryFromOptions).toHaveBeenCalledWith({ abc: 'cool', metrics: { accepted: 'metrics' }});
   });
 
-  it('should dispatch two actions', () => {
+  it('should dispatch actions', () => {
     expect(dispatchMock).toHaveBeenCalledTimes(2);
     expect(metricsActions.fetchDeliverability).toHaveBeenCalledWith({
       type: 'GET_ACCEPTED_AGGREGATES',
