@@ -11,7 +11,7 @@ describe('Component: BackupCodesModal', () => {
     const props = {
       codes: [],
       open: true,
-      activeCodes: 10,
+      activeCount: 10,
       error: null,
       generate: jest.fn(),
       pending: false,

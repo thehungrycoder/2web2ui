@@ -37,20 +37,22 @@ export default class DisableTfaModal extends Component {
     return (
       <Modal open={open}>
         <Panel title='Disable Two-Factor Authentication' accent>
-          <Panel.Section>
-            <p>Enter your SparkPost password to disable two-factor authentication.</p>
-            <Grid>
-              <Grid.Column xs={12} md={6}>
-                <TextField type='password' error={(this.state.showErrors && toggleError) ? 'Incorrect password' : ''} placeholder='Enter your password' onChange={this.handleInputChange} value={this.state.password} />
-              </Grid.Column>
-            </Grid>
-          </Panel.Section>
-          <Panel.Section>
-            <Button primary onClick={() => this.props.disable(this.state.password)}>
-              {togglePending ? 'Disabling...' : 'Disable 2FA'}
-            </Button>
-            <Button onClick={onClose} className={styles.Cancel}>Cancel</Button>
-          </Panel.Section>
+          <form onSubmit={(e) => e.preventDefault()}>
+            <Panel.Section>
+              <p>Enter your SparkPost password to disable two-factor authentication.</p>
+              <Grid>
+                <Grid.Column xs={12} md={6}>
+                  <TextField type='password' error={(this.state.showErrors && toggleError) ? 'Incorrect password' : ''} placeholder='Enter your password' onChange={this.handleInputChange} value={this.state.password} />
+                </Grid.Column>
+              </Grid>
+            </Panel.Section>
+            <Panel.Section>
+              <Button type='submit' primary onClick={() => this.props.disable(this.state.password)}>
+                {togglePending ? 'Disabling...' : 'Disable 2FA'}
+              </Button>
+              <Button onClick={onClose} className={styles.Cancel}>Cancel</Button>
+            </Panel.Section>
+          </form>
         </Panel>
       </Modal>
     );

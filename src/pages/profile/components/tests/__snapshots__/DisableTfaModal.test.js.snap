@@ -8,42 +8,47 @@ exports[`DisableTfaModal tests should render correctly 1`] = `
     accent={true}
     title="Disable Two-Factor Authentication"
   >
-    <Panel.Section>
-      <p>
-        Enter your SparkPost password to disable two-factor authentication.
-      </p>
-      <Grid>
-        <Grid.Column
-          md={6}
-          xs={12}
+    <form
+      onSubmit={[Function]}
+    >
+      <Panel.Section>
+        <p>
+          Enter your SparkPost password to disable two-factor authentication.
+        </p>
+        <Grid>
+          <Grid.Column
+            md={6}
+            xs={12}
+          >
+            <TextField
+              error=""
+              onChange={[Function]}
+              placeholder="Enter your password"
+              required={false}
+              resize="both"
+              type="password"
+              value=""
+            />
+          </Grid.Column>
+        </Grid>
+      </Panel.Section>
+      <Panel.Section>
+        <Button
+          onClick={[Function]}
+          primary={true}
+          size="default"
+          type="submit"
         >
-          <TextField
-            error=""
-            onChange={[Function]}
-            placeholder="Enter your password"
-            required={false}
-            resize="both"
-            type="password"
-            value=""
-          />
-        </Grid.Column>
-      </Grid>
-    </Panel.Section>
-    <Panel.Section>
-      <Button
-        onClick={[Function]}
-        primary={true}
-        size="default"
-      >
-        Disable 2FA
-      </Button>
-      <Button
-        onClick={[MockFunction]}
-        size="default"
-      >
-        Cancel
-      </Button>
-    </Panel.Section>
+          Disable 2FA
+        </Button>
+        <Button
+          onClick={[MockFunction]}
+          size="default"
+        >
+          Cancel
+        </Button>
+      </Panel.Section>
+    </form>
   </Panel>
 </Modal>
 `;
@@ -56,42 +61,47 @@ exports[`DisableTfaModal tests should show disabling as button text when toggleP
     accent={true}
     title="Disable Two-Factor Authentication"
   >
-    <Panel.Section>
-      <p>
-        Enter your SparkPost password to disable two-factor authentication.
-      </p>
-      <Grid>
-        <Grid.Column
-          md={6}
-          xs={12}
+    <form
+      onSubmit={[Function]}
+    >
+      <Panel.Section>
+        <p>
+          Enter your SparkPost password to disable two-factor authentication.
+        </p>
+        <Grid>
+          <Grid.Column
+            md={6}
+            xs={12}
+          >
+            <TextField
+              error=""
+              onChange={[MockFunction]}
+              placeholder="Enter your password"
+              required={false}
+              resize="both"
+              type="password"
+              value=""
+            />
+          </Grid.Column>
+        </Grid>
+      </Panel.Section>
+      <Panel.Section>
+        <Button
+          onClick={[Function]}
+          primary={true}
+          size="default"
+          type="submit"
         >
-          <TextField
-            error=""
-            onChange={[MockFunction]}
-            placeholder="Enter your password"
-            required={false}
-            resize="both"
-            type="password"
-            value=""
-          />
-        </Grid.Column>
-      </Grid>
-    </Panel.Section>
-    <Panel.Section>
-      <Button
-        onClick={[Function]}
-        primary={true}
-        size="default"
-      >
-        Disabling...
-      </Button>
-      <Button
-        onClick={[MockFunction]}
-        size="default"
-      >
-        Cancel
-      </Button>
-    </Panel.Section>
+          Disabling...
+        </Button>
+        <Button
+          onClick={[MockFunction]}
+          size="default"
+        >
+          Cancel
+        </Button>
+      </Panel.Section>
+    </form>
   </Panel>
 </Modal>
 `;
@@ -104,42 +114,47 @@ exports[`DisableTfaModal tests should show error on TextField when toggleError a
     accent={true}
     title="Disable Two-Factor Authentication"
   >
-    <Panel.Section>
-      <p>
-        Enter your SparkPost password to disable two-factor authentication.
-      </p>
-      <Grid>
-        <Grid.Column
-          md={6}
-          xs={12}
+    <form
+      onSubmit={[Function]}
+    >
+      <Panel.Section>
+        <p>
+          Enter your SparkPost password to disable two-factor authentication.
+        </p>
+        <Grid>
+          <Grid.Column
+            md={6}
+            xs={12}
+          >
+            <TextField
+              error="Incorrect password"
+              onChange={[MockFunction]}
+              placeholder="Enter your password"
+              required={false}
+              resize="both"
+              type="password"
+              value=""
+            />
+          </Grid.Column>
+        </Grid>
+      </Panel.Section>
+      <Panel.Section>
+        <Button
+          onClick={[Function]}
+          primary={true}
+          size="default"
+          type="submit"
         >
-          <TextField
-            error="Incorrect password"
-            onChange={[MockFunction]}
-            placeholder="Enter your password"
-            required={false}
-            resize="both"
-            type="password"
-            value=""
-          />
-        </Grid.Column>
-      </Grid>
-    </Panel.Section>
-    <Panel.Section>
-      <Button
-        onClick={[Function]}
-        primary={true}
-        size="default"
-      >
-        Disable 2FA
-      </Button>
-      <Button
-        onClick={[MockFunction]}
-        size="default"
-      >
-        Cancel
-      </Button>
-    </Panel.Section>
+          Disable 2FA
+        </Button>
+        <Button
+          onClick={[MockFunction]}
+          size="default"
+        >
+          Cancel
+        </Button>
+      </Panel.Section>
+    </form>
   </Panel>
 </Modal>
 `;

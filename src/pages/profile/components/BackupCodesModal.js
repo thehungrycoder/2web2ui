@@ -31,42 +31,51 @@ export default class BackupCodesModal extends Component {
 
   renderButtons = () => {
     const { pending, onClose } = this.props;
-    const hasCodes = this.props.codes.length > 0;
-    return (
-      <div>
-        { !hasCodes && <Button type='submit' disabled={pending} primary onClick={this.generateCodes}>
-          { pending ? 'Generating...' : 'Generate' }
-        </Button> }
-        { hasCodes && <Button primary onClick={onClose}>Close</Button> }
-        { !hasCodes && <Button onClick={onClose} className={styles.Cancel}>Cancel</Button> }
-      </div>
-    );
+    const generatedCodes = this.props.codes.length > 0;
+    if (generatedCodes) {
+      return (
+        <div>
+          <Button primary onClick={onClose}>Close</Button>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <Button type='submit' disabled={pending} primary onClick={this.generateCodes}>
+            { pending ? 'Generating...' : 'Generate' }
+          </Button>
+          <Button onClick={onClose} className={styles.Cancel}>Cancel</Button>
+        </div>
+      );
+
+    }
   }
 
   render() {
     const {
       open,
-      activeCodes,
+      activeCount,
       error,
       codes
     } = this.props;
-    const hasCodes = codes.length > 0;
+    const generatedCodes = codes.length > 0;
+    const hasCodes = activeCount > 0;
 
     return (
       <Modal open={open}>
         <Panel title='Generate Two-factor Backup Codes' accent>
           <form onSubmit={(e) => e.preventDefault()}>
             <Panel.Section>
-              { !hasCodes && <Banner status="warning" >
-                Clicking Generate will overwrite the {activeCodes} backup codes
+              { !generatedCodes && hasCodes && <Banner status="warning" >
+                Clicking Generate will overwrite the {activeCount} backup codes
               </Banner> }
               <p>Keep these single-use backup codes somewhere safe but accessible.
                 They can be used if your authentication app is unavailable (<span role="img" aria-label="phone in toilet emojis">📱  ➡︎🚽</span> , etc).
               </p>
               <Grid>
                 <Grid.Column xs={12} md={6}>
-                  { !hasCodes && <TextField required type='password' onChange={this.handleInputChange} placeholder='Password' value={this.state.password} error={(this.state.showErrors && error) ? 'Incorrect Password' : ''} /> }
-                  { hasCodes && <BackupCodes codes={codes} /> }
+                  { !generatedCodes && <TextField required type='password' onChange={this.handleInputChange} placeholder='Password' value={this.state.password} error={(this.state.showErrors && error) ? 'Incorrect Password' : ''} /> }
+                  { generatedCodes && <BackupCodes codes={codes} /> }
                 </Grid.Column>
               </Grid>
             </Panel.Section>
