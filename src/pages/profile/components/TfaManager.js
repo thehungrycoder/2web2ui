@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Panel, Icon } from '@sparkpost/matchbox';
+import { Panel } from '@sparkpost/matchbox';
 import { PanelLoading, LabelledValue } from 'src/components';
 import * as tfaActions from 'src/actions/tfa';
 import BackupCodesModal from './BackupCodesModal';
@@ -20,10 +20,6 @@ export class TfaManager extends Component {
     if (this.props.statusUnknown) {
       this.props.getTfaStatus();
     }
-
-    if (!this.props.secret) {
-      this.props.getTfaSecret();
-    }
   }
 
   closeModals = () => this.setState({ openModal: null });
@@ -36,20 +32,18 @@ export class TfaManager extends Component {
   enable = (code) => this.props.toggleTfa({ enabled: true, code });
   disable = (password) => this.props.toggleTfa({ enabled: false, password });
 
-  renderStatusMessage() {
+  renderBackupCodesStatus() {
     const { enabled, backupCodes } = this.props;
 
     if (!enabled) {
       return null;
     }
 
-    if (backupCodes.activeCodes > 0) {
-      return <p><small>You currently have {backupCodes.activeCodes} codes remaining.</small></p>;
-    }
-
-    // TODO: remove this <br> but settle on styling for this message
     return (
-      <p><br /><Icon name="ErrorOutline" size={15} /> <small>We recommend saving a set of backup codes in case you lose or misplace your current device.</small></p>
+      <LabelledValue label='Active Codes'>
+        <h6>{backupCodes.activeCount}</h6>
+        {(backupCodes.activeCount === 0) && <p><small>We recommend saving a set of backup codes in case you lose or misplace your current device.</small></p>}
+      </LabelledValue>
     );
   }
 
@@ -82,7 +76,7 @@ export class TfaManager extends Component {
         <LabelledValue label='Status'>
           <h6>{enabled ? 'Enabled' : 'Disabled'}</h6>
         </LabelledValue>
-        {this.renderStatusMessage()}
+        {this.renderBackupCodesStatus()}
         <BackupCodesModal
           open={this.state.openModal === 'backupCodes'}
           onClose={this.closeBackupModal}
@@ -94,6 +88,7 @@ export class TfaManager extends Component {
           onClose={this.closeModals}
           enable={this.enable}
           secret={this.props.secret}
+          getSecret={this.props.getTfaSecret}
           username={this.props.username}
           togglePending={this.props.togglePending}
           toggleError={this.props.toggleError}
