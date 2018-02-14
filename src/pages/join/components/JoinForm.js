@@ -9,19 +9,15 @@ import { LINKS } from 'src/constants';
 import { TextFieldWrapper, CheckboxWrapper } from 'src/components/reduxFormWrappers';
 import { Button, UnstyledLink, Grid, Label } from '@sparkpost/matchbox';
 import { required, minLength, email } from 'src/helpers/validation';
-import styles from './JoinPage.module.scss';
+import styles from '../JoinPage.module.scss';
 const { recaptcha } = config;
 
 const formName = 'registerAccountForm';
-
 let reCaptchaInstance;
+
 export class JoinForm extends Component {
   state = {
     reCaptchaReady: false
-  }
-
-  executeRecaptcha = (values) => {
-    reCaptchaInstance.execute();
   }
 
   reCaptchaLoaded = () => {
@@ -36,7 +32,7 @@ export class JoinForm extends Component {
 
   render() {
     const {
-      submitting,
+      loading,
       pristine,
       invalid
     } = this.props;
@@ -52,7 +48,7 @@ export class JoinForm extends Component {
               component={TextFieldWrapper}
               label='First Name'
               validate={required}
-              disabled={!reCaptchaReady || submitting}
+              disabled={!reCaptchaReady || loading}
             />
           </Grid.Column>
           <Grid.Column xs={12} md={6} lg={6}>
@@ -61,7 +57,7 @@ export class JoinForm extends Component {
               component={TextFieldWrapper}
               label='Last Name'
               validate={required}
-              disabled={!reCaptchaReady || submitting}
+              disabled={!reCaptchaReady || loading}
             />
           </Grid.Column>
         </Grid>
@@ -70,7 +66,7 @@ export class JoinForm extends Component {
           component={TextFieldWrapper}
           label='Email'
           validate={[required, email]}
-          disabled={!reCaptchaReady || submitting}
+          disabled={!reCaptchaReady || loading}
           autoComplete='username email'
         />
         <Field
@@ -78,7 +74,7 @@ export class JoinForm extends Component {
           component={TextFieldWrapper}
           label='Password'
           validate={[required, minLength(8)]}
-          disabled={!reCaptchaReady || submitting}
+          disabled={!reCaptchaReady || loading}
           type='password'
           autoComplete='new-password'
         />
@@ -88,7 +84,8 @@ export class JoinForm extends Component {
             id='tou_accepted'
             component={CheckboxWrapper}
             type="checkbox"
-            disabled={!reCaptchaReady || submitting}
+            disabled={!reCaptchaReady || loading}
+            validate={required}
           />
           <div className={styles.touLabel}>
             <Label id='tou_accepted'>
@@ -98,11 +95,10 @@ export class JoinForm extends Component {
         </div>
 
         <Button primary
-          disabled={submitting || pristine || invalid || !reCaptchaReady }
-          onClick={this.executeRecaptcha}
-          id='g-recaptcha'
+          // disabled={loading || pristine || invalid || !reCaptchaReady }
+          id='btnCreateAccount'
         >
-          { submitting ? 'Loading' : 'Create Account' }
+          { loading ? 'Loading' : 'Create Account' }
         </Button>
 
         <Recaptcha
@@ -110,6 +106,7 @@ export class JoinForm extends Component {
           sitekey={recaptcha.invisibleKey}
           size="invisible"
           render='explicit'
+          elementID='btnCreateAccount'
           onloadCallback={this.reCaptchaLoaded}
           verifyCallback={this.verifyCallback}
         />
@@ -123,6 +120,7 @@ const mapStateToProps = (state, props) => ({
   initialValues: {
     tou_accepted: false
   },
+  loading: state.account.createLoading,
   formValues: getFormValues(formName)(state)
 });
 

@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AuthPage handleSignupFailure handleSignupFailure:  manual review required (siftscience) 1`] = `"Your account requires manual review. To proceed with sign up, please <UnstyledLink to=https://support.sparkpost.com/customer/portal/emails/new?interaction%5Bname%5D=foo%20bar&interaction%5Bemail%5D=foo@bar.com&email%5Bsubject%5D=Account%20requires%20manual%20review>contact support</UnstyledLink>."`;
+
+exports[`AuthPage render renders correctly 1`] = `
+<div>
+  <div>
+    <UnstyledLink
+      title="SparkPost"
+      to="https://www.sparkpost.com"
+    >
+      <Logo />
+    </UnstyledLink>
+  </div>
+  <Panel
+    accent={true}
+    sectioned={true}
+    title="Log In"
+  >
+    <Connect(ReduxForm)
+      onSubmit={[Function]}
+    />
+  </Panel>
+  Already have an account? 
+  <Link
+    replace={false}
+    to="/auth"
+  >
+    Log In
+  </Link>
+  .
+</div>
+`;
