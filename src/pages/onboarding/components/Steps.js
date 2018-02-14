@@ -4,16 +4,16 @@ import { withRouter } from 'react-router';
 import { Icon } from '@sparkpost/matchbox';
 import styles from './Steps.module.scss';
 
+// TODO Finalize when whole register flow is complete
 const steps = [
   { path: 'plan', label: 'Confirm your Plan' },
-  { path: 'dedicated-ip', label: 'Add a Dedicated IP' }, // TODO show/hide this based on plan selected, maybe from qp?
+  // TODO show/hide this based on plan selected, maybe from qp?
+  { path: 'dedicated-ip', label: 'Add a Dedicated IP' },
   { path: 'sending-domain', label: 'Add a Domain' },
   { path: 'email', label: 'Send an Email' }
 ];
 
 class Steps extends Component {
-
-  // TODO this can probably be in render
   state = {
     currentStep: 0
   }

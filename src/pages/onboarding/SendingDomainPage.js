@@ -30,7 +30,6 @@ class SendingDomainPage extends Component {
         <CenteredLogo />
         <Panel accent title='Welcome to SparkPost!'>
           <form onSubmit={handleSubmit(this.handleDomainCreate)}>
-
             <Panel.Section>
               <p>Let's get you set up to send some email!</p>
               <p>Which domain will you be sending from? <UnstyledLink to={LINKS.ONBOARDING_SENDING} external>Learn more about sending domains</UnstyledLink>.</p>

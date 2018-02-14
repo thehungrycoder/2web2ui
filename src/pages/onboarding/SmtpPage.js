@@ -7,8 +7,8 @@ import Steps from './components/Steps';
 import SkipLink from './components/SkipLink';
 
 const SmtpPage = () => (
-  <AutoKeyGenerator>
-    {({ apiKey }) => (
+  <AutoKeyGenerator render={
+    ({ apiKey }) => (
       <Fragment>
         <CenteredLogo />
         <Panel accent title='SMTP Integration'>
@@ -21,8 +21,8 @@ const SmtpPage = () => (
           <Steps />
         </Panel>
       </Fragment>
-    )}
-  </AutoKeyGenerator>
+    )
+  } />
 );
 
 export default SmtpPage;

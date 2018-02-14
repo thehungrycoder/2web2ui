@@ -11,10 +11,8 @@ const keyDefaults = {
   grants: { 'smtp/inject': true, 'transmissions/modify': true, 'templates/view': true }
 };
 
-
 // Handles API key generation
-// apiKey - new keys
-// email - user's email
+// Passes down newly created apiKey and current user's email address
 class AutoKeyGenerator extends Component {
   componentDidMount() {
     const { createApiKey, showAlert, history } = this.props;
@@ -30,13 +28,13 @@ class AutoKeyGenerator extends Component {
   }
 
   render() {
-    const { apiKey, children, email } = this.props;
+    const { apiKey, render, email } = this.props;
 
     if (!apiKey) {
       return <Loading />;
     }
 
-    return children({ apiKey, email });
+    return render({ apiKey, email });
   }
 }
 
@@ -45,7 +43,7 @@ AutoKeyGenerator.defaultProps = {
 };
 
 AutoKeyGenerator.propTypes = {
-  children: PropTypes.func.isRequired,
+  render: PropTypes.func.isRequired,
   apiKey: PropTypes.string,
   email: PropTypes.string
 };
