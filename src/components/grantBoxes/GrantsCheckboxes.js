@@ -10,19 +10,19 @@ import styles from './GrantsCheckboxes.module.scss';
 const cx = classnames.bind(styles);
 
 const GrantsCheckboxes = ({ grants, show }) => {
-
   const grantFields = _.map(grants, (grant) => (
-    // TODO: fix css
-    <Tooltip key={grant.key} dark content={grant.description}>
-      <Field
-        key={grant.key}
-        name={`grants[${grant.key}]`}
-        label={grant.label}
-        component={CheckboxWrapper}
-        type="checkbox"
-      />
-    </Tooltip>
+    <div className={styles.Grant} key={grant.key}>
+      <Tooltip dark content={grant.description}>
+        <Field
+          name={`grants[${grant.key}]`}
+          label={grant.label}
+          component={CheckboxWrapper}
+          type="checkbox"
+        />
+      </Tooltip>
+    </div>
   ));
+
 
   const grantFieldChunks = _.chunk(grantFields, Math.ceil(_.size(grants) / 3));
 

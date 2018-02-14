@@ -9,38 +9,42 @@ exports[`GrantsCheckboxes should render 1`] = `
     md={4}
     xs={12}
   >
-    <WithPositioning(Tooltip)
-      content="desc for grant 1"
-      dark={true}
+    <div
       key="grant1"
     >
-      <Field
-        component={[Function]}
-        key="grant1"
-        label="Grant 1"
-        name="grants[grant1]"
-        type="checkbox"
-      />
-    </WithPositioning(Tooltip)>
+      <WithPositioning(Tooltip)
+        content="desc for grant 1"
+        dark={true}
+      >
+        <Field
+          component={[Function]}
+          label="Grant 1"
+          name="grants[grant1]"
+          type="checkbox"
+        />
+      </WithPositioning(Tooltip)>
+    </div>
   </Grid.Column>
   <Grid.Column
     key="1"
     md={4}
     xs={12}
   >
-    <WithPositioning(Tooltip)
-      content="desc for grant 2"
-      dark={true}
+    <div
       key="grant2"
     >
-      <Field
-        component={[Function]}
-        key="grant2"
-        label="Grant 2"
-        name="grants[grant2]"
-        type="checkbox"
-      />
-    </WithPositioning(Tooltip)>
+      <WithPositioning(Tooltip)
+        content="desc for grant 2"
+        dark={true}
+      >
+        <Field
+          component={[Function]}
+          label="Grant 2"
+          name="grants[grant2]"
+          type="checkbox"
+        />
+      </WithPositioning(Tooltip)>
+    </div>
   </Grid.Column>
 </Grid>
 `;

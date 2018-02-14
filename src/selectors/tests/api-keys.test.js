@@ -58,11 +58,15 @@ describe('ApiKey Selectors', () => {
     const props = {
       apiKey: {
         subaccount_id: 'subId',
-        grants: ['grant'],
+        grants: ['grant one'],
         valid_ips: ['ip']
       }
     };
     expect(apiKeys.getInitialValues(store, props)).toMatchSnapshot();
+  });
+
+  it('should get initial subaccount grants', () => {
+    expect(apiKeys.getInitialSubaccountGrants(store)).toMatchSnapshot();
   });
 
   it('should get all subaccount api keys', () => {
@@ -70,7 +74,7 @@ describe('ApiKey Selectors', () => {
       apiKeys: {
         keys: [
           {
-            subaccount_id: '101',
+            subaccount_id: 101,
             name: 'subby key'
           },
           {
