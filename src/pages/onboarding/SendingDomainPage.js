@@ -1,16 +1,15 @@
 import React, { Component, Fragment } from 'react';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 import { create as createDomain } from 'src/actions/sendingDomains';
 import { showAlert } from 'src/actions/globalAlert';
-import { Panel, UnstyledLink, Button, Icon } from '@sparkpost/matchbox';
+import { Panel, Button, UnstyledLink } from '@sparkpost/matchbox';
 import { TextFieldWrapper, CenteredLogo } from 'src/components';
 import Steps from './components/Steps';
+import SkipLink from './components/SkipLink';
 import { required, domain } from 'src/helpers/validation';
 import { LINKS } from 'src/constants';
-
-import styles from './Onboarding.module.scss';
 
 class SendingDomainPage extends Component {
   handleDomainCreate = (values) => {
@@ -46,12 +45,7 @@ class SendingDomainPage extends Component {
             </Panel.Section>
             <Panel.Section>
               <Button primary submit disabled={submitting}>{submitting ? 'Adding Domain...' : 'Add Domain'}</Button>
-              <UnstyledLink
-                to='/super-hidden-route/email'
-                Component={Link}
-                className={styles.SkipLink}>
-                  Skip for now <Icon name='ArrowRight'/>
-              </UnstyledLink>
+              <SkipLink to='/super-hidden-route/email'>Skip for now</SkipLink>
             </Panel.Section>
           </form>
           <Steps />

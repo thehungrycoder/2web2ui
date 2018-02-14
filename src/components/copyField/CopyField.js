@@ -44,7 +44,7 @@ class CopyField extends Component {
     if (!hideCopy) {
       const button = <Button onClick={this.handleCopy}><Icon name='Copy' size={14}/> Copy</Button>;
       connectRight = copied
-        ? <Tooltip content='Copied to clipboard!'>{ button }</Tooltip>
+        ? <Tooltip dark content='Copied to clipboard!'>{ button }</Tooltip>
         : button;
     }
 

@@ -10,22 +10,19 @@ const smtpDesc = 'Use the information below to configure your SMTP client to rel
 
 /**
  * SMTP Info Table
- * autoGenerateKey - enables a CopyField and creates a new apie key on mount
+ * Used in onboarding and SMTP account page
+ * apiKey - enables a CopyField
  */
 class SmtpDetails extends Component {
-  componentDidMount() {
-    // TODO generate key
-  }
-
   render() {
-    const { autoGenerateKey } = this.props;
+    const { apiKey } = this.props;
 
-    const smtpDescContent = autoGenerateKey
+    const smtpDescContent = apiKey
       ? `${smtpDesc} We generated an API key for you to use as a password.`
       : `${smtpDesc} You need an API key to use as a password when filling out the information.`;
 
-    const passwordContent = autoGenerateKey
-      ? <CopyField value='password'/>
+    const passwordContent = apiKey
+      ? <CopyField value={apiKey} helpText='For security, this key will never be displayed in full again. Make sure you copy it somewhere safe!'/>
       : <p>The password is an API key with <strong>Send via SMTP</strong><em>(smtp/inject)</em> permisions.  <UnstyledLink to='/account/api-keys' Component={Link}>Manage API Keys</UnstyledLink></p>;
 
     return (
@@ -44,11 +41,11 @@ class SmtpDetails extends Component {
 }
 
 SmtpDetails.defaultProps = {
-  autoGenerateKey: false
+  apiKey: null
 };
 
 SmtpDetails.propTypes = {
-  autoGenerateKey: PropTypes.bool
+  apiKey: PropTypes.string
 };
 
 export default SmtpDetails;

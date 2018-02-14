@@ -1,6 +1,7 @@
 const config = {
   apiBase: 'no-default-set',
   apiDateFormat: 'YYYY-MM-DDTHH:mm',
+  apiHost: '', // Used in onboarding
   apiRequestTimeout: 15000,
   apiRequestHeaders: {
     'X-Sparky': '1d24c3473dd52a2f4a53fb6808cf9a73'

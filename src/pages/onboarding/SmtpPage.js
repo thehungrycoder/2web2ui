@@ -1,34 +1,28 @@
-import React, { Component, Fragment } from 'react';
-import { Link } from 'react-router-dom';
+import React, { Fragment } from 'react';
+import AutoKeyGenerator from './components/AutoKeyGenerator';
 import { CenteredLogo } from 'src/components';
 import SmtpDetails from 'src/components/smtpDetails/SmtpDetails';
-import { Panel, UnstyledLink, Icon } from '@sparkpost/matchbox';
+import { Panel } from '@sparkpost/matchbox';
 import Steps from './components/Steps';
+import SkipLink from './components/SkipLink';
 
-import styles from './Onboarding.module.scss';
-
-class SmtpPage extends Component {
-  render() {
-    return (
+const SmtpPage = () => (
+  <AutoKeyGenerator>
+    {({ apiKey }) => (
       <Fragment>
         <CenteredLogo />
         <Panel accent title='SMTP Integration'>
           <Panel.Section>
-            <SmtpDetails autoGenerateKey />
+            <SmtpDetails apiKey={apiKey} />
           </Panel.Section>
           <Panel.Section>
-            <UnstyledLink
-              to='/dashboard'
-              Component={Link}
-              className={styles.SkipLink}>
-                Continue to dashboard <Icon name='ArrowRight'/>
-            </UnstyledLink>
+            <SkipLink to='/dashboard'>Continue to dashboard</SkipLink>
           </Panel.Section>
           <Steps />
         </Panel>
       </Fragment>
-    );
-  }
-}
+    )}
+  </AutoKeyGenerator>
+);
 
 export default SmtpPage;

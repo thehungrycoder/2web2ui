@@ -1,11 +1,10 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import { Panel, UnstyledLink, Grid, Icon } from '@sparkpost/matchbox';
+import { Panel, Grid } from '@sparkpost/matchbox';
 import { CenteredLogo } from 'src/components';
 import OptionTile from './components/OptionTile';
 import Steps from './components/Steps';
-
-import styles from './Onboarding.module.scss';
+import SkipLink from './components/SkipLink';
 
 class SmtpOrApiPage extends Component {
   render() {
@@ -36,12 +35,7 @@ class SmtpOrApiPage extends Component {
             </Grid>
           </Panel.Section>
           <Panel.Section>
-            <UnstyledLink
-              to='/dashboard'
-              Component={Link}
-              className={styles.SkipLink}>
-                    Or continue to dashboard <Icon name='ArrowRight'/>
-            </UnstyledLink>
+            <SkipLink to='/dashboard'>Continue to dashboard</SkipLink>
           </Panel.Section>
           <Steps />
         </Panel>
