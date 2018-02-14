@@ -1,0 +1,115 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SendingDomainPage should render correctly 1`] = `
+<React.Fragment>
+  <CenteredLogo />
+  <Panel
+    accent={true}
+    title="Welcome to SparkPost!"
+  >
+    <form>
+      <Panel.Section>
+        <p>
+          Let's get you set up to send some email!
+        </p>
+        <p>
+          Which domain will you be sending from? 
+          <UnstyledLink
+            external={true}
+            to="https://www.sparkpost.com/docs/getting-started/getting-started-sparkpost/#preparing-your-from-address"
+          >
+            Learn more about sending domains
+          </UnstyledLink>
+          .
+        </p>
+        <Field
+          component={[Function]}
+          disabled={false}
+          label="Domain Name"
+          name="domain"
+          placeholder="email.example.com"
+          validate={
+            Array [
+              [Function],
+              [Function],
+            ]
+          }
+        />
+      </Panel.Section>
+      <Panel.Section>
+        <Button
+          disabled={false}
+          primary={true}
+          size="default"
+          submit={true}
+        >
+          Add Domain
+        </Button>
+        <SkipLink
+          to="/super-hidden-route/email"
+        >
+          Skip for now
+        </SkipLink>
+      </Panel.Section>
+    </form>
+    <withRouter(Steps) />
+  </Panel>
+</React.Fragment>
+`;
+
+exports[`SendingDomainPage should render submitting state correctly 1`] = `
+<React.Fragment>
+  <CenteredLogo />
+  <Panel
+    accent={true}
+    title="Welcome to SparkPost!"
+  >
+    <form>
+      <Panel.Section>
+        <p>
+          Let's get you set up to send some email!
+        </p>
+        <p>
+          Which domain will you be sending from? 
+          <UnstyledLink
+            external={true}
+            to="https://www.sparkpost.com/docs/getting-started/getting-started-sparkpost/#preparing-your-from-address"
+          >
+            Learn more about sending domains
+          </UnstyledLink>
+          .
+        </p>
+        <Field
+          component={[Function]}
+          disabled={true}
+          label="Domain Name"
+          name="domain"
+          placeholder="email.example.com"
+          validate={
+            Array [
+              [Function],
+              [Function],
+            ]
+          }
+        />
+      </Panel.Section>
+      <Panel.Section>
+        <Button
+          disabled={true}
+          primary={true}
+          size="default"
+          submit={true}
+        >
+          Adding Domain...
+        </Button>
+        <SkipLink
+          to="/super-hidden-route/email"
+        >
+          Skip for now
+        </SkipLink>
+      </Panel.Section>
+    </form>
+    <withRouter(Steps) />
+  </Panel>
+</React.Fragment>
+`;

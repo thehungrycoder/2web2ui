@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`OptionTile should render correctly with an custom wrapper 1`] = `
+<span>
+  <h6>
+    tile label
+  </h6>
+  <p>
+    tile content
+  </p>
+</span>
+`;
+
+exports[`OptionTile should render correctly with default wrapper 1`] = `
+<UnstyledLink>
+  <h6>
+    tile label
+  </h6>
+  <p>
+    tile content
+  </p>
+</UnstyledLink>
+`;

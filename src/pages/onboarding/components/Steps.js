@@ -13,7 +13,7 @@ const steps = [
   { path: 'email', label: 'Send an Email' }
 ];
 
-class Steps extends Component {
+export class Steps extends Component {
   state = {
     currentStep: 0
   }

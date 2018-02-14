@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ApiPage should render 1`] = `
+<React.Fragment>
+  <CenteredLogo />
+  <Panel
+    accent={true}
+    title="REST API Integration"
+  >
+    <Panel.Section>
+      <CopyField
+        helpText="For security, we'll never display this full key again. Make sure you copy it somewhere safe!"
+        hideCopy={false}
+        label="Your API Key"
+        value="123456789"
+      />
+    </Panel.Section>
+    <Panel.Section>
+      <h6>
+        Send a Test Message
+      </h6>
+      <p>
+        Copy and run this curl request:
+      </p>
+      <CodeBlock
+        code="curl -X POST
+  http://fake-api-test-host.com/api/v1/transmissions
+  -H \\"Authorization: 123456789\\"
+  -H \\"Content-Type: application/json\\"
+  -d '{
+    \\"options\\": {
+      \\"sandbox\\": true
+    },
+    \\"content\\": {
+      \\"from\\": \\"sandbox@sparkpostbox.com\\",
+      \\"subject\\": \\"Thundercats are GO!!!\\",
+      \\"text\\": \\"Sword of Omens, give me sight BEYOND sight\\"
+    },
+    \\"recipients\\": [{ \\"address\\": \\"e@mail.co\\" }]
+}'"
+        height={350}
+        numbered={false}
+      />
+    </Panel.Section>
+    <Panel.Section>
+      <SkipLink
+        to="/dashboard"
+      >
+        Continue to dashboard
+      </SkipLink>
+    </Panel.Section>
+    <withRouter(Steps) />
+  </Panel>
+</React.Fragment>
+`;

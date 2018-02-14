@@ -11,7 +11,7 @@ import SkipLink from './components/SkipLink';
 import { required, domain } from 'src/helpers/validation';
 import { LINKS } from 'src/constants';
 
-class SendingDomainPage extends Component {
+export class SendingDomainPage extends Component {
   handleDomainCreate = (values) => {
     const { createDomain, showAlert, history } = this.props;
 

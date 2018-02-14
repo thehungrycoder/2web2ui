@@ -13,18 +13,22 @@ const keyDefaults = {
 
 // Handles API key generation
 // Passes down newly created apiKey and current user's email address
-class AutoKeyGenerator extends Component {
+export class AutoKeyGenerator extends Component {
   componentDidMount() {
-    const { createApiKey, showAlert, history } = this.props;
-
-    createApiKey(keyDefaults).catch((err) => {
-      showAlert({ type: 'error', message: 'Sorry, something went wrong', details: err.message });
-      history.push('/dashboard');
-    });
+    this.createKey();
   }
 
   componentWillUnmount() {
     this.props.hideNewApiKey();
+  }
+
+  createKey = () => {
+    const { createApiKey, showAlert, history } = this.props;
+
+    return createApiKey(keyDefaults).catch((err) => {
+      showAlert({ type: 'error', message: 'Sorry, something went wrong', details: err.message });
+      history.push('/dashboard');
+    });
   }
 
   render() {
