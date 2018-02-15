@@ -35,7 +35,7 @@ class ChartHeader extends Component {
             <Button.Group className={styles.ButtonSpacer}>
               {this.renderScaleButton('linear', 'Linear')}
               {this.renderScaleButton('log', 'Log')}
-              {this.renderScaleButton('sqrt', '√ Sq Rt')}
+              {this.renderScaleButton('pow', 'Pow')}
             </Button.Group>
           </div>
         </Grid.Column>

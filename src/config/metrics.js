@@ -91,6 +91,22 @@ export const list = [
     inSummary: true
   },
   {
+    key: 'count_initial_rendered',
+    label: 'Initial Rendered',
+    type: 'total',
+    unit: 'number',
+    description: 'Total initial renderings of a message.',
+    inSummary: true
+  },
+  {
+    key: 'count_unique_initial_rendered_approx',
+    label: 'Initial Unique Rendered',
+    type: 'total',
+    unit: 'number',
+    description: 'Total number of messages that were intially rendered at least once.',
+    inSummary: true
+  },
+  {
     key: 'count_unique_confirmed_opened_approx',
     label: 'Unique Confirmed Opens',
     type: 'total',
