@@ -34,7 +34,7 @@ export default (state = initialState, { type, meta, payload }) => {
       return { ...state, createLoading: false, payload };
 
     case 'CREATE_ACCOUNT_FAIL':
-      return { ...state, createError: payload, updateLoading: false };
+      return { ...state, createError: payload, createLoading: false };
 
     default:
       return state;

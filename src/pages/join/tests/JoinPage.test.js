@@ -28,6 +28,11 @@ describe('AuthPage', () => {
     it('renders correctly', () => {
       expect(wrapper).toMatchSnapshot();
     });
+    it('renders errors', () => {
+      instance.handleSignupFailure = jest.fn().mockReturnValue('Some error occurred');
+      wrapper.setProps({ account: { createError: {}}}); //just to make it truthy
+      expect(wrapper).toMatchSnapshot();
+    });
   });
 
   describe('handleSignupFailure', () => {

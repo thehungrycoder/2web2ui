@@ -15,7 +15,7 @@ exports[`AuthPage handleSignupFailure handleSignupFailure:  duplicate email 1`] 
 <span>
   It looks like you already have a SparkPost account with 
   foo@bar.com
-  .
+  . 
   <UnstyledLink
     to="/auth"
   >
@@ -51,6 +51,39 @@ exports[`AuthPage render renders correctly 1`] = `
     sectioned={true}
     title="Log In"
   >
+    <Connect(ReduxForm)
+      onSubmit={[Function]}
+    />
+  </Panel>
+  Already have an account? 
+  <Link
+    replace={false}
+    to="/auth"
+  >
+    Log In
+  </Link>
+  .
+</div>
+`;
+
+exports[`AuthPage render renders errors 1`] = `
+<div>
+  <div>
+    <UnstyledLink
+      title="SparkPost"
+      to="https://www.sparkpost.com"
+    >
+      <Logo />
+    </UnstyledLink>
+  </div>
+  <Panel
+    accent={true}
+    sectioned={true}
+    title="Log In"
+  >
+    <Error
+      error="Some error occurred"
+    />
     <Connect(ReduxForm)
       onSubmit={[Function]}
     />

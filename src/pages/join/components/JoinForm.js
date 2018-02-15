@@ -22,10 +22,14 @@ export class JoinForm extends Component {
     this.setState({ reCaptchaReady: true });
   }
 
-  verifyCallback = (response) => {
+  recaptchaVerifyCallback = (response) => {
     const { formValues, onSubmit } = this.props;
     this.reCaptchaInstance.reset();
     onSubmit({ ...formValues, recaptcha_response: response, recaptcha_type: 'invisible' });
+  }
+
+  executeRecaptcha = () => {
+    this.reCaptchaInstance.execute();
   }
 
   render() {
@@ -92,8 +96,9 @@ export class JoinForm extends Component {
           </div>
         </div>
 
-        <Button primary disabled={loading || pristine || invalid || !reCaptchaReady }
-          id='btnCreateAccount'
+        <Button primary 
+        disabled={loading || pristine || invalid || !reCaptchaReady }
+        onClick={this.executeRecaptcha}
         >
           { loading ? 'Loading' : 'Create Account' }
         </Button>
@@ -103,9 +108,8 @@ export class JoinForm extends Component {
           sitekey={recaptcha.invisibleKey}
           size="invisible"
           render='explicit'
-          elementID='btnCreateAccount'
           onloadCallback={this.reCaptchaLoaded}
-          verifyCallback={this.verifyCallback}
+          verifyCallback={this.recaptchaVerifyCallback}
         />
 
       </form>

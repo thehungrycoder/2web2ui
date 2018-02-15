@@ -81,7 +81,7 @@ export class JoinPage extends Component {
     } else if (status === 409 && mainError.match(/^AWS Account already exists/i)) {
       return 'It looks like you\'ve already created a SparkPost account through the AWS Marketplace. There may be a brief delay for your AWS account info to synchronize. Please wait a few minutes and then sign in.';
     } else if (status === 409 && mainError.match(/\bemail\b/i)) {
-      return <span>It looks like you already have a SparkPost account with {formData.email}. 
+      return <span>It looks like you already have a SparkPost account with {formData.email}.&nbsp;
          <UnstyledLink to="/auth">Sign in</UnstyledLink>
       </span>;
     } else if (status === 403 && mainError.match(/^Sign up blocked/i)) {
