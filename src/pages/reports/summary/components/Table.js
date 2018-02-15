@@ -27,9 +27,9 @@ export class Table extends Component {
 
   getColumnHeaders() {
     const { metrics, groupBy } = this.props;
-    const aggColumn = groupBy === 'aggregate';
+    const isAggColumn = groupBy === 'aggregate';
 
-    const primaryCol = aggColumn
+    const primaryCol = isAggColumn
       ? null
       : {
         label: GROUP_CONFIG[groupBy].label,
@@ -41,7 +41,7 @@ export class Table extends Component {
       key,
       label: <div className={styles.RightAlign}>{ label }</div>,
       className: cx(styles.HeaderCell, styles.NumericalHeader),
-      sortKey: aggColumn ? null : key
+      sortKey: isAggColumn ? null : key
     }));
 
     return [primaryCol, ...metricCols];
