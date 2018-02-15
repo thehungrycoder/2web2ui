@@ -12,8 +12,6 @@ import typeaheadCacheSelector from 'src/selectors/reportFilterTypeaheadCache';
 import { showAlert } from 'src/actions/globalAlert';
 import styles from './Filters.module.scss';
 
-
-
 export class Filters extends Component {
   state = {
     modal: false,
@@ -21,8 +19,6 @@ export class Filters extends Component {
   }
 
   componentDidMount() {
-    this._mounted = true;
-
     // initial report load
     const { options, filters = []} = parseSearch(this.props.location.search);
     this.props.addFilters(filters);
@@ -32,10 +28,6 @@ export class Filters extends Component {
     this.props.initTypeaheadCache();
   }
 
-  componentWillUnmount() {
-    this._mounted = false;
-  }
-
   componentDidUpdate(previousProps) {
     if (previousProps.filters !== this.props.filters) {
       this.updateLink();
@@ -43,9 +35,6 @@ export class Filters extends Component {
   }
 
   updateLink = () => {
-    if (!this._mounted) {
-      return;
-    }
     const { filters, history, location, extraLinkParams = []} = this.props;
     const query = getReportSearchOptions(filters, extraLinkParams);
     const search = qs.stringify(query, { encode: false });

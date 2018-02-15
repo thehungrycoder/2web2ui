@@ -55,15 +55,12 @@ exports[`DelayPage:  should show loading indicator when loading table 1`] = `
   empty={Object {}}
   title="Delay Report"
 >
-  <Connect(Filters)
-    onShare={[Function]}
-    refresh={[Function]}
-    shareDisabled={true}
+  <withRouter(Connect(Filters))
+    reportLoading={true}
   />
-  <MetricsSummary
+  <Connect(MetricsSummary)
     rateTitle="Delayed Rate"
     rateValue={0.1}
-    relativeRange="hour"
     secondaryMessage="10 were delayed on first attempt."
   >
     <strong>
@@ -74,7 +71,7 @@ exports[`DelayPage:  should show loading indicator when loading table 1`] = `
       10,000
     </strong>
      messages accepted
-  </MetricsSummary>
+  </Connect(MetricsSummary)>
   <Panel
     className="ReasonsTable"
     title="Delayed Messages"
@@ -83,11 +80,6 @@ exports[`DelayPage:  should show loading indicator when loading table 1`] = `
       minHeight="400px"
     />
   </Panel>
-  <ShareModal
-    handleToggle={[Function]}
-    open={false}
-    query={Array []}
-  />
 </Page>
 `;
 
@@ -96,10 +88,7 @@ exports[`DelayPage:  should show loading panel when aggregates are still loading
   empty={Object {}}
   title="Delay Report"
 >
-  <Connect(Filters)
-    onShare={[Function]}
-    refresh={[Function]}
-  />
+  <withRouter(Connect(Filters)) />
   <PanelLoading
     minHeight="115px"
   />
@@ -108,7 +97,7 @@ exports[`DelayPage:  should show loading panel when aggregates are still loading
     title="Delayed Messages"
   >
     <DelaysDataTable
-      onDomainClick={[Function]}
+      addFilters={[MockFunction]}
       rows={
         Array [
           Object {
@@ -121,10 +110,5 @@ exports[`DelayPage:  should show loading panel when aggregates are still loading
       totalAccepted={1000}
     />
   </Panel>
-  <ShareModal
-    handleToggle={[Function]}
-    open={false}
-    query={Array []}
-  />
 </Page>
 `;

@@ -7,7 +7,8 @@ cases('Report Filters Reducer', (action) => {
     activeList: [],
     from: time(),
     relativeRange: 'day',
-    to: time({ day: 2 })
+    to: time({ day: 2 }),
+    metrics: []
   };
 
   expect(reportFiltersReducer(state, action)).toMatchSnapshot();
@@ -23,12 +24,13 @@ cases('Report Filters Reducer', (action) => {
     ],
     type: 'ADD_FILTERS'
   },
-  'set report range': {
+  'set report options': {
     payload: {
       from: time({ year: 2018, month: 1, day: 1 }),
       relativeRange: 'day',
-      to: time({ year: 2018, month: 1, day: 2 })
+      to: time({ year: 2018, month: 1, day: 2 }),
+      metrics: [1, 2, 3]
     },
-    type: 'REFRESH_REPORT_RANGE'
+    type: 'REFRESH_REPORT_OPTIONS'
   }
 });

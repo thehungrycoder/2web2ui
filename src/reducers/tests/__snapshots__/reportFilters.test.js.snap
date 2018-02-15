@@ -9,6 +9,7 @@ Object {
     },
   ],
   "from": 1970-01-01T00:00:00.000Z,
+  "metrics": Array [],
   "relativeRange": "day",
   "to": 1970-01-02T00:00:00.000Z,
 }
@@ -27,15 +28,21 @@ Object {
     },
   ],
   "from": 1970-01-01T00:00:00.000Z,
+  "metrics": Array [],
   "relativeRange": "day",
   "to": 1970-01-02T00:00:00.000Z,
 }
 `;
 
-exports[`Report Filters Reducer set report range 1`] = `
+exports[`Report Filters Reducer set report options 1`] = `
 Object {
   "activeList": Array [],
   "from": 2018-01-01T00:00:00.000Z,
+  "metrics": Array [
+    1,
+    2,
+    3,
+  ],
   "relativeRange": "day",
   "to": 2018-01-02T00:00:00.000Z,
 }

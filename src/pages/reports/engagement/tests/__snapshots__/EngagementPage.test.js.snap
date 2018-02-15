@@ -5,10 +5,7 @@ exports[`renders engagement report page 1`] = `
   empty={Object {}}
   title="Engagement Report"
 >
-  <withRouter(Connect(EngagementFilters))
-    onLoad={[Function]}
-    shareDisabled={false}
-  />
+  <withRouter(Connect(Filters)) />
   <Connect(EngagementSummary)
     accepted={1}
     clicks={3}

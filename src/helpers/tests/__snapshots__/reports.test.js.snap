@@ -55,7 +55,6 @@ Object {
     "metrics": Array [
       "count-something",
     ],
-    "relativeRange": "custom",
     "to": 2017-11-04T14:43:00.000Z,
   },
 }

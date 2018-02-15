@@ -27,8 +27,9 @@ describe('Component: DateFilter', () => {
         to: mockNow,
         relativeRange: 'day'
       },
-      refresh: jest.fn(),
-      now: mockNow
+      refreshReportOptions: jest.fn(),
+      now: mockNow,
+      reportLoading: false
     };
     wrapper = shallow(<DateFilter {...props} />);
     instance = wrapper.instance();
@@ -296,7 +297,7 @@ describe('Component: DateFilter', () => {
       wrapper.setState({ showDatePicker: false });
       instance.handleSelectRange(e);
       expect(wrapper.state('showDatePicker')).toEqual(true);
-      expect(props.refresh).not.toHaveBeenCalled();
+      expect(props.refreshReportOptions).not.toHaveBeenCalled();
     });
 
     it('should close date picker and refresh for non-custom value', () => {

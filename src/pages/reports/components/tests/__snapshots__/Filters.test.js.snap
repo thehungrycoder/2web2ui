@@ -1,48 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Component: Report filters should render correctly 1`] = `
-<Panel>
-  <Panel.Section>
-    <Grid>
-      <Grid.Column
-        md={6}
-        xs={12}
-      >
-        <div>
-          <Connect(DateFilter)
-            refresh={[MockFunction]}
-          />
-        </div>
-      </Grid.Column>
-      <Grid.Column
-        md={4}
-        xl={5}
-        xs={8}
-      >
-        <Typeahead
-          items={Array []}
-          onSelect={[Function]}
-          placeholder="Filter by domain, campaign, etc"
-          selected={Array []}
-        />
-      </Grid.Column>
-      <Grid.Column
-        md={2}
-        xl={1}
-        xs={4}
-      >
-        <Button
-          fullWidth={true}
-          onClick={[MockFunction]}
-          size="default"
-        >
-          Share
-        </Button>
-      </Grid.Column>
-    </Grid>
-  </Panel.Section>
-</Panel>
-`;
+exports[`Component: Report filters should render correctly 1`] = `undefined`;
 
 exports[`Component: Report filters with active tags should render 1`] = `
 <Panel>
