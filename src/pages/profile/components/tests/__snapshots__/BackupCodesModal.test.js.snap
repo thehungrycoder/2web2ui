@@ -15,9 +15,9 @@ exports[`Component: BackupCodesModal should change button text to Generating... 
         <Banner
           status="warning"
         >
-          Clicking Generate will overwrite the 
+          Clicking Generate will overwrite your existing 
           10
-           backup codes
+           active backup codes.
         </Banner>
         <p>
           Keep these single-use backup codes somewhere safe but accessible. They can be used if your authentication app is unavailable (
@@ -85,9 +85,9 @@ exports[`Component: BackupCodesModal should render correctly 1`] = `
         <Banner
           status="warning"
         >
-          Clicking Generate will overwrite the 
+          Clicking Generate will overwrite your existing 
           10
-           backup codes
+           active backup codes.
         </Banner>
         <p>
           Keep these single-use backup codes somewhere safe but accessible. They can be used if your authentication app is unavailable (
@@ -211,9 +211,9 @@ exports[`Component: BackupCodesModal should show password error when exists 1`] 
         <Banner
           status="warning"
         >
-          Clicking Generate will overwrite the 
+          Clicking Generate will overwrite your existing 
           10
-           backup codes
+           active backup codes.
         </Banner>
         <p>
           Keep these single-use backup codes somewhere safe but accessible. They can be used if your authentication app is unavailable (

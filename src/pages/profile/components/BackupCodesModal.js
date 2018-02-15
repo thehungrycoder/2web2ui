@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Modal from 'src/components/modals/Modal';
-import BackupCodes from './BackupCodes';
+import BackupCodesView from './BackupCodesView';
 import { Panel, TextField, Banner, Button, Grid } from '@sparkpost/matchbox';
 import styles from './TfaModals.module.scss';
 const initialState = {
@@ -67,7 +67,7 @@ export default class BackupCodesModal extends Component {
           <form onSubmit={(e) => e.preventDefault()}>
             <Panel.Section>
               { !generatedCodes && hasCodes && <Banner status="warning" >
-                Clicking Generate will overwrite the {activeCount} backup codes
+                Clicking Generate will overwrite your existing {activeCount} active backup codes.
               </Banner> }
               <p>Keep these single-use backup codes somewhere safe but accessible.
                 They can be used if your authentication app is unavailable (<span role="img" aria-label="phone in toilet emojis">📱  ➡︎🚽</span> , etc).
@@ -75,7 +75,7 @@ export default class BackupCodesModal extends Component {
               <Grid>
                 <Grid.Column xs={12} md={6}>
                   { !generatedCodes && <TextField required type='password' onChange={this.handleInputChange} placeholder='Password' value={this.state.password} error={(this.state.showErrors && error) ? 'Incorrect Password' : ''} /> }
-                  { generatedCodes && <BackupCodes codes={codes} /> }
+                  { generatedCodes && <BackupCodesView codes={codes} /> }
                 </Grid.Column>
               </Grid>
             </Panel.Section>
