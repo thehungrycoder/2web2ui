@@ -1,5 +1,28 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`CopyField Component should pass rest of attrs to TextField 1`] = `
+<TextField
+  connectRight={
+    <Button
+      onClick={[Function]}
+      size="default"
+    >
+      <Icon
+        name="Copy"
+        size={14}
+      />
+       Copy
+    </Button>
+  }
+  multiline={true}
+  onFocus={[Function]}
+  readOnly={true}
+  required={true}
+  resize="both"
+  type="text"
+/>
+`;
+
 exports[`CopyField Component should render - no props 1`] = `
 <TextField
   connectRight={

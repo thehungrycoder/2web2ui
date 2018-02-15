@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PrintCodes Component should render 1`] = `
+<Button
+  onClick={[Function]}
+  size="default"
+>
+  Print
+</Button>
+`;

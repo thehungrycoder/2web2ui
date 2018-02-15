@@ -1,8 +1,8 @@
-const initialState = { tfaEnabled: false, tfaPending: false };
+const initialState = { enabled: null, pending: false };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case 'TFA_ENABLED': {
+    case 'TFA_ENABLED_ON_LOGIN': {
       const {
         access_token: token,
         username = state.username,
@@ -14,7 +14,7 @@ export default (state = initialState, action) => {
         token,
         username,
         refreshToken,
-        tfaEnabled: true
+        enabled: true
       };
     }
 
@@ -30,6 +30,36 @@ export default (state = initialState, action) => {
       const { errorDescription = 'An unknown error occurred' } = action.payload;
       return { ...state, tfaPending: false, errorDescription };
     }
+
+
+    case 'GET_TFA_STATUS_SUCCESS': {
+      return { ...state, enabled: action.payload.enabled };
+    }
+
+
+    case 'GET_TFA_SECRET_PENDING': {
+      return { ...state, secretError: null };
+    }
+
+    case 'GET_TFA_SECRET_FAIL': {
+      return { ...state, secretError: action.payload };
+    }
+
+    case 'GET_TFA_SECRET_SUCCESS': {
+      return { ...state, secret: action.payload.secret };
+    }
+
+
+    case 'TFA_TOGGLE_PENDING': {
+      return { ...state, togglePending: true, toggleError: null };
+    }
+    case 'TFA_TOGGLE_FAIL': {
+      return { ...state, toggleError: action.payload, togglePending: false };
+    }
+    case 'TFA_TOGGLE_SUCCESS': {
+      return { ...state, enabled: action.payload.enabled, togglePending: false };
+    }
+
 
     default: {
       return state;

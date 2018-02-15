@@ -7,20 +7,27 @@ jest.mock('copy-to-clipboard');
 describe('CopyField Component', () => {
   window.setTimeout = jest.fn();
   window.clearTimeout = jest.fn();
+  let wrapper;
+  const props = {
+    hideCopy: false
+  };
+
+  beforeEach(() => {
+    wrapper = shallow(<CopyField {...props} />);
+  });
 
   it('should render - no props', () => {
-    const wrapper = shallow(<CopyField />);
     expect(wrapper).toMatchSnapshot();
     expect(wrapper.instance().timeout).toEqual(null);
   });
 
   it('should not render button with hideCopy prop', () => {
-    const wrapper = shallow(<CopyField hideCopy />);
+    wrapper.setProps({ hideCopy: true });
     expect(wrapper.find('TextField').props().connectRight).toEqual(null);
   });
 
   it('should handle copy click', () => {
-    const wrapper = shallow(<CopyField value='to copy' />);
+    wrapper.setProps({ value: 'to copy' });
     wrapper.instance().handleCopy();
     expect(wrapper).toHaveState('copied', true);
     expect(window.clearTimeout).toHaveBeenCalled();
@@ -28,9 +35,14 @@ describe('CopyField Component', () => {
   });
 
   it('should handle focus', () => {
-    const wrapper = shallow(<CopyField value='to copy' />);
+    wrapper.setProps({ value: 'to copy' });
     const e = { target: { select: jest.fn() }};
     wrapper.instance().handleFieldFocus(e);
     expect(e.target.select).toHaveBeenCalled();
+  });
+
+  it('should pass rest of attrs to TextField', () => {
+    wrapper.setProps({ required: true, multiline: true });
+    expect(wrapper).toMatchSnapshot();
   });
 });

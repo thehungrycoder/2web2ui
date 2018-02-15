@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CopyCodes Component should render 1`] = `
+<Button
+  onClick={[Function]}
+  size="default"
+>
+  <Icon
+    name="Copy"
+    size={14}
+  />
+  Copy
+</Button>
+`;
+
+exports[`CopyCodes Component should show tooltip when copied state is true 1`] = `
+<WithPositioning(Tooltip)
+  content="Copied to clipboard!"
+  dark={true}
+>
+  <Button
+    onClick={[Function]}
+    size="default"
+  >
+    <Icon
+      name="Copy"
+      size={14}
+    />
+    Copy
+  </Button>
+</WithPositioning(Tooltip)>
+`;

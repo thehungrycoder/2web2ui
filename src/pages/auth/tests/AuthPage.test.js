@@ -12,7 +12,7 @@ const props = {
     loginPending: false
   },
   tfa: {
-    tfaEnabled: false,
+    enabled: false,
     username: 'bertha',
     token: 'tokey-token'
   },
@@ -49,7 +49,7 @@ it('redirects when logged in', () => {
 });
 
 it('should display tfa form when TFA is enabled', () => {
-  wrapper.setProps({ tfa: { tfaEnabled: true }});
+  wrapper.setProps({ tfa: { enabled: true }});
   expect(wrapper).toMatchSnapshot();
 });
 
@@ -75,7 +75,7 @@ it('should not throw an error when verifySpy fails with non 4xx error', async() 
 });
 
 it('should bind tfaSubmit to the submit handler of TfaForm', () => {
-  wrapper.setProps({ tfa: { tfaEnabled: true }});
+  wrapper.setProps({ tfa: { enabled: true }});
   const tfaForm = wrapper.find(TfaForm);
   expect(tfaForm.props().onSubmit).toBe(wrapper.instance().tfaSubmit);
 });

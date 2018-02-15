@@ -1,0 +1,356 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EnableTfaModal tests should render correctly 1`] = `
+<Modal
+  open={true}
+>
+  <Panel
+    accent={true}
+    title="Enable Two-Factor Authentication"
+  >
+    <form
+      onSubmit={[Function]}
+    >
+      <Panel.Section>
+        <Grid>
+          <Grid.Column
+            md={7}
+            xs={12}
+          >
+            <h6>
+              Step 1: Configure your 2FA app
+            </h6>
+            <p>
+              To enable 2FA, you'll need to have a 2FA auth app installed on your phone or tablet (examples include Google Authenticator, Duo Mobile, and Authy).
+            </p>
+            <p>
+              Most apps will let you get set up by scanning our QR code from within the app. If you prefer, you can type in the key manually.
+            </p>
+            <p>
+              <strong>
+                <Icon
+                  name="Key"
+                  size={18}
+                />
+                 
+                <code>
+                  super-secret
+                </code>
+              </strong>
+            </p>
+          </Grid.Column>
+          <Grid.Column
+            md={5}
+            style={
+              Object {
+                "textAlign": "center",
+              }
+            }
+            xs={12}
+          >
+            <QRCode
+              bgColor="#FFFFFF"
+              fgColor="#000000"
+              level="Q"
+              style={
+                Object {
+                  "width": 230,
+                }
+              }
+              value="otpauth://totp/kevin-mitnick?secret=super-secret&issuer=SparkPost"
+            />
+          </Grid.Column>
+        </Grid>
+      </Panel.Section>
+      <Panel.Section>
+        <Grid>
+          <Grid.Column
+            md={7}
+            xs={12}
+          >
+            <h6>
+              Step 2: Enter a 2FA code
+            </h6>
+            <p>
+              Generate a code from your newly-activated 2FA app to confirm that you're all set up.
+            </p>
+            <TextField
+              data-lpignore={true}
+              error=""
+              label="Passcode"
+              onChange={[Function]}
+              placeholder="Enter a generated 2FA passcode"
+              required={true}
+              resize="both"
+              type="text"
+              value=""
+            />
+          </Grid.Column>
+        </Grid>
+      </Panel.Section>
+      <Panel.Section>
+        <Button
+          onClick={[Function]}
+          primary={true}
+          size="default"
+          type="submit"
+        >
+          Enable 2FA
+        </Button>
+        <Button
+          onClick={[MockFunction]}
+          size="default"
+        >
+          Cancel
+        </Button>
+      </Panel.Section>
+    </form>
+  </Panel>
+</Modal>
+`;
+
+exports[`EnableTfaModal tests should show error on TextField when toggleError and showErrors 1`] = `
+<Modal
+  open={true}
+>
+  <Panel
+    accent={true}
+    title="Enable Two-Factor Authentication"
+  >
+    <form
+      onSubmit={[Function]}
+    >
+      <Panel.Section>
+        <Grid>
+          <Grid.Column
+            md={7}
+            xs={12}
+          >
+            <h6>
+              Step 1: Configure your 2FA app
+            </h6>
+            <p>
+              To enable 2FA, you'll need to have a 2FA auth app installed on your phone or tablet (examples include Google Authenticator, Duo Mobile, and Authy).
+            </p>
+            <p>
+              Most apps will let you get set up by scanning our QR code from within the app. If you prefer, you can type in the key manually.
+            </p>
+            <p>
+              <strong>
+                <Icon
+                  name="Key"
+                  size={18}
+                />
+                 
+                <code>
+                  super-secret
+                </code>
+              </strong>
+            </p>
+          </Grid.Column>
+          <Grid.Column
+            md={5}
+            style={
+              Object {
+                "textAlign": "center",
+              }
+            }
+            xs={12}
+          >
+            <QRCode
+              bgColor="#FFFFFF"
+              fgColor="#000000"
+              level="Q"
+              style={
+                Object {
+                  "width": 230,
+                }
+              }
+              value="otpauth://totp/kevin-mitnick?secret=super-secret&issuer=SparkPost"
+            />
+          </Grid.Column>
+        </Grid>
+      </Panel.Section>
+      <Panel.Section>
+        <Grid>
+          <Grid.Column
+            md={7}
+            xs={12}
+          >
+            <h6>
+              Step 2: Enter a 2FA code
+            </h6>
+            <p>
+              Generate a code from your newly-activated 2FA app to confirm that you're all set up.
+            </p>
+            <TextField
+              data-lpignore={true}
+              error="Problem verifying your code, please try again"
+              label="Passcode"
+              onChange={[MockFunction]}
+              placeholder="Enter a generated 2FA passcode"
+              required={true}
+              resize="both"
+              type="text"
+              value=""
+            />
+          </Grid.Column>
+        </Grid>
+      </Panel.Section>
+      <Panel.Section>
+        <Button
+          onClick={[MockFunction]}
+          primary={true}
+          size="default"
+          type="submit"
+        >
+          Enable 2FA
+        </Button>
+        <Button
+          onClick={
+            [MockFunction] {
+              "calls": Array [
+                Array [],
+                Array [],
+              ],
+            }
+          }
+          size="default"
+        >
+          Cancel
+        </Button>
+      </Panel.Section>
+    </form>
+  </Panel>
+</Modal>
+`;
+
+exports[`EnableTfaModal tests should show panel loading while retrieving 2fa deets 1`] = `
+<Modal
+  open={true}
+>
+  <Panel
+    accent={true}
+    title="Enable Two-Factor Authentication"
+  >
+    <PanelLoading
+      minHeight="400px"
+    />
+  </Panel>
+</Modal>
+`;
+
+exports[`EnableTfaModal tests should show verifying as button text when togglePending 1`] = `
+<Modal
+  open={true}
+>
+  <Panel
+    accent={true}
+    title="Enable Two-Factor Authentication"
+  >
+    <form
+      onSubmit={[Function]}
+    >
+      <Panel.Section>
+        <Grid>
+          <Grid.Column
+            md={7}
+            xs={12}
+          >
+            <h6>
+              Step 1: Configure your 2FA app
+            </h6>
+            <p>
+              To enable 2FA, you'll need to have a 2FA auth app installed on your phone or tablet (examples include Google Authenticator, Duo Mobile, and Authy).
+            </p>
+            <p>
+              Most apps will let you get set up by scanning our QR code from within the app. If you prefer, you can type in the key manually.
+            </p>
+            <p>
+              <strong>
+                <Icon
+                  name="Key"
+                  size={18}
+                />
+                 
+                <code>
+                  super-secret
+                </code>
+              </strong>
+            </p>
+          </Grid.Column>
+          <Grid.Column
+            md={5}
+            style={
+              Object {
+                "textAlign": "center",
+              }
+            }
+            xs={12}
+          >
+            <QRCode
+              bgColor="#FFFFFF"
+              fgColor="#000000"
+              level="Q"
+              style={
+                Object {
+                  "width": 230,
+                }
+              }
+              value="otpauth://totp/kevin-mitnick?secret=super-secret&issuer=SparkPost"
+            />
+          </Grid.Column>
+        </Grid>
+      </Panel.Section>
+      <Panel.Section>
+        <Grid>
+          <Grid.Column
+            md={7}
+            xs={12}
+          >
+            <h6>
+              Step 2: Enter a 2FA code
+            </h6>
+            <p>
+              Generate a code from your newly-activated 2FA app to confirm that you're all set up.
+            </p>
+            <TextField
+              data-lpignore={true}
+              error=""
+              label="Passcode"
+              onChange={[MockFunction]}
+              placeholder="Enter a generated 2FA passcode"
+              required={true}
+              resize="both"
+              type="text"
+              value=""
+            />
+          </Grid.Column>
+        </Grid>
+      </Panel.Section>
+      <Panel.Section>
+        <Button
+          onClick={[MockFunction]}
+          primary={true}
+          size="default"
+          type="submit"
+        >
+          Verifying Code...
+        </Button>
+        <Button
+          onClick={
+            [MockFunction] {
+              "calls": Array [
+                Array [],
+              ],
+            }
+          }
+          size="default"
+        >
+          Cancel
+        </Button>
+      </Panel.Section>
+    </form>
+  </Panel>
+</Modal>
+`;

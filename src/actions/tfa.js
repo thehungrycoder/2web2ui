@@ -1,7 +1,8 @@
 import { sparkpost as sparkpostRequest } from 'src/helpers/axiosInstances';
+import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 import { login } from 'src/actions/auth';
 
-export function get({ username, token }) {
+export function getTfaStatusBeforeLoggedIn({ username, token }) {
   return sparkpostRequest({
     method: 'GET',
     url: `/users/${username}/two-factor`,
@@ -9,6 +10,94 @@ export function get({ username, token }) {
       Authorization: token
     }
   });
+}
+
+export function getTfaStatus() {
+  return (dispatch, getState) => {
+    const { currentUser } = getState();
+    return dispatch(sparkpostApiRequest({
+      type: 'GET_TFA_STATUS',
+      meta: {
+        method: 'GET',
+        url: `/users/${currentUser.username}/two-factor`
+      }
+    }));
+  };
+}
+
+export function getTfaBackupStatus() {
+  return (dispatch, getState) => {
+    const { currentUser } = getState();
+    return dispatch(sparkpostApiRequest({
+      type: 'GET_TFA_BACKUP_STATUS',
+      meta: {
+        method: 'GET',
+        url: `/users/${currentUser.username}/two-factor/backup`
+      }
+    }));
+  };
+}
+
+export function generateBackupCodes(password) {
+  return (dispatch, getState) => {
+    const { currentUser } = getState();
+    return dispatch(sparkpostApiRequest({
+      type: 'TFA_GENERATE_BACKUP_CODES',
+      meta: {
+        method: 'POST',
+        url: `/users/${currentUser.username}/two-factor/backup`,
+        data: {
+          password
+        }
+      }
+    }));
+  };
+}
+
+export function clearBackupCodes() {
+  return {
+    type: 'TFA_CLEAR_BACKUP_CODES'
+  };
+}
+
+export function getTfaSecret() {
+  return (dispatch, getState) => {
+    const { currentUser } = getState();
+    return dispatch(sparkpostApiRequest({
+      type: 'GET_TFA_SECRET',
+      meta: {
+        method: 'PUT',
+        url: `/users/${currentUser.username}/two-factor`,
+        data: {
+          enabled: true
+        }
+      }
+    }));
+  };
+}
+
+/**
+ * Enables or disables TFA
+ *
+ * @param {*} data - request data
+ * @param {Boolean} data.enabled - true or false to enable/disable
+ * @param {Number} data.code - tfa generated code, required to enable
+ * @param {String} data.password - user password, required to disable
+ */
+export function toggleTfa(data) {
+  return (dispatch, getState) => {
+    const { currentUser } = getState();
+    return dispatch(sparkpostApiRequest({
+      type: 'TFA_TOGGLE',
+      meta: {
+        method: 'PUT',
+        url: `/users/${currentUser.username}/two-factor`,
+        data
+      }
+    })).catch(() => {
+      // swallow error, handled in reducer
+    });
+  };
 }
 
 export function verifyAndLogin({ authData, code }) {

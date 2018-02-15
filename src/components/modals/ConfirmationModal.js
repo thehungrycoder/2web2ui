@@ -17,7 +17,7 @@ export default class ConfirmationModal extends Component {
   };
 
   renderContent() {
-    const { content = null, onConfirm, onCancel, confirmVerb = 'Confirm' } = this.props;
+    const { children = null, content = children, onConfirm, onCancel, confirmVerb = 'Confirm' } = this.props;
     return (
       <div>
         {content}

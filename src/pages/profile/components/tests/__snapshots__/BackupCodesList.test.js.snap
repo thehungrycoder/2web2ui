@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: BackupCodesList should render correctly 1`] = `
+<ul>
+  <li
+    key="code1"
+  >
+    code1
+  </li>
+  <li
+    key="code2"
+  >
+    code2
+  </li>
+  <li
+    key="code3"
+  >
+    code3
+  </li>
+</ul>
+`;
