@@ -12,12 +12,10 @@ import { required, minLength, email } from 'src/helpers/validation';
 import styles from '../JoinPage.module.scss';
 const { recaptcha } = config;
 
-const formName = 'registerAccountForm';
-let reCaptchaInstance;
-
 export class JoinForm extends Component {
   state = {
-    reCaptchaReady: false
+    reCaptchaReady: false,
+    reCaptchaInstance: null
   }
 
   reCaptchaLoaded = () => {
@@ -26,7 +24,7 @@ export class JoinForm extends Component {
 
   verifyCallback = (response) => {
     const { formValues, onSubmit } = this.props;
-    reCaptchaInstance.reset();
+    this.reCaptchaInstance.reset();
     onSubmit({ ...formValues, recaptcha_response: response, recaptcha_type: 'invisible' });
   }
 
@@ -94,15 +92,14 @@ export class JoinForm extends Component {
           </div>
         </div>
 
-        <Button primary
-          // disabled={loading || pristine || invalid || !reCaptchaReady }
+        <Button primary disabled={loading || pristine || invalid || !reCaptchaReady }
           id='btnCreateAccount'
         >
           { loading ? 'Loading' : 'Create Account' }
         </Button>
 
         <Recaptcha
-          ref={(e) => reCaptchaInstance = e}
+          ref={(e) => this.reCaptchaInstance = e}
           sitekey={recaptcha.invisibleKey}
           size="invisible"
           render='explicit'
@@ -115,7 +112,7 @@ export class JoinForm extends Component {
     );
   }
 }
-
+const formName = 'registerAccountForm';
 const mapStateToProps = (state, props) => ({
   initialValues: {
     tou_accepted: false

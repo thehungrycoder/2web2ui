@@ -3,8 +3,6 @@ import React from 'react';
 import cases from 'jest-in-case';
 
 import { JoinPage } from '../JoinPage';
-// import JoinForm from '../components/JoinForm';
-// import { DEFAULT_REDIRECT_ROUTE } from 'src/constants';
 
 let props;
 let instance;
@@ -50,10 +48,10 @@ describe('AuthPage', () => {
       { name: 'invalid email (400)', message: 'invalid email', status: 400, expected: 'Email address is not valid.' },
       { name: 'invalid email (403)', message: 'invalid email', status: 403, expected: 'Email address is not valid.' },
       { name: 'aws account exists', message: 'AWS Account already exists', status: 409, expected: 'It looks like you\'ve already created a SparkPost account through the AWS Marketplace. There may be a brief delay for your AWS account info to synchronize. Please wait a few minutes and then sign in.' },
-      { name: 'duplicate email', message: 'email', status: 409, expected: 'It looks like you already have a SparkPost account with this email address.' },
+      { name: 'duplicate email', message: 'A user with that email address already exists', status: 409, expected: 'It looks like you already have a SparkPost account with this email address.', snapshot: true },
       { name: 'manual review required (siftscience)', message: 'Sign up blocked', status: 403, expected: 'Your account requires manual review. To proceed with sign up, please <UnstyledLink to=${this.createSupportLink()}>contact support</UnstyledLink>.', snapshot: true },
       { name: 'service not available in location', message: 'forbidden', status: 403, expected: 'SparkPost is not currently available in your location.' },
-      { name: 'all other case', message: 'unknown error', status: 403, expected: 'Something went wrong. Please try again in a few minutes or contact support' }
+      { name: 'all other case', message: 'unknown error', status: 403, expected: 'Something went wrong. Please try again in a few minutes or contact support', snapshot: true }
     ];
 
     cases('handleSignupFailure: ', (opts) => {
@@ -72,8 +70,6 @@ describe('AuthPage', () => {
         expect(instance.handleSignupFailure(response)).toBe(opts.expected);
       }
     }, testCases);
-
-
   });
 
 });

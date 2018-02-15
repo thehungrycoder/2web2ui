@@ -17,7 +17,7 @@ import { authenticate, login } from 'src/actions/auth';
 
 import { register } from 'src/actions/account';
 import { DEFAULT_REDIRECT_ROUTE, LINKS } from 'src/constants';
-const { attribution, salesforceDataParams, links } = config;
+const { attribution, salesforceDataParams, links, gaTag } = config;
 
 
 export class JoinPage extends Component {
@@ -25,12 +25,16 @@ export class JoinPage extends Component {
   state = {
     formData: {}
   }
-  componentDidMount() {
+
+  injectGA() { //TODO find better way of doing this in react. 
     const script = document.createElement('script');
     script.src = 'https://www.google.com/recaptcha/api.js';
     script.async = true;
-    document.body.appendChild(script); //TODO find better way of doing this in react. 
+    document.body.appendChild(script); 
+  }
 
+  componentDidMount() {
+    this.injectGA();
     this.props.logout();
   }
 
@@ -60,8 +64,7 @@ export class JoinPage extends Component {
   handleSignupFailure = (error) => {
     let status;
     let mainError; 
-    
-
+    const { formData } = this.state;
     try { 
       if(error.response.data.errors[0].message) {
         mainError = error.response.data.errors[0].message;
@@ -71,38 +74,46 @@ export class JoinPage extends Component {
       status = error.response.status;
     } catch(e) {}
 
-    // console.log(mainError);
-    
     if (status === 400 && mainError.match(/\brecaptcha\b/i)) {
       return 'There was an error with your reCAPTCHA response, please try again.';
     } else if ((status === 400 || status === 403) && mainError.match(/^invalid email/i)) {
-      //TODO also trigger email field validation? 
       return 'Email address is not valid.';
     } else if (status === 409 && mainError.match(/^AWS Account already exists/i)) {
       return 'It looks like you\'ve already created a SparkPost account through the AWS Marketplace. There may be a brief delay for your AWS account info to synchronize. Please wait a few minutes and then sign in.';
     } else if (status === 409 && mainError.match(/\bemail\b/i)) {
-      return 'It looks like you already have a SparkPost account with this email address.';
+      return <span>It looks like you already have a SparkPost account with {formData.email}. 
+         <UnstyledLink to="/auth">Sign in</UnstyledLink>
+      </span>;
     } else if (status === 403 && mainError.match(/^Sign up blocked/i)) {
-      return `Your account requires manual review. To proceed with sign up, please <UnstyledLink to=${this.createSupportLink()}>contact support</UnstyledLink>.`;
+      return <span>Your account requires manual review. To proceed with sign up, please <UnstyledLink to={this.createSupportLink()}>contact support</UnstyledLink>.</span>;
     } else if (status === 403 && mainError.match(/^forbidden/i)) {
       return 'SparkPost is not currently available in your location.';
     } else {
-      return 'Something went wrong. Please try again in a few minutes or contact support'; //TODO link support?
+      return <span>Something went wrong. Please try again in a few minutes or <UnstyledLink to={links.submitTicket}>contact support</UnstyledLink></span>
     }
+  }
+
+  trackSignup = () => {
+    //TODO verify data structure and/or move it to an Analytics service (ask brian).
+    window.gtag('config', gaTag, { 
+      event_category: 'Completed form', 
+      event_action: 'create account', 
+      data: { form_type: 'create account' }
+    });
   }
 
   registerSubmit = (values) => {
     //TODO
     //- retrieve salesforce_data - DONE
     //- retrieve sfdcid - DONE
-    //- retrieve analytics session id
+    //- retrieve analytics session id - SKIP
     //- handle and retrieve recaptcha - DONE
-    //- track signup after signup is completed
+    //- track signup after signup is completed - DONE
     //- fix TOU checkbox alignment when validation error is shown
     //- handle recaptcha lib loading on join page only
+    //- Enable eslint
 
     this.setState({ formData: values });
-    console.log('received', values);
     const { register, authenticate } = this.props;
     const attributionData = this.getAndSetAttributionData();
 
@@ -110,24 +121,16 @@ export class JoinPage extends Component {
 
     return register(signupData)
       .then((accountData) => {
+        this.trackSignup();
         return authenticate(accountData.username, values.password);
       })
       .then(() => this.props.history.push(DEFAULT_REDIRECT_ROUTE))
       .catch((e) => {});
   }
 
-  renderError = (error) => {
-    let message = 'An unknown error occurred';
-
-    try { 
-      if(error.response.data.errors[0].message) {
-        message = error.response.data.errors[0].message;
-      } else {
-        message = error.message;
-      }
-    } catch(e) {}
+  renderError = (errors) => {
     return (
-      <Error error={this.handleSignupFailure(error)} />
+      <Error error={this.handleSignupFailure(errors)} />
     );
   }
 

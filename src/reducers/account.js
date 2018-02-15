@@ -2,7 +2,8 @@ const initialState = {
   updateError: null,
   loading: false,
   subscription: {},
-  updateLoading: false
+  updateLoading: false,
+  createLoading: false
 };
 
 export default (state = initialState, { type, meta, payload }) => {
@@ -25,6 +26,15 @@ export default (state = initialState, { type, meta, payload }) => {
 
     case 'UPDATE_ACCOUNT_FAIL':
       return { ...state, updateError: payload, updateLoading: false };
+
+    case 'CREATE_ACCOUNT_PENDING':
+      return { ...state, createLoading: true, createError: null };
+
+    case 'CREATE_ACCOUNT_SUCCESS':
+      return { ...state, createLoading: false, payload };
+
+    case 'CREATE_ACCOUNT_FAIL':
+      return { ...state, createError: payload, updateLoading: false };
 
     default:
       return state;
