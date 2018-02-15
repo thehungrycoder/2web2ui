@@ -10,6 +10,7 @@ import { showAlert } from 'src/actions/globalAlert';
 
 import NameForm from './components/NameForm';
 import PasswordForm from './components/PasswordForm';
+import TfaManager from './components/TfaManager';
 import { LabelledValue } from 'src/components';
 import ErrorTracker from 'src/helpers/errorTracker';
 
@@ -59,6 +60,8 @@ export class ProfilePage extends Component {
           <LabelledValue label='Username' value={username}/>
           <LabelledValue label='Email Address' value={email}/>
         </Panel>
+
+        <TfaManager />
 
         <Panel sectioned title='Edit Profile'>
           <NameForm onSubmit={this.updateProfile} />

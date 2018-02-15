@@ -1,6 +1,6 @@
 import { sparkpostLogin } from '../helpers/http';
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
-import { get as tfaGet } from 'src/actions/tfa';
+import { getTfaStatusBeforeLoggedIn } from 'src/actions/tfa';
 
 import authCookie from '../helpers/authCookie';
 import { initializeAccessControl } from './accessControl';
@@ -53,13 +53,13 @@ export function authenticate(username, password, rememberMe = false) {
       .then(({ data = {}} = {}) => {
         const authData = { ...data, username };
 
-        return Promise.all([ authData, tfaGet({ username, token: authData.access_token })]);
+        return Promise.all([ authData, getTfaStatusBeforeLoggedIn({ username, token: authData.access_token })]);
       })
       .then(([ authData, tfaResponse]) => {
         // if tfa enabled must avoid logging in
         if (tfaResponse.data.results.enabled) {
           dispatch({
-            type: 'TFA_ENABLED',
+            type: 'TFA_ENABLED_ON_LOGIN',
             payload: authData
           });
         } else {

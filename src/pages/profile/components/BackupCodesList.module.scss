@@ -1,0 +1,27 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.List {
+  padding: 0;
+  column-count: 2;
+  column-gap: spacing(large);
+
+  li {
+    position: relative;
+    display: inline-block;
+    padding: 0 spacing(large);
+    list-style-type: none;
+    font-family: font-family(monospace);
+    font-weight: 600;
+    font-size: rem(16);
+    line-height: rem(30);
+
+    &:before {
+      content: '•';
+      display: block;
+      position: absolute;
+      top: 0;
+      left: rem(3);
+      color: color(gray, 7);
+    }
+  }
+}

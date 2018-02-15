@@ -21,6 +21,7 @@ exports[`ProfilePage renders correctly 1`] = `
       value="ned.stark@winterfell.biz"
     />
   </Panel>
+  <Connect(TfaManager) />
   <Panel
     sectioned={true}
     title="Edit Profile"
