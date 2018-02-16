@@ -18,14 +18,19 @@ exports[`edit path base props 1`] = `
     tabs={
       Array [
         Object {
-          "Component": Object {},
+          "Component": [Function],
           "content": "Details",
           "to": "/account/subaccounts/123",
         },
         Object {
-          "Component": Object {},
+          "Component": [Function],
           "content": "API Keys",
           "to": "/account/subaccounts/123/api-keys",
+        },
+        Object {
+          "Component": [Function],
+          "content": "Sending Domains",
+          "to": "/account/subaccounts/123/sending-domains",
         },
       ]
     }
@@ -38,6 +43,10 @@ exports[`edit path base props 1`] = `
     />
     <Route
       path="/account/subaccounts/123/api-keys"
+      render={[Function]}
+    />
+    <Route
+      path="/account/subaccounts/123/sending-domains"
       render={[Function]}
     />
   </Switch>
@@ -62,14 +71,19 @@ exports[`edit path loading 1`] = `
     tabs={
       Array [
         Object {
-          "Component": Object {},
+          "Component": [Function],
           "content": "Details",
           "to": "/account/subaccounts/123",
         },
         Object {
-          "Component": Object {},
+          "Component": [Function],
           "content": "API Keys",
           "to": "/account/subaccounts/123/api-keys",
+        },
+        Object {
+          "Component": [Function],
+          "content": "Sending Domains",
+          "to": "/account/subaccounts/123/sending-domains",
         },
       ]
     }
@@ -98,14 +112,19 @@ exports[`keys path base props 1`] = `
     tabs={
       Array [
         Object {
-          "Component": Object {},
+          "Component": [Function],
           "content": "Details",
           "to": "/account/subaccounts/123",
         },
         Object {
-          "Component": Object {},
+          "Component": [Function],
           "content": "API Keys",
           "to": "/account/subaccounts/123/api-keys",
+        },
+        Object {
+          "Component": [Function],
+          "content": "Sending Domains",
+          "to": "/account/subaccounts/123/sending-domains",
         },
       ]
     }
@@ -118,6 +137,10 @@ exports[`keys path base props 1`] = `
     />
     <Route
       path="/account/subaccounts/123/api-keys"
+      render={[Function]}
+    />
+    <Route
+      path="/account/subaccounts/123/sending-domains"
       render={[Function]}
     />
   </Switch>
@@ -142,14 +165,19 @@ exports[`keys path loading 1`] = `
     tabs={
       Array [
         Object {
-          "Component": Object {},
+          "Component": [Function],
           "content": "Details",
           "to": "/account/subaccounts/123",
         },
         Object {
-          "Component": Object {},
+          "Component": [Function],
           "content": "API Keys",
           "to": "/account/subaccounts/123/api-keys",
+        },
+        Object {
+          "Component": [Function],
+          "content": "Sending Domains",
+          "to": "/account/subaccounts/123/sending-domains",
         },
       ]
     }
@@ -177,18 +205,23 @@ exports[`on create scenario should show api key banner on new key 1`] = `
   />
   <Tabs
     connectBelow={true}
-    selected={0}
+    selected={-1}
     tabs={
       Array [
         Object {
-          "Component": Object {},
+          "Component": [Function],
           "content": "Details",
           "to": "/account/subaccounts/123",
         },
         Object {
-          "Component": Object {},
+          "Component": [Function],
           "content": "API Keys",
           "to": "/account/subaccounts/123/api-keys",
+        },
+        Object {
+          "Component": [Function],
+          "content": "Sending Domains",
+          "to": "/account/subaccounts/123/sending-domains",
         },
       ]
     }
@@ -201,6 +234,63 @@ exports[`on create scenario should show api key banner on new key 1`] = `
     />
     <Route
       path="/account/subaccounts/123/api-keys"
+      render={[Function]}
+    />
+    <Route
+      path="/account/subaccounts/123/sending-domains"
+      render={[Function]}
+    />
+  </Switch>
+</Page>
+`;
+
+exports[`should select sending domains tab 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "Subaccounts",
+      "to": "/account/subaccounts",
+    }
+  }
+  empty={Object {}}
+  title="Bob Evans, the restaurant. (123)"
+>
+  <Tabs
+    connectBelow={true}
+    selected={2}
+    tabs={
+      Array [
+        Object {
+          "Component": [Function],
+          "content": "Details",
+          "to": "/account/subaccounts/123",
+        },
+        Object {
+          "Component": [Function],
+          "content": "API Keys",
+          "to": "/account/subaccounts/123/api-keys",
+        },
+        Object {
+          "Component": [Function],
+          "content": "Sending Domains",
+          "to": "/account/subaccounts/123/sending-domains",
+        },
+      ]
+    }
+  />
+  <Switch>
+    <Route
+      exact={true}
+      path="/account/subaccounts/123"
+      render={[Function]}
+    />
+    <Route
+      path="/account/subaccounts/123/api-keys"
+      render={[Function]}
+    />
+    <Route
+      path="/account/subaccounts/123/sending-domains"
       render={[Function]}
     />
   </Switch>

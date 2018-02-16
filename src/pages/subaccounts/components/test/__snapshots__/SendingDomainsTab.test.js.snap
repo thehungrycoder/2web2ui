@@ -1,0 +1,90 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SendingDomainsTab getRowData 1`] = `
+Array [
+  <Link
+    replace={false}
+    to="/account/sending-domains/edit/foo.com"
+  >
+    foo.com
+  </Link>,
+  <DomainStatusCell
+    domain={
+      Object {
+        "domain": "foo.com",
+      }
+    }
+  />,
+]
+`;
+
+exports[`SendingDomainsTab should load domains in tab 1`] = `
+<Panel>
+  <div>
+    <Panel.Section>
+      <p>
+        Sending Domains assigned to this subaccount.
+      </p>
+    </Panel.Section>
+    <TableCollection
+      columns={
+        Array [
+          Object {
+            "label": "Domain",
+            "sortKey": "domain",
+            "width": "30%",
+          },
+          Object {
+            "label": <StatusTooltipHeader />,
+            "width": "40%",
+          },
+        ]
+      }
+      defaultSortColumn={null}
+      defaultSortDirection="asc"
+      getRowData={[Function]}
+      pagination={true}
+      rows={
+        Array [
+          Object {
+            "domain": "foo.com",
+          },
+          Object {
+            "domain": "bar.com",
+          },
+        ]
+      }
+    />
+  </div>
+</Panel>
+`;
+
+exports[`SendingDomainsTab should show empty message when 0 domains exist 1`] = `
+<Panel>
+  <Panel.Section
+    style={
+      Object {
+        "textAlign": "center",
+      }
+    }
+  >
+    <p>
+      This subaccount has no sending domains assigned to it. You can assign an existing one, or create a new one.
+    </p>
+    <Button
+      Component={[Function]}
+      plain={true}
+      size="default"
+      to="/account/sending-domains"
+    >
+      Manage Sending Domains
+    </Button>
+  </Panel.Section>
+</Panel>
+`;
+
+exports[`SendingDomainsTab should show panel loading while loading domains 1`] = `
+<PanelLoading
+  minHeight="400px"
+/>
+`;

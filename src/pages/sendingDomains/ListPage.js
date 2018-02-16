@@ -5,15 +5,10 @@ import { Link } from 'react-router-dom';
 import { list as listDomains } from 'src/actions/sendingDomains';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
 import { hasUnverifiedDomains } from 'src/selectors/sendingDomains';
-import { Loading, TableCollection, SubaccountTag, DomainStatusTag, ApiErrorBanner } from 'src/components';
+import { Loading, TableCollection, SubaccountTag, DomainStatusCell, StatusTooltipHeader, ApiErrorBanner } from 'src/components';
 import { Page, UnstyledLink } from '@sparkpost/matchbox';
-import ReadyFor from './components/ReadyFor';
 import UnverifiedWarningBanner from './components/UnverifiedWarningBanner';
-import StatusTooltip from './components/StatusTooltip';
-import { resolveStatus, resolveReadyFor } from 'src/helpers/domains';
 import { LINKS } from 'src/constants';
-
-const StatusHeader = <StatusTooltip>Status</StatusTooltip>;
 
 export class ListPage extends Component {
   componentDidMount() {
@@ -25,7 +20,7 @@ export class ListPage extends Component {
 
     const columns = [
       { label: 'Domain', width: '30%', sortKey: 'domain' },
-      { label: StatusHeader, width: '40%' }
+      { label: <StatusTooltipHeader />, width: '40%' }
     ];
 
     if (hasSubaccounts) {
@@ -35,23 +30,13 @@ export class ListPage extends Component {
     return columns;
   }
 
-  getStatusCell = ({ status, is_default_bounce_domain }) => {
-    const domainStatus = resolveStatus(status);
-
-    if (domainStatus !== 'verified') {
-      return <DomainStatusTag status={domainStatus} />;
-    }
-
-    return <ReadyFor {...resolveReadyFor(status)} bounceDefault={is_default_bounce_domain} />;
-  }
-
   getRowData = (row) => {
     const { hasSubaccounts } = this.props;
     const { domain, shared_with_subaccounts, subaccount_id } = row;
 
     const rowData = [
       <UnstyledLink Component={Link} to={`/account/sending-domains/edit/${domain}`}>{domain}</UnstyledLink>,
-      this.getStatusCell(row)
+      <DomainStatusCell domain={row} />
     ];
 
     if (hasSubaccounts) {

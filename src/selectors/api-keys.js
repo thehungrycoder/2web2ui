@@ -43,18 +43,35 @@ export const getInitialGrantsRadio = createSelector(
     isNew || _.size(grants) <= _.size(apiKey.grants) ? 'all' : 'select'
 );
 
-export const getInitialValues = createSelector(getFormApiKey, (apiKey) => {
-  // using lodash methods here allow us to handle undefined values nicely.
-  const grantsPairs = _.map(apiKey.grants, (grant) => [grant, 'true']);
-  const grants = _.fromPairs(grantsPairs);
-  const validIps = _.join(apiKey.valid_ips, ', ');
+export const getInitialValues = createSelector(
+  [getGrants, getFormApiKey],
+  (grantsList, apiKey) => {
+    const allGrants = _.keys(grantsList);
+    /**
+     * provides list of checked/unchecked values as
+     * [['metrics/view', false], ['webhooks/view', true]]
+     */
+    const grantsPairs = _.map(allGrants, (grant) => ([grant, _.includes(apiKey.grants, grant)]));
+    const grants = _.fromPairs(grantsPairs);
+    const validIps = _.join(apiKey.valid_ips, ', ');
 
-  return {
-    ...apiKey,
-    grants,
-    validIps
-  };
-});
+    return {
+      ...apiKey,
+      grants,
+      validIps
+    };
+  }
+);
+
+export const getInitialSubaccountGrants = createSelector(
+  [getSubaccountGrants],
+  (subaccountGrants) => {
+    // always setting the pairs to false because this is only on create
+    // subaccounts can't edit api key grants
+    const grantPairs = _.map(_.keys(subaccountGrants), (grant) => [grant, false]);
+    return _.fromPairs(grantPairs);
+  }
+);
 
 export const getSubaccountApiKeys = createSelector(
   [getApiKeys, getSubaccountIdFromProps],

@@ -52,8 +52,18 @@ export class ApiKeysDetailsPage extends Component {
   };
 
   onSubmit = (values) => {
-    const { updateApiKey, id, subaccount, showAlert } = this.props;
-    return updateApiKey({ id, key: values, subaccount }).then(() => showAlert({ type: 'success', message: 'API key updated' })).catch((err) => showAlert({ type: 'error', message: 'Could not update API key', details: err.message }));
+    const { id, showAlert, updateApiKey } = this.props;
+
+    return updateApiKey({ id, ...values })
+      .then(() => showAlert({
+        type: 'success',
+        message: 'API key updated'
+      }))
+      .catch((err) => showAlert({
+        type: 'error',
+        message: 'Could not update API key',
+        details: err.message
+      }));
   };
 
   render() {

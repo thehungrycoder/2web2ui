@@ -34,6 +34,11 @@ it('renders correctly with subaccounts', () => {
   expect(wrapper.instance().props.listSubaccountGrants).toHaveBeenCalled();
 });
 
+it('should show loading component while loading', () => {
+  wrapper.setProps({ loading: true });
+  expect(wrapper).toMatchSnapshot();
+});
+
 it('submits correctly', async() => {
   await wrapper.instance().onSubmit('test');
   expect(wrapper.instance().props.createApiKey).toHaveBeenCalledWith('test');

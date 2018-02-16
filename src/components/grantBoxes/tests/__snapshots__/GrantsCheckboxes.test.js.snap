@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GrantsCheckboxes should render 1`] = `
+<Grid
+  className="Grants show"
+>
+  <Grid.Column
+    key="0"
+    md={4}
+    xs={12}
+  >
+    <div
+      key="grant1"
+    >
+      <WithPositioning(Tooltip)
+        content="desc for grant 1"
+        dark={true}
+      >
+        <Field
+          component={[Function]}
+          label="Grant 1"
+          name="grants[grant1]"
+          type="checkbox"
+        />
+      </WithPositioning(Tooltip)>
+    </div>
+  </Grid.Column>
+  <Grid.Column
+    key="1"
+    md={4}
+    xs={12}
+  >
+    <div
+      key="grant2"
+    >
+      <WithPositioning(Tooltip)
+        content="desc for grant 2"
+        dark={true}
+      >
+        <Field
+          component={[Function]}
+          label="Grant 2"
+          name="grants[grant2]"
+          type="checkbox"
+        />
+      </WithPositioning(Tooltip)>
+    </div>
+  </Grid.Column>
+</Grid>
+`;
