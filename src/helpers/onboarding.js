@@ -21,7 +21,7 @@ export function curlRequest({ apiKey, email }) {
       "sandbox": true
     },
     "content": {
-      "from": "sandbox@sparkpostbox.com",
+      "from": "${config.sandbox.localpart}@${config.sandbox.domain}",
       "subject": "Thundercats are GO!!!",
       "text": "Sword of Omens, give me sight BEYOND sight"
     },
