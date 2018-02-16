@@ -7,6 +7,7 @@ import { DetailsPage } from '../DetailsPage';
 const getSubaccount = jest.fn();
 const listPools = jest.fn();
 const listApiKeys = jest.fn();
+const listDomains = jest.fn();
 const hideNewApiKey = jest.fn();
 
 const paths = {
@@ -27,6 +28,7 @@ const props = {
   getSubaccount,
   listPools,
   listApiKeys,
+  listDomains,
   hideNewApiKey
 };
 
@@ -40,6 +42,7 @@ test('componentDidMount', () => {
   expect(getSubaccount).toHaveBeenCalledWith('123');
   expect(listPools).toHaveBeenCalled();
   expect(listApiKeys).toHaveBeenCalled();
+  expect(listDomains).toHaveBeenCalled();
   expect(hideNewApiKey).not.toHaveBeenCalled();
 });
 

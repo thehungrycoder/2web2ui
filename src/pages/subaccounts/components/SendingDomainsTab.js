@@ -5,7 +5,6 @@ import { Panel, Button } from '@sparkpost/matchbox';
 import { TableCollection, DomainStatusCell, StatusTooltipHeader } from 'src/components';
 import { selectSendingDomainsForSubaccount } from 'src/selectors/sendingDomains';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
-import { list as listDomains } from 'src/actions/sendingDomains';
 
 const columns = [
   { label: 'Domain', width: '30%', sortKey: 'domain' },
@@ -18,10 +17,6 @@ export const getRowData = (row) => [
 ];
 
 export class SendingDomainsTab extends Component {
-  componentDidMount() {
-    this.props.listDomains();
-  }
-
   renderCollection() {
     const { domains } = this.props;
     return (
@@ -73,4 +68,4 @@ const mapStateToProps = (state, props) => ({
   domains: selectSendingDomainsForSubaccount(state, props)
 });
 
-export default withRouter(connect(mapStateToProps, { listDomains })(SendingDomainsTab));
+export default withRouter(connect(mapStateToProps)(SendingDomainsTab));

@@ -35,7 +35,8 @@ export class ApiKeyForm extends Component {
 
   onSubmit = ({ grants = {}, grantsRadio, label, subaccount, validIps = '' }) => {
     const availableGrantKeys = Object.keys(this.availableGrants);
-    const checkedGrantKeys = _.reduce(grants, (result = [], checked, key) => checked ? [...result, key] : result);
+    // extracts all checked grants and returns array of all checked ['grant1', 'grant2']
+    const checkedGrantKeys = _.reduce(grants, (result, checked, key) => checked ? [...result, key] : result, []);
 
     return this.props.onSubmit({
       label,
@@ -96,14 +97,14 @@ const valueSelector = formValueSelector(formName);
 const mapStateToProps = (state, props) => ({
   grants: getGrants(state),
   subaccountGrants: getSubaccountGrants(state),
+  subaccount: valueSelector(state, 'subaccount'),
   showGrants: valueSelector(state, 'grantsRadio') === 'select',
   isNew: getIsNew(state, props),
   initialValues: {
     grantsRadio: getInitialGrantsRadio(state, props),
     subaccount: selectSubaccountFromQuery(state, props),
     ...getInitialValues(state, props)
-  },
-  subaccount: valueSelector(state, 'subaccount')
+  }
 });
 
 const formOptions = {

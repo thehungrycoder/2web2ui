@@ -8,6 +8,7 @@ import { ApiKeySuccessBanner } from 'src/components';
 import { selectSubaccount } from 'src/selectors/subaccounts';
 import { listPools } from 'src/actions/ipPools';
 import { listApiKeys, hideNewApiKey } from 'src/actions/api-keys';
+import { list as listDomains } from 'src/actions/sendingDomains';
 
 import ApiKeysTab from './components/ApiKeysTab';
 import EditTab from './components/EditTab';
@@ -50,6 +51,7 @@ export class DetailsPage extends Component {
     this.props.getSubaccount(this.props.id);
     this.props.listPools();
     this.props.listApiKeys();
+    this.props.listDomains();
   }
 
   renderApiKeyBanner() {
@@ -101,5 +103,5 @@ const mapStateToProps = (state, props) => {
 };
 
 export default withRouter(
-  connect(mapStateToProps, { getSubaccount, listPools, listApiKeys, hideNewApiKey })(DetailsPage)
+  connect(mapStateToProps, { getSubaccount, listPools, listApiKeys, hideNewApiKey, listDomains })(DetailsPage)
 );

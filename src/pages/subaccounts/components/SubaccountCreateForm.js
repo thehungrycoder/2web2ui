@@ -8,7 +8,6 @@ import { getSubaccountGrants, getInitialSubaccountGrants } from 'src/selectors/a
 import { NameField, ApiKeyCheckBox, ApiKeyFields, IpPoolSelect } from './formFields';
 
 export class SubaccountCreateForm extends Component {
-
   render() {
     const {
       handleSubmit,

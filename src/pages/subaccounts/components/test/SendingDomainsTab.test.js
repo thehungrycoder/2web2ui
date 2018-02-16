@@ -7,7 +7,6 @@ describe('SendingDomainsTab', () => {
 
   beforeEach(() => {
     const props = {
-      listDomains: jest.fn(),
       domains: [
         {
           domain: 'foo.com'
