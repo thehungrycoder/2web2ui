@@ -1,4 +1,4 @@
-const initialState = {
+export const initialState = {
   updateError: null,
   loading: false,
   subscription: {},

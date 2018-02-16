@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Account reducer create account fail 1`] = `
+Object {
+  "createError": Object {
+    "errors": Array [
+      Object {
+        "message": "Some error occurred",
+      },
+    ],
+  },
+  "createLoading": false,
+  "loading": false,
+  "subscription": Object {},
+  "updateError": null,
+  "updateLoading": false,
+}
+`;
+
+exports[`Account reducer create account pending 1`] = `
+Object {
+  "createError": null,
+  "createLoading": true,
+  "loading": false,
+  "subscription": Object {},
+  "updateError": null,
+  "updateLoading": false,
+}
+`;
+
+exports[`Account reducer create account success 1`] = `
+Object {
+  "createLoading": false,
+  "loading": false,
+  "payload": Object {
+    "results": Object {
+      "customer_id": 1000242,
+      "message": "Account created, welcome to SparkPost!",
+      "username": "john.smith",
+    },
+  },
+  "subscription": Object {},
+  "updateError": null,
+  "updateLoading": false,
+}
+`;
