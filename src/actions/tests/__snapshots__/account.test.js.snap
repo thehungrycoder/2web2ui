@@ -1,7 +1,55 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`fetch - no params 1`] = `[Function]`;
+exports[`Account action creators register makes api call with passed data 1`] = `
+Object {
+  "meta": Object {
+    "data": Object {
+      "email": "foo@bar.com",
+      "first_name": "foo",
+      "last_name": "bar",
+      "passowrd": "foobar",
+      "recaptcha_response": "foofoo",
+      "recaptcha_type": "invisible",
+      "tou_accepted": true,
+    },
+    "method": "POST",
+    "url": "/account",
+  },
+  "type": "CREATE_ACCOUNT",
+}
+`;
 
-exports[`fetch with params 1`] = `[Function]`;
+exports[`fetch - no params 1`] = `
+Object {
+  "meta": Object {
+    "method": "GET",
+    "params": Object {},
+    "url": "/account",
+  },
+  "type": "FETCH_ACCOUNT",
+}
+`;
 
-exports[`getPlans 1`] = `[Function]`;
+exports[`fetch with params 1`] = `
+Object {
+  "meta": Object {
+    "method": "GET",
+    "params": Object {
+      "also": "that one",
+      "this": "one",
+    },
+    "url": "/account",
+  },
+  "type": "FETCH_ACCOUNT",
+}
+`;
+
+exports[`getPlans 1`] = `
+Object {
+  "meta": Object {
+    "method": "GET",
+    "url": "/account/plans",
+  },
+  "type": "GET_PLANS",
+}
+`;
