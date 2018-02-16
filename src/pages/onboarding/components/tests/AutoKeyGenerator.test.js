@@ -4,7 +4,7 @@ import { AutoKeyGenerator } from '../AutoKeyGenerator';
 
 const keyDefaults = {
   label: 'Send Email Key (auto-generated)',
-  grants: { 'smtp/inject': true, 'transmissions/modify': true, 'templates/view': true }
+  grants: ['smtp/inject', 'transmissions/modify', 'templates/view']
 };
 
 describe('AutoKeyGenerator', () => {

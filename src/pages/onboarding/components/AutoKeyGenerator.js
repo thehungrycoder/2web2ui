@@ -8,7 +8,7 @@ import { Loading } from 'src/components';
 
 const keyDefaults = {
   label: 'Send Email Key (auto-generated)',
-  grants: { 'smtp/inject': true, 'transmissions/modify': true, 'templates/view': true }
+  grants: ['smtp/inject', 'transmissions/modify', 'templates/view']
 };
 
 // Handles API key generation
