@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { ApiKeysTab, getRowData } from '../ApiKeysTab';
+import { ApiKeysTab } from '../ApiKeysTab';
 
 const props = {
   loading: false,
@@ -30,5 +30,5 @@ describe('ApiKeysTab', () => {
 });
 
 test('getRowData', () => {
-  expect(getRowData({ id: 12313, label: 'test', short_key: 'cdwa' })).toMatchSnapshot();
+  expect(wrapper.instance().getRowData({ id: 12313, label: 'test', short_key: 'cdwa' })).toMatchSnapshot();
 });

@@ -1,3 +1,5 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
 .Grants {
   display: none;
   margin-bottom: 1rem;
@@ -5,4 +7,12 @@
   &.show {
     display: flex;
   }
+}
+
+.Grant {
+  display: inline-block;
+  margin-bottom: rem(3);
+  min-width: rem(210);
+  width: 33%;
+  margin-right: -4px;
 }

@@ -1,18 +1,20 @@
-import { formatKeyForRequest } from './helpers/api-keys';
 import sparkpostApiRequest from './helpers/sparkpostApiRequest';
 import setSubaccountHeader from './helpers/setSubaccountHeader';
 
-export function createApiKey(key) {
-  return (dispatch, getState) => dispatch(
-    sparkpostApiRequest({
-      type: 'CREATE_API_KEY',
-      meta: {
-        method: 'POST',
-        url: '/api-keys',
-        ...formatKeyForRequest(key, getState)
+export function createApiKey({ grants, label, subaccount, validIps: valid_ips = []}) {
+  return sparkpostApiRequest({
+    type: 'CREATE_API_KEY',
+    meta: {
+      method: 'POST',
+      url: '/api-keys',
+      headers: setSubaccountHeader(subaccount),
+      data: {
+        grants,
+        label,
+        valid_ips
       }
-    })
-  );
+    }
+  });
 }
 
 export function getApiKey({ id, subaccount = null }) {
@@ -42,19 +44,20 @@ export function deleteApiKey({ id, subaccount = null }) {
   });
 }
 
-export function updateApiKey({ id, key, subaccount = null }) {
-  const headers = setSubaccountHeader(subaccount);
-  return (dispatch, getState) => dispatch(
-    sparkpostApiRequest({
-      type: 'UPDATE_API_KEY',
-      meta: {
-        method: 'PUT',
-        url: `/api-keys/${id}`,
-        ...formatKeyForRequest(key, getState),
-        headers
+export function updateApiKey({ grants, id, label, subaccount, validIps: valid_ips = []}) {
+  return sparkpostApiRequest({
+    type: 'UPDATE_API_KEY',
+    meta: {
+      method: 'PUT',
+      url: `/api-keys/${id}`,
+      headers: setSubaccountHeader(subaccount),
+      data: {
+        grants,
+        label,
+        valid_ips
       }
-    })
-  );
+    }
+  });
 }
 
 export function hideNewApiKey() {

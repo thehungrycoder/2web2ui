@@ -19,6 +19,9 @@ export { default as SparkPost } from './sparkPost/SparkPost';
 export { default as Support } from './support/Support';
 export { default as UsageReport } from './usageReport/UsageReport';
 export { default as ShortKeyCode } from './shortKeyCode/ShortKeyCode';
+export { default as ReadyFor } from './domainStatus/ReadyFor';
+export { default as StatusTooltipHeader } from './domainStatus/StatusTooltipHeader';
+export { default as DomainStatusCell } from './domainStatus/DomainStatusCell';
 
 
 export * from './collection';

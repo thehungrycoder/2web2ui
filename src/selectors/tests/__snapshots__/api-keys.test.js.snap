@@ -14,7 +14,8 @@ Object {
 exports[`ApiKey Selectors gets initial values 1`] = `
 Object {
   "grants": Object {
-    "grant": "true",
+    "grant one": true,
+    "grant two": false,
   },
   "subaccount_id": "subId",
   "validIps": "ip",
@@ -54,4 +55,18 @@ Array [
 ]
 `;
 
-exports[`ApiKey Selectors should get all subaccount api keys 1`] = `Array []`;
+exports[`ApiKey Selectors should get all subaccount api keys 1`] = `
+Array [
+  Object {
+    "name": "subby key",
+    "subaccount_id": 101,
+  },
+]
+`;
+
+exports[`ApiKey Selectors should get initial subaccount grants 1`] = `
+Object {
+  "sub grant one": false,
+  "sub grant two": false,
+}
+`;

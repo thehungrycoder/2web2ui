@@ -3,12 +3,11 @@ import { connect } from 'react-redux';
 import { reduxForm, formValueSelector } from 'redux-form';
 
 import { Button, Panel } from '@sparkpost/matchbox';
-import { getSubaccountGrants } from 'src/selectors/api-keys';
+import { getSubaccountGrants, getInitialSubaccountGrants } from 'src/selectors/api-keys';
 
 import { NameField, ApiKeyCheckBox, ApiKeyFields, IpPoolSelect } from './formFields';
 
 export class SubaccountCreateForm extends Component {
-
   render() {
     const {
       handleSubmit,
@@ -53,6 +52,7 @@ const mapStateToProps = (state, props) => ({
   showGrants: valueSelector(state, 'grantsRadio') === 'select',
   ipPools: state.ipPools.list,
   initialValues: {
+    grants: getInitialSubaccountGrants(state),
     grantsRadio: 'all',
     createApiKey: true,
     ipPool: 'default'

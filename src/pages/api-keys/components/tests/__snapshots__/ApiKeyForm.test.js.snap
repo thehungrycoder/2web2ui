@@ -1,9 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly - new and no subaccounts 1`] = `
-<form
-  onSubmit={[MockFunction]}
->
+<form>
   <Panel.Section>
     <Field
       component={[Function]}
@@ -38,9 +36,20 @@ exports[`renders correctly - new and no subaccounts 1`] = `
     />
     <GrantsCheckboxes
       grants={
-        Array [
-          "all grants",
-        ]
+        Object {
+          "grant1": Object {
+            "key": "value",
+          },
+          "grant2": Object {
+            "key": "value",
+          },
+          "grant3": Object {
+            "key": "value",
+          },
+          "grant4": Object {
+            "key": "value",
+          },
+        }
       }
     />
     <Field
@@ -65,9 +74,7 @@ exports[`renders correctly - new and no subaccounts 1`] = `
 `;
 
 exports[`renders correctly - update and subaccounts 1`] = `
-<form
-  onSubmit={[MockFunction]}
->
+<form>
   <Panel.Section>
     <Field
       component={[Function]}
@@ -102,9 +109,14 @@ exports[`renders correctly - update and subaccounts 1`] = `
     />
     <GrantsCheckboxes
       grants={
-        Array [
-          "subaccount grants",
-        ]
+        Object {
+          "grant1": Object {
+            "key": "value",
+          },
+          "grant2": Object {
+            "key": "value",
+          },
+        }
       }
     />
     <Field
@@ -129,15 +141,7 @@ exports[`renders correctly - update and subaccounts 1`] = `
 `;
 
 exports[`submits correctly 1`] = `
-<form
-  onSubmit={
-    [MockFunction] {
-      "calls": Array [
-        Array [],
-      ],
-    }
-  }
->
+<form>
   <Panel.Section>
     <Field
       component={[Function]}
@@ -172,9 +176,20 @@ exports[`submits correctly 1`] = `
     />
     <GrantsCheckboxes
       grants={
-        Array [
-          "all grants",
-        ]
+        Object {
+          "grant1": Object {
+            "key": "value",
+          },
+          "grant2": Object {
+            "key": "value",
+          },
+          "grant3": Object {
+            "key": "value",
+          },
+          "grant4": Object {
+            "key": "value",
+          },
+        }
       }
     />
     <Field

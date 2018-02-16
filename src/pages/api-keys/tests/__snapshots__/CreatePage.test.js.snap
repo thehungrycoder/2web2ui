@@ -19,3 +19,5 @@ exports[`renders correctly with no subaccounts 1`] = `
   </Panel>
 </Page>
 `;
+
+exports[`should show loading component while loading 1`] = `<Loading />`;

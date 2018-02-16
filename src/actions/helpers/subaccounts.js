@@ -34,8 +34,8 @@ export function formatSubaccount(values, getState) {
     subaccount.setup_api_key = false;
   }
 
-  if (ipPool && ipPool.id !== 'default') {
-    subaccount.ip_pool = ipPool.id;
+  if (ipPool !== 'default') {
+    subaccount.ip_pool = ipPool;
   }
 
   return subaccount;

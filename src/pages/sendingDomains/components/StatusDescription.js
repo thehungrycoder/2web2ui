@@ -3,10 +3,8 @@ import React, { Fragment } from 'react';
 import { Panel } from '@sparkpost/matchbox';
 
 import { DomainStatusTag, SubaccountTag } from 'src/components/tags';
-import { LabelledValue } from 'src/components';
+import { LabelledValue, ReadyFor, StatusTooltipHeader } from 'src/components';
 
-import ReadyFor from './ReadyFor';
-import StatusTooltip from './StatusTooltip';
 import { VerifiedIcon } from './Icons';
 
 const StatusDescription = ({ domain, readyFor, status }) => {
@@ -17,7 +15,7 @@ const StatusDescription = ({ domain, readyFor, status }) => {
 
   return <Fragment>
     <Panel.Section>
-      <LabelledValue label={<StatusTooltip>Status</StatusTooltip>}>
+      <LabelledValue label={<StatusTooltipHeader />}>
         { status === 'verified' && <div><VerifiedIcon/> <strong>Verified</strong></div> }
         { status !== 'verified' && <DomainStatusTag status={status} /> }
         <ReadyFor {...readyFor} bounceDefault={is_default_bounce_domain} />

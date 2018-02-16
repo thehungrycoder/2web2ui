@@ -2,6 +2,58 @@ import * as selector from '../subaccounts';
 
 describe('Subaccount selectors', () => {
 
+  describe('selectSubaccount', () => {
+    it('should return subaccount unformatted', () => {
+      const state = { subaccounts: { subaccount: { status: 'foo', key: 'value' }}};
+      expect(selector.selectSubaccount(state)).toEqual({ compliance: false, status: 'foo', key: 'value' });
+    });
+
+    it('should return compliance_status as status when it is not active', () => {
+      const state = { subaccounts: { subaccount: { compliance_status: 'terminated', key: 'value' }}};
+      expect(selector.selectSubaccount(state)).toEqual({ compliance: true, status: 'terminated', key: 'value' });
+
+    });
+  });
+
+  describe('selectSubaccounts', () => {
+    it('should return a list of formatted subaccounts', () => {
+      const state = {
+        subaccounts: {
+          list: [
+            {
+              compliance_status: 'active',
+              status: 'valid',
+              name: 'Subby 1'
+            },
+            {
+              compliance_status: 'not-active',
+              status: 'status',
+              name: 'Subby 2'
+            }
+          ]
+        }
+      };
+
+      expect(selector.selectSubaccounts(state)).toEqual([
+        {
+          compliance: false,
+          status: 'valid',
+          name: 'Subby 1'
+        },
+        {
+          compliance: true,
+          status: 'not-active',
+          name: 'Subby 2'
+        }
+      ]);
+    });
+
+    it('should return if user has subaccounts', () => {
+      const state = { currentUser: { has_subaccounts: false }};
+      expect(selector.hasSubaccounts(state)).toEqual(false);
+    });
+  });
+
   describe('getSubaccountIdFromParams', () => {
     it('should return subaccount router params', () => {
       const props = { match: { params: { id: 101 }}};
@@ -31,6 +83,18 @@ describe('Subaccount selectors', () => {
       ]}};
       const props = { location: { search: '?subaccount=501' }};
       expect(selector.selectSubaccountFromQuery(state, props)).toEqual({ name: 'sub 2', id: 501 });
+    });
+  });
+
+  describe('selectInitialSubaccountValues', () => {
+    it('should return status if not set by compliance', () => {
+      const state = { name: 'subby', ip_pool: 'pool-id', compliance: false, status: 'valid' };
+      expect(selector.selectInitialSubaccountValues(state)).toMatchSnapshot();
+    });
+
+    it('should return status + by SparkPost if set by compliance', () => {
+      const state = { name: 'subby', compliance: true, status: 'terminated' };
+      expect(selector.selectInitialSubaccountValues(state)).toMatchSnapshot();
     });
   });
 

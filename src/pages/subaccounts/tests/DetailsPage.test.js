@@ -7,25 +7,14 @@ import { DetailsPage } from '../DetailsPage';
 const getSubaccount = jest.fn();
 const listPools = jest.fn();
 const listApiKeys = jest.fn();
+const listDomains = jest.fn();
 const hideNewApiKey = jest.fn();
 
 const paths = {
   edit: '/account/subaccounts/123',
-  keys: '/account/subaccounts/123/api-keys'
+  keys: '/account/subaccounts/123/api-keys',
+  domains: '/account/subaccounts/123/sending-domains'
 };
-
-const tabs = [
-  {
-    content: 'Details',
-    Component: {},
-    to: '/account/subaccounts/123'
-  },
-  {
-    content: 'API Keys',
-    Component: {},
-    to: '/account/subaccounts/123/api-keys'
-  }
-];
 
 const props = {
   id: '123',
@@ -36,10 +25,10 @@ const props = {
   },
   location: { pathname: '' },
   match: { url: paths.edit },
-  tabs,
   getSubaccount,
   listPools,
   listApiKeys,
+  listDomains,
   hideNewApiKey
 };
 
@@ -53,6 +42,7 @@ test('componentDidMount', () => {
   expect(getSubaccount).toHaveBeenCalledWith('123');
   expect(listPools).toHaveBeenCalled();
   expect(listApiKeys).toHaveBeenCalled();
+  expect(listDomains).toHaveBeenCalled();
   expect(hideNewApiKey).not.toHaveBeenCalled();
 });
 
@@ -97,4 +87,9 @@ describe('keys path', () => {
     wrapper.setProps({ loading: true });
     expect(wrapper).toMatchSnapshot();
   });
+});
+
+it('should select sending domains tab', () => {
+  wrapper.setProps({ location: { pathname: paths.domains }});
+  expect(wrapper).toMatchSnapshot();
 });

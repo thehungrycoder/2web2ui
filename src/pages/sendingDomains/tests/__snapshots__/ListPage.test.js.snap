@@ -8,9 +8,7 @@ Array [
     "width": "30%",
   },
   Object {
-    "label": <StatusTooltip>
-      Status
-    </StatusTooltip>,
+    "label": <StatusTooltipHeader />,
     "width": "40%",
   },
   Object {
@@ -57,9 +55,7 @@ exports[`Sending Domains List Page renders correctly 1`] = `
           "width": "30%",
         },
         Object {
-          "label": <StatusTooltip>
-            Status
-          </StatusTooltip>,
+          "label": <StatusTooltipHeader />,
           "width": "40%",
         },
       ]
@@ -162,11 +158,21 @@ Array [
     >
       test.com
     </UnstyledLink>,
-    <ReadyFor
-      bounce={true}
-      bounceDefault={true}
-      dkim={true}
-      sending={true}
+    <DomainStatusCell
+      domain={
+        Object {
+          "domain": "test.com",
+          "is_default_bounce_domain": true,
+          "status": Object {
+            "cname_status": "valid",
+            "compliance_status": "valid",
+            "dkim_status": "valid",
+            "mx_status": "valid",
+            "ownership_verified": true,
+          },
+          "subaccount_id": 3,
+        }
+      }
     />,
     <SubaccountTag
       all={false}
@@ -183,8 +189,19 @@ Array [
     >
       test2.com
     </UnstyledLink>,
-    <DomainStatusTag
-      status="unverified"
+    <DomainStatusCell
+      domain={
+        Object {
+          "domain": "test2.com",
+          "status": Object {
+            "cname_status": "valid",
+            "compliance_status": "valid",
+            "dkim_status": "valid",
+            "mx_status": "valid",
+            "ownership_verified": false,
+          },
+        }
+      }
     />,
     null,
   ],
@@ -200,11 +217,21 @@ Array [
     >
       test.com
     </UnstyledLink>,
-    <ReadyFor
-      bounce={true}
-      bounceDefault={true}
-      dkim={true}
-      sending={true}
+    <DomainStatusCell
+      domain={
+        Object {
+          "domain": "test.com",
+          "is_default_bounce_domain": true,
+          "status": Object {
+            "cname_status": "valid",
+            "compliance_status": "valid",
+            "dkim_status": "valid",
+            "mx_status": "valid",
+            "ownership_verified": true,
+          },
+          "subaccount_id": 3,
+        }
+      }
     />,
   ],
   Array [
@@ -214,8 +241,19 @@ Array [
     >
       test2.com
     </UnstyledLink>,
-    <DomainStatusTag
-      status="unverified"
+    <DomainStatusCell
+      domain={
+        Object {
+          "domain": "test2.com",
+          "status": Object {
+            "cname_status": "valid",
+            "compliance_status": "valid",
+            "dkim_status": "valid",
+            "mx_status": "valid",
+            "ownership_verified": false,
+          },
+        }
+      }
     />,
   ],
 ]

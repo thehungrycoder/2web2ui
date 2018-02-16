@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 
 import { Button, Panel } from '@sparkpost/matchbox';
-
+import { selectInitialSubaccountValues } from 'src/selectors/subaccounts';
 import { NameField, IpPoolSelect, StatusSelect } from './formFields';
 
 export class SubaccountEditForm extends Component {
@@ -42,17 +42,11 @@ const formName = 'SubaccountEditForm';
 
 const mapStateToProps = (state, { subaccount }) => {
   const { compliance } = subaccount;
-  // changing the status name if set by compliance because it is uneditable
-  const status = compliance ? `${subaccount.status} by SparkPost` : subaccount.status;
 
   return {
     ipPools: state.ipPools.list,
     compliance,
-    initialValues: {
-      name: subaccount.name,
-      ipPool: subaccount.ip_pool || 'default',
-      status
-    }
+    initialValues: selectInitialSubaccountValues(subaccount)
   };
 };
 

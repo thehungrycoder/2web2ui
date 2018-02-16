@@ -1,5 +1,4 @@
 import { createSelector } from 'reselect';
-import { Link } from 'react-router-dom';
 import qs from 'query-string';
 import _ from 'lodash';
 
@@ -14,6 +13,7 @@ const formatSubaccount = ({ compliance_status = 'active', status = 'active', ...
 };
 
 export const hasSubaccounts = (state) => state.currentUser.has_subaccounts;
+export const getSubaccount = (state) => state.subaccount;
 
 export const selectSubaccounts = (state) => state.subaccounts.list.map((subaccount) => (formatSubaccount(subaccount)));
 
@@ -22,22 +22,6 @@ export const selectSubaccount = ({ subaccounts }) => (formatSubaccount(subaccoun
 export const getSubaccountIdFromProps = (state, props) => props.id;
 export const getSubaccountIdFromParams = (state, props) => props.match.params.id;
 export const selectSubaccountIdFromQuery = (state, props) => qs.parse(props.location.search).subaccount;
-
-export const selectDetailTabs = createSelector(
-  [getSubaccountIdFromParams],
-  (id) => ([
-    {
-      content: 'Details',
-      Component: Link,
-      to: `/account/subaccounts/${id}`
-    },
-    {
-      content: 'API Keys',
-      Component: Link,
-      to: `/account/subaccounts/${id}/api-keys`
-    }
-  ])
-);
 
 /*
  * Selects subaccount object from qp
@@ -48,3 +32,12 @@ export const selectSubaccountFromQuery = createSelector(
   [getSubaccounts, selectSubaccountIdFromQuery],
   (subaccounts, id) => _.find(subaccounts, { id: Number(id) })
 );
+
+// changing the status name if set by compliance because it is uneditable
+export const selectInitialSubaccountValues = ({ name, ip_pool = 'default', ...subaccount }) =>
+  ({
+    name,
+    ipPool: ip_pool,
+    status: subaccount.compliance ? `${subaccount.status} by SparkPost` : subaccount.status
+  });
+
