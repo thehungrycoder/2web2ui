@@ -15,21 +15,27 @@ export class JoinForm extends Component {
   state = {
     reCaptchaReady: false,
     reCaptchaInstance: null
-  }
+  };
 
   reCaptchaLoaded = () => {
     this.setState({ reCaptchaReady: true });
-  }
+  };
 
   recaptchaVerifyCallback = (response) => {
     const { formValues, onSubmit } = this.props;
-    this.reCaptchaInstance.reset();
+    this.state.reCaptchaInstance.reset();
     onSubmit({ ...formValues, recaptcha_response: response, recaptcha_type: 'invisible' });
-  }
+  };
 
   executeRecaptcha = () => {
-    this.reCaptchaInstance.execute();
-  }
+    this.state.reCaptchaInstance.execute();
+  };
+
+  linkRecaptcha = (instance) => {
+    if (!this.state.reCaptchaInstance) {
+      this.setState({ reCaptchaInstance: instance });
+    }
+  };
 
   render() {
     const {
@@ -103,7 +109,7 @@ export class JoinForm extends Component {
         </Button>
 
         <Recaptcha
-          ref={(e) => this.reCaptchaInstance = e}
+          ref={this.linkRecaptcha}
           sitekey={recaptcha.invisibleKey}
           size="invisible"
           render='explicit'
