@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -28,22 +29,28 @@ const grantsOptions = [
 ];
 
 export class ApiKeyForm extends Component {
-  render() {
-    const {
-      grants,
-      subaccountGrants,
-      isNew,
-      handleSubmit,
-      pristine,
-      showGrants,
-      showSubaccountGrants,
-      submitting
-    } = this.props;
+  get availableGrants() {
+    return this.props.subaccount ? this.props.subaccountGrants : this.props.grants;
+  }
 
+  onSubmit = ({ grants = {}, grantsRadio, label, subaccount, validIps = '' }) => {
+    const availableGrantKeys = Object.keys(this.availableGrants);
+    const checkedGrantKeys = _.reduce(grants, (result = [], checked, key) => checked ? [...result, key] : result);
+
+    return this.props.onSubmit({
+      label,
+      grants: grantsRadio === 'select' ? _.intersection(availableGrantKeys, checkedGrantKeys) : availableGrantKeys,
+      subaccount,
+      validIps: _.trim(validIps) !== '' ? validIps.split(',').map(_.trim) : undefined
+    });
+  }
+
+  render() {
+    const { handleSubmit, isNew, pristine, showGrants, submitting } = this.props;
     const submitText = isNew ? 'Create API Key' : 'Update API Key';
 
     return (
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit(this.onSubmit)}>
         <Panel.Section>
           <Field
             name='label'
@@ -65,7 +72,7 @@ export class ApiKeyForm extends Component {
             title='API Permissions'
             options={grantsOptions}
           />
-          <GrantsCheckboxes grants={showSubaccountGrants ? subaccountGrants : grants} show={showGrants} />
+          <GrantsCheckboxes grants={this.availableGrants} show={showGrants} />
           <Field
             name='validIps'
             component={TextFieldWrapper}
@@ -89,14 +96,14 @@ const valueSelector = formValueSelector(formName);
 const mapStateToProps = (state, props) => ({
   grants: getGrants(state),
   subaccountGrants: getSubaccountGrants(state),
-  showSubaccountGrants: !!valueSelector(state, 'subaccount'),
   showGrants: valueSelector(state, 'grantsRadio') === 'select',
   isNew: getIsNew(state, props),
   initialValues: {
     grantsRadio: getInitialGrantsRadio(state, props),
     subaccount: selectSubaccountFromQuery(state, props),
     ...getInitialValues(state, props)
-  }
+  },
+  subaccount: valueSelector(state, 'subaccount')
 });
 
 const formOptions = {
