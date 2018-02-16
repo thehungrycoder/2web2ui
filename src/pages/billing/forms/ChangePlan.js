@@ -8,7 +8,7 @@ import { showAlert } from 'src/actions/globalAlert';
 import { changePlanInitialValues } from 'src/selectors/accountBillingForms';
 import { publicPlansSelector, currentPlanSelector, shouldExposeCardSelector } from 'src/selectors/accountBillingInfo';
 
-import { Panel, Grid } from '@sparkpost/matchbox';
+import { Panel, Grid, Button } from '@sparkpost/matchbox';
 import { PlanPicker } from 'src/components';
 
 import PaymentForm from './fields/PaymentForm';
@@ -36,30 +36,26 @@ export class ChangePlan extends Component {
   }
 
   onSubmit = (values) => {
-    const { account, updateSubscription, billingCreate, billingUpdate, showAlert, history } = this.props;
+    const { account, updateSubscription, billingCreate, billingUpdate, showAlert, history, onboarding } = this.props;
+    const uri = onboarding ? '/onboarding/dedicated-ips' : '/account/billing';
 
-    if (account.billing) {
-      if (this.state.useSavedCC) {
-        // Updates plan
-        return updateSubscription(values.planpicker.code)
-          .then(() => history.push('/account/billing'))
-          .then(() => showAlert({ type: 'success', message: 'Subscription Updated' }))
-          .catch((err) => showAlert({ type: 'error', message: 'Plan Update Failed' }));
-
-      } else {
-        // Updates plan and payment information
-        return billingUpdate(values)
-          .then(() => history.push('/account/billing'))
-          .then(() => showAlert({ type: 'success', message: 'Subscription Updated' }))
-          .catch((err) => showAlert({ type: 'error', message: 'Plan Update Failed' }));
-      }
+    if (onboarding && values.planpicker.isFree) {
+      history.push(uri);
+      return;
     }
 
-    // Creates Zuora account
-    return billingCreate(values)
-      .then(() => history.push('/account/billing'))
-      .then(() => showAlert({ type: 'success', message: 'Subscription Upgraded' }))
-      .catch(() => showAlert({ type: 'error', message: 'Plan Upgrade Failed' }));
+    const action = account.billing
+      ? (
+        this.state.useSavedCC
+          ? updateSubscription(values.planpicker.code)
+          : billingUpdate(values))
+      : billingCreate(values); // creates Zuora account
+
+
+    return action
+      .then(() => history.push(uri))
+      .then(() => showAlert({ type: 'success', message: 'Subscription Updated' }))
+      .catch((err) => showAlert({ type: 'error', message: 'Plan Update Failed', details: err.message }));
   }
 
   renderCCSection = () => {
@@ -99,7 +95,7 @@ export class ChangePlan extends Component {
   }
 
   render() {
-    const { account, submitting, pristine, currentPlan, selectedPlan, plans } = this.props;
+    const { account, submitting, pristine, currentPlan, selectedPlan, plans, onboarding = false } = this.props;
 
     // Manually billed accounts can submit without changing plan
     const disableSubmit = submitting || (account.subscription.self_serve && (pristine || currentPlan.code === selectedPlan.code));
@@ -108,6 +104,8 @@ export class ChangePlan extends Component {
     const availablePlans = !account.subscription.self_serve
       ? plans.filter((plan) => !plan.isFree)
       : plans;
+
+    const buttonText = selectedPlan && selectedPlan.isFree ? 'Get Started' : 'Confirm Plan';
 
     return (
       <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
@@ -119,14 +117,17 @@ export class ChangePlan extends Component {
               }
             </Panel>
             { this.renderCCSection() }
+            { onboarding && <Panel.Section>
+              <Button primary submit disabled={submitting}>{submitting ? 'Adding Plan...' : buttonText}</Button></Panel.Section> }
           </Grid.Column>
+          { !onboarding &&
           <Grid.Column xs={12} md={5}>
             <Confirmation
               current={this.props.currentPlan}
               selected={this.props.selectedPlan}
               selfServe={this.props.account.subscription.self_serve}
               disableSubmit={disableSubmit} />
-          </Grid.Column>
+          </Grid.Column> }
         </Grid>
       </form>
     );

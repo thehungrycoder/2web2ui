@@ -22,6 +22,8 @@ import {
   DefaultRedirect
 } from 'src/pages';
 
+import onboarding from 'src/pages/onboarding';
+
 import {
   hasGrants,
   composeConditions
@@ -372,6 +374,18 @@ const routes = [
     component: ipPools.EditPage,
     condition: hasGrants('ip_pools/manage'),
     layout: App
+  },
+  {
+    path: '/onboarding/plan',
+    component: onboarding.ChoosePlan
+    // TODO: add feature flag condition
+    //condition:
+  },
+  {
+    path: '/onboarding/dedicated-ips',
+    component: onboarding.DedicatedIps
+    // TODO: add feature flag condition
+    //condition:
   }
 ];
 
