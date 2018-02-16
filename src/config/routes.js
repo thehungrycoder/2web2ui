@@ -376,6 +376,16 @@ const routes = [
     layout: App
   },
   {
+    path: '/onboarding/plan',
+    component: onboarding.ChoosePlan,
+    condition: configFlag('featureFlags.has_signup')
+  },
+  {
+    path: '/onboarding/dedicated-ips',
+    component: onboarding.DedicatedIps,
+    condition: configFlag('featureFlags.has_signup')
+  },
+  {
     path: '/onboarding/sending-domain',
     component: onboarding.SendingDomainPage,
     condition: configFlag('featureFlags.has_signup')
