@@ -97,7 +97,9 @@ const routes = [
   {
     path: '/__join',
     public: true,
-    component: JoinPage
+    component: JoinPage,
+    // TODO: swap out for condition helper config flag
+    condition: () => false
   },
 
   /**
