@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, Field, getFormValues } from 'redux-form';
@@ -96,9 +95,9 @@ export class JoinForm extends Component {
           </div>
         </div>
 
-        <Button primary 
-        disabled={loading || pristine || invalid || !reCaptchaReady }
-        onClick={this.executeRecaptcha}
+        <Button primary
+          disabled={loading || pristine || invalid || !reCaptchaReady }
+          onClick={this.executeRecaptcha}
         >
           { loading ? 'Loading' : 'Create Account' }
         </Button>

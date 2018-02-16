@@ -24,13 +24,13 @@ export class JoinPage extends Component {
 
   state = {
     formData: {}
-  }
+  };
 
-  injectGA() { //TODO find better way of doing this in react. 
+  injectGA() {
     const script = document.createElement('script');
     script.src = 'https://www.google.com/recaptcha/api.js';
     script.async = true;
-    document.body.appendChild(script); 
+    document.body.appendChild(script);
   }
 
   componentDidMount() {
@@ -42,19 +42,20 @@ export class JoinPage extends Component {
     const { params } = this.props;
 
     let trackingData = cookie.getJSON(attribution.cookieName);
-    const cookieOptions = {
-      expires: attribution.cookieDuration,
-      expirationUnit: 'seconds',
-      path: '/',
-      domain: attribution.cookieDomain
-    };
 
     if (!trackingData) {
+      const cookieOptions = {
+        expires: attribution.cookieDuration,
+        expirationUnit: 'seconds',
+        path: '/',
+        domain: attribution.cookieDomain
+      };
+
       trackingData = _.pick(params, salesforceDataParams);
       cookie.set(attribution.cookieName, trackingData, cookieOptions);
     }
     return trackingData;
-  }
+  };
 
   createSupportLink() {
     const { formData } = this.state;
@@ -63,16 +64,14 @@ export class JoinPage extends Component {
 
   handleSignupFailure = (error) => {
     let status;
-    let mainError; 
+    let mainError;
     const { formData } = this.state;
-    try { 
-      if(error.response.data.errors[0].message) {
-        mainError = error.response.data.errors[0].message;
-      } else {
-        mainError = error.message;
-      }
+    try {
+      mainError = error.response.data.errors[0].message;
       status = error.response.status;
-    } catch(e) {}
+    } catch (e) {
+      mainError = <span>Something went wrong. Please try again in a few minutes or <UnstyledLink to={links.submitTicket}>contact support</UnstyledLink></span>;
+    }
 
     if (status === 400 && mainError.match(/\brecaptcha\b/i)) {
       return 'There was an error with your reCAPTCHA response, please try again.';
@@ -89,30 +88,19 @@ export class JoinPage extends Component {
     } else if (status === 403 && mainError.match(/^forbidden/i)) {
       return 'SparkPost is not currently available in your location.';
     } else {
-      return <span>Something went wrong. Please try again in a few minutes or <UnstyledLink to={links.submitTicket}>contact support</UnstyledLink></span>
+      return mainError;
     }
-  }
+  };
 
   trackSignup = () => {
-    //TODO verify data structure and/or move it to an Analytics service (ask brian).
-    window.gtag('config', gaTag, { 
-      event_category: 'Completed form', 
-      event_action: 'create account', 
+    window.gtag('config', gaTag, {
+      event_category: 'Completed form',
+      event_action: 'create account',
       data: { form_type: 'create account' }
     });
-  }
+  };
 
   registerSubmit = (values) => {
-    //TODO
-    //- retrieve salesforce_data - DONE
-    //- retrieve sfdcid - DONE
-    //- retrieve analytics session id - SKIP
-    //- handle and retrieve recaptcha - DONE
-    //- track signup after signup is completed - DONE
-    //- fix TOU checkbox alignment when validation error is shown
-    //- handle recaptcha lib loading on join page only
-    //- Enable eslint
-
     this.setState({ formData: values });
     const { register, authenticate } = this.props;
     const attributionData = this.getAndSetAttributionData();
@@ -124,15 +112,15 @@ export class JoinPage extends Component {
         this.trackSignup();
         return authenticate(accountData.username, values.password);
       })
-      .then(() => this.props.history.push(DEFAULT_REDIRECT_ROUTE))
-      .catch((e) => {});
-  }
+      .then(() => this.props.history.push(DEFAULT_REDIRECT_ROUTE));
+      //.catch((e) => {});
+  };
 
   renderError = (errors) => {
     return (
       <Error error={this.handleSignupFailure(errors)} />
     );
-  }
+  };
 
   render() {
     const { createError } = this.props.account;

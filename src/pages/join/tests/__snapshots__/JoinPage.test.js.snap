@@ -1,15 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AuthPage handleSignupFailure handleSignupFailure:  all other case 1`] = `
-<span>
-  Something went wrong. Please try again in a few minutes or 
-  <UnstyledLink
-    to="https://support.sparkpost.com/customer/portal/emails/new"
-  >
-    contact support
-  </UnstyledLink>
-</span>
-`;
+exports[`AuthPage createSupportLink creates support link correctly 1`] = `"https://support.sparkpost.com/customer/portal/emails/new?interaction%5Bname%5D=foo%20bar&interaction%5Bemail%5D=foo@bar.com&email%5Bsubject%5D=Account%20requires%20manual%20review"`;
 
 exports[`AuthPage handleSignupFailure handleSignupFailure:  duplicate email 1`] = `
 <span>
@@ -33,6 +24,19 @@ exports[`AuthPage handleSignupFailure handleSignupFailure:  manual review requir
     contact support
   </UnstyledLink>
   .
+</span>
+`;
+
+exports[`AuthPage handleSignupFailure handleSignupFailure:  no status 1`] = `"some error"`;
+
+exports[`AuthPage handleSignupFailure it returns generic error on all other cases 1`] = `
+<span>
+  Something went wrong. Please try again in a few minutes or 
+  <UnstyledLink
+    to="https://support.sparkpost.com/customer/portal/emails/new"
+  >
+    contact support
+  </UnstyledLink>
 </span>
 `;
 
