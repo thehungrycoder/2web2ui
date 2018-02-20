@@ -95,11 +95,10 @@ const routes = [
     component: RegisterPage
   },
   {
-    path: '/__join',
+    path: '/join',
     public: true,
     component: JoinPage,
-    // TODO: swap out for condition helper config flag
-    condition: () => false
+    condition: configEquals('hasSignup', true)
   },
 
   /**
