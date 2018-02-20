@@ -8,7 +8,7 @@ import { LINKS } from 'src/constants';
 import { TextFieldWrapper, CheckboxWrapper } from 'src/components/reduxFormWrappers';
 import { Button, UnstyledLink, Grid } from '@sparkpost/matchbox';
 import { required, minLength, email } from 'src/helpers/validation';
-import styles from '../JoinPage.module.scss';
+import styles from './JoinForm.module.scss';
 const { recaptcha } = config;
 
 export class JoinForm extends Component {

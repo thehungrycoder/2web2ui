@@ -33,7 +33,7 @@ const config = {
   featureFlags: {
     allow_mailbox_verification: true,
     allow_anyone_at_verification: false,
-    has_signup: false
+    has_signup: true
   },
   gaTag: 'no-default-set',
   maxUploadSizeBytes: 20000000,
@@ -109,10 +109,7 @@ const config = {
     // cookieDomain: '.sparkpost.com' //TODO change it before merge
     cookieDomain: 'localhost'
   },
-  salesforceDataParams: ['sfdcid', 'src', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'],
-  links: {
-    submitTicket: 'https://support.sparkpost.com/customer/portal/emails/new'
-  }
+  salesforceDataParams: ['sfdcid', 'src', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term']
 };
 
 export default config;

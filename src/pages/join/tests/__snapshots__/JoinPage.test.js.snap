@@ -42,14 +42,7 @@ exports[`AuthPage handleSignupFailure it returns generic error on all other case
 
 exports[`AuthPage render renders correctly 1`] = `
 <div>
-  <div>
-    <UnstyledLink
-      title="SparkPost"
-      to="https://www.sparkpost.com"
-    >
-      <Logo />
-    </UnstyledLink>
-  </div>
+  <CenteredLogo />
   <Panel
     accent={true}
     sectioned={true}
@@ -72,14 +65,7 @@ exports[`AuthPage render renders correctly 1`] = `
 
 exports[`AuthPage render renders errors 1`] = `
 <div>
-  <div>
-    <UnstyledLink
-      title="SparkPost"
-      to="https://www.sparkpost.com"
-    >
-      <Logo />
-    </UnstyledLink>
-  </div>
+  <CenteredLogo />
   <Panel
     accent={true}
     sectioned={true}
