@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 import { reduxForm, formValueSelector } from 'redux-form';
 import { withRouter } from 'react-router-dom';
 
-import { billingCreate, billingUpdate, updateSubscription } from 'src/actions/billing';
-import { showAlert } from 'src/actions/globalAlert';
 import { changePlanInitialValues } from 'src/selectors/accountBillingForms';
 import { publicPlansSelector, currentPlanSelector, shouldExposeCardSelector } from 'src/selectors/accountBillingInfo';
 
@@ -131,6 +129,5 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchtoProps = { billingCreate, billingUpdate, updateSubscription, showAlert };
 const formOptions = { form: FORMNAME, enableReinitialize: true };
-export default withRouter(connect(mapStateToProps, mapDispatchtoProps)(reduxForm(formOptions)(ChangePlan)));
+export default withRouter(connect(mapStateToProps)(reduxForm(formOptions)(ChangePlan)));

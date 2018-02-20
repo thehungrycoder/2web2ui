@@ -1,7 +1,75 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Form Container: Change Plan should change onboarding button text when plan is free 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <Grid>
+    <Grid.Column>
+      <Panel
+        title="Select A Plan"
+      >
+        0
+      </Panel>
+      <Panel.Section>
+        <Button
+          primary={true}
+          size="default"
+          submit={true}
+        >
+          Get Started
+        </Button>
+      </Panel.Section>
+    </Grid.Column>
+  </Grid>
+</form>
+`;
+
+exports[`Form Container: Change Plan should not show confirmation column when onboarding is true 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <Grid>
+    <Grid.Column>
+      <Panel
+        title="Select A Plan"
+      >
+        0
+      </Panel>
+      <Panel
+        actions={null}
+        title="Add a Credit Card"
+      >
+        <Panel.Section>
+          <Connect(PaymentForm)
+            formName="changePlan"
+          />
+        </Panel.Section>
+        <Panel.Section>
+          <Connect(BillingAddressForm)
+            countries={Array []}
+            formName="changePlan"
+          />
+        </Panel.Section>
+      </Panel>
+      <Panel.Section>
+        <Button
+          primary={true}
+          size="default"
+          submit={true}
+        >
+          Confirm Plan
+        </Button>
+      </Panel.Section>
+    </Grid.Column>
+  </Grid>
+</form>
+`;
+
 exports[`Form Container: Change Plan should render 1`] = `
-<form>
+<form
+  onSubmit={[Function]}
+>
   <Grid>
     <Grid.Column>
       <Panel
@@ -42,7 +110,9 @@ exports[`Form Container: Change Plan should render 1`] = `
 `;
 
 exports[`Form Container: Change Plan should show saved card 1`] = `
-<form>
+<form
+  onSubmit={[Function]}
+>
   <Grid>
     <Grid.Column>
       <Panel

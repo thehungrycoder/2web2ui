@@ -27,7 +27,7 @@ export class OnboardingPlanPage extends Component {
     return billingCreate(values)
       .then(() => history.push(uri))
       .then(() => showAlert({ type: 'success', message: 'Added plan' }))
-      .catch((err) => showAlert({ type: 'error', message: 'Selecting plan failed', details: err.message }));
+      .catch((err) => showAlert({ type: 'error', message: 'Adding plan failed', details: err.message }));
 
   };
 

@@ -107,7 +107,7 @@ exports[`Billing Banners:  renders Enterprise banner 1`] = `
   title="Enterprise"
 >
   <p>
-    Enterprise-grade guarantees and SLAs across email, push, and SMS - manage, analyzed, and reported from a single console.
+    Enterprise-grade guarantees and SLAs across email - manage, analyzed, and reported from a single console.
   </p>
   <ul>
     <li>
@@ -115,9 +115,6 @@ exports[`Billing Banners:  renders Enterprise banner 1`] = `
     </li>
     <li>
       Guaranteed burst rates
-    </li>
-    <li>
-      Push notifications and SMS messaging
     </li>
     <li>
       Single sign-on support

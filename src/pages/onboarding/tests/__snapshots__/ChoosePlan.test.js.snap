@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ChoosePlan page tests should render correctly 1`] = `
+<React.Fragment>
+  <CenteredLogo />
+  <Panel
+    accent={true}
+  >
+    <withRouter(Connect(ReduxForm))
+      onSubmit={[Function]}
+      onboarding={true}
+    />
+    <withRouter(Steps) />
+  </Panel>
+</React.Fragment>
+`;
+
+exports[`ChoosePlan page tests should render loading component 1`] = `<Loading />`;

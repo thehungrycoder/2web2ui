@@ -11,6 +11,7 @@ describe('Page: SummaryPage', () => {
     },
     billing: {},
     dedicatedIpPrice: jest.fn(() => ''),
+    fetchAccount: jest.fn(),
     getPlans: jest.fn(),
     getBillingCountries: jest.fn(),
     getSendingIps: jest.fn(),
@@ -27,11 +28,15 @@ describe('Page: SummaryPage', () => {
     wrapper = shallow(<SummaryPage {...props} />);
   });
 
-  it('gets plans on mount', () => {
+  it('gets plans, sending ips and account on mount', () => {
     const plansSpy = jest.spyOn(wrapper.instance().props, 'getPlans');
+    const fetchSpy = jest.spyOn(wrapper.instance().props, 'fetchAccount');
+    const getSendingIpsSpy = jest.spyOn(wrapper.instance().props, 'getSendingIps');
     wrapper.instance().componentDidMount();
     expect(wrapper).toHaveState('show', false);
     expect(plansSpy).toHaveBeenCalled();
+    expect(fetchSpy).toHaveBeenCalledWith({ include: 'billing' });
+    expect(getSendingIpsSpy).toHaveBeenCalled();
   });
 
   it('should render banner when manually billed', () => {

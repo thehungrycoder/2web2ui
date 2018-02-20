@@ -4,6 +4,7 @@ import { shallow } from 'enzyme';
 
 describe('Form Container: Change Plan', () => {
   let wrapper;
+  let submitSpy;
 
   const props = {
     account: {
@@ -14,18 +15,25 @@ describe('Form Container: Change Plan', () => {
     currentPlan: {},
     selectedPlan: {},
     shouldExposeCard: false,
-    handleSubmit: jest.fn(),
-    showAlert: jest.fn(),
-    billingCreate: jest.fn(() => Promise.resolve()),
-    billingUpdate: jest.fn(() => Promise.resolve()),
-    updateSubscription: jest.fn(() => Promise.resolve())
+    handleSubmit: jest.fn()
   };
 
   beforeEach(() => {
     wrapper = shallow(<ChangePlan {...props} />);
+    submitSpy = jest.spyOn(wrapper.instance().props, 'handleSubmit');
   });
 
   it('should render', () => {
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should not show confirmation column when onboarding is true', () => {
+    wrapper.setProps({ onboarding: true });
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should change onboarding button text when plan is free', () => {
+    wrapper.setProps({ onboarding: true, selectedPlan: { isFree: true }});
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -55,42 +63,13 @@ describe('Form Container: Change Plan', () => {
   });
 
   it('should submit redux-form', () => {
-    const submitSpy = jest.spyOn(wrapper.instance().props, 'handleSubmit');
     wrapper.find('form').simulate('submit');
-    expect(submitSpy).toHaveBeenCalled();
-  });
-
-  it('should create zuora account', () => {
-    const createSpy = jest.spyOn(wrapper.instance().props, 'billingCreate');
-    wrapper.instance().onSubmit('hello');
-    expect(createSpy).toHaveBeenCalledWith('hello');
-  });
-
-  it('should update zuora', () => {
-    const newProps = {
-      account: {
-        billing: {},
-        subscription: { self_serve: true }
-      }
-    };
-    const updateSpy = jest.spyOn(wrapper.instance().props, 'billingUpdate');
-    wrapper.setProps(newProps);
-    wrapper.instance().onSubmit('hi');
-    expect(updateSpy).toHaveBeenCalledWith('hi');
+    expect(submitSpy).toHaveBeenCalledWith(undefined, null);
   });
 
   it('should update plan', () => {
-    const newProps = {
-      account: {
-        billing: {},
-        subscription: { self_serve: true }
-      }
-    };
-    const subSpy = jest.spyOn(wrapper.instance().props, 'updateSubscription');
-    const planpicker = { planpicker: { code: 'newplan' }};
-    wrapper.setProps(newProps);
     wrapper.setState({ useSavedCC: true });
-    wrapper.instance().onSubmit(planpicker);
-    expect(subSpy).toHaveBeenCalledWith('newplan');
+    wrapper.find('form').simulate('submit');
+    expect(submitSpy).toHaveBeenCalledWith(undefined, true);
   });
 });

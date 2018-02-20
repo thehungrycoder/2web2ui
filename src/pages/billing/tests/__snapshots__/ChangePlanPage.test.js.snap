@@ -37,6 +37,8 @@ exports[`Page: ChangePlanPage should render form if allowed to change plan 1`] =
   <Component
     account={Object {}}
   />
-  <withRouter(Connect(ReduxForm)) />
+  <withRouter(Connect(ReduxForm))
+    onSubmit={[Function]}
+  />
 </Page>
 `;

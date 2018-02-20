@@ -10,6 +10,8 @@ import ChangePlan from './forms/ChangePlan';
 import { getPlans } from 'src/actions/account';
 import { getBillingCountries } from 'src/actions/billing';
 import { canChangePlanSelector } from 'src/selectors/accountBillingInfo';
+import { billingCreate, billingUpdate, updateSubscription } from 'src/actions/billing';
+import { showAlert } from 'src/actions/globalAlert';
 
 export class ChangePlanPage extends Component {
   componentWillMount() {
@@ -60,7 +62,11 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchtoProps = {
   getPlans,
-  getBillingCountries
+  showAlert,
+  getBillingCountries,
+  updateSubscription,
+  billingUpdate,
+  billingCreate
 };
 
 export default connect(mapStateToProps, mapDispatchtoProps)(ChangePlanPage);
