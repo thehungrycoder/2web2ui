@@ -1,11 +1,6 @@
 import { createSelector } from 'reselect';
 
-export const selectSummaryReportState = (state) => state.summaryChart;
-
-export const selectSummaryMetrics = createSelector(
-  [selectSummaryReportState],
-  (state = {}) => state.metrics
-);
+const selectSummaryMetrics = (state) => state.summaryChart.metrics;
 
 export const selectSelectedMetrics = createSelector(
   [selectSummaryMetrics],
