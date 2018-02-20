@@ -54,14 +54,6 @@ describe('Page: Message Events tests', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should handle view details click', () => {
-    wrapper.instance().handleDetailClick({ message_id: 'message', event_id: 'event' });
-    expect(props.history.push).toHaveBeenCalledWith({
-      pathname: '/reports/message-events/details/message',
-      state: { selectedEventId: 'event' }
-    });
-  });
-
   it('renders correctly with too many (1000) records', () => {
     wrapper.setProps({ events: new Array(1000) });
     expect(wrapper).toMatchSnapshot();
@@ -81,12 +73,6 @@ describe('Page: Message Events tests', () => {
     });
 
     it('renders correctly', () => {
-      expect(instance.getRowData(event)).toMatchSnapshot();
-    });
-
-    it('hides view details button if message_id property does not exist', () => {
-      delete event.message_id;
-
       expect(instance.getRowData(event)).toMatchSnapshot();
     });
 
