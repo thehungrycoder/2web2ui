@@ -36,26 +36,10 @@ export class ChangePlan extends Component {
   }
 
   onSubmit = (values) => {
-    const { account, updateSubscription, billingCreate, billingUpdate, showAlert, history, onboarding } = this.props;
-    const uri = onboarding ? '/onboarding/dedicated-ips' : '/account/billing';
+    const { handleSubmit } = this.props;
 
-    if (onboarding && values.planpicker.isFree) {
-      history.push(uri);
-      return;
-    }
-
-    const action = account.billing
-      ? (
-        this.state.useSavedCC
-          ? updateSubscription(values.planpicker.code)
-          : billingUpdate(values))
-      : billingCreate(values); // creates Zuora account
-
-
-    return action
-      .then(() => history.push(uri))
-      .then(() => showAlert({ type: 'success', message: 'Subscription Updated' }))
-      .catch((err) => showAlert({ type: 'error', message: 'Plan Update Failed', details: err.message }));
+    // capturing the useSavedCC state and passing to parent submit function
+    return handleSubmit(values, this.state.useSavedCC);
   }
 
   renderCCSection = () => {
@@ -108,7 +92,7 @@ export class ChangePlan extends Component {
     const buttonText = selectedPlan && selectedPlan.isFree ? 'Get Started' : 'Confirm Plan';
 
     return (
-      <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
+      <form onSubmit={this.onSubmit}>
         <Grid>
           <Grid.Column>
             <Panel title='Select A Plan'>

@@ -83,11 +83,10 @@ export const PremiumBanner = () => (
  */
 export const EnterpriseBanner = () => (
   <Banner title='Enterprise' action={{ content: 'Contact Us', to: LINKS.ENTERPRISE_SUPPORT, external: true }}>
-    <p>Enterprise-grade guarantees and SLAs across email, push, and SMS - manage, analyzed, and reported from a single console.</p>
+    <p>Enterprise-grade guarantees and SLAs across email - manage, analyzed, and reported from a single console.</p>
     <ul>
       <li>The industry's best uptime SLAs with service credits</li>
       <li>Guaranteed burst rates</li>
-      <li>Push notifications and SMS messaging</li>
       <li>Single sign-on support</li>
       <li>Support for iOS universal links</li>
     </ul>
