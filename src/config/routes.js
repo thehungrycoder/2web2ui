@@ -22,12 +22,14 @@ import {
   DefaultRedirect
 } from 'src/pages';
 
+import onboarding from 'src/pages/onboarding';
+
 import {
   hasGrants,
   composeConditions
 } from 'src/helpers/conditions';
 import { notEnterprise } from 'src/helpers/conditions/account';
-import { configEquals } from 'src/helpers/conditions/config';
+import { configFlag, configEquals } from 'src/helpers/conditions/config';
 import App from 'src/components/layout/App';
 
 import { DEFAULT_REDIRECT_ROUTE } from 'src/constants';
@@ -372,6 +374,26 @@ const routes = [
     component: ipPools.EditPage,
     condition: hasGrants('ip_pools/manage'),
     layout: App
+  },
+  {
+    path: '/onboarding/sending-domain',
+    component: onboarding.SendingDomainPage,
+    condition: configFlag('featureFlags.has_signup')
+  },
+  {
+    path: '/onboarding/email',
+    component: onboarding.SmtpOrApiPage,
+    condition: configFlag('featureFlags.has_signup')
+  },
+  {
+    path: '/onboarding/email/smtp',
+    component: onboarding.SmtpPage,
+    condition: configFlag('featureFlags.has_signup')
+  },
+  {
+    path: '/onboarding/email/api',
+    component: onboarding.ApiPage,
+    condition: configFlag('featureFlags.has_signup')
   }
 ];
 

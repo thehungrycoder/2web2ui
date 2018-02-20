@@ -5,7 +5,14 @@ exports[`Page: Smtp tests should render page correctly with defaults 1`] = `
   empty={Object {}}
   title="SMTP Relay"
 >
-  <SmtpDetails />
+  <Panel
+    accent={true}
+    sectioned={true}
+  >
+    <SmtpDetails
+      apiKey={null}
+    />
+  </Panel>
   <Connect(ReduxForm)
     toggle={[Function]}
   />

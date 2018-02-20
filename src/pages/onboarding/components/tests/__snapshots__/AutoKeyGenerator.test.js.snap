@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AutoKeyGenerator should call render with api key and default email 1`] = `"Rendered Component"`;
+
+exports[`AutoKeyGenerator should render loading without an api key 1`] = `<Loading />`;
