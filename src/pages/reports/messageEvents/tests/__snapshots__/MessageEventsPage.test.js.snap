@@ -1,5 +1,44 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Page: Message Events tests getRowData hides view details button if message_id property does not exist 1`] = `
+Array [
+  <DisplayDate
+    formattedDate="formatted"
+    timestamp={undefined}
+  />,
+  "Injection",
+  "tom.haverford@pawnee.state.in.us",
+  "mean@friendly",
+  null,
+]
+`;
+
+exports[`Page: Message Events tests getRowData renders correctly 1`] = `
+Array [
+  <DisplayDate
+    formattedDate="formatted"
+    timestamp={undefined}
+  />,
+  "Injection",
+  "tom.haverford@pawnee.state.in.us",
+  "mean@friendly",
+  <div
+    style={
+      Object {
+        "textAlign": "right",
+      }
+    }
+  >
+    <Button
+      onClick={[Function]}
+      size="small"
+    >
+      View Details
+    </Button>
+  </div>,
+]
+`;
+
 exports[`Page: Message Events tests renders correctly with too many (1000) records 1`] = `
 <Page
   empty={Object {}}

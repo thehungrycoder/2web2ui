@@ -50,9 +50,11 @@ export class MessageEventsPage extends Component {
       snakeToFriendly(type),
       rcpt_to,
       friendly_from,
-      <div style={{ textAlign: 'right' }}>
-        <Button onClick={() => this.handleDetailClick({ message_id, event_id })} size='small'>View Details</Button>
-      </div>
+      message_id
+        ? <div style={{ textAlign: 'right' }}>
+          <Button onClick={() => this.handleDetailClick({ message_id, event_id })} size='small'>View Details</Button>
+        </div>
+        : null
     ];
   }
 
