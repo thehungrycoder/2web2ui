@@ -4,7 +4,7 @@ import _ from 'lodash';
 import csvFileParseRequest, { hasData, hasField } from 'src/actions/helpers/csvFileParseRequest';
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 import setSubaccountHeader from 'src/actions/helpers/setSubaccountHeader';
-import { refreshReportOptions } from 'src/actions/reportFilters';
+import { refreshReportOptions } from 'src/actions/reportOptions';
 import { showAlert } from './globalAlert';
 
 const { apiDateFormat } = config;
@@ -56,8 +56,8 @@ export function searchRecipient({ email, subaccountId } = {}) {
 }
 
 export function searchSuppressions(options) {
-  const { reportFilters, types = [], sources = []} = options;
-  const { from, to } = reportFilters;
+  const { reportOptions, types = [], sources = []} = options;
+  const { from, to } = reportOptions;
 
   const params = {};
 
@@ -78,7 +78,7 @@ export function searchSuppressions(options) {
   }
 
   return (dispatch, getState) => {
-    dispatch(refreshReportOptions(reportFilters));
+    dispatch(refreshReportOptions(reportOptions));
 
     return dispatch(
       sparkpostApiRequest({

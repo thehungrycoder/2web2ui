@@ -5,7 +5,7 @@ import { getRelativeDates } from 'src/helpers/date';
 // second argument is only for mocking local functions that can't be otherwise mocked or spied on in jest-land
 export function refreshSummaryReport(updates = {}, { getChartData = _getChartData, getTableData = _getTableData } = {}) {
   return (dispatch, getState) => {
-    const { summaryChart, reportFilters } = getState();
+    const { summaryChart, reportOptions } = getState();
 
     // if new metrics are included, convert them to their full representation from config
     if (updates.metrics) {
@@ -15,8 +15,8 @@ export function refreshSummaryReport(updates = {}, { getChartData = _getChartDat
     // merge together states
     const merged = {
       ...summaryChart,
-      ...reportFilters,
-      ...getRelativeDates(reportFilters.relativeRange),
+      ...reportOptions,
+      ...getRelativeDates(reportOptions.relativeRange),
       ...updates,
       ...getRelativeDates(updates.relativeRange)
     };

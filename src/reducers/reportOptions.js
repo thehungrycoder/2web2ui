@@ -4,7 +4,7 @@ import config from 'src/config';
 
 const initialState = {
   relativeRange: 'day',
-  activeList: [],
+  filters: [],
   metrics: getMetricsFromKeys(config.summaryChart.defaultMetrics)
 };
 
@@ -17,14 +17,14 @@ export default (state = initialState, action) => {
     }
 
     case 'ADD_FILTERS':
-      return { ...state, activeList: dedupeFilters([ ...state.activeList, ...action.payload ]) };
+      return { ...state, filters: dedupeFilters([ ...state.filters, ...action.payload ]) };
 
     case 'REMOVE_FILTER':
       return {
         ...state,
-        activeList: [
-          ...state.activeList.slice(0, action.payload),
-          ...state.activeList.slice(action.payload + 1)
+        filters: [
+          ...state.filters.slice(0, action.payload),
+          ...state.filters.slice(action.payload + 1)
         ]
       };
 

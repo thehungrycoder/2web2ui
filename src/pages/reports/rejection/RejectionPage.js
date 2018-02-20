@@ -2,19 +2,19 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import _ from 'lodash';
-import { addFilters } from 'src/actions/reportFilters';
+import { addFilters } from 'src/actions/reportOptions';
 import { refreshRejectionReport } from 'src/actions/rejectionReport';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
 import { Page, Panel } from '@sparkpost/matchbox';
-import Filters from '../components/Filters';
+import ReportOptions from '../components/ReportOptions';
 import MetricsSummary from '../components/MetricsSummary';
 import DataTable from './components/DataTable';
 
 export class RejectionPage extends Component {
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.reportFilters !== this.props.reportFilters) {
-      this.props.refreshRejectionReport(nextProps.reportFilters);
+    if (nextProps.reportOptions !== this.props.reportOptions) {
+      this.props.refreshRejectionReport(nextProps.reportOptions);
     }
   }
 
@@ -54,7 +54,7 @@ export class RejectionPage extends Component {
 
     return (
       <Page title='Rejections Report'>
-        <Filters reportLoading={loading} />
+        <ReportOptions reportLoading={loading} />
         {this.renderTopLevelMetrics()}
         <Panel title='Rejection Reasons' className='RejectionTable'>
           {this.renderCollection()}
@@ -64,12 +64,12 @@ export class RejectionPage extends Component {
   }
 }
 
-const mapStateToProps = ({ reportFilters, rejectionReport }) => ({
+const mapStateToProps = ({ reportOptions, rejectionReport }) => ({
   loading: rejectionReport.aggregatesLoading || rejectionReport.reasonsLoading,
   aggregatesLoading: rejectionReport.aggregatesLoading,
   aggregates: rejectionReport.aggregates,
   list: rejectionReport.list,
-  reportFilters
+  reportOptions
 });
 
 const mapDispatchToProps = {

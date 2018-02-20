@@ -20,7 +20,7 @@ describe('Action Creator: Refresh Summary Report', () => {
 
   beforeEach(() => {
     testState = {
-      reportFilters: {},
+      reportOptions: {},
       summaryChart: {}
     };
     getStateMock = jest.fn(() => testState);
@@ -53,7 +53,7 @@ describe('Action Creator: Refresh Summary Report', () => {
       a: 1,
       b: 2
     };
-    testState.reportFilters = {
+    testState.reportOptions = {
       b: 22,
       c: 33
     };
@@ -65,8 +65,8 @@ describe('Action Creator: Refresh Summary Report', () => {
     });
   });
 
-  it('should re-calculate relative range and merge over reportFilters', () => {
-    testState.reportFilters.to = 'a';
+  it('should re-calculate relative range and merge over reportOptions', () => {
+    testState.reportOptions.to = 'a';
     relativeDatesFirst.to = 'b';
     refreshSummaryReport({})(dispatchMock, getStateMock);
     expect(getMergedObject().to).toEqual('b');
@@ -74,7 +74,7 @@ describe('Action Creator: Refresh Summary Report', () => {
 
   it('should merge data, but prefer values in passed in updates over other values', () => {
     testState.summaryChart = { summary: true, to: 'a' };
-    testState.reportFilters = { report: true, to: 'b' };
+    testState.reportOptions = { report: true, to: 'b' };
     relativeDatesFirst.rel1 = true;
     relativeDatesFirst.to = 'c';
     refreshSummaryReport({ to: 'd', refresh: true })(dispatchMock, getStateMock);

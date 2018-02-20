@@ -2,7 +2,7 @@
 
 exports[`Report Filters Reducer add a filter 1`] = `
 Object {
-  "activeList": Array [
+  "filters": Array [
     Object {
       "type": "Example Domain",
       "value": "sparkpost.com",
@@ -17,7 +17,7 @@ Object {
 
 exports[`Report Filters Reducer add multiple filters 1`] = `
 Object {
-  "activeList": Array [
+  "filters": Array [
     Object {
       "type": "Example Domain",
       "value": "sparkpost.com",
@@ -36,7 +36,7 @@ Object {
 
 exports[`Report Filters Reducer set report options 1`] = `
 Object {
-  "activeList": Array [],
+  "filters": Array [],
   "from": 2018-01-01T00:00:00.000Z,
   "metrics": Array [
     1,

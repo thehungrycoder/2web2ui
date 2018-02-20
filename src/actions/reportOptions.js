@@ -20,20 +20,30 @@ const metricLists = [
 ];
 
 /**
- * Returns a thunk that gets the metrics filter lists to populate cache,
- * plus templates, subaccounts, and sending domains
+ * Returns a thunk that initializes the non-metric lists used
+ * for populating the typeahead cache (metrics lists are populated
+ * during date range refreshes)
  *
- * The thunk is a no-op if the cache has already been initialized, i.e.
- * metrics.domains is an array and not undefined
+ * The thunk skips calling any of the lists that already have values
+ * in the redux store
  */
-export function initTypeaheadCache(params) {
+export function initTypeaheadCache() {
   return (dispatch, getState) => {
-    const { metrics } = getState();
-    if (Array.isArray(metrics.domains)) {
-      return;
+    const { templates, subaccounts, sendingDomains } = getState();
+    const requests = [];
+
+    if (templates.list.length === 0) {
+      requests.push(dispatch(listTemplates()));
     }
-    const requests = [];//metricLists.map((list) => dispatch(list(params)));
-    requests.push(dispatch(listTemplates()), dispatch(listSubaccounts()), dispatch(listSendingDomains()));
+
+    if (subaccounts.list.length === 0) {
+      requests.push(dispatch(listSubaccounts()));
+    }
+
+    if (sendingDomains.list.length === 0) {
+      requests.push(dispatch(listSendingDomains()));
+    }
+
     return Promise.all(requests);
   };
 }
@@ -48,21 +58,16 @@ export function refreshTypeaheadCache(options) {
 
 export function maybeRefreshTypeaheadCache(update) {
   return (dispatch, getState) => {
-    const { reportFilters } = getState();
+    const { reportOptions } = getState();
 
     // do nothing if there is no change in from or to
-    if (reportFilters.from === update.from && reportFilters.to === update.to) {
+    if (reportOptions.from === update.from && reportOptions.to === update.to) {
       return;
     }
 
-    // refresh if the range is "custom"
-    if (update.relativeRange === 'custom') {
-      return dispatch(refreshTypeaheadCache(update));
-    }
-
-    // refresh if relative range is changing
-    if (update.relativeRange !== reportFilters.relativeRange) {
-      return dispatch(refreshTypeaheadCache(update));
+    // refresh if range is changing or if the range is staying the same but is "custom"
+    if (update.relativeRange !== reportOptions.relativeRange || update.relativeRange === 'custom') {
+      dispatch(refreshTypeaheadCache(update));
     }
   };
 }
@@ -97,8 +102,8 @@ export function removeFilter(payload) {
  */
 export function refreshReportOptions(update) {
   return (dispatch, getState) => {
-    const { reportFilters } = getState();
-    update = { ...reportFilters, ...update };
+    const { reportOptions } = getState();
+    update = { ...reportOptions, ...update };
 
     // calculate relative dates if range is not "custom"
     if (update.relativeRange && update.relativeRange !== 'custom') {
@@ -106,7 +111,7 @@ export function refreshReportOptions(update) {
     }
 
     // do nothing if there is no change in from or to
-    if (reportFilters.from === update.from && reportFilters.to === update.to) {
+    if (reportOptions.from === update.from && reportOptions.to === update.to) {
       return;
     }
 

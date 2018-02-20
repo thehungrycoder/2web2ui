@@ -4,12 +4,12 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import _ from 'lodash';
 import { refreshBounceReport } from 'src/actions/bounceReport';
-import { addFilters } from 'src/actions/reportFilters';
+import { addFilters } from 'src/actions/reportOptions';
 import { TableCollection, Empty, LongTextContainer } from 'src/components';
 import { Percent } from 'src/components/formatters';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
 import { Page, Panel, UnstyledLink } from '@sparkpost/matchbox';
-import Filters from '../components/Filters';
+import ReportOptions from '../components/ReportOptions';
 import BounceChart from './components/BounceChart';
 import MetricsSummary from '../components/MetricsSummary';
 import { mapStateToProps } from 'src/selectors/bounceReport';
@@ -25,8 +25,8 @@ const columns = [
 export class BouncePage extends Component {
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.reportFilters !== this.props.reportFilters) {
-      this.props.refreshBounceReport(nextProps.reportFilters);
+    if (nextProps.reportOptions !== this.props.reportOptions) {
+      this.props.refreshBounceReport(nextProps.reportOptions);
     }
   }
 
@@ -105,7 +105,7 @@ export class BouncePage extends Component {
 
     return (
       <Page title='Bounce Report'>
-        <Filters reportLoading={chartLoading} />
+        <ReportOptions reportLoading={chartLoading} />
         { this.renderTopLevelMetrics() }
         { this.renderChart() }
         <Panel title='Bounced Messages' className='ReasonsTable'>

@@ -11,7 +11,7 @@ describe('metrics helpers', () => {
         { key: 'count_bounce' },
         { key: 'foo_bar', computeKeys: 'test + last' }
       ],
-      activeList: [
+      filters: [
         { value: 'gmail.com', type: 'Recipient Domain' },
         { value: 'foobar', type: 'Subaccount', id: 100 }
       ]
@@ -51,7 +51,7 @@ describe('metrics helpers', () => {
     expect(metricsHelpers.getPrecision(from, to)).toEqual('hour');
 
     to.add(6, 'days');
-    expect(metricsHelpers.getPrecision(from, to)).toEqual('12hr');
+    expect(metricsHelpers.getPrecision(from, to)).toEqual('day'); // 12hr precision makes for an odd x-axis, use day here
 
     to.add(25, 'days');
     expect(metricsHelpers.getPrecision(from, to)).toEqual('day');
@@ -69,7 +69,7 @@ describe('metrics helpers', () => {
   });
 
   it('should return days as precision type', () => {
-    expect(metricsHelpers.getPrecisionType('12hr')).toEqual('days');
+    expect(metricsHelpers.getPrecisionType('day')).toEqual('days');
   });
 
   it('should get metrics from keys', () => {

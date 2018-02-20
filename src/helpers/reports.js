@@ -24,17 +24,18 @@ export function dedupeFilters(filters) {
  * By default, only returns the DEFAULT_LINK_PARAMS, but report-specific
  * params may be included with extraLinkParams (ie. summary chart selected metrics)
  *
- * @param  {Object} filters - reportFilters state
- * @param {Array} extraLinkParams - optional array of keys to include, on top of default keys
+ * @param  {Object} reportOptions - reportOptions state
+ * @param {Array} extraLinkParams - optional array of keys to include, in addition to default keys
  * @return {Object} - formatted search options object
  */
-export function getReportSearchOptions(filters, extraLinkParams = []) {
+export function getReportSearchOptions(reportOptions, extraLinkParams = []) {
+  const { filters = [], metrics = []} = reportOptions;
   const options = {
-    from: moment(filters.from).utc().format(),
-    to: moment(filters.to).utc().format(),
-    range: filters.relativeRange,
-    filters: filters.activeList.map(stringifyFilter),
-    metrics: filters.metrics.map((metric) => typeof metric === 'string' ? metric : metric.key)
+    from: moment(reportOptions.from).utc().format(),
+    to: moment(reportOptions.to).utc().format(),
+    range: reportOptions.relativeRange,
+    filters: filters.map(stringifyFilter),
+    metrics: metrics.map((metric) => typeof metric === 'string' ? metric : metric.key)
   };
   return _.pick(options, [ ...DEFAULT_LINK_PARAMS, ...extraLinkParams ]);
 }
@@ -45,7 +46,7 @@ export function getReportSearchOptions(filters, extraLinkParams = []) {
  * @return {Object}
  *   {
  *     options - options for refresh actions
- *     filters - array of objects ready to be called with reportFilters.addFilter action
+ *     filters - array of objects ready to be called with reportOptions.addFilter action
  *   }
  */
 export function parseSearch(search) {

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import cx from 'classnames';
 
 import { getTableData } from 'src/actions/summaryChart';
-import { addFilters } from 'src/actions/reportFilters';
+import { addFilters } from 'src/actions/reportOptions';
 import typeaheadCacheSelector from 'src/selectors/reportFilterTypeaheadCache';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
 

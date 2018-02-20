@@ -2,8 +2,6 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { SummaryReportPage } from '../SummaryPage';
 import * as reportHelpers from 'src/helpers/reports';
-import Filters from '../../components/Filters';
-import ShareModal from '../../components/ShareModal';
 import { MetricsModal, ChartHeader } from '../components';
 
 jest.mock('src/helpers/reports');
@@ -17,18 +15,12 @@ describe('Page: SummaryPage', () => {
     reportHelpers.getFilterSearchOptions = jest.fn(() => ({}));
     reportHelpers.parseSearch = jest.fn(() => ({ options: {}}));
     testProps = {
-      filters: [],
+      reportOptions: [],
       chart: {
         metrics: [1, 2, 3]
       },
-      location: {
-        search: '?hello'
-      },
-      history: {
-        replace: jest.fn()
-      },
-      refreshSummaryChart: jest.fn(() => Promise.resolve()),
-      initTypeaheadCache: jest.fn(),
+      refreshSummaryReport: jest.fn(),
+      refreshReportOptions: jest.fn(),
       addFilters: jest.fn()
     };
     wrapper = shallow(<SummaryReportPage {...testProps} />);
@@ -38,46 +30,26 @@ describe('Page: SummaryPage', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('should refresh when report options reference changes', () => {
+    const newReportOptions = {};
+    expect(testProps.refreshSummaryReport).not.toHaveBeenCalled();
+    wrapper.setProps({ reportOptions: newReportOptions });
+    expect(testProps.refreshSummaryReport).toHaveBeenCalledWith(newReportOptions);
+  });
+
   it('should render when loading', () => {
     testProps.chart.chartLoading = true;
     wrapper = shallow(<SummaryReportPage {...testProps} />);
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should add any found filters', () => {
-    reportHelpers.parseSearch = jest.fn(() => ({
-      options: {},
-      filters: [1, 2, 3]
-    }));
-    wrapper = shallow(<SummaryReportPage {...testProps} />);
-    expect(testProps.addFilters).toHaveBeenCalledWith([1, 2, 3]);
-  });
-
-  it('should toggle modals via filters', () => {
-    const filters = wrapper.find(Filters);
-    expect(wrapper.state('shareModal')).toEqual(false);
-    filters.simulate('share');
-    expect(wrapper.state('shareModal')).toEqual(true);
-    filters.simulate('share');
-    expect(wrapper.state('shareModal')).toEqual(false);
-  });
-
-  it('should toggle modals via chart header', () => {
+  it('should toggle metrics modal chart header', () => {
     const header = wrapper.find(ChartHeader);
     expect(wrapper.state('metricsModal')).toEqual(false);
     header.simulate('metricsToggle');
     expect(wrapper.state('metricsModal')).toEqual(true);
     header.simulate('metricsToggle');
     expect(wrapper.state('metricsModal')).toEqual(false);
-  });
-
-  it('should toggle modals via share modal toggle', () => {
-    const toggle = wrapper.find(ShareModal).props().handleToggle;
-    expect(wrapper.state('shareModal')).toEqual(false);
-    toggle();
-    expect(wrapper.state('shareModal')).toEqual(true);
-    toggle();
-    expect(wrapper.state('shareModal')).toEqual(false);
   });
 
   it('should toggle modals via metrics modal cancel', () => {
@@ -94,7 +66,7 @@ describe('Page: SummaryPage', () => {
     const modal = wrapper.find(MetricsModal);
     const metrics = {};
     modal.simulate('submit', metrics);
-    expect(testProps.refreshSummaryChart).toHaveBeenCalledWith({ metrics });
+    expect(testProps.refreshReportOptions).toHaveBeenCalledWith({ metrics });
     expect(wrapper.state('metricsModal')).toEqual(false);
   });
 

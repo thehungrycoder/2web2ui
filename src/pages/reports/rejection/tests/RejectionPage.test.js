@@ -2,21 +2,17 @@
 import React from 'react';
 import { RejectionPage } from '../RejectionPage';
 import { shallow } from 'enzyme';
-import * as reportHelpers from 'src/helpers/reports';
 
 jest.mock('src/helpers/reports');
 
 describe('RejectionPage: ', () => {
   let props;
   let wrapper;
-  let spyParseSearch;
 
   beforeEach(() => {
-    spyParseSearch = reportHelpers.parseSearch = jest.fn(() => ({ options: {}}));
-
     props = {
       loading: false,
-      filters: {},
+      reportOptions: {},
       list: [
         {
           count_rejected: 65,
@@ -37,27 +33,23 @@ describe('RejectionPage: ', () => {
         count_rejected: 14,
         count_targeted: 100
       },
-      loadRejectionMetrics: jest.fn(() => Promise.resolve()),
-      refreshRejectionTableMetrics: jest.fn(() => Promise.resolve()),
-      initTypeaheadCache: jest.fn(),
       addFilters: jest.fn(),
-      location: {
-        search: {}
-      },
-      showAlert: jest.fn(),
-      history: {
-        replace: jest.fn()
-      }
+      refreshRejectionReport: jest.fn()
     };
-    spyParseSearch = reportHelpers.parseSearch = jest.fn(() => ({ options: {}}));
 
     wrapper = shallow(<RejectionPage {...props} />);
   });
 
-  it('renders correctly', () => {
-    expect(spyParseSearch).toHaveBeenCalledTimes(1);
-    expect(props.initTypeaheadCache).toHaveBeenCalled();
+  it('should render', () => {
+    expect(props.refreshRejectionReport).not.toHaveBeenCalled();
     expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should refresh when report options reference changes', () => {
+    const newReportOptions = {};
+    expect(props.refreshRejectionReport).not.toHaveBeenCalled();
+    wrapper.setProps({ reportOptions: newReportOptions });
+    expect(props.refreshRejectionReport).toHaveBeenCalledWith(newReportOptions);
   });
 
   it('renders correctly when loading', () => {
@@ -73,64 +65,5 @@ describe('RejectionPage: ', () => {
   it('should not display top level metrics when there are no aggregates', () => {
     wrapper.setProps({ aggregates: {}});
     expect(wrapper.find('MetricsSummary')).toHaveLength(0);
-  });
-
-  describe('handleDomainClick', () => {
-    it('sets the filter and refresh', () => {
-      const value = 'abc.com';
-
-      wrapper.instance().handleDomainClick(value);
-
-      expect(props.addFilters).toHaveBeenCalledWith([{ type: 'Recipient Domain', value }]);
-      expect(props.refreshRejectionTableMetrics).toHaveBeenCalledTimes(2); // on load and
-    });
-  });
-
-  describe('handleModalToggle', () => {
-    it('toggles the state value', () => {
-      expect(wrapper.state('modal')).toEqual(false);
-      wrapper.instance().handleModalToggle();
-      expect(wrapper.state('modal')).toEqual(true);
-      wrapper.instance().handleModalToggle();
-      expect(wrapper.state('modal')).toEqual(false);
-    });
-  });
-
-  describe('handleRefresh', () => {
-    it('refresh rejections', async() => {
-      const options = { relativeRange: '7days' };
-
-      await wrapper.instance().handleRefresh(options);
-
-      expect(props.refreshRejectionTableMetrics).toHaveBeenCalledTimes(2);
-      expect(props.refreshRejectionTableMetrics).toHaveBeenCalledWith(options);
-      expect(props.showAlert).toHaveBeenCalledTimes(0);
-    });
-
-    it('alerts on error', async() => {
-      const err = new Error('dooms day!');
-      props.refreshRejectionTableMetrics.mockReturnValue(Promise.reject(err));
-
-      await wrapper.instance().handleRefresh();
-
-      expect(props.refreshRejectionTableMetrics).toHaveBeenCalledWith(undefined);
-      expect(props.showAlert).toHaveBeenCalledTimes(1);
-    });
-  });
-
-  describe('parseSearch', () => {
-    it('parses query params correctly', () => {
-      const from = new Date('2016');
-      const to = new Date();
-      const filter = { type: 'Recipient Domain', value: 'gmail.com' };
-
-      reportHelpers.parseSearch.mockReturnValue({
-        options: { to, from },
-        filters: [filter]
-      });
-
-      expect(wrapper.instance().parseSearch()).toEqual({ from, to });
-      expect(props.addFilters).toHaveBeenCalledWith([filter]);
-    });
   });
 });

@@ -3,14 +3,14 @@ import config from 'src/config';
 import _ from 'lodash';
 
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
-import { refreshReportOptions } from 'src/actions/reportFilters';
+import { refreshReportOptions } from 'src/actions/reportOptions';
 import { showAlert } from './globalAlert';
 
 const { apiDateFormat, messageEvents } = config;
 
 export function getMessageEvents(options = {}) {
-  const { reportFilters, recipients } = options;
-  const { from, to } = reportFilters;
+  const { reportOptions, recipients } = options;
+  const { from, to } = reportOptions;
 
   const params = {};
 
@@ -27,7 +27,7 @@ export function getMessageEvents(options = {}) {
   }
 
   return (dispatch, getState) => {
-    dispatch(refreshReportOptions(reportFilters));
+    dispatch(refreshReportOptions(reportOptions));
 
     return dispatch(
       sparkpostApiRequest({

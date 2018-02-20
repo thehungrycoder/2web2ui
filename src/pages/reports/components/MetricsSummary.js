@@ -7,7 +7,7 @@ import { formatDateTime, relativeDateOptionsIndexed } from 'src/helpers/date';
 
 import styles from './MetricsSummary.module.scss';
 
-class MetricsSummary extends Component {
+export class MetricsSummary extends Component {
   renderDate() {
     const { to, from, relativeRange } = this.props;
 
@@ -53,4 +53,4 @@ MetricsSummary.propTypes = {
   secondaryMessage: PropTypes.string
 };
 
-export default connect((state) => ({ ...state.reportFilters }))(MetricsSummary);
+export default connect((state) => ({ ...state.reportOptions }))(MetricsSummary);

@@ -45,5 +45,5 @@ export function EngagementSummary({ accepted = 0, clicks = 0, filters, loading, 
   );
 }
 
-const mapStateToProps = ({ reportFilters: filters }) => ({ filters });
+const mapStateToProps = ({ reportOptions: filters }) => ({ filters });
 export default connect(mapStateToProps)(EngagementSummary);

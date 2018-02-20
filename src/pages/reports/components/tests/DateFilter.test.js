@@ -305,7 +305,7 @@ describe('Component: DateFilter', () => {
       wrapper.setState({ showDatePicker: true });
       instance.handleSelectRange(e);
       expect(wrapper.state('showDatePicker')).toEqual(false);
-      expect(props.refresh).toHaveBeenCalledWith({ relativeRange: 'lasagna' });
+      expect(props.refreshReportOptions).toHaveBeenCalledWith({ relativeRange: 'lasagna' });
     });
 
   });
@@ -331,7 +331,7 @@ describe('Component: DateFilter', () => {
       instance.handleSubmit();
       expect(wrapper.state('showDatePicker')).toEqual(false);
       expect(wrapper.state('selecting')).toEqual(false);
-      expect(props.refresh).toHaveBeenCalledWith({ ...mockSelected, relativeRange: 'custom' });
+      expect(props.refreshReportOptions).toHaveBeenCalledWith({ ...mockSelected, relativeRange: 'custom' });
     });
 
   });

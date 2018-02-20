@@ -2,10 +2,6 @@ import React from 'react';
 import { BouncePage } from '../BouncePage';
 import { shallow, mount } from 'enzyme';
 
-jest.mock('src/helpers/reports');
-
-Date.now = jest.fn(() => 1487076708000);
-
 describe('BouncePage: ', () => {
 
   const props = {
@@ -15,9 +11,11 @@ describe('BouncePage: ', () => {
       countTargeted: 10
     },
     totalBounces: 100,
-    filters: {
+    reportOptions: {
       relativeRange: 'hour'
     },
+    addFilters: jest.fn(),
+    refreshBounceReport: jest.fn(),
     reasons: [ {
       bounce_category_name: 'Block',
       bounce_class_description: 'The message was blocked by the receiver as coming from a known spam source',
@@ -36,7 +34,15 @@ describe('BouncePage: ', () => {
   });
 
   it('should render', () => {
+    expect(props.refreshBounceReport).not.toHaveBeenCalled();
     expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should refresh when report options reference changes', () => {
+    const newReportOptions = {};
+    expect(props.refreshBounceReport).not.toHaveBeenCalled();
+    wrapper.setProps({ reportOptions: newReportOptions });
+    expect(props.refreshBounceReport).toHaveBeenCalledWith(newReportOptions);
   });
 
   it('should render correctly with no bounces', () => {

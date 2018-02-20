@@ -1,17 +1,17 @@
-import reportFiltersReducer from '../reportFilters';
+import reportOptionsReducer from '../reportOptions';
 import cases from 'jest-in-case';
 import time from 'src/__testHelpers__/time';
 
 cases('Report Filters Reducer', (action) => {
   const state = {
-    activeList: [],
+    filters: [],
     from: time(),
     relativeRange: 'day',
     to: time({ day: 2 }),
     metrics: []
   };
 
-  expect(reportFiltersReducer(state, action)).toMatchSnapshot();
+  expect(reportOptionsReducer(state, action)).toMatchSnapshot();
 }, {
   'add a filter': {
     payload: [{ type: 'Example Domain', value: 'sparkpost.com' }],

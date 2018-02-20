@@ -67,7 +67,6 @@ describe('Summary Table ', () => {
 
     snaps[0].find('UnstyledLink').simulate('click');
     expect(props.addFilters).toHaveBeenCalledWith([{ id: 0, type: 'Subaccount', value: 'Master Account (ID 0)' }]);
-    expect(props.refresh).toHaveBeenCalled();
   });
 
   it('should handle select change', () => {

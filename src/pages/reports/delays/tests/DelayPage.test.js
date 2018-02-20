@@ -1,16 +1,12 @@
 import React from 'react';
 import { DelayPage } from '../DelayPage';
 import { shallow } from 'enzyme';
-import * as reportHelpers from 'src/helpers/reports';
 
 jest.mock('src/helpers/reports');
 
-Date.now = jest.fn(() => 1487076708000);
-
 describe('DelayPage: ', () => {
   const props = {
-    filters: { relativeRange: 'hour' },
-    addFilters: jest.fn(),
+    reportOptions: { relativeRange: 'hour' },
     tableLoading: false,
     reasons: [
       {
@@ -25,42 +21,26 @@ describe('DelayPage: ', () => {
       count_accepted: 10000
     },
     totalAccepted: 1000,
-    loadDelayReasonsByDomain: jest.fn(() => Promise.resolve()),
-    initTypeaheadCache: jest.fn(() => Promise.resolve()),
-    location: { search: {}},
-    loadDelayMetrics: jest.fn(() => Promise.resolve()),
-    showAlert: jest.fn(),
-    history: { replace: jest.fn() }
+    addFilters: jest.fn(),
+    refreshDelayReport: jest.fn()
   };
 
   let wrapper;
-  let spyFilterListFromSearch;
-  let spyParseSearch;
-  let spyGetShare;
 
   beforeEach(() => {
-    spyFilterListFromSearch = reportHelpers.getFilterSearchOptions = jest.fn(() => []);
-    spyParseSearch = reportHelpers.parseSearch = jest.fn(() => ({ options: {}}));
-    spyGetShare = reportHelpers.getShareLink = jest.fn(() => ({ link: '', search: '' }));
     wrapper = shallow(<DelayPage {...props} />);
   });
 
-  afterEach(() => {
-    spyFilterListFromSearch.mockRestore();
-    spyParseSearch.mockRestore();
-    spyGetShare.mockRestore();
+  it('should render', () => {
+    expect(props.refreshDelayReport).not.toHaveBeenCalled();
+    expect(wrapper).toMatchSnapshot();
   });
 
-
-  it('should render page', () => {
-    const parseSpy = jest.spyOn(wrapper.instance(), 'parseSearch');
-    wrapper.instance().componentDidMount();
-    expect(props.loadDelayMetrics).toHaveBeenCalled();
-    expect(props.loadDelayReasonsByDomain).toHaveBeenCalled();
-    expect(parseSpy).toHaveBeenCalled();
-    expect(props.initTypeaheadCache).toHaveBeenCalled();
-    expect(props.addFilters).toHaveBeenCalledWith([]);
-    expect(wrapper).toMatchSnapshot();
+  it('should refresh when report options reference changes', () => {
+    const newReportOptions = {};
+    expect(props.refreshDelayReport).not.toHaveBeenCalled();
+    wrapper.setProps({ reportOptions: newReportOptions });
+    expect(props.refreshDelayReport).toHaveBeenCalledWith(newReportOptions);
   });
 
   it('should show loading indicator when loading table', () => {
@@ -71,24 +51,6 @@ describe('DelayPage: ', () => {
   it('should show loading panel when aggregates are still loading', () => {
     wrapper.setProps({ aggregatesLoading: true });
     expect(wrapper).toMatchSnapshot();
-  });
-
-  it('should show an alert when refresh fails', async() => {
-    wrapper.setProps({ loadDelayMetrics: jest.fn(() => Promise.reject(new Error('no way jose'))) });
-    await wrapper.instance().handleRefresh();
-    expect(props.showAlert).toHaveBeenCalledWith({ type: 'error', message: 'Unable to refresh delay report.', details: 'no way jose' });
-  });
-
-  it('should call addFilters when there are filters', () => {
-    reportHelpers.parseSearch = jest.fn(() => ({ options: {}, filters: ['1', '2', '3']}));
-    wrapper.instance().parseSearch();
-    expect(props.addFilters).toHaveBeenCalledWith(['1', '2', '3']);
-  });
-
-  it('should show modal toggle', () => {
-    const stateSpy = jest.spyOn(wrapper.instance(), 'setState');
-    wrapper.find('Connect').simulate('share');
-    expect(stateSpy).toHaveBeenCalled();
   });
 
   it('should not display top level metrics when there are no aggregates', () => {

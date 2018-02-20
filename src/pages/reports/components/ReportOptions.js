@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import qs from 'query-string';
-import { addFilters, removeFilter, refreshReportOptions, initTypeaheadCache } from 'src/actions/reportFilters';
+import { addFilters, removeFilter, refreshReportOptions, initTypeaheadCache } from 'src/actions/reportOptions';
 import ShareModal from './ShareModal';
 import { parseSearch, getReportSearchOptions } from 'src/helpers/reports';
 import { Grid, Button, Panel, Tag } from '@sparkpost/matchbox';
@@ -10,9 +10,9 @@ import Typeahead from './Typeahead';
 import DateFilter from './DateFilter';
 import typeaheadCacheSelector from 'src/selectors/reportFilterTypeaheadCache';
 import { showAlert } from 'src/actions/globalAlert';
-import styles from './Filters.module.scss';
+import styles from './ReportOptions.module.scss';
 
-export class Filters extends Component {
+export class ReportOptions extends Component {
   state = {
     modal: false,
     query: {}
@@ -29,14 +29,14 @@ export class Filters extends Component {
   }
 
   componentDidUpdate(previousProps) {
-    if (previousProps.filters !== this.props.filters) {
+    if (previousProps.reportOptions !== this.props.reportOptions) {
       this.updateLink();
     }
   }
 
   updateLink = () => {
-    const { filters, history, location, extraLinkParams = []} = this.props;
-    const query = getReportSearchOptions(filters, extraLinkParams);
+    const { reportOptions, history, location, extraLinkParams = []} = this.props;
+    const query = getReportSearchOptions(reportOptions, extraLinkParams);
     const search = qs.stringify(query, { encode: false });
 
     this.setState({ query });
@@ -44,11 +44,11 @@ export class Filters extends Component {
   }
 
   renderActiveFilters = () => {
-    const { filters } = this.props;
-    return filters.activeList.length
+    const { reportOptions } = this.props;
+    return reportOptions.filters.length
       ? <Panel.Section>
         <small>Filters:</small>
-        { filters.activeList.map((item, index) => <Tag key={index} onRemove={() => this.handleFilterRemove(index)} className={styles.TagWrapper}>{ item.type }: { item.value }</Tag>)}
+        { reportOptions.filters.map((item, index) => <Tag key={index} onRemove={() => this.handleFilterRemove(index)} className={styles.TagWrapper}>{ item.type }: { item.value }</Tag>)}
       </Panel.Section>
       : null;
   }
@@ -66,7 +66,7 @@ export class Filters extends Component {
   }
 
   render() {
-    const { typeaheadCache, filters, reportLoading } = this.props;
+    const { typeaheadCache, reportOptions, reportLoading } = this.props;
     const { query, modal } = this.state;
 
     return (
@@ -83,7 +83,7 @@ export class Filters extends Component {
                 placeholder='Filter by domain, campaign, etc'
                 onSelect={this.handleTypeaheadSelect}
                 items={typeaheadCache}
-                selected={filters.activeList}
+                selected={reportOptions.filters}
               />
             </Grid.Column>
             <Grid.Column xs={4} md={2} xl={1}>
@@ -102,7 +102,7 @@ export class Filters extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  filters: state.reportFilters,
+  reportOptions: state.reportOptions,
   typeaheadCache: typeaheadCacheSelector(state)
 });
 const mapDispatchToProps = {
@@ -112,4 +112,4 @@ const mapDispatchToProps = {
   showAlert,
   initTypeaheadCache
 };
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Filters));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ReportOptions));

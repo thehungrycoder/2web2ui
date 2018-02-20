@@ -1,11 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders engagement report page 1`] = `
+exports[`Engagement Report Page should render 1`] = `
 <Page
   empty={Object {}}
   title="Engagement Report"
 >
-  <withRouter(Connect(Filters)) />
+  <withRouter(Connect(ReportOptions)) />
   <Connect(EngagementSummary)
     accepted={1}
     clicks={3}

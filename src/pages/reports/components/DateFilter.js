@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import ReactDOM from 'react-dom';
 import { subMonths, format } from 'date-fns';
 import { getStartOfDay, getEndOfDay, relativeDateOptions } from 'src/helpers/date';
-import { refreshReportOptions } from 'src/actions/reportFilters';
+import { refreshReportOptions } from 'src/actions/reportOptions';
 import { Button, Datepicker, TextField, Select, Popover } from '@sparkpost/matchbox';
 import DateForm from './DateForm';
 import styles from './DateFilter.module.scss';
@@ -32,7 +32,7 @@ export class DateFilter extends Component {
     this.syncPropsToState(nextProps);
   }
 
-  // Sets local state from reportFilters redux state - need to separate to handle pre-apply state
+  // Sets local state from reportOptions redux state - need to separate to handle pre-apply state
   syncPropsToState = ({ filter }) => {
     this.setState({ selected: { from: filter.from, to: filter.to }});
   }
@@ -173,5 +173,5 @@ export class DateFilter extends Component {
   }
 }
 
-const mapStateToProps = ({ reportFilters }) => ({ filter: reportFilters });
+const mapStateToProps = ({ reportOptions }) => ({ filter: reportOptions });
 export default connect(mapStateToProps, { refreshReportOptions })(DateFilter);

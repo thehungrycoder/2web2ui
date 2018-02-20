@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import _ from 'lodash';
-import { addFilters } from 'src/actions/reportFilters';
+import { addFilters } from 'src/actions/reportOptions';
 import { refreshDelayReport } from 'src/actions/delayReport';
 import { Page, Panel } from '@sparkpost/matchbox';
-import Filters from '../components/Filters';
+import ReportOptions from 'src/pages/reports/components/ReportOptions';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
 import MetricsSummary from '../components/MetricsSummary';
 import DelaysDataTable from './components/DelaysDataTable';
@@ -13,8 +12,8 @@ import DelaysDataTable from './components/DelaysDataTable';
 export class DelayPage extends Component {
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.reportFilters !== this.props.reportFilters) {
-      this.props.refreshDelayReport(nextProps.reportFilters);
+    if (nextProps.reportOptions !== this.props.reportOptions) {
+      this.props.refreshDelayReport(nextProps.reportOptions);
     }
   }
 
@@ -56,7 +55,7 @@ export class DelayPage extends Component {
 
     return (
       <Page title='Delay Report'>
-        <Filters reportLoading={loading} />
+        <ReportOptions reportLoading={loading} />
         { this.renderTopLevelMetrics() }
         <Panel title='Delayed Messages' className='ReasonsTable'>
           { this.renderDataTable() }
@@ -74,7 +73,7 @@ const mapStateToProps = (state) => {
     totalAccepted: aggregates ? aggregates.count_accepted : 1,
     aggregates,
     aggregatesLoading: state.delayReport.aggregatesLoading,
-    reportFilters: state.reportFilters
+    reportOptions: state.reportOptions
   };
 };
 
@@ -83,4 +82,4 @@ const mapDispatchToProps = {
   refreshDelayReport
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(DelayPage));
+export default connect(mapStateToProps, mapDispatchToProps)(DelayPage);

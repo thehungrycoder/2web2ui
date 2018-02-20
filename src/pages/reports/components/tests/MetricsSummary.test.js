@@ -1,5 +1,5 @@
 import React from 'react';
-import MetricsSummary from '../MetricsSummary';
+import { MetricsSummary } from '../MetricsSummary';
 import { shallow } from 'enzyme';
 import moment from 'moment';
 

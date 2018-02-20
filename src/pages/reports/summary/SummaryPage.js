@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
 import { refreshSummaryReport } from 'src/actions/summaryChart';
-import { addFilters, refreshReportOptions } from 'src/actions/reportFilters';
+import { refreshReportOptions } from 'src/actions/reportOptions';
 import { Page, Panel } from '@sparkpost/matchbox';
 import { Loading } from 'src/components';
-import Filters from '../components/Filters';
+import ReportOptions from '../components/ReportOptions';
 import { Table, MetricsModal, ChartGroup, ChartHeader } from './components';
 import { selectSummaryReportState, selectSelectedMetrics } from 'src/selectors/summaryReport';
 
@@ -19,8 +19,8 @@ export class SummaryReportPage extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.reportFilters !== this.props.reportFilters) {
-      this.props.refreshSummaryReport(nextProps.reportFilters);
+    if (nextProps.reportOptions !== this.props.reportOptions) {
+      this.props.refreshSummaryReport(nextProps.reportOptions);
     }
   }
 
@@ -54,7 +54,7 @@ export class SummaryReportPage extends Component {
 
     return (
       <Page title='Summary Report'>
-        <Filters
+        <ReportOptions
           reportLoading={chart.chartLoading}
           extraLinkParams={['metrics']}
         />
@@ -90,11 +90,10 @@ export class SummaryReportPage extends Component {
 const mapStateToProps = (state) => ({
   chart: selectSummaryReportState(state),
   selectedMetrics: selectSelectedMetrics(state),
-  reportFilters: state.reportFilters
+  reportOptions: state.reportOptions
 });
 
 const mapDispatchToProps = {
-  addFilters,
   refreshReportOptions,
   refreshSummaryReport
 };
