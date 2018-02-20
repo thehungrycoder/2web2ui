@@ -41,7 +41,7 @@ export class DelayPage extends Component {
 
     return (
       <MetricsSummary
-        rateValue={(count_delayed_first / count_accepted) * 100}
+        rateValue={(count_delayed_first / count_accepted) * 100 || 0}
         rateTitle='Delayed Rate'
         secondaryMessage={`${count_delayed_first.toLocaleString()} were delayed on first attempt.`}
       >

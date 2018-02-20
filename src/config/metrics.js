@@ -1,10 +1,11 @@
 /* eslint-disable max-lines */
 function average(item, keys = []) {
-  return item[keys[0]] / item[keys[1]];
+  const avg = item[keys[0]] / item[keys[1]] || 0;
+  return isFinite(avg) ? avg : 0;
 }
 
 function rate(item, keys) {
-  return (item[keys[0]] / item[keys[1]]) * 100;
+  return average(item, keys) * 100;
 }
 
 export const list = [

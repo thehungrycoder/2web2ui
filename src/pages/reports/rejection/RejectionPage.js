@@ -41,7 +41,7 @@ export class RejectionPage extends Component {
 
     return (
       <MetricsSummary
-        rateValue={(count_rejected / count_targeted) * 100}
+        rateValue={(count_rejected / count_targeted) * 100 || 0}
         rateTitle='Rejected Rate'>
         <strong>{count_rejected.toLocaleString()}</strong> of your messages were rejected of <strong>{count_targeted.toLocaleString()}</strong> messages targeted
       </MetricsSummary>
