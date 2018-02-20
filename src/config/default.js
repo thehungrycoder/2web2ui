@@ -32,10 +32,10 @@ const config = {
   },
   featureFlags: {
     allow_mailbox_verification: true,
-    allow_anyone_at_verification: false
+    allow_anyone_at_verification: false,
+    has_signup: false
   },
   gaTag: 'no-default-set',
-  hasSignup: true,
   maxUploadSizeBytes: 20000000,
   metricsPrecisionMap: [
     { time: 60, value: '1min', format: 'ha' },

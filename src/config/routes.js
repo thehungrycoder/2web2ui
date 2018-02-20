@@ -378,22 +378,22 @@ const routes = [
   {
     path: '/onboarding/sending-domain',
     component: onboarding.SendingDomainPage,
-    condition: configFlag('hasSignup')
+    condition: configFlag('featureFlags.has_signup')
   },
   {
     path: '/onboarding/email',
     component: onboarding.SmtpOrApiPage,
-    condition: configFlag('hasSignup')
+    condition: configFlag('featureFlags.has_signup')
   },
   {
     path: '/onboarding/email/smtp',
     component: onboarding.SmtpPage,
-    condition: configFlag('hasSignup')
+    condition: configFlag('featureFlags.has_signup')
   },
   {
     path: '/onboarding/email/api',
     component: onboarding.ApiPage,
-    condition: configFlag('hasSignup')
+    condition: configFlag('featureFlags.has_signup')
   }
 ];
 
