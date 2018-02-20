@@ -112,8 +112,7 @@ const config = {
   salesforceDataParams: ['sfdcid', 'src', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'],
   links: {
     submitTicket: 'https://support.sparkpost.com/customer/portal/emails/new'
-  },
-  hasSignup: false
+  }
 };
 
 export default config;
