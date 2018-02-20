@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SmtpPage should render 1`] = `
+<React.Fragment>
+  <CenteredLogo />
+  <Panel
+    accent={true}
+    title="SMTP Integration"
+  >
+    <Panel.Section>
+      <SmtpDetails
+        apiKey="123456789"
+      />
+    </Panel.Section>
+    <Panel.Section>
+      <SkipLink
+        to="/dashboard"
+      >
+        Continue to dashboard
+      </SkipLink>
+    </Panel.Section>
+    <withRouter(Steps) />
+  </Panel>
+</React.Fragment>
+`;

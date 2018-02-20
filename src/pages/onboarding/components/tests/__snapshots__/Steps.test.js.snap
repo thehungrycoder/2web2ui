@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Steps should render correctly 1`] = `
+<ul>
+  <li
+    className=""
+    key="Confirm your Plan"
+  >
+    <Icon
+      name="Check"
+      size={18}
+    />
+     
+    Confirm your Plan
+  </li>
+  <li
+    className=""
+    key="Add a Dedicated IP"
+  >
+    <Icon
+      name="Check"
+      size={18}
+    />
+     
+    Add a Dedicated IP
+  </li>
+  <li
+    className=""
+    key="Add a Domain"
+  >
+    3.
+     
+    Add a Domain
+  </li>
+  <li
+    className=""
+    key="Send an Email"
+  >
+    4.
+     
+    Send an Email
+  </li>
+</ul>
+`;

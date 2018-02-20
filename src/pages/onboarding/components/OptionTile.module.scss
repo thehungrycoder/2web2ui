@@ -1,0 +1,18 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.OptionTile {
+  display: inline-block;
+  border: 1px solid color(gray, 8);
+  padding: spacing();
+  margin-bottom: spacing();
+
+  transition: 0.15s;
+
+  &:hover, &:active, &:focus {
+    border: 1px solid color(orange);
+  }
+}
+
+.Content {
+  color: color(gray, 2);
+}

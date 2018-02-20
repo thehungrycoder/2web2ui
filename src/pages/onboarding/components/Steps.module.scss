@@ -1,0 +1,31 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.Steps {
+  display: none;
+  position: absolute;
+  left: 100%;
+  top: 0;
+  width: rem(240);
+
+  @media screen and (min-width: breakpoint(small)) {
+    display: block;
+  }
+}
+
+.Item {
+  list-style-type: none;
+  margin-bottom: spacing();
+  font-weight: 500;
+  font-size: rem(15);
+  color: color(gray, 5);
+
+  &.completed {
+    color: color(green);
+    font-weight: 600;
+  }
+
+  &.current {
+    color: color(gray, 2);
+    font-weight: 600;
+  }
+}

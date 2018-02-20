@@ -1,0 +1,94 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Smtp component: Smtp Details should render page correctly with an api key 1`] = `
+<React.Fragment>
+  <p>
+    Use the information below to configure your SMTP client to relay via SparkPost. We generated an API key for you to use as a password.
+  </p>
+  <LabelledValue
+    label="Host"
+    value="smtp.sparkmail.com"
+  />
+  <LabelledValue
+    label="Port"
+    value={587}
+  />
+  <LabelledValue
+    label="Alternative Port"
+    value="2525"
+  />
+  <LabelledValue
+    label="Authentication"
+    value="AUTH LOGIN"
+  />
+  <LabelledValue
+    label="Encryption"
+    value="STARTTLS"
+  />
+  <LabelledValue
+    label="Username"
+    value="SMTP_Injection"
+  />
+  <LabelledValue
+    label="Password"
+  >
+    <CopyField
+      helpText="For security, this key will never be displayed in full again. Make sure you copy it somewhere safe!"
+      hideCopy={false}
+      value="123456"
+    />
+  </LabelledValue>
+</React.Fragment>
+`;
+
+exports[`Smtp component: Smtp Details should render page correctly with defaults 1`] = `
+<React.Fragment>
+  <p>
+    Use the information below to configure your SMTP client to relay via SparkPost. You need an API key to use as a password when filling out the information.
+  </p>
+  <LabelledValue
+    label="Host"
+    value="smtp.sparkmail.com"
+  />
+  <LabelledValue
+    label="Port"
+    value={587}
+  />
+  <LabelledValue
+    label="Alternative Port"
+    value="2525"
+  />
+  <LabelledValue
+    label="Authentication"
+    value="AUTH LOGIN"
+  />
+  <LabelledValue
+    label="Encryption"
+    value="STARTTLS"
+  />
+  <LabelledValue
+    label="Username"
+    value="SMTP_Injection"
+  />
+  <LabelledValue
+    label="Password"
+  >
+    <p>
+      The password is an API key with 
+      <strong>
+        Send via SMTP
+      </strong>
+      <em>
+        (smtp/inject)
+      </em>
+       permisions.  
+      <UnstyledLink
+        Component={[Function]}
+        to="/account/api-keys"
+      >
+        Manage API Keys
+      </UnstyledLink>
+    </p>
+  </LabelledValue>
+</React.Fragment>
+`;
