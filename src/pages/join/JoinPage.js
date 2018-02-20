@@ -128,7 +128,7 @@ export class JoinPage extends Component {
 
           <JoinForm onSubmit={this.registerSubmit} />
         </Panel>
-        Already have an account? <Link to={'/auth'}>Log In</Link>.
+        <small>Already have an account? <Link to={'/auth'}>Log In</Link>.</small>
       </div>
     );
   }

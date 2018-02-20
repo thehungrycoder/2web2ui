@@ -7,7 +7,7 @@ import config from 'src/config';
 import { LINKS } from 'src/constants';
 import { TextFieldWrapper, CheckboxWrapper } from 'src/components/reduxFormWrappers';
 import { Button, UnstyledLink, Grid } from '@sparkpost/matchbox';
-import { required, minLength, email } from 'src/helpers/validation';
+import { required, minLength, email, endsWithWhitespace } from 'src/helpers/validation';
 import styles from './JoinForm.module.scss';
 const { recaptcha } = config;
 
@@ -56,6 +56,7 @@ export class JoinForm extends Component {
               label='First Name'
               validate={required}
               disabled={!reCaptchaReady || loading}
+              placeholder='Leslie'
             />
           </Grid.Column>
           <Grid.Column xs={12} md={6} lg={6}>
@@ -65,6 +66,7 @@ export class JoinForm extends Component {
               label='Last Name'
               validate={required}
               disabled={!reCaptchaReady || loading}
+              placeholder='Knope'
             />
           </Grid.Column>
         </Grid>
@@ -75,15 +77,17 @@ export class JoinForm extends Component {
           validate={[required, email]}
           disabled={!reCaptchaReady || loading}
           autoComplete='username email'
+          placeholder='leslie.knope@pawnee.indiana.state.us.gov'
         />
         <Field
           name='password'
           component={TextFieldWrapper}
           label='Password'
-          validate={[required, minLength(8)]}
+          validate={[required, minLength(8), endsWithWhitespace]}
           disabled={!reCaptchaReady || loading}
           type='password'
           autoComplete='new-password'
+          placeholder='••••••••••'
         />
 
         <Field

@@ -13,6 +13,7 @@ exports[`JoinForm render disables form when loading 1`] = `
         disabled={true}
         label="First Name"
         name="first_name"
+        placeholder="Leslie"
         validate={[Function]}
       />
     </Grid.Column>
@@ -26,6 +27,7 @@ exports[`JoinForm render disables form when loading 1`] = `
         disabled={true}
         label="Last Name"
         name="last_name"
+        placeholder="Knope"
         validate={[Function]}
       />
     </Grid.Column>
@@ -36,6 +38,7 @@ exports[`JoinForm render disables form when loading 1`] = `
     disabled={true}
     label="Email"
     name="email"
+    placeholder="leslie.knope@pawnee.indiana.state.us.gov"
     validate={
       Array [
         [Function],
@@ -49,9 +52,11 @@ exports[`JoinForm render disables form when loading 1`] = `
     disabled={true}
     label="Password"
     name="password"
+    placeholder="••••••••••"
     type="password"
     validate={
       Array [
+        [Function],
         [Function],
         [Function],
       ]
@@ -116,6 +121,7 @@ exports[`JoinForm render disables form when recaptcha is not loaded 1`] = `
         disabled={true}
         label="First Name"
         name="first_name"
+        placeholder="Leslie"
         validate={[Function]}
       />
     </Grid.Column>
@@ -129,6 +135,7 @@ exports[`JoinForm render disables form when recaptcha is not loaded 1`] = `
         disabled={true}
         label="Last Name"
         name="last_name"
+        placeholder="Knope"
         validate={[Function]}
       />
     </Grid.Column>
@@ -139,6 +146,7 @@ exports[`JoinForm render disables form when recaptcha is not loaded 1`] = `
     disabled={true}
     label="Email"
     name="email"
+    placeholder="leslie.knope@pawnee.indiana.state.us.gov"
     validate={
       Array [
         [Function],
@@ -152,9 +160,11 @@ exports[`JoinForm render disables form when recaptcha is not loaded 1`] = `
     disabled={true}
     label="Password"
     name="password"
+    placeholder="••••••••••"
     type="password"
     validate={
       Array [
+        [Function],
         [Function],
         [Function],
       ]
@@ -219,6 +229,7 @@ exports[`JoinForm render enables form correctly 1`] = `
         disabled={false}
         label="First Name"
         name="first_name"
+        placeholder="Leslie"
         validate={[Function]}
       />
     </Grid.Column>
@@ -232,6 +243,7 @@ exports[`JoinForm render enables form correctly 1`] = `
         disabled={false}
         label="Last Name"
         name="last_name"
+        placeholder="Knope"
         validate={[Function]}
       />
     </Grid.Column>
@@ -242,6 +254,7 @@ exports[`JoinForm render enables form correctly 1`] = `
     disabled={false}
     label="Email"
     name="email"
+    placeholder="leslie.knope@pawnee.indiana.state.us.gov"
     validate={
       Array [
         [Function],
@@ -255,9 +268,11 @@ exports[`JoinForm render enables form correctly 1`] = `
     disabled={false}
     label="Password"
     name="password"
+    placeholder="••••••••••"
     type="password"
     validate={
       Array [
+        [Function],
         [Function],
         [Function],
       ]

@@ -52,14 +52,16 @@ exports[`AuthPage render renders correctly 1`] = `
       onSubmit={[Function]}
     />
   </Panel>
-  Already have an account? 
-  <Link
-    replace={false}
-    to="/auth"
-  >
-    Log In
-  </Link>
-  .
+  <small>
+    Already have an account? 
+    <Link
+      replace={false}
+      to="/auth"
+    >
+      Log In
+    </Link>
+    .
+  </small>
 </div>
 `;
 
@@ -78,13 +80,15 @@ exports[`AuthPage render renders errors 1`] = `
       onSubmit={[Function]}
     />
   </Panel>
-  Already have an account? 
-  <Link
-    replace={false}
-    to="/auth"
-  >
-    Log In
-  </Link>
-  .
+  <small>
+    Already have an account? 
+    <Link
+      replace={false}
+      to="/auth"
+    >
+      Log In
+    </Link>
+    .
+  </small>
 </div>
 `;
