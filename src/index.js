@@ -12,19 +12,12 @@ import './critical.scss';
 import './index.scss';
 import App from './App';
 
-const debug = () => (next) => (action) => {
-  // console.log(`=== ACTION: ${action.type} ===`); // eslint-disable-line no-console
-  // console.log(action); // eslint-disable-line no-console
-  next(action);
-};
-
 // necessary for redux devtools in development mode only
 const composeEnhancers = process.env.NODE_ENV !== 'production' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; // eslint-disable-line no-mixed-operators
 const store = createStore(
   rootReducer,
   composeEnhancers(
     applyMiddleware(thunk),
-    applyMiddleware(debug),
     applyMiddleware(ErrorTracker.middleware)
   )
 );

@@ -85,7 +85,7 @@ Object {
     "metrics": Array [
       "count-something",
     ],
-    "relativeRange": "day",
+    "relativeRange": "relative-range",
     "to": "relative-to",
   },
 }

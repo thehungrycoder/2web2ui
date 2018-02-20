@@ -38,15 +38,24 @@ describe('Date helpers', () => {
   cases('getRelativeDates calculations', ({ range, subtractArgs }) => {
     const date = moment(new Date('2017-12-17T12:00:00')).utc().toDate();
     Date.now = jest.fn(() => date);
-    const { from, to } = getRelativeDates(range);
+    const { from, to, relativeRange } = getRelativeDates(range);
     expect(to).toEqual(date);
     expect(from).toEqual(moment(date).subtract(...subtractArgs).toDate());
+    expect(relativeRange).toEqual(range);
   }, {
     'for an hour ago': { range: 'hour', subtractArgs: [1, 'hours']},
     'for a day ago': { range: 'day', subtractArgs: [1, 'days']},
     'for a week ago': { range: '7days', subtractArgs: [7, 'days']},
     'for a month': { range: '30days', subtractArgs: [30, 'days']},
     'for a quarter ago': { range: '90days', subtractArgs: [90, 'days']}
+  });
+
+  it('should return for a custom relative date range', () => {
+    expect(getRelativeDates('custom')).toEqual({ relativeRange: 'custom' });
+  });
+
+  it('should return an empty object for an unknown range', () => {
+    expect(getRelativeDates('einstein')).toEqual({});
   });
 
   it('should return an empty object when getting a relative range for an invalid range type', () => {

@@ -28,7 +28,8 @@ it('should parse search with relative range', () => {
 
   dateHelpers.getRelativeDates = jest.fn(() => ({
     from: 'relative-from',
-    to: 'relative-to'
+    to: 'relative-to',
+    relativeRange: 'relative-range'
   }));
 
   expect(reports.parseSearch(search)).toMatchSnapshot();
@@ -41,6 +42,10 @@ it('should parse search with custom range', () => {
   const metrics = 'metrics=count-something';
   const range = 'range=custom';
   const search = `?${filters}&${date}&${metrics}&${range}`;
+
+  dateHelpers.getRelativeDates = jest.fn(() => ({
+    relativeRange: 'custom'
+  }));
 
   expect(reports.parseSearch(search)).toMatchSnapshot();
   expect(dateHelpers.getRelativeDates).toHaveBeenCalledWith('custom');

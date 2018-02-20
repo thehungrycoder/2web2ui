@@ -14,6 +14,12 @@ export const ACCEPTED_METRICS = getMetricsFromKeys([
   'avg_msg_size'
 ]);
 
+export const DATE_FORMATS = {
+  READABLE_DATE_TIME: 'MMM D YYYY h:mma',
+  INPUT_DATE: 'YYYY-MM-DD',
+  INPUT_TIME: 'h:mma'
+};
+
 export const LINKS = {
   SP_HOME_PAGE: 'https://www.sparkpost.com',
   API_DOCS: 'https://developers.sparkpost.com/api',

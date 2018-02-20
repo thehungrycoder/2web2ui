@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChartGroup } from '../ChartGroup';
+import AcceptedChart from '../AcceptedChart';
 import { PieChart } from 'src/components';
 
 import { shallow } from 'enzyme';
@@ -20,7 +20,7 @@ describe('Accepted ChartGroup: ', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = shallow(<ChartGroup {...props} />);
+    wrapper = shallow(<AcceptedChart {...props} />);
   });
 
   it('should render', () => {

@@ -89,7 +89,7 @@ export function parseSearch(search) {
   }
 
   if (range) {
-    options = { ...options, ...getRelativeDates(range), relativeRange: range };
+    options = { ...options, ...getRelativeDates(range) };
   }
 
   // filters are used in pages to dispatch updates to Redux store

@@ -25,7 +25,6 @@ export const selectAcceptedAttempts = createSelector(
   }
 );
 
-// TODO: Share the "accepted metrics" as a constant somehow since it's not dynamic
 export const selectAcceptedAggregates = createSelector(
   [selectAggregates],
   (aggregates) => {
