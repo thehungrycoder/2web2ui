@@ -38,4 +38,15 @@ describe('Component ViewDetailsButton', () => {
     });
   });
 
+  describe('button', () => {
+    it('calls handleDetailClick upon click', () => {
+      const wrapper = shallow(<ViewDetailsButton {...props} />);
+      const instance = wrapper.instance();
+      instance.handleDetailClick = jest.fn();
+
+      wrapper.find('Button').simulate('click');
+      expect(instance.handleDetailClick).toHaveBeenLastCalledWith({ message_id: '123abc', event_id: '456xyz' });
+    });
+  });
+
 });
