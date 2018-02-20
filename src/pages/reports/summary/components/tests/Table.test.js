@@ -9,7 +9,7 @@ describe('Summary Table ', () => {
 
   const props = {
     addFilters: jest.fn(),
-    getTableData: jest.fn(),
+    _getTableData: jest.fn(),
     refresh: jest.fn(),
     metrics: [
       { key: 'metric_1' },
@@ -71,7 +71,7 @@ describe('Summary Table ', () => {
 
   it('should handle select change', () => {
     wrapper.find('Select').simulate('change', { target: { value: 'campaign' }});
-    expect(props.getTableData).toHaveBeenCalledWith({ groupBy: 'campaign' });
+    expect(props._getTableData).toHaveBeenCalledWith({ groupBy: 'campaign' });
   });
 
   it('should render with aggregate data', () => {
