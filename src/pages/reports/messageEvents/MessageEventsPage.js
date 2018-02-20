@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 
 import { snakeToFriendly } from 'src/helpers/string';
 import { Page, Banner, Button, Panel } from '@sparkpost/matchbox';
@@ -126,4 +125,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default withRouter(connect(mapStateToProps, { getMessageEvents })(MessageEventsPage));
+export default connect(mapStateToProps, { getMessageEvents })(MessageEventsPage);
