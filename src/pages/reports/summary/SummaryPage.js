@@ -7,7 +7,7 @@ import { Page, Panel } from '@sparkpost/matchbox';
 import { Loading } from 'src/components';
 import ReportOptions from '../components/ReportOptions';
 import { Table, MetricsModal, ChartGroup, ChartHeader } from './components';
-import { selectSummaryReportState, selectSelectedMetrics } from 'src/selectors/summaryReport';
+import { selectSelectedMetrics } from 'src/selectors/summaryReport';
 
 import styles from './SummaryPage.module.scss';
 
@@ -88,7 +88,7 @@ export class SummaryReportPage extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  chart: selectSummaryReportState(state),
+  chart: state.summaryChart,
   selectedMetrics: selectSelectedMetrics(state),
   reportOptions: state.reportOptions
 });
