@@ -25,6 +25,7 @@ export class SummaryPage extends Component {
   }
 
   componentDidMount() {
+    this.props.fetchAccount({ include: 'billing' });
     this.props.getPlans();
     this.props.getSendingIps();
   }
