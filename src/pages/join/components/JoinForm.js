@@ -6,7 +6,7 @@ import Recaptcha from 'react-recaptcha';
 import config from 'src/config';
 import { LINKS } from 'src/constants';
 import { TextFieldWrapper, CheckboxWrapper } from 'src/components/reduxFormWrappers';
-import { Button, UnstyledLink, Grid, Label } from '@sparkpost/matchbox';
+import { Button, UnstyledLink, Grid } from '@sparkpost/matchbox';
 import { required, minLength, email } from 'src/helpers/validation';
 import styles from '../JoinPage.module.scss';
 const { recaptcha } = config;
@@ -85,21 +85,16 @@ export class JoinForm extends Component {
           type='password'
           autoComplete='new-password'
         />
-        <div className={styles.inline}>
-          <Field
-            name="tou_accepted"
-            id='tou_accepted'
-            component={CheckboxWrapper}
-            type="checkbox"
-            disabled={!reCaptchaReady || loading}
-            validate={required}
-          />
-          <div className={styles.touLabel}>
-            <Label id='tou_accepted'>
-              I agree to SparkPost's <UnstyledLink to={LINKS.TOU} external>Terms of Use</UnstyledLink>
-            </Label>
-          </div>
-        </div>
+
+        <Field
+          name="tou_accepted"
+          id='tou_accepted'
+          component={CheckboxWrapper}
+          type="checkbox"
+          disabled={!reCaptchaReady || loading}
+          validate={required}
+          label={<span>I agree to SparkPost's <UnstyledLink to={LINKS.TOU} external>Terms of Use</UnstyledLink></span>}
+        />
 
         <Button primary
           disabled={loading || pristine || invalid || !reCaptchaReady }

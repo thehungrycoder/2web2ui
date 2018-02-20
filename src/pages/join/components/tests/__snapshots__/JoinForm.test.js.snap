@@ -57,19 +57,12 @@ exports[`JoinForm render disables form when loading 1`] = `
       ]
     }
   />
-  <div>
-    <Field
-      component={[Function]}
-      disabled={true}
-      id="tou_accepted"
-      name="tou_accepted"
-      type="checkbox"
-      validate={[Function]}
-    />
-    <div>
-      <Label
-        id="tou_accepted"
-      >
+  <Field
+    component={[Function]}
+    disabled={true}
+    id="tou_accepted"
+    label={
+      <span>
         I agree to SparkPost's 
         <UnstyledLink
           external={true}
@@ -77,9 +70,12 @@ exports[`JoinForm render disables form when loading 1`] = `
         >
           Terms of Use
         </UnstyledLink>
-      </Label>
-    </div>
-  </div>
+      </span>
+    }
+    name="tou_accepted"
+    type="checkbox"
+    validate={[Function]}
+  />
   <Button
     disabled={true}
     onClick={[Function]}
@@ -164,19 +160,12 @@ exports[`JoinForm render disables form when recaptcha is not loaded 1`] = `
       ]
     }
   />
-  <div>
-    <Field
-      component={[Function]}
-      disabled={true}
-      id="tou_accepted"
-      name="tou_accepted"
-      type="checkbox"
-      validate={[Function]}
-    />
-    <div>
-      <Label
-        id="tou_accepted"
-      >
+  <Field
+    component={[Function]}
+    disabled={true}
+    id="tou_accepted"
+    label={
+      <span>
         I agree to SparkPost's 
         <UnstyledLink
           external={true}
@@ -184,9 +173,12 @@ exports[`JoinForm render disables form when recaptcha is not loaded 1`] = `
         >
           Terms of Use
         </UnstyledLink>
-      </Label>
-    </div>
-  </div>
+      </span>
+    }
+    name="tou_accepted"
+    type="checkbox"
+    validate={[Function]}
+  />
   <Button
     disabled={true}
     onClick={[Function]}
@@ -271,19 +263,12 @@ exports[`JoinForm render enables form correctly 1`] = `
       ]
     }
   />
-  <div>
-    <Field
-      component={[Function]}
-      disabled={false}
-      id="tou_accepted"
-      name="tou_accepted"
-      type="checkbox"
-      validate={[Function]}
-    />
-    <div>
-      <Label
-        id="tou_accepted"
-      >
+  <Field
+    component={[Function]}
+    disabled={false}
+    id="tou_accepted"
+    label={
+      <span>
         I agree to SparkPost's 
         <UnstyledLink
           external={true}
@@ -291,9 +276,12 @@ exports[`JoinForm render enables form correctly 1`] = `
         >
           Terms of Use
         </UnstyledLink>
-      </Label>
-    </div>
-  </div>
+      </span>
+    }
+    name="tou_accepted"
+    type="checkbox"
+    validate={[Function]}
+  />
   <Button
     disabled={false}
     onClick={[Function]}
