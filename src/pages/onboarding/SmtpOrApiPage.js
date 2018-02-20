@@ -15,7 +15,7 @@ const SmtpOrApiPage = () => (
         <Grid>
           <Grid.Column xs={12} md={6}>
             <OptionTile
-              to='/super-hidden-route/email/smtp'
+              to='/onboarding/email/smtp'
               wrapper={Link}
               label='SMTP'
               content='Set up your own mail server to send through our SMTP relay service.'
@@ -23,7 +23,7 @@ const SmtpOrApiPage = () => (
           </Grid.Column>
           <Grid.Column xs={12} md={6}>
             <OptionTile
-              to='/super-hidden-route/email/api'
+              to='/onboarding/email/api'
               wrapper={Link}
               label='REST API'
               content='Use our powerful REST API to send email via simple HTTP requests'

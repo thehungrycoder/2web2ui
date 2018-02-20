@@ -46,7 +46,7 @@ exports[`SendingDomainPage should render correctly 1`] = `
           Add Domain
         </Button>
         <SkipLink
-          to="/super-hidden-route/email"
+          to="/onboarding/email"
         >
           Skip for now
         </SkipLink>
@@ -103,7 +103,7 @@ exports[`SendingDomainPage should render submitting state correctly 1`] = `
           Adding Domain...
         </Button>
         <SkipLink
-          to="/super-hidden-route/email"
+          to="/onboarding/email"
         >
           Skip for now
         </SkipLink>

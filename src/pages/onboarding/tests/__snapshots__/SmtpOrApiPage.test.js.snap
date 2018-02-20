@@ -19,7 +19,7 @@ exports[`SmtpOrApiPage should render 1`] = `
           <OptionTile
             content="Set up your own mail server to send through our SMTP relay service."
             label="SMTP"
-            to="/super-hidden-route/email/smtp"
+            to="/onboarding/email/smtp"
             wrapper={[Function]}
           />
         </Grid.Column>
@@ -30,7 +30,7 @@ exports[`SmtpOrApiPage should render 1`] = `
           <OptionTile
             content="Use our powerful REST API to send email via simple HTTP requests"
             label="REST API"
-            to="/super-hidden-route/email/api"
+            to="/onboarding/email/api"
             wrapper={[Function]}
           />
         </Grid.Column>

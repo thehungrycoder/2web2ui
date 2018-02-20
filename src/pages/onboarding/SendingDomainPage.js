@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { reduxForm, Field } from 'redux-form';
+import { reduxForm, Field, SubmissionError } from 'redux-form';
 import { create as createDomain } from 'src/actions/sendingDomains';
 import { showAlert } from 'src/actions/globalAlert';
 import { Panel, Button, UnstyledLink } from '@sparkpost/matchbox';
@@ -13,13 +13,24 @@ import { LINKS } from 'src/constants';
 
 export class SendingDomainPage extends Component {
   handleDomainCreate = (values) => {
-    const { createDomain, showAlert, history } = this.props;
+    const { createDomain, showAlert } = this.props;
 
-    return createDomain(values).then(() => {
-      history.push('/super-hidden-route/email');
-    }).catch((err) => {
+    return createDomain(values).catch((err) => {
       showAlert({ type: 'error', message: 'Could not add domain', details: err.message });
+
+      // Required to properly control 'submitFailed' & 'submitSucceeded'
+      throw new SubmissionError(err);
     });
+  }
+
+  componentDidUpdate(prevProps) {
+    const { submitSucceeded, history } = this.props;
+
+    // Redirect here instead of the createDomain promise
+    // to avoid redirects if component unmounts before the promise resolves
+    if (!prevProps.submitSucceeded && submitSucceeded) {
+      history.push('/onboarding/email');
+    }
   }
 
   render() {
@@ -44,7 +55,7 @@ export class SendingDomainPage extends Component {
             </Panel.Section>
             <Panel.Section>
               <Button primary submit disabled={submitting}>{submitting ? 'Adding Domain...' : 'Add Domain'}</Button>
-              <SkipLink to='/super-hidden-route/email'>Skip for now</SkipLink>
+              <SkipLink to='/onboarding/email'>Skip for now</SkipLink>
             </Panel.Section>
           </form>
           <Steps />

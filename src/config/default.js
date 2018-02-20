@@ -35,6 +35,7 @@ const config = {
     allow_anyone_at_verification: false
   },
   gaTag: 'no-default-set',
+  hasSignup: true,
   maxUploadSizeBytes: 20000000,
   metricsPrecisionMap: [
     { time: 60, value: '1min', format: 'ha' },

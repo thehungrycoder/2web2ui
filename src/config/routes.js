@@ -29,7 +29,7 @@ import {
   composeConditions
 } from 'src/helpers/conditions';
 import { notEnterprise } from 'src/helpers/conditions/account';
-import { configEquals } from 'src/helpers/conditions/config';
+import { configFlag, configEquals } from 'src/helpers/conditions/config';
 import App from 'src/components/layout/App';
 
 import { DEFAULT_REDIRECT_ROUTE } from 'src/constants';
@@ -376,20 +376,24 @@ const routes = [
     layout: App
   },
   {
-    path: '/super-hidden-route/sending-domain',
-    component: onboarding.SendingDomainPage
+    path: '/onboarding/sending-domain',
+    component: onboarding.SendingDomainPage,
+    condition: configFlag('hasSignup')
   },
   {
-    path: '/super-hidden-route/email',
-    component: onboarding.SmtpOrApiPage
+    path: '/onboarding/email',
+    component: onboarding.SmtpOrApiPage,
+    condition: configFlag('hasSignup')
   },
   {
-    path: '/super-hidden-route/email/smtp',
-    component: onboarding.SmtpPage
+    path: '/onboarding/email/smtp',
+    component: onboarding.SmtpPage,
+    condition: configFlag('hasSignup')
   },
   {
-    path: '/super-hidden-route/email/api',
-    component: onboarding.ApiPage
+    path: '/onboarding/email/api',
+    component: onboarding.ApiPage,
+    condition: configFlag('hasSignup')
   }
 ];
 
