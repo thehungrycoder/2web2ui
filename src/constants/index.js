@@ -18,5 +18,6 @@ export const LINKS = {
   DAILY_USAGE: 'https://www.sparkpost.com/docs/getting-started/what-counts-daily-monthly-usage',
   LEARN_MORE_TFA: 'https://www.sparkpost.com/docs/my-account-and-profile/enabling-two-factor-authentication',
   ONBOARDING_SENDING: 'https://www.sparkpost.com/docs/getting-started/getting-started-sparkpost/#preparing-your-from-address',
-  SUBMIT_SUPPORT_TICKET: 'https://support.sparkpost.com/customer/portal/emails/new'
+  SUBMIT_SUPPORT_TICKET: 'https://support.sparkpost.com/customer/portal/emails/new',
+  RECAPTCHA_LIB_URL: 'https://www.google.com/recaptcha/api.js'
 };
