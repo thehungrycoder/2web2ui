@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-
 import { list as listDomains } from 'src/actions/sendingDomains';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
 import { hasUnverifiedDomains } from 'src/selectors/sendingDomains';
 import { Loading, TableCollection, SubaccountTag, DomainStatusCell, StatusTooltipHeader, ApiErrorBanner } from 'src/components';
 import { Page, UnstyledLink } from '@sparkpost/matchbox';
 import UnverifiedWarningBanner from './components/UnverifiedWarningBanner';
+import VerifyIncomingEmail from './components/VerifyIncomingEmail';
 import { LINKS } from 'src/constants';
 
 export class ListPage extends Component {
@@ -105,6 +105,7 @@ export class ListPage extends Component {
             external: true
           }
         }}>
+        <VerifyIncomingEmail />
         {hasUnverifiedDomains && <UnverifiedWarningBanner />}
         {listError ? this.renderError() : this.renderCollection()}
       </Page>
