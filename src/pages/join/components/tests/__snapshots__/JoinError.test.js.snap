@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`JoinError it returns generic error on all other cases 1`] = `
+<span>
+  Something went wrong. Please try again in a few minutes or 
+  <UnstyledLink
+    to="https://support.sparkpost.com/customer/portal/emails/new"
+  >
+    contact support
+  </UnstyledLink>
+</span>
+`;
+
+exports[`JoinError render:  aws account exists 1`] = `"<span>It looks like you've already created a SparkPost account through the AWS Marketplace. There may be a brief delay for your AWS account info to synchronize. Please wait a few minutes and then sign in.</span>"`;
+
+exports[`JoinError render:  captcha error 1`] = `"<span>There was an error with your reCAPTCHA response, please try again.</span>"`;
+
+exports[`JoinError render:  duplicate email 1`] = `
+<span>
+  It looks like you already have a SparkPost account using 
+  foo@bar.com
+  . 
+  <UnstyledLink
+    to="/auth"
+  >
+    Sign in
+  </UnstyledLink>
+</span>
+`;
+
+exports[`JoinError render:  invalid email (400) 1`] = `"<span>Email address is not valid.</span>"`;
+
+exports[`JoinError render:  invalid email (403) 1`] = `"<span>Email address is not valid.</span>"`;
+
+exports[`JoinError render:  manual review required (siftscience) 1`] = `
+<span>
+  Your account requires manual review. To proceed with sign up, please 
+  <UnstyledLink
+    to="https://support.sparkpost.com/customer/portal/emails/new?interaction%5Bname%5D=foo%20bar&interaction%5Bemail%5D=foo@bar.com&email%5Bsubject%5D=Account%20requires%20manual%20review"
+  >
+    contact support
+  </UnstyledLink>
+  .
+</span>
+`;
+
+exports[`JoinError render:  no status 1`] = `
+<span>
+  Something went wrong. Please try again in a few minutes or 
+  <UnstyledLink
+    to="https://support.sparkpost.com/customer/portal/emails/new"
+  >
+    contact support
+  </UnstyledLink>
+</span>
+`;
+
+exports[`JoinError render:  service not available in location 1`] = `"<span>SparkPost is not currently available in your location.</span>"`;
