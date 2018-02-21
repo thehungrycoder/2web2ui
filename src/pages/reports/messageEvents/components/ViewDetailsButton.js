@@ -20,7 +20,7 @@ export class ViewDetailsButton extends Component {
       return null;
     }
 
-    return (<div className={styles.Center}>
+    return (<div className={styles.AlignRight}>
       <Button onClick={this.handleDetailClick} size='small'>View Details</Button>
     </div>);
   }
