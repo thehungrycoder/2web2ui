@@ -6,26 +6,15 @@ import { verifyMailboxToken, verifyAbuseToken, verifyPostmasterToken } from 'src
 import { showAlert } from 'src/actions/globalAlert';
 import _ from 'lodash';
 
-// subaccount_id | domain | shared_with_subaccounts | mailbox_at_token | pm_at_token | abuse_at_token
-// -------------+---------------+--------------------------------------+-------------------------+----------------------------------+----------------------------------+----------------------------------
-//DONE    0 |6164-1.com |0 | ahiugqwjdhvhvhlbhipfjbkugwhbtxyu |                             null |                             null
-// DONE  0 |6164-2.com |0 |                             null | utgdhmdhefnumpulcscvteimrrhyccnw |                             null
-//   0 |6164-3.com |0 |                             null |                             null | dntsnrngnqwfnszngkqnlsekgqedoxor
-//   0 |6164-4.com |1 | tacgdkkjxfwnahptjlmotyglgfniskem |                             null |                             null
-//   0 |6164-5.com |1 | kijxzxdmoasbtrozbfmnyryehcivawnk |                             null |                             null
-// DONE 101 |6164-6.com |0 |                             null | fwieumrjnjkgazgbfspdjnirqqmqnzbs |                             null
-// 101 |6164-7.com |0 | wjwrwnajwlpwkvypootycbpsrcifcjxz |                             null |                             null
-//
-class VerifyIncomingEmail extends Component {
-  // This component mounts within the ListPage's Page components
-  // Which means domains have already been loaded
+export class VerifyIncomingEmail extends Component {
+  // This component mounts within the ListPage's Page component
+  // Which means domains have already been loaded by the time this mounts
   componentDidMount() {
-    this.verifyDomain();
+    this.verifyDomain(qs.parse(this.props.location.search));
   }
 
-  verifyDomain = () => {
-    const { domains, location, verifyMailboxToken, verifyAbuseToken, verifyPostmasterToken } = this.props;
-    const { mailbox, domain, token } = qs.parse(location.search);
+  verifyDomain({ mailbox, domain, token }) {
+    const { domains, verifyMailboxToken, verifyAbuseToken, verifyPostmasterToken, showAlert } = this.props;
 
     // Find the domain to inject subaccount
     const sendingDomain = _.find(domains, { domain });
@@ -52,6 +41,7 @@ class VerifyIncomingEmail extends Component {
     const { tokenStatus, showAlert } = this.props;
 
     // Api returns a 200 even if domain has not been verified
+    // Manually check if this domain has been verified
     if (!prevProps.tokenStatus && tokenStatus) {
       if (tokenStatus[`${tokenStatus.type}_status`] !== 'valid') {
         showAlert({ type: 'error', message: `Unable to verify ${tokenStatus.domain}` });

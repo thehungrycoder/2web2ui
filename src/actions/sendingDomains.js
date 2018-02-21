@@ -76,6 +76,10 @@ function verify({ id, subaccount, type, ...rest }) {
   });
 }
 
+export function verifyAbuse({ id, subaccount }) {
+  return verify({ id, subaccount, type: 'abuse_at' });
+}
+
 export function verifyCname({ id, subaccount }) {
   return verify({ id, subaccount, type: 'cname' });
 }
@@ -90,10 +94,6 @@ export function verifyMailbox({ id, mailbox: verification_mailbox, subaccount })
 
 export function verifyPostmaster({ id, subaccount }) {
   return verify({ id, subaccount, type: 'postmaster_at' });
-}
-
-export function verifyAbuse({ id, subaccount }) {
-  return verify({ id, subaccount, type: 'abuse_at' });
 }
 
 function verifyToken({ id, subaccount, type, token }) {

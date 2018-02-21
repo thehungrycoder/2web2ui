@@ -45,6 +45,7 @@ exports[`Sending Domains List Page renders correctly 1`] = `
   }
   title="Sending Domains"
 >
+  <withRouter(Connect(VerifyIncomingEmail)) />
   <UnverifiedWarningBanner />
   <TableCollection
     columns={
@@ -132,6 +133,7 @@ exports[`Sending Domains List Page renders error banner correctly 1`] = `
   }
   title="Sending Domains"
 >
+  <withRouter(Connect(VerifyIncomingEmail)) />
   <UnverifiedWarningBanner />
   <ApiErrorBanner
     errorDetails="error"
