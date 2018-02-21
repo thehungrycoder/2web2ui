@@ -21,12 +21,11 @@ exports[`JoinPage render renders correctly 1`] = `
   </Panel>
   <small>
     Already have an account? 
-    <Link
-      replace={false}
+    <UnstyledLink
       to="/auth"
     >
       Log In
-    </Link>
+    </UnstyledLink>
     .
   </small>
 </div>
@@ -61,12 +60,11 @@ exports[`JoinPage render renders errors 1`] = `
   </Panel>
   <small>
     Already have an account? 
-    <Link
-      replace={false}
+    <UnstyledLink
       to="/auth"
     >
       Log In
-    </Link>
+    </UnstyledLink>
     .
   </small>
 </div>

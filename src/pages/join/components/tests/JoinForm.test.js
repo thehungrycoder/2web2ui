@@ -1,5 +1,3 @@
-/* eslint max-lines: ["error", 200] */
-
 import { shallow } from 'enzyme';
 import React from 'react';
 import { JoinForm } from '../JoinForm';

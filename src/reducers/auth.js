@@ -16,6 +16,7 @@ export default (state = initialState, action) => {
 
       return {
         ...state,
+        loginPending: false,
         token,
         username,
         refreshToken,

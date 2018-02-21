@@ -4,10 +4,9 @@ import { withRouter } from 'react-router-dom';
 import qs from 'query-string';
 import cookie from 'js-cookie';
 import _ from 'lodash';
-import { Link } from 'react-router-dom';
 
 import { CenteredLogo } from 'src/components';
-import { Panel, Error } from '@sparkpost/matchbox';
+import { Panel, Error, UnstyledLink } from '@sparkpost/matchbox';
 import JoinForm from './components/JoinForm';
 import JoinError from './components/JoinError';
 import config from 'src/config';
@@ -77,7 +76,7 @@ export class JoinPage extends Component {
 
           <JoinForm onSubmit={this.registerSubmit} />
         </Panel>
-        <small>Already have an account? <Link to={'/auth'}>Log In</Link>.</small>
+        <small>Already have an account? <UnstyledLink to={'/auth'}>Log In</UnstyledLink>.</small>
       </div>
     );
   }

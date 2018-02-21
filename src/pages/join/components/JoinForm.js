@@ -11,6 +11,23 @@ import { required, minLength, email, endsWithWhitespace } from 'src/helpers/vali
 import styles from './JoinForm.module.scss';
 const { recaptcha } = config;
 
+/** Recaptcha flow
+ *
+ * UX:
+ * Disable form until recaptcha is ready
+ * Challenge with recaptcha when Create Account button is clicked
+ * Submits form data to api upon successful completetion of recaptcha challenge
+
+
+ * Code
+ * Recaptcha script is loaded in JoinPage
+ * When script is loaded, Recaptcha component will initialize it and bind to different callbacks
+ * ref: reference to recaptcha instance
+ * onloadCallback: it's triggered upon Recaptcha's dependencies (global) is completely loaded. we enable form at that point
+ * executeRecaptcha: this is triggered, when user clicks Create Account button. captcha challenge is presented to user and submitted to Google for validation
+ * verifyCallback: this is triggered upon user completes recaptcha challenge successfuly. we pass the data we've received
+ */
+
 export class JoinForm extends Component {
   state = {
     reCaptchaReady: false,
@@ -125,7 +142,7 @@ const mapStateToProps = (state, props) => ({
   initialValues: {
     tou_accepted: false
   },
-  loading: state.account.createLoading,
+  loading: state.account.createLoading || state.auth.loginPending,
   formValues: getFormValues(formName)(state)
 });
 
