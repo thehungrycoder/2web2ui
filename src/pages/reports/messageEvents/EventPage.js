@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { getMessageHistory, getDocumentation } from 'src/actions/messageEvents';
 import { selectMessageHistory, selectInitialEventId } from 'src/selectors/messageEvents';
@@ -85,4 +85,4 @@ const mapStateToProps = (state, props) => ({
   selectedEventId: selectInitialEventId(state, props)
 });
 
-export default withRouter(connect(mapStateToProps, { getMessageHistory, getDocumentation })(EventPage));
+export default connect(mapStateToProps, { getMessageHistory, getDocumentation })(EventPage);
