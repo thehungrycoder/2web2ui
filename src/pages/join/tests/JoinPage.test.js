@@ -1,11 +1,9 @@
-/* eslint max-lines: ["error", 200] */
-
 import { shallow } from 'enzyme';
 import React from 'react';
-import cases from 'jest-in-case';
 import cookie from 'js-cookie';
 import { JoinPage } from '../JoinPage';
 import { DEFAULT_REDIRECT_ROUTE } from 'src/constants';
+import * as googleAnalytics from 'src/helpers/googleAnalytics';
 
 let props;
 let instance;
@@ -28,7 +26,9 @@ jest.mock('src/config', () => ({
   }
 }));
 
-describe('AuthPage', () => {
+jest.mock('src/helpers/googleAnalytics');
+
+describe('JoinPage', () => {
   beforeEach(() => {
     props = {
       account: {
@@ -48,6 +48,9 @@ describe('AuthPage', () => {
       tou_accepted: true,
       password: 'foobar'
     };
+
+
+    googleAnalytics.addEvent = jest.fn();
 
     wrapper = shallow(<JoinPage {...props} />);
     instance = wrapper.instance();
@@ -93,7 +96,7 @@ describe('AuthPage', () => {
     it('tracks signup after successful registration', async() => {
       await instance.registerSubmit(formValues);
       expect(props.register).toHaveBeenCalledTimes(1);
-      expect(instance.trackSignup).toHaveBeenCalledTimes(1);
+      expect(googleAnalytics.addEvent).toHaveBeenCalledTimes(1);
     });
 
     it('redirects to correct url upon auth', async() => {
@@ -109,12 +112,6 @@ describe('AuthPage', () => {
     });
   });
 
-  describe('createSupportLink', () => {
-    it('creates support link correctly', () => {
-      wrapper.setState({ formData: formValues });
-      expect(instance.createSupportLink()).toMatchSnapshot();
-    });
-  });
 
   describe('getAndSetAttributionData', () => {
     beforeEach(() => {
@@ -133,66 +130,4 @@ describe('AuthPage', () => {
       expect(cookie.set).toHaveBeenCalledTimes(1);
     });
   });
-
-  describe('handleSignupFailure', () => {
-    //TODO verify "error" with real like error messages
-
-    beforeEach(() => {
-      wrapper.setState({
-        formData: {
-          first_name: 'foo',
-          last_name: 'bar',
-          email: 'foo@bar.com'
-        }
-      });
-    });
-
-    const testCases = [
-      { name: 'captcha error', message: 'must provide recaptcha error', status: 400, expected: 'There was an error with your reCAPTCHA response, please try again.' },
-      { name: 'invalid email (400)', message: 'invalid email', status: 400, expected: 'Email address is not valid.' },
-      { name: 'invalid email (403)', message: 'invalid email', status: 403, expected: 'Email address is not valid.' },
-      { name: 'aws account exists', message: 'AWS Account already exists', status: 409, expected: 'It looks like you\'ve already created a SparkPost account through the AWS Marketplace. There may be a brief delay for your AWS account info to synchronize. Please wait a few minutes and then sign in.' },
-      { name: 'duplicate email', message: 'A user with that email address already exists', status: 409 },
-      { name: 'manual review required (siftscience)', message: 'Sign up blocked', status: 403 },
-      { name: 'service not available in location', message: 'forbidden', status: 403, expected: 'SparkPost is not currently available in your location.' },
-      { name: 'no status', message: 'some error', status: null }
-    ];
-
-    cases('handleSignupFailure: ', (opts) => {
-      const response = {
-        response: {
-          status: opts.status,
-          data: {
-            errors: [{ message: opts.message }]
-          }
-        }
-      };
-
-      if (opts.expected) {
-        expect(instance.handleSignupFailure(response)).toBe(opts.expected);
-      } else {
-        expect(instance.handleSignupFailure(response)).toMatchSnapshot();
-      }
-    }, testCases);
-
-    it('it returns generic error on all other cases', () => {
-      expect(instance.handleSignupFailure({})).toMatchSnapshot();
-    });
-  });
-
-  describe('trackSignup', () => {
-    beforeEach(() => {
-      window.gtag = jest.fn();
-    });
-
-    it('calls gTag with correct params', () => {
-      instance.trackSignup();
-      expect(window.gtag).toHaveBeenCalledWith('config', 'ga101', {
-        event_category: 'Completed form',
-        event_action: 'create account',
-        data: { form_type: 'create account' }
-      });
-    });
-  });
-
 });

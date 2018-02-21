@@ -1,47 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AuthPage createSupportLink creates support link correctly 1`] = `"https://support.sparkpost.com/customer/portal/emails/new?interaction%5Bname%5D=foo%20bar&interaction%5Bemail%5D=foo@bar.com&email%5Bsubject%5D=Account%20requires%20manual%20review"`;
-
-exports[`AuthPage handleSignupFailure handleSignupFailure:  duplicate email 1`] = `
-<span>
-  It looks like you already have a SparkPost account with 
-  foo@bar.com
-  . 
-  <UnstyledLink
-    to="/auth"
-  >
-    Sign in
-  </UnstyledLink>
-</span>
-`;
-
-exports[`AuthPage handleSignupFailure handleSignupFailure:  manual review required (siftscience) 1`] = `
-<span>
-  Your account requires manual review. To proceed with sign up, please 
-  <UnstyledLink
-    to="https://support.sparkpost.com/customer/portal/emails/new?interaction%5Bname%5D=foo%20bar&interaction%5Bemail%5D=foo@bar.com&email%5Bsubject%5D=Account%20requires%20manual%20review"
-  >
-    contact support
-  </UnstyledLink>
-  .
-</span>
-`;
-
-exports[`AuthPage handleSignupFailure handleSignupFailure:  no status 1`] = `"some error"`;
-
-exports[`AuthPage handleSignupFailure it returns generic error on all other cases 1`] = `
-<span>
-  Something went wrong. Please try again in a few minutes or 
-  <UnstyledLink
-    to="https://support.sparkpost.com/customer/portal/emails/new"
-  >
-    contact support
-  </UnstyledLink>
-</span>
-`;
-
-exports[`AuthPage render renders correctly 1`] = `
+exports[`JoinPage render renders correctly 1`] = `
 <div>
+  <Script
+    attributes={Object {}}
+    onCreate={[Function]}
+    onError={[Function]}
+    onLoad={[Function]}
+    url="https://www.google.com/recaptcha/api.js"
+  />
   <CenteredLogo />
   <Panel
     accent={true}
@@ -65,8 +32,15 @@ exports[`AuthPage render renders correctly 1`] = `
 </div>
 `;
 
-exports[`AuthPage render renders errors 1`] = `
+exports[`JoinPage render renders errors 1`] = `
 <div>
+  <Script
+    attributes={Object {}}
+    onCreate={[Function]}
+    onError={[Function]}
+    onLoad={[Function]}
+    url="https://www.google.com/recaptcha/api.js"
+  />
   <CenteredLogo />
   <Panel
     accent={true}
@@ -74,7 +48,12 @@ exports[`AuthPage render renders errors 1`] = `
     title="Log In"
   >
     <Error
-      error="Some error occurred"
+      error={
+        <JoinError
+          data={Object {}}
+          errors={Object {}}
+        />
+      }
     />
     <Connect(ReduxForm)
       onSubmit={[Function]}
