@@ -98,7 +98,7 @@ const routes = [
     path: '/join',
     public: true,
     component: JoinPage,
-    condition: configEquals('featureFlags.has_signup', true)
+    condition: configFlag('featureFlags.has_signup')
   },
 
   /**

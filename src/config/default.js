@@ -106,8 +106,7 @@ const config = {
   attribution: {
     cookieName: 'attribution',
     cookieDuration: 60 * 24 * 30,
-    // cookieDomain: '.sparkpost.com' //TODO change it before merge
-    cookieDomain: 'localhost'
+    cookieDomain: '.sparkpost.com'
   },
   salesforceDataParams: ['sfdcid', 'src', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term']
 };
