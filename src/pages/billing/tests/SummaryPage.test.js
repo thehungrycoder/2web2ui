@@ -11,6 +11,7 @@ describe('Page: SummaryPage', () => {
     },
     billing: {},
     dedicatedIpPrice: jest.fn(() => ''),
+    fetchAccount: jest.fn(),
     getPlans: jest.fn(),
     getBillingCountries: jest.fn(),
     getSendingIps: jest.fn(),
@@ -25,6 +26,13 @@ describe('Page: SummaryPage', () => {
 
   beforeEach(() => {
     wrapper = shallow(<SummaryPage {...props} />);
+  });
+
+  it('gets account billing details on mount', () => {
+    wrapper.instance().componentDidMount();
+    expect(props.fetchAccount).toBeCalledWith(expect.objectContaining({
+      include: expect.stringContaining('billing')
+    }));
   });
 
   it('gets plans on mount', () => {
