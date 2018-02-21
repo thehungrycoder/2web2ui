@@ -16,7 +16,7 @@ import { authenticate } from 'src/actions/auth';
 import { loadScript } from 'src/helpers/loadScript';
 import { addEvent } from 'src/helpers/googleAnalytics';
 import { register } from 'src/actions/account';
-import { DEFAULT_REDIRECT_ROUTE, LINKS } from 'src/constants';
+import { AFTER_JOIN_REDIRECT_ROUTE, LINKS } from 'src/constants';
 const { attribution, salesforceDataParams } = config;
 
 export class JoinPage extends Component {
@@ -60,7 +60,7 @@ export class JoinPage extends Component {
         addEvent('Completed form', 'create account', { form_type: 'create account' });
         return authenticate(accountData.username, values.password);
       })
-      .then(() => this.props.history.push(DEFAULT_REDIRECT_ROUTE));
+      .then(() => this.props.history.push(AFTER_JOIN_REDIRECT_ROUTE));
     //.catch((e) => {});
   };
 

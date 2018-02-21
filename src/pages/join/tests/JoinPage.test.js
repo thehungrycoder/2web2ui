@@ -2,7 +2,7 @@ import { shallow } from 'enzyme';
 import React from 'react';
 import cookie from 'js-cookie';
 import { JoinPage } from '../JoinPage';
-import { DEFAULT_REDIRECT_ROUTE } from 'src/constants';
+import { AFTER_JOIN_REDIRECT_ROUTE } from 'src/constants';
 import * as googleAnalytics from 'src/helpers/googleAnalytics';
 
 let props;
@@ -101,7 +101,7 @@ describe('JoinPage', () => {
 
     it('redirects to correct url upon auth', async() => {
       await instance.registerSubmit(formValues);
-      expect(props.history.push).toHaveBeenCalledWith(DEFAULT_REDIRECT_ROUTE);
+      expect(props.history.push).toHaveBeenCalledWith(AFTER_JOIN_REDIRECT_ROUTE);
     });
 
     it('does not swallow exceptions', async() => {
