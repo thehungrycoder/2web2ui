@@ -60,7 +60,6 @@ export class JoinPage extends Component {
         return authenticate(accountData.username, values.password);
       })
       .then(() => this.props.history.push(AFTER_JOIN_REDIRECT_ROUTE));
-    //.catch((e) => {});
   };
 
   render() {
@@ -71,7 +70,7 @@ export class JoinPage extends Component {
         {loadScript({ url: LINKS.RECAPTCHA_LIB_URL })}
         <CenteredLogo />
 
-        <Panel sectioned accent title="Log In">
+        <Panel sectioned accent title="Sign Up">
           { createError && <Error error={<JoinError errors={createError} data={formData} />} /> }
 
           <JoinForm onSubmit={this.registerSubmit} />

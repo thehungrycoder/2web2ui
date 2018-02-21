@@ -13,7 +13,7 @@ exports[`JoinPage render renders correctly 1`] = `
   <Panel
     accent={true}
     sectioned={true}
-    title="Log In"
+    title="Sign Up"
   >
     <Connect(ReduxForm)
       onSubmit={[Function]}
@@ -44,7 +44,7 @@ exports[`JoinPage render renders errors 1`] = `
   <Panel
     accent={true}
     sectioned={true}
-    title="Log In"
+    title="Sign Up"
   >
     <Error
       error={
