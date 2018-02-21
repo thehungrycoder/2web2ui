@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import { Button } from '@sparkpost/matchbox';
-
+import styles from './ViewDetailsButton.module.scss';
 
 export class ViewDetailsButton extends Component {
-  handleDetailClick = ({ message_id, event_id }) => {
-    const { history } = this.props;
+  handleDetailClick = () => {
+    const { history, message_id, event_id } = this.props;
     history.push({
       pathname: `/reports/message-events/details/${message_id}`,
       state: { selectedEventId: event_id }
@@ -15,16 +14,16 @@ export class ViewDetailsButton extends Component {
   };
 
   render() {
-    const { message_id, event_id } = this.props;
+    const { message_id } = this.props;
 
     if (!message_id) {
       return null;
     }
 
-    return (<div style={{ textAlign: 'right' }}>
-      <Button onClick={() => this.handleDetailClick({ message_id, event_id })} size='small'>View Details</Button>
+    return (<div className={styles.Center}>
+      <Button onClick={this.handleDetailClick} size='small'>View Details</Button>
     </div>);
   }
 }
 
-export default withRouter(connect()(ViewDetailsButton));
+export default withRouter(ViewDetailsButton);

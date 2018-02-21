@@ -9,7 +9,7 @@ Array [
   "Injection",
   "tom.haverford@pawnee.state.in.us",
   "mean@friendly",
-  <withRouter(Connect(ViewDetailsButton))
+  <withRouter(ViewDetailsButton)
     event_id="456xyz"
     formattedDate="formatted"
     friendly_from="mean@friendly"

@@ -1,13 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Component ViewDetailsButton renders correctly 1`] = `
-<div
-  style={
-    Object {
-      "textAlign": "right",
-    }
-  }
->
+<div>
   <Button
     onClick={[Function]}
     size="small"
@@ -17,4 +11,4 @@ exports[`Component ViewDetailsButton renders correctly 1`] = `
 </div>
 `;
 
-exports[`Component ViewDetailsButton renders nothing if message_id is abset 1`] = `""`;
+exports[`Component ViewDetailsButton renders nothing if message_id is absent 1`] = `""`;

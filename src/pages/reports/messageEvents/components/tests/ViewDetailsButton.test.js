@@ -24,28 +24,27 @@ describe('Component ViewDetailsButton', () => {
     expect(shallow(<ViewDetailsButton {...props} />)).toMatchSnapshot();
   });
 
-  it('renders nothing if message_id is abset', () => {
+  it('renders nothing if message_id is absent', () => {
     delete props.message_id;
     expect(shallow(<ViewDetailsButton {...props} />)).toMatchSnapshot();
   });
 
-  it('should handle view details click', () => {
-    const wrapper = shallow(<ViewDetailsButton {...props} />);
-    wrapper.instance().handleDetailClick({ message_id: 'message', event_id: 'event' });
-    expect(props.history.push).toHaveBeenCalledWith({
-      pathname: '/reports/message-events/details/message',
-      state: { selectedEventId: 'event' }
+  describe('handleDetailClick', () => {
+    it('pushes state to history', () => {
+      const wrapper = shallow(<ViewDetailsButton {...props} />);
+      wrapper.instance().handleDetailClick();
+      expect(props.history.push).toHaveBeenCalledWith({
+        pathname: '/reports/message-events/details/123abc',
+        state: { selectedEventId: '456xyz' }
+      });
     });
   });
 
   describe('button', () => {
     it('calls handleDetailClick upon click', () => {
       const wrapper = shallow(<ViewDetailsButton {...props} />);
-      const instance = wrapper.instance();
-      instance.handleDetailClick = jest.fn();
-
       wrapper.find('Button').simulate('click');
-      expect(instance.handleDetailClick).toHaveBeenLastCalledWith({ message_id: '123abc', event_id: '456xyz' });
+      expect(props.history.push).toHaveBeenCalledTimes(1);
     });
   });
 
