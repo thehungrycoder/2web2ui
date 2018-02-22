@@ -4,8 +4,8 @@ import * as metricsHelpers from 'src/helpers/metrics';
 
 jest.mock('src/helpers/metrics');
 jest.mock('src/actions/metrics');
-jest.mock('src/constants', () => ({
-  ACCEPTED_METRICS: { accepted: 'metrics' }
+jest.mock('src/helpers/accepted', () => ({
+  getAcceptedMetrics: () => ({ accepted: 'metrics' })
 }));
 
 describe('Action Creator: Refresh Accepted Report', () => {

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import _ from 'lodash';
 import { addFilters } from 'src/actions/reportOptions';
 import { refreshRejectionReport } from 'src/actions/rejectionReport';
@@ -76,4 +75,4 @@ const mapDispatchToProps = {
   addFilters,
   refreshRejectionReport
 };
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(RejectionPage));
+export default connect(mapStateToProps, mapDispatchToProps)(RejectionPage);

@@ -1,3 +1,18 @@
+import { getMetricsFromKeys } from 'src/helpers/metrics';
+
+// These metrics are here because they are shared between action,
+// reducer, and selector and they involve computation
+export function getAcceptedMetrics() {
+  return getMetricsFromKeys([
+    'count_targeted',
+    'count_sent',
+    'count_accepted',
+    'avg_delivery_time_first',
+    'avg_delivery_time_subsequent',
+    'avg_msg_size'
+  ]);
+}
+
 /**
  * Reshapes deliveries by attempt for the accepted pie chart
  * Places 2+ attempts under a "2 or More" group

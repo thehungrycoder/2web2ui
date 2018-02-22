@@ -1,9 +1,9 @@
 import { createSelector } from 'reselect';
 import { reshapeAttempts } from 'src/helpers/accepted';
 import { computeKeysForItem } from 'src/helpers/metrics';
-import { ACCEPTED_METRICS } from 'src/constants';
+import { getAcceptedMetrics } from 'src/helpers/accepted';
 
-const computeAccepted = computeKeysForItem(ACCEPTED_METRICS);
+const computeAccepted = computeKeysForItem(getAcceptedMetrics());
 
 const selectAcceptedReport = (state) => state.acceptedReport;
 const selectAttempts = createSelector(

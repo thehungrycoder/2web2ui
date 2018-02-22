@@ -1,11 +1,11 @@
-import { ACCEPTED_METRICS } from 'src/constants';
+import { getAcceptedMetrics } from 'src/helpers/accepted';
 
 const initialState = {
   aggregatesLoading: false,
   attemptsLoading: false,
   aggregates: {},
   attempts: [],
-  metrics: ACCEPTED_METRICS
+  metrics: getAcceptedMetrics()
 };
 
 export default (state = initialState, { type, payload }) => {

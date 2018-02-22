@@ -1,7 +1,6 @@
 /* eslint max-lines: ["error", 200] */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import _ from 'lodash';
 import { refreshBounceReport } from 'src/actions/bounceReport';
 import { addFilters } from 'src/actions/reportOptions';
@@ -121,4 +120,4 @@ const mapDispatchToProps = {
   refreshBounceReport
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(BouncePage));
+export default connect(mapStateToProps, mapDispatchToProps)(BouncePage);

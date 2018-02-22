@@ -16,8 +16,13 @@ export default (state = initialState, action) => {
       return { ...state, to, from, relativeRange, metrics };
     }
 
-    case 'ADD_FILTERS':
-      return { ...state, filters: dedupeFilters([ ...state.filters, ...action.payload ]) };
+    case 'ADD_FILTERS': {
+      const mergedFilters = dedupeFilters([ ...state.filters, ...action.payload ]);
+      if (mergedFilters.length === state.filters.length) {
+        return state;
+      }
+      return { ...state, filters: mergedFilters };
+    }
 
     case 'REMOVE_FILTER':
       return {

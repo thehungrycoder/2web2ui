@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Report Filters Reducer add a filter 1`] = `
+exports[`Reducer: Report Options General cases add a filter 1`] = `
 Object {
   "filters": Array [
     Object {
@@ -15,7 +15,7 @@ Object {
 }
 `;
 
-exports[`Report Filters Reducer add multiple filters 1`] = `
+exports[`Reducer: Report Options General cases add multiple filters 1`] = `
 Object {
   "filters": Array [
     Object {
@@ -34,7 +34,7 @@ Object {
 }
 `;
 
-exports[`Report Filters Reducer set report options 1`] = `
+exports[`Reducer: Report Options General cases set report options 1`] = `
 Object {
   "filters": Array [],
   "from": 2018-01-01T00:00:00.000Z,
