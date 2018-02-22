@@ -1,12 +1,11 @@
 import React from 'react';
-import { ProtectedRoute, AuthenticationGate } from 'src/components/auth';
+import { PublicRoute, ProtectedRoute, AuthenticationGate } from 'src/components/auth';
 import { Support, GlobalAlertWrapper, RouteWatch } from 'src/components';
 import Layout from 'src/components/layout/Layout';
 import routes from 'src/config/routes';
 
 import {
   BrowserRouter as Router,
-  Route,
   Redirect,
   Switch
 } from 'react-router-dom';
@@ -20,7 +19,7 @@ const App = () => (
         <Switch>
           {
             routes.map((route) => {
-              const MyRoute = route.public ? Route : ProtectedRoute;
+              const MyRoute = route.public ? PublicRoute : ProtectedRoute;
 
               route.exact = !(route.exact === false); // this makes exact default to true
 

@@ -1,4 +1,5 @@
-import { fetch, getPlans } from '../account';
+import { fetch, getPlans, register } from '../account';
+jest.mock('../helpers/sparkpostApiRequest', () => jest.fn((a) => a));
 
 test('fetch - no params', () => {
   const fetchAction = fetch();
@@ -17,4 +18,25 @@ test('fetch with params', () => {
 test('getPlans', () => {
   const getPlansAction = getPlans();
   expect(getPlansAction).toMatchSnapshot();
+});
+
+describe('Account action creators', () => {
+  describe('register', () => {
+    let data;
+    beforeEach(() => {
+      data = {
+        first_name: 'foo',
+        last_name: 'bar',
+        email: 'foo@bar.com',
+        passowrd: 'foobar',
+        tou_accepted: true,
+        recaptcha_response: 'foofoo',
+        recaptcha_type: 'invisible'
+      };
+    });
+    it('makes api call with passed data', () => {
+      expect(register(data)).toMatchSnapshot();
+    });
+  });
+
 });
