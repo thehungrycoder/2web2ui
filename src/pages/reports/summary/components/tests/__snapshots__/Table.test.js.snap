@@ -85,6 +85,10 @@ exports[`Summary Table  should render subaccount option 1`] = `
   options={
     Array [
       Object {
+        "label": "Aggregate Total",
+        "value": "aggregate",
+      },
+      Object {
         "label": "Recipient Domain",
         "value": "domain",
       },
@@ -120,6 +124,24 @@ exports[`Summary Table  should render subaccount option 1`] = `
 />
 `;
 
+exports[`Summary Table  should render with aggregate data 1`] = `
+<TableCollection
+  defaultSortColumn={null}
+  defaultSortDirection="asc"
+  getRowData={[Function]}
+  headerComponent={[Function]}
+  rows={
+    Array [
+      Object {
+        "metric_1": 987,
+        "metric_2": 654,
+        "metric_3": 321,
+      },
+    ]
+  }
+/>
+`;
+
 exports[`Summary Table  should render with data 1`] = `
 <TableCollection
   columns={
@@ -150,11 +172,6 @@ exports[`Summary Table  should render with data 1`] = `
   defaultPerPage={10}
   defaultSortColumn="metric_1"
   defaultSortDirection="desc"
-  filterBox={
-    Object {
-      "show": false,
-    }
-  }
   getRowData={[Function]}
   pagination={true}
   rowKeyName="domain"
@@ -195,6 +212,10 @@ exports[`Summary Table  should render with no data 1`] = `
           onChange={[Function]}
           options={
             Array [
+              Object {
+                "label": "Aggregate Total",
+                "value": "aggregate",
+              },
               Object {
                 "label": "Recipient Domain",
                 "value": "domain",

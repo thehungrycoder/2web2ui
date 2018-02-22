@@ -32,11 +32,11 @@ class ChartHeader extends Component {
           <div className={styles.Controls}>
             <Button size='small' onClick={onMetricsToggle}>Select Metrics</Button>
             {/* {this.renderTimeMode()} */}
-            <Button.Group className={styles.ButtonSpacer}>
-              {this.renderScaleButton('linear', 'Linear')}
-              {this.renderScaleButton('log', 'Log')}
-              {this.renderScaleButton('sqrt', '√ Sq Rt')}
-            </Button.Group>
+            {/*<Button.Group className={styles.ButtonSpacer}>*/}
+            {/*{this.renderScaleButton('linear', 'Linear')}*/}
+            {/*{this.renderScaleButton('log', 'Log')}*/}
+            {/*{this.renderScaleButton('pow', 'Pow')}*/}
+            {/*</Button.Group>*/}
           </div>
         </Grid.Column>
       </Grid>
