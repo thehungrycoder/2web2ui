@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: Summary Chart Legend should render 1`] = `
+<div>
+  <div
+    key="count_a"
+  >
+    <span
+      style={
+        Object {
+          "backgroundColor": "#aaa",
+        }
+      }
+    />
+    A
+  </div>
+  <div
+    key="count_b"
+  >
+    <span
+      style={
+        Object {
+          "backgroundColor": "#bbb",
+        }
+      }
+    />
+    B
+  </div>
+  <div
+    key="count_c"
+  >
+    <span
+      style={
+        Object {
+          "backgroundColor": "#ccc",
+        }
+      }
+    />
+    C
+  </div>
+</div>
+`;

@@ -4,28 +4,35 @@ const initialState = {
 };
 
 export default (state = initialState, { type, payload }) => {
+
   switch (type) {
-    case 'FETCH_METRICS_PENDING':
+
+    // AGGREGATES
+
+    case 'GET_REJECTION_AGGREGATES_PENDING':
       return { ...state, aggregatesLoading: true };
 
-    case 'FETCH_METRICS_SUCCESS':
-    case 'FETCH_METRICS_FAIL':
+    case 'GET_REJECTION_AGGREGATES_SUCCESS':
+      return { ...state, aggregatesLoading: false, aggregates: payload[0] };
+
+    case 'GET_REJECTION_AGGREGATES_FAIL':
       return { ...state, aggregatesLoading: false };
+
+
+    // REASONS
 
     case 'FETCH_METRICS_REJECTION_REASONS_BY_DOMAIN_PENDING':
       return { ...state, reasonsLoading: true };
 
     case 'FETCH_METRICS_REJECTION_REASONS_BY_DOMAIN_SUCCESS':
+      return { ...state, reasonsLoading: false, list: payload };
+
     case 'FETCH_METRICS_REJECTION_REASONS_BY_DOMAIN_FAIL':
       return { ...state, reasonsLoading: false };
 
-    case 'REFRESH_REJECTION_BY_DOMAIN_TABLE':
-      return { ...state, list: payload.reasons };
-
-    case 'REFRESH_REJECTION_AGGREGATES':
-      return { ...state, ...payload };
 
     default:
       return state;
   }
+
 };

@@ -4,7 +4,7 @@ import Legend from './Legend';
 
 import styles from './ChartHeader.module.scss';
 
-class ChartHeader extends Component {
+export default class ChartHeader extends Component {
   renderScaleButton(scale, label) {
     const { onScaleClick, selectedScale } = this.props;
     return <Button size='small' primary={scale === selectedScale} onClick={() => onScaleClick(scale)}>{ label }</Button>;
@@ -43,5 +43,3 @@ class ChartHeader extends Component {
     );
   }
 }
-
-export default ChartHeader;

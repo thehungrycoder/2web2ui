@@ -1,33 +1,26 @@
-import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import { Page } from '@sparkpost/matchbox';
-
-import { getAggregateMetrics, getLinkMetrics } from 'src/actions/engagementReport';
-import { showAlert } from 'src/actions/globalAlert';
+import { refreshEngagementReport } from 'src/actions/engagementReport';
+import ReportOptions from 'src/pages/reports/components/ReportOptions';
 import EngagementChart from './components/EngagementChart';
-import EngagementFilters from './components/EngagementFilters';
 import EngagementSummary from './components/EngagementSummary';
 import EngagementTable from './components/EngagementTable';
 
 export class EngagementPage extends Component {
-  onLoad = () => Promise.all([
-    this.props.getAggregateMetrics().catch(this.onLoadFail('Unable to load engagement chart.')),
-    this.props.getLinkMetrics().catch(this.onLoadFail('Unable to load link metrics.'))
-  ])
 
-  onLoadFail = (message) => (error) => {
-    const details = _.get(error, 'response.data.errors[0].message', error.message);
-    this.props.showAlert({ details, message, type: 'error' });
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.reportOptions !== this.props.reportOptions) {
+      this.props.refreshEngagementReport(nextProps.reportOptions);
+    }
   }
 
   render() {
-    const { aggregateMetrics, linkMetrics } = this.props;
+    const { loading, aggregateMetrics, linkMetrics } = this.props;
 
     return (
       <Page title='Engagement Report'>
-        <EngagementFilters shareDisabled={aggregateMetrics.loading} onLoad={this.onLoad} />
+        <ReportOptions reportLoading={loading} />
         <EngagementSummary
           accepted={aggregateMetrics.data.count_accepted}
           clicks={aggregateMetrics.data.count_unique_clicked_approx}
@@ -48,10 +41,12 @@ export class EngagementPage extends Component {
   }
 }
 
-const mapStateToProps = (state, props) => ({
+const mapStateToProps = (state) => ({
+  loading: state.engagementReport.loading,
   aggregateMetrics: state.engagementReport.aggregateMetrics,
-  linkMetrics: state.engagementReport.linkMetrics
+  linkMetrics: state.engagementReport.linkMetrics,
+  reportOptions: state.reportOptions
 });
-const mapDispatchToProps = { getAggregateMetrics, getLinkMetrics, showAlert };
+const mapDispatchToProps = { refreshEngagementReport };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(EngagementPage));
+export default connect(mapStateToProps, mapDispatchToProps)(EngagementPage);

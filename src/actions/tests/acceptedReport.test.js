@@ -1,56 +1,43 @@
-import * as acceptedReport from '../acceptedReport';
+import { refreshAcceptedReport } from '../acceptedReport';
 import * as metricsActions from 'src/actions/metrics';
 import * as metricsHelpers from 'src/helpers/metrics';
-import * as reportFilters from 'src/actions/reportFilters';
 
-import moment from 'moment';
-
-jest.mock('../helpers/sparkpostApiRequest', () => jest.fn((a) => a));
-jest.mock('src/helpers/accepted');
 jest.mock('src/helpers/metrics');
 jest.mock('src/actions/metrics');
-jest.mock('src/actions/reportFilters');
+jest.mock('src/helpers/accepted', () => ({
+  getAcceptedMetrics: () => ({ accepted: 'metrics' })
+}));
 
-describe('Action Creator: Accepted Report', () => {
+describe('Action Creator: Refresh Accepted Report', () => {
 
-  const from = moment(new Date(1487076708000)).utc().format('YYYY-MM-DDTHH:MM');
   let dispatchMock;
-  let getStateMock;
-  let stateMock;
+  let queryMock;
+  let updates;
+  let result;
 
   beforeEach(() => {
-    const metrics = 'count_accepted';
-    metricsActions.fetchDeliverability = jest.fn(() => [{ count_accepted: 1 }]);
-    metricsHelpers.getQueryFromOptions.mockImplementation(() => ({ from, metrics }));
-    metricsHelpers.transformData = jest.fn(() => ([{ data: 'transformed data' }]));
-    metricsHelpers.getMetricsFromKeys = jest.fn((a) => a);
-
-    stateMock = {};
-
+    queryMock = {};
+    updates = { abc: 'cool' };
+    metricsHelpers.getQueryFromOptions = jest.fn(() => queryMock);
     dispatchMock = jest.fn((a) => Promise.resolve(a));
-    getStateMock = jest.fn(() => stateMock);
+    result = refreshAcceptedReport(updates)(dispatchMock);
   });
 
-  it('should dispatch a chart refresh action', async() => {
-    const thunk = acceptedReport.refreshAcceptedMetrics();
-    await thunk(dispatchMock, getStateMock);
-    expect(reportFilters.maybeRefreshTypeaheadCache).toHaveBeenCalledTimes(1);
-    expect(reportFilters.refreshReportRange).toHaveBeenCalledTimes(1);
-    expect(metricsActions.fetchDeliveriesByAttempt).toHaveBeenCalledTimes(1);
-    expect(metricsActions.fetchDeliveriesByAttempt.mock.calls).toMatchSnapshot();
-
-    expect(dispatchMock.mock.calls).toMatchSnapshot();
+  it('should return a promise', () => {
+    expect(result).toBeInstanceOf(Promise);
   });
 
-  it('should clear refresh chart nor update deliveries by attempt if 0 accepted', async() => {
-    metricsActions.fetchDeliverability = jest.fn(() => [{ foo: 'bar' }]);
-    const thunk = acceptedReport.refreshAcceptedMetrics();
-    await thunk(dispatchMock, getStateMock);
-    expect(metricsActions.fetchDeliverability).toHaveBeenCalledTimes(1);
-    expect(metricsActions.fetchDeliverability.mock.calls).toMatchSnapshot();
-    expect(metricsActions.fetchDeliveriesByAttempt).not.toHaveBeenCalled();
+  it('should get query options, passing in combined updates and metrics constant', () => {
+    expect(metricsHelpers.getQueryFromOptions).toHaveBeenCalledWith({ abc: 'cool', metrics: { accepted: 'metrics' }});
+  });
 
-    expect(dispatchMock.mock.calls).toMatchSnapshot();
+  it('should dispatch actions', () => {
+    expect(dispatchMock).toHaveBeenCalledTimes(2);
+    expect(metricsActions.fetchDeliverability).toHaveBeenCalledWith({
+      type: 'GET_ACCEPTED_AGGREGATES',
+      params: queryMock
+    });
+    expect(metricsActions.fetchDeliveriesByAttempt).toHaveBeenCalledWith(queryMock);
   });
 
 });

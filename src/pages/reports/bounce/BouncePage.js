@@ -1,22 +1,17 @@
 /* eslint max-lines: ["error", 200] */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-import qs from 'query-string';
 import _ from 'lodash';
-
-import { refreshBounceChartMetrics, refreshBounceTableMetrics } from 'src/actions/bounceReport';
-import { addFilters, initTypeaheadCache } from 'src/actions/reportFilters';
-import { getFilterSearchOptions, parseSearch } from 'src/helpers/reports';
-import { showAlert } from 'src/actions/globalAlert';
+import { refreshBounceReport } from 'src/actions/bounceReport';
+import { addFilters } from 'src/actions/reportOptions';
 import { TableCollection, Empty, LongTextContainer } from 'src/components';
 import { Percent } from 'src/components/formatters';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
 import { Page, Panel, UnstyledLink } from '@sparkpost/matchbox';
-import ShareModal from '../components/ShareModal';
-import Filters from '../components/Filters';
-import ChartGroup from './components/ChartGroup';
+import ReportOptions from '../components/ReportOptions';
+import BounceChart from './components/BounceChart';
 import MetricsSummary from '../components/MetricsSummary';
+import { mapStateToProps } from 'src/selectors/bounceReport';
 
 const columns = [
   { label: 'Reason', width: '45%', sortKey: 'reason' },
@@ -27,72 +22,37 @@ const columns = [
 ];
 
 export class BouncePage extends Component {
-  state = {
-    modal: false,
-    query: {}
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.reportOptions !== this.props.reportOptions) {
+      this.props.refreshBounceReport(nextProps.reportOptions);
+    }
   }
 
-  componentDidMount() {
-    this.handleRefresh(this.parseSearch());
-    this.props.initTypeaheadCache();
-  }
-
-  /**
-   * takes qp's and dispatches filters being added
-   * Note: this has to be done in page because Redux is wired
-   * and not in the helper
-   */
-  parseSearch() {
-    const { filters = [], options } = parseSearch(this.props.location.search);
-    this.props.addFilters(filters);
-    return options;
-  }
-
-  handleRefresh = (options) => Promise.all([
-    this.props.refreshBounceChartMetrics(options),
-    this.props.refreshBounceTableMetrics(options)
-  ])
-    .then(() => this.updateLink())
-    .catch((err) => {
-      this.props.showAlert({ type: 'error', message: 'Unable to refresh bounce report.', details: err.message });
-    })
-
-  handleModalToggle = (modal) => {
-    this.setState({ modal: !this.state.modal });
-  }
-
-  updateLink = () => {
-    const { filters, history } = this.props;
-    const query = getFilterSearchOptions(filters);
-    const search = qs.stringify(query, { encode: false });
-    this.setState({ query });
-    history.replace({ pathname: '/reports/bounce', search });
-  }
-
-  handleDomainClick = (domain) => {
-    this.props.addFilters([{ type: 'Recipient Domain', value: domain }]);
-    this.handleRefresh();
-  }
-
-  getRowData = (rowData) => {
-    const { totalBounces } = this.props;
-    const { reason, domain, bounce_category_name, bounce_class_name, count_bounce } = rowData;
+  getRowData = (item) => {
+    const { aggregates = {}, addFilters } = this.props;
+    const { reason, domain, bounce_category_name, bounce_class_name } = item;
     return [
       <LongTextContainer text={reason} />,
-      <UnstyledLink onClick={() => this.handleDomainClick(domain)}>{ domain }</UnstyledLink>,
+      <UnstyledLink onClick={() => addFilters([{ type: 'Recipient Domain', value: domain }])}>{ domain }</UnstyledLink>,
       bounce_category_name,
       bounce_class_name,
-      <span>{count_bounce}(<Percent value={(count_bounce / totalBounces) * 100} />)</span>
+      <span>{item.count_bounce} <small>(<Percent value={(item.count_bounce / aggregates.countBounce) * 100} />)</small></span>
     ];
   };
 
   renderChart() {
-    const { chartLoading, aggregates } = this.props;
+    const { chartLoading, aggregates, categories, types } = this.props;
     if (!chartLoading && _.isEmpty(aggregates)) {
       return <Empty title='Bounce Rates' message='No bounces to report' />;
     }
 
-    return <ChartGroup loading={chartLoading} />;
+    return <BounceChart
+      loading={chartLoading}
+      aggregates={aggregates}
+      categories={categories}
+      types={types}
+    />;
   }
 
   renderCollection() {
@@ -117,7 +77,7 @@ export class BouncePage extends Component {
   }
 
   renderTopLevelMetrics() {
-    const { chartLoading, aggregates, filters } = this.props;
+    const { chartLoading, aggregates } = this.props;
     const { countBounce, countTargeted } = aggregates;
 
     // Aggregates aren't ready until chart refreshes
@@ -133,57 +93,31 @@ export class BouncePage extends Component {
       <MetricsSummary
         rateValue={(countBounce / countTargeted) * 100}
         rateTitle='Bounce Rate'
-        {...filters} >
+      >
         <strong>{countBounce.toLocaleString()}</strong> of your messages were bounced of <strong>{countTargeted.toLocaleString()}</strong> messages targeted
       </MetricsSummary>
     );
   }
 
   render() {
-    const { modal, query } = this.state;
     const { chartLoading } = this.props;
 
     return (
       <Page title='Bounce Report'>
-        <Filters
-          refresh={this.handleRefresh}
-          onShare={this.handleModalToggle}
-          shareDisabled={chartLoading}
-        />
+        <ReportOptions reportLoading={chartLoading} />
         { this.renderTopLevelMetrics() }
         { this.renderChart() }
         <Panel title='Bounced Messages' className='ReasonsTable'>
           { this.renderCollection() }
         </Panel>
-        <ShareModal
-          open={modal}
-          handleToggle={this.handleModalToggle}
-          query={query} />
       </Page>
     );
   }
 }
 
-const mapStateToProps = (state) => {
-  const chartLoading = state.bounceReport.aggregatesLoading || state.bounceReport.categoriesLoading;
-  const tableLoading = chartLoading || state.bounceReport.reasonsLoading;
-  const aggregates = state.bounceReport.aggregates;
-  return {
-    filters: state.reportFilters,
-    chartLoading,
-    aggregates,
-    totalBounces: aggregates ? aggregates.countBounce : 1,
-    tableLoading,
-    reasons: state.bounceReport.reasons
-  };
-};
-
 const mapDispatchToProps = {
   addFilters,
-  refreshBounceChartMetrics,
-  refreshBounceTableMetrics,
-  initTypeaheadCache,
-  showAlert
+  refreshBounceReport
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(BouncePage));
+export default connect(mapStateToProps, mapDispatchToProps)(BouncePage);

@@ -37,9 +37,9 @@ export function fetchMetricsIpPools(params = {}) {
   return fetch({ type, path, params });
 }
 
-export function fetchDeliverability(params = {}) {
+export function fetchDeliverability({ params, type }) {
   const path = 'deliverability';
-  return fetch({ path, params });
+  return fetch({ path, params, type });
 }
 
 export function getTimeSeries(params = {}) {
@@ -71,7 +71,7 @@ export function fetchRejectionReasonsByDomain(params = {}) {
   return fetch({ type, path, params });
 }
 
-export function fetchDelayReasonsByDomain(params = {}) {
+export function fetchDelayReasonsByDomain(params) {
   const type = 'FETCH_METRICS_DELAY_REASONS_BY_DOMAIN';
   const path = 'deliverability/delay-reason/domain';
   return fetch({ type, path, params });

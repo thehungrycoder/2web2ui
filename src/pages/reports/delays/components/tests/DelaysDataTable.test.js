@@ -14,7 +14,7 @@ describe('DelaysDataTable: ', () => {
       }
     ],
     totalAccepted: 50,
-    onDomainClick: jest.fn()
+    addFilters: jest.fn()
   };
 
   beforeEach(() => {
@@ -46,6 +46,6 @@ describe('DelaysDataTable: ', () => {
     const rows = wrapper.instance().getRowData({ reason: 'bad delay', count_delayed: 1, count_delayed_first: 10, domain: 'yahoo.com' });
     const link = mount(rows[1]);
     link.find('UnstyledLink').simulate('click');
-    expect(props.onDomainClick).toHaveBeenCalledWith('yahoo.com');
+    expect(props.addFilters).toHaveBeenCalledWith([{ type: 'Recipient Domain', value: 'yahoo.com' }]);
   });
 });

@@ -1,0 +1,301 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: Summary Chart Metrics Modal should disable checkboxes when max selected 1`] = `
+<Modal
+  open={true}
+>
+  <WindowEvent
+    event="keydown"
+    handler={[Function]}
+  />
+  <Panel>
+    <Panel.Section>
+      <h5>
+        Select up to 5 metrics
+      </h5>
+      <div>
+        <div
+          key="count_accepted"
+        >
+          <WithPositioning(Tooltip)
+            content="Messages an ISP or other remote domain accepted (less Out-of-Band Bounces)."
+          >
+            <Checkbox
+              checked={false}
+              disabled={true}
+              id="count_accepted"
+              label="Accepted"
+              onChange={[Function]}
+              required={false}
+            />
+          </WithPositioning(Tooltip)>
+        </div>
+        <div
+          key="count_injected"
+        >
+          <WithPositioning(Tooltip)
+            content="Messages either injected to or received by SparkPost."
+          >
+            <Checkbox
+              checked={true}
+              disabled={false}
+              id="count_injected"
+              label="Injected"
+              onChange={[Function]}
+              required={false}
+            />
+          </WithPositioning(Tooltip)>
+        </div>
+        <div
+          key="count_sent"
+        >
+          <WithPositioning(Tooltip)
+            content="Messages that SparkPost attempted to deliver, which includes both Deliveries and In-Band Bounces."
+          >
+            <Checkbox
+              checked={false}
+              disabled={true}
+              id="count_sent"
+              label="Sent"
+              onChange={[Function]}
+              required={false}
+            />
+          </WithPositioning(Tooltip)>
+        </div>
+        <div
+          key="count_targeted"
+        >
+          <WithPositioning(Tooltip)
+            content="Messages successfully injected into SparkPost as well as rejected by it."
+          >
+            <Checkbox
+              checked={true}
+              disabled={false}
+              id="count_targeted"
+              label="Targeted"
+              onChange={[Function]}
+              required={false}
+            />
+          </WithPositioning(Tooltip)>
+        </div>
+      </div>
+    </Panel.Section>
+    <Panel.Section>
+      <Button
+        disabled={false}
+        onClick={[Function]}
+        primary={true}
+        size="default"
+      >
+        Apply Metrics
+      </Button>
+      <Button
+        onClick={[MockFunction]}
+        size="default"
+      >
+        Cancel
+      </Button>
+    </Panel.Section>
+  </Panel>
+</Modal>
+`;
+
+exports[`Component: Summary Chart Metrics Modal should render 1`] = `
+<Modal
+  open={true}
+>
+  <WindowEvent
+    event="keydown"
+    handler={[Function]}
+  />
+  <Panel>
+    <Panel.Section>
+      <h5>
+        Select up to 5 metrics
+      </h5>
+      <div>
+        <div
+          key="count_accepted"
+        >
+          <WithPositioning(Tooltip)
+            content="Messages an ISP or other remote domain accepted (less Out-of-Band Bounces)."
+          >
+            <Checkbox
+              checked={false}
+              disabled={false}
+              id="count_accepted"
+              label="Accepted"
+              onChange={[Function]}
+              required={false}
+            />
+          </WithPositioning(Tooltip)>
+        </div>
+        <div
+          key="count_injected"
+        >
+          <WithPositioning(Tooltip)
+            content="Messages either injected to or received by SparkPost."
+          >
+            <Checkbox
+              checked={false}
+              disabled={false}
+              id="count_injected"
+              label="Injected"
+              onChange={[Function]}
+              required={false}
+            />
+          </WithPositioning(Tooltip)>
+        </div>
+        <div
+          key="count_sent"
+        >
+          <WithPositioning(Tooltip)
+            content="Messages that SparkPost attempted to deliver, which includes both Deliveries and In-Band Bounces."
+          >
+            <Checkbox
+              checked={false}
+              disabled={false}
+              id="count_sent"
+              label="Sent"
+              onChange={[Function]}
+              required={false}
+            />
+          </WithPositioning(Tooltip)>
+        </div>
+        <div
+          key="count_targeted"
+        >
+          <WithPositioning(Tooltip)
+            content="Messages successfully injected into SparkPost as well as rejected by it."
+          >
+            <Checkbox
+              checked={false}
+              disabled={false}
+              id="count_targeted"
+              label="Targeted"
+              onChange={[Function]}
+              required={false}
+            />
+          </WithPositioning(Tooltip)>
+        </div>
+      </div>
+    </Panel.Section>
+    <Panel.Section>
+      <Button
+        disabled={true}
+        onClick={[Function]}
+        primary={true}
+        size="default"
+      >
+        Apply Metrics
+      </Button>
+      <Button
+        onClick={[MockFunction]}
+        size="default"
+      >
+        Cancel
+      </Button>
+    </Panel.Section>
+  </Panel>
+</Modal>
+`;
+
+exports[`Component: Summary Chart Metrics Modal should select metrics 1`] = `
+<Modal
+  open={true}
+>
+  <WindowEvent
+    event="keydown"
+    handler={[Function]}
+  />
+  <Panel>
+    <Panel.Section>
+      <h5>
+        Select up to 5 metrics
+      </h5>
+      <div>
+        <div
+          key="count_accepted"
+        >
+          <WithPositioning(Tooltip)
+            content="Messages an ISP or other remote domain accepted (less Out-of-Band Bounces)."
+          >
+            <Checkbox
+              checked={false}
+              disabled={false}
+              id="count_accepted"
+              label="Accepted"
+              onChange={[Function]}
+              required={false}
+            />
+          </WithPositioning(Tooltip)>
+        </div>
+        <div
+          key="count_injected"
+        >
+          <WithPositioning(Tooltip)
+            content="Messages either injected to or received by SparkPost."
+          >
+            <Checkbox
+              checked={true}
+              disabled={false}
+              id="count_injected"
+              label="Injected"
+              onChange={[Function]}
+              required={false}
+            />
+          </WithPositioning(Tooltip)>
+        </div>
+        <div
+          key="count_sent"
+        >
+          <WithPositioning(Tooltip)
+            content="Messages that SparkPost attempted to deliver, which includes both Deliveries and In-Band Bounces."
+          >
+            <Checkbox
+              checked={false}
+              disabled={false}
+              id="count_sent"
+              label="Sent"
+              onChange={[Function]}
+              required={false}
+            />
+          </WithPositioning(Tooltip)>
+        </div>
+        <div
+          key="count_targeted"
+        >
+          <WithPositioning(Tooltip)
+            content="Messages successfully injected into SparkPost as well as rejected by it."
+          >
+            <Checkbox
+              checked={true}
+              disabled={false}
+              id="count_targeted"
+              label="Targeted"
+              onChange={[Function]}
+              required={false}
+            />
+          </WithPositioning(Tooltip)>
+        </div>
+      </div>
+    </Panel.Section>
+    <Panel.Section>
+      <Button
+        disabled={false}
+        onClick={[Function]}
+        primary={true}
+        size="default"
+      >
+        Apply Metrics
+      </Button>
+      <Button
+        onClick={[MockFunction]}
+        size="default"
+      >
+        Cancel
+      </Button>
+    </Panel.Section>
+  </Panel>
+</Modal>
+`;

@@ -17,7 +17,7 @@ import ipPools from './ipPools';
 import messageEvents from './messageEvents';
 import metrics from './metrics';
 import recipientLists from './recipientLists';
-import reportFilters from './reportFilters';
+import reportOptions from './reportOptions';
 import sendingDomains from './sendingDomains';
 import sendingIps from './sendingIps';
 import subaccounts from './subaccounts';
@@ -48,7 +48,7 @@ const appReducer = combineReducers({
   globalAlert,
   metrics,
   messageEvents,
-  reportFilters,
+  reportOptions,
   recipientLists,
   sendingDomains,
   sendingIps,

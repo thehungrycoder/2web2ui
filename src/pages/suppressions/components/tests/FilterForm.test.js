@@ -83,7 +83,7 @@ describe('FilterForm', () => {
       instance.handleDateSelection({ from, to });
       const state = wrapper.state();
       expect(state).toMatchObject({
-        reportFilters: {
+        reportOptions: {
           from,
           to
         }
@@ -94,7 +94,7 @@ describe('FilterForm', () => {
       instance.handleDateSelection({ relativeRange: '7day' });
       const state = wrapper.state();
       expect(state).toMatchObject({
-        reportFilters: {
+        reportOptions: {
           from,
           to,
           relativeRange: '7day'
