@@ -74,4 +74,18 @@ describe('Summary Table ', () => {
     wrapper.find('Select').simulate('change', { target: { value: 'campaign' }});
     expect(props.getTableData).toHaveBeenCalledWith({ groupBy: 'campaign' });
   });
+
+  it('should render with aggregate data', () => {
+    const aggData = [
+      { metric_1: 987, metric_2: 654, metric_3: 321 }
+    ];
+    const metrics = [
+      { key: 'metric_1' },
+      { key: 'metric_2', unit: 'millisecond' },
+      { key: 'metric_3' }
+    ];
+
+    wrapper.setProps({ metrics, groupBy: 'aggregate', tableData: aggData });
+    expect(wrapper.find('TableCollection')).toMatchSnapshot();
+  });
 });

@@ -88,3 +88,33 @@ Array [
   ],
 ]
 `;
+
+exports[`Action Creator: Summary Chart should use the correct path for aggregate group 1`] = `
+Array [
+  Array [
+    Promise {},
+  ],
+  Array [
+    Object {
+      "payload": Object {
+        "data": Object {
+          "params": Object {
+            "delimiter": ",",
+            "from": "2017-02-14T12:51",
+            "metrics": "",
+            "precision": "1min",
+            "to": "2017-02-14T12:51",
+          },
+          "path": "deliverability",
+          "type": "FETCH_TABLE_DATA",
+        },
+        "groupBy": "aggregate",
+        "metrics": Array [
+          "count_accepted",
+        ],
+      },
+      "type": "REFRESH_SUMMARY_TABLE",
+    },
+  ],
+]
+`;

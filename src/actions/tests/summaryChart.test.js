@@ -45,4 +45,18 @@ describe('Action Creator: Summary Chart', () => {
     await thunk(dispatchMock, getStateMock);
     expect(dispatchMock.mock.calls).toMatchSnapshot();
   });
+
+  it('should use the correct path for aggregate group', async() => {
+    const state = {
+      summaryChart: {
+        groupBy: 'aggregate',
+        metrics: ['count_accepted']
+      }
+    };
+
+    getStateMock = jest.fn(() => state);
+    const thunk = summaryChart.getTableData({});
+    await thunk(dispatchMock, getStateMock);
+    expect(dispatchMock.mock.calls).toMatchSnapshot();
+  });
 });

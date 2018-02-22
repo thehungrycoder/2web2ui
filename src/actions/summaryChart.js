@@ -77,9 +77,10 @@ export function getTableData({ params, metrics, groupBy }) {
       params = getQueryFromOptions({ ...state.summaryChart, ...state.reportFilters });
     }
 
+    const path = activeGroup === 'aggregate' ? 'deliverability' : `deliverability/${activeGroup}`;
     const options = {
       type: 'FETCH_TABLE_DATA',
-      path: `deliverability/${activeGroup}`,
+      path,
       params
     };
 
