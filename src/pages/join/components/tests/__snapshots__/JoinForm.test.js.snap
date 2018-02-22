@@ -1,0 +1,325 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`JoinForm render disables form when loading 1`] = `
+<form>
+  <Grid>
+    <Grid.Column
+      lg={6}
+      md={6}
+      xs={12}
+    >
+      <Field
+        component={[Function]}
+        disabled={true}
+        label="First Name"
+        name="first_name"
+        placeholder="Leslie"
+        validate={[Function]}
+      />
+    </Grid.Column>
+    <Grid.Column
+      lg={6}
+      md={6}
+      xs={12}
+    >
+      <Field
+        component={[Function]}
+        disabled={true}
+        label="Last Name"
+        name="last_name"
+        placeholder="Knope"
+        validate={[Function]}
+      />
+    </Grid.Column>
+  </Grid>
+  <Field
+    autoComplete="username email"
+    component={[Function]}
+    disabled={true}
+    label="Email"
+    name="email"
+    placeholder="leslie.knope@pawnee.indiana.state.us.gov"
+    validate={
+      Array [
+        [Function],
+        [Function],
+      ]
+    }
+  />
+  <Field
+    autoComplete="new-password"
+    component={[Function]}
+    disabled={true}
+    label="Password"
+    name="password"
+    placeholder="••••••••••"
+    type="password"
+    validate={
+      Array [
+        [Function],
+        [Function],
+        [Function],
+      ]
+    }
+  />
+  <Field
+    component={[Function]}
+    disabled={true}
+    id="tou_accepted"
+    label={
+      <span>
+        I agree to SparkPost's 
+        <UnstyledLink
+          external={true}
+          to="https://www.sparkpost.com/policies/tou"
+        >
+          Terms of Use
+        </UnstyledLink>
+      </span>
+    }
+    name="tou_accepted"
+    type="checkbox"
+    validate={[Function]}
+  />
+  <Button
+    disabled={true}
+    onClick={[Function]}
+    primary={true}
+    size="default"
+  >
+    Loading
+  </Button>
+  <t
+    badge="bottomright"
+    elementID="g-recaptcha"
+    expiredCallbackName="expiredCallback"
+    hl="en"
+    onloadCallback={[Function]}
+    onloadCallbackName="onloadCallback"
+    render="explicit"
+    sitekey="6LekChoUAAAAAJZouMPHnhRss2t7-ZetbAABfsOZ"
+    size="invisible"
+    tabindex="0"
+    theme="light"
+    type="image"
+    verifyCallback={[Function]}
+    verifyCallbackName="verifyCallback"
+  />
+</form>
+`;
+
+exports[`JoinForm render disables form when recaptcha is not loaded 1`] = `
+<form>
+  <Grid>
+    <Grid.Column
+      lg={6}
+      md={6}
+      xs={12}
+    >
+      <Field
+        component={[Function]}
+        disabled={true}
+        label="First Name"
+        name="first_name"
+        placeholder="Leslie"
+        validate={[Function]}
+      />
+    </Grid.Column>
+    <Grid.Column
+      lg={6}
+      md={6}
+      xs={12}
+    >
+      <Field
+        component={[Function]}
+        disabled={true}
+        label="Last Name"
+        name="last_name"
+        placeholder="Knope"
+        validate={[Function]}
+      />
+    </Grid.Column>
+  </Grid>
+  <Field
+    autoComplete="username email"
+    component={[Function]}
+    disabled={true}
+    label="Email"
+    name="email"
+    placeholder="leslie.knope@pawnee.indiana.state.us.gov"
+    validate={
+      Array [
+        [Function],
+        [Function],
+      ]
+    }
+  />
+  <Field
+    autoComplete="new-password"
+    component={[Function]}
+    disabled={true}
+    label="Password"
+    name="password"
+    placeholder="••••••••••"
+    type="password"
+    validate={
+      Array [
+        [Function],
+        [Function],
+        [Function],
+      ]
+    }
+  />
+  <Field
+    component={[Function]}
+    disabled={true}
+    id="tou_accepted"
+    label={
+      <span>
+        I agree to SparkPost's 
+        <UnstyledLink
+          external={true}
+          to="https://www.sparkpost.com/policies/tou"
+        >
+          Terms of Use
+        </UnstyledLink>
+      </span>
+    }
+    name="tou_accepted"
+    type="checkbox"
+    validate={[Function]}
+  />
+  <Button
+    disabled={true}
+    onClick={[Function]}
+    primary={true}
+    size="default"
+  >
+    Create Account
+  </Button>
+  <t
+    badge="bottomright"
+    elementID="g-recaptcha"
+    expiredCallbackName="expiredCallback"
+    hl="en"
+    onloadCallback={[Function]}
+    onloadCallbackName="onloadCallback"
+    render="explicit"
+    sitekey="6LekChoUAAAAAJZouMPHnhRss2t7-ZetbAABfsOZ"
+    size="invisible"
+    tabindex="0"
+    theme="light"
+    type="image"
+    verifyCallback={[Function]}
+    verifyCallbackName="verifyCallback"
+  />
+</form>
+`;
+
+exports[`JoinForm render enables form correctly 1`] = `
+<form>
+  <Grid>
+    <Grid.Column
+      lg={6}
+      md={6}
+      xs={12}
+    >
+      <Field
+        component={[Function]}
+        disabled={false}
+        label="First Name"
+        name="first_name"
+        placeholder="Leslie"
+        validate={[Function]}
+      />
+    </Grid.Column>
+    <Grid.Column
+      lg={6}
+      md={6}
+      xs={12}
+    >
+      <Field
+        component={[Function]}
+        disabled={false}
+        label="Last Name"
+        name="last_name"
+        placeholder="Knope"
+        validate={[Function]}
+      />
+    </Grid.Column>
+  </Grid>
+  <Field
+    autoComplete="username email"
+    component={[Function]}
+    disabled={false}
+    label="Email"
+    name="email"
+    placeholder="leslie.knope@pawnee.indiana.state.us.gov"
+    validate={
+      Array [
+        [Function],
+        [Function],
+      ]
+    }
+  />
+  <Field
+    autoComplete="new-password"
+    component={[Function]}
+    disabled={false}
+    label="Password"
+    name="password"
+    placeholder="••••••••••"
+    type="password"
+    validate={
+      Array [
+        [Function],
+        [Function],
+        [Function],
+      ]
+    }
+  />
+  <Field
+    component={[Function]}
+    disabled={false}
+    id="tou_accepted"
+    label={
+      <span>
+        I agree to SparkPost's 
+        <UnstyledLink
+          external={true}
+          to="https://www.sparkpost.com/policies/tou"
+        >
+          Terms of Use
+        </UnstyledLink>
+      </span>
+    }
+    name="tou_accepted"
+    type="checkbox"
+    validate={[Function]}
+  />
+  <Button
+    disabled={false}
+    onClick={[Function]}
+    primary={true}
+    size="default"
+  >
+    Create Account
+  </Button>
+  <t
+    badge="bottomright"
+    elementID="g-recaptcha"
+    expiredCallbackName="expiredCallback"
+    hl="en"
+    onloadCallback={[Function]}
+    onloadCallbackName="onloadCallback"
+    render="explicit"
+    sitekey="6LekChoUAAAAAJZouMPHnhRss2t7-ZetbAABfsOZ"
+    size="invisible"
+    tabindex="0"
+    theme="light"
+    type="image"
+    verifyCallback={[Function]}
+    verifyCallbackName="verifyCallback"
+  />
+</form>
+`;

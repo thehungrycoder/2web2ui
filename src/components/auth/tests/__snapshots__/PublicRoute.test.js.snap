@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: PublicRoute renders component 1`] = `
+<Route
+  path="/join"
+  public={true}
+  render={[Function]}
+/>
+`;

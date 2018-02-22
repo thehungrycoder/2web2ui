@@ -83,6 +83,7 @@ export class AuthPage extends Component {
 
   render() {
     const { errorDescription } = this.props.auth;
+    const hasSignup = (config.featureFlags || {}).has_signup;
     const { tfa } = this.props;
 
     return (
@@ -99,6 +100,8 @@ export class AuthPage extends Component {
           { tfa.enabled && <TfaForm onSubmit={this.tfaSubmit} /> }
           { !tfa.enabled && <LoginForm onSubmit={this.loginSubmit} ssoEnabled={this.state.ssoEnabled}/> }
         </Panel>
+
+        {hasSignup && <small>Don't have an account? <UnstyledLink to={'/join'}>Sign up</UnstyledLink>.</small> }
       </div>
     );
   }

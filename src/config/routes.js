@@ -19,7 +19,8 @@ import {
   webhooks,
   ipPools,
   PageNotFound,
-  DefaultRedirect
+  DefaultRedirect,
+  JoinPage
 } from 'src/pages';
 
 import onboarding from 'src/pages/onboarding';
@@ -92,6 +93,12 @@ const routes = [
     path: '/register',
     public: true,
     component: RegisterPage
+  },
+  {
+    path: '/join',
+    public: true,
+    component: JoinPage,
+    condition: configFlag('featureFlags.has_signup')
   },
 
   /**

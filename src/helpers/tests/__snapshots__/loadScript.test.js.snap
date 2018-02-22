@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`loadScript renders script tag correctly 1`] = `
+<Script
+  attributes={Object {}}
+  onCreate={[Function]}
+  onError={[Function]}
+  onLoad={[Function]}
+  url="domain.com/script.js"
+/>
+`;
