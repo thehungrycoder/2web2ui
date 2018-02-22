@@ -70,10 +70,11 @@ export class JoinPage extends Component {
         {loadScript({ url: LINKS.RECAPTCHA_LIB_URL })}
         <CenteredLogo />
 
-        <Panel sectioned accent title="Sign Up">
-          { createError && <Error error={<JoinError errors={createError} data={formData} />} /> }
-
-          <JoinForm onSubmit={this.registerSubmit} />
+        <Panel accent title="Sign Up">
+          { createError && <Panel.Section><Error error={<JoinError errors={createError} data={formData} />} /></Panel.Section> }
+          <Panel.Section>
+            <JoinForm onSubmit={this.registerSubmit} />
+          </Panel.Section>
         </Panel>
         <small>Already have an account? <UnstyledLink to={'/auth'}>Log In</UnstyledLink>.</small>
       </div>

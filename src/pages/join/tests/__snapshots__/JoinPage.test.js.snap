@@ -12,12 +12,13 @@ exports[`JoinPage render renders correctly 1`] = `
   <CenteredLogo />
   <Panel
     accent={true}
-    sectioned={true}
     title="Sign Up"
   >
-    <Connect(ReduxForm)
-      onSubmit={[Function]}
-    />
+    <Panel.Section>
+      <Connect(ReduxForm)
+        onSubmit={[Function]}
+      />
+    </Panel.Section>
   </Panel>
   <small>
     Already have an account? 
@@ -43,20 +44,23 @@ exports[`JoinPage render renders errors 1`] = `
   <CenteredLogo />
   <Panel
     accent={true}
-    sectioned={true}
     title="Sign Up"
   >
-    <Error
-      error={
-        <JoinError
-          data={Object {}}
-          errors={Object {}}
-        />
-      }
-    />
-    <Connect(ReduxForm)
-      onSubmit={[Function]}
-    />
+    <Panel.Section>
+      <Error
+        error={
+          <JoinError
+            data={Object {}}
+            errors={Object {}}
+          />
+        }
+      />
+    </Panel.Section>
+    <Panel.Section>
+      <Connect(ReduxForm)
+        onSubmit={[Function]}
+      />
+    </Panel.Section>
   </Panel>
   <small>
     Already have an account? 
