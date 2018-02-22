@@ -58,7 +58,15 @@ export function refreshTypeaheadCache(options) {
 
 export function maybeRefreshTypeaheadCache(update) {
   return (dispatch, getState) => {
-    const { reportOptions } = getState();
+    const { reportOptions, metrics } = getState();
+    const allCachesEmpty = ['domains', 'campaigns', 'sendingIps', 'ipPools'].every((cache) => (
+      metrics[cache].length === 0
+    ));
+
+    if (allCachesEmpty) {
+      dispatch(refreshTypeaheadCache(update));
+      return;
+    }
 
     // do nothing if there is no change in from or to
     if (reportOptions.from === update.from && reportOptions.to === update.to) {
