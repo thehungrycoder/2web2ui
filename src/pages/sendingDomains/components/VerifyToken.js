@@ -6,7 +6,7 @@ import { verifyMailboxToken, verifyAbuseToken, verifyPostmasterToken } from 'src
 import { showAlert } from 'src/actions/globalAlert';
 import _ from 'lodash';
 
-export class VerifyIncomingEmail extends Component {
+export class VerifyToken extends Component {
   // This component mounts within the ListPage's Page component
   // Which means domains have already been loaded by the time this mounts
   componentDidMount() {
@@ -62,4 +62,4 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = { showAlert, verifyMailboxToken, verifyAbuseToken, verifyPostmasterToken };
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(VerifyIncomingEmail));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(VerifyToken));

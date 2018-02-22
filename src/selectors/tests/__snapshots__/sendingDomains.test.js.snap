@@ -26,7 +26,7 @@ Array [
   Object {
     "status": Object {
       "cname_status": "valid",
-      "compliance_status": "invalid",
+      "compliance_status": "pending",
       "dkim_status": "invalid",
       "mx_status": "invalid",
       "ownership_verified": true,

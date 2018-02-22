@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { VerifyIncomingEmail } from '../VerifyIncomingEmail';
-describe('VerifyEmail component', () => {
+import { VerifyToken } from '../VerifyToken';
+describe('VerifyToken component', () => {
   const props = {
     showAlert: jest.fn(),
     domains: [
@@ -22,7 +22,7 @@ describe('VerifyEmail component', () => {
   let instance;
 
   beforeEach(() => {
-    wrapper = shallow(<VerifyIncomingEmail {...props} />);
+    wrapper = shallow(<VerifyToken {...props} />);
     instance = wrapper.instance();
   });
 
