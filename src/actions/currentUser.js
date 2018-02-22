@@ -51,3 +51,7 @@ export function verifyEmail(data = {}, type = 'VERIFY_EMAIL') {
     }));
   };
 }
+
+export function verifyEmailToken(data) {
+  return verifyEmail(data, 'VERIFY_EMAIL_TOKEN');
+}

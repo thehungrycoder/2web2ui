@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { verifyEmail } from 'src/actions/currentUser';
+import { verifyEmailToken } from 'src/actions/currentUser';
 import { Loading } from 'src/components';
 import { showAlert } from 'src/actions/globalAlert';
 
 export class EmailVerification extends Component {
   componentDidMount() {
-    const { token, verifyEmail } = this.props;
-    verifyEmail({ token }, 'VERIFY_EMAIL_TOKEN');
+    const { token, verifyEmailToken } = this.props;
+    verifyEmailToken({ token });
   }
 
   componentDidUpdate(prevProps) {
@@ -50,5 +50,5 @@ const mapStateToProps = (state, props) => ({
   error: state.currentUser.verifyError
 });
 
-export default connect(mapStateToProps, { verifyEmail, showAlert })(EmailVerification);
+export default connect(mapStateToProps, { verifyEmailToken, showAlert })(EmailVerification);
 
