@@ -123,3 +123,12 @@ export function buildCommonOptions(reportOptions, updates = {}) {
   };
 }
 
+export function average(item, keys = []) {
+  const avg = item[keys[0]] / item[keys[1]] || 0;
+  return isFinite(avg) ? avg : 0;
+}
+
+export function rate(item, keys) {
+  return average(item, keys) * 100;
+}
+
