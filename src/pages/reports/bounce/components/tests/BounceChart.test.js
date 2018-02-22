@@ -1,10 +1,10 @@
 import React from 'react';
-import { ChartGroup } from '../ChartGroup';
+import BounceChart from '../BounceChart';
 import { PieChart } from 'src/components';
 
 import { shallow } from 'enzyme';
 
-describe('Bounce ChartGroup: ', () => {
+describe('Bounce Chart', () => {
 
   const props = {
     categories: [
@@ -24,7 +24,7 @@ describe('Bounce ChartGroup: ', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = shallow(<ChartGroup {...props} />);
+    wrapper = shallow(<BounceChart {...props} />);
   });
 
   it('should render', () => {

@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import _ from 'lodash';
 import { Grid, Panel } from '@sparkpost/matchbox';
 import { Loading, PieChart } from 'src/components';
 import { generateColors } from 'src/helpers/color';
-import styles from './ChartGroup.module.scss';
+import styles from './AcceptedChart.module.scss';
 
 // Chart color palette generated from:
 const primaryColor = '#8CCA3A';
 
-export class ChartGroup extends Component {
+export default class AcceptedChart extends Component {
   state = {
     hoveredItem: null,
     active: null
@@ -140,10 +139,3 @@ export class ChartGroup extends Component {
     );
   }
 }
-
-const mapStateToProps = ({ acceptedReport }) => ({
-  loading: acceptedReport.aggregatesLoading || acceptedReport.attemptsLoading,
-  attempts: acceptedReport.attempts,
-  aggregates: acceptedReport.aggregates
-});
-export default connect(mapStateToProps, {})(ChartGroup);

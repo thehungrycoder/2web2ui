@@ -9,7 +9,7 @@ describe('Summary Table ', () => {
 
   const props = {
     addFilters: jest.fn(),
-    getTableData: jest.fn(),
+    _getTableData: jest.fn(),
     refresh: jest.fn(),
     metrics: [
       { key: 'metric_1' },
@@ -67,12 +67,11 @@ describe('Summary Table ', () => {
 
     snaps[0].find('UnstyledLink').simulate('click');
     expect(props.addFilters).toHaveBeenCalledWith([{ id: 0, type: 'Subaccount', value: 'Master Account (ID 0)' }]);
-    expect(props.refresh).toHaveBeenCalled();
   });
 
   it('should handle select change', () => {
     wrapper.find('Select').simulate('change', { target: { value: 'campaign' }});
-    expect(props.getTableData).toHaveBeenCalledWith({ groupBy: 'campaign' });
+    expect(props._getTableData).toHaveBeenCalledWith({ groupBy: 'campaign' });
   });
 
   it('should render with aggregate data', () => {

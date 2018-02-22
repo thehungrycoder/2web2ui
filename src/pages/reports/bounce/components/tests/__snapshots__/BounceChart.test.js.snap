@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Bounce ChartGroup:  should handle breadcrumb 1`] = `
+exports[`Bounce Chart should handle breadcrumb 1`] = `
 Object {
   "active": Object {
     "children": Array [
@@ -20,14 +20,14 @@ Object {
 }
 `;
 
-exports[`Bounce ChartGroup:  should handle breadcrumb 2`] = `
+exports[`Bounce Chart should handle breadcrumb 2`] = `
 Object {
   "active": null,
   "hoveredItem": null,
 }
 `;
 
-exports[`Bounce ChartGroup:  should handle mouse in and out 1`] = `
+exports[`Bounce Chart should handle mouse in and out 1`] = `
 Object {
   "active": null,
   "hoveredItem": Object {
@@ -39,35 +39,35 @@ Object {
 }
 `;
 
-exports[`Bounce ChartGroup:  should handle mouse in and out 2`] = `
+exports[`Bounce Chart should handle mouse in and out 2`] = `
 <PieChart.ActiveLabel
   name="in"
   value="40.00%"
 />
 `;
 
-exports[`Bounce ChartGroup:  should handle mouse in and out 3`] = `
+exports[`Bounce Chart should handle mouse in and out 3`] = `
 <PieChart.ActiveLabel
   name="Bounce Rate"
   value="50.00%"
 />
 `;
 
-exports[`Bounce ChartGroup:  should handle mouse in and out 4`] = `
+exports[`Bounce Chart should handle mouse in and out 4`] = `
 Object {
   "active": null,
   "hoveredItem": null,
 }
 `;
 
-exports[`Bounce ChartGroup:  should not do anything if clicking on an item without children 1`] = `
+exports[`Bounce Chart should not do anything if clicking on an item without children 1`] = `
 Object {
   "active": null,
   "hoveredItem": null,
 }
 `;
 
-exports[`Bounce ChartGroup:  should render 1`] = `
+exports[`Bounce Chart should render 1`] = `
 <Panel
   sectioned={true}
   title="Bounce Rates"
@@ -193,7 +193,7 @@ exports[`Bounce ChartGroup:  should render 1`] = `
 </Panel>
 `;
 
-exports[`Bounce ChartGroup:  should render correctly after click 1`] = `
+exports[`Bounce Chart should render correctly after click 1`] = `
 <PieChart.Legend
   headerData={
     Array [
@@ -235,7 +235,7 @@ exports[`Bounce ChartGroup:  should render correctly after click 1`] = `
 />
 `;
 
-exports[`Bounce ChartGroup:  should render correctly after click 2`] = `
+exports[`Bounce Chart should render correctly after click 2`] = `
 <LoadableComponent
   hoveredItem={null}
   onClick={[Function]}
@@ -259,14 +259,14 @@ exports[`Bounce ChartGroup:  should render correctly after click 2`] = `
 />
 `;
 
-exports[`Bounce ChartGroup:  should render label when hovering over a child 1`] = `
+exports[`Bounce Chart should render label when hovering over a child 1`] = `
 <PieChart.ActiveLabel
   name="softchild1"
   value="4.00%"
 />
 `;
 
-exports[`Bounce ChartGroup:  should render loading 1`] = `
+exports[`Bounce Chart should render loading 1`] = `
 <Panel
   sectioned={true}
   title="Bounce Rates"

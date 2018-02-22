@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: Summary Chart Header should render 1`] = `
+<Grid>
+  <Grid.Column
+    lg={5}
+    md={5}
+    xs={12}
+  >
+    <Legend
+      metrics={
+        Array [
+          "metric-1",
+        ]
+      }
+    />
+  </Grid.Column>
+  <Grid.Column
+    lg={7}
+    md={7}
+    xs={12}
+  >
+    <div>
+      <Button
+        onClick={[MockFunction]}
+        size="small"
+      >
+        Select Metrics
+      </Button>
+    </div>
+  </Grid.Column>
+</Grid>
+`;

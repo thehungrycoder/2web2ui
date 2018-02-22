@@ -13,9 +13,9 @@ export class BasicFilter extends Component {
   constructor(props) {
     super(props);
 
-    const { reportFilters } = props;
+    const { reportOptions } = props;
     this.state = {
-      reportFilters,
+      reportOptions,
       recipients: ''
     };
   }
@@ -69,7 +69,7 @@ export class BasicFilter extends Component {
     }
 
     this.setState({
-      reportFilters: {
+      reportOptions: {
         from: options.from,
         to: options.to,
         relativeRange: relativeRange
@@ -109,8 +109,8 @@ export class BasicFilter extends Component {
 
 const formName = 'msgEventsBasicFilter';
 const formOptions = { form: formName };
-const mapStateToProps = ({ reportFilters }) => ({
-  reportFilters,
+const mapStateToProps = ({ reportOptions }) => ({
+  reportOptions,
   formName
 });
 

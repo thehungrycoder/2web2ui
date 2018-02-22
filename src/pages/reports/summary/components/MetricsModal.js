@@ -8,7 +8,7 @@ import styles from './MetricsModal.module.scss';
 const METRICS_LIST = _.sortBy(list, ['label']);
 const MAX_METRICS = 5;
 
-class MetricsModal extends Component {
+export default class MetricsModal extends Component {
   componentWillMount() {
     this.syncPropsToState(this.props);
   }
@@ -52,6 +52,8 @@ class MetricsModal extends Component {
 
   renderMetrics() {
     const selectedCount = this.getSelectedMetrics().length;
+    const MAX = this.props.maxMetrics || MAX_METRICS;
+
     return METRICS_LIST.map((metric) => {
       if (metric.inSummary) {
         const checked = this.state[metric.key];
@@ -60,7 +62,7 @@ class MetricsModal extends Component {
             <Tooltip content={metric.description}>
               <Checkbox
                 id={metric.key}
-                disabled={selectedCount >= MAX_METRICS && !checked}
+                disabled={selectedCount >= MAX && !checked}
                 onChange={() => this.handleCheckbox(metric.key)}
                 checked={checked}
                 label={metric.label} />
@@ -92,5 +94,3 @@ class MetricsModal extends Component {
     );
   }
 }
-
-export default MetricsModal;

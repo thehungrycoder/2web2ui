@@ -11,11 +11,11 @@ const columns = [
 
 export class DataTable extends Component {
   getRowData = (rowData) => {
-    const { onDomainClick } = this.props;
-    const { reason, domain, rejection_category_name,count_rejected } = rowData;
+    const { addFilters } = this.props;
+    const { reason, domain, rejection_category_name, count_rejected } = rowData;
     return [
       <LongTextContainer text={reason} />,
-      <UnstyledLink onClick={() => onDomainClick(domain)}>{ domain }</UnstyledLink>,
+      <UnstyledLink onClick={() => addFilters([{ type: 'Recipient Domain', value: domain }])}>{ domain }</UnstyledLink>,
       rejection_category_name,
       count_rejected
     ];

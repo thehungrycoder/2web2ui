@@ -32,8 +32,8 @@ export class MessageEventsPage extends Component {
   }
 
   componentDidMount() {
-    const { reportFilters } = this.props;
-    this.refresh({ reportFilters });
+    const { reportOptions } = this.props;
+    this.refresh({ reportOptions });
   }
 
   getRowData = (rowData) => {
@@ -106,7 +106,7 @@ const mapStateToProps = (state) => {
   const events = selectMessageEvents(state);
 
   return {
-    reportFilters: state.reportFilters,
+    reportOptions: state.reportOptions,
     events: events,
     loading: state.messageEvents.loading,
     error: state.messageEvents.error,

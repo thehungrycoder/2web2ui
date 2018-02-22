@@ -1,65 +1,27 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-import qs from 'query-string';
-import { refreshAcceptedMetrics } from 'src/actions/acceptedReport';
-import { addFilters, initTypeaheadCache } from 'src/actions/reportFilters';
-import { getFilterSearchOptions, parseSearch } from 'src/helpers/reports';
-import { showAlert } from 'src/actions/globalAlert';
+import { refreshAcceptedReport } from 'src/actions/acceptedReport';
+import { selectAcceptedAggregates, selectAcceptedAttempts } from 'src/selectors/acceptedReport';
 import { Empty, PanelLoading } from 'src/components';
 import { Page } from '@sparkpost/matchbox';
-import { Filters, ShareModal } from '../components/';
-import ChartGroup from './components/ChartGroup';
+import ReportOptions from 'src/pages/reports/components/ReportOptions';
+import AcceptedChart from './components/AcceptedChart';
 import TopLevelMetrics from './components/TopLevelMetrics';
 import _ from 'lodash';
 
 export class AcceptedPage extends Component {
-  state = {
-    modal: false,
-    query: {}
-  }
 
-  componentDidMount() {
-    this.handleRefresh(this.parseSearch());
-    this.props.initTypeaheadCache();
-  }
-
-  parseSearch() {
-    const { options, filters } = parseSearch(this.props.location.search);
-
-    if (filters) {
-      this.props.addFilters(filters);
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.reportOptions !== this.props.reportOptions) {
+      this.props.refreshAcceptedReport(nextProps.reportOptions);
     }
-
-    return options;
   }
 
-  handleRefresh = (options) => {
-    const { refreshAcceptedMetrics, showAlert } = this.props;
-
-    return refreshAcceptedMetrics(options)
-      .then(() => this.updateLink())
-      .catch((err) => {
-        showAlert({ type: 'error', message: 'Unable to refresh report.', details: err.message });
-      });
-  }
-
-  updateLink = () => {
-    const { filters, history } = this.props;
-    const query = getFilterSearchOptions(filters);
-    const search = qs.stringify(query, { encode: false });
-    this.setState({ query });
-    history.replace({ pathname: '/reports/accepted', search });
-  }
-
-  handleModalToggle = (modal) => {
-    this.setState({ modal: !this.state.modal });
-  }
-
+  // TODO: move this logic into <TopLevelMetrics>
   renderTopLevelMetrics() {
-    const { chartLoading, aggregates, filters, metrics } = this.props;
+    const { loading, aggregates, metrics } = this.props;
 
-    if (chartLoading) {
+    if (loading) {
       return <PanelLoading minHeight='120px' />;
     }
 
@@ -67,50 +29,42 @@ export class AcceptedPage extends Component {
       return null;
     }
 
-    return <TopLevelMetrics aggregates={aggregates} filters={filters} metrics={metrics}/>;
+    return <TopLevelMetrics aggregates={aggregates} metrics={metrics} />;
   }
 
+  // TODO: move this logic into <AcceptedChart>
   renderChart() {
-    const { chartLoading, aggregates } = this.props;
+    const { loading, aggregates, attempts } = this.props;
 
-    if (!chartLoading && _.isEmpty(aggregates)) {
+    if (!loading && _.isEmpty(aggregates)) {
       return <Empty title='Accepted Rates' message='No Accepted Messages To Report' />;
     }
 
-    return <ChartGroup loading={chartLoading} />;
+    return <AcceptedChart loading={loading} aggregates={aggregates} attempts={attempts} />;
   }
 
   render() {
-    const { modal, query } = this.state;
-
+    const { loading } = this.props;
     return (
       <Page title='Accepted Report'>
-        <Filters refresh={this.handleRefresh} onShare={() => this.handleModalToggle('shareModal')} />
+        <ReportOptions reportLoading={loading} />
         {this.renderTopLevelMetrics()}
         {this.renderChart()}
-        <ShareModal
-          open={modal}
-          handleToggle={this.handleModalToggle}
-          query={query} />
       </Page>
     );
   }
 }
 
-
-const mapStateToProps = ({ reportFilters, acceptedReport }) => ({
-  filters: reportFilters,
-  attempts: acceptedReport.attempts,
-  aggregates: acceptedReport.aggregates,
-  metrics: acceptedReport.metrics,
-  chartLoading: acceptedReport.aggregatesLoading || acceptedReport.attemptsLoading
+const mapStateToProps = (state) => ({
+  attempts: selectAcceptedAttempts(state),
+  aggregates: selectAcceptedAggregates(state),
+  metrics: state.acceptedReport.metrics,
+  loading: state.acceptedReport.aggregatesLoading || state.acceptedReport.attemptsLoading,
+  reportOptions: state.reportOptions
 });
 
 const mapDispatchToProps = {
-  refreshAcceptedMetrics,
-  initTypeaheadCache,
-  addFilters,
-  showAlert
+  refreshAcceptedReport
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AcceptedPage));
+export default connect(mapStateToProps, mapDispatchToProps)(AcceptedPage);

@@ -1,12 +1,6 @@
 import React from 'react';
 import { BouncePage } from '../BouncePage';
 import { shallow, mount } from 'enzyme';
-import * as reportHelpers from 'src/helpers/reports';
-import Filters from 'src/pages/reports/components/Filters';
-
-jest.mock('src/helpers/reports');
-
-Date.now = jest.fn(() => 1487076708000);
 
 describe('BouncePage: ', () => {
 
@@ -17,9 +11,11 @@ describe('BouncePage: ', () => {
       countTargeted: 10
     },
     totalBounces: 100,
-    filters: {
+    reportOptions: {
       relativeRange: 'hour'
     },
+    addFilters: jest.fn(),
+    refreshBounceReport: jest.fn(),
     reasons: [ {
       bounce_category_name: 'Block',
       bounce_class_description: 'The message was blocked by the receiver as coming from a known spam source',
@@ -28,49 +24,25 @@ describe('BouncePage: ', () => {
       count_bounce: 5,
       domain: 'yahoo.com',
       reason: '554 - 5.7.1 Blacklisted by \'twoomail.com\'(twoo.com.multi.surbl.org) Contact the postmaster of this domain for resolution. This attempt has been logged.'
-    } ],
-    refreshBounceChartMetrics: jest.fn((a) => Promise.resolve()),
-    refreshBounceTableMetrics: jest.fn((a) => Promise.resolve()),
-    initTypeaheadCache: jest.fn((a) => Promise.resolve()),
-    location: {
-      search: {}
-    },
-    history: {
-      replace: jest.fn()
-    }
+    } ]
   };
 
   let wrapper;
-  let spyParseSearch;
 
   beforeEach(() => {
-    props.addFilters = jest.fn();
-    props.showAlert = jest.fn();
-    reportHelpers.getFilterSearchOptions = jest.fn(() => []);
-    spyParseSearch = reportHelpers.parseSearch = jest.fn(() => ({ options: {}}));
-    reportHelpers.getShareLink = jest.fn(() => ({ link: '', search: '' }));
     wrapper = shallow(<BouncePage {...props} />);
   });
 
   it('should render', () => {
-    expect(props.refreshBounceChartMetrics).toHaveBeenCalled();
-    expect(props.refreshBounceTableMetrics).toHaveBeenCalled();
-    expect(spyParseSearch).toHaveBeenCalled();
-    expect(props.initTypeaheadCache).toHaveBeenCalled();
-    expect(props.addFilters).toHaveBeenCalledWith([]);
+    expect(props.refreshBounceReport).not.toHaveBeenCalled();
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should call addfilters when there are filters', () => {
-    reportHelpers.parseSearch = jest.fn(() => ({ options: {}, filters: ['1', '2', '3']}));
-    wrapper.instance().parseSearch();
-    expect(props.addFilters).toHaveBeenCalledWith(['1', '2', '3']);
-  });
-
-  it('should show alert when one of the refresh calls fails', async() => {
-    wrapper.setProps({ refreshBounceChartMetrics: jest.fn(() => Promise.reject(new Error('failed to load'))) });
-    await wrapper.instance().handleRefresh();
-    expect(props.showAlert).toHaveBeenCalledWith({ type: 'error', message: 'Unable to refresh bounce report.', details: 'failed to load' });
+  it('should refresh when report options reference changes', () => {
+    const newReportOptions = {};
+    expect(props.refreshBounceReport).not.toHaveBeenCalled();
+    wrapper.setProps({ reportOptions: newReportOptions });
+    expect(props.refreshBounceReport).toHaveBeenCalledWith(newReportOptions);
   });
 
   it('should render correctly with no bounces', () => {
@@ -122,9 +94,4 @@ describe('BouncePage: ', () => {
     expect(props.addFilters).toHaveBeenCalledWith([{ type: 'Recipient Domain', value: 'gmail' }]);
   });
 
-  it('should show modal toggle', () => {
-    const stateSpy = jest.spyOn(wrapper.instance(), 'setState');
-    wrapper.find(Filters).simulate('share');
-    expect(stateSpy).toHaveBeenCalled();
-  });
 });

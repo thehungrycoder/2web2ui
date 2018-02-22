@@ -13,7 +13,7 @@ let instance;
 beforeEach(() => {
   props = {
     onSubmit: jest.fn(() => Promise.resolve()),
-    reportFilters: null
+    reportOptions: null
   };
 
   wrapper = shallow(<BasicFilter {...props} />);
@@ -29,7 +29,7 @@ describe('BasicFilter', () => {
     it('refresh calls onSubmit with correct params', () => {
       props.recipients = 'email@domain.com';
       instance.refresh();
-      expect(props.onSubmit).toBeCalledWith({ recipients: '', reportFilters: null });
+      expect(props.onSubmit).toBeCalledWith({ recipients: '', reportOptions: null });
     });
   });
 
@@ -122,7 +122,7 @@ describe('BasicFilter', () => {
 
       instance.handleDateSelection(options);
       expect(dateMock.getRelativeDates).toHaveBeenCalledTimes(1);
-      expect(wrapper.state().reportFilters).toEqual({ to: now, from: now, relativeRange: '30days' });
+      expect(wrapper.state().reportOptions).toEqual({ to: now, from: now, relativeRange: '30days' });
       expect(props.onSubmit).toHaveBeenCalledTimes(1);
     });
 
@@ -134,7 +134,7 @@ describe('BasicFilter', () => {
 
       instance.handleDateSelection(options);
       expect(dateMock.getRelativeDates).toHaveBeenCalledTimes(0);
-      expect(wrapper.state().reportFilters).toEqual({ to: now, from: now, relativeRange: undefined });
+      expect(wrapper.state().reportOptions).toEqual({ to: now, from: now, relativeRange: undefined });
       expect(props.onSubmit).toHaveBeenCalledTimes(1);
     });
   });

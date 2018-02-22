@@ -1,4 +1,14 @@
-export default (state = { pending: false, error: null, results: []}, { type, payload }) => {
+const initialState = {
+  pending: false,
+  error: null,
+  results: [],
+  domains: [],
+  campaigns: [],
+  sendingIps: [],
+  ipPools: []
+};
+
+export default (state = initialState, { type, payload }) => {
   switch (type) {
     case 'FETCH_METRICS_PENDING':
       return { ...state, pending: true };

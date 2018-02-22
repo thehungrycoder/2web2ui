@@ -1,74 +1,34 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-import qs from 'query-string';
 import _ from 'lodash';
-
-import { addFilters, initTypeaheadCache } from 'src/actions/reportFilters';
-import { loadDelayReasonsByDomain, loadDelayMetrics } from 'src/actions/delayReport';
-import { parseSearch, getFilterSearchOptions } from 'src/helpers/reports';
-import { showAlert } from 'src/actions/globalAlert';
+import { addFilters } from 'src/actions/reportOptions';
+import { refreshDelayReport } from 'src/actions/delayReport';
 import { Page, Panel } from '@sparkpost/matchbox';
-import ShareModal from '../components/ShareModal';
-import Filters from '../components/Filters';
+import ReportOptions from 'src/pages/reports/components/ReportOptions';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
 import MetricsSummary from '../components/MetricsSummary';
 import DelaysDataTable from './components/DelaysDataTable';
 
 export class DelayPage extends Component {
-  state = {
-    modal: false,
-    query: {}
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.reportOptions !== this.props.reportOptions) {
+      this.props.refreshDelayReport(nextProps.reportOptions);
+    }
   }
 
-  componentDidMount() {
-    this.handleRefresh(this.parseSearch());
-    this.props.initTypeaheadCache();
-  }
-
-  parseSearch() {
-    const { filters = [], options } = parseSearch(this.props.location.search);
-    this.props.addFilters(filters);
-    return options;
-  }
-
-  handleRefresh = (options) => Promise.all([
-    this.props.loadDelayMetrics(options),
-    this.props.loadDelayReasonsByDomain(options)
-  ])
-    .then(() => this.updateLink())
-    .catch((err) => {
-      this.props.showAlert({ type: 'error', message: 'Unable to refresh delay report.', details: err.message });
-    });
-
-  handleModalToggle = (modal) => {
-    this.setState({ modal: !this.state.modal });
-  }
-
-  updateLink = () => {
-    const { filters, history } = this.props;
-    const query = getFilterSearchOptions(filters);
-    const search = qs.stringify(query, { encode: false });
-    this.setState({ query });
-    history.replace({ pathname: '/reports/delayed', search });
-  }
-
-  handleDomainClick = (domain) => {
-    this.props.addFilters([{ type: 'Recipient Domain', value: domain }]);
-    this.handleRefresh();
-  }
-
-  renderCollection() {
+  renderDataTable() {
     const { loading, reasons, totalAccepted } = this.props;
 
     if (loading) {
       return <PanelLoading />;
     }
-    return <DelaysDataTable totalAccepted={totalAccepted} rows={reasons} onDomainClick={this.handleDomainClick} />;
+
+    return <DelaysDataTable totalAccepted={totalAccepted} rows={reasons} addFilters={this.props.addFilters} />;
   }
 
   renderTopLevelMetrics() {
-    const { aggregatesLoading, aggregates, filters } = this.props;
+    const { aggregatesLoading, aggregates } = this.props;
     const { count_delayed_first, count_accepted } = aggregates;
 
     if (aggregatesLoading) {
@@ -84,55 +44,42 @@ export class DelayPage extends Component {
         rateValue={(count_delayed_first / count_accepted) * 100}
         rateTitle='Delayed Rate'
         secondaryMessage={`${count_delayed_first.toLocaleString()} were delayed on first attempt.`}
-        {...filters} >
+      >
         <strong>{count_delayed_first.toLocaleString()}</strong> of your messages were delayed of <strong>{count_accepted.toLocaleString()}</strong> messages accepted
       </MetricsSummary>
     );
   }
 
   render() {
-    const { modal, query } = this.state;
     const { loading } = this.props;
 
     return (
       <Page title='Delay Report'>
-        <Filters
-          refresh={this.handleRefresh}
-          onShare={this.handleModalToggle}
-          shareDisabled={loading}
-        />
+        <ReportOptions reportLoading={loading} />
         { this.renderTopLevelMetrics() }
         <Panel title='Delayed Messages' className='ReasonsTable'>
-          { this.renderCollection() }
+          { this.renderDataTable() }
         </Panel>
-        <ShareModal
-          open={modal}
-          handleToggle={this.handleModalToggle}
-          query={query} />
       </Page>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  const loading = state.delayReport.aggregatesLoading || state.delayReport.reasonsLoading;
-  const aggregates = state.delayReport.aggregates;
+  const { aggregates } = state.delayReport;
   return {
-    filters: state.reportFilters,
-    loading,
+    loading: state.delayReport.aggregatesLoading || state.delayReport.reasonsLoading,
     reasons: state.delayReport.reasons,
     totalAccepted: aggregates ? aggregates.count_accepted : 1,
     aggregates,
-    aggregatesLoading: state.delayReport.aggregatesLoading
+    aggregatesLoading: state.delayReport.aggregatesLoading,
+    reportOptions: state.reportOptions
   };
 };
 
 const mapDispatchToProps = {
   addFilters,
-  initTypeaheadCache,
-  loadDelayReasonsByDomain,
-  loadDelayMetrics,
-  showAlert
+  refreshDelayReport
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(DelayPage));
+export default connect(mapStateToProps, mapDispatchToProps)(DelayPage);

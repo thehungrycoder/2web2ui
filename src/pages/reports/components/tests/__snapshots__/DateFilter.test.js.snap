@@ -10,6 +10,7 @@ exports[`Component: DateFilter should render ok by default 1`] = `
     <TextField
       connectLeft={
         <Select
+          disabled={false}
           onChange={[Function]}
           options={Array []}
           placeholderValue=""

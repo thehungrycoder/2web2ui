@@ -1,6 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Should get search options 1`] = `
+exports[`Should parse search with no empty value 1`] = `
+Object {
+  "options": Object {},
+}
+`;
+
+exports[`should get search options 1`] = `
 Object {
   "filters": Array [
     "type:123",
@@ -11,7 +17,7 @@ Object {
 }
 `;
 
-exports[`Should parse search with custom range 1`] = `
+exports[`should parse search with custom range 1`] = `
 Object {
   "filters": Array [
     Object {
@@ -36,7 +42,7 @@ Object {
 }
 `;
 
-exports[`Should parse search with missing range (as custom) 1`] = `
+exports[`should parse search with missing range 1`] = `
 Object {
   "filters": Array [
     Object {
@@ -55,19 +61,12 @@ Object {
     "metrics": Array [
       "count-something",
     ],
-    "relativeRange": "custom",
     "to": 2017-11-04T14:43:00.000Z,
   },
 }
 `;
 
-exports[`Should parse search with no empty value 1`] = `
-Object {
-  "options": Object {},
-}
-`;
-
-exports[`Should parse search with relative range 1`] = `
+exports[`should parse search with relative range 1`] = `
 Object {
   "filters": Array [
     Object {
@@ -86,7 +85,7 @@ Object {
     "metrics": Array [
       "count-something",
     ],
-    "relativeRange": "day",
+    "relativeRange": "relative-range",
     "to": "relative-to",
   },
 }

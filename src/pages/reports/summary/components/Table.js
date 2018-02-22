@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import cx from 'classnames';
 
-import { getTableData } from 'src/actions/summaryChart';
-import { addFilters } from 'src/actions/reportFilters';
+import { _getTableData } from 'src/actions/summaryChart';
+import { addFilters } from 'src/actions/reportOptions';
 import typeaheadCacheSelector from 'src/selectors/reportFilterTypeaheadCache';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
 
@@ -17,12 +17,11 @@ import styles from './Table.module.scss';
 
 export class Table extends Component {
   handleGroupChange = (e) => {
-    this.props.getTableData({ groupBy: e.target.value });
+    this.props._getTableData({ groupBy: e.target.value });
   }
 
   handleRowClick = (item) => {
     this.props.addFilters([item]);
-    this.props.refresh();
   }
 
   getColumnHeaders() {
@@ -177,4 +176,4 @@ const mapStateToProps = (state) => ({
   hasSubaccounts: hasSubaccounts(state),
   ...state.summaryChart
 });
-export default connect(mapStateToProps, { getTableData, addFilters })(Table);
+export default connect(mapStateToProps, { _getTableData, addFilters })(Table);

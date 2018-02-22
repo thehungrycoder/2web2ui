@@ -1,15 +1,17 @@
-/* eslint max-lines: ["error", 176] */
+/* eslint max-lines: ["error", 200] */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactDOM from 'react-dom';
 import { subMonths, format } from 'date-fns';
 import { getStartOfDay, getEndOfDay, relativeDateOptions } from 'src/helpers/date';
+import { refreshReportOptions } from 'src/actions/reportOptions';
 import { Button, Datepicker, TextField, Select, Popover } from '@sparkpost/matchbox';
 import DateForm from './DateForm';
+import { DATE_FORMATS } from 'src/constants';
 import styles from './DateFilter.module.scss';
 
 export class DateFilter extends Component {
-  format = 'MMM DD, YY h:mma';
+  DATE_FORMAT = DATE_FORMATS.READABLE_DATE_TIME;
   state = {
     showDatePicker: false,
     selecting: false,
@@ -31,7 +33,7 @@ export class DateFilter extends Component {
     this.syncPropsToState(nextProps);
   }
 
-  // Sets local state from reportFilters redux state - need to separate to handle pre-apply state
+  // Sets local state from reportOptions redux state - need to separate to handle pre-apply state
   syncPropsToState = ({ filter }) => {
     this.setState({ selected: { from: filter.from, to: filter.to }});
   }
@@ -108,7 +110,7 @@ export class DateFilter extends Component {
       this.setState({ showDatePicker: true });
     } else {
       this.setState({ showDatePicker: false });
-      this.props.refresh({ relativeRange: value });
+      this.props.refreshReportOptions({ relativeRange: value });
     }
   }
 
@@ -118,7 +120,7 @@ export class DateFilter extends Component {
 
   handleSubmit = () => {
     this.setState({ showDatePicker: false, selecting: false });
-    this.props.refresh({ ...this.state.selected, relativeRange: 'custom' });
+    this.props.refreshReportOptions({ ...this.state.selected, relativeRange: 'custom' });
   }
 
   render() {
@@ -131,13 +133,14 @@ export class DateFilter extends Component {
     const rangeSelect = <Select
       options={relativeDateOptions}
       onChange={this.handleSelectRange}
-      value={selectedRange} />;
+      value={selectedRange}
+      disabled={this.props.reportLoading} />;
 
     const dateField = <TextField
       labelHidden={true}
       onClick={this.showDatePicker}
       connectLeft={rangeSelect}
-      value={`${format(from, this.format)} - ${format(to, this.format)}`}
+      value={`${format(from, this.DATE_FORMAT)} - ${format(to, this.DATE_FORMAT)}`}
       readOnly />;
 
     return (
@@ -171,5 +174,5 @@ export class DateFilter extends Component {
   }
 }
 
-const mapStateToProps = ({ reportFilters }) => ({ filter: reportFilters });
-export default connect(mapStateToProps)(DateFilter);
+const mapStateToProps = ({ reportOptions }) => ({ filter: reportOptions });
+export default connect(mapStateToProps, { refreshReportOptions })(DateFilter);

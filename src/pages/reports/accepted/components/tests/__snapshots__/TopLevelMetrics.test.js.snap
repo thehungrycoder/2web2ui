@@ -2,7 +2,7 @@
 
 exports[`Accepted TopLevelMetrics Component:  should render correctly 1`] = `
 <div>
-  <MetricsSummary
+  <Connect(MetricsSummary)
     rateTitle="Accepted Rate"
     rateValue={75}
     relativeRange="hour"
@@ -16,7 +16,7 @@ exports[`Accepted TopLevelMetrics Component:  should render correctly 1`] = `
       200
     </strong>
      targeted messages were accepted
-  </MetricsSummary>
+  </Connect(MetricsSummary)>
   <Grid>
     <Grid.Column
       md={4}

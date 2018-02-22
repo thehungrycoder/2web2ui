@@ -1,22 +1,43 @@
 import moment from 'moment';
+import _ from 'lodash';
 import qs from 'query-string';
 import { getRelativeDates } from 'src/helpers/date';
 
+const DEFAULT_LINK_PARAMS = [
+  'from',
+  'to',
+  'range',
+  'filters'
+];
+
+export function stringifyFilter(filter) {
+  const subaccount = filter.type === 'Subaccount' ? `:${filter.id}` : '';
+  return `${filter.type}:${filter.value}${subaccount}`;
+}
+
+export function dedupeFilters(filters) {
+  return _.uniqBy(filters, stringifyFilter);
+}
+
 /**
- * Creates search options object from shared report options. Page specific options not included (ie. summary chart selected metrics)
- * @param  {Object} filters - reportFilters state
+ * Creates search options object from all possible query string params.
+ * By default, only returns the DEFAULT_LINK_PARAMS, but report-specific
+ * params may be included with extraLinkParams (ie. summary chart selected metrics)
+ *
+ * @param  {Object} reportOptions - reportOptions state
+ * @param {Array} extraLinkParams - optional array of keys to include, in addition to default keys
  * @return {Object} - formatted search options object
  */
-export function getFilterSearchOptions(filters) {
-  return {
-    from: moment(filters.from).utc().format(),
-    to: moment(filters.to).utc().format(),
-    range: filters.relativeRange,
-    filters: filters.activeList.map((filter) => {
-      const subaccount = filter.type === 'Subaccount' ? `:${filter.id}` : '';
-      return `${filter.type}:${filter.value}${subaccount}`;
-    })
+export function getReportSearchOptions(reportOptions, extraLinkParams = []) {
+  const { filters = [], metrics = []} = reportOptions;
+  const options = {
+    from: moment(reportOptions.from).utc().format(),
+    to: moment(reportOptions.to).utc().format(),
+    range: reportOptions.relativeRange,
+    filters: filters.map(stringifyFilter),
+    metrics: metrics.map((metric) => typeof metric === 'string' ? metric : metric.key)
   };
+  return _.pick(options, [ ...DEFAULT_LINK_PARAMS, ...extraLinkParams ]);
 }
 
 /**
@@ -25,7 +46,7 @@ export function getFilterSearchOptions(filters) {
  * @return {Object}
  *   {
  *     options - options for refresh actions
- *     filters - array of objects ready to be called with reportFilters.addFilter action
+ *     filters - array of objects ready to be called with reportOptions.addFilter action
  *   }
  */
 export function parseSearch(search) {
@@ -33,8 +54,7 @@ export function parseSearch(search) {
     return { options: {}};
   }
 
-  const { from, to, range = 'custom', metrics = [], filters = []} = qs.parse(search);
-  const metricsList = typeof metrics === 'string' ? [metrics] : metrics;
+  const { from, to, range, metrics, filters = []} = qs.parse(search);
   const filtersList = (typeof filters === 'string' ? [filters] : filters).map((filter) => {
     const parts = filter.split(':');
     const type = parts.shift();
@@ -53,13 +73,24 @@ export function parseSearch(search) {
     return { value, type, id };
   });
 
-  const options = {
-    metrics: metricsList,
-    from: new Date(from),
-    to: new Date(to),
-    ...getRelativeDates(range), // invalid or custom ranges produce {} here
-    relativeRange: range
-  };
+
+  let options = {};
+
+  if (metrics) {
+    options.metrics = (typeof metrics === 'string') ? [metrics] : metrics;
+  }
+
+  if (from) {
+    options.from = new Date(from);
+  }
+
+  if (to) {
+    options.to = new Date(to);
+  }
+
+  if (range) {
+    options = { ...options, ...getRelativeDates(range) };
+  }
 
   // filters are used in pages to dispatch updates to Redux store
   return { options, filters: filtersList };
