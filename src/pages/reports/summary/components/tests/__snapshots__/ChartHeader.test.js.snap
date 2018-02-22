@@ -27,29 +27,6 @@ exports[`Component: Summary Chart Header should render 1`] = `
       >
         Select Metrics
       </Button>
-      <Button.Group>
-        <Button
-          onClick={[Function]}
-          primary={true}
-          size="small"
-        >
-          Linear
-        </Button>
-        <Button
-          onClick={[Function]}
-          primary={false}
-          size="small"
-        >
-          Log
-        </Button>
-        <Button
-          onClick={[Function]}
-          primary={false}
-          size="small"
-        >
-          √ Sq Rt
-        </Button>
-      </Button.Group>
     </div>
   </Grid.Column>
 </Grid>
