@@ -105,3 +105,4 @@ export function registerUser(token, data) {
       throw error;
     });
 }
+

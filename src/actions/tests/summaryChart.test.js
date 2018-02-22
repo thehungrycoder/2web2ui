@@ -182,7 +182,7 @@ describe('Action Creator: Refresh Summary Report', () => {
     });
 
     it('should use the correct path for aggregate group', () => {
-      const params = {}
+      const params = {};
       testState.summaryChart = {
         groupBy: 'aggregate',
         metrics: ['count_accepted']
