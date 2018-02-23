@@ -12,6 +12,9 @@ describe('VerifyToken component', () => {
     location: {
       search: ''
     },
+    history: {
+      push: jest.fn()
+    },
     verifyMailboxToken: jest.fn(() => Promise.resolve()),
     verifyAbuseToken: jest.fn(() => Promise.resolve()),
     verifyPostmasterToken: jest.fn(() => Promise.resolve()),
@@ -75,6 +78,7 @@ describe('VerifyToken component', () => {
     it('show a success alert if domain has been verified', () => {
       wrapper.setProps({ tokenStatus: { type: 'postmaster_at', domain: 'foo.co', postmaster_at_status: 'valid' }});
       expect(instance.props.showAlert).toHaveBeenCalledWith({ type: 'success', message: 'foo.co has been verified' });
+      expect(instance.props.history.push).toHaveBeenCalledWith('/account/sending-domains/edit/foo.co');
     });
   });
 });

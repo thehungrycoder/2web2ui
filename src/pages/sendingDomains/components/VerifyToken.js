@@ -38,7 +38,7 @@ export class VerifyToken extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { tokenStatus, showAlert } = this.props;
+    const { tokenStatus, showAlert, history } = this.props;
 
     // Api returns a 200 even if domain has not been verified
     // Manually check if this domain has been verified
@@ -47,6 +47,7 @@ export class VerifyToken extends Component {
         showAlert({ type: 'error', message: `Unable to verify ${tokenStatus.domain}` });
       } else {
         showAlert({ type: 'success', message: `${tokenStatus.domain} has been verified` });
+        history.push(`/account/sending-domains/edit/${tokenStatus.domain}`);
       }
     }
   }
