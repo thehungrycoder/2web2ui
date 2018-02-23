@@ -44,6 +44,10 @@ export function getStartOfDay(date) {
   return start;
 }
 
+export function isSameDate(a, b) {
+  return (a instanceof Date) && (b instanceof Date) && (a.getTime() === b.getTime());
+}
+
 export function getRelativeDates(range) {
   const now = moment.utc();
   const to = now.toDate();
