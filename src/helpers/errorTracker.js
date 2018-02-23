@@ -41,7 +41,14 @@ export function getEnricherOrDieTryin(store) {
     const { currentUser } = store.getState();
     const user = _.pick(currentUser, ['access_level', 'customer', 'username']);
 
-    return { ...data, user };
+    return {
+      ...data,
+      tags: { // all tags can be easily searched and sent in Slack notifications
+        ...data.tags,
+        customer: _.get(user, 'customer')
+      },
+      user
+    };
   };
 }
 
@@ -65,7 +72,7 @@ class ErrorTracker {
       breadcrumbCallback,
       dataCallback: getEnricherOrDieTryin(store),
       release,
-      extra: { tenant }
+      tags: { tenant }
     };
 
     Raven.config(dsn, options).install();
