@@ -4,7 +4,8 @@ import {
   getRelativeDates,
   formatDate,
   formatTime,
-  formatDateTime
+  formatDateTime,
+  isSameDate
 } from '../date';
 import cases from 'jest-in-case';
 import moment from 'moment';
@@ -33,6 +34,20 @@ describe('Date helpers', () => {
     const startOfDay = new Date('2017-12-18T00:00:00.000');
     expect(getStartOfDay('2017-12-18T00:01:59')).toEqual(startOfDay);
     expect(getStartOfDay('2017-12-18T23:59:59')).toEqual(startOfDay);
+  });
+
+  it('should compare two dates', () => {
+    const a1 = new Date('2018-02-14T12:00:00');
+    const a2 = new Date(a1);
+    const b = new Date(a1);
+    b.setYear(1970);
+    const c = '2018-02-14T12:00:00';
+
+    expect(isSameDate(a1, a2)).toEqual(true);
+    expect(isSameDate(a1, b)).toEqual(false);
+
+    // must be dates to be the same
+    expect(isSameDate(a1, c)).toEqual(false);
   });
 
   cases('getRelativeDates calculations', ({ range, subtractArgs }) => {

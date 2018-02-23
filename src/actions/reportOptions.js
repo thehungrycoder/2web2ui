@@ -8,7 +8,7 @@ import {
 import { listTemplates } from './templates';
 import { list as listSubaccounts } from './subaccounts';
 import { list as listSendingDomains } from './sendingDomains';
-import { getRelativeDates } from 'src/helpers/date';
+import { getRelativeDates, isSameDate } from 'src/helpers/date';
 import { getQueryFromOptions } from 'src/helpers/metrics';
 
 // array of all lists that need to be re-filtered when time changes
@@ -69,7 +69,10 @@ export function maybeRefreshTypeaheadCache(update) {
     }
 
     // do nothing if there is no change in from or to
-    if (reportOptions.from === update.from && reportOptions.to === update.to) {
+    if (
+      isSameDate(reportOptions.from, update.from) &&
+      isSameDate(reportOptions.to, update.to)
+    ) {
       return;
     }
 
@@ -119,7 +122,11 @@ export function refreshReportOptions(update) {
     }
 
     // do nothing if there is no change in from or to
-    if (reportOptions.from === update.from && reportOptions.to === update.to) {
+    if (
+      !update.force &&
+      isSameDate(reportOptions.from, update.from) &&
+      isSameDate(reportOptions.to, update.to)
+    ) {
       return;
     }
 

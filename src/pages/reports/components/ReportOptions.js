@@ -22,7 +22,7 @@ export class ReportOptions extends Component {
     // initial report load
     const { options, filters = []} = parseSearch(this.props.location.search);
     this.props.addFilters(filters);
-    this.props.refreshReportOptions(options);
+    this.props.refreshReportOptions({ ...options, force: true });
 
     // initial typeahead cache load
     this.props.initTypeaheadCache();
