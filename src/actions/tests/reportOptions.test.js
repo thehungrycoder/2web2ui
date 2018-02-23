@@ -4,7 +4,7 @@ import * as metrics from 'src/actions/metrics';
 import { listTemplates } from 'src/actions/templates';
 import { list as listSubaccounts } from 'src/actions/subaccounts';
 import { list as listSendingDomains } from 'src/actions/sendingDomains';
-import { getRelativeDates } from 'src/helpers/date';
+import { getRelativeDates, isSameDate } from 'src/helpers/date';
 
 jest.mock('src/helpers/date');
 jest.mock('src/helpers/metrics');
@@ -20,7 +20,12 @@ describe('Action Creator: Report Filters', () => {
 
   beforeEach(() => {
     testState = {
-      metrics: {},
+      metrics: {
+        campaigns: [],
+        domains: [],
+        sendingIps: [],
+        ipPools: []
+      },
       templates: {
         list: []
       },
@@ -33,6 +38,7 @@ describe('Action Creator: Report Filters', () => {
     };
     dispatchMock = jest.fn((a) => a);
     getStateMock = jest.fn(() => testState);
+    isSameDate.mockImplementation(() => false);
   });
 
   describe('initTypeaheadCache', () => {
@@ -68,7 +74,7 @@ describe('Action Creator: Report Filters', () => {
     expect(metrics.fetchMetricsIpPools).toHaveBeenCalledTimes(1);
   });
 
-  describe('maybeRefreshTypeahead', () => {
+  describe('maybeRefreshTypeaheadCache', () => {
 
     let currentFrom;
     let currentTo;
@@ -85,9 +91,13 @@ describe('Action Creator: Report Filters', () => {
         to: currentTo,
         relativeRange: 'custom'
       };
+
+      // prevent "all caches empty" scenario by default
+      testState.metrics.campaigns.push('campaign-1');
     });
 
     it('should not refresh if from and to are not changed', async() => {
+      isSameDate.mockImplementation(() => true);
       reportOptions.maybeRefreshTypeaheadCache({
         from: currentFrom,
         to: currentTo
@@ -201,10 +211,17 @@ describe('Action Creator: Report Filters', () => {
     });
 
     it('should do nothing if dates did not change at all', () => {
+      isSameDate.mockImplementation(() => true);
       const action = reportOptions.refreshReportOptions({ from: currentFrom, to: currentTo })(dispatchMock, getStateMock);
       expect(action).toBeUndefined();
       expect(getRelativeDates).not.toHaveBeenCalled();
       expect(dispatchMock).not.toHaveBeenCalled();
+    });
+
+    it('should refresh if dates did not change at all but "force" is present', () => {
+      isSameDate.mockImplementation(() => true);
+      reportOptions.refreshReportOptions({ from: currentFrom, to: currentTo, force: true })(dispatchMock, getStateMock);
+      expect(dispatchMock).toHaveBeenCalledTimes(2);
     });
 
   });

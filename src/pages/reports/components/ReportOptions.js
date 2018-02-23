@@ -12,6 +12,7 @@ import typeaheadCacheSelector from 'src/selectors/reportFilterTypeaheadCache';
 import { showAlert } from 'src/actions/globalAlert';
 import styles from './ReportOptions.module.scss';
 
+// TODO: separate the share modal / link update logic out of this component
 export class ReportOptions extends Component {
   state = {
     modal: false,
@@ -22,7 +23,7 @@ export class ReportOptions extends Component {
     // initial report load
     const { options, filters = []} = parseSearch(this.props.location.search);
     this.props.addFilters(filters);
-    this.props.refreshReportOptions(options);
+    this.props.refreshReportOptions({ ...options, force: true });
 
     // initial typeahead cache load
     this.props.initTypeaheadCache();
