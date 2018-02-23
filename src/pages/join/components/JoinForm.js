@@ -28,6 +28,7 @@ const { recaptcha } = config;
  * verifyCallback: this is triggered upon user completes recaptcha challenge successfuly. we pass the data we've received
  */
 
+
 export class JoinForm extends Component {
   state = {
     reCaptchaReady: false,
@@ -117,6 +118,15 @@ export class JoinForm extends Component {
           label={<span>I agree to SparkPost's <UnstyledLink to={LINKS.TOU} external>Terms of Use</UnstyledLink></span>}
         />
 
+        <Field
+          name='email_opt_in'
+          id='email_opt_in'
+          component={CheckboxWrapper}
+          disabled={!reCaptchaReady || loading}
+          type='checkbox'
+          label={<span>I'm happy to receive marketing email from SparkPost</span>}
+        />
+
         <Button primary
           disabled={loading || pristine || invalid || !reCaptchaReady }
           onClick={this.executeRecaptcha}
@@ -140,7 +150,8 @@ export class JoinForm extends Component {
 const formName = 'registerAccountForm';
 const mapStateToProps = (state, props) => ({
   initialValues: {
-    tou_accepted: false
+    tou_accepted: false,
+    email_opt_in: false
   },
   loading: state.account.createLoading || state.auth.loginPending,
   formValues: getFormValues(formName)(state)
