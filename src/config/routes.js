@@ -179,8 +179,7 @@ const routes = [
   },
   {
     path: '/account/email-verification/:token',
-    component: emailVerification,
-    layout: App
+    component: emailVerification
   },
   {
     path: '/account/subaccounts',
