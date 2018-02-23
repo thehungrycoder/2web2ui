@@ -11,18 +11,18 @@ export class EmailVerification extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { history, showAlert, verifyingEmail, error } = this.props;
+    const { history, showAlert, verifyingToken, error } = this.props;
 
     if (!prevProps.error && error) {
       showAlert({
         type: 'error',
-        message: 'The verification token is either invalid or expired.',
+        message: 'Email verification failed.  The verification token is either invalid or expired.',
         details: error.message
       });
       history.push('/dashboard');
     }
 
-    if (!error && verifyingEmail === false) {
+    if (!error && verifyingToken === false) {
       showAlert({
         type: 'success',
         message: 'Your email address has been verified!'
@@ -34,9 +34,9 @@ export class EmailVerification extends Component {
   }
 
   render() {
-    const { verifyingEmail } = this.props;
+    const { verifyingToken } = this.props;
 
-    if (verifyingEmail) {
+    if (verifyingToken) {
       return <Loading />;
     }
 
@@ -46,8 +46,8 @@ export class EmailVerification extends Component {
 
 const mapStateToProps = (state, props) => ({
   token: props.match.params.token,
-  verifyingEmail: state.currentUser.verifying,
-  error: state.currentUser.verifyError
+  verifyingToken: state.currentUser.verifyingToken,
+  error: state.currentUser.tokenError
 });
 
 export default connect(mapStateToProps, { verifyEmailToken, showAlert })(EmailVerification);

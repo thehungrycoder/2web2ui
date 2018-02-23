@@ -1,7 +1,9 @@
 const initialState = {
   grants: [],
-  verifying: null,
-  verifyError: null
+  verifyingEmail: null,
+  emailError: null,
+  verifyingToken: null,
+  tokenError: null
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -16,26 +18,22 @@ export default (state = initialState, { type, payload }) => {
       return { ...state, has_subaccounts: true };
 
     case 'VERIFY_EMAIL_PENDING':
-      return { ...state, verifying: true, verifyError: null };
+      return { ...state, verifyingEmail: true, emailError: null };
 
-    case 'VERIFY_EMAIL_SUCCESS': {
-      return { ...state, verifying: false };
-    }
+    case 'VERIFY_EMAIL_SUCCESS':
+      return { ...state, verifyingEmail: false };
 
-    case 'VERIFY_EMAIL_FAIL': {
-      return { ...state, verifyError: payload, verifying: false };
-    }
+    case 'VERIFY_EMAIL_FAIL':
+      return { ...state, emailError: payload, verifyingEmail: false };
 
     case 'VERIFY_EMAIL_TOKEN_PENDING':
-      return { ...state, verifying: true, verifyError: null };
+      return { ...state, verifyingToken: true, tokenError: null };
 
-    case 'VERIFY_EMAIL_TOKEN_SUCCESS': {
-      return { ...state, email_verified: true, verifying: false };
-    }
+    case 'VERIFY_EMAIL_TOKEN_SUCCESS':
+      return { ...state, email_verified: true, verifyingToken: false };
 
-    case 'VERIFY_EMAIL_TOKEN_FAIL': {
-      return { ...state, verifyError: payload, verifying: false };
-    }
+    case 'VERIFY_EMAIL_TOKEN_FAIL':
+      return { ...state, tokenError: payload, verifyingToken: false };
 
     default:
       return state;

@@ -77,7 +77,7 @@ function mapStateToProps(state) {
 
   return {
     currentUser: state.currentUser,
-    verifyingEmail: state.currentUser.verifying,
+    verifyingEmail: state.currentUser.verifyingEmail,
     accountAgeInWeeks: acctAge,
     hasSuppressions: state.suppressions.hasSuppression,
     hasSendingDomains: state.sendingDomains.list.length > 0,

@@ -7,6 +7,7 @@ exports[`Page: Dashboard tests should correctly render page when user is not ver
 >
   <EmailBanner
     handleResend={[Function]}
+    verifying={false}
   />
   <Connect(UsageReport) />
   <SuppressionBanner
@@ -56,6 +57,7 @@ exports[`Page: Dashboard tests should correctly render page when user is not ver
     }
     showAlert={[MockFunction]}
     verifyEmail={[MockFunction]}
+    verifyingEmail={false}
   />
 </Page>
 `;
@@ -113,6 +115,7 @@ exports[`Page: Dashboard tests should display upgrade CTA when account is free a
     }
     showAlert={[MockFunction]}
     verifyEmail={[MockFunction]}
+    verifyingEmail={false}
   />
 </Page>
 `;
@@ -170,6 +173,7 @@ exports[`Page: Dashboard tests should render import suppression list when 0 supp
     }
     showAlert={[MockFunction]}
     verifyEmail={[MockFunction]}
+    verifyingEmail={false}
   />
 </Page>
 `;
@@ -227,6 +231,7 @@ exports[`Page: Dashboard tests should render page correctly with defaults 1`] = 
     }
     showAlert={[MockFunction]}
     verifyEmail={[MockFunction]}
+    verifyingEmail={false}
   />
 </Page>
 `;

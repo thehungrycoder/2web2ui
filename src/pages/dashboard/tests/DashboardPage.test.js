@@ -20,6 +20,7 @@ describe('Page: Dashboard tests', () => {
     hasSuppressions: true,
     accountAgeInWeeks: 0,
     showAlert: jest.fn(),
+    verifyingEmail: false,
     verifyEmail: jest.fn(() => Promise.resolve())
   };
 

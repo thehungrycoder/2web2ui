@@ -10,7 +10,7 @@ describe('EmailVerification Component', () => {
     const props = {
       history: { push: jest.fn() },
       showAlert: jest.fn(),
-      verifyingEmail: true,
+      verifyingToken: true,
       error: null,
       token: 'my-token',
       verifyEmailToken: jest.fn()
@@ -28,7 +28,7 @@ describe('EmailVerification Component', () => {
   });
 
   it('should render null when done loading', () => {
-    wrapper.setProps({ verifyingEmail: false });
+    wrapper.setProps({ verifyingToken: false });
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -37,13 +37,13 @@ describe('EmailVerification Component', () => {
     expect(instance.props.history.push).toHaveBeenCalledWith('/dashboard');
     expect(instance.props.showAlert).toHaveBeenCalledWith({
       type: 'error',
-      message: 'The verification token is either invalid or expired.',
+      message: 'Email verification failed.  The verification token is either invalid or expired.',
       details: 'no token'
     });
   });
 
   it('should go to dashboard and show success alert on verification', () => {
-    wrapper.setProps({ verifyingEmail: false });
+    wrapper.setProps({ verifyingToken: false });
     expect(instance.props.history.push).toHaveBeenCalledWith('/dashboard');
     expect(instance.props.showAlert).toHaveBeenCalledWith({
       type: 'success',
