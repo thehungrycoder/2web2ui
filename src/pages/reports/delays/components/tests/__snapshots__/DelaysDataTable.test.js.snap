@@ -63,14 +63,12 @@ Array [
 
 exports[`DelaysDataTable:  should show empty message when there are no reasons 1`] = `
 <Empty
-  message="No delay reasons to report"
-  title="Delayed Messages"
+  message="No delayed messages to report"
 />
 `;
 
 exports[`DelaysDataTable:  should show empty message when there are no reasons 2`] = `
 <Empty
-  message="No delay reasons to report"
-  title="Delayed Messages"
+  message="No delayed messages to report"
 />
 `;

@@ -27,7 +27,7 @@ export class DelaysDataTable extends Component {
     const { rows } = this.props;
 
     if (_.isEmpty(rows)) {
-      return <Empty title={'Delayed Messages'} message={'No delay reasons to report'} />;
+      return <Empty message={'No delayed messages to report'} />;
     }
 
     return <TableCollection

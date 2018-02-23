@@ -25,7 +25,7 @@ export class DataTable extends Component {
     const { list } = this.props;
 
     if (!list.length) {
-      return <Empty message={'There are no rejection messages for your current query'} />;
+      return <Empty message={'No rejection reasons to report'} />;
     }
 
     return <TableCollection
