@@ -28,7 +28,7 @@ exports[`AcceptedPage:  should render 1`] = `
 
 exports[`AcceptedPage:  should render correctly with no accepted results 1`] = `
 <Empty
-  message="No Accepted Messages To Report"
+  message="No accepted messages to report"
   title="Accepted Rates"
 />
 `;

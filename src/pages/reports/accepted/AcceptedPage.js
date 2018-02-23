@@ -37,7 +37,7 @@ export class AcceptedPage extends Component {
     const { loading, aggregates, attempts } = this.props;
 
     if (!loading && _.isEmpty(aggregates)) {
-      return <Empty title='Accepted Rates' message='No Accepted Messages To Report' />;
+      return <Empty title='Accepted Rates' message='No accepted messages to report' />;
     }
 
     return <AcceptedChart loading={loading} aggregates={aggregates} attempts={attempts} />;

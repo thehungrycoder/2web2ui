@@ -1,11 +1,5 @@
 /* eslint-disable max-lines */
-function average(item, keys = []) {
-  return item[keys[0]] / item[keys[1]];
-}
-
-function rate(item, keys) {
-  return (item[keys[0]] / item[keys[1]]) * 100;
-}
+import { rate, average } from '../helpers/metrics';
 
 export const list = [
   {
