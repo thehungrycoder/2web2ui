@@ -132,3 +132,6 @@ export function rate(item, keys) {
   return average(item, keys) * 100;
 }
 
+export function getRate(numerator, denominator) {
+  return rate({ numerator, denominator }, ['numerator', 'denominator']);
+}

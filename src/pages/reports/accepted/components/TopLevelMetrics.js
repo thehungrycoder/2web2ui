@@ -2,6 +2,7 @@ import React from 'react';
 import { Grid } from '@sparkpost/matchbox';
 import { Size, Duration } from 'src/components';
 import { MetricCard, MetricsSummary } from '../../components';
+import { getRate } from 'src/helpers/metrics';
 import _ from 'lodash';
 
 /**
@@ -41,7 +42,7 @@ const TopLevelMetrics = ({ filters, metrics, aggregates }) => {
   return (
     <div>
       <MetricsSummary
-        rateValue={(count_accepted / count_targeted) * 100}
+        rateValue={getRate(count_accepted, count_targeted)}
         rateTitle='Accepted Rate'
         secondaryMessage={`${count_sent.toLocaleString()} messages were sent.`}
         {...filters} >

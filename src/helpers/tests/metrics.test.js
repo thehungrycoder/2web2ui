@@ -124,4 +124,8 @@ describe('metrics helpers', () => {
     const keys = ['count_accepted', 'count_targeted'];
     expect(metricsHelpers.rate(item, keys)).toEqual(90);
   });
+
+  it('should get rate', () => {
+    expect(metricsHelpers.getRate(5, 10)).toEqual(50);
+  });
 });

@@ -5,6 +5,7 @@ import { Grid, Panel } from '@sparkpost/matchbox';
 import { PanelLoading } from 'src/components';
 import { formatDateTime, relativeDateOptionsIndexed } from 'src/helpers/date';
 import { formatFullNumber, formatPercent } from 'src/helpers/units';
+import { getRate } from 'src/helpers/metrics';
 import styles from './EngagementSummary.module.scss';
 
 export function EngagementSummary({ accepted = 0, clicks = 0, filters, loading, opens = 0, targeted = 0 }) {
@@ -25,11 +26,11 @@ export function EngagementSummary({ accepted = 0, clicks = 0, filters, loading, 
     <Panel className={styles.EngagementSummary}>
       <Grid>
         <Grid.Column xs={12} md={3} xl={2}>
-          <h1>{formatPercent(opens / targeted * 100)}</h1>
+          <h1>{formatPercent(getRate(opens, targeted))}</h1>
           <h6>Unique Open Rate</h6>
         </Grid.Column>
         <Grid.Column xs={12} md={3} xl={2}>
-          <h1>{formatPercent(clicks / targeted * 100)}</h1>
+          <h1>{formatPercent(getRate(clicks, targeted))}</h1>
           <h6>Unique Click Rate</h6>
         </Grid.Column>
         <Grid.Column xs={12} md={6} xl={8}>

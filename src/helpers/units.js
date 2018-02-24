@@ -74,6 +74,10 @@ export const formatNumber = (value) => {
     return value;
   }
 
+  if (!isFinite(value)) {
+    value = 0;
+  }
+
   // No suffix for default case
   let formatted = value;
   let suffix = '';
@@ -106,6 +110,10 @@ export const formatFullNumber = (value) => {
 export const formatPercent = (value) => {
   if (!isNumber(value)) {
     return value;
+  }
+
+  if (!isFinite(value)) {
+    value = 0;
   }
 
   let formatted = `${roundToPlaces(value, 2)}%`;

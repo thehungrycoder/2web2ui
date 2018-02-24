@@ -4,6 +4,7 @@ import { Panel } from '@sparkpost/matchbox';
 
 import { Empty, PanelLoading } from 'src/components';
 import { formatNumber, formatPercent } from 'src/helpers/units';
+import { getRate } from 'src/helpers/metrics';
 import styles from './EngagementChart.module.scss';
 
 // Width must be less than 100% to get ResponsiveContainer to be responsive
@@ -69,17 +70,17 @@ export default function EngagementChart({ accepted = 0, clicks = 0, loading, ope
             </Bar>
             <ReferenceArea
               x1="Targeted" x2="Accepted"
-              percentage={formatPercent(accepted / targeted * 100)}
+              percentage={formatPercent(getRate(accepted, targeted))}
               shape={PercentLabel}
             />
             <ReferenceArea
               x1="Accepted" x2="Unique Confirmed Opens"
-              percentage={formatPercent(opens / targeted * 100)}
+              percentage={formatPercent(getRate(opens, targeted))}
               shape={PercentLabel}
             />
             <ReferenceArea
               x1="Unique Confirmed Opens" x2="Unique Clicks"
-              percentage={formatPercent(clicks / targeted * 100)}
+              percentage={formatPercent(getRate(clicks, targeted))}
               shape={PercentLabel}
             />
           </BarChart>

@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
+import { getRate } from 'src/helpers/metrics';
 import { refreshBounceReport } from 'src/actions/bounceReport';
 import { addFilters } from 'src/actions/reportOptions';
 import { TableCollection, Empty, LongTextContainer } from 'src/components';
@@ -91,7 +92,7 @@ export class BouncePage extends Component {
 
     return (
       <MetricsSummary
-        rateValue={(countBounce / countTargeted) * 100}
+        rateValue={getRate(countBounce, countTargeted)}
         rateTitle='Bounce Rate'
       >
         <strong>{countBounce.toLocaleString()}</strong> of your messages were bounced of <strong>{countTargeted.toLocaleString()}</strong> messages targeted
