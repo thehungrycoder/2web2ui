@@ -8,12 +8,24 @@ exports[`EventDetails Component should render with all props 1`] = `
     <LabelledValue
       key="key1"
       label={
-        <WithPositioning(Tooltip)
+        <Tooltip
+          bottom={true}
           content="description for key1"
           dark={true}
+          forcePosition={false}
+          horizontalOffset="0px"
+          preferredDirection={
+            Object {
+              "bottom": true,
+              "left": false,
+              "right": true,
+              "top": false,
+            }
+          }
+          right={true}
         >
           key1
-        </WithPositioning(Tooltip)>
+        </Tooltip>
       }
       value="val1"
     />

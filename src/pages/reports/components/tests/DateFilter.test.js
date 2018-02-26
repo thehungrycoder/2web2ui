@@ -54,8 +54,7 @@ describe('Component: DateFilter', () => {
 
     instance.componentDidMount();
     expect(instance.syncPropsToState).toHaveBeenCalledTimes(1);
-    expect(window.addEventListener).toHaveBeenCalledTimes(2);
-    expect(window.addEventListener).toHaveBeenCalledWith('click', instance.handleClickOutside);
+    expect(window.addEventListener).toHaveBeenCalledTimes(1);
     expect(window.addEventListener).toHaveBeenCalledWith('keydown', instance.handleKeyDown);
   });
 
@@ -63,8 +62,7 @@ describe('Component: DateFilter', () => {
     jest.spyOn(window, 'removeEventListener');
 
     instance.componentWillUnmount();
-    expect(window.removeEventListener).toHaveBeenCalledTimes(2);
-    expect(window.removeEventListener).toHaveBeenCalledWith('click', instance.handleClickOutside);
+    expect(window.removeEventListener).toHaveBeenCalledTimes(1);
     expect(window.removeEventListener).toHaveBeenCalledWith('keydown', instance.handleKeyDown);
   });
 
@@ -79,20 +77,6 @@ describe('Component: DateFilter', () => {
       instance.syncPropsToState({ filter: after });
       expect(wrapper.state('selected')).toEqual(after);
     });
-
-  });
-
-  describe('handleClickOutside', () => {
-
-    it('should hide date picker when no DOM node is found', () => {
-      wrapper.setState({ showDatePicker: true });
-      instance.handleClickOutside();
-      expect(wrapper.state('showDatePicker')).toEqual(false);
-    });
-
-    // Note: can't test other scenarios for this method because you
-    // can't (AFAICT) mock react-dom's findDOMNode method to return
-    // different things in different tests
 
   });
 

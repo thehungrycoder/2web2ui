@@ -1,14 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`StatusTooltipHeader component renders 1`] = `
-<WithPositioning(Tooltip)
+<Tooltip
+  bottom={true}
   content="Domains can be ready for sending (From), sending with DKIM signing, and bounce (Return Path) usage."
   dark={true}
+  forcePosition={false}
+  horizontalOffset="0px"
+  preferredDirection={
+    Object {
+      "bottom": true,
+      "left": false,
+      "right": true,
+      "top": false,
+    }
+  }
+  right={true}
 >
   Status
   <Icon
     name="Help"
     size={14}
   />
-</WithPositioning(Tooltip)>
+</Tooltip>
 `;

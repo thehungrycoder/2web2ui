@@ -12,9 +12,21 @@ exports[`GrantsCheckboxes should render 1`] = `
     <div
       key="grant1"
     >
-      <WithPositioning(Tooltip)
+      <Tooltip
+        bottom={true}
         content="desc for grant 1"
         dark={true}
+        forcePosition={false}
+        horizontalOffset="0px"
+        preferredDirection={
+          Object {
+            "bottom": true,
+            "left": false,
+            "right": true,
+            "top": false,
+          }
+        }
+        right={true}
       >
         <Field
           component={[Function]}
@@ -22,7 +34,7 @@ exports[`GrantsCheckboxes should render 1`] = `
           name="grants[grant1]"
           type="checkbox"
         />
-      </WithPositioning(Tooltip)>
+      </Tooltip>
     </div>
   </Grid.Column>
   <Grid.Column
@@ -33,9 +45,21 @@ exports[`GrantsCheckboxes should render 1`] = `
     <div
       key="grant2"
     >
-      <WithPositioning(Tooltip)
+      <Tooltip
+        bottom={true}
         content="desc for grant 2"
         dark={true}
+        forcePosition={false}
+        horizontalOffset="0px"
+        preferredDirection={
+          Object {
+            "bottom": true,
+            "left": false,
+            "right": true,
+            "top": false,
+          }
+        }
+        right={true}
       >
         <Field
           component={[Function]}
@@ -43,7 +67,7 @@ exports[`GrantsCheckboxes should render 1`] = `
           name="grants[grant2]"
           type="checkbox"
         />
-      </WithPositioning(Tooltip)>
+      </Tooltip>
     </div>
   </Grid.Column>
 </Grid>

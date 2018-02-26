@@ -4,16 +4,28 @@ exports[`Component: EditBounce default bounce toggle renders correctly toggle wh
 <Field
   component={[Function]}
   label={
-    <WithPositioning(Tooltip)
+    <Tooltip
+      bottom={true}
       content="When this is set to \\"ON\\", all future transmissions will use xyz.com as their bounce domain (unless otherwise specified)."
       dark={true}
+      forcePosition={false}
+      horizontalOffset="0px"
+      preferredDirection={
+        Object {
+          "bottom": true,
+          "left": false,
+          "right": true,
+          "top": false,
+        }
+      }
+      right={true}
     >
       Use this domain as your default bounce domain? 
       <Icon
         name="Help"
         size={15}
       />
-    </WithPositioning(Tooltip)>
+    </Tooltip>
   }
   name="is_default_bounce_domain"
   onChange={[Function]}

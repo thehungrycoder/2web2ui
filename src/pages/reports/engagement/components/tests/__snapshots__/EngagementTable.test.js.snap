@@ -26,9 +26,21 @@ exports[`EngagementTable when renders table 1`] = `
         "key": "count_raw_clicked_approx",
         "label": <span>
           Unique Clicks
-          <WithPositioning(Tooltip)
+          <Tooltip
+            bottom={true}
             content="Total number of messages which had at least one link selected one or more times."
             dark={true}
+            forcePosition={false}
+            horizontalOffset="0px"
+            preferredDirection={
+              Object {
+                "bottom": true,
+                "left": false,
+                "right": true,
+                "top": false,
+              }
+            }
+            right={true}
             top={true}
           >
             <Icon
@@ -40,7 +52,7 @@ exports[`EngagementTable when renders table 1`] = `
                 }
               }
             />
-          </WithPositioning(Tooltip)>
+          </Tooltip>
         </span>,
         "sortKey": "count_raw_clicked_approx",
         "width": "20%",
@@ -49,9 +61,21 @@ exports[`EngagementTable when renders table 1`] = `
         "key": "count_clicked",
         "label": <span>
           Clicks
-          <WithPositioning(Tooltip)
+          <Tooltip
+            bottom={true}
             content="Total number of times that links were selected across all messages."
             dark={true}
+            forcePosition={false}
+            horizontalOffset="0px"
+            preferredDirection={
+              Object {
+                "bottom": true,
+                "left": false,
+                "right": true,
+                "top": false,
+              }
+            }
+            right={true}
             top={true}
           >
             <Icon
@@ -63,7 +87,7 @@ exports[`EngagementTable when renders table 1`] = `
                 }
               }
             />
-          </WithPositioning(Tooltip)>
+          </Tooltip>
         </span>,
         "sortKey": "count_clicked",
         "width": "20%",
