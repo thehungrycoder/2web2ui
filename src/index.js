@@ -17,8 +17,8 @@ const composeEnhancers = process.env.NODE_ENV !== 'production' && window.__REDUX
 const store = createStore(
   rootReducer,
   composeEnhancers(
-    applyMiddleware(thunk),
-    applyMiddleware(ErrorTracker.middleware)
+    applyMiddleware(ErrorTracker.middleware),
+    applyMiddleware(thunk)
   )
 );
 
