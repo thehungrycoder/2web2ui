@@ -169,9 +169,18 @@ export function getTestData({ id, mode }) {
       if (results) {
         testData = JSON.parse(results);
 
-        // Reshapes test data if it does not conform with default JSON structure
-        if (!['substitution_data', 'metadata', 'options'].every((key) => key in testData)) {
+        if (!('substitution_data' in testData)) {
+          // Reshape test data if it does not conform with the current format.
+          // There was an earlier format which included only substitution_data values.
           testData = { ...config.templates.testData, substitution_data: testData };
+        } else {
+          // Note: this technique leaves any toplevel keys from local storage intact.
+          testData = {
+            // Set defaults for each key
+            ...config.templates.testData,
+            // Bring in existing fields from local storage
+            ...testData
+          };
         }
       }
 

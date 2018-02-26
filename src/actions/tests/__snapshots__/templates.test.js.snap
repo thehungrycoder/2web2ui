@@ -1,5 +1,35 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Action Creator: Templates getTestData should handle old test data 1`] = `
+Array [
+  Object {
+    "payload": Object {
+      "metadata": Object {},
+      "options": Object {},
+      "substitution_data": Object {
+        "test": "test",
+      },
+    },
+    "type": "GET_TEMPLATE_TEST_DATA",
+  },
+]
+`;
+
+exports[`Action Creator: Templates getTestData should handle partial test data 1`] = `
+Array [
+  Object {
+    "payload": Object {
+      "metadata": Object {},
+      "options": Object {},
+      "substitution_data": Object {
+        "test": "test",
+      },
+    },
+    "type": "GET_TEMPLATE_TEST_DATA",
+  },
+]
+`;
+
 exports[`Action Creator: Templates should dispatch a create action 1`] = `
 Array [
   Object {

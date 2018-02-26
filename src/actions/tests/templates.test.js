@@ -93,6 +93,22 @@ describe('Action Creator: Templates', () => {
     expect(mockStore.getActions()).toMatchSnapshot();
   });
 
+  describe('getTestData', () => {
+    it('should handle old test data', async() => {
+      localforage.getItem = jest.fn((a) => Promise.resolve('{"test": "test"}'));
+      const template = { id: 'id', mode: 'draft' };
+      await mockStore.dispatch(templates.getTestData(template));
+      expect(mockStore.getActions()).toMatchSnapshot();
+    });
+    it('should handle partial test data' , async() => {
+
+      localforage.getItem = jest.fn((a) => Promise.resolve('{"substitution_data": {"test": "test"}}'));
+      const template = { id: 'id', mode: 'draft' };
+      await mockStore.dispatch(templates.getTestData(template));
+      expect(mockStore.getActions()).toMatchSnapshot();
+    });
+  });
+
   it('should dispatch getDraft, getTestData, and getPreview actions', async() => {
     const action = templates.getDraftAndPreview('test-template');
     await mockStore.dispatch(action);
