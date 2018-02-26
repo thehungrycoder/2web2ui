@@ -15,6 +15,16 @@ function redispatchAfterRefresh(action, dispatch) {
   return resolveOnCondition(() => !refreshing).then(() => dispatch(sparkpostRequest(action)));
 }
 
+function parseApiError(error) {
+  const description = _.get(error, 'response.data.errors[0].description');
+
+  if (description) {
+    error.message = description;
+  }
+
+  return error;
+}
+
 const sparkpostRequest = requestHelperFactory({
   request: sparkpostAxios,
   transformHttpOptions: (options, getState) => {
@@ -36,7 +46,8 @@ const sparkpostRequest = requestHelperFactory({
     return results;
   },
   onFail: ({ types, err, dispatch, meta, action, getState }) => {
-    const { message, response = {}} = err;
+    const apiError = parseApiError(err);
+    const { message, response = {}} = apiError;
     const { auth } = getState();
     const { retries = 0 } = meta;
 
@@ -93,7 +104,7 @@ const sparkpostRequest = requestHelperFactory({
       dispatch(showAlert({ type: 'error', message: 'Something went wrong.', details: message }));
     }
 
-    throw err;
+    throw apiError;
   }
 });
 
