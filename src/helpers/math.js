@@ -5,7 +5,7 @@
  * @return {number}
  */
 export function safeDivide(numerator, denominator) {
-  const value = numerator / denominator || 0;
+  const value = numerator / denominator;
   return isFinite(value) ? value : 0;
 }
 

@@ -4,6 +4,7 @@ import { Grid, Panel } from '@sparkpost/matchbox';
 import { Loading, PieChart } from 'src/components';
 import { generateColors } from 'src/helpers/color';
 import styles from './BounceChart.module.scss';
+import { formatPercent } from 'src/helpers/units';
 import { safeRate } from 'src/helpers/math';
 
 // Chart color palette generated from:
@@ -64,8 +65,8 @@ export default class BounceChart extends Component {
     const { hoveredItem } = this.state;
 
     return hoveredItem
-      ? { name: hoveredItem.name, value: `${safeRate(hoveredItem.count, aggregates.countBounce).toFixed(2)}%` }
-      : { name: 'Bounce Rate', value: `${safeRate(aggregates.countBounce, aggregates.countTargeted).toFixed(2)}%` };
+      ? { name: hoveredItem.name, value: formatPercent(safeRate(hoveredItem.count, aggregates.countBounce)) }
+      : { name: 'Bounce Rate', value: formatPercent(safeRate(aggregates.countBounce, aggregates.countTargeted)) };
   }
 
   getLegendHeaderData = () => {
