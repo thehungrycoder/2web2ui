@@ -8,12 +8,18 @@ const selectTableLoading = createSelector(
   [selectChartLoading, selectReasonsLoading],
   (chartLoading, reasonsLoading) => chartLoading || reasonsLoading
 );
+const selectAggregates = ({ bounceReport }) => bounceReport.aggregates;
 const selectReasons = ({ bounceReport }) => bounceReport.reasons;
 
-const selectFormattedAggregates = ({ bounceReport }) => {
-  const { aggregates = []} = bounceReport;
-  return formatAggregates(aggregates[0]);
-};
+const selectFormattedAggregates = createSelector(
+  [selectAggregates],
+  (aggregates) => {
+    if (!aggregates.count_bounce) {
+      return [];
+    }
+    return formatAggregates(aggregates);
+  }
+);
 
 const selectReshapedClassifications = ({ bounceReport }) => {
   const { classifications = []} = bounceReport;

@@ -14,7 +14,12 @@ describe('Selector: Bounce Report', () => {
     testState = {
       reportOptions: {},
       bounceReport: {
-        aggregates: ['agg1'],
+        aggregates: {
+          count_targeted: 100,
+          count_bounce: 4,
+          count_inband_bounce: 2,
+          count_outofband_bounce: 1
+        },
         aggregatesLoading: false,
         categoriesLoading: false,
         reasonsLoading: false,
@@ -46,7 +51,7 @@ describe('Selector: Bounce Report', () => {
     });
     expect(bounceHelpers.getBandTypes).toHaveBeenCalledWith(formattedAggregates);
     expect(bounceHelpers.reshapeCategories).toHaveBeenCalledWith(testState.bounceReport.classifications);
-    expect(bounceHelpers.formatAggregates).toHaveBeenCalledWith(testState.bounceReport.aggregates[0]);
+    expect(bounceHelpers.formatAggregates).toHaveBeenCalledWith(testState.bounceReport.aggregates);
   });
 
   it('should report chart and table as loading if aggregates are loading', () => {
@@ -71,10 +76,10 @@ describe('Selector: Bounce Report', () => {
   });
 
   it('should default to an empty array when there are no aggregates', () => {
-    delete testState.bounceReport.aggregates;
+    testState.bounceReport.aggregates = {};
     const props = mapStateToProps(testState);
-    expect(props.aggregates).toBe(formattedAggregates);
-    expect(bounceHelpers.formatAggregates).toHaveBeenCalledWith(undefined);
+    expect(props.aggregates).toEqual([]);
+    expect(bounceHelpers.formatAggregates).not.toHaveBeenCalled();
   });
 
   it('should default to an empty array when there are no classifications', () => {
