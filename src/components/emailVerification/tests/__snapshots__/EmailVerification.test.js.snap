@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EmailVerification Component should render null when done loading 1`] = `""`;
+
+exports[`EmailVerification Component should show loading component when verifying Email 1`] = `<Loading />`;

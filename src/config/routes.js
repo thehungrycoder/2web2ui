@@ -24,6 +24,7 @@ import {
 } from 'src/pages';
 
 import onboarding from 'src/pages/onboarding';
+import { default as emailVerification } from 'src/components/emailVerification/EmailVerification';
 
 import {
   hasGrants,
@@ -175,6 +176,10 @@ const routes = [
   {
     path: '/account/security',
     redirect: '/account/profile'
+  },
+  {
+    path: '/account/email-verification/:token',
+    component: emailVerification
   },
   {
     path: '/account/subaccounts',
