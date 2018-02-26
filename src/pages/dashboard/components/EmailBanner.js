@@ -1,23 +1,17 @@
 import React from 'react';
 import { Banner } from '@sparkpost/matchbox';
 
-const EmailBanner = ({ sendingStatus, handleResend }) => {
+const EmailBanner = ({ verifying, handleResend }) => {
   let action = {
     content: 'Resend Email',
     onClick: handleResend
   };
-  let sentMarkup = null;
 
-  if (sendingStatus === 'sending') {
+  if (verifying) {
     action = {
       content: 'Sending..',
       disabled: true
     };
-  }
-
-  if (sendingStatus === 'sent') {
-    action = null;
-    sentMarkup = <p><strong>Email sent!</strong></p>;
   }
 
   return (
@@ -26,7 +20,6 @@ const EmailBanner = ({ sendingStatus, handleResend }) => {
       title="Verify your email address"
       action={action}>
       <p>Please click the link in the email we sent you to verify your email address and unlock higher daily sending limits.</p>
-      { sentMarkup }
     </Banner>
   );
 };

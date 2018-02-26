@@ -37,3 +37,21 @@ export function getGrants({ beta = false, role } = {}) {
     });
 
 }
+
+export function verifyEmail(data = {}, type = 'VERIFY_EMAIL') {
+  return (dispatch, getState) => {
+    const { username } = getState().currentUser;
+    return dispatch(sparkpostApiRequest({
+      type,
+      meta: {
+        method: 'POST',
+        url: `/users/${username}/verify`,
+        data
+      }
+    }));
+  };
+}
+
+export function verifyEmailToken(data) {
+  return verifyEmail(data, 'VERIFY_EMAIL_TOKEN');
+}

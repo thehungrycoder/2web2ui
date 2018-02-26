@@ -7,9 +7,13 @@ exports[`Page: Dashboard tests should correctly render page when user is not ver
 >
   <EmailBanner
     handleResend={[Function]}
-    sendingStatus={null}
+    verifying={false}
   />
   <Connect(UsageReport) />
+  <SuppressionBanner
+    accountAgeInWeeks={0}
+    hasSuppressions={true}
+  />
   <Tutorial
     account={
       Object {
@@ -51,6 +55,9 @@ exports[`Page: Dashboard tests should correctly render page when user is not ver
         ],
       }
     }
+    showAlert={[MockFunction]}
+    verifyEmail={[MockFunction]}
+    verifyingEmail={false}
   />
 </Page>
 `;
@@ -61,6 +68,10 @@ exports[`Page: Dashboard tests should display upgrade CTA when account is free a
   title="Dashboard"
 >
   <Connect(UsageReport) />
+  <SuppressionBanner
+    accountAgeInWeeks={0}
+    hasSuppressions={true}
+  />
   <Tutorial
     account={
       Object {
@@ -102,6 +113,9 @@ exports[`Page: Dashboard tests should display upgrade CTA when account is free a
         ],
       }
     }
+    showAlert={[MockFunction]}
+    verifyEmail={[MockFunction]}
+    verifyingEmail={false}
   />
 </Page>
 `;
@@ -112,21 +126,10 @@ exports[`Page: Dashboard tests should render import suppression list when 0 supp
   title="Dashboard"
 >
   <Connect(UsageReport) />
-  <Banner
-    status="default"
-    title="Coming from another email service?"
-  >
-    <p>
-      Welcome! Make sure you import your suppression list from your previous provider to avoid sending to people who have previously opted out, consistently bounced, etc. Learn more about migrating from Mailgun, Mandrill, or SendGrid. 
-      <UnstyledLink
-        external={true}
-        to="https://www.sparkpost.com/docs/getting-started/getting-started-sparkpost/#important-coming-from-other-email-services"
-      >
-        Import your suppressions
-      </UnstyledLink>
-      .
-    </p>
-  </Banner>
+  <SuppressionBanner
+    accountAgeInWeeks={40}
+    hasSuppressions={false}
+  />
   <Tutorial
     account={
       Object {
@@ -168,6 +171,9 @@ exports[`Page: Dashboard tests should render import suppression list when 0 supp
         ],
       }
     }
+    showAlert={[MockFunction]}
+    verifyEmail={[MockFunction]}
+    verifyingEmail={false}
   />
 </Page>
 `;
@@ -178,6 +184,10 @@ exports[`Page: Dashboard tests should render page correctly with defaults 1`] = 
   title="Dashboard"
 >
   <Connect(UsageReport) />
+  <SuppressionBanner
+    accountAgeInWeeks={0}
+    hasSuppressions={true}
+  />
   <Tutorial
     account={
       Object {
@@ -219,6 +229,9 @@ exports[`Page: Dashboard tests should render page correctly with defaults 1`] = 
         ],
       }
     }
+    showAlert={[MockFunction]}
+    verifyEmail={[MockFunction]}
+    verifyingEmail={false}
   />
 </Page>
 `;
