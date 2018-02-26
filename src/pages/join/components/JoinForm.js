@@ -109,6 +109,15 @@ export class JoinForm extends Component {
         />
 
         <Field
+          name='email_opt_in'
+          id='email_opt_in'
+          component={CheckboxWrapper}
+          disabled={!reCaptchaReady || loading}
+          type='checkbox'
+          label={<span>I'm happy to receive marketing email from SparkPost</span>}
+        />
+
+        <Field
           name="tou_accepted"
           id='tou_accepted'
           component={CheckboxWrapper}
@@ -116,15 +125,6 @@ export class JoinForm extends Component {
           disabled={!reCaptchaReady || loading}
           validate={required}
           label={<span>I agree to SparkPost's <UnstyledLink to={LINKS.TOU} external>Terms of Use</UnstyledLink></span>}
-        />
-
-        <Field
-          name='email_opt_in'
-          id='email_opt_in'
-          component={CheckboxWrapper}
-          disabled={!reCaptchaReady || loading}
-          type='checkbox'
-          label={<span>I'm happy to receive marketing email from SparkPost</span>}
         />
 
         <Button primary
