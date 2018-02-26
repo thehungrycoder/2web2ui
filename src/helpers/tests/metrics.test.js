@@ -107,25 +107,9 @@ describe('metrics helpers', () => {
     expect(metricsHelpers.average(item, keys)).toEqual(1000);
   });
 
-  it('should default NaN average values to 0', () => {
-    const item = { total_delivery_time_first: 5, count_delivered_first: 0 };
-    const keys = ['total_delivery_time_first', 'count_delivered_first'];
-    expect(metricsHelpers.average(item, keys)).toEqual(0);
-  });
-
-  it('should default infinte average values to 0', () => {
-    const item = { total_delivery_time_first: 0, count_delivered_first: 5 };
-    const keys = ['total_delivery_time_first', 'count_delivered_first'];
-    expect(metricsHelpers.average(item, keys)).toEqual(0);
-  });
-
   it('should calculate rate', () => {
     const item = { count_accepted: 27, count_targeted: 30 };
     const keys = ['count_accepted', 'count_targeted'];
     expect(metricsHelpers.rate(item, keys)).toEqual(90);
-  });
-
-  it('should get rate', () => {
-    expect(metricsHelpers.getRate(5, 10)).toEqual(50);
   });
 });

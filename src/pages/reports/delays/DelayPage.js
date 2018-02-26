@@ -8,7 +8,7 @@ import ReportOptions from 'src/pages/reports/components/ReportOptions';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
 import MetricsSummary from '../components/MetricsSummary';
 import DelaysDataTable from './components/DelaysDataTable';
-import { getRate } from 'src/helpers/metrics';
+import { safeRate } from 'src/helpers/math';
 
 export class DelayPage extends Component {
 
@@ -42,7 +42,7 @@ export class DelayPage extends Component {
 
     return (
       <MetricsSummary
-        rateValue={getRate(count_delayed_first, count_accepted)}
+        rateValue={safeRate(count_delayed_first, count_accepted)}
         rateTitle='Delayed Rate'
         secondaryMessage={`${count_delayed_first.toLocaleString()} were delayed on first attempt.`}
       >

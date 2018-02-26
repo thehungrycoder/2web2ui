@@ -8,7 +8,7 @@ import { Page, Panel } from '@sparkpost/matchbox';
 import ReportOptions from '../components/ReportOptions';
 import MetricsSummary from '../components/MetricsSummary';
 import DataTable from './components/DataTable';
-import { getRate } from 'src/helpers/metrics';
+import { safeRate } from 'src/helpers/math';
 
 export class RejectionPage extends Component {
 
@@ -42,7 +42,7 @@ export class RejectionPage extends Component {
 
     return (
       <MetricsSummary
-        rateValue={getRate(count_rejected, count_targeted)}
+        rateValue={safeRate(count_rejected, count_targeted)}
         rateTitle='Rejected Rate'>
         <strong>{count_rejected.toLocaleString()}</strong> of your messages were rejected of <strong>{count_targeted.toLocaleString()}</strong> messages targeted
       </MetricsSummary>

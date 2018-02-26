@@ -42,14 +42,14 @@ Object {
 exports[`Accepted ChartGroup:  should handle mouse in and out 2`] = `
 <PieChart.ActiveLabel
   name="first attempt"
-  value="10.00%"
+  value="10%"
 />
 `;
 
 exports[`Accepted ChartGroup:  should handle mouse in and out 3`] = `
 <PieChart.ActiveLabel
   name="Accepted Rate"
-  value="50.00%"
+  value="50%"
 />
 `;
 
@@ -110,7 +110,7 @@ exports[`Accepted ChartGroup:  should render 1`] = `
         />
         <PieChart.ActiveLabel
           name="Accepted Rate"
-          value="50.00%"
+          value="50%"
         />
       </div>
     </Grid.Column>
@@ -232,7 +232,7 @@ exports[`Accepted ChartGroup:  should render correctly after click 2`] = `
 exports[`Accepted ChartGroup:  should render label when hovering over a child 1`] = `
 <PieChart.ActiveLabel
   name="2-4"
-  value="4.00%"
+  value="4%"
 />
 `;
 
