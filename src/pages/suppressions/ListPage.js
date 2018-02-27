@@ -45,11 +45,11 @@ export class ListPage extends Component {
   }
 
   componentDidMount() {
-    const { reportFilters, hasSubaccounts, searchSuppressions, listSubaccounts } = this.props;
+    const { reportOptions, hasSubaccounts, searchSuppressions, listSubaccounts } = this.props;
     if (hasSubaccounts) {
       listSubaccounts();
     }
-    searchSuppressions({ reportFilters });
+    searchSuppressions({ reportOptions });
   }
 
   render() {
@@ -85,7 +85,7 @@ export class ListPage extends Component {
 const mapStateToProps = (state) => {
   const { listLoading, list, deleting } = state.suppressions;
   return {
-    reportFilters: state.reportFilters,
+    reportOptions: state.reportOptions,
     loading: listLoading,
     list,
     hasSubaccounts: hasSubaccounts(state),

@@ -35,7 +35,7 @@ exports[`ChoosePlan page tests should disable submit and plan picker when submit
             size="large"
             type="submit"
           >
-            Get Started
+            Updating Subscription...
           </Button>
         </Panel.Section>
         <withRouter(Steps) />

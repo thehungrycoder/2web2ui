@@ -15,9 +15,8 @@ export const AccessControl = function AccessControl({ children, ready, redirect,
 };
 
 const accept = () => true;
-const mapStateToProps = (state, { condition = accept, redirect }) => ({
-  ready: state.accessControlReady,
-  redirect,
+const mapStateToProps = (state, { condition = accept, wait = true }) => ({
+  ready: !wait || state.accessControlReady,
   show: condition(accessConditionState(state))
 });
 

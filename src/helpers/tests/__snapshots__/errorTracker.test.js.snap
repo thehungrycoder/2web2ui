@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`.getEnricherOrDieTryin with current user 1`] = `
+Object {
+  "logger": "test",
+  "tags": Object {
+    "customer": "123",
+  },
+  "user": Object {
+    "access_level": "admin",
+    "customer": "123",
+    "username": "test-user",
+  },
+}
+`;
+
+exports[`.getEnricherOrDieTryin with tags 1`] = `
+Object {
+  "logger": "test",
+  "tags": Object {
+    "customer": "123",
+    "tenant": "test",
+  },
+  "user": Object {
+    "customer": "123",
+  },
+}
+`;
+
+exports[`.getEnricherOrDieTryin without current user 1`] = `
+Object {
+  "logger": "test",
+  "tags": Object {
+    "customer": undefined,
+  },
+  "user": Object {},
+}
+`;

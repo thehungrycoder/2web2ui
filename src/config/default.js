@@ -23,7 +23,7 @@ const config = {
     { paymentFormat: 'amex', apiFormat: 'AmericanExpress' },
     { paymentFormat: 'discover', apiFormat: 'Discover' }
   ],
-  chartColors: ['#04AEF9', '#fa6423', '#FFD300', '#8CCA3A', '#2693c3'],
+  chartColors: ['#04AEF9', '#fa6423', '#FFD300', '#8CCA3A', '#b94696'],
   contact: {
     abuseEmail: 'compliance@sparkpost.com',
     contactEmail: 'hello@sparkpost.com',
@@ -42,7 +42,7 @@ const config = {
     { time: 60 * 2, value: '5min', format: 'ha' },
     { time: 60 * 4, value: '15min', format: 'ha' },
     { time: 60 * 24 * 2, value: 'hour', format: 'ha' },
-    { time: 60 * 24 * 7, value: '12hr', format: 'MMM Do' },
+    { time: 60 * 24 * 7, value: 'day', format: 'MMM Do' },
     { time: 60 * 24 * 33, value: 'day', format: 'MMM Do' },
     { time: 60 * 24 * 190, value: 'week', format: 'MMM Do' },
     { time: Infinity, value: 'month', format: 'MMM YY' }
@@ -98,7 +98,17 @@ const config = {
   timeFormat: 'h:mma',
   messageEvents: {
     retentionPeriodDays: 10
-  }
+  },
+  recaptcha: {
+    key: '6LeFZQETAAAAACWJfxw_DKHgEPnop3brlj9IsHrY',
+    invisibleKey: '6LekChoUAAAAAJZouMPHnhRss2t7-ZetbAABfsOZ'
+  },
+  attribution: {
+    cookieName: 'attribution',
+    cookieDuration: 60 * 24 * 30,
+    cookieDomain: '.sparkpost.com'
+  },
+  salesforceDataParams: ['sfdcid', 'src', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term']
 };
 
 export default config;

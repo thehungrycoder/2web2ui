@@ -3,6 +3,8 @@ import { resolveReadyFor } from 'src/helpers/domains';
 import _ from 'lodash';
 
 export const isVerified = (domain) => domain.status.ownership_verified && domain.status.compliance_status === 'valid';
+export const isUnverified = (domain) => !domain.status.ownership_verified || domain.status.compliance_status === 'pending';
+
 export const getDomains = (state) => state.sendingDomains.list;
 export const getDomain = (state) => state.sendingDomains.domain;
 const selectSubaccountFromProps = (state, props) => _.get(props, 'id', null);
@@ -28,11 +30,10 @@ export const selectReadyForBounce = createSelector(
 
 export const hasUnverifiedDomains = createSelector(
   [getDomains],
-  (domains) => _.reduce(domains, (acc, domain) => acc || !isVerified(domain), false)
+  (domains) => _.reduce(domains, (acc, domain) => acc || isUnverified(domain), false)
 );
 
 export const selectSendingDomainsForSubaccount = createSelector(
   [getDomains, selectSubaccountFromProps],
   (domains, subaccount) => domains.filter((domain) => domain.subaccount_id === Number(subaccount))
 );
-

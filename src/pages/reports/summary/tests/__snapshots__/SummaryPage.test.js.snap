@@ -5,9 +5,12 @@ exports[`Page: SummaryPage should render correctly 1`] = `
   empty={Object {}}
   title="Summary Report"
 >
-  <Connect(Filters)
-    onShare={[Function]}
-    refresh={[Function]}
+  <withRouter(Connect(ReportOptions))
+    extraLinkParams={
+      Array [
+        "metrics",
+      ]
+    }
   />
   <Panel>
     <Panel.Section
@@ -39,14 +42,7 @@ exports[`Page: SummaryPage should render correctly 1`] = `
       />
     </Panel.Section>
   </Panel>
-  <Connect(Table)
-    refresh={[Function]}
-  />
-  <ShareModal
-    handleToggle={[Function]}
-    open={false}
-    query={Object {}}
-  />
+  <Connect(Table) />
   <MetricsModal
     onCancel={[Function]}
     onSubmit={[Function]}
@@ -67,10 +63,13 @@ exports[`Page: SummaryPage should render when loading 1`] = `
   empty={Object {}}
   title="Summary Report"
 >
-  <Connect(Filters)
-    onShare={[Function]}
-    refresh={[Function]}
-    shareDisabled={true}
+  <withRouter(Connect(ReportOptions))
+    extraLinkParams={
+      Array [
+        "metrics",
+      ]
+    }
+    reportLoading={true}
   />
   <Panel>
     <Panel.Section
@@ -106,14 +105,7 @@ exports[`Page: SummaryPage should render when loading 1`] = `
       <Loading />
     </div>
   </Panel>
-  <Connect(Table)
-    refresh={[Function]}
-  />
-  <ShareModal
-    handleToggle={[Function]}
-    open={false}
-    query={Object {}}
-  />
+  <Connect(Table) />
   <MetricsModal
     onCancel={[Function]}
     onSubmit={[Function]}

@@ -1,5 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Page: Message Events tests getRowData renders correctly 1`] = `
+Array [
+  <DisplayDate
+    formattedDate="formatted"
+    timestamp={undefined}
+  />,
+  "Injection",
+  "tom.haverford@pawnee.state.in.us",
+  "mean@friendly",
+  <withRouter(ViewDetailsButton)
+    event_id="456xyz"
+    formattedDate="formatted"
+    friendly_from="mean@friendly"
+    message_id="123abc"
+    rcpt_to="tom.haverford@pawnee.state.in.us"
+    type="injection"
+  />,
+]
+`;
+
 exports[`Page: Message Events tests renders correctly with too many (1000) records 1`] = `
 <Page
   empty={Object {}}
@@ -1092,7 +1112,7 @@ exports[`Page: Message Events tests should render error when action fails 1`] = 
         "calls": Array [
           Array [
             Object {
-              "reportFilters": undefined,
+              "reportOptions": undefined,
             },
           ],
         ],

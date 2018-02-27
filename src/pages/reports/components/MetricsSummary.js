@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { Panel, Grid } from '@sparkpost/matchbox';
 import { Percent } from 'src/components';
 import { formatDateTime, relativeDateOptionsIndexed } from 'src/helpers/date';
 
 import styles from './MetricsSummary.module.scss';
 
-class MetricsSummary extends Component {
+export class MetricsSummary extends Component {
   renderDate() {
     const { to, from, relativeRange } = this.props;
 
@@ -52,4 +53,4 @@ MetricsSummary.propTypes = {
   secondaryMessage: PropTypes.string
 };
 
-export default MetricsSummary;
+export default connect((state) => ({ ...state.reportOptions }))(MetricsSummary);

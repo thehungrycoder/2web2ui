@@ -3,6 +3,8 @@ import localforage from 'localforage';
 import * as templates from '../templates';
 import * as templatesHelpers from '../helpers/templates';
 
+import cases from 'jest-in-case';
+
 import _ from 'lodash';
 
 jest.mock('../helpers/sparkpostApiRequest', () => jest.fn((a) => a));
@@ -17,8 +19,9 @@ describe('Action Creator: Templates', () => {
     }
   };
 
-  beforeEach(() => {
+  beforeEach(async() => {
     localforage.setItem = jest.fn((a) => Promise.resolve(a));
+    localforage.getItem = jest.fn(() => Promise.resolve(null));
     templatesHelpers.getTestDataKey = jest.fn(() => 'key');
     dispatchMock = jest.fn((a) => Promise.resolve(a));
     mockStore = createMockStore(user);
@@ -91,6 +94,27 @@ describe('Action Creator: Templates', () => {
     const data = { id: 'id', mode: 'draft' };
     await mockStore.dispatch(templates.getTestData(data));
     expect(mockStore.getActions()).toMatchSnapshot();
+  });
+
+  describe('getTestData', () => {
+    it('should handle old test data', async() => {
+      localforage.getItem = jest.fn((a) => Promise.resolve('{"test": "test"}'));
+      const template = { id: 'id', mode: 'draft' };
+      await mockStore.dispatch(templates.getTestData(template));
+      expect(mockStore.getActions()).toMatchSnapshot();
+    });
+
+    cases('should handle partial test data', async(testRecord) => {
+      localforage.getItem = jest.fn((a) => Promise.resolve(JSON.stringify(testRecord.payload)));
+      const template = { id: 'id', mode: 'draft' };
+      await mockStore.dispatch(templates.getTestData(template));
+      expect(mockStore.getActions()).toMatchSnapshot();
+    }, [
+      { name: 'substitution_data only', payload: { substitution_data: { test: 'test' }}},
+      { name: 'metadata only', payload: { metadata: { flavour: 'vanilla' }}},
+      { name: 'options only', payload: { options: { sandbox: true }}},
+      { name: 'combo', payload: { substitution_data: { test: 'test' }, options: { sandbox: true }}}
+    ]);
   });
 
   it('should dispatch getDraft, getTestData, and getPreview actions', async() => {

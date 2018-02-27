@@ -1,4 +1,8 @@
 export const GROUP_CONFIG = {
+  'aggregate': {
+    label: 'Aggregate Total',
+    keyName: 'aggregate'
+  },
   'domain': {
     label: 'Recipient Domain',
     keyName: 'domain'

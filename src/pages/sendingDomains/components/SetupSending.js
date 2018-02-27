@@ -85,14 +85,6 @@ export class SetupSending extends Component {
     this.setState({ open: !this.state.open });
   }
 
-  toggleVerifyViaEmailModal = () => {
-    const { open } = this.state;
-
-    this.setState({
-      open: !open
-    });
-  }
-
   renderTxtRecordPanel() {
     const { domain: { dkimHostname, dkimValue, status }, verifyDkimLoading } = this.props;
     const readyFor = resolveReadyFor(status);

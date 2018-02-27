@@ -1,43 +1,68 @@
-export default function(state) {
-  const { metrics, templates, subaccounts, sendingDomains } = state;
-
-  if (!templates.list || !subaccounts.list || !sendingDomains.list) {
-    return [];
-  }
-
-  const {
-    domains = [],
-    campaigns = [],
-    sendingIps = [],
-    ipPools = []
-  } = metrics;
-
-  return [
-    ...reshape(domains, 'Recipient Domain'),
-    ...reshape(campaigns, 'Campaign'),
-    ...reshape(sendingIps, 'Sending IP'),
-    ...reshape(ipPools, 'IP Pool'),
-    ...reshapeTemplates(templates.list),
-    ...reshapeSubaccounts(subaccounts.list),
-    ...reshapeSendingDomains(sendingDomains.list)
-  ];
-}
+import { createSelector } from 'reselect';
+import _ from 'lodash';
 
 function reshape(list, type) {
   return list.map((value) => ({ type, value }));
 }
 
-function reshapeTemplates(templates) {
-  const type = 'Template';
-  return templates.map((t) => ({ type, value: t.id }));
-}
+const selectTemplates = ({ templates }) => templates.list;
+const selectSubaccounts = ({ subaccounts }) => subaccounts.list;
+const selectSendingDomains = ({ sendingDomains }) => sendingDomains.list;
+const selectRecipientDomains = ({ metrics }) => metrics.domains;
+const selectCampaigns = ({ metrics }) => metrics.campaigns;
+const selectSendingIps = ({ metrics }) => metrics.sendingIps;
+const selectIpPools = ({ metrics }) => metrics.ipPools;
 
-function reshapeSubaccounts(subaccounts) {
-  const type = 'Subaccount';
-  return subaccounts.map((s) => ({ type, value: `${s.name} (ID ${s.id})`, id: s.id }));
-}
+const selectPreparedTemplates = createSelector(
+  [selectTemplates],
+  (templates) => templates.map((t) => ({ type: 'Template', value: t.id }))
+);
 
-function reshapeSendingDomains(domains) {
-  const type = 'Sending Domain';
-  return domains.map((d) => ({ type, value: d.domain }));
-}
+const selectPreparedSubaccounts = createSelector(
+  [selectSubaccounts],
+  (subaccounts) => subaccounts.map(({ name, id }) => ({
+    type: 'Subaccount',
+    value: `${name} (ID ${id})`,
+    id
+  }))
+);
+
+const selectPreparedSendingDomains = createSelector(
+  [selectSendingDomains],
+  (domains) => domains.map((d) => ({ type: 'Sending Domain', value: d.domain }))
+);
+
+const selectPreparedRecipientDomains = createSelector(
+  [selectRecipientDomains],
+  (domains) => reshape(domains, 'Recipient Domain')
+);
+
+const selectPreparedCampaigns = createSelector(
+  [selectCampaigns],
+  (campaigns) => reshape(campaigns, 'Campaign')
+);
+
+const selectPreparedSendingIps = createSelector(
+  [selectSendingIps],
+  (ips) => reshape(ips, 'Sending IP')
+);
+
+const selectPreparedIpPools = createSelector(
+  [selectIpPools],
+  (pools) => reshape(pools, 'IP Pool')
+);
+
+const selectCache = createSelector(
+  [
+    selectPreparedTemplates,
+    selectPreparedSubaccounts,
+    selectPreparedSendingDomains,
+    selectPreparedRecipientDomains,
+    selectPreparedCampaigns,
+    selectPreparedSendingIps,
+    selectPreparedIpPools
+  ],
+  (...caches) => _.flatten(caches)
+);
+
+export default selectCache;

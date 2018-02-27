@@ -1,11 +1,5 @@
 /* eslint-disable max-lines */
-function average(item, keys = []) {
-  return item[keys[0]] / item[keys[1]];
-}
-
-function rate(item, keys) {
-  return (item[keys[0]] / item[keys[1]]) * 100;
-}
+import { rate, average } from '../helpers/metrics';
 
 export const list = [
   {
@@ -88,6 +82,22 @@ export const list = [
     type: 'total',
     unit: 'number',
     description: 'Total number of messages that were rendered at least once.',
+    inSummary: true
+  },
+  {
+    key: 'count_initial_rendered',
+    label: 'Initial Rendered',
+    type: 'total',
+    unit: 'number',
+    description: 'Total initial renderings of a message.',
+    inSummary: true
+  },
+  {
+    key: 'count_unique_initial_rendered_approx',
+    label: 'Initial Unique Rendered',
+    type: 'total',
+    unit: 'number',
+    description: 'Total number of messages that were intially rendered at least once.',
     inSummary: true
   },
   {

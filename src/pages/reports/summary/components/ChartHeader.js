@@ -4,7 +4,7 @@ import Legend from './Legend';
 
 import styles from './ChartHeader.module.scss';
 
-class ChartHeader extends Component {
+export default class ChartHeader extends Component {
   renderScaleButton(scale, label) {
     const { onScaleClick, selectedScale } = this.props;
     return <Button size='small' primary={scale === selectedScale} onClick={() => onScaleClick(scale)}>{ label }</Button>;
@@ -32,16 +32,14 @@ class ChartHeader extends Component {
           <div className={styles.Controls}>
             <Button size='small' onClick={onMetricsToggle}>Select Metrics</Button>
             {/* {this.renderTimeMode()} */}
-            <Button.Group className={styles.ButtonSpacer}>
-              {this.renderScaleButton('linear', 'Linear')}
-              {this.renderScaleButton('log', 'Log')}
-              {this.renderScaleButton('sqrt', '√ Sq Rt')}
-            </Button.Group>
+            {/*<Button.Group className={styles.ButtonSpacer}>*/}
+            {/*{this.renderScaleButton('linear', 'Linear')}*/}
+            {/*{this.renderScaleButton('log', 'Log')}*/}
+            {/*{this.renderScaleButton('pow', 'Pow')}*/}
+            {/*</Button.Group>*/}
           </div>
         </Grid.Column>
       </Grid>
     );
   }
 }
-
-export default ChartHeader;

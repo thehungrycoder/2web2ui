@@ -26,7 +26,7 @@ describe('Rejection Data Table: ', () => {
           domain: 'gmail.com'
         }
       ],
-      onDomainClick: jest.fn()
+      addFilters: jest.fn()
     };
     wrapper = shallow(<DataTable {...props} />);
   });
@@ -53,7 +53,7 @@ describe('Rejection Data Table: ', () => {
       const rows = wrapper.instance().getRowData({ reason: 'bad delay', rejection_category_name: 'cat1', count_rejected: 10, domain: 'gmail.com' });
       const link = mount(rows[1]);
       link.find('UnstyledLink').simulate('click');
-      expect(props.onDomainClick).toHaveBeenCalledWith('gmail.com');
+      expect(props.addFilters).toHaveBeenCalledWith([{ type: 'Recipient Domain', value: 'gmail.com' }]);
     });
 
   });

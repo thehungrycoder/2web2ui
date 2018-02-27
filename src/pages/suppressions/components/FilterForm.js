@@ -49,9 +49,9 @@ export class FilterForm extends Component {
   constructor(props) {
     super(props);
 
-    const { reportFilters } = props;
+    const { reportOptions } = props;
     this.state = {
-      reportFilters,
+      reportOptions,
       types: [],
       sources: []
     };
@@ -68,7 +68,7 @@ export class FilterForm extends Component {
     }
 
     this.setState({
-      reportFilters: {
+      reportOptions: {
         from: options.from,
         to: options.to,
         relativeRange: relativeRange
@@ -143,7 +143,7 @@ const formOptions = {
   form: formName
 };
 const mapStateToProps = (state) => ({
-  reportFilters: state.reportFilters,
+  reportOptions: state.reportOptions,
   list: state.suppressions.list
 });
 export default connect(mapStateToProps)(reduxForm(formOptions)(FilterForm));

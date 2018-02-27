@@ -1,67 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-import qs from 'query-string';
 import _ from 'lodash';
-
-import { getFilterSearchOptions, parseSearch } from 'src/helpers/reports';
-import { showAlert } from 'src/actions/globalAlert';
-import { addFilters, initTypeaheadCache } from 'src/actions/reportFilters';
-import { loadRejectionMetrics, refreshRejectionTableMetrics } from 'src/actions/rejectionReport';
+import { addFilters } from 'src/actions/reportOptions';
+import { refreshRejectionReport } from 'src/actions/rejectionReport';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
 import { Page, Panel } from '@sparkpost/matchbox';
-import ShareModal from '../components/ShareModal';
-import Filters from '../components/Filters';
+import ReportOptions from '../components/ReportOptions';
 import MetricsSummary from '../components/MetricsSummary';
 import DataTable from './components/DataTable';
+import { safeRate } from 'src/helpers/math';
 
 export class RejectionPage extends Component {
-  state = {
-    modal: false,
-    query: {}
-  }
 
-  componentDidMount() {
-    this.handleRefresh(this.parseSearch());
-    this.props.initTypeaheadCache();
-  }
-
-  /**
-   * takes qp's and dispatches filters being added
-   * Note: this has to be done in page because Redux is wired
-   * and not in the helper
-   */
-  parseSearch() {
-    const { filters = [], options } = parseSearch(this.props.location.search);
-    this.props.addFilters(filters);
-    return options;
-  }
-
-  handleRefresh = (options) => {
-    const { showAlert, refreshRejectionTableMetrics, loadRejectionMetrics } = this.props;
-    return Promise.all([
-      loadRejectionMetrics(options),
-      refreshRejectionTableMetrics(options)
-    ])
-      .then(() => this.updateLink())
-      .catch((err) => showAlert({ type: 'error', message: 'Unable to refresh rejection reports.', details: err.message }));
-  }
-
-  handleModalToggle = () => {
-    this.setState({ modal: !this.state.modal });
-  }
-
-  updateLink = () => {
-    const { filters, history } = this.props;
-    const query = getFilterSearchOptions(filters);
-    const search = qs.stringify(query, { encode: false });
-    this.setState({ query });
-    history.replace({ pathname: '/reports/rejections', search });
-  }
-
-  handleDomainClick = (domain) => {
-    this.props.addFilters([{ type: 'Recipient Domain', value: domain }]);
-    this.handleRefresh();
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.reportOptions !== this.props.reportOptions) {
+      this.props.refreshRejectionReport(nextProps.reportOptions);
+    }
   }
 
   renderCollection() {
@@ -71,11 +25,11 @@ export class RejectionPage extends Component {
       return <PanelLoading />;
     }
 
-    return <DataTable list={list} onDomainClick={this.handleDomainClick} />;
+    return <DataTable list={list} addFilters={this.props.addFilters} />;
   }
 
   renderTopLevelMetrics() {
-    const { aggregatesLoading, aggregates, filters } = this.props;
+    const { aggregatesLoading, aggregates } = this.props;
     const { count_rejected, count_targeted } = aggregates;
 
     if (aggregatesLoading) {
@@ -88,51 +42,38 @@ export class RejectionPage extends Component {
 
     return (
       <MetricsSummary
-        rateValue={(count_rejected / count_targeted) * 100}
-        rateTitle='Rejected Rate'
-        {...filters} >
+        rateValue={safeRate(count_rejected, count_targeted)}
+        rateTitle='Rejected Rate'>
         <strong>{count_rejected.toLocaleString()}</strong> of your messages were rejected of <strong>{count_targeted.toLocaleString()}</strong> messages targeted
       </MetricsSummary>
     );
   }
 
   render() {
-    const { modal, query } = this.state;
     const { loading } = this.props;
 
     return (
       <Page title='Rejections Report'>
-        <Filters
-          refresh={this.handleRefresh}
-          onShare={this.handleModalToggle}
-          shareDisabled={loading}
-        />
-        { this.renderTopLevelMetrics() }
+        <ReportOptions reportLoading={loading} />
+        {this.renderTopLevelMetrics()}
         <Panel title='Rejection Reasons' className='RejectionTable'>
-          { this.renderCollection() }
+          {this.renderCollection()}
         </Panel>
-        <ShareModal
-          open={modal}
-          handleToggle={this.handleModalToggle}
-          query={query} />
       </Page>
     );
   }
 }
 
-const mapStateToProps = ({ reportFilters, rejectionReport }) => ({
-  filters: reportFilters,
+const mapStateToProps = ({ reportOptions, rejectionReport }) => ({
   loading: rejectionReport.aggregatesLoading || rejectionReport.reasonsLoading,
   aggregatesLoading: rejectionReport.aggregatesLoading,
   aggregates: rejectionReport.aggregates,
-  list: rejectionReport.list
+  list: rejectionReport.list,
+  reportOptions
 });
 
 const mapDispatchToProps = {
   addFilters,
-  loadRejectionMetrics,
-  refreshRejectionTableMetrics,
-  initTypeaheadCache,
-  showAlert
+  refreshRejectionReport
 };
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(RejectionPage));
+export default connect(mapStateToProps, mapDispatchToProps)(RejectionPage);

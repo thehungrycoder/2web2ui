@@ -4,7 +4,8 @@ import {
   getRelativeDates,
   formatDate,
   formatTime,
-  formatDateTime
+  formatDateTime,
+  isSameDate
 } from '../date';
 import cases from 'jest-in-case';
 import moment from 'moment';
@@ -35,18 +36,41 @@ describe('Date helpers', () => {
     expect(getStartOfDay('2017-12-18T23:59:59')).toEqual(startOfDay);
   });
 
+  it('should compare two dates', () => {
+    const a1 = new Date('2018-02-14T12:00:00');
+    const a2 = new Date(a1);
+    const b = new Date(a1);
+    b.setYear(1970);
+    const c = '2018-02-14T12:00:00';
+
+    expect(isSameDate(a1, a2)).toEqual(true);
+    expect(isSameDate(a1, b)).toEqual(false);
+
+    // must be dates to be the same
+    expect(isSameDate(a1, c)).toEqual(false);
+  });
+
   cases('getRelativeDates calculations', ({ range, subtractArgs }) => {
     const date = moment(new Date('2017-12-17T12:00:00')).utc().toDate();
     Date.now = jest.fn(() => date);
-    const { from, to } = getRelativeDates(range);
+    const { from, to, relativeRange } = getRelativeDates(range);
     expect(to).toEqual(date);
     expect(from).toEqual(moment(date).subtract(...subtractArgs).toDate());
+    expect(relativeRange).toEqual(range);
   }, {
     'for an hour ago': { range: 'hour', subtractArgs: [1, 'hours']},
     'for a day ago': { range: 'day', subtractArgs: [1, 'days']},
     'for a week ago': { range: '7days', subtractArgs: [7, 'days']},
     'for a month': { range: '30days', subtractArgs: [30, 'days']},
     'for a quarter ago': { range: '90days', subtractArgs: [90, 'days']}
+  });
+
+  it('should return for a custom relative date range', () => {
+    expect(getRelativeDates('custom')).toEqual({ relativeRange: 'custom' });
+  });
+
+  it('should return an empty object for an unknown range', () => {
+    expect(getRelativeDates('einstein')).toEqual({});
   });
 
   it('should return an empty object when getting a relative range for an invalid range type', () => {

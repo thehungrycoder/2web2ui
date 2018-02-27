@@ -65,6 +65,6 @@ exports[`Rejection Data Table:  renders correctly 1`] = `
 
 exports[`Rejection Data Table:  renders correctly with no rejections 1`] = `
 <Empty
-  message="There are no rejection messages for your current query"
+  message="No rejection reasons to report"
 />
 `;

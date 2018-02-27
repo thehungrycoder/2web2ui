@@ -65,6 +65,8 @@ export class PaymentForm extends Component {
     return `We only accept ${allowedCards.join(', ')}`;
   }
 
+  dateFormat = (date) => minLength(8)(date) ? 'Must be MM / YYYY' : undefined;
+
   render() {
     const { disabled } = this.props;
     return (
@@ -95,7 +97,7 @@ export class PaymentForm extends Component {
               onChange={this.handleExpiry}
               placeholder='MM/YYYY'
               component={TextFieldWrapper}
-              validate={[required, minLength(9)]}
+              validate={[required, this.dateFormat]}
               disabled={disabled}
             />
           </Grid.Column>

@@ -3,8 +3,9 @@ import _ from 'lodash';
 import { list as METRICS_LIST } from 'src/config/metrics';
 import config from 'src/config';
 import { getRelativeDates } from 'src/helpers/date';
+import { safeDivide, safeRate } from './math';
 
-const { metricsPrecisionMap: precisionMap, apiDateFormat, chartColors } = config;
+const { metricsPrecisionMap: precisionMap, apiDateFormat, chartColors = []} = config;
 const indexedPrecisions = _.keyBy(precisionMap, 'value');
 const FILTER_KEY_MAP = {
   'Recipient Domain': 'domains',
@@ -18,13 +19,12 @@ const FILTER_KEY_MAP = {
 
 const DELIMITERS = ',;:+~`!@#$%^*()-={}[]"\'<>?./|\\'.split('');
 
-export function getQueryFromOptions({ from, to, metrics, activeList = []}) {
+export function getQueryFromOptions({ from, to, metrics, filters = []}) {
   from = moment(from).utc();
   to = moment(to).utc();
 
   const apiMetricsKeys = getKeysFromMetrics(metrics);
-  const delimiter = getDelimiter(activeList);
-  const filters = getFilterSets(activeList, delimiter);
+  const delimiter = getDelimiter(filters);
 
   return {
     metrics: apiMetricsKeys.join(delimiter),
@@ -32,7 +32,7 @@ export function getQueryFromOptions({ from, to, metrics, activeList = []}) {
     from: from.format(apiDateFormat),
     to: to.format(apiDateFormat),
     delimiter,
-    ...filters
+    ...getFilterSets(filters, delimiter)
   };
 }
 
@@ -73,12 +73,19 @@ export function getPrecisionType(precision) {
   return (indexedPrecisions[precision].time <= (60 * 24 * 2)) ? 'hours' : 'days';
 }
 
-export function getMetricsFromKeys(keys = []) {
+export function _getMetricsFromKeys(keys = []) {
   return keys.map((metric, i) => {
-    const found = METRICS_LIST.find((M) => M.key === metric);
+    const found = METRICS_LIST.find((M) => M.key === metric || M.key === metric.key);
+
+    if (!found) {
+      throw new Error(`Cannot find metric: ${JSON.stringify(metric)}`);
+    }
+
     return { ...found, name: found.key, stroke: chartColors[i] };
   });
 }
+
+export const getMetricsFromKeys = _.memoize(_getMetricsFromKeys, (keys = []) => keys.join(''));
 
 export function getKeysFromMetrics(metrics = []) {
   const flattened = _.flatMap(metrics, ({ key, computeKeys }) => computeKeys ? computeKeys : key);
@@ -108,11 +115,19 @@ export function transformData(data = [], metrics = []) {
 
 // Extract from, to, filters (campaign, template, ...) and any other included update fields
 // into a set of common options for metrics queries.
-export function buildCommonOptions(reportFilters, updates = {}) {
+export function buildCommonOptions(reportOptions, updates = {}) {
   return {
-    ...reportFilters,
+    ...reportOptions,
     ...updates,
+    ...getRelativeDates(reportOptions.relativeRange),
     ...getRelativeDates(updates.relativeRange)
   };
 }
 
+export function average(item, keys = []) {
+  return safeDivide(item[keys[0]], item[keys[1]]);
+}
+
+export function rate(item, keys = []) {
+  return safeRate(item[keys[0]], item[keys[1]]);
+}

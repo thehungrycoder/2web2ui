@@ -101,6 +101,60 @@ Object {
 }
 `;
 
+exports[`Action Creator: Sending Domains Verify Token should dispatch verify abuse token action 1`] = `
+Object {
+  "meta": Object {
+    "data": Object {
+      "abuse_at_token": "12345",
+    },
+    "domain": "sub.com",
+    "headers": Object {
+      "x-msys-subaccount": 101,
+    },
+    "method": "POST",
+    "type": "abuse_at",
+    "url": "/sending-domains/sub.com/verify",
+  },
+  "type": "VERIFY_TOKEN",
+}
+`;
+
+exports[`Action Creator: Sending Domains Verify Token should dispatch verify mailbox token action 1`] = `
+Object {
+  "meta": Object {
+    "data": Object {
+      "verification_mailbox_token": "12345",
+    },
+    "domain": "sub.com",
+    "headers": Object {
+      "x-msys-subaccount": 101,
+    },
+    "method": "POST",
+    "type": "verification_mailbox",
+    "url": "/sending-domains/sub.com/verify",
+  },
+  "type": "VERIFY_TOKEN",
+}
+`;
+
+exports[`Action Creator: Sending Domains Verify Token should dispatch verify postmaster token action 1`] = `
+Object {
+  "meta": Object {
+    "data": Object {
+      "postmaster_at_token": "12345",
+    },
+    "domain": "sub.com",
+    "headers": Object {
+      "x-msys-subaccount": 101,
+    },
+    "method": "POST",
+    "type": "postmaster_at",
+    "url": "/sending-domains/sub.com/verify",
+  },
+  "type": "VERIFY_TOKEN",
+}
+`;
+
 exports[`Action Creator: Sending Domains Verify should dispatch verify abuse action 1`] = `
 Object {
   "meta": Object {

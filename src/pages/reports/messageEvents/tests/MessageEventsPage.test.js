@@ -2,6 +2,9 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { MessageEventsPage } from '../MessageEventsPage';
 
+let wrapper;
+let instance;
+
 describe('Page: Message Events tests', () => {
   const props = {
     empty: false,
@@ -27,10 +30,9 @@ describe('Page: Message Events tests', () => {
     }
   };
 
-  let wrapper;
-
   beforeEach(() => {
     wrapper = shallow(<MessageEventsPage {...props} />);
+    instance = wrapper.instance();
   });
 
   it('should render page correctly', () => {
@@ -52,16 +54,27 @@ describe('Page: Message Events tests', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should handle view details click', () => {
-    wrapper.instance().handleDetailClick({ message_id: 'message', event_id: 'event' });
-    expect(props.history.push).toHaveBeenCalledWith({
-      pathname: '/reports/message-events/details/message',
-      state: { selectedEventId: 'event' }
-    });
-  });
-
   it('renders correctly with too many (1000) records', () => {
     wrapper.setProps({ events: new Array(1000) });
     expect(wrapper).toMatchSnapshot();
+  });
+
+  describe('getRowData', () => {
+    let event;
+    beforeEach(() => {
+      event = {
+        formattedDate: 'formatted',
+        type: 'injection',
+        friendly_from: 'mean@friendly',
+        rcpt_to: 'tom.haverford@pawnee.state.in.us',
+        message_id: '123abc',
+        event_id: '456xyz'
+      };
+    });
+
+    it('renders correctly', () => {
+      expect(instance.getRowData(event)).toMatchSnapshot();
+    });
+
   });
 });

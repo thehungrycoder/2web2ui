@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 
 import { snakeToFriendly } from 'src/helpers/string';
-import { Page, Banner, Button, Panel } from '@sparkpost/matchbox';
+import { Page, Banner, Panel } from '@sparkpost/matchbox';
 import { PanelLoading, TableCollection, ApiErrorBanner, Empty } from 'src/components';
 import DisplayDate from './components/DisplayDate';
 import BasicFilter from './components/BasicFilter';
+import ViewDetailsButton from './components/ViewDetailsButton';
+
 import { getMessageEvents } from 'src/actions/messageEvents';
 import { selectMessageEvents } from 'src/selectors/messageEvents';
 
@@ -31,28 +32,18 @@ export class MessageEventsPage extends Component {
   }
 
   componentDidMount() {
-    const { reportFilters } = this.props;
-    this.refresh({ reportFilters });
-  }
-
-  handleDetailClick = ({ message_id, event_id }) => {
-    const { history } = this.props;
-    history.push({
-      pathname: `/reports/message-events/details/${message_id}`,
-      state: { selectedEventId: event_id }
-    });
+    const { reportOptions } = this.props;
+    this.refresh({ reportOptions });
   }
 
   getRowData = (rowData) => {
-    const { timestamp, formattedDate, type, friendly_from, rcpt_to, message_id, event_id } = rowData;
+    const { timestamp, formattedDate, type, friendly_from, rcpt_to } = rowData;
     return [
       <DisplayDate timestamp={timestamp} formattedDate={formattedDate} />,
       snakeToFriendly(type),
       rcpt_to,
       friendly_from,
-      <div style={{ textAlign: 'right' }}>
-        <Button onClick={() => this.handleDetailClick({ message_id, event_id })} size='small'>View Details</Button>
-      </div>
+      <ViewDetailsButton {...rowData} />
     ];
   }
 
@@ -107,7 +98,6 @@ export class MessageEventsPage extends Component {
         { error ? this.renderError() : this.renderCollection() }
       </Page>
     );
-
   }
 
 }
@@ -116,7 +106,7 @@ const mapStateToProps = (state) => {
   const events = selectMessageEvents(state);
 
   return {
-    reportFilters: state.reportFilters,
+    reportOptions: state.reportOptions,
     events: events,
     loading: state.messageEvents.loading,
     error: state.messageEvents.error,
@@ -124,4 +114,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default withRouter(connect(mapStateToProps, { getMessageEvents })(MessageEventsPage));
+export default connect(mapStateToProps, { getMessageEvents })(MessageEventsPage);

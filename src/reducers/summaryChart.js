@@ -8,7 +8,7 @@ const initialState = {
   precision: '',
   chartData: [],
   tableData: [],
-  groupBy: 'domain'
+  groupBy: 'aggregate'
 };
 
 export default (state = initialState, { type, payload }) => {

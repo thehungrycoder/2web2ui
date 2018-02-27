@@ -5,7 +5,7 @@ import EmailBanner from '../EmailBanner';
 
 describe('Component: Email Banner', () => {
   const props = {
-    sendingStatus: 'not-sending',
+    verifying: false,
     handleResend: jest.fn(() => true)
   };
 
@@ -20,12 +20,7 @@ describe('Component: Email Banner', () => {
   });
 
   it('should show sending sending content', () => {
-    wrapper.setProps({ sendingStatus: 'sending' });
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('should show sent content', () => {
-    wrapper.setProps({ sendingStatus: 'sent' });
+    wrapper.setProps({ verifying: true });
     expect(wrapper).toMatchSnapshot();
   });
 

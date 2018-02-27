@@ -95,7 +95,7 @@ exports[`Component: Date Form should sync props to state 1`] = `
         required={false}
         resize="both"
         type="text"
-        value="2018-1-10"
+        value="2018-01-10"
       />
     </Grid.Column>
     <Grid.Column>
@@ -133,7 +133,7 @@ exports[`Component: Date Form should sync props to state 1`] = `
         required={false}
         resize="both"
         type="text"
-        value="2018-1-15"
+        value="2018-01-15"
       />
     </Grid.Column>
     <Grid.Column>
@@ -172,7 +172,7 @@ exports[`Component: Date Form should update state from new props 1`] = `
         required={false}
         resize="both"
         type="text"
-        value="2018-1-10"
+        value="2018-01-10"
       />
     </Grid.Column>
     <Grid.Column>
@@ -210,7 +210,7 @@ exports[`Component: Date Form should update state from new props 1`] = `
         required={false}
         resize="both"
         type="text"
-        value="2018-1-15"
+        value="2018-01-15"
       />
     </Grid.Column>
     <Grid.Column>

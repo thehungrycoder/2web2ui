@@ -138,8 +138,7 @@ export default class SpLineChart extends React.Component {
               tickLine={false}
               width={60}
               scale={yScale}
-              domain={this.getYDomain()}
-              allowDataOverflow={yScale === 'log'} />
+              domain={this.getYDomain()} />
             <Tooltip
               isAnimationActive={false}
               labelFormatter={tooltipLabelFormatter}

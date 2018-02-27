@@ -3,12 +3,14 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import _ from 'lodash';
 
-import { LINKS } from 'src/constants';
-import { Page, Banner, UnstyledLink } from '@sparkpost/matchbox';
+import { Page } from '@sparkpost/matchbox';
 import { UsageReport } from 'src/components';
 import Tutorial from './components/Tutorial';
 import EmailBanner from './components/EmailBanner';
+import SuppressionBanner from './components/SuppressionBanner';
 
+import { showAlert } from 'src/actions/globalAlert';
+import { verifyEmail } from 'src/actions/currentUser';
 import { fetch as fetchAccount } from 'src/actions/account';
 import { checkSuppression } from 'src/actions/suppressions';
 import { list as listSendingDomains } from 'src/actions/sendingDomains';
@@ -19,14 +21,6 @@ import { selectVerifiedDomains, selectReadyForBounce } from 'src/selectors/sendi
 import { selectApiKeysForSending } from 'src/selectors/api-keys';
 
 export class DashboardPage extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      sendingStatus: null
-    };
-  }
-
   componentDidMount() {
     this.props.checkSuppression();
     this.props.listSendingDomains();
@@ -34,44 +28,41 @@ export class DashboardPage extends Component {
   }
 
   resendVerification() {
-    // TODO do this in redux
-    this.setState({ sendingStatus: 'sending' });
+    const { verifyEmail, showAlert } = this.props;
+    return verifyEmail()
+      .then(() => showAlert({
+        type: 'success',
+        message: 'Please click the link in the email we sent you to verify your email.'
+      }))
+      .catch((err) => showAlert({
+        type: 'error',
+        message: 'Error sending verification email.',
+        details: err.message
+      }));
   }
 
   renderVerifyEmailCta() {
-    const { currentUser } = this.props;
+    const { currentUser, verifyingEmail } = this.props;
 
     if (!currentUser.email_verified) {
       return (
         <EmailBanner
-          sendingStatus={this.state.sendingStatus}
+          verifying={verifyingEmail}
           handleResend={() => this.resendVerification()} />
       );
     }
   }
 
-  renderSuppressionBanner() {
+  render() {
     const { accountAgeInWeeks, hasSuppressions } = this.props;
 
-    if (accountAgeInWeeks > 1 && hasSuppressions === false) {
-      return (
-        <Banner title="Coming from another email service?">
-          <p>Welcome! Make sure you import your suppression list from your previous provider to avoid sending to people who have previously opted out, consistently bounced, etc. Learn more about migrating from Mailgun, Mandrill, or SendGrid. <UnstyledLink to={LINKS.SUPPRESSION_MIGRATION} external>Import your suppressions</UnstyledLink>.</p>
-        </Banner>
-      );
-    }
-  }
-
-  render() {
     return (
       <Page title='Dashboard'>
 
         { this.renderVerifyEmailCta() }
 
         <UsageReport />
-
-        { this.renderSuppressionBanner() }
-
+        <SuppressionBanner accountAgeInWeeks={accountAgeInWeeks} hasSuppressions={hasSuppressions} />
         <Tutorial {...this.props} />
       </Page>
     );
@@ -86,6 +77,7 @@ function mapStateToProps(state) {
 
   return {
     currentUser: state.currentUser,
+    verifyingEmail: state.currentUser.verifyingEmail,
     accountAgeInWeeks: acctAge,
     hasSuppressions: state.suppressions.hasSuppression,
     hasSendingDomains: state.sendingDomains.list.length > 0,
@@ -96,4 +88,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default withRouter(connect(mapStateToProps, { fetchAccount, checkSuppression, listSendingDomains, listApiKeys })(DashboardPage));
+export default withRouter(connect(mapStateToProps, { fetchAccount, checkSuppression, listSendingDomains, listApiKeys, verifyEmail, showAlert })(DashboardPage));

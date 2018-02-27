@@ -95,3 +95,29 @@ export function verifyMailbox({ id, mailbox: verification_mailbox, subaccount })
 export function verifyPostmaster({ id, subaccount }) {
   return verify({ id, subaccount, type: 'postmaster_at' });
 }
+
+function verifyToken({ id, subaccount, type, token }) {
+  return sparkpostApiRequest({
+    type: 'VERIFY_TOKEN',
+    meta: {
+      method: 'POST',
+      url: `/sending-domains/${id}/verify`,
+      headers: setSubaccountHeader(subaccount),
+      data: { [`${type}_token`]: token },
+      type,
+      domain: id
+    }
+  });
+}
+
+export function verifyMailboxToken({ id, token, subaccount }) {
+  return verifyToken({ id, subaccount, type: 'verification_mailbox', token });
+}
+
+export function verifyPostmasterToken({ id, token, subaccount }) {
+  return verifyToken({ id, subaccount, type: 'postmaster_at', token });
+}
+
+export function verifyAbuseToken({ id, token, subaccount }) {
+  return verifyToken({ id, subaccount, type: 'abuse_at', token });
+}

@@ -33,20 +33,3 @@ exports[`Component: Email Banner should show sending sending content 1`] = `
   </p>
 </Banner>
 `;
-
-exports[`Component: Email Banner should show sent content 1`] = `
-<Banner
-  action={null}
-  status="info"
-  title="Verify your email address"
->
-  <p>
-    Please click the link in the email we sent you to verify your email address and unlock higher daily sending limits.
-  </p>
-  <p>
-    <strong>
-      Email sent!
-    </strong>
-  </p>
-</Banner>
-`;

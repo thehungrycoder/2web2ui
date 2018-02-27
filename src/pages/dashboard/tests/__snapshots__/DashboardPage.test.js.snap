@@ -1,0 +1,237 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Page: Dashboard tests should correctly render page when user is not verified 1`] = `
+<Page
+  empty={Object {}}
+  title="Dashboard"
+>
+  <EmailBanner
+    handleResend={[Function]}
+    verifying={false}
+  />
+  <Connect(UsageReport) />
+  <SuppressionBanner
+    accountAgeInWeeks={0}
+    hasSuppressions={true}
+  />
+  <Tutorial
+    account={
+      Object {
+        "status": "active",
+        "subscription": Object {
+          "code": "paid",
+        },
+      }
+    }
+    accountAgeInWeeks={0}
+    checkSuppression={
+      [MockFunction] {
+        "calls": Array [
+          Array [],
+        ],
+      }
+    }
+    currentUser={
+      Object {
+        "email_verfied": false,
+      }
+    }
+    hasSuppressions={true}
+    listApiKeys={
+      [MockFunction] {
+        "calls": Array [
+          Array [
+            Object {
+              "id": 0,
+            },
+          ],
+        ],
+      }
+    }
+    listSendingDomains={
+      [MockFunction] {
+        "calls": Array [
+          Array [],
+        ],
+      }
+    }
+    showAlert={[MockFunction]}
+    verifyEmail={[MockFunction]}
+    verifyingEmail={false}
+  />
+</Page>
+`;
+
+exports[`Page: Dashboard tests should display upgrade CTA when account is free and active 1`] = `
+<Page
+  empty={Object {}}
+  title="Dashboard"
+>
+  <Connect(UsageReport) />
+  <SuppressionBanner
+    accountAgeInWeeks={0}
+    hasSuppressions={true}
+  />
+  <Tutorial
+    account={
+      Object {
+        "status": "active",
+        "subscription": Object {
+          "code": "free",
+        },
+      }
+    }
+    accountAgeInWeeks={0}
+    checkSuppression={
+      [MockFunction] {
+        "calls": Array [
+          Array [],
+        ],
+      }
+    }
+    currentUser={
+      Object {
+        "email_verified": true,
+      }
+    }
+    hasSuppressions={true}
+    listApiKeys={
+      [MockFunction] {
+        "calls": Array [
+          Array [
+            Object {
+              "id": 0,
+            },
+          ],
+        ],
+      }
+    }
+    listSendingDomains={
+      [MockFunction] {
+        "calls": Array [
+          Array [],
+        ],
+      }
+    }
+    showAlert={[MockFunction]}
+    verifyEmail={[MockFunction]}
+    verifyingEmail={false}
+  />
+</Page>
+`;
+
+exports[`Page: Dashboard tests should render import suppression list when 0 suppressions and new account 1`] = `
+<Page
+  empty={Object {}}
+  title="Dashboard"
+>
+  <Connect(UsageReport) />
+  <SuppressionBanner
+    accountAgeInWeeks={40}
+    hasSuppressions={false}
+  />
+  <Tutorial
+    account={
+      Object {
+        "status": "active",
+        "subscription": Object {
+          "code": "paid",
+        },
+      }
+    }
+    accountAgeInWeeks={40}
+    checkSuppression={
+      [MockFunction] {
+        "calls": Array [
+          Array [],
+        ],
+      }
+    }
+    currentUser={
+      Object {
+        "email_verified": true,
+      }
+    }
+    hasSuppressions={false}
+    listApiKeys={
+      [MockFunction] {
+        "calls": Array [
+          Array [
+            Object {
+              "id": 0,
+            },
+          ],
+        ],
+      }
+    }
+    listSendingDomains={
+      [MockFunction] {
+        "calls": Array [
+          Array [],
+        ],
+      }
+    }
+    showAlert={[MockFunction]}
+    verifyEmail={[MockFunction]}
+    verifyingEmail={false}
+  />
+</Page>
+`;
+
+exports[`Page: Dashboard tests should render page correctly with defaults 1`] = `
+<Page
+  empty={Object {}}
+  title="Dashboard"
+>
+  <Connect(UsageReport) />
+  <SuppressionBanner
+    accountAgeInWeeks={0}
+    hasSuppressions={true}
+  />
+  <Tutorial
+    account={
+      Object {
+        "status": "active",
+        "subscription": Object {
+          "code": "paid",
+        },
+      }
+    }
+    accountAgeInWeeks={0}
+    checkSuppression={
+      [MockFunction] {
+        "calls": Array [
+          Array [],
+        ],
+      }
+    }
+    currentUser={
+      Object {
+        "email_verified": true,
+      }
+    }
+    hasSuppressions={true}
+    listApiKeys={
+      [MockFunction] {
+        "calls": Array [
+          Array [
+            Object {
+              "id": 0,
+            },
+          ],
+        ],
+      }
+    }
+    listSendingDomains={
+      [MockFunction] {
+        "calls": Array [
+          Array [],
+        ],
+      }
+    }
+    showAlert={[MockFunction]}
+    verifyEmail={[MockFunction]}
+    verifyingEmail={false}
+  />
+</Page>
+`;

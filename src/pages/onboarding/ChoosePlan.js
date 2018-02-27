@@ -83,11 +83,13 @@ export class OnboardingPlanPage extends Component {
   }
 
   render() {
-    const { loading, plans } = this.props;
+    const { loading, plans, submitting } = this.props;
 
     if (loading) {
       return <Loading />;
     }
+
+    const buttonText = submitting ? 'Updating Subscription...' : 'Get Started';
 
     return (
       <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
@@ -95,10 +97,10 @@ export class OnboardingPlanPage extends Component {
         <Grid>
           <Grid.Column>
             <Panel title='Select A Plan'>
-              <PlanPicker disabled={this.props.submitting} plans={plans} />
+              <PlanPicker disabled={submitting} plans={plans} />
               {this.renderCCSection()}
               <Panel.Section>
-                <Button disabled={this.props.submitting} primary={true} type='submit' size='large' fullWidth={true}>Get Started</Button>
+                <Button disabled={submitting} primary={true} type='submit' size='large' fullWidth={true}>{buttonText}</Button>
               </Panel.Section>
               <Steps />
             </Panel>

@@ -12,7 +12,6 @@ exports[`VerifyEmail component should disable the send button while sending 1`] 
         },
       ]
     }
-    sectioned={true}
     title="Verify through Email"
   >
     <Panel.Section>
@@ -88,7 +87,6 @@ exports[`VerifyEmail component should error if custom mailbox field is invalid 1
         },
       ]
     }
-    sectioned={true}
     title="Verify through Email"
   >
     <Panel.Section>
@@ -150,7 +148,6 @@ exports[`VerifyEmail component should render error message 1`] = `
         },
       ]
     }
-    sectioned={true}
     title="Verify through Email"
   >
     <Panel.Section>
@@ -224,7 +221,6 @@ exports[`VerifyEmail component should render success message 1`] = `
         },
       ]
     }
-    sectioned={true}
     title="Verify through Email"
   >
     <Panel.Section>
@@ -298,7 +294,6 @@ exports[`VerifyEmail component should render with mailbox verification 1`] = `
         },
       ]
     }
-    sectioned={true}
     title="Verify through Email"
   >
     <Panel.Section>
@@ -359,7 +354,6 @@ exports[`VerifyEmail component should render with postmaster and abuse email ver
         },
       ]
     }
-    sectioned={true}
     title="Verify through Email"
   >
     <Panel.Section>
@@ -433,7 +427,6 @@ exports[`VerifyEmail component should send abuse-at email 1`] = `
         },
       ]
     }
-    sectioned={true}
     title="Verify through Email"
   >
     <Panel.Section>
@@ -507,7 +500,6 @@ exports[`VerifyEmail component should send custom mailbox email 1`] = `
         },
       ]
     }
-    sectioned={true}
     title="Verify through Email"
   >
     <Panel.Section>
@@ -568,7 +560,6 @@ exports[`VerifyEmail component should send postmaster-at email 1`] = `
         },
       ]
     }
-    sectioned={true}
     title="Verify through Email"
   >
     <Panel.Section>

@@ -3,6 +3,7 @@ import _ from 'lodash';
 import { TableCollection, Empty, LongTextContainer } from 'src/components';
 import { UnstyledLink } from '@sparkpost/matchbox';
 import { Percent } from 'src/components/formatters';
+import { safeRate } from 'src/helpers/math';
 
 const columns = [
   { label: 'Reason', sortKey: 'reason', width: '45%' },
@@ -13,13 +14,13 @@ const columns = [
 
 export class DelaysDataTable extends Component {
   getRowData = (rowData) => {
-    const { totalAccepted, onDomainClick } = this.props;
+    const { totalAccepted, addFilters } = this.props;
     const { reason, domain, count_delayed, count_delayed_first } = rowData;
     return [
       <LongTextContainer text={reason} />,
-      <UnstyledLink onClick={() => onDomainClick(domain)}>{domain}</UnstyledLink>,
+      <UnstyledLink onClick={() => addFilters([{ type: 'Recipient Domain', value: domain }])}>{domain}</UnstyledLink>,
       count_delayed,
-      <span>{count_delayed_first} (<Percent value={(count_delayed_first / totalAccepted) * 100} />)</span>
+      <span>{count_delayed_first} (<Percent value={safeRate(count_delayed_first, totalAccepted)} />)</span>
     ];
   }
 
@@ -27,7 +28,7 @@ export class DelaysDataTable extends Component {
     const { rows } = this.props;
 
     if (_.isEmpty(rows)) {
-      return <Empty title={'Delayed Messages'} message={'No delay reasons to report'} />;
+      return <Empty message={'No delayed messages to report'} />;
     }
 
     return <TableCollection

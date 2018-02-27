@@ -1,57 +1,44 @@
 import { fetch as fetchMetrics } from 'src/actions/metrics';
-import { initTypeaheadCache, refreshReportRange } from 'src/actions/reportFilters';
 import { getQueryFromOptions, getMetricsFromKeys } from 'src/helpers/metrics';
 import { getRelativeDates } from 'src/helpers/date';
 
-export function refresh(updates = {}) {
+// second argument is only for mocking local functions that can't be otherwise mocked or spied on in jest-land
+export function refreshSummaryReport(updates = {}, { getChartData = _getChartData, getTableData = _getTableData } = {}) {
   return (dispatch, getState) => {
-    const state = getState();
+    const { summaryChart, reportOptions } = getState();
 
     // if new metrics are included, convert them to their full representation from config
     if (updates.metrics) {
-      updates.metrics = getMetricsFromKeys(updates.metrics);
+      updates = { ...updates, metrics: getMetricsFromKeys(updates.metrics) };
     }
 
-    // if relativeRange is included, merge in the calculated from/to values
-    if (updates.relativeRange) {
-      Object.assign(updates, getRelativeDates(updates.relativeRange) || {});
-    }
-
-    // refresh the typeahead cache if the date range has been updated
-    const { from, to } = updates;
-
-    if (from || to) {
-      const params = getQueryFromOptions({ from, to });
-      dispatch(initTypeaheadCache(params));
-    }
-
-    // merge in existing state
-    const options = {
-      ...state.summaryChart,
-      ...state.reportFilters,
-      ...updates
+    // merge together states
+    const merged = {
+      ...summaryChart,
+      ...reportOptions,
+      ...getRelativeDates(reportOptions.relativeRange),
+      ...updates,
+      ...getRelativeDates(updates.relativeRange)
     };
 
-    dispatch(refreshReportRange(options));
-
     // convert new meta data into query param format
-    const params = getQueryFromOptions(options);
+    const params = getQueryFromOptions(merged);
 
     return Promise.all([
-      dispatch(getChartData({ params, metrics: options.metrics })),
-      dispatch(getTableData({ params, metrics: options.metrics }))
+      dispatch(getChartData({ params, metrics: merged.metrics })),
+      dispatch(getTableData({ params, metrics: merged.metrics }))
     ]);
   };
 }
 
-export function getChartData({ params = {}, metrics }) {
+export function _getChartData({ params, metrics }) {
   const options = {
     type: 'FETCH_CHART_DATA',
     path: 'deliverability/time-series',
     params
   };
 
-  return (dispatch, getState) => dispatch(fetchMetrics(options)).then((results) => {
+  return (dispatch) => dispatch(fetchMetrics(options)).then((results) => {
     const payload = {
       data: results,
       precision: params.precision,
@@ -62,7 +49,7 @@ export function getChartData({ params = {}, metrics }) {
   });
 }
 
-export function getTableData({ params, metrics, groupBy }) {
+export function _getTableData({ params, metrics, groupBy }) {
   return (dispatch, getState) => {
     const state = getState();
 
@@ -74,12 +61,14 @@ export function getTableData({ params, metrics, groupBy }) {
 
     // Gets filters and metrics for params
     if (!params) {
-      params = getQueryFromOptions({ ...state.summaryChart, ...state.reportFilters });
+      params = getQueryFromOptions({ ...state.reportOptions, metrics: activeMetrics });
     }
+
+    const path = activeGroup === 'aggregate' ? 'deliverability' : `deliverability/${activeGroup}`;
 
     const options = {
       type: 'FETCH_TABLE_DATA',
-      path: `deliverability/${activeGroup}`,
+      path,
       params
     };
 

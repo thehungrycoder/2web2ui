@@ -11,7 +11,7 @@ describe('metrics helpers', () => {
         { key: 'count_bounce' },
         { key: 'foo_bar', computeKeys: 'test + last' }
       ],
-      activeList: [
+      filters: [
         { value: 'gmail.com', type: 'Recipient Domain' },
         { value: 'foobar', type: 'Subaccount', id: 100 }
       ]
@@ -51,7 +51,7 @@ describe('metrics helpers', () => {
     expect(metricsHelpers.getPrecision(from, to)).toEqual('hour');
 
     to.add(6, 'days');
-    expect(metricsHelpers.getPrecision(from, to)).toEqual('12hr');
+    expect(metricsHelpers.getPrecision(from, to)).toEqual('day'); // 12hr precision makes for an odd x-axis, use day here
 
     to.add(25, 'days');
     expect(metricsHelpers.getPrecision(from, to)).toEqual('day');
@@ -69,7 +69,7 @@ describe('metrics helpers', () => {
   });
 
   it('should return days as precision type', () => {
-    expect(metricsHelpers.getPrecisionType('12hr')).toEqual('days');
+    expect(metricsHelpers.getPrecisionType('day')).toEqual('days');
   });
 
   it('should get metrics from keys', () => {
@@ -101,4 +101,15 @@ describe('metrics helpers', () => {
 
   });
 
+  it('should calculate average', () => {
+    const item = { total_delivery_time_first: 500000, count_delivered_first: 500 };
+    const keys = ['total_delivery_time_first', 'count_delivered_first'];
+    expect(metricsHelpers.average(item, keys)).toEqual(1000);
+  });
+
+  it('should calculate rate', () => {
+    const item = { count_accepted: 27, count_targeted: 30 };
+    const keys = ['count_accepted', 'count_targeted'];
+    expect(metricsHelpers.rate(item, keys)).toEqual(90);
+  });
 });

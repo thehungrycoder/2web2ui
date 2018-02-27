@@ -59,4 +59,9 @@ describe('Payment Form: ', () => {
     expect(PaymentMock.fns.cardExpiryVal).not.toHaveBeenCalled();
     expect(changeSpy).not.toHaveBeenCalled();
   });
+
+  it('should validate the expiration date', () => {
+    expect(wrapper.instance().dateFormat('22')).toEqual('Must be MM / YYYY');
+    expect(wrapper.instance().dateFormat('10 / 2020')).toEqual(undefined);
+  });
 });

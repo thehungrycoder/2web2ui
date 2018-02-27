@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import cx from 'classnames';
 
-import { getTableData } from 'src/actions/summaryChart';
-import { addFilters } from 'src/actions/reportFilters';
+import { _getTableData } from 'src/actions/summaryChart';
+import { addFilters } from 'src/actions/reportOptions';
 import typeaheadCacheSelector from 'src/selectors/reportFilterTypeaheadCache';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
 
-import { TableCollection, Unit, Loading } from 'src/components';
+import { TableCollection, TableHeader, Unit, Loading } from 'src/components';
 import { Empty } from 'src/components';
 import { Panel, Select, Grid, UnstyledLink } from '@sparkpost/matchbox';
 import { GROUP_CONFIG } from './tableConfig';
@@ -17,28 +17,30 @@ import styles from './Table.module.scss';
 
 export class Table extends Component {
   handleGroupChange = (e) => {
-    this.props.getTableData({ groupBy: e.target.value });
+    this.props._getTableData({ groupBy: e.target.value });
   }
 
   handleRowClick = (item) => {
     this.props.addFilters([item]);
-    this.props.refresh();
   }
 
   getColumnHeaders() {
     const { metrics, groupBy } = this.props;
+    const isAggColumn = groupBy === 'aggregate';
 
-    const primaryCol = {
-      label: GROUP_CONFIG[groupBy].label,
-      className: styles.HeaderCell,
-      sortKey: GROUP_CONFIG[groupBy].keyName
-    };
+    const primaryCol = isAggColumn
+      ? null
+      : {
+        label: GROUP_CONFIG[groupBy].label,
+        className: styles.HeaderCell,
+        sortKey: GROUP_CONFIG[groupBy].keyName
+      };
 
     const metricCols = metrics.map(({ label, key }) => ({
       key,
       label: <div className={styles.RightAlign}>{ label }</div>,
       className: cx(styles.HeaderCell, styles.NumericalHeader),
-      sortKey: key
+      sortKey: isAggColumn ? null : key
     }));
 
     return [primaryCol, ...metricCols];
@@ -68,7 +70,7 @@ export class Table extends Component {
         filter = { ...filter, value, id };
       }
 
-      const primaryCol = <UnstyledLink onClick={() => this.handleRowClick(filter)}>{ value }</UnstyledLink>;
+      const primaryCol = groupBy === 'aggregate' ? 'Aggregate Total' : <UnstyledLink onClick={() => this.handleRowClick(filter)}>{ value }</UnstyledLink>;
 
       const metricCols = metrics.map((metric) => (
         <div className={styles.RightAlign}>
@@ -95,9 +97,38 @@ export class Table extends Component {
     return options;
   }
 
+  renderAggregateTable() {
+    const { tableData } = this.props;
+
+    return (
+      <TableCollection
+        headerComponent={() => <TableHeader columns={this.getColumnHeaders()}/>}
+        getRowData={this.getRowData()}
+        rows={tableData}
+      />
+    );
+  }
+
+  renderGroupByTable() {
+    const { tableData, groupBy } = this.props;
+    const rowKeyName = GROUP_CONFIG[groupBy].keyName;
+
+    return (
+      <TableCollection
+        rowKeyName={rowKeyName}
+        columns={this.getColumnHeaders()}
+        getRowData={this.getRowData()}
+        pagination
+        defaultPerPage={10}
+        rows={tableData}
+        defaultSortColumn={this.getDefaultSortColumn()}
+        defaultSortDirection='desc'
+      />
+    );
+  }
+
   renderTable() {
     const { tableData, tableLoading, groupBy } = this.props;
-    const rowKeyName = GROUP_CONFIG[groupBy].keyName;
 
     if (tableLoading) {
       return (
@@ -112,17 +143,9 @@ export class Table extends Component {
     }
 
     return (
-      <TableCollection
-        rowKeyName={rowKeyName}
-        columns={this.getColumnHeaders()}
-        getRowData={this.getRowData()}
-        pagination
-        defaultPerPage={10}
-        rows={tableData}
-        filterBox={{ show: false }}
-        defaultSortColumn={this.getDefaultSortColumn()}
-        defaultSortDirection='desc'
-      />
+      groupBy === 'aggregate'
+        ? this.renderAggregateTable()
+        : this.renderGroupByTable()
     );
   }
 
@@ -153,4 +176,4 @@ const mapStateToProps = (state) => ({
   hasSubaccounts: hasSubaccounts(state),
   ...state.summaryChart
 });
-export default connect(mapStateToProps, { getTableData, addFilters })(Table);
+export default connect(mapStateToProps, { _getTableData, addFilters })(Table);

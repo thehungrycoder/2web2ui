@@ -44,25 +44,32 @@ export function getStartOfDay(date) {
   return start;
 }
 
+export function isSameDate(a, b) {
+  return (a instanceof Date) && (b instanceof Date) && (a.getTime() === b.getTime());
+}
+
 export function getRelativeDates(range) {
   const now = moment.utc();
   const to = now.toDate();
 
   switch (range) {
     case 'hour':
-      return { to, from: moment(to).subtract(1, 'hour').toDate() };
+      return { to, from: moment(to).subtract(1, 'hour').toDate(), relativeRange: range };
 
     case 'day':
-      return { to, from: moment(to).subtract(1, 'day').toDate() };
+      return { to, from: moment(to).subtract(1, 'day').toDate(), relativeRange: range };
 
     case '7days':
-      return { to, from: moment(to).subtract(7, 'day').toDate() };
+      return { to, from: moment(to).subtract(7, 'day').toDate(), relativeRange: range };
 
     case '30days':
-      return { to, from: moment(to).subtract(30, 'day').toDate() };
+      return { to, from: moment(to).subtract(30, 'day').toDate(), relativeRange: range };
 
     case '90days':
-      return { to, from: moment(to).subtract(90, 'day').toDate() };
+      return { to, from: moment(to).subtract(90, 'day').toDate(), relativeRange: range };
+
+    case 'custom':
+      return { relativeRange: range };
 
     default:
       return {};
