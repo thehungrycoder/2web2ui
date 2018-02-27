@@ -7,6 +7,7 @@ describe('ChoosePlan page tests', () => {
   let instance;
 
   const props = {
+    hasError: false,
     getPlans: jest.fn(),
     getBillingCountries: jest.fn(),
     billingCreate: jest.fn(() => Promise.resolve()),
@@ -17,7 +18,8 @@ describe('ChoosePlan page tests', () => {
     },
     loading: false,
     billing: { countries: []},
-    plans: []
+    plans: [],
+    submitting: false
   };
 
   beforeEach(() => {
@@ -27,6 +29,7 @@ describe('ChoosePlan page tests', () => {
 
   it('should render correctly', () => {
     expect(wrapper).toMatchSnapshot();
+    expect(instance.props.history.push).not.toHaveBeenCalled();
   });
 
   it('should render loading component', () => {
@@ -34,8 +37,18 @@ describe('ChoosePlan page tests', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('should redirect to next step when api calls fail', () => {
+    wrapper.setProps({ hasError: true });
+    expect(instance.props.history.push).toHaveBeenCalledWith('/onboarding/sending-domain');
+  });
+
   it('should show free bullets when isFree is selected', () => {
     wrapper.setProps({ selectedPlan: { isFree: true }});
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should disable submit and plan picker when submitting', () => {
+    wrapper.setProps({ submitting: true });
     expect(wrapper).toMatchSnapshot();
   });
 

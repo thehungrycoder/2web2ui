@@ -4,7 +4,6 @@ import { withRouter } from 'react-router';
 import { Icon } from '@sparkpost/matchbox';
 import styles from './Steps.module.scss';
 
-// TODO Finalize when whole register flow is complete
 const steps = [
   { path: 'plan', label: 'Confirm your Plan' },
   { path: 'sending-domain', label: 'Add a Domain' },

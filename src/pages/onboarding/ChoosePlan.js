@@ -13,6 +13,7 @@ import PaymentForm from 'src/pages/billing/forms/fields/PaymentForm';
 import BillingAddressForm from 'src/pages/billing/forms/fields/BillingAddressForm';
 
 const FORM_NAME = 'selectInitialPlan';
+const NEXT_STEP = '/onboarding/sending-domain';
 
 export class OnboardingPlanPage extends Component {
   componentDidMount() {
@@ -20,18 +21,27 @@ export class OnboardingPlanPage extends Component {
     this.props.getBillingCountries();
   }
 
+  componentDidUpdate(prevProps) {
+    const { hasError, history } = this.props;
+
+    // if we can't get plans or countries form is useless
+    // they can pick plan later from billing
+    if (!prevProps.hasError && hasError) {
+      history.push(NEXT_STEP);
+    }
+  }
+
   onSubmit = (values) => {
     const { billingCreate, showAlert, history } = this.props;
-    const uri = '/onboarding/sending-domain';
 
     // no billing updates needed since they are still on free plan
     if (values.planpicker.isFree) {
-      history.push(uri);
+      history.push(NEXT_STEP);
       return;
     }
 
     return billingCreate(values)
-      .then(() => history.push(uri))
+      .then(() => history.push(NEXT_STEP))
       .then(() => showAlert({ type: 'success', message: 'Added your plan' }))
       .catch((err) => showAlert({ type: 'error', message: 'Adding your plan failed', details: err.message }));
 
@@ -88,7 +98,7 @@ export class OnboardingPlanPage extends Component {
               <PlanPicker disabled={this.props.submitting} plans={plans} />
               {this.renderCCSection()}
               <Panel.Section>
-                <Button primary={true} type='submit' size='large' fullWidth={true}>Get Started</Button>
+                <Button disabled={this.props.submitting} primary={true} type='submit' size='large' fullWidth={true}>Get Started</Button>
               </Panel.Section>
               <Steps />
             </Panel>
@@ -106,7 +116,8 @@ const mapStateToProps = (state) => {
     billing: state.billing,
     plans: publicPlansSelector(state),
     initialValues: onboardingInitialValues(state),
-    selectedPlan: selector(state, 'planpicker')
+    selectedPlan: selector(state, 'planpicker'),
+    hasError: state.billing.plansError || state.billing.countriesError
   };
 };
 const mapDispatchToProps = { billingCreate, showAlert, getPlans, getBillingCountries };
