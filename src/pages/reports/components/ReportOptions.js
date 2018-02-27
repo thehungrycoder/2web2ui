@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import qs from 'query-string';
-import { addFilters, removeFilter, refreshReportOptions, initTypeaheadCache } from 'src/actions/reportOptions';
+import { addFilters, removeFilter, refreshReportOptions, refreshTypeaheadCache, initTypeaheadCache } from 'src/actions/reportOptions';
 import ShareModal from './ShareModal';
 import { parseSearch, getReportSearchOptions } from 'src/helpers/reports';
 import { Grid, Button, Panel, Tag } from '@sparkpost/matchbox';
@@ -10,6 +10,7 @@ import Typeahead from './Typeahead';
 import DateFilter from './DateFilter';
 import typeaheadCacheSelector from 'src/selectors/reportFilterTypeaheadCache';
 import { showAlert } from 'src/actions/globalAlert';
+import { isSameDate } from 'src/helpers/date';
 import styles from './ReportOptions.module.scss';
 
 // TODO: separate the share modal / link update logic out of this component
@@ -29,12 +30,24 @@ export class ReportOptions extends Component {
     this.props.initTypeaheadCache();
   }
 
-  componentDidUpdate(previousProps) {
-    if (previousProps.reportOptions !== this.props.reportOptions) {
+  componentWillReceiveProps(nextProps) {
+    const current = this.props.reportOptions;
+    const next = nextProps.reportOptions;
+    const datesAreDifferent = !isSameDate(current.from, next.from) || !isSameDate(current.to, next.to);
+    const rangesAreDifferent = current.relativeRange !== next.relativeRange;
+
+    if (rangesAreDifferent || (next.relativeRange === 'custom' && datesAreDifferent)) {
+      this.props.refreshTypeaheadCache(next);
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.reportOptions !== this.props.reportOptions) {
       this.updateLink();
     }
   }
 
+  // TODO move this and the share modal to their own component
   updateLink = () => {
     const { reportOptions, history, location, extraLinkParams = []} = this.props;
     const query = getReportSearchOptions(reportOptions, extraLinkParams);
@@ -111,6 +124,7 @@ const mapDispatchToProps = {
   removeFilter,
   refreshReportOptions,
   showAlert,
-  initTypeaheadCache
+  initTypeaheadCache,
+  refreshTypeaheadCache
 };
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ReportOptions));

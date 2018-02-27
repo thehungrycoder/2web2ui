@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
 import { snakeToFriendly } from 'src/helpers/string';
 import { Page, Banner, Panel } from '@sparkpost/matchbox';
 import { PanelLoading, TableCollection, ApiErrorBanner, Empty } from 'src/components';
 import DisplayDate from './components/DisplayDate';
 import BasicFilter from './components/BasicFilter';
 import ViewDetailsButton from './components/ViewDetailsButton';
-
 import { getMessageEvents } from 'src/actions/messageEvents';
 import { selectMessageEvents } from 'src/selectors/messageEvents';
-
+import { refreshReportOptions } from 'src/actions/reportOptions';
 const errorMsg = 'Sorry, we seem to have had some trouble loading your message events.';
 const emptyMesasage = 'There are no message events for your current query';
 const maxResults = 1000;
@@ -32,8 +30,14 @@ export class MessageEventsPage extends Component {
   }
 
   componentDidMount() {
+    this.props.refreshReportOptions();
+  }
+
+  componentDidUpdate(prevProps) {
     const { reportOptions } = this.props;
-    this.refresh({ reportOptions });
+    if (prevProps.reportOptions !== reportOptions) {
+      this.refresh({ reportOptions });
+    }
   }
 
   getRowData = (rowData) => {
@@ -93,7 +97,7 @@ export class MessageEventsPage extends Component {
     return (
       <Page title='Message Events'>
         <Panel sectioned>
-          <BasicFilter onSubmit={this.refresh} />
+          <BasicFilter onSubmit={() => null} />
         </Panel>
         { error ? this.renderError() : this.renderCollection() }
       </Page>
@@ -114,4 +118,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { getMessageEvents })(MessageEventsPage);
+export default connect(mapStateToProps, { getMessageEvents, refreshReportOptions })(MessageEventsPage);

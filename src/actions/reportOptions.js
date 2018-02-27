@@ -29,7 +29,10 @@ const metricLists = [
  */
 export function initTypeaheadCache() {
   return (dispatch, getState) => {
-    const { templates, subaccounts, sendingDomains } = getState();
+    const { templates, subaccounts, sendingDomains, metrics, reportOptions } = getState();
+    const allCachesEmpty = ['domains', 'campaigns', 'sendingIps', 'ipPools'].every((cache) => (
+      metrics[cache].length === 0
+    ));
     const requests = [];
 
     if (templates.list.length === 0) {
@@ -44,6 +47,10 @@ export function initTypeaheadCache() {
       requests.push(dispatch(listSendingDomains()));
     }
 
+    if (allCachesEmpty) {
+      requests.push(dispatch(refreshTypeaheadCache(reportOptions)));
+    }
+
     return Promise.all(requests);
   };
 }
@@ -53,33 +60,6 @@ export function refreshTypeaheadCache(options) {
   return (dispatch) => {
     const requests = metricLists.map((list) => dispatch(list(params)));
     return Promise.all(requests);
-  };
-}
-
-export function maybeRefreshTypeaheadCache(update) {
-  return (dispatch, getState) => {
-    const { reportOptions, metrics } = getState();
-    const allCachesEmpty = ['domains', 'campaigns', 'sendingIps', 'ipPools'].every((cache) => (
-      metrics[cache].length === 0
-    ));
-
-    if (allCachesEmpty) {
-      dispatch(refreshTypeaheadCache(update));
-      return;
-    }
-
-    // do nothing if there is no change in from or to
-    if (
-      isSameDate(reportOptions.from, update.from) &&
-      isSameDate(reportOptions.to, update.to)
-    ) {
-      return;
-    }
-
-    // refresh if range is changing or if the range is staying the same but is "custom"
-    if (update.relativeRange !== reportOptions.relativeRange || update.relativeRange === 'custom') {
-      dispatch(refreshTypeaheadCache(update));
-    }
   };
 }
 
@@ -129,8 +109,6 @@ export function refreshReportOptions(update) {
     ) {
       return;
     }
-
-    dispatch(maybeRefreshTypeaheadCache(update));
 
     return dispatch({
       type: 'REFRESH_REPORT_OPTIONS',
