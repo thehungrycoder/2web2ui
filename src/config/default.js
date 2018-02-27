@@ -33,7 +33,8 @@ const config = {
   featureFlags: {
     allow_mailbox_verification: true,
     allow_anyone_at_verification: false,
-    has_signup: false
+    has_signup: false,
+    has_ip_pools: true
   },
   gaTag: 'no-default-set',
   maxUploadSizeBytes: 20000000,

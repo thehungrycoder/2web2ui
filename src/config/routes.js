@@ -372,19 +372,19 @@ const routes = [
   {
     path: '/account/ip-pools',
     component: ipPools.ListPage,
-    condition: hasGrants('ip_pools/manage'),
+    condition: composeConditions(hasGrants('ip_pools/manage'), configFlag('featureFlags.has_ip_pools')),
     layout: App
   },
   {
     path: '/account/ip-pools/create',
     component: ipPools.CreatePage,
-    condition: hasGrants('ip_pools/manage'),
+    condition: composeConditions(hasGrants('ip_pools/manage'), configFlag('featureFlags.has_ip_pools')),
     layout: App
   },
   {
     path: '/account/ip-pools/edit/:id',
     component: ipPools.EditPage,
-    condition: hasGrants('ip_pools/manage'),
+    condition: composeConditions(hasGrants('ip_pools/manage'), configFlag('featureFlags.has_ip_pools')),
     layout: App
   },
   {
