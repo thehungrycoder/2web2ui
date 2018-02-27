@@ -164,16 +164,29 @@ export function getTestData({ id, mode }) {
     const username = getState().currentUser.username;
 
     return localforage.getItem(getTestDataKey({ id, username, mode })).then((results) => {
+      const defaultKeys = Object.keys(config.templates.testData);
       let testData;
 
       if (results) {
-        testData = JSON.parse(results);
+        const extracted = JSON.parse(results);
 
-        // Reshapes test data if it does not conform with default JSON structure
-        if (!['substitution_data', 'metadata', 'options'].every((key) => key in testData)) {
-          testData = { ...config.templates.testData, substitution_data: testData };
+        if (defaultKeys.some(((key) => key in extracted))) {
+          // If we find any of the expected keys, assume this is the modern format.
+          // Note: this technique leaves all top level keys from local storage intact.
+          testData = {
+            // Set defaults for each key
+            ...config.templates.testData,
+            // Bring in existing fields from local storage
+            ...extracted
+          };
+        } else {
+          // Reshape test data if it does not conform with the current format.
+          // There was an earlier format which included only substitution_data values.
+          testData = { ...config.templates.testData, substitution_data: extracted };
         }
       }
+      // Note: no fallthrough case: if no test data exists for this template,
+      // the action payload will be undefined.
 
       return dispatch({
         type: 'GET_TEMPLATE_TEST_DATA',
