@@ -8,7 +8,7 @@ import {
 import { listTemplates } from './templates';
 import { list as listSubaccounts } from './subaccounts';
 import { list as listSendingDomains } from './sendingDomains';
-import { getRelativeDates, isSameDate } from 'src/helpers/date';
+import { getRelativeDates } from 'src/helpers/date';
 import { getQueryFromOptions } from 'src/helpers/metrics';
 
 // array of all lists that need to be re-filtered when time changes
@@ -83,9 +83,6 @@ export function removeFilter(payload) {
  * Calculates relative ranges if a non-custom relativeRange value is present,
  * which will override passed in from/to dates
  *
- * Will also conditionally refresh the typeahead cache if the
- * from and to values changed
- *
  * @param {Object} update
  * @param {Date} update.from
  * @param {Date} update.to
@@ -99,15 +96,6 @@ export function refreshReportOptions(update) {
     // calculate relative dates if range is not "custom"
     if (update.relativeRange && update.relativeRange !== 'custom') {
       update = { ...update, ...getRelativeDates(update.relativeRange) };
-    }
-
-    // do nothing if there is no change in from or to
-    if (
-      !update.force &&
-      isSameDate(reportOptions.from, update.from) &&
-      isSameDate(reportOptions.to, update.to)
-    ) {
-      return;
     }
 
     return dispatch({
