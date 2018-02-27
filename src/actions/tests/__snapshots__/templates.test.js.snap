@@ -1,5 +1,82 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Action Creator: Templates getTestData should handle old test data 1`] = `
+Array [
+  Object {
+    "payload": Object {
+      "metadata": Object {},
+      "options": Object {},
+      "substitution_data": Object {
+        "test": "test",
+      },
+    },
+    "type": "GET_TEMPLATE_TEST_DATA",
+  },
+]
+`;
+
+exports[`Action Creator: Templates getTestData should handle partial test data combo 1`] = `
+Array [
+  Object {
+    "payload": Object {
+      "metadata": Object {},
+      "options": Object {
+        "sandbox": true,
+      },
+      "substitution_data": Object {
+        "test": "test",
+      },
+    },
+    "type": "GET_TEMPLATE_TEST_DATA",
+  },
+]
+`;
+
+exports[`Action Creator: Templates getTestData should handle partial test data metadata only 1`] = `
+Array [
+  Object {
+    "payload": Object {
+      "metadata": Object {
+        "flavour": "vanilla",
+      },
+      "options": Object {},
+      "substitution_data": Object {},
+    },
+    "type": "GET_TEMPLATE_TEST_DATA",
+  },
+]
+`;
+
+exports[`Action Creator: Templates getTestData should handle partial test data options only 1`] = `
+Array [
+  Object {
+    "payload": Object {
+      "metadata": Object {},
+      "options": Object {
+        "sandbox": true,
+      },
+      "substitution_data": Object {},
+    },
+    "type": "GET_TEMPLATE_TEST_DATA",
+  },
+]
+`;
+
+exports[`Action Creator: Templates getTestData should handle partial test data substitution_data only 1`] = `
+Array [
+  Object {
+    "payload": Object {
+      "metadata": Object {},
+      "options": Object {},
+      "substitution_data": Object {
+        "test": "test",
+      },
+    },
+    "type": "GET_TEMPLATE_TEST_DATA",
+  },
+]
+`;
+
 exports[`Action Creator: Templates should dispatch a create action 1`] = `
 Array [
   Object {
@@ -172,13 +249,7 @@ Array [
     "type": "GET_DRAFT_TEMPLATE",
   },
   Object {
-    "payload": Object {
-      "metadata": Object {},
-      "options": Object {},
-      "substitution_data": Object {
-        "test": "test",
-      },
-    },
+    "payload": undefined,
     "type": "GET_TEMPLATE_TEST_DATA",
   },
   Object {
@@ -189,9 +260,7 @@ Array [
       },
       "data": Object {
         "content": undefined,
-        "substitution_data": Object {
-          "test": "test",
-        },
+        "substitution_data": Object {},
       },
       "headers": Object {},
       "method": "POST",
@@ -216,13 +285,7 @@ Array [
     "type": "GET_PUBLISHED_TEMPLATE",
   },
   Object {
-    "payload": Object {
-      "metadata": Object {},
-      "options": Object {},
-      "substitution_data": Object {
-        "test": "test",
-      },
-    },
+    "payload": undefined,
     "type": "GET_TEMPLATE_TEST_DATA",
   },
   Object {
@@ -233,9 +296,7 @@ Array [
       },
       "data": Object {
         "content": undefined,
-        "substitution_data": Object {
-          "test": "test",
-        },
+        "substitution_data": Object {},
       },
       "headers": Object {},
       "method": "POST",
@@ -249,13 +310,7 @@ Array [
 exports[`Action Creator: Templates should dispatch getTestData and sendPreview actions 1`] = `
 Array [
   Object {
-    "payload": Object {
-      "metadata": Object {},
-      "options": Object {},
-      "substitution_data": Object {
-        "test": "test",
-      },
-    },
+    "payload": undefined,
     "type": "GET_TEMPLATE_TEST_DATA",
   },
   Object {
@@ -265,7 +320,6 @@ Array [
           "template_id": "test-template",
           "use_draft_template": true,
         },
-        "metadata": Object {},
         "options": Object {
           "sandbox": true,
         },
@@ -276,9 +330,6 @@ Array [
             },
           },
         ],
-        "substitution_data": Object {
-          "test": "test",
-        },
       },
       "headers": Object {},
       "method": "POST",
