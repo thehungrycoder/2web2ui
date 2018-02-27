@@ -4,6 +4,8 @@ import { Grid, Panel } from '@sparkpost/matchbox';
 import { Loading, PieChart } from 'src/components';
 import { generateColors } from 'src/helpers/color';
 import styles from './AcceptedChart.module.scss';
+import { formatPercent } from 'src/helpers/units';
+import { safeRate } from 'src/helpers/math';
 
 // Chart color palette generated from:
 const primaryColor = '#8CCA3A';
@@ -61,11 +63,9 @@ export default class AcceptedChart extends Component {
     const { aggregates } = this.props;
     const { hoveredItem } = this.state;
 
-    const getRate = (n) => `${(100 * n).toFixed(2)}%`;
-
     return hoveredItem
-      ? { name: hoveredItem.name, value: getRate(hoveredItem.count / aggregates.count_accepted) }
-      : { name: 'Accepted Rate', value: getRate(aggregates.count_accepted / aggregates.count_targeted) };
+      ? { name: hoveredItem.name, value: formatPercent(safeRate(hoveredItem.count, aggregates.count_accepted)) }
+      : { name: 'Accepted Rate', value: formatPercent(safeRate(aggregates.count_accepted, aggregates.count_targeted)) };
   }
 
   getLegendHeaderData = () => {

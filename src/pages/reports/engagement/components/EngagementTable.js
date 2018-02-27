@@ -5,6 +5,7 @@ import { Icon, Tooltip } from '@sparkpost/matchbox';
 import { Empty, PanelLoading, TableCollection } from 'src/components';
 import { map as metrics } from 'src/config/metrics';
 import { formatNumber, formatPercent } from 'src/helpers/units';
+import { safeRate } from 'src/helpers/math';
 
 const COLUMNS = [
   {
@@ -70,7 +71,7 @@ export default function EngagementTable({ data, loading }) {
   // Must include percentage in data for sorting
   const dataWithPercentage = data.map((row) => ({
     ...row,
-    percentage_clicked: row.count_clicked / totalClicks * 100
+    percentage_clicked: formatPercent(safeRate(row.count_clicked, totalClicks))
   }));
 
   return (

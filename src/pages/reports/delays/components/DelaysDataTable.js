@@ -3,6 +3,7 @@ import _ from 'lodash';
 import { TableCollection, Empty, LongTextContainer } from 'src/components';
 import { UnstyledLink } from '@sparkpost/matchbox';
 import { Percent } from 'src/components/formatters';
+import { safeRate } from 'src/helpers/math';
 
 const columns = [
   { label: 'Reason', sortKey: 'reason', width: '45%' },
@@ -19,7 +20,7 @@ export class DelaysDataTable extends Component {
       <LongTextContainer text={reason} />,
       <UnstyledLink onClick={() => addFilters([{ type: 'Recipient Domain', value: domain }])}>{domain}</UnstyledLink>,
       count_delayed,
-      <span>{count_delayed_first} (<Percent value={(count_delayed_first / totalAccepted) * 100} />)</span>
+      <span>{count_delayed_first} (<Percent value={safeRate(count_delayed_first, totalAccepted)} />)</span>
     ];
   }
 
