@@ -67,7 +67,7 @@ export class IpPoolsList extends Component {
         primaryAction={createAction}
         title='IP Pools'
         empty={{
-          show: ipPools.length === 1 && ipPools[0].ips === 0,
+          show: ipPools.length === 1 && ipPools[0].ips.length === 0,
           title: 'Boost your deliverability',
           image: 'Setup',
           content: <p>Purchase dedicated IPs to manage your IP Pools</p>,
