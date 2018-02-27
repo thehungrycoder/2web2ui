@@ -3,6 +3,7 @@ import _ from 'lodash';
 import { list as METRICS_LIST } from 'src/config/metrics';
 import config from 'src/config';
 import { getRelativeDates } from 'src/helpers/date';
+import { safeDivide, safeRate } from './math';
 
 const { metricsPrecisionMap: precisionMap, apiDateFormat, chartColors = []} = config;
 const indexedPrecisions = _.keyBy(precisionMap, 'value');
@@ -124,11 +125,9 @@ export function buildCommonOptions(reportOptions, updates = {}) {
 }
 
 export function average(item, keys = []) {
-  const avg = item[keys[0]] / item[keys[1]] || 0;
-  return isFinite(avg) ? avg : 0;
+  return safeDivide(item[keys[0]], item[keys[1]]);
 }
 
-export function rate(item, keys) {
-  return average(item, keys) * 100;
+export function rate(item, keys = []) {
+  return safeRate(item[keys[0]], item[keys[1]]);
 }
-

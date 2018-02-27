@@ -42,14 +42,14 @@ Object {
 exports[`Bounce Chart should handle mouse in and out 2`] = `
 <PieChart.ActiveLabel
   name="in"
-  value="40.00%"
+  value="40%"
 />
 `;
 
 exports[`Bounce Chart should handle mouse in and out 3`] = `
 <PieChart.ActiveLabel
   name="Bounce Rate"
-  value="50.00%"
+  value="50%"
 />
 `;
 
@@ -124,7 +124,7 @@ exports[`Bounce Chart should render 1`] = `
         />
         <PieChart.ActiveLabel
           name="Bounce Rate"
-          value="50.00%"
+          value="50%"
         />
       </div>
     </Grid.Column>
@@ -262,7 +262,7 @@ exports[`Bounce Chart should render correctly after click 2`] = `
 exports[`Bounce Chart should render label when hovering over a child 1`] = `
 <PieChart.ActiveLabel
   name="softchild1"
-  value="4.00%"
+  value="4%"
 />
 `;
 

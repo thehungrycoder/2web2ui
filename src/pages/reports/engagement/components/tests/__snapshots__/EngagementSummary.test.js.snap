@@ -15,7 +15,9 @@ exports[`EngagementSummary renders metric summary 1`] = `
       xs={12}
     >
       <h1>
-        0.42%
+        <Percent
+          value={0.42477847355896137}
+        />
       </h1>
       <h6>
         Unique Open Rate
@@ -27,7 +29,9 @@ exports[`EngagementSummary renders metric summary 1`] = `
       xs={12}
     >
       <h1>
-        0.1%
+        <Percent
+          value={0.0999000999000999}
+        />
       </h1>
       <h6>
         Unique Click Rate
@@ -78,7 +82,9 @@ exports[`EngagementSummary renders metric summary with custom time range 1`] = `
       xs={12}
     >
       <h1>
-        0.42%
+        <Percent
+          value={0.42477847355896137}
+        />
       </h1>
       <h6>
         Unique Open Rate
@@ -90,7 +96,9 @@ exports[`EngagementSummary renders metric summary with custom time range 1`] = `
       xs={12}
     >
       <h1>
-        0.1%
+        <Percent
+          value={0.0999000999000999}
+        />
       </h1>
       <h6>
         Unique Click Rate
