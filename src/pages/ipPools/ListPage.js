@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { listPools } from 'src/actions/ipPools';
 import { getOrderedIpPools } from 'src/selectors/ipPools';
+import { currentPlanCodeSelector } from 'src/selectors/accountBillingInfo';
 import { Loading, TableCollection, ApiErrorBanner } from 'src/components';
 import { Page } from '@sparkpost/matchbox';
+
+const plansWithDisallowedPurchaseCTA = ['ent1'];
 
 const columns = [
   { label: 'Name', sortKey: 'name' },
@@ -53,7 +57,7 @@ export class IpPoolsList extends Component {
   }
 
   render() {
-    const { loading, error, ipPools } = this.props;
+    const { loading, error, ipPools, showPurchaseCTA } = this.props;
 
     if (loading) {
       return <Loading />;
@@ -71,8 +75,8 @@ export class IpPoolsList extends Component {
           title: 'Boost your deliverability',
           image: 'Setup',
           content: <p>Purchase dedicated IPs to manage your IP Pools</p>,
-          secondaryAction: createAction,
-          primaryAction: purchaseAction
+          secondaryAction: showPurchaseCTA ? createAction : null,
+          primaryAction: showPurchaseCTA ? purchaseAction : createAction
         }}>
         { error ? this.renderError() : this.renderCollection() }
       </Page>
@@ -80,12 +84,18 @@ export class IpPoolsList extends Component {
   }
 }
 
+function shouldShowPurchaseCTA(state) {
+  const currentPlanCode = currentPlanCodeSelector(state);
+  return !_.includes(plansWithDisallowedPurchaseCTA, currentPlanCode);
+}
+
 function mapStateToProps(state) {
   const { ipPools } = state;
   return {
     ipPools: getOrderedIpPools(state),
     loading: ipPools.listLoading,
-    error: ipPools.listError
+    error: ipPools.listError,
+    showPurchaseCTA: shouldShowPurchaseCTA(state)
   };
 }
 
