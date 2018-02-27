@@ -107,20 +107,20 @@ exports[`Billing Banners:  renders Enterprise banner 1`] = `
   title="Enterprise"
 >
   <p>
-    Enterprise-grade guarantees and SLAs across email - manage, analyzed, and reported from a single console.
+    Enterprise-grade financial guarantees with 99.9% uptime SLA and guaranteed burst rates.
   </p>
   <ul>
     <li>
-      The industry's best uptime SLAs with service credits
+      Includes all standard SparkPost and Premium features
     </li>
     <li>
-      Guaranteed burst rates
+      Comprehensive uptime SLAs with service credits
     </li>
     <li>
-      Single sign-on support
+      The industry’s only burst-rate guarantee
     </li>
     <li>
-      Support for iOS universal links
+      Support for iOS Universal Links and Android App Links
     </li>
   </ul>
 </Banner>
@@ -139,14 +139,14 @@ exports[`Billing Banners:  renders Premium banner 1`] = `
   title="Premium Addon Plan"
 >
   <p>
-    Technical and deliverability account management - full service support on a first name basis.
+    Get full-service Technical Account Management with proactive reporting, planning & reviews.
   </p>
   <ul>
     <li>
-      Dedicated Technical Account Manager
+      Includes all standard SparkPost features
     </li>
     <li>
-      Proactive deliverability reporting, planning & reviews
+      Dedicated Technical Account Manager (TAM)
     </li>
     <li>
       Global ISP relations and mediation

@@ -3,10 +3,12 @@ import { connect } from 'react-redux';
 import { reduxForm, formValueSelector } from 'redux-form';
 import { withRouter } from 'react-router-dom';
 
+import { billingCreate, billingUpdate, updateSubscription } from 'src/actions/billing';
+import { showAlert } from 'src/actions/globalAlert';
 import { changePlanInitialValues } from 'src/selectors/accountBillingForms';
 import { publicPlansSelector, currentPlanSelector, shouldExposeCardSelector } from 'src/selectors/accountBillingInfo';
 
-import { Panel, Grid, Button } from '@sparkpost/matchbox';
+import { Panel, Grid } from '@sparkpost/matchbox';
 import { PlanPicker } from 'src/components';
 
 import PaymentForm from './fields/PaymentForm';
@@ -34,10 +36,22 @@ export class ChangePlan extends Component {
   }
 
   onSubmit = (values) => {
-    const { handleSubmit } = this.props;
+    const { account, updateSubscription, billingCreate, billingUpdate, showAlert, history } = this.props;
 
-    // capturing the useSavedCC state and passing to parent submit function
-    return handleSubmit(values, this.state.useSavedCC);
+    // decides which action to be taken based on
+    // if it already has billing and if you use a saved CC
+    const action = account.billing
+      ? (
+        this.state.useSavedCC
+          ? updateSubscription(values.planpicker.code)
+          : billingUpdate(values))
+      : billingCreate(values); // creates Zuora account
+
+
+    return action
+      .then(() => history.push('/account/billing'))
+      .then(() => showAlert({ type: 'success', message: 'Subscription Updated' }))
+      .catch((err) => showAlert({ type: 'error', message: 'Plan Update Failed', details: err.message }));
   }
 
   renderCCSection = () => {
@@ -77,7 +91,7 @@ export class ChangePlan extends Component {
   }
 
   render() {
-    const { account, submitting, pristine, currentPlan, selectedPlan, plans, onboarding = false } = this.props;
+    const { account, submitting, pristine, currentPlan, selectedPlan, plans } = this.props;
 
     // Manually billed accounts can submit without changing plan
     const disableSubmit = submitting || (account.subscription.self_serve && (pristine || currentPlan.code === selectedPlan.code));
@@ -87,10 +101,8 @@ export class ChangePlan extends Component {
       ? plans.filter((plan) => !plan.isFree)
       : plans;
 
-    const buttonText = selectedPlan && selectedPlan.isFree ? 'Get Started' : 'Confirm Plan';
-
     return (
-      <form onSubmit={this.onSubmit}>
+      <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
         <Grid>
           <Grid.Column>
             <Panel title='Select A Plan'>
@@ -99,17 +111,14 @@ export class ChangePlan extends Component {
               }
             </Panel>
             { this.renderCCSection() }
-            { onboarding && <Panel.Section>
-              <Button primary submit disabled={submitting}>{submitting ? 'Adding Plan...' : buttonText}</Button></Panel.Section> }
           </Grid.Column>
-          { !onboarding &&
           <Grid.Column xs={12} md={5}>
             <Confirmation
               current={this.props.currentPlan}
               selected={this.props.selectedPlan}
               selfServe={this.props.account.subscription.self_serve}
               disableSubmit={disableSubmit} />
-          </Grid.Column> }
+          </Grid.Column>
         </Grid>
       </form>
     );
@@ -129,5 +138,6 @@ const mapStateToProps = (state) => {
   };
 };
 
+const mapDispatchtoProps = { billingCreate, billingUpdate, updateSubscription, showAlert };
 const formOptions = { form: FORMNAME, enableReinitialize: true };
-export default withRouter(connect(mapStateToProps)(reduxForm(formOptions)(ChangePlan)));
+export default withRouter(connect(mapStateToProps, mapDispatchtoProps)(reduxForm(formOptions)(ChangePlan)));
