@@ -40,6 +40,21 @@ describe('Action Creator: Sending Domains', () => {
     });
   });
 
+  describe('Verify Token', () => {
+    it('should dispatch verify abuse token action', () => {
+      expect(sendingDomains.verifyAbuseToken({ id: 'sub.com', subaccount: 101, token: '12345' })).toMatchSnapshot();
+    });
+
+    it('should dispatch verify mailbox token action', () => {
+      const args = { id: 'sub.com', mailbox: 'example@test.com', subaccount: 101, token: '12345' };
+      expect(sendingDomains.verifyMailboxToken(args)).toMatchSnapshot();
+    });
+
+    it('should dispatch verify postmaster token action', () => {
+      expect(sendingDomains.verifyPostmasterToken({ id: 'sub.com', subaccount: 101, token: '12345' })).toMatchSnapshot();
+    });
+  });
+
   describe('Update', () => {
     it('should request with correct post data', () => {
       expect(sendingDomains.update({ id: 'domain.com', is_default_bounce_domain: true })).toMatchSnapshot();

@@ -3,7 +3,9 @@ const initialState = {
   domain: { dkim: {}, status: {}},
   listError: null,
   getError: null,
-  verifyError: null
+  verifyError: null,
+  verifyTokenStatus: null,
+  verifyTokenError: null
 };
 
 export default (state = initialState, { type, payload, meta }) => {
@@ -73,6 +75,15 @@ export default (state = initialState, { type, payload, meta }) => {
 
     case 'UPDATE_SENDING_DOMAIN_FAIL':
       return { ...state, updateLoading: false, updateError: payload };
+
+    case 'VERIFY_TOKEN_PENDING':
+      return { ...state, verifyTokenLoading: false, verifyTokenStatus: null, verifyTokenError: null };
+
+    case 'VERIFY_TOKEN_SUCCESS':
+      return { ...state, verifyTokenLoading: false, verifyTokenStatus: { ...payload, type: meta.type, domain: meta.domain }};
+
+    case 'VERIFY_TOKEN_FAIL':
+      return { ...state, verifyTokenLoading: false, verifyTokenError: payload };
 
     default:
       return state;

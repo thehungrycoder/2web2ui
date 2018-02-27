@@ -29,7 +29,7 @@ describe('Selectors: sendingDomains', () => {
         {
           status: {
             ownership_verified: true,
-            compliance_status: 'invalid',
+            compliance_status: 'pending',
             mx_status: 'invalid',
             cname_status: 'valid',
             dkim_status: 'invalid'
@@ -60,12 +60,8 @@ describe('Selectors: sendingDomains', () => {
       const state = {
         sendingDomains: {
           list: [
-            {
-              status: {
-                ownership_verified: true,
-                compliance_status: 'valid'
-              }
-            }
+            { status: { ownership_verified: true, compliance_status: 'valid' }},
+            { status: { ownership_verified: true, compliance_status: 'blocked' }}
           ]
         }
       };
