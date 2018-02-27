@@ -1,6 +1,18 @@
 import { currentPlanSelector, publicPlansSelector } from './accountBillingInfo';
 import _ from 'lodash';
 
+export function onboardingInitialValues(state) {
+  const plans = publicPlansSelector(state);
+
+  return {
+    planpicker: _.first(plans),
+    billingAddress: {
+      firstName: state.currentUser.first_name,
+      lastName: state.currentUser.last_name
+    }
+  };
+}
+
 /**
  * Selects initial values for all the forms on account/billing/plan
  */

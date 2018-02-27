@@ -1,20 +1,23 @@
 import { formatCountries } from 'src/helpers/billing';
 
-const initialState = {};
+const initialState = {
+  plansError: null,
+  countriesError: null
+};
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case 'GET_PLANS_PENDING':
-      return { ...state, plansLoading: true };
+      return { ...state, plansLoading: true, plansError: null };
 
     case 'GET_PLANS_SUCCESS':
       return { ...state, plans: action.payload, plansLoading: false };
 
     case 'GET_PLANS_FAIL':
-      return { ...state, plansLoading: false };
+      return { ...state, plansLoading: false, plansError: action.payload };
 
     case 'GET_COUNTRIES_BILLING_PENDING':
-      return { ...state, countriesLoading: true };
+      return { ...state, countriesLoading: true, countriesError: null };
 
     case 'GET_COUNTRIES_BILLING_SUCCESS':
       return {
@@ -24,7 +27,7 @@ export default (state = initialState, action) => {
       };
 
     case 'GET_COUNTRIES_BILLING_FAIL':
-      return { ...state, countriesLoading: false };
+      return { ...state, countriesLoading: false, countriesError: action.payload };
 
     default:
       return state;

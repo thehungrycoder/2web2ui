@@ -9,6 +9,7 @@ jest.mock('src/helpers/billing');
 
 describe('Payment Form: ', () => {
   let wrapper;
+  let changeSpy;
 
   const props = {
     formName: 'form-name',
@@ -17,6 +18,11 @@ describe('Payment Form: ', () => {
 
   beforeEach(() => {
     wrapper = shallow(<PaymentForm {...props} />);
+    changeSpy = jest.spyOn(wrapper.instance().props, 'change');
+  });
+
+  afterEach(() => {
+    changeSpy.mockReset();
   });
 
   it('should register events on mount', () => {
@@ -33,21 +39,29 @@ describe('Payment Form: ', () => {
 
   it('should handle type', () => {
     const e = { target: { value: '123' }};
-    const changeSpy = jest.spyOn(wrapper.instance().props, 'change');
     expect(changeSpy).not.toHaveBeenCalled();
     wrapper.instance().handleType(e);
     expect(PaymentMock.fns.cardType).toHaveBeenCalledWith(e.target.value);
     expect(changeSpy).toHaveBeenCalled();
-    changeSpy.mockReset();
   });
 
   it('should handle expiry', () => {
-    const e = { target: { value: '112020' }};
-    const changeSpy = jest.spyOn(wrapper.instance().props, 'change');
+    const e = { target: { value: '11 / 2020' }};
     PaymentMock.fns.cardExpiryVal.mockImplementation(() => ({ month: '11', year: '2020' }));
     wrapper.instance().handleExpiry(e);
     expect(PaymentMock.fns.cardExpiryVal).toHaveBeenCalledWith(e.target.value);
     expect(changeSpy).toHaveBeenCalledTimes(2);
-    changeSpy.mockReset();
+  });
+
+  it('should not call change if length is less than 8', () => {
+    const e = { target: { value: '11' }};
+    wrapper.instance().handleExpiry(e);
+    expect(PaymentMock.fns.cardExpiryVal).not.toHaveBeenCalled();
+    expect(changeSpy).not.toHaveBeenCalled();
+  });
+
+  it('should validate the expiration date', () => {
+    expect(wrapper.instance().dateFormat('22')).toEqual('Must be MM / YYYY');
+    expect(wrapper.instance().dateFormat('10 / 2020')).toEqual(undefined);
   });
 });

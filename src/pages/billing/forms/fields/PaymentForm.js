@@ -7,7 +7,7 @@ import _ from 'lodash';
 import config from 'src/config';
 
 import { TextFieldWrapper } from 'src/components';
-import { required } from 'src/helpers/validation';
+import { required, minLength } from 'src/helpers/validation';
 import Payment from 'payment';
 import { formatCardTypes } from 'src/helpers/billing';
 
@@ -38,9 +38,13 @@ export class PaymentForm extends Component {
   // Splits month and year into two hidden fields
   handleExpiry = (e) => {
     const { change, formName } = this.props;
-    const values = Payment.fns.cardExpiryVal(e.target.value);
-    change(formName, 'card.expMonth', values.month);
-    change(formName, 'card.expYear', values.year);
+    // only validating when date is whole
+    // this prevents the console.log of NaN errors
+    if (e.target.value.length > 8) {
+      const values = Payment.fns.cardExpiryVal(e.target.value);
+      change(formName, 'card.expMonth', values.month);
+      change(formName, 'card.expYear', values.year);
+    }
   }
 
   // Sets type from cc number into a hidden field
@@ -60,6 +64,8 @@ export class PaymentForm extends Component {
 
     return `We only accept ${allowedCards.join(', ')}`;
   }
+
+  dateFormat = (date) => minLength(9)(date) ? 'Must be MM / YYYY' : undefined;
 
   render() {
     const { disabled } = this.props;
@@ -91,7 +97,7 @@ export class PaymentForm extends Component {
               onChange={this.handleExpiry}
               placeholder='MM/YYYY'
               component={TextFieldWrapper}
-              validate={required}
+              validate={[required, this.dateFormat]}
               disabled={disabled}
             />
           </Grid.Column>

@@ -1,0 +1,139 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ChoosePlan page tests should disable submit and plan picker when submitting 1`] = `
+<form>
+  <CenteredLogo />
+  <Grid>
+    <Grid.Column>
+      <Panel
+        title="Select A Plan"
+      >
+        <Component
+          disabled={true}
+          plans={Array []}
+        />
+        <React.Fragment>
+          <Panel.Section>
+            <Connect(PaymentForm)
+              disabled={true}
+              formName="selectInitialPlan"
+            />
+          </Panel.Section>
+          <Panel.Section>
+            <Connect(BillingAddressForm)
+              countries={Array []}
+              disabled={true}
+              formName="selectInitialPlan"
+            />
+          </Panel.Section>
+        </React.Fragment>
+        <Panel.Section>
+          <Button
+            disabled={true}
+            fullWidth={true}
+            primary={true}
+            size="large"
+            type="submit"
+          >
+            Updating Subscription...
+          </Button>
+        </Panel.Section>
+        <withRouter(Steps) />
+      </Panel>
+    </Grid.Column>
+  </Grid>
+</form>
+`;
+
+exports[`ChoosePlan page tests should render correctly 1`] = `
+<form>
+  <CenteredLogo />
+  <Grid>
+    <Grid.Column>
+      <Panel
+        title="Select A Plan"
+      >
+        <Component
+          disabled={false}
+          plans={Array []}
+        />
+        <React.Fragment>
+          <Panel.Section>
+            <Connect(PaymentForm)
+              disabled={false}
+              formName="selectInitialPlan"
+            />
+          </Panel.Section>
+          <Panel.Section>
+            <Connect(BillingAddressForm)
+              countries={Array []}
+              disabled={false}
+              formName="selectInitialPlan"
+            />
+          </Panel.Section>
+        </React.Fragment>
+        <Panel.Section>
+          <Button
+            disabled={false}
+            fullWidth={true}
+            primary={true}
+            size="large"
+            type="submit"
+          >
+            Get Started
+          </Button>
+        </Panel.Section>
+        <withRouter(Steps) />
+      </Panel>
+    </Grid.Column>
+  </Grid>
+</form>
+`;
+
+exports[`ChoosePlan page tests should render loading component 1`] = `<Loading />`;
+
+exports[`ChoosePlan page tests should show free bullets when isFree is selected 1`] = `
+<form>
+  <CenteredLogo />
+  <Grid>
+    <Grid.Column>
+      <Panel
+        title="Select A Plan"
+      >
+        <Component
+          disabled={false}
+          plans={Array []}
+        />
+        <Panel.Section>
+          <p>
+            Our full-featured, free account designed for developers:
+          </p>
+          <ul>
+            <li>
+              Up to 15,000 free messages per month, forever.
+            </li>
+            <li>
+              Access to all of our powerful API features.
+            </li>
+            <li>
+              30 days of free technical support to get you up and running.
+            </li>
+          </ul>
+        </Panel.Section>
+        <Panel.Section>
+          <Button
+            disabled={false}
+            fullWidth={true}
+            primary={true}
+            size="large"
+            type="submit"
+          >
+            Get Started
+          </Button>
+        </Panel.Section>
+        <withRouter(Steps) />
+      </Panel>
+    </Grid.Column>
+  </Grid>
+</form>
+`;

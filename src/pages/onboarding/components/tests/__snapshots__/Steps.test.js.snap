@@ -15,20 +15,9 @@ exports[`Steps should render correctly 1`] = `
   </li>
   <li
     className=""
-    key="Add a Dedicated IP"
-  >
-    <Icon
-      name="Check"
-      size={18}
-    />
-     
-    Add a Dedicated IP
-  </li>
-  <li
-    className=""
     key="Add a Domain"
   >
-    3.
+    2.
      
     Add a Domain
   </li>
@@ -36,7 +25,7 @@ exports[`Steps should render correctly 1`] = `
     className=""
     key="Send an Email"
   >
-    4.
+    3.
      
     Send an Email
   </li>
