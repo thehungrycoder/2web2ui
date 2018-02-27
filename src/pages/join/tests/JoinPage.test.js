@@ -9,6 +9,7 @@ let props;
 let instance;
 let wrapper;
 let formValues;
+let accountFields;
 
 jest.mock('js-cookie');
 jest.mock('src/config', () => ({
@@ -46,9 +47,17 @@ describe('JoinPage', () => {
       last_name: 'bar',
       email: 'foo@bar.com',
       tou_accepted: true,
+      email_opt_in: false,
       password: 'foobar'
     };
 
+    accountFields = {
+      first_name: 'foo',
+      last_name: 'bar',
+      email: 'foo@bar.com',
+      tou_accepted: true,
+      password: 'foobar'
+    };
 
     googleAnalytics.addEvent = jest.fn();
 
@@ -74,8 +83,10 @@ describe('JoinPage', () => {
 
   describe('registerSubmit', () => {
     let attributionValues;
+    let salesforceValues;
     beforeEach(() => {
       attributionValues = { sfdcid: 'abcd', 'utm_source': 'test file' };
+      salesforceValues = { ...attributionValues, email_opt_out: true };
       instance.getAndSetAttributionData = jest.fn().mockReturnValue(attributionValues);
       instance.trackSignup = jest.fn();
     });
@@ -83,8 +94,17 @@ describe('JoinPage', () => {
     it('calls register with correct data', async() => {
       await instance.registerSubmit(formValues);
       expect(props.register).toHaveBeenCalledTimes(1);
-      expect(props.register).toHaveBeenCalledWith({ ...formValues, salesforce_data: attributionValues, sfdcid: attributionValues.sfdcid });
+      expect(props.register).toHaveBeenCalledWith({ ...accountFields, salesforce_data: salesforceValues, sfdcid: attributionValues.sfdcid });
+    });
 
+    it('negates email_opt_in properly', async() => {
+      formValues.email_opt_in = true;
+      await instance.registerSubmit(formValues);
+      expect(props.register).toHaveBeenCalledWith(expect.objectContaining({
+        salesforce_data: expect.objectContaining({
+          email_opt_out: false
+        })
+      }));
     });
 
     it('authenticates after successful register', async() => {

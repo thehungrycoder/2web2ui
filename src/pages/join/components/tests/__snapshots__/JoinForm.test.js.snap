@@ -65,6 +65,18 @@ exports[`JoinForm render disables form when loading 1`] = `
   <Field
     component={[Function]}
     disabled={true}
+    id="email_opt_in"
+    label={
+      <span>
+        I'm happy to receive marketing email from SparkPost
+      </span>
+    }
+    name="email_opt_in"
+    type="checkbox"
+  />
+  <Field
+    component={[Function]}
+    disabled={true}
     id="tou_accepted"
     label={
       <span>
@@ -173,6 +185,18 @@ exports[`JoinForm render disables form when recaptcha is not loaded 1`] = `
   <Field
     component={[Function]}
     disabled={true}
+    id="email_opt_in"
+    label={
+      <span>
+        I'm happy to receive marketing email from SparkPost
+      </span>
+    }
+    name="email_opt_in"
+    type="checkbox"
+  />
+  <Field
+    component={[Function]}
+    disabled={true}
     id="tou_accepted"
     label={
       <span>
@@ -277,6 +301,18 @@ exports[`JoinForm render enables form correctly 1`] = `
         [Function],
       ]
     }
+  />
+  <Field
+    component={[Function]}
+    disabled={false}
+    id="email_opt_in"
+    label={
+      <span>
+        I'm happy to receive marketing email from SparkPost
+      </span>
+    }
+    name="email_opt_in"
+    type="checkbox"
   />
   <Field
     component={[Function]}

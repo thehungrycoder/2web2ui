@@ -51,8 +51,14 @@ export class JoinPage extends Component {
     this.setState({ formData: values });
     const { register, authenticate } = this.props;
     const attributionData = this.getAndSetAttributionData();
+    const salesforceData = { ...attributionData, email_opt_out: !values.email_opt_in };
+    const accountFields = _.omit(values, 'email_opt_in');
 
-    const signupData = { ...values, salesforce_data: attributionData, sfdcid: attributionData.sfdcid };
+    const signupData = {
+      ...accountFields,
+      salesforce_data: salesforceData,
+      sfdcid: attributionData.sfdcid
+    };
 
     return register(signupData)
       .then((accountData) => {
@@ -71,7 +77,12 @@ export class JoinPage extends Component {
         <CenteredLogo />
 
         <Panel accent title="Sign Up">
-          { createError && <Panel.Section><Error error={<JoinError errors={createError} data={formData} />} /></Panel.Section> }
+          {
+            createError &&
+              <Panel.Section>
+                <Error error={<JoinError errors={createError} data={formData} />} />
+              </Panel.Section>
+          }
           <Panel.Section>
             <JoinForm onSubmit={this.registerSubmit} />
           </Panel.Section>
