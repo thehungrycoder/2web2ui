@@ -14,7 +14,8 @@ describe('IP Pools List Page', () => {
         { name: 'Test Pool 1', id: 101, ips: [{ external_ip: 1111 }, { external_ip: 2222 }]},
         { name: 'Test Pool 2', id: 102, ips: []}
       ],
-      listPools: jest.fn(() => [])
+      listPools: jest.fn(() => []),
+      showPurchaseCTA: true
     };
 
     wrapper = shallow(<IpPoolsList {...props} />);
@@ -42,5 +43,11 @@ describe('IP Pools List Page', () => {
     });
 
     expect(rows).toMatchSnapshot();
+  });
+
+  it('renders correctly when showPurchaseCTA is false', () => {
+    wrapper.setProps({ showPurchaseCTA: false });
+    expect(wrapper).toMatchSnapshot();
+
   });
 });
