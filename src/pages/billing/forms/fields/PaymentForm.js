@@ -65,7 +65,7 @@ export class PaymentForm extends Component {
     return `We only accept ${allowedCards.join(', ')}`;
   }
 
-  dateFormat = (date) => minLength(8)(date) ? 'Must be MM / YYYY' : undefined;
+  dateFormat = (date) => minLength(9)(date) ? 'Must be MM / YYYY' : undefined;
 
   render() {
     const { disabled } = this.props;
