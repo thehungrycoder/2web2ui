@@ -1,8 +1,10 @@
 import React from 'react';
 import { PublicRoute, ProtectedRoute, AuthenticationGate } from 'src/components/auth';
 import { Support, GlobalAlertWrapper, RouteWatch } from 'src/components';
+import SiftScience from 'src/components/siftScience/SiftScience';
 import Layout from 'src/components/layout/Layout';
 import routes from 'src/config/routes';
+import config from 'src/config';
 
 import {
   BrowserRouter as Router,
@@ -13,6 +15,7 @@ import {
 const App = () => (
   <Router>
     <div>
+      {config.siftScience && <SiftScience config={config.siftScience} />}
       <RouteWatch />
       <AuthenticationGate />
       <Layout>
