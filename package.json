@@ -66,6 +66,7 @@
     "react-day-picker": "^7.0.7",
     "react-dom": "^16.2.0",
     "react-dropzone": "^4.2.3",
+    "react-helmet": "^5.2.0",
     "react-load-script": "0.0.6",
     "react-loadable": "^5.3.1",
     "react-qr-svg": "^2.1.0",
@@ -78,7 +79,8 @@
     "redux-form": "^7.2.3",
     "redux-thunk": "^2.2.0",
     "reselect": "^3.0.1",
-    "source-map-explorer": "^1.5.0"
+    "source-map-explorer": "^1.5.0",
+    "uuid": "^3.2.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.2.5",

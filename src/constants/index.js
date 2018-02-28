@@ -1,6 +1,8 @@
 export const DEFAULT_REDIRECT_ROUTE = '/landing';
 export const AFTER_JOIN_REDIRECT_ROUTE = '/onboarding/plan';
 
+export const COOKIE_DOMAIN = '.sparkpost.com';
+
 export const DATE_FORMATS = {
   READABLE_DATE_TIME: 'MMM D YYYY h:mma',
   INPUT_DATE: 'YYYY-MM-DD',

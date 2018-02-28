@@ -1,0 +1,80 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SiftScience renders the snippet 1`] = `
+<HelmetWrapper
+  defer={true}
+  encodeSpecialCharacters={true}
+>
+  <script
+    src="https://cdn.siftscience.com/s.js"
+    type="text/javascript"
+  />
+</HelmetWrapper>
+`;
+
+exports[`SiftScience sends setup events 1`] = `
+Array [
+  Array [
+    "_setAccount",
+    "test-id",
+  ],
+  Array [
+    "_setSessionId",
+    "new-test-session-id",
+  ],
+  Array [
+    "_setUserId",
+    "",
+  ],
+  Array [
+    "_trackPageview",
+  ],
+]
+`;
+
+exports[`SiftScience sends update event when customer changes 1`] = `
+Array [
+  Array [
+    "_setAccount",
+    "test-id",
+  ],
+  Array [
+    "_setSessionId",
+    "new-test-session-id",
+  ],
+  Array [
+    "_setUserId",
+    "",
+  ],
+  Array [
+    "_trackPageview",
+  ],
+  Array [
+    "_setUserId",
+    "123456",
+  ],
+]
+`;
+
+exports[`SiftScience sends update event when page changes 1`] = `
+Array [
+  Array [
+    "_setAccount",
+    "test-id",
+  ],
+  Array [
+    "_setSessionId",
+    "new-test-session-id",
+  ],
+  Array [
+    "_setUserId",
+    "",
+  ],
+  Array [
+    "_trackPageview",
+  ],
+  Array [
+    "_trackPageview",
+  ],
+]
+`;
