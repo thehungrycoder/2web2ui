@@ -4,16 +4,28 @@ import { shallow } from 'enzyme';
 
 describe('Form Container: Change Plan', () => {
   let wrapper;
+  let submitSpy;
+  let instance;
 
   const props = {
     account: {
       subscription: { self_serve: true }
     },
     billing: { countries: []},
-    plans: [],
+    plans: [
+      {
+        isFree: false,
+        plan: 'paid'
+      },
+      {
+        isFree: true,
+        plan: 'free'
+      }
+    ],
     currentPlan: {},
     selectedPlan: {},
     shouldExposeCard: false,
+    history: { push: jest.fn() },
     handleSubmit: jest.fn(),
     showAlert: jest.fn(),
     billingCreate: jest.fn(() => Promise.resolve()),
@@ -23,9 +35,21 @@ describe('Form Container: Change Plan', () => {
 
   beforeEach(() => {
     wrapper = shallow(<ChangePlan {...props} />);
+    instance = wrapper.instance();
+    submitSpy = jest.spyOn(instance.props, 'handleSubmit');
   });
 
   it('should render', () => {
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should not show plans', () => {
+    wrapper.setProps({ plans: []});
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should not show free plans when not self serve', () => {
+    wrapper.setProps({ account: { subscription: { self_serve: false }}});
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -54,43 +78,52 @@ describe('Form Container: Change Plan', () => {
     expect(wrapper.find('Connect(BillingAddressForm)')).not.toBePresent();
   });
 
+  it('should toggle savedCard state', () => {
+    expect(instance.state.useSavedCC).toEqual(null);
+    instance.handleCardToggle();
+    expect(instance.state.useSavedCC).toEqual(true);
+  });
+
   it('should submit redux-form', () => {
-    const submitSpy = jest.spyOn(wrapper.instance().props, 'handleSubmit');
     wrapper.find('form').simulate('submit');
     expect(submitSpy).toHaveBeenCalled();
   });
 
-  it('should create zuora account', () => {
-    const createSpy = jest.spyOn(wrapper.instance().props, 'billingCreate');
-    wrapper.instance().onSubmit('hello');
-    expect(createSpy).toHaveBeenCalledWith('hello');
-  });
+  describe('onSubmit tests', () => {
+    it('should call bilingCreate when no billing exists', async() => {
+      await instance.onSubmit({ key: 'value' });
+      expect(instance.props.billingCreate).toHaveBeenCalledWith({ key: 'value' });
+      expect(instance.props.history.push).toHaveBeenCalledWith('/account/billing');
+      expect(instance.props.showAlert).toHaveBeenCalledWith({ type: 'success', message: 'Subscription Updated' });
+    });
 
-  it('should update zuora', () => {
-    const newProps = {
-      account: {
-        billing: {},
-        subscription: { self_serve: true }
-      }
-    };
-    const updateSpy = jest.spyOn(wrapper.instance().props, 'billingUpdate');
-    wrapper.setProps(newProps);
-    wrapper.instance().onSubmit('hi');
-    expect(updateSpy).toHaveBeenCalledWith('hi');
-  });
+    it('should update subscription when billing exists and using saved cc', async() => {
+      wrapper.setProps({ account: { billing: true, subscription: { self_serve: true }}});
+      await instance.onSubmit({ key: 'value' });
+      expect(instance.props.billingUpdate).toHaveBeenCalledWith({ key: 'value' });
+      expect(instance.props.updateSubscription).not.toHaveBeenCalled();
+      expect(instance.props.history.push).toHaveBeenCalledWith('/account/billing');
+      expect(instance.props.showAlert).toHaveBeenCalledWith({ type: 'success', message: 'Subscription Updated' });
 
-  it('should update plan', () => {
-    const newProps = {
-      account: {
-        billing: {},
-        subscription: { self_serve: true }
-      }
-    };
-    const subSpy = jest.spyOn(wrapper.instance().props, 'updateSubscription');
-    const planpicker = { planpicker: { code: 'newplan' }};
-    wrapper.setProps(newProps);
-    wrapper.setState({ useSavedCC: true });
-    wrapper.instance().onSubmit(planpicker);
-    expect(subSpy).toHaveBeenCalledWith('newplan');
+    });
+
+    it('should update billing when billing exists but enter new cc info', async() => {
+      wrapper.setState({ useSavedCC: true });
+      wrapper.setProps({ account: { billing: true, subscription: { self_serve: true }}});
+      await instance.onSubmit({ planpicker: { code: 'free' }});
+      expect(instance.props.updateSubscription).toHaveBeenCalledWith('free');
+      expect(instance.props.billingUpdate).not.toHaveBeenCalled();
+      expect(instance.props.history.push).toHaveBeenCalledWith('/account/billing');
+      expect(instance.props.showAlert).toHaveBeenCalledWith({ type: 'success', message: 'Subscription Updated' });
+    });
+
+    it('should show error alert on failure', async() => {
+      wrapper.setProps({ billingCreate: jest.fn(() => Promise.reject(new Error('failure'))) });
+      await instance.onSubmit({ key: 'value' });
+      expect(instance.props.billingCreate).toHaveBeenCalled();
+      expect(instance.props.history.push).not.toHaveBeenCalled();
+      expect(instance.props.showAlert).toHaveBeenCalledWith({ type: 'error', message: 'Plan Update Failed', details: 'failure' });
+
+    });
   });
 });

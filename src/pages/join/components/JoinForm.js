@@ -6,7 +6,7 @@ import Recaptcha from 'react-recaptcha';
 import config from 'src/config';
 import { LINKS } from 'src/constants';
 import { TextFieldWrapper, CheckboxWrapper } from 'src/components/reduxFormWrappers';
-import { Button, UnstyledLink, Grid } from '@sparkpost/matchbox';
+import { Button, UnstyledLink, Grid, Checkbox } from '@sparkpost/matchbox';
 import { required, minLength, email, endsWithWhitespace } from 'src/helpers/validation';
 import styles from './JoinForm.module.scss';
 const { recaptcha } = config;
@@ -108,24 +108,26 @@ export class JoinForm extends Component {
           placeholder='••••••••••'
         />
 
-        <Field
-          name='email_opt_in'
-          id='email_opt_in'
-          component={CheckboxWrapper}
-          disabled={!reCaptchaReady || loading}
-          type='checkbox'
-          label={<span>I'm happy to receive marketing email from SparkPost</span>}
-        />
+        <Checkbox.Group>
+          <Field
+            name='email_opt_in'
+            id='email_opt_in'
+            component={CheckboxWrapper}
+            disabled={!reCaptchaReady || loading}
+            type='checkbox'
+            label={<span>I'm happy to receive marketing email from SparkPost</span>}
+          />
 
-        <Field
-          name="tou_accepted"
-          id='tou_accepted'
-          component={CheckboxWrapper}
-          type="checkbox"
-          disabled={!reCaptchaReady || loading}
-          validate={required}
-          label={<span>I agree to SparkPost's <UnstyledLink to={LINKS.TOU} external>Terms of Use</UnstyledLink></span>}
-        />
+          <Field
+            name="tou_accepted"
+            id='tou_accepted'
+            component={CheckboxWrapper}
+            type="checkbox"
+            disabled={!reCaptchaReady || loading}
+            validate={required}
+            label={<span>I agree to SparkPost's <UnstyledLink to={LINKS.TOU} external>Terms of Use</UnstyledLink></span>}
+          />
+        </Checkbox.Group>
 
         <Button primary
           disabled={loading || pristine || invalid || !reCaptchaReady }

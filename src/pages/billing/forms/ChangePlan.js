@@ -38,28 +38,20 @@ export class ChangePlan extends Component {
   onSubmit = (values) => {
     const { account, updateSubscription, billingCreate, billingUpdate, showAlert, history } = this.props;
 
-    if (account.billing) {
-      if (this.state.useSavedCC) {
-        // Updates plan
-        return updateSubscription(values.planpicker.code)
-          .then(() => history.push('/account/billing'))
-          .then(() => showAlert({ type: 'success', message: 'Subscription Updated' }))
-          .catch((err) => showAlert({ type: 'error', message: 'Plan Update Failed' }));
+    // decides which action to be taken based on
+    // if it already has billing and if you use a saved CC
+    const action = account.billing
+      ? (
+        this.state.useSavedCC
+          ? updateSubscription(values.planpicker.code)
+          : billingUpdate(values))
+      : billingCreate(values); // creates Zuora account
 
-      } else {
-        // Updates plan and payment information
-        return billingUpdate(values)
-          .then(() => history.push('/account/billing'))
-          .then(() => showAlert({ type: 'success', message: 'Subscription Updated' }))
-          .catch((err) => showAlert({ type: 'error', message: 'Plan Update Failed' }));
-      }
-    }
 
-    // Creates Zuora account
-    return billingCreate(values)
+    return action
       .then(() => history.push('/account/billing'))
-      .then(() => showAlert({ type: 'success', message: 'Subscription Upgraded' }))
-      .catch(() => showAlert({ type: 'error', message: 'Plan Upgrade Failed' }));
+      .then(() => showAlert({ type: 'success', message: 'Subscription Updated' }))
+      .catch((err) => showAlert({ type: 'error', message: 'Plan Update Failed', details: err.message }));
   }
 
   renderCCSection = () => {

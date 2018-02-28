@@ -68,10 +68,10 @@ export const ManuallyBilledBanner = ({ account, ...rest }) => {
  */
 export const PremiumBanner = () => (
   <Banner title='Premium Addon Plan' action={{ content: 'Contact Us', to: LINKS.PREMIUM_SUPPORT, external: true }}>
-    <p>Technical and deliverability account management - full service support on a first name basis.</p>
+    <p>Get full-service Technical Account Management with proactive reporting, planning & reviews.</p>
     <ul>
-      <li>Dedicated Technical Account Manager</li>
-      <li>Proactive deliverability reporting, planning & reviews</li>
+      <li>Includes all standard SparkPost features</li>
+      <li>Dedicated Technical Account Manager (TAM)</li>
       <li>Global ISP relations and mediation</li>
       <li>Deliverability data analysis and guidance with 250ok</li>
     </ul>
@@ -83,13 +83,12 @@ export const PremiumBanner = () => (
  */
 export const EnterpriseBanner = () => (
   <Banner title='Enterprise' action={{ content: 'Contact Us', to: LINKS.ENTERPRISE_SUPPORT, external: true }}>
-    <p>Enterprise-grade guarantees and SLAs across email, push, and SMS - manage, analyzed, and reported from a single console.</p>
+    <p>Enterprise-grade financial guarantees with 99.9% uptime SLA and guaranteed burst rates.</p>
     <ul>
-      <li>The industry's best uptime SLAs with service credits</li>
-      <li>Guaranteed burst rates</li>
-      <li>Push notifications and SMS messaging</li>
-      <li>Single sign-on support</li>
-      <li>Support for iOS universal links</li>
+      <li>Includes all standard SparkPost and Premium features</li>
+      <li>Comprehensive uptime SLAs with service credits</li>
+      <li>The industry’s only burst-rate guarantee</li>
+      <li>Support for iOS Universal Links and Android App Links</li>
     </ul>
   </Banner>
 );
