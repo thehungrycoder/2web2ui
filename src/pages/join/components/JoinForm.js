@@ -72,6 +72,7 @@ export class JoinForm extends Component {
               name='first_name'
               component={TextFieldWrapper}
               label='First Name'
+              autoComplete='given-name'
               validate={required}
               disabled={!reCaptchaReady || loading}
               placeholder='Leslie'
@@ -82,6 +83,7 @@ export class JoinForm extends Component {
               name='last_name'
               component={TextFieldWrapper}
               label='Last Name'
+              autoComplete='family-name'
               validate={required}
               disabled={!reCaptchaReady || loading}
               placeholder='Knope'
