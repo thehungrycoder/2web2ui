@@ -86,6 +86,68 @@ exports[`IP Pools List Page renders correctly when showPurchaseCTA is false 1`] 
 </Page>
 `;
 
+exports[`IP Pools List Page renders empty state correctly 1`] = `
+<Page
+  empty={
+    Object {
+      "content": <p>
+        Purchase dedicated IPs to manage your IP Pools
+      </p>,
+      "image": "Setup",
+      "primaryAction": Object {
+        "Component": [Function],
+        "content": "Purchase IPs",
+        "to": "/account/billing",
+      },
+      "secondaryAction": Object {
+        "Component": [Function],
+        "content": "Create IP Pool",
+        "to": "/account/ip-pools/create",
+      },
+      "show": true,
+      "title": "Boost your deliverability",
+    }
+  }
+  primaryAction={
+    Object {
+      "Component": [Function],
+      "content": "Create IP Pool",
+      "to": "/account/ip-pools/create",
+    }
+  }
+  title="IP Pools"
+/>
+`;
+
+exports[`IP Pools List Page renders empty state correctly when showPurchaseCTA is false 1`] = `
+<Page
+  empty={
+    Object {
+      "content": <p>
+        Purchase dedicated IPs to manage your IP Pools
+      </p>,
+      "image": "Setup",
+      "primaryAction": Object {
+        "Component": [Function],
+        "content": "Create IP Pool",
+        "to": "/account/ip-pools/create",
+      },
+      "secondaryAction": null,
+      "show": true,
+      "title": "Boost your deliverability",
+    }
+  }
+  primaryAction={
+    Object {
+      "Component": [Function],
+      "content": "Create IP Pool",
+      "to": "/account/ip-pools/create",
+    }
+  }
+  title="IP Pools"
+/>
+`;
+
 exports[`IP Pools List Page should render loading component when loading data 1`] = `<Loading />`;
 
 exports[`IP Pools List Page should render row properly 1`] = `

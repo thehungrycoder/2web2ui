@@ -28,3 +28,5 @@ export const LINKS = {
   SUBMIT_SUPPORT_TICKET: 'https://support.sparkpost.com/customer/portal/emails/new',
   RECAPTCHA_LIB_URL: 'https://www.google.com/recaptcha/api.js'
 };
+
+export const ENTERPRISE_PLAN_CODES = ['ent1'];

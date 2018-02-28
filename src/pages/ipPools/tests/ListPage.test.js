@@ -50,4 +50,14 @@ describe('IP Pools List Page', () => {
     expect(wrapper).toMatchSnapshot();
 
   });
+
+  it('renders empty state correctly', () => {
+    wrapper.setProps({ ipPools: [{ name: 'Default', ips: []}]});
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders empty state correctly when showPurchaseCTA is false', () => {
+    wrapper.setProps({ ipPools: [{ name: 'Default', ips: []}], showPurchaseCTA: false });
+    expect(wrapper).toMatchSnapshot();
+  });
 });

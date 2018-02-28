@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
-import _ from 'lodash';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { listPools } from 'src/actions/ipPools';
-import { getOrderedIpPools } from 'src/selectors/ipPools';
-import { currentPlanCodeSelector } from 'src/selectors/accountBillingInfo';
+import { getOrderedIpPools, shouldShowIpPurchaseCTA } from 'src/selectors/ipPools';
 import { Loading, TableCollection, ApiErrorBanner } from 'src/components';
 import { Page } from '@sparkpost/matchbox';
-
-const plansWithDisallowedPurchaseCTA = ['ent1'];
 
 const columns = [
   { label: 'Name', sortKey: 'name' },
@@ -65,28 +61,24 @@ export class IpPoolsList extends Component {
 
     const createAction = { content: 'Create IP Pool', Component: Link, to: '/account/ip-pools/create' };
     const purchaseAction = { content: 'Purchase IPs', Component: Link, to: '/account/billing' };
+    const isEmptyState = ipPools.length === 1 && ipPools[0].ips.length === 0;
 
     return (
       <Page
         primaryAction={createAction}
         title='IP Pools'
         empty={{
-          show: ipPools.length === 1 && ipPools[0].ips.length === 0,
+          show: isEmptyState,
           title: 'Boost your deliverability',
           image: 'Setup',
           content: <p>Purchase dedicated IPs to manage your IP Pools</p>,
           secondaryAction: showPurchaseCTA ? createAction : null,
           primaryAction: showPurchaseCTA ? purchaseAction : createAction
         }}>
-        { error ? this.renderError() : this.renderCollection() }
+        { error ? this.renderError() : (isEmptyState ? null : this.renderCollection()) }
       </Page>
     );
   }
-}
-
-function shouldShowPurchaseCTA(state) {
-  const currentPlanCode = currentPlanCodeSelector(state);
-  return !_.includes(plansWithDisallowedPurchaseCTA, currentPlanCode);
 }
 
 function mapStateToProps(state) {
@@ -95,7 +87,7 @@ function mapStateToProps(state) {
     ipPools: getOrderedIpPools(state),
     loading: ipPools.listLoading,
     error: ipPools.listError,
-    showPurchaseCTA: shouldShowPurchaseCTA(state)
+    showPurchaseCTA: shouldShowIpPurchaseCTA(state)
   };
 }
 
