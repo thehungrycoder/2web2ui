@@ -29,7 +29,9 @@ describe('CopyField Component', () => {
   it('should handle copy click', () => {
     wrapper.setProps({ value: 'to copy' });
     wrapper.instance().handleCopy();
+    wrapper.update();
     expect(wrapper).toHaveState('copied', true);
+    expect(wrapper.find('TextField').props().connectRight).toMatchSnapshot();
     expect(window.clearTimeout).toHaveBeenCalled();
     expect(wrapper.instance().timeout).not.toEqual(null);
   });

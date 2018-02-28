@@ -1,7 +1,6 @@
 /* eslint max-lines: ["error", 200] */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import ReactDOM from 'react-dom';
 import { subMonths, format } from 'date-fns';
 import { getStartOfDay, getEndOfDay, relativeDateOptions } from 'src/helpers/date';
 import { refreshReportOptions } from 'src/actions/reportOptions';
@@ -20,12 +19,10 @@ export class DateFilter extends Component {
 
   componentDidMount() {
     this.syncPropsToState(this.props);
-    window.addEventListener('click', this.handleClickOutside);
     window.addEventListener('keydown', this.handleKeyDown);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('click', this.handleClickOutside);
     window.removeEventListener('keydown', this.handleKeyDown);
   }
 
@@ -36,14 +33,6 @@ export class DateFilter extends Component {
   // Sets local state from reportOptions redux state - need to separate to handle pre-apply state
   syncPropsToState = ({ filter }) => {
     this.setState({ selected: { from: filter.from, to: filter.to }});
-  }
-
-  // Closes popover when clicking outside
-  handleClickOutside = (e) => {
-    const domNode = ReactDOM.findDOMNode(this);
-    if ((!domNode || !domNode.contains(e.target))) {
-      this.setState({ showDatePicker: false });
-    }
   }
 
   // Closes popover on escape, submits on enter
@@ -147,8 +136,8 @@ export class DateFilter extends Component {
       <Popover
         wrapper='div'
         className={styles.Popover}
-        manualTrigger
         trigger={dateField}
+        onOutsideClick={this.cancelDatePicker}
         open={this.state.showDatePicker} >
 
         <Datepicker

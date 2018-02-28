@@ -11,16 +11,27 @@ exports[`MetricCard Component:  should render correctly with all props 1`] = `
     <h6>
       Card Label
        
-      <WithPositioning(Tooltip)
+      <Tooltip
+        bottom={true}
         content="Tooltip Content"
         dark={true}
+        forcePosition={false}
         horizontalOffset="-1.1rem"
+        preferredDirection={
+          Object {
+            "bottom": true,
+            "left": false,
+            "right": true,
+            "top": false,
+          }
+        }
+        right={true}
       >
         <Icon
           name="InfoOutline"
           size={18}
         />
-      </WithPositioning(Tooltip)>
+      </Tooltip>
     </h6>
   </Panel>
 </div>
