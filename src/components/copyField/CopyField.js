@@ -42,10 +42,11 @@ class CopyField extends Component {
     let connectRight = null;
 
     if (!hideCopy) {
-      const button = <Button onClick={this.handleCopy}><Icon name='Copy' size={14}/> Copy</Button>;
-      connectRight = copied
-        ? <Tooltip dark content='Copied to clipboard!'>{ button }</Tooltip>
-        : button;
+      connectRight = (
+        <Tooltip dark content='Copied to clipboard!' disabled={!copied}>
+          <Button onClick={this.handleCopy}><Icon name='Copy' size={14}/> Copy</Button>
+        </Tooltip>
+      );
     }
 
     return (

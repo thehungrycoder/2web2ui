@@ -1,18 +1,67 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`CopyField Component should handle copy click 1`] = `
+<Tooltip
+  bottom={true}
+  content="Copied to clipboard!"
+  dark={true}
+  disabled={false}
+  forcePosition={false}
+  horizontalOffset="0px"
+  preferredDirection={
+    Object {
+      "bottom": true,
+      "left": false,
+      "right": true,
+      "top": false,
+    }
+  }
+  right={true}
+>
+  <Button
+    onClick={[Function]}
+    size="default"
+  >
+    <Icon
+      name="Copy"
+      size={14}
+    />
+     Copy
+  </Button>
+</Tooltip>
+`;
+
 exports[`CopyField Component should pass rest of attrs to TextField 1`] = `
 <TextField
   connectRight={
-    <Button
-      onClick={[Function]}
-      size="default"
+    <Tooltip
+      bottom={true}
+      content="Copied to clipboard!"
+      dark={true}
+      disabled={true}
+      forcePosition={false}
+      horizontalOffset="0px"
+      preferredDirection={
+        Object {
+          "bottom": true,
+          "left": false,
+          "right": true,
+          "top": false,
+        }
+      }
+      right={true}
     >
-      <Icon
-        name="Copy"
-        size={14}
-      />
-       Copy
-    </Button>
+      <Button
+        onClick={[Function]}
+        size="default"
+      >
+        <Icon
+          name="Copy"
+          size={14}
+        />
+         Copy
+      </Button>
+    </Tooltip>
   }
   multiline={true}
   onFocus={[Function]}
@@ -26,16 +75,34 @@ exports[`CopyField Component should pass rest of attrs to TextField 1`] = `
 exports[`CopyField Component should render - no props 1`] = `
 <TextField
   connectRight={
-    <Button
-      onClick={[Function]}
-      size="default"
+    <Tooltip
+      bottom={true}
+      content="Copied to clipboard!"
+      dark={true}
+      disabled={true}
+      forcePosition={false}
+      horizontalOffset="0px"
+      preferredDirection={
+        Object {
+          "bottom": true,
+          "left": false,
+          "right": true,
+          "top": false,
+        }
+      }
+      right={true}
     >
-      <Icon
-        name="Copy"
-        size={14}
-      />
-       Copy
-    </Button>
+      <Button
+        onClick={[Function]}
+        size="default"
+      >
+        <Icon
+          name="Copy"
+          size={14}
+        />
+         Copy
+      </Button>
+    </Tooltip>
   }
   onFocus={[Function]}
   readOnly={true}
