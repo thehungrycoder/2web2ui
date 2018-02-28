@@ -8,7 +8,6 @@ exports[`Support Component should render just the icon by default 1`] = `
     <Popover
       bottom={true}
       left={true}
-      manualTrigger={true}
       open={false}
       right={true}
       top={true}

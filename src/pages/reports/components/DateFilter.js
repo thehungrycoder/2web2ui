@@ -136,7 +136,6 @@ export class DateFilter extends Component {
       <Popover
         wrapper='div'
         className={styles.Popover}
-        manualTrigger
         trigger={dateField}
         onOutsideClick={this.cancelDatePicker}
         open={this.state.showDatePicker} >
