@@ -7,41 +7,43 @@ exports[`Component: BackupCodes should render correctly 1`] = `
       Your shiny new backup codes:
     </strong>
   </p>
-  <BackupCodesList
-    codes={
-      Array [
-        "code1",
-        "code2",
-        "code3",
-      ]
-    }
-  />
-  <DownloadCodes
-    codes={
-      Array [
-        "code1",
-        "code2",
-        "code3",
-      ]
-    }
-  />
-  <CopyCodes
-    codes={
-      Array [
-        "code1",
-        "code2",
-        "code3",
-      ]
-    }
-  />
-  <PrintCodes
-    codes={
-      Array [
-        "code1",
-        "code2",
-        "code3",
-      ]
-    }
-  />
+  <Button.Group>
+    <BackupCodesList
+      codes={
+        Array [
+          "code1",
+          "code2",
+          "code3",
+        ]
+      }
+    />
+    <DownloadCodes
+      codes={
+        Array [
+          "code1",
+          "code2",
+          "code3",
+        ]
+      }
+    />
+    <CopyCodes
+      codes={
+        Array [
+          "code1",
+          "code2",
+          "code3",
+        ]
+      }
+    />
+    <PrintCodes
+      codes={
+        Array [
+          "code1",
+          "code2",
+          "code3",
+        ]
+      }
+    />
+  </Button.Group>
 </div>
 `;
