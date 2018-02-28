@@ -3,7 +3,7 @@
 exports[`Component: DateFilter should render ok by default 1`] = `
 <Popover
   bottom={true}
-  manualTrigger={true}
+  onOutsideClick={[Function]}
   open={false}
   right={true}
   trigger={

@@ -1,9 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Component: DomainStatusTag should render for blocked status 1`] = `
-<WithPositioning(Tooltip)
+<Tooltip
+  bottom={true}
   content="This domain is not available for use. For more information, please contact support."
   dark={true}
+  forcePosition={false}
+  horizontalOffset="0px"
+  preferredDirection={
+    Object {
+      "bottom": true,
+      "left": false,
+      "right": true,
+      "top": false,
+    }
+  }
+  right={true}
 >
   <Tag
     color="red"
@@ -14,13 +26,25 @@ exports[`Component: DomainStatusTag should render for blocked status 1`] = `
     />
      Blocked
   </Tag>
-</WithPositioning(Tooltip)>
+</Tooltip>
 `;
 
 exports[`Component: DomainStatusTag should render for pending status 1`] = `
-<WithPositioning(Tooltip)
+<Tooltip
+  bottom={true}
   content="This domain is pending review, please check back again soon."
   dark={true}
+  forcePosition={false}
+  horizontalOffset="0px"
+  preferredDirection={
+    Object {
+      "bottom": true,
+      "left": false,
+      "right": true,
+      "top": false,
+    }
+  }
+  right={true}
 >
   <Tag>
     <Icon
@@ -29,13 +53,25 @@ exports[`Component: DomainStatusTag should render for pending status 1`] = `
     />
      Pending
   </Tag>
-</WithPositioning(Tooltip)>
+</Tooltip>
 `;
 
 exports[`Component: DomainStatusTag should render for unverified status 1`] = `
-<WithPositioning(Tooltip)
+<Tooltip
+  bottom={true}
   content="This domain must be verified before use."
   dark={true}
+  forcePosition={false}
+  horizontalOffset="0px"
+  preferredDirection={
+    Object {
+      "bottom": true,
+      "left": false,
+      "right": true,
+      "top": false,
+    }
+  }
+  right={true}
 >
   <Tag
     color="yellow"
@@ -46,7 +82,7 @@ exports[`Component: DomainStatusTag should render for unverified status 1`] = `
     />
      Unverified
   </Tag>
-</WithPositioning(Tooltip)>
+</Tooltip>
 `;
 
 exports[`Component: DomainStatusTag should render for verified status 1`] = `

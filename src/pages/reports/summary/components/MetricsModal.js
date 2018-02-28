@@ -59,7 +59,7 @@ export default class MetricsModal extends Component {
         const checked = this.state[metric.key];
         return (
           <div className={styles.Metric} key={metric.key}>
-            <Tooltip content={metric.description}>
+            <Tooltip content={metric.description} dark>
               <Checkbox
                 id={metric.key}
                 disabled={selectedCount >= MAX && !checked}

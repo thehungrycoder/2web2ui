@@ -18,11 +18,11 @@ export default class CopyCodes extends Component {
   render() {
     const { copied } = this.state;
 
-    const button = <Button onClick={this.copyToClipboard}><Icon name='Copy' size={14}/>Copy</Button>;
-    return copied
-      ? <Tooltip dark content='Copied to clipboard!'>{ button }</Tooltip>
-      : button;
+    return (
+      <Tooltip dark content='Copied to clipboard!' disabled={!copied}>
+        <Button onClick={this.copyToClipboard}><Icon name='Copy' size={14}/>Copy</Button>
+      </Tooltip>
+    );
 
   }
 }
-
