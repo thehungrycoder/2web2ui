@@ -56,6 +56,7 @@ export class Support extends Component {
           <Popover
             top
             left
+            fixed
             className={styles.Popover}
             open={showPanel}
             trigger={triggerMarkup}>
