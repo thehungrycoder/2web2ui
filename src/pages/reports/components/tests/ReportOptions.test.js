@@ -4,7 +4,9 @@ import { ReportOptions } from '../ReportOptions';
 import { Tag } from '@sparkpost/matchbox';
 import Typeahead from '../Typeahead';
 import * as reportHelpers from 'src/helpers/reports';
+import { isSameDate } from 'src/helpers/date';
 
+jest.mock('src/helpers/date');
 jest.mock('src/helpers/reports');
 
 describe('Component: Report Options', () => {
@@ -36,7 +38,8 @@ describe('Component: Report Options', () => {
         replace: jest.fn()
       },
       initTypeaheadCache: jest.fn(),
-      refreshReportOptions: jest.fn()
+      refreshReportOptions: jest.fn(),
+      refreshTypeaheadCache: jest.fn()
     };
     wrapper = shallow(<ReportOptions {...testProps} />);
   });
@@ -94,6 +97,108 @@ describe('Component: Report Options', () => {
       search: 'abc=123'
     });
     expect(wrapper.state('query')).toEqual(testQuery);
+  });
+
+  describe('maybeRefreshFilterTypeaheadCache', () => {
+
+    beforeEach(() => {
+      testProps.reportOptions.from = 'from';
+      testProps.reportOptions.to = 'to';
+      testProps.reportOptions.relativeRange = 'custom';
+    });
+
+    it('should not refresh if relative range does not change', () => {
+      isSameDate.mockImplementation(() => false);
+      testProps.reportOptions.relativeRange = 'day';
+
+      wrapper.setProps({
+        reportOptions: {
+          ...testProps.reportOptions,
+          from: 'changed-from',
+          to: 'changed-to',
+          relativeRange: 'day'
+        }
+      });
+
+      expect(testProps.refreshTypeaheadCache).not.toHaveBeenCalled();
+    });
+
+    it('should not refresh if range is "custom" but dates have not changed', () => {
+      isSameDate.mockImplementation(() => true);
+      testProps.reportOptions.relativeRange = 'custom';
+
+      wrapper.setProps({
+        reportOptions: {
+          ...testProps.reportOptions,
+          from: 'from',
+          to: 'to',
+          relativeRange: 'custom'
+        }
+      });
+
+      expect(testProps.refreshTypeaheadCache).not.toHaveBeenCalled();
+    });
+
+    it('should refresh if the range changes', () => {
+      isSameDate.mockImplementation(() => true);
+      testProps.reportOptions.relativeRange = 'day';
+
+      wrapper.setProps({
+        reportOptions: {
+          ...testProps.reportOptions,
+          relativeRange: '7days'
+        }
+      });
+
+      expect(testProps.refreshTypeaheadCache).toHaveBeenCalledWith(wrapper.instance().props.reportOptions);
+    });
+
+    it('should refresh if custom range dates change', () => {
+      isSameDate.mockImplementation(() => false);
+      testProps.reportOptions.relativeRange = 'custom';
+
+      wrapper.setProps({
+        reportOptions: {
+          ...testProps.reportOptions,
+          relativeRange: 'custom'
+        }
+      });
+
+      expect(testProps.refreshTypeaheadCache).toHaveBeenCalledWith(wrapper.instance().props.reportOptions);
+    });
+
+    // it('should refresh if dates change and relative range is "custom"', () => {
+    //   reportOptions.maybeRefreshTypeaheadCache({
+    //     from: updatedFrom,
+    //     to: currentTo,
+    //     relativeRange: 'custom'
+    //   })(dispatchMock, getStateMock);
+
+    //   expect(dispatchMock).toHaveBeenCalledTimes(1);
+    // });
+
+    // it('should refresh if dates change and relative range is also changing', () => {
+    //   testState.reportOptions.relativeRange = 'day';
+    //   reportOptions.maybeRefreshTypeaheadCache({
+    //     from: updatedFrom,
+    //     to: currentTo,
+    //     relativeRange: '7days'
+    //   })(dispatchMock, getStateMock);
+
+    //   expect(dispatchMock).toHaveBeenCalledTimes(1);
+    // });
+
+    // it('should not refresh if dates change but relative range stays the same and is not "custom"', () => {
+    //   testState.reportOptions.relativeRange = 'day';
+    //   reportOptions.maybeRefreshTypeaheadCache({
+    //     from: updatedFrom,
+    //     to: currentTo,
+    //     relativeRange: 'day'
+    //   })(dispatchMock, getStateMock);
+
+    //   expect(dispatchMock).not.toHaveBeenCalled();
+    // });
+
   });
 
 });
