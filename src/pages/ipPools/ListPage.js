@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { listPools } from 'src/actions/ipPools';
-import { getOrderedIpPools } from 'src/selectors/ipPools';
+import { getOrderedIpPools, shouldShowIpPurchaseCTA } from 'src/selectors/ipPools';
 import { Loading, TableCollection, ApiErrorBanner } from 'src/components';
 import { Page } from '@sparkpost/matchbox';
 
@@ -53,7 +53,7 @@ export class IpPoolsList extends Component {
   }
 
   render() {
-    const { loading, error, ipPools } = this.props;
+    const { loading, error, ipPools, showPurchaseCTA } = this.props;
 
     if (loading) {
       return <Loading />;
@@ -61,20 +61,21 @@ export class IpPoolsList extends Component {
 
     const createAction = { content: 'Create IP Pool', Component: Link, to: '/account/ip-pools/create' };
     const purchaseAction = { content: 'Purchase IPs', Component: Link, to: '/account/billing' };
+    const isEmptyState = ipPools.length === 1 && ipPools[0].ips.length === 0;
 
     return (
       <Page
         primaryAction={createAction}
         title='IP Pools'
         empty={{
-          show: ipPools.length === 1 && ipPools[0].ips === 0,
+          show: isEmptyState,
           title: 'Boost your deliverability',
           image: 'Setup',
           content: <p>Purchase dedicated IPs to manage your IP Pools</p>,
-          secondaryAction: createAction,
-          primaryAction: purchaseAction
+          secondaryAction: showPurchaseCTA ? createAction : null,
+          primaryAction: showPurchaseCTA ? purchaseAction : createAction
         }}>
-        { error ? this.renderError() : this.renderCollection() }
+        { error ? this.renderError() : (isEmptyState ? null : this.renderCollection()) }
       </Page>
     );
   }
@@ -85,7 +86,8 @@ function mapStateToProps(state) {
   return {
     ipPools: getOrderedIpPools(state),
     loading: ipPools.listLoading,
-    error: ipPools.listError
+    error: ipPools.listError,
+    showPurchaseCTA: shouldShowIpPurchaseCTA(state)
   };
 }
 

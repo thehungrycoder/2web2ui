@@ -1,7 +1,10 @@
 import { createSelector } from 'reselect';
+import _ from 'lodash';
 import { encodeIp } from 'src/helpers/ipNames';
-
+import { currentPlanCodeSelector } from 'src/selectors/accountBillingInfo';
+import { ENTERPRISE_PLAN_CODES } from 'src/constants';
 const DEFAULT = 'default';
+
 const getIpPools = (state) => state.ipPools.list;
 const selectCurrentPool = ({ ipPools = {}}) => ipPools.pool || {};
 
@@ -54,4 +57,12 @@ export const selectCurrentPoolInitialValues = createSelector(
       return result;
     }, {})
   })
+);
+
+/**
+ * Returns whether Purchase IP cta should shown, based on account's plan code
+ * @return bool
+ */
+export const shouldShowIpPurchaseCTA = createSelector(
+  [currentPlanCodeSelector], (currentPlanCode) => !_.includes(ENTERPRISE_PLAN_CODES, currentPlanCode)
 );

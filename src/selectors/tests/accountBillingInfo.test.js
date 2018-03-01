@@ -66,3 +66,16 @@ describe('Selector: can change plan', () => {
     expect(billingInfo.canChangePlanSelector(store)).toEqual(false);
   });
 });
+
+describe('currentPlanCodeSelector: can select plan code', () => {
+  let store;
+  beforeEach(() => {
+    store = {
+      account: { subscription: { code: 'qwe' }}
+    };
+  });
+
+  it('returns correct plan code', () => {
+    expect(billingInfo.currentPlanCodeSelector(store)).toEqual('qwe');
+  });
+});

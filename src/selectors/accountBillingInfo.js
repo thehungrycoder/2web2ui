@@ -4,8 +4,15 @@ import _ from 'lodash';
 const suspendedSelector = (state) => state.account.isSuspendedForBilling;
 const pendingSubscriptionSelector = (state) => state.account.pending_subscription;
 const plansSelector = (state) => state.billing.plans || [];
-const currentPlanCodeSelector = (state) => state.account.subscription.code;
 const accountBillingSelector = (state) => state.account.billing;
+
+/**
+ * Returns current subscription's code
+ * @param state
+ * @return plan code
+ */
+export const currentPlanCodeSelector = (state) => state.account.subscription.code;
+
 
 /**
  * Returns true if user does not have pending plan change or is not suspended

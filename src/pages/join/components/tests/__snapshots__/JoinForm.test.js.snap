@@ -9,6 +9,7 @@ exports[`JoinForm render disables form when loading 1`] = `
       xs={12}
     >
       <Field
+        autoComplete="given-name"
         component={[Function]}
         disabled={true}
         label="First Name"
@@ -23,6 +24,7 @@ exports[`JoinForm render disables form when loading 1`] = `
       xs={12}
     >
       <Field
+        autoComplete="family-name"
         component={[Function]}
         disabled={true}
         label="Last Name"
@@ -131,6 +133,7 @@ exports[`JoinForm render disables form when recaptcha is not loaded 1`] = `
       xs={12}
     >
       <Field
+        autoComplete="given-name"
         component={[Function]}
         disabled={true}
         label="First Name"
@@ -145,6 +148,7 @@ exports[`JoinForm render disables form when recaptcha is not loaded 1`] = `
       xs={12}
     >
       <Field
+        autoComplete="family-name"
         component={[Function]}
         disabled={true}
         label="Last Name"
@@ -253,6 +257,7 @@ exports[`JoinForm render enables form correctly 1`] = `
       xs={12}
     >
       <Field
+        autoComplete="given-name"
         component={[Function]}
         disabled={false}
         label="First Name"
@@ -267,6 +272,7 @@ exports[`JoinForm render enables form correctly 1`] = `
       xs={12}
     >
       <Field
+        autoComplete="family-name"
         component={[Function]}
         disabled={false}
         label="Last Name"
