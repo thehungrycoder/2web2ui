@@ -5,6 +5,7 @@ import { useRefreshToken } from 'src/helpers/http';
 import { resolveOnCondition } from 'src/helpers/promise';
 import _ from 'lodash';
 import { sparkpost as sparkpostAxios } from 'src/helpers/axiosInstances';
+import { SparkpostApiError } from './sparkpostApiError';
 
 const maxRefreshRetries = 3;
 export const refreshTokensUsed = new Set();
@@ -13,16 +14,6 @@ export let refreshing = false;
 // Re-dispatches a given action after we finish refreshing the auth token
 function redispatchAfterRefresh(action, dispatch) {
   return resolveOnCondition(() => !refreshing).then(() => dispatch(sparkpostRequest(action)));
-}
-
-function parseApiError(error) {
-  const description = _.get(error, 'response.data.errors[0].description');
-
-  if (description) {
-    error.message = description;
-  }
-
-  return error;
 }
 
 const sparkpostRequest = requestHelperFactory({
@@ -46,7 +37,7 @@ const sparkpostRequest = requestHelperFactory({
     return results;
   },
   onFail: ({ types, err, dispatch, meta, action, getState }) => {
-    const apiError = parseApiError(err);
+    const apiError = new SparkpostApiError(err);
     const { message, response = {}} = apiError;
     const { auth } = getState();
     const { retries = 0 } = meta;
