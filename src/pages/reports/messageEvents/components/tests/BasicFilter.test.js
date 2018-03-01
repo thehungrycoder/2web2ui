@@ -1,10 +1,6 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-
 import { BasicFilter } from '../BasicFilter';
-import * as dateMock from 'src/helpers/date';
-
-jest.mock('src/helpers/date');
 
 let props;
 let wrapper;
@@ -12,8 +8,9 @@ let instance;
 
 beforeEach(() => {
   props = {
-    onSubmit: jest.fn(() => Promise.resolve()),
-    reportOptions: null
+    getMessageEvents: jest.fn(),
+    reportOptions: {},
+    refreshReportOptions: jest.fn()
   };
 
   wrapper = shallow(<BasicFilter {...props} />);
@@ -29,7 +26,7 @@ describe('BasicFilter', () => {
     it('refresh calls onSubmit with correct params', () => {
       props.recipients = 'email@domain.com';
       instance.refresh();
-      expect(props.onSubmit).toBeCalledWith({ recipients: '', reportOptions: null });
+      expect(props.getMessageEvents).toBeCalledWith({ recipients: '', reportOptions: props.reportOptions });
     });
   });
 
@@ -76,7 +73,7 @@ describe('BasicFilter', () => {
       instance.handleRecipientsChange(event);
       expect(wrapper.state().recipients).toEqual('email1@domain.com,email2@domain.com');
 
-      expect(props.onSubmit).toHaveBeenCalledTimes(2);
+      expect(props.getMessageEvents).toHaveBeenCalledTimes(2);
     });
 
     it('does not refresh on invalid recipient', () => {
@@ -88,7 +85,7 @@ describe('BasicFilter', () => {
 
       instance.handleRecipientsChange(event);
       expect(wrapper.state().recipients).toEqual('');
-      expect(props.onSubmit).toHaveBeenCalledTimes(0);
+      expect(props.getMessageEvents).toHaveBeenCalledTimes(0);
     });
 
     it('does not refresh when value is unchanged', () => {
@@ -101,41 +98,8 @@ describe('BasicFilter', () => {
 
       instance.handleRecipientsChange(event);
       expect(wrapper.state().recipients).toEqual('foo@bar.com');
-      expect(props.onSubmit).toHaveBeenCalledTimes(0);
+      expect(props.getMessageEvents).toHaveBeenCalledTimes(0);
     });
   });
 
-  describe('handleDateSelection', () => {
-    const now = new Date();
-
-    beforeEach(() => {
-      dateMock.getRelativeDates = jest.fn(() => ({
-        to: now,
-        from: now
-      }));
-    });
-
-    it('converts relativeRange to correct value', () => {
-      const options = {
-        relativeRange: '30days'
-      };
-
-      instance.handleDateSelection(options);
-      expect(dateMock.getRelativeDates).toHaveBeenCalledTimes(1);
-      expect(wrapper.state().reportOptions).toEqual({ to: now, from: now, relativeRange: '30days' });
-      expect(props.onSubmit).toHaveBeenCalledTimes(1);
-    });
-
-    it('uses the from/to provided when relativeRange is not given' , () => {
-      const options = {
-        from: now,
-        to: now
-      };
-
-      instance.handleDateSelection(options);
-      expect(dateMock.getRelativeDates).toHaveBeenCalledTimes(0);
-      expect(wrapper.state().reportOptions).toEqual({ to: now, from: now, relativeRange: undefined });
-      expect(props.onSubmit).toHaveBeenCalledTimes(1);
-    });
-  });
 });

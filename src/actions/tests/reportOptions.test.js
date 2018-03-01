@@ -13,7 +13,7 @@ jest.mock('src/actions/templates');
 jest.mock('src/actions/subaccounts');
 jest.mock('src/actions/sendingDomains');
 
-describe('Action Creator: Report Filters', () => {
+describe('Action Creator: Report Options', () => {
   let dispatchMock;
   let testState;
   let getStateMock;
@@ -43,9 +43,9 @@ describe('Action Creator: Report Filters', () => {
 
   describe('initTypeaheadCache', () => {
 
-    it('should dispatch 3 actions', () => {
+    it('should dispatch 4 actions', () => {
       reportOptions.initTypeaheadCache()(dispatchMock, getStateMock);
-      expect(dispatchMock).toHaveBeenCalledTimes(3);
+      expect(dispatchMock).toHaveBeenCalledTimes(4);
       expect(listTemplates).toHaveBeenCalledTimes(1);
       expect(listSubaccounts).toHaveBeenCalledTimes(1);
       expect(listSendingDomains).toHaveBeenCalledTimes(1);
@@ -58,10 +58,36 @@ describe('Action Creator: Report Filters', () => {
 
       reportOptions.initTypeaheadCache()(dispatchMock, getStateMock);
 
-      expect(dispatchMock).toHaveBeenCalledTimes(0);
+      expect(dispatchMock).toHaveBeenCalledTimes(1);
       expect(listTemplates).not.toHaveBeenCalled();
       expect(listSubaccounts).not.toHaveBeenCalled();
       expect(listSendingDomains).not.toHaveBeenCalled();
+    });
+
+    it('should skip call to refreshTypeaheadCache if any of the metrics lists are not empty', () => {
+      testState.templates.list.push('template');
+      testState.subaccounts.list.push('subaccount');
+      testState.sendingDomains.list.push('sending-domain');
+
+      testState.metrics.campaigns.push('campaign');
+      reportOptions.initTypeaheadCache()(dispatchMock, getStateMock);
+
+      testState.metrics.campaigns = [];
+
+      testState.metrics.domains.push('domain');
+      reportOptions.initTypeaheadCache()(dispatchMock, getStateMock);
+
+      testState.metrics.domains = [];
+
+      testState.metrics.sendingIps.push('sendingIp');
+      reportOptions.initTypeaheadCache()(dispatchMock, getStateMock);
+
+      testState.metrics.sendingIps = [];
+
+      testState.metrics.ipPools.push('pool');
+      reportOptions.initTypeaheadCache()(dispatchMock, getStateMock);
+
+      expect(dispatchMock).not.toHaveBeenCalled();
     });
 
   });
@@ -74,71 +100,71 @@ describe('Action Creator: Report Filters', () => {
     expect(metrics.fetchMetricsIpPools).toHaveBeenCalledTimes(1);
   });
 
-  describe('maybeRefreshTypeaheadCache', () => {
+  // describe('maybeRefreshTypeaheadCache', () => {
 
-    let currentFrom;
-    let currentTo;
-    let updatedFrom;
+  //   let currentFrom;
+  //   let currentTo;
+  //   let updatedFrom;
 
-    beforeEach(() => {
-      currentFrom = new Date('2018-02-10');
-      currentTo = new Date('2018-02-11');
-      updatedFrom = new Date(currentFrom);
-      updatedFrom.setMonth(currentFrom.getMonth() - 1);
+  //   beforeEach(() => {
+  //     currentFrom = new Date('2018-02-10');
+  //     currentTo = new Date('2018-02-11');
+  //     updatedFrom = new Date(currentFrom);
+  //     updatedFrom.setMonth(currentFrom.getMonth() - 1);
 
-      testState.reportOptions = {
-        from: currentFrom,
-        to: currentTo,
-        relativeRange: 'custom'
-      };
+  //     testState.reportOptions = {
+  //       from: currentFrom,
+  //       to: currentTo,
+  //       relativeRange: 'custom'
+  //     };
 
-      // prevent "all caches empty" scenario by default
-      testState.metrics.campaigns.push('campaign-1');
-    });
+  //     // prevent "all caches empty" scenario by default
+  //     testState.metrics.campaigns.push('campaign-1');
+  //   });
 
-    it('should not refresh if from and to are not changed', async() => {
-      isSameDate.mockImplementation(() => true);
-      reportOptions.maybeRefreshTypeaheadCache({
-        from: currentFrom,
-        to: currentTo
-      })(dispatchMock, getStateMock);
+  //   it('should not refresh if from and to are not changed', async() => {
+  //     isSameDate.mockImplementation(() => true);
+  //     reportOptions.maybeRefreshTypeaheadCache({
+  //       from: currentFrom,
+  //       to: currentTo
+  //     })(dispatchMock, getStateMock);
 
-      expect(dispatchMock).not.toHaveBeenCalled();
-    });
+  //     expect(dispatchMock).not.toHaveBeenCalled();
+  //   });
 
-    it('should refresh if dates change and relative range is "custom"', () => {
-      reportOptions.maybeRefreshTypeaheadCache({
-        from: updatedFrom,
-        to: currentTo,
-        relativeRange: 'custom'
-      })(dispatchMock, getStateMock);
+  //   it('should refresh if dates change and relative range is "custom"', () => {
+  //     reportOptions.maybeRefreshTypeaheadCache({
+  //       from: updatedFrom,
+  //       to: currentTo,
+  //       relativeRange: 'custom'
+  //     })(dispatchMock, getStateMock);
 
-      expect(dispatchMock).toHaveBeenCalledTimes(1);
-    });
+  //     expect(dispatchMock).toHaveBeenCalledTimes(1);
+  //   });
 
-    it('should refresh if dates change and relative range is also changing', () => {
-      testState.reportOptions.relativeRange = 'day';
-      reportOptions.maybeRefreshTypeaheadCache({
-        from: updatedFrom,
-        to: currentTo,
-        relativeRange: '7days'
-      })(dispatchMock, getStateMock);
+  //   it('should refresh if dates change and relative range is also changing', () => {
+  //     testState.reportOptions.relativeRange = 'day';
+  //     reportOptions.maybeRefreshTypeaheadCache({
+  //       from: updatedFrom,
+  //       to: currentTo,
+  //       relativeRange: '7days'
+  //     })(dispatchMock, getStateMock);
 
-      expect(dispatchMock).toHaveBeenCalledTimes(1);
-    });
+  //     expect(dispatchMock).toHaveBeenCalledTimes(1);
+  //   });
 
-    it('should not refresh if dates change but relative range stays the same and is not "custom"', () => {
-      testState.reportOptions.relativeRange = 'day';
-      reportOptions.maybeRefreshTypeaheadCache({
-        from: updatedFrom,
-        to: currentTo,
-        relativeRange: 'day'
-      })(dispatchMock, getStateMock);
+  //   it('should not refresh if dates change but relative range stays the same and is not "custom"', () => {
+  //     testState.reportOptions.relativeRange = 'day';
+  //     reportOptions.maybeRefreshTypeaheadCache({
+  //       from: updatedFrom,
+  //       to: currentTo,
+  //       relativeRange: 'day'
+  //     })(dispatchMock, getStateMock);
 
-      expect(dispatchMock).not.toHaveBeenCalled();
-    });
+  //     expect(dispatchMock).not.toHaveBeenCalled();
+  //   });
 
-  });
+  // });
 
   it('should add multiple filters', () => {
     const filters = [];
@@ -186,7 +212,7 @@ describe('Action Creator: Report Filters', () => {
           to: 'relative'
         })
       });
-      expect(dispatchMock).toHaveBeenCalledTimes(2);
+      expect(dispatchMock).toHaveBeenCalledTimes(1);
     });
 
     it('should calculate a non-custom relative range merged from the redux store', () => {
@@ -197,7 +223,7 @@ describe('Action Creator: Report Filters', () => {
         from: 'relative',
         to: 'relative'
       }));
-      expect(dispatchMock).toHaveBeenCalledTimes(2);
+      expect(dispatchMock).toHaveBeenCalledTimes(1);
     });
 
     it('should NOT calculate a "custom" relative range', () => {
@@ -207,21 +233,7 @@ describe('Action Creator: Report Filters', () => {
         from: updatedFrom,
         to: currentTo
       }));
-      expect(dispatchMock).toHaveBeenCalledTimes(2);
-    });
-
-    it('should do nothing if dates did not change at all', () => {
-      isSameDate.mockImplementation(() => true);
-      const action = reportOptions.refreshReportOptions({ from: currentFrom, to: currentTo })(dispatchMock, getStateMock);
-      expect(action).toBeUndefined();
-      expect(getRelativeDates).not.toHaveBeenCalled();
-      expect(dispatchMock).not.toHaveBeenCalled();
-    });
-
-    it('should refresh if dates did not change at all but "force" is present', () => {
-      isSameDate.mockImplementation(() => true);
-      reportOptions.refreshReportOptions({ from: currentFrom, to: currentTo, force: true })(dispatchMock, getStateMock);
-      expect(dispatchMock).toHaveBeenCalledTimes(2);
+      expect(dispatchMock).toHaveBeenCalledTimes(1);
     });
 
   });

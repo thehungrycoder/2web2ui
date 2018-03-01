@@ -1,9 +1,6 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import moment from 'moment';
-import * as dateHelpers from 'src/helpers/date';
 import { FilterForm } from '../FilterForm';
-jest.mock('src/helpers/date');
 
 let props;
 let wrapper;
@@ -12,11 +9,12 @@ let instance;
 beforeEach(() => {
   props = {
     onSubmit: jest.fn(),
+    refreshReportOptions: jest.fn(),
+    reportOptions: {},
     list: null
   };
   wrapper = shallow(<FilterForm {...props} />);
   instance = wrapper.instance();
-  dateHelpers.getRelativeDates = jest.fn();
 });
 
 describe('FilterForm', () => {
@@ -24,82 +22,25 @@ describe('FilterForm', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  describe('componentDidMount', () => {
-    it('does not reload suppression if list is null', () => {
-      expect(props.onSubmit).toHaveBeenCalledTimes(0);
-    });
-
-    it('reloads suppressions if list is empty', () => {
-      expect(props.onSubmit).toHaveBeenCalledTimes(0);
-      wrapper.setProps({ list: []});
-      instance.componentDidMount();
-      expect(props.onSubmit).toHaveBeenCalledTimes(1);
-    });
-
-    it('does not reload suppression if list is non-empty', () => {
-      wrapper.setProps({ list: [{ recipient: 'foo@bar.com' }]});
-      instance.componentDidMount();
-      expect(props.onSubmit).toHaveBeenCalledTimes(0);
-    });
+  it('should refresh report options on mount', () => {
+    expect(props.refreshReportOptions).toHaveBeenCalledTimes(1);
   });
 
   describe('componentDidUpdate', () => {
     it('does not reload suppression if new state is same as current', () => {
-      const state = wrapper.state();
-      instance.componentDidUpdate(null, state);
+      wrapper.setProps({ newProp: true });
       expect(props.onSubmit).toHaveBeenCalledTimes(0);
     });
 
     it('reloads suppressions if new state is different', () => {
-      const state = wrapper.state();
-      instance.componentDidUpdate(null, { ...state, sources: ['foo', 'bar' ]});
-      expect(wrapper.state()).toEqual(state);
-      expect(props.onSubmit).toHaveBeenCalledTimes(1);
-    });
-  });
-
-  describe('refresh', () => {
-    it('calls the onSubmit function with correct args', () => {
-      const newState = { types: ['txn', 'non_txn'], sources: ['admin', 'policy']};
-      wrapper.setState(newState);
-      props.onSubmit.mockClear(); //get rid of usage by lifecycle method after setState
-
-      instance.refresh();
-      expect(props.onSubmit).toHaveBeenCalledWith(newState);
-      expect(props.onSubmit).toHaveBeenCalledTimes(1);
-    });
-  });
-
-  describe('handleDateSelection', () => {
-    let from;
-    let to;
-    beforeEach(() => {
-      from = moment().toDate();
-      to = moment().add(7, 'days').toDate();
-      dateHelpers.getRelativeDates.mockReturnValue({ from, to });
+      wrapper.setState({ newState: true });
+      expect(props.onSubmit).toHaveBeenCalledWith({ ...wrapper.state(), reportOptions: props.reportOptions });
     });
 
-    it('sets state and refreshes correctly', () => {
-      instance.handleDateSelection({ from, to });
-      const state = wrapper.state();
-      expect(state).toMatchObject({
-        reportOptions: {
-          from,
-          to
-        }
-      });
-    });
-
-    it('converts relative date to actual from/to', () => {
-      instance.handleDateSelection({ relativeRange: '7day' });
-      const state = wrapper.state();
-      expect(state).toMatchObject({
-        reportOptions: {
-          from,
-          to,
-          relativeRange: '7day'
-        }
-      });
+    it('reloads suppressions if reportOptions reference changes', () => {
+      const reportOptions = { is: 'new!' };
+      wrapper.setProps({ reportOptions });
+      expect(props.onSubmit).toHaveBeenCalledWith({ ...wrapper.state(), reportOptions });
     });
   });
 

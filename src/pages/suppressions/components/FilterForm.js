@@ -51,6 +51,17 @@ export class FilterForm extends Component {
     sources: []
   };
 
+  componentDidMount() {
+    this.props.refreshReportOptions({ force: true });
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { reportOptions } = this.props;
+    if (this.state !== prevState || reportOptions !== prevProps.reportOptions) {
+      this.props.onSubmit({ ...this.state, reportOptions });
+    }
+  }
+
   handleTypesSelection = (selected) => {
     const values = _.compact(_.map(selected, (val, key) => val ? key : undefined));
     const { types } = this.state;
@@ -67,17 +78,6 @@ export class FilterForm extends Component {
       return; //same value, no need to do anything
     }
     this.setState({ sources: values });
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    const { reportOptions } = this.props;
-    if (this.state !== prevState || reportOptions !== prevProps.reportOptions) {
-      this.props.onSubmit({ ...this.state, reportOptions });
-    }
-  }
-
-  componentDidMount() {
-    this.props.refreshReportOptions({ force: true });
   }
 
   render() {
