@@ -44,7 +44,7 @@ describe('Component: Report Options', () => {
   it('should mount and render correctly', () => {
     expect(reportHelpers.parseSearch).toHaveBeenCalledWith(testProps.location.search);
     expect(testProps.addFilters).toHaveBeenCalledWith(filters);
-    expect(testProps.refreshReportOptions).toHaveBeenCalledWith({ ...options, force: true });
+    expect(testProps.refreshReportOptions).toHaveBeenCalledWith(options);
     expect(testProps.initTypeaheadCache).toHaveBeenCalledTimes(1);
     expect(wrapper).toMatchSnapshot();
   });

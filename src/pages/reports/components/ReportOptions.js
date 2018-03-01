@@ -21,29 +21,28 @@ export class ReportOptions extends Component {
   }
 
   componentDidMount() {
-    // initial report load
     const { options, filters = []} = parseSearch(this.props.location.search);
     this.props.addFilters(filters);
-    this.props.refreshReportOptions({ ...options, force: true });
+    this.props.refreshReportOptions(options);
 
     // initial typeahead cache load
     this.props.initTypeaheadCache();
   }
 
-  componentWillReceiveProps(nextProps) {
-    const current = this.props.reportOptions;
-    const next = nextProps.reportOptions;
-    const datesAreDifferent = !isSameDate(current.from, next.from) || !isSameDate(current.to, next.to);
-    const rangesAreDifferent = current.relativeRange !== next.relativeRange;
-
-    if (rangesAreDifferent || (next.relativeRange === 'custom' && datesAreDifferent)) {
-      this.props.refreshTypeaheadCache(next);
-    }
-  }
-
   componentDidUpdate(prevProps) {
     if (prevProps.reportOptions !== this.props.reportOptions) {
       this.updateLink();
+      this.maybeRefreshFilterTypeaheadCache(prevProps.reportOptions);
+    }
+  }
+
+  maybeRefreshFilterTypeaheadCache(prev) {
+    const current = this.props.reportOptions;
+    const datesAreDifferent = !isSameDate(prev.from, current.from) || !isSameDate(prev.to, current.to);
+    const rangesAreDifferent = prev.relativeRange !== current.relativeRange;
+
+    if (rangesAreDifferent || (current.relativeRange === 'custom' && datesAreDifferent)) {
+      this.props.refreshTypeaheadCache(current);
     }
   }
 

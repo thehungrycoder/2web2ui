@@ -52,7 +52,7 @@ export class FilterForm extends Component {
   };
 
   componentDidMount() {
-    this.props.refreshReportOptions({ force: true });
+    this.props.refreshReportOptions();
   }
 
   componentDidUpdate(prevProps, prevState) {
