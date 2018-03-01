@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
-
 import { reduxForm } from 'redux-form';
 import { Grid } from '@sparkpost/matchbox';
 import { FilterDropdown } from 'src/components';
 import DateFilter from 'src/pages/reports/components/DateFilter';
-import { getRelativeDates } from 'src/helpers/date';
+import { refreshReportOptions } from 'src/actions/reportOptions';
 import styles from './FilterForm.module.scss';
 
 const types = [
@@ -46,34 +45,21 @@ const sources = [
 ];
 
 export class FilterForm extends Component {
-  constructor(props) {
-    super(props);
 
-    const { reportOptions } = props;
-    this.state = {
-      reportOptions,
-      types: [],
-      sources: []
-    };
+  state = {
+    types: [],
+    sources: []
+  };
+
+  componentDidMount() {
+    this.props.refreshReportOptions();
   }
 
-  refresh() {
-    this.props.onSubmit(this.state);
-  }
-
-  handleDateSelection = (options) => {
-    const { relativeRange } = options;
-    if (relativeRange) {
-      Object.assign(options, getRelativeDates(relativeRange));
+  componentDidUpdate(prevProps, prevState) {
+    const { reportOptions } = this.props;
+    if (this.state !== prevState || reportOptions !== prevProps.reportOptions) {
+      this.props.onSubmit({ ...this.state, reportOptions });
     }
-
-    this.setState({
-      reportOptions: {
-        from: options.from,
-        to: options.to,
-        relativeRange: relativeRange
-      }
-    });
   }
 
   handleTypesSelection = (selected) => {
@@ -94,26 +80,12 @@ export class FilterForm extends Component {
     this.setState({ sources: values });
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (!_.isEqual(this.state, prevState)) {
-      this.refresh();
-    }
-  }
-
-  componentDidMount() {
-    const { list } = this.props;
-    // Note: This will cause API request each time this section is visited but that's ok
-    if (list && !list.length) {
-      this.refresh();
-    }
-  }
-
   render() {
     return (
       <Grid>
         <Grid.Column xs={12} md={6}>
           <div>
-            <DateFilter refresh={this.handleDateSelection} />
+            <DateFilter />
           </div>
         </Grid.Column>
         <Grid.Column xs={6} md={3}>
@@ -146,4 +118,4 @@ const mapStateToProps = (state) => ({
   reportOptions: state.reportOptions,
   list: state.suppressions.list
 });
-export default connect(mapStateToProps)(reduxForm(formOptions)(FilterForm));
+export default connect(mapStateToProps, { refreshReportOptions })(reduxForm(formOptions)(FilterForm));

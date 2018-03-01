@@ -1,16 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
 import { snakeToFriendly } from 'src/helpers/string';
 import { Page, Banner, Panel } from '@sparkpost/matchbox';
 import { PanelLoading, TableCollection, ApiErrorBanner, Empty } from 'src/components';
 import DisplayDate from './components/DisplayDate';
 import BasicFilter from './components/BasicFilter';
 import ViewDetailsButton from './components/ViewDetailsButton';
-
 import { getMessageEvents } from 'src/actions/messageEvents';
 import { selectMessageEvents } from 'src/selectors/messageEvents';
-
 const errorMsg = 'Sorry, we seem to have had some trouble loading your message events.';
 const emptyMesasage = 'There are no message events for your current query';
 const maxResults = 1000;
@@ -27,15 +24,6 @@ const columns = [
 
 export class MessageEventsPage extends Component {
 
-  refresh = (options) => {
-    this.props.getMessageEvents(options);
-  }
-
-  componentDidMount() {
-    const { reportOptions } = this.props;
-    this.refresh({ reportOptions });
-  }
-
   getRowData = (rowData) => {
     const { timestamp, formattedDate, type, friendly_from, rcpt_to } = rowData;
     return [
@@ -48,6 +36,8 @@ export class MessageEventsPage extends Component {
   }
 
   renderError() {
+    // TODO: this reload will load message events with no date or other filters, but error state
+    // might be triggered by a certain filter combination so reload should probably use those
     const { error, getMessageEvents } = this.props;
     return (
       <ApiErrorBanner
@@ -93,7 +83,7 @@ export class MessageEventsPage extends Component {
     return (
       <Page title='Message Events'>
         <Panel sectioned>
-          <BasicFilter onSubmit={this.refresh} />
+          <BasicFilter />
         </Panel>
         { error ? this.renderError() : this.renderCollection() }
       </Page>
@@ -106,7 +96,6 @@ const mapStateToProps = (state) => {
   const events = selectMessageEvents(state);
 
   return {
-    reportOptions: state.reportOptions,
     events: events,
     loading: state.messageEvents.loading,
     error: state.messageEvents.error,

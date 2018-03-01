@@ -1,27 +1,35 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { reduxForm, Field, change } from 'redux-form';
+import { reduxForm, Field } from 'redux-form';
 import _ from 'lodash';
-
+import { getMessageEvents } from 'src/actions/messageEvents';
+import { refreshReportOptions } from 'src/actions/reportOptions';
 import { Grid } from '@sparkpost/matchbox';
 import DateFilter from 'src/pages/reports/components/DateFilter';
 import { TextFieldWrapper } from 'src/components';
-import { getRelativeDates } from 'src/helpers/date';
 import { email as emailValidator } from 'src/helpers/validation';
 import { onEnter } from 'src/helpers/keyEvents';
-export class BasicFilter extends Component {
-  constructor(props) {
-    super(props);
 
-    const { reportOptions } = props;
-    this.state = {
-      reportOptions,
-      recipients: ''
-    };
+export class BasicFilter extends Component {
+
+  // TODO: move this to redux
+  state = {
+    recipients: ''
+  };
+
+  componentDidMount() {
+    this.props.refreshReportOptions();
+  }
+
+  componentDidUpdate(prevProps) {
+    const { reportOptions } = this.props;
+    if (prevProps.reportOptions !== reportOptions) {
+      this.refresh();
+    }
   }
 
   refresh = () => {
-    this.props.onSubmit(this.state);
+    this.props.getMessageEvents({ ...this.state, reportOptions: this.props.reportOptions });
   }
 
   parseAddresses = (value) => {
@@ -55,26 +63,12 @@ export class BasicFilter extends Component {
       value = addresses.join(',');
     }
 
+    // TODO: can this ever be true? Isn't it checking array references?
     if (this.state.recipients === value) { //nothing changed, don't trigger search
       return;
     }
 
     this.setState({ recipients: value }, this.refresh);
-  }
-
-  handleDateSelection = (options) => {
-    const { relativeRange } = options;
-    if (relativeRange) {
-      Object.assign(options, getRelativeDates(relativeRange));
-    }
-
-    this.setState({
-      reportOptions: {
-        from: options.from,
-        to: options.to,
-        relativeRange: relativeRange
-      }
-    }, this.refresh);
   }
 
   emailValidator = (value) => {
@@ -89,7 +83,7 @@ export class BasicFilter extends Component {
     return (
       <Grid>
         <Grid.Column xs={12} md={6}>
-          <DateFilter refresh={this.handleDateSelection} />
+          <DateFilter />
         </Grid.Column>
         <Grid.Column xs={12} md={6}>
           <Field
@@ -109,9 +103,11 @@ export class BasicFilter extends Component {
 
 const formName = 'msgEventsBasicFilter';
 const formOptions = { form: formName };
-const mapStateToProps = ({ reportOptions }) => ({
-  reportOptions,
-  formName
-});
 
-export default connect(mapStateToProps, { change })(reduxForm(formOptions)(BasicFilter));
+const mapStateToProps = ({ reportOptions }) => ({ reportOptions });
+const mapDispatchToProps = { getMessageEvents, refreshReportOptions };
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(reduxForm(formOptions)(BasicFilter));

@@ -4,7 +4,6 @@ import _ from 'lodash';
 import csvFileParseRequest, { hasData, hasField } from 'src/actions/helpers/csvFileParseRequest';
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 import setSubaccountHeader from 'src/actions/helpers/setSubaccountHeader';
-import { refreshReportOptions } from 'src/actions/reportOptions';
 import { showAlert } from './globalAlert';
 
 const { apiDateFormat } = config;
@@ -77,28 +76,24 @@ export function searchSuppressions(options) {
     params.sources = sources.join(',');
   }
 
-  return (dispatch, getState) => {
-    dispatch(refreshReportOptions(reportOptions));
-
-    return dispatch(
-      sparkpostApiRequest({
-        type: 'GET_SUPPRESSIONS',
-        meta: {
-          method: 'GET',
-          url: '/suppression-list',
-          params
-        }
-      }))
-      .catch((err) => {
-        dispatch(
-          showAlert({
-            type: 'error',
-            message: 'Error while searching suppressions list',
-            details: err.message
-          })
-        );
-      });
-  };
+  return (dispatch) => dispatch(
+    sparkpostApiRequest({
+      type: 'GET_SUPPRESSIONS',
+      meta: {
+        method: 'GET',
+        url: '/suppression-list',
+        params
+      }
+    }))
+    .catch((err) => {
+      dispatch(
+        showAlert({
+          type: 'error',
+          message: 'Error while searching suppressions list',
+          details: err.message
+        })
+      );
+    });
 }
 
 export function deleteSuppression(suppression) {

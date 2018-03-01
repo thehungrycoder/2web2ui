@@ -8,7 +8,7 @@ import {
 import { listTemplates } from './templates';
 import { list as listSubaccounts } from './subaccounts';
 import { list as listSendingDomains } from './sendingDomains';
-import { getRelativeDates, isSameDate } from 'src/helpers/date';
+import { getRelativeDates } from 'src/helpers/date';
 import { getQueryFromOptions } from 'src/helpers/metrics';
 
 // array of all lists that need to be re-filtered when time changes
@@ -29,7 +29,10 @@ const metricLists = [
  */
 export function initTypeaheadCache() {
   return (dispatch, getState) => {
-    const { templates, subaccounts, sendingDomains } = getState();
+    const { templates, subaccounts, sendingDomains, metrics, reportOptions } = getState();
+    const allCachesEmpty = ['domains', 'campaigns', 'sendingIps', 'ipPools'].every((cache) => (
+      metrics[cache].length === 0
+    ));
     const requests = [];
 
     if (templates.list.length === 0) {
@@ -44,6 +47,10 @@ export function initTypeaheadCache() {
       requests.push(dispatch(listSendingDomains()));
     }
 
+    if (allCachesEmpty) {
+      requests.push(dispatch(refreshTypeaheadCache(reportOptions)));
+    }
+
     return Promise.all(requests);
   };
 }
@@ -53,33 +60,6 @@ export function refreshTypeaheadCache(options) {
   return (dispatch) => {
     const requests = metricLists.map((list) => dispatch(list(params)));
     return Promise.all(requests);
-  };
-}
-
-export function maybeRefreshTypeaheadCache(update) {
-  return (dispatch, getState) => {
-    const { reportOptions, metrics } = getState();
-    const allCachesEmpty = ['domains', 'campaigns', 'sendingIps', 'ipPools'].every((cache) => (
-      metrics[cache].length === 0
-    ));
-
-    if (allCachesEmpty) {
-      dispatch(refreshTypeaheadCache(update));
-      return;
-    }
-
-    // do nothing if there is no change in from or to
-    if (
-      isSameDate(reportOptions.from, update.from) &&
-      isSameDate(reportOptions.to, update.to)
-    ) {
-      return;
-    }
-
-    // refresh if range is changing or if the range is staying the same but is "custom"
-    if (update.relativeRange !== reportOptions.relativeRange || update.relativeRange === 'custom') {
-      dispatch(refreshTypeaheadCache(update));
-    }
   };
 }
 
@@ -103,9 +83,6 @@ export function removeFilter(payload) {
  * Calculates relative ranges if a non-custom relativeRange value is present,
  * which will override passed in from/to dates
  *
- * Will also conditionally refresh the typeahead cache if the
- * from and to values changed
- *
  * @param {Object} update
  * @param {Date} update.from
  * @param {Date} update.to
@@ -120,17 +97,6 @@ export function refreshReportOptions(update) {
     if (update.relativeRange && update.relativeRange !== 'custom') {
       update = { ...update, ...getRelativeDates(update.relativeRange) };
     }
-
-    // do nothing if there is no change in from or to
-    if (
-      !update.force &&
-      isSameDate(reportOptions.from, update.from) &&
-      isSameDate(reportOptions.to, update.to)
-    ) {
-      return;
-    }
-
-    dispatch(maybeRefreshTypeaheadCache(update));
 
     return dispatch({
       type: 'REFRESH_REPORT_OPTIONS',

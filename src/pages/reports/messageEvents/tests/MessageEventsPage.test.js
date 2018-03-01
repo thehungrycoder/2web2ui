@@ -11,6 +11,7 @@ describe('Page: Message Events tests', () => {
     error: null,
     loading: false,
     getMessageEvents: jest.fn(() => []),
+    refreshReportOptions: jest.fn(),
     events: [
       {
         formattedDate: 'so-formatted',

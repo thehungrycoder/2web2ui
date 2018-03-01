@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import qs from 'query-string';
-import { addFilters, removeFilter, refreshReportOptions, initTypeaheadCache } from 'src/actions/reportOptions';
+import { addFilters, removeFilter, refreshReportOptions, refreshTypeaheadCache, initTypeaheadCache } from 'src/actions/reportOptions';
 import ShareModal from './ShareModal';
 import { parseSearch, getReportSearchOptions } from 'src/helpers/reports';
 import { Grid, Button, Panel, Tag } from '@sparkpost/matchbox';
@@ -10,6 +10,7 @@ import Typeahead from './Typeahead';
 import DateFilter from './DateFilter';
 import typeaheadCacheSelector from 'src/selectors/reportFilterTypeaheadCache';
 import { showAlert } from 'src/actions/globalAlert';
+import { isSameDate } from 'src/helpers/date';
 import styles from './ReportOptions.module.scss';
 
 // TODO: separate the share modal / link update logic out of this component
@@ -20,21 +21,32 @@ export class ReportOptions extends Component {
   }
 
   componentDidMount() {
-    // initial report load
     const { options, filters = []} = parseSearch(this.props.location.search);
     this.props.addFilters(filters);
-    this.props.refreshReportOptions({ ...options, force: true });
+    this.props.refreshReportOptions(options);
 
     // initial typeahead cache load
     this.props.initTypeaheadCache();
   }
 
-  componentDidUpdate(previousProps) {
-    if (previousProps.reportOptions !== this.props.reportOptions) {
+  componentDidUpdate(prevProps) {
+    if (prevProps.reportOptions !== this.props.reportOptions) {
       this.updateLink();
+      this.maybeRefreshFilterTypeaheadCache(prevProps.reportOptions);
     }
   }
 
+  maybeRefreshFilterTypeaheadCache(prev) {
+    const current = this.props.reportOptions;
+    const datesAreDifferent = !isSameDate(prev.from, current.from) || !isSameDate(prev.to, current.to);
+    const rangesAreDifferent = prev.relativeRange !== current.relativeRange;
+
+    if (rangesAreDifferent || (current.relativeRange === 'custom' && datesAreDifferent)) {
+      this.props.refreshTypeaheadCache(current);
+    }
+  }
+
+  // TODO move this and the share modal to their own component
   updateLink = () => {
     const { reportOptions, history, location, extraLinkParams = []} = this.props;
     const query = getReportSearchOptions(reportOptions, extraLinkParams);
@@ -88,7 +100,7 @@ export class ReportOptions extends Component {
               />
             </Grid.Column>
             <Grid.Column xs={4} md={2} xl={1}>
-              <Button disabled={reportLoading} fullWidth onClick={this.toggleShareModal}>Share</Button>
+              <Button id='shareModalButton' disabled={reportLoading} fullWidth onClick={this.toggleShareModal}>Share</Button>
             </Grid.Column>
           </Grid>
         </Panel.Section>
@@ -111,6 +123,7 @@ const mapDispatchToProps = {
   removeFilter,
   refreshReportOptions,
   showAlert,
-  initTypeaheadCache
+  initTypeaheadCache,
+  refreshTypeaheadCache
 };
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ReportOptions));
