@@ -53,8 +53,10 @@ describe('Helper: SparkPost API Request', () => {
     let apiErr;
 
     beforeEach(() => {
-      apiErr = new SparkpostApiError(new Error('API call failed'));
-      apiErr.response = { status: 400, data: { results }};
+      const error = new Error('API call failed');
+      error.response = { status: 400, data: { results }};
+      apiErr = new SparkpostApiError(error);
+
       axiosMocks.sparkpost.mockImplementation(() => Promise.reject(apiErr));
       refreshTokensUsed.clear();
     });
@@ -63,7 +65,7 @@ describe('Helper: SparkPost API Request', () => {
       try {
         await mockStore.dispatch(sparkpostApiRequest(action));
       } catch (err) {
-        expect(err).toBe(apiErr);
+        expect(err).toEqual(apiErr);
         expect(mockStore.getActions()).toMatchSnapshot();
       }
     });
