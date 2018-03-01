@@ -72,8 +72,8 @@ export class SubaccountTypeahead extends Component {
   };
 
   componentDidMount() {
-    const { hasSubaccounts, subaccounts } = this.props;
-    if (hasSubaccounts && subaccounts.length === 0) {
+    const { hasSubaccounts } = this.props;
+    if (hasSubaccounts) {
       this.props.getSubaccountsList();
     }
   }
