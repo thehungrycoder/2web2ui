@@ -6,9 +6,7 @@ exports[`BasicFilter renders correctly 1`] = `
     md={6}
     xs={12}
   >
-    <Connect(DateFilter)
-      refresh={[Function]}
-    />
+    <Connect(DateFilter) />
   </Grid.Column>
   <Grid.Column
     md={6}

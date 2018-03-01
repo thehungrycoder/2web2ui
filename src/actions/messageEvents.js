@@ -3,7 +3,6 @@ import config from 'src/config';
 import _ from 'lodash';
 
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
-import { refreshReportOptions } from 'src/actions/reportOptions';
 import { showAlert } from './globalAlert';
 
 const { apiDateFormat, messageEvents } = config;
@@ -26,28 +25,24 @@ export function getMessageEvents(options = {}) {
     params.recipients = recipients;
   }
 
-  return (dispatch, getState) => {
-    dispatch(refreshReportOptions(reportOptions));
-
-    return dispatch(
-      sparkpostApiRequest({
-        type: 'GET_MESSAGE_EVENTS',
-        meta: {
-          method: 'GET',
-          url: '/message-events',
-          params
-        }
-      }))
-      .catch((err) => {
-        dispatch(
-          showAlert({
-            type: 'error',
-            message: 'Error while loading message events',
-            details: err.message
-          })
-        );
-      });
-  };
+  return (dispatch) => dispatch(
+    sparkpostApiRequest({
+      type: 'GET_MESSAGE_EVENTS',
+      meta: {
+        method: 'GET',
+        url: '/message-events',
+        params
+      }
+    }))
+    .catch((err) => {
+      dispatch(
+        showAlert({
+          type: 'error',
+          message: 'Error while loading message events',
+          details: err.message
+        })
+      );
+    });
 }
 
 export function getMessageHistory({ messageId, ...rest }) {

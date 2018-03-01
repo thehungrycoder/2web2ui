@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-
 import { Page, Tabs , Panel } from '@sparkpost/matchbox';
-
 import { searchRecipient, searchSuppressions } from 'src/actions/suppressions';
 import { list as listSubaccounts } from 'src/actions/subaccounts';
-
 import { hasSubaccounts } from 'src/selectors/subaccounts';
-
 import FilterForm from './components/FilterForm';
 import EmailSearch from './components/EmailSearch';
 import Results from './components/Results';

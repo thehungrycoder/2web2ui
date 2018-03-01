@@ -28,9 +28,7 @@ exports[`Page: Message Events tests renders correctly with too many (1000) recor
   <Panel
     sectioned={true}
   >
-    <Connect(ReduxForm)
-      onSubmit={[Function]}
-    />
+    <Connect(ReduxForm) />
   </Panel>
   <div>
     <Banner
@@ -1082,9 +1080,7 @@ exports[`Page: Message Events tests should only render loading component while l
   <Panel
     sectioned={true}
   >
-    <Connect(ReduxForm)
-      onSubmit={[Function]}
-    />
+    <Connect(ReduxForm) />
   </Panel>
   <PanelLoading
     minHeight="400px"
@@ -1100,24 +1096,12 @@ exports[`Page: Message Events tests should render error when action fails 1`] = 
   <Panel
     sectioned={true}
   >
-    <Connect(ReduxForm)
-      onSubmit={[Function]}
-    />
+    <Connect(ReduxForm) />
   </Panel>
   <ApiErrorBanner
     errorDetails="You done f'ed up now"
     message="Sorry, we seem to have had some trouble loading your message events."
-    reload={
-      [MockFunction] {
-        "calls": Array [
-          Array [
-            Object {
-              "reportOptions": undefined,
-            },
-          ],
-        ],
-      }
-    }
+    reload={[MockFunction]}
   />
 </Page>
 `;
@@ -1130,9 +1114,7 @@ exports[`Page: Message Events tests should render page correctly 1`] = `
   <Panel
     sectioned={true}
   >
-    <Connect(ReduxForm)
-      onSubmit={[Function]}
-    />
+    <Connect(ReduxForm) />
   </Panel>
   <div>
     <TableCollection
@@ -1190,9 +1172,7 @@ exports[`Page: Message Events tests should render the empty message when 0 resul
   <Panel
     sectioned={true}
   >
-    <Connect(ReduxForm)
-      onSubmit={[Function]}
-    />
+    <Connect(ReduxForm) />
   </Panel>
   <Empty
     message="There are no message events for your current query"

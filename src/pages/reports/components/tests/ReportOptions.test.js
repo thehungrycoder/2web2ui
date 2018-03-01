@@ -4,7 +4,9 @@ import { ReportOptions } from '../ReportOptions';
 import { Tag } from '@sparkpost/matchbox';
 import Typeahead from '../Typeahead';
 import * as reportHelpers from 'src/helpers/reports';
+import { isSameDate } from 'src/helpers/date';
 
+jest.mock('src/helpers/date');
 jest.mock('src/helpers/reports');
 
 describe('Component: Report Options', () => {
@@ -36,7 +38,8 @@ describe('Component: Report Options', () => {
         replace: jest.fn()
       },
       initTypeaheadCache: jest.fn(),
-      refreshReportOptions: jest.fn()
+      refreshReportOptions: jest.fn(),
+      refreshTypeaheadCache: jest.fn()
     };
     wrapper = shallow(<ReportOptions {...testProps} />);
   });
@@ -44,8 +47,13 @@ describe('Component: Report Options', () => {
   it('should mount and render correctly', () => {
     expect(reportHelpers.parseSearch).toHaveBeenCalledWith(testProps.location.search);
     expect(testProps.addFilters).toHaveBeenCalledWith(filters);
-    expect(testProps.refreshReportOptions).toHaveBeenCalledWith({ ...options, force: true });
+    expect(testProps.refreshReportOptions).toHaveBeenCalledWith(options);
     expect(testProps.initTypeaheadCache).toHaveBeenCalledTimes(1);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render with share modal on', () => {
+    wrapper.find('#shareModalButton').simulate('click');
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -94,6 +102,76 @@ describe('Component: Report Options', () => {
       search: 'abc=123'
     });
     expect(wrapper.state('query')).toEqual(testQuery);
+  });
+
+  describe('maybeRefreshFilterTypeaheadCache', () => {
+
+    beforeEach(() => {
+      testProps.reportOptions.from = 'from';
+      testProps.reportOptions.to = 'to';
+      testProps.reportOptions.relativeRange = 'custom';
+    });
+
+    it('should not refresh if relative range does not change', () => {
+      isSameDate.mockImplementation(() => false);
+      testProps.reportOptions.relativeRange = 'day';
+
+      wrapper.setProps({
+        reportOptions: {
+          ...testProps.reportOptions,
+          from: 'changed-from',
+          to: 'changed-to',
+          relativeRange: 'day'
+        }
+      });
+
+      expect(testProps.refreshTypeaheadCache).not.toHaveBeenCalled();
+    });
+
+    it('should not refresh if range is "custom" but dates have not changed', () => {
+      isSameDate.mockImplementation(() => true);
+      testProps.reportOptions.relativeRange = 'custom';
+
+      wrapper.setProps({
+        reportOptions: {
+          ...testProps.reportOptions,
+          from: 'from',
+          to: 'to',
+          relativeRange: 'custom'
+        }
+      });
+
+      expect(testProps.refreshTypeaheadCache).not.toHaveBeenCalled();
+    });
+
+    it('should refresh if the range changes', () => {
+      isSameDate.mockImplementation(() => true);
+      testProps.reportOptions.relativeRange = 'day';
+
+      wrapper.setProps({
+        reportOptions: {
+          ...testProps.reportOptions,
+          relativeRange: '7days'
+        }
+      });
+
+      expect(testProps.refreshTypeaheadCache).toHaveBeenCalledWith(wrapper.instance().props.reportOptions);
+    });
+
+    it('should refresh if custom range dates change', () => {
+      isSameDate.mockImplementation(() => false);
+      testProps.reportOptions.relativeRange = 'custom';
+
+      wrapper.setProps({
+        reportOptions: {
+          ...testProps.reportOptions,
+          relativeRange: 'custom'
+        }
+      });
+
+      expect(testProps.refreshTypeaheadCache).toHaveBeenCalledWith(wrapper.instance().props.reportOptions);
+    });
+
   });
 
 });
