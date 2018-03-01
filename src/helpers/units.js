@@ -114,5 +114,9 @@ export const formatPercent = (value) => {
     formatted = '< 0.01%';
   }
 
+  if (value > 100) {
+    formatted = '> 100%';
+  }
+
   return formatted;
 };
