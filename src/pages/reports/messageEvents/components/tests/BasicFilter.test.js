@@ -2,35 +2,33 @@ import { shallow } from 'enzyme';
 import React from 'react';
 import { BasicFilter } from '../BasicFilter';
 
-let props;
-let wrapper;
-let instance;
-
-beforeEach(() => {
-  props = {
-    getMessageEvents: jest.fn(),
-    reportOptions: {},
-    refreshReportOptions: jest.fn()
-  };
-
-  wrapper = shallow(<BasicFilter {...props} />);
-  instance = wrapper.instance();
-});
-
 describe('BasicFilter', () => {
+
+  let props;
+  let wrapper;
+  let instance;
+
+  beforeEach(() => {
+    props = {
+      getMessageEvents: jest.fn(),
+      reportOptions: {},
+      refreshReportOptions: jest.fn()
+    };
+    wrapper = shallow(<BasicFilter {...props} />);
+    instance = wrapper.instance();
+  });
+
   it('renders correctly', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  describe('refresh', () => {
-    it('refresh calls onSubmit with correct params', () => {
-      props.recipients = 'email@domain.com';
-      instance.refresh();
-      expect(props.getMessageEvents).toBeCalledWith({ recipients: '', reportOptions: props.reportOptions });
-    });
+  it('refreshes on change', () => {
+    wrapper.setProps({ reportOptions: {}});
+    expect(props.getMessageEvents).toHaveBeenCalledTimes(1);
   });
 
   describe('parseAddresses', () => {
+
     it('parse email addresses correctly', () => {
       expect(instance.parseAddresses('email@domain.com, email2@domain.com')).toEqual(['email@domain.com', 'email2@domain.com']);
       expect(instance.parseAddresses('email@domain.com ,email2@domain.com')).toEqual(['email@domain.com', 'email2@domain.com']);

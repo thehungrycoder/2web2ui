@@ -25,7 +25,7 @@ export function getMessageEvents(options = {}) {
     params.recipients = recipients;
   }
 
-  return (dispatch, getState) => dispatch(
+  return (dispatch) => dispatch(
     sparkpostApiRequest({
       type: 'GET_MESSAGE_EVENTS',
       meta: {

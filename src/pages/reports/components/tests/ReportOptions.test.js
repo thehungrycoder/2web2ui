@@ -52,6 +52,11 @@ describe('Component: Report Options', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('should render with share modal on', () => {
+    wrapper.find('#shareModalButton').simulate('click');
+    expect(wrapper).toMatchSnapshot();
+  });
+
   describe('with active filters', () => {
 
     beforeEach(() => {
@@ -166,38 +171,6 @@ describe('Component: Report Options', () => {
 
       expect(testProps.refreshTypeaheadCache).toHaveBeenCalledWith(wrapper.instance().props.reportOptions);
     });
-
-    // it('should refresh if dates change and relative range is "custom"', () => {
-    //   reportOptions.maybeRefreshTypeaheadCache({
-    //     from: updatedFrom,
-    //     to: currentTo,
-    //     relativeRange: 'custom'
-    //   })(dispatchMock, getStateMock);
-
-    //   expect(dispatchMock).toHaveBeenCalledTimes(1);
-    // });
-
-    // it('should refresh if dates change and relative range is also changing', () => {
-    //   testState.reportOptions.relativeRange = 'day';
-    //   reportOptions.maybeRefreshTypeaheadCache({
-    //     from: updatedFrom,
-    //     to: currentTo,
-    //     relativeRange: '7days'
-    //   })(dispatchMock, getStateMock);
-
-    //   expect(dispatchMock).toHaveBeenCalledTimes(1);
-    // });
-
-    // it('should not refresh if dates change but relative range stays the same and is not "custom"', () => {
-    //   testState.reportOptions.relativeRange = 'day';
-    //   reportOptions.maybeRefreshTypeaheadCache({
-    //     from: updatedFrom,
-    //     to: currentTo,
-    //     relativeRange: 'day'
-    //   })(dispatchMock, getStateMock);
-
-    //   expect(dispatchMock).not.toHaveBeenCalled();
-    // });
 
   });
 

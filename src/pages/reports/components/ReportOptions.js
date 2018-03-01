@@ -100,7 +100,7 @@ export class ReportOptions extends Component {
               />
             </Grid.Column>
             <Grid.Column xs={4} md={2} xl={1}>
-              <Button disabled={reportLoading} fullWidth onClick={this.toggleShareModal}>Share</Button>
+              <Button id='shareModalButton' disabled={reportLoading} fullWidth onClick={this.toggleShareModal}>Share</Button>
             </Grid.Column>
           </Grid>
         </Panel.Section>

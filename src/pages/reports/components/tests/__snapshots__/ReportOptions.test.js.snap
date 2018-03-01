@@ -31,6 +31,7 @@ exports[`Component: Report Options should mount and render correctly 1`] = `
       >
         <Button
           fullWidth={true}
+          id="shareModalButton"
           onClick={[Function]}
           size="default"
         >
@@ -42,6 +43,54 @@ exports[`Component: Report Options should mount and render correctly 1`] = `
   <ShareModal
     handleToggle={[Function]}
     open={false}
+    query={Object {}}
+  />
+</Panel>
+`;
+
+exports[`Component: Report Options should render with share modal on 1`] = `
+<Panel>
+  <Panel.Section>
+    <Grid>
+      <Grid.Column
+        md={6}
+        xs={12}
+      >
+        <div>
+          <Connect(DateFilter) />
+        </div>
+      </Grid.Column>
+      <Grid.Column
+        md={4}
+        xl={5}
+        xs={8}
+      >
+        <Typeahead
+          items={Array []}
+          onSelect={[Function]}
+          placeholder="Filter by domain, campaign, etc"
+          selected={Array []}
+        />
+      </Grid.Column>
+      <Grid.Column
+        md={2}
+        xl={1}
+        xs={4}
+      >
+        <Button
+          fullWidth={true}
+          id="shareModalButton"
+          onClick={[Function]}
+          size="default"
+        >
+          Share
+        </Button>
+      </Grid.Column>
+    </Grid>
+  </Panel.Section>
+  <ShareModal
+    handleToggle={[Function]}
+    open={true}
     query={Object {}}
   />
 </Panel>
@@ -93,6 +142,7 @@ exports[`Component: Report Options with active filters should render 1`] = `
       >
         <Button
           fullWidth={true}
+          id="shareModalButton"
           onClick={[Function]}
           size="default"
         >
