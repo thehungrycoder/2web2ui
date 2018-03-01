@@ -15,7 +15,7 @@ export default (state = initialState, { type, payload }) => {
       return { ...state, aggregatesLoading: true };
 
     case 'GET_BOUNCE_REPORT_AGGREGATES_SUCCESS':
-      return { ...state, aggregatesLoading: false, aggregates: payload };
+      return { ...state, aggregatesLoading: false, aggregates: payload[0] };
 
     case 'GET_BOUNCE_REPORT_AGGREGATES_FAIL':
       return { ...state, aggregatesLoading: false };

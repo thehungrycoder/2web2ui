@@ -37,7 +37,7 @@ const LegendItem = ({
       { fill && <span className={styles.Color} style={{ backgroundColor: fill }}/> }
       { breadcrumbMarkup }
       <span className={styles.Name}>{name}{expandMarkup}</span>
-      { count && <span className={styles.Count}>{count.toLocaleString()}</span> }
+      { count !== undefined && <span className={styles.Count}>{count.toLocaleString()}</span> }
     </a>
   );
 };

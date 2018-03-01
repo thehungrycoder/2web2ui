@@ -77,5 +77,6 @@ describe('Formatting helpers', () => {
     it('should put a % on the end', () => expect(formatting.formatPercent(27.4)).toMatch(/%$/));
     it('should round percentages nicely', () => expect(formatting.formatPercent(27.436)).toEqual('27.44%'));
     it('should be nice about small percentages', () => expect(formatting.formatPercent(0.001)).toMatch(/<\s+0.01%$/));
+    it('should be nice about large percentages', () => expect(formatting.formatPercent(101)).toEqual('> 100%'));
   });
 });
