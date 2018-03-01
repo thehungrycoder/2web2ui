@@ -1,5 +1,6 @@
 /* eslint max-lines: ["error", 202] */
 import sparkpostApiRequest, { refreshTokensUsed } from '../sparkpostApiRequest';
+import SparkpostApiError from '../SparkpostApiError';
 import { createMockStore } from 'src/__testHelpers__/mockStore';
 import * as axiosMocks from 'src/helpers/axiosInstances';
 import * as authMock from 'src/actions/auth';
@@ -52,7 +53,7 @@ describe('Helper: SparkPost API Request', () => {
     let apiErr;
 
     beforeEach(() => {
-      apiErr = new Error('API call failed');
+      apiErr = new SparkpostApiError(new Error('API call failed'));
       apiErr.response = { status: 400, data: { results }};
       axiosMocks.sparkpost.mockImplementation(() => Promise.reject(apiErr));
       refreshTokensUsed.clear();
