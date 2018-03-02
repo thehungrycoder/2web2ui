@@ -20,8 +20,8 @@ const FILTER_KEY_MAP = {
 const DELIMITERS = ',;:+~`!@#$%^*()-={}[]"\'<>?./|\\'.split('');
 
 export function getQueryFromOptions({ from, to, metrics, filters = []}) {
-  from = moment(from).utc();
-  to = moment(to).utc();
+  from = moment(from);
+  to = moment(to);
 
   const apiMetricsKeys = getKeysFromMetrics(metrics);
   const delimiter = getDelimiter(filters);
@@ -32,7 +32,9 @@ export function getQueryFromOptions({ from, to, metrics, filters = []}) {
     from: from.format(apiDateFormat),
     to: to.format(apiDateFormat),
     delimiter,
-    ...getFilterSets(filters, delimiter)
+    ...getFilterSets(filters, delimiter),
+    // eslint-disable-next-line new-cap
+    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
   };
 }
 
