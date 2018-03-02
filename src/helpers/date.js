@@ -48,6 +48,28 @@ export function isSameDate(a, b) {
   return (a instanceof Date) && (b instanceof Date) && (a.getTime() === b.getTime());
 }
 
+/**
+ * Use native JS methods to get user's local
+ * timezone, if those methods are present
+ *
+ * Defaults to UTC otherwise
+ */
+export function getLocalTimezone() {
+  // eslint-disable-next-line new-cap
+  if (typeof Intl.DateTimeFormat !== 'function') {
+    return 'UTC';
+  }
+
+  // eslint-disable-next-line new-cap
+  const format = Intl.DateTimeFormat();
+
+  if (typeof format.resolvedOptions !== 'function') {
+    return 'UTC';
+  }
+
+  return format.resolvedOptions().timeZone;
+}
+
 export function getRelativeDates(range) {
   const now = moment.utc();
   const to = now.toDate();
