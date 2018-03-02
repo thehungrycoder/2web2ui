@@ -1,11 +1,10 @@
-/* eslint-disable */
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { sendPasswordResetEmail } from 'src/actions/password';
 import { showAlert } from 'src/actions/globalAlert';
 import { required } from 'src/helpers/validation';
-import { reduxForm, Field, getFormValues } from 'redux-form';
+import { reduxForm, Field } from 'redux-form';
 import { CenteredLogo, TextFieldWrapper } from 'src/components';
 import { Panel, Button, UnstyledLink } from '@sparkpost/matchbox';
 
@@ -63,6 +62,6 @@ export class ForgotPasswordPage extends Component {
   }
 }
 
-const formOptions = { form: 'forgotPassword' }
+const formOptions = { form: 'forgotPassword' };
 const mapStateToProps = ({ password }) => (password);
 export default connect(mapStateToProps, { sendPasswordResetEmail, showAlert })(reduxForm(formOptions)(ForgotPasswordPage));

@@ -6,10 +6,10 @@ describe('Forgot Password Page', () => {
   let wrapper;
 
   const props = {
-    handleSubmit: jest.fn(),
+    handleSubmit: jest.fn((a) => a),
     pristine: true,
     submitting: false,
-    sendPasswordResetEmail: jest.fn(),
+    sendPasswordResetEmail: jest.fn((a) => a),
     history: { push: jest.fn() },
     showAlert: jest.fn(),
     emailSuccess: false,
@@ -36,8 +36,9 @@ describe('Forgot Password Page', () => {
   });
 
   it('should handle submit', () => {
-    wrapper.find('form').simulate('submit');
+    wrapper.find('form').simulate('submit', { user: 'username' });
     expect(props.handleSubmit).toHaveBeenCalledWith(props.sendPasswordResetEmail);
+    expect(props.sendPasswordResetEmail).toHaveBeenCalledWith({ user: 'username' });
   });
 
   it('should handle success', () => {

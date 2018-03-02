@@ -20,6 +20,18 @@ exports[`renders correctly 1`] = `
       ssoEnabled={false}
     />
   </Panel>
+  <Panel.Footer
+    left={false}
+    right={
+      <small>
+        <UnstyledLink
+          to="/forgot-password"
+        >
+          Forgot your password?
+        </UnstyledLink>
+      </small>
+    }
+  />
 </div>
 `;
 
@@ -46,6 +58,18 @@ exports[`renders correctly when there is a login error 1`] = `
       ssoEnabled={false}
     />
   </Panel>
+  <Panel.Footer
+    left={false}
+    right={
+      <small>
+        <UnstyledLink
+          to="/forgot-password"
+        >
+          Forgot your password?
+        </UnstyledLink>
+      </small>
+    }
+  />
 </div>
 `;
 
@@ -68,5 +92,17 @@ exports[`should display tfa form when TFA is enabled 1`] = `
       onSubmit={[Function]}
     />
   </Panel>
+  <Panel.Footer
+    left={false}
+    right={
+      <small>
+        <UnstyledLink
+          to="/forgot-password"
+        >
+          Forgot your password?
+        </UnstyledLink>
+      </small>
+    }
+  />
 </div>
 `;

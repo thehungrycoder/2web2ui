@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { TextFieldWrapper, CheckboxWrapper } from 'src/components';
+import { required } from 'src/helpers/validation';
 
 import { Button } from '@sparkpost/matchbox';
 
@@ -20,6 +21,7 @@ export class LoginForm extends Component {
           label='Email or Username'
           placeholder='leslie.knope@pawnee.indiana.state.gov'
           component={TextFieldWrapper}
+          validate={required}
         />
 
         { !ssoEnabled &&
