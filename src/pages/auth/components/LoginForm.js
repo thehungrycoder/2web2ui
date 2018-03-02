@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import { required } from 'src/helpers/validation';
 import { TextFieldWrapper, CheckboxWrapper } from 'src/components';
 
 import { Button } from '@sparkpost/matchbox';
@@ -14,13 +13,13 @@ export class LoginForm extends Component {
     return (
       <form onSubmit={handleSubmit}>
         <Field
+          inlineErrors
           autoFocus
           name='username'
           id='username'
           label='Email or Username'
           placeholder='leslie.knope@pawnee.indiana.state.gov'
           component={TextFieldWrapper}
-          validate={required}
         />
 
         { !ssoEnabled &&
@@ -67,4 +66,3 @@ const formOptions = {
 };
 
 export default connect(mapStateToProps)(reduxForm(formOptions)(LoginForm));
-

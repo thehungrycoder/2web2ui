@@ -20,7 +20,8 @@ import {
   ipPools,
   PageNotFound,
   DefaultRedirect,
-  JoinPage
+  JoinPage,
+  password
 } from 'src/pages';
 
 import onboarding from 'src/pages/onboarding';
@@ -100,6 +101,16 @@ const routes = [
     public: true,
     component: JoinPage,
     condition: configFlag('featureFlags.has_signup')
+  },
+  {
+    path: '/forgot-password',
+    public: true,
+    component: password.ForgotPasswordPage
+  },
+  {
+    path: '/reset-password/:token',
+    public: true,
+    component: password.ResetPasswordPage
   },
 
   /**

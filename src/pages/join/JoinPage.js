@@ -87,7 +87,10 @@ export class JoinPage extends Component {
             <JoinForm onSubmit={this.registerSubmit} />
           </Panel.Section>
         </Panel>
-        <small>Already have an account? <UnstyledLink to={'/auth'}>Log In</UnstyledLink>.</small>
+        <Panel.Footer
+          left={<small>Already have an account? <UnstyledLink to={'/auth'}>Log In</UnstyledLink>.</small>}
+        />
+
       </div>
     );
   }

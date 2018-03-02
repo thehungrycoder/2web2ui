@@ -20,3 +20,4 @@ export { default as ComingSoonPage } from './comingSoon/ComingSoonPage';
 export { default as PageNotFound } from './pageNotFound/PageNotFound';
 export { default as DefaultRedirect } from './defaultRedirect/DefaultRedirect';
 export { default as SmtpPage } from './smtp/SmtpPage';
+export { default as password } from './password';
