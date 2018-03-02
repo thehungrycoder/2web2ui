@@ -1,4 +1,4 @@
-import SparkpostApiError from '../SparkpostApiError';
+import SparkpostApiError from '../sparkpostApiError';
 
 function createTestError(sugar = {}) {
   const error = new Error('Oh no!');

@@ -1,6 +1,6 @@
 /* eslint max-lines: ["error", 202] */
 import sparkpostApiRequest, { refreshTokensUsed } from '../sparkpostApiRequest';
-import SparkpostApiError from '../SparkpostApiError';
+import SparkpostApiError from '../sparkpostApiError';
 import { createMockStore } from 'src/__testHelpers__/mockStore';
 import * as axiosMocks from 'src/helpers/axiosInstances';
 import * as authMock from 'src/actions/auth';
