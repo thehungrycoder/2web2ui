@@ -68,4 +68,12 @@ describe('Forgot Password Page', () => {
     });
     expect(props.history.push).toHaveBeenCalledWith('/forgot-password');
   });
+
+  it('should compare passwords', () => {
+    const notSame = wrapper.instance().comparePasswords('', { newPassword: '123', confirmNewPassword: 'qwe' });
+    const same = wrapper.instance().comparePasswords('', { newPassword: '123', confirmNewPassword: '123' });
+
+    expect(notSame).toEqual('Must be the same password');
+    expect(same).toEqual(undefined);
+  });
 });

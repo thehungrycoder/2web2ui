@@ -40,7 +40,7 @@ export class ResetPasswordPage extends Component {
     }
   }
 
-  confirmPassword = (value, { newPassword, confirmNewPassword }) => newPassword === confirmNewPassword ? undefined : 'Must be the same password'
+  comparePasswords = (value, { newPassword, confirmNewPassword }) => newPassword === confirmNewPassword ? undefined : 'Must be the same password'
 
   render() {
     const { handleSubmit, invalid, submitting } = this.props;
@@ -66,7 +66,7 @@ export class ResetPasswordPage extends Component {
               name='confirmNewPassword'
               type='password'
               label='Confirm New Password'
-              validate={[required, minLength(8), endsWithWhitespace, this.confirmPassword]}
+              validate={[required, minLength(8), endsWithWhitespace, this.comparePasswords]}
               component={TextFieldWrapper}
             />
             <Button primary submit disabled={invalid || submitting}>{buttonText}</Button>
