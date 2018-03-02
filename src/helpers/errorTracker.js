@@ -15,7 +15,10 @@ const BLACKLIST = new Set([
   '@@redux-form/REGISTER_FIELD',
   '@@redux-form/TOUCH',
   '@@redux-form/UNREGISTER_FIELD',
-  '@@redux-form/UPDATE_SYNC_ERRORS'
+  '@@redux-form/UPDATE_SYNC_ERRORS',
+  '@@redux-form/INITIALIZE',
+  '@@redux-form/STOP_SUBMIT',
+  '@@redux-form/SET_SUBMIT_FAILED'
 ]);
 
 /**

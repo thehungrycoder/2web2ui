@@ -5,6 +5,7 @@ import { useRefreshToken } from 'src/helpers/http';
 import { resolveOnCondition } from 'src/helpers/promise';
 import _ from 'lodash';
 import { sparkpost as sparkpostAxios } from 'src/helpers/axiosInstances';
+import SparkpostApiError from './sparkpostApiError';
 
 const maxRefreshRetries = 3;
 export const refreshTokensUsed = new Set();
@@ -36,7 +37,8 @@ const sparkpostRequest = requestHelperFactory({
     return results;
   },
   onFail: ({ types, err, dispatch, meta, action, getState }) => {
-    const { message, response = {}} = err;
+    const apiError = new SparkpostApiError(err);
+    const { message, response = {}} = apiError;
     const { auth } = getState();
     const { retries = 0 } = meta;
 
@@ -79,7 +81,7 @@ const sparkpostRequest = requestHelperFactory({
     // If we have a 403 or a 401 and we're not refreshing, log the user out silently
     if (response.status === 401 || response.status === 403) {
       dispatch(logout());
-      throw err;
+      throw apiError;
     }
 
     // any other API error should automatically fail, to be handled in the reducers/components
@@ -93,7 +95,7 @@ const sparkpostRequest = requestHelperFactory({
       dispatch(showAlert({ type: 'error', message: 'Something went wrong.', details: message }));
     }
 
-    throw err;
+    throw apiError;
   }
 });
 

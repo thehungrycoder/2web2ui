@@ -44,13 +44,3 @@ gaScript.src = `https://www.googletagmanager.com/gtag/js?id=${config.gaTag}`;
 gaScript.async = true;
 document.head.appendChild(gaScript);
 /*  Google Analytics End */
-
-/**
- * Track unhandled promise rejects
- *
- * @param {PromiseRejectionEvent} event
- * @param {Error} event.reason
- */
-window.onunhandledrejection = ({ reason }) => {
-  ErrorTracker.report('onunhandledrejection', reason);
-};
