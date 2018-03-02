@@ -1,21 +1,17 @@
 import _ from 'lodash';
 
-export default class SparkpostApiError extends Error {
-  name = 'SparkpostApiError';
+// TODO: Return an Error object as if we were to create it with class and extends Error
+function SparkpostApiError(error) {
+  const apiError = _.get(error, 'response.data.errors[0]', {});
 
-  constructor({ message, fileName, lineNumber, ...rest }) {
-    const error = _.get(rest, 'response.data.errors[0]', {});
+  this.name = 'SparkpostApiError';
+  this.message = apiError.description || apiError.message || error.message;
+  this.stack = error.stack; // must manually assign prototype value
 
-    super(
-      error.description || error.message || message,
-      fileName,
-      lineNumber
-    );
-
-    // Maintains proper stack trace for where our error was thrown (only available on V8)
-    Error.captureStackTrace && Error.captureStackTrace(this, SparkpostApiError);
-
-    // Intentionally assigning additional properties
-    Object.assign(this, rest);
-  }
+  // Intentionally assigning additional properties
+  Object.assign(this, error);
 }
+
+SparkpostApiError.prototype = Object.create(Error.prototype);
+
+export default SparkpostApiError;
