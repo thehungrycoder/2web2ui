@@ -15,11 +15,10 @@ describe('ApiKey Selectors', () => {
         { key: 'sub grant one' },
         { key: 'sub grant two' }
       ],
-      grantsLoading: false,
+      grantsLoading: true,
       subaccountGrantsLoading: false
     },
     subaccounts: {
-      listLoading: true,
       list: [
         { id: 'subId' }
       ]
