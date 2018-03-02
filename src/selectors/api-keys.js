@@ -8,10 +8,8 @@ const getApiKeys = (state) => state.apiKeys.keys;
 const getGrantsArray = (state) => state.apiKeys.grants;
 const getSubaccountGrantsArray = (state) => state.apiKeys.subaccountGrants;
 export const selectApiKeyId = (props) => props.match.params.id;
-
 const getGrantsLoading = (state) => state.apiKeys.grantsLoading;
 const getSubaccountGrantsLoading = (state) => state.apiKeys.subaccountGrantsLoading;
-const getSubaccountsLoading = (state) => state.subaccounts.listLoading;
 
 // Convert grants array to an object keyed by `grant.key`
 export const getGrants = createSelector(getGrantsArray, (grants) =>
@@ -23,9 +21,9 @@ export const getSubaccountGrants = createSelector(getSubaccountGrantsArray, (gra
 );
 
 export const getFormLoading = createSelector(
-  [getGrantsLoading, getSubaccountGrantsLoading, getSubaccountsLoading],
-  (grantsLoading, subaccountGrantsLoading, subaccountsLoading) =>
-    grantsLoading || subaccountGrantsLoading || subaccountsLoading
+  [getGrantsLoading, getSubaccountGrantsLoading],
+  (grantsLoading, subaccountGrantsLoading) =>
+    grantsLoading || subaccountGrantsLoading
 );
 
 /*
