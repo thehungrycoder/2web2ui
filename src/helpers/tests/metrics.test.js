@@ -2,7 +2,14 @@ import * as metricsHelpers from '../metrics';
 import moment from 'moment';
 import * as dateHelpers from 'src/helpers/date';
 
+jest.mock('src/helpers/date');
+
 describe('metrics helpers', () => {
+
+  beforeEach(() => {
+    dateHelpers.getLocalTimezone = jest.fn(() => 'Mock/Timezone');
+  });
+
   it('should build return correct options from updates', () => {
     const actual = metricsHelpers.getQueryFromOptions({
       from: '2017-12-18T00:00Z',
@@ -112,4 +119,5 @@ describe('metrics helpers', () => {
     const keys = ['count_accepted', 'count_targeted'];
     expect(metricsHelpers.rate(item, keys)).toEqual(90);
   });
+
 });

@@ -14,11 +14,12 @@ exports[`metrics helpers should build return correct options from updates 1`] = 
 Object {
   "delimiter": ",",
   "domains": "gmail.com",
-  "from": "2017-12-18T00:00",
+  "from": "2017-12-17T19:00",
   "metrics": "count_bounce,test + last",
   "precision": "hour",
   "subaccounts": "100",
-  "to": "2017-12-18T11:00",
+  "timezone": "Mock/Timezone",
+  "to": "2017-12-18T06:00",
 }
 `;
 
