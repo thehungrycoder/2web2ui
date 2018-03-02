@@ -1,3 +1,4 @@
+/* eslint max-lines: ["error", 200] */
 import moment from 'moment';
 import config from 'src/config';
 import _ from 'lodash';
@@ -114,6 +115,19 @@ export function deleteSuppression(suppression) {
 const LIKE_NON = new RegExp('non', 'i');
 const LIKE_TRUE = new RegExp('true', 'i');
 
+export function addSuppression({ recipient, description, ...suppression }, subaccount) {
+  const suppressions = [];
+  if (LIKE_TRUE.test(suppression.transactional)) {
+    suppressions.push({ type: 'transactional', recipient, description });
+  }
+
+  if (LIKE_TRUE.test(suppression.non_transactional)) {
+    suppressions.push({ type: 'non_transactional', recipient, description });
+  }
+
+  return createOrUpdateSuppressions(suppressions, subaccount);
+}
+
 // SEE: https://developers.sparkpost.com/api/suppression-list.html#suppression-list-bulk-insert-update-put
 export function createOrUpdateSuppressions(recipients, subaccount) {
   const sanitizedRecipients = recipients.map(({
@@ -167,3 +181,10 @@ export function uploadSuppressions(file, subaccount) {
     return dispatch(createOrUpdateSuppressions(recipients, subaccount));
   };
 }
+
+export function resetErrors() {
+  return {
+    type: 'RESET_SUPPRESSION_ERRORS'
+  };
+}
+
