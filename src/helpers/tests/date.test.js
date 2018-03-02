@@ -5,7 +5,8 @@ import {
   formatDate,
   formatTime,
   formatDateTime,
-  isSameDate
+  isSameDate,
+  getLocalTimezone
 } from '../date';
 import cases from 'jest-in-case';
 import moment from 'moment';
@@ -96,6 +97,37 @@ describe('Date helpers', () => {
 
     it('should format a date-time consistently', () => {
       expect(formatDateTime(testDate)).toEqual('Oct 15 2017, 8:55am');
+    });
+  });
+
+  describe('getLocalTimezone', () => {
+
+    it('should return UTC if DateFormat is not a function', () => {
+      global.Intl = {};
+      expect(getLocalTimezone()).toEqual('UTC');
+    });
+
+    it('should return UTC if resolvedOptions is not a function', () => {
+      const dtfMock = jest.fn(() => ({}));
+      global.Intl = {
+        DateTimeFormat: dtfMock
+      };
+
+      expect(getLocalTimezone()).toEqual('UTC');
+      expect(dtfMock).toHaveBeenCalledTimes(1);
+    });
+
+    it('should return the timezone', () => {
+      const optionsMock = jest.fn(() => ({ timeZone: 'Cool/Story' }));
+      const dtfMock = jest.fn(() => ({
+        resolvedOptions: optionsMock
+      }));
+      global.Intl = {
+        DateTimeFormat: dtfMock
+      };
+      expect(getLocalTimezone()).toEqual('Cool/Story');
+      expect(dtfMock).toHaveBeenCalledTimes(1);
+      expect(optionsMock).toHaveBeenCalledTimes(1);
     });
   });
 });

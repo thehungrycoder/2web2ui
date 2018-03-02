@@ -2,7 +2,7 @@ import moment from 'moment';
 import _ from 'lodash';
 import { list as METRICS_LIST } from 'src/config/metrics';
 import config from 'src/config';
-import { getRelativeDates } from 'src/helpers/date';
+import { getRelativeDates, getLocalTimezone } from 'src/helpers/date';
 import { safeDivide, safeRate } from './math';
 
 const { metricsPrecisionMap: precisionMap, apiDateFormat, chartColors = []} = config;
@@ -33,8 +33,7 @@ export function getQueryFromOptions({ from, to, metrics, filters = []}) {
     to: to.format(apiDateFormat),
     delimiter,
     ...getFilterSets(filters, delimiter),
-    // eslint-disable-next-line new-cap
-    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
+    timezone: getLocalTimezone()
   };
 }
 
