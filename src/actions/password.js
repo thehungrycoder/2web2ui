@@ -13,15 +13,12 @@ export function sendPasswordResetEmail({ user }) {
     dispatch(emailPending());
 
     return sparkpostRequest({
-      type: 'SEND_PASSWORD_EMAIL',
       method: 'POST',
       url: '/users/password/forgot',
       data
-    }).then(() => {
-      dispatch(emailSuccess());
-    }).catch((err) => {
-      dispatch(emailError(err));
-    });
+    })
+      .then(() => dispatch(emailSuccess()))
+      .catch((err) => dispatch(emailError(err)));
   };
 }
 
@@ -36,6 +33,36 @@ function emailSuccess() {
 function emailError(error) {
   return {
     type: 'SEND_PASSWORD_EMAIL_ERROR',
+    payload: error
+  };
+}
+
+export function resetPassword({ password, token }) {
+  return (dispatch) => {
+    dispatch(resetPasswordPending());
+
+    return sparkpostRequest({
+      method: 'POST',
+      url: '/users/password/reset',
+      headers: { Authorization: token },
+      data: { password }
+    })
+      .then(() => dispatch(resetPasswordSuccess()))
+      .catch((err) => dispatch(resetPasswordError(err)));
+  };
+}
+
+function resetPasswordPending() {
+  return { type: 'RESET_PASSWORD_PENDING' };
+}
+
+function resetPasswordSuccess() {
+  return { type: 'RESET_PASSWORD_SUCCESS' };
+}
+
+function resetPasswordError(error) {
+  return {
+    type: 'RESET_PASSWORD_ERROR',
     payload: error
   };
 }

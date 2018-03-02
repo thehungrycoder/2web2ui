@@ -33,7 +33,7 @@ export class ForgotPasswordPage extends Component {
   }
 
   render() {
-    const { handleSubmit, pristine, submitting, sendPasswordResetEmail } = this.props;
+    const { handleSubmit, invalid, submitting, sendPasswordResetEmail } = this.props;
 
     const buttonText = submitting
       ? 'Sending Email..'
@@ -51,7 +51,7 @@ export class ForgotPasswordPage extends Component {
               validate={required}
               component={TextFieldWrapper}
             />
-            <Button primary submit disabled={pristine || submitting}>{buttonText}</Button>
+            <Button primary submit disabled={invalid || submitting}>{buttonText}</Button>
           </form>
         </Panel>
         <Panel.Footer

@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { authenticate, ssoCheck, login } from 'src/actions/auth';
 import { verifyAndLogin } from 'src/actions/tfa';
-import { SparkPost } from 'src/components';
+import { CenteredLogo } from 'src/components';
 import { Panel, Error, UnstyledLink } from '@sparkpost/matchbox';
 import { SubmissionError } from 'redux-form';
 
 import config from 'src/config';
-import { DEFAULT_REDIRECT_ROUTE, LINKS } from 'src/constants';
+import { DEFAULT_REDIRECT_ROUTE } from 'src/constants';
 import LoginForm from './components/LoginForm';
 import TfaForm from './components/TfaForm';
-import styles from './AuthPage.module.scss';
 
 export class AuthPage extends Component {
   constructor(props) {
@@ -88,22 +88,16 @@ export class AuthPage extends Component {
 
     return (
       <div>
-        <div className={styles.LogoWrapper}>
-          <UnstyledLink to={LINKS.SP_HOME_PAGE} title="SparkPost">
-            <SparkPost.Logo />
-          </UnstyledLink>
-        </div>
-
+        <CenteredLogo />
         <Panel sectioned accent title="Log In">
           { errorDescription && this.renderLoginError(errorDescription)}
 
           { tfa.enabled && <TfaForm onSubmit={this.tfaSubmit} /> }
           { !tfa.enabled && <LoginForm onSubmit={this.loginSubmit} ssoEnabled={this.state.ssoEnabled}/> }
         </Panel>
-
         <Panel.Footer
-          left={hasSignup && <small>Don't have an account? <UnstyledLink to='/join'>Sign up</UnstyledLink>.</small>}
-          right={<small><UnstyledLink to='/forgot-password'>Forgot your password?</UnstyledLink></small>}
+          left={hasSignup && <small>Don't have an account? <UnstyledLink Component={Link} to='/join'>Sign up</UnstyledLink>.</small>}
+          right={<small><UnstyledLink Component={Link} to='/forgot-password'>Forgot your password?</UnstyledLink></small>}
         />
       </div>
     );

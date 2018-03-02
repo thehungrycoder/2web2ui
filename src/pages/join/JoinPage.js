@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import qs from 'query-string';
 import cookie from 'js-cookie';
 import _ from 'lodash';
@@ -88,7 +88,7 @@ export class JoinPage extends Component {
           </Panel.Section>
         </Panel>
         <Panel.Footer
-          left={<small>Already have an account? <UnstyledLink to={'/auth'}>Log In</UnstyledLink>.</small>}
+          left={<small>Already have an account? <UnstyledLink Component={Link} to='/auth'>Log In</UnstyledLink>.</small>}
         />
 
       </div>

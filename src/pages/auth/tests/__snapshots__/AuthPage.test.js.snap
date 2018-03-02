@@ -2,14 +2,7 @@
 
 exports[`renders correctly 1`] = `
 <div>
-  <div>
-    <UnstyledLink
-      title="SparkPost"
-      to="https://www.sparkpost.com"
-    >
-      <Logo />
-    </UnstyledLink>
-  </div>
+  <CenteredLogo />
   <Panel
     accent={true}
     sectioned={true}
@@ -25,6 +18,7 @@ exports[`renders correctly 1`] = `
     right={
       <small>
         <UnstyledLink
+          Component={[Function]}
           to="/forgot-password"
         >
           Forgot your password?
@@ -37,14 +31,7 @@ exports[`renders correctly 1`] = `
 
 exports[`renders correctly when there is a login error 1`] = `
 <div>
-  <div>
-    <UnstyledLink
-      title="SparkPost"
-      to="https://www.sparkpost.com"
-    >
-      <Logo />
-    </UnstyledLink>
-  </div>
+  <CenteredLogo />
   <Panel
     accent={true}
     sectioned={true}
@@ -63,6 +50,7 @@ exports[`renders correctly when there is a login error 1`] = `
     right={
       <small>
         <UnstyledLink
+          Component={[Function]}
           to="/forgot-password"
         >
           Forgot your password?
@@ -75,14 +63,7 @@ exports[`renders correctly when there is a login error 1`] = `
 
 exports[`should display tfa form when TFA is enabled 1`] = `
 <div>
-  <div>
-    <UnstyledLink
-      title="SparkPost"
-      to="https://www.sparkpost.com"
-    >
-      <Logo />
-    </UnstyledLink>
-  </div>
+  <CenteredLogo />
   <Panel
     accent={true}
     sectioned={true}
@@ -97,6 +78,7 @@ exports[`should display tfa form when TFA is enabled 1`] = `
     right={
       <small>
         <UnstyledLink
+          Component={[Function]}
           to="/forgot-password"
         >
           Forgot your password?

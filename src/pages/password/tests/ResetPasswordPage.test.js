@@ -1,6 +1,6 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import { ForgotPasswordPage } from '../ForgotPasswordPage';
+import { ResetPasswordPage } from '../ResetPasswordPage';
 
 describe('Forgot Password Page', () => {
   let wrapper;
@@ -9,15 +9,16 @@ describe('Forgot Password Page', () => {
     handleSubmit: jest.fn((a) => a),
     invalid: true,
     submitting: false,
-    sendPasswordResetEmail: jest.fn((a) => a),
+    resetPassword: jest.fn((a) => a),
     history: { push: jest.fn() },
     showAlert: jest.fn(),
-    emailSuccess: false,
-    emailError: null
+    resetSuccess: false,
+    resetError: null,
+    token: 'faketoken'
   };
 
   beforeEach(() => {
-    wrapper = shallow(<ForgotPasswordPage {...props} />);
+    wrapper = shallow(<ResetPasswordPage {...props} />);
   });
 
   it('should render with initial props', () => {
@@ -32,30 +33,39 @@ describe('Forgot Password Page', () => {
 
     wrapper.setProps({ submitting: true });
     expect(wrapper.find('Button').props().disabled).toBe(true);
-    expect(wrapper.find('Button').props().children).toEqual('Sending Email..');
+    expect(wrapper.find('Button').props().children).toEqual('Creating Password..');
   });
 
   it('should handle submit', () => {
-    wrapper.find('form').simulate('submit', { user: 'username' });
-    expect(props.handleSubmit).toHaveBeenCalledWith(props.sendPasswordResetEmail);
-    expect(props.sendPasswordResetEmail).toHaveBeenCalledWith({ user: 'username' });
+    wrapper.find('form').simulate('submit', { newPassword: 'pw123' });
+    expect(props.handleSubmit).toHaveBeenCalledWith(wrapper.instance().handleResetPassword);
+    expect(props.resetPassword).toHaveBeenCalledWith({ password: 'pw123', token: 'faketoken' });
   });
 
   it('should handle success', () => {
-    wrapper.setProps({ emailSuccess: true });
+    wrapper.setProps({ resetSuccess: true });
     expect(props.history.push).toHaveBeenCalledWith('/auth');
     expect(props.showAlert).toHaveBeenCalledWith({
       type: 'success',
-      message: 'If you have an account with us, please check your email for your password reset instructions.'
+      message: 'Your password has been updated.'
     });
   });
 
   it('should handle error', () => {
-    wrapper.setProps({ emailError: { message: 'an error happened' }});
+    wrapper.setProps({ resetError: { message: 'an error happened' }});
     expect(props.showAlert).toHaveBeenCalledWith({
       type: 'error',
-      message: 'Unable to send your password reset email.',
+      message: 'Unable to update your password.',
       details: 'an error happened'
     });
+  });
+
+  it('should handle 401 error', () => {
+    wrapper.setProps({ resetError: { response: { status: 401 }}});
+    expect(props.showAlert).toHaveBeenCalledWith({
+      type: 'error',
+      message: 'Your password reset request has expired. Please resubmit your request.'
+    });
+    expect(props.history.push).toHaveBeenCalledWith('/forgot-password');
   });
 });

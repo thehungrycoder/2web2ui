@@ -25,6 +25,7 @@ exports[`JoinPage render renders correctly 1`] = `
       <small>
         Already have an account? 
         <UnstyledLink
+          Component={[Function]}
           to="/auth"
         >
           Log In
@@ -71,6 +72,7 @@ exports[`JoinPage render renders errors 1`] = `
       <small>
         Already have an account? 
         <UnstyledLink
+          Component={[Function]}
           to="/auth"
         >
           Log In
