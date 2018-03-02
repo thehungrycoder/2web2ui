@@ -34,38 +34,6 @@ export default class SpLineChart extends React.Component {
     return referenceLines.map((props) => <ReferenceLine {...props} />);
   }
 
-  getYDomain() {
-    const { yLabel, yScale } = this.props;
-    const minDomain = yScale === 'log' ? 0.001 : 0;
-    let maxDomain = 100; // Defaults to 100 max domain so y axis always renders at least 0 - 100
-
-    if (yLabel !== 'Percent') {
-      const max = this.getMax();
-      maxDomain = max ? `dataMax + ${max * 0.08}` : maxDomain; // Adds 8% top 'padding'
-    }
-
-    return [minDomain, maxDomain];
-  }
-
-  // Gets max value for this LineChart
-  getMax() {
-    const { lines, data } = this.props;
-    const lineData = _.flatten(lines.map((line) => data.map((d) => d[line.key])));
-    return _.max(lineData);
-  }
-
-  // Manually generates Y axis ticks
-  getYTicks() {
-    const { yLabel, yScale } = this.props;
-    let ticks;
-
-    if (yLabel === 'Percent' && yScale === 'linear') {
-      ticks = [0, 25, 50, 75, 100];
-    }
-
-    return ticks;
-  }
-
   // Manually generates X axis ticks
   getXTicks() {
     const { data, precision } = this.props;
@@ -134,11 +102,12 @@ export default class SpLineChart extends React.Component {
               hide={!showXAxis} />
             <YAxis
               tickFormatter={yTickFormatter}
-              ticks={this.getYTicks()}
               tickLine={false}
+              interval='preserveStartEnd'
+              padding={{ top: 8, bottom: 8 }}
               width={60}
               scale={yScale}
-              domain={this.getYDomain()} />
+              domain={['dataMin', 'dataMax']} />
             <Tooltip
               isAnimationActive={false}
               labelFormatter={tooltipLabelFormatter}

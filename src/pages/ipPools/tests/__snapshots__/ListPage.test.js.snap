@@ -1,5 +1,153 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`IP Pools List Page renders correctly when showPurchaseCTA is false 1`] = `
+<Page
+  empty={
+    Object {
+      "content": <p>
+        Purchase dedicated IPs to manage your IP Pools
+      </p>,
+      "image": "Setup",
+      "primaryAction": Object {
+        "Component": [Function],
+        "content": "Create IP Pool",
+        "to": "/account/ip-pools/create",
+      },
+      "secondaryAction": null,
+      "show": false,
+      "title": "Boost your deliverability",
+    }
+  }
+  primaryAction={
+    Object {
+      "Component": [Function],
+      "content": "Create IP Pool",
+      "to": "/account/ip-pools/create",
+    }
+  }
+  title="IP Pools"
+>
+  <TableCollection
+    columns={
+      Array [
+        Object {
+          "label": "Name",
+          "sortKey": "name",
+        },
+        Object {
+          "label": "ID",
+          "sortKey": "id",
+        },
+        Object {
+          "label": "Number of IPs Assigned",
+          "sortKey": [Function],
+        },
+      ]
+    }
+    defaultSortColumn={null}
+    defaultSortDirection="asc"
+    filterBox={
+      Object {
+        "exampleModifiers": Array [
+          "name",
+          "id",
+        ],
+        "itemToStringKeys": Array [
+          "name",
+          "id",
+        ],
+        "show": true,
+      }
+    }
+    getRowData={[Function]}
+    pagination={true}
+    rows={
+      Array [
+        Object {
+          "id": 101,
+          "ips": Array [
+            Object {
+              "external_ip": 1111,
+            },
+            Object {
+              "external_ip": 2222,
+            },
+          ],
+          "name": "Test Pool 1",
+        },
+        Object {
+          "id": 102,
+          "ips": Array [],
+          "name": "Test Pool 2",
+        },
+      ]
+    }
+  />
+</Page>
+`;
+
+exports[`IP Pools List Page renders empty state correctly 1`] = `
+<Page
+  empty={
+    Object {
+      "content": <p>
+        Purchase dedicated IPs to manage your IP Pools
+      </p>,
+      "image": "Setup",
+      "primaryAction": Object {
+        "Component": [Function],
+        "content": "Purchase IPs",
+        "to": "/account/billing",
+      },
+      "secondaryAction": Object {
+        "Component": [Function],
+        "content": "Create IP Pool",
+        "to": "/account/ip-pools/create",
+      },
+      "show": true,
+      "title": "Boost your deliverability",
+    }
+  }
+  primaryAction={
+    Object {
+      "Component": [Function],
+      "content": "Create IP Pool",
+      "to": "/account/ip-pools/create",
+    }
+  }
+  title="IP Pools"
+/>
+`;
+
+exports[`IP Pools List Page renders empty state correctly when showPurchaseCTA is false 1`] = `
+<Page
+  empty={
+    Object {
+      "content": <p>
+        Purchase dedicated IPs to manage your IP Pools
+      </p>,
+      "image": "Setup",
+      "primaryAction": Object {
+        "Component": [Function],
+        "content": "Create IP Pool",
+        "to": "/account/ip-pools/create",
+      },
+      "secondaryAction": null,
+      "show": true,
+      "title": "Boost your deliverability",
+    }
+  }
+  primaryAction={
+    Object {
+      "Component": [Function],
+      "content": "Create IP Pool",
+      "to": "/account/ip-pools/create",
+    }
+  }
+  title="IP Pools"
+/>
+`;
+
 exports[`IP Pools List Page should render loading component when loading data 1`] = `<Loading />`;
 
 exports[`IP Pools List Page should render row properly 1`] = `
