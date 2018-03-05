@@ -94,22 +94,26 @@ const routes = [
   {
     path: '/register',
     public: true,
+    forceLogout: true,
     component: RegisterPage
   },
   {
     path: '/join',
     public: true,
+    forceLogout: true,
     component: JoinPage,
     condition: configFlag('featureFlags.has_signup')
   },
   {
     path: '/forgot-password',
     public: true,
+    forceLogout: true,
     component: password.ForgotPasswordPage
   },
   {
     path: '/reset-password/:token',
     public: true,
+    forceLogout: true,
     component: password.ResetPasswordPage
   },
 

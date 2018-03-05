@@ -12,7 +12,6 @@ describe('Forgot Password Page', () => {
     sendPasswordResetEmail: jest.fn((a) => a),
     history: { push: jest.fn() },
     showAlert: jest.fn(),
-    logout: jest.fn(),
     emailSuccess: false,
     emailError: null
   };
@@ -23,12 +22,6 @@ describe('Forgot Password Page', () => {
 
   it('should render with initial props', () => {
     expect(wrapper).toMatchSnapshot();
-    expect(props.logout).toHaveBeenCalledTimes(1);
-  });
-
-  it('should render null when logged in', () => {
-    wrapper.setProps({ loggedIn: true });
-    expect(wrapper.html()).toBe(null);
   });
 
   it('should render submit button states correctly', () => {

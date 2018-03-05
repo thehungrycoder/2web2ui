@@ -7,7 +7,6 @@ import { DEFAULT_REDIRECT_ROUTE } from 'src/constants';
 // mocks
 const checkInviteToken = jest.fn();
 const registerUser = jest.fn(() => Promise.resolve());
-const logout = jest.fn();
 const authenticate = jest.fn(() => Promise.resolve());
 const historyPush = jest.fn();
 const report = jest.fn();
@@ -29,7 +28,6 @@ describe('Page: RegisterPage', () => {
     },
     checkInviteToken,
     registerUser,
-    logout,
     authenticate
   };
 
@@ -40,7 +38,6 @@ describe('Page: RegisterPage', () => {
   });
 
   test('happy path render', () => {
-    expect(logout).toHaveBeenCalled();
     expect(checkInviteToken).toHaveBeenCalledWith(props.token);
     expect(wrapper).toMatchSnapshot();
   });

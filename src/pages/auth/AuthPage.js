@@ -86,6 +86,12 @@ export class AuthPage extends Component {
     const hasSignup = (config.featureFlags || {}).has_signup;
     const { tfa } = this.props;
 
+    const footerMarkup = !tfa.enabled
+      ? <Panel.Footer
+        left={hasSignup && <small>Don't have an account? <UnstyledLink Component={Link} to='/join'>Sign up</UnstyledLink>.</small>}
+        right={<small><UnstyledLink Component={Link} to='/forgot-password'>Forgot your password?</UnstyledLink></small>} />
+      : null;
+
     return (
       <div>
         <CenteredLogo />
@@ -95,10 +101,7 @@ export class AuthPage extends Component {
           { tfa.enabled && <TfaForm onSubmit={this.tfaSubmit} /> }
           { !tfa.enabled && <LoginForm onSubmit={this.loginSubmit} ssoEnabled={this.state.ssoEnabled}/> }
         </Panel>
-        <Panel.Footer
-          left={hasSignup && !tfa.enabled && <small>Don't have an account? <UnstyledLink Component={Link} to='/join'>Sign up</UnstyledLink>.</small>}
-          right={!tfa.enabled && <small><UnstyledLink Component={Link} to='/forgot-password'>Forgot your password?</UnstyledLink></small>}
-        />
+        {footerMarkup}
       </div>
     );
   }

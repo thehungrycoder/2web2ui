@@ -73,9 +73,5 @@ exports[`should display tfa form when TFA is enabled 1`] = `
       onSubmit={[Function]}
     />
   </Panel>
-  <Panel.Footer
-    left={false}
-    right={false}
-  />
 </div>
 `;

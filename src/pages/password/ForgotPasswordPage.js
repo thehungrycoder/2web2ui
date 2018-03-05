@@ -2,7 +2,6 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { sendPasswordResetEmail } from 'src/actions/passwordReset';
-import { logout } from 'src/actions/auth';
 import { showAlert } from 'src/actions/globalAlert';
 import { required } from 'src/helpers/validation';
 import { reduxForm, Field } from 'redux-form';
@@ -20,10 +19,6 @@ const errorAlert = {
 };
 
 export class ForgotPasswordPage extends Component {
-  componentDidMount() {
-    this.props.logout();
-  }
-
   componentDidUpdate(prevProps) {
     const { emailSuccess, emailError, history, showAlert } = this.props;
 
@@ -38,11 +33,7 @@ export class ForgotPasswordPage extends Component {
   }
 
   render() {
-    const { handleSubmit, invalid, submitting, sendPasswordResetEmail, loggedIn } = this.props;
-
-    if (loggedIn) {
-      return null;
-    }
+    const { handleSubmit, invalid, submitting, sendPasswordResetEmail } = this.props;
 
     const buttonText = submitting
       ? 'Sending Email..'
@@ -72,8 +63,5 @@ export class ForgotPasswordPage extends Component {
 }
 
 const formOptions = { form: 'forgotPassword' };
-const mapStateToProps = (state) => ({
-  ...state.passwordReset,
-  loggedIn: state.auth.loggedIn
-});
-export default connect(mapStateToProps, { sendPasswordResetEmail, showAlert, logout })(reduxForm(formOptions)(ForgotPasswordPage));
+const mapStateToProps = ({ passwordReset }) => (passwordReset);
+export default connect(mapStateToProps, { sendPasswordResetEmail, showAlert })(reduxForm(formOptions)(ForgotPasswordPage));
