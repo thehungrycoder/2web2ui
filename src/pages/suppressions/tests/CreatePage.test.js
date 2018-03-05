@@ -1,91 +1,46 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import cases from 'jest-in-case';
-
-import { SubmissionError } from 'redux-form';
 
 import { CreatePage } from '../CreatePage';
 
-cases('CreatePage', ({ name, ...props }) => {
-  const wrapper = shallow(<CreatePage handleSubmit={() => {}} {...props} />);
-  expect(wrapper).toMatchSnapshot();
-}, {
-  'renders upload form': {},
-  'renders upload form with parsing error details': {
-    parseError: {
-      details: [
-        { row: undefined, message: 'Unable to auto detect delimiter' },
-        { row: 0, message: 'Wrong number of columns' },
-        { row: 1, message: 'Wrong number of columns' }
-      ]
-    },
-    submitFailed: true,
-    submitting: false
-  },
-  'renders upload form with parsing error too many details': {
-    parseError: {
-      details: [
-        ...Array.from(Array(100), (v, i) => ({ row: i, message: 'Oh no!' }))
-      ]
-    },
-    submitFailed: true,
-    submitting: false
-  },
-  'renders upload form with parsing error message': {
-    parseError: {
-      message: 'Oh no, parsing!'
-    },
-    submitFailed: true,
-    submitting: false
-  },
-  'renders upload form with persist error': {
-    persistError: {
-      response: {
-        data: {
-          errors: [
-            { message: 'Oh no, creating!' }
-          ]
-        }
-      }
-    },
-    submitFailed: true,
-    submitting: false
-  },
-  'renders disabled upload form when submitting': {
-    submitting: true
-  }
-});
+describe('CreatePage tests', () => {
+  let wrapper;
+  let instance;
+  let props;
 
-describe('CreatePage.handleSubmit', async() => {
-  it('displays an alert and redirects after successful upload', async() => {
-    const props = {
-      history: { push: jest.fn() },
-      showAlert: jest.fn(),
-      uploadSuppressions: jest.fn(() => Promise.resolve())
+  beforeEach(() => {
+    props = {
+      resetErrors: jest.fn(),
+      persistError: false,
+      parseError: false
     };
-    const instance = new CreatePage(props);
-    const args = {
-      subaccount: 999,
-      suppressionsFile: { name: 'example.csv' }
-    };
-
-    await instance.handleSubmit(args);
-
-    expect(props.uploadSuppressions).toHaveBeenCalledWith(args.suppressionsFile, args.subaccount);
-    expect(props.showAlert).toHaveBeenCalledWith(expect.objectContaining({ type: 'success' }));
-    expect(props.history.push).toHaveBeenCalled();
+    wrapper = shallow(<CreatePage {...props} />);
+    instance = wrapper.instance();
   });
 
-  it('rethrows unexpected errors as SubmissionError', async() => {
-    const props = {
-      uploadSuppressions: jest.fn(() => Promise.reject(new Error('Oh no!')))
-    };
-    const instance = new CreatePage(props);
-    const args = {
-      subaccount: 999,
-      suppressionsFile: { name: 'example.csv' }
-    };
+  it('should render UploadTab', () => {
+    wrapper.setState({ selectedTab: 1 });
+    expect(wrapper).toMatchSnapshot();
+  });
 
-    await expect(instance.handleSubmit(args)).rejects.toThrowError(SubmissionError);
+  it('should render AddTab', () => {
+    wrapper.setState({ selectedTab: 0 });
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should reset errors when changing tabs', () => {
+    instance.handleTabs(1);
+    expect(instance.props.resetErrors).toHaveBeenCalled();
+  });
+
+  it('should display the error banner on parse error', () => {
+    wrapper.setProps({ parseError: true });
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should display the error banner on persist error', () => {
+    wrapper.setProps({ persistError: true });
+    expect(wrapper).toMatchSnapshot();
   });
 });
+

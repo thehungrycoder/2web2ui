@@ -1,0 +1,105 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UploadTab tests should disable fields when submitting 1`] = `
+<React.Fragment>
+  <form>
+    <Panel.Section>
+      <Field
+        component={[Function]}
+        disabled={true}
+        fileType="csv"
+        helpText={
+          <span>
+            You can download an 
+            <DownloadLink
+              href="example-suppressions-list.csv"
+            >
+              example file here
+            </DownloadLink>
+             to use when formatting your list of suppressions for upload.
+          </span>
+        }
+        label="CSV File of Suppressions"
+        name="suppressionsFile"
+        required={true}
+        validate={
+          Array [
+            [Function],
+            [Function],
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Field
+        component={[Function]}
+        disabled={true}
+        helpText="Leaving this field blank will add the suppressions to the master account."
+        name="subaccount"
+      />
+    </Panel.Section>
+    <Panel.Section>
+      <Button
+        disabled={true}
+        primary={true}
+        size="default"
+        type="submit"
+      >
+        Upload
+      </Button>
+    </Panel.Section>
+  </form>
+</React.Fragment>
+`;
+
+exports[`UploadTab tests should render upload form 1`] = `
+<React.Fragment>
+  <form>
+    <Panel.Section>
+      <Field
+        component={[Function]}
+        disabled={false}
+        fileType="csv"
+        helpText={
+          <span>
+            You can download an 
+            <DownloadLink
+              href="example-suppressions-list.csv"
+            >
+              example file here
+            </DownloadLink>
+             to use when formatting your list of suppressions for upload.
+          </span>
+        }
+        label="CSV File of Suppressions"
+        name="suppressionsFile"
+        required={true}
+        validate={
+          Array [
+            [Function],
+            [Function],
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Field
+        component={[Function]}
+        disabled={false}
+        helpText="Leaving this field blank will add the suppressions to the master account."
+        name="subaccount"
+      />
+    </Panel.Section>
+    <Panel.Section>
+      <Button
+        disabled={false}
+        primary={true}
+        size="default"
+        type="submit"
+      >
+        Upload
+      </Button>
+    </Panel.Section>
+  </form>
+</React.Fragment>
+`;
