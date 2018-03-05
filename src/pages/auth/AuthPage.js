@@ -96,8 +96,8 @@ export class AuthPage extends Component {
           { !tfa.enabled && <LoginForm onSubmit={this.loginSubmit} ssoEnabled={this.state.ssoEnabled}/> }
         </Panel>
         <Panel.Footer
-          left={hasSignup && <small>Don't have an account? <UnstyledLink Component={Link} to='/join'>Sign up</UnstyledLink>.</small>}
-          right={<small><UnstyledLink Component={Link} to='/forgot-password'>Forgot your password?</UnstyledLink></small>}
+          left={hasSignup && !tfa.enabled && <small>Don't have an account? <UnstyledLink Component={Link} to='/join'>Sign up</UnstyledLink>.</small>}
+          right={!tfa.enabled && <small><UnstyledLink Component={Link} to='/forgot-password'>Forgot your password?</UnstyledLink></small>}
         />
       </div>
     );

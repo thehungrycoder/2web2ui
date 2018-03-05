@@ -75,16 +75,7 @@ exports[`should display tfa form when TFA is enabled 1`] = `
   </Panel>
   <Panel.Footer
     left={false}
-    right={
-      <small>
-        <UnstyledLink
-          Component={[Function]}
-          to="/forgot-password"
-        >
-          Forgot your password?
-        </UnstyledLink>
-      </small>
-    }
+    right={false}
   />
 </div>
 `;
