@@ -21,7 +21,7 @@ import {
   PageNotFound,
   DefaultRedirect,
   JoinPage,
-  password
+  passwordReset
 } from 'src/pages';
 
 import onboarding from 'src/pages/onboarding';
@@ -108,13 +108,13 @@ const routes = [
     path: '/forgot-password',
     public: true,
     forceLogout: true,
-    component: password.ForgotPasswordPage
+    component: passwordReset.ForgotPasswordPage
   },
   {
     path: '/reset-password/:token',
     public: true,
     forceLogout: true,
-    component: password.ResetPasswordPage
+    component: passwordReset.ResetPasswordPage
   },
 
   /**
