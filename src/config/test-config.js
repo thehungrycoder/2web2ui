@@ -12,6 +12,9 @@ const testConfig = {
         path: '/'
       }
     }
+  },
+  website: {
+    domain1: 'sparkpost.test'
   }
 };
 
