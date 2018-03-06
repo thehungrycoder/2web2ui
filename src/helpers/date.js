@@ -5,6 +5,7 @@ export const relativeDateOptions = [
   { value: 'hour', label: 'Last Hour' },
   { value: 'day', label: 'Last 24 Hours' },
   { value: '7days', label: 'Last 7 Days' },
+  { value: '10days', label: 'Last 10 Days' },
   { value: '30days', label: 'Last 30 Days' },
   { value: '90days', label: 'Last 90 Days' },
   { value: 'custom', label: 'Custom' }
@@ -71,7 +72,7 @@ export function getLocalTimezone() {
 }
 
 export function getRelativeDates(range) {
-  const now = moment.utc();
+  const now = moment();
   const to = now.toDate();
 
   switch (range) {
@@ -84,6 +85,9 @@ export function getRelativeDates(range) {
     case '7days':
       return { to, from: moment(to).subtract(7, 'day').toDate(), relativeRange: range };
 
+    case '10days':
+      return { to, from: moment(to).subtract(10, 'day').toDate(), relativeRange: range };
+
     case '30days':
       return { to, from: moment(to).subtract(30, 'day').toDate(), relativeRange: range };
 
@@ -93,8 +97,12 @@ export function getRelativeDates(range) {
     case 'custom':
       return { relativeRange: range };
 
-    default:
+    default: {
+      if (range) {
+        throw new Error(`Tried to calculate a relative date range with an invalid range value: ${range}`);
+      }
       return {};
+    }
   }
 }
 

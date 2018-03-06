@@ -4,7 +4,7 @@ import { snakeToFriendly } from 'src/helpers/string';
 import { Page, Banner, Panel } from '@sparkpost/matchbox';
 import { PanelLoading, TableCollection, ApiErrorBanner, Empty } from 'src/components';
 import DisplayDate from './components/DisplayDate';
-import BasicFilter from './components/BasicFilter';
+import MessageEventsOptions from './components/MessageEventsOptions';
 import ViewDetailsButton from './components/ViewDetailsButton';
 import { getMessageEvents } from 'src/actions/messageEvents';
 import { selectMessageEvents } from 'src/selectors/messageEvents';
@@ -83,7 +83,7 @@ export class MessageEventsPage extends Component {
     return (
       <Page title='Message Events'>
         <Panel sectioned>
-          <BasicFilter />
+          <MessageEventsOptions />
         </Panel>
         { error ? this.renderError() : this.renderCollection() }
       </Page>

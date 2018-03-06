@@ -1,6 +1,6 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import { BasicFilter } from '../BasicFilter';
+import { MessageEventsOptions } from '../MesageEventsOptions';
 
 describe('BasicFilter', () => {
 
@@ -14,7 +14,7 @@ describe('BasicFilter', () => {
       reportOptions: {},
       refreshReportOptions: jest.fn()
     };
-    wrapper = shallow(<BasicFilter {...props} />);
+    wrapper = shallow(<MessageEventsOptions {...props} />);
     instance = wrapper.instance();
   });
 

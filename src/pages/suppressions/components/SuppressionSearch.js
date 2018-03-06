@@ -4,47 +4,12 @@ import _ from 'lodash';
 import { reduxForm } from 'redux-form';
 import { Grid } from '@sparkpost/matchbox';
 import { FilterDropdown } from 'src/components';
-import DateFilter from 'src/pages/reports/components/DateFilter';
-import { refreshReportOptions } from 'src/actions/reportOptions';
-import styles from './FilterForm.module.scss';
+import * as suppressionActions from 'src/actions/suppressions';
+import DatePicker from 'src/components/datePicker/DatePicker';
+import styles from './SuppressionSearch.module.scss';
+import { TYPES, SOURCES, RELATIVE_DATE_OPTIONS } from '../constants';
 
-const types = [
-  {
-    content: 'Transactional',
-    name: 'transactional'
-  }, {
-    content: 'Non-Transactional',
-    name: 'non_transactional'
-  }
-];
-const sources = [
-  {
-    content: 'Spam Complaint',
-    name: 'Spam Complaint'
-  },
-  {
-    content: 'List Unsubscribe',
-    name: 'List Unsubscribe'
-  },
-  {
-    content: 'Bounce Rule',
-    name: 'Bounce Rule'
-  },
-  {
-    content: 'Unsubscribe Link',
-    name: 'Unsubscribe Link'
-  },
-  {
-    content: 'Manually Added',
-    name: 'Manually Added'
-  },
-  {
-    content: 'Compliance',
-    name: 'Compliance'
-  }
-];
-
-export class FilterForm extends Component {
+export class SuppressionSearch extends Component {
 
   state = {
     types: [],
@@ -52,13 +17,13 @@ export class FilterForm extends Component {
   };
 
   componentDidMount() {
-    this.props.refreshReportOptions();
+    this.props.refreshSuppressionDateRange({ relativeRange: this.props.search.dateOptions.relativeRange || 'day' });
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const { reportOptions } = this.props;
-    if (this.state !== prevState || reportOptions !== prevProps.reportOptions) {
-      this.props.onSubmit({ ...this.state, reportOptions });
+    const { search } = this.props;
+    if (search !== prevProps.search) {
+      this.props.searchSuppressions(search);
     }
   }
 
@@ -85,13 +50,18 @@ export class FilterForm extends Component {
       <Grid>
         <Grid.Column xs={12} md={6}>
           <div>
-            <DateFilter />
+            <DatePicker
+              {...this.props.search.dateOptions}
+              relativeDateOptions={RELATIVE_DATE_OPTIONS}
+              onChange={this.props.refreshSuppressionDateRange}
+              disabled={this.props.loading}
+            />
           </div>
         </Grid.Column>
         <Grid.Column xs={6} md={3}>
           <div>
             <FilterDropdown
-              popoverClassName={styles.suppresionPopver} formName='filterForm' options={types} namespace='types' displayValue='Type'
+              popoverClassName={styles.suppresionPopver} formName='filterForm' options={TYPES} namespace='types' displayValue='Type'
               onClose={this.handleTypesSelection}
             />
           </div>
@@ -100,7 +70,7 @@ export class FilterForm extends Component {
         <Grid.Column xs={6} md={3}>
           <div>
             <FilterDropdown
-              formName='filterForm' options={sources} namespace='sources' displayValue='Sources'
+              formName='filterForm' options={SOURCES} namespace='sources' displayValue='Sources'
               popoverClassName={styles.fatPopover} onClose={this.handleSourcesSelection}
             />
           </div>
@@ -115,7 +85,8 @@ const formOptions = {
   form: formName
 };
 const mapStateToProps = (state) => ({
-  reportOptions: state.reportOptions,
-  list: state.suppressions.list
+  search: state.suppressions.search,
+  list: state.suppressions.list,
+  loading: state.suppressions.listLoading
 });
-export default connect(mapStateToProps, { refreshReportOptions })(reduxForm(formOptions)(FilterForm));
+export default connect(mapStateToProps, suppressionActions)(reduxForm(formOptions)(SuppressionSearch));

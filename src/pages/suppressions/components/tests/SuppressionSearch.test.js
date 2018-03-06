@@ -1,6 +1,6 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import { FilterForm } from '../FilterForm';
+import { SuppressionSearch } from '../SuppressionSearch';
 
 let props;
 let wrapper;
@@ -13,11 +13,11 @@ beforeEach(() => {
     reportOptions: {},
     list: null
   };
-  wrapper = shallow(<FilterForm {...props} />);
+  wrapper = shallow(<SuppressionSearch {...props} />);
   instance = wrapper.instance();
 });
 
-describe('FilterForm', () => {
+describe('SuppressionSearch', () => {
   it('renders correctly', () => {
     expect(wrapper).toMatchSnapshot();
   });

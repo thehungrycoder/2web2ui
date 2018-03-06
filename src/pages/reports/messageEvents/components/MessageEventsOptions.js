@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import moment from 'moment';
 import { reduxForm, Field } from 'redux-form';
 import _ from 'lodash';
-import { getMessageEvents } from 'src/actions/messageEvents';
-import { refreshReportOptions } from 'src/actions/reportOptions';
+import { getMessageEvents, refreshMessageEventsDateRange } from 'src/actions/messageEvents';
 import { Grid } from '@sparkpost/matchbox';
-import DateFilter from 'src/pages/reports/components/DateFilter';
+import DatePicker from 'src/components/datePicker/DatePicker';
 import { TextFieldWrapper } from 'src/components';
 import { email as emailValidator } from 'src/helpers/validation';
 import { onEnter } from 'src/helpers/keyEvents';
@@ -18,18 +18,19 @@ export class BasicFilter extends Component {
   };
 
   componentDidMount() {
-    this.props.refreshReportOptions();
+    const relativeRange = this.props.dateOptions.relativeRange || 'hour';
+    this.props.refreshMessageEventsDateRange({ relativeRange });
   }
 
   componentDidUpdate(prevProps) {
-    const { reportOptions } = this.props;
-    if (prevProps.reportOptions !== reportOptions) {
+    const { dateOptions } = this.props;
+    if (prevProps.dateOptions !== dateOptions) {
       this.refresh();
     }
   }
 
   refresh = () => {
-    this.props.getMessageEvents({ ...this.state, reportOptions: this.props.reportOptions });
+    this.props.getMessageEvents({ ...this.state, dateOptions: this.props.dateOptions });
   }
 
   parseAddresses = (value) => {
@@ -80,10 +81,28 @@ export class BasicFilter extends Component {
   }
 
   render() {
+    const { dateOptions, refreshMessageEventsDateRange, loading } = this.props;
     return (
       <Grid>
         <Grid.Column xs={12} md={6}>
-          <DateFilter />
+          <DatePicker
+            {...dateOptions}
+            relativeDateOptions={[
+              'hour',
+              'day',
+              '7days',
+              '10days',
+              'custom'
+            ]}
+            disabled={loading}
+            onChange={refreshMessageEventsDateRange}
+            datePickerProps={{
+              disabledDays: {
+                after: new Date(),
+                before: moment().utc().subtract(10, 'days').toDate()
+              }
+            }}
+          />
         </Grid.Column>
         <Grid.Column xs={12} md={6}>
           <Field
@@ -104,8 +123,11 @@ export class BasicFilter extends Component {
 const formName = 'msgEventsBasicFilter';
 const formOptions = { form: formName };
 
-const mapStateToProps = ({ reportOptions }) => ({ reportOptions });
-const mapDispatchToProps = { getMessageEvents, refreshReportOptions };
+const mapStateToProps = ({ messageEvents }) => ({
+  dateOptions: messageEvents.dateOptions,
+  loading: messageEvents.loading
+});
+const mapDispatchToProps = { getMessageEvents, refreshMessageEventsDateRange };
 
 export default connect(
   mapStateToProps,

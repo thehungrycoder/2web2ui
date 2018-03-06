@@ -55,8 +55,8 @@ export function searchRecipient({ email, subaccountId } = {}) {
 }
 
 export function searchSuppressions(options) {
-  const { reportOptions, types = [], sources = []} = options;
-  const { from, to } = reportOptions;
+  const { dateOptions, types = [], sources = []} = options;
+  const { from, to } = dateOptions;
 
   const params = {};
 
@@ -171,5 +171,23 @@ export function uploadSuppressions(file, subaccount) {
 export function resetErrors() {
   return {
     type: 'RESET_SUPPRESSION_ERRORS'
+  };
+}
+
+/**
+ * Refreshes the date range for message events
+ *
+ * Calculates relative ranges if a non-custom relativeRange value is present,
+ * which will override passed in from/to dates
+ *
+ * @param {Object} dateOptions
+ * @param {Date} dateOptions.from
+ * @param {Date} dateOptions.to
+ * @param {String} dateOptions.relativeRange
+ */
+export function refreshSuppressionDateRange(dateOptions) {
+  return {
+    type: 'REFRESH_SUPPRESSION_SEARCH_DATE_OPTIONS',
+    payload: dateOptions
   };
 }

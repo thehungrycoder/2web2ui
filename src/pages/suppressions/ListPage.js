@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Page, Tabs , Panel } from '@sparkpost/matchbox';
-import { searchRecipient, searchSuppressions } from 'src/actions/suppressions';
+import { searchRecipient } from 'src/actions/suppressions';
 import { list as listSubaccounts } from 'src/actions/subaccounts';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
-import FilterForm from './components/FilterForm';
+import SuppressionSearch from './components/SuppressionSearch';
 import EmailSearch from './components/EmailSearch';
 import Results from './components/Results';
 
@@ -23,34 +23,20 @@ export class ListPage extends Component {
     selectedTab: 0
   };
 
-  handleSearchByEmail = (options) => {
-    this.props.searchRecipient(options);
-  }
-
-  renderFilters() {
-    return <FilterForm onSubmit={this.props.searchSuppressions} />;
-  }
-
-  renderFindByEmails() {
-    const { hasSubaccounts } = this.props;
-    return <EmailSearch onSubmit={this.handleSearchByEmail} hasSubaccounts={hasSubaccounts} />;
-  }
-
   handleTabs(tabIdx) {
     this.setState({ selectedTab: tabIdx });
   }
 
   componentDidMount() {
-    const { reportOptions, hasSubaccounts, searchSuppressions, listSubaccounts } = this.props;
+    const { hasSubaccounts, listSubaccounts } = this.props;
     if (hasSubaccounts) {
       listSubaccounts();
     }
-    searchSuppressions({ reportOptions });
   }
 
   render() {
     const { selectedTab } = this.state;
-    const { loading, deleting, list, subaccounts, hasSubaccounts } = this.props;
+    const { loading, deleting, list, subaccounts, hasSubaccounts, searchRecipient } = this.props;
 
     return (
       <Page
@@ -69,7 +55,10 @@ export class ListPage extends Component {
 
         <Panel>
           <Panel.Section>
-            { selectedTab === 1 ? this.renderFindByEmails() : this.renderFilters() }
+            {selectedTab === 1
+              ? <EmailSearch onSubmit={searchRecipient} hasSubaccounts={hasSubaccounts} />
+              : <SuppressionSearch />
+            }
           </Panel.Section>
         </Panel>
         <Results results={list} loading={loading} deleting={deleting} subaccounts={subaccounts} hasSubaccounts={hasSubaccounts}/>
@@ -81,7 +70,6 @@ export class ListPage extends Component {
 const mapStateToProps = (state) => {
   const { listLoading, list, deleting } = state.suppressions;
   return {
-    reportOptions: state.reportOptions,
     loading: listLoading,
     list,
     hasSubaccounts: hasSubaccounts(state),
@@ -90,4 +78,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { searchSuppressions, searchRecipient, listSubaccounts })(ListPage);
+export default connect(mapStateToProps, { searchRecipient, listSubaccounts })(ListPage);
