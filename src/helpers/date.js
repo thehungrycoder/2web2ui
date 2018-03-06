@@ -1,7 +1,6 @@
 import moment from 'moment';
 import config from 'src/config';
 
-
 export const relativeDateOptions = [
   { value: 'hour', label: 'Last Hour' },
   { value: 'day', label: 'Last 24 Hours' },
@@ -16,6 +15,7 @@ export const relativeDateOptionsIndexed = relativeDateOptions.reduce((result, { 
   return result;
 }, {});
 
+export const getRelativeDateOptions = (ranges) => relativeDateOptions.filter((item) => ranges.includes(item.value));
 /**
  * Takes a date string and returns the end of that day (11:59PM)
  *

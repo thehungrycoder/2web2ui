@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Component: DateFilter should render ok by default 1`] = `
+exports[`Component: DatePicker should render ok by default 1`] = `
 <Popover
   bottom={true}
   onOutsideClick={[Function]}
@@ -12,7 +12,13 @@ exports[`Component: DateFilter should render ok by default 1`] = `
         <Select
           disabled={false}
           onChange={[Function]}
-          options={Array []}
+          options={
+            Array [
+              1,
+              2,
+              3,
+            ]
+          }
           placeholderValue=""
           required={false}
           value="day"
@@ -51,7 +57,7 @@ exports[`Component: DateFilter should render ok by default 1`] = `
     }
     toMonth={2017-01-15T12:00:00.000Z}
   />
-  <DateForm
+  <ManualEntryForm
     from={2017-01-15T11:00:00.000Z}
     onEnter={[Function]}
     selectDates={[Function]}
