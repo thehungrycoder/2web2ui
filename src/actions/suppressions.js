@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import moment from 'moment';
 import config from 'src/config';
 import _ from 'lodash';
@@ -189,5 +190,19 @@ export function refreshSuppressionDateRange(dateOptions) {
   return {
     type: 'REFRESH_SUPPRESSION_SEARCH_DATE_OPTIONS',
     payload: dateOptions
+  };
+}
+
+export function updateSuppressionSearchTypes(types) {
+  return {
+    type: 'UPDATE_SUPPRESSION_SEARCH_TYPES',
+    payload: types
+  };
+}
+
+export function updateSuppressionSearchSources(sources) {
+  return {
+    type: 'UPDATE_SUPPRESSION_SEARCH_SOURCES',
+    payload: sources
   };
 }

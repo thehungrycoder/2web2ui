@@ -62,6 +62,15 @@ export default (state = initialState, action) => {
     }
 
 
+    // Type and source search
+
+    case 'UPDATE_SUPPRESSION_SEARCH_TYPES':
+      return { ...state, search: { ...state.search, types: action.payload }};
+
+    case 'UPDATE_SUPPRESSION_SEARCH_SOURCES':
+      return { ...state, search: { ...state.search, sources: action.payload }};
+
+
     // Delete suppression
 
     case 'DELETE_SUPPRESSION_PENDING':

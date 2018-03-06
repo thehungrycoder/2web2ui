@@ -6,15 +6,11 @@ import { Grid } from '@sparkpost/matchbox';
 import { FilterDropdown } from 'src/components';
 import * as suppressionActions from 'src/actions/suppressions';
 import DatePicker from 'src/components/datePicker/DatePicker';
+import { selectSearchInitialValues } from 'src/selectors/suppressions';
 import styles from './SuppressionSearch.module.scss';
 import { TYPES, SOURCES, RELATIVE_DATE_OPTIONS } from '../constants';
 
 export class SuppressionSearch extends Component {
-
-  state = {
-    types: [],
-    sources: []
-  };
 
   componentDidMount() {
     this.props.refreshSuppressionDateRange({ relativeRange: this.props.search.dateOptions.relativeRange || 'day' });
@@ -28,21 +24,13 @@ export class SuppressionSearch extends Component {
   }
 
   handleTypesSelection = (selected) => {
-    const values = _.compact(_.map(selected, (val, key) => val ? key : undefined));
-    const { types } = this.state;
-    if (_.isEqual(types, values)) {
-      return; //same value, no need to do anything
-    }
-    this.setState({ types: values });
+    const types = _.compact(_.map(selected, (val, key) => val ? key : undefined));
+    this.props.updateSuppressionSearchTypes(types);
   }
 
   handleSourcesSelection = (selected) => {
-    const values = _.compact(_.map(selected, (val, key) => val ? key : undefined));
-    const { sources } = this.state;
-    if (_.isEqual(sources, values)) {
-      return; //same value, no need to do anything
-    }
-    this.setState({ sources: values });
+    const sources = _.compact(_.map(selected, (val, key) => val ? key : undefined));
+    this.props.updateSuppressionSearchSources(sources);
   }
 
   render() {
@@ -84,9 +72,11 @@ const formName = 'filterForm';
 const formOptions = {
   form: formName
 };
+
 const mapStateToProps = (state) => ({
   search: state.suppressions.search,
   list: state.suppressions.list,
-  loading: state.suppressions.listLoading
+  loading: state.suppressions.listLoading,
+  initialValues: selectSearchInitialValues(state)
 });
 export default connect(mapStateToProps, suppressionActions)(reduxForm(formOptions)(SuppressionSearch));
