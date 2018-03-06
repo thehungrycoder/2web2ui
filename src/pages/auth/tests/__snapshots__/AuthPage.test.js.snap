@@ -2,14 +2,7 @@
 
 exports[`renders correctly 1`] = `
 <div>
-  <div>
-    <UnstyledLink
-      title="SparkPost"
-      to="https://www.sparkpost.com"
-    >
-      <Logo />
-    </UnstyledLink>
-  </div>
+  <CenteredLogo />
   <Panel
     accent={true}
     sectioned={true}
@@ -20,19 +13,25 @@ exports[`renders correctly 1`] = `
       ssoEnabled={false}
     />
   </Panel>
+  <Panel.Footer
+    left={false}
+    right={
+      <small>
+        <UnstyledLink
+          Component={[Function]}
+          to="/forgot-password"
+        >
+          Forgot your password?
+        </UnstyledLink>
+      </small>
+    }
+  />
 </div>
 `;
 
 exports[`renders correctly when there is a login error 1`] = `
 <div>
-  <div>
-    <UnstyledLink
-      title="SparkPost"
-      to="https://www.sparkpost.com"
-    >
-      <Logo />
-    </UnstyledLink>
-  </div>
+  <CenteredLogo />
   <Panel
     accent={true}
     sectioned={true}
@@ -46,19 +45,25 @@ exports[`renders correctly when there is a login error 1`] = `
       ssoEnabled={false}
     />
   </Panel>
+  <Panel.Footer
+    left={false}
+    right={
+      <small>
+        <UnstyledLink
+          Component={[Function]}
+          to="/forgot-password"
+        >
+          Forgot your password?
+        </UnstyledLink>
+      </small>
+    }
+  />
 </div>
 `;
 
 exports[`should display tfa form when TFA is enabled 1`] = `
 <div>
-  <div>
-    <UnstyledLink
-      title="SparkPost"
-      to="https://www.sparkpost.com"
-    >
-      <Logo />
-    </UnstyledLink>
-  </div>
+  <CenteredLogo />
   <Panel
     accent={true}
     sectioned={true}

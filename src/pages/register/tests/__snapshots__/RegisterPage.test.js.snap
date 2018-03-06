@@ -2,14 +2,7 @@
 
 exports[`Page: RegisterPage happy path render 1`] = `
 <div>
-  <div>
-    <UnstyledLink
-      title="SparkPost"
-      to="https://www.sparkpost.com"
-    >
-      <Logo />
-    </UnstyledLink>
-  </div>
+  <CenteredLogo />
   <Panel
     accent={true}
     title="Set Password"
@@ -27,25 +20,24 @@ exports[`Page: RegisterPage happy path render 1`] = `
       />
     </Panel.Section>
   </Panel>
-  <UnstyledLink
-    Component={[Function]}
-    to="/auth"
-  >
-    Already signed up?
-  </UnstyledLink>
+  <Panel.Footer
+    left={
+      <small>
+        <UnstyledLink
+          Component={[Function]}
+          to="/auth"
+        >
+          Already signed up?
+        </UnstyledLink>
+      </small>
+    }
+  />
 </div>
 `;
 
 exports[`Page: RegisterPage loading 1`] = `
 <div>
-  <div>
-    <UnstyledLink
-      title="SparkPost"
-      to="https://www.sparkpost.com"
-    >
-      <Logo />
-    </UnstyledLink>
-  </div>
+  <CenteredLogo />
   <Panel
     accent={true}
     title="Set Password"
@@ -54,12 +46,18 @@ exports[`Page: RegisterPage loading 1`] = `
       minHeight="400px"
     />
   </Panel>
-  <UnstyledLink
-    Component={[Function]}
-    to="/auth"
-  >
-    Already signed up?
-  </UnstyledLink>
+  <Panel.Footer
+    left={
+      <small>
+        <UnstyledLink
+          Component={[Function]}
+          to="/auth"
+        >
+          Already signed up?
+        </UnstyledLink>
+      </small>
+    }
+  />
 </div>
 `;
 
@@ -72,14 +70,7 @@ exports[`Page: RegisterPage no token 1`] = `
 
 exports[`Page: RegisterPage token expired 1`] = `
 <div>
-  <div>
-    <UnstyledLink
-      title="SparkPost"
-      to="https://www.sparkpost.com"
-    >
-      <Logo />
-    </UnstyledLink>
-  </div>
+  <CenteredLogo />
   <Panel
     accent={true}
     title="Set Password"
@@ -90,11 +81,17 @@ exports[`Page: RegisterPage token expired 1`] = `
       </p>
     </Panel.Section>
   </Panel>
-  <UnstyledLink
-    Component={[Function]}
-    to="/auth"
-  >
-    Already signed up?
-  </UnstyledLink>
+  <Panel.Footer
+    left={
+      <small>
+        <UnstyledLink
+          Component={[Function]}
+          to="/auth"
+        >
+          Already signed up?
+        </UnstyledLink>
+      </small>
+    }
+  />
 </div>
 `;

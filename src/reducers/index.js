@@ -16,6 +16,7 @@ import globalAlert from './globalAlert';
 import ipPools from './ipPools';
 import messageEvents from './messageEvents';
 import metrics from './metrics';
+import passwordReset from './passwordReset';
 import recipientLists from './recipientLists';
 import reportOptions from './reportOptions';
 import sendingDomains from './sendingDomains';
@@ -48,6 +49,7 @@ const appReducer = combineReducers({
   globalAlert,
   metrics,
   messageEvents,
+  passwordReset,
   reportOptions,
   recipientLists,
   sendingDomains,

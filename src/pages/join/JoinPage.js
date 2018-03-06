@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import qs from 'query-string';
 import cookie from 'js-cookie';
 import _ from 'lodash';
@@ -10,7 +10,6 @@ import { Panel, Error, UnstyledLink } from '@sparkpost/matchbox';
 import JoinForm from './components/JoinForm';
 import JoinError from './components/JoinError';
 import config from 'src/config';
-import { logout } from 'src/actions/auth';
 import { authenticate } from 'src/actions/auth';
 import { loadScript } from 'src/helpers/loadScript';
 import { addEvent } from 'src/helpers/googleAnalytics';
@@ -19,14 +18,9 @@ import { AFTER_JOIN_REDIRECT_ROUTE, LINKS } from 'src/constants';
 const { attribution, salesforceDataParams } = config;
 
 export class JoinPage extends Component {
-
   state = {
     formData: {}
   };
-
-  componentDidMount() {
-    this.props.logout();
-  }
 
   getAndSetAttributionData = () => {
     const { params } = this.props;
@@ -87,7 +81,9 @@ export class JoinPage extends Component {
             <JoinForm onSubmit={this.registerSubmit} />
           </Panel.Section>
         </Panel>
-        <small>Already have an account? <UnstyledLink to={'/auth'}>Log In</UnstyledLink>.</small>
+        <Panel.Footer
+          left={<small>Already have an account? <UnstyledLink Component={Link} to='/auth'>Log In</UnstyledLink>.</small>}
+        />
       </div>
     );
   }
@@ -100,4 +96,4 @@ function mapStateToProps(state, props) {
   };
 }
 
-export default withRouter(connect(mapStateToProps, { logout, authenticate, register })(JoinPage));
+export default withRouter(connect(mapStateToProps, { authenticate, register })(JoinPage));

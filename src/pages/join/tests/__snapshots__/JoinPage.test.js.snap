@@ -20,15 +20,20 @@ exports[`JoinPage render renders correctly 1`] = `
       />
     </Panel.Section>
   </Panel>
-  <small>
-    Already have an account? 
-    <UnstyledLink
-      to="/auth"
-    >
-      Log In
-    </UnstyledLink>
-    .
-  </small>
+  <Panel.Footer
+    left={
+      <small>
+        Already have an account? 
+        <UnstyledLink
+          Component={[Function]}
+          to="/auth"
+        >
+          Log In
+        </UnstyledLink>
+        .
+      </small>
+    }
+  />
 </div>
 `;
 
@@ -62,14 +67,19 @@ exports[`JoinPage render renders errors 1`] = `
       />
     </Panel.Section>
   </Panel>
-  <small>
-    Already have an account? 
-    <UnstyledLink
-      to="/auth"
-    >
-      Log In
-    </UnstyledLink>
-    .
-  </small>
+  <Panel.Footer
+    left={
+      <small>
+        Already have an account? 
+        <UnstyledLink
+          Component={[Function]}
+          to="/auth"
+        >
+          Log In
+        </UnstyledLink>
+        .
+      </small>
+    }
+  />
 </div>
 `;

@@ -4,15 +4,14 @@ import { withRouter, Redirect, Link } from 'react-router-dom';
 import qs from 'query-string';
 import ErrorTracker from 'src/helpers/errorTracker';
 
-import { SparkPost } from 'src/components';
+import { CenteredLogo } from 'src/components';
 import { Panel, UnstyledLink } from '@sparkpost/matchbox';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
 import RegisterUserForm from './RegisterUserForm';
-import styles from './RegisterPage.module.scss';
 
 import { registerUser, checkInviteToken } from 'src/actions/users';
-import { authenticate, logout } from 'src/actions/auth';
-import { DEFAULT_REDIRECT_ROUTE, LINKS } from 'src/constants';
+import { authenticate } from 'src/actions/auth';
+import { DEFAULT_REDIRECT_ROUTE } from 'src/constants';
 
 export class RegisterPage extends Component {
 
@@ -31,7 +30,6 @@ export class RegisterPage extends Component {
 
 
   componentDidMount() {
-    this.props.logout();
     this.props.checkInviteToken(this.props.token);
   }
 
@@ -67,16 +65,12 @@ export class RegisterPage extends Component {
 
     return (
       <div>
-        <div className={styles.LogoWrapper}>
-          <UnstyledLink to={LINKS.SP_HOME_PAGE} title='SparkPost'>
-            <SparkPost.Logo />
-          </UnstyledLink>
-        </div>
+        <CenteredLogo />
 
         <Panel accent title='Set Password'>
           { this.renderRegisterPanel() }
         </Panel>
-        <UnstyledLink Component={Link} to='/auth'>Already signed up?</UnstyledLink>
+        <Panel.Footer left={<small><UnstyledLink Component={Link} to='/auth'>Already signed up?</UnstyledLink></small>} />
       </div>
     );
   }
@@ -90,4 +84,4 @@ function mapStateToProps({ auth, users }, props) {
   };
 }
 
-export default withRouter(connect(mapStateToProps, { registerUser, checkInviteToken, logout, authenticate })(RegisterPage));
+export default withRouter(connect(mapStateToProps, { registerUser, checkInviteToken, authenticate })(RegisterPage));
