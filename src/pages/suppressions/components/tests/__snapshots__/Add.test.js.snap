@@ -27,7 +27,10 @@ exports[`AddTab tests should disable fields when submitting 1`] = `
         helpText="Leaving this field blank will add the suppressions to the master account."
         name="subaccount"
       />
-      <Checkbox.Group>
+      <Checkbox.Group
+        label="Type "
+        required={true}
+      >
         <Field
           component={[Function]}
           label="Transactional"
@@ -44,16 +47,13 @@ exports[`AddTab tests should disable fields when submitting 1`] = `
       </Checkbox.Group>
     </Panel.Section>
     <Panel.Section>
-      <Label>
-        If email exists, the record will be updated
-      </Label>
       <Button
         disabled={true}
         primary={true}
         size="default"
         type="submit"
       >
-        Add
+        Add / Update
       </Button>
     </Panel.Section>
   </form>
@@ -87,7 +87,10 @@ exports[`AddTab tests should make form submitable when dirty and not submitting 
         helpText="Leaving this field blank will add the suppressions to the master account."
         name="subaccount"
       />
-      <Checkbox.Group>
+      <Checkbox.Group
+        label="Type "
+        required={true}
+      >
         <Field
           component={[Function]}
           label="Transactional"
@@ -104,16 +107,13 @@ exports[`AddTab tests should make form submitable when dirty and not submitting 
       </Checkbox.Group>
     </Panel.Section>
     <Panel.Section>
-      <Label>
-        If email exists, the record will be updated
-      </Label>
       <Button
         disabled={false}
         primary={true}
         size="default"
         type="submit"
       >
-        Add
+        Add / Update
       </Button>
     </Panel.Section>
   </form>
@@ -147,7 +147,10 @@ exports[`AddTab tests should render add form 1`] = `
         helpText="Leaving this field blank will add the suppressions to the master account."
         name="subaccount"
       />
-      <Checkbox.Group>
+      <Checkbox.Group
+        label="Type "
+        required={true}
+      >
         <Field
           component={[Function]}
           label="Transactional"
@@ -164,16 +167,13 @@ exports[`AddTab tests should render add form 1`] = `
       </Checkbox.Group>
     </Panel.Section>
     <Panel.Section>
-      <Label>
-        If email exists, the record will be updated
-      </Label>
       <Button
         disabled={true}
         primary={true}
         size="default"
         type="submit"
       >
-        Add
+        Add / Update
       </Button>
     </Panel.Section>
   </form>

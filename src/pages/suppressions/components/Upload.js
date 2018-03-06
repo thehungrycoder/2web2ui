@@ -31,7 +31,7 @@ export class UploadTab extends Component {
   }
 
   render() {
-    const { handleSubmit: reduxFormSubmit, submitting } = this.props;
+    const { handleSubmit: reduxFormSubmit, submitting, pristine } = this.props;
     return (
       <Fragment>
         <form onSubmit={reduxFormSubmit(this.handleSubmit)}>
@@ -65,7 +65,7 @@ export class UploadTab extends Component {
             />
           </Panel.Section>
           <Panel.Section>
-            <Button primary disabled={submitting} type="submit">Upload</Button>
+            <Button primary disabled={pristine || submitting} type="submit">Upload</Button>
           </Panel.Section>
         </form>
       </Fragment>

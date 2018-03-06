@@ -9,7 +9,7 @@ import { resetErrors } from 'src/actions/suppressions';
 
 const tabs = [
   {
-    content: 'Add'
+    content: 'Single Recipient'
   },
   {
     content: 'Bulk Upload'

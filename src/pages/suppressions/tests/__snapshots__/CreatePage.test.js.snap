@@ -22,7 +22,7 @@ exports[`CreatePage tests should display the error banner on parse error 1`] = `
     tabs={
       Array [
         Object {
-          "content": "Add",
+          "content": "Single Recipient",
           "onClick": [Function],
         },
         Object {
@@ -60,7 +60,7 @@ exports[`CreatePage tests should display the error banner on persist error 1`] =
     tabs={
       Array [
         Object {
-          "content": "Add",
+          "content": "Single Recipient",
           "onClick": [Function],
         },
         Object {
@@ -94,7 +94,7 @@ exports[`CreatePage tests should render AddTab 1`] = `
     tabs={
       Array [
         Object {
-          "content": "Add",
+          "content": "Single Recipient",
           "onClick": [Function],
         },
         Object {
@@ -128,7 +128,7 @@ exports[`CreatePage tests should render UploadTab 1`] = `
     tabs={
       Array [
         Object {
-          "content": "Add",
+          "content": "Single Recipient",
           "onClick": [Function],
         },
         Object {

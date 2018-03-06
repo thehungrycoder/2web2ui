@@ -74,7 +74,7 @@ describe('AddTab tests', () => {
     });
 
     it('should return error if both trans and non-trans are false', () => {
-      expect(instance.atLeastOne(true, { })).toEqual('You must select at least 1 one of Transactional or Non-Transactional');
+      expect(instance.atLeastOne(true, { })).toEqual('You must select at least one Type');
     });
 
   });

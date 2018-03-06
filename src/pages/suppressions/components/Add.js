@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Field, reset, reduxForm } from 'redux-form';
-import { Button, Label, Panel, Checkbox } from '@sparkpost/matchbox';
+import { Button, Panel, Checkbox } from '@sparkpost/matchbox';
 import { TextFieldWrapper, CheckboxWrapper } from 'src/components';
 
 import { showAlert } from 'src/actions/globalAlert';
@@ -13,7 +13,7 @@ const FORM_NAME = 'addSuppression';
 
 export class AddTab extends Component {
   atLeastOne = (value, { transactional, non_transactional }) => (!transactional && !non_transactional)
-    ? 'You must select at least 1 one of Transactional or Non-Transactional'
+    ? 'You must select at least one Type'
     : undefined;
 
   onSubmit = ({ subaccount, ...recipient }) => {
@@ -53,7 +53,7 @@ export class AddTab extends Component {
               helpText='Leaving this field blank will add the suppressions to the master account.'
               name='subaccount'
             />
-            <Checkbox.Group>
+            <Checkbox.Group label="Type " required>
               <Field
                 name='transactional'
                 component={CheckboxWrapper}
@@ -70,8 +70,7 @@ export class AddTab extends Component {
             </Checkbox.Group>
           </Panel.Section>
           <Panel.Section>
-            <Label>If email exists, the record will be updated</Label>
-            <Button primary disabled={pristine || submitting} type="submit">Add</Button>
+            <Button primary disabled={pristine || submitting} type="submit">Add / Update</Button>
           </Panel.Section>
         </form>
       </Fragment>
