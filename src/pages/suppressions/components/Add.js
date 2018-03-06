@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -6,20 +7,27 @@ import { Button, Panel, Checkbox } from '@sparkpost/matchbox';
 import { TextFieldWrapper, CheckboxWrapper } from 'src/components';
 
 import { showAlert } from 'src/actions/globalAlert';
-import { addSuppression } from 'src/actions/suppressions';
+import { createOrUpdateSuppressions } from 'src/actions/suppressions';
 import SubaccountTypeaheadWrapper from 'src/components/reduxFormWrappers/SubaccountTypeaheadWrapper';
 import { required, email } from 'src/helpers/validation';
 const FORM_NAME = 'addSuppression';
 
 export class AddTab extends Component {
-  atLeastOne = (value, { transactional, non_transactional }) => (!transactional && !non_transactional)
+  atLeastOne = (_value, { types }) => !_.some(_.values(types))
     ? 'You must select at least one Type'
     : undefined;
 
-  onSubmit = ({ subaccount, ...recipient }) => {
-    const { showAlert, reset } = this.props;
+  onSubmit = ({ description, recipient, subaccount, types }) => {
+    const { reset, showAlert } = this.props;
+    const recipients = _.reduce(types, (result, checked, type) => {
+      if (!checked) {
+        return result;
+      }
 
-    return this.props.addSuppression(recipient, subaccount)
+      return [ ...result, { recipient, description, type }];
+    }, []);
+
+    return this.props.createOrUpdateSuppressions(recipients, subaccount)
       .then(() => {
         showAlert({ message: 'Successfully updated your suppression list', type: 'success' });
         reset(FORM_NAME);
@@ -31,6 +39,7 @@ export class AddTab extends Component {
 
   render() {
     const { handleSubmit, pristine, submitting } = this.props;
+
     return (
       <Fragment>
         <form onSubmit={handleSubmit(this.onSubmit)}>
@@ -55,16 +64,16 @@ export class AddTab extends Component {
             />
             <Checkbox.Group label="Type " required>
               <Field
-                name='transactional'
                 component={CheckboxWrapper}
-                type='checkbox'
+                name='types.transactional'
                 label='Transactional'
+                type='checkbox'
               />
               <Field
-                name='non_transactional'
                 component={CheckboxWrapper}
-                type='checkbox'
+                name='types.non_transactional'
                 label='Non-Transactional'
+                type='checkbox'
                 validate={this.atLeastOne}
               />
             </Checkbox.Group>
@@ -81,10 +90,11 @@ export class AddTab extends Component {
 
 const mapStateToProps = (state) => ({
   initialValues: {
-    transactional: false,
-    non_transactional: false
+    types: {
+      non_transactional: false,
+      transactional: false
+    }
   }
 });
 
-export default withRouter(connect(mapStateToProps, { showAlert, addSuppression, reset })(reduxForm({ form: FORM_NAME })(AddTab)));
-
+export default withRouter(connect(mapStateToProps, { showAlert, createOrUpdateSuppressions, reset })(reduxForm({ form: FORM_NAME })(AddTab)));

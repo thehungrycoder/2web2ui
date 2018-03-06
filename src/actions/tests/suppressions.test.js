@@ -152,40 +152,4 @@ describe('Action Creator: Suppressions', () => {
       expect(mockDispatch.mock.calls).toMatchSnapshot();
     });
   });
-
-  describe('addSuppression', () => {
-    let mockSuppression;
-    let createStub;
-
-    beforeEach(() => {
-      createStub = jest.fn();
-      mockSuppression = { recipient: 'foo@bar.com', description: 'desc', transactional: true, non_transactional: true };
-    });
-
-    it('should create two recipients if trans/non-trans are true', () => {
-      suppressions.addSuppression(mockSuppression, 'sub', createStub);
-      expect(createStub).toHaveBeenCalledWith([
-        { recipient: 'foo@bar.com', description: 'desc', type: 'transactional' },
-        { recipient: 'foo@bar.com', description: 'desc', type: 'non_transactional' }
-      ], 'sub');
-    });
-
-    it('should only create 1 recipient if trans is true and non-trans is false', () => {
-      mockSuppression.non_transactional = false;
-      suppressions.addSuppression(mockSuppression, 'sub', createStub);
-      expect(createStub).toHaveBeenCalledWith([
-        { recipient: 'foo@bar.com', description: 'desc', type: 'transactional' }
-      ], 'sub');
-
-    });
-
-    it('should not create any suppressions if missing trans/non-trans flags exists', () => {
-      mockSuppression.non_transactional = false;
-      mockSuppression.transactional = false;
-      suppressions.addSuppression(mockSuppression, undefined, createStub);
-      expect(createStub).toHaveBeenCalledWith([], undefined);
-
-    });
-
-  });
 });

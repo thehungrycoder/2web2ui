@@ -115,19 +115,6 @@ export function deleteSuppression(suppression) {
 const LIKE_NON = new RegExp('non', 'i');
 const LIKE_TRUE = new RegExp('true', 'i');
 
-export function addSuppression({ recipient, description, ...suppression }, subaccount, createSuppression = createOrUpdateSuppressions) {
-  const suppressions = [];
-  if (LIKE_TRUE.test(suppression.transactional)) {
-    suppressions.push({ type: 'transactional', recipient, description });
-  }
-
-  if (LIKE_TRUE.test(suppression.non_transactional)) {
-    suppressions.push({ type: 'non_transactional', recipient, description });
-  }
-
-  return createSuppression(suppressions, subaccount);
-}
-
 // SEE: https://developers.sparkpost.com/api/suppression-list.html#suppression-list-bulk-insert-update-put
 export function createOrUpdateSuppressions(recipients, subaccount) {
   const sanitizedRecipients = recipients.map(({
@@ -187,4 +174,3 @@ export function resetErrors() {
     type: 'RESET_SUPPRESSION_ERRORS'
   };
 }
-

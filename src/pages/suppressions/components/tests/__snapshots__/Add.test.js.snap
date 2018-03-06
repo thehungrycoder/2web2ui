@@ -34,13 +34,13 @@ exports[`AddTab tests should disable fields when submitting 1`] = `
         <Field
           component={[Function]}
           label="Transactional"
-          name="transactional"
+          name="types.transactional"
           type="checkbox"
         />
         <Field
           component={[Function]}
           label="Non-Transactional"
-          name="non_transactional"
+          name="types.non_transactional"
           type="checkbox"
           validate={[Function]}
         />
@@ -94,13 +94,13 @@ exports[`AddTab tests should make form submitable when dirty and not submitting 
         <Field
           component={[Function]}
           label="Transactional"
-          name="transactional"
+          name="types.transactional"
           type="checkbox"
         />
         <Field
           component={[Function]}
           label="Non-Transactional"
-          name="non_transactional"
+          name="types.non_transactional"
           type="checkbox"
           validate={[Function]}
         />
@@ -154,13 +154,13 @@ exports[`AddTab tests should render add form 1`] = `
         <Field
           component={[Function]}
           label="Transactional"
-          name="transactional"
+          name="types.transactional"
           type="checkbox"
         />
         <Field
           component={[Function]}
           label="Non-Transactional"
-          name="non_transactional"
+          name="types.non_transactional"
           type="checkbox"
           validate={[Function]}
         />

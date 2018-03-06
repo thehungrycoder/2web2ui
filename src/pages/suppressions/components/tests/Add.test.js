@@ -13,7 +13,7 @@ describe('AddTab tests', () => {
       submitting: false,
       pristine: true,
       handleSubmit: jest.fn(),
-      addSuppression: jest.fn(() => Promise.resolve()),
+      createOrUpdateSuppressions: jest.fn(() => Promise.resolve()),
       reset: jest.fn(),
       showAlert: jest.fn()
     };
@@ -40,21 +40,26 @@ describe('AddTab tests', () => {
       const args = {
         subaccount: 999,
         recipient: 'foo@bar.com',
-        description: 'desc'
+        description: 'desc',
+        types: {
+          non_transactional: true,
+          transactional: false
+        }
       };
 
       await instance.onSubmit(args);
 
-      expect(instance.props.addSuppression).toHaveBeenCalledWith({
+      expect(instance.props.createOrUpdateSuppressions).toHaveBeenCalledWith([{
         recipient: 'foo@bar.com',
-        description: 'desc'
-      }, 999);
-      expect(instance.props.showAlert).toHaveBeenCalledWith({ message: 'Successfully updated your suppression list', type: 'success' });
+        description: 'desc',
+        type: 'non_transactional'
+      }], 999);
+      expect(instance.props.showAlert).toHaveBeenCalledWith(expect.objectContaining({ type: 'success' }));
       expect(instance.props.reset).toHaveBeenCalled();
     });
 
     it('catches errors when adding suppression', async() => {
-      wrapper.setProps({ addSuppression: jest.fn(() => Promise.reject(new Error('failed'))) });
+      wrapper.setProps({ createOrUpdateSuppressions: jest.fn(() => Promise.reject(new Error('failed'))) });
       const args = {
         subaccount: 999,
         recipient: 'foo@bar.com',
@@ -69,16 +74,19 @@ describe('AddTab tests', () => {
 
   describe('atLeastOne validator', () => {
     it('should returned undefined if trans or non-trans is true', () => {
-      expect(instance.atLeastOne(true, { transactional: true })).toEqual(undefined);
-      expect(instance.atLeastOne(true, { non_transactional: true })).toEqual(undefined);
+      expect(instance.atLeastOne(true, { types: { non_transactional: false, transactional: true }})).toEqual(undefined);
+      expect(instance.atLeastOne(true, { types: { non_transactional: false, transactional: true }})).toEqual(undefined);
     });
 
     it('should return error if both trans and non-trans are false', () => {
-      expect(instance.atLeastOne(true, { })).toEqual('You must select at least one Type');
-    });
+      const values = {
+        types: {
+          non_transactional: false,
+          transactional: false
+        }
+      };
 
+      expect(instance.atLeastOne(true, values)).toMatch(/select at least one/);
+    });
   });
 });
-
-
-
