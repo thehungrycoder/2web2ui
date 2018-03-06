@@ -24,7 +24,7 @@ export class CreatePage extends Component {
     }).catch((err) => {
       showAlert({
         type: 'error',
-        message: 'Failed to recipient list. Please try again.'
+        message: 'Failed to create recipient list. Please try again.'
       });
     });
   };
