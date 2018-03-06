@@ -79,6 +79,7 @@ export class RecipientListForm extends Component {
               validate={[required, maxLength(64)]}
               disabled={submitting}
               component={TextFieldWrapper}
+              required
             />
             { ! editMode && <Field
               name='id'
@@ -87,6 +88,7 @@ export class RecipientListForm extends Component {
               validate={[required, maxLength(64)]}
               disabled={submitting}
               component={TextFieldWrapper}
+              required
             /> }
             <Field
               name='description'
@@ -110,6 +112,7 @@ export class RecipientListForm extends Component {
               label={uploadHint}
               name="csv"
               validate={uploadValidators}
+              required
             />
           </Panel.Section>
           <Panel.Section>
