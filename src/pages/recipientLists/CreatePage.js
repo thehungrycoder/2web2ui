@@ -44,13 +44,9 @@ export class CreatePage extends Component {
   }
 }
 
-const mapStateToProps = ({ recipientLists }) => ({
-  error: recipientLists.error
-});
-
 const mapDispatchToProps = {
   createRecipientList,
   showAlert
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CreatePage));
+export default withRouter(connect(undefined, mapDispatchToProps)(CreatePage));
