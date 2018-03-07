@@ -1,0 +1,126 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ErrorBanner tests renders upload form with parsing error details 1`] = `
+<ApiErrorBanner
+  errorDetails={
+    <ul>
+      <li>
+        Unable to auto detect delimiter
+      </li>
+      <li>
+        On line 1, wrong number of columns.
+      </li>
+      <li>
+        On line 2, wrong number of columns.
+      </li>
+    </ul>
+  }
+  message="Unable to add recipients to your suppression list"
+  status="danger"
+/>
+`;
+
+exports[`ErrorBanner tests renders upload form with parsing error message 1`] = `
+<ApiErrorBanner
+  errorDetails="Oh no, parsing!"
+  message="Unable to add recipients to your suppression list"
+  status="danger"
+/>
+`;
+
+exports[`ErrorBanner tests renders upload form with parsing error too many details 1`] = `
+<ApiErrorBanner
+  errorDetails={
+    <ul>
+      <li>
+        On line 1, oh no!.
+      </li>
+      <li>
+        On line 2, oh no!.
+      </li>
+      <li>
+        On line 3, oh no!.
+      </li>
+      <li>
+        On line 4, oh no!.
+      </li>
+      <li>
+        On line 5, oh no!.
+      </li>
+      <li>
+        On line 6, oh no!.
+      </li>
+      <li>
+        On line 7, oh no!.
+      </li>
+      <li>
+        On line 8, oh no!.
+      </li>
+      <li>
+        On line 9, oh no!.
+      </li>
+      <li>
+        On line 10, oh no!.
+      </li>
+      <li>
+        On line 11, oh no!.
+      </li>
+      <li>
+        On line 12, oh no!.
+      </li>
+      <li>
+        On line 13, oh no!.
+      </li>
+      <li>
+        On line 14, oh no!.
+      </li>
+      <li>
+        On line 15, oh no!.
+      </li>
+      <li>
+        On line 16, oh no!.
+      </li>
+      <li>
+        On line 17, oh no!.
+      </li>
+      <li>
+        On line 18, oh no!.
+      </li>
+      <li>
+        On line 19, oh no!.
+      </li>
+      <li>
+        On line 20, oh no!.
+      </li>
+      <li>
+        On line 21, oh no!.
+      </li>
+      <li>
+        On line 22, oh no!.
+      </li>
+      <li>
+        On line 23, oh no!.
+      </li>
+      <li>
+        On line 24, oh no!.
+      </li>
+      <li>
+        On line 25, oh no!.
+      </li>
+      <li>
+        And more...
+      </li>
+    </ul>
+  }
+  message="Unable to add recipients to your suppression list"
+  status="danger"
+/>
+`;
+
+exports[`ErrorBanner tests renders upload form with persist error 1`] = `
+<ApiErrorBanner
+  errorDetails="Oh no, creating!"
+  message="Unable to add recipients to your suppression list"
+  status="danger"
+/>
+`;

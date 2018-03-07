@@ -1,0 +1,181 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddForm tests should disable fields when submitting 1`] = `
+<React.Fragment>
+  <form>
+    <Panel.Section>
+      <Field
+        component={[Function]}
+        label="Email Address"
+        name="recipient"
+        required={true}
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Field
+        component={[Function]}
+        label="Description"
+        name="description"
+      />
+      <Field
+        component={[Function]}
+        disabled={true}
+        helpText="Leaving this field blank will add the suppressions to the master account."
+        name="subaccount"
+      />
+      <Checkbox.Group
+        label="Type"
+        required={true}
+      >
+        <Field
+          component={[Function]}
+          label="Transactional"
+          name="types.transactional"
+          type="checkbox"
+        />
+        <Field
+          component={[Function]}
+          label="Non-Transactional"
+          name="types.non_transactional"
+          type="checkbox"
+          validate={[Function]}
+        />
+      </Checkbox.Group>
+    </Panel.Section>
+    <Panel.Section>
+      <Button
+        disabled={true}
+        primary={true}
+        size="default"
+        type="submit"
+      >
+        Add / Update
+      </Button>
+    </Panel.Section>
+  </form>
+</React.Fragment>
+`;
+
+exports[`AddForm tests should make form submitable when dirty and not submitting 1`] = `
+<React.Fragment>
+  <form>
+    <Panel.Section>
+      <Field
+        component={[Function]}
+        label="Email Address"
+        name="recipient"
+        required={true}
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Field
+        component={[Function]}
+        label="Description"
+        name="description"
+      />
+      <Field
+        component={[Function]}
+        disabled={false}
+        helpText="Leaving this field blank will add the suppressions to the master account."
+        name="subaccount"
+      />
+      <Checkbox.Group
+        label="Type"
+        required={true}
+      >
+        <Field
+          component={[Function]}
+          label="Transactional"
+          name="types.transactional"
+          type="checkbox"
+        />
+        <Field
+          component={[Function]}
+          label="Non-Transactional"
+          name="types.non_transactional"
+          type="checkbox"
+          validate={[Function]}
+        />
+      </Checkbox.Group>
+    </Panel.Section>
+    <Panel.Section>
+      <Button
+        disabled={false}
+        primary={true}
+        size="default"
+        type="submit"
+      >
+        Add / Update
+      </Button>
+    </Panel.Section>
+  </form>
+</React.Fragment>
+`;
+
+exports[`AddForm tests should render add form 1`] = `
+<React.Fragment>
+  <form>
+    <Panel.Section>
+      <Field
+        component={[Function]}
+        label="Email Address"
+        name="recipient"
+        required={true}
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Field
+        component={[Function]}
+        label="Description"
+        name="description"
+      />
+      <Field
+        component={[Function]}
+        disabled={false}
+        helpText="Leaving this field blank will add the suppressions to the master account."
+        name="subaccount"
+      />
+      <Checkbox.Group
+        label="Type"
+        required={true}
+      >
+        <Field
+          component={[Function]}
+          label="Transactional"
+          name="types.transactional"
+          type="checkbox"
+        />
+        <Field
+          component={[Function]}
+          label="Non-Transactional"
+          name="types.non_transactional"
+          type="checkbox"
+          validate={[Function]}
+        />
+      </Checkbox.Group>
+    </Panel.Section>
+    <Panel.Section>
+      <Button
+        disabled={true}
+        primary={true}
+        size="default"
+        type="submit"
+      >
+        Add / Update
+      </Button>
+    </Panel.Section>
+  </form>
+</React.Fragment>
+`;

@@ -1,4 +1,9 @@
-const initialState = { list: null, hasSuppressions: null, listLoading: false };
+const initialState = {
+  list: null,
+  hasSuppressions: null,
+  listLoading: false,
+  createError: null
+};
 
 export default (state = initialState, action) => {
   const { meta } = action;
@@ -51,20 +56,18 @@ export default (state = initialState, action) => {
     case 'DELETE_SUPPRESSION_FAIL':
       return { ...state, deleting: false, deleteError: action.payload };
 
-
-    //reset results
-    case 'RESET_SUPPRESSIONS_RESULTS':
-      return { ...state, list: null };
-
     case 'CREATE_OR_UPDATE_SUPPRESSIONS_FAIL':
       return { ...state, persistError: action.payload };
     case 'CREATE_OR_UPDATE_SUPPRESSIONS_SUCCESS':
-      return { ...state, persistError: undefined };
+      return { ...state, persistError: null };
 
     case 'PARSE_SUPPRESSIONS_FILE_FAIL':
       return { ...state, parseError: action.payload };
     case 'PARSE_SUPPRESSIONS_FILE_SUCCESS':
-      return { ...state, parseError: undefined };
+      return { ...state, parseError: null };
+
+    case 'RESET_SUPPRESSION_ERRORS':
+      return { ...state, parseError: null, persistError: null };
 
     default:
       return state;

@@ -167,3 +167,9 @@ export function uploadSuppressions(file, subaccount) {
     return dispatch(createOrUpdateSuppressions(recipients, subaccount));
   };
 }
+
+export function resetErrors() {
+  return {
+    type: 'RESET_SUPPRESSION_ERRORS'
+  };
+}

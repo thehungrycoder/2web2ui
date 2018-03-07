@@ -46,7 +46,7 @@ Object {
       "type": "transactional",
     },
   ],
-  "persistError": undefined,
+  "persistError": null,
 }
 `;
 
@@ -113,6 +113,6 @@ Object {
       "type": "transactional",
     },
   ],
-  "parseError": undefined,
+  "parseError": null,
 }
 `;
