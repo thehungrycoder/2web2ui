@@ -25,6 +25,7 @@ describe('Component: DatePicker', () => {
       from: mockFrom,
       to: mockNow,
       relativeRange: 'day',
+      relativeDateOptions: ['day', 'hour', 'custom'],
       onChange: jest.fn(),
       now: mockNow,
       disabled: false
@@ -65,7 +66,7 @@ describe('Component: DatePicker', () => {
   describe('syncTimeToState', () => {
 
     const before = { from: 'unchanged', to: 'unchanged' };
-    const after = { from: 'changed', to: 'changed' };
+    const after = { from: new Date(), to: new Date() };
 
     it('should sync the state when from or to is changed', () => {
       wrapper.setState({ selected: before });

@@ -6,6 +6,7 @@ import { Button, Datepicker, TextField, Select, Popover } from '@sparkpost/match
 import ManualEntryForm from './ManualEntryForm';
 import { DATE_FORMATS } from 'src/constants';
 import styles from './DatePicker.module.scss';
+import PropTypes from 'prop-types';
 
 export default class AppDatePicker extends Component {
   DATE_FORMAT = DATE_FORMATS.READABLE_DATE_TIME;
@@ -163,3 +164,14 @@ export default class AppDatePicker extends Component {
     );
   }
 }
+
+AppDatePicker.propTypes = {
+  now: PropTypes.instanceOf(Date),
+  from: PropTypes.instanceOf(Date).isRequired,
+  to: PropTypes.instanceOf(Date).isRequired,
+  relativeRange: PropTypes.string,
+  relativeDateOptions: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onChange: PropTypes.func.isRequired,
+  datePickerProps: PropTypes.object,
+  disabled: PropTypes.bool
+};

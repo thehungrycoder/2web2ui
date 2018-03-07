@@ -9,15 +9,16 @@ describe('Component: MessageEventsSearch', () => {
   let instance;
 
   beforeEach(() => {
+    const testDate = new Date('2018-02-15T12:00:00Z');
     props = {
       getMessageEvents: jest.fn(),
       search: {
-        dateOptions: {},
+        dateOptions: { from: testDate, to: testDate },
         recipients: []
       },
       refreshMessageEventsDateRange: jest.fn(),
       updateMessageEventsSearchOptions: jest.fn(),
-      now: new Date('2018-02-15T12:00:00Z')
+      now: testDate
     };
     wrapper = shallow(<MessageEventsSearch {...props} />);
     instance = wrapper.instance();
@@ -28,7 +29,7 @@ describe('Component: MessageEventsSearch', () => {
   });
 
   it('refreshes on change', () => {
-    const search = { dateOptions: {}, recipients: [], changed: 'something' };
+    const search = { ...props.search, changed: 'something' };
     wrapper.setProps({ search });
     expect(props.getMessageEvents).toHaveBeenCalledWith(search);
   });

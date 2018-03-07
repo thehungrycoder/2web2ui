@@ -15,6 +15,7 @@ exports[`Component: MessageEventsSearch renders correctly 1`] = `
           },
         }
       }
+      from={2018-02-15T12:00:00.000Z}
       onChange={
         [MockFunction] {
           "calls": Array [
@@ -35,6 +36,7 @@ exports[`Component: MessageEventsSearch renders correctly 1`] = `
           "custom",
         ]
       }
+      to={2018-02-15T12:00:00.000Z}
     />
   </Grid.Column>
   <Grid.Column

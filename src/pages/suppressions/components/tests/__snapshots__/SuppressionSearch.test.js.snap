@@ -8,6 +8,7 @@ exports[`SuppressionSearch renders correctly 1`] = `
   >
     <div>
       <AppDatePicker
+        from={2018-02-15T12:00:00.000Z}
         onChange={
           [MockFunction] {
             "calls": Array [
@@ -29,6 +30,7 @@ exports[`SuppressionSearch renders correctly 1`] = `
             "custom",
           ]
         }
+        to={2018-02-15T12:00:00.000Z}
       />
     </div>
   </Grid.Column>

@@ -11,6 +11,7 @@ exports[`Component: Report Options should mount and render correctly 1`] = `
         <div>
           <AppDatePicker
             filters={Array []}
+            from={2018-02-15T12:00:00.000Z}
             onChange={
               [MockFunction] {
                 "calls": Array [
@@ -30,6 +31,8 @@ exports[`Component: Report Options should mount and render correctly 1`] = `
                 "custom",
               ]
             }
+            relativeRange="day"
+            to={2018-02-15T12:00:00.000Z}
           />
         </div>
       </Grid.Column>
@@ -80,6 +83,7 @@ exports[`Component: Report Options should render with share modal on 1`] = `
         <div>
           <AppDatePicker
             filters={Array []}
+            from={2018-02-15T12:00:00.000Z}
             onChange={
               [MockFunction] {
                 "calls": Array [
@@ -99,6 +103,8 @@ exports[`Component: Report Options should render with share modal on 1`] = `
                 "custom",
               ]
             }
+            relativeRange="day"
+            to={2018-02-15T12:00:00.000Z}
           />
         </div>
       </Grid.Column>
@@ -164,6 +170,7 @@ exports[`Component: Report Options with active filters should render 1`] = `
                 },
               ]
             }
+            from={2018-02-15T12:00:00.000Z}
             onChange={
               [MockFunction] {
                 "calls": Array [
@@ -183,6 +190,8 @@ exports[`Component: Report Options with active filters should render 1`] = `
                 "custom",
               ]
             }
+            relativeRange="day"
+            to={2018-02-15T12:00:00.000Z}
           />
         </div>
       </Grid.Column>

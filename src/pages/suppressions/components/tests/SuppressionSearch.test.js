@@ -7,13 +7,17 @@ let props;
 let wrapper;
 
 beforeEach(() => {
+  const testDate = new Date('2018-02-15T12:00:00Z');
   props = {
     onSubmit: jest.fn(),
     refreshSuppressionDateRange: jest.fn(),
     searchSuppressions: jest.fn(),
     updateSuppressionSearchOptions: jest.fn(),
     search: {
-      dateOptions: {}
+      dateOptions: {
+        from: testDate,
+        to: testDate
+      }
     },
     list: null
   };
@@ -31,14 +35,14 @@ describe('SuppressionSearch', () => {
   });
 
   it('should refresh date range on mount using the stored range, if present', () => {
-    props.search.dateOptions = { relativeRange: 'hour' };
+    props.search.dateOptions = { ...props.search.dateOptions, relativeRange: 'hour' };
     wrapper = shallow(<SuppressionSearch {...props} />);
     expect(props.refreshSuppressionDateRange).toHaveBeenLastCalledWith({ relativeRange: 'hour' });
   });
 
   describe('componentDidUpdate', () => {
     it('reloads suppressions if search reference changes', () => {
-      const search = { is: 'new!' };
+      const search = { ...props.search, is: 'new!' };
       wrapper.setProps({ search });
       expect(props.searchSuppressions).toHaveBeenCalledWith(search);
     });
