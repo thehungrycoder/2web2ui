@@ -193,16 +193,9 @@ export function refreshSuppressionDateRange(dateOptions) {
   };
 }
 
-export function updateSuppressionSearchTypes(types) {
+export function updateSuppressionSearchOptions(options) {
   return {
-    type: 'UPDATE_SUPPRESSION_SEARCH_TYPES',
-    payload: types
-  };
-}
-
-export function updateSuppressionSearchSources(sources) {
-  return {
-    type: 'UPDATE_SUPPRESSION_SEARCH_SOURCES',
-    payload: sources
+    type: 'UPDATE_SUPPRESSION_SEARCH_OPTIONS',
+    payload: options
   };
 }

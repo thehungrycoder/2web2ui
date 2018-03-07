@@ -11,8 +11,7 @@ beforeEach(() => {
     onSubmit: jest.fn(),
     refreshSuppressionDateRange: jest.fn(),
     searchSuppressions: jest.fn(),
-    updateSuppressionSearchTypes: jest.fn(),
-    updateSuppressionSearchSources: jest.fn(),
+    updateSuppressionSearchOptions: jest.fn(),
     search: {
       dateOptions: {}
     },
@@ -57,12 +56,12 @@ describe('SuppressionSearch', () => {
 
     it('should update types', () => {
       wrapper.find(FilterDropdown).at(0).simulate('close', types);
-      expect(props.updateSuppressionSearchTypes).toHaveBeenCalledWith(['b', 'c']);
+      expect(props.updateSuppressionSearchOptions).toHaveBeenCalledWith({ types: ['b', 'c']});
     });
 
     it('should update sources', () => {
       wrapper.find(FilterDropdown).at(1).simulate('close', sources);
-      expect(props.updateSuppressionSearchSources).toHaveBeenCalledWith(['aa', 'dd']);
+      expect(props.updateSuppressionSearchOptions).toHaveBeenCalledWith({ sources: ['aa', 'dd']});
     });
 
   });

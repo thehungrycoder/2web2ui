@@ -25,12 +25,12 @@ export class SuppressionSearch extends Component {
 
   handleTypesSelection = (selected) => {
     const types = _.compact(_.map(selected, (val, key) => val ? key : undefined));
-    this.props.updateSuppressionSearchTypes(types);
+    this.props.updateSuppressionSearchOptions({ types });
   }
 
   handleSourcesSelection = (selected) => {
     const sources = _.compact(_.map(selected, (val, key) => val ? key : undefined));
-    this.props.updateSuppressionSearchSources(sources);
+    this.props.updateSuppressionSearchOptions({ sources });
   }
 
   render() {
