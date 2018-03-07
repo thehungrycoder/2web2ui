@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`UploadTab tests should disable fields when submitting 1`] = `
+exports[`UploadForm tests should disable fields when submitting 1`] = `
 <React.Fragment>
   <form>
     <Panel.Section>
@@ -52,7 +52,7 @@ exports[`UploadTab tests should disable fields when submitting 1`] = `
 </React.Fragment>
 `;
 
-exports[`UploadTab tests should render upload form 1`] = `
+exports[`UploadForm tests should render upload form 1`] = `
 <React.Fragment>
   <form>
     <Panel.Section>

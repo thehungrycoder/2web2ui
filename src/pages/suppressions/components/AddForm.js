@@ -12,7 +12,7 @@ import SubaccountTypeaheadWrapper from 'src/components/reduxFormWrappers/Subacco
 import { required, email } from 'src/helpers/validation';
 const FORM_NAME = 'addSuppression';
 
-export class AddTab extends Component {
+export class AddForm extends Component {
   atLeastOne = (_value, { types }) => !_.some(_.values(types))
     ? 'You must select at least one Type'
     : undefined;
@@ -62,7 +62,7 @@ export class AddTab extends Component {
               helpText='Leaving this field blank will add the suppressions to the master account.'
               name='subaccount'
             />
-            <Checkbox.Group label="Type " required>
+            <Checkbox.Group label="Type" required>
               <Field
                 component={CheckboxWrapper}
                 name='types.transactional'
@@ -97,4 +97,4 @@ const mapStateToProps = (state) => ({
   }
 });
 
-export default withRouter(connect(mapStateToProps, { showAlert, createOrUpdateSuppressions, reset })(reduxForm({ form: FORM_NAME })(AddTab)));
+export default withRouter(connect(mapStateToProps, { showAlert, createOrUpdateSuppressions, reset })(reduxForm({ form: FORM_NAME })(AddForm)));

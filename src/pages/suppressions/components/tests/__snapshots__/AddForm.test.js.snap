@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AddTab tests should disable fields when submitting 1`] = `
+exports[`AddForm tests should disable fields when submitting 1`] = `
 <React.Fragment>
   <form>
     <Panel.Section>
@@ -28,7 +28,7 @@ exports[`AddTab tests should disable fields when submitting 1`] = `
         name="subaccount"
       />
       <Checkbox.Group
-        label="Type "
+        label="Type"
         required={true}
       >
         <Field
@@ -60,7 +60,7 @@ exports[`AddTab tests should disable fields when submitting 1`] = `
 </React.Fragment>
 `;
 
-exports[`AddTab tests should make form submitable when dirty and not submitting 1`] = `
+exports[`AddForm tests should make form submitable when dirty and not submitting 1`] = `
 <React.Fragment>
   <form>
     <Panel.Section>
@@ -88,7 +88,7 @@ exports[`AddTab tests should make form submitable when dirty and not submitting 
         name="subaccount"
       />
       <Checkbox.Group
-        label="Type "
+        label="Type"
         required={true}
       >
         <Field
@@ -120,7 +120,7 @@ exports[`AddTab tests should make form submitable when dirty and not submitting 
 </React.Fragment>
 `;
 
-exports[`AddTab tests should render add form 1`] = `
+exports[`AddForm tests should render add form 1`] = `
 <React.Fragment>
   <form>
     <Panel.Section>
@@ -148,7 +148,7 @@ exports[`AddTab tests should render add form 1`] = `
         name="subaccount"
       />
       <Checkbox.Group
-        label="Type "
+        label="Type"
         required={true}
       >
         <Field

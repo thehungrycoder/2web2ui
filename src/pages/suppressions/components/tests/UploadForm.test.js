@@ -1,9 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { UploadTab } from '../Upload';
+import { UploadForm } from '../UploadForm';
 
-describe('UploadTab tests', () => {
+describe('UploadForm tests', () => {
   let props;
   let wrapper;
   let instance;
@@ -16,7 +16,7 @@ describe('UploadTab tests', () => {
       history: { push: jest.fn() },
       showAlert: jest.fn()
     };
-    wrapper = shallow(<UploadTab {...props} />);
+    wrapper = shallow(<UploadForm {...props} />);
     instance = wrapper.instance();
   });
 
@@ -56,6 +56,3 @@ describe('UploadTab tests', () => {
     });
   });
 });
-
-
-

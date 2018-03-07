@@ -1,9 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { AddTab } from '../Add';
+import { AddForm } from '../AddForm';
 
-describe('AddTab tests', () => {
+describe('AddForm tests', () => {
   let props;
   let wrapper;
   let instance;
@@ -17,7 +17,7 @@ describe('AddTab tests', () => {
       reset: jest.fn(),
       showAlert: jest.fn()
     };
-    wrapper = shallow(<AddTab {...props} />);
+    wrapper = shallow(<AddForm {...props} />);
     instance = wrapper.instance();
   });
 

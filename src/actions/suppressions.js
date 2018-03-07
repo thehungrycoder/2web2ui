@@ -1,4 +1,3 @@
-/* eslint max-lines: ["error", 200] */
 import moment from 'moment';
 import config from 'src/config';
 import _ from 'lodash';

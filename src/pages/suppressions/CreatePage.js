@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Page, Panel, Tabs } from '@sparkpost/matchbox';
-import UploadTab from './components/Upload';
-import AddTab from './components/Add';
+import AddForm from './components/AddForm';
+import UploadForm from './components/UploadForm';
 import { ErrorBanner } from './components/ErrorBanner';
 import { resetErrors } from 'src/actions/suppressions';
 
@@ -24,18 +24,6 @@ export class CreatePage extends Component {
   handleTabs(idx) {
     this.setState({ selectedTab: idx });
     this.props.resetErrors();
-  }
-
-  renderAdd() {
-    return (
-      <AddTab />
-    );
-  }
-
-  renderUpload() {
-    return (
-      <UploadTab />
-    );
   }
 
   render() {
@@ -59,7 +47,7 @@ export class CreatePage extends Component {
           tabs={tabs.map(({ content }, idx) => ({ content, onClick: () => this.handleTabs(idx) }))}
         />
         <Panel>
-          { selectedTab === 1 ? this.renderUpload() : this.renderAdd() }
+          {selectedTab === 1 ? <UploadForm /> : <AddForm />}
         </Panel>
       </Page>
     );
@@ -72,4 +60,3 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, { resetErrors })(CreatePage);
-

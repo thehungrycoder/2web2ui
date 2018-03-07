@@ -1,4 +1,3 @@
-/* eslint max-lines: ["error", 200] */
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 import * as suppressions from '../suppressions';
 import csvFileParseRequest, { hasField } from 'src/actions/helpers/csvFileParseRequest';

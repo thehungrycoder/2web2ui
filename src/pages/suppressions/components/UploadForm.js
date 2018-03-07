@@ -14,7 +14,7 @@ import { fileExtension, maxFileSize, nonEmptyFile, required } from 'src/helpers/
 import exampleSuppressionsListPath from './example-suppressions-list.csv';
 
 
-export class UploadTab extends Component {
+export class UploadForm extends Component {
   handleSubmit = ({ subaccount, suppressionsFile }) => {
     this.props.uploadSuppressions(suppressionsFile, subaccount)
       .then(this.handleSubmitSuccess)
@@ -80,5 +80,4 @@ const mapStateToProps = (state) => ({
   parseError: state.suppressions.parseError
 });
 
-export default withRouter(connect(mapStateToProps, { showAlert, uploadSuppressions })(reduxForm({ form: FORM_NAME })(UploadTab)));
-
+export default withRouter(connect(mapStateToProps, { showAlert, uploadSuppressions })(reduxForm({ form: FORM_NAME })(UploadForm)));
