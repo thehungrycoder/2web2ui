@@ -16,6 +16,7 @@ describe('Page: SummaryPage', () => {
     getBillingCountries: jest.fn(),
     getSendingIps: jest.fn(),
     shouldExposeCard: false,
+    shouldShowBillingSummary: true,
     canChangePlan: false,
     currentPlan: {},
     plans: [],
@@ -40,7 +41,7 @@ describe('Page: SummaryPage', () => {
   });
 
   it('should render banner when manually billed', () => {
-    wrapper.setProps({ account: { subscription: { self_serve: false }}});
+    wrapper.setProps({ account: { subscription: { self_serve: false }}, shouldShowBillingSummary: false });
     expect(wrapper).toMatchSnapshot();
   });
 
