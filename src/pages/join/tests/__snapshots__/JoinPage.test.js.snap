@@ -1,5 +1,39 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`JoinPage render renders aws logo when signup from aws 1`] = `
+<div>
+  <Script
+    attributes={Object {}}
+    onCreate={[Function]}
+    onError={[Function]}
+    onLoad={[Function]}
+    url="https://www.google.com/recaptcha/api.js"
+  />
+  <CenteredLogo
+    showAwsLogo={true}
+  />
+  <Panel
+    accent={true}
+    title="Sign Up"
+  >
+    <Panel.Section>
+      <Connect(ReduxForm)
+        onSubmit={[Function]}
+      />
+    </Panel.Section>
+  </Panel>
+  <small>
+    Already have an account? 
+    <UnstyledLink
+      to="/auth"
+    >
+      Log In
+    </UnstyledLink>
+    .
+  </small>
+</div>
+`;
+
 exports[`JoinPage render renders correctly 1`] = `
 <div>
   <Script
@@ -9,7 +43,9 @@ exports[`JoinPage render renders correctly 1`] = `
     onLoad={[Function]}
     url="https://www.google.com/recaptcha/api.js"
   />
-  <CenteredLogo />
+  <CenteredLogo
+    showAwsLogo={false}
+  />
   <Panel
     accent={true}
     title="Sign Up"
@@ -46,7 +82,9 @@ exports[`JoinPage render renders errors 1`] = `
     onLoad={[Function]}
     url="https://www.google.com/recaptcha/api.js"
   />
-  <CenteredLogo />
+  <CenteredLogo
+    showAwsLogo={false}
+  />
   <Panel
     accent={true}
     title="Sign Up"
