@@ -9,7 +9,9 @@ exports[`should check all children and check parent 1`] = `
     onChange={[Function]}
     required={false}
   />
-  <Checkbox.Group>
+  <Checkbox.Group
+    required={false}
+  >
     <Checkbox
       checked={true}
       id="myCheckBoxGroup[0]"
@@ -43,7 +45,9 @@ exports[`should check one child 1`] = `
     onChange={[Function]}
     required={false}
   />
-  <Checkbox.Group>
+  <Checkbox.Group
+    required={false}
+  >
     <Checkbox
       checked={true}
       id="myCheckBoxGroup[0]"

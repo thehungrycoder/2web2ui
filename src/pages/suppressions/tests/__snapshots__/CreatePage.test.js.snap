@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CreatePage renders disabled upload form when submitting 1`] = `
+exports[`CreatePage tests should display the error banner on parse error 1`] = `
 <Page
   breadcrumbAction={
     Object {
@@ -12,59 +12,33 @@ exports[`CreatePage renders disabled upload form when submitting 1`] = `
   empty={Object {}}
   title="Add Suppressions"
 >
-  <form>
-    <Panel>
-      <Panel.Section>
-        <Field
-          component={[Function]}
-          disabled={true}
-          fileType="csv"
-          helpText={
-            <span>
-              You can download an 
-              <DownloadLink
-                href="example-suppressions-list.csv"
-              >
-                example file here
-              </DownloadLink>
-               to use when formatting your list of suppressions for upload.
-            </span>
-          }
-          label="CSV File of Suppressions"
-          name="suppressionsFile"
-          required={true}
-          validate={
-            Array [
-              [Function],
-              [Function],
-              [Function],
-              [Function],
-            ]
-          }
-        />
-        <Field
-          component={[Function]}
-          disabled={true}
-          helpText="Leaving this field blank will add the suppressions to the master account."
-          name="subaccount"
-        />
-      </Panel.Section>
-      <Panel.Section>
-        <Button
-          disabled={true}
-          primary={true}
-          size="default"
-          type="submit"
-        >
-          Upload
-        </Button>
-      </Panel.Section>
-    </Panel>
-  </form>
+  <ErrorBanner
+    parseError={true}
+    persistError={false}
+  />
+  <Tabs
+    connectBelow={true}
+    selected={0}
+    tabs={
+      Array [
+        Object {
+          "content": "Single Recipient",
+          "onClick": [Function],
+        },
+        Object {
+          "content": "Bulk Upload",
+          "onClick": [Function],
+        },
+      ]
+    }
+  />
+  <Panel>
+    <withRouter(Connect(ReduxForm)) />
+  </Panel>
 </Page>
 `;
 
-exports[`CreatePage renders upload form 1`] = `
+exports[`CreatePage tests should display the error banner on persist error 1`] = `
 <Page
   breadcrumbAction={
     Object {
@@ -76,56 +50,33 @@ exports[`CreatePage renders upload form 1`] = `
   empty={Object {}}
   title="Add Suppressions"
 >
-  <form>
-    <Panel>
-      <Panel.Section>
-        <Field
-          component={[Function]}
-          fileType="csv"
-          helpText={
-            <span>
-              You can download an 
-              <DownloadLink
-                href="example-suppressions-list.csv"
-              >
-                example file here
-              </DownloadLink>
-               to use when formatting your list of suppressions for upload.
-            </span>
-          }
-          label="CSV File of Suppressions"
-          name="suppressionsFile"
-          required={true}
-          validate={
-            Array [
-              [Function],
-              [Function],
-              [Function],
-              [Function],
-            ]
-          }
-        />
-        <Field
-          component={[Function]}
-          helpText="Leaving this field blank will add the suppressions to the master account."
-          name="subaccount"
-        />
-      </Panel.Section>
-      <Panel.Section>
-        <Button
-          primary={true}
-          size="default"
-          type="submit"
-        >
-          Upload
-        </Button>
-      </Panel.Section>
-    </Panel>
-  </form>
+  <ErrorBanner
+    parseError={false}
+    persistError={true}
+  />
+  <Tabs
+    connectBelow={true}
+    selected={0}
+    tabs={
+      Array [
+        Object {
+          "content": "Single Recipient",
+          "onClick": [Function],
+        },
+        Object {
+          "content": "Bulk Upload",
+          "onClick": [Function],
+        },
+      ]
+    }
+  />
+  <Panel>
+    <withRouter(Connect(ReduxForm)) />
+  </Panel>
 </Page>
 `;
 
-exports[`CreatePage renders upload form with parsing error details 1`] = `
+exports[`CreatePage tests should render AddTab 1`] = `
 <Page
   breadcrumbAction={
     Object {
@@ -137,76 +88,29 @@ exports[`CreatePage renders upload form with parsing error details 1`] = `
   empty={Object {}}
   title="Add Suppressions"
 >
-  <form>
-    <ApiErrorBanner
-      errorDetails={
-        <ul>
-          <li>
-            Unable to auto detect delimiter
-          </li>
-          <li>
-            On line 1, wrong number of columns.
-          </li>
-          <li>
-            On line 2, wrong number of columns.
-          </li>
-        </ul>
-      }
-      message="Unable to upload your list of suppressions"
-      status="danger"
-    />
-    <Panel>
-      <Panel.Section>
-        <Field
-          component={[Function]}
-          disabled={false}
-          fileType="csv"
-          helpText={
-            <span>
-              You can download an 
-              <DownloadLink
-                href="example-suppressions-list.csv"
-              >
-                example file here
-              </DownloadLink>
-               to use when formatting your list of suppressions for upload.
-            </span>
-          }
-          label="CSV File of Suppressions"
-          name="suppressionsFile"
-          required={true}
-          validate={
-            Array [
-              [Function],
-              [Function],
-              [Function],
-              [Function],
-            ]
-          }
-        />
-        <Field
-          component={[Function]}
-          disabled={false}
-          helpText="Leaving this field blank will add the suppressions to the master account."
-          name="subaccount"
-        />
-      </Panel.Section>
-      <Panel.Section>
-        <Button
-          disabled={false}
-          primary={true}
-          size="default"
-          type="submit"
-        >
-          Upload
-        </Button>
-      </Panel.Section>
-    </Panel>
-  </form>
+  <Tabs
+    connectBelow={true}
+    selected={0}
+    tabs={
+      Array [
+        Object {
+          "content": "Single Recipient",
+          "onClick": [Function],
+        },
+        Object {
+          "content": "Bulk Upload",
+          "onClick": [Function],
+        },
+      ]
+    }
+  />
+  <Panel>
+    <withRouter(Connect(ReduxForm)) />
+  </Panel>
 </Page>
 `;
 
-exports[`CreatePage renders upload form with parsing error message 1`] = `
+exports[`CreatePage tests should render UploadTab 1`] = `
 <Page
   breadcrumbAction={
     Object {
@@ -218,278 +122,24 @@ exports[`CreatePage renders upload form with parsing error message 1`] = `
   empty={Object {}}
   title="Add Suppressions"
 >
-  <form>
-    <ApiErrorBanner
-      errorDetails="Oh no, parsing!"
-      message="Unable to upload your list of suppressions"
-      status="danger"
-    />
-    <Panel>
-      <Panel.Section>
-        <Field
-          component={[Function]}
-          disabled={false}
-          fileType="csv"
-          helpText={
-            <span>
-              You can download an 
-              <DownloadLink
-                href="example-suppressions-list.csv"
-              >
-                example file here
-              </DownloadLink>
-               to use when formatting your list of suppressions for upload.
-            </span>
-          }
-          label="CSV File of Suppressions"
-          name="suppressionsFile"
-          required={true}
-          validate={
-            Array [
-              [Function],
-              [Function],
-              [Function],
-              [Function],
-            ]
-          }
-        />
-        <Field
-          component={[Function]}
-          disabled={false}
-          helpText="Leaving this field blank will add the suppressions to the master account."
-          name="subaccount"
-        />
-      </Panel.Section>
-      <Panel.Section>
-        <Button
-          disabled={false}
-          primary={true}
-          size="default"
-          type="submit"
-        >
-          Upload
-        </Button>
-      </Panel.Section>
-    </Panel>
-  </form>
-</Page>
-`;
-
-exports[`CreatePage renders upload form with parsing error too many details 1`] = `
-<Page
-  breadcrumbAction={
-    Object {
-      "Component": [Function],
-      "content": "Suppressions",
-      "to": "/lists/suppressions",
+  <Tabs
+    connectBelow={true}
+    selected={1}
+    tabs={
+      Array [
+        Object {
+          "content": "Single Recipient",
+          "onClick": [Function],
+        },
+        Object {
+          "content": "Bulk Upload",
+          "onClick": [Function],
+        },
+      ]
     }
-  }
-  empty={Object {}}
-  title="Add Suppressions"
->
-  <form>
-    <ApiErrorBanner
-      errorDetails={
-        <ul>
-          <li>
-            On line 1, oh no!.
-          </li>
-          <li>
-            On line 2, oh no!.
-          </li>
-          <li>
-            On line 3, oh no!.
-          </li>
-          <li>
-            On line 4, oh no!.
-          </li>
-          <li>
-            On line 5, oh no!.
-          </li>
-          <li>
-            On line 6, oh no!.
-          </li>
-          <li>
-            On line 7, oh no!.
-          </li>
-          <li>
-            On line 8, oh no!.
-          </li>
-          <li>
-            On line 9, oh no!.
-          </li>
-          <li>
-            On line 10, oh no!.
-          </li>
-          <li>
-            On line 11, oh no!.
-          </li>
-          <li>
-            On line 12, oh no!.
-          </li>
-          <li>
-            On line 13, oh no!.
-          </li>
-          <li>
-            On line 14, oh no!.
-          </li>
-          <li>
-            On line 15, oh no!.
-          </li>
-          <li>
-            On line 16, oh no!.
-          </li>
-          <li>
-            On line 17, oh no!.
-          </li>
-          <li>
-            On line 18, oh no!.
-          </li>
-          <li>
-            On line 19, oh no!.
-          </li>
-          <li>
-            On line 20, oh no!.
-          </li>
-          <li>
-            On line 21, oh no!.
-          </li>
-          <li>
-            On line 22, oh no!.
-          </li>
-          <li>
-            On line 23, oh no!.
-          </li>
-          <li>
-            On line 24, oh no!.
-          </li>
-          <li>
-            On line 25, oh no!.
-          </li>
-          <li>
-            And more...
-          </li>
-        </ul>
-      }
-      message="Unable to upload your list of suppressions"
-      status="danger"
-    />
-    <Panel>
-      <Panel.Section>
-        <Field
-          component={[Function]}
-          disabled={false}
-          fileType="csv"
-          helpText={
-            <span>
-              You can download an 
-              <DownloadLink
-                href="example-suppressions-list.csv"
-              >
-                example file here
-              </DownloadLink>
-               to use when formatting your list of suppressions for upload.
-            </span>
-          }
-          label="CSV File of Suppressions"
-          name="suppressionsFile"
-          required={true}
-          validate={
-            Array [
-              [Function],
-              [Function],
-              [Function],
-              [Function],
-            ]
-          }
-        />
-        <Field
-          component={[Function]}
-          disabled={false}
-          helpText="Leaving this field blank will add the suppressions to the master account."
-          name="subaccount"
-        />
-      </Panel.Section>
-      <Panel.Section>
-        <Button
-          disabled={false}
-          primary={true}
-          size="default"
-          type="submit"
-        >
-          Upload
-        </Button>
-      </Panel.Section>
-    </Panel>
-  </form>
-</Page>
-`;
-
-exports[`CreatePage renders upload form with persist error 1`] = `
-<Page
-  breadcrumbAction={
-    Object {
-      "Component": [Function],
-      "content": "Suppressions",
-      "to": "/lists/suppressions",
-    }
-  }
-  empty={Object {}}
-  title="Add Suppressions"
->
-  <form>
-    <ApiErrorBanner
-      errorDetails="Oh no, creating!"
-      message="Unable to upload your list of suppressions"
-      status="danger"
-    />
-    <Panel>
-      <Panel.Section>
-        <Field
-          component={[Function]}
-          disabled={false}
-          fileType="csv"
-          helpText={
-            <span>
-              You can download an 
-              <DownloadLink
-                href="example-suppressions-list.csv"
-              >
-                example file here
-              </DownloadLink>
-               to use when formatting your list of suppressions for upload.
-            </span>
-          }
-          label="CSV File of Suppressions"
-          name="suppressionsFile"
-          required={true}
-          validate={
-            Array [
-              [Function],
-              [Function],
-              [Function],
-              [Function],
-            ]
-          }
-        />
-        <Field
-          component={[Function]}
-          disabled={false}
-          helpText="Leaving this field blank will add the suppressions to the master account."
-          name="subaccount"
-        />
-      </Panel.Section>
-      <Panel.Section>
-        <Button
-          disabled={false}
-          primary={true}
-          size="default"
-          type="submit"
-        >
-          Upload
-        </Button>
-      </Panel.Section>
-    </Panel>
-  </form>
+  />
+  <Panel>
+    <withRouter(Connect(ReduxForm)) />
+  </Panel>
 </Page>
 `;
