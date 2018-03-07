@@ -43,7 +43,7 @@ describe('RecipientListForm', () => {
       'Line 73: Too many notes',
       'Line 247: Vanilla is unacceptable'
     ];
-    wrapper.setState({ csvErrors });
+    wrapper.setProps({ error: csvErrors });
     expect(wrapper).toMatchSnapshot();
   });
 

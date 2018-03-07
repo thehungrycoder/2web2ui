@@ -10,6 +10,7 @@ exports[`RecipientListForm defaults to create mode 1`] = `
           label="Label"
           name="name"
           placeholder="My favorite recipients"
+          required={true}
           validate={
             Array [
               [Function],
@@ -22,6 +23,7 @@ exports[`RecipientListForm defaults to create mode 1`] = `
           label="Identifier"
           name="id"
           placeholder="my-favorite-recipients"
+          required={true}
           validate={
             Array [
               [Function],
@@ -56,6 +58,7 @@ exports[`RecipientListForm defaults to create mode 1`] = `
           }
           label="Upload a CSV file of recipients"
           name="csv"
+          required={true}
           validate={
             Array [
               [Function],
@@ -103,6 +106,7 @@ exports[`RecipientListForm renders CSV errors 1`] = `
           label="Label"
           name="name"
           placeholder="My favorite recipients"
+          required={true}
           validate={
             Array [
               [Function],
@@ -115,6 +119,7 @@ exports[`RecipientListForm renders CSV errors 1`] = `
           label="Identifier"
           name="id"
           placeholder="my-favorite-recipients"
+          required={true}
           validate={
             Array [
               [Function],
@@ -149,6 +154,7 @@ exports[`RecipientListForm renders CSV errors 1`] = `
           }
           label="Upload a CSV file of recipients"
           name="csv"
+          required={true}
           validate={
             Array [
               [Function],
@@ -183,6 +189,7 @@ exports[`RecipientListForm renders correctly in create mode 1`] = `
           label="Label"
           name="name"
           placeholder="My favorite recipients"
+          required={true}
           validate={
             Array [
               [Function],
@@ -195,6 +202,7 @@ exports[`RecipientListForm renders correctly in create mode 1`] = `
           label="Identifier"
           name="id"
           placeholder="my-favorite-recipients"
+          required={true}
           validate={
             Array [
               [Function],
@@ -229,6 +237,7 @@ exports[`RecipientListForm renders correctly in create mode 1`] = `
           }
           label="Upload a CSV file of recipients"
           name="csv"
+          required={true}
           validate={
             Array [
               [Function],
@@ -263,6 +272,7 @@ exports[`RecipientListForm renders correctly in edit mode 1`] = `
           label="Label"
           name="name"
           placeholder="My favorite recipients"
+          required={true}
           validate={
             Array [
               [Function],
@@ -297,6 +307,7 @@ exports[`RecipientListForm renders correctly in edit mode 1`] = `
           }
           label="Optional: Upload a CSV file of recipients to replace the existing recipients in this list"
           name="csv"
+          required={true}
           validate={
             Array [
               [Function],
@@ -331,6 +342,7 @@ exports[`RecipientListForm should disable form elements on submit 1`] = `
           label="Label"
           name="name"
           placeholder="My favorite recipients"
+          required={true}
           validate={
             Array [
               [Function],
@@ -344,6 +356,7 @@ exports[`RecipientListForm should disable form elements on submit 1`] = `
           label="Identifier"
           name="id"
           placeholder="my-favorite-recipients"
+          required={true}
           validate={
             Array [
               [Function],
@@ -380,6 +393,7 @@ exports[`RecipientListForm should disable form elements on submit 1`] = `
           }
           label="Upload a CSV file of recipients"
           name="csv"
+          required={true}
           validate={
             Array [
               [Function],
