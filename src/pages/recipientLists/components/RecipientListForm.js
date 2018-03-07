@@ -19,14 +19,9 @@ import exampleRecipientListPath from './example-recipient-list.csv';
 const formName = 'recipientListForm';
 
 export class RecipientListForm extends Component {
-  state = {
-    csvErrors: null
-  };
-
   parseCsv = (csv) => parseRecipientListCsv(csv)
     .catch((csvErrors) => {
-      this.setState({ csvErrors });
-      throw new SubmissionError();
+      throw new SubmissionError({ _error: csvErrors });
     });
 
   // `csv` is an internal field. The outer conponent can access the parsed records in `recipients`.
@@ -51,14 +46,14 @@ export class RecipientListForm extends Component {
   };
 
   renderCsvErrors() {
+    const { error } = this.props;
     return <Banner status='danger' title='CSV Format Errors'>
-      {this.state.csvErrors.map((err, idx) => <Error key={idx} error={err}/>)}
+      {error.map((err, idx) => <Error key={idx} error={err}/>)}
     </Banner>;
   }
 
   render() {
-    const { editMode, pristine, valid, submitting, handleSubmit } = this.props;
-    const { csvErrors } = this.state;
+    const { editMode, pristine, valid, error, submitting, handleSubmit } = this.props;
 
     const submitDisabled = pristine || !valid || submitting;
 
@@ -73,7 +68,7 @@ export class RecipientListForm extends Component {
     }
 
     return <div>
-      { csvErrors && this.renderCsvErrors() }
+      { error && this.renderCsvErrors() }
       <form onSubmit={handleSubmit(this.preSubmit)}>
         <Panel>
           <Panel.Section>
@@ -84,6 +79,7 @@ export class RecipientListForm extends Component {
               validate={[required, maxLength(64)]}
               disabled={submitting}
               component={TextFieldWrapper}
+              required
             />
             { ! editMode && <Field
               name='id'
@@ -92,6 +88,7 @@ export class RecipientListForm extends Component {
               validate={[required, maxLength(64)]}
               disabled={submitting}
               component={TextFieldWrapper}
+              required
             /> }
             <Field
               name='description'
@@ -115,6 +112,7 @@ export class RecipientListForm extends Component {
               label={uploadHint}
               name="csv"
               validate={uploadValidators}
+              required
             />
           </Panel.Section>
           <Panel.Section>

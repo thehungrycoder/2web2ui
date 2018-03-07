@@ -24,7 +24,7 @@ export class CreatePage extends Component {
     }).catch((err) => {
       showAlert({
         type: 'error',
-        message: 'Failed to recipient list. Please try again.'
+        message: 'Failed to create recipient list. Please try again.'
       });
     });
   };
@@ -44,13 +44,9 @@ export class CreatePage extends Component {
   }
 }
 
-const mapStateToProps = ({ recipientLists }) => ({
-  error: recipientLists.error
-});
-
 const mapDispatchToProps = {
   createRecipientList,
   showAlert
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CreatePage));
+export default withRouter(connect(undefined, mapDispatchToProps)(CreatePage));
