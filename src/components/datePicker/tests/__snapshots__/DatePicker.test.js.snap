@@ -30,7 +30,7 @@ exports[`Component: DatePicker should render ok by default 1`] = `
       required={false}
       resize="both"
       type="text"
-      value="undefined - undefined"
+      value="undefined – undefined"
     />
   }
   wrapper="div"

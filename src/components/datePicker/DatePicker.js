@@ -129,7 +129,7 @@ export default class AppDatePicker extends Component {
       labelHidden={true}
       onClick={this.showDatePicker}
       connectLeft={rangeSelect}
-      value={`${format(from, this.DATE_FORMAT)} - ${format(to, this.DATE_FORMAT)}`}
+      value={`${format(from, this.DATE_FORMAT)} – ${format(to, this.DATE_FORMAT)}`}
       readOnly />;
 
     return (
