@@ -1,26 +1,24 @@
 import convertListToBoolHash from 'src/helpers/convertListToBoolHash';
-import { createSelector, createSelectorCreator, defaultMemoize } from 'reselect';
-import _ from 'lodash';
-
-// create a "selector creator" that uses lodash.isEqual instead of ===
-const createDeepEqualSelector = createSelectorCreator(defaultMemoize, _.isEqual);
+import { createSelector } from 'reselect';
 
 const selectSuppressionsSearch = (state) => state.suppressions.search;
 
-const selectSortedTypes = createSelector(
+const selectTypes = createSelector(
   [selectSuppressionsSearch],
-  ({ types = []}) => [ ...types ].sort()
+  ({ types = []}) => types
 );
 
-const selectSortedSources = createSelector(
+const selectSources = createSelector(
   [selectSuppressionsSearch],
-  ({ sources = []}) => [ ...sources ].sort()
+  ({ sources = []}) => sources
 );
 
-export const selectSearchInitialValues = createDeepEqualSelector(
-  [selectSortedTypes, selectSortedSources],
+export const selectSearchInitialValues = createSelector(
+  [selectTypes, selectSources],
   (types, sources) => ({
     types: convertListToBoolHash(types),
     sources: convertListToBoolHash(sources)
   })
 );
+
+

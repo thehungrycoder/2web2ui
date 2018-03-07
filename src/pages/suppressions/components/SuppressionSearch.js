@@ -34,16 +34,17 @@ export class SuppressionSearch extends Component {
   }
 
   render() {
+    const { dateOptions } = this.props.search;
     return (
       <Grid>
         <Grid.Column xs={12} md={6}>
           <div>
-            <DatePicker
-              {...this.props.search.dateOptions}
+            {dateOptions.from && dateOptions.to && <DatePicker
+              {...dateOptions}
               relativeDateOptions={RELATIVE_DATE_OPTIONS}
               onChange={this.props.refreshSuppressionDateRange}
               disabled={this.props.loading}
-            />
+            />}
           </div>
         </Grid.Column>
         <Grid.Column xs={6} md={3}>

@@ -1,11 +1,16 @@
 import { getRelativeDates } from 'src/helpers/date';
+import checkEqualityForKeys from 'src/helpers/checkEqualityForKeys';
 
 const initialState = {
   list: null,
   hasSuppressions: null,
   listLoading: false,
   createError: null,
-  search: { dateOptions: {}}
+  search: {
+    dateOptions: {},
+    types: [],
+    sources: []
+  }
 };
 
 export default (state = initialState, action) => {
@@ -64,8 +69,12 @@ export default (state = initialState, action) => {
 
     // Type and source search
 
-    case 'UPDATE_SUPPRESSION_SEARCH_OPTIONS':
+    case 'UPDATE_SUPPRESSION_SEARCH_OPTIONS': {
+      if (checkEqualityForKeys({ a: state.search, b: action.payload, keys: ['sources', 'types']})) {
+        return state;
+      }
       return { ...state, search: { ...state.search, ...action.payload }};
+    }
 
 
     // Delete suppression
