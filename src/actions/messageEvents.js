@@ -20,7 +20,7 @@ export function getMessageEvents(options = {}) {
   }
 
   if (!_.isEmpty(recipients)) {
-    params.recipients = recipients;
+    params.recipients = recipients.join(',');
   }
 
   return (dispatch) => dispatch(
@@ -59,6 +59,13 @@ export function refreshMessageEventsDateRange(dateOptions) {
   return {
     type: 'REFRESH_MESSAGE_EVENTS_DATE_OPTIONS',
     payload: dateOptions
+  };
+}
+
+export function updateMessageEventsSearchOptions(options) {
+  return {
+    type: 'REFRESH_MESSAGE_EVENTS_SEARCH_OPTIONS',
+    payload: options
   };
 }
 

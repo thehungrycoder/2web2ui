@@ -1,104 +1,70 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 import { SuppressionSearch } from '../SuppressionSearch';
+import FilterDropdown from 'src/components/filterDropdown/FilterDropdown';
 
 let props;
 let wrapper;
-let instance;
 
 beforeEach(() => {
   props = {
     onSubmit: jest.fn(),
-    refreshReportOptions: jest.fn(),
-    reportOptions: {},
+    refreshSuppressionDateRange: jest.fn(),
+    searchSuppressions: jest.fn(),
+    updateSuppressionSearchTypes: jest.fn(),
+    updateSuppressionSearchSources: jest.fn(),
+    search: {
+      dateOptions: {}
+    },
     list: null
   };
   wrapper = shallow(<SuppressionSearch {...props} />);
-  instance = wrapper.instance();
 });
 
 describe('SuppressionSearch', () => {
+
   it('renders correctly', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should refresh report options on mount', () => {
-    expect(props.refreshReportOptions).toHaveBeenCalledTimes(1);
+  it('should refresh date range on mount using the default value of "day"', () => {
+    expect(props.refreshSuppressionDateRange).toHaveBeenCalledWith({ relativeRange: 'day' });
+  });
+
+  it('should refresh date range on mount using the stored range, if present', () => {
+    props.search.dateOptions = { relativeRange: 'hour' };
+    wrapper = shallow(<SuppressionSearch {...props} />);
+    expect(props.refreshSuppressionDateRange).toHaveBeenLastCalledWith({ relativeRange: 'hour' });
   });
 
   describe('componentDidUpdate', () => {
-    it('does not reload suppression if new state is same as current', () => {
-      wrapper.setProps({ newProp: true });
-      expect(props.onSubmit).toHaveBeenCalledTimes(0);
-    });
-
-    it('reloads suppressions if new state is different', () => {
-      wrapper.setState({ newState: true });
-      expect(props.onSubmit).toHaveBeenCalledWith({ ...wrapper.state(), reportOptions: props.reportOptions });
-    });
-
-    it('reloads suppressions if reportOptions reference changes', () => {
-      const reportOptions = { is: 'new!' };
-      wrapper.setProps({ reportOptions });
-      expect(props.onSubmit).toHaveBeenCalledWith({ ...wrapper.state(), reportOptions });
+    it('reloads suppressions if search reference changes', () => {
+      const search = { is: 'new!' };
+      wrapper.setProps({ search });
+      expect(props.searchSuppressions).toHaveBeenCalledWith(search);
     });
   });
 
-  describe('handleTypesSelection', () => {
+  describe('search form changes', () => {
+
     let types;
-    beforeEach(() => {
-      types = { transactional: true, non_transactional: false };
-    });
-
-    it('update states with correct types (single)', () => {
-      instance.handleTypesSelection(types);
-      expect(wrapper.state().types).toEqual(['transactional']);
-    });
-
-    it('update states with correct types (multiple)', () => {
-      types.non_transactional = true;
-      instance.handleTypesSelection(types);
-      expect(wrapper.state().types).toEqual(['transactional', 'non_transactional']);
-
-    });
-
-    it('does not update if selected type is not changed', () => {
-      /** this test may look confusing/noop. the goal is to test when setState method is not called
-       * when selected types is same as that's already in state.
-       * it would be good to be able to test if setState is invoked but I can't get that working
-      */
-      wrapper.setState({ types: ['transactional']});
-      instance.handleTypesSelection(types);
-      expect(wrapper.state().types).toEqual(['transactional']);
-    });
-  });
-
-  describe('handleSourcesSelection', () => {
     let sources;
+
     beforeEach(() => {
-      sources = { 'Spam Complaint': true, 'List Unsubscribe': false };
+      types = { a: false, b: true, c: true, d: false };
+      sources = { aa: true, bb: false, cc: false, dd: true };
     });
 
-    it('update states with correct source (single)', () => {
-      instance.handleSourcesSelection(sources);
-      expect(wrapper.state().sources).toEqual(['Spam Complaint']);
+    it('should update types', () => {
+      wrapper.find(FilterDropdown).at(0).simulate('close', types);
+      expect(props.updateSuppressionSearchTypes).toHaveBeenCalledWith(['b', 'c']);
     });
 
-    it('update states with correct sources (multiple)', () => {
-      sources['List Unsubscribe'] = true;
-      instance.handleSourcesSelection(sources);
-      expect(wrapper.state().sources).toEqual(['Spam Complaint', 'List Unsubscribe']);
-
+    it('should update sources', () => {
+      wrapper.find(FilterDropdown).at(1).simulate('close', sources);
+      expect(props.updateSuppressionSearchSources).toHaveBeenCalledWith(['aa', 'dd']);
     });
 
-    it('does not update if selected source is not changed', () => {
-      /** this test may look confusing/noop. the goal is to test when setState method is not called
-       * when selected types is same as that's already in state.
-       * it would be good to be able to test if setState is invoked but I can't get that working
-      */
-      wrapper.setState({ sources: ['Spam Complaint']});
-      instance.handleSourcesSelection(sources);
-      expect(wrapper.state().sources).toEqual(['Spam Complaint']);
-    });
   });
+
 });

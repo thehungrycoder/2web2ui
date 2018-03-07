@@ -8,7 +8,10 @@ const initialState = {
   error: null,
   events: [],
   history: {},
-  dateOptions: {}
+  search: {
+    dateOptions: {},
+    recipients: []
+  }
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -53,11 +56,15 @@ export default (state = initialState, { type, payload }) => {
       return { ...state, documentationLoading: false, error: payload };
 
 
-    // Date options
+    // Search options
 
     case 'REFRESH_MESSAGE_EVENTS_DATE_OPTIONS': {
-      const dateOptions = { ...state.dateOptions, ...payload, ...getRelativeDates(payload.relativeRange) };
-      return { ...state, dateOptions };
+      const dateOptions = { ...state.search.dateOptions, ...payload, ...getRelativeDates(payload.relativeRange) };
+      return { ...state, search: { ...state.search, dateOptions }};
+    }
+
+    case 'REFRESH_MESSAGE_EVENTS_SEARCH_OPTIONS': {
+      return { ...state, search: { ...state.search, ...payload }};
     }
 
 

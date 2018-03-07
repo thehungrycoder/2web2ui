@@ -73,12 +73,13 @@ describe('Date helpers', () => {
       expect(getRelativeDates('custom')).toEqual({ relativeRange: 'custom' });
     });
 
-    it('should return an empty object for an unknown range', () => {
-      expect(getRelativeDates('einstein')).toEqual({});
+    it('should return an empty object when argument is undefined', () => {
+      const a = {};
+      expect(getRelativeDates(a.nope)).toEqual({});
     });
 
-    it('should return an empty object when getting a relative range for an invalid range type', () => {
-      expect(getRelativeDates('invalid-like-whoa')).toEqual({});
+    it('should throw an error if range is unknown', () => {
+      expect(() => getRelativeDates('invalid-like-whoa')).toThrow('Tried to calculate a relative date range with an invalid range value: invalid-like-whoa');
     });
 
   });

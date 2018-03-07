@@ -3,38 +3,29 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import { reduxForm, Field } from 'redux-form';
 import _ from 'lodash';
-import { getMessageEvents, refreshMessageEventsDateRange } from 'src/actions/messageEvents';
+import { getMessageEvents, refreshMessageEventsDateRange, updateMessageEventsSearchOptions } from 'src/actions/messageEvents';
 import { Grid } from '@sparkpost/matchbox';
 import DatePicker from 'src/components/datePicker/DatePicker';
 import { TextFieldWrapper } from 'src/components';
 import { email as emailValidator } from 'src/helpers/validation';
 import { onEnter } from 'src/helpers/keyEvents';
 
-export class BasicFilter extends Component {
-
-  // TODO: move this to redux
-  state = {
-    recipients: ''
-  };
+export class MessageEventsSearch extends Component {
 
   componentDidMount() {
-    const relativeRange = this.props.dateOptions.relativeRange || 'hour';
+    const relativeRange = this.props.search.dateOptions.relativeRange || 'hour';
     this.props.refreshMessageEventsDateRange({ relativeRange });
   }
 
   componentDidUpdate(prevProps) {
-    const { dateOptions } = this.props;
-    if (prevProps.dateOptions !== dateOptions) {
-      this.refresh();
+    const { search } = this.props;
+    if (prevProps.search !== search) {
+      this.props.getMessageEvents(search);
     }
   }
 
-  refresh = () => {
-    this.props.getMessageEvents({ ...this.state, dateOptions: this.props.dateOptions });
-  }
-
   parseAddresses = (value) => {
-    value = _.trim(value, ' ,'); //strip whitespace and commas
+    value = _.trim(value, ' ,'); // strip whitespace and commas
     if (!value) {
       return [];
     }
@@ -53,23 +44,15 @@ export class BasicFilter extends Component {
   }
 
   handleRecipientsChange = (event) => {
-    let value = event.target.value;
-    const addresses = this.parseAddresses(value);
-    const invalids = this.getInvalidAddresses(addresses);
+    const value = event.target.value;
+    const recipients = this.parseAddresses(value);
+    const invalids = this.getInvalidAddresses(recipients);
+
     if (invalids.length) {
       return;
     }
 
-    if (addresses.length) {
-      value = addresses.join(',');
-    }
-
-    // TODO: can this ever be true? Isn't it checking array references?
-    if (this.state.recipients === value) { //nothing changed, don't trigger search
-      return;
-    }
-
-    this.setState({ recipients: value }, this.refresh);
+    this.props.updateMessageEventsSearchOptions({ recipients });
   }
 
   emailValidator = (value) => {
@@ -81,12 +64,12 @@ export class BasicFilter extends Component {
   }
 
   render() {
-    const { dateOptions, refreshMessageEventsDateRange, loading } = this.props;
+    const { search, refreshMessageEventsDateRange, loading, now = new Date() } = this.props;
     return (
       <Grid>
         <Grid.Column xs={12} md={6}>
           <DatePicker
-            {...dateOptions}
+            {...search.dateOptions}
             relativeDateOptions={[
               'hour',
               'day',
@@ -98,8 +81,8 @@ export class BasicFilter extends Component {
             onChange={refreshMessageEventsDateRange}
             datePickerProps={{
               disabledDays: {
-                after: new Date(),
-                before: moment().utc().subtract(10, 'days').toDate()
+                after: now,
+                before: moment(now).subtract(10, 'days').toDate()
               }
             }}
           />
@@ -120,16 +103,19 @@ export class BasicFilter extends Component {
   }
 }
 
-const formName = 'msgEventsBasicFilter';
+const formName = 'messageEventsSearchOptions';
 const formOptions = { form: formName };
 
 const mapStateToProps = ({ messageEvents }) => ({
-  dateOptions: messageEvents.dateOptions,
-  loading: messageEvents.loading
+  search: messageEvents.search,
+  loading: messageEvents.loading,
+  initialValues: {
+    recipients: messageEvents.search.recipients.join(', ')
+  }
 });
-const mapDispatchToProps = { getMessageEvents, refreshMessageEventsDateRange };
+const mapDispatchToProps = { getMessageEvents, refreshMessageEventsDateRange, updateMessageEventsSearchOptions };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(reduxForm(formOptions)(BasicFilter));
+)(reduxForm(formOptions)(MessageEventsSearch));

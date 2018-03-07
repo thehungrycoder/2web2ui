@@ -1,8 +1,8 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import { MessageEventsOptions } from '../MesageEventsOptions';
+import { MessageEventsSearch } from '../MessageEventsSearch';
 
-describe('BasicFilter', () => {
+describe('Component: MessageEventsSearch', () => {
 
   let props;
   let wrapper;
@@ -11,10 +11,15 @@ describe('BasicFilter', () => {
   beforeEach(() => {
     props = {
       getMessageEvents: jest.fn(),
-      reportOptions: {},
-      refreshReportOptions: jest.fn()
+      search: {
+        dateOptions: {},
+        recipients: []
+      },
+      refreshMessageEventsDateRange: jest.fn(),
+      updateMessageEventsSearchOptions: jest.fn(),
+      now: new Date('2018-02-15T12:00:00Z')
     };
-    wrapper = shallow(<MessageEventsOptions {...props} />);
+    wrapper = shallow(<MessageEventsSearch {...props} />);
     instance = wrapper.instance();
   });
 
@@ -23,8 +28,9 @@ describe('BasicFilter', () => {
   });
 
   it('refreshes on change', () => {
-    wrapper.setProps({ reportOptions: {}});
-    expect(props.getMessageEvents).toHaveBeenCalledTimes(1);
+    const search = { dateOptions: {}, recipients: [], changed: 'something' };
+    wrapper.setProps({ search });
+    expect(props.getMessageEvents).toHaveBeenCalledWith(search);
   });
 
   describe('parseAddresses', () => {
@@ -55,8 +61,9 @@ describe('BasicFilter', () => {
     });
   });
 
-  describe('handleRecipientsChange', () => {
-    it('sets state and refreshes on valid recipients', () => {
+  describe('recipients field', () => {
+
+    it('should update recipients on blur', () => {
       const event = {
         target: {
           value: ''
@@ -64,14 +71,16 @@ describe('BasicFilter', () => {
       };
 
       event.target.value = 'email@domain.com';
-      instance.handleRecipientsChange(event);
-      expect(wrapper.state().recipients).toEqual('email@domain.com');
+      wrapper.find({ name: 'recipients' }).simulate('blur', event);
+      expect(props.updateMessageEventsSearchOptions).toHaveBeenLastCalledWith({
+        recipients: ['email@domain.com']
+      });
 
       event.target.value = 'email1@domain.com , email2@domain.com';
-      instance.handleRecipientsChange(event);
-      expect(wrapper.state().recipients).toEqual('email1@domain.com,email2@domain.com');
-
-      expect(props.getMessageEvents).toHaveBeenCalledTimes(2);
+      wrapper.find({ name: 'recipients' }).simulate('blur', event);
+      expect(props.updateMessageEventsSearchOptions).toHaveBeenLastCalledWith({
+        recipients: ['email1@domain.com', 'email2@domain.com']
+      });
     });
 
     it('does not refresh on invalid recipient', () => {
@@ -81,23 +90,24 @@ describe('BasicFilter', () => {
         }
       };
 
-      instance.handleRecipientsChange(event);
-      expect(wrapper.state().recipients).toEqual('');
-      expect(props.getMessageEvents).toHaveBeenCalledTimes(0);
+      wrapper.find({ name: 'recipients' }).simulate('blur', event);
+      expect(props.updateMessageEventsSearchOptions).not.toHaveBeenCalled();
     });
 
-    it('does not refresh when value is unchanged', () => {
+    it('should update recipients on enter', () => {
       const event = {
+        key: 'Enter',
         target: {
-          value: 'foo@bar.com'
+          value: 'email@domain.com'
         }
       };
-      wrapper.setState({ recipients: 'foo@bar.com' });
 
-      instance.handleRecipientsChange(event);
-      expect(wrapper.state().recipients).toEqual('foo@bar.com');
-      expect(props.getMessageEvents).toHaveBeenCalledTimes(0);
+      wrapper.find({ name: 'recipients' }).simulate('keyDown', event);
+      expect(props.updateMessageEventsSearchOptions).toHaveBeenLastCalledWith({
+        recipients: ['email@domain.com']
+      });
     });
+
   });
 
 });

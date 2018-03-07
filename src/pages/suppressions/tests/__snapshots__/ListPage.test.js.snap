@@ -30,19 +30,7 @@ exports[`ListPage renders correctly 1`] = `
   />
   <Panel>
     <Panel.Section>
-      <Connect(ReduxForm)
-        onSubmit={
-          [MockFunction] {
-            "calls": Array [
-              Array [
-                Object {
-                  "reportOptions": undefined,
-                },
-              ],
-            ],
-          }
-        }
-      />
+      <Connect(ReduxForm) />
     </Panel.Section>
   </Panel>
   <Connect(Results) />
@@ -79,24 +67,7 @@ exports[`ListPage renders correctly with subaccounts 1`] = `
   />
   <Panel>
     <Panel.Section>
-      <Connect(ReduxForm)
-        onSubmit={
-          [MockFunction] {
-            "calls": Array [
-              Array [
-                Object {
-                  "reportOptions": undefined,
-                },
-              ],
-              Array [
-                Object {
-                  "reportOptions": undefined,
-                },
-              ],
-            ],
-          }
-        }
-      />
+      <Connect(ReduxForm) />
     </Panel.Section>
   </Panel>
   <Connect(Results)
@@ -136,7 +107,7 @@ exports[`ListPage renders filter by email tab correctly when selected 1`] = `
   <Panel>
     <Panel.Section>
       <Connect(ReduxForm)
-        onSubmit={[Function]}
+        onSubmit={[MockFunction]}
       />
     </Panel.Section>
   </Panel>
