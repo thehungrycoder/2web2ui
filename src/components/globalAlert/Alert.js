@@ -16,7 +16,7 @@ class Alert extends Component {
   static defaultProps = {
     autoDismiss: true,
     type: 'default',
-    timeoutInterval: 3000
+    timeoutInterval: 15000
   }
 
   state = {
