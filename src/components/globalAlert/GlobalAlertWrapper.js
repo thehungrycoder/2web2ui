@@ -18,7 +18,7 @@ export const GlobalAlertWrapper = ({
         { alerts.map((alert, i) => (
           <Animator key={alert.id}>
             <div className={styles.Alert}>
-              <Alert onDismiss={() => clear(alert.id)} {...alert}></Alert>
+              <Alert onDismiss={() => clear(alert.id)} {...alert} />
             </div>
           </Animator>
         ))}
