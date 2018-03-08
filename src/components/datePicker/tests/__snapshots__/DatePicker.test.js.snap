@@ -76,5 +76,9 @@ exports[`Component: DatePicker should render ok by default 1`] = `
   >
     Cancel
   </Button>
+  <WindowEvent
+    event="keydown"
+    handler={[Function]}
+  />
 </Popover>
 `;

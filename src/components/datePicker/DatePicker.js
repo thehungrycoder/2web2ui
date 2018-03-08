@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { subMonths, format } from 'date-fns';
 import { getStartOfDay, getEndOfDay, getRelativeDateOptions } from 'src/helpers/date';
-import { Button, Datepicker, TextField, Select, Popover } from '@sparkpost/matchbox';
+import { Button, Datepicker, TextField, Select, Popover, WindowEvent } from '@sparkpost/matchbox';
 import ManualEntryForm from './ManualEntryForm';
 import { DATE_FORMATS } from 'src/constants';
 import styles from './DatePicker.module.scss';
@@ -18,11 +18,6 @@ export default class AppDatePicker extends Component {
 
   componentDidMount() {
     this.syncTimeToState(this.props);
-    window.addEventListener('keydown', this.handleKeyDown);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('keydown', this.handleKeyDown);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -160,6 +155,7 @@ export default class AppDatePicker extends Component {
         <ManualEntryForm selectDates={this.handleFormDates} onEnter={this.handleKeyDown} to={to} from={from} />
         <Button primary onClick={this.handleSubmit} className={styles.Apply}>Apply</Button>
         <Button onClick={this.cancelDatePicker}>Cancel</Button>
+        <WindowEvent event='keydown' handler={this.handleKeyDown} />
       </Popover>
     );
   }

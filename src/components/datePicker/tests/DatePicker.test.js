@@ -25,7 +25,7 @@ describe('Component: DatePicker', () => {
       from: mockFrom,
       to: mockNow,
       relativeRange: 'day',
-      relativeDateOptions: ['day', 'hour', 'custom'],
+      relativeDateOptions: [],
       onChange: jest.fn(),
       now: mockNow,
       disabled: false
@@ -51,16 +51,6 @@ describe('Component: DatePicker', () => {
 
     instance.componentDidMount();
     expect(instance.syncTimeToState).toHaveBeenCalledTimes(1);
-    expect(window.addEventListener).toHaveBeenCalledTimes(1);
-    expect(window.addEventListener).toHaveBeenCalledWith('keydown', instance.handleKeyDown);
-  });
-
-  it('should properly unmount', () => {
-    jest.spyOn(window, 'removeEventListener');
-
-    instance.componentWillUnmount();
-    expect(window.removeEventListener).toHaveBeenCalledTimes(1);
-    expect(window.removeEventListener).toHaveBeenCalledWith('keydown', instance.handleKeyDown);
   });
 
   describe('syncTimeToState', () => {

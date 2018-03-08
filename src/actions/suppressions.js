@@ -176,7 +176,7 @@ export function resetErrors() {
 }
 
 /**
- * Refreshes the date range for message events
+ * Refreshes the date range for suppressions
  *
  * Calculates relative ranges if a non-custom relativeRange value is present,
  * which will override passed in from/to dates

@@ -10,9 +10,18 @@ import { TextFieldWrapper } from 'src/components';
 import { email as emailValidator } from 'src/helpers/validation';
 import { onEnter } from 'src/helpers/keyEvents';
 
+const RELATIVE_DATE_OPTIONS = [
+  'hour',
+  'day',
+  '7days',
+  '10days',
+  'custom'
+];
+
 export class MessageEventsSearch extends Component {
 
   componentDidMount() {
+    // range defaults to "hour"
     const relativeRange = this.props.search.dateOptions.relativeRange || 'hour';
     this.props.refreshMessageEventsDateRange({ relativeRange });
   }
@@ -70,20 +79,15 @@ export class MessageEventsSearch extends Component {
         <Grid.Column xs={12} md={6}>
           <DatePicker
             {...search.dateOptions}
-            relativeDateOptions={[
-              'hour',
-              'day',
-              '7days',
-              '10days',
-              'custom'
-            ]}
+            relativeDateOptions={RELATIVE_DATE_OPTIONS}
             disabled={loading}
             onChange={refreshMessageEventsDateRange}
             datePickerProps={{
               disabledDays: {
                 after: now,
                 before: moment(now).subtract(10, 'days').toDate()
-              }
+              },
+              canChangeMonth: false
             }}
           />
         </Grid.Column>
