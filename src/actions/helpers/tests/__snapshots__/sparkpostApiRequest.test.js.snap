@@ -55,6 +55,9 @@ Array [
     },
     "type": "TEST_FAIL",
   },
+  Object {
+    "type": "SHOW_ALERT",
+  },
 ]
 `;
 
@@ -82,6 +85,37 @@ Array [
       },
     },
     "type": "TEST_FAIL",
+  },
+]
+`;
+
+exports[`Helper: SparkPost API Request failure cases should not log out on a 403 while suspended 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "method": "GET",
+      "url": "/some/path",
+    },
+    "type": "TEST_PENDING",
+  },
+  Object {
+    "meta": Object {
+      "method": "GET",
+      "url": "/some/path",
+    },
+    "payload": Object {
+      "message": "API call failed",
+      "response": Object {
+        "data": Object {
+          "results": Array [],
+        },
+        "status": 403,
+      },
+    },
+    "type": "TEST_FAIL",
+  },
+  Object {
+    "type": "SHOW_SUSPENSION_ALERT",
   },
 ]
 `;
