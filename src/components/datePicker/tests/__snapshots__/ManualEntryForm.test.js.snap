@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Component: Date Form should render correctly by default 1`] = `
+exports[`Component: DatePicker ManualEntryForm should render correctly by default 1`] = `
 <form
   onKeyDown={[Function]}
 >
@@ -77,7 +77,7 @@ exports[`Component: Date Form should render correctly by default 1`] = `
 </form>
 `;
 
-exports[`Component: Date Form should sync props to state 1`] = `
+exports[`Component: DatePicker ManualEntryForm should sync props to state 1`] = `
 <form
   onKeyDown={[MockFunction]}
 >
@@ -154,7 +154,7 @@ exports[`Component: Date Form should sync props to state 1`] = `
 </form>
 `;
 
-exports[`Component: Date Form should update state from new props 1`] = `
+exports[`Component: DatePicker ManualEntryForm should update state from new props 1`] = `
 <form
   onKeyDown={[MockFunction]}
 >

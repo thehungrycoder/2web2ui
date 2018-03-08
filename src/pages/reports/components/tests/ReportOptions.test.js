@@ -18,6 +18,7 @@ describe('Component: Report Options', () => {
   let testQuery;
 
   beforeEach(() => {
+    const testDate = new Date('2018-02-15T12:00:00Z');
     options = {};
     filters = [];
     testQuery = {};
@@ -28,6 +29,9 @@ describe('Component: Report Options', () => {
       removeFilter: jest.fn(),
       typeaheadCache: [],
       reportOptions: {
+        from: testDate,
+        to: testDate,
+        relativeRange: 'day',
         filters
       },
       location: {
@@ -61,11 +65,14 @@ describe('Component: Report Options', () => {
 
     beforeEach(() => {
       wrapper.setProps({
-        reportOptions: { filters: [
-          { type: 'A', value: 'aaa' },
-          { type: 'B', value: 'bbb' },
-          { type: 'C', value: 'ccc' }
-        ]}
+        reportOptions: {
+          ...testProps.reportOptions,
+          filters: [
+            { type: 'A', value: 'aaa' },
+            { type: 'B', value: 'bbb' },
+            { type: 'C', value: 'ccc' }
+          ]
+        }
       });
     });
 
@@ -90,9 +97,9 @@ describe('Component: Report Options', () => {
     expect(testProps.addFilters).toHaveBeenCalledWith([item]);
   });
 
-  it('should update the link when report options change', () => {
+  it('should update the link when report options reference changes', () => {
     const newReportOptions = {
-      filters: []
+      ...testProps.reportOptions
     };
     testQuery.abc = 123;
     wrapper.setProps({ reportOptions: newReportOptions, extraLinkParams: ['hello']});
@@ -106,21 +113,12 @@ describe('Component: Report Options', () => {
 
   describe('maybeRefreshFilterTypeaheadCache', () => {
 
-    beforeEach(() => {
-      testProps.reportOptions.from = 'from';
-      testProps.reportOptions.to = 'to';
-      testProps.reportOptions.relativeRange = 'custom';
-    });
-
     it('should not refresh if relative range does not change', () => {
       isSameDate.mockImplementation(() => false);
-      testProps.reportOptions.relativeRange = 'day';
 
       wrapper.setProps({
         reportOptions: {
           ...testProps.reportOptions,
-          from: 'changed-from',
-          to: 'changed-to',
           relativeRange: 'day'
         }
       });
@@ -128,15 +126,21 @@ describe('Component: Report Options', () => {
       expect(testProps.refreshTypeaheadCache).not.toHaveBeenCalled();
     });
 
-    it('should not refresh if range is "custom" but dates have not changed', () => {
+    it('should not refresh if range is "custom" and dates have not changed', () => {
       isSameDate.mockImplementation(() => true);
-      testProps.reportOptions.relativeRange = 'custom';
 
       wrapper.setProps({
         reportOptions: {
           ...testProps.reportOptions,
-          from: 'from',
-          to: 'to',
+          relativeRange: 'custom'
+        }
+      });
+
+      testProps.refreshTypeaheadCache.mockReset();
+
+      wrapper.setProps({
+        reportOptions: {
+          ...testProps.reportOptions,
           relativeRange: 'custom'
         }
       });
@@ -146,7 +150,6 @@ describe('Component: Report Options', () => {
 
     it('should refresh if the range changes', () => {
       isSameDate.mockImplementation(() => true);
-      testProps.reportOptions.relativeRange = 'day';
 
       wrapper.setProps({
         reportOptions: {

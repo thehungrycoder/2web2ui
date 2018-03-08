@@ -1,16 +1,14 @@
 import moment from 'moment';
 import config from 'src/config';
 import _ from 'lodash';
-
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 import { showAlert } from './globalAlert';
 
 const { apiDateFormat, messageEvents } = config;
 
 export function getMessageEvents(options = {}) {
-  const { reportOptions, recipients } = options;
-  const { from, to } = reportOptions;
-
+  const { dateOptions, recipients } = options;
+  const { from, to } = dateOptions;
   const params = {};
 
   if (from) {
@@ -22,7 +20,7 @@ export function getMessageEvents(options = {}) {
   }
 
   if (!_.isEmpty(recipients)) {
-    params.recipients = recipients;
+    params.recipients = recipients.join(',');
   }
 
   return (dispatch) => dispatch(
@@ -43,6 +41,32 @@ export function getMessageEvents(options = {}) {
         })
       );
     });
+}
+
+
+/**
+ * Refreshes the date range for message events
+ *
+ * Calculates relative ranges if a non-custom relativeRange value is present,
+ * which will override passed in from/to dates
+ *
+ * @param {Object} dateOptions
+ * @param {Date} dateOptions.from
+ * @param {Date} dateOptions.to
+ * @param {String} dateOptions.relativeRange
+ */
+export function refreshMessageEventsDateRange(dateOptions) {
+  return {
+    type: 'REFRESH_MESSAGE_EVENTS_DATE_OPTIONS',
+    payload: dateOptions
+  };
+}
+
+export function updateMessageEventsSearchOptions(options) {
+  return {
+    type: 'REFRESH_MESSAGE_EVENTS_SEARCH_OPTIONS',
+    payload: options
+  };
 }
 
 export function getMessageHistory({ messageId, ...rest }) {

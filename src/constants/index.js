@@ -4,7 +4,7 @@ export const AFTER_JOIN_REDIRECT_ROUTE = '/onboarding/plan';
 export const COOKIE_DOMAIN = '.sparkpost.com';
 
 export const DATE_FORMATS = {
-  READABLE_DATE_TIME: 'MMM D YYYY h:mma',
+  READABLE_DATE_TIME: 'MMM Do YYYY h:mma',
   INPUT_DATE: 'YYYY-MM-DD',
   INPUT_TIME: 'h:mma'
 };
