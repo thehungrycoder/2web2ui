@@ -59,49 +59,45 @@ describe('Helper: SparkPost API Request', () => {
 
       axiosMocks.sparkpost.mockImplementation(() => Promise.reject(apiErr));
       refreshTokensUsed.clear();
+      globalAlertMock.showAlert = jest.fn((a) => a);
     });
 
     it('should handle a failed API call', async() => {
-      try {
-        await mockStore.dispatch(sparkpostApiRequest(action));
-      } catch (err) {
-        expect(err).toEqual(apiErr);
-        expect(mockStore.getActions()).toMatchSnapshot();
-      }
+      await expect(mockStore.dispatch(sparkpostApiRequest(action))).rejects.toThrow(apiErr);
+      expect(globalAlertMock.showAlert).toHaveBeenCalledWith({
+        type: 'error',
+        message: 'Something went wrong.',
+        details: apiErr.message
+      });
+      expect(mockStore.getActions()).toMatchSnapshot();
     });
 
     it('should dispatch a special 5xx error action', async() => {
-      jest.spyOn(globalAlertMock, 'showAlert');
       apiErr.response.status = 500;
-      try {
-        await mockStore.dispatch(sparkpostApiRequest(action));
-      } catch (err) {
-        // const { message, response } = err;
-        // expect(err).toBe(apiErr);
-        expect(globalAlertMock.showAlert).toHaveBeenCalledWith({ message: 'Something went wrong.', type: 'error', details: apiErr.message });
-        expect(mockStore.getActions()).toMatchSnapshot();
-      }
-      globalAlertMock.showAlert.mockRestore();
+
+      await expect(mockStore.dispatch(sparkpostApiRequest(action))).rejects.toThrow(apiErr);
+      expect(globalAlertMock.showAlert).toHaveBeenCalledWith({
+        type: 'error',
+        message: 'Something went wrong.',
+        details: apiErr.message
+      });
+      expect(mockStore.getActions()).toMatchSnapshot();
     });
 
     it('should dispatch a logout action on a 403 response', async() => {
       apiErr.response.status = 403;
-      try {
-        await mockStore.dispatch(sparkpostApiRequest(action));
-      } catch (err) {
-        expect(authMock.logout).toHaveBeenCalledTimes(1);
-        expect(mockStore.getActions()).toMatchSnapshot();
-      }
+
+      await expect(mockStore.dispatch(sparkpostApiRequest(action))).rejects.toThrow(apiErr);
+      expect(authMock.logout).toHaveBeenCalledTimes(1);
+      expect(mockStore.getActions()).toMatchSnapshot();
     });
 
     it('should dispatch a logout action on a 401 with no refresh token', async() => {
       apiErr.response.status = 401;
-      try {
-        await mockStore.dispatch(sparkpostApiRequest(action));
-      } catch (err) {
-        expect(authMock.logout).toHaveBeenCalledTimes(1);
-        expect(mockStore.getActions()).toMatchSnapshot();
-      }
+
+      await expect(mockStore.dispatch(sparkpostApiRequest(action))).rejects.toThrow(apiErr);
+      expect(authMock.logout).toHaveBeenCalledTimes(1);
+      expect(mockStore.getActions()).toMatchSnapshot();
     });
 
     describe('with refresh tokens', () => {

@@ -91,9 +91,8 @@ const sparkpostRequest = requestHelperFactory({
       meta
     });
 
-    if (response.status >= 500) {
-      dispatch(showAlert({ type: 'error', message: 'Something went wrong.', details: message }));
-    }
+    // auto alert all failures
+    dispatch(showAlert({ type: 'error', message: 'Something went wrong.', details: message }));
 
     throw apiError;
   }

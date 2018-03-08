@@ -55,6 +55,11 @@ Array [
     },
     "type": "TEST_FAIL",
   },
+  Object {
+    "details": "API call failed",
+    "message": "Something went wrong.",
+    "type": "error",
+  },
 ]
 `;
 
@@ -82,6 +87,11 @@ Array [
       },
     },
     "type": "TEST_FAIL",
+  },
+  Object {
+    "details": "API call failed",
+    "message": "Something went wrong.",
+    "type": "error",
   },
 ]
 `;
