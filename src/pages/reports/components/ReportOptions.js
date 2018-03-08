@@ -7,11 +7,20 @@ import ShareModal from './ShareModal';
 import { parseSearch, getReportSearchOptions } from 'src/helpers/reports';
 import { Grid, Button, Panel, Tag } from '@sparkpost/matchbox';
 import Typeahead from './Typeahead';
-import DateFilter from './DateFilter';
+import DatePicker from 'src/components/datePicker/DatePicker';
 import typeaheadCacheSelector from 'src/selectors/reportFilterTypeaheadCache';
 import { showAlert } from 'src/actions/globalAlert';
 import { isSameDate } from 'src/helpers/date';
 import styles from './ReportOptions.module.scss';
+
+const RELATIVE_DATE_OPTIONS = [
+  'hour',
+  'day',
+  '7days',
+  '30days',
+  '90days',
+  'custom'
+];
 
 // TODO: separate the share modal / link update logic out of this component
 export class ReportOptions extends Component {
@@ -79,7 +88,7 @@ export class ReportOptions extends Component {
   }
 
   render() {
-    const { typeaheadCache, reportOptions, reportLoading } = this.props;
+    const { typeaheadCache, reportOptions, reportLoading, refreshReportOptions } = this.props;
     const { query, modal } = this.state;
 
     return (
@@ -88,7 +97,12 @@ export class ReportOptions extends Component {
           <Grid>
             <Grid.Column xs={12} md={6}>
               <div className={styles.FieldWrapper}>
-                <DateFilter reportLoading={reportLoading} />
+                <DatePicker
+                  {...reportOptions}
+                  relativeDateOptions={RELATIVE_DATE_OPTIONS}
+                  disabled={reportLoading}
+                  onChange={refreshReportOptions}
+                />
               </div>
             </Grid.Column>
             <Grid.Column xs={8} md={4} xl={5}>

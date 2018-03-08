@@ -1,4 +1,5 @@
 import { formatDocumentation } from 'src/helpers/messageEvents';
+import { getRelativeDates } from 'src/helpers/date';
 
 const initialState = {
   loading: false,
@@ -6,11 +7,17 @@ const initialState = {
   documentationLoading: false,
   error: null,
   events: [],
-  history: {}
+  history: {},
+  search: {
+    dateOptions: {},
+    recipients: []
+  }
 };
 
 export default (state = initialState, { type, payload }) => {
+
   switch (type) {
+
     case 'GET_MESSAGE_EVENTS_PENDING':
       return { ...state, loading: true, error: null };
 
@@ -20,7 +27,9 @@ export default (state = initialState, { type, payload }) => {
     case 'GET_MESSAGE_EVENTS_FAIL':
       return { ...state, loading: false, error: payload };
 
+
     // History
+
     case 'GET_MESSAGE_HISTORY_PENDING':
       return { ...state, historyLoading: true, error: null };
 
@@ -34,7 +43,9 @@ export default (state = initialState, { type, payload }) => {
     case 'GET_MESSAGE_HISTORY_FAIL':
       return { ...state, historyLoading: false, error: payload };
 
+
     // Documentation
+
     case 'GET_MESSAGE_EVENTS_DOCUMENTATION_PENDING':
       return { ...state, documentationLoading: true, error: null };
 
@@ -43,6 +54,19 @@ export default (state = initialState, { type, payload }) => {
 
     case 'GET_MESSAGE_EVENTS_DOCUMENTATION_FAIL':
       return { ...state, documentationLoading: false, error: payload };
+
+
+    // Search options
+
+    case 'REFRESH_MESSAGE_EVENTS_DATE_OPTIONS': {
+      const dateOptions = { ...state.search.dateOptions, ...payload, ...getRelativeDates(payload.relativeRange) };
+      return { ...state, search: { ...state.search, dateOptions }};
+    }
+
+    case 'REFRESH_MESSAGE_EVENTS_SEARCH_OPTIONS': {
+      return { ...state, search: { ...state.search, ...payload }};
+    }
+
 
     default:
       return state;

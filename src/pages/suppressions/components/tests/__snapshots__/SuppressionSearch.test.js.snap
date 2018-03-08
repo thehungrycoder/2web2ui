@@ -1,13 +1,37 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`FilterForm renders correctly 1`] = `
+exports[`SuppressionSearch renders correctly 1`] = `
 <Grid>
   <Grid.Column
     md={6}
     xs={12}
   >
     <div>
-      <Connect(DateFilter) />
+      <AppDatePicker
+        from={2018-02-15T12:00:00.000Z}
+        onChange={
+          [MockFunction] {
+            "calls": Array [
+              Array [
+                Object {
+                  "relativeRange": "day",
+                },
+              ],
+            ],
+          }
+        }
+        relativeDateOptions={
+          Array [
+            "hour",
+            "day",
+            "7days",
+            "30days",
+            "90days",
+            "custom",
+          ]
+        }
+        to={2018-02-15T12:00:00.000Z}
+      />
     </div>
   </Grid.Column>
   <Grid.Column

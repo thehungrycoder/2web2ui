@@ -3,11 +3,11 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import _ from 'lodash';
 import cases from 'jest-in-case';
-import DateForm from '../DateForm';
+import ManualEntryForm from '../ManualEntryForm';
 import { delay } from 'src/__testHelpers__';
 import moment from 'moment';
 
-describe('Component: Date Form', () => {
+describe('Component: DatePicker ManualEntryForm', () => {
 
   let props;
   let wrapper;
@@ -27,7 +27,7 @@ describe('Component: Date Form', () => {
       now: mockNow
     };
 
-    wrapper = shallow(<DateForm {...props} />);
+    wrapper = shallow(<ManualEntryForm {...props} />);
     instance = wrapper.instance();
     _.functions(instance).forEach((f) => jest.spyOn(instance, f));
     jest.spyOn(instance, 'syncPropsToState');

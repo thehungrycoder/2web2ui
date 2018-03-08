@@ -9,7 +9,31 @@ exports[`Component: Report Options should mount and render correctly 1`] = `
         xs={12}
       >
         <div>
-          <Connect(DateFilter) />
+          <AppDatePicker
+            filters={Array []}
+            from={2018-02-15T12:00:00.000Z}
+            onChange={
+              [MockFunction] {
+                "calls": Array [
+                  Array [
+                    Object {},
+                  ],
+                ],
+              }
+            }
+            relativeDateOptions={
+              Array [
+                "hour",
+                "day",
+                "7days",
+                "30days",
+                "90days",
+                "custom",
+              ]
+            }
+            relativeRange="day"
+            to={2018-02-15T12:00:00.000Z}
+          />
         </div>
       </Grid.Column>
       <Grid.Column
@@ -57,7 +81,31 @@ exports[`Component: Report Options should render with share modal on 1`] = `
         xs={12}
       >
         <div>
-          <Connect(DateFilter) />
+          <AppDatePicker
+            filters={Array []}
+            from={2018-02-15T12:00:00.000Z}
+            onChange={
+              [MockFunction] {
+                "calls": Array [
+                  Array [
+                    Object {},
+                  ],
+                ],
+              }
+            }
+            relativeDateOptions={
+              Array [
+                "hour",
+                "day",
+                "7days",
+                "30days",
+                "90days",
+                "custom",
+              ]
+            }
+            relativeRange="day"
+            to={2018-02-15T12:00:00.000Z}
+          />
         </div>
       </Grid.Column>
       <Grid.Column
@@ -105,7 +153,46 @@ exports[`Component: Report Options with active filters should render 1`] = `
         xs={12}
       >
         <div>
-          <Connect(DateFilter) />
+          <AppDatePicker
+            filters={
+              Array [
+                Object {
+                  "type": "A",
+                  "value": "aaa",
+                },
+                Object {
+                  "type": "B",
+                  "value": "bbb",
+                },
+                Object {
+                  "type": "C",
+                  "value": "ccc",
+                },
+              ]
+            }
+            from={2018-02-15T12:00:00.000Z}
+            onChange={
+              [MockFunction] {
+                "calls": Array [
+                  Array [
+                    Object {},
+                  ],
+                ],
+              }
+            }
+            relativeDateOptions={
+              Array [
+                "hour",
+                "day",
+                "7days",
+                "30days",
+                "90days",
+                "custom",
+              ]
+            }
+            relativeRange="day"
+            to={2018-02-15T12:00:00.000Z}
+          />
         </div>
       </Grid.Column>
       <Grid.Column

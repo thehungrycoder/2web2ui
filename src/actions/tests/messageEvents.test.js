@@ -22,11 +22,11 @@ describe('Action Creator: MessageEvents', () => {
 
     it('should dispatch get action with from/to/recipients', () => {
       const recipients = [1, 2, 3];
-      const reportOptions = {
+      const dateOptions = {
         from: '2018-02-15T12:00:00',
         to: '2018-02-16T12:00:00'
       };
-      messageEvents.getMessageEvents({ recipients, reportOptions })(dispatchMock);
+      messageEvents.getMessageEvents({ recipients, dateOptions })(dispatchMock);
       expect(dispatchMock).toHaveBeenCalledWith({
         type: 'GET_MESSAGE_EVENTS',
         meta: {
@@ -35,17 +35,17 @@ describe('Action Creator: MessageEvents', () => {
           params: {
             from: expect.any(String),
             to: expect.any(String),
-            recipients
+            recipients: '1,2,3'
           }
         }
       });
     });
 
     it('should dispatch get action with only from', () => {
-      const reportOptions = {
+      const dateOptions = {
         from: '2018-02-15T12:00:00'
       };
-      messageEvents.getMessageEvents({ reportOptions })(dispatchMock);
+      messageEvents.getMessageEvents({ dateOptions })(dispatchMock);
       expect(dispatchMock).toHaveBeenCalledWith({
         type: 'GET_MESSAGE_EVENTS',
         meta: {
@@ -59,10 +59,10 @@ describe('Action Creator: MessageEvents', () => {
     });
 
     it('should dispatch get action with only to', () => {
-      const reportOptions = {
+      const dateOptions = {
         to: '2018-02-16T12:00:00'
       };
-      messageEvents.getMessageEvents({ reportOptions })(dispatchMock);
+      messageEvents.getMessageEvents({ dateOptions })(dispatchMock);
       expect(dispatchMock).toHaveBeenCalledWith({
         type: 'GET_MESSAGE_EVENTS',
         meta: {
@@ -77,15 +77,15 @@ describe('Action Creator: MessageEvents', () => {
 
     it('should dispatch get action with only recipients', () => {
       const recipients = [1, 2, 3];
-      const reportOptions = {};
-      messageEvents.getMessageEvents({ reportOptions, recipients })(dispatchMock);
+      const dateOptions = {};
+      messageEvents.getMessageEvents({ dateOptions, recipients })(dispatchMock);
       expect(dispatchMock).toHaveBeenCalledWith({
         type: 'GET_MESSAGE_EVENTS',
         meta: {
           method: 'GET',
           url: '/message-events',
           params: {
-            recipients
+            recipients: '1,2,3'
           }
         }
       });

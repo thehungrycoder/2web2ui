@@ -2,6 +2,7 @@ import {
   getEndOfDay,
   getStartOfDay,
   getRelativeDates,
+  getRelativeDateOptions,
   formatDate,
   formatTime,
   formatDateTime,
@@ -51,31 +52,49 @@ describe('Date helpers', () => {
     expect(isSameDate(a1, c)).toEqual(false);
   });
 
-  cases('getRelativeDates calculations', ({ range, subtractArgs }) => {
-    const date = moment(new Date('2017-12-17T12:00:00')).utc().toDate();
-    Date.now = jest.fn(() => date);
-    const { from, to, relativeRange } = getRelativeDates(range);
-    expect(to).toEqual(date);
-    expect(from).toEqual(moment(date).subtract(...subtractArgs).toDate());
-    expect(relativeRange).toEqual(range);
-  }, {
-    'for an hour ago': { range: 'hour', subtractArgs: [1, 'hours']},
-    'for a day ago': { range: 'day', subtractArgs: [1, 'days']},
-    'for a week ago': { range: '7days', subtractArgs: [7, 'days']},
-    'for a month': { range: '30days', subtractArgs: [30, 'days']},
-    'for a quarter ago': { range: '90days', subtractArgs: [90, 'days']}
+  describe('getRelativeDates', () => {
+
+    cases('calculations', ({ range, subtractArgs }) => {
+      const date = moment(new Date('2017-12-17T12:00:00')).utc().toDate();
+      Date.now = jest.fn(() => date);
+      const { from, to, relativeRange } = getRelativeDates(range);
+      expect(to).toEqual(date);
+      expect(from).toEqual(moment(date).subtract(...subtractArgs).toDate());
+      expect(relativeRange).toEqual(range);
+    }, {
+      'for an hour ago': { range: 'hour', subtractArgs: [1, 'hours']},
+      'for a day ago': { range: 'day', subtractArgs: [1, 'days']},
+      'for a week ago': { range: '7days', subtractArgs: [7, 'days']},
+      'for a month': { range: '30days', subtractArgs: [30, 'days']},
+      'for a quarter ago': { range: '90days', subtractArgs: [90, 'days']}
+    });
+
+    it('should return for a custom relative date range', () => {
+      expect(getRelativeDates('custom')).toEqual({ relativeRange: 'custom' });
+    });
+
+    it('should return an empty object when argument is undefined', () => {
+      const a = {};
+      expect(getRelativeDates(a.nope)).toEqual({});
+    });
+
+    it('should throw an error if range is unknown', () => {
+      expect(() => getRelativeDates('invalid-like-whoa')).toThrow('Tried to calculate a relative date range with an invalid range value: invalid-like-whoa');
+    });
+
   });
 
-  it('should return for a custom relative date range', () => {
-    expect(getRelativeDates('custom')).toEqual({ relativeRange: 'custom' });
-  });
+  describe('getRelativeDateOptions', () => {
 
-  it('should return an empty object for an unknown range', () => {
-    expect(getRelativeDates('einstein')).toEqual({});
-  });
+    it('should get a set of date range options', () => {
+      const options = getRelativeDateOptions(['hour', 'day', 'custom']);
+      expect(options).toEqual([
+        { value: 'hour', label: expect.any(String) },
+        { value: 'day', label: expect.any(String) },
+        { value: 'custom', label: expect.any(String) }
+      ]);
+    });
 
-  it('should return an empty object when getting a relative range for an invalid range type', () => {
-    expect(getRelativeDates('invalid-like-whoa')).toEqual({});
   });
 
   describe('date formatting', () => {

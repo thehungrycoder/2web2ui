@@ -3,14 +3,14 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import _ from 'lodash';
 import * as dateHelpers from 'src/helpers/date';
-import { DateFilter } from '../DateFilter';
+import DatePicker from '../DatePicker';
 import utc from 'src/__testHelpers__/time';
 
 jest.mock('src/helpers/date');
 jest.mock('react-dom');
 jest.mock('date-fns');
 
-describe('Component: DateFilter', () => {
+describe('Component: DatePicker', () => {
 
   let wrapper;
   let instance;
@@ -22,60 +22,55 @@ describe('Component: DateFilter', () => {
     mockNow = utc({ year: 2017, month: 1, day: 15, hour: 12 });
     mockFrom = utc({ year: 2017, month: 1, day: 15, hour: 11 });
     props = {
-      filter: {
-        from: mockFrom,
-        to: mockNow,
-        relativeRange: 'day'
-      },
-      refreshReportOptions: jest.fn(),
+      from: mockFrom,
+      to: mockNow,
+      relativeRange: 'day',
+      relativeDateOptions: [],
+      onChange: jest.fn(),
       now: mockNow,
-      reportLoading: false
+      disabled: false
     };
-    wrapper = shallow(<DateFilter {...props} />);
-    instance = wrapper.instance();
-    // spy on all instance methods
-    _.functions(instance).forEach((f) => jest.spyOn(instance, f));
 
     dateHelpers.getStartOfDay = jest.fn(() => 'start-of-day');
     dateHelpers.getEndOfDay = jest.fn(() => 'end-of-day');
+    dateHelpers.getRelativeDateOptions = jest.fn(() => [1, 2, 3]);
+
+    wrapper = shallow(<DatePicker {...props} />);
+    instance = wrapper.instance();
+
+    // spy on all instance methods
+    _.functions(instance).forEach((f) => jest.spyOn(instance, f));
   });
 
   it('should render ok by default', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should sync props to state on new props', () => {
-    wrapper.setProps({});
-    expect(instance.syncPropsToState).toHaveBeenCalledTimes(1);
-  });
-
   it('should properly mount', () => {
     jest.spyOn(window, 'addEventListener');
 
     instance.componentDidMount();
-    expect(instance.syncPropsToState).toHaveBeenCalledTimes(1);
-    expect(window.addEventListener).toHaveBeenCalledTimes(1);
-    expect(window.addEventListener).toHaveBeenCalledWith('keydown', instance.handleKeyDown);
+    expect(instance.syncTimeToState).toHaveBeenCalledTimes(1);
   });
 
-  it('should properly unmount', () => {
-    jest.spyOn(window, 'removeEventListener');
+  describe('syncTimeToState', () => {
 
-    instance.componentWillUnmount();
-    expect(window.removeEventListener).toHaveBeenCalledTimes(1);
-    expect(window.removeEventListener).toHaveBeenCalledWith('keydown', instance.handleKeyDown);
-  });
+    const before = { from: 'unchanged', to: 'unchanged' };
+    const after = { from: new Date(), to: new Date() };
 
-  describe('syncPropsToState', () => {
-
-    it('should sync the state', () => {
-      const before = { from: 'unchanged', to: 'unchanged' };
-      const after = { from: 'changed', to: 'changed' };
+    it('should sync the state when from or to is changed', () => {
       wrapper.setState({ selected: before });
       expect(wrapper.state('selected')).toEqual(before);
-
-      instance.syncPropsToState({ filter: after });
+      wrapper.setProps(after);
+      expect(instance.syncTimeToState).toHaveBeenCalledTimes(1);
       expect(wrapper.state('selected')).toEqual(after);
+    });
+
+    it('shouldn\'t sync the state when from and to aren\'t changed', () => {
+      wrapper.setState({ selected: before });
+      wrapper.setProps({ other: 'stuff' });
+      expect(instance.syncTimeToState).not.toHaveBeenCalled();
+      expect(wrapper.state('selected')).toEqual(before);
     });
 
   });
@@ -136,7 +131,7 @@ describe('Component: DateFilter', () => {
     it('should sync props and close date picker', () => {
       wrapper.setState({ showDatePicker: true });
       instance.cancelDatePicker();
-      expect(instance.syncPropsToState).toHaveBeenCalledWith(instance.props);
+      expect(instance.syncTimeToState).toHaveBeenCalledWith(instance.props);
       expect(wrapper.state('showDatePicker')).toEqual(false);
     });
 
@@ -281,7 +276,7 @@ describe('Component: DateFilter', () => {
       wrapper.setState({ showDatePicker: false });
       instance.handleSelectRange(e);
       expect(wrapper.state('showDatePicker')).toEqual(true);
-      expect(props.refreshReportOptions).not.toHaveBeenCalled();
+      expect(props.onChange).not.toHaveBeenCalled();
     });
 
     it('should close date picker and refresh for non-custom value', () => {
@@ -289,7 +284,7 @@ describe('Component: DateFilter', () => {
       wrapper.setState({ showDatePicker: true });
       instance.handleSelectRange(e);
       expect(wrapper.state('showDatePicker')).toEqual(false);
-      expect(props.refreshReportOptions).toHaveBeenCalledWith({ relativeRange: 'lasagna' });
+      expect(props.onChange).toHaveBeenCalledWith({ relativeRange: 'lasagna' });
     });
 
   });
@@ -315,7 +310,7 @@ describe('Component: DateFilter', () => {
       instance.handleSubmit();
       expect(wrapper.state('showDatePicker')).toEqual(false);
       expect(wrapper.state('selecting')).toEqual(false);
-      expect(props.refreshReportOptions).toHaveBeenCalledWith({ ...mockSelected, relativeRange: 'custom' });
+      expect(props.onChange).toHaveBeenCalledWith({ ...mockSelected, relativeRange: 'custom' });
     });
 
   });

@@ -3,9 +3,9 @@ import moment from 'moment';
 import _ from 'lodash';
 import { Grid, TextField, Icon } from '@sparkpost/matchbox';
 import { DATE_FORMATS } from 'src/constants';
-import styles from './DateForm.module.scss';
+import styles from './ManualEntryForm.module.scss';
 
-export default class DateForm extends Component {
+export default class ManualEntryForm extends Component {
   DATE_FORMAT = DATE_FORMATS.INPUT_DATE;
   TIME_FORMAT = DATE_FORMATS.INPUT_TIME;
   DEBOUNCE = 500;
