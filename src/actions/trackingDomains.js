@@ -1,5 +1,4 @@
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
-import { apiResponseToAlert } from 'src/helpers/apiMessages';
 import setSubaccountHeader from './helpers/setSubaccountHeader';
 import { showAlert } from './globalAlert';
 
@@ -15,6 +14,7 @@ export function listTrackingDomains(subaccount = null) {
 
 export function createTrackingDomain({ subaccount, ...data }) {
   const headers = setSubaccountHeader(subaccount);
+
   return (dispatch) => dispatch(sparkpostApiRequest({
     type: 'CREATE_TRACKING_DOMAIN',
     meta: {
@@ -24,8 +24,7 @@ export function createTrackingDomain({ subaccount, ...data }) {
       headers
     }
   }))
-    .then(() => dispatch(showAlert({ type: 'success', message: `Successfully added ${data.domain}` })))
-    .catch((err) => dispatch(showAlert(apiResponseToAlert(err, `Unable to add ${data.domain}`))));
+    .then(() => dispatch(showAlert({ type: 'success', message: `Successfully added ${data.domain}` })));
 }
 
 export function updateTrackingDomain({ domain, subaccount = null, ...data }) {
