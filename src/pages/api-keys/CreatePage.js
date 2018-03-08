@@ -31,8 +31,6 @@ export class CreatePage extends React.Component {
     return createApiKey(values).then((res) => {
       showAlert({ type: 'success', message: 'API key created' });
       history.push('/account/api-keys');
-    }).catch((err) => {
-      showAlert({ type: 'error', message: 'Could not create API key', details: err.message });
     });
   };
 

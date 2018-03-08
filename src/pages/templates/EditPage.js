@@ -40,8 +40,6 @@ export default class EditPage extends Component {
     return publish(values, subaccountId).then(() => {
       history.push(`/templates/edit/${match.params.id}/published${setSubaccountQuery(subaccountId)}`);
       showAlert({ type: 'success', message: 'Template published' });
-    }).catch((err) => {
-      showAlert({ type: 'error', message: 'Could not publish template', details: err.message });
     });
   }
 
@@ -51,8 +49,6 @@ export default class EditPage extends Component {
       getDraft(match.params.id);
       getTestData({ id: match.params.id, mode: 'draft' });
       showAlert({ type: 'success', message: 'Template saved' });
-    }).catch((err) => {
-      showAlert({ type: 'error', message: 'Could not save template', details: err.message });
     });
   }
 
@@ -61,8 +57,6 @@ export default class EditPage extends Component {
     return deleteTemplate(match.params.id, subaccountId).then(() => {
       history.push('/templates/');
       showAlert({ message: 'Template deleted' });
-    }).catch((err) => {
-      showAlert({ type: 'error', message: 'Could not delete template', details: err.message });
     });
   }
 

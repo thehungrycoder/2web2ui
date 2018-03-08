@@ -60,13 +60,6 @@ describe('VerifyToken component', () => {
       instance.verifyDomain({ domain: 'baz.co', mailbox: 'postmaster', token: '123' });
       expect(props.verifyPostmasterToken).toHaveBeenCalledWith({ id: 'baz.co', subaccount: 0, token: '123' });
     });
-
-    it('should show an error if the api fails', async() => {
-      wrapper.setProps({ verifyMailboxToken: jest.fn(() => Promise.reject({ message: 'oh noe' })) });
-      await instance.verifyDomain({ domain: 'foo.co', mailbox: 'mail', token: '123' });
-      expect(instance.props.verifyMailboxToken).toHaveBeenCalledWith({ id: 'foo.co', token: '123' });
-      expect(props.showAlert).toHaveBeenCalledWith({ type: 'error', message: 'Unable to verify foo.co', details: 'oh noe' });
-    });
   });
 
   describe('component did update', () => {

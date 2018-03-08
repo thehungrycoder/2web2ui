@@ -57,19 +57,6 @@ describe('AddForm tests', () => {
       expect(instance.props.showAlert).toHaveBeenCalledWith(expect.objectContaining({ type: 'success' }));
       expect(instance.props.reset).toHaveBeenCalled();
     });
-
-    it('catches errors when adding suppression', async() => {
-      wrapper.setProps({ createOrUpdateSuppressions: jest.fn(() => Promise.reject(new Error('failed'))) });
-      const args = {
-        subaccount: 999,
-        recipient: 'foo@bar.com',
-        description: 'desc'
-      };
-
-      await instance.onSubmit(args);
-      expect(instance.props.showAlert).not.toHaveBeenCalled();
-      expect(instance.props.reset).not.toHaveBeenCalled();
-    });
   });
 
   describe('atLeastOne validator', () => {

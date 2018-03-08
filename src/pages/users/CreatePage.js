@@ -33,23 +33,6 @@ export class CreatePage extends Component {
           message: `Invitation sent to ${email}`
         });
         history.push('/account/users');
-      })
-      .catch((err) => {
-        const { response: { status, data }} = err;
-        let message = 'Unable to invite user.';
-
-        if (status === 400) {
-        // Email address suppressed
-          message = 'The email you tried to invite is currently suppressed by SparkPost. Please use another email address or contact support.';
-        } else if (status === 409) {
-        // User already exists
-          message = data.errors[0].message;
-        }
-
-        showAlert({
-          type: 'error',
-          message
-        });
       });
   };
 

@@ -53,14 +53,6 @@ describe('Template CreatePage', () => {
       expect(createSuccess).toHaveBeenCalledWith('values');
       expect(props.history.push).toHaveBeenCalledWith('/templates/edit/id');
     });
-
-    it('should handle create fail', async() => {
-      const createFail = jest.fn((a) => Promise.reject({ message: 'fail' }));
-      wrapper.setProps({ id: 'id', create: createFail });
-      await wrapper.instance().handleCreate('values');
-      expect(createFail).toHaveBeenCalledWith('values');
-      expect(props.showAlert).toHaveBeenCalledWith({ details: 'fail', message: 'Could not create template', type: 'error' });
-    });
   });
 
   describe('Duplicate Template', () => {

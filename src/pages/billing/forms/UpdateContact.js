@@ -23,7 +23,7 @@ export class UpdateContact extends Component {
     return updateBillingContact(values).then(() => {
       showAlert({ type: 'success', message: 'Billing Contact Updated' });
       onCancel();
-    }).catch((err) => showAlert({ type: 'error', message: 'Billing Contact Update Failed' }));
+    });
   }
 
   render() {

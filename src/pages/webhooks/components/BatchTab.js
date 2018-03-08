@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 
 import { getBatches } from 'src/actions/webhooks';
-import { showAlert } from 'src/actions/globalAlert';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
 
 import { Button, Panel } from '@sparkpost/matchbox';
@@ -26,10 +25,10 @@ export class BatchTab extends Component {
   }
 
   refreshBatches = () => {
-    const { webhook, getBatches, showAlert } = this.props;
+    const { webhook, getBatches } = this.props;
     const { id, subaccount } = webhook;
 
-    return getBatches({ id, subaccount }).catch((err) => showAlert({ type: 'error', message: 'Unable to refresh webhook batches', details: err.message }));
+    return getBatches({ id, subaccount });
   };
 
   renderBatches() {
@@ -75,4 +74,4 @@ const mapStateToProps = (state) => ({
   batchesLoading: state.webhooks.batchesLoading
 });
 
-export default connect(mapStateToProps, { getBatches, showAlert })(BatchTab);
+export default connect(mapStateToProps, { getBatches })(BatchTab);

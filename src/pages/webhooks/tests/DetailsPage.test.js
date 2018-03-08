@@ -67,7 +67,6 @@ describe('Page: Webhook Details', () => {
     await instance.componentDidMount();
     expect(instance.props.getWebhook).toHaveBeenCalledWith({ id: 'my-id', subaccount: 101 });
     expect(instance.props.history.push).toHaveBeenCalledWith('/webhooks/');
-    expect(instance.props.showAlert).toHaveBeenCalledWith({ type: 'error', message: 'Unable to find webhook', details: 'error' });
   });
 
   it('should delete webhook and return to list page', async() => {
@@ -76,15 +75,6 @@ describe('Page: Webhook Details', () => {
     expect(instance.props.deleteWebhook).toHaveBeenCalledWith({ id: 'my-id', subaccount: 101 });
     expect(instance.props.history.push).toHaveBeenCalledWith('/webhooks/');
     expect(instance.props.showAlert).toHaveBeenCalledWith({ message: 'Webhook deleted', type: 'success' });
-  });
-
-  it('should catch a delete error', async() => {
-    wrapper.setProps({ deleteWebhook: jest.fn(() => Promise.reject({ message: 'error' })) });
-    const instance = wrapper.instance();
-    await instance.deleteWebhook();
-    expect(instance.props.deleteWebhook).toHaveBeenCalledWith({ id: 'my-id', subaccount: 101 });
-    expect(instance.props.history.push).not.toHaveBeenCalledWith('/webhooks/');
-    expect(instance.props.showAlert).toHaveBeenCalledWith({ type: 'error', message: 'Unable to delete webhook', details: 'error' });
   });
 
   it('should toggle showDelete state on toggleDelete', () => {

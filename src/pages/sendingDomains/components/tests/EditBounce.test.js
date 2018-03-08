@@ -109,26 +109,21 @@ describe('Component: EditBounce', () => {
     });
 
     it('alerts error when verification req is successful but verification is failed', async() => {
-      props.verifyCname.mockReturnValue(Promise.resolve({ cname_status: 'invalid' }));
-      await instance.verifyDomain();
-      expect(props.verifyCname).toHaveBeenCalledTimes(1);
-      expect(props.verifyCname).toHaveBeenCalledWith({ id: 'xyz.com', subaccount: 100 });
-      const arg = props.showAlert.mock.calls[0][0];
-      expect(props.showAlert).toHaveBeenCalledTimes(1);
-      expect(arg.type).toEqual('error');
-      expect(arg.message).toMatch(/Unable to verify CNAME/);
-    });
+      const result = {
+        cname_status: 'invalid',
+        dns: {
+          cname_error: 'Something horrible just happened!'
+        }
+      };
 
-    it('alerts when request is errored', async() => {
-      const err = new Error('Request failed!');
-      props.verifyCname.mockReturnValue(Promise.reject(err));
+      props.verifyCname.mockReturnValue(Promise.resolve(result));
       await instance.verifyDomain();
-      expect(props.verifyCname).toHaveBeenCalledTimes(1);
+
       expect(props.verifyCname).toHaveBeenCalledWith({ id: 'xyz.com', subaccount: 100 });
-      const arg = props.showAlert.mock.calls[0][0];
-      expect(props.showAlert).toHaveBeenCalledTimes(1);
-      expect(arg.type).toEqual('error');
-      expect(arg.message).toMatch(/Request failed/);
+      expect(props.showAlert).toHaveBeenCalledWith({
+        type: 'error',
+        message: expect.stringContaining(result.dns.cname_error)
+      });
     });
   });
 
@@ -140,18 +135,6 @@ describe('Component: EditBounce', () => {
       props.domain.is_default_bounce_domain = true;
       await instance.toggleDefaultBounce();
       expect(props.update).toHaveBeenCalledWith({ id: props.id, subaccount: 100, is_default_bounce_domain: false });
-    });
-
-    it('alerts on error and reset form', async() => {
-      const err = new Error('Request failed!');
-      props.update.mockReturnValue(Promise.reject(err));
-
-      await instance.toggleDefaultBounce();
-      expect(props.update).toHaveBeenCalledTimes(1);
-      expect(props.update).toHaveBeenCalledWith({ id: props.id, subaccount: 100, is_default_bounce_domain: true });
-      expect(props.showAlert).toHaveBeenCalledTimes(1);
-      expect(props.showAlert.mock.calls[0][0].type).toEqual('error');
-      expect(props.reset).toHaveBeenCalledTimes(1);
     });
   });
 });

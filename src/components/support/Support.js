@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Portal, Icon, Popover } from '@sparkpost/matchbox';
 import entitledToSupport from 'src/selectors/support';
 import { createTicket, clearSupportForm } from 'src/actions/support';
-import { showAlert } from 'src/actions/globalAlert';
 import SupportForm from './components/SupportForm';
 import styles from './Support.module.scss';
 
@@ -14,16 +13,11 @@ export class Support extends Component {
   };
 
   onSubmit = (values) => {
-    const { createTicket, showAlert } = this.props;
+    const { createTicket } = this.props;
     const { subject, message } = values;
     const ticket = { subject, message };
-    return createTicket(ticket).catch((err) => {
-      showAlert({
-        type: 'error',
-        message: 'We were unable to submit your ticket. Please try again.'
-      });
-      throw err;
-    });
+
+    return createTicket(ticket).catch((err) => { throw err; });
   };
 
   togglePanel = () => {
@@ -78,6 +72,6 @@ const mapStateToProps = (state) => ({
   entitledToSupport: entitledToSupport(state)
 });
 
-const mapDispatchToProps = { createTicket, clearSupportForm, showAlert };
+const mapDispatchToProps = { createTicket, clearSupportForm };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Support);

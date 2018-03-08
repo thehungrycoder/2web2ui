@@ -96,14 +96,4 @@ describe('VerifyEmail component', () => {
     expect(props.showAlert).toHaveBeenCalledWith({ type: 'success', message: `Email sent to postmaster@${props.id}` });
     expect(wrapper).toMatchSnapshot();
   });
-
-  it('should render error message', async() => {
-    const verifyFail = jest.fn(() => Promise.reject(new Error('can\'t send!')));
-    wrapper.setProps({ verifyPostmaster: verifyFail });
-
-    await wrapper.instance().verifyWithPostmaster();
-    expect(verifyFail).toHaveBeenCalledTimes(1);
-    expect(props.showAlert).toHaveBeenCalledWith({ type: 'error', message: 'Email verification error: can\'t send!' });
-    expect(wrapper).toMatchSnapshot();
-  });
 });

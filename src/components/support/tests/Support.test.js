@@ -14,15 +14,13 @@ describe('Support Component', () => {
   let wrapper;
   let createTicket;
   let clearSupportForm;
-  let showAlert;
   let props;
 
   beforeEach(() => {
     createTicket = jest.fn().mockImplementation(() => Promise.resolve(createTicketResult));
     clearSupportForm = jest.fn();
-    showAlert = jest.fn();
 
-    props = { createTicket, clearSupportForm, showAlert, entitledToSupport: true, loggedIn: true };
+    props = { createTicket, clearSupportForm, entitledToSupport: true, loggedIn: true };
     wrapper = shallow(<Support {...props} />);
   });
 
@@ -51,7 +49,6 @@ describe('Support Component', () => {
   it('should show an alert on submission failure', async() => {
     createTicket.mockReturnValueOnce(Promise.reject({}));
     await expect(wrapper.instance().onSubmit(ticket)).rejects.toBeDefined();
-    expect(showAlert).toHaveBeenCalled();
   });
 
   it('should clear out form state on reset', () => {

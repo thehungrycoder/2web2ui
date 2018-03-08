@@ -24,7 +24,7 @@ export class UpdatePayment extends Component {
     return billingUpdate(values).then(() => {
       showAlert({ type: 'success', message: 'Payment Information Updated' });
       onCancel();
-    }).catch((err) => showAlert({ type: 'error', message: 'Payment Information Update Failed' }));
+    });
   }
 
   render() {

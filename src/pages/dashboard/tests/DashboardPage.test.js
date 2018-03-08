@@ -58,15 +58,4 @@ describe('Page: Dashboard tests', () => {
       message: 'Please click the link in the email we sent you to verify your email.'
     });
   });
-
-  it('should show error alert on failed email verification', async() => {
-    wrapper.setProps({ verifyEmail: jest.fn(() => Promise.reject(new Error('failed'))) });
-    await instance.resendVerification();
-    expect(instance.props.showAlert).toHaveBeenCalledWith({
-      type: 'error',
-      message: 'Error sending verification email.',
-      details: 'failed'
-    });
-
-  });
 });

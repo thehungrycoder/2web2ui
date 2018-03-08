@@ -55,8 +55,6 @@ export class TestTab extends Component {
     return testWebhook({ id: webhook.id, subaccount: webhook.subaccount, message: buildRequest(webhook, samples) }).then(() => {
       showAlert({ type: 'success', message: 'The test was successful!' });
       this.setState({ testSent: true });
-    }).catch((err) => {
-      showAlert({ type: 'error', message: 'The test failed', details: err.message });
     });
   }
 

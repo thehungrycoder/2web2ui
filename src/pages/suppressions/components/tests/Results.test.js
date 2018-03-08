@@ -82,18 +82,6 @@ describe('Results', () => {
       expect(props.showAlert).toHaveBeenCalledTimes(1);
       expect(instance.toggleDeleteModal).toHaveBeenCalledTimes(1);
     });
-
-    it('does not hide modal on error', async() => {
-      const err = new Error('that error!');
-      instance.toggleDeleteModal = jest.fn();
-      props.deleteSuppression.mockReturnValue(Promise.reject(err));
-
-      await instance.deleteSuppression();
-
-      expect(props.deleteSuppression).toHaveBeenCalledTimes(1);
-      expect(props.showAlert).toHaveBeenCalledWith({ type: 'error', message: 'that error!' });
-      expect(instance.toggleDeleteModal).toHaveBeenCalledTimes(0);
-    });
   });
 
   describe('toggleDetailModal', () => {

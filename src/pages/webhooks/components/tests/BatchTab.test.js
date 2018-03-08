@@ -73,13 +73,4 @@ describe('Webhook Component: Batch Status Tab', () => {
       subaccount: instance.props.webhook.subaccount
     });
   });
-
-  it('should fail getBatches correctly', async() => {
-    wrapper.setProps({ getBatches: jest.fn(() => Promise.reject({ message: 'error' })) });
-    const instance = wrapper.instance();
-    await instance.refreshBatches();
-    expect(instance.props.getBatches).toHaveBeenCalled();
-    expect(instance.props.showAlert).toHaveBeenCalledWith({ details: 'error', message: 'Unable to refresh webhook batches', type: 'error' });
-  });
-
 });

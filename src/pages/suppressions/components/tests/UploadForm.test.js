@@ -42,17 +42,5 @@ describe('UploadForm tests', () => {
       expect(instance.props.showAlert).toHaveBeenCalledWith(expect.objectContaining({ type: 'success' }));
       expect(instance.props.history.push).toHaveBeenCalled();
     });
-
-    it('catches errors when uploading suppressions', async() => {
-      wrapper.setProps({ uploadSuppressions: jest.fn(() => Promise.reject(new Error('Oh no!'))) });
-      const args = {
-        subaccount: 999,
-        suppressionsFile: { name: 'example.csv' }
-      };
-
-      await instance.handleSubmit(args);
-      expect(instance.props.showAlert).not.toHaveBeenCalled();
-      expect(instance.props.history.push).not.toHaveBeenCalled();
-    });
   });
 });

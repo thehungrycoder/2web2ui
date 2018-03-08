@@ -17,9 +17,6 @@ export class EditBounce extends Component {
 
   verifyDomain = () => {
     const { id, verifyCname, showAlert, domain: { subaccount_id: subaccount }} = this.props;
-    function alertError(error) {
-      showAlert({ type: 'error', message: `Unable to verify CNAME record of ${id}. ${error}` });
-    }
 
     return verifyCname({ id, subaccount })
       .then((results) => {
@@ -27,26 +24,19 @@ export class EditBounce extends Component {
         if (readyFor.bounce) {
           showAlert({ type: 'success', message: `You have successfully verified CNAME record of ${id}` });
         } else {
-          alertError(results.dns.cname_error);
+          showAlert({ type: 'error', message: `Unable to verify CNAME record of ${id}. ${results.dns.cname_error}` });
         }
-      })
-      .catch((err) => {
-        alertError(err.message);
       });
   }
 
   toggleDefaultBounce = () => {
-    const { id, update, domain, showAlert, reset } = this.props;
+    const { id, update, domain, reset } = this.props;
 
     return update({
       id,
       subaccount: domain.subaccount_id,
       is_default_bounce_domain: !domain.is_default_bounce_domain
-    })
-      .catch((err) => {
-        showAlert({ type: 'error', message: `Failed to update default bounce option. ${err.message}` });
-        reset();
-      });
+    }).catch((err) => { reset(); });
   }
 
   renderRootDomainWarning() {

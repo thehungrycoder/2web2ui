@@ -5,7 +5,6 @@ import _ from 'lodash';
 import csvFileParseRequest, { hasData, hasField } from 'src/actions/helpers/csvFileParseRequest';
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 import setSubaccountHeader from 'src/actions/helpers/setSubaccountHeader';
-import { showAlert } from './globalAlert';
 
 const { apiDateFormat } = config;
 
@@ -25,34 +24,14 @@ export function checkSuppression() { //used in DashBoardPage to check if account
 }
 
 export function searchRecipient({ email, subaccountId } = {}) {
-  const headers = {};
-  if (subaccountId) {
-    headers['x-msys-subaccount'] = subaccountId;
-  }
-
-  return (dispatch, getState) => dispatch(
-    sparkpostApiRequest({
-      type: 'SEARCH_SUPPRESSIONS_RECIPIENT',
-      meta: {
-        method: 'GET',
-        url: `/suppression-list/${email}`,
-        headers
-      }
-    }))
-    .catch((err) => {
-      const { response = {}} = err;
-      if (response.status === 404) {
-        return; //swallow 404s
-      }
-
-      dispatch(
-        showAlert({
-          type: 'error',
-          message: 'Error while searching recipient in suppressions list',
-          details: err.message
-        })
-      );
-    });
+  return sparkpostApiRequest({
+    type: 'SEARCH_SUPPRESSIONS_RECIPIENT',
+    meta: {
+      method: 'GET',
+      url: `/suppression-list/${email}`,
+      headers: setSubaccountHeader(subaccountId)
+    }
+  });
 }
 
 export function searchSuppressions(options) {
@@ -77,24 +56,14 @@ export function searchSuppressions(options) {
     params.sources = sources.join(',');
   }
 
-  return (dispatch) => dispatch(
-    sparkpostApiRequest({
-      type: 'GET_SUPPRESSIONS',
-      meta: {
-        method: 'GET',
-        url: '/suppression-list',
-        params
-      }
-    }))
-    .catch((err) => {
-      dispatch(
-        showAlert({
-          type: 'error',
-          message: 'Error while searching suppressions list',
-          details: err.message
-        })
-      );
-    });
+  return sparkpostApiRequest({
+    type: 'GET_SUPPRESSIONS',
+    meta: {
+      method: 'GET',
+      url: '/suppression-list',
+      params
+    }
+  });
 }
 
 export function deleteSuppression(suppression) {

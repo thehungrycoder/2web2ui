@@ -21,12 +21,9 @@ export class WebhooksDetails extends Component {
   };
 
   componentDidMount() {
-    const { showAlert, getWebhook, match, history, subaccountId: subaccount } = this.props;
+    const { getWebhook, match, history, subaccountId: subaccount } = this.props;
 
-    getWebhook({ id: match.params.id, subaccount }).catch((err) => {
-      history.push('/webhooks/');
-      showAlert({ type: 'error', message: 'Unable to find webhook', details: err.message });
-    });
+    getWebhook({ id: match.params.id, subaccount }).catch((err) => { history.push('/webhooks/'); });
   }
 
   /*
@@ -39,9 +36,6 @@ export class WebhooksDetails extends Component {
       .then(() => {
         history.push('/webhooks/');
         showAlert({ type: 'success', message: 'Webhook deleted' });
-      })
-      .catch((err) => {
-        showAlert({ type: 'error', message: 'Unable to delete webhook', details: err.message });
       });
   }
 
