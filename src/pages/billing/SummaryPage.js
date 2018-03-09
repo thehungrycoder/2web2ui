@@ -5,7 +5,8 @@ import { Page, Panel, WindowEvent } from '@sparkpost/matchbox';
 
 import { fetch as fetchAccount, getPlans } from 'src/actions/account';
 import { list as getSendingIps } from 'src/actions/sendingIps';
-import { shouldExposeCardSelector, canChangePlanSelector, currentPlanSelector, publicPlansSelector, isSelfServeOrAWSSelector } from 'src/selectors/accountBillingInfo';
+import { shouldExposeCardSelector, canChangePlanSelector, currentPlanSelector, publicPlansSelector, isSelfServeOrAWSSelector,
+  canPurchaseIps } from 'src/selectors/accountBillingInfo';
 
 import { Loading, Modal, LabelledValue } from 'src/components';
 import { PremiumBanner, EnterpriseBanner, SuspendedBanner, ManuallyBilledBanner, PendingPlanBanner } from './components/Banners';
@@ -41,7 +42,7 @@ export class SummaryPage extends Component {
   }
 
   renderSummary = () => {
-    const { account, currentPlan, canChangePlan, shouldExposeCard } = this.props;
+    const { account, currentPlan, canChangePlan, shouldExposeCard, canPurchaseIps } = this.props;
     const { show } = this.state;
     let changePlanActions = {};
 
@@ -59,7 +60,7 @@ export class SummaryPage extends Component {
           <Panel.Section {...changePlanActions}>
             <PlanSummary label='Your Plan' plan={currentPlan} />
           </Panel.Section>
-          { shouldExposeCard && this.renderDedicatedIpSummarySection() }
+          { canPurchaseIps && this.renderDedicatedIpSummarySection() }
         </Panel>
 
         { shouldExposeCard && this.renderBillingSummary() }
@@ -122,6 +123,7 @@ const mapStateToProps = (state) => ({
   billing: state.account.billing,
   shouldExposeCard: shouldExposeCardSelector(state),
   shouldShowBillingSummary: isSelfServeOrAWSSelector(state),
+  canPurchaseIps: canPurchaseIps(state),
   canChangePlan: canChangePlanSelector(state),
   currentPlan: currentPlanSelector(state),
   plans: publicPlansSelector(state),

@@ -53,13 +53,20 @@ export const isAWSAccountSelector = createSelector(
   (currentSubscription) => currentSubscription.type === 'aws'
 );
 
-
 /**
  * Returns true if user has billing account and they are on a paid plan
  */
 export const shouldExposeCardSelector = createSelector(
   [currentPlanSelector, accountBillingSelector, isAWSAccountSelector],
   (currentPlan, accountBilling, isAWSAccount) => (accountBilling && !currentPlan.isFree) || !isAWSAccount
+);
+
+/**
+ * Return true if plan can purchase IP and has billing info (except for aws as it'll be billed outside)
+ */
+export const canPurchaseIps = createSelector(
+  [currentPlanSelector, accountBillingSelector, isAWSAccountSelector],
+  (currentPlan, accountBilling, isAWSAccount) => currentPlan.canPurchaseIps === true && (accountBilling || isAWSAccount)
 );
 
 export const isSelfServeOrAWSSelector = createSelector(
