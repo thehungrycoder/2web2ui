@@ -1,18 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Plan:  renders correctly 1`] = `
+exports[`Plan: renders correctly 1`] = `
 <a>
   <span>
     <strong>
       200
     </strong>
-     emails for 
+     emails/month for 
     <span>
       <strong>
         $
         100
       </strong>
-      /mo
+      /
+      mo
     </span>
   </span>
   <span>
@@ -21,19 +22,42 @@ exports[`Plan:  renders correctly 1`] = `
 </a>
 `;
 
-exports[`Plan:  renders free and ip correctly 1`] = `
+exports[`Plan: renders free and ip correctly 1`] = `
 <a>
   <span>
     <strong>
       300
     </strong>
-     emails for 
+     emails/month for 
     <strong>
       Free
     </strong>
   </span>
   <span>
     Full-featured developer account
+    , first dedicated IP address is free
+  </span>
+</a>
+`;
+
+exports[`Plan: renders hourly plan correctly 1`] = `
+<a>
+  <span>
+    <strong>
+      300
+    </strong>
+     emails/month for 
+    <span>
+      <strong>
+        $
+        0.22
+      </strong>
+      /
+      hr
+    </span>
+  </span>
+  <span>
+    $0.80/ thousand extra emails
     , first dedicated IP address is free
   </span>
 </a>

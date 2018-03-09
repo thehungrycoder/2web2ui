@@ -9,8 +9,8 @@ class Plan extends React.Component {
     const intervalShortName = pricingInterval === 'hourly' ? 'hr' : 'mo';
     const pricePerInterval = plan[pricingInterval];
     return pricePerInterval
-      ? <span>for ${pricePerInterval.toLocaleString()}/{intervalShortName}</span>
-      : 'for Free';
+      ? <span><strong>${pricePerInterval.toLocaleString()}</strong>/{intervalShortName}</span>
+      : <strong>Free</strong>;
   }
 
   render() {
@@ -25,7 +25,7 @@ class Plan extends React.Component {
 
     return (
       <a className={className} {...rest} >
-        <span className={styles.MainLabel}><strong>{ plan.volume.toLocaleString() }</strong> emails/month {this.getPrice(plan)}</span>
+        <span className={styles.MainLabel}><strong>{ plan.volume.toLocaleString() }</strong> emails/month for {this.getPrice(plan)}</span>
         <span className={styles.SupportLabel}>{ overage }{ ip }</span>
       </a>
     );
