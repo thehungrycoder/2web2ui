@@ -37,11 +37,8 @@ export class ChangePlan extends Component {
 
   onSubmit = (values) => {
     const { account, updateSubscription, billingCreate, billingUpdate, showAlert, history, isAWSAccount } = this.props;
-    debugger;
     // decides which action to be taken based on
-    // if it already has billing and if you use a saved CC
-
-    //aws? just update the subscription
+    // if it's aws account, it already has billing and if you use a saved CC
     let action;
     if (isAWSAccount) {
       action = updateSubscription(values.planpicker.code, true);
@@ -50,14 +47,6 @@ export class ChangePlan extends Component {
     } else {
       action = billingCreate(values); // creates Zuora account
     }
-
-    // const action = account.billing
-    //   ? (
-    //     this.state.useSavedCC
-    //       ? updateSubscription(values.planpicker.code)
-    //       : billingUpdate(values))
-    //   : billingCreate(values); // creates Zuora account
-
 
     return action
       .then(() => history.push('/account/billing'))
@@ -102,9 +91,10 @@ export class ChangePlan extends Component {
 
   render() {
     const { account, submitting, pristine, currentPlan, selectedPlan, plans, isAWSAccount } = this.props;
+    const billingEnabled = account.subscription.self_serve || isAWSAccount;
 
     // Manually billed accounts can submit without changing plan
-    const disableSubmit = submitting || (account.subscription.self_serve && (pristine || currentPlan.code === selectedPlan.code));
+    const disableSubmit = submitting || (billingEnabled && (pristine || currentPlan.code === selectedPlan.code));
 
     return (
       <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
@@ -121,7 +111,7 @@ export class ChangePlan extends Component {
             <Confirmation
               current={this.props.currentPlan}
               selected={this.props.selectedPlan}
-              billingEnabled={this.props.account.subscription.self_serve || isAWSAccount}
+              billingEnabled={billingEnabled}
               disableSubmit={disableSubmit} />
           </Grid.Column>
         </Grid>

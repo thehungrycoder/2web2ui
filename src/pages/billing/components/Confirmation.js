@@ -7,9 +7,13 @@ export class Confirmation extends React.Component {
   getPrice(plan) {
     const pricingInterval = _.has(plan, 'hourly') ? 'hourly' : 'monthly';
     const intervalShortName = pricingInterval === 'hourly' ? 'hr' : 'mo';
-    const pricePerInterval = plan[pricingInterval];
-    return pricePerInterval
-      ? <span>for {pricePerInterval.toLocaleString()}/{intervalShortName}</span>
+    return { shortName: intervalShortName, fullName: pricingInterval, price: plan[pricingInterval] };
+  }
+
+  getPriceText(plan) {
+    const priceInfo = this.getPrice(plan);
+    return priceInfo.price
+      ? <span>for {priceInfo.price.toLocaleString()}/{priceInfo.shortName}</span>
       : 'for Free';
   }
 
@@ -22,28 +26,33 @@ export class Confirmation extends React.Component {
       : 'for Free';
   }
 
-  renderSelectedPlanMarkup(selectedPlan) {
-    return !selectedPlan
+  renderSelectedPlanMarkup() {
+    const { current = {}, selected = {}} = this.props;
+
+    return !selected || selected.code === current.code
       ? <p>Select a plan on the left to update your subscription</p>
       : <div>
         <small>New Plan</small>
-        <h5>{ selectedPlan.volume && selectedPlan.volume.toLocaleString() } emails each month { this.getPrice(selectedPlan) }</h5>
+        <h5>{ selected.volume && selected.volume.toLocaleString() } emails each month { this.getPriceText(selected) }</h5>
       </div>;
 
   }
 
-  renderCurrentPlanMarkup(currentPlan) {
+  renderCurrentPlanMarkup() {
+    const { current } = this.props;
     return (
       <span>
         <small>Current Plan</small>
-        <h4>{ currentPlan.volume && currentPlan.volume.toLocaleString() } emails each month {this.getPrice(currentPlan)}</h4>
+        <h4>{ current.volume && current.volume.toLocaleString() } emails each month {this.getPriceText(current)}</h4>
       </span>
     );
   }
 
   render() {
     const { current = {}, selected = {}, disableSubmit, billingEnabled } = this.props;
-    const isDowngrade = current.monthly > selected.monthly;
+    const currentPlanPricing = this.getPrice(current);
+    const selectedPlanPricing = this.getPrice(selected);
+    const isDowngrade = currentPlanPricing.price > selectedPlanPricing.price;
     const isPlanSelected = current.code !== selected.code;
     let effectiveDateMarkup = null;
     let ipMarkup = null;
@@ -83,10 +92,10 @@ export class Confirmation extends React.Component {
     return (
       <Panel>
         <Panel.Section>
-          { this.renderCurrentPlanMarkup(current) }
+          { this.renderCurrentPlanMarkup() }
         </Panel.Section>
         <Panel.Section>
-          { this.renderSelectedPlanMarkup(selected) }
+          { this.renderSelectedPlanMarkup() }
           { effectiveDateMarkup }
           { ipMarkup }
           { addonMarkup }
