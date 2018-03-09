@@ -111,7 +111,7 @@ export function createZuoraAccount({ data, token, signature }) {
 export function billingCreate(values) {
   const { corsData, billingData } = formatDataForCors(values);
 
-  return (dispatch) =>
+  return (dispatch, getState) =>
 
     // get CORS data for the create account context
     dispatch(cors('create-account', corsData))
@@ -119,7 +119,12 @@ export function billingCreate(values) {
       // create the Zuora account
       .then((results) => {
         const { token, signature } = results;
+        const { currentUser } = getState();
         const data = formatCreateData({ ...results, ...billingData });
+
+        // add user's email when creating account
+        data.billToContact.workEmail = currentUser.email;
+
         return dispatch(createZuoraAccount({ data, token, signature }));
       })
 

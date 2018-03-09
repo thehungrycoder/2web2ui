@@ -18,7 +18,11 @@ Array [
   Object {
     "meta": Object {
       "data": Object {
-        "formatted": "data",
+        "billToContact": Object {
+          "workEmail": "sparkpost-user-email@example.com",
+        },
+        "creditCard": Object {},
+        "subscription": Object {},
       },
       "headers": Object {
         "signature": undefined,
