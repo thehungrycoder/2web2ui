@@ -10,6 +10,7 @@ import qs from 'query-string';
 
 /**
  * Handles redirect for existing profile route
+ * and the templates 'email-verification', 'welcome-user'
  * /account/profile?verify={{token}}
  * to /account/email-verification/{{token}}
  */
@@ -19,7 +20,7 @@ export function emailVerificationRedirect(props) {
 }
 
 /**
- * Handles redirect for reset password
+ * Handles redirect for template 'forgotten-password'
  * /reset-password?token={{token}}
  * to /reset-password/{{token}}
  */
@@ -29,6 +30,7 @@ function passwordReset(props) {
 }
 
 export const emailRedirects = [
+  // Handles redirect for template 'webhook-deactivation'
   {
     path: '/account/webhooks',
     redirect: '/webhooks'
