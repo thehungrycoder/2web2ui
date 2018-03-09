@@ -3,6 +3,8 @@ import Confirmation from '../Confirmation';
 import { shallow } from 'enzyme';
 
 describe('Confirmation: ', () => {
+  let wrapper;
+  let props;
   const current = {
     monthly: 100,
     volume: 1000,
@@ -30,27 +32,37 @@ describe('Confirmation: ', () => {
     isFree: true
   };
 
+  beforeEach(() => {
+    props = {
+      current,
+      selected: current,
+      selfServe: true,
+      billingEnabled: true
+    };
+    wrapper = shallow(<Confirmation {...props} />);
+  });
+
   it('should render with nothing selected', () => {
-    const props = { current, selected: current, selfServe: true };
-    const wrapper = shallow(<Confirmation {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render correctly with an upgrade', () => {
-    const props = { current, selected: upgrade, selfServe: true };
-    const wrapper = shallow(<Confirmation {...props} />);
+    wrapper.setProps({ selected: upgrade, selfServe: true });
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render correctly with a downgrade', () => {
-    const props = { current, selected: downgrade, selfServe: true };
-    const wrapper = shallow(<Confirmation {...props} />);
+    wrapper.setProps({ selected: downgrade, selfServe: true });
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render correctly with a downgrade to free', () => {
-    const props = { current, selected: free, selfServe: true };
-    const wrapper = shallow(<Confirmation {...props} />);
+    wrapper.setProps({ selected: free, selfServe: true });
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders correctly when billing not enabled', () => {
+    wrapper.setProps({ billingEnabled: false });
     expect(wrapper).toMatchSnapshot();
   });
 });

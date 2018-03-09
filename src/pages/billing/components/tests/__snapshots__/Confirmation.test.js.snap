@@ -1,20 +1,61 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Confirmation:  renders correctly when billing not enabled 1`] = `
+<Panel>
+  <Panel.Section>
+    <span>
+      <small>
+        Current Plan
+      </small>
+      <h4>
+        1,000
+         emails each month 
+        <span>
+          for $
+          100
+          /
+          mo
+        </span>
+      </h4>
+    </span>
+  </Panel.Section>
+  <Panel.Section>
+    <p>
+      Select a plan on the left to update your subscription
+    </p>
+  </Panel.Section>
+  <Panel.Section>
+    <Button
+      destructive={false}
+      fullWidth={true}
+      primary={true}
+      size="default"
+      type="submit"
+    >
+      Enable Automatic Billing
+    </Button>
+  </Panel.Section>
+</Panel>
+`;
+
 exports[`Confirmation:  should render correctly with a downgrade 1`] = `
 <Panel>
   <Panel.Section>
-    <small>
-      Current Plan
-    </small>
-    <h4>
-      1,000
-       emails 
-      <span>
-        for $
-        100
-        /mo
-      </span>
-    </h4>
+    <span>
+      <small>
+        Current Plan
+      </small>
+      <h4>
+        1,000
+         emails each month 
+        <span>
+          for $
+          100
+          /
+          mo
+        </span>
+      </h4>
+    </span>
   </Panel.Section>
   <Panel.Section>
     <div>
@@ -23,11 +64,12 @@ exports[`Confirmation:  should render correctly with a downgrade 1`] = `
       </small>
       <h5>
         500
-         emails 
+         emails each month 
         <span>
           for $
           50
-          /mo
+          /
+          mo
         </span>
       </h5>
     </div>
@@ -71,18 +113,21 @@ exports[`Confirmation:  should render correctly with a downgrade 1`] = `
 exports[`Confirmation:  should render correctly with a downgrade to free 1`] = `
 <Panel>
   <Panel.Section>
-    <small>
-      Current Plan
-    </small>
-    <h4>
-      1,000
-       emails 
-      <span>
-        for $
-        100
-        /mo
-      </span>
-    </h4>
+    <span>
+      <small>
+        Current Plan
+      </small>
+      <h4>
+        1,000
+         emails each month 
+        <span>
+          for $
+          100
+          /
+          mo
+        </span>
+      </h4>
+    </span>
   </Panel.Section>
   <Panel.Section>
     <div>
@@ -91,7 +136,7 @@ exports[`Confirmation:  should render correctly with a downgrade to free 1`] = `
       </small>
       <h5>
         100
-         emails 
+         emails each month 
         for Free
       </h5>
     </div>
@@ -119,18 +164,21 @@ exports[`Confirmation:  should render correctly with a downgrade to free 1`] = `
 exports[`Confirmation:  should render correctly with an upgrade 1`] = `
 <Panel>
   <Panel.Section>
-    <small>
-      Current Plan
-    </small>
-    <h4>
-      1,000
-       emails 
-      <span>
-        for $
-        100
-        /mo
-      </span>
-    </h4>
+    <span>
+      <small>
+        Current Plan
+      </small>
+      <h4>
+        1,000
+         emails each month 
+        <span>
+          for $
+          100
+          /
+          mo
+        </span>
+      </h4>
+    </span>
   </Panel.Section>
   <Panel.Section>
     <div>
@@ -139,11 +187,12 @@ exports[`Confirmation:  should render correctly with an upgrade 1`] = `
       </small>
       <h5>
         2,000
-         emails 
+         emails each month 
         <span>
           for $
           200
-          /mo
+          /
+          mo
         </span>
       </h5>
     </div>
@@ -187,18 +236,21 @@ exports[`Confirmation:  should render correctly with an upgrade 1`] = `
 exports[`Confirmation:  should render with nothing selected 1`] = `
 <Panel>
   <Panel.Section>
-    <small>
-      Current Plan
-    </small>
-    <h4>
-      1,000
-       emails 
-      <span>
-        for $
-        100
-        /mo
-      </span>
-    </h4>
+    <span>
+      <small>
+        Current Plan
+      </small>
+      <h4>
+        1,000
+         emails each month 
+        <span>
+          for $
+          100
+          /
+          mo
+        </span>
+      </h4>
+    </span>
   </Panel.Section>
   <Panel.Section>
     <p>
