@@ -29,9 +29,10 @@ import { default as emailVerification } from 'src/components/emailVerification/E
 
 import {
   hasGrants,
-  composeConditions
+  all,
+  not
 } from 'src/helpers/conditions';
-import { notEnterprise } from 'src/helpers/conditions/account';
+import { isEnterprise } from 'src/helpers/conditions/account';
 import { configFlag, configEquals } from 'src/helpers/conditions/config';
 import App from 'src/components/layout/App';
 
@@ -136,7 +137,7 @@ const routes = [
     path: '/dashboard',
     component: DashboardPage,
     layout: App,
-    condition: composeConditions(
+    condition: all(
       hasGrants('api_keys/manage', 'templates/modify', 'sending_domains/manage'),
       configEquals('splashPage', '/dashboard') // want to hide if not a splash page https://jira.int.messagesystems.com/browse/FAD-6046
     )
@@ -230,7 +231,7 @@ const routes = [
   {
     path: '/templates',
     component: templates.ListPage,
-    condition: composeConditions(hasGrants('templates/modify'), ({ account }) => account.status === 'active'),
+    condition: all(hasGrants('templates/modify'), ({ account }) => account.status === 'active'),
     layout: App
   },
   {
@@ -375,13 +376,13 @@ const routes = [
   {
     path: '/account/billing',
     component: billing.SummaryPage,
-    condition: composeConditions(hasGrants('account/manage'), notEnterprise()),
+    condition: all(hasGrants('account/manage'), not(isEnterprise())),
     layout: App
   },
   {
     path: '/account/billing/plan',
     component: billing.ChangePlanPage,
-    condition: composeConditions(hasGrants('account/manage'), notEnterprise()),
+    condition: all(hasGrants('account/manage'), not(isEnterprise())),
     layout: App
   },
   {
