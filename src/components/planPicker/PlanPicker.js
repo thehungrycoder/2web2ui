@@ -4,7 +4,6 @@ import { Field } from 'redux-form';
 import cx from 'classnames';
 
 import { Icon } from '@sparkpost/matchbox';
-
 import Plan from './Plan';
 import styles from './PlanPicker.module.scss';
 

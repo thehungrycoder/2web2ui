@@ -13,7 +13,7 @@ export class Confirmation extends React.Component {
   getPriceText(plan) {
     const priceInfo = this.getPrice(plan);
     return priceInfo.price
-      ? <span>for {priceInfo.price.toLocaleString()}/{priceInfo.shortName}</span>
+      ? <span>for ${priceInfo.price.toLocaleString()}/{priceInfo.shortName}</span>
       : 'for Free';
   }
 

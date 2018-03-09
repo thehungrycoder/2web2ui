@@ -57,8 +57,8 @@ export const isAWSAccountSelector = createSelector(
  * Returns true if user has billing account and they are on a paid plan
  */
 export const shouldExposeCardSelector = createSelector(
-  [currentPlanSelector, accountBillingSelector, isAWSAccountSelector],
-  (currentPlan, accountBilling, isAWSAccount) => (accountBilling && !currentPlan.isFree) || !isAWSAccount
+  [currentPlanSelector, accountBillingSelector],
+  (currentPlan, accountBilling) => (accountBilling && !currentPlan.isFree)
 );
 
 /**

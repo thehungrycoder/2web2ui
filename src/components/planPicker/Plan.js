@@ -9,16 +9,7 @@ class Plan extends React.Component {
     const intervalShortName = pricingInterval === 'hourly' ? 'hr' : 'mo';
     const pricePerInterval = plan[pricingInterval];
     return pricePerInterval
-      ? <span>for {pricePerInterval.toLocaleString()}/{intervalShortName}</span>
-      : 'for Free';
-  }
-
-  getVolume(plan) {
-    const pricingInterval = _.has(plan, 'hourly') ? 'hourly' : 'monthly';
-    const intervalShortName = pricingInterval === 'hourly' ? 'hr' : 'mo';
-    const pricePerInterval = plan[pricingInterval];
-    return pricePerInterval
-      ? <span>for {pricePerInterval.toLocaleString()}/{intervalShortName}</span>
+      ? <span>for ${pricePerInterval.toLocaleString()}/{intervalShortName}</span>
       : 'for Free';
   }
 
