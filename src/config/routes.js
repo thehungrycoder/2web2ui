@@ -6,7 +6,6 @@ import {
   billing,
   DashboardPage,
   sendingDomains,
-  ProfilePage,
   RegisterPage,
   reports,
   recipientLists,
@@ -26,11 +25,8 @@ import {
 
 import onboarding from 'src/pages/onboarding';
 import { default as emailVerification } from 'src/components/emailVerification/EmailVerification';
-
-import {
-  hasGrants,
-  composeConditions
-} from 'src/helpers/conditions';
+import { emailVerificationRedirect, emailRedirects } from './emailRoutes';
+import { hasGrants, composeConditions } from 'src/helpers/conditions';
 import { notEnterprise } from 'src/helpers/conditions/account';
 import { configFlag, configEquals } from 'src/helpers/conditions/config';
 import App from 'src/components/layout/App';
@@ -131,6 +127,12 @@ const routes = [
     layout: App,
     condition: () => true // this route MUST be accessible to all logged-in app users
   },
+
+  /**
+   * Handles route redirects for cutover to GA from old email template links
+   * TODO: Should remove at a later date
+   */
+  ...emailRedirects,
 
   {
     path: '/dashboard',
@@ -344,7 +346,7 @@ const routes = [
   },
   {
     path: '/account/profile',
-    component: ProfilePage,
+    component: emailVerificationRedirect,
     condition: hasGrants('users/self-manage'),
     layout: App
   },
