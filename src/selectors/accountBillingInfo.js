@@ -5,7 +5,8 @@ const suspendedSelector = (state) => state.account.isSuspendedForBilling;
 const pendingSubscriptionSelector = (state) => state.account.pending_subscription;
 const plansSelector = (state) => state.billing.plans || [];
 const accountBillingSelector = (state) => state.account.billing;
-const currentSubscriptionSelector = (state) => state.account.subscription;
+
+export const currentSubscriptionSelector = (state) => state.account.subscription;
 
 /**
  * Returns current subscription's code
@@ -33,6 +34,12 @@ export const publicPlansSelector = createSelector(
   (plans) => _.sortBy(plans.filter((plan) => plan.status === 'public'), (plan) => plan.volume)
 );
 
+const awsPlans = createSelector(
+  [plansSelector],
+  (plans) => _.sortBy(plans.filter((plan) => plan.awsMarketplace === true), (plan) => plan.volume)
+);
+
+
 /**
  * Gets current plan
  */
@@ -41,15 +48,33 @@ export const currentPlanSelector = createSelector(
   (currentPlanCode, plans) => _.find(plans, { code: currentPlanCode }) || {}
 );
 
+export const isAWSAccountSelector = createSelector(
+  [currentSubscriptionSelector],
+  (currentSubscription) => currentSubscription.type === 'aws'
+);
+
+
 /**
  * Returns true if user has billing account and they are on a paid plan
  */
 export const shouldExposeCardSelector = createSelector(
-  [currentPlanSelector, accountBillingSelector],
-  (currentPlan, accountBilling) => !!accountBilling && !currentPlan.isFree
+  [currentPlanSelector, accountBillingSelector, isAWSAccountSelector],
+  (currentPlan, accountBilling, isAWSAccount) => (accountBilling && !currentPlan.isFree) || !isAWSAccount
 );
 
-export const shouldShowBillingSummary = createSelector(
-  [currentSubscriptionSelector],
-  (currentSubscription) => currentSubscription.self_serve === true || currentSubscription.type === 'aws'
+export const isSelfServeOrAWSSelector = createSelector(
+  [currentSubscriptionSelector, isAWSAccountSelector],
+  (currentSubscription, isAWSAccount) => currentSubscription.self_serve === true || isAWSAccount
+);
+
+export const getPlansSelector = (subscription) => createSelector(
+  [publicPlansSelector, awsPlans],
+  (publicPlans, awsPlans) => {
+    if (subscription.type === 'aws') { //TODO can isAWSAccount selected be used here?
+      return awsPlans;
+    }
+
+    // Strip free plans for manually billed accounts looking to convert
+    return !subscription.self_serve ? publicPlans.filter((plan) => !plan.isFree) : publicPlans;
+  }
 );

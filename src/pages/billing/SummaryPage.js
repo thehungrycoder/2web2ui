@@ -5,7 +5,7 @@ import { Page, Panel, WindowEvent } from '@sparkpost/matchbox';
 
 import { fetch as fetchAccount, getPlans } from 'src/actions/account';
 import { list as getSendingIps } from 'src/actions/sendingIps';
-import { shouldExposeCardSelector, canChangePlanSelector, currentPlanSelector, publicPlansSelector, shouldShowBillingSummary } from 'src/selectors/accountBillingInfo';
+import { shouldExposeCardSelector, canChangePlanSelector, currentPlanSelector, publicPlansSelector, isSelfServeOrAWSSelector } from 'src/selectors/accountBillingInfo';
 
 import { Loading, Modal, LabelledValue } from 'src/components';
 import { PremiumBanner, EnterpriseBanner, SuspendedBanner, ManuallyBilledBanner, PendingPlanBanner } from './components/Banners';
@@ -121,7 +121,7 @@ const mapStateToProps = (state) => ({
   account: state.account,
   billing: state.account.billing,
   shouldExposeCard: shouldExposeCardSelector(state),
-  shouldShowBillingSummary: shouldShowBillingSummary(state),
+  shouldShowBillingSummary: isSelfServeOrAWSSelector(state),
   canChangePlan: canChangePlanSelector(state),
   currentPlan: currentPlanSelector(state),
   plans: publicPlansSelector(state),

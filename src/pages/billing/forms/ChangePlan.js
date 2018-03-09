@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom';
 import { billingCreate, billingUpdate, updateSubscription } from 'src/actions/billing';
 import { showAlert } from 'src/actions/globalAlert';
 import { changePlanInitialValues } from 'src/selectors/accountBillingForms';
-import { publicPlansSelector, currentPlanSelector, shouldExposeCardSelector } from 'src/selectors/accountBillingInfo';
+import { currentPlanSelector, shouldExposeCardSelector, isAWSAccountSelector, getPlansSelector, currentSubscriptionSelector } from 'src/selectors/accountBillingInfo';
 
 import { Panel, Grid } from '@sparkpost/matchbox';
 import { PlanPicker } from 'src/components';
@@ -36,16 +36,27 @@ export class ChangePlan extends Component {
   }
 
   onSubmit = (values) => {
-    const { account, updateSubscription, billingCreate, billingUpdate, showAlert, history } = this.props;
-
+    const { account, updateSubscription, billingCreate, billingUpdate, showAlert, history, isAWSAccount } = this.props;
+    debugger;
     // decides which action to be taken based on
     // if it already has billing and if you use a saved CC
-    const action = account.billing
-      ? (
-        this.state.useSavedCC
-          ? updateSubscription(values.planpicker.code)
-          : billingUpdate(values))
-      : billingCreate(values); // creates Zuora account
+
+    //aws? just update the subscription
+    let action;
+    if (isAWSAccount) {
+      action = updateSubscription(values.planpicker.code, true);
+    } else if (account.billing) {
+      action = this.state.useSavedCC ? updateSubscription(values.planpicker.code) : billingUpdate(values);
+    } else {
+      action = billingCreate(values); // creates Zuora account
+    }
+
+    // const action = account.billing
+    //   ? (
+    //     this.state.useSavedCC
+    //       ? updateSubscription(values.planpicker.code)
+    //       : billingUpdate(values))
+    //   : billingCreate(values); // creates Zuora account
 
 
     return action
@@ -90,32 +101,27 @@ export class ChangePlan extends Component {
   }
 
   render() {
-    const { account, submitting, pristine, currentPlan, selectedPlan, plans } = this.props;
+    const { account, submitting, pristine, currentPlan, selectedPlan, plans, isAWSAccount } = this.props;
 
     // Manually billed accounts can submit without changing plan
     const disableSubmit = submitting || (account.subscription.self_serve && (pristine || currentPlan.code === selectedPlan.code));
-
-    // Strip free plans for manually billed accounts looking to convert
-    const availablePlans = !account.subscription.self_serve
-      ? plans.filter((plan) => !plan.isFree)
-      : plans;
 
     return (
       <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
         <Grid>
           <Grid.Column>
             <Panel title='Select A Plan'>
-              { availablePlans.length &&
-                <PlanPicker disabled={this.props.submitting} plans={availablePlans} />
+              { plans.length &&
+                <PlanPicker disabled={this.props.submitting} plans={plans} isAWSAccount={isAWSAccount} />
               }
             </Panel>
-            { this.renderCCSection() }
+            { !isAWSAccount && this.renderCCSection() }
           </Grid.Column>
           <Grid.Column xs={12} md={5}>
             <Confirmation
               current={this.props.currentPlan}
               selected={this.props.selectedPlan}
-              selfServe={this.props.account.subscription.self_serve}
+              billingEnabled={this.props.account.subscription.self_serve || isAWSAccount}
               disableSubmit={disableSubmit} />
           </Grid.Column>
         </Grid>
@@ -126,14 +132,17 @@ export class ChangePlan extends Component {
 
 const mapStateToProps = (state) => {
   const selector = formValueSelector(FORMNAME);
+  const subscription = currentSubscriptionSelector(state);
+
   return {
     account: state.account,
     billing: state.billing,
     shouldExposeCard: shouldExposeCardSelector(state),
-    plans: publicPlansSelector(state),
+    plans: getPlansSelector(subscription)(state),
     currentPlan: currentPlanSelector(state),
     selectedPlan: selector(state, 'planpicker'),
-    initialValues: changePlanInitialValues(state)
+    initialValues: changePlanInitialValues(state),
+    isAWSAccount: isAWSAccountSelector(state)
   };
 };
 
