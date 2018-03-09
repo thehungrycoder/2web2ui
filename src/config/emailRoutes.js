@@ -26,7 +26,7 @@ export function emailVerificationRedirect(props) {
  */
 function passwordReset(props) {
   const search = qs.parse(props.location.search);
-  return <Redirect to={search.token ? `/reset-password/${search.token}` : '/404'}/>;
+  return <Redirect to={search.token ? `/reset-password/${search.token}` : '/'}/>;
 }
 
 export const emailRedirects = [
@@ -38,6 +38,7 @@ export const emailRedirects = [
   {
     path: '/reset-password',
     public: true,
+    forceLogout: true,
     component: passwordReset
   }
 ];
