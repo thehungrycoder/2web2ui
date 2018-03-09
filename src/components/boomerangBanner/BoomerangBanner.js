@@ -1,52 +1,38 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import Cookies from 'js-cookie';
-import config from 'src/config';
+import { barMe } from 'src/helpers/heroku';
 
 const SNIPPET_URL = 'https://s3.amazonaws.com/assets.heroku.com/boomerang/boomerang.js';
-const COOKIE_NAME = config.heroku.cookieName;
-const OPTIONS = { path: '/', domain: config.website.domain };
 
 export class BoomerangBanner extends Component {
   /**
-   * Tries to load the cookie data from the heroku-nav-data cookie and then adds the heroku bar based on its contents.
+   * Attempt to load the boomerang banner and apply styling if it was loaded successfully
    */
-  barMe() {
-    const cookieValue = Cookies.get(COOKIE_NAME);
+  renderBanner() {
+    const style = <div className={'heroku-boomerang-loaded'} style={{ marginTop: '32px' }}/>;
 
-    if (cookieValue) {
-      try {
-        const cookieData = JSON.parse(atob(cookieValue));
-
-        window.Boomerang.init({
-          app: cookieData.appname,
-          addon: 'SparkPost',
-          user: cookieData.user,
-          org: cookieData.org
-        });
-      } catch (e) {
-        //silently ignore
-      }
+    // the bar is already in place, just return the style
+    if (document.getElementById('heroku-boomerang')) {
+      return style;
     }
+    const tryBar = barMe();
 
-  }
-
-  /**
-   * Cleans up Heroku resources like cookies and the Boomerang bar
-   */
-  destroy() {
-    Cookies.remove(COOKIE_NAME, OPTIONS);
-    // this.$window.Boomerang.reset(); // just kidding! this doesn't work! see https://github.com/heroku/boomerang/pull/21
-    document.getElementById('#heroku-boomerang').remove(); // so we'll do this instead until that PR gets merged
+    return (
+      tryBar
+        ? style
+        : null
+    );
   }
 
   render() {
     return (
-      <Helmet>
-        <script src={SNIPPET_URL} type="text/javascript" />
-        {this.barMe()}
-      </Helmet>
+      <div>
+        <Helmet>
+          <script src={SNIPPET_URL} type="text/javascript"/>
+        </Helmet>
+        {this.renderBanner()}
+      </div>
     );
   }
 }

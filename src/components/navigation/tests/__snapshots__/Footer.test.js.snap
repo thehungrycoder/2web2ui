@@ -1,6 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Footer tests should render footer correctly 1`] = `
+exports[`Footer tests should not render docs or logout for heroku user 1`] = `""`;
+
+exports[`Footer tests should render footer correctly for non-heroku user 1`] = `
 <ul>
   <li>
     <UnstyledLink

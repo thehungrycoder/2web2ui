@@ -1,3 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`RouteWatch attaches gtag to window 1`] = `undefined`;
+
+exports[`RouteWatch renders Helmet with script 1`] = `
+<HelmetWrapper
+  defer={true}
+  encodeSpecialCharacters={true}
+>
+  <script
+    async={true}
+    src="https://www.googletagmanager.com/gtag/js?id=no-default-set"
+    type="text/javascript"
+  />
+</HelmetWrapper>
+`;
+
 exports[`RouteWatch renders null 1`] = `""`;
+
+exports[`RouteWatch sets up gtag config on mount 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      "config",
+      "no-default-set",
+    ],
+  ],
+}
+`;

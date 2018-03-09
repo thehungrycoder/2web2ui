@@ -8,16 +8,23 @@ describe('Footer tests', () => {
 
   beforeEach(() => {
     props = {
-      logout: jest.fn()
+      logout: jest.fn(),
+      currentUser: { access_level: 'user' }
     };
 
     wrapper = shallow(<Footer {...props} />);
   });
 
 
-  it('should render footer correctly', () => {
+  it('should render footer correctly for non-heroku user', () => {
     expect(wrapper).toMatchSnapshot();
+  });
 
+  it('should not render docs or logout for heroku user', () => {
+    props.currentUser.access_level = 'heroku';
+    wrapper = shallow(<Footer {...props} />);
+
+    expect(wrapper).toMatchSnapshot();
   });
 
   it('should call logout on click', () => {
