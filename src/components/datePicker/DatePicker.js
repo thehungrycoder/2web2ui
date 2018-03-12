@@ -163,8 +163,8 @@ export default class AppDatePicker extends Component {
 
 AppDatePicker.propTypes = {
   now: PropTypes.instanceOf(Date),
-  from: PropTypes.instanceOf(Date).isRequired,
-  to: PropTypes.instanceOf(Date).isRequired,
+  from: PropTypes.instanceOf(Date),
+  to: PropTypes.instanceOf(Date),
   relativeRange: PropTypes.string,
   relativeDateOptions: PropTypes.arrayOf(PropTypes.string).isRequired,
   onChange: PropTypes.func.isRequired,

@@ -82,9 +82,7 @@ export class MessageEventsPage extends Component {
 
     return (
       <Page title='Message Events'>
-        <Panel sectioned>
-          <MessageEventsSearch />
-        </Panel>
+        <MessageEventsSearch />
         { error ? this.renderError() : this.renderCollection() }
       </Page>
     );

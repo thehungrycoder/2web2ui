@@ -59,6 +59,20 @@ export function updateMessageEventsSearchOptions(options) {
   };
 }
 
+export function addFilters(filters) {
+  return {
+    type: 'ADD_MESSAGE_EVENTS_FILTERS',
+    payload: filters
+  };
+}
+
+export function removeFilter(filter) {
+  return {
+    type: 'REMOVE_MESSAGE_EVENTS_FILTER',
+    payload: filter
+  };
+}
+
 export function getMessageHistory({ messageId, ...rest }) {
   return sparkpostApiRequest({
     type: 'GET_MESSAGE_HISTORY',

@@ -1,15 +1,17 @@
+/* eslint-disable */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
-import { reduxForm, Field } from 'redux-form';
 import _ from 'lodash';
-import { getMessageEvents, refreshMessageEventsDateRange, updateMessageEventsSearchOptions } from 'src/actions/messageEvents';
-import { Grid } from '@sparkpost/matchbox';
+import { getMessageEvents, refreshMessageEventsDateRange, updateMessageEventsSearchOptions, addFilters } from 'src/actions/messageEvents';
+import { Panel, Grid, TextField } from '@sparkpost/matchbox';
+import AdvancedFilters from './AdvancedFilters';
+import ActiveFilters from './ActiveFilters';
 import DatePicker from 'src/components/datePicker/DatePicker';
-import { TextFieldWrapper } from 'src/components';
 import { email as emailValidator } from 'src/helpers/validation';
 import { onEnter } from 'src/helpers/keyEvents';
 
+const formName = 'messageEventsSearchOptions';
 const RELATIVE_DATE_OPTIONS = [
   'hour',
   'day',
@@ -27,9 +29,11 @@ export class MessageEventsSearch extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { search } = this.props;
-    if (prevProps.search !== search) {
-      this.props.getMessageEvents(search);
+    const { search, getMessageEvents } = this.props;
+    console.log('prev', prevProps.search);
+    console.log('next', search);
+    if (!_.isEqual(prevProps.search, search)) {
+      getMessageEvents(search);
     }
   }
 
@@ -61,7 +65,8 @@ export class MessageEventsSearch extends Component {
       return;
     }
 
-    this.props.updateMessageEventsSearchOptions({ recipients });
+    event.target.value = '';
+    this.props.addFilters({ recipients });
   }
 
   emailValidator = (value) => {
@@ -75,51 +80,55 @@ export class MessageEventsSearch extends Component {
   render() {
     const { search, refreshMessageEventsDateRange, loading, now = new Date() } = this.props;
     return (
-      <Grid>
-        <Grid.Column xs={12} md={6}>
-          <DatePicker
-            {...search.dateOptions}
-            relativeDateOptions={RELATIVE_DATE_OPTIONS}
-            disabled={loading}
-            onChange={refreshMessageEventsDateRange}
-            datePickerProps={{
-              disabledDays: {
-                after: now,
-                before: moment(now).subtract(10, 'days').toDate()
-              },
-              canChangeMonth: false
-            }}
-          />
-        </Grid.Column>
-        <Grid.Column xs={12} md={6}>
-          <Field
-            name="recipients"
-            onBlur={this.handleRecipientsChange}
-            onKeyDown={onEnter(this.handleRecipientsChange)}
-            component={TextFieldWrapper}
-            title="Recipient Email(s)"
-            validate={this.emailValidator}
-            placeholder="Filter by recipient email address"
-          />
-        </Grid.Column>
-      </Grid>
+      <Panel>
+        <Panel.Section>
+          <Grid>
+            <Grid.Column xs={12} md={6}>
+              <DatePicker
+                {...search.dateOptions}
+                relativeDateOptions={RELATIVE_DATE_OPTIONS}
+                disabled={loading}
+                onChange={refreshMessageEventsDateRange}
+                datePickerProps={{
+                  disabledDays: {
+                    after: now,
+                    before: moment(now).subtract(10, 'days').toDate()
+                  },
+                  canChangeMonth: false
+                }}
+              />
+            </Grid.Column>
+            <Grid.Column xs={12} md={4}>
+              <TextField
+                labelHidden
+                label="Recipient Email(s)"
+                placeholder="Filter by recipient email address"
+                onBlur={this.handleRecipientsChange}
+                onKeyDown={onEnter(this.handleRecipientsChange)}
+              />
+              {/* <Field
+                component={TextFieldWrapper}
+                validate={this.emailValidator}
+              /> */}
+            </Grid.Column>
+            <Grid.Column xs={12} md={2}>
+              {/* <AdvancedFilters formName={formName} /> */}
+            </Grid.Column>
+          </Grid>
+        </Panel.Section>
+        <ActiveFilters />
+      </Panel>
     );
   }
 }
 
-const formName = 'messageEventsSearchOptions';
-const formOptions = { form: formName };
-
 const mapStateToProps = ({ messageEvents }) => ({
   search: messageEvents.search,
   loading: messageEvents.loading,
-  initialValues: {
-    recipients: messageEvents.search.recipients.join(', ')
-  }
 });
-const mapDispatchToProps = { getMessageEvents, refreshMessageEventsDateRange, updateMessageEventsSearchOptions };
+const mapDispatchToProps = { getMessageEvents, refreshMessageEventsDateRange, updateMessageEventsSearchOptions, addFilters };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(reduxForm(formOptions)(MessageEventsSearch));
+)(MessageEventsSearch);
