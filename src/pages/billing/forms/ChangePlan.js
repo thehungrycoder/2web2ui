@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom';
 import { billingCreate, billingUpdate, updateSubscription } from 'src/actions/billing';
 import { showAlert } from 'src/actions/globalAlert';
 import { changePlanInitialValues } from 'src/selectors/accountBillingForms';
-import { currentPlanSelector, shouldExposeCardSelector, isAWSAccountSelector, getPlansSelector, currentSubscriptionSelector } from 'src/selectors/accountBillingInfo';
+import { currentPlanSelector, shouldExposeCardSelector, isAWSAccountSelector, getPlansSelector } from 'src/selectors/accountBillingInfo';
 
 import { Panel, Grid } from '@sparkpost/matchbox';
 import { PlanPicker } from 'src/components';
@@ -102,7 +102,7 @@ export class ChangePlan extends Component {
           <Grid.Column>
             <Panel title='Select A Plan'>
               { plans.length &&
-                <PlanPicker disabled={this.props.submitting} plans={plans} isAWSAccount={isAWSAccount} />
+                <PlanPicker disabled={this.props.submitting} plans={plans} />
               }
             </Panel>
             { !isAWSAccount && this.renderCCSection() }
@@ -122,13 +122,11 @@ export class ChangePlan extends Component {
 
 const mapStateToProps = (state) => {
   const selector = formValueSelector(FORMNAME);
-  const subscription = currentSubscriptionSelector(state);
-
   return {
     account: state.account,
     billing: state.billing,
     shouldExposeCard: shouldExposeCardSelector(state),
-    plans: getPlansSelector(subscription)(state),
+    plans: getPlansSelector(state),
     currentPlan: currentPlanSelector(state),
     selectedPlan: selector(state, 'planpicker'),
     initialValues: changePlanInitialValues(state),

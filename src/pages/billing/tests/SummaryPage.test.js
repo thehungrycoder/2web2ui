@@ -17,6 +17,7 @@ describe('Page: SummaryPage', () => {
     getSendingIps: jest.fn(),
     shouldExposeCard: false,
     shouldShowBillingSummary: true,
+    canPurchaseIps: false,
     canChangePlan: false,
     currentPlan: {},
     plans: [],
@@ -54,12 +55,13 @@ describe('Page: SummaryPage', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should render billing and dedicated IP summary if on paid plan', () => {
+  it('should render billing and dedicated IP summary if allowed to purchase ip', () => {
     wrapper.setProps({
       canChangePlan: true,
       shouldExposeCard: true,
       account: { subscription: { self_serve: true }},
-      currentPlan: { isFree: false }
+      currentPlan: { isFree: false },
+      canPurchaseIps: true
     });
     expect(wrapper).toMatchSnapshot();
   });

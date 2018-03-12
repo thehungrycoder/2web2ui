@@ -30,7 +30,8 @@ describe('Form Container: Change Plan', () => {
     showAlert: jest.fn(),
     billingCreate: jest.fn(() => Promise.resolve()),
     billingUpdate: jest.fn(() => Promise.resolve()),
-    updateSubscription: jest.fn(() => Promise.resolve())
+    updateSubscription: jest.fn(() => Promise.resolve()),
+    isAWSAccount: false
   };
 
   beforeEach(() => {
@@ -45,11 +46,6 @@ describe('Form Container: Change Plan', () => {
 
   it('should not show plans', () => {
     wrapper.setProps({ plans: []});
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('should not show free plans when not self serve', () => {
-    wrapper.setProps({ account: { subscription: { self_serve: false }}});
     expect(wrapper).toMatchSnapshot();
   });
 
