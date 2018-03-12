@@ -376,13 +376,13 @@ const routes = [
   {
     path: '/account/billing',
     component: billing.SummaryPage,
-    condition: all(hasGrants('account/manage'), not(isEnterprise())),
+    condition: all(hasGrants('account/manage'), not(isEnterprise)),
     layout: App
   },
   {
     path: '/account/billing/plan',
     component: billing.ChangePlanPage,
-    condition: all(hasGrants('account/manage'), not(isEnterprise())),
+    condition: all(hasGrants('account/manage'), not(isEnterprise)),
     layout: App
   },
   {

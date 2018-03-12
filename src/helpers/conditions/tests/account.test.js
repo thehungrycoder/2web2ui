@@ -41,7 +41,7 @@ describe('Condition: isEnterprise', () => {
         service_level: 'whatev'
       }
     };
-    condition = isEnterprise();
+    condition = isEnterprise;
   });
 
   it('should return a function that returns true if on ent1 plan', () => {
@@ -64,17 +64,17 @@ describe('Condition: isSuspendedForBilling', () => {
 
   it('should return a function that returns true if account is suspended and category is 100.01', () => {
     const account = { status: 'suspended', status_reason_category: '100.01' };
-    expect(isSuspendedForBilling()({ account })).toEqual(true);
+    expect(isSuspendedForBilling({ account })).toEqual(true);
   });
 
   it('should return a function that returns false if account is NOT suspended', () => {
     const account = { status: 'active', status_reason_category: '100.01' };
-    expect(isSuspendedForBilling()({ account })).toEqual(false);
+    expect(isSuspendedForBilling({ account })).toEqual(false);
   });
 
   it('should return a function that returns false if account does NOT have the right status reason category', () => {
     const account = { status: 'suspended', status_reason_category: '200.01' };
-    expect(isSuspendedForBilling()({ account })).toEqual(false);
+    expect(isSuspendedForBilling({ account })).toEqual(false);
   });
 
 });

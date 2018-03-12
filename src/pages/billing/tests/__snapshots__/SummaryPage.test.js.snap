@@ -1,12 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Page: SummaryPage should handle modal toggle 1`] = `
+exports[`Page: BillingSummaryPage should not render billing and ips if on free plan 1`] = `
 <Page
   empty={Object {}}
   title="Billing"
 >
-  <div>
-    <Component
+  <Connect(Component)>
+    <SuspendedForBilling
       account={
         Object {
           "subscription": Object {
@@ -14,8 +14,9 @@ exports[`Page: SummaryPage should handle modal toggle 1`] = `
           },
         }
       }
+      condition={[Function]}
     />
-    <Component
+    <ManuallyBilledBanner
       account={
         Object {
           "subscription": Object {
@@ -23,122 +24,124 @@ exports[`Page: SummaryPage should handle modal toggle 1`] = `
           },
         }
       }
+      condition={[Function]}
     />
-    <Panel
-      accent={true}
-      title="Plan Overview"
-    >
-      <Panel.Section>
-        <PlanSummary
-          label="Your Plan"
-          plan={Object {}}
-        />
-      </Panel.Section>
-    </Panel>
-    <Component />
-    <Component />
-    <Modal
-      open={true}
-    >
-      <WindowEvent
-        event="keydown"
-        handler={[Function]}
-      />
-      <Connect(ReduxForm)
-        onCancel={[MockFunction]}
-      />
-    </Modal>
-  </div>
+    <BillingSummary
+      account={
+        Object {
+          "subscription": Object {
+            "self_serve": true,
+          },
+        }
+      }
+      condition={[Function]}
+      sendingIps={
+        Object {
+          "list": Array [],
+        }
+      }
+    />
+  </Connect(Component)>
 </Page>
 `;
 
-exports[`Page: SummaryPage should not render billing and ips if on free plan 1`] = `
+exports[`Page: BillingSummaryPage should render banner when manually billed 1`] = `
 <Page
   empty={Object {}}
   title="Billing"
 >
-  <div>
-    <Component
+  <Connect(Component)>
+    <SuspendedForBilling
       account={
         Object {
           "subscription": Object {
-            "self_serve": true,
+            "self_serve": false,
           },
         }
       }
+      condition={[Function]}
     />
-    <Component
+    <ManuallyBilledBanner
       account={
         Object {
           "subscription": Object {
-            "self_serve": true,
+            "self_serve": false,
           },
         }
       }
+      condition={[Function]}
     />
-    <Panel
-      accent={true}
-      title="Plan Overview"
-    >
-      <Panel.Section
-        actions={
-          Array [
-            Object {
-              "Component": [Function],
-              "content": "Upgrade Now",
-              "to": "/account/billing/plan",
-            },
-          ]
+    <BillingSummary
+      account={
+        Object {
+          "subscription": Object {
+            "self_serve": false,
+          },
         }
-      >
-        <PlanSummary
-          label="Your Plan"
-          plan={
-            Object {
-              "isFree": true,
-            }
-          }
-        />
-      </Panel.Section>
-    </Panel>
-    <Component />
-    <Component />
-    <Modal
-      open={false}
-    >
-      <WindowEvent
-        event="keydown"
-        handler={[Function]}
-      />
-    </Modal>
-  </div>
+      }
+      condition={[Function]}
+      sendingIps={
+        Object {
+          "list": Array [],
+        }
+      }
+    />
+  </Connect(Component)>
 </Page>
 `;
 
-exports[`Page: SummaryPage should render banner when manually billed 1`] = `
+exports[`Page: BillingSummaryPage should render billing and dedicated IP summary if on paid plan 1`] = `
 <Page
   empty={Object {}}
   title="Billing"
 >
-  <ManuallyBilledBanner
-    account={
-      Object {
-        "subscription": Object {
-          "self_serve": false,
-        },
+  <Connect(Component)>
+    <SuspendedForBilling
+      account={
+        Object {
+          "subscription": Object {
+            "self_serve": true,
+          },
+        }
       }
-    }
-  />
+      condition={[Function]}
+    />
+    <ManuallyBilledBanner
+      account={
+        Object {
+          "subscription": Object {
+            "self_serve": true,
+          },
+        }
+      }
+      condition={[Function]}
+    />
+    <BillingSummary
+      account={
+        Object {
+          "subscription": Object {
+            "self_serve": true,
+          },
+        }
+      }
+      condition={[Function]}
+      sendingIps={
+        Object {
+          "list": Array [],
+        }
+      }
+    />
+  </Connect(Component)>
 </Page>
 `;
 
-exports[`Page: SummaryPage should render billing and dedicated IP summary if on paid plan 1`] = `
+exports[`Page: BillingSummaryPage should render upgrade on free plan 1`] = `
 <Page
   empty={Object {}}
   title="Billing"
 >
-  <div>
-    <Component
+  <Connect(Component)>
+    <SuspendedForBilling
       account={
         Object {
           "subscription": Object {
@@ -146,8 +149,9 @@ exports[`Page: SummaryPage should render billing and dedicated IP summary if on 
           },
         }
       }
+      condition={[Function]}
     />
-    <Component
+    <ManuallyBilledBanner
       account={
         Object {
           "subscription": Object {
@@ -155,99 +159,9 @@ exports[`Page: SummaryPage should render billing and dedicated IP summary if on 
           },
         }
       }
+      condition={[Function]}
     />
-    <Panel
-      accent={true}
-      title="Plan Overview"
-    >
-      <Panel.Section
-        actions={
-          Array [
-            Object {
-              "Component": [Function],
-              "content": "Change Plan",
-              "to": "/account/billing/plan",
-            },
-          ]
-        }
-      >
-        <PlanSummary
-          label="Your Plan"
-          plan={
-            Object {
-              "isFree": false,
-            }
-          }
-        />
-      </Panel.Section>
-      <DedicatedIpSummarySection
-        onClick={[Function]}
-        plan={
-          Object {
-            "isFree": false,
-          }
-        }
-      />
-    </Panel>
-    <Panel
-      title="Billing"
-    >
-      <Panel.Section
-        actions={
-          Array [
-            Object {
-              "content": "Update Payment Information",
-              "onClick": [Function],
-            },
-          ]
-        }
-      >
-        <CardSummary
-          billing={Object {}}
-          label="Credit Card"
-        />
-      </Panel.Section>
-      <Panel.Section
-        actions={
-          Array [
-            Object {
-              "content": "Update Billing Contact",
-              "onClick": [Function],
-            },
-          ]
-        }
-      >
-        <LabelledValue
-          label="Billing Contact"
-        >
-          <h6>
-             
-          </h6>
-          <p />
-        </LabelledValue>
-      </Panel.Section>
-    </Panel>
-    <Component />
-    <Component />
-    <Modal
-      open={false}
-    >
-      <WindowEvent
-        event="keydown"
-        handler={[Function]}
-      />
-    </Modal>
-  </div>
-</Page>
-`;
-
-exports[`Page: SummaryPage should render upgrade on free plan 1`] = `
-<Page
-  empty={Object {}}
-  title="Billing"
->
-  <div>
-    <Component
+    <BillingSummary
       account={
         Object {
           "subscription": Object {
@@ -255,51 +169,13 @@ exports[`Page: SummaryPage should render upgrade on free plan 1`] = `
           },
         }
       }
-    />
-    <Component
-      account={
+      condition={[Function]}
+      sendingIps={
         Object {
-          "subscription": Object {
-            "self_serve": true,
-          },
+          "list": Array [],
         }
       }
     />
-    <Panel
-      accent={true}
-      title="Plan Overview"
-    >
-      <Panel.Section
-        actions={
-          Array [
-            Object {
-              "Component": [Function],
-              "content": "Upgrade Now",
-              "to": "/account/billing/plan",
-            },
-          ]
-        }
-      >
-        <PlanSummary
-          label="Your Plan"
-          plan={
-            Object {
-              "isFree": true,
-            }
-          }
-        />
-      </Panel.Section>
-    </Panel>
-    <Component />
-    <Component />
-    <Modal
-      open={false}
-    >
-      <WindowEvent
-        event="keydown"
-        handler={[Function]}
-      />
-    </Modal>
-  </div>
+  </Connect(Component)>
 </Page>
 `;

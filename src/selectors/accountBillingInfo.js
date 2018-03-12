@@ -41,7 +41,22 @@ export const currentPlanSelector = createSelector(
 /**
  * Returns true if user has billing account and they are on a paid plan
  */
-export const shouldExposeCardSelector = createSelector(
+export const canUpdateBillingInfoSelector = createSelector(
   [currentPlanSelector, accountBillingSelector],
   (currentPlan, accountBilling) => !!accountBilling && !currentPlan.isFree
+);
+
+export const selectBillingInfo = createSelector(
+  [
+    canUpdateBillingInfoSelector,
+    canChangePlanSelector,
+    currentPlanSelector,
+    publicPlansSelector
+  ],
+  (canUpdateBillingInfo, canChangePlan, currentPlan, plans) => ({
+    canUpdateBillingInfo,
+    canChangePlan,
+    currentPlan,
+    plans
+  })
 );

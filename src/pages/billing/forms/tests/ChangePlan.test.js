@@ -24,7 +24,7 @@ describe('Form Container: Change Plan', () => {
     ],
     currentPlan: {},
     selectedPlan: {},
-    shouldExposeCard: false,
+    canUpdateBillingInfo: false,
     history: { push: jest.fn() },
     handleSubmit: jest.fn(),
     showAlert: jest.fn(),
@@ -56,14 +56,14 @@ describe('Form Container: Change Plan', () => {
   it('should show saved card', () => {
     const receiveSpy = jest.spyOn(wrapper.instance(), 'componentWillReceiveProps');
     expect(wrapper).toHaveState('useSavedCC', null);
-    wrapper.setProps({ shouldExposeCard: true });
-    expect(receiveSpy).toHaveBeenCalledWith({ ...props, shouldExposeCard: true }, {});
+    wrapper.setProps({ canUpdateBillingInfo: true });
+    expect(receiveSpy).toHaveBeenCalledWith({ ...props, canUpdateBillingInfo: true }, {});
     expect(wrapper).toHaveState('useSavedCC', true);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should handle toggle', () => {
-    wrapper.setProps({ shouldExposeCard: true });
+    wrapper.setProps({ canUpdateBillingInfo: true });
     expect(wrapper.find('CardSummary')).toBePresent();
     expect(wrapper.find('Connect(PaymentForm)')).not.toBePresent();
     wrapper.setState({ useSavedCC: false });

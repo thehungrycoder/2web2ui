@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom';
 import { billingCreate, billingUpdate, updateSubscription } from 'src/actions/billing';
 import { showAlert } from 'src/actions/globalAlert';
 import { changePlanInitialValues } from 'src/selectors/accountBillingForms';
-import { publicPlansSelector, currentPlanSelector, shouldExposeCardSelector } from 'src/selectors/accountBillingInfo';
+import { publicPlansSelector, currentPlanSelector, canUpdateBillingInfoSelector } from 'src/selectors/accountBillingInfo';
 
 import { Panel, Grid } from '@sparkpost/matchbox';
 import { PlanPicker } from 'src/components';
@@ -26,7 +26,7 @@ export class ChangePlan extends Component {
 
   componentWillReceiveProps(nextProps) {
     // Null check to make sure this only runs once
-    if (nextProps.shouldExposeCard && this.state.useSavedCC === null) {
+    if (nextProps.canUpdateBillingInfo && this.state.useSavedCC === null) {
       this.setState({ useSavedCC: true });
     }
   }
@@ -69,7 +69,7 @@ export class ChangePlan extends Component {
       );
     }
 
-    const savedPaymentAction = this.props.shouldExposeCard
+    const savedPaymentAction = this.props.canUpdateBillingInfo
       ? [{ content: 'Use Saved Payment Method', onClick: this.handleCardToggle }]
       : null;
 
@@ -130,7 +130,7 @@ const mapStateToProps = (state) => {
   return {
     account: state.account,
     billing: state.billing,
-    shouldExposeCard: shouldExposeCardSelector(state),
+    canUpdateBillingInfo: canUpdateBillingInfoSelector(state),
     plans: publicPlansSelector(state),
     currentPlan: currentPlanSelector(state),
     selectedPlan: selector(state, 'planpicker'),

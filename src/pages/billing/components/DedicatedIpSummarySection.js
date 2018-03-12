@@ -1,7 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
 import { Link } from 'react-router-dom';
-import { Panel } from '@sparkpost/matchbox';
+import { Panel, Banner } from '@sparkpost/matchbox';
 
 import config from 'src/config';
 import { LabelledValue } from 'src/components';
@@ -22,11 +22,18 @@ export default function DedicatedIpSummarySection({ count = 0, plan = {}, onClic
     ? <h6>0</h6>
     : <h6>{count} for <DedicatedIpCost plan={plan} quantity={billableCount} /></h6>;
 
+  if (count === 0 && plan.includesIp) {
+    return (
+      <Banner status='info' title='Claim your free IP' action={action}>
+        Your plan includes a free dedicated IP address. Add one now!
+      </Banner>
+    );
+  }
+
   return (
     <Panel.Section actions={[action]}>
       <LabelledValue label='Dedicated IPs'>
         {summary}
-        {count === 0 && plan.includesIp && <p>First IP is free!</p>}
         {hasReachedMax && <p>You have reached the maximum allowed.</p>}
       </LabelledValue>
     </Panel.Section>

@@ -33,7 +33,7 @@ describe('Selector: current plan', () => {
   });
 });
 
-describe('Selector: should expose card', () => {
+describe('Selector: can update billing info', () => {
   const store = {
     account: { subscription: { code: 'qwe' }, billing: {}},
     billing: {
@@ -45,7 +45,7 @@ describe('Selector: should expose card', () => {
   };
 
   it('should return true if on paid plan', () => {
-    expect(billingInfo.shouldExposeCardSelector(store)).toEqual(true);
+    expect(billingInfo.canUpdateBillingInfoSelector(store)).toEqual(true);
   });
 });
 
