@@ -66,7 +66,7 @@ export const shouldExposeCardSelector = createSelector(
  */
 export const canPurchaseIps = createSelector(
   [currentPlanSelector, accountBillingSelector, isAWSAccountSelector],
-  (currentPlan, accountBilling, isAWSAccount) => currentPlan.canPurchaseIps === true && (accountBilling || isAWSAccount)
+  (currentPlan, accountBilling, isAWSAccount) => currentPlan.canPurchaseIps === true && !!(accountBilling || isAWSAccount)
 );
 
 export const isSelfServeOrAWSSelector = createSelector(
@@ -77,7 +77,7 @@ export const isSelfServeOrAWSSelector = createSelector(
 export const getPlansSelector = createSelector(
   [publicPlansSelector, awsPlans, currentSubscriptionSelector],
   (publicPlans, awsPlans, subscription) => {
-    if (subscription.type === 'aws') { //TODO can isAWSAccount selected be used here?
+    if (subscription.type === 'aws') { //TODO can isAWSAccount selector be used here?
       return awsPlans;
     }
 
