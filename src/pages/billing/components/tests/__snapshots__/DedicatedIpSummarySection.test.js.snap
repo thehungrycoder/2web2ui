@@ -89,17 +89,23 @@ exports[`DedicatedIpSummarySection renders upgrade button and zero count 1`] = `
 `;
 
 exports[`DedicatedIpSummarySection renders zero count and first is free notice 1`] = `
-<Banner
-  action={
-    Object {
-      "content": "Add Dedicated IPs",
-      "disabled": false,
-      "onClick": [Function],
-    }
+<Panel.Section
+  actions={
+    Array [
+      Object {
+        "content": "Claim Your Free Dedicated IP",
+        "disabled": false,
+        "onClick": [Function],
+      },
+    ]
   }
-  status="info"
-  title="Claim your free IP"
 >
-  Your plan includes a free dedicated IP address. Add one now!
-</Banner>
+  <LabelledValue
+    label="Dedicated IPs"
+  >
+    <h6>
+      0
+    </h6>
+  </LabelledValue>
+</Panel.Section>
 `;

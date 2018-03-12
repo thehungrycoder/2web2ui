@@ -1,7 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
 import { Link } from 'react-router-dom';
-import { Panel, Banner } from '@sparkpost/matchbox';
+import { Panel } from '@sparkpost/matchbox';
 
 import config from 'src/config';
 import { LabelledValue } from 'src/components';
@@ -9,10 +9,11 @@ import DedicatedIpCost from './DedicatedIpCost';
 
 export default function DedicatedIpSummarySection({ count = 0, plan = {}, onClick = _.noop }) {
   const hasReachedMax = count >= config.sendingIps.maxPerAccount;
+  const ipCtaContent = (count === 0 && plan.includesIp) ? 'Claim Your Free Dedicated IP' : 'Add Dedicated IPs';
 
   // There are some paid accounts that do not allow dedicated IPs
   const action = plan.canPurchaseIps
-    ? { content: 'Add Dedicated IPs', disabled: hasReachedMax, onClick }
+    ? { content: ipCtaContent, disabled: hasReachedMax, onClick }
     : { content: 'Upgrade Now', to: '/account/billing/plan', Component: Link };
 
   // Decrement count if plan includes one free IP
@@ -21,14 +22,6 @@ export default function DedicatedIpSummarySection({ count = 0, plan = {}, onClic
   const summary = count === 0
     ? <h6>0</h6>
     : <h6>{count} for <DedicatedIpCost plan={plan} quantity={billableCount} /></h6>;
-
-  if (count === 0 && plan.includesIp) {
-    return (
-      <Banner status='info' title='Claim your free IP' action={action}>
-        Your plan includes a free dedicated IP address. Add one now!
-      </Banner>
-    );
-  }
 
   return (
     <Panel.Section actions={[action]}>

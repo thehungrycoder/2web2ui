@@ -1,7 +1,7 @@
 import * as billingInfo from '../accountBillingInfo';
 
 describe('Selector: public plans', () => {
-  const store = {
+  const state = {
     billing: {
       plans: [
         { status: 'public', volume: 1 },
@@ -13,12 +13,12 @@ describe('Selector: public plans', () => {
   };
 
   it('should get public plans and sort by volume', () => {
-    expect(billingInfo.publicPlansSelector(store)).toMatchSnapshot();
+    expect(billingInfo.publicPlansSelector(state)).toMatchSnapshot();
   });
 });
 
 describe('Selector: current plan', () => {
-  const store = {
+  const state = {
     account: { subscription: { code: 'qwe' }},
     billing: {
       plans: [
@@ -29,12 +29,12 @@ describe('Selector: current plan', () => {
   };
 
   it('should get current plan from billing', () => {
-    expect(billingInfo.currentPlanSelector(store)).toMatchSnapshot();
+    expect(billingInfo.currentPlanSelector(state)).toMatchSnapshot();
   });
 });
 
 describe('Selector: can update billing info', () => {
-  const store = {
+  const state = {
     account: { subscription: { code: 'qwe' }, billing: {}},
     billing: {
       plans: [
@@ -45,37 +45,60 @@ describe('Selector: can update billing info', () => {
   };
 
   it('should return true if on paid plan', () => {
-    expect(billingInfo.canUpdateBillingInfoSelector(store)).toEqual(true);
+    expect(billingInfo.canUpdateBillingInfoSelector(state)).toEqual(true);
   });
 });
 
 describe('Selector: can change plan', () => {
   it('should return false with a suspension', () => {
-    const store = {
+    const state = {
       account: { isSuspendedForBilling: true }
     };
 
-    expect(billingInfo.canChangePlanSelector(store)).toEqual(false);
+    expect(billingInfo.canChangePlanSelector(state)).toEqual(false);
   });
 
   it('should return false with a pending plan change', () => {
-    const store = {
+    const state = {
       account: { pending_subscription: {}}
     };
 
-    expect(billingInfo.canChangePlanSelector(store)).toEqual(false);
+    expect(billingInfo.canChangePlanSelector(state)).toEqual(false);
   });
 });
 
 describe('currentPlanCodeSelector: can select plan code', () => {
-  let store;
+  let state;
   beforeEach(() => {
-    store = {
+    state = {
       account: { subscription: { code: 'qwe' }}
     };
   });
 
   it('returns correct plan code', () => {
-    expect(billingInfo.currentPlanCodeSelector(store)).toEqual('qwe');
+    expect(billingInfo.currentPlanCodeSelector(state)).toEqual('qwe');
   });
+});
+
+describe('selectBillingInfo', () => {
+
+  it('returns the combined billing info state', () => {
+    const state = {
+      account: { subscription: { code: 'qwe' }, billing: {}},
+      billing: {
+        plans: [
+          { status: 'public', code: '123' },
+          { status: 'public', code: 'qwe', isFree: false }
+        ]
+      }
+    };
+
+    expect(Object.keys(billingInfo.selectBillingInfo(state))).toEqual([
+      'canUpdateBillingInfo',
+      'canChangePlan',
+      'currentPlan',
+      'plans'
+    ]);
+  });
+
 });

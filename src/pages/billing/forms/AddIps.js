@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
-import { Button, Error, Panel, Banner } from '@sparkpost/matchbox';
+import { Button, Error, Panel } from '@sparkpost/matchbox';
 import { addDedicatedIps } from 'src/actions/billing';
 import { showAlert } from 'src/actions/globalAlert';
 import { createPool } from 'src/actions/ipPools';
@@ -65,20 +65,15 @@ class AddIps extends Component {
 
   renderFreeIpNotice() {
     if (this.props.currentPlan.isAwsAccount) {
-      return <Banner status='info'>Your plan includes one free dedicated IP address.</Banner>;
+      return <strong>Your plan includes one free dedicated IP address.</strong>;
     }
 
-    return (
-      <Banner status='info'>
-        Your plan includes one free dedicated IP address. {this.props.sendingIps.length === 0 && 'Once you\'ve purchased at least one IP, your account statement will show a charge with a matching refund.'}
-      </Banner>
-    );
+    return <span><strong>Your plan includes one free dedicated IP address.</strong> Your account statement will show a charge with a matching refund.</span>;
   }
 
   render() {
     const { currentPlan, error, handleSubmit, onClose, submitting } = this.props;
     const { maxPerAccount } = config.sendingIps;
-
     const remainingCount = maxPerAccount - Math.min(this.props.sendingIps.length, maxPerAccount);
 
     // This form should not be rendered if the account has no remaining IP addresses
@@ -91,19 +86,20 @@ class AddIps extends Component {
         <Panel title='Add Dedicated IPs' actions={[action]}>
           <Panel.Section>
             <p>
-              Dedicated IPs give you better control over your sending reputation.
+              Dedicated IPs give you better control over your sending reputation. { currentPlan.includesIp && this.renderFreeIpNotice() }
             </p>
-            { currentPlan.includesIp && this.renderFreeIpNotice() }
+
             <Field
               component={TextFieldWrapper}
               disabled={isDisabled}
               label='Quantity'
               name='quantity'
               min='1' max={remainingCount}
-              required
+              required={true}
               type='number'
               validate={[required, minNumber(1), maxNumber(remainingCount)]}
-              autoFocus
+              inlineErrors={true}
+              autoFocus={true}
               helpText={<span>You can add up to {maxPerAccount} total dedicated IPs to your plan for <DedicatedIpCost plan={currentPlan} quantity='1' /> each.</span>}
             />
             <IpPoolSelect disabled={isDisabled} formName={FORM_NAME} />
