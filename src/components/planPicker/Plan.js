@@ -1,4 +1,5 @@
 import React from 'react';
+import _ from 'lodash';
 import PropTypes from 'prop-types';
 import { getPlanPrice } from 'src/helpers/billing';
 import styles from './PlanPicker.module.scss';
@@ -24,17 +25,29 @@ class Plan extends React.Component {
 
     return (
       <a className={className} {...rest} >
-        <span className={styles.MainLabel}><strong>{ plan.volume.toLocaleString() }</strong> emails/month for {this.getPrice(plan)}</span>
+        <span
+          className={styles.MainLabel}><strong>{ plan.volume.toLocaleString() }</strong> emails/month for {this.getPrice(plan)}</span>
         <span className={styles.SupportLabel}>{ overage }{ ip }</span>
       </a>
     );
   }
 }
 
+function eitherMonthlyOrHourly(props, propName, componentName) {
+  const hasMonthly = _.has(props, 'monthly');
+  const hasHourly = _.has(props, 'hourly');
+
+  // If both are provided, or neither, error
+  if ((hasMonthly && hasHourly) || !(hasMonthly || hasHourly)) {
+    return new Error('Plan\'s pricing should either be hourly or monthly but not both');
+  }
+}
+
 Plan.propTypes = {
   plan: PropTypes.shape({
     volume: PropTypes.number.isRequired,
-    // monthly: PropTypes.number.isRequired, //TODO it would be either monthly or hourly
+    monthly: eitherMonthlyOrHourly,
+    hourly: eitherMonthlyOrHourly,
     overage: PropTypes.number.isRequired,
     includesIp: PropTypes.bool,
     isFree: PropTypes.bool
