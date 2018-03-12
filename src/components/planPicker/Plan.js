@@ -1,15 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
+import { getPlanPrice } from 'src/helpers/billing';
 import styles from './PlanPicker.module.scss';
 
 class Plan extends React.Component {
   getPrice(plan) {
-    const pricingInterval = _.has(plan, 'hourly') ? 'hourly' : 'monthly';
-    const intervalShortName = pricingInterval === 'hourly' ? 'hr' : 'mo';
-    const pricePerInterval = plan[pricingInterval];
-    return pricePerInterval
-      ? <span><strong>${pricePerInterval.toLocaleString()}</strong>/{intervalShortName}</span>
+    const priceInfo = getPlanPrice(plan);
+
+    return priceInfo.price
+      ? <span><strong>${priceInfo.price.toLocaleString()}</strong>/{priceInfo.intervalShort}</span>
       : <strong>Free</strong>;
   }
 

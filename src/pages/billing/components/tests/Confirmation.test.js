@@ -36,9 +36,9 @@ describe('Confirmation: ', () => {
     props = {
       current,
       selected: current,
-      selfServe: true,
       billingEnabled: true
     };
+
     wrapper = shallow(<Confirmation {...props} />);
   });
 
@@ -47,17 +47,17 @@ describe('Confirmation: ', () => {
   });
 
   it('should render correctly with an upgrade', () => {
-    wrapper.setProps({ selected: upgrade, selfServe: true });
+    wrapper.setProps({ selected: upgrade, billingEnabled: true });
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render correctly with a downgrade', () => {
-    wrapper.setProps({ selected: downgrade, selfServe: true });
+    wrapper.setProps({ selected: downgrade, billingEnabled: true });
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render correctly with a downgrade to free', () => {
-    wrapper.setProps({ selected: free, selfServe: true });
+    wrapper.setProps({ selected: free, billingEnabled: true });
     expect(wrapper).toMatchSnapshot();
   });
 
