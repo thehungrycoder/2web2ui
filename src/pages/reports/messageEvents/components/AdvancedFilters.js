@@ -1,30 +1,12 @@
-/* eslint-disable */
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { addFilters, updateMessageEventsSearchOptions } from 'src/actions/messageEvents';
-import { WindowEvent, Grid, Panel, Modal, Button, Tag, Checkbox, Tooltip, TextField } from '@sparkpost/matchbox';
-import { CheckboxWrapper } from 'src/components';
+import { updateMessageEventsSearchOptions } from 'src/actions/messageEvents';
+import { WindowEvent, Panel, Modal, Button, Checkbox, TextField } from '@sparkpost/matchbox';
 import { snakeToFriendly } from 'src/helpers/string';
 import _ from 'lodash';
 
+import { EVENT_FILTERS, TEXT_FILTERS } from './searchConfig';
 import styles from './AdvancedFilters.module.scss';
-
-const events = [
-  { name: 'delivery', tooltip: null },
-  { name: 'injection', tooltip: null },
-  { name: 'bounce', tooltip: null },
-  { name: 'delay', tooltip: null },
-  { name: 'policy_rejection', tooltip: null },
-  { name: 'out_of_band', tooltip: null },
-  { name: 'open', tooltip: null },
-  { name: 'initial_open', tooltip: null },
-  { name: 'click', tooltip: null },
-  { name: 'generation_failure', tooltip: null },
-  { name: 'generation_rejection', tooltip: null },
-  { name: 'spam_complaint', tooltip: null },
-  { name: 'list_unsubscribe', tooltip: null },
-  { name: 'link_unsubscribe', tooltip: null }
-];
 
 class AdvancedFilters extends Component {
   state = {
@@ -32,8 +14,8 @@ class AdvancedFilters extends Component {
     search: {
       events: {},
       friendly_froms: '',
-      subaccounts: '',
       message_ids: '',
+      subaccounts: '',
       template_ids: '',
       campaign_ids: ''
     }
@@ -45,14 +27,14 @@ class AdvancedFilters extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.search !== this.state.search) {
-      this.syncSearchToState(nextProps);
+      this.syncSearchToState(nextProps); // Updates form values if a filter is removed from ActiveFilters
     }
   }
 
   syncSearchToState(props) {
     const events = {};
 
-    // Converts array of events to an object
+    // Converts event array into booleans for checkboxes
     _.forEach(props.search.events, (event) => {
       events[event] = true;
     });
@@ -80,10 +62,7 @@ class AdvancedFilters extends Component {
 
     _.forEach(rest, (value, key) => options[key] = this.parseLists(value));
 
-    this.props.updateMessageEventsSearchOptions({
-      events: _.keys(_.pickBy(search.events)),
-      ...options
-    });
+    this.props.updateMessageEventsSearchOptions({ events: _.keys(_.pickBy(search.events)), ...options });
     this.toggleModal();
   }
 
@@ -103,94 +82,61 @@ class AdvancedFilters extends Component {
     }
   }
 
-  handleCheckbox = (name) => {
+  handleCheckbox = (event) => {
     const { search } = this.state;
-    this.setState({ search: { ...search, events: { ...search.events, [name]: !search.events[name] }}});
+    this.setState({ search: { ...search, events: { ...search.events, [event]: !search.events[event] }}});
   }
 
   handleTextField = (e, key) => {
-    const updatedSearch = {}
+    const updatedSearch = {};
     updatedSearch[key] = e.target.value;
     this.setState({ search: { ...this.state.search, ...updatedSearch }});
   }
 
-  renderEvent = ({ name, tooltip }) => {
-    const checkbox = (
+  renderEvent = (event) => (
+    <div className={styles.CheckWrapper} key={event}>
       <Checkbox
-        id={name}
-        onChange={() => this.handleCheckbox(name)}
-        label={snakeToFriendly(name)}
-        checked={this.state.search.events[name] || false}/>
-    );
+        id={event}
+        onChange={() => this.handleCheckbox(event)}
+        label={snakeToFriendly(event)}
+        checked={this.state.search.events[event] || false} />
+    </div>
+  );
 
-    return (
-      <div className={styles.CheckWrapper} key={name}>
-        {tooltip ? <Tooltip content={tooltip} dark>{checkbox}</Tooltip> : checkbox}
-      </div>
-    );
-  };
+  renderFilter = ({ key, ...rest }) => (
+    <div className={styles.FieldWrapper} key={key}>
+      <TextField
+        id={key}
+        value={this.state.search[key]}
+        onChange={(e) => this.handleTextField(e, key)}
+        {...rest} />
+    </div>
+  );
 
   render() {
     return (
-      <React.Fragment>
+      <Fragment>
         <Button fullWidth onClick={this.toggleModal}>More Filters</Button>
         <Modal open={this.state.modalOpen}>
           <WindowEvent event='keydown' handler={this.handleKeyDown} />
           <Panel title='Advanced Filters'>
             <Panel.Section>
-              <Checkbox.Group label='Event Type'>{events.map(this.renderEvent)}</Checkbox.Group>
+              <Checkbox.Group label='Event Type'>{EVENT_FILTERS.map(this.renderEvent)}</Checkbox.Group>
             </Panel.Section>
             <Panel.Section>
               <p><small>Each of these filters accept comma-separated values.</small></p>
-              <Grid>
-                <Grid.Column xs={6}>
-                  <TextField
-                    id='friendly_froms'
-                    label='From Addresses'
-                    value={this.state.search.friendly_froms}
-                    onChange={(e) => this.handleTextField(e, 'friendly_froms')}
-                  />
-                  <TextField
-                    id='subaccounts'
-                    label='Subaccount IDs'
-                    value={this.state.search.subaccounts}
-                    onChange={(e) => this.handleTextField(e, 'subaccounts')}
-                  />
-                  <TextField
-                    id='message_ids'
-                    label='Message IDs'
-                    value={this.state.search.message_ids}
-                    onChange={(e) => this.handleTextField(e, 'message_ids')}
-                  />
-                </Grid.Column>
-                <Grid.Column xs={6}>
-                  <TextField
-                    id='template_ids'
-                    label='Template IDs'
-                    value={this.state.search.template_ids}
-                    onChange={(e) => this.handleTextField(e, 'template_ids')}
-                  />
-                  <TextField
-                    id='campaign_ids'
-                    label='Campaign IDs'
-                    value={this.state.search.campaign_ids}
-                    onChange={(e) => this.handleTextField(e, 'campaign_ids')}
-                  />
-                </Grid.Column>
-              </Grid>
+              {TEXT_FILTERS.map(this.renderFilter)}
             </Panel.Section>
             <Panel.Section>
-              <Button primary onClick={this.handleApply}>Apply</Button>
+              <Button primary onClick={this.handleApply}>Apply Filters</Button>
               <Button className={styles.Cancel} onClick={this.toggleModal}>Cancel</Button>
             </Panel.Section>
           </Panel>
         </Modal>
-      </React.Fragment>
+      </Fragment>
     );
   }
 }
 
-const mapStateToProps = (state, props) => ({
-    search: state.messageEvents.search
-  });
-export default connect(mapStateToProps, { addFilters, updateMessageEventsSearchOptions })(AdvancedFilters);
+const mapStateToProps = (state, props) => ({ search: state.messageEvents.search });
+export default connect(mapStateToProps, { updateMessageEventsSearchOptions })(AdvancedFilters);

@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
@@ -10,15 +9,7 @@ import ActiveFilters from './ActiveFilters';
 import DatePicker from 'src/components/datePicker/DatePicker';
 import { email as emailValidator } from 'src/helpers/validation';
 import { onEnter } from 'src/helpers/keyEvents';
-
-const formName = 'messageEventsSearchOptions';
-const RELATIVE_DATE_OPTIONS = [
-  'hour',
-  'day',
-  '7days',
-  '10days',
-  'custom'
-];
+import { RELATIVE_DATE_OPTIONS } from './searchConfig';
 
 export class MessageEventsSearch extends Component {
 
@@ -123,7 +114,7 @@ export class MessageEventsSearch extends Component {
 
 const mapStateToProps = ({ messageEvents }) => ({
   search: messageEvents.search,
-  loading: messageEvents.loading,
+  loading: messageEvents.loading
 });
 const mapDispatchToProps = { getMessageEvents, refreshMessageEventsDateRange, updateMessageEventsSearchOptions, addFilters };
 

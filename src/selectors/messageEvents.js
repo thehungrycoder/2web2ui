@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { format } from 'date-fns';
+import { formatDateTime } from 'src/helpers/date';
 import { createSelector } from 'reselect';
 
 const getMessageEvents = (state) => state.messageEvents.events;
@@ -11,7 +11,7 @@ export const selectMessageEvents = createSelector(
   [ getMessageEvents ],
   (events) => _.map(events, (event) => ({
     ...event,
-    formattedDate: format(event.timestamp, 'YYYY/MM/DD HH:mm')
+    formattedDate: formatDateTime(event.timestamp)
   }))
 );
 
@@ -19,7 +19,7 @@ export const selectMessageHistory = createSelector(
   [getMessageHistory, getMessageIdParam],
   (history, id) => _.map(history[id], (event) => ({
     ...event,
-    formattedDate: format(event.timestamp, 'YYYY/MM/DD HH:mm')
+    formattedDate: formatDateTime(event.timestamp)
   }))
 );
 

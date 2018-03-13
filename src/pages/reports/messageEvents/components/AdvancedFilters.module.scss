@@ -9,6 +9,21 @@
   }
 }
 
+.FieldWrapper {
+  display: inline-block;
+  margin: 0 0 spacing();
+  width: 100%;
+  padding-right: 0;
+
+  @media screen and (min-width: breakpoint(small)) {
+    width: 50%;
+
+    &:nth-child(2n) {
+      padding-right: spacing();
+    }
+  }
+}
+
 .Cancel {
-  float: right;
+  margin-left: spacing();
 }
