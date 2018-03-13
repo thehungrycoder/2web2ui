@@ -103,6 +103,12 @@ describe('Form Container: Change Plan', () => {
 
     });
 
+    it('should update subscription for aws account', async() => {
+      wrapper.setProps({ isAWSAccount: true });
+      await instance.onSubmit({ planpicker: { code: 'free' }});
+      expect(instance.props.updateSubscription).toHaveBeenCalledWith('free', true);
+    });
+
     it('should update billing when billing exists but enter new cc info', async() => {
       wrapper.setState({ useSavedCC: true });
       wrapper.setProps({ account: { billing: true, subscription: { self_serve: true }}});

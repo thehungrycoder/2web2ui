@@ -19,12 +19,12 @@ export function syncSubscription() {
  * Updates plan
  * @param {string} code
  */
-export function updateSubscription(code, isAwsAccount = false) {
+export function updateSubscription(code, isAWSAccount = false) {
   const action = sparkpostApiRequest({
     type: 'UPDATE_SUBSCRIPTION',
     meta: {
       method: 'PUT',
-      url: `/account/${isAwsAccount ? 'aws-marketplace/' : ''}subscription`,
+      url: `/account/${isAWSAccount ? 'aws-marketplace/' : ''}subscription`,
       data: { code }
     }
   });
