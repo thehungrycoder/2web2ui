@@ -6,7 +6,7 @@ import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 const { apiDateFormat, messageEvents } = config;
 
 export function getMessageEvents(options = {}) {
-  const { dateOptions, recipients } = options;
+  const { dateOptions, recipients, events, friendly_froms, message_ids, template_ids, campaign_ids } = options;
   const { from, to } = dateOptions;
   const params = {};
 
@@ -18,8 +18,24 @@ export function getMessageEvents(options = {}) {
     params.to = moment(to).utc().format(apiDateFormat);
   }
 
-  if (!_.isEmpty(recipients)) {
-    params.recipients = recipients.join(',');
+  if (!_.isEmpty(events)) {
+    params.events = events.join(',');
+  }
+
+  if (!_.isEmpty(friendly_froms)) {
+    params.friendly_froms = friendly_froms.join(',');
+  }
+
+  if (!_.isEmpty(message_ids)) {
+    params.message_ids = message_ids.join(',');
+  }
+
+  if (!_.isEmpty(template_ids)) {
+    params.template_ids = template_ids.join(',');
+  }
+
+  if (!_.isEmpty(campaign_ids)) {
+    params.campaign_ids = campaign_ids.join(',');
   }
 
   return sparkpostApiRequest({

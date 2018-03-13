@@ -1,0 +1,14 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.CheckWrapper {
+  display: inline-block;
+  width: 50%;
+
+  @media screen and (min-width: breakpoint(small)) {
+    width: 25%;
+  }
+}
+
+.Cancel {
+  float: right;
+}

@@ -24,14 +24,13 @@ export class MessageEventsSearch extends Component {
 
   componentDidMount() {
     // range defaults to "hour"
-    const relativeRange = this.props.search.dateOptions.relativeRange || 'hour';
+    const relativeRange = this.props.search.dateOptions.relativeRange;
     this.props.refreshMessageEventsDateRange({ relativeRange });
   }
 
   componentDidUpdate(prevProps) {
     const { search, getMessageEvents } = this.props;
-    console.log('prev', prevProps.search);
-    console.log('next', search);
+
     if (!_.isEqual(prevProps.search, search)) {
       getMessageEvents(search);
     }
@@ -112,7 +111,7 @@ export class MessageEventsSearch extends Component {
               /> */}
             </Grid.Column>
             <Grid.Column xs={12} md={2}>
-              {/* <AdvancedFilters formName={formName} /> */}
+              <AdvancedFilters />
             </Grid.Column>
           </Grid>
         </Panel.Section>
