@@ -14,8 +14,8 @@ describe('EnableTfaModal tests', () => {
       getTfaStatus: jest.fn(),
       getTfaSecret: jest.fn(),
       clearBackupCodes: jest.fn(),
-      generateBackupCodes: jest.fn(),
-      toggleTfa: jest.fn(),
+      generateBackupCodes: jest.fn().mockImplementation(() => Promise.resolve(null)),
+      toggleTfa: jest.fn().mockImplementation(() => Promise.resolve(null)),
       enabled: false,
       secret: 'shhh',
       username: 'kevin-mitnick',
@@ -77,7 +77,7 @@ describe('EnableTfaModal tests', () => {
 
   it('should generate back codes on request', () => {
     instance.generateBackupCodes('password');
-    expect(instance.props.generateBackupCode).toHaveBeenCalled();
+    expect(instance.props.generateBackupCodes).toHaveBeenCalled();
   });
 
   it('should refresh backup code status after generation', () => {

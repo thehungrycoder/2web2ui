@@ -47,10 +47,10 @@ export default class DisableTfaModal extends Component {
               </Grid>
             </Panel.Section>
             <Panel.Section>
-              <Button type='submit' primary onClick={() => this.props.disable(this.state.password)}>
+              <Button type='submit' primary disabled={togglePending} onClick={() => this.props.disable(this.state.password)}>
                 {togglePending ? 'Disabling...' : 'Disable 2FA'}
               </Button>
-              <Button onClick={onClose} className={styles.Cancel}>Cancel</Button>
+              <Button disabled={togglePending} onClick={onClose} className={styles.Cancel}>Cancel</Button>
             </Panel.Section>
           </form>
         </Panel>

@@ -76,10 +76,10 @@ export default class EnableTfaModal extends Component {
           </Grid>
         </Panel.Section>
         <Panel.Section>
-          <Button type='submit' primary onClick={this.enable}>
+          <Button type='submit' primary disabled={togglePending} onClick={this.enable}>
             {togglePending ? 'Verifying Code...' : 'Enable 2FA'}
           </Button>
-          <Button onClick={onClose} className={styles.Cancel}>Cancel</Button>
+          <Button disabled={togglePending} onClick={onClose} className={styles.Cancel}>Cancel</Button>
         </Panel.Section>
       </form>
     );
