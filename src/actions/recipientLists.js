@@ -25,7 +25,8 @@ export function createRecipientList(data) {
     meta: {
       method: 'POST',
       url: '/recipient-lists',
-      data
+      data,
+      showErrorAlert: false
     }
   });
 }
@@ -38,7 +39,8 @@ export function updateRecipientList({ id, ...updateFields }, params) {
       url: `/recipient-lists/${id}`,
       data: updateFields,
       id,
-      params
+      params,
+      showErrorAlert: false
     }
   });
 }

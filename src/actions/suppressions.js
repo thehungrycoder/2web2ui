@@ -112,7 +112,8 @@ export function createOrUpdateSuppressions(recipients, subaccount) {
       headers: setSubaccountHeader(subaccount),
       data: {
         recipients: sanitizedRecipients
-      }
+      },
+      showErrorAlert: false
     }
   });
 }
