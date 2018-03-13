@@ -21,8 +21,7 @@ describe('Footer tests', () => {
   });
 
   it('should not render docs or logout for heroku user', () => {
-    props.currentUser.access_level = 'heroku';
-    wrapper = shallow(<Footer {...props} />);
+    wrapper.setProps({ currentUser: { access_level: 'heroku' }});
 
     expect(wrapper).toMatchSnapshot();
   });

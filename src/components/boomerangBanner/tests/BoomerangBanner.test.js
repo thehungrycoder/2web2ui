@@ -10,7 +10,7 @@ describe('Boomerang Banner', () => {
   let wrapper;
 
   beforeEach(() => {
-    herokuHelpers.barMe = jest.fn();
+    herokuHelpers.loadHerokuToolbar = jest.fn();
 
     wrapper = shallow(<BoomerangBanner />);
   });
@@ -20,7 +20,7 @@ describe('Boomerang Banner', () => {
   });
 
   it('should render when the bar initializes', () => {
-    expect(herokuHelpers.barMe).toHaveBeenCalledTimes(1);
+    expect(herokuHelpers.loadHerokuToolbar).toHaveBeenCalledTimes(1);
     expect(wrapper).toMatchSnapshot();
   });
 });

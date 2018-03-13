@@ -1,4 +1,4 @@
-import { barMe, unbar } from '../heroku';
+import { loadHerokuToolbar, removeHerokuToolbar } from '../heroku';
 import config from 'src/config';
 import Cookies from 'js-cookie';
 import Boomerang from '@sparkpost/boomerang';
@@ -34,7 +34,7 @@ const initObjectArg = {
 };
 
 describe('Heroku Helpers', () => {
-  describe('barMe', () => {
+  describe('loadHerokuToolbar', () => {
     beforeEach(() => {
       config.heroku = 'those-are-my-cookies';
 
@@ -43,7 +43,7 @@ describe('Heroku Helpers', () => {
     });
 
     it('should initialize the Boomerang bar', () => {
-      barMe();
+      loadHerokuToolbar();
       expect(Cookies.get).toHaveBeenCalledWith('those-are-my-cookies');
       expect(Boomerang.init).toHaveBeenCalledWith(initObjectArg);
     });
@@ -51,13 +51,13 @@ describe('Heroku Helpers', () => {
     it('should do nothing if the cookie value is empty', () => {
       Cookies.get = jest.fn(() => undefined);
 
-      barMe();
+      loadHerokuToolbar();
       expect(Cookies.get).toHaveBeenCalledWith('those-are-my-cookies');
       expect(Boomerang.init).not.toHaveBeenCalled();
     });
   });
 
-  describe('unbar', () => {
+  describe('removeHerokuToolbar', () => {
     let remove;
     const options = { path: '/', domain: 'best.domain' };
     beforeEach(() => {
@@ -71,7 +71,7 @@ describe('Heroku Helpers', () => {
     });
 
     it('should remove the cookie and bar', () => {
-      unbar();
+      removeHerokuToolbar();
 
       expect(Cookies.remove).toBeCalledWith('those-are-my-cookies', options);
       expect(remove).toHaveBeenCalled();
@@ -80,7 +80,7 @@ describe('Heroku Helpers', () => {
     it('should silently fail', () => {
       Cookies.remove = jest.fn(() => { throw new Error('error'); });
 
-      expect(unbar()).toEqual(undefined);
+      expect(removeHerokuToolbar()).toEqual(undefined);
       expect(Cookies.remove).toBeCalledWith('those-are-my-cookies', options);
       expect(remove).not.toHaveBeenCalled();
     });

@@ -2,7 +2,7 @@ import { sparkpostLogin } from '../helpers/http';
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 import { getTfaStatusBeforeLoggedIn } from 'src/actions/tfa';
 import { showAlert } from 'src/actions/globalAlert';
-import { unbar } from 'src/helpers/heroku';
+import { removeHerokuToolbar } from 'src/helpers/heroku';
 
 import authCookie from '../helpers/authCookie';
 import { initializeAccessControl } from './accessControl';
@@ -142,7 +142,7 @@ export function logout() {
       return;
     }
 
-    unbar();
+    removeHerokuToolbar();
     authCookie.remove();
     dispatch({
       type: 'LOGOUT'

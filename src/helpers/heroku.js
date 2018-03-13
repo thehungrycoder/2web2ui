@@ -8,10 +8,8 @@ const OPTIONS = { path: '/', domain: config.website.domain };
 
 /**
  * Tries to load the cookie data from the heroku-nav-data cookie and then adds the heroku bar based on its contents.
- *
- * @return(boolean) true if the bar was loaded so that styles can be added
  */
-function barMe() {
+function loadHerokuToolbar() {
   const cookieValue = Cookies.get(COOKIE_NAME);
 
   if (cookieValue) {
@@ -28,7 +26,7 @@ function barMe() {
 /**
  * Cleans up Heroku resources like cookies and the Boomerang bar
  */
-function unbar() {
+function removeHerokuToolbar() {
   try {
     Cookies.remove(COOKIE_NAME, OPTIONS);
 
@@ -40,6 +38,6 @@ function unbar() {
 }
 
 export {
-  barMe,
-  unbar
+  loadHerokuToolbar,
+  removeHerokuToolbar
 };
