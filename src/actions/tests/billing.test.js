@@ -78,4 +78,26 @@ describe('Action Creator: Billing', () => {
     expect(_.flatten(dispatchMock.mock.calls)).toMatchSnapshot();
   });
 
+  describe('addDedicatedIps', () => {
+    let dispatchMock;
+
+    beforeEach(() => {
+      dispatchMock = jest.fn(() => Promise.resolve());
+    });
+
+    it('dispatches with correct data for "normal" account', async() => {
+      const thunk = billing.addDedicatedIps({ ip_pool: 'abcd', isAWSAccount: false, quantity: 1 });
+
+      await thunk(dispatchMock);
+      expect(_.flatten(dispatchMock.mock.calls)).toMatchSnapshot();
+    });
+
+    it('dispatches with correct data for aws account', async() => {
+      const thunk = billing.addDedicatedIps({ ip_pool: 'abcd', isAWSAccount: true, quantity: 1 });
+
+      await thunk(dispatchMock);
+      expect(_.flatten(dispatchMock.mock.calls)).toMatchSnapshot();
+    });
+  });
+
 });
