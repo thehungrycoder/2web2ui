@@ -36,14 +36,12 @@ export class MessageEventsPage extends Component {
   }
 
   renderError() {
-    // TODO: this reload will load message events with no date or other filters, but error state
-    // might be triggered by a certain filter combination so reload should probably use those
-    const { error, getMessageEvents } = this.props;
+    const { error, getMessageEvents, search } = this.props;
     return (
       <ApiErrorBanner
         message={errorMsg}
         errorDetails={error.message}
-        reload={getMessageEvents}
+        reload={() => getMessageEvents(search)}
       />
     );
   }
@@ -97,7 +95,8 @@ const mapStateToProps = (state) => {
     events: events,
     loading: state.messageEvents.loading,
     error: state.messageEvents.error,
-    empty: events.length === 0
+    empty: events.length === 0,
+    search: state.messageEvents.search
   };
 };
 

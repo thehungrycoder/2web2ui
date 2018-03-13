@@ -1,10 +1,12 @@
-function snakeToFriendly(string) {
+import _ from 'lodash';
+
+export function snakeToFriendly(string) {
   return string
     .charAt(0).toUpperCase() + string.slice(1)
     .replace(/(_\w)/g, (matches) => ` ${matches[1].toUpperCase()}`);
 }
 
-function slugify(value) {
+export function slugify(value) {
   return value
     .replace(/([a-z])([A-Z])/g, '$1-$2')
     .replace(/_/g, '-')
@@ -12,7 +14,7 @@ function slugify(value) {
     .toLowerCase();
 }
 
-function snakeToCamel(string) {
+export function snakeToCamel(string) {
   return string.replace(/(_\w)/g, (matches) => matches[1].toUpperCase());
 }
 
@@ -25,7 +27,7 @@ function snakeToCamel(string) {
  * @param {String} string - string to shorten
  * @param {Number} maxLen - final string length
  */
-function shrinkToFit(string, targetLen) {
+export function shrinkToFit(string, targetLen) {
   const len = string.length;
   const chunkLen = (targetLen - 3) / 2;
 
@@ -36,9 +38,14 @@ function shrinkToFit(string, targetLen) {
   return `${string.slice(0, chunkLen)}...${string.slice(len - chunkLen)}`;
 }
 
-export {
-  snakeToFriendly,
-  slugify,
-  snakeToCamel,
-  shrinkToFit
-};
+/**
+ * Converts a comma separated string into an array
+ */
+export function stringToArray(value) {
+  value = _.trim(value, ' ,'); // strip whitespace and commas
+  if (!value) {
+    return [];
+  }
+
+  return value.split(',').map((address) => _.trim(address));
+}

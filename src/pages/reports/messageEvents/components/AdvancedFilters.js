@@ -2,7 +2,8 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { updateMessageEventsSearchOptions } from 'src/actions/messageEvents';
 import { WindowEvent, Panel, Modal, Button, Checkbox, TextField } from '@sparkpost/matchbox';
-import { snakeToFriendly } from 'src/helpers/string';
+import { snakeToFriendly, stringToArray } from 'src/helpers/string';
+import { onEnter, onEscape } from 'src/helpers/keyEvents';
 import _ from 'lodash';
 
 import { EVENT_FILTERS, TEXT_FILTERS } from './searchConfig';
@@ -42,15 +43,6 @@ class AdvancedFilters extends Component {
     this.setState({ search: { ...props.search, events }});
   }
 
-  parseLists = (value) => {
-    value = _.trim(value, ' ,'); // strip whitespace and commas
-    if (!value) {
-      return [];
-    }
-
-    return value.split(',').map((item) => _.trim(item));
-  }
-
   toggleModal = () => {
     this.setState({ modalOpen: !this.state.modalOpen });
   }
@@ -60,7 +52,7 @@ class AdvancedFilters extends Component {
     const { dateOptions, events, ...rest } = search;
     const options = {};
 
-    _.forEach(rest, (value, key) => options[key] = this.parseLists(value));
+    _.forEach(rest, (value, key) => options[key] = stringToArray(value));
 
     this.props.updateMessageEventsSearchOptions({ events: _.keys(_.pickBy(search.events)), ...options });
     this.toggleModal();
@@ -73,13 +65,8 @@ class AdvancedFilters extends Component {
       return;
     }
 
-    if (e.key === 'Enter') {
-      this.handleApply();
-    }
-
-    if (e.key === 'Escape') {
-      this.toggleModal();
-    }
+    onEnter(this.handleApply)(e);
+    onEscape(this.toggleModal)(e);
   }
 
   handleCheckbox = (event) => {
