@@ -64,10 +64,25 @@ describe('EnableTfaModal tests', () => {
     expect(instance.props.toggleTfa).toHaveBeenCalledWith({ enabled: true, code: 'code' });
   });
 
+  it('should refresh backup code status after enable', () => {
+    instance.enable('code');
+    expect(instance.props.getTfaBackupStatus).toHaveBeenCalled();
+  });
+
   it('should toggleTfa on disable', () => {
     instance.disable('pw');
     expect(instance.props.toggleTfa).toHaveBeenCalledWith({ enabled: false, password: 'pw' });
 
+  });
+
+  it('should generate back codes on request', () => {
+    instance.generateBackupCodes('password');
+    expect(instance.props.generateBackupCode).toHaveBeenCalled();
+  });
+
+  it('should refresh backup code status after generation', () => {
+    instance.generateBackupCodes('code');
+    expect(instance.props.getTfaBackupStatus).toHaveBeenCalled();
   });
 
   it('should close modal and clear codes when closing backup modal', () => {

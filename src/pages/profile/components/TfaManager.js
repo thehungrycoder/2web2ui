@@ -29,8 +29,13 @@ export class TfaManager extends Component {
     this.props.clearBackupCodes();
   };
 
-  enable = (code) => this.props.toggleTfa({ enabled: true, code });
+  enable = (code) => this.props.toggleTfa({ enabled: true, code })
+    .then(this.props.getTfaBackupStatus);
+
   disable = (password) => this.props.toggleTfa({ enabled: false, password });
+
+  generateBackupCodes = (password) => this.props.generateBackupCodes(password)
+    .then(this.props.getTfaBackupStatus);
 
   renderBackupCodesStatus() {
     const { enabled, backupCodes } = this.props;
@@ -48,7 +53,7 @@ export class TfaManager extends Component {
   }
 
   render() {
-    const { enabled, generateBackupCodes } = this.props;
+    const { enabled } = this.props;
 
     if (this.props.statusUnknown) {
       return <PanelLoading minHeight='100px' />;
@@ -81,7 +86,7 @@ export class TfaManager extends Component {
           open={this.state.openModal === 'backupCodes'}
           onClose={this.closeBackupModal}
           {...this.props.backupCodes}
-          generate={generateBackupCodes}
+          generate={this.generateBackupCodes}
         />
         <EnableTfaModal
           open={this.state.openModal === 'enable'}
