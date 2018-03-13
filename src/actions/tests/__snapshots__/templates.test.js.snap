@@ -117,6 +117,7 @@ Array [
       "params": Object {
         "draft": true,
       },
+      "showErrorAlert": false,
       "url": "/templates/one",
     },
     "type": "GET_DRAFT_TEMPLATE",
@@ -133,6 +134,7 @@ Array [
       "params": Object {
         "draft": false,
       },
+      "showErrorAlert": false,
       "url": "/templates/two",
     },
     "type": "GET_PUBLISHED_TEMPLATE",
@@ -157,6 +159,7 @@ Array [
       },
       "headers": Object {},
       "method": "POST",
+      "showErrorAlert": false,
       "url": "/utils/content-previewer",
     },
     "type": "GET_TEMPLATE_PREVIEW",
@@ -245,6 +248,7 @@ Array [
       "params": Object {
         "draft": true,
       },
+      "showErrorAlert": false,
       "url": "/templates/test-template",
     },
     "type": "GET_DRAFT_TEMPLATE",
@@ -265,6 +269,7 @@ Array [
       },
       "headers": Object {},
       "method": "POST",
+      "showErrorAlert": false,
       "url": "/utils/content-previewer",
     },
     "type": "GET_TEMPLATE_PREVIEW",
@@ -281,6 +286,7 @@ Array [
       "params": Object {
         "draft": false,
       },
+      "showErrorAlert": false,
       "url": "/templates/test-template",
     },
     "type": "GET_PUBLISHED_TEMPLATE",
@@ -301,6 +307,7 @@ Array [
       },
       "headers": Object {},
       "method": "POST",
+      "showErrorAlert": false,
       "url": "/utils/content-previewer",
     },
     "type": "GET_TEMPLATE_PREVIEW",
