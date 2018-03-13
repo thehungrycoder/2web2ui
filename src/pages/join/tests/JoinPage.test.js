@@ -32,6 +32,7 @@ jest.mock('src/helpers/googleAnalytics');
 describe('JoinPage', () => {
   beforeEach(() => {
     props = {
+      params: {},
       account: {
         createError: null
       },
@@ -126,7 +127,14 @@ describe('JoinPage', () => {
 
     it('redirects to correct url upon auth', async() => {
       await instance.registerSubmit(formValues);
-      expect(props.history.push).toHaveBeenCalledWith(AFTER_JOIN_REDIRECT_ROUTE);
+      expect(props.history.push).toHaveBeenCalledWith(AFTER_JOIN_REDIRECT_ROUTE, { plan: undefined });
+    });
+
+    it('Preserves plan for later onboarding phases', async() => {
+      const plan = 'a-man';
+      wrapper.setProps({ params: { plan }});
+      await instance.registerSubmit(formValues);
+      expect(props.history.push).toHaveBeenCalledWith(AFTER_JOIN_REDIRECT_ROUTE, { plan });
     });
 
     it('does not swallow exceptions', async() => {
