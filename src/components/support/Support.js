@@ -17,7 +17,7 @@ export class Support extends Component {
     const { subject, message } = values;
     const ticket = { subject, message };
 
-    return createTicket(ticket).catch((err) => { throw err; });
+    return createTicket(ticket);
   };
 
   togglePanel = () => {
