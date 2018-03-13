@@ -9,6 +9,7 @@ Object {
       "recipients": "1,2,3",
       "to": "2018-02-01T10:10",
     },
+    "showErrorAlert": false,
     "url": "/message-events",
   },
   "type": "GET_MESSAGE_EVENTS",
@@ -22,6 +23,7 @@ Object {
     "params": Object {
       "from": "2018-02-01T10:10",
     },
+    "showErrorAlert": false,
     "url": "/message-events",
   },
   "type": "GET_MESSAGE_EVENTS",
@@ -35,6 +37,7 @@ Object {
     "params": Object {
       "recipients": "1,2,3",
     },
+    "showErrorAlert": false,
     "url": "/message-events",
   },
   "type": "GET_MESSAGE_EVENTS",
@@ -48,6 +51,7 @@ Object {
     "params": Object {
       "to": "2018-02-01T10:10",
     },
+    "showErrorAlert": false,
     "url": "/message-events",
   },
   "type": "GET_MESSAGE_EVENTS",

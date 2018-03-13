@@ -11,7 +11,8 @@ export function listTemplates() {
     type: 'LIST_TEMPLATES',
     meta: {
       method: 'GET',
-      url: '/templates'
+      url: '/templates',
+      showErrorAlert: false
     }
   });
 }

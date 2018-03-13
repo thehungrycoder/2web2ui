@@ -11,7 +11,8 @@ export function listRecipientLists({ force } = {}) {
         type: 'LIST_RECIPIENT_LISTS',
         meta: {
           method: 'GET',
-          url: '/recipient-lists'
+          url: '/recipient-lists',
+          showErrorAlert: false
         }
       })
     );

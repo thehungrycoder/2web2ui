@@ -5,7 +5,8 @@ export function listPools() {
     type: 'LIST_IP_POOLS',
     meta: {
       method: 'GET',
-      url: '/ip-pools'
+      url: '/ip-pools',
+      showErrorAlert: false
     }
   });
 }
@@ -51,4 +52,3 @@ export function getPool(id) {
     }
   });
 }
-

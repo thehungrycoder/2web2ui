@@ -7,7 +7,8 @@ export function listTrackingDomains() {
     type: 'LIST_TRACKING_DOMAINS',
     meta: {
       method: 'GET',
-      url: '/tracking-domains'
+      url: '/tracking-domains',
+      showErrorAlert: false
     }
   });
 }

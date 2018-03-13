@@ -27,7 +27,8 @@ export function getMessageEvents(options = {}) {
     meta: {
       method: 'GET',
       url: '/message-events',
-      params
+      params,
+      showErrorAlert: false
     }
   });
 }

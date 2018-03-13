@@ -37,7 +37,8 @@ export function listUsers() {
     type: 'LIST_USERS',
     meta: {
       method: 'GET',
-      url: '/users'
+      url: '/users',
+      showErrorAlert: false
     }
   });
 }
