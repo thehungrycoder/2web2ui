@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { loadHerokuToolbar } from 'src/helpers/heroku';
 
@@ -24,4 +23,4 @@ export class BoomerangBanner extends Component {
   }
 }
 
-export default withRouter(BoomerangBanner);
+export default BoomerangBanner;

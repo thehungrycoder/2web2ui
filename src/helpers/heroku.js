@@ -1,5 +1,6 @@
 import Cookies from 'js-cookie';
 import config from 'src/config';
+import ErrorTracker from 'src/helpers/errorTracker';
 import Boomerang from '@sparkpost/boomerang';
 import '@sparkpost/boomerang/boomerang.scss';
 
@@ -30,10 +31,10 @@ function removeHerokuToolbar() {
   try {
     Cookies.remove(COOKIE_NAME, OPTIONS);
 
-    // window.Boomerang.reset(); // just kidding! this doesn't work! see https://github.com/heroku/boomerang/pull/21
-    document.getElementById('heroku-boomerang').remove(); // so we'll do this instead until that PR gets merged
-  } catch (e) {
-    // silently fail as to not inhibit the logout process
+    Boomerang.reset();
+  } catch (error) {
+    ErrorTracker.report('remove-heroku-toolbar', error);
+    // do not rethrow as to not inhibit the logout process
   }
 }
 

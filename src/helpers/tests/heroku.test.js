@@ -2,6 +2,7 @@ import { loadHerokuToolbar, removeHerokuToolbar } from '../heroku';
 import config from 'src/config';
 import Cookies from 'js-cookie';
 import Boomerang from '@sparkpost/boomerang';
+import ErrorTracker from 'src/helpers/errorTracker';
 
 jest.mock('src/config', () => ({
   heroku: {
@@ -13,7 +14,8 @@ jest.mock('src/config', () => ({
 }));
 jest.mock('js-cookie');
 jest.mock('@sparkpost/boomerang', () => ({
-  init: jest.fn()
+  init: jest.fn(),
+  reset: jest.fn()
 }));
 
 const encodedCookie = {
@@ -58,12 +60,10 @@ describe('Heroku Helpers', () => {
   });
 
   describe('removeHerokuToolbar', () => {
-    let remove;
+    let reportSpy;
     const options = { path: '/', domain: 'best.domain' };
     beforeEach(() => {
-      remove = jest.fn();
-      document.getElementById = jest.fn(() => ({ remove() { return remove(); } }));
-
+      reportSpy = jest.spyOn(ErrorTracker, 'report');
       config.heroku = 'those-are-my-cookies';
       config.website.domain = 'best.domain';
 
@@ -74,15 +74,16 @@ describe('Heroku Helpers', () => {
       removeHerokuToolbar();
 
       expect(Cookies.remove).toBeCalledWith('those-are-my-cookies', options);
-      expect(remove).toHaveBeenCalled();
+      expect(Boomerang.reset).toHaveBeenCalled();
     });
 
-    it('should silently fail', () => {
-      Cookies.remove = jest.fn(() => { throw new Error('error'); });
+    it('should silently fail and report the error', () => {
+      Boomerang.reset = jest.fn(() => { throw new Error('error'); });
 
       expect(removeHerokuToolbar()).toEqual(undefined);
       expect(Cookies.remove).toBeCalledWith('those-are-my-cookies', options);
-      expect(remove).not.toHaveBeenCalled();
+      expect(Boomerang.reset).toHaveBeenCalled();
+      expect(reportSpy).toHaveBeenCalledWith('remove-heroku-toolbar', Error('error'));
     });
   });
 });
