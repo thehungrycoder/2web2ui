@@ -7,7 +7,8 @@ import UpdatePayment from '../forms/UpdatePayment';
 import UpdateContact from '../forms/UpdateContact';
 import AddIps from '../forms/AddIps';
 import DedicatedIpSummarySection from './DedicatedIpSummarySection';
-import { CardSummary, PlanSummary } from './SummarySection';
+import CardSummary from './CardSummary';
+import PlanSummary from './PlanSummary';
 
 const PAYMENT_MODAL = 'payment';
 const CONTACT_MODAL = 'contact';
@@ -22,6 +23,10 @@ export default class BillingSummary extends Component {
     this.setState({ show: this.state.show ? false : modal });
   }
 
+  handlePaymentModal = () => this.handleModal(PAYMENT_MODAL);
+  handleContactModal = () => this.handleModal(CONTACT_MODAL);
+  handleIpModal = () => this.handleModal(IP_MODAL);
+
   handleEscape = (e) => {
     if (e.key === 'Escape') {
       this.handleModal();
@@ -33,10 +38,10 @@ export default class BillingSummary extends Component {
     const { billing } = account;
     return (
       <Panel title='Billing'>
-        <Panel.Section actions={[{ content: 'Update Payment Information', onClick: () => this.handleModal(PAYMENT_MODAL) }]}>
+        <Panel.Section actions={[{ content: 'Update Payment Information', onClick: this.handlePaymentModal }]}>
           <CardSummary label='Credit Card' billing={billing} />
         </Panel.Section>
-        <Panel.Section actions={[{ content: 'Update Billing Contact', onClick: () => this.handleModal(CONTACT_MODAL) }]}>
+        <Panel.Section actions={[{ content: 'Update Billing Contact', onClick: this.handleContactModal }]}>
           <LabelledValue label='Billing Contact'>
             <h6>{ billing.first_name } { billing.last_name }</h6>
             <p>{ billing.email }</p>
@@ -50,7 +55,7 @@ export default class BillingSummary extends Component {
     <DedicatedIpSummarySection
       count={this.props.sendingIps.length}
       plan={this.props.currentPlan}
-      onClick={() => this.handleModal(IP_MODAL)}
+      onClick={this.handleIpModal}
     />
   );
 

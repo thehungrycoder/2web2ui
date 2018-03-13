@@ -4,71 +4,38 @@ import { shallow } from 'enzyme';
 
 describe('Page: BillingSummaryPage', () => {
   let wrapper;
-
-  const props = {
-    account: {
-      subscription: {}
-    },
-    billing: {},
-    dedicatedIpPrice: jest.fn(() => ''),
-    fetchAccount: jest.fn(),
-    getPlans: jest.fn(),
-    getBillingCountries: jest.fn(),
-    getSendingIps: jest.fn(),
-    canUpdateBillingInfo: false,
-    canChangePlan: false,
-    currentPlan: {},
-    plans: [],
-    sendingIps: {
-      list: []
-    }
-  };
+  let props;
 
   beforeEach(() => {
+    props = {
+      account: {
+        subscription: {}
+      },
+      billingInfo: {},
+      loading: false,
+      sendingIps: {
+        list: []
+      },
+      fetchAccount: jest.fn(),
+      getPlans: jest.fn(),
+      getSendingIps: jest.fn()
+    };
     wrapper = shallow(<BillingSummaryPage {...props} />);
   });
 
-  it('gets plans, sending ips and account on mount', () => {
-    const plansSpy = jest.spyOn(wrapper.instance().props, 'getPlans');
-    const fetchSpy = jest.spyOn(wrapper.instance().props, 'fetchAccount');
-    const getSendingIpsSpy = jest.spyOn(wrapper.instance().props, 'getSendingIps');
-    wrapper.instance().componentDidMount();
-    expect(plansSpy).toHaveBeenCalled();
-    expect(fetchSpy).toHaveBeenCalledWith({ include: 'billing' });
-    expect(getSendingIpsSpy).toHaveBeenCalled();
-  });
-
-  it('should render banner when manually billed', () => {
-    wrapper.setProps({ account: { subscription: { self_serve: false }}});
+  it('should render correctly when not loading', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should render upgrade on free plan', () => {
-    wrapper.setProps({
-      canChangePlan: true,
-      account: { subscription: { self_serve: true }},
-      currentPlan: { isFree: true }
-    });
+  it('should render correctly when loading', () => {
+    wrapper.setProps({ loading: true });
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should render billing and dedicated IP summary if on paid plan', () => {
-    wrapper.setProps({
-      canChangePlan: true,
-      canUpdateBillingInfo: true,
-      account: { subscription: { self_serve: true }},
-      currentPlan: { isFree: false }
-    });
-    expect(wrapper).toMatchSnapshot();
+  it('should get plans, sending ips and account on mount', () => {
+    expect(props.getPlans).toHaveBeenCalledTimes(1);
+    expect(props.fetchAccount).toHaveBeenCalledWith({ include: 'billing' });
+    expect(props.getSendingIps).toHaveBeenCalledTimes(1);
   });
 
-  it('should not render billing and ips if on free plan', () => {
-    wrapper.setProps({
-      canChangePlan: true,
-      canUpdateBillingInfo: false,
-      account: { subscription: { self_serve: true }},
-      currentPlan: { isFree: true }
-    });
-    expect(wrapper).toMatchSnapshot();
-  });
 });

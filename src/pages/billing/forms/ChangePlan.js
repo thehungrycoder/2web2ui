@@ -2,19 +2,16 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, formValueSelector } from 'redux-form';
 import { withRouter } from 'react-router-dom';
-
 import { billingCreate, billingUpdate, updateSubscription } from 'src/actions/billing';
 import { showAlert } from 'src/actions/globalAlert';
 import { changePlanInitialValues } from 'src/selectors/accountBillingForms';
 import { publicPlansSelector, currentPlanSelector, canUpdateBillingInfoSelector } from 'src/selectors/accountBillingInfo';
-
 import { Panel, Grid } from '@sparkpost/matchbox';
 import { PlanPicker } from 'src/components';
-
 import PaymentForm from './fields/PaymentForm';
 import BillingAddressForm from './fields/BillingAddressForm';
 import Confirmation from '../components/Confirmation';
-import { CardSummary } from '../components/SummarySection';
+import CardSummary from '../components/CardSummary';
 
 const FORMNAME = 'changePlan';
 

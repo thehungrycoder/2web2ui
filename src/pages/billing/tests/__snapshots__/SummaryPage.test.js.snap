@@ -1,51 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Page: BillingSummaryPage should not render billing and ips if on free plan 1`] = `
-<Page
-  empty={Object {}}
-  title="Billing"
->
-  <Connect(Component)>
-    <SuspendedForBilling
-      account={
-        Object {
-          "subscription": Object {
-            "self_serve": true,
-          },
-        }
-      }
-      condition={[Function]}
-    />
-    <ManuallyBilledBanner
-      account={
-        Object {
-          "subscription": Object {
-            "self_serve": true,
-          },
-        }
-      }
-      condition={[Function]}
-    />
-    <BillingSummary
-      account={
-        Object {
-          "subscription": Object {
-            "self_serve": true,
-          },
-        }
-      }
-      condition={[Function]}
-      sendingIps={
-        Object {
-          "list": Array [],
-        }
-      }
-    />
-  </Connect(Component)>
-</Page>
-`;
+exports[`Page: BillingSummaryPage should render correctly when loading 1`] = `<Loading />`;
 
-exports[`Page: BillingSummaryPage should render banner when manually billed 1`] = `
+exports[`Page: BillingSummaryPage should render correctly when not loading 1`] = `
 <Page
   empty={Object {}}
   title="Billing"
@@ -54,9 +11,7 @@ exports[`Page: BillingSummaryPage should render banner when manually billed 1`] 
     <SuspendedForBilling
       account={
         Object {
-          "subscription": Object {
-            "self_serve": false,
-          },
+          "subscription": Object {},
         }
       }
       condition={[Function]}
@@ -64,9 +19,7 @@ exports[`Page: BillingSummaryPage should render banner when manually billed 1`] 
     <ManuallyBilledBanner
       account={
         Object {
-          "subscription": Object {
-            "self_serve": false,
-          },
+          "subscription": Object {},
         }
       }
       condition={[Function]}
@@ -74,99 +27,7 @@ exports[`Page: BillingSummaryPage should render banner when manually billed 1`] 
     <BillingSummary
       account={
         Object {
-          "subscription": Object {
-            "self_serve": false,
-          },
-        }
-      }
-      condition={[Function]}
-      sendingIps={
-        Object {
-          "list": Array [],
-        }
-      }
-    />
-  </Connect(Component)>
-</Page>
-`;
-
-exports[`Page: BillingSummaryPage should render billing and dedicated IP summary if on paid plan 1`] = `
-<Page
-  empty={Object {}}
-  title="Billing"
->
-  <Connect(Component)>
-    <SuspendedForBilling
-      account={
-        Object {
-          "subscription": Object {
-            "self_serve": true,
-          },
-        }
-      }
-      condition={[Function]}
-    />
-    <ManuallyBilledBanner
-      account={
-        Object {
-          "subscription": Object {
-            "self_serve": true,
-          },
-        }
-      }
-      condition={[Function]}
-    />
-    <BillingSummary
-      account={
-        Object {
-          "subscription": Object {
-            "self_serve": true,
-          },
-        }
-      }
-      condition={[Function]}
-      sendingIps={
-        Object {
-          "list": Array [],
-        }
-      }
-    />
-  </Connect(Component)>
-</Page>
-`;
-
-exports[`Page: BillingSummaryPage should render upgrade on free plan 1`] = `
-<Page
-  empty={Object {}}
-  title="Billing"
->
-  <Connect(Component)>
-    <SuspendedForBilling
-      account={
-        Object {
-          "subscription": Object {
-            "self_serve": true,
-          },
-        }
-      }
-      condition={[Function]}
-    />
-    <ManuallyBilledBanner
-      account={
-        Object {
-          "subscription": Object {
-            "self_serve": true,
-          },
-        }
-      }
-      condition={[Function]}
-    />
-    <BillingSummary
-      account={
-        Object {
-          "subscription": Object {
-            "self_serve": true,
-          },
+          "subscription": Object {},
         }
       }
       condition={[Function]}

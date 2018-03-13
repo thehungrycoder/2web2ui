@@ -20,7 +20,6 @@ export const ConditionSwitch = function({ children, ready, accessConditionState 
     const { props = {}} = child;
     if (
       output === null &&
-      React.isValidElement(child) &&
       typeof props.condition === 'function' &&
       props.condition(accessConditionState)
     ) {
