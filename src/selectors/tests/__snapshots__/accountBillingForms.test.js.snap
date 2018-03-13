@@ -1,6 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Billing Initial Values changePlanInitialValues should return change plan values: with a billing id 1`] = `
+exports[`Selector: Account billing form Onboarding Initial Values should set reasonable defaults 1`] = `
+Object {
+  "billingAddress": Object {
+    "firstName": "ann",
+    "lastName": "perkins",
+  },
+  "planpicker": undefined,
+}
+`;
+
+exports[`Selector: Account billing form changePlanInitialValues should return change plan values: with a billing id 1`] = `
 Object {
   "billingAddress": Object {
     "firstName": "ann",
@@ -14,7 +24,7 @@ Object {
 }
 `;
 
-exports[`Billing Initial Values changePlanInitialValues should return change plan values: without billing id 1`] = `
+exports[`Selector: Account billing form changePlanInitialValues should return change plan values: without billing id 1`] = `
 Object {
   "billingAddress": Object {
     "firstName": "ann",
@@ -28,7 +38,27 @@ Object {
 }
 `;
 
-exports[`Billing Initial Values should return update contact values 1`] = `
+exports[`Selector: Account billing form onboardingInitialValues should gracefully handle invalid plan values from /join 1`] = `
+Object {
+  "billingAddress": Object {
+    "firstName": "ann",
+    "lastName": "perkins",
+  },
+  "planpicker": undefined,
+}
+`;
+
+exports[`Selector: Account billing form onboardingInitialValues should set the plan picker to the plan specified by /join 1`] = `
+Object {
+  "billingAddress": Object {
+    "firstName": "ann",
+    "lastName": "perkins",
+  },
+  "planpicker": undefined,
+}
+`;
+
+exports[`Selector: Account billing form updatePaymentInitialValues should return update contact values 1`] = `
 Object {
   "billingContact": Object {
     "country": "GG",
@@ -41,7 +71,7 @@ Object {
 }
 `;
 
-exports[`Billing Initial Values should return update payment values 1`] = `
+exports[`Selector: Account billing form updatePaymentInitialValues should return update payment values 1`] = `
 Object {
   "billingAddress": Object {
     "firstName": "ann",
