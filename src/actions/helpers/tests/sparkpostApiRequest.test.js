@@ -1,4 +1,3 @@
-/* eslint max-lines: ["error", 202] */
 import sparkpostApiRequest, { refreshTokensUsed } from '../sparkpostApiRequest';
 import SparkpostApiError from '../sparkpostApiError';
 import { createMockStore } from 'src/__testHelpers__/mockStore';
@@ -69,6 +68,12 @@ describe('Helper: SparkPost API Request', () => {
         message: 'Something went wrong.',
         details: apiErr.message
       });
+      expect(mockStore.getActions()).toMatchSnapshot();
+    });
+
+    it('should not show error alert when request failed', async() => {
+      action.meta.showErrorAlert = false;
+      await expect(mockStore.dispatch(sparkpostApiRequest(action))).rejects.toThrow(apiErr);
       expect(mockStore.getActions()).toMatchSnapshot();
     });
 
