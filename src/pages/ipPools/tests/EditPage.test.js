@@ -110,15 +110,5 @@ describe('IP Pools Edit Page', () => {
       });
       expect(wrapper.instance().props.history.push).toHaveBeenCalled();
     });
-
-    it('should show error alert on failed delete pool', async() => {
-      wrapper.setProps({ deletePool: jest.fn(() => Promise.reject(true)) });
-      await wrapper.instance().onDeletePool();
-      expect(wrapper.instance().props.showAlert).toHaveBeenCalledWith({
-        type: 'error',
-        message: 'Unable to delete IP pool my-pool.'
-      });
-      expect(wrapper.instance().props.history.push).not.toHaveBeenCalled();
-    });
   });
 });
