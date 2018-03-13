@@ -1,59 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Boomerang Banner should only render div when bar is already in place 1`] = `
-<div>
-  <HelmetWrapper
-    defer={true}
-    encodeSpecialCharacters={true}
-  >
-    <script
-      src="https://s3.amazonaws.com/assets.heroku.com/boomerang/boomerang.js"
-      type="text/javascript"
-    />
-  </HelmetWrapper>
-  <div
-    className="heroku-boomerang-loaded"
-    style={
-      Object {
-        "marginTop": "32px",
-      }
-    }
-  />
-</div>
-`;
-
-exports[`Boomerang Banner should render when the bar doesn't initialize 1`] = `
-<div>
-  <HelmetWrapper
-    defer={true}
-    encodeSpecialCharacters={true}
-  >
-    <script
-      src="https://s3.amazonaws.com/assets.heroku.com/boomerang/boomerang.js"
-      type="text/javascript"
-    />
-  </HelmetWrapper>
-</div>
-`;
-
 exports[`Boomerang Banner should render when the bar initializes 1`] = `
-<div>
-  <HelmetWrapper
-    defer={true}
-    encodeSpecialCharacters={true}
+<HelmetWrapper
+  defer={true}
+  encodeSpecialCharacters={true}
+>
+  <style
+    type="text/css"
   >
-    <script
-      src="https://s3.amazonaws.com/assets.heroku.com/boomerang/boomerang.js"
-      type="text/javascript"
-    />
-  </HelmetWrapper>
-  <div
-    className="heroku-boomerang-loaded"
-    style={
-      Object {
-        "marginTop": "32px",
-      }
-    }
-  />
-</div>
+    
+          body.heroku-boomerang-loaded {
+            padding-top: 32px
+          }
+         
+  </style>
+</HelmetWrapper>
 `;

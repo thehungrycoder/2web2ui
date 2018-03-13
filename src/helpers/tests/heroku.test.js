@@ -1,13 +1,30 @@
 import { barMe, unbar } from '../heroku';
 import config from 'src/config';
 import Cookies from 'js-cookie';
+import Boomerang from '@sparkpost/boomerang';
 
 jest.mock('src/config', () => ({
   heroku: {
     cookieName: 'those-are-my-cookies'
+  },
+  website: {
+    domain: 'best.domain'
   }
 }));
 jest.mock('js-cookie');
+jest.mock('@sparkpost/boomerang', () => ({
+  init: jest.fn()
+}));
+
+const encodedCookie = {
+  appname: 'jordan-test',
+  addon: 'SparkPost Free',
+  addons:
+    [ { current: true,
+      icon: 'https://addons.heroku.com/provider/addons/sparkpost/icons/menu/processed.png',
+      slug: 'sparkpost:free',
+      name: 'SparkPost' } ]
+};
 
 const initObjectArg = {
   app: 'jordan-test',
@@ -19,51 +36,36 @@ const initObjectArg = {
 describe('Heroku Helpers', () => {
   describe('barMe', () => {
     beforeEach(() => {
-      window.Boomerang = {
-        init: jest.fn()
-      };
       config.heroku = 'those-are-my-cookies';
 
-      Cookies.get = jest.fn(() => 'eyJhcHBuYW1lIjoiam9yZGFuLXRlc3QiLCJhZGRvbiI6IlNwYXJrUG9zdCBGcmVlIiwiYWRkb25zIjpbeyJjdXJyZW50Ijp0cnVlLCJpY29uIjoiaHR0cHM6Ly9hZGRvbnMuaGVyb2t1LmNvbS9wcm92aWRlci9hZGRvbnMvc3Bhcmtwb3N0L2ljb25zL21lbnUvcHJvY2Vzc2VkLnBuZyIsInNsdWciOiJzcGFya3Bvc3Q6ZnJlZSIsIm5hbWUiOiJTcGFya1Bvc3QifV19');
+      const encodedValue = btoa(JSON.stringify(encodedCookie));
+      Cookies.get = jest.fn(() => encodedValue);
     });
 
     it('should initialize the Boomerang bar', () => {
-      expect(barMe()).toEqual(true);
+      barMe();
       expect(Cookies.get).toHaveBeenCalledWith('those-are-my-cookies');
-      expect(window.Boomerang.init).toHaveBeenCalledWith(initObjectArg);
+      expect(Boomerang.init).toHaveBeenCalledWith(initObjectArg);
     });
 
-    it('should do nothing and return false if Boomerang script has not loaded', () => {
-      delete window.Boomerang;
-
-      expect(barMe()).toEqual(false);
-      expect(Cookies.get).not.toHaveBeenCalled();
-    });
-
-    it('should do nothing and return false if the cookie value is empty', () => {
+    it('should do nothing if the cookie value is empty', () => {
       Cookies.get = jest.fn(() => undefined);
 
-      expect(barMe()).toEqual(false);
+      barMe();
       expect(Cookies.get).toHaveBeenCalledWith('those-are-my-cookies');
-      expect(window.Boomerang.init).not.toHaveBeenCalled();
-    });
-
-    it('should silently fail and return false if the init errors', () => {
-      window.Boomerang.init = jest.fn(() => { throw new Error('no heroku 4u'); });
-
-      expect(barMe()).toEqual(false);
-      expect(Cookies.get).toHaveBeenCalledWith('those-are-my-cookies');
-      expect(window.Boomerang.init).toHaveBeenCalled();
+      expect(Boomerang.init).not.toHaveBeenCalled();
     });
   });
 
   describe('unbar', () => {
     let remove;
+    const options = { path: '/', domain: 'best.domain' };
     beforeEach(() => {
       remove = jest.fn();
       document.getElementById = jest.fn(() => ({ remove() { return remove(); } }));
 
       config.heroku = 'those-are-my-cookies';
+      config.website.domain = 'best.domain';
 
       Cookies.remove = jest.fn();
     });
@@ -71,7 +73,7 @@ describe('Heroku Helpers', () => {
     it('should remove the cookie and bar', () => {
       unbar();
 
-      expect(Cookies.remove).toBeCalledWith('those-are-my-cookies');
+      expect(Cookies.remove).toBeCalledWith('those-are-my-cookies', options);
       expect(remove).toHaveBeenCalled();
     });
 
@@ -79,7 +81,7 @@ describe('Heroku Helpers', () => {
       Cookies.remove = jest.fn(() => { throw new Error('error'); });
 
       expect(unbar()).toEqual(undefined);
-      expect(Cookies.remove).toBeCalledWith('those-are-my-cookies');
+      expect(Cookies.remove).toBeCalledWith('those-are-my-cookies', options);
       expect(remove).not.toHaveBeenCalled();
     });
   });

@@ -9,6 +9,9 @@ jest.mock('src/config', () => ({
   heroku: {
     cookieName: 'my-cookie'
   },
+  website: {
+    domain: ''
+  },
   bounceDomains: {
     allowDefault: false,
     cnameValue: 'sparkpostmail.com'

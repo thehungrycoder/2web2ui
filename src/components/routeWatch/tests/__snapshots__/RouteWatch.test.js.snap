@@ -1,7 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`RouteWatch attaches gtag to window 1`] = `undefined`;
-
 exports[`RouteWatch renders Helmet with script 1`] = `
 <HelmetWrapper
   defer={true}
@@ -14,8 +12,6 @@ exports[`RouteWatch renders Helmet with script 1`] = `
   />
 </HelmetWrapper>
 `;
-
-exports[`RouteWatch renders null 1`] = `""`;
 
 exports[`RouteWatch sets up gtag config on mount 1`] = `
 [MockFunction] {

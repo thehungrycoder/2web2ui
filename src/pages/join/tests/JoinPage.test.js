@@ -18,6 +18,9 @@ jest.mock('src/config', () => ({
   heroku: {
     cookieName: 'my-cookie'
   },
+  website: {
+    domain: ''
+  },
   gaTag: 'ga101',
   links: {
     submitTicket: 'https://support.sparkpost.com/customer/portal/emails/new'
