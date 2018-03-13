@@ -36,7 +36,12 @@ export class EditBounce extends Component {
       id,
       subaccount: domain.subaccount_id,
       is_default_bounce_domain: !domain.is_default_bounce_domain
-    }).catch((err) => { reset(); });
+    }).catch((err) => {
+      // TODO: Switch this single field form to use ToggleBlock without Redux Form and set the value
+      //   of the toggle from the store value, so this catch can be removed
+      reset();
+      throw err; // for error reporting
+    });
   }
 
   renderRootDomainWarning() {

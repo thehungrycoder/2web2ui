@@ -136,5 +136,18 @@ describe('Component: EditBounce', () => {
       await instance.toggleDefaultBounce();
       expect(props.update).toHaveBeenCalledWith({ id: props.id, subaccount: 100, is_default_bounce_domain: false });
     });
+
+    it('on error reset form and rethrow the error', async() => {
+      const err = new Error('Request failed!');
+      props.update.mockReturnValue(Promise.reject(err));
+
+      await expect(instance.toggleDefaultBounce()).rejects.toThrow(err);
+      expect(props.update).toHaveBeenCalledWith({
+        id: props.id,
+        subaccount: 100,
+        is_default_bounce_domain: true
+      });
+      expect(props.reset).toHaveBeenCalled();
+    });
   });
 });
