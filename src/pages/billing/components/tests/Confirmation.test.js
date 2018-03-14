@@ -51,6 +51,11 @@ describe('Confirmation: ', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('should render correctly for an upgrade effectively immediately', () => {
+    wrapper.setProps({ current: free, selected: upgrade, billingEnabled: true });
+    expect(wrapper).toMatchSnapshot();
+  });
+
   it('should render correctly with a downgrade', () => {
     wrapper.setProps({ selected: downgrade, billingEnabled: true });
     expect(wrapper).toMatchSnapshot();

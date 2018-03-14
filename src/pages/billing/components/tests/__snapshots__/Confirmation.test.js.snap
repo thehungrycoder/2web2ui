@@ -38,6 +38,54 @@ exports[`Confirmation:  renders correctly when billing not enabled 1`] = `
 </Panel>
 `;
 
+exports[`Confirmation:  should render correctly for an upgrade effectively immediately 1`] = `
+<Panel>
+  <Panel.Section>
+    <span>
+      <small>
+        Current Plan
+      </small>
+      <h4>
+        100
+         emails each month 
+        for Free
+      </h4>
+    </span>
+  </Panel.Section>
+  <Panel.Section>
+    <div>
+      <small>
+        New Plan
+      </small>
+      <h5>
+        2,000
+         emails each month 
+        <span>
+          for $
+          200
+          /
+          mo
+        </span>
+      </h5>
+    </div>
+    <p>
+      Your upgrade will be effective today.
+    </p>
+  </Panel.Section>
+  <Panel.Section>
+    <Button
+      destructive={false}
+      fullWidth={true}
+      primary={true}
+      size="default"
+      type="submit"
+    >
+      Upgrade Plan
+    </Button>
+  </Panel.Section>
+</Panel>
+`;
+
 exports[`Confirmation:  should render correctly with a downgrade 1`] = `
 <Panel>
   <Panel.Section>

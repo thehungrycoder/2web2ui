@@ -52,15 +52,15 @@ export class Confirmation extends React.Component {
     }
 
     if (isPlanSelected && billingEnabled) {
-      if (!isDowngrade) {
+      if (isDowngrade) {
+        effectiveDateMarkup =
+          <p>Your downgrade will take effect at the end of the current billing cycle. You will not be able to make any
+            plan changes until your downgrade takes effect.</p>;
+      } else {
         effectiveDateMarkup = current.isFree
           ? <p>Your upgrade will be effective today.</p>
           : <p>Your upgrade will be effective today and you'll be billed a pro-rated amount for your current billing
           cycle.</p>;
-      } else {
-        effectiveDateMarkup =
-          <p>Your downgrade will take effect at the end of the current billing cycle. You will not be able to make any
-            plan changes until your downgrade takes effect.</p>;
       }
 
       if (current.includesIp && !selected.includesIp && !selected.isFree) {
