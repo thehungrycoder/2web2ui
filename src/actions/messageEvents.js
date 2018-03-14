@@ -80,7 +80,8 @@ export function getDocumentation() {
     type: 'GET_MESSAGE_EVENTS_DOCUMENTATION',
     meta: {
       method: 'GET',
-      url: '/message-events/events/documentation'
+      url: '/message-events/events/documentation',
+      showErrorAlert: false
     }
   });
 }
