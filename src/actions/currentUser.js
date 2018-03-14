@@ -38,7 +38,7 @@ export function getGrants({ beta = false, role } = {}) {
 
 }
 
-export function verifyEmail(data = {}, type = 'VERIFY_EMAIL') {
+export function verifyEmail(data = {}, { showErrorAlert = true, type = 'VERIFY_EMAIL' } = {}) {
   return (dispatch, getState) => {
     const { username } = getState().currentUser;
     return dispatch(sparkpostApiRequest({
@@ -47,12 +47,12 @@ export function verifyEmail(data = {}, type = 'VERIFY_EMAIL') {
         method: 'POST',
         url: `/users/${username}/verify`,
         data,
-        showErrorAlert: false
+        showErrorAlert
       }
     }));
   };
 }
 
 export function verifyEmailToken(data) {
-  return verifyEmail(data, 'VERIFY_EMAIL_TOKEN');
+  return verifyEmail(data, { showErrorAlert: false, type: 'VERIFY_EMAIL_TOKEN' });
 }
