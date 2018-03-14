@@ -46,7 +46,8 @@ export function verifyEmail(data = {}, type = 'VERIFY_EMAIL') {
       meta: {
         method: 'POST',
         url: `/users/${username}/verify`,
-        data
+        data,
+        showErrorAlert: false
       }
     }));
   };
