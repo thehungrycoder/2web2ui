@@ -1,33 +1,16 @@
 import React from 'react';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
-import { getPlanPrice } from 'src/helpers/billing';
+import PlanPrice from 'src/components/billing/PlanPrice';
 import styles from './PlanPicker.module.scss';
 
 class Plan extends React.Component {
-  getPriceElement(plan) {
-    const priceInfo = getPlanPrice(plan);
-
-    return priceInfo.price
-      ? <span>at <strong>${priceInfo.price.toLocaleString()}</strong>/{priceInfo.intervalShort}</span>
-      : <strong>for Free</strong>;
-  }
-
   render() {
     const { plan, className, ...rest } = this.props;
-    const overage = plan.isFree
-      ? 'Full-featured developer account'
-      : `$${plan.overage.toFixed(2)}/ thousand extra emails`;
-
-    const ip = plan.includesIp
-      ? ', first dedicated IP address is free'
-      : '';
 
     return (
       <a className={className} {...rest} >
-        <span
-          className={styles.MainLabel}><strong>{ plan.volume.toLocaleString() }</strong> emails/month {this.getPriceElement(plan)}</span>
-        <span className={styles.SupportLabel}>{ overage }{ ip }</span>
+        <PlanPrice plan={plan} showOverage={true} showIp={true} className={styles.MainLabel} />
       </a>
     );
   }

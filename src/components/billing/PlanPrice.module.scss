@@ -1,0 +1,16 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.MainLabel {
+  display: block;
+
+  .selected & {
+    color: color(orange);
+  }
+}
+
+.SupportLabel {
+  display: block;
+  color: color(gray, 4);
+  font-size: rem(15);
+}
+

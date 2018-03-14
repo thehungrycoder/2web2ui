@@ -2,15 +2,9 @@ import React from 'react';
 import { Panel, Button, UnstyledLink } from '@sparkpost/matchbox';
 import config from 'src/config';
 import { getPlanPrice } from 'src/helpers/billing';
+import PlanPrice from 'src/components/billing/PlanPrice';
 
 export class Confirmation extends React.Component {
-  getPriceElement(plan) {
-    const priceInfo = getPlanPrice(plan);
-    return priceInfo.price
-      ? <span>at ${priceInfo.price.toLocaleString()}/{priceInfo.intervalShort}</span>
-      : 'for Free';
-  }
-
   renderSelectedPlanMarkup() {
     const { current = {}, selected = {}} = this.props;
 
@@ -18,9 +12,8 @@ export class Confirmation extends React.Component {
       ? <p>Select a plan on the left to update your subscription</p>
       : <div>
         <small>New Plan</small>
-        <h5>{ selected.volume && selected.volume.toLocaleString() } emails/month { this.getPriceElement(selected) }</h5>
+        <h5><PlanPrice plan={selected}/></h5>
       </div>;
-
   }
 
   renderCurrentPlanMarkup() {
@@ -28,7 +21,7 @@ export class Confirmation extends React.Component {
     return (
       <span>
         <small>Current Plan</small>
-        <h4>{ current.volume && current.volume.toLocaleString() } emails/month {this.getPriceElement(current)}</h4>
+        <h4><PlanPrice plan={current}/></h4>
       </span>
     );
   }
