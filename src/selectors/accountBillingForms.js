@@ -1,8 +1,8 @@
-import { currentPlanSelector, publicPlansSelector } from './accountBillingInfo';
+import { currentPlanSelector, getPlansSelector, isSelfServeOrAWSSelector } from './accountBillingInfo';
 import _ from 'lodash';
 
 export function onboardingInitialValues(state) {
-  const plans = publicPlansSelector(state);
+  const plans = getPlansSelector(state);
 
   return {
     planpicker: _.first(plans),
@@ -22,8 +22,8 @@ export function changePlanInitialValues(state) {
 
   // Plans outside zuora won't be selectable through plan picker (only possible through manually billed accounts)
   // Picker default to the highest plan
-  if (!initialPlan.hasOwnProperty('billingId') && !state.account.subscription.self_serve) {
-    initialPlan = _.last(publicPlansSelector(state));
+  if (!initialPlan.hasOwnProperty('billingId') && !isSelfServeOrAWSSelector(state)) {
+    initialPlan = _.last(getPlansSelector(state));
   }
 
   return {

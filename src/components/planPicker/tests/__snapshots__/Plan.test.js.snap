@@ -1,40 +1,52 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Plan:  renders correctly 1`] = `
+exports[`Plan: renders correctly 1`] = `
 <a>
-  <span>
-    <strong>
-      200
-    </strong>
-     emails for 
-    <span>
-      <strong>
-        $
-        100
-      </strong>
-      /mo
-    </span>
-  </span>
-  <span>
-    $0.90/ thousand extra emails
-  </span>
+  <PlanPrice
+    plan={
+      Object {
+        "monthly": 100,
+        "overage": 0.9,
+        "volume": 200,
+      }
+    }
+    showIp={true}
+    showOverage={true}
+  />
 </a>
 `;
 
-exports[`Plan:  renders free and ip correctly 1`] = `
+exports[`Plan: renders free and ip correctly 1`] = `
 <a>
-  <span>
-    <strong>
-      300
-    </strong>
-     emails for 
-    <strong>
-      Free
-    </strong>
-  </span>
-  <span>
-    Full-featured developer account
-    , first dedicated IP address is free
-  </span>
+  <PlanPrice
+    plan={
+      Object {
+        "includesIp": true,
+        "isFree": true,
+        "monthly": 0,
+        "overage": 0.8,
+        "volume": 300,
+      }
+    }
+    showIp={true}
+    showOverage={true}
+  />
+</a>
+`;
+
+exports[`Plan: renders hourly plan correctly 1`] = `
+<a>
+  <PlanPrice
+    plan={
+      Object {
+        "hourly": 0.22,
+        "includesIp": true,
+        "overage": 0.8,
+        "volume": 300,
+      }
+    }
+    showIp={true}
+    showOverage={true}
+  />
 </a>
 `;

@@ -40,7 +40,8 @@ describe('JoinPage', () => {
       authenticate: jest.fn(() => Promise.resolve()),
       history: {
         push: jest.fn()
-      }
+      },
+      isAWSsignUp: false
     };
     formValues = {
       first_name: 'foo',
@@ -69,7 +70,6 @@ describe('JoinPage', () => {
     jest.resetAllMocks();
   });
 
-
   describe('render', () => {
     it('renders correctly', () => {
       expect(wrapper).toMatchSnapshot();
@@ -77,6 +77,11 @@ describe('JoinPage', () => {
     it('renders errors', () => {
       instance.handleSignupFailure = jest.fn().mockReturnValue('Some error occurred');
       wrapper.setProps({ account: { createError: {}}}); //just to make it truthy
+      expect(wrapper).toMatchSnapshot();
+    });
+
+    it('renders aws logo when signup from aws', () => {
+      wrapper.setProps({ isAWSsignUp: true });
       expect(wrapper).toMatchSnapshot();
     });
   });

@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DedicatedIpCost renders correct cost per ip for "normal" accounts 1`] = `"$20.00 per month"`;
+
+exports[`DedicatedIpCost renders correct cost per ip for aws accounts 1`] = `"$0.028 per hour"`;

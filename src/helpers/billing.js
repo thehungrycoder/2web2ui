@@ -157,3 +157,10 @@ export function formatCardTypes(cards) {
     return { ...card, type: type ? type.apiFormat : card.type };
   });
 }
+
+
+export function getPlanPrice(plan) {
+  const pricingInterval = _.has(plan, 'hourly') ? 'hourly' : 'monthly';
+  const intervalShortName = pricingInterval === 'hourly' ? 'hr' : 'mo';
+  return { intervalShort: intervalShortName, intervalLong: pricingInterval, price: plan[pricingInterval] };
+}

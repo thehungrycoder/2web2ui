@@ -30,7 +30,8 @@ describe('Form Container: Change Plan', () => {
     showAlert: jest.fn(),
     billingCreate: jest.fn(() => Promise.resolve()),
     billingUpdate: jest.fn(() => Promise.resolve()),
-    updateSubscription: jest.fn(() => Promise.resolve())
+    updateSubscription: jest.fn(() => Promise.resolve()),
+    isAWSAccount: false
   };
 
   beforeEach(() => {
@@ -45,11 +46,6 @@ describe('Form Container: Change Plan', () => {
 
   it('should not show plans', () => {
     wrapper.setProps({ plans: []});
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('should not show free plans when not self serve', () => {
-    wrapper.setProps({ account: { subscription: { self_serve: false }}});
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -89,6 +85,11 @@ describe('Form Container: Change Plan', () => {
     expect(submitSpy).toHaveBeenCalled();
   });
 
+  it('should not render ccsection for aws account', () => {
+    wrapper.setProps({ isAWSAccount: true, account: { subscription: { self_serve: false }}});
+    expect(wrapper).toMatchSnapshot();
+  });
+
   describe('onSubmit tests', () => {
     it('should call bilingCreate when no billing exists', async() => {
       await instance.onSubmit({ key: 'value' });
@@ -107,11 +108,17 @@ describe('Form Container: Change Plan', () => {
 
     });
 
+    it('should update subscription for aws account', async() => {
+      wrapper.setProps({ isAWSAccount: true });
+      await instance.onSubmit({ planpicker: { code: 'free' }});
+      expect(instance.props.updateSubscription).toHaveBeenCalledWith({ code: 'free', isAWSAccount: true });
+    });
+
     it('should update billing when billing exists but enter new cc info', async() => {
       wrapper.setState({ useSavedCC: true });
       wrapper.setProps({ account: { billing: true, subscription: { self_serve: true }}});
       await instance.onSubmit({ planpicker: { code: 'free' }});
-      expect(instance.props.updateSubscription).toHaveBeenCalledWith('free');
+      expect(instance.props.updateSubscription).toHaveBeenCalledWith({ code: 'free' });
       expect(instance.props.billingUpdate).not.toHaveBeenCalled();
       expect(instance.props.history.push).toHaveBeenCalledWith('/account/billing');
       expect(instance.props.showAlert).toHaveBeenCalledWith({ type: 'success', message: 'Subscription Updated' });
