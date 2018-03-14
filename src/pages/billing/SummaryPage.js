@@ -5,7 +5,7 @@ import { Page, Panel, WindowEvent } from '@sparkpost/matchbox';
 
 import { fetch as fetchAccount, getPlans } from 'src/actions/account';
 import { list as getSendingIps } from 'src/actions/sendingIps';
-import { shouldExposeCardSelector, canChangePlanSelector, currentPlanSelector, publicPlansSelector, isSelfServeOrAWSSelector,
+import { shouldExposeCardSelector, canChangePlanSelector, currentPlanSelector, isSelfServeOrAWSSelector,
   canPurchaseIps } from 'src/selectors/accountBillingInfo';
 
 import { Loading, Modal, LabelledValue } from 'src/components';
@@ -126,7 +126,6 @@ const mapStateToProps = (state) => ({
   canPurchaseIps: canPurchaseIps(state),
   canChangePlan: canChangePlanSelector(state),
   currentPlan: currentPlanSelector(state),
-  plans: publicPlansSelector(state),
   sendingIps: state.sendingIps.list
 });
 export default connect(mapStateToProps, { getSendingIps, getPlans, fetchAccount })(SummaryPage);
