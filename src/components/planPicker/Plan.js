@@ -5,12 +5,12 @@ import { getPlanPrice } from 'src/helpers/billing';
 import styles from './PlanPicker.module.scss';
 
 class Plan extends React.Component {
-  getPrice(plan) {
+  getPriceElement(plan) {
     const priceInfo = getPlanPrice(plan);
 
     return priceInfo.price
-      ? <span><strong>${priceInfo.price.toLocaleString()}</strong>/{priceInfo.intervalShort}</span>
-      : <strong>Free</strong>;
+      ? <span>at <strong>${priceInfo.price.toLocaleString()}</strong>/{priceInfo.intervalShort}</span>
+      : <strong>for Free</strong>;
   }
 
   render() {
@@ -26,7 +26,7 @@ class Plan extends React.Component {
     return (
       <a className={className} {...rest} >
         <span
-          className={styles.MainLabel}><strong>{ plan.volume.toLocaleString() }</strong> emails/month for {this.getPrice(plan)}</span>
+          className={styles.MainLabel}><strong>{ plan.volume.toLocaleString() }</strong> emails/month {this.getPriceElement(plan)}</span>
         <span className={styles.SupportLabel}>{ overage }{ ip }</span>
       </a>
     );
