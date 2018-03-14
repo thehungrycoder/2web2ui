@@ -14,7 +14,7 @@ export class ActiveFilters extends Component {
   renderTags = ({ key, label, itemToString }) => {
     const { search } = this.props;
 
-    if (!search[key].length) {
+    if (!search[key]) {
       return null;
     }
 

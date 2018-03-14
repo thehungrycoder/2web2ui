@@ -9,13 +9,13 @@ Array [
   Object {
     "event_id": "default_id",
     "foo": "bar",
-    "formattedDate": "2017/11/09 00:00",
+    "formattedDate": "Nov 9 2017, 12:00am",
     "timestamp": "2017-11-09T00:00",
   },
   Object {
     "bat": "baz",
     "foo": "bar",
-    "formattedDate": "2017/11/08 11:00",
+    "formattedDate": "Nov 8 2017, 11:00am",
     "timestamp": "2017-11-08T11:00",
   },
 ]
@@ -26,13 +26,13 @@ Array [
   Object {
     "event_id": "default_id",
     "foo": "bar",
-    "formattedDate": "2017/11/09 00:00",
+    "formattedDate": "Nov 9 2017, 12:00am",
     "timestamp": "2017-11-09T00:00",
   },
   Object {
     "bat": "baz",
     "foo": "bar",
-    "formattedDate": "2017/11/08 11:00",
+    "formattedDate": "Nov 8 2017, 11:00am",
     "timestamp": "2017-11-08T11:00",
   },
 ]

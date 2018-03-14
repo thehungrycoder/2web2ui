@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import _ from 'lodash';
-import { getMessageEvents, refreshMessageEventsDateRange, updateMessageEventsSearchOptions, addFilters } from 'src/actions/messageEvents';
+import { getMessageEvents, refreshMessageEventsDateRange, addFilters } from 'src/actions/messageEvents';
 import { Panel, Grid, TextField } from '@sparkpost/matchbox';
 import AdvancedFilters from './AdvancedFilters';
 import ActiveFilters from './ActiveFilters';
@@ -104,5 +104,5 @@ const mapStateToProps = ({ messageEvents }) => ({
   search: messageEvents.search,
   loading: messageEvents.loading
 });
-const mapDispatchToProps = { getMessageEvents, refreshMessageEventsDateRange, updateMessageEventsSearchOptions, addFilters };
+const mapDispatchToProps = { getMessageEvents, refreshMessageEventsDateRange, addFilters };
 export default connect(mapStateToProps, mapDispatchToProps)(MessageEventsSearch);

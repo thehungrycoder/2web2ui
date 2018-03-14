@@ -9,7 +9,7 @@ import _ from 'lodash';
 import { EVENT_FILTERS, TEXT_FILTERS } from './searchConfig';
 import styles from './AdvancedFilters.module.scss';
 
-class AdvancedFilters extends Component {
+export class AdvancedFilters extends Component {
   state = {
     modalOpen: false,
     search: {
@@ -27,7 +27,7 @@ class AdvancedFilters extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.search !== this.state.search) {
+    if (nextProps.search !== this.props.search) {
       this.syncSearchToState(nextProps); // Updates form values if a filter is removed from ActiveFilters
     }
   }

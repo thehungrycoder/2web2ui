@@ -17,7 +17,7 @@ describe('Component: MessageEventsSearch', () => {
         recipients: []
       },
       refreshMessageEventsDateRange: jest.fn(),
-      updateMessageEventsSearchOptions: jest.fn(),
+      addFilters: jest.fn(),
       now: testDate
     };
     wrapper = shallow(<MessageEventsSearch {...props} />);
@@ -34,15 +34,20 @@ describe('Component: MessageEventsSearch', () => {
     expect(props.getMessageEvents).toHaveBeenCalledWith(search);
   });
 
-  describe('parseAddresses', () => {
-
-    it('parse email addresses correctly', () => {
-      expect(instance.parseAddresses('email@domain.com, email2@domain.com')).toEqual(['email@domain.com', 'email2@domain.com']);
-      expect(instance.parseAddresses('email@domain.com ,email2@domain.com')).toEqual(['email@domain.com', 'email2@domain.com']);
-      expect(instance.parseAddresses('email@domain.com , ')).toEqual(['email@domain.com']);
-      expect(instance.parseAddresses('')).toEqual([]); //empty array if no valid emails
-    });
+  it('does not refresh if search has not changed', () => {
+    wrapper.setProps({ search: props.search, changed: 'something else' });
+    expect(props.getMessageEvents).not.toHaveBeenCalled();
   });
+
+  // describe('parseAddresses', () => {
+  //
+  //   it('parse email addresses correctly', () => {
+  //     expect(instance.parseAddresses('email@domain.com, email2@domain.com')).toEqual(['email@domain.com', 'email2@domain.com']);
+  //     expect(instance.parseAddresses('email@domain.com ,email2@domain.com')).toEqual(['email@domain.com', 'email2@domain.com']);
+  //     expect(instance.parseAddresses('email@domain.com , ')).toEqual(['email@domain.com']);
+  //     expect(instance.parseAddresses('')).toEqual([]); //empty array if no valid emails
+  //   });
+  // });
 
   describe('getInvalidAddresses', () => {
     it('detect invalid email addresses correctly', () => {
@@ -53,14 +58,14 @@ describe('Component: MessageEventsSearch', () => {
     });
   });
 
-  describe('emailValidator', () => {
-    it('returns correct validation error', () => {
-      expect(instance.emailValidator('')).toEqual(undefined);
-      expect(instance.emailValidator('email@domain.com, email2@domain.com')).toEqual(undefined);
-      expect(instance.emailValidator('email@domain.com ,email2')).toEqual('email2 is not a valid email address');
-      expect(instance.emailValidator('email.com ,email2')).toEqual('email.com, email2 are not valid email addresses');
-    });
-  });
+  // describe('emailValidator', () => {
+  //   it('returns correct validation error', () => {
+  //     expect(instance.emailValidator('')).toEqual(undefined);
+  //     expect(instance.emailValidator('email@domain.com, email2@domain.com')).toEqual(undefined);
+  //     expect(instance.emailValidator('email@domain.com ,email2')).toEqual('email2 is not a valid email address');
+  //     expect(instance.emailValidator('email.com ,email2')).toEqual('email.com, email2 are not valid email addresses');
+  //   });
+  // });
 
   describe('recipients field', () => {
 
@@ -72,16 +77,17 @@ describe('Component: MessageEventsSearch', () => {
       };
 
       event.target.value = 'email@domain.com';
-      wrapper.find({ name: 'recipients' }).simulate('blur', event);
-      expect(props.updateMessageEventsSearchOptions).toHaveBeenLastCalledWith({
+      wrapper.find('TextField').simulate('blur', event);
+      expect(props.addFilters).toHaveBeenLastCalledWith({
         recipients: ['email@domain.com']
       });
 
       event.target.value = 'email1@domain.com , email2@domain.com';
-      wrapper.find({ name: 'recipients' }).simulate('blur', event);
-      expect(props.updateMessageEventsSearchOptions).toHaveBeenLastCalledWith({
+      wrapper.find('TextField').simulate('blur', event);
+      expect(props.addFilters).toHaveBeenLastCalledWith({
         recipients: ['email1@domain.com', 'email2@domain.com']
       });
+      expect(event.target.value).toBe('');
     });
 
     it('does not refresh on invalid recipient', () => {
@@ -91,8 +97,28 @@ describe('Component: MessageEventsSearch', () => {
         }
       };
 
-      wrapper.find({ name: 'recipients' }).simulate('blur', event);
-      expect(props.updateMessageEventsSearchOptions).not.toHaveBeenCalled();
+      // Single invalid
+      expect(wrapper.find('TextField').props().error).toBe(null);
+      wrapper.find('TextField').simulate('blur', event);
+      expect(props.addFilters).not.toHaveBeenCalled();
+      expect(event.target.value).toBe('abc');
+      expect(wrapper.find('TextField').props().error).toBe('abc is not a valid email address');
+
+      // Multiple invalid
+      wrapper.find('TextField').simulate('blur', { target: { value: 'abc, 123' }});
+      expect(props.addFilters).not.toHaveBeenCalled();
+      expect(wrapper.find('TextField').props().error).toBe('abc, 123 are not valid email addresses');
+
+      // Clears error
+      wrapper.find('TextField').simulate('blur', { target: { value: 'abc@123.com' }});
+      expect(wrapper.find('TextField').props().error).toBe(null);
+    });
+
+    it('should clear error on focus', () => {
+      wrapper.setState({ recipientError: 'error' });
+      expect(wrapper.find('TextField').props().error).toBe('error');
+      wrapper.find('TextField').simulate('focus');
+      expect(wrapper.find('TextField').props().error).toBe(null);
     });
 
     it('should update recipients on enter', () => {
@@ -103,10 +129,11 @@ describe('Component: MessageEventsSearch', () => {
         }
       };
 
-      wrapper.find({ name: 'recipients' }).simulate('keyDown', event);
-      expect(props.updateMessageEventsSearchOptions).toHaveBeenLastCalledWith({
+      wrapper.find('TextField').simulate('keyDown', event);
+      expect(props.addFilters).toHaveBeenLastCalledWith({
         recipients: ['email@domain.com']
       });
+      expect(event.target.value).toBe('');
     });
 
   });
