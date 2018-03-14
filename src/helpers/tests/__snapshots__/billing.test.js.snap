@@ -1,6 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Helper: Billing Countries should reorder and format countries for select options 1`] = `
+exports[`Billing Helpers formatCardTypes should format card type strings 1`] = `
+Array [
+  Object {
+    "type": "Visa",
+  },
+  Object {
+    "type": "MasterCard",
+  },
+  Object {
+    "type": "AmericanExpress",
+  },
+  Object {
+    "type": "Discover",
+  },
+  Object {
+    "type": "bUtNoTtHiSoNe",
+  },
+]
+`;
+
+exports[`Billing Helpers formatCountries should reorder and format countries for select options 1`] = `
 Array [
   Object {
     "label": "USOFA",
@@ -35,22 +55,18 @@ Array [
 ]
 `;
 
-exports[`Helper: Card Types should format card type strings 1`] = `
-Array [
-  Object {
-    "type": "Visa",
-  },
-  Object {
-    "type": "MasterCard",
-  },
-  Object {
-    "type": "AmericanExpress",
-  },
-  Object {
-    "type": "Discover",
-  },
-  Object {
-    "type": "bUtNoTtHiSoNe",
-  },
-]
+exports[`Billing Helpers getPlanPrice returns price info correctly for hourly plan 1`] = `
+Object {
+  "intervalLong": "hourly",
+  "intervalShort": "hr",
+  "price": 0.25,
+}
+`;
+
+exports[`Billing Helpers getPlanPrice returns price info correctly for monthly plan 1`] = `
+Object {
+  "intervalLong": "monthly",
+  "intervalShort": "mo",
+  "price": 50,
+}
 `;

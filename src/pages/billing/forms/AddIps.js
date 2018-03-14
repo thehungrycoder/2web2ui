@@ -13,7 +13,7 @@ import config from 'src/config';
 import IpPoolSelect from './fields/IpPoolSelect';
 import ErrorTracker from 'src/helpers/errorTracker';
 import { required, minNumber, maxNumber } from 'src/helpers/validation';
-import { currentPlanSelector } from 'src/selectors/accountBillingInfo';
+import { currentPlanSelector, isAWSAccountSelector } from 'src/selectors/accountBillingInfo';
 import DedicatedIpCost from '../components/DedicatedIpCost';
 import { LINKS } from 'src/constants';
 
@@ -29,7 +29,7 @@ const WarmUpArticleLink = () => (
   </UnstyledLink>
 );
 
-class AddIps extends Component {
+export class AddIps extends Component {
   getOrCreateIpPool = async({ action, id, name }) => {
     let response;
 
@@ -54,10 +54,10 @@ class AddIps extends Component {
 
   onSubmit = async({ ipPool, quantity }) => {
     const ip_pool = await this.getOrCreateIpPool(ipPool);
-    const { isAwsAccount } = this.props.currentPlan;
+    const { isAWSAccount } = this.props;
 
     try {
-      await this.props.addDedicatedIps({ ip_pool, isAwsAccount, quantity });
+      await this.props.addDedicatedIps({ ip_pool, isAWSAccount, quantity });
     } catch (error) {
       ErrorTracker.report('add-dedicated-sending-ips', error);
 
@@ -76,10 +76,6 @@ class AddIps extends Component {
   }
 
   renderFreeIpNotice() {
-    if (this.props.currentPlan.isAwsAccount) {
-      return <p>Your plan includes one free.</p>;
-    }
-
     return (
       <p>
         Your plan includes one free IP.  If used, your account statement will show a charge
@@ -89,7 +85,7 @@ class AddIps extends Component {
   }
 
   render() {
-    const { currentPlan, error, handleSubmit, onClose, submitting } = this.props;
+    const { currentPlan, error, handleSubmit, onClose, submitting, isAWSAccount } = this.props;
     const { maxPerAccount } = config.sendingIps;
 
     const remainingCount = maxPerAccount - Math.min(this.props.sendingIps.length, maxPerAccount);
@@ -106,7 +102,7 @@ class AddIps extends Component {
             <p>
               Dedicated IPs give you better control over your sending reputation.  You can add up
               to { remainingCount } dedicated IPs to your plan
-              for <DedicatedIpCost plan={currentPlan} quantity='1' /> each.
+              for <DedicatedIpCost plan={currentPlan} quantity='1' isAWSAccount={isAWSAccount} /> each.
             </p>
             { currentPlan.includesIp && this.renderFreeIpNotice() }
             <Field
@@ -139,6 +135,7 @@ class AddIps extends Component {
 const mapStateToProps = (state) => ({
   currentPlan: currentPlanSelector(state),
   sendingIps: state.sendingIps.list,
+  isAWSAccount: isAWSAccountSelector(state),
   initialValues: {
     ipPool: {
       action: 'new'

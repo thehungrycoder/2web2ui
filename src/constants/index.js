@@ -32,3 +32,5 @@ export const LINKS = {
 };
 
 export const ENTERPRISE_PLAN_CODES = ['ent1'];
+
+export const AWS_COOKIE_NAME = 'aws-mkt';

@@ -1,4 +1,4 @@
-/* eslint max-lines: ["warn", { "max": 215, "skipComments": true }] */
+/* eslint max-lines: ["warn", { "max": 220, "skipComments": true }] */
 // @see discussion for custom lint rule, https://github.com/SparkPost/2web2ui/issues/230
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 import localforage from 'localforage';

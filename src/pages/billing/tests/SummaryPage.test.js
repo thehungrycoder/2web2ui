@@ -16,6 +16,8 @@ describe('Page: SummaryPage', () => {
     getBillingCountries: jest.fn(),
     getSendingIps: jest.fn(),
     shouldExposeCard: false,
+    shouldShowBillingSummary: true,
+    canPurchaseIps: false,
     canChangePlan: false,
     currentPlan: {},
     plans: [],
@@ -40,7 +42,7 @@ describe('Page: SummaryPage', () => {
   });
 
   it('should render banner when manually billed', () => {
-    wrapper.setProps({ account: { subscription: { self_serve: false }}});
+    wrapper.setProps({ account: { subscription: { self_serve: false }}, shouldShowBillingSummary: false });
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -53,12 +55,13 @@ describe('Page: SummaryPage', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should render billing and dedicated IP summary if on paid plan', () => {
+  it('should render billing and dedicated IP summary if allowed to purchase ip', () => {
     wrapper.setProps({
       canChangePlan: true,
       shouldExposeCard: true,
       account: { subscription: { self_serve: true }},
-      currentPlan: { isFree: false }
+      currentPlan: { isFree: false },
+      canPurchaseIps: true
     });
     expect(wrapper).toMatchSnapshot();
   });

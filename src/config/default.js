@@ -54,7 +54,8 @@ const config = {
   },
   sendingIps: {
     maxPerAccount: 4,
-    pricePerIp: 20.00
+    pricePerIp: 20.00,
+    awsPricePerIp: 0.028
   },
   sentry: {
     projectId: 232588,

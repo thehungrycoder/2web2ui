@@ -6,8 +6,8 @@ import { showAlert } from 'src/actions/globalAlert';
 import { CenteredLogo, Loading, PlanPicker } from 'src/components';
 import Steps from './components/Steps';
 import { getPlans } from 'src/actions/account';
-import { getBillingCountries, billingCreate } from 'src/actions/billing';
-import { publicPlansSelector } from 'src/selectors/accountBillingInfo';
+import { getBillingCountries, billingCreate, updateSubscription } from 'src/actions/billing';
+import { getPlansSelector, isAWSAccountSelector } from 'src/selectors/accountBillingInfo';
 import { onboardingInitialValues } from 'src/selectors/accountBillingForms';
 import PaymentForm from 'src/pages/billing/forms/fields/PaymentForm';
 import BillingAddressForm from 'src/pages/billing/forms/fields/BillingAddressForm';
@@ -32,7 +32,7 @@ export class OnboardingPlanPage extends Component {
   }
 
   onSubmit = (values) => {
-    const { billingCreate, showAlert, history } = this.props;
+    const { billingCreate, showAlert, history, isAWSAccount } = this.props;
 
     // no billing updates needed since they are still on free plan
     if (values.planpicker.isFree) {
@@ -40,7 +40,11 @@ export class OnboardingPlanPage extends Component {
       return;
     }
 
-    return billingCreate(values)
+    const promise = isAWSAccount
+      ? this.props.updateSubscription({ code: values.planpicker.code, isAWSAccount })
+      : billingCreate(values);
+
+    return promise
       .then(() => history.push(NEXT_STEP))
       .then(() => showAlert({ type: 'success', message: 'Added your plan' }));
   };
@@ -81,7 +85,7 @@ export class OnboardingPlanPage extends Component {
   }
 
   render() {
-    const { loading, plans, submitting } = this.props;
+    const { loading, plans, submitting, isAWSAccount } = this.props;
 
     if (loading) {
       return <Loading />;
@@ -96,7 +100,7 @@ export class OnboardingPlanPage extends Component {
           <Grid.Column>
             <Panel title='Select A Plan'>
               <PlanPicker disabled={submitting} plans={plans} />
-              {this.renderCCSection()}
+              {!isAWSAccount && this.renderCCSection()}
               <Panel.Section>
                 <Button disabled={submitting} primary={true} type='submit' size='large' fullWidth={true}>{buttonText}</Button>
               </Panel.Section>
@@ -114,13 +118,14 @@ const mapStateToProps = (state) => {
   return {
     loading: Boolean(state.account.loading || state.billing.plansLoading || state.billing.countriesLoading),
     billing: state.billing,
-    plans: publicPlansSelector(state),
+    plans: getPlansSelector(state),
     initialValues: onboardingInitialValues(state),
     selectedPlan: selector(state, 'planpicker'),
-    hasError: state.billing.plansError || state.billing.countriesError
+    hasError: state.billing.plansError || state.billing.countriesError,
+    isAWSAccount: isAWSAccountSelector(state)
   };
 };
-const mapDispatchToProps = { billingCreate, showAlert, getPlans, getBillingCountries };
+const mapDispatchToProps = { billingCreate, showAlert, getPlans, getBillingCountries, updateSubscription };
 const formOptions = { form: FORM_NAME, enableReinitialize: true };
 
 export default connect(mapStateToProps, mapDispatchToProps)(reduxForm(formOptions)(OnboardingPlanPage));
