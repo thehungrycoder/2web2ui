@@ -85,6 +85,11 @@ describe('Form Container: Change Plan', () => {
     expect(submitSpy).toHaveBeenCalled();
   });
 
+  it('should not render ccsection for aws account', () => {
+    wrapper.setProps({ isAWSAccount: true });
+    expect(wrapper).toMatchSnapshot();
+  });
+
   describe('onSubmit tests', () => {
     it('should call bilingCreate when no billing exists', async() => {
       await instance.onSubmit({ key: 'value' });

@@ -1,5 +1,43 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Form Container: Change Plan should not render ccsection for aws account 1`] = `
+<form>
+  <Grid>
+    <Grid.Column>
+      <Panel
+        title="Select A Plan"
+      >
+        <Component
+          plans={
+            Array [
+              Object {
+                "isFree": false,
+                "plan": "paid",
+              },
+              Object {
+                "isFree": true,
+                "plan": "free",
+              },
+            ]
+          }
+        />
+      </Panel>
+    </Grid.Column>
+    <Grid.Column
+      md={5}
+      xs={12}
+    >
+      <Confirmation
+        billingEnabled={true}
+        current={Object {}}
+        disableSubmit={true}
+        selected={Object {}}
+      />
+    </Grid.Column>
+  </Grid>
+</form>
+`;
+
 exports[`Form Container: Change Plan should not show plans 1`] = `
 <form>
   <Grid>

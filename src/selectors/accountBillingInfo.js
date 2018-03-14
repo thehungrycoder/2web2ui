@@ -75,9 +75,9 @@ export const isSelfServeOrAWSSelector = createSelector(
 );
 
 export const getPlansSelector = createSelector(
-  [publicPlansSelector, awsPlans, currentSubscriptionSelector],
-  (publicPlans, awsPlans, subscription) => {
-    if (subscription.type === 'aws') { //TODO can isAWSAccount selector be used here?
+  [publicPlansSelector, awsPlans, currentSubscriptionSelector, isAWSAccountSelector],
+  (publicPlans, awsPlans, subscription, isAWSAccount) => {
+    if (isAWSAccount) {
       return awsPlans;
     }
 
