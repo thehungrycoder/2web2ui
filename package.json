@@ -41,7 +41,7 @@
     "url": "https://github.com/SparkPost/2web2ui/issues"
   },
   "dependencies": {
-    "@sparkpost/boomerang": "^1.0.3",
+    "@sparkpost/boomerang": "^1.0.6",
     "@sparkpost/matchbox": "^2.3.5",
     "axios": "^0.17.1",
     "chart.js": "^2.6.0",
