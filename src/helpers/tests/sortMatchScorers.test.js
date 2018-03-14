@@ -1,4 +1,3 @@
-/* eslint max-lines: "off" */
 import { basicScorer, objectScorer } from '../sortMatchScorers';
 
 describe('Helper: sortMatchScorers', () => {

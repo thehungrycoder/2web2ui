@@ -1,4 +1,3 @@
-/* eslint max-lines: ["error", 200] */
 import {
   convertStatus,
   selectTrackingDomainsAreLoaded,

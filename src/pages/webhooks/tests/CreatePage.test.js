@@ -1,4 +1,3 @@
-/* eslint max-lines: ["error", 225] */
 import { shallow } from 'enzyme';
 import React from 'react';
 

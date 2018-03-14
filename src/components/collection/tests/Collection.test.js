@@ -1,4 +1,3 @@
-/* eslint max-lines: ["off"] */
 import React from 'react';
 import { shallow } from 'enzyme';
 import { Collection } from '../Collection';
