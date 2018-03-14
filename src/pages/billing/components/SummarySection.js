@@ -9,14 +9,9 @@ const PlanSummary = ({ plan }) => {
     return <LabelledValue label='Your Plan' />;
   }
 
-  const overage = plan.overage
-    ? <p>${ plan.overage.toFixed(2) }/thousand extra emails</p>
-    : null;
-
   return (
     <LabelledValue label='Your Plan'>
-      <h6><PlanPrice plan={plan} /></h6>
-      { overage }
+      <h6><PlanPrice plan={plan} showOverage={true}/></h6>
     </LabelledValue>
   );
 };

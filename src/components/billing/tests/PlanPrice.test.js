@@ -47,9 +47,22 @@ describe('PlanPrice', () => {
     wrapper.setProps({ plan, showIp: true });
     expect(wrapper).toMatchSnapshot();
   });
+
   it('renders free ip and overage correct', () => {
     plan.includesIp = true;
     wrapper.setProps({ plan, showIp: true, showOverage: true });
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders nothing when no plan', () => {
+    wrapper.setProps({ plan: {}});
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders correctly for free plan', () => {
+    plan.monthly = 0;
+    plan.isFree = true;
+    wrapper.setProps({ plan });
     expect(wrapper).toMatchSnapshot();
   });
 

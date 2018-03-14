@@ -44,6 +44,19 @@ exports[`PlanPrice renders correctly 1`] = `
 </span>
 `;
 
+exports[`PlanPrice renders correctly for free plan 1`] = `
+<span>
+  <span>
+    <strong>
+      50,000
+    </strong>
+     emails/month 
+    for Free
+  </span>
+  <span />
+</span>
+`;
+
 exports[`PlanPrice renders correctly with hourly plans 1`] = `
 <span>
   <span>
@@ -111,6 +124,8 @@ exports[`PlanPrice renders free ip and overage correct 1`] = `
   </span>
 </span>
 `;
+
+exports[`PlanPrice renders nothing when no plan 1`] = `""`;
 
 exports[`PlanPrice renders with overage 1`] = `
 <span>

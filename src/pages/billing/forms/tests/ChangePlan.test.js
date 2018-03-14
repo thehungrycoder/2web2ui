@@ -86,7 +86,7 @@ describe('Form Container: Change Plan', () => {
   });
 
   it('should not render ccsection for aws account', () => {
-    wrapper.setProps({ isAWSAccount: true });
+    wrapper.setProps({ isAWSAccount: true, account: { subscription: { self_serve: false }}});
     expect(wrapper).toMatchSnapshot();
   });
 
