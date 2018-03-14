@@ -70,14 +70,6 @@ describe('ChoosePlan page tests', () => {
       expect(instance.props.showAlert).toHaveBeenCalledWith({ type: 'success', message: 'Added your plan' });
     });
 
-    it('should show error alert on failure', async() => {
-      wrapper.setProps({ billingCreate: jest.fn(() => Promise.reject(new Error('plan failed'))) });
-      await instance.onSubmit({ planpicker: { isFree: false }});
-      expect(instance.props.billingCreate).toHaveBeenCalled();
-      expect(instance.props.history.push).not.toHaveBeenCalled();
-      expect(instance.props.showAlert).toHaveBeenCalledWith({ type: 'error', message: 'Adding your plan failed', details: 'plan failed' });
-    });
-
     it('updates just subscription if aws customer', async() => {
       wrapper.setProps({ isAWSAccount: true });
       await instance.onSubmit({ planpicker: { isFree: false, code: 'abcd' }});
