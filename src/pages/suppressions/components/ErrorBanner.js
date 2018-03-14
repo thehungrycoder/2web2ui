@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import ApiErrorBanner from 'src/components/apiErrorBanner/ApiErrorBanner';
-import { apiResponseToAlert } from 'src/helpers/apiMessages';
 const MAX_ERROR_DETAILS = 25;
 
 export class ErrorBanner extends Component {
@@ -24,7 +23,7 @@ export class ErrorBanner extends Component {
       );
     }
 
-    return parseError.message || apiResponseToAlert(persistError).details;
+    return parseError.message || persistError.message;
   }
 
   render() {

@@ -6,7 +6,8 @@ export function list() {
     type: 'LIST_SUBACCOUNTS',
     meta: {
       method: 'GET',
-      url: '/subaccounts'
+      url: '/subaccounts',
+      showErrorAlert: false
     }
   });
 }

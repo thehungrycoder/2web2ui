@@ -1,4 +1,3 @@
-/* eslint-disable max-lines */
 import * as reportOptions from '../reportOptions';
 import * as metrics from 'src/actions/metrics';
 import { listTemplates } from 'src/actions/templates';

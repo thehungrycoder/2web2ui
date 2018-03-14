@@ -42,9 +42,7 @@ export class OnboardingPlanPage extends Component {
 
     return billingCreate(values)
       .then(() => history.push(NEXT_STEP))
-      .then(() => showAlert({ type: 'success', message: 'Added your plan' }))
-      .catch((err) => showAlert({ type: 'error', message: 'Adding your plan failed', details: err.message }));
-
+      .then(() => showAlert({ type: 'success', message: 'Added your plan' }));
   };
 
   renderCCSection = () => {

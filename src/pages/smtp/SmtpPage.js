@@ -21,11 +21,6 @@ export class SmtpPage extends Component {
       .then(() => showAlert({
         type: 'success',
         message: 'Default SMTP Engagement Tracking updated.'
-      }))
-      .catch((err) => showAlert({
-        type: 'error',
-        message: 'Unable to update SMTP Engagement Tracking.',
-        details: err.message
       }));
   };
 

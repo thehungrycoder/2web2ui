@@ -17,10 +17,7 @@ import exampleSuppressionsListPath from './example-suppressions-list.csv';
 export class UploadForm extends Component {
   handleSubmit = ({ subaccount, suppressionsFile }) => {
     this.props.uploadSuppressions(suppressionsFile, subaccount)
-      .then(this.handleSubmitSuccess)
-      .catch(() => {
-        // do nothing
-      });
+      .then(this.handleSubmitSuccess);
   }
 
   handleSubmitSuccess = () => {

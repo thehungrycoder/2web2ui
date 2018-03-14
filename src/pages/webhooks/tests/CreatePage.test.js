@@ -1,4 +1,3 @@
-/* eslint max-lines: ["error", 225] */
 import { shallow } from 'enzyme';
 import React from 'react';
 
@@ -75,18 +74,6 @@ describe('Page: Webhook Create', () => {
   });
 
   describe('createWebhook tests', () => {
-    it('should handle create fail', async() => {
-      wrapper.setProps({ createWebhook: jest.fn(() => Promise.reject({ message: 'error' })) });
-      await wrapper.instance().createWebhook({
-        name: 'my webhook',
-        target: 'http://url.com'
-      }, [
-        { events: [{ key: 'event1' }]}
-      ]);
-
-      expect(props.showAlert).toHaveBeenCalledWith({ 'details': 'error', 'message': 'Unable to create webhook', 'type': 'error' });
-    });
-
     it('should redirect on create success, and receive events from only master', async() => {
       const instance = wrapper.instance();
       await instance.createWebhook({

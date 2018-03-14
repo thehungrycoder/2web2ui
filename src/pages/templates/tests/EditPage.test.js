@@ -77,12 +77,6 @@ describe('Template EditPage', () => {
       expect(props.history.push).toHaveBeenCalledWith('/templates/edit/id/published?subaccount=101');
       expect(props.showAlert).toHaveBeenCalledWith({ type: 'success', message: 'Template published' });
     });
-
-    it('should handle fail', async() => {
-      wrapper.setProps({ publish: jest.fn(() => Promise.reject({ message: 'fail' })) });
-      await wrapper.instance().handlePublish('values');
-      expect(props.showAlert).toHaveBeenCalledWith({ type: 'error', message: 'Could not publish template', details: 'fail' });
-    });
   });
 
   describe('save', () => {
@@ -93,12 +87,6 @@ describe('Template EditPage', () => {
       expect(props.getTestData).toHaveBeenCalledWith({ id: 'id', mode: 'draft' });
       expect(props.showAlert).toHaveBeenCalledWith({ type: 'success', message: 'Template saved' });
     });
-
-    it('should handle fail', async() => {
-      wrapper.setProps({ update: jest.fn(() => Promise.reject({ message: 'fail' })) });
-      await wrapper.instance().handleSave('values');
-      expect(props.showAlert).toHaveBeenCalledWith({ type: 'error', message: 'Could not save template', details: 'fail' });
-    });
   });
 
   describe('delete', () => {
@@ -107,12 +95,6 @@ describe('Template EditPage', () => {
       await wrapper.instance().handleDelete('id');
       expect(props.history.push).toHaveBeenCalledWith('/templates/');
       expect(props.showAlert).toHaveBeenCalledWith({ message: 'Template deleted' });
-    });
-
-    it('should handle fail', async() => {
-      wrapper.setProps({ deleteTemplate: jest.fn(() => Promise.reject({ message: 'fail' })) });
-      await wrapper.instance().handleDelete('id');
-      expect(props.showAlert).toHaveBeenCalledWith({ type: 'error', message: 'Could not delete template', details: 'fail' });
     });
   });
 });

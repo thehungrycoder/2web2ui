@@ -18,9 +18,7 @@ export class VerifyEmail extends Component {
   verifyWithAbuse = () => {
     const { id, subaccount, verifyAbuse } = this.props;
 
-    return verifyAbuse({ id, subaccount })
-      .then(this.onVerifySuccess(`abuse@${id}`))
-      .catch(this.onVerifyFail);
+    return verifyAbuse({ id, subaccount }).then(this.onVerifySuccess(`abuse@${id}`));
   }
 
   verifyWithCustom = () => {
@@ -33,24 +31,17 @@ export class VerifyEmail extends Component {
     }
 
     return verifyMailbox({ id, mailbox: localPart, subaccount })
-      .then(this.onVerifySuccess(`${localPart}@${id}`))
-      .catch(this.onVerifyFail);
+      .then(this.onVerifySuccess(`${localPart}@${id}`));
   }
 
   verifyWithPostmaster = () => {
     const { id, subaccount, verifyPostmaster } = this.props;
 
-    return verifyPostmaster({ id, subaccount })
-      .then(this.onVerifySuccess(`postmaster@${id}`))
-      .catch(this.onVerifyFail);
+    return verifyPostmaster({ id, subaccount }).then(this.onVerifySuccess(`postmaster@${id}`));
   }
 
   onVerifySuccess = (email) => () => {
     this.props.showAlert({ type: 'success', message: `Email sent to ${email}` });
-  }
-
-  onVerifyFail = (error) => {
-    this.props.showAlert({ type: 'error', message: `Email verification error: ${error.message}` });
   }
 
   renderAllowAnyoneAt = () => {

@@ -66,14 +66,5 @@ describe('ChoosePlan page tests', () => {
       expect(instance.props.history.push).toHaveBeenCalledWith('/onboarding/sending-domain');
       expect(instance.props.showAlert).toHaveBeenCalledWith({ type: 'success', message: 'Added your plan' });
     });
-
-    it('should show error alert on failure', async() => {
-      wrapper.setProps({ billingCreate: jest.fn(() => Promise.reject(new Error('plan failed'))) });
-      await instance.onSubmit({ planpicker: { isFree: false }});
-      expect(instance.props.billingCreate).toHaveBeenCalled();
-      expect(instance.props.history.push).not.toHaveBeenCalled();
-      expect(instance.props.showAlert).toHaveBeenCalledWith({ type: 'error', message: 'Adding your plan failed', details: 'plan failed' });
-    });
   });
-
 });

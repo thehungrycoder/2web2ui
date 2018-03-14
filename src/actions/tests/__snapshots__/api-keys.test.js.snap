@@ -6,6 +6,7 @@ Array [
     "meta": Object {
       "headers": Object {},
       "method": "GET",
+      "showErrorAlert": false,
       "url": "/api-keys",
     },
     "type": "LIST_API_KEYS",

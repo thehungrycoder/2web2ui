@@ -31,14 +31,7 @@ cases('ErrorBanner tests', ({ name, ...props }) => {
   },
   'renders upload form with persist error': {
     persistError: {
-      response: {
-        data: {
-          errors: [
-            { message: 'Oh no, creating!' }
-          ]
-        }
-      }
+      message: 'Oh no, creating!'
     }
   }
 });
-

@@ -21,11 +21,6 @@ export class CreatePage extends Component {
         message: 'Created recipient list'
       });
       history.push('/lists/recipient-lists');
-    }).catch((err) => {
-      showAlert({
-        type: 'error',
-        message: 'Failed to create recipient list. Please try again.'
-      });
     });
   };
 

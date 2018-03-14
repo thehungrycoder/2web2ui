@@ -57,21 +57,5 @@ describe('EditTab', () => {
       expect(showAlert).toHaveBeenCalledWith({ type: 'success', message: 'Updated subaccount' });
       expect(getSubaccount).toHaveBeenCalledWith(subaccount.id);
     });
-
-    test('fail', async() => {
-      const error = { mesage: 'bad edit' };
-      editSubaccount.mockReturnValue(Promise.reject(error));
-      await wrapper.instance().onSubmit(newValues);
-      expect(editSubaccount).toHaveBeenCalledWith(subaccount.id, {
-        name: newValues.name,
-        status: newValues.status,
-        ip_pool: newValues.ipPool
-      });
-      expect(showAlert).toHaveBeenCalledWith({
-        type: 'error',
-        message: 'Error updating subaccount',
-        details: error.message });
-      expect(getSubaccount).not.toHaveBeenCalled();
-    });
   });
 });

@@ -14,7 +14,7 @@ export class VerifyToken extends Component {
   }
 
   verifyDomain({ mailbox, domain, token }) {
-    const { domains, verifyMailboxToken, verifyAbuseToken, verifyPostmasterToken, showAlert } = this.props;
+    const { domains, verifyMailboxToken, verifyAbuseToken, verifyPostmasterToken } = this.props;
 
     // Find the domain to inject subaccount
     const sendingDomain = _.find(domains, { domain });
@@ -31,9 +31,7 @@ export class VerifyToken extends Component {
         verifyAction = verifyPostmasterToken;
       }
 
-      return verifyAction({ id: domain, token, subaccount }).catch((err) => {
-        showAlert({ type: 'error', message: `Unable to verify ${domain}`, details: err.message });
-      });
+      return verifyAction({ id: domain, token, subaccount });
     }
   }
 

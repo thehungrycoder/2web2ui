@@ -77,7 +77,8 @@ export class WebhooksCreate extends Component {
       subaccountId = subaccount.id;
     }
 
-    return createWebhook({ webhook, subaccount: subaccountId }).then(() => showAlert({ type: 'success', message: 'Webhook created' })).catch((err) => showAlert({ type: 'error', message: 'Unable to create webhook', details: err.message }));
+    return createWebhook({ webhook, subaccount: subaccountId })
+      .then(() => showAlert({ type: 'success', message: 'Webhook created' }));
   }
 
   componentDidUpdate(prevProps) {

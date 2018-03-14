@@ -11,14 +11,6 @@ describe('Sending Domains Edit Page', () => {
 
   const domain = Object.assign({}, domainRecord);
 
-  const apiErrorResp = {
-    response: {
-      data: {
-        errors: [ { message: 'Unhelpful cheese configuration' } ]
-      }
-    }
-  };
-
   beforeEach(() => {
     props = {
       domain,
@@ -65,12 +57,6 @@ describe('Sending Domains Edit Page', () => {
     expect(props.deleteDomain).toHaveBeenCalledWith({ id: domain.id, subaccount: domain.subaccount_id });
   });
 
-  it('should show errors on delete', async() => {
-    props.deleteDomain.mockImplementationOnce(() => Promise.reject(apiErrorResp));
-    await wrapper.instance().deleteDomain();
-    expect(props.showAlert).toHaveBeenCalledTimes(1);
-  });
-
   it('should redirect after delete', async() => {
     await wrapper.instance().deleteDomain();
     expect(props.history.push).toHaveBeenCalledWith('/account/sending-domains');
@@ -79,11 +65,5 @@ describe('Sending Domains Edit Page', () => {
   it('should toggle subaccount sharing', async() => {
     await wrapper.instance().shareDomainChange();
     expect(props.updateDomain).toHaveBeenCalledWith({ id: domain.id, shared_with_subaccounts: true, subaccount: domain.subaccount_id });
-  });
-
-  it('should show errors on subacount sharing toggle', async() => {
-    props.updateDomain.mockImplementationOnce(() => Promise.reject(apiErrorResp));
-    await wrapper.instance().shareDomainChange();
-    expect(props.showAlert).toHaveBeenCalledTimes(1);
   });
 });

@@ -39,22 +39,5 @@ describe('Page: Smtp tests', () => {
       });
 
     });
-
-    it('should show error alert when update account fails', async() => {
-      wrapper.setProps({ updateAccount: jest.fn(() => Promise.reject({ message: 'no no no' })) });
-      await instance.toggleTracking();
-      expect(instance.props.updateAccount).toHaveBeenCalledWith({
-        options: {
-          smtp_tracking_default: false
-        }
-      });
-      expect(instance.props.showAlert).toHaveBeenCalledWith({
-        type: 'error',
-        message: 'Unable to update SMTP Engagement Tracking.',
-        details: 'no no no'
-      });
-
-    });
   });
-
 });

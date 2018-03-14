@@ -9,7 +9,8 @@ export function listWebhooks({ subaccount = null, type = 'LIST_WEBHOOKS' } = {})
     meta: {
       method: 'GET',
       url: '/webhooks',
-      headers
+      headers,
+      showErrorAlert: false
     }
   });
 }
