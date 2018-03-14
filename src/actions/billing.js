@@ -19,12 +19,14 @@ export function syncSubscription() {
  * Updates plan
  * @param {string} code
  */
-export function updateSubscription(code, isAWSAccount = false) {
+export function updateSubscription({ code, isAWSAccount = false }) {
+  const url = `/account/${isAWSAccount ? 'aws-marketplace/subscription' : 'subscription'}`;
+
   const action = sparkpostApiRequest({
     type: 'UPDATE_SUBSCRIPTION',
     meta: {
       method: 'PUT',
-      url: `/account/${isAWSAccount ? 'aws-marketplace/' : ''}subscription`,
+      url: url,
       data: { code }
     }
   });
@@ -151,7 +153,7 @@ export function billingUpdate(values) {
       // change plan via our API if plan is included
       .then(() => {
         if (values.planpicker) {
-          dispatch(updateSubscription(values.planpicker.code));
+          dispatch(updateSubscription({ code: values.planpicker.code }));
         }
       })
 

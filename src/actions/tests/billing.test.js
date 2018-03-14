@@ -28,13 +28,6 @@ describe('Action Creator: Billing', () => {
     snapActions();
   });
 
-  it('should dispatch an update subscription action', async() => {
-    const dispatchMock = jest.fn((a) => Promise.resolve(a));
-    const thunk = billing.updateSubscription('test-code');
-    await thunk(dispatchMock);
-    expect(_.flatten(dispatchMock.mock.calls)).toMatchSnapshot();
-  });
-
   it('should dispatch a cors action', () => {
     mockStore.dispatch(billing.cors('some-context', { some: 'cors-data' }));
     snapActions();
@@ -76,6 +69,22 @@ describe('Action Creator: Billing', () => {
     await thunk(dispatchMock);
 
     expect(_.flatten(dispatchMock.mock.calls)).toMatchSnapshot();
+  });
+
+  describe('updateSubscription', () => {
+    it('should dispatch an update subscription action', async() => {
+      const dispatchMock = jest.fn((a) => Promise.resolve(a));
+      const thunk = billing.updateSubscription({ code: 'test-code' });
+      await thunk(dispatchMock);
+      expect(_.flatten(dispatchMock.mock.calls)).toMatchSnapshot();
+    });
+
+    it('dispatches un update subscription action for aws marketplace account', async() => {
+      const dispatchMock = jest.fn((a) => Promise.resolve(a));
+      const thunk = billing.updateSubscription({ code: 'test-code', isAWSAccount: true });
+      await thunk(dispatchMock);
+      expect(_.flatten(dispatchMock.mock.calls)).toMatchSnapshot();
+    });
   });
 
   describe('addDedicatedIps', () => {

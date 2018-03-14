@@ -41,7 +41,7 @@ export class OnboardingPlanPage extends Component {
     }
 
     const promise = isAWSAccount
-      ? this.props.updateSubscription(values.planpicker.code, true)
+      ? this.props.updateSubscription({ code: values.planpicker.code, isAWSAccount })
       : billingCreate(values);
 
     return promise

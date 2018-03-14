@@ -82,7 +82,7 @@ describe('ChoosePlan page tests', () => {
       wrapper.setProps({ isAWSAccount: true });
       await instance.onSubmit({ planpicker: { isFree: false, code: 'abcd' }});
       expect(instance.props.billingCreate).not.toHaveBeenCalled();
-      expect(instance.props.updateSubscription).toHaveBeenCalledWith('abcd', true);
+      expect(instance.props.updateSubscription).toHaveBeenCalledWith({ code: 'abcd', isAWSAccount: true });
       expect(instance.props.history.push).toHaveBeenCalled();
       expect(instance.props.showAlert).toHaveBeenCalledWith({ type: 'success', message: 'Added your plan' });
     });

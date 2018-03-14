@@ -41,9 +41,9 @@ export class ChangePlan extends Component {
     // if it's aws account, it already has billing and if you use a saved CC
     let action;
     if (isAWSAccount) {
-      action = updateSubscription(values.planpicker.code, true);
+      action = updateSubscription({ code: values.planpicker.code, isAWSAccount });
     } else if (account.billing) {
-      action = this.state.useSavedCC ? updateSubscription(values.planpicker.code) : billingUpdate(values);
+      action = this.state.useSavedCC ? updateSubscription({ code: values.planpicker.code }) : billingUpdate(values);
     } else {
       action = billingCreate(values); // creates Zuora account
     }
