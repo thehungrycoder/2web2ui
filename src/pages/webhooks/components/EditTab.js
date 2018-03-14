@@ -44,9 +44,6 @@ export class EditTab extends Component {
       .then(() => {
         showAlert({ type: 'success', message: 'Update Successful' });
         getWebhook({ id: webhook.id, subaccount: webhook.subaccount });
-      })
-      .catch((err) => {
-        showAlert({ type: 'error', message: 'Update Failed', details: err.message });
       });
   }
 

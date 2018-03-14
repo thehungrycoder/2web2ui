@@ -1,6 +1,7 @@
 import { sparkpostLogin } from '../helpers/http';
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 import { getTfaStatusBeforeLoggedIn } from 'src/actions/tfa';
+import { showAlert } from 'src/actions/globalAlert';
 
 import authCookie from '../helpers/authCookie';
 import { initializeAccessControl } from './accessControl';
@@ -101,12 +102,17 @@ export function confirmPassword(username, password) {
         const { response = {}} = err;
         const { data = {}} = response;
         const { error_description: errorDescription } = data;
+
         dispatch({
           type: 'CONFIRM_PASSWORD_FAIL',
           payload: {
             errorDescription
           }
         });
+
+        // To match sparkpostApiRequest behavior
+        dispatch(showAlert({ type: 'error', message: errorDescription }));
+
         throw err;
       });
   };

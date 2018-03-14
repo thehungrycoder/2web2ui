@@ -54,5 +54,13 @@
   "plugins": [
     "lodash",
     "jest"
+  ],
+  "overrides": [
+    {
+      "files": ["*.test.js"],
+      "rules": {
+        "max-lines": "off"
+      }
+    }
   ]
 }

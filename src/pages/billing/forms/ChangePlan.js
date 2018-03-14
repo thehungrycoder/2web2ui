@@ -50,8 +50,7 @@ export class ChangePlan extends Component {
 
     return action
       .then(() => history.push('/account/billing'))
-      .then(() => showAlert({ type: 'success', message: 'Subscription Updated' }))
-      .catch((err) => showAlert({ type: 'error', message: 'Plan Update Failed', details: err.message }));
+      .then(() => showAlert({ type: 'success', message: 'Subscription Updated' }));
   }
 
   renderCCSection = () => {

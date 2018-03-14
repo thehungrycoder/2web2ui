@@ -2,7 +2,6 @@ import moment from 'moment';
 import config from 'src/config';
 import _ from 'lodash';
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
-import { showAlert } from './globalAlert';
 
 const { apiDateFormat, messageEvents } = config;
 
@@ -23,24 +22,15 @@ export function getMessageEvents(options = {}) {
     params.recipients = recipients.join(',');
   }
 
-  return (dispatch) => dispatch(
-    sparkpostApiRequest({
-      type: 'GET_MESSAGE_EVENTS',
-      meta: {
-        method: 'GET',
-        url: '/message-events',
-        params
-      }
-    }))
-    .catch((err) => {
-      dispatch(
-        showAlert({
-          type: 'error',
-          message: 'Error while loading message events',
-          details: err.message
-        })
-      );
-    });
+  return sparkpostApiRequest({
+    type: 'GET_MESSAGE_EVENTS',
+    meta: {
+      method: 'GET',
+      url: '/message-events',
+      params,
+      showErrorAlert: false
+    }
+  });
 }
 
 
@@ -90,7 +80,8 @@ export function getDocumentation() {
     type: 'GET_MESSAGE_EVENTS_DOCUMENTATION',
     meta: {
       method: 'GET',
-      url: '/message-events/events/documentation'
+      url: '/message-events/events/documentation',
+      showErrorAlert: false
     }
   });
 }

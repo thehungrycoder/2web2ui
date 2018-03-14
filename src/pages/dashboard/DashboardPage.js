@@ -33,11 +33,6 @@ export class DashboardPage extends Component {
       .then(() => showAlert({
         type: 'success',
         message: 'Please click the link in the email we sent you to verify your email.'
-      }))
-      .catch((err) => showAlert({
-        type: 'error',
-        message: 'Error sending verification email.',
-        details: err.message
       }));
   }
 

@@ -9,13 +9,10 @@ import CreateForm from './components/CreateForm';
 
 export class CreatePage extends Component {
   handleCreate = (values) => {
-    const { createDomain, history, showAlert } = this.props;
+    const { createDomain, history } = this.props;
 
     return createDomain(values)
-      .then(() => history.push(`/account/sending-domains/edit/${values.domain}`))
-      .catch((err) => {
-        showAlert({ type: 'error', message: 'Could not add domain', details: err.message });
-      });
+      .then(() => history.push(`/account/sending-domains/edit/${values.domain}`));
   }
 
   render() {

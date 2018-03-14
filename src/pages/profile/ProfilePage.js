@@ -16,7 +16,6 @@ import ErrorTracker from 'src/helpers/errorTracker';
 
 export class ProfilePage extends Component {
   updateProfile = (values) => {
-    const { showAlert } = this.props;
     const { username } = this.props.currentUser;
     const data = { first_name: values.firstName, last_name: values.lastName };
 
@@ -25,25 +24,16 @@ export class ProfilePage extends Component {
         // update success, re-fetch current user but ignore re-fetch errors
         () => this.props.getCurrentUser().catch((err) => {
           ErrorTracker.report('silent-ignore-refetch-current-user', err);
-        }),
-        // update failed, show alert
-        (err) => showAlert({
-          type: 'error',
-          message: 'Unable to update profile',
-          details: err.message
         })
       );
-
   }
 
   updatePassword = (values) => {
     const { username } = this.props.currentUser;
-    const { showAlert } = this.props;
     const { currentPassword, newPassword } = values;
 
     return this.props.confirmPassword(username, currentPassword)
-      .then(() => this.props.updateUser(username, { password: newPassword }))
-      .catch((err) => showAlert({ type: 'error', message: 'Unable to update password' }));
+      .then(() => this.props.updateUser(username, { password: newPassword }));
   }
 
   render() {

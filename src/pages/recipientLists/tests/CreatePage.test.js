@@ -10,7 +10,7 @@ describe('CreatePage', () => {
     props = {
       createRecipientList: jest.fn(() => Promise.resolve()),
       showAlert: jest.fn(),
-      histort: { push: jest.fn() }
+      history: { push: jest.fn() }
     };
   });
 
@@ -22,15 +22,5 @@ describe('CreatePage', () => {
     const wrapper = shallow(<CreatePage {...props} />);
     await wrapper.instance().createRecipientList();
     expect(props.createRecipientList).toHaveBeenCalled();
-  });
-
-  it('should show errors', async() => {
-    const errorProps = {
-      ...props,
-      createRecipientList: jest.fn(() => Promise.reject())
-    };
-    const wrapper = shallow(<CreatePage {...errorProps} />);
-    await wrapper.instance().createRecipientList();
-    expect(props.showAlert).toBeCalledWith(expect.objectContaining({ type: 'error' }));
   });
 });

@@ -57,11 +57,7 @@ export class EditPage extends Component {
           message: `Updated IP pool ${id}.`
         });
         history.push('/account/ip-pools');
-      })
-      .catch(() => showAlert({
-        type: 'error',
-        message: `Unable to update IP pool ${id}.`
-      }));
+      });
   };
 
   onDeletePool = () => {
@@ -73,11 +69,7 @@ export class EditPage extends Component {
         message: `Deleted IP pool ${id}.`
       });
       history.push('/account/ip-pools');
-    })
-      .catch(() => showAlert({
-        type: 'error',
-        message: `Unable to delete IP pool ${id}.`
-      }));
+    });
   };
 
   loadDependentData = () => {

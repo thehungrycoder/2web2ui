@@ -11,8 +11,6 @@ import AssignTrackingDomain from './components/AssignTrackingDomain';
 import EditBounce from './components/EditBounce';
 import SetupSending from './components/SetupSending';
 
-import { apiResponseToAlert } from 'src/helpers/apiMessages';
-
 import { DomainStatus } from './components/DomainStatus';
 
 const breadcrumbAction = {
@@ -54,21 +52,16 @@ export class EditPage extends Component {
           message: `Domain ${id} deleted.`
         });
         this.afterDelete();
-      }).catch((err) => {
-        showAlert(apiResponseToAlert(err, 'Could not delete domain'));
-        this.afterDelete();
       });
   };
 
   shareDomainChange = () => {
     const {
       domain: { id, shared_with_subaccounts, subaccount_id: subaccount },
-      updateDomain,
-      showAlert
+      updateDomain
     } = this.props;
-    return updateDomain({ id, subaccount, shared_with_subaccounts: !shared_with_subaccounts })
-      .catch((err) =>
-        showAlert(apiResponseToAlert(err, 'Could not update domain')));
+
+    return updateDomain({ id, subaccount, shared_with_subaccounts: !shared_with_subaccounts });
   }
 
   componentDidMount() {

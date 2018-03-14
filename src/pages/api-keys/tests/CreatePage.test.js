@@ -45,11 +45,3 @@ it('submits correctly', async() => {
   expect(wrapper.instance().props.showAlert).toHaveBeenCalledWith({ type: 'success', message: 'API key created' });
   expect(wrapper.instance().props.history.push).toHaveBeenCalledWith('/account/api-keys');
 });
-
-it('submits handles error', async() => {
-  wrapper.setProps({ createApiKey: jest.fn(() => Promise.reject({ message: 'error' })) });
-  await wrapper.instance().onSubmit('test');
-  expect(wrapper.instance().props.createApiKey).toHaveBeenCalledWith('test');
-  expect(wrapper.instance().props.showAlert).toHaveBeenCalledWith({ type: 'error', message: 'Could not create API key', details: 'error' });
-  expect(wrapper.instance().props.history.push).not.toHaveBeenCalledWith();
-});

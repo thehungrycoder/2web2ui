@@ -11,7 +11,8 @@ export function listRecipientLists({ force } = {}) {
         type: 'LIST_RECIPIENT_LISTS',
         meta: {
           method: 'GET',
-          url: '/recipient-lists'
+          url: '/recipient-lists',
+          showErrorAlert: false
         }
       })
     );
@@ -24,7 +25,8 @@ export function createRecipientList(data) {
     meta: {
       method: 'POST',
       url: '/recipient-lists',
-      data
+      data,
+      showErrorAlert: false
     }
   });
 }
@@ -37,7 +39,8 @@ export function updateRecipientList({ id, ...updateFields }, params) {
       url: `/recipient-lists/${id}`,
       data: updateFields,
       id,
-      params
+      params,
+      showErrorAlert: false
     }
   });
 }

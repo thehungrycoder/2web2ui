@@ -26,10 +26,7 @@ export class CreatePage extends Component {
         message: `Created IP pool ${values.name}.`
       });
       history.push('/account/ip-pools');
-    }).catch((err) => showAlert({
-      type: 'error',
-      message: 'Unable to create IP pool. Please try again!'
-    }));
+    });
   };
 
   render() {

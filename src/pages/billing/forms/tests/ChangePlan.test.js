@@ -116,14 +116,5 @@ describe('Form Container: Change Plan', () => {
       expect(instance.props.history.push).toHaveBeenCalledWith('/account/billing');
       expect(instance.props.showAlert).toHaveBeenCalledWith({ type: 'success', message: 'Subscription Updated' });
     });
-
-    it('should show error alert on failure', async() => {
-      wrapper.setProps({ billingCreate: jest.fn(() => Promise.reject(new Error('failure'))) });
-      await instance.onSubmit({ key: 'value' });
-      expect(instance.props.billingCreate).toHaveBeenCalled();
-      expect(instance.props.history.push).not.toHaveBeenCalled();
-      expect(instance.props.showAlert).toHaveBeenCalledWith({ type: 'error', message: 'Plan Update Failed', details: 'failure' });
-
-    });
   });
 });

@@ -1,4 +1,3 @@
-/* eslint-disable max-lines */
 import * as metricsActions from 'src/actions/metrics';
 import * as metricsHelpers from 'src/helpers/metrics';
 import * as dateHelpers from 'src/helpers/date';

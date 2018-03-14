@@ -102,16 +102,5 @@ describe('Component: SetupSending', () => {
       expect(props.showAlert).toHaveBeenCalledTimes(1);
       expect(props.showAlert).toHaveBeenCalledWith({ type: 'error', message: 'Unable to verify DKIM record of xyz.com. nope!' });
     });
-
-    it('alerts when request is errored', async() => {
-      const err = new Error('Request failed!');
-      props.verifyDkim.mockReturnValue(Promise.reject(err));
-      await instance.verifyDomain();
-      expect(props.verifyDkim).toHaveBeenCalledTimes(1);
-      expect(props.verifyDkim).toHaveBeenCalledWith({ id: 'xyz.com', subaccount: 999 });
-      expect(props.showAlert).toHaveBeenCalledTimes(1);
-      expect(props.showAlert).toHaveBeenCalledWith({ type: 'error', message: 'Unable to verify DKIM record of xyz.com. Request failed!' });
-    });
-
   });
 });

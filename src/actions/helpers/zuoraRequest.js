@@ -1,6 +1,7 @@
 import requestHelperFactory from './requestHelperFactory';
 import _ from 'lodash';
 import { zuora as zuoraAxios } from 'src/helpers/axiosInstances';
+import { showAlert } from 'src/actions/globalAlert';
 
 export default requestHelperFactory({
   request: zuoraAxios,
@@ -15,7 +16,12 @@ export default requestHelperFactory({
       });
 
       const err = new Error(message);
+      err.name = 'ZuoraApiError';
       err.response = response;
+
+      // auto alert all errors
+      dispatch(showAlert({ type: 'error', message }));
+
       throw err;
     }
 

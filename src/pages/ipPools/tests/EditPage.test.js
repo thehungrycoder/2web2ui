@@ -93,27 +93,6 @@ describe('IP Pools Edit Page', () => {
       expect(updatePoolSpy).not.toHaveBeenCalled();
       expect(wrapper.instance().props.history.push).toHaveBeenCalled();
     });
-
-    it('should show an error alert on failed pool update', async() => {
-      wrapper.setProps({ updateSendingIp: jest.fn(() => Promise.reject(new Error('failed pool creation'))) });
-      await wrapper.instance().onUpdatePool({ name: 'my_pool', '127_0_0_1': 'other_pool', '127_0_0_2': 'my-pool' });
-      expect(wrapper.instance().props.showAlert).toHaveBeenCalledWith({
-        type: 'error',
-        message: 'Unable to update IP pool my-pool.'
-      });
-      expect(wrapper.instance().props.history.push).not.toHaveBeenCalled();
-    });
-
-    it('should show an error alert on updatePool failure', async() => {
-      wrapper.setProps({ updatePool: jest.fn(() => Promise.reject(true)) });
-      await wrapper.instance().onUpdatePool({ name: 'my-pool', '127_0_0_1': 'other_pool', '127_0_0_2': 'default' });
-      expect(wrapper.instance().props.showAlert).toHaveBeenCalledWith({
-        type: 'error',
-        message: 'Unable to update IP pool my-pool.'
-      });
-      expect(wrapper.instance().props.history.push).not.toHaveBeenCalled();
-
-    });
   });
 
   describe('delete modal tests', () => {
@@ -130,16 +109,6 @@ describe('IP Pools Edit Page', () => {
         message: 'Deleted IP pool my-pool.'
       });
       expect(wrapper.instance().props.history.push).toHaveBeenCalled();
-    });
-
-    it('should show error alert on failed delete pool', async() => {
-      wrapper.setProps({ deletePool: jest.fn(() => Promise.reject(true)) });
-      await wrapper.instance().onDeletePool();
-      expect(wrapper.instance().props.showAlert).toHaveBeenCalledWith({
-        type: 'error',
-        message: 'Unable to delete IP pool my-pool.'
-      });
-      expect(wrapper.instance().props.history.push).not.toHaveBeenCalled();
     });
   });
 });

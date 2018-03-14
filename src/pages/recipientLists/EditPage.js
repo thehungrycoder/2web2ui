@@ -39,10 +39,7 @@ export class EditPage extends Component {
         message: 'Deleted recipient list'
       });
       history.push('/lists/recipient-lists');
-    }).catch((err) => showAlert({
-      type: 'error',
-      message: 'Delete failed'
-    }));
+    });
   };
 
   updateRecipientList = (values) => {
@@ -54,24 +51,17 @@ export class EditPage extends Component {
         message: 'Updated recipient list'
       });
       history.push('/lists/recipient-lists');
-    }).catch((err) => showAlert({
-      type: 'error',
-      message: 'Update failed'
-    }));
+    });
   };
 
   componentDidMount() {
     const {
       match: { params: { id }},
       getRecipientList,
-      showAlert,
       history
     } = this.props;
+
     return getRecipientList(id).catch((err) => {
-      showAlert({
-        type: 'error',
-        message: 'Could not find recipient list'
-      });
       history.push('/lists/recipient-lists');
     });
   }

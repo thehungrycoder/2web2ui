@@ -18,9 +18,7 @@ export class EditTab extends Component {
     return editSubaccount(subaccount.id, { name, status, ip_pool: ipPool }).then(() => {
       showAlert({ type: 'success', message: 'Updated subaccount' });
       getSubaccount(subaccount.id);
-    }).catch((err) =>
-      showAlert({ type: 'error', message: 'Error updating subaccount', details: err.message })
-    );
+    });
   };
 
   render() {

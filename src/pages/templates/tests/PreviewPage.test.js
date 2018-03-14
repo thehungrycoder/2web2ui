@@ -130,14 +130,12 @@ it('successfully sends email and shows global alert', async() => {
 
 it('failed to send email and shows global alert', async() => {
   const props = {
-    sendPreview: jest.fn(() => Promise.reject(new Error('Oh no!'))),
-    showAlert: jest.fn()
+    sendPreview: jest.fn(() => Promise.reject(new Error('Oh no!')))
   };
   const wrapper = await loadPreviewPage(props);
 
   wrapper.setState({ to: 'recipient@example.com' });
   await wrapper.instance().onSend(); // unable to .find primary action button with shallow
 
-  expect(props.showAlert).toHaveBeenCalledWith({ message: 'Oh no!', type: 'error' });
   expect(wrapper.state()).toMatchSnapshot();
 });

@@ -33,7 +33,7 @@ export default class FileFieldWrapper extends Component {
 
     return (
       <fieldset className={styles.Field}>
-        <Label id={input.id}>{label}{required && '*'}</Label>
+        <Label id={input.id}>{label}{required && ' *'}</Label>
         <div className={styles.InputWrapper}>
           <Dropzone
             accept={`.${fileType}`}

@@ -4,7 +4,7 @@ exports[`FileFieldWrapper renders disabled file input 1`] = `
 <fieldset>
   <Label>
     Test File Input
-    *
+     *
   </Label>
   <div>
     <Dropzone
@@ -39,7 +39,7 @@ exports[`FileFieldWrapper renders file input 1`] = `
 <fieldset>
   <Label>
     Test File Input
-    *
+     *
   </Label>
   <div>
     <Dropzone
@@ -73,7 +73,7 @@ exports[`FileFieldWrapper renders file input with error message 1`] = `
 <fieldset>
   <Label>
     Test File Input
-    *
+     *
   </Label>
   <div>
     <Dropzone
@@ -110,7 +110,7 @@ exports[`FileFieldWrapper renders file input with help message 1`] = `
 <fieldset>
   <Label>
     Test File Input
-    *
+     *
   </Label>
   <div>
     <Dropzone
@@ -147,7 +147,7 @@ exports[`FileFieldWrapper renders file input with selected filename 1`] = `
 <fieldset>
   <Label>
     Test File Input
-    *
+     *
   </Label>
   <div>
     <Dropzone
