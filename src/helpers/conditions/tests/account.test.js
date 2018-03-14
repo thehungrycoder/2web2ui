@@ -97,14 +97,6 @@ describe('Condition: hasStatus', () => {
 
 });
 
-// export const hasStatus = (status) => ({ account }) => account.status === status;
-// export const hasStatusReasonCategory = (category) => ({ account }) => account.status_reason_category === category;
-// export const isSuspendedForBilling = all(
-//   hasStatus('suspended'),
-//   hasStatusReasonCategory('100.01')
-// );
-// export const isSelfServeBilling = ({ account }) => _.get(account, 'subscription.self_serve', false);
-
 describe('Conditon: hasStatusReasonCategory', () => {
 
   it('should return a function that returns whether the account has the given status reason category', () => {

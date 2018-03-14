@@ -1,5 +1,6 @@
 import requestHelperFactory from 'src/actions/helpers/requestHelperFactory';
 import { refresh, logout } from 'src/actions/auth';
+import { fetch as fetchAccount } from 'src/actions/account';
 import { showAlert, showSuspensionAlert } from 'src/actions/globalAlert';
 import { useRefreshToken } from 'src/helpers/http';
 import { resolveOnCondition } from 'src/helpers/promise';
@@ -97,7 +98,7 @@ const sparkpostRequest = requestHelperFactory({
     // if the account is suspended, a 403 should not log the user out
     if (response.status === 403 && account.status === 'suspended') {
       dispatch(showSuspensionAlert());
-      // TODO: dispatch(getAccount());
+      dispatch(fetchAccount());
     }
 
     if (response.status >= 500) {

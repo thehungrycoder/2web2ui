@@ -44,8 +44,6 @@ const props = {
 
 const selectedProps = { ...props, input: { ...props.input, value: selected }};
 
-// it('should not fail without any tests until we fix this', () => expect(1).toEqual(1));
-
 describe('Plan Picker: ', () => {
 
   it('renders correctly', () => {
