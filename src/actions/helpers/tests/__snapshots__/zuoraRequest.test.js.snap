@@ -23,6 +23,13 @@ Array [
     },
     "type": "ZUORA_REQUEST_FAIL",
   },
+  Object {
+    "payload": Object {
+      "message": "The credit card is bad and wrong",
+      "type": "error",
+    },
+    "type": "SHOW_GLOBAL_ALERT",
+  },
 ]
 `;
 
