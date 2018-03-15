@@ -2,12 +2,11 @@ import moment from 'moment';
 import config from 'src/config';
 import _ from 'lodash';
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
-import { showAlert } from './globalAlert';
 
 const { apiDateFormat, messageEvents } = config;
 
 export function getMessageEvents(options = {}) {
-  const { dateOptions, recipients } = options;
+  const { dateOptions, ...rest } = options;
   const { from, to } = dateOptions;
   const params = {};
 
@@ -19,28 +18,21 @@ export function getMessageEvents(options = {}) {
     params.to = moment(to).utc().format(apiDateFormat);
   }
 
-  if (!_.isEmpty(recipients)) {
-    params.recipients = recipients.join(',');
-  }
+  _.forEach(rest, (value, key) => {
+    if (!_.isEmpty(value)) {
+      params[key] = value.join(',');
+    }
+  });
 
-  return (dispatch) => dispatch(
-    sparkpostApiRequest({
-      type: 'GET_MESSAGE_EVENTS',
-      meta: {
-        method: 'GET',
-        url: '/message-events',
-        params
-      }
-    }))
-    .catch((err) => {
-      dispatch(
-        showAlert({
-          type: 'error',
-          message: 'Error while loading message events',
-          details: err.message
-        })
-      );
-    });
+  return sparkpostApiRequest({
+    type: 'GET_MESSAGE_EVENTS',
+    meta: {
+      method: 'GET',
+      url: '/message-events',
+      params,
+      showErrorAlert: false
+    }
+  });
 }
 
 
@@ -62,10 +54,31 @@ export function refreshMessageEventsDateRange(dateOptions) {
   };
 }
 
+/**
+ * Overwrites filters options
+ */
 export function updateMessageEventsSearchOptions(options) {
+  const updatedOptions = _.mapValues(options, (arr) => _.uniq(arr)); // Dedupes filter options
   return {
     type: 'REFRESH_MESSAGE_EVENTS_SEARCH_OPTIONS',
-    payload: options
+    payload: updatedOptions
+  };
+}
+
+/**
+ * Appends additional filter options to existing options
+ */
+export function addFilters(filters) {
+  return {
+    type: 'ADD_MESSAGE_EVENTS_FILTERS',
+    payload: filters
+  };
+}
+
+export function removeFilter(filter) {
+  return {
+    type: 'REMOVE_MESSAGE_EVENTS_FILTER',
+    payload: filter
   };
 }
 
@@ -90,7 +103,8 @@ export function getDocumentation() {
     type: 'GET_MESSAGE_EVENTS_DOCUMENTATION',
     meta: {
       method: 'GET',
-      url: '/message-events/events/documentation'
+      url: '/message-events/events/documentation',
+      showErrorAlert: false
     }
   });
 }

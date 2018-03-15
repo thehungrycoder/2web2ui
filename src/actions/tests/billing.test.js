@@ -87,4 +87,42 @@ describe('Action Creator: Billing', () => {
     expect(_.flatten(dispatchMock.mock.calls)).toMatchSnapshot();
   });
 
+  describe('updateSubscription', () => {
+    it('should dispatch an update subscription action', async() => {
+      const dispatchMock = jest.fn((a) => Promise.resolve(a));
+      const thunk = billing.updateSubscription({ code: 'test-code' });
+      await thunk(dispatchMock);
+      expect(_.flatten(dispatchMock.mock.calls)).toMatchSnapshot();
+    });
+
+    it('dispatches un update subscription action for aws marketplace account', async() => {
+      const dispatchMock = jest.fn((a) => Promise.resolve(a));
+      const thunk = billing.updateSubscription({ code: 'test-code', aws: true });
+      await thunk(dispatchMock);
+      expect(_.flatten(dispatchMock.mock.calls)).toMatchSnapshot();
+    });
+  });
+
+  describe('addDedicatedIps', () => {
+    let dispatchMock;
+
+    beforeEach(() => {
+      dispatchMock = jest.fn(() => Promise.resolve());
+    });
+
+    it('dispatches with correct data for "normal" account', async() => {
+      const thunk = billing.addDedicatedIps({ ip_pool: 'abcd', isAwsAccount: false, quantity: 1 });
+
+      await thunk(dispatchMock);
+      expect(_.flatten(dispatchMock.mock.calls)).toMatchSnapshot();
+    });
+
+    it('dispatches with correct data for aws account', async() => {
+      const thunk = billing.addDedicatedIps({ ip_pool: 'abcd', isAwsAccount: true, quantity: 1 });
+
+      await thunk(dispatchMock);
+      expect(_.flatten(dispatchMock.mock.calls)).toMatchSnapshot();
+    });
+  });
+
 });

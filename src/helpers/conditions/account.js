@@ -13,4 +13,6 @@ export const isSuspendedForBilling = all(
   hasStatus('suspended'),
   hasStatusReasonCategory('100.01')
 );
-export const isSelfServeBilling = ({ account }) => _.get(account, 'subscription.self_serve', false);
+export const subscriptionSelfServeIsTrue = ({ account }) => _.get(account, 'subscription.self_serve', false);
+export const isAws = ({ account }) => _.get(account, 'subscription.type') === 'aws';
+export const isSelfServeBilling = any(subscriptionSelfServeIsTrue, isAws);

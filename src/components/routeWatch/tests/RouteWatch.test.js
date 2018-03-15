@@ -21,13 +21,18 @@ describe('RouteWatch', () => {
     wrapper = shallow(<RouteWatch {...props} />);
   });
 
-  test('renders null', () => {
+  test('renders Helmet with script', () => {
     expect(wrapper).toMatchSnapshot();
+  });
+
+  test('sets up gtag config on mount', () => {
+    expect(window.gtag).toMatchSnapshot();
   });
 
   test('route change', () => {
     const pathname = 'yellow.brick';
     wrapper.setProps({ location: { pathname }});
+    expect(gtag).toHaveBeenCalledTimes(2);
     expect(gtag).toHaveBeenCalledWith(
       'config',
       config.gaTag,
@@ -37,13 +42,13 @@ describe('RouteWatch', () => {
 
   test('no change', () => {
     wrapper.setProps({ ...props });
-    expect(gtag).not.toHaveBeenCalled();
+    expect(gtag).toHaveBeenCalledTimes(1);
   });
 
   test('no config', () => {
     window.gtag = undefined;
     const pathname = 'yellow.brick';
     wrapper.setProps({ location: { pathname }});
-    expect(gtag).not.toHaveBeenCalled();
+    expect(gtag).toHaveBeenCalledTimes(1);
   });
 });

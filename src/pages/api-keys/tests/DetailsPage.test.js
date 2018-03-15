@@ -58,13 +58,6 @@ describe('delete', () => {
     expect(wrapper.instance().props.showAlert).toHaveBeenCalledWith({ message: 'API key deleted', type: 'success' });
     expect(wrapper.instance().props.history.push).toHaveBeenCalledWith('/account/api-keys');
   });
-
-  it('handles failure correctly', async() => {
-    wrapper.setProps({ deleteApiKey: jest.fn(() => Promise.reject({ message: 'error' })) });
-    await wrapper.instance().handleDelete();
-    expect(wrapper.instance().props.deleteApiKey).toHaveBeenCalled();
-    expect(wrapper.instance().props.showAlert).toHaveBeenCalledWith({ details: 'error', message: 'Could not delete API key', type: 'error' });
-  });
 });
 
 describe('update', () => {
@@ -72,12 +65,5 @@ describe('update', () => {
     await wrapper.instance().onSubmit({ subaccount: 101, key: 'test' });
     expect(wrapper.instance().props.updateApiKey).toHaveBeenCalledWith({ id: 'api-id', key: 'test', subaccount: 101 });
     expect(wrapper.instance().props.showAlert).toHaveBeenCalledWith({ message: 'API key updated', type: 'success' });
-  });
-
-  it('handles update failure correctly', async() => {
-    wrapper.setProps({ updateApiKey: jest.fn(() => Promise.reject({ message: 'error' })) });
-    await wrapper.instance().onSubmit({ subaccount: 101, key: 'test' });
-    expect(wrapper.instance().props.updateApiKey).toHaveBeenCalledWith({ id: 'api-id', key: 'test', subaccount: 101 });
-    expect(wrapper.instance().props.showAlert).toHaveBeenCalledWith({ details: 'error', message: 'Could not update API key', type: 'error' });
   });
 });

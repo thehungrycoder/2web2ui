@@ -29,10 +29,6 @@ export function deleteUser(username) {
     .then(() => dispatch(showAlert({
       type: 'success',
       message: `Deleted ${username}`
-    })))
-    .catch(() => dispatch(showAlert({
-      type: 'error',
-      message: `Unable to delete ${username}.`
     })));
 }
 
@@ -41,7 +37,8 @@ export function listUsers() {
     type: 'LIST_USERS',
     meta: {
       method: 'GET',
-      url: '/users'
+      url: '/users',
+      showErrorAlert: false
     }
   });
 }
@@ -60,11 +57,7 @@ export function updateUser(username, data) {
   };
 
   return (dispatch) => dispatch(sparkpostApiRequest(action))
-    .then(({ message }) => dispatch(showAlert({ type: 'success', message })))
-    .catch(() => dispatch(showAlert({
-      type: 'error',
-      message: `Unable to update role for ${username}.`
-    })));
+    .then(({ message }) => dispatch(showAlert({ type: 'success', message })));
 }
 
 export function checkInviteToken(token) {
@@ -94,15 +87,5 @@ export function registerUser(token, data) {
     .then(() => dispatch(showAlert({
       type: 'success',
       message: 'Welcome to SparkPost'
-    })))
-    .catch((error) => {
-      dispatch(showAlert({
-        type: 'error',
-        message: 'Unable to register user.',
-        details: error.message
-      }));
-
-      throw error;
-    });
+    })));
 }
-

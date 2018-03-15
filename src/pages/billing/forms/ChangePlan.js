@@ -12,6 +12,7 @@ import PaymentForm from './fields/PaymentForm';
 import BillingAddressForm from './fields/BillingAddressForm';
 import Confirmation from '../components/Confirmation';
 import CardSummary from '../components/CardSummary';
+import { isAws } from 'src/helpers/conditions/account';
 
 const FORMNAME = 'changePlan';
 
@@ -34,25 +35,24 @@ export class ChangePlan extends Component {
 
   onSubmit = (values) => {
     const { account, updateSubscription, billingCreate, billingUpdate, showAlert, history } = this.props;
-
     // decides which action to be taken based on
-    // if it already has billing and if you use a saved CC
-    const action = account.billing
-      ? (
-        this.state.useSavedCC
-          ? updateSubscription(values.planpicker.code)
-          : billingUpdate(values))
-      : billingCreate(values); // creates Zuora account
-
+    // if it's aws account, it already has billing and if you use a saved CC
+    let action;
+    if (isAws({ account })) {
+      action = updateSubscription({ code: values.planpicker.code, aws: true });
+    } else if (account.billing) {
+      action = this.state.useSavedCC ? updateSubscription({ code: values.planpicker.code }) : billingUpdate(values);
+    } else {
+      action = billingCreate(values); // creates Zuora account
+    }
 
     return action
       .then(() => history.push('/account/billing'))
-      .then(() => showAlert({ type: 'success', message: 'Subscription Updated' }))
-      .catch((err) => showAlert({ type: 'error', message: 'Plan Update Failed', details: err.message }));
+      .then(() => showAlert({ type: 'success', message: 'Subscription Updated' }));
   }
 
   renderCCSection = () => {
-    const { billing } = this.props.account;
+    const { account } = this.props;
 
     if (this.props.selectedPlan && this.props.selectedPlan.isFree) {
       return null; // CC not required on free plans
@@ -61,7 +61,7 @@ export class ChangePlan extends Component {
     if (this.state.useSavedCC) {
       return (
         <Panel title='Pay With Saved Payment Method' actions={[{ content: 'Use Another Credit Card', onClick: this.handleCardToggle }]}>
-          <Panel.Section><CardSummary billing={billing} /></Panel.Section>
+          <Panel.Section><CardSummary billing={account.billing} /></Panel.Section>
         </Panel>
       );
     }
@@ -88,32 +88,30 @@ export class ChangePlan extends Component {
   }
 
   render() {
+
     const { account, submitting, pristine, currentPlan, selectedPlan, plans } = this.props;
+    const isAwsAccount = isAws({ account });
+    const billingEnabled = account.subscription.self_serve || isAwsAccount;
 
     // Manually billed accounts can submit without changing plan
-    const disableSubmit = submitting || (account.subscription.self_serve && (pristine || currentPlan.code === selectedPlan.code));
-
-    // Strip free plans for manually billed accounts looking to convert
-    const availablePlans = !account.subscription.self_serve
-      ? plans.filter((plan) => !plan.isFree)
-      : plans;
+    const disableSubmit = submitting || (billingEnabled && (pristine || currentPlan.code === selectedPlan.code));
 
     return (
       <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
         <Grid>
           <Grid.Column>
             <Panel title='Select A Plan'>
-              { availablePlans.length &&
-                <PlanPicker disabled={this.props.submitting} plans={availablePlans} />
+              { plans.length &&
+                <PlanPicker disabled={submitting} plans={plans} />
               }
             </Panel>
-            { this.renderCCSection() }
+            {!isAwsAccount && this.renderCCSection()}
           </Grid.Column>
           <Grid.Column xs={12} md={5}>
             <Confirmation
-              current={this.props.currentPlan}
-              selected={this.props.selectedPlan}
-              selfServe={this.props.account.subscription.self_serve}
+              current={currentPlan}
+              selected={selectedPlan}
+              billingEnabled={billingEnabled}
               disableSubmit={disableSubmit} />
           </Grid.Column>
         </Grid>

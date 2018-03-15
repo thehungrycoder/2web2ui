@@ -1,6 +1,9 @@
 import React from 'react';
 import { ChangePlan } from '../ChangePlan';
 import { shallow } from 'enzyme';
+import * as accountConditions from 'src/helpers/conditions/account';
+
+jest.mock('src/helpers/conditions/account');
 
 describe('Form Container: Change Plan', () => {
   let wrapper;
@@ -30,10 +33,12 @@ describe('Form Container: Change Plan', () => {
     showAlert: jest.fn(),
     billingCreate: jest.fn(() => Promise.resolve()),
     billingUpdate: jest.fn(() => Promise.resolve()),
-    updateSubscription: jest.fn(() => Promise.resolve())
+    updateSubscription: jest.fn(() => Promise.resolve()),
+    isAWSAccount: false
   };
 
   beforeEach(() => {
+    accountConditions.isAws = jest.fn(() => false);
     wrapper = shallow(<ChangePlan {...props} />);
     instance = wrapper.instance();
     submitSpy = jest.spyOn(instance.props, 'handleSubmit');
@@ -45,11 +50,6 @@ describe('Form Container: Change Plan', () => {
 
   it('should not show plans', () => {
     wrapper.setProps({ plans: []});
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('should not show free plans when not self serve', () => {
-    wrapper.setProps({ account: { subscription: { self_serve: false }}});
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -89,6 +89,12 @@ describe('Form Container: Change Plan', () => {
     expect(submitSpy).toHaveBeenCalled();
   });
 
+  it('should not render cc section for aws account', () => {
+    accountConditions.isAws.mockImplementation(() => true);
+    wrapper.setProps({ account: { subscription: { self_serve: false }}});
+    expect(wrapper).toMatchSnapshot();
+  });
+
   describe('onSubmit tests', () => {
     it('should call bilingCreate when no billing exists', async() => {
       await instance.onSubmit({ key: 'value' });
@@ -107,23 +113,20 @@ describe('Form Container: Change Plan', () => {
 
     });
 
+    it('should update subscription for aws account', async() => {
+      accountConditions.isAws.mockImplementation(() => true);
+      await instance.onSubmit({ planpicker: { code: 'free' }});
+      expect(instance.props.updateSubscription).toHaveBeenCalledWith({ code: 'free', aws: true });
+    });
+
     it('should update billing when billing exists but enter new cc info', async() => {
       wrapper.setState({ useSavedCC: true });
       wrapper.setProps({ account: { billing: true, subscription: { self_serve: true }}});
       await instance.onSubmit({ planpicker: { code: 'free' }});
-      expect(instance.props.updateSubscription).toHaveBeenCalledWith('free');
+      expect(instance.props.updateSubscription).toHaveBeenCalledWith({ code: 'free' });
       expect(instance.props.billingUpdate).not.toHaveBeenCalled();
       expect(instance.props.history.push).toHaveBeenCalledWith('/account/billing');
       expect(instance.props.showAlert).toHaveBeenCalledWith({ type: 'success', message: 'Subscription Updated' });
-    });
-
-    it('should show error alert on failure', async() => {
-      wrapper.setProps({ billingCreate: jest.fn(() => Promise.reject(new Error('failure'))) });
-      await instance.onSubmit({ key: 'value' });
-      expect(instance.props.billingCreate).toHaveBeenCalled();
-      expect(instance.props.history.push).not.toHaveBeenCalled();
-      expect(instance.props.showAlert).toHaveBeenCalledWith({ type: 'error', message: 'Plan Update Failed', details: 'failure' });
-
     });
   });
 });

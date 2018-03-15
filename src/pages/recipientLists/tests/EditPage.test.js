@@ -81,22 +81,10 @@ describe('EditPage', () => {
     expect(props.history.push).toHaveBeenCalled();
   });
 
-  it('should show errors while deleting', async() => {
-    props.deleteRecipientList.mockImplementationOnce(() => Promise.reject());
-    await wrapper.instance().deleteRecipientList();
-    expect(props.showAlert).toHaveBeenCalledWith(expect.objectContaining({ type: 'error' }));
-  });
-
   it('should update a recipient list', async() => {
     await wrapper.instance().updateRecipientList();
     expect(props.updateRecipientList).toHaveBeenCalled();
     expect(wrapper).toMatchSnapshot();
-  });
-
-  it('should show errors while updating', async() => {
-    props.updateRecipientList.mockImplementationOnce(() => Promise.reject());
-    await wrapper.instance().updateRecipientList();
-    expect(props.showAlert).toHaveBeenCalledWith(expect.objectContaining({ type: 'error' }));
   });
 
   it('should redirect after update', async() => {
@@ -104,4 +92,3 @@ describe('EditPage', () => {
     expect(props.history.push).toHaveBeenCalled();
   });
 });
-

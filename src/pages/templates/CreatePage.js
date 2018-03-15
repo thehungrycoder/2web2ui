@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import _ from 'lodash';
 
 // Components
 import Form from './components/containers/Form.container';
@@ -18,14 +17,10 @@ export default class CreatePage extends Component {
   }
 
   handleCreate = (values) => {
-    const { create, showAlert, id, history, subaccountId } = this.props;
+    const { create, id, history, subaccountId } = this.props;
 
     return create(values)
-      .then(() => history.push(`/templates/edit/${id}${setSubaccountQuery(subaccountId)}`))
-      .catch((err) => {
-        const details = _.get(err, 'response.data.errors[0].description') || err.message;
-        return showAlert({ type: 'error', message: 'Could not create template', details: details });
-      });
+      .then(() => history.push(`/templates/edit/${id}${setSubaccountQuery(subaccountId)}`));
   }
 
   render() {

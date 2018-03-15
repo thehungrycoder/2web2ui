@@ -1,4 +1,4 @@
-/* eslint max-lines: ["warn", { "max": 215, "skipComments": true }] */
+/* eslint max-lines: ["warn", { "max": 220, "skipComments": true }] */
 // @see discussion for custom lint rule, https://github.com/SparkPost/2web2ui/issues/230
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 import localforage from 'localforage';
@@ -11,7 +11,8 @@ export function listTemplates() {
     type: 'LIST_TEMPLATES',
     meta: {
       method: 'GET',
-      url: '/templates'
+      url: '/templates',
+      showErrorAlert: false
     }
   });
 }
@@ -25,7 +26,8 @@ export function getDraft(id, subaccountId) {
       params: {
         draft: true
       },
-      headers: setSubaccountHeader(subaccountId)
+      headers: setSubaccountHeader(subaccountId),
+      showErrorAlert: false
     }
   });
 }
@@ -51,7 +53,8 @@ export function getPreview({ content, id, mode, subaccountId, substitution_data 
       method: 'POST',
       url: '/utils/content-previewer',
       data: { content, substitution_data },
-      headers: setSubaccountHeader(subaccountId)
+      headers: setSubaccountHeader(subaccountId),
+      showErrorAlert: false
     }
   });
 }
@@ -63,7 +66,8 @@ export function getPublished(id, subaccountId) {
       method: 'GET',
       url: `/templates/${id}`,
       params: { draft: false },
-      headers: setSubaccountHeader(subaccountId)
+      headers: setSubaccountHeader(subaccountId),
+      showErrorAlert: false
     }
   });
 }

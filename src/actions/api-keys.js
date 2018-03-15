@@ -74,7 +74,8 @@ export function listApiKeys(subaccount) {
     meta: {
       method: 'GET',
       url: '/api-keys',
-      headers
+      headers,
+      showErrorAlert: false
     }
   });
 }

@@ -22,25 +22,21 @@ export class SetupSending extends Component {
     open: false
   };
 
-  showErrorAlert = ({ message }) => {
-    const { domain: { id }, showAlert } = this.props;
-
-    showAlert({ type: 'error', message: `Unable to verify DKIM record of ${id}. ${message}` });
-  };
-
   verifyDomain = () => {
     const { domain: { id, subaccount_id: subaccount }, verifyDkim, showAlert } = this.props;
 
     return verifyDkim({ id, subaccount })
       .then((results) => {
         const readyFor = resolveReadyFor(results);
+
         if (readyFor.dkim) {
           showAlert({ type: 'success', message: `You have successfully verified DKIM record of ${id}` });
         } else {
-          this.showErrorAlert({ message: results.dns.dkim_error });
+          showAlert({
+            type: 'error',
+            message: `Unable to verify DKIM record of ${id}. ${results.dns.dkim_error}`
+          });
         }
-      }).catch((err) => {
-        this.showErrorAlert({ message: err.message });
       });
   }
 

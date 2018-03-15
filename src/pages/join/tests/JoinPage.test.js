@@ -15,6 +15,12 @@ jest.mock('js-cookie');
 jest.mock('src/config', () => ({
   zuora: {}, //axiosInstance throws without this
   authentication: { cookie: {}}, //authCookie throws without this
+  heroku: {
+    cookieName: 'my-cookie'
+  },
+  website: {
+    domain: ''
+  },
   gaTag: 'ga101',
   links: {
     submitTicket: 'https://support.sparkpost.com/customer/portal/emails/new'
@@ -32,6 +38,7 @@ jest.mock('src/helpers/googleAnalytics');
 describe('JoinPage', () => {
   beforeEach(() => {
     props = {
+      params: {},
       account: {
         createError: null
       },
@@ -40,7 +47,8 @@ describe('JoinPage', () => {
       authenticate: jest.fn(() => Promise.resolve()),
       history: {
         push: jest.fn()
-      }
+      },
+      isAWSsignUp: false
     };
     formValues = {
       first_name: 'foo',
@@ -69,7 +77,6 @@ describe('JoinPage', () => {
     jest.resetAllMocks();
   });
 
-
   describe('render', () => {
     it('renders correctly', () => {
       expect(wrapper).toMatchSnapshot();
@@ -77,6 +84,11 @@ describe('JoinPage', () => {
     it('renders errors', () => {
       instance.handleSignupFailure = jest.fn().mockReturnValue('Some error occurred');
       wrapper.setProps({ account: { createError: {}}}); //just to make it truthy
+      expect(wrapper).toMatchSnapshot();
+    });
+
+    it('renders aws logo when signup from aws', () => {
+      wrapper.setProps({ isAWSsignUp: true });
       expect(wrapper).toMatchSnapshot();
     });
   });
@@ -121,7 +133,14 @@ describe('JoinPage', () => {
 
     it('redirects to correct url upon auth', async() => {
       await instance.registerSubmit(formValues);
-      expect(props.history.push).toHaveBeenCalledWith(AFTER_JOIN_REDIRECT_ROUTE);
+      expect(props.history.push).toHaveBeenCalledWith(AFTER_JOIN_REDIRECT_ROUTE, { plan: undefined });
+    });
+
+    it('Preserves plan for later onboarding phases', async() => {
+      const plan = 'a-man';
+      wrapper.setProps({ params: { plan }});
+      await instance.registerSubmit(formValues);
+      expect(props.history.push).toHaveBeenCalledWith(AFTER_JOIN_REDIRECT_ROUTE, { plan });
     });
 
     it('does not swallow exceptions', async() => {

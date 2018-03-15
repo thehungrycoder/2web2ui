@@ -13,7 +13,6 @@ describe('AutoKeyGenerator', () => {
   beforeEach(() => {
     const props = {
       createApiKey: jest.fn(() => Promise.resolve()),
-      showAlert: jest.fn(),
       hideNewApiKey: jest.fn(),
       history: {
         push: jest.fn()
@@ -40,7 +39,6 @@ describe('AutoKeyGenerator', () => {
 
     const props = wrapper.instance().props;
     expect(createFailure).toHaveBeenCalledWith(keyDefaults);
-    expect(props.showAlert).toHaveBeenCalledWith({ type: 'error', message: 'Sorry, something went wrong', details: 'error' });
     expect(props.history.push).toHaveBeenCalledWith('/dashboard');
   });
 

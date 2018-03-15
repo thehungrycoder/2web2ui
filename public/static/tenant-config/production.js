@@ -14,5 +14,8 @@ window.SP.productionConfig = {
   smtpAuth: {
     host: 'smtp.sparkmail.com',
     alternativePort: 2525
+  },
+  website: {
+    domain: 'sparkpost.test'
   }
 };

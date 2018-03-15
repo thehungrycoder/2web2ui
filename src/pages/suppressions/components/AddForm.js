@@ -31,9 +31,6 @@ export class AddForm extends Component {
       .then(() => {
         showAlert({ message: 'Successfully updated your suppression list', type: 'success' });
         reset(FORM_NAME);
-      })
-      .catch(() => {
-        // do nothing
       });
   }
 

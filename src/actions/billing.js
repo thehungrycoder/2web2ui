@@ -19,12 +19,14 @@ export function syncSubscription() {
  * Updates plan
  * @param {string} code
  */
-export function updateSubscription(code) {
+export function updateSubscription({ code, aws = false }) {
+  const url = `/account/${aws ? 'aws-marketplace/subscription' : 'subscription'}`;
+
   const action = sparkpostApiRequest({
     type: 'UPDATE_SUBSCRIPTION',
     meta: {
       method: 'PUT',
-      url: '/account/subscription',
+      url: url,
       data: { code }
     }
   });
@@ -78,7 +80,7 @@ export function updateCreditCard({ data, token, signature }) {
 
 export function addDedicatedIps({ ip_pool, isAwsAccount, quantity }) {
   const url = isAwsAccount
-    ? '/account/integrations/aws-marketplace/add-ons/dedicated_ips'
+    ? '/account/aws-marketplace/add-ons/dedicated_ips'
     : '/account/add-ons/dedicated_ips';
   const action = {
     type: 'ADD_DEDICATED_IPS',
@@ -156,7 +158,7 @@ export function billingUpdate(values) {
       // change plan via our API if plan is included
       .then(() => {
         if (values.planpicker) {
-          dispatch(updateSubscription(values.planpicker.code));
+          dispatch(updateSubscription({ code: values.planpicker.code }));
         }
       })
 

@@ -36,6 +36,9 @@ const config = {
     has_signup: false
   },
   gaTag: 'no-default-set',
+  heroku: {
+    cookieName: 'heroku-nav-data'
+  },
   maxUploadSizeBytes: 20000000,
   metricsPrecisionMap: [
     { time: 60, value: '1min', format: 'ha' },
@@ -54,7 +57,8 @@ const config = {
   },
   sendingIps: {
     maxPerAccount: 4,
-    pricePerIp: 20.00
+    pricePerIp: 20.00,
+    awsPricePerIp: 0.028
   },
   sentry: {
     projectId: 232588,
@@ -75,6 +79,9 @@ const config = {
     }
   },
   tenant: 'local',
+  website: {
+    domain: 'sparkpost.com'
+  },
   zuora: {
     baseUrl: 'https://rest.apisandbox.zuora.com/v1',
     timeout: 15000

@@ -1,5 +1,63 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Action Creator: MessageEvents getMessageEvents should dispatch get action with from/to/recipients 1`] = `
+Object {
+  "meta": Object {
+    "method": "GET",
+    "params": Object {
+      "from": "2018-02-01T10:10",
+      "recipients": "1,2,3",
+      "to": "2018-02-01T10:10",
+    },
+    "showErrorAlert": false,
+    "url": "/message-events",
+  },
+  "type": "GET_MESSAGE_EVENTS",
+}
+`;
+
+exports[`Action Creator: MessageEvents getMessageEvents should dispatch get action with only from 1`] = `
+Object {
+  "meta": Object {
+    "method": "GET",
+    "params": Object {
+      "from": "2018-02-01T10:10",
+    },
+    "showErrorAlert": false,
+    "url": "/message-events",
+  },
+  "type": "GET_MESSAGE_EVENTS",
+}
+`;
+
+exports[`Action Creator: MessageEvents getMessageEvents should dispatch get action with only recipients 1`] = `
+Object {
+  "meta": Object {
+    "method": "GET",
+    "params": Object {
+      "recipients": "1,2,3",
+    },
+    "showErrorAlert": false,
+    "url": "/message-events",
+  },
+  "type": "GET_MESSAGE_EVENTS",
+}
+`;
+
+exports[`Action Creator: MessageEvents getMessageEvents should dispatch get action with only to 1`] = `
+Object {
+  "meta": Object {
+    "method": "GET",
+    "params": Object {
+      "to": "2018-02-01T10:10",
+    },
+    "showErrorAlert": false,
+    "url": "/message-events",
+  },
+  "type": "GET_MESSAGE_EVENTS",
+}
+`;
+
 exports[`Action Creator: MessageEvents getMessageHistory allows custom params 1`] = `
 Object {
   "meta": Object {
@@ -59,5 +117,23 @@ Object {
     "url": "/message-events",
   },
   "type": "GET_MESSAGE_HISTORY",
+}
+`;
+
+exports[`Action Creator: MessageEvents updateMessageEventsSearchOptions dedupes filters 1`] = `
+Object {
+  "payload": Object {
+    "campaign_ids": Array [],
+    "message_ids": Array [
+      "1",
+    ],
+    "subaccounts": Array [
+      "1",
+      "4",
+      "2",
+      "3",
+    ],
+  },
+  "type": "REFRESH_MESSAGE_EVENTS_SEARCH_OPTIONS",
 }
 `;

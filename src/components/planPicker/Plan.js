@@ -1,32 +1,36 @@
 import React from 'react';
+import _ from 'lodash';
 import PropTypes from 'prop-types';
+import PlanPrice from 'src/components/billing/PlanPrice';
 import styles from './PlanPicker.module.scss';
 
-const Plan = ({ plan, className, ...rest }) => {
-  const monthly = plan.monthly === 0
-    ? <strong>Free</strong>
-    : <span><strong>${ plan.monthly.toLocaleString() }</strong>/mo</span>;
+class Plan extends React.Component {
+  render() {
+    const { plan, className, ...rest } = this.props;
 
-  const overage = plan.isFree
-    ? 'Full-featured developer account'
-    : `$${plan.overage.toFixed(2)}/ thousand extra emails`;
+    return (
+      <a className={className} {...rest} >
+        <PlanPrice plan={plan} showOverage={true} showIp={true} className={styles.MainLabel} />
+      </a>
+    );
+  }
+}
 
-  const ip = plan.includesIp
-    ? ', first dedicated IP address is free'
-    : '';
+function eitherMonthlyOrHourly(props, propName, componentName) {
+  const hasMonthly = _.has(props, 'monthly');
+  const hasHourly = _.has(props, 'hourly');
 
-  return (
-    <a className={className} {...rest} >
-      <span className={styles.MainLabel}><strong>{ plan.volume.toLocaleString() }</strong> emails for { monthly }</span>
-      <span className={styles.SupportLabel}>{ overage }{ ip }</span>
-    </a>
-  );
-};
+  // If both are provided, or neither, error
+  if ((hasMonthly && hasHourly) || !(hasMonthly || hasHourly)) {
+    return new Error('Plan\'s pricing should either be hourly or monthly but not both');
+  }
+}
 
 Plan.propTypes = {
   plan: PropTypes.shape({
     volume: PropTypes.number.isRequired,
-    monthly: PropTypes.number.isRequired,
+    monthly: eitherMonthlyOrHourly,
+    hourly: eitherMonthlyOrHourly,
     overage: PropTypes.number.isRequired,
     includesIp: PropTypes.bool,
     isFree: PropTypes.bool

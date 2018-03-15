@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Form Container: Change Plan should not show free plans when not self serve 1`] = `
+exports[`Form Container: Change Plan should not render cc section for aws account 1`] = `
 <form>
   <Grid>
     <Grid.Column>
@@ -14,25 +14,13 @@ exports[`Form Container: Change Plan should not show free plans when not self se
                 "isFree": false,
                 "plan": "paid",
               },
+              Object {
+                "isFree": true,
+                "plan": "free",
+              },
             ]
           }
         />
-      </Panel>
-      <Panel
-        actions={null}
-        title="Add a Credit Card"
-      >
-        <Panel.Section>
-          <Connect(PaymentForm)
-            formName="changePlan"
-          />
-        </Panel.Section>
-        <Panel.Section>
-          <Connect(BillingAddressForm)
-            countries={Array []}
-            formName="changePlan"
-          />
-        </Panel.Section>
       </Panel>
     </Grid.Column>
     <Grid.Column
@@ -40,10 +28,10 @@ exports[`Form Container: Change Plan should not show free plans when not self se
       xs={12}
     >
       <Confirmation
+        billingEnabled={true}
         current={Object {}}
-        disableSubmit={false}
+        disableSubmit={true}
         selected={Object {}}
-        selfServe={false}
       />
     </Grid.Column>
   </Grid>
@@ -81,10 +69,10 @@ exports[`Form Container: Change Plan should not show plans 1`] = `
       xs={12}
     >
       <Confirmation
+        billingEnabled={true}
         current={Object {}}
         disableSubmit={true}
         selected={Object {}}
-        selfServe={true}
       />
     </Grid.Column>
   </Grid>
@@ -135,10 +123,10 @@ exports[`Form Container: Change Plan should render 1`] = `
       xs={12}
     >
       <Confirmation
+        billingEnabled={true}
         current={Object {}}
         disableSubmit={true}
         selected={Object {}}
-        selfServe={true}
       />
     </Grid.Column>
   </Grid>
@@ -188,10 +176,10 @@ exports[`Form Container: Change Plan should show saved card 1`] = `
       xs={12}
     >
       <Confirmation
+        billingEnabled={true}
         current={Object {}}
         disableSubmit={true}
         selected={Object {}}
-        selfServe={true}
       />
     </Grid.Column>
   </Grid>

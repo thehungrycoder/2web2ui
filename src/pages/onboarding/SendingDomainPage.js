@@ -3,7 +3,6 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { reduxForm, Field, SubmissionError } from 'redux-form';
 import { create as createDomain } from 'src/actions/sendingDomains';
-import { showAlert } from 'src/actions/globalAlert';
 import { Panel, Button, UnstyledLink } from '@sparkpost/matchbox';
 import { TextFieldWrapper, CenteredLogo } from 'src/components';
 import Steps from './components/Steps';
@@ -13,11 +12,9 @@ import { LINKS } from 'src/constants';
 
 export class SendingDomainPage extends Component {
   handleDomainCreate = (values) => {
-    const { createDomain, showAlert } = this.props;
+    const { createDomain } = this.props;
 
     return createDomain(values).catch((err) => {
-      showAlert({ type: 'error', message: 'Could not add domain', details: err.message });
-
       // Required to properly control 'submitFailed' & 'submitSucceeded'
       throw new SubmissionError(err);
     });
@@ -67,4 +64,4 @@ export class SendingDomainPage extends Component {
 
 
 const formOptions = { form: 'onboardingDomain' };
-export default withRouter(connect(null, { createDomain, showAlert })(reduxForm(formOptions)(SendingDomainPage)));
+export default withRouter(connect(null, { createDomain })(reduxForm(formOptions)(SendingDomainPage)));

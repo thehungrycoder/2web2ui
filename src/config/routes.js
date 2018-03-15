@@ -6,7 +6,6 @@ import {
   billing,
   DashboardPage,
   sendingDomains,
-  ProfilePage,
   RegisterPage,
   reports,
   recipientLists,
@@ -26,14 +25,14 @@ import {
 
 import onboarding from 'src/pages/onboarding';
 import { default as emailVerification } from 'src/components/emailVerification/EmailVerification';
+import { emailVerificationRedirect, emailRedirects } from './emailRoutes';
 
-import {
-  hasGrants,
-  all,
-  not
-} from 'src/helpers/conditions';
+import { hasGrants, all, not } from 'src/helpers/conditions';
 import { isEnterprise } from 'src/helpers/conditions/account';
+import { isHeroku, isAzure } from 'src/helpers/conditions/user';
 import { configFlag, configEquals } from 'src/helpers/conditions/config';
+
+
 import App from 'src/components/layout/App';
 
 import { DEFAULT_REDIRECT_ROUTE } from 'src/constants';
@@ -132,6 +131,12 @@ const routes = [
     layout: App,
     condition: () => true // this route MUST be accessible to all logged-in app users
   },
+
+  /**
+   * Handles route redirects for cutover to GA from old email template links
+   * TODO: Should remove at a later date
+   */
+  ...emailRedirects,
 
   {
     path: '/dashboard',
@@ -345,7 +350,7 @@ const routes = [
   },
   {
     path: '/account/profile',
-    component: ProfilePage,
+    component: emailVerificationRedirect,
     condition: hasGrants('users/self-manage'),
     layout: App
   },
@@ -376,13 +381,13 @@ const routes = [
   {
     path: '/account/billing',
     component: billing.SummaryPage,
-    condition: all(hasGrants('account/manage'), not(isEnterprise)),
+    condition: all(hasGrants('account/manage'), not(isEnterprise), not(isHeroku), not(isAzure)),
     layout: App
   },
   {
     path: '/account/billing/plan',
     component: billing.ChangePlanPage,
-    condition: all(hasGrants('account/manage'), not(isEnterprise)),
+    condition: all(hasGrants('account/manage'), not(isEnterprise), not(isHeroku), not(isAzure)),
     layout: App
   },
   {

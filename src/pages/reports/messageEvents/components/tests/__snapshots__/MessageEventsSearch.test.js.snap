@@ -1,58 +1,72 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Component: MessageEventsSearch renders correctly 1`] = `
-<Grid>
-  <Grid.Column
-    md={6}
-    xs={12}
-  >
-    <AppDatePicker
-      datePickerProps={
-        Object {
-          "canChangeMonth": false,
-          "disabledDays": Object {
-            "after": 2018-02-15T12:00:00.000Z,
-            "before": 2018-02-05T12:00:00.000Z,
-          },
-        }
-      }
-      from={2018-02-15T12:00:00.000Z}
-      onChange={
-        [MockFunction] {
-          "calls": Array [
-            Array [
-              Object {
-                "relativeRange": "hour",
+<Panel>
+  <Panel.Section>
+    <Grid>
+      <Grid.Column
+        md={6}
+        xs={12}
+      >
+        <AppDatePicker
+          datePickerProps={
+            Object {
+              "canChangeMonth": false,
+              "disabledDays": Object {
+                "after": 2018-02-15T12:00:00.000Z,
+                "before": 2018-02-05T12:00:00.000Z,
               },
-            ],
-          ],
-        }
-      }
-      relativeDateOptions={
-        Array [
-          "hour",
-          "day",
-          "7days",
-          "10days",
-          "custom",
-        ]
-      }
-      to={2018-02-15T12:00:00.000Z}
-    />
-  </Grid.Column>
-  <Grid.Column
-    md={6}
-    xs={12}
-  >
-    <Field
-      component={[Function]}
-      name="recipients"
-      onBlur={[Function]}
-      onKeyDown={[Function]}
-      placeholder="Filter by recipient email address"
-      title="Recipient Email(s)"
-      validate={[Function]}
-    />
-  </Grid.Column>
-</Grid>
+            }
+          }
+          from={2018-02-15T12:00:00.000Z}
+          onChange={
+            [MockFunction] {
+              "calls": Array [
+                Array [
+                  Object {
+                    "relativeRange": undefined,
+                  },
+                ],
+              ],
+            }
+          }
+          relativeDateOptions={
+            Array [
+              "hour",
+              "day",
+              "7days",
+              "10days",
+              "custom",
+            ]
+          }
+          to={2018-02-15T12:00:00.000Z}
+        />
+      </Grid.Column>
+      <Grid.Column
+        md={4}
+        xs={12}
+      >
+        <TextField
+          error={null}
+          label="Recipient Email(s)"
+          labelHidden={true}
+          onBlur={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          placeholder="Filter by recipient email address"
+          required={false}
+          resize="both"
+          type="text"
+        />
+      </Grid.Column>
+      <Grid.Column
+        md={2}
+        xs={12}
+      >
+        <Connect(AdvancedFilters) />
+      </Grid.Column>
+    </Grid>
+  </Panel.Section>
+  <Connect(ActiveFilters) />
+</Panel>
 `;

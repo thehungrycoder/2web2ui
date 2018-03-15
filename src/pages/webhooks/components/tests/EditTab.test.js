@@ -94,16 +94,5 @@ describe('Webhooks EditTab', () => {
       expect(props.showAlert).toHaveBeenCalledWith({ message: 'Update Successful', type: 'success' });
       expect(props.getWebhook).toHaveBeenCalledWith({ id: 'webhook id', subaccount: 101 });
     });
-
-    it('fails correctly', async() => {
-      wrapper.setProps({ updateWebhook: jest.fn(() => Promise.reject({ message: 'error' })) });
-      const props = wrapper.instance().props;
-      const values = { name: 'new name', target: 'new target' };
-      await wrapper.instance().handleSubmit(values, props.webhook);
-
-      expect(props.updateWebhook).toHaveBeenCalled();
-      expect(props.showAlert).toHaveBeenCalledWith({ message: 'Update Failed', type: 'error', details: 'error' });
-    });
-
   });
 });

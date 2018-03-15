@@ -40,15 +40,6 @@ describe('ProfilePage', () => {
       expect(props.showAlert).toHaveBeenCalledTimes(0);
     });
 
-    it('should alert on update error', async() => {
-      props.updateUser.mockReturnValue(Promise.reject(new Error('dooms day')));
-      await instance.updateProfile({ firstName: 'John', lastName: 'Doe' });
-
-      expect(props.updateUser).toHaveBeenCalledWith('Lord Stark', { first_name: 'John', last_name: 'Doe' });
-      expect(props.getCurrentUser).toHaveBeenCalledTimes(0);
-      expect(props.showAlert).toHaveBeenCalledTimes(1);
-    });
-
     it('should ignore refetch error, but report error silently', async() => {
       const getCurrentUserError = new Error('wow');
       props.getCurrentUser.mockReturnValue(Promise.reject(getCurrentUserError));
@@ -67,14 +58,6 @@ describe('ProfilePage', () => {
       expect(props.confirmPassword).toHaveBeenCalledWith('Lord Stark', '111');
       expect(props.updateUser).toHaveBeenCalledWith('Lord Stark', { password: '222' });
       expect(props.showAlert).toHaveBeenCalledTimes(0);
-    });
-
-    it('alerts on error', async() => {
-      props.confirmPassword.mockReturnValue(Promise.reject(new Error('dooms day')));
-      await instance.updatePassword({ currentPassword: '111', newPassword: '222' });
-      expect(props.confirmPassword).toHaveBeenCalledWith('Lord Stark', '111');
-      expect(props.updateUser).toHaveBeenCalledTimes(0);
-      expect(props.showAlert).toHaveBeenCalledTimes(1);
     });
   });
 });

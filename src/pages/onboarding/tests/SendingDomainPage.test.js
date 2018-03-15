@@ -49,6 +49,5 @@ describe('SendingDomainPage', () => {
   it('should handle submit failure correctly', async() => {
     wrapper.setProps({ createDomain: jest.fn(() => Promise.reject(new Error('Oh no!'))) });
     await expect(wrapper.instance().handleDomainCreate('values')).rejects.toThrowError(SubmissionError);
-    expect(wrapper.instance().props.showAlert).toHaveBeenCalledWith({ type: 'error', message: 'Could not add domain', details: 'Oh no!' });
   });
 });

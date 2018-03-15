@@ -58,8 +58,6 @@ export default class PreviewPage extends Component {
   }
 
   onSendFail = (error) => {
-    const message = _.get(error, 'response.data.errors[0].message', error.message);
-    this.props.showAlert({ message, type: 'error' });
     this.setState({ sending: false });
   }
 

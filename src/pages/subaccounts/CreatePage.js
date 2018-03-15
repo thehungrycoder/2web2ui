@@ -29,7 +29,7 @@ export class CreatePage extends Component {
     return createSubaccount(values).then(({ subaccount_id }) => {
       showAlert({ type: 'success', message: `Subaccount ${subaccount_id} created` });
       history.push(`/account/subaccounts/${subaccount_id}`);
-    }).catch((err) => showAlert({ type: 'error', message: 'Could not create Subaccount', details: err.message }));
+    });
   };
 
   render() {

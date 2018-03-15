@@ -19,7 +19,7 @@ class Typeahead extends Component {
     calculatingMatches: false
   }
 
-  updateMatches = _.debounce((pattern) => {
+  updateMatches = (pattern) => {
     let matches;
 
     this.setState({ calculatingMatches: true });
@@ -35,51 +35,66 @@ class Typeahead extends Component {
     }
 
     this.setState({ matches, calculatingMatches: false });
-  }, 250)
-
-  handleFieldChange = (e) => {
-    this.updateMatches(e.target.value);
   };
 
-  render() {
+  updateMatchesDebounced = _.debounce(this.updateMatches, 250);
+
+  handleFieldChange = (e) => {
+    this.updateMatchesDebounced(e.target.value);
+  };
+
+  // Pass only item selection events to mask the
+  // case where we call Downshift's clearSelection() which triggers
+  // onChange(null).
+  handleDownshiftChange = (item) => {
+    // Maps to downshift's onChange function https://github.com/paypal/downshift#onchange
+    const { onSelect } = this.props;
+    if (item) {
+      onSelect(item);
+    }
+  };
+
+  onTypeahead = ({
+    getInputProps,
+    getItemProps,
+    isOpen,
+    inputValue,
+    selectedItem,
+    highlightedIndex,
+    clearSelection
+  }) => {
+
     const {
-      onSelect, // Maps to downshift's onChange function https://github.com/paypal/downshift#onchange
       placeholder // TextField placeholder
     } = this.props;
 
     const { matches = []} = this.state;
 
-    const typeaheadFn = ({
-      getInputProps,
-      getItemProps,
-      isOpen,
-      inputValue,
-      selectedItem,
-      highlightedIndex,
-      clearSelection
-    }) => {
+    const mappedMatches = matches.map((item, index) => ({
+      content: <Item value={item.value} helpText={item.type} />,
+      ...getItemProps({ item, index }),
+      highlighted: highlightedIndex === index,
+      className: classnames(selectedItem === item && styles.selected) // Styles does nothing, was testing className pass through
+    }));
 
-      const mappedMatches = matches.map((item, index) => ({
-        content: <Item value={item.value} helpText={item.type} />,
-        ...getItemProps({ item, index }),
-        highlighted: highlightedIndex === index,
-        className: classnames(selectedItem === item && styles.selected) // Styles does nothing, was testing className pass through
-      }));
+    const listClasses = classnames(styles.List, isOpen && mappedMatches.length && styles.open);
 
-      const listClasses = classnames(styles.List, isOpen && mappedMatches.length && styles.open);
+    return (
+      <div className={styles.Typeahead}>
+        <div className={listClasses}><ActionList actions={mappedMatches} /></div>
+        <TextField {...getInputProps({
+          placeholder,
+          onFocus: clearSelection,
+          onChange: this.handleFieldChange
+        })} />
+      </div>
+    );
+  };
 
-      return (
-        <div className={styles.Typeahead}>
-          <div className={listClasses}><ActionList actions={mappedMatches} /></div>
-          <TextField {...getInputProps({
-            placeholder,
-            onChange: this.handleFieldChange
-          })} />
-        </div>
-      );
-    };
-
-    return <Downshift onChange={onSelect} itemToString={() => ''}>{typeaheadFn}</Downshift>;
+  render() {
+    return <Downshift onChange={this.handleDownshiftChange} itemToString={() => ''}>
+      {this.onTypeahead}
+    </Downshift>;
   }
 }
 

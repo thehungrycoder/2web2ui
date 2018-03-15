@@ -28,9 +28,6 @@ export class SSOPage extends Component {
         });
 
         return this.props.history.push(DEFAULT_REDIRECT_ROUTE);
-
-        //Heroku.barMe(); TODO: copied from old ui, fix it when heroku specific behaviors are implemented
-
       } else {
         return this.props.history.push(authPath);
       }

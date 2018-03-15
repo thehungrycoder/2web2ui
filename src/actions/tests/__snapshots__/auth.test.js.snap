@@ -65,6 +65,15 @@ Array [
       "type": "CONFIRM_PASSWORD_FAIL",
     },
   ],
+  Array [
+    Object {
+      "payload": Object {
+        "message": "login failed",
+        "type": "error",
+      },
+      "type": "SHOW_GLOBAL_ALERT",
+    },
+  ],
 ]
 `;
 

@@ -1,4 +1,3 @@
-/* eslint max-lines: ["error", 175] */
 import * as authActions from '../auth';
 import authCookie from 'src/helpers/authCookie';
 import { initializeAccessControl } from 'src/actions/accessControl';

@@ -19,6 +19,12 @@ describe('HistoryTable Component', () => {
     expect(wrapper.find('TableCollection')).toMatchSnapshot();
   });
 
+  it('should handle row click', () => {
+    const wrapper = shallow(<HistoryTable {...props} />);
+    wrapper.find('TableCollection').props().rows[0].onClick();
+    expect(props.handleEventClick).toHaveBeenCalledWith('1');
+  });
+
   it('should not show disclaimer if first event is injection', () => {
     props.messageHistory.push({ event_id: '3', type: 'injection' });
     const wrapper = shallow(<HistoryTable {...props} />);

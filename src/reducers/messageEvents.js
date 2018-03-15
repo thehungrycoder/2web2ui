@@ -1,5 +1,6 @@
 import { formatDocumentation } from 'src/helpers/messageEvents';
 import { getRelativeDates } from 'src/helpers/date';
+import _ from 'lodash';
 
 const initialState = {
   loading: false,
@@ -9,8 +10,16 @@ const initialState = {
   events: [],
   history: {},
   search: {
-    dateOptions: {},
-    recipients: []
+    dateOptions: {
+      relativeRange: 'hour'
+    },
+    recipients: [],
+    events: [],
+    friendly_froms: [],
+    subaccounts: [],
+    message_ids: [],
+    template_ids: [],
+    campaign_ids: []
   }
 };
 
@@ -67,6 +76,19 @@ export default (state = initialState, { type, payload }) => {
       return { ...state, search: { ...state.search, ...payload }};
     }
 
+    case 'ADD_MESSAGE_EVENTS_FILTERS': {
+      const updatedSearch = {};
+      _.keys(payload).map((key) => {
+        updatedSearch[key] = _.uniq([ ...state.search[key], ...payload[key]]);
+      });
+      return { ...state, search: { ...state.search, ...updatedSearch }};
+    }
+
+    case 'REMOVE_MESSAGE_EVENTS_FILTER': {
+      const updatedSearch = {};
+      updatedSearch[payload.key] = state.search[payload.key].filter((listItem) => payload.item !== listItem);
+      return { ...state, search: { ...state.search, ...updatedSearch }};
+    }
 
     default:
       return state;

@@ -13,11 +13,12 @@ import ErrorTracker from 'src/helpers/errorTracker';
 import { required, minNumber, maxNumber } from 'src/helpers/validation';
 import { currentPlanSelector } from 'src/selectors/accountBillingInfo';
 import DedicatedIpCost from '../components/DedicatedIpCost';
+import { isAws } from 'src/helpers/conditions/account';
 import styles from './Forms.module.scss';
 
 const FORM_NAME = 'add-sending-ips';
 
-class AddIps extends Component {
+export class AddIps extends Component {
   getOrCreateIpPool = async({ action, id, name }) => {
     let response;
 
@@ -42,7 +43,8 @@ class AddIps extends Component {
 
   onSubmit = async({ ipPool, quantity }) => {
     const ip_pool = await this.getOrCreateIpPool(ipPool);
-    const { isAwsAccount } = this.props.currentPlan;
+    const { account } = this.props;
+    const isAwsAccount = isAws({ account });
 
     try {
       await this.props.addDedicatedIps({ ip_pool, isAwsAccount, quantity });
@@ -68,7 +70,7 @@ class AddIps extends Component {
       return <strong>Your plan includes one free dedicated IP address.</strong>;
     }
 
-    return <span><strong>Your plan includes one free dedicated IP address.</strong> Your account statement will show a charge with a matching refund.</span>;
+    return <span><strong>Your plan includes one free dedicated IP address.</strong> If claimed, your account statement will show a charge with a matching refund.</span>;
   }
 
   render() {
@@ -100,7 +102,7 @@ class AddIps extends Component {
               validate={[required, minNumber(1), maxNumber(remainingCount)]}
               inlineErrors={true}
               autoFocus={true}
-              helpText={<span>You can add up to {maxPerAccount} total dedicated IPs to your plan for <DedicatedIpCost plan={currentPlan} quantity='1' /> each.</span>}
+              helpText={(remainingCount === 0) ? <span>You cannot currently add any more IPs</span> : <span>You can add up to {maxPerAccount} total dedicated IPs to your plan for <DedicatedIpCost plan={currentPlan} quantity='1' /> each.</span>}
             />
             <IpPoolSelect disabled={isDisabled} formName={FORM_NAME} />
           </Panel.Section>
@@ -116,6 +118,7 @@ class AddIps extends Component {
 }
 
 const mapStateToProps = (state) => ({
+  account: state.account,
   currentPlan: currentPlanSelector(state),
   sendingIps: state.sendingIps.list,
   initialValues: {

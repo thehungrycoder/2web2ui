@@ -1,4 +1,3 @@
-/* eslint max-lines: ["error", 200] */
 import React from 'react';
 import { RejectionPage } from '../RejectionPage';
 import { shallow } from 'enzyme';

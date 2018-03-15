@@ -1,7 +1,6 @@
 import React from 'react';
 import { PublicRoute, ProtectedRoute, AuthenticationGate } from 'src/components/auth';
-import { Support, GlobalAlertWrapper, RouteWatch } from 'src/components';
-import SiftScience from 'src/components/siftScience/SiftScience';
+import { Support, GlobalAlertWrapper, RouteWatch, BoomerangBanner, SiftScience } from 'src/components';
 import Layout from 'src/components/layout/Layout';
 import routes from 'src/config/routes';
 import config from 'src/config';
@@ -16,6 +15,7 @@ const App = () => (
   <Router>
     <div>
       {config.siftScience && <SiftScience config={config.siftScience} />}
+      <BoomerangBanner />
       <RouteWatch />
       <AuthenticationGate />
       <Layout>

@@ -13,84 +13,38 @@ describe('Action Creator: MessageEvents', () => {
   });
 
   describe('getMessageEvents', () => {
-
-    let dispatchMock;
-
-    beforeEach(() => {
-      dispatchMock = jest.fn((a) => Promise.resolve(a));
-    });
-
     it('should dispatch get action with from/to/recipients', () => {
       const recipients = [1, 2, 3];
       const dateOptions = {
         from: '2018-02-15T12:00:00',
         to: '2018-02-16T12:00:00'
       };
-      messageEvents.getMessageEvents({ recipients, dateOptions })(dispatchMock);
-      expect(dispatchMock).toHaveBeenCalledWith({
-        type: 'GET_MESSAGE_EVENTS',
-        meta: {
-          method: 'GET',
-          url: '/message-events',
-          params: {
-            from: expect.any(String),
-            to: expect.any(String),
-            recipients: '1,2,3'
-          }
-        }
-      });
+
+      expect(messageEvents.getMessageEvents({ dateOptions, recipients })).toMatchSnapshot();
     });
 
     it('should dispatch get action with only from', () => {
       const dateOptions = {
         from: '2018-02-15T12:00:00'
       };
-      messageEvents.getMessageEvents({ dateOptions })(dispatchMock);
-      expect(dispatchMock).toHaveBeenCalledWith({
-        type: 'GET_MESSAGE_EVENTS',
-        meta: {
-          method: 'GET',
-          url: '/message-events',
-          params: {
-            from: expect.any(String)
-          }
-        }
-      });
+
+      expect(messageEvents.getMessageEvents({ dateOptions })).toMatchSnapshot();
     });
 
     it('should dispatch get action with only to', () => {
       const dateOptions = {
         to: '2018-02-16T12:00:00'
       };
-      messageEvents.getMessageEvents({ dateOptions })(dispatchMock);
-      expect(dispatchMock).toHaveBeenCalledWith({
-        type: 'GET_MESSAGE_EVENTS',
-        meta: {
-          method: 'GET',
-          url: '/message-events',
-          params: {
-            to: expect.any(String)
-          }
-        }
-      });
+
+      expect(messageEvents.getMessageEvents({ dateOptions })).toMatchSnapshot();
     });
 
     it('should dispatch get action with only recipients', () => {
       const recipients = [1, 2, 3];
       const dateOptions = {};
-      messageEvents.getMessageEvents({ dateOptions, recipients })(dispatchMock);
-      expect(dispatchMock).toHaveBeenCalledWith({
-        type: 'GET_MESSAGE_EVENTS',
-        meta: {
-          method: 'GET',
-          url: '/message-events',
-          params: {
-            recipients: '1,2,3'
-          }
-        }
-      });
-    });
 
+      expect(messageEvents.getMessageEvents({ dateOptions, recipients })).toMatchSnapshot();
+    });
   });
 
   describe('getMessageHistory', () => {
@@ -108,6 +62,16 @@ describe('Action Creator: MessageEvents', () => {
 
     it('does not allow to override message_ids and from params', () => {
       expect(messageEvents.getMessageHistory({ messageId: 'abcd', message_ids: 'wxyz', from: 'OVERRIDDEN_FROM' })).toMatchSnapshot();
+    });
+  });
+
+  describe('updateMessageEventsSearchOptions', () => {
+    it('dedupes filters', () => {
+      expect(messageEvents.updateMessageEventsSearchOptions({
+        subaccounts: ['1','4','1','2','3'],
+        message_ids: ['1'],
+        campaign_ids: []
+      })).toMatchSnapshot();
     });
   });
 });

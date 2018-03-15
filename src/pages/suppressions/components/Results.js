@@ -43,8 +43,7 @@ export class Results extends Component {
       .then(() => {
         this.toggleDeleteModal();
         return showAlert({ type: 'success', message: `${data.recipient} was successfully deleted from the suppression list` });
-      })
-      .catch((e) => showAlert({ type: 'error', message: e.message }));
+      });
   }
 
   toggleDetailModal = (row) => {

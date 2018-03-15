@@ -55,14 +55,5 @@ describe('Webhook Component: Test Tab', () => {
       expect(instance.props.testWebhook).toHaveBeenCalled();
       expect(instance.props.showAlert).toHaveBeenCalledWith({ message: 'The test was successful!', type: 'success' });
     });
-
-    it('fails correctly', async() => {
-      wrapper.setProps({ testWebhook: jest.fn(() => Promise.reject({ message: 'error' })) });
-      const instance = wrapper.instance();
-      await instance.testWebhook();
-      expect(instance.props.testWebhook).toHaveBeenCalled();
-      expect(instance.props.showAlert).toHaveBeenCalledWith({ message: 'The test failed', type: 'error', details: 'error' });
-    });
   });
-
 });

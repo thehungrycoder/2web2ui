@@ -44,7 +44,7 @@ const sparkpostRequest = requestHelperFactory({
     const apiError = new SparkpostApiError(err);
     const { message, response = {}} = apiError;
     const { auth, account } = getState();
-    const { retries = 0 } = meta;
+    const { retries = 0, showErrorAlert = true } = meta;
 
     // NOTE: if this is a 401 and we have a refresh token, we need to do a
     // refresh to get a new auth token and then re-dispatch this action
@@ -101,8 +101,8 @@ const sparkpostRequest = requestHelperFactory({
       dispatch(fetchAccount());
     }
 
-    if (response.status >= 500) {
-      dispatch(showAlert({ type: 'error', message: 'Something went wrong', details: message }));
+    if (showErrorAlert) {
+      dispatch(showAlert({ type: 'error', message: 'Something went wrong.', details: message }));
     }
 
     // TODO: Remove this once we unchain all actions

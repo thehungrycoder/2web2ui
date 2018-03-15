@@ -1,5 +1,51 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Action Creator: Billing addDedicatedIps dispatches with correct data for "normal" account 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "data": Object {
+        "ip_pool": "abcd",
+        "quantity": 1,
+      },
+      "method": "POST",
+      "url": "/account/add-ons/dedicated_ips",
+    },
+    "type": "ADD_DEDICATED_IPS",
+  },
+  Object {
+    "meta": Object {
+      "method": "GET",
+      "url": "/sending-ips",
+    },
+    "type": "LIST_SENDING_IPS",
+  },
+]
+`;
+
+exports[`Action Creator: Billing addDedicatedIps dispatches with correct data for aws account 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "data": Object {
+        "ip_pool": "abcd",
+        "quantity": 1,
+      },
+      "method": "POST",
+      "url": "/account/aws-marketplace/add-ons/dedicated_ips",
+    },
+    "type": "ADD_DEDICATED_IPS",
+  },
+  Object {
+    "meta": Object {
+      "method": "GET",
+      "url": "/sending-ips",
+    },
+    "type": "LIST_SENDING_IPS",
+  },
+]
+`;
+
 exports[`Action Creator: Billing should dispatch a chained billing create action 1`] = `
 Array [
   Object {
@@ -172,6 +218,56 @@ Array [
 `;
 
 exports[`Action Creator: Billing should dispatch an update subscription action 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "data": Object {
+        "code": undefined,
+      },
+      "method": "PUT",
+      "url": "/account/subscription",
+    },
+    "type": "UPDATE_SUBSCRIPTION",
+  },
+  Object {
+    "meta": Object {
+      "method": "GET",
+      "params": Object {
+        "include": "usage,billing",
+      },
+      "url": "/account",
+    },
+    "type": "FETCH_ACCOUNT",
+  },
+]
+`;
+
+exports[`Action Creator: Billing updateSubscription dispatches un update subscription action for aws marketplace account 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "data": Object {
+        "code": "test-code",
+      },
+      "method": "PUT",
+      "url": "/account/aws-marketplace/subscription",
+    },
+    "type": "UPDATE_SUBSCRIPTION",
+  },
+  Object {
+    "meta": Object {
+      "method": "GET",
+      "params": Object {
+        "include": "usage,billing",
+      },
+      "url": "/account",
+    },
+    "type": "FETCH_ACCOUNT",
+  },
+]
+`;
+
+exports[`Action Creator: Billing updateSubscription should dispatch an update subscription action 1`] = `
 Array [
   Object {
     "meta": Object {

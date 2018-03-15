@@ -9,7 +9,6 @@ import { Grid, Button, Panel, Tag } from '@sparkpost/matchbox';
 import Typeahead from './Typeahead';
 import DatePicker from 'src/components/datePicker/DatePicker';
 import typeaheadCacheSelector from 'src/selectors/reportFilterTypeaheadCache';
-import { showAlert } from 'src/actions/globalAlert';
 import { isSameDate } from 'src/helpers/date';
 import styles from './ReportOptions.module.scss';
 
@@ -132,11 +131,11 @@ const mapStateToProps = (state) => ({
   reportOptions: state.reportOptions,
   typeaheadCache: typeaheadCacheSelector(state)
 });
+
 const mapDispatchToProps = {
   addFilters,
   removeFilter,
   refreshReportOptions,
-  showAlert,
   initTypeaheadCache,
   refreshTypeaheadCache
 };

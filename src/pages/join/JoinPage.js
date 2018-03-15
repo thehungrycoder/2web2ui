@@ -14,7 +14,7 @@ import { authenticate } from 'src/actions/auth';
 import { loadScript } from 'src/helpers/loadScript';
 import { addEvent } from 'src/helpers/googleAnalytics';
 import { register } from 'src/actions/account';
-import { AFTER_JOIN_REDIRECT_ROUTE, LINKS } from 'src/constants';
+import { AFTER_JOIN_REDIRECT_ROUTE, LINKS, AWS_COOKIE_NAME } from 'src/constants';
 const { attribution, salesforceDataParams } = config;
 
 export class JoinPage extends Component {
@@ -43,7 +43,7 @@ export class JoinPage extends Component {
 
   registerSubmit = (values) => {
     this.setState({ formData: values });
-    const { register, authenticate } = this.props;
+    const { params: { plan }, register, authenticate } = this.props;
     const attributionData = this.getAndSetAttributionData();
     const salesforceData = { ...attributionData, email_opt_out: !values.email_opt_in };
     const accountFields = _.omit(values, 'email_opt_in');
@@ -59,7 +59,7 @@ export class JoinPage extends Component {
         addEvent('Completed form', 'create account', { form_type: 'create account' });
         return authenticate(accountData.username, values.password);
       })
-      .then(() => this.props.history.push(AFTER_JOIN_REDIRECT_ROUTE));
+      .then(() => this.props.history.push(AFTER_JOIN_REDIRECT_ROUTE, { plan }));
   };
 
   render() {
@@ -68,7 +68,7 @@ export class JoinPage extends Component {
     return (
       <div>
         {loadScript({ url: LINKS.RECAPTCHA_LIB_URL })}
-        <CenteredLogo />
+        <CenteredLogo showAwsLogo={this.props.isAWSsignUp} />
 
         <Panel accent title="Sign Up">
           {
@@ -92,7 +92,8 @@ export class JoinPage extends Component {
 function mapStateToProps(state, props) {
   return {
     account: state.account,
-    params: qs.parse(props.location.search)
+    params: qs.parse(props.location.search),
+    isAWSsignUp: !!cookie.get(AWS_COOKIE_NAME)
   };
 }
 
