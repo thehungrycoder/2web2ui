@@ -28,13 +28,6 @@ describe('Selector: Account billing form', () => {
     props = { location: {}};
   });
 
-  describe('Onboarding Initial Values', () => {
-    it('should set reasonable defaults', () => {
-      billingInfo.publicPlansSelector = jest.fn(() => plans);
-      expect(onboardingInitialValues(store, props)).toMatchSnapshot();
-    });
-  });
-
   describe('changePlanInitialValues', () => {
     beforeEach(() => {
       billingInfo.currentPlanSelector = jest.fn();
@@ -60,6 +53,11 @@ describe('Selector: Account billing form', () => {
   });
 
   describe('onboardingInitialValues', () => {
+    it('should set reasonable defaults', () => {
+      billingInfo.publicPlansSelector = jest.fn(() => plans);
+      expect(onboardingInitialValues(store, props)).toMatchSnapshot();
+    });
+
     it('should set the plan picker to the plan specified by /join', () => {
       props.location = { state: { plan: 'im not free' }};
       expect(onboardingInitialValues(store, props)).toMatchSnapshot();
@@ -76,7 +74,9 @@ describe('Selector: Account billing form', () => {
       const store = { currentUser: Object.assign({}, baseUser) };
       expect(updatePaymentInitialValues(store)).toMatchSnapshot();
     });
+  });
 
+  describe('updateConteactInitialValues', () => {
     it('should return update contact values', () => {
       const store = { account: { billing: Object.assign({}, baseUser) }};
       expect(updateContactInitialValues(store)).toMatchSnapshot();

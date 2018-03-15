@@ -1,8 +1,8 @@
-import { publicPlansSelector, currentPlanSelector, getPlansSelector, isSelfServeOrAWSSelector } from './accountBillingInfo';
+import { currentPlanSelector, getPlansSelector, isSelfServeOrAWSSelector } from './accountBillingInfo';
 import _ from 'lodash';
 
 export function onboardingInitialValues(state, props) {
-  const plans = publicPlansSelector(state);
+  const plans = getPlansSelector(state);
   const { location: { state: locationState = {}}} = props;
   const planCode = locationState.plan;
   const selectedPlan = planCode ? _.find(plans, { code: planCode }) : null;

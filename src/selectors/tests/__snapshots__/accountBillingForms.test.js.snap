@@ -1,15 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Selector: Account billing form Onboarding Initial Values should set reasonable defaults 1`] = `
-Object {
-  "billingAddress": Object {
-    "firstName": "ann",
-    "lastName": "perkins",
-  },
-  "planpicker": undefined,
-}
-`;
-
 exports[`Selector: Account billing form changePlanInitialValues should return change plan values: with a billing id 1`] = `
 Object {
   "billingAddress": Object {
@@ -44,7 +34,23 @@ Object {
     "firstName": "ann",
     "lastName": "perkins",
   },
-  "planpicker": undefined,
+  "planpicker": Object {
+    "code": "im free",
+    "isFree": true,
+  },
+}
+`;
+
+exports[`Selector: Account billing form onboardingInitialValues should set reasonable defaults 1`] = `
+Object {
+  "billingAddress": Object {
+    "firstName": "ann",
+    "lastName": "perkins",
+  },
+  "planpicker": Object {
+    "code": "im free",
+    "isFree": true,
+  },
 }
 `;
 
@@ -54,11 +60,14 @@ Object {
     "firstName": "ann",
     "lastName": "perkins",
   },
-  "planpicker": undefined,
+  "planpicker": Object {
+    "code": "im not free",
+    "isFree": false,
+  },
 }
 `;
 
-exports[`Selector: Account billing form updatePaymentInitialValues should return update contact values 1`] = `
+exports[`Selector: Account billing form updateConteactInitialValues should return update contact values 1`] = `
 Object {
   "billingContact": Object {
     "country": "GG",
