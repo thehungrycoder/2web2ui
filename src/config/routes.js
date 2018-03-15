@@ -28,6 +28,7 @@ import { default as emailVerification } from 'src/components/emailVerification/E
 import { emailVerificationRedirect, emailRedirects } from './emailRoutes';
 import { hasGrants, composeConditions } from 'src/helpers/conditions';
 import { notEnterprise } from 'src/helpers/conditions/account';
+import { notHeroku, notAzure } from 'src/helpers/conditions/user';
 import { configFlag, configEquals } from 'src/helpers/conditions/config';
 import App from 'src/components/layout/App';
 
@@ -377,13 +378,13 @@ const routes = [
   {
     path: '/account/billing',
     component: billing.SummaryPage,
-    condition: composeConditions(hasGrants('account/manage'), notEnterprise()),
+    condition: composeConditions(hasGrants('account/manage'), notEnterprise(), notHeroku(), notAzure()),
     layout: App
   },
   {
     path: '/account/billing/plan',
     component: billing.ChangePlanPage,
-    condition: composeConditions(hasGrants('account/manage'), notEnterprise()),
+    condition: composeConditions(hasGrants('account/manage'), notEnterprise(), notHeroku(), notAzure()),
     layout: App
   },
   {

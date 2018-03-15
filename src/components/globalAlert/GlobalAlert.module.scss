@@ -12,6 +12,10 @@
   @media screen and (min-width: breakpoint(medium)) {
     top: spacing();
   }
+
+  :global(.heroku-boomerang-loaded) & {
+    top: spacing() * 3;
+  }
 }
 
 
