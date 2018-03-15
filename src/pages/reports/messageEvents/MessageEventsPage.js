@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { snakeToFriendly } from 'src/helpers/string';
-import { Page, Banner, Panel } from '@sparkpost/matchbox';
+import { Page, Banner } from '@sparkpost/matchbox';
 import { PanelLoading, TableCollection, ApiErrorBanner, Empty } from 'src/components';
 import DisplayDate from './components/DisplayDate';
 import MessageEventsSearch from './components/MessageEventsSearch';
@@ -36,14 +36,12 @@ export class MessageEventsPage extends Component {
   }
 
   renderError() {
-    // TODO: this reload will load message events with no date or other filters, but error state
-    // might be triggered by a certain filter combination so reload should probably use those
-    const { error, getMessageEvents } = this.props;
+    const { error, getMessageEvents, search } = this.props;
     return (
       <ApiErrorBanner
         message={errorMsg}
         errorDetails={error.message}
-        reload={getMessageEvents}
+        reload={() => getMessageEvents(search)}
       />
     );
   }
@@ -82,9 +80,7 @@ export class MessageEventsPage extends Component {
 
     return (
       <Page title='Message Events'>
-        <Panel sectioned>
-          <MessageEventsSearch />
-        </Panel>
+        <MessageEventsSearch />
         { error ? this.renderError() : this.renderCollection() }
       </Page>
     );
@@ -99,7 +95,8 @@ const mapStateToProps = (state) => {
     events: events,
     loading: state.messageEvents.loading,
     error: state.messageEvents.error,
-    empty: events.length === 0
+    empty: events.length === 0,
+    search: state.messageEvents.search
   };
 };
 

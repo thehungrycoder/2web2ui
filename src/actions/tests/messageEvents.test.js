@@ -64,4 +64,14 @@ describe('Action Creator: MessageEvents', () => {
       expect(messageEvents.getMessageHistory({ messageId: 'abcd', message_ids: 'wxyz', from: 'OVERRIDDEN_FROM' })).toMatchSnapshot();
     });
   });
+
+  describe('updateMessageEventsSearchOptions', () => {
+    it('dedupes filters', () => {
+      expect(messageEvents.updateMessageEventsSearchOptions({
+        subaccounts: ['1','4','1','2','3'],
+        message_ids: ['1'],
+        campaign_ids: []
+      })).toMatchSnapshot();
+    });
+  });
 });

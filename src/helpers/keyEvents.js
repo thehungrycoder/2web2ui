@@ -5,3 +5,11 @@ export function onEnter(callback) {
     }
   };
 }
+
+export function onEscape(callback) {
+  return function handleEscapeKeydown(event) {
+    if ((event.key === 'Escape' || event.keyCode === 27) && !event.shiftKey) {
+      return callback(event);
+    }
+  };
+}
