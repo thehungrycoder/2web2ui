@@ -6,10 +6,12 @@ import * as axiosMocks from 'src/helpers/axiosInstances';
 import * as authMock from 'src/actions/auth';
 import * as globalAlertMock from 'src/actions/globalAlert';
 import * as httpHelpersMock from 'src/helpers/http';
+import * as accountActions from 'src/actions/account';
 
 jest.mock('src/helpers/axiosInstances');
 jest.mock('src/actions/auth');
 jest.mock('src/actions/globalAlert');
+jest.mock('src/actions/account');
 jest.mock('src/helpers/http');
 
 describe('Helper: SparkPost API Request', () => {
@@ -36,6 +38,7 @@ describe('Helper: SparkPost API Request', () => {
     axiosMocks.sparkpost.mockImplementation(() => Promise.resolve({ data: { results }}));
     globalAlertMock.showAlert = jest.fn(() => ({ type: 'SHOW_ALERT' }));
     globalAlertMock.showSuspensionAlert = jest.fn(() => ({ type: 'SHOW_SUSPENSION_ALERT' }));
+    accountActions.fetch = jest.fn(() => ({ type: 'FETCH_ACCOUNT' }));
   });
 
   it('should successfully call the API', async() => {
@@ -97,12 +100,14 @@ describe('Helper: SparkPost API Request', () => {
       jest.spyOn(globalAlertMock, 'showSuspensionAlert');
       apiErr.response.status = 403;
       state.account.status = 'suspended';
+      expect(globalAlertMock.showSuspensionAlert).not.toHaveBeenCalled();
       try {
         await mockStore.dispatch(sparkpostApiRequest(action));
       } catch (err) {
         expect(err).toEqual(apiErr);
         expect(authMock.logout).not.toHaveBeenCalled();
         expect(globalAlertMock.showSuspensionAlert).toHaveBeenCalledTimes(1);
+        expect(accountActions.fetch).toHaveBeenCalledTimes(1);
         expect(mockStore.getActions()).toMatchSnapshot();
       }
     });

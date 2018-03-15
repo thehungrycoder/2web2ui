@@ -117,6 +117,9 @@ Array [
   Object {
     "type": "SHOW_SUSPENSION_ALERT",
   },
+  Object {
+    "type": "FETCH_ACCOUNT",
+  },
 ]
 `;
 
