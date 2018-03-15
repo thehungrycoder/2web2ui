@@ -81,6 +81,7 @@ export default function EngagementTable({ data, loading }) {
       defaultSortDirection="desc"
       getRowData={DataRow}
       pagination
+      saveCsv
       rows={dataWithPercentage}
     />
   );

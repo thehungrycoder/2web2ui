@@ -119,6 +119,7 @@ export class Table extends Component {
         columns={this.getColumnHeaders()}
         getRowData={this.getRowData()}
         pagination
+        saveCsv={true}
         defaultPerPage={10}
         rows={tableData}
         defaultSortColumn={this.getDefaultSortColumn()}

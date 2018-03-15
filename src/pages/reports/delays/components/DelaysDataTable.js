@@ -35,9 +35,10 @@ export class DelaysDataTable extends Component {
       columns={columns}
       rows={rows}
       getRowData={this.getRowData}
-      pagination={true}
+      pagination
       defaultSortColumn='count_delayed'
       defaultSortDirection='desc'
+      saveCsv
     />;
   }
 }

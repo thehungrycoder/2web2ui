@@ -67,7 +67,8 @@ export class MessageEventsPage extends Component {
             columns={columns}
             rows={events}
             getRowData={this.getRowData}
-            pagination={true}
+            pagination
+            saveCsv
             defaultSortColumn='timestamp'
             defaultSortDirection='desc'
           />

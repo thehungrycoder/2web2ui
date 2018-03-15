@@ -1,12 +1,14 @@
 /* eslint max-lines: ["error", 200] */
 import React, { Component } from 'react';
 import CollectionPropTypes from './Collection.propTypes';
+import { Button } from '@sparkpost/matchbox';
 import qs from 'query-string';
 import _ from 'lodash';
 import { withRouter } from 'react-router-dom';
 import Pagination, { defaultPerPageButtons } from './Pagination';
 import FilterBox from './FilterBox';
 import { objectSortMatch } from 'src/helpers/sortMatch';
+import Papa from 'papaparse';
 
 const PassThroughWrapper = (props) => props.children;
 const NullComponent = () => null;
@@ -120,6 +122,22 @@ export class Collection extends Component {
     );
   }
 
+  formatToCsv = () => {
+    const { rows } = this.props;
+    const data = Papa.unparse(rows);
+    return `data:text/csv;charset=utf-8,${encodeURI(data)}`;
+  }
+
+  renderCSVSave() {
+    const { saveCsv } = this.props;
+
+    if (!saveCsv) { return null; }
+
+    const now = Math.floor(Date.now() / 1000);
+    return <Button download={`sparkpost-csv-${now}.csv`} to={this.formatToCsv()}>Save As CSV</Button>;
+
+  }
+
   render() {
     const {
       rows,
@@ -144,6 +162,7 @@ export class Collection extends Component {
           </BodyWrapper>
         </OuterWrapper>
         {this.renderPagination()}
+        {this.renderCSVSave()}
       </div>
     );
   }
