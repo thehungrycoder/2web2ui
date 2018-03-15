@@ -34,6 +34,7 @@ exports[`DisableTfaModal tests should render correctly 1`] = `
       </Panel.Section>
       <Panel.Section>
         <Button
+          disabled={false}
           onClick={[Function]}
           primary={true}
           size="default"
@@ -42,6 +43,7 @@ exports[`DisableTfaModal tests should render correctly 1`] = `
           Disable 2FA
         </Button>
         <Button
+          disabled={false}
           onClick={[MockFunction]}
           size="default"
         >
@@ -87,6 +89,7 @@ exports[`DisableTfaModal tests should show disabling as button text when toggleP
       </Panel.Section>
       <Panel.Section>
         <Button
+          disabled={true}
           onClick={[Function]}
           primary={true}
           size="default"
@@ -95,6 +98,7 @@ exports[`DisableTfaModal tests should show disabling as button text when toggleP
           Disabling...
         </Button>
         <Button
+          disabled={true}
           onClick={[MockFunction]}
           size="default"
         >
@@ -140,6 +144,7 @@ exports[`DisableTfaModal tests should show error on TextField when toggleError a
       </Panel.Section>
       <Panel.Section>
         <Button
+          disabled={false}
           onClick={[Function]}
           primary={true}
           size="default"
@@ -148,6 +153,7 @@ exports[`DisableTfaModal tests should show error on TextField when toggleError a
           Disable 2FA
         </Button>
         <Button
+          disabled={false}
           onClick={[MockFunction]}
           size="default"
         >
