@@ -49,10 +49,10 @@ export default class Form extends Component {
     const parts = value.split('@');
 
     if (parts.length > 1) {
-      const validSandbox = value === `${config.sandbox.localpart}@${config.sandbox.domain}`;
+      const validSandboxDomain = parts[1] === config.sandbox.domain;
       const validDomain = parts[1] && (domains.map(({ domain }) => domain).includes(parts[1]) || !substitution(parts[1]));
 
-      return validSandbox || validDomain ? undefined : 'Must use a verified sending domain';
+      return validSandboxDomain || validDomain ? undefined : 'Must use a verified sending domain';
     }
 
     return undefined;
