@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import Typeahead from '../Typeahead';
+import _ from 'lodash';
 
 describe('Component: Typeahead', () => {
   let props;
@@ -13,11 +14,19 @@ describe('Component: Typeahead', () => {
       onSelect: jest.fn(),
       placeholder: ''
     };
+
+    jest.spyOn(_, 'debounce').mockImplementation((fn) => (...args) => fn(...args));
+
     wrapper = shallow(<Typeahead {...props} />);
   });
 
   it('should render ok by default', () => {
     expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should update matches on field change', () => {
+    wrapper.instance().handleFieldChange({ target: { value: 'cros' }});
+    expect(wrapper.state()).toMatchSnapshot();
   });
 
   it('should produce matches on search', () => {

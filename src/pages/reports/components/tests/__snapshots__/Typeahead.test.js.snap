@@ -70,3 +70,16 @@ exports[`Component: Typeahead should render with matches 1`] = `
   />
 </div>
 `;
+
+exports[`Component: Typeahead should update matches on field change 1`] = `
+Object {
+  "calculatingMatches": false,
+  "inputValue": "",
+  "matches": Array [
+    Object {
+      "type": "X",
+      "value": "cross",
+    },
+  ],
+}
+`;
