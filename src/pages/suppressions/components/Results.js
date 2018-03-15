@@ -152,6 +152,7 @@ export class Results extends Component {
           getRowData={this.getRowData}
           defaultSortColumn='recipient'
           pagination
+          saveCsv
         />
       </div>
     );

@@ -2,10 +2,26 @@ import React, { Component } from 'react';
 import { Pagination, Button } from '@sparkpost/matchbox';
 import classnames from 'classnames';
 import styles from './Pagination.module.scss';
+import Papa from 'papaparse';
 
 export const defaultPerPageButtons = [10, 25, 50, 100];
 
 class CollectionPagination extends Component {
+  formatToCsv = () => {
+    const { data: rows } = this.props;
+    const data = Papa.unparse(rows);
+    return `data:text/csv;charset=utf-8,${encodeURI(data)}`;
+  }
+
+  renderCSVSave() {
+    const { saveCsv } = this.props;
+
+    if (!saveCsv) { return null; }
+
+    const now = Math.floor(Date.now() / 1000);
+    return <Button download={`sparkpost-csv-${now}.csv`} to={this.formatToCsv()}>Save As CSV</Button>;
+
+  }
 
   renderPageButtons() {
     const { data, perPage, currentPage, pageRange, onPageChange } = this.props;
@@ -60,6 +76,7 @@ class CollectionPagination extends Component {
         </div>
         <div className={styles.PerPageButtons}>
           {this.renderPerPageButtons()}
+          {this.renderCSVSave()}
         </div>
       </div>
     );
