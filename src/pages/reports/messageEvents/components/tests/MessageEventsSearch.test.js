@@ -39,16 +39,6 @@ describe('Component: MessageEventsSearch', () => {
     expect(props.getMessageEvents).not.toHaveBeenCalled();
   });
 
-  // describe('parseAddresses', () => {
-  //
-  //   it('parse email addresses correctly', () => {
-  //     expect(instance.parseAddresses('email@domain.com, email2@domain.com')).toEqual(['email@domain.com', 'email2@domain.com']);
-  //     expect(instance.parseAddresses('email@domain.com ,email2@domain.com')).toEqual(['email@domain.com', 'email2@domain.com']);
-  //     expect(instance.parseAddresses('email@domain.com , ')).toEqual(['email@domain.com']);
-  //     expect(instance.parseAddresses('')).toEqual([]); //empty array if no valid emails
-  //   });
-  // });
-
   describe('getInvalidAddresses', () => {
     it('detect invalid email addresses correctly', () => {
       expect(instance.getInvalidAddresses(['email@domain.com', 'email2m'])).toEqual(['email2m']);
@@ -57,15 +47,6 @@ describe('Component: MessageEventsSearch', () => {
       expect(instance.getInvalidAddresses(['email@domain.com'])).toEqual([]);
     });
   });
-
-  // describe('emailValidator', () => {
-  //   it('returns correct validation error', () => {
-  //     expect(instance.emailValidator('')).toEqual(undefined);
-  //     expect(instance.emailValidator('email@domain.com, email2@domain.com')).toEqual(undefined);
-  //     expect(instance.emailValidator('email@domain.com ,email2')).toEqual('email2 is not a valid email address');
-  //     expect(instance.emailValidator('email.com ,email2')).toEqual('email.com, email2 are not valid email addresses');
-  //   });
-  // });
 
   describe('recipients field', () => {
 

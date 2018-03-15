@@ -41,11 +41,11 @@ export function shrinkToFit(string, targetLen) {
 /**
  * Converts a comma separated string into an array
  */
-export function stringToArray(value) {
-  value = _.trim(value, ' ,'); // strip whitespace and commas
-  if (!value) {
+export function stringToArray(string) {
+  string = _.trim(string, ' ,'); // strip whitespace and commas
+  if (!string) {
     return [];
   }
 
-  return value.split(',').map((address) => _.trim(address));
+  return string.split(',').map((item) => _.trim(item));
 }

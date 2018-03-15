@@ -55,9 +55,10 @@ export function refreshMessageEventsDateRange(dateOptions) {
 }
 
 export function updateMessageEventsSearchOptions(options) {
+  const updatedOptions = _.mapValues(options, (arr) => _.uniq(arr)); // Dedupes filter options
   return {
     type: 'REFRESH_MESSAGE_EVENTS_SEARCH_OPTIONS',
-    payload: options
+    payload: updatedOptions
   };
 }
 
