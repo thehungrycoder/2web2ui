@@ -50,4 +50,9 @@ describe('Selectors: Initial Event Id', () => {
     props.location.state.selectedEventId = null;
     expect(selectors.selectInitialEventId({ messageEvents: messageHistory }, props)).toMatchSnapshot();
   });
+
+  it('returns default event_id with no location state', () => {
+    props.location = null;
+    expect(selectors.selectInitialEventId({ messageEvents: messageHistory }, props)).toMatchSnapshot();
+  });
 });

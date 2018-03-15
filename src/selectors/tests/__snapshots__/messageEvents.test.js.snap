@@ -2,6 +2,8 @@
 
 exports[`Selectors: Initial Event Id returns default event_id 1`] = `"default_id"`;
 
+exports[`Selectors: Initial Event Id returns default event_id with no location state 1`] = `"default_id"`;
+
 exports[`Selectors: Initial Event Id returns event_id 1`] = `"selected_id"`;
 
 exports[`Selectors: Message Events returns formatted message event data 1`] = `

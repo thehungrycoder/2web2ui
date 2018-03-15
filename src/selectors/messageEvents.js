@@ -5,7 +5,7 @@ import { createSelector } from 'reselect';
 const getMessageEvents = (state) => state.messageEvents.events;
 const getMessageHistory = (state) => state.messageEvents.history;
 const getMessageIdParam = (state, props) => props.match.params.messageId;
-const getEventIdLocationState = (state, props) => props.location.state.selectedEventId;
+const getEventIdLocationState = (state, props) => _.get(props, 'location.state.selectedEventId');
 
 export const selectMessageEvents = createSelector(
   [ getMessageEvents ],
