@@ -113,13 +113,13 @@ export class OnboardingPlanPage extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
   const selector = formValueSelector(FORM_NAME);
   return {
     loading: Boolean(state.account.loading || state.billing.plansLoading || state.billing.countriesLoading),
     billing: state.billing,
     plans: getPlansSelector(state),
-    initialValues: onboardingInitialValues(state),
+    initialValues: onboardingInitialValues(state, ownProps),
     selectedPlan: selector(state, 'planpicker'),
     hasError: state.billing.plansError || state.billing.countriesError,
     isAWSAccount: isAWSAccountSelector(state)

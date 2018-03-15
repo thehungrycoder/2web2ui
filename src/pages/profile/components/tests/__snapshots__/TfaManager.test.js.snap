@@ -27,7 +27,7 @@ exports[`EnableTfaModal tests should render correctly 1`] = `
   </LabelledValue>
   <BackupCodesModal
     activeCount={1}
-    generate={[MockFunction]}
+    generate={[Function]}
     onClose={[Function]}
     open={false}
   />

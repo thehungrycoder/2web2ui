@@ -1,5 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Component: Typeahead should produce matches on search 1`] = `
+Object {
+  "calculatingMatches": false,
+  "inputValue": "",
+  "matches": Array [
+    Object {
+      "type": "X",
+      "value": "cross",
+    },
+  ],
+}
+`;
+
+exports[`Component: Typeahead should produce no matches on empty query 1`] = `
+Object {
+  "calculatingMatches": false,
+  "inputValue": "",
+  "matches": Array [],
+}
+`;
+
 exports[`Component: Typeahead should render ok by default 1`] = `
 <Downshift
   breakingChanges={Object {}}
@@ -11,7 +32,7 @@ exports[`Component: Typeahead should render ok by default 1`] = `
   getA11yStatusMessage={[Function]}
   id="downshift-1"
   itemToString={[Function]}
-  onChange={[MockFunction]}
+  onChange={[Function]}
   onInputValueChange={[Function]}
   onOuterClick={[Function]}
   onSelect={[Function]}
@@ -20,4 +41,45 @@ exports[`Component: Typeahead should render ok by default 1`] = `
   selectedItemChanged={[Function]}
   stateReducer={[Function]}
 />
+`;
+
+exports[`Component: Typeahead should render with matches 1`] = `
+<div>
+  <div
+    className=""
+  >
+    <ActionList
+      actions={
+        Array [
+          Object {
+            "className": "",
+            "content": <TypeaheadItem
+              helpText="X"
+              value="cross"
+            />,
+            "highlighted": true,
+          },
+        ]
+      }
+    />
+  </div>
+  <TextField
+    required={false}
+    resize="both"
+    type="text"
+  />
+</div>
+`;
+
+exports[`Component: Typeahead should update matches on field change 1`] = `
+Object {
+  "calculatingMatches": false,
+  "inputValue": "",
+  "matches": Array [
+    Object {
+      "type": "X",
+      "value": "cross",
+    },
+  ],
+}
 `;

@@ -43,7 +43,7 @@ export class JoinPage extends Component {
 
   registerSubmit = (values) => {
     this.setState({ formData: values });
-    const { register, authenticate } = this.props;
+    const { params: { plan }, register, authenticate } = this.props;
     const attributionData = this.getAndSetAttributionData();
     const salesforceData = { ...attributionData, email_opt_out: !values.email_opt_in };
     const accountFields = _.omit(values, 'email_opt_in');
@@ -59,7 +59,7 @@ export class JoinPage extends Component {
         addEvent('Completed form', 'create account', { form_type: 'create account' });
         return authenticate(accountData.username, values.password);
       })
-      .then(() => this.props.history.push(AFTER_JOIN_REDIRECT_ROUTE));
+      .then(() => this.props.history.push(AFTER_JOIN_REDIRECT_ROUTE, { plan }));
   };
 
   render() {
