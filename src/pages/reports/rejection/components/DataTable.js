@@ -35,7 +35,6 @@ export class DataTable extends Component {
       pagination
       defaultSortColumn='reason'
       defaultSortDirection='desc'
-      saveCsv
     />;
   }
 }

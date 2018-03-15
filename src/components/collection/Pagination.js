@@ -14,9 +14,11 @@ class CollectionPagination extends Component {
   }
 
   renderCSVSave() {
-    const { saveCsv } = this.props;
+    const { saveCsv, data, perPage } = this.props;
 
-    if (!saveCsv) { return null; }
+    // mimick behavior with "old" webui where we do not show
+    // save as csv button when less than a page
+    if (!saveCsv || data.length < perPage) { return null; }
 
     const now = Math.floor(Date.now() / 1000);
     return <Button download={`sparkpost-csv-${now}.csv`} to={this.formatToCsv()}>Save As CSV</Button>;
@@ -85,7 +87,8 @@ class CollectionPagination extends Component {
 
 CollectionPagination.defaultProps = {
   pageRange: 5,
-  perPageButtons: defaultPerPageButtons
+  perPageButtons: defaultPerPageButtons,
+  saveCsv: true
 };
 
 export default CollectionPagination;

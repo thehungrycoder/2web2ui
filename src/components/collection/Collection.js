@@ -103,7 +103,7 @@ export class Collection extends Component {
   }
 
   renderPagination() {
-    const { rows, perPageButtons, pagination, saveCsv } = this.props;
+    const { rows, perPageButtons, pagination } = this.props;
     const { currentPage, perPage, filteredRows } = this.state;
 
     if (!pagination || !currentPage) { return null; }
@@ -116,7 +116,6 @@ export class Collection extends Component {
         perPageButtons={perPageButtons}
         onPageChange={this.handlePageChange}
         onPerPageChange={this.handlePerPageChange}
-        saveCsv={saveCsv}
       />
     );
   }

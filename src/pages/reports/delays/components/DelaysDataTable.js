@@ -38,7 +38,6 @@ export class DelaysDataTable extends Component {
       pagination
       defaultSortColumn='count_delayed'
       defaultSortDirection='desc'
-      saveCsv
     />;
   }
 }

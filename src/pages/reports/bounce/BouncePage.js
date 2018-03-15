@@ -74,7 +74,6 @@ export class BouncePage extends Component {
       defaultSortColumn='count_bounce'
       defaultSortDirection='desc'
       pagination
-      saveCsv
     />;
   }
 
