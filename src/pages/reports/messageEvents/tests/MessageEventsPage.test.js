@@ -28,6 +28,10 @@ describe('Page: Message Events tests', () => {
     ],
     history: {
       push: jest.fn()
+    },
+    search: {
+      dateOptions: {},
+      recipients: []
     }
   };
 
@@ -43,6 +47,11 @@ describe('Page: Message Events tests', () => {
   it('should render error when action fails', () => {
     wrapper.setProps({ error: { message: 'You done f\'ed up now' }});
     expect(wrapper).toMatchSnapshot();
+    wrapper.find('ApiErrorBanner').props().reload();
+    expect(wrapper.instance().props.getMessageEvents).toHaveBeenCalledWith({
+      dateOptions: {},
+      recipients: []
+    });
   });
 
   it('should only render loading component while loading', () => {
@@ -55,9 +64,9 @@ describe('Page: Message Events tests', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('renders correctly with too many (1000) records', () => {
+  it('renders banner correctly with too many (1000) records', () => {
     wrapper.setProps({ events: new Array(1000) });
-    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.find('Banner')).toMatchSnapshot();
   });
 
   describe('getRowData', () => {

@@ -3,8 +3,16 @@
 exports[`Component ViewDetailsButton renders correctly 1`] = `
 <div>
   <Button
-    onClick={[Function]}
+    Component={[Function]}
     size="small"
+    to={
+      Object {
+        "pathname": "/reports/message-events/details/123abc",
+        "state": Object {
+          "selectedEventId": "456xyz",
+        },
+      }
+    }
   >
     View Details
   </Button>

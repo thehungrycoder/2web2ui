@@ -1,4 +1,4 @@
-import { snakeToFriendly, snakeToCamel, slugify, shrinkToFit } from '../string';
+import { snakeToFriendly, snakeToCamel, slugify, shrinkToFit, stringToArray } from '../string';
 
 describe('snakeToFrindly', () => {
   it('should properly format a snaked cased string', () => {
@@ -39,3 +39,10 @@ describe('shrinkToFit', () => {
   });
 });
 
+describe('stringToArray', () => {
+  it('should properly parse a comma separated string', () => {
+    expect(stringToArray('one, 2, 3,4')).toEqual(['one', '2', '3', '4']);
+    expect(stringToArray('1')).toEqual(['1']);
+    expect(stringToArray('')).toEqual([]);
+  });
+});

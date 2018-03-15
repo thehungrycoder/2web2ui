@@ -1,0 +1,29 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.CheckWrapper {
+  display: inline-block;
+  width: 50%;
+
+  @media screen and (min-width: breakpoint(small)) {
+    width: 25%;
+  }
+}
+
+.FieldWrapper {
+  display: inline-block;
+  margin: 0 0 spacing();
+  width: 100%;
+  padding-right: 0;
+
+  @media screen and (min-width: breakpoint(small)) {
+    width: 50%;
+
+    &:nth-child(2n) {
+      padding-right: spacing();
+    }
+  }
+}
+
+.Cancel {
+  margin-left: spacing();
+}

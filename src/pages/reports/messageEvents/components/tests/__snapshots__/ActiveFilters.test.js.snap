@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: ActiveFilters should render filters correctly 1`] = `
+<Panel.Section>
+  <small>
+    Filters: 
+  </small>
+  <Tag
+    key="0"
+    onRemove={[Function]}
+  >
+    Event
+    : 
+    Bounce
+  </Tag>
+  <Tag
+    key="1"
+    onRemove={[Function]}
+  >
+    Event
+    : 
+    Click
+  </Tag>
+  <Tag
+    key="2"
+    onRemove={[Function]}
+  >
+    Event
+    : 
+    Spam Complaint
+  </Tag>
+  <Tag
+    key="0"
+    onRemove={[Function]}
+  >
+    Message
+    : 
+    101
+  </Tag>
+  <Tag
+    key="1"
+    onRemove={[Function]}
+  >
+    Message
+    : 
+    102
+  </Tag>
+</Panel.Section>
+`;

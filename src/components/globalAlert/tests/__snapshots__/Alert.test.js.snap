@@ -2,6 +2,7 @@
 
 exports[`Alert should handle details click 1`] = `
 <Snackbar
+  maxWidth={380}
   onDismiss={[Function]}
   status="danger"
 >
@@ -15,6 +16,7 @@ exports[`Alert should handle details click 1`] = `
 
 exports[`Alert should render with all props 1`] = `
 <Snackbar
+  maxWidth={380}
   onDismiss={[Function]}
   status="danger"
 >
