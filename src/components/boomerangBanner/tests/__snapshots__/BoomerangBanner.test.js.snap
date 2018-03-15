@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Boomerang Banner should render when the bar initializes 1`] = `
+<HelmetWrapper
+  defer={true}
+  encodeSpecialCharacters={true}
+>
+  <style
+    type="text/css"
+  >
+    
+          body.heroku-boomerang-loaded {
+            padding-top: 32px
+          }
+         
+  </style>
+</HelmetWrapper>
+`;

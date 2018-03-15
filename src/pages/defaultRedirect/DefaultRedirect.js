@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 import { Loading } from 'src/components/loading/Loading';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -18,6 +19,7 @@ export class DefaultRedirect extends Component {
   handleRedirect() {
     const { location, history, currentUser, ready } = this.props;
     const { state: routerState = {}} = location;
+    const allowedAccessLevels = ['reporting', 'heroku', 'azure'];
 
     // if there is a redirect route set on state, we can
     // redirect there before access condition state is ready
@@ -33,7 +35,7 @@ export class DefaultRedirect extends Component {
     }
 
     // reporting users are all sent to the summary report
-    if (currentUser.access_level === 'reporting') {
+    if (_.includes(allowedAccessLevels, currentUser.access_level)) {
       history.push('/reports/summary', { replace: true });
       return;
     }

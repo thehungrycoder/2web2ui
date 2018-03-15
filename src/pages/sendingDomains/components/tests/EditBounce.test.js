@@ -6,6 +6,12 @@ import config from 'src/config';
 jest.mock('src/config', () => ({
   zuora: {}, //axiosInstance throws without this
   authentication: { cookie: {}}, //authCookie throws without this,
+  heroku: {
+    cookieName: 'my-cookie'
+  },
+  website: {
+    domain: ''
+  },
   bounceDomains: {
     allowDefault: false,
     cnameValue: 'sparkpostmail.com'
