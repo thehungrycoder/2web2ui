@@ -54,6 +54,9 @@ export function refreshMessageEventsDateRange(dateOptions) {
   };
 }
 
+/**
+ * Overwrites filters options
+ */
 export function updateMessageEventsSearchOptions(options) {
   const updatedOptions = _.mapValues(options, (arr) => _.uniq(arr)); // Dedupes filter options
   return {
@@ -62,6 +65,9 @@ export function updateMessageEventsSearchOptions(options) {
   };
 }
 
+/**
+ * Appends additional filter options to existing options
+ */
 export function addFilters(filters) {
   return {
     type: 'ADD_MESSAGE_EVENTS_FILTERS',
