@@ -22,7 +22,7 @@ describe('Selector: Account billing form', () => {
   let props;
 
   beforeEach(() => {
-    plans = Object.assign({}, basePlans);
+    plans = basePlans.slice();
     user = Object.assign({}, baseUser);
     store = { currentUser: user };
     props = { location: {}};
@@ -53,8 +53,11 @@ describe('Selector: Account billing form', () => {
   });
 
   describe('onboardingInitialValues', () => {
+    beforeEach(() => {
+      billingInfo.getPlansSelector = jest.fn(() => plans);
+    });
+
     it('should set reasonable defaults', () => {
-      billingInfo.publicPlansSelector = jest.fn(() => plans);
       expect(onboardingInitialValues(store, props)).toMatchSnapshot();
     });
 
