@@ -1,8 +1,61 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Collection Pagination Component should hide pagination if data is less than per page 1`] = `
+<div>
+  <div />
+  <div />
+</div>
+`;
+
+exports[`Collection Pagination Component should not show save as CSV button when false 1`] = `
+<div>
+  <div>
+    <Pagination
+      currentPage={1}
+      onChange={[Function]}
+      pageRange={5}
+      pages={3}
+    />
+  </div>
+  <div>
+    <Button.Group>
+      <span
+        style={
+          Object {
+            "color": "rgba(0,0,0,0.5)",
+            "display": "inline-block",
+            "fontSize": "80%",
+            "marginRight": "10px",
+            "textTransform": "uppercase",
+          }
+        }
+      >
+        Per Page
+      </span>
+      <Button
+        className=""
+        key="1"
+        onClick={[Function]}
+        size="default"
+      >
+        1
+      </Button>
+      <Button
+        className=""
+        key="2"
+        onClick={[Function]}
+        size="default"
+      >
+        2
+      </Button>
+    </Button.Group>
+  </div>
+</div>
+`;
+
 exports[`Collection Pagination Component should render with no props 1`] = `""`;
 
-exports[`Collection Pagination Component should render with perPageButtons 1`] = `
+exports[`Collection Pagination Component should render with perPageButtons and saveCsv 1`] = `
 <div>
   <div>
     <Pagination
@@ -60,6 +113,13 @@ exports[`Collection Pagination Component should render with perPageButtons 1`] =
         100
       </Button>
     </Button.Group>
+    <Button
+      download="sparkpost-csv-1512509841.csv"
+      size="default"
+      to="data:text/csv;charset=utf-8,mydata"
+    >
+      Save As CSV
+    </Button>
   </div>
 </div>
 `;

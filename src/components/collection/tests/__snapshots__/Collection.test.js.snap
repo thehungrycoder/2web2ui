@@ -135,6 +135,7 @@ exports[`Component: Collection should render pagination 1`] = `
         50,
       ]
     }
+    saveCsv={true}
   />
 </div>
 `;
