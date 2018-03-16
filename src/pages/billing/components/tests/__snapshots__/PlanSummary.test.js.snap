@@ -1,0 +1,123 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: PlanSummary should render correctly 1`] = `
+<LabelledValue
+  label="Your Plan"
+>
+  <h6>
+    <span>
+      <strong>
+        100,000,000
+      </strong>
+       emails
+    </span>
+     
+    <span>
+      <strong>
+        for $
+        100,000
+      </strong>
+       per month
+    </span>
+  </h6>
+  <p>
+    $
+    0.01
+    /thousand extra emails
+  </p>
+</LabelledValue>
+`;
+
+exports[`Component: PlanSummary should render with 0 monthly value 1`] = `
+<LabelledValue
+  label="Your Plan"
+>
+  <h6>
+    <span>
+      <strong>
+        100,000,000
+      </strong>
+       emails
+    </span>
+     
+    for Free
+  </h6>
+  <p>
+    $
+    0.01
+    /thousand extra emails
+  </p>
+</LabelledValue>
+`;
+
+exports[`Component: PlanSummary should render with no monthly value 1`] = `
+<LabelledValue
+  label="Your Plan"
+>
+  <h6>
+    <span>
+      <strong>
+        100,000,000
+      </strong>
+       emails
+    </span>
+     
+  </h6>
+  <p>
+    $
+    0.01
+    /thousand extra emails
+  </p>
+</LabelledValue>
+`;
+
+exports[`Component: PlanSummary should render with no overage value 1`] = `
+<LabelledValue
+  label="Your Plan"
+>
+  <h6>
+    <span>
+      <strong>
+        100,000,000
+      </strong>
+       emails
+    </span>
+     
+    <span>
+      <strong>
+        for $
+        100,000
+      </strong>
+       per month
+    </span>
+  </h6>
+</LabelledValue>
+`;
+
+exports[`Component: PlanSummary should render with no plan 1`] = `
+<LabelledValue
+  label="Your Plan"
+/>
+`;
+
+exports[`Component: PlanSummary should render with no volume value 1`] = `
+<LabelledValue
+  label="Your Plan"
+>
+  <h6>
+     
+    <span>
+      <strong>
+        for $
+        100,000
+      </strong>
+       per month
+    </span>
+  </h6>
+  <p>
+    $
+    0.01
+    /thousand extra emails
+  </p>
+</LabelledValue>
+`;

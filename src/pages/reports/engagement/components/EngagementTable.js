@@ -71,7 +71,7 @@ export default function EngagementTable({ data, loading }) {
   // Must include percentage in data for sorting
   const dataWithPercentage = data.map((row) => ({
     ...row,
-    percentage_clicked: formatPercent(safeRate(row.count_clicked, totalClicks))
+    percentage_clicked: safeRate(row.count_clicked, totalClicks)
   }));
 
   return (

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Selector: Account billing form changePlanInitialValues should return change plan values: with a billing id 1`] = `
+exports[`Selector: Account billing form changePlanInitialValues when NOT self serve should return change plan values: with a billing id 1`] = `
 Object {
   "billingAddress": Object {
     "firstName": "ann",
@@ -14,7 +14,7 @@ Object {
 }
 `;
 
-exports[`Selector: Account billing form changePlanInitialValues should return change plan values: without billing id 1`] = `
+exports[`Selector: Account billing form changePlanInitialValues when NOT self serve should return change plan values: without billing id 1`] = `
 Object {
   "billingAddress": Object {
     "firstName": "ann",

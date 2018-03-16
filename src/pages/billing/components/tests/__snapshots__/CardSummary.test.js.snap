@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: CardSummary should render correctly 1`] = `
+<LabelledValue
+  label="A Label"
+>
+  <h6>
+    <strong>
+      <Icon
+        name="CreditCard"
+        size={16}
+      />
+       
+      Visa
+       ···· 
+      5678
+    </strong>
+  </h6>
+  <p>
+    Expires 
+    04
+    /
+    2022
+  </p>
+</LabelledValue>
+`;

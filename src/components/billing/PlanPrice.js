@@ -15,22 +15,24 @@ const PlanPrice = ({ plan, showOverage = false, showIp = false, ...rest }) => {
 
   const overage = plan.isFree
     ? 'Full-featured developer account'
-    : `$${plan.overage.toFixed(2)}/ thousand extra emails. `;
+    : plan.overage ? `$${plan.overage.toFixed(2)}/ thousand extra emails. ` : null;
 
   const ip = plan.includesIp
     ? 'First dedicated IP address is free'
-    : '';
+    : null;
 
-  return (<span>
-    <span className={styles.MainLabel} {...rest}>
-      <strong>{ plan.volume.toLocaleString() }</strong> emails/month {priceElement}
-    </span>
-    <span className={styles.SupportLabel}>
-      {showOverage && overage }
+  return (
+    <span>
+      <span className={styles.MainLabel} {...rest}>
+        <strong>{ plan.volume.toLocaleString() }</strong> emails/month {priceElement}
+      </span>
+      <span className={styles.SupportLabel}>
+        {showOverage && overage }
 
-      { showIp && ip }
+        { showIp && ip }
+      </span>
     </span>
-  </span>);
+  );
 };
 
 export default PlanPrice;

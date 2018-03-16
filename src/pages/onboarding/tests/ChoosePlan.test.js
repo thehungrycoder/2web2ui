@@ -20,7 +20,6 @@ describe('ChoosePlan page tests', () => {
     billing: { countries: []},
     plans: [],
     submitting: false,
-    isAWSAccount: false,
     updateSubscription: jest.fn(() => Promise.resolve())
   };
 
@@ -67,15 +66,6 @@ describe('ChoosePlan page tests', () => {
       expect(instance.props.billingCreate).toHaveBeenCalledWith(values);
       expect(instance.props.updateSubscription).not.toHaveBeenCalled();
       expect(instance.props.history.push).toHaveBeenCalledWith('/onboarding/sending-domain');
-      expect(instance.props.showAlert).toHaveBeenCalledWith({ type: 'success', message: 'Added your plan' });
-    });
-
-    it('updates just subscription if aws customer', async() => {
-      wrapper.setProps({ isAWSAccount: true });
-      await instance.onSubmit({ planpicker: { isFree: false, code: 'abcd' }});
-      expect(instance.props.billingCreate).not.toHaveBeenCalled();
-      expect(instance.props.updateSubscription).toHaveBeenCalledWith({ code: 'abcd', isAWSAccount: true });
-      expect(instance.props.history.push).toHaveBeenCalled();
       expect(instance.props.showAlert).toHaveBeenCalledWith({ type: 'success', message: 'Added your plan' });
     });
 

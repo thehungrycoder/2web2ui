@@ -110,13 +110,13 @@ exports[`EngagementTable when renders table 1`] = `
         "count_clicked": 10,
         "count_raw_clicked_approx": 1,
         "link_name": "Raw URL",
-        "percentage_clicked": "33.33%",
+        "percentage_clicked": 33.33333333333333,
       },
       Object {
         "count_clicked": 20,
         "count_raw_clicked_approx": 2,
         "link_name": "Nintendo",
-        "percentage_clicked": "66.67%",
+        "percentage_clicked": 66.66666666666666,
       },
     ]
   }

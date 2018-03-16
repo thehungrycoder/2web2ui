@@ -54,7 +54,7 @@ Routes should all be set up in `src/config/routes.js`, and look like this:
   {
     path: '/some/other/path',
     component: SomeOtherPage,
-    condition: composeConditions(hasGrants('some/other', 'also/this'), anotherHelper('some argument'))
+    condition: all(hasGrants('some/other', 'also/this'), anotherHelper('some argument'))
   }
 ]
 ```
@@ -97,18 +97,48 @@ This makes conditions more readable and easier to compose.
 
 #### Condition composition
 
-You can compose multiple condition helpers together by using the `composeConditions` helper. For example, if you need to make a route's access dependent on grants _and_ a config flag:
+You can compose multiple condition helpers together by using the compose helpers. For example, if you need to make a route's access dependent on grants _and_ a config flag:
 
 ```js
-import { hasGrants, configFlag, composeConditions } from 'src/helpers/conditions';
+import { hasGrants, configFlag, all } from 'src/helpers/conditions';
 
 export default [
   {
     path: '/reports/summary',
-    condition: composeConditions(hasGrants('metrics/view'), configFlag('summaryChart.enabled'))
+    condition: all(hasGrants('metrics/view'), configFlag('summaryChart.enabled'))
   }
 ]
 ```
+
+If instead you need to check an "OR" condition, you can use the `any` composition helper:
+
+```js
+import { configEquals, configFlag, any } from 'src/helpers/conditions';
+
+export default [
+  {
+    path: '/account/billing',
+    condition: any(configEquals('account.plan', 'free1'), configFlag('account.billing.enabled'))
+  }
+]
+```
+
+#### Reversing a condition
+
+Try to always create conditions in the positive direction, which can then be reversed using the `not` helper:
+
+```js
+import { not, all } from 'src/helpers/conditions';
+import { onPlan } from 'src/helpers/conditions/account';
+
+export default [
+  {
+    path: '/account/billing/plan',
+    condition: all(not(onPlan('free1')), not(onPlan('ccfree1')))
+  }
+]
+```
+
 
 ## Access Condition Selector
 

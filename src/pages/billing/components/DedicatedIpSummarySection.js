@@ -9,10 +9,11 @@ import DedicatedIpCost from './DedicatedIpCost';
 
 export default function DedicatedIpSummarySection({ count = 0, plan = {}, onClick = _.noop }) {
   const hasReachedMax = count >= config.sendingIps.maxPerAccount;
+  const ipCtaContent = (count === 0 && plan.includesIp) ? 'Claim Your Free Dedicated IP' : 'Add Dedicated IPs';
 
   // There are some paid accounts that do not allow dedicated IPs
   const action = plan.canPurchaseIps
-    ? { content: 'Add Dedicated IPs', disabled: hasReachedMax, onClick }
+    ? { content: ipCtaContent, disabled: hasReachedMax, onClick }
     : { content: 'Upgrade Now', to: '/account/billing/plan', Component: Link };
 
   // Decrement count if plan includes one free IP
@@ -26,7 +27,6 @@ export default function DedicatedIpSummarySection({ count = 0, plan = {}, onClic
     <Panel.Section actions={[action]}>
       <LabelledValue label='Dedicated IPs'>
         {summary}
-        {count === 0 && plan.includesIp && <p>First IP is free!</p>}
         {hasReachedMax && <p>You have reached the maximum allowed.</p>}
       </LabelledValue>
     </Panel.Section>

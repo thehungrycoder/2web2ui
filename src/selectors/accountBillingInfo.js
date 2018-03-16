@@ -56,7 +56,7 @@ export const isAWSAccountSelector = createSelector(
 /**
  * Returns true if user has billing account and they are on a paid plan
  */
-export const shouldExposeCardSelector = createSelector(
+export const canUpdateBillingInfoSelector = createSelector(
   [currentPlanSelector, accountBillingSelector],
   (currentPlan, accountBilling) => (accountBilling && !currentPlan.isFree)
 );
@@ -69,14 +69,10 @@ export const canPurchaseIps = createSelector(
   (currentPlan, accountBilling, isAWSAccount) => currentPlan.canPurchaseIps === true && !!(accountBilling || isAWSAccount)
 );
 
-export const isSelfServeOrAWSSelector = createSelector(
-  [currentSubscriptionSelector, isAWSAccountSelector],
-  (currentSubscription, isAWSAccount) => currentSubscription.self_serve === true || isAWSAccount
-);
-
 export const getPlansSelector = createSelector(
   [publicPlansSelector, awsPlans, currentSubscriptionSelector, isAWSAccountSelector],
   (publicPlans, awsPlans, subscription, isAWSAccount) => {
+
     if (isAWSAccount) {
       return awsPlans;
     }
@@ -84,4 +80,21 @@ export const getPlansSelector = createSelector(
     // Strip free plans for manually billed accounts looking to convert
     return !subscription.self_serve ? publicPlans.filter((plan) => !plan.isFree) : publicPlans;
   }
+);
+
+export const selectBillingInfo = createSelector(
+  [
+    canUpdateBillingInfoSelector,
+    canChangePlanSelector,
+    canPurchaseIps,
+    currentPlanSelector,
+    getPlansSelector
+  ],
+  (canUpdateBillingInfo, canChangePlan, canPurchaseIps, currentPlan, plans) => ({
+    canUpdateBillingInfo,
+    canChangePlan,
+    canPurchaseIps,
+    currentPlan,
+    plans
+  })
 );

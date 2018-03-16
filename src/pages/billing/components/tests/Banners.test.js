@@ -1,5 +1,5 @@
 import React from 'react';
-import { PendingPlanBanner, SuspendedBanner, ManuallyBilledBanner, PremiumBanner, EnterpriseBanner } from '../Banners';
+import { PendingPlanBanner, ManuallyBilledBanner, PremiumBanner, EnterpriseBanner } from '../Banners';
 import { shallow } from 'enzyme';
 
 describe('Billing Banners: ', () => {
@@ -10,17 +10,6 @@ describe('Billing Banners: ', () => {
       }
     };
     const wrapper = shallow(<PendingPlanBanner {...props} />);
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('SuspendedBanner should render with isSuspendedForBilling', () => {
-    const props = {
-      account: {
-        isSuspendedForBilling: true,
-        billing: { email: 'tst' }
-      }
-    };
-    const wrapper = shallow(<SuspendedBanner {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 

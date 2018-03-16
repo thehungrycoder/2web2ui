@@ -1,11 +1,11 @@
-/* eslint max-lines: ["error", 205] */
+/* eslint max-lines: ["error", 300] */
 
 import * as billingInfo from '../accountBillingInfo';
 
 describe('Selector: public plans', () => {
-  let store;
+  let state;
   beforeEach(() => {
-    store = {
+    state = {
       billing: {
         plans: [
           { status: 'public', volume: 1 },
@@ -18,20 +18,20 @@ describe('Selector: public plans', () => {
   });
 
   it('should get public plans and sort by volume', () => {
-    expect(billingInfo.publicPlansSelector(store)).toMatchSnapshot();
+    expect(billingInfo.publicPlansSelector(state)).toMatchSnapshot();
   });
 
   it('returns empty list on no plans (billing.plans)', () => {
-    delete store.billing.plans;
-    expect(billingInfo.publicPlansSelector(store)).toEqual([]);
+    delete state.billing.plans;
+    expect(billingInfo.publicPlansSelector(state)).toEqual([]);
   });
 });
 
 describe('Selector: current plan', () => {
-  let store;
+  let state;
 
   beforeEach(() => {
-    store = {
+    state = {
       account: { subscription: { code: 'qwe' }},
       billing: {
         plans: [
@@ -43,17 +43,17 @@ describe('Selector: current plan', () => {
   });
 
   it('should get current plan from billing', () => {
-    expect(billingInfo.currentPlanSelector(store)).toMatchSnapshot();
+    expect(billingInfo.currentPlanSelector(state)).toMatchSnapshot();
   });
 
   it('returns empty object when matching plan found', () => {
-    store.account.subscription.code = 'no-match';
-    expect(billingInfo.currentPlanSelector(store)).toEqual({});
+    state.account.subscription.code = 'no-match';
+    expect(billingInfo.currentPlanSelector(state)).toEqual({});
   });
 });
 
-describe('Selector: should expose card', () => {
-  const store = {
+describe('Selector: can update billing info', () => {
+  const state = {
     account: { subscription: { code: 'qwe' }, billing: {}},
     billing: {
       plans: [
@@ -64,58 +64,82 @@ describe('Selector: should expose card', () => {
   };
 
   it('should return true if on paid plan', () => {
-    expect(billingInfo.shouldExposeCardSelector(store)).toEqual(true);
+    expect(billingInfo.canUpdateBillingInfoSelector(state)).toEqual(true);
   });
 });
 
 describe('Selector: can change plan', () => {
   it('should return false with a suspension', () => {
-    const store = {
+    const state = {
       account: { isSuspendedForBilling: true }
     };
 
-    expect(billingInfo.canChangePlanSelector(store)).toEqual(false);
+    expect(billingInfo.canChangePlanSelector(state)).toEqual(false);
   });
 
   it('should return false with a pending plan change', () => {
-    const store = {
+    const state = {
       account: { pending_subscription: {}}
     };
 
-    expect(billingInfo.canChangePlanSelector(store)).toEqual(false);
+    expect(billingInfo.canChangePlanSelector(state)).toEqual(false);
   });
 });
 
 describe('currentPlanCodeSelector: can select plan code', () => {
-  let store;
+  let state;
   beforeEach(() => {
-    store = {
+    state = {
       account: { subscription: { code: 'qwe' }}
     };
   });
 
   it('returns correct plan code', () => {
-    expect(billingInfo.currentPlanCodeSelector(store)).toEqual('qwe');
+    expect(billingInfo.currentPlanCodeSelector(state)).toEqual('qwe');
   });
 });
 
+describe('selectBillingInfo', () => {
+
+  it('returns the combined billing info state', () => {
+    const state = {
+      account: { subscription: { code: 'qwe' }, billing: {}},
+      billing: {
+        plans: [
+          { status: 'public', code: '123' },
+          { status: 'public', code: 'qwe', isFree: false }
+        ]
+      }
+    };
+
+    expect(Object.keys(billingInfo.selectBillingInfo(state))).toEqual([
+      'canUpdateBillingInfo',
+      'canChangePlan',
+      'canPurchaseIps',
+      'currentPlan',
+      'plans'
+    ]);
+  });
+
+});
+
 describe('isAWSAccountSelector', () => {
-  let store;
+  let state;
   beforeEach(() => {
-    store = {
+    state = {
       account: { subscription: { code: 'free', type: 'aws' }}
     };
   });
 
   it('returns true when subscription type is aws', () => {
-    expect(billingInfo.isAWSAccountSelector(store)).toBe(true);
+    expect(billingInfo.isAWSAccountSelector(state)).toBe(true);
   });
 });
 
 describe('getPlansSelector', () => {
-  let store;
+  let state;
   beforeEach(() => {
-    store = {
+    state = {
       account: { subscription: { code: 'free', type: 'aws' }},
       billing: {
         plans: [
@@ -128,50 +152,27 @@ describe('getPlansSelector', () => {
   });
 
   it('returns aws plans when subscription type is aws', () => {
-    expect(billingInfo.getPlansSelector(store)).toEqual([{ status: 'private', code: '123', awsMarketplace: true }]);
+    expect(billingInfo.getPlansSelector(state)).toEqual([{ status: 'private', code: '123', awsMarketplace: true }]);
   });
 
   it('does not return free for manually billed accounts', () => {
-    store.account.subscription = { code: 'ent1', type: 'Default' };
-    expect(billingInfo.getPlansSelector(store)).toEqual([{ status: 'public', code: 'qwe', isFree: false }]);
+    state.account.subscription = { code: 'ent1', type: 'Default' };
+    expect(billingInfo.getPlansSelector(state)).toEqual([{ status: 'public', code: 'qwe', isFree: false }]);
   });
 
   it('returns public plans for self serve customers', () => {
-    store.account.subscription = { code: 'free', type: 'Default', self_serve: true };
-    expect(billingInfo.getPlansSelector(store)).toEqual([
+    state.account.subscription = { code: 'free', type: 'Default', self_serve: true };
+    expect(billingInfo.getPlansSelector(state)).toEqual([
       { status: 'public', code: 'qwe', isFree: false },
       { status: 'public', code: 'qwe2', isFree: true }
     ]);
   });
 });
 
-describe('isSelfServeOrAWSSelector', () => {
-  let store;
-  beforeEach(() => {
-    store = {
-      account: { subscription: { type: 'aws' }}
-    };
-  });
-
-  it('returns true when subscription type is aws', () => {
-    expect(billingInfo.isSelfServeOrAWSSelector(store)).toBe(true);
-  });
-
-  it('returns true when it is self serve', () => {
-    store.account.subscription = { type: 'default', self_serve: true };
-    expect(billingInfo.isSelfServeOrAWSSelector(store)).toBe(true);
-  });
-
-  it('returns false for non-self-serve and non aws', () => {
-    store.account.subscription = { type: 'default', self_serve: false };
-    expect(billingInfo.isSelfServeOrAWSSelector(store)).toBe(false);
-  });
-});
-
 describe('canPurchaseIps', () => {
-  let store;
+  let state;
   beforeEach(() => {
-    store = {
+    state = {
       account: {
         subscription: { code: 'paid1' },
         billing: {}
@@ -186,18 +187,18 @@ describe('canPurchaseIps', () => {
   });
 
   it('returns true when plan can buy ip and has billing setup', () => {
-    expect(billingInfo.canPurchaseIps(store)).toBe(true);
+    expect(billingInfo.canPurchaseIps(state)).toBe(true);
   });
 
   it('returns false when plan can buy ip but billing is not setup', () => {
-    delete store.account.billing;
-    expect(billingInfo.canPurchaseIps(store)).toBe(false);
+    delete state.account.billing;
+    expect(billingInfo.canPurchaseIps(state)).toBe(false);
   });
 
   it('returns true when aws plan can buy ip but billing not setup', () => {
-    delete store.account.billing;
-    store.account.subscription.type = 'aws';
-    expect(billingInfo.canPurchaseIps(store)).toBe(true);
+    delete state.account.billing;
+    state.account.subscription.type = 'aws';
+    expect(billingInfo.canPurchaseIps(state)).toBe(true);
   });
 
 });

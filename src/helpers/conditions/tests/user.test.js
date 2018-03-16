@@ -1,23 +1,23 @@
-import { notHeroku, notAzure } from '../user';
+import { isHeroku, isAzure } from '../user';
 
 describe('User Condition Tests', () => {
-  it('should return true if user is not heroku', () => {
-    const currentUser = { access_level: 'nerfed' };
-    expect(notHeroku()({ currentUser })).toEqual(true);
-  });
-
-  it('should return false if user is heroku', () => {
+  it('should return true if user is heroku', () => {
     const currentUser = { access_level: 'heroku' };
-    expect(notHeroku()({ currentUser })).toEqual(false);
+    expect(isHeroku({ currentUser })).toEqual(true);
   });
 
-  it('should return true if user is not azure', () => {
-    const currentUser = { access_level: 'nerfed' };
-    expect(notAzure()({ currentUser })).toEqual(true);
+  it('should return false if user is not heroku', () => {
+    const currentUser = { access_level: 'klurgen' };
+    expect(isHeroku({ currentUser })).toEqual(false);
   });
 
-  it('should return false if user is azure', () => {
+  it('should return true if user is azure', () => {
     const currentUser = { access_level: 'azure' };
-    expect(notAzure()({ currentUser })).toEqual(false);
+    expect(isAzure({ currentUser })).toEqual(true);
+  });
+
+  it('should return false if user is not azure', () => {
+    const currentUser = { access_level: 'blargh' };
+    expect(isAzure({ currentUser })).toEqual(false);
   });
 });

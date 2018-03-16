@@ -18,19 +18,18 @@ exports[`AddIps renders correctly when user reaches max ip limit 1`] = `
   >
     <Panel.Section>
       <p>
-        Dedicated IPs give you better control over your sending reputation.  You can add up to 
-        0
-         dedicated IPs to your plan for 
-        <DedicatedIpCost
-          isAWSAccount={false}
-          plan={Object {}}
-          quantity="1"
-        />
-         each.
+        Dedicated IPs give you better control over your sending reputation. 
       </p>
       <Field
+        autoFocus={true}
         component={[Function]}
         disabled={true}
+        helpText={
+          <span>
+            You cannot currently add any more IPs
+          </span>
+        }
+        inlineErrors={true}
         label="Quantity"
         max={0}
         min="1"
@@ -50,11 +49,6 @@ exports[`AddIps renders correctly when user reaches max ip limit 1`] = `
         disabled={true}
         formName="add-sending-ips"
       />
-      <Note>
-        New dedicated IP addresses will need to be warmed up, so we suggest adding them to an isolated pool.  Read the 
-        <WarmUpArticleLink />
-         for more information.
-      </Note>
     </Panel.Section>
     <Panel.Section>
       <Button
@@ -93,21 +87,27 @@ exports[`AddIps renders correctly with default props 1`] = `
   >
     <Panel.Section>
       <p>
-        Dedicated IPs give you better control over your sending reputation.  You can add up to 
-        NaN
-         dedicated IPs to your plan for 
-        <DedicatedIpCost
-          isAWSAccount={false}
-          plan={Object {}}
-          quantity="1"
-        />
-         each.
+        Dedicated IPs give you better control over your sending reputation. 
       </p>
       <Field
+        autoFocus={true}
         component={[Function]}
         disabled={false}
+        helpText={
+          <span>
+            You can add up to 
+            4
+             total dedicated IPs to your plan for 
+            <DedicatedIpCost
+              plan={Object {}}
+              quantity="1"
+            />
+             each.
+          </span>
+        }
+        inlineErrors={true}
         label="Quantity"
-        max={NaN}
+        max={4}
         min="1"
         name="quantity"
         required={true}
@@ -125,11 +125,6 @@ exports[`AddIps renders correctly with default props 1`] = `
         disabled={false}
         formName="add-sending-ips"
       />
-      <Note>
-        New dedicated IP addresses will need to be warmed up, so we suggest adding them to an isolated pool.  Read the 
-        <WarmUpArticleLink />
-         for more information.
-      </Note>
     </Panel.Section>
     <Panel.Section>
       <Button
@@ -168,28 +163,37 @@ exports[`AddIps renders free ip elements when included in plan 1`] = `
   >
     <Panel.Section>
       <p>
-        Dedicated IPs give you better control over your sending reputation.  You can add up to 
-        NaN
-         dedicated IPs to your plan for 
-        <DedicatedIpCost
-          isAWSAccount={false}
-          plan={
-            Object {
-              "includesIp": true,
-            }
-          }
-          quantity="1"
-        />
-         each.
-      </p>
-      <p>
-        Your plan includes one free IP.  If used, your account statement will show a charge with a matching refund.
+        Dedicated IPs give you better control over your sending reputation. 
+        <span>
+          <strong>
+            Your plan includes one free dedicated IP address.
+          </strong>
+           If claimed, your account statement will show a charge with a matching refund.
+        </span>
       </p>
       <Field
+        autoFocus={true}
         component={[Function]}
         disabled={false}
+        helpText={
+          <span>
+            You can add up to 
+            4
+             total dedicated IPs to your plan for 
+            <DedicatedIpCost
+              plan={
+                Object {
+                  "includesIp": true,
+                }
+              }
+              quantity="1"
+            />
+             each.
+          </span>
+        }
+        inlineErrors={true}
         label="Quantity"
-        max={NaN}
+        max={4}
         min="1"
         name="quantity"
         required={true}
@@ -207,11 +211,6 @@ exports[`AddIps renders free ip elements when included in plan 1`] = `
         disabled={false}
         formName="add-sending-ips"
       />
-      <Note>
-        New dedicated IP addresses will need to be warmed up, so we suggest adding them to an isolated pool.  Read the 
-        <WarmUpArticleLink />
-         for more information.
-      </Note>
     </Panel.Section>
     <Panel.Section>
       <Button

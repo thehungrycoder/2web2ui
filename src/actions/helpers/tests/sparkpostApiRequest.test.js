@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import sparkpostApiRequest, { refreshTokensUsed } from '../sparkpostApiRequest';
 import SparkpostApiError from '../sparkpostApiError';
 import { createMockStore } from 'src/__testHelpers__/mockStore';
@@ -5,10 +6,12 @@ import * as axiosMocks from 'src/helpers/axiosInstances';
 import * as authMock from 'src/actions/auth';
 import * as globalAlertMock from 'src/actions/globalAlert';
 import * as httpHelpersMock from 'src/helpers/http';
+import * as accountActions from 'src/actions/account';
 
 jest.mock('src/helpers/axiosInstances');
 jest.mock('src/actions/auth');
 jest.mock('src/actions/globalAlert');
+jest.mock('src/actions/account');
 jest.mock('src/helpers/http');
 
 describe('Helper: SparkPost API Request', () => {
@@ -24,7 +27,7 @@ describe('Helper: SparkPost API Request', () => {
   expect.hasAssertions();
 
   beforeEach(() => {
-    state = { auth: { loggedIn: true, token: 'TEST-TOKEN' }};
+    state = { auth: { loggedIn: true, token: 'TEST-TOKEN' }, account: { status: 'active' }};
     mockStore = createMockStore(state);
 
     meta = { url: '/some/path', method: 'GET' };
@@ -33,6 +36,9 @@ describe('Helper: SparkPost API Request', () => {
     authMock.logout = jest.fn(() => ({ type: 'LOGOUT' }));
 
     axiosMocks.sparkpost.mockImplementation(() => Promise.resolve({ data: { results }}));
+    globalAlertMock.showAlert = jest.fn(() => ({ type: 'SHOW_ALERT' }));
+    globalAlertMock.showSuspensionAlert = jest.fn(() => ({ type: 'SHOW_SUSPENSION_ALERT' }));
+    accountActions.fetch = jest.fn(() => ({ type: 'FETCH_ACCOUNT' }));
   });
 
   it('should successfully call the API', async() => {
@@ -95,6 +101,22 @@ describe('Helper: SparkPost API Request', () => {
       await expect(mockStore.dispatch(sparkpostApiRequest(action))).rejects.toThrow(apiErr);
       expect(authMock.logout).toHaveBeenCalledTimes(1);
       expect(mockStore.getActions()).toMatchSnapshot();
+    });
+
+    it('should not log out on a 403 while suspended', async() => {
+      jest.spyOn(globalAlertMock, 'showSuspensionAlert');
+      apiErr.response.status = 403;
+      state.account.status = 'suspended';
+      expect(globalAlertMock.showSuspensionAlert).not.toHaveBeenCalled();
+      try {
+        await mockStore.dispatch(sparkpostApiRequest(action));
+      } catch (err) {
+        expect(err).toEqual(apiErr);
+        expect(authMock.logout).not.toHaveBeenCalled();
+        expect(globalAlertMock.showSuspensionAlert).toHaveBeenCalledTimes(1);
+        expect(accountActions.fetch).toHaveBeenCalledTimes(1);
+        expect(mockStore.getActions()).toMatchSnapshot();
+      }
     });
 
     it('should dispatch a logout action on a 401 with no refresh token', async() => {
