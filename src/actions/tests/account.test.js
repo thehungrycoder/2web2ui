@@ -1,4 +1,4 @@
-import { fetch, getPlans, register } from '../account';
+import { fetch, getPlans, register, emailRequest } from '../account';
 jest.mock('../helpers/sparkpostApiRequest', () => jest.fn((a) => a));
 
 test('fetch - no params', () => {
@@ -36,6 +36,22 @@ describe('Account action creators', () => {
     });
     it('makes api call with passed data', () => {
       expect(register(data)).toMatchSnapshot();
+    });
+  });
+
+  describe('emailRequest', () => {
+    let data;
+    beforeEach(() => {
+      data = {
+        limit: 50000,
+        previousLimit: '1000',
+        template_id: 'daily-limit-increase',
+        campaign_id: 'support-daily-limit-increase',
+        reason: 'just because i want'
+      };
+    });
+    it('makes api call with correct data', () => {
+      expect(emailRequest(data)).toMatchSnapshot();
     });
   });
 
