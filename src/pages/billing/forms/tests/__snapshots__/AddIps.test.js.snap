@@ -41,6 +41,7 @@ exports[`AddIps renders correctly when user reaches max ip limit 1`] = `
             [Function],
             [Function],
             [Function],
+            [Function],
           ]
         }
       />
@@ -113,6 +114,7 @@ exports[`AddIps renders correctly with default props 1`] = `
         type="number"
         validate={
           Array [
+            [Function],
             [Function],
             [Function],
             [Function],
@@ -198,6 +200,7 @@ exports[`AddIps renders free ip elements when included in plan 1`] = `
         type="number"
         validate={
           Array [
+            [Function],
             [Function],
             [Function],
             [Function],

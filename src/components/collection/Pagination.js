@@ -2,10 +2,30 @@ import React, { Component } from 'react';
 import { Pagination, Button } from '@sparkpost/matchbox';
 import classnames from 'classnames';
 import styles from './Pagination.module.scss';
+import Papa from 'papaparse';
+import _ from 'lodash';
 
 export const defaultPerPageButtons = [10, 25, 50, 100];
 
 class CollectionPagination extends Component {
+  formatToCsv = () => {
+    const { data: rows } = this.props;
+    // we are doing this because certain keys are objects/array which papa parse doesn't stringify
+    const mappedRows = _.map(rows, (row) => _.mapValues(row, (value) => _.isObject(value) || _.isArray(value) ? JSON.stringify(value) : value));
+    const data = Papa.unparse(mappedRows);
+    return `data:text/csv;charset=utf-8,${encodeURI(data)}`;
+  }
+
+  renderCSVSave() {
+    const { saveCsv, data, perPageButtons } = this.props;
+
+    // do not show save as csv if only 1 page of smallest per page increment
+    if (!saveCsv || data.length <= Math.min(...perPageButtons)) { return null; }
+
+    const now = Math.floor(Date.now() / 1000);
+    return <Button download={`sparkpost-csv-${now}.csv`} to={this.formatToCsv()}>Save As CSV</Button>;
+
+  }
 
   renderPageButtons() {
     const { data, perPage, currentPage, pageRange, onPageChange } = this.props;
@@ -60,6 +80,7 @@ class CollectionPagination extends Component {
         </div>
         <div className={styles.PerPageButtons}>
           {this.renderPerPageButtons()}
+          {this.renderCSVSave()}
         </div>
       </div>
     );
@@ -68,7 +89,8 @@ class CollectionPagination extends Component {
 
 CollectionPagination.defaultProps = {
   pageRange: 5,
-  perPageButtons: defaultPerPageButtons
+  perPageButtons: defaultPerPageButtons,
+  saveCsv: true
 };
 
 export default CollectionPagination;

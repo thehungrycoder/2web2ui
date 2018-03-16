@@ -32,7 +32,7 @@ export class DataTable extends Component {
       columns={columns}
       rows={list}
       getRowData={this.getRowData}
-      pagination={true}
+      pagination
       defaultSortColumn='reason'
       defaultSortDirection='desc'
     />;

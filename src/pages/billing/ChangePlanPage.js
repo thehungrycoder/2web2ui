@@ -5,12 +5,13 @@ import { Page } from '@sparkpost/matchbox';
 import { Loading } from 'src/components';
 import { PendingPlanBanner } from './components/Banners';
 import ChangePlan from './forms/ChangePlan';
-import { getPlans } from 'src/actions/account';
+import { fetch as fetchAccount, getPlans } from 'src/actions/account';
 import { getBillingCountries } from 'src/actions/billing';
 import { canChangePlanSelector } from 'src/selectors/accountBillingInfo';
 
 export class ChangePlanPage extends Component {
   componentWillMount() {
+    this.props.fetchAccount({ include: 'billing' });
     this.props.getPlans();
     this.props.getBillingCountries();
   }
@@ -37,6 +38,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchtoProps = {
+  fetchAccount,
   getPlans,
   getBillingCountries
 };

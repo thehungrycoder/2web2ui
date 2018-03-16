@@ -73,7 +73,7 @@ export class BouncePage extends Component {
       getRowData={this.getRowData}
       defaultSortColumn='count_bounce'
       defaultSortDirection='desc'
-      pagination={true}
+      pagination
     />;
   }
 

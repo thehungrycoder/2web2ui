@@ -10,7 +10,7 @@ import { TextFieldWrapper } from 'src/components';
 import config from 'src/config';
 import IpPoolSelect from './fields/IpPoolSelect';
 import ErrorTracker from 'src/helpers/errorTracker';
-import { required, minNumber, maxNumber } from 'src/helpers/validation';
+import { required, integer, minNumber, maxNumber } from 'src/helpers/validation';
 import { currentPlanSelector } from 'src/selectors/accountBillingInfo';
 import DedicatedIpCost from '../components/DedicatedIpCost';
 import { isAws } from 'src/helpers/conditions/account';
@@ -99,7 +99,7 @@ export class AddIps extends Component {
               min='1' max={remainingCount}
               required={true}
               type='number'
-              validate={[required, minNumber(1), maxNumber(remainingCount)]}
+              validate={[required, integer, minNumber(1), maxNumber(remainingCount)]}
               inlineErrors={true}
               autoFocus={true}
               helpText={(remainingCount === 0) ? <span>You cannot currently add any more IPs</span> : <span>You can add up to {maxPerAccount} total dedicated IPs to your plan for <DedicatedIpCost plan={currentPlan} quantity='1' /> each.</span>}

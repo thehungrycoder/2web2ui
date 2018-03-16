@@ -20,6 +20,7 @@ exports[`Form Container: Update Contact should render 1`] = `
         Update Billing Contact
       </Button>
       <Button
+        onClick={[MockFunction]}
         size="default"
       >
         Cancel

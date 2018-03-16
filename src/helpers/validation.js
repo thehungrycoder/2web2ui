@@ -51,6 +51,8 @@ export const minLength = _.memoize(function minLength(length) {
   return (value) => (typeof value !== 'undefined' && value.length < length) ? `Must be at least ${length} characters` : undefined;
 });
 
+export const integer = (value) => /^-?[0-9]+$/.test(value) ? undefined : 'Integers only please';
+
 export const minNumber = _.memoize(function minNumber(min) {
   return (value) => (value < min) ? `Must be at least ${min}` : undefined;
 });
