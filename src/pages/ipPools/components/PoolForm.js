@@ -6,7 +6,7 @@ import { SelectWrapper } from 'src/components/reduxFormWrappers';
 import { TableCollection } from 'src/components';
 import { required } from 'src/helpers/validation';
 import { TextFieldWrapper } from 'src/components';
-import { selectCurrentPoolInitialValues, selectIpsForCurrentPool } from 'src/selectors/ipPools';
+import { selectIpPoolFormInitialValues, selectIpsForCurrentPool } from 'src/selectors/ipPools';
 import isDefaultPool from '../helpers/defaultPool';
 
 const columns = ['Sending IP', 'Hostname', 'IP Pool'];
@@ -65,7 +65,7 @@ export class PoolForm extends Component {
   render() {
     const { isNew, pool, handleSubmit, submitting, pristine } = this.props;
     const submitText = isNew ? 'Create IP Pool' : 'Update IP Pool';
-    const editingDefault = isDefaultPool(pool.id);
+    const editingDefault = !isNew && isDefaultPool(pool.id);
     const helpText = editingDefault ? 'Sorry, you can\'t edit the default pool\'s name. Then it wouldn\'t be the default!' : '';
 
     return (
@@ -89,7 +89,7 @@ export class PoolForm extends Component {
   }
 }
 
-const mapStateToProps = (state, { isNew }) => {
+const mapStateToProps = (state, props) => {
   const { ipPools } = state;
   const { pool, list = []} = ipPools;
 
@@ -97,9 +97,14 @@ const mapStateToProps = (state, { isNew }) => {
     list,
     pool,
     ips: selectIpsForCurrentPool(state),
-    initialValues: selectCurrentPoolInitialValues(state)
+    initialValues: selectIpPoolFormInitialValues(state, props)
   };
 };
 
-const PoolReduxForm = reduxForm({ form: 'poolForm' })(PoolForm);
+const formOptions = {
+  form: 'poolForm',
+  enableReinitialize: true
+};
+
+const PoolReduxForm = reduxForm(formOptions)(PoolForm);
 export default connect(mapStateToProps, {})(PoolReduxForm);

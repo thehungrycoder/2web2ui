@@ -48,7 +48,7 @@ export const getOrderedIpPools = createSelector(
  * Note: IPs are converted to make them safe to use as
  * React props, with _ instead of .
  */
-export const selectCurrentPoolInitialValues = createSelector(
+const selectCurrentPoolInitialValues = createSelector(
   [selectCurrentPool, selectIpsForCurrentPool],
   (currentPool, ips) => ({
     name: currentPool.name,
@@ -57,6 +57,13 @@ export const selectCurrentPoolInitialValues = createSelector(
       return result;
     }, {})
   })
+);
+
+const isFormInNewMode = (state, { isNew }) => isNew;
+
+export const selectIpPoolFormInitialValues = createSelector(
+  [selectCurrentPoolInitialValues, isFormInNewMode],
+  (initialValues, isNew) => isNew ? {} : initialValues
 );
 
 /**
