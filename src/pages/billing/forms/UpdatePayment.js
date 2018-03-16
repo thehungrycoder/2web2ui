@@ -23,7 +23,7 @@ export class UpdatePayment extends Component {
     const { billingUpdate, onCancel, showAlert } = this.props;
     return billingUpdate(values).then(() => {
       showAlert({ type: 'success', message: 'Payment Information Updated' });
-      onCancel();
+      typeof onCancel === 'function' && onCancel();
     });
   }
 

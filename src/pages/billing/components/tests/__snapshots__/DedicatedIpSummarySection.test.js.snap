@@ -93,7 +93,7 @@ exports[`DedicatedIpSummarySection renders zero count and first is free notice 1
   actions={
     Array [
       Object {
-        "content": "Add Dedicated IPs",
+        "content": "Claim Your Free Dedicated IP",
         "disabled": false,
         "onClick": [Function],
       },
@@ -106,9 +106,6 @@ exports[`DedicatedIpSummarySection renders zero count and first is free notice 1
     <h6>
       0
     </h6>
-    <p>
-      First IP is free!
-    </p>
   </LabelledValue>
 </Panel.Section>
 `;

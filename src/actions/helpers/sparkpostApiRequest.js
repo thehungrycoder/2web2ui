@@ -1,6 +1,7 @@
 import requestHelperFactory from 'src/actions/helpers/requestHelperFactory';
 import { refresh, logout } from 'src/actions/auth';
-import { showAlert } from 'src/actions/globalAlert';
+import { fetch as fetchAccount } from 'src/actions/account';
+import { showAlert, showSuspensionAlert } from 'src/actions/globalAlert';
 import { useRefreshToken } from 'src/helpers/http';
 import { resolveOnCondition } from 'src/helpers/promise';
 import _ from 'lodash';
@@ -37,9 +38,12 @@ const sparkpostRequest = requestHelperFactory({
     return results;
   },
   onFail: ({ types, err, dispatch, meta, action, getState }) => {
+    // TODO: Move this error transformation into an axios interceptor in the
+    // sparkpost axios instance, so all sparkpost API errors look the same
+    // (even those that don't use this helper because the request is not authenticated)
     const apiError = new SparkpostApiError(err);
     const { message, response = {}} = apiError;
-    const { auth } = getState();
+    const { auth, account } = getState();
     const { retries = 0, showErrorAlert = true } = meta;
 
     // NOTE: if this is a 401 and we have a refresh token, we need to do a
@@ -79,7 +83,7 @@ const sparkpostRequest = requestHelperFactory({
     }
 
     // If we have a 403 or a 401 and we're not refreshing, log the user out silently
-    if (response.status === 401 || response.status === 403) {
+    if (account.status === 'active' && (response.status === 401 || response.status === 403)) {
       dispatch(logout());
       throw apiError;
     }
@@ -91,10 +95,17 @@ const sparkpostRequest = requestHelperFactory({
       meta
     });
 
+    // if the account is suspended, a 403 should not log the user out
+    if (response.status === 403 && account.status === 'suspended') {
+      dispatch(showSuspensionAlert());
+      dispatch(fetchAccount());
+    }
+
     if (showErrorAlert) {
       dispatch(showAlert({ type: 'error', message: 'Something went wrong.', details: message }));
     }
 
+    // TODO: Remove this once we unchain all actions
     throw apiError;
   }
 });

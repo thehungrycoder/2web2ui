@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Snackbar } from '@sparkpost/matchbox';
+import styles from './Alert.module.scss';
 
 class Alert extends Component {
   static propTypes = {
     autoDismiss: PropTypes.bool,
     message: PropTypes.string.isRequired,
-    type: PropTypes.oneOf(['default', 'success', 'error', 'danger']),
+    type: PropTypes.string,
     details: PropTypes.string,
     timeoutInterval: PropTypes.number,
-    onDismiss: PropTypes.func.isRequired
+    onDismiss: PropTypes.func.isRequired,
+    maxWidth: PropTypes.number
   };
 
   static defaultProps = {
@@ -53,21 +55,20 @@ class Alert extends Component {
     const { showDetails } = this.state;
 
     const detailsLink = details && !showDetails
-      ? <a onClick={this.handleDetails}>View Details</a>
+      ? <a className={styles.Details} onClick={this.handleDetails}>View Details</a>
       : null;
 
     const markup = showDetails
       ? <div>{ details }</div>
-      : <div>{ message } { detailsLink }</div>;
+      : <div>{ message } <span>{detailsLink}</span></div>;
 
     return <div>{ markup }</div>;
   }
 
   render() {
-    const { type } = this.props;
-    const status = type === 'error' ? 'danger' : type;
+    const { type, maxWidth } = this.props;
 
-    return <Snackbar status={status} onDismiss={this.handleDismiss}>{ this.renderMessage() }</Snackbar>;
+    return <Snackbar status={type} onDismiss={this.handleDismiss} maxWidth={maxWidth}>{this.renderMessage()}</Snackbar>;
   }
 }
 

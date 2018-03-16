@@ -2,19 +2,19 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, formValueSelector } from 'redux-form';
 import { withRouter } from 'react-router-dom';
-
 import { billingCreate, billingUpdate, updateSubscription } from 'src/actions/billing';
 import { showAlert } from 'src/actions/globalAlert';
 import { changePlanInitialValues } from 'src/selectors/accountBillingForms';
-import { currentPlanSelector, shouldExposeCardSelector, isAWSAccountSelector, getPlansSelector } from 'src/selectors/accountBillingInfo';
-
+import { getPlansSelector, currentPlanSelector, canUpdateBillingInfoSelector } from 'src/selectors/accountBillingInfo';
 import { Panel, Grid } from '@sparkpost/matchbox';
 import { PlanPicker } from 'src/components';
-
 import PaymentForm from './fields/PaymentForm';
 import BillingAddressForm from './fields/BillingAddressForm';
 import Confirmation from '../components/Confirmation';
-import { CardSummary } from '../components/SummarySection';
+import CardSummary from '../components/CardSummary';
+import { isAws, isSelfServeBilling } from 'src/helpers/conditions/account';
+import { not } from 'src/helpers/conditions';
+import AccessControl from 'src/components/auth/AccessControl';
 
 const FORMNAME = 'changePlan';
 
@@ -26,7 +26,7 @@ export class ChangePlan extends Component {
 
   componentWillReceiveProps(nextProps) {
     // Null check to make sure this only runs once
-    if (nextProps.shouldExposeCard && this.state.useSavedCC === null) {
+    if (nextProps.canUpdateBillingInfo && this.state.useSavedCC === null) {
       this.setState({ useSavedCC: true });
     }
   }
@@ -36,12 +36,12 @@ export class ChangePlan extends Component {
   }
 
   onSubmit = (values) => {
-    const { account, updateSubscription, billingCreate, billingUpdate, showAlert, history, isAWSAccount } = this.props;
+    const { account, updateSubscription, billingCreate, billingUpdate, showAlert, history } = this.props;
     // decides which action to be taken based on
     // if it's aws account, it already has billing and if you use a saved CC
     let action;
-    if (isAWSAccount) {
-      action = updateSubscription({ code: values.planpicker.code, isAWSAccount });
+    if (isAws({ account })) {
+      action = updateSubscription({ code: values.planpicker.code });
     } else if (account.billing) {
       action = this.state.useSavedCC ? updateSubscription({ code: values.planpicker.code }) : billingUpdate(values);
     } else {
@@ -54,7 +54,7 @@ export class ChangePlan extends Component {
   }
 
   renderCCSection = () => {
-    const { billing } = this.props.account;
+    const { account } = this.props;
 
     if (this.props.selectedPlan && this.props.selectedPlan.isFree) {
       return null; // CC not required on free plans
@@ -63,12 +63,12 @@ export class ChangePlan extends Component {
     if (this.state.useSavedCC) {
       return (
         <Panel title='Pay With Saved Payment Method' actions={[{ content: 'Use Another Credit Card', onClick: this.handleCardToggle }]}>
-          <Panel.Section><CardSummary billing={billing} /></Panel.Section>
+          <Panel.Section><CardSummary billing={account.billing} /></Panel.Section>
         </Panel>
       );
     }
 
-    const savedPaymentAction = this.props.shouldExposeCard
+    const savedPaymentAction = this.props.canUpdateBillingInfo
       ? [{ content: 'Use Saved Payment Method', onClick: this.handleCardToggle }]
       : null;
 
@@ -90,11 +90,10 @@ export class ChangePlan extends Component {
   }
 
   render() {
-    const { account, submitting, pristine, currentPlan, selectedPlan, plans, isAWSAccount } = this.props;
-    const billingEnabled = account.subscription.self_serve || isAWSAccount;
+    const { submitting, pristine, currentPlan, selectedPlan, plans, isSelfServeBilling } = this.props;
 
     // Manually billed accounts can submit without changing plan
-    const disableSubmit = submitting || (billingEnabled && (pristine || currentPlan.code === selectedPlan.code));
+    const disableSubmit = submitting || (isSelfServeBilling && (pristine || currentPlan.code === selectedPlan.code));
 
     return (
       <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
@@ -102,16 +101,18 @@ export class ChangePlan extends Component {
           <Grid.Column>
             <Panel title='Select A Plan'>
               { plans.length &&
-                <PlanPicker disabled={this.props.submitting} plans={plans} />
+                <PlanPicker disabled={submitting} plans={plans} />
               }
             </Panel>
-            { !isAWSAccount && this.renderCCSection() }
+            <AccessControl condition={not(isAws)}>
+              {this.renderCCSection()}
+            </AccessControl>
           </Grid.Column>
           <Grid.Column xs={12} md={5}>
             <Confirmation
-              current={this.props.currentPlan}
-              selected={this.props.selectedPlan}
-              billingEnabled={billingEnabled}
+              current={currentPlan}
+              selected={selectedPlan}
+              billingEnabled={isSelfServeBilling}
               disableSubmit={disableSubmit} />
           </Grid.Column>
         </Grid>
@@ -125,12 +126,12 @@ const mapStateToProps = (state) => {
   return {
     account: state.account,
     billing: state.billing,
-    shouldExposeCard: shouldExposeCardSelector(state),
+    canUpdateBillingInfo: canUpdateBillingInfoSelector(state),
+    isSelfServeBilling: isSelfServeBilling(state),
     plans: getPlansSelector(state),
     currentPlan: currentPlanSelector(state),
     selectedPlan: selector(state, 'planpicker'),
-    initialValues: changePlanInitialValues(state),
-    isAWSAccount: isAWSAccountSelector(state)
+    initialValues: changePlanInitialValues(state)
   };
 };
 

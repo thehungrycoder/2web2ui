@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: SuspendedForBilling should render correctly 1`] = `
+<React.Fragment>
+  <Banner
+    status="danger"
+    title="Your account has been suspended due to a billing problem"
+  >
+    <p>
+      We sent an email notification to your current billing contact email address
+       (account.billing.email@example.com)
+      . To reactivate your account and pay your outstanding balance due, please update your payment information below.
+    </p>
+    <p>
+      If you have any questions, please 
+      <UnstyledLink
+        to="mailto:billing.email@example.com"
+      >
+        contact us
+      </UnstyledLink>
+      .
+    </p>
+  </Banner>
+  <UpdatePaymentForm />
+</React.Fragment>
+`;

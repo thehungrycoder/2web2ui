@@ -26,10 +26,13 @@ import {
 import onboarding from 'src/pages/onboarding';
 import { default as emailVerification } from 'src/components/emailVerification/EmailVerification';
 import { emailVerificationRedirect, emailRedirects } from './emailRoutes';
-import { hasGrants, composeConditions } from 'src/helpers/conditions';
-import { notEnterprise } from 'src/helpers/conditions/account';
-import { notHeroku, notAzure } from 'src/helpers/conditions/user';
+
+import { hasGrants, all, not } from 'src/helpers/conditions';
+import { isEnterprise } from 'src/helpers/conditions/account';
+import { isHeroku, isAzure } from 'src/helpers/conditions/user';
 import { configFlag, configEquals } from 'src/helpers/conditions/config';
+
+
 import App from 'src/components/layout/App';
 
 import { DEFAULT_REDIRECT_ROUTE } from 'src/constants';
@@ -139,7 +142,7 @@ const routes = [
     path: '/dashboard',
     component: DashboardPage,
     layout: App,
-    condition: composeConditions(
+    condition: all(
       hasGrants('api_keys/manage', 'templates/modify', 'sending_domains/manage'),
       configEquals('splashPage', '/dashboard') // want to hide if not a splash page https://jira.int.messagesystems.com/browse/FAD-6046
     )
@@ -233,7 +236,7 @@ const routes = [
   {
     path: '/templates',
     component: templates.ListPage,
-    condition: composeConditions(hasGrants('templates/modify'), ({ account }) => account.status === 'active'),
+    condition: all(hasGrants('templates/modify'), ({ account }) => account.status === 'active'),
     layout: App
   },
   {
@@ -378,13 +381,13 @@ const routes = [
   {
     path: '/account/billing',
     component: billing.SummaryPage,
-    condition: composeConditions(hasGrants('account/manage'), notEnterprise(), notHeroku(), notAzure()),
+    condition: all(hasGrants('account/manage'), not(isEnterprise), not(isHeroku), not(isAzure)),
     layout: App
   },
   {
     path: '/account/billing/plan',
     component: billing.ChangePlanPage,
-    condition: composeConditions(hasGrants('account/manage'), notEnterprise(), notHeroku(), notAzure()),
+    condition: all(hasGrants('account/manage'), not(isEnterprise), not(isHeroku), not(isAzure)),
     layout: App
   },
   {

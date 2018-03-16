@@ -4,6 +4,7 @@ import { fetch as fetchAccount } from './account';
 import { list as getSendingIps } from './sendingIps';
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 import zuoraRequest from 'src/actions/helpers/zuoraRequest';
+import { isAws } from 'src/helpers/conditions/account';
 
 export function syncSubscription() {
   return sparkpostApiRequest({
@@ -19,20 +20,21 @@ export function syncSubscription() {
  * Updates plan
  * @param {string} code
  */
-export function updateSubscription({ code, isAWSAccount = false }) {
-  const url = `/account/${isAWSAccount ? 'aws-marketplace/subscription' : 'subscription'}`;
+export function updateSubscription({ code }) {
+  return (dispatch, getState) => {
+    const url = `/account/${isAws(getState()) ? 'aws-marketplace/subscription' : 'subscription'}`;
 
-  const action = sparkpostApiRequest({
-    type: 'UPDATE_SUBSCRIPTION',
-    meta: {
-      method: 'PUT',
-      url: url,
-      data: { code }
-    }
-  });
+    const action = sparkpostApiRequest({
+      type: 'UPDATE_SUBSCRIPTION',
+      meta: {
+        method: 'PUT',
+        url: url,
+        data: { code }
+      }
+    });
 
-  return (dispatch) => dispatch(action)
-    .then(() => dispatch(fetchAccount({ include: 'usage,billing' })));
+    return dispatch(action).then(() => dispatch(fetchAccount({ include: 'usage,billing' })));
+  };
 }
 
 /**
@@ -78,8 +80,8 @@ export function updateCreditCard({ data, token, signature }) {
   });
 }
 
-export function addDedicatedIps({ ip_pool, isAWSAccount, quantity }) {
-  const url = isAWSAccount
+export function addDedicatedIps({ ip_pool, isAwsAccount, quantity }) {
+  const url = isAwsAccount
     ? '/account/aws-marketplace/add-ons/dedicated_ips'
     : '/account/add-ons/dedicated_ips';
   const action = {
@@ -111,17 +113,28 @@ export function createZuoraAccount({ data, token, signature }) {
 }
 
 export function billingCreate(values) {
-  const { corsData, billingData } = formatDataForCors(values);
+  return (dispatch, getState) => {
 
-  return (dispatch) =>
+    // AWS plans don't get created through Zuora, instead update existing
+    // subscription to the selected plan
+    if (isAws(getState())) {
+      return dispatch(updateSubscription({ code: values.planpicker.code }));
+    }
+
+    const { corsData, billingData } = formatDataForCors(values);
 
     // get CORS data for the create account context
-    dispatch(cors('create-account', corsData))
+    return dispatch(cors('create-account', corsData))
 
       // create the Zuora account
       .then((results) => {
         const { token, signature } = results;
+        const { currentUser } = getState();
         const data = formatCreateData({ ...results, ...billingData });
+
+        // add user's email when creating account
+        data.billToContact.workEmail = currentUser.email;
+
         return dispatch(createZuoraAccount({ data, token, signature }));
       })
 
@@ -130,6 +143,8 @@ export function billingCreate(values) {
 
       // refetch the account
       .then(() => dispatch(fetchAccount({ include: 'usage,billing' })));
+
+  };
 }
 
 // note: this action creator should detect

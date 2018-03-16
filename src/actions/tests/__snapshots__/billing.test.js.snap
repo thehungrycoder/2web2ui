@@ -64,7 +64,11 @@ Array [
   Object {
     "meta": Object {
       "data": Object {
-        "formatted": "data",
+        "billToContact": Object {
+          "workEmail": "sparkpost-user-email@example.com",
+        },
+        "creditCard": Object {},
+        "subscription": Object {},
       },
       "headers": Object {
         "signature": undefined,
@@ -125,6 +129,26 @@ Array [
     "type": "ZUORA_UPDATE_CC",
   },
   [Function],
+  Object {
+    "meta": Object {
+      "data": Object {
+        "code": "test-plan",
+      },
+      "method": "PUT",
+      "url": "/account/subscription",
+    },
+    "type": "UPDATE_SUBSCRIPTION",
+  },
+  Object {
+    "meta": Object {
+      "method": "GET",
+      "params": Object {
+        "include": "usage,billing",
+      },
+      "url": "/account",
+    },
+    "type": "FETCH_ACCOUNT",
+  },
   Object {
     "meta": Object {
       "method": "POST",
@@ -209,6 +233,47 @@ Array [
       "url": "/payment-methods/credit-cards",
     },
     "type": "ZUORA_UPDATE_CC",
+  },
+]
+`;
+
+exports[`Action Creator: Billing should dispatch an update subscription action 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "data": Object {
+        "code": undefined,
+      },
+      "method": "PUT",
+      "url": "/account/subscription",
+    },
+    "type": "UPDATE_SUBSCRIPTION",
+  },
+  Object {
+    "meta": Object {
+      "method": "GET",
+      "params": Object {
+        "include": "usage,billing",
+      },
+      "url": "/account",
+    },
+    "type": "FETCH_ACCOUNT",
+  },
+]
+`;
+
+exports[`Action Creator: Billing should update instead of create if account is AWS 1`] = `
+Array [
+  [Function],
+  Object {
+    "meta": Object {
+      "data": Object {
+        "code": "newplan1",
+      },
+      "method": "PUT",
+      "url": "/account/aws-marketplace/subscription",
+    },
+    "type": "UPDATE_SUBSCRIPTION",
   },
 ]
 `;

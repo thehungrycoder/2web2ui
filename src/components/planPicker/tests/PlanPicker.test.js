@@ -5,6 +5,7 @@ import PlanPicker from '../PlanPicker';
 
 describe('Plan Picker: ', () => {
   let wrapper;
+  let props;
 
   beforeEach(() => {
     const plans = [
@@ -34,13 +35,14 @@ describe('Plan Picker: ', () => {
       }
     ];
 
-    const props = {
+    props = {
       input: { onChange: jest.fn() },
       plans
     };
 
     wrapper = shallow(<PlanPicker {...props} />);
   });
+
   it('renders correctly', () => {
     expect(wrapper).toMatchSnapshot();
   });
@@ -53,9 +55,9 @@ describe('Plan Picker: ', () => {
       overage: 0.4,
       volume: 4
     };
-
-    wrapper.setProps({ input: { onChange: jest.fn(), value: selected }});
+    const selectedProps = { ...props, input: { ...props.input, value: selected }};
+    const wrapper = shallow(<PlanPicker {...selectedProps} />);
     expect(wrapper).toMatchSnapshot();
   });
-//
+
 });

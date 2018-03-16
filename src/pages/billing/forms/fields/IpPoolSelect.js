@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, formValueSelector } from 'redux-form';
-
+import { UnstyledLink } from '@sparkpost/matchbox';
 import { listPools } from 'src/actions/ipPools';
 import { RadioGroup, SelectWrapper, TextFieldWrapper } from 'src/components';
 import { required } from 'src/helpers/validation';
 import { getNonDefaultIpPools } from 'src/selectors/ipPools';
+import { LINKS } from 'src/constants';
 
 const EXISTING = 'existing';
 const NEW = 'new';
@@ -25,7 +26,7 @@ const ActionSelect = ({ disabled, ipPools, loading }) => {
   ];
 
   return (
-    <Field
+    (ipPools.length > 0) && <Field
       component={RadioGroup}
       name='ipPool.action'
       options={options}
@@ -33,6 +34,11 @@ const ActionSelect = ({ disabled, ipPools, loading }) => {
     />
   );
 };
+
+
+const WarmUpHelpText = () => (
+  <span>New dedicated IP addresses will need to be warmed up, so we require new IPs to be added to an isolated, non-default pool. Read our <UnstyledLink to={LINKS.IP_WARM_UP} external>IP Warm-up Overview</UnstyledLink> for more information.</span>
+);
 
 const ExistingIpPoolField = ({ disabled, ipPools }) => {
   const options = ipPools.map((p) => ({ label: p.name, value: p.id }));
@@ -45,8 +51,9 @@ const ExistingIpPoolField = ({ disabled, ipPools }) => {
       label='Choose an IP Pool'
       options={options}
       placeholder=' ' // needed for matchbox, treated same as empty string by redux-form
-      required
+      required={true}
       validate={required}
+      helpText={<WarmUpHelpText />}
     />
   );
 };
@@ -57,8 +64,10 @@ const NewIpPoolField = ({ disabled }) => (
     name='ipPool.name'
     component={TextFieldWrapper}
     label='Name your new IP Pool'
-    required
+    required={true}
+    inlineErrors={true}
     validate={required}
+    helpText={<WarmUpHelpText />}
   />
 );
 

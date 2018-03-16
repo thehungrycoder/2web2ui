@@ -2,32 +2,21 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
-import { Button, Error, Panel, UnstyledLink } from '@sparkpost/matchbox';
-
+import { Button, Error, Panel } from '@sparkpost/matchbox';
 import { addDedicatedIps } from 'src/actions/billing';
 import { showAlert } from 'src/actions/globalAlert';
 import { createPool } from 'src/actions/ipPools';
 import { TextFieldWrapper } from 'src/components';
-import Note from 'src/components/note/Note';
 import config from 'src/config';
 import IpPoolSelect from './fields/IpPoolSelect';
 import ErrorTracker from 'src/helpers/errorTracker';
 import { required, integer, minNumber, maxNumber } from 'src/helpers/validation';
-import { currentPlanSelector, isAWSAccountSelector } from 'src/selectors/accountBillingInfo';
+import { currentPlanSelector } from 'src/selectors/accountBillingInfo';
 import DedicatedIpCost from '../components/DedicatedIpCost';
-import { LINKS } from 'src/constants';
-
+import { isAws } from 'src/helpers/conditions/account';
 import styles from './Forms.module.scss';
 
 const FORM_NAME = 'add-sending-ips';
-const WarmUpArticleLink = () => (
-  <UnstyledLink
-    to={LINKS.IP_WARM_UP}
-    external
-  >
-    IP Warm-up Overview article
-  </UnstyledLink>
-);
 
 export class AddIps extends Component {
   getOrCreateIpPool = async({ action, id, name }) => {
@@ -54,10 +43,11 @@ export class AddIps extends Component {
 
   onSubmit = async({ ipPool, quantity }) => {
     const ip_pool = await this.getOrCreateIpPool(ipPool);
-    const { isAWSAccount } = this.props;
+    const { account } = this.props;
+    const isAwsAccount = isAws({ account });
 
     try {
-      await this.props.addDedicatedIps({ ip_pool, isAWSAccount, quantity });
+      await this.props.addDedicatedIps({ ip_pool, isAwsAccount, quantity });
     } catch (error) {
       ErrorTracker.report('add-dedicated-sending-ips', error);
 
@@ -76,18 +66,16 @@ export class AddIps extends Component {
   }
 
   renderFreeIpNotice() {
-    return (
-      <p>
-        Your plan includes one free IP.  If used, your account statement will show a charge
-        with a matching refund.
-      </p>
-    );
+    if (this.props.currentPlan.isAwsAccount) {
+      return <strong>Your plan includes one free dedicated IP address.</strong>;
+    }
+
+    return <span><strong>Your plan includes one free dedicated IP address.</strong> If claimed, your account statement will show a charge with a matching refund.</span>;
   }
 
   render() {
-    const { currentPlan, error, handleSubmit, onClose, submitting, isAWSAccount } = this.props;
+    const { currentPlan, error, handleSubmit, onClose, submitting } = this.props;
     const { maxPerAccount } = config.sendingIps;
-
     const remainingCount = maxPerAccount - Math.min(this.props.sendingIps.length, maxPerAccount);
 
     // This form should not be rendered if the account has no remaining IP addresses
@@ -100,26 +88,23 @@ export class AddIps extends Component {
         <Panel title='Add Dedicated IPs' actions={[action]}>
           <Panel.Section>
             <p>
-              Dedicated IPs give you better control over your sending reputation.  You can add up
-              to { remainingCount } dedicated IPs to your plan
-              for <DedicatedIpCost plan={currentPlan} quantity='1' isAWSAccount={isAWSAccount} /> each.
+              Dedicated IPs give you better control over your sending reputation. { currentPlan.includesIp && this.renderFreeIpNotice() }
             </p>
-            { currentPlan.includesIp && this.renderFreeIpNotice() }
+
             <Field
               component={TextFieldWrapper}
               disabled={isDisabled}
               label='Quantity'
               name='quantity'
               min='1' max={remainingCount}
-              required
+              required={true}
               type='number'
               validate={[required, integer, minNumber(1), maxNumber(remainingCount)]}
+              inlineErrors={true}
+              autoFocus={true}
+              helpText={(remainingCount === 0) ? <span>You cannot currently add any more IPs</span> : <span>You can add up to {maxPerAccount} total dedicated IPs to your plan for <DedicatedIpCost plan={currentPlan} quantity='1' /> each.</span>}
             />
             <IpPoolSelect disabled={isDisabled} formName={FORM_NAME} />
-            <Note>
-              New dedicated IP addresses will need to be warmed up, so we suggest adding them to
-              an isolated pool.  Read the <WarmUpArticleLink /> for more information.
-            </Note>
           </Panel.Section>
           <Panel.Section>
             <Button type='submit' primary disabled={isDisabled}>Add Dedicated IPs</Button>
@@ -133,9 +118,9 @@ export class AddIps extends Component {
 }
 
 const mapStateToProps = (state) => ({
+  account: state.account,
   currentPlan: currentPlanSelector(state),
   sendingIps: state.sendingIps.list,
-  isAWSAccount: isAWSAccountSelector(state),
   initialValues: {
     ipPool: {
       action: 'new'

@@ -19,17 +19,6 @@ export const PendingPlanBanner = ({ account }) => account.pending_subscription
   : null;
 
 /**
- * Renders suspended-due-to-billing warning
- * @prop account Account state from redux store
- */
-export const SuspendedBanner = ({ account }) => account.isSuspendedForBilling
-  ? <Banner status='danger' title='Your account has been suspended due to a billing problem' >
-    <p>We sent an email notification to your current billing contact email address ({ account.billing.email }). To reactivate your account and pay your outstanding balance due, please update your payment information below.</p>
-    <p>If you have any questions, please <UnstyledLink to={`mailto:${config.contact.billingEmail}`}>contact us</UnstyledLink>.</p>
-  </Banner>
-  : null;
-
-/**
  * Renders plan information for non-self-serve users
  * @prop account Account state from redux store
  */
