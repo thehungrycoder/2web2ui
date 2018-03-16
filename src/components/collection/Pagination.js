@@ -3,22 +3,24 @@ import { Pagination, Button } from '@sparkpost/matchbox';
 import classnames from 'classnames';
 import styles from './Pagination.module.scss';
 import Papa from 'papaparse';
+import _ from 'lodash';
 
 export const defaultPerPageButtons = [10, 25, 50, 100];
 
 class CollectionPagination extends Component {
   formatToCsv = () => {
     const { data: rows } = this.props;
-    const data = Papa.unparse(rows);
+    // we are doing this because certain keys are objects/array which papa parse doesn't stringify
+    const mappedRows = _.map(rows, (row) => _.mapValues(row, (value) => _.isObject(value) || _.isArray(value) ? JSON.stringify(value) : value));
+    const data = Papa.unparse(mappedRows);
     return `data:text/csv;charset=utf-8,${encodeURI(data)}`;
   }
 
   renderCSVSave() {
-    const { saveCsv, data, perPage } = this.props;
+    const { saveCsv, data, perPageButtons } = this.props;
 
-    // mimick behavior with "old" webui where we do not show
-    // save as csv button when less than a page
-    if (!saveCsv || data.length < perPage) { return null; }
+    // do not show save as csv if only 1 page of smallest per page increment
+    if (!saveCsv || data.length <= Math.min(...perPageButtons)) { return null; }
 
     const now = Math.floor(Date.now() / 1000);
     return <Button download={`sparkpost-csv-${now}.csv`} to={this.formatToCsv()}>Save As CSV</Button>;
