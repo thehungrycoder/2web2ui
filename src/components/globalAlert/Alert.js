@@ -10,7 +10,8 @@ class Alert extends Component {
     type: PropTypes.string,
     details: PropTypes.string,
     timeoutInterval: PropTypes.number,
-    onDismiss: PropTypes.func.isRequired
+    onDismiss: PropTypes.func.isRequired,
+    maxWidth: PropTypes.number
   };
 
   static defaultProps = {
@@ -54,12 +55,12 @@ class Alert extends Component {
     const { showDetails } = this.state;
 
     const detailsLink = details && !showDetails
-      ? <a onClick={this.handleDetails}>View Details</a>
+      ? <a className={styles.Details} onClick={this.handleDetails}>View Details</a>
       : null;
 
     const markup = showDetails
       ? <div>{ details }</div>
-      : <div>{ message } <span className={styles.Details}>{detailsLink}</span></div>;
+      : <div>{ message } <span>{detailsLink}</span></div>;
 
     return <div>{ markup }</div>;
   }
