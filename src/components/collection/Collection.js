@@ -120,6 +120,7 @@ export class Collection extends Component {
     );
   }
 
+
   render() {
     const {
       rows,
