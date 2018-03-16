@@ -3,7 +3,7 @@ import {
   getDefaultPool,
   getOrderedIpPools,
   selectIpsForCurrentPool,
-  selectCurrentPoolInitialValues,
+  selectIpPoolFormInitialValues,
   shouldShowIpPurchaseCTA
 } from '../ipPools';
 
@@ -79,14 +79,18 @@ describe('Selector: ipPools', () => {
   });
 
 
-  describe('selectCurrentPoolInitialValues', () => {
+  describe('selectIpPoolFormInitialValues', () => {
     it('should return an object of ips assigned to their current pool, for initial values', () => {
-      expect(selectCurrentPoolInitialValues(state)).toEqual({
+      expect(selectIpPoolFormInitialValues(state, { isNew: false })).toEqual({
         name: 'MY CURRENT POOL',
         '1_1_1_1': 'my_current_pool',
         '2_2_2_2': 'my_current_pool',
         '3_3_3_3': 'my_current_pool'
       });
+    });
+
+    it('should return empty init values in new mode', () => {
+      expect(selectIpPoolFormInitialValues(state, { isNew: true })).toEqual({});
     });
   });
 

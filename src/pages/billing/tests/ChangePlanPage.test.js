@@ -10,6 +10,7 @@ describe('Page: ChangePlanPage', () => {
   const props = {
     loading: false,
     account: {},
+    fetchAccount: jest.fn(),
     getPlans: jest.fn(),
     getBillingCountries: jest.fn()
   };
@@ -19,9 +20,13 @@ describe('Page: ChangePlanPage', () => {
   });
 
   it('should get plans and countries on mount', () => {
+    const fetchAccountSpy = jest.spyOn(wrapper.instance().props, 'fetchAccount');
     const plansSpy = jest.spyOn(wrapper.instance().props, 'getPlans');
     const countrySpy = jest.spyOn(wrapper.instance().props, 'getBillingCountries');
     wrapper.instance().componentWillMount();
+    expect(fetchAccountSpy).toHaveBeenCalledWith(expect.objectContaining({
+      include: expect.stringContaining('billing')
+    }));
     expect(plansSpy).toHaveBeenCalled();
     expect(countrySpy).toHaveBeenCalled();
   });

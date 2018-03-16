@@ -12,7 +12,7 @@ import Note from 'src/components/note/Note';
 import config from 'src/config';
 import IpPoolSelect from './fields/IpPoolSelect';
 import ErrorTracker from 'src/helpers/errorTracker';
-import { required, minNumber, maxNumber } from 'src/helpers/validation';
+import { required, integer, minNumber, maxNumber } from 'src/helpers/validation';
 import { currentPlanSelector, isAWSAccountSelector } from 'src/selectors/accountBillingInfo';
 import DedicatedIpCost from '../components/DedicatedIpCost';
 import { LINKS } from 'src/constants';
@@ -113,7 +113,7 @@ export class AddIps extends Component {
               min='1' max={remainingCount}
               required
               type='number'
-              validate={[required, minNumber(1), maxNumber(remainingCount)]}
+              validate={[required, integer, minNumber(1), maxNumber(remainingCount)]}
             />
             <IpPoolSelect disabled={isDisabled} formName={FORM_NAME} />
             <Note>

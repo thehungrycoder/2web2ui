@@ -23,10 +23,10 @@ exports[`ApiPage should render 1`] = `
         Copy and run this curl request:
       </p>
       <CodeBlock
-        code="curl -X POST
-  http://fake-api-test-host.com/api/v1/transmissions
-  -H \\"Authorization: 123456789\\"
-  -H \\"Content-Type: application/json\\"
+        code="curl -X POST \\\\
+  http://fake-api-test-host.com/transmissions \\\\
+  -H \\"Authorization: 123456789\\" \\\\
+  -H \\"Content-Type: application/json\\" \\\\
   -d '{
     \\"options\\": {
       \\"sandbox\\": true
