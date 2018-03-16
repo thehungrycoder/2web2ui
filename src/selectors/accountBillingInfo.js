@@ -88,7 +88,7 @@ export const selectBillingInfo = createSelector(
     canChangePlanSelector,
     canPurchaseIps,
     currentPlanSelector,
-    publicPlansSelector
+    getPlansSelector
   ],
   (canUpdateBillingInfo, canChangePlan, canPurchaseIps, currentPlan, plans) => ({
     canUpdateBillingInfo,
