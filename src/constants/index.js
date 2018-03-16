@@ -35,3 +35,5 @@ export const LINKS = {
 export const ENTERPRISE_PLAN_CODES = ['ent1'];
 
 export const AWS_COOKIE_NAME = 'aws-mkt';
+
+export const DAILY_LIMIT_REQUEST_TEMPLATE = 'daily-limit-increase';

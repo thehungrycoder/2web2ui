@@ -8,7 +8,7 @@ import PanelLoading from 'src/components/panelLoading/PanelLoading';
 import { Panel, ProgressBar } from '@sparkpost/matchbox';
 import styles from './UsageReport.module.scss';
 import { LINKS } from 'src/constants';
-import UpgradeCTA from './UpgradeCTA';
+import SendMoreCTA from './SendMoreCTA';
 
 const actions = [
   {
@@ -77,7 +77,7 @@ export class UsageReport extends Component {
           <DisplayNumber label='Used' content={usage.day.used.toLocaleString()} orange />
           { dailyLimitMarkup }
 
-          <p><UpgradeCTA /></p>
+          <div><SendMoreCTA /></div>
         </Panel.Section>
         <Panel.Section>
 
