@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Portal, Icon, Popover } from '@sparkpost/matchbox';
-import entitledToSupport from 'src/selectors/support';
+import { entitledToSupport } from 'src/selectors/support';
 import { createTicket, clearSupportForm } from 'src/actions/support';
 import SupportForm from './components/SupportForm';
+import SearchPanel from './components/SearchPanel';
 import styles from './Support.module.scss';
 
 export class Support extends Component {
 
   state = {
-    showPanel: false
+    showPanel: false,
+    showForm: false
   };
 
   onSubmit = (values) => {
@@ -30,9 +32,13 @@ export class Support extends Component {
     });
   };
 
+  toggleForm = () => {
+    this.setState({ showForm: !this.state.showForm });
+  }
+
   render() {
     const { loggedIn, entitledToSupport } = this.props;
-    const { showPanel } = this.state;
+    const { showPanel, showForm } = this.state;
 
     if (!loggedIn || !entitledToSupport) {
       return null;
@@ -53,12 +59,15 @@ export class Support extends Component {
             fixed
             className={styles.Popover}
             open={showPanel}
+            onOutsideClick={this.resetPanel}
             trigger={triggerMarkup}>
 
+            { !showForm && <SearchPanel toggleForm={this.toggleForm} /> }
+            { showForm &&
             <SupportForm
               onSubmit={this.onSubmit}
-              onCancel={this.resetPanel}
-              onContinue={this.resetPanel} />
+              onCancel={this.toggleForm}
+              onContinue={this.resetPanel} /> }
 
           </Popover>
         </div>

@@ -2,8 +2,9 @@ import _ from 'lodash';
 import { createSelector } from 'reselect';
 import { currentPlanSelector } from './accountBillingInfo';
 const getAccountSupport = (state) => state.account.support;
+const getResults = (state) => state.support.algoliaResults;
 
-const entitledToSupport = createSelector(
+export const entitledToSupport = createSelector(
   [getAccountSupport],
   (support) => support && support.online
 );
@@ -18,4 +19,3 @@ export const currentLimitSelector = (state) => {
   return _.get(account, 'usage.day.limit', 0);
 };
 
-export default entitledToSupport;
