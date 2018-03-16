@@ -2,10 +2,12 @@ import { createMockStore } from 'src/__testHelpers__/mockStore';
 import * as billing from '../billing';
 import * as billingHelpers from 'src/helpers/billing';
 import _ from 'lodash';
+import { isAws } from 'src/helpers/conditions/account';
 
 jest.mock('../helpers/sparkpostApiRequest', () => jest.fn((a) => a));
 jest.mock('../helpers/zuoraRequest', () => jest.fn((a) => a));
 jest.mock('src/helpers/billing');
+jest.mock('src/helpers/conditions/account');
 
 describe('Action Creator: Billing', () => {
 
@@ -36,7 +38,8 @@ describe('Action Creator: Billing', () => {
       }
     };
 
-    dispatchMock = jest.fn((a) => Promise.resolve(a));
+    // thunk-friendly dispatch mock
+    dispatchMock = jest.fn((a) => typeof a === 'function' ? a(dispatchMock, getStateMock) : Promise.resolve(a));
     getStateMock = jest.fn(() => testState);
 
     billingHelpers.formatDataForCors = jest.fn((values) => ({ values, corsData, billingData }));
@@ -46,6 +49,7 @@ describe('Action Creator: Billing', () => {
       subscription: {}
     }));
     billingHelpers.formatUpdateData = jest.fn((values) => ({ accountKey }));
+    isAws.mockImplementation(() => false);
   });
 
   it('should dispatch a subscription sync action', () => {
@@ -55,7 +59,7 @@ describe('Action Creator: Billing', () => {
 
   it('should dispatch an update subscription action', async() => {
     const dispatchMock = jest.fn((a) => Promise.resolve(a));
-    await billing.updateSubscription('test-code')(dispatchMock);
+    await billing.updateSubscription('test-code')(dispatchMock, getStateMock);
     expect(_.flatten(dispatchMock.mock.calls)).toMatchSnapshot();
   });
 
@@ -83,7 +87,16 @@ describe('Action Creator: Billing', () => {
   });
 
   it('should dispatch a chained billing update action', async() => {
-    await billing.billingUpdate({ planpicker: { code: 'test-plan' }})(dispatchMock);
+    await billing.billingUpdate({ planpicker: { code: 'test-plan' }})(dispatchMock, getStateMock);
+    expect(_.flatten(dispatchMock.mock.calls)).toMatchSnapshot();
+  });
+
+  it('should update instead of create if account is AWS', () => {
+    isAws.mockImplementation(() => true);
+    billing.billingCreate({ planpicker: { code: 'newplan1' }})(dispatchMock, getStateMock);
+    // const update = dispatchMock.mock.calls[0][0];
+    // expect(update).toEqual(expect.any(Function));
+    // update(dispatchMock, getStateMock);
     expect(_.flatten(dispatchMock.mock.calls)).toMatchSnapshot();
   });
 
@@ -91,14 +104,15 @@ describe('Action Creator: Billing', () => {
     it('should dispatch an update subscription action', async() => {
       const dispatchMock = jest.fn((a) => Promise.resolve(a));
       const thunk = billing.updateSubscription({ code: 'test-code' });
-      await thunk(dispatchMock);
+      await thunk(dispatchMock, getStateMock);
       expect(_.flatten(dispatchMock.mock.calls)).toMatchSnapshot();
     });
 
     it('dispatches un update subscription action for aws marketplace account', async() => {
       const dispatchMock = jest.fn((a) => Promise.resolve(a));
-      const thunk = billing.updateSubscription({ code: 'test-code', aws: true });
-      await thunk(dispatchMock);
+      isAws.mockImplementation(() => true);
+      const thunk = billing.updateSubscription({ code: 'test-code' });
+      await thunk(dispatchMock, getStateMock);
       expect(_.flatten(dispatchMock.mock.calls)).toMatchSnapshot();
     });
   });

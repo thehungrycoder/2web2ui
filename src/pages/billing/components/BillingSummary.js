@@ -60,7 +60,7 @@ export default class BillingSummary extends Component {
   );
 
   render() {
-    const { account, currentPlan, canChangePlan, canUpdateBillingInfo } = this.props;
+    const { account, currentPlan, canChangePlan, canUpdateBillingInfo, canPurchaseIps } = this.props;
     const { show } = this.state;
     let changePlanActions = {};
 
@@ -77,10 +77,10 @@ export default class BillingSummary extends Component {
           <Panel.Section {...changePlanActions}>
             <PlanSummary label='Your Plan' plan={currentPlan} />
           </Panel.Section>
-          { canUpdateBillingInfo && this.renderDedicatedIpSummarySection() }
+          {canPurchaseIps && this.renderDedicatedIpSummarySection()}
         </Panel>
 
-        { canUpdateBillingInfo && this.renderSummary() }
+        {canUpdateBillingInfo && this.renderSummary()}
 
         <PremiumBanner />
         <EnterpriseBanner />

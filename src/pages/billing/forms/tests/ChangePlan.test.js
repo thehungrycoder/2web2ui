@@ -14,6 +14,7 @@ describe('Form Container: Change Plan', () => {
     account: {
       subscription: { self_serve: true }
     },
+    isSelfServeBilling: true,
     billing: { countries: []},
     plans: [
       {
@@ -89,14 +90,8 @@ describe('Form Container: Change Plan', () => {
     expect(submitSpy).toHaveBeenCalled();
   });
 
-  it('should not render cc section for aws account', () => {
-    accountConditions.isAws.mockImplementation(() => true);
-    wrapper.setProps({ account: { subscription: { self_serve: false }}});
-    expect(wrapper).toMatchSnapshot();
-  });
-
   describe('onSubmit tests', () => {
-    it('should call bilingCreate when no billing exists', async() => {
+    it('should call billingCreate when no billing exists', async() => {
       await instance.onSubmit({ key: 'value' });
       expect(instance.props.billingCreate).toHaveBeenCalledWith({ key: 'value' });
       expect(instance.props.history.push).toHaveBeenCalledWith('/account/billing');
@@ -116,7 +111,7 @@ describe('Form Container: Change Plan', () => {
     it('should update subscription for aws account', async() => {
       accountConditions.isAws.mockImplementation(() => true);
       await instance.onSubmit({ planpicker: { code: 'free' }});
-      expect(instance.props.updateSubscription).toHaveBeenCalledWith({ code: 'free', aws: true });
+      expect(instance.props.updateSubscription).toHaveBeenCalledWith({ code: 'free' });
     });
 
     it('should update billing when billing exists but enter new cc info', async() => {

@@ -21,13 +21,15 @@ describe('Component: Billing Summary', () => {
         isFree: true
       },
       canChangePlan: true,
-      canUpdateBillingInfo: false,
+      canUpdateBillingInfo: true,
+      canPurchaseIps: true,
       sendingIps: []
     };
     wrapper = shallow(<BillingSummary {...props} />);
   });
 
-  it('should render correctly for a free plan', () => {
+  it('should render correctly for a standard free plan', () => {
+    wrapper.setProps({ canUpdateBillingInfo: false, canPurchaseIps: false });
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -36,6 +38,7 @@ describe('Component: Billing Summary', () => {
       currentPlan: {
         isFree: false
       },
+      canPurchaseIps: true,
       canUpdateBillingInfo: true
     });
     expect(wrapper).toMatchSnapshot();
@@ -44,6 +47,20 @@ describe('Component: Billing Summary', () => {
   it('should render correctly if you can\'t change your plan', () => {
     wrapper.setProps({
       canChangePlan: false
+    });
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render correctly if you can\'t update your billing info', () => {
+    wrapper.setProps({
+      canUpdateBillingInfo: false
+    });
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render correctly if you can\'t buy IPs', () => {
+    wrapper.setProps({
+      canPurchaseIps: false
     });
     expect(wrapper).toMatchSnapshot();
   });

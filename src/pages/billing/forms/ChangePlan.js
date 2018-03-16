@@ -5,14 +5,16 @@ import { withRouter } from 'react-router-dom';
 import { billingCreate, billingUpdate, updateSubscription } from 'src/actions/billing';
 import { showAlert } from 'src/actions/globalAlert';
 import { changePlanInitialValues } from 'src/selectors/accountBillingForms';
-import { publicPlansSelector, currentPlanSelector, canUpdateBillingInfoSelector } from 'src/selectors/accountBillingInfo';
+import { getPlansSelector, currentPlanSelector, canUpdateBillingInfoSelector } from 'src/selectors/accountBillingInfo';
 import { Panel, Grid } from '@sparkpost/matchbox';
 import { PlanPicker } from 'src/components';
 import PaymentForm from './fields/PaymentForm';
 import BillingAddressForm from './fields/BillingAddressForm';
 import Confirmation from '../components/Confirmation';
 import CardSummary from '../components/CardSummary';
-import { isAws } from 'src/helpers/conditions/account';
+import { isAws, isSelfServeBilling } from 'src/helpers/conditions/account';
+import { not } from 'src/helpers/conditions';
+import AccessControl from 'src/components/auth/AccessControl';
 
 const FORMNAME = 'changePlan';
 
@@ -39,7 +41,7 @@ export class ChangePlan extends Component {
     // if it's aws account, it already has billing and if you use a saved CC
     let action;
     if (isAws({ account })) {
-      action = updateSubscription({ code: values.planpicker.code, aws: true });
+      action = updateSubscription({ code: values.planpicker.code });
     } else if (account.billing) {
       action = this.state.useSavedCC ? updateSubscription({ code: values.planpicker.code }) : billingUpdate(values);
     } else {
@@ -88,13 +90,10 @@ export class ChangePlan extends Component {
   }
 
   render() {
-
-    const { account, submitting, pristine, currentPlan, selectedPlan, plans } = this.props;
-    const isAwsAccount = isAws({ account });
-    const billingEnabled = account.subscription.self_serve || isAwsAccount;
+    const { submitting, pristine, currentPlan, selectedPlan, plans, isSelfServeBilling } = this.props;
 
     // Manually billed accounts can submit without changing plan
-    const disableSubmit = submitting || (billingEnabled && (pristine || currentPlan.code === selectedPlan.code));
+    const disableSubmit = submitting || (isSelfServeBilling && (pristine || currentPlan.code === selectedPlan.code));
 
     return (
       <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
@@ -105,13 +104,15 @@ export class ChangePlan extends Component {
                 <PlanPicker disabled={submitting} plans={plans} />
               }
             </Panel>
-            {!isAwsAccount && this.renderCCSection()}
+            <AccessControl condition={not(isAws)}>
+              {this.renderCCSection()}
+            </AccessControl>
           </Grid.Column>
           <Grid.Column xs={12} md={5}>
             <Confirmation
               current={currentPlan}
               selected={selectedPlan}
-              billingEnabled={billingEnabled}
+              billingEnabled={isSelfServeBilling}
               disableSubmit={disableSubmit} />
           </Grid.Column>
         </Grid>
@@ -126,7 +127,8 @@ const mapStateToProps = (state) => {
     account: state.account,
     billing: state.billing,
     canUpdateBillingInfo: canUpdateBillingInfoSelector(state),
-    plans: publicPlansSelector(state),
+    isSelfServeBilling: isSelfServeBilling(state),
+    plans: getPlansSelector(state),
     currentPlan: currentPlanSelector(state),
     selectedPlan: selector(state, 'planpicker'),
     initialValues: changePlanInitialValues(state)

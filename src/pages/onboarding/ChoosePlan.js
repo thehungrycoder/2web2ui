@@ -7,10 +7,13 @@ import { CenteredLogo, Loading, PlanPicker } from 'src/components';
 import Steps from './components/Steps';
 import { getPlans } from 'src/actions/account';
 import { getBillingCountries, billingCreate, updateSubscription } from 'src/actions/billing';
-import { getPlansSelector, isAWSAccountSelector } from 'src/selectors/accountBillingInfo';
+import { getPlansSelector } from 'src/selectors/accountBillingInfo';
 import { onboardingInitialValues } from 'src/selectors/accountBillingForms';
 import PaymentForm from 'src/pages/billing/forms/fields/PaymentForm';
 import BillingAddressForm from 'src/pages/billing/forms/fields/BillingAddressForm';
+import { isAws } from 'src/helpers/conditions/account';
+import { not } from 'src/helpers/conditions';
+import AccessControl from 'src/components/auth/AccessControl';
 
 const FORM_NAME = 'selectInitialPlan';
 const NEXT_STEP = '/onboarding/sending-domain';
@@ -32,7 +35,7 @@ export class OnboardingPlanPage extends Component {
   }
 
   onSubmit = (values) => {
-    const { billingCreate, showAlert, history, isAWSAccount } = this.props;
+    const { billingCreate, showAlert, history } = this.props;
 
     // no billing updates needed since they are still on free plan
     if (values.planpicker.isFree) {
@@ -40,11 +43,8 @@ export class OnboardingPlanPage extends Component {
       return;
     }
 
-    const promise = isAWSAccount
-      ? this.props.updateSubscription({ code: values.planpicker.code, isAWSAccount })
-      : billingCreate(values);
-
-    return promise
+    // Note: billingCreate will update the subscription if the account is AWS
+    return billingCreate(values)
       .then(() => history.push(NEXT_STEP))
       .then(() => showAlert({ type: 'success', message: 'Added your plan' }));
   };
@@ -85,7 +85,7 @@ export class OnboardingPlanPage extends Component {
   }
 
   render() {
-    const { loading, plans, submitting, isAWSAccount } = this.props;
+    const { loading, plans, submitting } = this.props;
 
     if (loading) {
       return <Loading />;
@@ -100,7 +100,9 @@ export class OnboardingPlanPage extends Component {
           <Grid.Column>
             <Panel title='Select A Plan'>
               <PlanPicker disabled={submitting} plans={plans} />
-              {!isAWSAccount && this.renderCCSection()}
+              <AccessControl condition={not(isAws)}>
+                {this.renderCCSection()}
+              </AccessControl>
               <Panel.Section>
                 <Button disabled={submitting} primary={true} type='submit' size='large' fullWidth={true}>{buttonText}</Button>
               </Panel.Section>
@@ -121,8 +123,7 @@ const mapStateToProps = (state, ownProps) => {
     plans: getPlansSelector(state),
     initialValues: onboardingInitialValues(state, ownProps),
     selectedPlan: selector(state, 'planpicker'),
-    hasError: state.billing.plansError || state.billing.countriesError,
-    isAWSAccount: isAWSAccountSelector(state)
+    hasError: state.billing.plansError || state.billing.countriesError
   };
 };
 const mapDispatchToProps = { billingCreate, showAlert, getPlans, getBillingCountries, updateSubscription };

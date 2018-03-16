@@ -69,14 +69,10 @@ export const canPurchaseIps = createSelector(
   (currentPlan, accountBilling, isAWSAccount) => currentPlan.canPurchaseIps === true && !!(accountBilling || isAWSAccount)
 );
 
-export const isSelfServeOrAWSSelector = createSelector(
-  [currentSubscriptionSelector, isAWSAccountSelector],
-  (currentSubscription, isAWSAccount) => currentSubscription.self_serve === true || isAWSAccount
-);
-
 export const getPlansSelector = createSelector(
   [publicPlansSelector, awsPlans, currentSubscriptionSelector, isAWSAccountSelector],
   (publicPlans, awsPlans, subscription, isAWSAccount) => {
+
     if (isAWSAccount) {
       return awsPlans;
     }
@@ -90,12 +86,14 @@ export const selectBillingInfo = createSelector(
   [
     canUpdateBillingInfoSelector,
     canChangePlanSelector,
+    canPurchaseIps,
     currentPlanSelector,
     publicPlansSelector
   ],
-  (canUpdateBillingInfo, canChangePlan, currentPlan, plans) => ({
+  (canUpdateBillingInfo, canChangePlan, canPurchaseIps, currentPlan, plans) => ({
     canUpdateBillingInfo,
     canChangePlan,
+    canPurchaseIps,
     currentPlan,
     plans
   })

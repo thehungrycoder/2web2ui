@@ -1,5 +1,8 @@
 import { onboardingInitialValues, changePlanInitialValues, updatePaymentInitialValues, updateContactInitialValues } from '../accountBillingForms';
 import * as billingInfo from '../accountBillingInfo';
+import { isSelfServeBilling } from 'src/helpers/conditions/account';
+
+jest.mock('src/helpers/conditions/account');
 
 const basePlans = [
   { isFree: true, code: 'im free' },
@@ -22,18 +25,19 @@ describe('Selector: Account billing form', () => {
   let props;
 
   beforeEach(() => {
+    isSelfServeBilling.mockImplementation(() => true);
     plans = basePlans.slice();
     user = Object.assign({}, baseUser);
     store = { currentUser: user };
     props = { location: {}};
   });
 
-  describe('changePlanInitialValues', () => {
+  describe('changePlanInitialValues when NOT self serve', () => {
     beforeEach(() => {
       billingInfo.currentPlanSelector = jest.fn();
       billingInfo.publicPlansSelector = jest.fn();
-      billingInfo.isSelfServeOrAWSSelector = jest.fn(() => false);
       billingInfo.getPlansSelector = jest.fn();
+      isSelfServeBilling.mockImplementation(() => false);
     });
 
     it('should return change plan values: with a billing id', () => {

@@ -131,6 +131,26 @@ Array [
   [Function],
   Object {
     "meta": Object {
+      "data": Object {
+        "code": "test-plan",
+      },
+      "method": "PUT",
+      "url": "/account/subscription",
+    },
+    "type": "UPDATE_SUBSCRIPTION",
+  },
+  Object {
+    "meta": Object {
+      "method": "GET",
+      "params": Object {
+        "include": "usage,billing",
+      },
+      "url": "/account",
+    },
+    "type": "FETCH_ACCOUNT",
+  },
+  Object {
+    "meta": Object {
       "method": "POST",
       "url": "/account/subscription/check",
     },
@@ -238,6 +258,22 @@ Array [
       "url": "/account",
     },
     "type": "FETCH_ACCOUNT",
+  },
+]
+`;
+
+exports[`Action Creator: Billing should update instead of create if account is AWS 1`] = `
+Array [
+  [Function],
+  Object {
+    "meta": Object {
+      "data": Object {
+        "code": "newplan1",
+      },
+      "method": "PUT",
+      "url": "/account/aws-marketplace/subscription",
+    },
+    "type": "UPDATE_SUBSCRIPTION",
   },
 ]
 `;

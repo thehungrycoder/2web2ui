@@ -1,43 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Form Container: Change Plan should not render cc section for aws account 1`] = `
-<form>
-  <Grid>
-    <Grid.Column>
-      <Panel
-        title="Select A Plan"
-      >
-        <Component
-          plans={
-            Array [
-              Object {
-                "isFree": false,
-                "plan": "paid",
-              },
-              Object {
-                "isFree": true,
-                "plan": "free",
-              },
-            ]
-          }
-        />
-      </Panel>
-    </Grid.Column>
-    <Grid.Column
-      md={5}
-      xs={12}
-    >
-      <Confirmation
-        billingEnabled={true}
-        current={Object {}}
-        disableSubmit={true}
-        selected={Object {}}
-      />
-    </Grid.Column>
-  </Grid>
-</form>
-`;
-
 exports[`Form Container: Change Plan should not show plans 1`] = `
 <form>
   <Grid>
@@ -47,22 +9,26 @@ exports[`Form Container: Change Plan should not show plans 1`] = `
       >
         0
       </Panel>
-      <Panel
-        actions={null}
-        title="Add a Credit Card"
+      <Connect(AccessControl)
+        condition={[Function]}
       >
-        <Panel.Section>
-          <Connect(PaymentForm)
-            formName="changePlan"
-          />
-        </Panel.Section>
-        <Panel.Section>
-          <Connect(BillingAddressForm)
-            countries={Array []}
-            formName="changePlan"
-          />
-        </Panel.Section>
-      </Panel>
+        <Panel
+          actions={null}
+          title="Add a Credit Card"
+        >
+          <Panel.Section>
+            <Connect(PaymentForm)
+              formName="changePlan"
+            />
+          </Panel.Section>
+          <Panel.Section>
+            <Connect(BillingAddressForm)
+              countries={Array []}
+              formName="changePlan"
+            />
+          </Panel.Section>
+        </Panel>
+      </Connect(AccessControl)>
     </Grid.Column>
     <Grid.Column
       md={5}
@@ -101,22 +67,26 @@ exports[`Form Container: Change Plan should render 1`] = `
           }
         />
       </Panel>
-      <Panel
-        actions={null}
-        title="Add a Credit Card"
+      <Connect(AccessControl)
+        condition={[Function]}
       >
-        <Panel.Section>
-          <Connect(PaymentForm)
-            formName="changePlan"
-          />
-        </Panel.Section>
-        <Panel.Section>
-          <Connect(BillingAddressForm)
-            countries={Array []}
-            formName="changePlan"
-          />
-        </Panel.Section>
-      </Panel>
+        <Panel
+          actions={null}
+          title="Add a Credit Card"
+        >
+          <Panel.Section>
+            <Connect(PaymentForm)
+              formName="changePlan"
+            />
+          </Panel.Section>
+          <Panel.Section>
+            <Connect(BillingAddressForm)
+              countries={Array []}
+              formName="changePlan"
+            />
+          </Panel.Section>
+        </Panel>
+      </Connect(AccessControl)>
     </Grid.Column>
     <Grid.Column
       md={5}
@@ -155,21 +125,25 @@ exports[`Form Container: Change Plan should show saved card 1`] = `
           }
         />
       </Panel>
-      <Panel
-        actions={
-          Array [
-            Object {
-              "content": "Use Another Credit Card",
-              "onClick": [Function],
-            },
-          ]
-        }
-        title="Pay With Saved Payment Method"
+      <Connect(AccessControl)
+        condition={[Function]}
       >
-        <Panel.Section>
-          <CardSummary />
-        </Panel.Section>
-      </Panel>
+        <Panel
+          actions={
+            Array [
+              Object {
+                "content": "Use Another Credit Card",
+                "onClick": [Function],
+              },
+            ]
+          }
+          title="Pay With Saved Payment Method"
+        >
+          <Panel.Section>
+            <CardSummary />
+          </Panel.Section>
+        </Panel>
+      </Connect(AccessControl)>
     </Grid.Column>
     <Grid.Column
       md={5}

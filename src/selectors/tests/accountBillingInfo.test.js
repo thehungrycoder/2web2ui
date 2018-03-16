@@ -115,6 +115,7 @@ describe('selectBillingInfo', () => {
     expect(Object.keys(billingInfo.selectBillingInfo(state))).toEqual([
       'canUpdateBillingInfo',
       'canChangePlan',
+      'canPurchaseIps',
       'currentPlan',
       'plans'
     ]);
@@ -165,29 +166,6 @@ describe('getPlansSelector', () => {
       { status: 'public', code: 'qwe', isFree: false },
       { status: 'public', code: 'qwe2', isFree: true }
     ]);
-  });
-});
-
-describe('isSelfServeOrAWSSelector', () => {
-  let state;
-  beforeEach(() => {
-    state = {
-      account: { subscription: { type: 'aws' }}
-    };
-  });
-
-  it('returns true when subscription type is aws', () => {
-    expect(billingInfo.isSelfServeOrAWSSelector(state)).toBe(true);
-  });
-
-  it('returns true when it is self serve', () => {
-    state.account.subscription = { type: 'default', self_serve: true };
-    expect(billingInfo.isSelfServeOrAWSSelector(state)).toBe(true);
-  });
-
-  it('returns false for non-self-serve and non aws', () => {
-    state.account.subscription = { type: 'default', self_serve: false };
-    expect(billingInfo.isSelfServeOrAWSSelector(state)).toBe(false);
   });
 });
 

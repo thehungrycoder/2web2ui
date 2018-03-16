@@ -1,52 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Component: Billing Summary should render correctly for a free plan 1`] = `
-<div>
-  <Component
-    account={
-      Object {
-        "billing": Object {},
-      }
-    }
-  />
-  <Panel
-    accent={true}
-    title="Plan Overview"
-  >
-    <Panel.Section
-      actions={
-        Array [
-          Object {
-            "Component": [Function],
-            "content": "Upgrade Now",
-            "to": "/account/billing/plan",
-          },
-        ]
-      }
-    >
-      <PlanSummary
-        label="Your Plan"
-        plan={
-          Object {
-            "isFree": true,
-          }
-        }
-      />
-    </Panel.Section>
-  </Panel>
-  <Component />
-  <Component />
-  <Modal
-    open={false}
-  >
-    <WindowEvent
-      event="keydown"
-      handler={[Function]}
-    />
-  </Modal>
-</div>
-`;
-
 exports[`Component: Billing Summary should render correctly for a paid plan 1`] = `
 <div>
   <Component
@@ -141,6 +94,138 @@ exports[`Component: Billing Summary should render correctly for a paid plan 1`] 
 </div>
 `;
 
+exports[`Component: Billing Summary should render correctly for a standard free plan 1`] = `
+<div>
+  <Component
+    account={
+      Object {
+        "billing": Object {},
+      }
+    }
+  />
+  <Panel
+    accent={true}
+    title="Plan Overview"
+  >
+    <Panel.Section
+      actions={
+        Array [
+          Object {
+            "Component": [Function],
+            "content": "Upgrade Now",
+            "to": "/account/billing/plan",
+          },
+        ]
+      }
+    >
+      <PlanSummary
+        label="Your Plan"
+        plan={
+          Object {
+            "isFree": true,
+          }
+        }
+      />
+    </Panel.Section>
+  </Panel>
+  <Component />
+  <Component />
+  <Modal
+    open={false}
+  >
+    <WindowEvent
+      event="keydown"
+      handler={[Function]}
+    />
+  </Modal>
+</div>
+`;
+
+exports[`Component: Billing Summary should render correctly if you can't buy IPs 1`] = `
+<div>
+  <Component
+    account={
+      Object {
+        "billing": Object {},
+      }
+    }
+  />
+  <Panel
+    accent={true}
+    title="Plan Overview"
+  >
+    <Panel.Section
+      actions={
+        Array [
+          Object {
+            "Component": [Function],
+            "content": "Upgrade Now",
+            "to": "/account/billing/plan",
+          },
+        ]
+      }
+    >
+      <PlanSummary
+        label="Your Plan"
+        plan={
+          Object {
+            "isFree": true,
+          }
+        }
+      />
+    </Panel.Section>
+  </Panel>
+  <Panel
+    title="Billing"
+  >
+    <Panel.Section
+      actions={
+        Array [
+          Object {
+            "content": "Update Payment Information",
+            "onClick": [Function],
+          },
+        ]
+      }
+    >
+      <CardSummary
+        billing={Object {}}
+        label="Credit Card"
+      />
+    </Panel.Section>
+    <Panel.Section
+      actions={
+        Array [
+          Object {
+            "content": "Update Billing Contact",
+            "onClick": [Function],
+          },
+        ]
+      }
+    >
+      <LabelledValue
+        label="Billing Contact"
+      >
+        <h6>
+           
+        </h6>
+        <p />
+      </LabelledValue>
+    </Panel.Section>
+  </Panel>
+  <Component />
+  <Component />
+  <Modal
+    open={false}
+  >
+    <WindowEvent
+      event="keydown"
+      handler={[Function]}
+    />
+  </Modal>
+</div>
+`;
+
 exports[`Component: Billing Summary should render correctly if you can't change your plan 1`] = `
 <div>
   <Component
@@ -164,6 +249,109 @@ exports[`Component: Billing Summary should render correctly if you can't change 
         }
       />
     </Panel.Section>
+    <DedicatedIpSummarySection
+      count={0}
+      onClick={[Function]}
+      plan={
+        Object {
+          "isFree": true,
+        }
+      }
+    />
+  </Panel>
+  <Panel
+    title="Billing"
+  >
+    <Panel.Section
+      actions={
+        Array [
+          Object {
+            "content": "Update Payment Information",
+            "onClick": [Function],
+          },
+        ]
+      }
+    >
+      <CardSummary
+        billing={Object {}}
+        label="Credit Card"
+      />
+    </Panel.Section>
+    <Panel.Section
+      actions={
+        Array [
+          Object {
+            "content": "Update Billing Contact",
+            "onClick": [Function],
+          },
+        ]
+      }
+    >
+      <LabelledValue
+        label="Billing Contact"
+      >
+        <h6>
+           
+        </h6>
+        <p />
+      </LabelledValue>
+    </Panel.Section>
+  </Panel>
+  <Component />
+  <Component />
+  <Modal
+    open={false}
+  >
+    <WindowEvent
+      event="keydown"
+      handler={[Function]}
+    />
+  </Modal>
+</div>
+`;
+
+exports[`Component: Billing Summary should render correctly if you can't update your billing info 1`] = `
+<div>
+  <Component
+    account={
+      Object {
+        "billing": Object {},
+      }
+    }
+  />
+  <Panel
+    accent={true}
+    title="Plan Overview"
+  >
+    <Panel.Section
+      actions={
+        Array [
+          Object {
+            "Component": [Function],
+            "content": "Upgrade Now",
+            "to": "/account/billing/plan",
+          },
+        ]
+      }
+    >
+      <PlanSummary
+        label="Your Plan"
+        plan={
+          Object {
+            "isFree": true,
+          }
+        }
+      />
+    </Panel.Section>
+    <DedicatedIpSummarySection
+      count={0}
+      onClick={[Function]}
+      plan={
+        Object {
+          "isFree": true,
+        }
+      }
+    />
   </Panel>
   <Component />
   <Component />
@@ -210,6 +398,53 @@ exports[`Component: Billing Summary should render with IP modal open 1`] = `
           }
         }
       />
+    </Panel.Section>
+    <DedicatedIpSummarySection
+      count={0}
+      onClick={[Function]}
+      plan={
+        Object {
+          "isFree": true,
+        }
+      }
+    />
+  </Panel>
+  <Panel
+    title="Billing"
+  >
+    <Panel.Section
+      actions={
+        Array [
+          Object {
+            "content": "Update Payment Information",
+            "onClick": [Function],
+          },
+        ]
+      }
+    >
+      <CardSummary
+        billing={Object {}}
+        label="Credit Card"
+      />
+    </Panel.Section>
+    <Panel.Section
+      actions={
+        Array [
+          Object {
+            "content": "Update Billing Contact",
+            "onClick": [Function],
+          },
+        ]
+      }
+    >
+      <LabelledValue
+        label="Billing Contact"
+      >
+        <h6>
+           
+        </h6>
+        <p />
+      </LabelledValue>
     </Panel.Section>
   </Panel>
   <Component />
@@ -261,6 +496,53 @@ exports[`Component: Billing Summary should render with the billing contact modal
         }
       />
     </Panel.Section>
+    <DedicatedIpSummarySection
+      count={0}
+      onClick={[Function]}
+      plan={
+        Object {
+          "isFree": true,
+        }
+      }
+    />
+  </Panel>
+  <Panel
+    title="Billing"
+  >
+    <Panel.Section
+      actions={
+        Array [
+          Object {
+            "content": "Update Payment Information",
+            "onClick": [Function],
+          },
+        ]
+      }
+    >
+      <CardSummary
+        billing={Object {}}
+        label="Credit Card"
+      />
+    </Panel.Section>
+    <Panel.Section
+      actions={
+        Array [
+          Object {
+            "content": "Update Billing Contact",
+            "onClick": [Function],
+          },
+        ]
+      }
+    >
+      <LabelledValue
+        label="Billing Contact"
+      >
+        <h6>
+           
+        </h6>
+        <p />
+      </LabelledValue>
+    </Panel.Section>
   </Panel>
   <Component />
   <Component />
@@ -310,6 +592,53 @@ exports[`Component: Billing Summary should render with the payment info modal op
           }
         }
       />
+    </Panel.Section>
+    <DedicatedIpSummarySection
+      count={0}
+      onClick={[Function]}
+      plan={
+        Object {
+          "isFree": true,
+        }
+      }
+    />
+  </Panel>
+  <Panel
+    title="Billing"
+  >
+    <Panel.Section
+      actions={
+        Array [
+          Object {
+            "content": "Update Payment Information",
+            "onClick": [Function],
+          },
+        ]
+      }
+    >
+      <CardSummary
+        billing={Object {}}
+        label="Credit Card"
+      />
+    </Panel.Section>
+    <Panel.Section
+      actions={
+        Array [
+          Object {
+            "content": "Update Billing Contact",
+            "onClick": [Function],
+          },
+        ]
+      }
+    >
+      <LabelledValue
+        label="Billing Contact"
+      >
+        <h6>
+           
+        </h6>
+        <p />
+      </LabelledValue>
     </Panel.Section>
   </Panel>
   <Component />
