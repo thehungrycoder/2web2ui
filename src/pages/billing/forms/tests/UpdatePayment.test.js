@@ -10,7 +10,8 @@ describe('Form Container: Update Contact', () => {
     handleSubmit: jest.fn(),
     showAlert: jest.fn(),
     getBillingCountries: jest.fn(),
-    billingUpdate: jest.fn(() => Promise.resolve())
+    billingUpdate: jest.fn(() => Promise.resolve()),
+    onCancel: jest.fn()
   };
 
   beforeEach(() => {
