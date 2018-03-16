@@ -1,7 +1,7 @@
 import config from 'src/config';
 
 export function getTransmissionsUri() {
-  const configUri = `${config.apiBase}/api/v1/transmissions`;
+  const configUri = `${config.apiBase}/transmissions`;
 
   // if config uri is protocol-relative, prepend window protocol
   if (/^\/\//.test(configUri)) {
@@ -12,10 +12,10 @@ export function getTransmissionsUri() {
 }
 
 export function curlRequest({ apiKey, email }) {
-  return `curl -X POST
-  ${getTransmissionsUri()}
-  -H "Authorization: ${apiKey}"
-  -H "Content-Type: application/json"
+  return `curl -X POST \\
+  ${getTransmissionsUri()} \\
+  -H "Authorization: ${apiKey}" \\
+  -H "Content-Type: application/json" \\
   -d '{
     "options": {
       "sandbox": true
