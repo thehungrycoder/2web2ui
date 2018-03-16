@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { SendMoreCTA } from '../SendMoreCTA';
 
-describe('UsageReport Component', () => {
+describe('SendMoreCTA Component', () => {
   let props;
   let wrapper;
   let instance;

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`UsageReport Component renders correct for deprecated plan (cta to upgrade) 1`] = `
+exports[`SendMoreCTA Component renders correct for deprecated plan (cta to upgrade) 1`] = `
 <div>
   <p>
     <span>
@@ -23,7 +23,7 @@ exports[`UsageReport Component renders correct for deprecated plan (cta to upgra
 </div>
 `;
 
-exports[`UsageReport Component renders correctly for aws free plan (cta to upgrade) 1`] = `
+exports[`SendMoreCTA Component renders correctly for aws free plan (cta to upgrade) 1`] = `
 <div>
   <p>
     <span>
@@ -46,7 +46,7 @@ exports[`UsageReport Component renders correctly for aws free plan (cta to upgra
 </div>
 `;
 
-exports[`UsageReport Component renders correctly for customers who can request limit bump 1`] = `
+exports[`SendMoreCTA Component renders correctly for customers who can request limit bump 1`] = `
 <div>
   <p>
     <span>
@@ -71,7 +71,7 @@ exports[`UsageReport Component renders correctly for customers who can request l
 </div>
 `;
 
-exports[`UsageReport Component renders correctly for free plan (cta to upgrade) 1`] = `
+exports[`SendMoreCTA Component renders correctly for free plan (cta to upgrade) 1`] = `
 <div>
   <p>
     <span>
@@ -94,7 +94,7 @@ exports[`UsageReport Component renders correctly for free plan (cta to upgrade) 
 </div>
 `;
 
-exports[`UsageReport Component renders support form correctly 1`] = `
+exports[`SendMoreCTA Component renders support form correctly 1`] = `
 <div>
   <p>
     <span>
@@ -116,13 +116,13 @@ exports[`UsageReport Component renders support form correctly 1`] = `
       Learn more about these limits.
     </UnstyledLink>
   </p>
-  <Connect(ReduxForm)
+  <ReduxForm
     onSubmit={[Function]}
   />
 </div>
 `;
 
-exports[`UsageReport Component renders when email address not verified 1`] = `
+exports[`SendMoreCTA Component renders when email address not verified 1`] = `
 <div>
   <p>
     <span>

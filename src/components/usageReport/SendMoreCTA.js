@@ -7,7 +7,7 @@ import { emailRequest } from 'src/actions/account';
 import { verifyEmail } from 'src/actions/currentUser';
 import { showAlert } from 'src/actions/globalAlert';
 import { currentPlanSelector } from 'src/selectors/accountBillingInfo';
-import RequstForm from './RequestForm';
+import RequestForm from './RequestForm';
 import { LINKS, DAILY_LIMIT_REQUEST_TEMPLATE } from 'src/constants';
 
 export class SendMoreCTA extends Component {
@@ -90,7 +90,7 @@ export class SendMoreCTA extends Component {
             Learn more about these limits.
           </UnstyledLink>
         </p>
-        {showSupportForm && <RequstForm onSubmit={this.handleFormSubmission}/> }
+        {showSupportForm && <RequestForm onSubmit={this.handleFormSubmission}/> }
       </div>
     );
   }

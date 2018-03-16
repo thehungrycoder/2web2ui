@@ -1,0 +1,181 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RequestForm Component renders form 1`] = `
+<div>
+  <Panel.Section>
+    <h6>
+      Request Daily Limit Increase
+    </h6>
+    <Banner
+      status="info"
+    >
+      <p>
+        Please note this process may take up to 2 business days.
+      </p>
+    </Banner>
+  </Panel.Section>
+  <form>
+    <Panel.Section>
+      <Field
+        component={[Function]}
+        disabled={false}
+        inlineErrors={true}
+        label="Daily Limit"
+        name="daily_limit"
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Field
+        component={[Function]}
+        disabled={false}
+        inlineErrors={true}
+        label="Reason for Increase?"
+        multiline={true}
+        name="reason"
+        resize="none"
+        rows={10}
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+    </Panel.Section>
+    <Panel.Section>
+      <Button
+        disabled={true}
+        primary={true}
+        size="default"
+        submit={true}
+      >
+        Request Limit Increase
+      </Button>
+    </Panel.Section>
+  </form>
+</div>
+`;
+
+exports[`RequestForm Component submit is disabled when submitting 1`] = `
+<div>
+  <Panel.Section>
+    <h6>
+      Request Daily Limit Increase
+    </h6>
+    <Banner
+      status="info"
+    >
+      <p>
+        Please note this process may take up to 2 business days.
+      </p>
+    </Banner>
+  </Panel.Section>
+  <form>
+    <Panel.Section>
+      <Field
+        component={[Function]}
+        disabled={true}
+        inlineErrors={true}
+        label="Daily Limit"
+        name="daily_limit"
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Field
+        component={[Function]}
+        disabled={true}
+        inlineErrors={true}
+        label="Reason for Increase?"
+        multiline={true}
+        name="reason"
+        resize="none"
+        rows={10}
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+    </Panel.Section>
+    <Panel.Section>
+      <Button
+        disabled={true}
+        primary={true}
+        size="default"
+        submit={true}
+      >
+        Submitting
+      </Button>
+    </Panel.Section>
+  </form>
+</div>
+`;
+
+exports[`RequestForm Component submit is enabled when form is valid 1`] = `
+<div>
+  <Panel.Section>
+    <h6>
+      Request Daily Limit Increase
+    </h6>
+    <Banner
+      status="info"
+    >
+      <p>
+        Please note this process may take up to 2 business days.
+      </p>
+    </Banner>
+  </Panel.Section>
+  <form>
+    <Panel.Section>
+      <Field
+        component={[Function]}
+        disabled={false}
+        inlineErrors={true}
+        label="Daily Limit"
+        name="daily_limit"
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Field
+        component={[Function]}
+        disabled={false}
+        inlineErrors={true}
+        label="Reason for Increase?"
+        multiline={true}
+        name="reason"
+        resize="none"
+        rows={10}
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+    </Panel.Section>
+    <Panel.Section>
+      <Button
+        disabled={false}
+        primary={true}
+        size="default"
+        submit={true}
+      >
+        Request Limit Increase
+      </Button>
+    </Panel.Section>
+  </form>
+</div>
+`;

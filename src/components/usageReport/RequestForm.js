@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { Button, Panel, Banner } from '@sparkpost/matchbox';
 import { TextFieldWrapper } from 'src/components';
@@ -7,7 +6,7 @@ import { required, minLength, hasNumber } from 'src/helpers/validation';
 
 const formName = 'requestForm';
 
-export class ReqeustForm extends Component {
+export class RequestForm extends Component {
   render() {
     const { onSubmit, handleSubmit, submitting, pristine, invalid } = this.props;
 
@@ -54,12 +53,7 @@ export class ReqeustForm extends Component {
   }
 }
 
-
-const mapStateToProps = ({ support }) => ({
-  ticketId: support.ticketId
-});
-
-const ReduxForm = reduxForm({ form: formName })(ReqeustForm);
-export default connect(mapStateToProps)(ReduxForm);
+const ReduxForm = reduxForm({ form: formName })(RequestForm);
+export default ReduxForm;
 
 
