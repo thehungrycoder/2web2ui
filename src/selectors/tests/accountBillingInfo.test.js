@@ -117,7 +117,8 @@ describe('selectBillingInfo', () => {
       'canChangePlan',
       'canPurchaseIps',
       'currentPlan',
-      'plans'
+      'plans',
+      'isAWSAccount'
     ]);
   });
 

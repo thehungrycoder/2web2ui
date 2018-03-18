@@ -56,6 +56,7 @@ export default class BillingSummary extends Component {
       count={this.props.sendingIps.length}
       plan={this.props.currentPlan}
       onClick={this.handleIpModal}
+      isAWSAccount={this.props.isAWSAccount}
     />
   );
 

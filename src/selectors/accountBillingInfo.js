@@ -88,13 +88,15 @@ export const selectBillingInfo = createSelector(
     canChangePlanSelector,
     canPurchaseIps,
     currentPlanSelector,
-    getPlansSelector
+    getPlansSelector,
+    isAWSAccountSelector
   ],
-  (canUpdateBillingInfo, canChangePlan, canPurchaseIps, currentPlan, plans) => ({
+  (canUpdateBillingInfo, canChangePlan, canPurchaseIps, currentPlan, plans, isAWSAccount) => ({
     canUpdateBillingInfo,
     canChangePlan,
     canPurchaseIps,
     currentPlan,
-    plans
+    plans,
+    isAWSAccount
   })
 );
