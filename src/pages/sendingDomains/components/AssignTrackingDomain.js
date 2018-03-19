@@ -83,6 +83,7 @@ function mapStateToProps(state, props) {
 }
 
 const formOptions = {
+  enableReinitialize: true,
   form: 'AssignTrackingDomain'
 };
 
