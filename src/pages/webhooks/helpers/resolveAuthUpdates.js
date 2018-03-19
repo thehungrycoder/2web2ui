@@ -40,8 +40,8 @@ export default function(values, webhook) {
         break;
       case 'oauth2':
         if (authRequestDetails.url !== tokenURL ||
-            authCredentials.body.client_id !== clientId ||
-            authCredentials.body.client_secret !== clientSecret) {
+            authRequestDetails.body.client_id !== clientId ||
+            authRequestDetails.body.client_secret !== clientSecret) {
           update.auth_request_details = {
             url: tokenURL,
             body: { client_id: clientId, client_secret: clientSecret }
