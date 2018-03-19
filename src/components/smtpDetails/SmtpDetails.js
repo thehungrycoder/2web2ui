@@ -23,7 +23,7 @@ class SmtpDetails extends Component {
 
     const passwordContent = apiKey
       ? <CopyField value={apiKey} helpText='For security, this key will never be displayed in full again. Make sure you copy it somewhere safe!'/>
-      : <p>The password is an API key with <strong>Send via SMTP</strong><em>(smtp/inject)</em> permisions.  <UnstyledLink to='/account/api-keys' Component={Link}>Manage API Keys</UnstyledLink></p>;
+      : <p>The password is an API key with <strong>Send via SMTP</strong> permissions.  <UnstyledLink to='/account/api-keys' Component={Link}>Manage API Keys</UnstyledLink></p>;
 
     return (
       <Fragment>

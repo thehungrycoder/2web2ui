@@ -1,5 +1,59 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`DedicatedIpSummarySection renders count and cost for aws customers 1`] = `
+<Panel.Section
+  actions={
+    Array [
+      Object {
+        "Component": [Function],
+        "content": "Upgrade Now",
+        "to": "/account/billing/plan",
+      },
+    ]
+  }
+>
+  <LabelledValue
+    label="Dedicated IPs"
+  >
+    <h6>
+      2
+       for 
+      <DedicatedIpCost
+        isAWSAccount={true}
+        quantity={2}
+      />
+    </h6>
+  </LabelledValue>
+</Panel.Section>
+`;
+
+exports[`DedicatedIpSummarySection renders count and cost for aws customers with free ip 1`] = `
+<Panel.Section
+  actions={
+    Array [
+      Object {
+        "Component": [Function],
+        "content": "Upgrade Now",
+        "to": "/account/billing/plan",
+      },
+    ]
+  }
+>
+  <LabelledValue
+    label="Dedicated IPs"
+  >
+    <h6>
+      3
+       for 
+      <DedicatedIpCost
+        isAWSAccount={true}
+        quantity={2}
+      />
+    </h6>
+  </LabelledValue>
+</Panel.Section>
+`;
+
 exports[`DedicatedIpSummarySection renders count and zero cost 1`] = `
 <Panel.Section
   actions={
@@ -19,12 +73,7 @@ exports[`DedicatedIpSummarySection renders count and zero cost 1`] = `
       1
        for 
       <DedicatedIpCost
-        plan={
-          Object {
-            "canPurchaseIps": true,
-            "includesIp": true,
-          }
-        }
+        isAWSAccount={false}
         quantity={0}
       />
     </h6>
@@ -51,11 +100,7 @@ exports[`DedicatedIpSummarySection renders disabled add button, count, cost, and
       4
        for 
       <DedicatedIpCost
-        plan={
-          Object {
-            "canPurchaseIps": true,
-          }
-        }
+        isAWSAccount={false}
         quantity={4}
       />
     </h6>

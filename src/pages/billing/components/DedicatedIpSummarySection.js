@@ -7,7 +7,7 @@ import config from 'src/config';
 import { LabelledValue } from 'src/components';
 import DedicatedIpCost from './DedicatedIpCost';
 
-export default function DedicatedIpSummarySection({ count = 0, plan = {}, onClick = _.noop }) {
+export default function DedicatedIpSummarySection({ count = 0, plan = {}, onClick = _.noop , isAWSAccount }) {
   const hasReachedMax = count >= config.sendingIps.maxPerAccount;
   const ipCtaContent = (count === 0 && plan.includesIp) ? 'Claim Your Free Dedicated IP' : 'Add Dedicated IPs';
 
@@ -21,7 +21,7 @@ export default function DedicatedIpSummarySection({ count = 0, plan = {}, onClic
 
   const summary = count === 0
     ? <h6>0</h6>
-    : <h6>{count} for <DedicatedIpCost plan={plan} quantity={billableCount} /></h6>;
+    : <h6>{count} for <DedicatedIpCost quantity={billableCount} isAWSAccount={isAWSAccount}/></h6>;
 
   return (
     <Panel.Section actions={[action]}>

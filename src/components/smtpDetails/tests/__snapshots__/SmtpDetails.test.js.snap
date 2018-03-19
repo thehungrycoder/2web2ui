@@ -78,10 +78,7 @@ exports[`Smtp component: Smtp Details should render page correctly with defaults
       <strong>
         Send via SMTP
       </strong>
-      <em>
-        (smtp/inject)
-      </em>
-       permisions.  
+       permissions.  
       <UnstyledLink
         Component={[Function]}
         to="/account/api-keys"
