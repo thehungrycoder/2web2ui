@@ -65,14 +65,16 @@ const AuthDropDown = () => (
   />
 );
 
-const ActiveField = () => (
-  <Field
+const ActiveField = () => {
+  // Artificially set a checked prop so the underlying input displays properly.
+  const CheckableCheckbox = ({ input, ...rest }) => <CheckboxWrapper input={input} {...rest} checked={Boolean(input.value)} />;
+  return <Field
     name='active'
     label='Active'
-    component={CheckboxWrapper}
+    component={CheckableCheckbox}
     helpText='An inactive webhook will not transmit any data.'
-  />
-);
+  />;
+};
 
 export {
   NameField,
