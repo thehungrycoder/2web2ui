@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import _ from 'lodash';
 import { getMessageEvents, refreshMessageEventsDateRange, addFilters } from 'src/actions/messageEvents';
-import { Panel, Grid, TextField } from '@sparkpost/matchbox';
+import { Panel, Grid, TextField, Button } from '@sparkpost/matchbox';
 import AdvancedFilters from './AdvancedFilters';
 import ActiveFilters from './ActiveFilters';
 import DatePicker from 'src/components/datePicker/DatePicker';
@@ -63,7 +63,7 @@ export class MessageEventsSearch extends Component {
       <Panel>
         <Panel.Section>
           <Grid>
-            <Grid.Column xs={12} md={6}>
+            <Grid.Column xs={12} md={5}>
               <DatePicker
                 {...search.dateOptions}
                 relativeDateOptions={RELATIVE_DATE_OPTIONS}
@@ -78,7 +78,7 @@ export class MessageEventsSearch extends Component {
                 }}
               />
             </Grid.Column>
-            <Grid.Column xs={12} md={4}>
+            <Grid.Column xs={12} md={3} xl={4}>
               <TextField
                 labelHidden
                 label="Recipient Email(s)"
@@ -91,6 +91,9 @@ export class MessageEventsSearch extends Component {
             </Grid.Column>
             <Grid.Column xs={12} md={2}>
               <AdvancedFilters />
+            </Grid.Column>
+            <Grid.Column xs={12} md={2} xl={1}>
+              <Button fullWidth>Share</Button>
             </Grid.Column>
           </Grid>
         </Panel.Section>
