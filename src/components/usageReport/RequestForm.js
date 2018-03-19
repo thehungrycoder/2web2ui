@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { Button, Panel, Banner } from '@sparkpost/matchbox';
 import { TextFieldWrapper } from 'src/components';
-import { required, minLength, hasNumber } from 'src/helpers/validation';
+import { required, integer, minNumber, minLength } from 'src/helpers/validation';
 
-const formName = 'requestForm';
+const formName = 'dailyLimitIncreaseRequestForm';
 
 export class RequestForm extends Component {
   render() {
-    const { onSubmit, handleSubmit, submitting, pristine, invalid } = this.props;
+    const { onSubmit, handleSubmit, onCancel, submitting, pristine, invalid, currentLimit = 1 } = this.props;
 
     return (<div>
       <Panel.Section>
@@ -27,8 +27,9 @@ export class RequestForm extends Component {
             label='Daily Limit'
             inlineErrors={true}
             disabled={submitting}
-            validate={[required, hasNumber]}
+            validate={[required, integer, minNumber(currentLimit)]}
             component={TextFieldWrapper}
+            required={true}
           />
 
           <Field
@@ -39,6 +40,7 @@ export class RequestForm extends Component {
             label='Reason for Increase?'
             inlineErrors={true}
             disabled={submitting}
+            required={true}
             validate={[required, minLength(5)]}
             component={TextFieldWrapper}
           />
@@ -46,6 +48,10 @@ export class RequestForm extends Component {
         <Panel.Section>
           <Button submit primary disabled={pristine || invalid || submitting}>
             {submitting ? 'Submitting' : 'Request Limit Increase' }
+          </Button>
+          { ' '}
+          <Button disabled={submitting} onClick={onCancel}>
+            Cancel
           </Button>
         </Panel.Section>
       </form>

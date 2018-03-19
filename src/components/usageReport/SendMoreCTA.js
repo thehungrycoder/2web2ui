@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import _ from 'lodash';
 import { connect } from 'react-redux';
 import { UnstyledLink } from '@sparkpost/matchbox';
 import { Link } from 'react-router-dom';
 import { emailRequest } from 'src/actions/account';
 import { verifyEmail } from 'src/actions/currentUser';
 import { showAlert } from 'src/actions/globalAlert';
-import { currentPlanSelector } from 'src/selectors/accountBillingInfo';
+import { allowSendingLimitRequestSelector, currentLimitSelector } from 'src/selectors/support';
 import RequestForm from './RequestForm';
 import { LINKS, DAILY_LIMIT_REQUEST_TEMPLATE } from 'src/constants';
 
@@ -41,22 +40,27 @@ export class SendMoreCTA extends Component {
     </UnstyledLink>);
   }
 
-  renderSupportTicketCTA() {
+  toggleSupportForm = () => {
     const { showSupportForm } = this.state;
+    this.setState({ showSupportForm: !showSupportForm });
+  }
+
+
+  renderSupportTicketCTA() {
 
     return (<span>
-      <UnstyledLink Component={Link} onClick={() => this.setState({ showSupportForm: !showSupportForm })}>
+      <UnstyledLink Component={Link} onClick={this.toggleSupportForm}>
         Submit a request.
       </UnstyledLink>
     </span>);
   }
 
   handleFormSubmission = (values) => {
-    const { emailRequest, account, showAlert } = this.props;
+    const { emailRequest, showAlert, currentLimit } = this.props;
 
     const limitRequest = {
       limit: values.daily_limit,
-      previousLimit: _.get(account, 'usage.day.limit', '').toString(),
+      previousLimit: currentLimit.toString(),
       template_id: DAILY_LIMIT_REQUEST_TEMPLATE,
       campaign_id: `support-${DAILY_LIMIT_REQUEST_TEMPLATE}`,
       reason: values.reason
@@ -64,7 +68,7 @@ export class SendMoreCTA extends Component {
 
     return emailRequest(limitRequest)
       .then(() => {
-        this.setState({ showSupportForm: false });
+        this.toggleSupportForm();
         return showAlert({
           type: 'success',
           message: 'We got your request and you should hear from us soon.'
@@ -73,10 +77,8 @@ export class SendMoreCTA extends Component {
   }
 
   render() {
-    const { currentUser: { email_verified: emailVerified }, currentPlan } = this.props;
-    const allowSendingLimitRequest = currentPlan.status !== 'deprecated' && !/free/.test(currentPlan.code);
+    const { currentUser: { email_verified: emailVerified }, allowSendingLimitRequest, currentLimit } = this.props;
     const { showSupportForm } = this.state;
-
 
     return (
       <div>
@@ -90,7 +92,9 @@ export class SendMoreCTA extends Component {
             Learn more about these limits.
           </UnstyledLink>
         </p>
-        {showSupportForm && <RequestForm onSubmit={this.handleFormSubmission}/> }
+        {showSupportForm && <RequestForm onSubmit={this.handleFormSubmission}
+          currentLimit={currentLimit} onCancel={this.toggleSupportForm}
+        /> }
       </div>
     );
   }
@@ -100,9 +104,9 @@ const mapStateToProps = (state) => {
   const { currentUser } = state;
   return {
     currentUser,
-    account: state.account,
     verifyingEmail: currentUser.verifyingEmail,
-    currentPlan: currentPlanSelector(state)
+    allowSendingLimitRequest: allowSendingLimitRequestSelector(state),
+    currentLimit: currentLimitSelector(state)
   };
 };
 
