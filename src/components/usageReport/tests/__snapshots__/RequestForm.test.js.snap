@@ -2,26 +2,19 @@
 
 exports[`RequestForm Component renders form 1`] = `
 <div>
-  <Panel.Section>
-    <h6>
-      Request Daily Limit Increase
-    </h6>
-    <Banner
-      status="info"
-    >
-      <p>
-        Please note this process may take up to 2 business days.
-      </p>
-    </Banner>
-  </Panel.Section>
   <form>
     <Panel.Section>
+      <p>
+        <strong>
+          Please note this process may take up to 2 business days.
+        </strong>
+      </p>
       <Field
         component={[Function]}
         disabled={false}
         inlineErrors={true}
         label="Daily Limit"
-        name="daily_limit"
+        name="dailyLimit"
         required={true}
         validate={
           Array [
@@ -40,7 +33,7 @@ exports[`RequestForm Component renders form 1`] = `
         name="reason"
         required={true}
         resize="none"
-        rows={10}
+        rows={4}
         validate={
           Array [
             [Function],
@@ -58,13 +51,12 @@ exports[`RequestForm Component renders form 1`] = `
       >
         Request Limit Increase
       </Button>
-       
       <Button
         disabled={false}
         onClick={[MockFunction]}
         size="default"
       >
-        Cancel
+        Close
       </Button>
     </Panel.Section>
   </form>
@@ -73,26 +65,19 @@ exports[`RequestForm Component renders form 1`] = `
 
 exports[`RequestForm Component submit is disabled when submitting 1`] = `
 <div>
-  <Panel.Section>
-    <h6>
-      Request Daily Limit Increase
-    </h6>
-    <Banner
-      status="info"
-    >
-      <p>
-        Please note this process may take up to 2 business days.
-      </p>
-    </Banner>
-  </Panel.Section>
   <form>
     <Panel.Section>
+      <p>
+        <strong>
+          Please note this process may take up to 2 business days.
+        </strong>
+      </p>
       <Field
         component={[Function]}
         disabled={true}
         inlineErrors={true}
         label="Daily Limit"
-        name="daily_limit"
+        name="dailyLimit"
         required={true}
         validate={
           Array [
@@ -111,7 +96,7 @@ exports[`RequestForm Component submit is disabled when submitting 1`] = `
         name="reason"
         required={true}
         resize="none"
-        rows={10}
+        rows={4}
         validate={
           Array [
             [Function],
@@ -129,13 +114,12 @@ exports[`RequestForm Component submit is disabled when submitting 1`] = `
       >
         Submitting
       </Button>
-       
       <Button
         disabled={true}
         onClick={[MockFunction]}
         size="default"
       >
-        Cancel
+        Close
       </Button>
     </Panel.Section>
   </form>
@@ -144,26 +128,19 @@ exports[`RequestForm Component submit is disabled when submitting 1`] = `
 
 exports[`RequestForm Component submit is enabled when form is valid 1`] = `
 <div>
-  <Panel.Section>
-    <h6>
-      Request Daily Limit Increase
-    </h6>
-    <Banner
-      status="info"
-    >
-      <p>
-        Please note this process may take up to 2 business days.
-      </p>
-    </Banner>
-  </Panel.Section>
   <form>
     <Panel.Section>
+      <p>
+        <strong>
+          Please note this process may take up to 2 business days.
+        </strong>
+      </p>
       <Field
         component={[Function]}
         disabled={false}
         inlineErrors={true}
         label="Daily Limit"
-        name="daily_limit"
+        name="dailyLimit"
         required={true}
         validate={
           Array [
@@ -182,7 +159,7 @@ exports[`RequestForm Component submit is enabled when form is valid 1`] = `
         name="reason"
         required={true}
         resize="none"
-        rows={10}
+        rows={4}
         validate={
           Array [
             [Function],
@@ -200,13 +177,12 @@ exports[`RequestForm Component submit is enabled when form is valid 1`] = `
       >
         Request Limit Increase
       </Button>
-       
       <Button
         disabled={false}
         onClick={[MockFunction]}
         size="default"
       >
-        Cancel
+        Close
       </Button>
     </Panel.Section>
   </form>

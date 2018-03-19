@@ -70,11 +70,19 @@ exports[`SendMoreCTA Component renders support form correctly 1`] = `
       Learn more about these limits.
     </UnstyledLink>
   </p>
-  <ReduxForm
-    currentLimit={1000}
-    onCancel={[Function]}
-    onSubmit={[Function]}
-  />
+  <Modal
+    open={true}
+  >
+    <Panel
+      title="Request Daily Limit Increase"
+    >
+      <ReduxForm
+        currentLimit={1000}
+        onCancel={[Function]}
+        onSubmit={[Function]}
+      />
+    </Panel>
+  </Modal>
 </div>
 `;
 

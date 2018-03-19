@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { UnstyledLink } from '@sparkpost/matchbox';
+import { BaseModal } from 'src/components';
+import { UnstyledLink, Panel } from '@sparkpost/matchbox';
 import { Link } from 'react-router-dom';
 import { emailRequest } from 'src/actions/account';
 import { verifyEmail } from 'src/actions/currentUser';
@@ -59,8 +60,8 @@ export class SendMoreCTA extends Component {
     const { emailRequest, showAlert, currentLimit } = this.props;
 
     const limitRequest = {
-      limit: values.daily_limit,
-      previousLimit: currentLimit.toString(),
+      limit: values.dailyLimit,
+      previousLimit: currentLimit,
       template_id: DAILY_LIMIT_REQUEST_TEMPLATE,
       campaign_id: `support-${DAILY_LIMIT_REQUEST_TEMPLATE}`,
       reason: values.reason
@@ -76,8 +77,20 @@ export class SendMoreCTA extends Component {
       });
   }
 
+  renderSupportTicketModal() {
+    const { currentLimit } = this.props;
+
+    return (<BaseModal open={this.state.showSupportForm}>
+      <Panel title='Request Daily Limit Increase'>
+        <RequestForm onSubmit={this.handleFormSubmission}
+          currentLimit={currentLimit} onCancel={this.toggleSupportForm}
+        />
+      </Panel>
+    </BaseModal>);
+  }
+
   render() {
-    const { currentUser: { email_verified: emailVerified }, allowSendingLimitRequest, currentLimit } = this.props;
+    const { currentUser: { email_verified: emailVerified }, allowSendingLimitRequest } = this.props;
     const { showSupportForm } = this.state;
 
     return (
@@ -92,9 +105,7 @@ export class SendMoreCTA extends Component {
             Learn more about these limits.
           </UnstyledLink>
         </p>
-        {showSupportForm && <RequestForm onSubmit={this.handleFormSubmission}
-          currentLimit={currentLimit} onCancel={this.toggleSupportForm}
-        /> }
+        {showSupportForm && this.renderSupportTicketModal()}
       </div>
     );
   }

@@ -57,7 +57,7 @@ describe('SendMoreCTA Component', () => {
     beforeEach(() => {
       data = {
         limit: 50000,
-        previousLimit: '1000',
+        previousLimit: 1000,
         template_id: 'daily-limit-increase',
         campaign_id: 'support-daily-limit-increase',
         reason: 'just because i want'
@@ -66,7 +66,7 @@ describe('SendMoreCTA Component', () => {
 
     it('creates ticket with correct data', async() => {
       wrapper.setState({ showSupportForm: true });
-      await instance.handleFormSubmission({ daily_limit: data.limit, reason: data.reason });
+      await instance.handleFormSubmission({ dailyLimit: data.limit, reason: data.reason });
       expect(props.emailRequest).toHaveBeenCalledWith(data);
       expect(wrapper.state().showSupportForm).toBe(false);
     });
