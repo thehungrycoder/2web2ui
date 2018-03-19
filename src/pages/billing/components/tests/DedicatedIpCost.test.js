@@ -10,17 +10,21 @@ jest.mock('src/config', () => ({
 }));
 
 describe('Component: Dedicated IP Cost', () => {
-
-  it('should render an AWS price', () => {
-    const plan = {
-      isAwsAccount: true
+  let wrapper;
+  beforeEach(() => {
+    const props = {
+      quantity: 2,
+      isAWSAccount: false
     };
-    expect(shallow(<DedicatedIpCost quantity={2} plan={plan} />).text()).toEqual('$0.020 per hour');
+    wrapper = shallow(<DedicatedIpCost {...props}/>);
+  });
+  it('should render an AWS price', () => {
+    wrapper.setProps({ isAWSAccount: true });
+    expect(wrapper.text()).toEqual('$0.020 per hour');
   });
 
   it('should render a regular price', () => {
-    const plan = {};
-    expect(shallow(<DedicatedIpCost quantity={2} plan={plan} />).text()).toEqual('$40.00 per month');
+    expect(wrapper.text()).toEqual('$40.00 per month');
   });
 
 });
