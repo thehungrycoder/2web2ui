@@ -6,7 +6,7 @@ exports[`renders an iframe 1`] = `
 >
   <iframe
     onLoad={[Function]}
-    sandbox="allow-same-origin allow-top-navigation-by-user-activation"
+    sandbox="allow-same-origin allow-top-navigation"
     title="preview email template frame"
   />
 </PreviewFrame>
@@ -19,7 +19,7 @@ exports[`sets iframe height after it loads 1`] = `
   <iframe
     height="99px"
     onLoad={[Function]}
-    sandbox="allow-same-origin allow-top-navigation-by-user-activation"
+    sandbox="allow-same-origin allow-top-navigation"
     title="preview email template frame"
   />
 </PreviewFrame>
