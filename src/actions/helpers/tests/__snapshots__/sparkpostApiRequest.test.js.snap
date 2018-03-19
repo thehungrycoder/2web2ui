@@ -96,6 +96,21 @@ Array [
 ]
 `;
 
+exports[`Helper: SparkPost API Request failure cases should log out on 403 when account status is unknown 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "method": "GET",
+      "url": "/some/path",
+    },
+    "type": "TEST_PENDING",
+  },
+  Object {
+    "type": "LOGOUT",
+  },
+]
+`;
+
 exports[`Helper: SparkPost API Request failure cases should not log out on a 403 while suspended 1`] = `
 Array [
   Object {
@@ -106,31 +121,10 @@ Array [
     "type": "TEST_PENDING",
   },
   Object {
-    "meta": Object {
-      "method": "GET",
-      "url": "/some/path",
-    },
-    "payload": Object {
-      "message": "API call failed",
-      "response": Object {
-        "data": Object {
-          "results": Array [],
-        },
-        "status": 403,
-      },
-    },
-    "type": "TEST_FAIL",
-  },
-  Object {
     "type": "SHOW_SUSPENSION_ALERT",
   },
   Object {
     "type": "FETCH_ACCOUNT",
-  },
-  Object {
-    "details": "API call failed",
-    "message": "Something went wrong.",
-    "type": "error",
   },
 ]
 `;
