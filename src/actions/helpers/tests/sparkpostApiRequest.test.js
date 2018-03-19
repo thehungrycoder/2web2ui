@@ -119,6 +119,21 @@ describe('Helper: SparkPost API Request', () => {
       }
     });
 
+    it('should log out on 403 when account status is unknown', async() => {
+      jest.spyOn(globalAlertMock, 'showSuspensionAlert');
+      apiErr.response.status = 403;
+      delete state.account.status;
+      expect(globalAlertMock.showSuspensionAlert).not.toHaveBeenCalled();
+      try {
+        await mockStore.dispatch(sparkpostApiRequest(action));
+      } catch (err) {
+        expect(err).toEqual(apiErr);
+        expect(authMock.logout).toHaveBeenCalled();
+        expect(globalAlertMock.showSuspensionAlert).not.toHaveBeenCalled();
+        expect(mockStore.getActions()).toMatchSnapshot();
+      }
+    });
+
     it('should dispatch a logout action on a 401 with no refresh token', async() => {
       apiErr.response.status = 401;
 
