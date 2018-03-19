@@ -82,8 +82,15 @@ const sparkpostRequest = requestHelperFactory({
         );
     }
 
+    // if the account is suspended, a 403 should not log the user out
+    if (response.status === 403 && account.status === 'suspended') {
+      dispatch(showSuspensionAlert());
+      dispatch(fetchAccount());
+      throw apiError;
+    }
+
     // If we have a 403 or a 401 and we're not refreshing, log the user out silently
-    if (account.status === 'active' && (response.status === 401 || response.status === 403)) {
+    if (response.status === 401 || response.status === 403) {
       dispatch(logout());
       throw apiError;
     }
@@ -94,12 +101,6 @@ const sparkpostRequest = requestHelperFactory({
       payload: { message, response },
       meta
     });
-
-    // if the account is suspended, a 403 should not log the user out
-    if (response.status === 403 && account.status === 'suspended') {
-      dispatch(showSuspensionAlert());
-      dispatch(fetchAccount());
-    }
 
     if (showErrorAlert) {
       dispatch(showAlert({ type: 'error', message: 'Something went wrong.', details: message }));
