@@ -72,7 +72,7 @@ export default class PreviewFrame extends Component {
         height={this.state.height}
         ref={this.setRef}
         onLoad={this.onLoad}
-        sandbox="allow-same-origin allow-top-navigation allow-top-navigation-by-user-activation"
+        sandbox="allow-same-origin allow-top-navigation"
         title="preview email template frame"
       />
     );
