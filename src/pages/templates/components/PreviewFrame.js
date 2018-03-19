@@ -35,9 +35,11 @@ export default class PreviewFrame extends Component {
     );
 
     // Avoid loading links in iframe
-    for (const a of this.iframe.contentDocument.getElementsByTagName('a')) {
-      a.setAttribute('target', '_parent');
-    }
+    const anchorHTMLCollection = this.iframe.contentDocument.getElementsByTagName('a');
+
+    // ...because DOM collections only array-like
+    const anchors = [...anchorHTMLCollection];
+    anchors.forEach((a) => a.setAttribute('target', '_parent'));
 
     this.setState({ height: `${height + PADDING}px` });
   }
