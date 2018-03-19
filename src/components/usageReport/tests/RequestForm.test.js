@@ -10,6 +10,7 @@ describe('RequestForm Component', () => {
     props = {
       onSubmit: jest.fn(),
       handleSubmit: jest.fn(),
+      onCancel: jest.fn(),
       invalid: true,
       pristine: true,
       submitting: false
@@ -32,8 +33,13 @@ describe('RequestForm Component', () => {
   });
 
   it('submits form correctly', () => {
-    wrapper.find('Button').simulate('click');
+    wrapper.find('Button').at(0).simulate('click');
     expect(props.handleSubmit).toHaveBeenCalled();
+  });
+
+  it('hides form on clicking cancel button', () => {
+    wrapper.find('Button').at(1).simulate('click');
+    expect(props.onCancel).toHaveBeenCalled();
   });
 
 });

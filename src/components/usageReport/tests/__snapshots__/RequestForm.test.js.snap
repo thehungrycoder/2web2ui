@@ -22,8 +22,10 @@ exports[`RequestForm Component renders form 1`] = `
         inlineErrors={true}
         label="Daily Limit"
         name="daily_limit"
+        required={true}
         validate={
           Array [
+            [Function],
             [Function],
             [Function],
           ]
@@ -36,6 +38,7 @@ exports[`RequestForm Component renders form 1`] = `
         label="Reason for Increase?"
         multiline={true}
         name="reason"
+        required={true}
         resize="none"
         rows={10}
         validate={
@@ -54,6 +57,14 @@ exports[`RequestForm Component renders form 1`] = `
         submit={true}
       >
         Request Limit Increase
+      </Button>
+       
+      <Button
+        disabled={false}
+        onClick={[MockFunction]}
+        size="default"
+      >
+        Cancel
       </Button>
     </Panel.Section>
   </form>
@@ -82,8 +93,10 @@ exports[`RequestForm Component submit is disabled when submitting 1`] = `
         inlineErrors={true}
         label="Daily Limit"
         name="daily_limit"
+        required={true}
         validate={
           Array [
+            [Function],
             [Function],
             [Function],
           ]
@@ -96,6 +109,7 @@ exports[`RequestForm Component submit is disabled when submitting 1`] = `
         label="Reason for Increase?"
         multiline={true}
         name="reason"
+        required={true}
         resize="none"
         rows={10}
         validate={
@@ -114,6 +128,14 @@ exports[`RequestForm Component submit is disabled when submitting 1`] = `
         submit={true}
       >
         Submitting
+      </Button>
+       
+      <Button
+        disabled={true}
+        onClick={[MockFunction]}
+        size="default"
+      >
+        Cancel
       </Button>
     </Panel.Section>
   </form>
@@ -142,8 +164,10 @@ exports[`RequestForm Component submit is enabled when form is valid 1`] = `
         inlineErrors={true}
         label="Daily Limit"
         name="daily_limit"
+        required={true}
         validate={
           Array [
+            [Function],
             [Function],
             [Function],
           ]
@@ -156,6 +180,7 @@ exports[`RequestForm Component submit is enabled when form is valid 1`] = `
         label="Reason for Increase?"
         multiline={true}
         name="reason"
+        required={true}
         resize="none"
         rows={10}
         validate={
@@ -174,6 +199,14 @@ exports[`RequestForm Component submit is enabled when form is valid 1`] = `
         submit={true}
       >
         Request Limit Increase
+      </Button>
+       
+      <Button
+        disabled={false}
+        onClick={[MockFunction]}
+        size="default"
+      >
+        Cancel
       </Button>
     </Panel.Section>
   </form>

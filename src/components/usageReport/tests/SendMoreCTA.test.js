@@ -13,10 +13,8 @@ describe('SendMoreCTA Component', () => {
       currentUser: {
         email_verified: true
       },
-      account: {
-        usage: { day: { limit: 1000 }}
-      },
-      currentPlan: {},
+      allowSendingLimitRequest: false,
+      currentLimit: 1000,
       verifyEmail: jest.fn(() => Promise.resolve()),
       showAlert: jest.fn(() => Promise.resolve()),
       emailRequest: jest.fn(() => Promise.resolve())
@@ -31,27 +29,17 @@ describe('SendMoreCTA Component', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('renders correct for deprecated plan (cta to upgrade)', () => {
-    wrapper.setProps({ currentPlan: { status: 'deprecated' }});
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('renders correctly for free plan (cta to upgrade)', () => {
-    wrapper.setProps({ currentPlan: { code: 'ccfree1' }});
-    expect(wrapper).toMatchSnapshot();
-  });
-
   it('renders correctly for aws free plan (cta to upgrade)', () => {
-    wrapper.setProps({ currentPlan: { code: 'aws_free' }});
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders correctly for customers who can request limit bump', () => {
-    wrapper.setProps({ currentPlan: { code: 'pro1' }});
+    wrapper.setProps({ allowSendingLimitRequest: true });
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders support form correctly', () => {
+    wrapper.setProps({ allowSendingLimitRequest: true });
     wrapper.setState({ showSupportForm: true });
     expect(wrapper).toMatchSnapshot();
   });
