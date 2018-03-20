@@ -25,7 +25,8 @@ describe('Template EditPage', () => {
         push: jest.fn()
       },
       subaccountId: 101,
-      formName: 'templateEdit'
+      formName: 'templateEdit',
+      canModify: true
     };
 
     wrapper = shallow(<EditPage {...props} />);
@@ -40,6 +41,11 @@ describe('Template EditPage', () => {
     expect(props.getTestData).toHaveBeenCalledWith({ id: 'id', mode: 'draft' });
     expect(props.getDraft).toHaveBeenCalledWith('id', props.subaccountId);
     expect(props.getPublished).toHaveBeenCalledWith('id', props.subaccountId);
+  });
+
+  it('should render without delete, duplicate, publish, and save action buttons', () => {
+    wrapper.setProps({ canModify: false });
+    expect(wrapper).toMatchSnapshot();
   });
 
   it('should catch 404s on both published and draft', async() => {

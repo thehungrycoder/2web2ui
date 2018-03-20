@@ -65,7 +65,7 @@ export default class EditPage extends Component {
   }
 
   getPageProps() {
-    const { handleSubmit, template, match, submitting, subaccountId } = this.props;
+    const { canModify, handleSubmit, template, match, submitting, subaccountId } = this.props;
     const published = template.published;
 
     const primaryAction = {
@@ -78,21 +78,33 @@ export default class EditPage extends Component {
       {
         content: 'View Published',
         Component: Link,
-        to: `/templates/edit/${match.params.id}/published${setSubaccountQuery(subaccountId)}`
+        to: `/templates/edit/${match.params.id}/published${setSubaccountQuery(subaccountId)}`,
+        visible: published
       },
       {
         content: 'Save as Draft',
         onClick: handleSubmit(this.handleSave),
-        disabled: submitting
+        disabled: submitting,
+        visible: canModify
       },
-      { content: 'Delete', onClick: this.handleDeleteModalToggle },
-      { content: 'Duplicate', Component: Link, to: `/templates/create/${match.params.id}` },
-      { content: 'Preview & Send', Component: Link, to: `/templates/preview/${match.params.id}${setSubaccountQuery(subaccountId)}` }
+      { content: 'Delete', onClick: this.handleDeleteModalToggle, visible: canModify },
+      {
+        content: 'Duplicate',
+        Component: Link,
+        to: `/templates/create/${match.params.id}`,
+        visible: canModify
+      },
+      {
+        content: 'Preview & Send',
+        Component: Link,
+        to: `/templates/preview/${match.params.id}${setSubaccountQuery(subaccountId)}`,
+        visible: true
+      }
     ];
 
-    if (!published) {
-      secondaryActions.shift();
-    }
+    const visibleSecondaryActions = secondaryActions.reduce((result, { visible, ...action }) => (
+      visible ? [...result, action] : result
+    ), []);
 
     const breadcrumbAction = {
       content: 'Templates',
@@ -101,8 +113,8 @@ export default class EditPage extends Component {
     };
 
     return {
-      secondaryActions,
-      primaryAction,
+      secondaryActions: visibleSecondaryActions,
+      primaryAction: canModify ? primaryAction : undefined,
       breadcrumbAction,
       title: `${match.params.id} (Draft)`
     };

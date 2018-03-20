@@ -103,3 +103,62 @@ exports[`Template EditPage should render correctly 1`] = `
   />
 </Page>
 `;
+
+exports[`Template EditPage should render without delete, duplicate, publish, and save action buttons 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "Templates",
+      "to": "/templates",
+    }
+  }
+  empty={Object {}}
+  secondaryActions={
+    Array [
+      Object {
+        "Component": [Function],
+        "content": "View Published",
+        "to": "/templates/edit/id/published?subaccount=101",
+      },
+      Object {
+        "Component": [Function],
+        "content": "Preview & Send",
+        "to": "/templates/preview/id?subaccount=101",
+      },
+    ]
+  }
+  title="id (Draft)"
+>
+  <Grid>
+    <Grid.Column
+      lg={4}
+      xs={12}
+    >
+      <Connect(Form)
+        name="templateEdit"
+        subaccountId={101}
+      />
+    </Grid.Column>
+    <Grid.Column
+      lg={8}
+      xs={12}
+    >
+      <LoadableComponent
+        name="templateEdit"
+      />
+    </Grid.Column>
+  </Grid>
+  <DeleteModal
+    content={
+      <p>
+        Both the draft and published versions of this template will be deleted.
+      </p>
+    }
+    onCancel={[Function]}
+    onDelete={[Function]}
+    open={false}
+    title="Are you sure you want to delete this template?"
+  />
+</Page>
+`;
