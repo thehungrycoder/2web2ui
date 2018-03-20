@@ -8,7 +8,7 @@ const BasicAuthFields = () => (
   <div>
   Basic Auth
     <Field name='basicUser' label='Username' placeholder='username' component={TextFieldWrapper} validate={required}/>
-    <Field name='basicPass' label='Password' placeholder='password' component={TextFieldWrapper} validate={required}/>
+    <Field name='basicPass' label='Password' placeholder='password' component={TextFieldWrapper} validate={required} type='password'/>
   </div>
 );
 
