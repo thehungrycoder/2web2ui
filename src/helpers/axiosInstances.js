@@ -6,7 +6,8 @@ const { apiBase, apiRequestTimeout, zuora: zuoraConfig, apiRequestHeaders } = co
 export const sparkpost = axios.create({
   baseURL: apiBase,
   timeout: apiRequestTimeout,
-  headers: apiRequestHeaders
+  headers: apiRequestHeaders,
+  withCredentials: true
 });
 
 export const zuora = axios.create({
