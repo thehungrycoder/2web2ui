@@ -28,9 +28,12 @@ export const LINKS = {
   LEARN_MORE_TFA: 'https://www.sparkpost.com/docs/my-account-and-profile/enabling-two-factor-authentication',
   ONBOARDING_SENDING: 'https://www.sparkpost.com/docs/getting-started/getting-started-sparkpost/#preparing-your-from-address',
   SUBMIT_SUPPORT_TICKET: 'https://support.sparkpost.com/customer/portal/emails/new',
-  RECAPTCHA_LIB_URL: 'https://www.google.com/recaptcha/api.js'
+  RECAPTCHA_LIB_URL: 'https://www.google.com/recaptcha/api.js',
+  DAILY_MONTHLY_QUOTA_LIMIT_DOC: 'https://support.sparkpost.com/customer/portal/articles/2030894'
 };
 
 export const ENTERPRISE_PLAN_CODES = ['ent1'];
 
 export const AWS_COOKIE_NAME = 'aws-mkt';
+
+export const DAILY_LIMIT_REQUEST_TEMPLATE = 'daily-limit-increase';

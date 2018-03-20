@@ -11,6 +11,7 @@ describe('Page: Dashboard tests', () => {
     checkSuppression: jest.fn(() => []),
     listSendingDomains: jest.fn(() => []),
     listApiKeys: jest.fn(() => []),
+    getPlans: jest.fn(() => []),
     account: {
       subscription: {
         code: 'paid'

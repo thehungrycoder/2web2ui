@@ -1,5 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Account action creators emailRequest makes api call with correct data 1`] = `
+Object {
+  "meta": Object {
+    "data": Object {
+      "campaign_id": "support-daily-limit-increase",
+      "limit": 50000,
+      "previousLimit": "1000",
+      "reason": "just because i want",
+      "template_id": "daily-limit-increase",
+    },
+    "method": "POST",
+    "url": "/account/email-request",
+  },
+  "type": "EMAIL_REQUEST",
+}
+`;
+
 exports[`Account action creators register makes api call with passed data 1`] = `
 Object {
   "meta": Object {
