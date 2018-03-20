@@ -78,6 +78,7 @@ exports[`Template EditPage should render correctly 1`] = `
     >
       <Connect(Form)
         name="templateEdit"
+        readOnly={false}
         subaccountId={101}
       />
     </Grid.Column>
@@ -87,6 +88,7 @@ exports[`Template EditPage should render correctly 1`] = `
     >
       <LoadableComponent
         name="templateEdit"
+        readOnly={false}
       />
     </Grid.Column>
   </Grid>
@@ -104,7 +106,7 @@ exports[`Template EditPage should render correctly 1`] = `
 </Page>
 `;
 
-exports[`Template EditPage should render without delete, duplicate, publish, and save action buttons 1`] = `
+exports[`Template EditPage should render correctly for read-only users 1`] = `
 <Page
   breadcrumbAction={
     Object {
@@ -137,6 +139,7 @@ exports[`Template EditPage should render without delete, duplicate, publish, and
     >
       <Connect(Form)
         name="templateEdit"
+        readOnly={true}
         subaccountId={101}
       />
     </Grid.Column>
@@ -146,6 +149,7 @@ exports[`Template EditPage should render without delete, duplicate, publish, and
     >
       <LoadableComponent
         name="templateEdit"
+        readOnly={true}
       />
     </Grid.Column>
   </Grid>

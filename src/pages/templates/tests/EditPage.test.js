@@ -43,7 +43,7 @@ describe('Template EditPage', () => {
     expect(props.getPublished).toHaveBeenCalledWith('id', props.subaccountId);
   });
 
-  it('should render without delete, duplicate, publish, and save action buttons', () => {
+  it('should render correctly for read-only users', () => {
     wrapper.setProps({ canModify: false });
     expect(wrapper).toMatchSnapshot();
   });

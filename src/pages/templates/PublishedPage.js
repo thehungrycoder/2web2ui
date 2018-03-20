@@ -50,10 +50,10 @@ export default class PublishedPage extends Component {
       <Page {...this.getPageProps()}>
         <Grid>
           <Grid.Column xs={12} lg={4}>
-            <Form name={formName} published />
+            <Form name={formName} readOnly />
           </Grid.Column>
           <Grid.Column xs={12} lg={8}>
-            <Editor name={formName} published />
+            <Editor name={formName} readOnly />
           </Grid.Column>
         </Grid>
       </Page>

@@ -16,7 +16,7 @@ describe('Template Form', () => {
       listDomains: jest.fn(),
       change: jest.fn(),
       newTemplate: false,
-      published: false,
+      readOnly: false,
       name: 'form-name',
       hasSubaccounts: false
     };
@@ -40,8 +40,8 @@ describe('Template Form', () => {
     expect(wrapper.find(SubaccountSection)).toMatchSnapshot();
   });
 
-  it('should disable fields on published', () => {
-    wrapper.setProps({ published: true });
+  it('should disable fields for read-only users', () => {
+    wrapper.setProps({ readOnly: true });
     expect(wrapper).toMatchSnapshot();
   });
 

@@ -33,7 +33,7 @@ exports[`Template PublishedPage should render correctly 1`] = `
     >
       <Connect(Form)
         name="templatePublished"
-        published={true}
+        readOnly={true}
       />
     </Grid.Column>
     <Grid.Column
@@ -42,7 +42,7 @@ exports[`Template PublishedPage should render correctly 1`] = `
     >
       <LoadableComponent
         name="templatePublished"
-        published={true}
+        readOnly={true}
       />
     </Grid.Column>
   </Grid>

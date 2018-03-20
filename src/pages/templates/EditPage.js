@@ -121,7 +121,7 @@ export default class EditPage extends Component {
   }
 
   render() {
-    const { loading, formName, subaccountId } = this.props;
+    const { canModify, loading, formName, subaccountId } = this.props;
 
     if (loading) {
       return <Loading />;
@@ -131,10 +131,10 @@ export default class EditPage extends Component {
       <Page {...this.getPageProps()}>
         <Grid>
           <Grid.Column xs={12} lg={4}>
-            <Form name={formName} subaccountId={subaccountId} />
+            <Form name={formName} subaccountId={subaccountId} readOnly={!canModify} />
           </Grid.Column>
           <Grid.Column xs={12} lg={8}>
-            <Editor name={formName} />
+            <Editor name={formName} readOnly={!canModify} />
           </Grid.Column>
         </Grid>
         <DeleteModal

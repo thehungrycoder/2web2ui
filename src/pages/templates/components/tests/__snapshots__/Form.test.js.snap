@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Template Form should disable fields on published 1`] = `
+exports[`Template Form should disable fields for read-only users 1`] = `
 <div>
   <Panel>
     <Panel.Section>
