@@ -5,7 +5,7 @@ import styles from './AlgoliaResults.module.scss';
 
 const AlgoliaResults = ({ hit }) => (
   <div className={styles.Result}>
-    <strong><Icon name='Link' /> <UnstyledLink to={hit.permalink}>{hit.post_title}</UnstyledLink></strong>
+    <strong><Icon name='Link' /> <UnstyledLink external to={hit.permalink}>{hit.post_title}</UnstyledLink></strong>
     <div><Snippet tagName="b" attribute="post_excerpt" hit={hit} /></div>
   </div>
 );
