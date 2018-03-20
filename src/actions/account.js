@@ -44,3 +44,15 @@ export function register(data) {
     }
   });
 }
+
+
+export function emailRequest(data) {
+  return sparkpostApiRequest({
+    type: 'EMAIL_REQUEST',
+    meta: {
+      method: 'POST',
+      url: '/account/email-request',
+      data
+    }
+  });
+}

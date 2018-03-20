@@ -1,0 +1,109 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SendMoreCTA Component renders correctly for aws free plan (cta to upgrade) 1`] = `
+<div>
+  <p>
+    <span>
+      Need to send more? 
+    </span>
+    <UnstyledLink
+      Component={[Function]}
+      to="/account/billing"
+    >
+      Upgrade your account.
+    </UnstyledLink>
+     
+    <UnstyledLink
+      external={true}
+      to="https://support.sparkpost.com/customer/portal/articles/2030894"
+    >
+      Learn more about these limits.
+    </UnstyledLink>
+  </p>
+</div>
+`;
+
+exports[`SendMoreCTA Component renders correctly for customers who can request limit bump 1`] = `
+<div>
+  <p>
+    <span>
+      Need to send more? 
+    </span>
+    <span>
+      <UnstyledLink
+        Component={[Function]}
+        onClick={[Function]}
+      >
+        Submit a request.
+      </UnstyledLink>
+    </span>
+     
+    <UnstyledLink
+      external={true}
+      to="https://support.sparkpost.com/customer/portal/articles/2030894"
+    >
+      Learn more about these limits.
+    </UnstyledLink>
+  </p>
+</div>
+`;
+
+exports[`SendMoreCTA Component renders support form correctly 1`] = `
+<div>
+  <p>
+    <span>
+      Need to send more? 
+    </span>
+    <span>
+      <UnstyledLink
+        Component={[Function]}
+        onClick={[Function]}
+      >
+        Submit a request.
+      </UnstyledLink>
+    </span>
+     
+    <UnstyledLink
+      external={true}
+      to="https://support.sparkpost.com/customer/portal/articles/2030894"
+    >
+      Learn more about these limits.
+    </UnstyledLink>
+  </p>
+  <Modal
+    open={true}
+  >
+    <Panel
+      title="Request Daily Limit Increase"
+    >
+      <ReduxForm
+        currentLimit={1000}
+        onCancel={[Function]}
+        onSubmit={[Function]}
+      />
+    </Panel>
+  </Modal>
+</div>
+`;
+
+exports[`SendMoreCTA Component renders when email address not verified 1`] = `
+<div>
+  <p>
+    <span>
+      Need to send more? 
+    </span>
+    <UnstyledLink
+      onClick={[Function]}
+    >
+      Verify your email.
+    </UnstyledLink>
+     
+    <UnstyledLink
+      external={true}
+      to="https://support.sparkpost.com/customer/portal/articles/2030894"
+    >
+      Learn more about these limits.
+    </UnstyledLink>
+  </p>
+</div>
+`;
