@@ -46,7 +46,7 @@ export class Support extends Component {
 
     const triggerMarkup = (
       <a className={styles.Button} onClick={this.togglePanel}>
-        <Icon name='HelpOutline' className={styles.Icon} size={33} />
+        <Icon name={showPanel ? 'CloseCircle' : 'HelpOutline'} className={styles.Icon} size={33} />
       </a>
     );
 
@@ -59,7 +59,6 @@ export class Support extends Component {
             fixed
             className={styles.Popover}
             open={showPanel}
-            onOutsideClick={this.resetPanel}
             trigger={triggerMarkup}>
 
             { !showForm && <SearchPanel toggleForm={this.toggleForm} /> }

@@ -1,6 +1,5 @@
 const initialState = {
-  ticketId: null,
-  algoliaResults: []
+  ticketId: null
 };
 
 export default (state = initialState, action) => {
@@ -9,7 +8,7 @@ export default (state = initialState, action) => {
       return { ...state, ticketId: action.payload.ticket_id };
 
     case 'RESET_SUPPORT_FORM':
-      return { ...state, ticketId: null };
+      return { ...initialState };
 
     default:
       return state;
