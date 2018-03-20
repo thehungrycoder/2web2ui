@@ -20,7 +20,6 @@ const RELATIVE_DATE_OPTIONS = [
   'custom'
 ];
 
-
 export class ReportOptions extends Component {
   componentDidMount() {
     const { options, filters = []} = parseSearch(this.props.location.search);
@@ -66,7 +65,7 @@ export class ReportOptions extends Component {
   }
 
   render() {
-    const { typeaheadCache, reportOptions, reportLoading, refreshReportOptions, extraLinkParams } = this.props;
+    const { typeaheadCache, reportOptions, reportLoading, refreshReportOptions, searchOptions } = this.props;
 
     return (
       <Panel>
@@ -91,7 +90,7 @@ export class ReportOptions extends Component {
               />
             </Grid.Column>
             <Grid.Column xs={4} md={2} xl={1}>
-              <ShareModal disabled={reportLoading} extraLinkParams={extraLinkParams} />
+              <ShareModal disabled={reportLoading} searchOptions={searchOptions} />
               {/* <Button id='shareModalButton' disabled={reportLoading} fullWidth onClick={this.toggleShareModal}>Share</Button> */}
             </Grid.Column>
           </Grid>

@@ -1,42 +1,39 @@
+/* eslint-disable */
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import qs from 'query-string';
 import { relativeDateOptions } from 'src/helpers/date';
-import { getReportSearchOptions } from 'src/helpers/reports';
 import { Panel, Button, WindowEvent, Checkbox } from '@sparkpost/matchbox';
 import { Modal, CopyField } from 'src/components';
+import _ from 'lodash';
 
 export class ShareModal extends Component {
-  static defaultProps = {
-    extraLinkParams: []
-  }
-
   state = {
     pinned: true,
     open: false,
-    query: ''
+    searchOptions: {}
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.reportOptions !== this.props.reportOptions) {
+    if (!_.isEqual(prevProps.searchOptions, this.props.searchOptions)) {
       this.updateLink();
     }
   }
 
   updateLink = () => {
-    const { reportOptions, history, location, extraLinkParams } = this.props;
-    const query = getReportSearchOptions(reportOptions, extraLinkParams);
-    const search = qs.stringify(query, { encode: false });
+    const { searchOptions, history, location } = this.props;
+    // console.log(searchOptions);
+    const search = qs.stringify(searchOptions, { encode: false });
 
-    this.setState({ query });
+    this.setState({ searchOptions });
     history.replace({ pathname: location.pathname, search });
   }
 
   getLink() {
-    const { query, pinned } = this.state;
-    const modifiedQuery = { ...query };
-
+    const { searchOptions, pinned } = this.state;
+    const modifiedQuery = { ...searchOptions };
+    console.log('query', modifiedQuery);
     if (pinned) {
       modifiedQuery.range = 'custom';
     }
@@ -63,9 +60,9 @@ export class ShareModal extends Component {
   }
 
   renderPinToggle() {
-    const { query, pinned } = this.state;
-    const relativeRange = relativeDateOptions.find((item) => item.value === query.range);
-    const isRelative = relativeRange && query.range !== 'custom';
+    const { searchOptions, pinned } = this.state;
+    const relativeRange = relativeDateOptions.find((item) => item.value === searchOptions.range);
+    const isRelative = relativeRange && searchOptions.range !== 'custom';
 
     if (!isRelative) {
       return null;
@@ -105,8 +102,4 @@ export class ShareModal extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  reportOptions: state.reportOptions
-});
-
-export default withRouter(connect(mapStateToProps, {})(ShareModal));
+export default withRouter(connect(null, {})(ShareModal));

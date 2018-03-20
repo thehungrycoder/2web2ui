@@ -3,9 +3,11 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import _ from 'lodash';
 import { getMessageEvents, refreshMessageEventsDateRange, addFilters } from 'src/actions/messageEvents';
-import { Panel, Grid, TextField, Button } from '@sparkpost/matchbox';
+import { selectMessageEventsSearchOptions } from 'src/selectors/reportSearchOptions';
+import { Panel, Grid, TextField } from '@sparkpost/matchbox';
 import AdvancedFilters from './AdvancedFilters';
 import ActiveFilters from './ActiveFilters';
+import ShareModal from '../../components/ShareModal';
 import DatePicker from 'src/components/datePicker/DatePicker';
 import { email as emailValidator } from 'src/helpers/validation';
 import { stringToArray } from 'src/helpers/string';
@@ -58,7 +60,8 @@ export class MessageEventsSearch extends Component {
   }
 
   render() {
-    const { search, refreshMessageEventsDateRange, loading, now = new Date() } = this.props;
+    const { search, refreshMessageEventsDateRange, loading, now, searchOptions } = this.props;
+
     return (
       <Panel>
         <Panel.Section>
@@ -93,7 +96,7 @@ export class MessageEventsSearch extends Component {
               <AdvancedFilters />
             </Grid.Column>
             <Grid.Column xs={12} md={2} xl={1}>
-              <Button fullWidth>Share</Button>
+              <ShareModal disabled={loading} searchOptions={searchOptions} />
             </Grid.Column>
           </Grid>
         </Panel.Section>
@@ -103,9 +106,10 @@ export class MessageEventsSearch extends Component {
   }
 }
 
-const mapStateToProps = ({ messageEvents }) => ({
-  search: messageEvents.search,
-  loading: messageEvents.loading
+const mapStateToProps = (state) => ({
+  search: state.messageEvents.search,
+  loading: state.messageEvents.loading,
+  searchOptions: selectMessageEventsSearchOptions(state)
 });
 const mapDispatchToProps = { getMessageEvents, refreshMessageEventsDateRange, addFilters };
 export default connect(mapStateToProps, mapDispatchToProps)(MessageEventsSearch);
