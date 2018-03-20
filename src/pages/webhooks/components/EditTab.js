@@ -38,7 +38,7 @@ export class EditTab extends Component {
   handleSubmit = (values, webhook, allEvents) => {
     const { getWebhook, updateWebhook, showAlert } = this.props;
 
-    const update = prepareWebhookUpdate(values, webhook, allEvents);
+    const update = prepareWebhookUpdate(values, allEvents);
 
     return updateWebhook({ id: webhook.id, subaccount: webhook.subaccount, ...update })
       .then(() => {

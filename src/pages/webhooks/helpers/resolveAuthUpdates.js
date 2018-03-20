@@ -3,48 +3,33 @@ Called by updateWebhook. Figures out if the webhooks auth details need to be upd
 then returns those updates if so.
 */
 
-export default function(values, webhook) {
+export default function resolveAuthUpdates(values) {
   const { auth, basicUser, basicPass, clientId, clientSecret, tokenURL } = values;
-  const update = {};
-  update.auth_type = auth || 'none';
 
-  // none is undefined !== undefined
-  if (auth !== webhook.auth_type) {
-    switch (auth) {
-      case 'basic':
-        update.auth_credentials = { username: basicUser, password: basicPass };
-        break;
-      case 'oauth2':
-        update.auth_request_details = {
+  switch (auth) {
+    case 'basic':
+      return {
+        auth_credentials: {
+          username: basicUser,
+          password: basicPass
+        },
+        auth_type: 'basic'
+      };
+    case 'oauth2':
+      return {
+        auth_request_details: {
           url: tokenURL,
-          body: { client_id: clientId, client_secret: clientSecret, grant_type: 'client_credentials' }
-        };
-        break;
-    }
-  } else {
-    const {
-      auth_credentials: authCredentials,
-      auth_request_details: authRequestDetails
-    } = webhook;
-
-    switch (auth) {
-      case 'basic':
-        if (authCredentials.username !== basicUser ||
-            authCredentials.password !== basicPass) {
-          update.auth_credentials = { username: basicUser, password: basicPass };
-        }
-        break;
-      case 'oauth2':
-        if (authRequestDetails.url !== tokenURL ||
-            authRequestDetails.body.client_id !== clientId ||
-            authRequestDetails.body.client_secret !== clientSecret) {
-          update.auth_request_details = {
-            url: tokenURL,
-            body: { client_id: clientId, client_secret: clientSecret, grant_type: 'client_credentials' }
-          };
-        }
-        break;
-    }
+          body: {
+            client_id: clientId,
+            client_secret: clientSecret,
+            grant_type: 'client_credentials'
+          }
+        },
+        auth_type: 'oauth2'
+      };
+    default:
+      return {
+        auth_type: 'none'
+      };
   }
-  return update;
 }
