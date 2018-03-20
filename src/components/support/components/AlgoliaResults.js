@@ -1,13 +1,12 @@
 import React from 'react';
 import { UnstyledLink, Icon } from '@sparkpost/matchbox';
+import { Snippet } from 'react-instantsearch/dom';
 
-const AlgoliaResults = ({ results }) => (
-  <ul>
-    {results.map((item) => (<li>
-      <strong><Icon name='Link' /><UnstyledLink to={item.permalink}>{item.post_title}</UnstyledLink></strong>
-      <div dangerouslySetInnerHTML={({ __html: item.post_excerpt })} />
-    </li>))}
-  </ul>
+const AlgoliaResults = ({ hit }) => (
+  <div>
+    <strong><Icon name='Link' /><UnstyledLink to={hit.permalink}>{hit.post_title}</UnstyledLink></strong>
+    <div><Snippet tagName="b" attribute="post_excerpt" hit={hit} /></div>
+  </div>
 );
 
 export default AlgoliaResults;

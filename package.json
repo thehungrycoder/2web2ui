@@ -43,7 +43,6 @@
   "dependencies": {
     "@sparkpost/boomerang": "^1.0.6",
     "@sparkpost/matchbox": "^2.4.1",
-    "algoliasearch": "^3.25.1",
     "axios": "^0.17.1",
     "chart.js": "^2.6.0",
     "classnames": "^2.2.5",
@@ -69,6 +68,7 @@
     "react-dom": "^16.2.0",
     "react-dropzone": "^4.2.3",
     "react-helmet": "^5.2.0",
+    "react-instantsearch": "^5.0.1",
     "react-load-script": "0.0.6",
     "react-loadable": "^5.3.1",
     "react-qr-svg": "^2.1.0",

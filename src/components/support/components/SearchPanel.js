@@ -1,41 +1,26 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Button, Panel, TextField } from '@sparkpost/matchbox';
-import { getAlgoliaResults } from 'src/selectors/support';
-import { algoliaSearch } from 'src/actions/support';
+import { Button, Panel } from '@sparkpost/matchbox';
 import AlgoliaResults from './AlgoliaResults';
 import styles from './SupportForm.module.scss';
+import { InstantSearch, Hits } from 'react-instantsearch/dom';
+import AlgoliaSearch from './AlogliaSearch.js';
+import config from 'src/config';
+const searchCfg = config.support.algolia;
 
 export class SearchPanel extends Component {
-  state = {
-    searchParams: ''
-  };
+  render() {
+    const { toggleForm } = this.props;
 
-  componentDidMount() {
-    // firing off a request to return "top" results
-    this.props.algoliaSearch('');
-  }
-
-  searchAlgolia = (event) => {
-    const { algoliaSearch } = this.props;
-    this.setState({ searchParams: event.currentTarget.value });
-    algoliaSearch(this.state.searchParams);
-  };
-
-  renderForm() {
-    const { searchParams } = this.state;
-    const { results, toggleForm } = this.props;
-
-    return <div>
+    return <InstantSearch
+      appId={searchCfg.appID}
+      apiKey={searchCfg.apiKey}
+      indexName={searchCfg.index}
+    >
       <Panel.Section>
-        <TextField
-          onChange={this.searchAlgolia}
-          value={searchParams}
-          placeholder={'Have a Question?  Ask or enter a search term here.'}
-        />
+        <AlgoliaSearch />
       </Panel.Section>
       <Panel.Section className={styles.Results}>
-        <AlgoliaResults results={results} />
+        <Hits hitComponent={AlgoliaResults} />
       </Panel.Section>
       <Panel.Section>
         <span className={styles.helpText}>Do you need more assistance?</span>
@@ -43,17 +28,9 @@ export class SearchPanel extends Component {
           Submit a Ticket
         </Button>
       </Panel.Section>
-    </div>;
-  }
-
-  render() {
-    return this.renderForm();
+    </InstantSearch>;
   }
 }
 
-const mapStateToProps = (state) => ({
-  results: getAlgoliaResults(state)
-});
-
-export default connect(mapStateToProps, { algoliaSearch })(SearchPanel);
+export default SearchPanel;
 
