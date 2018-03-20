@@ -60,6 +60,7 @@ exports[`should render BasicAuthFields 1`] = `
     label="Password"
     name="basicPass"
     placeholder="password"
+    type="password"
     validate={[Function]}
   />
 </div>
