@@ -86,7 +86,7 @@ export function authenticate(username, password, rememberMe = false) {
 }
 
 export function confirmPassword(username, password) {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     dispatch({ type: 'CONFIRM_PASSWORD' });
 
     return sparkpostLogin(username, password, false)

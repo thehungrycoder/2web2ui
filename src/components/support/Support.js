@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Portal, Icon, Popover } from '@sparkpost/matchbox';
-import entitledToSupport from 'src/selectors/support';
+import { entitledToSupport } from 'src/selectors/support';
 import { createTicket, clearSupportForm } from 'src/actions/support';
 import SupportForm from './components/SupportForm';
+import { SearchPanel } from './components/SearchPanel';
 import styles from './Support.module.scss';
 
 export class Support extends Component {
 
   state = {
-    showPanel: false
+    showPanel: false,
+    showForm: false
   };
 
   onSubmit = (values) => {
@@ -21,7 +23,13 @@ export class Support extends Component {
   };
 
   togglePanel = () => {
-    this.setState({ showPanel: !this.state.showPanel });
+    const stateUpdates = { showPanel: !this.state.showPanel };
+    // handling reseting doc search when closed
+    if (!this.state.showPanel) {
+      stateUpdates.showForm = false;
+    }
+
+    this.setState(stateUpdates);
   }
 
   resetPanel = () => {
@@ -29,6 +37,21 @@ export class Support extends Component {
       this.props.clearSupportForm();
     });
   };
+
+  toggleForm = () => {
+    this.setState({ showForm: !this.state.showForm });
+  }
+
+  renderPanel() {
+    const { showForm } = this.state;
+
+    return showForm
+      ? <SupportForm
+        onSubmit={this.onSubmit}
+        onCancel={this.toggleForm}
+        onContinue={this.toggleForm} />
+      : <SearchPanel toggleForm={this.toggleForm} />;
+  }
 
   render() {
     const { loggedIn, entitledToSupport } = this.props;
@@ -40,7 +63,7 @@ export class Support extends Component {
 
     const triggerMarkup = (
       <a className={styles.Button} onClick={this.togglePanel}>
-        <Icon name='HelpOutline' className={styles.Icon} size={33} />
+        <Icon name={showPanel ? 'CloseCircle' : 'HelpOutline'} className={styles.Icon} size={33} />
       </a>
     );
 
@@ -55,10 +78,7 @@ export class Support extends Component {
             open={showPanel}
             trigger={triggerMarkup}>
 
-            <SupportForm
-              onSubmit={this.onSubmit}
-              onCancel={this.resetPanel}
-              onContinue={this.resetPanel} />
+            { this.renderPanel() }
 
           </Popover>
         </div>

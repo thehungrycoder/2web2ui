@@ -30,7 +30,7 @@ export class LoginForm extends Component {
           name='password'
           id='password'
           label='Password'
-          placeholder='IheartLilSebastian'
+          placeholder='••••••••'
           component={TextFieldWrapper}
         />
         }

@@ -5,6 +5,13 @@ const testConfig = {
     host: 'smtp.sparkmail.com',
     alternativePort: 2525
   },
+  support: {
+    algolia: {
+      appID: 'id',
+      apiKey: 'key',
+      index: 'index'
+    }
+  },
   authentication: {
     cookie: {
       name: 'test',

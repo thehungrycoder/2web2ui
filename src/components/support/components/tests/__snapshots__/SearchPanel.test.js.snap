@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Search Panel Component should render 1`] = `
+<CreateInstantSearch
+  apiKey="key"
+  appId="id"
+  indexName="index"
+  refresh={false}
+  root={
+    Object {
+      "Root": "div",
+      "props": Object {
+        "className": "ais-InstantSearch__root",
+      },
+    }
+  }
+>
+  <Panel.Section>
+    <AlgoliaSearchBox(UnknownComponent) />
+  </Panel.Section>
+  <Panel.Section>
+    <AlgoliaHits(Hits)
+      hitComponent={[Function]}
+    />
+  </Panel.Section>
+  <Panel.Section>
+    <span>
+      Do you need more assistance?
+    </span>
+    <Button
+      onClick={[MockFunction]}
+      primary={true}
+      size="default"
+    >
+      Submit a Ticket
+    </Button>
+  </Panel.Section>
+</CreateInstantSearch>
+`;

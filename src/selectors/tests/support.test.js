@@ -1,11 +1,10 @@
-import entitledToSupport, { currentLimitSelector, allowSendingLimitRequestSelector } from '../support';
+import { entitledToSupport, currentLimitSelector, allowSendingLimitRequestSelector } from '../support';
 import * as billingInfo from '../accountBillingInfo';
 import cases from 'jest-in-case';
 
 jest.mock('../accountBillingInfo', () => ({
   currentPlanSelector: jest.fn()
 }));
-
 
 describe('Selectors: support', () => {
   describe('entitledToSupport', () => {
