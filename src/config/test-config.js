@@ -7,7 +7,7 @@ const testConfig = {
   },
   support: {
     algolia: {
-      appId: 'id',
+      appID: 'id',
       apiKey: 'key',
       index: 'index'
     }

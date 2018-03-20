@@ -3,6 +3,7 @@
 exports[`Search Panel Component should render 1`] = `
 <CreateInstantSearch
   apiKey="key"
+  appId="id"
   indexName="index"
   refresh={false}
   root={
