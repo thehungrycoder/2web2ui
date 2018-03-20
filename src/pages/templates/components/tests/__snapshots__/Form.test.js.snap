@@ -68,7 +68,7 @@ exports[`Template Form should disable fields on published 1`] = `
         disabled={true}
         helpText="An email address recipients can reply to."
         label="Reply To"
-        name="reply_to"
+        name="content.reply_to"
         validate={[Function]}
       />
       <Field
@@ -189,7 +189,7 @@ exports[`Template Form should render 1`] = `
         disabled={false}
         helpText="An email address recipients can reply to."
         label="Reply To"
-        name="reply_to"
+        name="content.reply_to"
         validate={[Function]}
       />
       <Field
