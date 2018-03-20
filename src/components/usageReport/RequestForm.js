@@ -9,7 +9,7 @@ const formName = 'dailyLimitIncreaseRequestForm';
 
 export class RequestForm extends Component {
   render() {
-    const { onSubmit, handleSubmit, onCancel, submitting, pristine, invalid, currentLimit = 1 } = this.props;
+    const { onSubmit, handleSubmit, onCancel, submitting, pristine, invalid, currentLimit } = this.props;
 
     return (<div>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -21,7 +21,7 @@ export class RequestForm extends Component {
             label='Daily Limit'
             inlineErrors={true}
             disabled={submitting}
-            validate={[required, integer, minNumber(currentLimit)]}
+            validate={[required, integer, minNumber(currentLimit + 1)]}
             component={TextFieldWrapper}
             required={true}
           />

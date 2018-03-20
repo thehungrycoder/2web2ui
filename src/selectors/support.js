@@ -15,7 +15,7 @@ export const allowSendingLimitRequestSelector = createSelector(
 
 export const currentLimitSelector = (state) => {
   const { account } = state;
-  return _.get(account, 'usage.day.limit', null);
+  return _.get(account, 'usage.day.limit', 0);
 };
 
 export default entitledToSupport;
