@@ -1,10 +1,10 @@
 import _ from 'lodash';
 import resolveAuthUpdates from './resolveAuthUpdates';
 
-export default function(values, webhook, allEvents) {
+export default function(values, allEvents) {
   const { name, target, active } = values;
   const update = {
-    ...resolveAuthUpdates(values, webhook),
+    ...resolveAuthUpdates(values),
     name,
     target,
     active
