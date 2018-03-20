@@ -9,6 +9,7 @@ exports[`Algolia Results component should render 1`] = `
     />
      
     <UnstyledLink
+      external={true}
       to="my-link"
     >
       Post Title

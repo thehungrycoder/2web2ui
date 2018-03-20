@@ -31,12 +31,7 @@ exports[`Support Form Component Form should render 1`] = `
         placeholder="Give us details about your issue"
         resize="none"
         rows={10}
-        validate={
-          Array [
-            [Function],
-            [Function],
-          ]
-        }
+        validate={[Function]}
       />
       <Field
         component={[Function]}
