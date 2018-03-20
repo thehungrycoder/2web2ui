@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Panel } from '@sparkpost/matchbox';
 import AlgoliaResults from './AlgoliaResults';
-import styles from './SupportForm.module.scss';
+import styles from './SearchPanel.module.scss';
 import { InstantSearch, Hits } from 'react-instantsearch/dom';
 import AlgoliaSearch from './AlgoliaSearch.js';
 import config from 'src/config';
@@ -23,7 +23,7 @@ export class SearchPanel extends Component {
         <Hits hitComponent={AlgoliaResults} />
       </Panel.Section>
       <Panel.Section>
-        <span className={styles.helpText}>Do you need more assistance?</span>
+        <span>Do you need more assistance?</span>
         <Button primary onClick={toggleForm} className={styles.ToggleButton}>
           Submit a Ticket
         </Button>

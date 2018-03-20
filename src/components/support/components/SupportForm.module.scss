@@ -12,19 +12,6 @@
   align-items: center;
 }
 
-.CancelBtn, .ToggleButton {
+.CancelBtn {
   float: right;
-}
-
-.Results {
-  height: rem(425);
-  overflow-y: scroll;
-}
-
-.Results ul {
-  list-style-type: none;
-}
-
-.HelpText {
-  float: left;
 }
