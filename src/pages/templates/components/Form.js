@@ -130,7 +130,7 @@ export default class Form extends Component {
             />
 
             <Field
-              name='reply_to'
+              name='content.reply_to'
               component={TextFieldWrapper}
               label='Reply To'
               helpText='An email address recipients can reply to.'
