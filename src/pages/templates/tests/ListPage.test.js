@@ -18,7 +18,8 @@ const props = {
     {
       name: 'Temp 2'
     }
-  ]
+  ],
+  canModify: true
 };
 
 let wrapper;
@@ -35,6 +36,11 @@ afterEach(() => {
 it('renders correctly', () => {
   expect(wrapper).toMatchSnapshot();
   expect(props.listTemplates).toHaveBeenCalled();
+});
+
+it('renders without primary action for read-only users', () => {
+  wrapper.setProps({ canModify: false });
+  expect(wrapper).toMatchSnapshot();
 });
 
 it('renders columns correctly with subaccounts', () => {
