@@ -21,6 +21,9 @@ jest.mock('src/config', () => ({
   website: {
     domain: ''
   },
+  support: {
+    algolia: {}
+  },
   gaTag: 'ga101',
   links: {
     submitTicket: 'https://support.sparkpost.com/customer/portal/emails/new'

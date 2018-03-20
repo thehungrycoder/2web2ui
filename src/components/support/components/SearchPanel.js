@@ -3,7 +3,7 @@ import { Button, Panel } from '@sparkpost/matchbox';
 import AlgoliaResults from './AlgoliaResults';
 import styles from './SupportForm.module.scss';
 import { InstantSearch, Hits } from 'react-instantsearch/dom';
-import AlgoliaSearch from './AlogliaSearch.js';
+import AlgoliaSearch from './AlgoliaSearch.js';
 import config from 'src/config';
 const searchCfg = config.support.algolia;
 
@@ -31,6 +31,4 @@ export class SearchPanel extends Component {
     </InstantSearch>;
   }
 }
-
-export default SearchPanel;
 

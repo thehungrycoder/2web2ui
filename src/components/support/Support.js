@@ -4,7 +4,7 @@ import { Portal, Icon, Popover } from '@sparkpost/matchbox';
 import { entitledToSupport } from 'src/selectors/support';
 import { createTicket, clearSupportForm } from 'src/actions/support';
 import SupportForm from './components/SupportForm';
-import SearchPanel from './components/SearchPanel';
+import { SearchPanel } from './components/SearchPanel';
 import styles from './Support.module.scss';
 
 export class Support extends Component {

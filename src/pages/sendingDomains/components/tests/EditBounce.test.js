@@ -12,6 +12,7 @@ jest.mock('src/config', () => ({
   website: {
     domain: ''
   },
+  support: { algolia: {}},
   bounceDomains: {
     allowDefault: false,
     cnameValue: 'sparkpostmail.com'
