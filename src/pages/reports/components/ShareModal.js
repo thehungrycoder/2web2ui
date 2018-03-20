@@ -15,6 +15,10 @@ export class ShareModal extends Component {
     searchOptions: {}
   }
 
+  componentDidMount() {
+    this.updateLink();
+  }
+
   componentDidUpdate(prevProps) {
     if (!_.isEqual(prevProps.searchOptions, this.props.searchOptions)) {
       this.updateLink();

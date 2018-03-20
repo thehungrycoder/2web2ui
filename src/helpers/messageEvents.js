@@ -1,6 +1,7 @@
 /* eslint-disable */
 import qs from 'query-string';
 import _ from 'lodash';
+import { getRelativeDates } from 'src/helpers/date';
 
 /**
  * Reshapes message event documentation for tooltips
@@ -29,7 +30,7 @@ export function parseSearch(search) {
   }
 
   if (range) {
-    dateOptions.relativeRange = range;
+    dateOptions = { ...dateOptions, ...getRelativeDates(range) };
   }
 
   const options = _.mapValues(rest, (filter, key) => {

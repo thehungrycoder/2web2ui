@@ -23,7 +23,9 @@ export class MessageEventsSearch extends Component {
   }
 
   componentDidMount() {
-    this.props.updateMessageEventsSearchOptions(parseSearch(this.props.location.search));
+    const { updateMessageEventsSearchOptions, refreshMessageEventsDateRange, location, search } = this.props;
+    refreshMessageEventsDateRange({ relativeRange: search.dateOptions.relativeRange });
+    updateMessageEventsSearchOptions(parseSearch(location.search));
   }
 
   componentDidUpdate(prevProps) {
