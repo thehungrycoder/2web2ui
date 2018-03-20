@@ -4,5 +4,4 @@ const selectSummaryMetrics = (state) => state.summaryChart.metrics;
 
 export const selectSelectedMetrics = createSelector(
   [selectSummaryMetrics],
-  (metrics = []) => metrics.map((metric) => metric.key)
-);
+  (metrics = []) => metrics.map((metric) => metric.key));

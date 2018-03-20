@@ -8,6 +8,7 @@ import MessageEventsSearch from './components/MessageEventsSearch';
 import ViewDetailsButton from './components/ViewDetailsButton';
 import { getMessageEvents } from 'src/actions/messageEvents';
 import { selectMessageEvents } from 'src/selectors/messageEvents';
+
 const errorMsg = 'Sorry, we seem to have had some trouble loading your message events.';
 const emptyMesasage = 'There are no message events for your current query';
 const maxResults = 1000;

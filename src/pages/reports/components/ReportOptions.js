@@ -21,13 +21,7 @@ const RELATIVE_DATE_OPTIONS = [
   'custom'
 ];
 
-// TODO: separate the share modal / link update logic out of this component
 export class ReportOptions extends Component {
-  state = {
-    modal: false,
-    query: {}
-  }
-
   componentDidMount() {
     const { options, filters = []} = parseSearch(this.props.location.search);
     this.props.addFilters(filters);
@@ -39,7 +33,6 @@ export class ReportOptions extends Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.reportOptions !== this.props.reportOptions) {
-      this.updateLink();
       this.maybeRefreshFilterTypeaheadCache(prevProps.reportOptions);
     }
   }
@@ -52,16 +45,6 @@ export class ReportOptions extends Component {
     if (rangesAreDifferent || (current.relativeRange === 'custom' && datesAreDifferent)) {
       this.props.refreshTypeaheadCache(current);
     }
-  }
-
-  // TODO move this and the share modal to their own component
-  updateLink = () => {
-    const { reportOptions, history, location, extraLinkParams = []} = this.props;
-    const query = getReportSearchOptions(reportOptions, extraLinkParams);
-    const search = qs.stringify(query, { encode: false });
-
-    this.setState({ query });
-    history.replace({ pathname: location.pathname, search });
   }
 
   renderActiveFilters = () => {
@@ -82,13 +65,8 @@ export class ReportOptions extends Component {
     this.props.addFilters([item]);
   }
 
-  toggleShareModal = () => {
-    this.setState({ modal: !this.state.modal });
-  }
-
   render() {
-    const { typeaheadCache, reportOptions, reportLoading, refreshReportOptions } = this.props;
-    const { query, modal } = this.state;
+    const { typeaheadCache, reportOptions, reportLoading, refreshReportOptions, searchOptions } = this.props;
 
     return (
       <Panel>
@@ -113,15 +91,12 @@ export class ReportOptions extends Component {
               />
             </Grid.Column>
             <Grid.Column xs={4} md={2} xl={1}>
-              <Button id='shareModalButton' disabled={reportLoading} fullWidth onClick={this.toggleShareModal}>Share</Button>
+              <ShareModal disabled={reportLoading} searchOptions={searchOptions} />
+              {/* <Button id='shareModalButton' disabled={reportLoading} fullWidth onClick={this.toggleShareModal}>Share</Button> */}
             </Grid.Column>
           </Grid>
         </Panel.Section>
         {this.renderActiveFilters()}
-        <ShareModal
-          open={modal}
-          handleToggle={this.toggleShareModal}
-          query={query} />
       </Panel>
     );
   }

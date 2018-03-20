@@ -57,11 +57,11 @@ export function refreshMessageEventsDateRange(dateOptions) {
 /**
  * Overwrites filters options
  */
-export function updateMessageEventsSearchOptions(options) {
+export function updateMessageEventsSearchOptions({ dateOptions, ...options }) {
   const updatedOptions = _.mapValues(options, (arr) => _.uniq(arr)); // Dedupes filter options
   return {
     type: 'REFRESH_MESSAGE_EVENTS_SEARCH_OPTIONS',
-    payload: updatedOptions
+    payload: { dateOptions, ...updatedOptions }
   };
 }
 
