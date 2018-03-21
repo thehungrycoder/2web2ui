@@ -7,7 +7,7 @@ import PreviewPage from '../PreviewPage';
 // Load a preview page with a test template and return for additional operations
 const loadPreviewPage = async(overrides = {}) => {
   const props = {
-    canModify: true,
+    canSendEmail: true,
     match: { params: { id: 'test-template' }},
     mode: 'draft',
     onLoad: () => Promise.resolve(),
@@ -40,7 +40,7 @@ it('renders preview page with template', async() => {
 });
 
 it('renders preview page with read-only template', async() => {
-  const wrapper = await loadPreviewPage({ canModify: false });
+  const wrapper = await loadPreviewPage({ canSendEmail: false });
   expect(wrapper).toMatchSnapshot();
 });
 

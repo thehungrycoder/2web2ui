@@ -15,7 +15,7 @@ exports[`renders loading error 1`] = `
   breadcrumbAction={
     Object {
       "Component": [Function],
-      "content": "Edit Template",
+      "content": "Back To Template",
       "to": "/path/to/return",
     }
   }
@@ -117,7 +117,7 @@ exports[`renders preview page with template 1`] = `
   breadcrumbAction={
     Object {
       "Component": [Function],
-      "content": "Edit Template",
+      "content": "Back To Template",
       "to": "/path/to/return",
     }
   }
@@ -173,7 +173,7 @@ exports[`resets error message when user starts typing again 1`] = `
   breadcrumbAction={
     Object {
       "Component": [Function],
-      "content": "Edit Template",
+      "content": "Back To Template",
       "to": "/path/to/return",
     }
   }
