@@ -206,3 +206,73 @@ Array [
   ],
 ]
 `;
+
+exports[`renders without primary action for read-only users 1`] = `
+<Page
+  empty={
+    Object {
+      "content": <p>
+        Build, test, preview and send your transmissions.
+      </p>,
+      "image": "Templates",
+      "show": false,
+      "title": "Manage your email templates",
+    }
+  }
+  title="Templates"
+>
+  <TableCollection
+    columns={
+      Array [
+        Object {
+          "label": "Name",
+          "sortKey": "name",
+          "width": "22%",
+        },
+        Object {
+          "label": "ID",
+          "sortKey": "id",
+          "width": "22%",
+        },
+        Object {
+          "label": "Status",
+          "sortKey": "published",
+          "width": "15%",
+        },
+        Object {
+          "label": "Updated",
+          "sortKey": "last_update_time",
+        },
+      ]
+    }
+    defaultSortColumn="name"
+    defaultSortDirection="asc"
+    filterBox={
+      Object {
+        "exampleModifiers": Array [
+          "id",
+          "name",
+        ],
+        "itemToStringKeys": Array [
+          "name",
+          "id",
+          "subaccount_id",
+        ],
+        "show": true,
+      }
+    }
+    getRowData={[Function]}
+    pagination={true}
+    rows={
+      Array [
+        Object {
+          "name": "Temp 1",
+        },
+        Object {
+          "name": "Temp 2",
+        },
+      ]
+    }
+  />
+</Page>
+`;

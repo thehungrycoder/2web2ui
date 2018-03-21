@@ -72,7 +72,7 @@ export default class PreviewPage extends Component {
   }
 
   render() {
-    const { mode, preview, returnPath, template } = this.props;
+    const { canSendEmail, mode, preview, returnPath, template } = this.props;
     const { loading, loadingError, sending, to, validationError } = this.state;
 
     if (loading) {
@@ -82,14 +82,14 @@ export default class PreviewPage extends Component {
     const pageProps = {
       breadcrumbAction: {
         Component: Link,
-        content: 'Edit Template',
+        content: 'Back To Template',
         to: returnPath
       },
-      primaryAction: {
+      primaryAction: canSendEmail ? {
         content: 'Send Email',
         disabled: sending || !!loadingError,
         onClick: this.onSend
-      },
+      } : undefined,
       title: `${template.name || ''} (${_.capitalize(mode)})`
     };
 
@@ -105,14 +105,16 @@ export default class PreviewPage extends Component {
           />
         )}
         <Panel sectioned>
-          <TextField
-            disabled={!!loadingError}
-            error={validationError}
-            label="To"
-            placeholder="Send to recipient email addresses"
-            onChange={this.onTextChange}
-            value={to}
-          />
+          { canSendEmail &&
+              <TextField
+                disabled={!!loadingError}
+                error={validationError}
+                label="To"
+                placeholder="Send to recipient email addresses"
+                onChange={this.onTextChange}
+                value={to}
+              />
+          }
           <TextField disabled label="From" value={name ? `${name} <${email}>` : email} />
           <TextField disabled label="Subject" value={preview.subject} />
           <PreviewPanel html={preview.html} text={preview.text} />

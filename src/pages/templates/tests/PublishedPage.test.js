@@ -14,13 +14,25 @@ describe('Template PublishedPage', () => {
       },
       getPublished: jest.fn(() => Promise.resolve()),
       getTestData: jest.fn(),
-      formName: 'templatePublished'
+      setTestData: jest.fn(),
+      formName: 'templatePublished',
+      handleSubmit: jest.fn(),
+      canModify: true
     };
   });
 
   it('should render correctly', () => {
     wrapper = shallow(<PublishedPage {...props} />);
     expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render read-only correctly', () => {
+    wrapper = shallow(<PublishedPage {...props} canModify={false} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should load template content', () => {
+    wrapper = shallow(<PublishedPage {...props} />);
     expect(props.getTestData).toHaveBeenCalledWith({ id: 'id', mode: 'published' });
     expect(props.getPublished).toHaveBeenCalledWith('id', props.subaccountId);
   });

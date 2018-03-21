@@ -236,7 +236,7 @@ const routes = [
   {
     path: '/templates',
     component: templates.ListPage,
-    condition: all(hasGrants('templates/modify'), ({ account }) => account.status === 'active'),
+    condition: hasGrants('templates/view'),
     layout: App
   },
   {
@@ -248,13 +248,13 @@ const routes = [
   {
     path: '/templates/edit/:id',
     component: templates.EditPage,
-    condition: hasGrants('templates/modify'),
+    condition: hasGrants('templates/view'),
     layout: App
   },
   {
     path: '/templates/edit/:id/published',
     component: templates.PublishedPage,
-    condition: hasGrants('templates/modify'),
+    condition: hasGrants('templates/view'),
     layout: App
   },
   {

@@ -2,8 +2,9 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 
-import { getDraft, getPublished, update, deleteTemplate, publish, getTestData } from 'src/actions/templates';
+import { getDraft, getPublished, update, deleteTemplate, publish, getTestData, setTestData } from 'src/actions/templates';
 import { showAlert } from 'src/actions/globalAlert';
+import { hasGrants } from 'src/helpers/conditions';
 import { selectTemplateById, selectTemplateTestData } from 'src/selectors/templates';
 import { selectSubaccountIdFromQuery, hasSubaccounts, selectSubaccountFromQuery } from 'src/selectors/subaccounts';
 
@@ -14,12 +15,14 @@ const FORM_NAME = 'templateEdit';
 const mapStateToProps = (state, props) => {
   const template = selectTemplateById(state, props);
   const values = template.draft || template.published; // For templates with published but no draft, pull in published values
+  const canModify = hasGrants('templates/modify')(state);
 
   return {
     loading: state.templates.getLoading,
     template,
     subaccountId: selectSubaccountIdFromQuery(state, props),
     hasSubaccounts: hasSubaccounts(state),
+    canModify,
 
     // Redux Form
     formName: FORM_NAME,
@@ -40,6 +43,7 @@ const mapDispatchToProps = {
   getDraft,
   getPublished,
   getTestData,
+  setTestData,
   update,
   deleteTemplate,
   publish,

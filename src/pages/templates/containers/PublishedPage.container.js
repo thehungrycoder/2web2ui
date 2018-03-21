@@ -2,7 +2,8 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 
-import { getPublished, getTestData } from 'src/actions/templates';
+import { getPublished, getTestData, setTestData } from 'src/actions/templates';
+import { hasGrants } from 'src/helpers/conditions';
 import { selectTemplateById, selectTemplateTestData } from 'src/selectors/templates';
 import { selectSubaccountIdFromQuery, selectSubaccountFromQuery } from 'src/selectors/subaccounts';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
@@ -13,6 +14,7 @@ const FORM_NAME = 'templatePublished';
 
 const mapStateToProps = (state, props) => ({
   loading: state.templates.getLoading,
+  canModify: hasGrants('templates/modify')(state),
   subaccountId: selectSubaccountIdFromQuery(state, props),
   hasSubaccounts: hasSubaccounts(state),
   formName: FORM_NAME,
@@ -28,4 +30,4 @@ const formOptions = {
   enableReinitialize: true // required to update initial values from redux state
 };
 
-export default withRouter(connect(mapStateToProps, { getPublished, getTestData })(reduxForm(formOptions)(PublishedPage)));
+export default withRouter(connect(mapStateToProps, { getPublished, getTestData, setTestData })(reduxForm(formOptions)(PublishedPage)));

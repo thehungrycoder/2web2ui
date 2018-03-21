@@ -13,8 +13,17 @@ export default class PublishedPage extends Component {
     getTestData({ id: match.params.id, mode: 'published' });
   }
 
+  handlePreview = ({ testData }) => {
+    const { setTestData, match: { params: { id }}, history, subaccountId } = this.props;
+    const query = setSubaccountQuery(subaccountId);
+
+    setTestData({ id, data: testData, mode: 'published' }).then(
+      () => history.push(`/templates/preview/${id}/published${query}`)
+    );
+  };
+
   getPageProps() {
-    const { match, subaccountId } = this.props;
+    const { canModify, handleSubmit, match, subaccountId } = this.props;
     const query = setSubaccountQuery(subaccountId);
 
     const secondaryActions = [
@@ -24,9 +33,8 @@ export default class PublishedPage extends Component {
         to: `/templates/edit/${match.params.id}${query}`
       },
       {
-        content: 'Preview & Send',
-        Component: Link,
-        to: `/templates/preview/${match.params.id}/published${query}`
+        content: canModify ? 'Preview & Send' : 'Preview',
+        onClick: handleSubmit(this.handlePreview)
       }
     ];
 
@@ -50,10 +58,10 @@ export default class PublishedPage extends Component {
       <Page {...this.getPageProps()}>
         <Grid>
           <Grid.Column xs={12} lg={4}>
-            <Form name={formName} published />
+            <Form name={formName} readOnly />
           </Grid.Column>
           <Grid.Column xs={12} lg={8}>
-            <Editor name={formName} published />
+            <Editor name={formName} readOnly />
           </Grid.Column>
         </Grid>
       </Page>

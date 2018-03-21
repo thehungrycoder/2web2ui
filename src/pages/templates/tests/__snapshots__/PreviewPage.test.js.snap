@@ -15,7 +15,7 @@ exports[`renders loading error 1`] = `
   breadcrumbAction={
     Object {
       "Component": [Function],
-      "content": "Edit Template",
+      "content": "Back To Template",
       "to": "/path/to/return",
     }
   }
@@ -73,12 +73,51 @@ exports[`renders loading error 1`] = `
 
 exports[`renders loading page and makes request for preview 1`] = `<Loading />`;
 
+exports[`renders preview page with read-only template 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "Back To Template",
+      "to": "/path/to/return",
+    }
+  }
+  empty={Object {}}
+  title="Test Template (Draft)"
+>
+  <Panel
+    sectioned={true}
+  >
+    <TextField
+      disabled={true}
+      label="From"
+      required={false}
+      resize="both"
+      type="text"
+      value="test@example.com"
+    />
+    <TextField
+      disabled={true}
+      label="Subject"
+      required={false}
+      resize="both"
+      type="text"
+      value="Test Template"
+    />
+    <PreviewPanel
+      html="<h1>Test Template</h1>"
+      text=""
+    />
+  </Panel>
+</Page>
+`;
+
 exports[`renders preview page with template 1`] = `
 <Page
   breadcrumbAction={
     Object {
       "Component": [Function],
-      "content": "Edit Template",
+      "content": "Back To Template",
       "to": "/path/to/return",
     }
   }
@@ -134,7 +173,7 @@ exports[`resets error message when user starts typing again 1`] = `
   breadcrumbAction={
     Object {
       "Component": [Function],
-      "content": "Edit Template",
+      "content": "Back To Template",
       "to": "/path/to/return",
     }
   }
