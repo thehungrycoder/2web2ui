@@ -1,43 +1,14 @@
-import moment from 'moment';
 import _ from 'lodash';
 import qs from 'query-string';
 import { getRelativeDates } from 'src/helpers/date';
 
-const DEFAULT_LINK_PARAMS = [
-  'from',
-  'to',
-  'range',
-  'filters'
-];
-
-export function stringifyFilter(filter) {
+export function stringifyTypeaheadfilter(filter) {
   const subaccount = filter.type === 'Subaccount' ? `:${filter.id}` : '';
   return `${filter.type}:${filter.value}${subaccount}`;
 }
 
 export function dedupeFilters(filters) {
-  return _.uniqBy(filters, stringifyFilter);
-}
-
-/**
- * Creates search options object from all possible query string params.
- * By default, only returns the DEFAULT_LINK_PARAMS, but report-specific
- * params may be included with extraLinkParams (ie. summary chart selected metrics)
- *
- * @param  {Object} reportOptions - reportOptions state
- * @param {Array} extraLinkParams - optional array of keys to include, in addition to default keys
- * @return {Object} - formatted search options object
- */
-export function getReportSearchOptions(reportOptions, extraLinkParams = []) {
-  const { filters = [], metrics = []} = reportOptions;
-  const options = {
-    from: moment(reportOptions.from).utc().format(),
-    to: moment(reportOptions.to).utc().format(),
-    range: reportOptions.relativeRange,
-    filters: filters.map(stringifyFilter),
-    metrics: metrics.map((metric) => typeof metric === 'string' ? metric : metric.key)
-  };
-  return _.pick(options, [ ...DEFAULT_LINK_PARAMS, ...extraLinkParams ]);
+  return _.uniqBy(filters, stringifyTypeaheadfilter);
 }
 
 /**

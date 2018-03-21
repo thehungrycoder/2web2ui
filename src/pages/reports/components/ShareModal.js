@@ -1,19 +1,39 @@
-import React, { Component } from 'react';
+/* eslint-disable */
+import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import qs from 'query-string';
 import { relativeDateOptions } from 'src/helpers/date';
 import { Panel, Button, WindowEvent, Checkbox } from '@sparkpost/matchbox';
 import { Modal, CopyField } from 'src/components';
+import _ from 'lodash';
 
-export default class ShareModal extends Component {
+export class ShareModal extends Component {
   state = {
-    pinned: true
+    pinned: true,
+    open: false,
+    searchOptions: {}
+  }
+
+  componentDidUpdate(prevProps) {
+    if (!_.isEqual(prevProps.searchOptions, this.props.searchOptions)) {
+      this.updateLink();
+    }
+  }
+
+  updateLink = () => {
+    const { searchOptions, history, location } = this.props;
+    // console.log(searchOptions);
+    const search = qs.stringify(searchOptions, { encode: false });
+
+    this.setState({ searchOptions });
+    history.replace({ pathname: location.pathname, search });
   }
 
   getLink() {
-    const { query } = this.props;
-    const { pinned } = this.state;
-    const modifiedQuery = { ...query };
-
+    const { searchOptions, pinned } = this.state;
+    const modifiedQuery = { ...searchOptions };
+    console.log('query', modifiedQuery);
     if (pinned) {
       modifiedQuery.range = 'custom';
     }
@@ -29,11 +49,20 @@ export default class ShareModal extends Component {
     return `${url}?${search}`;
   }
 
+  handleKeydown = (e) => {
+    if (e.key === 'Escape' || e.key === 'Enter') {
+      this.toggleModal(e);
+    }
+  }
+
+  toggleModal = () => {
+    this.setState({ open: !this.state.open });
+  }
+
   renderPinToggle() {
-    const { query = {}} = this.props;
-    const { pinned } = this.state;
-    const relativeRange = relativeDateOptions.find((item) => item.value === query.range);
-    const isRelative = relativeRange && query.range !== 'custom';
+    const { searchOptions, pinned } = this.state;
+    const relativeRange = relativeDateOptions.find((item) => item.value === searchOptions.range);
+    const isRelative = relativeRange && searchOptions.range !== 'custom';
 
     if (!isRelative) {
       return null;
@@ -50,29 +79,27 @@ export default class ShareModal extends Component {
     );
   }
 
-  handleKeydown = (e) => {
-    const { handleToggle } = this.props;
-    if (e.key === 'Escape' || e.key === 'Enter') {
-      handleToggle(e);
-    }
-  }
-
   render() {
-    const { open, handleToggle } = this.props;
+    const { open } = this.state;
 
     return (
-      <Modal open={open} onClick={handleToggle}>
-        {open && <WindowEvent event='keydown' handler={this.handleKeydown} />}
-        <Panel title='Share this report' onClick={(e) => e.stopPropagation()}>
-          <Panel.Section>
-            <CopyField value={this.getLink()} />
-            {this.renderPinToggle()}
-          </Panel.Section>
-          <Panel.Section>
-            <Button primary onClick={handleToggle}>Done</Button>
-          </Panel.Section>
-        </Panel>
-      </Modal>
+      <Fragment>
+        <Button id='shareModalButton' disabled={this.props.disabled} fullWidth onClick={this.toggleModal}>Share</Button>
+        <Modal open={open}>
+          {open && <WindowEvent event='keydown' handler={this.handleKeydown} />}
+          <Panel title='Share this report'>
+            <Panel.Section>
+              <CopyField value={this.getLink()} />
+              {this.renderPinToggle()}
+            </Panel.Section>
+            <Panel.Section>
+              <Button primary onClick={this.toggleModal}>Done</Button>
+            </Panel.Section>
+          </Panel>
+        </Modal>
+      </Fragment>
     );
   }
 }
+
+export default withRouter(connect(null, {})(ShareModal));

@@ -1,4 +1,3 @@
-/* eslint max-lines: ["error", 200] */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
@@ -24,9 +23,9 @@ const columns = [
 
 export class BouncePage extends Component {
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.reportOptions !== this.props.reportOptions) {
-      this.props.refreshBounceReport(nextProps.reportOptions);
+  componentDidUpdate(prevProps) {
+    if (prevProps.reportOptions !== this.props.reportOptions) {
+      this.props.refreshBounceReport(this.props.reportOptions);
     }
   }
 
@@ -101,11 +100,11 @@ export class BouncePage extends Component {
   }
 
   render() {
-    const { chartLoading } = this.props;
+    const { chartLoading, searchOptions } = this.props;
 
     return (
       <Page title='Bounce Report'>
-        <ReportOptions reportLoading={chartLoading} />
+        <ReportOptions reportLoading={chartLoading} searchOptions={searchOptions} />
         { this.renderTopLevelMetrics() }
         { this.renderChart() }
         <Panel title='Bounced Messages' className='ReasonsTable'>
