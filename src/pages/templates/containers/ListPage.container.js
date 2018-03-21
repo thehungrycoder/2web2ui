@@ -9,7 +9,7 @@ import ListPage from '../ListPage';
 
 function mapStateToProps(state) {
   const templates = selectTemplates(state);
-  const canModify = hasGrants('template/modify')(state);
+  const canModify = hasGrants('templates/modify')(state);
 
   return {
     count: templates.length,

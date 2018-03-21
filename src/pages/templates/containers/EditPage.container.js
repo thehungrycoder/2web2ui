@@ -15,7 +15,7 @@ const FORM_NAME = 'templateEdit';
 const mapStateToProps = (state, props) => {
   const template = selectTemplateById(state, props);
   const values = template.draft || template.published; // For templates with published but no draft, pull in published values
-  const canModify = hasGrants('template/modify')(state);
+  const canModify = hasGrants('templates/modify')(state);
 
   return {
     loading: state.templates.getLoading,
