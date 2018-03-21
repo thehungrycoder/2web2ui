@@ -17,9 +17,8 @@ Array [
     "to": "/templates/create/id",
   },
   Object {
-    "Component": [Function],
     "content": "Preview & Send",
-    "to": "/templates/preview/id?subaccount=101",
+    "onClick": undefined,
   },
 ]
 `;
@@ -63,9 +62,8 @@ exports[`Template EditPage should render correctly 1`] = `
         "to": "/templates/create/id",
       },
       Object {
-        "Component": [Function],
         "content": "Preview & Send",
-        "to": "/templates/preview/id?subaccount=101",
+        "onClick": undefined,
       },
     ]
   }
@@ -124,9 +122,8 @@ exports[`Template EditPage should render correctly for read-only users 1`] = `
         "to": "/templates/edit/id/published?subaccount=101",
       },
       Object {
-        "Component": [Function],
         "content": "Preview",
-        "to": "/templates/preview/id?subaccount=101",
+        "onClick": undefined,
       },
     ]
   }

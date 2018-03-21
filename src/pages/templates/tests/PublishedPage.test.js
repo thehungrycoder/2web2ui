@@ -14,7 +14,9 @@ describe('Template PublishedPage', () => {
       },
       getPublished: jest.fn(() => Promise.resolve()),
       getTestData: jest.fn(),
+      setTestData: jest.fn(),
       formName: 'templatePublished',
+      handleSubmit: jest.fn(),
       canModify: true
     };
   });

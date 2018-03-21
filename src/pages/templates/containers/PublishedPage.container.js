@@ -2,7 +2,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 
-import { getPublished, getTestData } from 'src/actions/templates';
+import { getPublished, getTestData, setTestData } from 'src/actions/templates';
 import { hasGrants } from 'src/helpers/conditions';
 import { selectTemplateById, selectTemplateTestData } from 'src/selectors/templates';
 import { selectSubaccountIdFromQuery, selectSubaccountFromQuery } from 'src/selectors/subaccounts';
@@ -30,4 +30,4 @@ const formOptions = {
   enableReinitialize: true // required to update initial values from redux state
 };
 
-export default withRouter(connect(mapStateToProps, { getPublished, getTestData })(reduxForm(formOptions)(PublishedPage)));
+export default withRouter(connect(mapStateToProps, { getPublished, getTestData, setTestData })(reduxForm(formOptions)(PublishedPage)));

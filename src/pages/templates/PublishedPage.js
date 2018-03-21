@@ -13,8 +13,17 @@ export default class PublishedPage extends Component {
     getTestData({ id: match.params.id, mode: 'published' });
   }
 
+  handlePreview = ({ testData }) => {
+    const { setTestData, match: { params: { id }}, history, subaccountId } = this.props;
+    const query = setSubaccountQuery(subaccountId);
+
+    setTestData({ id, data: testData, mode: 'published' }).then(
+      () => history.push(`/templates/preview/${id}/published${query}`)
+    );
+  };
+
   getPageProps() {
-    const { canModify, match, subaccountId } = this.props;
+    const { canModify, handleSubmit, match, subaccountId } = this.props;
     const query = setSubaccountQuery(subaccountId);
 
     const secondaryActions = [
@@ -25,8 +34,7 @@ export default class PublishedPage extends Component {
       },
       {
         content: canModify ? 'Preview & Send' : 'Preview',
-        Component: Link,
-        to: `/templates/preview/${match.params.id}/published${query}`
+        onClick: handleSubmit(this.handlePreview)
       }
     ];
 

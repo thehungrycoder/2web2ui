@@ -60,6 +60,13 @@ export default class EditPage extends Component {
     });
   }
 
+  handlePreview = ({ testData }) => {
+    const { setTestData, match: { params: { id }}, subaccountId, history } = this.props;
+    setTestData({ id, data: testData, mode: 'draft' }).then(
+      () => history.push(`/templates/preview/${id}${setSubaccountQuery(subaccountId)}`)
+    );
+  };
+
   handleDeleteModalToggle = () => {
     this.setState({ deleteOpen: !this.state.deleteOpen });
   }
@@ -99,8 +106,7 @@ export default class EditPage extends Component {
       },
       {
         content: canModify ? 'Preview & Send' : 'Preview',
-        Component: Link,
-        to: `/templates/preview/${match.params.id}${setSubaccountQuery(subaccountId)}`,
+        onClick: handleSubmit(this.handlePreview),
         visible: true
       }
     ]);

@@ -18,9 +18,8 @@ exports[`Template PublishedPage should render correctly 1`] = `
         "to": "/templates/edit/id",
       },
       Object {
-        "Component": [Function],
         "content": "Preview & Send",
-        "to": "/templates/preview/id/published",
+        "onClick": undefined,
       },
     ]
   }
@@ -67,9 +66,8 @@ exports[`Template PublishedPage should render read-only correctly 1`] = `
         "to": "/templates/edit/id",
       },
       Object {
-        "Component": [Function],
         "content": "Preview",
-        "to": "/templates/preview/id/published",
+        "onClick": undefined,
       },
     ]
   }

@@ -2,7 +2,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 
-import { getDraft, getPublished, update, deleteTemplate, publish, getTestData } from 'src/actions/templates';
+import { getDraft, getPublished, update, deleteTemplate, publish, getTestData, setTestData } from 'src/actions/templates';
 import { showAlert } from 'src/actions/globalAlert';
 import { hasGrants } from 'src/helpers/conditions';
 import { selectTemplateById, selectTemplateTestData } from 'src/selectors/templates';
@@ -43,6 +43,7 @@ const mapDispatchToProps = {
   getDraft,
   getPublished,
   getTestData,
+  setTestData,
   update,
   deleteTemplate,
   publish,
