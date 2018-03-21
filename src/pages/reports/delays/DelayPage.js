@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 import { addFilters } from 'src/actions/reportOptions';
 import { refreshDelayReport } from 'src/actions/delayReport';
-import { selectReportSearchOptions } from 'src/selectors/reportSearchOptions';
 import { Page, Panel } from '@sparkpost/matchbox';
 import ReportOptions from 'src/pages/reports/components/ReportOptions';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
@@ -13,9 +12,9 @@ import { safeRate } from 'src/helpers/math';
 
 export class DelayPage extends Component {
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.reportOptions !== this.props.reportOptions) {
-      this.props.refreshDelayReport(this.props.reportOptions);
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.reportOptions !== this.props.reportOptions) {
+      this.props.refreshDelayReport(nextProps.reportOptions);
     }
   }
 
@@ -53,11 +52,11 @@ export class DelayPage extends Component {
   }
 
   render() {
-    const { loading, searchOptions } = this.props;
+    const { loading } = this.props;
 
     return (
       <Page title='Delay Report'>
-        <ReportOptions reportLoading={loading} searchOptions={searchOptions} />
+        <ReportOptions reportLoading={loading} />
         { this.renderTopLevelMetrics() }
         <Panel title='Delayed Messages' className='ReasonsTable'>
           { this.renderDataTable() }
@@ -75,8 +74,7 @@ const mapStateToProps = (state) => {
     totalAccepted: aggregates ? aggregates.count_accepted : 1,
     aggregates,
     aggregatesLoading: state.delayReport.aggregatesLoading,
-    reportOptions: state.reportOptions,
-    searchOptions: selectReportSearchOptions(state)
+    reportOptions: state.reportOptions
   };
 };
 

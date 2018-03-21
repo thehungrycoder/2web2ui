@@ -3,11 +3,9 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import _ from 'lodash';
 import { getMessageEvents, refreshMessageEventsDateRange, addFilters } from 'src/actions/messageEvents';
-import { selectMessageEventsSearchOptions } from 'src/selectors/reportSearchOptions';
 import { Panel, Grid, TextField } from '@sparkpost/matchbox';
 import AdvancedFilters from './AdvancedFilters';
 import ActiveFilters from './ActiveFilters';
-import ShareModal from '../../components/ShareModal';
 import DatePicker from 'src/components/datePicker/DatePicker';
 import { email as emailValidator } from 'src/helpers/validation';
 import { stringToArray } from 'src/helpers/string';
@@ -60,13 +58,12 @@ export class MessageEventsSearch extends Component {
   }
 
   render() {
-    const { search, refreshMessageEventsDateRange, loading, now, searchOptions } = this.props;
-
+    const { search, refreshMessageEventsDateRange, loading, now = new Date() } = this.props;
     return (
       <Panel>
         <Panel.Section>
           <Grid>
-            <Grid.Column xs={12} md={5}>
+            <Grid.Column xs={12} md={6}>
               <DatePicker
                 {...search.dateOptions}
                 relativeDateOptions={RELATIVE_DATE_OPTIONS}
@@ -81,7 +78,7 @@ export class MessageEventsSearch extends Component {
                 }}
               />
             </Grid.Column>
-            <Grid.Column xs={12} md={3} xl={4}>
+            <Grid.Column xs={12} md={4}>
               <TextField
                 labelHidden
                 label="Recipient Email(s)"
@@ -95,9 +92,6 @@ export class MessageEventsSearch extends Component {
             <Grid.Column xs={12} md={2}>
               <AdvancedFilters />
             </Grid.Column>
-            <Grid.Column xs={12} md={2} xl={1}>
-              <ShareModal disabled={loading} searchOptions={searchOptions} />
-            </Grid.Column>
           </Grid>
         </Panel.Section>
         <ActiveFilters />
@@ -106,10 +100,9 @@ export class MessageEventsSearch extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  search: state.messageEvents.search,
-  loading: state.messageEvents.loading,
-  searchOptions: selectMessageEventsSearchOptions(state)
+const mapStateToProps = ({ messageEvents }) => ({
+  search: messageEvents.search,
+  loading: messageEvents.loading
 });
 const mapDispatchToProps = { getMessageEvents, refreshMessageEventsDateRange, addFilters };
 export default connect(mapStateToProps, mapDispatchToProps)(MessageEventsSearch);

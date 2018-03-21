@@ -7,14 +7,13 @@ import { Page } from '@sparkpost/matchbox';
 import ReportOptions from 'src/pages/reports/components/ReportOptions';
 import AcceptedChart from './components/AcceptedChart';
 import TopLevelMetrics from './components/TopLevelMetrics';
-import { selectReportSearchOptions } from 'src/selectors/reportSearchOptions';
 import _ from 'lodash';
 
 export class AcceptedPage extends Component {
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.reportOptions !== this.props.reportOptions) {
-      this.props.refreshAcceptedReport(this.props.reportOptions);
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.reportOptions !== this.props.reportOptions) {
+      this.props.refreshAcceptedReport(nextProps.reportOptions);
     }
   }
 
@@ -45,11 +44,10 @@ export class AcceptedPage extends Component {
   }
 
   render() {
-    const { loading, searchOptions } = this.props;
-
+    const { loading } = this.props;
     return (
       <Page title='Accepted Report'>
-        <ReportOptions reportLoading={loading} searchOptions={searchOptions} />
+        <ReportOptions reportLoading={loading} />
         {this.renderTopLevelMetrics()}
         {this.renderChart()}
       </Page>
@@ -62,8 +60,7 @@ const mapStateToProps = (state) => ({
   aggregates: selectAcceptedAggregates(state),
   metrics: state.acceptedReport.metrics,
   loading: state.acceptedReport.aggregatesLoading || state.acceptedReport.attemptsLoading,
-  reportOptions: state.reportOptions,
-  searchOptions: selectReportSearchOptions(state)
+  reportOptions: state.reportOptions
 });
 
 const mapDispatchToProps = {
