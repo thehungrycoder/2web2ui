@@ -14,7 +14,7 @@ export default class PublishedPage extends Component {
   }
 
   getPageProps() {
-    const { match, subaccountId } = this.props;
+    const { canModify, match, subaccountId } = this.props;
     const query = setSubaccountQuery(subaccountId);
 
     const secondaryActions = [
@@ -24,7 +24,7 @@ export default class PublishedPage extends Component {
         to: `/templates/edit/${match.params.id}${query}`
       },
       {
-        content: 'Preview & Send',
+        content: canModify ? 'Preview & Send' : 'Preview',
         Component: Link,
         to: `/templates/preview/${match.params.id}/published${query}`
       }

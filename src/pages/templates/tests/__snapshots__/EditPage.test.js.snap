@@ -125,7 +125,7 @@ exports[`Template EditPage should render correctly for read-only users 1`] = `
       },
       Object {
         "Component": [Function],
-        "content": "Preview & Send",
+        "content": "Preview",
         "to": "/templates/preview/id?subaccount=101",
       },
     ]

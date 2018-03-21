@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 
 import { getPublished, getTestData } from 'src/actions/templates';
+import { hasGrants } from 'src/helpers/conditions';
 import { selectTemplateById, selectTemplateTestData } from 'src/selectors/templates';
 import { selectSubaccountIdFromQuery, selectSubaccountFromQuery } from 'src/selectors/subaccounts';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
@@ -13,6 +14,7 @@ const FORM_NAME = 'templatePublished';
 
 const mapStateToProps = (state, props) => ({
   loading: state.templates.getLoading,
+  canModify: hasGrants('template/modify')(state),
   subaccountId: selectSubaccountIdFromQuery(state, props),
   hasSubaccounts: hasSubaccounts(state),
   formName: FORM_NAME,
