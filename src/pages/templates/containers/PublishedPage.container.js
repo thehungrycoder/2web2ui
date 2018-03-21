@@ -14,7 +14,7 @@ const FORM_NAME = 'templatePublished';
 
 const mapStateToProps = (state, props) => ({
   loading: state.templates.getLoading,
-  canModify: hasGrants('template/modify')(state),
+  canModify: hasGrants('templates/modify')(state),
   subaccountId: selectSubaccountIdFromQuery(state, props),
   hasSubaccounts: hasSubaccounts(state),
   formName: FORM_NAME,
