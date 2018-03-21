@@ -11,9 +11,10 @@ import PreviewPage from '../PreviewPage';
 
 export const mapStateToProps = (state, props) => {
   const subaccountId = selectSubaccountIdFromQuery(state, props);
+
   return {
     mode: 'draft',
-    canModify: hasGrants('template/modify')(state),
+    canSendEmail: hasGrants('transmissions/modify')(state),
     returnPath: `/templates/edit/${props.match.params.id}${setSubaccountQuery(subaccountId)}`,
     preview: selectDraftTemplatePreview(state, props.match.params.id),
     template: selectDraftTemplate(state, props.match.params.id),

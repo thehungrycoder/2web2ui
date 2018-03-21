@@ -72,7 +72,7 @@ export default class PreviewPage extends Component {
   }
 
   render() {
-    const { canModify, mode, preview, returnPath, template } = this.props;
+    const { canSendEmail, mode, preview, returnPath, template } = this.props;
     const { loading, loadingError, sending, to, validationError } = this.state;
 
     if (loading) {
@@ -82,10 +82,10 @@ export default class PreviewPage extends Component {
     const pageProps = {
       breadcrumbAction: {
         Component: Link,
-        content: canModify ? 'Edit Template' : 'Back To Template',
+        content: 'Back To Template',
         to: returnPath
       },
-      primaryAction: canModify ? {
+      primaryAction: canSendEmail ? {
         content: 'Send Email',
         disabled: sending || !!loadingError,
         onClick: this.onSend
@@ -105,7 +105,7 @@ export default class PreviewPage extends Component {
           />
         )}
         <Panel sectioned>
-          { canModify &&
+          { canSendEmail &&
               <TextField
                 disabled={!!loadingError}
                 error={validationError}
