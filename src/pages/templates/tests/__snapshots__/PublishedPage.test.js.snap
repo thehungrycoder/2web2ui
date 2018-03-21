@@ -18,9 +18,8 @@ exports[`Template PublishedPage should render correctly 1`] = `
         "to": "/templates/edit/id",
       },
       Object {
-        "Component": [Function],
         "content": "Preview & Send",
-        "to": "/templates/preview/id/published",
+        "onClick": undefined,
       },
     ]
   }
@@ -33,7 +32,7 @@ exports[`Template PublishedPage should render correctly 1`] = `
     >
       <Connect(Form)
         name="templatePublished"
-        published={true}
+        readOnly={true}
       />
     </Grid.Column>
     <Grid.Column
@@ -42,7 +41,55 @@ exports[`Template PublishedPage should render correctly 1`] = `
     >
       <LoadableComponent
         name="templatePublished"
-        published={true}
+        readOnly={true}
+      />
+    </Grid.Column>
+  </Grid>
+</Page>
+`;
+
+exports[`Template PublishedPage should render read-only correctly 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "Templates",
+      "to": "/templates",
+    }
+  }
+  empty={Object {}}
+  secondaryActions={
+    Array [
+      Object {
+        "Component": [Function],
+        "content": "View Draft",
+        "to": "/templates/edit/id",
+      },
+      Object {
+        "content": "Preview",
+        "onClick": undefined,
+      },
+    ]
+  }
+  title="id (Published)"
+>
+  <Grid>
+    <Grid.Column
+      lg={4}
+      xs={12}
+    >
+      <Connect(Form)
+        name="templatePublished"
+        readOnly={true}
+      />
+    </Grid.Column>
+    <Grid.Column
+      lg={8}
+      xs={12}
+    >
+      <LoadableComponent
+        name="templatePublished"
+        readOnly={true}
       />
     </Grid.Column>
   </Grid>

@@ -83,7 +83,7 @@ export default class ListPage extends Component {
   }
 
   render() {
-    const { count, loading, error } = this.props;
+    const { canModify, count, loading, error } = this.props;
 
     if (loading) {
       return <Loading />;
@@ -91,7 +91,7 @@ export default class ListPage extends Component {
 
     return (
       <Page
-        primaryAction={primaryAction}
+        primaryAction={canModify ? primaryAction : undefined}
         title='Templates'
         empty={{
           show: count === 0,

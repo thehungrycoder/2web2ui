@@ -74,7 +74,7 @@ export default class Form extends Component {
   }
 
   render() {
-    const { newTemplate, published, domains, hasSubaccounts, name } = this.props;
+    const { newTemplate, readOnly, domains, hasSubaccounts, name } = this.props;
 
     return (
       <div>
@@ -85,7 +85,7 @@ export default class Form extends Component {
               component={TextFieldWrapper}
               label='Template Name'
               onChange={this.handleIdFill}
-              disabled={published}
+              disabled={readOnly}
               validate={required}
             />
 
@@ -94,11 +94,11 @@ export default class Form extends Component {
               component={TextFieldWrapper}
               label='Template ID'
               helpText={newTemplate ? 'A Unique ID for your template, we\'ll fill this in for you.' : null}
-              disabled={!newTemplate || published}
+              disabled={!newTemplate || readOnly}
               validate={newTemplate ? [required, idSyntax] : null}
             />
           </Panel.Section>
-          { hasSubaccounts && <SubaccountSection newTemplate={newTemplate} formName={name} disabled={published} /> }
+          { hasSubaccounts && <SubaccountSection newTemplate={newTemplate} formName={name} disabled={readOnly} /> }
         </Panel>
         <Panel>
           <Panel.Section>
@@ -106,7 +106,7 @@ export default class Form extends Component {
               name='content.subject'
               component={TextFieldWrapper}
               label='Subject'
-              disabled={published}
+              disabled={readOnly}
               validate={required}
             />
 
@@ -115,7 +115,7 @@ export default class Form extends Component {
               component={FromEmailWrapper}
               placeholder='example@email.com'
               label='From Email'
-              disabled={!domains.length || published}
+              disabled={!domains.length || readOnly}
               validate={[required, emailOrSubstitution, this.validateDomain]}
               domains={domains}
               helpText={this.fromEmailWarning()}
@@ -126,7 +126,7 @@ export default class Form extends Component {
               component={TextFieldWrapper}
               label='From Name'
               helpText='A friendly from for your recipients.'
-              disabled={published}
+              disabled={readOnly}
             />
 
             <Field
@@ -134,7 +134,7 @@ export default class Form extends Component {
               component={TextFieldWrapper}
               label='Reply To'
               helpText='An email address recipients can reply to.'
-              disabled={published}
+              disabled={readOnly}
               validate={emailOrSubstitution}
             />
 
@@ -143,7 +143,7 @@ export default class Form extends Component {
               component={TextFieldWrapper}
               label='Description'
               helpText='Not visible to recipients.'
-              disabled={published}
+              disabled={readOnly}
             />
           </Panel.Section>
         </Panel>
@@ -155,7 +155,7 @@ export default class Form extends Component {
               label='Track Opens'
               type='checkbox'
               parse={this.parseToggle}
-              disabled={published}
+              disabled={readOnly}
             />
 
             <Field
@@ -164,7 +164,7 @@ export default class Form extends Component {
               label='Track Clicks'
               type='checkbox'
               parse={this.parseToggle}
-              disabled={published}
+              disabled={readOnly}
             />
           </Panel.Section>
 
@@ -176,7 +176,7 @@ export default class Form extends Component {
               type='checkbox'
               parse={this.parseToggle}
               helpText='Transactional messages are triggered by a user’s actions on the website, like requesting a password reset, signing up, or making a purchase.'
-              disabled={published}
+              disabled={readOnly}
             />
           </Panel.Section>
         </Panel>

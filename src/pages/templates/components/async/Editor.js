@@ -28,7 +28,7 @@ class Editor extends Component {
   }
 
   render() {
-    const { published } = this.props;
+    const { readOnly } = this.props;
     const { selectedTab } = this.state;
 
     const tabs = fields.map(({ content }, i) => ({ content, onClick: () => this.handleTab(i) }));
@@ -41,7 +41,7 @@ class Editor extends Component {
             name={fields[selectedTab].name}
             mode={fields[selectedTab].mode}
             component={AceWrapper}
-            readOnly={published && selectedTab !== 2}
+            readOnly={readOnly && selectedTab !== 2}
             validate={[contentRequired, validJson]}
           />
         </Panel>

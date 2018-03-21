@@ -60,12 +60,19 @@ export default class EditPage extends Component {
     });
   }
 
+  handlePreview = ({ testData }) => {
+    const { setTestData, match: { params: { id }}, subaccountId, history } = this.props;
+    setTestData({ id, data: testData, mode: 'draft' }).then(
+      () => history.push(`/templates/preview/${id}${setSubaccountQuery(subaccountId)}`)
+    );
+  };
+
   handleDeleteModalToggle = () => {
     this.setState({ deleteOpen: !this.state.deleteOpen });
   }
 
   getPageProps() {
-    const { handleSubmit, template, match, submitting, subaccountId } = this.props;
+    const { canModify, handleSubmit, template, match, submitting, subaccountId } = this.props;
     const published = template.published;
 
     const primaryAction = {
@@ -74,25 +81,35 @@ export default class EditPage extends Component {
       disabled: submitting
     };
 
-    const secondaryActions = [
+    const filterVisibleActions = (actions) =>
+      actions.filter((action) => action.visible).map(({ visible, ...action }) => action);
+
+    const secondaryActions = filterVisibleActions([
       {
         content: 'View Published',
         Component: Link,
-        to: `/templates/edit/${match.params.id}/published${setSubaccountQuery(subaccountId)}`
+        to: `/templates/edit/${match.params.id}/published${setSubaccountQuery(subaccountId)}`,
+        visible: published
       },
       {
         content: 'Save as Draft',
         onClick: handleSubmit(this.handleSave),
-        disabled: submitting
+        disabled: submitting,
+        visible: canModify
       },
-      { content: 'Delete', onClick: this.handleDeleteModalToggle },
-      { content: 'Duplicate', Component: Link, to: `/templates/create/${match.params.id}` },
-      { content: 'Preview & Send', Component: Link, to: `/templates/preview/${match.params.id}${setSubaccountQuery(subaccountId)}` }
-    ];
-
-    if (!published) {
-      secondaryActions.shift();
-    }
+      { content: 'Delete', onClick: this.handleDeleteModalToggle, visible: canModify },
+      {
+        content: 'Duplicate',
+        Component: Link,
+        to: `/templates/create/${match.params.id}`,
+        visible: canModify
+      },
+      {
+        content: canModify ? 'Preview & Send' : 'Preview',
+        onClick: handleSubmit(this.handlePreview),
+        visible: true
+      }
+    ]);
 
     const breadcrumbAction = {
       content: 'Templates',
@@ -102,14 +119,14 @@ export default class EditPage extends Component {
 
     return {
       secondaryActions,
-      primaryAction,
+      primaryAction: canModify ? primaryAction : undefined,
       breadcrumbAction,
       title: `${match.params.id} (Draft)`
     };
   }
 
   render() {
-    const { loading, formName, subaccountId } = this.props;
+    const { canModify, loading, formName, subaccountId } = this.props;
 
     if (loading) {
       return <Loading />;
@@ -119,10 +136,10 @@ export default class EditPage extends Component {
       <Page {...this.getPageProps()}>
         <Grid>
           <Grid.Column xs={12} lg={4}>
-            <Form name={formName} subaccountId={subaccountId} />
+            <Form name={formName} subaccountId={subaccountId} readOnly={!canModify} />
           </Grid.Column>
           <Grid.Column xs={12} lg={8}>
-            <Editor name={formName} />
+            <Editor name={formName} readOnly={!canModify} />
           </Grid.Column>
         </Grid>
         <DeleteModal
