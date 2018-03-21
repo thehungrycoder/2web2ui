@@ -19,7 +19,7 @@ exports[`renders correctly 1`] = `
     id="password"
     label="Password"
     name="password"
-    placeholder="IheartLilSebastian"
+    placeholder="••••••••"
     type="password"
   />
   <Field
@@ -57,7 +57,7 @@ exports[`renders correctly when logging in 1`] = `
     id="password"
     label="Password"
     name="password"
-    placeholder="IheartLilSebastian"
+    placeholder="••••••••"
     type="password"
   />
   <Field

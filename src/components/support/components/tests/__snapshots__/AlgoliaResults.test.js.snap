@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Algolia Results component should render 1`] = `
+<div>
+  <strong>
+    <Icon
+      name="Link"
+      size={18}
+    />
+     
+    <UnstyledLink
+      external={true}
+      to="my-link"
+    >
+      Post Title
+    </UnstyledLink>
+  </strong>
+  <div>
+    <AlgoliaHighlighter(Snippet)
+      attribute="post_excerpt"
+      hit={
+        Object {
+          "permalink": "my-link",
+          "post_excerpt": "<p>this is an excerpt from the post</p>",
+          "post_title": "Post Title",
+        }
+      }
+      tagName="b"
+    />
+  </div>
+</div>
+`;

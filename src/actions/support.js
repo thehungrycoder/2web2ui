@@ -19,3 +19,4 @@ export function clearSupportForm() {
     type: 'RESET_SUPPORT_FORM'
   };
 }
+

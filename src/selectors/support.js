@@ -3,7 +3,7 @@ import { createSelector } from 'reselect';
 import { currentPlanSelector } from './accountBillingInfo';
 const getAccountSupport = (state) => state.account.support;
 
-const entitledToSupport = createSelector(
+export const entitledToSupport = createSelector(
   [getAccountSupport],
   (support) => support && support.online
 );
@@ -17,5 +17,3 @@ export const currentLimitSelector = (state) => {
   const { account } = state;
   return _.get(account, 'usage.day.limit', 0);
 };
-
-export default entitledToSupport;

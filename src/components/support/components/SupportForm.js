@@ -70,7 +70,7 @@ export class SupportForm extends Component {
             placeholder='Give us details about your issue'
             inlineErrors={true}
             disabled={submitting}
-            validate={[required, minLength(20)]}
+            validate={required}
             component={TextFieldWrapper}
           />
           <Field
