@@ -74,7 +74,10 @@ export default class EditPage extends Component {
       disabled: submitting
     };
 
-    const secondaryActions = [
+    const filterVisibleActions = (actions) =>
+      actions.filter((action) => action.visible).map(({ visible, ...action }) => action);
+
+    const secondaryActions = filterVisibleActions([
       {
         content: 'View Published',
         Component: Link,
@@ -95,16 +98,12 @@ export default class EditPage extends Component {
         visible: canModify
       },
       {
-        content: 'Preview & Send',
+        content: canModify ? 'Preview & Send' : 'Preview',
         Component: Link,
         to: `/templates/preview/${match.params.id}${setSubaccountQuery(subaccountId)}`,
         visible: true
       }
-    ];
-
-    const visibleSecondaryActions = secondaryActions.reduce((result, { visible, ...action }) => (
-      visible ? [...result, action] : result
-    ), []);
+    ]);
 
     const breadcrumbAction = {
       content: 'Templates',
@@ -113,7 +112,7 @@ export default class EditPage extends Component {
     };
 
     return {
-      secondaryActions: visibleSecondaryActions,
+      secondaryActions,
       primaryAction: canModify ? primaryAction : undefined,
       breadcrumbAction,
       title: `${match.params.id} (Draft)`
