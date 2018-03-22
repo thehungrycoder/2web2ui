@@ -1,10 +1,12 @@
 import { createSelector } from 'reselect';
 import _ from 'lodash';
+import { onPlan } from 'src/helpers/conditions/account';
 
 const suspendedSelector = (state) => state.account.isSuspendedForBilling;
 const pendingSubscriptionSelector = (state) => state.account.pending_subscription;
 const plansSelector = (state) => state.billing.plans || [];
 const accountBillingSelector = (state) => state.account.billing;
+const isFreeLegacyPlanSelector = (state) => onPlan('ccfree1')(state);
 
 export const currentSubscriptionSelector = (state) => state.account.subscription;
 
@@ -57,8 +59,10 @@ export const isAWSAccountSelector = createSelector(
  * Returns true if user has billing account and they are on a paid plan
  */
 export const canUpdateBillingInfoSelector = createSelector(
-  [currentPlanSelector, accountBillingSelector],
-  (currentPlan, accountBilling) => (accountBilling && !currentPlan.isFree)
+  [currentPlanSelector, accountBillingSelector, isFreeLegacyPlanSelector],
+  (currentPlan, accountBilling, isFreeLegacyPlan) => (
+    accountBilling && (isFreeLegacyPlan || !currentPlan.isFree)
+  )
 );
 
 /**
