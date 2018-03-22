@@ -53,18 +53,34 @@ describe('Selector: current plan', () => {
 });
 
 describe('Selector: can update billing info', () => {
-  const state = {
-    account: { subscription: { code: 'qwe' }, billing: {}},
-    billing: {
-      plans: [
-        { status: 'public', code: '123' },
-        { status: 'public', code: 'qwe', isFree: false }
-      ]
-    }
-  };
+  let state;
+
+  beforeEach(() => {
+    state = {
+      account: { subscription: { code: 'paid' }, billing: {}},
+      billing: {
+        plans: [
+          { status: 'public', code: '123' },
+          { status: 'public', code: 'paid', isFree: false },
+          { status: 'public', code: 'free', isFree: true },
+          { status: 'public', code: 'ccfree1', isFree: true }
+        ]
+      }
+    };
+  });
 
   it('should return true if on paid plan', () => {
     expect(billingInfo.canUpdateBillingInfoSelector(state)).toEqual(true);
+  });
+
+  it('should return true if on free legacy plan', () => {
+    state.account.subscription.code = 'ccfree1';
+    expect(billingInfo.canUpdateBillingInfoSelector(state)).toEqual(true);
+  });
+
+  it('should return false if on free plan', () => {
+    state.account.subscription.code = 'free';
+    expect(billingInfo.canUpdateBillingInfoSelector(state)).toEqual(false);
   });
 });
 
