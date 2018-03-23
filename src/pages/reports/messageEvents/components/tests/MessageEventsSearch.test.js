@@ -16,9 +16,13 @@ describe('Component: MessageEventsSearch', () => {
         dateOptions: { from: testDate, to: testDate },
         recipients: []
       },
+      loading: false,
       refreshMessageEventsDateRange: jest.fn(),
       addFilters: jest.fn(),
-      now: testDate
+      updateMessageEventsSearchOptions: jest.fn(),
+      now: testDate,
+      searchOptions: {},
+      location: {}
     };
     wrapper = shallow(<MessageEventsSearch {...props} />);
     instance = wrapper.instance();

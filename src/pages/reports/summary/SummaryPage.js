@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
@@ -50,7 +49,7 @@ export class SummaryReportPage extends Component {
   }
 
   render() {
-    const { chart, searchOptions} = this.props;
+    const { chart, searchOptions } = this.props;
     const { scale, eventTime, metricsModal } = this.state;
 
     return (

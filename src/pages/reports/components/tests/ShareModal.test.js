@@ -1,9 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import ShareModal from '../ShareModal';
+import { ShareModal } from '../ShareModal';
 import * as dateHelpersMock from 'src/helpers/date';
-import { WindowEvent, Panel } from '@sparkpost/matchbox';
-import { Modal } from 'src/components';
+import { WindowEvent } from '@sparkpost/matchbox';
 
 jest.mock('src/helpers/date');
 
@@ -17,19 +16,26 @@ describe('Component: ShareModal', () => {
       { value: 'valid', label: 'Valid Labels Ago' }
     ];
     testProps = {
-      open: true,
       query: { range: 'valid' },
-      handleToggle: jest.fn()
+      handleToggle: jest.fn(),
+      searchOptions: {
+        range: 'valid'
+      },
+      location: {},
+      history: {
+        replace: jest.fn()
+      }
     };
     wrapper = shallow(<ShareModal {...testProps} />);
   });
 
   it('should render correctly when not open', () => {
-    expect(shallow(<ShareModal />)).toMatchSnapshot();
+    expect(wrapper).toMatchSnapshot();
   });
 
   it('should render correctly when open', () => {
-    expect(shallow(<ShareModal open={true} />)).toMatchSnapshot();
+    wrapper.setState({ open: true });
+    expect(wrapper).toMatchSnapshot();
   });
 
   it('should render with a valid relative range', () => {
@@ -45,32 +51,18 @@ describe('Component: ShareModal', () => {
   });
 
   it('should handle keydown events correctly', () => {
+    wrapper.setState({ open: true }); //open modal first
+
     const keydown = wrapper.find(WindowEvent).props().handler;
-
     keydown({ key: 'Escape' });
-    expect(testProps.handleToggle).toHaveBeenCalledTimes(1);
+    expect(wrapper.state().open).toBe(false);
 
-    testProps.handleToggle.mockClear();
-
+    wrapper.setState({ open: true });
     keydown({ key: 'Enter' });
-    expect(testProps.handleToggle).toHaveBeenCalledTimes(1);
+    expect(wrapper.state().open).toBe(false);
 
-    testProps.handleToggle.mockClear();
-
-    keydown({ key: 'Space' });
-    expect(testProps.handleToggle).toHaveBeenCalledTimes(0);
+    wrapper.setState({ open: true });
+    keydown({ key: 'Space' }); //shouldn't do anything
+    expect(wrapper.state().open).toBe(true);
   });
-
-  it('should toggle the modal on clicks outside the contents of the modal', () => {
-    wrapper.find(Modal).simulate('click');
-    expect(testProps.handleToggle).toHaveBeenCalledTimes(1);
-  });
-
-  it('should block propagation of clicks on the contents of the modal', () => {
-    const e = { stopPropagation: jest.fn() };
-    wrapper.find(Panel).simulate('click', e);
-    expect(e.stopPropagation).toHaveBeenCalledTimes(1);
-    expect(testProps.handleToggle).not.toHaveBeenCalled();
-  });
-
 });
