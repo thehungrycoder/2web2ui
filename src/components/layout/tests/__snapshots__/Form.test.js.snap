@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: Form Layout should render correctly 1`] = `
+<div
+  className="undefined undefined"
+>
+  <main
+    role="main"
+  >
+    <div>
+      <h1>
+        My cool af children
+      </h1>
+    </div>
+  </main>
+  <ScrollToTop />
+</div>
+`;

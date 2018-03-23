@@ -1,24 +1,21 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import { matchPath } from 'react-router';
-import _ from 'lodash';
-
 import Form from './Form';
-import routes from 'src/config/routes';
+import findRouteByPath from 'src/helpers/findRouteByPath';
+import { Helmet } from 'react-helmet';
 
 /**
  * Returns layout component from routes config
  */
 export const Layout = ({ children, location }) => {
-
-  // matchPath uses the same matching that <Route> uses
-  const route = _.find(routes, ({ path, exact = true }) => matchPath(location.pathname, {
-    path,
-    exact,
-    strict: false
-  }));
-
-  return React.createElement((route && route.layout) || Form, {}, children);
+  const route = findRouteByPath(location.pathname);
+  const LayoutComponent = route.layout || Form;
+  return (
+    <LayoutComponent>
+      {route.title && <Helmet><title>{route.title} | SparkPost</title></Helmet>}
+      {children}
+    </LayoutComponent>
+  );
 };
 
 export default withRouter(Layout);
