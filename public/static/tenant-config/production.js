@@ -7,6 +7,7 @@ window.SP.productionConfig = {
     has_signup: true
   },
   gaTag: 'UA-111136819-2',
+  gtmId: 'GTM-P87NNJ4',
   siftScience: {
     id: '88affa8e11'
   },

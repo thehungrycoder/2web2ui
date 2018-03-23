@@ -44,7 +44,7 @@ export class CreatePage extends Component {
     } = this.props;
 
     return (
-      <Page title="Add User" breadcrumbAction={breadcrumbAction}>
+      <Page title="Invite User" breadcrumbAction={breadcrumbAction}>
         <Panel>
           <Panel.Section>
             <form onSubmit={handleSubmit(this.handleSubmit)}>

@@ -1,46 +1,43 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Layout App renders correctly 1`] = `
-<div
-  className="undefined undefined undefined"
->
-  <div>
-    <withRouter(Connect(Navigation)) />
-  </div>
-  <main
-    role="main"
+exports[`Component: Layout should render a regular route with a specified layout and title 1`] = `
+<App>
+  <HelmetWrapper
+    defer={true}
+    encodeSpecialCharacters={true}
   >
-    <div>
-      App Layout
-    </div>
-  </main>
-  <ScrollToTop />
-</div>
+    <title>
+      Foo
+       | SparkPost
+    </title>
+  </HelmetWrapper>
+  <h1>
+    My layout children
+  </h1>
+</App>
 `;
 
-exports[`Layout Form renders correctly 1`] = `
-<div
-  className="undefined undefined"
->
-  <main
-    role="main"
-  >
-    <div>
-      Form Layout
-    </div>
-  </main>
-  <ScrollToTop />
-</div>
-`;
-
-exports[`Layout renders the correct default layout 1`] = `
+exports[`Component: Layout should render a route that does not specify a layout 1`] = `
 <Form>
-  Default
+  <HelmetWrapper
+    defer={true}
+    encodeSpecialCharacters={true}
+  >
+    <title>
+      With a Default Layout
+       | SparkPost
+    </title>
+  </HelmetWrapper>
+  <h1>
+    My layout children
+  </h1>
 </Form>
 `;
 
-exports[`Layout renders the specified layout 1`] = `
-<AppMock>
-  AppMock
-</AppMock>
+exports[`Component: Layout should render a route that does not specify a title 1`] = `
+<App>
+  <h1>
+    My layout children
+  </h1>
+</App>
 `;

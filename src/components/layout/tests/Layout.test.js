@@ -1,35 +1,41 @@
 import React from 'react';
-import App from '../App';
-import Form from '../Form';
 import { Layout } from '../Layout';
+import Form from 'src/components/layout/Form';
 import { shallow } from 'enzyme';
+import * as findRouteByPath from 'src/helpers/findRouteByPath';
 
-jest.mock('src/config/routes', () => [{ path: '/foo', layout: 'AppMock' }]);
+jest.mock('src/config/routes', () => ([]));
+jest.mock('src/helpers/findRouteByPath');
+jest.mock('src/components/layout/Form');
 
-describe('Layout App', () => {
-  it('renders correctly', () => {
-    const wrapper = shallow(<App>App Layout</App>);
-    expect(wrapper).toMatchSnapshot();
-  });
-});
+describe('Component: Layout', () => {
 
-describe('Layout Form', () => {
-  it('renders correctly', () => {
-    const wrapper = shallow(<Form>Form Layout</Form>);
-    expect(wrapper).toMatchSnapshot();
-  });
-});
+  let wrapper;
+  let App;
 
-describe('Layout', () => {
-  it('renders the correct default layout', () => {
-    const location = { pathname: '/' };
-    const wrapper = shallow(<Layout location={location}>Default</Layout>);
-    expect(wrapper).toMatchSnapshot();
+  beforeEach(() => {
+    App = (children) => children;
+    Form.default = function DefaultLayout(children) { return children; };
+    findRouteByPath.default = jest.fn(() => ({ layout: App, title: 'Foo' }));
+    wrapper = shallow(<Layout location={{ pathname: '/test' }}><h1>My layout children</h1></Layout>);
   });
 
-  it('renders the specified layout', () => {
-    const location = { pathname: '/foo' };
-    const wrapper = shallow(<Layout location={location}>AppMock</Layout>);
+  it('should render a regular route with a specified layout and title', () => {
+    expect(findRouteByPath.default).toHaveBeenCalledWith('/test');
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render a route that does not specify a layout', () => {
+    findRouteByPath.default = jest.fn(() => ({ title: 'With a Default Layout' }));
+    wrapper.setProps({ location: { pathname: '/default-layout' }});
+    expect(findRouteByPath.default).toHaveBeenLastCalledWith('/default-layout');
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render a route that does not specify a title', () => {
+    findRouteByPath.default = jest.fn(() => ({ layout: App }));
+    wrapper.setProps({ location: { pathname: '/no-title' }});
+    expect(findRouteByPath.default).toHaveBeenLastCalledWith('/no-title');
     expect(wrapper).toMatchSnapshot();
   });
 });
