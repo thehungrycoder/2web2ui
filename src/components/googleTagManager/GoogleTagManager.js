@@ -11,29 +11,30 @@ export class GoogleTagManager extends Component {
 
   componentDidMount() {
     window.dataLayer = [];
-    this.trackPageview(); // track initial page view
     this.setState({ dataLayerLoaded: true });
   }
 
   componentDidUpdate(prevProps) {
+    // Track additional page views whenever the route changes
     if (prevProps.location.pathname !== this.props.location.pathname) {
       this.trackPageview();
     }
 
-    // Google Tag Manager dataLayer set up
+    // Wait until the username is available to track the initial page view
     if (!prevProps.username && this.props.username) {
-      window.dataLayer.push({ username: this.props.username });
+      this.trackPageview(); // track initial page view
     }
   }
 
   trackPageview() {
-    const { location } = this.props;
+    const { location, username } = this.props;
     const route = findRouteByPath(location.pathname);
 
     window.dataLayer.push({
       event: 'content-view',
       'content-name': location.pathname + location.search, // duplicates angular 1.x ui-router "$location.url()" which is /path?plus=search
-      'content-title': route.title || location.pathname // duplicate angular 1.x $rootScope.stateData.title
+      'content-title': route.title || location.pathname, // duplicate angular 1.x $rootScope.stateData.title
+      username
     });
 
   }
