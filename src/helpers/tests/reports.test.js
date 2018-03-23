@@ -8,17 +8,6 @@ beforeEach(() => {
   dateHelpers.getRelativeDates = jest.fn(() => ({}));
 });
 
-it('should get search options', () => {
-  const filters = {
-    from: 1487076708000,
-    to: 1587076708000,
-    filters: [
-      { type: 'type', value: '123' }
-    ]
-  };
-  expect(reports.getReportSearchOptions(filters)).toMatchSnapshot();
-});
-
 it('should parse search with relative range', () => {
   const filters = 'filters=Domain:test.com&filters=Subaccount:test:123';
   const date = 'from=2017-11-03T14:43:00Z&to=2017-11-04T14:43:00Z';

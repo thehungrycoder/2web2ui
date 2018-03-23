@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import qs from 'query-string';
 import { addFilters, removeFilter, refreshReportOptions, refreshTypeaheadCache, initTypeaheadCache } from 'src/actions/reportOptions';
 import ShareModal from './ShareModal';
-import { parseSearch, getReportSearchOptions } from 'src/helpers/reports';
-import { Grid, Button, Panel, Tag } from '@sparkpost/matchbox';
+import { parseSearch } from 'src/helpers/reports';
+import { Grid, Panel, Tag } from '@sparkpost/matchbox';
 import Typeahead from './Typeahead';
 import DatePicker from 'src/components/datePicker/DatePicker';
 import typeaheadCacheSelector from 'src/selectors/reportFilterTypeaheadCache';
@@ -92,7 +91,6 @@ export class ReportOptions extends Component {
             </Grid.Column>
             <Grid.Column xs={4} md={2} xl={1}>
               <ShareModal disabled={reportLoading} searchOptions={searchOptions} />
-              {/* <Button id='shareModalButton' disabled={reportLoading} fullWidth onClick={this.toggleShareModal}>Share</Button> */}
             </Grid.Column>
           </Grid>
         </Panel.Section>

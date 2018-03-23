@@ -6,17 +6,6 @@ Object {
 }
 `;
 
-exports[`should get search options 1`] = `
-Object {
-  "filters": Array [
-    "type:123",
-  ],
-  "from": "2017-02-14T12:51:48Z",
-  "range": undefined,
-  "to": "2020-04-16T22:38:28Z",
-}
-`;
-
 exports[`should parse search with custom range 1`] = `
 Object {
   "filters": Array [

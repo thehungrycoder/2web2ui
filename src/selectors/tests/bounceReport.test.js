@@ -1,7 +1,13 @@
 import { mapStateToProps } from '../bounceReport';
 import * as bounceHelpers from 'src/helpers/bounce';
+import * as reportSearchOptions from 'src/selectors/reportSearchOptions';
+
 
 jest.mock('src/helpers/bounce');
+
+jest.mock('src/selectors/reportSearchOptions', () => ({
+  selectReportSearchOptions: jest.fn()
+}));
 
 describe('Selector: Bounce Report', () => {
 
@@ -9,6 +15,7 @@ describe('Selector: Bounce Report', () => {
   let bandTypes;
   let reshapedCategories;
   let formattedAggregates;
+  let searchOptions;
 
   beforeEach(() => {
     testState = {
@@ -36,6 +43,9 @@ describe('Selector: Bounce Report', () => {
 
     formattedAggregates = [];
     bounceHelpers.formatAggregates = jest.fn(() => formattedAggregates);
+
+    searchOptions = { from: '', to: '', range: '7d', filters: {}};
+    reportSearchOptions.selectReportSearchOptions.mockReturnValue(searchOptions);
   });
 
   it('should map state to props when not loading', () => {
@@ -47,7 +57,8 @@ describe('Selector: Bounce Report', () => {
       aggregates: formattedAggregates,
       categories: reshapedCategories,
       types: bandTypes,
-      reportOptions: testState.reportOptions
+      reportOptions: testState.reportOptions,
+      searchOptions: searchOptions
     });
     expect(bounceHelpers.getBandTypes).toHaveBeenCalledWith(formattedAggregates);
     expect(bounceHelpers.reshapeCategories).toHaveBeenCalledWith(testState.bounceReport.classifications);
