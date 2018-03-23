@@ -13,7 +13,9 @@ npm install npm@5 -g
 
 Then `npm install` to install deps.
 
-This will start a dev server backed by api.sparkpost.dev with live reload on http://localhost:3100/
+## Local development
+
+`npm start` will start a dev server backed by api.sparkpost.dev with live reload on http://localhost:3100/
 
 ## Tests
 
