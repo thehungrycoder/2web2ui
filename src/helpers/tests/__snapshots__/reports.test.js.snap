@@ -1,12 +1,32 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Should parse search with no empty value 1`] = `
+exports[`report helpers dedupeFilters returns deduped filters 1`] = `
+Array [
+  Object {
+    "id": 698,
+    "type": "Subaccount",
+    "value": "created (ID 698)",
+  },
+  Object {
+    "id": 656,
+    "type": "Subaccount",
+    "value": "test create no key (ID 656)",
+  },
+  Object {
+    "id": 550,
+    "type": "not-subaccount",
+    "value": "some random value",
+  },
+]
+`;
+
+exports[`report helpers parseSearch Should parse search with no empty value 1`] = `
 Object {
   "options": Object {},
 }
 `;
 
-exports[`should parse search with custom range 1`] = `
+exports[`report helpers parseSearch should parse search with custom range 1`] = `
 Object {
   "filters": Array [
     Object {
@@ -31,7 +51,7 @@ Object {
 }
 `;
 
-exports[`should parse search with missing range 1`] = `
+exports[`report helpers parseSearch should parse search with missing range 1`] = `
 Object {
   "filters": Array [
     Object {
@@ -55,7 +75,7 @@ Object {
 }
 `;
 
-exports[`should parse search with relative range 1`] = `
+exports[`report helpers parseSearch should parse search with relative range 1`] = `
 Object {
   "filters": Array [
     Object {

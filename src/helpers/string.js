@@ -49,3 +49,8 @@ export function stringToArray(string) {
 
   return string.split(',').map((item) => _.trim(item));
 }
+
+export function stringifyTypeaheadfilter(filter) {
+  const subaccount = filter.type === 'Subaccount' ? `:${filter.id}` : '';
+  return `${filter.type}:${filter.value}${subaccount}`;
+}

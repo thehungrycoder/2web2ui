@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 import moment from 'moment';
-import { stringifyTypeaheadfilter } from 'src/helpers/reports';
+import { stringifyTypeaheadfilter } from 'src/helpers/string';
 import _ from 'lodash';
 
 const selectDateOptions = (state) => ({

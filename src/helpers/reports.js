@@ -1,11 +1,7 @@
 import _ from 'lodash';
 import qs from 'query-string';
 import { getRelativeDates } from 'src/helpers/date';
-
-export function stringifyTypeaheadfilter(filter) {
-  const subaccount = filter.type === 'Subaccount' ? `:${filter.id}` : '';
-  return `${filter.type}:${filter.value}${subaccount}`;
-}
+import { stringifyTypeaheadfilter } from 'src/helpers/string';
 
 export function dedupeFilters(filters) {
   return _.uniqBy(filters, stringifyTypeaheadfilter);
