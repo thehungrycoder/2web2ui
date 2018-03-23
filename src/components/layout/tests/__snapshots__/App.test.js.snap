@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: App Layout should render correctly 1`] = `
+<div
+  className="undefined undefined undefined"
+>
+  <div>
+    <withRouter(Connect(Navigation)) />
+  </div>
+  <main
+    role="main"
+  >
+    <div>
+      <h1>
+        My cool af children
+      </h1>
+    </div>
+  </main>
+  <ScrollToTop />
+</div>
+`;
