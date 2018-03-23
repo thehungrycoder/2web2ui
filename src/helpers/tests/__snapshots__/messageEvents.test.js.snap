@@ -1,0 +1,87 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`messageEvents helpers formatDocumentation formats documentation correctly 1`] = `
+Object {
+  "bounce": Object {
+    "bounce_class": "Classification code for a given message (see [Bounce Classification Codes](https://support.sparkpost.com/customer/portal/articles/1929896))",
+    "campaign_id": "Campaign of which this message was a part",
+  },
+  "delivery": Object {
+    "campaign_id": "Campaign of which this message was a part",
+    "customer_id": "SparkPost-customer identifier through which this message was sent",
+  },
+}
+`;
+
+exports[`messageEvents helpers parseSearch parses correctly when all param exists 1`] = `
+Object {
+  "dateOptions": Object {
+    "from": "2018-02-23T03:02:32Z",
+    "relativeRange": "hour",
+    "to": "2018-03-22T03:02:32Z",
+  },
+  "filter1": Array [
+    "foo",
+  ],
+  "filter2": Array [
+    "bar",
+  ],
+}
+`;
+
+exports[`messageEvents helpers parseSearch parses correctly when extra filters do not exist 1`] = `
+Object {
+  "dateOptions": Object {
+    "from": "2018-02-23T03:02:32Z",
+    "relativeRange": "hour",
+    "to": "2018-03-22T03:02:32Z",
+  },
+}
+`;
+
+exports[`messageEvents helpers parseSearch parses correctly when from does not exist 1`] = `
+Object {
+  "dateOptions": Object {
+    "from": "2018-02-23T03:02:32Z",
+    "relativeRange": "hour",
+    "to": "2018-03-22T03:02:32Z",
+  },
+  "filter1": Array [
+    "foo",
+  ],
+  "filter2": Array [
+    "bar",
+  ],
+}
+`;
+
+exports[`messageEvents helpers parseSearch parses correctly when range does not exist (does not override from, to) 1`] = `
+Object {
+  "dateOptions": Object {
+    "from": 2018-03-23T03:02:32.000Z,
+    "to": 2018-03-23T04:02:32.000Z,
+  },
+  "filter1": Array [
+    "foo",
+  ],
+  "filter2": Array [
+    "bar",
+  ],
+}
+`;
+
+exports[`messageEvents helpers parseSearch parses correctly when to does not exist 1`] = `
+Object {
+  "dateOptions": Object {
+    "from": "2018-02-23T03:02:32Z",
+    "relativeRange": "hour",
+    "to": "2018-03-22T03:02:32Z",
+  },
+  "filter1": Array [
+    "foo",
+  ],
+  "filter2": Array [
+    "bar",
+  ],
+}
+`;
