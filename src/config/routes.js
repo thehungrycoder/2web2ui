@@ -84,37 +84,43 @@ const routes = [
   {
     path: '/auth',
     public: true,
-    component: AuthPage
+    component: AuthPage,
+    title: 'Log In'
   },
   {
     path: '/sso',
     public: true,
-    component: SSOPage
+    component: SSOPage,
+    title: 'Single Sign-On'
   },
   {
     path: '/register',
     public: true,
     forceLogout: true,
-    component: RegisterPage
+    component: RegisterPage,
+    title: 'Finish Your Registration'
   },
   {
     path: '/join',
     public: true,
     forceLogout: true,
     component: JoinPage,
-    condition: configFlag('featureFlags.has_signup')
+    condition: configFlag('featureFlags.has_signup'),
+    title: 'Join'
   },
   {
     path: '/forgot-password',
     public: true,
     forceLogout: true,
-    component: passwordReset.ForgotPasswordPage
+    component: passwordReset.ForgotPasswordPage,
+    title: 'Reset Password'
   },
   {
     path: '/reset-password/:token',
     public: true,
     forceLogout: true,
-    component: passwordReset.ResetPasswordPage
+    component: passwordReset.ResetPasswordPage,
+    title: 'Choose a New Password'
   },
 
   /**
@@ -129,7 +135,8 @@ const routes = [
     path: DEFAULT_REDIRECT_ROUTE,
     component: DefaultRedirect,
     layout: App,
-    condition: () => true // this route MUST be accessible to all logged-in app users
+    condition: () => true, // this route MUST be accessible to all logged-in app users
+    title: 'Loading...'
   },
 
   /**
@@ -142,6 +149,7 @@ const routes = [
     path: '/dashboard',
     component: DashboardPage,
     layout: App,
+    title: 'Dashboard',
     condition: all(
       hasGrants('api_keys/manage', 'templates/modify', 'sending_domains/manage'),
       configEquals('splashPage', '/dashboard') // want to hide if not a splash page https://jira.int.messagesystems.com/browse/FAD-6046
@@ -157,42 +165,50 @@ const routes = [
   {
     path: '/reports/summary',
     component: reports.SummaryPage,
-    layout: App
+    layout: App,
+    title: 'Summary Report'
   },
   {
     path: '/reports/bounce',
     component: reports.BouncePage,
-    layout: App
+    layout: App,
+    title: 'Bounce Report'
   },
   {
     path: '/reports/rejections',
     component: reports.RejectionPage,
-    layout: App
+    layout: App,
+    title: 'Rejection Report'
   },
   {
     path: '/reports/accepted',
     component: reports.AcceptedPage,
-    layout: App
+    layout: App,
+    title: 'Accepted Report'
   },
   {
     path: '/reports/delayed',
     component: reports.DelayPage,
-    layout: App
+    layout: App,
+    title: 'Delayed Report'
   },
   {
     path: '/reports/engagement',
     component: reports.EngagementPage,
-    layout: App
+    layout: App,
+    title: 'Engagement Report'
   },
   {
     path: '/reports/message-events',
     component: reports.MessageEventsPage,
-    layout: App
+    layout: App,
+    title: 'Message Events Report'
   },
   {
     path: '/reports/message-events/details/:messageId',
     component: reports.EventPage,
-    layout: App
+    layout: App,
+    title: 'Message History'
   },
   {
     path: '/account/security',
@@ -200,238 +216,278 @@ const routes = [
   },
   {
     path: '/account/email-verification/:token',
-    component: emailVerification
+    component: emailVerification,
+    title: 'Verify Your Email'
   },
   {
     path: '/account/subaccounts',
     component: subaccounts.ListPage,
     condition: hasGrants('subaccount/manage', 'api_keys/manage', 'sending_domains/manage'),
-    layout: App
+    layout: App,
+    title: 'Subaccounts'
   },
   {
     path: '/account/subaccounts/create',
     component: subaccounts.CreatePage,
     condition: hasGrants('subaccount/manage', 'api_keys/manage', 'sending_domains/manage'),
-    layout: App
+    layout: App,
+    title: 'New Subaccount'
   },
   {
     path: '/account/subaccounts/:id',
     component: subaccounts.DetailsPage,
     condition: hasGrants('subaccount/manage', 'api_keys/manage', 'sending_domains/manage'),
     layout: App,
+    title: 'Subaccount Details',
     exact: false
   },
   {
     path: '/account/users',
     component: users.ListPage,
     condition: hasGrants('users/manage'),
-    layout: App
+    layout: App,
+    title: 'Users'
   },
   {
     path: '/account/users/create',
     component: users.CreatePage,
     condition: hasGrants('users/manage'),
-    layout: App
+    layout: App,
+    title: 'Invite User'
   },
   {
     path: '/templates',
     component: templates.ListPage,
     condition: hasGrants('templates/view'),
-    layout: App
+    layout: App,
+    title: 'Templates'
   },
   {
     path: '/templates/create/:id?',
     component: templates.CreatePage,
     condition: hasGrants('templates/modify'),
-    layout: App
+    layout: App,
+    title: 'New Template'
   },
   {
     path: '/templates/edit/:id',
     component: templates.EditPage,
     condition: hasGrants('templates/view'),
-    layout: App
+    layout: App,
+    title: 'Edit Template'
   },
   {
     path: '/templates/edit/:id/published',
     component: templates.PublishedPage,
     condition: hasGrants('templates/view'),
-    layout: App
+    layout: App,
+    title: 'View Published Template'
   },
   {
     path: '/templates/preview/:id',
     component: templates.PreviewDraftPage,
     condition: hasGrants('templates/view'),
-    layout: App
+    layout: App,
+    title: 'Preview Draft Template'
   },
   {
     path: '/templates/preview/:id/published',
     component: templates.PreviewPublishedPage,
     condition: hasGrants('templates/view'),
-    layout: App
+    layout: App,
+    title: 'Preview Published Template'
   },
   {
     path: '/lists/recipient-lists',
     component: recipientLists.ListPage,
     condition: hasGrants('recipient_lists/manage'),
-    layout: App
+    layout: App,
+    title: 'Recipient Lists'
   },
   {
     path: '/lists/recipient-lists/create',
     component: recipientLists.CreatePage,
     condition: hasGrants('recipient_lists/manage'),
-    layout: App
+    layout: App,
+    title: 'New Recipient List'
   },
   {
     path: '/lists/recipient-lists/edit/:id',
     component: recipientLists.EditPage,
     condition: hasGrants('recipient_lists/manage'),
-    layout: App
+    layout: App,
+    title: 'Edit Recipient List'
   },
   {
     path: '/lists/suppressions',
     component: suppressions.ListPage,
     condition: hasGrants('suppression_lists/manage'),
-    layout: App
+    layout: App,
+    title: 'Suppression List'
   },
   {
     path: '/lists/suppressions/create',
     component: suppressions.CreatePage,
     condition: hasGrants('suppression_lists/manage'),
-    layout: App
+    layout: App,
+    title: 'New Suppression'
   },
   {
     path: '/webhooks',
     component: webhooks.ListPage,
     condition: hasGrants('webhooks/view'),
-    layout: App
+    layout: App,
+    title: 'Webhooks'
   },
   {
     path: '/webhooks/create',
     component: webhooks.CreatePage,
     condition: hasGrants('webhooks/modify'),
-    layout: App
+    layout: App,
+    title: 'New Webhook'
   },
   {
     path: '/webhooks/details/:id',
     component: webhooks.DetailsPage,
     condition: hasGrants('webhooks/modify'),
     layout: App,
+    title: 'Webhook Details',
     exact: false
   },
   {
     path: '/account/api-keys',
     component: apiKeys.ListPage,
     condition: hasGrants('api_keys/manage'),
-    layout: App
+    layout: App,
+    title: 'API Keys'
   },
   {
     path: '/account/api-keys/create',
     component: apiKeys.CreatePage,
     condition: hasGrants('api_keys/manage'),
-    layout: App
+    layout: App,
+    title: 'New API Key'
   },
   {
     path: '/account/api-keys/details/:id',
     component: apiKeys.DetailsPage,
     condition: hasGrants('api_keys/manage'),
-    layout: App
+    layout: App,
+    title: 'API Key Details'
   },
   {
     path: '/account/tracking-domains',
     component: trackingDomains.ListPage,
     condition: hasGrants('tracking_domains/view'),
-    layout: App
+    layout: App,
+    title: 'Tracking Domains'
   },
   {
     path: '/account/tracking-domains/create',
     component: trackingDomains.CreatePage,
     condition: hasGrants('tracking_domains/manage'),
-    layout: App
+    layout: App,
+    title: 'New Tracking Domain'
   },
   {
     path: '/account/profile',
     component: emailVerificationRedirect,
     condition: hasGrants('users/self-manage'),
-    layout: App
+    layout: App,
+    title: 'My Profile'
   },
   {
     path: '/account/sending-domains',
     component: sendingDomains.ListPage,
     condition: hasGrants('sending_domains/manage'),
-    layout: App
+    layout: App,
+    title: 'Sending Domains'
   },
   {
     path: '/account/sending-domains/create',
     component: sendingDomains.CreatePage,
     condition: hasGrants('sending_domains/manage'),
-    layout: App
+    layout: App,
+    title: 'New Domain'
   },
   {
     path: '/account/sending-domains/edit/:id',
     component: sendingDomains.EditPage,
     condition: hasGrants('sending_domains/manage'),
-    layout: App
+    layout: App,
+    title: 'Edit Domain'
   },
   {
     path: '/account/smtp',
     component: SmtpPage,
     condition: hasGrants('api_keys/manage'),
-    layout: App
+    layout: App,
+    title: 'SMTP Settings'
   },
   {
     path: '/account/billing',
     component: billing.SummaryPage,
     condition: all(hasGrants('account/manage'), not(isEnterprise), not(isHeroku), not(isAzure)),
-    layout: App
+    layout: App,
+    title: 'Billing'
   },
   {
     path: '/account/billing/plan',
     component: billing.ChangePlanPage,
     condition: all(hasGrants('account/manage'), not(isEnterprise), not(isHeroku), not(isAzure)),
-    layout: App
+    layout: App,
+    title: 'Change My Plan'
   },
   {
     path: '/account/ip-pools',
     component: ipPools.ListPage,
     condition: hasGrants('ip_pools/manage'),
-    layout: App
+    layout: App,
+    title: 'IP Pools'
   },
   {
     path: '/account/ip-pools/create',
     component: ipPools.CreatePage,
     condition: hasGrants('ip_pools/manage'),
-    layout: App
+    layout: App,
+    title: 'New IP Pool'
   },
   {
     path: '/account/ip-pools/edit/:id',
     component: ipPools.EditPage,
     condition: hasGrants('ip_pools/manage'),
-    layout: App
+    layout: App,
+    title: 'Edit IP Pool'
   },
   {
     path: '/onboarding/plan',
     component: onboarding.ChoosePlan,
-    condition: configFlag('featureFlags.has_signup')
+    condition: configFlag('featureFlags.has_signup'),
+    title: 'Choose Your Plan'
   },
   {
     path: '/onboarding/sending-domain',
     component: onboarding.SendingDomainPage,
-    condition: configFlag('featureFlags.has_signup')
+    condition: configFlag('featureFlags.has_signup'),
+    title: 'Create a Sending Domain'
   },
   {
     path: '/onboarding/email',
     component: onboarding.SmtpOrApiPage,
-    condition: configFlag('featureFlags.has_signup')
+    condition: configFlag('featureFlags.has_signup'),
+    title: 'REST and SMTP'
   },
   {
     path: '/onboarding/email/smtp',
     component: onboarding.SmtpPage,
-    condition: configFlag('featureFlags.has_signup')
+    condition: configFlag('featureFlags.has_signup'),
+    title: 'Send a Test Email: SMTP'
   },
   {
     path: '/onboarding/email/api',
     component: onboarding.ApiPage,
-    condition: configFlag('featureFlags.has_signup')
+    condition: configFlag('featureFlags.has_signup'),
+    title: 'Send a Test Email: REST'
   }
 ];
 
@@ -439,7 +495,8 @@ const routes = [
 routes.push({
   path: '*',
   component: PageNotFound,
-  layout: App
+  layout: App,
+  title: 'Page Not Found'
 });
 
 export default routes;

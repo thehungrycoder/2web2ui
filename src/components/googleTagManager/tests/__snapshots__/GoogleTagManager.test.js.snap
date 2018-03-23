@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: GoogleTagManager should init dataLayer and track initial page view on mount 1`] = `
+<HelmetWrapper
+  defer={true}
+  encodeSpecialCharacters={true}
+>
+  <script
+    async={true}
+    src="https://www.googletagmanager.com/gtm.js?id=GTM-XXXX"
+    type="text/javascript"
+  />
+</HelmetWrapper>
+`;

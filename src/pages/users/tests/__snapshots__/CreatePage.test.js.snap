@@ -10,7 +10,7 @@ exports[`Page: User Create Page should render correctly by default 1`] = `
     }
   }
   empty={Object {}}
-  title="Add User"
+  title="Invite User"
 >
   <Panel>
     <Panel.Section>
@@ -60,7 +60,7 @@ exports[`Page: User Create Page should render when pristine 1`] = `
     }
   }
   empty={Object {}}
-  title="Add User"
+  title="Invite User"
 >
   <Panel>
     <Panel.Section>
@@ -110,7 +110,7 @@ exports[`Page: User Create Page should render when submitting 1`] = `
     }
   }
   empty={Object {}}
-  title="Add User"
+  title="Invite User"
 >
   <Panel>
     <Panel.Section>

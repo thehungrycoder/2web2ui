@@ -15,7 +15,6 @@ export { default as Modal } from './modals/Modal';
 export { default as PanelLoading } from './panelLoading/PanelLoading';
 export { default as PieChart } from './pieChart/PieChart';
 export { default as PlanPicker } from './planPicker/PlanPicker';
-export { default as RouteWatch } from './routeWatch/RouteWatch';
 export { default as SparkPost } from './sparkPost/SparkPost';
 export { default as CenteredLogo } from './sparkPost/CenteredLogo';
 export { default as Support } from './support/Support';
