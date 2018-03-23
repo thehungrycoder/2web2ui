@@ -408,14 +408,14 @@ const routes = [
     component: sendingDomains.CreatePage,
     condition: hasGrants('sending_domains/manage'),
     layout: App,
-    title: 'New Domain'
+    title: 'New Sending Domain'
   },
   {
     path: '/account/sending-domains/edit/:id',
     component: sendingDomains.EditPage,
     condition: hasGrants('sending_domains/manage'),
     layout: App,
-    title: 'Edit Domain'
+    title: 'Edit Sending Domain'
   },
   {
     path: '/account/smtp',
@@ -436,7 +436,7 @@ const routes = [
     component: billing.ChangePlanPage,
     condition: all(hasGrants('account/manage'), not(isEnterprise), not(isHeroku), not(isAzure)),
     layout: App,
-    title: 'Change My Plan'
+    title: 'Billing | Change My Plan'
   },
   {
     path: '/account/ip-pools',
@@ -463,31 +463,31 @@ const routes = [
     path: '/onboarding/plan',
     component: onboarding.ChoosePlan,
     condition: configFlag('featureFlags.has_signup'),
-    title: 'Choose Your Plan'
+    title: 'Onboarding | Choose Your Plan'
   },
   {
     path: '/onboarding/sending-domain',
     component: onboarding.SendingDomainPage,
     condition: configFlag('featureFlags.has_signup'),
-    title: 'Create a Sending Domain'
+    title: 'Onboarding | Create a Sending Domain'
   },
   {
     path: '/onboarding/email',
     component: onboarding.SmtpOrApiPage,
     condition: configFlag('featureFlags.has_signup'),
-    title: 'REST and SMTP'
+    title: 'Onboarding | REST and SMTP'
   },
   {
     path: '/onboarding/email/smtp',
     component: onboarding.SmtpPage,
     condition: configFlag('featureFlags.has_signup'),
-    title: 'Send a Test Email: SMTP'
+    title: 'Onboarding | Send a Test Email (SMTP)'
   },
   {
     path: '/onboarding/email/api',
     component: onboarding.ApiPage,
     condition: configFlag('featureFlags.has_signup'),
-    title: 'Send a Test Email: REST'
+    title: 'Onboarding | Send a Test Email (REST)'
   }
 ];
 
