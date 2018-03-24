@@ -1,24 +1,22 @@
 import React from 'react';
 import { AcceptedPage } from '../AcceptedPage';
 import { shallow } from 'enzyme';
-// import * as reportHelpers from 'src/helpers/reports';
-
-jest.mock('src/helpers/reports');
-
-// Date.now = jest.fn(() => 1487076708000);
 
 describe('AcceptedPage: ', () => {
-
-  const props = {
-    loading: false,
-    aggregates: { count_accepted: 1 },
-    refreshAcceptedReport: jest.fn(),
-    addFilters: jest.fn()
-  };
-
+  let props;
   let wrapper;
 
   beforeEach(() => {
+    props = {
+      loading: false,
+      aggregates: { count_accepted: 1 },
+      refreshAcceptedReport: jest.fn(),
+      reportOptions: {
+        relativeRange: 'day'
+      },
+      searchOptions: { from: '', to: '', range: '7d', filters: {}}
+    };
+
     wrapper = shallow(<AcceptedPage {...props} />);
   });
 
@@ -28,7 +26,7 @@ describe('AcceptedPage: ', () => {
   });
 
   it('should refresh when report options reference changes', () => {
-    const newReportOptions = {};
+    const newReportOptions = { relativeRange: 'hour' };
     expect(props.refreshAcceptedReport).not.toHaveBeenCalled();
     wrapper.setProps({ reportOptions: newReportOptions });
     expect(props.refreshAcceptedReport).toHaveBeenCalledWith(newReportOptions);

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import _ from 'lodash';
 import { Page } from '@sparkpost/matchbox';
 import { refreshEngagementReport } from 'src/actions/engagementReport';
 import { selectReportSearchOptions } from 'src/selectors/reportSearchOptions';
@@ -11,7 +12,7 @@ import EngagementTable from './components/EngagementTable';
 export class EngagementPage extends Component {
 
   componentDidUpdate(prevProps) {
-    if (prevProps.reportOptions !== this.props.reportOptions) {
+    if (!_.isEqual(prevProps.reportOptions, this.props.reportOptions)) {
       this.props.refreshEngagementReport(this.props.reportOptions);
     }
   }

@@ -33,6 +33,12 @@ describe('Component: ShareModal', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('updates the link if options are changed', () => {
+    testProps.history.replace.mockReset();
+    wrapper.setProps({ searchOptions: { range: '7days' }});
+    expect(testProps.history.replace).toHaveBeenCalledTimes(1);
+  });
+
   it('should render correctly when open', () => {
     wrapper.setState({ open: true });
     expect(wrapper).toMatchSnapshot();

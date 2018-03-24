@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { addFilters, removeFilter, refreshReportOptions, refreshTypeaheadCache, initTypeaheadCache } from 'src/actions/reportOptions';
@@ -31,7 +32,7 @@ export class ReportOptions extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.reportOptions !== this.props.reportOptions) {
+    if (!_.isEqual(prevProps.reportOptions, this.props.reportOptions)) {
       this.maybeRefreshFilterTypeaheadCache(prevProps.reportOptions);
     }
   }

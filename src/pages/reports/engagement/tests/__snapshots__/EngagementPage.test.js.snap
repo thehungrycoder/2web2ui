@@ -5,7 +5,10 @@ exports[`Engagement Report Page should render 1`] = `
   empty={Object {}}
   title="Engagement Report"
 >
-  <withRouter(Connect(ReportOptions)) />
+  <withRouter(Connect(ReportOptions))
+    reportLoading={false}
+    searchOptions={Object {}}
+  />
   <Connect(EngagementSummary)
     accepted={1}
     clicks={3}
