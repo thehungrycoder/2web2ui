@@ -139,4 +139,11 @@ describe('Action Creator: Billing', () => {
     });
   });
 
+  describe('collectPayments', () => {
+    it('dispatches a collection action', async() => {
+      expect(billing.collectPayments()).toMatchSnapshot();
+    });
+
+  });
+
 });

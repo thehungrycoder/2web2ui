@@ -149,7 +149,6 @@ export function billingCreate(values) {
 
 /**
  * attempts to collect payments (like when payment method is updated) to make sure pending payments are charged
- * should suppress 400 from api as they are good here (means nothing to collect)
  */
 
 export function collectPayments() {
