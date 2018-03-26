@@ -1,5 +1,67 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Api Keys List Page gets row data correctly 1`] = `
+Array [
+  Array [
+    <Link
+      replace={false}
+      to="/account/api-keys/details/123id?subaccount=101"
+    >
+      Test Key 1
+    </Link>,
+    <ShortKeyCode
+      shortKey="ab01"
+    />,
+  ],
+  Array [
+    <Link
+      replace={false}
+      to="/account/api-keys/details/456id"
+    >
+      Test Key 2
+    </Link>,
+    <ShortKeyCode
+      shortKey="fe98"
+    />,
+  ],
+  Array [
+    <span>
+      Other User Key
+      <br />
+      <small>
+        <Tooltip
+          bottom={true}
+          content="API keys are only editable by their owner"
+          dark={true}
+          forcePosition={false}
+          horizontalOffset="0px"
+          preferredDirection={
+            Object {
+              "bottom": true,
+              "left": false,
+              "right": true,
+              "top": false,
+            }
+          }
+          right={true}
+        >
+          (owner: 
+          other_user
+          ) 
+          <Icon
+            name="Info"
+            size={18}
+          />
+        </Tooltip>
+      </small>
+    </span>,
+    <ShortKeyCode
+      shortKey="c00l"
+    />,
+  ],
+]
+`;
+
 exports[`Api Keys List Page renders correctly 1`] = `
 <Page
   empty={
@@ -68,6 +130,7 @@ exports[`Api Keys List Page renders correctly 1`] = `
             "metrics/view",
           ],
           "id": "123id",
+          "isOwnedByCurrentUser": true,
           "label": "Test Key 1",
           "short_key": "ab01",
           "subaccount_id": 101,
@@ -76,8 +139,20 @@ exports[`Api Keys List Page renders correctly 1`] = `
           "grants": Array [
             "smtp/inject",
           ],
+          "id": "456id",
+          "isOwnedByCurrentUser": true,
           "label": "Test Key 2",
           "short_key": "fe98",
+        },
+        Object {
+          "grants": Array [
+            "metrics/view",
+          ],
+          "id": "789id",
+          "isOwnedByCurrentUser": false,
+          "label": "Other User Key",
+          "short_key": "c00l",
+          "username": "other_user",
         },
       ]
     }
@@ -114,6 +189,72 @@ exports[`Api Keys List Page renders errors when present 1`] = `
     errorDetails="Uh oh! It broke. "
     message="Sorry, we seem to have had some trouble loading your API keys."
     reload={[Function]}
+  />
+</Page>
+`;
+
+exports[`Api Keys List Page renders when there are no keys 1`] = `
+<Page
+  empty={
+    Object {
+      "content": <p>
+        Create an API key you can use to access our REST or SMTP API services.
+      </p>,
+      "image": "Setup",
+      "secondaryAction": Object {
+        "content": "View our API Docs",
+        "external": true,
+        "to": "https://developers.sparkpost.com/api",
+      },
+      "show": true,
+    }
+  }
+  primaryAction={
+    Object {
+      "Component": [Function],
+      "content": "Create API Key",
+      "to": "/account/api-keys/create",
+    }
+  }
+  title="API Keys"
+>
+  <TableCollection
+    columns={
+      Array [
+        Object {
+          "label": "Name",
+          "sortKey": "label",
+          "width": "40%",
+        },
+        Object {
+          "label": "Key",
+        },
+      ]
+    }
+    defaultSortColumn="label"
+    defaultSortDirection="desc"
+    filterBox={
+      Object {
+        "exampleModifiers": Array [
+          "key",
+          "name",
+          "id",
+        ],
+        "itemToStringKeys": Array [
+          "label",
+          "short_key",
+          "id",
+        ],
+        "keyMap": Object {
+          "key": "short_key",
+          "name": "label",
+        },
+        "show": true,
+      }
+    }
+    getRowData={[Function]}
+    pagination={true}
+    rows={Array []}
   />
 </Page>
 `;
@@ -228,6 +369,7 @@ exports[`Api Keys List Page should show api key banner on successful create 1`] 
             "metrics/view",
           ],
           "id": "123id",
+          "isOwnedByCurrentUser": true,
           "label": "Test Key 1",
           "short_key": "ab01",
           "subaccount_id": 101,
@@ -236,8 +378,20 @@ exports[`Api Keys List Page should show api key banner on successful create 1`] 
           "grants": Array [
             "smtp/inject",
           ],
+          "id": "456id",
+          "isOwnedByCurrentUser": true,
           "label": "Test Key 2",
           "short_key": "fe98",
+        },
+        Object {
+          "grants": Array [
+            "metrics/view",
+          ],
+          "id": "789id",
+          "isOwnedByCurrentUser": false,
+          "label": "Other User Key",
+          "short_key": "c00l",
+          "username": "other_user",
         },
       ]
     }

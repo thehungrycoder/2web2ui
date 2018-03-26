@@ -39,4 +39,11 @@ exports[`renders correctly with no subaccounts 1`] = `
 </Page>
 `;
 
+exports[`should render a redirect when an error is present 1`] = `
+<Redirect
+  push={false}
+  to="/account/api-keys"
+/>
+`;
+
 exports[`should render loading component while loading 1`] = `<Loading />`;
