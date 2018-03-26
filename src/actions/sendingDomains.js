@@ -76,10 +76,6 @@ function verify({ id, subaccount, type, ...rest }) {
   });
 }
 
-export function verifyAbuse({ id, subaccount }) {
-  return verify({ id, subaccount, type: 'abuse_at' });
-}
-
 export function verifyCname({ id, subaccount }) {
   return verify({ id, subaccount, type: 'cname' });
 }
@@ -88,8 +84,18 @@ export function verifyDkim({ id, subaccount }) {
   return verify({ id, subaccount, type: 'dkim' });
 }
 
-export function verifyMailbox({ id, mailbox: verification_mailbox, subaccount }) {
-  return verify({ id, subaccount, type: 'verification_mailbox', verification_mailbox });
+export function verifyMailbox({ id, mailbox, subaccount }) {
+  if (mailbox === 'abuse') {
+    return verifyAbuse({ id, subaccount });
+  }
+  if (mailbox === 'postmaster') {
+    return verifyPostmaster({ id, subaccount });
+  }
+  return verify({ id, subaccount, type: 'verification_mailbox', verification_mailbox: mailbox });
+}
+
+export function verifyAbuse({ id, subaccount }) {
+  return verify({ id, subaccount, type: 'abuse_at' });
 }
 
 export function verifyPostmaster({ id, subaccount }) {
