@@ -117,6 +117,7 @@ exports[`Api Keys List Page renders correctly 1`] = `
         "keyMap": Object {
           "key": "short_key",
           "name": "label",
+          "owner": "username",
         },
         "show": true,
       }
@@ -248,6 +249,7 @@ exports[`Api Keys List Page renders when there are no keys 1`] = `
         "keyMap": Object {
           "key": "short_key",
           "name": "label",
+          "owner": "username",
         },
         "show": true,
       }
@@ -356,6 +358,7 @@ exports[`Api Keys List Page should show api key banner on successful create 1`] 
         "keyMap": Object {
           "key": "short_key",
           "name": "label",
+          "owner": "username",
         },
         "show": true,
       }
