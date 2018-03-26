@@ -4,7 +4,8 @@ const MAX_ERROR_DETAILS = 25;
 
 export class ErrorBanner extends Component {
   renderErrorDetails() {
-    const { parseError = {}, persistError } = this.props;
+    const parseError = this.props.parseError || {}; // ugh, null
+    const persistError = this.props.persistError || {}; // ugh, null
 
     if (parseError.details) {
       return (
