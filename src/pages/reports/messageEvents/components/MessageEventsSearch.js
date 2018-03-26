@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import moment from 'moment';
 import _ from 'lodash';
 import { getMessageEvents, refreshMessageEventsDateRange, updateMessageEventsSearchOptions, addFilters } from 'src/actions/messageEvents';
-import { selectMessageEventsSearchOptions } from 'src/selectors/reportSearchOptions';
+import { selectMessageEventsSearchOptions } from 'src/selectors/messageEvents';
 import { Panel, Grid, TextField } from '@sparkpost/matchbox';
 import AdvancedFilters from './AdvancedFilters';
 import ActiveFilters from './ActiveFilters';
@@ -24,7 +24,7 @@ export class MessageEventsSearch extends Component {
 
   componentDidMount() {
     const { updateMessageEventsSearchOptions, refreshMessageEventsDateRange, location, search } = this.props;
-    refreshMessageEventsDateRange({ relativeRange: search.dateOptions.relativeRange });
+    refreshMessageEventsDateRange({ relativeRange: search.dateOptions.relativeRange }); // Sets default dateoptions from initial state
     updateMessageEventsSearchOptions(parseSearch(location.search));
   }
 
@@ -62,7 +62,7 @@ export class MessageEventsSearch extends Component {
   }
 
   render() {
-    const { search, refreshMessageEventsDateRange, loading, now, searchOptions } = this.props;
+    const { search, refreshMessageEventsDateRange, loading, now = new Date(), searchOptions } = this.props;
 
     return (
       <Panel>

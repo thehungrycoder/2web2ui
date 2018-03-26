@@ -49,14 +49,14 @@ export class SummaryReportPage extends Component {
   }
 
   render() {
-    const { chart, searchOptions } = this.props;
+    const { chart, summarySearchOptions } = this.props;
     const { scale, eventTime, metricsModal } = this.state;
 
     return (
       <Page title='Summary Report'>
         <ReportOptions
           reportLoading={chart.chartLoading}
-          searchOptions={searchOptions}
+          searchOptions={summarySearchOptions}
         />
 
         <Panel>
@@ -90,7 +90,7 @@ export class SummaryReportPage extends Component {
 const mapStateToProps = (state) => ({
   chart: state.summaryChart,
   reportOptions: state.reportOptions,
-  searchOptions: selectSummaryChartSearchOptions(state)
+  summarySearchOptions: selectSummaryChartSearchOptions(state)
 });
 
 const mapDispatchToProps = {

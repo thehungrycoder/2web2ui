@@ -32,20 +32,3 @@ export const selectSummaryChartSearchOptions = createSelector(
   [selectDateOptions, selectTypeaheadFilters, selectSummaryMetrics],
   (dates, filters, metrics) => ({ ...dates, ...filters, ...metrics })
 );
-
-
-const selectMessageEventsDateOptions = (state) => ({
-  from: moment(_.get(state, 'messageEvents.search.dateOptions.from')).utc().format(),
-  to: moment(_.get(state, 'messageEvents.search.dateOptions.to')).utc().format(),
-  range: _.get(state, 'messageEvents.search.dateOptions.relativeRange')
-});
-
-const selectSearch = (state) => _.omit(state.messageEvents.search, ['dateOptions']);
-
-/**
- * Converts reportOptions for url sharing for message events
- */
-export const selectMessageEventsSearchOptions = createSelector(
-  [selectMessageEventsDateOptions, selectSearch],
-  (dates, search) => ({ ...dates, ...search })
-);

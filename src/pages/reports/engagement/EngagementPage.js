@@ -18,11 +18,11 @@ export class EngagementPage extends Component {
   }
 
   render() {
-    const { loading, aggregateMetrics, linkMetrics, searchOptions } = this.props;
+    const { loading, aggregateMetrics, linkMetrics, engagementSearchOptions } = this.props;
 
     return (
       <Page title='Engagement Report'>
-        <ReportOptions reportLoading={loading} searchOptions={searchOptions} />
+        <ReportOptions reportLoading={loading} searchOptions={engagementSearchOptions} />
         <EngagementSummary
           accepted={aggregateMetrics.data.count_accepted}
           clicks={aggregateMetrics.data.count_unique_clicked_approx}
@@ -48,7 +48,7 @@ const mapStateToProps = (state) => ({
   aggregateMetrics: state.engagementReport.aggregateMetrics,
   linkMetrics: state.engagementReport.linkMetrics,
   reportOptions: state.reportOptions,
-  searchOptions: selectReportSearchOptions(state)
+  engagementSearchOptions: selectReportSearchOptions(state)
 });
 const mapDispatchToProps = { refreshEngagementReport };
 

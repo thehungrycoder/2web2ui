@@ -41,5 +41,5 @@ export const mapStateToProps = createStructuredSelector({
   categories: selectReshapedClassifications,
   types: selectBandTypes,
   reportOptions: selectReportOptions,
-  searchOptions: selectReportSearchOptions
+  bounceSearchOptions: selectReportSearchOptions
 });

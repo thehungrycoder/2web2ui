@@ -26,7 +26,7 @@ describe('Engagement Report Page', () => {
       },
       refreshEngagementReport: jest.fn(),
       reportOptions: {},
-      searchOptions: {}
+      engagementSearchOptions: {}
     };
     wrapper = shallow(<EngagementPage {...props} />);
   });
@@ -46,4 +46,3 @@ describe('Engagement Report Page', () => {
   });
 
 });
-

@@ -53,11 +53,11 @@ export class DelayPage extends Component {
   }
 
   render() {
-    const { loading, searchOptions } = this.props;
+    const { loading, delaySearchOptions } = this.props;
 
     return (
       <Page title='Delay Report'>
-        <ReportOptions reportLoading={loading} searchOptions={searchOptions} />
+        <ReportOptions reportLoading={loading} searchOptions={delaySearchOptions} />
         { this.renderTopLevelMetrics() }
         <Panel title='Delayed Messages' className='ReasonsTable'>
           { this.renderDataTable() }
@@ -76,7 +76,7 @@ const mapStateToProps = (state) => {
     aggregates,
     aggregatesLoading: state.delayReport.aggregatesLoading,
     reportOptions: state.reportOptions,
-    searchOptions: selectReportSearchOptions(state)
+    delaySearchOptions: selectReportSearchOptions(state)
   };
 };
 

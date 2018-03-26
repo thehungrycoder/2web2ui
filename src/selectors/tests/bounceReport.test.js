@@ -58,7 +58,7 @@ describe('Selector: Bounce Report', () => {
       categories: reshapedCategories,
       types: bandTypes,
       reportOptions: testState.reportOptions,
-      searchOptions: searchOptions
+      bounceSearchOptions: searchOptions
     });
     expect(bounceHelpers.getBandTypes).toHaveBeenCalledWith(formattedAggregates);
     expect(bounceHelpers.reshapeCategories).toHaveBeenCalledWith(testState.bounceReport.classifications);

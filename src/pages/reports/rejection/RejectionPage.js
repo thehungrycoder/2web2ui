@@ -51,11 +51,11 @@ export class RejectionPage extends Component {
   }
 
   render() {
-    const { loading, searchOptions } = this.props;
+    const { loading, rejectionSearchOptions } = this.props;
 
     return (
       <Page title='Rejections Report'>
-        <ReportOptions reportLoading={loading} searchOptions={searchOptions} />
+        <ReportOptions reportLoading={loading} searchOptions={rejectionSearchOptions} />
         {this.renderTopLevelMetrics()}
         <Panel title='Rejection Reasons' className='RejectionTable'>
           {this.renderCollection()}
@@ -71,7 +71,7 @@ const mapStateToProps = (state) => ({
   aggregates: state.rejectionReport.aggregates,
   list: state.rejectionReport.list,
   reportOptions: state.reportOptions,
-  searchOptions: selectReportSearchOptions(state)
+  rejectionSearchOptions: selectReportSearchOptions(state)
 });
 
 const mapDispatchToProps = {

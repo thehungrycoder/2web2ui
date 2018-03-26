@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -6,13 +5,13 @@ import qs from 'query-string';
 import { relativeDateOptions } from 'src/helpers/date';
 import { Panel, Button, WindowEvent, Checkbox } from '@sparkpost/matchbox';
 import { Modal, CopyField } from 'src/components';
+import { onEnter, onEscape } from 'src/helpers/keyEvents';
 import _ from 'lodash';
 
 export class ShareModal extends Component {
   state = {
     pinned: true,
-    open: false,
-    searchOptions: {}
+    open: false
   }
 
   componentDidMount() {
@@ -27,15 +26,14 @@ export class ShareModal extends Component {
 
   updateLink = () => {
     const { searchOptions, history, location } = this.props;
-    // console.log(searchOptions);
     const search = qs.stringify(searchOptions, { encode: false });
 
-    this.setState({ searchOptions });
     history.replace({ pathname: location.pathname, search });
   }
 
   getLink() {
-    const { searchOptions, pinned } = this.state;
+    const { searchOptions } = this.props;
+    const { pinned } = this.state;
     const modifiedQuery = { ...searchOptions };
 
     if (pinned) {
@@ -54,9 +52,12 @@ export class ShareModal extends Component {
   }
 
   handleKeydown = (e) => {
-    if (e.key === 'Escape' || e.key === 'Enter') {
-      this.toggleModal(e);
-    }
+    onEnter(this.toggleModal)(e);
+    onEscape(this.toggleModal)(e);
+  }
+
+  handlePin = () => {
+    this.setState({ pinned: !this.state.pinned });
   }
 
   toggleModal = () => {
@@ -64,7 +65,8 @@ export class ShareModal extends Component {
   }
 
   renderPinToggle() {
-    const { searchOptions, pinned } = this.state;
+    const { searchOptions } = this.props;
+    const { pinned } = this.state;
     const relativeRange = relativeDateOptions.find((item) => item.value === searchOptions.range);
     const isRelative = relativeRange && searchOptions.range !== 'custom';
 
@@ -77,7 +79,7 @@ export class ShareModal extends Component {
         id='pin-relative-link'
         label='Pin dates for this link'
         checked={pinned}
-        onChange={() => this.setState({ pinned: !pinned })}
+        onChange={this.handlePin}
         helpText={<span>Pins this report's relative time range to its calculated dates (this is usually what you want when sharing a report).</span>}
       />
     );

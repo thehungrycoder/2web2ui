@@ -100,11 +100,11 @@ export class BouncePage extends Component {
   }
 
   render() {
-    const { chartLoading, searchOptions } = this.props;
+    const { chartLoading, bounceSearchOptions } = this.props;
 
     return (
       <Page title='Bounce Report'>
-        <ReportOptions reportLoading={chartLoading} searchOptions={searchOptions} />
+        <ReportOptions reportLoading={chartLoading} searchOptions={bounceSearchOptions} />
         { this.renderTopLevelMetrics() }
         { this.renderChart() }
         <Panel title='Bounced Messages' className='ReasonsTable'>
