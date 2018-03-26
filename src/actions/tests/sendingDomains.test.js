@@ -31,8 +31,16 @@ describe('Action Creator: Sending Domains', () => {
     });
 
     it('should dispatch verify mailbox action', () => {
-      const args = { id: 'sub.com', mailbox: 'example@test.com', subaccount: 101 };
+      const args = { id: 'sub.com', mailbox: 'example', subaccount: 101 };
       expect(sendingDomains.verifyMailbox(args)).toMatchSnapshot();
+    });
+
+    it('should verify as postmaster when using the mailbox action', () => {
+      expect(sendingDomains.verifyMailbox({ id: 'sub.com', mailbox: 'postmaster', subaccount: 101 })).toMatchSnapshot();
+    });
+
+    it('should verify as abuse when using the mailbox action', () => {
+      expect(sendingDomains.verifyMailbox({ id: 'sub.com', mailbox: 'abuse', subaccount: 101 })).toMatchSnapshot();
     });
 
     it('should dispatch verify postmaster action', () => {
