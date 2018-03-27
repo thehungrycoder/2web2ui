@@ -1,15 +1,13 @@
+import _ from 'lodash';
 import { currentPlanSelector, deepLinkablePlansSelector, getPlansSelector } from './accountBillingInfo';
 import { isSelfServeBilling } from 'src/helpers/conditions/account';
-import _ from 'lodash';
 
-export function onboardingInitialValues(state, props) {
+export function onboardingInitialValues(state, { plan: code } = {}) {
   const plans = getPlansSelector(state);
-  const { location: { state: locationState = {}}} = props;
-  const planCode = locationState.plan;
-  const selectedPlan = planCode ? _.find(plans, { code: planCode }) : null;
+  const initialPlan = _.find(deepLinkablePlansSelector(state), { code }) || _.first(plans);
 
   return {
-    planpicker: selectedPlan ? selectedPlan : _.first(plans),
+    planpicker: initialPlan,
     billingAddress: {
       firstName: state.currentUser.first_name,
       lastName: state.currentUser.last_name

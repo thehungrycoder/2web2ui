@@ -8,8 +8,9 @@ Object {
   },
   "email": "ann@perkins.com",
   "planpicker": Object {
-    "billingId": "ABC",
-    "code": "50M-shh",
+    "billingId": "ias",
+    "code": "im a secret",
+    "isFree": false,
     "status": "secret",
   },
 }
@@ -37,8 +38,10 @@ Object {
   },
   "email": "ann@perkins.com",
   "planpicker": Object {
+    "billingId": "inf",
     "code": "im not free",
     "isFree": false,
+    "status": "public",
   },
 }
 `;
@@ -50,8 +53,10 @@ Object {
     "lastName": "perkins",
   },
   "planpicker": Object {
+    "billingId": "if",
     "code": "im free",
     "isFree": true,
+    "status": "public",
   },
 }
 `;
@@ -63,8 +68,10 @@ Object {
     "lastName": "perkins",
   },
   "planpicker": Object {
+    "billingId": "if",
     "code": "im free",
     "isFree": true,
+    "status": "public",
   },
 }
 `;
@@ -76,8 +83,25 @@ Object {
     "lastName": "perkins",
   },
   "planpicker": Object {
+    "billingId": "inf",
     "code": "im not free",
     "isFree": false,
+    "status": "public",
+  },
+}
+`;
+
+exports[`Selector: Account billing form onboardingInitialValues should set the plan picker to the secret plan specified by /join 1`] = `
+Object {
+  "billingAddress": Object {
+    "firstName": "ann",
+    "lastName": "perkins",
+  },
+  "planpicker": Object {
+    "billingId": "ias",
+    "code": "im a secret",
+    "isFree": false,
+    "status": "secret",
   },
 }
 `;

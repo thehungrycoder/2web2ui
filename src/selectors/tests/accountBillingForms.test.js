@@ -4,11 +4,6 @@ import { isSelfServeBilling } from 'src/helpers/conditions/account';
 
 jest.mock('src/helpers/conditions/account');
 
-const basePlans = [
-  { isFree: true, code: 'im free' },
-  { isFree: false, code: 'im not free' }
-];
-
 const baseUser = {
   first_name: 'ann',
   last_name: 'perkins',
@@ -19,25 +14,26 @@ const baseUser = {
 };
 
 describe('Selector: Account billing form', () => {
-  let plans;
   let user;
   let store;
-  let props;
 
   beforeEach(() => {
+    billingInfo.getPlansSelector = jest.fn(() => [
+      { billingId: 'if', code: 'im free', isFree: true, status: 'public' },
+      { billingId: 'inf', code: 'im not free', isFree: false, status: 'public' }
+    ]);
+    billingInfo.deepLinkablePlansSelector = jest.fn(() => [
+      { billingId: 'inf', code: 'im not free', isFree: false, status: 'public' },
+      { billingId: 'ias', code: 'im a secret', isFree: false, status: 'secret' }
+    ]);
     isSelfServeBilling.mockImplementation(() => true);
-    plans = basePlans.slice();
     user = Object.assign({}, baseUser);
     store = { currentUser: user };
-    props = { location: {}};
   });
 
   describe('changePlanInitialValues when NOT self serve', () => {
     beforeEach(() => {
       billingInfo.currentPlanSelector = jest.fn();
-      billingInfo.deepLinkablePlansSelector = jest.fn();
-      billingInfo.publicPlansSelector = jest.fn();
-      billingInfo.getPlansSelector = jest.fn();
       isSelfServeBilling.mockImplementation(() => false);
     });
 
@@ -48,40 +44,29 @@ describe('Selector: Account billing form', () => {
 
     it('should return change plan values: without billing id', () => {
       billingInfo.currentPlanSelector.mockReturnValue({ code: 'abc' });
-      billingInfo.getPlansSelector.mockReturnValue([
-        { isFree: true, code: 'im free' },
-        { isFree: false, code: 'im not free' }
-      ]);
-
       expect(changePlanInitialValues(store)).toMatchSnapshot();
     });
 
     it('should find and return secret plan', () => {
-      billingInfo.deepLinkablePlansSelector.mockReturnValue([
-        { billingId: 'ABC', code: '50M-shh', status: 'secret' }
-      ]);
-
-      expect(changePlanInitialValues(store, { code: '50M-shh' })).toMatchSnapshot();
+      expect(changePlanInitialValues(store, { code: 'im a secret' })).toMatchSnapshot();
     });
   });
 
   describe('onboardingInitialValues', () => {
-    beforeEach(() => {
-      billingInfo.getPlansSelector = jest.fn(() => plans);
-    });
-
     it('should set reasonable defaults', () => {
-      expect(onboardingInitialValues(store, props)).toMatchSnapshot();
+      expect(onboardingInitialValues(store)).toMatchSnapshot();
     });
 
     it('should set the plan picker to the plan specified by /join', () => {
-      props.location = { state: { plan: 'im not free' }};
-      expect(onboardingInitialValues(store, props)).toMatchSnapshot();
+      expect(onboardingInitialValues(store, { plan: 'im not free' })).toMatchSnapshot();
     });
 
     it('should gracefully handle invalid plan values from /join', () => {
-      props.location = { state: { plan: 'im not even a real plan' }};
-      expect(onboardingInitialValues(store, props)).toMatchSnapshot();
+      expect(onboardingInitialValues(store, { plan: 'im not even a real plan' })).toMatchSnapshot();
+    });
+
+    it('should set the plan picker to the secret plan specified by /join', () => {
+      expect(onboardingInitialValues(store, { plan: 'im a secret' })).toMatchSnapshot();
     });
   });
 

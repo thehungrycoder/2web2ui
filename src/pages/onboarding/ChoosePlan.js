@@ -115,13 +115,14 @@ export class OnboardingPlanPage extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state, props) => {
   const selector = formValueSelector(FORM_NAME);
+
   return {
     loading: Boolean(state.account.loading || state.billing.plansLoading || state.billing.countriesLoading),
     billing: state.billing,
     plans: getPlansSelector(state),
-    initialValues: onboardingInitialValues(state, ownProps),
+    initialValues: onboardingInitialValues(state, props.location.state),
     selectedPlan: selector(state, 'planpicker'),
     hasError: state.billing.plansError || state.billing.countriesError
   };
