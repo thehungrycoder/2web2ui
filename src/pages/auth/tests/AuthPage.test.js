@@ -43,9 +43,22 @@ it('renders correctly when there is a login error', () => {
   expect(wrapper).toMatchSnapshot();
 });
 
-it('redirects when logged in', () => {
+it('redirects to default route when logged in', () => {
   wrapper.setProps({ auth: { loggedIn: true }});
   expect(props.history.push).toHaveBeenCalledWith(DEFAULT_REDIRECT_ROUTE);
+});
+
+it('redirects to desired route when logged in', () => {
+  wrapper.setProps({
+    auth: { loggedIn: true },
+    location: {
+      state: {
+        redirectAfterLogin: '/path'
+      }
+    }
+  });
+
+  expect(props.history.push).toHaveBeenCalledWith('/path');
 });
 
 it('should display tfa form when TFA is enabled', () => {

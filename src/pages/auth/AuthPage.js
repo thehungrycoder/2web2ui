@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -31,7 +32,7 @@ export class AuthPage extends Component {
     const { ssoUser, loggedIn } = nextProps.auth;
 
     if (loggedIn) {
-      this.redirect();
+      this.redirect(nextProps);
       return;
     }
 
@@ -46,8 +47,9 @@ export class AuthPage extends Component {
     }
   }
 
-  redirect() {
-    this.props.history.push(DEFAULT_REDIRECT_ROUTE);
+  redirect(nextProps) {
+    const route = _.get(nextProps, 'location.state.redirectAfterLogin', DEFAULT_REDIRECT_ROUTE);
+    this.props.history.push(route);
   }
 
   ssoSignIn(username) {
