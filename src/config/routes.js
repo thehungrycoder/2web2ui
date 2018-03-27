@@ -102,6 +102,11 @@ const routes = [
     title: 'Finish Your Registration'
   },
   {
+    path: '/sign-up',
+    public: true,
+    redirect: '/join'
+  },
+  {
     path: '/join',
     public: true,
     forceLogout: true,
