@@ -259,7 +259,7 @@ exports[`Component: ActiveFilters should render initially and sync to state corr
         >
           <TextField
             id="campaign_ids"
-            label="Campagin IDs"
+            label="Campaign IDs"
             onChange={[Function]}
             required={false}
             resize="both"
