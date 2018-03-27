@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: CookieConsent ConsentBar should render correctly 1`] = `
+<div>
+  <div>
+    <Snackbar
+      maxWidth={700}
+      onDismiss={[MockFunction]}
+      status="default"
+    >
+      We use cookies to offer you a better browsing experience, analyze site traffic, and personalize content and advertisements.  Read more about how we use cookies and how you can control them by visiting our 
+      <UnstyledLink
+        external={true}
+        to="https://www.sparkpost.com/policies/privacy/"
+      >
+        Cookie Policy
+      </UnstyledLink>
+      .  Note that parts of our site will not function properly if you disable them.  If you continue to use this site without disabling cookies, you consent to our use of them.
+    </Snackbar>
+  </div>
+</div>
+`;
+
+exports[`Component: CookieConsent should not render the banner with consent 1`] = `""`;
+
+exports[`Component: CookieConsent should render the banner without consent 1`] = `
+<Component
+  onDismiss={[Function]}
+/>
+`;
