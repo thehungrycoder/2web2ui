@@ -36,6 +36,12 @@ export const publicPlansSelector = createSelector(
   (plans) => _.sortBy(plans.filter((plan) => plan.status === 'public'), (plan) => plan.volume)
 );
 
+// Get public and secret paid plans that sales team can deep link to for special customers
+export const deepLinkablePlansSelector = createSelector(
+  [plansSelector],
+  (plans) => plans.filter((plan) => (plan.status === 'secret' || plan.status === 'public') && !plan.isFree)
+);
+
 const awsPlans = createSelector(
   [plansSelector],
   (plans) => _.sortBy(plans.filter((plan) => plan.awsMarketplace === true), (plan) => plan.volume)

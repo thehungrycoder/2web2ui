@@ -1,5 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Selector: Account billing form changePlanInitialValues when NOT self serve should find and return secret plan 1`] = `
+Object {
+  "billingAddress": Object {
+    "firstName": "ann",
+    "lastName": "perkins",
+  },
+  "email": "ann@perkins.com",
+  "planpicker": Object {
+    "billingId": "ABC",
+    "code": "50M-shh",
+    "status": "secret",
+  },
+}
+`;
+
 exports[`Selector: Account billing form changePlanInitialValues when NOT self serve should return change plan values: with a billing id 1`] = `
 Object {
   "billingAddress": Object {

@@ -7,6 +7,18 @@ Object {
 }
 `;
 
+exports[`Selector: deep linkable plans should return public and secret paid plans 1`] = `
+Array [
+  Object {
+    "isFree": false,
+    "status": "public",
+  },
+  Object {
+    "status": "secret",
+  },
+]
+`;
+
 exports[`Selector: public plans should get public plans and sort by volume 1`] = `
 Array [
   Object {

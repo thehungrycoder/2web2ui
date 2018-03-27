@@ -27,6 +27,23 @@ describe('Selector: public plans', () => {
   });
 });
 
+describe('Selector: deep linkable plans', () => {
+  it('should return public and secret paid plans', () => {
+    const state = {
+      billing: {
+        plans: [
+          { status: 'deprecated' },
+          { status: 'public', isFree: true },
+          { status: 'public', isFree: false },
+          { status: 'secret' }
+        ]
+      }
+    };
+
+    expect(billingInfo.deepLinkablePlansSelector(state)).toMatchSnapshot();
+  });
+});
+
 describe('Selector: current plan', () => {
   let state;
 

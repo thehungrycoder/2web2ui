@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, formValueSelector } from 'redux-form';
 import { withRouter } from 'react-router-dom';
+import qs from 'query-string';
+
 import { billingCreate, billingUpdate, updateSubscription } from 'src/actions/billing';
 import { showAlert } from 'src/actions/globalAlert';
 import { changePlanInitialValues } from 'src/selectors/accountBillingForms';
@@ -121,8 +123,10 @@ export class ChangePlan extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, props) => {
   const selector = formValueSelector(FORMNAME);
+  const search = qs.parse(props.location.search);
+
   return {
     account: state.account,
     billing: state.billing,
@@ -131,7 +135,7 @@ const mapStateToProps = (state) => {
     plans: getPlansSelector(state),
     currentPlan: currentPlanSelector(state),
     selectedPlan: selector(state, 'planpicker'),
-    initialValues: changePlanInitialValues(state)
+    initialValues: changePlanInitialValues(state, search)
   };
 };
 

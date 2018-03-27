@@ -1,4 +1,4 @@
-import { currentPlanSelector, getPlansSelector } from './accountBillingInfo';
+import { currentPlanSelector, deepLinkablePlansSelector, getPlansSelector } from './accountBillingInfo';
 import { isSelfServeBilling } from 'src/helpers/conditions/account';
 import _ from 'lodash';
 
@@ -20,9 +20,8 @@ export function onboardingInitialValues(state, props) {
 /**
  * Selects initial values for all the forms on account/billing/plan
  */
-export function changePlanInitialValues(state) {
-
-  let initialPlan = currentPlanSelector(state);
+export function changePlanInitialValues(state, { code } = {}) {
+  let initialPlan = _.find(deepLinkablePlansSelector(state), { code }) || currentPlanSelector(state);
 
   // Plans outside zuora won't be selectable through plan picker (only possible through manually billed accounts)
   // Picker default to the highest plan

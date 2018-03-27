@@ -35,6 +35,7 @@ describe('Selector: Account billing form', () => {
   describe('changePlanInitialValues when NOT self serve', () => {
     beforeEach(() => {
       billingInfo.currentPlanSelector = jest.fn();
+      billingInfo.deepLinkablePlansSelector = jest.fn();
       billingInfo.publicPlansSelector = jest.fn();
       billingInfo.getPlansSelector = jest.fn();
       isSelfServeBilling.mockImplementation(() => false);
@@ -53,6 +54,14 @@ describe('Selector: Account billing form', () => {
       ]);
 
       expect(changePlanInitialValues(store)).toMatchSnapshot();
+    });
+
+    it('should find and return secret plan', () => {
+      billingInfo.deepLinkablePlansSelector.mockReturnValue([
+        { billingId: 'ABC', code: '50M-shh', status: 'secret' }
+      ]);
+
+      expect(changePlanInitialValues(store, { code: '50M-shh' })).toMatchSnapshot();
     });
   });
 
