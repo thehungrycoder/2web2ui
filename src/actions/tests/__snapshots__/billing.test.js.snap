@@ -46,6 +46,16 @@ Array [
 ]
 `;
 
+exports[`Action Creator: Billing collectPayments dispatches a collection action 1`] = `
+Object {
+  "meta": Object {
+    "method": "POST",
+    "url": "/account/billing/collect",
+  },
+  "type": "COLLECT_PAYMENTS",
+}
+`;
+
 exports[`Action Creator: Billing should dispatch a chained billing create action 1`] = `
 Array [
   Object {
@@ -155,6 +165,13 @@ Array [
       "url": "/account/subscription/check",
     },
     "type": "SYNC_SUBSCRIPTION",
+  },
+  Object {
+    "meta": Object {
+      "method": "POST",
+      "url": "/account/billing/collect",
+    },
+    "type": "COLLECT_PAYMENTS",
   },
   Object {
     "meta": Object {
