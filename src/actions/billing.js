@@ -1,4 +1,4 @@
-/* eslint max-lines: ["error", 200] */
+/* eslint max-lines: ["error", 215] */
 import { formatDataForCors, formatCreateData, formatUpdateData, formatContactData } from 'src/helpers/billing';
 import { fetch as fetchAccount } from './account';
 import { list as getSendingIps } from './sendingIps';
@@ -147,6 +147,20 @@ export function billingCreate(values) {
   };
 }
 
+/**
+ * attempts to collect payments (like when payment method is updated) to make sure pending payments are charged
+ */
+
+export function collectPayments() {
+  return sparkpostApiRequest({
+    type: 'COLLECT_PAYMENTS',
+    meta: {
+      method: 'POST',
+      url: '/account/billing/collect'
+    }
+  });
+}
+
 // note: this action creator should detect
 // 1. if payment info is present, contact zuora first
 // 2. otherwise it's just a call to our API + sync + refetch
@@ -174,6 +188,8 @@ export function billingUpdate(values) {
 
       // sync our db with new Zuora state
       .then(() => dispatch(syncSubscription()))
+
+      .then(() => dispatch(collectPayments()))
 
       // refetch the account
       .then(() => dispatch(fetchAccount({ include: 'usage,billing' })));
