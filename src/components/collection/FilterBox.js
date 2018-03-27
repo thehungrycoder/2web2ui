@@ -1,23 +1,18 @@
 import React from 'react';
 import { TextField, Icon, Panel } from '@sparkpost/matchbox';
 import _ from 'lodash';
+import { getRandomExampleSearch } from './helpers/exampleSearch';
 
-export default function CollectionFilterBox({ onChange, rows, exampleModifiers = Object.keys(rows[0]), keyMap = {}}) {
-  function handleChange(e) {
-    onChange(e.target.value);
-  }
-
-  const exampleString = exampleModifiers.reduce((examples, modifier) => {
-    const realKey = keyMap[modifier] || modifier;
-    const rowWithValue = _.find(rows, realKey) || {};
-    const value = rowWithValue[realKey];
-    return [ ...examples, `${modifier}:${value}` ];
-  }, []).join(' ');
-  const placeholder = `Filter results e.g. ${exampleString}`;
+export default function CollectionFilterBox(props) {
+  const placeholder = `Filter results e.g. ${getRandomExampleSearch(props)}`;
 
   return (
     <Panel sectioned>
-      <TextField prefix={<Icon name='Search' />} placeholder={placeholder} onChange={handleChange} />
+      <TextField
+        prefix={<Icon name='Search' />}
+        placeholder={placeholder}
+        onChange={(e) => props.onChange(e.target.value)}
+      />
     </Panel>
   );
 }
