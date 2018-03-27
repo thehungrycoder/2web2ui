@@ -15,7 +15,9 @@ describe('Component: ProtectedRoute', () => {
       component: jest.fn(),
       path: '/foo/bar',
       location: {
-        pathname: 'path'
+        pathname: '/path',
+        search: '',
+        hash: ''
       }
     };
 
@@ -29,14 +31,17 @@ describe('Component: ProtectedRoute', () => {
   it('should render route if logged in', () => {
     wrapper.instance().renderRoute();
     expect(wrapper).toMatchSnapshot();
-
   });
 
   it('should redirect to auth if you are not logged in', () => {
-    wrapper.setProps({ auth: { loggedIn: false }});
-    wrapper.instance().renderRoute();
-    expect(wrapper).toMatchSnapshot();
+    wrapper.setProps({
+      auth: { loggedIn: false },
+      location: {
+        pathname: '/path',
+        search: '?deep=true',
+        hash: '#anchor'
+      }
+    });
+    expect(wrapper.instance().renderRoute()).toMatchSnapshot();
   });
-
-
 });

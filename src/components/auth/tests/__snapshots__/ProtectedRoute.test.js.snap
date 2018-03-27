@@ -1,14 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Component: ProtectedRoute should redirect to auth if you are not logged in 1`] = `
-<Route
-  location={
+<Redirect
+  push={false}
+  to={
     Object {
-      "pathname": "path",
+      "pathname": "/auth",
+      "state": Object {
+        "redirectAfterLogin": "/path?deep=true#anchor",
+      },
     }
   }
-  path="/foo/bar"
-  render={[Function]}
 />
 `;
 
@@ -16,7 +18,9 @@ exports[`Component: ProtectedRoute should render component 1`] = `
 <Route
   location={
     Object {
-      "pathname": "path",
+      "hash": "",
+      "pathname": "/path",
+      "search": "",
     }
   }
   path="/foo/bar"
@@ -28,7 +32,9 @@ exports[`Component: ProtectedRoute should render route if logged in 1`] = `
 <Route
   location={
     Object {
-      "pathname": "path",
+      "hash": "",
+      "pathname": "/path",
+      "search": "",
     }
   }
   path="/foo/bar"

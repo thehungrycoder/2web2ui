@@ -24,16 +24,12 @@ export class ProtectedRoute extends Component {
   }
 
   renderRoute = (reactRouterProps) => {
-    const { auth } = this.props;
+    const { auth, location } = this.props;
+    const redirectAfterLogin = `${location.pathname}${location.search}${location.hash}`;
 
     return auth.loggedIn
       ? this.renderComponent(reactRouterProps)
-      : (
-        <Redirect to={{
-          pathname: '/auth',
-          state: { redirectAfterLogin: this.props.location.pathname }
-        }}/>
-      );
+      : <Redirect to={{ pathname: '/auth', state: { redirectAfterLogin }}} />;
   }
 
   render() {
