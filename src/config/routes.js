@@ -26,6 +26,7 @@ import {
 import onboarding from 'src/pages/onboarding';
 import { default as emailVerification } from 'src/components/emailVerification/EmailVerification';
 import { emailVerificationRedirect, emailRedirects } from './emailRoutes';
+import SecretBillingPlanOrBillingSummaryPage from './SecretBillingPlanOrBillingSummaryPage';
 
 import { hasGrants, all, not } from 'src/helpers/conditions';
 import { isEnterprise } from 'src/helpers/conditions/account';
@@ -426,7 +427,7 @@ const routes = [
   },
   {
     path: '/account/billing',
-    component: billing.SummaryPage,
+    component: SecretBillingPlanOrBillingSummaryPage,
     condition: all(hasGrants('account/manage'), not(isEnterprise), not(isHeroku), not(isAzure)),
     layout: App,
     title: 'Billing'
