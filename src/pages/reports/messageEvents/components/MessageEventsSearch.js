@@ -15,6 +15,7 @@ import { parseSearch } from 'src/helpers/messageEvents';
 import { stringToArray } from 'src/helpers/string';
 import { onEnter } from 'src/helpers/keyEvents';
 import { RELATIVE_DATE_OPTIONS } from './searchConfig';
+import { DATE_FORMATS } from 'src/constants';
 
 export class MessageEventsSearch extends Component {
 
@@ -68,12 +69,13 @@ export class MessageEventsSearch extends Component {
       <Panel>
         <Panel.Section>
           <Grid>
-            <Grid.Column xs={12} md={5}>
+            <Grid.Column xs={12} md={5} xl={6}>
               <DatePicker
                 {...search.dateOptions}
                 relativeDateOptions={RELATIVE_DATE_OPTIONS}
                 disabled={loading}
                 onChange={refreshMessageEventsDateRange}
+                dateFieldFormat={DATE_FORMATS.READABLE_DATE_TIME}
                 datePickerProps={{
                   disabledDays: {
                     after: now,
@@ -83,7 +85,7 @@ export class MessageEventsSearch extends Component {
                 }}
               />
             </Grid.Column>
-            <Grid.Column xs={12} md={3} xl={4}>
+            <Grid.Column xs={12} md={5}>
               <TextField
                 labelHidden
                 label="Recipient Email(s)"
@@ -92,12 +94,10 @@ export class MessageEventsSearch extends Component {
                 onKeyDown={onEnter(this.handleRecipientsChange)}
                 onFocus={() => this.setState({ recipientError: null })}
                 error={this.state.recipientError}
+                connectRight={<AdvancedFilters />}
               />
             </Grid.Column>
-            <Grid.Column xs={12} md={2}>
-              <AdvancedFilters />
-            </Grid.Column>
-            <Grid.Column xs={12} md={2} xl={1}>
+            <Grid.Column>
               <ShareModal disabled={loading} searchOptions={searchOptions} />
             </Grid.Column>
           </Grid>

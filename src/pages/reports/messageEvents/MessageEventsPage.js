@@ -13,7 +13,7 @@ const errorMsg = 'Sorry, we seem to have had some trouble loading your message e
 const emptyMesasage = 'There are no message events for your current query';
 const maxResults = 1000;
 const maxResultsTitle = 'Note: A maximum of 1,000 results displayed';
-const maxResultsText = 'SparkPost retains message event data for 10 days.';
+const maxResultsText = 'You may want to narrow your search for better results. SparkPost retains message event data for 10 days.';
 
 const columns = [
   { label: 'Time', sortKey: 'timestamp' },

@@ -25,7 +25,7 @@ exports[`Page: Message Events tests renders banner correctly with too many (1000
   status="info"
   title="Note: A maximum of 1,000 results displayed"
 >
-  SparkPost retains message event data for 10 days.
+  You may want to narrow your search for better results. SparkPost retains message event data for 10 days.
 </Banner>
 `;
 
