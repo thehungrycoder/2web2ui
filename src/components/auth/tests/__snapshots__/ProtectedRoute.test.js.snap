@@ -7,7 +7,11 @@ exports[`Component: ProtectedRoute should redirect to auth if you are not logged
     Object {
       "pathname": "/auth",
       "state": Object {
-        "redirectAfterLogin": "/path?deep=true#anchor",
+        "redirectAfterLogin": Object {
+          "hash": "#anchor",
+          "pathname": "/path",
+          "search": "?deep=true",
+        },
       },
     }
   }
