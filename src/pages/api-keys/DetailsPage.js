@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { Page, Panel } from '@sparkpost/matchbox';
 
 import { deleteApiKey, getApiKey, updateApiKey, listGrants, listSubaccountGrants } from 'src/actions/api-keys';
@@ -61,10 +61,14 @@ export class ApiKeysDetailsPage extends Component {
   };
 
   render() {
-    const { apiKey, loading } = this.props;
+    const { apiKey, error, loading } = this.props;
 
     if (loading) {
       return <Loading />;
+    }
+
+    if (error) {
+      return <Redirect to='/account/api-keys' />;
     }
 
     return (
@@ -101,6 +105,4 @@ const mapStateToProps = (state, props) => {
   };
 };
 
-export default withRouter(
-  connect(mapStateToProps, { getApiKey, updateApiKey, listGrants, listSubaccountGrants, deleteApiKey, showAlert })(ApiKeysDetailsPage)
-);
+export default connect(mapStateToProps, { getApiKey, updateApiKey, listGrants, listSubaccountGrants, deleteApiKey, showAlert })(ApiKeysDetailsPage);

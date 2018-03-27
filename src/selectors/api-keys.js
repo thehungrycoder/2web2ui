@@ -10,6 +10,7 @@ const getSubaccountGrantsArray = (state) => state.apiKeys.subaccountGrants;
 export const selectApiKeyId = (props) => props.match.params.id;
 const getGrantsLoading = (state) => state.apiKeys.grantsLoading;
 const getSubaccountGrantsLoading = (state) => state.apiKeys.subaccountGrantsLoading;
+const getCurrentUsername = (state) => state.currentUser.username;
 
 // Convert grants array to an object keyed by `grant.key`
 export const getGrants = createSelector(getGrantsArray, (grants) =>
@@ -84,4 +85,9 @@ export const selectApiKeysForSending = createSelector(
 export const selectApiKeysForSmtp = createSelector(
   [getApiKeys],
   (apiKeys) => apiKeys.filter((key) => key.grants.includes('smtp/inject'))
+);
+
+export const selectKeysForAccount = createSelector(
+  [getApiKeys, getCurrentUsername],
+  (keys, currentUsername) => keys.map((key) => ({ ...key, isOwnedByCurrentUser: Boolean((key.username === currentUsername) || (!key.username && key.subaccount_id)) }))
 );

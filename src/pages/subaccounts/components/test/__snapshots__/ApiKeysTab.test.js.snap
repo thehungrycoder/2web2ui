@@ -69,6 +69,7 @@ exports[`ApiKeysTab normal props 1`] = `
           "keyMap": Object {
             "key": "short_key",
             "name": "label",
+            "owner": "username",
           },
           "show": true,
         }

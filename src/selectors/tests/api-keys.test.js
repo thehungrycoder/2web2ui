@@ -112,4 +112,36 @@ describe('ApiKey Selectors', () => {
 
     expect(apiKeys.selectApiKeysForSending(store)).toMatchSnapshot();
   });
+
+  it('should return a list of keys with ownership details', () => {
+    const store = {
+      currentUser: {
+        username: 'abc'
+      },
+      apiKeys: {
+        keys: [
+          {
+            // same username
+            username: 'abc'
+          },
+          {
+            // different username
+            username: 'other'
+          },
+          {
+            // no username but has a subaccount_id
+            subaccount_id: 123
+          },
+          {
+            // no username and no subaccount_id (should never happen but should produce false if so)
+            lol: 'wut'
+          }
+        ]
+      }
+    };
+
+    const list = apiKeys.selectKeysForAccount(store);
+    expect(list.map((key) => key.isOwnedByCurrentUser)).toEqual([true, false, true, false]);
+    expect(list).toMatchSnapshot();
+  });
 });

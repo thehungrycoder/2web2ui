@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Page } from '@sparkpost/matchbox';
+import { Page, Tooltip, Icon } from '@sparkpost/matchbox';
 import { listApiKeys, hideNewApiKey } from 'src/actions/api-keys';
+import { selectKeysForAccount } from 'src/selectors/api-keys';
 import { Loading, SubaccountTag, TableCollection, ApiErrorBanner, ApiKeySuccessBanner, ShortKeyCode } from 'src/components';
 import { filterBoxConfig } from './tableConfig';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
@@ -28,10 +29,19 @@ export class ListPage extends Component {
     this.props.listApiKeys();
   }
 
-  getRowData = ({ id, label, short_key, subaccount_id }) => {
+  getLabel = ({ isOwnedByCurrentUser, id, subaccount_id, label, username }) => {
+    if (isOwnedByCurrentUser) {
+      return <Link to={`/account/api-keys/details/${id}${setSubaccountQuery(subaccount_id)}`}>{label}</Link>;
+    } else {
+      return <span>{label}<br/><small><Tooltip dark content='API keys are only editable by their owner'>(owner: {username}) <Icon name='Info' /></Tooltip></small></span>;
+    }
+  }
+
+  getRowData = (key) => {
+    const { short_key, subaccount_id } = key;
     const { hasSubaccounts } = this.props;
     const rowData = [
-      <Link to={`/account/api-keys/details/${id}${setSubaccountQuery(subaccount_id)}`}>{label}</Link>,
+      this.getLabel(key),
       <ShortKeyCode shortKey={short_key} />
     ];
 
@@ -95,7 +105,7 @@ export class ListPage extends Component {
   }
 
   render() {
-    const { error, loading, newKey, count } = this.props;
+    const { error, loading, newKey, keys } = this.props;
 
     if (loading) {
       return <Loading />;
@@ -103,7 +113,7 @@ export class ListPage extends Component {
 
     return (
       <Page primaryAction={primaryAction} title='API Keys' empty={{
-        show: count === 0,
+        show: keys.length === 0,
         image: 'Setup',
         content: <p>Create an API key you can use to access our REST or SMTP API services.</p>,
         secondaryAction: {
@@ -119,11 +129,10 @@ export class ListPage extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const { error, keys, newKey, keysLoading } = state.apiKeys;
+  const { error, newKey, keysLoading } = state.apiKeys;
   return {
-    count: keys.length,
     hasSubaccounts: hasSubaccounts(state),
-    keys,
+    keys: selectKeysForAccount(state),
     error,
     newKey,
     loading: keysLoading
