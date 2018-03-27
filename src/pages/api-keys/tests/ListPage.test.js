@@ -12,19 +12,29 @@ describe('Api Keys List Page', () => {
     hideNewApiKey,
     listApiKeys,
     hasSubaccounts: false,
-    count: 30,
     keys: [
       {
         id: '123id',
         label: 'Test Key 1',
         short_key: 'ab01',
         grants: ['metrics/view'],
-        subaccount_id: 101
+        subaccount_id: 101,
+        isOwnedByCurrentUser: true
       },
       {
+        id: '456id',
         label: 'Test Key 2',
         short_key: 'fe98',
-        grants: ['smtp/inject']
+        grants: ['smtp/inject'],
+        isOwnedByCurrentUser: true
+      },
+      {
+        id: '789id',
+        label: 'Other User Key',
+        short_key: 'c00l',
+        grants: ['metrics/view'],
+        username: 'other_user',
+        isOwnedByCurrentUser: false
       }
     ]
   };
@@ -37,6 +47,15 @@ describe('Api Keys List Page', () => {
 
   it('renders correctly', () => {
     expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders when there are no keys', () => {
+    wrapper.setProps({ keys: []});
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('gets row data correctly', () => {
+    expect(props.keys.map(wrapper.instance().getRowData)).toMatchSnapshot();
   });
 
   it('renders errors when present', () => {

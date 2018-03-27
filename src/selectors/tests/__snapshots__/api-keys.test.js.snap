@@ -70,3 +70,24 @@ Object {
   "sub grant two": false,
 }
 `;
+
+exports[`ApiKey Selectors should return a list of keys with ownership details 1`] = `
+Array [
+  Object {
+    "isOwnedByCurrentUser": true,
+    "username": "abc",
+  },
+  Object {
+    "isOwnedByCurrentUser": false,
+    "username": "other",
+  },
+  Object {
+    "isOwnedByCurrentUser": true,
+    "subaccount_id": 123,
+  },
+  Object {
+    "isOwnedByCurrentUser": false,
+    "lol": "wut",
+  },
+]
+`;

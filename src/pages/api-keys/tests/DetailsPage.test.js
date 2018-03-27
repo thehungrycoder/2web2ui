@@ -45,6 +45,11 @@ it('should render loading component while loading', () => {
   expect(wrapper).toMatchSnapshot();
 });
 
+it('should render a redirect when an error is present', () => {
+  wrapper.setProps({ error: new Error('oops') });
+  expect(wrapper).toMatchSnapshot();
+});
+
 it('toggles modal', () => {
   expect(wrapper).toHaveState('showDeleteModal', false);
   wrapper.instance().onToggleDelete();

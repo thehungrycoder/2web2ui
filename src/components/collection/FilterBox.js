@@ -1,17 +1,21 @@
 import React from 'react';
 import { TextField, Icon } from '@sparkpost/matchbox';
+import _ from 'lodash';
 
-export default function CollectionFilterBox({ onChange, rows, exampleModifiers = Object.keys(rows[0]) }) {
+export default function CollectionFilterBox({ onChange, rows, exampleModifiers = Object.keys(rows[0]), keyMap = {}}) {
   function handleChange(e) {
     onChange(e.target.value);
   }
 
-  const first = exampleModifiers[0];
-  const second = exampleModifiers[1] || first;
-  const placeholder = `Filter results by ${exampleModifiers.slice(0, 3).join(', ')}, etc...`;
-  const helpText = <span>Advanced filtering: try using modifiers such as <strong>{first}:some-{first}</strong> or <strong>{second}:&#8220;some {second}&#8221;</strong></span>;
+  const exampleString = exampleModifiers.reduce((examples, modifier) => {
+    const realKey = keyMap[modifier] || modifier;
+    const rowWithValue = _.find(rows, realKey) || {};
+    const value = rowWithValue[realKey];
+    return [ ...examples, `${modifier}:${value}` ];
+  }, []).join(' ');
+  const placeholder = `Filter results e.g. ${exampleString}`;
 
   return (
-    <TextField prefix={<Icon name='Search' />} placeholder={placeholder} helpText={helpText} onChange={handleChange} />
+    <TextField prefix={<Icon name='Search' />} placeholder={placeholder} onChange={handleChange} />
   );
 }
