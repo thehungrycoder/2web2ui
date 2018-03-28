@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Editor should render 1`] = `
+<div>
+  <Tabs
+    connectBelow={true}
+    selected={0}
+    tabs={
+      Array [
+        Object {
+          "content": "HTML",
+          "onClick": [Function],
+        },
+        Object {
+          "content": "Text",
+          "onClick": [Function],
+        },
+        Object {
+          "content": "Test Data",
+          "onClick": [Function],
+        },
+      ]
+    }
+  />
+  <Panel>
+    <Field
+      component={[Function]}
+      mode="html"
+      name="content.html"
+      readOnly={false}
+      syntaxValidation={false}
+      validate={
+        Array [
+          [Function],
+          [Function],
+        ]
+      }
+    />
+  </Panel>
+</div>
+`;

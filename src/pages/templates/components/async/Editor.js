@@ -13,9 +13,9 @@ import './Editor.scss';
 import styles from '../FormEditor.module.scss';
 
 const fields = [
-  { content: 'HTML', name: 'content.html', mode: 'html' },
-  { content: 'Text', name: 'content.text', mode: 'text' },
-  { content: 'Test Data', name: 'testData', mode: 'json' }
+  { content: 'HTML', name: 'content.html', mode: 'html', syntaxValidation: false },
+  { content: 'Text', name: 'content.text', mode: 'text', syntaxValidation: false },
+  { content: 'Test Data', name: 'testData', mode: 'json', syntaxValidation: true }
 ];
 
 class Editor extends Component {
@@ -40,6 +40,7 @@ class Editor extends Component {
           <Field
             name={fields[selectedTab].name}
             mode={fields[selectedTab].mode}
+            syntaxValidation={fields[selectedTab].syntaxValidation}
             component={AceWrapper}
             readOnly={readOnly && selectedTab !== 2}
             validate={[contentRequired, validJson]}

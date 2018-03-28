@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AceWrapper should render 1`] = `
+<div>
+  <ReactAce
+    className="TemplateEditor"
+    cursorStart={1}
+    editorProps={
+      Object {
+        "$blockScrolling": Infinity,
+      }
+    }
+    enableBasicAutocompletion={false}
+    enableLiveAutocompletion={false}
+    focus={false}
+    fontSize={12}
+    height="900px"
+    highlightActiveLine={true}
+    maxLines={null}
+    minLines={null}
+    mode="html"
+    name="brace-editor"
+    onBlur={[Function]}
+    onChange={[MockFunction]}
+    onFocus={[Function]}
+    onLoad={null}
+    onPaste={null}
+    onScroll={null}
+    readOnly={false}
+    scrollMargin={
+      Array [
+        0,
+        0,
+        0,
+        0,
+      ]
+    }
+    setOptions={
+      Object {
+        "displayIndentGuides": false,
+        "useWorker": false,
+      }
+    }
+    showGutter={true}
+    showPrintMargin={false}
+    style={Object {}}
+    tabSize={2}
+    theme="tomorrow"
+    value="test"
+    width="auto"
+    wrapEnabled={false}
+  />
+</div>
+`;
