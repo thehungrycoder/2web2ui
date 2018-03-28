@@ -48,13 +48,20 @@ describe('AceWrapper', () => {
     expect(props.input.onFocus).toHaveBeenCalledWith('test');
   });
 
-  it('should show errors correctly', () => {
-    expect(wrapper.find('Error').exists()).toBe(false);
-    wrapper.setProps({ meta: { error: 'an error' }});
-    expect(wrapper.find('Error').exists()).toBe(false);
-    wrapper.setProps({ meta: { error: 'an error', submitFailed: true }});
-    expect(wrapper.find('Error').props().error).toBe('an error');
-    wrapper.setProps({ meta: { error: 'an error', submitFailed: true, active: true }});
-    expect(wrapper.find('Error').exists()).toBe(false);
+  describe('error state', () => {
+    it('should not show error without a submit attempt', () => {
+      wrapper.setProps({ meta: { error: 'an error' }});
+      expect(wrapper.find('Error').exists()).toBe(false);
+    });
+
+    it('should show error when submit fails', () => {
+      wrapper.setProps({ meta: { error: 'an error', submitFailed: true }});
+      expect(wrapper.find('Error').props().error).toBe('an error');
+    });
+
+    it('should not show error if the editor is active', () => {
+      wrapper.setProps({ meta: { error: 'an error', submitFailed: true, active: true }});
+      expect(wrapper.find('Error').exists()).toBe(false);
+    });
   });
 });
