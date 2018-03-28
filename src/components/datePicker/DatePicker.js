@@ -9,7 +9,7 @@ import styles from './DatePicker.module.scss';
 import PropTypes from 'prop-types';
 
 export default class AppDatePicker extends Component {
-  DATE_FORMAT = DATE_FORMATS.READABLE_DATE_TIME;
+  DATE_FORMAT = DATE_FORMATS.READABLE_DATE_YEAR_TIME;
   state = {
     showDatePicker: false,
     selecting: false,
@@ -113,7 +113,8 @@ export default class AppDatePicker extends Component {
     const selectedRange = showDatePicker ? 'custom' : this.props.relativeRange;
 
     // allow for prop-level override of "now" (DI, etc.)
-    const { now = new Date(), relativeDateOptions = [], disabled, datePickerProps = {}} = this.props;
+    const { now = new Date(), relativeDateOptions = [], disabled, datePickerProps = {}, dateFieldFormat } = this.props;
+    const dateFormat = dateFieldFormat || this.DATE_FORMAT;
 
     const rangeSelect = <Select
       options={getRelativeDateOptions(relativeDateOptions)}
@@ -125,7 +126,7 @@ export default class AppDatePicker extends Component {
       labelHidden={true}
       onClick={this.showDatePicker}
       connectLeft={rangeSelect}
-      value={`${format(from, this.DATE_FORMAT)} – ${format(to, this.DATE_FORMAT)}`}
+      value={`${format(from, dateFormat)} – ${format(to, dateFormat)}`}
       readOnly />;
 
     return (
@@ -169,5 +170,6 @@ AppDatePicker.propTypes = {
   relativeDateOptions: PropTypes.arrayOf(PropTypes.string).isRequired,
   onChange: PropTypes.func.isRequired,
   datePickerProps: PropTypes.object,
+  dateFieldFormat: PropTypes.string,
   disabled: PropTypes.bool
 };

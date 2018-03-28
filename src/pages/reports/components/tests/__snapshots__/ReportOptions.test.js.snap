@@ -53,94 +53,10 @@ exports[`Component: Report Options should mount and render correctly 1`] = `
         xl={1}
         xs={4}
       >
-        <Button
-          fullWidth={true}
-          id="shareModalButton"
-          onClick={[Function]}
-          size="default"
-        >
-          Share
-        </Button>
+        <withRouter(Connect(ShareModal)) />
       </Grid.Column>
     </Grid>
   </Panel.Section>
-  <ShareModal
-    handleToggle={[Function]}
-    open={false}
-    query={Object {}}
-  />
-</Panel>
-`;
-
-exports[`Component: Report Options should render with share modal on 1`] = `
-<Panel>
-  <Panel.Section>
-    <Grid>
-      <Grid.Column
-        md={6}
-        xs={12}
-      >
-        <div>
-          <AppDatePicker
-            filters={Array []}
-            from={2018-02-15T12:00:00.000Z}
-            onChange={
-              [MockFunction] {
-                "calls": Array [
-                  Array [
-                    Object {},
-                  ],
-                ],
-              }
-            }
-            relativeDateOptions={
-              Array [
-                "hour",
-                "day",
-                "7days",
-                "30days",
-                "90days",
-                "custom",
-              ]
-            }
-            relativeRange="day"
-            to={2018-02-15T12:00:00.000Z}
-          />
-        </div>
-      </Grid.Column>
-      <Grid.Column
-        md={4}
-        xl={5}
-        xs={8}
-      >
-        <Typeahead
-          items={Array []}
-          onSelect={[Function]}
-          placeholder="Filter by domain, campaign, etc"
-          selected={Array []}
-        />
-      </Grid.Column>
-      <Grid.Column
-        md={2}
-        xl={1}
-        xs={4}
-      >
-        <Button
-          fullWidth={true}
-          id="shareModalButton"
-          onClick={[Function]}
-          size="default"
-        >
-          Share
-        </Button>
-      </Grid.Column>
-    </Grid>
-  </Panel.Section>
-  <ShareModal
-    handleToggle={[Function]}
-    open={true}
-    query={Object {}}
-  />
 </Panel>
 `;
 
@@ -227,14 +143,7 @@ exports[`Component: Report Options with active filters should render 1`] = `
         xl={1}
         xs={4}
       >
-        <Button
-          fullWidth={true}
-          id="shareModalButton"
-          onClick={[Function]}
-          size="default"
-        >
-          Share
-        </Button>
+        <withRouter(Connect(ShareModal)) />
       </Grid.Column>
     </Grid>
   </Panel.Section>
@@ -267,10 +176,5 @@ exports[`Component: Report Options with active filters should render 1`] = `
       ccc
     </Tag>
   </Panel.Section>
-  <ShareModal
-    handleToggle={[Function]}
-    open={false}
-    query={Object {}}
-  />
 </Panel>
 `;

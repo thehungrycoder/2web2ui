@@ -1,7 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Component: ActiveFilters should render filters correctly 1`] = `
-<Panel.Section>
+<Panel.Section
+  actions={
+    Array [
+      Object {
+        "content": "Clear All Filters",
+        "onClick": [Function],
+      },
+    ]
+  }
+>
   <small>
     Filters: 
   </small>

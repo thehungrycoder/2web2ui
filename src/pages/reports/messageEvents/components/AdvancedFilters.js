@@ -103,7 +103,7 @@ export class AdvancedFilters extends Component {
   render() {
     return (
       <Fragment>
-        <Button fullWidth onClick={this.toggleModal}>More Filters</Button>
+        <Button onClick={this.toggleModal}>More Filters</Button>
         <Modal open={this.state.modalOpen}>
           <WindowEvent event='keydown' handler={this.handleKeyDown} />
           <Panel title='Advanced Filters'>

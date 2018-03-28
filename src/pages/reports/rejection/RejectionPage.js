@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 import { addFilters } from 'src/actions/reportOptions';
 import { refreshRejectionReport } from 'src/actions/rejectionReport';
+import { selectReportSearchOptions } from 'src/selectors/reportSearchOptions';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
 import { Page, Panel } from '@sparkpost/matchbox';
 import ReportOptions from '../components/ReportOptions';
@@ -12,9 +13,9 @@ import { safeRate } from 'src/helpers/math';
 
 export class RejectionPage extends Component {
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.reportOptions !== this.props.reportOptions) {
-      this.props.refreshRejectionReport(nextProps.reportOptions);
+  componentDidUpdate(prevProps) {
+    if (prevProps.reportOptions !== this.props.reportOptions) {
+      this.props.refreshRejectionReport(this.props.reportOptions);
     }
   }
 
@@ -50,11 +51,11 @@ export class RejectionPage extends Component {
   }
 
   render() {
-    const { loading } = this.props;
+    const { loading, rejectionSearchOptions } = this.props;
 
     return (
       <Page title='Rejections Report'>
-        <ReportOptions reportLoading={loading} />
+        <ReportOptions reportLoading={loading} searchOptions={rejectionSearchOptions} />
         {this.renderTopLevelMetrics()}
         <Panel title='Rejection Reasons' className='RejectionTable'>
           {this.renderCollection()}
@@ -64,12 +65,13 @@ export class RejectionPage extends Component {
   }
 }
 
-const mapStateToProps = ({ reportOptions, rejectionReport }) => ({
-  loading: rejectionReport.aggregatesLoading || rejectionReport.reasonsLoading,
-  aggregatesLoading: rejectionReport.aggregatesLoading,
-  aggregates: rejectionReport.aggregates,
-  list: rejectionReport.list,
-  reportOptions
+const mapStateToProps = (state) => ({
+  loading: state.rejectionReport.aggregatesLoading || state.rejectionReport.reasonsLoading,
+  aggregatesLoading: state.rejectionReport.aggregatesLoading,
+  aggregates: state.rejectionReport.aggregates,
+  list: state.rejectionReport.list,
+  reportOptions: state.reportOptions,
+  rejectionSearchOptions: selectReportSearchOptions(state)
 });
 
 const mapDispatchToProps = {

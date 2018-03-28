@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import { formatDateTime } from 'src/helpers/date';
+import moment from 'moment';
 import { createSelector } from 'reselect';
 
 const getMessageEvents = (state) => state.messageEvents.events;
@@ -26,4 +27,20 @@ export const selectMessageHistory = createSelector(
 export const selectInitialEventId = createSelector(
   [selectMessageHistory, getEventIdLocationState],
   (messageHistory, selectedEventId) => selectedEventId || _.get(messageHistory[0], 'event_id')
+);
+
+const selectMessageEventsDateOptions = (state) => ({
+  from: moment(_.get(state, 'messageEvents.search.dateOptions.from')).utc().format(),
+  to: moment(_.get(state, 'messageEvents.search.dateOptions.to')).utc().format(),
+  range: _.get(state, 'messageEvents.search.dateOptions.relativeRange')
+});
+
+const selectSearch = (state) => _.omit(state.messageEvents.search, ['dateOptions']);
+
+/**
+ * Converts reportOptions for url sharing for message events
+ */
+export const selectMessageEventsSearchOptions = createSelector(
+  [selectMessageEventsDateOptions, selectSearch],
+  (dates, search) => ({ ...dates, ...search })
 );

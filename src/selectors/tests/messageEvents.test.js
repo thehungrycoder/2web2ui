@@ -55,4 +55,22 @@ describe('Selectors: Initial Event Id', () => {
     props.location = null;
     expect(selectors.selectInitialEventId({ messageEvents: messageHistory }, props)).toMatchSnapshot();
   });
+
+  describe('selectMessageEventsSearchOptions', () => {
+    const state = {
+      messageEvents: {
+        search: {
+          dateOptions: {
+            from: '2018-03-23T17:10:08-04:00',
+            to: '2018-03-23T17:11:08-04:00',
+            relativeRange: 'hour'
+          }
+        }
+      }
+    };
+
+    it('prepares message events reportOptions for URL sharing', () => {
+      expect(selectors.selectMessageEventsSearchOptions(state)).toMatchSnapshot();
+    });
+  });
 });

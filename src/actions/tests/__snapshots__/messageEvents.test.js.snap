@@ -124,6 +124,7 @@ exports[`Action Creator: MessageEvents updateMessageEventsSearchOptions dedupes 
 Object {
   "payload": Object {
     "campaign_ids": Array [],
+    "dateOptions": Object {},
     "message_ids": Array [
       "1",
     ],

@@ -5,13 +5,7 @@ exports[`Page: SummaryPage should render correctly 1`] = `
   empty={Object {}}
   title="Summary Report"
 >
-  <withRouter(Connect(ReportOptions))
-    extraLinkParams={
-      Array [
-        "metrics",
-      ]
-    }
-  />
+  <withRouter(Connect(ReportOptions)) />
   <Panel>
     <Panel.Section
       className=""
@@ -64,11 +58,6 @@ exports[`Page: SummaryPage should render when loading 1`] = `
   title="Summary Report"
 >
   <withRouter(Connect(ReportOptions))
-    extraLinkParams={
-      Array [
-        "metrics",
-      ]
-    }
     reportLoading={true}
   />
   <Panel>
