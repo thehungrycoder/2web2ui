@@ -1,4 +1,4 @@
-import { onboardingInitialValues, changePlanInitialValues, updatePaymentInitialValues, updateContactInitialValues } from '../accountBillingForms';
+import { changePlanInitialValues, updatePaymentInitialValues, updateContactInitialValues } from '../accountBillingForms';
 import * as billingInfo from '../accountBillingInfo';
 import { isSelfServeBilling } from 'src/helpers/conditions/account';
 
@@ -18,11 +18,11 @@ describe('Selector: Account billing form', () => {
   let store;
 
   beforeEach(() => {
-    billingInfo.getPlansSelector = jest.fn(() => [
+    billingInfo.selectVisiblePlans = jest.fn(() => [
       { billingId: 'if', code: 'im free', isFree: true, status: 'public' },
       { billingId: 'inf', code: 'im not free', isFree: false, status: 'public' }
     ]);
-    billingInfo.deepLinkablePlansSelector = jest.fn(() => [
+    billingInfo.selectAvailablePlans = jest.fn(() => [
       { billingId: 'inf', code: 'im not free', isFree: false, status: 'public' },
       { billingId: 'ias', code: 'im a secret', isFree: false, status: 'secret' }
     ]);
@@ -48,25 +48,7 @@ describe('Selector: Account billing form', () => {
     });
 
     it('should find and return secret plan', () => {
-      expect(changePlanInitialValues(store, { code: 'im a secret' })).toMatchSnapshot();
-    });
-  });
-
-  describe('onboardingInitialValues', () => {
-    it('should set reasonable defaults', () => {
-      expect(onboardingInitialValues(store)).toMatchSnapshot();
-    });
-
-    it('should set the plan picker to the plan specified by /join', () => {
-      expect(onboardingInitialValues(store, { plan: 'im not free' })).toMatchSnapshot();
-    });
-
-    it('should gracefully handle invalid plan values from /join', () => {
-      expect(onboardingInitialValues(store, { plan: 'im not even a real plan' })).toMatchSnapshot();
-    });
-
-    it('should set the plan picker to the secret plan specified by /join', () => {
-      expect(onboardingInitialValues(store, { plan: 'im a secret' })).toMatchSnapshot();
+      expect(changePlanInitialValues(store, { planCode: 'im a secret' })).toMatchSnapshot();
     });
   });
 

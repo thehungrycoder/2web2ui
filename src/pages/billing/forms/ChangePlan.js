@@ -7,7 +7,9 @@ import qs from 'query-string';
 import { billingCreate, billingUpdate, updateSubscription } from 'src/actions/billing';
 import { showAlert } from 'src/actions/globalAlert';
 import { changePlanInitialValues } from 'src/selectors/accountBillingForms';
-import { getPlansSelector, currentPlanSelector, canUpdateBillingInfoSelector } from 'src/selectors/accountBillingInfo';
+import {
+  currentPlanSelector, canUpdateBillingInfoSelector, selectVisiblePlans
+} from 'src/selectors/accountBillingInfo';
 import { Panel, Grid } from '@sparkpost/matchbox';
 import { PlanPicker } from 'src/components';
 import PaymentForm from './fields/PaymentForm';
@@ -125,17 +127,17 @@ export class ChangePlan extends Component {
 
 const mapStateToProps = (state, props) => {
   const selector = formValueSelector(FORMNAME);
-  const search = qs.parse(props.location.search);
+  const { code: planCode } = qs.parse(props.location.search);
 
   return {
     account: state.account,
     billing: state.billing,
     canUpdateBillingInfo: canUpdateBillingInfoSelector(state),
     isSelfServeBilling: isSelfServeBilling(state),
-    plans: getPlansSelector(state),
+    plans: selectVisiblePlans(state),
     currentPlan: currentPlanSelector(state),
     selectedPlan: selector(state, 'planpicker') || {},
-    initialValues: changePlanInitialValues(state, search)
+    initialValues: changePlanInitialValues(state, { planCode })
   };
 };
 

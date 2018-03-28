@@ -7,31 +7,93 @@ Object {
 }
 `;
 
-exports[`Selector: deep linkable plans should return public and secret paid plans 1`] = `
+exports[`plan selector selectAvailablePlans should return active AWS plans 1`] = `
 Array [
   Object {
-    "isFree": false,
+    "awsMarketplace": true,
+    "code": "pub-aws",
     "status": "public",
   },
   Object {
+    "awsMarketplace": true,
+    "code": "pub-aws-free",
+    "isFree": true,
+    "status": "public",
+  },
+  Object {
+    "awsMarketplace": true,
+    "code": "sec-aws",
     "status": "secret",
   },
 ]
 `;
 
-exports[`Selector: public plans should get public plans and sort by volume 1`] = `
+exports[`plan selector selectAvailablePlans should return active paid plans 1`] = `
 Array [
   Object {
+    "code": "pub",
     "status": "public",
-    "volume": 1,
   },
   Object {
+    "code": "sec",
+    "status": "secret",
+  },
+]
+`;
+
+exports[`plan selector selectAvailablePlans should return active plans 1`] = `
+Array [
+  Object {
+    "code": "pub",
     "status": "public",
-    "volume": 2,
   },
   Object {
+    "code": "pub-free",
+    "isFree": true,
     "status": "public",
-    "volume": 3,
+  },
+  Object {
+    "code": "sec",
+    "status": "secret",
+  },
+]
+`;
+
+exports[`plan selector selectVisiblePlans should return public AWS plans 1`] = `
+Array [
+  Object {
+    "awsMarketplace": true,
+    "code": "pub-aws",
+    "status": "public",
+  },
+  Object {
+    "awsMarketplace": true,
+    "code": "pub-aws-free",
+    "isFree": true,
+    "status": "public",
+  },
+]
+`;
+
+exports[`plan selector selectVisiblePlans should return public paid plans 1`] = `
+Array [
+  Object {
+    "code": "pub",
+    "status": "public",
+  },
+]
+`;
+
+exports[`plan selector selectVisiblePlans should return public plans 1`] = `
+Array [
+  Object {
+    "code": "pub",
+    "status": "public",
+  },
+  Object {
+    "code": "pub-free",
+    "isFree": true,
+    "status": "public",
   },
 ]
 `;

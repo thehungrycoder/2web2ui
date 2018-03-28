@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 import _ from 'lodash';
-import { onPlan } from 'src/helpers/conditions/account';
+import { isAws, isSelfServeBilling, onPlan } from 'src/helpers/conditions/account';
 
 const suspendedSelector = (state) => state.account.isSuspendedForBilling;
 const pendingSubscriptionSelector = (state) => state.account.pending_subscription;
@@ -17,7 +17,7 @@ export const currentSubscriptionSelector = (state) => state.account.subscription
  */
 export const currentPlanCodeSelector = createSelector(
   [currentSubscriptionSelector],
-  (subscription) => subscription.code
+  (subscription = {}) => subscription.code
 );
 
 /**
@@ -27,26 +27,6 @@ export const canChangePlanSelector = createSelector(
   [suspendedSelector, pendingSubscriptionSelector],
   (suspended, pendingSubscription) => !suspended && !pendingSubscription
 );
-
-/**
- * Get public plans from state and sorts them by volume
- */
-export const publicPlansSelector = createSelector(
-  [plansSelector],
-  (plans) => _.sortBy(plans.filter((plan) => plan.status === 'public'), (plan) => plan.volume)
-);
-
-// Get public and secret paid plans that sales team can deep link to for special customers
-export const deepLinkablePlansSelector = createSelector(
-  [plansSelector],
-  (plans) => plans.filter((plan) => (plan.status === 'secret' || plan.status === 'public') && !plan.isFree)
-);
-
-const awsPlans = createSelector(
-  [plansSelector],
-  (plans) => _.sortBy(plans.filter((plan) => plan.awsMarketplace === true), (plan) => plan.volume)
-);
-
 
 /**
  * Gets current plan
@@ -79,17 +59,25 @@ export const canPurchaseIps = createSelector(
   (currentPlan, accountBilling, isAWSAccount) => currentPlan.canPurchaseIps === true && !!(accountBilling || isAWSAccount)
 );
 
-export const getPlansSelector = createSelector(
-  [publicPlansSelector, awsPlans, currentSubscriptionSelector, isAWSAccountSelector],
-  (publicPlans, awsPlans, subscription, isAWSAccount) => {
+export const selectAvailablePlans = createSelector(
+  [plansSelector, isAws, isSelfServeBilling],
+  (plans, isAws, isSelfServeBilling) => {
+    const availablePlans = plans
+      .filter(({ status }) => status === 'public' || status === 'secret')
+      // only select AWS plans for AWS users
+      .filter(({ awsMarketplace = false }) => awsMarketplace === isAws);
 
-    if (isAWSAccount) {
-      return awsPlans;
+    if (!isSelfServeBilling) {
+      _.remove(availablePlans, ({ isFree = false }) => isFree);
     }
 
-    // Strip free plans for manually billed accounts looking to convert
-    return !subscription.self_serve ? publicPlans.filter((plan) => !plan.isFree) : publicPlans;
+    return _.orderBy(availablePlans, 'volume', isSelfServeBilling ? 'asc' : 'desc');
   }
+);
+
+export const selectVisiblePlans = createSelector(
+  [selectAvailablePlans],
+  (plans) => plans.filter(({ status }) => status === 'public')
 );
 
 export const selectBillingInfo = createSelector(
@@ -98,7 +86,7 @@ export const selectBillingInfo = createSelector(
     canChangePlanSelector,
     canPurchaseIps,
     currentPlanSelector,
-    getPlansSelector,
+    selectVisiblePlans,
     isAWSAccountSelector
   ],
   (canUpdateBillingInfo, canChangePlan, canPurchaseIps, currentPlan, plans, isAWSAccount) => ({

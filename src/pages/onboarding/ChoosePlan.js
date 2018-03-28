@@ -7,8 +7,8 @@ import { CenteredLogo, Loading, PlanPicker } from 'src/components';
 import Steps from './components/Steps';
 import { getPlans } from 'src/actions/account';
 import { getBillingCountries, billingCreate, updateSubscription } from 'src/actions/billing';
-import { getPlansSelector } from 'src/selectors/accountBillingInfo';
-import { onboardingInitialValues } from 'src/selectors/accountBillingForms';
+import { selectVisiblePlans } from 'src/selectors/accountBillingInfo';
+import { changePlanInitialValues } from 'src/selectors/accountBillingForms';
 import PaymentForm from 'src/pages/billing/forms/fields/PaymentForm';
 import BillingAddressForm from 'src/pages/billing/forms/fields/BillingAddressForm';
 import { isAws } from 'src/helpers/conditions/account';
@@ -117,12 +117,13 @@ export class OnboardingPlanPage extends Component {
 
 const mapStateToProps = (state, props) => {
   const selector = formValueSelector(FORM_NAME);
+  const { plan: planCode } = props.location.state;
 
   return {
     loading: Boolean(state.account.loading || state.billing.plansLoading || state.billing.countriesLoading),
     billing: state.billing,
-    plans: getPlansSelector(state),
-    initialValues: onboardingInitialValues(state, props.location.state),
+    plans: selectVisiblePlans(state),
+    initialValues: changePlanInitialValues(state, { planCode }),
     selectedPlan: selector(state, 'planpicker'),
     hasError: state.billing.plansError || state.billing.countriesError
   };
