@@ -8,14 +8,14 @@ exports[`Component: CookieConsent ConsentBar should render correctly 1`] = `
       onDismiss={[MockFunction]}
       status="default"
     >
-      We use cookies to offer you a better browsing experience, analyze site traffic, and personalize content and advertisements.  Read more about how we use cookies and how you can control them by visiting our 
+      We use cookies to optimize your experience, analyze traffic, and personalize content.  To learn more, please visit our 
       <UnstyledLink
         external={true}
         to="https://www.sparkpost.com/policies/privacy/"
       >
         Cookie Policy
       </UnstyledLink>
-      .  Note that parts of our site will not function properly if you disable them.  If you continue to use this site without disabling cookies, you consent to our use of them.
+      .  By using our site without disabling cookies, you consent to our use of them.
     </Snackbar>
   </div>
 </div>
