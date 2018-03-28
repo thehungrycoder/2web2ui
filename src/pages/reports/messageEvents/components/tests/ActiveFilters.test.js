@@ -6,7 +6,12 @@ describe('Component: ActiveFilters', () => {
   let wrapper;
   const props = {
     removeFilter: jest.fn(),
+    updateMessageEventsSearchOptions: jest.fn(),
     search: {
+      dateOptions: {
+        to: 'to-date',
+        from: 'from-date'
+      },
       message_ids: []
     }
   };
@@ -32,5 +37,16 @@ describe('Component: ActiveFilters', () => {
     wrapper.setProps({ search: { events }});
     wrapper.find('Tag').at(1).simulate('remove');
     expect(props.removeFilter).toHaveBeenCalledWith({ item: 'click', key: 'events' });
+  });
+
+  it('should handle remove all', () => {
+    const events = ['bounce', 'click', 'spam_complaint'];
+    wrapper.setProps({ search: { ...props.search, events }});
+    wrapper.instance().handleRemoveAll();
+    expect(props.updateMessageEventsSearchOptions).toHaveBeenCalledWith({
+      ...props.search,
+      events: [],
+      message_ids: []
+    });
   });
 });

@@ -24,7 +24,8 @@ describe('BouncePage: ', () => {
       count_bounce: 5,
       domain: 'yahoo.com',
       reason: '554 - 5.7.1 Blacklisted by \'twoomail.com\'(twoo.com.multi.surbl.org) Contact the postmaster of this domain for resolution. This attempt has been logged.'
-    } ]
+    } ],
+    bounceSearchOptions: {}
   };
 
   let wrapper;

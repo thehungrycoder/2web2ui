@@ -1,16 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import moment from 'moment';
 import _ from 'lodash';
-import { getMessageEvents, refreshMessageEventsDateRange, addFilters } from 'src/actions/messageEvents';
+import { getMessageEvents, refreshMessageEventsDateRange, updateMessageEventsSearchOptions, addFilters } from 'src/actions/messageEvents';
+import { selectMessageEventsSearchOptions } from 'src/selectors/messageEvents';
 import { Panel, Grid, TextField } from '@sparkpost/matchbox';
 import AdvancedFilters from './AdvancedFilters';
 import ActiveFilters from './ActiveFilters';
+import ShareModal from '../../components/ShareModal';
 import DatePicker from 'src/components/datePicker/DatePicker';
 import { email as emailValidator } from 'src/helpers/validation';
+import { parseSearch } from 'src/helpers/messageEvents';
 import { stringToArray } from 'src/helpers/string';
 import { onEnter } from 'src/helpers/keyEvents';
 import { RELATIVE_DATE_OPTIONS } from './searchConfig';
+import { DATE_FORMATS } from 'src/constants';
 
 export class MessageEventsSearch extends Component {
 
@@ -19,9 +24,9 @@ export class MessageEventsSearch extends Component {
   }
 
   componentDidMount() {
-    // range defaults to "hour"
-    const relativeRange = this.props.search.dateOptions.relativeRange;
-    this.props.refreshMessageEventsDateRange({ relativeRange });
+    const { updateMessageEventsSearchOptions, refreshMessageEventsDateRange, location, search } = this.props;
+    refreshMessageEventsDateRange({ relativeRange: search.dateOptions.relativeRange }); // Sets default dateoptions from initial state
+    updateMessageEventsSearchOptions(parseSearch(location.search));
   }
 
   componentDidUpdate(prevProps) {
@@ -58,17 +63,19 @@ export class MessageEventsSearch extends Component {
   }
 
   render() {
-    const { search, refreshMessageEventsDateRange, loading, now = new Date() } = this.props;
+    const { search, refreshMessageEventsDateRange, loading, now = new Date(), searchOptions } = this.props;
+
     return (
       <Panel>
         <Panel.Section>
           <Grid>
-            <Grid.Column xs={12} md={6}>
+            <Grid.Column xs={12} md={5} xl={6}>
               <DatePicker
                 {...search.dateOptions}
                 relativeDateOptions={RELATIVE_DATE_OPTIONS}
                 disabled={loading}
                 onChange={refreshMessageEventsDateRange}
+                dateFieldFormat={DATE_FORMATS.READABLE_DATE_TIME}
                 datePickerProps={{
                   disabledDays: {
                     after: now,
@@ -78,7 +85,7 @@ export class MessageEventsSearch extends Component {
                 }}
               />
             </Grid.Column>
-            <Grid.Column xs={12} md={4}>
+            <Grid.Column xs={12} md={5}>
               <TextField
                 labelHidden
                 label="Recipient Email(s)"
@@ -87,10 +94,11 @@ export class MessageEventsSearch extends Component {
                 onKeyDown={onEnter(this.handleRecipientsChange)}
                 onFocus={() => this.setState({ recipientError: null })}
                 error={this.state.recipientError}
+                connectRight={<AdvancedFilters />}
               />
             </Grid.Column>
-            <Grid.Column xs={12} md={2}>
-              <AdvancedFilters />
+            <Grid.Column>
+              <ShareModal disabled={loading} searchOptions={searchOptions} />
             </Grid.Column>
           </Grid>
         </Panel.Section>
@@ -100,9 +108,10 @@ export class MessageEventsSearch extends Component {
   }
 }
 
-const mapStateToProps = ({ messageEvents }) => ({
-  search: messageEvents.search,
-  loading: messageEvents.loading
+const mapStateToProps = (state) => ({
+  search: state.messageEvents.search,
+  loading: state.messageEvents.loading,
+  searchOptions: selectMessageEventsSearchOptions(state)
 });
-const mapDispatchToProps = { getMessageEvents, refreshMessageEventsDateRange, addFilters };
-export default connect(mapStateToProps, mapDispatchToProps)(MessageEventsSearch);
+const mapDispatchToProps = { getMessageEvents, refreshMessageEventsDateRange, updateMessageEventsSearchOptions, addFilters };
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(MessageEventsSearch));

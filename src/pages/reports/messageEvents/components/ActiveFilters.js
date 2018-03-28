@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Panel, Tag } from '@sparkpost/matchbox';
-import { getMessageEvents, removeFilter } from 'src/actions/messageEvents';
+import { getMessageEvents, removeFilter, updateMessageEventsSearchOptions } from 'src/actions/messageEvents';
 import { snakeToFriendly } from 'src/helpers/string';
 import _ from 'lodash';
 import styles from './ActiveFilters.module.scss';
@@ -29,6 +29,12 @@ export class ActiveFilters extends Component {
     this.props.removeFilter(filter);
   }
 
+  handleRemoveAll = () => {
+    const { dateOptions, ...filters } = this.props.search;
+    const clearedFilters = _.mapValues(filters, () => []);
+    this.props.updateMessageEventsSearchOptions({ dateOptions, ...clearedFilters });
+  }
+
   isEmpty() {
     const { dateOptions, ...rest } = this.props.search;
     return _.every(rest, (arr) => arr.length === 0);
@@ -40,7 +46,7 @@ export class ActiveFilters extends Component {
     }
 
     return (
-      <Panel.Section>
+      <Panel.Section actions={[{ content: 'Clear All Filters', onClick: this.handleRemoveAll }]}>
         <small>Filters: </small>
         {this.renderTags({ key: 'events', label: 'Event', itemToString: snakeToFriendly })}
         {this.renderTags({ key: 'recipients', label: 'Recipient' })}
@@ -58,4 +64,4 @@ const mapStateToProps = (state, props) => ({
   search: state.messageEvents.search
 });
 
-export default connect(mapStateToProps, { removeFilter, getMessageEvents })(ActiveFilters);
+export default connect(mapStateToProps, { removeFilter, getMessageEvents, updateMessageEventsSearchOptions })(ActiveFilters);

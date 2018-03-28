@@ -1,3 +1,7 @@
+// TODO - support multiple key events that use the same callback. eg,
+// - handleKeyDown = combineKeyHelpers(onEnter, onEscape)(this.toggleModal);
+// - handleKeydown = onKeyEvents('Enter', 'Escape')(this.toggleModal);
+
 export function onEnter(callback) {
   return function handleEnterKeydown(event) {
     if ((event.key === 'Enter' || event.keyCode === 13) && !event.shiftKey) {

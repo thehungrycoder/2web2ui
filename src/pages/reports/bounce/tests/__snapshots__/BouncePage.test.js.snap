@@ -7,6 +7,7 @@ exports[`BouncePage:  should display loading panel on top level metrics when agg
 >
   <withRouter(Connect(ReportOptions))
     reportLoading={true}
+    searchOptions={Object {}}
   />
   <PanelLoading
     minHeight="115px"
@@ -77,7 +78,9 @@ exports[`BouncePage:  should render 1`] = `
   empty={Object {}}
   title="Bounce Report"
 >
-  <withRouter(Connect(ReportOptions)) />
+  <withRouter(Connect(ReportOptions))
+    searchOptions={Object {}}
+  />
   <Connect(MetricsSummary)
     rateTitle="Bounce Rate"
     rateValue={10}
@@ -156,7 +159,9 @@ exports[`BouncePage:  should render correctly with no bounces 1`] = `
   empty={Object {}}
   title="Bounce Report"
 >
-  <withRouter(Connect(ReportOptions)) />
+  <withRouter(Connect(ReportOptions))
+    searchOptions={Object {}}
+  />
   <Empty
     message="No bounces to report"
     title="Bounce Rates"
@@ -244,7 +249,9 @@ exports[`BouncePage:  should show empty reasons table when there are no reasons 
   empty={Object {}}
   title="Bounce Report"
 >
-  <withRouter(Connect(ReportOptions)) />
+  <withRouter(Connect(ReportOptions))
+    searchOptions={Object {}}
+  />
   <Connect(MetricsSummary)
     rateTitle="Bounce Rate"
     rateValue={10}
@@ -282,7 +289,9 @@ exports[`BouncePage:  should show loading panel when table is loading 1`] = `
   empty={Object {}}
   title="Bounce Report"
 >
-  <withRouter(Connect(ReportOptions)) />
+  <withRouter(Connect(ReportOptions))
+    searchOptions={Object {}}
+  />
   <Connect(MetricsSummary)
     rateTitle="Bounce Rate"
     rateValue={10}

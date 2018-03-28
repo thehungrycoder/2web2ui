@@ -7,7 +7,7 @@ import { Page, Panel } from '@sparkpost/matchbox';
 import { Loading } from 'src/components';
 import ReportOptions from '../components/ReportOptions';
 import { Table, MetricsModal, ChartGroup, ChartHeader } from './components';
-import { selectSelectedMetrics } from 'src/selectors/summaryReport';
+import { selectSummaryChartSearchOptions } from 'src/selectors/reportSearchOptions';
 
 import styles from './SummaryPage.module.scss';
 
@@ -18,9 +18,9 @@ export class SummaryReportPage extends Component {
     scale: 'linear'
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.reportOptions !== this.props.reportOptions) {
-      this.props.refreshSummaryReport(nextProps.reportOptions);
+  componentDidUpdate(prevProps) {
+    if (prevProps.reportOptions !== this.props.reportOptions) {
+      this.props.refreshSummaryReport(this.props.reportOptions);
     }
   }
 
@@ -36,8 +36,8 @@ export class SummaryReportPage extends Component {
     this.props.refreshReportOptions({ metrics: selectedMetrics });
   }
 
-  handleModalToggle = (modal) => {
-    this.setState({ [modal]: !this.state[modal] });
+  handleMetricsModal = () => {
+    this.setState({ metricsModal: !this.state.metricsModal });
   }
 
   handleTimeClick = (time) => {
@@ -49,14 +49,14 @@ export class SummaryReportPage extends Component {
   }
 
   render() {
-    const { chart } = this.props;
+    const { chart, summarySearchOptions } = this.props;
     const { scale, eventTime, metricsModal } = this.state;
 
     return (
       <Page title='Summary Report'>
         <ReportOptions
           reportLoading={chart.chartLoading}
-          extraLinkParams={['metrics']}
+          searchOptions={summarySearchOptions}
         />
 
         <Panel>
@@ -67,7 +67,7 @@ export class SummaryReportPage extends Component {
               selectedScale={scale}
               onScaleClick={this.handleScaleClick}
               onTimeClick={this.handleTimeClick}
-              onMetricsToggle={() => this.handleModalToggle('metricsModal')}
+              onMetricsToggle={this.handleMetricsModal}
             />
             <ChartGroup {...chart} yScale={scale} />
           </Panel.Section>
@@ -80,7 +80,7 @@ export class SummaryReportPage extends Component {
         <MetricsModal
           selectedMetrics={chart.metrics}
           open={metricsModal}
-          onCancel={() => this.handleModalToggle('metricsModal')}
+          onCancel={this.handleMetricsModal}
           onSubmit={this.handleMetricsApply} />
       </Page>
     );
@@ -89,8 +89,8 @@ export class SummaryReportPage extends Component {
 
 const mapStateToProps = (state) => ({
   chart: state.summaryChart,
-  selectedMetrics: selectSelectedMetrics(state),
-  reportOptions: state.reportOptions
+  reportOptions: state.reportOptions,
+  summarySearchOptions: selectSummaryChartSearchOptions(state)
 });
 
 const mapDispatchToProps = {

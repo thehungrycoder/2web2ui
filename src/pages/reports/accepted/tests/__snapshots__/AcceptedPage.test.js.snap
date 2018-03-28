@@ -7,6 +7,14 @@ exports[`AcceptedPage:  should render 1`] = `
 >
   <withRouter(Connect(ReportOptions))
     reportLoading={false}
+    searchOptions={
+      Object {
+        "filters": Object {},
+        "from": "",
+        "range": "7d",
+        "to": "",
+      }
+    }
   />
   <TopLevelMetrics
     aggregates={

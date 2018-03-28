@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import _ from 'lodash';
 import * as dateHelpers from 'src/helpers/date';
+import datefns from 'date-fns';
 import DatePicker from '../DatePicker';
 import utc from 'src/__testHelpers__/time';
 
@@ -33,6 +34,8 @@ describe('Component: DatePicker', () => {
     dateHelpers.getStartOfDay = jest.fn(() => 'start-of-day');
     dateHelpers.getEndOfDay = jest.fn(() => 'end-of-day');
     dateHelpers.getRelativeDateOptions = jest.fn(() => [1, 2, 3]);
+    datefns.format = jest.fn((a,b) => b);
+    datefns.subMonths = jest.fn((a) => a);
 
     wrapper = shallow(<DatePicker {...props} />);
     instance = wrapper.instance();
@@ -289,6 +292,11 @@ describe('Component: DatePicker', () => {
   });
 
   describe('handleFormDates', () => {
+
+    it('should use a date field format if provided', () => {
+      wrapper.setProps({ dateFieldFormat: 'YYYY-MM h' });
+      expect(wrapper.find('Popover').props().trigger).toMatchSnapshot();
+    });
 
     it('should set from and to state and call the passed in callback', () => {
       wrapper.setState({ selected: false });

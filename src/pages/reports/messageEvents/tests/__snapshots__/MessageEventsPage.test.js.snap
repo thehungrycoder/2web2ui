@@ -25,7 +25,7 @@ exports[`Page: Message Events tests renders banner correctly with too many (1000
   status="info"
   title="Note: A maximum of 1,000 results displayed"
 >
-  SparkPost retains message event data for 10 days.
+  You may want to narrow your search for better results. SparkPost retains message event data for 10 days.
 </Banner>
 `;
 
@@ -34,7 +34,7 @@ exports[`Page: Message Events tests should only render loading component while l
   empty={Object {}}
   title="Message Events"
 >
-  <Connect(MessageEventsSearch) />
+  <withRouter(Connect(MessageEventsSearch)) />
   <PanelLoading
     minHeight="400px"
   />
@@ -46,7 +46,7 @@ exports[`Page: Message Events tests should render error when action fails 1`] = 
   empty={Object {}}
   title="Message Events"
 >
-  <Connect(MessageEventsSearch) />
+  <withRouter(Connect(MessageEventsSearch)) />
   <ApiErrorBanner
     errorDetails="You done f'ed up now"
     message="Sorry, we seem to have had some trouble loading your message events."
@@ -60,7 +60,7 @@ exports[`Page: Message Events tests should render page correctly 1`] = `
   empty={Object {}}
   title="Message Events"
 >
-  <Connect(MessageEventsSearch) />
+  <withRouter(Connect(MessageEventsSearch)) />
   <div>
     <TableCollection
       columns={
@@ -114,7 +114,7 @@ exports[`Page: Message Events tests should render the empty message when 0 resul
   empty={Object {}}
   title="Message Events"
 >
-  <Connect(MessageEventsSearch) />
+  <withRouter(Connect(MessageEventsSearch)) />
   <Empty
     message="There are no message events for your current query"
   />

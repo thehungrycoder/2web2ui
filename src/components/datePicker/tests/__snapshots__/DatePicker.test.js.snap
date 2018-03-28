@@ -1,5 +1,33 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Component: DatePicker handleFormDates should use a date field format if provided 1`] = `
+<TextField
+  connectLeft={
+    <Select
+      disabled={false}
+      onChange={[MockFunction]}
+      options={
+        Array [
+          1,
+          2,
+          3,
+        ]
+      }
+      placeholderValue=""
+      required={false}
+      value="day"
+    />
+  }
+  labelHidden={true}
+  onClick={[MockFunction]}
+  readOnly={true}
+  required={false}
+  resize="both"
+  type="text"
+  value="YYYY-MM h – YYYY-MM h"
+/>
+`;
+
 exports[`Component: DatePicker should render ok by default 1`] = `
 <Popover
   bottom={true}
@@ -30,7 +58,7 @@ exports[`Component: DatePicker should render ok by default 1`] = `
       required={false}
       resize="both"
       type="text"
-      value="undefined – undefined"
+      value="MMM Do YYYY h:mma – MMM Do YYYY h:mma"
     />
   }
   wrapper="div"
@@ -43,6 +71,7 @@ exports[`Component: DatePicker should render ok by default 1`] = `
     }
     enableOutsideDays={false}
     fixedWeeks={true}
+    initialMonth={2017-01-15T12:00:00.000Z}
     numberOfMonths={2}
     onDayClick={[Function]}
     onDayFocus={[Function]}

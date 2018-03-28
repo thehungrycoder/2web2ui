@@ -8,6 +8,7 @@ describe('Engagement Report Page', () => {
 
   beforeEach(() => {
     props = {
+      loading: false,
       aggregateMetrics: {
         data: {
           count_accepted: 1,
@@ -23,7 +24,9 @@ describe('Engagement Report Page', () => {
         ],
         loading: false
       },
-      refreshEngagementReport: jest.fn()
+      refreshEngagementReport: jest.fn(),
+      reportOptions: {},
+      engagementSearchOptions: {}
     };
     wrapper = shallow(<EngagementPage {...props} />);
   });
@@ -33,11 +36,13 @@ describe('Engagement Report Page', () => {
   });
 
   it('should refresh when report options reference changes', () => {
-    const newReportOptions = {};
-    expect(props.refreshEngagementReport).not.toHaveBeenCalled();
-    wrapper.setProps({ reportOptions: newReportOptions });
-    expect(props.refreshEngagementReport).toHaveBeenCalledWith(newReportOptions);
+    wrapper.setProps({ reportOptions: { relativeRange: 'day' }});
+    expect(props.refreshEngagementReport).toHaveBeenLastCalledWith({ relativeRange: 'day' });
+  });
+
+  it('should not refresh when report options reference is unchanged', () => {
+    wrapper.setProps({ reportOptions: {}});
+    expect(props.refreshEngagementReport).toHaveBeenCalledTimes(0);
   });
 
 });
-

@@ -18,7 +18,6 @@ Object {
 exports[`Component: ActiveFilters should render initially and sync to state correctly 1`] = `
 <React.Fragment>
   <Button
-    fullWidth={true}
     onClick={[Function]}
     size="default"
   >

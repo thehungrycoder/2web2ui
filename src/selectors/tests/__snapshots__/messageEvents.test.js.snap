@@ -6,6 +6,14 @@ exports[`Selectors: Initial Event Id returns default event_id with no location s
 
 exports[`Selectors: Initial Event Id returns event_id 1`] = `"selected_id"`;
 
+exports[`Selectors: Initial Event Id selectMessageEventsSearchOptions prepares message events reportOptions for URL sharing 1`] = `
+Object {
+  "from": "2018-03-23T21:10:08Z",
+  "range": "hour",
+  "to": "2018-03-23T21:11:08Z",
+}
+`;
+
 exports[`Selectors: Message Events returns formatted message event data 1`] = `
 Array [
   Object {

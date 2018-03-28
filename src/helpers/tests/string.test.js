@@ -1,4 +1,4 @@
-import { snakeToFriendly, snakeToCamel, slugify, shrinkToFit, stringToArray } from '../string';
+import { snakeToFriendly, snakeToCamel, slugify, shrinkToFit, stringToArray, stringifyTypeaheadfilter } from '../string';
 
 describe('snakeToFrindly', () => {
   it('should properly format a snaked cased string', () => {
@@ -44,5 +44,15 @@ describe('stringToArray', () => {
     expect(stringToArray('one, 2, 3,4')).toEqual(['one', '2', '3', '4']);
     expect(stringToArray('1')).toEqual(['1']);
     expect(stringToArray('')).toEqual([]);
+  });
+});
+
+describe('stringifyTypeaheadfilter', () => {
+  it('stringifies subaccount type correctly', () => {
+    expect(stringifyTypeaheadfilter({ type: 'Subaccount', value: 'test-value', id: 110 }))
+      .toEqual('Subaccount:test-value:110');
+
+    expect(stringifyTypeaheadfilter({ type: 'otherfilter', value: 'otherfiltervalue', id: 220 }))
+      .toEqual('otherfilter:otherfiltervalue');
   });
 });
