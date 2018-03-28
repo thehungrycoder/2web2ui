@@ -8,6 +8,7 @@ import apiKeys from './api-keys';
 import auth from './auth';
 import billing from './billing';
 import bounceReport from './bounceReport';
+import cookieConsent from './cookieConsent';
 import delayReport from './delayReport';
 import engagementReport from './engagementReport';
 import rejectionReport from './rejectionReport';
@@ -39,6 +40,7 @@ const appReducer = combineReducers({
   auth,
   billing,
   bounceReport,
+  cookieConsent,
   delayReport,
   engagementReport,
   rejectionReport,
