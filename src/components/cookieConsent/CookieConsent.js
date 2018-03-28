@@ -31,17 +31,28 @@ export class CookieConsent extends React.Component {
   };
 
   componentDidUpdate() {
+    const { cookieSet, userFlagSet, setConsentCookie } = this.props;
+
     // If cookie is set but user consent flag is not, set the flag to
     // indicate the user has consented but either they consented through another
     // .sparkpost.com property or they were not logged in when they consented.
-    const { cookieSet, userFlagSet } = this.props;
     if (cookieSet && !userFlagSet) {
       this.setConsentFlag();
+    }
+
+    // If the user flag is set, the user has previously consented but has 'lost'
+    // the cookie, so set it again.
+    if (!cookieSet && userFlagSet) {
+      setConsentCookie();
     }
   }
 
   render() {
-    const { consentGiven } = this.props;
+    const { accessControlReady, consentGiven } = this.props;
+
+    if (!accessControlReady) {
+      return null;
+    }
 
     if (consentGiven) {
       return null;
