@@ -97,7 +97,10 @@ export class ChangePlan extends Component {
     const { submitting, currentPlan, selectedPlan, plans, isSelfServeBilling } = this.props;
 
     // Manually billed accounts can submit without changing plan
-    const disableSubmit = submitting || (isSelfServeBilling && currentPlan.code === selectedPlan.code);
+    const disableSubmit = submitting ||
+      (isSelfServeBilling && currentPlan.code === selectedPlan.code) ||
+      // do not allow private, deprecated, etc. plans to enable billing
+      (selectedPlan.status !== 'public' && selectedPlan.status !== 'secret');
 
     return (
       <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
