@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { CookieConsent, ConsentBar } from '../CookieConsent';
+import { CookieConsent } from '../CookieConsent';
 
 describe('Component: CookieConsent', () => {
   let props;
@@ -18,13 +18,6 @@ describe('Component: CookieConsent', () => {
     };
 
     wrapper = shallow(<CookieConsent {...props} />);
-  });
-
-  describe('ConsentBar', () => {
-    it('should render correctly', () => {
-      const props = { onDismiss: jest.fn() };
-      expect(shallow(<ConsentBar {...props} />)).toMatchSnapshot();
-    });
   });
 
   it('should render the banner without consent', () => {

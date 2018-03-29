@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { UnstyledLink, Snackbar } from '@sparkpost/matchbox';
 
 import { setConsentCookie } from 'src/actions/cookieConsent';
 import { userGivesCookieConsent } from 'src/actions/currentUser';
@@ -8,14 +7,7 @@ import { userGivesCookieConsent } from 'src/actions/currentUser';
 import { consentCookieSetSelector, cookieConsentGivenSelector } from 'src/selectors/cookieConsent';
 import { userCookieConsentFlagSelector } from 'src/selectors/currentUser';
 
-import styles from './CookieConsent.module.scss';
-
-export const ConsentBar = ({ onDismiss }) => <div className={styles.CookieConsent}>
-  <div className={styles.ConsentBar}>
-    <Snackbar maxWidth={700} onDismiss={onDismiss}>
-      We use cookies to optimize your experience, analyze traffic, and personalize content.  To learn more, please visit our <UnstyledLink external to={'https://www.sparkpost.com/policies/privacy/'}>Cookie Policy</UnstyledLink>.  By using our site without disabling cookies, you consent to our use of them.</Snackbar>
-  </div>
-</div>;
+import { ConsentBar } from './components/ConsentBar';
 
 export class CookieConsent extends React.Component {
   storeConsent = () => {
@@ -24,8 +16,8 @@ export class CookieConsent extends React.Component {
   };
 
   setConsentFlag = () => {
-    const { accessControlReady, loggedIn, userGivesCookieConsent } = this.props;
-    if (accessControlReady && loggedIn) {
+    const { accessControlReady, loggedIn, savingFlag, userGivesCookieConsent } = this.props;
+    if (accessControlReady && loggedIn && !savingFlag) {
       return userGivesCookieConsent();
     }
   };
@@ -66,6 +58,7 @@ const mapStateToProps = (state) => ({
   consentGiven: cookieConsentGivenSelector(state),
   cookieSet: consentCookieSetSelector(state),
   userFlagSet: userCookieConsentFlagSelector(state),
+  savingFlag: state.currentUser.storingCookieConsent,
   accessControlReady: state.accessControlReady,
   loggedIn: state.auth.loggedIn
 });
