@@ -30,6 +30,16 @@ const config = {
     supportEmail: 'support@sparkpost.com',
     billingEmail: 'billing@sparkpost.com'
   },
+  cookieConsent: {
+    cookie: {
+      name: 'cookieConsent',
+      ageDays: 365,
+      options: {
+        domain: 'sparkpost.com',
+        path: '/'
+      }
+    }
+  },
   featureFlags: {
     allow_mailbox_verification: true,
     allow_anyone_at_verification: false,

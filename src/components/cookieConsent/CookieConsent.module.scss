@@ -1,0 +1,16 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.CookieConsent {
+  position: fixed;
+  bottom: spacing(large);
+  z-index: z-index(overlay);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.ConsentBar {
+  pointer-events: auto;
+}
+

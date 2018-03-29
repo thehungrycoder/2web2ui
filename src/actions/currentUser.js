@@ -56,3 +56,18 @@ export function verifyEmail(data = {}, { showErrorAlert = true, type = 'VERIFY_E
 export function verifyEmailToken(data) {
   return verifyEmail(data, { showErrorAlert: false, type: 'VERIFY_EMAIL_TOKEN' });
 }
+
+export function userGivesCookieConsent(username) {
+  return (dispatch, getState) => {
+    const { username } = getState().currentUser;
+    const action = {
+      type: 'USER_GIVES_COOKIE_CONSENT',
+      meta: {
+        method: 'PUT',
+        url: `/users/${username}`,
+        data: { cookie_consent: true }
+      }
+    };
+    return dispatch(sparkpostApiRequest(action)).then(() => dispatch(get()));
+  };
+}
