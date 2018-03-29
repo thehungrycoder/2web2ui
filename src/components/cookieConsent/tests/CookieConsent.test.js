@@ -13,11 +13,17 @@ describe('Component: CookieConsent', () => {
       userFlagSet: false,
       accessControlReady: true,
       loggedIn: true,
+      savingFlag: false,
       setConsentCookie: jest.fn(),
       userGivesCookieConsent: jest.fn()
     };
 
     wrapper = shallow(<CookieConsent {...props} />);
+  });
+
+  it('should not render until access control is ready', () => {
+    wrapper.setProps({ accessControlReady: false });
+    expect(wrapper).toMatchSnapshot();
   });
 
   it('should render the banner without consent', () => {
@@ -45,8 +51,23 @@ describe('Component: CookieConsent', () => {
     expect(props.setConsentCookie).toHaveBeenCalled();
   });
 
+  it('should not set the flag unless logged in', () => {
+    wrapper.setProps({ cookieSet: true, loggedIn: false });
+    expect(props.userGivesCookieConsent).not.toHaveBeenCalled();
+  });
+
+  it('should not set the flag unless access control is ready', () => {
+    wrapper.setProps({ cookieSet: true, loggedIn: false });
+    expect(props.userGivesCookieConsent).not.toHaveBeenCalled();
+  });
+
   it('should not set the flag if already set', () => {
-    wrapper.setProps({ userFlagset: true });
+    wrapper.setProps({ userFlagSet: true });
+    expect(props.userGivesCookieConsent).not.toHaveBeenCalled();
+  });
+
+  it('should not set the flag if a call to set it is in flight', () => {
+    wrapper.setProps({ savingFlag: true });
     expect(props.userGivesCookieConsent).not.toHaveBeenCalled();
   });
 });
