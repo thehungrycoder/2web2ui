@@ -1,6 +1,6 @@
 import React from 'react';
 import { PublicRoute, ProtectedRoute, AuthenticationGate } from 'src/components/auth';
-import { Support, GlobalAlertWrapper, BoomerangBanner, SiftScience } from 'src/components';
+import { CookieConsent, Support, GlobalAlertWrapper, BoomerangBanner, SiftScience } from 'src/components';
 import GoogleTagManager from 'src/components/googleTagManager/GoogleTagManager';
 import Layout from 'src/components/layout/Layout';
 import routes from 'src/config/routes';
@@ -19,6 +19,7 @@ const App = () => (
       <BoomerangBanner />
       {config.gtmId && <GoogleTagManager id={config.gtmId} />}
       <AuthenticationGate />
+      <CookieConsent />
       <Layout>
         <Switch>
           {

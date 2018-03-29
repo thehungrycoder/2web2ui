@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ConsentBar should render correctly 1`] = `
+<div>
+  <div>
+    <Snackbar
+      maxWidth={700}
+      onDismiss={[MockFunction]}
+      status="default"
+    >
+      We use cookies to optimize your experience, analyze traffic, and personalize content. To learn more, please visit our 
+      <UnstyledLink
+        external={true}
+        to="https://www.sparkpost.com/policies/privacy/"
+      >
+        Cookie Policy
+      </UnstyledLink>
+      . By using our site without disabling cookies, you consent to our use of them.
+    </Snackbar>
+  </div>
+</div>
+`;

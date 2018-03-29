@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: CookieConsent should not render the banner with consent 1`] = `""`;
+
+exports[`Component: CookieConsent should not render until access control is ready 1`] = `""`;
+
+exports[`Component: CookieConsent should render the banner without consent 1`] = `
+<Component
+  onDismiss={[Function]}
+/>
+`;

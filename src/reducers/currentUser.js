@@ -3,13 +3,14 @@ const initialState = {
   verifyingEmail: null,
   emailError: null,
   verifyingToken: null,
-  tokenError: null
+  tokenError: null,
+  storingCookieConsent: null
 };
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
     case 'GET_CURRENT_USER_SUCCESS':
-      return { ...state, ...payload };
+      return { ...state, ...payload, cookie_consent: !!payload.cookie_consent };
 
     case 'GET_GRANTS_SUCCESS':
       return { ...state, grants: payload };
@@ -34,6 +35,15 @@ export default (state = initialState, { type, payload }) => {
 
     case 'VERIFY_EMAIL_TOKEN_FAIL':
       return { ...state, tokenError: payload, verifyingToken: false };
+
+    case 'USER_GIVES_COOKIE_CONSENT_PENDING':
+      return { ...state, storingCookieConsent: true };
+
+    case 'USER_GIVES_COOKIE_CONSENT_FAIL':
+      return { ...state, storingCookieConsent: false };
+
+    case 'USER_GIVES_COOKIE_CONSENT_SUCCESS':
+      return { ...state, storingCookieConsent: false, cookie_consent: true };
 
     default:
       return state;
