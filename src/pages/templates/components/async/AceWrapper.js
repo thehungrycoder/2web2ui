@@ -12,6 +12,7 @@ const AceWrapper = ({
   input,
   mode,
   readOnly,
+  syntaxValidation,
   meta: { error, active, submitFailed }
 }) => (
   <div>
@@ -33,7 +34,7 @@ const AceWrapper = ({
       highlightActiveLine
       showPrintMargin={false}
       setOptions={{
-        // useWorker: false, - disables error checking
+        useWorker: syntaxValidation,
         displayIndentGuides: false
       }}
       editorProps={{ $blockScrolling: Infinity }}
