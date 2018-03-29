@@ -11,6 +11,8 @@ export const DATE_FORMATS = {
 };
 
 export const LINKS = {
+  SPC_EU_URL: 'https://app.eu.sparkpost.com',
+  SPC_US_URL: 'https://app.sparkpost.com',
   SP_HOME_PAGE: 'https://www.sparkpost.com',
   API_DOCS: 'https://developers.sparkpost.com/api',
   DOCS: 'https://www.sparkpost.com/docs',
@@ -38,3 +40,5 @@ export const ENTERPRISE_PLAN_CODES = ['ent1'];
 export const AWS_COOKIE_NAME = 'aws-mkt';
 
 export const DAILY_LIMIT_REQUEST_TEMPLATE = 'daily-limit-increase';
+
+export const SPC_EU_TENANT = 'spceu';

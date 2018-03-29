@@ -52,7 +52,10 @@ describe('JoinPage', () => {
       history: {
         push: jest.fn()
       },
-      isAWSsignUp: false
+      isAWSsignUp: false,
+      location: {
+        pathname: '/join'
+      }
     };
     formValues = {
       first_name: 'foo',
