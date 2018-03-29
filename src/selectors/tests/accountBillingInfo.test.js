@@ -1,31 +1,4 @@
-/* eslint max-lines: ["error", 300] */
-
 import * as billingInfo from '../accountBillingInfo';
-
-describe('Selector: public plans', () => {
-  let state;
-  beforeEach(() => {
-    state = {
-      billing: {
-        plans: [
-          { status: 'public', volume: 1 },
-          { status: 'public', volume: 3 },
-          { status: 'private', volume: 4 },
-          { status: 'public', volume: 2 }
-        ]
-      }
-    };
-  });
-
-  it('should get public plans and sort by volume', () => {
-    expect(billingInfo.publicPlansSelector(state)).toMatchSnapshot();
-  });
-
-  it('returns empty list on no plans (billing.plans)', () => {
-    delete state.billing.plans;
-    expect(billingInfo.publicPlansSelector(state)).toEqual([]);
-  });
-});
 
 describe('Selector: current plan', () => {
   let state;
@@ -153,39 +126,6 @@ describe('isAWSAccountSelector', () => {
   });
 });
 
-describe('getPlansSelector', () => {
-  let state;
-  beforeEach(() => {
-    state = {
-      account: { subscription: { code: 'free', type: 'aws' }},
-      billing: {
-        plans: [
-          { status: 'private', code: '123', awsMarketplace: true },
-          { status: 'public', code: 'qwe', isFree: false },
-          { status: 'public', code: 'qwe2', isFree: true }
-        ]
-      }
-    };
-  });
-
-  it('returns aws plans when subscription type is aws', () => {
-    expect(billingInfo.getPlansSelector(state)).toEqual([{ status: 'private', code: '123', awsMarketplace: true }]);
-  });
-
-  it('does not return free for manually billed accounts', () => {
-    state.account.subscription = { code: 'ent1', type: 'Default' };
-    expect(billingInfo.getPlansSelector(state)).toEqual([{ status: 'public', code: 'qwe', isFree: false }]);
-  });
-
-  it('returns public plans for self serve customers', () => {
-    state.account.subscription = { code: 'free', type: 'Default', self_serve: true };
-    expect(billingInfo.getPlansSelector(state)).toEqual([
-      { status: 'public', code: 'qwe', isFree: false },
-      { status: 'public', code: 'qwe2', isFree: true }
-    ]);
-  });
-});
-
 describe('canPurchaseIps', () => {
   let state;
   beforeEach(() => {
@@ -217,5 +157,61 @@ describe('canPurchaseIps', () => {
     state.account.subscription.type = 'aws';
     expect(billingInfo.canPurchaseIps(state)).toBe(true);
   });
+});
 
+describe('plan selector', () => {
+  let state;
+
+  beforeEach(() => {
+    state = {
+      account: {
+        subscription: { self_serve: true },
+        billing: {}
+      },
+      billing: {
+        plans: [
+          { code: 'dep', status: 'deprecated' },
+          { code: 'dep-aws', status: 'deprecated', awsMarketplace: true },
+          { code: 'pub', status: 'public' },
+          { code: 'pub-free', status: 'public', isFree: true },
+          { code: 'pub-aws', status: 'public', awsMarketplace: true },
+          { code: 'pub-aws-free', status: 'public', awsMarketplace: true, isFree: true },
+          { code: 'sec', status: 'secret' },
+          { code: 'sec-aws', status: 'secret', awsMarketplace: true }
+        ]
+      }
+    };
+  });
+
+  describe('selectAvailablePlans', () => {
+    it('should return active plans', () => {
+      expect(billingInfo.selectAvailablePlans(state)).toMatchSnapshot();
+    });
+
+    it('should return active paid plans', () => {
+      state.account.subscription.self_serve = false;
+      expect(billingInfo.selectAvailablePlans(state)).toMatchSnapshot();
+    });
+
+    it('should return active AWS plans', () => {
+      state.account.subscription.type = 'aws';
+      expect(billingInfo.selectAvailablePlans(state)).toMatchSnapshot();
+    });
+  });
+
+  describe('selectVisiblePlans', () => {
+    it('should return public plans', () => {
+      expect(billingInfo.selectVisiblePlans(state)).toMatchSnapshot();
+    });
+
+    it('should return public paid plans', () => {
+      state.account.subscription.self_serve = false;
+      expect(billingInfo.selectVisiblePlans(state)).toMatchSnapshot();
+    });
+
+    it('should return public AWS plans', () => {
+      state.account.subscription.type = 'aws';
+      expect(billingInfo.selectVisiblePlans(state)).toMatchSnapshot();
+    });
+  });
 });

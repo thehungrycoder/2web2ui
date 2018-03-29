@@ -9,6 +9,7 @@ import config from 'src/config';
 import {
   BrowserRouter as Router,
   Redirect,
+  Route,
   Switch
 } from 'react-router-dom';
 
@@ -29,7 +30,11 @@ const App = () => (
               route.exact = !(route.exact === false); // this makes exact default to true
 
               if (route.redirect) {
-                return <Redirect key={route.path} exact from={route.path} to={route.redirect} />;
+                return (
+                  <Route key={route.path} exact path={route.path} render={({ location }) => (
+                    <Redirect to={{ ...location, pathname: route.redirect }} />
+                  )} />
+                );
               }
 
               return <MyRoute key={route.path} {...route} />;
