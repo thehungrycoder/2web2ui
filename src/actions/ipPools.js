@@ -11,13 +11,13 @@ export function listPools() {
   });
 }
 
-export function createPool({ name }) {
+export function createPool({ name, defaultSigningDomain }) {
   return sparkpostApiRequest({
     type: 'CREATE_IP_POOL',
     meta: {
       method: 'POST',
       url: '/ip-pools',
-      data: { name }
+      data: { name, defaultSigningDomain }
     }
   });
 }

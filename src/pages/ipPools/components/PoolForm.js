@@ -79,6 +79,13 @@ export class PoolForm extends Component {
           helpText={helpText}
         />
 
+        <Field
+          name="signing_domain"
+          component={TextFieldWrapper}
+          label="Default Signing Domain"
+          disabled={submitting}
+        />
+
         { this.renderCollection() }
 
         <Button submit primary disabled={submitting || pristine}>
