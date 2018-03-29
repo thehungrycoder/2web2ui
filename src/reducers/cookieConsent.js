@@ -9,6 +9,9 @@ export default (state = initialState, { type, payload }) => {
     case 'GIVE_COOKIE_CONSENT':
       return { ...state, cookieSet: true };
 
+    case 'LOGOUT':
+      return { ...state, cookieSet: helpers.isCookieSet() };
+
     default:
       return state;
   }

@@ -40,11 +40,7 @@ export class CookieConsent extends React.Component {
   }
 
   render() {
-    const { accessControlReady, consentGiven } = this.props;
-
-    if (!accessControlReady) {
-      return null;
-    }
+    const { consentGiven } = this.props;
 
     if (consentGiven) {
       return null;

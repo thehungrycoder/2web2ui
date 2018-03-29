@@ -21,11 +21,6 @@ describe('Component: CookieConsent', () => {
     wrapper = shallow(<CookieConsent {...props} />);
   });
 
-  it('should not render until access control is ready', () => {
-    wrapper.setProps({ accessControlReady: false });
-    expect(wrapper).toMatchSnapshot();
-  });
-
   it('should render the banner without consent', () => {
     expect(wrapper).toMatchSnapshot();
   });
