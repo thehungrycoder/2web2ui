@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
@@ -7,7 +7,7 @@ import { Panel, UnstyledLink } from '@sparkpost/matchbox';
 import { LabelledValue } from 'src/components';
 import VerifyEmail from './VerifyEmail';
 import { SendingDomainSection } from './SendingDomainSection';
-import { VerifiedIcon } from './Icons';
+import { VerifiedIcon, ErrorIcon } from './Icons';
 
 // actions
 import { showAlert } from 'src/actions/globalAlert';
@@ -84,25 +84,21 @@ export class SetupSending extends Component {
   renderTxtRecordPanel() {
     const { domain: { dkimHostname, dkimValue, status }, verifyDkimLoading } = this.props;
     const readyFor = resolveReadyFor(status);
+    const verified = readyFor.sending && readyFor.dkim;
 
-    if (readyFor.sending && readyFor.dkim) {
-      return (
-        <Panel sectioned>
-          <p><VerifiedIcon/> This domain is all set up to send with DKIM-signing. Nice work!</p>
-        </Panel>
-      );
-    }
+    const titleIcon = verified ? <VerifiedIcon/> : <ErrorIcon/>;
+    const verifyButtonContent = verified ? 'Re-verify TXT Record' : 'Verify TXT Record';
 
     return (
       <Panel
         actions={[{
           id: 'verify-dkim',
-          content: verifyDkimLoading ? 'Verifying...' : 'Verify TXT Record',
+          content: verifyDkimLoading ? 'Verifying...' : verifyButtonContent,
           onClick: this.verifyDomain,
           disabled: verifyDkimLoading
         }]}
         sectioned
-        title="DNS Settings"
+        title={<Fragment>{titleIcon} DNS Settings</Fragment>}
       >
         <LabelledValue label='Type'><p>TXT</p></LabelledValue>
         <LabelledValue label='Hostname'><p>{dkimHostname}</p></LabelledValue>
