@@ -57,7 +57,7 @@ describe('Component: CookieConsent', () => {
   });
 
   it('should not set the flag unless access control is ready', () => {
-    wrapper.setProps({ cookieSet: true, loggedIn: false });
+    wrapper.setProps({ cookieSet: true, accessControlReady: false });
     expect(props.userGivesCookieConsent).not.toHaveBeenCalled();
   });
 
