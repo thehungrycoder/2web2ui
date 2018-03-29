@@ -1,38 +1,17 @@
-import { currentPlanSelector, getPlansSelector } from './accountBillingInfo';
-import { isSelfServeBilling } from 'src/helpers/conditions/account';
 import _ from 'lodash';
-
-export function onboardingInitialValues(state, props) {
-  const plans = getPlansSelector(state);
-  const { location: { state: locationState = {}}} = props;
-  const planCode = locationState.plan;
-  const selectedPlan = planCode ? _.find(plans, { code: planCode }) : null;
-
-  return {
-    planpicker: selectedPlan ? selectedPlan : _.first(plans),
-    billingAddress: {
-      firstName: state.currentUser.first_name,
-      lastName: state.currentUser.last_name
-    }
-  };
-}
+import { currentPlanSelector, selectAvailablePlans, selectVisiblePlans } from './accountBillingInfo';
 
 /**
  * Selects initial values for all the forms on account/billing/plan
  */
-export function changePlanInitialValues(state) {
-
-  let initialPlan = currentPlanSelector(state);
-
-  // Plans outside zuora won't be selectable through plan picker (only possible through manually billed accounts)
-  // Picker default to the highest plan
-  if (!initialPlan.hasOwnProperty('billingId') && !isSelfServeBilling(state)) {
-    initialPlan = _.last(getPlansSelector(state));
-  }
+export function changePlanInitialValues(state, { planCode } = {}) {
+  const overridePlan = _.find(selectAvailablePlans(state), { code: planCode }); // typically from query string
+  const currentPlan = currentPlanSelector(state);
+  const firstVisiblePlan = _.first(selectVisiblePlans(state));
 
   return {
     email: state.currentUser.email, // This sets the email value even though the field does not exist
-    planpicker: initialPlan,
+    planpicker: overridePlan || currentPlan || firstVisiblePlan,
     billingAddress: {
       firstName: state.currentUser.first_name,
       lastName: state.currentUser.last_name

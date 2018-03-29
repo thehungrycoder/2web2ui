@@ -1,5 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Selector: Account billing form changePlanInitialValues when NOT self serve should find and return secret plan 1`] = `
+Object {
+  "billingAddress": Object {
+    "firstName": "ann",
+    "lastName": "perkins",
+  },
+  "email": "ann@perkins.com",
+  "planpicker": Object {
+    "billingId": "ias",
+    "code": "im a secret",
+    "isFree": false,
+    "status": "secret",
+  },
+}
+`;
+
 exports[`Selector: Account billing form changePlanInitialValues when NOT self serve should return change plan values: with a billing id 1`] = `
 Object {
   "billingAddress": Object {
@@ -22,47 +38,7 @@ Object {
   },
   "email": "ann@perkins.com",
   "planpicker": Object {
-    "code": "im not free",
-    "isFree": false,
-  },
-}
-`;
-
-exports[`Selector: Account billing form onboardingInitialValues should gracefully handle invalid plan values from /join 1`] = `
-Object {
-  "billingAddress": Object {
-    "firstName": "ann",
-    "lastName": "perkins",
-  },
-  "planpicker": Object {
-    "code": "im free",
-    "isFree": true,
-  },
-}
-`;
-
-exports[`Selector: Account billing form onboardingInitialValues should set reasonable defaults 1`] = `
-Object {
-  "billingAddress": Object {
-    "firstName": "ann",
-    "lastName": "perkins",
-  },
-  "planpicker": Object {
-    "code": "im free",
-    "isFree": true,
-  },
-}
-`;
-
-exports[`Selector: Account billing form onboardingInitialValues should set the plan picker to the plan specified by /join 1`] = `
-Object {
-  "billingAddress": Object {
-    "firstName": "ann",
-    "lastName": "perkins",
-  },
-  "planpicker": Object {
-    "code": "im not free",
-    "isFree": false,
+    "code": "abc",
   },
 }
 `;

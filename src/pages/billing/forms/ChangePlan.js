@@ -2,10 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, formValueSelector } from 'redux-form';
 import { withRouter } from 'react-router-dom';
+import qs from 'query-string';
+
 import { billingCreate, billingUpdate, updateSubscription } from 'src/actions/billing';
 import { showAlert } from 'src/actions/globalAlert';
 import { changePlanInitialValues } from 'src/selectors/accountBillingForms';
-import { getPlansSelector, currentPlanSelector, canUpdateBillingInfoSelector } from 'src/selectors/accountBillingInfo';
+import {
+  currentPlanSelector, canUpdateBillingInfoSelector, selectVisiblePlans
+} from 'src/selectors/accountBillingInfo';
 import { Panel, Grid } from '@sparkpost/matchbox';
 import { PlanPicker } from 'src/components';
 import PaymentForm from './fields/PaymentForm';
@@ -54,9 +58,9 @@ export class ChangePlan extends Component {
   }
 
   renderCCSection = () => {
-    const { account } = this.props;
+    const { account, selectedPlan } = this.props;
 
-    if (this.props.selectedPlan && this.props.selectedPlan.isFree) {
+    if (selectedPlan.isFree) {
       return null; // CC not required on free plans
     }
 
@@ -90,10 +94,13 @@ export class ChangePlan extends Component {
   }
 
   render() {
-    const { submitting, pristine, currentPlan, selectedPlan, plans, isSelfServeBilling } = this.props;
+    const { submitting, currentPlan, selectedPlan, plans, isSelfServeBilling } = this.props;
 
     // Manually billed accounts can submit without changing plan
-    const disableSubmit = submitting || (isSelfServeBilling && (pristine || currentPlan.code === selectedPlan.code));
+    const disableSubmit = submitting ||
+      (isSelfServeBilling && currentPlan.code === selectedPlan.code) ||
+      // do not allow private, deprecated, etc. plans to enable billing
+      (selectedPlan.status !== 'public' && selectedPlan.status !== 'secret');
 
     return (
       <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
@@ -121,17 +128,19 @@ export class ChangePlan extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, props) => {
   const selector = formValueSelector(FORMNAME);
+  const { code: planCode } = qs.parse(props.location.search);
+
   return {
     account: state.account,
     billing: state.billing,
     canUpdateBillingInfo: canUpdateBillingInfoSelector(state),
     isSelfServeBilling: isSelfServeBilling(state),
-    plans: getPlansSelector(state),
+    plans: selectVisiblePlans(state),
     currentPlan: currentPlanSelector(state),
-    selectedPlan: selector(state, 'planpicker'),
-    initialValues: changePlanInitialValues(state)
+    selectedPlan: selector(state, 'planpicker') || {},
+    initialValues: changePlanInitialValues(state, { planCode })
   };
 };
 

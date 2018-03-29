@@ -9,9 +9,6 @@ const PlanPrice = ({ plan, showOverage = false, showIp = false, ...rest }) => {
   }
 
   const priceInfo = getPlanPrice(plan);
-  const priceElement = priceInfo.price
-    ? <span>at <strong>${priceInfo.price.toLocaleString()}</strong>/{priceInfo.intervalShort}</span>
-    : 'for Free';
 
   const overage = plan.isFree
     ? 'Full-featured developer account'
@@ -24,7 +21,9 @@ const PlanPrice = ({ plan, showOverage = false, showIp = false, ...rest }) => {
   return (
     <span>
       <span className={styles.MainLabel} {...rest}>
-        <strong>{ plan.volume.toLocaleString() }</strong> emails/month {priceElement}
+        <strong>{ plan.volume.toLocaleString() }</strong> emails/month
+        {priceInfo.price > 0 && <span> at <strong>${priceInfo.price.toLocaleString()}</strong>/{priceInfo.intervalShort}</span>}
+        {plan.isFree && ' for Free'}
       </span>
       <span className={styles.SupportLabel}>
         {showOverage && overage }
