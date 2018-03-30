@@ -27,7 +27,7 @@ const sparkpostRequest = requestHelperFactory({
     }
     return transformed;
   },
-  onSuccess: ({ response, dispatch, types, meta }) => {
+  onSuccess: ({ response, dispatch, types, meta, getState }) => {
     const { data: { results }} = response;
     dispatch({
       type: types.SUCCESS,
@@ -35,7 +35,9 @@ const sparkpostRequest = requestHelperFactory({
       meta
     });
 
-    return results;
+    console.log('sp request successful, moving to ', meta.onSuccess ? meta.onSuccess.name : undefined);
+    // return meta.onSuccess ? meta.onSuccess({ dispatch, getState, results }) : results;
+    return meta.onSuccess ? dispatch(meta.onSuccess(results)) : results;
   },
   onFail: ({ types, err, dispatch, meta, action, getState }) => {
     // TODO: Move this error transformation into an axios interceptor in the
@@ -114,7 +116,7 @@ const sparkpostRequest = requestHelperFactory({
     }
 
     // TODO: Remove this once we unchain all actions
-    throw apiError;
+    // throw apiError;
   }
 });
 

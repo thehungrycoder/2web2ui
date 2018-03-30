@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 
-import { getBillingCountries, billingUpdate } from 'src/actions/billing';
+import { getBillingCountries } from 'src/actions/billing';
+import billingUpdate from 'src/actions/billingUpdate';
 import { showAlert } from 'src/actions/globalAlert';
 import { updatePaymentInitialValues } from 'src/selectors/accountBillingForms';
 
@@ -21,9 +22,11 @@ export class UpdatePayment extends Component {
 
   onSubmit = (values) => {
     const { billingUpdate, onCancel, showAlert } = this.props;
-    return billingUpdate(values).then(() => {
-      showAlert({ type: 'success', message: 'Payment Information Updated' });
-      typeof onCancel === 'function' && onCancel();
+    return billingUpdate(values).then((res) => {
+      if (!(res instanceof Error)) {
+        showAlert({ type: 'success', message: 'Payment Information Updated' });
+        typeof onCancel === 'function' && onCancel();
+      }
     });
   }
 
