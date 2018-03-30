@@ -42,3 +42,4 @@ export const AWS_COOKIE_NAME = 'aws-mkt';
 export const DAILY_LIMIT_REQUEST_TEMPLATE = 'daily-limit-increase';
 
 export const SPC_EU_TENANT = 'spceu';
+export const SPC_TENANT = 'spc';
