@@ -74,6 +74,10 @@ class ErrorTracker {
     const options = {
       breadcrumbCallback,
       dataCallback: getEnricherOrDieTryin(store),
+      ignoreUrls: [
+        /^chrome-extension:\/\//i,
+        /^chrome:\/\//i
+      ],
       release,
       tags: { tenant }
     };
