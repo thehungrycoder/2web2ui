@@ -17,14 +17,13 @@ class CollectionPagination extends Component {
   }
 
   renderCSVSave() {
-    const { saveCsv, data, perPageButtons } = this.props;
-
-    // do not show save as csv if only 1 page of smallest per page increment
-    if (!saveCsv || data.length <= Math.min(...perPageButtons)) { return null; }
-
     const now = Math.floor(Date.now() / 1000);
-    return <Button download={`sparkpost-csv-${now}.csv`} to={this.formatToCsv()}>Save As CSV</Button>;
 
+    if (!this.props.saveCsv) {
+      return null;
+    }
+
+    return <Button download={`sparkpost-csv-${now}.csv`} to={this.formatToCsv()}>Save As CSV</Button>;
   }
 
   renderPageButtons() {
