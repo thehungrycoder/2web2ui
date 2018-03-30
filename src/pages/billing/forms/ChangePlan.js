@@ -4,7 +4,8 @@ import { reduxForm, formValueSelector } from 'redux-form';
 import { withRouter } from 'react-router-dom';
 import qs from 'query-string';
 
-import { billingCreate, billingUpdate, updateSubscription } from 'src/actions/billing';
+import { billingCreate, updateSubscription } from 'src/actions/billing';
+import billingUpdate from 'src/actions/billingUpdate';
 import { showAlert } from 'src/actions/globalAlert';
 import { changePlanInitialValues } from 'src/selectors/accountBillingForms';
 import {
