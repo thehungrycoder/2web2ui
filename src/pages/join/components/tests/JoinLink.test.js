@@ -21,4 +21,9 @@ describe('JoinLink', () => {
     wrapper.setProps({ tenant: 'spceu' });
     expect(wrapper).toMatchSnapshot();
   });
+
+  it('should return no link otherwise', () => {
+    wrapper.setProps({ tenant: 'onterpreez' });
+    expect(wrapper).toMatchSnapshot();
+  });
 });
