@@ -9,12 +9,15 @@ import { CenteredLogo } from 'src/components';
 import { Panel, Error, UnstyledLink } from '@sparkpost/matchbox';
 import JoinForm from './components/JoinForm';
 import JoinError from './components/JoinError';
+import JoinLink from './components/JoinLink';
 import config from 'src/config';
+import { inSPCEU } from 'src/config/tenant';
 import { authenticate } from 'src/actions/auth';
 import { loadScript } from 'src/helpers/loadScript';
 import { addEvent } from 'src/helpers/googleAnalytics';
 import { register } from 'src/actions/account';
 import { AFTER_JOIN_REDIRECT_ROUTE, LINKS, AWS_COOKIE_NAME } from 'src/constants';
+
 const { attribution, salesforceDataParams } = config;
 
 export class JoinPage extends Component {
@@ -65,12 +68,14 @@ export class JoinPage extends Component {
   render() {
     const { createError } = this.props.account;
     const { formData } = this.state;
+    const title = inSPCEU() ? 'Sign Up For SparkPost EU' : 'Sign Up';
+
     return (
       <div>
         {loadScript({ url: LINKS.RECAPTCHA_LIB_URL })}
         <CenteredLogo showAwsLogo={this.props.isAWSsignUp} />
 
-        <Panel accent title="Sign Up">
+        <Panel accent title={title}>
           {
             createError &&
               <Panel.Section>
@@ -83,6 +88,7 @@ export class JoinPage extends Component {
         </Panel>
         <Panel.Footer
           left={<small>Already have an account? <UnstyledLink Component={Link} to='/auth'>Log In</UnstyledLink>.</small>}
+          right={<JoinLink location={this.props.location} />}
         />
       </div>
     );

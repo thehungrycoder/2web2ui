@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`JoinLink should return EU sign-up link 1`] = `
+<small>
+  <UnstyledLink
+    to="https://app.eu.sparkpost.com/join?special=token"
+  >
+    Sign up for SparkPost 
+    EU
+  </UnstyledLink>
+</small>
+`;
+
+exports[`JoinLink should return US sign-up link 1`] = `
+<small>
+  <UnstyledLink
+    to="https://app.sparkpost.com/join?special=token"
+  >
+    Sign up for SparkPost 
+  </UnstyledLink>
+</small>
+`;
+
+exports[`JoinLink should return no link otherwise 1`] = `""`;

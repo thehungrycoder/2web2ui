@@ -35,6 +35,15 @@ exports[`JoinPage render renders aws logo when signup from aws 1`] = `
         .
       </small>
     }
+    right={
+      <JoinLink
+        location={
+          Object {
+            "pathname": "/join",
+          }
+        }
+      />
+    }
   />
 </div>
 `;
@@ -73,6 +82,15 @@ exports[`JoinPage render renders correctly 1`] = `
         </UnstyledLink>
         .
       </small>
+    }
+    right={
+      <JoinLink
+        location={
+          Object {
+            "pathname": "/join",
+          }
+        }
+      />
     }
   />
 </div>
@@ -122,6 +140,15 @@ exports[`JoinPage render renders errors 1`] = `
         </UnstyledLink>
         .
       </small>
+    }
+    right={
+      <JoinLink
+        location={
+          Object {
+            "pathname": "/join",
+          }
+        }
+      />
     }
   />
 </div>
