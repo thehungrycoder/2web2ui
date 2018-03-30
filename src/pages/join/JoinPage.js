@@ -11,6 +11,7 @@ import JoinForm from './components/JoinForm';
 import JoinError from './components/JoinError';
 import JoinLink from './components/JoinLink';
 import config from 'src/config';
+import { inSPCEU } from 'src/config/tenant';
 import { authenticate } from 'src/actions/auth';
 import { loadScript } from 'src/helpers/loadScript';
 import { addEvent } from 'src/helpers/googleAnalytics';
@@ -67,13 +68,14 @@ export class JoinPage extends Component {
   render() {
     const { createError } = this.props.account;
     const { formData } = this.state;
+    const title = inSPCEU() ? 'Sign Up For SparkPost EU' : 'Sign Up';
 
     return (
       <div>
         {loadScript({ url: LINKS.RECAPTCHA_LIB_URL })}
         <CenteredLogo showAwsLogo={this.props.isAWSsignUp} />
 
-        <Panel accent title="Sign Up">
+        <Panel accent title={title}>
           {
             createError &&
               <Panel.Section>
