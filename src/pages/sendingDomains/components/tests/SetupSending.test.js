@@ -34,7 +34,9 @@ describe('Component: SetupSending', () => {
   });
 
   it('renders correctly for unverified DKIM and invalid ownership with mailbox verification enabled', () => {
+    wrapper.debug();
     expect(wrapper).toMatchSnapshot();
+
   });
 
   it('renders correctly when ownership and DKIM are verified', () => {

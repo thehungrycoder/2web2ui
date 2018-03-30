@@ -62,8 +62,8 @@ export class EditBounce extends Component {
     const { verifyCnameLoading, domain } = this.props;
     const { bounce } = resolveReadyFor(domain.status);
 
-    const verifyButtonContent = bounce ? 'Re-verify CNAME Record' : 'Verify CNAME Record';
-    const buttonText = verifyCnameLoading ? 'Verifying...' : verifyButtonContent;
+    const verifyText = bounce ? 'Re-verify CNAME Record' : 'Verify CNAME Record';
+    const buttonText = verifyCnameLoading ? 'Verifying...' : verifyText;
 
     return {
       content: buttonText,

@@ -36,7 +36,12 @@ exports[`Component: SetupSending renders correctly for unverified DKIM and inval
         ]
       }
       sectioned={true}
-      title="DNS Settings"
+      title={
+        <UNDEFINED>
+          <ErrorIcon />
+           DNS Settings
+        </UNDEFINED>
+      }
     >
       <LabelledValue
         label="Type"
@@ -100,7 +105,12 @@ exports[`Component: SetupSending renders correctly for unverified DKIM and inval
         ]
       }
       sectioned={true}
-      title="DNS Settings"
+      title={
+        <UNDEFINED>
+          <ErrorIcon />
+           DNS Settings
+        </UNDEFINED>
+      }
     >
       <LabelledValue
         label="Type"
@@ -135,12 +145,45 @@ exports[`Component: SetupSending renders correctly when ownership and DKIM are v
   <Left />
   <Right>
     <Panel
+      actions={
+        Array [
+          Object {
+            "content": "Re-verify TXT Record",
+            "disabled": false,
+            "id": "verify-dkim",
+            "onClick": [Function],
+          },
+        ]
+      }
       sectioned={true}
+      title={
+        <UNDEFINED>
+          <VerifiedIcon />
+           DNS Settings
+        </UNDEFINED>
+      }
     >
-      <p>
-        <VerifiedIcon />
-         This domain is all set up to send with DKIM-signing. Nice work!
-      </p>
+      <LabelledValue
+        label="Type"
+      >
+        <p>
+          TXT
+        </p>
+      </LabelledValue>
+      <LabelledValue
+        label="Hostname"
+      >
+        <p>
+          scph0118._domainkey.xyz.com
+        </p>
+      </LabelledValue>
+      <LabelledValue
+        label="Value"
+      >
+        <p>
+          v=DKIM1; k=rsa; h=sha256; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC7J/mQAVP9pynvD79opV/GD495pJWTWmHaEMymBO55y52gu2D23/CHbLys0KXszTAPOVS9x3HdRByeE1jIx41sZkWwDzxcyZH2NP5Mw3zNQWO4CqSGqrVPuukjIy5N3jmZnJ/V3IOkKnC3A+j76iIG42cVOgzoekbM3ZXSfwag+wIDAQAB
+        </p>
+      </LabelledValue>
     </Panel>
   </Right>
 </SendingDomainSection>
@@ -176,7 +219,12 @@ exports[`Component: SetupSending renders correctly when ownership is valid and D
         ]
       }
       sectioned={true}
-      title="DNS Settings"
+      title={
+        <UNDEFINED>
+          <ErrorIcon />
+           DNS Settings
+        </UNDEFINED>
+      }
     >
       <LabelledValue
         label="Type"
