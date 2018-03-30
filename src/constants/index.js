@@ -43,3 +43,8 @@ export const DAILY_LIMIT_REQUEST_TEMPLATE = 'daily-limit-increase';
 
 export const SPC_EU_TENANT = 'spceu';
 export const SPC_TENANT = 'spc';
+
+export const CROSS_LINK_MAP = {
+  [SPC_TENANT]: { label: '', url: LINKS.SPC_US_URL },
+  [SPC_EU_TENANT]: { label: 'EU', url: LINKS.SPC_EU_URL }
+};

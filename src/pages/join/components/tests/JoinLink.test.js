@@ -13,17 +13,17 @@ describe('JoinLink', () => {
   });
 
   it('should return EU sign-up link', () => {
-    wrapper.setProps({ tenant: 'spc' });
+    wrapper.setProps({ crossLinkTenant: 'spceu' });
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should return US sign-up link', () => {
-    wrapper.setProps({ tenant: 'spceu' });
+    wrapper.setProps({ crossLinkTenant: 'spc' });
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should return no link otherwise', () => {
-    wrapper.setProps({ tenant: 'onterpreez' });
+    wrapper.setProps({ crossLinkTenant: 'onterpreez' });
     expect(wrapper).toMatchSnapshot();
   });
 });
