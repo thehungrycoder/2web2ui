@@ -27,7 +27,7 @@ const sparkpostRequest = requestHelperFactory({
     }
     return transformed;
   },
-  onSuccess: ({ response, dispatch, types, meta, getState }) => {
+  onSuccess: ({ response, dispatch, types, meta }) => {
     const { data: { results }} = response;
     dispatch({
       type: types.SUCCESS,
@@ -35,9 +35,8 @@ const sparkpostRequest = requestHelperFactory({
       meta
     });
 
-    console.log('sp request successful, moving to ', meta.onSuccess ? meta.onSuccess.name : undefined);
-    // return meta.onSuccess ? meta.onSuccess({ dispatch, getState, results }) : results;
-    return meta.onSuccess ? dispatch(meta.onSuccess(results)) : results;
+    // console.log('sp request successful, moving to ', meta.onSuccess ? meta.onSuccess : undefined);
+    return meta.onSuccess ? dispatch(meta.onSuccess({ results })) : results;
   },
   onFail: ({ types, err, dispatch, meta, action, getState }) => {
     // TODO: Move this error transformation into an axios interceptor in the
@@ -79,7 +78,6 @@ const sparkpostRequest = requestHelperFactory({
           // refresh token request failed
           (err) => {
             dispatch(logout());
-            throw err;
           }
         );
     }
@@ -88,13 +86,11 @@ const sparkpostRequest = requestHelperFactory({
     if (response.status === 403 && account.status === 'suspended') {
       dispatch(showSuspensionAlert());
       dispatch(fetchAccount());
-      throw apiError;
     }
 
     // If we have a 403 or a 401 and we're not refreshing, log the user out silently
     if (response.status === 401 || response.status === 403) {
       dispatch(logout());
-      throw apiError;
     }
 
     // any other API error should automatically fail, to be handled in the reducers/components
@@ -114,9 +110,6 @@ const sparkpostRequest = requestHelperFactory({
           details: message
         }));
     }
-
-    // TODO: Remove this once we unchain all actions
-    // throw apiError;
   }
 });
 

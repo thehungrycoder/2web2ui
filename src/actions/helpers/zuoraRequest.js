@@ -5,7 +5,7 @@ import { showAlert } from 'src/actions/globalAlert';
 
 export default requestHelperFactory({
   request: zuoraAxios,
-  onSuccess: ({ types, response, dispatch, meta, getState }) => {
+  onSuccess: ({ types, response, dispatch, meta }) => {
     if (!response.data.success) {
       const message = _.get(response, 'data.reasons[0].message', 'An error occurred while contacting the billing service');
 
@@ -23,7 +23,6 @@ export default requestHelperFactory({
       dispatch(showAlert({ type: 'error', message }));
 
       return err;
-      // throw err;
     }
 
     dispatch({
@@ -32,7 +31,7 @@ export default requestHelperFactory({
       meta
     });
 
-    console.log('zuora request successful, moving to ', meta.onSuccess ? meta.onSuccess.name : undefined);
-    return meta.onSuccess ? dispatch(meta.onSuccess(response)) : response;
+    console.log('zuora request successful, moving to ', meta.onSuccess ? meta.onSuccess : undefined);
+    return meta.onSuccess ? dispatch(meta.onSuccess({ results: response })) : response;
   }
 });

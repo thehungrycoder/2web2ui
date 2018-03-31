@@ -75,14 +75,14 @@ export function cors({ meta, context, data = {}}) {
   });
 }
 
-export function updateCreditCard({ data, token, signature, onSuccess }) {
+export function updateCreditCard({ data, token, signature, meta }) {
   return zuoraRequest({
     type: 'ZUORA_UPDATE_CC',
     meta: {
       method: 'POST',
       url: '/payment-methods/credit-cards',
       data,
-      onSuccess,
+      ...meta,
       headers: { token, signature }
     }
   });
@@ -159,13 +159,13 @@ export function billingCreate(values) {
  * attempts to collect payments (like when payment method is updated) to make sure pending payments are charged
  */
 
-export function collectPayments(onSuccess) {
+export function collectPayments({ meta }) {
   return sparkpostApiRequest({
     type: 'COLLECT_PAYMENTS',
     meta: {
       method: 'POST',
       url: '/account/billing/collect',
-      onSuccess
+      ...meta
     }
   });
 }

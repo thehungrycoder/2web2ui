@@ -8,71 +8,34 @@ import { formatUpdateData } from '../helpers/billing';
 import { collectPayments, cors, syncSubscription, updateCreditCard, updateSubscription } from './billing';
 import zuoraRequest from './helpers/zuoraRequest';
 
-// export default function billingUpdate(values) {
-//
-//   return (dispatch) => {
-//     // Update Zuora with new CC
-//     function updateZuoraCC({ dispatch, getState, results: { accountKey, token, signature }}) {
-//       const data = formatUpdateData({ ...values, accountKey });
-//       return dispatch(updateCreditCard({ data, token, signature, onSuccess: maybeChangePlan }));
-//     }
-//
-//     // change plan via our API if plan is included
-//     function maybeChangePlan({ dispatch }) {
-//       if (values.planpicker) {
-//         dispatch(updateSubscription({ code: values.planpicker.code, onSuccess: snycThenCollect }));
-//       } else {
-//         syncSubscription(getPayments);
-//       }
-//     }
-//
-//     // sync our db with new Zuora state
-//     // function doSync({ dispatch }) {
-//     //   dispatch(syncSubscription(getPayments));
-//     // }
-//
-//     function getPayments({ dispatch }) {
-//       dispatch(collectPayments(refreshAccount));
-//     }
-//
-//     // refetch the account
-//     function refreshAccount({ dispatch }) {
-//       dispatch(fetchAccount({ include: 'usage,billing' }));
-//     }
-//
-//     // get CORS data for the update billing context
-//     return dispatch(cors({ context: 'update-billing', onSuccess: updateZuoraCC }));
-//   };
-// }
-
-
-
 export default function billingUpdate(values) {
+  // if (values.planpicker) {
+  //   dispatch(updateSubscription({ code: values.planpicker.code }));
+  // }
+
   return (dispatch) => {
-    // const actions =
-    //   [ //action, onSuccess
-    //     [ corsThenUpdateZuora, updateZuoraCC ],
-    //     [ updateZuoraCC, maybeChangePlan ],
-    //     [ maybeChangePlan, syncSubscription ],
-    //     [ syncSubscription, collectPayments ],
-    //     [ collectPayments, refreshAccount ],
-    //     [ refreshAccount]
-    //   ];
+    const actions = [
+      { action: cors, args: { context: 'update-billing' }},
+      { action: updateZuoraCC },
+      // { action: updateSubscription, args: { code: values.planpicker.code }},
+      { action: syncSubscription },
+      { action: collectPayments },
+      { action: fetchAccount }
+    ];
 
-    const actions =
-      [ //action, onSuccess
-        [corsThenUpdateZuora, updateZuoraCC],
-        [updateZuoraCC]
-      ];
+    return dispatch(chainActions(actions));
 
-    return chainActions(actions);
-
-    function corsThenUpdateZuora({ meta }) {
-      return cors({ context: 'update-billing', meta });
-    }
+    // return dispatch(cors({ context: 'update-billing', meta: { onSuccess: (results) =>
+    //   updateZuoraCC({ results, meta: { onSuccess: () =>
+    //     syncSubscription({ meta: { onSuccess: () =>
+    //       collectPayments({ meta: { onSuccess: () =>
+    //         fetchAccount()
+    //       }})
+    //     }})
+    //   }})
+    // }}));
 
     function updateZuoraCC({ meta, getState, results: { accountKey, token, signature }}) {
-      console.log(accountKey);
       const data = formatUpdateData({ ...values, accountKey });
       return zuoraRequest({
         type: 'ZUORA_UPDATE_CC',
@@ -85,50 +48,27 @@ export default function billingUpdate(values) {
         }
       });
     }
-
-    function maybeChangePlan({ dispatch }) {
-      if (values.planpicker) {
-        dispatch(updateSubscription({ code: values.planpicker.code }));
-      }
-    }
-
-    function refreshAccount({ dispatch }) {
-      dispatch(fetchAccount({ include: 'usage,billing' }));
-    }
-
-    function snycThenCollect() {
-      return syncSubscription({ meta: { onSuccess: collectPayments }});
-    }
   };
 }
 
-
-
-
 /**
-returns
-() => actionA({ onSuccess: (results) =>
-        actionB({ results, onSuccess: (results) =>
-            actionC({ results, onSuccess: (results) =>
-                actionD({ results }) })})});
+ return actions[0].action({ ...actions[0].args, meta: { onSuccess: (results) =>
+    actions[1].action({ ...actions[1].args, results, meta: { onSuccess: () =>
+      actions[2].action({ ...actions[2].args, meta: { onSuccess: () =>
+        actions[3].action({ ...actions[3].args, meta: { onSuccess: () =>
+          actions[4].action({ ...actions[4].args })
+        }})
+      }})
+    }})
+  }});
 **/
 
 function chainActions(actions) {
-  let current = actions[0][0];
-
-  const reduced = actions.reduce((results, next) => {
-    console.log(next);
-    let result;
-    if (current) {
-      console.log('current', current.name);
-      return result = current({ results, meta: { onSuccess: next[1] }});
-      console.log('result of ', current.name, ' ', result);
+  return actions.reduceRight((last, current, index) => {
+    const meta = last ? { onSuccess: last } : null;
+    if (index === 0) { // the first action gets called directly, without results from anything
+      return current.action({ ...current.args, meta });
     }
-    current = next[1]; // set the next action to be called
-    console.log('next up is ', current ? current.name : 'nothing!');
-    return result;
+    return (results) => current.action({ ...current.args, ...results, meta });
   }, undefined);
-
-  console.log(reduced);
-  return reduced;
 }
