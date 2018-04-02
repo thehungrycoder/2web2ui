@@ -69,6 +69,14 @@ describe('Component: EditBounce', () => {
   describe('default bounce toggle', () => {
     it('renders correctly toggle when all conditions are true', () => {
       config.bounceDomains.allowDefault = true;
+      config.bounceDomains.allowSubaccountDefault = true;
+      wrapper.setProps({ domain: { status: { ...status, ownership_verified: true, cname_status: 'valid' }}});
+      expect(wrapper.find('Field')).toMatchSnapshot();
+    });
+
+    it('renders correctly toggle when all conditions are true except allowSubaccount', () => {
+      config.bounceDomains.allowDefault = true;
+      config.bounceDomains.allowSubaccountDefault = false;
       wrapper.setProps({ domain: { status: { ...status, ownership_verified: true, cname_status: 'valid' }}});
       expect(wrapper.find('Field')).toMatchSnapshot();
     });
@@ -85,8 +93,16 @@ describe('Component: EditBounce', () => {
       expect(wrapper.find('Field')).toHaveLength(0);
     });
 
-    it('does not render if assigned to subaccount', () => {
+    it('renders correctly if assigned to subaccount and feature flag is true', () => {
       config.bounceDomains.allowDefault = true;
+      config.bounceDomains.allowSubaccountDefault = true;
+      wrapper.setProps({ domain: { subaccount_id: 101, status: { ...status, ownership_verified: true, cname_status: 'valid' }}});
+      expect(wrapper.find('Field')).toMatchSnapshot();
+    });
+
+    it('does not render if assigned to subaccount and feature flag is false', () => {
+      config.bounceDomains.allowDefault = true;
+      config.bounceDomains.allowSubaccountDefault = false;
       wrapper.setProps({ domain: { subaccount_id: 101, status: { ...status, ownership_verified: true, cname_status: 'valid' }}});
       expect(wrapper.find('Field')).toHaveLength(0);
     });
