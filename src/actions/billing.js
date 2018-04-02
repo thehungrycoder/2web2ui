@@ -1,5 +1,5 @@
 /* eslint max-lines: ["error", 215] */
-import { formatDataForCors, formatCreateData, formatUpdateData, formatContactData } from 'src/helpers/billing';
+import { formatContactData } from 'src/helpers/billing';
 import { fetch as fetchAccount } from './account';
 import { list as getSendingIps } from './sendingIps';
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
@@ -118,41 +118,6 @@ export function createZuoraAccount({ data, token, signature }) {
       headers: { token, signature }
     }
   });
-}
-
-export function billingCreate(values) {
-  return (dispatch, getState) => {
-
-    // AWS plans don't get created through Zuora, instead update existing
-    // subscription to the selected plan
-    if (isAws(getState())) {
-      return dispatch(updateSubscription({ code: values.planpicker.code }));
-    }
-
-    const { corsData, billingData } = formatDataForCors(values);
-
-    // get CORS data for the create account context
-    return dispatch(cors({ context: 'create-account', data: corsData }))
-
-      // create the Zuora account
-      .then((results) => {
-        const { token, signature } = results;
-        const { currentUser } = getState();
-        const data = formatCreateData({ ...results, ...billingData });
-
-        // add user's email when creating account
-        data.billToContact.workEmail = currentUser.email;
-
-        return dispatch(createZuoraAccount({ data, token, signature }));
-      })
-
-      // sync our db with new Zuora state
-      .then(() => dispatch(syncSubscription()))
-
-      // refetch the account
-      .then(() => dispatch(fetchAccount({ include: 'usage,billing' })));
-
-  };
 }
 
 /**
