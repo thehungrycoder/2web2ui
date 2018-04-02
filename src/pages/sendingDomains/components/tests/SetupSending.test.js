@@ -4,6 +4,9 @@ import config from 'src/config';
 
 import { SetupSending } from '../SetupSending';
 
+// Snapshot note - Fragments that are not directly rendered will show 'UNDEFINED'
+// Will be fixed in a future jest update (https://github.com/facebook/jest/pull/5816)
+
 describe('Component: SetupSending', () => {
   let wrapper;
   let props;
@@ -34,9 +37,7 @@ describe('Component: SetupSending', () => {
   });
 
   it('renders correctly for unverified DKIM and invalid ownership with mailbox verification enabled', () => {
-    wrapper.debug();
     expect(wrapper).toMatchSnapshot();
-
   });
 
   it('renders correctly when ownership and DKIM are verified', () => {
