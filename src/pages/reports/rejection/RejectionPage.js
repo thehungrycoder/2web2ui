@@ -5,7 +5,7 @@ import { addFilters } from 'src/actions/reportOptions';
 import { refreshRejectionReport } from 'src/actions/rejectionReport';
 import { selectReportSearchOptions } from 'src/selectors/reportSearchOptions';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
-import { Page, Panel } from '@sparkpost/matchbox';
+import { Page } from '@sparkpost/matchbox';
 import ReportOptions from '../components/ReportOptions';
 import MetricsSummary from '../components/MetricsSummary';
 import DataTable from './components/DataTable';
@@ -57,9 +57,8 @@ export class RejectionPage extends Component {
       <Page title='Rejections Report'>
         <ReportOptions reportLoading={loading} searchOptions={rejectionSearchOptions} />
         {this.renderTopLevelMetrics()}
-        <Panel title='Rejection Reasons' className='RejectionTable'>
-          {this.renderCollection()}
-        </Panel>
+        <hr/>
+        {this.renderCollection()}
       </Page>
     );
   }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextField, Icon } from '@sparkpost/matchbox';
+import { TextField, Icon, Panel } from '@sparkpost/matchbox';
 import _ from 'lodash';
 
 export default function CollectionFilterBox({ onChange, rows, exampleModifiers = Object.keys(rows[0]), keyMap = {}}) {
@@ -16,6 +16,8 @@ export default function CollectionFilterBox({ onChange, rows, exampleModifiers =
   const placeholder = `Filter results e.g. ${exampleString}`;
 
   return (
-    <TextField prefix={<Icon name='Search' />} placeholder={placeholder} onChange={handleChange} />
+    <Panel sectioned>
+      <TextField prefix={<Icon name='Search' />} placeholder={placeholder} onChange={handleChange} />
+    </Panel>
   );
 }
