@@ -6,23 +6,32 @@ import findRouteByPath from 'src/helpers/findRouteByPath';
 
 export class GoogleTagManager extends Component {
   state = {
-    dataLayerLoaded: false
+    dataLayerLoaded: false,
+    waitForUser: false
   }
 
   componentDidMount() {
     window.dataLayer = [];
-    this.setState({ dataLayerLoaded: true });
+    const route = findRouteByPath(this.props.location.pathname);
+    // for public routes, track initial page view immediately
+    if (route.public) {
+      this.trackPageview();
+    }
+    // for non-public routes, store flag to let us know we need to track initial page view once the username loads
+    this.setState({ dataLayerLoaded: true, waitForUser: !route.public });
   }
 
   componentDidUpdate(prevProps) {
-    // Track additional page views whenever the route changes
-    if (prevProps.location.pathname !== this.props.location.pathname) {
+    const isNewRoute = !this.state.waitForUser && prevProps.location.pathname !== this.props.location.pathname;
+    const userHasLoaded = this.state.waitForUser && !prevProps.username && this.props.username;
+
+    // Track additional page views whenever the route changes or when username first loads on auth page initial load
+    if (isNewRoute || userHasLoaded) {
       this.trackPageview();
     }
 
-    // Wait until the username is available to track the initial page view
-    if (!prevProps.username && this.props.username) {
-      this.trackPageview(); // track initial page view
+    if (userHasLoaded) {
+      this.setState({ waitForUser: false });
     }
   }
 
