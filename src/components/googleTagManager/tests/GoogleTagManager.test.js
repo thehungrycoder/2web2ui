@@ -30,6 +30,9 @@ describe('Component: GoogleTagManager', () => {
 
   it('should push the username and track the initial event when username becomes available', () => {
     expect(window.dataLayer).toEqual([]);
+
+    expect(wrapper.state('waitForUser')).toEqual(true);
+
     wrapper.setProps({ username: 'jojo' });
     expect(window.dataLayer).toEqual([
       {
@@ -39,6 +42,8 @@ describe('Component: GoogleTagManager', () => {
         username: 'jojo'
       }
     ]);
+
+    expect(wrapper.state('waitForUser')).toEqual(false);
   });
 
   it('should track a page view immediately if on a public route, and not again when the username becomes available', () => {
@@ -52,7 +57,6 @@ describe('Component: GoogleTagManager', () => {
         username: undefined
       }
     ]);
-
     wrapper.setProps({ username: 'loaded' });
     expect(window.dataLayer).toHaveLength(1);
   });

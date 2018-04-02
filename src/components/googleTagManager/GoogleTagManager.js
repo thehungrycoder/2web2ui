@@ -23,11 +23,15 @@ export class GoogleTagManager extends Component {
 
   componentDidUpdate(prevProps) {
     const isNewRoute = !this.state.waitForUser && prevProps.location.pathname !== this.props.location.pathname;
-    const trackWhenUserLoads = this.state.waitForUser && !prevProps.username && this.props.username;
+    const userHasLoaded = this.state.waitForUser && !prevProps.username && this.props.username;
 
     // Track additional page views whenever the route changes or when username first loads on auth page initial load
-    if (isNewRoute || trackWhenUserLoads) {
+    if (isNewRoute || userHasLoaded) {
       this.trackPageview();
+    }
+
+    if (userHasLoaded) {
+      this.setState({ waitForUser: false });
     }
   }
 
