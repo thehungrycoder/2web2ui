@@ -21,6 +21,9 @@ const BLACKLIST = new Set([
   '@@redux-form/SET_SUBMIT_FAILED'
 ]);
 
+// Chrome and Firefox extensions
+export const BROWSER_EXTENSION_REGEX = new RegExp('^(chrome|chrome-extension|resource)://', 'i');
+
 /**
  * Filter out blacklisted breadcrumbs
  *
@@ -75,8 +78,7 @@ class ErrorTracker {
       breadcrumbCallback,
       dataCallback: getEnricherOrDieTryin(store),
       ignoreUrls: [
-        /^chrome-extension:\/\//i,
-        /^chrome:\/\//i
+        BROWSER_EXTENSION_REGEX
       ],
       release,
       tags: { tenant }

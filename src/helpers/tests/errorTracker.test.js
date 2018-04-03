@@ -1,4 +1,6 @@
-import ErrorTracker, { breadcrumbCallback, getEnricherOrDieTryin } from '../errorTracker';
+import ErrorTracker, {
+  breadcrumbCallback, getEnricherOrDieTryin, BROWSER_EXTENSION_REGEX
+} from '../errorTracker';
 import * as mockRaven from 'raven-js';
 
 jest.mock('raven-js');
@@ -90,5 +92,19 @@ describe('.report', () => {
     isSetup.mockReturnValue(true);
     ErrorTracker.report('test-logger', error);
     expect(captureException).toHaveBeenCalledWith(error, { logger: 'test-logger' });
+  });
+});
+
+describe('BROWSER_EXTENSION_REGEX', () => {
+  it('should match Chrome files', () => {
+    expect('chrome://example/test.js').toMatch(BROWSER_EXTENSION_REGEX);
+  });
+
+  it('should match Chrome extension files', () => {
+    expect('chrome-extension://example/test.js').toMatch(BROWSER_EXTENSION_REGEX);
+  });
+
+  it('should match Firefox extension files', () => {
+    expect('resource://example/test.js').toMatch(BROWSER_EXTENSION_REGEX);
   });
 });
