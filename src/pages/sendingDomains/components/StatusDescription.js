@@ -18,7 +18,7 @@ const StatusDescription = ({ domain, readyFor, status }) => {
       <LabelledValue label={<StatusTooltipHeader />}>
         { status === 'verified' && <div><VerifiedIcon/> <strong>Verified</strong></div> }
         { status !== 'verified' && <DomainStatusTag status={status} /> }
-        <ReadyFor {...readyFor} bounceDefault={is_default_bounce_domain} />
+        <div><ReadyFor {...readyFor} bounceDefault={is_default_bounce_domain} /></div>
       </LabelledValue>
     </Panel.Section>
     {

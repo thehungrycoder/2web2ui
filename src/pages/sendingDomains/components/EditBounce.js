@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { verifyCname, update } from 'src/actions/sendingDomains';
 
-import { VerifiedIcon } from './Icons';
+import { VerifiedIcon, ErrorIcon } from './Icons';
 import { Panel, Banner, Tooltip, Icon } from '@sparkpost/matchbox';
 import ToggleBlock from 'src/components/toggleBlock/ToggleBlock';
 import { LabelledValue } from 'src/components';
@@ -59,8 +59,11 @@ export class EditBounce extends Component {
   }
 
   getVerifyAction() {
-    const { verifyCnameLoading } = this.props;
-    const buttonText = verifyCnameLoading ? 'Verifying...' : 'Verify CNAME Record';
+    const { verifyCnameLoading, domain } = this.props;
+    const { bounce } = resolveReadyFor(domain.status);
+
+    const verifyText = bounce ? 'Re-verify CNAME Record' : 'Verify CNAME Record';
+    const buttonText = verifyCnameLoading ? 'Verifying...' : verifyText;
 
     return {
       content: buttonText,
@@ -69,9 +72,22 @@ export class EditBounce extends Component {
     };
   }
 
-  renderNotReady() {
-    const { id } = this.props;
+  renderDnsSettings() {
+    const { id, domain } = this.props;
+    const { bounce } = resolveReadyFor(domain.status);
+    const titleIcon = bounce ? <VerifiedIcon/> : <ErrorIcon/>;
 
+    return (
+      <Panel title={<Fragment>{titleIcon} DNS Settings</Fragment>} sectioned
+        actions={[this.getVerifyAction()]} >
+        <LabelledValue label='Type'><p>CNAME</p></LabelledValue>
+        <LabelledValue label='Hostname'><p>{id}</p></LabelledValue>
+        <LabelledValue label='Value'><p>{config.bounceDomains.cnameValue}</p></LabelledValue>
+      </Panel>
+    );
+  }
+
+  renderNotReady() {
     return (
       <Fragment>
         <SendingDomainSection.Left>
@@ -80,12 +96,7 @@ export class EditBounce extends Component {
         </SendingDomainSection.Left>
         <SendingDomainSection.Right>
           { this.renderRootDomainWarning() }
-          <Panel title='DNS Settings' sectioned
-            actions={[this.getVerifyAction()]} >
-            <LabelledValue label='Type'><p>CNAME</p></LabelledValue>
-            <LabelledValue label='Hostname'><p>{id}</p></LabelledValue>
-            <LabelledValue label='Value'><p>{config.bounceDomains.cnameValue}</p></LabelledValue>
-          </Panel>
+          { this.renderDnsSettings() }
         </SendingDomainSection.Right>
       </Fragment>
     );
@@ -111,9 +122,7 @@ export class EditBounce extends Component {
         <SendingDomainSection.Left/>
         <SendingDomainSection.Right>
           { this.renderRootDomainWarning() }
-          <Panel sectioned>
-            <p><VerifiedIcon/> This domain is ready to be used as a bounce domain.</p>
-          </Panel>
+          { this.renderDnsSettings() }
           { showDefaultBounceToggle &&
               <Panel sectioned>
                 <Field

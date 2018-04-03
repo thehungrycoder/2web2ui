@@ -9,12 +9,14 @@ exports[`StatusDescription component Shallow tests does not render subaccount de
       <DomainStatusTag
         status="unverified"
       />
-      <ReadyFor
-        bounce={false}
-        bounceDefault={false}
-        dkim={false}
-        sending={false}
-      />
+      <div>
+        <ReadyFor
+          bounce={false}
+          bounceDefault={false}
+          dkim={false}
+          sending={false}
+        />
+      </div>
     </LabelledValue>
   </Panel.Section>
 </React.Fragment>
@@ -29,12 +31,14 @@ exports[`StatusDescription component Shallow tests renders subaccount details 1`
       <DomainStatusTag
         status="unverified"
       />
-      <ReadyFor
-        bounce={false}
-        bounceDefault={false}
-        dkim={false}
-        sending={false}
-      />
+      <div>
+        <ReadyFor
+          bounce={false}
+          bounceDefault={false}
+          dkim={false}
+          sending={false}
+        />
+      </div>
     </LabelledValue>
   </Panel.Section>
   <Panel.Section>
@@ -62,12 +66,14 @@ exports[`StatusDescription component Shallow tests renders verification status c
       <DomainStatusTag
         status="blocked"
       />
-      <ReadyFor
-        bounce={false}
-        bounceDefault={false}
-        dkim={false}
-        sending={false}
-      />
+      <div>
+        <ReadyFor
+          bounce={false}
+          bounceDefault={false}
+          dkim={false}
+          sending={false}
+        />
+      </div>
     </LabelledValue>
   </Panel.Section>
 </React.Fragment>
@@ -82,12 +88,14 @@ exports[`StatusDescription component Shallow tests renders verification status c
       <DomainStatusTag
         status="pending"
       />
-      <ReadyFor
-        bounce={false}
-        bounceDefault={false}
-        dkim={false}
-        sending={false}
-      />
+      <div>
+        <ReadyFor
+          bounce={false}
+          bounceDefault={false}
+          dkim={false}
+          sending={false}
+        />
+      </div>
     </LabelledValue>
   </Panel.Section>
 </React.Fragment>
@@ -102,12 +110,14 @@ exports[`StatusDescription component Shallow tests renders verification status c
       <DomainStatusTag
         status="unverified"
       />
-      <ReadyFor
-        bounce={false}
-        bounceDefault={false}
-        dkim={false}
-        sending={false}
-      />
+      <div>
+        <ReadyFor
+          bounce={false}
+          bounceDefault={false}
+          dkim={false}
+          sending={false}
+        />
+      </div>
     </LabelledValue>
   </Panel.Section>
 </React.Fragment>
@@ -126,12 +136,14 @@ exports[`StatusDescription component Shallow tests renders verification status c
           Verified
         </strong>
       </div>
-      <ReadyFor
-        bounce={false}
-        bounceDefault={false}
-        dkim={false}
-        sending={false}
-      />
+      <div>
+        <ReadyFor
+          bounce={false}
+          bounceDefault={false}
+          dkim={false}
+          sending={false}
+        />
+      </div>
     </LabelledValue>
   </Panel.Section>
 </React.Fragment>

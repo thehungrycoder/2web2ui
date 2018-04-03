@@ -64,7 +64,12 @@ exports[`Component: EditBounce does not show root domain warning for 3rd level d
           ]
         }
         sectioned={true}
-        title="DNS Settings"
+        title={
+          <UNDEFINED>
+            <ErrorIcon />
+             DNS Settings
+          </UNDEFINED>
+        }
       >
         <LabelledValue
           label="Type"
@@ -139,7 +144,12 @@ exports[`Component: EditBounce renders not ready correctly 1`] = `
           ]
         }
         sectioned={true}
-        title="DNS Settings"
+        title={
+          <UNDEFINED>
+            <ErrorIcon />
+             DNS Settings
+          </UNDEFINED>
+        }
       >
         <LabelledValue
           label="Type"
@@ -192,12 +202,44 @@ exports[`Component: EditBounce renders ready correctly 1`] = `
         </Link>
       </Banner>
       <Panel
+        actions={
+          Array [
+            Object {
+              "content": "Re-verify CNAME Record",
+              "disabled": false,
+              "onClick": [Function],
+            },
+          ]
+        }
         sectioned={true}
+        title={
+          <UNDEFINED>
+            <VerifiedIcon />
+             DNS Settings
+          </UNDEFINED>
+        }
       >
-        <p>
-          <VerifiedIcon />
-           This domain is ready to be used as a bounce domain.
-        </p>
+        <LabelledValue
+          label="Type"
+        >
+          <p>
+            CNAME
+          </p>
+        </LabelledValue>
+        <LabelledValue
+          label="Hostname"
+        >
+          <p>
+            xyz.com
+          </p>
+        </LabelledValue>
+        <LabelledValue
+          label="Value"
+        >
+          <p>
+            sparkpostmail.com
+          </p>
+        </LabelledValue>
       </Panel>
     </Right>
   </React.Fragment>

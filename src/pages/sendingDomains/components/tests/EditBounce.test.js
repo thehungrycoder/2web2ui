@@ -3,6 +3,9 @@ import React from 'react';
 import { EditBounce } from '../EditBounce';
 import config from 'src/config';
 
+// Snapshot note - Fragments that are not directly rendered will show 'UNDEFINED'
+// Will be fixed in a future jest update (https://github.com/facebook/jest/pull/5816)
+
 jest.mock('src/config', () => ({
   zuora: {}, //axiosInstance throws without this
   authentication: { cookie: {}}, //authCookie throws without this,
