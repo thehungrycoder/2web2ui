@@ -7,7 +7,7 @@ import { addFilters } from 'src/actions/reportOptions';
 import { TableCollection, Empty, LongTextContainer } from 'src/components';
 import { Percent } from 'src/components/formatters';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
-import { Page, Panel, UnstyledLink } from '@sparkpost/matchbox';
+import { Page, UnstyledLink } from '@sparkpost/matchbox';
 import ReportOptions from '../components/ReportOptions';
 import BounceChart from './components/BounceChart';
 import MetricsSummary from '../components/MetricsSummary';
@@ -73,6 +73,16 @@ export class BouncePage extends Component {
       defaultSortColumn='count_bounce'
       defaultSortDirection='desc'
       pagination
+      filterBox={{
+        show: true,
+        keyMap: {
+          category: 'bounce_category_name',
+          classification: 'bounce_class_name',
+          reason: 'bounce_class_description'
+        },
+        itemToStringKeys: ['bounce_category_name', 'bounce_class_name', 'domain', 'bounce_class_description'],
+        exampleModifiers: ['domain', 'category']
+      }}
     />;
   }
 
@@ -107,9 +117,8 @@ export class BouncePage extends Component {
         <ReportOptions reportLoading={chartLoading} searchOptions={bounceSearchOptions} />
         { this.renderTopLevelMetrics() }
         { this.renderChart() }
-        <Panel title='Bounced Messages' className='ReasonsTable'>
-          { this.renderCollection() }
-        </Panel>
+        <hr/>
+        { this.renderCollection() }
       </Page>
     );
   }

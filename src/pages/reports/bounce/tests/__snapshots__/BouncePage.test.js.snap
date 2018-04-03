@@ -21,55 +21,71 @@ exports[`BouncePage:  should display loading panel on top level metrics when agg
     }
     loading={true}
   />
-  <Panel
-    className="ReasonsTable"
-    title="Bounced Messages"
-  >
-    <TableCollection
-      columns={
-        Array [
-          Object {
-            "label": "Reason",
-            "sortKey": "reason",
-            "width": "45%",
-          },
-          Object {
-            "label": "Domain",
-            "sortKey": "domain",
-          },
-          Object {
-            "label": "Category",
-            "sortKey": "bounce_category_name",
-          },
-          Object {
-            "label": "Classification",
-            "sortKey": "classification_id",
-          },
-          Object {
-            "label": "Count (%)",
-            "sortKey": "count_bounce",
-          },
-        ]
+  <hr />
+  <TableCollection
+    columns={
+      Array [
+        Object {
+          "label": "Reason",
+          "sortKey": "reason",
+          "width": "45%",
+        },
+        Object {
+          "label": "Domain",
+          "sortKey": "domain",
+        },
+        Object {
+          "label": "Category",
+          "sortKey": "bounce_category_name",
+        },
+        Object {
+          "label": "Classification",
+          "sortKey": "classification_id",
+        },
+        Object {
+          "label": "Count (%)",
+          "sortKey": "count_bounce",
+        },
+      ]
+    }
+    defaultSortColumn="count_bounce"
+    defaultSortDirection="desc"
+    filterBox={
+      Object {
+        "exampleModifiers": Array [
+          "domain",
+          "category",
+        ],
+        "itemToStringKeys": Array [
+          "bounce_category_name",
+          "bounce_class_name",
+          "domain",
+          "bounce_class_description",
+        ],
+        "keyMap": Object {
+          "category": "bounce_category_name",
+          "classification": "bounce_class_name",
+          "reason": "bounce_class_description",
+        },
+        "show": true,
       }
-      defaultSortColumn="count_bounce"
-      defaultSortDirection="desc"
-      getRowData={[Function]}
-      pagination={true}
-      rows={
-        Array [
-          Object {
-            "bounce_category_name": "Block",
-            "bounce_class_description": "The message was blocked by the receiver as coming from a known spam source",
-            "bounce_class_name": "Spam Block",
-            "classification_id": 51,
-            "count_bounce": 5,
-            "domain": "yahoo.com",
-            "reason": "554 - 5.7.1 Blacklisted by 'twoomail.com'(twoo.com.multi.surbl.org) Contact the postmaster of this domain for resolution. This attempt has been logged.",
-          },
-        ]
-      }
-    />
-  </Panel>
+    }
+    getRowData={[Function]}
+    pagination={true}
+    rows={
+      Array [
+        Object {
+          "bounce_category_name": "Block",
+          "bounce_class_description": "The message was blocked by the receiver as coming from a known spam source",
+          "bounce_class_name": "Spam Block",
+          "classification_id": 51,
+          "count_bounce": 5,
+          "domain": "yahoo.com",
+          "reason": "554 - 5.7.1 Blacklisted by 'twoomail.com'(twoo.com.multi.surbl.org) Contact the postmaster of this domain for resolution. This attempt has been logged.",
+        },
+      ]
+    }
+  />
 </Page>
 `;
 
@@ -102,55 +118,71 @@ exports[`BouncePage:  should render 1`] = `
       }
     }
   />
-  <Panel
-    className="ReasonsTable"
-    title="Bounced Messages"
-  >
-    <TableCollection
-      columns={
-        Array [
-          Object {
-            "label": "Reason",
-            "sortKey": "reason",
-            "width": "45%",
-          },
-          Object {
-            "label": "Domain",
-            "sortKey": "domain",
-          },
-          Object {
-            "label": "Category",
-            "sortKey": "bounce_category_name",
-          },
-          Object {
-            "label": "Classification",
-            "sortKey": "classification_id",
-          },
-          Object {
-            "label": "Count (%)",
-            "sortKey": "count_bounce",
-          },
-        ]
+  <hr />
+  <TableCollection
+    columns={
+      Array [
+        Object {
+          "label": "Reason",
+          "sortKey": "reason",
+          "width": "45%",
+        },
+        Object {
+          "label": "Domain",
+          "sortKey": "domain",
+        },
+        Object {
+          "label": "Category",
+          "sortKey": "bounce_category_name",
+        },
+        Object {
+          "label": "Classification",
+          "sortKey": "classification_id",
+        },
+        Object {
+          "label": "Count (%)",
+          "sortKey": "count_bounce",
+        },
+      ]
+    }
+    defaultSortColumn="count_bounce"
+    defaultSortDirection="desc"
+    filterBox={
+      Object {
+        "exampleModifiers": Array [
+          "domain",
+          "category",
+        ],
+        "itemToStringKeys": Array [
+          "bounce_category_name",
+          "bounce_class_name",
+          "domain",
+          "bounce_class_description",
+        ],
+        "keyMap": Object {
+          "category": "bounce_category_name",
+          "classification": "bounce_class_name",
+          "reason": "bounce_class_description",
+        },
+        "show": true,
       }
-      defaultSortColumn="count_bounce"
-      defaultSortDirection="desc"
-      getRowData={[Function]}
-      pagination={true}
-      rows={
-        Array [
-          Object {
-            "bounce_category_name": "Block",
-            "bounce_class_description": "The message was blocked by the receiver as coming from a known spam source",
-            "bounce_class_name": "Spam Block",
-            "classification_id": 51,
-            "count_bounce": 5,
-            "domain": "yahoo.com",
-            "reason": "554 - 5.7.1 Blacklisted by 'twoomail.com'(twoo.com.multi.surbl.org) Contact the postmaster of this domain for resolution. This attempt has been logged.",
-          },
-        ]
-      }
-    />
-  </Panel>
+    }
+    getRowData={[Function]}
+    pagination={true}
+    rows={
+      Array [
+        Object {
+          "bounce_category_name": "Block",
+          "bounce_class_description": "The message was blocked by the receiver as coming from a known spam source",
+          "bounce_class_name": "Spam Block",
+          "classification_id": 51,
+          "count_bounce": 5,
+          "domain": "yahoo.com",
+          "reason": "554 - 5.7.1 Blacklisted by 'twoomail.com'(twoo.com.multi.surbl.org) Contact the postmaster of this domain for resolution. This attempt has been logged.",
+        },
+      ]
+    }
+  />
 </Page>
 `;
 
@@ -166,55 +198,71 @@ exports[`BouncePage:  should render correctly with no bounces 1`] = `
     message="No bounces to report"
     title="Bounce Rates"
   />
-  <Panel
-    className="ReasonsTable"
-    title="Bounced Messages"
-  >
-    <TableCollection
-      columns={
-        Array [
-          Object {
-            "label": "Reason",
-            "sortKey": "reason",
-            "width": "45%",
-          },
-          Object {
-            "label": "Domain",
-            "sortKey": "domain",
-          },
-          Object {
-            "label": "Category",
-            "sortKey": "bounce_category_name",
-          },
-          Object {
-            "label": "Classification",
-            "sortKey": "classification_id",
-          },
-          Object {
-            "label": "Count (%)",
-            "sortKey": "count_bounce",
-          },
-        ]
+  <hr />
+  <TableCollection
+    columns={
+      Array [
+        Object {
+          "label": "Reason",
+          "sortKey": "reason",
+          "width": "45%",
+        },
+        Object {
+          "label": "Domain",
+          "sortKey": "domain",
+        },
+        Object {
+          "label": "Category",
+          "sortKey": "bounce_category_name",
+        },
+        Object {
+          "label": "Classification",
+          "sortKey": "classification_id",
+        },
+        Object {
+          "label": "Count (%)",
+          "sortKey": "count_bounce",
+        },
+      ]
+    }
+    defaultSortColumn="count_bounce"
+    defaultSortDirection="desc"
+    filterBox={
+      Object {
+        "exampleModifiers": Array [
+          "domain",
+          "category",
+        ],
+        "itemToStringKeys": Array [
+          "bounce_category_name",
+          "bounce_class_name",
+          "domain",
+          "bounce_class_description",
+        ],
+        "keyMap": Object {
+          "category": "bounce_category_name",
+          "classification": "bounce_class_name",
+          "reason": "bounce_class_description",
+        },
+        "show": true,
       }
-      defaultSortColumn="count_bounce"
-      defaultSortDirection="desc"
-      getRowData={[Function]}
-      pagination={true}
-      rows={
-        Array [
-          Object {
-            "bounce_category_name": "Block",
-            "bounce_class_description": "The message was blocked by the receiver as coming from a known spam source",
-            "bounce_class_name": "Spam Block",
-            "classification_id": 51,
-            "count_bounce": 5,
-            "domain": "yahoo.com",
-            "reason": "554 - 5.7.1 Blacklisted by 'twoomail.com'(twoo.com.multi.surbl.org) Contact the postmaster of this domain for resolution. This attempt has been logged.",
-          },
-        ]
-      }
-    />
-  </Panel>
+    }
+    getRowData={[Function]}
+    pagination={true}
+    rows={
+      Array [
+        Object {
+          "bounce_category_name": "Block",
+          "bounce_class_description": "The message was blocked by the receiver as coming from a known spam source",
+          "bounce_class_name": "Spam Block",
+          "classification_id": 51,
+          "count_bounce": 5,
+          "domain": "yahoo.com",
+          "reason": "554 - 5.7.1 Blacklisted by 'twoomail.com'(twoo.com.multi.surbl.org) Contact the postmaster of this domain for resolution. This attempt has been logged.",
+        },
+      ]
+    }
+  />
 </Page>
 `;
 
@@ -273,14 +321,10 @@ exports[`BouncePage:  should show empty reasons table when there are no reasons 
       }
     }
   />
-  <Panel
-    className="ReasonsTable"
-    title="Bounced Messages"
-  >
-    <Empty
-      message="No bounce reasons to report"
-    />
-  </Panel>
+  <hr />
+  <Empty
+    message="No bounce reasons to report"
+  />
 </Page>
 `;
 
@@ -313,13 +357,9 @@ exports[`BouncePage:  should show loading panel when table is loading 1`] = `
       }
     }
   />
-  <Panel
-    className="ReasonsTable"
-    title="Bounced Messages"
-  >
-    <PanelLoading
-      minHeight="400px"
-    />
-  </Panel>
+  <hr />
+  <PanelLoading
+    minHeight="400px"
+  />
 </Page>
 `;
