@@ -1,5 +1,40 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Component: EditBounce default bounce toggle renders correctly if assigned to subaccount and feature flag is true 1`] = `
+<Field
+  component={[Function]}
+  label={
+    <Tooltip
+      bottom={true}
+      content="When this is set to \\"ON\\", all future transmissions for this subaccount will use xyz.com as their bounce domain (unless otherwise specified)."
+      dark={true}
+      forcePosition={false}
+      horizontalOffset="0px"
+      preferredDirection={
+        Object {
+          "bottom": true,
+          "left": false,
+          "right": true,
+          "top": false,
+        }
+      }
+      right={true}
+    >
+      Default bounce domain 
+       for Subaccount 101
+      <Icon
+        name="Help"
+        size={15}
+      />
+    </Tooltip>
+  }
+  name="is_default_bounce_domain"
+  onChange={[Function]}
+  parse={[Function]}
+  type="checkbox"
+/>
+`;
+
 exports[`Component: EditBounce default bounce toggle renders correctly toggle when all conditions are true 1`] = `
 <Field
   component={[Function]}
@@ -20,7 +55,41 @@ exports[`Component: EditBounce default bounce toggle renders correctly toggle wh
       }
       right={true}
     >
-      Use this domain as your default bounce domain? 
+      Default bounce domain 
+      <Icon
+        name="Help"
+        size={15}
+      />
+    </Tooltip>
+  }
+  name="is_default_bounce_domain"
+  onChange={[Function]}
+  parse={[Function]}
+  type="checkbox"
+/>
+`;
+
+exports[`Component: EditBounce default bounce toggle renders correctly toggle when all conditions are true except allowSubaccount 1`] = `
+<Field
+  component={[Function]}
+  label={
+    <Tooltip
+      bottom={true}
+      content="When this is set to \\"ON\\", all future transmissions will use xyz.com as their bounce domain (unless otherwise specified)."
+      dark={true}
+      forcePosition={false}
+      horizontalOffset="0px"
+      preferredDirection={
+        Object {
+          "bottom": true,
+          "left": false,
+          "right": true,
+          "top": false,
+        }
+      }
+      right={true}
+    >
+      Default bounce domain 
       <Icon
         name="Help"
         size={15}
