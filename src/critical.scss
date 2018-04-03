@@ -1,5 +1,9 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 
+html {
+  background: color(gray, 9);
+}
+
 #critical {
   position: fixed;
   top: 0;
@@ -28,6 +32,12 @@
   }
 }
 
+// Overrides Critical CSS. Prevents FOUT.
+#critical.ready {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
 @keyframes pulse {
   0%, 100% {
     opacity: 0.6;
@@ -35,4 +45,24 @@
   50% {
     opacity: 1;
   }
+}
+
+
+#error {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  text-align: center;
+  font-family: -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, Cantarell, “Fira Sans”, “Droid Sans”, “Helvetica Neue”, Arial, sans-serif;
+
+  * {
+    color: color(gray, 3);
+  }
+}
+
+#error.show {
+  display: block;
 }
