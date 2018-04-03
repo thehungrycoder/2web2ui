@@ -17,7 +17,7 @@ exports[`StatusTooltipHeader component renders 1`] = `
   }
   right={true}
 >
-  Status
+  Status 
   <Icon
     name="Help"
     size={14}
