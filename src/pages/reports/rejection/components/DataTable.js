@@ -35,6 +35,12 @@ export class DataTable extends Component {
       pagination
       defaultSortColumn='reason'
       defaultSortDirection='desc'
+      filterBox={{
+        show: true,
+        keyMap: { category: 'rejection_category_name' },
+        itemToStringKeys: ['rejection_category_name', 'domain', 'reason'],
+        exampleModifiers: ['domain', 'category']
+      }}
     />;
   }
 }

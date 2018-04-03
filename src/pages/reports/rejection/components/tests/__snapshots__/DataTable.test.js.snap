@@ -40,6 +40,23 @@ exports[`Rejection Data Table:  renders correctly 1`] = `
   }
   defaultSortColumn="reason"
   defaultSortDirection="desc"
+  filterBox={
+    Object {
+      "exampleModifiers": Array [
+        "domain",
+        "category",
+      ],
+      "itemToStringKeys": Array [
+        "rejection_category_name",
+        "domain",
+        "reason",
+      ],
+      "keyMap": Object {
+        "category": "rejection_category_name",
+      },
+      "show": true,
+    }
+  }
   getRowData={[Function]}
   pagination={true}
   rows={
