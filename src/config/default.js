@@ -106,6 +106,7 @@ const config = {
   },
   bounceDomains: {
     allowDefault: true,
+    allowSubaccountDefault: false,
     cnameValue: 'sparkpostmail.com'
   },
   trackingDomains: {
