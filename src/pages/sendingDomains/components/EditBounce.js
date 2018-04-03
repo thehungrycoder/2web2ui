@@ -94,7 +94,6 @@ export class EditBounce extends Component {
   renderReady() {
     const { updateLoading, id, domain } = this.props;
     const readyFor = resolveReadyFor(domain.status);
-    const defaultBounceText = domain.subaccount_id ? `Default bounce domain for subaccount ${domain.subaccount_id}?` : 'Use this domain as your default bounce domain?';
 
     // Allow default bounce toggle if:
     // Config flag is true
@@ -105,7 +104,10 @@ export class EditBounce extends Component {
     const showDefaultBounceToggle = config.bounceDomains.allowDefault && readyFor.sending && readyFor.bounce && showDefaultBounceSubaccount;
 
     const tooltip = (
-      <Tooltip dark content={`When this is set to "ON", all future transmissions will use ${id} as their bounce domain (unless otherwise specified).`}>{defaultBounceText}<Icon name='Help' size={15}/></Tooltip>
+      <Tooltip dark content={`When this is set to "ON", all future transmissions ${domain.subaccount_id && 'for this subaccount ' || ''}will use ${id} as their bounce domain (unless otherwise specified).`}>
+        Default bounce domain {domain.subaccount_id && ` for Subaccount ${domain.subaccount_id}`}
+        <Icon name='Help' size={15}/>
+      </Tooltip>
     );
 
     return (

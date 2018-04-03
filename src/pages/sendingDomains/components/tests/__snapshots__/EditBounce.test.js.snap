@@ -6,7 +6,7 @@ exports[`Component: EditBounce default bounce toggle renders correctly if assign
   label={
     <Tooltip
       bottom={true}
-      content="When this is set to \\"ON\\", all future transmissions will use xyz.com as their bounce domain (unless otherwise specified)."
+      content="When this is set to \\"ON\\", all future transmissions for this subaccount will use xyz.com as their bounce domain (unless otherwise specified)."
       dark={true}
       forcePosition={false}
       horizontalOffset="0px"
@@ -20,7 +20,8 @@ exports[`Component: EditBounce default bounce toggle renders correctly if assign
       }
       right={true}
     >
-      Default bounce domain for subaccount 101?
+      Default bounce domain 
+       for Subaccount 101
       <Icon
         name="Help"
         size={15}
@@ -54,7 +55,7 @@ exports[`Component: EditBounce default bounce toggle renders correctly toggle wh
       }
       right={true}
     >
-      Use this domain as your default bounce domain?
+      Default bounce domain 
       <Icon
         name="Help"
         size={15}
@@ -88,7 +89,7 @@ exports[`Component: EditBounce default bounce toggle renders correctly toggle wh
       }
       right={true}
     >
-      Use this domain as your default bounce domain?
+      Default bounce domain 
       <Icon
         name="Help"
         size={15}
