@@ -5,7 +5,7 @@ import { Button } from '@sparkpost/matchbox';
 import { SelectWrapper } from 'src/components/reduxFormWrappers';
 import { TableCollection } from 'src/components';
 import { required } from 'src/helpers/validation';
-import { TextFieldWrapper } from 'src/components';
+import { TextFieldWrapper, SendingDomainTypeaheadWrapper } from 'src/components';
 import { selectIpPoolFormInitialValues, selectIpsForCurrentPool } from 'src/selectors/ipPools';
 import isDefaultPool from '../helpers/defaultPool';
 
@@ -81,7 +81,7 @@ export class PoolForm extends Component {
 
         <Field
           name="signing_domain"
-          component={TextFieldWrapper}
+          component={SendingDomainTypeaheadWrapper}
           label="Default Signing Domain"
           disabled={submitting}
         />
