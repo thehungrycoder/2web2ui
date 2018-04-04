@@ -70,10 +70,6 @@ const config = {
     pricePerIp: 20.00,
     awsPricePerIp: 0.028
   },
-  sentry: {
-    projectId: 232588,
-    publicKey: '63149b1565df4b7199db939a4410b47a'
-  },
   splashPage: '/reports/summary',
   summaryChart: {
     defaultMetrics: ['count_targeted', 'count_rendered', 'count_accepted', 'count_bounce']
