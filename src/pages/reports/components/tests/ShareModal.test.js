@@ -18,7 +18,8 @@ describe('Component: ShareModal', () => {
     testProps = {
       handleToggle: jest.fn(),
       searchOptions: {
-        range: 'valid'
+        range: 'valid',
+        recipients: ['one@test.com', 'two+2@test.com']
       },
       location: {
         pathname: '/route'
@@ -32,7 +33,10 @@ describe('Component: ShareModal', () => {
 
   it('should render correctly when not open', () => {
     expect(wrapper.find('Modal').props().open).toBe(false);
-    expect(testProps.history.replace).toHaveBeenCalledWith({ pathname: '/route', search: 'range=valid' });
+    expect(testProps.history.replace).toHaveBeenCalledWith({
+      pathname: '/route',
+      search: 'range=valid&recipients=one%40test.com&recipients=two%2B2%40test.com'
+    });
   });
 
   it('updates the link if options are changed', () => {
@@ -53,10 +57,10 @@ describe('Component: ShareModal', () => {
 
   it('should unpin when clicking the checkbox', () => {
     expect(wrapper.state('pinned')).toEqual(true);
-    expect(wrapper.find('CopyField').props().value).toEqual('http://phoenix.test/?range=custom');
+    expect(wrapper.find('CopyField').props().value).toMatchSnapshot();
     wrapper.find('#pin-relative-link').simulate('change');
     expect(wrapper.state('pinned')).toEqual(false);
-    expect(wrapper.find('CopyField').props().value).toEqual('http://phoenix.test/?range=valid');
+    expect(wrapper.find('CopyField').props().value).toMatchSnapshot();
   });
 
   it('should handle keydown events correctly', () => {
