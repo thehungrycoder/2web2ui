@@ -1,6 +1,14 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 
-#critical {
+/*
+ * Styles in this file are extracted and appended to the <head> tag
+ */
+
+html {
+  background: color(gray, 9);
+}
+
+#loading {
   position: fixed;
   top: 0;
   left: 0;
@@ -12,18 +20,28 @@
   opacity: 1;
   transition: 0.4s 0.6s;
 
-  .critical__icon {
+  // Overrides Critical CSS. Prevents FOUT.
+  &.ready {
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+
+  .logo__icon {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-
-    display: inline-block;
-    height: 120px;
     animation: pulse 1.5s linear infinite;
   }
+}
 
-  .critical__flame {
+.logo {
+  &__icon {
+    display: inline-block;
+    height: 120px;
+  }
+
+  &__flame {
     fill: color(gray, 6);
   }
 }
@@ -34,5 +52,33 @@
   }
   50% {
     opacity: 1;
+  }
+}
+
+
+#error {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  padding: 0 spacing();
+  transform: translate(0, -50%);
+
+  text-align: center;
+  font-family: -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, Cantarell, “Fira Sans”, “Droid Sans”, “Helvetica Neue”, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  h3 {
+    color: color(gray, 2);
+  }
+
+  p, a, a:visited {
+    color: color(gray, 3);
+  }
+
+  &.show {
+    display: block;
   }
 }
