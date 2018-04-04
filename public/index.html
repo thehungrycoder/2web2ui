@@ -44,9 +44,9 @@
       }
 
       function handleAppLoad() {
-        document.getElementById('loading').className += ' ready'; // Kills loading screen
+        document.getElementById('loading').className += 'ready'; // Kills loading screen
         if (!window.SPARKPOST_LOADED) {
-          document.getElementById('error').className += ' show';
+          document.getElementById('error').className += 'show';
           var sentry = document.createElement('script');
           sentry.src = 'https://cdn.ravenjs.com/3.24.0/raven.min.js';
           sentry.onload = trackAppLoadError;

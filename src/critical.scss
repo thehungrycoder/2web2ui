@@ -86,6 +86,10 @@ html {
     color: color(gray, 3);
   }
 
+  a, a:visited {
+    text-decoration: underline;
+  }
+
   &.show {
     display: block;
   }
