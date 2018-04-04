@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Meow Typeahead render function should render the list 1`] = `
+<div
+  className="Typeahead"
+>
+  <ActionList
+    actions={
+      Array [
+        Object {
+          "content": <div
+            className={undefined}
+          >
+            apples
+          </div>,
+          "highlighted": true,
+          "index": 0,
+          "item": "apples",
+        },
+        Object {
+          "content": <div
+            className={undefined}
+          >
+            bananas
+          </div>,
+          "highlighted": false,
+          "index": 1,
+          "item": "bananas",
+        },
+        Object {
+          "content": <div
+            className={undefined}
+          >
+            cauliflower
+          </div>,
+          "highlighted": false,
+          "index": 2,
+          "item": "cauliflower",
+        },
+      ]
+    }
+    className="List"
+  />
+  <TextField
+    connectRight={null}
+    data-lpignore={true}
+    error={null}
+    placeholder="None"
+    readOnly={false}
+    required={false}
+    resize="both"
+    type="text"
+  />
+</div>
+`;
+
+exports[`Meow Typeahead render function should render with selected item and not disabled 1`] = `
+<Button
+  onClick={[MockFunction]}
+  size="default"
+>
+  Clear
+</Button>
+`;

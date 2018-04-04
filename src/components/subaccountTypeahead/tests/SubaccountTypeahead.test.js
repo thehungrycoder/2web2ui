@@ -2,7 +2,7 @@ import { shallow } from 'enzyme';
 import React from 'react';
 import { SubaccountTypeahead } from '../SubaccountTypeahead';
 
-const subaccounts = [
+const results = [
   { id: 1, name: 'Subaccount 1' },
   { id: 2, name: 'Subaccount 2' },
   { id: 3, name: 'Subaccount 3' },
@@ -18,7 +18,7 @@ describe('Subaccount Typeahead', () => {
     const props = {
       onChange: jest.fn(),
       getSubaccountsList: jest.fn(),
-      subaccounts: []
+      results: []
     };
 
     wrapper = shallow(<SubaccountTypeahead {...props} />);
@@ -47,65 +47,29 @@ describe('Subaccount Typeahead', () => {
 
   it('should render itemToString correctly', () => {
     wrapper.setProps({ hasSubaccounts: true });
-    const noItem = wrapper.find('Downshift').props().itemToString();
-    const item = wrapper.find('Downshift').props().itemToString({ id: 10101, name: 'tst' });
+    const noItem = wrapper.find('Typeahead').props().itemToString();
+    const item = wrapper.find('Typeahead').props().itemToString({ id: 10101, name: 'tst' });
     expect(noItem).toEqual('');
     expect(item).toEqual('tst (10101)');
   });
 
   describe('render function', () => {
-    let args;
+    let props;
 
     beforeEach(() => {
-      wrapper.setProps({
-        subaccounts,
-        disabled: false,
-        helpText: 'help text',
-        name: 'redux form name'
-      });
-
-      args = {
-        clearSelection: jest.fn(),
-        inputValue: 'test@t',
-        isOpen: false,
-        highlightedIndex: 0,
-        getInputProps: jest.fn((props) => props),
-        getItemProps: jest.fn((a) => a)
+      props = {
+        onChange: jest.fn(),
+        getSubaccountsList: jest.fn(),
+        hasSubaccounts: true,
+        results: results
       };
+
+      wrapper = shallow(<SubaccountTypeahead {...props} />);
     });
 
     it('should render the list', () => {
-      const result = shallow(wrapper.instance().typeaheadFn(args));
+      const result = wrapper;
       expect(result).toMatchSnapshot();
-    });
-
-    it('should switch placeholder if open', () => {
-      const result = shallow(wrapper.instance().typeaheadFn({ ...args, isOpen: true }));
-      expect(result.find('TextField').props().placeholder).toEqual('Type to search');
-    });
-
-    it('should render with selected item and not disabled', () => {
-      const result = shallow(wrapper.instance().typeaheadFn({ ...args, selectedItem: subaccounts[2] }));
-      expect(result.find('TextField').props().connectRight).toMatchSnapshot(); // Clear button
-      expect(result.find('TextField').props().readOnly).toBe(true); // Boolean prop
-    });
-
-    it('should not render clear button if disabled with selected item', () => {
-      wrapper.setProps({ disabled: true });
-      const result = shallow(wrapper.instance().typeaheadFn({ ...args, selectedItem: subaccounts[2] }));
-      expect(result.find('TextField').props().connectRight).toBe(null); // No clear button
-    });
-
-    it('should render error', () => {
-      wrapper.setProps({ error: 'an error omg' });
-      const result = shallow(wrapper.instance().typeaheadFn(args));
-      expect(result.find('TextField').props().error).toBe('an error omg');
-    });
-
-    it('should not render error if it is open', () => {
-      wrapper.setProps({ error: 'an error omg' });
-      const result = shallow(wrapper.instance().typeaheadFn({ ...args, isOpen: true }));
-      expect(result.find('TextField').props().error).toBe(null);
     });
   });
 });
