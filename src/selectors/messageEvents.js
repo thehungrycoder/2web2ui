@@ -44,3 +44,8 @@ export const selectMessageEventsSearchOptions = createSelector(
   [selectMessageEventsDateOptions, selectSearch],
   (dates, search) => ({ ...dates, ...search })
 );
+
+export const isMessageHistoryEmpty = createSelector(
+  [getMessageHistory, getMessageIdParam],
+  (history, id) => history.hasOwnProperty(id) && history[id].length === 0
+);
