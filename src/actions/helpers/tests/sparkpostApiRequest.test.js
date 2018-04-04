@@ -83,6 +83,14 @@ describe('Helper: SparkPost API Request', () => {
       expect(mockStore.getActions()).toMatchSnapshot();
     });
 
+    it('should not show an error alert when a GET returns 404', async() => {
+      action.meta.showErrorAlert = false;
+      action.meta.method = 'GET';
+      apiErr.response.status = 404;
+      await expect(mockStore.dispatch(sparkpostApiRequest(action))).rejects.toThrow(apiErr);
+      expect(mockStore.getActions()).toMatchSnapshot();
+    });
+
     it('should dispatch a special 5xx error action', async() => {
       apiErr.response.status = 500;
 
