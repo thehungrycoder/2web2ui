@@ -67,17 +67,15 @@ html {
 
   text-align: center;
   font-family: -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, Cantarell, “Fira Sans”, “Droid Sans”, “Helvetica Neue”, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 
   h3 {
     color: color(gray, 2);
   }
 
-  p {
+  p, a, a:visited {
     color: color(gray, 3);
-  }
-
-  a, a:visited {
-    color: color(gray, 1);
   }
 
   &.show {
