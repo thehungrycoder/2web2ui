@@ -3,8 +3,10 @@ import { connect } from 'react-redux';
 import { list as getSubaccountsList } from 'src/actions/subaccounts';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
 import { Typeahead } from './Typeahead';
+import React, { Component } from 'react';
+import Item from './SubaccountTypeaheadItem';
 
-export class SubaccountTypeahead extends Typeahead {
+export class SubaccountTypeahead extends Component {
   static defaultProps = {
     name: 'subaccount'
   };
@@ -16,7 +18,13 @@ export class SubaccountTypeahead extends Typeahead {
       return null;
     }
 
-    return super.render();
+    return (
+      <Typeahead
+        renderItem={(item) => <Item name={item.name} id={item.id} /> }
+        itemToString={(item) => (item ? `${item.name} (${item.id})` : '')}
+        {...this.props}
+      />
+    );
   }
 
   componentDidMount() {

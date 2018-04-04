@@ -4,12 +4,9 @@ import React, { Component } from 'react';
 import { ActionList, Button, TextField } from '@sparkpost/matchbox';
 
 import sortMatch from 'src/helpers/sortMatch';
-import Item from './SubaccountTypeaheadItem';
-import styles from './SubaccountTypeahead.module.scss';
+import styles from './Typeahead.module.scss';
 
 const cx = classnames.bind(styles);
-
-const itemToString = (item) => (item ? `${item.name} (${item.id})` : '');
 
 export class Typeahead extends Component {
   static defaultProps = {
@@ -27,17 +24,17 @@ export class Typeahead extends Component {
     clearSelection,
     isOpen
   }) => {
-    const { name, results, disabled, label = 'Subaccount', placeholder = (isOpen ? 'Type to search' : 'None'), error, helpText } = this.props;
+    const { name, results, disabled, label, placeholder = (isOpen ? 'Type to search' : 'None'), error, helpText, itemToString, renderItem } = this.props;
 
     const matches = sortMatch(
       results,
       inputValue,
-      (item) => `${item.name} ID: ${item.id}`
+      itemToString
     );
 
     const mappedItems = (matches.length ? matches : results).map((item, index) => ({
       ...getItemProps({ item, index }),
-      content: <Item name={item.name} id={item.id} />,
+      content: renderItem ? renderItem(item) : <div className={styles.Item}>{item}</div>,
       highlighted: highlightedIndex === index
     }));
 
@@ -73,7 +70,7 @@ export class Typeahead extends Component {
   }
 
   render() {
-    const { onChange, selectedItem } = this.props;
+    const { itemToString, onChange, selectedItem } = this.props;
 
     return (
       <Downshift
