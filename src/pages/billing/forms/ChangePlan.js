@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 import qs from 'query-string';
 
 import { updateSubscription } from 'src/actions/billing';
-import { billingCreate } from 'src/actions/billingCreate';
+import billingCreate from 'src/actions/billingCreate';
 import billingUpdate from 'src/actions/billingUpdate';
 import { showAlert } from 'src/actions/globalAlert';
 import { changePlanInitialValues } from 'src/selectors/accountBillingForms';
@@ -56,7 +56,11 @@ export class ChangePlan extends Component {
 
     return action
       .then(() => history.push('/account/billing'))
-      .then(() => showAlert({ type: 'success', message: 'Subscription Updated' }));
+      .then((res) => {
+        if (!(res instanceof Error)) {
+          showAlert({ type: 'success', message: 'Subscription Updated' });
+        }
+      });
   }
 
   renderCCSection = () => {

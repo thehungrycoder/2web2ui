@@ -15,7 +15,7 @@ class SparkpostApiError {
   }
 }
 
-SparkpostApiError.prototype = Object.create(Error.prototype);
+// SparkpostApiError.prototype = Object.create(Error.prototype);
 SparkpostApiError.prototype.constructor = SparkpostApiError;
 
 export default SparkpostApiError;

@@ -80,26 +80,6 @@ describe('Action Creator: Billing', () => {
     snapActions();
   });
 
-  it('should dispatch a chained billing create action', async() => {
-    billing.cors = jest.fn(() => ({ token, signature }));
-    await billing.billingCreate({ some: 'test-values' })(dispatchMock, getStateMock);
-    expect(_.flatten(dispatchMock.mock.calls)).toMatchSnapshot();
-  });
-
-  it('should dispatch a chained billing update action', async() => {
-    await billing.billingUpdate({ planpicker: { code: 'test-plan' }})(dispatchMock, getStateMock);
-    expect(_.flatten(dispatchMock.mock.calls)).toMatchSnapshot();
-  });
-
-  it('should update instead of create if account is AWS', () => {
-    isAws.mockImplementation(() => true);
-    billing.billingCreate({ planpicker: { code: 'newplan1' }})(dispatchMock, getStateMock);
-    // const update = dispatchMock.mock.calls[0][0];
-    // expect(update).toEqual(expect.any(Function));
-    // update(dispatchMock, getStateMock);
-    expect(_.flatten(dispatchMock.mock.calls)).toMatchSnapshot();
-  });
-
   describe('updateSubscription', () => {
     it('should dispatch an update subscription action', async() => {
       const dispatchMock = jest.fn((a) => Promise.resolve(a));

@@ -31,7 +31,6 @@ export default requestHelperFactory({
       meta
     });
 
-    console.log('zuora request successful, moving to ', meta.onSuccess ? meta.onSuccess : undefined);
     return meta.onSuccess ? dispatch(meta.onSuccess({ results: response })) : response;
   }
 });

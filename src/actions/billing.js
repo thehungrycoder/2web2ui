@@ -22,13 +22,8 @@ export function syncSubscription({ meta }) {
  * Updates plan
  * @param {string} code
  */
-export function updateSubscription({ code, onSuccess }) {
+export function updateSubscription({ code, meta = {}}) {
   return (dispatch, getState) => {
-
-    function refreshAccount() {
-      dispatch(fetchAccount({ include: 'usage,billing' }, onSuccess));
-    }
-
     const url = `/account/${isAws(getState()) ? 'aws-marketplace/subscription' : 'subscription'}`;
 
     return sparkpostApiRequest({
@@ -37,7 +32,8 @@ export function updateSubscription({ code, onSuccess }) {
         method: 'PUT',
         url: url,
         data: { code },
-        onSuccess: refreshAccount
+        ...meta,
+        onSuccess: meta.onSuccess ? meta.onSuccess : fetchAccount({ include: 'usage,billing' })
       }
     });
   };
@@ -108,14 +104,15 @@ export function addDedicatedIps({ ip_pool, isAwsAccount, quantity }) {
     .then(() => dispatch(getSendingIps())); // refresh list
 }
 
-export function createZuoraAccount({ data, token, signature }) {
+export function createZuoraAccount({ data, token, signature, meta }) {
   return zuoraRequest({
     type: 'ZUORA_CREATE',
     meta: {
       method: 'POST',
       url: '/accounts',
       data,
-      headers: { token, signature }
+      headers: { token, signature },
+      ...meta
     }
   });
 }

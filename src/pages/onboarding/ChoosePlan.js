@@ -7,7 +7,7 @@ import { CenteredLogo, Loading, PlanPicker } from 'src/components';
 import Steps from './components/Steps';
 import { getPlans } from 'src/actions/account';
 import { getBillingCountries, updateSubscription } from 'src/actions/billing';
-import { billingCreate } from 'src/actions/billingCreate';
+import billingCreate from 'src/actions/billingCreate';
 import { selectVisiblePlans } from 'src/selectors/accountBillingInfo';
 import { changePlanInitialValues } from 'src/selectors/accountBillingForms';
 import PaymentForm from 'src/pages/billing/forms/fields/PaymentForm';
@@ -47,7 +47,11 @@ export class OnboardingPlanPage extends Component {
     // Note: billingCreate will update the subscription if the account is AWS
     return billingCreate(values)
       .then(() => history.push(NEXT_STEP))
-      .then(() => showAlert({ type: 'success', message: 'Added your plan' }));
+      .then((res) => {
+        if (!(res instanceof Error)) {
+          showAlert({ type: 'success', message: 'Added your plan' });
+        }
+      });
   };
 
   renderCCSection = () => {

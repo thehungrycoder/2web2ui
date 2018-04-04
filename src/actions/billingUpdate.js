@@ -1,8 +1,9 @@
 import { fetch as fetchAccount } from './account';
 import { formatUpdateData } from 'src/helpers/billing';
 import chainActions from 'src/actions/helpers/chainActions';
-import { collectPayments, cors, syncSubscription, updateSubscription } from './billing';
-import zuoraRequest from './helpers/zuoraRequest';
+import { collectPayments, cors, syncSubscription, updateCreditCard, updateSubscription } from './billing';
+import { showAlert } from 'src/actions/globalAlert';
+
 
 // note: this action creator should detect
 // 1. if payment info is present, contact zuora first
@@ -11,32 +12,19 @@ import zuoraRequest from './helpers/zuoraRequest';
 // call this action creator from the "free -> paid" form if account.billing is present
 export default function billingUpdate(values) {
   return (dispatch) => {
-    const actions = [
-      { action: cors, args: { context: 'update-billing' }},
-      { action: updateZuoraCC },
-      { action: syncSubscription },
-      { action: collectPayments },
-      { action: fetchAccount }
-    ];
-
-    if (values.planpicker) {
-      actions.splice(2, 0, { action: updateSubscription, args: { code: values.planpicker.code }});
-    }
-
-    return dispatch(chainActions(actions));
-
-    function updateZuoraCC({ meta, getState, results: { accountKey, token, signature }}) {
+    // action creator wrappers for chaining as callbacks
+    const corsUpdateBilling = ({ meta, data = {}}) => cors({ meta, context: 'update-billing', data });
+    const maybeUpdateSubscription = ({ meta }) => values.planpicker ? updateSubscription({ code: values.planpicker.code, meta }) : meta.onSuccess({ meta });
+    const updateZuoraCC = ({ meta, getState, results: { accountKey, token, signature }}) => {
       const data = formatUpdateData({ ...values, accountKey });
-      return zuoraRequest({
-        type: 'ZUORA_UPDATE_CC',
-        meta: {
-          method: 'POST',
-          url: '/payment-methods/credit-cards',
-          data,
-          headers: { token, signature },
-          ...meta
-        }
-      });
-    }
+      return updateCreditCard({ data, token, signature, meta });
+    };
+    const actions = [corsUpdateBilling, updateZuoraCC, maybeUpdateSubscription, syncSubscription, collectPayments, fetchAccount];
+
+    return dispatch(chainActions(...actions)()).then((res) => {
+      if (!(res instanceof Error)) {
+        showAlert({ type: 'success', message: 'Payment Information Updated' });
+      }
+    });
   };
 }

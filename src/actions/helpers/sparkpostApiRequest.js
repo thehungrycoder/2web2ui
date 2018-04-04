@@ -35,7 +35,6 @@ const sparkpostRequest = requestHelperFactory({
       meta
     });
 
-    // console.log('sp request successful, moving to ', meta.onSuccess ? meta.onSuccess : undefined);
     return meta.onSuccess ? dispatch(meta.onSuccess({ results })) : results;
   },
   onFail: ({ types, err, dispatch, meta, action, getState }) => {
@@ -76,7 +75,7 @@ const sparkpostRequest = requestHelperFactory({
             return dispatch(sparkpostRequest(action));
           },
           // refresh token request failed
-          (err) => {
+          () => {
             dispatch(logout());
           }
         );

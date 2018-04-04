@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Action Creator: Billing Create should dispatch a chained billing create action 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "onSuccess": [Function],
+    },
+    "signature": undefined,
+    "token": undefined,
+  },
+]
+`;
+
+exports[`Action Creator: Billing Create should update instead of create if account is AWS 1`] = `
+Array [
+  [Function],
+]
+`;
