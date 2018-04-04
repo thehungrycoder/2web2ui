@@ -40,3 +40,44 @@ exports[`ProfilePage renders correctly 1`] = `
   </Panel>
 </Page>
 `;
+
+exports[`ProfilePage renders correctly for SSO accounts 1`] = `
+<Page
+  empty={Object {}}
+  title="Profile"
+>
+  <Panel
+    sectioned={true}
+  >
+    <LabelledValue
+      label="Account ID"
+      value={12345}
+    />
+    <LabelledValue
+      label="Username"
+      value="Lord Stark"
+    />
+    <LabelledValue
+      label="Email Address"
+      value="ned.stark@winterfell.biz"
+    />
+  </Panel>
+  <Connect(TfaManager) />
+  <Panel
+    sectioned={true}
+    title="Edit Profile"
+  >
+    <Connect(ReduxForm)
+      onSubmit={[Function]}
+    />
+  </Panel>
+  <Panel
+    sectioned={true}
+    title="Update Password"
+  >
+    <Connect(ReduxForm)
+      onSubmit={[Function]}
+    />
+  </Panel>
+</Page>
+`;

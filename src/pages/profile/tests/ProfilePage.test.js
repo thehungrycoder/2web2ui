@@ -32,6 +32,11 @@ describe('ProfilePage', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('renders correctly for SSO accounts', () => {
+    wrapper.setProps({ isSSOAccount: true });
+    expect(wrapper).toMatchSnapshot();
+  });
+
   describe('updateProfile', () => {
     it('should update profile correctly', async() => {
       await instance.updateProfile({ firstName: 'John', lastName: 'Doe' });
