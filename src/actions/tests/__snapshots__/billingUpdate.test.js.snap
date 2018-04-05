@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Action Creator: Billing Create should dispatch a chained billing update action 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "data": Object {},
+      "method": "POST",
+      "onSuccess": [Function],
+      "params": Object {
+        "context": "update-billing",
+      },
+      "url": "/account/cors-data",
+    },
+    "type": "CORS_UPDATE_BILLING",
+  },
+]
+`;

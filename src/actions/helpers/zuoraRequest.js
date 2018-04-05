@@ -22,7 +22,8 @@ export default requestHelperFactory({
       // auto alert all errors
       dispatch(showAlert({ type: 'error', message }));
 
-      return err;
+      // TODO: 'return' err once we unchain all actions
+      throw err;
     }
 
     dispatch({

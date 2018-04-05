@@ -2,8 +2,6 @@ import { fetch as fetchAccount } from './account';
 import { formatUpdateData } from 'src/helpers/billing';
 import chainActions from 'src/actions/helpers/chainActions';
 import { collectPayments, cors, syncSubscription, updateCreditCard, updateSubscription } from './billing';
-import { showAlert } from 'src/actions/globalAlert';
-
 
 // note: this action creator should detect
 // 1. if payment info is present, contact zuora first
@@ -21,10 +19,6 @@ export default function billingUpdate(values) {
     };
     const actions = [corsUpdateBilling, updateZuoraCC, maybeUpdateSubscription, syncSubscription, collectPayments, fetchAccount];
 
-    return dispatch(chainActions(...actions)()).then((res) => {
-      if (!(res instanceof Error)) {
-        showAlert({ type: 'success', message: 'Payment Information Updated' });
-      }
-    });
+    return dispatch(chainActions(...actions)());
   };
 }

@@ -8,14 +8,11 @@ class SparkpostApiError {
 
     this.name = 'SparkpostApiError';
     this.message = message;
-    this.stack = (new Error(message)).stack; // must manually assign prototype value
+    this.stack = error.stack;
 
     // Intentionally assigning additional properties
     Object.assign(this, error);
   }
 }
-
-// SparkpostApiError.prototype = Object.create(Error.prototype);
-SparkpostApiError.prototype.constructor = SparkpostApiError;
 
 export default SparkpostApiError;

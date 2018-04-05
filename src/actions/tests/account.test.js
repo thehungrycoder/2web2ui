@@ -11,7 +11,7 @@ test('fetch with params', () => {
     this: 'one',
     also: 'that one'
   };
-  const fetchAction = fetch(params);
+  const fetchAction = fetch(params, { meta: { onSuccess: jest.fn() }});
   expect(fetchAction).toMatchSnapshot();
 });
 

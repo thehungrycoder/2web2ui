@@ -56,136 +56,6 @@ Object {
 }
 `;
 
-exports[`Action Creator: Billing should dispatch a chained billing create action 1`] = `
-Array [
-  Object {
-    "meta": Object {
-      "data": Object {
-        "some": "test-cors-data",
-      },
-      "method": "POST",
-      "params": Object {
-        "context": "create-account",
-      },
-      "url": "/account/cors-data",
-    },
-    "type": "CORS_CREATE_ACCOUNT",
-  },
-  Object {
-    "meta": Object {
-      "data": Object {
-        "billToContact": Object {
-          "workEmail": "sparkpost-user-email@example.com",
-        },
-        "creditCard": Object {},
-        "subscription": Object {},
-      },
-      "headers": Object {
-        "signature": undefined,
-        "token": undefined,
-      },
-      "method": "POST",
-      "url": "/accounts",
-    },
-    "type": "ZUORA_CREATE",
-  },
-  Object {
-    "meta": Object {
-      "method": "POST",
-      "url": "/account/subscription/check",
-    },
-    "type": "SYNC_SUBSCRIPTION",
-  },
-  Object {
-    "meta": Object {
-      "method": "GET",
-      "params": Object {
-        "include": "usage,billing",
-      },
-      "url": "/account",
-    },
-    "type": "FETCH_ACCOUNT",
-  },
-]
-`;
-
-exports[`Action Creator: Billing should dispatch a chained billing update action 1`] = `
-Array [
-  Object {
-    "meta": Object {
-      "data": Object {},
-      "method": "POST",
-      "params": Object {
-        "context": "update-billing",
-      },
-      "url": "/account/cors-data",
-    },
-    "type": "CORS_UPDATE_BILLING",
-  },
-  Object {
-    "meta": Object {
-      "data": Object {
-        "accountKey": Object {
-          "some": "test-billing-data",
-        },
-      },
-      "headers": Object {
-        "signature": undefined,
-        "token": undefined,
-      },
-      "method": "POST",
-      "url": "/payment-methods/credit-cards",
-    },
-    "type": "ZUORA_UPDATE_CC",
-  },
-  [Function],
-  Object {
-    "meta": Object {
-      "data": Object {
-        "code": "test-plan",
-      },
-      "method": "PUT",
-      "url": "/account/subscription",
-    },
-    "type": "UPDATE_SUBSCRIPTION",
-  },
-  Object {
-    "meta": Object {
-      "method": "GET",
-      "params": Object {
-        "include": "usage,billing",
-      },
-      "url": "/account",
-    },
-    "type": "FETCH_ACCOUNT",
-  },
-  Object {
-    "meta": Object {
-      "method": "POST",
-      "url": "/account/subscription/check",
-    },
-    "type": "SYNC_SUBSCRIPTION",
-  },
-  Object {
-    "meta": Object {
-      "method": "POST",
-      "url": "/account/billing/collect",
-    },
-    "type": "COLLECT_PAYMENTS",
-  },
-  Object {
-    "meta": Object {
-      "method": "GET",
-      "params": Object {
-        "include": "usage,billing",
-      },
-      "url": "/account",
-    },
-    "type": "FETCH_ACCOUNT",
-  },
-]
-`;
-
 exports[`Action Creator: Billing should dispatch a cors action 1`] = `
 Array [
   Object {
@@ -223,12 +93,13 @@ Array [
 ]
 `;
 
-exports[`Action Creator: Billing should dispatch a subscription sync action 1`] = `
+exports[`Action Creator: Billing should dispatch a subscription sync action with meta data param 1`] = `
 Array [
   Object {
     "meta": Object {
       "method": "POST",
       "url": "/account/subscription/check",
+      "word": "test",
     },
     "type": "SYNC_SUBSCRIPTION",
   },
@@ -254,7 +125,7 @@ Array [
 ]
 `;
 
-exports[`Action Creator: Billing should dispatch an update subscription action 1`] = `
+exports[`Action Creator: Billing should dispatch an update subscription action and fetch account 1`] = `
 Array [
   Object {
     "meta": Object {

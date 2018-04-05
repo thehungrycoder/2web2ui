@@ -52,14 +52,25 @@ describe('Action Creator: Billing', () => {
     isAws.mockImplementation(() => false);
   });
 
-  it('should dispatch a subscription sync action', () => {
+  it('should dispatch a subscription sync action with no params', () => {
     mockStore.dispatch(billing.syncSubscription());
     snapActions();
   });
 
-  it('should dispatch an update subscription action', async() => {
+  it('should dispatch a subscription sync action with meta data param', () => {
+    mockStore.dispatch(billing.syncSubscription({ meta: { word: 'test' }}));
+    snapActions();
+  });
+
+  it('should dispatch an update subscription action and fetch account', async() => {
     const dispatchMock = jest.fn((a) => Promise.resolve(a));
-    await billing.updateSubscription('test-code')(dispatchMock, getStateMock);
+    await billing.updateSubscription({ code: 'test-code' })(dispatchMock, getStateMock);
+    expect(_.flatten(dispatchMock.mock.calls)).toMatchSnapshot();
+  });
+
+  it('should dispatch an update subscription action with provided onSuccess action', async() => {
+    const dispatchMock = jest.fn((a) => Promise.resolve(a));
+    await billing.updateSubscription({ code: 'test-code', meta: { onSuccess: jest.fn() }})(dispatchMock, getStateMock);
     expect(_.flatten(dispatchMock.mock.calls)).toMatchSnapshot();
   });
 

@@ -10,7 +10,7 @@ function defaultOnSuccess({ types, response, dispatch, meta, action }) {
   return response;
 }
 
-function defaultOnFail({ types, err, dispatch, meta, action }) {
+function defaultOnFail({ types, err, dispatch, meta }) {
   const { message, response = {}} = err;
 
   dispatch({

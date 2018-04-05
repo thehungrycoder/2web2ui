@@ -6,7 +6,7 @@ import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 import zuoraRequest from 'src/actions/helpers/zuoraRequest';
 import { isAws } from 'src/helpers/conditions/account';
 
-export function syncSubscription({ meta }) {
+export function syncSubscription({ meta } = {}) {
   return sparkpostApiRequest({
     type: 'SYNC_SUBSCRIPTION',
     meta: {
