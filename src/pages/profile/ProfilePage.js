@@ -11,8 +11,11 @@ import { showAlert } from 'src/actions/globalAlert';
 import NameForm from './components/NameForm';
 import PasswordForm from './components/PasswordForm';
 import TfaManager from './components/TfaManager';
+import { AccessControl } from 'src/components/auth';
 import { LabelledValue } from 'src/components';
 import ErrorTracker from 'src/helpers/errorTracker';
+import { all, not } from 'src/helpers/conditions';
+import { isHeroku, isAzure } from 'src/helpers/conditions/user';
 
 export class ProfilePage extends Component {
   updateProfile = (values) => {
@@ -51,15 +54,17 @@ export class ProfilePage extends Component {
           <LabelledValue label='Email Address' value={email}/>
         </Panel>
 
-        <TfaManager />
+        <AccessControl condition={all(not(isAzure), not(isHeroku))}>
+          <TfaManager />
 
-        <Panel sectioned title='Edit Profile'>
-          <NameForm onSubmit={this.updateProfile} />
-        </Panel>
+          <Panel sectioned title='Edit Profile'>
+            <NameForm onSubmit={this.updateProfile} />
+          </Panel>
 
-        <Panel sectioned title='Update Password'>
-          <PasswordForm onSubmit={this.updatePassword} />
-        </Panel>
+          <Panel sectioned title='Update Password'>
+            <PasswordForm onSubmit={this.updatePassword} />
+          </Panel>
+        </AccessControl>
       </Page>
     );
   }

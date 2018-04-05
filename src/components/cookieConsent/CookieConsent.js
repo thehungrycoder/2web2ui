@@ -16,8 +16,10 @@ export class CookieConsent extends React.Component {
   };
 
   setConsentFlag = () => {
-    const { accessControlReady, loggedIn, savingFlag, userGivesCookieConsent } = this.props;
-    if (accessControlReady && loggedIn && !savingFlag) {
+    // Attempt to store cookie consent to user resource once, if not already
+    // saving, and logged in and access control is ready.
+    const { accessControlReady, loggedIn, savingFlag, saveFailed, userGivesCookieConsent } = this.props;
+    if (accessControlReady && loggedIn && !savingFlag && !saveFailed) {
       return userGivesCookieConsent();
     }
   };
@@ -55,6 +57,7 @@ const mapStateToProps = (state) => ({
   cookieSet: consentCookieSetSelector(state),
   userFlagSet: userCookieConsentFlagSelector(state),
   savingFlag: state.currentUser.storingCookieConsent,
+  saveFailed: state.currentUser.consentFailed === true,
   accessControlReady: state.accessControlReady,
   loggedIn: state.auth.loggedIn
 });

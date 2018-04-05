@@ -1,7 +1,9 @@
 import { shallow } from 'enzyme';
 import React from 'react';
+import cases from 'jest-in-case';
 
 import { ProfilePage } from '../ProfilePage';
+import { AccessControl } from 'src/components/auth';
 import errorTracker from 'src/helpers/errorTracker';
 
 jest.mock('src/helpers/errorTracker');
@@ -15,7 +17,8 @@ beforeEach(() => {
     currentUser: {
       username: 'Lord Stark',
       email: 'ned.stark@winterfell.biz',
-      customer: 12345
+      customer: 12345,
+      access_level: 'user'
     },
     updateUser: jest.fn(() => Promise.resolve()),
     getCurrentUser: jest.fn(() => Promise.resolve()),
@@ -30,6 +33,15 @@ beforeEach(() => {
 describe('ProfilePage', () => {
   it('renders correctly', () => {
     expect(wrapper).toMatchSnapshot();
+  });
+
+  cases('handles the various account types', ({ access_level, result }) => {
+    const condition = wrapper.find(AccessControl).first().prop('condition');
+    expect(condition({ currentUser: { access_level }, ready: true })).toEqual(result);
+  }, {
+    'user': { access_level: 'user', result: true },
+    'heroku': { access_level: 'heroku', result: false },
+    'azure': { access_level: 'azure', result: false }
   });
 
   describe('updateProfile', () => {

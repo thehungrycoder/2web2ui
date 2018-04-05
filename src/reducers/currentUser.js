@@ -4,7 +4,8 @@ const initialState = {
   emailError: null,
   verifyingToken: null,
   tokenError: null,
-  storingCookieConsent: null
+  storingCookieConsent: null,
+  consentFailed: null
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -40,7 +41,7 @@ export default (state = initialState, { type, payload }) => {
       return { ...state, storingCookieConsent: true };
 
     case 'USER_GIVES_COOKIE_CONSENT_FAIL':
-      return { ...state, storingCookieConsent: false };
+      return { ...state, storingCookieConsent: false, consentFailed: true };
 
     case 'USER_GIVES_COOKIE_CONSENT_SUCCESS':
       return { ...state, storingCookieConsent: false, cookie_consent: true };
