@@ -11,11 +11,6 @@ describe('SparkpostApiError', () => {
     expect(error).toBeInstanceOf(SparkpostApiError);
   });
 
-  it('instance of Error', () => {
-    const error = createTestError();
-    expect(error).toBeInstanceOf(Error);
-  });
-
   it('returns error name', () => {
     const error = createTestError();
     expect(error).toHaveProperty('name', 'SparkpostApiError');

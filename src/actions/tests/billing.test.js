@@ -62,20 +62,8 @@ describe('Action Creator: Billing', () => {
     snapActions();
   });
 
-  it('should dispatch an update subscription action and fetch account', async() => {
-    const dispatchMock = jest.fn((a) => Promise.resolve(a));
-    await billing.updateSubscription({ code: 'test-code' })(dispatchMock, getStateMock);
-    expect(_.flatten(dispatchMock.mock.calls)).toMatchSnapshot();
-  });
-
-  it('should dispatch an update subscription action with provided onSuccess action', async() => {
-    const dispatchMock = jest.fn((a) => Promise.resolve(a));
-    await billing.updateSubscription({ code: 'test-code', meta: { onSuccess: jest.fn() }})(dispatchMock, getStateMock);
-    expect(_.flatten(dispatchMock.mock.calls)).toMatchSnapshot();
-  });
-
   it('should dispatch a cors action', () => {
-    mockStore.dispatch(billing.cors('some-context', { some: 'cors-data' }));
+    mockStore.dispatch(billing.cors({ context: 'some-context', data: { some: 'cors-data' }, meta: { word: 'up' }}));
     snapActions();
   });
 
@@ -92,19 +80,19 @@ describe('Action Creator: Billing', () => {
   });
 
   describe('updateSubscription', () => {
-    it('should dispatch an update subscription action', async() => {
-      const dispatchMock = jest.fn((a) => Promise.resolve(a));
-      const thunk = billing.updateSubscription({ code: 'test-code' });
-      await thunk(dispatchMock, getStateMock);
-      expect(_.flatten(dispatchMock.mock.calls)).toMatchSnapshot();
+    it('should dispatch an update subscription action and fetch account', async() => {
+      await mockStore.dispatch(billing.updateSubscription({ code: 'test-code' }));
+      snapActions();
     });
 
-    it('dispatches un update subscription action for aws marketplace account', async() => {
-      const dispatchMock = jest.fn((a) => Promise.resolve(a));
-      isAws.mockImplementation(() => true);
-      const thunk = billing.updateSubscription({ code: 'test-code' });
-      await thunk(dispatchMock, getStateMock);
-      expect(_.flatten(dispatchMock.mock.calls)).toMatchSnapshot();
+    it('should dispatch an update subscription action with provided onSuccess action', async() => {
+      await mockStore.dispatch(billing.updateSubscription({ code: 'test-code', meta: { onSuccess: jest.fn() }}));
+      snapActions();
+    });
+
+    it('dispatches an update subscription action for aws marketplace account', async() => {
+      mockStore.dispatch(billing.updateSubscription({ code: 'test-code', isAwsAccount: true }));
+      snapActions();
     });
   });
 
@@ -132,7 +120,8 @@ describe('Action Creator: Billing', () => {
 
   describe('collectPayments', () => {
     it('dispatches a collection action', async() => {
-      expect(billing.collectPayments()).toMatchSnapshot();
+      await mockStore.dispatch(billing.collectPayments({ meta: { onSuccess: jest.fn() }}));
+      snapActions();
     });
 
   });

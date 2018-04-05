@@ -9,13 +9,13 @@ export default function billingCreate(values) {
     // AWS plans don't get created through Zuora, instead update existing
     // subscription to the selected plan
     if (isAws(getState())) {
-      return dispatch(updateSubscription({ code: values.planpicker.code }));
+      return dispatch(updateSubscription({ code: values.planpicker.code, isAwsAccount: true }));
     }
 
     const { corsData, billingData } = formatDataForCors(values);
 
     // action creator wrappers for chaining as callbacks
-    const corsCreateBilling = ({ meta }) => cors({ meta, context: 'update-billing', data: corsData });
+    const corsCreateBilling = ({ meta }) => cors({ meta, context: 'create-account', data: corsData });
     const fetchUsageAndBilling = ({ meta: { onSuccess }}) => fetchAccount({ include: 'usage,billing' }, onSuccess);
     const constructZuoraAccount = ({ results, meta }) => {
       const { token, signature } = results;

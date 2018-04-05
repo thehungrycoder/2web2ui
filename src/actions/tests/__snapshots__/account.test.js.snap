@@ -40,6 +40,7 @@ exports[`fetch - no params 1`] = `
 Object {
   "meta": Object {
     "method": "GET",
+    "onSuccess": undefined,
     "params": Object {},
     "url": "/account",
   },
@@ -51,6 +52,11 @@ exports[`fetch with params 1`] = `
 Object {
   "meta": Object {
     "method": "GET",
+    "onSuccess": Object {
+      "meta": Object {
+        "onSuccess": [MockFunction],
+      },
+    },
     "params": Object {
       "also": "that one",
       "this": "one",

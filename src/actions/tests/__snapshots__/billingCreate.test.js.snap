@@ -14,6 +14,16 @@ Array [
 
 exports[`Action Creator: Billing Create should update instead of create if account is AWS 1`] = `
 Array [
-  [Function],
+  Object {
+    "meta": Object {
+      "data": Object {
+        "code": "newplan1",
+      },
+      "method": "PUT",
+      "onSuccess": [Function],
+      "url": "/account/aws-marketplace/subscription",
+    },
+    "type": "UPDATE_SUBSCRIPTION",
+  },
 ]
 `;
