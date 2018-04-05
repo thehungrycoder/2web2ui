@@ -49,6 +49,18 @@ exports[`Page: Event tests should handle location state 1`] = `
 </Page>
 `;
 
+exports[`Page: Event tests should redirect when no message events 1`] = `
+<Connect(RedirectAndAlert)
+  alert={
+    Object {
+      "message": "Unable to find message events for id",
+      "type": "warning",
+    }
+  }
+  to="/reports/message-events"
+/>
+`;
+
 exports[`Page: Event tests should render page correctly 1`] = `
 <Page
   breadcrumbAction={

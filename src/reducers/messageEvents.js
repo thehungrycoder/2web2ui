@@ -23,7 +23,7 @@ const initialState = {
   }
 };
 
-export default (state = initialState, { type, payload }) => {
+export default (state = initialState, { type, payload, meta }) => {
 
   switch (type) {
 
@@ -46,7 +46,7 @@ export default (state = initialState, { type, payload }) => {
       return {
         ...state,
         historyLoading: false,
-        history: { ...state.history, [payload[0].message_id]: payload }
+        history: { ...state.history, [meta.params.message_ids]: payload }
       };
 
     case 'GET_MESSAGE_HISTORY_FAIL':

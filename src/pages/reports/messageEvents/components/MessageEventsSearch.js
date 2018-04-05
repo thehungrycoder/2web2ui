@@ -16,6 +16,7 @@ import { stringToArray } from 'src/helpers/string';
 import { onEnter } from 'src/helpers/keyEvents';
 import { RELATIVE_DATE_OPTIONS } from './searchConfig';
 import { DATE_FORMATS } from 'src/constants';
+import config from 'src/config';
 
 export class MessageEventsSearch extends Component {
 
@@ -64,6 +65,7 @@ export class MessageEventsSearch extends Component {
 
   render() {
     const { search, refreshMessageEventsDateRange, loading, now = new Date(), searchOptions } = this.props;
+    const { retentionPeriodDays } = config.messageEvents;
 
     return (
       <Panel>
@@ -79,7 +81,7 @@ export class MessageEventsSearch extends Component {
                 datePickerProps={{
                   disabledDays: {
                     after: now,
-                    before: moment(now).subtract(10, 'days').toDate()
+                    before: moment(now).subtract(retentionPeriodDays, 'days').toDate()
                   },
                   canChangeMonth: false
                 }}

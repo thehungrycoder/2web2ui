@@ -74,3 +74,45 @@ describe('Selectors: Initial Event Id', () => {
     });
   });
 });
+
+describe('isMessageHistoryEmpty', () => {
+  it('should return true', () => {
+    const state = {
+      messageEvents: {
+        history: {
+          abc: []
+        }
+      }
+    };
+    const props = { match: { params: { messageId: 'abc' }}};
+
+    expect(selectors.isMessageHistoryEmpty(state, props)).toEqual(true);
+  });
+
+  it('should return false with message events', () => {
+    const state = {
+      messageEvents: {
+        history: {
+          abc: [
+            { event_id: '123', message_id: 'abc' },
+            { event_id: '234', message_id: 'abc' }
+          ]
+        }
+      }
+    };
+    const props = { match: { params: { messageId: 'abc' }}};
+
+    expect(selectors.isMessageHistoryEmpty(state, props)).toEqual(false);
+  });
+
+  it('should return false with no events', () => {
+    const state = {
+      messageEvents: {
+        history: {}
+      }
+    };
+    const props = { match: { params: { messageId: 'abc' }}};
+
+    expect(selectors.isMessageHistoryEmpty(state, props)).toEqual(false);
+  });
+});

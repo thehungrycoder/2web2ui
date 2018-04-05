@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { getMessageHistory, getDocumentation } from 'src/actions/messageEvents';
-import { selectMessageHistory, selectInitialEventId } from 'src/selectors/messageEvents';
+import RedirectAndAlert from 'src/components/globalAlert/RedirectAndAlert';
+import { isMessageHistoryEmpty, selectMessageHistory, selectInitialEventId } from 'src/selectors/messageEvents';
 
 import { Page, Grid } from '@sparkpost/matchbox';
 import { Loading } from 'src/components';
@@ -52,9 +53,18 @@ export class EventPage extends Component {
   }
 
   render() {
-    const { loading, messageId, messageHistory, documentation } = this.props;
+    const { isMessageHistoryEmpty, loading, messageId, messageHistory, documentation } = this.props;
     const { selectedEventId } = this.state;
     const selectedEvent = _.find(messageHistory, (event) => event.event_id === selectedEventId);
+
+    if (isMessageHistoryEmpty) {
+      return (
+        <RedirectAndAlert
+          to="/reports/message-events"
+          alert={{ type: 'warning', message: `Unable to find message events for ${messageId}` }}
+        />
+      );
+    }
 
     const pageContent = loading
       ? <Loading />
@@ -78,6 +88,7 @@ export class EventPage extends Component {
 }
 
 const mapStateToProps = (state, props) => ({
+  isMessageHistoryEmpty: isMessageHistoryEmpty(state, props),
   loading: state.messageEvents.historyLoading || state.messageEvents.documentationLoading,
   messageHistory: selectMessageHistory(state, props),
   messageId: props.match.params.messageId,

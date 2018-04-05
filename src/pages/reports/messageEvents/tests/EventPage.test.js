@@ -45,4 +45,9 @@ describe('Page: Event tests', () => {
     wrapper.setProps({ loading: true });
     expect(wrapper.find('Loading')).toHaveLength(1);
   });
+
+  it('should redirect when no message events', () => {
+    wrapper.setProps({ isMessageHistoryEmpty: true });
+    expect(wrapper).toMatchSnapshot();
+  });
 });
