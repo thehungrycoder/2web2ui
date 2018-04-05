@@ -110,6 +110,9 @@ const config = {
   },
   dateFormat: 'MMM D YYYY',
   timeFormat: 'h:mma',
+  messageEvents: {
+    retentionPeriodDays: 10
+  },
   recaptcha: {
     key: '6LeFZQETAAAAACWJfxw_DKHgEPnop3brlj9IsHrY',
     invisibleKey: '6LekChoUAAAAAJZouMPHnhRss2t7-ZetbAABfsOZ'
