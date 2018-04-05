@@ -41,21 +41,6 @@ export const isAWSAccountSelector = createSelector(
   (currentSubscription) => currentSubscription.type === 'aws'
 );
 
-export const isAzureAccountSelector = createSelector(
-  [currentSubscriptionSelector],
-  (currentSubscription) => currentSubscription.type === 'azure'
-);
-
-export const isHerokuAccountSelector = createSelector(
-  [currentSubscriptionSelector],
-  (currentSubscription) => currentSubscription.type === 'heroku'
-);
-
-export const isSSOAccountSelector = createSelector(
-  [isAzureAccountSelector, isHerokuAccountSelector],
-  (isAzure, isHeroku) => isAzure || isHeroku
-);
-
 /**
  * Returns true if user has billing account and they are on a paid plan
  */

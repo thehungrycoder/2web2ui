@@ -1,5 +1,4 @@
 import * as billingInfo from '../accountBillingInfo';
-import cases from 'jest-in-case';
 
 describe('Selector: current plan', () => {
   let state;
@@ -34,7 +33,7 @@ describe('Selector: can update billing info', () => {
       account: { subscription: { code: 'paid' }, billing: {}},
       billing: {
         plans: [
-          { status: 'public', code: '112' },
+          { status: 'public', code: '123' },
           { status: 'public', code: 'paid', isFree: false },
           { status: 'public', code: 'free', isFree: true },
           { status: 'public', code: 'ccfree1', isFree: true }
@@ -114,14 +113,16 @@ describe('selectBillingInfo', () => {
 
 });
 
-describe('Subscription type selectors', () => {
-  cases('Subscription types', ({ type, selector }) => {
-    const state = { account: { subscription: { code: 'free', type }}};
-    return expect(billingInfo[selector](state)).toBe(true);
-  }, {
-    'AWS': { type: 'aws', selector: 'isAWSAccountSelector' },
-    'Azure': { type: 'azure', selector: 'isAzureAccountSelector' },
-    'Heroku': { type: 'heroku', selector: 'isHerokuAccountSelector' }
+describe('isAWSAccountSelector', () => {
+  let state;
+  beforeEach(() => {
+    state = {
+      account: { subscription: { code: 'free', type: 'aws' }}
+    };
+  });
+
+  it('returns true when subscription type is aws', () => {
+    expect(billingInfo.isAWSAccountSelector(state)).toBe(true);
   });
 });
 
