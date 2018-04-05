@@ -3,7 +3,7 @@ import config from 'src/config';
 import _ from 'lodash';
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 
-const { apiDateFormat, messageEvents } = config;
+const { apiDateFormat } = config;
 
 export function getMessageEvents(options = {}) {
   const { dateOptions, ...rest } = options;
@@ -82,17 +82,19 @@ export function removeFilter(filter) {
   };
 }
 
-export function getMessageHistory({ messageId, ...rest }) {
+export function getMessageHistory({ messageId }) {
   return sparkpostApiRequest({
     type: 'GET_MESSAGE_HISTORY',
     meta: {
       method: 'GET',
       url: '/message-events',
       params: {
-        to: moment().utc().format(apiDateFormat), // it's above ...rest so it can be overriden when needed
-        ...rest,
         message_ids: messageId,
-        from: moment().subtract(messageEvents.retentionPeriodDays, 'days').utc().format(apiDateFormat)
+        // Must pass a time range because the defaults are too narrow (now to 24 hours ago) and
+        // must cast a wide time range (even wider than the standard 10 day retention) to avoid
+        // missing message events
+        to: moment.utc().add(1, 'minute').format(apiDateFormat),
+        from: moment.utc().subtract(1, 'month').format(apiDateFormat)
       }
     }
   });
