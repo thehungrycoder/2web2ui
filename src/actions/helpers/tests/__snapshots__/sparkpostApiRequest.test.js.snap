@@ -129,6 +129,36 @@ Array [
 ]
 `;
 
+exports[`Helper: SparkPost API Request failure cases should not show an error alert when a GET returns 404 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "method": "GET",
+      "showErrorAlert": false,
+      "url": "/some/path",
+    },
+    "type": "TEST_PENDING",
+  },
+  Object {
+    "meta": Object {
+      "method": "GET",
+      "showErrorAlert": false,
+      "url": "/some/path",
+    },
+    "payload": Object {
+      "message": "API call failed",
+      "response": Object {
+        "data": Object {
+          "results": Array [],
+        },
+        "status": 404,
+      },
+    },
+    "type": "TEST_FAIL",
+  },
+]
+`;
+
 exports[`Helper: SparkPost API Request failure cases should not show error alert when request failed 1`] = `
 Array [
   Object {
