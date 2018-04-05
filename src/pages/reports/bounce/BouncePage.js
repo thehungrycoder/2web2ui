@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import { safeRate } from 'src/helpers/math';
@@ -42,7 +42,7 @@ export class BouncePage extends Component {
   };
 
   renderChart() {
-    const { chartLoading, aggregates, categories, types, adminBounces } = this.props;
+    const { chartLoading, aggregates, categories, types } = this.props;
     if (!chartLoading && _.isEmpty(aggregates)) {
       return <Empty title='Bounce Rates' message='No bounces to report' />;
     }
@@ -52,7 +52,6 @@ export class BouncePage extends Component {
       aggregates={aggregates}
       categories={categories}
       types={types}
-      adminBounces={adminBounces}
     />;
   }
 
@@ -88,8 +87,13 @@ export class BouncePage extends Component {
   }
 
   renderTopLevelMetrics() {
-    const { chartLoading, aggregates } = this.props;
+    const { chartLoading, aggregates, adminBounces } = this.props;
     const { countBounce, countSent } = aggregates;
+
+    // TODO Add support doc link - <UnstyledLink to={LINKS.ADMIN_BOUNCE} external>Learn more</UnstyledLink>.
+    const adminBounceText = adminBounces
+      ? <Fragment>{adminBounces.toLocaleString()} message were categorized as Admin Bounces.</Fragment>
+      : null;
 
     // Aggregates aren't ready until chart refreshes
     if (chartLoading) {
@@ -104,6 +108,7 @@ export class BouncePage extends Component {
       <MetricsSummary
         rateValue={safeRate(countBounce, countSent)}
         rateTitle='Bounce Rate'
+        secondaryMessage={adminBounceText}
       >
         <strong>{countBounce.toLocaleString()}</strong> of your messages were bounced of <strong>{countSent.toLocaleString()}</strong> messages sent
       </MetricsSummary>

@@ -11,6 +11,7 @@ const selectTableLoading = createSelector(
   (chartLoading, reasonsLoading) => chartLoading || reasonsLoading
 );
 const selectAggregates = ({ bounceReport }) => bounceReport.aggregates;
+const selectClassifications = (state) => _.get(state, 'bounceReport.classifications', []);
 const selectReasons = ({ bounceReport }) => bounceReport.reasons;
 
 const selectFormattedAggregates = createSelector(
@@ -23,10 +24,10 @@ const selectFormattedAggregates = createSelector(
   }
 );
 
-const selectReshapedClassifications = ({ bounceReport }) => {
-  const { classifications = []} = bounceReport;
-  return reshapeCategories(classifications);
-};
+const selectReshapedClassifications = createSelector(
+  [selectClassifications],
+  (classifications) => reshapeCategories(classifications)
+);
 
 const selectCategories = createSelector(
   [selectReshapedClassifications],

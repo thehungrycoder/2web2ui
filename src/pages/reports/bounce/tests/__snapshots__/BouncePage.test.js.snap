@@ -16,7 +16,7 @@ exports[`BouncePage:  should display loading panel on top level metrics when agg
     aggregates={
       Object {
         "countBounce": 1,
-        "countTargeted": 10,
+        "countSent": 10,
       }
     }
     loading={true}
@@ -101,6 +101,12 @@ exports[`BouncePage:  should render 1`] = `
   <Connect(MetricsSummary)
     rateTitle="Bounce Rate"
     rateValue={10}
+    secondaryMessage={
+      <UNDEFINED>
+        5
+         message were categorized as Admin Bounces.
+      </UNDEFINED>
+    }
   >
     <strong>
       1
@@ -109,13 +115,13 @@ exports[`BouncePage:  should render 1`] = `
     <strong>
       10
     </strong>
-     messages targeted
+     messages sent
   </Connect(MetricsSummary)>
   <BounceChart
     aggregates={
       Object {
         "countBounce": 1,
-        "countTargeted": 10,
+        "countSent": 10,
       }
     }
   />
@@ -306,6 +312,12 @@ exports[`BouncePage:  should show empty reasons table when there are no reasons 
   <Connect(MetricsSummary)
     rateTitle="Bounce Rate"
     rateValue={10}
+    secondaryMessage={
+      <UNDEFINED>
+        5
+         message were categorized as Admin Bounces.
+      </UNDEFINED>
+    }
   >
     <strong>
       1
@@ -314,13 +326,13 @@ exports[`BouncePage:  should show empty reasons table when there are no reasons 
     <strong>
       10
     </strong>
-     messages targeted
+     messages sent
   </Connect(MetricsSummary)>
   <BounceChart
     aggregates={
       Object {
         "countBounce": 1,
-        "countTargeted": 10,
+        "countSent": 10,
       }
     }
   />
@@ -342,6 +354,12 @@ exports[`BouncePage:  should show loading panel when table is loading 1`] = `
   <Connect(MetricsSummary)
     rateTitle="Bounce Rate"
     rateValue={10}
+    secondaryMessage={
+      <UNDEFINED>
+        5
+         message were categorized as Admin Bounces.
+      </UNDEFINED>
+    }
   >
     <strong>
       1
@@ -350,13 +368,13 @@ exports[`BouncePage:  should show loading panel when table is loading 1`] = `
     <strong>
       10
     </strong>
-     messages targeted
+     messages sent
   </Connect(MetricsSummary)>
   <BounceChart
     aggregates={
       Object {
         "countBounce": 1,
-        "countTargeted": 10,
+        "countSent": 10,
       }
     }
   />

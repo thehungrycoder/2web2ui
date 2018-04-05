@@ -22,7 +22,7 @@ describe('Selector: Bounce Report', () => {
       reportOptions: {},
       bounceReport: {
         aggregates: {
-          count_targeted: 100,
+          count_sent: 100,
           count_bounce: 4,
           count_inband_bounce: 2,
           count_outofband_bounce: 1
@@ -31,7 +31,7 @@ describe('Selector: Bounce Report', () => {
         categoriesLoading: false,
         reasonsLoading: false,
         reasons: [],
-        classifications: ['class1']
+        classifications: []
       }
     };
 
@@ -58,7 +58,8 @@ describe('Selector: Bounce Report', () => {
       categories: reshapedCategories,
       types: bandTypes,
       reportOptions: testState.reportOptions,
-      bounceSearchOptions: searchOptions
+      bounceSearchOptions: searchOptions,
+      adminBounces: 0
     });
     expect(bounceHelpers.getBandTypes).toHaveBeenCalledWith(formattedAggregates);
     expect(bounceHelpers.reshapeCategories).toHaveBeenCalledWith(testState.bounceReport.classifications);
@@ -96,8 +97,20 @@ describe('Selector: Bounce Report', () => {
   it('should default to an empty array when there are no classifications', () => {
     delete testState.bounceReport.classifications;
     const props = mapStateToProps(testState);
-    expect(props.categories).toBe(reshapedCategories);
+    expect(props.categories).toEqual(reshapedCategories);
+    expect(props.adminBounces).toEqual(0);
     expect(bounceHelpers.reshapeCategories).toHaveBeenCalledWith([]);
   });
 
+  it('should extract admin bounces from classifications', () => {
+    const categories = [
+      { name: 'Admin', count: 10, children: ['test']},
+      { name: 'Block', count: 100, children: ['test']}
+    ];
+    bounceHelpers.reshapeCategories = jest.fn(() => categories);
+    const props = mapStateToProps(testState);
+    expect(props.categories).toEqual([{ name: 'Block', count: 100, children: ['test']}]);
+    expect(props.adminBounces).toEqual(10);
+    expect(bounceHelpers.reshapeCategories).toHaveBeenCalledWith([]);
+  });
 });

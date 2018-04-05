@@ -70,7 +70,7 @@ export default class BounceChart extends Component {
   }
 
   getLegendHeaderData = () => {
-    const { aggregates, adminBounces } = this.props;
+    const { aggregates } = this.props;
     const { active } = this.state;
 
     // Header with breadcrumb & active data
@@ -85,7 +85,6 @@ export default class BounceChart extends Component {
     // Default header
     return [
       { name: 'Bounces', count: aggregates.countBounce },
-      { name: 'Admin Bounces', count: adminBounces },
       { name: 'Sent', count: aggregates.countSent }
     ];
   }
@@ -111,7 +110,7 @@ export default class BounceChart extends Component {
 
   render() {
     const { loading } = this.props;
-    // console.log(this.props);
+
     if (loading) {
       return <Panel title='Bounce Rates' sectioned className={styles.LoadingPanel}><Loading /></Panel>;
     }
