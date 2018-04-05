@@ -1,6 +1,7 @@
 import { createSelector, createStructuredSelector } from 'reselect';
 import { getBandTypes, reshapeCategories, formatAggregates } from 'src/helpers/bounce';
 import { selectReportSearchOptions } from './reportSearchOptions';
+import _ from 'lodash';
 
 const selectReportOptions = (state) => state.reportOptions;
 const selectChartLoading = ({ bounceReport }) => bounceReport.aggregatesLoading || bounceReport.categoriesLoading;
@@ -27,6 +28,19 @@ const selectReshapedClassifications = ({ bounceReport }) => {
   return reshapeCategories(classifications);
 };
 
+const selectCategories = createSelector(
+  [selectReshapedClassifications],
+  (classifications) => _.filter(classifications, ({ name }) => name !== 'Admin')
+);
+
+const selectAdminBounces = createSelector(
+  [selectReshapedClassifications],
+  (classifications) => {
+    const adminBounces = _.filter(classifications, ({ name }) => name === 'Admin')[0];
+    return adminBounces ? adminBounces.count : 0;
+  }
+);
+
 const selectBandTypes = createSelector(
   [selectFormattedAggregates],
   (formattedAggregates) => getBandTypes(formattedAggregates)
@@ -38,7 +52,8 @@ export const mapStateToProps = createStructuredSelector({
   tableLoading: selectTableLoading,
   reasons: selectReasons,
   aggregates: selectFormattedAggregates,
-  categories: selectReshapedClassifications,
+  categories: selectCategories,
+  adminBounces: selectAdminBounces,
   types: selectBandTypes,
   reportOptions: selectReportOptions,
   bounceSearchOptions: selectReportSearchOptions

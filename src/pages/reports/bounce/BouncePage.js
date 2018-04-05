@@ -42,7 +42,7 @@ export class BouncePage extends Component {
   };
 
   renderChart() {
-    const { chartLoading, aggregates, categories, types } = this.props;
+    const { chartLoading, aggregates, categories, types, adminBounces } = this.props;
     if (!chartLoading && _.isEmpty(aggregates)) {
       return <Empty title='Bounce Rates' message='No bounces to report' />;
     }
@@ -52,6 +52,7 @@ export class BouncePage extends Component {
       aggregates={aggregates}
       categories={categories}
       types={types}
+      adminBounces={adminBounces}
     />;
   }
 
@@ -88,7 +89,7 @@ export class BouncePage extends Component {
 
   renderTopLevelMetrics() {
     const { chartLoading, aggregates } = this.props;
-    const { countBounce, countTargeted } = aggregates;
+    const { countBounce, countSent } = aggregates;
 
     // Aggregates aren't ready until chart refreshes
     if (chartLoading) {
@@ -101,10 +102,10 @@ export class BouncePage extends Component {
 
     return (
       <MetricsSummary
-        rateValue={safeRate(countBounce, countTargeted)}
+        rateValue={safeRate(countBounce, countSent)}
         rateTitle='Bounce Rate'
       >
-        <strong>{countBounce.toLocaleString()}</strong> of your messages were bounced of <strong>{countTargeted.toLocaleString()}</strong> messages targeted
+        <strong>{countBounce.toLocaleString()}</strong> of your messages were bounced of <strong>{countSent.toLocaleString()}</strong> messages sent
       </MetricsSummary>
     );
   }

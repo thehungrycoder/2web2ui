@@ -11,7 +11,7 @@ export function refreshBounceReport(updates = {}) {
         type: 'GET_BOUNCE_REPORT_AGGREGATES',
         params: {
           ...params,
-          metrics: 'count_targeted,count_bounce,count_inband_bounce,count_outofband_bounce'
+          metrics: 'count_sent,count_bounce,count_inband_bounce,count_outofband_bounce'
         }
       })),
       dispatch(fetchBounceClassifications({
