@@ -26,7 +26,6 @@ export class TfaManager extends Component {
 
   closeBackupModal = () => {
     this.closeModals();
-    this.props.clearBackupCodes();
   };
 
   enable = (code) => this.props.toggleTfa({ enabled: true, code })
@@ -87,6 +86,7 @@ export class TfaManager extends Component {
           onClose={this.closeBackupModal}
           {...this.props.backupCodes}
           generate={this.generateBackupCodes}
+          clearCodes={this.props.clearBackupCodes}
         />
         <EnableTfaModal
           open={this.state.openModal === 'enable'}

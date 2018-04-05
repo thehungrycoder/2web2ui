@@ -9,6 +9,7 @@ describe('Component: BackupCodesModal', () => {
 
   beforeEach(() => {
     const props = {
+      clearCodes: jest.fn(),
       codes: [],
       open: true,
       activeCount: 10,
@@ -70,6 +71,13 @@ describe('Component: BackupCodesModal', () => {
       expect(instance.setState).toHaveBeenCalledWith({ showErrors: true });
     });
 
+  });
+
+  describe('componentWillUnmount tests', () => {
+    it('should clear codes on unmount', () => {
+      instance.componentWillUnmount();
+      expect(instance.props.clearCodes).toHaveBeenCalled();
+    });
   });
 
 });
