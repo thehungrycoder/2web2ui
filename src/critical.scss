@@ -58,17 +58,25 @@ html {
 
 #error {
   display: none;
-  position: absolute;
-  top: 50%;
+  position: fixed;
+  top: 0;
   left: 0;
-  right: 0;
-  padding: 0 spacing();
-  transform: translate(0, -50%);
+  width: 100vw;
+  height: 100vh;
 
-  text-align: center;
   font-family: -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, Cantarell, “Fira Sans”, “Droid Sans”, “Helvetica Neue”, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  .content {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    padding: 0 spacing();
+    transform: translate(0, -50%);
+    text-align: center;
+  }
 
   h3 {
     color: color(gray, 2);
@@ -76,6 +84,10 @@ html {
 
   p, a, a:visited {
     color: color(gray, 3);
+  }
+
+  a, a:visited {
+    text-decoration: underline;
   }
 
   &.show {
