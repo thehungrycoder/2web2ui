@@ -16,7 +16,8 @@ describe('IP Pools Edit Page', () => {
       error: null,
       pool: {
         name: 'My Pool',
-        id: 'my-pool'
+        id: 'my-pool',
+        signing_domain: 'my-domain.sparkpost.com'
       },
       updatePool: jest.fn(() => Promise.resolve()),
       updateSendingIp: jest.fn(() => Promise.resolve()),
@@ -73,14 +74,25 @@ describe('IP Pools Edit Page', () => {
     });
 
     it('should show an alert on successful pool update', async() => {
+      await wrapper.instance().onUpdatePool({ name: 'my_pool', signing_domain: 'my-domain.sparkpost.com', '127_0_0_1': 'other_pool', '127_0_0_2': 'my-pool' });
+      expect(wrapper.instance().props.showAlert).toHaveBeenCalledWith({
+        type: 'success',
+        message: 'Updated IP pool my-pool.'
+      });
+      expect(updatePoolSpy).toHaveBeenCalledWith('my-pool', { name: 'my_pool', signing_domain: 'my-domain.sparkpost.com', '127_0_0_1': 'other_pool', '127_0_0_2': 'my-pool' });
+      expect(wrapper.instance().props.history.push).toHaveBeenCalled();
+
+    });
+
+    it('should set signing_domain to empty string if it is null', async() => {
+      props.pool.signing_domain = null;
       await wrapper.instance().onUpdatePool({ name: 'my_pool', '127_0_0_1': 'other_pool', '127_0_0_2': 'my-pool' });
       expect(wrapper.instance().props.showAlert).toHaveBeenCalledWith({
         type: 'success',
         message: 'Updated IP pool my-pool.'
       });
-      expect(updatePoolSpy).toHaveBeenCalled();
+      expect(updatePoolSpy).toHaveBeenCalledWith('my-pool', { name: 'my_pool', signing_domain: '', '127_0_0_1': 'other_pool', '127_0_0_2': 'my-pool' });
       expect(wrapper.instance().props.history.push).toHaveBeenCalled();
-
     });
 
     it('should not update pool if editing default pool', async() => {

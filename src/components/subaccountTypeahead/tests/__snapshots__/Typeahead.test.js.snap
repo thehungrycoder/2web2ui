@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Meow Typeahead render function should render the list 1`] = `
+exports[`Typeahead render function should render the list 1`] = `
 <div
   className="Typeahead"
 >
@@ -54,7 +54,7 @@ exports[`Meow Typeahead render function should render the list 1`] = `
 </div>
 `;
 
-exports[`Meow Typeahead render function should render with selected item and not disabled 1`] = `
+exports[`Typeahead render function should render with selected item and not disabled 1`] = `
 <Button
   onClick={[MockFunction]}
   size="default"

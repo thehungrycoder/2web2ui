@@ -1,7 +1,8 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 import { PoolForm } from '../PoolForm';
-
+import config from 'src/config';
+jest.mock('src/config');
 
 describe('PoolForm tests', () => {
   let props;
@@ -45,6 +46,17 @@ describe('PoolForm tests', () => {
 
   it('should show help text when editing default pool', () => {
     wrapper.setProps({ pool: { id: 'default', name: 'Default' }});
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should not render signing_domain if editing default pool', () => {
+    wrapper.setProps({ pool: { id: 'default', name: 'Default' }});
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should not render signing_domain if feature flag is disabled', () => {
+    config.featureFlags.allow_default_signing_domains_for_ip_pools = false;
+    wrapper = shallow(<PoolForm {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 

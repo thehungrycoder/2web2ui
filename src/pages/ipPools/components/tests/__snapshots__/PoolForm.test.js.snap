@@ -58,6 +58,112 @@ exports[`PoolForm tests should not disable button if form is not pristine or not
 </form>
 `;
 
+exports[`PoolForm tests should not render signing_domain if editing default pool 1`] = `
+<form
+  onSubmit={[MockFunction]}
+>
+  <Field
+    component={[Function]}
+    disabled={true}
+    helpText="Sorry, you can't edit the default pool's name. Then it wouldn't be the default!"
+    label="Pool Name"
+    name="name"
+    validate={[Function]}
+  />
+  <TableCollection
+    columns={
+      Array [
+        "Sending IP",
+        "Hostname",
+        "IP Pool",
+      ]
+    }
+    defaultSortColumn={null}
+    defaultSortDirection="asc"
+    getRowData={[Function]}
+    pagination={false}
+    rows={
+      Array [
+        Object {
+          "external_ip": "external",
+          "hostname": "hostname",
+        },
+        Object {
+          "external_ip": "external-2",
+          "hostname": "hostname-2",
+        },
+      ]
+    }
+  />
+  <Button
+    disabled={true}
+    primary={true}
+    size="default"
+    submit={true}
+  >
+    Update IP Pool
+  </Button>
+</form>
+`;
+
+exports[`PoolForm tests should not render signing_domain if feature flag is disabled 1`] = `
+<form
+  onSubmit={[MockFunction]}
+>
+  <Field
+    component={[Function]}
+    disabled={false}
+    helpText=""
+    label="Pool Name"
+    name="name"
+    validate={[Function]}
+  />
+  <Connect(AccessControl)
+    condition={[Function]}
+  >
+    <Field
+      component={[Function]}
+      disabled={false}
+      label="Default Signing Domain"
+      name="signing_domain"
+    />
+  </Connect(AccessControl)>
+  <TableCollection
+    columns={
+      Array [
+        "Sending IP",
+        "Hostname",
+        "IP Pool",
+      ]
+    }
+    defaultSortColumn={null}
+    defaultSortDirection="asc"
+    getRowData={[Function]}
+    pagination={false}
+    rows={
+      Array [
+        Object {
+          "external_ip": "external",
+          "hostname": "hostname",
+        },
+        Object {
+          "external_ip": "external-2",
+          "hostname": "hostname-2",
+        },
+      ]
+    }
+  />
+  <Button
+    disabled={true}
+    primary={true}
+    size="default"
+    submit={true}
+  >
+    Update IP Pool
+  </Button>
+</form>
+`;
+
 exports[`PoolForm tests should not render table if no ips exist 1`] = `
 <form
   onSubmit={[MockFunction]}

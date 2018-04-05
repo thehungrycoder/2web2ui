@@ -8,7 +8,7 @@ const results = [
   'cauliflower'
 ];
 
-describe('Meow Typeahead', () => {
+describe('Typeahead', () => {
   let wrapper;
 
   beforeEach(() => {

@@ -2,7 +2,7 @@ import { createSelector } from 'reselect';
 import { resolveReadyFor } from 'src/helpers/domains';
 import _ from 'lodash';
 
-export const isDkimVerified = (domain) => domain.status.dkim_verified === 'valid';
+export const isDkimVerified = (domain) => domain.status.dkim_status === 'valid';
 export const isVerified = (domain) => domain.status.ownership_verified && domain.status.compliance_status === 'valid';
 export const isUnverified = (domain) => !domain.status.ownership_verified || domain.status.compliance_status === 'pending';
 
@@ -26,7 +26,7 @@ export const selectVerifiedDomains = createSelector(
 
 export const selectDkimVerifiedDomains = createSelector(
   [getDomains],
-  (domains) => _.map(_.filter(domains, isVerified), 'domain')
+  (domains) => _.map(_.filter(domains, isDkimVerified), 'domain')
 );
 
 export const selectReadyForBounce = createSelector(

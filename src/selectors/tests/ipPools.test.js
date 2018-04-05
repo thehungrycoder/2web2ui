@@ -33,6 +33,7 @@ describe('Selector: ipPools', () => {
         pool: {
           name: 'MY CURRENT POOL',
           id: 'my_current_pool',
+          signing_domain: 'signing-domain.test',
           ips: [
             { external_ip: '1.1.1.1' },
             { external_ip: '2.2.2.2' },
@@ -83,6 +84,7 @@ describe('Selector: ipPools', () => {
     it('should return an object of ips assigned to their current pool, for initial values', () => {
       expect(selectIpPoolFormInitialValues(state, { isNew: false })).toEqual({
         name: 'MY CURRENT POOL',
+        signing_domain: 'signing-domain.test',
         '1_1_1_1': 'my_current_pool',
         '2_2_2_2': 'my_current_pool',
         '3_3_3_3': 'my_current_pool'
