@@ -36,6 +36,12 @@ describe('Component: CookieConsent', () => {
     expect(props.userGivesCookieConsent).toHaveBeenCalledTimes(1);
   });
 
+  it('should attempt to give consent once only', () => {
+    wrapper.setProps({ saveFailed: true });
+    wrapper.instance().storeConsent();
+    expect(props.userGivesCookieConsent).not.toHaveBeenCalled();
+  });
+
   it('should set the flag if only the cookie is set', () => {
     wrapper.setProps({ cookieSet: true });
     expect(props.userGivesCookieConsent).toHaveBeenCalled();
