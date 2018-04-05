@@ -5,7 +5,6 @@
 // Adjusting the root font size here will scale the UI proportionally
 
 html {
-  background: color(gray, 9);
   font-size: rem(16);
   @media screen and (min-width: breakpoint(medium)) { font-size: rem(18); }
   @media screen and (min-width: breakpoint(larger)) { font-size: rem(20); }
@@ -23,13 +22,6 @@ html {
 :-moz-placeholder { /* Firefox 18- */
   color: #aaa;
 }
-
-// Overrides Critical CSS. Prevents FOUT.
-#critical.ready {
-  opacity: 0 !important;
-  pointer-events: none !important;
-}
-
 
 hr {
   border-top: none;
