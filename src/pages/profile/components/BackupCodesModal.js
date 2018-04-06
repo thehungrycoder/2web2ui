@@ -21,6 +21,10 @@ export default class BackupCodesModal extends Component {
     }
   }
 
+  componentWillUnmount() {
+    this.props.clearCodes();
+  }
+
   handleInputChange = ({ target }) => {
     this.setState({ password: target.value });
   }

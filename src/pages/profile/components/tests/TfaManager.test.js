@@ -85,10 +85,9 @@ describe('EnableTfaModal tests', () => {
     expect(instance.props.getTfaBackupStatus).toHaveBeenCalled();
   });
 
-  it('should close modal and clear codes when closing backup modal', () => {
+  it('should close modal when closing backup modal', () => {
     wrapper.find('BackupCodesModal').simulate('close');
     expect(instance.closeModals).toHaveBeenCalled();
-    expect(instance.props.clearBackupCodes).toHaveBeenCalled();
   });
 
   it('should close enable modal on close', () => {
