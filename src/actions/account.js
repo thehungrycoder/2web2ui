@@ -1,12 +1,12 @@
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 
-export function fetch(params = {}, onSuccess) {
+export function fetch({ meta, ...params } = {}) {
   return sparkpostApiRequest({
     type: 'FETCH_ACCOUNT',
     meta: {
       method: 'GET',
       url: '/account',
-      onSuccess,
+      ...meta,
       params
     }
   });

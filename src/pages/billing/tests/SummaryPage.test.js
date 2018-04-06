@@ -34,7 +34,7 @@ describe('Page: BillingSummaryPage', () => {
 
   it('should get plans, sending ips and account on mount', () => {
     expect(props.getPlans).toHaveBeenCalledTimes(1);
-    expect(props.fetchAccount).toHaveBeenCalledWith({ include: 'billing' });
+    expect(props.fetchAccount).toHaveBeenCalledWith({ params: { include: 'billing' }});
     expect(props.getSendingIps).toHaveBeenCalledTimes(1);
   });
 

@@ -23,7 +23,7 @@ export function syncSubscription({ meta } = {}) {
  */
 export function updateSubscription({ code, meta = {}, isAwsAccount }) {
   const url = `/account/${isAwsAccount ? 'aws-marketplace/subscription' : 'subscription'}`;
-  const refreshAccount = () => fetchAccount({ include: 'usage,billing' });
+  const refreshAccount = () => fetchAccount({ params: { include: 'usage,billing' }});
 
   return sparkpostApiRequest({
     type: 'UPDATE_SUBSCRIPTION',
@@ -52,7 +52,7 @@ export function updateBillingContact(data) {
   });
 
   return (dispatch) => dispatch(action)
-    .then(() => dispatch(fetchAccount({ include: 'usage,billing' })));
+    .then(() => dispatch(fetchAccount({ params: { include: 'usage,billing' }})));
 }
 
 export function cors({ meta, context, data = {}}) {

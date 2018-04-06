@@ -48,7 +48,7 @@ describe('UsageReport Component', () => {
 
   it('should get the account including usage', () => {
     shallow(<UsageReport {...props} />);
-    expect(props.getAccount).toHaveBeenCalledWith({ include: 'usage' });
+    expect(props.getAccount).toHaveBeenCalledWith({ params: { include: 'usage' }});
   });
 
   it('should render with overages', () => {

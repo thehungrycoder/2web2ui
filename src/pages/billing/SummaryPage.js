@@ -15,7 +15,7 @@ import SuspendedForBilling from './components/SuspendedForBilling';
 export class BillingSummaryPage extends Component {
 
   componentDidMount() {
-    this.props.fetchAccount({ include: 'billing' });
+    this.props.fetchAccount({ params: { include: 'billing' }});
     this.props.getPlans();
     this.props.getSendingIps();
   }
