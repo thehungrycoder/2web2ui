@@ -23,7 +23,7 @@ export const list = [
     label: 'Sent',
     type: 'total',
     unit: 'number',
-    description: 'Messages that SparkPost attempted to deliver, which includes both Deliveries and In-Band Bounces.',
+    description: 'Messages that SparkPost attempted to deliver, which includes both Deliveries and Bounces.',
     inSummary: true
   },
   {
@@ -63,9 +63,9 @@ export const list = [
     key: 'spam_complaint_rate',
     label: 'Spam Complaint Rate',
     unit: 'percent',
-    computeKeys: ['count_spam_complaint', 'count_delivered'],
+    computeKeys: ['count_spam_complaint', 'count_accepted'],
     compute: rate,
-    description: 'Percentage of Delivered messages that resulted in spam complaints.',
+    description: 'Percentage of Accepted messages that resulted in spam complaints.',
     inSummary: true
   },
   {
@@ -208,9 +208,9 @@ export const list = [
     key: 'accepted_rate',
     label: 'Accepted Rate',
     unit: 'percent',
-    computeKeys: ['count_accepted', 'count_targeted'],
+    computeKeys: ['count_accepted', 'count_sent'],
     compute: rate,
-    description: 'Percentage of Targeted messages that were accepted.',
+    description: 'Percentage of Sent messages that were accepted.',
     inSummary: true
   },
   {
@@ -218,18 +218,18 @@ export const list = [
     label: 'Open Rate',
     type: 'percentage',
     unit: 'percent',
-    computeKeys: ['count_unique_confirmed_opened_approx', 'count_targeted'],
+    computeKeys: ['count_unique_confirmed_opened_approx', 'count_accepted'],
     compute: rate,
-    description: 'Percentage of Targeted messages that were either rendered or had at least one link selected.',
+    description: 'Percentage of Accepted messages that were either rendered or had at least one link selected.',
     inSummary: true
   },
   {
     key: 'click_through_rate_approx',
     label: 'Click-through Rate',
     unit: 'percent',
-    computeKeys: ['count_unique_clicked_approx', 'count_targeted'],
+    computeKeys: ['count_unique_clicked_approx', 'count_accepted'],
     compute: rate,
-    description: 'Percentage of Targeted messages that had at least one link selected.',
+    description: 'Percentage of Accepted messages that had at least one link selected.',
     inSummary: true
   },
   {
@@ -246,18 +246,18 @@ export const list = [
     key: 'hard_bounce_rate',
     label: 'Hard Bounce Rate',
     unit: 'percent',
-    computeKeys: ['count_hard_bounce', 'count_targeted'],
+    computeKeys: ['count_hard_bounce', 'count_sent'],
     compute: rate,
-    description: 'Percentage of Targeted messages that Hard Bounced.',
+    description: 'Percentage of Sent messages that Hard Bounced.',
     inSummary: true
   },
   {
     key: 'soft_bounce_rate',
     label: 'Soft Bounce Rate',
     unit: 'percent',
-    computeKeys: ['count_soft_bounce', 'count_targeted'],
+    computeKeys: ['count_soft_bounce', 'count_sent'],
     compute: rate,
-    description: 'Percentage of Targeted messages that Soft Bounced.',
+    description: 'Percentage of Sent messages that Soft Bounced.',
     inSummary: true
   },
   {
@@ -265,9 +265,9 @@ export const list = [
     label: 'Block Bounce Rate',
     type: 'percentage',
     unit: 'percent',
-    computeKeys: ['count_block_bounce', 'count_targeted'],
+    computeKeys: ['count_block_bounce', 'count_sent'],
     compute: rate,
-    description: 'Percentage of Targeted messages that Block Bounced.',
+    description: 'Percentage of Sent messages that Block Bounced.',
     inSummary: true
   },
   {
@@ -283,9 +283,9 @@ export const list = [
     key: 'undetermined_bounce_rate',
     label: 'Undetermined Bounce Rate',
     unit: 'percent',
-    computeKeys: ['count_undetermined_bounce', 'count_targeted'],
+    computeKeys: ['count_undetermined_bounce', 'count_sent'],
     compute: rate,
-    description: 'Percentage of Targeted messages that Undetermined Bounced.',
+    description: 'Percentage of Sent messages that Undetermined Bounced.',
     inSummary: true
   },
   {
