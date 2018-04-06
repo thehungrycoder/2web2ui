@@ -14,6 +14,6 @@ cases('EngagementChart', (props) => {
     clicks: 2525,
     loading: false,
     opens: 5000,
-    targeted: 50000
+    sent: 50000
   }
 });

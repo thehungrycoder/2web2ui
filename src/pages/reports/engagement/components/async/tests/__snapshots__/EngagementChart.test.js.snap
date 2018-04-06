@@ -22,7 +22,7 @@ exports[`EngagementChart renders engagement chart 1`] = `
         data={
           Array [
             Object {
-              "label": "Targeted",
+              "label": "Sent",
               "value": 50000,
             },
             Object {
@@ -149,7 +149,7 @@ exports[`EngagementChart renders engagement chart 1`] = `
           shape={[Function]}
           stroke="none"
           strokeWidth={1}
-          x1="Targeted"
+          x1="Sent"
           x2="Accepted"
           xAxisId={0}
           yAxisId={0}
