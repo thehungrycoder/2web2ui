@@ -9,13 +9,13 @@ import { formatFullNumber } from 'src/helpers/units';
 import { safeRate } from 'src/helpers/math';
 import styles from './EngagementSummary.module.scss';
 
-export function EngagementSummary({ accepted = 0, clicks = 0, filters, loading, opens = 0, targeted = 0 }) {
+export function EngagementSummary({ accepted = 0, clicks = 0, filters, loading, opens = 0, sent = 0 }) {
   if (loading) {
     return <PanelLoading minHeight="115px" />;
   }
 
-  // targeted should always be the largest number, so if it is zero all others should be zero
-  if (targeted === 0) {
+  // sent should always be the largest number, so if it is zero all others should be zero
+  if (sent === 0) {
     return null;
   }
 
@@ -27,16 +27,16 @@ export function EngagementSummary({ accepted = 0, clicks = 0, filters, loading, 
     <Panel className={styles.EngagementSummary}>
       <Grid>
         <Grid.Column xs={12} md={3} xl={2}>
-          <h1>< Percent value={safeRate(opens, targeted)} /></h1>
+          <h1>< Percent value={safeRate(opens, accepted)} /></h1>
           <h6>Unique Open Rate</h6>
         </Grid.Column>
         <Grid.Column xs={12} md={3} xl={2}>
-          <h1>< Percent value={safeRate(clicks, targeted)} /></h1>
+          <h1>< Percent value={safeRate(clicks, accepted)} /></h1>
           <h6>Unique Click Rate</h6>
         </Grid.Column>
         <Grid.Column xs={12} md={6} xl={8}>
           <p>
-            Of <strong>{formatFullNumber(targeted)}</strong> targeted
+            Of <strong>{formatFullNumber(sent)}</strong> sent
             recipients, <strong>{formatFullNumber(accepted)}</strong> messages were
             accepted, <strong>{formatFullNumber(opens)}</strong> were opened
             and <strong>{formatFullNumber(clicks)}</strong> were clicked {timeRange}.
