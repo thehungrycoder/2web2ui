@@ -14,14 +14,14 @@ exports[`Engagement Report Page should render 1`] = `
     clicks={3}
     loading={false}
     opens={4}
-    targeted={2}
+    sent={2}
   />
   <LoadableComponent
     accepted={1}
     clicks={3}
     loading={false}
     opens={4}
-    targeted={2}
+    sent={2}
   />
   <EngagementTable
     data={
