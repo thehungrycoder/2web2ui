@@ -16,7 +16,7 @@ cases('EngagementSummary', (props) => {
     filters: { relativeRange: 'hour' },
     loading: false,
     opens: 523,
-    targeted: 123123
+    sent: 123123
   },
   'renders metric summary with custom time range': {
     clicks: 123,
@@ -27,6 +27,6 @@ cases('EngagementSummary', (props) => {
     },
     loading: false,
     opens: 523,
-    targeted: 123123
+    sent: 123123
   }
 });

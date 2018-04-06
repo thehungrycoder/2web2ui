@@ -47,7 +47,7 @@ exports[`EngagementSummary renders metric summary 1`] = `
         <strong>
           123,123
         </strong>
-         targeted recipients, 
+         sent recipients, 
         <strong>
           0
         </strong>
@@ -114,7 +114,7 @@ exports[`EngagementSummary renders metric summary with custom time range 1`] = `
         <strong>
           123,123
         </strong>
-         targeted recipients, 
+         sent recipients, 
         <strong>
           0
         </strong>
