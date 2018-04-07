@@ -1,8 +1,10 @@
 import _ from 'lodash';
 const MAX_EXAMPLE_VALUE_LENGTH = 50;
+export const GENERIC_EXAMPLES = ['myKey:123dF9', 'myKey:"Some Value"', 'myKey:true'];
 
 export const isValidExampleValue = (row, key) => (
   typeof row[key] !== 'undefined' &&
+  typeof row[key] !== 'object' &&
   row[key] !== null &&
   row[key] !== ''
 );
@@ -16,15 +18,10 @@ export const isValidExampleValue = (row, key) => (
  * @param {Array} rows Data set to use for deriving example values
  * @param {Object} options
  * @param {Array|String} options.exampleModifiers List of keys to use as example modifiers, or hard-coded example modifier string
- * @param {Array} options.keyMap Hash for mapping friendly keys to their real key names in the data set
+ * @param {Array} options.keyMap Hash for mapping friendly keys to their real key names in the data set, e.g. friendly: 'realKey'
  */
-export function createExampleSearch(rows, { exampleModifiers = [], keyMap = {}, MAX_LENGTH = MAX_EXAMPLE_VALUE_LENGTH }) {
-  // Allows passing in of a string version of thing:value, for complicated cases
-  if (typeof exampleModifiers === 'string') {
-    return exampleModifiers;
-  }
+export function createExampleSearches(rows, { exampleModifiers = [], keyMap = {}, MAX_LENGTH = MAX_EXAMPLE_VALUE_LENGTH }) {
 
-  // Derive examples from data set
   const converted = exampleModifiers.map((modifier) => {
     const realKey = keyMap[modifier] || modifier;
     const rowWithValue = rows.find((row) => isValidExampleValue(row, realKey));
@@ -55,14 +52,14 @@ export function createExampleSearch(rows, { exampleModifiers = [], keyMap = {}, 
 
   // Don't guess at keys that are searchable or return an empty list, use a generic example instead
   if (results.length === 0) {
-    return ['myKey:123dF9', 'myKey:"Some Value"', 'myKey:true'];
+    return GENERIC_EXAMPLES;
   }
 
   return results;
 }
 
 // Memoizes createExampleSearch on first argument, "rows", to prevent re-calculation
-export const memoizedCreateExampleSearch = _.memoize(createExampleSearch);
+export const memoizedCreateExampleSearches = _.memoize(createExampleSearches);
 
 // Get a random search pair, e.g. key:value
-export const getRandomExampleSearch = ({ rows, ...options }) => _.sample(memoizedCreateExampleSearch(rows, options));
+export const getRandomExampleSearch = ({ rows, ...options }) => _.sample(memoizedCreateExampleSearches(rows, options));

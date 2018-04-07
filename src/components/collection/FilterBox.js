@@ -1,6 +1,5 @@
 import React from 'react';
 import { TextField, Icon, Panel } from '@sparkpost/matchbox';
-import _ from 'lodash';
 import { getRandomExampleSearch } from './helpers/exampleSearch';
 
 export default function CollectionFilterBox(props) {
