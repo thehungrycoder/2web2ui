@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import _ from 'lodash';
-
 import { getEventSamples, testWebhook } from 'src/actions/webhooks';
 import { showAlert } from 'src/actions/globalAlert';
 
@@ -13,12 +11,24 @@ import RequestBlock from './RequestBlock';
 export class TestTab extends Component {
   state = {
     testSent: false,
-    buildRequest: _.once(this.buildTestRequest)
+    sampleGenerated: null
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (!this.state.sampleGenerated && nextProps.samples) {
+      this.setState({ sampleGenerated: this.buildTestRequest(this.props.webhook, nextProps.samples) });
+    }
   }
 
   componentDidMount() {
-    if (!this.props.samples) {
-      this.props.getEventSamples(this.props.webhook.events);
+    const { webhook, samples } = this.props;
+
+    if (!samples) {
+      this.props.getEventSamples(['delivery']);
+    }
+
+    if (!this.state.sampleGenerated && samples) {
+      this.setState({ sampleGenerated: this.buildTestRequest(webhook, samples) });
     }
   }
 
@@ -44,15 +54,15 @@ export class TestTab extends Component {
 
     requestLines.push('Connection: close');
     requestLines.push('');
-    requestLines.push(JSON.stringify(payload, null, '  '));
+    requestLines.push(JSON.stringify(payload, null, 2));
+
     return requestLines.join('\n');
   }
 
   testWebhook = () => {
     const { testWebhook, webhook, samples, showAlert } = this.props;
-    const { buildRequest } = this.state;
 
-    return testWebhook({ id: webhook.id, subaccount: webhook.subaccount, message: buildRequest(webhook, samples) }).then(() => {
+    return testWebhook({ id: webhook.id, subaccount: webhook.subaccount, message: samples }).then(() => {
       showAlert({ type: 'success', message: 'The test was successful!' });
       this.setState({ testSent: true });
     });
@@ -63,8 +73,8 @@ export class TestTab extends Component {
       return <PanelLoading />;
     }
 
-    const { webhook, samples, testResponse, testLoading } = this.props;
-    const { testSent, buildRequest } = this.state;
+    const { webhook, testResponse, testLoading } = this.props;
+    const { testSent } = this.state;
 
     const buttonText = testSent ? (testLoading ? 'Sending...' : 'Re-send batch') : 'Send Test Batch';
 
@@ -72,7 +82,7 @@ export class TestTab extends Component {
       <Panel>
         <Panel.Section>
           <p><Button primary size='small' disabled={testLoading} onClick={this.testWebhook}>{buttonText}</Button></p>
-          <RequestBlock testSent={testSent} testRequest={buildRequest(webhook, samples)} targetURL={webhook.target}/>
+          <RequestBlock testSent={testSent} testRequest={ this.state.sampleGenerated || 'generating...' } targetURL={webhook.target}/>
         </Panel.Section>
         { !testLoading && <ResponseBlock testSent={testSent} testResponse={testResponse} /> }
       </Panel>
