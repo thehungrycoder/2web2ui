@@ -1,38 +1,80 @@
 import billingUpdate from '../billingUpdate';
-import * as billingHelpers from '../../helpers/billing';
-import _ from 'lodash';
+import * as accountActions from 'src/actions/account';
+import * as billingActions from 'src/actions/billing';
+import * as billingHelpers from 'src/helpers/billing';
 
+jest.mock('src/actions/account');
+jest.mock('src/actions/billing');
 jest.mock('src/helpers/billing');
-jest.mock('src/helpers/conditions/account');
-jest.mock('../helpers/sparkpostApiRequest', () => jest.fn((a) => a));
-jest.mock('../helpers/zuoraRequest', () => jest.fn((a) => a));
 
-describe('Action Creator: Billing Create', () => {
-  let accountKey;
-  let testState;
-  let dispatchMock;
-  let getStateMock;
+describe('Action Creator: Billing Update', () => {
+  let dispatch;
 
   beforeEach(() => {
-    accountKey = { some: 'test-billing-data' };
-    // corsData = { some: 'test-cors-data' };
-    // billingData = { some: 'test-billing-data', billToContact: {}};
-    testState = {
-      currentUser: {
-        email: 'sparkpost-user-email@example.com'
+    dispatch = jest.fn((a) => a);
+    billingActions.cors = jest.fn(({ meta }) => meta.onSuccess({
+      results: {
+        accountKey: 'account-key',
+        signature: 'TEST_SIGNATURE',
+        token: 'TEST_TOKEN'
+      }
+    }));
+    billingActions.updateCreditCard = jest.fn(({ meta }) => meta.onSuccess({}));
+    billingActions.updateSubscription = jest.fn(({ meta }) => meta.onSuccess({}));
+    billingActions.syncSubscription = jest.fn(({ meta }) => meta.onSuccess({}));
+    billingActions.collectPayments = jest.fn(({ meta }) => meta.onSuccess({}));
+    accountActions.fetch = jest.fn();
+    billingHelpers.formatUpdateData = jest.fn((a) => a);
+  });
+
+  it('update without a planpicker code', () => {
+    const values = {};
+    const thunk = billingUpdate(values);
+
+    thunk(dispatch);
+
+    expect(billingActions.cors).toHaveBeenCalledWith(expect.objectContaining({
+      context: 'update-billing'
+    }));
+    expect(billingActions.updateCreditCard).toHaveBeenCalledWith(expect.objectContaining({
+      data: {
+        accountKey: 'account-key'
+      },
+      signature: 'TEST_SIGNATURE',
+      token: 'TEST_TOKEN'
+    }));
+    expect(billingActions.updateSubscription).not.toHaveBeenCalled();
+    expect(billingActions.syncSubscription).toHaveBeenCalled();
+    expect(billingActions.collectPayments).toHaveBeenCalled();
+    expect(accountActions.fetch).toHaveBeenCalledWith({ include: 'usage,billing' });
+  });
+
+  it('update with a planpicker code', () => {
+    const values = {
+      planpicker: {
+        code: 'plan-code'
       }
     };
+    const thunk = billingUpdate(values);
 
-    // thunk-friendly dispatch mock
-    dispatchMock = jest.fn((a) => typeof a === 'function' ? a(dispatchMock, getStateMock) : Promise.resolve(a));
-    getStateMock = jest.fn(() => testState);
-    billingHelpers.formatUpdateData = jest.fn((values) => ({ accountKey }));
+    thunk(dispatch);
+
+    expect(billingActions.cors).toHaveBeenCalledWith(expect.objectContaining({
+      context: 'update-billing'
+    }));
+    expect(billingActions.updateCreditCard).toHaveBeenCalledWith(expect.objectContaining({
+      data: {
+        accountKey: 'account-key',
+        ...values
+      },
+      signature: 'TEST_SIGNATURE',
+      token: 'TEST_TOKEN'
+    }));
+    expect(billingActions.updateSubscription).toHaveBeenCalledWith(expect.objectContaining({
+      code: 'plan-code'
+    }));
+    expect(billingActions.syncSubscription).toHaveBeenCalled();
+    expect(billingActions.collectPayments).toHaveBeenCalled();
+    expect(accountActions.fetch).toHaveBeenCalledWith({ include: 'usage,billing' });
   });
-
-
-  it('should dispatch a chained billing update action', async() => {
-    await billingUpdate({ planpicker: { code: 'test-plan' }})(dispatchMock, getStateMock);
-    expect(_.flatten(dispatchMock.mock.calls)).toMatchSnapshot();
-  });
-
 });
