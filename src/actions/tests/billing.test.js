@@ -81,18 +81,25 @@ describe('Action Creator: Billing', () => {
 
   describe('updateSubscription', () => {
     it('should dispatch an update subscription action and fetch account', async() => {
-      await mockStore.dispatch(billing.updateSubscription({ code: 'test-code' }));
-      snapActions();
+      const dispatchMock = jest.fn((a) => Promise.resolve(a));
+      const thunk = billing.updateSubscription({ code: 'test-code' });
+      await thunk(dispatchMock, getStateMock);
+      expect(_.flatten(dispatchMock.mock.calls)).toMatchSnapshot();
     });
 
     it('should dispatch an update subscription action with provided onSuccess action', async() => {
-      await mockStore.dispatch(billing.updateSubscription({ code: 'test-code', meta: { onSuccess: jest.fn() }}));
-      snapActions();
+      const dispatchMock = jest.fn((a) => Promise.resolve(a));
+      const thunk = billing.updateSubscription({ code: 'test-code', meta: { onSuccess: jest.fn() }});
+      await thunk(dispatchMock, getStateMock);
+      expect(_.flatten(dispatchMock.mock.calls)).toMatchSnapshot();
     });
 
-    it('dispatches an update subscription action for aws marketplace account', async() => {
-      mockStore.dispatch(billing.updateSubscription({ code: 'test-code', isAwsAccount: true }));
-      snapActions();
+    it('dispatches un update subscription action for aws marketplace account', async() => {
+      const dispatchMock = jest.fn((a) => Promise.resolve(a));
+      isAws.mockImplementation(() => true);
+      const thunk = billing.updateSubscription({ code: 'test-code' });
+      await thunk(dispatchMock, getStateMock);
+      expect(_.flatten(dispatchMock.mock.calls)).toMatchSnapshot();
     });
   });
 

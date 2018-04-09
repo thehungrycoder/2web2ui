@@ -6,7 +6,7 @@ import { showAlert } from 'src/actions/globalAlert';
 import { CenteredLogo, Loading, PlanPicker } from 'src/components';
 import Steps from './components/Steps';
 import { getPlans } from 'src/actions/account';
-import { getBillingCountries, updateSubscription } from 'src/actions/billing';
+import { getBillingCountries } from 'src/actions/billing';
 import billingCreate from 'src/actions/billingCreate';
 import { selectVisiblePlans } from 'src/selectors/accountBillingInfo';
 import { changePlanInitialValues } from 'src/selectors/accountBillingForms';
@@ -133,7 +133,7 @@ const mapStateToProps = (state, props) => {
     hasError: state.billing.plansError || state.billing.countriesError
   };
 };
-const mapDispatchToProps = { billingCreate, showAlert, getPlans, getBillingCountries, updateSubscription };
+const mapDispatchToProps = { billingCreate, showAlert, getPlans, getBillingCountries };
 const formOptions = { form: FORM_NAME, enableReinitialize: true };
 
 export default connect(mapStateToProps, mapDispatchToProps)(reduxForm(formOptions)(OnboardingPlanPage));

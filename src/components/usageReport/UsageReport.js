@@ -36,7 +36,7 @@ const ProgressLabel = ({ title, secondaryTitle }) => (
 
 export class UsageReport extends Component {
   componentDidMount() {
-    this.props.getAccount({ params: { include: 'usage' }});
+    this.props.getAccount({ include: 'usage' });
   }
   render() {
     const { subscription, usage } = this.props;

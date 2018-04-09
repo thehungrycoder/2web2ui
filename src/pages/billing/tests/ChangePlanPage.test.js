@@ -25,7 +25,7 @@ describe('Page: ChangePlanPage', () => {
     const countrySpy = jest.spyOn(wrapper.instance().props, 'getBillingCountries');
     wrapper.instance().componentWillMount();
     expect(fetchAccountSpy).toHaveBeenCalledWith(expect.objectContaining({
-      params: { include: expect.stringContaining('billing') }
+      include: expect.stringContaining('billing')
     }));
     expect(plansSpy).toHaveBeenCalled();
     expect(countrySpy).toHaveBeenCalled();

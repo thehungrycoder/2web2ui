@@ -157,6 +157,22 @@ Array [
 ]
 `;
 
+exports[`Action Creator: Billing updateSubscription dispatches un update subscription action for aws marketplace account 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "data": Object {
+        "code": "test-code",
+      },
+      "method": "PUT",
+      "onSuccess": [Function],
+      "url": "/account/aws-marketplace/subscription",
+    },
+    "type": "UPDATE_SUBSCRIPTION",
+  },
+]
+`;
+
 exports[`Action Creator: Billing updateSubscription should dispatch an update subscription action and fetch account 1`] = `
 Array [
   Object {

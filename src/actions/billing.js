@@ -2,6 +2,7 @@
 import { formatContactData } from 'src/helpers/billing';
 import { fetch as fetchAccount } from './account';
 import { list as getSendingIps } from './sendingIps';
+import { isAws } from 'src/helpers/conditions/account';
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 import zuoraRequest from 'src/actions/helpers/zuoraRequest';
 
@@ -21,20 +22,19 @@ export function syncSubscription({ meta } = {}) {
  * Updates plan
  * @param {string} code
  */
-export function updateSubscription({ code, meta = {}, isAwsAccount }) {
-  const url = `/account/${isAwsAccount ? 'aws-marketplace/subscription' : 'subscription'}`;
-  const refreshAccount = () => fetchAccount({ params: { include: 'usage,billing' }});
-
-  return sparkpostApiRequest({
-    type: 'UPDATE_SUBSCRIPTION',
-    meta: {
-      method: 'PUT',
-      url: url,
-      data: { code },
-      ...meta,
-      onSuccess: meta.onSuccess ? meta.onSuccess : refreshAccount
-    }
-  });
+export function updateSubscription({ code, meta = {}}) {
+  return (dispatch, getState) => dispatch(
+    sparkpostApiRequest({
+      type: 'UPDATE_SUBSCRIPTION',
+      meta: {
+        method: 'PUT',
+        url: isAws(getState()) ? '/account/aws-marketplace/subscription' : '/account/subscription',
+        data: { code },
+        ...meta,
+        onSuccess: meta.onSuccess ? meta.onSuccess : () => fetchAccount()
+      }
+    })
+  );
 }
 
 /**
@@ -52,7 +52,7 @@ export function updateBillingContact(data) {
   });
 
   return (dispatch) => dispatch(action)
-    .then(() => dispatch(fetchAccount({ params: { include: 'usage,billing' }})));
+    .then(() => dispatch(fetchAccount()));
 }
 
 export function cors({ meta, context, data = {}}) {

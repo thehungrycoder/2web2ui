@@ -16,7 +16,7 @@ export default function billingCreate(values) {
 
     // action creator wrappers for chaining as callbacks
     const corsCreateBilling = ({ meta }) => cors({ meta, context: 'create-account', data: corsData });
-    const fetchUsageAndBilling = ({ meta }) => fetchAccount({ params: { include: 'usage,billing' }, meta });
+    const fetchUsageAndBilling = ({ meta }) => fetchAccount({ include: 'usage,billing', meta });
     const constructZuoraAccount = ({ results, meta }) => {
       const { token, signature } = results;
       const { currentUser } = getState();
