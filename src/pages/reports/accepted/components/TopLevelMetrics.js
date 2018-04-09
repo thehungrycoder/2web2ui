@@ -10,7 +10,6 @@ import _ from 'lodash';
  */
 const TopLevelMetrics = ({ filters, metrics, aggregates }) => {
   const {
-    count_targeted,
     count_accepted,
     count_sent,
     avg_delivery_time_first,
@@ -44,7 +43,6 @@ const TopLevelMetrics = ({ filters, metrics, aggregates }) => {
       <MetricsSummary
         rateValue={safeRate(count_accepted, count_sent)}
         rateTitle='Accepted Rate'
-        secondaryMessage={`${count_targeted.toLocaleString()} messages were targeted.`}
         {...filters} >
         <strong>{count_accepted.toLocaleString()}</strong> of <strong>{count_sent.toLocaleString()}</strong> sent messages were accepted
       </MetricsSummary>

@@ -6,7 +6,6 @@ exports[`Accepted TopLevelMetrics Component:  should render correctly 1`] = `
     rateTitle="Accepted Rate"
     rateValue={93.75}
     relativeRange="hour"
-    secondaryMessage="200 messages were targeted."
   >
     <strong>
       150
