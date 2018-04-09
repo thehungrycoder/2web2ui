@@ -1,6 +1,46 @@
-import { formatCountries, formatCardTypes, getPlanPrice } from '../billing';
+import {
+  formatCountries,
+  formatCardTypes,
+  formatDataForCors,
+  getPlanPrice
+} from '../billing';
 
 describe('Billing Helpers', () => {
+
+  describe('formatDataForCors', () => {
+    const card = {
+      number: '4123512361237123',
+      name: 'Person Face',
+      type: 'CardType',
+      expMonth: 4,
+      expYear: 2050,
+      securityCode: 123
+    };
+    const billingAddress = {
+      state: 'MD',
+      country: 'US',
+      zip: '21234',
+      firstName: 'Person',
+      lastName: 'Head'
+    };
+    const planpicker = {
+      billingId: 'testBillingId135'
+    };
+    const values = {
+      email: 'someemail@example.com',
+      planpicker,
+      card,
+      billingAddress
+    };
+
+    it('should return the correctly formatted values', () => {
+      const formatted = formatDataForCors(values);
+      expect(formatted).toMatchSnapshot();
+      // country is especially important here for AVS, see FAD-6500
+      expect(formatted.billingData.creditCard.cardHolderInfo.country).toEqual('US');
+    });
+  });
+
   describe('formatCountries', () => {
     const countries = [
       { code: 'GG', name: 'gg' },

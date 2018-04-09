@@ -55,6 +55,50 @@ Array [
 ]
 `;
 
+exports[`Billing Helpers formatDataForCors should return the correctly formatted values 1`] = `
+Object {
+  "billingData": Object {
+    "billToContact": Object {
+      "country": "US",
+      "firstName": "Person",
+      "lastName": "Head",
+      "state": "MD",
+      "workEmail": "someemail@example.com",
+      "zipCode": "21234",
+    },
+    "billingId": "testBillingId135",
+    "creditCard": Object {
+      "cardHolderInfo": Object {
+        "addressLine1": null,
+        "addressLine2": null,
+        "cardHolderName": "Person Face",
+        "city": null,
+        "country": "US",
+        "zipCode": "21234",
+      },
+      "cardNumber": "4123512361237123",
+      "cardType": "CardType",
+      "expirationMonth": 4,
+      "expirationYear": 2050,
+      "securityCode": 123,
+    },
+  },
+  "corsData": Object {
+    "address1": null,
+    "address2": null,
+    "bin": "412351",
+    "cardholder_name": "Person Face",
+    "city": null,
+    "country": "US",
+    "email": "someemail@example.com",
+    "last_four": "7123",
+    "plan_id": "testBillingId135",
+    "state": "MD",
+    "zip_code": "21234",
+  },
+}
+`;
+
 exports[`Billing Helpers getPlanPrice returns price info correctly for hourly plan 1`] = `
 Object {
   "intervalLong": "hourly",
