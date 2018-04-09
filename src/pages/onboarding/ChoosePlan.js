@@ -47,11 +47,7 @@ export class OnboardingPlanPage extends Component {
     // Note: billingCreate will update the subscription if the account is AWS
     return billingCreate(values)
       .then(() => history.push(NEXT_STEP))
-      .then((res) => {
-        if (!(res instanceof Error)) {
-          showAlert({ type: 'success', message: 'Added your plan' });
-        }
-      });
+      .then(() => showAlert({ type: 'success', message: 'Added your plan' }));
   };
 
   renderCCSection = () => {
