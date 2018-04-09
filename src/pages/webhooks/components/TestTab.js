@@ -11,12 +11,12 @@ import RequestBlock from './RequestBlock';
 export class TestTab extends Component {
   state = {
     testSent: false,
-    sampleGenerated: null
+    sampleEvent: null
   }
 
   componentWillReceiveProps(nextProps) {
-    if (!this.state.sampleGenerated && nextProps.samples) {
-      this.setState({ sampleGenerated: this.buildTestRequest(this.props.webhook, nextProps.samples) });
+    if (!this.state.sampleEvent && nextProps.samples) {
+      this.setState({ sampleEvent: this.buildTestRequest(this.props.webhook, nextProps.samples) });
     }
   }
 
@@ -27,8 +27,8 @@ export class TestTab extends Component {
       this.props.getEventSamples(['delivery']);
     }
 
-    if (!this.state.sampleGenerated && samples) {
-      this.setState({ sampleGenerated: this.buildTestRequest(webhook, samples) });
+    if (!this.state.sampleEvent && samples) {
+      this.setState({ sampleEvent: this.buildTestRequest(webhook, samples) });
     }
   }
 
@@ -82,7 +82,7 @@ export class TestTab extends Component {
       <Panel>
         <Panel.Section>
           <p><Button primary size='small' disabled={testLoading} onClick={this.testWebhook}>{buttonText}</Button></p>
-          <RequestBlock testSent={testSent} testRequest={ this.state.sampleGenerated || 'generating...' } targetURL={webhook.target}/>
+          <RequestBlock testSent={testSent} testRequest={ this.state.sampleEvent || 'generating...' } targetURL={webhook.target}/>
         </Panel.Section>
         { !testLoading && <ResponseBlock testSent={testSent} testResponse={testResponse} /> }
       </Panel>
