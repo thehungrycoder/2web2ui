@@ -1,73 +1,77 @@
-import * as billing from '../billing';
-// import { fetch } from '../account';
 import billingCreate from '../billingCreate';
-import { isAws } from '../../helpers/conditions/account';
-import * as billingHelpers from '../../helpers/billing';
-import _ from 'lodash';
-// import * as actionHelper from '../helpers/chainActions';
+import * as accountActions from 'src/actions/account';
+import * as billingActions from 'src/actions/billing';
+import * as accountConditions from 'src/helpers/conditions/account';
+import * as billingHelpers from 'src/helpers/billing';
 
-jest.mock('src/helpers/billing');
+jest.mock('src/actions/account');
+jest.mock('src/actions/billing');
 jest.mock('src/helpers/conditions/account');
-jest.mock('../helpers/sparkpostApiRequest', () => jest.fn((a) => a));
-jest.mock('../helpers/zuoraRequest', () => jest.fn((a) => a));
+jest.mock('src/helpers/billing');
 
 describe('Action Creator: Billing Create', () => {
-  let token;
-  let signature;
-  let corsData;
-  let billingData;
-  let testState;
-  let dispatchMock;
-  let getStateMock;
-  // let chainActionsMock;
+  let dispatch;
 
-  beforeEach(() => {
-    corsData = { some: 'test-cors-data' };
-    billingData = { some: 'test-billing-data', billToContact: {}};
-    testState = {
-      currentUser: {
-        email: 'sparkpost-user-email@example.com'
+  beforeEach(() => { dispatch = jest.fn((a) => a); });
+
+  it('update without a planpicker code', () => {
+    const values = {};
+    const currentUser = {
+      email: 'test@example.com'
+    };
+    const corsData = {
+      email: 'test@example.com'
+    };
+    const billingData = {
+      billToContact: {},
+      creditCard: {
+        cardNumber: '1111222233334444'
       }
     };
+    const getState = () => ({ currentUser });
+    const thunk = billingCreate(values);
 
-    // thunk-friendly dispatch mock
-    dispatchMock = jest.fn((a) => typeof a === 'function' ? a(dispatchMock, getStateMock) : Promise.resolve(a));
-    getStateMock = jest.fn(() => testState);
+    billingActions.cors = jest.fn(({ meta }) => meta.onSuccess({
+      results: {
+        signature: 'TEST_SIGNATURE',
+        token: 'TEST_TOKEN'
+      }
+    }));
+    billingActions.createZuoraAccount = jest.fn(({ meta }) => meta.onSuccess({}));
+    billingActions.syncSubscription = jest.fn(({ meta }) => meta.onSuccess({}));
+    accountActions.fetch = jest.fn();
 
-    billingHelpers.formatDataForCors = jest.fn((values) => ({ values, corsData, billingData }));
-    billingHelpers.formatCreateData = jest.fn(() => ({
-      billToContact: {},
-      creditCard: {},
-      subscription: {}
+    billingHelpers.formatCreateData = jest.fn((a) => a);
+    billingHelpers.formatDataForCors = jest.fn((a) => ({ billingData, corsData }));
+
+    thunk(dispatch, getState);
+
+    expect(billingActions.cors).toHaveBeenCalledWith(expect.objectContaining({
+      context: 'create-account',
+      data: corsData
     }));
 
-    isAws.mockImplementation(() => false);
-    billing.cors = jest.fn(({ meta }) => ({ token, signature, meta }));
-    billing.createZuoraAccount = jest.fn(({ meta }) => ({ meta }));
-    billing.syncSubscription = jest.fn(({ meta }) => ({ meta }));
-    // fetch = jest.fn(({ meta }) => ({ meta }));
-    // chainActionsMock = jest.genMockFromModule('src/actions/helpers/chainActions').default;
-    // chainActionsMock = jest.spyOn(actionHelper, 'default');
+    expect(billingActions.createZuoraAccount).toHaveBeenCalledWith(expect.objectContaining({
+      data: billingData,
+      signature: 'TEST_SIGNATURE',
+      token: 'TEST_TOKEN'
+    }));
+
+    expect(billingActions.syncSubscription).toHaveBeenCalled();
+    expect(accountActions.fetch).toHaveBeenCalledWith(expect.objectContaining({ include: 'usage,billing' }));
   });
 
-  it('should dispatch a chained billing create action', async() => {
-    await billingCreate({ some: 'test-values' })(dispatchMock, getStateMock);
-    // expect(billing.cors).toHaveBeenCalledWith({ meta: { onSuccess: () => {} }, context: 'update-billing', data: { some: 'test-cors-data' }});
-    // expect(billing.cors).toHaveBeenCalled();
-    // expect(billing.createZuoraAccount).toHaveBeenCalled();
-    // expect(billing.createZuoraAccount.mock.calls[0][0].data.billToContact).toEqual('sparkpost-user-email@example.com');
-    // expect(billing.syncSubscription).toHaveBeenCalled();
-    // expect(fetch).toHaveBeenCalled();
-    // expect(chainActionsMock).toHaveBeenCalledWith('stuff');
-    expect(_.flatten(dispatchMock.mock.calls)).toMatchSnapshot();
-  });
+  it('update subscription for AWS users', () => {
+    const state = jest.fn();
+    const values = { planpicker: { code: 'plan-code' }};
+    const thunk = billingCreate(values);
 
-  it('should update instead of create if account is AWS', () => {
-    isAws.mockImplementation(() => true);
-    billingCreate({ planpicker: { code: 'newplan1' }})(dispatchMock, getStateMock);
-    // const update = dispatchMock.mock.calls[0][0];
-    // expect(update).toEqual(expect.any(Function));
-    // update(dispatchMock, getStateMock);
-    expect(_.flatten(dispatchMock.mock.calls)).toMatchSnapshot();
+    accountConditions.isAws = jest.fn(() => true);
+    billingActions.updateSubscription = jest.fn();
+
+    thunk(dispatch, () => state);
+
+    expect(accountConditions.isAws).toHaveBeenCalledWith(state);
+    expect(billingActions.updateSubscription).toHaveBeenCalledWith({ code: 'plan-code' });
   });
 });
