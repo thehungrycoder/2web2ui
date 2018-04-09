@@ -13,7 +13,8 @@ describe('Accepted ChartGroup: ', () => {
     ],
     aggregates: {
       count_targeted: 100,
-      count_accepted: 50
+      count_accepted: 50,
+      count_sent: 80
     }
   };
 
