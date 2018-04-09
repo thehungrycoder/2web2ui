@@ -4,7 +4,6 @@ import { getMetricsFromKeys } from 'src/helpers/metrics';
 // reducer, and selector and they involve computation
 export function getAcceptedMetrics() {
   return getMetricsFromKeys([
-    'count_targeted',
     'count_sent',
     'count_accepted',
     'avg_delivery_time_first',
