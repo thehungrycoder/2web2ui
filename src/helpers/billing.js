@@ -42,7 +42,8 @@ export function formatDataForCors(values) {
         zipCode: billingAddress.zip,
         addressLine1: null,
         addressLine2: null,
-        city: null
+        city: null,
+        country: billingAddress.country // must send country so gateway knows which AVS rules to apply
       }
     }
   };
