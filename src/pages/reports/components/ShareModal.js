@@ -26,7 +26,7 @@ export class ShareModal extends Component {
 
   updateLink = () => {
     const { searchOptions, history, location } = this.props;
-    const search = qs.stringify(searchOptions, { encode: false });
+    const search = qs.stringify(searchOptions);
 
     history.replace({ pathname: location.pathname, search });
   }
@@ -45,7 +45,7 @@ export class ShareModal extends Component {
       delete modifiedQuery.to;
     }
 
-    const search = qs.stringify(modifiedQuery, { encode: false });
+    const search = qs.stringify(modifiedQuery);
     const url = window.location.href.split('?')[0];
 
     return `${url}?${search}`;
