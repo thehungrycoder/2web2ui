@@ -1,5 +1,5 @@
 import React from 'react';
-import SubaccountTypeahead from '../subaccountTypeahead/SubaccountTypeahead';
+import SubaccountTypeahead from '../typeahead/SubaccountTypeahead';
 
 /**
  * @example

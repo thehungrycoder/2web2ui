@@ -22,6 +22,7 @@ export class SubaccountTypeahead extends Component {
       <Typeahead
         renderItem={(item) => <Item name={item.name} id={item.id} /> }
         itemToString={(item) => (item ? `${item.name} (${item.id})` : '')}
+        label="Subaccount"
         {...this.props}
       />
     );

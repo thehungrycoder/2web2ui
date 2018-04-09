@@ -31,7 +31,7 @@ const config = {
     billingEmail: 'billing@sparkpost.com'
   },
   featureFlags: {
-    allow_default_signing_domains_for_ip_pools: true,
+    allow_default_signing_domains_for_ip_pools: false,
     allow_mailbox_verification: true,
     allow_anyone_at_verification: false,
     has_signup: false

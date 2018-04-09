@@ -1,5 +1,5 @@
 import React from 'react';
-import SendingDomainTypeahead from '../subaccountTypeahead/SendingDomainTypeahead';
+import SendingDomainTypeahead from '../typeahead/SendingDomainTypeahead';
 
 /**
  * @example

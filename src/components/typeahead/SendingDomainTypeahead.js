@@ -22,7 +22,10 @@ export class SendingDomainTypeahead extends Component {
     }
 
     return (
-      <Typeahead {...this.props} />
+      <Typeahead
+        label="Sending Domain"
+        {...this.props}
+      />
     );
   }
 }
