@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RedirectAndAlert should render a redirect 1`] = `
+<Redirect
+  push={false}
+  to="/test/example"
+/>
+`;
