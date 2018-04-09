@@ -102,8 +102,15 @@ const sparkpostRequest = requestHelperFactory({
       meta
     });
 
-    if (showErrorAlert) {
-      dispatch(showAlert({ type: 'error', message: 'Something went wrong.', details: message }));
+    // Don't show alerts for 404s on GET. Otherwise show alerts on request.
+    const get404 = response.status === 404 && action.meta.method === 'GET';
+    if (!get404 && showErrorAlert) {
+      dispatch(
+        showAlert({
+          type: 'error',
+          message: 'Something went wrong.',
+          details: message
+        }));
     }
 
     // TODO: Remove this once we unchain all actions

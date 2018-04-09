@@ -32,5 +32,5 @@ render(
 );
 unregister(); // our bundle is currently too big to be added to SW cache, causing problems on every deploy
 
-// Kill loading screen
-document.getElementById('critical').className += ' ready';
+// Indicates the app bundle has loaded successfully
+window.SPARKPOST_LOADED = true;

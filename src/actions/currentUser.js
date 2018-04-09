@@ -61,14 +61,6 @@ export function userGivesCookieConsent(username) {
   return (dispatch, getState) => {
     const state = getState();
 
-    // TODO: change this condition to check if the user has the right grants
-    // to make this request so they don't get a 403 and get logged out
-    // e.g. heroku and azure users, see: FAD-6464
-    // eslint-disable-next-line no-constant-condition
-    if (true) {
-      return;
-    }
-
     const { username } = state.currentUser;
     const action = {
       type: 'USER_GIVES_COOKIE_CONSENT',
