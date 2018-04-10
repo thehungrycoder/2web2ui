@@ -14,7 +14,8 @@ import { formatDateTime } from 'src/helpers/date';
 
 const filterBoxConfig = {
   show: true,
-  itemToStringKeys: ['name', 'target']
+  itemToStringKeys: ['name', 'target'],
+  exampleModifiers: ['name', 'target', 'auth_type', 'last_successful']
 };
 
 export class WebhooksList extends Component {

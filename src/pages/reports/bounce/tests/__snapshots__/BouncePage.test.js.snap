@@ -55,17 +55,17 @@ exports[`BouncePage:  should display loading panel on top level metrics when agg
         "exampleModifiers": Array [
           "domain",
           "category",
+          "classification",
         ],
         "itemToStringKeys": Array [
           "bounce_category_name",
           "bounce_class_name",
           "domain",
-          "bounce_class_description",
+          "reason",
         ],
         "keyMap": Object {
           "category": "bounce_category_name",
           "classification": "bounce_class_name",
-          "reason": "bounce_class_description",
         },
         "show": true,
       }
@@ -152,17 +152,17 @@ exports[`BouncePage:  should render 1`] = `
         "exampleModifiers": Array [
           "domain",
           "category",
+          "classification",
         ],
         "itemToStringKeys": Array [
           "bounce_category_name",
           "bounce_class_name",
           "domain",
-          "bounce_class_description",
+          "reason",
         ],
         "keyMap": Object {
           "category": "bounce_category_name",
           "classification": "bounce_class_name",
-          "reason": "bounce_class_description",
         },
         "show": true,
       }
@@ -232,17 +232,17 @@ exports[`BouncePage:  should render correctly with no bounces 1`] = `
         "exampleModifiers": Array [
           "domain",
           "category",
+          "classification",
         ],
         "itemToStringKeys": Array [
           "bounce_category_name",
           "bounce_class_name",
           "domain",
-          "bounce_class_description",
+          "reason",
         ],
         "keyMap": Object {
           "category": "bounce_category_name",
           "classification": "bounce_class_name",
-          "reason": "bounce_class_description",
         },
         "show": true,
       }
