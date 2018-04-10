@@ -22,6 +22,7 @@ export default requestHelperFactory({
       // auto alert all errors
       dispatch(showAlert({ type: 'error', message }));
 
+      // TODO: 'return' err once we unchain all actions
       throw err;
     }
 
@@ -31,6 +32,6 @@ export default requestHelperFactory({
       meta
     });
 
-    return response;
+    return meta.onSuccess ? dispatch(meta.onSuccess({ results: response })) : response;
   }
 });

@@ -35,7 +35,7 @@ const sparkpostRequest = requestHelperFactory({
       meta
     });
 
-    return results;
+    return meta.onSuccess ? dispatch(meta.onSuccess({ results })) : results;
   },
   onFail: ({ types, err, dispatch, meta, action, getState }) => {
     // TODO: Move this error transformation into an axios interceptor in the

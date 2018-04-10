@@ -1,40 +1,40 @@
 /* eslint max-lines: ["error", 215] */
-import { formatDataForCors, formatCreateData, formatUpdateData, formatContactData } from 'src/helpers/billing';
+import { formatContactData } from 'src/helpers/billing';
 import { fetch as fetchAccount } from './account';
 import { list as getSendingIps } from './sendingIps';
+import { isAws } from 'src/helpers/conditions/account';
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 import zuoraRequest from 'src/actions/helpers/zuoraRequest';
-import { isAws } from 'src/helpers/conditions/account';
 
-export function syncSubscription() {
+export function syncSubscription({ meta = {}} = {}) {
   return sparkpostApiRequest({
     type: 'SYNC_SUBSCRIPTION',
     meta: {
       method: 'POST',
-      url: '/account/subscription/check'
+      url: '/account/subscription/check',
+      ...meta
     }
   });
 }
+
 
 /**
  * Updates plan
  * @param {string} code
  */
-export function updateSubscription({ code }) {
-  return (dispatch, getState) => {
-    const url = `/account/${isAws(getState()) ? 'aws-marketplace/subscription' : 'subscription'}`;
-
-    const action = sparkpostApiRequest({
+export function updateSubscription({ code, meta = {}}) {
+  return (dispatch, getState) => dispatch(
+    sparkpostApiRequest({
       type: 'UPDATE_SUBSCRIPTION',
       meta: {
         method: 'PUT',
-        url: url,
-        data: { code }
+        url: isAws(getState()) ? '/account/aws-marketplace/subscription' : '/account/subscription',
+        data: { code },
+        ...meta,
+        onSuccess: meta.onSuccess ? meta.onSuccess : () => fetchAccount({ include: 'usage,billing' })
       }
-    });
-
-    return dispatch(action).then(() => dispatch(fetchAccount({ include: 'usage,billing' })));
-  };
+    })
+  );
 }
 
 /**
@@ -55,7 +55,7 @@ export function updateBillingContact(data) {
     .then(() => dispatch(fetchAccount({ include: 'usage,billing' })));
 }
 
-export function cors(context, data = {}) {
+export function cors({ meta = {}, context, data = {}}) {
   const type = `CORS_${context.toUpperCase().replace('-', '_')}`;
   return sparkpostApiRequest({
     type,
@@ -63,19 +63,21 @@ export function cors(context, data = {}) {
       method: 'POST',
       url: '/account/cors-data',
       params: { context },
-      data
+      data,
+      ...meta
     }
   });
 }
 
-export function updateCreditCard({ data, token, signature }) {
+export function updateCreditCard({ data, token, signature, meta = {}}) {
   return zuoraRequest({
     type: 'ZUORA_UPDATE_CC',
     meta: {
       method: 'POST',
       url: '/payment-methods/credit-cards',
       data,
-      headers: { token, signature }
+      headers: { token, signature },
+      ...meta
     }
   });
 }
@@ -100,99 +102,31 @@ export function addDedicatedIps({ ip_pool, isAwsAccount, quantity }) {
     .then(() => dispatch(getSendingIps())); // refresh list
 }
 
-export function createZuoraAccount({ data, token, signature }) {
+export function createZuoraAccount({ data, token, signature, meta = {}}) {
   return zuoraRequest({
     type: 'ZUORA_CREATE',
     meta: {
       method: 'POST',
       url: '/accounts',
       data,
-      headers: { token, signature }
+      headers: { token, signature },
+      ...meta
     }
   });
-}
-
-export function billingCreate(values) {
-  return (dispatch, getState) => {
-
-    // AWS plans don't get created through Zuora, instead update existing
-    // subscription to the selected plan
-    if (isAws(getState())) {
-      return dispatch(updateSubscription({ code: values.planpicker.code }));
-    }
-
-    const { corsData, billingData } = formatDataForCors(values);
-
-    // get CORS data for the create account context
-    return dispatch(cors('create-account', corsData))
-
-      // create the Zuora account
-      .then((results) => {
-        const { token, signature } = results;
-        const { currentUser } = getState();
-        const data = formatCreateData({ ...results, ...billingData });
-
-        // add user's email when creating account
-        data.billToContact.workEmail = currentUser.email;
-
-        return dispatch(createZuoraAccount({ data, token, signature }));
-      })
-
-      // sync our db with new Zuora state
-      .then(() => dispatch(syncSubscription()))
-
-      // refetch the account
-      .then(() => dispatch(fetchAccount({ include: 'usage,billing' })));
-
-  };
 }
 
 /**
  * attempts to collect payments (like when payment method is updated) to make sure pending payments are charged
  */
-
-export function collectPayments() {
+export function collectPayments({ meta = {}}) {
   return sparkpostApiRequest({
     type: 'COLLECT_PAYMENTS',
     meta: {
       method: 'POST',
-      url: '/account/billing/collect'
+      url: '/account/billing/collect',
+      ...meta
     }
   });
-}
-
-// note: this action creator should detect
-// 1. if payment info is present, contact zuora first
-// 2. otherwise it's just a call to our API + sync + refetch
-//
-// call this action creator from the "free -> paid" form if account.billing is present
-export function billingUpdate(values) {
-
-  return (dispatch) =>
-
-    // get CORS data for the update billing context
-    dispatch(cors('update-billing'))
-
-      // Update Zuora with new CC
-      .then(({ accountKey, token, signature }) => {
-        const data = formatUpdateData({ ...values, accountKey });
-        return dispatch(updateCreditCard({ data, token, signature }));
-      })
-
-      // change plan via our API if plan is included
-      .then(() => {
-        if (values.planpicker) {
-          dispatch(updateSubscription({ code: values.planpicker.code }));
-        }
-      })
-
-      // sync our db with new Zuora state
-      .then(() => dispatch(syncSubscription()))
-
-      .then(() => dispatch(collectPayments()))
-
-      // refetch the account
-      .then(() => dispatch(fetchAccount({ include: 'usage,billing' })));
 }
 
 /**

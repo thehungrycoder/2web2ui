@@ -51,6 +51,7 @@ exports[`fetch with params 1`] = `
 Object {
   "meta": Object {
     "method": "GET",
+    "onSuccess": [MockFunction],
     "params": Object {
       "also": "that one",
       "this": "one",
