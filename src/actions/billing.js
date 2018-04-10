@@ -31,7 +31,7 @@ export function updateSubscription({ code, meta = {}}) {
         url: isAws(getState()) ? '/account/aws-marketplace/subscription' : '/account/subscription',
         data: { code },
         ...meta,
-        onSuccess: meta.onSuccess ? meta.onSuccess : () => fetchAccount()
+        onSuccess: meta.onSuccess ? meta.onSuccess : () => fetchAccount({ include: 'usage,billing' })
       }
     })
   );
