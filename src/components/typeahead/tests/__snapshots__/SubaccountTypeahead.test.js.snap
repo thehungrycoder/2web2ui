@@ -11,6 +11,7 @@ exports[`Subaccount Typeahead render function should render the list 1`] = `
   }
   hasSubaccounts={true}
   itemToString={[Function]}
+  label="Subaccount"
   name="subaccount"
   onChange={[MockFunction]}
   renderItem={[Function]}
