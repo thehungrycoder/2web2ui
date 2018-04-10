@@ -164,6 +164,12 @@ exports[`Page: Webhook List should render happy path 1`] = `
     defaultSortDirection="asc"
     filterBox={
       Object {
+        "exampleModifiers": Array [
+          "name",
+          "target",
+          "auth_type",
+          "last_successful",
+        ],
         "itemToStringKeys": Array [
           "name",
           "target",

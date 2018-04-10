@@ -28,7 +28,8 @@
     "presets": [
       "react-app",
       "stage-2"
-    ]
+    ],
+    "plugins": ["lodash", "recharts"]
   },
   "description": "SparkPost web app built in React",
   "main": "index.js",

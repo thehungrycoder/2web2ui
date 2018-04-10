@@ -77,11 +77,10 @@ export class BouncePage extends Component {
         show: true,
         keyMap: {
           category: 'bounce_category_name',
-          classification: 'bounce_class_name',
-          reason: 'bounce_class_description'
+          classification: 'bounce_class_name'
         },
-        itemToStringKeys: ['bounce_category_name', 'bounce_class_name', 'domain', 'bounce_class_description'],
-        exampleModifiers: ['domain', 'category']
+        itemToStringKeys: ['bounce_category_name', 'bounce_class_name', 'domain', 'reason'],
+        exampleModifiers: ['domain', 'category', 'classification']
       }}
     />;
   }
