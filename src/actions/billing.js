@@ -52,7 +52,7 @@ export function updateBillingContact(data) {
   });
 
   return (dispatch) => dispatch(action)
-    .then(() => dispatch(fetchAccount()));
+    .then(() => dispatch(fetchAccount({ include: 'usage,billing' })));
 }
 
 export function cors({ meta = {}, context, data = {}}) {
