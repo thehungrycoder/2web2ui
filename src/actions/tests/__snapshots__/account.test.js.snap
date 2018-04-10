@@ -53,10 +53,8 @@ Object {
     "method": "GET",
     "onSuccess": [MockFunction],
     "params": Object {
-      "params": Object {
-        "also": "that one",
-        "this": "one",
-      },
+      "also": "that one",
+      "this": "one",
     },
     "url": "/account",
   },

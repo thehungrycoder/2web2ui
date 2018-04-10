@@ -7,11 +7,12 @@ test('fetch - no params', () => {
 });
 
 test('fetch with params', () => {
-  const params = {
+  const fetchAction = fetch({
     this: 'one',
-    also: 'that one'
-  };
-  const fetchAction = fetch({ params, meta: { onSuccess: jest.fn() }});
+    also: 'that one',
+    meta: { onSuccess: jest.fn() }
+  });
+
   expect(fetchAction).toMatchSnapshot();
 });
 
