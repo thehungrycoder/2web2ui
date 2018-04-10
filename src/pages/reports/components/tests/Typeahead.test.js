@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import Typeahead from '../Typeahead';
-import _ from 'lodash';
+// import _ from 'lodash';
 
 describe('Component: Typeahead', () => {
   let props;
@@ -15,8 +15,6 @@ describe('Component: Typeahead', () => {
       placeholder: ''
     };
 
-    jest.spyOn(_, 'debounce').mockImplementation((fn) => (...args) => fn(...args));
-
     wrapper = shallow(<Typeahead {...props} />);
   });
 
@@ -25,7 +23,9 @@ describe('Component: Typeahead', () => {
   });
 
   it('should update matches on field change', () => {
-    wrapper.instance().handleFieldChange({ target: { value: 'cros' }});
+    const { handleFieldChange, updateMatchesDebounced } = wrapper.instance();
+    handleFieldChange({ target: { value: 'cros' }});
+    updateMatchesDebounced.flush(); // forces debounced calls to execute
     expect(wrapper.state()).toMatchSnapshot();
   });
 
