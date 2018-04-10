@@ -94,7 +94,7 @@ describe('Action Creator: Billing', () => {
       expect(_.flatten(dispatchMock.mock.calls)).toMatchSnapshot();
     });
 
-    it('dispatches un update subscription action for aws marketplace account', async() => {
+    it('should dispatch an update subscription action for aws marketplace account', async() => {
       const dispatchMock = jest.fn((a) => Promise.resolve(a));
       isAws.mockImplementation(() => true);
       const thunk = billing.updateSubscription({ code: 'test-code' });
