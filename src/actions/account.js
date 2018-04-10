@@ -1,6 +1,6 @@
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 
-export function fetch({ meta, ...params } = {}) {
+export function fetch({ meta = {}, ...params } = {}) {
   return sparkpostApiRequest({
     type: 'FETCH_ACCOUNT',
     meta: {

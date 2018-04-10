@@ -6,7 +6,7 @@ import { isAws } from 'src/helpers/conditions/account';
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 import zuoraRequest from 'src/actions/helpers/zuoraRequest';
 
-export function syncSubscription({ meta } = {}) {
+export function syncSubscription({ meta = {}} = {}) {
   return sparkpostApiRequest({
     type: 'SYNC_SUBSCRIPTION',
     meta: {
@@ -55,7 +55,7 @@ export function updateBillingContact(data) {
     .then(() => dispatch(fetchAccount()));
 }
 
-export function cors({ meta, context, data = {}}) {
+export function cors({ meta = {}, context, data = {}}) {
   const type = `CORS_${context.toUpperCase().replace('-', '_')}`;
   return sparkpostApiRequest({
     type,
@@ -69,7 +69,7 @@ export function cors({ meta, context, data = {}}) {
   });
 }
 
-export function updateCreditCard({ data, token, signature, meta }) {
+export function updateCreditCard({ data, token, signature, meta = {}}) {
   return zuoraRequest({
     type: 'ZUORA_UPDATE_CC',
     meta: {
@@ -102,7 +102,7 @@ export function addDedicatedIps({ ip_pool, isAwsAccount, quantity }) {
     .then(() => dispatch(getSendingIps())); // refresh list
 }
 
-export function createZuoraAccount({ data, token, signature, meta }) {
+export function createZuoraAccount({ data, token, signature, meta = {}}) {
   return zuoraRequest({
     type: 'ZUORA_CREATE',
     meta: {
