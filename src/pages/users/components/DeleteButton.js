@@ -1,8 +1,9 @@
 import React from 'react';
-import _ from 'lodash';
 import { Button } from '@sparkpost/matchbox';
 
-export default function DeleteButton({ disabled = false, name = null, onClick = _.noop }) {
+function noop() {}
+
+export default function DeleteButton({ disabled = false, name = null, onClick = noop }) {
   // Display nothing when disabled
   if (disabled) { return null; }
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Select } from '@sparkpost/matchbox';
-import _ from 'lodash';
+
+function noop() {}
 
 const DEFAULT_OPTIONS = [
   { label: 'Admin', value: 'admin' },
@@ -19,7 +20,7 @@ const DEFAULT_OPTIONS = [
 export default function RoleSelect({
   disabled = false,
   name = null,
-  onChange = _.noop,
+  onChange = noop,
   value = null,
   input = {},
   allowSuperUser = false,

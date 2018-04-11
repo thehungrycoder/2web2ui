@@ -1,5 +1,4 @@
 import React from 'react';
-import _ from 'lodash';
 import { Link } from 'react-router-dom';
 import { Panel } from '@sparkpost/matchbox';
 
@@ -7,7 +6,9 @@ import config from 'src/config';
 import { LabelledValue } from 'src/components';
 import DedicatedIpCost from './DedicatedIpCost';
 
-export default function DedicatedIpSummarySection({ count = 0, plan = {}, onClick = _.noop , isAWSAccount }) {
+function noop() {}
+
+export default function DedicatedIpSummarySection({ count = 0, plan = {}, onClick = noop, isAWSAccount }) {
   const hasReachedMax = count >= config.sendingIps.maxPerAccount;
   const ipCtaContent = (count === 0 && plan.includesIp) ? 'Claim Your Free Dedicated IP' : 'Add Dedicated IPs';
 
