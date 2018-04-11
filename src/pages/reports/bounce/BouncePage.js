@@ -92,7 +92,7 @@ export class BouncePage extends Component {
 
     // TODO Add support doc link - <UnstyledLink to={LINKS.ADMIN_BOUNCE} external>Learn more</UnstyledLink>.
     const adminBounceText = adminBounces
-      ? <Fragment>{adminBounces.toLocaleString()} message were categorized as Admin Bounces.</Fragment>
+      ? <Fragment>{adminBounces.toLocaleString()} messages were categorized as Admin Bounces.</Fragment>
       : null;
 
     // Aggregates aren't ready until chart refreshes

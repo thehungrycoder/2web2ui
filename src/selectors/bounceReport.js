@@ -24,21 +24,21 @@ const selectFormattedAggregates = createSelector(
   }
 );
 
-const selectReshapedClassifications = createSelector(
+const selectReshapedCategories = createSelector(
   [selectClassifications],
   (classifications) => reshapeCategories(classifications)
 );
 
 const selectCategories = createSelector(
-  [selectReshapedClassifications],
-  (classifications) => _.filter(classifications, ({ name }) => name !== 'Admin')
+  [selectReshapedCategories],
+  (categories) => _.filter(categories, ({ name }) => name !== 'Admin')
 );
 
 const selectAdminBounces = createSelector(
-  [selectReshapedClassifications],
-  (classifications) => {
-    const adminBounces = _.filter(classifications, ({ name }) => name === 'Admin')[0];
-    return adminBounces ? adminBounces.count : 0;
+  [selectReshapedCategories],
+  (categories) => {
+    const adminBounces = _.find(categories, ({ name }) => name === 'Admin');
+    return _.get(adminBounces, 'count', 0);
   }
 );
 
