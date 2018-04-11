@@ -1,7 +1,7 @@
 import requestHelperFactory from 'src/actions/helpers/requestHelperFactory';
 import { refresh, logout } from 'src/actions/auth';
 import { fetch as fetchAccount } from 'src/actions/account';
-import { showAlert, showSuspensionAlert } from 'src/actions/globalAlert';
+import { showAlert } from 'src/actions/globalAlert';
 import { useRefreshToken } from 'src/helpers/http';
 import { resolveOnCondition } from 'src/helpers/promise';
 import _ from 'lodash';
@@ -43,7 +43,7 @@ const sparkpostRequest = requestHelperFactory({
     // (even those that don't use this helper because the request is not authenticated)
     const apiError = new SparkpostApiError(err);
     const { message, response = {}} = apiError;
-    const { auth, account } = getState();
+    const { auth } = getState();
     const { retries = 0, showErrorAlert = true } = meta;
 
     // NOTE: if this is a 401 and we have a refresh token, we need to do a
@@ -82,17 +82,13 @@ const sparkpostRequest = requestHelperFactory({
         );
     }
 
-    // if the account is suspended, a 403 should not log the user out
-    if (response.status === 403 && account.status === 'suspended') {
-      dispatch(showSuspensionAlert());
+    // Re-fetch the account to see if suspended or terminated (handled in AuthenticationGate)
+    if (response.status === 403) {
       dispatch(fetchAccount());
-      throw apiError;
     }
 
-    // If we have a 403 or a 401 and we're not refreshing, log the user out silently
-    if (response.status === 401 || response.status === 403) {
+    if (response.status === 401) {
       dispatch(logout());
-      throw apiError;
     }
 
     // any other API error should automatically fail, to be handled in the reducers/components
