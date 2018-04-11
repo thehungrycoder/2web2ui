@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import { newlineStrRegex, spacesRegex, tagsRegex } from './regex';
 
 export function snakeToFriendly(string) {
   return string
@@ -53,4 +54,14 @@ export function stringToArray(string) {
 export function stringifyTypeaheadfilter(filter) {
   const subaccount = filter.type === 'Subaccount' ? `:${filter.id}` : '';
   return `${filter.type}:${filter.value}${subaccount}`;
+}
+
+export function stripTags(html) {
+  const space = ' ';
+
+  return html
+    .replace(tagsRegex, space)
+    .replace(newlineStrRegex, space) // extra credit since html could have newlines
+    .replace(spacesRegex, space) // avoid multiple spaces between words
+    .trim();
 }
