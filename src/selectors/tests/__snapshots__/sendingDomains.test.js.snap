@@ -15,6 +15,7 @@ Object {
 exports[`Selectors: sendingDomains should return all domains ready for bounce domains 1`] = `
 Array [
   Object {
+    "domain": "dkim-verified.test",
     "status": Object {
       "cname_status": "invalid",
       "compliance_status": "valid",
@@ -24,6 +25,7 @@ Array [
     },
   },
   Object {
+    "domain": "compliance-verified.test",
     "status": Object {
       "cname_status": "valid",
       "compliance_status": "pending",
@@ -35,9 +37,16 @@ Array [
 ]
 `;
 
+exports[`Selectors: sendingDomains should return all domains that are dkim verified 1`] = `
+Array [
+  "dkim-verified.test",
+]
+`;
+
 exports[`Selectors: sendingDomains should return all verified domains 1`] = `
 Array [
   Object {
+    "domain": "owner-verified.test",
     "status": Object {
       "compliance_status": "valid",
       "ownership_verified": true,

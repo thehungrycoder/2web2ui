@@ -40,7 +40,10 @@ export class EditPage extends Component {
      * have been reassigned by the user.
      */
     const changedIpKeys = Object.keys(values).filter((key) =>
-      key !== 'name' && values[key] !== id);
+      key !== 'name' && key !== 'signing_domain' && values[key] !== id);
+
+    // if signing_domain is not set, then we want to clear it out to empty string.
+    values.signing_domain = values.signing_domain || '';
 
     // Update each changed sending IP
     return Promise.all(changedIpKeys.map((ipKey) =>

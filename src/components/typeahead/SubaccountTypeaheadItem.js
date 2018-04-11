@@ -1,6 +1,7 @@
 import React from 'react';
-
-import styles from './SubaccountTypeahead.module.scss';
+import classnames from 'classnames/bind';
+import styles from './Typeahead.module.scss';
+classnames.bind(styles);
 
 const SubaccountTypeaheadItem = ({ name, id }) => (
   <div className={styles.Item}>

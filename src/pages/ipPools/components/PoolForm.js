@@ -4,8 +4,10 @@ import { Field, reduxForm } from 'redux-form';
 import { Button } from '@sparkpost/matchbox';
 import { SelectWrapper } from 'src/components/reduxFormWrappers';
 import { TableCollection } from 'src/components';
+import AccessControl from 'src/components/auth/AccessControl';
 import { required } from 'src/helpers/validation';
-import { TextFieldWrapper } from 'src/components';
+import { configFlag } from 'src/helpers/conditions/config';
+import { TextFieldWrapper, SendingDomainTypeaheadWrapper } from 'src/components';
 import { selectIpPoolFormInitialValues, selectIpsForCurrentPool } from 'src/selectors/ipPools';
 import isDefaultPool from '../helpers/defaultPool';
 
@@ -78,6 +80,17 @@ export class PoolForm extends Component {
           disabled={editingDefault || submitting}
           helpText={helpText}
         />
+
+        { !editingDefault &&
+          <AccessControl condition={configFlag('featureFlags.allow_default_signing_domains_for_ip_pools')}>
+            <Field
+              name="signing_domain"
+              component={SendingDomainTypeaheadWrapper}
+              label="Default Signing Domain"
+              disabled={submitting}
+            />
+          </AccessControl>
+        }
 
         { this.renderCollection() }
 
