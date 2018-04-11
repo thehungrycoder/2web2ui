@@ -1,20 +1,14 @@
 import classnames from 'classnames/bind';
 import Downshift from 'downshift';
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { list as getSubaccountsList } from 'src/actions/subaccounts';
 import { ActionList, Button, TextField } from '@sparkpost/matchbox';
-import { hasSubaccounts } from 'src/selectors/subaccounts';
 
 import sortMatch from 'src/helpers/sortMatch';
-import Item from './SubaccountTypeaheadItem';
-import styles from './SubaccountTypeahead.module.scss';
+import styles from './Typeahead.module.scss';
 
 const cx = classnames.bind(styles);
 
-const itemToString = (item) => (item ? `${item.name} (${item.id})` : '');
-
-export class SubaccountTypeahead extends Component {
+export class Typeahead extends Component {
   static defaultProps = {
     name: 'subaccount'
   };
@@ -30,17 +24,17 @@ export class SubaccountTypeahead extends Component {
     clearSelection,
     isOpen
   }) => {
-    const { name, subaccounts, disabled, label = 'Subaccount', placeholder = (isOpen ? 'Type to search' : 'None'), error, helpText } = this.props;
+    const { name, results, disabled, label, placeholder = (isOpen ? 'Type to search' : 'None'), error, helpText, itemToString, renderItem } = this.props;
 
     const matches = sortMatch(
-      subaccounts,
+      results,
       inputValue,
-      (item) => `${item.name} ID: ${item.id}`
+      itemToString
     );
 
-    const mappedItems = (matches.length ? matches : subaccounts).map((item, index) => ({
+    const mappedItems = (matches.length ? matches : results).map((item, index) => ({
       ...getItemProps({ item, index }),
-      content: <Item name={item.name} id={item.id} />,
+      content: renderItem ? renderItem(item) : <div className={styles.Item}>{item}</div>,
       highlighted: highlightedIndex === index
     }));
 
@@ -71,23 +65,12 @@ export class SubaccountTypeahead extends Component {
     );
   };
 
-  componentDidMount() {
-    const { hasSubaccounts } = this.props;
-    if (hasSubaccounts) {
-      this.props.getSubaccountsList();
-    }
-  }
-
   renderClearButton(clearSelection) {
     return <Button onClick={clearSelection}>Clear</Button>;
   }
 
   render() {
-    const { hasSubaccounts, onChange, selectedItem } = this.props;
-
-    if (!hasSubaccounts) {
-      return null;
-    }
+    const { itemToString, onChange, selectedItem } = this.props;
 
     return (
       <Downshift
@@ -101,12 +84,6 @@ export class SubaccountTypeahead extends Component {
   }
 }
 
-SubaccountTypeahead.defaultProps = {
-  subaccounts: []
+Typeahead.defaultProps = {
+  results: []
 };
-
-const mapStateToProps = (state) => ({
-  hasSubaccounts: hasSubaccounts(state),
-  subaccounts: state.subaccounts.list
-});
-export default connect(mapStateToProps, { getSubaccountsList })(SubaccountTypeahead);

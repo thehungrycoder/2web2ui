@@ -1,56 +1,29 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import { SubaccountTypeahead } from '../SubaccountTypeahead';
+import { Typeahead } from '../Typeahead';
 
-const subaccounts = [
-  { id: 1, name: 'Subaccount 1' },
-  { id: 2, name: 'Subaccount 2' },
-  { id: 3, name: 'Subaccount 3' },
-  { id: 4, name: 'Subaccount 4' },
-  { id: 5, name: 'Subaccount 5' },
-  { id: 6, name: 'Subaccount 6' }
+const results = [
+  'apples',
+  'bananas',
+  'cauliflower'
 ];
 
-describe('Subaccount Typeahead', () => {
+describe('Typeahead', () => {
   let wrapper;
 
   beforeEach(() => {
     const props = {
       onChange: jest.fn(),
-      getSubaccountsList: jest.fn(),
-      subaccounts: []
+      itemToString: jest.fn(),
+      selectedItem: jest.fn(),
+      results: []
     };
 
-    wrapper = shallow(<SubaccountTypeahead {...props} />);
+    wrapper = shallow(<Typeahead {...props} />);
   });
 
   afterEach(() => {
     jest.resetAllMocks();
-  });
-
-  it('should render nothing if account has no subaccounts', () => {
-    wrapper.setProps({ hasSubaccounts: false });
-    expect(wrapper.html()).toEqual(null);
-  });
-
-  it('should get subaccounts if no subaccounts exist', () => {
-    wrapper.setProps({ hasSubaccounts: true });
-    wrapper.instance().componentDidMount();
-    expect(wrapper.instance().props.getSubaccountsList).toHaveBeenCalled();
-  });
-
-  it('should not get subaccounts if subaccounts exist', () => {
-    wrapper.setProps({ hasSubaccounts: false });
-    wrapper.instance().componentDidMount();
-    expect(wrapper.instance().props.getSubaccountsList).not.toHaveBeenCalled();
-  });
-
-  it('should render itemToString correctly', () => {
-    wrapper.setProps({ hasSubaccounts: true });
-    const noItem = wrapper.find('Downshift').props().itemToString();
-    const item = wrapper.find('Downshift').props().itemToString({ id: 10101, name: 'tst' });
-    expect(noItem).toEqual('');
-    expect(item).toEqual('tst (10101)');
   });
 
   describe('render function', () => {
@@ -58,10 +31,7 @@ describe('Subaccount Typeahead', () => {
 
     beforeEach(() => {
       wrapper.setProps({
-        subaccounts,
-        disabled: false,
-        helpText: 'help text',
-        name: 'redux form name'
+        results
       });
 
       args = {
@@ -85,14 +55,14 @@ describe('Subaccount Typeahead', () => {
     });
 
     it('should render with selected item and not disabled', () => {
-      const result = shallow(wrapper.instance().typeaheadFn({ ...args, selectedItem: subaccounts[2] }));
+      const result = shallow(wrapper.instance().typeaheadFn({ ...args, selectedItem: results[2] }));
       expect(result.find('TextField').props().connectRight).toMatchSnapshot(); // Clear button
       expect(result.find('TextField').props().readOnly).toBe(true); // Boolean prop
     });
 
     it('should not render clear button if disabled with selected item', () => {
       wrapper.setProps({ disabled: true });
-      const result = shallow(wrapper.instance().typeaheadFn({ ...args, selectedItem: subaccounts[2] }));
+      const result = shallow(wrapper.instance().typeaheadFn({ ...args, selectedItem: results[2] }));
       expect(result.find('TextField').props().connectRight).toBe(null); // No clear button
     });
 

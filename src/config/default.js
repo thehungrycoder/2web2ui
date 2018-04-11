@@ -41,6 +41,7 @@ const config = {
     }
   },
   featureFlags: {
+    allow_default_signing_domains_for_ip_pools: false,
     allow_mailbox_verification: true,
     allow_anyone_at_verification: false,
     has_signup: false

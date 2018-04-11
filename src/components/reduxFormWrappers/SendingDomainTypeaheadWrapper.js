@@ -1,20 +1,20 @@
 import React from 'react';
-import SubaccountTypeahead from '../typeahead/SubaccountTypeahead';
+import SendingDomainTypeahead from '../typeahead/SendingDomainTypeahead';
 
 /**
  * @example
  * // This plugs into a redux-form Field like so:
  * <Field
- *   name="subaccount"
- *   component={SubaccountTypeaheadWrapper}
- *   subaccounts={subaccountsFromReduxStore}
+ *   name="sendingDomain"
+ *   component={SendingDomainTypeahead}
+ *   results={sendingDomainsFromReduxStore}
  * />
  */
-export default function SubaccountTypeaheadWrapper({ input, meta, ...rest }) {
+export default function SendingDomainTypeaheadWrapper({ input, meta, ...rest }) {
   const { active, error, touched } = meta;
 
   return (
-    <SubaccountTypeahead
+    <SendingDomainTypeahead
       name={input.name}
       onChange={input.onChange}
       selectedItem={input.value}

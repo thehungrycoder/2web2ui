@@ -52,6 +52,7 @@ const selectCurrentPoolInitialValues = createSelector(
   [selectCurrentPool, selectIpsForCurrentPool],
   (currentPool, ips) => ({
     name: currentPool.name,
+    signing_domain: currentPool.signing_domain,
     ...ips.reduce((result, ip) => {
       result[ip.id] = currentPool.id;
       return result;

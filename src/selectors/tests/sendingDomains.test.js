@@ -1,4 +1,4 @@
-import { selectVerifiedDomains, selectReadyForBounce, hasUnverifiedDomains, selectDomain } from '../sendingDomains';
+import { selectVerifiedDomains, selectReadyForBounce, selectDkimVerifiedDomains, hasUnverifiedDomains, selectDomain } from '../sendingDomains';
 
 describe('Selectors: sendingDomains', () => {
   const state = {
@@ -12,12 +12,14 @@ describe('Selectors: sendingDomains', () => {
       },
       list: [
         {
+          domain: 'owner-verified.test',
           status: {
             ownership_verified: true,
             compliance_status: 'valid'
           }
         },
         {
+          domain: 'dkim-verified.test',
           status: {
             ownership_verified: false,
             compliance_status: 'valid',
@@ -27,6 +29,7 @@ describe('Selectors: sendingDomains', () => {
           }
         },
         {
+          domain: 'compliance-verified.test',
           status: {
             ownership_verified: true,
             compliance_status: 'pending',
@@ -49,6 +52,10 @@ describe('Selectors: sendingDomains', () => {
 
   it('should return all domains ready for bounce domains', () => {
     expect(selectReadyForBounce(state)).toMatchSnapshot();
+  });
+
+  it('should return all domains that are dkim verified', () => {
+    expect(selectDkimVerifiedDomains(state)).toMatchSnapshot();
   });
 
   describe('has unverified domains', () => {
