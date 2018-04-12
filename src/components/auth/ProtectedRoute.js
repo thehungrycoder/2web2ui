@@ -2,16 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect, Route } from 'react-router-dom';
 import { AccessControl } from 'src/components/auth';
-import { showSuspensionAlert } from 'src/actions/globalAlert';
 import _ from 'lodash';
 
 export class ProtectedRoute extends Component {
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.accountStatus !== 'suspended' && this.props.accountStatus === 'suspended') {
-      this.props.showSuspensionAlert({ autoDismiss: false });
-    }
-  }
 
   renderComponent(reactRouterProps) {
     const { component: Component, condition } = this.props;
@@ -42,4 +35,4 @@ const mapStateToProps = ({ auth, account }) => ({
   auth,
   accountStatus: account.status
 });
-export default connect(mapStateToProps, { showSuspensionAlert })(ProtectedRoute);
+export default connect(mapStateToProps, {})(ProtectedRoute);

@@ -20,11 +20,16 @@ describe('Component: AuthenticationGate', () => {
         token: null,
         loggedIn: false
       },
+      account: {
+        status: 'active'
+      },
       login: jest.fn(),
       getGrantsFromCookie: jest.fn(),
       history: {
         push: jest.fn()
-      }
+      },
+      logout: jest.fn(),
+      showSuspensionAlert: jest.fn()
     };
 
     wrapper = shallow(<AuthenticationGate {...props} />);
@@ -70,14 +75,26 @@ describe('Component: AuthenticationGate', () => {
   describe('componentDidUpdate', () => {
     it('should redirect to auth on logout', () => {
       wrapper.setProps({ location: { pathname: '/report/summary' }, auth: { loggedIn: false }});
-      wrapper.instance().componentDidUpdate({ auth: { loggedIn: true }});
+      wrapper.instance().componentDidUpdate({ account: {}, auth: { loggedIn: true }});
       expect(wrapper.instance().props.history.push).toHaveBeenCalledWith('/auth');
     });
 
     it('should do nothing you aren\'t on auth and logged in', () => {
       wrapper.setProps({ location: { pathname: '/report/summary' }, auth: { loggedIn: true }});
-      wrapper.instance().componentDidUpdate({ auth: { loggedIn: true }});
+      wrapper.instance().componentDidUpdate({ account: {}, auth: { loggedIn: true }});
       expect(wrapper.instance().props.history.push).not.toHaveBeenCalled();
+    });
+
+    it('should dispatch a logout action if account terminated', async() => {
+      wrapper.setProps({ account: { status: 'terminated' }});
+      wrapper.instance().componentDidUpdate({ account: { status: 'active' }, auth: {}});
+      expect(wrapper.instance().props.logout).toHaveBeenCalled();
+    });
+
+    it('should show suspension alert if account suspended', async() => {
+      wrapper.setProps({ account: { status: 'suspended' }});
+      wrapper.instance().componentDidUpdate({ account: { status: 'active' }, auth: {}});
+      expect(wrapper.instance().props.showSuspensionAlert).toHaveBeenCalledWith({ autoDismiss: false });
     });
   });
 });
