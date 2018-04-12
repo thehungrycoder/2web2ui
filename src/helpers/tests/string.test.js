@@ -65,8 +65,8 @@ describe('stripTags', () => {
     expect(stripTags('<p>This is a test.</p>')).toEqual('This is a test.');
   });
 
-  it('should replace single tags with a space', () => {
-    expect(stripTags('This is</br>a test.')).toEqual('This is a test.');
+  it('should remove single tags', () => {
+    expect(stripTags('This is</br>a test.')).toEqual('This isa test.'); // ugh
   });
 
   it('should replace multiple spaces with a space', () => {
