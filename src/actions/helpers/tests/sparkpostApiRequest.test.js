@@ -37,7 +37,6 @@ describe('Helper: SparkPost API Request', () => {
 
     axiosMocks.sparkpost.mockImplementation(() => Promise.resolve({ data: { results }}));
     globalAlertMock.showAlert = jest.fn(() => ({ type: 'SHOW_ALERT' }));
-    globalAlertMock.showSuspensionAlert = jest.fn(() => ({ type: 'SHOW_SUSPENSION_ALERT' }));
     accountActions.fetch = jest.fn(() => ({ type: 'FETCH_ACCOUNT' }));
   });
 
@@ -103,41 +102,14 @@ describe('Helper: SparkPost API Request', () => {
       expect(mockStore.getActions()).toMatchSnapshot();
     });
 
-    it('should dispatch a logout action on a 403 response', async() => {
+    it('should fetch account on a 403', async() => {
       apiErr.response.status = 403;
-
-      await expect(mockStore.dispatch(sparkpostApiRequest(action))).rejects.toThrow(apiErr);
-      expect(authMock.logout).toHaveBeenCalledTimes(1);
-      expect(mockStore.getActions()).toMatchSnapshot();
-    });
-
-    it('should not log out on a 403 while suspended', async() => {
-      jest.spyOn(globalAlertMock, 'showSuspensionAlert');
-      apiErr.response.status = 403;
-      state.account.status = 'suspended';
-      expect(globalAlertMock.showSuspensionAlert).not.toHaveBeenCalled();
       try {
         await mockStore.dispatch(sparkpostApiRequest(action));
       } catch (err) {
         expect(err).toEqual(apiErr);
         expect(authMock.logout).not.toHaveBeenCalled();
-        expect(globalAlertMock.showSuspensionAlert).toHaveBeenCalledTimes(1);
         expect(accountActions.fetch).toHaveBeenCalledTimes(1);
-        expect(mockStore.getActions()).toMatchSnapshot();
-      }
-    });
-
-    it('should log out on 403 when account status is unknown', async() => {
-      jest.spyOn(globalAlertMock, 'showSuspensionAlert');
-      apiErr.response.status = 403;
-      delete state.account.status;
-      expect(globalAlertMock.showSuspensionAlert).not.toHaveBeenCalled();
-      try {
-        await mockStore.dispatch(sparkpostApiRequest(action));
-      } catch (err) {
-        expect(err).toEqual(apiErr);
-        expect(authMock.logout).toHaveBeenCalled();
-        expect(globalAlertMock.showSuspensionAlert).not.toHaveBeenCalled();
         expect(mockStore.getActions()).toMatchSnapshot();
       }
     });
