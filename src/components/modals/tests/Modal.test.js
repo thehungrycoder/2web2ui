@@ -19,7 +19,7 @@ describe('Modal Component', () => {
     expect(wrapper.find('Modal').dive().find('TransitionGroup').children()).toHaveLength(0);
   });
 
-  it('should render contents when not open', () => {
+  it('should render contents when open', () => {
     wrapper.setProps({ open: true });
     expect(wrapper.find('Modal').dive().find('TransitionGroup').children()).toMatchSnapshot();
   });

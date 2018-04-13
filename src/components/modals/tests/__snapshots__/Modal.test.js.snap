@@ -13,7 +13,7 @@ exports[`Modal Component should not render contents when not open 1`] = `
 </Portal>
 `;
 
-exports[`Modal Component should render contents when not open 1`] = `
+exports[`Modal Component should render contents when open 1`] = `
 <Modal.Content
   contentRef={[Function]}
 >
