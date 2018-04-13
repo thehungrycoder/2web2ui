@@ -60,7 +60,8 @@ export class ListPage extends Component {
         filterBox={{
           show: true,
           itemToStringKeys: ['domain'],
-          exampleModifiers: ['domain', 'subaccount_id']
+          keyMap: { default: 'is_default_bounce_domain' },
+          exampleModifiers: ['domain', 'subaccount_id', 'default']
         }}
         defaultSortColumn='domain'
       />

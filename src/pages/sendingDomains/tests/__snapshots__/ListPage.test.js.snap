@@ -68,10 +68,14 @@ exports[`Sending Domains List Page renders correctly 1`] = `
         "exampleModifiers": Array [
           "domain",
           "subaccount_id",
+          "default",
         ],
         "itemToStringKeys": Array [
           "domain",
         ],
+        "keyMap": Object {
+          "default": "is_default_bounce_domain",
+        },
         "show": true,
       }
     }

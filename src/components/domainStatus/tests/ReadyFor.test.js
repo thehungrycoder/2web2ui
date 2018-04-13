@@ -20,4 +20,8 @@ describe('Component: Ready For', () => {
   it('should render bounce as default ready', () => {
     expect(shallow(<ReadyFor bounce bounceDefault/>)).toMatchSnapshot();
   });
+
+  it('should render bounce as subaccount default ready', () => {
+    expect(shallow(<ReadyFor bounce bounceDefault subaccount={101} />)).toMatchSnapshot();
+  });
 });
