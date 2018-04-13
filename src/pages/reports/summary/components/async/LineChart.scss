@@ -81,15 +81,17 @@
     }
     .recharts-tooltip-item-list {
        .recharts-tooltip-item {
-         font-size: rem(13)!important;
-         padding: rem(0) !important;
-         margin: 0!important;
+         font-size: rem(13) !important;
+         margin: 0 !important;
+         padding: 0 !important;
+         position: relative;
+
         .recharts-tooltip-item-name {}
         .recharts-tooltip-item-separator {}
         .recharts-tooltip-item-value {
-          float: right;
-          padding-left: rem(9);
           font-weight: 600;
+          position: absolute;
+          right: 0;
         }
         .recharts-tooltip-item-unit {}
       }
