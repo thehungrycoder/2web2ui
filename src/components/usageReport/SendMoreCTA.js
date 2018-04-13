@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { BaseModal } from 'src/components';
+import { Modal } from 'src/components';
 import { UnstyledLink, Panel } from '@sparkpost/matchbox';
 import { Link } from 'react-router-dom';
 import { emailRequest } from 'src/actions/account';
@@ -80,33 +80,29 @@ export class SendMoreCTA extends Component {
   renderSupportTicketModal() {
     const { currentLimit } = this.props;
 
-    return (<BaseModal open={this.state.showSupportForm}>
+    return (<Modal open={this.state.showSupportForm} onClose={this.toggleSupportForm}>
       <Panel title='Request Daily Limit Increase'>
         <RequestForm onSubmit={this.handleFormSubmission}
           currentLimit={currentLimit} onCancel={this.toggleSupportForm}
         />
       </Panel>
-    </BaseModal>);
+    </Modal>);
   }
 
   render() {
     const { currentUser: { email_verified: emailVerified }, allowSendingLimitRequest } = this.props;
-    const { showSupportForm } = this.state;
 
     return (
-      <div>
-        <p>
-          <span>Need to send more? </span>
-          { !emailVerified && this.renderVerifyEmailCTA() }
-          { emailVerified && !allowSendingLimitRequest && this.renderUpgradeCTA() }
-          { emailVerified && allowSendingLimitRequest && this.renderSupportTicketCTA() }
-          {' '}
-          <UnstyledLink to={LINKS.DAILY_MONTHLY_QUOTA_LIMIT_DOC} external>
-            Learn more about these limits.
-          </UnstyledLink>
-        </p>
-        {showSupportForm && this.renderSupportTicketModal()}
-      </div>
+      <Fragment>
+        Need to send more?
+        {' '}
+        { !emailVerified && this.renderVerifyEmailCTA() }
+        { emailVerified && !allowSendingLimitRequest && this.renderUpgradeCTA() }
+        { emailVerified && allowSendingLimitRequest && this.renderSupportTicketCTA() }
+        {' '}
+        <UnstyledLink to={LINKS.DAILY_MONTHLY_QUOTA_LIMIT_DOC} external>Learn more about these limits.</UnstyledLink>
+        {this.renderSupportTicketModal()}
+      </Fragment>
     );
   }
 }
@@ -122,4 +118,3 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, { verifyEmail, showAlert, emailRequest })(SendMoreCTA);
-

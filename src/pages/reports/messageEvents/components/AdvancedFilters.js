@@ -104,7 +104,7 @@ export class AdvancedFilters extends Component {
     return (
       <Fragment>
         <Button onClick={this.toggleModal}>More Filters</Button>
-        <Modal open={this.state.modalOpen}>
+        <Modal open={this.state.modalOpen} onClose={this.toggleModal}>
           <WindowEvent event='keydown' handler={this.handleKeyDown} />
           <Panel title='Advanced Filters'>
             <Panel.Section>
