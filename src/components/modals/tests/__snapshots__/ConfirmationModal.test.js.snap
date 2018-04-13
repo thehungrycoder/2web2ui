@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Component: ConfirmationModal should render correctly with basic props 1`] = `
-<Modal>
+<Modal
+  onClose={[MockFunction]}
+>
   <Panel
     accent={true}
     sectioned={true}
@@ -27,6 +29,7 @@ exports[`Component: ConfirmationModal should render correctly with basic props 1
 
 exports[`Component: ConfirmationModal should render correctly with open, content, title and custom verb 1`] = `
 <Modal
+  onClose={[MockFunction]}
   open={true}
 >
   <Panel

@@ -12,20 +12,21 @@ Array [
       }
     }
   >
-    <Button
-      onClick={[Function]}
-      size="small"
-    >
-      View Details
-    </Button>
-      
-    <Button
-      destructive={true}
-      onClick={[Function]}
-      size="small"
-    >
-      Delete
-    </Button>
+    <Button.Group>
+      <Button
+        onClick={[Function]}
+        size="small"
+      >
+        View Details
+      </Button>
+      <Button
+        destructive={true}
+        onClick={[Function]}
+        size="small"
+      >
+        Delete
+      </Button>
+    </Button.Group>
   </div>,
 ]
 `;
@@ -43,20 +44,21 @@ Array [
       }
     }
   >
-    <Button
-      onClick={[Function]}
-      size="small"
-    >
-      View Details
-    </Button>
-      
-    <Button
-      destructive={true}
-      onClick={[Function]}
-      size="small"
-    >
-      Delete
-    </Button>
+    <Button.Group>
+      <Button
+        onClick={[Function]}
+        size="small"
+      >
+        View Details
+      </Button>
+      <Button
+        destructive={true}
+        onClick={[Function]}
+        size="small"
+      >
+        Delete
+      </Button>
+    </Button.Group>
   </div>,
 ]
 `;
@@ -69,6 +71,22 @@ exports[`Results renders correctly (empty suppressions) 1`] = `
 
 exports[`Results renders correctly (with suppressions) 1`] = `
 <div>
+  <DeleteModal
+    content={
+      <p>
+        This can not be undone!
+      </p>
+    }
+    onCancel={[Function]}
+    onConfirm={[Function]}
+    open={false}
+    title="Are you sure you want to delete undefined from suppression list?"
+  />
+  <Detail
+    onCancel={[Function]}
+    open={false}
+    suppression={null}
+  />
   <TableCollection
     columns={
       Array [
@@ -117,6 +135,23 @@ exports[`Results renders correctly (with suppressions) 1`] = `
 
 exports[`Results renders correctly (with suppressions, with subaccount) 1`] = `
 <div>
+  <DeleteModal
+    content={
+      <p>
+        This can not be undone!
+      </p>
+    }
+    onCancel={[Function]}
+    onConfirm={[Function]}
+    open={false}
+    title="Are you sure you want to delete undefined from suppression list?"
+  />
+  <Detail
+    hasSubaccounts={true}
+    onCancel={[Function]}
+    open={false}
+    suppression={null}
+  />
   <TableCollection
     columns={
       Array [
@@ -193,6 +228,11 @@ exports[`Results renders delete confirmation modal correctly 1`] = `
     open={false}
     title="Are you sure you want to delete undefined from suppression list?"
   />
+  <Detail
+    onCancel={[Function]}
+    open={false}
+    suppression={null}
+  />
   <TableCollection
     columns={
       Array [
@@ -241,6 +281,17 @@ exports[`Results renders delete confirmation modal correctly 1`] = `
 
 exports[`Results renders detail modal correctly 1`] = `
 <div>
+  <DeleteModal
+    content={
+      <p>
+        This can not be undone!
+      </p>
+    }
+    onCancel={[Function]}
+    onConfirm={[Function]}
+    open={false}
+    title="Are you sure you want to delete undefined from suppression list?"
+  />
   <Detail
     hasSubaccounts={true}
     onCancel={[Function]}

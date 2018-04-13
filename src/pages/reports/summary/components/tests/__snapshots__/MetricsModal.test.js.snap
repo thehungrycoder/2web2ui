@@ -2,6 +2,7 @@
 
 exports[`Component: Summary Chart Metrics Modal should disable checkboxes when max selected 1`] = `
 <Modal
+  onClose={[MockFunction]}
   open={true}
 >
   <WindowEvent
@@ -154,6 +155,7 @@ exports[`Component: Summary Chart Metrics Modal should disable checkboxes when m
 
 exports[`Component: Summary Chart Metrics Modal should render 1`] = `
 <Modal
+  onClose={[MockFunction]}
   open={true}
 >
   <WindowEvent
@@ -306,6 +308,7 @@ exports[`Component: Summary Chart Metrics Modal should render 1`] = `
 
 exports[`Component: Summary Chart Metrics Modal should select metrics 1`] = `
 <Modal
+  onClose={[MockFunction]}
   open={true}
 >
   <WindowEvent

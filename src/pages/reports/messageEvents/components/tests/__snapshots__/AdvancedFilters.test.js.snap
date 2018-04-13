@@ -24,6 +24,7 @@ exports[`Component: ActiveFilters should render initially and sync to state corr
     More Filters
   </Button>
   <Modal
+    onClose={[Function]}
     open={false}
   >
     <WindowEvent
