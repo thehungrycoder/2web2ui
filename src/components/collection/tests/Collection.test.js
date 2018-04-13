@@ -128,6 +128,25 @@ describe('Component: Collection', () => {
       });
     });
 
+    it('should handle filter change with sort column', () => {
+      const filteredRowsMock = [{ col1: 1 }, { col1: 2 }, { col1: 3 }];
+      const sortedRows = [{ col1: 3 }, { col1: 2 }, { col1: 1 }];
+      sorters.objectSortMatch = jest.fn(() => filteredRowsMock);
+      props.filterBox = { show: true };
+      props.sortColumn = 'col1';
+      props.sortDirection = 'desc';
+      addRows(30);
+      setupCollection();
+      instance.handlePageChange(2);
+      instance.handleFilterChange('some pattern');
+
+      return delay(350).then(() => {
+        expect(wrapper).toHaveState('currentPage', 1);
+        expect(wrapper).toHaveState('filteredRows', sortedRows);
+        expect(instance.getVisibleRows()).toEqual(sortedRows);
+      });
+    });
+
     it('should calculate visible rows', () => {
       addRows(50);
       props.pagination = true;
