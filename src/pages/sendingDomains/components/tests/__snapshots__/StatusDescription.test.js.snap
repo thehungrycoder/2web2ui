@@ -37,6 +37,7 @@ exports[`StatusDescription component Shallow tests renders subaccount details 1`
           bounceDefault={false}
           dkim={false}
           sending={false}
+          subaccount={101}
         />
       </div>
     </LabelledValue>
