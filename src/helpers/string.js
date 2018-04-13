@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import { newlineStrRegex, spacesRegex } from './regex';
 
 export function snakeToFriendly(string) {
   return string
@@ -53,4 +54,19 @@ export function stringToArray(string) {
 export function stringifyTypeaheadfilter(filter) {
   const subaccount = filter.type === 'Subaccount' ? `:${filter.id}` : '';
   return `${filter.type}:${filter.value}${subaccount}`;
+}
+
+// @see why we don't use regex to remove tags, https://stackoverflow.com/a/1732454
+export function stripTags(html) {
+  const div = document.createElement('div');
+  const space = ' ';
+
+  div.innerHTML = html;
+
+  // innerText handles spacing much better than textContent, specifically line breaks are replaced
+  // with spaces instead of completely removed
+  return (div.innerText || div.textContent || '')
+    .replace(newlineStrRegex, space) // extra credit since html could have newlines
+    .replace(spacesRegex, space) // avoid multiple spaces between words
+    .trim();
 }
