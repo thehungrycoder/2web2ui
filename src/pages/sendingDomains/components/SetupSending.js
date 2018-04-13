@@ -63,6 +63,7 @@ export class SetupSending extends Component {
                 id={domain.id}
                 open={this.state.open}
                 onCancel={this.toggleVerifyViaEmailModal}
+                subaccount={domain.subaccount_id}
               />
             )}
           </React.Fragment>
