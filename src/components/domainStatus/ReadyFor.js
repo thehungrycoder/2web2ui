@@ -4,7 +4,7 @@ import { Tag } from '@sparkpost/matchbox';
 
 import styles from './ReadyFor.module.scss';
 
-const ReadyFor = ({ bounce, dkim, sending, bounceDefault }) => {
+const ReadyFor = ({ bounce, dkim, sending, bounceDefault, subaccount }) => {
   let bounceMarkup = null;
 
   if (!bounce && !dkim && !sending) {
@@ -13,7 +13,7 @@ const ReadyFor = ({ bounce, dkim, sending, bounceDefault }) => {
 
   if (bounce) {
     bounceMarkup = bounceDefault
-      ? <Tag color='orange'>Bounce (Default)</Tag>
+      ? <Tag color='orange'>Bounce ({subaccount ? 'Subaccount ' : '' }Default)</Tag>
       : <Tag>Bounce</Tag>;
   }
 
