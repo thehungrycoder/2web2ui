@@ -1,4 +1,7 @@
-import { snakeToFriendly, snakeToCamel, slugify, shrinkToFit, stringToArray, stringifyTypeaheadfilter } from '../string';
+import {
+  snakeToFriendly, snakeToCamel, slugify, shrinkToFit, stringToArray, stringifyTypeaheadfilter,
+  stripTags
+} from '../string';
 
 describe('snakeToFrindly', () => {
   it('should properly format a snaked cased string', () => {
@@ -54,5 +57,23 @@ describe('stringifyTypeaheadfilter', () => {
 
     expect(stringifyTypeaheadfilter({ type: 'otherfilter', value: 'otherfiltervalue', id: 220 }))
       .toEqual('otherfilter:otherfiltervalue');
+  });
+});
+
+describe('stripTags', () => {
+  it('should remove leading and trailing tags', () => {
+    expect(stripTags('<p>This is a test.</p>')).toEqual('This is a test.');
+  });
+
+  it('should remove single tags', () => {
+    expect(stripTags('This is</br>a test.')).toEqual('This isa test.'); // ugh
+  });
+
+  it('should replace multiple spaces with a space', () => {
+    expect(stripTags('This       is a test.')).toEqual('This is a test.');
+  });
+
+  it('should replace newline strings with a space', () => {
+    expect(stripTags('This is\\r\\na test.')).toEqual('This is a test.');
   });
 });
