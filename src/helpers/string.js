@@ -63,7 +63,9 @@ export function stripTags(html) {
 
   div.innerHTML = html;
 
-  return (div.textContent || div.innerText || '')
+  // innerText handles spacing much better than textContent, specifically line breaks are replaced
+  // with spaces instead of completely removed
+  return (div.innerText || div.textContent || '')
     .replace(newlineStrRegex, space) // extra credit since html could have newlines
     .replace(spacesRegex, space) // avoid multiple spaces between words
     .trim();
