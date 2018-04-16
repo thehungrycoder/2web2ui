@@ -87,7 +87,9 @@
          position: relative;
 
         .recharts-tooltip-item-name {}
-        .recharts-tooltip-item-separator {}
+        .recharts-tooltip-item-separator {
+          padding-right: rem(50);
+        }
         .recharts-tooltip-item-value {
           font-weight: 600;
           position: absolute;
