@@ -35,7 +35,7 @@ export default class DisableTfaModal extends Component {
     const { open, onClose, togglePending, toggleError } = this.props;
 
     return (
-      <Modal open={open}>
+      <Modal open={open} onClose={onClose}>
         <Panel title='Disable Two-Factor Authentication' accent>
           <form onSubmit={(e) => e.preventDefault()}>
             <Panel.Section>

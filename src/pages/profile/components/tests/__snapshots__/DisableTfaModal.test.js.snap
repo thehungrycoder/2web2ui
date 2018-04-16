@@ -2,6 +2,7 @@
 
 exports[`DisableTfaModal tests should render correctly 1`] = `
 <Modal
+  onClose={[MockFunction]}
   open={true}
 >
   <Panel
@@ -57,6 +58,7 @@ exports[`DisableTfaModal tests should render correctly 1`] = `
 
 exports[`DisableTfaModal tests should show disabling as button text when togglePending 1`] = `
 <Modal
+  onClose={[MockFunction]}
   open={true}
 >
   <Panel
@@ -112,6 +114,7 @@ exports[`DisableTfaModal tests should show disabling as button text when toggleP
 
 exports[`DisableTfaModal tests should show error on TextField when toggleError and showErrors 1`] = `
 <Modal
+  onClose={[MockFunction]}
   open={true}
 >
   <Panel

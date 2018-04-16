@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Panel, WindowEvent } from '@sparkpost/matchbox';
+import { Panel } from '@sparkpost/matchbox';
 import { Modal, LabelledValue } from 'src/components';
 import { PremiumBanner, EnterpriseBanner, PendingPlanBanner } from './Banners';
 import UpdatePayment from '../forms/UpdatePayment';
@@ -26,12 +26,6 @@ export default class BillingSummary extends Component {
   handlePaymentModal = () => this.handleModal(PAYMENT_MODAL);
   handleContactModal = () => this.handleModal(CONTACT_MODAL);
   handleIpModal = () => this.handleModal(IP_MODAL);
-
-  handleEscape = (e) => {
-    if (e.key === 'Escape') {
-      this.handleModal();
-    }
-  }
 
   renderSummary = () => {
     const { account } = this.props;
@@ -86,8 +80,7 @@ export default class BillingSummary extends Component {
         <PremiumBanner />
         <EnterpriseBanner />
 
-        <Modal open={!!show}>
-          <WindowEvent event='keydown' handler={this.handleEscape} />
+        <Modal open={!!show} onClose={this.handleModal}>
           { show === PAYMENT_MODAL && <UpdatePayment onCancel={this.handleModal}/> }
           { show === CONTACT_MODAL && <UpdateContact onCancel={this.handleModal}/> }
           { show === IP_MODAL && <AddIps onClose={this.handleModal}/> }

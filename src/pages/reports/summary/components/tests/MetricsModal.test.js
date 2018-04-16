@@ -55,18 +55,6 @@ describe('Component: Summary Chart Metrics Modal', () => {
     expect(props.onSubmit).toHaveBeenCalledWith(['count_injected', 'count_targeted']);
   });
 
-  it('should handle cancel', () => {
-    const checkboxes = wrapper.find(Checkbox);
-    const instance = wrapper.instance();
-
-    checkboxes.at(1).simulate('change');
-    checkboxes.at(3).simulate('change');
-
-    instance.handleKeyDown({ key: 'Escape' });
-    expect(props.onSubmit).not.toHaveBeenCalled();
-    expect(props.onCancel).toHaveBeenCalled();
-  });
-
   it('should do nothing on key events if not open 🤔', () => {
     const checkboxes = wrapper.find(Checkbox);
     const instance = wrapper.instance();

@@ -1,76 +1,92 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`SendMoreCTA Component renders correctly for aws free plan (cta to upgrade) 1`] = `
-<div>
-  <p>
-    <span>
-      Need to send more? 
-    </span>
-    <UnstyledLink
-      Component={[Function]}
-      to="/account/billing"
+<p>
+  Need to send more?
+   
+  <UnstyledLink
+    Component={[Function]}
+    to="/account/billing"
+  >
+    Upgrade your account.
+  </UnstyledLink>
+   
+  <UnstyledLink
+    external={true}
+    to="https://support.sparkpost.com/customer/portal/articles/2030894"
+  >
+    Learn more about these limits.
+  </UnstyledLink>
+  <Modal
+    onClose={[Function]}
+    open={false}
+  >
+    <Panel
+      title="Request Daily Limit Increase"
     >
-      Upgrade your account.
-    </UnstyledLink>
-     
-    <UnstyledLink
-      external={true}
-      to="https://support.sparkpost.com/customer/portal/articles/2030894"
-    >
-      Learn more about these limits.
-    </UnstyledLink>
-  </p>
-</div>
+      <ReduxForm
+        currentLimit={1000}
+        onCancel={[Function]}
+        onSubmit={[Function]}
+      />
+    </Panel>
+  </Modal>
+</p>
 `;
 
 exports[`SendMoreCTA Component renders correctly for customers who can request limit bump 1`] = `
-<div>
-  <p>
-    <span>
-      Need to send more? 
-    </span>
-    <span>
-      <UnstyledLink
-        Component={[Function]}
-        onClick={[Function]}
-      >
-        Submit a request.
-      </UnstyledLink>
-    </span>
-     
-    <UnstyledLink
-      external={true}
-      to="https://support.sparkpost.com/customer/portal/articles/2030894"
+<p>
+  Need to send more?
+   
+  <UnstyledLink
+    Component={[Function]}
+    onClick={[Function]}
+  >
+    Submit a request.
+  </UnstyledLink>
+   
+  <UnstyledLink
+    external={true}
+    to="https://support.sparkpost.com/customer/portal/articles/2030894"
+  >
+    Learn more about these limits.
+  </UnstyledLink>
+  <Modal
+    onClose={[Function]}
+    open={false}
+  >
+    <Panel
+      title="Request Daily Limit Increase"
     >
-      Learn more about these limits.
-    </UnstyledLink>
-  </p>
-</div>
+      <ReduxForm
+        currentLimit={1000}
+        onCancel={[Function]}
+        onSubmit={[Function]}
+      />
+    </Panel>
+  </Modal>
+</p>
 `;
 
 exports[`SendMoreCTA Component renders support form correctly 1`] = `
-<div>
-  <p>
-    <span>
-      Need to send more? 
-    </span>
-    <span>
-      <UnstyledLink
-        Component={[Function]}
-        onClick={[Function]}
-      >
-        Submit a request.
-      </UnstyledLink>
-    </span>
-     
-    <UnstyledLink
-      external={true}
-      to="https://support.sparkpost.com/customer/portal/articles/2030894"
-    >
-      Learn more about these limits.
-    </UnstyledLink>
-  </p>
+<p>
+  Need to send more?
+   
+  <UnstyledLink
+    Component={[Function]}
+    onClick={[Function]}
+  >
+    Submit a request.
+  </UnstyledLink>
+   
+  <UnstyledLink
+    external={true}
+    to="https://support.sparkpost.com/customer/portal/articles/2030894"
+  >
+    Learn more about these limits.
+  </UnstyledLink>
   <Modal
+    onClose={[Function]}
     open={true}
   >
     <Panel
@@ -83,27 +99,38 @@ exports[`SendMoreCTA Component renders support form correctly 1`] = `
       />
     </Panel>
   </Modal>
-</div>
+</p>
 `;
 
 exports[`SendMoreCTA Component renders when email address not verified 1`] = `
-<div>
-  <p>
-    <span>
-      Need to send more? 
-    </span>
-    <UnstyledLink
-      onClick={[Function]}
+<p>
+  Need to send more?
+   
+  <UnstyledLink
+    onClick={[Function]}
+  >
+    Verify your email.
+  </UnstyledLink>
+   
+  <UnstyledLink
+    external={true}
+    to="https://support.sparkpost.com/customer/portal/articles/2030894"
+  >
+    Learn more about these limits.
+  </UnstyledLink>
+  <Modal
+    onClose={[Function]}
+    open={false}
+  >
+    <Panel
+      title="Request Daily Limit Increase"
     >
-      Verify your email.
-    </UnstyledLink>
-     
-    <UnstyledLink
-      external={true}
-      to="https://support.sparkpost.com/customer/portal/articles/2030894"
-    >
-      Learn more about these limits.
-    </UnstyledLink>
-  </p>
-</div>
+      <ReduxForm
+        currentLimit={1000}
+        onCancel={[Function]}
+        onSubmit={[Function]}
+      />
+    </Panel>
+  </Modal>
+</p>
 `;

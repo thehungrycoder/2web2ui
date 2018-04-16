@@ -33,11 +33,12 @@ export default class ConfirmationModal extends Component {
     const {
       open,
       title,
-      isPending
+      isPending,
+      onCancel
     } = this.props;
 
     return (
-      <Modal open={open}>
+      <Modal open={open} onClose={onCancel}>
         <Panel title={title} accent sectioned>
           {isPending ? <div className={styles.Loading}><Loading /></div> : this.renderContent()}
         </Panel>

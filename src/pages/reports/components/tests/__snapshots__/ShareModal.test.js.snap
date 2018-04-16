@@ -11,6 +11,7 @@ exports[`Component: ShareModal should render correctly when open 1`] = `
     Share
   </Button>
   <Modal
+    onClose={[Function]}
     open={true}
   >
     <WindowEvent
@@ -63,6 +64,7 @@ exports[`Component: ShareModal should render with a valid relative range 1`] = `
     Share
   </Button>
   <Modal
+    onClose={[Function]}
     open={false}
   >
     <Panel

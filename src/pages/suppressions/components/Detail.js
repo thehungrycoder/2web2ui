@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { Panel, Button } from '@sparkpost/matchbox';
-import { BaseModal, LabelledValue, CopyField, LongTextContainer } from 'src/components';
+import { Modal, LabelledValue, CopyField, LongTextContainer } from 'src/components';
 import { formatDateTime } from 'src/helpers/date';
 import { formatSubaccountDisplay } from '../helpers';
 import styles from './Detail.module.scss';
@@ -27,17 +27,17 @@ export default class Detail extends Component {
   }
 
   render() {
-    const { open, onCancel } = this.props;
+    const { open, onCancel, suppression } = this.props;
 
     return (
-      <BaseModal open={open}>
+      <Modal open={open} onClose={onCancel}>
         <Panel title='Suppression Details' accent sectioned>
-          {this.renderContents()}
+          {suppression && this.renderContents()}
           <div className={styles.Buttons}>
-            <Button onClick={() => { onCancel(); }} >Close</Button>
+            <Button onClick={onCancel} >Close</Button>
           </div>
         </Panel>
-      </BaseModal>
+      </Modal>
     );
   }
 }
