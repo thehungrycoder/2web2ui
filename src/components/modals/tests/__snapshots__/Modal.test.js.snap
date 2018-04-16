@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Modal Component should render 1`] = `
+<Portal
+  containerId="modal-portal"
+>
+  <Modal
+    onClose={[MockFunction]}
+    open={true}
+  >
+    content
+  </Modal>
+</Portal>
+`;

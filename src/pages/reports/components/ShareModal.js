@@ -5,7 +5,7 @@ import qs from 'query-string';
 import { relativeDateOptions } from 'src/helpers/date';
 import { Panel, Button, WindowEvent, Checkbox } from '@sparkpost/matchbox';
 import { Modal, CopyField } from 'src/components';
-import { onEnter, onEscape } from 'src/helpers/keyEvents';
+import { onEnter } from 'src/helpers/keyEvents';
 import _ from 'lodash';
 
 export class ShareModal extends Component {
@@ -53,7 +53,6 @@ export class ShareModal extends Component {
 
   handleKeydown = (e) => {
     onEnter(this.toggleModal)(e);
-    onEscape(this.toggleModal)(e);
   }
 
   handlePin = () => {
@@ -91,7 +90,7 @@ export class ShareModal extends Component {
     return (
       <Fragment>
         <Button id='shareModalButton' disabled={this.props.disabled} fullWidth onClick={this.toggleModal}>Share</Button>
-        <Modal open={open}>
+        <Modal open={open} onClose={this.toggleModal}>
           {open && <WindowEvent event='keydown' handler={this.handleKeydown} />}
           <Panel title='Share this report'>
             <Panel.Section>

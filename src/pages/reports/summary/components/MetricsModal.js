@@ -33,7 +33,7 @@ export default class MetricsModal extends Component {
   }
 
   handleKeyDown = (e) => {
-    const { open, onCancel } = this.props;
+    const { open } = this.props;
 
     if (!open) {
       return;
@@ -41,10 +41,6 @@ export default class MetricsModal extends Component {
 
     if (e.key === 'Enter') {
       this.handleApply();
-    }
-
-    if (e.key === 'Escape') {
-      onCancel();
     }
   }
 
@@ -78,7 +74,7 @@ export default class MetricsModal extends Component {
     const selectedCount = this.getSelectedMetrics().length;
 
     return (
-      <Modal open={open}>
+      <Modal open={open} onClose={onCancel}>
         <WindowEvent event='keydown' handler={this.handleKeyDown} />
         <Panel>
           <Panel.Section>

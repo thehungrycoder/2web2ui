@@ -67,8 +67,6 @@ describe('Component: ShareModal', () => {
     wrapper.setState({ open: true }); //open modal first
 
     const keydown = wrapper.find(WindowEvent).props().handler;
-    keydown({ key: 'Escape' });
-    expect(wrapper.state().open).toBe(false);
 
     wrapper.setState({ open: true });
     keydown({ key: 'Enter' });

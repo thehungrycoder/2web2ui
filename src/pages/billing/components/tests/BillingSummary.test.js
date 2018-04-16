@@ -82,17 +82,4 @@ describe('Component: Billing Summary', () => {
     wrapper.update();
     expect(wrapper).toMatchSnapshot();
   });
-
-  it('should handle keydown events correctly', () => {
-    const instance = wrapper.instance();
-    instance.handleModal('tada');
-    expect(wrapper.state('show')).toEqual('tada');
-
-    wrapper.instance().handleEscape({ key: 'Enter' });
-    expect(wrapper.state('show')).toEqual('tada');
-
-    wrapper.instance().handleEscape({ key: 'Escape' });
-    expect(wrapper.state('show')).toEqual(false);
-  });
-
 });

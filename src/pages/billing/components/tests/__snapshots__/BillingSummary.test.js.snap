@@ -84,13 +84,9 @@ exports[`Component: Billing Summary should render correctly for a paid plan 1`] 
   <Component />
   <Component />
   <Modal
+    onClose={[Function]}
     open={false}
-  >
-    <WindowEvent
-      event="keydown"
-      handler={[Function]}
-    />
-  </Modal>
+  />
 </div>
 `;
 
@@ -131,13 +127,9 @@ exports[`Component: Billing Summary should render correctly for a standard free 
   <Component />
   <Component />
   <Modal
+    onClose={[Function]}
     open={false}
-  >
-    <WindowEvent
-      event="keydown"
-      handler={[Function]}
-    />
-  </Modal>
+  />
 </div>
 `;
 
@@ -216,13 +208,9 @@ exports[`Component: Billing Summary should render correctly if you can't buy IPs
   <Component />
   <Component />
   <Modal
+    onClose={[Function]}
     open={false}
-  >
-    <WindowEvent
-      event="keydown"
-      handler={[Function]}
-    />
-  </Modal>
+  />
 </div>
 `;
 
@@ -300,13 +288,9 @@ exports[`Component: Billing Summary should render correctly if you can't change 
   <Component />
   <Component />
   <Modal
+    onClose={[Function]}
     open={false}
-  >
-    <WindowEvent
-      event="keydown"
-      handler={[Function]}
-    />
-  </Modal>
+  />
 </div>
 `;
 
@@ -356,13 +340,9 @@ exports[`Component: Billing Summary should render correctly if you can't update 
   <Component />
   <Component />
   <Modal
+    onClose={[Function]}
     open={false}
-  >
-    <WindowEvent
-      event="keydown"
-      handler={[Function]}
-    />
-  </Modal>
+  />
 </div>
 `;
 
@@ -450,12 +430,9 @@ exports[`Component: Billing Summary should render with IP modal open 1`] = `
   <Component />
   <Component />
   <Modal
+    onClose={[Function]}
     open={true}
   >
-    <WindowEvent
-      event="keydown"
-      handler={[Function]}
-    />
     <AddIpsForm
       onClose={[Function]}
     />
@@ -547,12 +524,9 @@ exports[`Component: Billing Summary should render with the billing contact modal
   <Component />
   <Component />
   <Modal
+    onClose={[Function]}
     open={true}
   >
-    <WindowEvent
-      event="keydown"
-      handler={[Function]}
-    />
     <UpdateContactForm
       onCancel={[Function]}
     />
@@ -644,12 +618,9 @@ exports[`Component: Billing Summary should render with the payment info modal op
   <Component />
   <Component />
   <Modal
+    onClose={[Function]}
     open={true}
   >
-    <WindowEvent
-      event="keydown"
-      handler={[Function]}
-    />
     <UpdatePaymentForm
       onCancel={[Function]}
     />

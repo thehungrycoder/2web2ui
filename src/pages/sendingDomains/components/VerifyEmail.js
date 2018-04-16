@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { BaseModal } from 'src/components';
+import { Modal } from 'src/components';
 import { Panel, Button, TextField, Grid } from '@sparkpost/matchbox';
 import config from 'src/config';
 import styles from './VerifyEmail.module.scss';
@@ -129,11 +129,11 @@ export class VerifyEmail extends Component {
       : this.renderAllowMailboxVerification();
 
     return (
-      <BaseModal open={open}>
+      <Modal open={open} onClose={onCancel}>
         <Panel title='Verify through Email' accent actions={[{ content: 'Close', onClick: onCancel }]}>
           {renderVerification}
         </Panel>
-      </BaseModal>
+      </Modal>
     );
   }
 }

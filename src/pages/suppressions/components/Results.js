@@ -19,7 +19,7 @@ export class Results extends Component {
     },
     del: { // delete confirmation modal
       open: false,
-      data: null
+      data: {}
     }
   }
 
@@ -71,8 +71,10 @@ export class Results extends Component {
 
     rowData.push(
       <div style={{ textAlign: 'right' }}>
-        <Button size='small' onClick={() => this.toggleDetailModal(row)}>View Details</Button> &nbsp;
-        <Button destructive size='small' onClick={() => this.toggleDeleteModal(row)}>Delete</Button>
+        <Button.Group>
+          <Button size='small' onClick={() => this.toggleDetailModal(row)}>View Details</Button>
+          <Button destructive size='small' onClick={() => this.toggleDeleteModal(row)}>Delete</Button>
+        </Button.Group>
       </div>
     );
 
@@ -101,10 +103,6 @@ export class Results extends Component {
     const { open, data } = this.state.detail;
     const { subaccounts, hasSubaccounts } = this.props;
 
-    if (!data) {
-      return null;
-    }
-
     return (
       <Detail suppression={data} open={open} onCancel={this.toggleDetailModal} subaccounts={subaccounts} hasSubaccounts={hasSubaccounts} />
     );
@@ -124,9 +122,6 @@ export class Results extends Component {
   renderDeleteModal = () => {
     const { open, data } = this.state.del;
     const { deleting } = this.props;
-    if (!data) {
-      return null;
-    }
 
     return (<DeleteModal
       open={open}
