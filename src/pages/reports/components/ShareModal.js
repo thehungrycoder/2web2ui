@@ -5,7 +5,7 @@ import qs from 'query-string';
 import { relativeDateOptions } from 'src/helpers/date';
 import { Panel, Button, WindowEvent, Checkbox } from '@sparkpost/matchbox';
 import { Modal, CopyField } from 'src/components';
-import { onEnter, onEscape } from 'src/helpers/keyEvents';
+import { onEnter } from 'src/helpers/keyEvents';
 import _ from 'lodash';
 
 export class ShareModal extends Component {
@@ -53,7 +53,6 @@ export class ShareModal extends Component {
 
   handleKeydown = (e) => {
     onEnter(this.toggleModal)(e);
-    onEscape(this.toggleModal)(e);
   }
 
   handlePin = () => {

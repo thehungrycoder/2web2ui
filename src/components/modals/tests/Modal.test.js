@@ -6,21 +6,12 @@ describe('Modal Component', () => {
   let wrapper;
 
   const props = {
-    open: false,
+    open: true,
     onClose: jest.fn()
   };
 
-  beforeEach(() => {
+  it('should render', () => {
     wrapper = shallow(<Modal {...props}>content</Modal>);
-  });
-
-  it('should not render contents when not open', () => {
     expect(wrapper).toMatchSnapshot();
-    expect(wrapper.find('Modal').dive().find('TransitionGroup').children()).toHaveLength(0);
-  });
-
-  it('should render contents when open', () => {
-    wrapper.setProps({ open: true });
-    expect(wrapper.find('Modal').dive().find('TransitionGroup').children()).toMatchSnapshot();
   });
 });

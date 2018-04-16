@@ -77,7 +77,7 @@ export class UsageReport extends Component {
           <DisplayNumber label='Used' content={usage.day.used.toLocaleString()} orange />
           { dailyLimitMarkup }
 
-          <p><SendMoreCTA /></p>
+          <SendMoreCTA />
         </Panel.Section>
         <Panel.Section>
 

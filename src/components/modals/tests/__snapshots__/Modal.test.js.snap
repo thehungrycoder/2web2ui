@@ -1,22 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Modal Component should not render contents when not open 1`] = `
+exports[`Modal Component should render 1`] = `
 <Portal
   containerId="modal-portal"
 >
   <Modal
     onClose={[MockFunction]}
-    open={false}
+    open={true}
   >
     content
   </Modal>
 </Portal>
-`;
-
-exports[`Modal Component should render contents when open 1`] = `
-<Modal.Content
-  contentRef={[Function]}
->
-  content
-</Modal.Content>
 `;

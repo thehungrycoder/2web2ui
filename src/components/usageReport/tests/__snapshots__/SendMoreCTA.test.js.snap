@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`SendMoreCTA Component renders correctly for aws free plan (cta to upgrade) 1`] = `
-<React.Fragment>
+<p>
   Need to send more?
    
   <UnstyledLink
@@ -31,21 +31,19 @@ exports[`SendMoreCTA Component renders correctly for aws free plan (cta to upgra
       />
     </Panel>
   </Modal>
-</React.Fragment>
+</p>
 `;
 
 exports[`SendMoreCTA Component renders correctly for customers who can request limit bump 1`] = `
-<React.Fragment>
+<p>
   Need to send more?
    
-  <span>
-    <UnstyledLink
-      Component={[Function]}
-      onClick={[Function]}
-    >
-      Submit a request.
-    </UnstyledLink>
-  </span>
+  <UnstyledLink
+    Component={[Function]}
+    onClick={[Function]}
+  >
+    Submit a request.
+  </UnstyledLink>
    
   <UnstyledLink
     external={true}
@@ -67,21 +65,19 @@ exports[`SendMoreCTA Component renders correctly for customers who can request l
       />
     </Panel>
   </Modal>
-</React.Fragment>
+</p>
 `;
 
 exports[`SendMoreCTA Component renders support form correctly 1`] = `
-<React.Fragment>
+<p>
   Need to send more?
    
-  <span>
-    <UnstyledLink
-      Component={[Function]}
-      onClick={[Function]}
-    >
-      Submit a request.
-    </UnstyledLink>
-  </span>
+  <UnstyledLink
+    Component={[Function]}
+    onClick={[Function]}
+  >
+    Submit a request.
+  </UnstyledLink>
    
   <UnstyledLink
     external={true}
@@ -103,11 +99,11 @@ exports[`SendMoreCTA Component renders support form correctly 1`] = `
       />
     </Panel>
   </Modal>
-</React.Fragment>
+</p>
 `;
 
 exports[`SendMoreCTA Component renders when email address not verified 1`] = `
-<React.Fragment>
+<p>
   Need to send more?
    
   <UnstyledLink
@@ -136,5 +132,5 @@ exports[`SendMoreCTA Component renders when email address not verified 1`] = `
       />
     </Panel>
   </Modal>
-</React.Fragment>
+</p>
 `;

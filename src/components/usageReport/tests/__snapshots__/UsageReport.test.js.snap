@@ -36,9 +36,7 @@ exports[`UsageReport Component should render with overages 1`] = `
       content="2,000"
       label="Daily Limit"
     />
-    <p>
-      <Connect(SendMoreCTA) />
-    </p>
+    <Connect(SendMoreCTA) />
   </Panel.Section>
   <Panel.Section>
     <ProgressLabel
@@ -99,9 +97,7 @@ exports[`UsageReport Component should render with regular usage 1`] = `
       content="2,000"
       label="Daily Limit"
     />
-    <p>
-      <Connect(SendMoreCTA) />
-    </p>
+    <Connect(SendMoreCTA) />
   </Panel.Section>
   <Panel.Section>
     <ProgressLabel

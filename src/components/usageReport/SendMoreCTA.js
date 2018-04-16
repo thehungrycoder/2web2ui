@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Modal } from 'src/components';
 import { UnstyledLink, Panel } from '@sparkpost/matchbox';
@@ -48,12 +48,11 @@ export class SendMoreCTA extends Component {
 
 
   renderSupportTicketCTA() {
-
-    return (<span>
+    return (
       <UnstyledLink Component={Link} onClick={this.toggleSupportForm}>
         Submit a request.
       </UnstyledLink>
-    </span>);
+    );
   }
 
   handleFormSubmission = (values) => {
@@ -93,7 +92,7 @@ export class SendMoreCTA extends Component {
     const { currentUser: { email_verified: emailVerified }, allowSendingLimitRequest } = this.props;
 
     return (
-      <Fragment>
+      <p>
         Need to send more?
         {' '}
         { !emailVerified && this.renderVerifyEmailCTA() }
@@ -102,7 +101,7 @@ export class SendMoreCTA extends Component {
         {' '}
         <UnstyledLink to={LINKS.DAILY_MONTHLY_QUOTA_LIMIT_DOC} external>Learn more about these limits.</UnstyledLink>
         {this.renderSupportTicketModal()}
-      </Fragment>
+      </p>
     );
   }
 }
