@@ -55,10 +55,11 @@ describe('Component: DatePicker ManualEntryForm', () => {
   });
 
   it('should handle a field change', () => {
-    const e = { target: { value: 100 }};
-    wrapper.setState({ a: 1 });
-    instance.handleFieldChange(e, 'a');
-    expect(wrapper.state('a')).toEqual(100);
+    const event = { target: { id: 'fromDate', value: '2018-04-15' }};
+
+    instance.handleFieldChange(event);
+
+    expect(wrapper.state('fromDate')).toEqual(event.target.value);
     expect(instance.debounceChanges).toHaveBeenCalledTimes(1);
   });
 
@@ -167,38 +168,6 @@ describe('Component: DatePicker ManualEntryForm', () => {
         }, expect.any(Function));
         expect(onEnter).toHaveBeenCalledWith(e);
       });
-
     });
-
   });
-
-  cases('handle field change', ({ id, value }) => {
-    const field = wrapper.find(id);
-    const event = { target: { value: 'whatever' }};
-    field.simulate('change', event);
-    expect(instance.handleFieldChange).toHaveBeenCalledWith(event, value);
-  }, [
-    {
-      name: 'for fromDate field',
-      id: '#fieldFromDate',
-      value: 'fromDate'
-    },
-    {
-      name: 'for fromTime field',
-      id: '#fieldFromTime',
-      value: 'fromTime'
-    },
-    {
-      name: 'for toDate field',
-      id: '#fieldToDate',
-      value: 'toDate'
-    },
-    {
-      name: 'for toTime field',
-      id: '#fieldToTime',
-      value: 'toTime'
-    }
-  ]);
-
-
 });

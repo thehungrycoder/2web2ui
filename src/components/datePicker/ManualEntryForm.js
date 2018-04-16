@@ -8,6 +8,7 @@ import styles from './ManualEntryForm.module.scss';
 export default class ManualEntryForm extends Component {
   DATE_FORMAT = DATE_FORMATS.INPUT_DATE;
   TIME_FORMAT = DATE_FORMATS.INPUT_TIME;
+  DATE_TIME_FORMAT = `${DATE_FORMATS.INPUT_DATE} ${DATE_FORMATS.INPUT_TIME}`;
   DEBOUNCE = 500;
 
   state = {
@@ -30,8 +31,8 @@ export default class ManualEntryForm extends Component {
     });
   }
 
-  handleFieldChange = (e, key) => {
-    this.setState({ [key]: e.target.value });
+  handleFieldChange = (e) => {
+    this.setState({ [e.target.id]: e.target.value });
     this.debounceChanges();
   }
 
@@ -50,9 +51,8 @@ export default class ManualEntryForm extends Component {
   }
 
   validate = (e, shouldReset) => {
-    const format = `${this.DATE_FORMAT} ${this.TIME_FORMAT}`;
-    const to = moment(`${this.state.toDate} ${this.state.toTime}`, format, true);
-    const from = moment(`${this.state.fromDate} ${this.state.fromTime}`, format, true);
+    const to = moment(`${this.state.toDate} ${this.state.toTime}`, this.DATE_TIME_FORMAT, true);
+    const from = moment(`${this.state.fromDate} ${this.state.fromTime}`, this.DATE_TIME_FORMAT, true);
 
     // allow for prop-level override of "now" (DI, etc.)
     const { now = moment() } = this.props;
@@ -76,17 +76,17 @@ export default class ManualEntryForm extends Component {
         <Grid middle='xs'>
           <Grid.Column >
             <TextField
-              id="fieldFromDate"
+              id="fromDate"
               label='From Date' labelHidden placeholder='YYYY-MM-DD'
-              onChange={(e) => this.handleFieldChange(e, 'fromDate')}
+              onChange={this.handleFieldChange}
               onBlur={this.handleBlur}
               value={fromDate} />
           </Grid.Column>
           <Grid.Column >
             <TextField
-              id="fieldFromTime"
+              id="fromTime"
               label='From Time' labelHidden placeholder='12:00am'
-              onChange={(e) => this.handleFieldChange(e, 'fromTime')}
+              onChange={this.handleFieldChange}
               onBlur={this.handleBlur}
               value={fromTime} />
           </Grid.Column>
@@ -97,17 +97,17 @@ export default class ManualEntryForm extends Component {
           </Grid.Column>
           <Grid.Column >
             <TextField
-              id="fieldToDate"
+              id="toDate"
               label='To Date' labelHidden placeholder='YYYY-MM-DD'
-              onChange={(e) => this.handleFieldChange(e, 'toDate')}
+              onChange={this.handleFieldChange}
               onBlur={this.handleBlur}
               value={toDate} />
           </Grid.Column>
           <Grid.Column >
             <TextField
-              id="fieldToTime"
+              id="toTime"
               label='To Time' labelHidden placeholder='12:00am'
-              onChange={(e) => this.handleFieldChange(e, 'toTime')}
+              onChange={this.handleFieldChange}
               onBlur={this.handleBlur}
               value={toTime} />
           </Grid.Column>

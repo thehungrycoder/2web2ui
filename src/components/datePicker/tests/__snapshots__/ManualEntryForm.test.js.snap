@@ -9,7 +9,7 @@ exports[`Component: DatePicker ManualEntryForm should render correctly by defaul
   >
     <Grid.Column>
       <TextField
-        id="fieldFromDate"
+        id="fromDate"
         label="From Date"
         labelHidden={true}
         onBlur={[Function]}
@@ -23,7 +23,7 @@ exports[`Component: DatePicker ManualEntryForm should render correctly by defaul
     </Grid.Column>
     <Grid.Column>
       <TextField
-        id="fieldFromTime"
+        id="fromTime"
         label="From Time"
         labelHidden={true}
         onBlur={[Function]}
@@ -47,7 +47,7 @@ exports[`Component: DatePicker ManualEntryForm should render correctly by defaul
     </Grid.Column>
     <Grid.Column>
       <TextField
-        id="fieldToDate"
+        id="toDate"
         label="To Date"
         labelHidden={true}
         onBlur={[Function]}
@@ -61,7 +61,7 @@ exports[`Component: DatePicker ManualEntryForm should render correctly by defaul
     </Grid.Column>
     <Grid.Column>
       <TextField
-        id="fieldToTime"
+        id="toTime"
         label="To Time"
         labelHidden={true}
         onBlur={[Function]}
@@ -86,11 +86,11 @@ exports[`Component: DatePicker ManualEntryForm should sync props to state 1`] = 
   >
     <Grid.Column>
       <TextField
-        id="fieldFromDate"
+        id="fromDate"
         label="From Date"
         labelHidden={true}
         onBlur={[MockFunction]}
-        onChange={[Function]}
+        onChange={[MockFunction]}
         placeholder="YYYY-MM-DD"
         required={false}
         resize="both"
@@ -100,11 +100,11 @@ exports[`Component: DatePicker ManualEntryForm should sync props to state 1`] = 
     </Grid.Column>
     <Grid.Column>
       <TextField
-        id="fieldFromTime"
+        id="fromTime"
         label="From Time"
         labelHidden={true}
         onBlur={[MockFunction]}
-        onChange={[Function]}
+        onChange={[MockFunction]}
         placeholder="12:00am"
         required={false}
         resize="both"
@@ -124,11 +124,11 @@ exports[`Component: DatePicker ManualEntryForm should sync props to state 1`] = 
     </Grid.Column>
     <Grid.Column>
       <TextField
-        id="fieldToDate"
+        id="toDate"
         label="To Date"
         labelHidden={true}
         onBlur={[MockFunction]}
-        onChange={[Function]}
+        onChange={[MockFunction]}
         placeholder="YYYY-MM-DD"
         required={false}
         resize="both"
@@ -138,11 +138,11 @@ exports[`Component: DatePicker ManualEntryForm should sync props to state 1`] = 
     </Grid.Column>
     <Grid.Column>
       <TextField
-        id="fieldToTime"
+        id="toTime"
         label="To Time"
         labelHidden={true}
         onBlur={[MockFunction]}
-        onChange={[Function]}
+        onChange={[MockFunction]}
         placeholder="12:00am"
         required={false}
         resize="both"
@@ -163,11 +163,11 @@ exports[`Component: DatePicker ManualEntryForm should update state from new prop
   >
     <Grid.Column>
       <TextField
-        id="fieldFromDate"
+        id="fromDate"
         label="From Date"
         labelHidden={true}
         onBlur={[MockFunction]}
-        onChange={[Function]}
+        onChange={[MockFunction]}
         placeholder="YYYY-MM-DD"
         required={false}
         resize="both"
@@ -177,11 +177,11 @@ exports[`Component: DatePicker ManualEntryForm should update state from new prop
     </Grid.Column>
     <Grid.Column>
       <TextField
-        id="fieldFromTime"
+        id="fromTime"
         label="From Time"
         labelHidden={true}
         onBlur={[MockFunction]}
-        onChange={[Function]}
+        onChange={[MockFunction]}
         placeholder="12:00am"
         required={false}
         resize="both"
@@ -201,11 +201,11 @@ exports[`Component: DatePicker ManualEntryForm should update state from new prop
     </Grid.Column>
     <Grid.Column>
       <TextField
-        id="fieldToDate"
+        id="toDate"
         label="To Date"
         labelHidden={true}
         onBlur={[MockFunction]}
-        onChange={[Function]}
+        onChange={[MockFunction]}
         placeholder="YYYY-MM-DD"
         required={false}
         resize="both"
@@ -215,11 +215,11 @@ exports[`Component: DatePicker ManualEntryForm should update state from new prop
     </Grid.Column>
     <Grid.Column>
       <TextField
-        id="fieldToTime"
+        id="toTime"
         label="To Time"
         labelHidden={true}
         onBlur={[MockFunction]}
-        onChange={[Function]}
+        onChange={[MockFunction]}
         placeholder="12:00am"
         required={false}
         resize="both"
