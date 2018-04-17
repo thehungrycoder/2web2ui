@@ -4,10 +4,13 @@ import raf from './tempPolyfills';
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import toJson from 'enzyme-to-json';
+import matchers from './matchers';
 
 // Provides enzyme assertions.
 // See https://github.com/blainekasten/enzyme-matchers#assertions
 import 'jest-enzyme';
+
+expect.extend(matchers); // register custom matchers
 
 Enzyme.configure({ adapter: new Adapter() });
 
