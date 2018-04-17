@@ -2,13 +2,10 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import _ from 'lodash';
 import { Grid, TextField, Icon } from '@sparkpost/matchbox';
-import { DATE_FORMATS } from 'src/constants';
+import { formatFormDate, formatFormTime, parseDateTime } from 'src/helpers/date';
 import styles from './ManualEntryForm.module.scss';
 
 export default class ManualEntryForm extends Component {
-  DATE_FORMAT = DATE_FORMATS.INPUT_DATE;
-  TIME_FORMAT = DATE_FORMATS.INPUT_TIME;
-  DATE_TIME_FORMAT = `${DATE_FORMATS.INPUT_DATE} ${DATE_FORMATS.INPUT_TIME}`;
   DEBOUNCE = 500;
 
   state = {
@@ -24,10 +21,10 @@ export default class ManualEntryForm extends Component {
 
   syncPropsToState({ to, from }) {
     this.setState({
-      toDate: moment(to).format(this.DATE_FORMAT),
-      toTime: moment(to).format(this.TIME_FORMAT),
-      fromDate: moment(from).format(this.DATE_FORMAT),
-      fromTime: moment(from).format(this.TIME_FORMAT)
+      toDate: formatFormDate(to),
+      toTime: formatFormTime(to),
+      fromDate: formatFormDate(from),
+      fromTime: formatFormTime(from)
     });
   }
 
@@ -51,8 +48,8 @@ export default class ManualEntryForm extends Component {
   }
 
   validate = (e, shouldReset) => {
-    const to = moment(`${this.state.toDate} ${this.state.toTime}`, this.DATE_TIME_FORMAT, true);
-    const from = moment(`${this.state.fromDate} ${this.state.fromTime}`, this.DATE_TIME_FORMAT, true);
+    const from = parseDateTime(this.state.fromDate, this.state.fromTime);
+    const to = parseDateTime(this.state.toDate, this.state.toTime);
 
     // allow for prop-level override of "now" (DI, etc.)
     const { now = moment() } = this.props;
@@ -85,7 +82,7 @@ export default class ManualEntryForm extends Component {
           <Grid.Column >
             <TextField
               id="fromTime"
-              label='From Time' labelHidden placeholder='12:00am'
+              label='From Time' labelHidden placeholder='HH:MMam'
               onChange={this.handleFieldChange}
               onBlur={this.handleBlur}
               value={fromTime} />
@@ -106,7 +103,7 @@ export default class ManualEntryForm extends Component {
           <Grid.Column >
             <TextField
               id="toTime"
-              label='To Time' labelHidden placeholder='12:00am'
+              label='To Time' labelHidden placeholder='HH:MMam'
               onChange={this.handleFieldChange}
               onBlur={this.handleBlur}
               value={toTime} />

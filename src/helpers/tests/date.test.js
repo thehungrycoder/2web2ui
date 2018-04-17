@@ -7,7 +7,13 @@ import {
   formatTime,
   formatDateTime,
   isSameDate,
-  getLocalTimezone
+  getLocalTimezone,
+  formatFormDate,
+  formatFormTime,
+  formatFormDateTime,
+  parseDate,
+  parseTime,
+  parseDateTime
 } from '../date';
 import cases from 'jest-in-case';
 import moment from 'moment';
@@ -147,6 +153,92 @@ describe('Date helpers', () => {
       expect(getLocalTimezone()).toEqual('Cool/Story');
       expect(dtfMock).toHaveBeenCalledTimes(1);
       expect(optionsMock).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe('formatFormDate', () => {
+    const dateTime = '2018-04-17T15:18:42Z';
+
+    it('returns valid date', () => {
+      expect(formatFormDate(dateTime).toString()).toEqual('2018-04-17');
+    });
+  });
+
+  describe('formatFormTime', () => {
+    const dateTime = '2018-04-17T15:18:42Z';
+
+    it('returns valid date', () => {
+      expect(formatFormTime(dateTime).toString()).toEqual('11:18am');
+    });
+  });
+
+  describe('formatFormDateTime', () => {
+    const dateTime = '2018-04-17T15:18:42Z';
+
+    it('returns valid date', () => {
+      expect(formatFormDateTime(dateTime).toString()).toEqual('2018-04-17 11:18am');
+    });
+  });
+
+  describe('parseDate', () => {
+    it('returns invalid date for undefined', () => {
+      expect(parseDate()).not.toBeValid();
+    });
+
+    it('returns invalid date for empty string', () => {
+      expect(parseDate('')).not.toBeValid();
+    });
+
+    it('returns invalid date', () => {
+      expect(parseDate('04-17-2018')).not.toBeValid();
+    });
+
+    it('returns valid date for ISO-8601 date strings', () => {
+      expect(parseDate('2018-04-17')).toBeValid();
+    });
+  });
+
+  describe('parseTime', () => {
+    it('returns invalid time for undefined', () => {
+      expect(parseTime()).not.toBeValid();
+    });
+
+    it('returns invalid time for empty string', () => {
+      expect(parseTime('')).not.toBeValid();
+    });
+
+    it('returns valid time for 12-hour time', () => {
+      expect(parseTime('12:00am')).toBeValid();
+    });
+
+    it('returns valid time for 24-hour time', () => {
+      expect(parseTime('14:00')).toBeValid();
+    });
+
+    it('returns valid time for 24-hour with am/pm', () => {
+      expect(parseTime('14:00am')).toBeValid();
+    });
+  });
+
+  describe('parseDateTime', () => {
+    it('returns invalid date time for undefined', () => {
+      expect(parseDateTime()).not.toBeValid();
+    });
+
+    it('returns invalid date time for empty string', () => {
+      expect(parseDateTime('')).not.toBeValid();
+    });
+
+    it('returns valid date time for 12-hour time', () => {
+      expect(parseDateTime('2018-01-01 12:00am')).toBeValid();
+    });
+
+    it('returns valid time for 24-hour time', () => {
+      expect(parseDateTime('2018-01-01 14:00')).toBeValid();
+    });
+
+    it('returns valid time for 24-hour with am/pm', () => {
+      expect(parseDateTime('2018-01-01 14:00am')).toBeValid();
     });
   });
 });

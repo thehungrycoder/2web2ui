@@ -1,5 +1,13 @@
 import moment from 'moment';
 import config from 'src/config';
+import {
+  ACCEPTED_DATE_FORMATS,
+  ACCEPTED_TIME_FORMATS,
+  ACCEPTED_DATE_TIME_FORMATS,
+  DEFAULT_DATE_FORMAT,
+  DEFAULT_TIME_FORMAT,
+  DEFAULT_DATE_TIME_FORMAT
+} from 'src/constants';
 
 export const relativeDateOptions = [
   { value: 'hour', label: 'Last Hour' },
@@ -117,3 +125,10 @@ export function formatTime(time) {
 export function formatDateTime(datetime) {
   return `${formatDate(datetime)}, ${formatTime(datetime)}`;
 }
+
+export const formatFormDate = (date) => moment(date).format(DEFAULT_DATE_FORMAT);
+export const formatFormTime = (time) => moment(time).format(DEFAULT_TIME_FORMAT);
+export const formatFormDateTime = (...args) => moment(args.join(' ')).format(DEFAULT_DATE_TIME_FORMAT);
+export const parseDate = (str) => moment(str, ACCEPTED_DATE_FORMATS, true);
+export const parseTime = (str) => moment(str, ACCEPTED_TIME_FORMATS, true);
+export const parseDateTime = (...args) => moment(args.join(' '), ACCEPTED_DATE_TIME_FORMATS, true);

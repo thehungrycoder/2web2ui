@@ -5,10 +5,24 @@ export const COOKIE_DOMAIN = '.sparkpost.com';
 
 export const DATE_FORMATS = {
   READABLE_DATE_YEAR_TIME: 'MMM Do YYYY h:mma',
-  READABLE_DATE_TIME: 'MMM Do h:mma',
-  INPUT_DATE: 'YYYY-MM-DD',
-  INPUT_TIME: 'h:mma'
+  READABLE_DATE_TIME: 'MMM Do h:mma'
 };
+
+export const DEFAULT_DATE_FORMAT = 'YYYY-MM-DD';
+export const DEFAULT_TIME_FORMAT = 'h:mma';
+export const DEFAULT_DATE_TIME_FORMAT = `${DEFAULT_DATE_FORMAT} ${DEFAULT_TIME_FORMAT}`;
+export const ACCEPTED_DATE_FORMATS = [
+  DEFAULT_DATE_FORMAT
+];
+export const ACCEPTED_TIME_FORMATS = [
+  DEFAULT_TIME_FORMAT,
+  'H:mm', // for 24 hour
+  'H:mma' // for 24 hour accidentally including am/pm (FE-61)
+];
+export const ACCEPTED_DATE_TIME_FORMATS = ACCEPTED_DATE_FORMATS.reduce((result, dateFormat) => [
+  ...result,
+  ...ACCEPTED_TIME_FORMATS.map((timeFormat) => `${dateFormat} ${timeFormat}`)
+], []);
 
 export const LINKS = {
   SPC_EU_URL: 'https://app.eu.sparkpost.com',
