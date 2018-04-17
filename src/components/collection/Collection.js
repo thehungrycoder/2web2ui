@@ -49,7 +49,8 @@ export class Collection extends Component {
 
   handleFilterChange = (pattern) => {
     const { rows, filterBox, sortColumn, sortDirection } = this.props;
-    const { keyMap, itemToStringKeys } = filterBox;
+    const { keyMap, itemToStringKeys, matchThreshold } = filterBox;
+    const primarySorter = sortColumn ? (filteredRows) => _.orderBy(filteredRows, sortColumn, sortDirection || 'asc') : null; // ultimately respect the sort column, if present
     const update = {
       currentPage: 1,
       filteredRows: null,
@@ -57,15 +58,14 @@ export class Collection extends Component {
     };
 
     if (pattern) {
-      const filteredRows = objectSortMatch({
+      update.filteredRows = objectSortMatch({
         items: rows,
         pattern,
         getter: objectValuesToString(itemToStringKeys),
-        keyMap
+        keyMap,
+        matchThreshold,
+        primarySorter
       });
-
-      // ultimately respect the sort column, if present
-      update.filteredRows = sortColumn ? _.orderBy(filteredRows, sortColumn, sortDirection || 'asc') : filteredRows ;
     }
 
 

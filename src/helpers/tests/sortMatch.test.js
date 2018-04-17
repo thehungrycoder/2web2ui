@@ -1,4 +1,5 @@
 import sortMatch, { objectSortMatch, getObjectPattern } from '../sortMatch';
+import _ from 'lodash';
 import * as scorers from '../sortMatchScorers';
 
 describe('Helper: sortMatch', () => {
@@ -45,6 +46,18 @@ describe('Helper: sortMatch', () => {
         getter: (item) => item.a
       });
       expect(result).toEqual([{ a: 2 }, { a: 1 }]);
+    });
+
+    it('should filter and sort results using primary sorter function', () => {
+      const primarySorter = jest.fn((items) => _.reverse(items));
+      const result = objectSortMatch({
+        items: [{ a: 1 }, { a: 2 }, { a: 3 }],
+        pattern: 'key:value whatever',
+        getter: (item) => item.a,
+        primarySorter
+      });
+      expect(primarySorter).toHaveBeenCalled();
+      expect(result).toEqual([{ a: 1 }, { a: 2 }]);
     });
 
     it('should only run the object scorer when only modifiers are present', () => {

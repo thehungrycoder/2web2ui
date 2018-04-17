@@ -39,7 +39,8 @@ export class DataTable extends Component {
         show: true,
         keyMap: { category: 'rejection_category_name' },
         itemToStringKeys: ['rejection_category_name', 'domain', 'reason'],
-        exampleModifiers: ['domain', 'category']
+        exampleModifiers: ['domain', 'category'],
+        matchThreshold: 5
       }}
     />;
   }

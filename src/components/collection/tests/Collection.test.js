@@ -122,15 +122,15 @@ describe('Component: Collection', () => {
       instance.handleFilterChange('some pattern');
 
       return delay(350).then(() => {
+        expect(sorters.objectSortMatch.mock.calls[0][0].primarySorter).toBe(null);
         expect(wrapper).toHaveState('currentPage', 1);
         expect(wrapper).toHaveState('filteredRows', filteredRowsMock);
         expect(instance.getVisibleRows()).toEqual(filteredRowsMock);
       });
     });
 
-    it('should handle filter change with sort column', () => {
+    it('should provide sorting function when sortColumn is present', () => {
       const filteredRowsMock = [{ col1: 1 }, { col1: 2 }, { col1: 3 }];
-      const sortedRows = [{ col1: 3 }, { col1: 2 }, { col1: 1 }];
       sorters.objectSortMatch = jest.fn(() => filteredRowsMock);
       props.filterBox = { show: true };
       props.sortColumn = 'col1';
@@ -141,9 +141,10 @@ describe('Component: Collection', () => {
       instance.handleFilterChange('some pattern');
 
       return delay(350).then(() => {
+        expect(sorters.objectSortMatch.mock.calls[0][0].primarySorter).toEqual(expect.anything());
         expect(wrapper).toHaveState('currentPage', 1);
-        expect(wrapper).toHaveState('filteredRows', sortedRows);
-        expect(instance.getVisibleRows()).toEqual(sortedRows);
+        expect(wrapper).toHaveState('filteredRows', filteredRowsMock);
+        expect(instance.getVisibleRows()).toEqual(filteredRowsMock);
       });
     });
 
