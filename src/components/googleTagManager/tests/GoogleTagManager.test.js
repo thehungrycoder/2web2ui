@@ -6,9 +6,15 @@ import * as findRouteByPath from 'src/helpers/findRouteByPath';
 jest.mock('src/helpers/findRouteByPath');
 
 describe('Component: GoogleTagManager', () => {
+  const timestamp = 1523978057120;
 
+  let initialEvent;
   let wrapper;
   let props;
+
+  Date = jest.fn(() => ({ // eslint-disable-line
+    getTime: () => timestamp
+  }));
 
   beforeEach(() => {
     findRouteByPath.default = jest.fn(() => ({ title: 'Test Title', public: false }));
@@ -19,28 +25,32 @@ describe('Component: GoogleTagManager', () => {
         search: '?fun=times'
       }
     };
+    initialEvent = {
+      event: 'gtm.js',
+      'gtm.start': 1523978057120
+
+    };
     wrapper = shallow(<GoogleTagManager {...props} />);
   });
 
   it('should init dataLayer and track initial page view on mount', () => {
-    expect(window.dataLayer).toEqual([]);
+    expect(window.dataLayer).toEqual([initialEvent]);
     expect(wrapper.state('dataLayerLoaded')).toEqual(true);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should push the username and track the initial event when username becomes available', () => {
-    expect(window.dataLayer).toEqual([]);
+    expect(window.dataLayer).toEqual([initialEvent]);
 
     expect(wrapper.state('waitForUser')).toEqual(true);
 
     wrapper.setProps({ username: 'jojo' });
-    expect(window.dataLayer).toEqual([
-      {
-        event: 'content-view',
-        'content-name': '/some/path?fun=times',
-        'content-title': 'Test Title',
-        username: 'jojo'
-      }
+    expect(window.dataLayer).toEqual([initialEvent, {
+      event: 'content-view',
+      'content-name': '/some/path?fun=times',
+      'content-title': 'Test Title',
+      username: 'jojo'
+    }
     ]);
 
     expect(wrapper.state('waitForUser')).toEqual(false);
@@ -49,16 +59,14 @@ describe('Component: GoogleTagManager', () => {
   it('should track a page view immediately if on a public route, and not again when the username becomes available', () => {
     findRouteByPath.default = jest.fn(() => ({ title: 'Test Public Title', public: true }));
     wrapper = shallow(<GoogleTagManager {...props} />);
-    expect(window.dataLayer).toEqual([
-      {
-        event: 'content-view',
-        'content-name': '/some/path?fun=times',
-        'content-title': 'Test Public Title',
-        username: undefined
-      }
-    ]);
+    expect(window.dataLayer).toHaveLength(2);
+    expect(window.dataLayer.pop()).toEqual({
+      event: 'content-view',
+      'content-name': '/some/path?fun=times',
+      'content-title': 'Test Public Title',
+      username: undefined
+    });
     wrapper.setProps({ username: 'loaded' });
-    expect(window.dataLayer).toHaveLength(1);
   });
 
   it('should track a new page view when the location changes', () => {
@@ -74,7 +82,7 @@ describe('Component: GoogleTagManager', () => {
 
   it('should not track a new page view when the location changes if we are still waiting for the username to load', () => {
     wrapper.setProps({ location: { pathname: '/new2_FINAL', search: '' }});
-    expect(window.dataLayer).toEqual([]);
+    expect(window.dataLayer).toEqual([initialEvent]);
   });
 
   it('should use the pathname if no title is available', () => {
