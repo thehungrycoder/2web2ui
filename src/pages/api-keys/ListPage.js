@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Page, Tooltip, Icon } from '@sparkpost/matchbox';
+import { Page } from '@sparkpost/matchbox';
 import { listApiKeys, hideNewApiKey } from 'src/actions/api-keys';
 import { selectKeysForAccount } from 'src/selectors/api-keys';
 import { Loading, SubaccountTag, TableCollection, ApiErrorBanner, ApiKeySuccessBanner, ShortKeyCode } from 'src/components';
@@ -9,7 +9,6 @@ import { filterBoxConfig } from './tableConfig';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
 import { LINKS } from 'src/constants';
-import ApiKeyLabel from './components/ApiKeyLabel';
 
 const primaryAction = {
   content: 'Create API Key',
@@ -30,19 +29,13 @@ export class ListPage extends Component {
     this.props.listApiKeys();
   }
 
-  getLabel = ({ isOwnedByCurrentUser, id, subaccount_id, label, username }) => {
-    if (isOwnedByCurrentUser) {
-      return <Link to={`/account/api-keys/details/${id}${setSubaccountQuery(subaccount_id)}`}>{label}</Link>;
-    } else {
-      return <span>{label}<br/><small><Tooltip dark content='API keys are only editable by their owner'>(owner: {username}) <Icon name='Info' /></Tooltip></small></span>;
-    }
-  }
+  getLabel = ({ id, subaccount_id, label }) => <Link to={`/account/api-keys/details/${id}${setSubaccountQuery(subaccount_id)}`}>{label}</Link>
 
   getRowData = (key) => {
     const { short_key, subaccount_id } = key;
     const { hasSubaccounts } = this.props;
     const rowData = [
-      <ApiKeyLabel apiKey={key} />,
+      this.getLabel(key),
       <ShortKeyCode shortKey={short_key} />
     ];
 

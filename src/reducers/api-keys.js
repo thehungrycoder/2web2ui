@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 const initialState = {
   grants: [],
   grantsLoading: false,
@@ -73,19 +71,6 @@ export default (state = initialState, { payload, type }) => {
 
     case 'HIDE_NEW_API_KEY': {
       return { ...state, newKey: null };
-    }
-
-    case 'MARK_API_KEY_CURRENT': {
-      const keys = _.map(state.keys, (key) => {
-        if (key.id === payload) {
-          key.isCurrent = true;
-        } else {
-          delete key.isCurrent;
-        }
-        return key;
-      });
-
-      return { ...state, keys };
     }
 
     default: {
