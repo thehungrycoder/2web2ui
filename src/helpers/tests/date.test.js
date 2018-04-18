@@ -198,6 +198,10 @@ describe('Date helpers', () => {
       expect(parseTime('')).not.toBeValid();
     });
 
+    it('returns valid time for zero-hour', () => {
+      expect(parseTime('00:00')).toBeValid();
+    });
+
     it('returns valid time for 12-hour time', () => {
       expect(parseTime('12:00am')).toBeValid();
     });
