@@ -1,5 +1,1 @@
-import toBeValid from './toBeValid';
-
-export default {
-  toBeValid
-}
+export { default as toBeValid } from './toBeValid';
