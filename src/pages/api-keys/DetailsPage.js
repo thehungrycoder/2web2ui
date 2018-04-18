@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
-import { Page, Panel } from '@sparkpost/matchbox';
+import { Page, Panel, Banner } from '@sparkpost/matchbox';
 
-import { deleteApiKey, getApiKey, updateApiKey, listGrants, listSubaccountGrants } from 'src/actions/api-keys';
+import { listApiKeys, deleteApiKey, getApiKey, updateApiKey, listGrants, listSubaccountGrants } from 'src/actions/api-keys';
 import { showAlert } from 'src/actions/globalAlert';
 
 import { hasSubaccounts } from 'src/selectors/subaccounts';
-import { getFormLoading, selectApiKeyId } from 'src/selectors/api-keys';
+import { getFormLoading, selectApiKeyId, getCurrentAPIKey, selectKeysForAccount, isFormReadyOnly } from 'src/selectors/api-keys';
 import { selectSubaccountIdFromQuery } from 'src/selectors/subaccounts';
 
 import { Loading, DeleteModal } from 'src/components';
@@ -29,8 +29,10 @@ export class ApiKeysDetailsPage extends Component {
   };
 
   componentDidMount() {
-    const { subaccount, id } = this.props;
-    this.props.getApiKey({ id, subaccount });
+    const { keys } = this.props;
+    if (!keys.length) {
+      this.props.listApiKeys();
+    }
 
     this.props.listGrants();
     if (this.props.hasSubaccounts) {
@@ -60,8 +62,16 @@ export class ApiKeysDetailsPage extends Component {
     }));
   };
 
+  renderReadOnlyAlert() {
+    return (<Banner
+      status='info'
+    >
+      <p>API keys are only editable by their owner.</p>
+    </Banner>);
+  }
+
   render() {
-    const { apiKey, error, loading } = this.props;
+    const { apiKey, error, loading, isReadOnly } = this.props;
 
     if (loading) {
       return <Loading />;
@@ -71,13 +81,16 @@ export class ApiKeysDetailsPage extends Component {
       return <Redirect to='/account/api-keys' />;
     }
 
+    const secondarActions = isReadOnly ? [] : [{ content: 'Delete', onClick: this.onToggleDelete }];
+
     return (
       <Page
         title={apiKey.label}
         breadcrumbAction={breadcrumbAction}
-        secondaryActions={[{ content: 'Delete', onClick: this.onToggleDelete }]}>
+        secondaryActions={secondarActions}>
+        {isReadOnly && this.renderReadOnlyAlert()}
         <Panel>
-          <ApiKeyForm apiKey={apiKey} onSubmit={this.onSubmit} />
+          <ApiKeyForm apiKey={apiKey} onSubmit={this.onSubmit} isReadOnly={isReadOnly} />
         </Panel>
         <DeleteModal
           open={this.state.showDeleteModal}
@@ -95,14 +108,16 @@ const mapStateToProps = (state, props) => {
   const { error, grants } = state.apiKeys;
 
   return {
-    apiKey: state.apiKeys.key,
-    id: selectApiKeyId(props),
+    apiKey: getCurrentAPIKey(state, props),
+    id: selectApiKeyId(state, props),
+    keys: selectKeysForAccount(state),
     error,
     grants,
     hasSubaccounts: hasSubaccounts(state),
     loading: getFormLoading(state) || state.apiKeys.keyLoading,
-    subaccount: selectSubaccountIdFromQuery(state, props)
+    subaccount: selectSubaccountIdFromQuery(state, props),
+    isReadOnly: isFormReadyOnly(state, props)
   };
 };
 
-export default connect(mapStateToProps, { getApiKey, updateApiKey, listGrants, listSubaccountGrants, deleteApiKey, showAlert })(ApiKeysDetailsPage);
+export default connect(mapStateToProps, { listApiKeys, getApiKey, updateApiKey, listGrants, listSubaccountGrants, deleteApiKey, showAlert })(ApiKeysDetailsPage);

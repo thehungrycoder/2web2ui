@@ -102,3 +102,11 @@ export function listSubaccountGrants() {
     }
   });
 }
+
+
+export function markAsCurrent(id) {
+  return {
+    type: 'MARK_API_KEY_CURRENT',
+    payload: id
+  };
+}

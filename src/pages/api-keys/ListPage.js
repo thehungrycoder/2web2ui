@@ -9,6 +9,7 @@ import { filterBoxConfig } from './tableConfig';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
 import { LINKS } from 'src/constants';
+import ApiKeyLabel from './components/ApiKeyLabel';
 
 const primaryAction = {
   content: 'Create API Key',
@@ -41,7 +42,7 @@ export class ListPage extends Component {
     const { short_key, subaccount_id } = key;
     const { hasSubaccounts } = this.props;
     const rowData = [
-      this.getLabel(key),
+      <ApiKeyLabel apiKey={key} />,
       <ShortKeyCode shortKey={short_key} />
     ];
 
