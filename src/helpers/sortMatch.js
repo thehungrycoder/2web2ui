@@ -58,12 +58,10 @@ export default function sortMatch(items, pattern, getter = identity, matchThresh
  * @param {function} getter - customer parser/stringifyer, e.g. to use for converting object values to strings
  * @param {object} [keyMap={}] - optional mapping of key names used by the object scorer
  * @param {number} [matchThreshold=0] - only include items whose match score is higher than this number
- * @param {function} [sorter] - sorts results after being sorted according to match score
  * @returns {Array} Matched and sorted results
  */
-export function objectSortMatch({ items, pattern, getter, keyMap = {}, matchThreshold, primarySorter }) {
+export function objectSortMatch({ items, pattern, getter, keyMap = {}, matchThreshold }) {
   const objectPattern = getObjectPattern(pattern);
-  let filteredAndSorted = [];
   if (objectPattern && Object.keys(objectPattern).length) {
     const remainingPattern = pattern
       .replace(objectPatternRegex, '')
@@ -74,10 +72,7 @@ export function objectSortMatch({ items, pattern, getter, keyMap = {}, matchThre
       const score = objectScorer({ item, objectPattern, keyMap }) + (remainingPattern ? basicScorer(getter(item), remainingPattern) : 0);
       return [score, item];
     });
-    filteredAndSorted = filterAndSortByScore(scoredItems, matchThreshold);
-  } else {
-    filteredAndSorted = sortMatch(items, pattern, getter, matchThreshold);
+    return filterAndSortByScore(scoredItems, matchThreshold);
   }
-
-  return primarySorter ? primarySorter(filteredAndSorted) : filteredAndSorted;
+  return sortMatch(items, pattern, getter, matchThreshold);
 }

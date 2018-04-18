@@ -122,14 +122,31 @@ describe('Component: Collection', () => {
       instance.handleFilterChange('some pattern');
 
       return delay(350).then(() => {
-        expect(sorters.objectSortMatch.mock.calls[0][0].primarySorter).toBe(null);
         expect(wrapper).toHaveState('currentPage', 1);
         expect(wrapper).toHaveState('filteredRows', filteredRowsMock);
         expect(instance.getVisibleRows()).toEqual(filteredRowsMock);
       });
     });
 
-    it('should provide sorting function when sortColumn is present', () => {
+    it('should sort by column when sortColumn is present', () => {
+      const filteredRowsMock = [{ col1: 1 }, { col1: 2 }, { col1: 3 }];
+      sorters.objectSortMatch = jest.fn(() => filteredRowsMock);
+      props.filterBox = { show: true };
+      props.sortColumn = 'col1';
+      props.sortDirection = 'asc';
+      addRows(30);
+      setupCollection();
+      instance.handlePageChange(2);
+      instance.handleFilterChange('some pattern');
+
+      return delay(350).then(() => {
+        expect(wrapper).toHaveState('currentPage', 1);
+        expect(wrapper).toHaveState('filteredRows', filteredRowsMock);
+        expect(instance.getVisibleRows()).toMatchSnapshot();
+      });
+    });
+
+    it('should obey sort direction', () => {
       const filteredRowsMock = [{ col1: 1 }, { col1: 2 }, { col1: 3 }];
       sorters.objectSortMatch = jest.fn(() => filteredRowsMock);
       props.filterBox = { show: true };
@@ -137,14 +154,10 @@ describe('Component: Collection', () => {
       props.sortDirection = 'desc';
       addRows(30);
       setupCollection();
-      instance.handlePageChange(2);
       instance.handleFilterChange('some pattern');
 
       return delay(350).then(() => {
-        expect(sorters.objectSortMatch.mock.calls[0][0].primarySorter).toEqual(expect.anything());
-        expect(wrapper).toHaveState('currentPage', 1);
-        expect(wrapper).toHaveState('filteredRows', filteredRowsMock);
-        expect(instance.getVisibleRows()).toEqual(filteredRowsMock);
+        expect(instance.getVisibleRows()).toMatchSnapshot();
       });
     });
 
