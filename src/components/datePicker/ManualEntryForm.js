@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import _ from 'lodash';
 import { Grid, TextField, Icon } from '@sparkpost/matchbox';
-import { formatFormDate, formatFormTime, parseDateTime } from 'src/helpers/date';
+import { formatInputDate, formatInputTime, parseDatetime } from 'src/helpers/date';
 import styles from './ManualEntryForm.module.scss';
 
 export default class ManualEntryForm extends Component {
@@ -21,10 +21,10 @@ export default class ManualEntryForm extends Component {
 
   syncPropsToState({ to, from }) {
     this.setState({
-      toDate: formatFormDate(to),
-      toTime: formatFormTime(to),
-      fromDate: formatFormDate(from),
-      fromTime: formatFormTime(from)
+      toDate: formatInputDate(to),
+      toTime: formatInputTime(to),
+      fromDate: formatInputDate(from),
+      fromTime: formatInputTime(from)
     });
   }
 
@@ -48,8 +48,8 @@ export default class ManualEntryForm extends Component {
   }
 
   validate = (e, shouldReset) => {
-    const from = parseDateTime(this.state.fromDate, this.state.fromTime);
-    const to = parseDateTime(this.state.toDate, this.state.toTime);
+    const from = parseDatetime(this.state.fromDate, this.state.fromTime);
+    const to = parseDatetime(this.state.toDate, this.state.toTime);
 
     // allow for prop-level override of "now" (DI, etc.)
     const { now = moment() } = this.props;

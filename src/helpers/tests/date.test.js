@@ -8,12 +8,11 @@ import {
   formatDateTime,
   isSameDate,
   getLocalTimezone,
-  formatFormDate,
-  formatFormTime,
-  formatFormDateTime,
+  formatInputDate,
+  formatInputTime,
   parseDate,
   parseTime,
-  parseDateTime
+  parseDatetime
 } from '../date';
 import cases from 'jest-in-case';
 import moment from 'moment';
@@ -156,27 +155,19 @@ describe('Date helpers', () => {
     });
   });
 
-  describe('formatFormDate', () => {
+  describe('formatInputDate', () => {
     const dateTime = '2018-04-17T15:18:42Z';
 
     it('returns valid date', () => {
-      expect(formatFormDate(dateTime).toString()).toEqual('2018-04-17');
+      expect(formatInputDate(dateTime).toString()).toEqual('2018-04-17');
     });
   });
 
-  describe('formatFormTime', () => {
+  describe('formatInputTime', () => {
     const dateTime = '2018-04-17T15:18:42Z';
 
     it('returns valid date', () => {
-      expect(formatFormTime(dateTime).toString()).toEqual('11:18am');
-    });
-  });
-
-  describe('formatFormDateTime', () => {
-    const dateTime = '2018-04-17T15:18:42Z';
-
-    it('returns valid date', () => {
-      expect(formatFormDateTime(dateTime).toString()).toEqual('2018-04-17 11:18am');
+      expect(formatInputTime(dateTime).toString()).toEqual('11:18am');
     });
   });
 
@@ -220,25 +211,25 @@ describe('Date helpers', () => {
     });
   });
 
-  describe('parseDateTime', () => {
+  describe('parseDatetime', () => {
     it('returns invalid date time for undefined', () => {
-      expect(parseDateTime()).not.toBeValid();
+      expect(parseDatetime()).not.toBeValid();
     });
 
     it('returns invalid date time for empty string', () => {
-      expect(parseDateTime('')).not.toBeValid();
+      expect(parseDatetime('')).not.toBeValid();
     });
 
     it('returns valid date time for 12-hour time', () => {
-      expect(parseDateTime('2018-01-01 12:00am')).toBeValid();
+      expect(parseDatetime('2018-01-01 12:00am')).toBeValid();
     });
 
     it('returns valid time for 24-hour time', () => {
-      expect(parseDateTime('2018-01-01 14:00')).toBeValid();
+      expect(parseDatetime('2018-01-01 14:00')).toBeValid();
     });
 
     it('returns valid time for 24-hour with am/pm', () => {
-      expect(parseDateTime('2018-01-01 14:00am')).toBeValid();
+      expect(parseDatetime('2018-01-01 14:00am')).toBeValid();
     });
   });
 });

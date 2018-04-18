@@ -3,26 +3,22 @@ export const AFTER_JOIN_REDIRECT_ROUTE = '/onboarding/plan';
 
 export const COOKIE_DOMAIN = '.sparkpost.com';
 
-export const DATE_FORMATS = {
-  READABLE_DATE_YEAR_TIME: 'MMM Do YYYY h:mma',
-  READABLE_DATE_TIME: 'MMM Do h:mma'
-};
+export const FORMATS = {
+  DATE: 'MMM Do',
+  LONG_DATE: 'MMM Do YYYY',
+  SHORT_DATE: 'YYYY-MM-DD',
 
-export const DEFAULT_DATE_FORMAT = 'YYYY-MM-DD';
-export const DEFAULT_TIME_FORMAT = 'h:mma';
-export const DEFAULT_DATE_TIME_FORMAT = `${DEFAULT_DATE_FORMAT} ${DEFAULT_TIME_FORMAT}`;
-export const ACCEPTED_DATE_FORMATS = [
-  DEFAULT_DATE_FORMAT
-];
-export const ACCEPTED_TIME_FORMATS = [
-  DEFAULT_TIME_FORMAT,
-  'H:mm', // for 24 hour
-  'H:mma' // for 24 hour accidentally including am/pm (FE-61)
-];
-export const ACCEPTED_DATE_TIME_FORMATS = ACCEPTED_DATE_FORMATS.reduce((result, dateFormat) => [
-  ...result,
-  ...ACCEPTED_TIME_FORMATS.map((timeFormat) => `${dateFormat} ${timeFormat}`)
-], []);
+  TIME: 'h:mma',
+  MILITARY_TIME: 'H:mm',
+  ANTE_MILITARY_TIME: 'H:mma', // for 24 hour accidentally including am/pm (FE-61)
+
+  DATETIME: 'MMM Do h:mma',
+  LONG_DATETIME: 'MMM Do YYYY h:mma',
+
+  INPUT_DATES: ['YYYY-MM-DD'],
+  INPUT_TIMES: ['h:mma', 'H:mm', 'H:mma'],
+  INPUT_DATETIMES: ['YYYY-MM-DD h:mma', 'YYYY-MM-DD H:mm', 'YYYY-MM-DD H:mma']
+};
 
 export const LINKS = {
   SPC_EU_URL: 'https://app.eu.sparkpost.com',
