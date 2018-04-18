@@ -5,6 +5,9 @@ import { Grid, TextField, Icon } from '@sparkpost/matchbox';
 import { formatInputDate, formatInputTime, parseDatetime } from 'src/helpers/date';
 import styles from './ManualEntryForm.module.scss';
 
+const DATE_PLACEHOLDER = '1970-01-20';
+const TIME_PLACEHOLDER = '12:00am';
+
 export default class ManualEntryForm extends Component {
   DEBOUNCE = 500;
 
@@ -74,7 +77,7 @@ export default class ManualEntryForm extends Component {
           <Grid.Column >
             <TextField
               id="fromDate"
-              label='From Date' labelHidden placeholder='YYYY-MM-DD'
+              label='From Date' labelHidden placeholder={DATE_PLACEHOLDER}
               onChange={this.handleFieldChange}
               onBlur={this.handleBlur}
               value={fromDate} />
@@ -82,7 +85,7 @@ export default class ManualEntryForm extends Component {
           <Grid.Column >
             <TextField
               id="fromTime"
-              label='From Time' labelHidden placeholder='HH:MMam'
+              label='From Time' labelHidden placeholder={TIME_PLACEHOLDER}
               onChange={this.handleFieldChange}
               onBlur={this.handleBlur}
               value={fromTime} />
@@ -95,7 +98,7 @@ export default class ManualEntryForm extends Component {
           <Grid.Column >
             <TextField
               id="toDate"
-              label='To Date' labelHidden placeholder='YYYY-MM-DD'
+              label='To Date' labelHidden placeholder={DATE_PLACEHOLDER}
               onChange={this.handleFieldChange}
               onBlur={this.handleBlur}
               value={toDate} />
@@ -103,7 +106,7 @@ export default class ManualEntryForm extends Component {
           <Grid.Column >
             <TextField
               id="toTime"
-              label='To Time' labelHidden placeholder='HH:MMam'
+              label='To Time' labelHidden placeholder={TIME_PLACEHOLDER}
               onChange={this.handleFieldChange}
               onBlur={this.handleBlur}
               value={toTime} />
