@@ -95,13 +95,14 @@ export class ApiKeysDetailsPage extends Component {
         <Panel>
           <ApiKeyForm apiKey={apiKey} onSubmit={this.onSubmit} isReadOnly={isReadOnly} />
         </Panel>
-        <DeleteModal
+        {!isReadOnly && <DeleteModal
           open={this.state.showDeleteModal}
           title="Are you sure you want to delete this key?"
           content={<p>The key will be immediately and permanently removed. This cannot be undone.</p>}
           onCancel={this.onToggleDelete}
           onDelete={this.handleDelete}
         />
+        }
       </Page>
     );
   }
