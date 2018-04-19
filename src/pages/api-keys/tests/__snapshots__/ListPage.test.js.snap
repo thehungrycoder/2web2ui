@@ -25,36 +25,12 @@ Array [
     />,
   ],
   Array [
-    <span>
+    <Link
+      replace={false}
+      to="/account/api-keys/details/789id"
+    >
       Other User Key
-      <br />
-      <small>
-        <Tooltip
-          bottom={true}
-          content="API keys are only editable by their owner"
-          dark={true}
-          forcePosition={false}
-          horizontalOffset="0px"
-          preferredDirection={
-            Object {
-              "bottom": true,
-              "left": false,
-              "right": true,
-              "top": false,
-            }
-          }
-          right={true}
-        >
-          (owner: 
-          other_user
-          ) 
-          <Icon
-            name="Info"
-            size={18}
-          />
-        </Tooltip>
-      </small>
-    </span>,
+    </Link>,
     <ShortKeyCode
       shortKey="c00l"
     />,

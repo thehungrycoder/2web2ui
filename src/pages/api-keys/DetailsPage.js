@@ -63,10 +63,13 @@ export class ApiKeysDetailsPage extends Component {
   };
 
   renderReadOnlyAlert() {
+    const { apiKey } = this.props;
+
     return (<Banner
       status='info'
     >
       <p>API keys are only editable by their owner.</p>
+      <p>Owner: {apiKey.username}</p>
     </Banner>);
   }
 

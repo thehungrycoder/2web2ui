@@ -9,15 +9,17 @@ beforeEach(() => {
   const props = {
     loading: false,
     error: null,
+    keys: [],
     listGrants: jest.fn(),
     listSubaccountGrants: jest.fn(),
     deleteApiKey: jest.fn(() => Promise.resolve()),
     updateApiKey: jest.fn(() => Promise.resolve()),
     history: { push: jest.fn() },
-    getApiKey: jest.fn(),
+    listApiKeys: jest.fn(() => []),
     id: 'api-id',
     subaccount: 101,
-    showAlert: jest.fn()
+    showAlert: jest.fn(),
+    isReadOnly: false
   };
 
   wrapper = shallow(<ApiKeysDetailsPage {...props} />);
@@ -55,6 +57,12 @@ it('toggles modal', () => {
   wrapper.instance().onToggleDelete();
   expect(wrapper).toHaveState('showDeleteModal', true);
 });
+
+it('renders correctly in readonly mode', () => {
+  wrapper.setProps({ isReadOnly: true });
+  expect(wrapper).toMatchSnapshot();
+});
+
 
 describe('delete', () => {
   it('handles success correctly', async() => {
