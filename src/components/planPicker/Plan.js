@@ -20,6 +20,10 @@ function eitherMonthlyOrHourly(props, propName, componentName) {
   const hasMonthly = _.has(props, 'monthly');
   const hasHourly = _.has(props, 'hourly');
 
+  if (props.status !== 'public' && props.status !== 'secret') {
+    return;
+  }
+
   // If both are provided, or neither, error
   if ((hasMonthly && hasHourly) || !(hasMonthly || hasHourly)) {
     return new Error('Plan\'s pricing should either be hourly or monthly but not both');
@@ -31,7 +35,7 @@ Plan.propTypes = {
     volume: PropTypes.number.isRequired,
     monthly: eitherMonthlyOrHourly,
     hourly: eitherMonthlyOrHourly,
-    overage: PropTypes.number.isRequired,
+    overage: PropTypes.number,
     includesIp: PropTypes.bool,
     isFree: PropTypes.bool
   }).isRequired
