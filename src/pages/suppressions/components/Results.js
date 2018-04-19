@@ -35,28 +35,6 @@ export class Results extends Component {
     );
   }
 
-  deleteSuppression = () => {
-    const { showAlert, deleteSuppression } = this.props;
-    const { data } = this.state.del;
-
-    return deleteSuppression(data)
-      .then(() => {
-        this.toggleDeleteModal();
-        return showAlert({ type: 'success', message: `${data.recipient} was successfully deleted from the suppression list` });
-      });
-  }
-
-  toggleDetailModal = (row) => {
-    const { detail } = this.state;
-
-    this.setState({
-      detail: {
-        open: !detail.open,
-        data: row
-      }
-    });
-  }
-
   getRowData = (row) => {
     const { recipient, type, source, subaccount_id: subaccountId } = row;
     const { subaccounts: allSubaccounts, hasSubaccounts } = this.props;
@@ -99,6 +77,17 @@ export class Results extends Component {
     return columns;
   }
 
+  toggleDetailModal = (row) => {
+    const { detail } = this.state;
+
+    this.setState({
+      detail: {
+        open: !detail.open,
+        data: row
+      }
+    });
+  }
+
   renderDetailModal = () => {
     const { open, data } = this.state.detail;
     const { subaccounts, hasSubaccounts } = this.props;
@@ -108,14 +97,24 @@ export class Results extends Component {
     );
   }
 
+  deleteSuppression = () => {
+    const { showAlert, deleteSuppression } = this.props;
+    const { data } = this.state.del;
+
+    return deleteSuppression(data)
+      .then(() => {
+        this.toggleDeleteModal();
+        return showAlert({ type: 'success', message: `${data.recipient} was successfully deleted from the suppression list` });
+      });
+  }
+
   toggleDeleteModal = (row) => {
     const { del } = this.state;
+    const open = !del.open;
+    const data = open ? row : {};
 
     this.setState({
-      del: {
-        open: !del.open,
-        data: row
-      }
+      del: { open, data }
     });
   }
 

@@ -113,7 +113,7 @@ describe('Results', () => {
       instance.toggleDeleteModal();
       del = wrapper.state().del;
       expect(del.open).toBe(false);
-      expect(del.data).toEqual(undefined);
+      expect(del.data).toEqual({});
     });
   });
 
