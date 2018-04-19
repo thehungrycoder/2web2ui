@@ -27,10 +27,6 @@ export const getFormLoading = createSelector(
     grantsLoading || subaccountGrantsLoading
 );
 
-/*
- * ApiKeyForm selectors
- */
-
 export const getCurrentAPIKey = createSelector(
   [getApiKeys, selectApiKeyId, selectSubaccountIdFromQuery],
   (keys, id, subaccountId) => _.find(keys, (key) => key.id === id && (!key.subaccountId || key.subaccount_id === subaccountId)));
@@ -42,8 +38,7 @@ export const getIsNew = createSelector(getCurrentAPIKey, (apiKey) =>
 
 export const getInitialGrantsRadio = createSelector(
   [getGrants, getCurrentAPIKey, getIsNew],
-  (grants, apiKey, isNew) =>
-    isNew || _.size(grants) <= _.size(apiKey.grants) ? 'all' : 'select'
+  (grants, apiKey, isNew) => isNew || _.size(grants) <= _.size(apiKey.grants) ? 'all' : 'select'
 );
 
 export const getInitialValues = createSelector(
