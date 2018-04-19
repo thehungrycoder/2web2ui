@@ -24,7 +24,7 @@ export class DefaultRedirect extends Component {
     // if there is a redirect route set on state, we can
     // redirect there before access condition state is ready
     if (routerState.redirectAfterLogin) {
-      history.push(routerState.redirectAfterLogin, { replace: true });
+      history.push({ ...location, pathname: routerState.redirectAfterLogin }, { replace: true });
       return;
     }
 
@@ -36,12 +36,12 @@ export class DefaultRedirect extends Component {
 
     // reporting users are all sent to the summary report
     if (_.includes(allowedAccessLevels, currentUser.access_level)) {
-      history.push('/reports/summary', { replace: true });
+      history.push({ ...location, pathname: '/reports/summary' }, { replace: true });
       return;
     }
 
     // everyone else is sent to the config.splashPage route
-    history.push(config.splashPage, { replace: true });
+    history.push({ ...location, pathname: config.splashPage }, { replace: true });
   }
 
   render() {

@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
+import qs from 'query-string';
 import { Portal, Icon, Popover } from '@sparkpost/matchbox';
 import { entitledToSupport } from 'src/selectors/support';
-import { createTicket, clearSupportForm } from 'src/actions/support';
+import { createTicket, clearTicketForm, toggleSupportPanel, toggleTicketForm, hydrateTicketForm } from 'src/actions/support';
 import SupportForm from './components/SupportForm';
 import { SearchPanel } from './components/SearchPanel';
 import styles from './Support.module.scss';
@@ -14,6 +16,17 @@ export class Support extends Component {
     showForm: false
   };
 
+  componentDidMount() {
+    const { location, toggleSupportPanel, toggleTicketForm, hydrateTicketForm } = this.props;
+    const { supportTicket, supportMessage: message, supportSubject: subject } = qs.parse(location.search);
+
+    if (supportTicket) {
+      toggleSupportPanel();
+      toggleTicketForm();
+      hydrateTicketForm({ message, subject });
+    }
+  }
+
   onSubmit = (values) => {
     const { createTicket } = this.props;
     const { subject, message } = values;
@@ -23,29 +36,28 @@ export class Support extends Component {
   };
 
   togglePanel = () => {
-    const stateUpdates = { showPanel: !this.state.showPanel };
-    // handling reseting doc search when closed
-    if (!this.state.showPanel) {
-      stateUpdates.showForm = false;
-    }
+    const { showPanel, showTicketForm, toggleSupportPanel, toggleTicketForm } = this.props;
 
-    this.setState(stateUpdates);
+    // handling reseting doc search when closed
+    if (!showPanel && showTicketForm) {
+      toggleTicketForm();
+    }
+    toggleSupportPanel();
   }
 
   resetPanel = () => {
-    this.setState({ showPanel: false }, () => {
-      this.props.clearSupportForm();
-    });
+    this.props.toggleSupportPanel();
+    this.props.clearTicketForm();
   };
 
   toggleForm = () => {
-    this.setState({ showForm: !this.state.showForm });
+    this.props.toggleTicketForm();
   }
 
   renderPanel() {
-    const { showForm } = this.state;
+    const { showTicketForm } = this.props;
 
-    return showForm
+    return showTicketForm
       ? <SupportForm
         onSubmit={this.onSubmit}
         onCancel={this.toggleForm}
@@ -54,8 +66,7 @@ export class Support extends Component {
   }
 
   render() {
-    const { loggedIn, entitledToSupport } = this.props;
-    const { showPanel } = this.state;
+    const { loggedIn, entitledToSupport, showPanel } = this.props;
 
     if (!loggedIn || !entitledToSupport) {
       return null;
@@ -89,9 +100,11 @@ export class Support extends Component {
 
 const mapStateToProps = (state) => ({
   loggedIn: state.auth.loggedIn,
-  entitledToSupport: entitledToSupport(state)
+  entitledToSupport: entitledToSupport(state),
+  showPanel: state.support.showPanel,
+  showTicketForm: state.support.showTicketForm
 });
 
-const mapDispatchToProps = { createTicket, clearSupportForm };
+const mapDispatchToProps = { createTicket, clearTicketForm, toggleSupportPanel, toggleTicketForm, hydrateTicketForm };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Support);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Support));
