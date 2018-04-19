@@ -3,11 +3,21 @@ export const AFTER_JOIN_REDIRECT_ROUTE = '/onboarding/plan';
 
 export const COOKIE_DOMAIN = '.sparkpost.com';
 
-export const DATE_FORMATS = {
-  READABLE_DATE_YEAR_TIME: 'MMM Do YYYY h:mma',
-  READABLE_DATE_TIME: 'MMM Do h:mma',
-  INPUT_DATE: 'YYYY-MM-DD',
-  INPUT_TIME: 'h:mma'
+export const FORMATS = {
+  DATE: 'MMM Do',
+  LONG_DATE: 'MMM Do YYYY',
+  SHORT_DATE: 'YYYY-MM-DD',
+
+  TIME: 'h:mma',
+  MILITARY_TIME: 'H:mm',
+  ANTE_MILITARY_TIME: 'H:mma', // for 24 hour accidentally including am/pm (FE-61)
+
+  DATETIME: 'MMM Do h:mma',
+  LONG_DATETIME: 'MMM Do YYYY h:mma',
+
+  INPUT_DATES: ['YYYY-MM-DD'],
+  INPUT_TIMES: ['h:mma', 'H:mm', 'H:mma'],
+  INPUT_DATETIMES: ['YYYY-MM-DD h:mma', 'YYYY-MM-DD H:mm', 'YYYY-MM-DD H:mma']
 };
 
 export const LINKS = {
