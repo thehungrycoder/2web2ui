@@ -4,12 +4,12 @@ import { subMonths, format } from 'date-fns';
 import { getStartOfDay, getEndOfDay, getRelativeDateOptions } from 'src/helpers/date';
 import { Button, Datepicker, TextField, Select, Popover, WindowEvent } from '@sparkpost/matchbox';
 import ManualEntryForm from './ManualEntryForm';
-import { DATE_FORMATS } from 'src/constants';
+import { FORMATS } from 'src/constants';
 import styles from './DatePicker.module.scss';
 import PropTypes from 'prop-types';
 
 export default class AppDatePicker extends Component {
-  DATE_FORMAT = DATE_FORMATS.READABLE_DATE_YEAR_TIME;
+  DATE_FORMAT = FORMATS.LONG_DATETIME;
   state = {
     showDatePicker: false,
     selecting: false,

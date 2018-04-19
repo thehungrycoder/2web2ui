@@ -15,7 +15,7 @@ import { parseSearch } from 'src/helpers/messageEvents';
 import { stringToArray } from 'src/helpers/string';
 import { onEnter } from 'src/helpers/keyEvents';
 import { RELATIVE_DATE_OPTIONS } from './searchConfig';
-import { DATE_FORMATS } from 'src/constants';
+import { FORMATS } from 'src/constants';
 import config from 'src/config';
 
 export class MessageEventsSearch extends Component {
@@ -77,7 +77,7 @@ export class MessageEventsSearch extends Component {
                 relativeDateOptions={RELATIVE_DATE_OPTIONS}
                 disabled={loading}
                 onChange={refreshMessageEventsDateRange}
-                dateFieldFormat={DATE_FORMATS.READABLE_DATE_TIME}
+                dateFieldFormat={FORMATS.DATETIME}
                 datePickerProps={{
                   disabledDays: {
                     after: now,
