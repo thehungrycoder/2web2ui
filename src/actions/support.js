@@ -1,7 +1,7 @@
 import sparkpostApiRequest from './helpers/sparkpostApiRequest';
 import { change } from 'redux-form';
 
-export function createTicket({ subject, message }) {
+export function createTicket({ subject, message, attachment }) {
   return sparkpostApiRequest({
     type: 'CREATE_TICKET',
     meta: {
@@ -9,7 +9,8 @@ export function createTicket({ subject, message }) {
       url: '/integrations/support/ticket',
       data: {
         subject,
-        message
+        message,
+        attachment
       }
     }
   });

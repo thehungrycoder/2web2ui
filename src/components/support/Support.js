@@ -4,7 +4,7 @@ import { withRouter } from 'react-router';
 import qs from 'query-string';
 import { Portal, Icon, Popover } from '@sparkpost/matchbox';
 import { entitledToSupport } from 'src/selectors/support';
-import { createTicket, clearTicketForm, toggleSupportPanel, toggleTicketForm, hydrateTicketForm } from 'src/actions/support';
+import { createTicket, toggleSupportPanel, toggleTicketForm, hydrateTicketForm } from 'src/actions/support';
 import SupportForm from './components/SupportForm';
 import { SearchPanel } from './components/SearchPanel';
 import styles from './Support.module.scss';
@@ -44,11 +44,6 @@ export class Support extends Component {
     }
     toggleSupportPanel();
   }
-
-  resetPanel = () => {
-    this.props.toggleSupportPanel();
-    this.props.clearTicketForm();
-  };
 
   toggleForm = () => {
     this.props.toggleTicketForm();
@@ -105,6 +100,6 @@ const mapStateToProps = (state) => ({
   showTicketForm: state.support.showTicketForm
 });
 
-const mapDispatchToProps = { createTicket, clearTicketForm, toggleSupportPanel, toggleTicketForm, hydrateTicketForm };
+const mapDispatchToProps = { createTicket, toggleSupportPanel, toggleTicketForm, hydrateTicketForm };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Support));

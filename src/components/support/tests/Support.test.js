@@ -1,6 +1,5 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-
 import { Support } from '../Support';
 
 describe('Support Component', () => {
@@ -12,16 +11,20 @@ describe('Support Component', () => {
     ticket_id: 103339
   };
   let wrapper;
-  let createTicket;
-  let clearSupportForm;
-  let props;
   let instance;
 
   beforeEach(() => {
-    createTicket = jest.fn().mockImplementation(() => Promise.resolve(createTicketResult));
-    clearSupportForm = jest.fn();
-
-    props = { createTicket, clearSupportForm, entitledToSupport: true, loggedIn: true };
+    const props = {
+      createTicket: jest.fn().mockImplementation(() => Promise.resolve(createTicketResult)),
+      entitledToSupport: true,
+      loggedIn: true,
+      location: {},
+      toggleSupportPanel: jest.fn(),
+      toggleTicketForm: jest.fn(),
+      hydrateTicketForm: jest.fn(),
+      showPanel: false,
+      showTicketForm: false
+    };
     wrapper = shallow(<Support {...props} />);
     instance = wrapper.instance();
   });
@@ -42,31 +45,51 @@ describe('Support Component', () => {
     });
 
     it('should show search panel and close icon when panel is opened', () => {
-      wrapper.setState({ showPanel: true });
+      wrapper.setProps({ showPanel: true });
       expect(wrapper).toMatchSnapshot();
     });
 
     it('should show form and close icon when panel is opened and form is toggled', () => {
-      wrapper.setState({ showPanel: true, showForm: true });
+      wrapper.setProps({ showPanel: true, showTicketForm: true });
       expect(wrapper).toMatchSnapshot();
     });
   });
 
-  describe('toggleForm/Panel tests tests', () => {
+  describe('on mount', () => {
+    it('should open panel and hydrate form', () => {
+      wrapper.setProps({ location: { search: '?supportTicket=true,supportMessage=testmessage' }});
+      instance.componentDidMount();
+      expect(instance.props.toggleTicketForm).toHaveBeenCalledTimes(1);
+      expect(instance.props.toggleSupportPanel).toHaveBeenCalledTimes(1);
+      expect(instance.props.hydrateTicketForm).toHaveBeenCalledTimes(1);
+    });
+
+    it('should not open panel or hydrate form', () => {
+      expect(instance.props.toggleTicketForm).not.toHaveBeenCalled();
+      expect(instance.props.toggleSupportPanel).not.toHaveBeenCalled();
+      expect(instance.props.hydrateTicketForm).not.toHaveBeenCalledWith();
+    });
+  });
+
+  describe('toggleForm/Panel tests', () => {
     it('should toggle panel', () => {
       expect(wrapper.state('showPanel')).toBeFalsy();
       expect(wrapper.state('showForm')).toBeFalsy();
       instance.togglePanel();
-      expect(wrapper.state('showPanel')).toBeTruthy();
+      expect(instance.props.toggleSupportPanel).toHaveBeenCalledTimes(1);
+      expect(instance.props.toggleTicketForm).not.toHaveBeenCalled();
+    });
+
+    it('should reset to search panel if ticket form was open when closed', () => {
+      wrapper.setProps({ showTicketForm: true });
       instance.togglePanel();
-      expect(wrapper.state('showPanel')).toBeFalsy();
-      expect(wrapper.state('showForm')).toBeFalsy();
+      expect(instance.props.toggleTicketForm).toHaveBeenCalledTimes(1);
+      expect(instance.props.toggleSupportPanel).toHaveBeenCalledTimes(1);
     });
 
     it('should toggle form', () => {
-      expect(wrapper.state('showForm')).toBeFalsy();
       instance.toggleForm();
-      expect(wrapper.state('showForm')).toBeTruthy();
+      expect(instance.props.toggleTicketForm).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -74,20 +97,12 @@ describe('Support Component', () => {
     it('should create a ticket on submit', async() => {
       wrapper.setState({ showForm: true });
       await expect(instance.onSubmit(ticket)).resolves.toBeDefined();
-      expect(createTicket).toHaveBeenCalled();
+      expect(instance.props.createTicket).toHaveBeenCalled();
     });
 
     it('should show an alert on submission failure', async() => {
-      createTicket.mockReturnValueOnce(Promise.reject({}));
+      instance.props.createTicket.mockReturnValueOnce(Promise.reject({}));
       await expect(instance.onSubmit(ticket)).rejects.toBeDefined();
     });
   });
-
-  describe('resetPanel tests', () => {
-    it('should clear out form state on reset', () => {
-      instance.resetPanel();
-      expect(clearSupportForm).toHaveBeenCalled();
-    });
-  });
-
 });

@@ -22,6 +22,9 @@ const props = {
   authenticate: jest.fn(),
   history: {
     push: jest.fn()
+  },
+  location: {
+    search: '?test=one'
   }
 };
 
@@ -53,7 +56,10 @@ it('redirects to default route after mounted when logged in ', () => {
 
 it('redirects to default route when logged in', () => {
   wrapper.setProps({ auth: { loggedIn: true }});
-  expect(props.history.push).toHaveBeenCalledWith(DEFAULT_REDIRECT_ROUTE);
+  expect(props.history.push).toHaveBeenCalledWith({
+    pathname: DEFAULT_REDIRECT_ROUTE,
+    search: '?test=one'
+  });
 });
 
 it('redirects to desired route when logged in', () => {
