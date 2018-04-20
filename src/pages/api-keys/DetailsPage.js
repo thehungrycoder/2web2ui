@@ -7,7 +7,7 @@ import { listApiKeys, deleteApiKey, getApiKey, updateApiKey, listGrants, listSub
 import { showAlert } from 'src/actions/globalAlert';
 
 import { hasSubaccounts } from 'src/selectors/subaccounts';
-import { getFormLoading, selectApiKeyId, getCurrentAPIKey, selectKeysForAccount, isFormReadyOnly } from 'src/selectors/api-keys';
+import { getFormLoading, selectApiKeyId, getCurrentApiKey, isFormReadOnly } from 'src/selectors/api-keys';
 import { selectSubaccountIdFromQuery } from 'src/selectors/subaccounts';
 
 import { Loading, DeleteModal } from 'src/components';
@@ -68,8 +68,7 @@ export class ApiKeysDetailsPage extends Component {
     return (<Banner
       status='info'
     >
-      <p>API keys are only editable by their owner.</p>
-      <p>Owner: {apiKey.username}</p>
+      <p>This API key is only editable by the owner: {apiKey.username}.</p>
     </Banner>);
   }
 
@@ -84,13 +83,13 @@ export class ApiKeysDetailsPage extends Component {
       return <Redirect to='/account/api-keys' />;
     }
 
-    const secondarActions = isReadOnly ? [] : [{ content: 'Delete', onClick: this.onToggleDelete }];
+    const secondaryActions = isReadOnly ? [] : [{ content: 'Delete', onClick: this.onToggleDelete }];
 
     return (
       <Page
         title={apiKey.label}
         breadcrumbAction={breadcrumbAction}
-        secondaryActions={secondarActions}>
+        secondaryActions={secondaryActions}>
         {isReadOnly && this.renderReadOnlyAlert()}
         <Panel>
           <ApiKeyForm apiKey={apiKey} onSubmit={this.onSubmit} isReadOnly={isReadOnly} />
@@ -112,15 +111,15 @@ const mapStateToProps = (state, props) => {
   const { error, grants } = state.apiKeys;
 
   return {
-    apiKey: getCurrentAPIKey(state, props),
+    apiKey: getCurrentApiKey(state, props),
     id: selectApiKeyId(state, props),
-    keys: selectKeysForAccount(state),
+    keys: state.apiKeys.keys,
     error,
     grants,
     hasSubaccounts: hasSubaccounts(state),
     loading: getFormLoading(state) || state.apiKeys.keyLoading,
     subaccount: selectSubaccountIdFromQuery(state, props),
-    isReadOnly: isFormReadyOnly(state, props)
+    isReadOnly: isFormReadOnly(state, props)
   };
 };
 

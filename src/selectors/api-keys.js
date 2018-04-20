@@ -27,23 +27,23 @@ export const getFormLoading = createSelector(
     grantsLoading || subaccountGrantsLoading
 );
 
-export const getCurrentAPIKey = createSelector(
+export const getCurrentApiKey = createSelector(
   [getApiKeys, selectApiKeyId, selectSubaccountIdFromQuery],
-  (keys, id, subaccountId) => _.find(keys, (key) => key.id === id && (!key.subaccountId || key.subaccount_id === subaccountId)));
+  (keys, id, subaccountId) => _.find(keys, (key) => key.id === id && (!key.subaccountId || key.subaccount_id === subaccountId)) || {});
 
 
-export const getIsNew = createSelector(getCurrentAPIKey, (apiKey) =>
+export const getIsNew = createSelector(getCurrentApiKey, (apiKey) =>
   _.isEmpty(apiKey)
 );
 
 export const getInitialGrantsRadio = createSelector(
-  [getGrants, getCurrentAPIKey, getIsNew],
+  [getGrants, getCurrentApiKey, getIsNew],
   (grants, apiKey, isNew) => isNew || _.size(grants) <= _.size(apiKey.grants) ? 'all' : 'select'
 );
 
 export const getInitialValues = createSelector(
-  [getGrants, getCurrentAPIKey],
-  (grantsList, apiKey = {}) => {
+  [getGrants, getCurrentApiKey],
+  (grantsList, apiKey) => {
     const allGrants = _.keys(grantsList);
     /**
      * provides list of checked/unchecked values as
@@ -86,25 +86,17 @@ export const selectApiKeysForSmtp = createSelector(
   (apiKeys) => apiKeys.filter((key) => key.grants.includes('smtp/inject'))
 );
 
-export const isKeyOwnedByCurrentUser = (key, currentUsername) => Boolean((key.username === currentUsername) || (!key.username && key.subaccount_id));
+export const canCurrentUserEditKey = (key, currentUsername) => Boolean((key.username === currentUsername) || (!key.username && key.subaccount_id));
 
-export const selectKeysForAccount = createSelector(
-  [getApiKeys, getCurrentUsername],
-  (keys, currentUsername) => keys.map((key) => ({
-    ...key,
-    isOwnedByCurrentUser: isKeyOwnedByCurrentUser(key, currentUsername)
-  }))
-);
-
-export const isFormReadyOnly = createSelector(
-  [getCurrentUsername, getCurrentAPIKey, getIsNew],
+export const isFormReadOnly = createSelector(
+  [getCurrentUsername, getCurrentApiKey, getIsNew],
   (currentUsername, currentKey, isNew) => {
 
     if (isNew) {
       return false;
     }
 
-    if (isKeyOwnedByCurrentUser(currentKey || {}, currentUsername)) {
+    if (canCurrentUserEditKey(currentKey, currentUsername)) {
       return false;
     }
 

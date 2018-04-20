@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Page } from '@sparkpost/matchbox';
 import { listApiKeys, hideNewApiKey } from 'src/actions/api-keys';
-import { selectKeysForAccount } from 'src/selectors/api-keys';
 import { Loading, SubaccountTag, TableCollection, ApiErrorBanner, ApiKeySuccessBanner, ShortKeyCode } from 'src/components';
 import { filterBoxConfig } from './tableConfig';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
@@ -126,7 +125,7 @@ const mapStateToProps = (state) => {
   const { error, newKey, keysLoading } = state.apiKeys;
   return {
     hasSubaccounts: hasSubaccounts(state),
-    keys: selectKeysForAccount(state),
+    keys: state.apiKeys.keys,
     error,
     newKey,
     loading: keysLoading

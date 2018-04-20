@@ -42,7 +42,7 @@ export class ApiKeyForm extends Component {
     });
   }
 
-  getGrandOptions() {
+  getGrantOptions() {
     const { isReadOnly } = this.props;
 
     return [
@@ -67,7 +67,7 @@ export class ApiKeyForm extends Component {
           />
           <Field
             name='subaccount'
-            helpText='This assigment is permanent. Leave blank to assign to master account.'
+            helpText='This assignment is permanent. Leave blank to assign to master account.'
             component={SubaccountTypeaheadWrapper}
             disabled={!isNew}
           />
@@ -77,7 +77,7 @@ export class ApiKeyForm extends Component {
             name='grantsRadio'
             component={RadioGroup}
             title='API Permissions'
-            options={this.getGrandOptions()}
+            options={this.getGrantOptions()}
           />
           <GrantsCheckboxes grants={this.availableGrants} show={showGrants} disabled={isReadOnly}/>
           <Field
@@ -85,7 +85,7 @@ export class ApiKeyForm extends Component {
             component={TextFieldWrapper}
             label='Allowed IPs'
             helpText='Leaving the field blank will allow access by valid API keys from any IP address.'
-            placeholder='10.20.30.40, 10.20.30.0/24'
+            placeholder={isReadOnly ? '' : '10.20.30.40, 10.20.30.0/24'}
             validate={validIpList}
             disabled={isReadOnly}
           />
