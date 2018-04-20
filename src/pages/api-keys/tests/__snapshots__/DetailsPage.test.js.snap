@@ -16,15 +16,19 @@ exports[`renders correctly in readonly mode 1`] = `
     status="info"
   >
     <p>
-      API keys are only editable by their owner.
-    </p>
-    <p>
-      Owner: 
+      This API key is only editable by the owner: 
+      johndoe
+      .
     </p>
   </Banner>
   <Panel>
     <withRouter(Connect(ReduxForm))
-      apiKey={Object {}}
+      apiKey={
+        Object {
+          "id": "id1",
+          "username": "johndoe",
+        }
+      }
       isReadOnly={true}
       onSubmit={[Function]}
     />
@@ -53,7 +57,12 @@ exports[`renders correctly with no subaccounts 1`] = `
 >
   <Panel>
     <withRouter(Connect(ReduxForm))
-      apiKey={Object {}}
+      apiKey={
+        Object {
+          "id": "id1",
+          "username": "johndoe",
+        }
+      }
       isReadOnly={false}
       onSubmit={[Function]}
     />

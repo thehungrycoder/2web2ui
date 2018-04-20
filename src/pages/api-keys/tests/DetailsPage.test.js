@@ -4,9 +4,13 @@ import React from 'react';
 import { ApiKeysDetailsPage } from '../DetailsPage';
 
 let wrapper;
-
+let props;
 beforeEach(() => {
-  const props = {
+  props = {
+    apiKey: {
+      id: 'id1',
+      username: 'johndoe'
+    },
     loading: false,
     error: null,
     keys: [],
@@ -35,7 +39,19 @@ it('renders correctly with no subaccounts', () => {
   expect(wrapper).toMatchSnapshot();
 });
 
-it('renders correctly with subaccounts', () => {
+it('fetches api keys when store not populated', () => {
+  wrapper.instance().componentDidMount();
+  expect(wrapper.instance().props.listApiKeys).toHaveBeenCalled();
+});
+
+it('does not fetch api keys when store not populated', () => {
+  props.listApiKeys.mockReset();
+  wrapper.setProps({ keys: [{ id: 'key 1' }]});
+  wrapper.instance().componentDidMount();
+  expect(wrapper.instance().props.listApiKeys).not.toHaveBeenCalled();
+});
+
+it('fetches subaccounts when account has subaccounts', () => {
   wrapper.setProps({ hasSubaccounts: true });
   wrapper.instance().componentDidMount();
   expect(wrapper.instance().props.listGrants).toHaveBeenCalled();

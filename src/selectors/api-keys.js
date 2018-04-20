@@ -29,7 +29,9 @@ export const getFormLoading = createSelector(
 
 export const getCurrentApiKey = createSelector(
   [getApiKeys, selectApiKeyId, selectSubaccountIdFromQuery],
-  (keys, id, subaccountId) => _.find(keys, (key) => key.id === id && (!key.subaccountId || key.subaccount_id === subaccountId)) || {});
+  (keys, id, subaccountId) => _.find(keys, (key) =>
+    key.id === id && (!key.subaccount_id || key.subaccount_id === subaccountId)
+  ) || {});
 
 
 export const getIsNew = createSelector(getCurrentApiKey, (apiKey) =>
@@ -79,11 +81,6 @@ export const getSubaccountApiKeys = createSelector(
 export const selectApiKeysForSending = createSelector(
   [getApiKeys],
   (apiKeys) => apiKeys.filter((key) => key.grants.includes('smtp/inject') || key.grants.includes('transmissions/modify'))
-);
-
-export const selectApiKeysForSmtp = createSelector(
-  [getApiKeys],
-  (apiKeys) => apiKeys.filter((key) => key.grants.includes('smtp/inject'))
 );
 
 export const canCurrentUserEditKey = (key, currentUsername) => Boolean((key.username === currentUsername) || (!key.username && key.subaccount_id));

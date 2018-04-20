@@ -13,7 +13,7 @@ exports[`renders correctly - new and no subaccounts 1`] = `
     <Field
       component={[Function]}
       disabled={false}
-      helpText="This assigment is permanent. Leave blank to assign to master account."
+      helpText="This assignment is permanent. Leave blank to assign to master account."
       name="subaccount"
     />
   </Panel.Section>
@@ -91,7 +91,7 @@ exports[`renders correctly - readonly mode 1`] = `
     <Field
       component={[Function]}
       disabled={false}
-      helpText="This assigment is permanent. Leave blank to assign to master account."
+      helpText="This assignment is permanent. Leave blank to assign to master account."
       name="subaccount"
     />
   </Panel.Section>
@@ -140,7 +140,7 @@ exports[`renders correctly - readonly mode 1`] = `
       helpText="Leaving the field blank will allow access by valid API keys from any IP address."
       label="Allowed IPs"
       name="validIps"
-      placeholder="10.20.30.40, 10.20.30.0/24"
+      placeholder=""
       validate={[Function]}
     />
   </Panel.Section>
@@ -160,7 +160,7 @@ exports[`renders correctly - update and subaccounts 1`] = `
     <Field
       component={[Function]}
       disabled={true}
-      helpText="This assigment is permanent. Leave blank to assign to master account."
+      helpText="This assignment is permanent. Leave blank to assign to master account."
       name="subaccount"
     />
   </Panel.Section>
@@ -232,7 +232,7 @@ exports[`submits correctly 1`] = `
     <Field
       component={[Function]}
       disabled={false}
-      helpText="This assigment is permanent. Leave blank to assign to master account."
+      helpText="This assignment is permanent. Leave blank to assign to master account."
       name="subaccount"
     />
   </Panel.Section>
