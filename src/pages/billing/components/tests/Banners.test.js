@@ -48,7 +48,7 @@ describe('Billing Banners: ', () => {
       account: { subscription: { self_serve: true }}
     };
     const wrapper = shallow(<ManuallyBilledBanner {...props} />);
-    expect(wrapper.find('t')).not.toBePresent();
+    expect(wrapper.find('t')).not.toExist();
   });
 
   it('renders Premium banner', () => {
