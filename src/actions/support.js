@@ -1,7 +1,14 @@
 import sparkpostApiRequest from './helpers/sparkpostApiRequest';
 import { change } from 'redux-form';
 
-export function createTicket({ subject, message, attachment }) {
+// Toggles the support panel UI
+export function toggleSupportPanel() {
+  return {
+    type: 'TOGGLE_SUPPORT_PANEL'
+  };
+}
+
+export function createTicket({ subject, message }) {
   return sparkpostApiRequest({
     type: 'CREATE_TICKET',
     meta: {
@@ -9,8 +16,7 @@ export function createTicket({ subject, message, attachment }) {
       url: '/integrations/support/ticket',
       data: {
         subject,
-        message,
-        attachment
+        message
       }
     }
   });
@@ -22,13 +28,15 @@ export function clearTicketForm() {
   };
 }
 
+// Toggles support ticket form (algolia search shown when false)
 export function toggleTicketForm() {
   return {
     type: 'TOGGLE_TICKET_FORM'
   };
 }
 
-export function hydrateTicketForm({ message, subject }) {
+// Fills support ticket form values
+export function hydrateTicketForm({ message, subject } = {}) {
   const formName = 'supportForm'; // Must match the form name used in SupportForm component
 
   return (dispatch) => {
@@ -43,11 +51,5 @@ export function hydrateTicketForm({ message, subject }) {
     return {
       type: 'HYDRATE_TICKET_FORM'
     };
-  };
-}
-
-export function toggleSupportPanel() {
-  return {
-    type: 'TOGGLE_SUPPORT_PANEL'
   };
 }

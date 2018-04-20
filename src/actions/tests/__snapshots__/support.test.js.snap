@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Action Creator: Support clearTicketForm should clear ticket form 1`] = `
+Object {
+  "type": "RESET_TICKET_FORM",
+}
+`;
+
+exports[`Action Creator: Support createTicket should create a ticket 1`] = `
+Object {
+  "meta": Object {
+    "data": Object {
+      "message": "mess",
+      "subject": "sub",
+    },
+    "method": "POST",
+    "url": "/integrations/support/ticket",
+  },
+  "type": "CREATE_TICKET",
+}
+`;
+
+exports[`Action Creator: Support hydrateTicketForm should not hydrate without values 1`] = `
+Object {
+  "type": "HYDRATE_TICKET_FORM",
+}
+`;
+
+exports[`Action Creator: Support toggleSupportPanel should toggle panel 1`] = `
+Object {
+  "type": "TOGGLE_SUPPORT_PANEL",
+}
+`;
+
+exports[`Action Creator: Support toggleTicketForm should toggle ticket form 1`] = `
+Object {
+  "type": "TOGGLE_TICKET_FORM",
+}
+`;

@@ -10,12 +10,6 @@ import { SearchPanel } from './components/SearchPanel';
 import styles from './Support.module.scss';
 
 export class Support extends Component {
-
-  state = {
-    showPanel: false,
-    showForm: false
-  };
-
   componentDidMount() {
     const { location, toggleSupportPanel, toggleTicketForm, hydrateTicketForm } = this.props;
     const { supportTicket, supportMessage: message, supportSubject: subject } = qs.parse(location.search);
