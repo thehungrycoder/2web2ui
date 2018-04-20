@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Page } from '@sparkpost/matchbox';
+import { Page, Tooltip, Icon } from '@sparkpost/matchbox';
+import { Setup } from 'src/components/images';
 import { listApiKeys, hideNewApiKey } from 'src/actions/api-keys';
 import { Loading, SubaccountTag, TableCollection, ApiErrorBanner, ApiKeySuccessBanner, ShortKeyCode } from 'src/components';
 import { filterBoxConfig } from './tableConfig';
@@ -115,7 +116,7 @@ export class ListPage extends Component {
     return (
       <Page primaryAction={primaryAction} title='API Keys' empty={{
         show: keys.length === 0,
-        image: 'Setup',
+        image: Setup,
         content: <p>Create an API key you can use to access our REST or SMTP API services.</p>,
         secondaryAction: {
           content: 'View our API Docs',

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { TableCollection, ApiErrorBanner, Loading, SubaccountTag } from 'src/components';
+import { Templates } from 'src/components/images';
 import { Page } from '@sparkpost/matchbox';
 import Editor from './components/Editor'; // async, for preload
 
@@ -95,7 +96,7 @@ export default class ListPage extends Component {
         title='Templates'
         empty={{
           show: count === 0,
-          image: 'Templates',
+          image: Templates,
           title: 'Manage your email templates',
           content: <p>Build, test, preview and send your transmissions.</p>
         }} >

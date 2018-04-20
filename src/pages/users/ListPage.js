@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import fp from 'lodash/fp';
 import { Page } from '@sparkpost/matchbox';
+import { Users } from 'src/components/images';
 import TimeAgo from 'react-timeago';
 
 import * as usersActions from 'src/actions/users';
@@ -138,7 +139,7 @@ export class ListPage extends Component {
         empty={{
           show: users.length === 1,
           title: 'Invite Your Team to SparkPost',
-          image: 'Users',
+          image: Users,
           content: <p>Manage your team's accounts and roles.</p>
         }}>
         { error ? this.renderError() : this.renderPage() }
