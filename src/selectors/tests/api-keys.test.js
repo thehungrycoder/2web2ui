@@ -156,62 +156,6 @@ describe('ApiKey Selectors', () => {
     expect(apiKeys.selectApiKeysForSending(store)).toMatchSnapshot();
   });
 
-  describe('isFormReadOnly', () => {
-    let store;
-    let props;
-    beforeEach(() => {
-      store = {
-        currentUser: { username: 'me' },
-        apiKeys: {
-          keys: [
-            {
-              id: 'key1',
-              username: 'user1'
-            },
-            {
-              id: 'key2',
-              username: 'user2'
-            },
-            {
-              id: 'key3',
-              subaccount_id: 123
-            }
-          ]
-        }
-      };
-      props = {
-        match: {
-          params: {
-            id: 'key1'
-          }
-        },
-        location: {
-          search: '?subaccount=123'
-        },
-        apiKey: { id: 'key1' }
-      };
-    });
-
-    it('returns true when form is not new and api key not owned by current user ', () => {
-      expect(apiKeys.isFormReadOnly(store, props)).toBe(true);
-    });
-
-    it('returns false when subaccount_id exists for key', () => {
-      props.match.params.id = 'key3';
-      expect(apiKeys.isFormReadOnly(store, props)).toBe(false);
-    });
-
-    it('returns false for a new form', () => {
-      store.apiKeys.keys[0] = {};
-      expect(apiKeys.isFormReadOnly(store, props)).toBe(false);
-    });
-
-    it('returns false when current username same as key username', () => {
-      store.currentUser.username = 'user1';
-      expect(apiKeys.isFormReadOnly(store, props)).toBe(false);
-    });
-  });
-
   describe('getCurrentAPIKey', () => {
     it('returns correct apiKey from store based on query string', () => {
       props.match.params.id = 'Zebra';
@@ -238,6 +182,40 @@ describe('ApiKey Selectors', () => {
     it('returns false if usernames do not match', () => {
       expect(apiKeys.canCurrentUserEditKey({ username: 'abc' }, 'def')).toBe(false);
       expect(apiKeys.canCurrentUserEditKey({ username: 'abc', subaccount_id: 123 }, 'def')).toBe(false);
+    });
+  });
+
+  describe('selectKeysForAccount', () => {
+    it('should return a list of keys with ownership details', () => {
+      const store = {
+        currentUser: {
+          username: 'abc'
+        },
+        apiKeys: {
+          keys: [
+            {
+              // same username
+              username: 'abc'
+            },
+            {
+              // different username
+              username: 'other'
+            },
+            {
+              // no username but has a subaccount_id
+              subaccount_id: 123
+            },
+            {
+              // no username and no subaccount_id (should never happen but should produce false if so)
+              lol: 'wut'
+            }
+          ]
+        }
+      };
+
+      const list = apiKeys.selectKeysForAccount(store);
+      expect(list.map((key) => key.canCurrentUserEdit)).toEqual([true, false, true, false]);
+      expect(list).toMatchSnapshot();
     });
   });
 });

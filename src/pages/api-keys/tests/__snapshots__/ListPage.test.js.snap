@@ -5,7 +5,7 @@ Array [
   Array [
     <Link
       replace={false}
-      to="/account/api-keys/details/123id?subaccount=101"
+      to="/account/api-keys/edit/123id?subaccount=101"
     >
       Test Key 1
     </Link>,
@@ -16,7 +16,7 @@ Array [
   Array [
     <Link
       replace={false}
-      to="/account/api-keys/details/456id"
+      to="/account/api-keys/edit/456id"
     >
       Test Key 2
     </Link>,
@@ -27,7 +27,7 @@ Array [
   Array [
     <Link
       replace={false}
-      to="/account/api-keys/details/789id"
+      to="/account/api-keys/view/789id"
     >
       Other User Key
     </Link>,
@@ -103,30 +103,30 @@ exports[`Api Keys List Page renders correctly 1`] = `
     rows={
       Array [
         Object {
+          "canCurrentUserEdit": true,
           "grants": Array [
             "metrics/view",
           ],
           "id": "123id",
-          "isOwnedByCurrentUser": true,
           "label": "Test Key 1",
           "short_key": "ab01",
           "subaccount_id": 101,
         },
         Object {
+          "canCurrentUserEdit": true,
           "grants": Array [
             "smtp/inject",
           ],
           "id": "456id",
-          "isOwnedByCurrentUser": true,
           "label": "Test Key 2",
           "short_key": "fe98",
         },
         Object {
+          "canCurrentUserEdit": false,
           "grants": Array [
             "metrics/view",
           ],
           "id": "789id",
-          "isOwnedByCurrentUser": false,
           "label": "Other User Key",
           "short_key": "c00l",
           "username": "other_user",
@@ -259,7 +259,7 @@ exports[`Api Keys List Page should render correctly with subaccounts 2`] = `
 Array [
   <Link
     replace={false}
-    to="/account/api-keys/details/123id?subaccount=101"
+    to="/account/api-keys/edit/123id?subaccount=101"
   >
     Test Key 1
   </Link>,
@@ -344,30 +344,30 @@ exports[`Api Keys List Page should show api key banner on successful create 1`] 
     rows={
       Array [
         Object {
+          "canCurrentUserEdit": true,
           "grants": Array [
             "metrics/view",
           ],
           "id": "123id",
-          "isOwnedByCurrentUser": true,
           "label": "Test Key 1",
           "short_key": "ab01",
           "subaccount_id": 101,
         },
         Object {
+          "canCurrentUserEdit": true,
           "grants": Array [
             "smtp/inject",
           ],
           "id": "456id",
-          "isOwnedByCurrentUser": true,
           "label": "Test Key 2",
           "short_key": "fe98",
         },
         Object {
+          "canCurrentUserEdit": false,
           "grants": Array [
             "metrics/view",
           ],
           "id": "789id",
-          "isOwnedByCurrentUser": false,
           "label": "Other User Key",
           "short_key": "c00l",
           "username": "other_user",

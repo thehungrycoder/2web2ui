@@ -87,5 +87,5 @@ export const canCurrentUserEditKey = (key, currentUsername) => Boolean((key.user
 
 export const selectKeysForAccount = createSelector(
   [getApiKeys, getCurrentUsername],
-  (keys, currentUsername) => keys.map((key) => ({ ...key, canCurrentUserEdit: canCurrentUserEditKey(key, key, currentUsername) }))
+  (keys, currentUsername) => keys.map((key) => ({ ...key, canCurrentUserEdit: canCurrentUserEditKey(key, currentUsername) }))
 );

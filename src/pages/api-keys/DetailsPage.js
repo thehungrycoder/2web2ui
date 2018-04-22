@@ -8,7 +8,6 @@ import { listApiKeys, getApiKey, listGrants } from 'src/actions/api-keys';
 import { showAlert } from 'src/actions/globalAlert';
 
 import { getFormLoading, getCurrentApiKey } from 'src/selectors/api-keys';
-import { selectSubaccountIdFromQuery } from 'src/selectors/subaccounts';
 
 import { Loading } from 'src/components';
 import ApiKeyForm from './components/ApiKeyForm';
@@ -77,8 +76,7 @@ const mapStateToProps = (state, props) => {
     apiKey: getCurrentApiKey(state, props),
     keys: state.apiKeys.keys,
     grants,
-    loading: getFormLoading(state) || state.apiKeys.keysLoading,
-    subaccount: selectSubaccountIdFromQuery(state, props)
+    loading: getFormLoading(state) || state.apiKeys.keysLoading
   };
 };
 
