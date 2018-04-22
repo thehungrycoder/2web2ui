@@ -5,6 +5,8 @@ import { Page } from '@sparkpost/matchbox';
 import { listApiKeys, hideNewApiKey } from 'src/actions/api-keys';
 import { Loading, SubaccountTag, TableCollection, ApiErrorBanner, ApiKeySuccessBanner, ShortKeyCode } from 'src/components';
 import { filterBoxConfig } from './tableConfig';
+import { selectKeysForAccount } from 'src/selectors/api-keys';
+
 import { hasSubaccounts } from 'src/selectors/subaccounts';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
 import { LINKS } from 'src/constants';
@@ -28,7 +30,13 @@ export class ListPage extends Component {
     this.props.listApiKeys();
   }
 
-  getLabel = ({ id, subaccount_id, label }) => <Link to={`/account/api-keys/details/${id}${setSubaccountQuery(subaccount_id)}`}>{label}</Link>
+  getLabel = ({ canCurrentUserEdit, id, subaccount_id, label, username }) => {
+    if (canCurrentUserEdit) {
+      return <Link to={`/account/api-keys/edit/${id}${setSubaccountQuery(subaccount_id)}`}>{label}</Link>;
+    } else {
+      return <Link to={`/account/api-keys/view/${id}${setSubaccountQuery(subaccount_id)}`}>{label}</Link>;
+    }
+  }
 
   getRowData = (key) => {
     const { short_key, subaccount_id } = key;
@@ -125,7 +133,7 @@ const mapStateToProps = (state) => {
   const { error, newKey, keysLoading } = state.apiKeys;
   return {
     hasSubaccounts: hasSubaccounts(state),
-    keys: state.apiKeys.keys,
+    keys: selectKeysForAccount(state),
     error,
     newKey,
     loading: keysLoading

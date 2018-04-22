@@ -85,17 +85,7 @@ export const selectApiKeysForSending = createSelector(
 
 export const canCurrentUserEditKey = (key, currentUsername) => Boolean((key.username === currentUsername) || (!key.username && key.subaccount_id));
 
-export const isFormReadOnly = createSelector(
-  [getCurrentUsername, getCurrentApiKey, getIsNew],
-  (currentUsername, currentKey, isNew) => {
-
-    if (isNew) {
-      return false;
-    }
-
-    if (canCurrentUserEditKey(currentKey, currentUsername)) {
-      return false;
-    }
-
-    return true;
-  });
+export const selectKeysForAccount = createSelector(
+  [getApiKeys, getCurrentUsername],
+  (keys, currentUsername) => keys.map((key) => ({ ...key, canCurrentUserEdit: canCurrentUserEditKey(key, key, currentUsername) }))
+);
