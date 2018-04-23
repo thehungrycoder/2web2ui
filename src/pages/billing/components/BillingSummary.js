@@ -9,6 +9,7 @@ import AddIps from '../forms/AddIps';
 import DedicatedIpSummarySection from './DedicatedIpSummarySection';
 import CardSummary from './CardSummary';
 import PlanSummary from './PlanSummary';
+import InvoiceHistory from './InvoiceHistory';
 
 const PAYMENT_MODAL = 'payment';
 const CONTACT_MODAL = 'contact';
@@ -76,6 +77,8 @@ export default class BillingSummary extends Component {
         </Panel>
 
         {canUpdateBillingInfo && this.renderSummary()}
+
+        {/* FE-294 */} <InvoiceHistory />
 
         <PremiumBanner />
         <EnterpriseBanner />
