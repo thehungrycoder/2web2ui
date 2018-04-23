@@ -1,0 +1,15 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.ToggleButton {
+  float: right;
+}
+
+.Phone {
+  display: inline-block;
+
+  p {
+    margin-bottom: 0;
+    font-size: rem(13);
+    line-height: 1.4em;
+  }
+}

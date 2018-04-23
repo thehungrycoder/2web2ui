@@ -3,9 +3,14 @@ import { createSelector } from 'reselect';
 import { currentPlanSelector } from './accountBillingInfo';
 const getAccountSupport = (state) => state.account.support;
 
-export const entitledToSupport = createSelector(
+export const entitledToOnlineSupport = createSelector(
   [getAccountSupport],
   (support) => support && support.online
+);
+
+export const entitledToPhoneSupport = createSelector(
+  [getAccountSupport],
+  (support) => support && support.phone
 );
 
 export const allowSendingLimitRequestSelector = createSelector(

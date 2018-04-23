@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import qs from 'query-string';
 import { Portal, Icon, Popover } from '@sparkpost/matchbox';
-import { entitledToSupport } from 'src/selectors/support';
+import { entitledToOnlineSupport } from 'src/selectors/support';
 import * as supportActions from 'src/actions/support';
 import SupportForm from './components/SupportForm';
 import { SearchPanel } from './components/SearchPanel';
@@ -68,9 +68,9 @@ export class Support extends Component {
   }
 
   render() {
-    const { loggedIn, entitledToSupport, showPanel } = this.props;
+    const { loggedIn, entitledToOnlineSupport, showPanel } = this.props;
 
-    if (!loggedIn || !entitledToSupport) {
+    if (!loggedIn || !entitledToOnlineSupport) {
       return null;
     }
 
@@ -102,7 +102,7 @@ export class Support extends Component {
 
 const mapStateToProps = (state) => ({
   loggedIn: state.auth.loggedIn,
-  entitledToSupport: entitledToSupport(state),
+  entitledToOnlineSupport: entitledToOnlineSupport(state),
   showPanel: state.support.showPanel,
   showTicketForm: state.support.showTicketForm
 });
