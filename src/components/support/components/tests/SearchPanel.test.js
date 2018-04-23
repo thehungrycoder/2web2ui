@@ -16,11 +16,4 @@ describe('Search Panel Component', () => {
   it('should render', () => {
     expect(wrapper).toMatchSnapshot();
   });
-
-  it('should call toggleForm on button click', () => {
-    wrapper.find('Button').simulate('click');
-    expect(wrapper.instance().props.toggleForm).toHaveBeenCalled();
-  });
-
 });
-

@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Support CTA Component should render 1`] = `
+<React.Fragment>
+  <span>
+    Do you need more assistance?
+  </span>
+  <Button
+    onClick={[MockFunction]}
+    primary={true}
+    size="default"
+  >
+    Submit a Ticket
+  </Button>
+</React.Fragment>
+`;
+
+exports[`Support CTA Component should render with phone support 1`] = `
+<React.Fragment>
+  <div>
+    <p>
+      Phone Support: 
+      <strong>
+        415-751-0928
+      </strong>
+    </p>
+    <p>
+      Available: 
+      <strong>
+        9am - 7pm EST, Mon-Fri
+      </strong>
+    </p>
+  </div>
+  <Button
+    onClick={[MockFunction]}
+    primary={true}
+    size="default"
+  >
+    Submit a Ticket
+  </Button>
+</React.Fragment>
+`;

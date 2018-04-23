@@ -4,7 +4,7 @@ import { entitledToPhoneSupport } from 'src/selectors/support';
 import { Button } from '@sparkpost/matchbox';
 import styles from './SupportCta.module.scss';
 
-const SupportCta = ({ entitledToPhoneSupport, toggleForm }) => {
+export const SupportCta = ({ entitledToPhoneSupport, toggleForm }) => {
   let leftContent = <span>Do you need more assistance?</span>;
 
   if (entitledToPhoneSupport) {
