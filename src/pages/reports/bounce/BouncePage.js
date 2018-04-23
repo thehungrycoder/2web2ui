@@ -80,7 +80,8 @@ export class BouncePage extends Component {
           classification: 'bounce_class_name'
         },
         itemToStringKeys: ['bounce_category_name', 'bounce_class_name', 'domain', 'reason'],
-        exampleModifiers: ['domain', 'category', 'classification']
+        exampleModifiers: ['domain', 'category', 'classification'],
+        matchThreshold: 5
       }}
     />;
   }

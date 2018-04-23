@@ -54,6 +54,7 @@ exports[`Rejection Data Table:  renders correctly 1`] = `
       "keyMap": Object {
         "category": "rejection_category_name",
       },
+      "matchThreshold": 5,
       "show": true,
     }
   }
