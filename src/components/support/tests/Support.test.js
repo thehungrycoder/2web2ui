@@ -15,7 +15,7 @@ describe('Support Component', () => {
 
   beforeEach(() => {
     const props = {
-      createTicket: jest.fn().mockImplementation(() => Promise.resolve(createTicketResult)),
+      createTicket: jest.fn(() => Promise.resolve(createTicketResult)),
       entitledToSupport: true,
       loggedIn: true,
       location: {},
@@ -58,6 +58,7 @@ describe('Support Component', () => {
   describe('on mount', () => {
     it('should open panel and hydrate form', () => {
       wrapper.setProps({ location: { search: '?supportTicket=true,supportMessage=testmessage' }});
+      jest.resetAllMocks(); // To clear the initial mount call
       instance.componentDidMount();
       expect(instance.props.toggleTicketForm).toHaveBeenCalledTimes(1);
       expect(instance.props.toggleSupportPanel).toHaveBeenCalledTimes(1);
@@ -67,7 +68,22 @@ describe('Support Component', () => {
     it('should not open panel or hydrate form', () => {
       expect(instance.props.toggleTicketForm).not.toHaveBeenCalled();
       expect(instance.props.toggleSupportPanel).not.toHaveBeenCalled();
-      expect(instance.props.hydrateTicketForm).not.toHaveBeenCalledWith();
+      expect(instance.props.hydrateTicketForm).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('on update', () => {
+    it('should open panel and hydrate form', () => {
+      wrapper.setProps({ location: { search: '?supportTicket=true,supportMessage=testmessage' }});
+      expect(instance.props.toggleTicketForm).toHaveBeenCalledTimes(1);
+      expect(instance.props.toggleSupportPanel).toHaveBeenCalledTimes(1);
+      expect(instance.props.hydrateTicketForm).toHaveBeenCalledTimes(1);
+    });
+
+    it('should not open panel or hydrate form', () => {
+      expect(instance.props.toggleTicketForm).not.toHaveBeenCalled();
+      expect(instance.props.toggleSupportPanel).not.toHaveBeenCalled();
+      expect(instance.props.hydrateTicketForm).not.toHaveBeenCalled();
     });
   });
 

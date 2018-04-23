@@ -4,13 +4,24 @@ import { withRouter } from 'react-router';
 import qs from 'query-string';
 import { Portal, Icon, Popover } from '@sparkpost/matchbox';
 import { entitledToSupport } from 'src/selectors/support';
-import { createTicket, toggleSupportPanel, toggleTicketForm, hydrateTicketForm } from 'src/actions/support';
+import * as supportActions from 'src/actions/support';
 import SupportForm from './components/SupportForm';
 import { SearchPanel } from './components/SearchPanel';
 import styles from './Support.module.scss';
 
 export class Support extends Component {
   componentDidMount() {
+    this.maybeOpenTicket();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.location.search !== prevProps.location.search) {
+      this.maybeOpenTicket();
+    }
+  }
+
+  // Opens and hydrates support ticket form from query params
+  maybeOpenTicket = () => {
     const { location, toggleSupportPanel, toggleTicketForm, hydrateTicketForm } = this.props;
     const { supportTicket, supportMessage: message, supportSubject: subject } = qs.parse(location.search);
 
@@ -94,6 +105,4 @@ const mapStateToProps = (state) => ({
   showTicketForm: state.support.showTicketForm
 });
 
-const mapDispatchToProps = { createTicket, toggleSupportPanel, toggleTicketForm, hydrateTicketForm };
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Support));
+export default withRouter(connect(mapStateToProps, supportActions)(Support));
