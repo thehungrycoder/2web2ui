@@ -11,6 +11,9 @@ const props = {
     loggedIn: false,
     loginPending: false
   },
+  location: {
+    search: ''
+  },
   tfa: {
     enabled: false,
     username: 'bertha',
@@ -127,4 +130,9 @@ it('should redirect to sso if there is a sso user', () => {
 it('should set sso enabled if there ssoUser is null', () => {
   wrapper.setProps({ auth: { ssoUser: null }});
   expect(wrapper.state().ssoEnabled).toBeFalsy();
+});
+
+it('should display sso error message', () => {
+  wrapper.setProps({ location: { search: `?error=${btoa('Oh no!')}` }});
+  expect(wrapper).toMatchSnapshot();
 });
