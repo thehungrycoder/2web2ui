@@ -25,7 +25,7 @@ exports[`Support Component render tests should render just the icon by default 1
         </a>
       }
     >
-      <Component
+      <SearchPanel
         toggleForm={[Function]}
       />
     </Popover>
@@ -93,7 +93,7 @@ exports[`Support Component render tests should show search panel and close icon 
         </a>
       }
     >
-      <Component
+      <SearchPanel
         toggleForm={[Function]}
       />
     </Popover>

@@ -26,6 +26,8 @@ export const SupportCta = ({ entitledToPhoneSupport, toggleForm }) => {
   );
 };
 
+SupportCta.displayName = 'SupportCta';
+
 const mapStateToProps = (state) => ({
   entitledToPhoneSupport: entitledToPhoneSupport(state)
 });

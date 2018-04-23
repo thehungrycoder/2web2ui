@@ -8,7 +8,7 @@ import AlgoliaSearch from './AlgoliaSearch.js';
 import config from 'src/config';
 const searchCfg = config.support.algolia;
 
-export const SearchPanel = ({ toggleForm }) => (
+const SearchPanel = ({ toggleForm }) => (
   <InstantSearch
     appId={searchCfg.appID}
     apiKey={searchCfg.apiKey}
@@ -25,3 +25,5 @@ export const SearchPanel = ({ toggleForm }) => (
     </Panel.Section>
   </InstantSearch>
 );
+
+export default SearchPanel;

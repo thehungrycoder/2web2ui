@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { SearchPanel } from '../SearchPanel';
+import SearchPanel from '../SearchPanel';
 
 describe('Search Panel Component', () => {
   let wrapper;
