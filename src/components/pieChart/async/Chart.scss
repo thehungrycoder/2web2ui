@@ -6,7 +6,8 @@
 
 .Chart--hover {
   .recharts-sector {
-    opacity: 0.4;
+    opacity: 1;
+    -webkit-opacity: 0.4;
   }
 }
 
