@@ -70,3 +70,11 @@ export function stripTags(html) {
     .replace(spacesRegex, space) // avoid multiple spaces between words
     .trim();
 }
+
+export function decodeBase64(str) {
+  try {
+    return atob(str);
+  } catch (e) {
+    return undefined; // ignore parsing error
+  }
+}

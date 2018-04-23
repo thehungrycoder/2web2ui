@@ -1,6 +1,6 @@
 import {
   snakeToFriendly, snakeToCamel, slugify, shrinkToFit, stringToArray, stringifyTypeaheadfilter,
-  stripTags
+  stripTags, decodeBase64
 } from '../string';
 
 describe('snakeToFrindly', () => {
@@ -75,5 +75,16 @@ describe('stripTags', () => {
 
   it('should replace newline strings with a space', () => {
     expect(stripTags('This is\\r\\na test.')).toEqual('This is a test.');
+  });
+});
+
+describe('decodeBase64', () => {
+  it('should ignores errors and returns undefined', () => {
+    expect(decodeBase64()).toBeUndefined();
+  });
+
+  it('should decode and return string', () => {
+    const encoded = btoa('Testing!');
+    expect(decodeBase64(encoded)).toEqual('Testing!');
   });
 });
