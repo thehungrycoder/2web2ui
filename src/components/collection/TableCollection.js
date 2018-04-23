@@ -54,6 +54,8 @@ class TableCollection extends Component {
         rowComponent={TableRow}
         { ...this.props}
         rows={sortedRows}
+        sortColumn={sortColumn}
+        sortDirection={sortDirection}
       />
     );
   }

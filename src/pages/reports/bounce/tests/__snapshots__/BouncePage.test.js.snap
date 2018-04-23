@@ -67,6 +67,7 @@ exports[`BouncePage:  should display loading panel on top level metrics when agg
           "category": "bounce_category_name",
           "classification": "bounce_class_name",
         },
+        "matchThreshold": 5,
         "show": true,
       }
     }
@@ -164,6 +165,7 @@ exports[`BouncePage:  should render 1`] = `
           "category": "bounce_category_name",
           "classification": "bounce_class_name",
         },
+        "matchThreshold": 5,
         "show": true,
       }
     }
@@ -244,6 +246,7 @@ exports[`BouncePage:  should render correctly with no bounces 1`] = `
           "category": "bounce_category_name",
           "classification": "bounce_class_name",
         },
+        "matchThreshold": 5,
         "show": true,
       }
     }

@@ -317,3 +317,31 @@ exports[`Component: Collection should render with custom wrappers 1`] = `
   </CustomOuterWrapper>
 </div>
 `;
+
+exports[`Component: Collection state changes should obey sort direction 1`] = `
+Array [
+  Object {
+    "col1": 3,
+  },
+  Object {
+    "col1": 2,
+  },
+  Object {
+    "col1": 1,
+  },
+]
+`;
+
+exports[`Component: Collection state changes should sort by column when sortColumn is present 1`] = `
+Array [
+  Object {
+    "col1": 1,
+  },
+  Object {
+    "col1": 2,
+  },
+  Object {
+    "col1": 3,
+  },
+]
+`;
