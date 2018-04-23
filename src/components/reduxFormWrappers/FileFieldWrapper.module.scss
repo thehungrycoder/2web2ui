@@ -15,9 +15,8 @@
 
 .Dropzone {
   @extend .Input;
-  border-right-style: none;
-  border-bottom-right-radius: 0;
-  border-top-right-radius: 0;
+  border-style: dashed;
+  text-align: center;
   cursor: pointer;
 }
 

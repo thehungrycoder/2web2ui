@@ -1,8 +1,7 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
-import { Button, Error, Label } from '@sparkpost/matchbox';
-
+import { Error, Label, Icon } from '@sparkpost/matchbox';
 import styles from './FileFieldWrapper.module.scss';
 
 // TODO: Integrate in Matchbox if Dropzone isn't too big of a dependency
@@ -30,13 +29,14 @@ export default class FileFieldWrapper extends Component {
   render() {
     const { disabled, fileType, helpText, input, label, meta, required } = this.props;
     const filename = _.get(input, 'value.name');
+    const acceptedTypes = fileType ? `.${fileType}` : '';
 
     return (
       <fieldset className={styles.Field}>
         <Label id={input.id}>{label}{required && ' *'}</Label>
         <div className={styles.InputWrapper}>
           <Dropzone
-            accept={`.${fileType}`}
+            accept={acceptedTypes}
             activeClassName={styles.DropzoneActive}
             className={styles.Dropzone}
             disabledClassName={styles.DropzoneDisabled}
@@ -51,15 +51,8 @@ export default class FileFieldWrapper extends Component {
           >
             {filename
               ? <span>{filename}</span>
-              : <span className={styles.Placeholder}>example.{fileType}</span>}
+              : <span className={styles.Placeholder}><Icon name='Upload' /> Drag a file here, or click to browse</span>}
           </Dropzone>
-          <Button
-            className={styles.Button}
-            disabled={disabled}
-            onClick={this.handleOpen}
-          >
-            Choose File
-          </Button>
         </div>
         {helpText && <div className={styles.Help}>{helpText}</div>}
         {meta.touched && meta.error && <Error error={meta.error} />}

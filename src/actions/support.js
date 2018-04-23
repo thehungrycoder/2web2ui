@@ -8,16 +8,24 @@ export function toggleSupportPanel() {
   };
 }
 
-export function createTicket({ subject, message }) {
+/**
+ * Creates a support ticket with a subject, message, and optional file attachment
+ *
+ * @param {Object} data
+ * @param {String} data.subject
+ * @param {String} data.message
+ * @param {Object} data.attachment
+ * @param {String} data.attachment.filename
+ * @param {Base64 String} data.attachment.content
+ *
+ */
+export function createTicket(data) {
   return sparkpostApiRequest({
     type: 'CREATE_TICKET',
     meta: {
       method: 'POST',
       url: '/integrations/support/ticket',
-      data: {
-        subject,
-        message
-      }
+      data
     }
   });
 }

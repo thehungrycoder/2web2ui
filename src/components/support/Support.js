@@ -7,6 +7,7 @@ import { entitledToOnlineSupport } from 'src/selectors/support';
 import * as supportActions from 'src/actions/support';
 import SupportForm from './components/SupportForm';
 import SearchPanel from './components/SearchPanel';
+import { getBase64Contents } from 'src/helpers/file';
 import styles from './Support.module.scss';
 
 export class Support extends Component {
@@ -34,10 +35,15 @@ export class Support extends Component {
     }
   }
 
-  onSubmit = (values) => {
+  onSubmit = async(values) => {
     const { createTicket } = this.props;
-    const { subject, message } = values;
-    const ticket = { subject, message };
+    const { message, subject, attachment } = values;
+    let ticket = { message, subject };
+
+    if (attachment) {
+      const encoded = await getBase64Contents(attachment);
+      ticket = { ...ticket, attachment: { filename: attachment.name, content: encoded }};
+    }
 
     return createTicket(ticket);
   };
@@ -91,7 +97,7 @@ export class Support extends Component {
             open={showPanel}
             trigger={triggerMarkup}>
 
-            { this.renderPanel() }
+            {this.renderPanel()}
 
           </Popover>
         </div>
