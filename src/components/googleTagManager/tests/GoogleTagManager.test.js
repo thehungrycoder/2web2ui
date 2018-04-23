@@ -66,7 +66,6 @@ describe('Component: GoogleTagManager', () => {
       'content-title': 'Test Public Title',
       username: undefined
     });
-    wrapper.setProps({ username: 'loaded' });
   });
 
   it('should track a new page view when the location changes', () => {
