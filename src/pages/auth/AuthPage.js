@@ -2,6 +2,7 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import qs from 'query-string';
 import { authenticate, ssoCheck, login } from 'src/actions/auth';
 import { verifyAndLogin } from 'src/actions/tfa';
 import { CenteredLogo } from 'src/components';
@@ -12,6 +13,7 @@ import config from 'src/config';
 import { DEFAULT_REDIRECT_ROUTE } from 'src/constants';
 import LoginForm from './components/LoginForm';
 import TfaForm from './components/TfaForm';
+import { decodeBase64 } from 'src/helpers/string';
 
 export class AuthPage extends Component {
   constructor(props) {
@@ -53,17 +55,11 @@ export class AuthPage extends Component {
   }
 
   ssoSignIn(username) {
-    return this.props.ssoCheck(username).catch((err) => err);
+    return this.props.ssoCheck(username);
   }
 
   regularSignIn(username, password, rememberMe) {
     return this.props.authenticate(username, password, rememberMe);
-  }
-
-  renderLoginError(errorDescription) {
-    return (
-      <Error error={errorDescription} />
-    );
   }
 
   loginSubmit = (values) => {
@@ -84,9 +80,10 @@ export class AuthPage extends Component {
   }
 
   render() {
-    const { errorDescription } = this.props.auth;
+    const { auth, location, tfa } = this.props;
     const hasSignup = (config.featureFlags || {}).has_signup;
-    const { tfa } = this.props;
+    const search = qs.parse(location.search);
+    const loginError = decodeBase64(search.error) || auth.errorDescription; // SSO or submit error
 
     const footerMarkup = !tfa.enabled
       ? <Panel.Footer
@@ -98,7 +95,7 @@ export class AuthPage extends Component {
       <div>
         <CenteredLogo />
         <Panel sectioned accent title="Log In">
-          { errorDescription && this.renderLoginError(errorDescription)}
+          {loginError && <Error error={loginError} />}
 
           { tfa.enabled && <TfaForm onSubmit={this.tfaSubmit} /> }
           { !tfa.enabled && <LoginForm onSubmit={this.loginSubmit} ssoEnabled={this.state.ssoEnabled}/> }

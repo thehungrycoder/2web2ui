@@ -61,6 +61,38 @@ exports[`renders correctly when there is a login error 1`] = `
 </div>
 `;
 
+exports[`should display sso error message 1`] = `
+<div>
+  <CenteredLogo />
+  <Panel
+    accent={true}
+    sectioned={true}
+    title="Log In"
+  >
+    <Error
+      error="Oh no!"
+    />
+    <Connect(ReduxForm)
+      onSubmit={[Function]}
+      ssoEnabled={false}
+    />
+  </Panel>
+  <Panel.Footer
+    left={false}
+    right={
+      <small>
+        <UnstyledLink
+          Component={[Function]}
+          to="/forgot-password"
+        >
+          Forgot your password?
+        </UnstyledLink>
+      </small>
+    }
+  />
+</div>
+`;
+
 exports[`should display tfa form when TFA is enabled 1`] = `
 <div>
   <CenteredLogo />
