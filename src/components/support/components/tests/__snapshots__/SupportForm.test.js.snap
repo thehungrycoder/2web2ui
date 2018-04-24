@@ -35,7 +35,7 @@ exports[`Support Form Component Form should render 1`] = `
       />
       <Field
         component={[Function]}
-        label="Attachment"
+        label="Attach a file (optional)"
         name="attachment"
         type="file"
         validate={[Function]}

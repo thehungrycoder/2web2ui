@@ -20,17 +20,13 @@ exports[`FileFieldWrapper renders disabled file input 1`] = `
       preventDropOnDocument={true}
     >
       <span>
-        example.
-        csv
+        <Icon
+          name="Upload"
+          size={18}
+        />
+         Drag a file here, or click to browse
       </span>
     </Dropzone>
-    <Button
-      disabled={true}
-      onClick={[Function]}
-      size="default"
-    >
-      Choose File
-    </Button>
   </div>
 </fieldset>
 `;
@@ -55,16 +51,13 @@ exports[`FileFieldWrapper renders file input 1`] = `
       preventDropOnDocument={true}
     >
       <span>
-        example.
-        csv
+        <Icon
+          name="Upload"
+          size={18}
+        />
+         Drag a file here, or click to browse
       </span>
     </Dropzone>
-    <Button
-      onClick={[Function]}
-      size="default"
-    >
-      Choose File
-    </Button>
   </div>
 </fieldset>
 `;
@@ -89,16 +82,13 @@ exports[`FileFieldWrapper renders file input with error message 1`] = `
       preventDropOnDocument={true}
     >
       <span>
-        example.
-        csv
+        <Icon
+          name="Upload"
+          size={18}
+        />
+         Drag a file here, or click to browse
       </span>
     </Dropzone>
-    <Button
-      onClick={[Function]}
-      size="default"
-    >
-      Choose File
-    </Button>
   </div>
   <Error
     error="Oh no!"
@@ -126,16 +116,13 @@ exports[`FileFieldWrapper renders file input with help message 1`] = `
       preventDropOnDocument={true}
     >
       <span>
-        example.
-        csv
+        <Icon
+          name="Upload"
+          size={18}
+        />
+         Drag a file here, or click to browse
       </span>
     </Dropzone>
-    <Button
-      onClick={[Function]}
-      size="default"
-    >
-      Choose File
-    </Button>
   </div>
   <div>
     Ask Google!
@@ -166,12 +153,6 @@ exports[`FileFieldWrapper renders file input with selected filename 1`] = `
         test.csv
       </span>
     </Dropzone>
-    <Button
-      onClick={[Function]}
-      size="default"
-    >
-      Choose File
-    </Button>
   </div>
 </fieldset>
 `;
