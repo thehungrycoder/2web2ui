@@ -10,8 +10,8 @@ export const SupportCta = ({ entitledToPhoneSupport, toggleForm }) => {
   if (entitledToPhoneSupport) {
     leftContent = (
       <div className={styles.Phone}>
-        <p>Phone Support: <strong>415-751-0928</strong></p>
-        <p>Available: <strong>9am - 7pm EST, Mon-Fri</strong></p>
+        <p>Do you need more assistance?</p>
+        <p><strong>+1 415-751-0928</strong> <span className={styles.Spacer}>—</span> <strong>9am – 7pm EST, Mon – Fri</strong></p>
       </div>
     );
   }

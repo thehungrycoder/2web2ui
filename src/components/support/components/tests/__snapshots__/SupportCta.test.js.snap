@@ -19,15 +19,19 @@ exports[`Support CTA Component should render with phone support 1`] = `
 <React.Fragment>
   <div>
     <p>
-      Phone Support: 
-      <strong>
-        415-751-0928
-      </strong>
+      Do you need more assistance?
     </p>
     <p>
-      Available: 
       <strong>
-        9am - 7pm EST, Mon-Fri
+        +1 415-751-0928
+      </strong>
+       
+      <span>
+        —
+      </span>
+       
+      <strong>
+        9am – 7pm EST, Mon – Fri
       </strong>
     </p>
   </div>

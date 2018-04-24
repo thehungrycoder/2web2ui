@@ -9,7 +9,13 @@
 
   p {
     margin-bottom: 0;
-    font-size: rem(13);
+    font-size: rem(14);
     line-height: 1.4em;
   }
+}
+
+.Spacer {
+  display: inline-block;
+  padding: 0 spacing(small);
+  color: color(gray, 6);
 }
