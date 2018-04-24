@@ -67,7 +67,7 @@ export class ApiKeyForm extends Component {
           />
           <Field
             name='subaccount'
-            helpText='This assignment is permanent. Leave blank to assign to master account.'
+            helpText={isReadOnly ? '' : 'This assignment is permanent. Leave blank to assign to master account.'}
             component={SubaccountTypeaheadWrapper}
             disabled={!isNew}
           />
@@ -84,7 +84,7 @@ export class ApiKeyForm extends Component {
             name='validIps'
             component={TextFieldWrapper}
             label='Allowed IPs'
-            helpText='Leaving the field blank will allow access by valid API keys from any IP address.'
+            helpText={isReadOnly ? '' : 'Leaving the field blank will allow access by valid API keys from any IP address.'}
             placeholder={isReadOnly ? '' : '10.20.30.40, 10.20.30.0/24'}
             validate={validIpList}
             disabled={isReadOnly}

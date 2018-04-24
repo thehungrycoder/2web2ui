@@ -7,7 +7,7 @@ import _ from 'lodash';
 import { listApiKeys, getApiKey, listGrants } from 'src/actions/api-keys';
 import { showAlert } from 'src/actions/globalAlert';
 
-import { getFormLoading, getCurrentApiKey } from 'src/selectors/api-keys';
+import { getCurrentApiKeyFromKeys } from 'src/selectors/api-keys';
 
 import { Loading } from 'src/components';
 import ApiKeyForm from './components/ApiKeyForm';
@@ -33,16 +33,19 @@ export class ApiKeysDetailsPage extends Component {
 
     return (<Banner
       status='info'
+      title='This API Key is read-only'
     >
-      <p>This API key is only editable by the owner: {apiKey.username}.</p>
+      <p>This API Key is only editable by the owner: {apiKey.username}.</p>
     </Banner>);
   }
 
   renderNotFound() {
     return (<Banner
       status='warning'
+      title='Not found'
+
     >
-      <p>API Key not found.</p>
+      <p>API Key was not found.</p>
     </Banner>);
   }
 
@@ -73,10 +76,10 @@ const mapStateToProps = (state, props) => {
   const { grants } = state.apiKeys;
 
   return {
-    apiKey: getCurrentApiKey(state, props),
+    apiKey: getCurrentApiKeyFromKeys(state, props),
     keys: state.apiKeys.keys,
     grants,
-    loading: getFormLoading(state) || state.apiKeys.keysLoading
+    loading: state.apiKeys.grantsLoading || state.apiKeys.keysLoading
   };
 };
 

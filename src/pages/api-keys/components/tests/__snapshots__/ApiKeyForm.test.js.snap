@@ -91,7 +91,7 @@ exports[`renders correctly - readonly mode 1`] = `
     <Field
       component={[Function]}
       disabled={false}
-      helpText="This assignment is permanent. Leave blank to assign to master account."
+      helpText=""
       name="subaccount"
     />
   </Panel.Section>
@@ -137,7 +137,7 @@ exports[`renders correctly - readonly mode 1`] = `
     <Field
       component={[Function]}
       disabled={true}
-      helpText="Leaving the field blank will allow access by valid API keys from any IP address."
+      helpText=""
       label="Allowed IPs"
       name="validIps"
       placeholder=""

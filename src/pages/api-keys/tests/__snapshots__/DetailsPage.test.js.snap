@@ -13,9 +13,10 @@ exports[`renders ready only mode correctly 1`] = `
 >
   <Banner
     status="info"
+    title="This API Key is read-only"
   >
     <p>
-      This API key is only editable by the owner: 
+      This API Key is only editable by the owner: 
       johndoe
       .
     </p>
@@ -51,9 +52,10 @@ exports[`should render not found pane when api key can not be found 1`] = `
   <Panel>
     <Banner
       status="warning"
+      title="Not found"
     >
       <p>
-        API Key not found.
+        API Key was not found.
       </p>
     </Banner>
   </Panel>

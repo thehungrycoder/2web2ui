@@ -10,7 +10,7 @@ describe('ApiKey Selectors', () => {
       apiKeys: {
         keys: [
           { id: 'Zebra' },
-          { id: 'Ape', grants: ['grant one'], valid_ips: ['ip'], subaccount_id: 'subId' }
+          { id: 'Ape', grants: ['grant one'], valid_ips: ['ip'], subaccount_id: 999 }
         ],
         grants: [
           { key: 'grant one' },
@@ -37,7 +37,7 @@ describe('ApiKey Selectors', () => {
         }
       },
       location: {
-        search: '?subaccount=subId'
+        search: '?subaccount=999'
       }
     };
   });
@@ -60,30 +60,25 @@ describe('ApiKey Selectors', () => {
 
   describe('getIsNew', () => {
     it('gets form is new - true', () => {
-      props.match.params.id = 'new';
-      expect(apiKeys.getIsNew(store, props)).toEqual(true);
+      expect(apiKeys.getIsNew(store, {})).toEqual(true);
     });
 
     it('gets form is new - false', () => {
-      expect(apiKeys.getIsNew(store, props)).toEqual(false);
+      expect(apiKeys.getIsNew(store, { apiKey: { not: 'empty' }})).toEqual(false);
     });
   });
 
   describe('getInitialGrantsRadio', () => {
     it('gets form grants radio value - all (for new)', () => {
-      props.match.params.id = 'new key';
-      expect(apiKeys.getInitialGrantsRadio(store, props)).toEqual('all');
+      expect(apiKeys.getInitialGrantsRadio(store, {})).toEqual('all');
     });
 
     it('gets form grants radio value - all', () => {
-      store.apiKeys.keys[1].grants = ['grant one', 'grant two'];
-      expect(apiKeys.getInitialGrantsRadio(store, props)).toEqual('all');
+      expect(apiKeys.getInitialGrantsRadio(store, { apiKey: { grants: ['grant', 'grants 2']}})).toEqual('all');
     });
 
     it('gets form grants radio value - select', () => {
-      //props.match.params.id = 'new key';
-      store.apiKeys.keys[1].grants = ['grant 1'];
-      expect(apiKeys.getInitialGrantsRadio(store, props)).toEqual('select');
+      expect(apiKeys.getInitialGrantsRadio(store, { apiKey: { grants: ['grant']}})).toEqual('select');
     });
   });
 
@@ -93,16 +88,7 @@ describe('ApiKey Selectors', () => {
         subaccount_id: 'subId',
         grants: ['grant one'],
         valid_ips: ['ip']
-      },
-      match: {
-        params: {
-          id: 'Ape'
-        }
-      },
-      location: {
-        search: '?subaccount=subId'
       }
-
     };
     expect(apiKeys.getInitialValues(store, props)).toMatchSnapshot();
   });
@@ -156,20 +142,20 @@ describe('ApiKey Selectors', () => {
     expect(apiKeys.selectApiKeysForSending(store)).toMatchSnapshot();
   });
 
-  describe('getCurrentAPIKey', () => {
+  describe('getCurrentApiKeyFromKeys', () => {
     it('returns correct apiKey from store based on query string', () => {
       props.match.params.id = 'Zebra';
       props.location.search = '';
-      expect(apiKeys.getCurrentApiKey(store, props)).toEqual(store.apiKeys.keys[0]);
+      expect(apiKeys.getCurrentApiKeyFromKeys(store, props)).toEqual(store.apiKeys.keys[0]);
     });
 
     it('returns correct apiKey if subaccount id provided in query string', () => {
-      expect(apiKeys.getCurrentApiKey(store, props)).toEqual(store.apiKeys.keys[1]);
+      expect(apiKeys.getCurrentApiKeyFromKeys(store, props)).toEqual(store.apiKeys.keys[1]);
     });
 
     it('returns default empty apiKey if no matching found', () => {
       props.match.params.id = 'foobar';
-      expect(apiKeys.getCurrentApiKey(store, props)).toEqual({});
+      expect(apiKeys.getCurrentApiKeyFromKeys(store, props)).toEqual({});
     });
   });
 

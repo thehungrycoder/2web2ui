@@ -92,10 +92,10 @@ export class ApiKeyEditPage extends Component {
 }
 
 const mapStateToProps = (state, props) => {
-  const { error, grants } = state.apiKeys;
+  const { error, grants, key } = state.apiKeys;
 
   return {
-    apiKey: state.apiKeys.key,
+    apiKey: key,
     id: selectApiKeyId(state, props),
     error,
     grants,

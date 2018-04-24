@@ -17,7 +17,6 @@ Object {
     "grant one": true,
     "grant two": false,
   },
-  "id": "Ape",
   "subaccount_id": "subId",
   "validIps": "ip",
   "valid_ips": Array [
