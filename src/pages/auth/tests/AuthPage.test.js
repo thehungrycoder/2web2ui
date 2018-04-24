@@ -11,6 +11,9 @@ const props = {
     loggedIn: false,
     loginPending: false
   },
+  location: {
+    search: ''
+  },
   tfa: {
     enabled: false,
     username: 'bertha',
@@ -41,6 +44,11 @@ it('renders correctly', () => {
 it('renders correctly when there is a login error', () => {
   wrapper.setProps({ auth: { errorDescription: 'uh oh!' }});
   expect(wrapper).toMatchSnapshot();
+});
+
+it('redirects to default route after mounted when logged in ', () => {
+  wrapper = shallow(<AuthPage {...props} auth={{ loggedIn: true }} />);
+  expect(props.history.push).toHaveBeenCalledWith(DEFAULT_REDIRECT_ROUTE);
 });
 
 it('redirects to default route when logged in', () => {
@@ -127,4 +135,9 @@ it('should redirect to sso if there is a sso user', () => {
 it('should set sso enabled if there ssoUser is null', () => {
   wrapper.setProps({ auth: { ssoUser: null }});
   expect(wrapper.state().ssoEnabled).toBeFalsy();
+});
+
+it('should display sso error message', () => {
+  wrapper.setProps({ location: { search: `?error=${btoa('Oh no!')}` }});
+  expect(wrapper).toMatchSnapshot();
 });
