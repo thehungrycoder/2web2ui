@@ -11,7 +11,10 @@ export class GoogleTagManager extends Component {
   }
 
   componentDidMount() {
-    window.dataLayer = [];
+    window.dataLayer = [{
+      'gtm.start': new Date().getTime(),
+      event: 'gtm.js'
+    }];
     const route = findRouteByPath(this.props.location.pathname);
     // for public routes, track initial page view immediately
     if (route.public) {
