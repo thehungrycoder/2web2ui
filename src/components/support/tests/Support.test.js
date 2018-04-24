@@ -81,6 +81,12 @@ describe('Support Component', () => {
     });
 
     it('should not open panel or hydrate form', () => {
+      wrapper.setProps({ location: { search: '?supportTicket=true,supportMessage=testmessage' }});
+      jest.resetAllMocks();
+
+      // Simulate cDU twice for two negative cases
+      wrapper.setProps({ location: { search: '?supportTicket=true,supportMessage=testmessage' }});
+      wrapper.setProps({ location: { search: undefined }});
       expect(instance.props.toggleTicketForm).not.toHaveBeenCalled();
       expect(instance.props.toggleSupportPanel).not.toHaveBeenCalled();
       expect(instance.props.hydrateTicketForm).not.toHaveBeenCalled();

@@ -15,7 +15,9 @@ export class Support extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.location.search !== prevProps.location.search) {
+    const { location } = this.props;
+
+    if (location.search && location.search !== prevProps.location.search) {
       this.maybeOpenTicket();
     }
   }
