@@ -11,6 +11,7 @@
     ],
     "complexity": "off",
     "react/jsx-no-bind": "off",
+    "space-before-function-paren": ["error", "always"],
     "max-lines": [
       "error",
       {
