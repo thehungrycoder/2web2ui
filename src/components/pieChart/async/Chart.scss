@@ -1,17 +1,17 @@
 // Global scoped to target recharts classnames
 .recharts-sector {
-  opacity: 1;
-  transition: opacity 0.3s;
+  fill-opacity: 1;
+  transition: fill-opacity 0.3s;
 }
 
 .Chart--hover {
   .recharts-sector {
-    opacity: 0.4;
+    fill-opacity: 0.4;
   }
 }
 
 .recharts-sector.Chart--forceOpacity {
-  opacity: 1 !important;
+  fill-opacity: 1 !important;
 }
 
 .recharts-sector.Chart--hasChildren {
