@@ -1,19 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-
 import { Button, Panel } from '@sparkpost/matchbox';
-
 import { TextFieldWrapper } from 'src/components';
-
 import { required, minLength, maxFileSize } from 'src/helpers/validation';
-
 import config from 'src/config';
-
 import FileInput from './FileInput';
 
 import styles from './SupportForm.module.scss';
-
 const formName = 'supportForm';
 
 const AttachmentField = (props) => <FileInput {...props}>Attach a file</FileInput>;
@@ -105,4 +99,3 @@ const mapStateToProps = ({ support }) => ({
 
 const ReduxSupportForm = reduxForm({ form: formName })(SupportForm);
 export default connect(mapStateToProps)(ReduxSupportForm);
-

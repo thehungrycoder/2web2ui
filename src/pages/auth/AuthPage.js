@@ -50,7 +50,10 @@ export class AuthPage extends Component {
   }
 
   redirect(nextProps) {
-    const route = _.get(nextProps, 'location.state.redirectAfterLogin', DEFAULT_REDIRECT_ROUTE);
+    // Passes location state through '/' or '/auth'
+    // DefaultRedirect component handles protected routes
+    const defaultRoute = { ...this.props.location, pathname: DEFAULT_REDIRECT_ROUTE };
+    const route = _.get(nextProps, 'location.state.redirectAfterLogin', defaultRoute);
     this.props.history.push(route);
   }
 

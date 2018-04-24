@@ -15,7 +15,8 @@ describe('Component: DefaultRedirect', () => {
   beforeEach(() => {
     props = {
       location: {
-        state: {}
+        state: {},
+        search: '?test=one'
       },
       history: {
         push: jest.fn()
@@ -39,7 +40,10 @@ describe('Component: DefaultRedirect', () => {
     props.history.push.mockClear();
     instance.handleRedirect();
     expect(props.history.push).toHaveBeenCalledTimes(1);
-    expect(props.history.push).toHaveBeenCalledWith('/test/redirect/after/login', { replace: true });
+    expect(props.history.push).toHaveBeenCalledWith({
+      pathname: '/test/redirect/after/login',
+      state: { redirectAfterLogin: '/test/redirect/after/login' }
+    }, { replace: true });
   });
 
   it('should do nothing if no redirect after login and not ready', () => {
@@ -58,7 +62,11 @@ describe('Component: DefaultRedirect', () => {
     props.history.push.mockClear();
     instance.handleRedirect();
     expect(props.history.push).toHaveBeenCalledTimes(1);
-    expect(props.history.push).toHaveBeenCalledWith('/reports/summary', { replace: true });
+    expect(props.history.push).toHaveBeenCalledWith({
+      pathname: '/reports/summary',
+      search: '?test=one',
+      state: {}
+    }, { replace: true });
   });
 
   it('should redirect based on config', () => {
@@ -66,7 +74,11 @@ describe('Component: DefaultRedirect', () => {
     props.history.push.mockClear();
     instance.handleRedirect();
     expect(props.history.push).toHaveBeenCalledTimes(1);
-    expect(props.history.push).toHaveBeenCalledWith('/config/splash', { replace: true });
+    expect(props.history.push).toHaveBeenCalledWith({
+      pathname: '/config/splash',
+      search: '?test=one',
+      state: {}
+    }, { replace: true });
   });
 
   it('should handle a redirect on mount', () => {
