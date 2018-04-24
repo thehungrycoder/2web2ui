@@ -46,6 +46,11 @@ it('renders correctly when there is a login error', () => {
   expect(wrapper).toMatchSnapshot();
 });
 
+it('redirects to default route after mounted when logged in ', () => {
+  wrapper = shallow(<AuthPage {...props} auth={{ loggedIn: true }} />);
+  expect(props.history.push).toHaveBeenCalledWith(DEFAULT_REDIRECT_ROUTE);
+});
+
 it('redirects to default route when logged in', () => {
   wrapper.setProps({ auth: { loggedIn: true }});
   expect(props.history.push).toHaveBeenCalledWith(DEFAULT_REDIRECT_ROUTE);
