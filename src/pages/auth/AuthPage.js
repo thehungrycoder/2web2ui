@@ -31,7 +31,7 @@ export class AuthPage extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { ssoUser, loggedIn } = nextProps.auth;
+    const { ssoUser, loggedIn, username } = nextProps.auth;
 
     if (loggedIn) {
       this.redirect(nextProps);
@@ -43,7 +43,7 @@ export class AuthPage extends Component {
     }
 
     if (ssoUser) {
-      window.location.assign(`${config.apiBase}/users/saml/login`);
+      window.location.assign(`${config.apiBase}/users/saml/login/${username}`);
     } else {
       this.setState({ ssoEnabled: false });
     }
