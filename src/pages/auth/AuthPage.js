@@ -55,7 +55,7 @@ export class AuthPage extends Component {
   }
 
   ssoSignIn(username) {
-    return this.props.ssoCheck(username).catch((err) => err);
+    return this.props.ssoCheck(username);
   }
 
   regularSignIn(username, password, rememberMe) {
