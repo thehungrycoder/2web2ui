@@ -23,7 +23,12 @@ exports[`Support CTA Component should render with phone support 1`] = `
     </p>
     <p>
       <strong>
-        +1 415-751-0928
+        <UnstyledLink
+          title="Call Support"
+          to="tel:1-415-751-0928"
+        >
+          +1 (415) 751-0928
+        </UnstyledLink>
       </strong>
        
       <span>
