@@ -14,7 +14,7 @@ export const SupportCta = ({ entitledToPhoneSupport, toggleForm }) => {
         <p>
           <strong><UnstyledLink to='tel:1-415-751-0928' className={styles.PhoneLink} title='Call Support'>+1 (415) 751-0928</UnstyledLink></strong>
           {' '}<span className={styles.Spacer}>—</span>{' '}
-          <strong>9am – 7pm EST, Mon – Fri</strong>
+          <strong>9am – 8pm ET, Mon – Fri</strong>
         </p>
       </div>
     );

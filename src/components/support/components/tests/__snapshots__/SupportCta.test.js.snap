@@ -36,7 +36,7 @@ exports[`Support CTA Component should render with phone support 1`] = `
       </span>
        
       <strong>
-        9am – 7pm EST, Mon – Fri
+        9am – 8pm ET, Mon – Fri
       </strong>
     </p>
   </div>
