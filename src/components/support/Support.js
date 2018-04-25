@@ -11,11 +11,11 @@ import { getBase64Contents } from 'src/helpers/file';
 import styles from './Support.module.scss';
 
 export class Support extends Component {
-  componentDidMount() {
+  componentDidMount () {
     this.maybeOpenTicket();
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate (prevProps) {
     const { location } = this.props;
 
     if (location.search && location.search !== prevProps.location.search) {
@@ -25,12 +25,11 @@ export class Support extends Component {
 
   // Opens and hydrates support ticket form from query params
   maybeOpenTicket = () => {
-    const { location, toggleSupportPanel, toggleTicketForm, hydrateTicketForm } = this.props;
+    const { location, openSupportPanel, hydrateTicketForm } = this.props;
     const { supportTicket, supportMessage: message, supportSubject: subject } = qs.parse(location.search);
 
     if (supportTicket) {
-      toggleSupportPanel();
-      toggleTicketForm();
+      openSupportPanel({ view: 'ticket' });
       hydrateTicketForm({ message, subject });
     }
   }
@@ -62,7 +61,7 @@ export class Support extends Component {
     this.props.toggleTicketForm();
   }
 
-  renderPanel() {
+  renderPanel () {
     const { showTicketForm } = this.props;
 
     return showTicketForm

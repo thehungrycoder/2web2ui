@@ -4,10 +4,10 @@ const initialState = {
   showPanel: false
 };
 
-export default (state = initialState, action) => {
-  switch (action.type) {
+export default (state = initialState, { type, payload = {}}) => {
+  switch (type) {
     case 'CREATE_TICKET_SUCCESS':
-      return { ...state, ticketId: action.payload.ticket_id };
+      return { ...state, ticketId: payload.ticket_id };
 
     case 'RESET_TICKET_FORM':
       return { ...initialState };
@@ -17,6 +17,10 @@ export default (state = initialState, action) => {
 
     case 'TOGGLE_SUPPORT_PANEL':
       return { ...state, showPanel: !state.showPanel };
+
+    case 'OPEN_SUPPORT_PANEL': {
+      return { ...state, showPanel: true, showTicketForm: payload.view === 'ticket' };
+    }
 
     default:
       return state;
