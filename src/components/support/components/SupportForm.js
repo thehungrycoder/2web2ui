@@ -50,6 +50,7 @@ export class SupportForm extends Component {
             label='Subject'
             placeholder='Give your issue a title'
             inlineErrors={true}
+            autoFocus={true}
             disabled={submitting}
             validate={[required, minLength(5)]}
             component={TextFieldWrapper} />
@@ -68,7 +69,8 @@ export class SupportForm extends Component {
           <Field
             type='file'
             name='attachment'
-            label='Attach a file (optional)'
+            label='Attach a file'
+            disabled={submitting}
             component={FileFieldWrapper}
             validate={maxFileSize(config.support.maxAttachmentSizeBytes)}
           />

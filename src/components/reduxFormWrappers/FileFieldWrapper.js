@@ -26,14 +26,18 @@ export default class FileFieldWrapper extends Component {
     this.dropzoneRef = ref;
   }
 
-  render() {
+  render () {
     const { disabled, fileType, helpText, input, label, meta, required } = this.props;
     const filename = _.get(input, 'value.name');
     const acceptedTypes = fileType ? `.${fileType}` : '';
 
     return (
       <fieldset className={styles.Field}>
-        <Label id={input.id}>{label}{required && ' *'}</Label>
+        <Label id={input.id}>
+          {label}{required && ' *'}
+          {' '}
+          {(meta.touched && meta.error) ? <Error error={meta.error} wrapper='span' /> : null}
+        </Label>
         <div className={styles.InputWrapper}>
           <Dropzone
             accept={acceptedTypes}
@@ -49,13 +53,12 @@ export default class FileFieldWrapper extends Component {
             onFileDialogCancel={this.handleCancel}
             ref={this.setDropzoneRef}
           >
-            {filename
+            {(filename && !meta.error)
               ? <span>{filename}</span>
               : <span className={styles.Placeholder}><Icon name='Upload' /> Drag a file here, or click to browse</span>}
           </Dropzone>
         </div>
-        {helpText && <div className={styles.Help}>{helpText}</div>}
-        {meta.touched && meta.error && <Error error={meta.error} />}
+        {helpText ? <div className={styles.Help}>{helpText}</div> : null}
       </fieldset>
     );
   }
