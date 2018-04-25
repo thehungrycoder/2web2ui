@@ -19,6 +19,7 @@ describe('Support Component', () => {
       entitledToOnlineSupport: true,
       loggedIn: true,
       location: {},
+      openSupportPanel: jest.fn(),
       toggleSupportPanel: jest.fn(),
       toggleTicketForm: jest.fn(),
       hydrateTicketForm: jest.fn(),
@@ -56,39 +57,43 @@ describe('Support Component', () => {
   });
 
   describe('on mount', () => {
-    it('should open panel and hydrate form', () => {
+    it('should open panel and hydrate form if search value is present', () => {
       wrapper.setProps({ location: { search: '?supportTicket=true,supportMessage=testmessage' }});
       jest.resetAllMocks(); // To clear the initial mount call
       instance.componentDidMount();
-      expect(instance.props.toggleTicketForm).toHaveBeenCalledTimes(1);
-      expect(instance.props.toggleSupportPanel).toHaveBeenCalledTimes(1);
+      expect(instance.props.openSupportPanel).toHaveBeenCalledWith({ view: 'ticket' });
       expect(instance.props.hydrateTicketForm).toHaveBeenCalledTimes(1);
     });
 
-    it('should not open panel or hydrate form', () => {
-      expect(instance.props.toggleTicketForm).not.toHaveBeenCalled();
-      expect(instance.props.toggleSupportPanel).not.toHaveBeenCalled();
+    it('should not open panel or hydrate form if search value is not present', () => {
+      expect(instance.props.openSupportPanel).not.toHaveBeenCalled();
       expect(instance.props.hydrateTicketForm).not.toHaveBeenCalled();
     });
   });
 
   describe('on update', () => {
-    it('should open panel and hydrate form', () => {
+    it('should open panel and hydrate form if location changes and search value is present', () => {
       wrapper.setProps({ location: { search: '?supportTicket=true,supportMessage=testmessage' }});
-      expect(instance.props.toggleTicketForm).toHaveBeenCalledTimes(1);
-      expect(instance.props.toggleSupportPanel).toHaveBeenCalledTimes(1);
+      expect(instance.props.openSupportPanel).toHaveBeenCalledWith({ view: 'ticket' });
       expect(instance.props.hydrateTicketForm).toHaveBeenCalledTimes(1);
     });
 
-    it('should not open panel or hydrate form', () => {
+    it('should not open panel or hydrate form if search does not change', () => {
       wrapper.setProps({ location: { search: '?supportTicket=true,supportMessage=testmessage' }});
       jest.resetAllMocks();
 
-      // Simulate cDU twice for two negative cases
       wrapper.setProps({ location: { search: '?supportTicket=true,supportMessage=testmessage' }});
+
+      expect(instance.props.openSupportPanel).not.toHaveBeenCalled();
+      expect(instance.props.hydrateTicketForm).not.toHaveBeenCalled();
+    });
+
+    it('should not open panel or hydrate form if search value is not present', () => {
+      wrapper.setProps({ location: { search: '?supportTicket=true,supportMessage=testmessage' }});
+      jest.resetAllMocks();
+
       wrapper.setProps({ location: { search: undefined }});
-      expect(instance.props.toggleTicketForm).not.toHaveBeenCalled();
-      expect(instance.props.toggleSupportPanel).not.toHaveBeenCalled();
+      expect(instance.props.openSupportPanel).not.toHaveBeenCalled();
       expect(instance.props.hydrateTicketForm).not.toHaveBeenCalled();
     });
   });
@@ -116,13 +121,13 @@ describe('Support Component', () => {
   });
 
   describe('onSubmit tests', () => {
-    it('should create a ticket on submit', async() => {
+    it('should create a ticket on submit', async () => {
       wrapper.setState({ showForm: true });
       await expect(instance.onSubmit(ticket)).resolves.toBeDefined();
       expect(instance.props.createTicket).toHaveBeenCalled();
     });
 
-    it('should show an alert on submission failure', async() => {
+    it('should show an alert on submission failure', async () => {
       instance.props.createTicket.mockReturnValueOnce(Promise.reject({}));
       await expect(instance.onSubmit(ticket)).rejects.toBeDefined();
     });

@@ -8,6 +8,18 @@ export function toggleSupportPanel () {
   };
 }
 
+/**
+ * Forces the support panel open rather than blindly toggling, good
+ * for places where we know we want to open it and the function might
+ * run multiple times (cDU etc) so a toggle would open then close
+ *
+ * @param {Object} options optional options to pass to reducer
+ * @param {String} options.view The view you want the panel to load in, currently only 'ticket' works
+ *
+ * @example
+ * openSupportPanel() // opens in default mode
+ * openSupportPanel({ view: 'ticket' }) // opens in ticket mode
+ */
 export function openSupportPanel (options) {
   return {
     type: 'OPEN_SUPPORT_PANEL',

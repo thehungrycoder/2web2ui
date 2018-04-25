@@ -10,6 +10,7 @@ exports[`Support Form Component Form should render 1`] = `
   <form>
     <Panel.Section>
       <Field
+        autoFocus={true}
         component={[Function]}
         inlineErrors={true}
         label="Subject"
@@ -35,7 +36,7 @@ exports[`Support Form Component Form should render 1`] = `
       />
       <Field
         component={[Function]}
-        label="Attach a file (optional)"
+        label="Attach a file"
         name="attachment"
         type="file"
         validate={[Function]}
