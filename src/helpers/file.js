@@ -5,7 +5,11 @@
  * @param {File} file object
  * @return {Promise -> String} data url of the file
  */
-export function getDataUrl(file) {
+export function getDataUrl (file) {
+  if (!(file instanceof File)) {
+    return Promise.reject('Only native File objects can be converted to data URL');
+  }
+
   const reader = new FileReader();
   return new Promise((resolve, reject) => {
     reader.addEventListener('load', () => resolve(reader.result));
@@ -20,6 +24,6 @@ export function getDataUrl(file) {
  * @param {File} file object
  * @return {Promise -> String} base 64 encoded contents of the file
  */
-export function getBase64Contents(file) {
+export function getBase64Contents (file) {
   return getDataUrl(file).then((dataUrl) => dataUrl.replace(/^data:.*\/.*;base64,/, ''));
 }
