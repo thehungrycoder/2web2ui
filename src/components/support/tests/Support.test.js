@@ -16,7 +16,7 @@ describe('Support Component', () => {
   beforeEach(() => {
     const props = {
       createTicket: jest.fn(() => Promise.resolve(createTicketResult)),
-      entitledToSupport: true,
+      entitledToOnlineSupport: true,
       loggedIn: true,
       location: {},
       toggleSupportPanel: jest.fn(),
@@ -31,7 +31,7 @@ describe('Support Component', () => {
 
   describe('render tests', () => {
     it('should not render the icon if the account is not entitled to support', () => {
-      wrapper.setProps({ entitledToSupport: false });
+      wrapper.setProps({ entitledToOnlineSupport: false });
       expect(wrapper.get(0)).toBeFalsy();
     });
 

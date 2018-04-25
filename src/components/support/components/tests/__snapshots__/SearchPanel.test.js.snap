@@ -24,16 +24,9 @@ exports[`Search Panel Component should render 1`] = `
     />
   </Panel.Section>
   <Panel.Section>
-    <span>
-      Do you need more assistance?
-    </span>
-    <Button
-      onClick={[MockFunction]}
-      primary={true}
-      size="default"
-    >
-      Submit a Ticket
-    </Button>
+    <Connect(SupportCta)
+      toggleForm={[MockFunction]}
+    />
   </Panel.Section>
 </CreateInstantSearch>
 `;

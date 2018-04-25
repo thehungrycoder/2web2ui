@@ -1,4 +1,4 @@
-import { entitledToSupport, currentLimitSelector, allowSendingLimitRequestSelector } from '../support';
+import { entitledToOnlineSupport, entitledToPhoneSupport, currentLimitSelector, allowSendingLimitRequestSelector } from '../support';
 import * as billingInfo from '../accountBillingInfo';
 import cases from 'jest-in-case';
 
@@ -7,12 +7,13 @@ jest.mock('../accountBillingInfo', () => ({
 }));
 
 describe('Selectors: support', () => {
-  describe('entitledToSupport', () => {
+  describe('entitled to support', () => {
     it('when account is not loaded', () => {
       const state = {
         account: {}
       };
-      expect(entitledToSupport(state)).toBeFalsy();
+      expect(entitledToOnlineSupport(state)).toBeFalsy();
+      expect(entitledToPhoneSupport(state)).toBeFalsy();
     });
 
     it('when account is not entitled to online support', () => {
@@ -24,7 +25,8 @@ describe('Selectors: support', () => {
           }
         }
       };
-      expect(entitledToSupport(state)).toBeFalsy();
+      expect(entitledToOnlineSupport(state)).toBeFalsy();
+      expect(entitledToPhoneSupport(state)).toBeTruthy();
     });
 
     it('when account entitled to online support', () => {
@@ -36,7 +38,8 @@ describe('Selectors: support', () => {
           }
         }
       };
-      expect(entitledToSupport(state)).toBeTruthy();
+      expect(entitledToOnlineSupport(state)).toBeTruthy();
+      expect(entitledToPhoneSupport(state)).toBeFalsy();
     });
   });
 
