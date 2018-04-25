@@ -19,6 +19,9 @@ cases('FileFieldWrapper', (props) => {
   expect(wrapper).toMatchSnapshot();
 }, {
   'renders file input': {},
+  'renders file input with no specified type': {
+    fileType: undefined
+  },
   'renders file input with selected filename': {
     input: {
       value: {
