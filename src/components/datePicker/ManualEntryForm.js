@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import _ from 'lodash';
-import { Grid, TextField, Icon } from '@sparkpost/matchbox';
+import { Grid, TextField } from '@sparkpost/matchbox';
+import { ArrowForward } from '@sparkpost/matchbox-icons';
 import { formatInputDate, formatInputTime, parseDatetime } from 'src/helpers/date';
 import styles from './ManualEntryForm.module.scss';
 
@@ -92,7 +93,7 @@ export default class ManualEntryForm extends Component {
           </Grid.Column>
           <Grid.Column xs={1}>
             <div className={styles.ArrowWrapper}>
-              <Icon name='ArrowRight'/>
+              <ArrowForward />
             </div>
           </Grid.Column>
           <Grid.Column >

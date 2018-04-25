@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { ChevronLeft } from '@sparkpost/matchbox-icons';
 import classnames from 'classnames';
-
-import { Icon } from '@sparkpost/matchbox';
 import styles from './Navigation.module.scss';
 
 export class Item extends Component {
@@ -42,7 +41,7 @@ export class Item extends Component {
   render() {
     const {
       to,
-      icon,
+      icon: Icon,
       label,
       children
     } = this.props;
@@ -60,16 +59,16 @@ export class Item extends Component {
         { children
           ? <li>
             <a onClick={() => this.handleParentClick()} className={linkClasses}>
-              <span className={styles.iconWrapper}><Icon name={icon} size={18} className={styles.icon} /></span>
+              <span className={styles.iconWrapper}><Icon size={18} className={styles.icon} /></span>
               { label }
-              <Icon name='ChevronLeft' className={styles.chevron} />
+              <ChevronLeft className={styles.chevron} />
             </a>
             { this.renderChildren() }
           </li>
 
           : <li>
             <Link to={ to } className={linkClasses}>
-              { icon && <span className={styles.iconWrapper}><Icon name={icon} size={18} className={styles.icon} /></span> }
+              { Icon && <span className={styles.iconWrapper}><Icon size={18} className={styles.icon} /></span> }
               { label }
             </Link>
           </li>

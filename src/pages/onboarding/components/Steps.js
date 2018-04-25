@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import cx from 'classnames';
 import { withRouter } from 'react-router';
-import { Icon } from '@sparkpost/matchbox';
+import { Check } from '@sparkpost/matchbox-icons';
 import styles from './Steps.module.scss';
 
 const steps = [
@@ -38,7 +38,7 @@ export class Steps extends Component {
 
       return (
         <li className={classes} key={label}>
-          {!completed ? `${i + 1}.` : <Icon name='Check' />} {label}
+          {!completed ? `${i + 1}.` : <Check />} {label}
         </li>
       );
     });

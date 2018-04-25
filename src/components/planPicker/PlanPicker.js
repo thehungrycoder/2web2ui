@@ -3,7 +3,7 @@ import Downshift from 'downshift';
 import { Field } from 'redux-form';
 import cx from 'classnames';
 
-import { Icon } from '@sparkpost/matchbox';
+import { ExpandMore } from '@sparkpost/matchbox-icons';
 import Plan from './Plan';
 import styles from './PlanPicker.module.scss';
 
@@ -54,7 +54,7 @@ export class PlanPicker extends Component {
     return (
       <div className={styles.PlanPicker}>
         <div className={listClasses}>{ items }</div>
-        <Icon name='ChevronDown' size={24} className={styles.Chevron} />
+        <ExpandMore size={24} className={styles.Chevron} />
         <input {...getInputProps()} ref={(input) => this.input = input} className={styles.Input} />
         <Plan {...triggerProps} className={triggerClasses} />
       </div>

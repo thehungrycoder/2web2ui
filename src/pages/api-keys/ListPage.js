@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Page, Tooltip, Icon } from '@sparkpost/matchbox';
+import { Page, Tooltip } from '@sparkpost/matchbox';
+import { InfoOutline } from '@sparkpost/matchbox-icons';
 import { Setup } from 'src/components/images';
 import { listApiKeys, hideNewApiKey } from 'src/actions/api-keys';
 import { Loading, SubaccountTag, TableCollection, ApiErrorBanner, ApiKeySuccessBanner, ShortKeyCode } from 'src/components';

@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import qs from 'query-string';
-import { Portal, Icon, Popover } from '@sparkpost/matchbox';
+import { Portal, Popover } from '@sparkpost/matchbox';
+import { Cancel, Help } from '@sparkpost/matchbox-icons';
 import { entitledToOnlineSupport } from 'src/selectors/support';
 import * as supportActions from 'src/actions/support';
 import SupportForm from './components/SupportForm';
@@ -79,9 +80,11 @@ export class Support extends Component {
       return null;
     }
 
+    const Icon = showPanel ? Cancel : Help;
+
     const triggerMarkup = (
       <a className={styles.Button} onClick={this.togglePanel}>
-        <Icon name={showPanel ? 'CloseCircle' : 'HelpOutline'} className={styles.Icon} size={33} />
+        <Icon className={styles.Icon} size={33} />
       </a>
     );
 

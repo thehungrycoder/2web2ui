@@ -7,7 +7,7 @@ import { SparkPost } from 'src/components';
 import Item from './Item';
 import Footer from './Footer';
 import selectNavItems from 'src/selectors/navItems';
-import { Icon } from '@sparkpost/matchbox';
+import { Close } from '@sparkpost/matchbox-icons';
 import styles from './Navigation.module.scss';
 
 export class Navigation extends Component {
@@ -50,8 +50,7 @@ export class Navigation extends Component {
             </ul>
             <Footer />
           </div>
-          <Icon
-            name='Close'
+          <Close
             className={styles.close}
             size={33}
             onClick={this.handleClick} />
