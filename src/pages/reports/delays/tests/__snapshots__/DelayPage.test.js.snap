@@ -9,7 +9,7 @@ exports[`DelayPage:  should render 1`] = `
   <Connect(MetricsSummary)
     rateTitle="Delayed Rate"
     rateValue={0.1}
-    secondaryMessage="1,000 total delays."
+    secondaryMessage="There were 1,000 total delays in this time period. (Note: messages may be delayed multiple times)"
   >
     <strong>
       10
@@ -52,7 +52,7 @@ exports[`DelayPage:  should show loading indicator when loading table 1`] = `
   <Connect(MetricsSummary)
     rateTitle="Delayed Rate"
     rateValue={0.1}
-    secondaryMessage="1,000 total delays."
+    secondaryMessage="There were 1,000 total delays in this time period. (Note: messages may be delayed multiple times)"
   >
     <strong>
       10

@@ -45,7 +45,7 @@ export class DelayPage extends Component {
       <MetricsSummary
         rateValue={safeRate(count_delayed_first, count_accepted)}
         rateTitle='Delayed Rate'
-        secondaryMessage={`${count_delayed.toLocaleString()} total delays.`}
+        secondaryMessage={`There were ${count_delayed.toLocaleString()} total delays in this time period. (Note: messages may be delayed multiple times)`}
       >
         <strong>{count_delayed_first.toLocaleString()}</strong> of <strong>{count_accepted.toLocaleString()}</strong> accepted messages were delayed on first attempt
       </MetricsSummary>

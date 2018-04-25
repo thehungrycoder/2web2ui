@@ -14,7 +14,7 @@ exports[`DelaysDataTable:  should render page 1`] = `
         "sortKey": "domain",
       },
       Object {
-        "label": "Delayed",
+        "label": "Total Delays",
         "sortKey": "count_delayed",
       },
       Object {

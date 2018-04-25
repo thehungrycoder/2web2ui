@@ -8,7 +8,7 @@ import { safeRate } from 'src/helpers/math';
 const columns = [
   { label: 'Reason', sortKey: 'reason', width: '45%' },
   { label: 'Domain', sortKey: 'domain' },
-  { label: 'Delayed', sortKey: 'count_delayed' },
+  { label: 'Total Delays', sortKey: 'count_delayed' },
   { label: 'Delayed First Attempt (%)', sortKey: 'count_delayed_first' }
 ];
 
