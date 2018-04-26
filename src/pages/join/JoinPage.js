@@ -14,9 +14,9 @@ import config from 'src/config';
 import { inSPCEU } from 'src/config/tenant';
 import { authenticate } from 'src/actions/auth';
 import { loadScript } from 'src/helpers/loadScript';
-import { addEvent } from 'src/helpers/googleAnalytics';
+import * as analytics from 'src/helpers/analytics';
 import { register } from 'src/actions/account';
-import { AFTER_JOIN_REDIRECT_ROUTE, LINKS, AWS_COOKIE_NAME } from 'src/constants';
+import { AFTER_JOIN_REDIRECT_ROUTE, LINKS, AWS_COOKIE_NAME, ANALYTICS_CREATE_ACCOUNT } from 'src/constants';
 
 export class JoinPage extends Component {
   state = {
@@ -43,7 +43,7 @@ export class JoinPage extends Component {
 
     return register(signupData)
       .then((accountData) => {
-        addEvent('Completed form', 'create account', { form_type: 'create account' });
+        analytics.trackFormSuccess(ANALYTICS_CREATE_ACCOUNT, { form_type: ANALYTICS_CREATE_ACCOUNT });
         return authenticate(accountData.username, values.password);
       })
       .then(() => this.props.history.push(AFTER_JOIN_REDIRECT_ROUTE, { plan }));
