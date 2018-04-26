@@ -16,6 +16,7 @@ exports[`SendingDomainPage should render correctly 1`] = `
           Which domain will you be sending from? 
           <UnstyledLink
             external={true}
+            onClick={[Function]}
             to="https://www.sparkpost.com/docs/getting-started/getting-started-sparkpost/#preparing-your-from-address"
           >
             Learn more about sending domains
@@ -73,6 +74,7 @@ exports[`SendingDomainPage should render submitting state correctly 1`] = `
           Which domain will you be sending from? 
           <UnstyledLink
             external={true}
+            onClick={[Function]}
             to="https://www.sparkpost.com/docs/getting-started/getting-started-sparkpost/#preparing-your-from-address"
           >
             Learn more about sending domains
