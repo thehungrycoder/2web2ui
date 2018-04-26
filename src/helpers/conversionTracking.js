@@ -1,5 +1,8 @@
 import * as analytics from './analytics';
 
+// These events are consumed through GTM by various Marketing-owned services to trigger
+// follow-on actions.
+
 function trackPlanChange(allPlans, oldCode, newCode) {
   const oldPlan = allPlans.find((plan) => plan.code === oldCode);
   const newPlan = allPlans.find((plan) => plan.code === newCode);

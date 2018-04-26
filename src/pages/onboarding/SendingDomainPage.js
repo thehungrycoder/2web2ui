@@ -8,7 +8,8 @@ import { TextFieldWrapper, CenteredLogo } from 'src/components';
 import Steps from './components/Steps';
 import SkipLink from './components/SkipLink';
 import { required, domain } from 'src/helpers/validation';
-import { LINKS } from 'src/constants';
+import * as analytics from 'src/helpers/analytics';
+import { LINKS, ANALYTICS_ONBOARDING, ANALYTICS_ONBOARDING_LEARN_MORE, ANALYTICS_ONBOARDING_CREATE_DOMAIN } from 'src/constants';
 
 export class SendingDomainPage extends Component {
   handleDomainCreate = (values) => {
@@ -26,9 +27,13 @@ export class SendingDomainPage extends Component {
     // Redirect here instead of the createDomain promise
     // to avoid redirects if component unmounts before the promise resolves
     if (!prevProps.submitSucceeded && submitSucceeded) {
+      analytics.trackEvent(ANALYTICS_ONBOARDING, ANALYTICS_ONBOARDING_CREATE_DOMAIN, { action: ANALYTICS_ONBOARDING_CREATE_DOMAIN });
       history.push('/onboarding/email');
     }
   }
+
+  trackLearnMoreClick = () => analytics.trackEvent(ANALYTICS_ONBOARDING, ANALYTICS_ONBOARDING_LEARN_MORE,
+    { action: ANALYTICS_ONBOARDING_LEARN_MORE });
 
   render() {
     const { handleSubmit, submitting } = this.props;
@@ -40,7 +45,8 @@ export class SendingDomainPage extends Component {
           <form onSubmit={handleSubmit(this.handleDomainCreate)}>
             <Panel.Section>
               <p>Let's get you set up to send some email!</p>
-              <p>Which domain will you be sending from? <UnstyledLink to={LINKS.ONBOARDING_SENDING} external>Learn more about sending domains</UnstyledLink>.</p>
+              <p>Which domain will you be sending from? <UnstyledLink to={LINKS.ONBOARDING_SENDING} onClick={this.trackLearnMoreClick} external>
+              Learn more about sending domains</UnstyledLink>.</p>
               <Field
                 component={TextFieldWrapper}
                 label='Domain Name'
