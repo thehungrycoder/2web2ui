@@ -76,7 +76,7 @@ const config = {
     defaultMetrics: ['count_targeted', 'count_rendered', 'count_accepted', 'count_bounce']
   },
   support: {
-    maxAttachmentSizeBytes: 1000 * 1000
+    maxAttachmentSizeBytes: 500 * 1000 // ~ 500 KB
   },
   templates: {
     testData: {

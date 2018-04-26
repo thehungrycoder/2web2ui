@@ -11,6 +11,7 @@
     ],
     "complexity": "off",
     "react/jsx-no-bind": "off",
+    "space-before-function-paren": ["error", "always"],
     "max-lines": [
       "error",
       {
@@ -44,6 +45,13 @@
     "lodash/chaining": [
       "error",
       "never"
+    ],
+    "react/jsx-curly-spacing": [
+      "error",
+      {
+        "when": "never",
+        "children": true
+      }
     ]
   },
   "extends": [

@@ -2,41 +2,68 @@ import sparkpostApiRequest from './helpers/sparkpostApiRequest';
 import { change } from 'redux-form';
 
 // Toggles the support panel UI
-export function toggleSupportPanel() {
+export function toggleSupportPanel () {
   return {
     type: 'TOGGLE_SUPPORT_PANEL'
   };
 }
 
-export function createTicket({ subject, message }) {
+/**
+ * Forces the support panel open rather than blindly toggling, good
+ * for places where we know we want to open it and the function might
+ * run multiple times (cDU etc) so a toggle would open then close
+ *
+ * @param {Object} options optional options to pass to reducer
+ * @param {String} options.view The view you want the panel to load in, currently only 'ticket' works
+ *
+ * @example
+ * openSupportPanel() // opens in default mode
+ * openSupportPanel({ view: 'ticket' }) // opens in ticket mode
+ */
+export function openSupportPanel (options) {
+  return {
+    type: 'OPEN_SUPPORT_PANEL',
+    payload: options
+  };
+}
+
+/**
+ * Creates a support ticket with a subject, message, and optional file attachment
+ *
+ * @param {Object} data
+ * @param {String} data.subject
+ * @param {String} data.message
+ * @param {Object} data.attachment
+ * @param {String} data.attachment.filename
+ * @param {Base64 String} data.attachment.content
+ *
+ */
+export function createTicket (data) {
   return sparkpostApiRequest({
     type: 'CREATE_TICKET',
     meta: {
       method: 'POST',
       url: '/integrations/support/ticket',
-      data: {
-        subject,
-        message
-      }
+      data
     }
   });
 }
 
-export function clearTicketForm() {
+export function clearTicketForm () {
   return {
     type: 'RESET_TICKET_FORM'
   };
 }
 
 // Toggles support ticket form (algolia search shown when false)
-export function toggleTicketForm() {
+export function toggleTicketForm () {
   return {
     type: 'TOGGLE_TICKET_FORM'
   };
 }
 
 // Fills support ticket form values
-export function hydrateTicketForm({ message, subject } = {}) {
+export function hydrateTicketForm ({ message, subject } = {}) {
   const formName = 'supportForm'; // Must match the form name used in SupportForm component
 
   return (dispatch) => {

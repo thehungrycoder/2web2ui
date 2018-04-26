@@ -10,7 +10,7 @@ exports[`Sending Domains Create Form renders correctly 1`] = `
       <em>
         mail.mydomain.com
       </em>
-      . Depending on how you want to use your domain, you many not be able to completely configure your DNS records if you use your organizational domain.
+      . Depending on how you want to use your domain, you may not be able to completely configure your DNS records if you use your organizational domain.
     </p>
     <Field
       component={[Function]}
@@ -49,7 +49,7 @@ exports[`Sending Domains Create Form renders submitting state correctly 1`] = `
       <em>
         mail.mydomain.com
       </em>
-      . Depending on how you want to use your domain, you many not be able to completely configure your DNS records if you use your organizational domain.
+      . Depending on how you want to use your domain, you may not be able to completely configure your DNS records if you use your organizational domain.
     </p>
     <Field
       component={[Function]}

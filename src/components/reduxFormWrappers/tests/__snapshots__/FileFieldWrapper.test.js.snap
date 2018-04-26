@@ -5,6 +5,7 @@ exports[`FileFieldWrapper renders disabled file input 1`] = `
   <Label>
     Test File Input
      *
+     
   </Label>
   <div>
     <Dropzone
@@ -20,17 +21,13 @@ exports[`FileFieldWrapper renders disabled file input 1`] = `
       preventDropOnDocument={true}
     >
       <span>
-        example.
-        csv
+        <Icon
+          name="Upload"
+          size={18}
+        />
+         Drag a file here, or click to browse
       </span>
     </Dropzone>
-    <Button
-      disabled={true}
-      onClick={[Function]}
-      size="default"
-    >
-      Choose File
-    </Button>
   </div>
 </fieldset>
 `;
@@ -40,6 +37,7 @@ exports[`FileFieldWrapper renders file input 1`] = `
   <Label>
     Test File Input
      *
+     
   </Label>
   <div>
     <Dropzone
@@ -55,16 +53,13 @@ exports[`FileFieldWrapper renders file input 1`] = `
       preventDropOnDocument={true}
     >
       <span>
-        example.
-        csv
+        <Icon
+          name="Upload"
+          size={18}
+        />
+         Drag a file here, or click to browse
       </span>
     </Dropzone>
-    <Button
-      onClick={[Function]}
-      size="default"
-    >
-      Choose File
-    </Button>
   </div>
 </fieldset>
 `;
@@ -74,6 +69,11 @@ exports[`FileFieldWrapper renders file input with error message 1`] = `
   <Label>
     Test File Input
      *
+     
+    <Error
+      error="Oh no!"
+      wrapper="span"
+    />
   </Label>
   <div>
     <Dropzone
@@ -89,20 +89,14 @@ exports[`FileFieldWrapper renders file input with error message 1`] = `
       preventDropOnDocument={true}
     >
       <span>
-        example.
-        csv
+        <Icon
+          name="Upload"
+          size={18}
+        />
+         Drag a file here, or click to browse
       </span>
     </Dropzone>
-    <Button
-      onClick={[Function]}
-      size="default"
-    >
-      Choose File
-    </Button>
   </div>
-  <Error
-    error="Oh no!"
-  />
 </fieldset>
 `;
 
@@ -111,6 +105,7 @@ exports[`FileFieldWrapper renders file input with help message 1`] = `
   <Label>
     Test File Input
      *
+     
   </Label>
   <div>
     <Dropzone
@@ -126,19 +121,48 @@ exports[`FileFieldWrapper renders file input with help message 1`] = `
       preventDropOnDocument={true}
     >
       <span>
-        example.
-        csv
+        <Icon
+          name="Upload"
+          size={18}
+        />
+         Drag a file here, or click to browse
       </span>
     </Dropzone>
-    <Button
-      onClick={[Function]}
-      size="default"
-    >
-      Choose File
-    </Button>
   </div>
   <div>
     Ask Google!
+  </div>
+</fieldset>
+`;
+
+exports[`FileFieldWrapper renders file input with no specified type 1`] = `
+<fieldset>
+  <Label>
+    Test File Input
+     *
+     
+  </Label>
+  <div>
+    <Dropzone
+      accept=""
+      disableClick={false}
+      disablePreview={true}
+      disabled={false}
+      maxSize={Infinity}
+      minSize={0}
+      multiple={false}
+      onDrop={[Function]}
+      onFileDialogCancel={[Function]}
+      preventDropOnDocument={true}
+    >
+      <span>
+        <Icon
+          name="Upload"
+          size={18}
+        />
+         Drag a file here, or click to browse
+      </span>
+    </Dropzone>
   </div>
 </fieldset>
 `;
@@ -148,6 +172,7 @@ exports[`FileFieldWrapper renders file input with selected filename 1`] = `
   <Label>
     Test File Input
      *
+     
   </Label>
   <div>
     <Dropzone
@@ -166,12 +191,6 @@ exports[`FileFieldWrapper renders file input with selected filename 1`] = `
         test.csv
       </span>
     </Dropzone>
-    <Button
-      onClick={[Function]}
-      size="default"
-    >
-      Choose File
-    </Button>
   </div>
 </fieldset>
 `;
