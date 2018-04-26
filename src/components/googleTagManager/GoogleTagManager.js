@@ -3,6 +3,10 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import findRouteByPath from 'src/helpers/findRouteByPath';
+import * as analytics from 'src/helpers/analytics';
+
+// This component is responsible for loading the GTM snippet, initialising our analytics
+// module, setting the username analytics variable and firing the content-view even on route change.
 
 export class GoogleTagManager extends Component {
   state = {
@@ -11,10 +15,8 @@ export class GoogleTagManager extends Component {
   }
 
   componentDidMount() {
-    window.dataLayer = [{
-      'gtm.start': new Date().getTime(),
-      event: 'gtm.js'
-    }];
+    analytics.setup();
+
     const route = findRouteByPath(this.props.location.pathname);
     // for public routes, track initial page view immediately
     if (route.public) {
@@ -42,13 +44,11 @@ export class GoogleTagManager extends Component {
     const { location, username } = this.props;
     const route = findRouteByPath(location.pathname);
 
-    window.dataLayer.push({
-      event: 'content-view',
-      'content-name': location.pathname + location.search, // duplicates angular 1.x ui-router "$location.url()" which is /path?plus=search
-      'content-title': route.title || location.pathname, // duplicate angular 1.x $rootScope.stateData.title
+    analytics.trackPageview(
+      location.pathname + location.search, // duplicates angular 1.x ui-router "$location.url()" which is /path?plus=search
+      route.title || location.pathname, // duplicate angular 1.x $rootScope.stateData.title
       username
-    });
-
+    );
   }
 
   render() {
