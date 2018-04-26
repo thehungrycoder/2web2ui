@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Error from './component/Error';
 import ErrorTracker from 'src/helpers/errorTracker';
+
 const primaryAction = {
   content: 'Reload Page',
   onClick: () => {
@@ -9,9 +10,8 @@ const primaryAction = {
 };
 
 export default class ErrorBoundary extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { hasError: false };
+  state = {
+    hasError: false
   }
 
   componentDidCatch(error, info) {
@@ -22,7 +22,7 @@ export default class ErrorBoundary extends Component {
   render() {
     const { showAction } = this.props;
     if (this.state.hasError) {
-      return <Error primaryAction={showAction ? primaryAction : null } {...this.props} />;
+      return <Error primaryAction={showAction ? primaryAction : null } />;
     }
 
     return this.props.children;

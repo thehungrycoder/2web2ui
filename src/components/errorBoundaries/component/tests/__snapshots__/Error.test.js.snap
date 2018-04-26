@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: Error renders correctly 1`] = `
+<EmptyState
+  image="Generic"
+  message=""
+  primaryAction={null}
+  title="Sorry, something went wrong"
+>
+  <p>
+    Our engineers are notified and working on fixing this issue.
+  </p>
+</EmptyState>
+`;
+
+exports[`Component: Error renders correctly with actions 1`] = `
+<EmptyState
+  image="Generic"
+  message=""
+  primaryAction={
+    Object {
+      "content": "Reload",
+    }
+  }
+  title="Sorry, something went wrong"
+>
+  <p>
+    Our engineers are notified and working on fixing this issue.
+  </p>
+</EmptyState>
+`;
+
+exports[`Component: Error renders correctly with custom message 1`] = `
+<EmptyState
+  image="Generic"
+  message="fooooo"
+  primaryAction={null}
+  title="Sorry, something went wrong"
+>
+  <p>
+    fooooo
+  </p>
+</EmptyState>
+`;
