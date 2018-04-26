@@ -31,7 +31,7 @@ export class DelayPage extends Component {
 
   renderTopLevelMetrics() {
     const { aggregatesLoading, aggregates } = this.props;
-    const { count_delayed_first, count_accepted } = aggregates;
+    const { count_delayed, count_delayed_first, count_accepted } = aggregates;
 
     if (aggregatesLoading) {
       return <PanelLoading minHeight='115px' />;
@@ -45,9 +45,9 @@ export class DelayPage extends Component {
       <MetricsSummary
         rateValue={safeRate(count_delayed_first, count_accepted)}
         rateTitle='Delayed Rate'
-        secondaryMessage={`${count_delayed_first.toLocaleString()} were delayed on first attempt.`}
+        secondaryMessage={`There were ${count_delayed.toLocaleString()} total delays in this time period. (Note: messages may be delayed multiple times)`}
       >
-        <strong>{count_delayed_first.toLocaleString()}</strong> of your messages were delayed of <strong>{count_accepted.toLocaleString()}</strong> messages accepted
+        <strong>{count_delayed_first.toLocaleString()}</strong> of <strong>{count_accepted.toLocaleString()}</strong> accepted messages were delayed on first attempt
       </MetricsSummary>
     );
   }
