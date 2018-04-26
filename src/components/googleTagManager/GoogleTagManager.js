@@ -15,7 +15,9 @@ export class GoogleTagManager extends Component {
   }
 
   componentDidMount() {
-    analytics.setup();
+    if (!this.state.dataLayerLoaded) {
+      analytics.setup();
+    }
 
     const route = findRouteByPath(this.props.location.pathname);
     // for public routes, track initial page view immediately
