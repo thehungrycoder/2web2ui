@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders correctly with no subaccounts 1`] = `
+exports[`renders ready only mode correctly 1`] = `
 <Page
   breadcrumbAction={
     Object {
@@ -10,40 +10,54 @@ exports[`renders correctly with no subaccounts 1`] = `
     }
   }
   empty={Object {}}
-  secondaryActions={
-    Array [
-      Object {
-        "content": "Delete",
-        "onClick": [Function],
-      },
-    ]
-  }
 >
+  <Banner
+    status="info"
+    title="This API Key is read-only"
+  >
+    <p>
+      This API Key is only editable by the owner: 
+      johndoe
+      .
+    </p>
+  </Banner>
   <Panel>
     <withRouter(Connect(ReduxForm))
-      apiKey={Object {}}
+      apiKey={
+        Object {
+          "id": "id1",
+          "username": "johndoe",
+        }
+      }
+      isReadOnly={true}
       onSubmit={[Function]}
     />
   </Panel>
-  <DeleteModal
-    content={
-      <p>
-        The key will be immediately and permanently removed. This cannot be undone.
-      </p>
-    }
-    onCancel={[Function]}
-    onDelete={[Function]}
-    open={false}
-    title="Are you sure you want to delete this key?"
-  />
 </Page>
 `;
 
-exports[`should render a redirect when an error is present 1`] = `
-<Redirect
-  push={false}
-  to="/account/api-keys"
-/>
-`;
-
 exports[`should render loading component while loading 1`] = `<Loading />`;
+
+exports[`should render not found pane when api key can not be found 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "API Keys",
+      "to": "/account/api-keys",
+    }
+  }
+  empty={Object {}}
+>
+  <Panel>
+    <Banner
+      status="warning"
+      title="Not found"
+    >
+      <p>
+        API Key was not found.
+      </p>
+    </Banner>
+  </Panel>
+</Page>
+`;

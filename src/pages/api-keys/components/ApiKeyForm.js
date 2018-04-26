@@ -23,10 +23,6 @@ import { required } from 'src/helpers/validation';
 import GrantsCheckboxes from 'src/components/grantBoxes/GrantsCheckboxes';
 
 const formName = 'apiKeyForm';
-const grantsOptions = [
-  { value: 'all', label: 'All' },
-  { value: 'select', label: 'Select' }
-];
 
 export class ApiKeyForm extends Component {
   get availableGrants() {
@@ -46,8 +42,17 @@ export class ApiKeyForm extends Component {
     });
   }
 
+  getGrantOptions() {
+    const { isReadOnly } = this.props;
+
+    return [
+      { value: 'all', label: 'All', disabled: isReadOnly },
+      { value: 'select', label: 'Select', disabled: isReadOnly }
+    ];
+  }
+
   render() {
-    const { handleSubmit, isNew, pristine, showGrants, submitting } = this.props;
+    const { handleSubmit, isNew, pristine, showGrants, submitting, isReadOnly } = this.props;
     const submitText = isNew ? 'Create API Key' : 'Update API Key';
 
     return (
@@ -58,10 +63,11 @@ export class ApiKeyForm extends Component {
             component={TextFieldWrapper}
             validate={required}
             label='API Key Name'
+            disabled={isReadOnly}
           />
           <Field
             name='subaccount'
-            helpText='This assigment is permanent. Leave blank to assign to master account.'
+            helpText={isReadOnly ? '' : 'This assignment is permanent. Leave blank to assign to master account.'}
             component={SubaccountTypeaheadWrapper}
             disabled={!isNew}
           />
@@ -71,23 +77,26 @@ export class ApiKeyForm extends Component {
             name='grantsRadio'
             component={RadioGroup}
             title='API Permissions'
-            options={grantsOptions}
+            options={this.getGrantOptions()}
           />
-          <GrantsCheckboxes grants={this.availableGrants} show={showGrants} />
+          <GrantsCheckboxes grants={this.availableGrants} show={showGrants} disabled={isReadOnly}/>
           <Field
             name='validIps'
             component={TextFieldWrapper}
             label='Allowed IPs'
-            helpText='Leaving the field blank will allow access by valid API keys from any IP address.'
-            placeholder='10.20.30.40, 10.20.30.0/24'
+            helpText={isReadOnly ? '' : 'Leaving the field blank will allow access by valid API keys from any IP address.'}
+            placeholder={isReadOnly ? '' : '10.20.30.40, 10.20.30.0/24'}
             validate={validIpList}
+            disabled={isReadOnly}
           />
         </Panel.Section>
-        <Panel.Section>
-          <Button submit primary disabled={submitting || pristine}>
-            {submitting ? 'Loading...' : submitText}
-          </Button>
-        </Panel.Section>
+        {!isReadOnly &&
+          <Panel.Section>
+            <Button submit primary disabled={submitting || pristine}>
+              {submitting ? 'Loading...' : submitText}
+            </Button>
+          </Panel.Section>
+        }
       </form>
     );
   }

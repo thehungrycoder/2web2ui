@@ -19,14 +19,14 @@ describe('Api Keys List Page', () => {
         short_key: 'ab01',
         grants: ['metrics/view'],
         subaccount_id: 101,
-        isOwnedByCurrentUser: true
+        canCurrentUserEdit: true
       },
       {
         id: '456id',
         label: 'Test Key 2',
         short_key: 'fe98',
         grants: ['smtp/inject'],
-        isOwnedByCurrentUser: true
+        canCurrentUserEdit: true
       },
       {
         id: '789id',
@@ -34,7 +34,7 @@ describe('Api Keys List Page', () => {
         short_key: 'c00l',
         grants: ['metrics/view'],
         username: 'other_user',
-        isOwnedByCurrentUser: false
+        canCurrentUserEdit: false
       }
     ]
   };

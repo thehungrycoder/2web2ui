@@ -14,6 +14,7 @@ exports[`renders correctly with no subaccounts 1`] = `
 >
   <Panel>
     <withRouter(Connect(ReduxForm))
+      isReadOnly={false}
       onSubmit={[Function]}
     />
   </Panel>

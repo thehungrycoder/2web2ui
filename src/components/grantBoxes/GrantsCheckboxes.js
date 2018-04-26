@@ -9,7 +9,7 @@ import styles from './GrantsCheckboxes.module.scss';
 
 const cx = classnames.bind(styles);
 
-const GrantsCheckboxes = ({ grants, show }) => {
+const GrantsCheckboxes = ({ grants, show, disabled }) => {
   const grantFields = _.map(grants, (grant) => (
     <div className={styles.Grant} key={grant.key}>
       <Tooltip dark content={grant.description}>
@@ -18,6 +18,7 @@ const GrantsCheckboxes = ({ grants, show }) => {
           label={grant.label}
           component={CheckboxWrapper}
           type="checkbox"
+          disabled={disabled}
         />
       </Tooltip>
     </div>

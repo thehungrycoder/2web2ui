@@ -1,13 +1,13 @@
 import _ from 'lodash';
 import { createSelector } from 'reselect';
-import { getSubaccountIdFromProps } from './subaccounts';
+import { getSubaccountIdFromProps, selectSubaccountIdFromQuery } from './subaccounts';
 /*
  * generic apiKeys selectors
  */
 const getApiKeys = (state) => state.apiKeys.keys;
 const getGrantsArray = (state) => state.apiKeys.grants;
 const getSubaccountGrantsArray = (state) => state.apiKeys.subaccountGrants;
-export const selectApiKeyId = (props) => props.match.params.id;
+export const selectApiKeyId = (state, props) => props.match.params.id;
 const getGrantsLoading = (state) => state.apiKeys.grantsLoading;
 const getSubaccountGrantsLoading = (state) => state.apiKeys.subaccountGrantsLoading;
 const getCurrentUsername = (state) => state.currentUser.username;
@@ -27,9 +27,12 @@ export const getFormLoading = createSelector(
     grantsLoading || subaccountGrantsLoading
 );
 
-/*
- * ApiKeyForm selectors
- */
+export const getCurrentApiKeyFromKeys = createSelector(
+  [getApiKeys, selectApiKeyId, selectSubaccountIdFromQuery],
+  (keys, id, subaccountId) => _.find(keys, (key) =>
+    key.id === id && (!key.subaccount_id || key.subaccount_id === parseInt(subaccountId, 10))
+  ) || {});
+
 const getFormApiKey = (state, props) => props.apiKey || {};
 
 export const getIsNew = createSelector(getFormApiKey, (apiKey) =>
@@ -38,8 +41,7 @@ export const getIsNew = createSelector(getFormApiKey, (apiKey) =>
 
 export const getInitialGrantsRadio = createSelector(
   [getGrants, getFormApiKey, getIsNew],
-  (grants, apiKey, isNew) =>
-    isNew || _.size(grants) <= _.size(apiKey.grants) ? 'all' : 'select'
+  (grants, apiKey, isNew) => isNew || _.size(grants) <= _.size(apiKey.grants) ? 'all' : 'select'
 );
 
 export const getInitialValues = createSelector(
@@ -82,12 +84,9 @@ export const selectApiKeysForSending = createSelector(
   (apiKeys) => apiKeys.filter((key) => key.grants.includes('smtp/inject') || key.grants.includes('transmissions/modify'))
 );
 
-export const selectApiKeysForSmtp = createSelector(
-  [getApiKeys],
-  (apiKeys) => apiKeys.filter((key) => key.grants.includes('smtp/inject'))
-);
+export const canCurrentUserEditKey = (key, currentUsername) => Boolean((key.username === currentUsername) || (!key.username && key.subaccount_id));
 
 export const selectKeysForAccount = createSelector(
   [getApiKeys, getCurrentUsername],
-  (keys, currentUsername) => keys.map((key) => ({ ...key, isOwnedByCurrentUser: Boolean((key.username === currentUsername) || (!key.username && key.subaccount_id)) }))
+  (keys, currentUsername) => keys.map((key) => ({ ...key, canCurrentUserEdit: canCurrentUserEditKey(key, currentUsername) }))
 );
