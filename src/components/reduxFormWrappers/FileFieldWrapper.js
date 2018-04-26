@@ -2,6 +2,7 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
 import { Error, Label, Icon } from '@sparkpost/matchbox';
+import { shrinkToFit } from 'src/helpers/string';
 import styles from './FileFieldWrapper.module.scss';
 
 // TODO: Integrate in Matchbox if Dropzone isn't too big of a dependency
@@ -54,7 +55,7 @@ export default class FileFieldWrapper extends Component {
             ref={this.setDropzoneRef}
           >
             {(filename && !meta.error)
-              ? <span>{filename}</span>
+              ? <span>{shrinkToFit(filename, 50)}</span>
               : <span className={styles.Placeholder}><Icon name='Upload' /> Drag a file here, or click to browse</span>}
           </Dropzone>
         </div>
