@@ -11,9 +11,11 @@ import config from 'src/config';
 import IpPoolSelect from './fields/IpPoolSelect';
 import ErrorTracker from 'src/helpers/errorTracker';
 import { required, integer, minNumber, maxNumber } from 'src/helpers/validation';
+import * as conversions from 'src/helpers/conversionTracking';
 import { currentPlanSelector } from 'src/selectors/accountBillingInfo';
 import DedicatedIpCost from '../components/DedicatedIpCost';
 import { isAws } from 'src/helpers/conditions/account';
+import { ANALYTICS_ADDON_IP } from 'src/constants';
 import styles from './Forms.module.scss';
 
 const FORM_NAME = 'add-sending-ips';
@@ -56,6 +58,8 @@ export class AddIps extends Component {
         _error: 'Unable to complete your request at this time'
       });
     }
+
+    conversions.trackAddonPurchase(ANALYTICS_ADDON_IP);
 
     this.props.showAlert({
       message: `Successfully added ${quantity} dedicated IPs!`,

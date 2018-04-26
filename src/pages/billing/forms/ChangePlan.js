@@ -20,6 +20,7 @@ import Confirmation from '../components/Confirmation';
 import CardSummary from '../components/CardSummary';
 import { isAws, isSelfServeBilling } from 'src/helpers/conditions/account';
 import { not } from 'src/helpers/conditions';
+import * as conversions from 'src/helpers/conversionTracking';
 import AccessControl from 'src/components/auth/AccessControl';
 
 const FORMNAME = 'changePlan';
@@ -42,21 +43,27 @@ export class ChangePlan extends Component {
   }
 
   onSubmit = (values) => {
-    const { account, updateSubscription, billingCreate, billingUpdate, showAlert, history } = this.props;
+    const { account, billing, updateSubscription, billingCreate, billingUpdate, showAlert, history } = this.props;
+    const oldCode = account.subscription.code;
+    const newCode = values.planpicker.code;
+
     // decides which action to be taken based on
     // if it's aws account, it already has billing and if you use a saved CC
     let action;
     if (isAws({ account })) {
-      action = updateSubscription({ code: values.planpicker.code });
+      action = updateSubscription({ code: newCode });
     } else if (account.billing) {
-      action = this.state.useSavedCC ? updateSubscription({ code: values.planpicker.code }) : billingUpdate(values);
+      action = this.state.useSavedCC ? updateSubscription({ code: newCode }) : billingUpdate(values);
     } else {
       action = billingCreate(values); // creates Zuora account
     }
 
     return action
       .then(() => history.push('/account/billing'))
-      .then(() => showAlert({ type: 'success', message: 'Subscription Updated' }));
+      .then(() => {
+        conversions.trackPlanChange(billing.plans, oldCode, newCode);
+        return showAlert({ type: 'success', message: 'Subscription Updated' });
+      });
   }
 
   renderCCSection = () => {
