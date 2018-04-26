@@ -46,7 +46,7 @@ export class ApiKeysTab extends Component {
     return (
       <Panel.Section style={{ textAlign: 'center' }}>
         <p>This subaccount has no API Keys assigned to it. You can assign an existing one, or create a new one.</p>
-        <Button plain Component={Link} to='/account/api-keys'>Manage API Keys</Button>
+        <Button plain Component={Link} to='/account/api-keys' color='orange'>Manage API Keys</Button>
       </Panel.Section>
     );
   }

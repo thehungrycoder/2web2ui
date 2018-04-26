@@ -32,10 +32,10 @@ export default class BillingSummary extends Component {
     const { billing } = account;
     return (
       <Panel title='Billing'>
-        <Panel.Section actions={[{ content: 'Update Payment Information', onClick: this.handlePaymentModal }]}>
+        <Panel.Section actions={[{ content: 'Update Payment Information', onClick: this.handlePaymentModal, color: 'orange' }]}>
           <CardSummary label='Credit Card' billing={billing} />
         </Panel.Section>
-        <Panel.Section actions={[{ content: 'Update Billing Contact', onClick: this.handleContactModal }]}>
+        <Panel.Section actions={[{ content: 'Update Billing Contact', onClick: this.handleContactModal, color: 'orange' }]}>
           <LabelledValue label='Billing Contact'>
             <h6>{ billing.first_name } { billing.last_name }</h6>
             <p>{ billing.email }</p>
@@ -61,7 +61,7 @@ export default class BillingSummary extends Component {
 
     if (canChangePlan) {
       const changePlanLabel = currentPlan.isFree ? 'Upgrade Now' : 'Change Plan';
-      changePlanActions = { actions: [{ content: changePlanLabel, to: '/account/billing/plan', Component: Link }]};
+      changePlanActions = { actions: [{ content: changePlanLabel, to: '/account/billing/plan', Component: Link, color: 'orange' }]};
     }
 
     return (

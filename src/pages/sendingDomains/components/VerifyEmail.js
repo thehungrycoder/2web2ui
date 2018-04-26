@@ -116,6 +116,7 @@ export class VerifyEmail extends Component {
         plain
         disabled={submitting}
         onClick={eventHandler}
+        color='orange'
       >
         {submitting ? 'Sending Email...' : 'Send Email'}
       </Button>
@@ -130,7 +131,7 @@ export class VerifyEmail extends Component {
 
     return (
       <Modal open={open} onClose={onCancel}>
-        <Panel title='Verify through Email' accent actions={[{ content: 'Close', onClick: onCancel }]}>
+        <Panel title='Verify through Email' accent actions={[{ content: 'Close', onClick: onCancel, color: 'orange' }]}>
           {renderVerification}
         </Panel>
       </Modal>

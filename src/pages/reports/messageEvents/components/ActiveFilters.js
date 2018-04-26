@@ -46,7 +46,7 @@ export class ActiveFilters extends Component {
     }
 
     return (
-      <Panel.Section actions={[{ content: 'Clear All Filters', onClick: this.handleRemoveAll }]}>
+      <Panel.Section actions={[{ content: 'Clear All Filters', onClick: this.handleRemoveAll, color: 'blue' }]}>
         <small>Filters: </small>
         {this.renderTags({ key: 'events', label: 'Event', itemToString: snakeToFriendly })}
         {this.renderTags({ key: 'recipients', label: 'Recipient' })}

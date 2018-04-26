@@ -69,7 +69,8 @@ export class EditBounce extends Component {
     return {
       content: buttonText,
       onClick: this.verifyDomain,
-      disabled: verifyCnameLoading
+      disabled: verifyCnameLoading,
+      color: 'orange'
     };
   }
 

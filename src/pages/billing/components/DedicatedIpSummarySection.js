@@ -14,8 +14,8 @@ export default function DedicatedIpSummarySection({ count = 0, plan = {}, onClic
 
   // There are some paid accounts that do not allow dedicated IPs
   const action = plan.canPurchaseIps
-    ? { content: ipCtaContent, disabled: hasReachedMax, onClick }
-    : { content: 'Upgrade Now', to: '/account/billing/plan', Component: Link };
+    ? { content: ipCtaContent, disabled: hasReachedMax, onClick, color: 'orange' }
+    : { content: 'Upgrade Now', to: '/account/billing/plan', Component: Link, color: 'orange' };
 
   // Decrement count if plan includes one free IP
   const billableCount = count > 0 && plan.includesIp ? count - 1 : count;
