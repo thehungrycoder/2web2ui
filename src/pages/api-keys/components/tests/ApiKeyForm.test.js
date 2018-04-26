@@ -19,7 +19,8 @@ const props = {
   subaccount: false,
   isNew: true,
   handleSubmit: jest.fn(),
-  onSubmit: jest.fn()
+  onSubmit: jest.fn(),
+  isReadOnly: false
 };
 
 let wrapper;
@@ -29,6 +30,11 @@ beforeEach(() => {
 });
 
 it('renders correctly - new and no subaccounts', () => {
+  expect(wrapper).toMatchSnapshot();
+});
+
+it('renders correctly - readonly mode', () => {
+  wrapper.setProps({ isReadOnly: true });
   expect(wrapper).toMatchSnapshot();
 });
 

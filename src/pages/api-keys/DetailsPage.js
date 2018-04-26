@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
-import { Page, Panel } from '@sparkpost/matchbox';
+import { Link } from 'react-router-dom';
+import { Page, Panel, Banner } from '@sparkpost/matchbox';
+import _ from 'lodash';
 
-import { deleteApiKey, getApiKey, updateApiKey, listGrants, listSubaccountGrants } from 'src/actions/api-keys';
+import { listApiKeys, getApiKey, listGrants } from 'src/actions/api-keys';
 import { showAlert } from 'src/actions/globalAlert';
 
-import { hasSubaccounts } from 'src/selectors/subaccounts';
-import { getFormLoading, selectApiKeyId } from 'src/selectors/api-keys';
-import { selectSubaccountIdFromQuery } from 'src/selectors/subaccounts';
+import { getCurrentApiKeyFromKeys } from 'src/selectors/api-keys';
 
-import { Loading, DeleteModal } from 'src/components';
+import { Loading } from 'src/components';
 import ApiKeyForm from './components/ApiKeyForm';
 
 const breadcrumbAction = {
@@ -20,89 +19,73 @@ const breadcrumbAction = {
 };
 
 export class ApiKeysDetailsPage extends Component {
-  static defaultProps = {
-    apiKey: {}
-  };
-
-  state = {
-    showDeleteModal: false
-  };
-
   componentDidMount() {
-    const { subaccount, id } = this.props;
-    this.props.getApiKey({ id, subaccount });
+    const { keys } = this.props;
+    if (!keys.length) {
+      this.props.listApiKeys();
+    }
 
     this.props.listGrants();
-    if (this.props.hasSubaccounts) {
-      this.props.listSubaccountGrants();
-    }
   }
 
-  handleDelete = () => {
-    const { deleteApiKey, history, subaccount, id, showAlert } = this.props;
+  renderReadOnlyAlert() {
+    const { apiKey } = this.props;
 
-    return deleteApiKey({ id, subaccount }).then(() => {
-      history.push('/account/api-keys');
-      return showAlert({ type: 'success', message: 'API key deleted' });
-    });
-  };
+    return (<Banner
+      status='info'
+      title='This API Key is read-only'
+    >
+      <p>This API Key is only editable by the owner: {apiKey.username}.</p>
+    </Banner>);
+  }
 
-  onToggleDelete = () => {
-    this.setState({ showDeleteModal: !this.state.showDeleteModal });
-  };
+  renderNotFound() {
+    return (<Banner
+      status='warning'
+      title='Not found'
 
-  onSubmit = (values) => {
-    const { id, showAlert, updateApiKey } = this.props;
-
-    return updateApiKey({ id, ...values }).then(() => showAlert({
-      type: 'success',
-      message: 'API key updated'
-    }));
-  };
+    >
+      <p>API Key was not found.</p>
+    </Banner>);
+  }
 
   render() {
-    const { apiKey, error, loading } = this.props;
+    const { apiKey, loading } = this.props;
 
     if (loading) {
       return <Loading />;
     }
 
-    if (error) {
-      return <Redirect to='/account/api-keys' />;
-    }
+    const isEmpty = _.isEmpty(apiKey);
 
     return (
       <Page
         title={apiKey.label}
         breadcrumbAction={breadcrumbAction}
-        secondaryActions={[{ content: 'Delete', onClick: this.onToggleDelete }]}>
+      >
+        {!isEmpty && this.renderReadOnlyAlert()}
         <Panel>
-          <ApiKeyForm apiKey={apiKey} onSubmit={this.onSubmit} />
+          {isEmpty ? this.renderNotFound() : <ApiKeyForm onSubmit={_.noop} apiKey={apiKey} isReadOnly={true}/>}
         </Panel>
-        <DeleteModal
-          open={this.state.showDeleteModal}
-          title="Are you sure you want to delete this key?"
-          content={<p>The key will be immediately and permanently removed. This cannot be undone.</p>}
-          onCancel={this.onToggleDelete}
-          onDelete={this.handleDelete}
-        />
       </Page>
     );
   }
 }
 
 const mapStateToProps = (state, props) => {
-  const { error, grants } = state.apiKeys;
+  const { grants } = state.apiKeys;
 
   return {
-    apiKey: state.apiKeys.key,
-    id: selectApiKeyId(props),
-    error,
+    apiKey: getCurrentApiKeyFromKeys(state, props),
+    keys: state.apiKeys.keys,
     grants,
-    hasSubaccounts: hasSubaccounts(state),
-    loading: getFormLoading(state) || state.apiKeys.keyLoading,
-    subaccount: selectSubaccountIdFromQuery(state, props)
+    loading: state.apiKeys.grantsLoading || state.apiKeys.keysLoading
   };
 };
 
-export default connect(mapStateToProps, { getApiKey, updateApiKey, listGrants, listSubaccountGrants, deleteApiKey, showAlert })(ApiKeysDetailsPage);
+export default connect(mapStateToProps, {
+  listApiKeys,
+  getApiKey,
+  listGrants,
+  showAlert
+})(ApiKeysDetailsPage);

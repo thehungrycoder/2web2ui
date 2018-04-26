@@ -5,6 +5,7 @@ exports[`renders correctly - new and no subaccounts 1`] = `
   <Panel.Section>
     <Field
       component={[Function]}
+      disabled={false}
       label="API Key Name"
       name="label"
       validate={[Function]}
@@ -12,7 +13,7 @@ exports[`renders correctly - new and no subaccounts 1`] = `
     <Field
       component={[Function]}
       disabled={false}
-      helpText="This assigment is permanent. Leave blank to assign to master account."
+      helpText="This assignment is permanent. Leave blank to assign to master account."
       name="subaccount"
     />
   </Panel.Section>
@@ -23,10 +24,12 @@ exports[`renders correctly - new and no subaccounts 1`] = `
       options={
         Array [
           Object {
+            "disabled": false,
             "label": "All",
             "value": "all",
           },
           Object {
+            "disabled": false,
             "label": "Select",
             "value": "select",
           },
@@ -35,6 +38,7 @@ exports[`renders correctly - new and no subaccounts 1`] = `
       title="API Permissions"
     />
     <GrantsCheckboxes
+      disabled={false}
       grants={
         Object {
           "grant1": Object {
@@ -54,6 +58,7 @@ exports[`renders correctly - new and no subaccounts 1`] = `
     />
     <Field
       component={[Function]}
+      disabled={false}
       helpText="Leaving the field blank will allow access by valid API keys from any IP address."
       label="Allowed IPs"
       name="validIps"
@@ -73,19 +78,20 @@ exports[`renders correctly - new and no subaccounts 1`] = `
 </form>
 `;
 
-exports[`renders correctly - update and subaccounts 1`] = `
+exports[`renders correctly - readonly mode 1`] = `
 <form>
   <Panel.Section>
     <Field
       component={[Function]}
+      disabled={true}
       label="API Key Name"
       name="label"
       validate={[Function]}
     />
     <Field
       component={[Function]}
-      disabled={true}
-      helpText="This assigment is permanent. Leave blank to assign to master account."
+      disabled={false}
+      helpText=""
       name="subaccount"
     />
   </Panel.Section>
@@ -96,10 +102,12 @@ exports[`renders correctly - update and subaccounts 1`] = `
       options={
         Array [
           Object {
+            "disabled": true,
             "label": "All",
             "value": "all",
           },
           Object {
+            "disabled": true,
             "label": "Select",
             "value": "select",
           },
@@ -108,6 +116,76 @@ exports[`renders correctly - update and subaccounts 1`] = `
       title="API Permissions"
     />
     <GrantsCheckboxes
+      disabled={true}
+      grants={
+        Object {
+          "grant1": Object {
+            "key": "value",
+          },
+          "grant2": Object {
+            "key": "value",
+          },
+          "grant3": Object {
+            "key": "value",
+          },
+          "grant4": Object {
+            "key": "value",
+          },
+        }
+      }
+    />
+    <Field
+      component={[Function]}
+      disabled={true}
+      helpText=""
+      label="Allowed IPs"
+      name="validIps"
+      placeholder=""
+      validate={[Function]}
+    />
+  </Panel.Section>
+</form>
+`;
+
+exports[`renders correctly - update and subaccounts 1`] = `
+<form>
+  <Panel.Section>
+    <Field
+      component={[Function]}
+      disabled={false}
+      label="API Key Name"
+      name="label"
+      validate={[Function]}
+    />
+    <Field
+      component={[Function]}
+      disabled={true}
+      helpText="This assignment is permanent. Leave blank to assign to master account."
+      name="subaccount"
+    />
+  </Panel.Section>
+  <Panel.Section>
+    <Field
+      component={[Function]}
+      name="grantsRadio"
+      options={
+        Array [
+          Object {
+            "disabled": false,
+            "label": "All",
+            "value": "all",
+          },
+          Object {
+            "disabled": false,
+            "label": "Select",
+            "value": "select",
+          },
+        ]
+      }
+      title="API Permissions"
+    />
+    <GrantsCheckboxes
+      disabled={false}
       grants={
         Object {
           "grant1": Object {
@@ -121,6 +199,7 @@ exports[`renders correctly - update and subaccounts 1`] = `
     />
     <Field
       component={[Function]}
+      disabled={false}
       helpText="Leaving the field blank will allow access by valid API keys from any IP address."
       label="Allowed IPs"
       name="validIps"
@@ -145,6 +224,7 @@ exports[`submits correctly 1`] = `
   <Panel.Section>
     <Field
       component={[Function]}
+      disabled={false}
       label="API Key Name"
       name="label"
       validate={[Function]}
@@ -152,7 +232,7 @@ exports[`submits correctly 1`] = `
     <Field
       component={[Function]}
       disabled={false}
-      helpText="This assigment is permanent. Leave blank to assign to master account."
+      helpText="This assignment is permanent. Leave blank to assign to master account."
       name="subaccount"
     />
   </Panel.Section>
@@ -163,10 +243,12 @@ exports[`submits correctly 1`] = `
       options={
         Array [
           Object {
+            "disabled": false,
             "label": "All",
             "value": "all",
           },
           Object {
+            "disabled": false,
             "label": "Select",
             "value": "select",
           },
@@ -175,6 +257,7 @@ exports[`submits correctly 1`] = `
       title="API Permissions"
     />
     <GrantsCheckboxes
+      disabled={false}
       grants={
         Object {
           "grant1": Object {
@@ -194,6 +277,7 @@ exports[`submits correctly 1`] = `
     />
     <Field
       component={[Function]}
+      disabled={false}
       helpText="Leaving the field blank will allow access by valid API keys from any IP address."
       label="Allowed IPs"
       name="validIps"

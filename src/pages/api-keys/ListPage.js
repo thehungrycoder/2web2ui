@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Page, Tooltip, Icon } from '@sparkpost/matchbox';
+import { Page } from '@sparkpost/matchbox';
 import { listApiKeys, hideNewApiKey } from 'src/actions/api-keys';
-import { selectKeysForAccount } from 'src/selectors/api-keys';
 import { Loading, SubaccountTag, TableCollection, ApiErrorBanner, ApiKeySuccessBanner, ShortKeyCode } from 'src/components';
 import { filterBoxConfig } from './tableConfig';
+import { selectKeysForAccount } from 'src/selectors/api-keys';
+
 import { hasSubaccounts } from 'src/selectors/subaccounts';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
 import { LINKS } from 'src/constants';
@@ -29,11 +30,11 @@ export class ListPage extends Component {
     this.props.listApiKeys();
   }
 
-  getLabel = ({ isOwnedByCurrentUser, id, subaccount_id, label, username }) => {
-    if (isOwnedByCurrentUser) {
-      return <Link to={`/account/api-keys/details/${id}${setSubaccountQuery(subaccount_id)}`}>{label}</Link>;
+  getLabel = ({ canCurrentUserEdit, id, subaccount_id, label, username }) => {
+    if (canCurrentUserEdit) {
+      return <Link to={`/account/api-keys/edit/${id}${setSubaccountQuery(subaccount_id)}`}>{label}</Link>;
     } else {
-      return <span>{label}<br/><small><Tooltip dark content='API keys are only editable by their owner'>(owner: {username}) <Icon name='Info' /></Tooltip></small></span>;
+      return <Link to={`/account/api-keys/view/${id}${setSubaccountQuery(subaccount_id)}`}>{label}</Link>;
     }
   }
 

@@ -375,11 +375,18 @@ const routes = [
     title: 'New API Key'
   },
   {
-    path: '/account/api-keys/details/:id',
+    path: '/account/api-keys/edit/:id',
+    component: apiKeys.EditPage,
+    condition: hasGrants('api_keys/manage'),
+    layout: App,
+    title: 'Edit API Key'
+  },
+  {
+    path: '/account/api-keys/view/:id',
     component: apiKeys.DetailsPage,
     condition: hasGrants('api_keys/manage'),
     layout: App,
-    title: 'API Key Details'
+    title: 'View API Key'
   },
   {
     path: '/account/tracking-domains',
