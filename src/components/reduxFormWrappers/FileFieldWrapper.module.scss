@@ -15,15 +15,19 @@
 
 .Dropzone {
   @extend .Input;
-  border-right-style: none;
-  border-bottom-right-radius: 0;
-  border-top-right-radius: 0;
+  border-style: dashed;
+  text-align: center;
   cursor: pointer;
+
+  &:hover {
+    border-color: color(gray, 5);
+    border-style: solid;
+  }
 }
 
-.DropzoneActive {
+.DropzoneActive, .DropzoneActive:hover {
   border-color: color(blue, light);
-  border-right-style: solid;
+  border-style: solid;
   box-shadow: 0 0 0 1px color(blue, light);
 }
 

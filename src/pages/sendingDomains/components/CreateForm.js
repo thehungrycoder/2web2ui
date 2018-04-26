@@ -11,13 +11,13 @@ import SubaccountForm from './SubaccountForm';
 const FORM_NAME = 'createSendingDomain';
 
 export class CreateForm extends Component {
-  render() {
+  render () {
     const { submitting, handleSubmit, hasSubaccounts } = this.props;
 
     return (
       <form onSubmit={handleSubmit}>
         <Panel.Section>
-          <p>We recommend using a subdomain e.g. <em>mail.mydomain.com</em>. Depending on how you want to use your domain, you many not be able to completely configure your DNS records if you use your organizational domain.</p>
+          <p>We recommend using a subdomain e.g. <em>mail.mydomain.com</em>. Depending on how you want to use your domain, you may not be able to completely configure your DNS records if you use your organizational domain.</p>
           <Field
             component={TextFieldWrapper}
             label='Domain Name'

@@ -5,12 +5,10 @@ import { Button, Panel } from '@sparkpost/matchbox';
 import { TextFieldWrapper } from 'src/components';
 import { required, minLength, maxFileSize } from 'src/helpers/validation';
 import config from 'src/config';
-import FileInput from './FileInput';
-
 import styles from './SupportForm.module.scss';
-const formName = 'supportForm';
+import FileFieldWrapper from 'src/components/reduxFormWrappers/FileFieldWrapper';
 
-const AttachmentField = (props) => <FileInput {...props}>Attach a file</FileInput>;
+const formName = 'supportForm';
 
 export class SupportForm extends Component {
   renderSuccess() {
@@ -52,6 +50,7 @@ export class SupportForm extends Component {
             label='Subject'
             placeholder='Give your issue a title'
             inlineErrors={true}
+            autoFocus={true}
             disabled={submitting}
             validate={[required, minLength(5)]}
             component={TextFieldWrapper} />
@@ -70,14 +69,15 @@ export class SupportForm extends Component {
           <Field
             type='file'
             name='attachment'
-            label='Attachment'
-            component={AttachmentField}
+            label='Attach a file'
+            disabled={submitting}
+            component={FileFieldWrapper}
             validate={maxFileSize(config.support.maxAttachmentSizeBytes)}
           />
         </Panel.Section>
         <Panel.Section>
           <Button submit primary disabled={pristine || invalid || submitting}>
-            {submitting ? 'Saving' : 'Submit Ticket' }
+            {submitting ? 'Saving' : 'Submit Ticket'}
           </Button>
           <Button className={styles.CancelBtn} disabled={submitting} onClick={() => this.reset(onCancel)}>Cancel</Button>
         </Panel.Section>
