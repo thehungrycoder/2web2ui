@@ -7,8 +7,8 @@ import { RadioGroup, SubaccountTypeaheadWrapper, TextFieldWrapper } from 'src/co
 import { required } from 'src/helpers/validation';
 
 const createOptions = [
-  { label: 'Master account only', value: 'master' },
   { label: 'Master and all subaccounts', value: 'all' },
+  { label: 'Master account only', value: 'master' },
   { label: 'Single Subaccount', value: 'subaccount' }
 ];
 
@@ -22,7 +22,7 @@ const createOptions = [
  * - subaccount TextField | typeahead (disabled)
  */
 export class SubaccountSection extends Component {
-  componentDidUpdate(prevProps) {
+  componentDidUpdate (prevProps) {
     const { assignTo, formName, change } = this.props;
 
     // Clear subaccount value if switching away from subaccount
@@ -31,7 +31,7 @@ export class SubaccountSection extends Component {
     }
   }
 
-  renderCreate() {
+  renderCreate () {
     const { assignTo } = this.props;
 
     const typeahead = assignTo === 'subaccount'
@@ -50,7 +50,7 @@ export class SubaccountSection extends Component {
     );
   }
 
-  renderEdit() {
+  renderEdit () {
     const { subaccount } = this.props;
     let component = SubaccountTypeaheadWrapper;
 
@@ -69,14 +69,14 @@ export class SubaccountSection extends Component {
     );
   }
 
-  render() {
+  render () {
     return this.props.newWebhook ? this.renderCreate() : this.renderEdit();
   }
 }
 
 SubaccountSection.propTypes = {
   newWebhook: PropTypes.bool,
-  assignTo: PropTypes.oneOf(['master', 'all', 'subaccount', null]),
+  assignTo: PropTypes.oneOf(['master', 'all', 'subaccount']),
   change: PropTypes.func
 };
 

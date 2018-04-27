@@ -1,3 +1,3 @@
-export function setSubaccountQuery(id) {
-  return typeof id !== 'undefined' ? `?subaccount=${id}` : '';
-}
+import _ from 'lodash';
+
+export const setSubaccountQuery = (id) => _.isNil(id) ? '' : `?subaccount=${id}`;
