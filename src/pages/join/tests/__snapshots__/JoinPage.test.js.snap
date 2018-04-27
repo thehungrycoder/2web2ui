@@ -1,5 +1,40 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`JoinPage getAttributionData merges attribution data from query params onto stored cookie data 1`] = `
+Object {
+  "sfdcid": "123",
+  "utm_medium": "script",
+  "utm_source": "script",
+}
+`;
+
+exports[`JoinPage getAttributionData returns correct attribution data from stored cookie 1`] = `
+Object {
+  "sfdcid": "123",
+  "utm_source": "script",
+}
+`;
+
+exports[`JoinPage registerSubmit calls register with correct data 1`] = `
+Array [
+  Array [
+    Object {
+      "email": "foo@bar.com",
+      "first_name": "foo",
+      "last_name": "bar",
+      "password": "foobar",
+      "salesforce_data": Object {
+        "email_opt_out": true,
+        "src": "Test Source",
+        "utm_source": "test file",
+      },
+      "sfdcid": "abcd",
+      "tou_accepted": true,
+    },
+  ],
+]
+`;
+
 exports[`JoinPage render renders aws logo when signup from aws 1`] = `
 <div>
   <Script

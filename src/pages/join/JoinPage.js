@@ -18,43 +18,27 @@ import { addEvent } from 'src/helpers/googleAnalytics';
 import { register } from 'src/actions/account';
 import { AFTER_JOIN_REDIRECT_ROUTE, LINKS, AWS_COOKIE_NAME } from 'src/constants';
 
-const { attribution, salesforceDataParams } = config;
-
 export class JoinPage extends Component {
   state = {
     formData: {}
   };
 
-  getAndSetAttributionData = () => {
+  getAttributionData = () => {
     const { params } = this.props;
-
-    let trackingData = cookie.getJSON(attribution.cookieName);
-
-    if (!trackingData) {
-      const cookieOptions = {
-        expires: attribution.cookieDuration,
-        expirationUnit: 'seconds',
-        path: '/',
-        domain: attribution.cookieDomain
-      };
-
-      trackingData = _.pick(params, salesforceDataParams);
-      cookie.set(attribution.cookieName, trackingData, cookieOptions);
-    }
-    return trackingData;
+    const existingCookie = cookie.getJSON(config.attribution.cookieName) || {};
+    return _.pick({ ...existingCookie, ...params }, config.salesforceDataParams);
   };
 
   registerSubmit = (values) => {
     this.setState({ formData: values });
     const { params: { plan }, register, authenticate } = this.props;
-    const attributionData = this.getAndSetAttributionData();
-    const salesforceData = { ...attributionData, email_opt_out: !values.email_opt_in };
+    const { sfdcid, ...attributionData } = this.getAttributionData();
     const accountFields = _.omit(values, 'email_opt_in');
 
     const signupData = {
       ...accountFields,
-      salesforce_data: salesforceData,
-      sfdcid: attributionData.sfdcid
+      sfdcid,
+      salesforce_data: { ...attributionData, email_opt_out: !values.email_opt_in }
     };
 
     return register(signupData)
