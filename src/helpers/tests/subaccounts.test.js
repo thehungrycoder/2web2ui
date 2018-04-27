@@ -6,7 +6,7 @@ describe('setSubaccountQuery', () => {
   });
 
   it('should return an empty string for null', () => {
-    expect(subaccounts.setSubaccountQuery()).toEqual('');
+    expect(subaccounts.setSubaccountQuery(null)).toEqual('');
   });
 
   it('should return a query string for an integer', () => {
