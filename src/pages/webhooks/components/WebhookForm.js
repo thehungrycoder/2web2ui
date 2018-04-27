@@ -34,16 +34,16 @@ export const WebhookForm = ({
         <NameField />
         <TargetField />
       </Panel.Section>
-      { hasSubaccounts && <Panel.Section><SubaccountSection newWebhook={newWebhook} formName={formName} /></Panel.Section> }
+      {hasSubaccounts && <Panel.Section><SubaccountSection newWebhook={newWebhook} formName={formName} /></Panel.Section>}
       <Panel.Section>
         <EventsRadioGroup />
-        { showEvents && eventBoxes }
+        {showEvents && eventBoxes}
       </Panel.Section>
       <Panel.Section>
         <AuthDropDown />
-        { auth && <AuthFields /> }
+        {auth && <AuthFields />}
       </Panel.Section>
-      { !newWebhook && <Panel.Section><ActiveField /></Panel.Section>}
+      {!newWebhook && <Panel.Section><ActiveField /></Panel.Section>}
       <Panel.Section>
         <Button submit primary disabled={disabled}>{submitText}</Button>
       </Panel.Section>
@@ -62,7 +62,7 @@ const mapStateToProps = (state, props) => {
     auth,
     hasSubaccounts: hasSubaccounts(state),
     initialValues: {
-      assignTo: 'master',
+      assignTo: 'all',
       eventsRadio: props.allChecked || props.newWebhook ? 'all' : 'select',
       subaccount: !props.newWebhook ? selectInitialSubaccountValue(state, props) : null,
       ...webhookValues,
