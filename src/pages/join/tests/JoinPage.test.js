@@ -9,7 +9,6 @@ let props;
 let instance;
 let wrapper;
 let formValues;
-let accountFields;
 
 jest.mock('js-cookie');
 jest.mock('src/config', () => ({
@@ -66,14 +65,6 @@ describe('JoinPage', () => {
       password: 'foobar'
     };
 
-    accountFields = {
-      first_name: 'foo',
-      last_name: 'bar',
-      email: 'foo@bar.com',
-      tou_accepted: true,
-      password: 'foobar'
-    };
-
     googleAnalytics.addEvent = jest.fn();
 
     wrapper = shallow(<JoinPage {...props} />);
@@ -102,18 +93,16 @@ describe('JoinPage', () => {
 
   describe('registerSubmit', () => {
     let attributionValues;
-    let salesforceValues;
     beforeEach(() => {
-      attributionValues = { sfdcid: 'abcd', 'utm_source': 'test file' };
-      salesforceValues = { ...attributionValues, email_opt_out: true };
-      instance.getAndSetAttributionData = jest.fn().mockReturnValue(attributionValues);
+      attributionValues = { sfdcid: 'abcd', src: 'Test Source', 'utm_source': 'test file' };
+      instance.getAttributionData = jest.fn().mockReturnValue(attributionValues);
       instance.trackSignup = jest.fn();
     });
 
     it('calls register with correct data', async() => {
       await instance.registerSubmit(formValues);
       expect(props.register).toHaveBeenCalledTimes(1);
-      expect(props.register).toHaveBeenCalledWith({ ...accountFields, salesforce_data: salesforceValues, sfdcid: attributionValues.sfdcid });
+      expect(props.register.mock.calls).toMatchSnapshot();
     });
 
     it('negates email_opt_in properly', async() => {
@@ -159,21 +148,18 @@ describe('JoinPage', () => {
   });
 
 
-  describe('getAndSetAttributionData', () => {
+  describe('getAttributionData', () => {
     beforeEach(() => {
       cookie.getJSON.mockReturnValue({ sfdcid: '123', utm_source: 'script' });
     });
 
-    it('returns correct attribution data', () => {
-      expect(instance.getAndSetAttributionData()).toEqual({ sfdcid: '123', utm_source: 'script' });
-      expect(cookie.set).toHaveBeenCalledTimes(0);
+    it('returns correct attribution data from stored cookie', () => {
+      expect(instance.getAttributionData()).toMatchSnapshot();
     });
 
-    it('correctly sets cookie and returns attribution data', () => {
-      cookie.getJSON.mockReturnValue(null);
+    it('merges attribution data from query params onto stored cookie data', () => {
       wrapper.setProps({ params: { foo: 'bar', sfdcid: '123', utm_medium: 'script' }});
-      expect(instance.getAndSetAttributionData()).toEqual({ sfdcid: '123', utm_medium: 'script' });
-      expect(cookie.set).toHaveBeenCalledTimes(1);
+      expect(instance.getAttributionData()).toMatchSnapshot();
     });
   });
 });
