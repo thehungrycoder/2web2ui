@@ -15,7 +15,7 @@ import {
 } from 'react-router-dom';
 
 const App = () => (
-  <ErrorBoundary showAction={true}>
+  <ErrorBoundary>
     <Router>
       <div>
         {config.siftScience && <SiftScience config={config.siftScience} />}

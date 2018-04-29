@@ -16,7 +16,7 @@ describe('Component: ErrorBoundary', () => {
     wrapper = shallow(<ErrorBoundary {...props}><div>Children</div></ErrorBoundary>);
   });
 
-  it('renders correctly without error', () => {
+  it('renders (children) correctly without error', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -24,11 +24,4 @@ describe('Component: ErrorBoundary', () => {
     wrapper.setState({ hasError: true });
     expect(wrapper).toMatchSnapshot();
   });
-
-  it('renders error correctly with action', () => {
-    wrapper.setState({ hasError: true });
-    wrapper.setProps({ showAction: true });
-    expect(wrapper).toMatchSnapshot();
-  });
-
 });
