@@ -4,6 +4,7 @@ import 'brace/mode/html';
 import 'brace/mode/text';
 import 'brace/mode/json';
 import 'brace/theme/tomorrow';
+import 'brace/ext/searchbox';
 
 import { Error } from '@sparkpost/matchbox';
 import styles from '../FormEditor.module.scss';
@@ -39,7 +40,7 @@ const AceWrapper = ({
       }}
       editorProps={{ $blockScrolling: Infinity }}
     />
-    { submitFailed && !active && error ? <span className={styles.Error}><Error error={error}/></span> : null }
+    {submitFailed && !active && error ? <span className={styles.Error}><Error error={error}/></span> : null}
   </div>
 );
 
