@@ -23,20 +23,20 @@ export class ListPage extends Component {
     selectedTab: 0
   };
 
-  handleTabs(tabIdx) {
+  handleTabs (tabIdx) {
     this.setState({ selectedTab: tabIdx });
   }
 
-  componentDidMount() {
+  componentDidMount () {
     const { hasSubaccounts, listSubaccounts } = this.props;
     if (hasSubaccounts) {
       listSubaccounts();
     }
   }
 
-  render() {
+  render () {
     const { selectedTab } = this.state;
-    const { loading, deleting, list, subaccounts, hasSubaccounts, searchRecipient } = this.props;
+    const { list, hasSubaccounts, searchRecipient } = this.props;
 
     return (
       <Page
@@ -61,17 +61,20 @@ export class ListPage extends Component {
             }
           </Panel.Section>
         </Panel>
-        <Results results={list} loading={loading} deleting={deleting} subaccounts={subaccounts} hasSubaccounts={hasSubaccounts}/>
+        <Results results={list} {...this.props} />
       </Page>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  const { listLoading, list, deleting } = state.suppressions;
+  const { listLoading, list, deleting, nextPage, totalCount, search } = state.suppressions;
   return {
     loading: listLoading,
     list,
+    nextPage,
+    totalCount,
+    search,
     hasSubaccounts: hasSubaccounts(state),
     subaccounts: state.subaccounts.list,
     deleting

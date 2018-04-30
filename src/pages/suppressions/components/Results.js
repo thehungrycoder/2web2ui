@@ -2,13 +2,13 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
-import { Button } from '@sparkpost/matchbox';
+import { Button, Banner } from '@sparkpost/matchbox';
 import { PanelLoading, TableCollection, Empty, DeleteModal } from 'src/components';
-import { deleteSuppression } from 'src/actions/suppressions';
+import { deleteSuppression, searchSuppressions } from 'src/actions/suppressions';
 import { formatSubaccountDisplay } from '../helpers';
 import { showAlert } from 'src/actions/globalAlert';
 import Detail from './Detail';
+import qs from 'query-string';
 
 
 export class Results extends Component {
@@ -23,13 +23,13 @@ export class Results extends Component {
     }
   }
 
-  renderPlaceholder() {
+  renderPlaceholder () {
     return (
       <Empty message='Choose some options to see your suppressions' />
     );
   }
 
-  renderEmpty() {
+  renderEmpty () {
     return (
       <Empty message='There are no results for your current query' />
     );
@@ -59,7 +59,7 @@ export class Results extends Component {
     return rowData;
   };
 
-  getColumns() {
+  getColumns () {
     const { hasSubaccounts } = this.props;
 
     const columns = [
@@ -132,13 +132,35 @@ export class Results extends Component {
     />);
   }
 
+  renderResultLimitDisclaimer = () => {
+    const { results, nextPage, totalCount, search, searchSuppressions } = this.props;
+
+    if (!nextPage) {
+      return null;
+    }
+
+    const nextLink = nextPage.href.split('?');
+    nextLink.shift();
+    const queryParams = nextLink.join('?');
+    const cursor = qs.parse(queryParams).cursor;
+
+    if (!cursor) {
+      return null;
+    }
+
+    return (
+      <Banner action={{ content: 'Load More', onClick: () => searchSuppressions({ ...search, cursor, append: true }) }}>This search matches {totalCount.toLocaleString()} results but only {results.length.toLocaleString()} are shown below.</Banner>
+    );
+  }
+
   renderResults = () => {
     const { results } = this.props;
 
     return (
       <div>
-        { this.renderDeleteModal() }
-        { this.renderDetailModal() }
+        {this.renderDeleteModal()}
+        {this.renderDetailModal()}
+        {this.renderResultLimitDisclaimer()}
 
         <TableCollection
           columns={this.getColumns()}
@@ -151,7 +173,7 @@ export class Results extends Component {
     );
   }
 
-  render() {
+  render () {
     const { results = [], loading } = this.props;
 
     if (loading) {
@@ -166,4 +188,4 @@ export class Results extends Component {
   }
 }
 
-export default connect(null, { deleteSuppression, showAlert })(Results);
+export default connect(null, { deleteSuppression, searchSuppressions, showAlert })(Results);

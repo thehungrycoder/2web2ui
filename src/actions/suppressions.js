@@ -8,7 +8,7 @@ import setSubaccountHeader from 'src/actions/helpers/setSubaccountHeader';
 
 const { apiDateFormat } = config;
 
-export function checkSuppression() { //used in DashBoardPage to check if account has suppression
+export function checkSuppression () { //used in DashBoardPage to check if account has suppression
   const params = { sources: 'Manually Added', limit: 1 };
 
   return (dispatch, getState) => dispatch(
@@ -23,7 +23,7 @@ export function checkSuppression() { //used in DashBoardPage to check if account
   );
 }
 
-export function searchRecipient({ email, subaccountId } = {}) {
+export function searchRecipient ({ email, subaccountId } = {}) {
   return sparkpostApiRequest({
     type: 'SEARCH_SUPPRESSIONS_RECIPIENT',
     meta: {
@@ -34,11 +34,11 @@ export function searchRecipient({ email, subaccountId } = {}) {
   });
 }
 
-export function searchSuppressions(options) {
-  const { dateOptions, types = [], sources = []} = options;
+export function searchSuppressions (options) {
+  const { dateOptions, types = [], sources = [], cursor = 'initial' } = options;
   const { from, to } = dateOptions;
 
-  const params = {};
+  const params = { cursor };
 
   if (from) {
     params.from = moment(from).utc().format(apiDateFormat);
@@ -59,6 +59,7 @@ export function searchSuppressions(options) {
   return sparkpostApiRequest({
     type: 'GET_SUPPRESSIONS',
     meta: {
+      append: options.append,
       method: 'GET',
       url: '/suppression-list',
       params
@@ -66,7 +67,7 @@ export function searchSuppressions(options) {
   });
 }
 
-export function deleteSuppression(suppression) {
+export function deleteSuppression (suppression) {
   const { recipient, subaccount_id: subaccountId, type } = suppression;
 
   return sparkpostApiRequest({
@@ -85,7 +86,7 @@ const LIKE_NON = new RegExp('non', 'i');
 const LIKE_TRUE = new RegExp('true', 'i');
 
 // SEE: https://developers.sparkpost.com/api/suppression-list.html#suppression-list-bulk-insert-update-put
-export function createOrUpdateSuppressions(recipients, subaccount) {
+export function createOrUpdateSuppressions (recipients, subaccount) {
   const sanitizedRecipients = recipients.map(({
     description, email, non_transactional, recipient, transactional, type
   }) => {
@@ -118,7 +119,7 @@ export function createOrUpdateSuppressions(recipients, subaccount) {
   });
 }
 
-export function parseSuppressionsFile(file) {
+export function parseSuppressionsFile (file) {
   return csvFileParseRequest({
     type: 'PARSE_SUPPRESSIONS_FILE',
     meta: {
@@ -132,14 +133,14 @@ export function parseSuppressionsFile(file) {
   });
 }
 
-export function uploadSuppressions(file, subaccount) {
-  return async(dispatch) => {
+export function uploadSuppressions (file, subaccount) {
+  return async (dispatch) => {
     const recipients = await dispatch(parseSuppressionsFile(file));
     return dispatch(createOrUpdateSuppressions(recipients, subaccount));
   };
 }
 
-export function resetErrors() {
+export function resetErrors () {
   return {
     type: 'RESET_SUPPRESSION_ERRORS'
   };
@@ -156,14 +157,14 @@ export function resetErrors() {
  * @param {Date} dateOptions.to
  * @param {String} dateOptions.relativeRange
  */
-export function refreshSuppressionDateRange(dateOptions) {
+export function refreshSuppressionDateRange (dateOptions) {
   return {
     type: 'REFRESH_SUPPRESSION_SEARCH_DATE_OPTIONS',
     payload: dateOptions
   };
 }
 
-export function updateSuppressionSearchOptions(options) {
+export function updateSuppressionSearchOptions (options) {
   return {
     type: 'UPDATE_SUPPRESSION_SEARCH_OPTIONS',
     payload: options

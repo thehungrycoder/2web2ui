@@ -10,7 +10,9 @@ const initialState = {
     dateOptions: {},
     types: [],
     sources: []
-  }
+  },
+  nextPage: null,
+  totalCount: 0
 };
 
 export default (state = initialState, action) => {
@@ -31,10 +33,16 @@ export default (state = initialState, action) => {
     // Fetch list
 
     case 'GET_SUPPRESSIONS_PENDING':
-      return { ...state, listLoading: true, listError: null };
+      return { ...state, listLoading: true, listError: null, nextPage: null };
 
-    case 'GET_SUPPRESSIONS_SUCCESS':
-      return { ...state, list: action.payload, listLoading: false };
+    case 'GET_SUPPRESSIONS_SUCCESS': {
+      const nextPage = action.response.data.links.find((link) => link.rel === 'next');
+      let list = action.payload;
+      if (action.meta.append) {
+        list = [...state.list, ...action.payload];
+      }
+      return { ...state, list, listLoading: false, nextPage, totalCount: action.response.data.total_count };
+    }
 
     case 'GET_SUPPRESSIONS_FAIL':
       return { ...state, listError: action.payload, listLoading: false };
