@@ -134,8 +134,8 @@ it('should authenticate on submit when sso is disabled', () => {
 
 it('should redirect to sso if there is a sso user', () => {
   const redirectSpy = jest.spyOn(window.location, 'assign').mockImplementation();
-  wrapper.setProps({ auth: { ssoUser: 'foo-bar' }});
-  expect(redirectSpy).toHaveBeenCalledWith(expect.stringMatching(/saml\/login$/));
+  wrapper.setProps({ auth: { ssoUser: true, username: 'foobar' }});
+  expect(redirectSpy).toHaveBeenCalledWith(expect.stringMatching(/saml\/login\/foobar$/));
 });
 
 it('should set sso enabled if there ssoUser is null', () => {

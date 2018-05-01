@@ -39,9 +39,10 @@ export default (state = initialState, action) => {
 
     case 'SSO_CHECK_SUCCESS': {
       const { saml: ssoUser } = action.payload;
+      const { username } = action.meta;
 
       if (ssoUser) {
-        return { ...state, ssoUser }; //loginPending unchanged (true)to keep loading state on while redirecting
+        return { ...state, ssoUser, username }; //loginPending unchanged (true)to keep loading state on while redirecting
       } else {
         return { ...state, ssoUser, loginPending: false };
       }
