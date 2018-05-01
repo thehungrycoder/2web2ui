@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect, Route } from 'react-router-dom';
 import { AccessControl } from 'src/components/auth';
+import ErrorBoundary from 'src/components/errorBoundaries/ErrorBoundary';
 import _ from 'lodash';
 
 export class ProtectedRoute extends Component {
@@ -27,7 +28,9 @@ export class ProtectedRoute extends Component {
   render() {
     // can't pass component prop to Route below or it confuses RR
     const protectedRouteProps = _.omit(this.props, ['component', 'auth', 'condition']);
-    return (<Route {...protectedRouteProps} render={this.renderRoute} />);
+    return (<ErrorBoundary>
+      <Route {...protectedRouteProps} render={this.renderRoute} />
+    </ErrorBoundary>);
   }
 }
 
