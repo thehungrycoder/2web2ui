@@ -1,6 +1,9 @@
 # SparkPost App
 
+[![Build Status](https://travis-ci.org/SparkPost/2web2ui.svg?branch=master)](https://travis-ci.org/SparkPost/2web2ui)
+[![Coverage Status](https://coveralls.io/repos/github/SparkPost/2web2ui/badge.svg?branch=master)](https://coveralls.io/github/SparkPost/2web2ui?branch=master)
 [![Greenkeeper badge](https://badges.greenkeeper.io/SparkPost/2web2ui.svg)](https://greenkeeper.io/)
+
 
 A re-build of the current SparkPost web app using React and Redux.
 
