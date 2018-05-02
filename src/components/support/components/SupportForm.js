@@ -2,16 +2,30 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { Button, Panel } from '@sparkpost/matchbox';
+import * as supportActions from 'src/actions/support';
 import { TextFieldWrapper } from 'src/components';
 import { required, minLength, maxFileSize } from 'src/helpers/validation';
 import config from 'src/config';
 import styles from './SupportForm.module.scss';
 import FileFieldWrapper from 'src/components/reduxFormWrappers/FileFieldWrapper';
+import { getBase64Contents } from 'src/helpers/file';
 
 const formName = 'supportForm';
 
 export class SupportForm extends Component {
-  renderSuccess() {
+  onSubmit = async (values) => {
+    const { message, subject, attachment } = values;
+    let ticket = { message, subject };
+
+    if (attachment) {
+      const encoded = await getBase64Contents(attachment);
+      ticket = { ...ticket, attachment: { filename: attachment.name, content: encoded }};
+    }
+
+    return this.props.createTicket(ticket);
+  };
+
+  renderSuccess () {
     const { ticketId, onContinue } = this.props;
 
     return <div className={styles.SupportForm}>
@@ -24,18 +38,17 @@ export class SupportForm extends Component {
     </div>;
   }
 
-  reset(parentReset) {
+  reset (parentReset) {
     this.props.reset(formName);
     return parentReset();
   }
 
-  renderForm() {
+  renderForm () {
     const {
       pristine,
       invalid,
       submitting,
       handleSubmit,
-      onSubmit,
       onCancel
     } = this.props;
 
@@ -43,7 +56,7 @@ export class SupportForm extends Component {
       <Panel.Section>
         <h6>Submit A Support Ticket</h6>
       </Panel.Section>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(this.onSubmit)}>
         <Panel.Section>
           <Field
             name='subject'
@@ -85,7 +98,7 @@ export class SupportForm extends Component {
     </div>;
   }
 
-  render() {
+  render () {
     if (this.props.submitSucceeded) {
       return this.renderSuccess();
     }
@@ -98,4 +111,4 @@ const mapStateToProps = ({ support }) => ({
 });
 
 const ReduxSupportForm = reduxForm({ form: formName })(SupportForm);
-export default connect(mapStateToProps)(ReduxSupportForm);
+export default connect(mapStateToProps, supportActions)(ReduxSupportForm);

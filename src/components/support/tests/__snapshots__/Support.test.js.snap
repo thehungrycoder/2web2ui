@@ -59,7 +59,6 @@ exports[`Support Component render tests should show form and close icon when pan
       <Connect(ReduxForm)
         onCancel={[Function]}
         onContinue={[Function]}
-        onSubmit={[Function]}
       />
     </Popover>
   </div>

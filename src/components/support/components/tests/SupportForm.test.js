@@ -1,7 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import * as fileHelpers from 'src/helpers/file';
 
 import { SupportForm } from '../SupportForm';
+
+jest.mock('src/helpers/file');
 
 describe('Support Form Component', () => {
   let wrapper;
@@ -46,8 +49,10 @@ describe('Support Form Component', () => {
   describe('Control', () => {
     let props;
     let wrapper;
+
     beforeEach(() => {
       props = {
+        createTicket: jest.fn(),
         handleSubmit: jest.fn(),
         reset: jest.fn(),
         onCancel: jest.fn(),
@@ -82,6 +87,41 @@ describe('Support Form Component', () => {
       wrapper.find('Button').simulate('click');
       expect(spy).toHaveBeenCalled();
       expect(props.onContinue).toHaveBeenCalled();
+    });
+
+    it('should submit a ticket', async () => {
+      const values = {
+        subject: 'I need help!',
+        message: 'I was not able to send an email!'
+      };
+
+      await wrapper.instance().onSubmit(values);
+      expect(props.createTicket).toHaveBeenCalledWith(values);
+    });
+
+    it('should submit a ticket with an attachment', async () => {
+      const values = {
+        subject: 'I need help!',
+        message: 'I was not able to send an email!',
+        attachment: {
+          name: 'example.png'
+        }
+      };
+      const encoded = btoa('attachment://body');
+
+      fileHelpers.getBase64Contents = jest.fn(() => Promise.resolve(encoded));
+
+      await wrapper.instance().onSubmit(values);
+
+      expect(fileHelpers.getBase64Contents).toHaveBeenCalledWith(values.attachment);
+      expect(props.createTicket).toHaveBeenCalledWith({
+        subject: values.subject,
+        message: values.message,
+        attachment: {
+          filename: values.attachment.name,
+          content: encoded
+        }
+      });
     });
   });
 });

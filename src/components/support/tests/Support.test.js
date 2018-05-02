@@ -3,19 +3,11 @@ import { shallow } from 'enzyme';
 import { Support } from '../Support';
 
 describe('Support Component', () => {
-  const ticket = {
-    subject: 'subject',
-    message: 'message'
-  };
-  const createTicketResult = {
-    ticket_id: 103339
-  };
   let wrapper;
   let instance;
 
   beforeEach(() => {
     const props = {
-      createTicket: jest.fn(() => Promise.resolve(createTicketResult)),
       entitledToOnlineSupport: true,
       loggedIn: true,
       location: {},
@@ -117,19 +109,6 @@ describe('Support Component', () => {
     it('should toggle form', () => {
       instance.toggleForm();
       expect(instance.props.toggleTicketForm).toHaveBeenCalledTimes(1);
-    });
-  });
-
-  describe('onSubmit tests', () => {
-    it('should create a ticket on submit', async () => {
-      wrapper.setState({ showForm: true });
-      await expect(instance.onSubmit(ticket)).resolves.toBeDefined();
-      expect(instance.props.createTicket).toHaveBeenCalled();
-    });
-
-    it('should show an alert on submission failure', async () => {
-      instance.props.createTicket.mockReturnValueOnce(Promise.reject({}));
-      await expect(instance.onSubmit(ticket)).rejects.toBeDefined();
     });
   });
 });
