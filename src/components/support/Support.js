@@ -74,9 +74,9 @@ export class Support extends Component {
             open={showPanel}
             trigger={triggerMarkup}
           >
-            {showTicketForm
+            {showPanel && (showTicketForm
               ? <SupportForm onCancel={this.toggleForm} onContinue={this.toggleForm} />
-              : <SearchPanel toggleForm={this.toggleForm} />}
+              : <SearchPanel toggleForm={this.toggleForm} />)}
           </Popover>
         </div>
       </Portal>
