@@ -50,7 +50,8 @@ describe('Action Creator: Support', () => {
 
   describe('createTicket', () => {
     it('should create a ticket', () => {
-      expect(support.createTicket({ subject: 'sub', message: 'mess' })).toMatchSnapshot();
+      const ticket = { issueType: 'billing', subject: 'sub', message: 'mess' };
+      expect(support.createTicket(ticket)).toMatchSnapshot();
     });
   });
 });

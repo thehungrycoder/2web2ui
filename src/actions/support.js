@@ -31,6 +31,7 @@ export function openSupportPanel (options) {
  * Creates a support ticket with a subject, message, and optional file attachment
  *
  * @param {Object} data
+ * @param {String} data.issueType
  * @param {String} data.subject
  * @param {String} data.message
  * @param {Object} data.attachment
@@ -38,13 +39,16 @@ export function openSupportPanel (options) {
  * @param {Base64 String} data.attachment.content
  *
  */
-export function createTicket (data) {
+export function createTicket ({ issueType, ...data }) {
   return sparkpostApiRequest({
     type: 'CREATE_TICKET',
     meta: {
       method: 'POST',
       url: '/integrations/support/ticket',
-      data
+      data: {
+        ...data,
+        issue_type: issueType
+      }
     }
   });
 }
