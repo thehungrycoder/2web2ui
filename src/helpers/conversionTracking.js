@@ -3,7 +3,7 @@ import * as analytics from './analytics';
 // These events are consumed through GTM by various Marketing-owned services to trigger
 // follow-on actions.
 
-function trackPlanChange(allPlans, oldCode, newCode) {
+export function trackPlanChange({ allPlans, oldCode, newCode }) {
   const oldPlan = allPlans.find((plan) => plan.code === oldCode);
   const newPlan = allPlans.find((plan) => plan.code === newCode);
   const action = newPlan.volume > oldPlan.volume ? 'upgrade' : 'downgrade';
@@ -13,7 +13,7 @@ function trackPlanChange(allPlans, oldCode, newCode) {
   });
 }
 
-function trackAddonPurchase(addonType) {
+export function trackAddonPurchase(addonType) {
   const action = 'purchase_addon';
   analytics.trackFormSuccess(action, {
     form_type: action,
@@ -21,12 +21,10 @@ function trackAddonPurchase(addonType) {
   });
 }
 
-function trackAddonRequest(addonType) {
-  analytics.trackEvent('Clicked button', addonType, { action: addonType });
+export function trackAddonRequest(addonType) {
+  analytics.trackEvent({
+    category: 'Clicked button',
+    action: addonType,
+    data: { action: addonType }
+  });
 }
-
-export {
-  trackPlanChange,
-  trackAddonPurchase,
-  trackAddonRequest
-};

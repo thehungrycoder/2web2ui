@@ -27,12 +27,11 @@ describe('Analytics instrumentation', () => {
     const path = '/path/to/funsies';
     const title = 'The Funsies Page';
     it('should push a content-view event', () => {
-      analytics.trackPageview(path, title, undefined);
+      analytics.trackPageview({ path, title });
       expect(window.dataLayer.pop()).toEqual({
         event: 'content-view',
         'content-name': path,
-        'content-title': title,
-        username: undefined
+        'content-title': title
       });
     });
   });
@@ -43,7 +42,7 @@ describe('Analytics instrumentation', () => {
     const data = { species: 'plankton' };
 
     it('should push the specified event', () => {
-      analytics.trackEvent(category, action, data);
+      analytics.trackEvent({ category, action, data });
       expect(window.dataLayer.pop()).toEqual({
         event: category,
         'event-action': action,
@@ -52,7 +51,7 @@ describe('Analytics instrumentation', () => {
     });
 
     it('should provide empty event data by default', () => {
-      analytics.trackEvent(category, action);
+      analytics.trackEvent({ category, action });
       expect(window.dataLayer.pop()).toEqual({
         event: category,
         'event-action': action,

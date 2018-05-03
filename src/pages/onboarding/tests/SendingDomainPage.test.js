@@ -32,11 +32,11 @@ describe('SendingDomainPage', () => {
 
   it('should track learn more link clicks', () => {
     wrapper.find(UnstyledLink).simulate('click');
-    expect(analytics.trackEvent).toHaveBeenCalledWith(
-      constants.ANALYTICS_ONBOARDING,
-      constants.ANALYTICS_ONBOARDING_LEARN_MORE,
-      { action: constants.ANALYTICS_ONBOARDING_LEARN_MORE }
-    );
+    expect(analytics.trackEvent).toHaveBeenCalledWith({
+      category: constants.ANALYTICS_ONBOARDING,
+      action: constants.ANALYTICS_ONBOARDING_LEARN_MORE,
+      data: { action: constants.ANALYTICS_ONBOARDING_LEARN_MORE }
+    });
   });
 
   it('should render submitting state correctly', () => {
@@ -62,11 +62,11 @@ describe('SendingDomainPage', () => {
 
   it('should track success', () => {
     wrapper.setProps({ submitSucceeded: true });
-    expect(analytics.trackEvent).toHaveBeenCalledWith(
-      constants.ANALYTICS_ONBOARDING,
-      constants.ANALYTICS_ONBOARDING_CREATE_DOMAIN,
-      { action: constants.ANALYTICS_ONBOARDING_CREATE_DOMAIN }
-    );
+    expect(analytics.trackEvent).toHaveBeenCalledWith({
+      category: constants.ANALYTICS_ONBOARDING,
+      action: constants.ANALYTICS_ONBOARDING_CREATE_DOMAIN,
+      data: { action: constants.ANALYTICS_ONBOARDING_CREATE_DOMAIN }
+    });
   });
 
   it('should handle submit failure correctly', async() => {

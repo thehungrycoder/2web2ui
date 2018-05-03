@@ -27,13 +27,20 @@ export class SendingDomainPage extends Component {
     // Redirect here instead of the createDomain promise
     // to avoid redirects if component unmounts before the promise resolves
     if (!prevProps.submitSucceeded && submitSucceeded) {
-      analytics.trackEvent(ANALYTICS_ONBOARDING, ANALYTICS_ONBOARDING_CREATE_DOMAIN, { action: ANALYTICS_ONBOARDING_CREATE_DOMAIN });
+      analytics.trackEvent({
+        category: ANALYTICS_ONBOARDING,
+        action: ANALYTICS_ONBOARDING_CREATE_DOMAIN,
+        data: { action: ANALYTICS_ONBOARDING_CREATE_DOMAIN }
+      });
       history.push('/onboarding/email');
     }
   }
 
-  trackLearnMoreClick = () => analytics.trackEvent(ANALYTICS_ONBOARDING, ANALYTICS_ONBOARDING_LEARN_MORE,
-    { action: ANALYTICS_ONBOARDING_LEARN_MORE });
+  trackLearnMoreClick = () => analytics.trackEvent({
+    category: ANALYTICS_ONBOARDING,
+    action: ANALYTICS_ONBOARDING_LEARN_MORE,
+    data: { action: ANALYTICS_ONBOARDING_LEARN_MORE }
+  });
 
   render() {
     const { handleSubmit, submitting } = this.props;

@@ -5,18 +5,18 @@ jest.mock('src/helpers/analytics');
 
 describe('Conversion tracking', () => {
   describe('trackPlanChange', () => {
-    const plans = [
+    const allPlans = [
       { code: '27', volume: 27 },
       { code: '257', volume: 257 }
     ];
 
     it('should emit trackFormSuccess', () => {
-      conversions.trackPlanChange(plans, '27', '257');
+      conversions.trackPlanChange({ allPlans, oldCode: '27', newCode: '257' });
       expect(analytics.trackFormSuccess).toHaveBeenCalled();
     });
 
     it('should emit upgrade when the new plan has higher volume', () => {
-      conversions.trackPlanChange(plans, '27', '257');
+      conversions.trackPlanChange({ allPlans, oldCode: '27', newCode: '257' });
       expect(analytics.trackFormSuccess).toHaveBeenCalledWith('upgrade', {
         form_type: 'upgrade',
         plan_key: '257'
@@ -24,7 +24,7 @@ describe('Conversion tracking', () => {
     });
 
     it('should emit downgrade when the new plan has lower or equal volume', () => {
-      conversions.trackPlanChange(plans, '257', '27');
+      conversions.trackPlanChange({ allPlans, oldCode: '257', newCode: '27' });
       expect(analytics.trackFormSuccess).toHaveBeenCalledWith('downgrade', {
         form_type: 'downgrade',
         plan_key: '27'
@@ -59,7 +59,11 @@ describe('Conversion tracking', () => {
     });
 
     it('should set event, action and data', () => {
-      expect(analytics.trackEvent).toHaveBeenCalledWith('Clicked button', addon, { action: addon });
+      expect(analytics.trackEvent).toHaveBeenCalledWith({
+        category: 'Clicked button',
+        action: addon,
+        data: { action: addon }
+      });
     });
   });
 });
