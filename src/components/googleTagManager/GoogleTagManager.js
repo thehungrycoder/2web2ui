@@ -10,47 +10,44 @@ import * as analytics from 'src/helpers/analytics';
 
 export class GoogleTagManager extends Component {
   state = {
-    dataLayerLoaded: false,
-    waitForUser: false
+    dataLayerLoaded: false
   }
 
   componentDidMount() {
-    if (!this.state.dataLayerLoaded) {
-      analytics.setup();
-    }
+    analytics.setup();
 
     const route = findRouteByPath(this.props.location.pathname);
     // for public routes, track initial page view immediately
     if (route.public) {
       this.trackPageview();
     }
+
     // for non-public routes, store flag to let us know we need to track initial page view once the username loads
-    this.setState({ dataLayerLoaded: true, waitForUser: !route.public });
+    this.setState({ dataLayerLoaded: true });
   }
 
   componentDidUpdate(prevProps) {
-    const isNewRoute = !this.state.waitForUser && prevProps.location.pathname !== this.props.location.pathname;
-    const userHasLoaded = this.state.waitForUser && !prevProps.username && this.props.username;
-
-    // Track additional page views whenever the route changes or when username first loads on auth page initial load
-    if (isNewRoute || userHasLoaded) {
-      this.trackPageview();
-    }
+    const isNewRoute = prevProps.location.pathname !== this.props.location.pathname;
+    const userHasLoaded = !prevProps.username && this.props.username;
 
     if (userHasLoaded) {
-      this.setState({ waitForUser: false });
+      analytics.setVariable('username', this.props.username);
+    }
+
+    // Track additional page views whenever the route changes or when username first loads on auth page initial load
+    if (isNewRoute) {
+      this.trackPageview();
     }
   }
 
   trackPageview() {
-    const { location, username } = this.props;
+    const { location } = this.props;
     const route = findRouteByPath(location.pathname);
 
-    analytics.trackPageview(
-      location.pathname + location.search, // duplicates angular 1.x ui-router "$location.url()" which is /path?plus=search
-      route.title || location.pathname, // duplicate angular 1.x $rootScope.stateData.title
-      username
-    );
+    analytics.trackPageview({
+      path: location.pathname + location.search, // duplicates angular 1.x ui-router "$location.url()" which is /path?plus=search
+      title: route.title || location.pathname // duplicate angular 1.x $rootScope.stateData.title
+    });
   }
 
   render() {

@@ -43,6 +43,7 @@ export class JoinPage extends Component {
 
     return register(signupData)
       .then((accountData) => {
+        analytics.setVariable('username', accountData.username);
         analytics.trackFormSuccess(ANALYTICS_CREATE_ACCOUNT, { form_type: ANALYTICS_CREATE_ACCOUNT });
         return authenticate(accountData.username, values.password);
       })

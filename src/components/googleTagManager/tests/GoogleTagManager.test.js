@@ -30,40 +30,26 @@ describe('Component: GoogleTagManager', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should push the username and track the initial event when username becomes available', () => {
+  it('should push the username when it becomes available', () => {
     expect(analytics.setup).toHaveBeenCalledTimes(1);
-
-    expect(wrapper.state('waitForUser')).toEqual(true);
-
     wrapper.setProps({ username: 'jojo' });
-    expect(analytics.trackPageview).toHaveBeenCalledWith('/some/path?fun=times', 'Test Title', 'jojo');
-
-    expect(wrapper.state('waitForUser')).toEqual(false);
-  });
-
-  it('should track a page view immediately if on a public route, and not again when the username becomes available', () => {
-    findRouteByPath.default = jest.fn(() => ({ title: 'Test Public Title', public: true }));
-    jest.clearAllMocks();
-    wrapper = shallow(<GoogleTagManager {...props} />);
-    expect(analytics.setup).toHaveBeenCalledTimes(1);
-    expect(analytics.trackPageview).toHaveBeenCalledWith('/some/path?fun=times', 'Test Public Title', undefined);
+    expect(analytics.setVariable).toHaveBeenCalledWith('username', 'jojo');
   });
 
   it('should track a new page view when the location changes', () => {
     findRouteByPath.default = jest.fn(() => ({ title: 'New Title' }));
     wrapper.setProps({ username: 'fred', location: { pathname: '/new', search: '' }});
-    expect(analytics.trackPageview).toHaveBeenCalledWith('/new', 'New Title', 'fred');
-  });
-
-  it('should not track a new page view when the location changes if we are still waiting for the username to load', () => {
-    wrapper.setProps({ location: { pathname: '/new2_FINAL', search: '' }});
-    expect(analytics.setup).toHaveBeenCalledTimes(1);
-    expect(analytics.trackPageview).not.toHaveBeenCalled();
+    expect(analytics.trackPageview).toHaveBeenCalledWith({
+      path: '/new', title: 'New Title'
+    });
   });
 
   it('should use the pathname if no title is available', () => {
     findRouteByPath.default = jest.fn(() => ({}));
-    wrapper.setProps({ username: 'jane', location: { pathname: '/no-title', search: '?cool=story' }});
-    expect(analytics.trackPageview).toHaveBeenCalledWith('/no-title?cool=story','/no-title', 'jane');
+    wrapper.setProps({ location: { pathname: '/no-title', search: '?cool=story' }});
+    expect(analytics.trackPageview).toHaveBeenCalledWith({
+      path: '/no-title?cool=story',
+      title: '/no-title'
+    });
   });
 });

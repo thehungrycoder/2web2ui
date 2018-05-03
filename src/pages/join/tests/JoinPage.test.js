@@ -6,6 +6,7 @@ import { AFTER_JOIN_REDIRECT_ROUTE } from 'src/constants';
 import * as constants from 'src/constants';
 import * as analytics from 'src/helpers/analytics';
 
+const username = 'foo_bar';
 let props;
 let instance;
 let wrapper;
@@ -47,7 +48,7 @@ describe('JoinPage', () => {
         createError: null
       },
       logout: jest.fn(),
-      register: jest.fn(() => Promise.resolve({ username: 'foo_bar' })),
+      register: jest.fn(() => Promise.resolve({ username })),
       authenticate: jest.fn(() => Promise.resolve()),
       history: {
         push: jest.fn()
@@ -118,6 +119,11 @@ describe('JoinPage', () => {
       await instance.registerSubmit(formValues);
       expect(props.register).toHaveBeenCalledTimes(1);
       expect(props.authenticate).toHaveBeenCalledWith('foo_bar', formValues.password);
+    });
+
+    it('gives username to analytics after successful registration', async() => {
+      await instance.registerSubmit(formValues);
+      expect(analytics.setVariable).toHaveBeenCalledWith('username', username);
     });
 
     it('tracks signup after successful registration', async() => {
