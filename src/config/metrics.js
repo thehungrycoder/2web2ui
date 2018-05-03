@@ -234,12 +234,12 @@ export const list = [
   },
   {
     key: 'bounce_rate',
-    label: 'All Bounce Rate',
+    label: 'Bounce Rate',
     type: 'percentage',
     unit: 'percent',
-    computeKeys: ['count_bounce', 'count_targeted'],
+    computeKeys: ['count_bounce', 'count_sent'],
     compute: rate,
-    description: 'Percentage of Targeted messages that Bounced.',
+    description: 'Percentage of Sent messages that Bounced.',
     inSummary: true
   },
   {
