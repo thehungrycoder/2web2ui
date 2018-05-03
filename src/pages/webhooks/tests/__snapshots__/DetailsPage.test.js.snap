@@ -21,6 +21,7 @@ exports[`Page: Webhook Details should render happy path 1`] = `
   title="My Hooky"
 >
   <Tabs
+    color="orange"
     connectBelow={true}
     selected={1}
     tabs={

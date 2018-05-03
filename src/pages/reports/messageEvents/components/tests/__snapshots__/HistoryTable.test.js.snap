@@ -31,6 +31,7 @@ exports[`HistoryTable Component should render with no props 1`] = `
     actions={
       Array [
         Object {
+          "color": "orange",
           "content": "Refresh",
           "onClick": undefined,
         },

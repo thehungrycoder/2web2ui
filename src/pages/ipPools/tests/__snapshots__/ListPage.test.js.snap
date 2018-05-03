@@ -7,7 +7,7 @@ exports[`IP Pools List Page renders correctly when showPurchaseCTA is false 1`] 
       "content": <p>
         Purchase dedicated IPs to manage your IP Pools
       </p>,
-      "image": "Setup",
+      "image": [Function],
       "primaryAction": Object {
         "Component": [Function],
         "content": "Create IP Pool",
@@ -93,7 +93,7 @@ exports[`IP Pools List Page renders empty state correctly 1`] = `
       "content": <p>
         Purchase dedicated IPs to manage your IP Pools
       </p>,
-      "image": "Setup",
+      "image": [Function],
       "primaryAction": Object {
         "Component": [Function],
         "content": "Purchase IPs",
@@ -126,7 +126,7 @@ exports[`IP Pools List Page renders empty state correctly when showPurchaseCTA i
       "content": <p>
         Purchase dedicated IPs to manage your IP Pools
       </p>,
-      "image": "Setup",
+      "image": [Function],
       "primaryAction": Object {
         "Component": [Function],
         "content": "Create IP Pool",
@@ -170,7 +170,7 @@ exports[`IP Pools List Page should render the list page correctly 1`] = `
       "content": <p>
         Purchase dedicated IPs to manage your IP Pools
       </p>,
-      "image": "Setup",
+      "image": [Function],
       "primaryAction": Object {
         "Component": [Function],
         "content": "Purchase IPs",
@@ -260,7 +260,7 @@ exports[`IP Pools List Page should show alert upon error 1`] = `
       "content": <p>
         Purchase dedicated IPs to manage your IP Pools
       </p>,
-      "image": "Setup",
+      "image": [Function],
       "primaryAction": Object {
         "Component": [Function],
         "content": "Purchase IPs",

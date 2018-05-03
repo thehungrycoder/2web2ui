@@ -17,6 +17,7 @@ exports[`CreatePage tests should display the error banner on parse error 1`] = `
     persistError={false}
   />
   <Tabs
+    color="orange"
     connectBelow={true}
     selected={0}
     tabs={
@@ -55,6 +56,7 @@ exports[`CreatePage tests should display the error banner on persist error 1`] =
     persistError={true}
   />
   <Tabs
+    color="orange"
     connectBelow={true}
     selected={0}
     tabs={
@@ -89,6 +91,7 @@ exports[`CreatePage tests should render AddTab 1`] = `
   title="Add Suppressions"
 >
   <Tabs
+    color="orange"
     connectBelow={true}
     selected={0}
     tabs={
@@ -123,6 +126,7 @@ exports[`CreatePage tests should render UploadTab 1`] = `
   title="Add Suppressions"
 >
   <Tabs
+    color="orange"
     connectBelow={true}
     selected={1}
     tabs={

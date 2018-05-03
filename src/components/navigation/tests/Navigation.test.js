@@ -45,7 +45,7 @@ describe('Navigation', () => {
     });
 
     it('should close nav when clicking x', () => {
-      wrapper.find('Icon').simulate('click');
+      wrapper.find('Close').simulate('click');
       expect(stateSpy).toHaveBeenCalledWith({ open: true });
     });
 

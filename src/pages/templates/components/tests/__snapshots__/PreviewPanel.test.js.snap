@@ -3,6 +3,7 @@
 exports[`renders HTML by default 1`] = `
 <div>
   <Tabs
+    color="orange"
     connectBelow={true}
     selected={0}
     tabs={
@@ -30,6 +31,7 @@ exports[`renders HTML by default 1`] = `
 exports[`renders blank panel 1`] = `
 <div>
   <Tabs
+    color="orange"
     connectBelow={true}
     selected={0}
     tabs={
@@ -57,6 +59,7 @@ exports[`renders blank panel 1`] = `
 exports[`renders text on tab click 1`] = `
 <div>
   <Tabs
+    color="orange"
     connectBelow={true}
     selected={1}
     tabs={

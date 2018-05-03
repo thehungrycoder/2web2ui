@@ -1,15 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Sending Domains Icons render correctly 1`] = `
-<Icon
-  name="Check"
+<Check
   size={16}
 />
 `;
 
 exports[`Sending Domains Icons render correctly 2`] = `
-<Icon
-  name="Error"
+<Error
   size={16}
 />
 `;

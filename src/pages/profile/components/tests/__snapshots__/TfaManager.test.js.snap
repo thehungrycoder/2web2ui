@@ -5,10 +5,12 @@ exports[`EnableTfaModal tests should render correctly 1`] = `
   actions={
     Array [
       Object {
+        "color": "orange",
         "content": "Enable 2FA",
         "onClick": [Function],
       },
       Object {
+        "color": "orange",
         "content": "Learn More",
         "external": true,
         "to": "https://www.sparkpost.com/docs/my-account-and-profile/enabling-two-factor-authentication",
@@ -59,10 +61,12 @@ exports[`EnableTfaModal tests should show a message about 0 codes 1`] = `
   actions={
     Array [
       Object {
+        "color": "orange",
         "content": "Generate New Backup Codes",
         "onClick": [Function],
       },
       Object {
+        "color": "orange",
         "content": "Disable 2FA",
         "onClick": [Function],
       },
@@ -130,10 +134,12 @@ exports[`EnableTfaModal tests should toggle status text when enabled 1`] = `
   actions={
     Array [
       Object {
+        "color": "orange",
         "content": "Generate New Backup Codes",
         "onClick": [Function],
       },
       Object {
+        "color": "orange",
         "content": "Disable 2FA",
         "onClick": [Function],
       },

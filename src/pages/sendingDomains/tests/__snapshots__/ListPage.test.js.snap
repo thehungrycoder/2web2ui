@@ -26,7 +26,7 @@ exports[`Sending Domains List Page renders correctly 1`] = `
       "content": <p>
         Create and configure your sending and bounce domains.
       </p>,
-      "image": "Setup",
+      "image": [Function],
       "secondaryAction": Object {
         "content": "Learn more",
         "external": true,
@@ -118,7 +118,7 @@ exports[`Sending Domains List Page renders error banner correctly 1`] = `
       "content": <p>
         Create and configure your sending and bounce domains.
       </p>,
-      "image": "Setup",
+      "image": [Function],
       "secondaryAction": Object {
         "content": "Learn more",
         "external": true,

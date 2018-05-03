@@ -3,10 +3,7 @@
 exports[`Algolia Results component should render 1`] = `
 <div>
   <strong>
-    <Icon
-      name="Link"
-      size={18}
-    />
+    <InsertLink />
      
     <UnstyledLink
       external={true}

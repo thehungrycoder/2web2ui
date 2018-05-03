@@ -7,9 +7,6 @@ exports[`SkipLink should render correctly 1`] = `
 >
   go to a path
    
-  <Icon
-    name="ArrowRight"
-    size={18}
-  />
+  <ArrowForward />
 </UnstyledLink>
 `;

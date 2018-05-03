@@ -22,8 +22,7 @@ exports[`Component: EditBounce default bounce toggle renders correctly if assign
     >
       Default bounce domain 
        for Subaccount 101
-      <Icon
-        name="Help"
+      <Help
         size={15}
       />
     </Tooltip>
@@ -56,8 +55,7 @@ exports[`Component: EditBounce default bounce toggle renders correctly toggle wh
       right={true}
     >
       Default bounce domain 
-      <Icon
-        name="Help"
+      <Help
         size={15}
       />
     </Tooltip>
@@ -90,8 +88,7 @@ exports[`Component: EditBounce default bounce toggle renders correctly toggle wh
       right={true}
     >
       Default bounce domain 
-      <Icon
-        name="Help"
+      <Help
         size={15}
       />
     </Tooltip>
@@ -126,6 +123,7 @@ exports[`Component: EditBounce does not show root domain warning for 3rd level d
         actions={
           Array [
             Object {
+              "color": "orange",
               "content": "Verify CNAME Record",
               "disabled": false,
               "onClick": [Function],
@@ -206,6 +204,7 @@ exports[`Component: EditBounce renders not ready correctly 1`] = `
         actions={
           Array [
             Object {
+              "color": "orange",
               "content": "Verify CNAME Record",
               "disabled": false,
               "onClick": [Function],
@@ -274,6 +273,7 @@ exports[`Component: EditBounce renders ready correctly 1`] = `
         actions={
           Array [
             Object {
+              "color": "orange",
               "content": "Re-verify CNAME Record",
               "disabled": false,
               "onClick": [Function],
@@ -318,6 +318,7 @@ exports[`Component: EditBounce renders ready correctly 1`] = `
 exports[`Component: EditBounce verifyDomain renders loading state correctly 1`] = `
 Array [
   Object {
+    "color": "orange",
     "content": "Verifying...",
     "disabled": true,
     "onClick": [Function],

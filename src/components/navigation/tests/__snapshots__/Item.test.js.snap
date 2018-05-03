@@ -9,8 +9,7 @@ exports[`Item tests should render a link correctly 1`] = `
       to="/to"
     >
       <span>
-        <Icon
-          name="Mail"
+        <Mail
           size={18}
         />
       </span>
@@ -28,16 +27,12 @@ exports[`Item tests should render children correctly 1`] = `
       onClick={[Function]}
     >
       <span>
-        <Icon
-          name="Mail"
+        <Mail
           size={18}
         />
       </span>
       label
-      <Icon
-        name="ChevronLeft"
-        size={18}
-      />
+      <ChevronLeft />
     </a>
     <ul>
       <Item

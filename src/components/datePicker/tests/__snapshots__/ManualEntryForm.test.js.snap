@@ -39,10 +39,7 @@ exports[`Component: DatePicker ManualEntryForm should render correctly by defaul
       xs={1}
     >
       <div>
-        <Icon
-          name="ArrowRight"
-          size={18}
-        />
+        <ArrowForward />
       </div>
     </Grid.Column>
     <Grid.Column>
@@ -116,10 +113,7 @@ exports[`Component: DatePicker ManualEntryForm should sync props to state 1`] = 
       xs={1}
     >
       <div>
-        <Icon
-          name="ArrowRight"
-          size={18}
-        />
+        <ArrowForward />
       </div>
     </Grid.Column>
     <Grid.Column>
@@ -193,10 +187,7 @@ exports[`Component: DatePicker ManualEntryForm should update state from new prop
       xs={1}
     >
       <div>
-        <Icon
-          name="ArrowRight"
-          size={18}
-        />
+        <ArrowForward />
       </div>
     </Grid.Column>
     <Grid.Column>

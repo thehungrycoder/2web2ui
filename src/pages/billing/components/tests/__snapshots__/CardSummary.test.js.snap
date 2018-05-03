@@ -6,8 +6,7 @@ exports[`Component: CardSummary should render correctly 1`] = `
 >
   <h6>
     <strong>
-      <Icon
-        name="CreditCard"
+      <CreditCard
         size={16}
       />
        

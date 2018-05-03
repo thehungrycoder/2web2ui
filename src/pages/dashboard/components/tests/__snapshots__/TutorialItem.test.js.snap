@@ -4,8 +4,7 @@ exports[`Component: TutorialItem should ignore a label link and children when th
 <div
   className=""
 >
-  <Icon
-    name="Check"
+  <Check
     size={24}
   />
   <div>
@@ -46,10 +45,7 @@ exports[`Component: TutorialItem should render the link and children when not co
       >
         my item
          
-        <Icon
-          name="ArrowRight"
-          size={18}
-        />
+        <ArrowForward />
       </Link>
     </h6>
     <div>
@@ -64,8 +60,7 @@ exports[`Component: TutorialItem should show checkmark when task is completed 1`
 <div
   className=""
 >
-  <Icon
-    name="Check"
+  <Check
     size={24}
   />
   <div>

@@ -22,8 +22,7 @@ exports[`CopyCodes Component should render 1`] = `
     onClick={[Function]}
     size="default"
   >
-    <Icon
-      name="Copy"
+    <ContentCopy
       size={14}
     />
     Copy
@@ -53,8 +52,7 @@ exports[`CopyCodes Component should show tooltip when copied state is true 1`] =
     onClick={[Function]}
     size="default"
   >
-    <Icon
-      name="Copy"
+    <ContentCopy
       size={14}
     />
     Copy

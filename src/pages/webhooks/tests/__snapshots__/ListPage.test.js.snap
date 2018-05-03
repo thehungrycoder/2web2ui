@@ -91,7 +91,7 @@ exports[`Page: Webhook List should render error when it fails 1`] = `
       "content": <p>
         Push message events directly to your own endpoints
       </p>,
-      "image": "Setup",
+      "image": [Function],
       "show": false,
       "title": "Create a Webhook",
     }
@@ -126,7 +126,7 @@ exports[`Page: Webhook List should render happy path 1`] = `
       "content": <p>
         Push message events directly to your own endpoints
       </p>,
-      "image": "Setup",
+      "image": [Function],
       "show": false,
       "title": "Create a Webhook",
     }

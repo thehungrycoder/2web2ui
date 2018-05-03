@@ -27,10 +27,7 @@ exports[`MetricCard Component:  should render correctly with all props 1`] = `
         }
         right={true}
       >
-        <Icon
-          name="InfoOutline"
-          size={18}
-        />
+        <InfoOutline />
       </Tooltip>
     </h6>
   </Panel>
