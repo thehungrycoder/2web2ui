@@ -7,7 +7,7 @@ exports[`Page: Users List should render correctly by default 1`] = `
       "content": <p>
         Manage your team's accounts and roles.
       </p>,
-      "image": "Users",
+      "image": [Function],
       "show": false,
       "title": "Invite Your Team to SparkPost",
     }
@@ -104,7 +104,7 @@ exports[`Page: Users List should render with an error 1`] = `
       "content": <p>
         Manage your team's accounts and roles.
       </p>,
-      "image": "Users",
+      "image": [Function],
       "show": false,
       "title": "Invite Your Team to SparkPost",
     }

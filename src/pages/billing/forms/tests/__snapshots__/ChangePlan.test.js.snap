@@ -132,6 +132,7 @@ exports[`Form Container: Change Plan should show saved card 1`] = `
           actions={
             Array [
               Object {
+                "color": "orange",
                 "content": "Use Another Credit Card",
                 "onClick": [Function],
               },

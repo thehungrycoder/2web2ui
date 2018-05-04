@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 import { Field, change, formValueSelector } from 'redux-form';
 
-import { TextField, Icon, Popover, ActionList } from '@sparkpost/matchbox';
+import { TextField, Popover, ActionList } from '@sparkpost/matchbox';
+import { ArrowDropDown } from '@sparkpost/matchbox-icons';
 
 import styles from './FilterDropdown.module.scss';
 
@@ -70,7 +71,7 @@ export class FilterDropdown extends Component {
       <div>
         <Popover
           className={popoverClassName} trigger={<TextField prefix={prefix} value={displayValue} readOnly
-            suffix={<Icon name='CaretDown'/>} />} onClose={this.onClose}>
+            suffix={<ArrowDropDown />} />} onClose={this.onClose}>
           <ActionList actions={actions} />
         </Popover>
         {this.renderCheckboxes()}

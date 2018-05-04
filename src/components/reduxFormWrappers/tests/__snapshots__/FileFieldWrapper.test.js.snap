@@ -21,10 +21,7 @@ exports[`FileFieldWrapper renders disabled file input 1`] = `
       preventDropOnDocument={true}
     >
       <span>
-        <Icon
-          name="Upload"
-          size={18}
-        />
+        <FileUpload />
          Drag a file here, or click to browse
       </span>
     </Dropzone>
@@ -53,10 +50,7 @@ exports[`FileFieldWrapper renders file input 1`] = `
       preventDropOnDocument={true}
     >
       <span>
-        <Icon
-          name="Upload"
-          size={18}
-        />
+        <FileUpload />
          Drag a file here, or click to browse
       </span>
     </Dropzone>
@@ -89,10 +83,7 @@ exports[`FileFieldWrapper renders file input with error message 1`] = `
       preventDropOnDocument={true}
     >
       <span>
-        <Icon
-          name="Upload"
-          size={18}
-        />
+        <FileUpload />
          Drag a file here, or click to browse
       </span>
     </Dropzone>
@@ -121,10 +112,7 @@ exports[`FileFieldWrapper renders file input with help message 1`] = `
       preventDropOnDocument={true}
     >
       <span>
-        <Icon
-          name="Upload"
-          size={18}
-        />
+        <FileUpload />
          Drag a file here, or click to browse
       </span>
     </Dropzone>
@@ -156,10 +144,7 @@ exports[`FileFieldWrapper renders file input with no specified type 1`] = `
       preventDropOnDocument={true}
     >
       <span>
-        <Icon
-          name="Upload"
-          size={18}
-        />
+        <FileUpload />
          Drag a file here, or click to browse
       </span>
     </Dropzone>

@@ -68,14 +68,14 @@ export class ChangePlan extends Component {
 
     if (this.state.useSavedCC) {
       return (
-        <Panel title='Pay With Saved Payment Method' actions={[{ content: 'Use Another Credit Card', onClick: this.handleCardToggle }]}>
+        <Panel title='Pay With Saved Payment Method' actions={[{ content: 'Use Another Credit Card', onClick: this.handleCardToggle, color: 'orange' }]}>
           <Panel.Section><CardSummary billing={account.billing} /></Panel.Section>
         </Panel>
       );
     }
 
     const savedPaymentAction = this.props.canUpdateBillingInfo
-      ? [{ content: 'Use Saved Payment Method', onClick: this.handleCardToggle }]
+      ? [{ content: 'Use Saved Payment Method', onClick: this.handleCardToggle, color: 'orange' }]
       : null;
 
     return (

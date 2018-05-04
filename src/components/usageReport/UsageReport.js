@@ -14,7 +14,8 @@ const actions = [
   {
     content: 'What counts towards usage?',
     to: LINKS.DAILY_USAGE,
-    external: true
+    external: true,
+    color: 'orange'
   }
 ];
 

@@ -13,6 +13,7 @@ exports[`edit path base props 1`] = `
   title="Bob Evans, the restaurant. (123)"
 >
   <Tabs
+    color="orange"
     connectBelow={true}
     selected={0}
     tabs={
@@ -66,6 +67,7 @@ exports[`edit path loading 1`] = `
   title="loading..."
 >
   <Tabs
+    color="orange"
     connectBelow={true}
     selected={0}
     tabs={
@@ -107,6 +109,7 @@ exports[`keys path base props 1`] = `
   title="Bob Evans, the restaurant. (123)"
 >
   <Tabs
+    color="orange"
     connectBelow={true}
     selected={1}
     tabs={
@@ -160,6 +163,7 @@ exports[`keys path loading 1`] = `
   title="loading..."
 >
   <Tabs
+    color="orange"
     connectBelow={true}
     selected={1}
     tabs={
@@ -204,6 +208,7 @@ exports[`on create scenario should show api key banner on new key 1`] = `
     title="Don't Forget Your API Key"
   />
   <Tabs
+    color="orange"
     connectBelow={true}
     selected={-1}
     tabs={
@@ -257,6 +262,7 @@ exports[`should select sending domains tab 1`] = `
   title="Bob Evans, the restaurant. (123)"
 >
   <Tabs
+    color="orange"
     connectBelow={true}
     selected={2}
     tabs={

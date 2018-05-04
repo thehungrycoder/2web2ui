@@ -11,6 +11,7 @@ exports[`UsageReport Component should render with overages 1`] = `
   actions={
     Array [
       Object {
+        "color": "orange",
         "content": "What counts towards usage?",
         "external": true,
         "to": "https://www.sparkpost.com/docs/getting-started/what-counts-daily-monthly-usage",
@@ -25,6 +26,7 @@ exports[`UsageReport Component should render with overages 1`] = `
       title="Today"
     />
     <ProgressBar
+      color="orange"
       completed={50}
     />
     <DisplayNumber
@@ -44,6 +46,7 @@ exports[`UsageReport Component should render with overages 1`] = `
       title="This Month"
     />
     <ProgressBar
+      color="orange"
       completed={22}
     />
     <DisplayNumber
@@ -72,6 +75,7 @@ exports[`UsageReport Component should render with regular usage 1`] = `
   actions={
     Array [
       Object {
+        "color": "orange",
         "content": "What counts towards usage?",
         "external": true,
         "to": "https://www.sparkpost.com/docs/getting-started/what-counts-daily-monthly-usage",
@@ -86,6 +90,7 @@ exports[`UsageReport Component should render with regular usage 1`] = `
       title="Today"
     />
     <ProgressBar
+      color="orange"
       completed={50}
     />
     <DisplayNumber
@@ -105,6 +110,7 @@ exports[`UsageReport Component should render with regular usage 1`] = `
       title="This Month"
     />
     <ProgressBar
+      color="orange"
       completed={2}
     />
     <DisplayNumber

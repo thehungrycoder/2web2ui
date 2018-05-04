@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Panel, Tooltip, Icon } from '@sparkpost/matchbox';
+import { Panel, Tooltip } from '@sparkpost/matchbox';
+import { InfoOutline } from '@sparkpost/matchbox-icons';
 
 import styles from './MetricCard.module.scss';
 
 const MetricCard = ({ label, value, tooltipContent, ...rest }) => {
   const tooltip = tooltipContent
-    ? <Tooltip dark content={tooltipContent} horizontalOffset='-1.1rem'><Icon name='InfoOutline'/></Tooltip>
+    ? <Tooltip dark content={tooltipContent} horizontalOffset='-1.1rem'><InfoOutline /></Tooltip>
     : null;
 
   return (

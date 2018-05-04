@@ -1,5 +1,6 @@
 import React from 'react';
-import { TextField, Icon, Panel } from '@sparkpost/matchbox';
+import { TextField, Panel } from '@sparkpost/matchbox';
+import { Search } from '@sparkpost/matchbox-icons';
 import { getRandomExampleSearch } from './helpers/exampleSearch';
 
 export default function CollectionFilterBox(props) {
@@ -8,7 +9,7 @@ export default function CollectionFilterBox(props) {
   return (
     <Panel sectioned>
       <TextField
-        prefix={<Icon name='Search' />}
+        prefix={<Search />}
         placeholder={placeholder}
         onChange={(e) => props.onChange(e.target.value)}
       />

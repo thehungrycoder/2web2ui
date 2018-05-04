@@ -123,7 +123,7 @@
     background: color(gray, 1);
 
     .chevron {
-      transform: translate(0, -50%) rotate(0);
+      transform: translate(0, -50%) rotate(-90deg);
     }
 
     & + .nestedList {
@@ -157,7 +157,7 @@
   right: rem(15);
   width: rem(24);
   height: rem(24);
-  transform: translate(0, -50%) rotate(-90deg);
+  transform: translate(0, -50%) rotate(0);
   fill: color(gray, 4);
   transition: 0.1s;
 }

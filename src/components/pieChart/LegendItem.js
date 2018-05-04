@@ -1,6 +1,6 @@
 import React from 'react';
 import cx from 'classnames';
-import { Icon } from '@sparkpost/matchbox';
+import { ChevronLeft, ChevronRight } from '@sparkpost/matchbox-icons';
 
 import styles from './LegendItem.module.scss';
 
@@ -25,11 +25,11 @@ const LegendItem = ({
   );
 
   const breadcrumbMarkup = breadcrumb
-    ? <Icon name='ChevronLeft' className={styles.BreadcrumbIcon}/>
+    ? <ChevronLeft className={styles.BreadcrumbIcon}/>
     : null;
 
   const expandMarkup = children && children.length
-    ? <Icon name='ChevronRight' />
+    ? <ChevronRight />
     : null;
 
   return (

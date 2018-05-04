@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { Page } from '@sparkpost/matchbox';
+import { Users } from 'src/components/images';
 import { Loading, TableCollection, ApiErrorBanner } from 'src/components';
 import { list as listSubaccounts } from 'src/actions/subaccounts';
 import { selectSubaccounts } from 'src/selectors/subaccounts';
@@ -74,7 +75,7 @@ export class ListPage extends Component {
         empty={{
           show: subaccounts.length === 0,
           title: 'Manage your subaccounts',
-          image: 'Users',
+          image: Users,
           content: <p>Subaccounts are a good way of managing external client accounts.</p>,
           secondaryAction: {
             content: 'Learn more',

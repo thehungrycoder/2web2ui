@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Tag, Icon } from '@sparkpost/matchbox';
+import { Tag } from '@sparkpost/matchbox';
+import { InsertLink } from '@sparkpost/matchbox-icons';
 
 const SubaccountTag = ({ id, all, receiveAll, master, isDefault }) => {
   let content = null;
@@ -32,7 +33,7 @@ const SubaccountTag = ({ id, all, receiveAll, master, isDefault }) => {
     return null;
   }
 
-  return <Tag color={color}><Icon name='Link' size={15} /> {content}{defaultContent}</Tag>;
+  return <Tag color={color}><InsertLink size={15} /> {content}{defaultContent}</Tag>;
 };
 
 SubaccountTag.propTypes = {

@@ -1,12 +1,12 @@
 import React from 'react';
-import { Icon } from '@sparkpost/matchbox';
+import { Check, Error } from '@sparkpost/matchbox-icons';
 
 import styles from './Icons.module.scss';
 
-const VerifiedIcon = () => <Icon name="Check" size={16} className={styles.GreenCheck}/>;
+const VerifiedIcon = () => <Check size={16} className={styles.GreenCheck}/>;
 VerifiedIcon.displayName = 'VerifiedIcon';
 
-const ErrorIcon = () => <Icon name="Error" size={16} className={styles.RedError}/>;
+const ErrorIcon = () => <Error size={16} className={styles.RedError}/>;
 ErrorIcon.displayName = 'ErrorIcon';
 
 

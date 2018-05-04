@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import { Page } from '@sparkpost/matchbox';
 import { Loading, ApiErrorBanner, TableCollection } from 'src/components';
-
+import { Users } from 'src/components/images';
 import { listRecipientLists } from 'src/actions/recipientLists';
 import { LINKS } from 'src/constants';
 
@@ -75,7 +75,7 @@ export class ListPage extends Component {
         primaryAction={primaryAction}
         empty={{
           show: recipientLists.length === 0,
-          image: 'Users',
+          image: Users,
           content: <p>Manage your recipient lists</p>,
           secondaryAction: {
             content: 'Learn More',

@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 import { verifyCname, update } from 'src/actions/sendingDomains';
 
 import { VerifiedIcon, ErrorIcon } from './Icons';
-import { Panel, Banner, Tooltip, Icon } from '@sparkpost/matchbox';
+import { Panel, Banner, Tooltip } from '@sparkpost/matchbox';
+import { Help } from '@sparkpost/matchbox-icons';
 import ToggleBlock from 'src/components/toggleBlock/ToggleBlock';
 import { LabelledValue } from 'src/components';
 import { showAlert } from 'src/actions/globalAlert';
@@ -68,7 +69,8 @@ export class EditBounce extends Component {
     return {
       content: buttonText,
       onClick: this.verifyDomain,
-      disabled: verifyCnameLoading
+      disabled: verifyCnameLoading,
+      color: 'orange'
     };
   }
 
@@ -117,7 +119,7 @@ export class EditBounce extends Component {
     const tooltip = (
       <Tooltip dark content={`When this is set to "ON", all future transmissions ${domain.subaccount_id ? 'for this subaccount ' : ''}will use ${id} as their bounce domain (unless otherwise specified).`}>
         Default bounce domain {domain.subaccount_id && ` for Subaccount ${domain.subaccount_id}`}
-        <Icon name='Help' size={15}/>
+        <Help size={15}/>
       </Tooltip>
     );
 

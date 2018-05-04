@@ -33,7 +33,7 @@ class HistoryTable extends Component {
 
     return (
       <div>
-        <Panel title='Message History' actions={[{ content: 'Refresh', onClick: this.props.handleRefresh }]}>
+        <Panel title='Message History' actions={[{ content: 'Refresh', onClick: this.props.handleRefresh, color: 'orange' }]}>
           <TableCollection
             outerWrapper={TableWrapper}
             headerComponent={Header}

@@ -31,8 +31,7 @@ exports[`Navigation Navigation tests should render full nav 1`] = `
       </ul>
       <Connect(Footer) />
     </div>
-    <Icon
-      name="Close"
+    <Close
       onClick={[Function]}
       size={33}
     />

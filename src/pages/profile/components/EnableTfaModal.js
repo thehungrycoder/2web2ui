@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { QRCode } from 'react-qr-svg';
 import Modal from 'src/components/modals/Modal';
 import styles from './TfaModals.module.scss';
-import { Panel, Button, TextField, Grid, Icon } from '@sparkpost/matchbox';
+import { Panel, Button, TextField, Grid } from '@sparkpost/matchbox';
+import { VpnKey } from '@sparkpost/matchbox-icons';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
 
 export default class EnableTfaModal extends Component {
@@ -53,7 +54,7 @@ export default class EnableTfaModal extends Component {
               <h6>Step 1: Configure your 2FA app</h6>
               <p>To enable 2FA, you'll need to have a 2FA auth app installed on your phone or tablet (examples include Google Authenticator, Duo Mobile, and Authy).</p>
               <p>Most apps will let you get set up by scanning our QR code from within the app. If you prefer, you can type in the key manually.</p>
-              <p><strong><Icon name="Key"/> <code>{secret}</code></strong></p>
+              <p><strong><VpnKey /> <code>{secret}</code></strong></p>
             </Grid.Column>
             <Grid.Column xs={12} md={5} style={{ textAlign: 'center' }}>
               <QRCode

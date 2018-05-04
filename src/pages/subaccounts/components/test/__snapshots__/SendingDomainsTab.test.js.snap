@@ -73,6 +73,7 @@ exports[`SendingDomainsTab should show empty message when 0 domains exist 1`] = 
     </p>
     <Button
       Component={[Function]}
+      color="orange"
       plain={true}
       size="default"
       to="/account/sending-domains"

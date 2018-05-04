@@ -43,9 +43,7 @@ exports[`EngagementTable when renders table 1`] = `
             right={true}
             top={true}
           >
-            <Icon
-              name="InfoOutline"
-              size={18}
+            <InfoOutline
               style={
                 Object {
                   "marginLeft": "5px",
@@ -78,9 +76,7 @@ exports[`EngagementTable when renders table 1`] = `
             right={true}
             top={true}
           >
-            <Icon
-              name="InfoOutline"
-              size={18}
+            <InfoOutline
               style={
                 Object {
                   "marginLeft": "5px",

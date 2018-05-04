@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import React from 'react';
-import { Icon, Tooltip } from '@sparkpost/matchbox';
+import { Tooltip } from '@sparkpost/matchbox';
+import { InfoOutline } from '@sparkpost/matchbox-icons';
 
 import { Empty, PanelLoading, TableCollection } from 'src/components';
 import { map as metrics } from 'src/config/metrics';
@@ -20,7 +21,7 @@ const COLUMNS = [
       <span>
         Unique Clicks
         <Tooltip dark top content={metrics.count_raw_clicked_approx.description}>
-          <Icon name="InfoOutline" style={{ marginLeft: '5px' }} />
+          <InfoOutline style={{ marginLeft: '5px' }} />
         </Tooltip>
       </span>
     ),
@@ -33,7 +34,7 @@ const COLUMNS = [
       <span>
         Clicks
         <Tooltip dark top content={metrics.count_clicked.description}>
-          <Icon name="InfoOutline" style={{ marginLeft: '5px' }} />
+          <InfoOutline style={{ marginLeft: '5px' }} />
         </Tooltip>
       </span>
     ),

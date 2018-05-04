@@ -3,6 +3,7 @@
 exports[`Component: SetupSending disables the verification button while submitting 1`] = `
 Array [
   Object {
+    "color": "orange",
     "content": "Verifying...",
     "disabled": true,
     "id": "verify-dkim",
@@ -28,6 +29,7 @@ exports[`Component: SetupSending renders correctly for unverified DKIM and inval
       actions={
         Array [
           Object {
+            "color": "orange",
             "content": "Verify TXT Record",
             "disabled": false,
             "id": "verify-dkim",
@@ -97,6 +99,7 @@ exports[`Component: SetupSending renders correctly for unverified DKIM and inval
       actions={
         Array [
           Object {
+            "color": "orange",
             "content": "Verify TXT Record",
             "disabled": false,
             "id": "verify-dkim",
@@ -148,6 +151,7 @@ exports[`Component: SetupSending renders correctly when ownership and DKIM are v
       actions={
         Array [
           Object {
+            "color": "orange",
             "content": "Re-verify TXT Record",
             "disabled": false,
             "id": "verify-dkim",
@@ -211,6 +215,7 @@ exports[`Component: SetupSending renders correctly when ownership is valid and D
       actions={
         Array [
           Object {
+            "color": "orange",
             "content": "Verify TXT Record",
             "disabled": false,
             "id": "verify-dkim",

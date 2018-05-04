@@ -17,9 +17,8 @@ exports[`Support Component render tests should render just the icon by default 1
           className={undefined}
           onClick={[Function]}
         >
-          <Icon
+          <Help
             className={undefined}
-            name="HelpOutline"
             size={33}
           />
         </a>
@@ -50,9 +49,8 @@ exports[`Support Component render tests should show form and close icon when pan
           className={undefined}
           onClick={[Function]}
         >
-          <Icon
+          <Cancel
             className={undefined}
-            name="CloseCircle"
             size={33}
           />
         </a>
@@ -85,9 +83,8 @@ exports[`Support Component render tests should show search panel and close icon 
           className={undefined}
           onClick={[Function]}
         >
-          <Icon
+          <Cancel
             className={undefined}
-            name="CloseCircle"
             size={33}
           />
         </a>
