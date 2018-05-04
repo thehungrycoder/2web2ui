@@ -1,21 +1,23 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Field, reduxForm } from 'redux-form';
+import { Field, formValueSelector, reduxForm } from 'redux-form';
 import { Button, Panel } from '@sparkpost/matchbox';
-import * as supportActions from 'src/actions/support';
-import { TextFieldWrapper } from 'src/components';
-import { required, minLength, maxFileSize } from 'src/helpers/validation';
-import config from 'src/config';
-import styles from './SupportForm.module.scss';
-import FileFieldWrapper from 'src/components/reduxFormWrappers/FileFieldWrapper';
-import { getBase64Contents } from 'src/helpers/file';
 
-const formName = 'supportForm';
+import * as supportActions from 'src/actions/support';
+import { SelectWrapper, TextFieldWrapper } from 'src/components';
+import FileFieldWrapper from 'src/components/reduxFormWrappers/FileFieldWrapper';
+import config from 'src/config';
+import { getBase64Contents } from 'src/helpers/file';
+import { required, maxFileSize } from 'src/helpers/validation';
+import { selectSupportIssue, selectSupportIssues } from 'src/selectors/support';
+
+import styles from './SupportForm.module.scss';
 
 export class SupportForm extends Component {
-  onSubmit = async (values) => {
-    const { message, subject, attachment } = values;
-    let ticket = { message, subject };
+  onSubmit = async ({ attachment, issueId, message }) => {
+    const issue = _.find(this.props.issues, { id: issueId });
+    let ticket = { issueType: issue.type, message, subject: issue.label };
 
     if (attachment) {
       const encoded = await getBase64Contents(attachment);
@@ -45,11 +47,13 @@ export class SupportForm extends Component {
 
   renderForm () {
     const {
-      pristine,
-      invalid,
-      submitting,
       handleSubmit,
-      onCancel
+      invalid,
+      issues,
+      onCancel,
+      pristine,
+      selectedIssue,
+      submitting
     } = this.props;
 
     return <div className={styles.SupportForm}>
@@ -59,25 +63,25 @@ export class SupportForm extends Component {
       <form onSubmit={handleSubmit(this.onSubmit)}>
         <Panel.Section>
           <Field
-            name='subject'
-            label='Subject'
-            placeholder='Give your issue a title'
-            autoFocus
+            name='issueId'
+            label='I need help with...'
+            placeholder=' '
             errorInLabel
             disabled={submitting}
-            validate={[required, minLength(5)]}
-            component={TextFieldWrapper} />
-          <Field
-            multiline
-            rows={10}
-            resize='none'
-            name='message'
-            label='Message'
-            placeholder='Give us details about your issue'
-            errorInLabel
-            disabled={submitting}
+            component={SelectWrapper}
+            options={issues.map(({ id, label }) => ({ label, value: id }))}
             validate={required}
+          />
+          <Field
+            name='message'
+            label={selectedIssue ? selectedIssue.messageLabel : 'Tell us more about your issue'}
+            errorInLabel
+            multiline
+            resize='none'
+            rows={10}
+            disabled={submitting}
             component={TextFieldWrapper}
+            validate={required}
           />
           <Field
             type='file'
@@ -106,8 +110,12 @@ export class SupportForm extends Component {
   }
 }
 
-const mapStateToProps = ({ support }) => ({
-  ticketId: support.ticketId
+const formName = 'supportForm';
+const selector = formValueSelector(formName);
+const mapStateToProps = (state) => ({
+  issues: selectSupportIssues(state),
+  selectedIssue: selectSupportIssue(state, selector(state, 'issueId')),
+  ticketId: state.support.ticketId
 });
 
 const ReduxSupportForm = reduxForm({ form: formName })(SupportForm);

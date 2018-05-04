@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Selectors: support selectSupportIssues should return issues that satisified condition 1`] = `
+Array [
+  Object {
+    "id": "without_condition",
+  },
+  Object {
+    "condition": [MockFunction] {
+      "calls": Array [
+        Array [
+          Object {
+            "account": Object {
+              "id": "stubbed_for_snapshot",
+            },
+          },
+        ],
+      ],
+    },
+    "id": "when_satisfied",
+  },
+]
+`;
