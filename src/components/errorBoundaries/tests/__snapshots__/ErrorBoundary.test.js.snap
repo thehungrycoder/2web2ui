@@ -16,7 +16,7 @@ exports[`Component: ErrorBoundary renders correctly with error 1`] = `
   }
 >
   <EmptyState
-    image="Generic"
+    image={[Function]}
     primaryAction={
       Object {
         "content": "Reload Page",

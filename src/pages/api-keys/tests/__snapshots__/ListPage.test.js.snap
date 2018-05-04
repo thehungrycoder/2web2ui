@@ -45,7 +45,7 @@ exports[`Api Keys List Page renders correctly 1`] = `
       "content": <p>
         Create an API key you can use to access our REST or SMTP API services.
       </p>,
-      "image": "Setup",
+      "image": [Function],
       "secondaryAction": Object {
         "content": "View our API Docs",
         "external": true,
@@ -144,7 +144,7 @@ exports[`Api Keys List Page renders errors when present 1`] = `
       "content": <p>
         Create an API key you can use to access our REST or SMTP API services.
       </p>,
-      "image": "Setup",
+      "image": [Function],
       "secondaryAction": Object {
         "content": "View our API Docs",
         "external": true,
@@ -177,7 +177,7 @@ exports[`Api Keys List Page renders when there are no keys 1`] = `
       "content": <p>
         Create an API key you can use to access our REST or SMTP API services.
       </p>,
-      "image": "Setup",
+      "image": [Function],
       "secondaryAction": Object {
         "content": "View our API Docs",
         "external": true,
@@ -283,7 +283,7 @@ exports[`Api Keys List Page should show api key banner on successful create 1`] 
       "content": <p>
         Create an API key you can use to access our REST or SMTP API services.
       </p>,
-      "image": "Setup",
+      "image": [Function],
       "secondaryAction": Object {
         "content": "View our API Docs",
         "external": true,

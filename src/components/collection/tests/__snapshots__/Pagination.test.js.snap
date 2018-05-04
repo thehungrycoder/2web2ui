@@ -23,6 +23,7 @@ exports[`Collection Pagination Component should not show save as CSV button when
       onChange={[Function]}
       pageRange={5}
       pages={3}
+      selectedColor="orange"
     />
   </div>
   <div>
@@ -71,6 +72,7 @@ exports[`Collection Pagination Component should render with perPageButtons and s
       onChange={[Function]}
       pageRange={5}
       pages={6}
+      selectedColor="orange"
     />
   </div>
   <div>
@@ -140,6 +142,7 @@ exports[`Collection Pagination Component should render without perPageButtons 1`
       onChange={[Function]}
       pageRange={5}
       pages={3}
+      selectedColor="orange"
     />
   </div>
   <div>

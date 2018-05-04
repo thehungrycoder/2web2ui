@@ -5,6 +5,7 @@ exports[`Component: ActiveFilters should render filters correctly 1`] = `
   actions={
     Array [
       Object {
+        "color": "blue",
         "content": "Clear All Filters",
         "onClick": [Function],
       },

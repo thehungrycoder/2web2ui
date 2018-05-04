@@ -2,7 +2,7 @@
 
 exports[`Page: Page Not Found tests renders correctly 1`] = `
 <EmptyState
-  image="Generic"
+  image={[Function]}
   title="Page Not Found"
 >
   <p>

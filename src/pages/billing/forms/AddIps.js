@@ -81,7 +81,7 @@ export class AddIps extends Component {
     // This form should not be rendered if the account has no remaining IP addresses
     const isDisabled = submitting || remainingCount === 0;
 
-    const action = { content: 'Manage Your IPs', to: '/account/ip-pools', Component: Link };
+    const action = { content: 'Manage Your IPs', to: '/account/ip-pools', Component: Link, color: 'orange' };
 
     return (
       <form onSubmit={handleSubmit(this.onSubmit)} noValidate>

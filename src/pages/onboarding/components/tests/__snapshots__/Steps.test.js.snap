@@ -6,10 +6,7 @@ exports[`Steps should render correctly 1`] = `
     className=""
     key="Confirm your Plan"
   >
-    <Icon
-      name="Check"
-      size={18}
-    />
+    <Check />
      
     Confirm your Plan
   </li>

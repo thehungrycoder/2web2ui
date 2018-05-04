@@ -7,7 +7,7 @@ exports[`renders correctly 1`] = `
       "content": <p>
         Manage your recipient lists
       </p>,
-      "image": "Users",
+      "image": [Function],
       "secondaryAction": Object {
         "content": "Learn More",
         "external": true,
@@ -99,7 +99,7 @@ exports[`renders empty state 1`] = `
       "content": <p>
         Manage your recipient lists
       </p>,
-      "image": "Users",
+      "image": [Function],
       "secondaryAction": Object {
         "content": "Learn More",
         "external": true,
@@ -168,7 +168,7 @@ exports[`renders errors when present 1`] = `
       "content": <p>
         Manage your recipient lists
       </p>,
-      "image": "Users",
+      "image": [Function],
       "secondaryAction": Object {
         "content": "Learn More",
         "external": true,

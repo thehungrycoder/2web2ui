@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { listPools } from 'src/actions/ipPools';
 import { getOrderedIpPools, shouldShowIpPurchaseCTA } from 'src/selectors/ipPools';
 import { Loading, TableCollection, ApiErrorBanner } from 'src/components';
+import { Setup } from 'src/components/images';
 import { Page } from '@sparkpost/matchbox';
 
 const columns = [
@@ -70,7 +71,7 @@ export class IpPoolsList extends Component {
         empty={{
           show: isEmptyState,
           title: 'Boost your deliverability',
-          image: 'Setup',
+          image: Setup,
           content: <p>Purchase dedicated IPs to manage your IP Pools</p>,
           secondaryAction: showPurchaseCTA ? createAction : null,
           primaryAction: showPurchaseCTA ? purchaseAction : createAction

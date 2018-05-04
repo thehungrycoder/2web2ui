@@ -1,9 +1,10 @@
 import React from 'react';
 
-import { Tooltip, Icon } from '@sparkpost/matchbox';
+import { Tooltip } from '@sparkpost/matchbox';
+import { Help } from '@sparkpost/matchbox-icons';
 
 const tooltipContent = 'Domains can be ready for sending (From), sending with DKIM signing, and bounce (Return Path) usage.';
 
-const StatusTooltipHeader = () => <Tooltip dark content={tooltipContent}>Status <Icon name='Help' size={14}/></Tooltip>;
+const StatusTooltipHeader = () => <Tooltip dark content={tooltipContent}>Status <Help size={14}/></Tooltip>;
 
 export default StatusTooltipHeader;

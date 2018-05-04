@@ -2,7 +2,7 @@
 
 exports[`renders correctly 1`] = `
 <EmptyState
-  image="Generic"
+  image={[Function]}
   title="We are not quite finished in here."
 >
   <p>

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Tag, Tooltip, Icon } from '@sparkpost/matchbox';
+import { Tag, Tooltip } from '@sparkpost/matchbox';
+import { ErrorOutline, Schedule } from '@sparkpost/matchbox-icons';
 
 const DomainStatusTag = ({ status, className }) => {
   const size = 15;
@@ -14,7 +15,7 @@ const DomainStatusTag = ({ status, className }) => {
       <Tooltip
         content='This domain must be verified before use.'
         dark>
-        <Tag className={className} color='yellow'><Icon size={size} name='ErrorOutline'/> Unverified</Tag>
+        <Tag className={className} color='yellow'><ErrorOutline size={size} /> Unverified</Tag>
       </Tooltip>
     );
   }
@@ -24,7 +25,7 @@ const DomainStatusTag = ({ status, className }) => {
       <Tooltip
         content='This domain is not available for use. For more information, please contact support.'
         dark>
-        <Tag className={className} color='red'><Icon size={size} name='ErrorOutline'/> Blocked</Tag>
+        <Tag className={className} color='red'><ErrorOutline size={size} /> Blocked</Tag>
       </Tooltip>
     );
   }
@@ -34,7 +35,7 @@ const DomainStatusTag = ({ status, className }) => {
       <Tooltip
         content='This domain is pending review, please check back again soon.'
         dark>
-        <Tag className={className}><Icon size={size} name='ClockOutline'/> Pending</Tag>
+        <Tag className={className}><Schedule size={size} /> Pending</Tag>
       </Tooltip>
     );
   }

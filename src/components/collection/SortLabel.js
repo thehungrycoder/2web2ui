@@ -1,5 +1,6 @@
 import React from 'react';
-import { UnstyledLink, Icon } from '@sparkpost/matchbox';
+import { UnstyledLink } from '@sparkpost/matchbox';
+import { ArrowDropDown, ArrowDropUp } from '@sparkpost/matchbox-icons';
 import cx from 'classnames';
 
 import styles from './SortLabel.module.scss';
@@ -15,8 +16,8 @@ const SortLabel = ({ label, direction, ...rest }) => {
   return (
     <UnstyledLink className={classes} {...rest}>
       <span>{label}</span>
-      <Icon name='CaretUp' className={styles.Up}/>
-      <Icon name='CaretDown' className={styles.Down}/>
+      <ArrowDropUp className={styles.Up}/>
+      <ArrowDropDown className={styles.Down}/>
     </UnstyledLink>
   );
 };

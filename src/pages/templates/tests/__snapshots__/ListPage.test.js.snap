@@ -36,7 +36,7 @@ exports[`renders correctly 1`] = `
       "content": <p>
         Build, test, preview and send your transmissions.
       </p>,
-      "image": "Templates",
+      "image": [Function],
       "show": false,
       "title": "Manage your email templates",
     }
@@ -108,7 +108,7 @@ exports[`renders correctly 1`] = `
 
 exports[`renders empty state 1`] = `
 <EmptyState
-  image="Templates"
+  image={[Function]}
   primaryAction={
     Object {
       "Component": [Function],
@@ -214,7 +214,7 @@ exports[`renders without primary action for read-only users 1`] = `
       "content": <p>
         Build, test, preview and send your transmissions.
       </p>,
-      "image": "Templates",
+      "image": [Function],
       "show": false,
       "title": "Manage your email templates",
     }

@@ -38,7 +38,7 @@ export class SendingDomainsTab extends Component {
     return (
       <Panel.Section style={{ textAlign: 'center' }}>
         <p>This subaccount has no sending domains assigned to it. You can assign an existing one, or create a new one.</p>
-        <Button plain Component={Link} to='/account/sending-domains'>Manage Sending Domains</Button>
+        <Button plain color='orange' Component={Link} to='/account/sending-domains'>Manage Sending Domains</Button>
       </Panel.Section>
     );
   }

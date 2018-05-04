@@ -6,6 +6,7 @@ import { hasSubaccounts } from 'src/selectors/subaccounts';
 import { hasUnverifiedDomains } from 'src/selectors/sendingDomains';
 import { Loading, TableCollection, SubaccountTag, DomainStatusCell, StatusTooltipHeader, ApiErrorBanner } from 'src/components';
 import { Page, UnstyledLink } from '@sparkpost/matchbox';
+import { Setup } from 'src/components/images';
 import UnverifiedWarningBanner from './components/UnverifiedWarningBanner';
 import VerifyToken from './components/VerifyToken';
 import { LINKS } from 'src/constants';
@@ -99,7 +100,7 @@ export class ListPage extends Component {
           show: domains.length === 0,
           title: 'Manage Your Domains',
           content: <p>Create and configure your sending and bounce domains.</p>,
-          image: 'Setup',
+          image: Setup,
           secondaryAction: {
             content: 'Learn more',
             to: LINKS.SENDING_SETUP,

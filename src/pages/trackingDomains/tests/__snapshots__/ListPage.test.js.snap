@@ -7,7 +7,7 @@ exports[`renders correctly 1`] = `
       "content": <p>
         Use a custom domain for engagement tracking
       </p>,
-      "image": "Generic",
+      "image": [Function],
       "show": false,
     }
   }
@@ -85,7 +85,7 @@ exports[`renders empty state 1`] = `
       "content": <p>
         Use a custom domain for engagement tracking
       </p>,
-      "image": "Generic",
+      "image": [Function],
       "show": true,
     }
   }
@@ -131,7 +131,7 @@ exports[`renders errors when present 1`] = `
       "content": <p>
         Use a custom domain for engagement tracking
       </p>,
-      "image": "Generic",
+      "image": [Function],
       "show": false,
     }
   }

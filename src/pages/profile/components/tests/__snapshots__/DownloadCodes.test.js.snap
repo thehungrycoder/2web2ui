@@ -6,8 +6,7 @@ exports[`DownloadCodes component should render download button 1`] = `
   size="default"
   to="data:text/plain;base64,Y29kZTEKY29kZTI="
 >
-  <Icon
-    name="Download"
+  <FileDownload
     size={14}
   />
   Download

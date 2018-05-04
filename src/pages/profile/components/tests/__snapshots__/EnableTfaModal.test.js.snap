@@ -28,10 +28,7 @@ exports[`EnableTfaModal tests should render correctly 1`] = `
             </p>
             <p>
               <strong>
-                <Icon
-                  name="Key"
-                  size={18}
-                />
+                <VpnKey />
                  
                 <code>
                   super-secret
@@ -139,10 +136,7 @@ exports[`EnableTfaModal tests should show error on TextField when toggleError an
             </p>
             <p>
               <strong>
-                <Icon
-                  name="Key"
-                  size={18}
-                />
+                <VpnKey />
                  
                 <code>
                   super-secret
@@ -272,10 +266,7 @@ exports[`EnableTfaModal tests should show verifying as button text when togglePe
             </p>
             <p>
               <strong>
-                <Icon
-                  name="Key"
-                  size={18}
-                />
+                <VpnKey />
                  
                 <code>
                   super-secret

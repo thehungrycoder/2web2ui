@@ -60,19 +60,23 @@ export class TfaManager extends Component {
 
     const disabledActions = [{
       content: 'Enable 2FA',
-      onClick: () => this.setState({ openModal: 'enable' })
+      onClick: () => this.setState({ openModal: 'enable' }),
+      color: 'orange'
     }, {
       content: 'Learn More',
       to: LINKS.LEARN_MORE_TFA,
-      external: true
+      external: true,
+      color: 'orange'
     }];
 
     const enabledActions = [{
       content: 'Generate New Backup Codes',
-      onClick: () => this.setState({ openModal: 'backupCodes' })
+      onClick: () => this.setState({ openModal: 'backupCodes' }),
+      color: 'orange'
     }, {
       content: 'Disable 2FA',
-      onClick: () => this.setState({ openModal: 'disable' })
+      onClick: () => this.setState({ openModal: 'disable' }),
+      color: 'orange'
     }];
 
     return (

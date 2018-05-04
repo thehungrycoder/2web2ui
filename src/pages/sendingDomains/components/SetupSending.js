@@ -96,7 +96,8 @@ export class SetupSending extends Component {
           id: 'verify-dkim',
           content: verifyDkimLoading ? 'Verifying...' : verifyButtonContent,
           onClick: this.verifyDomain,
-          disabled: verifyDkimLoading
+          disabled: verifyDkimLoading,
+          color: 'orange'
         }]}
         sectioned
         title={<Fragment>{titleIcon} DNS Settings</Fragment>}

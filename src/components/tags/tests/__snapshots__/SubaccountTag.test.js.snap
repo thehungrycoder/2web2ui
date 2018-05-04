@@ -4,8 +4,7 @@ exports[`Component: SubaccountTag should render a default assigned subaccount 1`
 <Tag
   color="orange"
 >
-  <Icon
-    name="Link"
+  <InsertLink
     size={15}
   />
    
@@ -18,8 +17,7 @@ exports[`Component: SubaccountTag should render a master account tag 1`] = `
 <Tag
   color={null}
 >
-  <Icon
-    name="Link"
+  <InsertLink
     size={15}
   />
    
@@ -31,8 +29,7 @@ exports[`Component: SubaccountTag should render a non-default assigned subaccoun
 <Tag
   color={null}
 >
-  <Icon
-    name="Link"
+  <InsertLink
     size={15}
   />
    
@@ -44,8 +41,7 @@ exports[`Component: SubaccountTag should render a non-default assigned subaccoun
 <Tag
   color={null}
 >
-  <Icon
-    name="Link"
+  <InsertLink
     size={15}
   />
    
@@ -57,8 +53,7 @@ exports[`Component: SubaccountTag should render a shared with all tag 1`] = `
 <Tag
   color={null}
 >
-  <Icon
-    name="Link"
+  <InsertLink
     size={15}
   />
    

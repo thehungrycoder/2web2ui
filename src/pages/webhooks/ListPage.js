@@ -10,6 +10,7 @@ import { hasSubaccounts } from 'src/selectors/subaccounts';
 // Components
 import { Loading, TableCollection, SubaccountTag, ApiErrorBanner } from 'src/components';
 import { Page } from '@sparkpost/matchbox';
+import { Setup } from 'src/components/images';
 import { formatDateTime } from 'src/helpers/date';
 
 const filterBoxConfig = {
@@ -100,7 +101,7 @@ export class WebhooksList extends Component {
         title='Webhooks'
         empty={{
           show: !error && webhooks.length === 0,
-          image: 'Setup',
+          image: Setup,
           title: 'Create a Webhook',
           content: <p>Push message events directly to your own endpoints</p>
         }}>

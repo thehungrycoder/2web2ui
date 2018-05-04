@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Page, Panel } from '@sparkpost/matchbox';
 import { Loading, ApiErrorBanner, Collection } from 'src/components';
+import { Generic } from 'src/components/images';
 import { listTrackingDomains } from 'src/actions/trackingDomains';
 import { list as listSubaccounts } from 'src/actions/subaccounts';
 import {
@@ -73,7 +74,7 @@ export class ListPage extends Component {
         empty={{
           show: trackingDomainsLoaded && trackingDomains.length === 0,
           content: <p>Use a custom domain for engagement tracking</p>,
-          image: 'Generic'
+          image: Generic
         }}>
         {error ? this.renderError() : this.renderCollection()}
       </Page>

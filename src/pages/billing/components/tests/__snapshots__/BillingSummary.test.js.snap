@@ -18,6 +18,7 @@ exports[`Component: Billing Summary should render correctly for a paid plan 1`] 
         Array [
           Object {
             "Component": [Function],
+            "color": "orange",
             "content": "Change Plan",
             "to": "/account/billing/plan",
           },
@@ -50,6 +51,7 @@ exports[`Component: Billing Summary should render correctly for a paid plan 1`] 
       actions={
         Array [
           Object {
+            "color": "orange",
             "content": "Update Payment Information",
             "onClick": [Function],
           },
@@ -65,6 +67,7 @@ exports[`Component: Billing Summary should render correctly for a paid plan 1`] 
       actions={
         Array [
           Object {
+            "color": "orange",
             "content": "Update Billing Contact",
             "onClick": [Function],
           },
@@ -108,6 +111,7 @@ exports[`Component: Billing Summary should render correctly for a standard free 
         Array [
           Object {
             "Component": [Function],
+            "color": "orange",
             "content": "Upgrade Now",
             "to": "/account/billing/plan",
           },
@@ -151,6 +155,7 @@ exports[`Component: Billing Summary should render correctly if you can't buy IPs
         Array [
           Object {
             "Component": [Function],
+            "color": "orange",
             "content": "Upgrade Now",
             "to": "/account/billing/plan",
           },
@@ -174,6 +179,7 @@ exports[`Component: Billing Summary should render correctly if you can't buy IPs
       actions={
         Array [
           Object {
+            "color": "orange",
             "content": "Update Payment Information",
             "onClick": [Function],
           },
@@ -189,6 +195,7 @@ exports[`Component: Billing Summary should render correctly if you can't buy IPs
       actions={
         Array [
           Object {
+            "color": "orange",
             "content": "Update Billing Contact",
             "onClick": [Function],
           },
@@ -254,6 +261,7 @@ exports[`Component: Billing Summary should render correctly if you can't change 
       actions={
         Array [
           Object {
+            "color": "orange",
             "content": "Update Payment Information",
             "onClick": [Function],
           },
@@ -269,6 +277,7 @@ exports[`Component: Billing Summary should render correctly if you can't change 
       actions={
         Array [
           Object {
+            "color": "orange",
             "content": "Update Billing Contact",
             "onClick": [Function],
           },
@@ -312,6 +321,7 @@ exports[`Component: Billing Summary should render correctly if you can't update 
         Array [
           Object {
             "Component": [Function],
+            "color": "orange",
             "content": "Upgrade Now",
             "to": "/account/billing/plan",
           },
@@ -364,6 +374,7 @@ exports[`Component: Billing Summary should render with IP modal open 1`] = `
         Array [
           Object {
             "Component": [Function],
+            "color": "orange",
             "content": "Upgrade Now",
             "to": "/account/billing/plan",
           },
@@ -396,6 +407,7 @@ exports[`Component: Billing Summary should render with IP modal open 1`] = `
       actions={
         Array [
           Object {
+            "color": "orange",
             "content": "Update Payment Information",
             "onClick": [Function],
           },
@@ -411,6 +423,7 @@ exports[`Component: Billing Summary should render with IP modal open 1`] = `
       actions={
         Array [
           Object {
+            "color": "orange",
             "content": "Update Billing Contact",
             "onClick": [Function],
           },
@@ -458,6 +471,7 @@ exports[`Component: Billing Summary should render with the billing contact modal
         Array [
           Object {
             "Component": [Function],
+            "color": "orange",
             "content": "Upgrade Now",
             "to": "/account/billing/plan",
           },
@@ -490,6 +504,7 @@ exports[`Component: Billing Summary should render with the billing contact modal
       actions={
         Array [
           Object {
+            "color": "orange",
             "content": "Update Payment Information",
             "onClick": [Function],
           },
@@ -505,6 +520,7 @@ exports[`Component: Billing Summary should render with the billing contact modal
       actions={
         Array [
           Object {
+            "color": "orange",
             "content": "Update Billing Contact",
             "onClick": [Function],
           },
@@ -552,6 +568,7 @@ exports[`Component: Billing Summary should render with the payment info modal op
         Array [
           Object {
             "Component": [Function],
+            "color": "orange",
             "content": "Upgrade Now",
             "to": "/account/billing/plan",
           },
@@ -584,6 +601,7 @@ exports[`Component: Billing Summary should render with the payment info modal op
       actions={
         Array [
           Object {
+            "color": "orange",
             "content": "Update Payment Information",
             "onClick": [Function],
           },
@@ -599,6 +617,7 @@ exports[`Component: Billing Summary should render with the payment info modal op
       actions={
         Array [
           Object {
+            "color": "orange",
             "content": "Update Billing Contact",
             "onClick": [Function],
           },

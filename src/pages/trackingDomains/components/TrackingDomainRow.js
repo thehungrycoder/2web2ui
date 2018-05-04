@@ -1,7 +1,8 @@
 /* eslint max-lines: ["error", 200] */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Panel, Grid, Icon, Button, Tag } from '@sparkpost/matchbox';
+import { Panel, Grid, Button, Tag } from '@sparkpost/matchbox';
+import { Refresh } from '@sparkpost/matchbox-icons';
 import { listTrackingDomains, updateTrackingDomain, deleteTrackingDomain, verifyTrackingDomain } from 'src/actions/trackingDomains';
 import { DeleteModal, ConfirmationModal } from 'src/components/modals';
 import { DomainStatusTag, SubaccountTag } from 'src/components/tags';
@@ -70,7 +71,7 @@ export class TrackingDomainRow extends Component {
     }
     const verifyText = verifying.indexOf(domain) >= 0 ? 'Verifying...' : 'Retry Verification';
     return (
-      <Button size='small' onClick={this.retryVerification}><Icon name='Refresh' /> {verifyText}</Button>
+      <Button size='small' onClick={this.retryVerification}><Refresh /> {verifyText}</Button>
     );
   }
 

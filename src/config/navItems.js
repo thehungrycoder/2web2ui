@@ -1,13 +1,15 @@
+import { Home, Assessment, Code, Mail, Language, Settings } from '@sparkpost/matchbox-icons';
+
 export default [
   {
     label: 'Dashboard',
     to: '/dashboard',
-    icon: 'Home'
+    icon: Home
   },
   {
     label: 'Reports',
     to: '/reports',
-    icon: 'ReportBox',
+    icon: Assessment,
     children: [
       {
         label: 'Summary',
@@ -42,12 +44,12 @@ export default [
   {
     label: 'Templates',
     to: '/templates',
-    icon: 'Code'
+    icon: Code
   },
   {
     label: 'Lists',
     to: '/lists',
-    icon: 'Mail',
+    icon: Mail,
     children: [
       {
         label: 'Recipient Lists',
@@ -62,12 +64,12 @@ export default [
   {
     label: 'Webhooks',
     to: '/webhooks',
-    icon: 'Language'
+    icon: Language
   },
   {
     label: 'Account',
     to: '/account',
-    icon: 'Settings',
+    icon: Settings,
     children: [
       {
         label: 'Profile',
