@@ -62,8 +62,8 @@ export class SupportForm extends Component {
             name='subject'
             label='Subject'
             placeholder='Give your issue a title'
-            inlineErrors={true}
-            autoFocus={true}
+            autoFocus
+            errorInLabel
             disabled={submitting}
             validate={[required, minLength(5)]}
             component={TextFieldWrapper} />
@@ -74,7 +74,7 @@ export class SupportForm extends Component {
             name='message'
             label='Message'
             placeholder='Give us details about your issue'
-            inlineErrors={true}
+            errorInLabel
             disabled={submitting}
             validate={required}
             component={TextFieldWrapper}

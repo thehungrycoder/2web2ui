@@ -8,14 +8,14 @@ import { Button } from '@sparkpost/matchbox';
 
 export class LoginForm extends Component {
 
-  render() {
+  render () {
     const { loginPending, pristine, ssoEnabled, handleSubmit } = this.props;
 
     return (
       <form onSubmit={handleSubmit}>
         <Field
-          inlineErrors
           autoFocus
+          errorInLabel
           name='username'
           id='username'
           label='Email or Username'
@@ -24,7 +24,7 @@ export class LoginForm extends Component {
           validate={required}
         />
 
-        { !ssoEnabled &&
+        {!ssoEnabled &&
         <Field
           type='password'
           name='password'
@@ -35,7 +35,7 @@ export class LoginForm extends Component {
         />
         }
 
-        { !ssoEnabled &&
+        {!ssoEnabled &&
         <Field
           name='rememberMe'
           id='rememberMe'
@@ -45,14 +45,14 @@ export class LoginForm extends Component {
         }
 
         <Button primary submit disabled={loginPending || pristine}>
-          { loginPending ? 'Logging In' : 'Log In' }
+          {loginPending ? 'Logging In' : 'Log In'}
         </Button>
       </form>
     );
   }
 }
 
-function mapStateToProps({ auth }) {
+function mapStateToProps ({ auth }) {
   return {
     loginPending: auth.loginPending,
     initialValues: {

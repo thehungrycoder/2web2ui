@@ -64,7 +64,6 @@ exports[`Component: Typeahead should render with matches 1`] = `
     />
   </div>
   <TextField
-    required={false}
     resize="both"
     type="text"
   />

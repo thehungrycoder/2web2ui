@@ -8,7 +8,7 @@ import styles from './UsageReport.module.scss';
 const formName = 'dailyLimitIncreaseRequestForm';
 
 export class RequestForm extends Component {
-  render() {
+  render () {
     const { onSubmit, handleSubmit, onCancel, submitting, pristine, invalid, currentLimit } = this.props;
 
     return (<div>
@@ -19,7 +19,7 @@ export class RequestForm extends Component {
           <Field
             name='dailyLimit'
             label='Daily Limit'
-            inlineErrors={true}
+            errorInLabel
             disabled={submitting}
             validate={[required, integer, minNumber(currentLimit + 1)]}
             component={TextFieldWrapper}
@@ -32,7 +32,7 @@ export class RequestForm extends Component {
             resize='none'
             name='reason'
             label='Reason for Increase?'
-            inlineErrors={true}
+            errorInLabel
             disabled={submitting}
             required={true}
             validate={[required, minLength(5)]}
@@ -41,7 +41,7 @@ export class RequestForm extends Component {
         </Panel.Section>
         <Panel.Section>
           <Button submit primary disabled={pristine || invalid || submitting}>
-            {submitting ? 'Submitting' : 'Request Limit Increase' }
+            {submitting ? 'Submitting' : 'Request Limit Increase'}
           </Button>
           <Button disabled={submitting} onClick={onCancel} className={styles.CloseButton}>
             Close
@@ -54,5 +54,3 @@ export class RequestForm extends Component {
 
 const ReduxForm = reduxForm({ form: formName })(RequestForm);
 export default ReduxForm;
-
-

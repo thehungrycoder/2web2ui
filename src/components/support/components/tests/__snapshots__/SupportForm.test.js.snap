@@ -12,7 +12,7 @@ exports[`Support Form Component Form should render 1`] = `
       <Field
         autoFocus={true}
         component={[Function]}
-        inlineErrors={true}
+        errorInLabel={true}
         label="Subject"
         name="subject"
         placeholder="Give your issue a title"
@@ -25,7 +25,7 @@ exports[`Support Form Component Form should render 1`] = `
       />
       <Field
         component={[Function]}
-        inlineErrors={true}
+        errorInLabel={true}
         label="Message"
         multiline={true}
         name="message"
