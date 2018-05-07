@@ -65,7 +65,7 @@ export class SupportForm extends Component {
           <Field
             name='issueId'
             label='I need help with...'
-            placeholder=' '
+            placeholder='Select an option'
             errorInLabel
             disabled={submitting}
             component={SelectWrapper}

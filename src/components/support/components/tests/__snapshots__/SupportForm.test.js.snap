@@ -22,7 +22,7 @@ exports[`Support Form Component Form should render 1`] = `
             },
           ]
         }
-        placeholder=" "
+        placeholder="Select an option"
         validate={[Function]}
       />
       <Field
@@ -84,7 +84,7 @@ exports[`Support Form Component Form should render with selected issue message l
             },
           ]
         }
-        placeholder=" "
+        placeholder="Select an option"
         validate={[Function]}
       />
       <Field
