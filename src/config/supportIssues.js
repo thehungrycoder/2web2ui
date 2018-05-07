@@ -1,8 +1,8 @@
 // types of support issues
 const BILLING = 'Billing';
 const COMPLIANCE = 'Compliance';
-const ERRORS = 'Errors';
-const LIMITS = 'Limits';
+const ERRORS = 'Support'; // 'Errors';
+const LIMITS = 'Support'; // 'Limits';
 const SUPPORT = 'Support';
 
 /**
