@@ -1,0 +1,9 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.Posted {
+  color: color(green, dark);
+}
+
+.Error {
+  color: color(red)
+}
