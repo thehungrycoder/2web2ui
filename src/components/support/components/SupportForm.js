@@ -110,7 +110,7 @@ export class SupportForm extends Component {
   }
 }
 
-const formName = 'supportForm';
+export const formName = 'supportForm';
 const selector = formValueSelector(formName);
 const mapStateToProps = (state) => ({
   issues: selectSupportIssues(state),

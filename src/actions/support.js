@@ -1,5 +1,8 @@
+import _ from 'lodash';
 import sparkpostApiRequest from './helpers/sparkpostApiRequest';
 import { change } from 'redux-form';
+import { formName } from 'src/components/support/components/SupportForm';
+import supportIssues from 'src/config/supportIssues';
 
 // Toggles the support panel UI
 export function toggleSupportPanel () {
@@ -67,16 +70,16 @@ export function toggleTicketForm () {
 }
 
 // Fills support ticket form values
-export function hydrateTicketForm ({ message, subject } = {}) {
-  const formName = 'supportForm'; // Must match the form name used in SupportForm component
+export function hydrateTicketForm ({ issueId, message } = {}) {
+  const issue = _.find(supportIssues, { id: issueId });
 
   return (dispatch) => {
-    if (message) {
-      dispatch(change(formName, 'message', message));
+    if (issue) {
+      dispatch(change(formName, 'issueId', issueId));
     }
 
-    if (subject) {
-      dispatch(change(formName, 'subject', subject));
+    if (message) {
+      dispatch(change(formName, 'message', message));
     }
 
     return {

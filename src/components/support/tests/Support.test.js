@@ -50,11 +50,14 @@ describe('Support Component', () => {
 
   describe('on mount', () => {
     it('should open panel and hydrate form if search value is present', () => {
-      wrapper.setProps({ location: { search: '?supportTicket=true&supportMessage=testmessage' }});
+      wrapper.setProps({ location: { search: '?supportTicket=true&supportIssue=test_issue&supportMessage=testmessage' }});
       jest.resetAllMocks(); // To clear the initial mount call
       instance.componentDidMount();
       expect(instance.props.openSupportPanel).toHaveBeenCalledWith({ view: 'ticket' });
-      expect(instance.props.hydrateTicketForm).toHaveBeenCalledWith(expect.objectContaining({ message: 'testmessage' }));
+      expect(instance.props.hydrateTicketForm).toHaveBeenCalledWith(expect.objectContaining({
+        issueId: 'test_issue',
+        message: 'testmessage'
+      }));
     });
 
     it('should not open panel or hydrate form if search value is not present', () => {
