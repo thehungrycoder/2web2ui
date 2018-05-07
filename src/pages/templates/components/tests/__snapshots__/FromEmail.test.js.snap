@@ -20,7 +20,6 @@ exports[`From Email Typeahead should render list 1`] = `
   className={undefined}
 >
   <TextField
-    required={false}
     resize="both"
     type="text"
   />

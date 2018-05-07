@@ -4,7 +4,6 @@ exports[`TextFieldWrapper renders text input 1`] = `
 <TextField
   id="example"
   name="example"
-  required={false}
   resize="both"
   type="text"
   value="Example Text"
@@ -16,7 +15,6 @@ exports[`TextFieldWrapper renders text input with an error 1`] = `
   error="Oh no!"
   id="example"
   name="example"
-  required={false}
   resize="both"
   type="text"
 />

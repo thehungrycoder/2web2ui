@@ -8,7 +8,6 @@ import { entitledToOnlineSupport } from 'src/selectors/support';
 import * as supportActions from 'src/actions/support';
 import SupportForm from './components/SupportForm';
 import SearchPanel from './components/SearchPanel';
-import { getBase64Contents } from 'src/helpers/file';
 import styles from './Support.module.scss';
 
 export class Support extends Component {
@@ -27,26 +26,13 @@ export class Support extends Component {
   // Opens and hydrates support ticket form from query params
   maybeOpenTicket = () => {
     const { location, openSupportPanel, hydrateTicketForm } = this.props;
-    const { supportTicket, supportMessage: message, supportSubject: subject } = qs.parse(location.search);
+    const { supportTicket, supportMessage: message, supportIssue: issueId } = qs.parse(location.search);
 
     if (supportTicket) {
       openSupportPanel({ view: 'ticket' });
-      hydrateTicketForm({ message, subject });
+      hydrateTicketForm({ issueId, message });
     }
   }
-
-  onSubmit = async(values) => {
-    const { createTicket } = this.props;
-    const { message, subject, attachment } = values;
-    let ticket = { message, subject };
-
-    if (attachment) {
-      const encoded = await getBase64Contents(attachment);
-      ticket = { ...ticket, attachment: { filename: attachment.name, content: encoded }};
-    }
-
-    return createTicket(ticket);
-  };
 
   togglePanel = () => {
     const { showPanel, showTicketForm, toggleSupportPanel, toggleTicketForm } = this.props;
@@ -62,19 +48,8 @@ export class Support extends Component {
     this.props.toggleTicketForm();
   }
 
-  renderPanel () {
-    const { showTicketForm } = this.props;
-
-    return showTicketForm
-      ? <SupportForm
-        onSubmit={this.onSubmit}
-        onCancel={this.toggleForm}
-        onContinue={this.toggleForm} />
-      : <SearchPanel toggleForm={this.toggleForm} />;
-  }
-
-  render() {
-    const { loggedIn, entitledToOnlineSupport, showPanel } = this.props;
+  render () {
+    const { loggedIn, entitledToOnlineSupport, showPanel, showTicketForm } = this.props;
 
     if (!loggedIn || !entitledToOnlineSupport) {
       return null;
@@ -97,10 +72,11 @@ export class Support extends Component {
             fixed
             className={styles.Popover}
             open={showPanel}
-            trigger={triggerMarkup}>
-
-            {this.renderPanel()}
-
+            trigger={triggerMarkup}
+          >
+            {showPanel && (showTicketForm
+              ? <SupportForm onCancel={this.toggleForm} onContinue={this.toggleForm} />
+              : <SearchPanel toggleForm={this.toggleForm} />)}
           </Popover>
         </div>
       </Portal>

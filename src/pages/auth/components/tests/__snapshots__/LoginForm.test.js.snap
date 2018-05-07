@@ -7,8 +7,8 @@ exports[`renders correctly 1`] = `
   <Field
     autoFocus={true}
     component={[Function]}
+    errorInLabel={true}
     id="username"
-    inlineErrors={true}
     label="Email or Username"
     name="username"
     placeholder="leslie.knope@pawnee.indiana.state.gov"
@@ -45,8 +45,8 @@ exports[`renders correctly when logging in 1`] = `
   <Field
     autoFocus={true}
     component={[Function]}
+    errorInLabel={true}
     id="username"
-    inlineErrors={true}
     label="Email or Username"
     name="username"
     placeholder="leslie.knope@pawnee.indiana.state.gov"
@@ -84,8 +84,8 @@ exports[`renders correctly when ssoEnabled is true 1`] = `
   <Field
     autoFocus={true}
     component={[Function]}
+    errorInLabel={true}
     id="username"
-    inlineErrors={true}
     label="Email or Username"
     name="username"
     placeholder="leslie.knope@pawnee.indiana.state.gov"

@@ -23,11 +23,7 @@ exports[`Support Component render tests should render just the icon by default 1
           />
         </a>
       }
-    >
-      <SearchPanel
-        toggleForm={[Function]}
-      />
-    </Popover>
+    />
   </div>
 </Portal>
 `;
@@ -59,7 +55,6 @@ exports[`Support Component render tests should show form and close icon when pan
       <Connect(ReduxForm)
         onCancel={[Function]}
         onContinue={[Function]}
-        onSubmit={[Function]}
       />
     </Popover>
   </div>

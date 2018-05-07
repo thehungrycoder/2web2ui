@@ -25,12 +25,12 @@ exports[`AddIps renders correctly when user reaches max ip limit 1`] = `
         autoFocus={true}
         component={[Function]}
         disabled={true}
+        errorInLabel={true}
         helpText={
           <span>
             You cannot currently add any more IPs
           </span>
         }
-        inlineErrors={true}
         label="Quantity"
         max={0}
         min="1"
@@ -95,6 +95,7 @@ exports[`AddIps renders correctly with default props 1`] = `
         autoFocus={true}
         component={[Function]}
         disabled={false}
+        errorInLabel={true}
         helpText={
           <span>
             You can add up to 
@@ -107,7 +108,6 @@ exports[`AddIps renders correctly with default props 1`] = `
              each.
           </span>
         }
-        inlineErrors={true}
         label="Quantity"
         max={4}
         min="1"
@@ -178,6 +178,7 @@ exports[`AddIps renders free ip elements when included in plan 1`] = `
         autoFocus={true}
         component={[Function]}
         disabled={false}
+        errorInLabel={true}
         helpText={
           <span>
             You can add up to 
@@ -194,7 +195,6 @@ exports[`AddIps renders free ip elements when included in plan 1`] = `
              each.
           </span>
         }
-        inlineErrors={true}
         label="Quantity"
         max={4}
         min="1"
