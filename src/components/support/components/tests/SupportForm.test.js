@@ -1,10 +1,19 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import * as fileHelpers from 'src/helpers/file';
 
 import { SupportForm } from '../SupportForm';
 
+jest.mock('src/helpers/file');
+
 describe('Support Form Component', () => {
   let wrapper;
+  const technicalIssue = {
+    id: 'technical_issues',
+    label: 'I need help!',
+    messageLabel: 'Tell use more about your technical issue',
+    type: 'Support'
+  };
 
   describe('Form', () => {
     let props;
@@ -12,7 +21,7 @@ describe('Support Form Component', () => {
 
     beforeEach(() => {
       handleSubmit = jest.fn();
-      props = { handleSubmit };
+      props = { handleSubmit, issues: [technicalIssue]};
       wrapper = shallow(<SupportForm {...props} />);
     });
 
@@ -41,13 +50,21 @@ describe('Support Form Component', () => {
       wrapper = shallow(<SupportForm {...props} submitFailed={true} />);
       expect(wrapper.find('h6').text()).not.toMatch(/Has Been Submitted/);
     });
+
+    it('should render with selected issue message label', () => {
+      wrapper.setProps({ selectedIssue: technicalIssue });
+      expect(wrapper).toMatchSnapshot();
+    });
   });
 
   describe('Control', () => {
     let props;
     let wrapper;
+
     beforeEach(() => {
       props = {
+        issues: [technicalIssue],
+        createTicket: jest.fn(),
         handleSubmit: jest.fn(),
         reset: jest.fn(),
         onCancel: jest.fn(),
@@ -82,6 +99,47 @@ describe('Support Form Component', () => {
       wrapper.find('Button').simulate('click');
       expect(spy).toHaveBeenCalled();
       expect(props.onContinue).toHaveBeenCalled();
+    });
+
+    it('should submit a ticket', async () => {
+      const values = {
+        issueId: 'technical_issues',
+        message: 'I was not able to send an email!'
+      };
+
+      await wrapper.instance().onSubmit(values);
+
+      expect(props.createTicket).toHaveBeenCalledWith({
+        issueType: technicalIssue.type,
+        subject: technicalIssue.label,
+        message: values.message
+      });
+    });
+
+    it('should submit a ticket with an attachment', async () => {
+      const values = {
+        issueId: 'technical_issues',
+        message: 'I was not able to send an email!',
+        attachment: {
+          name: 'example.png'
+        }
+      };
+      const encoded = btoa('attachment://body');
+
+      fileHelpers.getBase64Contents = jest.fn(() => Promise.resolve(encoded));
+
+      await wrapper.instance().onSubmit(values);
+
+      expect(fileHelpers.getBase64Contents).toHaveBeenCalledWith(values.attachment);
+      expect(props.createTicket).toHaveBeenCalledWith({
+        issueType: technicalIssue.type,
+        subject: technicalIssue.label,
+        message: values.message,
+        attachment: {
+          filename: values.attachment.name,
+          content: encoded
+        }
+      });
     });
   });
 });

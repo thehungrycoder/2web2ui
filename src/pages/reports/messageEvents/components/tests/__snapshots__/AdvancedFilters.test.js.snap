@@ -208,7 +208,6 @@ exports[`Component: ActiveFilters should render initially and sync to state corr
             id="friendly_froms"
             label="From Addresses"
             onChange={[Function]}
-            required={false}
             resize="both"
             type="text"
             value={
@@ -225,7 +224,6 @@ exports[`Component: ActiveFilters should render initially and sync to state corr
             id="subaccounts"
             label="Subaccount IDs"
             onChange={[Function]}
-            required={false}
             resize="both"
             type="text"
           />
@@ -237,7 +235,6 @@ exports[`Component: ActiveFilters should render initially and sync to state corr
             id="message_ids"
             label="Message IDs"
             onChange={[Function]}
-            required={false}
             resize="both"
             type="text"
           />
@@ -249,7 +246,6 @@ exports[`Component: ActiveFilters should render initially and sync to state corr
             id="template_ids"
             label="Template IDs"
             onChange={[Function]}
-            required={false}
             resize="both"
             type="text"
           />
@@ -261,7 +257,6 @@ exports[`Component: ActiveFilters should render initially and sync to state corr
             id="campaign_ids"
             label="Campaign IDs"
             onChange={[Function]}
-            required={false}
             resize="both"
             type="text"
             value={Array []}

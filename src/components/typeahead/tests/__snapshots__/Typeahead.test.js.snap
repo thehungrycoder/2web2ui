@@ -47,7 +47,6 @@ exports[`Typeahead render function should render the list 1`] = `
     error={null}
     placeholder="None"
     readOnly={false}
-    required={false}
     resize="both"
     type="text"
   />

@@ -1,5 +1,8 @@
+import _ from 'lodash';
 import sparkpostApiRequest from './helpers/sparkpostApiRequest';
 import { change } from 'redux-form';
+import { formName } from 'src/components/support/components/SupportForm';
+import supportIssues from 'src/config/supportIssues';
 
 // Toggles the support panel UI
 export function toggleSupportPanel () {
@@ -31,6 +34,7 @@ export function openSupportPanel (options) {
  * Creates a support ticket with a subject, message, and optional file attachment
  *
  * @param {Object} data
+ * @param {String} data.issueType
  * @param {String} data.subject
  * @param {String} data.message
  * @param {Object} data.attachment
@@ -38,13 +42,16 @@ export function openSupportPanel (options) {
  * @param {Base64 String} data.attachment.content
  *
  */
-export function createTicket (data) {
+export function createTicket ({ issueType, ...data }) {
   return sparkpostApiRequest({
     type: 'CREATE_TICKET',
     meta: {
       method: 'POST',
       url: '/integrations/support/ticket',
-      data
+      data: {
+        ...data,
+        issue_type: issueType
+      }
     }
   });
 }
@@ -63,16 +70,16 @@ export function toggleTicketForm () {
 }
 
 // Fills support ticket form values
-export function hydrateTicketForm ({ message, subject } = {}) {
-  const formName = 'supportForm'; // Must match the form name used in SupportForm component
+export function hydrateTicketForm ({ issueId, message } = {}) {
+  const issue = _.find(supportIssues, { id: issueId });
 
   return (dispatch) => {
-    if (message) {
-      dispatch(change(formName, 'message', message));
+    if (issue) {
+      dispatch(change(formName, 'issueId', issueId));
     }
 
-    if (subject) {
-      dispatch(change(formName, 'subject', subject));
+    if (message) {
+      dispatch(change(formName, 'message', message));
     }
 
     return {

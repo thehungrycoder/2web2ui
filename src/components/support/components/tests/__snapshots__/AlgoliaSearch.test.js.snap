@@ -4,7 +4,6 @@ exports[`Algolia Search component should render 1`] = `
 <TextField
   onChange={[Function]}
   placeholder="Have a question?  Ask or enter a search term here."
-  required={false}
   resize="both"
   type="text"
   value="my text"

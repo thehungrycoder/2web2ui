@@ -17,7 +17,6 @@ exports[`Component: RoleSelect should render the select 1`] = `
     ]
   }
   placeholderValue=""
-  required={false}
   value="admin"
 />
 `;
