@@ -17,20 +17,6 @@ exports[`SendMoreCTA Component renders correctly for aws free plan (cta to upgra
   >
     Learn more about these limits.
   </UnstyledLink>
-  <Modal
-    onClose={[Function]}
-    open={false}
-  >
-    <Panel
-      title="Request Daily Limit Increase"
-    >
-      <ReduxForm
-        currentLimit={1000}
-        onCancel={[Function]}
-        onSubmit={[Function]}
-      />
-    </Panel>
-  </Modal>
 </p>
 `;
 
@@ -38,12 +24,15 @@ exports[`SendMoreCTA Component renders correctly for customers who can request l
 <p>
   Need to send more?
    
-  <UnstyledLink
-    Component={[Function]}
-    onClick={[Function]}
-  >
-    Submit a request.
-  </UnstyledLink>
+  <React.Fragment>
+    <UnstyledLink
+      Component={[Function]}
+      onClick={[Function]}
+    >
+      Submit a request
+    </UnstyledLink>
+     to increase your daily sending limit.
+  </React.Fragment>
    
   <UnstyledLink
     external={true}
@@ -51,20 +40,6 @@ exports[`SendMoreCTA Component renders correctly for customers who can request l
   >
     Learn more about these limits.
   </UnstyledLink>
-  <Modal
-    onClose={[Function]}
-    open={false}
-  >
-    <Panel
-      title="Request Daily Limit Increase"
-    >
-      <ReduxForm
-        currentLimit={1000}
-        onCancel={[Function]}
-        onSubmit={[Function]}
-      />
-    </Panel>
-  </Modal>
 </p>
 `;
 
@@ -72,12 +47,15 @@ exports[`SendMoreCTA Component renders support form correctly 1`] = `
 <p>
   Need to send more?
    
-  <UnstyledLink
-    Component={[Function]}
-    onClick={[Function]}
-  >
-    Submit a request.
-  </UnstyledLink>
+  <React.Fragment>
+    <UnstyledLink
+      Component={[Function]}
+      onClick={[Function]}
+    >
+      Submit a request
+    </UnstyledLink>
+     to increase your daily sending limit.
+  </React.Fragment>
    
   <UnstyledLink
     external={true}
@@ -85,20 +63,6 @@ exports[`SendMoreCTA Component renders support form correctly 1`] = `
   >
     Learn more about these limits.
   </UnstyledLink>
-  <Modal
-    onClose={[Function]}
-    open={true}
-  >
-    <Panel
-      title="Request Daily Limit Increase"
-    >
-      <ReduxForm
-        currentLimit={1000}
-        onCancel={[Function]}
-        onSubmit={[Function]}
-      />
-    </Panel>
-  </Modal>
 </p>
 `;
 
@@ -118,19 +82,5 @@ exports[`SendMoreCTA Component renders when email address not verified 1`] = `
   >
     Learn more about these limits.
   </UnstyledLink>
-  <Modal
-    onClose={[Function]}
-    open={false}
-  >
-    <Panel
-      title="Request Daily Limit Increase"
-    >
-      <ReduxForm
-        currentLimit={1000}
-        onCancel={[Function]}
-        onSubmit={[Function]}
-      />
-    </Panel>
-  </Modal>
 </p>
 `;
