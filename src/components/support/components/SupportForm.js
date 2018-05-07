@@ -94,7 +94,7 @@ export class SupportForm extends Component {
         </Panel.Section>
         <Panel.Section>
           <Button submit primary disabled={pristine || invalid || submitting}>
-            {submitting ? 'Saving' : 'Submit Ticket'}
+            {submitting ? 'Submitting' : 'Submit Ticket'}
           </Button>
           <Button className={styles.CancelBtn} disabled={submitting} onClick={() => this.reset(onCancel)}>Cancel</Button>
         </Panel.Section>
