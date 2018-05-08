@@ -1,3 +1,5 @@
+import { hasOnlineSupport } from 'src/helpers/conditions/account';
+
 // types of support issues
 // @note These values must be configured in Desk before being used and they are case-sensitive
 const BILLING = 'Billing';
@@ -21,7 +23,7 @@ const SUPPORT = 'Support';
  *     type: 'Example',
  *
  *     // optional, composed account helpers to determine which user can report this issue
- *     condition: isEnterprise()
+ *     condition: isEnterprise
  *   }
  */
 const supportIssues = [
@@ -29,13 +31,15 @@ const supportIssues = [
     id: 'technical_errors',
     label: 'Technical errors',
     messageLabel: 'Tell us more about your issue',
-    type: ERRORS
+    type: ERRORS,
+    condition: hasOnlineSupport
   },
   {
     id: 'general_billing',
     label: 'Billing problems',
     messageLabel: 'Tell us more about your billing issue',
-    type: BILLING
+    type: BILLING,
+    condition: hasOnlineSupport
   },
   {
     id: 'account_cancellation',
@@ -53,13 +57,15 @@ const supportIssues = [
     id: 'daily_limits',
     label: 'Daily sending limit increase',
     messageLabel: 'What limit do you need and why?',
-    type: LIMITS
+    type: LIMITS,
+    condition: hasOnlineSupport
   },
   {
     id: 'general_issue',
     label: 'Another issue',
     messageLabel: 'Tell us more about your issue',
-    type: SUPPORT
+    type: SUPPORT,
+    condition: hasOnlineSupport
   }
 ];
 
