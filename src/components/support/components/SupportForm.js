@@ -1,13 +1,14 @@
 import _ from 'lodash';
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Field, formValueSelector, reduxForm } from 'redux-form';
 import { Button, Panel } from '@sparkpost/matchbox';
 
 import * as supportActions from 'src/actions/support';
-import { SelectWrapper, TextFieldWrapper } from 'src/components';
+import { PageLink, SelectWrapper, TextFieldWrapper } from 'src/components';
 import FileFieldWrapper from 'src/components/reduxFormWrappers/FileFieldWrapper';
 import config from 'src/config';
+import { hasOnlineSupport } from 'src/helpers/conditions/account';
 import { getBase64Contents } from 'src/helpers/file';
 import { required, maxFileSize } from 'src/helpers/validation';
 import { selectSupportIssue, selectSupportIssues } from 'src/selectors/support';
@@ -50,6 +51,7 @@ export class SupportForm extends Component {
       handleSubmit,
       invalid,
       issues,
+      needsOnlineSupport,
       onCancel,
       pristine,
       selectedIssue,
@@ -66,6 +68,12 @@ export class SupportForm extends Component {
             name='issueId'
             label='I need help with...'
             placeholder='Select an option'
+            helpText={needsOnlineSupport && (
+              <Fragment>
+                Additional technical support is available on paid
+                plans. <PageLink to="/account/billing/plan">Ugrade now</PageLink>.
+              </Fragment>
+            )}
             errorInLabel
             disabled={submitting}
             component={SelectWrapper}
@@ -114,6 +122,7 @@ export const formName = 'supportForm';
 const selector = formValueSelector(formName);
 const mapStateToProps = (state) => ({
   issues: selectSupportIssues(state),
+  needsOnlineSupport: !hasOnlineSupport(state),
   selectedIssue: selectSupportIssue(state, selector(state, 'issueId')),
   ticketId: state.support.ticketId
 });

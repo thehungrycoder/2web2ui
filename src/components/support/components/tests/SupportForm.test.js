@@ -55,6 +55,11 @@ describe('Support Form Component', () => {
       wrapper.setProps({ selectedIssue: technicalIssue });
       expect(wrapper).toMatchSnapshot();
     });
+
+    it('should render issue dropdown with help text', () => {
+      wrapper.setProps({ needsOnlineSupport: true });
+      expect(wrapper).toMatchSnapshot();
+    });
   });
 
   describe('Control', () => {
