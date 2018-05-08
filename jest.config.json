@@ -13,6 +13,7 @@
     "<rootDir>/src/App.js",
     "<rootDir>/src/index.js",
     "<rootDir>/src/config",
+    "<rootDir>/src/components/index.js",
     "<rootDir>/src/helpers/registerServiceWorker",
     "<rootDir>/src/reducers",
     "tests/helpers/"
