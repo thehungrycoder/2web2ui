@@ -1,4 +1,5 @@
 // types of support issues
+// @note These values must be configured in Desk before being used and they are case-sensitive
 const BILLING = 'Billing';
 const COMPLIANCE = 'Compliance';
 const ERRORS = 'Errors';
