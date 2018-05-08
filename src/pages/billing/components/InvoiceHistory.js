@@ -3,17 +3,8 @@ import { Panel, Button } from '@sparkpost/matchbox';
 import { Check, Close } from '@sparkpost/matchbox-icons';
 import { TableCollection } from 'src/components';
 import { formatDate } from 'src/helpers/date';
-import _ from 'lodash';
 
 import styles from './InvoiceHistory.module.scss';
-
-const data = _.fill(Array(8), {
-  date: new Date(),
-  amount: 9123.33,
-  invoiceNumber: 'INV00000002',
-  // Posted | Draft | Canceled | Error - unsure what these mean, remove icons if this doesnt make sense
-  status: 'Posted'
-});
 
 const columns = [
   { label: null, width: '18px' },
@@ -23,7 +14,7 @@ const columns = [
   null
 ];
 
-const getRowData = ({ status, date, amount, invoiceNumber }) => ([
+const getRowData = ({ status, date, amount, invoice_number: invoiceNumber }) => ([
   status === 'Posted'
     ? <Check className={styles.Posted} size={20} />
     : <Close className={styles.Error} size={20} />,
@@ -35,7 +26,7 @@ const getRowData = ({ status, date, amount, invoiceNumber }) => ([
 
 const formatCurrency = (v) => `$${v.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
-const InvoiceHistory = ({ invoices = data }) => {
+const InvoiceHistory = ({ invoices }) => {
   // Perhaps need a "amounts shown in USD" message somewhere?
 
   const maxWarning = invoices.length === 20
