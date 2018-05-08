@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Component: GoogleTagManager should init dataLayer and track initial page view on mount 1`] = `
+exports[`Component: GoogleTagManager should init analytics and track initial page view on mount 1`] = `
 <HelmetWrapper
   defer={true}
   encodeSpecialCharacters={true}
