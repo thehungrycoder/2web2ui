@@ -79,12 +79,11 @@ exports[`Smtp component: Smtp Details should render page correctly with defaults
         Send via SMTP
       </strong>
        permissions.  
-      <UnstyledLink
-        Component={[Function]}
+      <PageLink
         to="/account/api-keys"
       >
         Manage API Keys
-      </UnstyledLink>
+      </PageLink>
     </p>
   </LabelledValue>
 </React.Fragment>

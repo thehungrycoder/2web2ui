@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter, Redirect, Link } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 import qs from 'query-string';
 import ErrorTracker from 'src/helpers/errorTracker';
 
-import { CenteredLogo } from 'src/components';
-import { Panel, UnstyledLink } from '@sparkpost/matchbox';
+import { CenteredLogo, PageLink } from 'src/components';
+import { Panel } from '@sparkpost/matchbox';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
 import RegisterUserForm from './RegisterUserForm';
 
@@ -29,11 +29,11 @@ export class RegisterPage extends Component {
   }
 
 
-  componentDidMount() {
+  componentDidMount () {
     this.props.checkInviteToken(this.props.token);
   }
 
-  renderRegisterPanel() {
+  renderRegisterPanel () {
     const { invite, loading } = this.props;
 
     if (loading) {
@@ -56,7 +56,7 @@ export class RegisterPage extends Component {
     );
   }
 
-  render() {
+  render () {
     const { token } = this.props;
 
     if (token === undefined) {
@@ -68,15 +68,15 @@ export class RegisterPage extends Component {
         <CenteredLogo />
 
         <Panel accent title='Set Password'>
-          { this.renderRegisterPanel() }
+          {this.renderRegisterPanel()}
         </Panel>
-        <Panel.Footer left={<small><UnstyledLink Component={Link} to='/auth'>Already signed up?</UnstyledLink></small>} />
+        <Panel.Footer left={<small><PageLink to="/auth">Already signed up?</PageLink></small>} />
       </div>
     );
   }
 }
 
-function mapStateToProps({ auth, users }, props) {
+function mapStateToProps ({ auth, users }, props) {
   return {
     token: qs.parse(props.location.search).token,
     invite: users.invite,

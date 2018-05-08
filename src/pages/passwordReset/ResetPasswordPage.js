@@ -1,12 +1,11 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { resetPassword } from 'src/actions/passwordReset';
 import { showAlert } from 'src/actions/globalAlert';
 import { required, minLength, endsWithWhitespace } from 'src/helpers/validation';
 import { reduxForm, Field } from 'redux-form';
-import { CenteredLogo, TextFieldWrapper } from 'src/components';
-import { Panel, Button, UnstyledLink } from '@sparkpost/matchbox';
+import { CenteredLogo, PageLink, TextFieldWrapper } from 'src/components';
+import { Panel, Button } from '@sparkpost/matchbox';
 import _ from 'lodash';
 
 export class ResetPasswordPage extends Component {
@@ -15,7 +14,7 @@ export class ResetPasswordPage extends Component {
     return resetPassword({ password, token });
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate (prevProps) {
     const { resetSuccess, resetError, history, showAlert } = this.props;
 
     if (!prevProps.resetSuccess && resetSuccess) {
@@ -42,7 +41,7 @@ export class ResetPasswordPage extends Component {
 
   comparePasswords = (value, { newPassword, confirmNewPassword }) => newPassword === confirmNewPassword ? undefined : 'Must be the same password'
 
-  render() {
+  render () {
     const { handleSubmit, invalid, submitting } = this.props;
 
     const buttonText = submitting
@@ -73,7 +72,7 @@ export class ResetPasswordPage extends Component {
           </form>
         </Panel>
         <Panel.Footer
-          left={<small>Remember your password? <UnstyledLink to='/auth' Component={Link}>Log in</UnstyledLink>.</small>}
+          left={<small>Remember your password? <PageLink to="/auth">Log in</PageLink>.</small>}
         />
       </Fragment>
     );

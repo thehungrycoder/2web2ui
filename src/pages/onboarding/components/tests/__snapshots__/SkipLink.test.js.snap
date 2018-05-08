@@ -1,12 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`SkipLink should render correctly 1`] = `
-<UnstyledLink
-  Component={[Function]}
+<PageLink
   to="/a-path"
 >
   go to a path
    
   <ArrowForward />
-</UnstyledLink>
+</PageLink>
 `;
