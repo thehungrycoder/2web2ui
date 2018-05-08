@@ -4,7 +4,6 @@ import { withRouter } from 'react-router';
 import qs from 'query-string';
 import { Portal, Popover } from '@sparkpost/matchbox';
 import { Cancel, Help } from '@sparkpost/matchbox-icons';
-import { entitledToOnlineSupport } from 'src/selectors/support';
 import * as supportActions from 'src/actions/support';
 import SupportForm from './components/SupportForm';
 import SearchPanel from './components/SearchPanel';
@@ -49,9 +48,9 @@ export class Support extends Component {
   }
 
   render () {
-    const { loggedIn, entitledToOnlineSupport, showPanel, showTicketForm } = this.props;
+    const { loggedIn, showPanel, showTicketForm } = this.props;
 
-    if (!loggedIn || !entitledToOnlineSupport) {
+    if (!loggedIn) {
       return null;
     }
 
@@ -86,7 +85,6 @@ export class Support extends Component {
 
 const mapStateToProps = (state) => ({
   loggedIn: state.auth.loggedIn,
-  entitledToOnlineSupport: entitledToOnlineSupport(state),
   showPanel: state.support.showPanel,
   showTicketForm: state.support.showTicketForm
 });
