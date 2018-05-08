@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
-import { Panel, Button, Icon } from '@sparkpost/matchbox';
+import { Panel, Button } from '@sparkpost/matchbox';
+import { Check, Close } from '@sparkpost/matchbox-icons';
 import { TableCollection } from 'src/components';
 import { formatDate } from 'src/helpers/date';
 import _ from 'lodash';
@@ -24,8 +25,8 @@ const columns = [
 
 const getRowData = ({ status, date, amount, invoiceNumber }) => ([
   status === 'Posted'
-    ? <Icon name='Check' className={styles.Posted} size={20} />
-    : <Icon name='Close' className={styles.Error} size={20} />,
+    ? <Check className={styles.Posted} size={20} />
+    : <Close className={styles.Error} size={20} />,
   formatDate(date),
   formatCurrency(amount),
   invoiceNumber,
