@@ -31,7 +31,7 @@ export class ChangePlan extends Component {
     useSavedCC: null
   };
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps (nextProps) {
     // Null check to make sure this only runs once
     if (nextProps.canUpdateBillingInfo && this.state.useSavedCC === null) {
       this.setState({ useSavedCC: true });
@@ -61,7 +61,7 @@ export class ChangePlan extends Component {
     return action
       .then(() => history.push('/account/billing'))
       .then(() => {
-        conversions.trackPlanChange(billing.plans, oldCode, newCode);
+        conversions.trackPlanChange({ allPlans: billing.plans, oldCode, newCode });
         return showAlert({ type: 'success', message: 'Subscription Updated' });
       });
   }
@@ -102,7 +102,7 @@ export class ChangePlan extends Component {
     );
   }
 
-  render() {
+  render () {
     const { submitting, currentPlan, selectedPlan, plans, isSelfServeBilling } = this.props;
 
     // Manually billed accounts can submit without changing plan
@@ -116,7 +116,7 @@ export class ChangePlan extends Component {
         <Grid>
           <Grid.Column>
             <Panel title='Select A Plan'>
-              { plans.length &&
+              {plans.length &&
                 <PlanPicker disabled={submitting} plans={plans} />
               }
             </Panel>

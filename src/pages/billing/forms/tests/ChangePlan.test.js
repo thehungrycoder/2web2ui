@@ -103,14 +103,14 @@ describe('Form Container: Change Plan', () => {
       values = { key: 'value', planpicker: { code: 'paid' }};
     });
 
-    it('should call billingCreate when no billing exists', async() => {
+    it('should call billingCreate when no billing exists', async () => {
       await instance.onSubmit(values);
       expect(instance.props.billingCreate).toHaveBeenCalledWith(values);
       expect(instance.props.history.push).toHaveBeenCalledWith('/account/billing');
       expect(instance.props.showAlert).toHaveBeenCalledWith({ type: 'success', message: 'Subscription Updated' });
     });
 
-    it('should update subscription when billing exists and using saved cc', async() => {
+    it('should update subscription when billing exists and using saved cc', async () => {
       wrapper.setProps({ account: { billing: true, subscription: { self_serve: true }}});
       await instance.onSubmit(values);
       expect(instance.props.billingUpdate).toHaveBeenCalledWith(values);
@@ -120,13 +120,13 @@ describe('Form Container: Change Plan', () => {
 
     });
 
-    it('should update subscription for aws account', async() => {
+    it('should update subscription for aws account', async () => {
       accountConditions.isAws.mockImplementation(() => true);
       await instance.onSubmit({ planpicker: { code: 'free' }});
       expect(instance.props.updateSubscription).toHaveBeenCalledWith({ code: 'free' });
     });
 
-    it('should update billing when billing exists but enter new cc info', async() => {
+    it('should update billing when billing exists but enter new cc info', async () => {
       wrapper.setState({ useSavedCC: true });
       wrapper.setProps({ account: { billing: true, subscription: { self_serve: true }}});
       await instance.onSubmit({ planpicker: { code: 'free' }});
@@ -136,9 +136,13 @@ describe('Form Container: Change Plan', () => {
       expect(instance.props.showAlert).toHaveBeenCalledWith({ type: 'success', message: 'Subscription Updated' });
     });
 
-    it('should track the plan change', async() => {
+    it('should track the plan change', async () => {
       await instance.onSubmit(values);
-      expect(conversions.trackPlanChange).toHaveBeenCalledWith(plans, 'free', 'paid');
+      expect(conversions.trackPlanChange).toHaveBeenCalledWith({
+        allPlans: plans,
+        oldCode: 'free',
+        newCode: 'paid'
+      });
     });
   });
 });
