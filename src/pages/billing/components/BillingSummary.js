@@ -7,9 +7,9 @@ import UpdatePayment from '../forms/UpdatePayment';
 import UpdateContact from '../forms/UpdateContact';
 import AddIps from '../forms/AddIps';
 import DedicatedIpSummarySection from './DedicatedIpSummarySection';
+import InvoiceHistory from './InvoiceHistory';
 import CardSummary from './CardSummary';
 import PlanSummary from './PlanSummary';
-import InvoiceHistory from './InvoiceHistory';
 
 const PAYMENT_MODAL = 'payment';
 const CONTACT_MODAL = 'contact';
@@ -38,8 +38,8 @@ export default class BillingSummary extends Component {
         </Panel.Section>
         <Panel.Section actions={[{ content: 'Update Billing Contact', onClick: this.handleContactModal, color: 'orange' }]}>
           <LabelledValue label='Billing Contact'>
-            <h6>{ billing.first_name } { billing.last_name }</h6>
-            <p>{ billing.email }</p>
+            <h6>{billing.first_name} {billing.last_name}</h6>
+            <p>{billing.email}</p>
           </LabelledValue>
         </Panel.Section>
       </Panel>
@@ -55,7 +55,13 @@ export default class BillingSummary extends Component {
     />
   );
 
-  render() {
+  renderInvoiceHistory = () => (
+    <InvoiceHistory
+      invoices={this.props.invoices}
+    />
+  );
+
+  render () {
     const { account, currentPlan, canChangePlan, canUpdateBillingInfo, canPurchaseIps } = this.props;
     const { show } = this.state;
     let changePlanActions = {};
@@ -78,15 +84,15 @@ export default class BillingSummary extends Component {
 
         {canUpdateBillingInfo && this.renderSummary()}
 
-        {/* FE-294 */} <InvoiceHistory />
+        {this.renderInvoiceHistory()}
 
         <PremiumBanner />
         <EnterpriseBanner />
 
         <Modal open={!!show} onClose={this.handleModal}>
-          { show === PAYMENT_MODAL && <UpdatePayment onCancel={this.handleModal}/> }
-          { show === CONTACT_MODAL && <UpdateContact onCancel={this.handleModal}/> }
-          { show === IP_MODAL && <AddIps onClose={this.handleModal}/> }
+          {show === PAYMENT_MODAL && <UpdatePayment onCancel={this.handleModal}/>}
+          {show === CONTACT_MODAL && <UpdateContact onCancel={this.handleModal}/>}
+          {show === IP_MODAL && <AddIps onClose={this.handleModal}/>}
         </Modal>
       </div>
     );
