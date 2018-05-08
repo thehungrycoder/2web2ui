@@ -1,19 +1,14 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { Modal } from 'src/components';
-import { UnstyledLink, Panel } from '@sparkpost/matchbox';
+import { UnstyledLink } from '@sparkpost/matchbox';
 import { Link } from 'react-router-dom';
-import { emailRequest } from 'src/actions/account';
 import { verifyEmail } from 'src/actions/currentUser';
 import { showAlert } from 'src/actions/globalAlert';
-import { allowSendingLimitRequestSelector, currentLimitSelector } from 'src/selectors/support';
-import RequestForm from './RequestForm';
-import { LINKS, DAILY_LIMIT_REQUEST_TEMPLATE } from 'src/constants';
+import { openSupportPanel, hydrateTicketForm } from 'src/actions/support';
+import { allowSendingLimitRequestSelector } from 'src/selectors/support';
+import { LINKS } from 'src/constants';
 
 export class SendMoreCTA extends Component {
-  state = {
-    showSupportForm: false
-  }
 
   resendVerification = () => {
     const { verifyEmail, showAlert } = this.props;
@@ -24,7 +19,7 @@ export class SendMoreCTA extends Component {
       }));
   }
 
-  renderVerifyEmailCTA() {
+  renderVerifyEmailCTA () {
     const { verifyingEmail } = this.props;
 
     const resendVerificationLink = <UnstyledLink
@@ -35,85 +30,50 @@ export class SendMoreCTA extends Component {
     return verifyingEmail ? <span>Resending a verification email... </span> : resendVerificationLink;
   }
 
-  renderUpgradeCTA() {
+  renderUpgradeCTA () {
     return (<UnstyledLink Component={Link} to='/account/billing'>
       Upgrade your account.
     </UnstyledLink>);
   }
 
   toggleSupportForm = () => {
-    const { showSupportForm } = this.state;
-    this.setState({ showSupportForm: !showSupportForm });
+    const { openSupportPanel, hydrateTicketForm } = this.props;
+    openSupportPanel({ view: 'ticket' });
+    hydrateTicketForm({ issueId: 'daily_limits' });
   }
 
 
-  renderSupportTicketCTA() {
+  renderSupportTicketCTA () {
     return (
-      <UnstyledLink Component={Link} onClick={this.toggleSupportForm}>
-        Submit a request.
-      </UnstyledLink>
+      <Fragment>
+        <UnstyledLink Component={Link} onClick={this.toggleSupportForm}>Submit a request</UnstyledLink> to increase your daily sending limit.
+      </Fragment>
     );
   }
 
-  handleFormSubmission = (values) => {
-    const { emailRequest, showAlert, currentLimit } = this.props;
-
-    const limitRequest = {
-      limit: values.dailyLimit,
-      previousLimit: currentLimit,
-      template_id: DAILY_LIMIT_REQUEST_TEMPLATE,
-      campaign_id: `support-${DAILY_LIMIT_REQUEST_TEMPLATE}`,
-      reason: values.reason
-    };
-
-    return emailRequest(limitRequest)
-      .then(() => {
-        this.toggleSupportForm();
-        return showAlert({
-          type: 'success',
-          message: 'We got your request and you should hear from us soon.'
-        });
-      });
-  }
-
-  renderSupportTicketModal() {
-    const { currentLimit } = this.props;
-
-    return (<Modal open={this.state.showSupportForm} onClose={this.toggleSupportForm}>
-      <Panel title='Request Daily Limit Increase'>
-        <RequestForm onSubmit={this.handleFormSubmission}
-          currentLimit={currentLimit} onCancel={this.toggleSupportForm}
-        />
-      </Panel>
-    </Modal>);
-  }
-
-  render() {
+  render () {
     const { currentUser: { email_verified: emailVerified }, allowSendingLimitRequest } = this.props;
 
     return (
       <p>
         Need to send more?
         {' '}
-        { !emailVerified && this.renderVerifyEmailCTA() }
-        { emailVerified && !allowSendingLimitRequest && this.renderUpgradeCTA() }
-        { emailVerified && allowSendingLimitRequest && this.renderSupportTicketCTA() }
+        {!emailVerified && this.renderVerifyEmailCTA()}
+        {emailVerified && !allowSendingLimitRequest && this.renderUpgradeCTA()}
+        {emailVerified && allowSendingLimitRequest && this.renderSupportTicketCTA()}
         {' '}
         <UnstyledLink to={LINKS.DAILY_MONTHLY_QUOTA_LIMIT_DOC} external>Learn more about these limits.</UnstyledLink>
-        {this.renderSupportTicketModal()}
       </p>
     );
   }
 }
 
-const mapStateToProps = (state) => {
-  const { currentUser } = state;
-  return {
-    currentUser,
-    verifyingEmail: currentUser.verifyingEmail,
-    allowSendingLimitRequest: allowSendingLimitRequestSelector(state),
-    currentLimit: currentLimitSelector(state)
-  };
+const mapStateToProps = (state) => ({
+  currentUser: state.currentUser,
+  verifyingEmail: state.currentUser.verifyingEmail,
+  allowSendingLimitRequest: allowSendingLimitRequestSelector(state)
+});
+const mapDispatchToProps = {
+  verifyEmail, showAlert, openSupportPanel, hydrateTicketForm
 };
-
-export default connect(mapStateToProps, { verifyEmail, showAlert, emailRequest })(SendMoreCTA);
+export default connect(mapStateToProps, mapDispatchToProps)(SendMoreCTA);
