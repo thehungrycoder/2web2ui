@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: SuspensionAlerts componentDidUpdate should show suspension alert if account suspended 1`] = `
+Array [
+  Object {
+    "autoDismiss": false,
+    "dedupeId": "SUSPENSION_NOTICE",
+    "maxWidth": 800,
+    "message": <UNDEFINED>
+      <div>
+        Your account is currently suspended.
+      </div>
+      <div>
+        For any questions or to request reactivation, please 
+        <UnstyledLink
+          onClick={[Function]}
+        >
+          submit a ticket
+        </UnstyledLink>
+        .
+      </div>
+    </UNDEFINED>,
+    "type": "warning",
+  },
+]
+`;
+
+exports[`Component: SuspensionAlerts componentDidUpdate should show suspension alert if account suspended for billing 1`] = `
+Array [
+  Object {
+    "autoDismiss": false,
+    "dedupeId": "SUSPENSION_NOTICE",
+    "maxWidth": 800,
+    "message": <UNDEFINED>
+      <div>
+        Your account is currently suspended due to a billing problem.
+      </div>
+      <div>
+        To make a payment and reactivate your account, 
+        <UnstyledLink
+          component={[Function]}
+          to="/account/billing"
+        >
+          visit the billing page
+        </UnstyledLink>
+        .
+      </div>
+    </UNDEFINED>,
+    "type": "warning",
+  },
+]
+`;
