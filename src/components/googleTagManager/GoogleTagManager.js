@@ -3,52 +3,51 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import findRouteByPath from 'src/helpers/findRouteByPath';
+import * as analytics from 'src/helpers/analytics';
+
+// This component is responsible for loading the GTM snippet, initialising our analytics
+// module, setting the username analytics variable and firing the content-view even on route change.
 
 export class GoogleTagManager extends Component {
   state = {
-    dataLayerLoaded: false,
-    waitForUser: false
+    dataLayerLoaded: false
   }
 
   componentDidMount() {
-    window.dataLayer = [{
-      'gtm.start': new Date().getTime(),
-      event: 'gtm.js'
-    }];
+    analytics.setup();
+
     const route = findRouteByPath(this.props.location.pathname);
     // for public routes, track initial page view immediately
     if (route.public) {
       this.trackPageview();
     }
+
     // for non-public routes, store flag to let us know we need to track initial page view once the username loads
-    this.setState({ dataLayerLoaded: true, waitForUser: !route.public });
+    this.setState({ dataLayerLoaded: true });
   }
 
   componentDidUpdate(prevProps) {
-    const isNewRoute = !this.state.waitForUser && prevProps.location.pathname !== this.props.location.pathname;
-    const userHasLoaded = this.state.waitForUser && !prevProps.username && this.props.username;
-
-    // Track additional page views whenever the route changes or when username first loads on auth page initial load
-    if (isNewRoute || userHasLoaded) {
-      this.trackPageview();
-    }
+    const isNewRoute = prevProps.location.pathname !== this.props.location.pathname;
+    const userHasLoaded = !prevProps.username && this.props.username;
 
     if (userHasLoaded) {
-      this.setState({ waitForUser: false });
+      analytics.setVariable('username', this.props.username);
+    }
+
+    // Track additional page views whenever the route changes or when username first loads on auth page initial load
+    if (isNewRoute) {
+      this.trackPageview();
     }
   }
 
   trackPageview() {
-    const { location, username } = this.props;
+    const { location } = this.props;
     const route = findRouteByPath(location.pathname);
 
-    window.dataLayer.push({
-      event: 'content-view',
-      'content-name': location.pathname + location.search, // duplicates angular 1.x ui-router "$location.url()" which is /path?plus=search
-      'content-title': route.title || location.pathname, // duplicate angular 1.x $rootScope.stateData.title
-      username
+    analytics.trackPageview({
+      path: location.pathname + location.search, // duplicates angular 1.x ui-router "$location.url()" which is /path?plus=search
+      title: route.title || location.pathname // duplicate angular 1.x $rootScope.stateData.title
     });
-
   }
 
   render() {

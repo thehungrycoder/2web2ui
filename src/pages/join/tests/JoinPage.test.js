@@ -3,8 +3,10 @@ import React from 'react';
 import cookie from 'js-cookie';
 import { JoinPage } from '../JoinPage';
 import { AFTER_JOIN_REDIRECT_ROUTE } from 'src/constants';
-import * as googleAnalytics from 'src/helpers/googleAnalytics';
+import * as constants from 'src/constants';
+import * as analytics from 'src/helpers/analytics';
 
+const username = 'foo_bar';
 let props;
 let instance;
 let wrapper;
@@ -36,7 +38,7 @@ jest.mock('src/config', () => ({
   }
 }));
 
-jest.mock('src/helpers/googleAnalytics');
+jest.mock('src/helpers/analytics');
 
 describe('JoinPage', () => {
   beforeEach(() => {
@@ -46,7 +48,7 @@ describe('JoinPage', () => {
         createError: null
       },
       logout: jest.fn(),
-      register: jest.fn(() => Promise.resolve({ username: 'foo_bar' })),
+      register: jest.fn(() => Promise.resolve({ username })),
       authenticate: jest.fn(() => Promise.resolve()),
       history: {
         push: jest.fn()
@@ -64,8 +66,6 @@ describe('JoinPage', () => {
       email_opt_in: false,
       password: 'foobar'
     };
-
-    googleAnalytics.addEvent = jest.fn();
 
     wrapper = shallow(<JoinPage {...props} />);
     instance = wrapper.instance();
@@ -121,10 +121,17 @@ describe('JoinPage', () => {
       expect(props.authenticate).toHaveBeenCalledWith('foo_bar', formValues.password);
     });
 
+    it('gives username to analytics after successful registration', async() => {
+      await instance.registerSubmit(formValues);
+      expect(analytics.setVariable).toHaveBeenCalledWith('username', username);
+    });
+
     it('tracks signup after successful registration', async() => {
       await instance.registerSubmit(formValues);
       expect(props.register).toHaveBeenCalledTimes(1);
-      expect(googleAnalytics.addEvent).toHaveBeenCalledTimes(1);
+      expect(analytics.trackFormSuccess).toHaveBeenCalledWith(constants.ANALYTICS_CREATE_ACCOUNT, {
+        form_type: constants.ANALYTICS_CREATE_ACCOUNT
+      });
     });
 
     it('redirects to correct url upon auth', async() => {

@@ -4,6 +4,8 @@ import { format } from 'date-fns';
 import { Banner, UnstyledLink } from '@sparkpost/matchbox';
 import { Link } from 'react-router-dom';
 import { LINKS } from 'src/constants';
+import * as conversions from 'src/helpers/conversionTracking';
+import { ANALYTICS_PREMIUM_SUPPORT, ANALYTICS_ENTERPRISE_SUPPORT } from 'src/constants';
 
 const dateFormat = (date) => format(date, 'MMM DD, YYYY');
 
@@ -56,7 +58,12 @@ export const ManuallyBilledBanner = ({ account, ...rest }) => {
  * Premium Addon Plan CTA
  */
 export const PremiumBanner = () => (
-  <Banner title='Premium Addon Plan' action={{ content: 'Contact Us', to: LINKS.PREMIUM_SUPPORT, external: true }}>
+  <Banner title='Premium Addon Plan' action={{
+    content: 'Contact Us',
+    to: LINKS.PREMIUM_SUPPORT,
+    external: true,
+    onClick: () => conversions.trackAddonRequest(ANALYTICS_PREMIUM_SUPPORT)
+  }}>
     <p>Get full-service Technical Account Management with proactive reporting, planning & reviews.</p>
     <ul>
       <li>Includes all standard SparkPost features</li>
@@ -71,7 +78,12 @@ export const PremiumBanner = () => (
  * Enterprise CTA
  */
 export const EnterpriseBanner = () => (
-  <Banner title='Enterprise' action={{ content: 'Contact Us', to: LINKS.ENTERPRISE_SUPPORT, external: true }}>
+  <Banner title='Enterprise' action={{
+    content: 'Contact Us',
+    to: LINKS.ENTERPRISE_SUPPORT,
+    external: true,
+    onClick: () => conversions.trackAddonRequest(ANALYTICS_ENTERPRISE_SUPPORT)
+  }}>
     <p>Enterprise-grade financial guarantees with 99.9% uptime SLA and guaranteed burst rates.</p>
     <ul>
       <li>Includes all standard SparkPost and Premium features</li>
