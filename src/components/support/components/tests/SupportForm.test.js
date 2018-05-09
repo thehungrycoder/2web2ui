@@ -17,11 +17,14 @@ describe('Support Form Component', () => {
 
   describe('Form', () => {
     let props;
-    let handleSubmit;
 
     beforeEach(() => {
-      handleSubmit = jest.fn();
-      props = { handleSubmit, issues: [technicalIssue]};
+
+      props = {
+        handleSubmit: jest.fn(),
+        issues: [technicalIssue],
+        toggleSupportPanel: jest.fn()
+      };
       wrapper = shallow(<SupportForm {...props} />);
     });
 

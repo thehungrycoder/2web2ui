@@ -55,7 +55,8 @@ export class SupportForm extends Component {
       onCancel,
       pristine,
       selectedIssue,
-      submitting
+      submitting,
+      toggleSupportPanel
     } = this.props;
 
     return <div className={styles.SupportForm}>
@@ -71,7 +72,7 @@ export class SupportForm extends Component {
             helpText={needsOnlineSupport && (
               <Fragment>
                 Additional technical support is available on paid
-                plans. <PageLink to="/account/billing/plan">Upgrade now</PageLink>.
+                plans. <PageLink onClick={toggleSupportPanel} to="/account/billing/plan">Upgrade now</PageLink>.
               </Fragment>
             )}
             errorInLabel
