@@ -1,28 +1,28 @@
 import React, { Fragment } from 'react';
 import { Panel, Button } from '@sparkpost/matchbox';
-import { Check, Close } from '@sparkpost/matchbox-icons';
+import config from 'src/config';
 import { TableCollection } from 'src/components';
 import { formatDate } from 'src/helpers/date';
 
-import styles from './InvoiceHistory.module.scss';
 
 const columns = [
-  { label: null, width: '18px' },
   'Date',
   'Amount',
   'Invoice Number',
   null
 ];
 
-const getRowData = ({ status, date, amount, invoice_number: invoiceNumber }) => ([
-  status === 'Posted'
-    ? <Check className={styles.Posted} size={20} />
-    : <Close className={styles.Error} size={20} />,
-  formatDate(date),
-  formatCurrency(amount),
-  invoiceNumber,
-  <div style={{ textAlign: 'right' }}><Button plain size='small'>Download</Button></div>
-]);
+const getRowData = ({ status, date, amount, invoice_number: invoiceNumber, id }) => {
+  const downloadLink = `${config.apiBase}/account/invoices/${id}`;
+  return ([
+    formatDate(date),
+    formatCurrency(amount),
+    invoiceNumber,
+    <div style={{ textAlign: 'right' }}>
+      <Button plain size='small' type='submit' onClick={window.open(downloadLink)}>Download</Button>
+    </div>
+  ]);
+};
 
 const formatCurrency = (v) => `$${v.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
