@@ -4,12 +4,11 @@ exports[`SendMoreCTA Component renders correctly for aws free plan (cta to upgra
 <p>
   Need to send more?
    
-  <UnstyledLink
-    Component={[Function]}
+  <PageLink
     to="/account/billing"
   >
     Upgrade your account.
-  </UnstyledLink>
+  </PageLink>
    
   <UnstyledLink
     external={true}
@@ -26,7 +25,6 @@ exports[`SendMoreCTA Component renders correctly for customers who can request l
    
   <React.Fragment>
     <UnstyledLink
-      Component={[Function]}
       onClick={[Function]}
     >
       Submit a request
@@ -49,7 +47,6 @@ exports[`SendMoreCTA Component renders support form correctly 1`] = `
    
   <React.Fragment>
     <UnstyledLink
-      Component={[Function]}
       onClick={[Function]}
     >
       Submit a request

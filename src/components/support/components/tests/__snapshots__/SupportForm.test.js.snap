@@ -62,6 +62,37 @@ exports[`Support Form Component Form should render 1`] = `
 </div>
 `;
 
+exports[`Support Form Component Form should render issue dropdown with help text 1`] = `
+<Field
+  component={[Function]}
+  errorInLabel={true}
+  helpText={
+    <UNDEFINED>
+      Additional technical support is available on paid plans. 
+      <PageLink
+        onClick={[MockFunction]}
+        to="/account/billing/plan"
+      >
+        Upgrade now
+      </PageLink>
+      .
+    </UNDEFINED>
+  }
+  label="I need help with..."
+  name="issueId"
+  options={
+    Array [
+      Object {
+        "label": "I need help!",
+        "value": "technical_issues",
+      },
+    ]
+  }
+  placeholder="Select an option"
+  validate={[Function]}
+/>
+`;
+
 exports[`Support Form Component Form should render with selected issue message label 1`] = `
 <div>
   <Panel.Section>

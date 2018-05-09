@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PageLink should render a page link 1`] = `
+<UnstyledLink
+  component={[Function]}
+  to="/profile"
+>
+  My Profile
+</UnstyledLink>
+`;

@@ -8,7 +8,6 @@ describe('Support Component', () => {
 
   beforeEach(() => {
     const props = {
-      entitledToOnlineSupport: true,
       loggedIn: true,
       location: {},
       openSupportPanel: jest.fn(),
@@ -23,18 +22,13 @@ describe('Support Component', () => {
   });
 
   describe('render tests', () => {
-    it('should not render the icon if the account is not entitled to support', () => {
-      wrapper.setProps({ entitledToOnlineSupport: false });
-      expect(wrapper.get(0)).toBeFalsy();
+    it('should render just the icon by default', () => {
+      expect(wrapper).toMatchSnapshot();
     });
 
     it('should not render icon if account is not logged in', () => {
       wrapper.setProps({ loggedIn: false });
       expect(wrapper.get(0)).toBeFalsy();
-    });
-
-    it('should render just the icon by default', () => {
-      expect(wrapper).toMatchSnapshot();
     });
 
     it('should show search panel and close icon when panel is opened', () => {

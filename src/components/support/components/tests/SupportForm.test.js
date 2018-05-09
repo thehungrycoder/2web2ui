@@ -17,11 +17,14 @@ describe('Support Form Component', () => {
 
   describe('Form', () => {
     let props;
-    let handleSubmit;
 
     beforeEach(() => {
-      handleSubmit = jest.fn();
-      props = { handleSubmit, issues: [technicalIssue]};
+
+      props = {
+        handleSubmit: jest.fn(),
+        issues: [technicalIssue],
+        toggleSupportPanel: jest.fn()
+      };
       wrapper = shallow(<SupportForm {...props} />);
     });
 
@@ -54,6 +57,11 @@ describe('Support Form Component', () => {
     it('should render with selected issue message label', () => {
       wrapper.setProps({ selectedIssue: technicalIssue });
       expect(wrapper).toMatchSnapshot();
+    });
+
+    it('should render issue dropdown with help text', () => {
+      wrapper.setProps({ needsOnlineSupport: true });
+      expect(wrapper.find('Field[name="issueId"]')).toMatchSnapshot();
     });
   });
 

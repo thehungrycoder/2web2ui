@@ -20,33 +20,30 @@ describe('Selectors: support', () => {
       const state = {
         account: {}
       };
-      expect(selectors.entitledToOnlineSupport(state)).toBeFalsy();
       expect(selectors.entitledToPhoneSupport(state)).toBeFalsy();
     });
 
-    it('when account is not entitled to online support', () => {
+    it('when account is not entitled to phone support', () => {
       const state = {
         account: {
           support: {
-            online: false,
             phone: true
           }
         }
       };
-      expect(selectors.entitledToOnlineSupport(state)).toBeFalsy();
+
       expect(selectors.entitledToPhoneSupport(state)).toBeTruthy();
     });
 
-    it('when account entitled to online support', () => {
+    it('when account entitled to phone support', () => {
       const state = {
         account: {
           support: {
-            online: true,
             phone: false
           }
         }
       };
-      expect(selectors.entitledToOnlineSupport(state)).toBeTruthy();
+
       expect(selectors.entitledToPhoneSupport(state)).toBeFalsy();
     });
   });
