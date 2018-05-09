@@ -58,7 +58,7 @@ describe('Support Form Component', () => {
 
     it('should render issue dropdown with help text', () => {
       wrapper.setProps({ needsOnlineSupport: true });
-      expect(wrapper).toMatchSnapshot();
+      expect(wrapper.find('Field[name="issueId"]')).toMatchSnapshot();
     });
   });
 

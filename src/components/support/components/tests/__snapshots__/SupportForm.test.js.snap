@@ -63,76 +63,33 @@ exports[`Support Form Component Form should render 1`] = `
 `;
 
 exports[`Support Form Component Form should render issue dropdown with help text 1`] = `
-<div>
-  <Panel.Section>
-    <h6>
-      Submit A Support Ticket
-    </h6>
-  </Panel.Section>
-  <form>
-    <Panel.Section>
-      <Field
-        component={[Function]}
-        errorInLabel={true}
-        helpText={
-          <UNDEFINED>
-            Additional technical support is available on paid plans. 
-            <PageLink
-              to="/account/billing/plan"
-            >
-              Ugrade now
-            </PageLink>
-            .
-          </UNDEFINED>
-        }
-        label="I need help with..."
-        name="issueId"
-        options={
-          Array [
-            Object {
-              "label": "I need help!",
-              "value": "technical_issues",
-            },
-          ]
-        }
-        placeholder="Select an option"
-        validate={[Function]}
-      />
-      <Field
-        component={[Function]}
-        errorInLabel={true}
-        label="Tell us more about your issue"
-        multiline={true}
-        name="message"
-        resize="none"
-        rows={10}
-        validate={[Function]}
-      />
-      <Field
-        component={[Function]}
-        label="Attach a file"
-        name="attachment"
-        type="file"
-        validate={[Function]}
-      />
-    </Panel.Section>
-    <Panel.Section>
-      <Button
-        primary={true}
-        size="default"
-        submit={true}
+<Field
+  component={[Function]}
+  errorInLabel={true}
+  helpText={
+    <UNDEFINED>
+      Additional technical support is available on paid plans. 
+      <PageLink
+        to="/account/billing/plan"
       >
-        Submit Ticket
-      </Button>
-      <Button
-        onClick={[Function]}
-        size="default"
-      >
-        Cancel
-      </Button>
-    </Panel.Section>
-  </form>
-</div>
+        Upgrade now
+      </PageLink>
+      .
+    </UNDEFINED>
+  }
+  label="I need help with..."
+  name="issueId"
+  options={
+    Array [
+      Object {
+        "label": "I need help!",
+        "value": "technical_issues",
+      },
+    ]
+  }
+  placeholder="Select an option"
+  validate={[Function]}
+/>
 `;
 
 exports[`Support Form Component Form should render with selected issue message label 1`] = `

@@ -71,7 +71,7 @@ export class SupportForm extends Component {
             helpText={needsOnlineSupport && (
               <Fragment>
                 Additional technical support is available on paid
-                plans. <PageLink to="/account/billing/plan">Ugrade now</PageLink>.
+                plans. <PageLink to="/account/billing/plan">Upgrade now</PageLink>.
               </Fragment>
             )}
             errorInLabel
