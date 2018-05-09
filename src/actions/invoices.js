@@ -9,3 +9,14 @@ export function list () {
     }
   });
 }
+
+export function get (id) {
+  return sparkpostApiRequest({
+    type: 'GET_INVOICE',
+    meta: {
+      method: 'GET',
+      url: `/account/invoices/${id}`,
+      responseType: 'blob'
+    }
+  });
+}

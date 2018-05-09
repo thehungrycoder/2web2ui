@@ -56,9 +56,7 @@ export default class BillingSummary extends Component {
   );
 
   renderInvoiceHistory = () => (
-    <InvoiceHistory
-      invoices={this.props.invoices}
-    />
+    <InvoiceHistory/>
   );
 
   render () {

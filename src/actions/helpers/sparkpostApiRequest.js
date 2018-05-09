@@ -13,7 +13,7 @@ export const refreshTokensUsed = new Set();
 export let refreshing = false;
 
 // Re-dispatches a given action after we finish refreshing the auth token
-function redispatchAfterRefresh(action, dispatch) {
+function redispatchAfterRefresh (action, dispatch) {
   return resolveOnCondition(() => !refreshing).then(() => dispatch(sparkpostRequest(action)));
 }
 
@@ -28,6 +28,7 @@ const sparkpostRequest = requestHelperFactory({
     return transformed;
   },
   onSuccess: ({ response, dispatch, types, meta }) => {
+    meta.data = response.data;
     const { data: { results }} = response;
     dispatch({
       type: types.SUCCESS,

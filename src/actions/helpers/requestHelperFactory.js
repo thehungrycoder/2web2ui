@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-function defaultOnSuccess({ types, response, dispatch, meta, action }) {
+function defaultOnSuccess ({ types, response, dispatch, meta, action }) {
   dispatch({
     type: types.SUCCESS,
     payload: response,
@@ -10,7 +10,7 @@ function defaultOnSuccess({ types, response, dispatch, meta, action }) {
   return response;
 }
 
-function defaultOnFail({ types, err, dispatch, meta }) {
+function defaultOnFail ({ types, err, dispatch, meta }) {
   const { message, response = {}} = err;
 
   dispatch({
@@ -22,7 +22,7 @@ function defaultOnFail({ types, err, dispatch, meta }) {
   throw err;
 }
 
-export default function requestFactory({
+export default function requestFactory ({
   request = axios,
   onSuccess = defaultOnSuccess,
   onFail = defaultOnFail,
@@ -30,7 +30,7 @@ export default function requestFactory({
 } = {}) {
   return (action) => (dispatch, getState) => {
     const { type = 'NO_TYPE_DEFINED', meta } = action;
-    const { url, method = 'get', params, headers, data } = meta;
+    const { url, method = 'get', params, headers, data, responseType = 'json' } = meta;
     const types = {
       PENDING: `${type}_PENDING`,
       SUCCESS: `${type}_SUCCESS`,
@@ -44,6 +44,7 @@ export default function requestFactory({
 
     const httpOptions = {
       method: method.toLowerCase(),
+      responseType,
       url,
       params,
       headers,
