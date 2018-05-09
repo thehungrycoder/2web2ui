@@ -1,4 +1,4 @@
-'use strict';
+/* eslint-disable */
 
 const autoprefixer = require('autoprefixer');
 const path = require('path');
@@ -7,13 +7,11 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
-const eslintFormatter = require('react-dev-utils/eslintFormatter');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const StyleExtHtmlWebpackPlugin = require('style-ext-html-webpack-plugin');
 const getClientEnvironment = require('./env');
 const paths = require('./paths');
-const generateScopedName = require('./generateScopedName');
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // In development, we always serve from the root. This makes config easier.
@@ -144,6 +142,7 @@ module.exports = {
           /\.gif$/,
           /\.jpe?g$/,
           /\.png$/,
+          /\.mdx?$/
         ],
         loader: require.resolve('file-loader'),
         options: {
@@ -160,6 +159,18 @@ module.exports = {
           limit: 10000,
           name: 'static/media/[name].[hash:8].[ext]',
         },
+      },
+      /**
+       * MDX is a tool that converts Markdown files to React components. This
+       * loader uses MDX to create Page objects for Markdown files. As it
+       * produces ES2015, the result is then passed through babel.
+       */
+      {
+        test: /\.mdx?$/,
+        use: [
+          'babel-loader',
+          'mdx-loader'
+        ]
       },
       // Process JS with Babel.
       {

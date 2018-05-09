@@ -1,0 +1,91 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.TopNavigation {
+  background: color(gray, 1);
+  height: 100%;
+  display: flex;
+}
+
+.IconLink {
+  display: inline-block;
+  vertical-align: middle;
+  padding: spacing(small) rem(10);
+
+  // font-size: rem(28);
+  line-height: rem(24);
+
+  color: color(gray, 5);
+  transition: 0.15s;
+
+  &:hover, &:active, &:focus {
+    color: color(gray, 10);
+  }
+}
+
+.Logo {
+  flex: 0 0 0;
+  padding: rem(12) 0;
+  min-width: rem(250);
+  text-align: center;
+  height: 100%;
+  opacity: 1;
+  // background: darken(color(gray, 1), 0)
+  border-right: 1px solid darken(color(gray, 1), 3);
+}
+
+.RightOptions {
+  flex: 1 0 0;
+  text-align: right;
+  padding: rem(12) spacing(larger);
+}
+
+.NotificationSignal {
+  cursor: pointer;
+  position: relative;
+  opacity: 0.6;
+}
+
+.UnreadNotificationSignal {
+  @extend .NotificationSignal;
+  opacity: 1;
+  fill: black;
+  color: color(blue);
+}
+
+.NotificationItem {
+  width: rem(520);
+  padding: spacing();
+  padding-right: rem(60);
+  display: flex;
+  border-bottom: 1px solid color(gray, 8);
+  opacity: 0.75;
+}
+
+.UnreadNotificationItem {
+  @extend .NotificationItem;
+  position: relative;
+  opacity: 1;
+
+  &::after {
+    content: '';
+    border: 5px solid color(blue);
+    border-radius: 5px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+}
+
+.NotificationIconWrapper {
+  flex: 0 0 0;
+  min-width: rem(42);
+  text-align: left;
+}
+
+.NotificationIcon {
+  color: color(gray, 4)
+}
+
+.NotificationContent {
+  flex: 1 0 0;
+}

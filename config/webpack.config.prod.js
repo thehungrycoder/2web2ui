@@ -1,4 +1,5 @@
-'use strict';
+/* eslint-disable */
+
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
@@ -10,7 +11,6 @@ const StyleExtHtmlWebpackPlugin = require('style-ext-html-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
-const eslintFormatter = require('react-dev-utils/eslintFormatter');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const paths = require('./paths');
 const getClientEnvironment = require('./env');
@@ -144,11 +144,24 @@ module.exports = {
           /\.gif$/,
           /\.jpe?g$/,
           /\.png$/,
+          /\.mdx?$/
         ],
         loader: require.resolve('file-loader'),
         options: {
           name: 'static/media/[name].[hash:8].[ext]',
         },
+      },
+      /**
+       * MDX is a tool that converts Markdown files to React components. This
+       * loader uses MDX to create Page objects for Markdown files. As it
+       * produces ES2015, the result is then passed through babel.
+       */
+      {
+        test: /\.mdx?$/,
+        use: [
+          'babel-loader',
+          'mdx-loader'
+        ]
       },
       // "url" loader works just like "file" loader but it also embeds
       // assets smaller than specified size as data URLs to avoid requests.

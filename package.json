@@ -92,6 +92,7 @@
     "uuid": "^3.2.1"
   },
   "devDependencies": {
+    "@mdx-js/mdx": "^0.9.0",
     "autoprefixer": "^8.1.0",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.2.1",
@@ -132,6 +133,8 @@
     "jest-enzyme": "^5.0.0",
     "jest-junit": "^3.4.1",
     "lint-staged": "^7.0.1",
+    "mdx-loader": "^1.1.0",
+    "mdxc": "^1.1.1",
     "moment-timezone": "^0.5.14",
     "node-sass": "^4.5.3",
     "object-assign": "^4.1.1",
