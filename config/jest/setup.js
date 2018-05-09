@@ -19,6 +19,9 @@ console.error = (message) => {
   throw new Error(message);
 };
 
+// mock out a file that uses require.context under the hood
+jest.mock('src/components/notifications/staticMarkdownNotifications', () => []);
+
 beforeEach(() => {
   // Verifies that at least one assertion is called during a test
   // See https://facebook.github.io/jest/docs/en/expect.html#expecthasassertions

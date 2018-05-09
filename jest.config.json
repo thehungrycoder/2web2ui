@@ -11,6 +11,7 @@
   ],
   "coveragePathIgnorePatterns": [
     "<rootDir>/src/App.js",
+    "<rootDir>/src/store.js",
     "<rootDir>/src/config",
     "<rootDir>/src/helpers/registerServiceWorker",
     "<rootDir>/src/reducers",
