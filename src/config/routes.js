@@ -20,7 +20,8 @@ import {
   PageNotFound,
   DefaultRedirect,
   JoinPage,
-  passwordReset
+  passwordReset,
+  PremiumSupportPage
 } from 'src/pages';
 
 import onboarding from 'src/pages/onboarding';
@@ -29,7 +30,7 @@ import { emailVerificationRedirect, emailRedirects } from './emailRoutes';
 import SecretBillingPlanOrBillingSummaryPage from './SecretBillingPlanOrBillingSummaryPage';
 
 import { hasGrants, all, not } from 'src/helpers/conditions';
-import { isEnterprise } from 'src/helpers/conditions/account';
+import { isEnterprise, isAws } from 'src/helpers/conditions/account';
 import { isHeroku, isAzure } from 'src/helpers/conditions/user';
 import { configFlag, configEquals } from 'src/helpers/conditions/config';
 
@@ -501,6 +502,12 @@ const routes = [
     component: onboarding.ApiPage,
     condition: configFlag('featureFlags.has_signup'),
     title: 'Onboarding | Send a Test Email (REST)'
+  },
+  {
+    path: '/support/aws-premium',
+    component: PremiumSupportPage,
+    condition: isAws,
+    title: 'Support | Request Premium Support'
   }
 ];
 
