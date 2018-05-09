@@ -1,10 +1,10 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { UnstyledLink } from '@sparkpost/matchbox';
-import { Link } from 'react-router-dom';
 import { verifyEmail } from 'src/actions/currentUser';
 import { showAlert } from 'src/actions/globalAlert';
 import { openSupportPanel, hydrateTicketForm } from 'src/actions/support';
+import { PageLink } from 'src/components';
 import { allowSendingLimitRequestSelector } from 'src/selectors/support';
 import { LINKS } from 'src/constants';
 
@@ -31,9 +31,7 @@ export class SendMoreCTA extends Component {
   }
 
   renderUpgradeCTA () {
-    return (<UnstyledLink Component={Link} to='/account/billing'>
-      Upgrade your account.
-    </UnstyledLink>);
+    return <PageLink to="/account/billing">Upgrade your account.</PageLink>;
   }
 
   toggleSupportForm = () => {
@@ -46,7 +44,7 @@ export class SendMoreCTA extends Component {
   renderSupportTicketCTA () {
     return (
       <Fragment>
-        <UnstyledLink Component={Link} onClick={this.toggleSupportForm}>Submit a request</UnstyledLink> to increase your daily sending limit.
+        <UnstyledLink onClick={this.toggleSupportForm}>Submit a request</UnstyledLink> to increase your daily sending limit.
       </Fragment>
     );
   }

@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import qs from 'query-string';
 import cookie from 'js-cookie';
 import _ from 'lodash';
 
-import { CenteredLogo } from 'src/components';
-import { Panel, Error, UnstyledLink } from '@sparkpost/matchbox';
+import { CenteredLogo, PageLink } from 'src/components';
+import { Panel, Error } from '@sparkpost/matchbox';
 import JoinForm from './components/JoinForm';
 import JoinError from './components/JoinError';
 import JoinLink from './components/JoinLink';
@@ -50,7 +50,7 @@ export class JoinPage extends Component {
       .then(() => this.props.history.push(AFTER_JOIN_REDIRECT_ROUTE, { plan }));
   };
 
-  render() {
+  render () {
     const { createError } = this.props.account;
     const { formData } = this.state;
     const title = inSPCEU() ? 'Sign Up For SparkPost EU' : 'Sign Up';
@@ -72,7 +72,7 @@ export class JoinPage extends Component {
           </Panel.Section>
         </Panel>
         <Panel.Footer
-          left={<small>Already have an account? <UnstyledLink Component={Link} to='/auth'>Log In</UnstyledLink>.</small>}
+          left={<small>Already have an account? <PageLink to="/auth">Log In</PageLink>.</small>}
           right={<JoinLink location={this.props.location} />}
         />
       </div>
@@ -80,7 +80,7 @@ export class JoinPage extends Component {
   }
 }
 
-function mapStateToProps(state, props) {
+function mapStateToProps (state, props) {
   return {
     account: state.account,
     params: qs.parse(props.location.search),

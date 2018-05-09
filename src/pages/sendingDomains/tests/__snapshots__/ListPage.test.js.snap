@@ -158,12 +158,11 @@ exports[`Sending Domains List Page renders loading correctly 1`] = `<Loading />`
 exports[`Sending Domains List Page renders rows correctly 1`] = `
 Array [
   Array [
-    <UnstyledLink
-      Component={[Function]}
+    <PageLink
       to="/account/sending-domains/edit/test.com"
     >
       test.com
-    </UnstyledLink>,
+    </PageLink>,
     <DomainStatusCell
       domain={
         Object {
@@ -189,12 +188,11 @@ Array [
     />,
   ],
   Array [
-    <UnstyledLink
-      Component={[Function]}
+    <PageLink
       to="/account/sending-domains/edit/test2.com"
     >
       test2.com
-    </UnstyledLink>,
+    </PageLink>,
     <DomainStatusCell
       domain={
         Object {
@@ -217,12 +215,11 @@ Array [
 exports[`Sending Domains List Page renders rows correctly with no subaccounts 1`] = `
 Array [
   Array [
-    <UnstyledLink
-      Component={[Function]}
+    <PageLink
       to="/account/sending-domains/edit/test.com"
     >
       test.com
-    </UnstyledLink>,
+    </PageLink>,
     <DomainStatusCell
       domain={
         Object {
@@ -241,12 +238,11 @@ Array [
     />,
   ],
   Array [
-    <UnstyledLink
-      Component={[Function]}
+    <PageLink
       to="/account/sending-domains/edit/test2.com"
     >
       test2.com
-    </UnstyledLink>,
+    </PageLink>,
     <DomainStatusCell
       domain={
         Object {

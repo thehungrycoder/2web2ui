@@ -17,12 +17,11 @@ exports[`renders correctly 1`] = `
     left={false}
     right={
       <small>
-        <UnstyledLink
-          Component={[Function]}
+        <PageLink
           to="/forgot-password"
         >
           Forgot your password?
-        </UnstyledLink>
+        </PageLink>
       </small>
     }
   />
@@ -49,12 +48,11 @@ exports[`renders correctly when there is a login error 1`] = `
     left={false}
     right={
       <small>
-        <UnstyledLink
-          Component={[Function]}
+        <PageLink
           to="/forgot-password"
         >
           Forgot your password?
-        </UnstyledLink>
+        </PageLink>
       </small>
     }
   />
@@ -81,12 +79,11 @@ exports[`should display sso error message 1`] = `
     left={false}
     right={
       <small>
-        <UnstyledLink
-          Component={[Function]}
+        <PageLink
           to="/forgot-password"
         >
           Forgot your password?
-        </UnstyledLink>
+        </PageLink>
       </small>
     }
   />
