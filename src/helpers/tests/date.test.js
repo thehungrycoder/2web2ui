@@ -126,6 +126,11 @@ describe('Date helpers', () => {
 
   describe('getLocalTimezone', () => {
 
+    it('should return UTC if Intl is not defined', () => {
+      delete global.Intl;
+      expect(getLocalTimezone()).toEqual('UTC');
+    });
+
     it('should return UTC if DateFormat is not a function', () => {
       global.Intl = {};
       expect(getLocalTimezone()).toEqual('UTC');

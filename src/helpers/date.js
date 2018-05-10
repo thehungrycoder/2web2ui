@@ -58,7 +58,7 @@ export function isSameDate(a, b) {
  */
 export function getLocalTimezone() {
   // eslint-disable-next-line new-cap
-  if (typeof Intl.DateTimeFormat !== 'function') {
+  if (typeof Intl === 'undefined' || typeof Intl.DateTimeFormat !== 'function') {
     return 'UTC';
   }
 
