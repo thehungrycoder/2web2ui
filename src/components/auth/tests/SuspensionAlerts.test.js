@@ -8,10 +8,9 @@ describe('Component: SuspensionAlerts', () => {
 
   beforeEach(() => {
     props = {
-      hydrateTicketForm: jest.fn(),
       isSuspended: null,
       isSuspendedForBilling: false,
-      openSupportPanel: jest.fn(),
+      openSupportTicket: jest.fn(),
       showAlert: jest.fn()
     };
 
@@ -24,8 +23,7 @@ describe('Component: SuspensionAlerts', () => {
 
   it('should open ticket form', () => {
     wrapper.instance().openTicket();
-    expect(props.openSupportPanel).toHaveBeenCalledWith({ view: 'ticket' });
-    expect(props.hydrateTicketForm).toHaveBeenCalledWith({ issueId: 'account_suspension' });
+    expect(props.openSupportTicket).toHaveBeenCalledWith({ issueId: 'account_suspension' });
   });
 
   describe('componentDidUpdate', () => {

@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { showAlert } from 'src/actions/globalAlert';
-import { openSupportPanel, hydrateTicketForm } from 'src/actions/support';
+import { openSupportTicket } from 'src/actions/support';
 import { PageLink } from 'src/components';
 import { hasStatus, isSuspendedForBilling } from 'src/helpers/conditions/account';
 import { UnstyledLink } from '@sparkpost/matchbox';
@@ -12,10 +12,8 @@ import { UnstyledLink } from '@sparkpost/matchbox';
  * - Account suspended for billing
  */
 export class SuspensionAlerts extends Component {
-
   openTicket = () => {
-    this.props.openSupportPanel({ view: 'ticket' });
-    this.props.hydrateTicketForm({ issueId: 'account_suspension' });
+    this.props.openSupportTicket({ issueId: 'account_suspension' });
   }
 
   getMessage () {
@@ -56,5 +54,4 @@ const mapStateToProps = (state) => ({
   isSuspended: hasStatus('suspended')(state),
   isSuspendedForBilling: isSuspendedForBilling(state)
 });
-const mapDispatchToProps = { showAlert, openSupportPanel, hydrateTicketForm };
-export default connect(mapStateToProps, mapDispatchToProps)(SuspensionAlerts);
+export default connect(mapStateToProps, { showAlert, openSupportTicket })(SuspensionAlerts);

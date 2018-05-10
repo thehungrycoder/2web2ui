@@ -24,12 +24,11 @@ export class Support extends Component {
 
   // Opens and hydrates support ticket form from query params
   maybeOpenTicket = () => {
-    const { location, openSupportPanel, hydrateTicketForm } = this.props;
+    const { location, openSupportTicket } = this.props;
     const { supportTicket, supportMessage: message, supportIssue: issueId } = qs.parse(location.search);
 
     if (supportTicket) {
-      openSupportPanel({ view: 'ticket' });
-      hydrateTicketForm({ issueId, message });
+      openSupportTicket({ issueId, message });
     }
   }
 

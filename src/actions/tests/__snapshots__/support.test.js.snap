@@ -21,9 +21,18 @@ Object {
 }
 `;
 
-exports[`Action Creator: Support hydrateTicketForm should not hydrate without values 1`] = `
-Object {
-  "type": "HYDRATE_TICKET_FORM",
+exports[`Action Creator: Support openSupportTicket should open support panel 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "payload": Object {
+          "view": "ticket",
+        },
+        "type": "OPEN_SUPPORT_PANEL",
+      },
+    ],
+  ],
 }
 `;
 

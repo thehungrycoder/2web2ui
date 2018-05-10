@@ -29,20 +29,21 @@ describe('Action Creator: Support', () => {
     });
   });
 
-  describe('hydrateTicketForm', () => {
-    it('should not hydrate without values', () => {
-      expect(support.hydrateTicketForm({})(dispatchMock)).toMatchSnapshot();
-      expect(formActions.change).not.toHaveBeenCalled();
+  describe('openSupportTicket', () => {
+
+    it('should open support panel', () => {
+      support.openSupportTicket()(dispatchMock);
+      expect(dispatchMock).toMatchSnapshot();
     });
 
-    it('should hydrate message', () => {
-      support.hydrateTicketForm({ message: 'test' })(dispatchMock);
+    it('should open support panel and set support ticket message', () => {
+      support.openSupportTicket({ message: 'test' })(dispatchMock);
       expect(formActions.change).toHaveBeenCalledWith('supportForm', 'message', 'test');
       expect(formActions.change).toHaveBeenCalledTimes(1);
     });
 
-    it('should hydrate issueId', () => {
-      support.hydrateTicketForm({ issueId: 'technical_errors' })(dispatchMock);
+    it('should open support panel ane set support ticket issue', () => {
+      support.openSupportTicket({ issueId: 'technical_errors' })(dispatchMock);
       expect(formActions.change).toHaveBeenCalledWith('supportForm', 'issueId', 'technical_errors');
       expect(formActions.change).toHaveBeenCalledTimes(1);
     });

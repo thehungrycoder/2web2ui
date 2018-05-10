@@ -69,11 +69,14 @@ export function toggleTicketForm () {
   };
 }
 
-// Fills support ticket form values
-export function hydrateTicketForm ({ issueId, message } = {}) {
+// Opens support ticket form and fills values if provided
+export function openSupportTicket ({ issueId, message } = {}) {
   const issue = _.find(supportIssues, { id: issueId });
 
   return (dispatch) => {
+    // the support panel must be open before you can hydrate it
+    dispatch(openSupportPanel({ view: 'ticket' }));
+
     if (issue) {
       dispatch(change(formName, 'issueId', issueId));
     }
@@ -81,9 +84,5 @@ export function hydrateTicketForm ({ issueId, message } = {}) {
     if (message) {
       dispatch(change(formName, 'message', message));
     }
-
-    return {
-      type: 'HYDRATE_TICKET_FORM'
-    };
   };
 }
