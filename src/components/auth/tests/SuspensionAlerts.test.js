@@ -7,21 +7,15 @@ describe('Component: SuspensionAlerts', () => {
   let props;
 
   beforeEach(() => {
-
-
     props = {
-      status: null,
-      showAlert: jest.fn(),
+      hydrateTicketForm: jest.fn(),
+      isSuspended: null,
       isSuspendedForBilling: false,
       openSupportPanel: jest.fn(),
-      hydrateTicketForm: jest.fn()
+      showAlert: jest.fn()
     };
 
     wrapper = shallow(<SuspensionAlerts {...props} />);
-  });
-
-  afterEach(() => {
-    jest.resetAllMocks();
   });
 
   it('renders correctly', () => {
@@ -36,20 +30,17 @@ describe('Component: SuspensionAlerts', () => {
 
   describe('componentDidUpdate', () => {
     it('should show suspension alert if account suspended', async () => {
-      wrapper.setProps({ status: 'suspended' });
-      wrapper.update();
+      wrapper.setProps({ isSuspended: true });
       expect(props.showAlert.mock.calls[0]).toMatchSnapshot();
     });
 
     it('should show suspension alert if account suspended for billing', async () => {
-      wrapper.setProps({ status: 'suspended', isSuspendedForBilling: true });
-      wrapper.update();
+      wrapper.setProps({ isSuspended: true, isSuspendedForBilling: true });
       expect(props.showAlert.mock.calls[0]).toMatchSnapshot();
     });
 
     it('should not show suspension alert unless suspended', async () => {
-      wrapper.setProps({ status: 'active' });
-      wrapper.update();
+      wrapper.setProps({ isSuspended: false });
       expect(props.showAlert).not.toHaveBeenCalled();
     });
   });

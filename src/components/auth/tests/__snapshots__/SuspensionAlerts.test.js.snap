@@ -37,12 +37,11 @@ Array [
       </div>
       <div>
         To make a payment and reactivate your account, 
-        <UnstyledLink
-          component={[Function]}
+        <PageLink
           to="/account/billing"
         >
           visit the billing page
-        </UnstyledLink>
+        </PageLink>
         .
       </div>
     </UNDEFINED>,

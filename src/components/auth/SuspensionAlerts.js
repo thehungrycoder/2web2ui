@@ -1,10 +1,9 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import { showAlert } from 'src/actions/globalAlert';
 import { openSupportPanel, hydrateTicketForm } from 'src/actions/support';
-import { isSuspendedForBilling } from 'src/helpers/conditions/account';
-import { Link } from 'react-router-dom';
+import { PageLink } from 'src/components';
+import { hasStatus, isSuspendedForBilling } from 'src/helpers/conditions/account';
 import { UnstyledLink } from '@sparkpost/matchbox';
 
 /**
@@ -24,7 +23,7 @@ export class SuspensionAlerts extends Component {
       ? (
         <Fragment>
           <div>Your account is currently suspended due to a billing problem.</div>
-          <div>To make a payment and reactivate your account, <UnstyledLink component={Link} to='/account/billing'>visit the billing page</UnstyledLink>.</div>
+          <div>To make a payment and reactivate your account, <PageLink to='/account/billing'>visit the billing page</PageLink>.</div>
         </Fragment>
       ) : (
         <Fragment>
@@ -35,9 +34,9 @@ export class SuspensionAlerts extends Component {
   }
 
   componentDidUpdate (prevProps) {
-    const { status, showAlert } = this.props;
+    const { isSuspended, showAlert } = this.props;
 
-    if (prevProps.status !== 'suspended' && status === 'suspended') {
+    if (!prevProps.isSuspended && isSuspended) {
       showAlert({
         type: 'warning',
         message: this.getMessage(),
@@ -54,8 +53,8 @@ export class SuspensionAlerts extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  status: state.account.status,
+  isSuspended: hasStatus('suspended')(state),
   isSuspendedForBilling: isSuspendedForBilling(state)
 });
 const mapDispatchToProps = { showAlert, openSupportPanel, hydrateTicketForm };
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SuspensionAlerts));
+export default connect(mapStateToProps, mapDispatchToProps)(SuspensionAlerts);
