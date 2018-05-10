@@ -1,17 +1,22 @@
 import markdownNotifications from 'src/components/notifications/staticMarkdownNotifications';
 import { updateUserUIOptions } from 'src/actions/currentUser';
+import _ from 'lodash';
+
+function getId() {
+  return _.uniqueId('notification-');
+}
 
 export function loadNotifications() {
   return {
     type: 'LOAD_NOTIFICATIONS_SUCCESS',
-    payload: markdownNotifications
+    payload: markdownNotifications.map((n) => ({ ...n, id: getId() }))
   };
 }
 
 export function addNotification(notification) {
   return {
     type: 'ADD_NOTIFICATION',
-    payload: notification
+    payload: { ...notification, id: getId() }
   };
 }
 

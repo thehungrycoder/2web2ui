@@ -22,12 +22,12 @@ const NotificationItem = ({ children, icon: Icon, unread }) => (
 
 export class NotificationCenter extends Component {
 
-  componentDidMount () {
+  componentDidMount() {
     this.props.loadNotifications();
   }
 
-  renderNotification = ({ component: Component, meta, key }) => (
-    <NotificationItem key={key} icon={iconTypeMap[meta.type]} unread={meta.unread}>
+  renderNotification = ({ component: Component, meta, id }) => (
+    <NotificationItem key={id} icon={iconTypeMap[meta.type]} unread={meta.unread}>
       {meta.title ? <h2>{meta.title}</h2> : null}
       <Component />
     </NotificationItem>
@@ -37,13 +37,10 @@ export class NotificationCenter extends Component {
     if (!this.props.notifications || this.props.notifications.length === 0) {
       return <p>No notifications at this time.</p>;
     }
-    return this.props.notifications.map((notification, index) => {
-      notification.key = `${(notification.meta.title || 'untitled')}-${index}`;
-      return this.renderNotification(notification);
-    });
+    return this.props.notifications.map(this.renderNotification);
   }
 
-  render () {
+  render() {
     const icon = (this.props.unreadCount > 0)
       ? <UnreadNotifications className={styles.UnreadNotificationSignal} />
       : <Notifications className={styles.NotificationSignal} />;

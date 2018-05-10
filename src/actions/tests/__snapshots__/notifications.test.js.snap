@@ -5,6 +5,7 @@ Array [
   Object {
     "payload": Object {
       "component": "test component",
+      "id": "notification-3",
       "meta": Object {},
     },
     "type": "ADD_NOTIFICATION",
@@ -15,7 +16,23 @@ Array [
 exports[`Action: Notifications loadNotifications 1`] = `
 Array [
   Object {
-    "payload": Array [],
+    "payload": Array [
+      Object {
+        "component": [Function],
+        "id": "notification-1",
+        "meta": Object {
+          "title": "Some notification",
+          "type": "info",
+        },
+      },
+      Object {
+        "component": [Function],
+        "id": "notification-2",
+        "meta": Object {
+          "type": "notice",
+        },
+      },
+    ],
     "type": "LOAD_NOTIFICATIONS_SUCCESS",
   },
 ]
