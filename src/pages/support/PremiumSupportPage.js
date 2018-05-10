@@ -8,7 +8,7 @@ import { Page, Panel, Button } from '@sparkpost/matchbox';
 import PremiumSupportFields from './components/PremiumSupportFields';
 import { generateMessage } from './helpers/formHelpers';
 
-class PremiumSupportPage extends Component {
+export class PremiumSupportPage extends Component {
   handleTicketCreate = (values) => this.props.createTicket({
     message: generateMessage(values),
     issueType: 'Vetting',

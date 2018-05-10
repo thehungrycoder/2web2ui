@@ -43,9 +43,6 @@ export function openSupportPanel (options) {
  *
  */
 export function createTicket ({ issueType, ...data }) {
-  // Desk does not differentiate between dev and production environments
-  const devSuffix = process.env.NODE_ENV !== 'production' ? ' - TEST' : '';
-
   return sparkpostApiRequest({
     type: 'CREATE_TICKET',
     meta: {
@@ -53,7 +50,6 @@ export function createTicket ({ issueType, ...data }) {
       url: '/integrations/support/ticket',
       data: {
         ...data,
-        subject: `${data.subject}${devSuffix}`,
         issue_type: issueType
       }
     }

@@ -1,0 +1,91 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PremiumSupportFields default state 1`] = `
+<React.Fragment>
+  <Field
+    component={[Function]}
+    label="Please list any existing and previous non SparkPost sending domains."
+    name="previous_sending_domains"
+    validate={[Function]}
+  />
+  <Field
+    component={[Function]}
+    label="Please list any existing and previous non SparkPost sending IPs."
+    name="previous_ips"
+  />
+  <Field
+    component={[Function]}
+    label="What are your acquisition practices?"
+    name="acquisition_practices"
+  />
+  <Field
+    component={[Function]}
+    label="What are your hygiene practices?"
+    name="hygiene"
+  />
+  <Field
+    component={[Function]}
+    label="What are your traffic types? (marketing, newletters, e-commerce, transactional)"
+    name="traffic_types"
+    validate={[Function]}
+  />
+  <Field
+    component={[Function]}
+    name="only_dedicated"
+    options={
+      Array [
+        Object {
+          "label": "Yes",
+          "value": "Yes",
+        },
+        Object {
+          "label": "No",
+          "value": "No",
+        },
+      ]
+    }
+    title="Are you willing to only use dedicated IPs and no longer use the shared pools?"
+  />
+  <Field
+    component={[Function]}
+    label="Please provide the location of your privacy policy?"
+    name="privacy_policy"
+    validate={[Function]}
+  />
+  <Field
+    component={[Function]}
+    label="Please provide the location of your website?"
+    name="website"
+    validate={[Function]}
+  />
+  <Field
+    component={[Function]}
+    label="If small service provider, please provide the location of your sending policy"
+    name="sending_policy"
+  />
+  <Field
+    component={[Function]}
+    name="terminated_from_esp"
+    options={
+      Array [
+        Object {
+          "label": "Yes",
+          "value": "Yes",
+        },
+        Object {
+          "label": "No",
+          "value": "No",
+        },
+      ]
+    }
+    title="Have you been terminated as a customer from an ESP before?"
+    validate={[Function]}
+  />
+  <Field
+    component={[Function]}
+    label="What are the current issues you would like to resolve or improve?"
+    multiline={true}
+    name="current_issues"
+  />
+</React.Fragment>
+`;

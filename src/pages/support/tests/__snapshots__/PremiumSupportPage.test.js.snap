@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PremiumSupportPage default state 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "component": [Function],
+      "content": "Back to billing",
+      "to": "/account/billing",
+    }
+  }
+  empty={Object {}}
+>
+  <Panel
+    accent={true}
+    sectioned={true}
+    title="Request Premium Support"
+  >
+    <form
+      onSubmit={[Function]}
+    >
+      <PremiumSupportFields />
+      <Button
+        color="orange"
+        disabled={false}
+        size="default"
+        submit={true}
+      >
+        Submit Request
+      </Button>
+    </form>
+  </Panel>
+</Page>
+`;
+
+exports[`PremiumSupportPage handles submit success 1`] = `
+Array [
+  Object {
+    "autoDimiss": false,
+    "message": "Request Submitted - Ticket # 123",
+    "type": "success",
+  },
+]
+`;
+
+exports[`PremiumSupportPage renders submitting state correctly 1`] = `
+<Button
+  color="orange"
+  disabled={true}
+  size="default"
+  submit={true}
+>
+  Submitting...
+</Button>
+`;
+
+exports[`PremiumSupportPage submits form correctly 1`] = `
+Array [
+  Object {
+    "issueType": "Vetting",
+    "message": undefined,
+    "subject": "AWS Premium Vetting",
+  },
+]
+`;
