@@ -42,5 +42,20 @@ exports[`ProfilePage renders correctly 1`] = `
       />
     </Panel>
   </Connect(AccessControl)>
+  <Panel
+    sectioned={true}
+    title="Cancel Account"
+  >
+    <p>
+      Cancelling your account is permanent and cannot be undone.
+    </p>
+    <Button
+      destructive={true}
+      onClick={[Function]}
+      size="default"
+    >
+      Cancel Account
+    </Button>
+  </Panel>
 </Page>
 `;

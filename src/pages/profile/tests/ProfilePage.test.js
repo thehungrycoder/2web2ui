@@ -23,6 +23,7 @@ beforeEach(() => {
     updateUser: jest.fn(() => Promise.resolve()),
     getCurrentUser: jest.fn(() => Promise.resolve()),
     confirmPassword: jest.fn(() => Promise.resolve()),
+    openSupportTicket: jest.fn(),
     showAlert: jest.fn()
   };
 
@@ -45,14 +46,14 @@ describe('ProfilePage', () => {
   });
 
   describe('updateProfile', () => {
-    it('should update profile correctly', async() => {
+    it('should update profile correctly', async () => {
       await instance.updateProfile({ firstName: 'John', lastName: 'Doe' });
       expect(props.updateUser).toHaveBeenCalledWith('Lord Stark', { first_name: 'John', last_name: 'Doe' });
       expect(props.getCurrentUser).toHaveBeenCalledTimes(1);
       expect(props.showAlert).toHaveBeenCalledTimes(0);
     });
 
-    it('should ignore refetch error, but report error silently', async() => {
+    it('should ignore refetch error, but report error silently', async () => {
       const getCurrentUserError = new Error('wow');
       props.getCurrentUser.mockReturnValue(Promise.reject(getCurrentUserError));
       await instance.updateProfile({ firstName: 'Ryan', lastName: 'Seacrest' });
@@ -65,11 +66,18 @@ describe('ProfilePage', () => {
   });
 
   describe('updatePassword', () => {
-    it('updates password correctly', async() => {
+    it('updates password correctly', async () => {
       await instance.updatePassword({ currentPassword: '111', newPassword: '222' });
       expect(props.confirmPassword).toHaveBeenCalledWith('Lord Stark', '111');
       expect(props.updateUser).toHaveBeenCalledWith('Lord Stark', { password: '222' });
       expect(props.showAlert).toHaveBeenCalledTimes(0);
+    });
+  });
+
+  describe('requestCancellation', () => {
+    it('should open support panel and preselect account cancellation', () => {
+      instance.requestCancellation();
+      expect(props.openSupportTicket).toHaveBeenCalledWith({ issueId: 'account_cancellation' });
     });
   });
 });

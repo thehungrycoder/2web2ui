@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { Page, Panel } from '@sparkpost/matchbox';
+import { Button, Page, Panel } from '@sparkpost/matchbox';
 
 import { updateUser } from 'src/actions/users';
 import { get as getCurrentUser } from 'src/actions/currentUser';
 import { confirmPassword } from 'src/actions/auth';
 import { showAlert } from 'src/actions/globalAlert';
+import { openSupportTicket } from 'src/actions/support';
 
 import NameForm from './components/NameForm';
 import PasswordForm from './components/PasswordForm';
@@ -18,6 +19,10 @@ import { all, not } from 'src/helpers/conditions';
 import { isHeroku, isAzure } from 'src/helpers/conditions/user';
 
 export class ProfilePage extends Component {
+  requestCancellation = () => {
+    this.props.openSupportTicket({ issueId: 'account_cancellation' });
+  }
+
   updateProfile = (values) => {
     const { username } = this.props.currentUser;
     const data = { first_name: values.firstName, last_name: values.lastName };
@@ -39,7 +44,7 @@ export class ProfilePage extends Component {
       .then(() => this.props.updateUser(username, { password: newPassword }));
   }
 
-  render() {
+  render () {
     const {
       username,
       email,
@@ -65,6 +70,11 @@ export class ProfilePage extends Component {
             <PasswordForm onSubmit={this.updatePassword} />
           </Panel>
         </AccessControl>
+
+        <Panel sectioned title="Cancel Account">
+          <p>Cancelling your account is permanent and cannot be undone.</p>
+          <Button destructive onClick={this.requestCancellation}>Cancel Account</Button>
+        </Panel>
       </Page>
     );
   }
@@ -75,4 +85,12 @@ const mapStateToProps = ({ account, currentUser }) => ({
   currentUser
 });
 
-export default connect(mapStateToProps, { updateUser, confirmPassword, showAlert, getCurrentUser })(ProfilePage);
+const mapDispatchToProps = {
+  confirmPassword,
+  getCurrentUser,
+  openSupportTicket,
+  showAlert,
+  updateUser
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProfilePage);
