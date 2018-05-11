@@ -91,7 +91,12 @@ describe('.report', () => {
   it('sends error when setup', () => {
     isSetup.mockReturnValue(true);
     ErrorTracker.report('test-logger', error);
-    expect(captureException).toHaveBeenCalledWith(error, { logger: 'test-logger' });
+    expect(captureException).toHaveBeenCalledWith(error, { logger: 'test-logger', extra: {}});
+  });
+
+  it('sends extra data', () => {
+    ErrorTracker.report('test-logger', error, { foo: 'bar' });
+    expect(captureException).toHaveBeenCalledWith(error, { logger: 'test-logger', extra: { foo: 'bar' }});
   });
 });
 
