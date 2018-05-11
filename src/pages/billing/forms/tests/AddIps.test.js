@@ -3,8 +3,11 @@ import { AddIps } from '../AddIps';
 import { shallow } from 'enzyme';
 import { SubmissionError } from 'redux-form';
 import { isAws } from 'src/helpers/conditions/account';
+import * as conversions from 'src/helpers/conversionTracking';
+import * as constants from 'src/constants';
 
 jest.mock('src/helpers/conditions/account');
+jest.mock('src/helpers/conversionTracking');
 
 describe('AddIps', () => {
   let wrapper;
@@ -80,6 +83,11 @@ describe('AddIps', () => {
       await expect(instance.onSubmit({ ipPool: 'pool name', quantity: 1 })).rejects.toThrowError(SubmissionError);
       expect(additionalProps.showAlert).toHaveBeenCalledTimes(0);
       expect(additionalProps.onClose).toHaveBeenCalledTimes(0);
+    });
+
+    it('tracks the add purchase', async() => {
+      await instance.onSubmit({ ipPool: 'pool name', quantity: 1 });
+      expect(conversions.trackAddonPurchase).toHaveBeenCalledWith(constants.ANALYTICS_ADDON_IP);
     });
   });
 

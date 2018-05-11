@@ -11,15 +11,17 @@ import config from 'src/config';
 import IpPoolSelect from './fields/IpPoolSelect';
 import ErrorTracker from 'src/helpers/errorTracker';
 import { required, integer, minNumber, maxNumber } from 'src/helpers/validation';
+import * as conversions from 'src/helpers/conversionTracking';
 import { currentPlanSelector } from 'src/selectors/accountBillingInfo';
 import DedicatedIpCost from '../components/DedicatedIpCost';
 import { isAws } from 'src/helpers/conditions/account';
+import { ANALYTICS_ADDON_IP } from 'src/constants';
 import styles from './Forms.module.scss';
 
 const FORM_NAME = 'add-sending-ips';
 
 export class AddIps extends Component {
-  getOrCreateIpPool = async({ action, id, name }) => {
+  getOrCreateIpPool = async ({ action, id, name }) => {
     let response;
 
     // Exit early with provided IP pool ID
@@ -41,7 +43,7 @@ export class AddIps extends Component {
     return response.id;
   }
 
-  onSubmit = async({ ipPool, quantity }) => {
+  onSubmit = async ({ ipPool, quantity }) => {
     const ip_pool = await this.getOrCreateIpPool(ipPool);
     const { account } = this.props;
     const isAwsAccount = isAws({ account });
@@ -57,6 +59,8 @@ export class AddIps extends Component {
       });
     }
 
+    conversions.trackAddonPurchase(ANALYTICS_ADDON_IP);
+
     this.props.showAlert({
       message: `Successfully added ${quantity} dedicated IPs!`,
       type: 'success'
@@ -65,7 +69,7 @@ export class AddIps extends Component {
     this.props.onClose();
   }
 
-  renderFreeIpNotice() {
+  renderFreeIpNotice () {
     if (this.props.currentPlan.isAwsAccount) {
       return <strong>Your plan includes one free dedicated IP address.</strong>;
     }
@@ -73,7 +77,7 @@ export class AddIps extends Component {
     return <span><strong>Your plan includes one free dedicated IP address.</strong> If claimed, your account statement will show a charge with a matching refund.</span>;
   }
 
-  render() {
+  render () {
     const { currentPlan, error, handleSubmit, onClose, submitting } = this.props;
     const { maxPerAccount } = config.sendingIps;
     const remainingCount = maxPerAccount - Math.min(this.props.sendingIps.length, maxPerAccount);
@@ -88,7 +92,7 @@ export class AddIps extends Component {
         <Panel title='Add Dedicated IPs' actions={[action]}>
           <Panel.Section>
             <p>
-              Dedicated IPs give you better control over your sending reputation. { currentPlan.includesIp && this.renderFreeIpNotice() }
+              Dedicated IPs give you better control over your sending reputation. {currentPlan.includesIp && this.renderFreeIpNotice()}
             </p>
 
             <Field
@@ -100,7 +104,7 @@ export class AddIps extends Component {
               required={true}
               type='number'
               validate={[required, integer, minNumber(1), maxNumber(remainingCount)]}
-              inlineErrors={true}
+              errorInLabel
               autoFocus={true}
               helpText={(remainingCount === 0) ? <span>You cannot currently add any more IPs</span> : <span>You can add up to {maxPerAccount} total dedicated IPs to your plan for <DedicatedIpCost plan={currentPlan} quantity='1' /> each.</span>}
             />
@@ -109,7 +113,7 @@ export class AddIps extends Component {
           <Panel.Section>
             <Button type='submit' primary disabled={isDisabled}>Add Dedicated IPs</Button>
             <Button onClick={onClose} className={styles.Cancel}>Cancel</Button>
-            { error && <div className={styles.ErrorWrapper}><Error error={error} /></div> }
+            {error && <div className={styles.ErrorWrapper}><Error error={error} /></div>}
           </Panel.Section>
         </Panel>
       </form>

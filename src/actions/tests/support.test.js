@@ -41,16 +41,17 @@ describe('Action Creator: Support', () => {
       expect(formActions.change).toHaveBeenCalledTimes(1);
     });
 
-    it('should hydrate subject', () => {
-      support.hydrateTicketForm({ subject: 'test' })(dispatchMock);
-      expect(formActions.change).toHaveBeenCalledWith('supportForm', 'subject', 'test');
+    it('should hydrate issueId', () => {
+      support.hydrateTicketForm({ issueId: 'technical_errors' })(dispatchMock);
+      expect(formActions.change).toHaveBeenCalledWith('supportForm', 'issueId', 'technical_errors');
       expect(formActions.change).toHaveBeenCalledTimes(1);
     });
   });
 
   describe('createTicket', () => {
     it('should create a ticket', () => {
-      expect(support.createTicket({ subject: 'sub', message: 'mess' })).toMatchSnapshot();
+      const ticket = { issueType: 'billing', subject: 'sub', message: 'mess' };
+      expect(support.createTicket(ticket)).toMatchSnapshot();
     });
   });
 });

@@ -1,17 +1,34 @@
-import React, { Component } from 'react';
+import _ from 'lodash';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { Field, reduxForm } from 'redux-form';
+import { Field, formValueSelector, reduxForm } from 'redux-form';
 import { Button, Panel } from '@sparkpost/matchbox';
-import { TextFieldWrapper } from 'src/components';
-import { required, minLength, maxFileSize } from 'src/helpers/validation';
-import config from 'src/config';
-import styles from './SupportForm.module.scss';
-import FileFieldWrapper from 'src/components/reduxFormWrappers/FileFieldWrapper';
 
-const formName = 'supportForm';
+import * as supportActions from 'src/actions/support';
+import { PageLink, SelectWrapper, TextFieldWrapper } from 'src/components';
+import FileFieldWrapper from 'src/components/reduxFormWrappers/FileFieldWrapper';
+import config from 'src/config';
+import { hasOnlineSupport } from 'src/helpers/conditions/account';
+import { getBase64Contents } from 'src/helpers/file';
+import { required, maxFileSize } from 'src/helpers/validation';
+import { selectSupportIssue, selectSupportIssues } from 'src/selectors/support';
+
+import styles from './SupportForm.module.scss';
 
 export class SupportForm extends Component {
-  renderSuccess() {
+  onSubmit = async ({ attachment, issueId, message }) => {
+    const issue = _.find(this.props.issues, { id: issueId });
+    let ticket = { issueType: issue.type, message, subject: issue.label };
+
+    if (attachment) {
+      const encoded = await getBase64Contents(attachment);
+      ticket = { ...ticket, attachment: { filename: attachment.name, content: encoded }};
+    }
+
+    return this.props.createTicket(ticket);
+  };
+
+  renderSuccess () {
     const { ticketId, onContinue } = this.props;
 
     return <div className={styles.SupportForm}>
@@ -24,47 +41,56 @@ export class SupportForm extends Component {
     </div>;
   }
 
-  reset(parentReset) {
+  reset (parentReset) {
     this.props.reset(formName);
     return parentReset();
   }
 
-  renderForm() {
+  renderForm () {
     const {
-      pristine,
-      invalid,
-      submitting,
       handleSubmit,
-      onSubmit,
-      onCancel
+      invalid,
+      issues,
+      needsOnlineSupport,
+      onCancel,
+      pristine,
+      selectedIssue,
+      submitting,
+      toggleSupportPanel
     } = this.props;
 
     return <div className={styles.SupportForm}>
       <Panel.Section>
         <h6>Submit A Support Ticket</h6>
       </Panel.Section>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(this.onSubmit)}>
         <Panel.Section>
           <Field
-            name='subject'
-            label='Subject'
-            placeholder='Give your issue a title'
-            inlineErrors={true}
-            autoFocus={true}
+            name='issueId'
+            label='I need help with...'
+            placeholder='Select an option'
+            helpText={needsOnlineSupport && (
+              <Fragment>
+                Additional technical support is available on paid
+                plans. <PageLink onClick={toggleSupportPanel} to="/account/billing/plan">Upgrade now</PageLink>.
+              </Fragment>
+            )}
+            errorInLabel
             disabled={submitting}
-            validate={[required, minLength(5)]}
-            component={TextFieldWrapper} />
-          <Field
-            multiline
-            rows={10}
-            resize='none'
-            name='message'
-            label='Message'
-            placeholder='Give us details about your issue'
-            inlineErrors={true}
-            disabled={submitting}
+            component={SelectWrapper}
+            options={issues.map(({ id, label }) => ({ label, value: id }))}
             validate={required}
+          />
+          <Field
+            name='message'
+            label={selectedIssue ? selectedIssue.messageLabel : 'Tell us more about your issue'}
+            errorInLabel
+            multiline
+            resize='none'
+            rows={10}
+            disabled={submitting}
             component={TextFieldWrapper}
+            validate={required}
           />
           <Field
             type='file'
@@ -77,7 +103,7 @@ export class SupportForm extends Component {
         </Panel.Section>
         <Panel.Section>
           <Button submit primary disabled={pristine || invalid || submitting}>
-            {submitting ? 'Saving' : 'Submit Ticket'}
+            {submitting ? 'Submitting' : 'Submit Ticket'}
           </Button>
           <Button className={styles.CancelBtn} disabled={submitting} onClick={() => this.reset(onCancel)}>Cancel</Button>
         </Panel.Section>
@@ -85,7 +111,7 @@ export class SupportForm extends Component {
     </div>;
   }
 
-  render() {
+  render () {
     if (this.props.submitSucceeded) {
       return this.renderSuccess();
     }
@@ -93,9 +119,14 @@ export class SupportForm extends Component {
   }
 }
 
-const mapStateToProps = ({ support }) => ({
-  ticketId: support.ticketId
+export const formName = 'supportForm';
+const selector = formValueSelector(formName);
+const mapStateToProps = (state) => ({
+  issues: selectSupportIssues(state),
+  needsOnlineSupport: !hasOnlineSupport(state),
+  selectedIssue: selectSupportIssue(state, selector(state, 'issueId')),
+  ticketId: state.support.ticketId
 });
 
 const ReduxSupportForm = reduxForm({ form: formName })(SupportForm);
-export default connect(mapStateToProps)(ReduxSupportForm);
+export default connect(mapStateToProps, supportActions)(ReduxSupportForm);

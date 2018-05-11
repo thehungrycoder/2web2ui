@@ -17,7 +17,8 @@ describe('SendMoreCTA Component', () => {
       currentLimit: 1000,
       verifyEmail: jest.fn(() => Promise.resolve()),
       showAlert: jest.fn(() => Promise.resolve()),
-      emailRequest: jest.fn(() => Promise.resolve())
+      openSupportPanel: jest.fn(),
+      hydrateTicketForm: jest.fn()
     };
 
     wrapper = shallow(<SendMoreCTA {...props} />);
@@ -40,35 +41,26 @@ describe('SendMoreCTA Component', () => {
 
   it('renders support form correctly', () => {
     wrapper.setProps({ allowSendingLimitRequest: true });
-    wrapper.setState({ showSupportForm: true });
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('togles support ticket form correctly', () => {
+    wrapper.setProps({ allowSendingLimitRequest: true });
+    wrapper.find('UnstyledLink').at(0).simulate('click');
+    expect(props.openSupportPanel).toHaveBeenCalledWith({ view: 'ticket' });
+    expect(props.hydrateTicketForm).toHaveBeenCalledWith({ issueId: 'daily_limits' });
+  });
+
   describe('resendVerification', () => {
-    it('re-sends verification email and shows alert', async() => {
+    it('renders verifying state', () => {
+      wrapper.setProps({ verifyingEmail: true, currentUser: { email_verified: false }});
+      expect(wrapper.find('span').text()).toEqual('Resending a verification email... ');
+    });
+
+    it('re-sends verification email and shows alert', async () => {
       await instance.resendVerification();
       expect(props.verifyEmail).toHaveBeenCalled();
       expect(props.showAlert).toHaveBeenCalled();
-    });
-  });
-
-  describe('handleFormSubmission', () => {
-    let data;
-    beforeEach(() => {
-      data = {
-        limit: 50000,
-        previousLimit: 1000,
-        template_id: 'daily-limit-increase',
-        campaign_id: 'support-daily-limit-increase',
-        reason: 'just because i want'
-      };
-    });
-
-    it('creates ticket with correct data', async() => {
-      wrapper.setState({ showSupportForm: true });
-      await instance.handleFormSubmission({ dailyLimit: data.limit, reason: data.reason });
-      expect(props.emailRequest).toHaveBeenCalledWith(data);
-      expect(wrapper.state().showSupportForm).toBe(false);
     });
   });
 });

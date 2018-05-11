@@ -10,7 +10,6 @@ exports[`Component: FilterDropdown renders correctly 1`] = `
       <TextField
         prefix={null}
         readOnly={true}
-        required={false}
         resize="both"
         suffix={<ArrowDropDown />}
         type="text"
@@ -80,7 +79,6 @@ exports[`Component: FilterDropdown renders selected correctly 1`] = `
       <TextField
         prefix="(1)"
         readOnly={true}
-        required={false}
         resize="both"
         suffix={<ArrowDropDown />}
         type="text"

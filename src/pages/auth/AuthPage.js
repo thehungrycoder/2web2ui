@@ -1,12 +1,11 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import qs from 'query-string';
 import { authenticate, ssoCheck, login } from 'src/actions/auth';
 import { verifyAndLogin } from 'src/actions/tfa';
-import { CenteredLogo } from 'src/components';
-import { Panel, Error, UnstyledLink } from '@sparkpost/matchbox';
+import { CenteredLogo, PageLink } from 'src/components';
+import { Panel, Error } from '@sparkpost/matchbox';
 import { SubmissionError } from 'redux-form';
 
 import config from 'src/config';
@@ -16,21 +15,21 @@ import TfaForm from './components/TfaForm';
 import { decodeBase64 } from 'src/helpers/string';
 
 export class AuthPage extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props);
     this.state = {
       ssoEnabled: config.sso.enabled
     };
   }
 
-  componentDidMount() {
+  componentDidMount () {
     if (this.props.auth.loggedIn) {
       this.redirect();
       return;
     }
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps (nextProps) {
     const { ssoUser, loggedIn, username } = nextProps.auth;
 
     if (loggedIn) {
@@ -49,7 +48,7 @@ export class AuthPage extends Component {
     }
   }
 
-  redirect(nextProps) {
+  redirect (nextProps) {
     // Passes location state through '/' or '/auth'
     // DefaultRedirect component handles protected routes
     const defaultRoute = { ...this.props.location, pathname: DEFAULT_REDIRECT_ROUTE };
@@ -57,11 +56,11 @@ export class AuthPage extends Component {
     this.props.history.push(route);
   }
 
-  ssoSignIn(username) {
+  ssoSignIn (username) {
     return this.props.ssoCheck(username);
   }
 
-  regularSignIn(username, password, rememberMe) {
+  regularSignIn (username, password, rememberMe) {
     return this.props.authenticate(username, password, rememberMe);
   }
 
@@ -82,7 +81,7 @@ export class AuthPage extends Component {
     });
   }
 
-  render() {
+  render () {
     const { auth, location, tfa } = this.props;
     const hasSignup = (config.featureFlags || {}).has_signup;
     const search = qs.parse(location.search);
@@ -90,8 +89,8 @@ export class AuthPage extends Component {
 
     const footerMarkup = !tfa.enabled
       ? <Panel.Footer
-        left={hasSignup && <small>Don't have an account? <UnstyledLink Component={Link} to='/join'>Sign up</UnstyledLink>.</small>}
-        right={<small><UnstyledLink Component={Link} to='/forgot-password'>Forgot your password?</UnstyledLink></small>} />
+        left={hasSignup && <small>Don't have an account? <PageLink to="/join">Sign up</PageLink>.</small>}
+        right={<small><PageLink to="/forgot-password">Forgot your password?</PageLink></small>} />
       : null;
 
     return (
@@ -100,8 +99,8 @@ export class AuthPage extends Component {
         <Panel sectioned accent title="Log In">
           {loginError && <Error error={loginError} />}
 
-          { tfa.enabled && <TfaForm onSubmit={this.tfaSubmit} /> }
-          { !tfa.enabled && <LoginForm onSubmit={this.loginSubmit} ssoEnabled={this.state.ssoEnabled}/> }
+          {tfa.enabled && <TfaForm onSubmit={this.tfaSubmit} />}
+          {!tfa.enabled && <LoginForm onSubmit={this.loginSubmit} ssoEnabled={this.state.ssoEnabled}/>}
         </Panel>
         {footerMarkup}
       </div>

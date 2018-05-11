@@ -23,12 +23,11 @@ exports[`Page: RegisterPage happy path render 1`] = `
   <Panel.Footer
     left={
       <small>
-        <UnstyledLink
-          Component={[Function]}
+        <PageLink
           to="/auth"
         >
           Already signed up?
-        </UnstyledLink>
+        </PageLink>
       </small>
     }
   />
@@ -49,12 +48,11 @@ exports[`Page: RegisterPage loading 1`] = `
   <Panel.Footer
     left={
       <small>
-        <UnstyledLink
-          Component={[Function]}
+        <PageLink
           to="/auth"
         >
           Already signed up?
-        </UnstyledLink>
+        </PageLink>
       </small>
     }
   />
@@ -84,12 +82,11 @@ exports[`Page: RegisterPage token expired 1`] = `
   <Panel.Footer
     left={
       <small>
-        <UnstyledLink
-          Component={[Function]}
+        <PageLink
           to="/auth"
         >
           Already signed up?
-        </UnstyledLink>
+        </PageLink>
       </small>
     }
   />

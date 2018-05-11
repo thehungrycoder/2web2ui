@@ -4,15 +4,18 @@ import { Link } from 'react-router-dom';
 import { list as listDomains } from 'src/actions/sendingDomains';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
 import { hasUnverifiedDomains } from 'src/selectors/sendingDomains';
-import { Loading, TableCollection, SubaccountTag, DomainStatusCell, StatusTooltipHeader, ApiErrorBanner } from 'src/components';
-import { Page, UnstyledLink } from '@sparkpost/matchbox';
+import {
+  Loading, TableCollection, SubaccountTag, DomainStatusCell, StatusTooltipHeader, ApiErrorBanner,
+  PageLink
+} from 'src/components';
+import { Page } from '@sparkpost/matchbox';
 import { Setup } from 'src/components/images';
 import UnverifiedWarningBanner from './components/UnverifiedWarningBanner';
 import VerifyToken from './components/VerifyToken';
 import { LINKS } from 'src/constants';
 
 export class ListPage extends Component {
-  componentDidMount() {
+  componentDidMount () {
     this.props.listDomains();
   }
 
@@ -36,7 +39,7 @@ export class ListPage extends Component {
     const { domain, shared_with_subaccounts, subaccount_id } = row;
 
     const rowData = [
-      <UnstyledLink Component={Link} to={`/account/sending-domains/edit/${domain}`}>{domain}</UnstyledLink>,
+      <PageLink to={`/account/sending-domains/edit/${domain}`}>{domain}</PageLink>,
       <DomainStatusCell domain={row} />
     ];
 
@@ -51,7 +54,7 @@ export class ListPage extends Component {
     return rowData;
   }
 
-  renderCollection() {
+  renderCollection () {
     return (
       <TableCollection
         columns={this.getColumns()}
@@ -69,7 +72,7 @@ export class ListPage extends Component {
     );
   }
 
-  renderError() {
+  renderError () {
     return (
       <ApiErrorBanner
         errorDetails={this.props.listError.message}
@@ -79,7 +82,7 @@ export class ListPage extends Component {
     );
   }
 
-  render() {
+  render () {
     const { listError, listLoading, domains, hasUnverifiedDomains } = this.props;
 
     if (listLoading) {

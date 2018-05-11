@@ -65,25 +65,25 @@ const NewIpPoolField = ({ disabled }) => (
     component={TextFieldWrapper}
     label='Name your new IP Pool'
     required={true}
-    inlineErrors={true}
+    errorInLabel
     validate={required}
     helpText={<WarmUpHelpText />}
   />
 );
 
 class IpPoolSelect extends Component {
-  componentDidMount() {
+  componentDidMount () {
     this.props.listPools();
   }
 
-  render() {
+  render () {
     const { action } = this.props;
 
     return (
       <div>
         <ActionSelect {...this.props} />
-        { action === EXISTING && <ExistingIpPoolField { ...this.props } /> }
-        { action === NEW && <NewIpPoolField { ...this.props } /> }
+        {action === EXISTING && <ExistingIpPoolField {...this.props} />}
+        {action === NEW && <NewIpPoolField {...this.props} />}
       </div>
     );
   }

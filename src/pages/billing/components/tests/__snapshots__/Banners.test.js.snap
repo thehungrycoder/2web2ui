@@ -1,5 +1,38 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Billing Banners:  Enterprise banner renders 1`] = `
+<Banner
+  action={
+    Object {
+      "content": "Contact Us",
+      "external": true,
+      "onClick": [Function],
+      "to": "https://www.sparkpost.com/contact-enterprise",
+    }
+  }
+  status="default"
+  title="Enterprise"
+>
+  <p>
+    Enterprise-grade financial guarantees with 99.9% uptime SLA and guaranteed burst rates.
+  </p>
+  <ul>
+    <li>
+      Includes all standard SparkPost and Premium features
+    </li>
+    <li>
+      Comprehensive uptime SLAs with service credits
+    </li>
+    <li>
+      The industry’s only burst-rate guarantee
+    </li>
+    <li>
+      Support for iOS Universal Links and Android App Links
+    </li>
+  </ul>
+</Banner>
+`;
+
 exports[`Billing Banners:  ManuallyBilledBanner should render with pending subscription 1`] = `
 <Banner
   action={null}
@@ -72,44 +105,13 @@ exports[`Billing Banners:  PendingPlanBanner should render with pending_subscrip
 </Banner>
 `;
 
-exports[`Billing Banners:  renders Enterprise banner 1`] = `
+exports[`Billing Banners:  Premium banner renders 1`] = `
 <Banner
   action={
     Object {
       "content": "Contact Us",
       "external": true,
-      "to": "https://www.sparkpost.com/contact-enterprise",
-    }
-  }
-  status="default"
-  title="Enterprise"
->
-  <p>
-    Enterprise-grade financial guarantees with 99.9% uptime SLA and guaranteed burst rates.
-  </p>
-  <ul>
-    <li>
-      Includes all standard SparkPost and Premium features
-    </li>
-    <li>
-      Comprehensive uptime SLAs with service credits
-    </li>
-    <li>
-      The industry’s only burst-rate guarantee
-    </li>
-    <li>
-      Support for iOS Universal Links and Android App Links
-    </li>
-  </ul>
-</Banner>
-`;
-
-exports[`Billing Banners:  renders Premium banner 1`] = `
-<Banner
-  action={
-    Object {
-      "content": "Contact Us",
-      "external": true,
+      "onClick": [Function],
       "to": "https://www.sparkpost.com/contact-premium",
     }
   }

@@ -1,12 +1,11 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { sendPasswordResetEmail } from 'src/actions/passwordReset';
 import { showAlert } from 'src/actions/globalAlert';
 import { required } from 'src/helpers/validation';
 import { reduxForm, Field } from 'redux-form';
-import { CenteredLogo, TextFieldWrapper } from 'src/components';
-import { Panel, Button, UnstyledLink } from '@sparkpost/matchbox';
+import { CenteredLogo, PageLink, TextFieldWrapper } from 'src/components';
+import { Panel, Button } from '@sparkpost/matchbox';
 
 const successAlert = {
   type: 'success',
@@ -19,7 +18,7 @@ const errorAlert = {
 };
 
 export class ForgotPasswordPage extends Component {
-  componentDidUpdate(prevProps) {
+  componentDidUpdate (prevProps) {
     const { emailSuccess, emailError, history, showAlert } = this.props;
 
     if (!prevProps.emailSuccess && emailSuccess) {
@@ -32,7 +31,7 @@ export class ForgotPasswordPage extends Component {
     }
   }
 
-  render() {
+  render () {
     const { handleSubmit, invalid, submitting, sendPasswordResetEmail } = this.props;
 
     const buttonText = submitting
@@ -55,7 +54,7 @@ export class ForgotPasswordPage extends Component {
           </form>
         </Panel>
         <Panel.Footer
-          left={<small>Remember your password? <UnstyledLink to='/auth' Component={Link}>Log in</UnstyledLink>.</small>}
+          left={<small>Remember your password? <PageLink to="/auth">Log in</PageLink>.</small>}
         />
       </Fragment>
     );

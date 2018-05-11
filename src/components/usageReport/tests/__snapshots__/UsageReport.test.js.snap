@@ -129,3 +129,27 @@ exports[`UsageReport Component should render with regular usage 1`] = `
   </Panel.Section>
 </Panel>
 `;
+
+exports[`UsageReport Component should render with regular usage 2`] = `
+<div>
+  <h5
+    className=""
+  >
+    1,000
+  </h5>
+  <h6>
+    Used
+  </h6>
+</div>
+`;
+
+exports[`UsageReport Component should render with regular usage 3`] = `
+<div>
+  <h5>
+    Today
+  </h5>
+  <h6>
+    Since 2017-08-30T00:00:00.000Z
+  </h6>
+</div>
+`;
