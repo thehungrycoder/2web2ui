@@ -4,10 +4,11 @@ import { withRouter } from 'react-router-dom';
 import authCookie from 'src/helpers/authCookie';
 import { login } from 'src/actions/auth';
 import { getGrantsFromCookie } from 'src/actions/currentUser';
+import { showSuspensionAlert } from 'src/actions/globalAlert';
 import { logout } from 'src/actions/auth';
 
 export class AuthenticationGate extends Component {
-  componentWillMount () {
+  componentWillMount() {
     const { auth } = this.props;
     if (auth.loggedIn && auth.token) {
       return;
@@ -20,8 +21,8 @@ export class AuthenticationGate extends Component {
     }
   }
 
-  componentDidUpdate (oldProps) {
-    const { account, auth, history, location = {}, logout } = this.props;
+  componentDidUpdate(oldProps) {
+    const { account, auth, history, location = {}, showSuspensionAlert, logout } = this.props;
     // if logging out
     if (location.pathname !== '/auth' && oldProps.auth.loggedIn && !auth.loggedIn) {
       history.push('/auth');
@@ -30,11 +31,15 @@ export class AuthenticationGate extends Component {
     if (oldProps.account.status !== 'terminated' && account.status === 'terminated') {
       logout();
     }
+
+    if (oldProps.account.status !== 'suspended' && account.status === 'suspended') {
+      showSuspensionAlert({ autoDismiss: false });
+    }
   }
 
-  render () {
+  render() {
     return null;
   }
 }
 
-export default withRouter(connect(({ auth, account }) => ({ auth, account }), { login, logout, getGrantsFromCookie })(AuthenticationGate));
+export default withRouter(connect(({ auth, account }) => ({ auth, account }), { login, logout, getGrantsFromCookie, showSuspensionAlert })(AuthenticationGate));

@@ -1,5 +1,8 @@
 import { createMockStore } from '../../__testHelpers__/mockStore';
 import * as Actions from '../globalAlert';
+import { isSuspendedForBilling } from 'src/helpers/conditions/account';
+
+jest.mock('src/helpers/conditions/account');
 
 describe('Actions: Global alerts', () => {
 
@@ -21,6 +24,21 @@ describe('Actions: Global alerts', () => {
     });
   });
 
+  describe('suspension alerts', () => {
+
+    it('should dispatch the default suspension alert', () => {
+      isSuspendedForBilling.mockImplementation(() => false);
+      store.dispatch(Actions.showSuspensionAlert());
+      expect(store.getActions()).toMatchSnapshot();
+    });
+
+    it('should dispatch a suspended for billing suspension alert', () => {
+      isSuspendedForBilling.mockImplementation(() => true);
+      store.dispatch(Actions.showSuspensionAlert());
+      expect(store.getActions()).toMatchSnapshot();
+    });
+  });
+
   describe('clear alert', () => {
     it('should dispatch the correct action', () => {
       const store = createMockStore();
@@ -28,4 +46,5 @@ describe('Actions: Global alerts', () => {
       expect(store.getActions()).toMatchSnapshot();
     });
   });
+
 });
