@@ -40,7 +40,7 @@ export class ChangePlan extends Component {
 
   handleCardToggle = () => {
     this.setState({ useSavedCC: !this.state.useSavedCC });
-  }
+  };
 
   onSubmit = (values) => {
     const { account, billing, updateSubscription, billingCreate, billingUpdate, showAlert, history } = this.props;
@@ -64,7 +64,7 @@ export class ChangePlan extends Component {
         conversions.trackPlanChange({ allPlans: billing.plans, oldCode, newCode });
         return showAlert({ type: 'success', message: 'Subscription Updated' });
       });
-  }
+  };
 
   renderCCSection = () => {
     const { account, selectedPlan } = this.props;
