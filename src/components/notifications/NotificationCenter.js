@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Popover } from '@sparkpost/matchbox';
-import { Notifications, InfoOutline, Warning } from '@sparkpost/matchbox-icons';
-import UnreadNotifications from 'src/icons/UnreadNotificationsIcon';
+import { Notifications, NotificationsUnread, InfoOutline, Warning } from '@sparkpost/matchbox-icons';
 import * as notificationActions from 'src/actions/notifications';
 import { selectTransformedNotifications, selectUnreadCount } from 'src/selectors/notifications';
 import styles from './NotificationCenter.module.scss';
@@ -42,7 +41,7 @@ export class NotificationCenter extends Component {
 
   render() {
     const icon = (this.props.unreadCount > 0)
-      ? <UnreadNotifications className={styles.UnreadNotificationSignal} />
+      ? <NotificationsUnread className={styles.UnreadNotificationSignal} />
       : <Notifications className={styles.NotificationSignal} />;
 
     return (
