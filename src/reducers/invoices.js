@@ -11,6 +11,7 @@ export default (state = initialState, { type, payload, meta }) => {
 
     case 'LIST_INVOICES_SUCCESS':
       return { ...state, list: payload, invoicesLoading: false };
+
     case 'LIST_INVOICES_FAIL':
       return { ...state, listError: payload, invoicesLoading: false };
 
@@ -22,7 +23,6 @@ export default (state = initialState, { type, payload, meta }) => {
 
     case 'GET_INVOICE_SUCCESS':
       return { ...state, invoiceLoading: false, invoice: meta.data };
-
 
     default:
       return state;

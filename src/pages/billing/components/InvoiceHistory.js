@@ -1,7 +1,6 @@
 import React, { Fragment, Component } from 'react';
 import { connect } from 'react-redux';
 import { Panel, Button } from '@sparkpost/matchbox';
-import { Loading } from 'src/components';
 import { TableCollection } from 'src/components';
 import { formatDate } from 'src/helpers/date';
 import { get as getInvoice, list as getInvoices } from 'src/actions/invoices';
@@ -26,32 +25,40 @@ export class InvoiceHistory extends Component {
     this.props.getInvoices();
   }
 
-  getRowData = ({ status, date, amount, invoice_number: invoiceNumber, id }) =>
-    //const { invoiceLoading } = this.props;
-    ([
+  getRowData = ({ status, date, amount, invoice_number: invoiceNumber, id }) => {
+    const { invoiceLoading } = this.props;
+    const thisInvoiceLoading = (id === this.state.invoiceId);
+    return ([
       formatDate(date),
       formatCurrency(amount),
       invoiceNumber,
       <div style={{ textAlign: 'right' }}>
-        <Button plain size='small' type='submit' onClick={() => this.getInvoice(id, invoiceNumber)}>Download</Button>
+        <Button plain size='small' type='submit' disabled={invoiceLoading}
+          onClick={() => this.getInvoice(id, invoiceNumber)}>
+          {thisInvoiceLoading ? 'Downloading...' : 'Download'}
+        </Button>
       </div>
-    ])
+    ]);
+  }
   ;
 
   getInvoice = (id, invoiceNumber) => {
-    this.setState({ id: invoiceNumber });
+    this.setState({ invoiceNumber, invoiceId: id });
     this.props.getInvoice(id);
-  }
+  };
 
   componentDidUpdate (prevProps) {
     const { invoice } = this.props;
-    const { id } = this.state;
+    const { invoiceNumber } = this.state;
+
+    //maybe set invoiceId back to null here
 
     if (!prevProps.invoice && invoice) {
+      this.setState({ invoiceId: null });
       const url = URL.createObjectURL(invoice);
       const link = document.createElement('a');
       link.href = url;
-      link.setAttribute('download', `sparkpost-invoice-${id}.pdf`);
+      link.setAttribute('download', `sparkpost-invoice-${invoiceNumber}.pdf`);
       link.click();
     }
 
@@ -59,8 +66,9 @@ export class InvoiceHistory extends Component {
 
   render () {
     const { invoices, invoicesLoading } = this.props;
-    if (invoicesLoading) {
-      return <Loading />;
+
+    if (invoicesLoading || (invoices.length < 1)) {
+      return null;
     }
 
     // Perhaps need a "amounts shown in USD" message somewhere?
