@@ -16,8 +16,12 @@ import { AccessControl } from 'src/components/auth';
 import { LabelledValue } from 'src/components';
 import ErrorTracker from 'src/helpers/errorTracker';
 import { all, not } from 'src/helpers/conditions';
+<<<<<<< HEAD
 import { isAdmin, isAzure, isHeroku } from 'src/helpers/conditions/user';
 import { isAdmin, isHeroku, isAzure, isSso } from 'src/helpers/conditions/user';
+=======
+import { isHeroku, isAzure, isSso } from 'src/helpers/conditions/user';
+>>>>>>> AC-78 wrapped up the refactor
 
 export class ProfilePage extends Component {
   requestCancellation = () => {
