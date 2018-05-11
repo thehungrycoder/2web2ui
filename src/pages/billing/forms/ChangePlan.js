@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { reduxForm, formValueSelector } from 'redux-form';
 import { withRouter } from 'react-router-dom';
 import qs from 'query-string';
+import _ from 'lodash';
 
 import { updateSubscription } from 'src/actions/billing';
 import billingCreate from 'src/actions/billingCreate';
@@ -22,6 +23,7 @@ import { isAws, isSelfServeBilling } from 'src/helpers/conditions/account';
 import { not } from 'src/helpers/conditions';
 import * as conversions from 'src/helpers/conversionTracking';
 import AccessControl from 'src/components/auth/AccessControl';
+import errorTracker from 'src/helpers/errorTracker';
 
 const FORMNAME = 'changePlan';
 
@@ -40,7 +42,7 @@ export class ChangePlan extends Component {
 
   handleCardToggle = () => {
     this.setState({ useSavedCC: !this.state.useSavedCC });
-  }
+  };
 
   onSubmit = (values) => {
     const { account, billing, updateSubscription, billingCreate, billingUpdate, showAlert, history } = this.props;
@@ -63,8 +65,13 @@ export class ChangePlan extends Component {
       .then(() => {
         conversions.trackPlanChange({ allPlans: billing.plans, oldCode, newCode });
         return showAlert({ type: 'success', message: 'Subscription Updated' });
+      })
+      .catch((err) => {
+        const filterValues = _.omit(values, ['card.number', 'card.securityCode', 'card.name']);
+        errorTracker.report('change-plan', err, filterValues);
+        throw err;
       });
-  }
+  };
 
   renderCCSection = () => {
     const { account, selectedPlan } = this.props;
