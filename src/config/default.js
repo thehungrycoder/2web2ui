@@ -98,9 +98,6 @@ const config = {
     port: 587,
     username: 'SMTP_Injection'
   },
-  sso: {
-    enabled: false
-  },
   bounceDomains: {
     allowDefault: true,
     allowSubaccountDefault: false,
