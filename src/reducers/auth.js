@@ -34,7 +34,7 @@ export default (state = initialState, action) => {
     }
 
     case 'SSO_CHECK_PENDING': {
-      return { ...state, errorDescription: null, loginPending: true };
+      return { ...state, errorDescription: null, loginPending: true, ssoUser: undefined };
     }
 
     case 'SSO_CHECK_SUCCESS': {
@@ -50,7 +50,7 @@ export default (state = initialState, action) => {
 
     case 'SSO_CHECK_FAIL': {
       const { message: errorDescription = 'An unknown error occurred' } = action.payload;
-      return { loginPending: false, errorDescription, ssoUser: false };
+      return { loginPending: false, errorDescription };
     }
 
     default: {

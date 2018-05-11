@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import { TextFieldWrapper, CheckboxWrapper } from 'src/components';
+import { TextFieldWrapper, CheckboxWrapper, PageLink } from 'src/components';
 import { required } from 'src/helpers/validation';
 
 import { Button } from '@sparkpost/matchbox';
@@ -32,6 +32,7 @@ export class LoginForm extends Component {
           label='Password'
           placeholder='••••••••'
           component={TextFieldWrapper}
+          helpText={<PageLink to='/forgot-password'>Forgot your password?</PageLink>}
         />
         }
 

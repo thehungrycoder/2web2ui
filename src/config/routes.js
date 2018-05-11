@@ -2,6 +2,7 @@
 import {
   apiKeys,
   AuthPage,
+  SsoAuthPage,
   SSOPage,
   billing,
   DashboardPage,
@@ -90,6 +91,12 @@ const routes = [
     public: true,
     component: AuthPage,
     title: 'Log In'
+  },
+  {
+    path: '/sso-auth',
+    public: true,
+    component: SsoAuthPage,
+    title: 'SSO Log In'
   },
   {
     path: '/sso',

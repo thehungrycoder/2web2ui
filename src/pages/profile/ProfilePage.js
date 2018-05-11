@@ -17,6 +17,7 @@ import { LabelledValue } from 'src/components';
 import ErrorTracker from 'src/helpers/errorTracker';
 import { all, not } from 'src/helpers/conditions';
 import { isAdmin, isAzure, isHeroku } from 'src/helpers/conditions/user';
+import { isAdmin, isHeroku, isAzure, isSso } from 'src/helpers/conditions/user';
 
 export class ProfilePage extends Component {
   requestCancellation = () => {
@@ -60,15 +61,19 @@ export class ProfilePage extends Component {
         </Panel>
 
         <AccessControl condition={all(not(isAzure), not(isHeroku))}>
-          <TfaManager />
+          <AccessControl condition={not(isSso)}>
+            <TfaManager />
+          </AccessControl>
 
           <Panel sectioned title='Edit Profile'>
             <NameForm onSubmit={this.updateProfile} />
           </Panel>
 
-          <Panel sectioned title='Update Password'>
-            <PasswordForm onSubmit={this.updatePassword} />
-          </Panel>
+          <AccessControl condition={not(isSso)}>
+            <Panel sectioned title='Update Password'>
+              <PasswordForm onSubmit={this.updatePassword} />
+            </Panel>
+          </AccessControl>
         </AccessControl>
 
         <AccessControl condition={isAdmin}>
