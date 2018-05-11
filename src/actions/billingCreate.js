@@ -1,10 +1,12 @@
+import _ from 'lodash';
 import { isAws } from 'src/helpers/conditions/account';
 import { formatCreateData, formatDataForCors } from 'src/helpers/billing';
 import { fetch as fetchAccount } from './account';
 import chainActions from 'src/actions/helpers/chainActions';
 import { cors, createZuoraAccount, syncSubscription, updateSubscription } from './billing';
+import errorTracker from 'src/helpers/errorTracker';
 
-export default function billingCreate(values) {
+export default function billingCreate (values) {
   return (dispatch, getState) => {
     // AWS plans don't get created through Zuora, instead update existing
     // subscription to the selected plan
@@ -13,6 +15,12 @@ export default function billingCreate(values) {
     }
 
     const { corsData, billingData } = formatDataForCors(values);
+
+    errorTracker.addBreadcrumb({
+      message: 'billing data',
+      category: 'payload',
+      data: _.omit(billingData, ['creditCard.cardNumber', 'creditCard.cardHolderInfo', 'creditCard.securityCode'])
+    });
 
     // action creator wrappers for chaining as callbacks
     const corsCreateBilling = ({ meta }) => cors({ meta, context: 'create-account', data: corsData });
