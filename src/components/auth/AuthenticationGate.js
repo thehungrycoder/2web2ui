@@ -5,6 +5,7 @@ import authCookie from 'src/helpers/authCookie';
 import { login } from 'src/actions/auth';
 import { getGrantsFromCookie } from 'src/actions/currentUser';
 import { logout } from 'src/actions/auth';
+import { AUTH_ROUTE, SSO_AUTH_ROUTE } from 'src/constants';
 
 export class AuthenticationGate extends Component {
   componentWillMount () {
@@ -23,8 +24,8 @@ export class AuthenticationGate extends Component {
   componentDidUpdate (oldProps) {
     const { account, auth, history, location = {}, logout } = this.props;
     // if logging out
-    if (location.pathname !== '/auth' && oldProps.auth.loggedIn && !auth.loggedIn) {
-      history.push('/auth');
+    if (![AUTH_ROUTE, SSO_AUTH_ROUTE].includes(location.pathname) && oldProps.auth.loggedIn && !auth.loggedIn) {
+      history.push(AUTH_ROUTE);
     }
 
     if (oldProps.account.status !== 'terminated' && account.status === 'terminated') {

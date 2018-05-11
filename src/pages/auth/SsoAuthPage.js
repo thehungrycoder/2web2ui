@@ -8,6 +8,7 @@ import { PageLink } from 'src/components';
 import config from 'src/config';
 import { decodeBase64 } from 'src/helpers/string';
 import LoginPanel from './components/LoginPanel';
+import { AUTH_ROUTE } from 'src/constants';
 
 export class SsoAuthPage extends Component {
   state = {
@@ -41,11 +42,15 @@ export class SsoAuthPage extends Component {
     return (
       <LoginPanel title={'Single Sign-On'} ssoEnabled={true} loginError={loginError} handleSubmit={this.loginSubmit}>
         <Panel.Footer
-          left={<small><PageLink to='/auth'>Not looking for single sign-on?</PageLink></small>}
+          left={<small><PageLink to={AUTH_ROUTE}>Not looking for single sign-on?</PageLink></small>}
         />
       </LoginPanel>
     );
   }
 }
 
-export default connect(null, { ssoCheck })(SsoAuthPage);
+const mapStateToProps = ({ auth }) => ({
+  auth
+});
+
+export default connect(mapStateToProps, { ssoCheck })(SsoAuthPage);

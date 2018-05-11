@@ -24,7 +24,11 @@ exports[`ProfilePage renders correctly 1`] = `
   <Connect(AccessControl)
     condition={[Function]}
   >
-    <Connect(TfaManager) />
+    <Connect(AccessControl)
+      condition={[Function]}
+    >
+      <Connect(TfaManager) />
+    </Connect(AccessControl)>
     <Panel
       sectioned={true}
       title="Edit Profile"

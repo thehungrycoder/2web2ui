@@ -7,6 +7,7 @@ import { reduxForm, Field } from 'redux-form';
 import { CenteredLogo, PageLink, TextFieldWrapper } from 'src/components';
 import { Panel, Button } from '@sparkpost/matchbox';
 import _ from 'lodash';
+import { AUTH_ROUTE } from 'src/constants';
 
 export class ResetPasswordPage extends Component {
   handleResetPassword = ({ newPassword: password }) => {
@@ -19,7 +20,7 @@ export class ResetPasswordPage extends Component {
 
     if (!prevProps.resetSuccess && resetSuccess) {
       showAlert({ type: 'success', message: 'Your password has been updated.' });
-      history.push('/auth');
+      history.push(AUTH_ROUTE);
     }
 
     if (!prevProps.resetError && resetError) {

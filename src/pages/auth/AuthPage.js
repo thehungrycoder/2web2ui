@@ -6,6 +6,7 @@ import { Panel } from '@sparkpost/matchbox';
 
 import config from 'src/config';
 import LoginPanel from './components/LoginPanel';
+import { SSO_AUTH_ROUTE } from 'src/constants';
 
 export class AuthPage extends Component {
   loginSubmit = ({ username, password, rememberMe }) => {
@@ -20,7 +21,7 @@ export class AuthPage extends Component {
       <LoginPanel title={'Log In'} ssoEnabled={false} loginError={auth.errorDescription} handleSubmit={this.loginSubmit}>
         <Panel.Footer
           left={hasSignup && <div><small>Don't have an account? <PageLink to="/join">Sign up</PageLink>.</small><br /></div>}
-          right={<small><PageLink to='/sso-auth'>Single Sign-On</PageLink></small>}
+          right={<small><PageLink to={SSO_AUTH_ROUTE}>Single Sign-On</PageLink></small>}
         />
       </LoginPanel>
     );

@@ -4,10 +4,11 @@ import { Redirect, Route } from 'react-router-dom';
 import { AccessControl } from 'src/components/auth';
 import ErrorBoundary from 'src/components/errorBoundaries/ErrorBoundary';
 import _ from 'lodash';
+import { AUTH_ROUTE } from 'src/constants';
 
 export class ProtectedRoute extends Component {
 
-  renderComponent(reactRouterProps) {
+  renderComponent (reactRouterProps) {
     const { component: Component, condition } = this.props;
 
     return (
@@ -22,10 +23,10 @@ export class ProtectedRoute extends Component {
 
     return auth.loggedIn
       ? this.renderComponent(reactRouterProps)
-      : <Redirect to={{ pathname: '/auth', state: { redirectAfterLogin: location }}} />;
+      : <Redirect to={{ pathname: AUTH_ROUTE, state: { redirectAfterLogin: location }}} />;
   }
 
-  render() {
+  render () {
     // can't pass component prop to Route below or it confuses RR
     const protectedRouteProps = _.omit(this.props, ['component', 'auth', 'condition']);
     return (<ErrorBoundary>

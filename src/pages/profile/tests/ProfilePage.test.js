@@ -18,7 +18,8 @@ beforeEach(() => {
       username: 'Lord Stark',
       email: 'ned.stark@winterfell.biz',
       customer: 12345,
-      access_level: 'admin'
+      access_level: 'admin',
+      is_sso: false
     },
     updateUser: jest.fn(() => Promise.resolve()),
     getCurrentUser: jest.fn(() => Promise.resolve()),
@@ -34,6 +35,14 @@ beforeEach(() => {
 describe('ProfilePage', () => {
   it('renders correctly', () => {
     expect(wrapper).toMatchSnapshot();
+  });
+
+  cases('handles the is_sso condition', ({ is_sso, result }) => {
+    const condition = wrapper.find(AccessControl).at(1).prop('condition');
+    expect(condition({ currentUser: { is_sso }, ready: true })).toEqual(result);
+  }, {
+    'is sso': { is_sso: true, result: false },
+    'not sso': { is_sso: false, result: true }
   });
 
   cases('handles the various account types', ({ access_level, result }) => {
