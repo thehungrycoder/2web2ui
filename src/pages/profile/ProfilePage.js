@@ -16,7 +16,7 @@ import { AccessControl } from 'src/components/auth';
 import { LabelledValue } from 'src/components';
 import ErrorTracker from 'src/helpers/errorTracker';
 import { all, not } from 'src/helpers/conditions';
-import { isHeroku, isAzure } from 'src/helpers/conditions/user';
+import { isAdmin, isAzure, isHeroku } from 'src/helpers/conditions/user';
 
 export class ProfilePage extends Component {
   requestCancellation = () => {
@@ -71,10 +71,12 @@ export class ProfilePage extends Component {
           </Panel>
         </AccessControl>
 
-        <Panel sectioned title="Cancel Account">
-          <p>Cancelling your account is permanent and cannot be undone.</p>
-          <Button destructive onClick={this.requestCancellation}>Cancel Account</Button>
-        </Panel>
+        <AccessControl condition={isAdmin}>
+          <Panel sectioned title="Cancel Account">
+            <p>Cancelling your account is permanent and cannot be undone.</p>
+            <Button destructive onClick={this.requestCancellation}>Cancel Account</Button>
+          </Panel>
+        </AccessControl>
       </Page>
     );
   }

@@ -18,7 +18,7 @@ beforeEach(() => {
       username: 'Lord Stark',
       email: 'ned.stark@winterfell.biz',
       customer: 12345,
-      access_level: 'user'
+      access_level: 'admin'
     },
     updateUser: jest.fn(() => Promise.resolve()),
     getCurrentUser: jest.fn(() => Promise.resolve()),
