@@ -1,40 +1,18 @@
 import { createMockStore } from 'src/__testHelpers__/mockStore';
 import * as webhooks from '../webhooks';
-import * as webhookHelpers from 'src/helpers/webhooks';
 
 jest.mock('../helpers/sparkpostApiRequest', () => jest.fn((a) => a));
-jest.mock('src/helpers/webhooks');
 
 describe('Action Creator: Webhooks', () => {
   let mockStore;
-  let dispatchMock;
 
   beforeEach(() => {
     mockStore = createMockStore({});
-    dispatchMock = jest.fn((a) => Promise.resolve(a));
-    webhookHelpers.mergeWebhooks = jest.fn();
   });
 
   it('should dispatch a list action', () => {
     mockStore.dispatch(webhooks.listWebhooks());
     expect(mockStore.getActions()).toMatchSnapshot();
-  });
-
-  it('should dispatch a list all webhooks action', async() => {
-    const thunk = webhooks.listAllWebhooks();
-    await thunk(dispatchMock);
-    expect(dispatchMock.mock.calls).toMatchSnapshot();
-    expect(webhookHelpers.mergeWebhooks).toHaveBeenCalled();
-  });
-
-  it('should catch dispatch a list all webhooks failure', async() => {
-    dispatchMock = jest.fn(() => Promise.resolve())
-      .mockImplementationOnce(() => Promise.resolve())
-      .mockImplementationOnce(() => Promise.reject('error'));
-    const thunk = webhooks.listAllWebhooks();
-    await thunk(dispatchMock);
-    expect(dispatchMock.mock.calls).toMatchSnapshot();
-    expect(webhookHelpers.mergeWebhooks).not.toHaveBeenCalled();
   });
 
   it('should dispatch a get action', () => {
