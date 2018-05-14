@@ -10,14 +10,15 @@ export function list () {
   });
 }
 
-export function get (id) {
+export function get (id, invoiceNumber) {
   return sparkpostApiRequest({
     type: 'GET_INVOICE',
     meta: {
       method: 'GET',
       url: `/account/invoices/${id}`,
       responseType: 'blob',
-      invoiceId: id
+      invoiceId: id,
+      invoiceNumber
     }
   });
 }
