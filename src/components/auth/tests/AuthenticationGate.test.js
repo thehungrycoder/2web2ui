@@ -28,8 +28,7 @@ describe('Component: AuthenticationGate', () => {
       history: {
         push: jest.fn()
       },
-      logout: jest.fn(),
-      showSuspensionAlert: jest.fn()
+      logout: jest.fn()
     };
 
     wrapper = shallow(<AuthenticationGate {...props} />);
@@ -85,16 +84,10 @@ describe('Component: AuthenticationGate', () => {
       expect(wrapper.instance().props.history.push).not.toHaveBeenCalled();
     });
 
-    it('should dispatch a logout action if account terminated', async() => {
+    it('should dispatch a logout action if account terminated', async () => {
       wrapper.setProps({ account: { status: 'terminated' }});
       wrapper.instance().componentDidUpdate({ account: { status: 'active' }, auth: {}});
       expect(wrapper.instance().props.logout).toHaveBeenCalled();
-    });
-
-    it('should show suspension alert if account suspended', async() => {
-      wrapper.setProps({ account: { status: 'suspended' }});
-      wrapper.instance().componentDidUpdate({ account: { status: 'active' }, auth: {}});
-      expect(wrapper.instance().props.showSuspensionAlert).toHaveBeenCalledWith({ autoDismiss: false });
     });
   });
 });
