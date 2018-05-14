@@ -49,7 +49,7 @@ exports[`Accepted ChartGroup:  should handle mouse in and out 2`] = `
 exports[`Accepted ChartGroup:  should handle mouse in and out 3`] = `
 <PieChart.ActiveLabel
   name="Accepted Rate"
-  value="50%"
+  value="62.5%"
 />
 `;
 
@@ -110,7 +110,7 @@ exports[`Accepted ChartGroup:  should render 1`] = `
         />
         <PieChart.ActiveLabel
           name="Accepted Rate"
-          value="50%"
+          value="62.5%"
         />
       </div>
     </Grid.Column>
@@ -126,8 +126,8 @@ exports[`Accepted ChartGroup:  should render 1`] = `
               "name": "Accepted",
             },
             Object {
-              "count": 100,
-              "name": "Targeted",
+              "count": 80,
+              "name": "Sent",
             },
           ]
         }
@@ -176,8 +176,8 @@ exports[`Accepted ChartGroup:  should render correctly after click 1`] = `
         "onClick": [Function],
       },
       Object {
-        "count": 100,
-        "name": "Targeted",
+        "count": 80,
+        "name": "Sent",
       },
       Object {
         "count": 1,

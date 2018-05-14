@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import { safeRate } from 'src/helpers/math';
@@ -23,7 +23,7 @@ const columns = [
 
 export class BouncePage extends Component {
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate (prevProps) {
     if (prevProps.reportOptions !== this.props.reportOptions) {
       this.props.refreshBounceReport(this.props.reportOptions);
     }
@@ -34,14 +34,14 @@ export class BouncePage extends Component {
     const { reason, domain, bounce_category_name, bounce_class_name } = item;
     return [
       <LongTextContainer text={reason} />,
-      <UnstyledLink onClick={() => addFilters([{ type: 'Recipient Domain', value: domain }])}>{ domain }</UnstyledLink>,
+      <UnstyledLink onClick={() => addFilters([{ type: 'Recipient Domain', value: domain }])}>{domain}</UnstyledLink>,
       bounce_category_name,
       bounce_class_name,
       <span>{item.count_bounce} <small>(<Percent value={(item.count_bounce / aggregates.countBounce) * 100} />)</small></span>
     ];
   };
 
-  renderChart() {
+  renderChart () {
     const { chartLoading, aggregates, categories, types } = this.props;
     if (!chartLoading && _.isEmpty(aggregates)) {
       return <Empty title='Bounce Rates' message='No bounces to report' />;
@@ -55,7 +55,7 @@ export class BouncePage extends Component {
     />;
   }
 
-  renderCollection() {
+  renderCollection () {
     const { tableLoading, reasons } = this.props;
 
     if (tableLoading) {
@@ -86,9 +86,14 @@ export class BouncePage extends Component {
     />;
   }
 
-  renderTopLevelMetrics() {
-    const { chartLoading, aggregates } = this.props;
-    const { countBounce, countTargeted } = aggregates;
+  renderTopLevelMetrics () {
+    const { chartLoading, aggregates, adminBounces } = this.props;
+    const { countBounce, countSent } = aggregates;
+
+    // TODO Add support doc link - <UnstyledLink to={LINKS.ADMIN_BOUNCE} external>Learn more</UnstyledLink>.
+    const adminBounceText = adminBounces
+      ? <Fragment>{adminBounces.toLocaleString()} messages were categorized as Admin Bounces.</Fragment>
+      : null;
 
     // Aggregates aren't ready until chart refreshes
     if (chartLoading) {
@@ -101,24 +106,25 @@ export class BouncePage extends Component {
 
     return (
       <MetricsSummary
-        rateValue={safeRate(countBounce, countTargeted)}
+        rateValue={safeRate(countBounce, countSent)}
         rateTitle='Bounce Rate'
+        secondaryMessage={adminBounceText}
       >
-        <strong>{countBounce.toLocaleString()}</strong> of your messages were bounced of <strong>{countTargeted.toLocaleString()}</strong> messages targeted
+        <strong>{countBounce.toLocaleString()}</strong> of <strong>{countSent.toLocaleString()}</strong> sent messages bounced
       </MetricsSummary>
     );
   }
 
-  render() {
+  render () {
     const { chartLoading, bounceSearchOptions } = this.props;
 
     return (
       <Page title='Bounce Report'>
         <ReportOptions reportLoading={chartLoading} searchOptions={bounceSearchOptions} />
-        { this.renderTopLevelMetrics() }
-        { this.renderChart() }
+        {this.renderTopLevelMetrics()}
+        {this.renderChart()}
         <hr/>
-        { this.renderCollection() }
+        {this.renderCollection()}
       </Page>
     );
   }

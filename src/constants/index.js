@@ -42,7 +42,8 @@ export const LINKS = {
   ONBOARDING_SENDING: 'https://www.sparkpost.com/docs/getting-started/getting-started-sparkpost/#preparing-your-from-address',
   SUBMIT_SUPPORT_TICKET: 'https://support.sparkpost.com/customer/portal/emails/new',
   RECAPTCHA_LIB_URL: 'https://www.google.com/recaptcha/api.js',
-  DAILY_MONTHLY_QUOTA_LIMIT_DOC: 'https://support.sparkpost.com/customer/portal/articles/2030894'
+  DAILY_MONTHLY_QUOTA_LIMIT_DOC: 'https://support.sparkpost.com/customer/portal/articles/2030894',
+  ADMIN_BOUNCE: 'https://support.sparkpost.com/' // TODO Add this to the bounce page
 };
 
 export const ENTERPRISE_PLAN_CODES = ['ent1'];

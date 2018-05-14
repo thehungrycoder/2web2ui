@@ -50,7 +50,7 @@ MetricsSummary.propTypes = {
   relativeRange: PropTypes.string,
   rateValue: PropTypes.number,
   rateTitle: PropTypes.string,
-  secondaryMessage: PropTypes.string
+  secondaryMessage: PropTypes.node
 };
 
 export default connect((state) => ({ ...state.reportOptions }))(MetricsSummary);
