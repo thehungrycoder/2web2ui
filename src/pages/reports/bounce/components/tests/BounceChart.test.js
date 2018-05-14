@@ -16,7 +16,7 @@ describe('Bounce Chart', () => {
       { name: 'out', count: 30 }
     ],
     aggregates: {
-      countTargeted: 100,
+      countSent: 100,
       countBounce: 50
     }
   };

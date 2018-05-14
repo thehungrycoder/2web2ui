@@ -33,7 +33,7 @@ describe('Action Creator: Refresh Engagement Report', () => {
     expect(metricsActions.fetch).toHaveBeenCalledWith({
       params: {
         ...queryMock,
-        metrics: 'count_accepted,count_targeted,count_unique_clicked_approx,count_unique_confirmed_opened_approx'
+        metrics: 'count_accepted,count_sent,count_unique_clicked_approx,count_unique_confirmed_opened_approx'
       },
       path: 'deliverability',
       type: 'GET_ENGAGEMENT_AGGREGATE_METRICS'

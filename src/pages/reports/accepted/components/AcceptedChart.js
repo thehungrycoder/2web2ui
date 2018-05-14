@@ -65,7 +65,7 @@ export default class AcceptedChart extends Component {
 
     return hoveredItem
       ? { name: hoveredItem.name, value: formatPercent(safeRate(hoveredItem.count, aggregates.count_accepted)) }
-      : { name: 'Accepted Rate', value: formatPercent(safeRate(aggregates.count_accepted, aggregates.count_targeted)) };
+      : { name: 'Accepted Rate', value: formatPercent(safeRate(aggregates.count_accepted, aggregates.count_sent)) };
   }
 
   getLegendHeaderData = () => {
@@ -76,7 +76,7 @@ export default class AcceptedChart extends Component {
     if (active) {
       return [
         { name: 'Accepted', breadcrumb: true, onClick: this.handleBreadcrumb, count: aggregates.count_accepted },
-        { name: 'Targeted', count: aggregates.count_targeted },
+        { name: 'Sent', count: aggregates.count_sent },
         { name: active.name, count: active.count }
       ];
     }
@@ -84,7 +84,7 @@ export default class AcceptedChart extends Component {
     // Default header
     return [
       { name: 'Accepted', count: aggregates.count_accepted },
-      { name: 'Targeted', count: aggregates.count_targeted }
+      { name: 'Sent', count: aggregates.count_sent }
     ];
   }
 

@@ -66,7 +66,7 @@ export default class BounceChart extends Component {
 
     return hoveredItem
       ? { name: hoveredItem.name, value: formatPercent(safeRate(hoveredItem.count, aggregates.countBounce)) }
-      : { name: 'Bounce Rate', value: formatPercent(safeRate(aggregates.countBounce, aggregates.countTargeted)) };
+      : { name: 'Bounce Rate', value: formatPercent(safeRate(aggregates.countBounce, aggregates.countSent)) };
   }
 
   getLegendHeaderData = () => {
@@ -77,7 +77,7 @@ export default class BounceChart extends Component {
     if (active) {
       return [
         { name: 'Bounces', breadcrumb: true, onClick: this.handleBreadcrumb, count: aggregates.countBounce },
-        { name: 'Targeted', count: aggregates.countTargeted },
+        { name: 'Sent', count: aggregates.countSent },
         { name: active.name, count: active.count }
       ];
     }
@@ -85,7 +85,7 @@ export default class BounceChart extends Component {
     // Default header
     return [
       { name: 'Bounces', count: aggregates.countBounce },
-      { name: 'Targeted', count: aggregates.countTargeted }
+      { name: 'Sent', count: aggregates.countSent }
     ];
   }
 

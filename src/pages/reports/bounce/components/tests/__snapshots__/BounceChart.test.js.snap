@@ -141,7 +141,7 @@ exports[`Bounce Chart should render 1`] = `
             },
             Object {
               "count": 100,
-              "name": "Targeted",
+              "name": "Sent",
             },
           ]
         }
@@ -205,7 +205,7 @@ exports[`Bounce Chart should render correctly after click 1`] = `
       },
       Object {
         "count": 100,
-        "name": "Targeted",
+        "name": "Sent",
       },
       Object {
         "count": 1,
