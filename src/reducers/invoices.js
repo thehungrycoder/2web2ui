@@ -1,7 +1,8 @@
 const initialState = {
   list: [],
   invoiceLoading: false,
-  invoicesLoading: false
+  invoicesLoading: false,
+  invoiceId: null
 };
 
 export default (state = initialState, { type, payload, meta }) => {
@@ -19,7 +20,7 @@ export default (state = initialState, { type, payload, meta }) => {
       return { ...state, invoiceLoading: true, getError: null, invoice: null };
 
     case 'GET_INVOICE_FAIL':
-      return { ...state, invoiceLoading: false, getError: payload };
+      return { ...state, invoiceLoading: false, getError: payload, invoice: null };
 
     case 'GET_INVOICE_SUCCESS':
       return { ...state, invoiceLoading: false, invoice: meta.data };

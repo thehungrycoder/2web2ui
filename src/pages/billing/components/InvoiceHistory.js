@@ -4,7 +4,10 @@ import { Panel, Button } from '@sparkpost/matchbox';
 import { TableCollection } from 'src/components';
 import { formatDate } from 'src/helpers/date';
 import { get as getInvoice, list as getInvoices } from 'src/actions/invoices';
+import { showAlert } from 'src/actions/globalAlert';
 
+
+//use showalert for errors
 
 const columns = [
   'Date',
@@ -18,7 +21,7 @@ const formatCurrency = (v) => `$${v.toLocaleString(undefined, { minimumFractionD
 
 export class InvoiceHistory extends Component {
   state = {
-    id: null
+    invoiceNumber: null
   };
 
   componentDidMount () {
@@ -26,8 +29,10 @@ export class InvoiceHistory extends Component {
   }
 
   getRowData = ({ status, date, amount, invoice_number: invoiceNumber, id }) => {
+    // const { invoiceLoading, invoiceId } = this.props;
     const { invoiceLoading } = this.props;
-    const thisInvoiceLoading = (id === this.state.invoiceId);
+    const { invoiceId } = this.state;
+    const thisInvoiceLoading = (id === invoiceId);
     return ([
       formatDate(date),
       formatCurrency(amount),
@@ -48,13 +53,23 @@ export class InvoiceHistory extends Component {
   };
 
   componentDidUpdate (prevProps) {
-    const { invoice } = this.props;
+    const { invoice, listError, getError, showAlert, invoiceLoading } = this.props;
     const { invoiceNumber } = this.state;
 
-    //maybe set invoiceId back to null here
+    if (prevProps.invoiceLoading && !invoiceLoading) {
+      this.setState({ invoiceId: null });
+      return;
+    }
+
+    if (listError) {
+      showAlert({ type: 'error', message: 'Error getting invoices' });
+    }
+
+    if (getError) {
+      showAlert({ type: 'error', message: 'Error downloading invoice' });
+    }
 
     if (!prevProps.invoice && invoice) {
-      this.setState({ invoiceId: null });
       const url = URL.createObjectURL(invoice);
       const link = document.createElement('a');
       link.href = url;
@@ -94,7 +109,10 @@ const mapStateToProps = (state) => ({
   invoices: state.invoices.list,
   invoicesLoading: state.invoices.invoicesLoading,
   invoice: state.invoices.invoice,
-  invoiceLoading: state.invoices.invoiceLoading
+  invoiceLoading: state.invoices.invoiceLoading,
+  invoiceId: state.invoices.invoiceId,
+  listError: state.invoices.listError,
+  getError: state.invoices.getError
 });
 
 // In case 'status' & 'invoiceNumber' don't work out
@@ -106,4 +124,4 @@ const mapStateToProps = (state) => ({
 //   </Panel.Section>
 // );
 
-export default connect(mapStateToProps, { getInvoices, getInvoice })(InvoiceHistory);
+export default connect(mapStateToProps, { getInvoices, getInvoice, showAlert })(InvoiceHistory);
