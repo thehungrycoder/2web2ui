@@ -22,7 +22,7 @@ export class InvoiceHistory extends Component {
     invoiceNumber: null
   };
 
-  getRowData = ({ status, date, amount, invoice_number: invoiceNumber, id }) => {
+  getRowData = ({ date, amount, invoice_number: invoiceNumber, id }) => {
     const { invoiceLoading, invoiceId } = this.props;
     const thisInvoiceLoading = (invoiceId === id);
     return ([
@@ -99,19 +99,9 @@ export class InvoiceHistory extends Component {
 
 const mapStateToProps = (state) => ({
   invoices: state.invoices.list,
-  invoicesLoading: state.invoices.invoicesLoading,
   invoice: state.invoices.invoice,
   invoiceLoading: state.invoices.invoiceLoading,
   invoiceId: state.invoices.invoiceId
 });
-
-// In case 'status' & 'invoiceNumber' don't work out
-// <Collection rows={invoices} rowComponent={Invoice}/>
-// const Invoice = ({ date, amount, invoiceNumber }) => (
-//   <Panel.Section actions={[{ content: 'Download' }]}>//
-//     <h6 style={{ marginBottom: 0 }}><strong>{formatCurrency(amount)}</strong></h6>
-//     <small>{formatDate(date)}</small>
-//   </Panel.Section>
-// );
 
 export default connect(mapStateToProps, { getInvoice, showAlert })(InvoiceHistory);

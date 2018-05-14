@@ -8,13 +8,13 @@ const initialState = {
 export default (state = initialState, { type, payload, meta }) => {
   switch (type) {
     case 'LIST_INVOICES_PENDING':
-      return { ...state, invoicesLoading: true, listError: null };
+      return { ...state, listError: null };
 
     case 'LIST_INVOICES_SUCCESS':
-      return { ...state, list: payload, invoicesLoading: false };
+      return { ...state, list: payload };
 
     case 'LIST_INVOICES_FAIL':
-      return { ...state, listError: payload, invoicesLoading: false };
+      return { ...state, listError: payload };
 
     case 'GET_INVOICE_PENDING':
       return { ...state, invoiceLoading: true, getError: null, invoice: null, invoiceId: meta.invoiceId };
