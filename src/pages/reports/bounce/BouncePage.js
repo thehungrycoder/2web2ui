@@ -23,7 +23,7 @@ const columns = [
 
 export class BouncePage extends Component {
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate (prevProps) {
     if (prevProps.reportOptions !== this.props.reportOptions) {
       this.props.refreshBounceReport(this.props.reportOptions);
     }
@@ -34,14 +34,14 @@ export class BouncePage extends Component {
     const { reason, domain, bounce_category_name, bounce_class_name } = item;
     return [
       <LongTextContainer text={reason} />,
-      <UnstyledLink onClick={() => addFilters([{ type: 'Recipient Domain', value: domain }])}>{ domain }</UnstyledLink>,
+      <UnstyledLink onClick={() => addFilters([{ type: 'Recipient Domain', value: domain }])}>{domain}</UnstyledLink>,
       bounce_category_name,
       bounce_class_name,
       <span>{item.count_bounce} <small>(<Percent value={(item.count_bounce / aggregates.countBounce) * 100} />)</small></span>
     ];
   };
 
-  renderChart() {
+  renderChart () {
     const { chartLoading, aggregates, categories, types } = this.props;
     if (!chartLoading && _.isEmpty(aggregates)) {
       return <Empty title='Bounce Rates' message='No bounces to report' />;
@@ -55,7 +55,7 @@ export class BouncePage extends Component {
     />;
   }
 
-  renderCollection() {
+  renderCollection () {
     const { tableLoading, reasons } = this.props;
 
     if (tableLoading) {
@@ -86,7 +86,7 @@ export class BouncePage extends Component {
     />;
   }
 
-  renderTopLevelMetrics() {
+  renderTopLevelMetrics () {
     const { chartLoading, aggregates, adminBounces } = this.props;
     const { countBounce, countSent } = aggregates;
 
@@ -110,21 +110,21 @@ export class BouncePage extends Component {
         rateTitle='Bounce Rate'
         secondaryMessage={adminBounceText}
       >
-        <strong>{countBounce.toLocaleString()}</strong> of your messages were bounced of <strong>{countSent.toLocaleString()}</strong> messages sent
+        <strong>{countBounce.toLocaleString()}</strong> of <strong>{countSent.toLocaleString()}</strong> sent messages bounced
       </MetricsSummary>
     );
   }
 
-  render() {
+  render () {
     const { chartLoading, bounceSearchOptions } = this.props;
 
     return (
       <Page title='Bounce Report'>
         <ReportOptions reportLoading={chartLoading} searchOptions={bounceSearchOptions} />
-        { this.renderTopLevelMetrics() }
-        { this.renderChart() }
+        {this.renderTopLevelMetrics()}
+        {this.renderChart()}
         <hr/>
-        { this.renderCollection() }
+        {this.renderCollection()}
       </Page>
     );
   }

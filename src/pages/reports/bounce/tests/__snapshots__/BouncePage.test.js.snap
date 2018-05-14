@@ -111,11 +111,11 @@ exports[`BouncePage:  should render 1`] = `
     <strong>
       1
     </strong>
-     of your messages were bounced of 
+     of 
     <strong>
       10
     </strong>
-     messages sent
+     sent messages bounced
   </Connect(MetricsSummary)>
   <BounceChart
     aggregates={
@@ -322,11 +322,11 @@ exports[`BouncePage:  should show empty reasons table when there are no reasons 
     <strong>
       1
     </strong>
-     of your messages were bounced of 
+     of 
     <strong>
       10
     </strong>
-     messages sent
+     sent messages bounced
   </Connect(MetricsSummary)>
   <BounceChart
     aggregates={
@@ -364,11 +364,11 @@ exports[`BouncePage:  should show loading panel when table is loading 1`] = `
     <strong>
       1
     </strong>
-     of your messages were bounced of 
+     of 
     <strong>
       10
     </strong>
-     messages sent
+     sent messages bounced
   </Connect(MetricsSummary)>
   <BounceChart
     aggregates={
