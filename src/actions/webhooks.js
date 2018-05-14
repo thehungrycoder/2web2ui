@@ -1,11 +1,10 @@
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 import setSubaccountHeader from './helpers/setSubaccountHeader';
-import { mergeWebhooks } from 'src/helpers/webhooks';
 
-export function listWebhooks({ subaccount = null, type = 'LIST_WEBHOOKS' } = {}) {
+export function listWebhooks (subaccount = null) {
   const headers = setSubaccountHeader(subaccount);
   return sparkpostApiRequest({
-    type,
+    type: 'LIST_WEBHOOKS',
     meta: {
       method: 'GET',
       url: '/webhooks',
@@ -15,24 +14,7 @@ export function listWebhooks({ subaccount = null, type = 'LIST_WEBHOOKS' } = {})
   });
 }
 
-// Gets all webhooks & master-only webhooks
-// Then rewrites subaccount_id for webhooks assigned to master
-export function listAllWebhooks() {
-  return (dispatch) => Promise.all([
-    dispatch(listWebhooks({ type: 'LIST_MASTER_ONLY_WEBHOOKS', subaccount: 0 })),
-    dispatch(listWebhooks())
-  ])
-    .then(([masterOnlyWebhooks, webhooks]) => dispatch({
-      type: 'LIST_ALL_WEBHOOKS_SUCCESS',
-      payload: mergeWebhooks(masterOnlyWebhooks, webhooks)
-    }))
-    .catch((err) => dispatch({
-      type: 'LIST_ALL_WEBHOOKS_SUCCESS_FAIL',
-      payload: err
-    }));
-}
-
-export function getWebhook({ id, subaccount = null }) {
+export function getWebhook ({ id, subaccount = null }) {
   const headers = setSubaccountHeader(subaccount);
 
   // Subaccount is passed through from qp because:
@@ -49,7 +31,7 @@ export function getWebhook({ id, subaccount = null }) {
   });
 }
 
-export function createWebhook({ webhook, subaccount = null }) {
+export function createWebhook ({ webhook, subaccount = null }) {
   const headers = setSubaccountHeader(subaccount);
 
   // Subaccount is passed through to be used in the redirect in componentDidMount
@@ -66,7 +48,7 @@ export function createWebhook({ webhook, subaccount = null }) {
   });
 }
 
-export function updateWebhook({ id, subaccount = null, ...data }) {
+export function updateWebhook ({ id, subaccount = null, ...data }) {
   const headers = setSubaccountHeader(subaccount);
   return sparkpostApiRequest({
     type: 'UPDATE_WEBHOOK',
@@ -79,7 +61,7 @@ export function updateWebhook({ id, subaccount = null, ...data }) {
   });
 }
 
-export function deleteWebhook({ id, subaccount = null }) {
+export function deleteWebhook ({ id, subaccount = null }) {
   const headers = setSubaccountHeader(subaccount);
   return sparkpostApiRequest({
     type: 'DELETE_WEBHOOK',
@@ -91,7 +73,7 @@ export function deleteWebhook({ id, subaccount = null }) {
   });
 }
 
-export function testWebhook({ id, subaccount = null, message }) {
+export function testWebhook ({ id, subaccount = null, message }) {
   const headers = setSubaccountHeader(subaccount);
   return sparkpostApiRequest({
     type: 'TEST_WEBHOOK',
@@ -104,7 +86,7 @@ export function testWebhook({ id, subaccount = null, message }) {
   });
 }
 
-export function getEventDocs() {
+export function getEventDocs () {
   return sparkpostApiRequest({
     type: 'GET_EVENT_DOCS',
     meta: {
@@ -114,7 +96,7 @@ export function getEventDocs() {
   });
 }
 
-export function getEventSamples(events) {
+export function getEventSamples (events) {
   return sparkpostApiRequest({
     type: 'GET_EVENT_SAMPLES',
     meta: {
@@ -125,7 +107,7 @@ export function getEventSamples(events) {
   });
 }
 
-export function getBatches({ id, subaccount = null }) {
+export function getBatches ({ id, subaccount = null }) {
   const headers = setSubaccountHeader(subaccount);
   return sparkpostApiRequest({
     type: 'GET_WEBHOOK_BATCHES',
