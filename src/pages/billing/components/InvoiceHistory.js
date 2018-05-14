@@ -3,11 +3,9 @@ import { connect } from 'react-redux';
 import { Panel, Button } from '@sparkpost/matchbox';
 import { TableCollection } from 'src/components';
 import { formatDate } from 'src/helpers/date';
-import { get as getInvoice, list as getInvoices } from 'src/actions/invoices';
+import { get as getInvoice } from 'src/actions/invoices';
 import { showAlert } from 'src/actions/globalAlert';
 
-
-//use showalert for errors
 
 const columns = [
   'Date',
@@ -24,15 +22,9 @@ export class InvoiceHistory extends Component {
     invoiceNumber: null
   };
 
-  componentDidMount () {
-    this.props.getInvoices();
-  }
-
   getRowData = ({ status, date, amount, invoice_number: invoiceNumber, id }) => {
-    // const { invoiceLoading, invoiceId } = this.props;
-    const { invoiceLoading } = this.props;
-    const { invoiceId } = this.state;
-    const thisInvoiceLoading = (id === invoiceId);
+    const { invoiceLoading, invoiceId } = this.props;
+    const thisInvoiceLoading = (invoiceId === id);
     return ([
       formatDate(date),
       formatCurrency(amount),
@@ -48,18 +40,13 @@ export class InvoiceHistory extends Component {
   ;
 
   getInvoice = (id, invoiceNumber) => {
-    this.setState({ invoiceNumber, invoiceId: id });
+    this.setState({ invoiceNumber });
     this.props.getInvoice(id);
   };
 
   componentDidUpdate (prevProps) {
-    const { invoice, listError, getError, showAlert, invoiceLoading } = this.props;
+    const { invoice, listError, getError, showAlert } = this.props;
     const { invoiceNumber } = this.state;
-
-    if (prevProps.invoiceLoading && !invoiceLoading) {
-      this.setState({ invoiceId: null });
-      return;
-    }
 
     if (listError) {
       showAlert({ type: 'error', message: 'Error getting invoices' });
@@ -75,27 +62,32 @@ export class InvoiceHistory extends Component {
       link.href = url;
       link.setAttribute('download', `sparkpost-invoice-${invoiceNumber}.pdf`);
       link.click();
+
+      showAlert({ type: 'success', message: `Downloaded invoice: ${invoiceNumber}` });
+
     }
 
   }
 
   render () {
-    const { invoices, invoicesLoading } = this.props;
-
-    if (invoicesLoading || (invoices.length < 1)) {
-      return null;
-    }
+    const { invoices } = this.props;
 
     // Perhaps need a "amounts shown in USD" message somewhere?
     //
+    const hasInvoices = (invoices && invoices.length > 0);
+
     const maxWarning = invoices.length === 20
       ? <Panel.Footer left={<p><small>Only your last 20 invoices are available to be viewed</small></p>} />
       : null;
 
     return (
       <Fragment>
-        <Panel title='Invoice History'>
-          <TableCollection rows={invoices} columns={columns} getRowData={this.getRowData} />
+        <Panel title='Invoice History' sectioned={!hasInvoices}>
+          {
+            hasInvoices
+              ? <TableCollection rows={invoices} columns={columns} getRowData={this.getRowData}/>
+              : 'You don\'t have any invoices'
+          }
         </Panel>
         {maxWarning}
       </Fragment>
@@ -110,9 +102,7 @@ const mapStateToProps = (state) => ({
   invoicesLoading: state.invoices.invoicesLoading,
   invoice: state.invoices.invoice,
   invoiceLoading: state.invoices.invoiceLoading,
-  invoiceId: state.invoices.invoiceId,
-  listError: state.invoices.listError,
-  getError: state.invoices.getError
+  invoiceId: state.invoices.invoiceId
 });
 
 // In case 'status' & 'invoiceNumber' don't work out
@@ -124,4 +114,4 @@ const mapStateToProps = (state) => ({
 //   </Panel.Section>
 // );
 
-export default connect(mapStateToProps, { getInvoices, getInvoice, showAlert })(InvoiceHistory);
+export default connect(mapStateToProps, { getInvoice, showAlert })(InvoiceHistory);

@@ -17,13 +17,13 @@ export default (state = initialState, { type, payload, meta }) => {
       return { ...state, listError: payload, invoicesLoading: false };
 
     case 'GET_INVOICE_PENDING':
-      return { ...state, invoiceLoading: true, getError: null, invoice: null };
+      return { ...state, invoiceLoading: true, getError: null, invoice: null, invoiceId: meta.invoiceId };
 
     case 'GET_INVOICE_FAIL':
-      return { ...state, invoiceLoading: false, getError: payload, invoice: null };
+      return { ...state, invoiceLoading: false, getError: payload, invoice: null, invoiceId: null };
 
     case 'GET_INVOICE_SUCCESS':
-      return { ...state, invoiceLoading: false, invoice: meta.data };
+      return { ...state, invoiceLoading: false, invoice: meta.data, invoiceId: null };
 
     default:
       return state;

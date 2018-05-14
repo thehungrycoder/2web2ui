@@ -16,7 +16,8 @@ export function get (id) {
     meta: {
       method: 'GET',
       url: `/account/invoices/${id}`,
-      responseType: 'blob'
+      responseType: 'blob',
+      invoiceId: id
     }
   });
 }
