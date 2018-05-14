@@ -16,12 +16,12 @@ const primaryAction = {
 
 export default class ListPage extends Component {
 
-  componentDidMount() {
+  componentDidMount () {
     this.props.listTemplates();
     Editor.preload(); //loads editor chunk
   }
 
-  renderError() {
+  renderError () {
     return (
       <ApiErrorBanner
         message={'Sorry, we seem to have had some trouble loading your templates.'}
@@ -49,7 +49,7 @@ export default class ListPage extends Component {
     return row;
   }
 
-  getColumns() {
+  getColumns () {
     const { hasSubaccounts } = this.props;
 
     const columns = [
@@ -66,7 +66,7 @@ export default class ListPage extends Component {
     return columns;
   }
 
-  renderCollection() {
+  renderCollection () {
     return (
       <TableCollection
         columns={this.getColumns()}
@@ -83,7 +83,7 @@ export default class ListPage extends Component {
     );
   }
 
-  render() {
+  render () {
     const { canModify, count, loading, error } = this.props;
 
     if (loading) {
@@ -100,7 +100,7 @@ export default class ListPage extends Component {
           title: 'Manage your email templates',
           content: <p>Build, test, preview and send your transmissions.</p>
         }} >
-        { error ? this.renderError() : this.renderCollection() }
+        {error ? this.renderError() : this.renderCollection()}
       </Page>
     );
   }

@@ -4,7 +4,7 @@ import { Panel, Button } from '@sparkpost/matchbox';
 import { Loading } from 'src/components';
 import { TableCollection } from 'src/components';
 import { formatDate } from 'src/helpers/date';
-import { get as getInvoice, list as getInvoices } from 'src/actions/invoices';
+import { get as getInvoice } from 'src/actions/invoices';
 
 
 const columns = [
@@ -21,10 +21,6 @@ export class InvoiceHistory extends Component {
   state = {
     id: null
   };
-
-  componentDidMount () {
-    this.props.getInvoices();
-  }
 
   getRowData = ({ status, date, amount, invoice_number: invoiceNumber, id }) =>
     //const { invoiceLoading } = this.props;
@@ -83,7 +79,6 @@ export class InvoiceHistory extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  invoices: state.invoices.list,
   invoicesLoading: state.invoices.invoicesLoading,
   invoice: state.invoices.invoice,
   invoiceLoading: state.invoices.invoiceLoading
@@ -98,4 +93,4 @@ const mapStateToProps = (state) => ({
 //   </Panel.Section>
 // );
 
-export default connect(mapStateToProps, { getInvoices, getInvoice })(InvoiceHistory);
+export default connect(mapStateToProps, { getInvoice })(InvoiceHistory);
