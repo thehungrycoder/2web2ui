@@ -60,6 +60,14 @@ describe('Component: Invoice History', () => {
     expect(row[3]).toMatchSnapshot();
   });
 
+  it('should show an alert when an invoice has been downloaded', () => {
+    URL.createObjectURL = jest.fn();
+    const showAlertMock = jest.fn();
+    wrapper.setProps({ invoice: 'anInvoice', invoiceNumber: 'anInvoiceNumber', showAlert: showAlertMock });
+    expect(showAlertMock).toHaveBeenCalledTimes(1);
+    expect(showAlertMock).toHaveBeenCalledWith({ type: 'success', message: 'Downloaded invoice: anInvoiceNumber' });
+  });
+
   it('should get an invoice when the download button is clicked', () => {
 
     const getInvoiceMock = jest.fn();
