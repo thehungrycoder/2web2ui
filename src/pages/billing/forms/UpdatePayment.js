@@ -6,6 +6,7 @@ import { getBillingCountries } from 'src/actions/billing';
 import billingUpdate from 'src/actions/billingUpdate';
 import { showAlert } from 'src/actions/globalAlert';
 import { updatePaymentInitialValues } from 'src/selectors/accountBillingForms';
+import { prepareCardInfo } from 'src/helpers/billing';
 
 import { Panel, Button } from '@sparkpost/matchbox';
 import PaymentForm from './fields/PaymentForm';
@@ -16,19 +17,25 @@ import styles from './Forms.module.scss';
 const FORMNAME = 'updatePayment';
 
 export class UpdatePayment extends Component {
-  componentDidMount() {
+  componentDidMount () {
     this.props.getBillingCountries();
   }
 
   onSubmit = (values) => {
     const { billingUpdate, onCancel, showAlert } = this.props;
-    return billingUpdate(values).then(() => {
+
+    const newValues = {
+      ...values,
+      card: prepareCardInfo(values.card)
+    };
+
+    return billingUpdate(newValues).then(() => {
       showAlert({ type: 'success', message: 'Payment Information Updated' });
       typeof onCancel === 'function' && onCancel();
     });
-  }
+  };
 
-  render() {
+  render () {
     const { onCancel, handleSubmit, submitting } = this.props;
 
     return (

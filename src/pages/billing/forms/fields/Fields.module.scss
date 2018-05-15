@@ -3,7 +3,3 @@
 .spacer {
   margin-bottom: spacing();
 }
-
-.hidden {
-  @include visually-hidden;
-}
