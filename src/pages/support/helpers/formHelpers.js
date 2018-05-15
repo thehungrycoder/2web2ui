@@ -3,7 +3,7 @@ export const labels = {
   previous_ips: 'Please list any existing and previous non SparkPost sending IPs.',
   acquisition_practices: 'What are your acquisition practices?',
   hygiene: 'What are your hygiene practices?',
-  traffic_types: 'What are your traffic types? (marketing, newletters, e-commerce, transactional)',
+  traffic_types: 'What are your traffic types? (marketing, newsletters, e-commerce, transactional)',
   only_dedicated: 'Are you willing to only use dedicated IPs and no longer use the shared pools?',
   privacy_policy: 'Please provide the location of your privacy policy?',
   website: 'Please provide the location of your website?',

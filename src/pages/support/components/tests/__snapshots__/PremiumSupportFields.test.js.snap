@@ -27,7 +27,7 @@ exports[`PremiumSupportFields default state 1`] = `
   />
   <Field
     component={[Function]}
-    label="What are your traffic types? (marketing, newletters, e-commerce, transactional)"
+    label="What are your traffic types? (marketing, newsletters, e-commerce, transactional)"
     name="traffic_types"
     validate={[Function]}
   />
