@@ -114,7 +114,12 @@ export class PaymentForm extends Component {
           </Grid.Column>
         </Grid>
 
-        {/* Hidden redux-form connected fields */}
+        {
+        /*
+        Hidden redux-form connected fields.
+        autoComplete attr is to prevent chrome automatically filling credit card number.
+        */
+        }
         <div className={styles.hidden} >
           <Field name='card.type' component='input' tabIndex='-1' autoComplete="new-password" />
           <Field name='card.expMonth' component='input' tabIndex='-1' autoComplete="new-password"/>
