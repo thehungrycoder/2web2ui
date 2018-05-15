@@ -5,12 +5,12 @@ import _ from 'lodash';
 
 describe('Component: Invoice History', () => {
 
-  jest.mock('src/actions/invoices');
-
   let wrapper;
   let props;
 
   beforeEach(() => {
+
+    jest.mock('src/actions/invoices');
 
     props = {
       invoices: [
@@ -60,12 +60,28 @@ describe('Component: Invoice History', () => {
     expect(row[3]).toMatchSnapshot();
   });
 
-  it('should show an alert when an invoice has been downloaded', () => {
-    URL.createObjectURL = jest.fn();
+  it('should download an invoice', () => {
     const showAlertMock = jest.fn();
+    const linkMock = { setAttribute: jest.fn(), click: jest.fn() };
+
+    const defaultCreateUbjectURL = URL.createObjectURL;
+    URL.createObjectURL = jest.fn(() => 'a URL');
+
+    const defaultCreateElement = document.createElement;
+    document.createElement = jest.fn(() => linkMock);
+
     wrapper.setProps({ invoice: 'anInvoice', invoiceNumber: 'anInvoiceNumber', showAlert: showAlertMock });
+
+    expect(URL.createObjectURL).toHaveBeenCalledWith('anInvoice');
+    expect(document.createElement).toHaveBeenCalledWith('a');
+    expect(linkMock.href).toEqual('a URL');
+    expect(linkMock.setAttribute).toHaveBeenCalledWith('download', 'sparkpost-invoice-anInvoiceNumber.pdf');
+    expect(linkMock.click).toHaveBeenCalledTimes(1);
     expect(showAlertMock).toHaveBeenCalledTimes(1);
     expect(showAlertMock).toHaveBeenCalledWith({ type: 'success', message: 'Downloaded invoice: anInvoiceNumber' });
+
+    URL.createObjectURL = defaultCreateUbjectURL;
+    document.createElement = defaultCreateElement;
   });
 
   it('should get an invoice when the download button is clicked', () => {
