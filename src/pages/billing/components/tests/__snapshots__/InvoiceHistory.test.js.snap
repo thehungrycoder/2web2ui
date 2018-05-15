@@ -4,7 +4,6 @@ exports[`Component: Invoice History should change the text of the download butto
 <div
   style={
     Object {
-      "alignItems": "flex-end",
       "textAlign": "right",
       "width": 26,
     }
@@ -26,7 +25,6 @@ exports[`Component: Invoice History should deactivate download buttons while an 
 <div
   style={
     Object {
-      "alignItems": "flex-end",
       "textAlign": "right",
       "width": 26,
     }
