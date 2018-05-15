@@ -12,35 +12,31 @@ import { AUTH_ROUTE } from 'src/constants';
 
 export class SsoAuthPage extends Component {
   state = {
-    ssoError: null
+    submitted: false
   };
+
+  loginSubmit = ({ username }) => {
+    this.setState({ submitted: true });
+    this.props.ssoCheck(username);
+  }
 
   componentWillReceiveProps (nextProps) {
     const { ssoUser, username } = nextProps.auth;
 
-    if (typeof ssoUser === 'undefined') { // we don't know if you're an ssoUser yet
-      return;
-    }
-
     if (ssoUser) {
       window.location.assign(`${config.apiBase}/users/saml/login/${username}`);
-    } else {
-      this.setState({ ssoError: 'User is not SSO' });
-
     }
-  }
-
-  loginSubmit = ({ username }) => {
-    this.props.ssoCheck(username);
   }
 
   render () {
-    const { location } = this.props;
+    const { location, auth } = this.props;
+    const { ssoUser } = auth;
+    const { submitted } = this.state;
     const search = qs.parse(location.search);
-    const loginError = this.state.ssoError || decodeBase64(search.error); // SSO or submit error
+    const loginError = (submitted && ssoUser === false) ? 'User is not set up to use single sign-on' : decodeBase64(search.error); // error comes base 64 encoded in url on redirect from 3rd party
 
     return (
-      <LoginPanel title={'Single Sign-On'} ssoEnabled={true} loginError={loginError} handleSubmit={this.loginSubmit}>
+      <LoginPanel title={'Single Sign-On'} ssoEnabled loginError={loginError} handleSubmit={this.loginSubmit}>
         <Panel.Footer
           left={<small><PageLink to={AUTH_ROUTE}>Not looking for single sign-on?</PageLink></small>}
         />

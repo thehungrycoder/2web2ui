@@ -44,7 +44,7 @@ exports[`SsoAuthPage tests should display sso error message from url 1`] = `
 exports[`SsoAuthPage tests should throw error when ssoUser is false 1`] = `
 <Connect(LoginPanel)
   handleSubmit={[Function]}
-  loginError="User is not SSO"
+  loginError="User is not set up to use single sign-on"
   ssoEnabled={true}
   title="Single Sign-On"
 >

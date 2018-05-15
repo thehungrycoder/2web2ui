@@ -51,4 +51,12 @@ describe('LoginRedirect tests', () => {
 
     expect(instance.props.history.push).toHaveBeenCalledWith('/path');
   });
+
+  it('should not redirect if props change to loggedIn false', () => {
+    wrapper.setProps({
+      auth: { loggedIn: false }
+    });
+
+    expect(instance.props.history.push).not.toHaveBeenCalled();
+  });
 });

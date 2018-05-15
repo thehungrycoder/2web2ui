@@ -24,6 +24,7 @@ describe('SsoAuthPage tests', () => {
 
   it('should throw error when ssoUser is false', () => {
     wrapper.setProps({ auth: { ssoUser: false }});
+    wrapper.setState({ submitted: true });
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -41,5 +42,11 @@ describe('SsoAuthPage tests', () => {
   it('should display sso error message from url', () => {
     wrapper.setProps({ location: { search: `?error=${btoa('Oh no!')}` }});
     expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should set submitting state on submit of loginSubmit', () => {
+    expect(instance.state.submitted).toEqual(false);
+    instance.loginSubmit({ username: 'foo' });
+    expect(instance.state.submitted).toEqual(true);
   });
 });
