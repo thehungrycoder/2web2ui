@@ -84,6 +84,9 @@ exports[`Component: Billing Summary should render correctly for a paid plan 1`] 
       </LabelledValue>
     </Panel.Section>
   </Panel>
+  <Connect(InvoiceHistory)
+    invoices={Array []}
+  />
   <Component />
   <Component />
   <Modal
@@ -128,6 +131,9 @@ exports[`Component: Billing Summary should render correctly for a standard free 
       />
     </Panel.Section>
   </Panel>
+  <Connect(InvoiceHistory)
+    invoices={Array []}
+  />
   <Component />
   <Component />
   <Modal
@@ -212,6 +218,9 @@ exports[`Component: Billing Summary should render correctly if you can't buy IPs
       </LabelledValue>
     </Panel.Section>
   </Panel>
+  <Connect(InvoiceHistory)
+    invoices={Array []}
+  />
   <Component />
   <Component />
   <Modal
@@ -294,6 +303,9 @@ exports[`Component: Billing Summary should render correctly if you can't change 
       </LabelledValue>
     </Panel.Section>
   </Panel>
+  <Connect(InvoiceHistory)
+    invoices={Array []}
+  />
   <Component />
   <Component />
   <Modal
@@ -347,6 +359,9 @@ exports[`Component: Billing Summary should render correctly if you can't update 
       }
     />
   </Panel>
+  <Connect(InvoiceHistory)
+    invoices={Array []}
+  />
   <Component />
   <Component />
   <Modal
@@ -440,6 +455,9 @@ exports[`Component: Billing Summary should render with IP modal open 1`] = `
       </LabelledValue>
     </Panel.Section>
   </Panel>
+  <Connect(InvoiceHistory)
+    invoices={Array []}
+  />
   <Component />
   <Component />
   <Modal
@@ -537,6 +555,9 @@ exports[`Component: Billing Summary should render with the billing contact modal
       </LabelledValue>
     </Panel.Section>
   </Panel>
+  <Connect(InvoiceHistory)
+    invoices={Array []}
+  />
   <Component />
   <Component />
   <Modal
@@ -634,6 +655,9 @@ exports[`Component: Billing Summary should render with the payment info modal op
       </LabelledValue>
     </Panel.Section>
   </Panel>
+  <Connect(InvoiceHistory)
+    invoices={Array []}
+  />
   <Component />
   <Component />
   <Modal

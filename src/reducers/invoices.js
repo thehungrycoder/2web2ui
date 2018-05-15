@@ -1,8 +1,9 @@
 const initialState = {
   list: [],
   invoiceLoading: false,
-  invoicesLoading: false,
-  invoiceId: null
+  invoice: null,
+  invoiceId: null,
+  invoiceNumber: null
 };
 
 export default (state = initialState, { type, payload, meta }) => {

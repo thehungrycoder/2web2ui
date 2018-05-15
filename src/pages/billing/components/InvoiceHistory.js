@@ -29,7 +29,7 @@ export class InvoiceHistory extends Component {
       formatDate(date),
       formatCurrency(amount),
       invoiceNumber,
-      <div style={{ textAlign: 'right' }}>
+      <div style={{ textAlign: 'right', width: 26 }}>
         <Button plain size='small' type='submit' disabled={invoiceLoading}
           onClick={() => this.getInvoice(id, invoiceNumber)}>
           {thisInvoiceLoading ? 'Downloading...' : 'Download'}
