@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { Page, Panel } from '@sparkpost/matchbox';
+import { Page, Panel, UnstyledLink } from '@sparkpost/matchbox';
 
 import { updateUser } from 'src/actions/users';
 import { get as getCurrentUser } from 'src/actions/currentUser';
 import { confirmPassword } from 'src/actions/auth';
 import { showAlert } from 'src/actions/globalAlert';
+import { openSupportTicketForm } from 'src/actions/support';
 
 import NameForm from './components/NameForm';
 import PasswordForm from './components/PasswordForm';
@@ -15,9 +16,13 @@ import { AccessControl } from 'src/components/auth';
 import { LabelledValue } from 'src/components';
 import ErrorTracker from 'src/helpers/errorTracker';
 import { all, not } from 'src/helpers/conditions';
-import { isHeroku, isAzure } from 'src/helpers/conditions/user';
+import { isAdmin, isAzure, isHeroku } from 'src/helpers/conditions/user';
 
 export class ProfilePage extends Component {
+  requestCancellation = () => {
+    this.props.openSupportTicketForm({ issueId: 'account_cancellation' });
+  }
+
   updateProfile = (values) => {
     const { username } = this.props.currentUser;
     const data = { first_name: values.firstName, last_name: values.lastName };
@@ -39,7 +44,7 @@ export class ProfilePage extends Component {
       .then(() => this.props.updateUser(username, { password: newPassword }));
   }
 
-  render() {
+  render () {
     const {
       username,
       email,
@@ -65,6 +70,19 @@ export class ProfilePage extends Component {
             <PasswordForm onSubmit={this.updatePassword} />
           </Panel>
         </AccessControl>
+
+        <AccessControl condition={isAdmin}>
+          <Panel sectioned title="Request Account Cancellation">
+            <p>
+              To cancel your SparkPost account, {
+                <UnstyledLink onClick={this.requestCancellation}>
+                  submit a cancellation request
+                </UnstyledLink>
+              }. The request may take a few days to process.  All your data (e.g. domains, users, etc.)
+              will be permanently deleted. We're sorry to see you go!
+            </p>
+          </Panel>
+        </AccessControl>
       </Page>
     );
   }
@@ -75,4 +93,12 @@ const mapStateToProps = ({ account, currentUser }) => ({
   currentUser
 });
 
-export default connect(mapStateToProps, { updateUser, confirmPassword, showAlert, getCurrentUser })(ProfilePage);
+const mapDispatchToProps = {
+  confirmPassword,
+  getCurrentUser,
+  openSupportTicketForm,
+  showAlert,
+  updateUser
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProfilePage);
