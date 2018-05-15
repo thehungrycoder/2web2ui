@@ -24,10 +24,7 @@ export class UpdatePayment extends Component {
   onSubmit = (values) => {
     const { billingUpdate, onCancel, showAlert } = this.props;
 
-    const newValues = {
-      ...values,
-      card: prepareCardInfo(values.card)
-    };
+    const newValues = values.card ? { ...values, card: prepareCardInfo(values.card) } : values;
 
     return billingUpdate(newValues).then(() => {
       showAlert({ type: 'success', message: 'Payment Information Updated' });

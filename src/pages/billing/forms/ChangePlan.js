@@ -49,10 +49,7 @@ export class ChangePlan extends Component {
     const oldCode = account.subscription.code;
     const newCode = values.planpicker.code;
 
-    const newValues = {
-      ...values,
-      card: prepareCardInfo(values.card)
-    };
+    const newValues = values.card ? { ...values, card: prepareCardInfo(values.card) } : values;
 
     // decides which action to be taken based on
     // if it's aws account, it already has billing and if you use a saved CC

@@ -2,7 +2,8 @@ import {
   formatCountries,
   formatCardTypes,
   formatDataForCors,
-  getPlanPrice
+  getPlanPrice,
+  prepareCardInfo
 } from '../billing';
 
 describe('Billing Helpers', () => {
@@ -86,6 +87,12 @@ describe('Billing Helpers', () => {
 
     it('returns price info correctly for hourly plan', () => {
       expect(getPlanPrice(hourly)).toMatchSnapshot();
+    });
+  });
+
+  describe('prepareCardInfo', () => {
+    it('returns cardinf with type and formatted expiry date', () => {
+      expect(prepareCardInfo({ number: '411', expCombined: '02 / 2019' })).toMatchSnapshot();
     });
   });
 });
