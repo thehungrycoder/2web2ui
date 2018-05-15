@@ -109,11 +109,6 @@ class ErrorTracker {
     if (!Raven.isSetup()) { return; }
     Raven.captureException(error, { logger, extra });
   }
-
-  addBreadcrumb (data) {
-    if (!Raven.isSetup()) { return; }
-    Raven.captureBreadcrumb(data);
-  }
 }
 
 // Export a constructed instance to avoid the need to call `new` everywhere

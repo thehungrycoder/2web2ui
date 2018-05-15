@@ -24,7 +24,7 @@ import styles from './Fields.module.scss';
  * card.securityCode
  */
 export class PaymentForm extends Component {
-  componentDidMount() {
+  componentDidMount () {
     const types = Payment.getCardArray();
     // Formats strings for our api (the ones we accept)
     Payment.setCardArray(formatCardTypes(types));
@@ -45,16 +45,16 @@ export class PaymentForm extends Component {
       change(formName, 'card.expMonth', values.month);
       change(formName, 'card.expYear', values.year);
     }
-  }
+  };
 
   // Sets type from cc number into a hidden field
   handleType = (e) => {
     const { change, formName } = this.props;
     const value = Payment.fns.cardType(e.target.value);
     change(formName, 'card.type', value);
-  }
+  };
 
-  validateType(number) {
+  validateType (number) {
     const cardType = Payment.fns.cardType(number);
     const allowedCards = _.map(config.cardTypes, 'apiFormat');
 
@@ -67,7 +67,7 @@ export class PaymentForm extends Component {
 
   dateFormat = (date) => minLength(9)(date) ? 'Must be MM / YYYY' : undefined;
 
-  render() {
+  render () {
     const { disabled } = this.props;
     return (
       <div>
@@ -114,11 +114,16 @@ export class PaymentForm extends Component {
           </Grid.Column>
         </Grid>
 
-        {/* Hidden redux-form connected fields */}
+        {
+        /*
+        Hidden redux-form connected fields.
+        autoComplete attr is to prevent chrome automatically filling credit card number.
+        */
+        }
         <div className={styles.hidden} >
-          <Field name='card.type' component='input' tabIndex='-1' />
-          <Field name='card.expMonth' component='input' tabIndex='-1'/>
-          <Field name='card.expYear' component='input' tabIndex='-1'/>
+          <Field name='card.type' component='input' tabIndex='-1' autoComplete="new-password" />
+          <Field name='card.expMonth' component='input' tabIndex='-1' autoComplete="new-password"/>
+          <Field name='card.expYear' component='input' tabIndex='-1' autoComplete="new-password"/>
         </div>
       </div>
     );
