@@ -16,11 +16,13 @@ exports[`PremiumSupportFields default state 1`] = `
   <Field
     component={[Function]}
     label="What are your acquisition practices?"
+    multiline={true}
     name="acquisition_practices"
   />
   <Field
     component={[Function]}
     label="What are your hygiene practices?"
+    multiline={true}
     name="hygiene"
   />
   <Field

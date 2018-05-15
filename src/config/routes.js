@@ -507,7 +507,8 @@ const routes = [
     path: '/support/aws-premium',
     component: PremiumSupportPage,
     condition: isAws,
-    title: 'Support | Request Premium Support'
+    title: 'Support | Request Premium Support',
+    layout: App
   }
 ];
 

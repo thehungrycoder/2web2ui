@@ -109,7 +109,6 @@ exports[`Billing Banners:  Premium banner renders 1`] = `
 <Banner
   action={
     Object {
-      "component": null,
       "content": "Contact Us",
       "external": true,
       "onClick": [Function],
@@ -145,7 +144,6 @@ exports[`Billing Banners:  Premium banner renders correctly for aws users 1`] = 
     Object {
       "component": [Function],
       "content": "Request Premium Support",
-      "external": false,
       "onClick": [Function],
       "to": "/support/aws-premium",
     }

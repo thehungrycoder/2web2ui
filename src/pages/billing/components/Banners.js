@@ -57,12 +57,22 @@ export const ManuallyBilledBanner = ({ account, ...rest }) => {
 /**
  * Premium Addon Plan CTA
  */
+
+const premiumAction = {
+  content: 'Contact Us',
+  to: LINKS.PREMIUM_SUPPORT,
+  external: true
+};
+
+const awsPremiumAction = {
+  content: 'Request Premium Support',
+  component: Link,
+  to: '/support/aws-premium'
+};
+
 export const PremiumBanner = ({ isAWSAccount }) => (
   <Banner title='Premium Addon Plan' action={{
-    content: isAWSAccount ? 'Request Premium Support' : 'Contact Us',
-    component: isAWSAccount ? Link : null,
-    to: isAWSAccount ? '/support/aws-premium' : LINKS.PREMIUM_SUPPORT,
-    external: !isAWSAccount,
+    ...(isAWSAccount ? awsPremiumAction : premiumAction),
     onClick: () => conversions.trackAddonRequest(ANALYTICS_PREMIUM_SUPPORT)
   }}>
     <p>Get full-service Technical Account Management with proactive reporting, planning & reviews.</p>

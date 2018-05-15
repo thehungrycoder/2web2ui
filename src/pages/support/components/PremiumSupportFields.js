@@ -21,11 +21,13 @@ const PremiumSupportFields = () => (
       name='acquisition_practices'
       label={labels.acquisition_practices}
       component={TextFieldWrapper}
+      multiline
     />
     <Field
       name='hygiene'
       label={labels.hygiene}
       component={TextFieldWrapper}
+      multiline
     />
     <Field
       name='traffic_types'
