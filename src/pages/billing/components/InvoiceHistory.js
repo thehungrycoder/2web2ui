@@ -44,15 +44,7 @@ export class InvoiceHistory extends Component {
   };
 
   componentDidUpdate (prevProps) {
-    const { invoice, listError, getError, showAlert, invoiceNumber } = this.props;
-
-    if (listError) {
-      showAlert({ type: 'error', message: 'Error getting invoices' });
-    }
-
-    if (getError) {
-      showAlert({ type: 'error', message: 'Error downloading invoice' });
-    }
+    const { invoice, showAlert, invoiceNumber } = this.props;
 
     if (!prevProps.invoice && invoice) {
       const url = URL.createObjectURL(invoice);
