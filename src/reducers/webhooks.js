@@ -14,7 +14,7 @@ export default (state = initialState, action) => {
       return { ...state, listLoading: true, listError: null };
 
     case 'LIST_WEBHOOKS_FAIL':
-      return { ...state, listError: action.payload };
+      return { ...state, listError: action.payload, listLoading: false };
 
     case 'LIST_WEBHOOKS_SUCCESS':
       return { ...state, list: action.payload, listLoading: false };
