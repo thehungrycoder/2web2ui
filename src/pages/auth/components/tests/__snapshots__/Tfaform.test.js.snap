@@ -16,9 +16,7 @@ exports[`renders correctly 1`] = `
       .
     </p>
   </div>
-  <form
-    onSubmit={[Function]}
-  >
+  <form>
     <Field
       autoFocus={true}
       component={[Function]}
@@ -55,9 +53,7 @@ exports[`renders correctly verifying tfa 1`] = `
       .
     </p>
   </div>
-  <form
-    onSubmit={[Function]}
-  >
+  <form>
     <Field
       autoFocus={true}
       component={[Function]}
