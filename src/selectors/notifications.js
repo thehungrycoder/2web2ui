@@ -26,7 +26,7 @@ export const selectActiveNotifications = createSelector(
 export const selectTransformedNotifications = createSelector(
   [selectActiveNotifications, selectLastSeenDate],
   (notifications, lastSeen) => {
-    const cutoff = moment(new Date(lastSeen));
+    const cutoff = moment(lastSeen);
     return notifications.map(applyUnreadStatus(cutoff));
   }
 );
