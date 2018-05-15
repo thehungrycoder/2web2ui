@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { showAlert } from 'src/actions/globalAlert';
-import { openSupportTicket } from 'src/actions/support';
+import { openSupportTicketForm } from 'src/actions/support';
 import { PageLink } from 'src/components';
 import { hasStatus, isSuspendedForBilling } from 'src/helpers/conditions/account';
 import { UnstyledLink } from '@sparkpost/matchbox';
@@ -13,7 +13,7 @@ import { UnstyledLink } from '@sparkpost/matchbox';
  */
 export class SuspensionAlerts extends Component {
   openTicket = () => {
-    this.props.openSupportTicket({ issueId: 'account_suspension' });
+    this.props.openSupportTicketForm({ issueId: 'account_suspension' });
   }
 
   getMessage () {
@@ -54,4 +54,4 @@ const mapStateToProps = (state) => ({
   isSuspended: hasStatus('suspended')(state),
   isSuspendedForBilling: isSuspendedForBilling(state)
 });
-export default connect(mapStateToProps, { showAlert, openSupportTicket })(SuspensionAlerts);
+export default connect(mapStateToProps, { showAlert, openSupportTicketForm })(SuspensionAlerts);

@@ -17,7 +17,7 @@ describe('SendMoreCTA Component', () => {
       currentLimit: 1000,
       verifyEmail: jest.fn(() => Promise.resolve()),
       showAlert: jest.fn(() => Promise.resolve()),
-      openSupportTicket: jest.fn()
+      openSupportTicketForm: jest.fn()
     };
 
     wrapper = shallow(<SendMoreCTA {...props} />);
@@ -46,7 +46,7 @@ describe('SendMoreCTA Component', () => {
   it('togles support ticket form correctly', () => {
     wrapper.setProps({ allowSendingLimitRequest: true });
     wrapper.find('UnstyledLink').at(0).simulate('click');
-    expect(props.openSupportTicket).toHaveBeenCalledWith({ issueId: 'daily_limits' });
+    expect(props.openSupportTicketForm).toHaveBeenCalledWith({ issueId: 'daily_limits' });
   });
 
   describe('resendVerification', () => {

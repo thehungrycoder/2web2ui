@@ -23,7 +23,7 @@ beforeEach(() => {
     updateUser: jest.fn(() => Promise.resolve()),
     getCurrentUser: jest.fn(() => Promise.resolve()),
     confirmPassword: jest.fn(() => Promise.resolve()),
-    openSupportTicket: jest.fn(),
+    openSupportTicketForm: jest.fn(),
     showAlert: jest.fn()
   };
 
@@ -77,7 +77,7 @@ describe('ProfilePage', () => {
   describe('requestCancellation', () => {
     it('should open support panel and preselect account cancellation', () => {
       instance.requestCancellation();
-      expect(props.openSupportTicket).toHaveBeenCalledWith({ issueId: 'account_cancellation' });
+      expect(props.openSupportTicketForm).toHaveBeenCalledWith({ issueId: 'account_cancellation' });
     });
   });
 });

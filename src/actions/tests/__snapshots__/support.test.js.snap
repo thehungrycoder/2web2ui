@@ -21,7 +21,7 @@ Object {
 }
 `;
 
-exports[`Action Creator: Support openSupportTicket should open support panel 1`] = `
+exports[`Action Creator: Support openSupportTicketForm should open support panel 1`] = `
 [MockFunction] {
   "calls": Array [
     Array [

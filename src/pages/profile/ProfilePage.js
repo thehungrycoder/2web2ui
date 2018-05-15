@@ -7,7 +7,7 @@ import { updateUser } from 'src/actions/users';
 import { get as getCurrentUser } from 'src/actions/currentUser';
 import { confirmPassword } from 'src/actions/auth';
 import { showAlert } from 'src/actions/globalAlert';
-import { openSupportTicket } from 'src/actions/support';
+import { openSupportTicketForm } from 'src/actions/support';
 
 import NameForm from './components/NameForm';
 import PasswordForm from './components/PasswordForm';
@@ -20,7 +20,7 @@ import { isAdmin, isAzure, isHeroku } from 'src/helpers/conditions/user';
 
 export class ProfilePage extends Component {
   requestCancellation = () => {
-    this.props.openSupportTicket({ issueId: 'account_cancellation' });
+    this.props.openSupportTicketForm({ issueId: 'account_cancellation' });
   }
 
   updateProfile = (values) => {
@@ -90,7 +90,7 @@ const mapStateToProps = ({ account, currentUser }) => ({
 const mapDispatchToProps = {
   confirmPassword,
   getCurrentUser,
-  openSupportTicket,
+  openSupportTicketForm,
   showAlert,
   updateUser
 };

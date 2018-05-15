@@ -10,7 +10,7 @@ describe('Component: SuspensionAlerts', () => {
     props = {
       isSuspended: null,
       isSuspendedForBilling: false,
-      openSupportTicket: jest.fn(),
+      openSupportTicketForm: jest.fn(),
       showAlert: jest.fn()
     };
 
@@ -23,7 +23,7 @@ describe('Component: SuspensionAlerts', () => {
 
   it('should open ticket form', () => {
     wrapper.instance().openTicket();
-    expect(props.openSupportTicket).toHaveBeenCalledWith({ issueId: 'account_suspension' });
+    expect(props.openSupportTicketForm).toHaveBeenCalledWith({ issueId: 'account_suspension' });
   });
 
   describe('componentDidUpdate', () => {

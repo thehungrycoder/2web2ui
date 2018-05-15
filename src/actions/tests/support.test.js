@@ -29,21 +29,21 @@ describe('Action Creator: Support', () => {
     });
   });
 
-  describe('openSupportTicket', () => {
+  describe('openSupportTicketForm', () => {
 
     it('should open support panel', () => {
-      support.openSupportTicket()(dispatchMock);
+      support.openSupportTicketForm()(dispatchMock);
       expect(dispatchMock).toMatchSnapshot();
     });
 
     it('should open support panel and set support ticket message', () => {
-      support.openSupportTicket({ message: 'test' })(dispatchMock);
+      support.openSupportTicketForm({ message: 'test' })(dispatchMock);
       expect(formActions.change).toHaveBeenCalledWith('supportForm', 'message', 'test');
       expect(formActions.change).toHaveBeenCalledTimes(1);
     });
 
     it('should open support panel ane set support ticket issue', () => {
-      support.openSupportTicket({ issueId: 'technical_errors' })(dispatchMock);
+      support.openSupportTicketForm({ issueId: 'technical_errors' })(dispatchMock);
       expect(formActions.change).toHaveBeenCalledWith('supportForm', 'issueId', 'technical_errors');
       expect(formActions.change).toHaveBeenCalledTimes(1);
     });

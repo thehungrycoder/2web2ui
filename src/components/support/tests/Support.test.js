@@ -10,7 +10,7 @@ describe('Support Component', () => {
     const props = {
       loggedIn: true,
       location: {},
-      openSupportTicket: jest.fn(),
+      openSupportTicketForm: jest.fn(),
       toggleSupportPanel: jest.fn(),
       toggleTicketForm: jest.fn(),
       showPanel: false,
@@ -45,35 +45,35 @@ describe('Support Component', () => {
     it('should open panel and hydrate form if search value is present', () => {
       wrapper.setProps({ location: { search: '?supportTicket=true&supportIssue=test_issue&supportMessage=testmessage' }});
 
-      expect(instance.props.openSupportTicket).toHaveBeenCalledWith(expect.objectContaining({
+      expect(instance.props.openSupportTicketForm).toHaveBeenCalledWith(expect.objectContaining({
         issueId: 'test_issue',
         message: 'testmessage'
       }));
     });
 
     it('should not open panel or hydrate form if search value is not present', () => {
-      expect(instance.props.openSupportTicket).not.toHaveBeenCalled();
+      expect(instance.props.openSupportTicketForm).not.toHaveBeenCalled();
     });
   });
 
   describe('on update', () => {
     it('should open panel and hydrate form if location changes and search value is present', () => {
       wrapper.setProps({ location: { search: '?supportTicket=true&supportMessage=testmessage' }});
-      expect(instance.props.openSupportTicket).toHaveBeenCalledWith(expect.objectContaining({ message: 'testmessage' }));
+      expect(instance.props.openSupportTicketForm).toHaveBeenCalledWith(expect.objectContaining({ message: 'testmessage' }));
     });
 
     it('should not open panel or hydrate form if search does not change', () => {
       wrapper.setProps({ location: { search: '?supportTicket=true,supportMessage=testmessage' }});
       wrapper.setProps({ location: { search: '?supportTicket=true,supportMessage=testmessage' }});
 
-      expect(instance.props.openSupportTicket).toHaveBeenCalledTimes(1);
+      expect(instance.props.openSupportTicketForm).toHaveBeenCalledTimes(1);
     });
 
     it('should not open panel or hydrate form if search value is not present', () => {
       wrapper.setProps({ location: { search: '?supportTicket=true,supportMessage=testmessage' }});
       wrapper.setProps({ location: { search: undefined }});
 
-      expect(instance.props.openSupportTicket).toHaveBeenCalledTimes(1);
+      expect(instance.props.openSupportTicketForm).toHaveBeenCalledTimes(1);
     });
   });
 

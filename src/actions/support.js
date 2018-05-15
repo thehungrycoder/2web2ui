@@ -70,7 +70,7 @@ export function toggleTicketForm () {
 }
 
 // Opens support ticket form and fills values if provided
-export function openSupportTicket ({ issueId, message } = {}) {
+export function openSupportTicketForm ({ issueId, message } = {}) {
   const issue = _.find(supportIssues, { id: issueId });
 
   return (dispatch) => {

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { UnstyledLink } from '@sparkpost/matchbox';
 import { verifyEmail } from 'src/actions/currentUser';
 import { showAlert } from 'src/actions/globalAlert';
-import { openSupportTicket } from 'src/actions/support';
+import { openSupportTicketForm } from 'src/actions/support';
 import { PageLink } from 'src/components';
 import { allowSendingLimitRequestSelector } from 'src/selectors/support';
 import { LINKS } from 'src/constants';
@@ -35,7 +35,7 @@ export class SendMoreCTA extends Component {
   }
 
   toggleSupportForm = () => {
-    this.props.openSupportTicket({ issueId: 'daily_limits' });
+    this.props.openSupportTicketForm({ issueId: 'daily_limits' });
   }
 
   renderSupportTicketCTA () {
@@ -69,6 +69,6 @@ const mapStateToProps = (state) => ({
   allowSendingLimitRequest: allowSendingLimitRequestSelector(state)
 });
 const mapDispatchToProps = {
-  verifyEmail, showAlert, openSupportTicket
+  verifyEmail, showAlert, openSupportTicketForm
 };
 export default connect(mapStateToProps, mapDispatchToProps)(SendMoreCTA);
