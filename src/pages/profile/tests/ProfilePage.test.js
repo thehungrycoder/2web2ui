@@ -37,8 +37,16 @@ describe('ProfilePage', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  cases('handles the is_sso condition', ({ is_sso, result }) => {
+  cases('handles the is_sso condition on tfa form', ({ is_sso, result }) => {
     const condition = wrapper.find(AccessControl).at(1).prop('condition');
+    expect(condition({ currentUser: { is_sso }, ready: true })).toEqual(result);
+  }, {
+    'is sso': { is_sso: true, result: false },
+    'not sso': { is_sso: false, result: true }
+  });
+
+  cases('handles the is_sso condition on update password', ({ is_sso, result }) => {
+    const condition = wrapper.find(AccessControl).at(2).prop('condition');
     expect(condition({ currentUser: { is_sso }, ready: true })).toEqual(result);
   }, {
     'is sso': { is_sso: true, result: false },
