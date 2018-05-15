@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { Button, Page, Panel } from '@sparkpost/matchbox';
+import { Page, Panel, UnstyledLink } from '@sparkpost/matchbox';
 
 import { updateUser } from 'src/actions/users';
 import { get as getCurrentUser } from 'src/actions/currentUser';
@@ -72,9 +72,15 @@ export class ProfilePage extends Component {
         </AccessControl>
 
         <AccessControl condition={isAdmin}>
-          <Panel sectioned title="Cancel Account">
-            <p>Cancelling your account is permanent and cannot be undone.</p>
-            <Button destructive onClick={this.requestCancellation}>Cancel Account</Button>
+          <Panel sectioned title="Request Account Cancellation">
+            <p>
+              To cancel your SparkPost account, {
+                <UnstyledLink onClick={this.requestCancellation}>
+                  submit a cancellation request
+                </UnstyledLink>
+              }. The request may take a few days to process.  All your data (e.g. domains, users, etc.)
+              will be permanently deleted. We're sorry to see you go!
+            </p>
           </Panel>
         </AccessControl>
       </Page>

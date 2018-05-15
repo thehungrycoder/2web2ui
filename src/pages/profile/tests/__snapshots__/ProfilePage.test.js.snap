@@ -47,18 +47,17 @@ exports[`ProfilePage renders correctly 1`] = `
   >
     <Panel
       sectioned={true}
-      title="Cancel Account"
+      title="Request Account Cancellation"
     >
       <p>
-        Cancelling your account is permanent and cannot be undone.
+        To cancel your SparkPost account, 
+        <UnstyledLink
+          onClick={[Function]}
+        >
+          submit a cancellation request
+        </UnstyledLink>
+        . The request may take a few days to process.  All your data (e.g. domains, users, etc.) will be permanently deleted. We're sorry to see you go!
       </p>
-      <Button
-        destructive={true}
-        onClick={[Function]}
-        size="default"
-      >
-        Cancel Account
-      </Button>
     </Panel>
   </Connect(AccessControl)>
 </Page>
