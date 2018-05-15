@@ -6,7 +6,7 @@ exports[`Component: NotificationCenter should render correctly 1`] = `
   left={true}
   right={true}
   trigger={
-    <UnreadNotifications
+    <NotificationsUnread
       className={undefined}
     />
   }
