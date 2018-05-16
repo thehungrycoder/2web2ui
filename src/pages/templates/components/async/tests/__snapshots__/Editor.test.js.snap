@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Editor should render 1`] = `
-<div>
+<div
+  className="EditorSection"
+>
   <Tabs
     color="orange"
     connectBelow={true}
@@ -23,7 +25,9 @@ exports[`Editor should render 1`] = `
       ]
     }
   />
-  <Panel>
+  <Panel
+    className="EditorPanel"
+  >
     <Field
       component={[Function]}
       mode="html"

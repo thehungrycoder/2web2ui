@@ -4,9 +4,12 @@ exports[`Support Component render tests should render just the icon by default 1
 <Portal
   containerId="support-portal"
 >
-  <div>
+  <div
+    className="Support"
+  >
     <Popover
       bottom={true}
+      className="Popover"
       fixed={true}
       left={true}
       open={false}
@@ -14,11 +17,11 @@ exports[`Support Component render tests should render just the icon by default 1
       top={true}
       trigger={
         <a
-          className={undefined}
+          className="Button"
           onClick={[Function]}
         >
           <Help
-            className={undefined}
+            className="Icon"
             size={33}
           />
         </a>
@@ -32,9 +35,12 @@ exports[`Support Component render tests should show form and close icon when pan
 <Portal
   containerId="support-portal"
 >
-  <div>
+  <div
+    className="Support"
+  >
     <Popover
       bottom={true}
+      className="Popover"
       fixed={true}
       left={true}
       open={true}
@@ -42,11 +48,11 @@ exports[`Support Component render tests should show form and close icon when pan
       top={true}
       trigger={
         <a
-          className={undefined}
+          className="Button"
           onClick={[Function]}
         >
           <Cancel
-            className={undefined}
+            className="Icon"
             size={33}
           />
         </a>
@@ -65,9 +71,12 @@ exports[`Support Component render tests should show search panel and close icon 
 <Portal
   containerId="support-portal"
 >
-  <div>
+  <div
+    className="Support"
+  >
     <Popover
       bottom={true}
+      className="Popover"
       fixed={true}
       left={true}
       open={true}
@@ -75,11 +84,11 @@ exports[`Support Component render tests should show search panel and close icon 
       top={true}
       trigger={
         <a
-          className={undefined}
+          className="Button"
           onClick={[Function]}
         >
           <Cancel
-            className={undefined}
+            className="Icon"
             size={33}
           />
         </a>

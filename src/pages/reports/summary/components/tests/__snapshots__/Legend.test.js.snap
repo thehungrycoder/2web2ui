@@ -1,11 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Component: Summary Chart Legend should render 1`] = `
-<div>
+<div
+  className="Legend"
+>
   <div
+    className="Metric"
     key="count_a"
   >
     <span
+      className="Color"
       style={
         Object {
           "backgroundColor": "#aaa",
@@ -15,9 +19,11 @@ exports[`Component: Summary Chart Legend should render 1`] = `
     A
   </div>
   <div
+    className="Metric"
     key="count_b"
   >
     <span
+      className="Color"
       style={
         Object {
           "backgroundColor": "#bbb",
@@ -27,9 +33,11 @@ exports[`Component: Summary Chart Legend should render 1`] = `
     B
   </div>
   <div
+    className="Metric"
     key="count_c"
   >
     <span
+      className="Color"
       style={
         Object {
           "backgroundColor": "#ccc",

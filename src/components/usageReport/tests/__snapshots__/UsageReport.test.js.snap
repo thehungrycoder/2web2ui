@@ -131,13 +131,17 @@ exports[`UsageReport Component should render with regular usage 1`] = `
 `;
 
 exports[`UsageReport Component should render with regular usage 2`] = `
-<div>
+<div
+  className="Display"
+>
   <h5
-    className=""
+    className="Content orange"
   >
     1,000
   </h5>
-  <h6>
+  <h6
+    className="Label"
+  >
     Used
   </h6>
 </div>
@@ -145,10 +149,14 @@ exports[`UsageReport Component should render with regular usage 2`] = `
 
 exports[`UsageReport Component should render with regular usage 3`] = `
 <div>
-  <h5>
+  <h5
+    className="ProgressTitle"
+  >
     Today
   </h5>
-  <h6>
+  <h6
+    className="ProgressSecondary"
+  >
     Since 2017-08-30T00:00:00.000Z
   </h6>
 </div>

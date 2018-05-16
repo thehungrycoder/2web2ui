@@ -1,9 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Steps should render correctly 1`] = `
-<ul>
+<ul
+  className="Steps"
+>
   <li
-    className=""
+    className="Item completed"
     key="Confirm your Plan"
   >
     <Check />
@@ -11,7 +13,7 @@ exports[`Steps should render correctly 1`] = `
     Confirm your Plan
   </li>
   <li
-    className=""
+    className="Item current"
     key="Add a Domain"
   >
     2.
@@ -19,7 +21,7 @@ exports[`Steps should render correctly 1`] = `
     Add a Domain
   </li>
   <li
-    className=""
+    className="Item"
     key="Send an Email"
   >
     3.

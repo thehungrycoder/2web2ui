@@ -10,6 +10,7 @@ exports[`Component: ConfirmationModal should render correctly with basic props 1
   >
     <div>
       <Button
+        className="Confirm"
         onClick={[MockFunction]}
         primary={true}
         size="default"
@@ -17,6 +18,7 @@ exports[`Component: ConfirmationModal should render correctly with basic props 1
         Confirm
       </Button>
       <Button
+        className="Cancel"
         onClick={[MockFunction]}
         size="default"
       >
@@ -42,6 +44,7 @@ exports[`Component: ConfirmationModal should render correctly with open, content
         Some JSX content for the modal
       </p>
       <Button
+        className="Confirm"
         onClick={[MockFunction]}
         primary={true}
         size="default"
@@ -49,6 +52,7 @@ exports[`Component: ConfirmationModal should render correctly with open, content
         DESTROY
       </Button>
       <Button
+        className="Cancel"
         onClick={[MockFunction]}
         size="default"
       >

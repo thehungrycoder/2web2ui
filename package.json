@@ -128,6 +128,7 @@
     "fs-extra": "^5.0.0",
     "html-webpack-plugin": "^2.30.1",
     "husky": "^0.14.3",
+    "identity-obj-proxy": "^3.0.0",
     "incstr": "^1.2.3",
     "jest": "^22.1.4",
     "jest-enzyme": "^5.0.0",

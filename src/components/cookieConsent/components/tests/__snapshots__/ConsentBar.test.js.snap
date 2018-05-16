@@ -1,8 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ConsentBar should render correctly 1`] = `
-<div>
-  <div>
+<div
+  className="CookieConsent"
+>
+  <div
+    className="ConsentBar"
+  >
     <Snackbar
       maxWidth={700}
       onDismiss={[MockFunction]}

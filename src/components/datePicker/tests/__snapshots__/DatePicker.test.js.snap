@@ -28,6 +28,7 @@ exports[`Component: DatePicker handleFormDates should use a date field format if
 exports[`Component: DatePicker should render ok by default 1`] = `
 <Popover
   bottom={true}
+  className="Popover"
   onOutsideClick={[Function]}
   open={false}
   right={true}
@@ -87,6 +88,7 @@ exports[`Component: DatePicker should render ok by default 1`] = `
     to={2017-01-15T12:00:00.000Z}
   />
   <Button
+    className="Apply"
     onClick={[Function]}
     primary={true}
     size="default"

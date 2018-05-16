@@ -7,7 +7,7 @@ exports[`Component: NotificationCenter should render correctly 1`] = `
   right={true}
   trigger={
     <NotificationsUnread
-      className={undefined}
+      className="UnreadNotificationSignal"
     />
   }
 >
@@ -38,7 +38,7 @@ exports[`Component: NotificationCenter should render with no notifications 1`] =
   right={true}
   trigger={
     <Notifications
-      className={undefined}
+      className="NotificationSignal"
     />
   }
 >
@@ -55,7 +55,7 @@ exports[`Component: NotificationCenter should render with no unread notification
   right={true}
   trigger={
     <Notifications
-      className={undefined}
+      className="NotificationSignal"
     />
   }
 >

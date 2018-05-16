@@ -43,6 +43,7 @@ exports[`DisableTfaModal tests should render correctly 1`] = `
           Disable 2FA
         </Button>
         <Button
+          className="Cancel"
           disabled={false}
           onClick={[MockFunction]}
           size="default"
@@ -98,6 +99,7 @@ exports[`DisableTfaModal tests should show disabling as button text when toggleP
           Disabling...
         </Button>
         <Button
+          className="Cancel"
           disabled={true}
           onClick={[MockFunction]}
           size="default"
@@ -153,6 +155,7 @@ exports[`DisableTfaModal tests should show error on TextField when toggleError a
           Disable 2FA
         </Button>
         <Button
+          className="Cancel"
           disabled={false}
           onClick={[MockFunction]}
           size="default"

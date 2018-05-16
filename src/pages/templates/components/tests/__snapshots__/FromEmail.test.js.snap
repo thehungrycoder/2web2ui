@@ -17,7 +17,7 @@ exports[`From Email Typeahead Wrapper should render error 1`] = `
 
 exports[`From Email Typeahead should render list 1`] = `
 <div
-  className={undefined}
+  className="Typeahead"
 >
   <TextField
     resize="both"
@@ -34,7 +34,7 @@ exports[`From Email Typeahead should render list 1`] = `
         },
       ]
     }
-    className=""
+    className="List open"
   />
 </div>
 `;

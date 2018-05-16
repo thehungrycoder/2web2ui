@@ -8,7 +8,9 @@ exports[`Component: Report Options should mount and render correctly 1`] = `
         md={6}
         xs={12}
       >
-        <div>
+        <div
+          className="FieldWrapper"
+        >
           <AppDatePicker
             filters={Array []}
             from={2018-02-15T12:00:00.000Z}
@@ -68,7 +70,9 @@ exports[`Component: Report Options with active filters should render 1`] = `
         md={6}
         xs={12}
       >
-        <div>
+        <div
+          className="FieldWrapper"
+        >
           <AppDatePicker
             filters={
               Array [
@@ -152,6 +156,7 @@ exports[`Component: Report Options with active filters should render 1`] = `
       Filters:
     </small>
     <Tag
+      className="TagWrapper"
       key="0"
       onRemove={[Function]}
     >
@@ -160,6 +165,7 @@ exports[`Component: Report Options with active filters should render 1`] = `
       aaa
     </Tag>
     <Tag
+      className="TagWrapper"
       key="1"
       onRemove={[Function]}
     >
@@ -168,6 +174,7 @@ exports[`Component: Report Options with active filters should render 1`] = `
       bbb
     </Tag>
     <Tag
+      className="TagWrapper"
       key="2"
       onRemove={[Function]}
     >

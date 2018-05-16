@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders HTML by default 1`] = `
-<div>
+<div
+  className="PreviewPanel"
+>
   <Tabs
     color="orange"
     connectBelow={true}
@@ -19,7 +21,9 @@ exports[`renders HTML by default 1`] = `
       ]
     }
   />
-  <div>
+  <div
+    className="PreviewPanelWrapper"
+  >
     <PreviewFrame
       content="<h1>Test Template</h1>"
       key="html"
@@ -29,7 +33,9 @@ exports[`renders HTML by default 1`] = `
 `;
 
 exports[`renders blank panel 1`] = `
-<div>
+<div
+  className="PreviewPanel"
+>
   <Tabs
     color="orange"
     connectBelow={true}
@@ -47,7 +53,9 @@ exports[`renders blank panel 1`] = `
       ]
     }
   />
-  <div>
+  <div
+    className="PreviewPanelWrapper"
+  >
     <PreviewFrame
       content=""
       key="html"
@@ -57,7 +65,9 @@ exports[`renders blank panel 1`] = `
 `;
 
 exports[`renders text on tab click 1`] = `
-<div>
+<div
+  className="PreviewPanel"
+>
   <Tabs
     color="orange"
     connectBelow={true}
@@ -75,7 +85,9 @@ exports[`renders text on tab click 1`] = `
       ]
     }
   />
-  <div>
+  <div
+    className="PreviewPanelWrapper"
+  >
     <PreviewFrame
       content="<p style=\\"white-space: pre-wrap\\">Test Template</p>"
       key="text"

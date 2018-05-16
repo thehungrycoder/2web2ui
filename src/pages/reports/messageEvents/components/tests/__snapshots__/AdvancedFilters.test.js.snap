@@ -39,6 +39,7 @@ exports[`Component: ActiveFilters should render initially and sync to state corr
           label="Event Type"
         >
           <div
+            className="CheckWrapper"
             key="delivery"
           >
             <Checkbox
@@ -49,6 +50,7 @@ exports[`Component: ActiveFilters should render initially and sync to state corr
             />
           </div>
           <div
+            className="CheckWrapper"
             key="injection"
           >
             <Checkbox
@@ -59,6 +61,7 @@ exports[`Component: ActiveFilters should render initially and sync to state corr
             />
           </div>
           <div
+            className="CheckWrapper"
             key="bounce"
           >
             <Checkbox
@@ -69,6 +72,7 @@ exports[`Component: ActiveFilters should render initially and sync to state corr
             />
           </div>
           <div
+            className="CheckWrapper"
             key="delay"
           >
             <Checkbox
@@ -79,6 +83,7 @@ exports[`Component: ActiveFilters should render initially and sync to state corr
             />
           </div>
           <div
+            className="CheckWrapper"
             key="policy_rejection"
           >
             <Checkbox
@@ -89,6 +94,7 @@ exports[`Component: ActiveFilters should render initially and sync to state corr
             />
           </div>
           <div
+            className="CheckWrapper"
             key="out_of_band"
           >
             <Checkbox
@@ -99,6 +105,7 @@ exports[`Component: ActiveFilters should render initially and sync to state corr
             />
           </div>
           <div
+            className="CheckWrapper"
             key="open"
           >
             <Checkbox
@@ -109,6 +116,7 @@ exports[`Component: ActiveFilters should render initially and sync to state corr
             />
           </div>
           <div
+            className="CheckWrapper"
             key="initial_open"
           >
             <Checkbox
@@ -119,6 +127,7 @@ exports[`Component: ActiveFilters should render initially and sync to state corr
             />
           </div>
           <div
+            className="CheckWrapper"
             key="click"
           >
             <Checkbox
@@ -129,6 +138,7 @@ exports[`Component: ActiveFilters should render initially and sync to state corr
             />
           </div>
           <div
+            className="CheckWrapper"
             key="generation_failure"
           >
             <Checkbox
@@ -139,6 +149,7 @@ exports[`Component: ActiveFilters should render initially and sync to state corr
             />
           </div>
           <div
+            className="CheckWrapper"
             key="generation_rejection"
           >
             <Checkbox
@@ -149,6 +160,7 @@ exports[`Component: ActiveFilters should render initially and sync to state corr
             />
           </div>
           <div
+            className="CheckWrapper"
             key="spam_complaint"
           >
             <Checkbox
@@ -159,6 +171,7 @@ exports[`Component: ActiveFilters should render initially and sync to state corr
             />
           </div>
           <div
+            className="CheckWrapper"
             key="list_unsubscribe"
           >
             <Checkbox
@@ -169,6 +182,7 @@ exports[`Component: ActiveFilters should render initially and sync to state corr
             />
           </div>
           <div
+            className="CheckWrapper"
             key="link_unsubscribe"
           >
             <Checkbox
@@ -187,6 +201,7 @@ exports[`Component: ActiveFilters should render initially and sync to state corr
           </small>
         </p>
         <div
+          className="FieldWrapper"
           key="friendly_froms"
         >
           <TextField
@@ -203,6 +218,7 @@ exports[`Component: ActiveFilters should render initially and sync to state corr
           />
         </div>
         <div
+          className="FieldWrapper"
           key="subaccounts"
         >
           <TextField
@@ -214,6 +230,7 @@ exports[`Component: ActiveFilters should render initially and sync to state corr
           />
         </div>
         <div
+          className="FieldWrapper"
           key="message_ids"
         >
           <TextField
@@ -225,6 +242,7 @@ exports[`Component: ActiveFilters should render initially and sync to state corr
           />
         </div>
         <div
+          className="FieldWrapper"
           key="template_ids"
         >
           <TextField
@@ -236,6 +254,7 @@ exports[`Component: ActiveFilters should render initially and sync to state corr
           />
         </div>
         <div
+          className="FieldWrapper"
           key="campaign_ids"
         >
           <TextField
@@ -257,6 +276,7 @@ exports[`Component: ActiveFilters should render initially and sync to state corr
           Apply Filters
         </Button>
         <Button
+          className="Cancel"
           onClick={[Function]}
           size="default"
         >

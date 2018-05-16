@@ -2,22 +2,27 @@
 
 exports[`LegendItem:  should render 1`] = `
 <a
-  className=""
+  className="LegendItem enabled hasChildren hovered otherHovered"
   onClick={[MockFunction]}
   title="View name"
 >
   <span
+    className="Color"
     style={
       Object {
         "backgroundColor": "#000",
       }
     }
   />
-  <span>
+  <span
+    className="Name"
+  >
     name
     <ChevronRight />
   </span>
-  <span>
+  <span
+    className="Count"
+  >
     2
   </span>
 </a>
@@ -25,23 +30,30 @@ exports[`LegendItem:  should render 1`] = `
 
 exports[`LegendItem:  should render breadcrumb 1`] = `
 <a
-  className=""
+  className="LegendItem enabled hasChildren breadcrumb hovered otherHovered"
   onClick={[MockFunction]}
   title="View name"
 >
   <span
+    className="Color"
     style={
       Object {
         "backgroundColor": "#000",
       }
     }
   />
-  <ChevronLeft />
-  <span>
+  <ChevronLeft
+    className="BreadcrumbIcon"
+  />
+  <span
+    className="Name"
+  >
     name
     <ChevronRight />
   </span>
-  <span>
+  <span
+    className="Count"
+  >
     2
   </span>
 </a>

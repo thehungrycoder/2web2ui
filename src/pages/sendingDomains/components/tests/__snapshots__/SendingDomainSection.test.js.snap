@@ -5,7 +5,9 @@ exports[`Component: SendingDomainSection should render Left section 1`] = `
   lg={5}
   xs={12}
 >
-  <div>
+  <div
+    className="Left"
+  >
     Bill
     Brasky
   </div>
@@ -17,7 +19,9 @@ exports[`Component: SendingDomainSection should render Right section 1`] = `
   lg={7}
   xs={12}
 >
-  <div>
+  <div
+    className="Right"
+  >
     Bill
     Brasky
   </div>
@@ -25,8 +29,12 @@ exports[`Component: SendingDomainSection should render Right section 1`] = `
 `;
 
 exports[`Component: SendingDomainSection should render sending domain section 1`] = `
-<div>
-  <hr />
+<div
+  className="SendingDomainSection"
+>
+  <hr
+    className="Hr"
+  />
   <h3>
     Title
   </h3>

@@ -6,6 +6,7 @@ exports[`Support CTA Component should render 1`] = `
     Do you need more assistance?
   </span>
   <Button
+    className="ToggleButton"
     onClick={[MockFunction]}
     primary={true}
     size="default"
@@ -17,13 +18,16 @@ exports[`Support CTA Component should render 1`] = `
 
 exports[`Support CTA Component should render with phone support 1`] = `
 <React.Fragment>
-  <div>
+  <div
+    className="Phone"
+  >
     <p>
       Do you need more assistance?
     </p>
     <p>
       <strong>
         <UnstyledLink
+          className="PhoneLink"
           title="Call Support"
           to="tel:1-415-751-0928"
         >
@@ -31,7 +35,9 @@ exports[`Support CTA Component should render with phone support 1`] = `
         </UnstyledLink>
       </strong>
        
-      <span>
+      <span
+        className="Spacer"
+      >
         —
       </span>
        
@@ -41,6 +47,7 @@ exports[`Support CTA Component should render with phone support 1`] = `
     </p>
   </div>
   <Button
+    className="ToggleButton"
     onClick={[MockFunction]}
     primary={true}
     size="default"

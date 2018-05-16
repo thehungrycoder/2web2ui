@@ -19,13 +19,17 @@ exports[`PlanPrice allows class name overriding 1`] = `
       mo
     </span>
   </span>
-  <span />
+  <span
+    className="SupportLabel"
+  />
 </span>
 `;
 
 exports[`PlanPrice renders correctly 1`] = `
 <span>
-  <span>
+  <span
+    className="MainLabel"
+  >
     <strong>
       50,000
     </strong>
@@ -40,26 +44,34 @@ exports[`PlanPrice renders correctly 1`] = `
       mo
     </span>
   </span>
-  <span />
+  <span
+    className="SupportLabel"
+  />
 </span>
 `;
 
 exports[`PlanPrice renders correctly for free plan 1`] = `
 <span>
-  <span>
+  <span
+    className="MainLabel"
+  >
     <strong>
       50,000
     </strong>
      emails/month
      for Free
   </span>
-  <span />
+  <span
+    className="SupportLabel"
+  />
 </span>
 `;
 
 exports[`PlanPrice renders correctly with hourly plans 1`] = `
 <span>
-  <span>
+  <span
+    className="MainLabel"
+  >
     <strong>
       50,000
     </strong>
@@ -74,13 +86,17 @@ exports[`PlanPrice renders correctly with hourly plans 1`] = `
       hr
     </span>
   </span>
-  <span />
+  <span
+    className="SupportLabel"
+  />
 </span>
 `;
 
 exports[`PlanPrice renders free ip 1`] = `
 <span>
-  <span>
+  <span
+    className="MainLabel"
+  >
     <strong>
       50,000
     </strong>
@@ -95,7 +111,9 @@ exports[`PlanPrice renders free ip 1`] = `
       mo
     </span>
   </span>
-  <span>
+  <span
+    className="SupportLabel"
+  >
     First dedicated IP address is free
   </span>
 </span>
@@ -103,7 +121,9 @@ exports[`PlanPrice renders free ip 1`] = `
 
 exports[`PlanPrice renders free ip and overage correct 1`] = `
 <span>
-  <span>
+  <span
+    className="MainLabel"
+  >
     <strong>
       50,000
     </strong>
@@ -118,7 +138,9 @@ exports[`PlanPrice renders free ip and overage correct 1`] = `
       mo
     </span>
   </span>
-  <span>
+  <span
+    className="SupportLabel"
+  >
     $0.75/ thousand extra emails. 
     First dedicated IP address is free
   </span>
@@ -129,7 +151,9 @@ exports[`PlanPrice renders nothing when no plan 1`] = `""`;
 
 exports[`PlanPrice renders with overage 1`] = `
 <span>
-  <span>
+  <span
+    className="MainLabel"
+  >
     <strong>
       50,000
     </strong>
@@ -144,7 +168,9 @@ exports[`PlanPrice renders with overage 1`] = `
       mo
     </span>
   </span>
-  <span>
+  <span
+    className="SupportLabel"
+  >
     $0.75/ thousand extra emails. 
   </span>
 </span>

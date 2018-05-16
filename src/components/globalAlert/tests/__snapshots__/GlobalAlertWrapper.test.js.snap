@@ -4,7 +4,9 @@ exports[`GlobalAlertWrapper should render 1`] = `
 <Portal
   containerId="alert-portal"
 >
-  <div>
+  <div
+    className="Wrapper"
+  >
     <TransitionGroup
       childFactory={[Function]}
       component="div"
@@ -12,7 +14,9 @@ exports[`GlobalAlertWrapper should render 1`] = `
       <Animator
         key="alert_1"
       >
-        <div>
+        <div
+          className="Alert"
+        >
           <Alert
             autoDismiss={true}
             id="alert_1"

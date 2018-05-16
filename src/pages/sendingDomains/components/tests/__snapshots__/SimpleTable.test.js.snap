@@ -18,6 +18,7 @@ exports[`Component: SimpleTable renders table correctly 1`] = `
       </Table.HeaderCell>
     </Table.Row>
     <Table.Row
+      className="Row"
       key="0"
     >
       <Table.Cell

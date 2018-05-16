@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[` Component: Centered Logo renders aws marketplace logo (along with sparkpost) 1`] = `
-<div>
+<div
+  className="CenteredLogo"
+>
   <UnstyledLink
     title="SparkPost"
     to="https://www.sparkpost.com"
@@ -16,7 +18,9 @@ exports[` Component: Centered Logo renders aws marketplace logo (along with spar
 `;
 
 exports[` Component: Centered Logo renders sparkpost logo 1`] = `
-<div>
+<div
+  className="CenteredLogo"
+>
   <UnstyledLink
     title="SparkPost"
     to="https://www.sparkpost.com"

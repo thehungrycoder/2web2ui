@@ -1,14 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`MetricCard Component:  should render correctly with all props 1`] = `
-<div>
+<div
+  className="MetricCard"
+>
   <Panel
+    className="Panel"
     primary={true}
   >
-    <h1>
+    <h1
+      className="Value"
+    >
       Card Value
     </h1>
-    <h6>
+    <h6
+      className="Label"
+    >
       Card Label
        
       <Tooltip
@@ -35,14 +42,21 @@ exports[`MetricCard Component:  should render correctly with all props 1`] = `
 `;
 
 exports[`MetricCard Component:  should render without tooltip 1`] = `
-<div>
+<div
+  className="MetricCard"
+>
   <Panel
+    className="Panel"
     primary={true}
   >
-    <h1>
+    <h1
+      className="Value"
+    >
       Card Value
     </h1>
-    <h6>
+    <h6
+      className="Label"
+    >
       Card Label
        
     </h6>

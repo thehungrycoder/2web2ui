@@ -16,6 +16,7 @@ exports[`Component: ActiveFilters should render filters correctly 1`] = `
     Filters: 
   </small>
   <Tag
+    className="TagWrapper"
     key="0"
     onRemove={[Function]}
   >
@@ -24,6 +25,7 @@ exports[`Component: ActiveFilters should render filters correctly 1`] = `
     Bounce
   </Tag>
   <Tag
+    className="TagWrapper"
     key="1"
     onRemove={[Function]}
   >
@@ -32,6 +34,7 @@ exports[`Component: ActiveFilters should render filters correctly 1`] = `
     Click
   </Tag>
   <Tag
+    className="TagWrapper"
     key="2"
     onRemove={[Function]}
   >
@@ -40,6 +43,7 @@ exports[`Component: ActiveFilters should render filters correctly 1`] = `
     Spam Complaint
   </Tag>
   <Tag
+    className="TagWrapper"
     key="0"
     onRemove={[Function]}
   >
@@ -48,6 +52,7 @@ exports[`Component: ActiveFilters should render filters correctly 1`] = `
     101
   </Tag>
   <Tag
+    className="TagWrapper"
     key="1"
     onRemove={[Function]}
   >

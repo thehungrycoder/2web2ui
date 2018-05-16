@@ -2,15 +2,20 @@
 
 exports[`Component: App Layout should render correctly 1`] = `
 <div
-  className="undefined undefined undefined"
+  className="wrapper app accent"
 >
-  <div>
+  <div
+    className="aside"
+  >
     <withRouter(Connect(Navigation)) />
   </div>
   <main
+    className="content"
     role="main"
   >
-    <div>
+    <div
+      className="container"
+    >
       <h1>
         My cool af children
       </h1>
