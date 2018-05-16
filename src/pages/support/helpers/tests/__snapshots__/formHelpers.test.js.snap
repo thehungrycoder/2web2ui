@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`generateMessage should create a support ticket message with labels correctly 1`] = `
+"
+Please list any existing and previous non SparkPost sending domains.
+1
+
+
+Please list any existing and previous non SparkPost sending IPs.
+2
+
+
+What are your acquisition practices?
+3
+
+
+What are your hygiene practices?
+4
+
+
+What are your traffic types? (marketing, newsletters, e-commerce, transactional)
+5
+
+
+Are you willing to only use dedicated IPs and no longer use the shared pools?
+yes
+
+
+Please provide the location of your privacy policy?
+6
+
+
+Please provide the location of your website?
+7
+
+
+If you're a small service provider, please provide the location of your sending policy
+
+
+
+Have you been terminated as a customer from an ESP before?
+no
+
+
+What are the current issues you would like to resolve or improve?
+9
+
+"
+`;

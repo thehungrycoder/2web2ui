@@ -137,3 +137,36 @@ exports[`Billing Banners:  Premium banner renders 1`] = `
   </ul>
 </Banner>
 `;
+
+exports[`Billing Banners:  Premium banner renders correctly for aws users 1`] = `
+<Banner
+  action={
+    Object {
+      "component": [Function],
+      "content": "Request Premium Support",
+      "onClick": [Function],
+      "to": "/support/aws-premium",
+    }
+  }
+  status="default"
+  title="Premium Addon Plan"
+>
+  <p>
+    Get full-service Technical Account Management with proactive reporting, planning & reviews.
+  </p>
+  <ul>
+    <li>
+      Includes all standard SparkPost features
+    </li>
+    <li>
+      Dedicated Technical Account Manager (TAM)
+    </li>
+    <li>
+      Global ISP relations and mediation
+    </li>
+    <li>
+      Deliverability data analysis and guidance with 250ok
+    </li>
+  </ul>
+</Banner>
+`;
