@@ -1,13 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`RadioGroup renders radio buttons 1`] = `
+exports[`RadioGroup renders error state 1`] = `
 <Radio.Group>
-  Choose one
+  <Label>
+    Choose one
+    <Error
+      error="error message"
+    />
+  </Label>
   <Radio
     checked={false}
     disabled={false}
-    id="Option One"
-    key="Option One"
+    id="example-one"
+    key="example-one"
     label="Option One"
     name="example"
     value="one"
@@ -15,8 +20,34 @@ exports[`RadioGroup renders radio buttons 1`] = `
   <Radio
     checked={false}
     disabled={false}
-    id="Option Two"
-    key="Option Two"
+    id="example-two"
+    key="example-two"
+    label="Option Two"
+    name="example"
+    value="two"
+  />
+</Radio.Group>
+`;
+
+exports[`RadioGroup renders radio buttons 1`] = `
+<Radio.Group>
+  <Label>
+    Choose one
+  </Label>
+  <Radio
+    checked={false}
+    disabled={false}
+    id="example-one"
+    key="example-one"
+    label="Option One"
+    name="example"
+    value="one"
+  />
+  <Radio
+    checked={false}
+    disabled={false}
+    id="example-two"
+    key="example-two"
     label="Option Two"
     name="example"
     value="two"
@@ -26,12 +57,14 @@ exports[`RadioGroup renders radio buttons 1`] = `
 
 exports[`RadioGroup renders radio buttons with first option checked 1`] = `
 <Radio.Group>
-  Choose one
+  <Label>
+    Choose one
+  </Label>
   <Radio
     checked={true}
     disabled={false}
-    id="Option One"
-    key="Option One"
+    id="example-one"
+    key="example-one"
     label="Option One"
     name="example"
     value="one"
@@ -39,8 +72,8 @@ exports[`RadioGroup renders radio buttons with first option checked 1`] = `
   <Radio
     checked={false}
     disabled={false}
-    id="Option Two"
-    key="Option Two"
+    id="example-two"
+    key="example-two"
     label="Option Two"
     name="example"
     value="two"
@@ -50,12 +83,14 @@ exports[`RadioGroup renders radio buttons with first option checked 1`] = `
 
 exports[`RadioGroup renders radio buttons with second option disabled 1`] = `
 <Radio.Group>
-  Choose one
+  <Label>
+    Choose one
+  </Label>
   <Radio
     checked={false}
     disabled={false}
-    id="Option One"
-    key="Option One"
+    id="example-one"
+    key="example-one"
     label="Option One"
     name="example"
     value="one"
@@ -63,8 +98,8 @@ exports[`RadioGroup renders radio buttons with second option disabled 1`] = `
   <Radio
     checked={false}
     disabled={true}
-    id="Option Two"
-    key="Option Two"
+    id="example-two"
+    key="example-two"
     label="Option Two"
     name="example"
     value="two"

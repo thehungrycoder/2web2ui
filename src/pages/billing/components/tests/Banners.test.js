@@ -66,6 +66,11 @@ describe('Billing Banners: ', () => {
       expect(wrapper).toMatchSnapshot();
     });
 
+    it('renders correctly for aws users', () => {
+      wrapper.setProps({ isAWSAccount: true });
+      expect(wrapper).toMatchSnapshot();
+    });
+
     it('tracks addon request', () => {
       wrapper.prop('action').onClick();
       expect(conversions.trackAddonRequest).toHaveBeenCalledWith(constants.ANALYTICS_PREMIUM_SUPPORT);
