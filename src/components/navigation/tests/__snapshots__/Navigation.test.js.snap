@@ -3,15 +3,21 @@
 exports[`Navigation Navigation tests should render full nav 1`] = `
 <div>
   <div
-    className=""
+    className="overlay"
     onClick={[Function]}
   />
   <nav
-    className=""
+    className="navigation"
   >
-    <div>
-      <ul>
-        <div>
+    <div
+      className="wrapper"
+    >
+      <ul
+        className="list"
+      >
+        <div
+          className="logo"
+        >
           <Logo
             type="white"
           />
@@ -32,20 +38,28 @@ exports[`Navigation Navigation tests should render full nav 1`] = `
       <Connect(Footer) />
     </div>
     <Close
+      className="close"
       onClick={[Function]}
       size={33}
     />
   </nav>
-  <nav>
-    <div>
+  <nav
+    className="bar"
+  >
+    <div
+      className="mobileLogo"
+    >
       <Logo
         type="white"
       />
     </div>
     <a
+      className="open"
       onClick={[Function]}
     >
-      <span />
+      <span
+        className="hamburger"
+      />
     </a>
   </nav>
 </div>

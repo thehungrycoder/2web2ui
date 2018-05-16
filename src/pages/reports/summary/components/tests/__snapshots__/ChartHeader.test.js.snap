@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Component: Summary Chart Header should render 1`] = `
-<Grid>
+<Grid
+  className="ChartHeader"
+>
   <Grid.Column
     lg={5}
     md={5}
@@ -20,7 +22,9 @@ exports[`Component: Summary Chart Header should render 1`] = `
     md={7}
     xs={12}
   >
-    <div>
+    <div
+      className="Controls"
+    >
       <Button
         onClick={[MockFunction]}
         size="small"

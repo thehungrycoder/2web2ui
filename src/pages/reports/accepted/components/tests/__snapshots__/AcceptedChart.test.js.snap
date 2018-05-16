@@ -77,7 +77,9 @@ exports[`Accepted ChartGroup:  should render 1`] = `
       lg={5}
       xs={12}
     >
-      <div>
+      <div
+        className="ChartWrapper"
+      >
         <LoadableComponent
           hoveredItem={null}
           onClick={[Function]}
@@ -238,6 +240,7 @@ exports[`Accepted ChartGroup:  should render label when hovering over a child 1`
 
 exports[`Accepted ChartGroup:  should render loading 1`] = `
 <Panel
+  className="LoadingPanel"
   sectioned={true}
   title="Accepted Rates"
 >

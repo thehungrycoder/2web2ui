@@ -2,6 +2,7 @@
 
 exports[`Component: TrackingDomainRow Tag component should render the IsDefaultTag 1`] = `
 <Tag
+  className="Tag"
   color="orange"
 >
   Default
@@ -15,11 +16,16 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
       md={9}
       xs={12}
     >
-      <span>
+      <span
+        className="DomainHeading"
+      >
         somedomain.com
       </span>
-      <div>
+      <div
+        className="TagRow"
+      >
         <DomainStatusTag
+          className="Tag"
           status="unverified"
         />
       </div>
@@ -28,7 +34,9 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
       md={3}
       xs={12}
     >
-      <Button.Group>
+      <Button.Group
+        className="ButtonColumn"
+      >
         <Button
           onClick={[Function]}
           size="small"
@@ -84,11 +92,16 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
       md={9}
       xs={12}
     >
-      <span>
+      <span
+        className="DomainHeading"
+      >
         somedomain.com
       </span>
-      <div>
+      <div
+        className="TagRow"
+      >
         <DomainStatusTag
+          className="Tag"
           status="blocked"
         />
       </div>
@@ -97,7 +110,9 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
       md={3}
       xs={12}
     >
-      <Button.Group>
+      <Button.Group
+        className="ButtonColumn"
+      >
         <Button
           onClick={[Function]}
           size="small"
@@ -146,11 +161,16 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
       md={9}
       xs={12}
     >
-      <span>
+      <span
+        className="DomainHeading"
+      >
         somedomain.com
       </span>
-      <div>
+      <div
+        className="TagRow"
+      >
         <DomainStatusTag
+          className="Tag"
           status="unverified"
         />
         <IsDefaultTag />
@@ -160,7 +180,9 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
       md={3}
       xs={12}
     >
-      <Button.Group>
+      <Button.Group
+        className="ButtonColumn"
+      >
         <Button
           onClick={[Function]}
           size="small"
@@ -222,10 +244,14 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
       md={9}
       xs={12}
     >
-      <span>
+      <span
+        className="DomainHeading"
+      >
         somedomain.com
       </span>
-      <div>
+      <div
+        className="TagRow"
+      >
         <IsDefaultTag />
       </div>
     </Grid.Column>
@@ -233,7 +259,9 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
       md={3}
       xs={12}
     >
-      <Button.Group>
+      <Button.Group
+        className="ButtonColumn"
+      >
         <Button
           destructive={true}
           onClick={[Function]}
@@ -294,11 +322,16 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
       md={9}
       xs={12}
     >
-      <span>
+      <span
+        className="DomainHeading"
+      >
         somedomain.com
       </span>
-      <div>
+      <div
+        className="TagRow"
+      >
         <DomainStatusTag
+          className="Tag"
           status="unverified"
         />
       </div>
@@ -307,7 +340,9 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
       md={3}
       xs={12}
     >
-      <Button.Group>
+      <Button.Group
+        className="ButtonColumn"
+      >
         <Button
           onClick={[Function]}
           size="small"
@@ -363,16 +398,22 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
       md={9}
       xs={12}
     >
-      <span>
+      <span
+        className="DomainHeading"
+      >
         somedomain.com
       </span>
-      <div />
+      <div
+        className="TagRow"
+      />
     </Grid.Column>
     <Grid.Column
       md={3}
       xs={12}
     >
-      <Button.Group>
+      <Button.Group
+        className="ButtonColumn"
+      >
         <Button
           destructive={false}
           onClick={[Function]}
@@ -427,11 +468,16 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
       md={9}
       xs={12}
     >
-      <span>
+      <span
+        className="DomainHeading"
+      >
         somedomain.com
       </span>
-      <div>
+      <div
+        className="TagRow"
+      >
         <DomainStatusTag
+          className="Tag"
           status="pending"
         />
       </div>
@@ -440,7 +486,9 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
       md={3}
       xs={12}
     >
-      <Button.Group>
+      <Button.Group
+        className="ButtonColumn"
+      >
         <Button
           onClick={[Function]}
           size="small"
@@ -489,15 +537,21 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
       md={9}
       xs={12}
     >
-      <span>
+      <span
+        className="DomainHeading"
+      >
         somedomain.com
       </span>
-      <div>
+      <div
+        className="TagRow"
+      >
         <DomainStatusTag
+          className="Tag"
           status="unverified"
         />
         <SubaccountTag
           all={false}
+          className="Tag"
           id={100}
           isDefault={false}
           master={false}
@@ -509,7 +563,9 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
       md={3}
       xs={12}
     >
-      <Button.Group>
+      <Button.Group
+        className="ButtonColumn"
+      >
         <Button
           onClick={[Function]}
           size="small"
@@ -565,15 +621,21 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
       md={9}
       xs={12}
     >
-      <span>
+      <span
+        className="DomainHeading"
+      >
         somedomain.com
       </span>
-      <div>
+      <div
+        className="TagRow"
+      >
         <DomainStatusTag
+          className="Tag"
           status="blocked"
         />
         <SubaccountTag
           all={false}
+          className="Tag"
           id={100}
           isDefault={false}
           master={false}
@@ -585,7 +647,9 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
       md={3}
       xs={12}
     >
-      <Button.Group>
+      <Button.Group
+        className="ButtonColumn"
+      >
         <Button
           onClick={[Function]}
           size="small"
@@ -634,15 +698,21 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
       md={9}
       xs={12}
     >
-      <span>
+      <span
+        className="DomainHeading"
+      >
         somedomain.com
       </span>
-      <div>
+      <div
+        className="TagRow"
+      >
         <DomainStatusTag
+          className="Tag"
           status="unverified"
         />
         <SubaccountTag
           all={false}
+          className="Tag"
           id={100}
           isDefault={true}
           master={false}
@@ -654,7 +724,9 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
       md={3}
       xs={12}
     >
-      <Button.Group>
+      <Button.Group
+        className="ButtonColumn"
+      >
         <Button
           onClick={[Function]}
           size="small"
@@ -716,12 +788,17 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
       md={9}
       xs={12}
     >
-      <span>
+      <span
+        className="DomainHeading"
+      >
         somedomain.com
       </span>
-      <div>
+      <div
+        className="TagRow"
+      >
         <SubaccountTag
           all={false}
+          className="Tag"
           id={100}
           isDefault={true}
           master={false}
@@ -733,7 +810,9 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
       md={3}
       xs={12}
     >
-      <Button.Group>
+      <Button.Group
+        className="ButtonColumn"
+      >
         <Button
           destructive={true}
           onClick={[Function]}
@@ -794,15 +873,21 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
       md={9}
       xs={12}
     >
-      <span>
+      <span
+        className="DomainHeading"
+      >
         somedomain.com
       </span>
-      <div>
+      <div
+        className="TagRow"
+      >
         <DomainStatusTag
+          className="Tag"
           status="unverified"
         />
         <SubaccountTag
           all={false}
+          className="Tag"
           id={100}
           isDefault={false}
           master={false}
@@ -814,7 +899,9 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
       md={3}
       xs={12}
     >
-      <Button.Group>
+      <Button.Group
+        className="ButtonColumn"
+      >
         <Button
           onClick={[Function]}
           size="small"
@@ -870,12 +957,17 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
       md={9}
       xs={12}
     >
-      <span>
+      <span
+        className="DomainHeading"
+      >
         somedomain.com
       </span>
-      <div>
+      <div
+        className="TagRow"
+      >
         <SubaccountTag
           all={false}
+          className="Tag"
           id={100}
           isDefault={false}
           master={false}
@@ -887,7 +979,9 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
       md={3}
       xs={12}
     >
-      <Button.Group>
+      <Button.Group
+        className="ButtonColumn"
+      >
         <Button
           destructive={false}
           onClick={[Function]}
@@ -942,15 +1036,21 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
       md={9}
       xs={12}
     >
-      <span>
+      <span
+        className="DomainHeading"
+      >
         somedomain.com
       </span>
-      <div>
+      <div
+        className="TagRow"
+      >
         <DomainStatusTag
+          className="Tag"
           status="pending"
         />
         <SubaccountTag
           all={false}
+          className="Tag"
           id={100}
           isDefault={false}
           master={false}
@@ -962,7 +1062,9 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
       md={3}
       xs={12}
     >
-      <Button.Group>
+      <Button.Group
+        className="ButtonColumn"
+      >
         <Button
           onClick={[Function]}
           size="small"

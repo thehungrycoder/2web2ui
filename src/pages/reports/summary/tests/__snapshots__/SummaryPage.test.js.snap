@@ -8,7 +8,7 @@ exports[`Page: SummaryPage should render correctly 1`] = `
   <withRouter(Connect(ReportOptions)) />
   <Panel>
     <Panel.Section
-      className=""
+      className="ChartSection"
     >
       <ChartHeader
         onMetricsToggle={[Function]}
@@ -62,7 +62,7 @@ exports[`Page: SummaryPage should render when loading 1`] = `
   />
   <Panel>
     <Panel.Section
-      className=""
+      className="ChartSection pending"
     >
       <ChartHeader
         onMetricsToggle={[Function]}
@@ -90,7 +90,9 @@ exports[`Page: SummaryPage should render when loading 1`] = `
         yScale="linear"
       />
     </Panel.Section>
-    <div>
+    <div
+      className="Loading"
+    >
       <Loading />
     </div>
   </Panel>

@@ -48,7 +48,7 @@ module.exports = {
   ],
   moduleNameMapper: {
     '^react-native$': 'react-native-web',
-    '\\.(css|scss)$': '<rootDir>/config/jest/styleMock.js'
+    '\\.(css|scss)$': 'identity-obj-proxy'
   },
   snapshotSerializers: [
     '<rootDir>/node_modules/enzyme-to-json/serializer'

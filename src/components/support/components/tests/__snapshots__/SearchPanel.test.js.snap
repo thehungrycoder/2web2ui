@@ -18,7 +18,9 @@ exports[`Search Panel Component should render 1`] = `
   <Panel.Section>
     <AlgoliaSearchBox(UnknownComponent) />
   </Panel.Section>
-  <Panel.Section>
+  <Panel.Section
+    className="Results"
+  >
     <AlgoliaHits(Hits)
       hitComponent={[Function]}
     />

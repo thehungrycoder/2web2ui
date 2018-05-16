@@ -2,7 +2,9 @@
 
 exports[`Template Form should disable fields for read-only users 1`] = `
 <div>
-  <Panel>
+  <Panel
+    className="FormPanel"
+  >
     <Panel.Section>
       <Field
         component={[Function]}
@@ -123,7 +125,9 @@ Array [
 
 exports[`Template Form should render 1`] = `
 <div>
-  <Panel>
+  <Panel
+    className="FormPanel"
+  >
     <Panel.Section>
       <Field
         component={[Function]}

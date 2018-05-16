@@ -2,7 +2,9 @@
 
 exports[`JoinForm render disables form when loading 1`] = `
 <form>
-  <Grid>
+  <Grid
+    className="spacer"
+  >
     <Grid.Column
       lg={6}
       md={6}
@@ -126,7 +128,9 @@ exports[`JoinForm render disables form when loading 1`] = `
 
 exports[`JoinForm render disables form when recaptcha is not loaded 1`] = `
 <form>
-  <Grid>
+  <Grid
+    className="spacer"
+  >
     <Grid.Column
       lg={6}
       md={6}
@@ -250,7 +254,9 @@ exports[`JoinForm render disables form when recaptcha is not loaded 1`] = `
 
 exports[`JoinForm render enables form correctly 1`] = `
 <form>
-  <Grid>
+  <Grid
+    className="spacer"
+  >
     <Grid.Column
       lg={6}
       md={6}

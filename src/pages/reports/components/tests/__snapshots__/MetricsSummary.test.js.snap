@@ -1,27 +1,39 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`MetricsSummary:  should render custom date 1`] = `
-<Panel>
+<Panel
+  className="Panel"
+>
   <Grid>
     <Grid.Column
       md={3}
       xl={2}
       xs={12}
     >
-      <div>
-        <h1>
+      <div
+        className="panelvertical"
+      >
+        <h1
+          className="RateValue"
+        >
           <Percent
             value={10}
           />
         </h1>
-        <h6>
+        <h6
+          className="RateTitle"
+        >
           Summary Title
         </h6>
       </div>
     </Grid.Column>
     <Grid.Column>
-      <div>
-        <p>
+      <div
+        className="panelvertical"
+      >
+        <p
+          className="Description"
+        >
           <p>
             message
           </p>
@@ -44,27 +56,39 @@ exports[`MetricsSummary:  should render custom date 1`] = `
 `;
 
 exports[`MetricsSummary:  should render relative range 1`] = `
-<Panel>
+<Panel
+  className="Panel"
+>
   <Grid>
     <Grid.Column
       md={3}
       xl={2}
       xs={12}
     >
-      <div>
-        <h1>
+      <div
+        className="panelvertical"
+      >
+        <h1
+          className="RateValue"
+        >
           <Percent
             value={10}
           />
         </h1>
-        <h6>
+        <h6
+          className="RateTitle"
+        >
           Summary Title
         </h6>
       </div>
     </Grid.Column>
     <Grid.Column>
-      <div>
-        <p>
+      <div
+        className="panelvertical"
+      >
+        <p
+          className="Description"
+        >
           <p>
             message
           </p>
@@ -83,27 +107,39 @@ exports[`MetricsSummary:  should render relative range 1`] = `
 `;
 
 exports[`MetricsSummary:  should render secondary message 1`] = `
-<Panel>
+<Panel
+  className="Panel"
+>
   <Grid>
     <Grid.Column
       md={3}
       xl={2}
       xs={12}
     >
-      <div>
-        <h1>
+      <div
+        className="panelvertical"
+      >
+        <h1
+          className="RateValue"
+        >
           <Percent
             value={10}
           />
         </h1>
-        <h6>
+        <h6
+          className="RateTitle"
+        >
           Summary Title
         </h6>
       </div>
     </Grid.Column>
     <Grid.Column>
-      <div>
-        <p>
+      <div
+        className="panelvertical"
+      >
+        <p
+          className="Description"
+        >
           <p>
             message
           </p>
@@ -119,7 +155,9 @@ exports[`MetricsSummary:  should render secondary message 1`] = `
           </span>
           .
         </p>
-        <p>
+        <p
+          className="Secondary"
+        >
           another message
         </p>
       </div>

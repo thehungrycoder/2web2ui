@@ -44,9 +44,11 @@ exports[`Component: Typeahead should render ok by default 1`] = `
 `;
 
 exports[`Component: Typeahead should render with matches 1`] = `
-<div>
+<div
+  className="Typeahead"
+>
   <div
-    className=""
+    className="List open"
   >
     <ActionList
       actions={

@@ -2,6 +2,7 @@
 
 exports[`Component: DatePicker ManualEntryForm should render correctly by default 1`] = `
 <form
+  className="DateFields"
   onKeyDown={[Function]}
 >
   <Grid
@@ -36,7 +37,9 @@ exports[`Component: DatePicker ManualEntryForm should render correctly by defaul
     <Grid.Column
       xs={1}
     >
-      <div>
+      <div
+        className="ArrowWrapper"
+      >
         <ArrowForward />
       </div>
     </Grid.Column>
@@ -72,6 +75,7 @@ exports[`Component: DatePicker ManualEntryForm should render correctly by defaul
 
 exports[`Component: DatePicker ManualEntryForm should sync props to state 1`] = `
 <form
+  className="DateFields"
   onKeyDown={[MockFunction]}
 >
   <Grid
@@ -106,7 +110,9 @@ exports[`Component: DatePicker ManualEntryForm should sync props to state 1`] = 
     <Grid.Column
       xs={1}
     >
-      <div>
+      <div
+        className="ArrowWrapper"
+      >
         <ArrowForward />
       </div>
     </Grid.Column>
@@ -142,6 +148,7 @@ exports[`Component: DatePicker ManualEntryForm should sync props to state 1`] = 
 
 exports[`Component: DatePicker ManualEntryForm should update state from new props 1`] = `
 <form
+  className="DateFields"
   onKeyDown={[MockFunction]}
 >
   <Grid
@@ -176,7 +183,9 @@ exports[`Component: DatePicker ManualEntryForm should update state from new prop
     <Grid.Column
       xs={1}
     >
-      <div>
+      <div
+        className="ArrowWrapper"
+      >
         <ArrowForward />
       </div>
     </Grid.Column>

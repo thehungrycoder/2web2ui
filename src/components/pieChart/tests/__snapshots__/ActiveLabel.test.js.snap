@@ -1,12 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ActiveLabel:  should render 1`] = `
-<div>
-  <div>
+<div
+  className="ActiveLabel"
+>
+  <div
+    className="Label"
+  >
     name
   </div>
-  <div />
-  <div>
+  <div
+    className="Line"
+  />
+  <div
+    className="Value"
+  >
     123
   </div>
 </div>

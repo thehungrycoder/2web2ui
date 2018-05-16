@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Algolia Results component should render 1`] = `
-<div>
+<div
+  className="Result"
+>
   <strong>
     <InsertLink />
      

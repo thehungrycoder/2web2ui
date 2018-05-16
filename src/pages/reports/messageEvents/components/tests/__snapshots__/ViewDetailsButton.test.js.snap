@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Component ViewDetailsButton renders correctly 1`] = `
-<div>
+<div
+  className="AlignRight"
+>
   <Button
     Component={[Function]}
     size="small"

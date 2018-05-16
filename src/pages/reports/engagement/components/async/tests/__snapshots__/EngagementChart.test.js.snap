@@ -10,7 +10,9 @@ exports[`EngagementChart renders engagement chart 1`] = `
 <Panel
   sectioned={true}
 >
-  <div>
+  <div
+    className="EngagementChart"
+  >
     <ResponsiveContainer
       debounce={0}
       height={350}

@@ -29,7 +29,9 @@ exports[`Legend:  should handle external hover 1`] = `
 
 exports[`Legend:  should render 1`] = `
 <div>
-  <div>
+  <div
+    className="LegendHeader"
+  >
     <PieChart.LegendItem
       key="0"
       name="header"
@@ -52,7 +54,9 @@ exports[`Legend:  should render 1`] = `
 
 exports[`Legend:  should render with secondaryData 1`] = `
 <div>
-  <div>
+  <div
+    className="LegendHeader"
+  >
     <PieChart.LegendItem
       key="0"
       name="header"

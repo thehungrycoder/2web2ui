@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Long Text Container:  should render 1`] = `
-<div>
+<div
+  className="LongText"
+>
   foo
 </div>
 `;

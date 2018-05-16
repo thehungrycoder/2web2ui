@@ -1,19 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ToggleBlock should render 1`] = `
-<div>
+<div
+  className="ToggleBlock"
+>
   <Grid>
     <Grid.Column
       xs={8}
     >
-      <label>
+      <label
+        className="Label"
+      >
         label
       </label>
     </Grid.Column>
     <Grid.Column
       xs={4}
     >
-      <div>
+      <div
+        className="ToggleWrapper"
+      >
         <Toggle
           id="name"
           name="name"
@@ -21,7 +27,9 @@ exports[`ToggleBlock should render 1`] = `
       </div>
     </Grid.Column>
   </Grid>
-  <p>
+  <p
+    className="Help"
+  >
     some help
   </p>
 </div>

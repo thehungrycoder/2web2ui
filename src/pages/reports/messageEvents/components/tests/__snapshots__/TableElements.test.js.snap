@@ -7,11 +7,13 @@ exports[`Header Component should render 1`] = `
       width="2px"
     />
     <Table.HeaderCell
+      className="HeaderCell"
       width="35%"
     >
       Time
     </Table.HeaderCell>
     <Table.HeaderCell
+      className="HeaderCell"
       width="auto"
     >
       Event
@@ -22,10 +24,12 @@ exports[`Header Component should render 1`] = `
 
 exports[`Row Component should render 1`] = `
 <Table.Row
-  className=""
+  className="Row"
   onClick={[MockFunction]}
 >
-  <td />
+  <td
+    className="Bar"
+  />
   <Table.Cell>
     <DisplayDate
       formattedDate="date"

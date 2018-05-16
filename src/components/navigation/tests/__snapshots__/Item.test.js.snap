@@ -4,12 +4,15 @@ exports[`Item tests should render a link correctly 1`] = `
 <span>
   <li>
     <Link
-      className=""
+      className="link"
       replace={false}
       to="/to"
     >
-      <span>
+      <span
+        className="iconWrapper"
+      >
         <Mail
+          className="icon"
           size={18}
         />
       </span>
@@ -23,18 +26,25 @@ exports[`Item tests should render children correctly 1`] = `
 <span>
   <li>
     <a
-      className=""
+      className="link hasChildren"
       onClick={[Function]}
     >
-      <span>
+      <span
+        className="iconWrapper"
+      >
         <Mail
+          className="icon"
           size={18}
         />
       </span>
       label
-      <ChevronLeft />
+      <ChevronLeft
+        className="chevron"
+      />
     </a>
-    <ul>
+    <ul
+      className="nestedList"
+    >
       <Item
         key="0"
         label="child 1"

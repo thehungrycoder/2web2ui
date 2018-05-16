@@ -58,6 +58,7 @@ exports[`Component: BackupCodesModal should change button text to Generating... 
             Generating...
           </Button>
           <Button
+            className="Cancel"
             onClick={[MockFunction]}
             size="default"
           >
@@ -128,6 +129,7 @@ exports[`Component: BackupCodesModal should render correctly 1`] = `
             Generate
           </Button>
           <Button
+            className="Cancel"
             onClick={[MockFunction]}
             size="default"
           >
@@ -254,6 +256,7 @@ exports[`Component: BackupCodesModal should show password error when exists 1`] 
             Generate
           </Button>
           <Button
+            className="Cancel"
             onClick={[MockFunction]}
             size="default"
           >
