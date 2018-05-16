@@ -12,7 +12,7 @@ describe('Engagement Report Page', () => {
       aggregateMetrics: {
         data: {
           count_accepted: 1,
-          count_targeted: 2,
+          count_sent: 2,
           count_unique_clicked_approx: 3,
           count_unique_confirmed_opened_approx: 4
         },

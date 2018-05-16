@@ -11,13 +11,13 @@ import EngagementTable from './components/EngagementTable';
 
 export class EngagementPage extends Component {
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate (prevProps) {
     if (!_.isEqual(prevProps.reportOptions, this.props.reportOptions)) {
       this.props.refreshEngagementReport(this.props.reportOptions);
     }
   }
 
-  render() {
+  render () {
     const { loading, aggregateMetrics, linkMetrics, engagementSearchOptions } = this.props;
 
     return (
@@ -28,14 +28,14 @@ export class EngagementPage extends Component {
           clicks={aggregateMetrics.data.count_unique_clicked_approx}
           loading={aggregateMetrics.loading}
           opens={aggregateMetrics.data.count_unique_confirmed_opened_approx}
-          targeted={aggregateMetrics.data.count_targeted}
+          sent={aggregateMetrics.data.count_sent}
         />
         <EngagementChart
           accepted={aggregateMetrics.data.count_accepted}
           clicks={aggregateMetrics.data.count_unique_clicked_approx}
           loading={aggregateMetrics.loading}
           opens={aggregateMetrics.data.count_unique_confirmed_opened_approx}
-          targeted={aggregateMetrics.data.count_targeted}
+          sent={aggregateMetrics.data.count_sent}
         />
         <EngagementTable data={linkMetrics.data} loading={linkMetrics.loading} />
       </Page>

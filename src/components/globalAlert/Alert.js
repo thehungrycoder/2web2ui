@@ -6,7 +6,7 @@ import styles from './Alert.module.scss';
 class Alert extends Component {
   static propTypes = {
     autoDismiss: PropTypes.bool,
-    message: PropTypes.string.isRequired,
+    message: PropTypes.node.isRequired,
     type: PropTypes.string,
     details: PropTypes.string,
     timeoutInterval: PropTypes.number,
@@ -26,7 +26,7 @@ class Alert extends Component {
 
   timeout = null;
 
-  componentDidMount() {
+  componentDidMount () {
     if (this.props.autoDismiss) {
       this.refreshTimeout();
     }
@@ -50,7 +50,7 @@ class Alert extends Component {
     this.setState({ showDetails: true });
   }
 
-  renderMessage() {
+  renderMessage () {
     const { message, details } = this.props;
     const { showDetails } = this.state;
 
@@ -59,13 +59,13 @@ class Alert extends Component {
       : null;
 
     const markup = showDetails
-      ? <div>{ details }</div>
-      : <div>{ message } <span>{detailsLink}</span></div>;
+      ? <div>{details}</div>
+      : <div>{message} <span>{detailsLink}</span></div>;
 
-    return <div>{ markup }</div>;
+    return <div>{markup}</div>;
   }
 
-  render() {
+  render () {
     const { type, maxWidth } = this.props;
 
     return <Snackbar status={type} onDismiss={this.handleDismiss} maxWidth={maxWidth}>{this.renderMessage()}</Snackbar>;

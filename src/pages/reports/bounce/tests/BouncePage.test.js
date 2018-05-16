@@ -1,6 +1,7 @@
 import React from 'react';
 import { BouncePage } from '../BouncePage';
 import { shallow, mount } from 'enzyme';
+import MetricsSummary from '../../components/MetricsSummary';
 
 describe('BouncePage: ', () => {
 
@@ -8,9 +9,9 @@ describe('BouncePage: ', () => {
     loading: false,
     aggregates: {
       countBounce: 1,
-      countTargeted: 10
+      countSent: 10
     },
-    totalBounces: 100,
+    adminBounces: 5,
     reportOptions: {
       relativeRange: 'hour'
     },
@@ -61,9 +62,14 @@ describe('BouncePage: ', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('should not display top level metrics admin bounce message with no admin bounces', () => {
+    wrapper.setProps({ adminBounces: 0 });
+    expect(wrapper.find(MetricsSummary).props().secondaryMessage).toBe(null);
+  });
+
   it('should not display top level metrics when there are no aggregates', () => {
     wrapper.setProps({ aggregates: {}});
-    expect(wrapper.find('MetricsSummary')).toHaveLength(0);
+    expect(wrapper.find(MetricsSummary)).toHaveLength(0);
   });
 
   it('should show empty reasons table when there are no reasons', () => {

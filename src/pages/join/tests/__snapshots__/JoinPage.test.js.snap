@@ -61,12 +61,11 @@ exports[`JoinPage render renders aws logo when signup from aws 1`] = `
     left={
       <small>
         Already have an account? 
-        <UnstyledLink
-          Component={[Function]}
+        <PageLink
           to="/auth"
         >
           Log In
-        </UnstyledLink>
+        </PageLink>
         .
       </small>
     }
@@ -109,12 +108,11 @@ exports[`JoinPage render renders correctly 1`] = `
     left={
       <small>
         Already have an account? 
-        <UnstyledLink
-          Component={[Function]}
+        <PageLink
           to="/auth"
         >
           Log In
-        </UnstyledLink>
+        </PageLink>
         .
       </small>
     }
@@ -167,12 +165,11 @@ exports[`JoinPage render renders errors 1`] = `
     left={
       <small>
         Already have an account? 
-        <UnstyledLink
-          Component={[Function]}
+        <PageLink
           to="/auth"
         >
           Log In
-        </UnstyledLink>
+        </PageLink>
         .
       </small>
     }

@@ -20,7 +20,10 @@ import Confirmation from '../components/Confirmation';
 import CardSummary from '../components/CardSummary';
 import { isAws, isSelfServeBilling } from 'src/helpers/conditions/account';
 import { not } from 'src/helpers/conditions';
+import * as conversions from 'src/helpers/conversionTracking';
 import AccessControl from 'src/components/auth/AccessControl';
+import { prepareCardInfo } from 'src/helpers/billing';
+
 
 const FORMNAME = 'changePlan';
 
@@ -30,7 +33,7 @@ export class ChangePlan extends Component {
     useSavedCC: null
   };
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps (nextProps) {
     // Null check to make sure this only runs once
     if (nextProps.canUpdateBillingInfo && this.state.useSavedCC === null) {
       this.setState({ useSavedCC: true });
@@ -39,25 +42,33 @@ export class ChangePlan extends Component {
 
   handleCardToggle = () => {
     this.setState({ useSavedCC: !this.state.useSavedCC });
-  }
+  };
 
   onSubmit = (values) => {
-    const { account, updateSubscription, billingCreate, billingUpdate, showAlert, history } = this.props;
+    const { account, billing, updateSubscription, billingCreate, billingUpdate, showAlert, history } = this.props;
+    const oldCode = account.subscription.code;
+    const newCode = values.planpicker.code;
+
+    const newValues = values.card ? { ...values, card: prepareCardInfo(values.card) } : values;
+
     // decides which action to be taken based on
     // if it's aws account, it already has billing and if you use a saved CC
     let action;
     if (isAws({ account })) {
-      action = updateSubscription({ code: values.planpicker.code });
+      action = updateSubscription({ code: newCode });
     } else if (account.billing) {
-      action = this.state.useSavedCC ? updateSubscription({ code: values.planpicker.code }) : billingUpdate(values);
+      action = this.state.useSavedCC ? updateSubscription({ code: newCode }) : billingUpdate(newValues);
     } else {
-      action = billingCreate(values); // creates Zuora account
+      action = billingCreate(newValues); // creates Zuora account
     }
 
     return action
       .then(() => history.push('/account/billing'))
-      .then(() => showAlert({ type: 'success', message: 'Subscription Updated' }));
-  }
+      .then(() => {
+        conversions.trackPlanChange({ allPlans: billing.plans, oldCode, newCode });
+        return showAlert({ type: 'success', message: 'Subscription Updated' });
+      });
+  };
 
   renderCCSection = () => {
     const { account, selectedPlan } = this.props;
@@ -95,7 +106,7 @@ export class ChangePlan extends Component {
     );
   }
 
-  render() {
+  render () {
     const { submitting, currentPlan, selectedPlan, plans, isSelfServeBilling } = this.props;
 
     // Manually billed accounts can submit without changing plan
@@ -109,7 +120,7 @@ export class ChangePlan extends Component {
         <Grid>
           <Grid.Column>
             <Panel title='Select A Plan'>
-              { plans.length &&
+              {plans.length &&
                 <PlanPicker disabled={submitting} plans={plans} />
               }
             </Panel>

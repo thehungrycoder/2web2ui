@@ -2,7 +2,8 @@ const initialState = {
   precision: '',
   categories: [],
   aggregates: {},
-  reasons: []
+  reasons: [],
+  adminBounces: 0
 };
 
 export default (state = initialState, { type, payload }) => {

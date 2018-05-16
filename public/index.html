@@ -26,15 +26,7 @@
 
     <title>SparkPost</title>
 
-    <!-- Global site tag (gtag.js) - Google Analytics - Keep at top of scripts -->
-    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-111136819-2"></script> -->
-    <script>
-     window.dataLayer = window.dataLayer || [];
-     function gtag(){dataLayer.push(arguments);}
-     gtag('js', new Date());
-    </script>
-
-    <!-- Pushes app load failure to Sentry -->
+     <!-- Pushes app load failure to Sentry -->
     <script>
       function trackAppLoadError() {
         var key = window.SP.productionConfig.sentry.publicKey;

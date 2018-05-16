@@ -4,7 +4,6 @@ import { withRouter } from 'react-router';
 import qs from 'query-string';
 import { Portal, Popover } from '@sparkpost/matchbox';
 import { Cancel, Help } from '@sparkpost/matchbox-icons';
-import { entitledToOnlineSupport } from 'src/selectors/support';
 import * as supportActions from 'src/actions/support';
 import SupportForm from './components/SupportForm';
 import SearchPanel from './components/SearchPanel';
@@ -25,12 +24,11 @@ export class Support extends Component {
 
   // Opens and hydrates support ticket form from query params
   maybeOpenTicket = () => {
-    const { location, openSupportPanel, hydrateTicketForm } = this.props;
+    const { location, openSupportTicketForm } = this.props;
     const { supportTicket, supportMessage: message, supportIssue: issueId } = qs.parse(location.search);
 
     if (supportTicket) {
-      openSupportPanel({ view: 'ticket' });
-      hydrateTicketForm({ issueId, message });
+      openSupportTicketForm({ issueId, message });
     }
   }
 
@@ -49,9 +47,9 @@ export class Support extends Component {
   }
 
   render () {
-    const { loggedIn, entitledToOnlineSupport, showPanel, showTicketForm } = this.props;
+    const { loggedIn, showPanel, showTicketForm } = this.props;
 
-    if (!loggedIn || !entitledToOnlineSupport) {
+    if (!loggedIn) {
       return null;
     }
 
@@ -86,7 +84,6 @@ export class Support extends Component {
 
 const mapStateToProps = (state) => ({
   loggedIn: state.auth.loggedIn,
-  entitledToOnlineSupport: entitledToOnlineSupport(state),
   showPanel: state.support.showPanel,
   showTicketForm: state.support.showTicketForm
 });

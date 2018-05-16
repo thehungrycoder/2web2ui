@@ -56,12 +56,14 @@ exports[`Form Container: Change Plan should render 1`] = `
           plans={
             Array [
               Object {
+                "code": "paid",
                 "isFree": false,
-                "plan": "paid",
+                "volume": 15000,
               },
               Object {
+                "code": "free",
                 "isFree": true,
-                "plan": "free",
+                "volume": 100000,
               },
             ]
           }
@@ -114,12 +116,14 @@ exports[`Form Container: Change Plan should show saved card 1`] = `
           plans={
             Array [
               Object {
+                "code": "paid",
                 "isFree": false,
-                "plan": "paid",
+                "volume": 15000,
               },
               Object {
+                "code": "free",
                 "isFree": true,
-                "plan": "free",
+                "volume": 100000,
               },
             ]
           }

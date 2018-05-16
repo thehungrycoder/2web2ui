@@ -1,15 +1,17 @@
 import React from 'react';
-import { Radio } from '@sparkpost/matchbox';
+import { Radio, Label, Error } from '@sparkpost/matchbox';
 
-export default function RadioGroup({ input, options, title }) {
+export default function RadioGroup ({ input, options, title, meta }) {
+  const { error, touched } = meta;
+
   return (
     <Radio.Group>
-      {title}
+      <Label>{title}{touched && error ? <Error error={error}/> : ''}</Label>
       {options.map((o) => (
         <Radio
-          key={o.label}
+          key={`${input.name}-${o.value}`}
           {...input}
-          id={o.label}
+          id={`${input.name}-${o.value}`}
           label={o.label}
           checked={o.value === input.value}
           disabled={!!o.disabled}

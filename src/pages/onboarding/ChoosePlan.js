@@ -15,17 +15,18 @@ import BillingAddressForm from 'src/pages/billing/forms/fields/BillingAddressFor
 import { isAws } from 'src/helpers/conditions/account';
 import { not } from 'src/helpers/conditions';
 import AccessControl from 'src/components/auth/AccessControl';
+import { prepareCardInfo } from 'src/helpers/billing';
 
 const FORM_NAME = 'selectInitialPlan';
 const NEXT_STEP = '/onboarding/sending-domain';
 
 export class OnboardingPlanPage extends Component {
-  componentDidMount() {
+  componentDidMount () {
     this.props.getPlans();
     this.props.getBillingCountries();
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate (prevProps) {
     const { hasError, history } = this.props;
 
     // if we can't get plans or countries form is useless
@@ -38,14 +39,16 @@ export class OnboardingPlanPage extends Component {
   onSubmit = (values) => {
     const { billingCreate, showAlert, history } = this.props;
 
+    const newValues = values.card ? { ...values, card: prepareCardInfo(values.card) } : values;
+
     // no billing updates needed since they are still on free plan
-    if (values.planpicker.isFree) {
+    if (newValues.planpicker.isFree) {
       history.push(NEXT_STEP);
       return;
     }
 
     // Note: billingCreate will update the subscription if the account is AWS
-    return billingCreate(values)
+    return billingCreate(newValues)
       .then(() => history.push(NEXT_STEP))
       .then(() => showAlert({ type: 'success', message: 'Added your plan' }));
   };
@@ -85,7 +88,7 @@ export class OnboardingPlanPage extends Component {
     );
   }
 
-  render() {
+  render () {
     const { loading, plans, submitting } = this.props;
 
     if (loading) {

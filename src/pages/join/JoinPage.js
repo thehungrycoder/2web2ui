@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import qs from 'query-string';
 import cookie from 'js-cookie';
 import _ from 'lodash';
 
-import { CenteredLogo } from 'src/components';
-import { Panel, Error, UnstyledLink } from '@sparkpost/matchbox';
+import { CenteredLogo, PageLink } from 'src/components';
+import { Panel, Error } from '@sparkpost/matchbox';
 import JoinForm from './components/JoinForm';
 import JoinError from './components/JoinError';
 import JoinLink from './components/JoinLink';
@@ -14,9 +14,9 @@ import config from 'src/config';
 import { inSPCEU } from 'src/config/tenant';
 import { authenticate } from 'src/actions/auth';
 import { loadScript } from 'src/helpers/loadScript';
-import { addEvent } from 'src/helpers/googleAnalytics';
+import * as analytics from 'src/helpers/analytics';
 import { register } from 'src/actions/account';
-import { AFTER_JOIN_REDIRECT_ROUTE, LINKS, AWS_COOKIE_NAME } from 'src/constants';
+import { AFTER_JOIN_REDIRECT_ROUTE, LINKS, AWS_COOKIE_NAME, ANALYTICS_CREATE_ACCOUNT } from 'src/constants';
 
 export class JoinPage extends Component {
   state = {
@@ -43,13 +43,14 @@ export class JoinPage extends Component {
 
     return register(signupData)
       .then((accountData) => {
-        addEvent('Completed form', 'create account', { form_type: 'create account' });
+        analytics.setVariable('username', accountData.username);
+        analytics.trackFormSuccess(ANALYTICS_CREATE_ACCOUNT, { form_type: ANALYTICS_CREATE_ACCOUNT });
         return authenticate(accountData.username, values.password);
       })
       .then(() => this.props.history.push(AFTER_JOIN_REDIRECT_ROUTE, { plan }));
   };
 
-  render() {
+  render () {
     const { createError } = this.props.account;
     const { formData } = this.state;
     const title = inSPCEU() ? 'Sign Up For SparkPost EU' : 'Sign Up';
@@ -71,7 +72,7 @@ export class JoinPage extends Component {
           </Panel.Section>
         </Panel>
         <Panel.Footer
-          left={<small>Already have an account? <UnstyledLink Component={Link} to='/auth'>Log In</UnstyledLink>.</small>}
+          left={<small>Already have an account? <PageLink to="/auth">Log In</PageLink>.</small>}
           right={<JoinLink location={this.props.location} />}
         />
       </div>
@@ -79,7 +80,7 @@ export class JoinPage extends Component {
   }
 }
 
-function mapStateToProps(state, props) {
+function mapStateToProps (state, props) {
   return {
     account: state.account,
     params: qs.parse(props.location.search),

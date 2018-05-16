@@ -44,6 +44,8 @@ describe('UsageReport Component', () => {
   it('should render with regular usage', () => {
     const wrapper = shallow(<UsageReport {...props} />);
     expect(wrapper).toMatchSnapshot();
+    expect(wrapper.find('DisplayNumber').at(0).dive()).toMatchSnapshot();
+    expect(wrapper.find('ProgressLabel').at(0).dive()).toMatchSnapshot();
   });
 
   it('should get the account including usage', () => {

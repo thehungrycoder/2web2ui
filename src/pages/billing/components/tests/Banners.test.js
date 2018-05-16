@@ -1,6 +1,10 @@
 import React from 'react';
 import { PendingPlanBanner, ManuallyBilledBanner, PremiumBanner, EnterpriseBanner } from '../Banners';
+import * as conversions from 'src/helpers/conversionTracking';
+import * as constants from 'src/constants';
 import { shallow } from 'enzyme';
+
+jest.mock('src/helpers/conversionTracking');
 
 describe('Billing Banners: ', () => {
   it('PendingPlanBanner should render with pending_subscription', () => {
@@ -51,13 +55,42 @@ describe('Billing Banners: ', () => {
     expect(wrapper.find('t')).not.toExist();
   });
 
-  it('renders Premium banner', () => {
-    const wrapper = shallow(<PremiumBanner />);
-    expect(wrapper).toMatchSnapshot();
+  describe('Premium banner', () => {
+    let wrapper;
+
+    beforeEach(() => {
+      wrapper = shallow(<PremiumBanner />);
+    });
+
+    it('renders', () => {
+      expect(wrapper).toMatchSnapshot();
+    });
+
+    it('renders correctly for aws users', () => {
+      wrapper.setProps({ isAWSAccount: true });
+      expect(wrapper).toMatchSnapshot();
+    });
+
+    it('tracks addon request', () => {
+      wrapper.prop('action').onClick();
+      expect(conversions.trackAddonRequest).toHaveBeenCalledWith(constants.ANALYTICS_PREMIUM_SUPPORT);
+    });
   });
 
-  it('renders Enterprise banner', () => {
-    const wrapper = shallow(<EnterpriseBanner />);
-    expect(wrapper).toMatchSnapshot();
+  describe('Enterprise banner', () => {
+    let wrapper;
+
+    beforeEach(() => {
+      wrapper = shallow(<EnterpriseBanner />);
+    });
+
+    it('renders', () => {
+      expect(wrapper).toMatchSnapshot();
+    });
+
+    it('tracks addon request', () => {
+      wrapper.prop('action').onClick();
+      expect(conversions.trackAddonRequest).toHaveBeenCalledWith(constants.ANALYTICS_ENTERPRISE_SUPPORT);
+    });
   });
 });

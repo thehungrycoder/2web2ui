@@ -5,7 +5,8 @@ import {
   isSuspendedForBilling,
   hasStatus,
   hasStatusReasonCategory,
-  isSelfServeBilling
+  isSelfServeBilling,
+  hasOnlineSupport
 } from '../account';
 
 describe('Condition: onPlan', () => {
@@ -127,4 +128,23 @@ describe('Condition: isSelfServeBilling', () => {
     expect(isSelfServeBilling({ account })).toEqual(true);
   });
 
+});
+
+describe('Condition: hasOnlineSupport', () => {
+  it('should return true for accounts with online support', () => {
+    const state = {
+      account: {
+        support: {
+          online: true
+        }
+      }
+    };
+
+    expect(hasOnlineSupport(state)).toEqual(true);
+  });
+
+  it('should return false for accounts without online support', () => {
+    const state = {};
+    expect(hasOnlineSupport(state)).toEqual(false);
+  });
 });

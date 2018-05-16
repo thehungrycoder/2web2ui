@@ -4,7 +4,7 @@ import { fetch as fetchAccount } from './account';
 import chainActions from 'src/actions/helpers/chainActions';
 import { cors, createZuoraAccount, syncSubscription, updateSubscription } from './billing';
 
-export default function billingCreate(values) {
+export default function billingCreate (values) {
   return (dispatch, getState) => {
     // AWS plans don't get created through Zuora, instead update existing
     // subscription to the selected plan

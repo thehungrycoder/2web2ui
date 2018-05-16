@@ -7,11 +7,6 @@ import supportIssues from 'src/config/supportIssues';
 const getAccountSupport = (state) => state.account.support;
 const getSupportIssueId = (state, id) => id;
 
-export const entitledToOnlineSupport = createSelector(
-  [getAccountSupport],
-  (support) => support && support.online
-);
-
 export const entitledToPhoneSupport = createSelector(
   [getAccountSupport],
   (support) => support && support.phone

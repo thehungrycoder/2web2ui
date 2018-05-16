@@ -8,7 +8,7 @@ import { formatDateTime, relativeDateOptionsIndexed } from 'src/helpers/date';
 import styles from './MetricsSummary.module.scss';
 
 export class MetricsSummary extends Component {
-  renderDate() {
+  renderDate () {
     const { to, from, relativeRange } = this.props;
 
     if (relativeRange === 'custom') {
@@ -18,7 +18,7 @@ export class MetricsSummary extends Component {
     return <span> in the <strong>{relativeDateOptionsIndexed[relativeRange].toLowerCase()}</strong></span>;
   }
 
-  render() {
+  render () {
     const { children, rateValue, rateTitle, secondaryMessage } = this.props;
 
     return (
@@ -50,7 +50,7 @@ MetricsSummary.propTypes = {
   relativeRange: PropTypes.string,
   rateValue: PropTypes.number,
   rateTitle: PropTypes.string,
-  secondaryMessage: PropTypes.string
+  secondaryMessage: PropTypes.node
 };
 
 export default connect((state) => ({ ...state.reportOptions }))(MetricsSummary);
