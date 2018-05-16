@@ -11,7 +11,6 @@ exports[`Payment Form:  should render 1`] = `
     component={[Function]}
     label="Credit Card Number"
     name="card.number"
-    onChange={[Function]}
     validate={
       Array [
         [Function],
@@ -33,7 +32,6 @@ exports[`Payment Form:  should render 1`] = `
         component={[Function]}
         label="Expiration Date"
         name="card.expCombined"
-        onChange={[Function]}
         placeholder="MM/YYYY"
         validate={
           Array [
@@ -55,25 +53,7 @@ exports[`Payment Form:  should render 1`] = `
       />
     </Grid.Column>
   </Grid>
-  <div>
-    <Field
-      autoComplete="new-password"
-      component="input"
-      name="card.type"
-      tabIndex="-1"
-    />
-    <Field
-      autoComplete="new-password"
-      component="input"
-      name="card.expMonth"
-      tabIndex="-1"
-    />
-    <Field
-      autoComplete="new-password"
-      component="input"
-      name="card.expYear"
-      tabIndex="-1"
-    />
-  </div>
 </div>
 `;
+
+exports[`Payment Form:  validates card type 1`] = `"We only accept Visa, MasterCard, AmericanExpress, Discover"`;

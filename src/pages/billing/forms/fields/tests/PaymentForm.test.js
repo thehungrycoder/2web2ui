@@ -37,31 +37,16 @@ describe('Payment Form: ', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should handle type', () => {
-    const e = { target: { value: '123' }};
-    expect(changeSpy).not.toHaveBeenCalled();
-    wrapper.instance().handleType(e);
-    expect(PaymentMock.fns.cardType).toHaveBeenCalledWith(e.target.value);
-    expect(changeSpy).toHaveBeenCalled();
-  });
-
-  it('should handle expiry', () => {
-    const e = { target: { value: '11 / 2020' }};
-    PaymentMock.fns.cardExpiryVal.mockImplementation(() => ({ month: '11', year: '2020' }));
-    wrapper.instance().handleExpiry(e);
-    expect(PaymentMock.fns.cardExpiryVal).toHaveBeenCalledWith(e.target.value);
-    expect(changeSpy).toHaveBeenCalledTimes(2);
-  });
-
-  it('should not call change if length is less than 8', () => {
-    const e = { target: { value: '11' }};
-    wrapper.instance().handleExpiry(e);
-    expect(PaymentMock.fns.cardExpiryVal).not.toHaveBeenCalled();
-    expect(changeSpy).not.toHaveBeenCalled();
-  });
-
   it('should validate the expiration date', () => {
     expect(wrapper.instance().dateFormat('22')).toEqual('Must be MM / YYYY');
     expect(wrapper.instance().dateFormat('10 / 2020')).toEqual(undefined);
+  });
+
+  it('validates card type', () => {
+    PaymentMock.fns.cardType = jest.fn().mockReturnValue('Visa');
+    expect(wrapper.instance().validateType('')).toBeUndefined();
+
+    PaymentMock.fns.cardType = jest.fn().mockReturnValue('UnknownCard');
+    expect(wrapper.instance().validateType('')).toMatchSnapshot();
   });
 });
