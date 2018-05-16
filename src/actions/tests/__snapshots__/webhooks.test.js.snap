@@ -102,7 +102,6 @@ exports[`Action Creator: Webhooks should dispatch a list action 1`] = `
 Array [
   Object {
     "meta": Object {
-      "headers": Object {},
       "method": "GET",
       "showErrorAlert": false,
       "url": "/webhooks",

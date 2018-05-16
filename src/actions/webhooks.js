@@ -1,14 +1,12 @@
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 import setSubaccountHeader from './helpers/setSubaccountHeader';
 
-export function listWebhooks (subaccount = null) {
-  const headers = setSubaccountHeader(subaccount);
+export function listWebhooks () {
   return sparkpostApiRequest({
     type: 'LIST_WEBHOOKS',
     meta: {
       method: 'GET',
       url: '/webhooks',
-      headers,
       showErrorAlert: false
     }
   });
