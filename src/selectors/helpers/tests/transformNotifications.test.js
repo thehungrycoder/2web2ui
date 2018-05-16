@@ -1,4 +1,5 @@
 import {
+  applyUnreadStatus,
   getPrecision,
   filterNotificationsByTimeWindow
 } from '../transformNotifications';
@@ -131,4 +132,27 @@ describe('Notifications selector helper', () => {
 
   });
 
+  describe('applyUnreadStatus', () => {
+    const cutoff = moment('2018-02-14');
+
+    it('should return notification as unread', () => {
+      const notification = {
+        meta: {
+          activeDate: moment('2018-02-15')
+        }
+      };
+
+      expect(applyUnreadStatus(cutoff)(notification)).toHaveProperty('meta.unread', true);
+    });
+
+    it('should return notification as read', () => {
+      const notification = {
+        meta: {
+          activeDate: moment('2018-02-13')
+        }
+      };
+
+      expect(applyUnreadStatus(cutoff)(notification)).toHaveProperty('meta.unread', false);
+    });
+  });
 });

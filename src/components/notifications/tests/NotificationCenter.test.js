@@ -46,4 +46,9 @@ describe('Component: NotificationCenter', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('should render with no notifications', () => {
+    wrapper.setProps({ notifications: [], unreadCount: 0 });
+    expect(wrapper).toMatchSnapshot();
+  });
+
 });
