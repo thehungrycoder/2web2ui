@@ -22,6 +22,8 @@ import { isAws, isSelfServeBilling } from 'src/helpers/conditions/account';
 import { not } from 'src/helpers/conditions';
 import * as conversions from 'src/helpers/conversionTracking';
 import AccessControl from 'src/components/auth/AccessControl';
+import { prepareCardInfo } from 'src/helpers/billing';
+
 
 const FORMNAME = 'changePlan';
 
@@ -47,15 +49,17 @@ export class ChangePlan extends Component {
     const oldCode = account.subscription.code;
     const newCode = values.planpicker.code;
 
+    const newValues = values.card ? { ...values, card: prepareCardInfo(values.card) } : values;
+
     // decides which action to be taken based on
     // if it's aws account, it already has billing and if you use a saved CC
     let action;
     if (isAws({ account })) {
       action = updateSubscription({ code: newCode });
     } else if (account.billing) {
-      action = this.state.useSavedCC ? updateSubscription({ code: newCode }) : billingUpdate(values);
+      action = this.state.useSavedCC ? updateSubscription({ code: newCode }) : billingUpdate(newValues);
     } else {
-      action = billingCreate(values); // creates Zuora account
+      action = billingCreate(newValues); // creates Zuora account
     }
 
     return action

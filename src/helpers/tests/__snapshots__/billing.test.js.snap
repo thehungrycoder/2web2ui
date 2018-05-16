@@ -114,3 +114,12 @@ Object {
   "price": 50,
 }
 `;
+
+exports[`Billing Helpers prepareCardInfo returns cardinfo with type and formatted expiry date 1`] = `
+Object {
+  "expMonth": 2,
+  "expYear": 2019,
+  "number": "411",
+  "type": "visa",
+}
+`;
