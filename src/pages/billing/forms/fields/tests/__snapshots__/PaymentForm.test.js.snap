@@ -55,3 +55,5 @@ exports[`Payment Form:  should render 1`] = `
   </Grid>
 </div>
 `;
+
+exports[`Payment Form:  validates card type 1`] = `"We only accept Visa, MasterCard, AmericanExpress, Discover"`;

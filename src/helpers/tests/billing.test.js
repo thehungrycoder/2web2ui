@@ -91,7 +91,7 @@ describe('Billing Helpers', () => {
   });
 
   describe('prepareCardInfo', () => {
-    it('returns cardinf with type and formatted expiry date', () => {
+    it('returns cardinfo with type and formatted expiry date', () => {
       expect(prepareCardInfo({ number: '411', expCombined: '02 / 2019' })).toMatchSnapshot();
     });
   });

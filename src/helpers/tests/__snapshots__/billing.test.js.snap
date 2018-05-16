@@ -115,7 +115,7 @@ Object {
 }
 `;
 
-exports[`Billing Helpers prepareCardInfo returns cardinf with type and formatted expiry date 1`] = `
+exports[`Billing Helpers prepareCardInfo returns cardinfo with type and formatted expiry date 1`] = `
 Object {
   "expCombined": "02 / 2019",
   "expMonth": 2,

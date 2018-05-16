@@ -41,4 +41,12 @@ describe('Payment Form: ', () => {
     expect(wrapper.instance().dateFormat('22')).toEqual('Must be MM / YYYY');
     expect(wrapper.instance().dateFormat('10 / 2020')).toEqual(undefined);
   });
+
+  it('validates card type', () => {
+    PaymentMock.fns.cardType = jest.fn().mockReturnValue('Visa');
+    expect(wrapper.instance().validateType('')).toBeUndefined();
+
+    PaymentMock.fns.cardType = jest.fn().mockReturnValue('UnknownCard');
+    expect(wrapper.instance().validateType('')).toMatchSnapshot();
+  });
 });
