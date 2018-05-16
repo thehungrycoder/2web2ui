@@ -1,7 +1,8 @@
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 import authCookie from 'src/helpers/authCookie';
+import _ from 'lodash';
 
-export function get() {
+export function get () {
   return (dispatch, getState) => {
     const { username } = getState().auth;
     return dispatch(sparkpostApiRequest({
@@ -14,7 +15,7 @@ export function get() {
   };
 }
 
-export function getGrantsFromCookie(authCookieData = authCookie.get()) {
+export function getGrantsFromCookie (authCookieData = authCookie.get()) {
   const { grants = []} = authCookieData;
   const expanded = grants.map((key) => ({ key }));
   return {
@@ -23,7 +24,7 @@ export function getGrantsFromCookie(authCookieData = authCookie.get()) {
   };
 }
 
-export function getGrants({ beta = false, role } = {}) {
+export function getGrants ({ beta = false, role } = {}) {
   return (dispatch) => dispatch(sparkpostApiRequest({
     type: 'GET_GRANTS',
     meta: {
@@ -38,7 +39,7 @@ export function getGrants({ beta = false, role } = {}) {
 
 }
 
-export function verifyEmail(data = {}, { showErrorAlert = true, type = 'VERIFY_EMAIL' } = {}) {
+export function verifyEmail (data = {}, { showErrorAlert = true, type = 'VERIFY_EMAIL' } = {}) {
   return (dispatch, getState) => {
     const { username } = getState().currentUser;
     return dispatch(sparkpostApiRequest({
@@ -53,11 +54,11 @@ export function verifyEmail(data = {}, { showErrorAlert = true, type = 'VERIFY_E
   };
 }
 
-export function verifyEmailToken(data) {
+export function verifyEmailToken (data) {
   return verifyEmail(data, { showErrorAlert: false, type: 'VERIFY_EMAIL_TOKEN' });
 }
 
-export function userGivesCookieConsent(username) {
+export function userGivesCookieConsent (username) {
   return (dispatch, getState) => {
     const state = getState();
 
@@ -71,5 +72,25 @@ export function userGivesCookieConsent(username) {
       }
     };
     return dispatch(sparkpostApiRequest(action)).then(() => dispatch(get()));
+  };
+}
+
+export function updateUserUIOptions (updates) {
+  return (dispatch, getState) => {
+    const { currentUser } = getState();
+    const existing = _.get(currentUser, 'options.ui', {});
+
+    return dispatch(sparkpostApiRequest({
+      type: 'UPDATE_USER_UI_OPTIONS',
+      meta: {
+        method: 'PUT',
+        url: `/users/${currentUser.username}`,
+        data: {
+          options: {
+            ui: { ...existing, ...updates }
+          }
+        }
+      }
+    }));
   };
 }

@@ -5,10 +5,11 @@ const initialState = {
   verifyingToken: null,
   tokenError: null,
   storingCookieConsent: null,
-  consentFailed: null
+  consentFailed: null,
+  options: {}
 };
 
-export default (state = initialState, { type, payload }) => {
+export default (state = initialState, { type, payload, meta }) => {
   switch (type) {
     case 'GET_CURRENT_USER_SUCCESS':
       return { ...state, ...payload, cookie_consent: !!payload.cookie_consent };
@@ -45,6 +46,21 @@ export default (state = initialState, { type, payload }) => {
 
     case 'USER_GIVES_COOKIE_CONSENT_SUCCESS':
       return { ...state, storingCookieConsent: false, cookie_consent: true };
+
+    case 'UPDATE_USER_UI_OPTIONS_SUCCESS':
+      return { ...state, options: meta.data.options };
+
+    case 'MARK_ALL_NOTIFICATIONS_AS_READ': {
+      return {
+        ...state,
+        options: {
+          ...state.options, ui: {
+            ...state.options.ui,
+            notificationsLastSeenDate: payload
+          }
+        }
+      };
+    }
 
     default:
       return state;

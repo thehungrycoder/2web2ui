@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: MDX Wrapper markdown link factory should transform external links 1`] = `
+<a
+  href="http://google.com"
+  otherProp={true}
+  target="_blank"
+>
+  <span>
+    jsx children
+  </span>
+</a>
+`;
+
+exports[`Component: MDX Wrapper markdown link factory should transform internal links 1`] = `
+<Link
+  otherProp={true}
+  replace={false}
+  to="/some/route"
+>
+  <span>
+    jsx children
+  </span>
+</Link>
+`;
+
+exports[`Component: MDX Wrapper should render correctly 1`] = `
+<TestComponent
+  factories={
+    Object {
+      "a": [Function],
+    }
+  }
+/>
+`;

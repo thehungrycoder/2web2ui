@@ -37,7 +37,6 @@ exports[`Component: ActiveFilters should render initially and sync to state corr
       <Panel.Section>
         <Checkbox.Group
           label="Event Type"
-          required={false}
         >
           <div
             key="delivery"
@@ -47,7 +46,6 @@ exports[`Component: ActiveFilters should render initially and sync to state corr
               id="delivery"
               label="Delivery"
               onChange={[Function]}
-              required={false}
             />
           </div>
           <div
@@ -58,7 +56,6 @@ exports[`Component: ActiveFilters should render initially and sync to state corr
               id="injection"
               label="Injection"
               onChange={[Function]}
-              required={false}
             />
           </div>
           <div
@@ -69,7 +66,6 @@ exports[`Component: ActiveFilters should render initially and sync to state corr
               id="bounce"
               label="Bounce"
               onChange={[Function]}
-              required={false}
             />
           </div>
           <div
@@ -80,7 +76,6 @@ exports[`Component: ActiveFilters should render initially and sync to state corr
               id="delay"
               label="Delay"
               onChange={[Function]}
-              required={false}
             />
           </div>
           <div
@@ -91,7 +86,6 @@ exports[`Component: ActiveFilters should render initially and sync to state corr
               id="policy_rejection"
               label="Policy Rejection"
               onChange={[Function]}
-              required={false}
             />
           </div>
           <div
@@ -102,7 +96,6 @@ exports[`Component: ActiveFilters should render initially and sync to state corr
               id="out_of_band"
               label="Out Of Band"
               onChange={[Function]}
-              required={false}
             />
           </div>
           <div
@@ -113,7 +106,6 @@ exports[`Component: ActiveFilters should render initially and sync to state corr
               id="open"
               label="Open"
               onChange={[Function]}
-              required={false}
             />
           </div>
           <div
@@ -124,7 +116,6 @@ exports[`Component: ActiveFilters should render initially and sync to state corr
               id="initial_open"
               label="Initial Open"
               onChange={[Function]}
-              required={false}
             />
           </div>
           <div
@@ -135,7 +126,6 @@ exports[`Component: ActiveFilters should render initially and sync to state corr
               id="click"
               label="Click"
               onChange={[Function]}
-              required={false}
             />
           </div>
           <div
@@ -146,7 +136,6 @@ exports[`Component: ActiveFilters should render initially and sync to state corr
               id="generation_failure"
               label="Generation Failure"
               onChange={[Function]}
-              required={false}
             />
           </div>
           <div
@@ -157,7 +146,6 @@ exports[`Component: ActiveFilters should render initially and sync to state corr
               id="generation_rejection"
               label="Generation Rejection"
               onChange={[Function]}
-              required={false}
             />
           </div>
           <div
@@ -168,7 +156,6 @@ exports[`Component: ActiveFilters should render initially and sync to state corr
               id="spam_complaint"
               label="Spam Complaint"
               onChange={[Function]}
-              required={false}
             />
           </div>
           <div
@@ -179,7 +166,6 @@ exports[`Component: ActiveFilters should render initially and sync to state corr
               id="list_unsubscribe"
               label="List Unsubscribe"
               onChange={[Function]}
-              required={false}
             />
           </div>
           <div
@@ -190,7 +176,6 @@ exports[`Component: ActiveFilters should render initially and sync to state corr
               id="link_unsubscribe"
               label="Link Unsubscribe"
               onChange={[Function]}
-              required={false}
             />
           </div>
         </Checkbox.Group>
