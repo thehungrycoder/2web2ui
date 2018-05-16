@@ -167,8 +167,8 @@ export function getPlanPrice (plan) {
   return { intervalShort: intervalShortName, intervalLong: pricingInterval, price: plan[pricingInterval] };
 }
 
-export function prepareCardInfo (cardInfo) {
-  const expiryInfo = Payment.fns.cardExpiryVal(cardInfo.expCombined);
+export function prepareCardInfo ({ expCombined, ...cardInfo }) {
+  const expiryInfo = Payment.fns.cardExpiryVal(expCombined);
 
   return {
     ...cardInfo,
