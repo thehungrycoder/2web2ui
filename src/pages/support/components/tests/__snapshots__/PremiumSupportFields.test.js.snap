@@ -62,7 +62,7 @@ exports[`PremiumSupportFields default state 1`] = `
   />
   <Field
     component={[Function]}
-    label="If small service provider, please provide the location of your sending policy"
+    label="If you're a small service provider, please provide the location of your sending policy"
     name="sending_policy"
   />
   <Field

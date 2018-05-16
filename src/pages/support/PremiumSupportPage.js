@@ -19,7 +19,7 @@ export class PremiumSupportPage extends Component {
     const { submitSucceeded, showAlert, history, ticketId, createError } = this.props;
 
     if (!prevProps.submitSucceeded && submitSucceeded && !createError) {
-      history.push('/landing');
+      history.push('/account/billing');
       return showAlert({
         type: 'success',
         message: `Request Submitted - Ticket # ${ticketId}`,

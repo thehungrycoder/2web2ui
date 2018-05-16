@@ -7,7 +7,7 @@ export const labels = {
   only_dedicated: 'Are you willing to only use dedicated IPs and no longer use the shared pools?',
   privacy_policy: 'Please provide the location of your privacy policy?',
   website: 'Please provide the location of your website?',
-  sending_policy: 'If small service provider, please provide the location of your sending policy',
+  sending_policy: 'If you\'re a small service provider, please provide the location of your sending policy',
   terminated_from_esp: 'Have you been terminated as a customer from an ESP before?',
   current_issues: 'What are the current issues you would like to resolve or improve?'
 };

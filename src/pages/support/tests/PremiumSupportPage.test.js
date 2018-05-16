@@ -38,7 +38,7 @@ describe('PremiumSupportPage', () => {
 
   it('handles submit success', () => {
     wrapper.setProps({ submitSucceeded: true, ticketId: '123' });
-    expect(props.history.push).toHaveBeenCalledWith('/landing');
+    expect(props.history.push).toHaveBeenCalledWith('/account/billing');
     expect(props.showAlert.mock.calls[0]).toMatchSnapshot();
   });
 
