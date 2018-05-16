@@ -11,7 +11,7 @@ const columns = [
   'Date',
   'Amount',
   'Invoice Number',
-  null
+  { label: null, width: 150 }
 ];
 
 
@@ -29,8 +29,8 @@ export class InvoiceHistory extends Component {
       formatDate(date),
       formatCurrency(amount),
       invoiceNumber,
-      <div style={{ textAlign: 'right', width: 26 }}>
-        <Button plain size='small' type='submit' disabled={invoiceLoading}
+      <div style={{ textAlign: 'right' }}>
+        <Button plain size='small' type='submit' color='orange' disabled={invoiceLoading}
           onClick={() => this.getInvoice(id, invoiceNumber)}>
           {thisInvoiceLoading ? 'Downloading...' : 'Download'}
         </Button>
@@ -60,10 +60,8 @@ export class InvoiceHistory extends Component {
   }
 
   render () {
-    const { invoices } = this.props;
 
-    // Perhaps need a "amounts shown in USD" message somewhere?
-    //
+    const { invoices } = this.props;
     const hasInvoices = (invoices && invoices.length > 0);
 
     const maxWarning = invoices.length === 20
@@ -88,7 +86,6 @@ export class InvoiceHistory extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  invoices: state.invoices.list,
   invoice: state.invoices.invoice,
   invoiceLoading: state.invoices.invoiceLoading,
   invoiceId: state.invoices.invoiceId,

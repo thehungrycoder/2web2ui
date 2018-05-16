@@ -5,11 +5,11 @@ exports[`Component: Invoice History should change the text of the download butto
   style={
     Object {
       "textAlign": "right",
-      "width": 26,
     }
   }
 >
   <Button
+    color="orange"
     disabled={true}
     onClick={[Function]}
     plain={true}
@@ -26,11 +26,11 @@ exports[`Component: Invoice History should deactivate download buttons while an 
   style={
     Object {
       "textAlign": "right",
-      "width": 26,
     }
   }
 >
   <Button
+    color="orange"
     disabled={true}
     onClick={[Function]}
     plain={true}
@@ -54,7 +54,10 @@ exports[`Component: Invoice History should show a list of invoices 1`] = `
           "Date",
           "Amount",
           "Invoice Number",
-          null,
+          Object {
+            "label": null,
+            "width": 150,
+          },
         ]
       }
       defaultSortColumn={null}
@@ -123,7 +126,10 @@ exports[`Component: Invoice History should show a message that only 20 invoices 
           "Date",
           "Amount",
           "Invoice Number",
-          null,
+          Object {
+            "label": null,
+            "width": 150,
+          },
         ]
       }
       defaultSortColumn={null}
