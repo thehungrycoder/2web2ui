@@ -1,0 +1,80 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: NotificationCenter should render correctly 1`] = `
+<Popover
+  bottom={true}
+  left={true}
+  right={true}
+  trigger={
+    <NotificationsUnread
+      className={undefined}
+    />
+  }
+>
+  <NotificationItem
+    icon={[Function]}
+    key="notification-1"
+    unread={true}
+  >
+    <h2>
+      An unread informational notification
+    </h2>
+    <NotificationComponent />
+  </NotificationItem>
+  <NotificationItem
+    icon={[Function]}
+    key="notification-2"
+    unread={false}
+  >
+    <NotificationComponent />
+  </NotificationItem>
+</Popover>
+`;
+
+exports[`Component: NotificationCenter should render with no notifications 1`] = `
+<Popover
+  bottom={true}
+  left={true}
+  right={true}
+  trigger={
+    <Notifications
+      className={undefined}
+    />
+  }
+>
+  <p>
+    No notifications at this time.
+  </p>
+</Popover>
+`;
+
+exports[`Component: NotificationCenter should render with no unread notifications 1`] = `
+<Popover
+  bottom={true}
+  left={true}
+  right={true}
+  trigger={
+    <Notifications
+      className={undefined}
+    />
+  }
+>
+  <NotificationItem
+    icon={[Function]}
+    key="notification-1"
+    unread={true}
+  >
+    <h2>
+      An unread informational notification
+    </h2>
+    <NotificationComponent />
+  </NotificationItem>
+  <NotificationItem
+    icon={[Function]}
+    key="notification-2"
+    unread={false}
+  >
+    <NotificationComponent />
+  </NotificationItem>
+</Popover>
+`;

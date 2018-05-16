@@ -40,7 +40,6 @@ exports[`Component: Summary Chart Metrics Modal should disable checkboxes when m
               id="count_accepted"
               label="Accepted"
               onChange={[Function]}
-              required={false}
             />
           </Tooltip>
         </div>
@@ -69,7 +68,6 @@ exports[`Component: Summary Chart Metrics Modal should disable checkboxes when m
               id="count_injected"
               label="Injected"
               onChange={[Function]}
-              required={false}
             />
           </Tooltip>
         </div>
@@ -98,7 +96,6 @@ exports[`Component: Summary Chart Metrics Modal should disable checkboxes when m
               id="count_sent"
               label="Sent"
               onChange={[Function]}
-              required={false}
             />
           </Tooltip>
         </div>
@@ -127,7 +124,6 @@ exports[`Component: Summary Chart Metrics Modal should disable checkboxes when m
               id="count_targeted"
               label="Targeted"
               onChange={[Function]}
-              required={false}
             />
           </Tooltip>
         </div>
@@ -193,7 +189,6 @@ exports[`Component: Summary Chart Metrics Modal should render 1`] = `
               id="count_accepted"
               label="Accepted"
               onChange={[Function]}
-              required={false}
             />
           </Tooltip>
         </div>
@@ -222,7 +217,6 @@ exports[`Component: Summary Chart Metrics Modal should render 1`] = `
               id="count_injected"
               label="Injected"
               onChange={[Function]}
-              required={false}
             />
           </Tooltip>
         </div>
@@ -251,7 +245,6 @@ exports[`Component: Summary Chart Metrics Modal should render 1`] = `
               id="count_sent"
               label="Sent"
               onChange={[Function]}
-              required={false}
             />
           </Tooltip>
         </div>
@@ -280,7 +273,6 @@ exports[`Component: Summary Chart Metrics Modal should render 1`] = `
               id="count_targeted"
               label="Targeted"
               onChange={[Function]}
-              required={false}
             />
           </Tooltip>
         </div>
@@ -346,7 +338,6 @@ exports[`Component: Summary Chart Metrics Modal should select metrics 1`] = `
               id="count_accepted"
               label="Accepted"
               onChange={[Function]}
-              required={false}
             />
           </Tooltip>
         </div>
@@ -375,7 +366,6 @@ exports[`Component: Summary Chart Metrics Modal should select metrics 1`] = `
               id="count_injected"
               label="Injected"
               onChange={[Function]}
-              required={false}
             />
           </Tooltip>
         </div>
@@ -404,7 +394,6 @@ exports[`Component: Summary Chart Metrics Modal should select metrics 1`] = `
               id="count_sent"
               label="Sent"
               onChange={[Function]}
-              required={false}
             />
           </Tooltip>
         </div>
@@ -433,7 +422,6 @@ exports[`Component: Summary Chart Metrics Modal should select metrics 1`] = `
               id="count_targeted"
               label="Targeted"
               onChange={[Function]}
-              required={false}
             />
           </Tooltip>
         </div>

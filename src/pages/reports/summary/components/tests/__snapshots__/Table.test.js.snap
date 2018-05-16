@@ -118,7 +118,6 @@ exports[`Summary Table  should render subaccount option 1`] = `
       },
     ]
   }
-  placeholderValue=""
   value="domain"
 />
 `;
@@ -241,7 +240,6 @@ exports[`Summary Table  should render with no data 1`] = `
               },
             ]
           }
-          placeholderValue=""
           value="domain"
         />
       </Grid.Column>

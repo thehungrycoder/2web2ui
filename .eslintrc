@@ -11,7 +11,11 @@
     ],
     "complexity": "off",
     "react/jsx-no-bind": "off",
-    "space-before-function-paren": ["error", "always"],
+    "space-before-function-paren": ["error", {
+      "anonymous": "always",
+      "named": "never",
+      "asyncArrow": "always"
+    }],
     "max-lines": [
       "error",
       {

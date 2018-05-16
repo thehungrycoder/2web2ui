@@ -10,11 +10,11 @@
     "start": "REACT_APP_VERSION=local-$USER-$(git rev-parse HEAD) node scripts/start.js",
     "build": "node scripts/build.js",
     "analyze": "source-map-explorer build/static/js/main.*",
-    "test": "node scripts/test.js --env=jsdom --config=./jest.config.json",
+    "test": "node scripts/test.js --env=jsdom --config=./jest.config.js",
     "test-coverage": "npm test -- --coverage",
     "test-ci": "CI=true npm test -- --coverage",
     "coveralls": "cat ./build-reports/lcov.info | coveralls",
-    "test-examples": "node scripts/test.js --env=jsdom --config=./jest.config.json --testMatch='<rootDir>/docs/testing/**/?(*.)test.js'",
+    "test-examples": "node scripts/test.js --env=jsdom --config=./jest.config.js --testMatch='<rootDir>/docs/testing/**/?(*.)test.js'",
     "lint": "node node_modules/eslint/bin/eslint.js src",
     "lintfix": "npm run lint -- --fix",
     "precommit": "lint-staged"
@@ -47,8 +47,8 @@
   },
   "dependencies": {
     "@sparkpost/boomerang": "^1.0.6",
-    "@sparkpost/matchbox": "^3.0.0-2",
-    "@sparkpost/matchbox-icons": "^1.0.0",
+    "@sparkpost/matchbox": "^3.1.1",
+    "@sparkpost/matchbox-icons": "^1.1.0",
     "axios": "^0.17.1",
     "chart.js": "^2.6.0",
     "classnames": "^2.2.5",
@@ -92,6 +92,7 @@
     "uuid": "^3.2.1"
   },
   "devDependencies": {
+    "@mdx-js/mdx": "^0.9.0",
     "autoprefixer": "^8.1.0",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.2.1",
@@ -132,6 +133,8 @@
     "jest-enzyme": "^5.0.0",
     "jest-junit": "^3.4.1",
     "lint-staged": "^7.0.1",
+    "mdx-loader": "^1.1.0",
+    "mdxc": "^1.1.1",
     "moment-timezone": "^0.5.14",
     "node-sass": "^4.5.3",
     "object-assign": "^4.1.1",

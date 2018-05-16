@@ -36,7 +36,6 @@ exports[`Component: ShareModal should render correctly when open 1`] = `
           id="pin-relative-link"
           label="Pin dates for this link"
           onChange={[Function]}
-          required={false}
         />
       </Panel.Section>
       <Panel.Section>
@@ -85,7 +84,6 @@ exports[`Component: ShareModal should render with a valid relative range 1`] = `
           id="pin-relative-link"
           label="Pin dates for this link"
           onChange={[Function]}
-          required={false}
         />
       </Panel.Section>
       <Panel.Section>

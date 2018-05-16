@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Action: Notifications addNotification 1`] = `
+Array [
+  Object {
+    "payload": Object {
+      "component": "test component",
+      "id": "notification-3",
+      "meta": Object {},
+    },
+    "type": "ADD_NOTIFICATION",
+  },
+]
+`;
+
+exports[`Action: Notifications loadNotifications 1`] = `
+Array [
+  Object {
+    "payload": Array [
+      Object {
+        "component": [Function],
+        "id": "notification-1",
+        "meta": Object {
+          "title": "Some notification",
+          "type": "info",
+        },
+      },
+      Object {
+        "component": [Function],
+        "id": "notification-2",
+        "meta": Object {
+          "type": "notice",
+        },
+      },
+    ],
+    "type": "LOAD_NOTIFICATIONS_SUCCESS",
+  },
+]
+`;
+
+exports[`Action: Notifications markAllAsRead 1`] = `
+Array [
+  Object {
+    "payload": 2018-05-01T12:00:00.000Z,
+    "type": "MARK_ALL_NOTIFICATIONS_AS_READ",
+  },
+  Object {
+    "notificationsLastSeenDate": 2018-05-01T12:00:00.000Z,
+    "type": "UPDATE_USER_UI_OPTIONS_TEST_TYPE",
+  },
+]
+`;

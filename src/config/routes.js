@@ -24,6 +24,8 @@ import {
   PremiumSupportPage
 } from 'src/pages';
 
+import NotificationTestPage from 'src/pages/NotificationTestPage';
+
 import onboarding from 'src/pages/onboarding';
 import { default as emailVerification } from 'src/components/emailVerification/EmailVerification';
 import { emailVerificationRedirect, emailRedirects } from './emailRoutes';
@@ -509,6 +511,11 @@ const routes = [
     condition: isAws,
     title: 'Support | Request Premium Support',
     layout: App
+  },
+  {
+    path: '/notifications',
+    component: NotificationTestPage,
+    title: 'Notification Test Page'
   }
 ];
 

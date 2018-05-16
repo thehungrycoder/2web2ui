@@ -17,7 +17,6 @@ exports[`SelectWrapper renders checkbox with an error 1`] = `
       },
     ]
   }
-  placeholderValue=""
 />
 `;
 
@@ -37,6 +36,5 @@ exports[`SelectWrapper renders select 1`] = `
       },
     ]
   }
-  placeholderValue=""
 />
 `;

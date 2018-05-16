@@ -64,9 +64,7 @@ exports[`JoinForm render disables form when loading 1`] = `
       ]
     }
   />
-  <Checkbox.Group
-    required={false}
-  >
+  <Checkbox.Group>
     <Field
       component={[Function]}
       disabled={true}
@@ -190,9 +188,7 @@ exports[`JoinForm render disables form when recaptcha is not loaded 1`] = `
       ]
     }
   />
-  <Checkbox.Group
-    required={false}
-  >
+  <Checkbox.Group>
     <Field
       component={[Function]}
       disabled={true}
@@ -316,9 +312,7 @@ exports[`JoinForm render enables form correctly 1`] = `
       ]
     }
   />
-  <Checkbox.Group
-    required={false}
-  >
+  <Checkbox.Group>
     <Field
       component={[Function]}
       disabled={false}

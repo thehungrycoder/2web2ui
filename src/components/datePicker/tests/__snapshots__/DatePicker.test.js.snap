@@ -13,7 +13,6 @@ exports[`Component: DatePicker handleFormDates should use a date field format if
           3,
         ]
       }
-      placeholderValue=""
       value="day"
     />
   }
@@ -45,7 +44,6 @@ exports[`Component: DatePicker should render ok by default 1`] = `
               3,
             ]
           }
-          placeholderValue=""
           value="day"
         />
       }
