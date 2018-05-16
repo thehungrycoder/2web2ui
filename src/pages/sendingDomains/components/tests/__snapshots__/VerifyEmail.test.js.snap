@@ -32,7 +32,9 @@ exports[`VerifyEmail component should disable the send button while sending 1`] 
         <Grid.Column
           xs={6}
         >
-          <div>
+          <div
+            className="ButtonColumn"
+          >
              
             <Button
               color="orange"
@@ -60,7 +62,9 @@ exports[`VerifyEmail component should disable the send button while sending 1`] 
         <Grid.Column
           xs={6}
         >
-          <div>
+          <div
+            className="ButtonColumn"
+          >
             <Button
               color="orange"
               disabled={true}
@@ -105,7 +109,7 @@ exports[`VerifyEmail component should error if custom mailbox field is invalid 1
             <TextField
               connectRight={
                 <strong
-                  className={undefined}
+                  className="Domain"
                 >
                   @xyz.com
                 </strong>
@@ -123,7 +127,9 @@ exports[`VerifyEmail component should error if custom mailbox field is invalid 1
         <Grid.Column
           xs={6}
         >
-          <div>
+          <div
+            className="ButtonColumn"
+          >
             <Button
               color="orange"
               onClick={[Function]}
@@ -172,7 +178,9 @@ exports[`VerifyEmail component should render success message 1`] = `
         <Grid.Column
           xs={6}
         >
-          <div>
+          <div
+            className="ButtonColumn"
+          >
              
             <Button
               color="orange"
@@ -199,7 +207,9 @@ exports[`VerifyEmail component should render success message 1`] = `
         <Grid.Column
           xs={6}
         >
-          <div>
+          <div
+            className="ButtonColumn"
+          >
             <Button
               color="orange"
               onClick={[Function]}
@@ -243,7 +253,7 @@ exports[`VerifyEmail component should render with mailbox verification 1`] = `
             <TextField
               connectRight={
                 <strong
-                  className={undefined}
+                  className="Domain"
                 >
                   @xyz.com
                 </strong>
@@ -260,7 +270,9 @@ exports[`VerifyEmail component should render with mailbox verification 1`] = `
         <Grid.Column
           xs={6}
         >
-          <div>
+          <div
+            className="ButtonColumn"
+          >
             <Button
               color="orange"
               onClick={[Function]}
@@ -309,7 +321,9 @@ exports[`VerifyEmail component should render with postmaster and abuse email ver
         <Grid.Column
           xs={6}
         >
-          <div>
+          <div
+            className="ButtonColumn"
+          >
              
             <Button
               color="orange"
@@ -336,7 +350,9 @@ exports[`VerifyEmail component should render with postmaster and abuse email ver
         <Grid.Column
           xs={6}
         >
-          <div>
+          <div
+            className="ButtonColumn"
+          >
             <Button
               color="orange"
               onClick={[Function]}
@@ -385,7 +401,9 @@ exports[`VerifyEmail component should send abuse-at email 1`] = `
         <Grid.Column
           xs={6}
         >
-          <div>
+          <div
+            className="ButtonColumn"
+          >
              
             <Button
               color="orange"
@@ -412,7 +430,9 @@ exports[`VerifyEmail component should send abuse-at email 1`] = `
         <Grid.Column
           xs={6}
         >
-          <div>
+          <div
+            className="ButtonColumn"
+          >
             <Button
               color="orange"
               onClick={[Function]}
@@ -456,7 +476,7 @@ exports[`VerifyEmail component should send custom mailbox email 1`] = `
             <TextField
               connectRight={
                 <strong
-                  className={undefined}
+                  className="Domain"
                 >
                   @xyz.com
                 </strong>
@@ -473,7 +493,9 @@ exports[`VerifyEmail component should send custom mailbox email 1`] = `
         <Grid.Column
           xs={6}
         >
-          <div>
+          <div
+            className="ButtonColumn"
+          >
             <Button
               color="orange"
               onClick={[Function]}
@@ -522,7 +544,9 @@ exports[`VerifyEmail component should send postmaster-at email 1`] = `
         <Grid.Column
           xs={6}
         >
-          <div>
+          <div
+            className="ButtonColumn"
+          >
              
             <Button
               color="orange"
@@ -549,7 +573,9 @@ exports[`VerifyEmail component should send postmaster-at email 1`] = `
         <Grid.Column
           xs={6}
         >
-          <div>
+          <div
+            className="ButtonColumn"
+          >
             <Button
               color="orange"
               onClick={[Function]}

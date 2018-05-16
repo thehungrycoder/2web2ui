@@ -5,7 +5,9 @@ exports[`Empty:  should render 1`] = `
   sectioned={true}
   title="Empty Title"
 >
-  <h6>
+  <h6
+    className="Center"
+  >
     nothing here to see
   </h6>
 </Panel>

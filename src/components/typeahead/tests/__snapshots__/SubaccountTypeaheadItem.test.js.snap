@@ -1,9 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Subaccount Typeahead Item should render correctly 1`] = `
-<div>
+<div
+  className="Item"
+>
   a name
-  <span>
+  <span
+    className="id"
+  >
     101
   </span>
 </div>

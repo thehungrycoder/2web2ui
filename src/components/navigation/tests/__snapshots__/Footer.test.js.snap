@@ -4,9 +4,12 @@ exports[`Footer tests should not render docs or logout for heroku user 1`] = `
 <Connect(AccessControl)
   condition={[Function]}
 >
-  <ul>
+  <ul
+    className="footer"
+  >
     <li>
       <UnstyledLink
+        className="link"
         external={true}
         to="https://www.sparkpost.com/docs"
       >
@@ -15,6 +18,7 @@ exports[`Footer tests should not render docs or logout for heroku user 1`] = `
     </li>
     <li>
       <UnstyledLink
+        className="link"
         onClick={[MockFunction]}
       >
         Log Out
@@ -28,9 +32,12 @@ exports[`Footer tests should render footer correctly for non-heroku user 1`] = `
 <Connect(AccessControl)
   condition={[Function]}
 >
-  <ul>
+  <ul
+    className="footer"
+  >
     <li>
       <UnstyledLink
+        className="link"
         external={true}
         to="https://www.sparkpost.com/docs"
       >
@@ -39,6 +46,7 @@ exports[`Footer tests should render footer correctly for non-heroku user 1`] = `
     </li>
     <li>
       <UnstyledLink
+        className="link"
         onClick={[MockFunction]}
       >
         Log Out

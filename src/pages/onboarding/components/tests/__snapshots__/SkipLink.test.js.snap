@@ -2,6 +2,7 @@
 
 exports[`SkipLink should render correctly 1`] = `
 <PageLink
+  className="SkipLink"
   to="/a-path"
 >
   go to a path

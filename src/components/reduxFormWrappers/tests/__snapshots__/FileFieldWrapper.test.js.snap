@@ -1,18 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`FileFieldWrapper renders disabled file input 1`] = `
-<fieldset>
+<fieldset
+  className="Field"
+>
   <Label>
     Test File Input
      *
      
   </Label>
-  <div>
+  <div
+    className="InputWrapper"
+  >
     <Dropzone
       accept=".csv"
+      activeClassName="DropzoneActive"
+      className="Dropzone"
       disableClick={false}
       disablePreview={true}
       disabled={true}
+      disabledClassName="DropzoneDisabled"
       maxSize={Infinity}
       minSize={0}
       multiple={false}
@@ -20,7 +27,9 @@ exports[`FileFieldWrapper renders disabled file input 1`] = `
       onFileDialogCancel={[Function]}
       preventDropOnDocument={true}
     >
-      <span>
+      <span
+        className="Placeholder"
+      >
         <FileUpload />
          Drag a file here, or click to browse
       </span>
@@ -30,18 +39,25 @@ exports[`FileFieldWrapper renders disabled file input 1`] = `
 `;
 
 exports[`FileFieldWrapper renders file input 1`] = `
-<fieldset>
+<fieldset
+  className="Field"
+>
   <Label>
     Test File Input
      *
      
   </Label>
-  <div>
+  <div
+    className="InputWrapper"
+  >
     <Dropzone
       accept=".csv"
+      activeClassName="DropzoneActive"
+      className="Dropzone"
       disableClick={false}
       disablePreview={true}
       disabled={false}
+      disabledClassName="DropzoneDisabled"
       maxSize={Infinity}
       minSize={0}
       multiple={false}
@@ -49,7 +65,9 @@ exports[`FileFieldWrapper renders file input 1`] = `
       onFileDialogCancel={[Function]}
       preventDropOnDocument={true}
     >
-      <span>
+      <span
+        className="Placeholder"
+      >
         <FileUpload />
          Drag a file here, or click to browse
       </span>
@@ -59,7 +77,9 @@ exports[`FileFieldWrapper renders file input 1`] = `
 `;
 
 exports[`FileFieldWrapper renders file input with error message 1`] = `
-<fieldset>
+<fieldset
+  className="Field"
+>
   <Label>
     Test File Input
      *
@@ -69,12 +89,17 @@ exports[`FileFieldWrapper renders file input with error message 1`] = `
       wrapper="span"
     />
   </Label>
-  <div>
+  <div
+    className="InputWrapper"
+  >
     <Dropzone
       accept=".csv"
+      activeClassName="DropzoneActive"
+      className="Dropzone"
       disableClick={false}
       disablePreview={true}
       disabled={false}
+      disabledClassName="DropzoneDisabled"
       maxSize={Infinity}
       minSize={0}
       multiple={false}
@@ -82,7 +107,9 @@ exports[`FileFieldWrapper renders file input with error message 1`] = `
       onFileDialogCancel={[Function]}
       preventDropOnDocument={true}
     >
-      <span>
+      <span
+        className="Placeholder"
+      >
         <FileUpload />
          Drag a file here, or click to browse
       </span>
@@ -92,18 +119,25 @@ exports[`FileFieldWrapper renders file input with error message 1`] = `
 `;
 
 exports[`FileFieldWrapper renders file input with help message 1`] = `
-<fieldset>
+<fieldset
+  className="Field"
+>
   <Label>
     Test File Input
      *
      
   </Label>
-  <div>
+  <div
+    className="InputWrapper"
+  >
     <Dropzone
       accept=".csv"
+      activeClassName="DropzoneActive"
+      className="Dropzone"
       disableClick={false}
       disablePreview={true}
       disabled={false}
+      disabledClassName="DropzoneDisabled"
       maxSize={Infinity}
       minSize={0}
       multiple={false}
@@ -111,31 +145,42 @@ exports[`FileFieldWrapper renders file input with help message 1`] = `
       onFileDialogCancel={[Function]}
       preventDropOnDocument={true}
     >
-      <span>
+      <span
+        className="Placeholder"
+      >
         <FileUpload />
          Drag a file here, or click to browse
       </span>
     </Dropzone>
   </div>
-  <div>
+  <div
+    className="Help"
+  >
     Ask Google!
   </div>
 </fieldset>
 `;
 
 exports[`FileFieldWrapper renders file input with no specified type 1`] = `
-<fieldset>
+<fieldset
+  className="Field"
+>
   <Label>
     Test File Input
      *
      
   </Label>
-  <div>
+  <div
+    className="InputWrapper"
+  >
     <Dropzone
       accept=""
+      activeClassName="DropzoneActive"
+      className="Dropzone"
       disableClick={false}
       disablePreview={true}
       disabled={false}
+      disabledClassName="DropzoneDisabled"
       maxSize={Infinity}
       minSize={0}
       multiple={false}
@@ -143,7 +188,9 @@ exports[`FileFieldWrapper renders file input with no specified type 1`] = `
       onFileDialogCancel={[Function]}
       preventDropOnDocument={true}
     >
-      <span>
+      <span
+        className="Placeholder"
+      >
         <FileUpload />
          Drag a file here, or click to browse
       </span>
@@ -153,18 +200,25 @@ exports[`FileFieldWrapper renders file input with no specified type 1`] = `
 `;
 
 exports[`FileFieldWrapper renders file input with selected filename 1`] = `
-<fieldset>
+<fieldset
+  className="Field"
+>
   <Label>
     Test File Input
      *
      
   </Label>
-  <div>
+  <div
+    className="InputWrapper"
+  >
     <Dropzone
       accept=".csv"
+      activeClassName="DropzoneActive"
+      className="Dropzone"
       disableClick={false}
       disablePreview={true}
       disabled={false}
+      disabledClassName="DropzoneDisabled"
       maxSize={Infinity}
       minSize={0}
       multiple={false}

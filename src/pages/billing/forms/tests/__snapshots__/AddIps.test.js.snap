@@ -61,6 +61,7 @@ exports[`AddIps renders correctly when user reaches max ip limit 1`] = `
         Add Dedicated IPs
       </Button>
       <Button
+        className="Cancel"
         size="default"
       >
         Cancel
@@ -138,6 +139,7 @@ exports[`AddIps renders correctly with default props 1`] = `
         Add Dedicated IPs
       </Button>
       <Button
+        className="Cancel"
         size="default"
       >
         Cancel
@@ -225,6 +227,7 @@ exports[`AddIps renders free ip elements when included in plan 1`] = `
         Add Dedicated IPs
       </Button>
       <Button
+        className="Cancel"
         size="default"
       >
         Cancel

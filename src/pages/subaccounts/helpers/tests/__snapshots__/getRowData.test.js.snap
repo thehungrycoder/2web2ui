@@ -12,7 +12,7 @@ Array [
     123
   </p>,
   <p
-    className={undefined}
+    className="StatusActive"
   >
     active
   </p>,
@@ -31,7 +31,7 @@ Array [
     789
   </p>,
   <p
-    className={undefined}
+    className="StatusSuspended"
   >
     suspended
   </p>,
@@ -50,7 +50,7 @@ Array [
     456
   </p>,
   <p
-    className={undefined}
+    className="StatusTerminated"
   >
     terminated
   </p>,

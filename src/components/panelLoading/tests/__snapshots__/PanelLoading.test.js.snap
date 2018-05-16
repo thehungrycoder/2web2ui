@@ -2,6 +2,7 @@
 
 exports[`Panel Loading render 1`] = `
 <Panel
+  className="Loading"
   style={
     Object {
       "minHeight": "400px",

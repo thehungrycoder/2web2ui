@@ -2,12 +2,14 @@
 
 exports[`Sending Domains Icons render correctly 1`] = `
 <Check
+  className="GreenCheck"
   size={16}
 />
 `;
 
 exports[`Sending Domains Icons render correctly 2`] = `
 <Error
+  className="RedError"
   size={16}
 />
 `;

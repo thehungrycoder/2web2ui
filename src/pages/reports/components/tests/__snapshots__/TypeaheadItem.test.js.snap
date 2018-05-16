@@ -1,19 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Component: TypeaheadItem should render 1`] = `
-<div>
-  <span>
+<div
+  className="Item"
+>
+  <span
+    className="Value"
+  >
     found
   </span>
 </div>
 `;
 
 exports[`Component: TypeaheadItem should render help text 1`] = `
-<div>
-  <span>
+<div
+  className="Item"
+>
+  <span
+    className="Value"
+  >
     found
   </span>
-  <span>
+  <span
+    className="HelpText"
+  >
     I am helping!
   </span>
 </div>

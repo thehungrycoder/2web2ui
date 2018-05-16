@@ -7,7 +7,9 @@ exports[`EngagementSummary renders loading panel 1`] = `
 `;
 
 exports[`EngagementSummary renders metric summary 1`] = `
-<Panel>
+<Panel
+  className="EngagementSummary"
+>
   <Grid>
     <Grid.Column
       md={3}
@@ -74,7 +76,9 @@ exports[`EngagementSummary renders metric summary 1`] = `
 `;
 
 exports[`EngagementSummary renders metric summary with custom time range 1`] = `
-<Panel>
+<Panel
+  className="EngagementSummary"
+>
   <Grid>
     <Grid.Column
       md={3}

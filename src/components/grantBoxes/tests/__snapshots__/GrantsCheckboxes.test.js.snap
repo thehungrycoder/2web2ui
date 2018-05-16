@@ -10,6 +10,7 @@ exports[`GrantsCheckboxes should render 1`] = `
     xs={12}
   >
     <div
+      className="Grant"
       key="grant1"
     >
       <Tooltip
@@ -43,6 +44,7 @@ exports[`GrantsCheckboxes should render 1`] = `
     xs={12}
   >
     <div
+      className="Grant"
       key="grant2"
     >
       <Tooltip

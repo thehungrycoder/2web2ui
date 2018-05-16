@@ -9,7 +9,7 @@ exports[`Typeahead render function should render the list 1`] = `
       Array [
         Object {
           "content": <div
-            className={undefined}
+            className="Item"
           >
             apples
           </div>,
@@ -19,7 +19,7 @@ exports[`Typeahead render function should render the list 1`] = `
         },
         Object {
           "content": <div
-            className={undefined}
+            className="Item"
           >
             bananas
           </div>,
@@ -29,7 +29,7 @@ exports[`Typeahead render function should render the list 1`] = `
         },
         Object {
           "content": <div
-            className={undefined}
+            className="Item"
           >
             cauliflower
           </div>,

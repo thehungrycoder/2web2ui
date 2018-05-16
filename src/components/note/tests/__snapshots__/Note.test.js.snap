@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders a note 1`] = `
-<div>
+<div
+  className="Note"
+>
   Attention!
 </div>
 `;

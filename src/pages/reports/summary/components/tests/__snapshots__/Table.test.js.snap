@@ -11,14 +11,18 @@ Array [
       Master Account (ID 0)
     </a>
   </UnstyledLink>,
-  <div>
+  <div
+    className="RightAlign"
+  >
     <Unit
       value={123}
     >
       123
     </Unit>
   </div>,
-  <div>
+  <div
+    className="RightAlign"
+  >
     <Unit
       unit="millisecond"
       value={12345}
@@ -35,14 +39,18 @@ Array [
       sub 1 name
     </a>
   </UnstyledLink>,
-  <div>
+  <div
+    className="RightAlign"
+  >
     <Unit
       value={123}
     >
       123
     </Unit>
   </div>,
-  <div>
+  <div
+    className="RightAlign"
+  >
     <Unit
       unit="millisecond"
       value={12345}
@@ -59,14 +67,18 @@ Array [
       Deleted (ID 1010)
     </a>
   </UnstyledLink>,
-  <div>
+  <div
+    className="RightAlign"
+  >
     <Unit
       value={123}
     >
       123
     </Unit>
   </div>,
-  <div>
+  <div
+    className="RightAlign"
+  >
     <Unit
       unit="millisecond"
       value={12345}
@@ -145,23 +157,23 @@ exports[`Summary Table  should render with data 1`] = `
   columns={
     Array [
       Object {
-        "className": undefined,
+        "className": "HeaderCell",
         "label": "Recipient Domain",
         "sortKey": "domain",
       },
       Object {
-        "className": "",
+        "className": "HeaderCell NumericalHeader",
         "key": "metric_1",
         "label": <div
-          className={undefined}
+          className="RightAlign"
         />,
         "sortKey": "metric_1",
       },
       Object {
-        "className": "",
+        "className": "HeaderCell NumericalHeader",
         "key": "metric_2",
         "label": <div
-          className={undefined}
+          className="RightAlign"
         />,
         "sortKey": "metric_2",
       },

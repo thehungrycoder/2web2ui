@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Support Form Component Form should render 1`] = `
-<div>
+<div
+  className="SupportForm"
+>
   <Panel.Section>
     <h6>
       Submit A Support Ticket
@@ -52,6 +54,7 @@ exports[`Support Form Component Form should render 1`] = `
         Submit Ticket
       </Button>
       <Button
+        className="CancelBtn"
         onClick={[Function]}
         size="default"
       >
@@ -94,7 +97,9 @@ exports[`Support Form Component Form should render issue dropdown with help text
 `;
 
 exports[`Support Form Component Form should render with selected issue message label 1`] = `
-<div>
+<div
+  className="SupportForm"
+>
   <Panel.Section>
     <h6>
       Submit A Support Ticket
@@ -145,6 +150,7 @@ exports[`Support Form Component Form should render with selected issue message l
         Submit Ticket
       </Button>
       <Button
+        className="CancelBtn"
         onClick={[Function]}
         size="default"
       >

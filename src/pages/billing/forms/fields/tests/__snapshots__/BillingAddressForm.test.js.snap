@@ -7,7 +7,9 @@ exports[`Billing Address Form: should render 1`] = `
       Billing Address
     </small>
   </p>
-  <Grid>
+  <Grid
+    className="spacer"
+  >
     <Grid.Column
       xs={6}
     >
@@ -73,7 +75,9 @@ exports[`Billing Address Form: should show states 1`] = `
       Billing Address
     </small>
   </p>
-  <Grid>
+  <Grid
+    className="spacer"
+  >
     <Grid.Column
       xs={6}
     >

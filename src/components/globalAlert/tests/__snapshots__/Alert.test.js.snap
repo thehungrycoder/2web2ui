@@ -26,6 +26,7 @@ exports[`Alert should render with all props 1`] = `
        
       <span>
         <a
+          className="Details"
           onClick={[Function]}
         >
           View Details

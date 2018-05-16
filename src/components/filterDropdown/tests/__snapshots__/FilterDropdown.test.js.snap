@@ -43,6 +43,7 @@ exports[`Component: FilterDropdown renders correctly 1`] = `
     />
   </Popover>
   <Field
+    className="hidden"
     component="input"
     key="active"
     name="status.active"
@@ -51,6 +52,7 @@ exports[`Component: FilterDropdown renders correctly 1`] = `
     type="checkbox"
   />
   <Field
+    className="hidden"
     component="input"
     key="terminated"
     name="status.terminated"
@@ -59,6 +61,7 @@ exports[`Component: FilterDropdown renders correctly 1`] = `
     type="checkbox"
   />
   <Field
+    className="hidden"
     component="input"
     key="suspended"
     name="status.suspended"
@@ -112,6 +115,7 @@ exports[`Component: FilterDropdown renders selected correctly 1`] = `
     />
   </Popover>
   <Field
+    className="hidden"
     component="input"
     key="active"
     name="status.active"
@@ -120,6 +124,7 @@ exports[`Component: FilterDropdown renders selected correctly 1`] = `
     type="checkbox"
   />
   <Field
+    className="hidden"
     component="input"
     key="terminated"
     name="status.terminated"
@@ -128,6 +133,7 @@ exports[`Component: FilterDropdown renders selected correctly 1`] = `
     type="checkbox"
   />
   <Field
+    className="hidden"
     component="input"
     key="suspended"
     name="status.suspended"

@@ -3,6 +3,7 @@
 exports[`Plan: renders correctly 1`] = `
 <a>
   <PlanPrice
+    className="MainLabel"
     plan={
       Object {
         "monthly": 100,
@@ -19,6 +20,7 @@ exports[`Plan: renders correctly 1`] = `
 exports[`Plan: renders free and ip correctly 1`] = `
 <a>
   <PlanPrice
+    className="MainLabel"
     plan={
       Object {
         "includesIp": true,
@@ -37,6 +39,7 @@ exports[`Plan: renders free and ip correctly 1`] = `
 exports[`Plan: renders hourly plan correctly 1`] = `
 <a>
   <PlanPrice
+    className="MainLabel"
     plan={
       Object {
         "hourly": 0.22,

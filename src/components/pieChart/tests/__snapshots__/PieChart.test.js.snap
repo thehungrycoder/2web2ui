@@ -2,7 +2,9 @@
 
 exports[`Pie Chart:  renders its children 1`] = `
 <div>
-  <div />
+  <div
+    className="LegendHeader"
+  />
   <Grid>
     <Grid.Column />
   </Grid>
@@ -19,9 +21,17 @@ exports[`Pie Chart:  renders its children 2`] = `
 `;
 
 exports[`Pie Chart:  renders its children 3`] = `
-<div>
-  <div />
-  <div />
-  <div />
+<div
+  className="ActiveLabel"
+>
+  <div
+    className="Label"
+  />
+  <div
+    className="Line"
+  />
+  <div
+    className="Value"
+  />
 </div>
 `;

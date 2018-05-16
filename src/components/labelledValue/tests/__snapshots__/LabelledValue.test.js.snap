@@ -1,19 +1,31 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`LabelledValue Component should render - no props 1`] = `
-<div>
-  <div />
+<div
+  className="LabelledValue"
+>
+  <div
+    className="Content"
+  />
 </div>
 `;
 
 exports[`LabelledValue Component should render children 1`] = `
-<div>
-  <div>
-    <small>
+<div
+  className="LabelledValue"
+>
+  <div
+    className="LabelContainer"
+  >
+    <small
+      className="Label"
+    >
       Label
     </small>
   </div>
-  <div>
+  <div
+    className="Content"
+  >
     <h5>
       child
     </h5>
@@ -22,13 +34,21 @@ exports[`LabelledValue Component should render children 1`] = `
 `;
 
 exports[`LabelledValue Component should render with label and value 1`] = `
-<div>
-  <div>
-    <small>
+<div
+  className="LabelledValue"
+>
+  <div
+    className="LabelContainer"
+  >
+    <small
+      className="Label"
+    >
       Label
     </small>
   </div>
-  <div>
+  <div
+    className="Content"
+  >
     <h6>
       a value
     </h6>
