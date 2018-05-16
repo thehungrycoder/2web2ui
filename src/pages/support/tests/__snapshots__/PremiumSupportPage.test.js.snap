@@ -36,7 +36,7 @@ exports[`PremiumSupportPage default state 1`] = `
 exports[`PremiumSupportPage handles submit success 1`] = `
 Array [
   Object {
-    "autoDimiss": false,
+    "autoDismiss": false,
     "message": "Request Submitted - Ticket # 123",
     "type": "success",
   },

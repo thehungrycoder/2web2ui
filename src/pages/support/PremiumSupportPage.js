@@ -23,7 +23,7 @@ export class PremiumSupportPage extends Component {
       return showAlert({
         type: 'success',
         message: `Request Submitted - Ticket # ${ticketId}`,
-        autoDimiss: false
+        autoDismiss: false
       });
     }
   }
