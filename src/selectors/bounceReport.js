@@ -17,7 +17,7 @@ const selectReasons = ({ bounceReport }) => bounceReport.reasons;
 const selectFormattedAggregates = createSelector(
   [selectAggregates],
   (aggregates) => {
-    if (!aggregates.count_bounce || aggregates.count_admin_bounce) {
+    if (!aggregates.count_bounce || !aggregates.count_admin_bounce) {
       return [];
     }
     return formatAggregates(aggregates);
