@@ -4,7 +4,7 @@ import { WebhooksList } from '../ListPage';
 
 describe('Page: Webhook List', () => {
   const props = {
-    listAllWebhooks: jest.fn(),
+    listWebhooks: jest.fn(),
     error: null,
     webhooks: [
       {

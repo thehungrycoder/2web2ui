@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 
 // Actions
-import { listAllWebhooks } from 'src/actions/webhooks';
+import { listWebhooks } from 'src/actions/webhooks';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
 
@@ -21,8 +21,8 @@ const filterBoxConfig = {
 
 export class WebhooksList extends Component {
 
-  componentDidMount() {
-    this.props.listAllWebhooks();
+  componentDidMount () {
+    this.props.listWebhooks();
   }
 
   getColumns = () => {
@@ -63,18 +63,18 @@ export class WebhooksList extends Component {
     return row;
   };
 
-  renderError() {
-    const { error, listAllWebhooks } = this.props;
+  renderError () {
+    const { error, listWebhooks } = this.props;
     return (
       <ApiErrorBanner
         message={'Sorry, we seem to have had some trouble loading your webhooks.'}
         errorDetails={error.message}
-        reload={listAllWebhooks}
+        reload={listWebhooks}
       />
     );
   }
 
-  renderCollection() {
+  renderCollection () {
     const { webhooks } = this.props;
     return (
       <TableCollection
@@ -88,7 +88,7 @@ export class WebhooksList extends Component {
     );
   }
 
-  render() {
+  render () {
     const { loading, error, webhooks } = this.props;
 
     if (loading) {
@@ -105,13 +105,13 @@ export class WebhooksList extends Component {
           title: 'Create a Webhook',
           content: <p>Push message events directly to your own endpoints</p>
         }}>
-        { error ? this.renderError() : this.renderCollection() }
+        {error ? this.renderError() : this.renderCollection()}
       </Page>
     );
   }
 }
 
-function mapStateToProps({ webhooks, ...state }) {
+function mapStateToProps ({ webhooks, ...state }) {
   return {
     hasSubaccounts: hasSubaccounts(state),
     webhooks: webhooks.list,
@@ -120,4 +120,4 @@ function mapStateToProps({ webhooks, ...state }) {
   };
 }
 
-export default withRouter(connect(mapStateToProps, { listAllWebhooks })(WebhooksList));
+export default withRouter(connect(mapStateToProps, { listWebhooks })(WebhooksList));
