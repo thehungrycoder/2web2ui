@@ -1,0 +1,23 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.Email {
+  display: inline-block;
+  vertical-align: middle;
+
+  line-height: rem(24);
+  font-size: rem(14);
+  color: color(gray, 5);
+  transition: 0.15s;
+
+  &:hover, &:active, &:focus {
+    color: color(gray, 10);
+  }
+}
+
+.AccountList {
+  width: rem(260);
+}
+
+.FloatIcon {
+  float: right;
+}

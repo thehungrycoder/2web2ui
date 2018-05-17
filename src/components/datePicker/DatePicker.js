@@ -134,7 +134,7 @@ export default class AppDatePicker extends Component {
         wrapper='div'
         className={styles.Popover}
         trigger={dateField}
-        onOutsideClick={this.cancelDatePicker}
+        onClose={this.cancelDatePicker}
         open={this.state.showDatePicker} >
 
         <Datepicker
