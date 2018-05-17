@@ -1,40 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Action Creator: Webhooks should catch dispatch a list all webhooks failure 1`] = `
-Array [
-  Array [
-    Object {
-      "meta": Object {
-        "headers": Object {
-          "x-msys-subaccount": 0,
-        },
-        "method": "GET",
-        "showErrorAlert": false,
-        "url": "/webhooks",
-      },
-      "type": "LIST_MASTER_ONLY_WEBHOOKS",
-    },
-  ],
-  Array [
-    Object {
-      "meta": Object {
-        "headers": Object {},
-        "method": "GET",
-        "showErrorAlert": false,
-        "url": "/webhooks",
-      },
-      "type": "LIST_WEBHOOKS",
-    },
-  ],
-  Array [
-    Object {
-      "payload": "error",
-      "type": "LIST_ALL_WEBHOOKS_SUCCESS_FAIL",
-    },
-  ],
-]
-`;
-
 exports[`Action Creator: Webhooks should dispatch a create action 1`] = `
 Array [
   Object {
@@ -137,48 +102,12 @@ exports[`Action Creator: Webhooks should dispatch a list action 1`] = `
 Array [
   Object {
     "meta": Object {
-      "headers": Object {},
       "method": "GET",
       "showErrorAlert": false,
       "url": "/webhooks",
     },
     "type": "LIST_WEBHOOKS",
   },
-]
-`;
-
-exports[`Action Creator: Webhooks should dispatch a list all webhooks action 1`] = `
-Array [
-  Array [
-    Object {
-      "meta": Object {
-        "headers": Object {
-          "x-msys-subaccount": 0,
-        },
-        "method": "GET",
-        "showErrorAlert": false,
-        "url": "/webhooks",
-      },
-      "type": "LIST_MASTER_ONLY_WEBHOOKS",
-    },
-  ],
-  Array [
-    Object {
-      "meta": Object {
-        "headers": Object {},
-        "method": "GET",
-        "showErrorAlert": false,
-        "url": "/webhooks",
-      },
-      "type": "LIST_WEBHOOKS",
-    },
-  ],
-  Array [
-    Object {
-      "payload": undefined,
-      "type": "LIST_ALL_WEBHOOKS_SUCCESS",
-    },
-  ],
 ]
 `;
 
