@@ -33,13 +33,13 @@ export class BouncePage extends Component {
     const { aggregates = {}, addFilters } = this.props;
     const { reason, domain, bounce_category_name, bounce_class_name } = item;
     const numerator = item.bounce_category_name === 'Admin' ? item.count_admin_bounce : item.count_bounce;
-    const denominator = aggregates.countBounce;
+    const denominator = aggregates.countBounce + aggregates.countAdminBounce ;
     return [
       <LongTextContainer text={reason} />,
       <UnstyledLink onClick={() => addFilters([{ type: 'Recipient Domain', value: domain }])}>{domain}</UnstyledLink>,
       bounce_category_name,
       bounce_class_name,
-      <span>{numerator} <small>(<Percent value={(numerator / denominator) * 100} />)</small></span>
+      <span>{numerator} <small>(<Percent value={safeRate(numerator, denominator)} />)</small></span>
     ];
   };
 
