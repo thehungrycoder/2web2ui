@@ -16,7 +16,7 @@ export function refreshBounceReport (updates = {}) {
       })),
       dispatch(fetchBounceClassifications({
         ...params,
-        metrics: 'count_bounce'
+        metrics: 'count_bounce,count_admin_bounce'
       })),
       dispatch(fetchBounceReasonsByDomain({
         ...params,
