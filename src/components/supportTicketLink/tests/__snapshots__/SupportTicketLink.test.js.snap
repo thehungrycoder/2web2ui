@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SupportTicketLink should render an unstyled link with a click handler 1`] = `
+<UnstyledLink
+  onClick={[Function]}
+>
+  Click Me
+</UnstyledLink>
+`;
