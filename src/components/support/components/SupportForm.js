@@ -28,7 +28,7 @@ export class SupportForm extends Component {
     return this.props.createTicket(ticket);
   };
 
-  renderSuccess () {
+  renderSuccess() {
     const { ticketId, onContinue } = this.props;
 
     return <div className={styles.SupportForm}>
@@ -41,12 +41,12 @@ export class SupportForm extends Component {
     </div>;
   }
 
-  reset (parentReset) {
+  reset(parentReset) {
     this.props.reset(formName);
     return parentReset();
   }
 
-  renderForm () {
+  renderForm() {
     const {
       handleSubmit,
       invalid,
@@ -68,7 +68,6 @@ export class SupportForm extends Component {
           <Field
             name='issueId'
             label='I need help with...'
-            placeholder='Select an option'
             helpText={needsOnlineSupport && (
               <Fragment>
                 Additional technical support is available on paid
@@ -78,7 +77,10 @@ export class SupportForm extends Component {
             errorInLabel
             disabled={submitting}
             component={SelectWrapper}
-            options={issues.map(({ id, label }) => ({ label, value: id }))}
+            options={[
+              { disabled: true, label: 'Select an option', value: '' },
+              ...issues.map(({ id, label }) => ({ label, value: id }))
+            ]}
             validate={required}
           />
           <Field
@@ -111,7 +113,7 @@ export class SupportForm extends Component {
     </div>;
   }
 
-  render () {
+  render() {
     if (this.props.submitSucceeded) {
       return this.renderSuccess();
     }
