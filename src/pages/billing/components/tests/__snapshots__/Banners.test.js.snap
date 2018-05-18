@@ -93,15 +93,6 @@ exports[`Billing Banners:  PendingPlanBanner should render with pending_subscrip
     Oct 05, 2020
     , and can't update your plan until that switch happens.
   </p>
-  <p>
-    If you have any questions, please 
-    <UnstyledLink
-      to="mailto:support@sparkpost.com"
-    >
-      contact support
-    </UnstyledLink>
-    .
-  </p>
 </Banner>
 `;
 

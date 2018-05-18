@@ -13,12 +13,21 @@ const dateFormat = (date) => format(date, 'MMM DD, YYYY');
  * Renders pending plan change information
  * @prop account Account state from redux store
  */
-export const PendingPlanBanner = ({ account }) => account.pending_subscription
-  ? <Banner status='info' title='Pending Plan Change' >
-    <p>You're scheduled to switch to the {account.pending_subscription.name} plan on {dateFormat(account.pending_subscription.effective_date)}, and can't update your plan until that switch happens.</p>
-    <p>If you have any questions, please <UnstyledLink to={`mailto:${config.contact.supportEmail}`}>contact support</UnstyledLink>.</p>
-  </Banner>
-  : null;
+export const PendingPlanBanner = ({ account }) => {
+  if (!account.pending_subscription) {
+    return null;
+  }
+
+  return (
+    <Banner status='info' title='Pending Plan Change' >
+      <p>
+        You're scheduled to switch to the {account.pending_subscription.name} plan
+        on {dateFormat(account.pending_subscription.effective_date)}, and can't update your plan
+        until that switch happens.
+      </p>
+    </Banner>
+  );
+};
 
 /**
  * Renders plan information for non-self-serve users
