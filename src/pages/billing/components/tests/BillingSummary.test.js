@@ -83,4 +83,10 @@ describe('Component: Billing Summary', () => {
     wrapper.update();
     expect(wrapper).toMatchSnapshot();
   });
+
+  it('should show the invoice history if there are invoices', () => {
+    wrapper.setProps({ invoices: ['an invoice', 'another invoice']});
+    expect(wrapper).toMatchSnapshot();
+  });
+
 });

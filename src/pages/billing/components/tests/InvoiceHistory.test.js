@@ -34,11 +34,6 @@ describe('Component: Invoice History', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should tell the user if there are no invoices', () => {
-    wrapper.setProps({ invoices: []});
-    expect(wrapper).toMatchSnapshot();
-  });
-
   it('should show a message that only 20 invoices are available if there are 20 invoices', () => {
 
     const invoices = _.fill(Array(20), { 'id': 'id0','amount': 3.34,'balance': 0,'invoice_date': '2018-05-04','invoice_number': 'no0' });

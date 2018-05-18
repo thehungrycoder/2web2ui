@@ -68,7 +68,6 @@ export class InvoiceHistory extends Component {
   render () {
 
     const { invoices } = this.props;
-    const hasInvoices = (invoices.length > 0);
 
     const maxWarning = invoices.length >= 20
       ? <Panel.Footer left={<p><small>Only your last 20 invoices are available to be viewed</small></p>} />
@@ -76,12 +75,8 @@ export class InvoiceHistory extends Component {
 
     return (
       <Fragment>
-        <Panel title='Invoice History' sectioned={!hasInvoices}>
-          {
-            hasInvoices
-              ? <TableCollection rows={invoices} columns={columns} getRowData={this.getRowData}/>
-              : 'No invoices to report'
-          }
+        <Panel title='Invoice History'>
+          <TableCollection rows={invoices} columns={columns} getRowData={this.getRowData}/>
         </Panel>
         {maxWarning}
       </Fragment>

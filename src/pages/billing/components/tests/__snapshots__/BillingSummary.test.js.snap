@@ -84,9 +84,6 @@ exports[`Component: Billing Summary should render correctly for a paid plan 1`] 
       </LabelledValue>
     </Panel.Section>
   </Panel>
-  <Connect(InvoiceHistory)
-    invoices={Array []}
-  />
   <Component />
   <Component />
   <Modal
@@ -131,9 +128,6 @@ exports[`Component: Billing Summary should render correctly for a standard free 
       />
     </Panel.Section>
   </Panel>
-  <Connect(InvoiceHistory)
-    invoices={Array []}
-  />
   <Component />
   <Component />
   <Modal
@@ -218,9 +212,6 @@ exports[`Component: Billing Summary should render correctly if you can't buy IPs
       </LabelledValue>
     </Panel.Section>
   </Panel>
-  <Connect(InvoiceHistory)
-    invoices={Array []}
-  />
   <Component />
   <Component />
   <Modal
@@ -303,9 +294,6 @@ exports[`Component: Billing Summary should render correctly if you can't change 
       </LabelledValue>
     </Panel.Section>
   </Panel>
-  <Connect(InvoiceHistory)
-    invoices={Array []}
-  />
   <Component />
   <Component />
   <Modal
@@ -359,9 +347,6 @@ exports[`Component: Billing Summary should render correctly if you can't update 
       }
     />
   </Panel>
-  <Connect(InvoiceHistory)
-    invoices={Array []}
-  />
   <Component />
   <Component />
   <Modal
@@ -455,9 +440,6 @@ exports[`Component: Billing Summary should render with IP modal open 1`] = `
       </LabelledValue>
     </Panel.Section>
   </Panel>
-  <Connect(InvoiceHistory)
-    invoices={Array []}
-  />
   <Component />
   <Component />
   <Modal
@@ -555,9 +537,6 @@ exports[`Component: Billing Summary should render with the billing contact modal
       </LabelledValue>
     </Panel.Section>
   </Panel>
-  <Connect(InvoiceHistory)
-    invoices={Array []}
-  />
   <Component />
   <Component />
   <Modal
@@ -655,9 +634,6 @@ exports[`Component: Billing Summary should render with the payment info modal op
       </LabelledValue>
     </Panel.Section>
   </Panel>
-  <Connect(InvoiceHistory)
-    invoices={Array []}
-  />
   <Component />
   <Component />
   <Modal
@@ -668,5 +644,106 @@ exports[`Component: Billing Summary should render with the payment info modal op
       onCancel={[Function]}
     />
   </Modal>
+</div>
+`;
+
+exports[`Component: Billing Summary should show the invoice history if there are invoices 1`] = `
+<div>
+  <Component
+    account={
+      Object {
+        "billing": Object {},
+      }
+    }
+  />
+  <Panel
+    accent={true}
+    title="Plan Overview"
+  >
+    <Panel.Section
+      actions={
+        Array [
+          Object {
+            "Component": [Function],
+            "color": "orange",
+            "content": "Upgrade Now",
+            "to": "/account/billing/plan",
+          },
+        ]
+      }
+    >
+      <PlanSummary
+        label="Your Plan"
+        plan={
+          Object {
+            "isFree": true,
+          }
+        }
+      />
+    </Panel.Section>
+    <DedicatedIpSummarySection
+      count={0}
+      onClick={[Function]}
+      plan={
+        Object {
+          "isFree": true,
+        }
+      }
+    />
+  </Panel>
+  <Panel
+    title="Billing"
+  >
+    <Panel.Section
+      actions={
+        Array [
+          Object {
+            "color": "orange",
+            "content": "Update Payment Information",
+            "onClick": [Function],
+          },
+        ]
+      }
+    >
+      <CardSummary
+        billing={Object {}}
+        label="Credit Card"
+      />
+    </Panel.Section>
+    <Panel.Section
+      actions={
+        Array [
+          Object {
+            "color": "orange",
+            "content": "Update Billing Contact",
+            "onClick": [Function],
+          },
+        ]
+      }
+    >
+      <LabelledValue
+        label="Billing Contact"
+      >
+        <h6>
+           
+        </h6>
+        <p />
+      </LabelledValue>
+    </Panel.Section>
+  </Panel>
+  <Connect(InvoiceHistory)
+    invoices={
+      Array [
+        "an invoice",
+        "another invoice",
+      ]
+    }
+  />
+  <Component />
+  <Component />
+  <Modal
+    onClose={[Function]}
+    open={false}
+  />
 </div>
 `;

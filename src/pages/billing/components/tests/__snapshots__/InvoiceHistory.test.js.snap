@@ -43,7 +43,6 @@ exports[`Component: Invoice History should deactivate download buttons while an 
 exports[`Component: Invoice History should show a list of invoices 1`] = `
 <React.Fragment>
   <Panel
-    sectioned={false}
     title="Invoice History"
   >
     <TableCollection
@@ -115,7 +114,6 @@ exports[`Component: Invoice History should show a list of invoices 1`] = `
 exports[`Component: Invoice History should show a message that only 20 invoices are available if there are 20 invoices 1`] = `
 <React.Fragment>
   <Panel
-    sectioned={false}
     title="Invoice History"
   >
     <TableCollection
@@ -288,16 +286,5 @@ exports[`Component: Invoice History should show a message that only 20 invoices 
       </p>
     }
   />
-</React.Fragment>
-`;
-
-exports[`Component: Invoice History should tell the user if there are no invoices 1`] = `
-<React.Fragment>
-  <Panel
-    sectioned={true}
-    title="Invoice History"
-  >
-    No invoices to report
-  </Panel>
 </React.Fragment>
 `;
