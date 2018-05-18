@@ -45,11 +45,16 @@ export class InvoiceHistory extends Component {
   };
 
   componentDidUpdate (prevProps) {
-    const { invoice } = this.props;
+    const { invoice, getInvoiceError, showAlert } = this.props;
 
     if (!prevProps.invoice && invoice) {
       this.downloadInvoice();
     }
+
+    if (!prevProps.getInvoiceError && getInvoiceError) {
+      showAlert({ type: 'error', message: 'Error getting invoice' });
+    }
+
   }
 
   downloadInvoice = () => {
@@ -90,7 +95,8 @@ const mapStateToProps = (state) => ({
   invoice: state.invoices.invoice,
   invoiceLoading: state.invoices.invoiceLoading,
   invoiceId: state.invoices.invoiceId,
-  invoiceNumber: state.invoices.invoiceNumber
+  invoiceNumber: state.invoices.invoiceNumber,
+  getInvoiceError: state.invoices.getError
 });
 
 export default connect(mapStateToProps, { getInvoice, showAlert })(InvoiceHistory);

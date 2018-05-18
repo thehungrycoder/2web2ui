@@ -96,15 +96,24 @@ describe('Component: Invoice History', () => {
 
   it('should get an invoice when the download button is clicked', () => {
 
-    const getInvoiceMock = jest.fn();
-    wrapper.setProps({ getInvoice: getInvoiceMock });
+    const getInvoiceStub = jest.fn();
+    wrapper.setProps({ getInvoice: getInvoiceStub });
 
     const button = shallow(wrapper.instance()
       .getRowData({ 'id': 'id1','amount': 0,'balance': 0,'invoice_date': '2018-04-26','invoice_number': 'no1' })[3]
     ).find('Button');
 
     button.simulate('click');
-    expect(getInvoiceMock).toHaveBeenCalledWith('id1');
+    expect(getInvoiceStub).toHaveBeenCalledWith('id1');
+  });
+
+  it('should show an error message if there was an error getting the invoice', () => {
+    const showAlertStub = jest.fn();
+
+    wrapper.setProps({ getInvoiceError: 'an error', showAlert: showAlertStub });
+
+    expect(showAlertStub).toHaveBeenCalledTimes(1);
+    expect(showAlertStub).toHaveBeenCalledWith({ type: 'error', message: 'Error getting invoice' });
   });
 
 });
