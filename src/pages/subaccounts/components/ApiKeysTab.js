@@ -36,11 +36,12 @@ export class ApiKeysTab extends Component {
   getRowData = ({ id, label, short_key }) => {
     const subaccountId = this.props.id;
 
+    //unlike api keys page, no need to check if user can edit as that logic checks if subaccount_id exists which is always true here
     return [
-      <Link to={`/account/api-keys/details/${id}${setSubaccountQuery(subaccountId)}`}>{label}</Link>,
+      <Link to={`/account/api-keys/edit/${id}${setSubaccountQuery(subaccountId)}`}>{label}</Link>,
       <code>{short_key}••••••••</code>
     ];
-  }
+  };
 
   renderEmpty() {
     return (
@@ -63,7 +64,7 @@ export class ApiKeysTab extends Component {
 
     return (
       <Panel>
-        { showEmpty
+        {showEmpty
           ? this.renderEmpty()
           : this.renderCollection(keys)
         }
