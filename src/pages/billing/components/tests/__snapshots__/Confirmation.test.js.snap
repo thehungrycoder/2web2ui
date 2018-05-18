@@ -148,12 +148,12 @@ exports[`Confirmation:  should render correctly with a downgrade 1`] = `
          / month price for each dedicated IP on your next statement.
       </p>
       <p>
-        To remove dedicated IPs from your account, please 
-        <UnstyledLink
-          to="mailto:support@sparkpost.com"
+        To remove dedicated IPs from your account, 
+        <Connect(SupportTicketLink)
+          issueId="general_issue"
         >
-          contact our support team
-        </UnstyledLink>
+          submit a support ticket
+        </Connect(SupportTicketLink)>
         .
       </p>
     </div>
@@ -283,12 +283,12 @@ exports[`Confirmation:  should render correctly with an upgrade 1`] = `
          / month price for each dedicated IP on your next statement.
       </p>
       <p>
-        To remove dedicated IPs from your account, please 
-        <UnstyledLink
-          to="mailto:support@sparkpost.com"
+        To remove dedicated IPs from your account, 
+        <Connect(SupportTicketLink)
+          issueId="general_issue"
         >
-          contact our support team
-        </UnstyledLink>
+          submit a support ticket
+        </Connect(SupportTicketLink)>
         .
       </p>
     </div>

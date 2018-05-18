@@ -1,8 +1,9 @@
 import React from 'react';
-import { Panel, Button, UnstyledLink } from '@sparkpost/matchbox';
+import { Panel, Button } from '@sparkpost/matchbox';
 import config from 'src/config';
 import { getPlanPrice } from 'src/helpers/billing';
 import PlanPrice from 'src/components/billing/PlanPrice';
+import SupportTicketLink from 'src/components/supportTicketLink/SupportTicketLink';
 
 export class Confirmation extends React.Component {
   renderSelectedPlanMarkup() {
@@ -60,9 +61,14 @@ export class Confirmation extends React.Component {
           <div>
             <p>Note: your current plan includes a free dedicated IP address.</p>
             <p>If you downgrade to the selected plan, you will lose that discount and will be charged the standard
-              ${ config.sendingIps.pricePerIp } / month price for each dedicated IP on your next statement.</p>
-            <p>To remove dedicated IPs from your account, please <UnstyledLink
-              to={`mailto:${config.contact.supportEmail}`}>contact our support team</UnstyledLink>.</p>
+              ${config.sendingIps.pricePerIp} / month price for each dedicated IP on your next statement.</p>
+            <p>
+              To remove dedicated IPs from your account, {
+                <SupportTicketLink issueId="general_issue">
+                  submit a support ticket
+                </SupportTicketLink>
+              }.
+            </p>
           </div>
         );
       }
@@ -76,13 +82,13 @@ export class Confirmation extends React.Component {
     return (
       <Panel>
         <Panel.Section>
-          { this.renderCurrentPlanMarkup() }
+          {this.renderCurrentPlanMarkup()}
         </Panel.Section>
         <Panel.Section>
-          { this.renderSelectedPlanMarkup() }
-          { effectiveDateMarkup }
-          { ipMarkup }
-          { addonMarkup }
+          {this.renderSelectedPlanMarkup()}
+          {effectiveDateMarkup}
+          {ipMarkup}
+          {addonMarkup}
         </Panel.Section>
         <Panel.Section>
           <Button
@@ -91,7 +97,7 @@ export class Confirmation extends React.Component {
             primary={!isDowngrade}
             destructive={isDowngrade}
             disabled={disableSubmit}>
-            { buttonText }
+            {buttonText}
           </Button>
         </Panel.Section>
       </Panel>
