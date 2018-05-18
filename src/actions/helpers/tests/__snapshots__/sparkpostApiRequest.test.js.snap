@@ -400,7 +400,7 @@ Array [
       "responseType": "blob",
       "url": "/some/path",
     },
-    "payload": undefined,
+    "payload": "blob data",
     "type": "TEST_SUCCESS",
   },
 ]

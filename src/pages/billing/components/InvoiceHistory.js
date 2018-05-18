@@ -5,6 +5,8 @@ import { TableCollection } from 'src/components';
 import { formatDate } from 'src/helpers/date';
 import { get as getInvoice } from 'src/actions/invoices';
 import { showAlert } from 'src/actions/globalAlert';
+import _ from 'lodash';
+import { formatCurrency } from 'src/helpers/units';
 
 
 const columns = [
@@ -14,10 +16,9 @@ const columns = [
   { label: null, width: 150 }
 ];
 
-
-const formatCurrency = (v) => `$${v.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
-
 export class InvoiceHistory extends Component {
+
+  //todo: delete this probably
   state = {
     invoiceNumber: null
   };
@@ -30,41 +31,46 @@ export class InvoiceHistory extends Component {
       formatCurrency(amount),
       invoiceNumber,
       <div style={{ textAlign: 'right' }}>
-        <Button plain size='small' type='submit' color='orange' disabled={invoiceLoading}
+        <Button plain size='small' color='orange' disabled={invoiceLoading}
           onClick={() => this.getInvoice(id, invoiceNumber)}>
-          {thisInvoiceLoading ? 'Downloading...' : 'Download'}
+          {(invoiceLoading && thisInvoiceLoading) ? 'Downloading...' : 'Download'}
         </Button>
       </div>
     ]);
   }
   ;
 
-  getInvoice = (id, invoiceNumber) => {
-    this.props.getInvoice(id, invoiceNumber);
+  getInvoice = (id) => {
+    this.props.getInvoice(id);
   };
 
   componentDidUpdate (prevProps) {
-    const { invoice, showAlert, invoiceNumber } = this.props;
+    const { invoice } = this.props;
 
     if (!prevProps.invoice && invoice) {
-      const url = URL.createObjectURL(invoice);
-      const link = document.createElement('a');
-      link.href = url;
-      link.setAttribute('download', `sparkpost-invoice-${invoiceNumber}.pdf`);
-      link.click();
-
-      showAlert({ type: 'success', message: `Downloaded invoice: ${invoiceNumber}` });
-
+      this.downloadInvoice();
     }
-
   }
+
+  downloadInvoice = () => {
+    const { invoice, showAlert, invoices, invoiceId } = this.props;
+    const invoiceNumber = _.find(invoices, { id: invoiceId }).invoice_number;
+
+    const url = URL.createObjectURL(invoice);
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', `sparkpost-invoice-${invoiceNumber}.pdf`);
+    link.click();
+
+    showAlert({ type: 'success', message: `Downloaded invoice: ${invoiceNumber}` });
+  };
 
   render () {
 
     const { invoices } = this.props;
-    const hasInvoices = (invoices && invoices.length > 0);
+    const hasInvoices = (invoices.length > 0);
 
-    const maxWarning = invoices.length === 20
+    const maxWarning = invoices.length >= 20
       ? <Panel.Footer left={<p><small>Only your last 20 invoices are available to be viewed</small></p>} />
       : null;
 
@@ -74,7 +80,7 @@ export class InvoiceHistory extends Component {
           {
             hasInvoices
               ? <TableCollection rows={invoices} columns={columns} getRowData={this.getRowData}/>
-              : 'You don\'t have any invoices'
+              : 'No invoices to report'
           }
         </Panel>
         {maxWarning}

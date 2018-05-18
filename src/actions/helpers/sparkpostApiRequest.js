@@ -29,7 +29,7 @@ const sparkpostRequest = requestHelperFactory({
   },
   onSuccess: ({ response, dispatch, types, meta }) => {
     meta.data = response.data;
-    const { data: { results }} = response;
+    const results = _.get(response, 'data.results', response.data);
     dispatch({
       type: types.SUCCESS,
       payload: results,

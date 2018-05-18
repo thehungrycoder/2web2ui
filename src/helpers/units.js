@@ -7,7 +7,7 @@ const QUARDRILLION = Math.pow(10, 15);
 
 export const isNumber = (value) => isNaN(parseFloat(value)) === false || isFinite(value) === true;
 
-export function roundToPlaces(number, places) {
+export function roundToPlaces (number, places) {
   const multiplier = Math.pow(10, places);
   return Math.round(number * multiplier) / multiplier;
 }
@@ -120,3 +120,5 @@ export const formatPercent = (value) => {
 
   return formatted;
 };
+
+export const formatCurrency = (value) => `$${value.toFixed(2)}`;

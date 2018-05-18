@@ -14,7 +14,6 @@ exports[`Component: Invoice History should change the text of the download butto
     onClick={[Function]}
     plain={true}
     size="small"
-    type="submit"
   >
     Downloading...
   </Button>
@@ -35,7 +34,6 @@ exports[`Component: Invoice History should deactivate download buttons while an 
     onClick={[Function]}
     plain={true}
     size="small"
-    type="submit"
   >
     Download
   </Button>
@@ -299,7 +297,7 @@ exports[`Component: Invoice History should tell the user if there are no invoice
     sectioned={true}
     title="Invoice History"
   >
-    You don't have any invoices
+    No invoices to report
   </Panel>
 </React.Fragment>
 `;

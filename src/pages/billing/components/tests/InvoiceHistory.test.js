@@ -23,8 +23,7 @@ describe('Component: Invoice History', () => {
       ],
       invoiceLoading: false,
       invoiceId: null,
-      invoice: null,
-      invoiceNumber: null
+      invoice: null
     };
 
     wrapper = shallow(<InvoiceHistory {...props}/>);
@@ -60,8 +59,17 @@ describe('Component: Invoice History', () => {
     expect(row[3]).toMatchSnapshot();
   });
 
-  it('should download an invoice', () => {
-    const showAlertMock = jest.fn();
+  it('should call downloadInvoice() if there is a new invoice', () => {
+    const downloadInvoiceStub = jest.fn();
+    wrapper.instance().downloadInvoice = downloadInvoiceStub;
+
+    wrapper.setProps({ invoice: 'an invoice', invoiceId: 'id3' });
+
+    expect(downloadInvoiceStub).toHaveBeenCalledTimes(1);
+  });
+
+  it('downloadInvoice() should download an invoice', () => {
+    const showAlertStub = jest.fn();
     const linkMock = { setAttribute: jest.fn(), click: jest.fn() };
 
     const defaultCreateUbjectURL = URL.createObjectURL;
@@ -70,15 +78,22 @@ describe('Component: Invoice History', () => {
     const defaultCreateElement = document.createElement;
     document.createElement = jest.fn(() => linkMock);
 
-    wrapper.setProps({ invoice: 'anInvoice', invoiceNumber: 'anInvoiceNumber', showAlert: showAlertMock });
+    wrapper = shallow(<InvoiceHistory {...{
+      ...props,
+      invoiceId: 'id3',
+      invoice: 'an invoice',
+      showAlert: showAlertStub
+    }}/>);
 
-    expect(URL.createObjectURL).toHaveBeenCalledWith('anInvoice');
+    wrapper.instance().downloadInvoice();
+
+    expect(URL.createObjectURL).toHaveBeenCalledWith('an invoice');
     expect(document.createElement).toHaveBeenCalledWith('a');
     expect(linkMock.href).toEqual('a URL');
-    expect(linkMock.setAttribute).toHaveBeenCalledWith('download', 'sparkpost-invoice-anInvoiceNumber.pdf');
+    expect(linkMock.setAttribute).toHaveBeenCalledWith('download', 'sparkpost-invoice-no3.pdf');
     expect(linkMock.click).toHaveBeenCalledTimes(1);
-    expect(showAlertMock).toHaveBeenCalledTimes(1);
-    expect(showAlertMock).toHaveBeenCalledWith({ type: 'success', message: 'Downloaded invoice: anInvoiceNumber' });
+    expect(showAlertStub).toHaveBeenCalledTimes(1);
+    expect(showAlertStub).toHaveBeenCalledWith({ type: 'success', message: 'Downloaded invoice: no3' });
 
     URL.createObjectURL = defaultCreateUbjectURL;
     document.createElement = defaultCreateElement;
@@ -94,7 +109,7 @@ describe('Component: Invoice History', () => {
     ).find('Button');
 
     button.simulate('click');
-    expect(getInvoiceMock).toHaveBeenCalledWith('id1', 'no1');
+    expect(getInvoiceMock).toHaveBeenCalledWith('id1');
   });
 
 });

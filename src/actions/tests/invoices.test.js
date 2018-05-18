@@ -20,7 +20,7 @@ describe('Action Creator: Invoices', () => {
   });
 
   it('should make a request to get a specific invoice', async () => {
-    await invoices.get('thisId', 'thisNumber');
+    await invoices.get('thisId');
     expect(sparkpostApiRequest).toHaveBeenCalledTimes(1);
     expect(sparkpostApiRequest).toHaveBeenCalledWith(
       {
@@ -29,8 +29,7 @@ describe('Action Creator: Invoices', () => {
           method: 'GET',
           url: '/account/invoices/thisId',
           responseType: 'blob',
-          invoiceId: 'thisId',
-          invoiceNumber: 'thisNumber'
+          invoiceId: 'thisId'
         }
       }
     );
