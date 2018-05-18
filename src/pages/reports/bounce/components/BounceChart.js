@@ -108,7 +108,7 @@ export default class BounceChart extends Component {
     };
   }
 
-  render() {
+  render () {
     const { loading } = this.props;
 
     if (loading) {

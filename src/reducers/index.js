@@ -14,6 +14,7 @@ import engagementReport from './engagementReport';
 import rejectionReport from './rejectionReport';
 import currentUser from './currentUser';
 import globalAlert from './globalAlert';
+import invoices from './invoices';
 import ipPools from './ipPools';
 import messageEvents from './messageEvents';
 import metrics from './metrics';
@@ -48,6 +49,7 @@ const appReducer = combineReducers({
   apiKeys,
   currentUser,
   form,
+  invoices,
   ipPools,
   globalAlert,
   metrics,

@@ -99,13 +99,13 @@ describe('JoinPage', () => {
       instance.trackSignup = jest.fn();
     });
 
-    it('calls register with correct data', async() => {
+    it('calls register with correct data', async () => {
       await instance.registerSubmit(formValues);
       expect(props.register).toHaveBeenCalledTimes(1);
       expect(props.register.mock.calls).toMatchSnapshot();
     });
 
-    it('negates email_opt_in properly', async() => {
+    it('negates email_opt_in properly', async () => {
       formValues.email_opt_in = true;
       await instance.registerSubmit(formValues);
       expect(props.register).toHaveBeenCalledWith(expect.objectContaining({
@@ -115,18 +115,18 @@ describe('JoinPage', () => {
       }));
     });
 
-    it('authenticates after successful register', async() => {
+    it('authenticates after successful register', async () => {
       await instance.registerSubmit(formValues);
       expect(props.register).toHaveBeenCalledTimes(1);
       expect(props.authenticate).toHaveBeenCalledWith('foo_bar', formValues.password);
     });
 
-    it('gives username to analytics after successful registration', async() => {
+    it('gives username to analytics after successful registration', async () => {
       await instance.registerSubmit(formValues);
       expect(analytics.setVariable).toHaveBeenCalledWith('username', username);
     });
 
-    it('tracks signup after successful registration', async() => {
+    it('tracks signup after successful registration', async () => {
       await instance.registerSubmit(formValues);
       expect(props.register).toHaveBeenCalledTimes(1);
       expect(analytics.trackFormSuccess).toHaveBeenCalledWith(constants.ANALYTICS_CREATE_ACCOUNT, {
@@ -134,19 +134,19 @@ describe('JoinPage', () => {
       });
     });
 
-    it('redirects to correct url upon auth', async() => {
+    it('redirects to correct url upon auth', async () => {
       await instance.registerSubmit(formValues);
       expect(props.history.push).toHaveBeenCalledWith(AFTER_JOIN_REDIRECT_ROUTE, { plan: undefined });
     });
 
-    it('Preserves plan for later onboarding phases', async() => {
+    it('Preserves plan for later onboarding phases', async () => {
       const plan = 'a-man';
       wrapper.setProps({ params: { plan }});
       await instance.registerSubmit(formValues);
       expect(props.history.push).toHaveBeenCalledWith(AFTER_JOIN_REDIRECT_ROUTE, { plan });
     });
 
-    it('does not swallow exceptions', async() => {
+    it('does not swallow exceptions', async () => {
       const err = new Error('some error');
       props.register.mockReturnValue(Promise.reject(err));
 

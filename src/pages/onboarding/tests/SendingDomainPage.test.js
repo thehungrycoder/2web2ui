@@ -49,7 +49,7 @@ describe('SendingDomainPage', () => {
     expect(props.handleSubmit).toHaveBeenCalledWith(wrapper.instance().handleDomainCreate);
   });
 
-  it('should handle submit success correctly', async() => {
+  it('should handle submit success correctly', async () => {
     wrapper.setProps({ createDomain: jest.fn(() => Promise.resolve()) });
     await wrapper.instance().handleDomainCreate('values');
     expect(wrapper.instance().props.createDomain).toHaveBeenCalledWith('values');
@@ -69,7 +69,7 @@ describe('SendingDomainPage', () => {
     });
   });
 
-  it('should handle submit failure correctly', async() => {
+  it('should handle submit failure correctly', async () => {
     wrapper.setProps({ createDomain: jest.fn(() => Promise.reject(new Error('Oh no!'))) });
     await expect(wrapper.instance().handleDomainCreate('values')).rejects.toThrowError(SubmissionError);
   });

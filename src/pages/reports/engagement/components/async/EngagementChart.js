@@ -19,7 +19,7 @@ const TOP_PADDING = { top: 60 };
 
 // NOTE: ReferenceArea was used because they could easily attach to two bars and provide the
 // cooridinates and dimmenions to reliable place this label
-function PercentLabel({ percentage, width, x, yAxis }) {
+function PercentLabel ({ percentage, width, x, yAxis }) {
   const label = { height: 24, width: 64 };
   const offset = (width / 2) - (label.width / 2);
   const y = yAxis.y + (yAxis.height / yAxis.tickCount) * Math.round(yAxis.tickCount / 2);
@@ -40,7 +40,7 @@ function PercentLabel({ percentage, width, x, yAxis }) {
   );
 }
 
-export default function EngagementChart({ accepted = 0, clicks = 0, loading, opens = 0, sent = 0 }) {
+export default function EngagementChart ({ accepted = 0, clicks = 0, loading, opens = 0, sent = 0 }) {
   const data = [
     { label: 'Sent', value: sent },
     { label: 'Accepted', value: accepted },

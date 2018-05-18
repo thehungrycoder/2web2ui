@@ -9,7 +9,7 @@ import { formatFullNumber } from 'src/helpers/units';
 import { safeRate } from 'src/helpers/math';
 import styles from './EngagementSummary.module.scss';
 
-export function EngagementSummary({ accepted = 0, clicks = 0, filters, loading, opens = 0, sent = 0 }) {
+export function EngagementSummary ({ accepted = 0, clicks = 0, filters, loading, opens = 0, sent = 0 }) {
   if (loading) {
     return <PanelLoading minHeight="115px" />;
   }

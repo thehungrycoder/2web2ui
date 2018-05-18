@@ -366,3 +366,25 @@ Array [
   },
 ]
 `;
+
+exports[`Helper: SparkPost API Request should successfully call the API with a non-json response type 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "method": "GET",
+      "responseType": "blob",
+      "url": "/some/path",
+    },
+    "type": "TEST_PENDING",
+  },
+  Object {
+    "meta": Object {
+      "method": "GET",
+      "responseType": "blob",
+      "url": "/some/path",
+    },
+    "payload": "blob data",
+    "type": "TEST_SUCCESS",
+  },
+]
+`;

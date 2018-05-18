@@ -21,7 +21,7 @@ export class SendingDomainPage extends Component {
     });
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate (prevProps) {
     const { submitSucceeded, history } = this.props;
 
     // Redirect here instead of the createDomain promise
@@ -42,7 +42,7 @@ export class SendingDomainPage extends Component {
     data: { action: ANALYTICS_ONBOARDING_LEARN_MORE }
   });
 
-  render() {
+  render () {
     const { handleSubmit, submitting } = this.props;
 
     return (

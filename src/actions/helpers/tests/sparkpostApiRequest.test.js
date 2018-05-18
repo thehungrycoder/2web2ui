@@ -40,7 +40,7 @@ describe('Helper: SparkPost API Request', () => {
     accountActions.fetch = jest.fn(() => ({ type: 'FETCH_ACCOUNT' }));
   });
 
-  it('should successfully call the API', async() => {
+  it('should successfully call the API', async () => {
     const actualResults = await mockStore.dispatch(sparkpostApiRequest(action));
 
     expect(actualResults).toBe(results);
@@ -48,6 +48,23 @@ describe('Helper: SparkPost API Request', () => {
     expect(axiosMocks.sparkpost).toHaveBeenCalledWith(expect.objectContaining({
       method: 'get',
       url: '/some/path',
+      headers: { Authorization: 'TEST-TOKEN' }
+    }));
+  });
+
+  it('should successfully call the API with a non-json response type', async () => {
+    const blobData = 'blob data';
+
+    axiosMocks.sparkpost.mockImplementation(() => Promise.resolve({ data: blobData }));
+    meta.responseType = 'blob';
+
+    await mockStore.dispatch(sparkpostApiRequest(action));
+
+    expect(mockStore.getActions()).toMatchSnapshot();
+    expect(axiosMocks.sparkpost).toHaveBeenCalledWith(expect.objectContaining({
+      method: 'get',
+      url: '/some/path',
+      responseType: 'blob',
       headers: { Authorization: 'TEST-TOKEN' }
     }));
   });
@@ -66,7 +83,7 @@ describe('Helper: SparkPost API Request', () => {
       globalAlertMock.showAlert = jest.fn((a) => a);
     });
 
-    it('should handle a failed API call', async() => {
+    it('should handle a failed API call', async () => {
       await expect(mockStore.dispatch(sparkpostApiRequest(action))).rejects.toThrow(apiErr);
       expect(globalAlertMock.showAlert).toHaveBeenCalledWith({
         type: 'error',
@@ -76,13 +93,13 @@ describe('Helper: SparkPost API Request', () => {
       expect(mockStore.getActions()).toMatchSnapshot();
     });
 
-    it('should not show error alert when request failed', async() => {
+    it('should not show error alert when request failed', async () => {
       action.meta.showErrorAlert = false;
       await expect(mockStore.dispatch(sparkpostApiRequest(action))).rejects.toThrow(apiErr);
       expect(mockStore.getActions()).toMatchSnapshot();
     });
 
-    it('should not show an error alert when a GET returns 404', async() => {
+    it('should not show an error alert when a GET returns 404', async () => {
       action.meta.showErrorAlert = false;
       action.meta.method = 'GET';
       apiErr.response.status = 404;
@@ -90,7 +107,7 @@ describe('Helper: SparkPost API Request', () => {
       expect(mockStore.getActions()).toMatchSnapshot();
     });
 
-    it('should dispatch a special 5xx error action', async() => {
+    it('should dispatch a special 5xx error action', async () => {
       apiErr.response.status = 500;
 
       await expect(mockStore.dispatch(sparkpostApiRequest(action))).rejects.toThrow(apiErr);
@@ -102,7 +119,7 @@ describe('Helper: SparkPost API Request', () => {
       expect(mockStore.getActions()).toMatchSnapshot();
     });
 
-    it('should fetch account on a 403', async() => {
+    it('should fetch account on a 403', async () => {
       apiErr.response.status = 403;
       try {
         await mockStore.dispatch(sparkpostApiRequest(action));
@@ -114,7 +131,7 @@ describe('Helper: SparkPost API Request', () => {
       }
     });
 
-    it('should dispatch a logout action on a 401 with no refresh token', async() => {
+    it('should dispatch a logout action on a 401 with no refresh token', async () => {
       apiErr.response.status = 401;
 
       await expect(mockStore.dispatch(sparkpostApiRequest(action))).rejects.toThrow(apiErr);
@@ -133,7 +150,7 @@ describe('Helper: SparkPost API Request', () => {
         authMock.refresh = jest.fn(() => ({ type: 'REFRESH' }));
       });
 
-      it('should get a refresh token and re-dispatch', async() => {
+      it('should get a refresh token and re-dispatch', async () => {
         axiosMocks.sparkpost
           .mockImplementationOnce(() => Promise.reject(apiErr))
           .mockImplementation(() => Promise.resolve({ data: { results }}));
@@ -147,7 +164,7 @@ describe('Helper: SparkPost API Request', () => {
         expect(mockStore.getActions()).toMatchSnapshot();
       });
 
-      it('should only request one refresh token at a time', async() => {
+      it('should only request one refresh token at a time', async () => {
         axiosMocks.sparkpost
           .mockImplementationOnce(() => Promise.reject(apiErr))
           .mockImplementationOnce(() => Promise.reject(apiErr))
@@ -175,7 +192,7 @@ describe('Helper: SparkPost API Request', () => {
         expect(actions.filter(byType('TEST_NO_REFRESH_SUCCESS'))).toHaveLength(2);
       });
 
-      it('should only retry 3 times', async() => {
+      it('should only retry 3 times', async () => {
         authMock.refresh.mockImplementation(() => {
           refreshTokensUsed.clear(); // have to do this since state always returns original refresh token
           return { type: 'REFRESH' };
@@ -191,7 +208,7 @@ describe('Helper: SparkPost API Request', () => {
         }
       });
 
-      it('should only retry once with the same token', async() => {
+      it('should only retry once with the same token', async () => {
         try {
           await mockStore.dispatch(sparkpostApiRequest({ type: 'TEST_ONE_RETRY_PER_TOKEN', meta: {}}));
         } catch (err) {
@@ -200,7 +217,7 @@ describe('Helper: SparkPost API Request', () => {
         }
       });
 
-      it('should log out if refresh fails', async() => {
+      it('should log out if refresh fails', async () => {
         const refreshErr = new Error();
         httpHelpersMock.useRefreshToken = jest.fn(() => Promise.reject(refreshErr));
 

@@ -3,9 +3,9 @@ import { shallow } from 'enzyme';
 import BillingSummary from '../BillingSummary';
 
 // mock connected components as named functions for better snapshots
-jest.mock('../../forms/UpdatePayment', () => function UpdatePaymentForm() {});
-jest.mock('../../forms/UpdateContact', () => function UpdateContactForm() {});
-jest.mock('../../forms/AddIps', () => function AddIpsForm() {});
+jest.mock('../../forms/UpdatePayment', () => function UpdatePaymentForm () {});
+jest.mock('../../forms/UpdateContact', () => function UpdateContactForm () {});
+jest.mock('../../forms/AddIps', () => function AddIpsForm () {});
 
 describe('Component: Billing Summary', () => {
 
@@ -23,7 +23,8 @@ describe('Component: Billing Summary', () => {
       canChangePlan: true,
       canUpdateBillingInfo: true,
       canPurchaseIps: true,
-      sendingIps: []
+      sendingIps: [],
+      invoices: []
     };
     wrapper = shallow(<BillingSummary {...props} />);
   });
@@ -82,4 +83,10 @@ describe('Component: Billing Summary', () => {
     wrapper.update();
     expect(wrapper).toMatchSnapshot();
   });
+
+  it('should show the invoice history if there are invoices', () => {
+    wrapper.setProps({ invoices: ['an invoice', 'another invoice']});
+    expect(wrapper).toMatchSnapshot();
+  });
+
 });

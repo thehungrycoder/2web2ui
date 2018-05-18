@@ -47,7 +47,7 @@ describe('AddIps', () => {
   describe('onSubmit', () => {
     let additionalProps;
     beforeEach(() => {
-      instance.getOrCreateIpPool = jest.fn(async() => Promise.resolve('pool_name'));
+      instance.getOrCreateIpPool = jest.fn(async () => Promise.resolve('pool_name'));
 
       additionalProps = {
         showAlert: jest.fn(),
@@ -57,7 +57,7 @@ describe('AddIps', () => {
       wrapper.setProps(additionalProps);
     });
 
-    it('calls addDedicatedIps with correct args', async() => {
+    it('calls addDedicatedIps with correct args', async () => {
       await instance.onSubmit({ ipPool: 'pool name', quantity: 2 });
       expect(instance.props.addDedicatedIps).toHaveBeenCalledWith({
         ip_pool: 'pool_name',
@@ -68,7 +68,7 @@ describe('AddIps', () => {
       expect(additionalProps.onClose).toHaveBeenCalledTimes(1);
     });
 
-    it('calls addDedicatedIps with correct args for aws account', async() => {
+    it('calls addDedicatedIps with correct args for aws account', async () => {
       isAws.mockImplementation(() => true);
       await instance.onSubmit({ ipPool: 'pool name', quantity: 1 });
       expect(instance.props.addDedicatedIps).toHaveBeenCalledWith({
@@ -78,14 +78,14 @@ describe('AddIps', () => {
       });
     });
 
-    it('throws on error', async() => {
+    it('throws on error', async () => {
       additionalProps.addDedicatedIps.mockReturnValue(Promise.reject());
       await expect(instance.onSubmit({ ipPool: 'pool name', quantity: 1 })).rejects.toThrowError(SubmissionError);
       expect(additionalProps.showAlert).toHaveBeenCalledTimes(0);
       expect(additionalProps.onClose).toHaveBeenCalledTimes(0);
     });
 
-    it('tracks the add purchase', async() => {
+    it('tracks the add purchase', async () => {
       await instance.onSubmit({ ipPool: 'pool name', quantity: 1 });
       expect(conversions.trackAddonPurchase).toHaveBeenCalledWith(constants.ANALYTICS_ADDON_IP);
     });
