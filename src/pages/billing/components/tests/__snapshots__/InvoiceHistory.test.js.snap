@@ -1,0 +1,284 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: Invoice History should change the text of the download button in the row of the downloading invoice 1`] = `
+<div
+  style={
+    Object {
+      "textAlign": "right",
+    }
+  }
+>
+  <Button
+    color="orange"
+    disabled={true}
+    onClick={[Function]}
+    plain={true}
+    size="small"
+  >
+    Downloading...
+  </Button>
+</div>
+`;
+
+exports[`Component: Invoice History should deactivate download buttons while an invoice is downloading 1`] = `
+<div
+  style={
+    Object {
+      "textAlign": "right",
+    }
+  }
+>
+  <Button
+    color="orange"
+    disabled={true}
+    onClick={[Function]}
+    plain={true}
+    size="small"
+  >
+    Download
+  </Button>
+</div>
+`;
+
+exports[`Component: Invoice History should show a list of invoices 1`] = `
+<React.Fragment>
+  <Panel
+    title="Invoice History"
+  >
+    <TableCollection
+      columns={
+        Array [
+          "Date",
+          "Amount",
+          "Invoice Number",
+          Object {
+            "label": null,
+            "width": 150,
+          },
+        ]
+      }
+      defaultSortColumn={null}
+      defaultSortDirection="asc"
+      getRowData={[Function]}
+      rows={
+        Array [
+          Object {
+            "amount": 3.34,
+            "id": "id0",
+            "invoice_date": "2018-05-04",
+            "invoice_number": "no0",
+          },
+          Object {
+            "amount": 0,
+            "id": "id1",
+            "invoice_date": "2018-04-26",
+            "invoice_number": "no1",
+          },
+          Object {
+            "amount": 302.17,
+            "id": "id2",
+            "invoice_date": "2018-04-26",
+            "invoice_number": "no2",
+          },
+          Object {
+            "amount": 173.79,
+            "id": "id3",
+            "invoice_date": "2018-02-27",
+            "invoice_number": "no3",
+          },
+          Object {
+            "amount": 25.33,
+            "id": "id4",
+            "invoice_date": "2017-11-20",
+            "invoice_number": "no4",
+          },
+          Object {
+            "amount": 9,
+            "id": "id5",
+            "invoice_date": "2017-11-09",
+            "invoice_number": "no5",
+          },
+        ]
+      }
+    />
+  </Panel>
+</React.Fragment>
+`;
+
+exports[`Component: Invoice History should show a message that only 20 invoices are available if there are 20 invoices 1`] = `
+<React.Fragment>
+  <Panel
+    title="Invoice History"
+  >
+    <TableCollection
+      columns={
+        Array [
+          "Date",
+          "Amount",
+          "Invoice Number",
+          Object {
+            "label": null,
+            "width": 150,
+          },
+        ]
+      }
+      defaultSortColumn={null}
+      defaultSortDirection="asc"
+      getRowData={[Function]}
+      rows={
+        Array [
+          Object {
+            "amount": 3.34,
+            "balance": 0,
+            "id": "id0",
+            "invoice_date": "2018-05-04",
+            "invoice_number": "no0",
+          },
+          Object {
+            "amount": 3.34,
+            "balance": 0,
+            "id": "id0",
+            "invoice_date": "2018-05-04",
+            "invoice_number": "no0",
+          },
+          Object {
+            "amount": 3.34,
+            "balance": 0,
+            "id": "id0",
+            "invoice_date": "2018-05-04",
+            "invoice_number": "no0",
+          },
+          Object {
+            "amount": 3.34,
+            "balance": 0,
+            "id": "id0",
+            "invoice_date": "2018-05-04",
+            "invoice_number": "no0",
+          },
+          Object {
+            "amount": 3.34,
+            "balance": 0,
+            "id": "id0",
+            "invoice_date": "2018-05-04",
+            "invoice_number": "no0",
+          },
+          Object {
+            "amount": 3.34,
+            "balance": 0,
+            "id": "id0",
+            "invoice_date": "2018-05-04",
+            "invoice_number": "no0",
+          },
+          Object {
+            "amount": 3.34,
+            "balance": 0,
+            "id": "id0",
+            "invoice_date": "2018-05-04",
+            "invoice_number": "no0",
+          },
+          Object {
+            "amount": 3.34,
+            "balance": 0,
+            "id": "id0",
+            "invoice_date": "2018-05-04",
+            "invoice_number": "no0",
+          },
+          Object {
+            "amount": 3.34,
+            "balance": 0,
+            "id": "id0",
+            "invoice_date": "2018-05-04",
+            "invoice_number": "no0",
+          },
+          Object {
+            "amount": 3.34,
+            "balance": 0,
+            "id": "id0",
+            "invoice_date": "2018-05-04",
+            "invoice_number": "no0",
+          },
+          Object {
+            "amount": 3.34,
+            "balance": 0,
+            "id": "id0",
+            "invoice_date": "2018-05-04",
+            "invoice_number": "no0",
+          },
+          Object {
+            "amount": 3.34,
+            "balance": 0,
+            "id": "id0",
+            "invoice_date": "2018-05-04",
+            "invoice_number": "no0",
+          },
+          Object {
+            "amount": 3.34,
+            "balance": 0,
+            "id": "id0",
+            "invoice_date": "2018-05-04",
+            "invoice_number": "no0",
+          },
+          Object {
+            "amount": 3.34,
+            "balance": 0,
+            "id": "id0",
+            "invoice_date": "2018-05-04",
+            "invoice_number": "no0",
+          },
+          Object {
+            "amount": 3.34,
+            "balance": 0,
+            "id": "id0",
+            "invoice_date": "2018-05-04",
+            "invoice_number": "no0",
+          },
+          Object {
+            "amount": 3.34,
+            "balance": 0,
+            "id": "id0",
+            "invoice_date": "2018-05-04",
+            "invoice_number": "no0",
+          },
+          Object {
+            "amount": 3.34,
+            "balance": 0,
+            "id": "id0",
+            "invoice_date": "2018-05-04",
+            "invoice_number": "no0",
+          },
+          Object {
+            "amount": 3.34,
+            "balance": 0,
+            "id": "id0",
+            "invoice_date": "2018-05-04",
+            "invoice_number": "no0",
+          },
+          Object {
+            "amount": 3.34,
+            "balance": 0,
+            "id": "id0",
+            "invoice_date": "2018-05-04",
+            "invoice_number": "no0",
+          },
+          Object {
+            "amount": 3.34,
+            "balance": 0,
+            "id": "id0",
+            "invoice_date": "2018-05-04",
+            "invoice_number": "no0",
+          },
+        ]
+      }
+    />
+  </Panel>
+  <Panel.Footer
+    left={
+      <p>
+        <small>
+          Only your last 20 invoices are available to be viewed
+        </small>
+      </p>
+    }
+  />
+</React.Fragment>
+`;

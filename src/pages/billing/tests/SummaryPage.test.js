@@ -18,7 +18,8 @@ describe('Page: BillingSummaryPage', () => {
       },
       fetchAccount: jest.fn(),
       getPlans: jest.fn(),
-      getSendingIps: jest.fn()
+      getSendingIps: jest.fn(),
+      getInvoices: jest.fn()
     };
     wrapper = shallow(<BillingSummaryPage {...props} />);
   });
@@ -32,10 +33,11 @@ describe('Page: BillingSummaryPage', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should get plans, sending ips and account on mount', () => {
+  it('should get plans, sending ips, invoices, and account on mount', () => {
     expect(props.getPlans).toHaveBeenCalledTimes(1);
     expect(props.fetchAccount).toHaveBeenCalledWith({ include: 'billing' });
     expect(props.getSendingIps).toHaveBeenCalledTimes(1);
+    expect(props.getInvoices).toHaveBeenCalledTimes(1);
   });
 
 });

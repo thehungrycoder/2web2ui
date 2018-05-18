@@ -7,6 +7,7 @@ import UpdatePayment from '../forms/UpdatePayment';
 import UpdateContact from '../forms/UpdateContact';
 import AddIps from '../forms/AddIps';
 import DedicatedIpSummarySection from './DedicatedIpSummarySection';
+import InvoiceHistory from './InvoiceHistory';
 import CardSummary from './CardSummary';
 import PlanSummary from './PlanSummary';
 
@@ -55,7 +56,7 @@ export default class BillingSummary extends Component {
   );
 
   render () {
-    const { account, currentPlan, canChangePlan, canUpdateBillingInfo, canPurchaseIps, isAWSAccount } = this.props;
+    const { account, currentPlan, canChangePlan, canUpdateBillingInfo, canPurchaseIps, invoices, isAWSAccount } = this.props;
     const { show } = this.state;
     let changePlanActions = {};
 
@@ -76,6 +77,8 @@ export default class BillingSummary extends Component {
         </Panel>
 
         {canUpdateBillingInfo && this.renderSummary()}
+
+        {(invoices.length > 0) && <InvoiceHistory invoices={this.props.invoices} />}
 
         <PremiumBanner isAWSAccount={isAWSAccount} />
         <EnterpriseBanner />

@@ -11,13 +11,13 @@ import EngagementTable from './components/EngagementTable';
 
 export class EngagementPage extends Component {
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate (prevProps) {
     if (!_.isEqual(prevProps.reportOptions, this.props.reportOptions)) {
       this.props.refreshEngagementReport(this.props.reportOptions);
     }
   }
 
-  render() {
+  render () {
     const { loading, aggregateMetrics, linkMetrics, engagementSearchOptions } = this.props;
 
     return (

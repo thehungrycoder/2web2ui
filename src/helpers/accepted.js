@@ -2,7 +2,7 @@ import { getMetricsFromKeys } from 'src/helpers/metrics';
 
 // These metrics are here because they are shared between action,
 // reducer, and selector and they involve computation
-export function getAcceptedMetrics() {
+export function getAcceptedMetrics () {
   return getMetricsFromKeys([
     'count_sent',
     'count_accepted',
@@ -16,7 +16,7 @@ export function getAcceptedMetrics() {
  * Reshapes deliveries by attempt for the accepted pie chart
  * Places 2+ attempts under a "2 or More" group
  */
-export function reshapeAttempts(deliveries) {
+export function reshapeAttempts (deliveries) {
   const first = { name: '1st Attempt', count: 0 };
   const overTwo = { name: '2 or More Attempts', count: 0 };
   const twoToFour = { name: '2 to 4 Attempts', count: 0 };

@@ -11,17 +11,19 @@ import { Loading } from 'src/components';
 import { ManuallyBilledBanner } from './components/Banners';
 import BillingSummary from './components/BillingSummary';
 import SuspendedForBilling from './components/SuspendedForBilling';
+import { list as getInvoices } from 'src/actions/invoices';
 
 export class BillingSummaryPage extends Component {
 
-  componentDidMount() {
+  componentDidMount () {
     this.props.fetchAccount({ include: 'billing' });
     this.props.getPlans();
     this.props.getSendingIps();
+    this.props.getInvoices();
   }
 
-  render() {
-    const { loading, account, billingInfo, sendingIps } = this.props;
+  render () {
+    const { loading, account, billingInfo, sendingIps, invoices } = this.props;
 
     if (loading) {
       return <Loading />;
@@ -32,7 +34,7 @@ export class BillingSummaryPage extends Component {
         <ConditionSwitch>
           <SuspendedForBilling condition={isSuspendedForBilling} account={account} />
           <ManuallyBilledBanner condition={not(isSelfServeBilling)} account={account} />
-          <BillingSummary condition={defaultCase} account={account} {...billingInfo} sendingIps={sendingIps} />
+          <BillingSummary condition={defaultCase} account={account} {...billingInfo} invoices={invoices} sendingIps={sendingIps} />
         </ConditionSwitch>
       </Page>
     );
@@ -43,6 +45,8 @@ const mapStateToProps = (state) => ({
   loading: state.account.loading || state.billing.plansLoading || !state.account.subscription,
   account: state.account,
   billingInfo: selectBillingInfo(state),
-  sendingIps: state.sendingIps.list
+  sendingIps: state.sendingIps.list,
+  invoices: state.invoices.list
 });
-export default connect(mapStateToProps, { getSendingIps, getPlans, fetchAccount })(BillingSummaryPage);
+
+export default connect(mapStateToProps, { getInvoices, getSendingIps, getPlans, fetchAccount })(BillingSummaryPage);

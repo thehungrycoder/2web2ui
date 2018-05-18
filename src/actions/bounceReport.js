@@ -1,7 +1,7 @@
 import { fetchDeliverability, fetchBounceClassifications, fetchBounceReasonsByDomain } from 'src/actions/metrics';
 import { getQueryFromOptions } from 'src/helpers/metrics';
 
-export function refreshBounceReport(updates = {}) {
+export function refreshBounceReport (updates = {}) {
   return (dispatch) => {
     const params = getQueryFromOptions(updates);
 

@@ -104,7 +104,7 @@ export default class AcceptedChart extends Component {
     };
   }
 
-  render() {
+  render () {
     const { loading } = this.props;
 
     if (loading) {

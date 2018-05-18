@@ -13,7 +13,7 @@ export class GoogleTagManager extends Component {
     dataLayerLoaded: false
   }
 
-  componentDidMount() {
+  componentDidMount () {
     analytics.setup();
 
     const route = findRouteByPath(this.props.location.pathname);
@@ -26,7 +26,7 @@ export class GoogleTagManager extends Component {
     this.setState({ dataLayerLoaded: true });
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate (prevProps) {
     const isNewRoute = prevProps.location.pathname !== this.props.location.pathname;
     const userHasLoaded = !prevProps.username && this.props.username;
 
@@ -40,7 +40,7 @@ export class GoogleTagManager extends Component {
     }
   }
 
-  trackPageview() {
+  trackPageview () {
     const { location } = this.props;
     const route = findRouteByPath(location.pathname);
 
@@ -50,7 +50,7 @@ export class GoogleTagManager extends Component {
     });
   }
 
-  render() {
+  render () {
     const src = `https://www.googletagmanager.com/gtm.js?id=${this.props.id}`;
     return (
       <Helmet>

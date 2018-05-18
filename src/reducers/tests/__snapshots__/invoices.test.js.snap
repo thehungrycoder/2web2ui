@@ -1,0 +1,76 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Invoices reducer get invoice fail 1`] = `
+Object {
+  "getError": Object {
+    "errors": Array [
+      Object {
+        "message": "an error message",
+      },
+    ],
+  },
+  "invoice": null,
+  "invoiceId": null,
+  "invoiceLoading": false,
+  "list": Array [],
+}
+`;
+
+exports[`Invoices reducer get invoice pending 1`] = `
+Object {
+  "getError": null,
+  "invoice": null,
+  "invoiceId": "thisId",
+  "invoiceLoading": true,
+  "list": Array [],
+}
+`;
+
+exports[`Invoices reducer get invoice success 1`] = `
+Object {
+  "invoice": undefined,
+  "invoiceId": null,
+  "invoiceLoading": false,
+  "list": Array [],
+}
+`;
+
+exports[`Invoices reducer list invoice fail 1`] = `
+Object {
+  "invoice": null,
+  "invoiceId": null,
+  "invoiceLoading": false,
+  "list": Array [],
+  "listError": Object {
+    "errors": Array [
+      Object {
+        "message": "an error message",
+      },
+    ],
+  },
+}
+`;
+
+exports[`Invoices reducer list invoices pending 1`] = `
+Object {
+  "invoice": null,
+  "invoiceId": null,
+  "invoiceLoading": false,
+  "list": Array [],
+  "listError": null,
+}
+`;
+
+exports[`Invoices reducer list invoices success 1`] = `
+Object {
+  "invoice": null,
+  "invoiceId": null,
+  "invoiceLoading": false,
+  "list": Object {
+    "results": Array [
+      "an invoice",
+      "a different invoice",
+    ],
+  },
+}
+`;
