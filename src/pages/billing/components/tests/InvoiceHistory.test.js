@@ -46,6 +46,11 @@ describe('Component: Invoice History', () => {
     expect(row[3]).toMatchSnapshot();
   });
 
+  it('should show the right information in a row', () => {
+    const row = wrapper.instance().getRowData({ 'id': 'id0','amount': 3.34,'balance': 0,'invoice_date': '2018-05-04','invoice_number': 'no0' });
+    expect(row).toMatchSnapshot();
+  });
+
   it('should change the text of the download button in the row of the downloading invoice', () => {
     wrapper.setProps({ invoiceLoading: true, invoiceId: 'id1' });
     const row = wrapper.instance().getRowData({ 'id': 'id1','amount': 0,'balance': 0,'invoice_date': '2018-04-26','invoice_number': 'no1' });

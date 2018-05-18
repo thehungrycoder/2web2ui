@@ -282,3 +282,28 @@ exports[`Component: Invoice History should show a message that only 20 invoices 
   />
 </React.Fragment>
 `;
+
+exports[`Component: Invoice History should show the right information in a row 1`] = `
+Array [
+  "May 4 2018",
+  "$3.34",
+  "no0",
+  <div
+    style={
+      Object {
+        "textAlign": "right",
+      }
+    }
+  >
+    <Button
+      color="orange"
+      disabled={false}
+      onClick={[Function]}
+      plain={true}
+      size="small"
+    >
+      Download
+    </Button>
+  </div>,
+]
+`;
