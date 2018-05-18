@@ -18,11 +18,11 @@ const columns = [
 
 export class InvoiceHistory extends Component {
 
-  getRowData = ({ date, amount, invoice_number: invoiceNumber, id }) => {
+  getRowData = ({ invoice_date: invoiceDate, amount, invoice_number: invoiceNumber, id }) => {
     const { invoiceLoading, invoiceId } = this.props;
     const thisInvoiceLoading = (invoiceId === id);
     return ([
-      formatDate(date),
+      formatDate(invoiceDate),
       formatCurrency(amount),
       invoiceNumber,
       <div style={{ textAlign: 'right' }}>
@@ -34,7 +34,7 @@ export class InvoiceHistory extends Component {
     ]);
   };
 
-  componentDidUpdate (prevProps) {
+  componentDidUpdate(prevProps) {
     const { invoice } = this.props;
 
     if (!prevProps.invoice && invoice) {
@@ -56,7 +56,7 @@ export class InvoiceHistory extends Component {
     showAlert({ type: 'success', message: `Downloaded invoice: ${invoiceNumber}` });
   };
 
-  render () {
+  render() {
 
     const { invoices } = this.props;
 
