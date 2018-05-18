@@ -1,11 +1,11 @@
 import React from 'react';
-import config from 'src/config';
 import { format } from 'date-fns';
-import { Banner, UnstyledLink } from '@sparkpost/matchbox';
+import { Banner } from '@sparkpost/matchbox';
 import { Link } from 'react-router-dom';
 import { LINKS } from 'src/constants';
 import * as conversions from 'src/helpers/conversionTracking';
 import { ANALYTICS_PREMIUM_SUPPORT, ANALYTICS_ENTERPRISE_SUPPORT } from 'src/constants';
+import SupportTicketLink from 'src/components/supportTicketLink/SupportTicketLink';
 
 const dateFormat = (date) => format(date, 'MMM DD, YYYY');
 
@@ -38,12 +38,6 @@ export const ManuallyBilledBanner = ({ account, ...rest }) => {
     return null;
   }
 
-  const content = account.pending_subscription // Is this even possible??
-    ? <p>
-        You're scheduled to switch to the {account.pending_subscription.name} plan on {dateFormat(account.pending_subscription.effective_date)}. If you have any questions, please <UnstyledLink to={`mailto:${config.contact.supportEmail}`}>contact support</UnstyledLink>.
-    </p>
-    : <p>To make changes to your plan, billing information, or addons, <UnstyledLink to={`mailto:${config.contact.supportEmail}`}>contact support</UnstyledLink>.</p>;
-
   const convertAction = !account.pending_subscription
     ? { content: 'Enable Automatic Billing', to: '/account/billing/plan', Component: Link }
     : null;
@@ -56,8 +50,20 @@ export const ManuallyBilledBanner = ({ account, ...rest }) => {
     <Banner
       status='info'
       title={`Your current ${account.subscription.name} plan includes ${account.subscription.plan_volume.toLocaleString()} emails per month`}
-      action={convertAction}>
-      {content}
+      action={convertAction}
+    >
+      {account.pending_subscription ? (
+        <p>
+          You're scheduled to switch to the {account.pending_subscription.name} plan
+          on {dateFormat(account.pending_subscription.effective_date)}.
+        </p>
+      ) : (
+        <p>
+          To make changes to your plan, billing information, or addons, {
+            <SupportTicketLink issueId="general_issue">submit a support ticket</SupportTicketLink>
+          }.
+        </p>
+      )}
       {convertMarkup}
     </Banner>
   );

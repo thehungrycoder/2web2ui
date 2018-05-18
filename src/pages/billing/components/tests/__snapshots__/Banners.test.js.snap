@@ -44,12 +44,6 @@ exports[`Billing Banners:  ManuallyBilledBanner should render with pending subsc
     omg
      plan on 
     Oct 05, 2020
-    . If you have any questions, please 
-    <UnstyledLink
-      to="mailto:support@sparkpost.com"
-    >
-      contact support
-    </UnstyledLink>
     .
   </p>
 </Banner>
@@ -69,11 +63,11 @@ exports[`Billing Banners:  ManuallyBilledBanner should render with subscription 
 >
   <p>
     To make changes to your plan, billing information, or addons, 
-    <UnstyledLink
-      to="mailto:support@sparkpost.com"
+    <Connect(SupportTicketLink)
+      issueId="general_issue"
     >
-      contact support
-    </UnstyledLink>
+      submit a support ticket
+    </Connect(SupportTicketLink)>
     .
   </p>
   <p>
