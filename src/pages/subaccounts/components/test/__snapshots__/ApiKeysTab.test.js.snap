@@ -91,7 +91,7 @@ exports[`getRowData 1`] = `
 Array [
   <Link
     replace={false}
-    to="/account/api-keys/details/12313"
+    to="/account/api-keys/edit/12313"
   >
     test
   </Link>,
