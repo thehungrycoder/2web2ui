@@ -202,9 +202,6 @@ exports[`Helper: SparkPost API Request failure cases with refresh tokens should 
 Array [
   Object {
     "meta": Object {
-      "data": Object {
-        "results": Array [],
-      },
       "method": "GET",
       "retries": 1,
       "url": "/some/path",
@@ -216,9 +213,6 @@ Array [
   },
   Object {
     "meta": Object {
-      "data": Object {
-        "results": Array [],
-      },
       "method": "GET",
       "retries": 1,
       "url": "/some/path",
@@ -227,9 +221,6 @@ Array [
   },
   Object {
     "meta": Object {
-      "data": Object {
-        "results": Array [],
-      },
       "method": "GET",
       "retries": 1,
       "url": "/some/path",
@@ -360,9 +351,6 @@ exports[`Helper: SparkPost API Request should successfully call the API 1`] = `
 Array [
   Object {
     "meta": Object {
-      "data": Object {
-        "results": Array [],
-      },
       "method": "GET",
       "url": "/some/path",
     },
@@ -370,9 +358,6 @@ Array [
   },
   Object {
     "meta": Object {
-      "data": Object {
-        "results": Array [],
-      },
       "method": "GET",
       "url": "/some/path",
     },
@@ -386,7 +371,6 @@ exports[`Helper: SparkPost API Request should successfully call the API with a n
 Array [
   Object {
     "meta": Object {
-      "data": "blob data",
       "method": "GET",
       "responseType": "blob",
       "url": "/some/path",
@@ -395,7 +379,6 @@ Array [
   },
   Object {
     "meta": Object {
-      "data": "blob data",
       "method": "GET",
       "responseType": "blob",
       "url": "/some/path",

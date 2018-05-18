@@ -18,11 +18,6 @@ const columns = [
 
 export class InvoiceHistory extends Component {
 
-  //todo: delete this probably
-  state = {
-    invoiceNumber: null
-  };
-
   getRowData = ({ date, amount, invoice_number: invoiceNumber, id }) => {
     const { invoiceLoading, invoiceId } = this.props;
     const thisInvoiceLoading = (invoiceId === id);
@@ -32,27 +27,18 @@ export class InvoiceHistory extends Component {
       invoiceNumber,
       <div style={{ textAlign: 'right' }}>
         <Button plain size='small' color='orange' disabled={invoiceLoading}
-          onClick={() => this.getInvoice(id, invoiceNumber)}>
+          onClick={() => this.props.getInvoice(id)}>
           {(invoiceLoading && thisInvoiceLoading) ? 'Downloading...' : 'Download'}
         </Button>
       </div>
     ]);
-  }
-  ;
-
-  getInvoice = (id) => {
-    this.props.getInvoice(id);
   };
 
   componentDidUpdate (prevProps) {
-    const { invoice, getInvoiceError, showAlert } = this.props;
+    const { invoice } = this.props;
 
     if (!prevProps.invoice && invoice) {
       this.downloadInvoice();
-    }
-
-    if (!prevProps.getInvoiceError && getInvoiceError) {
-      showAlert({ type: 'error', message: 'Error getting invoice' });
     }
 
   }
@@ -94,9 +80,7 @@ export class InvoiceHistory extends Component {
 const mapStateToProps = (state) => ({
   invoice: state.invoices.invoice,
   invoiceLoading: state.invoices.invoiceLoading,
-  invoiceId: state.invoices.invoiceId,
-  invoiceNumber: state.invoices.invoiceNumber,
-  getInvoiceError: state.invoices.getError
+  invoiceId: state.invoices.invoiceId
 });
 
 export default connect(mapStateToProps, { getInvoice, showAlert })(InvoiceHistory);

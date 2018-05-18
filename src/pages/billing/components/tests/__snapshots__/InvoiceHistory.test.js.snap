@@ -64,42 +64,36 @@ exports[`Component: Invoice History should show a list of invoices 1`] = `
         Array [
           Object {
             "amount": 3.34,
-            "balance": 0,
             "id": "id0",
             "invoice_date": "2018-05-04",
             "invoice_number": "no0",
           },
           Object {
             "amount": 0,
-            "balance": 0,
             "id": "id1",
             "invoice_date": "2018-04-26",
             "invoice_number": "no1",
           },
           Object {
             "amount": 302.17,
-            "balance": 0,
             "id": "id2",
             "invoice_date": "2018-04-26",
             "invoice_number": "no2",
           },
           Object {
             "amount": 173.79,
-            "balance": 0,
             "id": "id3",
             "invoice_date": "2018-02-27",
             "invoice_number": "no3",
           },
           Object {
             "amount": 25.33,
-            "balance": 0,
             "id": "id4",
             "invoice_date": "2017-11-20",
             "invoice_number": "no4",
           },
           Object {
             "amount": 9,
-            "balance": 0,
             "id": "id5",
             "invoice_date": "2017-11-09",
             "invoice_number": "no5",

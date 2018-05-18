@@ -55,8 +55,6 @@ export default class BillingSummary extends Component {
     />
   );
 
-  renderInvoiceHistory = () => (<InvoiceHistory invoices={this.props.invoices} />);
-
   render () {
     const { account, currentPlan, canChangePlan, canUpdateBillingInfo, canPurchaseIps, invoices, isAWSAccount } = this.props;
     const { show } = this.state;
@@ -80,7 +78,7 @@ export default class BillingSummary extends Component {
 
         {canUpdateBillingInfo && this.renderSummary()}
 
-        {(invoices.length > 0) && this.renderInvoiceHistory()}
+        {(invoices.length > 0) && <InvoiceHistory invoices={this.props.invoices} />}
 
         <PremiumBanner isAWSAccount={isAWSAccount} />
         <EnterpriseBanner />
