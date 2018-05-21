@@ -2,148 +2,40 @@ import { shallow } from 'enzyme';
 import React from 'react';
 
 import { AuthPage } from '../AuthPage';
-import LoginForm from '../components/LoginForm';
-import TfaForm from '../components/TfaForm';
-import { DEFAULT_REDIRECT_ROUTE } from 'src/constants';
+import config from 'src/config';
 
-const props = {
-  auth: {
-    loggedIn: false,
-    loginPending: false
-  },
-  tfa: {
-    enabled: false,
-    username: 'bertha',
-    token: 'tokey-token'
-  },
-  authenticate: jest.fn(),
-  history: {
-    push: jest.fn()
-  },
-  location: {
-    search: '?test=one'
-  }
-};
+describe('AuthPage tests', () => {
+  const props = {
+    auth: {},
+    authenticate: jest.fn()
+  };
 
-let wrapper;
+  let wrapper;
+  let instance;
 
-beforeEach(() => {
-  props.ssoCheck = jest.fn(() => Promise.resolve());
-  props.verifyAndLogin = jest.fn(() => Promise.resolve());
-  wrapper = shallow(<AuthPage {...props} />);
-});
-
-afterEach(() => {
-  jest.resetAllMocks();
-});
-
-it('renders correctly', () => {
-  expect(wrapper).toMatchSnapshot();
-});
-
-it('renders correctly when there is a login error', () => {
-  wrapper.setProps({ auth: { errorDescription: 'uh oh!' }});
-  expect(wrapper).toMatchSnapshot();
-});
-
-it('redirects to default route after mounted when logged in ', () => {
-  wrapper = shallow(<AuthPage {...props} auth={{ loggedIn: true }} />);
-  expect(props.history.push).toHaveBeenCalledWith({
-    pathname: DEFAULT_REDIRECT_ROUTE,
-    search: '?test=one'
-  });
-});
-
-it('redirects to default route when logged in', () => {
-  wrapper.setProps({ auth: { loggedIn: true }});
-  expect(props.history.push).toHaveBeenCalledWith({
-    pathname: DEFAULT_REDIRECT_ROUTE,
-    search: '?test=one'
-  });
-});
-
-it('redirects to desired route when logged in', () => {
-  wrapper.setProps({
-    auth: { loggedIn: true },
-    location: {
-      state: {
-        redirectAfterLogin: '/path'
-      }
-    }
+  beforeEach(() => {
+    wrapper = shallow(<AuthPage {...props} />);
+    instance = wrapper.instance();
   });
 
-  expect(props.history.push).toHaveBeenCalledWith('/path');
-});
-
-it('should display tfa form when TFA is enabled', () => {
-  wrapper.setProps({ tfa: { enabled: true }});
-  expect(wrapper).toMatchSnapshot();
-});
-
-it('should verify tfa login on submit', () => {
-  const authPage = wrapper.instance();
-  const verifySpy = jest.spyOn(authPage.props, 'verifyAndLogin');
-  authPage.tfaSubmit({ code: 'code' });
-  expect(verifySpy).toHaveBeenCalled();
-});
-
-it('should throw a submission error when verifyAndLogin fails with 4xx error', () => {
-  const authPage = wrapper.instance();
-  authPage.props.verifyAndLogin.mockImplementation(() => Promise.reject({ response: { status: 400 }}));
-  return authPage.tfaSubmit({ code: 'code' }).catch((err) => {
-    expect(err.errors.code).toEqual('The code is invalid');
+  it('renders correctly', () => {
+    expect(wrapper).toMatchSnapshot();
   });
-});
 
-it('should not throw an error when verifySpy fails with non 4xx error', async() => {
-  const authPage = wrapper.instance();
-  authPage.props.verifyAndLogin.mockImplementation(() => Promise.reject({ response: { status: 500 }}));
-  await expect(authPage.tfaSubmit({ code: 'code' })).resolves.toBeUndefined();
-});
+  it('renders correctly when there is a login error', () => {
+    wrapper.setProps({ auth: { errorDescription: 'uh oh!' }});
+    expect(wrapper).toMatchSnapshot();
+  });
 
-it('should bind tfaSubmit to the submit handler of TfaForm', () => {
-  wrapper.setProps({ tfa: { enabled: true }});
-  const tfaForm = wrapper.find(TfaForm);
-  expect(tfaForm.props().onSubmit).toBe(wrapper.instance().tfaSubmit);
-});
+  it('should show link to join when has_signup feature flag exists', () => {
+    config.featureFlags = { has_signup: true };
+    wrapper.setProps({});
+    expect(wrapper).toMatchSnapshot();
+  });
 
-it('should bind loginSubmit to the submit handler of LoginForm', () => {
-  const loginForm = wrapper.find(LoginForm);
-  expect(loginForm.props().onSubmit).toBe(wrapper.instance().loginSubmit);
-});
+  it('should call authenticate with correct fields when submitting', () => {
+    instance.loginSubmit({ username: 'foo', password: 'pw', rememberMe: true });
+    expect(instance.props.authenticate).toHaveBeenCalledWith('foo', 'pw', true);
+  });
 
-it('should sso check on submit when sso is enabled', () => {
-  const authPage = wrapper.instance();
-  const ssoCheckSpy = jest.spyOn(authPage.props, 'ssoCheck');
-  const authSpy = jest.spyOn(authPage.props, 'authenticate');
-  wrapper.setState({ ssoEnabled: true });
-  authPage.loginSubmit({ username: 'foo', password: 'pw', rememberMe: false });
-  expect(ssoCheckSpy).toHaveBeenCalled();
-  expect(authSpy).not.toHaveBeenCalled();
-});
-
-it('should authenticate on submit when sso is disabled', () => {
-  const authPage = wrapper.instance();
-  const ssoCheckSpy = jest.spyOn(authPage.props, 'ssoCheck');
-  const authSpy = jest.spyOn(authPage.props, 'authenticate');
-  wrapper.setState({ ssoEnabled: false });
-  authPage.loginSubmit({ username: 'foo', password: 'pw', rememberMe: false });
-  expect(ssoCheckSpy).not.toHaveBeenCalled();
-  expect(authSpy).toHaveBeenCalled();
-});
-
-it('should redirect to sso if there is a sso user', () => {
-  const redirectSpy = jest.spyOn(window.location, 'assign').mockImplementation();
-  wrapper.setProps({ auth: { ssoUser: true, username: 'foobar' }});
-  expect(redirectSpy).toHaveBeenCalledWith(expect.stringMatching(/saml\/login\/foobar$/));
-});
-
-it('should set sso enabled if there ssoUser is null', () => {
-  wrapper.setProps({ auth: { ssoUser: null }});
-  expect(wrapper.state().ssoEnabled).toBeFalsy();
-});
-
-it('should display sso error message', () => {
-  wrapper.setProps({ location: { search: `?error=${btoa('Oh no!')}` }});
-  expect(wrapper).toMatchSnapshot();
 });

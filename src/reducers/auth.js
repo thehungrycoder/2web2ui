@@ -1,5 +1,5 @@
 
-const initialState = { loggedIn: false, ssoUser: undefined };
+const initialState = { loggedIn: false, ssoUser: null };
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -34,23 +34,19 @@ export default (state = initialState, action) => {
     }
 
     case 'SSO_CHECK_PENDING': {
-      return { ...state, errorDescription: null, loginPending: true };
+      const { errorDescription, ssoUser, ...newState } = state;
+      return { ...newState, loginPending: true };
     }
 
     case 'SSO_CHECK_SUCCESS': {
       const { saml: ssoUser } = action.payload;
       const { username } = action.meta;
 
-      if (ssoUser) {
-        return { ...state, ssoUser, username }; //loginPending unchanged (true)to keep loading state on while redirecting
-      } else {
-        return { ...state, ssoUser, loginPending: false };
-      }
+      return { ...state, ssoUser, username, loginPending: ssoUser };
     }
 
     case 'SSO_CHECK_FAIL': {
-      const { message: errorDescription = 'An unknown error occurred' } = action.payload;
-      return { loginPending: false, errorDescription, ssoUser: false };
+      return { loginPending: false };
     }
 
     default: {

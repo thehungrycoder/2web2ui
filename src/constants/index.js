@@ -1,5 +1,8 @@
 export const DEFAULT_REDIRECT_ROUTE = '/landing';
 export const AFTER_JOIN_REDIRECT_ROUTE = '/onboarding/plan';
+export const SIGN_UP_ROUTE = '/join';
+export const AUTH_ROUTE = '/auth';
+export const SSO_AUTH_ROUTE = '/auth/sso';
 
 export const COOKIE_DOMAIN = '.sparkpost.com';
 

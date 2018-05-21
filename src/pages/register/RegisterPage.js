@@ -11,7 +11,7 @@ import RegisterUserForm from './RegisterUserForm';
 
 import { registerUser, checkInviteToken } from 'src/actions/users';
 import { authenticate } from 'src/actions/auth';
-import { DEFAULT_REDIRECT_ROUTE } from 'src/constants';
+import { DEFAULT_REDIRECT_ROUTE, AUTH_ROUTE } from 'src/constants';
 
 export class RegisterPage extends Component {
 
@@ -22,7 +22,7 @@ export class RegisterPage extends Component {
         .then(() => this.props.history.push(DEFAULT_REDIRECT_ROUTE))
         .catch((error) => {
           // user was created but auth failed, redirect to /auth
-          this.props.history.push('/auth');
+          this.props.history.push(AUTH_ROUTE);
           ErrorTracker.report('sign-in', error);
         }))
       .catch((error) => ErrorTracker.report('register-user', error));
@@ -60,7 +60,7 @@ export class RegisterPage extends Component {
     const { token } = this.props;
 
     if (token === undefined) {
-      return <Redirect to='/auth' />;
+      return <Redirect to={AUTH_ROUTE} />;
     }
 
     return (

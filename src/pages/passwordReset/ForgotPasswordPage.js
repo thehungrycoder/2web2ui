@@ -6,6 +6,7 @@ import { required } from 'src/helpers/validation';
 import { reduxForm, Field } from 'redux-form';
 import { CenteredLogo, PageLink, TextFieldWrapper } from 'src/components';
 import { Panel, Button } from '@sparkpost/matchbox';
+import { AUTH_ROUTE } from 'src/constants';
 
 const successAlert = {
   type: 'success',
@@ -22,7 +23,7 @@ export class ForgotPasswordPage extends Component {
     const { emailSuccess, emailError, history, showAlert } = this.props;
 
     if (!prevProps.emailSuccess && emailSuccess) {
-      history.push('/auth');
+      history.push(AUTH_ROUTE);
       showAlert(successAlert);
     }
 

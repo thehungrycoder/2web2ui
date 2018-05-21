@@ -24,7 +24,11 @@ exports[`ProfilePage renders correctly 1`] = `
   <Connect(AccessControl)
     condition={[Function]}
   >
-    <Connect(TfaManager) />
+    <Connect(AccessControl)
+      condition={[Function]}
+    >
+      <Connect(TfaManager) />
+    </Connect(AccessControl)>
     <Panel
       sectioned={true}
       title="Edit Profile"
@@ -33,14 +37,18 @@ exports[`ProfilePage renders correctly 1`] = `
         onSubmit={[Function]}
       />
     </Panel>
-    <Panel
-      sectioned={true}
-      title="Update Password"
+    <Connect(AccessControl)
+      condition={[Function]}
     >
-      <Connect(ReduxForm)
-        onSubmit={[Function]}
-      />
-    </Panel>
+      <Panel
+        sectioned={true}
+        title="Update Password"
+      >
+        <Connect(ReduxForm)
+          onSubmit={[Function]}
+        />
+      </Panel>
+    </Connect(AccessControl)>
   </Connect(AccessControl)>
   <Connect(AccessControl)
     condition={[Function]}

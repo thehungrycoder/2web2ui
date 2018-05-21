@@ -1,106 +1,78 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders correctly 1`] = `
-<div>
-  <CenteredLogo />
-  <Panel
-    accent={true}
-    sectioned={true}
-    title="Log In"
-  >
-    <Connect(ReduxForm)
-      onSubmit={[Function]}
-      ssoEnabled={false}
-    />
-  </Panel>
+exports[`AuthPage tests renders correctly 1`] = `
+<Connect(LoginPanel)
+  handleSubmit={[Function]}
+  ssoEnabled={false}
+  title="Log In"
+>
   <Panel.Footer
     left={false}
     right={
       <small>
         <PageLink
-          to="/forgot-password"
+          to="/auth/sso"
         >
-          Forgot your password?
+          Single Sign-On
         </PageLink>
       </small>
     }
   />
-</div>
+</Connect(LoginPanel)>
 `;
 
-exports[`renders correctly when there is a login error 1`] = `
-<div>
-  <CenteredLogo />
-  <Panel
-    accent={true}
-    sectioned={true}
-    title="Log In"
-  >
-    <Error
-      error="uh oh!"
-    />
-    <Connect(ReduxForm)
-      onSubmit={[Function]}
-      ssoEnabled={false}
-    />
-  </Panel>
+exports[`AuthPage tests renders correctly when there is a login error 1`] = `
+<Connect(LoginPanel)
+  handleSubmit={[Function]}
+  loginError="uh oh!"
+  ssoEnabled={false}
+  title="Log In"
+>
   <Panel.Footer
     left={false}
     right={
       <small>
         <PageLink
-          to="/forgot-password"
+          to="/auth/sso"
         >
-          Forgot your password?
+          Single Sign-On
         </PageLink>
       </small>
     }
   />
-</div>
+</Connect(LoginPanel)>
 `;
 
-exports[`should display sso error message 1`] = `
-<div>
-  <CenteredLogo />
-  <Panel
-    accent={true}
-    sectioned={true}
-    title="Log In"
-  >
-    <Error
-      error="Oh no!"
-    />
-    <Connect(ReduxForm)
-      onSubmit={[Function]}
-      ssoEnabled={false}
-    />
-  </Panel>
+exports[`AuthPage tests should show link to join when has_signup feature flag exists 1`] = `
+<Connect(LoginPanel)
+  handleSubmit={[Function]}
+  ssoEnabled={false}
+  title="Log In"
+>
   <Panel.Footer
-    left={false}
+    left={
+      <div>
+        <small>
+          Don't have an account? 
+          <PageLink
+            to="/join"
+          >
+            Sign up
+          </PageLink>
+          .
+        </small>
+        <br />
+      </div>
+    }
     right={
       <small>
         <PageLink
-          to="/forgot-password"
+          to="/auth/sso"
         >
-          Forgot your password?
+          Single Sign-On
         </PageLink>
       </small>
     }
   />
-</div>
-`;
-
-exports[`should display tfa form when TFA is enabled 1`] = `
-<div>
-  <CenteredLogo />
-  <Panel
-    accent={true}
-    sectioned={true}
-    title="Log In"
-  >
-    <Connect(ReduxForm)
-      onSubmit={[Function]}
-    />
-  </Panel>
-</div>
+</Connect(LoginPanel)>
 `;
