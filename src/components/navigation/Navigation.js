@@ -10,7 +10,7 @@ import styles from './Navigation.module.scss';
 
 export class Navigation extends Component {
   state = {
-    open: true
+    open: false
   };
 
   renderItems() {

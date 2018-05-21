@@ -29,7 +29,7 @@ exports[`Component: DatePicker should render ok by default 1`] = `
 <Popover
   bottom={true}
   className="Popover"
-  onOutsideClick={[Function]}
+  onClose={[Function]}
   open={false}
   right={true}
   trigger={
