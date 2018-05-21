@@ -1,4 +1,4 @@
-import { isAdmin, isAzure, isHeroku } from '../user';
+import { isAdmin, isHeroku, isAzure, isSso } from '../user';
 
 describe('User Condition Tests', () => {
   it('should return true if user is heroku', () => {
@@ -29,5 +29,15 @@ describe('User Condition Tests', () => {
   it('should return false if user is not an admin', () => {
     const currentUser = { access_level: 'reporting' };
     expect(isAdmin({ currentUser })).toEqual(false);
+  });
+
+  it('should return true if user is sso', () => {
+    const currentUser = { is_sso: true };
+    expect(isSso({ currentUser })).toEqual(true);
+  });
+
+  it('should return false if user is sso', () => {
+    const currentUser = { is_sso: false };
+    expect(isSso({ currentUser })).toEqual(false);
   });
 });

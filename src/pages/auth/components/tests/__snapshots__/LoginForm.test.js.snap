@@ -16,6 +16,13 @@ exports[`renders correctly 1`] = `
   />
   <Field
     component={[Function]}
+    helpText={
+      <PageLink
+        to="/forgot-password"
+      >
+        Forgot your password?
+      </PageLink>
+    }
     id="password"
     label="Password"
     name="password"
@@ -54,6 +61,13 @@ exports[`renders correctly when logging in 1`] = `
   />
   <Field
     component={[Function]}
+    helpText={
+      <PageLink
+        to="/forgot-password"
+      >
+        Forgot your password?
+      </PageLink>
+    }
     id="password"
     label="Password"
     name="password"

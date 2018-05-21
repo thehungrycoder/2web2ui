@@ -2,6 +2,7 @@
 import {
   apiKeys,
   AuthPage,
+  SsoAuthPage,
   SSOPage,
   billing,
   DashboardPage,
@@ -39,7 +40,7 @@ import { configFlag, configEquals } from 'src/helpers/conditions/config';
 
 import App from 'src/components/layout/App';
 
-import { DEFAULT_REDIRECT_ROUTE } from 'src/constants';
+import { DEFAULT_REDIRECT_ROUTE, SIGN_UP_ROUTE, AUTH_ROUTE, SSO_AUTH_ROUTE } from 'src/constants';
 
 /**
  *  Angular UI Grant List:
@@ -83,13 +84,19 @@ const routes = [
   {
     path: '/',
     public: true,
-    redirect: '/auth'
+    redirect: AUTH_ROUTE
   },
   {
-    path: '/auth',
+    path: AUTH_ROUTE,
     public: true,
     component: AuthPage,
     title: 'Log In'
+  },
+  {
+    path: SSO_AUTH_ROUTE,
+    public: true,
+    component: SsoAuthPage,
+    title: 'SSO Log In'
   },
   {
     path: '/sso',
@@ -107,10 +114,10 @@ const routes = [
   {
     path: '/sign-up',
     public: true,
-    redirect: '/join'
+    redirect: SIGN_UP_ROUTE
   },
   {
-    path: '/join',
+    path: SIGN_UP_ROUTE,
     public: true,
     forceLogout: true,
     component: JoinPage,
