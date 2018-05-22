@@ -16,7 +16,7 @@ function formatCategory(classification) {
   return {
     category: bounce_category_name,
     name: bounce_class_name,
-    count: count_bounce + count_admin_bounce // count bounce does not include admin bounces
+    count: count_bounce || count_admin_bounce
   };
 }
 
