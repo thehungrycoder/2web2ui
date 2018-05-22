@@ -34,16 +34,16 @@ describe('Action Creator: Refresh Bounce Report', () => {
       type: 'GET_BOUNCE_REPORT_AGGREGATES',
       params: {
         ...queryMock,
-        metrics: 'count_sent,count_bounce,count_inband_bounce,count_outofband_bounce'
+        metrics: 'count_sent,count_bounce,count_inband_bounce,count_outofband_bounce,count_admin_bounce'
       }
     });
     expect(metricsActions.fetchBounceClassifications).toHaveBeenCalledWith({
       ...queryMock,
-      metrics: 'count_bounce'
+      metrics: 'count_bounce,count_admin_bounce'
     });
     expect(metricsActions.fetchBounceReasonsByDomain).toHaveBeenCalledWith({
       ...queryMock,
-      metrics: 'count_bounce'
+      metrics: 'count_bounce,count_admin_bounce'
     });
   });
 

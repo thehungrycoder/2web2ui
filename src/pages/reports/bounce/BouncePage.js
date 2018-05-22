@@ -30,10 +30,11 @@ export class BouncePage extends Component {
   }
 
   getRowData = (item) => {
-    const { aggregates = {}, addFilters } = this.props;
-    const { reason, domain, bounce_category_name, bounce_class_name } = item;
-    const numerator = item.bounce_category_name === 'Admin' ? item.count_admin_bounce : item.count_bounce;
-    const denominator = aggregates.countBounce + aggregates.countAdminBounce ;
+    const { aggregates = {}, addFilters, adminBounces } = this.props;
+    const { reason, domain, bounce_category_name, bounce_class_name, count_bounce, count_admin_bounce } = item;
+    const numerator = count_admin_bounce || count_bounce;
+    const denominator = bounce_category_name === 'Admin' ? adminBounces : aggregates.countBounce;
+
     return [
       <LongTextContainer text={reason} />,
       <UnstyledLink onClick={() => addFilters([{ type: 'Recipient Domain', value: domain }])}>{domain}</UnstyledLink>,
@@ -108,7 +109,7 @@ export class BouncePage extends Component {
 
     return (
       <MetricsSummary
-        rateValue={safeRate(countBounce, countSent)}
+        rateValue={safeRate(countBounce, countSent)} // TODO: should this include admin bounces?
         rateTitle='Bounce Rate'
         secondaryMessage={adminBounceText}
       >
