@@ -34,7 +34,7 @@ export class AccountDropdown extends Component {
     const docsContent = <Fragment>API Documentation <div className={styles.FloatIcon}><OpenInNew size={15}/></div></Fragment>;
 
     return (
-      <Popover left trigger={this.renderActivator} open={this.state.open} onClose={this.toggleDropdown}>
+      <Popover left trigger={this.renderActivator()} open={this.state.open} onClose={this.toggleDropdown}>
         <ActionList className={styles.AccountList} onClick={this.toggleDropdown}
           sections={[[
             { content: 'Profile', to: '/account/profile', component: Link },
