@@ -64,7 +64,6 @@ describe('Item tests', () => {
     const stateSpy = jest.spyOn(wrapper.component.instance(), 'setState');
     wrapper.component.instance().componentDidMount();
     expect(stateSpy).toHaveBeenCalledWith({ open: true });
-
   });
 
   it('should set open state to false if location does not match route', () => {
