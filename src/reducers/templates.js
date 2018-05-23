@@ -1,3 +1,5 @@
+import { normalizeFromAddress, normalizeTemplateFromAddress } from 'src/helpers/templates';
+
 const initialState = {
   list: [],
   listError: null,
@@ -29,7 +31,7 @@ export default (state = initialState, action) => {
         ...state,
         byId: {
           ...state.byId,
-          [action.payload.id]: { ...state.byId[action.payload.id], draft: action.payload }
+          [action.payload.id]: { ...state.byId[action.payload.id], draft: normalizeTemplateFromAddress(action.payload) }
         },
         getLoading: false
       };
@@ -46,7 +48,7 @@ export default (state = initialState, action) => {
         ...state,
         byId: {
           ...state.byId,
-          [action.payload.id]: { ...state.byId[action.payload.id], published: action.payload }
+          [action.payload.id]: { ...state.byId[action.payload.id], published: normalizeTemplateFromAddress(action.payload) }
         },
         getLoading: false
       };
@@ -64,7 +66,10 @@ export default (state = initialState, action) => {
           ...state.contentPreview,
           [action.meta.context.mode]: {
             ...state.contentPreview[action.meta.context.mode],
-            [action.meta.context.id]: action.payload
+            [action.meta.context.id]: {
+              ...action.payload,
+              from: normalizeFromAddress(action.payload.from)
+            }
           }
         }
       };
