@@ -24,6 +24,7 @@ describe('Selector: Bounce Report', () => {
         aggregates: {
           count_sent: 100,
           count_bounce: 4,
+          count_admin_bounce: 3,
           count_inband_bounce: 2,
           count_outofband_bounce: 1
         },
@@ -92,6 +93,13 @@ describe('Selector: Bounce Report', () => {
     const props = mapStateToProps(testState);
     expect(props.aggregates).toEqual([]);
     expect(bounceHelpers.formatAggregates).not.toHaveBeenCalled();
+  });
+
+  it('should format aggregates when there are only Admin bounces', () => {
+    testState.bounceReport.aggregates.count_bounce = 0;
+    const props = mapStateToProps(testState);
+    expect(props.aggregates).toEqual([]);
+    expect(bounceHelpers.formatAggregates).toHaveBeenCalled();
   });
 
   it('should default to an empty array when there are no classifications', () => {

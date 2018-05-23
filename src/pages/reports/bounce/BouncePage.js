@@ -33,8 +33,13 @@ export class BouncePage extends Component {
     const { aggregates = {}, addFilters, adminBounces } = this.props;
     const { reason, domain, bounce_category_name, bounce_class_name, count_bounce, count_admin_bounce } = item;
     // calculate the rate of admin bounces against all bounces
-    const numerator = count_bounce || count_admin_bounce;
-    const denominator = aggregates.countBounce + (bounce_category_name === 'Admin' ? adminBounces : 0);
+    let numerator = count_bounce;
+    let denominator = aggregates.countBounce;
+
+    if (bounce_category_name === 'Admin') {
+      numerator = count_admin_bounce;
+      denominator += adminBounces;
+    }
 
     return [
       <LongTextContainer text={reason} />,

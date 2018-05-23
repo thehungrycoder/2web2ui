@@ -88,6 +88,17 @@ describe('BouncePage: ', () => {
     expect(rows).toMatchSnapshot();
   });
 
+  it('should render row data for admin bounce properly', () => {
+    const rows = wrapper.instance().getRowData({
+      reason: 'bouncy boi',
+      domain: 'gmail',
+      bounce_category_name: 'Admin',
+      count_admin_bounce: 5
+    });
+
+    expect(rows).toMatchSnapshot();
+  });
+
   it('should filter by domain', () => {
     const rows = wrapper.instance().getRowData({
       reason: 'u y bounce?',
