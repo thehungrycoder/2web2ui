@@ -155,35 +155,4 @@ describe('Templates selectors', () => {
       expect(selector.selectDomainsBySubaccount(store, { subaccountId: 101 })).toMatchSnapshot();
     });
   });
-
-  describe('normalizeFromAddress', () => {
-    let template;
-    beforeEach(() => {
-      template = {
-        name: 'Test Template',
-        id: 'test-template',
-        published: false,
-        content: {
-          from: 'sender@domain.com',
-          html: '<h1>html values</h1>'
-        }
-      };
-    });
-
-    it('reformats string from to obj format', () => {
-      expect(selector.normalizeFromAddress(template)).toMatchSnapshot();
-    });
-
-    it('does not change obj formatted from', () => {
-      template.content.from = { name: 'sender name', email: 'sender@domain.com' };
-      expect(selector.normalizeFromAddress(template)).toMatchSnapshot();
-    });
-
-    it('does not do anything if template is empty', () => {
-      expect(selector.normalizeFromAddress({})).toEqual({});
-      expect(selector.normalizeFromAddress(false)).toBe(false);
-      expect(selector.normalizeFromAddress(null)).toBe(null);
-    });
-  });
-
 });

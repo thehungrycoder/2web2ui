@@ -7,10 +7,6 @@ import _ from 'lodash';
  * @returns {*} {name: null, email: from}
  */
 export const normalizeFromAddress = (from) => {
-  if (_.isEmpty(from)) {
-    return from; //just not to change whatever value it is
-  }
-
   if (_.isString(from)) {
     return {
       name: null,
