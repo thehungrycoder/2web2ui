@@ -11,7 +11,7 @@ import { selectSupportIssues } from 'src/selectors/support';
 import config from 'src/config';
 const searchCfg = config.support.algolia;
 
-const SearchPanel = ({ toggleForm, issues }) => {
+export const SearchPanel = ({ toggleForm, issues }) => {
   const canSubmitSupportTicket = issues.length > 0;
   return (
     <InstantSearch

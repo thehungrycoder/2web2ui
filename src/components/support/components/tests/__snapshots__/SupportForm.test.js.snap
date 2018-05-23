@@ -96,6 +96,12 @@ exports[`Support Form Component Form should render issue dropdown with help text
 />
 `;
 
+exports[`Support Form Component Form should render no issue view when no issues are available 1`] = `
+<NoIssues
+  onCancel={[Function]}
+/>
+`;
+
 exports[`Support Form Component Form should render with selected issue message label 1`] = `
 <div
   className="SupportForm"
