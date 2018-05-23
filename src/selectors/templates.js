@@ -40,3 +40,34 @@ export const selectDomainsBySubaccount = createSelector(
       : !domain.subaccount_id;
   })
 );
+
+/**
+ * Converts string formatted from address to json structure.
+ * Example:
+ * before: content.from = 'me@domain.com'
+ * after: content.from = { name: null, email: 'me@domain.com'}
+ * @param template
+ * @returns {*} null or template with reformatted from field
+ */
+export const normalizeFromAddress = (template) => {
+  if (_.isEmpty(template)) {
+    return template; //just not to change whatever value it is
+  }
+
+  const { content } = template;
+  if (_.isString(content.from)) {
+    return {
+      ...template,
+      content: {
+        ...content,
+        from: {
+          name: null,
+          email: content.from
+        }
+      }
+    };
+  } else {
+    return template;
+  }
+};
+

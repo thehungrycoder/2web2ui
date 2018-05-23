@@ -71,6 +71,36 @@ Object {
 
 exports[`Templates selectors getClonedTemplate should not clone template if :id does not exist 1`] = `undefined`;
 
+exports[`Templates selectors normalizeFromAddress does not change obj formatted from 1`] = `
+Object {
+  "content": Object {
+    "from": Object {
+      "email": "sender@domain.com",
+      "name": "sender name",
+    },
+    "html": "<h1>html values</h1>",
+  },
+  "id": "test-template",
+  "name": "Test Template",
+  "published": false,
+}
+`;
+
+exports[`Templates selectors normalizeFromAddress reformats string from to obj format 1`] = `
+Object {
+  "content": Object {
+    "from": Object {
+      "email": "sender@domain.com",
+      "name": null,
+    },
+    "html": "<h1>html values</h1>",
+  },
+  "id": "test-template",
+  "name": "Test Template",
+  "published": false,
+}
+`;
+
 exports[`Templates selectors selectDefaultTestData should return default test data 1`] = `
 "{
   \\"substitution_data\\": {},
