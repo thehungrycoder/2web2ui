@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import { formatBytes } from 'src/helpers/units';
 import { emailRegex, emailLocalRegex, domainRegex } from './regex';
+import isURL from 'validator/lib/isURL';
 
 export function required(value) {
   return value ? undefined : 'Required';
@@ -69,3 +70,7 @@ export const maxFileSize = _.memoize(function maxFilesSize(maxSize) {
     return (file.size < maxSize) ? undefined : `Please keep file size under ${formatBytes(maxSize)}`;
   };
 });
+
+export function url(value) {
+  return isURL(value) ? undefined : 'Must be a valid URL';
+}
