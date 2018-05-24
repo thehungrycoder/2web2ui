@@ -26,6 +26,7 @@ import {
 } from 'src/pages';
 
 import NotificationTestPage from 'src/pages/NotificationTestPage';
+import LogoutPage from 'src/pages/logout/LogoutPage';
 
 import onboarding from 'src/pages/onboarding';
 import { default as emailVerification } from 'src/components/emailVerification/EmailVerification';
@@ -523,6 +524,11 @@ const routes = [
     path: '/notifications',
     component: NotificationTestPage,
     title: 'Notification Test Page'
+  },
+  {
+    path: '/logout',
+    component: LogoutPage,
+    title: 'Logging out...'
   }
 ];
 

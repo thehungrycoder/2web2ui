@@ -1,12 +1,12 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
+import _ from 'lodash';
 import { Link } from 'react-router-dom';
-import { LINKS } from 'src/constants';
 import { WindowSizeContext } from 'src/context/WindowSize';
-import { isHeroku } from 'src/helpers/conditions/user';
+import { selectAccountNavItems } from 'src/selectors/navItems';
 import { logout } from 'src/actions/auth';
 import { UnstyledLink, Popover, ActionList } from '@sparkpost/matchbox';
-import { ArrowDropDown, OpenInNew, Person } from '@sparkpost/matchbox-icons';
+import { ArrowDropDown, Person } from '@sparkpost/matchbox-icons';
 import styles from './AccountDropdown.module.scss';
 
 export class AccountDropdown extends Component {
@@ -29,23 +29,36 @@ export class AccountDropdown extends Component {
     </WindowSizeContext.Consumer>
   );
 
-  render() {
-    const { logout, isHeroku } = this.props;
-    const docsContent = <Fragment>API Documentation <div className={styles.FloatIcon}><OpenInNew size={15}/></div></Fragment>;
+  getItems() {
+    const { accountNavItems } = this.props;
+    const items = accountNavItems.map(({ label, external, condition, icon: Icon, ...rest }) => {
+      const content = Icon
+        ? <Fragment>{label} <div className={styles.FloatIcon}><Icon size={15} /></div></Fragment>
+        : label;
+      const listItem = { content, external, ...rest };
 
+      if (!external) {
+        listItem.component = Link;
+      }
+
+      return listItem;
+    });
+    // TODO: move this transformation into matchbox ActionList for declarative sectioning
+    // i.e. actions key is treated as sections = sort/group/values ...
+    // if there's just one it will look the same as it does now
+    const sorted = _.sortBy(items, 'section');
+    const sections = _.groupBy(sorted, 'section');
+    return _.values(sections);
+  }
+
+  render() {
     return (
       <Popover left trigger={this.renderActivator()} open={this.state.open} onClose={this.toggleDropdown}>
-        <ActionList className={styles.AccountList} onClick={this.toggleDropdown}
-          sections={[[
-            { content: 'Profile', to: '/account/profile', component: Link },
-            { content: 'Billing', to: '/account/billing', component: Link },
-            { content: 'Manage Users', to: '/account/users', component: Link }
-          ],
-          ...(!isHeroku ? [
-            [{ content: docsContent, external: true, to: LINKS.DOCS }],
-            [{ content: 'Log Out', onClick: logout }]
-          ] : [])
-          ]}/>
+        <ActionList
+          className={styles.AccountList}
+          onClick={this.toggleDropdown}
+          sections={this.getItems()}
+        />
       </Popover>
     );
   }
@@ -53,6 +66,6 @@ export class AccountDropdown extends Component {
 
 const mapStateToProps = (state) => ({
   email: state.currentUser.email,
-  isHeroku: isHeroku(state)
+  accountNavItems: selectAccountNavItems(state)
 });
 export default connect(mapStateToProps, { logout })(AccountDropdown);

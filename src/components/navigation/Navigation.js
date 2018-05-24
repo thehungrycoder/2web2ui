@@ -5,7 +5,7 @@ import classnames from 'classnames';
 import Item from './components/Item';
 import Top from './components/Top';
 import { WindowSizeContext } from 'src/context/WindowSize';
-import selectNavItems from 'src/selectors/navItems';
+import { selectNavItems } from 'src/selectors/navItems';
 import styles from './Navigation.module.scss';
 
 export class Navigation extends Component {
