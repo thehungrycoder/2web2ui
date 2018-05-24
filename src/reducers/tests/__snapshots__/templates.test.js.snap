@@ -5,6 +5,14 @@ Object {
   "byId": Object {
     "test-draft": Object {
       "draft": Object {
+        "content": Object {
+          "from": Object {
+            "email": "me@domain.com",
+            "name": null,
+          },
+          "html": "html content",
+          "subject": "draft template",
+        },
         "id": "test-draft",
       },
     },
@@ -19,12 +27,64 @@ Object {
 }
 `;
 
-exports[`Template reducer stores preview of draft 1`] = `
+exports[`Template reducer stores draft with obj from 1`] = `
+Object {
+  "byId": Object {
+    "test-draft": Object {
+      "draft": Object {
+        "content": Object {
+          "from": Object {
+            "email": "sender1@domain.com",
+            "name": "sender 1",
+          },
+          "html": "html content",
+          "subject": "draft template",
+        },
+        "id": "test-draft",
+      },
+    },
+  },
+  "contentPreview": Object {
+    "draft": Object {},
+    "published": Object {},
+  },
+  "getLoading": false,
+  "list": Array [],
+  "listError": null,
+}
+`;
+
+exports[`Template reducer stores preview of draft with obj from 1`] = `
 Object {
   "byId": Object {},
   "contentPreview": Object {
     "draft": Object {
       "test-template": Object {
+        "from": Object {
+          "email": "me@domain.com",
+          "name": "unnamed",
+        },
+        "html": "<h1>Preview of Test Template</h1>",
+        "subject": "Preview of Test Template",
+      },
+    },
+    "published": Object {},
+  },
+  "list": Array [],
+  "listError": null,
+}
+`;
+
+exports[`Template reducer stores preview of draft with string from 1`] = `
+Object {
+  "byId": Object {},
+  "contentPreview": Object {
+    "draft": Object {
+      "test-template": Object {
+        "from": Object {
+          "email": "me@domain.com",
+          "name": null,
+        },
         "html": "<h1>Preview of Test Template</h1>",
         "subject": "Preview of Test Template",
       },
@@ -41,6 +101,41 @@ Object {
   "byId": Object {
     "test-published": Object {
       "published": Object {
+        "content": Object {
+          "from": Object {
+            "email": "me@domain.com",
+            "name": null,
+          },
+          "html": "html content",
+          "subject": "published template",
+        },
+        "id": "test-published",
+      },
+    },
+  },
+  "contentPreview": Object {
+    "draft": Object {},
+    "published": Object {},
+  },
+  "getLoading": false,
+  "list": Array [],
+  "listError": null,
+}
+`;
+
+exports[`Template reducer stores published with obj from 1`] = `
+Object {
+  "byId": Object {
+    "test-published": Object {
+      "published": Object {
+        "content": Object {
+          "from": Object {
+            "email": "sender2@domain.com",
+            "name": "sender 2",
+          },
+          "html": "html content",
+          "subject": "published template",
+        },
         "id": "test-published",
       },
     },

@@ -8,7 +8,8 @@ import Form from '../Form';
 
 const mapStateToProps = (state, props) => ({
   domains: selectDomainsBySubaccount(state, props),
-  hasSubaccounts: hasSubaccounts(state)
+  hasSubaccounts: hasSubaccounts(state),
+  domainsLoading: state.sendingDomains.listLoading
 });
 
 export default connect(mapStateToProps, { change, listDomains })(Form);

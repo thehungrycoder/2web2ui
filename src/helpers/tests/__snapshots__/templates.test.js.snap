@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`template helpers normalizeTemplateFromAddress does not change obj formatted from 1`] = `
+Object {
+  "content": Object {
+    "from": Object {
+      "email": "sender@domain.com",
+      "name": "sender name",
+    },
+    "html": "<h1>html values</h1>",
+  },
+  "id": "test-template",
+  "name": "Test Template",
+  "published": false,
+}
+`;
+
+exports[`template helpers normalizeTemplateFromAddress reformats string from to obj format 1`] = `
+Object {
+  "content": Object {
+    "from": Object {
+      "email": "sender@domain.com",
+      "name": null,
+    },
+    "html": "<h1>html values</h1>",
+  },
+  "id": "test-template",
+  "name": "Test Template",
+  "published": false,
+}
+`;
