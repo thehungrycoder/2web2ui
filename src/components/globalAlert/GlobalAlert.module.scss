@@ -11,7 +11,7 @@
   pointer-events: none;
 
   :global(.heroku-boomerang-loaded) & {
-    top: rem(75) + spacing() * 3;
+    top: rem(60) + spacing() * 3;
   }
 }
 

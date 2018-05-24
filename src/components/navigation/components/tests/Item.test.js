@@ -1,5 +1,5 @@
 import React from 'react';
-import Item from '../Item';
+import { Item } from '../Item';
 import context from 'src/__testHelpers__/context';
 
 describe('Item tests', () => {
@@ -75,5 +75,21 @@ describe('Item tests', () => {
     const stateSpy = jest.spyOn(wrapper.component.instance(), 'setState');
     wrapper.component.instance().componentDidMount();
     expect(stateSpy).not.toHaveBeenCalled();
+  });
+
+  it('should call toggle nav when on mobile', () => {
+    const toggle = jest.fn();
+    const item = context(
+      <Item
+        to='/to'
+        icon='Mail'
+        label='label'
+        toggleMobileNav={toggle}
+        location={{ pathname: 'to' }}
+      />
+      , { mobile: true });
+    expect(item.children()).toMatchSnapshot();
+    item.children().find('Link').simulate('click');
+    expect(toggle).toHaveBeenCalledTimes(1);
   });
 });

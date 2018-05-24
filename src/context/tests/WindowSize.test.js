@@ -1,5 +1,6 @@
 import React from 'react';
 import WindowSize from '../WindowSize';
+import { delay } from 'src/__testHelpers__';
 import { shallow } from 'enzyme';
 
 describe('WindowSize Provider', () => {
@@ -18,9 +19,10 @@ describe('WindowSize Provider', () => {
     expect(wrapper).toHaveState({ mobile: true });
   });
 
-  it('should update size on resize event', () => {
+  it('should update size on resize event', async () => {
     global.innerWidth = 2000;
     wrapper.find('WindowEvent').props().handler();
+    await delay(400);
     expect(wrapper).toHaveState({ mobile: false });
   });
 });

@@ -1,5 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`AccountDropdown activator should render an icon on desktop if email doesnt exist 1`] = `
+<UnstyledLink
+  className="Email"
+  onClick={[Function]}
+>
+  <Person
+    size={24}
+  />
+</UnstyledLink>
+`;
+
 exports[`AccountDropdown activator should render an icon on mobile 1`] = `
 <UnstyledLink
   className="Email"
@@ -24,28 +35,6 @@ exports[`AccountDropdown activator should render email address on desktop 1`] = 
 </UnstyledLink>
 `;
 
-exports[`AccountDropdown should hide docs and logout actions for heroku users 1`] = `
-Array [
-  Array [
-    Object {
-      "component": [Function],
-      "content": "Profile",
-      "to": "/account/profile",
-    },
-    Object {
-      "component": [Function],
-      "content": "Billing",
-      "to": "/account/billing",
-    },
-    Object {
-      "component": [Function],
-      "content": "Manage Users",
-      "to": "/account/users",
-    },
-  ],
-]
-`;
-
 exports[`AccountDropdown should render correctly 1`] = `
 <Popover
   bottom={true}
@@ -67,40 +56,24 @@ exports[`AccountDropdown should render correctly 1`] = `
         Array [
           Object {
             "component": [Function],
-            "content": "Profile",
-            "to": "/account/profile",
+            "content": "link",
+            "external": undefined,
+            "to": "link",
           },
-          Object {
-            "component": [Function],
-            "content": "Billing",
-            "to": "/account/billing",
-          },
-          Object {
-            "component": [Function],
-            "content": "Manage Users",
-            "to": "/account/users",
-          },
-        ],
-        Array [
           Object {
             "content": <UNDEFINED>
-              API Documentation 
+              link2
+               
               <div
                 className="FloatIcon"
               >
-                <OpenInNew
+                <MockIcon
                   size={15}
                 />
               </div>
             </UNDEFINED>,
             "external": true,
-            "to": "https://www.sparkpost.com/docs",
-          },
-        ],
-        Array [
-          Object {
-            "content": "Log Out",
-            "onClick": undefined,
+            "to": "link2",
           },
         ],
       ]

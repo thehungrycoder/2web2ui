@@ -66,7 +66,7 @@ export class Item extends Component {
           </li>
         ) : (
           <li>
-            <Link to={to} className={linkClasses} onClick={toggleMobileNav}>
+            <Link to={to} className={linkClasses} onClick={mobile ? toggleMobileNav : null}>
               {Icon && <span className={styles.iconWrapper}><Icon size={21} className={styles.icon} /></span>}
               {label}
             </Link>

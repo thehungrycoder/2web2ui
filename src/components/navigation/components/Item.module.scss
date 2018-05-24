@@ -9,7 +9,7 @@
 .Link, .Link:visited {
   position: relative;
   display: block;
-  padding: rem(6) rem(18);
+  padding: rem(9) rem(18);
   color: color(gray, 2);
 
   text-decoration: none;
@@ -39,7 +39,7 @@
     color: color(gray, 0);
   }
 
-  &.isActive {
+  &.isActive:not(.hasChildren) {
     color: color(orange);
     font-weight: 500;
     .icon { fill: color(orange); }
@@ -51,14 +51,9 @@
     }
   }
 
-  &.hasChildren.isOpen.isActive {
-    color: color(gray, 2);
-    .icon { fill: color(gray, 2); }
-  }
-
   &.hasChildren.isOpen {
     .chevron {
-      transform: translate(0, -50%) rotate(-90deg);
+      transform: translate(0, -50%) rotate(90deg);
     }
 
     & + .NestedList {
@@ -68,7 +63,7 @@
 }
 
 .NestedList {
-  margin-bottom: rem(11);
+  margin-bottom: rem(13);
 }
 
 .NestedList .Link {
@@ -103,5 +98,4 @@
   height: rem(24);
   transform: translate(0, -50%) rotate(-90deg);
   fill: color(gray, 6);
-  transition: 0.1s;
 }

@@ -5,9 +5,21 @@ import context from 'src/__testHelpers__/context';
 
 describe('AccountDropdown', () => {
   let wrapper;
+  const MockIcon = () => 'MockIcon';
   const props = {
     email: 'test@testing.com',
-    isHeroku: false
+    accountNavItems: [
+      {
+        label: 'link',
+        to: 'link'
+      },
+      {
+        label: 'link2',
+        to: 'link2',
+        external: true,
+        icon: MockIcon
+      }
+    ]
   };
 
   beforeEach(() => {
@@ -16,11 +28,6 @@ describe('AccountDropdown', () => {
 
   it('should render correctly', () => {
     expect(wrapper).toMatchSnapshot();
-  });
-
-  it('should hide docs and logout actions for heroku users', () => {
-    wrapper.setProps({ isHeroku: true });
-    expect(wrapper.find('ActionList').props().sections).toMatchSnapshot();
   });
 
   it('should hide dropdown on popover close', () => {
@@ -51,6 +58,11 @@ describe('AccountDropdown', () => {
 
     it('should render an icon on mobile', () => {
       expect(consumer.children({ mobile: true })).toMatchSnapshot();
+    });
+
+    it('should render an icon on desktop if email doesnt exist', () => {
+      wrapper.setProps({ email: null });
+      expect(consumer.children({ mobile: false })).toMatchSnapshot();
     });
 
     it('should toggle dropdown on click', () => {

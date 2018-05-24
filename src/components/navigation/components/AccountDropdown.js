@@ -23,7 +23,7 @@ export class AccountDropdown extends Component {
     <WindowSizeContext.Consumer>
       {({ mobile }) => (
         <UnstyledLink className={styles.Email} onClick={this.toggleDropdown}>
-          {mobile ? <Person size={24}/> : <Fragment>{this.props.email} <ArrowDropDown/></Fragment>}
+          {(mobile || !this.props.email) ? <Person size={24}/> : <Fragment>{this.props.email} <ArrowDropDown/></Fragment>}
         </UnstyledLink>
       )}
     </WindowSizeContext.Consumer>

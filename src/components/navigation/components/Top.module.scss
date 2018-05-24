@@ -11,6 +11,10 @@
   background: color(gray, 1);
 
   display: flex;
+
+  :global(.heroku-boomerang-loaded) & {
+    top: 30px;
+  }
 }
 
 .Logo {
@@ -35,8 +39,6 @@
 
 .MobileAccountDropdownWrapper {
   flex: 0 0 0;
-  padding: rem(14) spacing();
-  min-width: rem(80);
 }
 
 .Menu {
