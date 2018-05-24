@@ -11,6 +11,14 @@ Array [
     "to": "/no/children",
   },
   Object {
+    "condition": [Function],
+    "label": "With Nav Condition",
+    "route": Object {
+      "path": "/nav/condition",
+    },
+    "to": "/nav/condition",
+  },
+  Object {
     "label": "No Condition",
     "route": Object {
       "path": "/no/condition",
@@ -29,6 +37,14 @@ Array [
       "path": "/no/children",
     },
     "to": "/no/children",
+  },
+  Object {
+    "condition": [Function],
+    "label": "With Nav Condition",
+    "route": Object {
+      "path": "/nav/condition",
+    },
+    "to": "/nav/condition",
   },
   Object {
     "children": Array [
@@ -85,6 +101,14 @@ Array [
     "to": "/no/children",
   },
   Object {
+    "condition": [Function],
+    "label": "With Nav Condition",
+    "route": Object {
+      "path": "/nav/condition",
+    },
+    "to": "/nav/condition",
+  },
+  Object {
     "label": "No Condition",
     "route": Object {
       "path": "/no/condition",
@@ -105,6 +129,14 @@ Array [
     "to": "/no/children",
   },
   Object {
+    "condition": [Function],
+    "label": "With Nav Condition",
+    "route": Object {
+      "path": "/nav/condition",
+    },
+    "to": "/nav/condition",
+  },
+  Object {
     "label": "No Condition",
     "route": Object {
       "path": "/no/condition",
@@ -116,6 +148,14 @@ Array [
 
 exports[`NavItems Selectors should remove blocked parents and children 1`] = `
 Array [
+  Object {
+    "condition": [Function],
+    "label": "With Nav Condition",
+    "route": Object {
+      "path": "/nav/condition",
+    },
+    "to": "/nav/condition",
+  },
   Object {
     "children": Array [
       Object {
@@ -152,6 +192,60 @@ Array [
 ]
 `;
 
+exports[`NavItems Selectors should remove item if the nav blocks it 1`] = `
+Array [
+  Object {
+    "label": "No Children",
+    "route": Object {
+      "condition": [Function],
+      "path": "/no/children",
+    },
+    "to": "/no/children",
+  },
+  Object {
+    "children": Array [
+      Object {
+        "label": "Child A",
+        "route": Object {
+          "condition": [Function],
+          "path": "/child/a",
+        },
+        "to": "/child/a",
+      },
+      Object {
+        "label": "Child B",
+        "route": Object {
+          "condition": [Function],
+          "path": "/child/b",
+        },
+        "to": "/child/b",
+      },
+      Object {
+        "label": "Child C",
+        "route": Object {
+          "condition": [Function],
+          "path": "/child/c",
+        },
+        "to": "/child/c",
+      },
+    ],
+    "label": "With Children",
+    "route": Object {
+      "condition": [Function],
+      "path": "/with/children",
+    },
+    "to": "/with/children",
+  },
+  Object {
+    "label": "No Condition",
+    "route": Object {
+      "path": "/no/condition",
+    },
+    "to": "/no/condition",
+  },
+]
+`;
+
 exports[`NavItems Selectors should select all nav items if none are blocked 1`] = `
 Array [
   Object {
@@ -161,6 +255,14 @@ Array [
       "path": "/no/children",
     },
     "to": "/no/children",
+  },
+  Object {
+    "condition": [Function],
+    "label": "With Nav Condition",
+    "route": Object {
+      "path": "/nav/condition",
+    },
+    "to": "/nav/condition",
   },
   Object {
     "children": Array [
