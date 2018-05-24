@@ -37,6 +37,7 @@ const TargetField = () => (
     name='target'
     component={TextFieldWrapper}
     validate={[required, url]}
+    normalize={(value = '') => value.trim()}
     label='Target'
     placeholder='https://example.com/webhook-target'
     helpText="This is the URL we'll send data to. We recommend the use of https."
