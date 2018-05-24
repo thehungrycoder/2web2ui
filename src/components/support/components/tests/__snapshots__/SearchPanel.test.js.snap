@@ -16,7 +16,7 @@ exports[`SearchPanel renders search panel 1`] = `
   }
 >
   <Panel.Section>
-    <AlgoliaSearchBox(UnknownComponent) />
+    <AlgoliaSearchBox(AlgoliaSearch) />
   </Panel.Section>
   <Panel.Section
     className="Results"

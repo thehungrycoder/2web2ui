@@ -1,11 +1,41 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Algolia Search component should render 1`] = `
+exports[`Algolia Search component should render and refine with input text 1`] = `
 <TextField
   onChange={[Function]}
   placeholder="Have a question?  Ask or enter a search term here."
   resize="both"
   type="text"
-  value="my text"
+  value="example text"
+/>
+`;
+
+exports[`Algolia Search component should render with empty text field 1`] = `
+<TextField
+  onChange={[Function]}
+  placeholder="Have a question?  Ask or enter a search term here."
+  resize="both"
+  type="text"
+  value=""
+/>
+`;
+
+exports[`Algolia Search component should render with input text 1`] = `
+<TextField
+  onChange={[Function]}
+  placeholder="Have a question?  Ask or enter a search term here."
+  resize="both"
+  type="text"
+  value="example text"
+/>
+`;
+
+exports[`Algolia Search component should render with input text and refine with default refinement 1`] = `
+<TextField
+  onChange={[Function]}
+  placeholder="Have a question?  Ask or enter a search term here."
+  resize="both"
+  type="text"
+  value=" "
 />
 `;
