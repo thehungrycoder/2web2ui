@@ -49,35 +49,33 @@ exports[`AccountDropdown should render correctly 1`] = `
   }
 >
   <ActionList
-    className="AccountList"
-    onClick={[Function]}
-    sections={
+    actions={
       Array [
-        Array [
-          Object {
-            "component": [Function],
-            "content": "link",
-            "external": undefined,
-            "to": "link",
-          },
-          Object {
-            "content": <UNDEFINED>
-              link2
-               
-              <div
-                className="FloatIcon"
-              >
-                <MockIcon
-                  size={15}
-                />
-              </div>
-            </UNDEFINED>,
-            "external": true,
-            "to": "link2",
-          },
-        ],
+        Object {
+          "component": [Function],
+          "content": "link",
+          "external": undefined,
+          "to": "link",
+        },
+        Object {
+          "content": <UNDEFINED>
+            link2
+             
+            <div
+              className="FloatIcon"
+            >
+              <MockIcon
+                size={15}
+              />
+            </div>
+          </UNDEFINED>,
+          "external": true,
+          "to": "link2",
+        },
       ]
     }
+    className="AccountList"
+    onClick={[Function]}
   />
 </Popover>
 `;
