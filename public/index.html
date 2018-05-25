@@ -28,6 +28,40 @@
 
      <!-- Pushes app load failure to Sentry -->
     <script>
+      /**
+       * Returns browser's name
+       * @credit https://jsfiddle.net/311aLtkz/
+       * @returns {*}
+       */
+      function getAgent(){
+        var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+        switch(true){
+          // Opera 8.0+
+          case (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0:
+            return 'Opera';
+
+          // Firefox 1.0+
+          case typeof InstallTrigger !== 'undefined':
+            return 'Firefox';
+
+          case !!window.chrome && !!window.chrome.webstore:
+            return 'Chrome';
+
+          case /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || safari.pushNotification):
+            return 'Safari';
+
+          case isIE:
+            return 'IE';
+
+          case !!window.StyleMedia:
+            return 'Edge';
+
+          default:
+            return ':shrug:';
+        }
+      }
+
       function trackAppLoadError() {
         var key = window.SP.productionConfig.sentry.publicKey;
         var id = window.SP.productionConfig.sentry.projectId;
@@ -35,14 +69,24 @@
         Raven.captureMessage('Unable to load application');
       }
 
+      function reportError(){
+        var agentsToIgnoreError = /IE/i;
+
+        if(agentsToIgnoreError.test(getAgent())){
+          return;
+        }
+
+        var sentry = document.createElement('script');
+        sentry.src = 'https://cdn.ravenjs.com/3.24.0/raven.min.js';
+        sentry.onload = trackAppLoadError;
+        document.body.appendChild(sentry);
+      }
+
       function handleAppLoad() {
         document.getElementById('loading').className += 'ready'; // Kills loading screen
         if (!window.SPARKPOST_LOADED) {
           document.getElementById('error').className += 'show';
-          var sentry = document.createElement('script');
-          sentry.src = 'https://cdn.ravenjs.com/3.24.0/raven.min.js';
-          sentry.onload = trackAppLoadError;
-          document.body.appendChild(sentry);
+          reportError();
         }
       }
 
@@ -83,8 +127,10 @@
         <svg class='logo__icon' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 127.5 260">
           <path class='logo__flame' d="M106.5 101.3c-13.4 10.1-16 28-16.4 40.1C68.8 116.8 129.3 44.6 60.6 0 103.1 55.1 0 109.3 0 190.4c0 31.8 19.9 59.9 63.5 69.6 42.8-9.1 64-37.8 64-69.6 0-47.4-29.5-63.3-21-89.1zM63.6 234c-23.3 0-42.2-18.9-42.2-42.2 0-23.3 18.9-42.2 42.2-42.2 23.3 0 42.2 18.9 42.2 42.2.1 23.3-18.8 42.2-42.2 42.2z"/>
         </svg>
-        <h3>Oh no, SparkPost is having trouble loading.</h3>
-        <p>Please <a id='reloadLink'>try again</a> soon.</p>
+        <p>
+          We're very sorry for the inconvenience.  Please <a id='reloadLink'>try again</a> soon.
+          <br /><small>(Note: If you're visiting from a legacy or uncommon browser, you may want to consider upgrading to latest version or trying another browser.)</small>
+        </p>
         <p>If problems continue, check our <a href='https://status.sparkpost.com'>status page</a> for updates, or reach out on <a href='http://slack.sparkpost.com/'>Slack</a>.</p>
       </div>
       <script type="text/javascript">
