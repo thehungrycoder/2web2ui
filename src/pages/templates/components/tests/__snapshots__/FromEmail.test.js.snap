@@ -35,6 +35,7 @@ exports[`From Email Typeahead should render list 1`] = `
       ]
     }
     className="List open"
+    groupByKey="section"
   />
 </div>
 `;
