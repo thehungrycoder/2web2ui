@@ -39,6 +39,47 @@ exports[`Support renders search panel by default 1`] = `
 </Connect(AccessControl)>
 `;
 
+exports[`Support renders search panel with current page search term 1`] = `
+<Connect(AccessControl)
+  condition={[Function]}
+>
+  <Modal
+    onClose={[MockFunction]}
+    open={true}
+    showCloseButton={true}
+  >
+    <Tabs
+      color="orange"
+      connectBelow={true}
+      selected={0}
+      tabs={
+        Array [
+          Object {
+            "content": "Search Help",
+            "onClick": [Function],
+          },
+          Object {
+            "content": "Submit A Ticket",
+            "onClick": [Function],
+          },
+          Object {
+            "content": "Contact Us",
+            "onClick": [Function],
+          },
+        ]
+      }
+    />
+    <Panel
+      className="Support"
+    >
+      <SearchPanel
+        defaultSearchText="exampleKeyword"
+      />
+    </Panel>
+  </Modal>
+</Connect(AccessControl)>
+`;
+
 exports[`Support renders search panel without tabs 1`] = `
 <Connect(AccessControl)
   condition={[Function]}

@@ -2,6 +2,9 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import { Support } from '../Support';
+import findRouteByPath from 'src/helpers/findRouteByPath';
+
+jest.mock('src/helpers/findRouteByPath');
 
 describe('Support', () => {
   let props;
@@ -43,11 +46,19 @@ describe('Support', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('renders search panel with current page search term', () => {
+    findRouteByPath.mockImplementationOnce(() => ({ keywords: [ 'exampleKeyword' ]}));
+    wrapper.setProps({ currentSupportView: 'docs' });
+
+    expect(wrapper).toMatchSnapshot();
+  });
+
   it('renders search panel without tabs', () => {
     wrapper.setProps({
       authorizedToCallSupport: false,
       authorizedToSubmitSupportTickets: false
     });
+
     expect(wrapper).toMatchSnapshot();
   });
 
