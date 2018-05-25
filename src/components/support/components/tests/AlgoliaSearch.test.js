@@ -4,14 +4,13 @@ import { shallow } from 'enzyme';
 import { AlgoliaSearch } from '../AlgoliaSearch';
 
 describe('Algolia Search component', () => {
-  const defaultRefinement = 'default refinement';
-  const inputText = 'example text';
+  const defaultSearchText = 'default search';
   let props;
   let wrapper;
 
   beforeEach(() => {
     props = {
-      defaultRefinement,
+      defaultSearchText,
       refine: jest.fn()
     };
     wrapper = shallow(<AlgoliaSearch {...props} />);
@@ -21,20 +20,30 @@ describe('Algolia Search component', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should render with input text', () => {
-    wrapper.setState({ text: inputText });
+  it('should refine search on mount wiht default search text', () => {
+    expect(props.refine).toHaveBeenCalledWith(defaultSearchText);
+  });
+
+  it('should render text field with user entered search text', () => {
+    wrapper.find('TextField').simulate('change', { currentTarget: { value: 'example search' }});
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should render and refine with input text', () => {
-    wrapper.find('TextField').simulate('change', { currentTarget: { value: inputText }});
-    expect(props.refine).toHaveBeenCalledWith(inputText);
-    expect(wrapper).toMatchSnapshot();
+  it('should refine search when search text changes', () => {
+    const searchText = 'example search';
+    wrapper.setState({ searchText });
+    expect(props.refine).toHaveBeenCalledWith(searchText);
   });
 
-  it('should render with input text and refine with default refinement', () => {
-    wrapper.find('TextField').simulate('change', { currentTarget: { value: ' ' }});
-    expect(props.refine).toHaveBeenCalledWith(defaultRefinement);
-    expect(wrapper).toMatchSnapshot();
+  it('should refine search with default search text when blank search text is entered', () => {
+    wrapper.setState({ searchText: '  ' });
+    expect(props.refine).toHaveBeenCalledTimes(2);
+    expect(props.refine).toHaveBeenCalledWith(defaultSearchText);
+  });
+
+  it('should refine search when default search text changes', () => {
+    const nextDefaultSearchText = 'new search text';
+    wrapper.setProps({ defaultSearchText: nextDefaultSearchText });
+    expect(props.refine).toHaveBeenCalledWith(nextDefaultSearchText);
   });
 });
