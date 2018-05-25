@@ -1,5 +1,6 @@
 import * as selectors from '../support';
 import * as billingInfo from '../accountBillingInfo';
+import * as accountConditions from 'src/helpers/conditions/account';
 import cases from 'jest-in-case';
 
 jest.mock('../accountBillingInfo', () => ({
@@ -13,6 +14,11 @@ jest.mock('src/config/supportIssues', () => [
 ]);
 
 jest.mock('src/selectors/accessConditionState', () => jest.fn((s) => s));
+
+jest.mock('src/helpers/conditions/account', () => ({
+  hasStatus: jest.fn(),
+  hasOnlineSupport: jest.fn()
+}));
 
 describe('Selectors: support', () => {
   describe('entitled to support', () => {
@@ -78,15 +84,54 @@ describe('Selectors: support', () => {
   });
 
   const testCases = {
-    'return false for deprecated plans': { plan: { status: 'deprecated' }, expected: false },
-    'return false for free plans': { plan: { isFree: true }, expected: false },
-    'return true for paid public plans': { plan: { status: 'public', code: '2.5m-0817' }, expected: true },
-    'return true for paid private': { plan: { status: 'public', code: '2.5m-0817' }, expected: true },
-    'return true for aws plans': { plan: { status: 'public', code: 'aws_basic', type: 'aws' }, expected: true }
+    'return false for deprecated plans': {
+      plan: { status: 'deprecated' },
+      onlineSupport: true,
+      active: () => true,
+      expected: false
+    },
+    'return false for free plans': {
+      plan: { isFree: true },
+      onlineSupport: true,
+      active: () => true,
+      expected: false
+    },
+    'return true for paid public plans': {
+      plan: { status: 'public', code: '2.5m-0817' },
+      onlineSupport: true,
+      active: () => true,
+      expected: true
+    },
+    'return true for paid private': {
+      plan: { status: 'public', code: '2.5m-0817' },
+      onlineSupport: true,
+      active: () => true,
+      expected: true
+    },
+    'return true for aws plans': {
+      plan: { status: 'public', code: 'aws_basic', type: 'aws' },
+      onlineSupport: true,
+      active: () => true,
+      expected: true
+    },
+    'return false if account is not active': {
+      plan: { status: 'public', code: '2.5m-0817' },
+      onlineSupport: true,
+      active: () => false,
+      expected: false
+    },
+    'return false if account does not have online support': {
+      plan: { status: 'public', code: '2.5m-0817' },
+      onlineSupport: false,
+      active: () => true,
+      expected: false
+    }
   };
 
-  cases('allowSendingLimitRequestSelector', ({ plan, expected }) => {
+  cases('allowSendingLimitRequestSelector', ({ plan, expected, onlineSupport, active }) => {
     billingInfo.currentPlanSelector.mockReturnValue(plan);
+    accountConditions.hasOnlineSupport.mockReturnValue(onlineSupport);
+    accountConditions.hasStatus.mockReturnValue(active);
     expect(selectors.allowSendingLimitRequestSelector({ plan })).toBe(expected);
   }, testCases);
 

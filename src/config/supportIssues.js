@@ -10,11 +10,6 @@ const ERRORS = 'Errors';
 const LIMITS = 'DailyLimits';
 const SUPPORT = 'Support';
 
-const isActiveOrSuspendedForBilling = any(
-  isSuspendedForBilling,
-  not(hasStatus('suspended'))
-);
-
 /**
  * @example
  *   {
@@ -39,14 +34,14 @@ const supportIssues = [
     label: 'Technical errors',
     messageLabel: 'Tell us more about your issue',
     type: ERRORS,
-    condition: all(hasOnlineSupport, isActiveOrSuspendedForBilling)
+    condition: all(hasOnlineSupport, hasStatus('active'))
   },
   {
     id: 'general_billing',
     label: 'Billing problems',
     messageLabel: 'Tell us more about your billing issue',
     type: BILLING,
-    condition: all(hasOnlineSupport, isActiveOrSuspendedForBilling)
+    condition: all(isAdmin, any(isSuspendedForBilling, hasStatus('active')))
   },
   {
     id: 'account_suspension',
@@ -60,14 +55,14 @@ const supportIssues = [
     label: 'Daily sending limit increase',
     messageLabel: 'What limit do you need and why?',
     type: LIMITS,
-    condition: all(hasOnlineSupport, isActiveOrSuspendedForBilling)
+    condition: all(hasOnlineSupport, hasStatus('active'))
   },
   {
     id: 'general_issue',
     label: 'Another issue',
     messageLabel: 'Tell us more about your issue',
     type: SUPPORT,
-    condition: all(hasOnlineSupport, isActiveOrSuspendedForBilling)
+    condition: all(hasOnlineSupport, hasStatus('active'))
   },
   {
     id: 'account_cancellation',
