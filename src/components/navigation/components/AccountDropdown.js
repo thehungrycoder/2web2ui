@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import _ from 'lodash';
 import { Link } from 'react-router-dom';
 import { WindowSizeContext } from 'src/context/WindowSize';
 import { selectAccountNavItems } from 'src/selectors/navItems';
@@ -43,12 +42,8 @@ export class AccountDropdown extends Component {
 
       return listItem;
     });
-    // TODO: move this transformation into matchbox ActionList for declarative sectioning
-    // i.e. actions key is treated as sections = sort/group/values ...
-    // if there's just one it will look the same as it does now
-    const sorted = _.sortBy(items, 'section');
-    const sections = _.groupBy(sorted, 'section');
-    return _.values(sections);
+
+    return items;
   }
 
   render() {
@@ -57,7 +52,7 @@ export class AccountDropdown extends Component {
         <ActionList
           className={styles.AccountList}
           onClick={this.toggleDropdown}
-          sections={this.getItems()}
+          actions={this.getItems()}
         />
       </Popover>
     );
