@@ -12,11 +12,11 @@ function formatAggregates(aggregates) {
  * Formats category objects from getBounceClassifications
  */
 function formatCategory(classification) {
-  const { bounce_category_name, bounce_class_name, count_bounce } = classification;
+  const { bounce_category_name, bounce_class_name, count_bounce = 0, count_admin_bounce = 0 } = classification;
   return {
     category: bounce_category_name,
     name: bounce_class_name,
-    count: count_bounce
+    count: count_bounce || count_admin_bounce
   };
 }
 
