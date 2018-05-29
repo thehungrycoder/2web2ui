@@ -52,7 +52,7 @@ class TableCollection extends Component {
         headerComponent={HeaderComponent}
         bodyWrapper={TableBody}
         rowComponent={TableRow}
-        { ...this.props}
+        {...this.props}
         rows={sortedRows}
         sortColumn={sortColumn}
         sortDirection={sortDirection}

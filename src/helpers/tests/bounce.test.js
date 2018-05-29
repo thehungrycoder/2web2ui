@@ -12,19 +12,22 @@ it('Should reshape categories', () => {
       bounce_category_name: 'cat 1',
       bounce_class_name: 1,
       bounce_class_description: 1,
-      count_bounce: 1
+      count_bounce: 1,
+      count_admin_bounce: 0
     },
     {
       bounce_category_name: 'cat 2',
       bounce_class_name: 2,
       bounce_class_description: 2,
-      count_bounce: 2
+      count_bounce: 0,
+      count_admin_bounce: 2
     },
     {
       bounce_category_name: 'cat 2',
       bounce_class_name: 3,
       bounce_class_description: 3,
-      count_bounce: 3
+      count_bounce: 3,
+      count_admin_bounce: 0
     }
   ];
   expect(bounce.reshapeCategories(categories)).toMatchSnapshot();

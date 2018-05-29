@@ -23,25 +23,34 @@ const columns = [
 
 export class BouncePage extends Component {
 
-  componentDidUpdate (prevProps) {
+  componentDidUpdate(prevProps) {
     if (prevProps.reportOptions !== this.props.reportOptions) {
       this.props.refreshBounceReport(this.props.reportOptions);
     }
   }
 
   getRowData = (item) => {
-    const { aggregates = {}, addFilters } = this.props;
-    const { reason, domain, bounce_category_name, bounce_class_name } = item;
+    const { aggregates = {}, addFilters, adminBounces } = this.props;
+    const { reason, domain, bounce_category_name, bounce_class_name, count_bounce, count_admin_bounce } = item;
+    // calculate the rate of admin bounces against all bounces
+    let numerator = count_bounce;
+    let denominator = aggregates.countBounce;
+
+    if (bounce_category_name === 'Admin') {
+      numerator = count_admin_bounce;
+      denominator += adminBounces;
+    }
+
     return [
       <LongTextContainer text={reason} />,
       <UnstyledLink onClick={() => addFilters([{ type: 'Recipient Domain', value: domain }])}>{domain}</UnstyledLink>,
       bounce_category_name,
       bounce_class_name,
-      <span>{item.count_bounce} <small>(<Percent value={(item.count_bounce / aggregates.countBounce) * 100} />)</small></span>
+      <span>{numerator} <small>(<Percent value={safeRate(numerator, denominator)} />)</small></span>
     ];
   };
 
-  renderChart () {
+  renderChart() {
     const { chartLoading, aggregates, categories, types } = this.props;
     if (!chartLoading && _.isEmpty(aggregates)) {
       return <Empty title='Bounce Rates' message='No bounces to report' />;
@@ -55,7 +64,7 @@ export class BouncePage extends Component {
     />;
   }
 
-  renderCollection () {
+  renderCollection() {
     const { tableLoading, reasons } = this.props;
 
     if (tableLoading) {
@@ -86,7 +95,7 @@ export class BouncePage extends Component {
     />;
   }
 
-  renderTopLevelMetrics () {
+  renderTopLevelMetrics() {
     const { chartLoading, aggregates, adminBounces } = this.props;
     const { countBounce, countSent } = aggregates;
 
@@ -115,7 +124,7 @@ export class BouncePage extends Component {
     );
   }
 
-  render () {
+  render() {
     const { chartLoading, bounceSearchOptions } = this.props;
 
     return (

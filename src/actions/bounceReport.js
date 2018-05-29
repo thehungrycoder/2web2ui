@@ -11,16 +11,16 @@ export function refreshBounceReport (updates = {}) {
         type: 'GET_BOUNCE_REPORT_AGGREGATES',
         params: {
           ...params,
-          metrics: 'count_sent,count_bounce,count_inband_bounce,count_outofband_bounce'
+          metrics: 'count_sent,count_bounce,count_inband_bounce,count_outofband_bounce,count_admin_bounce'
         }
       })),
       dispatch(fetchBounceClassifications({
         ...params,
-        metrics: 'count_bounce'
+        metrics: 'count_bounce,count_admin_bounce'
       })),
       dispatch(fetchBounceReasonsByDomain({
         ...params,
-        metrics: 'count_bounce'
+        metrics: 'count_bounce,count_admin_bounce'
       }))
     ]);
   };

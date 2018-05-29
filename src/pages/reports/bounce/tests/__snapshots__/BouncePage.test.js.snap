@@ -275,6 +275,32 @@ exports[`BouncePage:  should render correctly with no bounces 1`] = `
 </Page>
 `;
 
+exports[`BouncePage:  should render row data for admin bounce properly 1`] = `
+Array [
+  <LongTextContainer
+    text="bouncy boi"
+  />,
+  <UnstyledLink
+    onClick={[Function]}
+  >
+    gmail
+  </UnstyledLink>,
+  "Admin",
+  undefined,
+  <span>
+    5
+     
+    <small>
+      (
+      <Percent
+        value={83.33333333333334}
+      />
+      )
+    </small>
+  </span>,
+]
+`;
+
 exports[`BouncePage:  should render row data properly 1`] = `
 Array [
   <LongTextContainer
