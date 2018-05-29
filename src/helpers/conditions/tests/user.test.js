@@ -1,4 +1,4 @@
-import { isAdmin, isHeroku, isAzure, isSso } from '../user';
+import { isAdmin, isHeroku, isAzure, isSso, hasRole } from '../user';
 
 describe('User Condition Tests', () => {
   it('should return true if user is heroku', () => {
@@ -26,6 +26,11 @@ describe('User Condition Tests', () => {
     expect(isAdmin({ currentUser })).toEqual(true);
   });
 
+  it('should return true if user is a superadmin', () => {
+    const currentUser = { access_level: 'superadmin' };
+    expect(isAdmin({ currentUser })).toEqual(true);
+  });
+
   it('should return false if user is not an admin', () => {
     const currentUser = { access_level: 'reporting' };
     expect(isAdmin({ currentUser })).toEqual(false);
@@ -39,5 +44,15 @@ describe('User Condition Tests', () => {
   it('should return false if user is sso', () => {
     const currentUser = { is_sso: false };
     expect(isSso({ currentUser })).toEqual(false);
+  });
+
+  it('should return true if access level matches', () => {
+    const currentUser = { access_level: 'admin' };
+    expect(hasRole('admin')({ currentUser })).toEqual(true);
+  });
+
+  it('should return true if access level does not match', () => {
+    const currentUser = { access_level: 'reporting' };
+    expect(hasRole('admin')({ currentUser })).toEqual(false);
   });
 });
