@@ -1,7 +1,13 @@
+import { any } from 'src/helpers/conditions';
+
 export const isHeroku = ({ currentUser }) => currentUser.access_level === 'heroku';
 
 export const isAzure = ({ currentUser }) => currentUser.access_level === 'azure';
 
-export const isAdmin = ({ currentUser }) => currentUser.access_level === 'admin';
+export const hasRole = (role) => ({ currentUser }) => currentUser.access_level === role;
+
+export const isAdmin = any(hasRole('admin'), hasRole('superadmin'));
 
 export const isSso = ({ currentUser }) => currentUser.is_sso;
+
+export const isVerified = ({ currentUser }) => currentUser.email_verified;

@@ -5,7 +5,11 @@ import { verifyEmail } from 'src/actions/currentUser';
 import { showAlert } from 'src/actions/globalAlert';
 import { openSupportTicketForm } from 'src/actions/support';
 import { PageLink } from 'src/components';
-import { allowSendingLimitRequestSelector } from 'src/selectors/support';
+import ConditionSwitch, { Case } from 'src/components/auth/ConditionSwitch';
+import { AccessControl } from 'src/components/auth';
+import { isAdmin, isVerified } from 'src/helpers/conditions/user';
+import { hasOnlineSupport, hasStatus } from 'src/helpers/conditions/account';
+import { not } from 'src/helpers/conditions';
 import { LINKS } from 'src/constants';
 
 export class SendMoreCTA extends Component {
@@ -19,7 +23,11 @@ export class SendMoreCTA extends Component {
       }));
   }
 
-  renderVerifyEmailCTA () {
+  toggleSupportForm = () => {
+    this.props.openSupportTicketForm({ issueId: 'daily_limits' });
+  }
+
+  renderVerifyEmailCTA() {
     const { verifyingEmail } = this.props;
 
     const resendVerificationLink = <UnstyledLink
@@ -30,15 +38,11 @@ export class SendMoreCTA extends Component {
     return verifyingEmail ? <span>Resending a verification email... </span> : resendVerificationLink;
   }
 
-  renderUpgradeCTA () {
+  renderUpgradeCTA() {
     return <PageLink to="/account/billing">Upgrade your account.</PageLink>;
   }
 
-  toggleSupportForm = () => {
-    this.props.openSupportTicketForm({ issueId: 'daily_limits' });
-  }
-
-  renderSupportTicketCTA () {
+  renderSupportTicketCTA() {
     return (
       <Fragment>
         <UnstyledLink onClick={this.toggleSupportForm}>Submit a request</UnstyledLink> to increase your daily sending limit.
@@ -46,27 +50,27 @@ export class SendMoreCTA extends Component {
     );
   }
 
-  render () {
-    const { currentUser: { email_verified: emailVerified }, allowSendingLimitRequest } = this.props;
-
+  render() {
     return (
-      <p>
-        Need to send more?
-        {' '}
-        {!emailVerified && this.renderVerifyEmailCTA()}
-        {emailVerified && !allowSendingLimitRequest && this.renderUpgradeCTA()}
-        {emailVerified && allowSendingLimitRequest && this.renderSupportTicketCTA()}
-        {' '}
-        <UnstyledLink to={LINKS.DAILY_MONTHLY_QUOTA_LIMIT_DOC} external>Learn more about these limits.</UnstyledLink>
-      </p>
+      <AccessControl condition={isAdmin}>
+        <p>
+          Need to send more?
+          {' '}
+          <ConditionSwitch>
+            <Case condition={not(isVerified)} children={this.renderVerifyEmailCTA()}/>
+            <Case condition={not(hasOnlineSupport)} children={this.renderUpgradeCTA()}/>
+            <Case condition={hasStatus('active')} children={this.renderSupportTicketCTA()}/>
+          </ConditionSwitch>
+          {' '}
+          <UnstyledLink to={LINKS.DAILY_MONTHLY_QUOTA_LIMIT_DOC} external>Learn more about these limits.</UnstyledLink>
+        </p>
+      </AccessControl>
     );
   }
 }
 
 const mapStateToProps = (state) => ({
-  currentUser: state.currentUser,
-  verifyingEmail: state.currentUser.verifyingEmail,
-  allowSendingLimitRequest: allowSendingLimitRequestSelector(state)
+  verifyingEmail: state.currentUser.verifyingEmail
 });
 const mapDispatchToProps = {
   verifyEmail, showAlert, openSupportTicketForm
