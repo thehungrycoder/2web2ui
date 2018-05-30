@@ -16,8 +16,8 @@ const SortLabel = ({ label, direction, ...rest }) => {
   return (
     <UnstyledLink className={classes} {...rest}>
       <span>{label}</span>
-      <ArrowDropUp className={styles.Up}/>
-      <ArrowDropDown className={styles.Down}/>
+      <span className={styles.Up}><ArrowDropUp /></span>
+      <span className={styles.Down}><ArrowDropDown /></span>
     </UnstyledLink>
   );
 };
