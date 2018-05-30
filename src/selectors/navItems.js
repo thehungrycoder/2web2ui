@@ -2,7 +2,9 @@ import { createSelector } from 'reselect';
 import _ from 'lodash';
 import routes from 'src/config/routes';
 import navItems from 'src/config/navItems';
-import accessConditionState from './accessConditionState';
+import accountNavItems from 'src/config/accountNavItems';
+import selectAccessConditionState from './accessConditionState';
+import { all } from 'src/helpers/conditions/compose';
 
 export const mapNavToRoutes = _.memoize((items) => {
   const routesByPath = _.keyBy(routes, 'path');
@@ -17,8 +19,10 @@ export const mapNavToRoutes = _.memoize((items) => {
 
 export function filterNavByAccess(items, accessConditionState) {
   const firstLevelFiltered = items.filter((item) => {
-    const condition = _.get(item, 'route.condition', () => true);
-    return condition(accessConditionState);
+    const allowed = () => true;
+    const navCondition = _.get(item, 'condition', allowed);
+    const routeCondition = _.get(item, 'route.condition', () => true);
+    return all(navCondition, routeCondition)(accessConditionState);
   });
 
   const childrenFiltered = firstLevelFiltered.map((item) => {
@@ -31,12 +35,17 @@ export function filterNavByAccess(items, accessConditionState) {
   return childrenFiltered.filter((item) => !item.children || item.children.length);
 }
 
-export function prepareNavItems(accessConditionState) {
-  const mapped = mapNavToRoutes(navItems);
+export function prepareNavItems(items, accessConditionState) {
+  const mapped = mapNavToRoutes(items);
   return filterNavByAccess(mapped, accessConditionState);
 }
 
-export default createSelector(
-  [accessConditionState],
-  prepareNavItems
+export const selectNavItems = createSelector(
+  [selectAccessConditionState],
+  (accessConditionState) => prepareNavItems(navItems, accessConditionState)
+);
+
+export const selectAccountNavItems = createSelector(
+  [selectAccessConditionState],
+  (accessConditionState) => prepareNavItems(accountNavItems, accessConditionState)
 );

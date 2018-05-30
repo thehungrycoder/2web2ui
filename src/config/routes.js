@@ -26,6 +26,7 @@ import {
 } from 'src/pages';
 
 import NotificationTestPage from 'src/pages/NotificationTestPage';
+import LogoutPage from 'src/pages/logout/LogoutPage';
 
 import onboarding from 'src/pages/onboarding';
 import { default as emailVerification } from 'src/components/emailVerification/EmailVerification';
@@ -36,7 +37,6 @@ import { hasGrants, all, not } from 'src/helpers/conditions';
 import { isEnterprise, isAws } from 'src/helpers/conditions/account';
 import { isHeroku, isAzure } from 'src/helpers/conditions/user';
 import { configFlag, configEquals } from 'src/helpers/conditions/config';
-
 
 import App from 'src/components/layout/App';
 
@@ -523,6 +523,11 @@ const routes = [
     path: '/notifications',
     component: NotificationTestPage,
     title: 'Notification Test Page'
+  },
+  {
+    path: '/logout',
+    component: LogoutPage,
+    title: 'Logging out...'
   }
 ];
 

@@ -23,13 +23,22 @@ jest.mock('src/config/routes', () => ([
   },
   {
     path: '/no/condition'
+  },
+  {
+    path: '/nav/condition'
   }
 ]));
 
-jest.mock('src/config/navItems', () => ([
+
+const mockItems = [
   {
     label: 'No Children',
     to: '/no/children'
+  },
+  {
+    label: 'With Nav Condition',
+    to: '/nav/condition',
+    condition: ({ blocked = []}) => !blocked.includes('/nav/condition')
   },
   {
     label: 'With Children',
@@ -53,7 +62,9 @@ jest.mock('src/config/navItems', () => ([
     label: 'No Condition',
     to: '/no/condition'
   }
-]));
+];
+
+// jest.mock('src/config/navItems', () => mockItems);
 
 describe('NavItems Selectors', () => {
   let store;
@@ -65,9 +76,9 @@ describe('NavItems Selectors', () => {
   });
 
   it('should select all nav items if none are blocked', () => {
-    const selected = prepareNavItems(store);
-    expect(selected).toHaveLength(3);
-    expect(selected[1].children).toHaveLength(3);
+    const selected = prepareNavItems(mockItems, store);
+    expect(selected).toHaveLength(4);
+    expect(selected[2].children).toHaveLength(3);
     expect(selected).toMatchSnapshot();
   });
 
@@ -75,9 +86,9 @@ describe('NavItems Selectors', () => {
     store.blocked.push('/no/children');
     store.blocked.push('/child/b');
 
-    const selected = prepareNavItems(store);
-    expect(selected).toHaveLength(2);
-    expect(selected[0].children).toHaveLength(2);
+    const selected = prepareNavItems(mockItems, store);
+    expect(selected).toHaveLength(3);
+    expect(selected[1].children).toHaveLength(2);
     expect(selected).toMatchSnapshot();
   });
 
@@ -86,16 +97,16 @@ describe('NavItems Selectors', () => {
     store.blocked.push('/child/b');
     store.blocked.push('/child/c');
 
-    const selected = prepareNavItems(store);
-    expect(selected).toHaveLength(2);
+    const selected = prepareNavItems(mockItems, store);
+    expect(selected).toHaveLength(3);
     expect(selected).toMatchSnapshot();
   });
 
   it('should remove a parent and all of its children if parent is blocked', () => {
     store.blocked.push('/with/children');
 
-    const selected = prepareNavItems(store);
-    expect(selected).toHaveLength(2);
+    const selected = prepareNavItems(mockItems, store);
+    expect(selected).toHaveLength(3);
     expect(selected).toMatchSnapshot();
   });
 
@@ -104,15 +115,23 @@ describe('NavItems Selectors', () => {
     store.blocked.push('/child/b');
     store.blocked.push('/child/c');
 
-    const selected1 = prepareNavItems(store);
-    expect(selected1).toHaveLength(2);
+    const selected1 = prepareNavItems(mockItems, store);
+    expect(selected1).toHaveLength(3);
     expect(selected1).toMatchSnapshot();
 
     store.blocked = [];
-    const selected2 = prepareNavItems(store);
-    expect(selected2).toHaveLength(3);
-    expect(selected2[1].children).toHaveLength(3);
+    const selected2 = prepareNavItems(mockItems, store);
+    expect(selected2).toHaveLength(4);
+    expect(selected2[2].children).toHaveLength(3);
     expect(selected2).toMatchSnapshot();
+  });
+
+  it('should remove item if the nav blocks it', () => {
+    store.blocked.push('/nav/condition');
+
+    const selected = prepareNavItems(mockItems, store);
+    expect(selected).toHaveLength(3);
+    expect(selected).toMatchSnapshot();
   });
 
 });

@@ -75,7 +75,7 @@ describe('Component: AuthenticationGate', () => {
     it('should redirect to auth on logout', () => {
       wrapper.setProps({ location: { pathname: '/report/summary' }, auth: { loggedIn: false }});
       wrapper.instance().componentDidUpdate({ account: {}, auth: { loggedIn: true }});
-      expect(wrapper.instance().props.history.push).toHaveBeenCalledWith('/auth');
+      expect(wrapper.instance().props.history.push).toHaveBeenCalledWith({ pathname: '/auth', state: {}});
     });
 
     it('should do nothing you aren\'t on auth and logged in', () => {

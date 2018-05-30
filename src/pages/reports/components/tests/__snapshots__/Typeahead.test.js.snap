@@ -63,6 +63,7 @@ exports[`Component: Typeahead should render with matches 1`] = `
           },
         ]
       }
+      groupByKey="section"
     />
   </div>
   <TextField

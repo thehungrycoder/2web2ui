@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WindowSize Provider should render children and window event 1`] = `
+Array [
+  <WindowEvent
+    event="resize"
+    handler={[Function]}
+  />,
+  "child",
+]
+`;

@@ -1,26 +1,24 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Component: App Layout should render correctly 1`] = `
-<div
-  className="wrapper app accent"
->
+<WindowSize>
   <div
-    className="aside"
+    className="wrapper app"
   >
     <withRouter(Connect(Navigation)) />
-  </div>
-  <main
-    className="content"
-    role="main"
-  >
-    <div
-      className="container"
+    <main
+      className="content"
+      role="main"
     >
-      <h1>
-        My cool af children
-      </h1>
-    </div>
-  </main>
-  <ScrollToTop />
-</div>
+      <div
+        className="container"
+      >
+        <h1>
+          My cool af children
+        </h1>
+      </div>
+    </main>
+    <ScrollToTop />
+  </div>
+</WindowSize>
 `;

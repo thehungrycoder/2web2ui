@@ -8,8 +8,9 @@ import { logout } from 'src/actions/auth';
 import { AUTH_ROUTE, SSO_AUTH_ROUTE } from 'src/constants';
 
 export class AuthenticationGate extends Component {
-  componentWillMount () {
+  componentWillMount() {
     const { auth } = this.props;
+
     if (auth.loggedIn && auth.token) {
       return;
     }
@@ -21,11 +22,15 @@ export class AuthenticationGate extends Component {
     }
   }
 
-  componentDidUpdate (oldProps) {
+  componentDidUpdate(oldProps) {
     const { account, auth, history, location = {}, logout } = this.props;
+
     // if logging out
     if (![AUTH_ROUTE, SSO_AUTH_ROUTE].includes(location.pathname) && oldProps.auth.loggedIn && !auth.loggedIn) {
-      history.push(AUTH_ROUTE);
+      history.push({
+        pathname: AUTH_ROUTE,
+        state: {} // explicitly clear router state on log out
+      });
     }
 
     if (oldProps.account.status !== 'terminated' && account.status === 'terminated') {
@@ -33,7 +38,7 @@ export class AuthenticationGate extends Component {
     }
   }
 
-  render () {
+  render() {
     return null;
   }
 }

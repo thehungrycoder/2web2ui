@@ -24,3 +24,13 @@
     fill: color(gray, 10);
   }
 }
+
+.halfWhite {
+  .Base {
+    fill: color(gray, 10);
+  }
+
+  .Flame {
+    fill: color(orange);
+  }
+}

@@ -4,7 +4,7 @@ import styles from './SparkPost.module.scss';
 
 /* SparkPost.Logo: Full SparkPost logo
  * SparkPost.Icon: Just the flame
- * type: 'muted' | 'white'
+ * type: 'muted' | 'white' | 'halfWhite'
  */
 
 const Logo = ({ type, ...rest }) => (

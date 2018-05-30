@@ -2,19 +2,16 @@
 
 .Wrapper {
   position: fixed;
-  top: rem(90);
+  top: rem(75);
   right: spacing();
 
   z-index: z-index(overlay);
   text-align: right;
   overflow: hidden;
-
-  @media screen and (min-width: breakpoint(medium)) {
-    top: spacing();
-  }
+  pointer-events: none;
 
   :global(.heroku-boomerang-loaded) & {
-    top: spacing() * 3;
+    top: rem(60) + spacing() * 3;
   }
 }
 
@@ -23,6 +20,7 @@
   padding-bottom: spacing();
 
   & > * {
+    pointer-events: auto;
     text-align: left;
   }
 }
