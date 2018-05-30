@@ -8,11 +8,15 @@ exports[`Collection SortLabel Component should render correctly 1`] = `
   <span>
     Table Header Label
   </span>
-  <ArrowDropUp
+  <span
     className="Up"
-  />
-  <ArrowDropDown
+  >
+    <ArrowDropUp />
+  </span>
+  <span
     className="Down"
-  />
+  >
+    <ArrowDropDown />
+  </span>
 </UnstyledLink>
 `;
