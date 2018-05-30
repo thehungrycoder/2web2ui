@@ -75,6 +75,7 @@ exports[`AccountDropdown should render correctly 1`] = `
       ]
     }
     className="AccountList"
+    groupByKey="section"
     onClick={[Function]}
   />
 </Popover>
