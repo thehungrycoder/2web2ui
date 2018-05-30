@@ -55,7 +55,7 @@ const supportIssues = [
     label: 'Daily sending limit increase',
     messageLabel: 'What limit do you need and why?',
     type: LIMITS,
-    condition: all(hasOnlineSupport, hasStatus('active'))
+    condition: all(hasOnlineSupport, isAdmin, hasStatus('active'))
   },
   {
     id: 'general_issue',
