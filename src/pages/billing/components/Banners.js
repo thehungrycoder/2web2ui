@@ -59,7 +59,7 @@ export const ManuallyBilledBanner = ({ account, ...rest }) => {
         </p>
       ) : (
         <p>
-          To make changes to your plan, billing information, or addons, {
+          To make changes to your plan, billing information, or addons, please {
             <SupportTicketLink issueId="general_issue">submit a support ticket</SupportTicketLink>
           }.
         </p>

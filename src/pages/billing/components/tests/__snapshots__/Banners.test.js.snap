@@ -62,7 +62,7 @@ exports[`Billing Banners:  ManuallyBilledBanner should render with subscription 
   title="Your current whoa plan includes 123 emails per month"
 >
   <p>
-    To make changes to your plan, billing information, or addons, 
+    To make changes to your plan, billing information, or addons, please 
     <Connect(SupportTicketLink)
       issueId="general_issue"
     >
