@@ -26,8 +26,8 @@ describe('User Condition Tests', () => {
     expect(isAdmin({ currentUser })).toEqual(true);
   });
 
-  it('should return true if user is a superadmin', () => {
-    const currentUser = { access_level: 'superadmin' };
+  it('should return true if user is a superuser', () => {
+    const currentUser = { access_level: 'superuser' };
     expect(isAdmin({ currentUser })).toEqual(true);
   });
 

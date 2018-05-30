@@ -7,7 +7,7 @@ import { openSupportTicketForm } from 'src/actions/support';
 import { PageLink } from 'src/components';
 import ConditionSwitch, { Case } from 'src/components/auth/ConditionSwitch';
 import { AccessControl } from 'src/components/auth';
-import { isAdmin, isVerified } from 'src/helpers/conditions/user';
+import { isAdmin, isEmailVerified } from 'src/helpers/conditions/user';
 import { hasOnlineSupport, hasStatus } from 'src/helpers/conditions/account';
 import { not } from 'src/helpers/conditions';
 import { LINKS } from 'src/constants';
@@ -57,7 +57,7 @@ export class SendMoreCTA extends Component {
           Need to send more?
           {' '}
           <ConditionSwitch>
-            <Case condition={not(isVerified)} children={this.renderVerifyEmailCTA()}/>
+            <Case condition={not(isEmailVerified)} children={this.renderVerifyEmailCTA()}/>
             <Case condition={not(hasOnlineSupport)} children={this.renderUpgradeCTA()}/>
             <Case condition={hasStatus('active')} children={this.renderSupportTicketCTA()}/>
           </ConditionSwitch>
