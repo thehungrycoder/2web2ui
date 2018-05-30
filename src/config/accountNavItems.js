@@ -40,7 +40,7 @@ export default [
     section: 1
   },
   {
-    label: 'API Documentation',
+    label: 'Help and API Docs',
     external: true,
     to: LINKS.DOCS,
     icon: OpenInNew,
