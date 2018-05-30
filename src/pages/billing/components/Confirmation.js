@@ -63,7 +63,7 @@ export class Confirmation extends React.Component {
             <p>If you downgrade to the selected plan, you will lose that discount and will be charged the standard
               ${config.sendingIps.pricePerIp} / month price for each dedicated IP on your next statement.</p>
             <p>
-              To remove dedicated IPs from your account, {
+              To remove dedicated IPs from your account, please {
                 <SupportTicketLink issueId="general_issue">
                   submit a support ticket
                 </SupportTicketLink>
