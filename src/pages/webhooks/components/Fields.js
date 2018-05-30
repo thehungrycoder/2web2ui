@@ -1,6 +1,6 @@
 import React from 'react';
 import { Field } from 'redux-form';
-import { required, maxLength } from 'src/helpers/validation';
+import { required, maxLength, url } from 'src/helpers/validation';
 import { TextFieldWrapper, SelectWrapper, RadioGroup, CheckboxWrapper } from 'src/components';
 import { UnstyledLink } from '@sparkpost/matchbox';
 
@@ -36,7 +36,8 @@ const TargetField = () => (
   <Field
     name='target'
     component={TextFieldWrapper}
-    validate={required}
+    validate={[required, url]}
+    normalize={(value = '') => value.trim()}
     label='Target'
     placeholder='https://example.com/webhook-target'
     helpText="This is the URL we'll send data to. We recommend the use of https."

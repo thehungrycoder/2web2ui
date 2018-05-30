@@ -135,7 +135,13 @@ exports[`should render TargetField 1`] = `
   helpText="This is the URL we'll send data to. We recommend the use of https."
   label="Target"
   name="target"
+  normalize={[Function]}
   placeholder="https://example.com/webhook-target"
-  validate={[Function]}
+  validate={
+    Array [
+      [Function],
+      [Function],
+    ]
+  }
 />
 `;
