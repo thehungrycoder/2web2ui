@@ -16,7 +16,7 @@ export default function SuspendedForBilling({ account }) {
         </p>
         <p>
           If this is incorrect, please {
-            <SupportTicketLink issueId="account_suspension">
+            <SupportTicketLink issueId="general_billing">
               submit a support ticket
             </SupportTicketLink>
           } and let us know why.
