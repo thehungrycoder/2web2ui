@@ -104,3 +104,13 @@ describe('Memoized validation helpers', () => {
     });
   });
 });
+
+describe('URL Validation', () => {
+  it('returns undefined for valid url', () => {
+    expect(validations.url('http://yahoo.com')).toBeUndefined();
+  });
+
+  it('returns error for invalid url',() => {
+    expect(validations.url('http://  google.com')).toEqual('Must be a valid URL');
+  });
+});
