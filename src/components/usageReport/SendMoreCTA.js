@@ -8,7 +8,8 @@ import { PageLink } from 'src/components';
 import ConditionSwitch, { Case } from 'src/components/auth/ConditionSwitch';
 import { AccessControl } from 'src/components/auth';
 import { isAdmin, isEmailVerified } from 'src/helpers/conditions/user';
-import { hasOnlineSupport, hasStatus } from 'src/helpers/conditions/account';
+import { hasOnlineSupport, hasStatus, isSelfServeBilling } from 'src/helpers/conditions/account';
+import { all } from 'src/helpers/conditions/compose';
 import { not } from 'src/helpers/conditions';
 import { LINKS } from 'src/constants';
 
@@ -57,9 +58,16 @@ export class SendMoreCTA extends Component {
           Need to send more?
           {' '}
           <ConditionSwitch>
-            <Case condition={not(isEmailVerified)} children={this.renderVerifyEmailCTA()}/>
-            <Case condition={not(hasOnlineSupport)} children={this.renderUpgradeCTA()}/>
-            <Case condition={hasStatus('active')} children={this.renderSupportTicketCTA()}/>
+
+            {/* email isn't verified */}
+            <Case condition={not(isEmailVerified)} children={this.renderVerifyEmailCTA()} />
+
+            {/* is self serve billing and doesn't have online support */}
+            <Case condition={all(isSelfServeBilling, not(hasOnlineSupport))} children={this.renderUpgradeCTA()} />
+
+            {/* has online support and is active account status */}
+            <Case condition={all(hasOnlineSupport, hasStatus('active'))} children={this.renderSupportTicketCTA()} />
+
           </ConditionSwitch>
           {' '}
           <UnstyledLink to={LINKS.DAILY_MONTHLY_QUOTA_LIMIT_DOC} external>Learn more about these limits.</UnstyledLink>
