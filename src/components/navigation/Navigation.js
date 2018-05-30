@@ -1,13 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import classnames from 'classnames';
-
-import { SparkPost } from 'src/components';
-import Item from './Item';
-import Footer from './Footer';
-import selectNavItems from 'src/selectors/navItems';
-import { Close } from '@sparkpost/matchbox-icons';
+import Item from './components/Item';
+import Top from './components/Top';
+import { WindowSizeContext } from 'src/context/WindowSize';
+import { selectNavItems } from 'src/selectors/navItems';
 import styles from './Navigation.module.scss';
 
 export class Navigation extends Component {
@@ -15,55 +13,41 @@ export class Navigation extends Component {
     open: false
   };
 
-  renderItems(items) {
+  renderItems() {
     return this.props.navItems.map((item, key) => (
-      <Item {...item} location={this.props.location} key={key} />
+      <Item {...item} toggleMobileNav={this.toggleMobileNav} location={this.props.location} key={key} />
     ));
   }
 
-  handleClick = () => {
+  toggleMobileNav = () => {
     this.setState({ open: !this.state.open });
   }
 
-  render() {
-    const navClasses = classnames(
-      styles.navigation,
-      this.state.open && styles.showNav
-    );
-
-    const overlayClasses = classnames(
-      styles.overlay,
-      this.state.open && styles.showOverlay
-    );
+  renderNav = ({ mobile }) => {
+    const asideClasses = classnames(styles.Aside, mobile && styles.mobile);
+    const listClasses = classnames(styles.List, mobile && styles.mobile);
+    const navClasses = classnames(styles.Navigation, mobile && styles.mobile, this.state.open && styles.show);
+    const overlayClasses = classnames(styles.Overlay, this.state.open && styles.show);
 
     return (
-      <div>
-        <div
-          className={overlayClasses}
-          onClick={this.handleClick} />
-
-        <nav className={navClasses}>
-          <div className={styles.wrapper}>
-            <ul className={styles.list}>
-              <div className={styles.logo}><SparkPost.Logo type='white' /></div>
-              {this.renderItems()}
-            </ul>
-            <Footer />
-          </div>
-          <Close
-            className={styles.close}
-            size={33}
-            onClick={this.handleClick} />
-        </nav>
-
-        <nav className={styles.bar}>
-          <div className={styles.mobileLogo}><SparkPost.Logo type='white' /></div>
-          <a className={styles.open} onClick={this.handleClick}>
-            <span className={styles.hamburger} />
-          </a>
-        </nav>
-      </div>
+      <Fragment>
+        {mobile && <div className={overlayClasses} onClick={this.toggleMobileNav}/>}
+        <Top toggleMobileNav={this.toggleMobileNav} open={this.state.open} />
+        <div className={asideClasses}>
+          <nav className={navClasses}>
+            <div className={styles.Wrapper}>
+              <ul className={listClasses}>
+                {this.renderItems()}
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </Fragment>
     );
+  }
+
+  render() {
+    return <WindowSizeContext.Consumer children={this.renderNav} />;
   }
 }
 

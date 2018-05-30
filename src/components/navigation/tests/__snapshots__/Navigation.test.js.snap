@@ -1,66 +1,89 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Navigation Navigation tests should render full nav 1`] = `
-<div>
+exports[`Navigation should render on desktop 1`] = `
+<React.Fragment>
+  <Top
+    open={false}
+    toggleMobileNav={[Function]}
+  />
   <div
-    className="overlay"
+    className="Aside"
+  >
+    <nav
+      className="Navigation"
+    >
+      <div
+        className="Wrapper"
+      >
+        <ul
+          className="List"
+        >
+          <Item
+            key="0"
+            location="/foo/bar"
+            toggleMobileNav={[Function]}
+          />
+          <Item
+            key="1"
+            location="/foo/bar"
+            toggleMobileNav={[Function]}
+          />
+          <Item
+            key="2"
+            location="/foo/bar"
+            toggleMobileNav={[Function]}
+          />
+        </ul>
+      </div>
+    </nav>
+  </div>
+</React.Fragment>
+`;
+
+exports[`Navigation should render on mobile 1`] = `
+<React.Fragment>
+  <div
+    className="Overlay"
     onClick={[Function]}
   />
-  <nav
-    className="navigation"
+  <Top
+    open={false}
+    toggleMobileNav={[Function]}
+  />
+  <div
+    className="Aside mobile"
   >
-    <div
-      className="wrapper"
+    <nav
+      className="Navigation mobile"
     >
-      <ul
-        className="list"
+      <div
+        className="Wrapper"
       >
-        <div
-          className="logo"
+        <ul
+          className="List mobile"
         >
-          <Logo
-            type="white"
+          <Item
+            key="0"
+            location="/foo/bar"
+            toggleMobileNav={[Function]}
           />
-        </div>
-        <Item
-          key="0"
-          location="/foo/bar"
-        />
-        <Item
-          key="1"
-          location="/foo/bar"
-        />
-        <Item
-          key="2"
-          location="/foo/bar"
-        />
-      </ul>
-      <Connect(Footer) />
-    </div>
-    <Close
-      className="close"
-      onClick={[Function]}
-      size={33}
-    />
-  </nav>
-  <nav
-    className="bar"
-  >
-    <div
-      className="mobileLogo"
-    >
-      <Logo
-        type="white"
-      />
-    </div>
-    <a
-      className="open"
-      onClick={[Function]}
-    >
-      <span
-        className="hamburger"
-      />
-    </a>
-  </nav>
-</div>
+          <Item
+            key="1"
+            location="/foo/bar"
+            toggleMobileNav={[Function]}
+          />
+          <Item
+            key="2"
+            location="/foo/bar"
+            toggleMobileNav={[Function]}
+          />
+        </ul>
+      </div>
+    </nav>
+  </div>
+</React.Fragment>
 `;
+
+exports[`Navigation should render on mobile and open 1`] = `"Navigation mobile show"`;
+
+exports[`Navigation should toggle menu when clicking overlay 1`] = `"Navigation mobile"`;

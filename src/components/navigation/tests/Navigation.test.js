@@ -1,62 +1,41 @@
 import React from 'react';
 import { Navigation } from '../Navigation';
-import { shallow } from 'enzyme';
+import context from 'src/__testHelpers__/context';
 
 describe('Navigation', () => {
+  let props;
 
-  describe('Navigation tests', () => {
-    let props;
-    let wrapper;
-    let stateSpy;
-
-    beforeEach(() => {
-      props = {
-        location: '/foo/bar',
-        navItems: [
-          {
-            key: 'value'
-          },
-          {
-            key: 'value2'
-          },
-          {
-            key: 'value3'
-
-          }
-        ]
-      };
-
-      wrapper = shallow(<Navigation {...props} />);
-      stateSpy = jest.spyOn(wrapper.instance(), 'setState');
-    });
-
-    it('should render full nav', () => {
-      expect(wrapper).toMatchSnapshot();
-    });
-
-    it('should open when clicking div', () => {
-      wrapper.find('div').at('1').simulate('click');
-      expect(stateSpy).toHaveBeenCalledWith({ open: true });
-    });
-
-    it('should open nav when clicking hamburger', () => {
-      wrapper.find('a').simulate('click');
-      expect(stateSpy).toHaveBeenCalledWith({ open: true });
-    });
-
-    it('should close nav when clicking x', () => {
-      wrapper.find('Close').simulate('click');
-      expect(stateSpy).toHaveBeenCalledWith({ open: true });
-    });
-
-    it('should toggle open state', () => {
-      wrapper.instance().handleClick();
-      expect(stateSpy).toHaveBeenCalledWith({ open: true });
-      wrapper.instance().handleClick();
-      expect(stateSpy).toHaveBeenCalledWith({ open: false });
-    });
-
+  beforeEach(() => {
+    props = {
+      location: '/foo/bar',
+      navItems: [
+        { key: 'value' },
+        { key: 'value2' },
+        { key: 'value3' }
+      ]
+    };
   });
 
+  it('should render on desktop', () => {
+    const consumer = context(<Navigation {...props}/>, { mobile: false });
+    expect(consumer.children()).toMatchSnapshot();
+  });
 
+  it('should render on mobile', () => {
+    const consumer = context(<Navigation {...props}/>, { mobile: true });
+    expect(consumer.children()).toMatchSnapshot();
+  });
+
+  it('should render on mobile and open', () => {
+    const consumer = context(<Navigation {...props}/>, { mobile: true });
+    consumer.component.instance().toggleMobileNav();
+    expect(consumer.children().find('.Navigation').props().className).toMatchSnapshot();
+  });
+
+  it('should toggle menu when clicking overlay', () => {
+    const consumer = context(<Navigation {...props}/>, { mobile: true });
+    consumer.component.instance().toggleMobileNav();
+    consumer.children().find('.Overlay').simulate('click');
+    expect(consumer.children().find('.Navigation').props().className).toMatchSnapshot();
+  });
 });

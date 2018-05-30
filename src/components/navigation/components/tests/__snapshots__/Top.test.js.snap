@@ -1,0 +1,74 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Top should render close icon when open 1`] = `
+<div
+  className="Top"
+>
+  <UnstyledLink
+    className="Menu"
+    onClick={[MockFunction]}
+  >
+    <Close
+      size={24}
+    />
+  </UnstyledLink>
+  <div
+    className="MobileLogo"
+  >
+    <Logo
+      type="halfWhite"
+    />
+  </div>
+  <div
+    className="MobileAccountDropdownWrapper"
+  >
+    <Connect(AccountDropdown) />
+  </div>
+</div>
+`;
+
+exports[`Top should render correctly on desktop 1`] = `
+<div
+  className="Top"
+>
+  <div
+    className="Logo"
+  >
+    <Logo
+      type="halfWhite"
+    />
+  </div>
+  <div
+    className="AccountDropdownWrapper"
+  >
+    <Connect(AccountDropdown) />
+  </div>
+</div>
+`;
+
+exports[`Top should render correctly on mobile 1`] = `
+<div
+  className="Top"
+>
+  <UnstyledLink
+    className="Menu"
+    onClick={[MockFunction]}
+  >
+    <Menu
+      size={24}
+    />
+  </UnstyledLink>
+  <div
+    className="MobileLogo"
+  >
+    <Logo
+      type="halfWhite"
+    />
+  </div>
+  <div
+    className="MobileAccountDropdownWrapper"
+  >
+    <Connect(AccountDropdown) />
+  </div>
+</div>
+`;

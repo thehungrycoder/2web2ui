@@ -1,4 +1,4 @@
-import { Home, Assessment, Code, Mail, Language, Settings } from '@sparkpost/matchbox-icons';
+import { Home, InsertChart, Code, MailOutline, Language, Settings } from '@sparkpost/matchbox-icons';
 
 export default [
   {
@@ -9,7 +9,7 @@ export default [
   {
     label: 'Reports',
     to: '/reports',
-    icon: Assessment,
+    icon: InsertChart,
     children: [
       {
         label: 'Summary',
@@ -49,7 +49,7 @@ export default [
   {
     label: 'Lists',
     to: '/lists',
-    icon: Mail,
+    icon: MailOutline,
     children: [
       {
         label: 'Recipient Lists',
@@ -67,22 +67,10 @@ export default [
     icon: Language
   },
   {
-    label: 'Account',
+    label: 'Settings',
     to: '/account',
     icon: Settings,
     children: [
-      {
-        label: 'Profile',
-        to: '/account/profile'
-      },
-      {
-        label: 'Billing',
-        to: '/account/billing'
-      },
-      {
-        label: 'Users',
-        to: '/account/users'
-      },
       {
         label: 'API Keys',
         to: '/account/api-keys'
