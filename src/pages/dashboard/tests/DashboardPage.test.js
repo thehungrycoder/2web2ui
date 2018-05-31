@@ -11,7 +11,6 @@ describe('Page: Dashboard tests', () => {
     checkSuppression: jest.fn(() => []),
     listSendingDomains: jest.fn(() => []),
     listApiKeys: jest.fn(() => []),
-    getPlans: jest.fn(() => []),
     account: {
       subscription: {
         code: 'paid'
@@ -52,7 +51,7 @@ describe('Page: Dashboard tests', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should show success alert on successful email verification', async() => {
+  it('should show success alert on successful email verification', async () => {
     await instance.resendVerification();
     expect(instance.props.showAlert).toHaveBeenCalledWith({
       type: 'success',

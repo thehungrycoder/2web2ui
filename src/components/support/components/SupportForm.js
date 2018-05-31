@@ -12,6 +12,7 @@ import { hasOnlineSupport } from 'src/helpers/conditions/account';
 import { getBase64Contents } from 'src/helpers/file';
 import { required, maxFileSize } from 'src/helpers/validation';
 import { selectSupportIssue, selectSupportIssues } from 'src/selectors/support';
+import NoIssues from './NoIssues';
 
 import styles from './SupportForm.module.scss';
 
@@ -28,7 +29,7 @@ export class SupportForm extends Component {
     return this.props.createTicket(ticket);
   };
 
-  renderSuccess () {
+  renderSuccess() {
     const { ticketId, onContinue } = this.props;
 
     return <div className={styles.SupportForm}>
@@ -41,12 +42,12 @@ export class SupportForm extends Component {
     </div>;
   }
 
-  reset (parentReset) {
+  reset(parentReset) {
     this.props.reset(formName);
     return parentReset();
   }
 
-  renderForm () {
+  renderForm() {
     const {
       handleSubmit,
       invalid,
@@ -59,6 +60,7 @@ export class SupportForm extends Component {
       toggleSupportPanel
     } = this.props;
 
+
     return <div className={styles.SupportForm}>
       <Panel.Section>
         <h6>Submit A Support Ticket</h6>
@@ -68,7 +70,6 @@ export class SupportForm extends Component {
           <Field
             name='issueId'
             label='I need help with...'
-            placeholder='Select an option'
             helpText={needsOnlineSupport && (
               <Fragment>
                 Additional technical support is available on paid
@@ -78,7 +79,10 @@ export class SupportForm extends Component {
             errorInLabel
             disabled={submitting}
             component={SelectWrapper}
-            options={issues.map(({ id, label }) => ({ label, value: id }))}
+            options={[
+              { disabled: true, label: 'Select an option', value: '' },
+              ...issues.map(({ id, label }) => ({ label, value: id }))
+            ]}
             validate={required}
           />
           <Field
@@ -111,10 +115,15 @@ export class SupportForm extends Component {
     </div>;
   }
 
-  render () {
+  render() {
     if (this.props.submitSucceeded) {
       return this.renderSuccess();
     }
+
+    if (this.props.issues.length < 1) {
+      return <NoIssues onCancel={() => this.reset(this.props.onCancel)} />;
+    }
+
     return this.renderForm();
   }
 }

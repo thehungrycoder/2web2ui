@@ -19,12 +19,16 @@ exports[`Support Form Component Form should render 1`] = `
         options={
           Array [
             Object {
+              "disabled": true,
+              "label": "Select an option",
+              "value": "",
+            },
+            Object {
               "label": "I need help!",
               "value": "technical_issues",
             },
           ]
         }
-        placeholder="Select an option"
         validate={[Function]}
       />
       <Field
@@ -86,13 +90,23 @@ exports[`Support Form Component Form should render issue dropdown with help text
   options={
     Array [
       Object {
+        "disabled": true,
+        "label": "Select an option",
+        "value": "",
+      },
+      Object {
         "label": "I need help!",
         "value": "technical_issues",
       },
     ]
   }
-  placeholder="Select an option"
   validate={[Function]}
+/>
+`;
+
+exports[`Support Form Component Form should render no issue view when no issues are available 1`] = `
+<NoIssues
+  onCancel={[Function]}
 />
 `;
 
@@ -115,12 +129,16 @@ exports[`Support Form Component Form should render with selected issue message l
         options={
           Array [
             Object {
+              "disabled": true,
+              "label": "Select an option",
+              "value": "",
+            },
+            Object {
               "label": "I need help!",
               "value": "technical_issues",
             },
           ]
         }
-        placeholder="Select an option"
         validate={[Function]}
       />
       <Field

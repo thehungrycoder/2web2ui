@@ -4,12 +4,15 @@ import selectAccessConditionState from 'src/selectors/accessConditionState';
 
 export const defaultCase = () => true;
 
+export const Case = ({ children }) => children;
+Case.displayName = 'Case';
+
 /**
  * Returns the first child whose condition prop returns true
  *
  * Patterned after the React Router <Switch> element
  */
-export const ConditionSwitch = function({ children, ready, accessConditionState }) {
+export const ConditionSwitch = function ({ children, ready, accessConditionState }) {
   if (!ready) {
     return null;
   }
