@@ -46,18 +46,27 @@ export class InvoiceHistory extends Component {
   downloadInvoice = () => {
     const { invoice, showAlert, invoices, invoiceId } = this.props;
     const invoiceNumber = _.find(invoices, { id: invoiceId }).invoice_number;
-
     const url = URL.createObjectURL(invoice);
     const link = document.createElement('a');
+
     link.href = url;
     link.setAttribute('download', `sparkpost-invoice-${invoiceNumber}.pdf`);
+
+    // Firefox requires the link be added to the DOM before it can be .click()'d
+    document.body.appendChild(link);
     link.click();
+
+    // Need to make sure we wait for the next event loop to be sure the link click finishes
+    // before we remove the link from the DOM and revoke the object URL
+    setTimeout(() => {
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    }, 0);
 
     showAlert({ type: 'success', message: `Downloaded invoice: ${invoiceNumber}` });
   };
 
   render() {
-
     const { invoices } = this.props;
 
     const maxWarning = invoices.length >= 20
