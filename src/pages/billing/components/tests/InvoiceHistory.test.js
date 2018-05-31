@@ -66,16 +66,20 @@ describe('Component: Invoice History', () => {
     expect(downloadInvoiceStub).toHaveBeenCalledTimes(1);
   });
 
-  it('downloadInvoice() should download an invoice', () => {
+  test('downloadInvoice() should download an invoice', () => {
+    jest.useFakeTimers();
+
     const showAlertStub = jest.fn();
     const linkMock = { setAttribute: jest.fn(), click: jest.fn() };
 
-    //This mock must be manually restored because jsdom doesn't support URL.createObjectURL
-    const defaultCreateUbjectURL = URL.createObjectURL;
     URL.createObjectURL = jest.fn(() => 'a URL');
+    URL.revokeObjectURL = jest.fn();
 
     const createElementSpy = jest.spyOn(document, 'createElement')
       .mockImplementationOnce(() => linkMock);
+
+    document.body.appendChild = jest.fn();
+    document.body.removeChild = jest.fn();
 
     wrapper = shallow(<InvoiceHistory {...props}
       invoiceId='id3'
@@ -90,10 +94,19 @@ describe('Component: Invoice History', () => {
     expect(linkMock.href).toEqual('a URL');
     expect(linkMock.setAttribute).toHaveBeenCalledWith('download', 'sparkpost-invoice-no3.pdf');
     expect(linkMock.click).toHaveBeenCalledTimes(1);
+    expect(document.body.appendChild).toHaveBeenCalledWith(linkMock);
     expect(showAlertStub).toHaveBeenCalledTimes(1);
     expect(showAlertStub).toHaveBeenCalledWith({ type: 'success', message: 'Downloaded invoice: no3' });
 
-    URL.createObjectURL = defaultCreateUbjectURL;
+    expect(document.body.removeChild).not.toHaveBeenCalled();
+    expect(URL.revokeObjectURL).not.toHaveBeenCalled();
+
+    jest.runAllTimers();
+
+    expect(document.body.removeChild).toHaveBeenCalledWith(linkMock);
+    expect(URL.revokeObjectURL).toHaveBeenCalledWith('a URL');
+
+    jest.useRealTimers();
   });
 
   it('should get an invoice when the download button is clicked', () => {
