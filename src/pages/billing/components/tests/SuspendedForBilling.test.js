@@ -3,11 +3,6 @@ import { shallow } from 'enzyme';
 import SuspendedForBilling from '../SuspendedForBilling';
 
 jest.mock('../../forms/UpdatePayment', () => function UpdatePaymentForm() {});
-jest.mock('src/config', () => ({
-  contact: {
-    billingEmail: 'billing.email@example.com'
-  }
-}));
 
 describe('Component: SuspendedForBilling', () => {
 

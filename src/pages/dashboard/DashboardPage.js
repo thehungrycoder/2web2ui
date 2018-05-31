@@ -11,7 +11,7 @@ import SuppressionBanner from './components/SuppressionBanner';
 
 import { showAlert } from 'src/actions/globalAlert';
 import { verifyEmail } from 'src/actions/currentUser';
-import { fetch as fetchAccount, getPlans } from 'src/actions/account';
+import { fetch as fetchAccount } from 'src/actions/account';
 import { checkSuppression } from 'src/actions/suppressions';
 import { list as listSendingDomains } from 'src/actions/sendingDomains';
 import { listApiKeys } from 'src/actions/api-keys';
@@ -24,7 +24,6 @@ export class DashboardPage extends Component {
   componentDidMount() {
     this.props.checkSuppression();
     this.props.listSendingDomains();
-    this.props.getPlans();
     this.props.listApiKeys({ id: 0 });
   }
 
@@ -55,7 +54,7 @@ export class DashboardPage extends Component {
     return (
       <Page title='Dashboard'>
 
-        { this.renderVerifyEmailCta() }
+        {this.renderVerifyEmailCta()}
 
         <UsageReport />
         <SuppressionBanner accountAgeInWeeks={accountAgeInWeeks} hasSuppressions={hasSuppressions} />
@@ -84,4 +83,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default withRouter(connect(mapStateToProps, { fetchAccount, checkSuppression, listSendingDomains, listApiKeys, verifyEmail, showAlert, getPlans })(DashboardPage));
+export default withRouter(connect(mapStateToProps, { fetchAccount, checkSuppression, listSendingDomains, listApiKeys, verifyEmail, showAlert })(DashboardPage));

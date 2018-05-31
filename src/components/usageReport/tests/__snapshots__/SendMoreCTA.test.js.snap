@@ -1,83 +1,51 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SendMoreCTA Component renders correctly for aws free plan (cta to upgrade) 1`] = `
-<p>
-  Need to send more?
-   
-  <PageLink
-    to="/account/billing"
-  >
-    Upgrade your account.
-  </PageLink>
-   
-  <UnstyledLink
-    external={true}
-    to="https://support.sparkpost.com/customer/portal/articles/2030894"
-  >
-    Learn more about these limits.
-  </UnstyledLink>
-</p>
-`;
-
-exports[`SendMoreCTA Component renders correctly for customers who can request limit bump 1`] = `
-<p>
-  Need to send more?
-   
-  <React.Fragment>
+exports[`SendMoreCTA Component renders correctly 1`] = `
+<Connect(AccessControl)
+  condition={[Function]}
+>
+  <p>
+    Need to send more?
+     
+    <Connect(Component)>
+      <Case
+        condition={[Function]}
+      >
+        <UnstyledLink
+          onClick={[Function]}
+        >
+          Verify your email.
+        </UnstyledLink>
+      </Case>
+      <Case
+        condition={[Function]}
+      >
+        <PageLink
+          to="/account/billing"
+        >
+          Upgrade your account.
+        </PageLink>
+      </Case>
+      <Case
+        condition={[Function]}
+      >
+        <React.Fragment>
+          <UnstyledLink
+            onClick={[Function]}
+          >
+            Submit a request
+          </UnstyledLink>
+           to increase your daily sending limit.
+        </React.Fragment>
+      </Case>
+    </Connect(Component)>
+     
     <UnstyledLink
-      onClick={[Function]}
+      external={true}
+      to="https://support.sparkpost.com/customer/portal/articles/2030894"
     >
-      Submit a request
+      Learn more about these limits.
     </UnstyledLink>
-     to increase your daily sending limit.
-  </React.Fragment>
-   
-  <UnstyledLink
-    external={true}
-    to="https://support.sparkpost.com/customer/portal/articles/2030894"
-  >
-    Learn more about these limits.
-  </UnstyledLink>
-</p>
-`;
-
-exports[`SendMoreCTA Component renders support form correctly 1`] = `
-<p>
-  Need to send more?
-   
-  <React.Fragment>
-    <UnstyledLink
-      onClick={[Function]}
-    >
-      Submit a request
-    </UnstyledLink>
-     to increase your daily sending limit.
-  </React.Fragment>
-   
-  <UnstyledLink
-    external={true}
-    to="https://support.sparkpost.com/customer/portal/articles/2030894"
-  >
-    Learn more about these limits.
-  </UnstyledLink>
-</p>
-`;
-
-exports[`SendMoreCTA Component renders when email address not verified 1`] = `
-<p>
-  Need to send more?
-   
-  <UnstyledLink
-    onClick={[Function]}
-  >
-    Verify your email.
-  </UnstyledLink>
-   
-  <UnstyledLink
-    external={true}
-    to="https://support.sparkpost.com/customer/portal/articles/2030894"
-  >
-    Learn more about these limits.
-  </UnstyledLink>
-</p>
+  </p>
+</Connect(AccessControl)>
 `;

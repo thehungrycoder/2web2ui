@@ -24,12 +24,6 @@ const config = {
     { paymentFormat: 'discover', apiFormat: 'Discover' }
   ],
   chartColors: ['#04AEF9', '#fa6423', '#FFD300', '#8CCA3A', '#b94696'],
-  contact: {
-    abuseEmail: 'compliance@sparkpost.com',
-    contactEmail: 'hello@sparkpost.com',
-    supportEmail: 'support@sparkpost.com',
-    billingEmail: 'billing@sparkpost.com'
-  },
   cookieConsent: {
     cookie: {
       name: 'cookieConsent',

@@ -1,10 +1,4 @@
 import * as selectors from '../support';
-import * as billingInfo from '../accountBillingInfo';
-import cases from 'jest-in-case';
-
-jest.mock('../accountBillingInfo', () => ({
-  currentPlanSelector: jest.fn()
-}));
 
 jest.mock('src/config/supportIssues', () => [
   { id: 'without_condition' },
@@ -76,20 +70,6 @@ describe('Selectors: support', () => {
       expect(selectors.currentLimitSelector(state)).toEqual(0);
     });
   });
-
-  const testCases = {
-    'return false for deprecated plans': { plan: { status: 'deprecated' }, expected: false },
-    'return false for free plans': { plan: { isFree: true }, expected: false },
-    'return true for paid public plans': { plan: { status: 'public', code: '2.5m-0817' }, expected: true },
-    'return true for paid private': { plan: { status: 'public', code: '2.5m-0817' }, expected: true },
-    'return true for aws plans': { plan: { status: 'public', code: 'aws_basic', type: 'aws' }, expected: true }
-  };
-
-  cases('allowSendingLimitRequestSelector', ({ plan, expected }) => {
-    billingInfo.currentPlanSelector.mockReturnValue(plan);
-    expect(selectors.allowSendingLimitRequestSelector({ plan })).toBe(expected);
-  }, testCases);
-
 
   describe('selectSupportIssues', () => {
     it('should return issues that satisified condition', () => {
