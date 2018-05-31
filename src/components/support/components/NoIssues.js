@@ -6,7 +6,7 @@ const NoIssues = ({ onCancel }) => (
   <div className={styles.NoIssues}>
     <div className={styles.Message}>
       <h6>Sorry, you are not authorized to submit a support ticket.</h6>
-      <Button flat color='orange' onClick={onCancel}>Go Back</Button>
+      <Button flat color='orange' onClick={onCancel}>Search support articles</Button>
     </div>
   </div>
 );

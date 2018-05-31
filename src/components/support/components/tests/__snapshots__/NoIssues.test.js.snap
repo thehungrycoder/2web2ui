@@ -16,7 +16,7 @@ exports[`NoIssues View Component should render 1`] = `
       onClick={[MockFunction]}
       size="default"
     >
-      Go Back
+      Search support articles
     </Button>
   </div>
 </div>
