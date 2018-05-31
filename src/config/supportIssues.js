@@ -1,4 +1,6 @@
-import { hasOnlineSupport } from 'src/helpers/conditions/account';
+import { hasOnlineSupport, hasStatus, hasStatusReasonCategory, isSuspendedForBilling } from 'src/helpers/conditions/account';
+import { all, not, any } from 'src/helpers/conditions';
+import { isAdmin } from 'src/helpers/conditions/user';
 
 // types of support issues
 // @note These values must be configured in Desk before being used and they are case-sensitive
@@ -32,40 +34,42 @@ const supportIssues = [
     label: 'Technical errors',
     messageLabel: 'Tell us more about your issue',
     type: ERRORS,
-    condition: hasOnlineSupport
+    condition: all(hasOnlineSupport, hasStatus('active'))
   },
   {
     id: 'general_billing',
     label: 'Billing problems',
     messageLabel: 'Tell us more about your billing issue',
     type: BILLING,
-    condition: hasOnlineSupport
-  },
-  {
-    id: 'account_cancellation',
-    label: 'Account cancellation',
-    messageLabel: 'Tell us why you are leaving',
-    type: COMPLIANCE
+    condition: all(isAdmin, any(isSuspendedForBilling, hasStatus('active')))
   },
   {
     id: 'account_suspension',
     label: 'Account suspension',
     messageLabel: 'Why do you think your account should be unsuspended?',
-    type: COMPLIANCE
+    type: COMPLIANCE,
+    condition: all(hasStatus('suspended'), not(hasStatusReasonCategory('100.01')))
   },
   {
     id: 'daily_limits',
     label: 'Daily sending limit increase',
     messageLabel: 'What limit do you need and why?',
     type: LIMITS,
-    condition: hasOnlineSupport
+    condition: all(hasOnlineSupport, isAdmin, hasStatus('active'))
   },
   {
     id: 'general_issue',
     label: 'Another issue',
     messageLabel: 'Tell us more about your issue',
     type: SUPPORT,
-    condition: hasOnlineSupport
+    condition: all(hasOnlineSupport, hasStatus('active'))
+  },
+  {
+    id: 'account_cancellation',
+    label: 'Account cancellation',
+    messageLabel: 'Tell us why you are leaving',
+    type: COMPLIANCE,
+    condition: isAdmin
   }
 ];
 

@@ -63,6 +63,11 @@ describe('Support Form Component', () => {
       wrapper.setProps({ needsOnlineSupport: true });
       expect(wrapper.find('Field[name="issueId"]')).toMatchSnapshot();
     });
+
+    it('should render no issue view when no issues are available', () => {
+      wrapper.setProps({ issues: []});
+      expect(wrapper).toMatchSnapshot();
+    });
   });
 
   describe('Control', () => {
@@ -96,6 +101,14 @@ describe('Support Form Component', () => {
       const btns = wrapper.find('Button');
       expect(btns).toHaveLength(2);
       btns.at(1).simulate('click');
+      expect(spy).toHaveBeenCalled();
+      expect(props.onCancel).toHaveBeenCalled();
+    });
+
+    it('should cancel on no issue view', () => {
+      wrapper.setProps({ issues: []});
+      const spy = jest.spyOn(wrapper.instance(), 'reset');
+      wrapper.find('NoIssues').simulate('cancel');
       expect(spy).toHaveBeenCalled();
       expect(props.onCancel).toHaveBeenCalled();
     });

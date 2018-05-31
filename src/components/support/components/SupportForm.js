@@ -12,6 +12,7 @@ import { hasOnlineSupport } from 'src/helpers/conditions/account';
 import { getBase64Contents } from 'src/helpers/file';
 import { required, maxFileSize } from 'src/helpers/validation';
 import { selectSupportIssue, selectSupportIssues } from 'src/selectors/support';
+import NoIssues from './NoIssues';
 
 import styles from './SupportForm.module.scss';
 
@@ -28,7 +29,7 @@ export class SupportForm extends Component {
     return this.props.createTicket(ticket);
   };
 
-  renderSuccess () {
+  renderSuccess() {
     const { ticketId, onContinue } = this.props;
 
     return <div className={styles.SupportForm}>
@@ -41,12 +42,12 @@ export class SupportForm extends Component {
     </div>;
   }
 
-  reset (parentReset) {
+  reset(parentReset) {
     this.props.reset(formName);
     return parentReset();
   }
 
-  renderForm () {
+  renderForm() {
     const {
       handleSubmit,
       invalid,
@@ -58,6 +59,7 @@ export class SupportForm extends Component {
       submitting,
       toggleSupportPanel
     } = this.props;
+
 
     return <div className={styles.SupportForm}>
       <Panel.Section>
@@ -111,10 +113,15 @@ export class SupportForm extends Component {
     </div>;
   }
 
-  render () {
+  render() {
     if (this.props.submitSucceeded) {
       return this.renderSuccess();
     }
+
+    if (this.props.issues.length < 1) {
+      return <NoIssues onCancel={() => this.reset(this.props.onCancel)} />;
+    }
+
     return this.renderForm();
   }
 }

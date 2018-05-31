@@ -1,6 +1,5 @@
 import _ from 'lodash';
 import { createSelector } from 'reselect';
-import { currentPlanSelector } from './accountBillingInfo';
 import accessConditionState from './accessConditionState';
 import supportIssues from 'src/config/supportIssues';
 
@@ -10,11 +9,6 @@ const getSupportIssueId = (state, id) => id;
 export const entitledToPhoneSupport = createSelector(
   [getAccountSupport],
   (support) => support && support.phone
-);
-
-export const allowSendingLimitRequestSelector = createSelector(
-  [currentPlanSelector],
-  (currentPlan) => currentPlan.status !== 'deprecated' && !(currentPlan.isFree)
 );
 
 export const currentLimitSelector = (state) => {

@@ -7,26 +7,30 @@ exports[`Support Component render tests should render just the icon by default 1
   <div
     className="Support"
   >
-    <Popover
-      bottom={true}
-      className="Popover"
-      fixed={true}
-      left={true}
-      open={false}
-      right={true}
-      top={true}
-      trigger={
-        <a
-          className="Button"
-          onClick={[Function]}
-        >
-          <Help
-            className="Icon"
-            size={33}
-          />
-        </a>
-      }
-    />
+    <Connect(AccessControl)
+      condition={[Function]}
+    >
+      <Popover
+        bottom={true}
+        className="Popover"
+        fixed={true}
+        left={true}
+        open={false}
+        right={true}
+        top={true}
+        trigger={
+          <a
+            className="Button"
+            onClick={[Function]}
+          >
+            <Help
+              className="Icon"
+              size={33}
+            />
+          </a>
+        }
+      />
+    </Connect(AccessControl)>
   </div>
 </Portal>
 `;
@@ -38,31 +42,35 @@ exports[`Support Component render tests should show form and close icon when pan
   <div
     className="Support"
   >
-    <Popover
-      bottom={true}
-      className="Popover"
-      fixed={true}
-      left={true}
-      open={true}
-      right={true}
-      top={true}
-      trigger={
-        <a
-          className="Button"
-          onClick={[Function]}
-        >
-          <Cancel
-            className="Icon"
-            size={33}
-          />
-        </a>
-      }
+    <Connect(AccessControl)
+      condition={[Function]}
     >
-      <Connect(ReduxForm)
-        onCancel={[Function]}
-        onContinue={[Function]}
-      />
-    </Popover>
+      <Popover
+        bottom={true}
+        className="Popover"
+        fixed={true}
+        left={true}
+        open={true}
+        right={true}
+        top={true}
+        trigger={
+          <a
+            className="Button"
+            onClick={[Function]}
+          >
+            <Cancel
+              className="Icon"
+              size={33}
+            />
+          </a>
+        }
+      >
+        <Connect(ReduxForm)
+          onCancel={[Function]}
+          onContinue={[Function]}
+        />
+      </Popover>
+    </Connect(AccessControl)>
   </div>
 </Portal>
 `;
@@ -74,30 +82,34 @@ exports[`Support Component render tests should show search panel and close icon 
   <div
     className="Support"
   >
-    <Popover
-      bottom={true}
-      className="Popover"
-      fixed={true}
-      left={true}
-      open={true}
-      right={true}
-      top={true}
-      trigger={
-        <a
-          className="Button"
-          onClick={[Function]}
-        >
-          <Cancel
-            className="Icon"
-            size={33}
-          />
-        </a>
-      }
+    <Connect(AccessControl)
+      condition={[Function]}
     >
-      <SearchPanel
-        toggleForm={[Function]}
-      />
-    </Popover>
+      <Popover
+        bottom={true}
+        className="Popover"
+        fixed={true}
+        left={true}
+        open={true}
+        right={true}
+        top={true}
+        trigger={
+          <a
+            className="Button"
+            onClick={[Function]}
+          >
+            <Cancel
+              className="Icon"
+              size={33}
+            />
+          </a>
+        }
+      >
+        <Connect(Component)
+          toggleForm={[Function]}
+        />
+      </Popover>
+    </Connect(AccessControl)>
   </div>
 </Portal>
 `;

@@ -1,8 +1,12 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 
 .Results {
-  height: rem(425);
+  height: rem(525);
   overflow-y: scroll;
+
+  &.shorten {
+    height: rem(425);
+  }
 }
 
 .Results ul {

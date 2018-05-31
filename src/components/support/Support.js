@@ -4,17 +4,18 @@ import { withRouter } from 'react-router';
 import qs from 'query-string';
 import { Portal, Popover } from '@sparkpost/matchbox';
 import { Cancel, Help } from '@sparkpost/matchbox-icons';
+import { AccessControl } from 'src/components/auth';
 import * as supportActions from 'src/actions/support';
 import SupportForm from './components/SupportForm';
 import SearchPanel from './components/SearchPanel';
 import styles from './Support.module.scss';
 
 export class Support extends Component {
-  componentDidMount () {
+  componentDidMount() {
     this.maybeOpenTicket();
   }
 
-  componentDidUpdate (prevProps) {
+  componentDidUpdate(prevProps) {
     const { location } = this.props;
 
     if (location.search && location.search !== prevProps.location.search) {
@@ -46,7 +47,7 @@ export class Support extends Component {
     this.props.toggleTicketForm();
   }
 
-  render () {
+  render() {
     const { loggedIn, showPanel, showTicketForm } = this.props;
 
     if (!loggedIn) {
@@ -64,18 +65,21 @@ export class Support extends Component {
     return (
       <Portal containerId='support-portal'>
         <div className={styles.Support}>
-          <Popover
-            top
-            left
-            fixed
-            className={styles.Popover}
-            open={showPanel}
-            trigger={triggerMarkup}
-          >
-            {showPanel && (showTicketForm
-              ? <SupportForm onCancel={this.toggleForm} onContinue={this.toggleForm} />
-              : <SearchPanel toggleForm={this.toggleForm} />)}
-          </Popover>
+          {/* Wait for access control state to be ready before rendering the popover */}
+          <AccessControl condition={() => true}>
+            <Popover
+              top
+              left
+              fixed
+              className={styles.Popover}
+              open={showPanel}
+              trigger={triggerMarkup}
+            >
+              {showPanel && (showTicketForm
+                ? <SupportForm onCancel={this.toggleForm} onContinue={this.toggleForm} />
+                : <SearchPanel toggleForm={this.toggleForm} />)}
+            </Popover>
+          </AccessControl>
         </div>
       </Portal>
     );

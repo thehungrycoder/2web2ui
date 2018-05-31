@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NoIssues View Component should render 1`] = `
+<div
+  className="NoIssues"
+>
+  <div
+    className="Message"
+  >
+    <h6>
+      Sorry, you are not authorized to submit a support ticket.
+    </h6>
+    <Button
+      color="orange"
+      flat={true}
+      onClick={[MockFunction]}
+      size="default"
+    >
+      Search support articles
+    </Button>
+  </div>
+</div>
+`;
