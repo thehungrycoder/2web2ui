@@ -70,7 +70,6 @@ export class SupportForm extends Component {
           <Field
             name='issueId'
             label='I need help with...'
-            placeholder='Select an option'
             helpText={needsOnlineSupport && (
               <Fragment>
                 Additional technical support is available on paid
@@ -80,7 +79,10 @@ export class SupportForm extends Component {
             errorInLabel
             disabled={submitting}
             component={SelectWrapper}
-            options={issues.map(({ id, label }) => ({ label, value: id }))}
+            options={[
+              { disabled: true, label: 'Select an option', value: '' },
+              ...issues.map(({ id, label }) => ({ label, value: id }))
+            ]}
             validate={required}
           />
           <Field
