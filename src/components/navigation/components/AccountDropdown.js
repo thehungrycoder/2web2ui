@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { WindowSizeContext } from 'src/context/WindowSize';
 import { selectAccountNavItems } from 'src/selectors/navItems';
-import { logout } from 'src/actions/auth';
 import { UnstyledLink, Popover, ActionList } from '@sparkpost/matchbox';
 import { ArrowDropDown, Person } from '@sparkpost/matchbox-icons';
 import styles from './AccountDropdown.module.scss';
@@ -29,8 +28,8 @@ export class AccountDropdown extends Component {
   );
 
   getItems() {
-    const { accountNavItems } = this.props;
-    const items = accountNavItems.map(({ label, external, condition, icon: Icon, ...rest }) => {
+    const { accountNavItems, dispatch } = this.props;
+    const items = accountNavItems.map(({ action, label, external, condition, icon: Icon, ...rest }) => {
       const content = Icon
         ? <Fragment>{label} <div className={styles.FloatIcon}><Icon size={15} /></div></Fragment>
         : label;
@@ -38,6 +37,10 @@ export class AccountDropdown extends Component {
 
       if (!external) {
         listItem.component = Link;
+      }
+
+      if (action) {
+        listItem.onClick = () => dispatch(action());
       }
 
       return listItem;
@@ -63,4 +66,5 @@ const mapStateToProps = (state) => ({
   email: state.currentUser.email,
   accountNavItems: selectAccountNavItems(state)
 });
-export default connect(mapStateToProps, { logout })(AccountDropdown);
+
+export default connect(mapStateToProps)(AccountDropdown);

@@ -72,6 +72,12 @@ exports[`AccountDropdown should render correctly 1`] = `
           "external": true,
           "to": "link2",
         },
+        Object {
+          "component": [Function],
+          "content": "link3",
+          "external": undefined,
+          "onClick": [Function],
+        },
       ]
     }
     className="AccountList"

@@ -1,5 +1,6 @@
 import { OpenInNew, ExitToApp } from '@sparkpost/matchbox-icons';
 import { LINKS } from 'src/constants';
+import { openSupportPanel } from 'src/actions/support';
 import { isHeroku } from 'src/helpers/conditions/user';
 import not from 'src/helpers/conditions/not';
 
@@ -40,9 +41,14 @@ export default [
     section: 1
   },
   {
-    label: 'Help and API Docs',
+    label: 'Get Help',
+    section: 2,
+    action: openSupportPanel
+  },
+  {
+    label: 'API Docs',
     external: true,
-    to: LINKS.DOCS,
+    to: LINKS.API_DOCS,
     icon: OpenInNew,
     section: 2,
     condition: not(isHeroku)
@@ -51,7 +57,7 @@ export default [
     label: 'Log Out',
     to: '/logout',
     icon: ExitToApp,
-    section: 2,
+    section: 3,
     condition: not(isHeroku)
   }
 ];
