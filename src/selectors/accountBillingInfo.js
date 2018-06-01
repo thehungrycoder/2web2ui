@@ -7,6 +7,7 @@ const pendingSubscriptionSelector = (state) => state.account.pending_subscriptio
 const plansSelector = (state) => state.billing.plans || [];
 const accountBillingSelector = (state) => state.account.billing;
 const isFreeLegacyPlanSelector = (state) => onPlan('ccfree1')(state);
+const isFreeLegacyFree1PlanSelector = (state) => onPlan('free1')(state);
 
 export const currentSubscriptionSelector = (state) => state.account.subscription;
 
@@ -76,8 +77,11 @@ export const selectAvailablePlans = createSelector(
 );
 
 export const selectVisiblePlans = createSelector(
-  [selectAvailablePlans],
-  (plans) => plans.filter(({ status }) => status === 'public')
+  [selectAvailablePlans, isFreeLegacyFree1PlanSelector],
+  (plans, isLegacyFree1) => plans.filter(({ isFree, status }) =>
+    status === 'public' &&
+        !(isLegacyFree1 && isFree) //hide new free plans if on free1 plan
+  )
 );
 
 export const selectBillingInfo = createSelector(
