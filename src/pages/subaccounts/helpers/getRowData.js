@@ -3,6 +3,7 @@ import { Tag } from '@sparkpost/matchbox';
 import { Link } from 'react-router-dom';
 
 const statusTagColors = {
+  active: null,
   suspended: 'yellow',
   terminated: 'red'
 };

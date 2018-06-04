@@ -12,7 +12,7 @@ Array [
     123
   </p>,
   <Tag
-    color={undefined}
+    color={null}
   >
     active
   </Tag>,
