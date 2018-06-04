@@ -11,11 +11,11 @@ Array [
   <p>
     123
   </p>,
-  <p
-    className="StatusActive"
+  <Tag
+    color={undefined}
   >
     active
-  </p>,
+  </Tag>,
 ]
 `;
 
@@ -30,11 +30,11 @@ Array [
   <p>
     789
   </p>,
-  <p
-    className="StatusSuspended"
+  <Tag
+    color="yellow"
   >
     suspended
-  </p>,
+  </Tag>,
 ]
 `;
 
@@ -49,10 +49,10 @@ Array [
   <p>
     456
   </p>,
-  <p
-    className="StatusTerminated"
+  <Tag
+    color="red"
   >
     terminated
-  </p>,
+  </Tag>,
 ]
 `;
