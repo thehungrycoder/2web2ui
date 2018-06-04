@@ -1,13 +1,13 @@
 import React from 'react';
-import styles from './rowData.module.scss';
+import { snakeToFriendly } from 'src/helpers/string';
+import { Tag } from '@sparkpost/matchbox';
 import { Link } from 'react-router-dom';
 
-const STATUS_CLASSES = {
-  active: styles.StatusActive,
-  suspended: styles.StatusSuspended,
-  terminated: styles.StatusTerminated
+const statusTagColors = {
+  active: null,
+  suspended: 'yellow',
+  terminated: 'red'
 };
-
 
 /*
  Subaccounts getRowData passed to TableCollection in ListPage.
@@ -15,7 +15,7 @@ const STATUS_CLASSES = {
 const getRowData = ({ status, id, name }) => [
   <Link to={`/account/subaccounts/${id}`}>{name}</Link>,
   <p>{id}</p>,
-  <p className={STATUS_CLASSES[status]}>{status}</p>
+  <Tag color={statusTagColors[status]}>{snakeToFriendly(status)}</Tag>
 ];
 
 export default getRowData;
