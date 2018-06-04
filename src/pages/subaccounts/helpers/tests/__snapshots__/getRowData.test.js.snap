@@ -14,7 +14,7 @@ Array [
   <Tag
     color={null}
   >
-    active
+    Active
   </Tag>,
 ]
 `;
@@ -33,7 +33,7 @@ Array [
   <Tag
     color="yellow"
   >
-    suspended
+    Suspended
   </Tag>,
 ]
 `;
@@ -52,7 +52,7 @@ Array [
   <Tag
     color="red"
   >
-    terminated
+    Terminated
   </Tag>,
 ]
 `;

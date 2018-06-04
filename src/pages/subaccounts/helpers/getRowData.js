@@ -1,4 +1,5 @@
 import React from 'react';
+import { snakeToFriendly } from 'src/helpers/string';
 import { Tag } from '@sparkpost/matchbox';
 import { Link } from 'react-router-dom';
 
@@ -14,7 +15,7 @@ const statusTagColors = {
 const getRowData = ({ status, id, name }) => [
   <Link to={`/account/subaccounts/${id}`}>{name}</Link>,
   <p>{id}</p>,
-  <Tag color={statusTagColors[status]}>{status}</Tag>
+  <Tag color={statusTagColors[status]}>{snakeToFriendly(status)}</Tag>
 ];
 
 export default getRowData;
