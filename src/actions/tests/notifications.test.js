@@ -3,6 +3,7 @@ import * as actions from '../notifications';
 import * as userActions from 'src/actions/currentUser';
 
 jest.mock('src/actions/currentUser');
+global.Date = jest.fn();
 
 beforeEach(() => {
   userActions.updateUserUIOptions = jest.fn((a) => ({ ...a, type: 'UPDATE_USER_UI_OPTIONS_TEST_TYPE' }));
@@ -19,6 +20,6 @@ snapshotActionCases('Action: Notifications', [
   },
   {
     name: 'markAllAsRead',
-    action: () => actions.markAllAsRead(new Date('2018-05-01T12:00:00-00:00'))
+    action: () => actions.markAllAsRead()
   }
 ]);
