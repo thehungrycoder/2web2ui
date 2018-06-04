@@ -5,7 +5,6 @@ import styles from './Notification.module.scss';
 
 const Notification = ({
   component: Content,
-  icon: Icon,
   title,
   activeDate,
   unread

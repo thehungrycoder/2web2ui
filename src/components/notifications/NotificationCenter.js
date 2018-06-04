@@ -29,24 +29,14 @@ export class NotificationCenter extends Component {
       : <Notifications size={22} />;
 
     return (
-      <React.Fragment>
-        <span onClick={() => this.props.addNotification({
-          component: () => <p>This is a new random notification at aas lorem ips um dolsd  {new Date().toString()}</p>,
-          meta: {
-            title: `A new notification lorem upsu dol fdi sdfs nfignd eddsa ${new Date().toString()}`,
-            activeDate: new Date(),
-            type: 'info'
-          }
-        })}>add</span>
-        <Popover
-          left
-          onClose={this.props.markAllAsRead}
-          trigger={<UnstyledLink className={styles.IconWrapper}>{icon}</UnstyledLink>}>
-          <div className={styles.ListWrapper}>
-            {this.renderNotificationsList()}
-          </div>
-        </Popover>
-      </React.Fragment>
+      <Popover
+        left
+        onClose={this.props.markAllAsRead}
+        trigger={<UnstyledLink className={styles.IconWrapper}>{icon}</UnstyledLink>}>
+        <div className={styles.ListWrapper}>
+          {this.renderNotificationsList()}
+        </div>
+      </Popover>
     );
   }
 }
