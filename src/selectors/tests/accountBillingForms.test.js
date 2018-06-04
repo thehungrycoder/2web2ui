@@ -1,8 +1,5 @@
 import { changePlanInitialValues, updatePaymentInitialValues, updateContactInitialValues } from '../accountBillingForms';
 import * as billingInfo from '../accountBillingInfo';
-import { isSelfServeBilling } from 'src/helpers/conditions/account';
-
-jest.mock('src/helpers/conditions/account');
 
 const baseUser = {
   first_name: 'ann',
@@ -26,7 +23,6 @@ describe('Selector: Account billing form', () => {
       { billingId: 'inf', code: 'im not free', isFree: false, status: 'public' },
       { billingId: 'ias', code: 'im a secret', isFree: false, status: 'secret' }
     ]);
-    isSelfServeBilling.mockImplementation(() => true);
     user = Object.assign({}, baseUser);
     store = { currentUser: user };
   });
@@ -34,7 +30,6 @@ describe('Selector: Account billing form', () => {
   describe('changePlanInitialValues when NOT self serve', () => {
     beforeEach(() => {
       billingInfo.currentPlanSelector = jest.fn();
-      isSelfServeBilling.mockImplementation(() => false);
     });
 
     it('should return change plan values: with a billing id', () => {

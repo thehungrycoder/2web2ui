@@ -6,8 +6,6 @@ const suspendedSelector = (state) => state.account.isSuspendedForBilling;
 const pendingSubscriptionSelector = (state) => state.account.pending_subscription;
 const plansSelector = (state) => state.billing.plans || [];
 const accountBillingSelector = (state) => state.account.billing;
-const isFreeLegacyPlanSelector = (state) => onPlan('ccfree1')(state);
-const isFreeLegacyFree1PlanSelector = (state) => onPlan('free1')(state);
 
 export const currentSubscriptionSelector = (state) => state.account.subscription;
 
@@ -46,9 +44,9 @@ export const isAWSAccountSelector = createSelector(
  * Returns true if user has billing account and they are on a paid plan
  */
 export const canUpdateBillingInfoSelector = createSelector(
-  [currentPlanSelector, accountBillingSelector, isFreeLegacyPlanSelector],
-  (currentPlan, accountBilling, isFreeLegacyPlan) => (
-    accountBilling && (isFreeLegacyPlan || !currentPlan.isFree)
+  [currentPlanSelector, accountBillingSelector, onPlan('ccfree1')],
+  (currentPlan, accountBilling, isOnLegacyCcFreePlan) => (
+    accountBilling && (isOnLegacyCcFreePlan || !currentPlan.isFree)
   )
 );
 
@@ -77,10 +75,10 @@ export const selectAvailablePlans = createSelector(
 );
 
 export const selectVisiblePlans = createSelector(
-  [selectAvailablePlans, isFreeLegacyFree1PlanSelector],
-  (plans, isLegacyFree1) => plans.filter(({ isFree, status }) =>
+  [selectAvailablePlans, onPlan('free1')],
+  (plans, isOnLegacyFree1Plan) => plans.filter(({ isFree, status }) =>
     status === 'public' &&
-        !(isLegacyFree1 && isFree) //hide new free plans if on free1 plan
+        !(isOnLegacyFree1Plan && isFree) //hide new free plans if on legacy free1 plan
   )
 );
 
