@@ -3,12 +3,10 @@ import _ from 'lodash';
 
 const ID_ALLOWED_CHARS = 'a-z0-9_-';
 
+// This validator is intentionally not very good
+// Legacy app uses this regex: /^{{\s*(\w|\.)+\s*}}$/ - however does not handle complex but valid substitution data
 function looseSubstitution(value) {
   return value.includes('{{') && value.includes('}}') ? undefined : 'Substitution syntax error';
-}
-
-function substitution(value) {
-  return /^{{\s*(\w|\.)+\s*}}$/.test(value) ? undefined : 'Substitution syntax error';
 }
 
 function idSyntax(value) {
@@ -51,7 +49,6 @@ export {
   ID_ALLOWED_CHARS,
   idSyntax,
   looseSubstitution,
-  substitution,
   emailOrSubstitution,
   contentRequired,
   validJson
