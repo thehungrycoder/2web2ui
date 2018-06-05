@@ -39,8 +39,9 @@ exports[`Top should render correctly on desktop 1`] = `
     />
   </div>
   <div
-    className="AccountDropdownWrapper"
+    className="RightSideWrapper"
   >
+    <Connect(NotificationCenter) />
     <Connect(AccountDropdown) />
   </div>
 </div>

@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: Notification should add unread class to title if unread 1`] = `
+<div
+  className="Notification"
+>
+  <div
+    className="Content"
+  >
+    <p
+      className="Date"
+    >
+      Jun 4 2018
+    </p>
+    <h6
+      className="Title unread"
+    >
+      A Title
+    </h6>
+    <component />
+  </div>
+</div>
+`;
+
+exports[`Component: Notification should render correctly 1`] = `
+<div
+  className="Notification"
+>
+  <div
+    className="Content"
+  >
+    <p
+      className="Date"
+    >
+      Jun 4 2018
+    </p>
+    <h6
+      className="Title"
+    >
+      A Title
+    </h6>
+    <component />
+  </div>
+</div>
+`;

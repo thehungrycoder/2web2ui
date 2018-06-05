@@ -1,23 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Popover } from '@sparkpost/matchbox';
-import { Notifications, NotificationsUnread, InfoOutline, Warning } from '@sparkpost/matchbox-icons';
+import { Popover, UnstyledLink } from '@sparkpost/matchbox';
+import { Notifications, NotificationsUnread } from '@sparkpost/matchbox-icons';
+import Notification from './Notification';
 import * as notificationActions from 'src/actions/notifications';
 import { selectTransformedNotifications, selectUnreadCount } from 'src/selectors/notifications';
 import styles from './NotificationCenter.module.scss';
-
-const iconTypeMap = {
-  info: InfoOutline,
-  notice: Warning,
-  warning: Warning
-};
-
-const NotificationItem = ({ children, icon: Icon, unread }) => (
-  <div className={unread ? styles.UnreadNotificationItem : styles.NotificationItem}>
-    <div className={styles.NotificationIconWrapper}><Icon className={styles.NotificationIcon} size={21} /></div>
-    <div className={styles.NotificationContent}>{children}</div>
-  </div>
-);
 
 export class NotificationCenter extends Component {
 
@@ -25,31 +13,29 @@ export class NotificationCenter extends Component {
     this.props.loadNotifications();
   }
 
-  renderNotification = ({ component: Component, meta, id }) => (
-    <NotificationItem key={id} icon={iconTypeMap[meta.type]} unread={meta.unread}>
-      {meta.title ? <h2>{meta.title}</h2> : null}
-      <Component />
-    </NotificationItem>
-  );
-
   renderNotificationsList = () => {
-    if (!this.props.notifications || this.props.notifications.length === 0) {
-      return <p>No notifications at this time.</p>;
+    const { notifications } = this.props;
+
+    if (!notifications || notifications.length === 0) {
+      return <div className={styles.Empty}><small>No notifications at this time.</small></div>;
     }
-    return this.props.notifications.map(this.renderNotification);
+
+    return notifications.map(({ id, meta, ...rest }) => <Notification {...rest} {...meta} key={id} />);
   }
 
   render() {
     const icon = (this.props.unreadCount > 0)
-      ? <NotificationsUnread className={styles.UnreadNotificationSignal} />
-      : <Notifications className={styles.NotificationSignal} />;
+      ? <NotificationsUnread className={styles.UnreadIcon} size={22} />
+      : <Notifications size={22} />;
 
     return (
       <Popover
         left
         onClose={this.props.markAllAsRead}
-        trigger={icon}>
-        {this.renderNotificationsList()}
+        trigger={<UnstyledLink className={styles.IconWrapper}>{icon}</UnstyledLink>}>
+        <div className={styles.ListWrapper}>
+          {this.renderNotificationsList()}
+        </div>
       </Popover>
     );
   }

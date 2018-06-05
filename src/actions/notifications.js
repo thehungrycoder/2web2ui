@@ -20,14 +20,15 @@ export function addNotification(notification) {
   };
 }
 
-export function markAllAsRead(date = new Date()) {
+export function markAllAsRead() {
+  const now = new Date();
   return (dispatch) => {
     dispatch({
       type: 'MARK_ALL_NOTIFICATIONS_AS_READ',
-      payload: date
+      payload: now
     });
     dispatch(updateUserUIOptions({
-      notificationsLastSeenDate: date
+      notificationsLastSeenDate: now
     }));
   };
 }
