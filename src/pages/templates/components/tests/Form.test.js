@@ -127,5 +127,11 @@ describe('Template Form', () => {
       const result = wrapper.instance().validateDomain('email@{{domain}}');
       expect(result).toEqual(undefined);
     });
+
+    it('should validate complicated substituted domain', () => {
+      wrapper.setProps({ domains: [{ domain: 'valid.com' }]});
+      const result = wrapper.instance().validateDomain('email@{{if sending_domain}}{{domain}}{{else}}domain.com{{end}}');
+      expect(result).toEqual(undefined);
+    });
   });
 });

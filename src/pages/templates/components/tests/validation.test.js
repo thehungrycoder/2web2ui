@@ -33,10 +33,13 @@ describe('contentRequired', () => {
 });
 
 describe('substitution', () => {
-  it('should handle substitution values', () => {
-    expect(validation.substitution('{{ sub_content }}')).toEqual(undefined);
-    expect(validation.substitution('{{ not valid }}')).toEqual('Substitution syntax error');
-    expect(validation.substitution('{{ not }} valid')).toEqual('Substitution syntax error');
+  it('should loosely handle substitution values', () => {
+    expect(validation.looseSubstitution('{{ sub_content }}')).toEqual(undefined);
+    expect(validation.looseSubstitution('e.{{ if sending_domain }}{{sending_domain}}{{else}}domain-123.com{{end}}')).toEqual(undefined);
+    expect(validation.looseSubstitution('{{ {{}}')).toEqual(undefined); // intentional
+    expect(validation.looseSubstitution('{{ notvalid')).toEqual('Substitution syntax error');
+    expect(validation.looseSubstitution('{ not valid }')).toEqual('Substitution syntax error');
+    expect(validation.looseSubstitution('notvalid.com')).toEqual('Substitution syntax error');
   });
 });
 
@@ -59,6 +62,10 @@ describe('emailOrSubstitution', () => {
 
   it('should handle domain substitution value', () => {
     expect(validation.emailOrSubstitution('email@{{b}}')).toEqual(undefined);
+  });
+
+  it('should handle complicated domain substitution value', () => {
+    expect(validation.emailOrSubstitution('email@{{if sending_domain}}{{domain}}{{else}}domain.com{{end}}')).toEqual(undefined);
   });
 
   it('should handle local substitution value', () => {
