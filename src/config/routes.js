@@ -25,7 +25,6 @@ import {
   PremiumSupportPage
 } from 'src/pages';
 
-import NotificationTestPage from 'src/pages/NotificationTestPage';
 import LogoutPage from 'src/pages/logout/LogoutPage';
 
 import onboarding from 'src/pages/onboarding';
@@ -518,11 +517,6 @@ const routes = [
     condition: isAws,
     title: 'Support | Request Premium Support',
     layout: App
-  },
-  {
-    path: '/notifications',
-    component: NotificationTestPage,
-    title: 'Notification Test Page'
   },
   {
     path: '/logout',

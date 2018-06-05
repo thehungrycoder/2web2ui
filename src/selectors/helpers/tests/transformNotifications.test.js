@@ -1,29 +1,11 @@
 import {
   applyUnreadStatus,
-  getPrecision,
   filterNotificationsByTimeWindow
 } from '../transformNotifications';
 import moment from 'moment';
 import cases from 'jest-in-case';
 
 describe('Notifications selector helper', () => {
-
-  describe('getPrecision', () => {
-
-    it('should return undefined if no date is present', () => {
-      expect(getPrecision()).toBeUndefined();
-    });
-
-    it('should return "day" if the date is 10 characters', () => {
-      expect(getPrecision('2018-05-04')).toEqual('day');
-    });
-
-    it('should return undefined if the date is not 10 characters', () => {
-      expect(getPrecision('2018-3-4')).toBeUndefined();
-      expect(getPrecision('2018-05-15T12:42:25-0400')).toBeUndefined();
-    });
-
-  });
 
   describe('filterNotificationsByTimeWindow', () => {
 

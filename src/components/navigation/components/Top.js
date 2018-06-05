@@ -4,6 +4,7 @@ import { WindowSizeContext } from 'src/context/WindowSize';
 import { UnstyledLink } from '@sparkpost/matchbox';
 import { Menu, Close } from '@sparkpost/matchbox-icons';
 import AccountDropdown from './AccountDropdown';
+import NotificationCenter from 'src/components/notifications/NotificationCenter';
 import styles from './Top.module.scss';
 
 class Top extends Component {
@@ -22,7 +23,8 @@ class Top extends Component {
   renderDesktop = () => (
     <div className={styles.Top}>
       <div className={styles.Logo}><SparkPost.Logo type='halfWhite' /></div>
-      <div className={styles.AccountDropdownWrapper}>
+      <div className={styles.RightSideWrapper}>
+        <NotificationCenter />
         <AccountDropdown />
       </div>
     </div>

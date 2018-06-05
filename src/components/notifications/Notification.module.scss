@@ -1,0 +1,46 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.Notification {
+  position: relative;
+  width: rem(520);
+  padding: spacing(large);
+  border-bottom: 1px solid color(gray, 8);
+  display: flex;
+}
+
+.Date {
+  font-size: rem(13);
+  margin-bottom: spacing(small);
+  color: color(gray, 4);
+  font-weight: 600;
+}
+
+.Title {
+  position: relative;
+}
+
+.unread {
+  padding-left: spacing();
+}
+
+.unread::after {
+  position: absolute;
+  top: rem(4);
+  left: 0;
+
+  display: block;
+  content: '';
+  width: 10px;
+  height: 10px;
+  border-radius: 100%;
+
+  background: color(blue);
+}
+
+.Content {
+  flex: 1 0 0;
+
+  div > *:last-child {
+    margin-bottom: 0;
+  }
+}
