@@ -2,22 +2,18 @@
 
 exports[`NoIssues View Component should render 1`] = `
 <div
-  className="NoIssues"
+  className="SupportContainer"
 >
-  <div
-    className="Message"
+  <h6>
+    Sorry, you are not authorized to submit a support ticket.
+  </h6>
+  <Button
+    color="orange"
+    flat={true}
+    onClick={[MockFunction]}
+    size="default"
   >
-    <h6>
-      Sorry, you are not authorized to submit a support ticket.
-    </h6>
-    <Button
-      color="orange"
-      flat={true}
-      onClick={[MockFunction]}
-      size="default"
-    >
-      Search support articles
-    </Button>
-  </div>
+    Search support articles
+  </Button>
 </div>
 `;

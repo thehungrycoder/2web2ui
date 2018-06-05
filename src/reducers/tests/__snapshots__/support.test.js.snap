@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Support Reducer default 1`] = `
+Object {
+  "createError": null,
+  "currentView": "docs",
+  "showPanel": false,
+  "ticketId": null,
+}
+`;
+
+exports[`Support Reducer when support panel is closed 1`] = `
+Object {
+  "createError": null,
+  "currentView": "docs",
+  "showPanel": false,
+  "ticketId": null,
+}
+`;
+
+exports[`Support Reducer when support panel is opened 1`] = `
+Object {
+  "createError": null,
+  "currentView": "docs",
+  "showPanel": true,
+  "ticketId": null,
+}
+`;
+
+exports[`Support Reducer when support panel is opened with specific view 1`] = `
+Object {
+  "createError": null,
+  "currentView": "ticket",
+  "showPanel": true,
+  "ticketId": null,
+}
+`;
+
+exports[`Support Reducer when ticket creation fails 1`] = `
+Object {
+  "createError": "Oh no!",
+  "currentView": "docs",
+  "showPanel": false,
+  "ticketId": null,
+}
+`;
+
+exports[`Support Reducer when ticket creation is pending 1`] = `
+Object {
+  "createError": null,
+  "currentView": "docs",
+  "showPanel": false,
+  "ticketId": null,
+}
+`;
+
+exports[`Support Reducer when ticket is created 1`] = `
+Object {
+  "createError": null,
+  "currentView": "docs",
+  "showPanel": false,
+  "ticketId": 123,
+}
+`;

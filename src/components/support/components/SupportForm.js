@@ -11,10 +11,10 @@ import config from 'src/config';
 import { hasOnlineSupport } from 'src/helpers/conditions/account';
 import { getBase64Contents } from 'src/helpers/file';
 import { required, maxFileSize } from 'src/helpers/validation';
-import { selectSupportIssue, selectSupportIssues } from 'src/selectors/support';
+import { notAuthorizedToSubmitSupportTickets, selectSupportIssue, selectSupportIssues } from 'src/selectors/support';
 import NoIssues from './NoIssues';
 
-import styles from './SupportForm.module.scss';
+import styles from '../Support.module.scss';
 
 export class SupportForm extends Component {
   onSubmit = async ({ attachment, issueId, message }) => {
@@ -30,16 +30,16 @@ export class SupportForm extends Component {
   };
 
   renderSuccess() {
-    const { ticketId, onContinue } = this.props;
+    const { onClose, ticketId } = this.props;
 
-    return <div className={styles.SupportForm}>
-      <div className={styles.SuccessMessage}>
+    return (
+      <div className={styles.SupportContainer}>
         <h6>Your Ticket Has Been Submitted</h6>
-        <p>Ticket # {ticketId}</p>
+        <p>Ticket #{ticketId}</p>
         <p>Please check your email for updates on your support ticket.</p>
-        <Button primary onClick={() => this.reset(onContinue)}>Continue</Button>
+        <Button primary onClick={onClose}>Continue</Button>
       </div>
-    </div>;
+    );
   }
 
   reset(parentReset) {
@@ -53,18 +53,13 @@ export class SupportForm extends Component {
       invalid,
       issues,
       needsOnlineSupport,
-      onCancel,
+      onClose,
       pristine,
       selectedIssue,
-      submitting,
-      toggleSupportPanel
+      submitting
     } = this.props;
 
-
-    return <div className={styles.SupportForm}>
-      <Panel.Section>
-        <h6>Submit A Support Ticket</h6>
-      </Panel.Section>
+    return (
       <form onSubmit={handleSubmit(this.onSubmit)}>
         <Panel.Section>
           <Field
@@ -73,7 +68,7 @@ export class SupportForm extends Component {
             helpText={needsOnlineSupport && (
               <Fragment>
                 Additional technical support is available on paid
-                plans. <PageLink onClick={toggleSupportPanel} to="/account/billing/plan">Upgrade now</PageLink>.
+                plans. <PageLink onClick={onClose} to="/account/billing/plan">Upgrade now</PageLink>.
               </Fragment>
             )}
             errorInLabel
@@ -109,19 +104,20 @@ export class SupportForm extends Component {
           <Button submit primary disabled={pristine || invalid || submitting}>
             {submitting ? 'Submitting' : 'Submit Ticket'}
           </Button>
-          <Button className={styles.CancelBtn} disabled={submitting} onClick={() => this.reset(onCancel)}>Cancel</Button>
         </Panel.Section>
       </form>
-    </div>;
+    );
   }
 
   render() {
-    if (this.props.submitSucceeded) {
-      return this.renderSuccess();
+    const { notAuthorizedToSubmitSupportTickets, openSupportPanel, submitSucceeded } = this.props;
+
+    if (notAuthorizedToSubmitSupportTickets) {
+      return <NoIssues onCancel={openSupportPanel} />;
     }
 
-    if (this.props.issues.length < 1) {
-      return <NoIssues onCancel={() => this.reset(this.props.onCancel)} />;
+    if (submitSucceeded) {
+      return this.renderSuccess();
     }
 
     return this.renderForm();
@@ -133,6 +129,7 @@ const selector = formValueSelector(formName);
 const mapStateToProps = (state) => ({
   issues: selectSupportIssues(state),
   needsOnlineSupport: !hasOnlineSupport(state),
+  notAuthorizedToSubmitSupportTickets: notAuthorizedToSubmitSupportTickets(state),
   selectedIssue: selectSupportIssue(state, selector(state, 'issueId')),
   ticketId: state.support.ticketId
 });

@@ -1,66 +1,13 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 
 .Support {
-  position: fixed;
-  bottom: spacing(large);
-  right: spacing(large);
-  width: rem(60);
-  height: rem(60);
-  z-index: z-index(overlay);
-
-  // Targets the trigger wrapper
-  & > span {
-    display: block;
-  }
+  min-height: rem(530);
 }
 
-.Popover {
-  width: rem(590);
-  height: rem(600);
-}
-
-.Button {
-  position: relative;
-  display: inline-block;
-  width: rem(60);
-  height: rem(60);
-
-  background: color(orange);
-  border-radius: 50%;
-  box-shadow: shadow(deep);
-
-  &:hover {
-    box-shadow: shadow(deeper);
-  }
-}
-
-.Icon {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: color(gray, 10);
-
-  path {
-    box-shadow: shadow(deep);
-  }
-}
-
-// Support article
-
-.Article {
-  margin-bottom: spacing();
-}
-
-.ArticleTitle {
-  margin-bottom: 0;
-
-  * {
-    vertical-align: middle;
-  }
-
-  a {
-    color: color(blue, dark);
-    text-decoration: none;
-  }
+.SupportContainer {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: rem(530);
+  justify-content: center;
 }
