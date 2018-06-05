@@ -2,10 +2,11 @@ import React from 'react';
 import { AddIps } from '../AddIps';
 import { shallow } from 'enzyme';
 import { SubmissionError } from 'redux-form';
-import * as accountConditions from 'src/helpers/conditions/account';
+import { isAws } from 'src/helpers/conditions/account';
 import * as conversions from 'src/helpers/conversionTracking';
 import * as constants from 'src/constants';
 
+jest.mock('src/helpers/conditions/account');
 jest.mock('src/helpers/conversionTracking');
 
 describe('AddIps', () => {
@@ -22,7 +23,7 @@ describe('AddIps', () => {
       account: {}
     };
 
-    accountConditions.isAws = jest.fn(() => false);
+    isAws.mockImplementation(() => false);
 
     wrapper = shallow(<AddIps {...props} />);
     instance = wrapper.instance();
@@ -68,7 +69,7 @@ describe('AddIps', () => {
     });
 
     it('calls addDedicatedIps with correct args for aws account', async () => {
-      accountConditions.isAws = jest.fn(() => true);
+      isAws.mockImplementation(() => true);
       await instance.onSubmit({ ipPool: 'pool name', quantity: 1 });
       expect(instance.props.addDedicatedIps).toHaveBeenCalledWith({
         ip_pool: 'pool_name',
