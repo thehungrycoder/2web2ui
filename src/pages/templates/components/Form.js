@@ -13,7 +13,7 @@ import FromEmailWrapper from './FromEmail';
 // Helpers & Validation
 import { required } from 'src/helpers/validation';
 import { slugify } from 'src/helpers/string';
-import { ID_ALLOWED_CHARS, idSyntax, emailOrSubstitution, substitution } from './validation';
+import { ID_ALLOWED_CHARS, idSyntax, emailOrSubstitution, looseSubstitution } from './validation';
 
 import styles from './FormEditor.module.scss';
 
@@ -50,7 +50,7 @@ export default class Form extends Component {
 
     if (parts.length > 1) {
       const validSandboxDomain = parts[1] === config.sandbox.domain;
-      const validDomain = parts[1] && (domains.map(({ domain }) => domain).includes(parts[1]) || !substitution(parts[1]));
+      const validDomain = parts[1] && (domains.map(({ domain }) => domain).includes(parts[1]) || !looseSubstitution(parts[1]));
 
       return validSandboxDomain || validDomain ? undefined : 'Must use a verified sending domain';
     }
