@@ -3,7 +3,8 @@ import * as actions from '../notifications';
 import * as userActions from 'src/actions/currentUser';
 
 jest.mock('src/actions/currentUser');
-global.Date = jest.fn();
+const mockNow = new Date('2018-05-15T12:00:00.000Z');
+global.Date = jest.fn(() => mockNow);
 
 beforeEach(() => {
   userActions.updateUserUIOptions = jest.fn((a) => ({ ...a, type: 'UPDATE_USER_UI_OPTIONS_TEST_TYPE' }));
