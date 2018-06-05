@@ -55,7 +55,7 @@ export class Support extends Component {
 
     return (
       <AccessControl condition={() => true}>
-        <Modal open={showSupportPanel} onClose={closeSupportPanel}>
+        <Modal open={showSupportPanel} onClose={closeSupportPanel} showCloseButton={true}>
           {authorizedToSubmitSupportTickets && (
             <Tabs connectBelow={true} selected={selectedTabIndex} tabs={tabs} />
           )}
