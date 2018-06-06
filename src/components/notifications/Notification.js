@@ -11,7 +11,7 @@ const Notification = ({
 }) => (
   <div className={styles.Notification}>
     <div className={styles.Content}>
-      <p className={styles.Date}>{formatDate(activeDate)}</p>
+      <p className={styles.Date}>{formatDate(activeDate, 'MMMM Do, YYYY')}</p>
       <h6 className={classnames(styles.Title, unread && styles.unread)}>
         {title}
       </h6>

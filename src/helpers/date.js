@@ -107,12 +107,12 @@ export function getRelativeDates(range) {
   }
 }
 
-export function formatDate(date) {
-  return moment(date).format(config.dateFormat);
+export function formatDate(date, FORMAT = config.dateFormat) {
+  return moment(date).format(FORMAT);
 }
 
-export function formatTime(time) {
-  return moment(time).format(config.timeFormat);
+export function formatTime(time, FORMAT = config.timeFormat) {
+  return moment(time).format(FORMAT);
 }
 
 export function formatDateTime(datetime) {
