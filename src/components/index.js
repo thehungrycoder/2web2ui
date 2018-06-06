@@ -16,7 +16,6 @@ export { default as PieChart } from './pieChart/PieChart';
 export { default as PlanPicker } from './planPicker/PlanPicker';
 export { default as SparkPost } from './sparkPost/SparkPost';
 export { default as CenteredLogo } from './sparkPost/CenteredLogo';
-export { default as Support } from './support/Support';
 export { default as UsageReport } from './usageReport/UsageReport';
 export { default as ShortKeyCode } from './shortKeyCode/ShortKeyCode';
 export { default as ReadyFor } from './domainStatus/ReadyFor';

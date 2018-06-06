@@ -2,6 +2,9 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import { Support } from '../Support';
+import findRouteByPath from 'src/helpers/findRouteByPath';
+
+jest.mock('src/helpers/findRouteByPath');
 
 describe('Support', () => {
   let props;
@@ -12,6 +15,7 @@ describe('Support', () => {
   );
 
   beforeEach(() => {
+    findRouteByPath.mockImplementation(() => ({ path: '/example' }));
     props = {
       authorizedToCallSupport: true,
       authorizedToSubmitSupportTickets: true,
@@ -43,11 +47,22 @@ describe('Support', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('renders search panel with current page search term', () => {
+    findRouteByPath.mockImplementationOnce(() => ({
+      path: '/example',
+      supportDocSearch: 'exampleKeyword'
+    }));
+    wrapper.setProps({ currentSupportView: 'docs' });
+
+    expect(wrapper).toMatchSnapshot();
+  });
+
   it('renders search panel without tabs', () => {
     wrapper.setProps({
       authorizedToCallSupport: false,
       authorizedToSubmitSupportTickets: false
     });
+
     expect(wrapper).toMatchSnapshot();
   });
 

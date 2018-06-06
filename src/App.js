@@ -1,6 +1,7 @@
 import React from 'react';
 import { PublicRoute, ProtectedRoute, AuthenticationGate, SuspensionAlerts } from 'src/components/auth';
-import { CookieConsent, Support, GlobalAlertWrapper, BoomerangBanner, SiftScience } from 'src/components';
+import { CookieConsent, GlobalAlertWrapper, BoomerangBanner, SiftScience } from 'src/components';
+import Support from 'src/components/support/Support';
 import GoogleTagManager from 'src/components/googleTagManager/GoogleTagManager';
 import Layout from 'src/components/layout/Layout';
 import ErrorBoundary from 'src/components/errorBoundaries/ErrorBoundary';
