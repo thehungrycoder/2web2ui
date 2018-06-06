@@ -297,6 +297,15 @@ export const list = [
     inSummary: true
   },
   {
+    key: 'unsubscribe_rate',
+    label: 'Unsubscribe Rate',
+    unit: 'percent',
+    computeKeys: ['count_unsubscribe', 'count_accepted'],
+    compute: rate,
+    description: 'Percentage of Accepted messages that resulted in unsubscribes.',
+    inSummary: true
+  },
+  {
     key: 'count_delayed',
     label: 'Delayed',
     type: 'total',
