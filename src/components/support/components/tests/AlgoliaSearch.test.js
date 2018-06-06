@@ -20,7 +20,7 @@ describe('Algolia Search component', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should refine search on mount wiht default search text', () => {
+  it('should refine search on mount with default search text', () => {
     expect(props.refine).toHaveBeenCalledWith(defaultSearchText);
   });
 

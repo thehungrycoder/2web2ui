@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { TextField } from '@sparkpost/matchbox';
 import { connectSearchBox } from 'react-instantsearch/connectors';
 
-// TODO: https://github.com/algolia/react-instantsearch/issues/355
 export class AlgoliaSearch extends Component {
   // Must track user entered text to control the display
   state = {
