@@ -1,15 +1,17 @@
 import React from 'react';
-import Top from '../Top';
+import { Top } from '../Top';
 import context from 'src/__testHelpers__/context';
 
 describe('Top', () => {
   let consumer;
-  const props = {
-    toggleMobileNav: jest.fn(),
-    open: false
-  };
+  let props;
 
   beforeEach(() => {
+    props = {
+      openSupportPanel: jest.fn(),
+      toggleMobileNav: jest.fn(),
+      open: false
+    };
     consumer = context(<Top {...props} />, { mobile: false });
   });
 
@@ -29,5 +31,10 @@ describe('Top', () => {
   it('should render close icon when open', () => {
     consumer.component.setProps({ open: true });
     expect(consumer.children({ mobile: true })).toMatchSnapshot();
+  });
+
+  it('should call openSupportPanel when help icon is clicked', () => {
+    consumer.children().find('HelpOutline').simulate('click');
+    expect(props.openSupportPanel).toHaveBeenCalled();
   });
 });

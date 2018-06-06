@@ -11,26 +11,22 @@ describe('Action Creator: Support', () => {
     formActions.change = jest.fn((a) => a);
   });
 
-  describe('toggleSupportPanel', () => {
-    it('should toggle panel', () => {
-      expect(support.toggleSupportPanel()).toMatchSnapshot();
-    });
+  it('should close support panel', () => {
+    const action = support.closeSupportPanel();
+    expect(action).toMatchSnapshot();
   });
 
-  describe('clearTicketForm', () => {
-    it('should clear ticket form', () => {
-      expect(support.clearTicketForm()).toMatchSnapshot();
-    });
+  it('should open support panel', () => {
+    const action = support.openSupportPanel();
+    expect(action).toMatchSnapshot();
   });
 
-  describe('toggleTicketForm', () => {
-    it('should toggle ticket form', () => {
-      expect(support.toggleTicketForm()).toMatchSnapshot();
-    });
+  it('should open support panel with specific view', () => {
+    const action = support.openSupportPanel({ view: 'ticket' });
+    expect(action).toMatchSnapshot();
   });
 
   describe('openSupportTicketForm', () => {
-
     it('should open support panel', () => {
       support.openSupportTicketForm()(dispatchMock);
       expect(dispatchMock).toMatchSnapshot();

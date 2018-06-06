@@ -1,115 +1,149 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Support Component render tests should render just the icon by default 1`] = `
-<Portal
-  containerId="support-portal"
+exports[`Support renders search panel by default 1`] = `
+<Connect(AccessControl)
+  condition={[Function]}
 >
-  <div
-    className="Support"
+  <Modal
+    onClose={[MockFunction]}
+    open={true}
+    showCloseButton={true}
   >
-    <Connect(AccessControl)
-      condition={[Function]}
+    <Tabs
+      color="orange"
+      connectBelow={true}
+      selected={0}
+      tabs={
+        Array [
+          Object {
+            "content": "Search Help",
+            "onClick": [Function],
+          },
+          Object {
+            "content": "Submit A Ticket",
+            "onClick": [Function],
+          },
+          Object {
+            "content": "Contact Us",
+            "onClick": [Function],
+          },
+        ]
+      }
+    />
+    <Panel
+      className="Support"
     >
-      <Popover
-        bottom={true}
-        className="Popover"
-        fixed={true}
-        left={true}
-        open={false}
-        right={true}
-        top={true}
-        trigger={
-          <a
-            className="Button"
-            onClick={[Function]}
-          >
-            <Help
-              className="Icon"
-              size={33}
-            />
-          </a>
-        }
+      <SearchPanel />
+    </Panel>
+  </Modal>
+</Connect(AccessControl)>
+`;
+
+exports[`Support renders search panel without tabs 1`] = `
+<Connect(AccessControl)
+  condition={[Function]}
+>
+  <Modal
+    onClose={[MockFunction]}
+    open={true}
+    showCloseButton={true}
+  >
+    <Panel
+      className="Support"
+    >
+      <SearchPanel />
+    </Panel>
+  </Modal>
+</Connect(AccessControl)>
+`;
+
+exports[`Support renders support contact panel 1`] = `
+<Connect(AccessControl)
+  condition={[Function]}
+>
+  <Modal
+    onClose={[MockFunction]}
+    open={true}
+    showCloseButton={true}
+  >
+    <Tabs
+      color="orange"
+      connectBelow={true}
+      selected={2}
+      tabs={
+        Array [
+          Object {
+            "content": "Search Help",
+            "onClick": [Function],
+          },
+          Object {
+            "content": "Submit A Ticket",
+            "onClick": [Function],
+          },
+          Object {
+            "content": "Contact Us",
+            "onClick": [Function],
+          },
+        ]
+      }
+    />
+    <Panel
+      className="Support"
+    >
+      <div
+        className="SupportContainer"
+      >
+        <h6>
+          We are available Monday through Friday, 9am to 8pm Eastern time.
+        </h6>
+        <UnstyledLink
+          to="tel:1-415-751-0928"
+        >
+          +1 (415) 751-0928
+        </UnstyledLink>
+      </div>
+    </Panel>
+  </Modal>
+</Connect(AccessControl)>
+`;
+
+exports[`Support renders support form 1`] = `
+<Connect(AccessControl)
+  condition={[Function]}
+>
+  <Modal
+    onClose={[MockFunction]}
+    open={true}
+    showCloseButton={true}
+  >
+    <Tabs
+      color="orange"
+      connectBelow={true}
+      selected={1}
+      tabs={
+        Array [
+          Object {
+            "content": "Search Help",
+            "onClick": [Function],
+          },
+          Object {
+            "content": "Submit A Ticket",
+            "onClick": [Function],
+          },
+          Object {
+            "content": "Contact Us",
+            "onClick": [Function],
+          },
+        ]
+      }
+    />
+    <Panel
+      className="Support"
+    >
+      <Connect(ReduxForm)
+        onClose={[MockFunction]}
       />
-    </Connect(AccessControl)>
-  </div>
-</Portal>
-`;
-
-exports[`Support Component render tests should show form and close icon when panel is opened and form is toggled 1`] = `
-<Portal
-  containerId="support-portal"
->
-  <div
-    className="Support"
-  >
-    <Connect(AccessControl)
-      condition={[Function]}
-    >
-      <Popover
-        bottom={true}
-        className="Popover"
-        fixed={true}
-        left={true}
-        open={true}
-        right={true}
-        top={true}
-        trigger={
-          <a
-            className="Button"
-            onClick={[Function]}
-          >
-            <Cancel
-              className="Icon"
-              size={33}
-            />
-          </a>
-        }
-      >
-        <Connect(ReduxForm)
-          onCancel={[Function]}
-          onContinue={[Function]}
-        />
-      </Popover>
-    </Connect(AccessControl)>
-  </div>
-</Portal>
-`;
-
-exports[`Support Component render tests should show search panel and close icon when panel is opened 1`] = `
-<Portal
-  containerId="support-portal"
->
-  <div
-    className="Support"
-  >
-    <Connect(AccessControl)
-      condition={[Function]}
-    >
-      <Popover
-        bottom={true}
-        className="Popover"
-        fixed={true}
-        left={true}
-        open={true}
-        right={true}
-        top={true}
-        trigger={
-          <a
-            className="Button"
-            onClick={[Function]}
-          >
-            <Cancel
-              className="Icon"
-              size={33}
-            />
-          </a>
-        }
-      >
-        <Connect(Component)
-          toggleForm={[Function]}
-        />
-      </Popover>
-    </Connect(AccessControl)>
-  </div>
-</Portal>
+    </Panel>
+  </Modal>
+</Connect(AccessControl)>
 `;

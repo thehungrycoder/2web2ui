@@ -28,30 +28,13 @@ describe('Support Form Component', () => {
       wrapper = shallow(<SupportForm {...props} />);
     });
 
-    it('should render', () => {
+    it('should render support form', () => {
       expect(wrapper).toMatchSnapshot();
     });
 
-    it('should render the form by default', () => {
-      expect(wrapper.find('form').exists()).toBeTruthy();
-      expect(wrapper.find('h6').text()).toMatch(/Submit A Support Ticket/);
-    });
-
-    it('should not render the form on success', () => {
-      const successProps = { ...props, submitSucceeded: true };
-
-      wrapper = shallow(<SupportForm {...successProps} />);
-      expect(wrapper.find('form').exists()).toBeFalsy();
-    });
-
-    it('should render message on success', () => {
-      wrapper = shallow(<SupportForm {...props} submitSucceeded={true} />);
-      expect(wrapper.find('h6').text()).toMatch(/Has Been Submitted/);
-    });
-
-    it('should not render message on failure', () => {
-      wrapper = shallow(<SupportForm {...props} submitFailed={true} />);
-      expect(wrapper.find('h6').text()).not.toMatch(/Has Been Submitted/);
+    it('should render successfully created ticket message', () => {
+      wrapper.setProps({ submitSucceeded: true, ticketId: 123 });
+      expect(wrapper).toMatchSnapshot();
     });
 
     it('should render with selected issue message label', () => {
@@ -64,8 +47,8 @@ describe('Support Form Component', () => {
       expect(wrapper.find('Field[name="issueId"]')).toMatchSnapshot();
     });
 
-    it('should render no issue view when no issues are available', () => {
-      wrapper.setProps({ issues: []});
+    it('should render unauthorized message', () => {
+      wrapper.setProps({ notAuthorizedToSubmitSupportTickets: true });
       expect(wrapper).toMatchSnapshot();
     });
   });
@@ -80,46 +63,28 @@ describe('Support Form Component', () => {
         createTicket: jest.fn(),
         handleSubmit: jest.fn(),
         reset: jest.fn(),
-        onCancel: jest.fn(),
-        onContinue: jest.fn()
+        onClose: jest.fn(),
+        openSupportPanel: jest.fn()
       };
       wrapper = shallow(<SupportForm {...props} />);
     });
 
     it('should call parent on cancel', () => {
-      wrapper.instance().reset(props.onCancel);
-      expect(props.onCancel).toHaveBeenCalled();
+      wrapper.instance().reset(props.onClose);
+      expect(props.onClose).toHaveBeenCalled();
     });
 
-    it('should call parent on continue', () => {
-      wrapper.instance().reset(props.onContinue);
-      expect(props.onContinue).toHaveBeenCalled();
-    });
-
-    it('should cancel', () => {
-      const spy = jest.spyOn(wrapper.instance(), 'reset');
-      const btns = wrapper.find('Button');
-      expect(btns).toHaveLength(2);
-      btns.at(1).simulate('click');
-      expect(spy).toHaveBeenCalled();
-      expect(props.onCancel).toHaveBeenCalled();
-    });
-
-    it('should cancel on no issue view', () => {
-      wrapper.setProps({ issues: []});
-      const spy = jest.spyOn(wrapper.instance(), 'reset');
+    it('should reopen support panel when no issue view is canceled', () => {
+      wrapper.setProps({ notAuthorizedToSubmitSupportTickets: true });
       wrapper.find('NoIssues').simulate('cancel');
-      expect(spy).toHaveBeenCalled();
-      expect(props.onCancel).toHaveBeenCalled();
+
+      expect(props.openSupportPanel).toHaveBeenCalled();
     });
 
     it('should continue', () => {
-      props = { ...props, submitSucceeded: true };
-      wrapper = shallow(<SupportForm {...props} />);
-      const spy = jest.spyOn(wrapper.instance(), 'reset');
+      wrapper.setProps({ submitSucceeded: true });
       wrapper.find('Button').simulate('click');
-      expect(spy).toHaveBeenCalled();
-      expect(props.onContinue).toHaveBeenCalled();
+      expect(props.onClose).toHaveBeenCalled();
     });
 
     it('should submit a ticket', async () => {

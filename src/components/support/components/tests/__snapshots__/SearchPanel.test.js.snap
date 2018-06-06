@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Search Panel Component should not render cta without support issues 1`] = `
+exports[`SearchPanel renders search panel 1`] = `
 <CreateInstantSearch
   apiKey="key"
   appId="id"
@@ -23,39 +23,6 @@ exports[`Search Panel Component should not render cta without support issues 1`]
   >
     <AlgoliaHits(Hits)
       hitComponent={[Function]}
-    />
-  </Panel.Section>
-</CreateInstantSearch>
-`;
-
-exports[`Search Panel Component should render 1`] = `
-<CreateInstantSearch
-  apiKey="key"
-  appId="id"
-  indexName="index"
-  refresh={false}
-  root={
-    Object {
-      "Root": "div",
-      "props": Object {
-        "className": "ais-InstantSearch__root",
-      },
-    }
-  }
->
-  <Panel.Section>
-    <AlgoliaSearchBox(UnknownComponent) />
-  </Panel.Section>
-  <Panel.Section
-    className="Results shorten"
-  >
-    <AlgoliaHits(Hits)
-      hitComponent={[Function]}
-    />
-  </Panel.Section>
-  <Panel.Section>
-    <Connect(SupportCta)
-      toggleForm={[MockFunction]}
     />
   </Panel.Section>
 </CreateInstantSearch>

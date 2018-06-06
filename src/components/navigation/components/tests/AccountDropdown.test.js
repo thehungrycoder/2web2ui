@@ -4,25 +4,33 @@ import { shallow } from 'enzyme';
 import context from 'src/__testHelpers__/context';
 
 describe('AccountDropdown', () => {
+  let props;
   let wrapper;
   const MockIcon = () => 'MockIcon';
-  const props = {
-    email: 'test@testing.com',
-    accountNavItems: [
-      {
-        label: 'link',
-        to: 'link'
-      },
-      {
-        label: 'link2',
-        to: 'link2',
-        external: true,
-        icon: MockIcon
-      }
-    ]
-  };
+  const link3Action = Symbol;
 
   beforeEach(() => {
+    props = {
+      dispatch: jest.fn(),
+      email: 'test@testing.com',
+      accountNavItems: [
+        {
+          label: 'link',
+          to: 'link'
+        },
+        {
+          label: 'link2',
+          to: 'link2',
+          external: true,
+          icon: MockIcon
+        },
+        {
+          label: 'link3',
+          action: jest.fn(() => link3Action)
+        }
+      ]
+    };
+
     wrapper = shallow(<AccountDropdown {...props} />);
   });
 
@@ -42,6 +50,14 @@ describe('AccountDropdown', () => {
     expect(wrapper).toHaveState({ open: true });
     wrapper.find('ActionList').simulate('click');
     expect(wrapper).toHaveState({ open: false });
+  });
+
+  it('should dispatch nav item action on click', () => {
+    const link3 = wrapper.instance().getItems().find((item) => item.content === 'link3');
+    link3.onClick();
+
+    expect(props.accountNavItems[2].action).toHaveBeenCalled();
+    expect(props.dispatch).toHaveBeenCalledWith(link3Action);
   });
 
   describe('activator', () => {

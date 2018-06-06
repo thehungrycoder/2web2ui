@@ -2,15 +2,38 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import qs from 'query-string';
-import { Portal, Popover } from '@sparkpost/matchbox';
-import { Cancel, Help } from '@sparkpost/matchbox-icons';
-import { AccessControl } from 'src/components/auth';
+import { Panel, Tabs, UnstyledLink } from '@sparkpost/matchbox';
 import * as supportActions from 'src/actions/support';
-import SupportForm from './components/SupportForm';
+import { AccessControl } from 'src/components/auth';
+import Modal from 'src/components/modals/Modal';
+import { authorizedToSubmitSupportTickets, entitledToPhoneSupport } from 'src/selectors/support';
 import SearchPanel from './components/SearchPanel';
+import SupportForm from './components/SupportForm';
+
 import styles from './Support.module.scss';
 
 export class Support extends Component {
+  TABS = [
+    {
+      content: 'Search Help',
+      onClick: () => this.props.openSupportPanel({ view: 'docs' }),
+      view: 'docs',
+      visible: () => true
+    },
+    {
+      content: 'Submit A Ticket',
+      onClick: () => this.props.openSupportPanel({ view: 'ticket' }),
+      view: 'ticket',
+      visible: () => this.props.authorizedToSubmitSupportTickets
+    },
+    {
+      content: 'Contact Us',
+      onClick: () => this.props.openSupportPanel({ view: 'contact' }),
+      view: 'contact',
+      visible: () => this.props.authorizedToCallSupport
+    }
+  ];
+
   componentDidMount() {
     this.maybeOpenTicket();
   }
@@ -33,63 +56,46 @@ export class Support extends Component {
     }
   }
 
-  togglePanel = () => {
-    const { showPanel, showTicketForm, toggleSupportPanel, toggleTicketForm } = this.props;
-
-    // handling reseting doc search when closed
-    if (!showPanel && showTicketForm) {
-      toggleTicketForm();
-    }
-    toggleSupportPanel();
-  }
-
-  toggleForm = () => {
-    this.props.toggleTicketForm();
-  }
-
   render() {
-    const { loggedIn, showPanel, showTicketForm } = this.props;
+    const { closeSupportPanel, currentSupportView, loggedIn, showSupportPanel } = this.props;
+    const visibleTabs = this.TABS.filter((tab) => tab.visible());
 
     if (!loggedIn) {
       return null;
     }
 
-    const Icon = showPanel ? Cancel : Help;
-
-    const triggerMarkup = (
-      <a className={styles.Button} onClick={this.togglePanel}>
-        <Icon className={styles.Icon} size={33} />
-      </a>
-    );
-
     return (
-      <Portal containerId='support-portal'>
-        <div className={styles.Support}>
-          {/* Wait for access control state to be ready before rendering the popover */}
-          <AccessControl condition={() => true}>
-            <Popover
-              top
-              left
-              fixed
-              className={styles.Popover}
-              open={showPanel}
-              trigger={triggerMarkup}
-            >
-              {showPanel && (showTicketForm
-                ? <SupportForm onCancel={this.toggleForm} onContinue={this.toggleForm} />
-                : <SearchPanel toggleForm={this.toggleForm} />)}
-            </Popover>
-          </AccessControl>
-        </div>
-      </Portal>
+      <AccessControl condition={() => true}>
+        <Modal open={showSupportPanel} onClose={closeSupportPanel} showCloseButton={true}>
+          {visibleTabs.length > 1 && (
+            <Tabs
+              connectBelow={true}
+              selected={visibleTabs.findIndex((tab) => tab.view === currentSupportView)}
+              tabs={visibleTabs.map(({ content, onClick }) => ({ content, onClick }))}
+            />
+          )}
+          <Panel className={styles.Support}>
+            {currentSupportView === 'docs' && <SearchPanel />}
+            {currentSupportView === 'ticket' && <SupportForm onClose={closeSupportPanel} />}
+            {currentSupportView === 'contact' && (
+              <div className={styles.SupportContainer}>
+                <h6>We are available Monday through Friday, 9am to 8pm Eastern time.</h6>
+                <UnstyledLink to='tel:1-415-751-0928'>+1 (415) 751-0928</UnstyledLink>
+              </div>
+            )}
+          </Panel>
+        </Modal>
+      </AccessControl>
     );
   }
 }
 
 const mapStateToProps = (state) => ({
+  authorizedToCallSupport: entitledToPhoneSupport(state),
+  authorizedToSubmitSupportTickets: authorizedToSubmitSupportTickets(state),
+  currentSupportView: state.support.currentView,
   loggedIn: state.auth.loggedIn,
-  showPanel: state.support.showPanel,
-  showTicketForm: state.support.showTicketForm
+  showSupportPanel: state.support.showPanel
 });
 
 export default withRouter(connect(mapStateToProps, supportActions)(Support));

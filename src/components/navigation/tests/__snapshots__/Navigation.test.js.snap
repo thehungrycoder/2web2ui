@@ -2,7 +2,7 @@
 
 exports[`Navigation should render on desktop 1`] = `
 <React.Fragment>
-  <Top
+  <Connect(Top)
     open={false}
     toggleMobileNav={[Function]}
   />
@@ -46,7 +46,7 @@ exports[`Navigation should render on mobile 1`] = `
     className="Overlay"
     onClick={[Function]}
   />
-  <Top
+  <Connect(Top)
     open={false}
     toggleMobileNav={[Function]}
   />

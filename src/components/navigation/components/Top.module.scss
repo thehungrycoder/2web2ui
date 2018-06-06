@@ -50,3 +50,13 @@
     color: color(gray, 10);
   }
 }
+
+.SupportIcon {
+  cursor: pointer;
+  fill: color(gray, 5);
+  margin: 0 spacing() 0 0;
+
+  &:hover {
+    fill: color(gray, 10);
+  }
+}
