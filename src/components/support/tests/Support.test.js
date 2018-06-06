@@ -9,6 +9,7 @@ describe('Support', () => {
 
   beforeEach(() => {
     props = {
+      authorizedToCallSupport: true,
       authorizedToSubmitSupportTickets: true,
       closeSupportPanel: jest.fn(),
       currentSupportView: 'docs',
@@ -37,8 +38,11 @@ describe('Support', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('renders search panel without tabs when unauthorized to submit tickets', () => {
-    wrapper.setProps({ authorizedToSubmitSupportTickets: false });
+  it('renders search panel without tabs', () => {
+    wrapper.setProps({
+      authorizedToCallSupport: false,
+      authorizedToSubmitSupportTickets: false
+    });
     expect(wrapper).toMatchSnapshot();
   });
 

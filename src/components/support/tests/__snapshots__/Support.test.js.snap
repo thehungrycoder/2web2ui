@@ -19,16 +19,19 @@ exports[`Support renders search panel by default 1`] = `
             "content": "Search Help",
             "onClick": [Function],
             "view": "docs",
+            "visible": [Function],
           },
           Object {
             "content": "Submit A Ticket",
             "onClick": [Function],
             "view": "ticket",
+            "visible": [Function],
           },
           Object {
             "content": "Contact Us",
             "onClick": [Function],
             "view": "contact",
+            "visible": [Function],
           },
         ]
       }
@@ -42,7 +45,7 @@ exports[`Support renders search panel by default 1`] = `
 </Connect(AccessControl)>
 `;
 
-exports[`Support renders search panel without tabs when unauthorized to submit tickets 1`] = `
+exports[`Support renders search panel without tabs 1`] = `
 <Connect(AccessControl)
   condition={[Function]}
 >
@@ -79,16 +82,19 @@ exports[`Support renders support contact panel 1`] = `
             "content": "Search Help",
             "onClick": [Function],
             "view": "docs",
+            "visible": [Function],
           },
           Object {
             "content": "Submit A Ticket",
             "onClick": [Function],
             "view": "ticket",
+            "visible": [Function],
           },
           Object {
             "content": "Contact Us",
             "onClick": [Function],
             "view": "contact",
+            "visible": [Function],
           },
         ]
       }
@@ -96,7 +102,18 @@ exports[`Support renders support contact panel 1`] = `
     <Panel
       className="Support"
     >
-      <Connect(Component) />
+      <div
+        className="SupportContainer"
+      >
+        <h6>
+          We are available Monday through Friday, 9am to 8pm Eastern time.
+        </h6>
+        <UnstyledLink
+          to="tel:1-415-751-0928"
+        >
+          +1 (415) 751-0928
+        </UnstyledLink>
+      </div>
     </Panel>
   </Modal>
 </Connect(AccessControl)>
@@ -121,16 +138,19 @@ exports[`Support renders support form 1`] = `
             "content": "Search Help",
             "onClick": [Function],
             "view": "docs",
+            "visible": [Function],
           },
           Object {
             "content": "Submit A Ticket",
             "onClick": [Function],
             "view": "ticket",
+            "visible": [Function],
           },
           Object {
             "content": "Contact Us",
             "onClick": [Function],
             "view": "contact",
+            "visible": [Function],
           },
         ]
       }

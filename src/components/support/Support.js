@@ -2,18 +2,38 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import qs from 'query-string';
-import { Panel, Tabs } from '@sparkpost/matchbox';
+import { Panel, Tabs, UnstyledLink } from '@sparkpost/matchbox';
 import * as supportActions from 'src/actions/support';
 import { AccessControl } from 'src/components/auth';
 import Modal from 'src/components/modals/Modal';
-import { authorizedToSubmitSupportTickets } from 'src/selectors/support';
+import { authorizedToSubmitSupportTickets, entitledToPhoneSupport } from 'src/selectors/support';
 import SearchPanel from './components/SearchPanel';
-import SupportContact from './components/SupportContact';
 import SupportForm from './components/SupportForm';
 
 import styles from './Support.module.scss';
 
 export class Support extends Component {
+  TABS = [
+    {
+      content: 'Search Help',
+      onClick: () => this.props.openSupportPanel({ view: 'docs' }),
+      view: 'docs',
+      visible: () => true
+    },
+    {
+      content: 'Submit A Ticket',
+      onClick: () => this.props.openSupportPanel({ view: 'ticket' }),
+      view: 'ticket',
+      visible: () => this.props.authorizedToSubmitSupportTickets
+    },
+    {
+      content: 'Contact Us',
+      onClick: () => this.props.openSupportPanel({ view: 'contact' }),
+      view: 'contact',
+      visible: () => this.props.authorizedToCallSupport
+    }
+  ];
+
   componentDidMount() {
     this.maybeOpenTicket();
   }
@@ -36,18 +56,9 @@ export class Support extends Component {
     }
   }
 
-  openSupportPanel = (view) => () => {
-    this.props.openSupportPanel({ view });
-  }
-
   render() {
-    const { authorizedToSubmitSupportTickets, closeSupportPanel, currentSupportView, loggedIn, showSupportPanel } = this.props;
-    const tabs = [
-      { content: 'Search Help', onClick: this.openSupportPanel('docs'), view: 'docs' },
-      { content: 'Submit A Ticket', onClick: this.openSupportPanel('ticket'), view: 'ticket' },
-      { content: 'Contact Us', onClick: this.openSupportPanel('contact'), view: 'contact' }
-    ];
-    const selectedTabIndex = tabs.findIndex((tab) => tab.view === currentSupportView);
+    const { closeSupportPanel, currentSupportView, loggedIn, showSupportPanel } = this.props;
+    const visibleTabs = this.TABS.filter((tab) => tab.visible());
 
     if (!loggedIn) {
       return null;
@@ -56,13 +67,22 @@ export class Support extends Component {
     return (
       <AccessControl condition={() => true}>
         <Modal open={showSupportPanel} onClose={closeSupportPanel} showCloseButton={true}>
-          {authorizedToSubmitSupportTickets && (
-            <Tabs connectBelow={true} selected={selectedTabIndex} tabs={tabs} />
+          {visibleTabs.length > 1 && (
+            <Tabs
+              connectBelow={true}
+              selected={visibleTabs.findIndex((tab) => tab.view === currentSupportView)}
+              tabs={visibleTabs}
+            />
           )}
           <Panel className={styles.Support}>
             {currentSupportView === 'docs' && <SearchPanel />}
             {currentSupportView === 'ticket' && <SupportForm onClose={closeSupportPanel} />}
-            {currentSupportView === 'contact' && <SupportContact />}
+            {currentSupportView === 'contact' && (
+              <div className={styles.SupportContainer}>
+                <h6>We are available Monday through Friday, 9am to 8pm Eastern time.</h6>
+                <UnstyledLink to='tel:1-415-751-0928'>+1 (415) 751-0928</UnstyledLink>
+              </div>
+            )}
           </Panel>
         </Modal>
       </AccessControl>
@@ -71,6 +91,7 @@ export class Support extends Component {
 }
 
 const mapStateToProps = (state) => ({
+  authorizedToCallSupport: entitledToPhoneSupport(state),
   authorizedToSubmitSupportTickets: authorizedToSubmitSupportTickets(state),
   currentSupportView: state.support.currentView,
   loggedIn: state.auth.loggedIn,
