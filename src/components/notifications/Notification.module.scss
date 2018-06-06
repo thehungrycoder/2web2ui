@@ -6,6 +6,11 @@
   padding: spacing(large);
   border-bottom: 1px solid color(gray, 8);
   display: flex;
+
+  p {
+    // tighter leading to keep notification paragraphs together
+    line-height: rem(25);
+  }
 }
 
 .Date {
