@@ -213,5 +213,10 @@ describe('plan selector', () => {
       state.account.subscription.type = 'aws';
       expect(billingInfo.selectVisiblePlans(state)).toMatchSnapshot();
     });
+
+    it('should not return new free plans if customer on free1 plan', () => {
+      state.account.subscription.code = 'free1';
+      expect(billingInfo.selectVisiblePlans(state)).toMatchSnapshot();
+    });
   });
 });

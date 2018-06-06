@@ -59,6 +59,15 @@ Array [
 ]
 `;
 
+exports[`plan selector selectVisiblePlans should not return new free plans if customer on free1 plan 1`] = `
+Array [
+  Object {
+    "code": "pub",
+    "status": "public",
+  },
+]
+`;
+
 exports[`plan selector selectVisiblePlans should return public AWS plans 1`] = `
 Array [
   Object {
