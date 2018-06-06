@@ -113,10 +113,18 @@ describe('Date helpers', () => {
       expect(formatDate(testDate)).toEqual('Oct 15 2017');
     });
 
+    it('should format a date given a custom format string', () => {
+      expect(formatDate(testDate, 'YYYY')).toEqual('2017');
+    });
+
     it('should format a time consistently', () => {
       expect(formatTime(testDate)).toEqual('8:55am');
       testDate.hours(15);
       expect(formatTime(testDate)).toEqual('3:55pm');
+    });
+
+    it('should format a time given a custom format string', () => {
+      expect(formatTime(testDate, 'ha')).toEqual('8am');
     });
 
     it('should format a date-time consistently', () => {
