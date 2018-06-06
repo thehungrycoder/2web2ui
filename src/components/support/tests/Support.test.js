@@ -7,8 +7,8 @@ describe('Support', () => {
   let props;
   let wrapper;
 
-  const findTab = (view) => (
-    wrapper.find('Tabs').prop('tabs').find((tab) => tab.view === view)
+  const findTab = (content) => (
+    wrapper.find('Tabs').prop('tabs').find((tab) => tab.content === content)
   );
 
   beforeEach(() => {
@@ -73,17 +73,17 @@ describe('Support', () => {
   });
 
   it('calls openSupportPanel when docs tab is clicked', () => {
-    findTab('docs').onClick();
+    findTab('Search Help').onClick();
     expect(props.openSupportPanel).toHaveBeenCalledWith({ view: 'docs' });
   });
 
   it('calls openSupportPanel when ticket tab is clicked', () => {
-    findTab('ticket').onClick();
+    findTab('Submit A Ticket').onClick();
     expect(props.openSupportPanel).toHaveBeenCalledWith({ view: 'ticket' });
   });
 
   it('calls openSupportPanel when contact tab is clicked', () => {
-    findTab('contact').onClick();
+    findTab('Contact Us').onClick();
     expect(props.openSupportPanel).toHaveBeenCalledWith({ view: 'contact' });
   });
 

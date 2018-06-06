@@ -71,7 +71,7 @@ export class Support extends Component {
             <Tabs
               connectBelow={true}
               selected={visibleTabs.findIndex((tab) => tab.view === currentSupportView)}
-              tabs={visibleTabs}
+              tabs={visibleTabs.map(({ content, onClick }) => ({ content, onClick }))}
             />
           )}
           <Panel className={styles.Support}>
