@@ -197,6 +197,14 @@ export const list = [
     inSummary: true
   },
   {
+    key: 'count_unsubscribe',
+    label: 'Unsubscribes',
+    type: 'total',
+    unit: 'number',
+    description: 'Link and List Unsubscriptions.',
+    inSummary: true
+  },
+  {
     key: 'count_generation_rejection',
     label: 'Generation Rejection',
     type: 'total',
