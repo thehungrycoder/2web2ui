@@ -24,3 +24,13 @@ export const selectSupportIssue = createSelector(
   [selectSupportIssues, getSupportIssueId],
   (issues, id) => _.find(issues, { id })
 );
+
+export const authorizedToSubmitSupportTickets = createSelector(
+  selectSupportIssues,
+  (issues) => issues.length > 0
+);
+
+export const notAuthorizedToSubmitSupportTickets = createSelector(
+  authorizedToSubmitSupportTickets,
+  (authorized) => !authorized
+);

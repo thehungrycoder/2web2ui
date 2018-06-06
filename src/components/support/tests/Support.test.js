@@ -1,101 +1,122 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+
 import { Support } from '../Support';
 
-describe('Support Component', () => {
+describe('Support', () => {
+  let props;
   let wrapper;
-  let instance;
+
+  const findTab = (content) => (
+    wrapper.find('Tabs').prop('tabs').find((tab) => tab.content === content)
+  );
 
   beforeEach(() => {
-    const props = {
+    props = {
+      authorizedToCallSupport: true,
+      authorizedToSubmitSupportTickets: true,
+      closeSupportPanel: jest.fn(),
+      currentSupportView: 'docs',
+      location: {
+        search: ''
+      },
       loggedIn: true,
-      location: {},
+      openSupportPanel: jest.fn(),
       openSupportTicketForm: jest.fn(),
-      toggleSupportPanel: jest.fn(),
-      toggleTicketForm: jest.fn(),
-      showPanel: false,
-      showTicketForm: false
+      showSupportPanel: true
     };
+
     wrapper = shallow(<Support {...props} />);
-    instance = wrapper.instance();
   });
 
-  describe('render tests', () => {
-    it('should render just the icon by default', () => {
-      expect(wrapper).toMatchSnapshot();
-    });
+  it('renders search panel by default', () => {
+    expect(wrapper).toMatchSnapshot();
+  });
 
-    it('should not render icon if account is not logged in', () => {
-      wrapper.setProps({ loggedIn: false });
-      expect(wrapper.get(0)).toBeFalsy();
-    });
+  it('renders support form', () => {
+    wrapper.setProps({ currentSupportView: 'ticket' });
+    expect(wrapper).toMatchSnapshot();
+  });
 
-    it('should show search panel and close icon when panel is opened', () => {
-      wrapper.setProps({ showPanel: true });
-      expect(wrapper).toMatchSnapshot();
-    });
+  it('renders support contact panel', () => {
+    wrapper.setProps({ currentSupportView: 'contact' });
+    expect(wrapper).toMatchSnapshot();
+  });
 
-    it('should show form and close icon when panel is opened and form is toggled', () => {
-      wrapper.setProps({ showPanel: true, showTicketForm: true });
-      expect(wrapper).toMatchSnapshot();
+  it('renders search panel without tabs', () => {
+    wrapper.setProps({
+      authorizedToCallSupport: false,
+      authorizedToSubmitSupportTickets: false
+    });
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders closed support panel', () => {
+    wrapper.setProps({ showSupportPanel: false });
+    expect(wrapper.find('Modal').props()).toHaveProperty('open', false);
+  });
+
+  it('renders nothing when not logged in', () => {
+    wrapper.setProps({ loggedIn: false });
+    expect(wrapper.type()).toBeNull();
+  });
+
+  it('calls closeSupportPanel when modal is closed', () => {
+    wrapper.find('Modal').simulate('close');
+    expect(props.closeSupportPanel).toHaveBeenCalled();
+  });
+
+  it('calls closeSupportPanel when support form is closed', () => {
+    wrapper.setProps({ currentSupportView: 'ticket' });
+    wrapper.find('Connect(ReduxForm)').simulate('close');
+    expect(props.closeSupportPanel).toHaveBeenCalled();
+  });
+
+  it('calls openSupportPanel when docs tab is clicked', () => {
+    findTab('Search Help').onClick();
+    expect(props.openSupportPanel).toHaveBeenCalledWith({ view: 'docs' });
+  });
+
+  it('calls openSupportPanel when ticket tab is clicked', () => {
+    findTab('Submit A Ticket').onClick();
+    expect(props.openSupportPanel).toHaveBeenCalledWith({ view: 'ticket' });
+  });
+
+  it('calls openSupportPanel when contact tab is clicked', () => {
+    findTab('Contact Us').onClick();
+    expect(props.openSupportPanel).toHaveBeenCalledWith({ view: 'contact' });
+  });
+
+  it('opens support ticket tab on mount with deep link', () => {
+    const location = {
+      search: '?supportTicket=true&supportIssue=test_issue&supportMessage=testmessage'
+    };
+    wrapper = shallow(<Support {...props} location={location} />);
+
+    expect(props.openSupportTicketForm).toHaveBeenCalledWith({
+      issueId: 'test_issue',
+      message: 'testmessage'
     });
   });
 
-  describe('on mount', () => {
-    it('should open panel and hydrate form if search value is present', () => {
-      wrapper.setProps({ location: { search: '?supportTicket=true&supportIssue=test_issue&supportMessage=testmessage' }});
-
-      expect(instance.props.openSupportTicketForm).toHaveBeenCalledWith(expect.objectContaining({
-        issueId: 'test_issue',
-        message: 'testmessage'
-      }));
+  it('opens support ticket tab on location update with deep link', () => {
+    wrapper.setProps({
+      location: {
+        search: '?supportTicket=true&supportIssue=test_issue&supportMessage=testmessage'
+      }
     });
 
-    it('should not open panel or hydrate form if search value is not present', () => {
-      expect(instance.props.openSupportTicketForm).not.toHaveBeenCalled();
+    expect(props.openSupportTicketForm).toHaveBeenCalledWith({
+      issueId: 'test_issue',
+      message: 'testmessage'
     });
   });
 
-  describe('on update', () => {
-    it('should open panel and hydrate form if location changes and search value is present', () => {
-      wrapper.setProps({ location: { search: '?supportTicket=true&supportMessage=testmessage' }});
-      expect(instance.props.openSupportTicketForm).toHaveBeenCalledWith(expect.objectContaining({ message: 'testmessage' }));
-    });
+  it('only calls openSupportTicketForm once when location stays the same', () => {
+    const search = '?supportTicket=true&supportIssue=test_issue&supportMessage=testmessage';
+    wrapper.setProps({ location: { search }});
+    wrapper.setProps({ location: { search }});
 
-    it('should not open panel or hydrate form if search does not change', () => {
-      wrapper.setProps({ location: { search: '?supportTicket=true,supportMessage=testmessage' }});
-      wrapper.setProps({ location: { search: '?supportTicket=true,supportMessage=testmessage' }});
-
-      expect(instance.props.openSupportTicketForm).toHaveBeenCalledTimes(1);
-    });
-
-    it('should not open panel or hydrate form if search value is not present', () => {
-      wrapper.setProps({ location: { search: '?supportTicket=true,supportMessage=testmessage' }});
-      wrapper.setProps({ location: { search: undefined }});
-
-      expect(instance.props.openSupportTicketForm).toHaveBeenCalledTimes(1);
-    });
-  });
-
-  describe('toggleForm/Panel tests', () => {
-    it('should toggle panel', () => {
-      expect(wrapper.state('showPanel')).toBeFalsy();
-      expect(wrapper.state('showForm')).toBeFalsy();
-      instance.togglePanel();
-      expect(instance.props.toggleSupportPanel).toHaveBeenCalledTimes(1);
-      expect(instance.props.toggleTicketForm).not.toHaveBeenCalled();
-    });
-
-    it('should reset to search panel if ticket form was open when closed', () => {
-      wrapper.setProps({ showTicketForm: true });
-      instance.togglePanel();
-      expect(instance.props.toggleTicketForm).toHaveBeenCalledTimes(1);
-      expect(instance.props.toggleSupportPanel).toHaveBeenCalledTimes(1);
-    });
-
-    it('should toggle form', () => {
-      instance.toggleForm();
-      expect(instance.props.toggleTicketForm).toHaveBeenCalledTimes(1);
-    });
+    expect(props.openSupportTicketForm).toHaveBeenCalledTimes(1);
   });
 });

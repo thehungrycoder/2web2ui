@@ -4,10 +4,9 @@ import { change } from 'redux-form';
 import { formName } from 'src/components/support/components/SupportForm';
 import supportIssues from 'src/config/supportIssues';
 
-// Toggles the support panel UI
-export function toggleSupportPanel () {
+export function closeSupportPanel() {
   return {
-    type: 'TOGGLE_SUPPORT_PANEL'
+    type: 'CLOSE_SUPPORT_PANEL'
   };
 }
 
@@ -23,7 +22,7 @@ export function toggleSupportPanel () {
  * openSupportPanel() // opens in default mode
  * openSupportPanel({ view: 'ticket' }) // opens in ticket mode
  */
-export function openSupportPanel (options) {
+export function openSupportPanel(options) {
   return {
     type: 'OPEN_SUPPORT_PANEL',
     payload: options
@@ -42,7 +41,7 @@ export function openSupportPanel (options) {
  * @param {Base64 String} data.attachment.content
  *
  */
-export function createTicket ({ issueType, ...data }) {
+export function createTicket({ issueType, ...data }) {
   return sparkpostApiRequest({
     type: 'CREATE_TICKET',
     meta: {
@@ -56,21 +55,8 @@ export function createTicket ({ issueType, ...data }) {
   });
 }
 
-export function clearTicketForm () {
-  return {
-    type: 'RESET_TICKET_FORM'
-  };
-}
-
-// Toggles support ticket form (algolia search shown when false)
-export function toggleTicketForm () {
-  return {
-    type: 'TOGGLE_TICKET_FORM'
-  };
-}
-
 // Opens support ticket form and fills values if provided
-export function openSupportTicketForm ({ issueId, message } = {}) {
+export function openSupportTicketForm({ issueId, message } = {}) {
   const issue = _.find(supportIssues, { id: issueId });
 
   return (dispatch) => {

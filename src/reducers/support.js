@@ -1,29 +1,30 @@
 const initialState = {
-  ticketId: null,
-  showTicketForm: false,
+  createError: null,
+  currentView: 'docs',
   showPanel: false,
-  createError: null
+  ticketId: null
 };
 
 export default (state = initialState, { type, payload = {}}) => {
   switch (type) {
-    case 'CREATE_TICKET_SUCCESS':
-      return { ...state, ticketId: payload.ticket_id };
+    case 'CLOSE_SUPPORT_PANEL':
+      return { ...state, showPanel: false };
 
     case 'CREATE_TICKET_FAIL':
       return { ...state, createError: payload.message };
 
-    case 'RESET_TICKET_FORM':
-      return { ...initialState };
+    case 'CREATE_TICKET_PENDING':
+      return { ...state, createError: null, ticketId: null };
 
-    case 'TOGGLE_TICKET_FORM':
-      return { ...state, showTicketForm: !state.showTicketForm };
-
-    case 'TOGGLE_SUPPORT_PANEL':
-      return { ...state, showPanel: !state.showPanel };
+    case 'CREATE_TICKET_SUCCESS':
+      return { ...state, ticketId: payload.ticket_id };
 
     case 'OPEN_SUPPORT_PANEL': {
-      return { ...state, showPanel: true, showTicketForm: payload.view === 'ticket' };
+      return {
+        ...state,
+        showPanel: true,
+        currentView: payload.view || initialState.currentView
+      };
     }
 
     default:

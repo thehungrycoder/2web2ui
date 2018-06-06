@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { SparkPost } from 'src/components';
 import { WindowSizeContext } from 'src/context/WindowSize';
 import { UnstyledLink } from '@sparkpost/matchbox';
-import { Menu, Close } from '@sparkpost/matchbox-icons';
+import { HelpOutline, Menu, Close } from '@sparkpost/matchbox-icons';
+import { openSupportPanel } from 'src/actions/support';
 import AccountDropdown from './AccountDropdown';
 import NotificationCenter from 'src/components/notifications/NotificationCenter';
 import styles from './Top.module.scss';
 
-class Top extends Component {
+export class Top extends Component {
   renderMobile = () => (
     <div className={styles.Top}>
       <UnstyledLink onClick={this.props.toggleMobileNav} className={styles.Menu}>
@@ -25,10 +27,13 @@ class Top extends Component {
       <div className={styles.Logo}><SparkPost.Logo type='halfWhite' /></div>
       <div className={styles.RightSideWrapper}>
         <NotificationCenter />
+        <HelpOutline className={styles.SupportIcon} onClick={this.openSupportPanel} size={22} />
         <AccountDropdown />
       </div>
     </div>
   );
+
+  openSupportPanel = () => { this.props.openSupportPanel(); }
 
   render() {
     return (
@@ -37,4 +42,4 @@ class Top extends Component {
   }
 }
 
-export default Top;
+export default connect(undefined, { openSupportPanel })(Top);
