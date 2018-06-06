@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
@@ -61,7 +60,7 @@ export class Support extends Component {
   render() {
     const { closeSupportPanel, currentSupportView, location, loggedIn, showSupportPanel } = this.props;
     const visibleTabs = this.TABS.filter((tab) => tab.visible());
-    const keyword = _.get(findRouteByPath(location.pathname), 'keywords[0]');
+    const { supportDocSearch } = findRouteByPath(location.pathname);
 
     if (!loggedIn) {
       return null;
@@ -78,7 +77,7 @@ export class Support extends Component {
             />
           )}
           <Panel className={styles.Support}>
-            {currentSupportView === 'docs' && <SearchPanel defaultSearchText={keyword} />}
+            {currentSupportView === 'docs' && <SearchPanel defaultSearchText={supportDocSearch} />}
             {currentSupportView === 'ticket' && <SupportForm onClose={closeSupportPanel} />}
             {currentSupportView === 'contact' && (
               <div className={styles.SupportContainer}>

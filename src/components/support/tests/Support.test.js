@@ -15,6 +15,7 @@ describe('Support', () => {
   );
 
   beforeEach(() => {
+    findRouteByPath.mockImplementation(() => ({ path: '/example' }));
     props = {
       authorizedToCallSupport: true,
       authorizedToSubmitSupportTickets: true,
@@ -47,7 +48,10 @@ describe('Support', () => {
   });
 
   it('renders search panel with current page search term', () => {
-    findRouteByPath.mockImplementationOnce(() => ({ keywords: [ 'exampleKeyword' ]}));
+    findRouteByPath.mockImplementationOnce(() => ({
+      path: '/example',
+      supportDocSearch: 'exampleKeyword'
+    }));
     wrapper.setProps({ currentSupportView: 'docs' });
 
     expect(wrapper).toMatchSnapshot();

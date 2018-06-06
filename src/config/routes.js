@@ -172,9 +172,7 @@ const routes = [
     // TODO: implement some kind of blockedRoutes check that runs on every route so we can
     // hide routes based on config, account/user settings, etc. without having to mess
     // around with grants in the web UI keys
-    keywords: [
-      'started'
-    ]
+    supportDocSearch: 'started'
   },
   {
     path: '/reports',
@@ -185,78 +183,56 @@ const routes = [
     component: reports.SummaryPage,
     layout: App,
     title: 'Summary Report',
-    keywords: [
-      'reporting'
-    ]
+    supportDocSearch: 'reporting'
   },
   {
     path: '/reports/bounce',
     component: reports.BouncePage,
     layout: App,
     title: 'Bounce Report',
-    keywords: [
-      'bounce',
-      'reporting'
-    ]
+    supportDocSearch: 'bounce'
   },
   {
     path: '/reports/rejections',
     component: reports.RejectionPage,
     layout: App,
     title: 'Rejection Report',
-    keywords: [
-      'reject',
-      'reporting'
-    ]
+    supportDocSearch: 'reject'
   },
   {
     path: '/reports/accepted',
     component: reports.AcceptedPage,
     layout: App,
     title: 'Accepted Report',
-    keywords: [
-      'accept',
-      'reporting'
-    ]
+    supportDocSearch: 'accept'
   },
   {
     path: '/reports/delayed',
     component: reports.DelayPage,
     layout: App,
     title: 'Delayed Report',
-    keywords: [
-      'delay',
-      'reporting'
-    ]
+    supportDocSearch: 'delay'
   },
   {
     path: '/reports/engagement',
     component: reports.EngagementPage,
     layout: App,
     title: 'Engagement Report',
-    keywords: [
-      'engagement',
-      'reporting'
-    ]
+    supportDocSearch: 'engagement'
   },
   {
     path: '/reports/message-events',
     component: reports.MessageEventsPage,
     layout: App,
     title: 'Message Events Report',
-    keywords: [
-      'event',
-      'reporting'
-    ]
+    supportDocSearch: 'event'
   },
   {
     path: '/reports/message-events/details/:messageId',
     component: reports.EventPage,
     layout: App,
     title: 'Message History',
-    keywords: [
-      'event'
-    ]
+    supportDocSearch: 'event'
   },
   {
     path: '/account/security',
@@ -266,9 +242,7 @@ const routes = [
     path: '/account/email-verification/:token',
     component: emailVerification,
     title: 'Verify Your Email',
-    keywords: [
-      'verification'
-    ]
+    supportDocSearch: 'verification'
   },
   {
     path: '/account/subaccounts',
@@ -276,9 +250,7 @@ const routes = [
     condition: hasGrants('subaccount/manage', 'api_keys/manage', 'sending_domains/manage'),
     layout: App,
     title: 'Subaccounts',
-    keywords: [
-      'subaccout'
-    ]
+    supportDocSearch: 'subaccout'
   },
   {
     path: '/account/subaccounts/create',
@@ -286,9 +258,7 @@ const routes = [
     condition: hasGrants('subaccount/manage', 'api_keys/manage', 'sending_domains/manage'),
     layout: App,
     title: 'New Subaccount',
-    keywords: [
-      'subaccout'
-    ]
+    supportDocSearch: 'subaccout'
   },
   {
     path: '/account/subaccounts/:id',
@@ -297,9 +267,7 @@ const routes = [
     layout: App,
     title: 'Subaccount Details',
     exact: false,
-    keywords: [
-      'subaccout'
-    ]
+    supportDocSearch: 'subaccout'
   },
   {
     path: '/account/users',
@@ -307,9 +275,7 @@ const routes = [
     condition: hasGrants('users/manage'),
     layout: App,
     title: 'Users',
-    keywords: [
-      'user'
-    ]
+    supportDocSearch: 'user'
   },
   {
     path: '/account/users/create',
@@ -317,9 +283,7 @@ const routes = [
     condition: hasGrants('users/manage'),
     layout: App,
     title: 'Invite User',
-    keywords: [
-      'user'
-    ]
+    supportDocSearch: 'user'
   },
   {
     path: '/templates',
@@ -327,9 +291,7 @@ const routes = [
     condition: hasGrants('templates/view'),
     layout: App,
     title: 'Templates',
-    keywords: [
-      'template'
-    ]
+    supportDocSearch: 'template'
   },
   {
     path: '/templates/create/:id?',
@@ -337,9 +299,7 @@ const routes = [
     condition: hasGrants('templates/modify'),
     layout: App,
     title: 'New Template',
-    keywords: [
-      'template'
-    ]
+    supportDocSearch: 'template'
   },
   {
     path: '/templates/edit/:id',
@@ -347,9 +307,7 @@ const routes = [
     condition: hasGrants('templates/view'),
     layout: App,
     title: 'Edit Template',
-    keywords: [
-      'template'
-    ]
+    supportDocSearch: 'template'
   },
   {
     path: '/templates/edit/:id/published',
@@ -357,9 +315,7 @@ const routes = [
     condition: hasGrants('templates/view'),
     layout: App,
     title: 'View Published Template',
-    keywords: [
-      'template'
-    ]
+    supportDocSearch: 'template'
   },
   {
     path: '/templates/preview/:id',
@@ -367,9 +323,7 @@ const routes = [
     condition: hasGrants('templates/view'),
     layout: App,
     title: 'Preview Draft Template',
-    keywords: [
-      'template'
-    ]
+    supportDocSearch: 'template'
   },
   {
     path: '/templates/preview/:id/published',
@@ -377,9 +331,7 @@ const routes = [
     condition: hasGrants('templates/view'),
     layout: App,
     title: 'Preview Published Template',
-    keywords: [
-      'template'
-    ]
+    supportDocSearch: 'template'
   },
   {
     path: '/lists/recipient-lists',
@@ -387,9 +339,7 @@ const routes = [
     condition: hasGrants('recipient_lists/manage'),
     layout: App,
     title: 'Recipient Lists',
-    keywords: [
-      'recipient list'
-    ]
+    supportDocSearch: 'recipient list'
   },
   {
     path: '/lists/recipient-lists/create',
@@ -397,9 +347,7 @@ const routes = [
     condition: hasGrants('recipient_lists/manage'),
     layout: App,
     title: 'New Recipient List',
-    keywords: [
-      'recipient list'
-    ]
+    supportDocSearch: 'recipient list'
   },
   {
     path: '/lists/recipient-lists/edit/:id',
@@ -407,9 +355,7 @@ const routes = [
     condition: hasGrants('recipient_lists/manage'),
     layout: App,
     title: 'Edit Recipient List',
-    keywords: [
-      'recipient list'
-    ]
+    supportDocSearch: 'recipient list'
   },
   {
     path: '/lists/suppressions',
@@ -417,9 +363,7 @@ const routes = [
     condition: hasGrants('suppression_lists/manage'),
     layout: App,
     title: 'Suppression List',
-    keywords: [
-      'suppression list'
-    ]
+    supportDocSearch: 'suppression list'
   },
   {
     path: '/lists/suppressions/create',
@@ -427,9 +371,7 @@ const routes = [
     condition: hasGrants('suppression_lists/manage'),
     layout: App,
     title: 'New Suppression',
-    keywords: [
-      'suppression list'
-    ]
+    supportDocSearch: 'suppression list'
   },
   {
     path: '/webhooks',
@@ -437,9 +379,7 @@ const routes = [
     condition: hasGrants('webhooks/view'),
     layout: App,
     title: 'Webhooks',
-    keywords: [
-      'webhook'
-    ]
+    supportDocSearch: 'webhook'
   },
   {
     path: '/webhooks/create',
@@ -447,9 +387,7 @@ const routes = [
     condition: hasGrants('webhooks/modify'),
     layout: App,
     title: 'New Webhook',
-    keywords: [
-      'webhook'
-    ]
+    supportDocSearch: 'webhook'
   },
   {
     path: '/webhooks/details/:id',
@@ -458,9 +396,7 @@ const routes = [
     layout: App,
     title: 'Webhook Details',
     exact: false,
-    keywords: [
-      'webhook'
-    ]
+    supportDocSearch: 'webhook'
   },
   {
     path: '/account/api-keys',
@@ -468,9 +404,7 @@ const routes = [
     condition: hasGrants('api_keys/manage'),
     layout: App,
     title: 'API Keys',
-    keywords: [
-      'api key'
-    ]
+    supportDocSearch: 'api key'
   },
   {
     path: '/account/api-keys/create',
@@ -478,9 +412,7 @@ const routes = [
     condition: hasGrants('api_keys/manage'),
     layout: App,
     title: 'New API Key',
-    keywords: [
-      'api key'
-    ]
+    supportDocSearch: 'api key'
   },
   {
     path: '/account/api-keys/edit/:id',
@@ -488,9 +420,7 @@ const routes = [
     condition: hasGrants('api_keys/manage'),
     layout: App,
     title: 'Edit API Key',
-    keywords: [
-      'api key'
-    ]
+    supportDocSearch: 'api key'
   },
   {
     path: '/account/api-keys/view/:id',
@@ -498,9 +428,7 @@ const routes = [
     condition: hasGrants('api_keys/manage'),
     layout: App,
     title: 'View API Key',
-    keywords: [
-      'api key'
-    ]
+    supportDocSearch: 'api key'
   },
   {
     path: '/account/tracking-domains',
@@ -508,9 +436,7 @@ const routes = [
     condition: hasGrants('tracking_domains/view'),
     layout: App,
     title: 'Tracking Domains',
-    keywords: [
-      'tracking domain'
-    ]
+    supportDocSearch: 'tracking domain'
   },
   {
     path: '/account/tracking-domains/create',
@@ -518,9 +444,7 @@ const routes = [
     condition: hasGrants('tracking_domains/manage'),
     layout: App,
     title: 'New Tracking Domain',
-    keywords: [
-      'tracking domain'
-    ]
+    supportDocSearch: 'tracking domain'
   },
   {
     path: '/account/profile',
@@ -528,9 +452,7 @@ const routes = [
     condition: hasGrants('users/self-manage'),
     layout: App,
     title: 'My Profile',
-    keywords: [
-      'account profile'
-    ]
+    supportDocSearch: 'account profile'
   },
   {
     path: '/account/sending-domains',
@@ -538,9 +460,7 @@ const routes = [
     condition: hasGrants('sending_domains/manage'),
     layout: App,
     title: 'Sending Domains',
-    keywords: [
-      'sending domain'
-    ]
+    supportDocSearch: 'sending domain'
   },
   {
     path: '/account/sending-domains/create',
@@ -548,9 +468,7 @@ const routes = [
     condition: hasGrants('sending_domains/manage'),
     layout: App,
     title: 'New Sending Domain',
-    keywords: [
-      'sending domain'
-    ]
+    supportDocSearch: 'sending domain'
   },
   {
     path: '/account/sending-domains/edit/:id',
@@ -558,9 +476,7 @@ const routes = [
     condition: hasGrants('sending_domains/manage'),
     layout: App,
     title: 'Edit Sending Domain',
-    keywords: [
-      'sending domain'
-    ]
+    supportDocSearch: 'sending domain'
   },
   {
     path: '/account/smtp',
@@ -568,9 +484,7 @@ const routes = [
     condition: hasGrants('api_keys/manage'),
     layout: App,
     title: 'SMTP Settings',
-    keywords: [
-      'smtp'
-    ]
+    supportDocSearch: 'smtp'
   },
   {
     path: '/account/billing',
@@ -578,9 +492,7 @@ const routes = [
     condition: all(hasGrants('account/manage'), not(isEnterprise), not(isHeroku), not(isAzure)),
     layout: App,
     title: 'Billing',
-    keywords: [
-      'billing'
-    ]
+    supportDocSearch: 'billing'
   },
   {
     path: '/account/billing/plan',
@@ -588,9 +500,7 @@ const routes = [
     condition: all(hasGrants('account/manage'), not(isEnterprise), not(isHeroku), not(isAzure)),
     layout: App,
     title: 'Billing | Change My Plan',
-    keywords: [
-      'upgrade account'
-    ]
+    supportDocSearch: 'upgrade account'
   },
   {
     path: '/account/ip-pools',
@@ -598,9 +508,7 @@ const routes = [
     condition: hasGrants('ip_pools/manage'),
     layout: App,
     title: 'IP Pools',
-    keywords: [
-      'ip pool'
-    ]
+    supportDocSearch: 'ip pool'
   },
   {
     path: '/account/ip-pools/create',
@@ -608,9 +516,7 @@ const routes = [
     condition: hasGrants('ip_pools/manage'),
     layout: App,
     title: 'New IP Pool',
-    keywords: [
-      'ip pool'
-    ]
+    supportDocSearch: 'ip pool'
   },
   {
     path: '/account/ip-pools/edit/:id',
@@ -618,54 +524,42 @@ const routes = [
     condition: hasGrants('ip_pools/manage'),
     layout: App,
     title: 'Edit IP Pool',
-    keywords: [
-      'ip pool'
-    ]
+    supportDocSearch: 'ip pool'
   },
   {
     path: '/onboarding/plan',
     component: onboarding.ChoosePlan,
     condition: configFlag('featureFlags.has_signup'),
     title: 'Onboarding | Choose Your Plan',
-    keywords: [
-      'upgrade account'
-    ]
+    supportDocSearch: 'upgrade account'
   },
   {
     path: '/onboarding/sending-domain',
     component: onboarding.SendingDomainPage,
     condition: configFlag('featureFlags.has_signup'),
     title: 'Onboarding | Create a Sending Domain',
-    keywords: [
-      'sending domain'
-    ]
+    supportDocSearch: 'sending domain'
   },
   {
     path: '/onboarding/email',
     component: onboarding.SmtpOrApiPage,
     condition: configFlag('featureFlags.has_signup'),
     title: 'Onboarding | REST and SMTP',
-    keywords: [
-      'smtp'
-    ]
+    supportDocSearch: 'smtp'
   },
   {
     path: '/onboarding/email/smtp',
     component: onboarding.SmtpPage,
     condition: configFlag('featureFlags.has_signup'),
     title: 'Onboarding | Send a Test Email (SMTP)',
-    keywords: [
-      'smtp'
-    ]
+    supportDocSearch: 'smtp'
   },
   {
     path: '/onboarding/email/api',
     component: onboarding.ApiPage,
     condition: configFlag('featureFlags.has_signup'),
     title: 'Onboarding | Send a Test Email (REST)',
-    keywords: [
-      'smtp'
-    ]
+    supportDocSearch: 'smtp'
   },
   {
     path: '/support/aws-premium',
@@ -673,9 +567,7 @@ const routes = [
     condition: isAws,
     title: 'Support | Request Premium Support',
     layout: App,
-    keywords: [
-      'upgrade plan'
-    ]
+    supportDocSearch: 'upgrade plan'
   },
   {
     path: '/logout',
