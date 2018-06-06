@@ -7,6 +7,10 @@ describe('Support', () => {
   let props;
   let wrapper;
 
+  const findTab = (view) => (
+    wrapper.find('Tabs').prop('tabs').find((tab) => tab.view === view)
+  );
+
   beforeEach(() => {
     props = {
       authorizedToCallSupport: true,
@@ -17,6 +21,7 @@ describe('Support', () => {
         search: ''
       },
       loggedIn: true,
+      openSupportPanel: jest.fn(),
       openSupportTicketForm: jest.fn(),
       showSupportPanel: true
     };
@@ -65,6 +70,21 @@ describe('Support', () => {
     wrapper.setProps({ currentSupportView: 'ticket' });
     wrapper.find('Connect(ReduxForm)').simulate('close');
     expect(props.closeSupportPanel).toHaveBeenCalled();
+  });
+
+  it('calls openSupportPanel when docs tab is clicked', () => {
+    findTab('docs').onClick();
+    expect(props.openSupportPanel).toHaveBeenCalledWith({ view: 'docs' });
+  });
+
+  it('calls openSupportPanel when ticket tab is clicked', () => {
+    findTab('ticket').onClick();
+    expect(props.openSupportPanel).toHaveBeenCalledWith({ view: 'ticket' });
+  });
+
+  it('calls openSupportPanel when contact tab is clicked', () => {
+    findTab('contact').onClick();
+    expect(props.openSupportPanel).toHaveBeenCalledWith({ view: 'contact' });
   });
 
   it('opens support ticket tab on mount with deep link', () => {
