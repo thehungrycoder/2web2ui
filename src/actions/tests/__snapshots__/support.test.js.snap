@@ -35,3 +35,19 @@ Object {
   "type": "CLOSE_SUPPORT_PANEL",
 }
 `;
+
+exports[`Action Creator: Support should open support panel 1`] = `
+Object {
+  "payload": undefined,
+  "type": "OPEN_SUPPORT_PANEL",
+}
+`;
+
+exports[`Action Creator: Support should open support panel with specific view 1`] = `
+Object {
+  "payload": Object {
+    "view": "ticket",
+  },
+  "type": "OPEN_SUPPORT_PANEL",
+}
+`;

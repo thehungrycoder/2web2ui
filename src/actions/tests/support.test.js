@@ -16,6 +16,16 @@ describe('Action Creator: Support', () => {
     expect(action).toMatchSnapshot();
   });
 
+  it('should open support panel', () => {
+    const action = support.openSupportPanel();
+    expect(action).toMatchSnapshot();
+  });
+
+  it('should open support panel with specific view', () => {
+    const action = support.openSupportPanel({ view: 'ticket' });
+    expect(action).toMatchSnapshot();
+  });
+
   describe('openSupportTicketForm', () => {
     it('should open support panel', () => {
       support.openSupportTicketForm()(dispatchMock);
