@@ -10,7 +10,7 @@ export default function DeleteButton({ disabled = false, name = null, onClick = 
   const handleClick = (event) => { onClick(name); };
 
   return (
-    <Button name={name} onClick={handleClick}>
+    <Button destructive size="small" name={name} onClick={handleClick}>
       Delete
     </Button>
   );
