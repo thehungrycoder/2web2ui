@@ -6,6 +6,7 @@ import { Panel, Tabs, UnstyledLink } from '@sparkpost/matchbox';
 import * as supportActions from 'src/actions/support';
 import { AccessControl } from 'src/components/auth';
 import Modal from 'src/components/modals/Modal';
+import findRouteByPath from 'src/helpers/findRouteByPath';
 import { authorizedToSubmitSupportTickets, entitledToPhoneSupport } from 'src/selectors/support';
 import SearchPanel from './components/SearchPanel';
 import SupportForm from './components/SupportForm';
@@ -57,8 +58,9 @@ export class Support extends Component {
   }
 
   render() {
-    const { closeSupportPanel, currentSupportView, loggedIn, showSupportPanel } = this.props;
+    const { closeSupportPanel, currentSupportView, location, loggedIn, showSupportPanel } = this.props;
     const visibleTabs = this.TABS.filter((tab) => tab.visible());
+    const { supportDocSearch } = findRouteByPath(location.pathname);
 
     if (!loggedIn) {
       return null;
@@ -75,7 +77,7 @@ export class Support extends Component {
             />
           )}
           <Panel className={styles.Support}>
-            {currentSupportView === 'docs' && <SearchPanel />}
+            {currentSupportView === 'docs' && <SearchPanel defaultSearchText={supportDocSearch} />}
             {currentSupportView === 'ticket' && <SupportForm onClose={closeSupportPanel} />}
             {currentSupportView === 'contact' && (
               <div className={styles.SupportContainer}>

@@ -168,10 +168,11 @@ const routes = [
     condition: all(
       hasGrants('api_keys/manage', 'templates/modify', 'sending_domains/manage'),
       configEquals('splashPage', '/dashboard') // want to hide if not a splash page https://jira.int.messagesystems.com/browse/FAD-6046
-    )
+    ),
     // TODO: implement some kind of blockedRoutes check that runs on every route so we can
     // hide routes based on config, account/user settings, etc. without having to mess
     // around with grants in the web UI keys
+    supportDocSearch: 'started'
   },
   {
     path: '/reports',
@@ -181,49 +182,57 @@ const routes = [
     path: '/reports/summary',
     component: reports.SummaryPage,
     layout: App,
-    title: 'Summary Report'
+    title: 'Summary Report',
+    supportDocSearch: 'reporting'
   },
   {
     path: '/reports/bounce',
     component: reports.BouncePage,
     layout: App,
-    title: 'Bounce Report'
+    title: 'Bounce Report',
+    supportDocSearch: 'bounce'
   },
   {
     path: '/reports/rejections',
     component: reports.RejectionPage,
     layout: App,
-    title: 'Rejection Report'
+    title: 'Rejection Report',
+    supportDocSearch: 'reject'
   },
   {
     path: '/reports/accepted',
     component: reports.AcceptedPage,
     layout: App,
-    title: 'Accepted Report'
+    title: 'Accepted Report',
+    supportDocSearch: 'accept'
   },
   {
     path: '/reports/delayed',
     component: reports.DelayPage,
     layout: App,
-    title: 'Delayed Report'
+    title: 'Delayed Report',
+    supportDocSearch: 'delay'
   },
   {
     path: '/reports/engagement',
     component: reports.EngagementPage,
     layout: App,
-    title: 'Engagement Report'
+    title: 'Engagement Report',
+    supportDocSearch: 'engagement'
   },
   {
     path: '/reports/message-events',
     component: reports.MessageEventsPage,
     layout: App,
-    title: 'Message Events Report'
+    title: 'Message Events Report',
+    supportDocSearch: 'event'
   },
   {
     path: '/reports/message-events/details/:messageId',
     component: reports.EventPage,
     layout: App,
-    title: 'Message History'
+    title: 'Message History',
+    supportDocSearch: 'event'
   },
   {
     path: '/account/security',
@@ -232,21 +241,24 @@ const routes = [
   {
     path: '/account/email-verification/:token',
     component: emailVerification,
-    title: 'Verify Your Email'
+    title: 'Verify Your Email',
+    supportDocSearch: 'verification'
   },
   {
     path: '/account/subaccounts',
     component: subaccounts.ListPage,
     condition: hasGrants('subaccount/manage', 'api_keys/manage', 'sending_domains/manage'),
     layout: App,
-    title: 'Subaccounts'
+    title: 'Subaccounts',
+    supportDocSearch: 'subaccout'
   },
   {
     path: '/account/subaccounts/create',
     component: subaccounts.CreatePage,
     condition: hasGrants('subaccount/manage', 'api_keys/manage', 'sending_domains/manage'),
     layout: App,
-    title: 'New Subaccount'
+    title: 'New Subaccount',
+    supportDocSearch: 'subaccout'
   },
   {
     path: '/account/subaccounts/:id',
@@ -254,112 +266,128 @@ const routes = [
     condition: hasGrants('subaccount/manage', 'api_keys/manage', 'sending_domains/manage'),
     layout: App,
     title: 'Subaccount Details',
-    exact: false
+    exact: false,
+    supportDocSearch: 'subaccout'
   },
   {
     path: '/account/users',
     component: users.ListPage,
     condition: hasGrants('users/manage'),
     layout: App,
-    title: 'Users'
+    title: 'Users',
+    supportDocSearch: 'user'
   },
   {
     path: '/account/users/create',
     component: users.CreatePage,
     condition: hasGrants('users/manage'),
     layout: App,
-    title: 'Invite User'
+    title: 'Invite User',
+    supportDocSearch: 'user'
   },
   {
     path: '/templates',
     component: templates.ListPage,
     condition: hasGrants('templates/view'),
     layout: App,
-    title: 'Templates'
+    title: 'Templates',
+    supportDocSearch: 'template'
   },
   {
     path: '/templates/create/:id?',
     component: templates.CreatePage,
     condition: hasGrants('templates/modify'),
     layout: App,
-    title: 'New Template'
+    title: 'New Template',
+    supportDocSearch: 'template'
   },
   {
     path: '/templates/edit/:id',
     component: templates.EditPage,
     condition: hasGrants('templates/view'),
     layout: App,
-    title: 'Edit Template'
+    title: 'Edit Template',
+    supportDocSearch: 'template'
   },
   {
     path: '/templates/edit/:id/published',
     component: templates.PublishedPage,
     condition: hasGrants('templates/view'),
     layout: App,
-    title: 'View Published Template'
+    title: 'View Published Template',
+    supportDocSearch: 'template'
   },
   {
     path: '/templates/preview/:id',
     component: templates.PreviewDraftPage,
     condition: hasGrants('templates/view'),
     layout: App,
-    title: 'Preview Draft Template'
+    title: 'Preview Draft Template',
+    supportDocSearch: 'template'
   },
   {
     path: '/templates/preview/:id/published',
     component: templates.PreviewPublishedPage,
     condition: hasGrants('templates/view'),
     layout: App,
-    title: 'Preview Published Template'
+    title: 'Preview Published Template',
+    supportDocSearch: 'template'
   },
   {
     path: '/lists/recipient-lists',
     component: recipientLists.ListPage,
     condition: hasGrants('recipient_lists/manage'),
     layout: App,
-    title: 'Recipient Lists'
+    title: 'Recipient Lists',
+    supportDocSearch: 'recipient list'
   },
   {
     path: '/lists/recipient-lists/create',
     component: recipientLists.CreatePage,
     condition: hasGrants('recipient_lists/manage'),
     layout: App,
-    title: 'New Recipient List'
+    title: 'New Recipient List',
+    supportDocSearch: 'recipient list'
   },
   {
     path: '/lists/recipient-lists/edit/:id',
     component: recipientLists.EditPage,
     condition: hasGrants('recipient_lists/manage'),
     layout: App,
-    title: 'Edit Recipient List'
+    title: 'Edit Recipient List',
+    supportDocSearch: 'recipient list'
   },
   {
     path: '/lists/suppressions',
     component: suppressions.ListPage,
     condition: hasGrants('suppression_lists/manage'),
     layout: App,
-    title: 'Suppression List'
+    title: 'Suppression List',
+    supportDocSearch: 'suppression list'
   },
   {
     path: '/lists/suppressions/create',
     component: suppressions.CreatePage,
     condition: hasGrants('suppression_lists/manage'),
     layout: App,
-    title: 'New Suppression'
+    title: 'New Suppression',
+    supportDocSearch: 'suppression list'
   },
   {
     path: '/webhooks',
     component: webhooks.ListPage,
     condition: hasGrants('webhooks/view'),
     layout: App,
-    title: 'Webhooks'
+    title: 'Webhooks',
+    supportDocSearch: 'webhook'
   },
   {
     path: '/webhooks/create',
     component: webhooks.CreatePage,
     condition: hasGrants('webhooks/modify'),
     layout: App,
-    title: 'New Webhook'
+    title: 'New Webhook',
+    supportDocSearch: 'webhook'
   },
   {
     path: '/webhooks/details/:id',
@@ -367,156 +395,179 @@ const routes = [
     condition: hasGrants('webhooks/modify'),
     layout: App,
     title: 'Webhook Details',
-    exact: false
+    exact: false,
+    supportDocSearch: 'webhook'
   },
   {
     path: '/account/api-keys',
     component: apiKeys.ListPage,
     condition: hasGrants('api_keys/manage'),
     layout: App,
-    title: 'API Keys'
+    title: 'API Keys',
+    supportDocSearch: 'api key'
   },
   {
     path: '/account/api-keys/create',
     component: apiKeys.CreatePage,
     condition: hasGrants('api_keys/manage'),
     layout: App,
-    title: 'New API Key'
+    title: 'New API Key',
+    supportDocSearch: 'api key'
   },
   {
     path: '/account/api-keys/edit/:id',
     component: apiKeys.EditPage,
     condition: hasGrants('api_keys/manage'),
     layout: App,
-    title: 'Edit API Key'
+    title: 'Edit API Key',
+    supportDocSearch: 'api key'
   },
   {
     path: '/account/api-keys/view/:id',
     component: apiKeys.DetailsPage,
     condition: hasGrants('api_keys/manage'),
     layout: App,
-    title: 'View API Key'
+    title: 'View API Key',
+    supportDocSearch: 'api key'
   },
   {
     path: '/account/tracking-domains',
     component: trackingDomains.ListPage,
     condition: hasGrants('tracking_domains/view'),
     layout: App,
-    title: 'Tracking Domains'
+    title: 'Tracking Domains',
+    supportDocSearch: 'tracking domain'
   },
   {
     path: '/account/tracking-domains/create',
     component: trackingDomains.CreatePage,
     condition: hasGrants('tracking_domains/manage'),
     layout: App,
-    title: 'New Tracking Domain'
+    title: 'New Tracking Domain',
+    supportDocSearch: 'tracking domain'
   },
   {
     path: '/account/profile',
     component: emailVerificationRedirect,
     condition: hasGrants('users/self-manage'),
     layout: App,
-    title: 'My Profile'
+    title: 'My Profile',
+    supportDocSearch: 'account profile'
   },
   {
     path: '/account/sending-domains',
     component: sendingDomains.ListPage,
     condition: hasGrants('sending_domains/manage'),
     layout: App,
-    title: 'Sending Domains'
+    title: 'Sending Domains',
+    supportDocSearch: 'sending domain'
   },
   {
     path: '/account/sending-domains/create',
     component: sendingDomains.CreatePage,
     condition: hasGrants('sending_domains/manage'),
     layout: App,
-    title: 'New Sending Domain'
+    title: 'New Sending Domain',
+    supportDocSearch: 'sending domain'
   },
   {
     path: '/account/sending-domains/edit/:id',
     component: sendingDomains.EditPage,
     condition: hasGrants('sending_domains/manage'),
     layout: App,
-    title: 'Edit Sending Domain'
+    title: 'Edit Sending Domain',
+    supportDocSearch: 'sending domain'
   },
   {
     path: '/account/smtp',
     component: SmtpPage,
     condition: hasGrants('api_keys/manage'),
     layout: App,
-    title: 'SMTP Settings'
+    title: 'SMTP Settings',
+    supportDocSearch: 'smtp'
   },
   {
     path: '/account/billing',
     component: SecretBillingPlanOrBillingSummaryPage,
     condition: all(hasGrants('account/manage'), not(isEnterprise), not(isHeroku), not(isAzure)),
     layout: App,
-    title: 'Billing'
+    title: 'Billing',
+    supportDocSearch: 'billing'
   },
   {
     path: '/account/billing/plan',
     component: billing.ChangePlanPage,
     condition: all(hasGrants('account/manage'), not(isEnterprise), not(isHeroku), not(isAzure)),
     layout: App,
-    title: 'Billing | Change My Plan'
+    title: 'Billing | Change My Plan',
+    supportDocSearch: 'upgrade account'
   },
   {
     path: '/account/ip-pools',
     component: ipPools.ListPage,
     condition: hasGrants('ip_pools/manage'),
     layout: App,
-    title: 'IP Pools'
+    title: 'IP Pools',
+    supportDocSearch: 'ip pool'
   },
   {
     path: '/account/ip-pools/create',
     component: ipPools.CreatePage,
     condition: hasGrants('ip_pools/manage'),
     layout: App,
-    title: 'New IP Pool'
+    title: 'New IP Pool',
+    supportDocSearch: 'ip pool'
   },
   {
     path: '/account/ip-pools/edit/:id',
     component: ipPools.EditPage,
     condition: hasGrants('ip_pools/manage'),
     layout: App,
-    title: 'Edit IP Pool'
+    title: 'Edit IP Pool',
+    supportDocSearch: 'ip pool'
   },
   {
     path: '/onboarding/plan',
     component: onboarding.ChoosePlan,
     condition: configFlag('featureFlags.has_signup'),
-    title: 'Onboarding | Choose Your Plan'
+    title: 'Onboarding | Choose Your Plan',
+    supportDocSearch: 'upgrade account'
   },
   {
     path: '/onboarding/sending-domain',
     component: onboarding.SendingDomainPage,
     condition: configFlag('featureFlags.has_signup'),
-    title: 'Onboarding | Create a Sending Domain'
+    title: 'Onboarding | Create a Sending Domain',
+    supportDocSearch: 'sending domain'
   },
   {
     path: '/onboarding/email',
     component: onboarding.SmtpOrApiPage,
     condition: configFlag('featureFlags.has_signup'),
-    title: 'Onboarding | REST and SMTP'
+    title: 'Onboarding | REST and SMTP',
+    supportDocSearch: 'smtp'
   },
   {
     path: '/onboarding/email/smtp',
     component: onboarding.SmtpPage,
     condition: configFlag('featureFlags.has_signup'),
-    title: 'Onboarding | Send a Test Email (SMTP)'
+    title: 'Onboarding | Send a Test Email (SMTP)',
+    supportDocSearch: 'smtp'
   },
   {
     path: '/onboarding/email/api',
     component: onboarding.ApiPage,
     condition: configFlag('featureFlags.has_signup'),
-    title: 'Onboarding | Send a Test Email (REST)'
+    title: 'Onboarding | Send a Test Email (REST)',
+    supportDocSearch: 'smtp'
   },
   {
     path: '/support/aws-premium',
     component: PremiumSupportPage,
     condition: isAws,
     title: 'Support | Request Premium Support',
-    layout: App
+    layout: App,
+    supportDocSearch: 'upgrade plan'
   },
   {
     path: '/logout',

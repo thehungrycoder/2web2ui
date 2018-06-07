@@ -16,7 +16,37 @@ exports[`SearchPanel renders search panel 1`] = `
   }
 >
   <Panel.Section>
-    <AlgoliaSearchBox(UnknownComponent) />
+    <AlgoliaSearchBox(AlgoliaSearch) />
+  </Panel.Section>
+  <Panel.Section
+    className="Results"
+  >
+    <AlgoliaHits(Hits)
+      hitComponent={[Function]}
+    />
+  </Panel.Section>
+</CreateInstantSearch>
+`;
+
+exports[`SearchPanel renders search panel with default search text 1`] = `
+<CreateInstantSearch
+  apiKey="key"
+  appId="id"
+  indexName="index"
+  refresh={false}
+  root={
+    Object {
+      "Root": "div",
+      "props": Object {
+        "className": "ais-InstantSearch__root",
+      },
+    }
+  }
+>
+  <Panel.Section>
+    <AlgoliaSearchBox(AlgoliaSearch)
+      defaultSearchText="example"
+    />
   </Panel.Section>
   <Panel.Section
     className="Results"
