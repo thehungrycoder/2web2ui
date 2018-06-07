@@ -2,9 +2,10 @@
 
 exports[`Component: User Page DeleteButton should render correctly by default 1`] = `
 <Button
+  destructive={true}
   name="delete-button-name"
   onClick={[Function]}
-  size="default"
+  size="small"
 >
   Delete
 </Button>
