@@ -201,7 +201,7 @@ export const list = [
     label: 'Unsubscribes',
     type: 'total',
     unit: 'number',
-    description: 'Total number of times unsubscribe links were selected accross all messages.',
+    description: 'Total number of times unsubscribe links were selected across all messages.',
     inSummary: true
   },
   {
