@@ -197,6 +197,14 @@ export const list = [
     inSummary: true
   },
   {
+    key: 'count_unsubscribe',
+    label: 'Unsubscribes',
+    type: 'total',
+    unit: 'number',
+    description: 'Total number of times unsubscribe links were selected accross all messages.',
+    inSummary: true
+  },
+  {
     key: 'count_generation_rejection',
     label: 'Generation Rejection',
     type: 'total',
@@ -286,6 +294,15 @@ export const list = [
     computeKeys: ['count_undetermined_bounce', 'count_sent'],
     compute: rate,
     description: 'Percentage of Sent messages that Undetermined Bounced.',
+    inSummary: true
+  },
+  {
+    key: 'unsubscribe_rate',
+    label: 'Unsubscribe Rate',
+    unit: 'percent',
+    computeKeys: ['count_unsubscribe', 'count_accepted'],
+    compute: rate,
+    description: 'Percentage of Accepted messages that resulted in unsubscribes.',
     inSummary: true
   },
   {
