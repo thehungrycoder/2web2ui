@@ -4,7 +4,7 @@ import { Link, withRouter } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
 import { Page, Panel, Button } from '@sparkpost/matchbox';
 import { TextFieldWrapper } from 'src/components';
-import RoleSelect from './components/RoleSelect';
+import { RadioGroup } from 'src/components/reduxFormWrappers';
 import { required, email } from 'src/helpers/validation';
 import { inviteUser } from 'src/actions/users';
 import { showAlert } from 'src/actions/globalAlert';
@@ -15,6 +15,8 @@ const breadcrumbAction = {
   Component: Link,
   to: '/account/users'
 };
+
+
 
 export class CreatePage extends Component {
 
@@ -55,9 +57,26 @@ export class CreatePage extends Component {
                 label="Email address"
                 component={TextFieldWrapper}
               />
-              <Field name="access" label="Role" component={RoleSelect} />
+              <Field
+                name="access"
+                title="Role"
+                component={RadioGroup}
+                grid={{ xs: 12, sm: 12, md: 6 }}
+                options={[
+                  {
+                    label: <strong>Admin</strong>,
+                    value: 'admin',
+                    helpText: 'Has access to all functionality in the UI. Has the ability to add additional administrators and create / invite users with a role of Reporting'
+                  },
+                  {
+                    label: <strong>Reporting</strong>,
+                    value: 'reporting',
+                    helpText: 'Has no access to functionality in the UI. Permissions include access to view all reports, and view all templates except being allowed to change them'
+                  }
+                ]}
+              />
               <Button submit primary disabled={submitting || pristine}>
-                {submitting ? 'Loading' : 'Add User' }
+                {submitting ? 'Loading' : 'Add User'}
               </Button>
             </form>
           </Panel.Section>
