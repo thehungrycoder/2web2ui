@@ -24,6 +24,7 @@ exports[`Page: User Create Page should render correctly by default 1`] = `
           component={[Function]}
           label="Email address"
           name="email"
+          normalize={[Function]}
           validate={
             Array [
               [Function],
@@ -99,6 +100,7 @@ exports[`Page: User Create Page should render when pristine 1`] = `
           component={[Function]}
           label="Email address"
           name="email"
+          normalize={[Function]}
           validate={
             Array [
               [Function],
@@ -174,6 +176,7 @@ exports[`Page: User Create Page should render when submitting 1`] = `
           component={[Function]}
           label="Email address"
           name="email"
+          normalize={[Function]}
           validate={
             Array [
               [Function],

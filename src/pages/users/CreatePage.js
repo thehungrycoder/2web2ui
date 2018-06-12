@@ -54,6 +54,7 @@ export class CreatePage extends Component {
               <Field
                 name="email"
                 validate={[required, email]}
+                normalize={(value = '') => value.trim()}
                 label="Email address"
                 component={TextFieldWrapper}
               />
