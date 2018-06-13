@@ -25,12 +25,13 @@ export class BillingAddressForm extends Component {
   }
 
   handleCountryChange = (e) => {
-    const value = e.target.value;
+    this.props.change(this.props.formName, 'billingAddress.state', '');
+    // const value = e.target.value;
 
-    // Removes state value from store
-    if (value !== 'US' && value !== 'CA') {
-      this.props.change(this.props.formName, 'billingAddress.state', null);
-    }
+    // // Removes state value from store
+    // if (value !== 'US' && value !== 'CA') {
+    //   this.props.change(this.props.formName, 'billingAddress.state', '');
+    // }
   }
 
   componentDidMount() {
@@ -52,6 +53,7 @@ export class BillingAddressForm extends Component {
           label={countryValue === 'US' ? 'State' : 'Province'}
           name='billingAddress.state'
           placeholder={`Select a ${countryValue === 'US' ? 'State' : 'Province'}`}
+          placeholderValue=''
           component={SelectWrapper}
           options={_.find(countries, { value: countryValue }).states}
           validate={required}
@@ -86,11 +88,12 @@ export class BillingAddressForm extends Component {
     return (
       <div>
         <p><small>Billing Address</small></p>
-        { nameFields }
+        {nameFields}
         <Field
           label='Country'
           name='billingAddress.country'
           placeholder='Select a country'
+          placeholderValue=''
           component={SelectWrapper}
           options={countries}
           validate={required}
@@ -98,7 +101,7 @@ export class BillingAddressForm extends Component {
           onChange={this.handleCountryChange}
         />
         <Grid>
-          { stateOrProvince }
+          {stateOrProvince}
           <Grid.Column xs={6}>
             <Field
               label={getZipLabel(countryValue)}

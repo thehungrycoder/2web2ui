@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Billing Address Form: should render 1`] = `
+exports[`Billing Address Fields: should render 1`] = `
 <div>
   <Grid
     className="spacer"
@@ -74,7 +74,7 @@ exports[`Billing Address Form: should render 1`] = `
 </div>
 `;
 
-exports[`Billing Address Form: should show states 1`] = `
+exports[`Billing Address Fields: should show states 1`] = `
 <div>
   <Grid
     className="spacer"

@@ -1,8 +1,8 @@
 import React from 'react';
-import { BillingContactForm } from '../BillingContactForm';
+import { BillingContactFields } from '../BillingContactFields';
 import { shallow } from 'enzyme';
 
-describe('Billing Address Form:', () => {
+describe('Billing Contact Fields:', () => {
   let wrapper;
 
   const props = {
@@ -15,7 +15,7 @@ describe('Billing Address Form:', () => {
   };
 
   beforeEach(() => {
-    wrapper = shallow(<BillingContactForm {...props} />);
+    wrapper = shallow(<BillingContactFields {...props} />);
   });
 
   it('should render', () => {

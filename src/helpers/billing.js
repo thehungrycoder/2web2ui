@@ -3,7 +3,7 @@ import _ from 'lodash';
 import config from 'src/config';
 import Payment from 'payment';
 
-export function formatDataForCors (values) {
+export function formatDataForCors(values) {
   const { email, planpicker, card, billingAddress } = values;
 
   // For CORS Endpoint + sift
@@ -52,7 +52,7 @@ export function formatDataForCors (values) {
   return { corsData, billingData };
 }
 
-export function formatUpdateData ({ accountKey, billingAddress, card }) {
+export function formatUpdateData({ accountKey, billingAddress, card }) {
   const { securityCode } = card;
   const { zip, country, state } = billingAddress;
   return {
@@ -75,7 +75,7 @@ export function formatUpdateData ({ accountKey, billingAddress, card }) {
   };
 }
 
-export function formatCreateData ({
+export function formatCreateData({
   accountNumber,
   crmId,
   name,
@@ -108,19 +108,19 @@ export function formatCreateData ({
   return formatted;
 }
 
-export function formatContactData ({ billingContact }) {
+export function formatContactData(data) {
   return {
-    email: billingContact.email,
-    first_name: billingContact.firstName,
-    last_name: billingContact.lastName,
-    country_code: billingContact.country,
-    zip_code: billingContact.zip,
-    state: billingContact.state
+    email: data.email,
+    first_name: data.firstName,
+    last_name: data.lastName,
+    country_code: data.country,
+    zip_code: data.zip,
+    state: data.state
   };
 }
 
 // Formats countries before storing in state
-export function formatCountries (countries) {
+export function formatCountries(countries) {
   const ordered = _.flatten([
     _.remove(countries, { code: 'US' }),
     _.remove(countries, { code: 'GB' }),
@@ -131,14 +131,14 @@ export function formatCountries (countries) {
   return ordered.map((country) => formatForSelect(country));
 }
 
-function formatForSelect ({ code, name, states }) {
+function formatForSelect({ code, name, states }) {
   if (states) {
     return { value: code, label: name, states: states.map((state) => formatForSelect(state)) };
   }
   return { value: code, label: name };
 }
 
-export function getZipLabel (country) {
+export function getZipLabel(country) {
   if (country === 'US') {
     return 'Zip Code';
   }
@@ -153,7 +153,7 @@ export function getZipLabel (country) {
 /**
  * Reshapes type strings from what the payment lib provides to a format our api accepts
  */
-export function formatCardTypes (cards) {
+export function formatCardTypes(cards) {
   return cards.map((card) => {
     const type = _.find(config.cardTypes, { paymentFormat: card.type });
     return { ...card, type: type ? type.apiFormat : card.type };
@@ -161,13 +161,13 @@ export function formatCardTypes (cards) {
 }
 
 
-export function getPlanPrice (plan) {
+export function getPlanPrice(plan) {
   const pricingInterval = _.has(plan, 'hourly') ? 'hourly' : 'monthly';
   const intervalShortName = pricingInterval === 'hourly' ? 'hr' : 'mo';
   return { intervalShort: intervalShortName, intervalLong: pricingInterval, price: plan[pricingInterval] };
 }
 
-export function prepareCardInfo ({ expCombined, ...cardInfo }) {
+export function prepareCardInfo({ expCombined, ...cardInfo }) {
   const expiryInfo = Payment.fns.cardExpiryVal(expCombined);
 
   return {
