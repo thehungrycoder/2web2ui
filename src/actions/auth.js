@@ -3,10 +3,8 @@ import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 import { getTfaStatusBeforeLoggedIn } from 'src/actions/tfa';
 import { showAlert } from 'src/actions/globalAlert';
 import { removeHerokuToolbar } from 'src/helpers/heroku';
-
 import authCookie from '../helpers/authCookie';
 import { initializeAccessControl } from './accessControl';
-
 
 /**
  * does the necessary actions to log a user in and set appropriate data in redux
