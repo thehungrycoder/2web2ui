@@ -114,3 +114,43 @@ describe('URL Validation', () => {
     expect(validations.url('http://  google.com')).toEqual('Must be a valid URL');
   });
 });
+
+describe('Credit card expiration validation', () => {
+  const validateExpiry = validations.cardExpiry(new Date('2018-06-15'));
+
+  it('should be valid for a date in a future year', () => {
+    expect(validateExpiry('05 / 19')).toBeUndefined();
+    expect(validateExpiry('05/19')).toBeUndefined();
+    expect(validateExpiry('05 / 2019')).toBeUndefined();
+  });
+
+  it('should be valid for a date in the same year, future month', () => {
+    expect(validateExpiry('07 / 18')).toBeUndefined();
+    expect(validateExpiry('07/18')).toBeUndefined();
+    expect(validateExpiry('07 / 2018')).toBeUndefined();
+  });
+
+  it('should be valid for a date in the same year, same month', () => {
+    expect(validateExpiry('06 / 18')).toBeUndefined();
+    expect(validateExpiry('06/18')).toBeUndefined();
+    expect(validateExpiry('06 / 2018')).toBeUndefined();
+  });
+
+  it('should be invalid for a date in the same year, previous month', () => {
+    expect(validateExpiry('05 / 18')).toEqual('Please choose a valid expiration date');
+    expect(validateExpiry('05/18')).toEqual('Please choose a valid expiration date');
+    expect(validateExpiry('05 / 2018')).toEqual('Please choose a valid expiration date');
+  });
+
+  it('should be invalid for a date in a previous year', () => {
+    expect(validateExpiry('12 / 17')).toEqual('Please choose a valid expiration date');
+    expect(validateExpiry('12/17')).toEqual('Please choose a valid expiration date');
+    expect(validateExpiry('12 / 2017')).toEqual('Please choose a valid expiration date');
+  });
+
+  it('should be invalid for a date with an invalid month', () => {
+    expect(validateExpiry('44 / 20')).toEqual('Please choose a valid expiration date');
+    expect(validateExpiry('44/20')).toEqual('Please choose a valid expiration date');
+    expect(validateExpiry('44 / 2020')).toEqual('Please choose a valid expiration date');
+  });
+});

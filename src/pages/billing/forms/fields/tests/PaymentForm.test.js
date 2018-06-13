@@ -38,8 +38,11 @@ describe('Payment Form: ', () => {
   });
 
   it('should validate the expiration date', () => {
-    expect(wrapper.instance().dateFormat('22')).toEqual('Must be MM / YYYY');
-    expect(wrapper.instance().dateFormat('10 / 2020')).toEqual(undefined);
+    expect(wrapper.instance().validateCardExpiry('22')).toEqual('Please choose a valid expiration date');
+    expect(wrapper.instance().validateCardExpiry('10 / 2020')).toEqual(undefined);
+    expect(wrapper.instance().validateCardExpiry('10 / 20')).toEqual(undefined);
+    expect(wrapper.instance().validateCardExpiry('10/2020')).toEqual(undefined);
+    expect(wrapper.instance().validateCardExpiry('10/20')).toEqual(undefined);
   });
 
   it('validates card type', () => {

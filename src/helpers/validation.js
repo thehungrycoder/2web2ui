@@ -74,3 +74,27 @@ export const maxFileSize = _.memoize(function maxFilesSize(maxSize) {
 export function url(value) {
   return isURL(value) ? undefined : 'Must be a valid URL';
 }
+
+export const cardExpiry = _.memoize((now = new Date()) => {
+  const currentYear = now.getFullYear();
+  const currentMonth = now.getMonth() + 1;
+  const message = 'Please choose a valid expiration date';
+
+  return (value) => {
+    let [month, year] = value.split(/ ?\/ ?/);
+    month = Number(month);
+    year = Number(year);
+
+    if (year < 100) {
+      year += 2000;
+    }
+
+    if (month < 1 || month > 12) {
+      return message;
+    }
+
+    if ((year < currentYear) || (year === currentYear && month < currentMonth)) {
+      return message;
+    }
+  };
+});

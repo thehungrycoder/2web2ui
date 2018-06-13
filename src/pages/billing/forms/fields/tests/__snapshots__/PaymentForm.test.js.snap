@@ -32,7 +32,7 @@ exports[`Payment Form:  should render 1`] = `
         component={[Function]}
         label="Expiration Date"
         name="card.expCombined"
-        placeholder="MM/YYYY"
+        placeholder="MM / YY"
         validate={
           Array [
             [Function],
