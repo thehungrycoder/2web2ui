@@ -9,9 +9,9 @@ A re-build of the current SparkPost web app using React and Redux.
 
 ## Installing dependencies
 
-This project uses `npm5`, so upgrade if you haven't.
+This project uses `npm6`, so upgrade if you haven't.
 ```
-npm install npm@5 -g
+npm install npm@6 -g
 ```
 
 Then `npm install` to install deps.
