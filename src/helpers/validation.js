@@ -2,6 +2,7 @@ import _ from 'lodash';
 import { formatBytes } from 'src/helpers/units';
 import { emailRegex, emailLocalRegex, domainRegex } from './regex';
 import isURL from 'validator/lib/isURL';
+import Payment from 'payment';
 
 export function required(value) {
   return value ? undefined : 'Required';
@@ -75,26 +76,6 @@ export function url(value) {
   return isURL(value) ? undefined : 'Must be a valid URL';
 }
 
-export const cardExpiry = _.memoize((now = new Date()) => {
-  const currentYear = now.getFullYear();
-  const currentMonth = now.getMonth() + 1;
-  const message = 'Please choose a valid expiration date';
-
-  return (value) => {
-    let [month, year] = value.split(/ ?\/ ?/);
-    month = Number(month);
-    year = Number(year);
-
-    if (year < 100) {
-      year += 2000;
-    }
-
-    if (month < 1 || month > 12) {
-      return message;
-    }
-
-    if ((year < currentYear) || (year === currentYear && month < currentMonth)) {
-      return message;
-    }
-  };
-});
+export const cardExpiry = (value) => (
+  Payment.fns.validateCardExpiry(value) ? undefined : 'Please choose a valid expiration date'
+);

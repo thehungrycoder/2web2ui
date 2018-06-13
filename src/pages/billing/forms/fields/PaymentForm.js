@@ -30,9 +30,6 @@ export class PaymentForm extends Component {
     Payment.formatCardCVC(ReactDOM.findDOMNode(this.cvc));
   }
 
-  // calculates "now" date once per mount of this component
-  validateCardExpiry = cardExpiry(new Date());
-
   validateType(number) {
     const cardType = Payment.fns.cardType(number);
     const allowedCards = _.map(config.cardTypes, 'apiFormat');
@@ -72,7 +69,7 @@ export class PaymentForm extends Component {
               ref={(input) => this.expiry = input}
               placeholder='MM / YY'
               component={TextFieldWrapper}
-              validate={[required, this.validateCardExpiry]}
+              validate={[required, cardExpiry]}
               disabled={disabled}
             />
           </Grid.Column>
