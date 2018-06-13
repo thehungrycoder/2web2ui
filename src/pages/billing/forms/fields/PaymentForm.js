@@ -5,9 +5,8 @@ import { Field, change } from 'redux-form';
 import { Grid } from '@sparkpost/matchbox';
 import _ from 'lodash';
 import config from 'src/config';
-
 import { TextFieldWrapper } from 'src/components';
-import { required, minLength } from 'src/helpers/validation';
+import { required, cardExpiry } from 'src/helpers/validation';
 import Payment from 'payment';
 import { formatCardTypes } from 'src/helpers/billing';
 
@@ -19,7 +18,8 @@ import { formatCardTypes } from 'src/helpers/billing';
  * card.securityCode
  */
 export class PaymentForm extends Component {
-  componentDidMount () {
+
+  componentDidMount() {
     const types = Payment.getCardArray();
     // Formats strings for our api (the ones we accept)
     Payment.setCardArray(formatCardTypes(types));
@@ -30,20 +30,21 @@ export class PaymentForm extends Component {
     Payment.formatCardCVC(ReactDOM.findDOMNode(this.cvc));
   }
 
-  validateType (number) {
+  // calculates "now" date once per mount of this component
+  validateCardExpiry = cardExpiry(new Date());
+
+  validateType(number) {
     const cardType = Payment.fns.cardType(number);
     const allowedCards = _.map(config.cardTypes, 'apiFormat');
 
-    if (_.includes(allowedCards, cardType)) {
+    if (allowedCards.includes(cardType)) {
       return undefined;
     }
 
     return `We only accept ${allowedCards.join(', ')}`;
   }
 
-  dateFormat = (date) => minLength(9)(date) ? 'Must be MM / YYYY' : undefined;
-
-  render () {
+  render() {
     const { disabled } = this.props;
     return (
       <div>
@@ -69,9 +70,9 @@ export class PaymentForm extends Component {
               label='Expiration Date'
               name='card.expCombined'
               ref={(input) => this.expiry = input}
-              placeholder='MM/YYYY'
+              placeholder='MM / YY'
               component={TextFieldWrapper}
-              validate={[required, this.dateFormat]}
+              validate={[required, this.validateCardExpiry]}
               disabled={disabled}
             />
           </Grid.Column>
