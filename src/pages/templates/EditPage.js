@@ -37,8 +37,8 @@ export default class EditPage extends Component {
 
   handleSave = (values) => {
     const { update, match, getDraft, showAlert, getTestData, subaccountId } = this.props;
-    return update(values, subaccountId).then(() => {
-      getDraft(match.params.id);
+    return update(_.omit(values, 'published'), subaccountId).then(() => {
+      getDraft(match.params.id, subaccountId);
       getTestData({ id: match.params.id, mode: 'draft' });
       showAlert({ type: 'success', message: 'Template saved' });
     });

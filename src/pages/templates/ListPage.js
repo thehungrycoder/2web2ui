@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { TableCollection, ApiErrorBanner, Loading, SubaccountTag } from 'src/components';
+import { SubaccountTag, TableCollection, ApiErrorBanner, Loading } from 'src/components';
 import { Templates } from 'src/components/images';
 import { Page } from '@sparkpost/matchbox';
 import Editor from './components/Editor'; // async, for preload
-
-import { format } from 'date-fns';
-import { setSubaccountQuery } from 'src/helpers/subaccounts';
+import { Name, Status, Actions } from './components/ListComponents';
+import { formatDateTime } from 'src/helpers/date';
 
 const primaryAction = {
   content: 'Create Template',
@@ -31,39 +30,35 @@ export default class ListPage extends Component {
     );
   }
 
-  getRowData = ({ published, id, name, last_update_time, subaccount_id, shared_with_subaccounts }) => {
-    const row = [
-      <Link to={`/templates/edit/${id}${setSubaccountQuery(subaccount_id)}`}>{name}</Link>,
-      id,
-      published ? 'Published' : 'Draft',
-      format(last_update_time, 'MMM D, YYYY [at] h:mma')
+  getRowData = ({ last_update_time, shared_with_subaccounts, ...rowData }) => {
+    const { hasSubaccounts } = this.props;
+    const { subaccount_id } = rowData;
+
+    const subaccountCell = subaccount_id || shared_with_subaccounts
+      ? <SubaccountTag all={shared_with_subaccounts} id={subaccount_id} />
+      : null;
+
+    return [
+      <Name {...rowData} />,
+      <Status {...rowData} />,
+      ...(hasSubaccounts ? [subaccountCell] : []),
+      <small>{formatDateTime(last_update_time)}</small>,
+      <Actions {...rowData} />
     ];
-
-    if (this.props.hasSubaccounts) {
-      const tag = subaccount_id || shared_with_subaccounts
-        ? <SubaccountTag all={shared_with_subaccounts} id={subaccount_id} />
-        : null;
-      row.push(tag);
-    }
-
-    return row;
   }
 
   getColumns() {
     const { hasSubaccounts } = this.props;
 
-    const columns = [
-      { label: 'Name', width: '22%', sortKey: 'name' },
-      { label: 'ID', width: '22%', sortKey: 'id' },
-      { label: 'Status', width: '15%', sortKey: 'published' },
-      { label: 'Updated', sortKey: 'last_update_time' }
+    return [
+      { label: 'Name', width: '28%', sortKey: 'name' },
+      { label: 'Status', width: '18%', sortKey: 'published' },
+      ...(hasSubaccounts ? [{
+        label: 'Subaccount', width: '18%', sortKey: (template) => [template.subaccount_id, template.shared_with_subaccounts]
+      }] : []),
+      { label: 'Last Updated', sortKey: 'last_update_time' },
+      null
     ];
-
-    if (hasSubaccounts) {
-      columns.push({ label: 'Subaccount', width: '20%', sortKey: (template) => [template.subaccount_id, template.shared_with_subaccounts]});
-    }
-
-    return columns;
   }
 
   renderCollection() {
@@ -100,7 +95,7 @@ export default class ListPage extends Component {
           title: 'Manage your email templates',
           content: <p>Build, test, preview and send your transmissions.</p>
         }} >
-        { error ? this.renderError() : this.renderCollection() }
+        {error ? this.renderError() : this.renderCollection()}
       </Page>
     );
   }
