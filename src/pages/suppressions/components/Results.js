@@ -3,10 +3,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { SubaccountTag } from 'src/components';
 import { Button } from '@sparkpost/matchbox';
 import { PanelLoading, TableCollection, Empty, DeleteModal } from 'src/components';
 import { deleteSuppression } from 'src/actions/suppressions';
-import { formatSubaccountDisplay } from '../helpers';
 import { showAlert } from 'src/actions/globalAlert';
 import Detail from './Detail';
 
@@ -44,7 +44,7 @@ export class Results extends Component {
     ];
 
     if (hasSubaccounts) {
-      rowData.push(formatSubaccountDisplay(subaccountId, allSubaccounts));
+      rowData.push(<SubaccountTag id={subaccountId}/>);
     }
 
     rowData.push(
@@ -137,8 +137,8 @@ export class Results extends Component {
 
     return (
       <div>
-        { this.renderDeleteModal() }
-        { this.renderDetailModal() }
+        {this.renderDeleteModal()}
+        {this.renderDetailModal()}
 
         <TableCollection
           columns={this.getColumns()}

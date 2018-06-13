@@ -36,7 +36,13 @@ Array [
   "rec2@dom.com",
   "Non-transactional",
   "Manually added",
-  "101",
+  <SubaccountTag
+    all={false}
+    id={101}
+    isDefault={false}
+    master={false}
+    receiveAll={false}
+  />,
   <div
     style={
       Object {
