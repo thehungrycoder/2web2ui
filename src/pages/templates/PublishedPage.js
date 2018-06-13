@@ -7,10 +7,16 @@ import { Loading } from 'src/components';
 import { Page, Grid } from '@sparkpost/matchbox';
 
 export default class PublishedPage extends Component {
-  componentWillMount() {
+  componentDidMount() {
     const { match, getPublished, getTestData, subaccountId } = this.props;
     getPublished(match.params.id, subaccountId);
     getTestData({ id: match.params.id, mode: 'published' });
+  }
+
+  componentDidUpdate() {
+    if (this.props.getPublishedError) {
+      this.props.history.push('/templates/');
+    }
   }
 
   handlePreview = ({ testData }) => {
@@ -29,7 +35,7 @@ export default class PublishedPage extends Component {
     const secondaryActions = [
       {
         content: 'View Draft',
-        Component: Link,
+        component: Link,
         to: `/templates/edit/${match.params.id}${query}`
       },
       {
@@ -40,7 +46,7 @@ export default class PublishedPage extends Component {
 
     const breadcrumbAction = {
       content: 'Templates',
-      Component: Link,
+      component: Link,
       to: '/templates'
     };
 

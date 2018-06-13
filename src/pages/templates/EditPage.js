@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { allSettled } from 'src/helpers/promise';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
+import _ from 'lodash';
 
 // Components
 import Form from './components/containers/Form.container';
@@ -14,25 +14,17 @@ export default class EditPage extends Component {
     deleteOpen: false
   };
 
-  getTemplate() {
-    const { match, getDraft, getPublished, subaccountId } = this.props;
-    return allSettled([
-      getDraft(match.params.id, subaccountId),
-      getPublished(match.params.id, subaccountId)
-    ], { onlyRejected: true });
+  componentDidMount() {
+    const { match, getDraft, getTestData, subaccountId } = this.props;
+
+    getDraft(match.params.id, subaccountId);
+    getTestData({ id: match.params.id, mode: 'draft' });
   }
 
-  componentDidMount() {
-    const { match, getTestData, showAlert, history } = this.props;
-
-    this.getTemplate().then((errors) => {
-      if (errors.length === 2) {
-        history.push('/templates/'); // Redirect if no draft or published found
-        showAlert({ type: 'error', message: 'Could not find template' });
-      }
-    });
-
-    getTestData({ id: match.params.id, mode: 'draft' });
+  componentDidUpdate() {
+    if (this.props.getDraftError) {
+      this.props.history.push('/templates/');
+    }
   }
 
   handlePublish = (values) => {
@@ -73,7 +65,7 @@ export default class EditPage extends Component {
 
   getPageProps() {
     const { canModify, handleSubmit, template, match, submitting, subaccountId } = this.props;
-    const published = template.published;
+    const published = template.has_published;
 
     const primaryAction = {
       content: 'Publish Template',
@@ -100,7 +92,7 @@ export default class EditPage extends Component {
       { content: 'Delete', onClick: this.handleDeleteModalToggle, visible: canModify },
       {
         content: 'Duplicate',
-        Component: Link,
+        component: Link,
         to: `/templates/create/${match.params.id}`,
         visible: canModify
       },
@@ -113,7 +105,7 @@ export default class EditPage extends Component {
 
     const breadcrumbAction = {
       content: 'Templates',
-      Component: Link,
+      component: Link,
       to: '/templates'
     };
 
@@ -126,9 +118,9 @@ export default class EditPage extends Component {
   }
 
   render() {
-    const { canModify, loading, formName, subaccountId } = this.props;
+    const { canModify, loading, formName, subaccountId, template } = this.props;
 
-    if (loading) {
+    if (loading || _.isEmpty(template)) {
       return <Loading />;
     }
 

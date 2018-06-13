@@ -24,7 +24,7 @@ export default (state = initialState, action) => {
 
     // Get Draft
     case 'GET_DRAFT_TEMPLATE_PENDING':
-      return { ...state, getLoading: true };
+      return { ...state, getDraftLoading: true, getDraftError: null };
 
     case 'GET_DRAFT_TEMPLATE_SUCCESS':
       return {
@@ -33,15 +33,15 @@ export default (state = initialState, action) => {
           ...state.byId,
           [action.payload.id]: { ...state.byId[action.payload.id], draft: normalizeTemplateFromAddress(action.payload) }
         },
-        getLoading: false
+        getDraftLoading: false
       };
 
     case 'GET_DRAFT_TEMPLATE_FAIL':
-      return { ...state, getLoading: false };
+      return { ...state, getDraftLoading: false, getDraftError: action.payload };
 
     // Get Published
     case 'GET_PUBLISHED_TEMPLATE_PENDING':
-      return { ...state, getLoading: true };
+      return { ...state, getPublishedLoading: true, getPublishedError: null };
 
     case 'GET_PUBLISHED_TEMPLATE_SUCCESS':
       return {
@@ -50,11 +50,11 @@ export default (state = initialState, action) => {
           ...state.byId,
           [action.payload.id]: { ...state.byId[action.payload.id], published: normalizeTemplateFromAddress(action.payload) }
         },
-        getLoading: false
+        getPublishedLoading: false
       };
 
     case 'GET_PUBLISHED_TEMPLATE_FAIL':
-      return { ...state, getLoading: false };
+      return { ...state, getPublishedLoading: false, getPublishedError: action.payload };
 
     case 'GET_TEMPLATE_TEST_DATA':
       return { ...state, testData: action.payload };
