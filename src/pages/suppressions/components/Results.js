@@ -37,14 +37,14 @@ export class Results extends Component {
 
   getRowData = (row) => {
     const { recipient, type, source, subaccount_id: subaccountId } = row;
-    const { subaccounts: allSubaccounts, hasSubaccounts } = this.props;
+    const { hasSubaccounts } = this.props;
     const rowData = [recipient,
       type === 'transactional' ? 'Transactional' : 'Non-transactional',
       source
     ];
 
     if (hasSubaccounts) {
-      rowData.push(<SubaccountTag id={subaccountId}/>);
+      rowData.push(<SubaccountTag id={subaccountId} master={!subaccountId}/>);
     }
 
     rowData.push(
