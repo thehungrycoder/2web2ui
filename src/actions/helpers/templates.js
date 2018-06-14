@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 const MODE_ABBRS = {
   draft: 'd',
   published: 'p'
@@ -10,8 +12,13 @@ const MODE_ABBRS = {
  * @param  {string} mode - 'draft' | 'published'
  * @return {string} key
  */
-const getTestDataKey = ({ id, username, mode }) => ([ 'tpldata', username, id, MODE_ABBRS[mode] ].join('/'));
+export const getTestDataKey = ({ id, username, mode }) => ([ 'tpldata', username, id, MODE_ABBRS[mode] ].join('/'));
 
-export {
-  getTestDataKey
+// Shape the content attributes for API
+export const shapeContent = (content = {}) => {
+  if (_.isEmpty(content.reply_to)) {
+    return _.omit(content, 'reply_to');
+  }
+
+  return content;
 };

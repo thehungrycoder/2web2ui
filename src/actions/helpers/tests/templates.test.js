@@ -1,4 +1,4 @@
-import { getTestDataKey } from '../templates';
+import { getTestDataKey, shapeContent } from '../templates';
 
 describe('Helper: Templates local storage key', () => {
   it('should get the correct draft key', () => {
@@ -11,5 +11,15 @@ describe('Helper: Templates local storage key', () => {
     const options = { id: 'two', username: 'user', mode: 'published' };
     const results = getTestDataKey(options);
     expect(results).toEqual('tpldata/user/two/p');
+  });
+});
+
+describe('.shapeContent', () => {
+  it('should return content object with reply_to key', () => {
+    expect(shapeContent({ reply_to: 'test@example.com' })).toHaveProperty('reply_to');
+  });
+
+  it('should return content object without reply_to key', () => {
+    expect(shapeContent({ reply_to: '' })).not.toHaveProperty('reply_to');
   });
 });

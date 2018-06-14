@@ -3,7 +3,7 @@
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 import localforage from 'localforage';
 import config from 'src/config';
-import { getTestDataKey } from './helpers/templates';
+import { getTestDataKey, shapeContent } from './helpers/templates';
 import setSubaccountHeader from './helpers/setSubaccountHeader';
 
 export function listTemplates() {
@@ -33,7 +33,7 @@ export function getDraft(id, subaccountId) {
 }
 
 export function getDraftAndPreview(id, subaccountId) {
-  return async(dispatch) => {
+  return async (dispatch) => {
     const { content } = await dispatch(getDraft(id, subaccountId));
     const { payload = {}} = await dispatch(getTestData({ id, mode: 'draft' }));
     const substitution_data = payload.substitution_data || {};
@@ -73,7 +73,7 @@ export function getPublished(id, subaccountId) {
 }
 
 export function getPublishedAndPreview(id, subaccountId) {
-  return async(dispatch) => {
+  return async (dispatch) => {
     const { content } = await dispatch(getPublished(id, subaccountId));
     const { payload = {}} = await dispatch(getTestData({ id, mode: 'published' }));
     const substitution_data = payload.substitution_data || {};
@@ -83,7 +83,7 @@ export function getPublishedAndPreview(id, subaccountId) {
 }
 
 export function create(data) {
-  const { id, testData, assignTo, subaccount, ...formData } = data;
+  const { id, testData, assignTo, subaccount, content, ...formData } = data;
 
   return (dispatch) => {
     dispatch(setTestData({ id, mode: 'draft', data: testData }));
@@ -97,6 +97,7 @@ export function create(data) {
         data: {
           ...formData,
           id,
+          content: shapeContent(content),
           shared_with_subaccounts: assignTo === 'shared'
         }
       }
@@ -105,7 +106,7 @@ export function create(data) {
 }
 
 export function update(data, subaccountId, params = {}) {
-  const { id, testData, ...formData } = data;
+  const { id, testData, content, ...formData } = data;
 
   return (dispatch) => {
     dispatch(setTestData({ id, mode: 'draft', data: testData }));
@@ -115,7 +116,10 @@ export function update(data, subaccountId, params = {}) {
       meta: {
         method: 'PUT',
         url: `/templates/${id}`,
-        data: formData,
+        data: {
+          ...formData,
+          content: shapeContent(content)
+        },
         params,
         headers: setSubaccountHeader(subaccountId)
       }
@@ -206,7 +210,7 @@ export function sendPreview({ id, mode, emails, from, subaccountId }) {
     address: { email }
   }));
 
-  return async(dispatch) => {
+  return async (dispatch) => {
     const { payload: testData = {}} = await dispatch(getTestData({ id, mode }));
 
     return dispatch(sparkpostApiRequest({
