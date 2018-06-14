@@ -82,6 +82,7 @@ Array [
   Object {
     "meta": Object {
       "data": Object {
+        "content": Object {},
         "form": "data",
         "id": "id",
         "shared_with_subaccounts": false,
@@ -227,6 +228,7 @@ Array [
   Object {
     "meta": Object {
       "data": Object {
+        "content": Object {},
         "form": "data",
       },
       "headers": Object {},
