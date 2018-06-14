@@ -1,0 +1,174 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Template List Components Actions should render correct actions when not published 1`] = `
+<div
+  style={
+    Object {
+      "textAlign": "right",
+    }
+  }
+>
+  <Button.Group>
+    <Button
+      component={[Function]}
+      size="small"
+      to="/templates/edit/10?subaccount=101"
+    >
+      Edit
+    </Button>
+    <Popover
+      bottom={true}
+      left={true}
+      right={true}
+      trigger={
+        <Button
+          size="small"
+        >
+          <ArrowDropDown />
+        </Button>
+      }
+    >
+      <ActionList
+        actions={
+          Array [
+            Object {
+              "component": [Function],
+              "content": "Edit Draft",
+              "section": 1,
+              "to": "/templates/edit/10?subaccount=101",
+            },
+            Object {
+              "component": [Function],
+              "content": "Preview Draft",
+              "section": 1,
+              "to": "/templates/preview/10?subaccount=101",
+            },
+            Object {
+              "component": [Function],
+              "content": "View Published",
+              "section": 2,
+              "to": "/templates/edit/10/published?subaccount=101",
+              "visible": false,
+            },
+            Object {
+              "component": [Function],
+              "content": "Preview Published",
+              "section": 2,
+              "to": "/templates/preview/10/published?subaccount=101",
+              "visible": false,
+            },
+          ]
+        }
+        groupByKey="section"
+      />
+    </Popover>
+  </Button.Group>
+</div>
+`;
+
+exports[`Template List Components Actions should render correct actions when published 1`] = `
+<div
+  style={
+    Object {
+      "textAlign": "right",
+    }
+  }
+>
+  <Button.Group>
+    <Button
+      component={[Function]}
+      size="small"
+      to="/templates/edit/10?subaccount=101"
+    >
+      Edit
+    </Button>
+    <Popover
+      bottom={true}
+      left={true}
+      right={true}
+      trigger={
+        <Button
+          size="small"
+        >
+          <ArrowDropDown />
+        </Button>
+      }
+    >
+      <ActionList
+        actions={
+          Array [
+            Object {
+              "component": [Function],
+              "content": "Edit Draft",
+              "section": 1,
+              "to": "/templates/edit/10?subaccount=101",
+            },
+            Object {
+              "component": [Function],
+              "content": "Preview Draft",
+              "section": 1,
+              "to": "/templates/preview/10?subaccount=101",
+            },
+            Object {
+              "component": [Function],
+              "content": "View Published",
+              "section": 2,
+              "to": "/templates/edit/10/published?subaccount=101",
+              "visible": true,
+            },
+            Object {
+              "component": [Function],
+              "content": "Preview Published",
+              "section": 2,
+              "to": "/templates/preview/10/published?subaccount=101",
+              "visible": true,
+            },
+          ]
+        }
+        groupByKey="section"
+      />
+    </Popover>
+  </Button.Group>
+</div>
+`;
+
+exports[`Template List Components Name should render 1`] = `
+<React.Fragment>
+  <p
+    className="Name"
+  >
+    <Link
+      replace={false}
+      to="/templates/edit/id-123?subaccount=123"
+    >
+      <strong>
+        template name
+      </strong>
+    </Link>
+  </p>
+  <p
+    className="Id"
+  >
+    <small>
+      <em>
+        ID: 
+        id-123
+      </em>
+    </small>
+  </p>
+</React.Fragment>
+`;
+
+exports[`Template List Components Status should render draft 1`] = `
+<Tag>
+  Draft
+</Tag>
+`;
+
+exports[`Template List Components Status should render published 1`] = `
+<Tag
+  color="blue"
+>
+  Published
+</Tag>
+`;

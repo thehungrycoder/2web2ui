@@ -16,7 +16,7 @@ const Name = ({ name, id, subaccount_id }) => (
   </Fragment>
 );
 
-const Status = ({ has_published, has_draft }) => {
+const Status = ({ has_published }) => {
 
   // Unpublished Changes
   // TODO Decide if we want to show something list page
@@ -65,7 +65,7 @@ const Actions = ({ id, subaccount_id, has_published }) => {
         <Button size='small' component={Link} to={`/templates/edit/${id}${setSubaccountQuery(subaccount_id)}`}>
           Edit
         </Button>
-        <Popover left style={{ zIndex: '-1' }} trigger={<Button size='small'><ArrowDropDown/></Button>}>
+        <Popover left trigger={<Button size='small'><ArrowDropDown/></Button>}>
           <ActionList actions={actions}/>
         </Popover>
       </Button.Group>
