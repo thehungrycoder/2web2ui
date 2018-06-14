@@ -5,7 +5,7 @@ import { Popover, Button, ActionList, Tag } from '@sparkpost/matchbox';
 import { ArrowDropDown } from '@sparkpost/matchbox-icons';
 import styles from './ListComponents.module.scss';
 
-export const Name = ({ name, id, subaccount_id }) => (
+const Name = ({ name, id, subaccount_id }) => (
   <Fragment>
     <p className={styles.Name}>
       <Link to={`/templates/edit/${id}${setSubaccountQuery(subaccount_id)}`}>
@@ -16,20 +16,20 @@ export const Name = ({ name, id, subaccount_id }) => (
   </Fragment>
 );
 
-export const Status = ({ has_published, has_draft }) => {
-
-  if (has_published) {
-    return <Tag color='blue'>Published</Tag>;
-  }
+const Status = ({ has_published, has_draft }) => {
 
   // Unpublished Changes
   // TODO Decide if we want to show something list page
   // if (has_published && has_draft)
 
+  if (has_published) {
+    return <Tag color='blue'>Published</Tag>;
+  }
+
   return <Tag>Draft</Tag>;
 };
 
-export const Actions = ({ id, subaccount_id, has_published }) => {
+const Actions = ({ id, subaccount_id, has_published }) => {
   const actions = [
     {
       content: 'Edit Draft',
@@ -71,4 +71,10 @@ export const Actions = ({ id, subaccount_id, has_published }) => {
       </Button.Group>
     </div>
   );
+};
+
+export {
+  Name,
+  Status,
+  Actions
 };

@@ -29,7 +29,7 @@ export default class EditPage extends Component {
 
   handlePublish = (values) => {
     const { publish, match, showAlert, history, subaccountId } = this.props;
-    return publish(values, subaccountId).then(() => {
+    return publish(_.omit(values, 'published'), subaccountId).then(() => {
       history.push(`/templates/edit/${match.params.id}/published${setSubaccountQuery(subaccountId)}`);
       showAlert({ type: 'success', message: 'Template published' });
     });
@@ -73,10 +73,7 @@ export default class EditPage extends Component {
       disabled: submitting
     };
 
-    const filterVisibleActions = (actions) =>
-      actions.filter((action) => action.visible).map(({ visible, ...action }) => action);
-
-    const secondaryActions = filterVisibleActions([
+    const secondaryActions = [
       {
         content: 'View Published',
         Component: Link,
@@ -101,7 +98,7 @@ export default class EditPage extends Component {
         onClick: handleSubmit(this.handlePreview),
         visible: true
       }
-    ]);
+    ];
 
     const breadcrumbAction = {
       content: 'Templates',

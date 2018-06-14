@@ -1,33 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Template EditPage should not show View Published link if template is not published 1`] = `
-Array [
-  Object {
-    "content": "Save as Draft",
-    "disabled": undefined,
-    "onClick": undefined,
-  },
-  Object {
-    "content": "Delete",
-    "onClick": [Function],
-  },
-  Object {
-    "Component": [Function],
-    "content": "Duplicate",
-    "to": "/templates/create/id",
-  },
-  Object {
-    "content": "Preview & Send",
-    "onClick": undefined,
-  },
-]
-`;
-
 exports[`Template EditPage should render correctly 1`] = `
 <Page
   breadcrumbAction={
     Object {
-      "Component": [Function],
+      "component": [Function],
       "content": "Templates",
       "to": "/templates",
     }
@@ -46,24 +23,29 @@ exports[`Template EditPage should render correctly 1`] = `
         "Component": [Function],
         "content": "View Published",
         "to": "/templates/edit/id/published?subaccount=101",
+        "visible": true,
       },
       Object {
         "content": "Save as Draft",
         "disabled": undefined,
         "onClick": undefined,
+        "visible": true,
       },
       Object {
         "content": "Delete",
         "onClick": [Function],
+        "visible": true,
       },
       Object {
-        "Component": [Function],
+        "component": [Function],
         "content": "Duplicate",
         "to": "/templates/create/id",
+        "visible": true,
       },
       Object {
         "content": "Preview & Send",
         "onClick": undefined,
+        "visible": true,
       },
     ]
   }
@@ -108,7 +90,7 @@ exports[`Template EditPage should render correctly for read-only users 1`] = `
 <Page
   breadcrumbAction={
     Object {
-      "Component": [Function],
+      "component": [Function],
       "content": "Templates",
       "to": "/templates",
     }
@@ -120,10 +102,29 @@ exports[`Template EditPage should render correctly for read-only users 1`] = `
         "Component": [Function],
         "content": "View Published",
         "to": "/templates/edit/id/published?subaccount=101",
+        "visible": true,
+      },
+      Object {
+        "content": "Save as Draft",
+        "disabled": undefined,
+        "onClick": undefined,
+        "visible": false,
+      },
+      Object {
+        "content": "Delete",
+        "onClick": [Function],
+        "visible": false,
+      },
+      Object {
+        "component": [Function],
+        "content": "Duplicate",
+        "to": "/templates/create/id",
+        "visible": false,
       },
       Object {
         "content": "Preview",
         "onClick": undefined,
+        "visible": true,
       },
     ]
   }

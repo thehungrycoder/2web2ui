@@ -10,14 +10,13 @@ describe('Template EditPage', () => {
   beforeEach(() => {
     props = {
       template: {
-        published: true
+        has_published: true
       },
       handleSubmit: jest.fn(),
       match: {
         params: { id: 'id' }
       },
       getDraft: jest.fn(() => Promise.resolve()),
-      getPublished: jest.fn(() => Promise.resolve()),
       getTestData: jest.fn(),
       deleteTemplate: jest.fn(() => Promise.resolve()),
       showAlert: jest.fn(),
@@ -40,7 +39,6 @@ describe('Template EditPage', () => {
     expect(wrapper).toMatchSnapshot();
     expect(props.getTestData).toHaveBeenCalledWith({ id: 'id', mode: 'draft' });
     expect(props.getDraft).toHaveBeenCalledWith('id', props.subaccountId);
-    expect(props.getPublished).toHaveBeenCalledWith('id', props.subaccountId);
   });
 
   it('should render correctly for read-only users', () => {
@@ -48,16 +46,9 @@ describe('Template EditPage', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should catch 404s on both published and draft', async() => {
-    wrapper.setProps({
-      getDraft: jest.fn(() => Promise.reject()),
-      getPublished: jest.fn(() => Promise.reject())
-    });
-    wrapper.instance().componentDidMount(); // Re-run cDM as it's already been mounted
-    await wrapper.instance().getTemplate();
-
+  it('should handle errors when getting template', () => {
+    wrapper.setProps({ getDraftError: 'error' });
     expect(props.history.push).toHaveBeenCalledWith('/templates/');
-    expect(props.showAlert).toHaveBeenCalledWith({ type: 'error', message: 'Could not find template' });
   });
 
   it('should render loading', () => {
@@ -66,8 +57,8 @@ describe('Template EditPage', () => {
   });
 
   it('should not show View Published link if template is not published', () => {
-    wrapper.setProps({ template: { published: false }});
-    expect(wrapper.find('Page').props().secondaryActions).toMatchSnapshot();
+    wrapper.setProps({ template: { has_published: false }});
+    expect(wrapper.find('Page').props().secondaryActions[0].visible).toBe(false);
   });
 
   it('should handle modal toggle', () => {
@@ -77,7 +68,7 @@ describe('Template EditPage', () => {
   });
 
   describe('publish', () => {
-    it('should handle success', async() => {
+    it('should handle success', async () => {
       wrapper.setProps({ publish: jest.fn(() => Promise.resolve()) });
       await wrapper.instance().handlePublish('values');
       expect(props.history.push).toHaveBeenCalledWith('/templates/edit/id/published?subaccount=101');
@@ -86,17 +77,17 @@ describe('Template EditPage', () => {
   });
 
   describe('save', () => {
-    it('should handle success', async() => {
+    it('should handle success', async () => {
       wrapper.setProps({ update: jest.fn(() => Promise.resolve()) });
       await wrapper.instance().handleSave('values');
-      expect(props.getDraft).toHaveBeenCalledWith('id');
+      expect(props.getDraft).toHaveBeenCalledWith('id', 101);
       expect(props.getTestData).toHaveBeenCalledWith({ id: 'id', mode: 'draft' });
       expect(props.showAlert).toHaveBeenCalledWith({ type: 'success', message: 'Template saved' });
     });
   });
 
   describe('delete', () => {
-    it('should handle success', async() => {
+    it('should handle success', async () => {
       wrapper.setProps({ deleteTemplate: jest.fn(() => Promise.resolve()) });
       await wrapper.instance().handleDelete('id');
       expect(props.history.push).toHaveBeenCalledWith('/templates/');
