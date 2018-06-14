@@ -21,7 +21,7 @@ exports[`Component: SubaccountTag should render a master account tag 1`] = `
     size={15}
   />
    
-  Master account
+  Master Account
 </Tag>
 `;
 

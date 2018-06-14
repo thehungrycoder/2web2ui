@@ -26,7 +26,7 @@ const SubaccountTag = ({ id, all, receiveAll, master, isDefault }) => {
   }
 
   if (master) {
-    content = 'Master account';
+    content = 'Master Account';
   }
 
   if (!content && !defaultContent) {
