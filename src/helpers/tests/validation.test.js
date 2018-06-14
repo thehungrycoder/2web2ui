@@ -114,3 +114,61 @@ describe('URL Validation', () => {
     expect(validations.url('http://  google.com')).toEqual('Must be a valid URL');
   });
 });
+
+describe('Credit card expiration validation', () => {
+
+  let realDate;
+  const mockNow = new Date('2018-06-15T12:00:00-00:00');
+
+  beforeEach(() => {
+    realDate = Date;
+    /* eslint-disable-next-line no-global-assign */
+    Date = class extends Date {
+      constructor(...args) {
+        /* eslint-disable-next-line constructor-super */
+        return (args[0] === undefined) ? mockNow : super(...args);
+      }
+    };
+  });
+
+  afterEach(() => {
+    /* eslint-disable-next-line no-global-assign */
+    Date = realDate;
+  });
+
+  it('should be valid for a date in a future year', () => {
+    expect(validations.cardExpiry('05 / 19')).toBeUndefined();
+    expect(validations.cardExpiry('05/19')).toBeUndefined();
+    expect(validations.cardExpiry('05 / 2019')).toBeUndefined();
+  });
+
+  it('should be valid for a date in the same year, future month', () => {
+    expect(validations.cardExpiry('07 / 18')).toBeUndefined();
+    expect(validations.cardExpiry('07/18')).toBeUndefined();
+    expect(validations.cardExpiry('07 / 2018')).toBeUndefined();
+  });
+
+  it('should be valid for a date in the same year, same month', () => {
+    expect(validations.cardExpiry('06 / 18')).toBeUndefined();
+    expect(validations.cardExpiry('06/18')).toBeUndefined();
+    expect(validations.cardExpiry('06 / 2018')).toBeUndefined();
+  });
+
+  it('should be invalid for a date in the same year, previous month', () => {
+    expect(validations.cardExpiry('05 / 18')).toEqual('Please choose a valid expiration date');
+    expect(validations.cardExpiry('05/18')).toEqual('Please choose a valid expiration date');
+    expect(validations.cardExpiry('05 / 2018')).toEqual('Please choose a valid expiration date');
+  });
+
+  it('should be invalid for a date in a previous year', () => {
+    expect(validations.cardExpiry('12 / 17')).toEqual('Please choose a valid expiration date');
+    expect(validations.cardExpiry('12/17')).toEqual('Please choose a valid expiration date');
+    expect(validations.cardExpiry('12 / 2017')).toEqual('Please choose a valid expiration date');
+  });
+
+  it('should be invalid for a date with an invalid month', () => {
+    expect(validations.cardExpiry('44 / 20')).toEqual('Please choose a valid expiration date');
+    expect(validations.cardExpiry('44/20')).toEqual('Please choose a valid expiration date');
+    expect(validations.cardExpiry('44 / 2020')).toEqual('Please choose a valid expiration date');
+  });
+});
