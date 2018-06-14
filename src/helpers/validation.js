@@ -2,6 +2,7 @@ import _ from 'lodash';
 import { formatBytes } from 'src/helpers/units';
 import { emailRegex, emailLocalRegex, domainRegex } from './regex';
 import isURL from 'validator/lib/isURL';
+import Payment from 'payment';
 
 export function required(value) {
   return value ? undefined : 'Required';
@@ -74,3 +75,7 @@ export const maxFileSize = _.memoize(function maxFilesSize(maxSize) {
 export function url(value) {
   return isURL(value) ? undefined : 'Must be a valid URL';
 }
+
+export const cardExpiry = (value) => (
+  Payment.fns.validateCardExpiry(value) ? undefined : 'Please choose a valid expiration date'
+);
