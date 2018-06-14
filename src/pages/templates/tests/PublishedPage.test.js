@@ -14,10 +14,12 @@ describe('Template PublishedPage', () => {
       },
       getPublished: jest.fn(() => Promise.resolve()),
       getTestData: jest.fn(),
-      setTestData: jest.fn(),
+      setTestData: jest.fn(() => Promise.resolve()),
       formName: 'templatePublished',
       handleSubmit: jest.fn(),
-      canModify: true
+      canModify: true,
+      history: { push: jest.fn() },
+      getPublishedError: null
     };
   });
 
@@ -35,6 +37,19 @@ describe('Template PublishedPage', () => {
     wrapper = shallow(<PublishedPage {...props} />);
     expect(props.getTestData).toHaveBeenCalledWith({ id: 'id', mode: 'published' });
     expect(props.getPublished).toHaveBeenCalledWith('id', props.subaccountId);
+  });
+
+  it('should redirect if template fails to load', () => {
+    wrapper = shallow(<PublishedPage {...props} />);
+    wrapper.setProps({ getPublishedError: 'error' });
+    expect(props.history.push).toHaveBeenCalledWith('/templates/');
+  });
+
+  it('should handle preview', async () => {
+    wrapper = shallow(<PublishedPage {...props} />);
+    await wrapper.instance().handlePreview({ testData: 'test' });
+    expect(props.setTestData).toHaveBeenCalledWith({ data: 'test', id: 'id', mode: 'published' });
+    expect(props.history.push).toHaveBeenCalledWith('/templates/preview/id/published');
   });
 
   it('should get subaccount template', () => {

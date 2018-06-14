@@ -19,6 +19,7 @@ describe('Template EditPage', () => {
       getDraft: jest.fn(() => Promise.resolve()),
       getTestData: jest.fn(),
       deleteTemplate: jest.fn(() => Promise.resolve()),
+      setTestData: jest.fn(() => Promise.resolve()),
       showAlert: jest.fn(),
       history: {
         push: jest.fn()
@@ -92,6 +93,14 @@ describe('Template EditPage', () => {
       await wrapper.instance().handleDelete('id');
       expect(props.history.push).toHaveBeenCalledWith('/templates/');
       expect(props.showAlert).toHaveBeenCalledWith({ message: 'Template deleted' });
+    });
+  });
+
+  describe('preview', () => {
+    it('should handle success', async () => {
+      await wrapper.instance().handlePreview({ testData: 'test' });
+      expect(props.setTestData).toHaveBeenCalledWith({ data: 'test', id: 'id', mode: 'draft' });
+      expect(props.history.push).toHaveBeenCalledWith('/templates/preview/id?subaccount=101');
     });
   });
 });

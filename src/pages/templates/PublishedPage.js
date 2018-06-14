@@ -23,7 +23,7 @@ export default class PublishedPage extends Component {
     const { setTestData, match: { params: { id }}, history, subaccountId } = this.props;
     const query = setSubaccountQuery(subaccountId);
 
-    setTestData({ id, data: testData, mode: 'published' }).then(
+    return setTestData({ id, data: testData, mode: 'published' }).then(
       () => history.push(`/templates/preview/${id}/published${query}`)
     );
   };
@@ -54,7 +54,7 @@ export default class PublishedPage extends Component {
   }
 
   render() {
-    const { loading, formName } = this.props;
+    const { loading, formName, subaccountId } = this.props;
 
     if (loading) {
       return <Loading />;
@@ -64,7 +64,7 @@ export default class PublishedPage extends Component {
       <Page {...this.getPageProps()}>
         <Grid>
           <Grid.Column xs={12} lg={4}>
-            <Form name={formName} readOnly />
+            <Form name={formName} subaccountId={subaccountId} readOnly />
           </Grid.Column>
           <Grid.Column xs={12} lg={8}>
             <Editor name={formName} readOnly />

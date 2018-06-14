@@ -54,7 +54,7 @@ export default class EditPage extends Component {
 
   handlePreview = ({ testData }) => {
     const { setTestData, match: { params: { id }}, subaccountId, history } = this.props;
-    setTestData({ id, data: testData, mode: 'draft' }).then(
+    return setTestData({ id, data: testData, mode: 'draft' }).then(
       () => history.push(`/templates/preview/${id}${setSubaccountQuery(subaccountId)}`)
     );
   };
