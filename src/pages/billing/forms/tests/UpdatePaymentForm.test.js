@@ -1,5 +1,5 @@
 import React from 'react';
-import { UpdateContact } from '../UpdateContact';
+import { UpdatePaymentForm } from '../UpdatePaymentForm';
 import { shallow } from 'enzyme';
 
 describe('Form Container: Update Contact', () => {
@@ -10,12 +10,12 @@ describe('Form Container: Update Contact', () => {
     handleSubmit: jest.fn(),
     showAlert: jest.fn(),
     getBillingCountries: jest.fn(),
-    updateBillingContact: jest.fn(() => Promise.resolve()),
+    billingUpdate: jest.fn(() => Promise.resolve()),
     onCancel: jest.fn()
   };
 
   beforeEach(() => {
-    wrapper = shallow(<UpdateContact {...props} />);
+    wrapper = shallow(<UpdatePaymentForm {...props} />);
   });
 
   it('should render', () => {
@@ -34,8 +34,8 @@ describe('Form Container: Update Contact', () => {
     expect(submitSpy).toHaveBeenCalled();
   });
 
-  it('should update contact', () => {
-    const updateSpy = jest.spyOn(wrapper.instance().props, 'updateBillingContact');
+  it('should update payment', () => {
+    const updateSpy = jest.spyOn(wrapper.instance().props, 'billingUpdate');
     wrapper.instance().onSubmit('hello');
     expect(updateSpy).toHaveBeenCalledWith('hello');
   });

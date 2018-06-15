@@ -3,12 +3,10 @@ import { connect } from 'react-redux';
 import { Field, formValueSelector, change } from 'redux-form';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-
 import { Grid } from '@sparkpost/matchbox';
 import { TextFieldWrapper, SelectWrapper } from 'src/components';
 import { required, email } from 'src/helpers/validation';
 import { getZipLabel } from 'src/helpers/billing';
-
 import styles from './Fields.module.scss';
 
 /**
@@ -82,7 +80,7 @@ export class BillingContactForm extends Component {
           validate={required}
         />
         <Grid>
-          { stateOrProvince }
+          {stateOrProvince}
           <Grid.Column xs={6}>
             <Field
               label={getZipLabel(countryValue)}

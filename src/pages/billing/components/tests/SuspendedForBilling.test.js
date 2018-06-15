@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import SuspendedForBilling from '../SuspendedForBilling';
 
-jest.mock('../../forms/UpdatePayment', () => function UpdatePaymentForm() {});
+jest.mock('../../forms/UpdatePaymentForm', () => function UpdatePaymentForm() {});
 
 describe('Component: SuspendedForBilling', () => {
 

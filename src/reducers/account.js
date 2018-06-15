@@ -12,8 +12,13 @@ export default (state = initialState, { type, meta, payload }) => {
       return { ...state, loading: true };
     }
 
-    case 'FETCH_ACCOUNT_SUCCESS':
-      return { ...state, loading: false, ...payload };
+    case 'FETCH_ACCOUNT_SUCCESS': {
+      const updated = { ...state, loading: false, ...payload };
+      if (!payload.billing) {
+        delete updated.billing;
+      }
+      return updated;
+    }
 
     case 'FETCH_ACCOUNT_FAIL':
       return { ...state, loading: false };

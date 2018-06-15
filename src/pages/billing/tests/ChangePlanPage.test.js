@@ -19,18 +19,6 @@ describe('Page: ChangePlanPage', () => {
     wrapper = shallow(<ChangePlanPage {...props} />);
   });
 
-  it('should get plans and countries on mount', () => {
-    const fetchAccountSpy = jest.spyOn(wrapper.instance().props, 'fetchAccount');
-    const plansSpy = jest.spyOn(wrapper.instance().props, 'getPlans');
-    const countrySpy = jest.spyOn(wrapper.instance().props, 'getBillingCountries');
-    wrapper.instance().componentWillMount();
-    expect(fetchAccountSpy).toHaveBeenCalledWith(expect.objectContaining({
-      include: expect.stringContaining('billing')
-    }));
-    expect(plansSpy).toHaveBeenCalled();
-    expect(countrySpy).toHaveBeenCalled();
-  });
-
   it('should render form if allowed to change plan', () => {
     wrapper.setProps({ canChangePlan: true });
     expect(wrapper).toMatchSnapshot();

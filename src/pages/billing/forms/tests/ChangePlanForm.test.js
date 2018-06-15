@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChangePlan } from '../ChangePlan';
+import { ChangePlanForm } from '../ChangePlanForm';
 import { shallow } from 'enzyme';
 import * as accountConditions from 'src/helpers/conditions/account';
 import * as conversions from 'src/helpers/conversionTracking';
@@ -25,28 +25,33 @@ describe('Form Container: Change Plan', () => {
     }
   ];
 
-  const props = {
-    account: {
-      subscription: { self_serve: true, code: 'free' }
-    },
-    isSelfServeBilling: true,
-    billing: { countries: [], plans },
-    plans,
-    currentPlan: {},
-    selectedPlan: {},
-    canUpdateBillingInfo: false,
-    history: { push: jest.fn() },
-    handleSubmit: jest.fn(),
-    showAlert: jest.fn(),
-    billingCreate: jest.fn(() => Promise.resolve()),
-    billingUpdate: jest.fn(() => Promise.resolve()),
-    updateSubscription: jest.fn(() => Promise.resolve()),
-    isAWSAccount: false
-  };
+  let props;
 
   beforeEach(() => {
+    props = {
+      account: {
+        subscription: { self_serve: true, code: 'free' },
+        billing: {}
+      },
+      isSelfServeBilling: true,
+      billing: { countries: [], plans },
+      getPlans: jest.fn(),
+      getBillingCountries: jest.fn(),
+      fetchAccount: jest.fn(),
+      plans,
+      currentPlan: {},
+      selectedPlan: {},
+      canUpdateBillingInfo: false,
+      history: { push: jest.fn() },
+      handleSubmit: jest.fn(),
+      showAlert: jest.fn(),
+      billingCreate: jest.fn(() => Promise.resolve()),
+      billingUpdate: jest.fn(() => Promise.resolve()),
+      updateSubscription: jest.fn(() => Promise.resolve()),
+      isAWSAccount: false
+    };
     accountConditions.isAws = jest.fn(() => false);
-    wrapper = shallow(<ChangePlan {...props} />);
+    wrapper = shallow(<ChangePlanForm {...props} />);
     instance = wrapper.instance();
     submitSpy = jest.spyOn(instance.props, 'handleSubmit');
   });
@@ -55,16 +60,22 @@ describe('Form Container: Change Plan', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('should get plans and countries on mount', () => {
+    expect(props.fetchAccount).toHaveBeenCalledWith(expect.objectContaining({
+      include: expect.stringContaining('billing')
+    }));
+    expect(props.getPlans).toHaveBeenCalled();
+    expect(props.getBillingCountries).toHaveBeenCalled();
+  });
+
   it('should not show plans', () => {
     wrapper.setProps({ plans: []});
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should show saved card', () => {
-    const receiveSpy = jest.spyOn(wrapper.instance(), 'componentWillReceiveProps');
     expect(wrapper).toHaveState('useSavedCC', null);
     wrapper.setProps({ canUpdateBillingInfo: true });
-    expect(receiveSpy).toHaveBeenCalledWith({ ...props, canUpdateBillingInfo: true }, {});
     expect(wrapper).toHaveState('useSavedCC', true);
     expect(wrapper).toMatchSnapshot();
   });
@@ -104,6 +115,8 @@ describe('Form Container: Change Plan', () => {
     });
 
     it('should call billingCreate when no billing exists', async () => {
+      const { billing, ...account } = props.account;
+      wrapper.setProps({ account }); // remove billing from account
       await instance.onSubmit(values);
       expect(instance.props.billingCreate).toHaveBeenCalledWith(values);
       expect(instance.props.history.push).toHaveBeenCalledWith('/account/billing');
@@ -111,7 +124,6 @@ describe('Form Container: Change Plan', () => {
     });
 
     it('should update subscription when billing exists and using saved cc', async () => {
-      wrapper.setProps({ account: { billing: true, subscription: { self_serve: true }}});
       await instance.onSubmit(values);
       expect(instance.props.billingUpdate).toHaveBeenCalledWith(values);
       expect(instance.props.updateSubscription).not.toHaveBeenCalled();
