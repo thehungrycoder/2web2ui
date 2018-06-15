@@ -4,46 +4,6 @@ exports[`Change Plan Form: Update My Credit Card and Plan 1`] = `
 Array [
   Array [
     Object {
-      "data": undefined,
-      "headers": Object {
-        "Authorization": "very-real-access-token",
-      },
-      "method": "get",
-      "params": undefined,
-      "responseType": "json",
-      "url": "/account/plans",
-    },
-  ],
-  Array [
-    Object {
-      "data": undefined,
-      "headers": Object {
-        "Authorization": "very-real-access-token",
-      },
-      "method": "get",
-      "params": Object {
-        "filter": "billing",
-      },
-      "responseType": "json",
-      "url": "/account/countries",
-    },
-  ],
-  Array [
-    Object {
-      "data": undefined,
-      "headers": Object {
-        "Authorization": "very-real-access-token",
-      },
-      "method": "get",
-      "params": Object {
-        "include": "billing",
-      },
-      "responseType": "json",
-      "url": "/account",
-    },
-  ],
-  Array [
-    Object {
       "data": Object {},
       "headers": Object {
         "Authorization": "very-real-access-token",
@@ -145,46 +105,6 @@ exports[`Change Plan Form: Update Plan Only 1`] = `
 Array [
   Array [
     Object {
-      "data": undefined,
-      "headers": Object {
-        "Authorization": "very-real-access-token",
-      },
-      "method": "get",
-      "params": undefined,
-      "responseType": "json",
-      "url": "/account/plans",
-    },
-  ],
-  Array [
-    Object {
-      "data": undefined,
-      "headers": Object {
-        "Authorization": "very-real-access-token",
-      },
-      "method": "get",
-      "params": Object {
-        "filter": "billing",
-      },
-      "responseType": "json",
-      "url": "/account/countries",
-    },
-  ],
-  Array [
-    Object {
-      "data": undefined,
-      "headers": Object {
-        "Authorization": "very-real-access-token",
-      },
-      "method": "get",
-      "params": Object {
-        "include": "billing",
-      },
-      "responseType": "json",
-      "url": "/account",
-    },
-  ],
-  Array [
-    Object {
       "data": Object {
         "code": "large",
       },
@@ -216,46 +136,6 @@ Array [
 
 exports[`Change Plan Form: Upgrade for the First Time 1`] = `
 Array [
-  Array [
-    Object {
-      "data": undefined,
-      "headers": Object {
-        "Authorization": "very-real-access-token",
-      },
-      "method": "get",
-      "params": undefined,
-      "responseType": "json",
-      "url": "/account/plans",
-    },
-  ],
-  Array [
-    Object {
-      "data": undefined,
-      "headers": Object {
-        "Authorization": "very-real-access-token",
-      },
-      "method": "get",
-      "params": Object {
-        "filter": "billing",
-      },
-      "responseType": "json",
-      "url": "/account/countries",
-    },
-  ],
-  Array [
-    Object {
-      "data": undefined,
-      "headers": Object {
-        "Authorization": "very-real-access-token",
-      },
-      "method": "get",
-      "params": Object {
-        "include": "billing",
-      },
-      "responseType": "json",
-      "url": "/account",
-    },
-  ],
   Array [
     Object {
       "data": Object {
@@ -367,20 +247,6 @@ exports[`Update Contact Form 1`] = `
 Array [
   Array [
     Object {
-      "data": undefined,
-      "headers": Object {
-        "Authorization": "very-real-access-token",
-      },
-      "method": "get",
-      "params": Object {
-        "filter": "billing",
-      },
-      "responseType": "json",
-      "url": "/account/countries",
-    },
-  ],
-  Array [
-    Object {
       "data": Object {
         "country_code": "US",
         "email": "something@email.test",
@@ -417,20 +283,6 @@ Array [
 
 exports[`Update Payment Form 1`] = `
 Array [
-  Array [
-    Object {
-      "data": undefined,
-      "headers": Object {
-        "Authorization": "very-real-access-token",
-      },
-      "method": "get",
-      "params": Object {
-        "filter": "billing",
-      },
-      "responseType": "json",
-      "url": "/account/countries",
-    },
-  ],
   Array [
     Object {
       "data": Object {},

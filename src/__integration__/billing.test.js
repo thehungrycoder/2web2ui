@@ -12,7 +12,7 @@ jest.mock('src/helpers/analytics');
 test('Update Payment Form', async () => {
   const form = await setupForm(<UpdatePaymentForm />);
 
-  form.changeFields([
+  form.fillInOrder([
     '4111111111111111',
     'Person Face',
     '10 / 2022',
@@ -24,6 +24,7 @@ test('Update Payment Form', async () => {
     '12345'
   ]);
 
+  axiosMock.mockClear();
   await form.submit();
   expect(axiosMock.mock.calls).toMatchSnapshot();
 });
@@ -31,7 +32,7 @@ test('Update Payment Form', async () => {
 test('Update Contact Form', async () => {
   const form = await setupForm(<UpdateContactForm onCancel={jest.fn()} />);
 
-  form.changeFields([
+  form.fillInOrder([
     'Firsty',
     'Lasty',
     'something@email.test',
@@ -40,6 +41,7 @@ test('Update Contact Form', async () => {
     '12345'
   ]);
 
+  axiosMock.mockClear();
   await form.submit();
   expect(axiosMock.mock.calls).toMatchSnapshot();
 });
@@ -53,7 +55,7 @@ test('Change Plan Form: Update My Credit Card and Plan', async () => {
     .find('button').first()
     .simulate('click');
 
-  form.changeFields([
+  form.fillInOrder([
     'skip plan picker', // this is the plan picker and setting it here won't work, so we have to skip it
     '4111111111111111',
     'Person Face',
@@ -70,6 +72,7 @@ test('Change Plan Form: Update My Credit Card and Plan', async () => {
   const newPlan = form.store.getState().billing.plans[2];
   form.mounted.find('Downshift').props().onChange(newPlan);
 
+  axiosMock.mockClear();
   await form.submit();
   expect(axiosMock.mock.calls).toMatchSnapshot();
 });
@@ -81,6 +84,7 @@ test('Change Plan Form: Update Plan Only', async () => {
   const newPlan = form.store.getState().billing.plans[2];
   form.mounted.find('Downshift').props().onChange(newPlan);
 
+  axiosMock.mockClear();
   await form.submit();
   expect(axiosMock.mock.calls).toMatchSnapshot();
 });
@@ -106,7 +110,7 @@ test('Change Plan Form: Upgrade for the First Time', async () => {
   form.asyncFlush();
   form.mounted.update();
 
-  form.changeFields([
+  form.fillInOrder([
     'skip plan picker', // this is the plan picker and setting it here won't work, so we have to skip it
     '4111111111111111',
     'Person Face',
@@ -123,6 +127,7 @@ test('Change Plan Form: Upgrade for the First Time', async () => {
   const newPlan = form.store.getState().billing.plans[1];
   form.mounted.find('Downshift').props().onChange(newPlan);
 
+  axiosMock.mockClear();
   await form.submit();
   expect(axiosMock.mock.calls).toMatchSnapshot();
 });

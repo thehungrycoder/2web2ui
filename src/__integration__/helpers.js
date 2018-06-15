@@ -44,7 +44,7 @@ export async function setupForm(tree) {
     store,
     change,
     asyncFlush,
-    changeFields: (fields) => fields.map((val, i) => change(i, val)),
+    fillInOrder: (fields) => fields.map((val, i) => change(i, val)),
     submit: async () => {
       mounted.find('form').simulate('submit');
       return asyncFlush();
