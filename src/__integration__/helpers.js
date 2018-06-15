@@ -3,6 +3,7 @@ import { mount } from 'enzyme';
 import { MemoryRouter } from 'react-router-dom';
 import configureStore from 'src/store';
 import { Provider } from 'react-redux';
+import _ from 'lodash';
 
 export const asyncFlush = () => new Promise((resolve) => setImmediate(resolve));
 
@@ -32,9 +33,11 @@ export async function setupForm(tree) {
       control = el.find('select');
     }
     control.simulate('change', { target: { value }});
+    mounted.update();
   };
 
   await asyncFlush();
+  mounted.update();
 
   return {
     mounted,
@@ -47,6 +50,6 @@ export async function setupForm(tree) {
       return asyncFlush();
     },
     /* eslint-disable-next-line no-console */
-    debug: (path = 'form') => console.log(JSON.stringify(store.getState()[path], null, 2))
+    debug: (path = 'form') => console.log(JSON.stringify(_.get(store.getState(), path), null, 2))
   };
 }

@@ -1,5 +1,420 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Change Plan Form: Update My Credit Card and Plan 1`] = `
+Array [
+  Array [
+    Object {
+      "data": undefined,
+      "headers": Object {
+        "Authorization": "very-real-access-token",
+      },
+      "method": "get",
+      "params": undefined,
+      "responseType": "json",
+      "url": "/account/plans",
+    },
+  ],
+  Array [
+    Object {
+      "data": undefined,
+      "headers": Object {
+        "Authorization": "very-real-access-token",
+      },
+      "method": "get",
+      "params": Object {
+        "filter": "billing",
+      },
+      "responseType": "json",
+      "url": "/account/countries",
+    },
+  ],
+  Array [
+    Object {
+      "data": undefined,
+      "headers": Object {
+        "Authorization": "very-real-access-token",
+      },
+      "method": "get",
+      "params": Object {
+        "include": "billing",
+      },
+      "responseType": "json",
+      "url": "/account",
+    },
+  ],
+  Array [
+    Object {
+      "data": Object {},
+      "headers": Object {
+        "Authorization": "very-real-access-token",
+      },
+      "method": "post",
+      "params": Object {
+        "context": "update-billing",
+      },
+      "responseType": "json",
+      "url": "/account/cors-data",
+    },
+  ],
+  Array [
+    Object {
+      "data": Object {
+        "accountKey": undefined,
+        "cardHolderInfo": Object {
+          "addressLine1": null,
+          "addressLine2": null,
+          "cardHolderName": "Person Face",
+          "city": null,
+          "country": "US",
+          "state": "MD",
+          "zipCode": "12345",
+        },
+        "creditCardNumber": "4111111111111111",
+        "creditCardType": "Visa",
+        "defaultPaymentMethod": true,
+        "expirationMonth": 10,
+        "expirationYear": 2022,
+        "securityCode": 123,
+      },
+      "headers": Object {
+        "signature": "update-billing__signature",
+        "token": "update-billing__token",
+      },
+      "method": "post",
+      "params": undefined,
+      "responseType": "json",
+      "url": "/payment-methods/credit-cards",
+    },
+  ],
+  Array [
+    Object {
+      "data": Object {
+        "code": "large",
+      },
+      "headers": Object {
+        "Authorization": "very-real-access-token",
+      },
+      "method": "put",
+      "params": undefined,
+      "responseType": "json",
+      "url": "/account/subscription",
+    },
+  ],
+  Array [
+    Object {
+      "data": undefined,
+      "headers": Object {
+        "Authorization": "very-real-access-token",
+      },
+      "method": "post",
+      "params": undefined,
+      "responseType": "json",
+      "url": "/account/subscription/check",
+    },
+  ],
+  Array [
+    Object {
+      "data": undefined,
+      "headers": Object {
+        "Authorization": "very-real-access-token",
+      },
+      "method": "post",
+      "params": undefined,
+      "responseType": "json",
+      "url": "/account/billing/collect",
+    },
+  ],
+  Array [
+    Object {
+      "data": undefined,
+      "headers": Object {
+        "Authorization": "very-real-access-token",
+      },
+      "method": "get",
+      "params": Object {
+        "include": "usage,billing",
+      },
+      "responseType": "json",
+      "url": "/account",
+    },
+  ],
+]
+`;
+
+exports[`Change Plan Form: Update Plan Only 1`] = `
+Array [
+  Array [
+    Object {
+      "data": undefined,
+      "headers": Object {
+        "Authorization": "very-real-access-token",
+      },
+      "method": "get",
+      "params": undefined,
+      "responseType": "json",
+      "url": "/account/plans",
+    },
+  ],
+  Array [
+    Object {
+      "data": undefined,
+      "headers": Object {
+        "Authorization": "very-real-access-token",
+      },
+      "method": "get",
+      "params": Object {
+        "filter": "billing",
+      },
+      "responseType": "json",
+      "url": "/account/countries",
+    },
+  ],
+  Array [
+    Object {
+      "data": undefined,
+      "headers": Object {
+        "Authorization": "very-real-access-token",
+      },
+      "method": "get",
+      "params": Object {
+        "include": "billing",
+      },
+      "responseType": "json",
+      "url": "/account",
+    },
+  ],
+  Array [
+    Object {
+      "data": Object {
+        "code": "large",
+      },
+      "headers": Object {
+        "Authorization": "very-real-access-token",
+      },
+      "method": "put",
+      "params": undefined,
+      "responseType": "json",
+      "url": "/account/subscription",
+    },
+  ],
+  Array [
+    Object {
+      "data": undefined,
+      "headers": Object {
+        "Authorization": "very-real-access-token",
+      },
+      "method": "get",
+      "params": Object {
+        "include": "usage,billing",
+      },
+      "responseType": "json",
+      "url": "/account",
+    },
+  ],
+]
+`;
+
+exports[`Change Plan Form: Upgrade for the First Time 1`] = `
+Array [
+  Array [
+    Object {
+      "data": undefined,
+      "headers": Object {
+        "Authorization": "very-real-access-token",
+      },
+      "method": "get",
+      "params": undefined,
+      "responseType": "json",
+      "url": "/account/plans",
+    },
+  ],
+  Array [
+    Object {
+      "data": undefined,
+      "headers": Object {
+        "Authorization": "very-real-access-token",
+      },
+      "method": "get",
+      "params": Object {
+        "filter": "billing",
+      },
+      "responseType": "json",
+      "url": "/account/countries",
+    },
+  ],
+  Array [
+    Object {
+      "data": undefined,
+      "headers": Object {
+        "Authorization": "very-real-access-token",
+      },
+      "method": "get",
+      "params": Object {
+        "include": "billing",
+      },
+      "responseType": "json",
+      "url": "/account",
+    },
+  ],
+  Array [
+    Object {
+      "data": Object {
+        "address1": null,
+        "address2": null,
+        "bin": "411111",
+        "cardholder_name": "Person Face",
+        "city": null,
+        "country": "US",
+        "email": undefined,
+        "last_four": "1111",
+        "plan_id": "50k-billingid",
+        "state": "MD",
+        "zip_code": "12345",
+      },
+      "headers": Object {
+        "Authorization": "very-real-access-token",
+      },
+      "method": "post",
+      "params": Object {
+        "context": "create-account",
+      },
+      "responseType": "json",
+      "url": "/account/cors-data",
+    },
+  ],
+  Array [
+    Object {
+      "data": Object {
+        "accountNumber": undefined,
+        "autoPay": true,
+        "billToContact": Object {
+          "country": "US",
+          "firstName": "Firsty",
+          "lastName": "Lasty",
+          "state": "MD",
+          "workEmail": undefined,
+          "zipCode": "12345",
+        },
+        "creditCard": Object {
+          "cardHolderInfo": Object {
+            "addressLine1": null,
+            "addressLine2": null,
+            "cardHolderName": "Person Face",
+            "city": null,
+            "country": "US",
+            "zipCode": "12345",
+          },
+          "cardNumber": "4111111111111111",
+          "cardType": "Visa",
+          "expirationMonth": 10,
+          "expirationYear": 2022,
+          "securityCode": 123,
+        },
+        "crmId": undefined,
+        "currency": "USD",
+        "invoiceCollect": true,
+        "name": undefined,
+        "subscription": Object {
+          "contractEffectiveDate": undefined,
+          "subscribeToRatePlans": Array [
+            Object {
+              "productRatePlanId": "50k-billingid",
+            },
+          ],
+          "termType": "EVERGREEN",
+        },
+      },
+      "headers": Object {
+        "signature": "create-account__signature",
+        "token": "create-account__token",
+      },
+      "method": "post",
+      "params": undefined,
+      "responseType": "json",
+      "url": "/accounts",
+    },
+  ],
+  Array [
+    Object {
+      "data": undefined,
+      "headers": Object {
+        "Authorization": "very-real-access-token",
+      },
+      "method": "post",
+      "params": undefined,
+      "responseType": "json",
+      "url": "/account/subscription/check",
+    },
+  ],
+  Array [
+    Object {
+      "data": undefined,
+      "headers": Object {
+        "Authorization": "very-real-access-token",
+      },
+      "method": "get",
+      "params": Object {
+        "include": "usage,billing",
+      },
+      "responseType": "json",
+      "url": "/account",
+    },
+  ],
+]
+`;
+
+exports[`Update Contact Form 1`] = `
+Array [
+  Array [
+    Object {
+      "data": undefined,
+      "headers": Object {
+        "Authorization": "very-real-access-token",
+      },
+      "method": "get",
+      "params": Object {
+        "filter": "billing",
+      },
+      "responseType": "json",
+      "url": "/account/countries",
+    },
+  ],
+  Array [
+    Object {
+      "data": Object {
+        "country_code": "US",
+        "email": "something@email.test",
+        "first_name": "Firsty",
+        "last_name": "Lasty",
+        "state": "MD",
+        "zip_code": "12345",
+      },
+      "headers": Object {
+        "Authorization": "very-real-access-token",
+      },
+      "method": "put",
+      "params": undefined,
+      "responseType": "json",
+      "url": "/account/billing",
+    },
+  ],
+  Array [
+    Object {
+      "data": undefined,
+      "headers": Object {
+        "Authorization": "very-real-access-token",
+      },
+      "method": "get",
+      "params": Object {
+        "include": "usage,billing",
+      },
+      "responseType": "json",
+      "url": "/account",
+    },
+  ],
+]
+`;
+
 exports[`Update Payment Form 1`] = `
 Array [
   Array [
