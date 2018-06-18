@@ -14,6 +14,7 @@ import {
 } from 'src/selectors/accountBillingInfo';
 import { Panel, Grid } from '@sparkpost/matchbox';
 import { PlanPicker } from 'src/components';
+import { Loading } from 'src/components';
 import PaymentForm from './fields/PaymentForm';
 import BillingAddressForm from './fields/BillingAddressForm';
 import Confirmation from '../components/Confirmation';
@@ -112,7 +113,11 @@ export class ChangePlanForm extends Component {
   }
 
   render() {
-    const { submitting, currentPlan, selectedPlan, plans, isSelfServeBilling } = this.props;
+    const { loading, submitting, currentPlan, selectedPlan, plans, isSelfServeBilling } = this.props;
+
+    if (loading) {
+      return <Loading />;
+    }
 
     // Manually billed accounts can submit without changing plan
     const disableSubmit = submitting ||
@@ -151,12 +156,15 @@ const mapStateToProps = (state, props) => {
   const selector = formValueSelector(FORMNAME);
   const { code: planCode } = qs.parse(props.location.search);
 
+  const plans = selectVisiblePlans(state);
+
   return {
+    loading: (!state.account.created && state.account.loading) || (plans.length === 0 && state.billing.plansLoading),
     account: state.account,
     billing: state.billing,
     canUpdateBillingInfo: canUpdateBillingInfoSelector(state),
     isSelfServeBilling: isSelfServeBilling(state),
-    plans: selectVisiblePlans(state),
+    plans,
     currentPlan: currentPlanSelector(state),
     selectedPlan: selector(state, 'planpicker') || {},
     initialValues: changePlanInitialValues(state, { planCode })
