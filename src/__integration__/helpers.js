@@ -41,10 +41,11 @@ export async function setupForm(tree) {
 
   return {
     mounted,
+    find: mounted.find.bind(mounted),
     store,
     change,
     asyncFlush,
-    fillInOrder: (fields) => fields.map((val, i) => change(i, val)),
+    fill: (fields) => fields.map((val, i) => change(i, val)),
     submit: async () => {
       mounted.find('form').simulate('submit');
       return asyncFlush();

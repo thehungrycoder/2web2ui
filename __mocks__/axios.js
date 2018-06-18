@@ -1,19 +1,7 @@
 import qs from 'query-string';
-import lookup from './responses';
+import lookup from 'src/__integration__/http-responses';
 
-const defaultResponse = {
-  data: {
-    success: true,
-    results: []
-  }
-}
-
-export const singleton = jest.fn((request) => {
-  const response = lookup(request);
-  // let response;
-  return Promise.resolve(response ? response : defaultResponse);
-});
-
+export const singleton = jest.fn((request) => Promise.resolve(lookup(request)));
 const mock = {
   create: () => singleton
 };

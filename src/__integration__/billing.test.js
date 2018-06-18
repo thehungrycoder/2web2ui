@@ -12,7 +12,7 @@ jest.mock('src/helpers/analytics');
 test('Update Payment Form', async () => {
   const form = await setupForm(<UpdatePaymentForm />);
 
-  form.fillInOrder([
+  form.fill([
     '4111111111111111',
     'Person Face',
     '10 / 2022',
@@ -32,7 +32,7 @@ test('Update Payment Form', async () => {
 test('Update Contact Form', async () => {
   const form = await setupForm(<UpdateContactForm onCancel={jest.fn()} />);
 
-  form.fillInOrder([
+  form.fill([
     'Firsty',
     'Lasty',
     'something@email.test',
@@ -50,12 +50,12 @@ test('Change Plan Form: Update My Credit Card and Plan', async () => {
   const form = await setupForm(<ChangePlanForm />);
 
   // Click the button to use a different credit card
-  form.mounted
+  form
     .find('Panel[title="Pay With Saved Payment Method"]')
     .find('button').first()
     .simulate('click');
 
-  form.fillInOrder([
+  form.fill([
     'skip plan picker', // this is the plan picker and setting it here won't work, so we have to skip it
     '4111111111111111',
     'Person Face',
@@ -70,7 +70,7 @@ test('Change Plan Form: Update My Credit Card and Plan', async () => {
 
   // update the plan picker input (Downshift-specific)
   const newPlan = form.store.getState().billing.plans[2];
-  form.mounted.find('Downshift').props().onChange(newPlan);
+  form.find('Downshift').props().onChange(newPlan);
 
   axiosMock.mockClear();
   await form.submit();
@@ -82,7 +82,7 @@ test('Change Plan Form: Update Plan Only', async () => {
 
   // update the plan picker input (Downshift-specific)
   const newPlan = form.store.getState().billing.plans[2];
-  form.mounted.find('Downshift').props().onChange(newPlan);
+  form.find('Downshift').props().onChange(newPlan);
 
   axiosMock.mockClear();
   await form.submit();
@@ -110,7 +110,7 @@ test('Change Plan Form: Upgrade for the First Time', async () => {
   form.asyncFlush();
   form.mounted.update();
 
-  form.fillInOrder([
+  form.fill([
     'skip plan picker', // this is the plan picker and setting it here won't work, so we have to skip it
     '4111111111111111',
     'Person Face',
@@ -125,7 +125,7 @@ test('Change Plan Form: Upgrade for the First Time', async () => {
 
   // update the plan picker input (Downshift-specific)
   const newPlan = form.store.getState().billing.plans[1];
-  form.mounted.find('Downshift').props().onChange(newPlan);
+  form.find('Downshift').props().onChange(newPlan);
 
   axiosMock.mockClear();
   await form.submit();
