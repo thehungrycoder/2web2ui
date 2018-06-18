@@ -48,6 +48,7 @@ test('Update Contact Form', async () => {
 
 test('Change Plan Form: Update My Credit Card and Plan', async () => {
   const form = await setupForm(<ChangePlanForm />);
+  const newPlan = form.store.getState().billing.plans[2];
 
   // Click the button to use a different credit card
   form
@@ -56,7 +57,7 @@ test('Change Plan Form: Update My Credit Card and Plan', async () => {
     .simulate('click');
 
   form.fill([
-    'skip plan picker', // this is the plan picker and setting it here won't work, so we have to skip it
+    newPlan,
     '4111111111111111',
     'Person Face',
     '10 / 2022',
@@ -68,8 +69,6 @@ test('Change Plan Form: Update My Credit Card and Plan', async () => {
     '12345'
   ]);
 
-  // update the plan picker input (Downshift-specific)
-  const newPlan = form.store.getState().billing.plans[2];
   form.find('Downshift').props().onChange(newPlan);
 
   axiosMock.mockClear();
@@ -82,7 +81,10 @@ test('Change Plan Form: Update Plan Only', async () => {
 
   // update the plan picker input (Downshift-specific)
   const newPlan = form.store.getState().billing.plans[2];
-  form.find('Downshift').props().onChange(newPlan);
+
+  form.fill([
+    newPlan
+  ]);
 
   axiosMock.mockClear();
   await form.submit();
@@ -93,6 +95,7 @@ test('Change Plan Form: Upgrade for the First Time', async () => {
   const form = await setupForm(<ChangePlanForm />);
   const state = form.store.getState();
   const { billing, ...account } = state.account;
+  const newPlan = state.billing.plans[1];
 
   form.store.dispatch({
     type: 'FETCH_ACCOUNT_SUCCESS',
@@ -111,7 +114,7 @@ test('Change Plan Form: Upgrade for the First Time', async () => {
   form.mounted.update();
 
   form.fill([
-    'skip plan picker', // this is the plan picker and setting it here won't work, so we have to skip it
+    newPlan,
     '4111111111111111',
     'Person Face',
     '10 / 2022',
@@ -122,10 +125,6 @@ test('Change Plan Form: Upgrade for the First Time', async () => {
     'MD',
     '12345'
   ]);
-
-  // update the plan picker input (Downshift-specific)
-  const newPlan = form.store.getState().billing.plans[1];
-  form.find('Downshift').props().onChange(newPlan);
 
   axiosMock.mockClear();
   await form.submit();

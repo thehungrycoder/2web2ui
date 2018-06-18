@@ -28,11 +28,18 @@ export async function setupForm(tree) {
 
   const change = (index, value) => {
     const el = mounted.find('Field').at(index);
-    let control = el.find('input');
-    if (control.length === 0) {
-      control = el.find('select');
+
+    const downshift = el.find('Downshift');
+    if (downshift.length) {
+      downshift.props().onChange(value);
+    } else {
+      let control = el.find('input');
+      if (control.length === 0) {
+        control = el.find('select');
+      }
+      control.simulate('change', { target: { value }});
     }
-    control.simulate('change', { target: { value }});
+
     mounted.update();
   };
 
