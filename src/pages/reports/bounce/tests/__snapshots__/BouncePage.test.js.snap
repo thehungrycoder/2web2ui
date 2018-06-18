@@ -111,7 +111,7 @@ exports[`BouncePage:  should render 1`] = `
     <strong>
       1
     </strong>
-     of 
+     of
     <strong>
       10
     </strong>
@@ -289,7 +289,7 @@ Array [
   undefined,
   <span>
     5
-     
+
     <small>
       (
       <Percent
@@ -315,7 +315,7 @@ Array [
   undefined,
   <span>
     10
-     
+
     <small>
       (
       <Percent
@@ -348,7 +348,7 @@ exports[`BouncePage:  should show empty reasons table when there are no reasons 
     <strong>
       1
     </strong>
-     of 
+     of
     <strong>
       10
     </strong>
@@ -390,7 +390,7 @@ exports[`BouncePage:  should show loading panel when table is loading 1`] = `
     <strong>
       1
     </strong>
-     of 
+     of
     <strong>
       10
     </strong>

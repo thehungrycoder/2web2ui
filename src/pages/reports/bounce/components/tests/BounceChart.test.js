@@ -5,11 +5,14 @@ import { PieChart } from 'src/components';
 import { shallow } from 'enzyme';
 
 describe('Bounce Chart', () => {
-
   const props = {
     categories: [
       { name: 'hard', count: 5 },
       { name: 'soft', count: 1, children: [{ name: 'softchild1', count: 2 }, { name: 'softchild2', count: 3 }]}
+    ],
+    admin: [
+      { name: 'admin failure', count: 5 },
+      { name: 'smart send', count: 1 }
     ],
     types: [
       { name: 'in', count: 20 },
@@ -18,7 +21,8 @@ describe('Bounce Chart', () => {
     aggregates: {
       countSent: 100,
       countBounce: 50
-    }
+    },
+    tab: 0
   };
 
   let wrapper;
@@ -71,6 +75,18 @@ describe('Bounce Chart', () => {
     wrapper.instance().handleClick(props.categories[1]);
     expect(wrapper.instance().state).toMatchSnapshot();
     wrapper.instance().handleBreadcrumb();
+    expect(wrapper.instance().state).toMatchSnapshot();
+  });
+
+  it('should render bounces chart when on bounces tab', () => {
+    wrapper.setProps({ tab: 0 });
+    wrapper.update();
+    expect(wrapper.instance().state).toMatchSnapshot();
+  });
+
+  it('should render admin bounces chart when on admin bounces tab', () => {
+    wrapper.setProps({ tab: 1 });
+    wrapper.update();
     expect(wrapper.instance().state).toMatchSnapshot();
   });
 });

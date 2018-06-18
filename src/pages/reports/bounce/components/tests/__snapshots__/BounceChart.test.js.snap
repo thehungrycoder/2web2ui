@@ -68,19 +68,85 @@ Object {
 `;
 
 exports[`Bounce Chart should render 1`] = `
-<Panel
-  sectioned={true}
-  title="Bounce Rates"
->
-  <Grid>
-    <Grid.Column
-      lg={5}
-      xs={12}
-    >
-      <div
-        className="ChartWrapper"
+<React.Fragment>
+  <Panel
+    sectioned={true}
+  >
+    <Grid>
+      <Grid.Column
+        lg={5}
+        xs={12}
       >
-        <LoadableComponent
+        <div
+          className="ChartWrapper"
+        >
+          <LoadableComponent
+            hoveredItem={null}
+            onClick={[Function]}
+            onMouseOut={[Function]}
+            onMouseOver={[Function]}
+            primaryData={
+              Array [
+                Object {
+                  "count": 5,
+                  "fill": "hsl(355.1, 70.5%, 52.2%)",
+                  "name": "hard",
+                },
+                Object {
+                  "children": Array [
+                    Object {
+                      "count": 2,
+                      "name": "softchild1",
+                    },
+                    Object {
+                      "count": 3,
+                      "name": "softchild2",
+                    },
+                  ],
+                  "count": 1,
+                  "fill": "hsl(35.10000000000002, 72.6%, 52.2%)",
+                  "name": "soft",
+                },
+              ]
+            }
+            secondaryData={
+              Array [
+                Object {
+                  "count": 20,
+                  "fill": "hsl(198.20000000000005, 70.2%, 53.9%)",
+                  "name": "in",
+                },
+                Object {
+                  "count": 30,
+                  "fill": "hsl(228.20000000000005, 73.7%, 53.9%)",
+                  "name": "out",
+                },
+              ]
+            }
+          />
+          <PieChart.ActiveLabel
+            name="Bounce Rate"
+            value="50%"
+          />
+        </div>
+      </Grid.Column>
+      <Grid.Column
+        lg={7}
+        xs={12}
+      >
+        <PieChart.Legend
+          headerData={
+            Array [
+              Object {
+                "count": 50,
+                "name": "Bounces",
+              },
+              Object {
+                "count": 100,
+                "name": "Sent",
+              },
+            ]
+          }
           hoveredItem={null}
           onClick={[Function]}
           onMouseOut={[Function]}
@@ -124,75 +190,24 @@ exports[`Bounce Chart should render 1`] = `
             ]
           }
         />
-        <PieChart.ActiveLabel
-          name="Bounce Rate"
-          value="50%"
-        />
-      </div>
-    </Grid.Column>
-    <Grid.Column
-      lg={7}
-      xs={12}
-    >
-      <PieChart.Legend
-        headerData={
-          Array [
-            Object {
-              "count": 50,
-              "name": "Bounces",
-            },
-            Object {
-              "count": 100,
-              "name": "Sent",
-            },
-          ]
-        }
-        hoveredItem={null}
-        onClick={[Function]}
-        onMouseOut={[Function]}
-        onMouseOver={[Function]}
-        primaryData={
-          Array [
-            Object {
-              "count": 5,
-              "fill": "hsl(355.1, 70.5%, 52.2%)",
-              "name": "hard",
-            },
-            Object {
-              "children": Array [
-                Object {
-                  "count": 2,
-                  "name": "softchild1",
-                },
-                Object {
-                  "count": 3,
-                  "name": "softchild2",
-                },
-              ],
-              "count": 1,
-              "fill": "hsl(35.10000000000002, 72.6%, 52.2%)",
-              "name": "soft",
-            },
-          ]
-        }
-        secondaryData={
-          Array [
-            Object {
-              "count": 20,
-              "fill": "hsl(198.20000000000005, 70.2%, 53.9%)",
-              "name": "in",
-            },
-            Object {
-              "count": 30,
-              "fill": "hsl(228.20000000000005, 73.7%, 53.9%)",
-              "name": "out",
-            },
-          ]
-        }
-      />
-    </Grid.Column>
-  </Grid>
-</Panel>
+      </Grid.Column>
+    </Grid>
+  </Panel>
+</React.Fragment>
+`;
+
+exports[`Bounce Chart should render admin bounces chart when on admin bounces tab 1`] = `
+Object {
+  "active": null,
+  "hoveredItem": null,
+}
+`;
+
+exports[`Bounce Chart should render bounces chart when on bounces tab 1`] = `
+Object {
+  "active": null,
+  "hoveredItem": null,
+}
 `;
 
 exports[`Bounce Chart should render correctly after click 1`] = `
@@ -272,7 +287,6 @@ exports[`Bounce Chart should render loading 1`] = `
 <Panel
   className="LoadingPanel"
   sectioned={true}
-  title="Bounce Rates"
 >
   <Loading />
 </Panel>
