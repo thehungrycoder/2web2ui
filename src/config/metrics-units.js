@@ -1,9 +1,10 @@
 import {
   formatBytes,
   formatMilliseconds,
-  formatNumber,
-  roundToPlaces
+  formatNumber
 } from 'src/helpers/units';
+
+import { formatYAxisPercent } from 'src/helpers/chart';
 
 export default {
   number: {
@@ -12,7 +13,7 @@ export default {
   },
   percent: {
     label: 'Percent',
-    yAxisFormatter: (v) => v < 1 ? `${roundToPlaces(v, 2)}%` : `${roundToPlaces(v, 1)}%`
+    yAxisFormatter: formatYAxisPercent
   },
   milliseconds: {
     label: 'Time',
