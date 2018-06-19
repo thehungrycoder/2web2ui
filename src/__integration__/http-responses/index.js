@@ -5,7 +5,8 @@ const defaultResponse = {
   }
 };
 
-export default ({ method, url, ...rest }) => {
+export default (request) => {
+  const { method, url } = request;
   const directory = url.toLowerCase().replace(/\//g, '_');
   let storedResponse;
 
@@ -18,7 +19,7 @@ export default ({ method, url, ...rest }) => {
   }
 
   if (storedResponse && storedResponse.default) {
-    return { data: storedResponse.default(rest) };
+    return { data: storedResponse.default(request) };
   } else {
     return defaultResponse;
   }

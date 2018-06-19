@@ -6,9 +6,6 @@ import ChangePlanForm from 'src/pages/billing/forms/ChangePlanForm';
 import axios from 'axios';
 const axiosMock = axios.create();
 
-// prevent problems with trying to load google analytics stuff
-jest.mock('src/helpers/analytics');
-
 test('Update Payment Form', async () => {
   const form = await setupForm(<UpdatePaymentForm />);
 

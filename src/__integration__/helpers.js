@@ -5,6 +5,9 @@ import configureStore from 'src/store';
 import { Provider } from 'react-redux';
 import _ from 'lodash';
 
+// prevent problems with trying to load google analytics stuff
+jest.mock('src/helpers/analytics');
+
 export const asyncFlush = () => new Promise((resolve) => setImmediate(resolve));
 
 export const login = (store) => store.dispatch({
