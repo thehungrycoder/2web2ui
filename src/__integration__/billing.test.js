@@ -91,13 +91,11 @@ test('Change Plan Form: Update Plan Only', async () => {
 test('Change Plan Form: Upgrade for the First Time', async () => {
   const form = await setupForm(<ChangePlanForm />);
   const state = form.store.getState();
-  const { billing, ...account } = state.account;
   const newPlan = state.billing.plans[1];
 
   form.store.dispatch({
     type: 'FETCH_ACCOUNT_SUCCESS',
     payload: {
-      ...account,
       subscription: {
         ...state.account.subscription,
         code: 'free-0817',
@@ -106,6 +104,8 @@ test('Change Plan Form: Upgrade for the First Time', async () => {
       }
     }
   });
+
+  form.store.dispatch({ type: 'REMOVE_ACCOUNT_BILLING' });
 
   form.asyncFlush();
   form.mounted.update();
