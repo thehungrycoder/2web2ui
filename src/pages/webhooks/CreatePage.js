@@ -36,7 +36,7 @@ export class WebhooksCreate extends Component {
     let subaccountId;
 
     if (eventsRadio === 'select') {
-      events = _.compact(_.concat(values.message_event, values.track_event, values.gen_event, values.unsubscribe_event, values.relay_event));
+      events = _.compact(_.concat(values.message_event, values.track_event, values.gen_event, values.unsubscribe_event, values.relay_event, values.ab_test_event));
     } else {
       // all events
       events = _.flatten(_.map(eventsTree, ({ events }) => _.map(events, ({ key }) => (key))));
