@@ -40,5 +40,38 @@ describe('template helpers', () => {
       expect(templatesHelper.normalizeTemplateFromAddress(null)).toBe(null);
     });
   });
-});
 
+  describe('resolveTemplateStatus', () => {
+    it('resolves a published only template', () => {
+      const result = templatesHelper.resolveTemplateStatus({
+        has_published: true,
+        has_draft: true,
+        published: true
+      });
+
+      expect(result).toMatchSnapshot();
+
+      expect(templatesHelper.resolveTemplateStatus({
+        has_published: true,
+        has_draft: false,
+        published: true
+      })).toEqual(result);
+    });
+
+    it('resolves a draft only template', () => {
+      expect(templatesHelper.resolveTemplateStatus({
+        has_published: false,
+        has_draft: true,
+        published: false
+      })).toMatchSnapshot();
+    });
+
+    it('resolves a published with unpublished changes template', () => {
+      expect(templatesHelper.resolveTemplateStatus({
+        has_published: true,
+        has_draft: true,
+        published: false
+      })).toMatchSnapshot();
+    });
+  });
+});

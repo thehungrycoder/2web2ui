@@ -8,61 +8,44 @@ exports[`Template List Components Actions should render correct actions when not
     }
   }
 >
-  <Button.Group>
-    <Button
-      component={[Function]}
-      size="small"
-      to="/templates/edit/10?subaccount=101"
-    >
-      Edit
-    </Button>
-    <Popover
-      bottom={true}
-      left={true}
-      right={true}
-      trigger={
-        <Button
-          size="small"
-        >
-          <ArrowDropDown />
-        </Button>
+  <Popover
+    bottom={true}
+    left={true}
+    right={true}
+    trigger={
+      <Button
+        flat={true}
+        size="small"
+      >
+        <MoreHoriz />
+      </Button>
+    }
+  >
+    <ActionList
+      actions={
+        Array [
+          Object {
+            "component": [Function],
+            "content": "Edit",
+            "to": "/templates/edit/10?subaccount=101",
+          },
+          Object {
+            "component": [Function],
+            "content": "Preview",
+            "to": "/templates/preview/10?subaccount=101",
+            "visible": true,
+          },
+          Object {
+            "component": [Function],
+            "content": "Preview",
+            "to": "/templates/preview/10/published?subaccount=101",
+            "visible": false,
+          },
+        ]
       }
-    >
-      <ActionList
-        actions={
-          Array [
-            Object {
-              "component": [Function],
-              "content": "Edit Draft",
-              "section": 1,
-              "to": "/templates/edit/10?subaccount=101",
-            },
-            Object {
-              "component": [Function],
-              "content": "Preview Draft",
-              "section": 1,
-              "to": "/templates/preview/10?subaccount=101",
-            },
-            Object {
-              "component": [Function],
-              "content": "View Published",
-              "section": 2,
-              "to": "/templates/edit/10/published?subaccount=101",
-              "visible": false,
-            },
-            Object {
-              "component": [Function],
-              "content": "Preview Published",
-              "section": 2,
-              "to": "/templates/preview/10/published?subaccount=101",
-              "visible": false,
-            },
-          ]
-        }
-        groupByKey="section"
-      />
-    </Popover>
-  </Button.Group>
+      groupByKey="section"
+    />
+  </Popover>
 </div>
 `;
 
@@ -74,62 +57,102 @@ exports[`Template List Components Actions should render correct actions when pub
     }
   }
 >
-  <Button.Group>
-    <Button
-      component={[Function]}
-      size="small"
-      to="/templates/edit/10?subaccount=101"
-    >
-      Edit
-    </Button>
-    <Popover
-      bottom={true}
-      left={true}
-      right={true}
-      trigger={
-        <Button
-          size="small"
-        >
-          <ArrowDropDown />
-        </Button>
+  <Popover
+    bottom={true}
+    left={true}
+    right={true}
+    trigger={
+      <Button
+        flat={true}
+        size="small"
+      >
+        <MoreHoriz />
+      </Button>
+    }
+  >
+    <ActionList
+      actions={
+        Array [
+          Object {
+            "component": [Function],
+            "content": "Edit",
+            "to": "/templates/edit/10?subaccount=101",
+          },
+          Object {
+            "component": [Function],
+            "content": "Preview",
+            "to": "/templates/preview/10?subaccount=101",
+            "visible": false,
+          },
+          Object {
+            "component": [Function],
+            "content": "Preview",
+            "to": "/templates/preview/10/published?subaccount=101",
+            "visible": true,
+          },
+        ]
       }
-    >
-      <ActionList
-        actions={
-          Array [
-            Object {
-              "component": [Function],
-              "content": "Edit Draft",
-              "section": 1,
-              "to": "/templates/edit/10?subaccount=101",
-            },
-            Object {
-              "component": [Function],
-              "content": "Preview Draft",
-              "section": 1,
-              "to": "/templates/preview/10?subaccount=101",
-            },
-            Object {
-              "component": [Function],
-              "content": "View Published",
-              "section": 2,
-              "to": "/templates/edit/10/published?subaccount=101",
-              "visible": true,
-            },
-            Object {
-              "component": [Function],
-              "content": "Preview Published",
-              "section": 2,
-              "to": "/templates/preview/10/published?subaccount=101",
-              "visible": true,
-            },
-          ]
-        }
-        groupByKey="section"
-      />
-    </Popover>
-  </Button.Group>
+      groupByKey="section"
+    />
+  </Popover>
 </div>
+`;
+
+exports[`Template List Components Actions should render correct actions with unpublished changes 1`] = `
+<div
+  style={
+    Object {
+      "textAlign": "right",
+    }
+  }
+>
+  <Popover
+    bottom={true}
+    left={true}
+    right={true}
+    trigger={
+      <Button
+        flat={true}
+        size="small"
+      >
+        <MoreHoriz />
+      </Button>
+    }
+  >
+    <ActionList
+      actions={
+        Array [
+          Object {
+            "component": [Function],
+            "content": "Edit Saved Draft",
+            "to": "/templates/edit/10?subaccount=101",
+          },
+          Object {
+            "component": [Function],
+            "content": "Preview Saved Draft",
+            "to": "/templates/preview/10?subaccount=101",
+            "visible": true,
+          },
+          Object {
+            "component": [Function],
+            "content": "Preview Published",
+            "to": "/templates/preview/10/published?subaccount=101",
+            "visible": true,
+          },
+        ]
+      }
+      groupByKey="section"
+    />
+  </Popover>
+</div>
+`;
+
+exports[`Template List Components LastUpdated should render 1`] = `
+<p
+  className="LastUpdated"
+>
+  Aug 10 2017, 10:15am
+</p>
 `;
 
 exports[`Template List Components Name should render 1`] = `
@@ -149,12 +172,10 @@ exports[`Template List Components Name should render 1`] = `
   <p
     className="Id"
   >
-    <small>
-      <em>
-        ID: 
-        id-123
-      </em>
-    </small>
+    <em>
+      ID: 
+      id-123
+    </em>
   </p>
 </React.Fragment>
 `;
@@ -171,4 +192,32 @@ exports[`Template List Components Status should render published 1`] = `
 >
   Published
 </Tag>
+`;
+
+exports[`Template List Components Status should render unpublished changes 1`] = `
+<Tooltip
+  bottom={true}
+  content="Contains unpublished changes"
+  dark={true}
+  forcePosition={false}
+  horizontalOffset="0px"
+  preferredDirection={
+    Object {
+      "bottom": true,
+      "left": false,
+      "right": true,
+      "top": false,
+    }
+  }
+  right={true}
+>
+  <Tag
+    color="blue"
+  >
+    <Edit
+      size={14}
+    />
+     Published
+  </Tag>
+</Tooltip>
 `;

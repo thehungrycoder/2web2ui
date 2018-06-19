@@ -29,3 +29,27 @@ Object {
   "published": false,
 }
 `;
+
+exports[`template helpers resolveTemplateStatus resolves a draft only template 1`] = `
+Object {
+  "draft": true,
+  "published": false,
+  "publishedWithChanges": false,
+}
+`;
+
+exports[`template helpers resolveTemplateStatus resolves a published only template 1`] = `
+Object {
+  "draft": false,
+  "published": true,
+  "publishedWithChanges": false,
+}
+`;
+
+exports[`template helpers resolveTemplateStatus resolves a published with unpublished changes template 1`] = `
+Object {
+  "draft": false,
+  "published": false,
+  "publishedWithChanges": true,
+}
+`;

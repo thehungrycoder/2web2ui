@@ -9,7 +9,7 @@ Array [
   },
   Object {
     "label": "Status",
-    "sortKey": "published",
+    "sortKey": [Function],
     "width": "18%",
   },
   Object {
@@ -56,7 +56,7 @@ exports[`renders correctly 1`] = `
         },
         Object {
           "label": "Status",
-          "sortKey": "published",
+          "sortKey": [Function],
           "width": "18%",
         },
         Object {
@@ -136,19 +136,25 @@ Array [
   Array [
     <Name
       id="id3"
+      last_update_time="2017-08-10T14:15:16+00:00"
       name="no subs template"
       published={true}
     />,
     <Status
       id="id3"
+      last_update_time="2017-08-10T14:15:16+00:00"
       name="no subs template"
       published={true}
     />,
-    <small>
-      Aug 10 2017, 10:15am
-    </small>,
+    <LastUpdated
+      id="id3"
+      last_update_time="2017-08-10T14:15:16+00:00"
+      name="no subs template"
+      published={true}
+    />,
     <Actions
       id="id3"
+      last_update_time="2017-08-10T14:15:16+00:00"
       name="no subs template"
       published={true}
     />,
@@ -161,12 +167,14 @@ Array [
   Array [
     <Name
       id="id1"
+      last_update_time="2017-08-10T14:15:16+00:00"
       name="subaccount template"
       published={true}
       subaccount_id={101}
     />,
     <Status
       id="id1"
+      last_update_time="2017-08-10T14:15:16+00:00"
       name="subaccount template"
       published={true}
       subaccount_id={101}
@@ -178,11 +186,16 @@ Array [
       master={false}
       receiveAll={false}
     />,
-    <small>
-      Aug 10 2017, 10:15am
-    </small>,
+    <LastUpdated
+      id="id1"
+      last_update_time="2017-08-10T14:15:16+00:00"
+      name="subaccount template"
+      published={true}
+      subaccount_id={101}
+    />,
     <Actions
       id="id1"
+      last_update_time="2017-08-10T14:15:16+00:00"
       name="subaccount template"
       published={true}
       subaccount_id={101}
@@ -191,11 +204,13 @@ Array [
   Array [
     <Name
       id="id2"
+      last_update_time="2017-08-10T14:15:16+00:00"
       name="shared template"
       published={false}
     />,
     <Status
       id="id2"
+      last_update_time="2017-08-10T14:15:16+00:00"
       name="shared template"
       published={false}
     />,
@@ -206,11 +221,15 @@ Array [
       master={false}
       receiveAll={false}
     />,
-    <small>
-      Aug 10 2017, 10:15am
-    </small>,
+    <LastUpdated
+      id="id2"
+      last_update_time="2017-08-10T14:15:16+00:00"
+      name="shared template"
+      published={false}
+    />,
     <Actions
       id="id2"
+      last_update_time="2017-08-10T14:15:16+00:00"
       name="shared template"
       published={false}
     />,
@@ -218,20 +237,26 @@ Array [
   Array [
     <Name
       id="id3"
+      last_update_time="2017-08-10T14:15:16+00:00"
       name="master template"
       published={false}
     />,
     <Status
       id="id3"
+      last_update_time="2017-08-10T14:15:16+00:00"
       name="master template"
       published={false}
     />,
     null,
-    <small>
-      Aug 10 2017, 10:15am
-    </small>,
+    <LastUpdated
+      id="id3"
+      last_update_time="2017-08-10T14:15:16+00:00"
+      name="master template"
+      published={false}
+    />,
     <Actions
       id="id3"
+      last_update_time="2017-08-10T14:15:16+00:00"
       name="master template"
       published={false}
     />,
@@ -263,7 +288,7 @@ exports[`renders without primary action for read-only users 1`] = `
         },
         Object {
           "label": "Status",
-          "sortKey": "published",
+          "sortKey": [Function],
           "width": "18%",
         },
         Object {

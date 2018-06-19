@@ -4,8 +4,8 @@ import { SubaccountTag, TableCollection, ApiErrorBanner, Loading } from 'src/com
 import { Templates } from 'src/components/images';
 import { Page } from '@sparkpost/matchbox';
 import Editor from './components/Editor'; // async, for preload
-import { Name, Status, Actions } from './components/ListComponents';
-import { formatDateTime } from 'src/helpers/date';
+import { Name, Status, Actions, LastUpdated } from './components/ListComponents';
+import { resolveTemplateStatus } from 'src/helpers/templates';
 
 const primaryAction = {
   content: 'Create Template',
@@ -30,7 +30,7 @@ export default class ListPage extends Component {
     );
   }
 
-  getRowData = ({ last_update_time, shared_with_subaccounts, ...rowData }) => {
+  getRowData = ({ shared_with_subaccounts, ...rowData }) => {
     const { hasSubaccounts } = this.props;
     const { subaccount_id } = rowData;
 
@@ -42,7 +42,7 @@ export default class ListPage extends Component {
       <Name {...rowData} />,
       <Status {...rowData} />,
       ...(hasSubaccounts ? [subaccountCell] : []),
-      <small>{formatDateTime(last_update_time)}</small>,
+      <LastUpdated {...rowData}/>,
       <Actions {...rowData} />
     ];
   }
@@ -52,7 +52,7 @@ export default class ListPage extends Component {
 
     return [
       { label: 'Name', width: '28%', sortKey: 'name' },
-      { label: 'Status', width: '18%', sortKey: 'published' },
+      { label: 'Status', width: '18%', sortKey: (template) => [resolveTemplateStatus(template).publishedWithChanges, template.published]},
       ...(hasSubaccounts ? [{
         label: 'Subaccount', width: '18%', sortKey: (template) => [template.subaccount_id, template.shared_with_subaccounts]
       }] : []),
