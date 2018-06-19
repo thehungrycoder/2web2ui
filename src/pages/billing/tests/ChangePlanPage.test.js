@@ -28,9 +28,4 @@ describe('Page: ChangePlanPage', () => {
     wrapper.setProps({ canChangePlan: false });
     expect(wrapper).toMatchSnapshot();
   });
-
-  it('should show loading component while loading data', () => {
-    wrapper.setProps({ loading: true });
-    expect(wrapper).toMatchSnapshot();
-  });
 });
