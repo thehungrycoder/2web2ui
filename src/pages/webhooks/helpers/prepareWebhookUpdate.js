@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import resolveAuthUpdates from './resolveAuthUpdates';
 
-export default function(values, allEvents) {
+export default function (values, allEvents) {
   const { name, target, active } = values;
   const update = {
     ...resolveAuthUpdates(values),
@@ -15,7 +15,8 @@ export default function(values, allEvents) {
     values.track_event,
     values.gen_event,
     values.unsubscribe_event,
-    values.relay_event
+    values.relay_event,
+    values.ab_test_event
   );
 
   // "All" selected, or all boxes clicked
