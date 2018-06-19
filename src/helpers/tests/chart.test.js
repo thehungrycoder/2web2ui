@@ -2,7 +2,8 @@ import {
   getDayLines,
   getTimeTickFormatter,
   getTooltipLabelFormatter,
-  getLineChartFormatters
+  getLineChartFormatters,
+  formatYAxisPercent
 } from '../chart';
 import * as metrics from '../metrics';
 import moment from 'moment';
@@ -109,6 +110,16 @@ describe('Helper: chart', () => {
     expect(getLineChartFormatters()).toEqual({
       xTickFormatter: expect.any(Function),
       tooltipLabelFormatter: expect.any(Function)
+    });
+  });
+
+  describe('formatYAxisPercent', () => {
+    it('should format y axis percent labels correctly', () => {
+      expect(formatYAxisPercent(12)).toEqual('12%');
+      expect(formatYAxisPercent(1)).toEqual('1%');
+      expect(formatYAxisPercent(0.051)).toEqual('0.051%');
+      expect(formatYAxisPercent(0.0051)).toEqual('0.005%');
+      expect(formatYAxisPercent(0.00051)).toEqual('0.001%');
     });
   });
 

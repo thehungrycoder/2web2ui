@@ -1,6 +1,7 @@
 import moment from 'moment';
 import _ from 'lodash';
 import { getPrecisionType } from './metrics';
+import { roundToPlaces } from 'src/helpers/units';
 
 function getDayLines(data, precision = 'day') {
   if (getPrecisionType(precision) !== 'hours') {
@@ -41,9 +42,14 @@ function getLineChartFormatters(precision) {
   return formatters;
 }
 
+function formatYAxisPercent(v) {
+  return `${roundToPlaces(v, v < 1 ? 3 : 1)}%`;
+}
+
 export {
   getDayLines,
   getTimeTickFormatter,
   getTooltipLabelFormatter,
-  getLineChartFormatters
+  getLineChartFormatters,
+  formatYAxisPercent
 };

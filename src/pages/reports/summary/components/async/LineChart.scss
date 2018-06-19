@@ -30,10 +30,8 @@
 .sp-linechart-yLabel {
   position: absolute;
   top: 50%;
-  left: 9px;
   transform: rotate(-90deg);
   transform-origin: 0;
-  backface-visibility: hidden;
 
   color: color(gray, 4);
   font-size: 13px
