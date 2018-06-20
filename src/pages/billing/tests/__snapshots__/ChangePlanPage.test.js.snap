@@ -34,5 +34,3 @@ exports[`Page: ChangePlanPage should render form if allowed to change plan 1`] =
   <withRouter(Connect(ReduxForm)) />
 </Page>
 `;
-
-exports[`Page: ChangePlanPage should show loading component while loading data 1`] = `<Loading />`;

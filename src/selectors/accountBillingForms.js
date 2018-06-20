@@ -35,7 +35,7 @@ export function updatePaymentInitialValues(state) {
  * Selects initial values for the update contact form on the summary page
  */
 export function updateContactInitialValues(state) {
-  const { billing } = state.account;
+  const { billing = {}} = state.account;
   return {
     billingContact: {
       email: billing.email,

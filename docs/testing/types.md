@@ -1,8 +1,8 @@
 # Test Types
 
-For this project, we usually work with what we refer to as [unit tests](#unit-tests), [functional component tests](#functional-component-tests), and [snapshot tests*](#snapshot-tests).
+For this project, we usually work with what we refer to as [unit tests](#unit-tests), [functional component tests](#functional-component-tests), and [snapshot tests*](#snapshot-tests). We have also recently introduced [integration-tests](#integration-tests).
 
-This document also includes a few words about [integration tests](#integration-tests) and [end-to-end browser tests](#end-to-end-tests).
+This document also includes a few words about [end-to-end browser tests](#end-to-end-tests).
 
 _*Snapshot disclaimer: To be perfectly honest (and less perfectly clear), snapshot testing is less of its own testing type and more of a testing tool that can be used within other tests, whenever you have a medium to large sized string you want to track changes in. This is why you'll see snapshot assertions show up alongside unit tests and in functional component tests._
 
@@ -164,7 +164,9 @@ Once we got more comfortable with snapshot testing, we realized it wasn't only g
 
 ## Integration Tests
 
-We currently don't do much in the way of integration tests except in the few cases where we use enzyme's `mount` method to fully mount a component. We should look into ways of doing more integration tests in a standard way using enzyme and jsdom.
+We've recently added the ability to write integration tests that test our code within Redux, Redux Form, React Router, etc. and mostly test that form inputs result in the right HTTP calls.
+
+See [our integration testing guide](../../src/__integration__/README.md).
 
 ## End to End Tests
 

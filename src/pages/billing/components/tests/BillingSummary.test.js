@@ -3,9 +3,9 @@ import { shallow } from 'enzyme';
 import BillingSummary from '../BillingSummary';
 
 // mock connected components as named functions for better snapshots
-jest.mock('../../forms/UpdatePayment', () => function UpdatePaymentForm () {});
-jest.mock('../../forms/UpdateContact', () => function UpdateContactForm () {});
-jest.mock('../../forms/AddIps', () => function AddIpsForm () {});
+jest.mock('../../forms/UpdatePaymentForm', () => function UpdatePaymentForm() {});
+jest.mock('../../forms/UpdateContactForm', () => function UpdateContactForm() {});
+jest.mock('../../forms/AddIps', () => function AddIpsForm() {});
 
 describe('Component: Billing Summary', () => {
 

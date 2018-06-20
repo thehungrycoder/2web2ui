@@ -53,7 +53,7 @@ export class PlanPicker extends Component {
 
     return (
       <div className={styles.PlanPicker}>
-        <div className={listClasses}>{ items }</div>
+        <div className={listClasses}>{items}</div>
         <ExpandMore size={24} className={styles.Chevron} />
         <input {...getInputProps()} ref={(input) => this.input = input} className={styles.Input} />
         <Plan {...triggerProps} className={triggerClasses} />
@@ -69,7 +69,7 @@ export class PlanPicker extends Component {
       <Downshift
         onChange={onChange}
         itemToString={(item) => (item ? item.code : '')} // prevents the downshift console warning
-        defaultSelectedItem={value || plans[0]} >
+        defaultSelectedItem={(value && value.code) ? value : plans[0]} >
         {this.planFn}
       </Downshift>
     );

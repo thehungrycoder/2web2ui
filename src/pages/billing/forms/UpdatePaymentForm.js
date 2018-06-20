@@ -1,23 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
-
 import { getBillingCountries } from 'src/actions/billing';
 import billingUpdate from 'src/actions/billingUpdate';
 import { showAlert } from 'src/actions/globalAlert';
 import { updatePaymentInitialValues } from 'src/selectors/accountBillingForms';
 import { prepareCardInfo } from 'src/helpers/billing';
-
 import { Panel, Button } from '@sparkpost/matchbox';
 import PaymentForm from './fields/PaymentForm';
 import BillingAddressForm from './fields/BillingAddressForm';
-
 import styles from './Forms.module.scss';
 
 const FORMNAME = 'updatePayment';
 
-export class UpdatePayment extends Component {
-  componentDidMount () {
+export class UpdatePaymentForm extends Component {
+  componentDidMount() {
     this.props.getBillingCountries();
   }
 
@@ -32,7 +29,7 @@ export class UpdatePayment extends Component {
     });
   };
 
-  render () {
+  render() {
     const { onCancel, handleSubmit, submitting } = this.props;
 
     return (
@@ -66,4 +63,4 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchtoProps = { getBillingCountries, billingUpdate, showAlert };
 const formOptions = { form: FORMNAME, enableReinitialize: true };
-export default connect(mapStateToProps, mapDispatchtoProps)(reduxForm(formOptions)(UpdatePayment));
+export default connect(mapStateToProps, mapDispatchtoProps)(reduxForm(formOptions)(UpdatePaymentForm));

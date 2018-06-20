@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import { Panel } from '@sparkpost/matchbox';
 import { Modal, LabelledValue } from 'src/components';
 import { PremiumBanner, EnterpriseBanner, PendingPlanBanner } from './Banners';
-import UpdatePayment from '../forms/UpdatePayment';
-import UpdateContact from '../forms/UpdateContact';
+import UpdatePaymentForm from '../forms/UpdatePaymentForm';
+import UpdateContactForm from '../forms/UpdateContactForm';
 import AddIps from '../forms/AddIps';
 import DedicatedIpSummarySection from './DedicatedIpSummarySection';
 import InvoiceHistory from './InvoiceHistory';
@@ -55,7 +55,7 @@ export default class BillingSummary extends Component {
     />
   );
 
-  render () {
+  render() {
     const { account, currentPlan, canChangePlan, canUpdateBillingInfo, canPurchaseIps, invoices, isAWSAccount } = this.props;
     const { show } = this.state;
     let changePlanActions = {};
@@ -84,8 +84,8 @@ export default class BillingSummary extends Component {
         <EnterpriseBanner />
 
         <Modal open={!!show} onClose={this.handleModal}>
-          {show === PAYMENT_MODAL && <UpdatePayment onCancel={this.handleModal}/>}
-          {show === CONTACT_MODAL && <UpdateContact onCancel={this.handleModal}/>}
+          {show === PAYMENT_MODAL && <UpdatePaymentForm onCancel={this.handleModal}/>}
+          {show === CONTACT_MODAL && <UpdateContactForm onCancel={this.handleModal}/>}
           {show === IP_MODAL && <AddIps onClose={this.handleModal}/>}
         </Modal>
       </div>
