@@ -12,11 +12,23 @@ export default (state = initialState, { type, meta, payload }) => {
       return { ...state, loading: true };
     }
 
-    case 'FETCH_ACCOUNT_SUCCESS':
+    case 'FETCH_ACCOUNT_SUCCESS': {
       return { ...state, loading: false, ...payload };
+    }
 
     case 'FETCH_ACCOUNT_FAIL':
       return { ...state, loading: false };
+
+    /**
+     * FETCH_ACCOUNT_SUCCESS simply spreads the payload into state,
+     * so it's impossible to remove keys from the account -- this is
+     * the main place we want to do that and it's usually just for testing
+     */
+    case 'REMOVE_ACCOUNT_BILLING': {
+      const updated = { ...state, loading: false, ...payload };
+      delete updated.billing;
+      return updated;
+    }
 
     case 'UPDATE_ACCOUNT_PENDING':
       return { ...state, updateLoading: true, updateError: null };

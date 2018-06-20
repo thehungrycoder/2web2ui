@@ -6,9 +6,7 @@ exports[`Form Container: Change Plan should not show plans 1`] = `
     <Grid.Column>
       <Panel
         title="Select A Plan"
-      >
-        0
-      </Panel>
+      />
       <Connect(AccessControl)
         condition={[Function]}
       >
@@ -145,7 +143,9 @@ exports[`Form Container: Change Plan should show saved card 1`] = `
           title="Pay With Saved Payment Method"
         >
           <Panel.Section>
-            <CardSummary />
+            <CardSummary
+              billing={Object {}}
+            />
           </Panel.Section>
         </Panel>
       </Connect(AccessControl)>

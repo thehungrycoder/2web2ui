@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { reduxForm, formValueSelector } from 'redux-form';
 import { withRouter } from 'react-router-dom';
 import qs from 'query-string';
-
-import { updateSubscription } from 'src/actions/billing';
+import { fetch as fetchAccount, getPlans } from 'src/actions/account';
+import { updateSubscription, getBillingCountries } from 'src/actions/billing';
 import billingCreate from 'src/actions/billingCreate';
 import billingUpdate from 'src/actions/billingUpdate';
 import { showAlert } from 'src/actions/globalAlert';
@@ -14,6 +14,7 @@ import {
 } from 'src/selectors/accountBillingInfo';
 import { Panel, Grid } from '@sparkpost/matchbox';
 import { PlanPicker } from 'src/components';
+import { Loading } from 'src/components';
 import PaymentForm from './fields/PaymentForm';
 import BillingAddressForm from './fields/BillingAddressForm';
 import Confirmation from '../components/Confirmation';
@@ -24,16 +25,21 @@ import * as conversions from 'src/helpers/conversionTracking';
 import AccessControl from 'src/components/auth/AccessControl';
 import { prepareCardInfo } from 'src/helpers/billing';
 
-
 const FORMNAME = 'changePlan';
 
-export class ChangePlan extends Component {
+export class ChangePlanForm extends Component {
 
   state = {
     useSavedCC: null
   };
 
-  componentWillReceiveProps (nextProps) {
+  componentDidMount() {
+    this.props.getPlans();
+    this.props.getBillingCountries();
+    this.props.fetchAccount({ include: 'billing' });
+  }
+
+  componentWillReceiveProps(nextProps) {
     // Null check to make sure this only runs once
     if (nextProps.canUpdateBillingInfo && this.state.useSavedCC === null) {
       this.setState({ useSavedCC: true });
@@ -77,7 +83,7 @@ export class ChangePlan extends Component {
       return null; // CC not required on free plans
     }
 
-    if (this.state.useSavedCC) {
+    if (account.billing && this.state.useSavedCC) {
       return (
         <Panel title='Pay With Saved Payment Method' actions={[{ content: 'Use Another Credit Card', onClick: this.handleCardToggle, color: 'orange' }]}>
           <Panel.Section><CardSummary billing={account.billing} /></Panel.Section>
@@ -106,8 +112,12 @@ export class ChangePlan extends Component {
     );
   }
 
-  render () {
-    const { submitting, currentPlan, selectedPlan, plans, isSelfServeBilling } = this.props;
+  render() {
+    const { loading, submitting, currentPlan, selectedPlan, plans, isSelfServeBilling } = this.props;
+
+    if (loading) {
+      return <Loading />;
+    }
 
     // Manually billed accounts can submit without changing plan
     const disableSubmit = submitting ||
@@ -120,8 +130,9 @@ export class ChangePlan extends Component {
         <Grid>
           <Grid.Column>
             <Panel title='Select A Plan'>
-              {plans.length &&
-                <PlanPicker disabled={submitting} plans={plans} />
+              {plans.length
+                ? <PlanPicker disabled={submitting} plans={plans} />
+                : null
               }
             </Panel>
             <AccessControl condition={not(isAws)}>
@@ -145,18 +156,21 @@ const mapStateToProps = (state, props) => {
   const selector = formValueSelector(FORMNAME);
   const { code: planCode } = qs.parse(props.location.search);
 
+  const plans = selectVisiblePlans(state);
+
   return {
+    loading: (!state.account.created && state.account.loading) || (plans.length === 0 && state.billing.plansLoading),
     account: state.account,
     billing: state.billing,
     canUpdateBillingInfo: canUpdateBillingInfoSelector(state),
     isSelfServeBilling: isSelfServeBilling(state),
-    plans: selectVisiblePlans(state),
+    plans,
     currentPlan: currentPlanSelector(state),
     selectedPlan: selector(state, 'planpicker') || {},
     initialValues: changePlanInitialValues(state, { planCode })
   };
 };
 
-const mapDispatchtoProps = { billingCreate, billingUpdate, updateSubscription, showAlert };
+const mapDispatchtoProps = { billingCreate, billingUpdate, updateSubscription, showAlert, getPlans, getBillingCountries, fetchAccount };
 const formOptions = { form: FORMNAME, enableReinitialize: true };
-export default withRouter(connect(mapStateToProps, mapDispatchtoProps)(reduxForm(formOptions)(ChangePlan)));
+export default withRouter(connect(mapStateToProps, mapDispatchtoProps)(reduxForm(formOptions)(ChangePlanForm)));

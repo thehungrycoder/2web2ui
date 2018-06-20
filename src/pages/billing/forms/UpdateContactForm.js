@@ -13,7 +13,7 @@ import styles from './Forms.module.scss';
 
 const FORMNAME = 'updateContact';
 
-export class UpdateContact extends Component {
+export class UpdateContactForm extends Component {
   componentDidMount() {
     this.props.getBillingCountries();
   }
@@ -55,4 +55,4 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchtoProps = { getBillingCountries, updateBillingContact, showAlert };
 const formOptions = { form: FORMNAME, enableReinitialize: true };
-export default connect(mapStateToProps, mapDispatchtoProps)(reduxForm(formOptions)(UpdateContact));
+export default connect(mapStateToProps, mapDispatchtoProps)(reduxForm(formOptions)(UpdateContactForm));
