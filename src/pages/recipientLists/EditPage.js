@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 
 import { Link, withRouter } from 'react-router-dom';
 
-import { Page, Button, Panel } from '@sparkpost/matchbox';
-import { PanelLoading, TableCollection, Empty } from 'src/components';
+import { Page } from '@sparkpost/matchbox';
+import { TableCollection } from 'src/components';
 import SuppressionSearch from './components/SuppressionSearch';
-
+import RecipientDelete from './components/DeleteButton';
 
 import {
   getRecipientList,
@@ -14,7 +14,7 @@ import {
   deleteRecipientList
 } from 'src/actions/recipientLists';
 
-import {  searchSuppressions } from 'src/actions/suppressions';
+import { searchSuppressions } from 'src/actions/suppressions';
 
 import { showAlert } from 'src/actions/globalAlert';
 import { Loading, DeleteModal } from 'src/components';
@@ -65,7 +65,7 @@ export class EditPage extends Component {
       name,
       return_path,
       metadata,
-      <Button size='small'>Delete</Button>
+      <RecipientDelete email={email} list={this.props.current} />
     ];
   }
 
@@ -123,8 +123,8 @@ export class EditPage extends Component {
         Component: Link,
         to: '/lists/recipient-lists' }}>
 
-      { showClean ?
-          <SuppressionSearch />
+      {showClean
+        ? <SuppressionSearch />
         : <RecipientListForm editMode={true} onSubmit={this.updateRecipientList} />
 
       }

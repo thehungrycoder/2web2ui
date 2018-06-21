@@ -36,11 +36,18 @@ export default (state = initialState, { meta, payload, type }) => {
     case 'CREATE_RECIPIENT_LIST_FAIL':
       return { ...state, loading: false };
 
+    case 'UPDATE_RECIPIENT_LIST_PENDING':
+      return { ...state, updateLoading: true };
+
+    case 'UPDATE_RECIPIENT_LIST_FAIL':
+      return { ...state, updateLoading: false };
+
     case 'UPDATE_RECIPIENT_LIST_SUCCESS':
       return {
         ...state,
         list: state.list.map((item) =>
-          item.id === payload.id ? { ...item, ...payload } : item)
+          item.id === payload.id ? { ...item, ...payload } : item),
+        updateLoading: false
       };
 
     case 'DELETE_RECIPIENT_LIST_SUCCESS':
