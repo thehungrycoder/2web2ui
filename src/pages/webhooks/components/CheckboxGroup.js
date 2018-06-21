@@ -53,7 +53,7 @@ const CheckboxGroup = ({ input, options, parent }) => {
 
   return (
     <div>
-      <Checkbox onChange={parentOnChange} label={parent} id={parent} checked={parentChecked}/>
+      <Checkbox onChange={parentOnChange} label={parent} id={`event-group__${name}`} checked={parentChecked}/>
       {showChildBoxes && <Checkbox.Group>{checkboxes}</Checkbox.Group>}
     </div>
   );

@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Create Webhook: Defaults 1`] = `
+Array [
+  Array [
+    Object {
+      "data": Object {
+        "events": Array [
+          "bounce",
+          "delivery",
+          "injection",
+          "sms_status",
+          "spam_complaint",
+          "out_of_band",
+          "policy_rejection",
+          "delay",
+          "click",
+          "open",
+          "initial_open",
+          "generation_failure",
+          "generation_rejection",
+          "list_unsubscribe",
+          "link_unsubscribe",
+          "relay_injection",
+          "relay_rejection",
+          "relay_delivery",
+          "relay_tempfail",
+          "relay_permfail",
+          "ab_test_completed",
+        ],
+        "name": "Webhook Test Name",
+        "target": "https://target.webhooks.com/status/200",
+      },
+      "headers": Object {
+        "Authorization": "very-real-access-token",
+      },
+      "method": "post",
+      "params": undefined,
+      "responseType": "json",
+      "url": "/webhooks",
+    },
+  ],
+]
+`;
+
+exports[`Create Webhook: Selected Events 1`] = `
+Array [
+  Array [
+    Object {
+      "data": Object {
+        "events": Array [
+          "bounce",
+          "spam_complaint",
+        ],
+        "name": "Webhook Test Name",
+        "target": "https://target.webhooks.com/status/200",
+      },
+      "headers": Object {
+        "Authorization": "very-real-access-token",
+      },
+      "method": "post",
+      "params": undefined,
+      "responseType": "json",
+      "url": "/webhooks",
+    },
+  ],
+]
+`;
