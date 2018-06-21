@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
+import _ from 'lodash';
 
 import { getRecipientList, updateRecipientList } from 'src/actions/recipientLists';
 import { Button, Panel } from '@sparkpost/matchbox';
@@ -18,9 +19,19 @@ export class RecipientListAddRecipientForm extends Component {
 
     return this.props.getRecipientList(this.props.list.id)
       .then((list) => {
-        list.recipients.push(newRecipient);
-        console.log(list.length);
-        return list;
+        const recipients = _.compact(_.map(list.recipients, (recipient) => {
+          if (!recipient.return_path) {
+            return _.omit(recipient, ['return_path']);
+          } else {
+            return recipient;
+          }
+        }));
+
+        recipients.push(newRecipient);
+        return {
+          ...list,
+          recipients
+        };
       })
       .then((newList) => this.props.updateRecipientList(newList))
       .then(() => {
@@ -28,7 +39,8 @@ export class RecipientListAddRecipientForm extends Component {
           type: 'success',
           message: `Recipient ${values.email} is added to from ${this.props.list.name}`
         });
-      });
+      })
+      .then(() => this.props.getRecipientList(this.props.list.id));
   };
 
 
