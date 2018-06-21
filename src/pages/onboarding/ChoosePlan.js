@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { reduxForm, formValueSelector } from 'redux-form';
+import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { Panel, Grid, Button } from '@sparkpost/matchbox';
 import { showAlert } from 'src/actions/globalAlert';
@@ -8,8 +8,7 @@ import Steps from './components/Steps';
 import { getPlans } from 'src/actions/account';
 import { getBillingCountries } from 'src/actions/billing';
 import billingCreate from 'src/actions/billingCreate';
-import { selectVisiblePlans } from 'src/selectors/accountBillingInfo';
-import { changePlanInitialValues } from 'src/selectors/accountBillingForms';
+import { choosePlanMSTP } from 'src/selectors/onboarding';
 import PaymentForm from 'src/pages/billing/forms/fields/PaymentForm';
 import BillingAddressForm from 'src/pages/billing/forms/fields/BillingAddressForm';
 import { isAws } from 'src/helpers/conditions/account';
@@ -21,12 +20,12 @@ const FORM_NAME = 'selectInitialPlan';
 const NEXT_STEP = '/onboarding/sending-domain';
 
 export class OnboardingPlanPage extends Component {
-  componentDidMount () {
+  componentDidMount() {
     this.props.getPlans();
     this.props.getBillingCountries();
   }
 
-  componentDidUpdate (prevProps) {
+  componentDidUpdate(prevProps) {
     const { hasError, history } = this.props;
 
     // if we can't get plans or countries form is useless
@@ -88,7 +87,7 @@ export class OnboardingPlanPage extends Component {
     );
   }
 
-  render () {
+  render() {
     const { loading, plans, submitting } = this.props;
 
     if (loading) {
@@ -119,20 +118,9 @@ export class OnboardingPlanPage extends Component {
   }
 }
 
-const mapStateToProps = (state, props) => {
-  const selector = formValueSelector(FORM_NAME);
-  const { plan: planCode } = props.location.state;
-
-  return {
-    loading: Boolean(state.account.loading || state.billing.plansLoading || state.billing.countriesLoading),
-    billing: state.billing,
-    plans: selectVisiblePlans(state),
-    initialValues: changePlanInitialValues(state, { planCode }),
-    selectedPlan: selector(state, 'planpicker'),
-    hasError: state.billing.plansError || state.billing.countriesError
-  };
-};
-const mapDispatchToProps = { billingCreate, showAlert, getPlans, getBillingCountries };
 const formOptions = { form: FORM_NAME, enableReinitialize: true };
 
-export default connect(mapStateToProps, mapDispatchToProps)(reduxForm(formOptions)(OnboardingPlanPage));
+export default connect(
+  choosePlanMSTP(FORM_NAME),
+  { billingCreate, showAlert, getPlans, getBillingCountries }
+)(reduxForm(formOptions)(OnboardingPlanPage));
