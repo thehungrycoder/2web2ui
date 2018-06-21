@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`choosePlanMSTP should return mapped prop values 1`] = `
+Object {
+  "billing": Object {},
+  "hasError": false,
+  "initialValues": "change-plan-initial-values",
+  "loading": false,
+  "plans": Array [
+    "visible plans",
+  ],
+  "selectedPlan": "selected-plan-redux-form-value",
+}
+`;
