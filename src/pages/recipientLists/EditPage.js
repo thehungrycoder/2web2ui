@@ -20,6 +20,7 @@ import { showAlert } from 'src/actions/globalAlert';
 import { Loading, DeleteModal } from 'src/components';
 
 import RecipientListForm from './components/RecipientListForm';
+import RecipientListAddRecipientForm from './components/RecipientListAddRecipientForm';
 
 const columns = [
   { label: 'Email', sortKey: 'email' },
@@ -125,7 +126,8 @@ export class EditPage extends Component {
 
       {showClean
         ? <SuppressionSearch />
-        : <RecipientListForm editMode={true} onSubmit={this.updateRecipientList} />
+        : (<div><RecipientListForm editMode={true} onSubmit={this.updateRecipientList} />
+          <RecipientListAddRecipientForm list={current} /></div>)
 
       }
       <TableCollection
