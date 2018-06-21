@@ -58,18 +58,33 @@ export class SuppressionSearch extends Component {
 
   cleanDuplicates = () => {
     const { cleanList } = this.state;
-    const { recipients, id } = this.props;
-    return this.props.updateRecipientList({id, recipients: cleanList });
+    const { current } = this.props;
+    const newList = _.map(cleanList, (recipient) => {
+      if (!recipient.return_path) {
+        return _.omit(recipient, ['return_path']);
+      } else {
+        return recipient;
+      }
+    });
+    current.recipients = newList;
+    return this.props.updateRecipientList(current);
   }
 
   cleanSuppressed = () => {
-    const { suppressed } = this.props.suppressed;
-    const { recipients, id, } = this.props.recipients;
-    const emails = _.map(suppressed, (s) => {
-      return { address: { email: s.recipient }};
+    const { recipients, current, suppressed } = this.props;
+    console.log('suppressed: ', suppressed);
+    const newList = _.differenceBy(recipients, suppressed, 'address.email');
+    const actualList = _.map(newList, (recipient) => {
+      if (!recipient.return_path) {
+        return _.omit(recipient, ['return_path']);
+      } else {
+        return recipient;
+      }
     });
-    const newList = _.differenceBy(recipients, emails, 'address.email');
-    return this.props.updateRecipientList({ id, recipients: newList });
+    current.recipients = actualList;
+    console.log('list length: ', actualList.length);
+    return this.props.updateRecipientList(current);
+
   }
 
   handleTypesSelection = (selected) => {
@@ -89,8 +104,6 @@ export class SuppressionSearch extends Component {
   render() {
     const { duplicates, showDuplicateCalc } = this.state;
     const { showSupp, suppressed } = this.props;
-    console.log(showSupp);
-    console.log(suppressed);
     return (
       <Panel>
         <Panel.Section>
@@ -155,6 +168,7 @@ const formOptions = {
 const mapStateToProps = (state) => ({
   search: state.suppressions.search,
   list: state.suppressions.list,
+  current: state.recipientLists.current,
   recipients: state.recipientLists.current.recipients,
   suppressed: state.suppressions.suppressed,
   showSupp: state.suppressions.showSuppressed,
