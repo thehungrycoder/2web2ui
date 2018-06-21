@@ -3,7 +3,10 @@ import { connect } from 'react-redux';
 
 import { Link, withRouter } from 'react-router-dom';
 
-import { Page } from '@sparkpost/matchbox';
+import { Page, Button, Panel } from '@sparkpost/matchbox';
+import { PanelLoading, TableCollection, Empty } from 'src/components';
+import SuppressionSearch from './components/SuppressionSearch';
+
 
 import {
   getRecipientList,
@@ -11,24 +14,60 @@ import {
   deleteRecipientList
 } from 'src/actions/recipientLists';
 
+import {  searchSuppressions } from 'src/actions/suppressions';
+
 import { showAlert } from 'src/actions/globalAlert';
 import { Loading, DeleteModal } from 'src/components';
 
 import RecipientListForm from './components/RecipientListForm';
 
+const columns = [
+  { label: 'Email', sortKey: 'email' },
+  { label: 'Name', sortKey: 'name' },
+  { label: 'Return Path', sortKey: 'return_path' },
+  { label: 'Matadata', sortKey: 'metadata' },
+  null
+];
+
 export class EditPage extends Component {
   state = {
-    showDelete: false
+    showDelete: false,
+    showClean: false
   };
 
   toggleDelete = () => this.setState({ showDelete: !this.state.showDelete });
+
+  toggleClean = () => this.setState({ showClean: !this.state.showClean });
+
+  // cleanList = () => {
+  //   console.log('here');
+  //   return this.props.searchSuppressions({ dateOptions: {}, subaccount: 0 }).then((results) => {
+  //     console.log(results);
+  //   });
+  // }
 
   secondaryActions = [
     {
       content: 'Delete',
       onClick: this.toggleDelete
+    },
+    {
+      content: 'Clean List',
+      onClick: this.toggleClean
     }
   ];
+
+  getRowData = (rowData) => {
+    const { address, return_path, metadata } = rowData;
+    const { email, name } = address;
+    return [
+      email,
+      name,
+      return_path,
+      metadata,
+      <Button size='small'>Delete</Button>
+    ];
+  }
 
   deleteRecipientList = () => {
     const { current, deleteRecipientList, showAlert, history } = this.props;
@@ -67,21 +106,34 @@ export class EditPage extends Component {
   }
 
   render() {
-    const { loading } = this.props;
+    const { loading, current } = this.props;
 
-    if (loading) {
+    if (loading || current === null) {
       return <Loading />;
     }
 
+    const { recipients } = current;
+    const { showClean } = this.state;
+
     return <Page
-      title='Update Recipient List'
+      title='Manage Recipient List'
       secondaryActions={this.secondaryActions}
       breadcrumbAction={{
         content: 'Recipient Lists',
         Component: Link,
         to: '/lists/recipient-lists' }}>
 
-      <RecipientListForm editMode={true} onSubmit={this.updateRecipientList} />
+      { showClean ?
+          <SuppressionSearch />
+        : <RecipientListForm editMode={true} onSubmit={this.updateRecipientList} />
+
+      }
+      <TableCollection
+        columns={columns}
+        rows={recipients}
+        getRowData={this.getRowData}
+        pagination
+      />
 
       <DeleteModal
         open={this.state.showDelete}
@@ -96,15 +148,17 @@ export class EditPage extends Component {
 
 const mapStateToProps = (state) => ({
   current: state.recipientLists.current,
-  loading: state.recipientLists.currentLoading,
+  loading: state.recipientLists.currentLoading || state.suppressions.listLoading,
   list: state.recipientLists.list,
-  error: state.recipientLists.error
+  error: state.recipientLists.error,
+  suppressions: state.suppressions.list
 });
 
 const mapDispatchToProps = {
   getRecipientList,
   updateRecipientList,
   deleteRecipientList,
+  searchSuppressions,
   showAlert
 };
 

@@ -35,7 +35,7 @@ export function searchRecipient({ email, subaccountId } = {}) {
 }
 
 export function searchSuppressions(options) {
-  const { dateOptions, types = [], sources = []} = options;
+  const { dateOptions, types = [], sources = [], subaccount} = options;
   const { from, to } = dateOptions;
 
   const params = {};
@@ -61,6 +61,20 @@ export function searchSuppressions(options) {
     meta: {
       method: 'GET',
       url: '/suppression-list',
+      headers: setSubaccountHeader(subaccount),
+      params
+    }
+  });
+}
+
+export function updateRecipientList({ id, ...updateFields }, params) {
+  return sparkpostApiRequest({
+    type: 'UPDATE_RECIPIENT_LIST',
+    meta: {
+      method: 'PUT',
+      url: `/recipient-lists/${id}`,
+      data: updateFields,
+      id,
       params
     }
   });
