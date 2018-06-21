@@ -89,6 +89,17 @@ export function updateRecipientList({ id, ...updateFields }, params) {
   });
 }
 
+export function getRecipientList(id, params) {
+  return sparkpostApiRequest({
+    type: 'GET_RECIPIENT_LIST',
+    meta: {
+      method: 'GET',
+      url: `/recipient-lists/${id}?show_recipients=true`,
+      params
+    }
+  });
+}
+
 export function deleteSuppression(suppression) {
   const { recipient, subaccount_id: subaccountId, type } = suppression;
 

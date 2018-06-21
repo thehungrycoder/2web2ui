@@ -7,6 +7,7 @@ import { FilterDropdown } from 'src/components';
 import * as suppressionActions from 'src/actions/suppressions';
 import { selectSearchInitialValues } from 'src/selectors/suppressions';
 import styles from './SuppressionSearch.module.scss';
+import { showAlert } from '../../../actions/globalAlert';
 
 import { TYPES, SOURCES, RELATIVE_DATE_OPTIONS } from '../constants';
 
@@ -28,7 +29,6 @@ export class SuppressionSearch extends Component {
     const suppressed = [];
     return this.props.searchSuppressions({ dateOptions: {}, subaccount: 0, types, sources}, recipients)
       .then((results) => {
-        console.log('suppressions: ', results);
         _.map(recipients, (recip) => {
           _.map(results, (sup) => {
             if (recip.address.email.toLowerCase() === sup.recipient) {
@@ -47,13 +47,12 @@ export class SuppressionSearch extends Component {
     const recipients = this.props.recipients;
     const deduped = _.uniqBy(recipients, 'address.email');
     const diff = recipients.length - deduped.length;
-    if (diff) {
-      this.setState({
-        duplicates: diff,
-        showDuplicateCalc: true,
-        cleanList: deduped
-      });
-    }
+    this.setState({
+      duplicates: diff,
+      showDuplicateCalc: true,
+      cleanList: deduped
+    });
+
   }
 
   cleanDuplicates = () => {
@@ -66,13 +65,20 @@ export class SuppressionSearch extends Component {
         return recipient;
       }
     });
+
     current.recipients = newList;
-    return this.props.updateRecipientList(current);
+    return this.props.updateRecipientList(current)
+      .then(() => this.props.getRecipientList(current.id))
+      .then(() => {
+        this.props.showAlert({
+          type: 'success',
+          message: `Duplicate recipients have been removed from this list`
+        });
+      });
   }
 
   cleanSuppressed = () => {
     const { recipients, current, suppressed } = this.props;
-    console.log('suppressed: ', suppressed);
     const newList = _.differenceBy(recipients, suppressed, 'address.email');
     const actualList = _.map(newList, (recipient) => {
       if (!recipient.return_path) {
@@ -82,8 +88,15 @@ export class SuppressionSearch extends Component {
       }
     });
     current.recipients = actualList;
-    console.log('list length: ', actualList.length);
-    return this.props.updateRecipientList(current);
+    console.log(actualList.length);
+    // return this.props.updateRecipientList(current)
+    //   .then(() => this.props.getRecipientList(current.id))
+    //   .then(() => {
+    //     this.props.showAlert({
+    //       type: 'success',
+    //       message: `${suppressed.length} recipients have been removed from this list`
+    //     });
+    //   });;
 
   }
 
@@ -116,7 +129,9 @@ export class SuppressionSearch extends Component {
         { showDuplicateCalc &&
           <Panel.Section>
             <p> There are {duplicates} duplicate entries that can be removed from this list </p>
-            <Button onClick={this.cleanDuplicates} primary> Delete Duplicates </Button>
+            { duplicates &&
+              <Button onClick={this.cleanDuplicates} primary> Delete Duplicates </Button>
+            }
           </Panel.Section>
         }
         <Panel.Section>
@@ -152,7 +167,9 @@ export class SuppressionSearch extends Component {
         { showSupp &&
           (<Panel.Section>
            <p>There are {suppressed.length} suppressed entries in the list.</p>
-           <Button primary onClick={this.cleanSuppressed}>Delete Suppressed</Button>
+           { !!suppressed.length &&
+             <Button primary onClick={this.cleanSuppressed}>Delete Suppressed</Button>
+           }
          </Panel.Section>)
         }
       </Panel>
@@ -178,4 +195,4 @@ const mapStateToProps = (state) => ({
 });
 
 
-export default connect(mapStateToProps, suppressionActions)(reduxForm(formOptions)(SuppressionSearch));
+export default connect(mapStateToProps, {...suppressionActions, showAlert})(reduxForm(formOptions)(SuppressionSearch));

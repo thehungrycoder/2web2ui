@@ -19,6 +19,7 @@ export class RecipientListAddRecipientForm extends Component {
     return this.props.getRecipientList(this.props.list.id)
       .then((list) => {
         list.recipients.push(newRecipient);
+        console.log(list.length);
         return list;
       })
       .then((newList) => this.props.updateRecipientList(newList))
