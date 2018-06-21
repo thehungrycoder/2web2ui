@@ -3,6 +3,8 @@ import checkEqualityForKeys from 'src/helpers/checkEqualityForKeys';
 
 const initialState = {
   list: null,
+  suppressed: [],
+  showSuppressed: false,
   hasSuppressions: null,
   listLoading: false,
   createError: null,
@@ -39,6 +41,11 @@ export default (state = initialState, action) => {
     case 'GET_SUPPRESSIONS_FAIL':
       return { ...state, listError: action.payload, listLoading: false };
 
+
+    // Fetch list
+
+    case 'GET_SUPPRESSIONS_SPECIAL':
+      return { ...state, suppressed: action.payload, showSuppressed: true, listLoading: false };
 
 
     // Recipients search

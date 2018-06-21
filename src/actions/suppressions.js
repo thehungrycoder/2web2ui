@@ -67,6 +67,15 @@ export function searchSuppressions(options) {
   });
 }
 
+
+export function showSuppressed(suppressed) {
+  return {
+    type: 'GET_SUPPRESSIONS_SPECIAL',
+    payload: suppressed
+  };
+}
+
+
 export function updateRecipientList({ id, ...updateFields }, params) {
   return sparkpostApiRequest({
     type: 'UPDATE_RECIPIENT_LIST',

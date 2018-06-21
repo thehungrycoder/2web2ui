@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
-import { reduxForm } from 'redux-form';
+import { reduxForm, change } from 'redux-form';
 import { Grid, Button, Panel } from '@sparkpost/matchbox';
 import { FilterDropdown } from 'src/components';
 import * as suppressionActions from 'src/actions/suppressions';
@@ -17,27 +17,30 @@ export class SuppressionSearch extends Component {
     types: [],
     showDuplicateCalc: false,
     duplicates: 0,
-    showSuppressed: false,
-    suppressed: []
+    cleanList: []
   }
+
 
 
   search = () => {
     const { types, sources } = this.state;
     const recipients = this.props.recipients;
-    return this.props.searchSuppressions({ dateOptions: {}, subaccount: 0, types, sources }).then((results) => {
-      console.log('suppressions: ', results);
-      const suppressed = [];
-      _.map(recipients, (recip) => {
-        _.map(results, (sup) => {
-          if (recip.address.email === sup.recipient) {
-            suppressed.push(recip);
-          }
+    const suppressed = [];
+    return this.props.searchSuppressions({ dateOptions: {}, subaccount: 0, types, sources}, recipients)
+      .then((results) => {
+        console.log('suppressions: ', results);
+        _.map(recipients, (recip) => {
+          _.map(results, (sup) => {
+            if (recip.address.email.toLowerCase() === sup.recipient) {
+              suppressed.push(recip);
+            }
+          });
         });
-      })
-      console.log('sup in list: ', suppressed);
-      this.setState({ suppressed, showSuppressed: true });
-    });
+
+      }).then(() => {
+        return this.props.showSuppressed(suppressed);
+      });
+
   }
 
   checkUnique = () => {
@@ -53,18 +56,20 @@ export class SuppressionSearch extends Component {
     }
   }
 
-  // cleanDuplicates = () => {
-  //   this.props.updateRecipientList()
-  // }
+  cleanDuplicates = () => {
+    const { cleanList } = this.state;
+    const { recipients, id } = this.props;
+    return this.props.updateRecipientList({id, recipients: cleanList });
+  }
 
   cleanSuppressed = () => {
-    const { suppressed } = this.state;
-    const { recipients, id } = this.props.recipients;
+    const { suppressed } = this.props.suppressed;
+    const { recipients, id, } = this.props.recipients;
     const emails = _.map(suppressed, (s) => {
       return { address: { email: s.recipient }};
     });
     const newList = _.differenceBy(recipients, emails, 'address.email');
-
+    return this.props.updateRecipientList({ id, recipients: newList });
   }
 
   handleTypesSelection = (selected) => {
@@ -82,7 +87,10 @@ export class SuppressionSearch extends Component {
 
 
   render() {
-    const { duplicates, showDuplicateCalc, showSuppressed, suppressed } = this.state;
+    const { duplicates, showDuplicateCalc } = this.state;
+    const { showSupp, suppressed } = this.props;
+    console.log(showSupp);
+    console.log(suppressed);
     return (
       <Panel>
         <Panel.Section>
@@ -91,14 +99,13 @@ export class SuppressionSearch extends Component {
           <Button onClick={this.checkUnique}>
             Check Duplicates
           </Button>
-          { showDuplicateCalc &&
-            <div>
-              <p> There are {duplicates} duplicate entries that can be removed from this list </p>
-              <Button primary> Delete Duplicates </Button>
-            </div>
-          }
-
         </Panel.Section>
+        { showDuplicateCalc &&
+          <Panel.Section>
+            <p> There are {duplicates} duplicate entries that can be removed from this list </p>
+            <Button onClick={this.cleanDuplicates} primary> Delete Duplicates </Button>
+          </Panel.Section>
+        }
         <Panel.Section>
           <h2>Suppressions</h2>
           <p>Clear your list of suppressed entries</p>
@@ -128,13 +135,13 @@ export class SuppressionSearch extends Component {
               </div>
             </Grid.Column>
           </Grid>
-          { showSuppressed &&
-            <div>
-             <p>There are {suppressed.length} suppressed entries in the list.</p>
-             <Button onClick={this.cleanSuppressed}>Delete Suppressed</Button>
-            </div>
-          }
         </Panel.Section>
+        { showSupp &&
+          (<Panel.Section>
+           <p>There are {suppressed.length} suppressed entries in the list.</p>
+           <Button primary onClick={this.cleanSuppressed}>Delete Suppressed</Button>
+         </Panel.Section>)
+        }
       </Panel>
     );
   }
@@ -149,6 +156,8 @@ const mapStateToProps = (state) => ({
   search: state.suppressions.search,
   list: state.suppressions.list,
   recipients: state.recipientLists.current.recipients,
+  suppressed: state.suppressions.suppressed,
+  showSupp: state.suppressions.showSuppressed,
   id: state.recipientLists.current.id,
   loading: state.suppressions.listLoading,
   initialValues: selectSearchInitialValues(state)
