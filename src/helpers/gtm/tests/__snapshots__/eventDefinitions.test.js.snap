@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Event Defintions getFormDefinition Initialize 1`] = `
+Object {
+  "action": "Initialize",
+  "category": "Form",
+  "event": "Interactions",
+  "label": "formName",
+  "value": undefined,
+}
+`;
+
+exports[`Event Defintions getFormDefinition Submit 1`] = `
+Object {
+  "action": "Submit",
+  "category": "Form",
+  "event": "Interactions",
+  "label": "formName",
+  "value": 1,
+}
+`;
+
+exports[`Event Defintions getFormDefinition Submit Failure 1`] = `
+Object {
+  "action": "Submit Failure",
+  "category": "Form",
+  "event": "Interactions",
+  "label": "formName",
+  "value": undefined,
+}
+`;
+
+exports[`Event Defintions getFormDefinition Submit Success 1`] = `
+Object {
+  "action": "Submit Success",
+  "category": "Form",
+  "event": "Interactions",
+  "label": "formName",
+  "value": undefined,
+}
+`;
+
+exports[`Event Defintions getFormDefinition Validation Success 1`] = `
+Object {
+  "action": "Validation Success",
+  "category": "Form",
+  "event": "Interactions",
+  "label": "formName",
+  "value": undefined,
+}
+`;
+
+exports[`Event Defintions getFormDefinition invokes the callback when provided 1`] = `
+Object {
+  "action": "Validation Error",
+  "category": "Form",
+  "event": "Interactions",
+  "label": "formName: {\\"field1\\": \\"required\\"}",
+  "value": undefined,
+}
+`;
