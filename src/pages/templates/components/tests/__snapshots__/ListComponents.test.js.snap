@@ -15,9 +15,11 @@ exports[`Template List Components Actions should render correct actions when not
     trigger={
       <Button
         flat={true}
-        size="small"
+        size="default"
       >
-        <MoreHoriz />
+        <MoreHoriz
+          size={20}
+        />
       </Button>
     }
   >
@@ -64,9 +66,11 @@ exports[`Template List Components Actions should render correct actions when pub
     trigger={
       <Button
         flat={true}
-        size="small"
+        size="default"
       >
-        <MoreHoriz />
+        <MoreHoriz
+          size={20}
+        />
       </Button>
     }
   >
@@ -113,9 +117,11 @@ exports[`Template List Components Actions should render correct actions with unp
     trigger={
       <Button
         flat={true}
-        size="small"
+        size="default"
       >
-        <MoreHoriz />
+        <MoreHoriz
+          size={20}
+        />
       </Button>
     }
   >
@@ -214,10 +220,7 @@ exports[`Template List Components Status should render unpublished changes 1`] =
   <Tag
     color="blue"
   >
-    <Edit
-      size={14}
-    />
-     Published
+    Published •
   </Tag>
 </Tooltip>
 `;
