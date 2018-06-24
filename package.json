@@ -46,7 +46,6 @@
     "url": "https://github.com/SparkPost/2web2ui/issues"
   },
   "dependencies": {
-    "@redux-beacon/logger": "^1.0.0",
     "@sparkpost/boomerang": "^1.0.6",
     "@sparkpost/matchbox": "^3.2.4",
     "@sparkpost/matchbox-icons": "^1.1.1",

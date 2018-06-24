@@ -7,6 +7,7 @@ function determineFormValidationState(action) {
     label: `${action.meta.form}: ${JSON.stringify(action.payload.syncErrors)}`
   };
 }
+
 const eventsMap = {
   '@@redux-form/INITIALIZE': getFormDefinition('Initialize'),
   '@@redux-form/START_SUBMIT': getFormDefinition('Submit'),
