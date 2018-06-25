@@ -72,15 +72,6 @@ export class PoolForm extends Component {
         </React.Fragment>
       );
     }
-
-    return (
-      <TableCollection
-        columns={columns}
-        rows={ips}
-        getRowData={getRowDataFunc}
-        pagination={false}
-      />
-    );
   }
 
   render() {
