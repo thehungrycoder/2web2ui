@@ -58,13 +58,13 @@ export class PoolForm extends Component {
     if (ips.length >= 1) {
       return (
         <div>
+          <p>Add sending IPs to the pool by moving them from their current pool.</p>
           <TableCollection
             columns={columns}
             rows={ips}
             getRowData={getRowDataFunc}
             pagination={false}
           />
-          <p>Add sending IPs to the pool by moving them from their current pool.</p>
         </div>
       );
     }
