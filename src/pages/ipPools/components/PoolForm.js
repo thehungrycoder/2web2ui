@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import { Button } from '@sparkpost/matchbox';
+import { Button, UnstyledLink } from '@sparkpost/matchbox';
 import { SelectWrapper } from 'src/components/reduxFormWrappers';
 import { TableCollection } from 'src/components';
 import AccessControl from 'src/components/auth/AccessControl';
@@ -10,6 +10,7 @@ import { configFlag } from 'src/helpers/conditions/config';
 import { TextFieldWrapper, SendingDomainTypeaheadWrapper } from 'src/components';
 import { selectIpPoolFormInitialValues, selectIpsForCurrentPool } from 'src/selectors/ipPools';
 import isDefaultPool from '../helpers/defaultPool';
+
 
 const columns = ['Sending IP', 'Hostname', 'IP Pool'];
 
@@ -51,7 +52,21 @@ export class PoolForm extends Component {
 
     // Empty pool
     if (ips.length === 0) {
-      return <p>Add sending IPs to this pool by moving them from their current pool.</p>;
+      return <p>Add a Dedicated IP to the pool by purchasing from the <UnstyledLink to="/account/billing">billing</UnstyledLink> page</p>;
+    }
+
+    if (ips.length >= 1) {
+      return (
+        <div>
+          <TableCollection
+            columns={columns}
+            rows={ips}
+            getRowData={getRowDataFunc}
+            pagination={false}
+          />
+          <p>Add sending IPs to the pool by moving them from their current pool.</p>
+        </div>
+      );
     }
 
     return (
@@ -81,7 +96,7 @@ export class PoolForm extends Component {
           helpText={helpText}
         />
 
-        { !editingDefault &&
+        {!editingDefault &&
           <AccessControl condition={configFlag('featureFlags.allow_default_signing_domains_for_ip_pools')}>
             <Field
               name="signing_domain"
@@ -92,7 +107,7 @@ export class PoolForm extends Component {
           </AccessControl>
         }
 
-        { this.renderCollection() }
+        {this.renderCollection()}
 
         <Button submit primary disabled={submitting || pristine}>
           {submitting ? 'Saving' : submitText}

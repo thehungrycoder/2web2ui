@@ -22,31 +22,36 @@ exports[`PoolForm tests should not disable button if form is not pristine or not
       name="signing_domain"
     />
   </Connect(AccessControl)>
-  <TableCollection
-    columns={
-      Array [
-        "Sending IP",
-        "Hostname",
-        "IP Pool",
-      ]
-    }
-    defaultSortColumn={null}
-    defaultSortDirection="asc"
-    getRowData={[Function]}
-    pagination={false}
-    rows={
-      Array [
-        Object {
-          "external_ip": "external",
-          "hostname": "hostname",
-        },
-        Object {
-          "external_ip": "external-2",
-          "hostname": "hostname-2",
-        },
-      ]
-    }
-  />
+  <div>
+    <TableCollection
+      columns={
+        Array [
+          "Sending IP",
+          "Hostname",
+          "IP Pool",
+        ]
+      }
+      defaultSortColumn={null}
+      defaultSortDirection="asc"
+      getRowData={[Function]}
+      pagination={false}
+      rows={
+        Array [
+          Object {
+            "external_ip": "external",
+            "hostname": "hostname",
+          },
+          Object {
+            "external_ip": "external-2",
+            "hostname": "hostname-2",
+          },
+        ]
+      }
+    />
+    <p>
+      Add sending IPs to the pool by moving them from their current pool.
+    </p>
+  </div>
   <Button
     disabled={false}
     primary={true}
@@ -70,31 +75,36 @@ exports[`PoolForm tests should not render signing_domain if editing default pool
     name="name"
     validate={[Function]}
   />
-  <TableCollection
-    columns={
-      Array [
-        "Sending IP",
-        "Hostname",
-        "IP Pool",
-      ]
-    }
-    defaultSortColumn={null}
-    defaultSortDirection="asc"
-    getRowData={[Function]}
-    pagination={false}
-    rows={
-      Array [
-        Object {
-          "external_ip": "external",
-          "hostname": "hostname",
-        },
-        Object {
-          "external_ip": "external-2",
-          "hostname": "hostname-2",
-        },
-      ]
-    }
-  />
+  <div>
+    <TableCollection
+      columns={
+        Array [
+          "Sending IP",
+          "Hostname",
+          "IP Pool",
+        ]
+      }
+      defaultSortColumn={null}
+      defaultSortDirection="asc"
+      getRowData={[Function]}
+      pagination={false}
+      rows={
+        Array [
+          Object {
+            "external_ip": "external",
+            "hostname": "hostname",
+          },
+          Object {
+            "external_ip": "external-2",
+            "hostname": "hostname-2",
+          },
+        ]
+      }
+    />
+    <p>
+      Add sending IPs to the pool by moving them from their current pool.
+    </p>
+  </div>
   <Button
     disabled={true}
     primary={true}
@@ -128,31 +138,36 @@ exports[`PoolForm tests should not render signing_domain if feature flag is disa
       name="signing_domain"
     />
   </Connect(AccessControl)>
-  <TableCollection
-    columns={
-      Array [
-        "Sending IP",
-        "Hostname",
-        "IP Pool",
-      ]
-    }
-    defaultSortColumn={null}
-    defaultSortDirection="asc"
-    getRowData={[Function]}
-    pagination={false}
-    rows={
-      Array [
-        Object {
-          "external_ip": "external",
-          "hostname": "hostname",
-        },
-        Object {
-          "external_ip": "external-2",
-          "hostname": "hostname-2",
-        },
-      ]
-    }
-  />
+  <div>
+    <TableCollection
+      columns={
+        Array [
+          "Sending IP",
+          "Hostname",
+          "IP Pool",
+        ]
+      }
+      defaultSortColumn={null}
+      defaultSortDirection="asc"
+      getRowData={[Function]}
+      pagination={false}
+      rows={
+        Array [
+          Object {
+            "external_ip": "external",
+            "hostname": "hostname",
+          },
+          Object {
+            "external_ip": "external-2",
+            "hostname": "hostname-2",
+          },
+        ]
+      }
+    />
+    <p>
+      Add sending IPs to the pool by moving them from their current pool.
+    </p>
+  </div>
   <Button
     disabled={true}
     primary={true}
@@ -252,31 +267,36 @@ exports[`PoolForm tests should render form 1`] = `
       name="signing_domain"
     />
   </Connect(AccessControl)>
-  <TableCollection
-    columns={
-      Array [
-        "Sending IP",
-        "Hostname",
-        "IP Pool",
-      ]
-    }
-    defaultSortColumn={null}
-    defaultSortDirection="asc"
-    getRowData={[Function]}
-    pagination={false}
-    rows={
-      Array [
-        Object {
-          "external_ip": "external",
-          "hostname": "hostname",
-        },
-        Object {
-          "external_ip": "external-2",
-          "hostname": "hostname-2",
-        },
-      ]
-    }
-  />
+  <div>
+    <TableCollection
+      columns={
+        Array [
+          "Sending IP",
+          "Hostname",
+          "IP Pool",
+        ]
+      }
+      defaultSortColumn={null}
+      defaultSortDirection="asc"
+      getRowData={[Function]}
+      pagination={false}
+      rows={
+        Array [
+          Object {
+            "external_ip": "external",
+            "hostname": "hostname",
+          },
+          Object {
+            "external_ip": "external-2",
+            "hostname": "hostname-2",
+          },
+        ]
+      }
+    />
+    <p>
+      Add sending IPs to the pool by moving them from their current pool.
+    </p>
+  </div>
   <Button
     disabled={true}
     primary={true}
@@ -324,7 +344,13 @@ exports[`PoolForm tests should return a msg if there are no ips 1`] = `
     />
   </Connect(AccessControl)>
   <p>
-    Add sending IPs to this pool by moving them from their current pool.
+    Add a Dedicated IP to the pool by purchasing from the 
+    <UnstyledLink
+      to="/account/billing"
+    >
+      billing
+    </UnstyledLink>
+     page
   </p>
   <Button
     disabled={true}
@@ -349,31 +375,36 @@ exports[`PoolForm tests should show help text when editing default pool 1`] = `
     name="name"
     validate={[Function]}
   />
-  <TableCollection
-    columns={
-      Array [
-        "Sending IP",
-        "Hostname",
-        "IP Pool",
-      ]
-    }
-    defaultSortColumn={null}
-    defaultSortDirection="asc"
-    getRowData={[Function]}
-    pagination={false}
-    rows={
-      Array [
-        Object {
-          "external_ip": "external",
-          "hostname": "hostname",
-        },
-        Object {
-          "external_ip": "external-2",
-          "hostname": "hostname-2",
-        },
-      ]
-    }
-  />
+  <div>
+    <TableCollection
+      columns={
+        Array [
+          "Sending IP",
+          "Hostname",
+          "IP Pool",
+        ]
+      }
+      defaultSortColumn={null}
+      defaultSortDirection="asc"
+      getRowData={[Function]}
+      pagination={false}
+      rows={
+        Array [
+          Object {
+            "external_ip": "external",
+            "hostname": "hostname",
+          },
+          Object {
+            "external_ip": "external-2",
+            "hostname": "hostname-2",
+          },
+        ]
+      }
+    />
+    <p>
+      Add sending IPs to the pool by moving them from their current pool.
+    </p>
+  </div>
   <Button
     disabled={true}
     primary={true}
@@ -407,31 +438,36 @@ exports[`PoolForm tests should update button text to Saving and disable button w
       name="signing_domain"
     />
   </Connect(AccessControl)>
-  <TableCollection
-    columns={
-      Array [
-        "Sending IP",
-        "Hostname",
-        "IP Pool",
-      ]
-    }
-    defaultSortColumn={null}
-    defaultSortDirection="asc"
-    getRowData={[Function]}
-    pagination={false}
-    rows={
-      Array [
-        Object {
-          "external_ip": "external",
-          "hostname": "hostname",
-        },
-        Object {
-          "external_ip": "external-2",
-          "hostname": "hostname-2",
-        },
-      ]
-    }
-  />
+  <div>
+    <TableCollection
+      columns={
+        Array [
+          "Sending IP",
+          "Hostname",
+          "IP Pool",
+        ]
+      }
+      defaultSortColumn={null}
+      defaultSortDirection="asc"
+      getRowData={[Function]}
+      pagination={false}
+      rows={
+        Array [
+          Object {
+            "external_ip": "external",
+            "hostname": "hostname",
+          },
+          Object {
+            "external_ip": "external-2",
+            "hostname": "hostname-2",
+          },
+        ]
+      }
+    />
+    <p>
+      Add sending IPs to the pool by moving them from their current pool.
+    </p>
+  </div>
   <Button
     disabled={true}
     primary={true}

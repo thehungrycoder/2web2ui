@@ -106,7 +106,6 @@ export class EditPage extends Component {
         <PoolForm onSubmit={this.onUpdatePool} isNew={false} />
       </Panel.Section>
     </Panel>;
-
   }
 
   render() {
@@ -120,15 +119,18 @@ export class EditPage extends Component {
       <Page
         title={`${pool.name} (${pool.id})`}
         breadcrumbAction={breadcrumbAction}
-        secondaryActions={!isDefaultPool(this.props.match.params.id)
-          ? [{
+        secondaryActions={
+          [{
             content: 'Delete',
-            onClick: this.toggleDelete
+            onClick: this.toggleDelete,
+            visible: !isDefaultPool(this.props.match.params.id)
+          },
+          { content: 'Purchase IP',
+            to: '/account/billing'
           }]
-          : []
         }>
 
-        { this.renderForm() }
+        {this.renderForm()}
 
         <DeleteModal
           open={this.state.showDelete}
