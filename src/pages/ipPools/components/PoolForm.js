@@ -54,7 +54,7 @@ export class PoolForm extends Component {
     // Empty pool
     if (ips.length === 0) {
       return <Panel.Section>
-        <p>Add a Dedicated IP to the pool by purchasing from the <UnstyledLink to="/account/billing" component={Link}>billing</UnstyledLink> page</p>
+        <p>Add a Dedicated IP to the pool by purchasing from the <UnstyledLink to="/account/billing" component={Link}>billing</UnstyledLink> page.</p>
       </Panel.Section>;
     }
 
@@ -62,7 +62,7 @@ export class PoolForm extends Component {
     return (
       <React.Fragment>
         <Panel.Section>
-          <p>Add sending IPs to the pool by moving them from their current pool.</p>
+          <p>Add sending IPs to this pool by moving them from their current pool or by purchasing a new Dedicated IP.</p>
         </Panel.Section>
         <TableCollection
           columns={columns}
