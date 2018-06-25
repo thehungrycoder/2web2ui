@@ -57,21 +57,20 @@ export class PoolForm extends Component {
       </Panel.Section>;
     }
 
-    if (ips.length >= 1) {
-      return (
-        <React.Fragment>
-          <Panel.Section>
-            <p>Add sending IPs to the pool by moving them from their current pool.</p>
-          </Panel.Section>
-          <TableCollection
-            columns={columns}
-            rows={ips}
-            getRowData={getRowDataFunc}
-            pagination={false}
-          />
-        </React.Fragment>
-      );
-    }
+
+    return (
+      <React.Fragment>
+        <Panel.Section>
+          <p>Add sending IPs to the pool by moving them from their current pool.</p>
+        </Panel.Section>
+        <TableCollection
+          columns={columns}
+          rows={ips}
+          getRowData={getRowDataFunc}
+          pagination={false}
+        />
+      </React.Fragment>
+    );
   }
 
   render() {
