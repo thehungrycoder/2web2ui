@@ -25,14 +25,10 @@ exports[`IP Pools Edit Page render tests should render the edit page correctly 1
   }
   title="My Pool (my-pool)"
 >
-  <Panel>
-    <Panel.Section>
-      <Connect(ReduxForm)
-        isNew={false}
-        onSubmit={[Function]}
-      />
-    </Panel.Section>
-  </Panel>
+  <Connect(ReduxForm)
+    isNew={false}
+    onSubmit={[Function]}
+  />
   <DeleteModal
     content={
       <p>

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { Page, Panel } from '@sparkpost/matchbox';
+import { Page } from '@sparkpost/matchbox';
 import { Loading } from 'src/components';
 import PoolForm from './components/PoolForm';
 
@@ -36,11 +36,7 @@ export class CreatePage extends Component {
 
     return (
       <Page title="Create IP Pool" breadcrumbAction={breadcrumbAction}>
-        <Panel>
-          <Panel.Section>
-            <PoolForm onSubmit={this.createPool} isNew={true} />
-          </Panel.Section>
-        </Panel>
+        <PoolForm onSubmit={this.createPool} isNew={true} />
       </Page>
     );
   }
