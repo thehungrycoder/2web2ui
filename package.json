@@ -133,8 +133,13 @@
     "identity-obj-proxy": "^3.0.0",
     "incstr": "^1.2.3",
     "jest": "^22.1.4",
+<<<<<<< HEAD
     "jest-enzyme": "^5.0.0",
     "jest-junit": "^4.0.0",
+=======
+    "jest-enzyme": "^6.0.1",
+    "jest-junit": "^3.4.1",
+>>>>>>> greenkeeper/jest-enzyme-6.0.1
     "lint-staged": "^7.0.1",
     "mdx-loader": "^1.1.0",
     "mdxc": "^1.1.1",
