@@ -132,10 +132,10 @@ exports[`Component: EditBounce does not show root domain warning for 3rd level d
         }
         sectioned={true}
         title={
-          <UNDEFINED>
+          <React.Fragment>
             <ErrorIcon />
              DNS Settings
-          </UNDEFINED>
+          </React.Fragment>
         }
       >
         <LabelledValue
@@ -213,10 +213,10 @@ exports[`Component: EditBounce renders not ready correctly 1`] = `
         }
         sectioned={true}
         title={
-          <UNDEFINED>
+          <React.Fragment>
             <ErrorIcon />
              DNS Settings
-          </UNDEFINED>
+          </React.Fragment>
         }
       >
         <LabelledValue
@@ -282,10 +282,10 @@ exports[`Component: EditBounce renders ready correctly 1`] = `
         }
         sectioned={true}
         title={
-          <UNDEFINED>
+          <React.Fragment>
             <VerifiedIcon />
              DNS Settings
-          </UNDEFINED>
+          </React.Fragment>
         }
       >
         <LabelledValue

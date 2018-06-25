@@ -39,10 +39,10 @@ exports[`Component: SetupSending renders correctly for unverified DKIM and inval
       }
       sectioned={true}
       title={
-        <UNDEFINED>
+        <React.Fragment>
           <ErrorIcon />
            DNS Settings
-        </UNDEFINED>
+        </React.Fragment>
       }
     >
       <LabelledValue
@@ -109,10 +109,10 @@ exports[`Component: SetupSending renders correctly for unverified DKIM and inval
       }
       sectioned={true}
       title={
-        <UNDEFINED>
+        <React.Fragment>
           <ErrorIcon />
            DNS Settings
-        </UNDEFINED>
+        </React.Fragment>
       }
     >
       <LabelledValue
@@ -161,10 +161,10 @@ exports[`Component: SetupSending renders correctly when ownership and DKIM are v
       }
       sectioned={true}
       title={
-        <UNDEFINED>
+        <React.Fragment>
           <VerifiedIcon />
            DNS Settings
-        </UNDEFINED>
+        </React.Fragment>
       }
     >
       <LabelledValue
@@ -225,10 +225,10 @@ exports[`Component: SetupSending renders correctly when ownership is valid and D
       }
       sectioned={true}
       title={
-        <UNDEFINED>
+        <React.Fragment>
           <ErrorIcon />
            DNS Settings
-        </UNDEFINED>
+        </React.Fragment>
       }
     >
       <LabelledValue

@@ -146,6 +146,7 @@ exports[`submits correctly 1`] = `
       "calls": Array [
         Array [],
       ],
+      "results": undefined,
     }
   }
 >
