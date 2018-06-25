@@ -394,6 +394,7 @@ exports[`PoolForm tests should return a msg if there are no ips 1`] = `
       <p>
         Add a Dedicated IP to the pool by purchasing from the 
         <UnstyledLink
+          component={[Function]}
           to="/account/billing"
         >
           billing

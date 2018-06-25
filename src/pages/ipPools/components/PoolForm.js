@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
+import { Link } from 'react-router-dom';
 import { Panel, Button, UnstyledLink } from '@sparkpost/matchbox';
 import { SelectWrapper } from 'src/components/reduxFormWrappers';
 import { TableCollection } from 'src/components';
@@ -53,7 +54,7 @@ export class PoolForm extends Component {
     // Empty pool
     if (ips.length === 0) {
       return <Panel.Section>
-        <p>Add a Dedicated IP to the pool by purchasing from the <UnstyledLink to="/account/billing">billing</UnstyledLink> page</p>
+        <p>Add a Dedicated IP to the pool by purchasing from the <UnstyledLink to="/account/billing" component={Link}>billing</UnstyledLink> page</p>
       </Panel.Section>;
     }
 

@@ -122,7 +122,8 @@ export class EditPage extends Component {
             visible: !isDefaultPool(this.props.match.params.id)
           },
           { content: 'Purchase IP',
-            to: '/account/billing'
+            to: '/account/billing',
+            component: Link
           }]
         }>
 
