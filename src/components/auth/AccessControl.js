@@ -8,10 +8,12 @@ export const AccessControl = function AccessControl({ children, ready, redirect,
   if (ready && redirect && !show) {
     return <Redirect to={redirect} />;
   }
+
   if (!ready && redirect) {
     return <Loading />;
   }
-  return show ? children : null;
+
+  return (ready && show) ? children : null;
 };
 
 const accept = () => true;
