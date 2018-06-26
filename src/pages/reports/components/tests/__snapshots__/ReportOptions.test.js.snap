@@ -21,6 +21,7 @@ exports[`Component: Report Options should mount and render correctly 1`] = `
                     Object {},
                   ],
                 ],
+                "results": undefined,
               }
             }
             relativeDateOptions={
@@ -98,6 +99,7 @@ exports[`Component: Report Options with active filters should render 1`] = `
                     Object {},
                   ],
                 ],
+                "results": undefined,
               }
             }
             relativeDateOptions={

@@ -4,7 +4,6 @@ exports[`Page: Message Events tests getRowData renders correctly 1`] = `
 Array [
   <DisplayDate
     formattedDate="formatted"
-    timestamp={undefined}
   />,
   "Injection",
   "tom.haverford@pawnee.state.in.us",

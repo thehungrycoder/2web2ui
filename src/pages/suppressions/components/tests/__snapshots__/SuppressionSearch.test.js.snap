@@ -18,6 +18,7 @@ exports[`SuppressionSearch renders correctly 1`] = `
                 },
               ],
             ],
+            "results": undefined,
           }
         }
         relativeDateOptions={

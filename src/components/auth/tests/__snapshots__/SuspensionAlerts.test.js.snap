@@ -6,7 +6,7 @@ Array [
     "autoDismiss": false,
     "dedupeId": "SUSPENSION_NOTICE",
     "maxWidth": 800,
-    "message": <UNDEFINED>
+    "message": <React.Fragment>
       <div>
         Your account is currently suspended.
       </div>
@@ -19,7 +19,7 @@ Array [
         </UnstyledLink>
         .
       </div>
-    </UNDEFINED>,
+    </React.Fragment>,
     "type": "warning",
   },
 ]
@@ -31,7 +31,7 @@ Array [
     "autoDismiss": false,
     "dedupeId": "SUSPENSION_NOTICE",
     "maxWidth": 800,
-    "message": <UNDEFINED>
+    "message": <React.Fragment>
       <div>
         Your account is currently suspended due to a billing problem.
       </div>
@@ -44,7 +44,7 @@ Array [
         </PageLink>
         .
       </div>
-    </UNDEFINED>,
+    </React.Fragment>,
     "type": "warning",
   },
 ]

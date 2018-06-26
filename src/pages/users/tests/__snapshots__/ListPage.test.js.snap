@@ -126,6 +126,7 @@ exports[`Page: Users List should render with an error 1`] = `
         "calls": Array [
           Array [],
         ],
+        "results": undefined,
       }
     }
   />
@@ -138,7 +139,6 @@ Array [
   <RoleSelect
     allowSuperUser={false}
     disabled={false}
-    name={undefined}
     onChange={[Function]}
     value="admin"
   />,
@@ -146,7 +146,6 @@ Array [
   "Never",
   <DeleteButton
     disabled={false}
-    name={undefined}
     onClick={[Function]}
   />,
 ]

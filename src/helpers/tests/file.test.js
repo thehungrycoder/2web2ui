@@ -28,7 +28,7 @@ describe('Helper: File', () => {
       expect(result).toEqual('data:image/png;base64,<BASE64 ENCODED CONTENTS>');
     });
 
-    it('should reject if the given object is not a File', () => expect(getDataUrl({})).rejects.toThrow('Only native File objects can be converted to data URL'));
+    it('should reject if the given object is not a File', () => expect(getDataUrl({})).rejects.toEqual('Only native File objects can be converted to data URL'));
 
   });
 

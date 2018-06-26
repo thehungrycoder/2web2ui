@@ -7,6 +7,7 @@ exports[`Subaccount Typeahead render function should render the list 1`] = `
       "calls": Array [
         Array [],
       ],
+      "results": undefined,
     }
   }
   hasSubaccounts={true}

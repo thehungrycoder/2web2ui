@@ -27,6 +27,7 @@ exports[`Action Creator: Support openSupportTicketForm should open support panel
       },
     ],
   ],
+  "results": undefined,
 }
 `;
 

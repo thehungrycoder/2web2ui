@@ -27,6 +27,7 @@ module.exports = {
       statements: 80
     }
   },
+  reporters: ['default', 'jest-junit'],
   setupFiles: [
     '<rootDir>/config/polyfills.js'
   ],
@@ -35,7 +36,6 @@ module.exports = {
     '<rootDir>/src/**/__tests__/**/*.js?(x)',
     '<rootDir>/src/**/?(*.)(spec|test).js?(x)'
   ],
-  testResultsProcessor: './node_modules/jest-junit',
   testEnvironment: 'node',
   testURL: 'http://phoenix.test',
   transform: {
