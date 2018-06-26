@@ -15,19 +15,21 @@ exports[`IP Pools Edit Page render tests should render the edit page correctly 1
       Object {
         "content": "Delete",
         "onClick": [Function],
+        "visible": true,
+      },
+      Object {
+        "component": [Function],
+        "content": "Purchase IP",
+        "to": "/account/billing",
       },
     ]
   }
   title="My Pool (my-pool)"
 >
-  <Panel>
-    <Panel.Section>
-      <Connect(ReduxForm)
-        isNew={false}
-        onSubmit={[Function]}
-      />
-    </Panel.Section>
-  </Panel>
+  <Connect(ReduxForm)
+    isNew={false}
+    onSubmit={[Function]}
+  />
   <DeleteModal
     content={
       <p>
@@ -63,6 +65,12 @@ exports[`IP Pools Edit Page renderForm tests should show get error msg on error 
       Object {
         "content": "Delete",
         "onClick": [Function],
+        "visible": true,
+      },
+      Object {
+        "component": [Function],
+        "content": "Purchase IP",
+        "to": "/account/billing",
       },
     ]
   }
@@ -101,6 +109,12 @@ exports[`IP Pools Edit Page renderForm tests should show list error msg on error
       Object {
         "content": "Delete",
         "onClick": [Function],
+        "visible": true,
+      },
+      Object {
+        "component": [Function],
+        "content": "Purchase IP",
+        "to": "/account/billing",
       },
     ]
   }
