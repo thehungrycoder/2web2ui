@@ -1,102 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`edit path base props 1`] = `
-<Page
-  breadcrumbAction={
+exports[`DetailsPage should redirect and alert on error 1`] = `
+<Connect(RedirectAndAlert)
+  alert={
     Object {
-      "Component": [Function],
-      "content": "Subaccounts",
-      "to": "/account/subaccounts",
+      "message": "Unable to find subaccount for 123",
+      "type": "warning",
     }
   }
-  empty={Object {}}
-  title="Bob Evans, the restaurant. (123)"
->
-  <Tabs
-    color="orange"
-    connectBelow={true}
-    selected={0}
-    tabs={
-      Array [
-        Object {
-          "Component": [Function],
-          "content": "Details",
-          "to": "/account/subaccounts/123",
-        },
-        Object {
-          "Component": [Function],
-          "content": "API Keys",
-          "to": "/account/subaccounts/123/api-keys",
-        },
-        Object {
-          "Component": [Function],
-          "content": "Sending Domains",
-          "to": "/account/subaccounts/123/sending-domains",
-        },
-      ]
-    }
-  />
-  <Switch>
-    <Route
-      exact={true}
-      path="/account/subaccounts/123"
-      render={[Function]}
-    />
-    <Route
-      path="/account/subaccounts/123/api-keys"
-      render={[Function]}
-    />
-    <Route
-      path="/account/subaccounts/123/sending-domains"
-      render={[Function]}
-    />
-  </Switch>
-</Page>
+  to="/account/subaccounts"
+/>
 `;
 
-exports[`edit path loading 1`] = `
-<Page
-  breadcrumbAction={
-    Object {
-      "Component": [Function],
-      "content": "Subaccounts",
-      "to": "/account/subaccounts",
-    }
-  }
-  empty={Object {}}
-  title="loading..."
->
-  <Tabs
-    color="orange"
-    connectBelow={true}
-    selected={0}
-    tabs={
-      Array [
-        Object {
-          "Component": [Function],
-          "content": "Details",
-          "to": "/account/subaccounts/123",
-        },
-        Object {
-          "Component": [Function],
-          "content": "API Keys",
-          "to": "/account/subaccounts/123/api-keys",
-        },
-        Object {
-          "Component": [Function],
-          "content": "Sending Domains",
-          "to": "/account/subaccounts/123/sending-domains",
-        },
-      ]
-    }
-  />
-  <PanelLoading
-    minHeight="400px"
-  />
-</Page>
-`;
-
-exports[`keys path base props 1`] = `
+exports[`DetailsPage should render api keys tab 1`] = `
 <Page
   breadcrumbAction={
     Object {
@@ -135,64 +51,24 @@ exports[`keys path base props 1`] = `
   <Switch>
     <Route
       exact={true}
-      path="/account/subaccounts/123"
+      path="/account/subaccounts/:id"
       render={[Function]}
     />
     <Route
-      path="/account/subaccounts/123/api-keys"
+      exact={true}
+      path="/account/subaccounts/:id/api-keys"
       render={[Function]}
     />
     <Route
-      path="/account/subaccounts/123/sending-domains"
+      exact={true}
+      path="/account/subaccounts/:id/sending-domains"
       render={[Function]}
     />
   </Switch>
 </Page>
 `;
 
-exports[`keys path loading 1`] = `
-<Page
-  breadcrumbAction={
-    Object {
-      "Component": [Function],
-      "content": "Subaccounts",
-      "to": "/account/subaccounts",
-    }
-  }
-  empty={Object {}}
-  title="loading..."
->
-  <Tabs
-    color="orange"
-    connectBelow={true}
-    selected={1}
-    tabs={
-      Array [
-        Object {
-          "Component": [Function],
-          "content": "Details",
-          "to": "/account/subaccounts/123",
-        },
-        Object {
-          "Component": [Function],
-          "content": "API Keys",
-          "to": "/account/subaccounts/123/api-keys",
-        },
-        Object {
-          "Component": [Function],
-          "content": "Sending Domains",
-          "to": "/account/subaccounts/123/sending-domains",
-        },
-      ]
-    }
-  />
-  <PanelLoading
-    minHeight="400px"
-  />
-</Page>
-`;
-
-exports[`on create scenario should show api key banner on new key 1`] = `
+exports[`DetailsPage should render edit tab 1`] = `
 <Page
   breadcrumbAction={
     Object {
@@ -204,13 +80,10 @@ exports[`on create scenario should show api key banner on new key 1`] = `
   empty={Object {}}
   title="Bob Evans, the restaurant. (123)"
 >
-  <Connect(ApiKeySuccessBanner)
-    title="Don't Forget Your API Key"
-  />
   <Tabs
     color="orange"
     connectBelow={true}
-    selected={-1}
+    selected={0}
     tabs={
       Array [
         Object {
@@ -234,22 +107,26 @@ exports[`on create scenario should show api key banner on new key 1`] = `
   <Switch>
     <Route
       exact={true}
-      path="/account/subaccounts/123"
+      path="/account/subaccounts/:id"
       render={[Function]}
     />
     <Route
-      path="/account/subaccounts/123/api-keys"
+      exact={true}
+      path="/account/subaccounts/:id/api-keys"
       render={[Function]}
     />
     <Route
-      path="/account/subaccounts/123/sending-domains"
+      exact={true}
+      path="/account/subaccounts/:id/sending-domains"
       render={[Function]}
     />
   </Switch>
 </Page>
 `;
 
-exports[`should select sending domains tab 1`] = `
+exports[`DetailsPage should render loading page 1`] = `<Loading />`;
+
+exports[`DetailsPage should select sending domains tab 1`] = `
 <Page
   breadcrumbAction={
     Object {
@@ -288,15 +165,76 @@ exports[`should select sending domains tab 1`] = `
   <Switch>
     <Route
       exact={true}
-      path="/account/subaccounts/123"
+      path="/account/subaccounts/:id"
       render={[Function]}
     />
     <Route
-      path="/account/subaccounts/123/api-keys"
+      exact={true}
+      path="/account/subaccounts/:id/api-keys"
       render={[Function]}
     />
     <Route
-      path="/account/subaccounts/123/sending-domains"
+      exact={true}
+      path="/account/subaccounts/:id/sending-domains"
+      render={[Function]}
+    />
+  </Switch>
+</Page>
+`;
+
+exports[`DetailsPage should show api key banner with new api key 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "Subaccounts",
+      "to": "/account/subaccounts",
+    }
+  }
+  empty={Object {}}
+  title="Bob Evans, the restaurant. (123)"
+>
+  <Connect(ApiKeySuccessBanner)
+    title="Don't Forget Your API Key"
+  />
+  <Tabs
+    color="orange"
+    connectBelow={true}
+    selected={0}
+    tabs={
+      Array [
+        Object {
+          "Component": [Function],
+          "content": "Details",
+          "to": "/account/subaccounts/123",
+        },
+        Object {
+          "Component": [Function],
+          "content": "API Keys",
+          "to": "/account/subaccounts/123/api-keys",
+        },
+        Object {
+          "Component": [Function],
+          "content": "Sending Domains",
+          "to": "/account/subaccounts/123/sending-domains",
+        },
+      ]
+    }
+  />
+  <Switch>
+    <Route
+      exact={true}
+      path="/account/subaccounts/:id"
+      render={[Function]}
+    />
+    <Route
+      exact={true}
+      path="/account/subaccounts/:id/api-keys"
+      render={[Function]}
+    />
+    <Route
+      exact={true}
+      path="/account/subaccounts/:id/sending-domains"
       render={[Function]}
     />
   </Switch>

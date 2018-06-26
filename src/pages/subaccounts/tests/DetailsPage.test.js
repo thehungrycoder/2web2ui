@@ -1,95 +1,87 @@
-import { shallow } from 'enzyme';
 import React from 'react';
+import { shallow } from 'enzyme';
 
 import { DetailsPage } from '../DetailsPage';
 
-// actions
-const getSubaccount = jest.fn();
-const listPools = jest.fn();
-const listApiKeys = jest.fn();
-const listDomains = jest.fn();
-const hideNewApiKey = jest.fn();
+describe('DetailsPage', () => {
+  let props;
+  let wrapper;
 
-const paths = {
-  edit: '/account/subaccounts/123',
-  keys: '/account/subaccounts/123/api-keys',
-  domains: '/account/subaccounts/123/sending-domains'
-};
+  beforeEach(() => {
+    props = {
+      id: '123',
+      loading: false,
+      subaccount: {
+        id: '123',
+        name: 'Bob Evans, the restaurant.'
+      },
+      location: {
+        pathname: '/account/subaccounts/123'
+      },
+      clearSubaccount: jest.fn(),
+      getSubaccount: jest.fn(),
+      hideNewApiKey: jest.fn(),
+      listApiKeys: jest.fn(),
+      listDomains: jest.fn(),
+      listPools: jest.fn()
+    };
 
-const props = {
-  id: '123',
-  loading: false,
-  subaccount: {
-    id: '123',
-    name: 'Bob Evans, the restaurant.'
-  },
-  location: { pathname: '' },
-  match: { url: paths.edit },
-  getSubaccount,
-  listPools,
-  listApiKeys,
-  listDomains,
-  hideNewApiKey
-};
+    wrapper = shallow(<DetailsPage {...props} />);
+  });
 
-let wrapper;
+  it('should render edit tab', () => {
+    expect(wrapper).toMatchSnapshot();
+  });
 
-beforeEach(() => {
-  wrapper = shallow(<DetailsPage {...props} />);
-});
+  it('should render loading page', () => {
+    wrapper.setProps({ loading: true });
+    expect(wrapper).toMatchSnapshot();
+  });
 
-test('componentDidMount', () => {
-  expect(getSubaccount).toHaveBeenCalledWith('123');
-  expect(listPools).toHaveBeenCalled();
-  expect(listApiKeys).toHaveBeenCalled();
-  expect(listDomains).toHaveBeenCalled();
-  expect(hideNewApiKey).not.toHaveBeenCalled();
-});
+  it('should redirect and alert on error', () => {
+    wrapper.setProps({ error: new Error('Oh no!') });
+    expect(wrapper).toMatchSnapshot();
+  });
 
-test('componentDidUnmount', () => {
-  wrapper.unmount();
-  expect(hideNewApiKey).toHaveBeenCalled();
-});
-
-describe('on create scenario', () => {
-  it('should show api key banner on new key', () => {
+  it('should show api key banner with new api key', () => {
     wrapper.setProps({ newKey: 'my-key' });
     expect(wrapper).toMatchSnapshot();
   });
 
-});
+  it('should render api keys tab', () => {
+    wrapper.setProps({
+      location: {
+        pathname: '/account/subaccounts/123/api-keys'
+      }
+    });
 
-describe('edit path', () => {
-  beforeEach(() => {
-    wrapper.setProps({ location: { pathname: paths.edit }});
-  });
-
-  test('base props', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  test('loading', () => {
-    wrapper.setProps({ loading: true });
-    expect(wrapper).toMatchSnapshot();
-  });
-});
+  it('should select sending domains tab', () => {
+    wrapper.setProps({
+      location: {
+        pathname: '/account/subaccounts/123/sending-domains'
+      }
+    });
 
-describe('keys path', () => {
-  beforeEach(() => {
-    wrapper.setProps({ location: { pathname: paths.keys }});
-  });
-
-  test('base props', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  test('loading', () => {
-    wrapper.setProps({ loading: true });
-    expect(wrapper).toMatchSnapshot();
+  it('should request data on mount', () => {
+    expect(props.getSubaccount).toHaveBeenCalledWith('123');
+    expect(props.listApiKeys).toHaveBeenCalledTimes(1);
+    expect(props.listDomains).toHaveBeenCalledTimes(1);
+    expect(props.listPools).toHaveBeenCalledTimes(1);
   });
-});
 
-it('should select sending domains tab', () => {
-  wrapper.setProps({ location: { pathname: paths.domains }});
-  expect(wrapper).toMatchSnapshot();
+  it('should clear new api key on unmount', () => {
+    wrapper.unmount();
+    expect(props.hideNewApiKey).toHaveBeenCalledTimes(1);
+  });
+
+  it('should clear subaccount on unmount', () => {
+    wrapper.unmount();
+    expect(props.clearSubaccount).toHaveBeenCalledTimes(1);
+  });
 });
