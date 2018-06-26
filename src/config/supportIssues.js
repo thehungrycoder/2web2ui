@@ -30,10 +30,66 @@ const SUPPORT = 'Support';
  */
 const supportIssues = [
   {
-    id: 'technical_errors',
-    label: 'Technical errors',
+    id: 'ui_errors',
+    label: 'UI errors',
     messageLabel: 'Tell us more about your issue',
     type: ERRORS,
+    condition: all(hasOnlineSupport, hasStatus('active'))
+  },
+  {
+    id: 'sending_domain_block',
+    label: 'Sending domain block',
+    messageLabel: 'Tell us more about your issue',
+    type: COMPLIANCE,
+    condition: all(hasOnlineSupport, hasStatus('active'))
+  },
+  {
+    id: 'configuration_setup_support',
+    label: 'Configuration support',
+    messageLabel: 'Tell us more about your issue',
+    type: SUPPORT,
+    condition: all(hasOnlineSupport, hasStatus('active'))
+  },
+  {
+    id: 'dns',
+    label: 'DNS help',
+    messageLabel: 'Tell us more about your issue',
+    type: SUPPORT,
+    condition: all(hasOnlineSupport, hasStatus('active'))
+  },
+  {
+    id: 'placement_deliverability',
+    label: 'Deliverability issues',
+    messageLabel: 'Tell us more about your issue',
+    type: SUPPORT,
+    condition: all(hasOnlineSupport, hasStatus('active'))
+  },
+  {
+    id: 'reporting_and_event_issue',
+    label: 'Reporting & event issues',
+    messageLabel: 'Tell us more about your issue',
+    type: SUPPORT,
+    condition: all(hasOnlineSupport, hasStatus('active'))
+  },
+  {
+    id: 'blacklisting',
+    label: 'IP blacklisting',
+    messageLabel: 'Tell us more about your issue',
+    type: COMPLIANCE,
+    condition: all(hasOnlineSupport, hasStatus('active'))
+  },
+  {
+    id: 'product/support_feedback',
+    label: 'Feedback',
+    messageLabel: 'Tell us more about your issue',
+    type: SUPPORT,
+    condition: all(hasOnlineSupport, hasStatus('active'))
+  },
+  {
+    id: 'account_upgrade/downgrade_issue',
+    label: 'Account upgrade/downgrade issues',
+    messageLabel: 'Tell us more about your issue',
+    type: SUPPORT,
     condition: all(hasOnlineSupport, hasStatus('active'))
   },
   {
@@ -58,18 +114,18 @@ const supportIssues = [
     condition: all(hasOnlineSupport, isAdmin, hasStatus('active'))
   },
   {
-    id: 'general_issue',
-    label: 'Another issue',
-    messageLabel: 'Tell us more about your issue',
-    type: SUPPORT,
-    condition: all(hasOnlineSupport, hasStatus('active'))
-  },
-  {
     id: 'account_cancellation',
     label: 'Account cancellation',
     messageLabel: 'Tell us why you are leaving',
     type: COMPLIANCE,
     condition: isAdmin
+  },
+  {
+    id: 'general_issue',
+    label: 'Another issue',
+    messageLabel: 'Tell us more about your issue',
+    type: SUPPORT,
+    condition: all(hasOnlineSupport, hasStatus('active'))
   }
 ];
 
