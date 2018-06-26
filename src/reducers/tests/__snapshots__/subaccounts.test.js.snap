@@ -1,0 +1,86 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Reducer: Subaccount when get subaccount failed 1`] = `
+Object {
+  "getError": [Error: Oh no!],
+  "getLoading": false,
+  "list": Array [],
+  "listError": null,
+  "listLoading": false,
+  "subaccount": Object {},
+}
+`;
+
+exports[`Reducer: Subaccount when get subaccount is cleared 1`] = `
+Object {
+  "getError": null,
+  "getLoading": false,
+  "list": Array [],
+  "listError": null,
+  "listLoading": false,
+  "subaccount": Object {},
+}
+`;
+
+exports[`Reducer: Subaccount when get subaccount is pending 1`] = `
+Object {
+  "getError": null,
+  "getLoading": true,
+  "list": Array [],
+  "listError": null,
+  "listLoading": false,
+  "subaccount": Object {},
+}
+`;
+
+exports[`Reducer: Subaccount when get subaccount succeeds 1`] = `
+Object {
+  "getError": null,
+  "getLoading": false,
+  "list": Array [],
+  "listError": null,
+  "listLoading": false,
+  "subaccount": Object {
+    "id": "test-subaccount",
+    "name": "Test Subaccount",
+  },
+}
+`;
+
+exports[`Reducer: Subaccount when subaccount list failed to load 1`] = `
+Object {
+  "getError": null,
+  "getLoading": false,
+  "list": Array [],
+  "listError": [Error: Oh no!],
+  "listLoading": false,
+  "subaccount": Object {},
+}
+`;
+
+exports[`Reducer: Subaccount when subaccount list is pending 1`] = `
+Object {
+  "getError": null,
+  "getLoading": false,
+  "list": Array [],
+  "listError": null,
+  "listLoading": true,
+  "subaccount": Object {},
+}
+`;
+
+exports[`Reducer: Subaccount when subaccount list loaded 1`] = `
+Object {
+  "getError": null,
+  "getLoading": false,
+  "list": Array [
+    Object {
+      "id": "test-subaccount",
+      "name": "Test Subaccount",
+    },
+  ],
+  "listError": null,
+  "listLoading": false,
+  "subaccount": Object {},
+}
+`;

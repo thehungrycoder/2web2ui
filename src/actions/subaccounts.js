@@ -55,3 +55,5 @@ export function editSubaccount(id, data) {
     }
   });
 }
+
+export const clearSubaccount = () => ({ type: 'CLEAR_SUBACCOUNT' });
