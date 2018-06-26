@@ -18,7 +18,8 @@ export class AdvancedFilters extends Component {
       message_ids: '',
       subaccounts: '',
       template_ids: '',
-      campaign_ids: ''
+      campaign_ids: '',
+      bounce_classes: ''
     }
   }
 

@@ -266,6 +266,18 @@ exports[`Component: ActiveFilters should render initially and sync to state corr
             value={Array []}
           />
         </div>
+        <div
+          className="FieldWrapper"
+          key="bounce_classes"
+        >
+          <TextField
+            id="bounce_classes"
+            label="Bounce Classes"
+            onChange={[Function]}
+            resize="both"
+            type="text"
+          />
+        </div>
       </Panel.Section>
       <Panel.Section>
         <Button

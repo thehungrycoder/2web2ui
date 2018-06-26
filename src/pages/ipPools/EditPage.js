@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 
-import { Page, Panel } from '@sparkpost/matchbox';
+import { Page } from '@sparkpost/matchbox';
 import { DeleteModal, ApiErrorBanner } from 'src/components';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
 import PoolForm from './components/PoolForm';
@@ -101,12 +101,7 @@ export class EditPage extends Component {
       return this.renderError();
     }
 
-    return <Panel>
-      <Panel.Section>
-        <PoolForm onSubmit={this.onUpdatePool} isNew={false} />
-      </Panel.Section>
-    </Panel>;
-
+    return <PoolForm onSubmit={this.onUpdatePool} isNew={false} />;
   }
 
   render() {
@@ -120,15 +115,19 @@ export class EditPage extends Component {
       <Page
         title={`${pool.name} (${pool.id})`}
         breadcrumbAction={breadcrumbAction}
-        secondaryActions={!isDefaultPool(this.props.match.params.id)
-          ? [{
+        secondaryActions={
+          [{
             content: 'Delete',
-            onClick: this.toggleDelete
+            onClick: this.toggleDelete,
+            visible: !isDefaultPool(this.props.match.params.id)
+          },
+          { content: 'Purchase IP',
+            to: '/account/billing',
+            component: Link
           }]
-          : []
         }>
 
-        { this.renderForm() }
+        {this.renderForm()}
 
         <DeleteModal
           open={this.state.showDelete}

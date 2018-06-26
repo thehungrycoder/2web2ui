@@ -55,6 +55,7 @@ export class ActiveFilters extends Component {
         {this.renderTags({ key: 'message_ids', label: 'Message' })}
         {this.renderTags({ key: 'template_ids', label: 'Template' })}
         {this.renderTags({ key: 'campaign_ids', label: 'Campaign' })}
+        {this.renderTags({ key: 'bounce_classes', label: 'Bounce Class' })}
       </Panel.Section>
     );
   }
