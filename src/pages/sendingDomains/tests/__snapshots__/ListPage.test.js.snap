@@ -147,6 +147,7 @@ exports[`Sending Domains List Page renders error banner correctly 1`] = `
         "calls": Array [
           Array [],
         ],
+        "results": undefined,
       }
     }
   />

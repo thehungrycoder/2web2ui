@@ -43,9 +43,9 @@ exports[`AccountDropdown should render correctly 1`] = `
   open={false}
   right={true}
   trigger={
-    <UNDEFINED>
+    <Context.Consumer>
       [Function]
-    </UNDEFINED>
+    </Context.Consumer>
   }
 >
   <ActionList
@@ -58,7 +58,7 @@ exports[`AccountDropdown should render correctly 1`] = `
           "to": "link",
         },
         Object {
-          "content": <UNDEFINED>
+          "content": <React.Fragment>
             link2
              
             <div
@@ -68,7 +68,7 @@ exports[`AccountDropdown should render correctly 1`] = `
                 size={15}
               />
             </div>
-          </UNDEFINED>,
+          </React.Fragment>,
           "external": true,
           "to": "link2",
         },

@@ -292,6 +292,7 @@ exports[`IP Pools List Page should show alert upon error 1`] = `
         "calls": Array [
           Array [],
         ],
+        "results": undefined,
       }
     }
   />

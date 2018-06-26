@@ -102,10 +102,10 @@ exports[`BouncePage:  should render 1`] = `
     rateTitle="Bounce Rate"
     rateValue={10}
     secondaryMessage={
-      <UNDEFINED>
+      <React.Fragment>
         5
          messages were categorized as Admin Bounces.
-      </UNDEFINED>
+      </React.Fragment>
     }
   >
     <strong>
@@ -339,10 +339,10 @@ exports[`BouncePage:  should show empty reasons table when there are no reasons 
     rateTitle="Bounce Rate"
     rateValue={10}
     secondaryMessage={
-      <UNDEFINED>
+      <React.Fragment>
         5
          messages were categorized as Admin Bounces.
-      </UNDEFINED>
+      </React.Fragment>
     }
   >
     <strong>
@@ -381,10 +381,10 @@ exports[`BouncePage:  should show loading panel when table is loading 1`] = `
     rateTitle="Bounce Rate"
     rateValue={10}
     secondaryMessage={
-      <UNDEFINED>
+      <React.Fragment>
         5
          messages were categorized as Admin Bounces.
-      </UNDEFINED>
+      </React.Fragment>
     }
   >
     <strong>

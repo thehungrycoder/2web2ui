@@ -213,6 +213,7 @@ exports[`EnableTfaModal tests should show error on TextField when toggleError an
                 Array [],
                 Array [],
               ],
+              "results": undefined,
             }
           }
           size="default"
@@ -343,6 +344,7 @@ exports[`EnableTfaModal tests should show verifying as button text when togglePe
               "calls": Array [
                 Array [],
               ],
+              "results": undefined,
             }
           }
           size="default"

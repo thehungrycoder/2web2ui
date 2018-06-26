@@ -31,6 +31,7 @@ exports[`Component: MessageEventsSearch renders correctly 1`] = `
                   },
                 ],
               ],
+              "results": undefined,
             }
           }
           relativeDateOptions={

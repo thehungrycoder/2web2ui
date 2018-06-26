@@ -29,6 +29,7 @@ exports[`Page: Dashboard tests should correctly render page when user is not ver
         "calls": Array [
           Array [],
         ],
+        "results": undefined,
       }
     }
     currentUser={
@@ -46,6 +47,7 @@ exports[`Page: Dashboard tests should correctly render page when user is not ver
             },
           ],
         ],
+        "results": undefined,
       }
     }
     listSendingDomains={
@@ -53,6 +55,7 @@ exports[`Page: Dashboard tests should correctly render page when user is not ver
         "calls": Array [
           Array [],
         ],
+        "results": undefined,
       }
     }
     showAlert={[MockFunction]}
@@ -87,6 +90,7 @@ exports[`Page: Dashboard tests should display upgrade CTA when account is free a
         "calls": Array [
           Array [],
         ],
+        "results": undefined,
       }
     }
     currentUser={
@@ -104,6 +108,7 @@ exports[`Page: Dashboard tests should display upgrade CTA when account is free a
             },
           ],
         ],
+        "results": undefined,
       }
     }
     listSendingDomains={
@@ -111,6 +116,7 @@ exports[`Page: Dashboard tests should display upgrade CTA when account is free a
         "calls": Array [
           Array [],
         ],
+        "results": undefined,
       }
     }
     showAlert={[MockFunction]}
@@ -145,6 +151,7 @@ exports[`Page: Dashboard tests should render import suppression list when 0 supp
         "calls": Array [
           Array [],
         ],
+        "results": undefined,
       }
     }
     currentUser={
@@ -162,6 +169,7 @@ exports[`Page: Dashboard tests should render import suppression list when 0 supp
             },
           ],
         ],
+        "results": undefined,
       }
     }
     listSendingDomains={
@@ -169,6 +177,7 @@ exports[`Page: Dashboard tests should render import suppression list when 0 supp
         "calls": Array [
           Array [],
         ],
+        "results": undefined,
       }
     }
     showAlert={[MockFunction]}
@@ -203,6 +212,7 @@ exports[`Page: Dashboard tests should render page correctly with defaults 1`] = 
         "calls": Array [
           Array [],
         ],
+        "results": undefined,
       }
     }
     currentUser={
@@ -220,6 +230,7 @@ exports[`Page: Dashboard tests should render page correctly with defaults 1`] = 
             },
           ],
         ],
+        "results": undefined,
       }
     }
     listSendingDomains={
@@ -227,6 +238,7 @@ exports[`Page: Dashboard tests should render page correctly with defaults 1`] = 
         "calls": Array [
           Array [],
         ],
+        "results": undefined,
       }
     }
     showAlert={[MockFunction]}

@@ -5,16 +5,15 @@ exports[`Support Form Component Form should render issue dropdown with help text
   component={[Function]}
   errorInLabel={true}
   helpText={
-    <UNDEFINED>
+    <React.Fragment>
       Additional technical support is available on paid plans. 
       <PageLink
-        onClick={undefined}
         to="/account/billing/plan"
       >
         Upgrade now
       </PageLink>
       .
-    </UNDEFINED>
+    </React.Fragment>
   }
   label="I need help with..."
   name="issueId"
