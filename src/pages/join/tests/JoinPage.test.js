@@ -30,7 +30,7 @@ jest.mock('src/config', () => ({
   links: {
     submitTicket: 'https://support.sparkpost.com/customer/portal/emails/new'
   },
-  salesforceDataParams: ['sfdcid', 'src', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'],
+  salesforceDataParams: ['src', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'],
   attribution: {
     cookieName: 'attribution',
     cookieDuration: 60 * 24 * 30,
@@ -94,8 +94,8 @@ describe('JoinPage', () => {
   describe('registerSubmit', () => {
     let attributionValues;
     beforeEach(() => {
-      attributionValues = { sfdcid: 'abcd', src: 'Test Source', 'utm_source': 'test file' };
-      instance.getAttributionData = jest.fn().mockReturnValue(attributionValues);
+      attributionValues = { sfdcid: 'abcd', attributionData: { src: 'Test Source', 'utm_source': 'test file' }, creationParams: { extra1: 'bar1', extra2: 'bar2' }};
+      instance.formatQueryString = jest.fn().mockReturnValue(attributionValues);
       instance.trackSignup = jest.fn();
     });
 
@@ -155,18 +155,18 @@ describe('JoinPage', () => {
   });
 
 
-  describe('getAttributionData', () => {
+  describe('formatQueryString', () => {
     beforeEach(() => {
       cookie.getJSON.mockReturnValue({ sfdcid: '123', utm_source: 'script' });
     });
 
-    it('returns correct attribution data from stored cookie', () => {
-      expect(instance.getAttributionData()).toMatchSnapshot();
+    it('returns correct data when value exists in cookie only', () => {
+      expect(instance.formatQueryString()).toMatchSnapshot();
     });
 
-    it('merges attribution data from query params onto stored cookie data', () => {
+    it('merges data from query params onto stored cookie data', () => {
       wrapper.setProps({ params: { foo: 'bar', sfdcid: '123', utm_medium: 'script' }});
-      expect(instance.getAttributionData()).toMatchSnapshot();
+      expect(instance.formatQueryString()).toMatchSnapshot();
     });
   });
 });

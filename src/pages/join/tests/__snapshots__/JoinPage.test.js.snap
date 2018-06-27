@@ -1,17 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`JoinPage getAttributionData merges attribution data from query params onto stored cookie data 1`] = `
+exports[`JoinPage formatQueryString merges data from query params onto stored cookie data 1`] = `
 Object {
+  "attributionData": Object {
+    "utm_medium": "script",
+    "utm_source": "script",
+  },
+  "creationParams": Object {
+    "foo": "bar",
+  },
   "sfdcid": "123",
-  "utm_medium": "script",
-  "utm_source": "script",
 }
 `;
 
-exports[`JoinPage getAttributionData returns correct attribution data from stored cookie 1`] = `
+exports[`JoinPage formatQueryString returns correct data when value exists in cookie only 1`] = `
 Object {
+  "attributionData": Object {
+    "utm_source": "script",
+  },
+  "creationParams": Object {},
   "sfdcid": "123",
-  "utm_source": "script",
 }
 `;
 
@@ -19,6 +27,10 @@ exports[`JoinPage registerSubmit calls register with correct data 1`] = `
 Array [
   Array [
     Object {
+      "creation_params": Object {
+        "extra1": "bar1",
+        "extra2": "bar2",
+      },
       "email": "foo@bar.com",
       "first_name": "foo",
       "last_name": "bar",
