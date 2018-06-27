@@ -23,22 +23,32 @@ export class JoinPage extends Component {
     formData: {}
   };
 
-  getAttributionData = () => {
+  formatQueryString = () => {
     const { params } = this.props;
     const existingCookie = cookie.getJSON(config.attribution.cookieName) || {};
-    return _.pick({ ...existingCookie, ...params }, config.salesforceDataParams);
-  };
+
+    const allData = { ...existingCookie, ...params };
+
+    const excludeInCreationParams = config.salesforceDataParams.concat(['sfdcid']);
+
+    return {
+      sfdcid: allData.sfdcid,
+      attributionData: _.pick(allData, config.salesforceDataParams),
+      creationParams: _.omit(allData, excludeInCreationParams)
+    };
+  }
 
   registerSubmit = (values) => {
     this.setState({ formData: values });
     const { params: { plan }, register, authenticate } = this.props;
-    const { sfdcid, ...attributionData } = this.getAttributionData();
-    const accountFields = _.omit(values, 'email_opt_in');
+    const { sfdcid, attributionData, creationParams } = this.formatQueryString();
 
+    const accountFields = _.omit(values, 'email_opt_in');
     const signupData = {
       ...accountFields,
       sfdcid,
-      salesforce_data: { ...attributionData, email_opt_out: !values.email_opt_in }
+      salesforce_data: { ...attributionData, email_opt_out: !values.email_opt_in },
+      creation_params: creationParams
     };
 
     return register(signupData)
@@ -50,7 +60,7 @@ export class JoinPage extends Component {
       .then(() => this.props.history.push(AFTER_JOIN_REDIRECT_ROUTE, { plan }));
   };
 
-  render () {
+  render() {
     const { createError } = this.props.account;
     const { formData } = this.state;
     const title = inSPCEU() ? 'Sign Up For SparkPost EU' : 'Sign Up';
@@ -80,7 +90,7 @@ export class JoinPage extends Component {
   }
 }
 
-function mapStateToProps (state, props) {
+function mapStateToProps(state, props) {
   return {
     account: state.account,
     params: qs.parse(props.location.search),
