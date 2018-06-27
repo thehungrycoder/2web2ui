@@ -7,17 +7,23 @@ import { Loading } from 'src/components';
 import { Page, Grid } from '@sparkpost/matchbox';
 
 export default class PublishedPage extends Component {
-  componentWillMount() {
+  componentDidMount() {
     const { match, getPublished, getTestData, subaccountId } = this.props;
     getPublished(match.params.id, subaccountId);
     getTestData({ id: match.params.id, mode: 'published' });
+  }
+
+  componentDidUpdate() {
+    if (this.props.getPublishedError) {
+      this.props.history.push('/templates/');
+    }
   }
 
   handlePreview = ({ testData }) => {
     const { setTestData, match: { params: { id }}, history, subaccountId } = this.props;
     const query = setSubaccountQuery(subaccountId);
 
-    setTestData({ id, data: testData, mode: 'published' }).then(
+    return setTestData({ id, data: testData, mode: 'published' }).then(
       () => history.push(`/templates/preview/${id}/published${query}`)
     );
   };
@@ -28,8 +34,8 @@ export default class PublishedPage extends Component {
 
     const secondaryActions = [
       {
-        content: 'View Draft',
-        Component: Link,
+        content: 'Edit Draft',
+        component: Link,
         to: `/templates/edit/${match.params.id}${query}`
       },
       {
@@ -40,7 +46,7 @@ export default class PublishedPage extends Component {
 
     const breadcrumbAction = {
       content: 'Templates',
-      Component: Link,
+      component: Link,
       to: '/templates'
     };
 
@@ -48,7 +54,7 @@ export default class PublishedPage extends Component {
   }
 
   render() {
-    const { loading, formName } = this.props;
+    const { loading, formName, subaccountId } = this.props;
 
     if (loading) {
       return <Loading />;
@@ -58,7 +64,7 @@ export default class PublishedPage extends Component {
       <Page {...this.getPageProps()}>
         <Grid>
           <Grid.Column xs={12} lg={4}>
-            <Form name={formName} readOnly />
+            <Form name={formName} subaccountId={subaccountId} readOnly />
           </Grid.Column>
           <Grid.Column xs={12} lg={8}>
             <Editor name={formName} readOnly />

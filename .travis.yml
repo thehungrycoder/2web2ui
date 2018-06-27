@@ -1,7 +1,7 @@
 language: node_js
 node_js:
   - "8"
-install: npm install # change to npm ci when travis runs npm 5.7+ (currently 5.6)
+install: npm install -dd # change to npm ci when travis runs npm 5.7+ (currently 5.6)
 script: npm run test-ci && npm run build && npm run coveralls
 before_install: npm install -g greenkeeper-lockfile@1
 before_script: greenkeeper-lockfile-update

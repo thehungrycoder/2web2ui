@@ -41,4 +41,13 @@ export const normalizeTemplateFromAddress = (template) => {
   };
 };
 
+export const resolveTemplateStatus = ({ has_draft, has_published, published } = {}) => ({
+  // The template is published with no unpublished changes
+  published,
 
+  // A published template with a draft that contains unpublished changes
+  publishedWithChanges: !published && has_draft && has_published,
+
+  // Unpublished draft template
+  draft: !published && !has_published
+});
