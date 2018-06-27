@@ -7,16 +7,19 @@ import { formatDateTime } from 'src/helpers/date';
 import { resolveTemplateStatus } from 'src/helpers/templates';
 import styles from './ListComponents.module.scss';
 
-const Name = ({ name, id, subaccount_id }) => (
-  <Fragment>
-    <p className={styles.Name}>
-      <Link to={`/templates/edit/${id}${setSubaccountQuery(subaccount_id)}`}>
-        <strong>{name}</strong>
-      </Link>
-    </p>
-    <p className={styles.Id}><em>ID: {id}</em></p>
-  </Fragment>
-);
+const Name = ({ name, id, subaccount_id, ...rowData }) => {
+  const { published } = resolveTemplateStatus(rowData);
+  return (
+    <Fragment>
+      <p className={styles.Name}>
+        <Link to={`/templates/edit/${id}${published ? '/published' : ''}${setSubaccountQuery(subaccount_id)}`}>
+          <strong>{name}</strong>
+        </Link>
+      </p>
+      <p className={styles.Id}><em>ID: {id}</em></p>
+    </Fragment>
+  );
+};
 
 const Status = (rowData) => {
   const { published, publishedWithChanges } = resolveTemplateStatus(rowData);

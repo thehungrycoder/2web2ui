@@ -14,7 +14,7 @@ exports[`Template PublishedPage should render correctly 1`] = `
     Array [
       Object {
         "component": [Function],
-        "content": "View Draft",
+        "content": "Edit Draft",
         "to": "/templates/edit/id",
       },
       Object {
@@ -62,7 +62,7 @@ exports[`Template PublishedPage should render read-only correctly 1`] = `
     Array [
       Object {
         "component": [Function],
-        "content": "View Draft",
+        "content": "Edit Draft",
         "to": "/templates/edit/id",
       },
       Object {

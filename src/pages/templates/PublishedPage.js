@@ -34,7 +34,7 @@ export default class PublishedPage extends Component {
 
     const secondaryActions = [
       {
-        content: 'View Draft',
+        content: 'Edit Draft',
         component: Link,
         to: `/templates/edit/${match.params.id}${query}`
       },

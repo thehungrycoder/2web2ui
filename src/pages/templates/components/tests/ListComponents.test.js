@@ -14,6 +14,11 @@ describe('Template List Components', () => {
     it('should render', () => {
       expect(wrapper).toMatchSnapshot();
     });
+
+    it('should navigate to published page if template is published', () => {
+      wrapper.setProps({ published: true });
+      expect(wrapper.find('Link').props().to).toEqual('/templates/edit/id-123/published?subaccount=123');
+    });
   });
 
   describe('Status', () => {
