@@ -12,18 +12,24 @@ import PublishedPage from '../PublishedPage';
 
 const FORM_NAME = 'templatePublished';
 
-const mapStateToProps = (state, props) => ({
-  loading: state.templates.getLoading,
-  canModify: hasGrants('templates/modify')(state),
-  subaccountId: selectSubaccountIdFromQuery(state, props),
-  hasSubaccounts: hasSubaccounts(state),
-  formName: FORM_NAME,
-  initialValues: {
-    testData: selectTemplateTestData(state),
-    ...selectTemplateById(state, props).published,
-    subaccount: selectSubaccountFromQuery(state, props)
-  }
-});
+const mapStateToProps = (state, props) => {
+  const template = selectTemplateById(state, props).published;
+
+  return {
+    loading: state.templates.getPublishedLoading,
+    getPublishedError: state.templates.getPublishedError,
+    template,
+    canModify: hasGrants('templates/modify')(state),
+    subaccountId: selectSubaccountIdFromQuery(state, props),
+    hasSubaccounts: hasSubaccounts(state),
+    formName: FORM_NAME,
+    initialValues: {
+      testData: selectTemplateTestData(state),
+      ...template,
+      subaccount: selectSubaccountFromQuery(state, props)
+    }
+  };
+};
 
 const formOptions = {
   form: FORM_NAME,

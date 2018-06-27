@@ -29,7 +29,7 @@ function wait(options) {
  *
  * @return {Promise} - promise that will resolve when condition is met
  */
-function resolveOnCondition(condition, options = {}) {
+export function resolveOnCondition(condition, options = {}) {
   return new Promise((resolve, reject) => {
     if (typeof condition !== 'function') {
       return reject(new Error('condition function not provided to resolveOnCondition helper'));
@@ -37,25 +37,3 @@ function resolveOnCondition(condition, options = {}) {
     wait({ resolve, reject, condition, ...options });
   });
 }
-
-const captureSuccess = (result) => ({ state: 'fulfilled', result });
-const captureFail = (error) => ({ state: 'rejected', error });
-
-const allSettled = (promises, { onlyFulfilled = false, onlyRejected = false }) => {
-  const settled = Promise.all(promises.map((p) => p.then(captureSuccess).catch(captureFail)));
-
-  if (onlyFulfilled) {
-    return settled.then((results) => results.filter((r) => r.state === 'fulfilled').map((r) => r.result));
-  }
-
-  if (onlyRejected) {
-    return settled.then((results) => results.filter((r) => r.state === 'rejected').map((r) => r.error));
-  }
-
-  return settled;
-};
-
-export {
-  resolveOnCondition,
-  allSettled
-};

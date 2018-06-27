@@ -23,11 +23,7 @@ export function getDraft(id, subaccountId) {
     meta: {
       method: 'GET',
       url: `/templates/${id}`,
-      params: {
-        draft: true
-      },
-      headers: setSubaccountHeader(subaccountId),
-      showErrorAlert: false
+      headers: setSubaccountHeader(subaccountId)
     }
   });
 }

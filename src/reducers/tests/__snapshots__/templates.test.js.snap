@@ -21,7 +21,7 @@ Object {
     "draft": Object {},
     "published": Object {},
   },
-  "getLoading": false,
+  "getDraftLoading": false,
   "list": Array [],
   "listError": null,
 }
@@ -48,7 +48,7 @@ Object {
     "draft": Object {},
     "published": Object {},
   },
-  "getLoading": false,
+  "getDraftLoading": false,
   "list": Array [],
   "listError": null,
 }
@@ -117,7 +117,7 @@ Object {
     "draft": Object {},
     "published": Object {},
   },
-  "getLoading": false,
+  "getPublishedLoading": false,
   "list": Array [],
   "listError": null,
 }
@@ -144,7 +144,7 @@ Object {
     "draft": Object {},
     "published": Object {},
   },
-  "getLoading": false,
+  "getPublishedLoading": false,
   "list": Array [],
   "listError": null,
 }

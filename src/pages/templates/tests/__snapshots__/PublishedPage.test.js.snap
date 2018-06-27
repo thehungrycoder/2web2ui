@@ -4,7 +4,7 @@ exports[`Template PublishedPage should render correctly 1`] = `
 <Page
   breadcrumbAction={
     Object {
-      "Component": [Function],
+      "component": [Function],
       "content": "Templates",
       "to": "/templates",
     }
@@ -13,8 +13,8 @@ exports[`Template PublishedPage should render correctly 1`] = `
   secondaryActions={
     Array [
       Object {
-        "Component": [Function],
-        "content": "View Draft",
+        "component": [Function],
+        "content": "Edit Draft",
         "to": "/templates/edit/id",
       },
       Object {
@@ -52,7 +52,7 @@ exports[`Template PublishedPage should render read-only correctly 1`] = `
 <Page
   breadcrumbAction={
     Object {
-      "Component": [Function],
+      "component": [Function],
       "content": "Templates",
       "to": "/templates",
     }
@@ -61,8 +61,8 @@ exports[`Template PublishedPage should render read-only correctly 1`] = `
   secondaryActions={
     Array [
       Object {
-        "Component": [Function],
-        "content": "View Draft",
+        "component": [Function],
+        "content": "Edit Draft",
         "to": "/templates/edit/id",
       },
       Object {

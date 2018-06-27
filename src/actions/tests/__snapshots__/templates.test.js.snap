@@ -115,10 +115,6 @@ Array [
     "meta": Object {
       "headers": Object {},
       "method": "GET",
-      "params": Object {
-        "draft": true,
-      },
-      "showErrorAlert": false,
       "url": "/templates/one",
     },
     "type": "GET_DRAFT_TEMPLATE",
@@ -247,10 +243,6 @@ Array [
     "meta": Object {
       "headers": Object {},
       "method": "GET",
-      "params": Object {
-        "draft": true,
-      },
-      "showErrorAlert": false,
       "url": "/templates/test-template",
     },
     "type": "GET_DRAFT_TEMPLATE",

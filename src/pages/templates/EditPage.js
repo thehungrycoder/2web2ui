@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { allSettled } from 'src/helpers/promise';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
+import _ from 'lodash';
 
 // Components
 import Form from './components/containers/Form.container';
@@ -14,30 +14,22 @@ export default class EditPage extends Component {
     deleteOpen: false
   };
 
-  getTemplate() {
-    const { match, getDraft, getPublished, subaccountId } = this.props;
-    return allSettled([
-      getDraft(match.params.id, subaccountId),
-      getPublished(match.params.id, subaccountId)
-    ], { onlyRejected: true });
+  componentDidMount() {
+    const { match, getDraft, getTestData, subaccountId } = this.props;
+
+    getDraft(match.params.id, subaccountId);
+    getTestData({ id: match.params.id, mode: 'draft' });
   }
 
-  componentDidMount() {
-    const { match, getTestData, showAlert, history } = this.props;
-
-    this.getTemplate().then((errors) => {
-      if (errors.length === 2) {
-        history.push('/templates/'); // Redirect if no draft or published found
-        showAlert({ type: 'error', message: 'Could not find template' });
-      }
-    });
-
-    getTestData({ id: match.params.id, mode: 'draft' });
+  componentDidUpdate() {
+    if (this.props.getDraftError) {
+      this.props.history.push('/templates/');
+    }
   }
 
   handlePublish = (values) => {
     const { publish, match, showAlert, history, subaccountId } = this.props;
-    return publish(values, subaccountId).then(() => {
+    return publish(_.omit(values, 'published'), subaccountId).then(() => {
       history.push(`/templates/edit/${match.params.id}/published${setSubaccountQuery(subaccountId)}`);
       showAlert({ type: 'success', message: 'Template published' });
     });
@@ -45,8 +37,8 @@ export default class EditPage extends Component {
 
   handleSave = (values) => {
     const { update, match, getDraft, showAlert, getTestData, subaccountId } = this.props;
-    return update(values, subaccountId).then(() => {
-      getDraft(match.params.id);
+    return update(_.omit(values, 'published'), subaccountId).then(() => {
+      getDraft(match.params.id, subaccountId);
       getTestData({ id: match.params.id, mode: 'draft' });
       showAlert({ type: 'success', message: 'Template saved' });
     });
@@ -62,7 +54,7 @@ export default class EditPage extends Component {
 
   handlePreview = ({ testData }) => {
     const { setTestData, match: { params: { id }}, subaccountId, history } = this.props;
-    setTestData({ id, data: testData, mode: 'draft' }).then(
+    return setTestData({ id, data: testData, mode: 'draft' }).then(
       () => history.push(`/templates/preview/${id}${setSubaccountQuery(subaccountId)}`)
     );
   };
@@ -73,7 +65,7 @@ export default class EditPage extends Component {
 
   getPageProps() {
     const { canModify, handleSubmit, template, match, submitting, subaccountId } = this.props;
-    const published = template.published;
+    const published = template.has_published;
 
     const primaryAction = {
       content: 'Publish Template',
@@ -81,10 +73,7 @@ export default class EditPage extends Component {
       disabled: submitting
     };
 
-    const filterVisibleActions = (actions) =>
-      actions.filter((action) => action.visible).map(({ visible, ...action }) => action);
-
-    const secondaryActions = filterVisibleActions([
+    const secondaryActions = [
       {
         content: 'View Published',
         Component: Link,
@@ -100,7 +89,7 @@ export default class EditPage extends Component {
       { content: 'Delete', onClick: this.handleDeleteModalToggle, visible: canModify },
       {
         content: 'Duplicate',
-        Component: Link,
+        component: Link,
         to: `/templates/create/${match.params.id}`,
         visible: canModify
       },
@@ -109,11 +98,11 @@ export default class EditPage extends Component {
         onClick: handleSubmit(this.handlePreview),
         visible: true
       }
-    ]);
+    ];
 
     const breadcrumbAction = {
       content: 'Templates',
-      Component: Link,
+      component: Link,
       to: '/templates'
     };
 
@@ -126,9 +115,9 @@ export default class EditPage extends Component {
   }
 
   render() {
-    const { canModify, loading, formName, subaccountId } = this.props;
+    const { canModify, loading, formName, subaccountId, template } = this.props;
 
-    if (loading) {
+    if (loading || _.isEmpty(template)) {
       return <Loading />;
     }
 

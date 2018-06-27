@@ -2,7 +2,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 
-import { getDraft, getPublished, update, deleteTemplate, publish, getTestData, setTestData } from 'src/actions/templates';
+import { getDraft, update, deleteTemplate, publish, getTestData, setTestData } from 'src/actions/templates';
 import { showAlert } from 'src/actions/globalAlert';
 import { hasGrants } from 'src/helpers/conditions';
 import { selectTemplateById, selectTemplateTestData } from 'src/selectors/templates';
@@ -13,12 +13,12 @@ import EditPage from '../EditPage';
 const FORM_NAME = 'templateEdit';
 
 const mapStateToProps = (state, props) => {
-  const template = selectTemplateById(state, props);
-  const values = template.draft || template.published; // For templates with published but no draft, pull in published values
+  const template = selectTemplateById(state, props).draft;
   const canModify = hasGrants('templates/modify')(state);
 
   return {
-    loading: state.templates.getLoading,
+    loading: state.templates.getDraftLoading,
+    getDraftError: state.templates.getDraftError,
     template,
     subaccountId: selectSubaccountIdFromQuery(state, props),
     hasSubaccounts: hasSubaccounts(state),
@@ -28,7 +28,7 @@ const mapStateToProps = (state, props) => {
     formName: FORM_NAME,
     initialValues: {
       testData: selectTemplateTestData(state),
-      ...values,
+      ...template,
       subaccount: selectSubaccountFromQuery(state, props)
     }
   };
@@ -41,7 +41,6 @@ const formOptions = {
 
 const mapDispatchToProps = {
   getDraft,
-  getPublished,
   getTestData,
   setTestData,
   update,
