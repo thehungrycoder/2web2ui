@@ -91,7 +91,6 @@ export class Support extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  ready: state.accessControlReady,
   authorizedToCallSupport: entitledToPhoneSupport(state),
   authorizedToSubmitSupportTickets: authorizedToSubmitSupportTickets(state),
   currentSupportView: state.support.currentView,
