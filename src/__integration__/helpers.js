@@ -18,49 +18,50 @@ export const login = (store) => store.dispatch({
   }
 });
 
-export const setReady = (store) => store.dispatch({
-  type: 'ACCESS_CONTROL_READY'
-});
+// function changeDownshift({ field, value }) {
+//   const downshift = field.find('Downshift');
+//   if (!downshift.length) {
+//     debugLog(field.html());
+//     throw new Error('No downshift element found in this field');
+//   }
+//   downshift.props().onChange(value);
+// }
 
-function simulateChange({ field, type, value, name }) {
+function toggleCheckbox({ mounted, name }) {
+  const selector = `input[name="${name}"]`;
+  let checkbox = mounted.find(selector);
 
-  if (type === 'downshift') {
-    const downshift = field.find('Downshift');
-    if (!downshift.length) {
-      throw new Error(`No downshift element found for ${name}`);
-    }
-    downshift.props().onChange(value);
-    return;
+  if (checkbox.length !== 1) {
+    checkbox = mounted.find(name);
   }
 
-  let control = field.find('input');
-  if (type === 'select') {
-    control = field.find('select');
+  if (checkbox.length !== 1) {
+    throw new Error(`No checkbox (${name}) found in this field`);
   }
 
-  if (control.length === 0) {
-    debugLog(field.html());
-    throw new Error(`No control found in this field: ${name}`);
+  const props = checkbox.props();
+  checkbox.simulate('change', { target: { checked: !props.checked }});
+}
+
+function selectRadioOption({ mounted, selector, value, index }) {
+  const radios = mounted.find(selector);
+  let control;
+
+  if (value) {
+    const options = radios.map((option) => option);
+    control = options.find((option) => option.props().value === value);
   }
 
-  if (control.length > 1) {
-    const controls = control.map((option) => option);
-    control = controls.find((option) => option.props().value === value);
+  if (!control && typeof index === 'number') {
+    control = radios.at(index);
   }
 
-  if (type === 'radio') {
-    // redux form seems to be watching for currentTarget for radio buttons lol no idea why
-    control.simulate('change', { currentTarget: { checked: true }});
-    return;
+  if (!control || control.length !== 1) {
+    throw new Error(`Single radio not found for this field, instead found ${control.length} for ${value || index}`);
   }
 
-  if (type === 'checkbox') {
-    control.simulate('change', { target: { checked: value }});
-    return;
-  }
-
-  // text inputs and textareas should work here
-  control.simulate('change', { target: { value }});
+  // redux form seems to be watching for currentTarget for radio buttons lol no idea why
+  control.simulate('change', { currentTarget: { checked: true }});
 }
 
 export async function setupForm(tree) {
@@ -76,35 +77,16 @@ export async function setupForm(tree) {
     </Provider>
   );
 
-  const change = ({ type, name, value }) => {
-    const field = mounted.find(`Field[name="${name}"]`);
-    if (!field || field.length === 0) {
-      throw new Error(`No field found for ${name}, value: ${value}`);
+  function fill(selector, value) {
+    const control = mounted.find(selector);
+    if (control.length !== 1) {
+      debugLog(mounted.html());
+      throw new Error('No control found in this field');
     }
-
-    simulateChange({ field, type, value, name });
+    control.simulate('change', { target: { value }});
+    control.simulate('change', value); // for downshift, etc.
     mounted.update();
-  };
-
-  const toggleCheckbox = (name) => {
-    let selector = `input[name="${name}"]`;
-    if (typeof name === 'object') {
-      const attribute = Object.keys(name)[0];
-      selector = `input[${attribute}="${name[attribute]}"]`;
-    }
-    const checkbox = mounted.find(selector);
-
-    if (checkbox.length !== 1) {
-      throw new Error(`${selector} not found`);
-    }
-
-    const props = checkbox.props();
-    if (props.type !== 'checkbox') {
-      throw new Error(`${name} input is not a checkbox, instead found ${checkbox.props().type}`);
-    }
-    const currentlyChecked = props.checked;
-    checkbox.simulate('change', { target: { checked: !currentlyChecked }});
-  };
+  }
 
   await asyncFlush();
   mounted.update();
@@ -113,19 +95,16 @@ export async function setupForm(tree) {
     mounted,
     find: mounted.find.bind(mounted),
     store,
-    change,
-    toggleCheckbox,
-    asyncFlush,
-    fill: (fields) => {
-      Object.keys(fields).forEach((name) => {
-        if (typeof fields[name] === 'object') {
-          change({ ...fields[name], name });
-        } else {
-          change({ name, value: fields[name] });
-        }
-      });
+    fill,
+    toggleCheckbox: (name) => {
+      toggleCheckbox({ mounted, name });
+      mounted.update();
     },
-    fillInOrder: (fields) => fields.forEach(change),
+    selectRadioOption: (options) => {
+      selectRadioOption({ mounted, ...options });
+      mounted.update();
+    },
+    asyncFlush,
     submit: async () => {
       mounted.find('form').simulate('submit');
       return asyncFlush();
