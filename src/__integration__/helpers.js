@@ -17,9 +17,14 @@ export const login = (store) => store.dispatch({
   }
 });
 
+export const setReady = (store) => store.dispatch({
+  type: 'ACCESS_CONTROL_READY'
+});
+
 export async function setupForm(tree) {
   const store = configureStore();
   login(store);
+  setReady(store);
 
   const mounted = mount(
     <Provider store={store}>

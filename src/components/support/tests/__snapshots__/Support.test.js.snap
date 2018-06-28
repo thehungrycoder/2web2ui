@@ -1,190 +1,170 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Support renders search panel by default 1`] = `
-<Connect(AccessControl)
-  condition={[Function]}
+<Modal
+  onClose={[MockFunction]}
+  open={true}
+  showCloseButton={true}
 >
-  <Modal
-    onClose={[MockFunction]}
-    open={true}
-    showCloseButton={true}
+  <Tabs
+    color="orange"
+    connectBelow={true}
+    selected={0}
+    tabs={
+      Array [
+        Object {
+          "content": "Search Help",
+          "onClick": [Function],
+        },
+        Object {
+          "content": "Submit A Ticket",
+          "onClick": [Function],
+        },
+        Object {
+          "content": "Contact Us",
+          "onClick": [Function],
+        },
+      ]
+    }
+  />
+  <Panel
+    className="Support"
   >
-    <Tabs
-      color="orange"
-      connectBelow={true}
-      selected={0}
-      tabs={
-        Array [
-          Object {
-            "content": "Search Help",
-            "onClick": [Function],
-          },
-          Object {
-            "content": "Submit A Ticket",
-            "onClick": [Function],
-          },
-          Object {
-            "content": "Contact Us",
-            "onClick": [Function],
-          },
-        ]
-      }
-    />
-    <Panel
-      className="Support"
-    >
-      <SearchPanel />
-    </Panel>
-  </Modal>
-</Connect(AccessControl)>
+    <SearchPanel />
+  </Panel>
+</Modal>
 `;
 
 exports[`Support renders search panel with current page search term 1`] = `
-<Connect(AccessControl)
-  condition={[Function]}
+<Modal
+  onClose={[MockFunction]}
+  open={true}
+  showCloseButton={true}
 >
-  <Modal
-    onClose={[MockFunction]}
-    open={true}
-    showCloseButton={true}
+  <Tabs
+    color="orange"
+    connectBelow={true}
+    selected={0}
+    tabs={
+      Array [
+        Object {
+          "content": "Search Help",
+          "onClick": [Function],
+        },
+        Object {
+          "content": "Submit A Ticket",
+          "onClick": [Function],
+        },
+        Object {
+          "content": "Contact Us",
+          "onClick": [Function],
+        },
+      ]
+    }
+  />
+  <Panel
+    className="Support"
   >
-    <Tabs
-      color="orange"
-      connectBelow={true}
-      selected={0}
-      tabs={
-        Array [
-          Object {
-            "content": "Search Help",
-            "onClick": [Function],
-          },
-          Object {
-            "content": "Submit A Ticket",
-            "onClick": [Function],
-          },
-          Object {
-            "content": "Contact Us",
-            "onClick": [Function],
-          },
-        ]
-      }
+    <SearchPanel
+      defaultSearchText="exampleKeyword"
     />
-    <Panel
-      className="Support"
-    >
-      <SearchPanel
-        defaultSearchText="exampleKeyword"
-      />
-    </Panel>
-  </Modal>
-</Connect(AccessControl)>
+  </Panel>
+</Modal>
 `;
 
 exports[`Support renders search panel without tabs 1`] = `
-<Connect(AccessControl)
-  condition={[Function]}
+<Modal
+  onClose={[MockFunction]}
+  open={true}
+  showCloseButton={true}
 >
-  <Modal
-    onClose={[MockFunction]}
-    open={true}
-    showCloseButton={true}
+  <Panel
+    className="Support"
   >
-    <Panel
-      className="Support"
-    >
-      <SearchPanel />
-    </Panel>
-  </Modal>
-</Connect(AccessControl)>
+    <SearchPanel />
+  </Panel>
+</Modal>
 `;
 
 exports[`Support renders support contact panel 1`] = `
-<Connect(AccessControl)
-  condition={[Function]}
+<Modal
+  onClose={[MockFunction]}
+  open={true}
+  showCloseButton={true}
 >
-  <Modal
-    onClose={[MockFunction]}
-    open={true}
-    showCloseButton={true}
+  <Tabs
+    color="orange"
+    connectBelow={true}
+    selected={2}
+    tabs={
+      Array [
+        Object {
+          "content": "Search Help",
+          "onClick": [Function],
+        },
+        Object {
+          "content": "Submit A Ticket",
+          "onClick": [Function],
+        },
+        Object {
+          "content": "Contact Us",
+          "onClick": [Function],
+        },
+      ]
+    }
+  />
+  <Panel
+    className="Support"
   >
-    <Tabs
-      color="orange"
-      connectBelow={true}
-      selected={2}
-      tabs={
-        Array [
-          Object {
-            "content": "Search Help",
-            "onClick": [Function],
-          },
-          Object {
-            "content": "Submit A Ticket",
-            "onClick": [Function],
-          },
-          Object {
-            "content": "Contact Us",
-            "onClick": [Function],
-          },
-        ]
-      }
-    />
-    <Panel
-      className="Support"
+    <div
+      className="SupportContainer"
     >
-      <div
-        className="SupportContainer"
+      <h6>
+        We are available Monday through Friday, 9am to 8pm Eastern time.
+      </h6>
+      <UnstyledLink
+        to="tel:1-415-751-0928"
       >
-        <h6>
-          We are available Monday through Friday, 9am to 8pm Eastern time.
-        </h6>
-        <UnstyledLink
-          to="tel:1-415-751-0928"
-        >
-          +1 (415) 751-0928
-        </UnstyledLink>
-      </div>
-    </Panel>
-  </Modal>
-</Connect(AccessControl)>
+        +1 (415) 751-0928
+      </UnstyledLink>
+    </div>
+  </Panel>
+</Modal>
 `;
 
 exports[`Support renders support form 1`] = `
-<Connect(AccessControl)
-  condition={[Function]}
+<Modal
+  onClose={[MockFunction]}
+  open={true}
+  showCloseButton={true}
 >
-  <Modal
-    onClose={[MockFunction]}
-    open={true}
-    showCloseButton={true}
+  <Tabs
+    color="orange"
+    connectBelow={true}
+    selected={1}
+    tabs={
+      Array [
+        Object {
+          "content": "Search Help",
+          "onClick": [Function],
+        },
+        Object {
+          "content": "Submit A Ticket",
+          "onClick": [Function],
+        },
+        Object {
+          "content": "Contact Us",
+          "onClick": [Function],
+        },
+      ]
+    }
+  />
+  <Panel
+    className="Support"
   >
-    <Tabs
-      color="orange"
-      connectBelow={true}
-      selected={1}
-      tabs={
-        Array [
-          Object {
-            "content": "Search Help",
-            "onClick": [Function],
-          },
-          Object {
-            "content": "Submit A Ticket",
-            "onClick": [Function],
-          },
-          Object {
-            "content": "Contact Us",
-            "onClick": [Function],
-          },
-        ]
-      }
+    <Connect(ReduxForm)
+      onClose={[MockFunction]}
     />
-    <Panel
-      className="Support"
-    >
-      <Connect(ReduxForm)
-        onClose={[MockFunction]}
-      />
-    </Panel>
-  </Modal>
-</Connect(AccessControl)>
+  </Panel>
+</Modal>
 `;

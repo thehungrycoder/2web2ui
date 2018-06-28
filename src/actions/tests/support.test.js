@@ -1,13 +1,17 @@
 import * as support from '../support';
 import * as formActions from 'redux-form';
+import { selectSupportIssues } from 'src/selectors/support';
 
 jest.mock('../helpers/sparkpostApiRequest', () => jest.fn((a) => a));
+jest.mock('src/selectors/support');
 
 describe('Action Creator: Support', () => {
   let dispatchMock;
+  let getStateMock;
 
   beforeEach(() => {
     dispatchMock = jest.fn((a) => a);
+    getStateMock = jest.fn();
     formActions.change = jest.fn((a) => a);
   });
 
@@ -28,20 +32,26 @@ describe('Action Creator: Support', () => {
 
   describe('openSupportTicketForm', () => {
     it('should open support panel', () => {
-      support.openSupportTicketForm()(dispatchMock);
+      support.openSupportTicketForm()(dispatchMock, getStateMock);
       expect(dispatchMock).toMatchSnapshot();
     });
 
     it('should open support panel and set support ticket message', () => {
-      support.openSupportTicketForm({ message: 'test' })(dispatchMock);
+      support.openSupportTicketForm({ message: 'test' })(dispatchMock, getStateMock);
       expect(formActions.change).toHaveBeenCalledWith('supportForm', 'message', 'test');
       expect(formActions.change).toHaveBeenCalledTimes(1);
     });
 
-    it('should open support panel ane set support ticket issue', () => {
-      support.openSupportTicketForm({ issueId: 'technical_errors' })(dispatchMock);
+    it('should open support panel and set support ticket issue', () => {
+      const stateMock = {};
+      getStateMock.mockImplementation(() => stateMock);
+      selectSupportIssues.mockImplementation(() => [
+        { id: 'technical_errors' }
+      ]);
+      support.openSupportTicketForm({ issueId: 'technical_errors' })(dispatchMock, getStateMock);
       expect(formActions.change).toHaveBeenCalledWith('supportForm', 'issueId', 'technical_errors');
       expect(formActions.change).toHaveBeenCalledTimes(1);
+      expect(selectSupportIssues).toHaveBeenCalledWith(stateMock);
     });
   });
 

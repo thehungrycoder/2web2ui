@@ -67,27 +67,25 @@ export class Support extends Component {
     }
 
     return (
-      <AccessControl condition={() => true}>
-        <Modal open={showSupportPanel} onClose={closeSupportPanel} showCloseButton={true}>
-          {visibleTabs.length > 1 && (
-            <Tabs
-              connectBelow={true}
-              selected={visibleTabs.findIndex((tab) => tab.view === currentSupportView)}
-              tabs={visibleTabs.map(({ content, onClick }) => ({ content, onClick }))}
-            />
+      <Modal open={showSupportPanel} onClose={closeSupportPanel} showCloseButton={true}>
+        {visibleTabs.length > 1 && (
+          <Tabs
+            connectBelow={true}
+            selected={visibleTabs.findIndex((tab) => tab.view === currentSupportView)}
+            tabs={visibleTabs.map(({ content, onClick }) => ({ content, onClick }))}
+          />
+        )}
+        <Panel className={styles.Support}>
+          {currentSupportView === 'docs' && <SearchPanel defaultSearchText={supportDocSearch} />}
+          {currentSupportView === 'ticket' && <SupportForm onClose={closeSupportPanel} />}
+          {currentSupportView === 'contact' && (
+            <div className={styles.SupportContainer}>
+              <h6>We are available Monday through Friday, 9am to 8pm Eastern time.</h6>
+              <UnstyledLink to='tel:1-415-751-0928'>+1 (415) 751-0928</UnstyledLink>
+            </div>
           )}
-          <Panel className={styles.Support}>
-            {currentSupportView === 'docs' && <SearchPanel defaultSearchText={supportDocSearch} />}
-            {currentSupportView === 'ticket' && <SupportForm onClose={closeSupportPanel} />}
-            {currentSupportView === 'contact' && (
-              <div className={styles.SupportContainer}>
-                <h6>We are available Monday through Friday, 9am to 8pm Eastern time.</h6>
-                <UnstyledLink to='tel:1-415-751-0928'>+1 (415) 751-0928</UnstyledLink>
-              </div>
-            )}
-          </Panel>
-        </Modal>
-      </AccessControl>
+        </Panel>
+      </Modal>
     );
   }
 }
@@ -100,4 +98,8 @@ const mapStateToProps = (state) => ({
   showSupportPanel: state.support.showPanel
 });
 
-export default withRouter(connect(mapStateToProps, supportActions)(Support));
+export const ConnectedSupport = withRouter(connect(mapStateToProps, supportActions)(Support));
+
+export default function SupportWithAccessControlLoaded(props) {
+  return <AccessControl><ConnectedSupport {...props} /></AccessControl>;
+}
