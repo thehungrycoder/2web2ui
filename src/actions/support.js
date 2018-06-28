@@ -2,7 +2,7 @@ import _ from 'lodash';
 import sparkpostApiRequest from './helpers/sparkpostApiRequest';
 import { change } from 'redux-form';
 import { formName } from 'src/components/support/components/SupportForm';
-import supportIssues from 'src/config/supportIssues';
+import { selectSupportIssues } from 'src/selectors/support';
 
 export function closeSupportPanel() {
   return {
@@ -57,9 +57,13 @@ export function createTicket({ issueType, ...data }) {
 
 // Opens support ticket form and fills values if provided
 export function openSupportTicketForm({ issueId, message } = {}) {
-  const issue = _.find(supportIssues, { id: issueId });
 
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    // this action assumes access control is ready when called, because
+    // selectSupportIssues uses AC state to decide on what issues are visible
+    const visibleIssues = selectSupportIssues(getState());
+    const issue = _.find(visibleIssues, { id: issueId });
+
     // the support panel must be open before you can hydrate it
     dispatch(openSupportPanel({ view: 'ticket' }));
 
