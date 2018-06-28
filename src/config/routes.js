@@ -235,6 +235,13 @@ const routes = [
     supportDocSearch: 'event'
   },
   {
+    path: '/reports/message-events/event/:eventId',
+    component: reports.EventPage,
+    layout: App,
+    title: 'Message History',
+    supportDocSearch: 'event'
+  },
+  {
     path: '/account/security',
     redirect: '/account/profile'
   },

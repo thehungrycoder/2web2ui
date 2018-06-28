@@ -19,7 +19,7 @@ const breadcrumbAction = {
   to: '/reports/message-events'
 };
 
-export class EventPage extends Component {
+export class MessagePage extends Component {
   static defaultProps = {
     messageHistory: []
   }
@@ -96,4 +96,4 @@ const mapStateToProps = (state, props) => ({
   selectedEventId: selectInitialEventId(state, props)
 });
 
-export default connect(mapStateToProps, { getMessageHistory, getDocumentation })(EventPage);
+export default connect(mapStateToProps, { getMessageHistory, getDocumentation })(MessagePage);
