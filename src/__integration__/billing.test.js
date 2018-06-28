@@ -10,15 +10,16 @@ test('Update Payment Form', async () => {
   const form = await setupForm(<UpdatePaymentForm />);
 
   form.fill([
-    '4111111111111111',
-    'Person Face',
-    '10 / 2022',
-    123,
-    'Firsty',
-    'Lasty',
-    'US',
-    'MD',
-    '12345'
+    { name: 'card.number', value: '4111111111111111' },
+    { name: 'card.name', value: 'Person Face' },
+    { name: 'card.expCombined', value: '10 / 2022' },
+    { name: 'card.securityCode', value: 123 },
+
+    { name: 'billingAddress.firstName', value: 'Firsty' },
+    { name: 'billingAddress.lastName', value: 'Lasty' },
+    { type: 'select', name: 'billingAddress.country', value: 'US' },
+    { type: 'select', name: 'billingAddress.state', value: 'MD' },
+    { name: 'billingAddress.zip', value: '12345' }
   ]);
 
   axiosMock.mockClear();
@@ -30,12 +31,12 @@ test('Update Contact Form', async () => {
   const form = await setupForm(<UpdateContactForm onCancel={jest.fn()} />);
 
   form.fill([
-    'Firsty',
-    'Lasty',
-    'something@email.test',
-    'US',
-    'MD',
-    '12345'
+    { name: 'billingContact.firstName', value: 'Firsty' },
+    { name: 'billingContact.lastName', value: 'Lasty' },
+    { name: 'billingContact.email', value: 'something@email.test' },
+    { type: 'select', name: 'billingContact.country', value: 'US' },
+    { type: 'select', name: 'billingContact.state', value: 'MD' },
+    { name: 'billingContact.zip', value: '12345' }
   ]);
 
   axiosMock.mockClear();
@@ -54,19 +55,18 @@ test('Change Plan Form: Update My Credit Card and Plan', async () => {
     .simulate('click');
 
   form.fill([
-    newPlan,
-    '4111111111111111',
-    'Person Face',
-    '10 / 2022',
-    123,
-    'Firsty',
-    'Lasty',
-    'US',
-    'MD',
-    '12345'
-  ]);
+    { type: 'typeahead', name: 'planpicker', value: newPlan },
+    { name: 'card.number', value: '4111111111111111' },
+    { name: 'card.name', value: 'Person Face' },
+    { name: 'card.expCombined', value: '10 / 2022' },
+    { name: 'card.securityCode', value: 123 },
 
-  form.find('Downshift').props().onChange(newPlan);
+    { name: 'billingAddress.firstName', value: 'Firsty' },
+    { name: 'billingAddress.lastName', value: 'Lasty' },
+    { type: 'select', name: 'billingAddress.country', value: 'US' },
+    { type: 'select', name: 'billingAddress.state', value: 'MD' },
+    { name: 'billingAddress.zip', value: '12345' }
+  ]);
 
   axiosMock.mockClear();
   await form.submit();
@@ -79,9 +79,7 @@ test('Change Plan Form: Update Plan Only', async () => {
   // update the plan picker input (Downshift-specific)
   const newPlan = form.store.getState().billing.plans[2];
 
-  form.fill([
-    newPlan
-  ]);
+  form.fill({ type: 'typeahead', name: 'planpicker', value: newPlan });
 
   axiosMock.mockClear();
   await form.submit();
@@ -111,16 +109,17 @@ test('Change Plan Form: Upgrade for the First Time', async () => {
   form.mounted.update();
 
   form.fill([
-    newPlan,
-    '4111111111111111',
-    'Person Face',
-    '10 / 2022',
-    123,
-    'Firsty',
-    'Lasty',
-    'US',
-    'MD',
-    '12345'
+    { type: 'typeahead', name: 'planpicker', value: newPlan },
+    { name: 'card.number', value: '4111111111111111' },
+    { name: 'card.name', value: 'Person Face' },
+    { name: 'card.expCombined', value: '10 / 2022' },
+    { name: 'card.securityCode', value: 123 },
+
+    { name: 'billingAddress.firstName', value: 'Firsty' },
+    { name: 'billingAddress.lastName', value: 'Lasty' },
+    { type: 'select', name: 'billingAddress.country', value: 'US' },
+    { type: 'select', name: 'billingAddress.state', value: 'MD' },
+    { name: 'billingAddress.zip', value: '12345' }
   ]);
 
   axiosMock.mockClear();

@@ -7,10 +7,10 @@ const axiosMock = axios.create();
 test('Create Webhook: Defaults', async () => {
   const form = await setupForm(<WebhookCreatePage />);
 
-  form.fill({
-    name: 'Webhook Test Name',
-    target: 'https://target.webhooks.com/status/200'
-  });
+  form.fill([
+    { name: 'name', value: 'Webhook Test Name' },
+    { name: 'target', value: 'https://target.webhooks.com/status/200' }
+  ]);
 
   axiosMock.mockClear();
   await form.submit();
@@ -20,89 +20,108 @@ test('Create Webhook: Defaults', async () => {
 test('Create Webhook: Selected Events', async () => {
   const form = await setupForm(<WebhookCreatePage />);
 
-  form.fill({
-    name: 'Webhook Test Name',
-    target: 'https://target.webhooks.com/status/200',
-    eventsRadio: {
-      type: 'radio',
-      value: 'select' // switches eventsRadio to "select" to reveal top-level event groups
-    }
-  });
-
-  form.toggleCheckbox({ id: 'event-group__message_event' }); // check the message events group, which selects all in that group by default
-  form.toggleCheckbox('message_event[1]'); // uncheck delivery
-  form.toggleCheckbox('message_event[2]'); // uncheck injection
-  form.toggleCheckbox('message_event[3]'); // uncheck sms_status
-  form.toggleCheckbox('message_event[5]'); // uncheck out_of_band
-  form.toggleCheckbox('message_event[6]'); // uncheck policy_rejection
-  form.toggleCheckbox('message_event[7]'); // uncheck delay
-
-  // form.find('Field').at(3).find('input').map((o) => console.log(o.props().name, o.props().value))
-
-  // form.fill([
-  //   { name: 'name', value: 'Webhook Test Name' },
-  //   {
-  //     name: 'eventsRadio',
-  //     type: 'radio',
-  //     value: 'select'
-  //   },
-  //   {
-  //     name: 'message_events[0]',
-  //     type: 'checkbox',
-  //     checked: true
-  //   }
-  // })
-
-  // Uncheck all the events in the above group except "bounce" and "spam_complaint"
-  // const eventCheckboxes = form.mounted.find('Field').at(3).find('input[type="checkbox"]');
-  // eventCheckboxes.forEach((checkbox) => {
-  //   const { value } = checkbox.props();
-  //   if (!value) return; // top-level checkbox is still in this group, don't touch
-  //   if (!['bounce', 'spam_complaint'].includes(value)) {
-  //     checkbox.simulate('change', { target: { checked: false }});
-  //   }
-  // });
+  form.fill([
+    { name: 'name', value: 'Webhook Test Name' },
+    { name: 'target', value: 'https://target.webhooks.com/status/200' },
+    { type: 'radio', name: 'eventsRadio', value: 'select' },
+    { type: 'checkbox', selector: 'input#event-group__message_event' },
+    { type: 'checkbox', name: 'message_event[1]' }, // uncheck delivery
+    { type: 'checkbox', name: 'message_event[2]' }, // uncheck injection
+    { type: 'checkbox', name: 'message_event[3]' }, // uncheck sms_status
+    { type: 'checkbox', name: 'message_event[5]' }, // uncheck out_of_band
+    { type: 'checkbox', name: 'message_event[6]' }, // uncheck policy_rejection
+    { type: 'checkbox', name: 'message_event[7]' } // uncheck delay
+  ]);
 
   axiosMock.mockClear();
   await form.submit();
   expect(axiosMock.mock.calls).toMatchSnapshot();
 });
 
-// test('Create Webhook: With Authentication', async () => {
-//   const form = await setupForm(<WebhookCreatePage />);
+test('Create Webhook: With Basic Auth', async () => {
+  const form = await setupForm(<WebhookCreatePage />);
 
-//   form.fill([
-//     'Webhook Test Name',
-//     'https://target.webhooks.com/status/200'
-//   ]);
+  form.fill([
+    { name: 'name', value: 'Webhook With Basic Auth' },
+    { name: 'target', value: 'https://target.webhooks.com/status/200' },
+    { type: 'select', name: 'auth', value: 'basic' },
+    { name: 'basicUser', value: 'my-basic-auth-username' },
+    { name: 'basicPass', value: 'my-basic-auth-password' }
+  ]);
 
-//   axiosMock.mockClear();
-//   await form.submit();
-//   expect(axiosMock.mock.calls).toMatchSnapshot();
-// });
+  axiosMock.mockClear();
+  await form.submit();
+  expect(axiosMock.mock.calls).toMatchSnapshot();
+});
 
-// test('Create Webhook: Assigned to Master Account', async () => {
-//   const form = await setupForm(<WebhookCreatePage />);
+test('Create Webhook: With OAuth2', async () => {
+  const form = await setupForm(<WebhookCreatePage />);
 
-//   form.fill([
-//     'Webhook Test Name',
-//     'https://target.webhooks.com/status/200'
-//   ]);
+  form.fill([
+    { name: 'name', value: 'Webhook With OAuth2' },
+    { name: 'target', value: 'https://target.webhooks.com/status/200' },
+    { type: 'select', name: 'auth', value: 'oauth2' },
+    { name: 'clientId', value: 'my-client-id' },
+    { name: 'clientSecret', value: 'my-client-secret' },
+    { name: 'tokenURL', value: 'https://oauth2.webhooks.com/token' }
+  ]);
 
-//   axiosMock.mockClear();
-//   await form.submit();
-//   expect(axiosMock.mock.calls).toMatchSnapshot();
-// });
+  axiosMock.mockClear();
+  await form.submit();
+  expect(axiosMock.mock.calls).toMatchSnapshot();
+});
 
-// test('Create Webhook: Assigned to a Subaccount', async () => {
-//   const form = await setupForm(<WebhookCreatePage />);
+test('Create Webhook: Assigned to Master Account', async () => {
+  const form = await setupForm(<WebhookCreatePage />);
 
-//   form.fill([
-//     'Webhook Test Name',
-//     'https://target.webhooks.com/status/200'
-//   ]);
+  // Turn on subaccounts to allow subaccount options to appear
+  form.store.dispatch({
+    type: 'CREATE_SUBACCOUNT_SUCCESS'
+  });
 
-//   axiosMock.mockClear();
-//   await form.submit();
-//   expect(axiosMock.mock.calls).toMatchSnapshot();
-// });
+  form.asyncFlush();
+
+  form.fill([
+    { name: 'name', value: 'Assigned to Master' },
+    { name: 'target', value: 'https://target.webhooks.com/status/200' },
+    { type: 'radio', name: 'assignTo', value: 'master' }
+  ]);
+
+  axiosMock.mockClear();
+  await form.submit();
+  expect(axiosMock.mock.calls).toMatchSnapshot();
+});
+
+test('Create Webhook: Assigned to a Subaccount', async () => {
+  const form = await setupForm(<WebhookCreatePage />);
+
+  // Turn on subaccounts to allow subaccount options to appear
+  form.store.dispatch({
+    type: 'CREATE_SUBACCOUNT_SUCCESS'
+  });
+
+  // Load one subaccount
+  const subaccount = {
+    customer_id: 101,
+    id: 577,
+    name: 'ada',
+    compliance_status: 'active',
+    status: 'active'
+  };
+
+  form.store.dispatch({
+    type: 'LIST_SUBACCOUNTS_SUCCESS',
+    payload: [subaccount]
+  });
+
+  form.fill([
+    { name: 'name', value: 'Assigned to Subaccount' },
+    { name: 'target', value: 'https://target.webhooks.com/status/200' },
+    { type: 'radio', name: 'assignTo', value: 'subaccount' },
+    { type: 'typeahead', name: 'subaccount', value: subaccount }
+  ]);
+
+  axiosMock.mockClear();
+  await form.submit();
+  expect(axiosMock.mock.calls).toMatchSnapshot();
+});
