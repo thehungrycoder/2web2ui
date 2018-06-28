@@ -1,5 +1,93 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Create Webhook: Assigned to Master Account 1`] = `
+Array [
+  Array [
+    Object {
+      "data": Object {
+        "events": Array [
+          "bounce",
+          "delivery",
+          "injection",
+          "sms_status",
+          "spam_complaint",
+          "out_of_band",
+          "policy_rejection",
+          "delay",
+          "click",
+          "open",
+          "initial_open",
+          "generation_failure",
+          "generation_rejection",
+          "list_unsubscribe",
+          "link_unsubscribe",
+          "relay_injection",
+          "relay_rejection",
+          "relay_delivery",
+          "relay_tempfail",
+          "relay_permfail",
+          "ab_test_completed",
+        ],
+        "name": "Assigned to Master",
+        "target": "https://target.webhooks.com/status/200",
+      },
+      "headers": Object {
+        "Authorization": "very-real-access-token",
+        "x-msys-subaccount": 0,
+      },
+      "method": "post",
+      "params": undefined,
+      "responseType": "json",
+      "url": "/webhooks",
+    },
+  ],
+]
+`;
+
+exports[`Create Webhook: Assigned to a Subaccount 1`] = `
+Array [
+  Array [
+    Object {
+      "data": Object {
+        "events": Array [
+          "bounce",
+          "delivery",
+          "injection",
+          "sms_status",
+          "spam_complaint",
+          "out_of_band",
+          "policy_rejection",
+          "delay",
+          "click",
+          "open",
+          "initial_open",
+          "generation_failure",
+          "generation_rejection",
+          "list_unsubscribe",
+          "link_unsubscribe",
+          "relay_injection",
+          "relay_rejection",
+          "relay_delivery",
+          "relay_tempfail",
+          "relay_permfail",
+          "ab_test_completed",
+        ],
+        "name": "Assigned to Subaccount",
+        "target": "https://target.webhooks.com/status/200",
+      },
+      "headers": Object {
+        "Authorization": "very-real-access-token",
+        "x-msys-subaccount": 577,
+      },
+      "method": "post",
+      "params": undefined,
+      "responseType": "json",
+      "url": "/webhooks",
+    },
+  ],
+]
+`;
+
 exports[`Create Webhook: Defaults 1`] = `
 Array [
   Array [
@@ -53,6 +141,105 @@ Array [
           "spam_complaint",
         ],
         "name": "Webhook Test Name",
+        "target": "https://target.webhooks.com/status/200",
+      },
+      "headers": Object {
+        "Authorization": "very-real-access-token",
+      },
+      "method": "post",
+      "params": undefined,
+      "responseType": "json",
+      "url": "/webhooks",
+    },
+  ],
+]
+`;
+
+exports[`Create Webhook: With Basic Auth 1`] = `
+Array [
+  Array [
+    Object {
+      "data": Object {
+        "auth_credentials": Object {
+          "password": "my-basic-auth-password",
+          "username": "my-basic-auth-username",
+        },
+        "auth_type": "basic",
+        "events": Array [
+          "bounce",
+          "delivery",
+          "injection",
+          "sms_status",
+          "spam_complaint",
+          "out_of_band",
+          "policy_rejection",
+          "delay",
+          "click",
+          "open",
+          "initial_open",
+          "generation_failure",
+          "generation_rejection",
+          "list_unsubscribe",
+          "link_unsubscribe",
+          "relay_injection",
+          "relay_rejection",
+          "relay_delivery",
+          "relay_tempfail",
+          "relay_permfail",
+          "ab_test_completed",
+        ],
+        "name": "Webhook With Basic Auth",
+        "target": "https://target.webhooks.com/status/200",
+      },
+      "headers": Object {
+        "Authorization": "very-real-access-token",
+      },
+      "method": "post",
+      "params": undefined,
+      "responseType": "json",
+      "url": "/webhooks",
+    },
+  ],
+]
+`;
+
+exports[`Create Webhook: With OAuth2 1`] = `
+Array [
+  Array [
+    Object {
+      "data": Object {
+        "auth_request_details": Object {
+          "body": Object {
+            "client_id": "my-client-id",
+            "client_secret": "my-client-secret",
+          },
+          "url": "https://oauth2.webhooks.com/token",
+        },
+        "auth_type": "oauth2",
+        "events": Array [
+          "bounce",
+          "delivery",
+          "injection",
+          "sms_status",
+          "spam_complaint",
+          "out_of_band",
+          "policy_rejection",
+          "delay",
+          "click",
+          "open",
+          "initial_open",
+          "generation_failure",
+          "generation_rejection",
+          "list_unsubscribe",
+          "link_unsubscribe",
+          "relay_injection",
+          "relay_rejection",
+          "relay_delivery",
+          "relay_tempfail",
+          "relay_permfail",
+          "ab_test_completed",
+        ],
+        "name": "Webhook With OAuth2",
         "target": "https://target.webhooks.com/status/200",
       },
       "headers": Object {
