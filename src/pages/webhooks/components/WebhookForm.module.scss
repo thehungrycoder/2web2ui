@@ -1,0 +1,22 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.CheckboxGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+
+  fieldset {
+    white-space: normal;
+  }
+
+  @media screen and (min-width: breakpoint(medium)) {
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 80px;
+    grid-row-gap: 15px;
+  }
+
+  @media screen and (min-width: breakpoint(larger)) {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-column-gap: 50px;
+    grid-row-gap: 25px;
+  }
+}

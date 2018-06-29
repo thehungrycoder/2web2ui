@@ -30,7 +30,7 @@ function getControl({
 }
 
 function toggleCheckbox(checkbox) {
-  checkbox.simulate('change', { target: { checked: !checkbox.props().checked }});
+  checkbox.simulate('change', { currentTarget: { checked: !checkbox.props().checked }});
 }
 
 function selectRadioOption({ radios, value, index }) {

@@ -24,13 +24,8 @@ test('Create Webhook: Selected Events', async () => {
     { name: 'name', value: 'Webhook Test Name' },
     { name: 'target', value: 'https://target.webhooks.com/status/200' },
     { type: 'radio', name: 'eventsRadio', value: 'select' },
-    { type: 'checkbox', selector: 'input#event-group__message_event' },
-    { type: 'checkbox', name: 'message_event[1]' }, // uncheck delivery
-    { type: 'checkbox', name: 'message_event[2]' }, // uncheck injection
-    { type: 'checkbox', name: 'message_event[3]' }, // uncheck sms_status
-    { type: 'checkbox', name: 'message_event[5]' }, // uncheck out_of_band
-    { type: 'checkbox', name: 'message_event[6]' }, // uncheck policy_rejection
-    { type: 'checkbox', name: 'message_event[7]' } // uncheck delay
+    { type: 'checkbox', name: 'events.bounce' },
+    { type: 'checkbox', name: 'events.spam_complaint' }
   ]);
 
   axiosMock.mockClear();

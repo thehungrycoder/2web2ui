@@ -1,55 +1,80 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { reduxForm, formValueSelector } from 'redux-form';
-import { selectInitialSubaccountValue } from 'src/selectors/webhooks';
+import { reduxForm, formValueSelector, Field } from 'redux-form';
+import { selectInitialSubaccountValue, getSelectedEvents } from 'src/selectors/webhooks';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
 import { withRouter } from 'react-router-dom';
 import { Button, Panel } from '@sparkpost/matchbox';
+import CheckboxWrapper from 'src/components/reduxFormWrappers/CheckboxWrapper';
+import { selectEventListing } from 'src/selectors/eventListing';
 import { NameField, TargetField, EventsRadioGroup, AuthDropDown, BasicAuthFields, OAuth2Fields, ActiveField } from './Fields';
 import SubaccountSection from './SubaccountSection';
 import formatEditValues from '../helpers/formatEditValues';
-import buildCheckBoxes from '../helpers/buildCheckBoxes';
+import styles from './WebhookForm.module.scss';
 
 const formName = 'webhookForm';
 
+function EventCheckBoxes({ show, events }) {
+  if (!show) {
+    return null;
+  }
+  return (
+    <div className={styles.CheckboxGrid}>
+      {events.map(({ key, display_name, description, name = `events.${key}` }) => (
+        <Field
+          key={key}
+          label={display_name}
+          type="checkbox"
+          name={name}
+          helpText={description}
+          component={CheckboxWrapper}
+        />
+      ))}
+    </div>
+  );
+}
+
+function AuthFields({ authType }) {
+  if (authType === 'basic') {
+    return <BasicAuthFields />;
+  }
+  if (authType === 'oauth2') {
+    return <OAuth2Fields />;
+  }
+  return null;
+}
+
 export const WebhookForm = ({
   handleSubmit,
-  submitting,
+  submitText,
   auth,
-  eventsRadio,
-  eventsTree,
-  pristine,
+  eventListing,
+  showEvents,
+  disabled,
+  initialValues,
   newWebhook, /* passed from CreatePage */
   hasSubaccounts
-}) => {
-  const submitText = submitting ? 'Submitting...' : (newWebhook ? 'Create Webhook' : 'Update Webhook');
-  const AuthFields = auth && auth === 'basic' ? BasicAuthFields : OAuth2Fields;
-  const showEvents = eventsRadio === 'select';
-  const eventBoxes = buildCheckBoxes(eventsTree);
-  const disabled = submitting || pristine;
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <Panel.Section>
-        <NameField />
-        <TargetField />
-      </Panel.Section>
-      {hasSubaccounts && <Panel.Section><SubaccountSection newWebhook={newWebhook} formName={formName} /></Panel.Section>}
-      <Panel.Section>
-        <EventsRadioGroup />
-        {showEvents && eventBoxes}
-      </Panel.Section>
-      <Panel.Section>
-        <AuthDropDown />
-        {auth && <AuthFields />}
-      </Panel.Section>
-      {!newWebhook && <Panel.Section><ActiveField /></Panel.Section>}
-      <Panel.Section>
-        <Button submit primary disabled={disabled}>{submitText}</Button>
-      </Panel.Section>
-    </form>
-  );
-};
+}) => (
+  <form onSubmit={handleSubmit}>
+    <Panel.Section>
+      <NameField />
+      <TargetField />
+    </Panel.Section>
+    {hasSubaccounts ? <Panel.Section><SubaccountSection newWebhook={newWebhook} formName={formName} /></Panel.Section> : null}
+    <Panel.Section>
+      <EventsRadioGroup />
+      <EventCheckBoxes show={showEvents} events={eventListing} />
+    </Panel.Section>
+    <Panel.Section>
+      <AuthDropDown />
+      <AuthFields authType={auth} />
+    </Panel.Section>
+    {newWebhook ? null : <Panel.Section><ActiveField /></Panel.Section>}
+    <Panel.Section>
+      <Button submit primary disabled={disabled}>{submitText}</Button>
+    </Panel.Section>
+  </form>
+);
 
 
 const mapStateToProps = (state, props) => {
@@ -58,15 +83,18 @@ const mapStateToProps = (state, props) => {
   const webhookValues = props.newWebhook ? {} : formatEditValues(state.webhooks.webhook);
 
   return {
-    eventsRadio,
+    showEvents: eventsRadio === 'select',
+    disabled: props.pristine || props.submitting,
+    submitText: props.submitting ? 'Submitting...' : (props.newWebhook ? 'Create Webhook' : 'Update Webhook'),
     auth,
     hasSubaccounts: hasSubaccounts(state),
+    eventListing: selectEventListing(state),
     initialValues: {
       assignTo: 'all',
       eventsRadio: props.allChecked || props.newWebhook ? 'all' : 'select',
       subaccount: !props.newWebhook ? selectInitialSubaccountValue(state, props) : null,
       ...webhookValues,
-      ...props.checkedEvents
+      events: getSelectedEvents(state)
     }
   };
 };
