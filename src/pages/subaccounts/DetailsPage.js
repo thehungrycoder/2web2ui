@@ -64,7 +64,7 @@ export class DetailsPage extends Component {
       return (
         <RedirectAndAlert
           to="/account/subaccounts"
-          alert={{ type: 'warning', message: `Unable to find subaccount for ${id}` }}
+          alert={{ type: 'error', message: error.message }}
         />
       );
     }

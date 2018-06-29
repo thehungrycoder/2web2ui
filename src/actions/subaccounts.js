@@ -40,7 +40,9 @@ export function getSubaccount(id) {
     type: 'GET_SUBACCOUNT',
     meta: {
       method: 'GET',
-      url: `subaccounts/${id}`
+      url: `subaccounts/${id}`,
+      // sparkpostApiRequest suppress 404 and not 400 for invalid
+      showErrorAlert: false
     }
   });
 }

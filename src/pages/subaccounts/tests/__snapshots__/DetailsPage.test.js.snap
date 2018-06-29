@@ -4,8 +4,8 @@ exports[`DetailsPage should redirect and alert on error 1`] = `
 <Connect(RedirectAndAlert)
   alert={
     Object {
-      "message": "Unable to find subaccount for 123",
-      "type": "warning",
+      "message": "Oh no!",
+      "type": "error",
     }
   }
   to="/account/subaccounts"
