@@ -6,6 +6,7 @@ import { createSelector } from 'reselect';
 const getMessageEvents = (state) => state.messageEvents.events;
 const getMessageHistory = (state) => state.messageEvents.history;
 const getMessageIdParam = (state, props) => props.match.params.messageId;
+export const getEventIdParam = (state, props) => props.match.params.eventId;
 const getEventIdLocationState = (state, props) => _.get(props, 'location.state.selectedEventId');
 
 export const selectMessageEvents = createSelector(
@@ -48,4 +49,8 @@ export const selectMessageEventsSearchOptions = createSelector(
 export const isMessageHistoryEmpty = createSelector(
   [getMessageHistory, getMessageIdParam],
   (history, id) => history.hasOwnProperty(id) && history[id].length === 0
+);
+
+export const selectCurrentEvent = createSelector(
+  [selectMessageEvents, getEventIdParam], (events, eventId) => _.find(events, { event_id: eventId })
 );
