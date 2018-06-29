@@ -127,7 +127,7 @@ const supportIssues = [
 const augmentIssuesWithConditions = function () {
   return _.map(supportIssues, (supportIssue) => ({
     ...supportIssue,
-    condition: idConditionsMap[supportIssue.id] || defaultCondition
+    condition: supportIssue.condition || idConditionsMap[supportIssue.id] || defaultCondition
   }));
 };
 
