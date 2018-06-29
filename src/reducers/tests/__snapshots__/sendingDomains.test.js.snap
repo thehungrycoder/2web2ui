@@ -1,6 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Sending Domain Update reducer update domain 1`] = `
+exports[`Sending Domain reducer clear sending domain 1`] = `
+Object {
+  "domain": Object {
+    "dkim": Object {},
+    "status": Object {},
+  },
+  "getError": null,
+  "getLoading": false,
+}
+`;
+
+exports[`Sending Domain reducer update domain 1`] = `
 Object {
   "domain": Object {
     "is_default_bounce_domain": true,
@@ -14,7 +25,7 @@ Object {
 }
 `;
 
-exports[`Sending Domain Update reducer update domain fail 1`] = `
+exports[`Sending Domain reducer update domain fail 1`] = `
 Object {
   "domain": Object {
     "is_default_bounce_domain": false,
@@ -35,7 +46,7 @@ Object {
 }
 `;
 
-exports[`Sending Domain Update reducer update pending 1`] = `
+exports[`Sending Domain reducer update pending 1`] = `
 Object {
   "domain": Object {
     "is_default_bounce_domain": false,

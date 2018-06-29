@@ -3,13 +3,19 @@ import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 
 import { selectDomain } from 'src/selectors/sendingDomains';
-import { get as getDomain, remove as deleteDomain, update as updateDomain } from 'src/actions/sendingDomains';
+import {
+  get as getDomain,
+  remove as deleteDomain,
+  update as updateDomain,
+  clearSendingDomain
+} from 'src/actions/sendingDomains';
 import { showAlert } from 'src/actions/globalAlert';
-import { Loading, ApiErrorBanner, DeleteModal } from 'src/components';
+import { Loading, DeleteModal } from 'src/components';
 import { Page } from '@sparkpost/matchbox';
 import AssignTrackingDomain from './components/AssignTrackingDomain';
 import EditBounce from './components/EditBounce';
 import SetupSending from './components/SetupSending';
+import RedirectAndAlert from 'src/components/globalAlert/RedirectAndAlert';
 
 import { DomainStatus } from './components/DomainStatus';
 
@@ -65,37 +71,26 @@ export class EditPage extends Component {
   }
 
   componentDidMount() {
-    return this.loadDomainProps();
+    this.props.getDomain(this.props.match.params.id);
   }
 
-  loadDomainProps = () => this.props.getDomain(this.props.match.params.id);
-
-  renderPage() {
-    const { domain, match: { params: { id }}} = this.props;
-
-
-    return (
-      <div>
-        <DomainStatus domain={domain} onShareDomainChange={this.shareDomainChange} />
-        <SetupSending domain={domain} />
-        <EditBounce id={id} domain={domain} />
-        <AssignTrackingDomain domain={domain} />
-      </div>
-    );
-  }
-
-  renderError() {
-    return <ApiErrorBanner
-      errorDetails={this.props.getError.message}
-      message='Sorry, we seem to have had some trouble loading your Sending Domain.'
-      reload={this.loadDomainProps}
-    />;
+  componentWillUnmount() {
+    this.props.clearSendingDomain();
   }
 
   render() {
-    const { domain, getError, match: { params: { id }}} = this.props;
+    const { domain, error, loading, match: { params: { id }}} = this.props;
 
-    if (domain.id !== id) {
+    if (error) {
+      return (
+        <RedirectAndAlert
+          to="/account/sending-domains"
+          alert={{ type: 'error', message: error.message }}
+        />
+      );
+    }
+
+    if (loading) {
       return <Loading />;
     }
 
@@ -105,8 +100,12 @@ export class EditPage extends Component {
         secondaryActions={this.secondaryActions}
         breadcrumbAction={breadcrumbAction}
       >
-        { getError ? this.renderError() : this.renderPage() }
-
+        <div>
+          <DomainStatus domain={domain} onShareDomainChange={this.shareDomainChange} />
+          <SetupSending domain={domain} />
+          <EditBounce id={id} domain={domain} />
+          <AssignTrackingDomain domain={domain} />
+        </div>
         <DeleteModal
           open={this.state.showDelete}
           title='Are you sure you want to delete this sending domain?'
@@ -120,12 +119,14 @@ export class EditPage extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  getError: state.sendingDomains.getError,
-  domain: selectDomain(state)
+  domain: selectDomain(state),
+  error: state.sendingDomains.getError,
+  loading: state.sendingDomains.getLoading
 });
 
 
 const mapDispatchToProps = {
+  clearSendingDomain,
   getDomain,
   deleteDomain,
   updateDomain,

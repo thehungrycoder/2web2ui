@@ -1,8 +1,13 @@
-const initialState = {
-  list: [],
+const initialDomainState = {
   domain: { dkim: {}, status: {}},
-  listError: null,
   getError: null,
+  getLoading: false
+};
+
+const initialState = {
+  ...initialDomainState,
+  list: [],
+  listError: null,
   verifyError: null,
   verifyTokenStatus: null,
   verifyTokenError: null
@@ -29,6 +34,9 @@ export default (state = initialState, { type, payload, meta }) => {
 
     case 'GET_SENDING_DOMAIN_FAIL':
       return { ...state, getError: payload, getLoading: false };
+
+    case 'CLEAR_SENDING_DOMAIN':
+      return { ...state, ...initialDomainState };
 
     case 'VERIFY_SENDING_DOMAIN_CNAME_PENDING':
       return { ...state, verifyCnameLoading: true, verifyCnameError: null };
