@@ -1,5 +1,16 @@
 import _ from 'lodash';
+import ensure from '@redux-beacon/ensure';
+
 import { getFormDefinition } from './eventsDefinitions';
+
+
+const whiteListedForms = ['loginForm', 'registerAccountForm'];
+const categoryName = 'Form';
+
+function isWhitelistedForm(event) {
+  const formName = _.first(event.label.split(':'));
+  return event.category === categoryName && _.includes(whiteListedForms, formName);
+}
 
 function determineFormValidationState(action) {
   return {
@@ -16,4 +27,5 @@ const eventsMap = {
   '@@redux-form/UPDATE_SYNC_ERRORS': getFormDefinition(determineFormValidationState)
 };
 
-export default eventsMap;
+// export default eventsMap;
+export default _.mapValues(eventsMap, (val) => ensure(isWhitelistedForm, val));
