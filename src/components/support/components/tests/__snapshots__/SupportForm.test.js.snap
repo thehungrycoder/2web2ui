@@ -1,5 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Support Form Component Form should render heroku message 1`] = `<HerokuMessage />`;
+
 exports[`Support Form Component Form should render issue dropdown with help text 1`] = `
 <Field
   component={[Function]}
