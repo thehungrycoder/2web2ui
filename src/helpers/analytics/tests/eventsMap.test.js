@@ -12,6 +12,6 @@ const TEST_CASES = {
 };
 
 cases('Events Map', ({ name, arg }) => {
-  expect(eventsMap[name]).toEqual(arg);
+  expect(eventsMap[name]()).toEqual(arg);
 }, TEST_CASES);
 

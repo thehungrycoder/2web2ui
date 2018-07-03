@@ -1,5 +1,5 @@
 import { createMiddleware } from 'redux-beacon';
-import { pushEvents } from '../analytics';
+import { pushEvents } from './index';
 import eventsMap from './eventsMap';
 
 

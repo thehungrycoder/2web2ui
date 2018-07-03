@@ -2,7 +2,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers';
 import ErrorTracker from './helpers/errorTracker';
-import { gtmMiddleware } from './helpers/gtm/setup';
+import { gtmMiddleware } from './helpers/analytics/setup';
 
 const configureStore = () => {
   // necessary for redux devtools in development mode only
