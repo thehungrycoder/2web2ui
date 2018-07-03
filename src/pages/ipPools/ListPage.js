@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { listPools } from 'src/actions/ipPools';
 import { getOrderedIpPools, shouldShowIpPurchaseCTA } from 'src/selectors/ipPools';
 import { Loading, TableCollection, ApiErrorBanner } from 'src/components';
-import { Setup } from 'src/components/images';
 import { Page } from '@sparkpost/matchbox';
 
 const columns = [
@@ -54,29 +53,21 @@ export class IpPoolsList extends Component {
   }
 
   render() {
-    const { loading, error, ipPools, showPurchaseCTA } = this.props;
+    const { loading, error, showPurchaseCTA } = this.props;
 
     if (loading) {
       return <Loading />;
     }
 
     const createAction = { content: 'Create IP Pool', Component: Link, to: '/account/ip-pools/create' };
-    const purchaseAction = { content: 'Purchase IPs', Component: Link, to: '/account/billing' };
-    const isEmptyState = ipPools.length === 1 && ipPools[0].ips.length === 0;
+    const purchaseActions = showPurchaseCTA ? [{ content: 'Purchase IPs', Component: Link, to: '/account/billing' }] : null;
 
     return (
       <Page
         primaryAction={createAction}
-        title='IP Pools'
-        empty={{
-          show: isEmptyState,
-          title: 'Boost your deliverability',
-          image: Setup,
-          content: <p>Purchase dedicated IPs to manage your IP Pools</p>,
-          secondaryAction: showPurchaseCTA ? createAction : null,
-          primaryAction: showPurchaseCTA ? purchaseAction : createAction
-        }}>
-        { error ? this.renderError() : (isEmptyState ? null : this.renderCollection()) }
+        secondaryActions={purchaseActions}
+        title='IP Pools' >
+        {error ? this.renderError() : this.renderCollection()}
       </Page>
     );
   }

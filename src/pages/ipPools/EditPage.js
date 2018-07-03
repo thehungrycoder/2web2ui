@@ -1,17 +1,16 @@
-/* eslint max-lines: ["error", 200] */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 
 import { Page } from '@sparkpost/matchbox';
-import { DeleteModal, ApiErrorBanner } from 'src/components';
-import PanelLoading from 'src/components/panelLoading/PanelLoading';
+import { Loading, DeleteModal, ApiErrorBanner } from 'src/components';
 import PoolForm from './components/PoolForm';
 
 import { showAlert } from 'src/actions/globalAlert';
 import { listPools, getPool, updatePool, deletePool } from 'src/actions/ipPools';
 import { updateSendingIp } from 'src/actions/sendingIps';
+import { shouldShowIpPurchaseCTA } from 'src/selectors/ipPools';
 
 import { decodeIp } from 'src/helpers/ipNames';
 import isDefaultPool from './helpers/defaultPool';
@@ -105,10 +104,10 @@ export class EditPage extends Component {
   }
 
   render() {
-    const { loading, pool } = this.props;
+    const { loading, pool, showPurchaseCTA } = this.props;
 
     if (loading) {
-      return <PanelLoading />;
+      return <Loading />;
     }
 
     return (
@@ -121,9 +120,10 @@ export class EditPage extends Component {
             onClick: this.toggleDelete,
             visible: !isDefaultPool(this.props.match.params.id)
           },
-          { content: 'Purchase IP',
+          { content: 'Purchase IPs',
             to: '/account/billing',
-            component: Link
+            component: Link,
+            visible: showPurchaseCTA
           }]
         }>
 
@@ -141,15 +141,16 @@ export class EditPage extends Component {
   }
 }
 
-const mapStateToProps = ({ ipPools }) => {
-  const { getLoading, getError, listLoading, listError, pool } = ipPools;
+const mapStateToProps = (state) => {
+  const { getLoading, getError, listLoading, listError, pool } = state.ipPools;
 
   return {
     loading: getLoading || listLoading,
     error: listError || getError,
     pool,
     listError,
-    getError
+    getError,
+    showPurchaseCTA: shouldShowIpPurchaseCTA(state)
   };
 };
 

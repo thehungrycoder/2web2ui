@@ -30,7 +30,8 @@ describe('IP Pools Edit Page', () => {
       listPools: jest.fn(),
       listError: null,
       getError: null,
-      getPool: jest.fn()
+      getPool: jest.fn(),
+      showPurchaseCTA: true
     };
 
     wrapper = shallow(<EditPage {...props} />);
@@ -41,8 +42,13 @@ describe('IP Pools Edit Page', () => {
       expect(wrapper).toMatchSnapshot();
     });
 
-    it('should show loading panel when data is loading', () => {
+    it('should show loading when data is loading', () => {
       wrapper.setProps({ loading: true });
+      expect(wrapper).toMatchSnapshot();
+    });
+
+    it('should not show purchase action if showPurchaseCTA is false', () => {
+      wrapper.setProps({ showPurchaseCTA: false });
       expect(wrapper).toMatchSnapshot();
     });
 
@@ -73,7 +79,7 @@ describe('IP Pools Edit Page', () => {
       updatePoolSpy = jest.spyOn(wrapper.instance().props, 'updatePool');
     });
 
-    it('should show an alert on successful pool update', async() => {
+    it('should show an alert on successful pool update', async () => {
       await wrapper.instance().onUpdatePool({ name: 'my_pool', signing_domain: 'my-domain.sparkpost.com', '127_0_0_1': 'other_pool', '127_0_0_2': 'my-pool' });
       expect(wrapper.instance().props.showAlert).toHaveBeenCalledWith({
         type: 'success',
@@ -84,7 +90,7 @@ describe('IP Pools Edit Page', () => {
 
     });
 
-    it('should set signing_domain to empty string if it is null', async() => {
+    it('should set signing_domain to empty string if it is null', async () => {
       props.pool.signing_domain = null;
       await wrapper.instance().onUpdatePool({ name: 'my_pool', '127_0_0_1': 'other_pool', '127_0_0_2': 'my-pool' });
       expect(wrapper.instance().props.showAlert).toHaveBeenCalledWith({
@@ -95,7 +101,7 @@ describe('IP Pools Edit Page', () => {
       expect(wrapper.instance().props.history.push).toHaveBeenCalled();
     });
 
-    it('should not update pool if editing default pool', async() => {
+    it('should not update pool if editing default pool', async () => {
       wrapper.setProps({ match: { params: { id: 'default' }}});
       await wrapper.instance().onUpdatePool({ name: 'default', '127_0_0_1': 'other_pool', '127_0_0_2': 'default' });
       expect(wrapper.instance().props.showAlert).toHaveBeenCalledWith({
@@ -114,7 +120,7 @@ describe('IP Pools Edit Page', () => {
       expect(stateSpy).toHaveBeenCalledWith({ showDelete: true });
     });
 
-    it('should show alert on delete pool', async() => {
+    it('should show alert on delete pool', async () => {
       await wrapper.instance().onDeletePool();
       expect(wrapper.instance().props.showAlert).toHaveBeenCalledWith({
         type: 'success',
