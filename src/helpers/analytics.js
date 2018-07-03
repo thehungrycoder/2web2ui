@@ -3,7 +3,7 @@ import _ from 'lodash';
 // Google Tag Manager tracking helpers
 // Adapted from webui/src/common/services/analytics.js
 
-// Call once at app load time to initialise the GTM dataLayer variable
+// Call to initialise the GTM dataLayer variable
 // and trigger the GA 'Page View' event.
 export function setup() {
   if (!window.dataLayer) {
@@ -15,6 +15,7 @@ export function setup() {
 }
 
 function pushEvent(evt) {
+  setup();
   window.dataLayer.push(evt);
 }
 
