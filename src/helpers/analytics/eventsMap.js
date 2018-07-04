@@ -13,9 +13,11 @@ function isWhitelistedForm(event) {
 }
 
 function determineFormValidationState(action) {
+  const fieldErrors = _.map(action.payload.syncErrors, (val, key) => `${key}=${val}`);
+
   return {
-    action: `Validation ${_.isEmpty(action.payload.syncErrors) ? 'Success' : 'Error'}`,
-    label: `${action.meta.form}: ${JSON.stringify(action.payload.syncErrors)}`
+    action: `Validation ${fieldErrors.length ? 'Error' : 'Success'}`,
+    label: `${action.meta.form}: ${fieldErrors.join(',')}`
   };
 }
 
