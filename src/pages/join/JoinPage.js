@@ -23,7 +23,7 @@ export class JoinPage extends Component {
     formData: {}
   };
 
-  formatQueryString = () => {
+  extractQueryParams = () => {
     const { params } = this.props;
     const existingCookie = cookie.getJSON(config.attribution.cookieName) || {};
 
@@ -41,7 +41,7 @@ export class JoinPage extends Component {
   registerSubmit = (values) => {
     this.setState({ formData: values });
     const { params: { plan }, register, authenticate } = this.props;
-    const { sfdcid, attributionData, creationParams } = this.formatQueryString();
+    const { sfdcid, attributionData, creationParams } = this.extractQueryParams();
 
     const accountFields = _.omit(values, 'email_opt_in');
     const signupData = {
@@ -63,14 +63,13 @@ export class JoinPage extends Component {
   render() {
     const { createError } = this.props.account;
     const { formData } = this.state;
-    const title = inSPCEU() ? 'Sign Up For SparkPost EU' : 'Sign Up';
 
     return (
       <div>
         {loadScript({ url: LINKS.RECAPTCHA_LIB_URL })}
         <CenteredLogo showAwsLogo={this.props.isAWSsignUp} />
 
-        <Panel accent title={title}>
+        <Panel accent title={this.props.title}>
           {
             createError &&
               <Panel.Section>
@@ -94,7 +93,8 @@ function mapStateToProps(state, props) {
   return {
     account: state.account,
     params: qs.parse(props.location.search),
-    isAWSsignUp: !!cookie.get(AWS_COOKIE_NAME)
+    isAWSsignUp: !!cookie.get(AWS_COOKIE_NAME),
+    title: inSPCEU() ? 'Sign Up For SparkPost EU' : 'Sign Up'
   };
 }
 

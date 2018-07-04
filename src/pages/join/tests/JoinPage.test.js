@@ -56,7 +56,8 @@ describe('JoinPage', () => {
       isAWSsignUp: false,
       location: {
         pathname: '/join'
-      }
+      },
+      title: 'Sign Up'
     };
     formValues = {
       first_name: 'foo',
@@ -79,6 +80,7 @@ describe('JoinPage', () => {
     it('renders correctly', () => {
       expect(wrapper).toMatchSnapshot();
     });
+
     it('renders errors', () => {
       instance.handleSignupFailure = jest.fn().mockReturnValue('Some error occurred');
       wrapper.setProps({ account: { createError: {}}}); //just to make it truthy
@@ -95,7 +97,7 @@ describe('JoinPage', () => {
     let attributionValues;
     beforeEach(() => {
       attributionValues = { sfdcid: 'abcd', attributionData: { src: 'Test Source', 'utm_source': 'test file' }, creationParams: { extra1: 'bar1', extra2: 'bar2' }};
-      instance.formatQueryString = jest.fn().mockReturnValue(attributionValues);
+      instance.extractQueryParams = jest.fn().mockReturnValue(attributionValues);
       instance.trackSignup = jest.fn();
     });
 
@@ -155,18 +157,24 @@ describe('JoinPage', () => {
   });
 
 
-  describe('formatQueryString', () => {
+  describe('extractQueryParams', () => {
     beforeEach(() => {
       cookie.getJSON.mockReturnValue({ sfdcid: '123', utm_source: 'script' });
     });
 
     it('returns correct data when value exists in cookie only', () => {
-      expect(instance.formatQueryString()).toMatchSnapshot();
+      expect(instance.extractQueryParams()).toMatchSnapshot();
+    });
+
+    it('returns correct data when cookie is absent', () => {
+      cookie.getJSON.mockReturnValue(undefined);
+      expect(instance.extractQueryParams()).toMatchSnapshot();
     });
 
     it('merges data from query params onto stored cookie data', () => {
       wrapper.setProps({ params: { foo: 'bar', sfdcid: '123', utm_medium: 'script' }});
-      expect(instance.formatQueryString()).toMatchSnapshot();
+      expect(instance.extractQueryParams()).toMatchSnapshot();
     });
+
   });
 });

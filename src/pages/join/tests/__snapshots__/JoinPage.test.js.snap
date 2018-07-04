@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`JoinPage formatQueryString merges data from query params onto stored cookie data 1`] = `
+exports[`JoinPage extractQueryParams merges data from query params onto stored cookie data 1`] = `
 Object {
   "attributionData": Object {
     "utm_medium": "script",
@@ -13,7 +13,15 @@ Object {
 }
 `;
 
-exports[`JoinPage formatQueryString returns correct data when value exists in cookie only 1`] = `
+exports[`JoinPage extractQueryParams returns correct data when cookie is absent 1`] = `
+Object {
+  "attributionData": Object {},
+  "creationParams": Object {},
+  "sfdcid": undefined,
+}
+`;
+
+exports[`JoinPage extractQueryParams returns correct data when value exists in cookie only 1`] = `
 Object {
   "attributionData": Object {
     "utm_source": "script",
