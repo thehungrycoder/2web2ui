@@ -18,7 +18,7 @@ export class PlanPicker extends Component {
 
   planFn = ({
     getInputProps,
-    getButtonProps,
+    getToggleButtonProps,
     getItemProps,
     isOpen,
     selectedItem,
@@ -46,7 +46,7 @@ export class PlanPicker extends Component {
       disabled && styles.disabled,
       isOpen && styles.triggerOpen
     );
-    const triggerProps = getButtonProps({
+    const triggerProps = getToggleButtonProps({
       plan: selectedItem,
       onClick: this.handleOpen
     });
