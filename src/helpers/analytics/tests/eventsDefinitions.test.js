@@ -3,7 +3,7 @@ import _ from 'lodash';
 
 import { getFormDefinition } from '../eventsDefinitions';
 
-describe('Event Defintions', () => {
+describe('Event Definitions', () => {
   let mockAction;
   beforeEach(() => {
     mockAction = {
