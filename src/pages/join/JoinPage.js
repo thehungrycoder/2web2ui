@@ -29,12 +29,10 @@ export class JoinPage extends Component {
 
     const allData = { ...existingCookie, ...params };
 
-    const excludeInCreationParams = config.salesforceDataParams.concat(['sfdcid']);
-
     return {
       sfdcid: allData.sfdcid,
       attributionData: _.pick(allData, config.salesforceDataParams),
-      creationParams: _.omit(allData, excludeInCreationParams)
+      creationParams: allData
     };
   }
 

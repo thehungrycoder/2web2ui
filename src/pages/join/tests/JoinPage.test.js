@@ -172,7 +172,7 @@ describe('JoinPage', () => {
     });
 
     it('merges data from query params onto stored cookie data', () => {
-      wrapper.setProps({ params: { foo: 'bar', sfdcid: '123', utm_medium: 'script' }});
+      wrapper.setProps({ params: { sfdcid: 'overridden', utm_medium: 'new property' }});
       expect(instance.extractQueryParams()).toMatchSnapshot();
     });
 

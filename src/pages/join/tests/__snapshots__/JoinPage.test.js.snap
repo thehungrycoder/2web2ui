@@ -3,13 +3,15 @@
 exports[`JoinPage extractQueryParams merges data from query params onto stored cookie data 1`] = `
 Object {
   "attributionData": Object {
-    "utm_medium": "script",
+    "utm_medium": "new property",
     "utm_source": "script",
   },
   "creationParams": Object {
-    "foo": "bar",
+    "sfdcid": "overridden",
+    "utm_medium": "new property",
+    "utm_source": "script",
   },
-  "sfdcid": "123",
+  "sfdcid": "overridden",
 }
 `;
 
@@ -26,7 +28,10 @@ Object {
   "attributionData": Object {
     "utm_source": "script",
   },
-  "creationParams": Object {},
+  "creationParams": Object {
+    "sfdcid": "123",
+    "utm_source": "script",
+  },
   "sfdcid": "123",
 }
 `;
