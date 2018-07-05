@@ -88,7 +88,7 @@ describe('From Email Typeahead', () => {
 
   it('should handle state change', () => {
     const changes = {
-      inputValue: 'new value'
+      selectedItem: 'new value'
     };
     const downshift = {
       highlightedIndex: null,
