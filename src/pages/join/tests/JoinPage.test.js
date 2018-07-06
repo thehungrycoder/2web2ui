@@ -1,10 +1,12 @@
 import { shallow } from 'enzyme';
+import _ from 'lodash';
 import React from 'react';
 import cookie from 'js-cookie';
 import { JoinPage } from '../JoinPage';
 import { AFTER_JOIN_REDIRECT_ROUTE } from 'src/constants';
 import * as constants from 'src/constants';
 import * as analytics from 'src/helpers/analytics';
+import config from '../../../config';
 
 const username = 'foo_bar';
 let props;
@@ -94,10 +96,9 @@ describe('JoinPage', () => {
   });
 
   describe('registerSubmit', () => {
-    let attributionValues;
     beforeEach(() => {
-      attributionValues = { sfdcid: 'abcd', attributionData: { src: 'Test Source', 'utm_source': 'test file' }, creationParams: { extra1: 'bar1', extra2: 'bar2' }};
-      instance.extractQueryParams = jest.fn().mockReturnValue(attributionValues);
+      const allData = { sfdcid: 'abcd', src: 'Test Source', 'utm_source': 'test file', extra1: 'bar1', extra2: 'bar2' };
+      instance.extractQueryParams = jest.fn().mockReturnValue({ sfdcid: allData.sfdcid, attributionData: _.pick(allData, config.salesforceDataParams), creationParams: allData });
       instance.trackSignup = jest.fn();
     });
 
