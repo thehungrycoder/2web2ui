@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
@@ -52,7 +52,7 @@ export class PoolForm extends Component {
     }
 
     const purchaseCTA = showPurchaseCTA
-      ? <React.Fragment>, or by purchasing new IPs from the <UnstyledLink to="/account/billing" component={Link}>billing page</UnstyledLink></React.Fragment>
+      ? <Fragment>, or by <UnstyledLink to="/account/billing" component={Link}>purchasing new IPs</UnstyledLink></Fragment>
       : null;
 
     return (

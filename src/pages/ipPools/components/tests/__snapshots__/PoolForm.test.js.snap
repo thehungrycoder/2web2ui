@@ -31,12 +31,12 @@ exports[`PoolForm tests should not disable button if form is not pristine or not
         <p>
           Add dedicated IPs to this pool by moving them from their current pool
           <React.Fragment>
-            , or by purchasing new IPs from the 
+            , or by 
             <UnstyledLink
               component={[Function]}
               to="/account/billing"
             >
-              billing page
+              purchasing new IPs
             </UnstyledLink>
           </React.Fragment>
           .
@@ -103,12 +103,12 @@ exports[`PoolForm tests should not render signing_domain if editing default pool
         <p>
           Add dedicated IPs to this pool by moving them from their current pool
           <React.Fragment>
-            , or by purchasing new IPs from the 
+            , or by 
             <UnstyledLink
               component={[Function]}
               to="/account/billing"
             >
-              billing page
+              purchasing new IPs
             </UnstyledLink>
           </React.Fragment>
           .
@@ -185,12 +185,12 @@ exports[`PoolForm tests should not render signing_domain if feature flag is disa
         <p>
           Add dedicated IPs to this pool by moving them from their current pool
           <React.Fragment>
-            , or by purchasing new IPs from the 
+            , or by 
             <UnstyledLink
               component={[Function]}
               to="/account/billing"
             >
-              billing page
+              purchasing new IPs
             </UnstyledLink>
           </React.Fragment>
           .
@@ -420,12 +420,12 @@ exports[`PoolForm tests should render form 1`] = `
         <p>
           Add dedicated IPs to this pool by moving them from their current pool
           <React.Fragment>
-            , or by purchasing new IPs from the 
+            , or by 
             <UnstyledLink
               component={[Function]}
               to="/account/billing"
             >
-              billing page
+              purchasing new IPs
             </UnstyledLink>
           </React.Fragment>
           .
@@ -505,12 +505,12 @@ exports[`PoolForm tests should show help text when editing default pool 1`] = `
         <p>
           Add dedicated IPs to this pool by moving them from their current pool
           <React.Fragment>
-            , or by purchasing new IPs from the 
+            , or by 
             <UnstyledLink
               component={[Function]}
               to="/account/billing"
             >
-              billing page
+              purchasing new IPs
             </UnstyledLink>
           </React.Fragment>
           .
@@ -587,12 +587,12 @@ exports[`PoolForm tests should update button text to Saving and disable button w
         <p>
           Add dedicated IPs to this pool by moving them from their current pool
           <React.Fragment>
-            , or by purchasing new IPs from the 
+            , or by 
             <UnstyledLink
               component={[Function]}
               to="/account/billing"
             >
-              billing page
+              purchasing new IPs
             </UnstyledLink>
           </React.Fragment>
           .
