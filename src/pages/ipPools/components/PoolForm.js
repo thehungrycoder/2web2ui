@@ -56,7 +56,7 @@ export class PoolForm extends Component {
       : null;
 
     return (
-      <React.Fragment>
+      <Fragment>
         <Panel.Section>
           <p>
             Add dedicated IPs to this pool by moving them from their current pool{purchaseCTA}.
@@ -68,7 +68,7 @@ export class PoolForm extends Component {
           getRowData={getRowDataFunc}
           pagination={false}
         />
-      </React.Fragment>
+      </Fragment>
     );
   }
 
