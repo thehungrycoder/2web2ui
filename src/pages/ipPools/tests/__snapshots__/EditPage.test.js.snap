@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`IP Pools Edit Page render tests should render the edit page correctly 1`] = `
+exports[`IP Pools Edit Page render tests should not show purchase action if showPurchaseCTA is false 1`] = `
 <Page
   breadcrumbAction={
     Object {
@@ -19,8 +19,9 @@ exports[`IP Pools Edit Page render tests should render the edit page correctly 1
       },
       Object {
         "component": [Function],
-        "content": "Purchase IP",
+        "content": "Purchase IPs",
         "to": "/account/billing",
+        "visible": false,
       },
     ]
   }
@@ -44,11 +45,52 @@ exports[`IP Pools Edit Page render tests should render the edit page correctly 1
 </Page>
 `;
 
-exports[`IP Pools Edit Page render tests should show loading panel when data is loading 1`] = `
-<PanelLoading
-  minHeight="400px"
-/>
+exports[`IP Pools Edit Page render tests should render the edit page correctly 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "IP Pools",
+      "to": "/account/ip-pools",
+    }
+  }
+  empty={Object {}}
+  secondaryActions={
+    Array [
+      Object {
+        "content": "Delete",
+        "onClick": [Function],
+        "visible": true,
+      },
+      Object {
+        "component": [Function],
+        "content": "Purchase IPs",
+        "to": "/account/billing",
+        "visible": true,
+      },
+    ]
+  }
+  title="My Pool (my-pool)"
+>
+  <Connect(ReduxForm)
+    isNew={false}
+    onSubmit={[Function]}
+  />
+  <DeleteModal
+    content={
+      <p>
+        IPs in this pool will be re-assigned to your Default pool.
+      </p>
+    }
+    onCancel={[Function]}
+    onDelete={[Function]}
+    open={false}
+    title="Are you sure you want to delete this IP Pool?"
+  />
+</Page>
 `;
+
+exports[`IP Pools Edit Page render tests should show loading when data is loading 1`] = `<Loading />`;
 
 exports[`IP Pools Edit Page renderForm tests should show get error msg on error 1`] = `
 <Page
@@ -69,8 +111,9 @@ exports[`IP Pools Edit Page renderForm tests should show get error msg on error 
       },
       Object {
         "component": [Function],
-        "content": "Purchase IP",
+        "content": "Purchase IPs",
         "to": "/account/billing",
+        "visible": true,
       },
     ]
   }
@@ -113,8 +156,9 @@ exports[`IP Pools Edit Page renderForm tests should show list error msg on error
       },
       Object {
         "component": [Function],
-        "content": "Purchase IP",
+        "content": "Purchase IPs",
         "to": "/account/billing",
+        "visible": true,
       },
     ]
   }

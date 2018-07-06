@@ -12,6 +12,7 @@ exports[`PoolForm tests should not disable button if form is not pristine or not
         helpText=""
         label="Pool Name"
         name="name"
+        placeholder="My IP Pool"
         validate={[Function]}
       />
       <Connect(AccessControl)
@@ -28,7 +29,17 @@ exports[`PoolForm tests should not disable button if form is not pristine or not
     <React.Fragment>
       <Panel.Section>
         <p>
-          Add sending IPs to this pool by moving them from their current pool or by purchasing a new Dedicated IP.
+          Add dedicated IPs to this pool by moving them from their current pool
+          <React.Fragment>
+            , or by 
+            <UnstyledLink
+              component={[Function]}
+              to="/account/billing"
+            >
+              purchasing new IPs
+            </UnstyledLink>
+          </React.Fragment>
+          .
         </p>
       </Panel.Section>
       <TableCollection
@@ -80,16 +91,27 @@ exports[`PoolForm tests should not render signing_domain if editing default pool
       <Field
         component={[Function]}
         disabled={true}
-        helpText="Sorry, you can't edit the default pool's name. Then it wouldn't be the default!"
+        helpText="You cannot change the default IP pool's name"
         label="Pool Name"
         name="name"
+        placeholder="My IP Pool"
         validate={[Function]}
       />
     </Panel.Section>
     <React.Fragment>
       <Panel.Section>
         <p>
-          Add sending IPs to this pool by moving them from their current pool or by purchasing a new Dedicated IP.
+          Add dedicated IPs to this pool by moving them from their current pool
+          <React.Fragment>
+            , or by 
+            <UnstyledLink
+              component={[Function]}
+              to="/account/billing"
+            >
+              purchasing new IPs
+            </UnstyledLink>
+          </React.Fragment>
+          .
         </p>
       </Panel.Section>
       <TableCollection
@@ -144,6 +166,7 @@ exports[`PoolForm tests should not render signing_domain if feature flag is disa
         helpText=""
         label="Pool Name"
         name="name"
+        placeholder="My IP Pool"
         validate={[Function]}
       />
       <Connect(AccessControl)
@@ -160,7 +183,17 @@ exports[`PoolForm tests should not render signing_domain if feature flag is disa
     <React.Fragment>
       <Panel.Section>
         <p>
-          Add sending IPs to this pool by moving them from their current pool or by purchasing a new Dedicated IP.
+          Add dedicated IPs to this pool by moving them from their current pool
+          <React.Fragment>
+            , or by 
+            <UnstyledLink
+              component={[Function]}
+              to="/account/billing"
+            >
+              purchasing new IPs
+            </UnstyledLink>
+          </React.Fragment>
+          .
         </p>
       </Panel.Section>
       <TableCollection
@@ -215,6 +248,7 @@ exports[`PoolForm tests should not render table if no ips exist 1`] = `
         helpText=""
         label="Pool Name"
         name="name"
+        placeholder="My IP Pool"
         validate={[Function]}
       />
       <Connect(AccessControl)
@@ -254,6 +288,7 @@ exports[`PoolForm tests should not render table if pool is new 1`] = `
         helpText=""
         label="Pool Name"
         name="name"
+        placeholder="My IP Pool"
         validate={[Function]}
       />
       <Connect(AccessControl)
@@ -281,7 +316,7 @@ exports[`PoolForm tests should not render table if pool is new 1`] = `
 </Panel>
 `;
 
-exports[`PoolForm tests should render form 1`] = `
+exports[`PoolForm tests should not show purchase cta if showPurchaseCTA is false 1`] = `
 <Panel>
   <form
     onSubmit={[MockFunction]}
@@ -293,6 +328,7 @@ exports[`PoolForm tests should render form 1`] = `
         helpText=""
         label="Pool Name"
         name="name"
+        placeholder="My IP Pool"
         validate={[Function]}
       />
       <Connect(AccessControl)
@@ -309,7 +345,90 @@ exports[`PoolForm tests should render form 1`] = `
     <React.Fragment>
       <Panel.Section>
         <p>
-          Add sending IPs to this pool by moving them from their current pool or by purchasing a new Dedicated IP.
+          Add dedicated IPs to this pool by moving them from their current pool
+          .
+        </p>
+      </Panel.Section>
+      <TableCollection
+        columns={
+          Array [
+            "Sending IP",
+            "Hostname",
+            "IP Pool",
+          ]
+        }
+        defaultSortColumn={null}
+        defaultSortDirection="asc"
+        getRowData={[Function]}
+        pagination={false}
+        rows={
+          Array [
+            Object {
+              "external_ip": "external",
+              "hostname": "hostname",
+            },
+            Object {
+              "external_ip": "external-2",
+              "hostname": "hostname-2",
+            },
+          ]
+        }
+      />
+    </React.Fragment>
+    <Panel.Section>
+      <Button
+        disabled={true}
+        primary={true}
+        size="default"
+        submit={true}
+      >
+        Update IP Pool
+      </Button>
+    </Panel.Section>
+  </form>
+</Panel>
+`;
+
+exports[`PoolForm tests should render form 1`] = `
+<Panel>
+  <form
+    onSubmit={[MockFunction]}
+  >
+    <Panel.Section>
+      <Field
+        component={[Function]}
+        disabled={false}
+        helpText=""
+        label="Pool Name"
+        name="name"
+        placeholder="My IP Pool"
+        validate={[Function]}
+      />
+      <Connect(AccessControl)
+        condition={[Function]}
+      >
+        <Field
+          component={[Function]}
+          disabled={false}
+          label="Default Signing Domain"
+          name="signing_domain"
+        />
+      </Connect(AccessControl)>
+    </Panel.Section>
+    <React.Fragment>
+      <Panel.Section>
+        <p>
+          Add dedicated IPs to this pool by moving them from their current pool
+          <React.Fragment>
+            , or by 
+            <UnstyledLink
+              component={[Function]}
+              to="/account/billing"
+            >
+              purchasing new IPs
+            </UnstyledLink>
+          </React.Fragment>
+          .
         </p>
       </Panel.Section>
       <TableCollection
@@ -365,57 +484,6 @@ Array [
 ]
 `;
 
-exports[`PoolForm tests should return a msg if there are no ips 1`] = `
-<Panel>
-  <form
-    onSubmit={[MockFunction]}
-  >
-    <Panel.Section>
-      <Field
-        component={[Function]}
-        disabled={false}
-        helpText=""
-        label="Pool Name"
-        name="name"
-        validate={[Function]}
-      />
-      <Connect(AccessControl)
-        condition={[Function]}
-      >
-        <Field
-          component={[Function]}
-          disabled={false}
-          label="Default Signing Domain"
-          name="signing_domain"
-        />
-      </Connect(AccessControl)>
-    </Panel.Section>
-    <Panel.Section>
-      <p>
-        Add a Dedicated IP to the pool by purchasing from the 
-        <UnstyledLink
-          component={[Function]}
-          to="/account/billing"
-        >
-          billing
-        </UnstyledLink>
-         page.
-      </p>
-    </Panel.Section>
-    <Panel.Section>
-      <Button
-        disabled={true}
-        primary={true}
-        size="default"
-        submit={true}
-      >
-        Update IP Pool
-      </Button>
-    </Panel.Section>
-  </form>
-</Panel>
-`;
-
 exports[`PoolForm tests should show help text when editing default pool 1`] = `
 <Panel>
   <form
@@ -425,16 +493,27 @@ exports[`PoolForm tests should show help text when editing default pool 1`] = `
       <Field
         component={[Function]}
         disabled={true}
-        helpText="Sorry, you can't edit the default pool's name. Then it wouldn't be the default!"
+        helpText="You cannot change the default IP pool's name"
         label="Pool Name"
         name="name"
+        placeholder="My IP Pool"
         validate={[Function]}
       />
     </Panel.Section>
     <React.Fragment>
       <Panel.Section>
         <p>
-          Add sending IPs to this pool by moving them from their current pool or by purchasing a new Dedicated IP.
+          Add dedicated IPs to this pool by moving them from their current pool
+          <React.Fragment>
+            , or by 
+            <UnstyledLink
+              component={[Function]}
+              to="/account/billing"
+            >
+              purchasing new IPs
+            </UnstyledLink>
+          </React.Fragment>
+          .
         </p>
       </Panel.Section>
       <TableCollection
@@ -489,6 +568,7 @@ exports[`PoolForm tests should update button text to Saving and disable button w
         helpText=""
         label="Pool Name"
         name="name"
+        placeholder="My IP Pool"
         validate={[Function]}
       />
       <Connect(AccessControl)
@@ -505,7 +585,17 @@ exports[`PoolForm tests should update button text to Saving and disable button w
     <React.Fragment>
       <Panel.Section>
         <p>
-          Add sending IPs to this pool by moving them from their current pool or by purchasing a new Dedicated IP.
+          Add dedicated IPs to this pool by moving them from their current pool
+          <React.Fragment>
+            , or by 
+            <UnstyledLink
+              component={[Function]}
+              to="/account/billing"
+            >
+              purchasing new IPs
+            </UnstyledLink>
+          </React.Fragment>
+          .
         </p>
       </Panel.Section>
       <TableCollection

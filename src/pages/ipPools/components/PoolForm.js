@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
@@ -9,7 +9,7 @@ import AccessControl from 'src/components/auth/AccessControl';
 import { required } from 'src/helpers/validation';
 import { configFlag } from 'src/helpers/conditions/config';
 import { TextFieldWrapper, SendingDomainTypeaheadWrapper } from 'src/components';
-import { selectIpPoolFormInitialValues, selectIpsForCurrentPool } from 'src/selectors/ipPools';
+import { selectIpPoolFormInitialValues, selectIpsForCurrentPool, shouldShowIpPurchaseCTA } from 'src/selectors/ipPools';
 import isDefaultPool from '../helpers/defaultPool';
 
 
@@ -34,7 +34,7 @@ export class PoolForm extends Component {
   }
 
   renderCollection() {
-    const { isNew, ips, list, pool: currentPool } = this.props;
+    const { isNew, ips, list, pool: currentPool, showPurchaseCTA } = this.props;
     const poolOptions = list.map((pool) => ({
       value: pool.id,
       label: (pool.id === currentPool.id) ? '-- Change Pool --' : `${pool.name} (${pool.id})`
@@ -51,18 +51,16 @@ export class PoolForm extends Component {
       return null;
     }
 
-    // Empty pool
-    if (ips.length === 0) {
-      return <Panel.Section>
-        <p>Add a Dedicated IP to the pool by purchasing from the <UnstyledLink to="/account/billing" component={Link}>billing</UnstyledLink> page.</p>
-      </Panel.Section>;
-    }
-
+    const purchaseCTA = showPurchaseCTA
+      ? <Fragment>, or by <UnstyledLink to="/account/billing" component={Link}>purchasing new IPs</UnstyledLink></Fragment>
+      : null;
 
     return (
-      <React.Fragment>
+      <Fragment>
         <Panel.Section>
-          <p>Add sending IPs to this pool by moving them from their current pool or by purchasing a new Dedicated IP.</p>
+          <p>
+            Add dedicated IPs to this pool by moving them from their current pool{purchaseCTA}.
+          </p>
         </Panel.Section>
         <TableCollection
           columns={columns}
@@ -70,7 +68,7 @@ export class PoolForm extends Component {
           getRowData={getRowDataFunc}
           pagination={false}
         />
-      </React.Fragment>
+      </Fragment>
     );
   }
 
@@ -78,30 +76,31 @@ export class PoolForm extends Component {
     const { isNew, pool, handleSubmit, submitting, pristine } = this.props;
     const submitText = isNew ? 'Create IP Pool' : 'Update IP Pool';
     const editingDefault = !isNew && isDefaultPool(pool.id);
-    const helpText = editingDefault ? 'Sorry, you can\'t edit the default pool\'s name. Then it wouldn\'t be the default!' : '';
+    const helpText = editingDefault ? 'You cannot change the default IP pool\'s name' : '';
 
     return (
       <Panel>
         <form onSubmit={handleSubmit}>
           <Panel.Section>
             <Field
-              name="name"
+              name='name'
               component={TextFieldWrapper}
               validate={required}
-              label="Pool Name"
+              label='Pool Name'
+              placeholder='My IP Pool'
               disabled={editingDefault || submitting}
               helpText={helpText}
             />
 
             {!editingDefault &&
-          <AccessControl condition={configFlag('featureFlags.allow_default_signing_domains_for_ip_pools')}>
-            <Field
-              name="signing_domain"
-              component={SendingDomainTypeaheadWrapper}
-              label="Default Signing Domain"
-              disabled={submitting}
-            />
-          </AccessControl>
+              <AccessControl condition={configFlag('featureFlags.allow_default_signing_domains_for_ip_pools')}>
+                <Field
+                  name="signing_domain"
+                  component={SendingDomainTypeaheadWrapper}
+                  label="Default Signing Domain"
+                  disabled={submitting}
+                />
+              </AccessControl>
             }
           </Panel.Section>
 
@@ -126,7 +125,8 @@ const mapStateToProps = (state, props) => {
     list,
     pool,
     ips: selectIpsForCurrentPool(state),
-    initialValues: selectIpPoolFormInitialValues(state, props)
+    initialValues: selectIpPoolFormInitialValues(state, props),
+    showPurchaseCTA: shouldShowIpPurchaseCTA(state)
   };
 };
 
