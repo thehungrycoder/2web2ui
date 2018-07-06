@@ -34,7 +34,8 @@ describe('PoolForm tests', () => {
       ],
       pool: { id: 'my-pool', name: 'My Pool' },
       handleSubmit: jest.fn(),
-      pristine: true
+      pristine: true,
+      showPurchaseCTA: true
     };
 
     wrapper = shallow(<PoolForm {...props} />);
@@ -70,8 +71,8 @@ describe('PoolForm tests', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should return a msg if there are no ips', () => {
-    wrapper.setProps({ ips: []});
+  it('should not show purchase cta if showPurchaseCTA is false', () => {
+    wrapper.setProps({ showPurchaseCTA: false });
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -91,4 +92,3 @@ describe('PoolForm tests', () => {
     expect(rows).toMatchSnapshot();
   });
 });
-
