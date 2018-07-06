@@ -96,7 +96,7 @@ export class Results extends Component {
       <Detail
         suppression={data}
         open={open}
-        onCancel={() => this.toggleDetailModal(data)}
+        onCancel={() => this.toggleDetailModal()}
         subaccounts={subaccounts}
         hasSubaccounts={hasSubaccounts} />
     );
