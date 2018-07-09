@@ -114,7 +114,7 @@ const config = {
     cookieDuration: 60 * 24 * 30,
     cookieDomain: '.sparkpost.com'
   },
-  salesforceDataParams: ['sfdcid', 'src', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term']
+  salesforceDataParams: ['src', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term']
 };
 
 export default config;

@@ -1,10 +1,12 @@
 import { shallow } from 'enzyme';
+import _ from 'lodash';
 import React from 'react';
 import cookie from 'js-cookie';
 import { JoinPage } from '../JoinPage';
 import { AFTER_JOIN_REDIRECT_ROUTE } from 'src/constants';
 import * as constants from 'src/constants';
 import * as analytics from 'src/helpers/analytics';
+import config from '../../../config';
 
 const username = 'foo_bar';
 let props;
@@ -30,7 +32,7 @@ jest.mock('src/config', () => ({
   links: {
     submitTicket: 'https://support.sparkpost.com/customer/portal/emails/new'
   },
-  salesforceDataParams: ['sfdcid', 'src', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'],
+  salesforceDataParams: ['src', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'],
   attribution: {
     cookieName: 'attribution',
     cookieDuration: 60 * 24 * 30,
@@ -56,7 +58,8 @@ describe('JoinPage', () => {
       isAWSsignUp: false,
       location: {
         pathname: '/join'
-      }
+      },
+      title: 'Sign Up'
     };
     formValues = {
       first_name: 'foo',
@@ -79,6 +82,7 @@ describe('JoinPage', () => {
     it('renders correctly', () => {
       expect(wrapper).toMatchSnapshot();
     });
+
     it('renders errors', () => {
       instance.handleSignupFailure = jest.fn().mockReturnValue('Some error occurred');
       wrapper.setProps({ account: { createError: {}}}); //just to make it truthy
@@ -92,10 +96,9 @@ describe('JoinPage', () => {
   });
 
   describe('registerSubmit', () => {
-    let attributionValues;
     beforeEach(() => {
-      attributionValues = { sfdcid: 'abcd', src: 'Test Source', 'utm_source': 'test file' };
-      instance.getAttributionData = jest.fn().mockReturnValue(attributionValues);
+      const allData = { sfdcid: 'abcd', src: 'Test Source', 'utm_source': 'test file', extra1: 'bar1', extra2: 'bar2' };
+      instance.extractQueryParams = jest.fn().mockReturnValue({ sfdcid: allData.sfdcid, attributionData: _.pick(allData, config.salesforceDataParams), creationParams: allData });
       instance.trackSignup = jest.fn();
     });
 
@@ -155,18 +158,24 @@ describe('JoinPage', () => {
   });
 
 
-  describe('getAttributionData', () => {
+  describe('extractQueryParams', () => {
     beforeEach(() => {
       cookie.getJSON.mockReturnValue({ sfdcid: '123', utm_source: 'script' });
     });
 
-    it('returns correct attribution data from stored cookie', () => {
-      expect(instance.getAttributionData()).toMatchSnapshot();
+    it('returns correct data when value exists in cookie only', () => {
+      expect(instance.extractQueryParams()).toMatchSnapshot();
     });
 
-    it('merges attribution data from query params onto stored cookie data', () => {
-      wrapper.setProps({ params: { foo: 'bar', sfdcid: '123', utm_medium: 'script' }});
-      expect(instance.getAttributionData()).toMatchSnapshot();
+    it('returns correct data when cookie is absent', () => {
+      cookie.getJSON.mockReturnValue(undefined);
+      expect(instance.extractQueryParams()).toMatchSnapshot();
     });
+
+    it('merges data from query params onto stored cookie data', () => {
+      wrapper.setProps({ params: { sfdcid: 'overridden', utm_medium: 'new property' }});
+      expect(instance.extractQueryParams()).toMatchSnapshot();
+    });
+
   });
 });
