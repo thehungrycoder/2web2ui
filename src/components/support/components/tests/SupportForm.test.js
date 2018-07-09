@@ -12,7 +12,8 @@ describe('Support Form Component', () => {
     id: 'technical_issues',
     label: 'I need help!',
     messageLabel: 'Tell use more about your technical issue',
-    type: 'Support'
+    type: 'Support',
+    isHeroku: false
   };
 
   describe('Form', () => {
@@ -49,6 +50,11 @@ describe('Support Form Component', () => {
 
     it('should render unauthorized message', () => {
       wrapper.setProps({ notAuthorizedToSubmitSupportTickets: true });
+      expect(wrapper).toMatchSnapshot();
+    });
+
+    it('should render heroku message', () => {
+      wrapper.setProps({ isHeroku: true });
       expect(wrapper).toMatchSnapshot();
     });
   });

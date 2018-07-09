@@ -9,10 +9,12 @@ import { PageLink, SelectWrapper, TextFieldWrapper } from 'src/components';
 import FileFieldWrapper from 'src/components/reduxFormWrappers/FileFieldWrapper';
 import config from 'src/config';
 import { hasOnlineSupport } from 'src/helpers/conditions/account';
+import { isHeroku } from 'src/helpers/conditions/user';
 import { getBase64Contents } from 'src/helpers/file';
 import { required, maxFileSize } from 'src/helpers/validation';
 import { notAuthorizedToSubmitSupportTickets, selectSupportIssue, selectSupportIssues } from 'src/selectors/support';
 import NoIssues from './NoIssues';
+import HerokuMessage from './HerokuMessage';
 
 import styles from '../Support.module.scss';
 
@@ -110,7 +112,11 @@ export class SupportForm extends Component {
   }
 
   render() {
-    const { notAuthorizedToSubmitSupportTickets, openSupportPanel, submitSucceeded } = this.props;
+    const { notAuthorizedToSubmitSupportTickets, openSupportPanel, submitSucceeded, isHeroku } = this.props;
+
+    if (isHeroku) {
+      return <HerokuMessage />;
+    }
 
     if (notAuthorizedToSubmitSupportTickets) {
       return <NoIssues onCancel={openSupportPanel} />;
@@ -131,7 +137,8 @@ const mapStateToProps = (state) => ({
   needsOnlineSupport: !hasOnlineSupport(state),
   notAuthorizedToSubmitSupportTickets: notAuthorizedToSubmitSupportTickets(state),
   selectedIssue: selectSupportIssue(state, selector(state, 'issueId')),
-  ticketId: state.support.ticketId
+  ticketId: state.support.ticketId,
+  isHeroku: isHeroku(state)
 });
 
 const ReduxSupportForm = reduxForm({ form: formName })(SupportForm);

@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HerokuMessage View Component should render 1`] = `
+<div
+  className="SupportContainer"
+>
+  <h6>
+    Please submit a ticket through Heroku
+  </h6>
+  <Button
+    color="orange"
+    external={true}
+    flat={true}
+    size="default"
+    to="https://help.heroku.com"
+  >
+    Go to help.heroku.com 
+    <OpenInNew />
+  </Button>
+</div>
+`;
