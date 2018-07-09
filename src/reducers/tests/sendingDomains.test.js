@@ -1,18 +1,20 @@
 import cases from 'jest-in-case';
 import sendingDomainsReducer from '../sendingDomains';
 
-const state = {
-  domain: {
-    is_default_bounce_domain: false,
-    status: {
-      cname_status: null,
-      mx_status: null,
-      ownership_verified: 1
+cases('Sending Domain reducer', (action) => {
+  const state = {
+    domain: {
+      is_default_bounce_domain: false,
+      status: {
+        cname_status: null,
+        mx_status: null,
+        ownership_verified: 1
+      }
     }
-  }
-};
+  };
 
-const VERIFY_TEST_CASES = {
+  expect(sendingDomainsReducer(state, action)).toMatchSnapshot();
+}, {
   'verify cname pending': {
     type: 'VERIFY_SENDING_DOMAIN_CNAME_PENDING'
   },
@@ -67,14 +69,7 @@ const VERIFY_TEST_CASES = {
   'verify with postmaster fail': {
     payload: { errors: [ { message: 'Some error occurred' }]},
     type: 'VERIFY_SENDING_DOMAIN_POSTMASTER_AT_FAIL'
-  }
-};
-
-cases('Sending Domain reducer', (action) => {
-  expect(sendingDomainsReducer(state, action)).toMatchSnapshot();
-}, VERIFY_TEST_CASES);
-
-const UPDATE_TEST_CASES = {
+  },
   'update pending': {
     type: 'UPDATE_SENDING_DOMAIN_PENDING'
   },
@@ -90,9 +85,8 @@ const UPDATE_TEST_CASES = {
   'update domain fail': {
     payload: { errors: [ { message: 'Some error occurred' }]},
     type: 'UPDATE_SENDING_DOMAIN_FAIL'
+  },
+  'clear sending domain': {
+    type: 'CLEAR_SENDING_DOMAIN'
   }
-};
-
-cases('Sending Domain Update reducer', (action) => {
-  expect(sendingDomainsReducer(state, action)).toMatchSnapshot();
-}, UPDATE_TEST_CASES);
+});

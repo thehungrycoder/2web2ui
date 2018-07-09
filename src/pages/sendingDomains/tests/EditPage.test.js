@@ -14,8 +14,9 @@ describe('Sending Domains Edit Page', () => {
   beforeEach(() => {
     props = {
       domain,
-      getError: null,
-      getLoading: false,
+      clearSendingDomain: jest.fn(),
+      error: null,
+      loading: false,
       getDomain: jest.fn(),
       deleteDomain: jest.fn(() => Promise.resolve()),
       updateDomain: jest.fn(() => Promise.resolve()),
@@ -31,18 +32,18 @@ describe('Sending Domains Edit Page', () => {
     wrapper = shallow(<EditPage {...props}/>);
   });
 
-  it('renders correctly', () => {
+  it('should renders correctly', () => {
     expect(wrapper).toMatchSnapshot();
-    expect(wrapper.instance().props.getDomain).toHaveBeenCalledTimes(1);
+    expect(props.getDomain).toHaveBeenCalledTimes(1);
   });
 
-  it('renders loading correctly', () => {
-    wrapper.setProps({ domain: { id: 'foobar.com' }});
+  it('should renders loading correctly', () => {
+    wrapper.setProps({ loading: true });
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('renders error banner correctly', () => {
-    wrapper.setProps({ getError: { message: 'error' }});
+  it('should redirects to list page with error message', () => {
+    wrapper.setProps({ error: new Error('Oh no!') });
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -52,18 +53,23 @@ describe('Sending Domains Edit Page', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should delete a sending domain', async() => {
+  it('should delete a sending domain', async () => {
     await wrapper.instance().deleteDomain();
     expect(props.deleteDomain).toHaveBeenCalledWith({ id: domain.id, subaccount: domain.subaccount_id });
   });
 
-  it('should redirect after delete', async() => {
+  it('should redirect after delete', async () => {
     await wrapper.instance().deleteDomain();
     expect(props.history.push).toHaveBeenCalledWith('/account/sending-domains');
   });
 
-  it('should toggle subaccount sharing', async() => {
+  it('should toggle subaccount sharing', async () => {
     await wrapper.instance().shareDomainChange();
     expect(props.updateDomain).toHaveBeenCalledWith({ id: domain.id, shared_with_subaccounts: true, subaccount: domain.subaccount_id });
+  });
+
+  it('should clear sending domain on unmount', () => {
+    wrapper.unmount();
+    expect(props.clearSendingDomain).toHaveBeenCalledTimes(1);
   });
 });

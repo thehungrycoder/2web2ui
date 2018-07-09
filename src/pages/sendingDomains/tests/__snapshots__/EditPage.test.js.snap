@@ -1,6 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Sending Domains Edit Page renders correctly 1`] = `
+exports[`Sending Domains Edit Page should redirects to list page with error message 1`] = `
+<Connect(RedirectAndAlert)
+  alert={
+    Object {
+      "message": "Oh no!",
+      "type": "error",
+    }
+  }
+  to="/account/sending-domains"
+/>
+`;
+
+exports[`Sending Domains Edit Page should renders correctly 1`] = `
 <Page
   breadcrumbAction={
     Object {
@@ -142,46 +154,7 @@ exports[`Sending Domains Edit Page renders correctly 1`] = `
 </Page>
 `;
 
-exports[`Sending Domains Edit Page renders error banner correctly 1`] = `
-<Page
-  breadcrumbAction={
-    Object {
-      "Component": [Function],
-      "content": "Sending Domains",
-      "to": "/account/sending-domains",
-    }
-  }
-  empty={Object {}}
-  secondaryActions={
-    Array [
-      Object {
-        "content": "Delete",
-        "onClick": [Function],
-      },
-    ]
-  }
-  title="Edit example.com"
->
-  <ApiErrorBanner
-    errorDetails="error"
-    message="Sorry, we seem to have had some trouble loading your Sending Domain."
-    reload={[Function]}
-  />
-  <DeleteModal
-    content={
-      <p>
-        Any future transmission that uses this domain will be rejected.
-      </p>
-    }
-    onCancel={[Function]}
-    onDelete={[Function]}
-    open={false}
-    title="Are you sure you want to delete this sending domain?"
-  />
-</Page>
-`;
-
-exports[`Sending Domains Edit Page renders loading correctly 1`] = `<Loading />`;
+exports[`Sending Domains Edit Page should renders loading correctly 1`] = `<Loading />`;
 
 exports[`Sending Domains Edit Page should show a delete modal 1`] = `
 <Page
