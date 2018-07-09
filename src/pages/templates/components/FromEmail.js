@@ -36,8 +36,8 @@ export class FromEmail extends Component {
     const { onChange } = this.props;
 
     // Push changes to redux form store
-    if (changes.hasOwnProperty('inputValue')) {
-      onChange && onChange(changes.inputValue);
+    if (changes.hasOwnProperty('selectedItem')) {
+      onChange && onChange(changes.selectedItem);
     }
 
     // Highlights first item in list by default
