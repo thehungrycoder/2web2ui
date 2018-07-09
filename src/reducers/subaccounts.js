@@ -1,10 +1,14 @@
-const initialState = {
-  list: [],
-  subaccount: {},
-  listError: null,
+const initialSubaccountState = {
   getError: null,
-  listLoading: false,
-  getLoading: false
+  getLoading: false,
+  subaccount: {}
+};
+
+const initialState = {
+  ...initialSubaccountState,
+  list: [],
+  listError: null,
+  listLoading: false
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -26,6 +30,9 @@ export default (state = initialState, { type, payload }) => {
 
     case 'GET_SUBACCOUNT_FAIL':
       return { ...state, getLoading: false, getError: payload };
+
+    case 'CLEAR_SUBACCOUNT':
+      return { ...state, ...initialSubaccountState };
 
     default:
       return state;

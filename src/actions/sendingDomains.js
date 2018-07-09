@@ -17,7 +17,8 @@ export function get(id) {
     meta: {
       method: 'GET',
       url: `/sending-domains/${id}`,
-      id
+      id,
+      showErrorAlert: false
     }
   });
 }
@@ -127,3 +128,5 @@ export function verifyPostmasterToken({ id, token, subaccount }) {
 export function verifyAbuseToken({ id, token, subaccount }) {
   return verifyToken({ id, subaccount, type: 'abuse_at', token });
 }
+
+export const clearSendingDomain = () => ({ type: 'CLEAR_SENDING_DOMAIN' });
