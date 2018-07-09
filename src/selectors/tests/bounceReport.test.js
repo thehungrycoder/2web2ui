@@ -111,23 +111,35 @@ describe('Selector: Bounce Report', () => {
     expect(bounceHelpers.reshapeCategories).toHaveBeenCalledWith([]);
   });
 
-  it('should remove admin bounces in regular bounce data', () => {
-    testState.bounceReport.reasons = [
-      { name: 'test1', count_bounce: 5 } ,
-      { name: 'test2', count_bounce: 0 },
-      { name: 'test3' }
+  it('should extract admin bounces from classifications', () => {
+    const categories = [
+      { name: 'Admin', count: 10, children: ['test']},
+      { name: 'Block', count: 100, children: ['test']}
     ];
+    bounceHelpers.reshapeCategories = jest.fn(() => categories);
     const props = mapStateToProps(testState);
-    expect(props.reasons).toHaveLength(1);
+    expect(props.categories).toEqual([{ name: 'Block', count: 100, children: ['test']}]);
+    expect(props.adminCategories).toEqual(['test']);
+    expect(bounceHelpers.reshapeCategories).toHaveBeenCalledWith([]);
   });
 
   it('should remove regular bounces in admin bounce data', () => {
     testState.bounceReport.adminReasons = [
-      { name: 'test1', count_admin_bounce: 5 } ,
-      { name: 'test2', count_admin_bounce: 0 },
+      { name: 'test1', count_bounce: 0, count_admin_bounce: 5 } ,
+      { name: 'test2', count_bounce: 5, count_admin_bounce: 0 },
       { name: 'test3' }
     ];
     const props = mapStateToProps(testState);
     expect(props.adminReasons).toHaveLength(1);
+  });
+
+  it('should remove admin bounces in regular bounce data', () => {
+    testState.bounceReport.reasons = [
+      { name: 'test1', count_bounce: 5, count_admin_bounce: 0 } ,
+      { name: 'test2', count_bounce: 0, count_admin_bounce: 5 },
+      { name: 'test3' }
+    ];
+    const props = mapStateToProps(testState);
+    expect(props.reasons).toHaveLength(1);
   });
 });
