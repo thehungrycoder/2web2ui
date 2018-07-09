@@ -93,7 +93,12 @@ export class Results extends Component {
     const { subaccounts, hasSubaccounts } = this.props;
 
     return (
-      <Detail suppression={data} open={open} onCancel={this.toggleDetailModal} subaccounts={subaccounts} hasSubaccounts={hasSubaccounts} />
+      <Detail
+        suppression={data}
+        open={open}
+        onCancel={() => this.toggleDetailModal()}
+        subaccounts={subaccounts}
+        hasSubaccounts={hasSubaccounts} />
     );
   }
 
@@ -128,7 +133,7 @@ export class Results extends Component {
       content={<p>This can not be undone!</p>}
       isPending={deleting}
       onConfirm={this.deleteSuppression}
-      onCancel={this.toggleDeleteModal}
+      onCancel={() => this.toggleDeleteModal()}
     />);
   }
 

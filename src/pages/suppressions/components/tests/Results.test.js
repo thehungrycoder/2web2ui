@@ -2,6 +2,8 @@ import { shallow } from 'enzyme';
 import React from 'react';
 
 import { Results } from '../Results';
+import Detail from '../Detail';
+import { DeleteModal } from 'src/components';
 
 let props;
 let wrapper;
@@ -63,14 +65,31 @@ describe('Results', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('toggles the detail modal on cancel', () => {
+    const toggleFn = jest.spyOn(instance, 'toggleDetailModal');
+    wrapper.setProps({ results, hasSubaccounts: true });
+    wrapper.find(Detail).at(0).simulate('cancel');
+    expect(toggleFn).toHaveBeenCalled();
+    toggleFn.mockRestore();
+  });
+
   it('renders delete confirmation modal correctly', () => {
     wrapper.setProps({ results });
     wrapper.setState({ del: { open: false, data: {}}});
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('toggles the delete modal on cancel', () => {
+    const toggleFn = jest.spyOn(instance, 'toggleDeleteModal').mockImplementation(() => {});
+    wrapper.setProps({ results, hasSubaccounts: true });
+    wrapper.find(DeleteModal).at(0).simulate('cancel');
+    expect(toggleFn).toHaveBeenCalled();
+    toggleFn.mockRestore();
+  });
+
+
   describe('deleteSuppression', () => {
-    it('deletes the recipient', async() => {
+    it('deletes the recipient', async () => {
       const suppression = { recipient: 'foo@bar.com' };
       wrapper.setState({ del: { open: true, data: suppression }});
       instance.toggleDeleteModal = jest.fn();
