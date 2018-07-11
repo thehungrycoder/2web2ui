@@ -12,14 +12,33 @@ exports[`BouncePage:  should display loading panel on top level metrics when agg
   <PanelLoading
     minHeight="115px"
   />
+  <Tabs
+    color="orange"
+    connectBelow={true}
+    selected={0}
+    tabs={
+      Array [
+        Object {
+          "content": "Bounces",
+          "onClick": [Function],
+        },
+        Object {
+          "content": "Admin Bounces",
+          "onClick": [Function],
+        },
+      ]
+    }
+  />
   <BounceChart
     aggregates={
       Object {
+        "countAdminBounce": 5,
         "countBounce": 1,
         "countSent": 10,
       }
     }
     loading={true}
+    tab={0}
   />
   <hr />
   <TableCollection
@@ -117,13 +136,32 @@ exports[`BouncePage:  should render 1`] = `
     </strong>
      sent messages bounced
   </Connect(MetricsSummary)>
+  <Tabs
+    color="orange"
+    connectBelow={true}
+    selected={0}
+    tabs={
+      Array [
+        Object {
+          "content": "Bounces",
+          "onClick": [Function],
+        },
+        Object {
+          "content": "Admin Bounces",
+          "onClick": [Function],
+        },
+      ]
+    }
+  />
   <BounceChart
     aggregates={
       Object {
+        "countAdminBounce": 5,
         "countBounce": 1,
         "countSent": 10,
       }
     }
+    tab={0}
   />
   <hr />
   <TableCollection
@@ -202,9 +240,25 @@ exports[`BouncePage:  should render correctly with no bounces 1`] = `
   <withRouter(Connect(ReportOptions))
     searchOptions={Object {}}
   />
+  <Tabs
+    color="orange"
+    connectBelow={true}
+    selected={0}
+    tabs={
+      Array [
+        Object {
+          "content": "Bounces",
+          "onClick": [Function],
+        },
+        Object {
+          "content": "Admin Bounces",
+          "onClick": [Function],
+        },
+      ]
+    }
+  />
   <Empty
     message="No bounces to report"
-    title="Bounce Rates"
   />
   <hr />
   <TableCollection
@@ -327,7 +381,7 @@ Array [
 ]
 `;
 
-exports[`BouncePage:  should show empty reasons table when there are no reasons 1`] = `
+exports[`BouncePage:  should show empty reasons table when there are no admin reasons when on admin bounce tab 1`] = `
 <Page
   empty={Object {}}
   title="Bounce Report"
@@ -354,13 +408,93 @@ exports[`BouncePage:  should show empty reasons table when there are no reasons 
     </strong>
      sent messages bounced
   </Connect(MetricsSummary)>
+  <Tabs
+    color="orange"
+    connectBelow={true}
+    selected={1}
+    tabs={
+      Array [
+        Object {
+          "content": "Bounces",
+          "onClick": [Function],
+        },
+        Object {
+          "content": "Admin Bounces",
+          "onClick": [Function],
+        },
+      ]
+    }
+  />
   <BounceChart
     aggregates={
       Object {
+        "countAdminBounce": 5,
         "countBounce": 1,
         "countSent": 10,
       }
     }
+    tab={1}
+  />
+  <hr />
+  <Empty
+    message="No bounce reasons to report"
+  />
+</Page>
+`;
+
+exports[`BouncePage:  should show empty reasons table when there are no reasons when on regular bounce tab 1`] = `
+<Page
+  empty={Object {}}
+  title="Bounce Report"
+>
+  <withRouter(Connect(ReportOptions))
+    searchOptions={Object {}}
+  />
+  <Connect(MetricsSummary)
+    rateTitle="Bounce Rate"
+    rateValue={10}
+    secondaryMessage={
+      <React.Fragment>
+        5
+         messages were categorized as Admin Bounces.
+      </React.Fragment>
+    }
+  >
+    <strong>
+      1
+    </strong>
+     of 
+    <strong>
+      10
+    </strong>
+     sent messages bounced
+  </Connect(MetricsSummary)>
+  <Tabs
+    color="orange"
+    connectBelow={true}
+    selected={0}
+    tabs={
+      Array [
+        Object {
+          "content": "Bounces",
+          "onClick": [Function],
+        },
+        Object {
+          "content": "Admin Bounces",
+          "onClick": [Function],
+        },
+      ]
+    }
+  />
+  <BounceChart
+    aggregates={
+      Object {
+        "countAdminBounce": 5,
+        "countBounce": 1,
+        "countSent": 10,
+      }
+    }
+    tab={0}
   />
   <hr />
   <Empty
@@ -396,13 +530,32 @@ exports[`BouncePage:  should show loading panel when table is loading 1`] = `
     </strong>
      sent messages bounced
   </Connect(MetricsSummary)>
+  <Tabs
+    color="orange"
+    connectBelow={true}
+    selected={0}
+    tabs={
+      Array [
+        Object {
+          "content": "Bounces",
+          "onClick": [Function],
+        },
+        Object {
+          "content": "Admin Bounces",
+          "onClick": [Function],
+        },
+      ]
+    }
+  />
   <BounceChart
     aggregates={
       Object {
+        "countAdminBounce": 5,
         "countBounce": 1,
         "countSent": 10,
       }
     }
+    tab={0}
   />
   <hr />
   <PanelLoading
