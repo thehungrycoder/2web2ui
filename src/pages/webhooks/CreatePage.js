@@ -27,7 +27,7 @@ export class WebhooksCreate extends Component {
     const webhook = { name, target };
 
     if (eventsRadio === 'select') {
-      webhook.events = Object.keys(values.events);
+      webhook.events = Object.keys(values.events).filter((key) => values.events[key]);
     } else {
       // all events
       webhook.events = eventListing.map((event) => event.key);
@@ -81,26 +81,8 @@ export class WebhooksCreate extends Component {
     }
   }
 
-  /*
-    Builds a tree of event data, based on the eventDocs, for the form to create
-    the checkbox groups with.
-  */
-  buildEventsData(eventGroups) {
-    return _.map(eventGroups, ({ display_name, description, events }, key) => ({
-      key,
-      label: display_name,
-      description,
-      events: _.map(events, ({ display_name, description }, eventKey) => ({
-        key: eventKey,
-        label: display_name,
-        description
-      }))
-    }));
-  }
-
   render() {
-    const { eventDocs, eventsLoading } = this.props; // Form doesn't load until we have events
-    const eventsTree = this.buildEventsData(eventDocs);
+    const { eventsLoading } = this.props; // Form doesn't load until we have events
 
     if (eventsLoading) {
       return <Loading />;
@@ -109,7 +91,7 @@ export class WebhooksCreate extends Component {
     return (
       <Page title='Create Webhook' breadcrumbAction={{ content: 'Webhooks', Component: Link, to: '/webhooks' }} >
         <Panel>
-          <WebhookForm eventsTree={eventsTree} newWebhook={true} onSubmit={(values) => this.createWebhook(values, eventsTree)}/>
+          <WebhookForm newWebhook={true} onSubmit={(values) => this.createWebhook(values)}/>
         </Panel>
       </Page>
     );

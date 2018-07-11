@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, formValueSelector, Field } from 'redux-form';
 import { selectInitialSubaccountValue, getSelectedEvents } from 'src/selectors/webhooks';
@@ -14,7 +14,7 @@ import styles from './WebhookForm.module.scss';
 
 const formName = 'webhookForm';
 
-function EventCheckBoxes({ show, events }) {
+export function EventCheckBoxes({ show, events }) {
   if (!show) {
     return null;
   }
@@ -34,7 +34,7 @@ function EventCheckBoxes({ show, events }) {
   );
 }
 
-function AuthFields({ authType }) {
+export function AuthFields({ authType }) {
   if (authType === 'basic') {
     return <BasicAuthFields />;
   }
@@ -44,37 +44,51 @@ function AuthFields({ authType }) {
   return null;
 }
 
-export const WebhookForm = ({
-  handleSubmit,
-  submitText,
-  auth,
-  eventListing,
-  showEvents,
-  disabled,
-  initialValues,
-  newWebhook, /* passed from CreatePage */
-  hasSubaccounts
-}) => (
-  <form onSubmit={handleSubmit}>
-    <Panel.Section>
-      <NameField />
-      <TargetField />
-    </Panel.Section>
-    {hasSubaccounts ? <Panel.Section><SubaccountSection newWebhook={newWebhook} formName={formName} /></Panel.Section> : null}
-    <Panel.Section>
-      <EventsRadioGroup />
-      <EventCheckBoxes show={showEvents} events={eventListing} />
-    </Panel.Section>
-    <Panel.Section>
-      <AuthDropDown />
-      <AuthFields authType={auth} />
-    </Panel.Section>
-    {newWebhook ? null : <Panel.Section><ActiveField /></Panel.Section>}
-    <Panel.Section>
-      <Button submit primary disabled={disabled}>{submitText}</Button>
-    </Panel.Section>
-  </form>
-);
+
+
+export class WebhookForm extends Component {
+
+  // componentDidUpdate(prevProps) {
+  //   if (!prevProps.showEvents && this.props.showEvents) {
+  //     this.props.change('events', {});
+  //   }
+  // }
+
+  render() {
+    const {
+      handleSubmit,
+      submitText,
+      auth,
+      eventListing,
+      showEvents,
+      disabled,
+      newWebhook, /* passed from CreatePage */
+      hasSubaccounts
+    } = this.props;
+
+    return (
+      <form onSubmit={handleSubmit}>
+        <Panel.Section>
+          <NameField />
+          <TargetField />
+        </Panel.Section>
+        {hasSubaccounts ? <Panel.Section><SubaccountSection newWebhook={newWebhook} formName={formName} /></Panel.Section> : null}
+        <Panel.Section>
+          <EventsRadioGroup />
+          <EventCheckBoxes show={showEvents} events={eventListing} />
+        </Panel.Section>
+        <Panel.Section>
+          <AuthDropDown />
+          <AuthFields authType={auth} />
+        </Panel.Section>
+        {newWebhook ? null : <Panel.Section><ActiveField /></Panel.Section>}
+        <Panel.Section>
+          <Button submit primary disabled={disabled}>{submitText}</Button>
+        </Panel.Section>
+      </form>
+    );
+  }
+}
 
 
 const mapStateToProps = (state, props) => {
@@ -94,7 +108,7 @@ const mapStateToProps = (state, props) => {
       eventsRadio: props.allChecked || props.newWebhook ? 'all' : 'select',
       subaccount: !props.newWebhook ? selectInitialSubaccountValue(state, props) : null,
       ...webhookValues,
-      events: getSelectedEvents(state)
+      events: props.newWebhook ? {} : getSelectedEvents(state)
     }
   };
 };

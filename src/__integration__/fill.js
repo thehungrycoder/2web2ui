@@ -29,10 +29,6 @@ function getControl({
   return control;
 }
 
-function toggleCheckbox(checkbox) {
-  checkbox.simulate('change', { currentTarget: { checked: !checkbox.props().checked }});
-}
-
 function selectRadioOption({ radios, value, index }) {
   let control;
 
@@ -74,12 +70,6 @@ export default function getFiller(mounted) {
           break;
         }
 
-        case 'checkbox': {
-          toggleCheckbox(control);
-          updated = true;
-          break;
-        }
-
         case 'downshift':
         case 'typeahead': {
           control.props().onChange(args.value);
@@ -87,6 +77,7 @@ export default function getFiller(mounted) {
         }
 
         // eslint-disable-next-line no-fallthrough
+        case 'checkbox':
         case 'select':
         case 'text':
         default: {
@@ -99,5 +90,6 @@ export default function getFiller(mounted) {
     }
 
     updated && mounted.update();
+    type === 'checkbox' && debugLog('checked after:', control.props().checked);
   };
 }

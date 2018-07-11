@@ -12,7 +12,7 @@ import { selectEventListing } from 'src/selectors/eventListing';
 export class EditTab extends Component {
 
   componentDidMount() {
-    if (!this.props.eventDocs) {
+    if (this.props.eventListing.length === 0) {
       this.props.getEventDocs();
     }
   }
@@ -25,6 +25,7 @@ export class EditTab extends Component {
     const { getWebhook, updateWebhook, showAlert, eventListing } = this.props;
     const { name, target, active, events = [], eventsRadio } = values;
     const { id, subaccount } = webhook;
+    const eventKeys = eventListing.map(({ key }) => key);
 
     await updateWebhook({
       id,
@@ -33,7 +34,7 @@ export class EditTab extends Component {
       name,
       target,
       active,
-      events: (eventsRadio === 'all') ? Object.keys(eventListing) : Object.keys(events).filter((e) => events[e])
+      events: (eventsRadio === 'all') ? eventKeys : eventKeys.filter((e) => events[e]) // if not "all", choose only keys whose value is "true"
     });
 
     showAlert({ type: 'success', message: 'Update Successful' });
@@ -55,7 +56,7 @@ export class EditTab extends Component {
     return (
       <Panel>
         <WebhookForm
-          allChecked={webhook.events.length === Object.keys(eventListing).length}
+          allChecked={webhook.events.length === eventListing.length}
           onSubmit={(values) => this.update(values, webhook)}
         />
       </Panel>
