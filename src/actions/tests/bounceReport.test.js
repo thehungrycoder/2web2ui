@@ -29,12 +29,12 @@ describe('Action Creator: Refresh Bounce Report', () => {
   });
 
   it('should dispatch actions', () => {
-    expect(dispatchMock).toHaveBeenCalledTimes(3);
+    expect(dispatchMock).toHaveBeenCalledTimes(4);
     expect(metricsActions.fetchDeliverability).toHaveBeenCalledWith({
       type: 'GET_BOUNCE_REPORT_AGGREGATES',
       params: {
         ...queryMock,
-        metrics: 'count_sent,count_bounce,count_inband_bounce,count_outofband_bounce,count_admin_bounce'
+        metrics: 'count_sent,count_bounce,count_inband_bounce,count_outofband_bounce,count_admin_bounce,count_targeted'
       }
     });
     expect(metricsActions.fetchBounceClassifications).toHaveBeenCalledWith({
@@ -43,8 +43,12 @@ describe('Action Creator: Refresh Bounce Report', () => {
     });
     expect(metricsActions.fetchBounceReasonsByDomain).toHaveBeenCalledWith({
       ...queryMock,
-      metrics: 'count_bounce,count_admin_bounce'
-    });
+      metrics: 'count_bounce'
+    }, 'FETCH_METRICS_BOUNCE_REASONS_BY_DOMAIN');
+    expect(metricsActions.fetchBounceReasonsByDomain).toHaveBeenCalledWith({
+      ...queryMock,
+      metrics: 'count_admin_bounce'
+    }, 'FETCH_METRICS_ADMIN_BOUNCE_REASONS_BY_DOMAIN');
   });
 
 });

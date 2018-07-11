@@ -7,7 +7,7 @@ import { addFilters } from 'src/actions/reportOptions';
 import { TableCollection, Empty, LongTextContainer } from 'src/components';
 import { Percent } from 'src/components/formatters';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
-import { Page, UnstyledLink } from '@sparkpost/matchbox';
+import { Page, UnstyledLink, Tabs } from '@sparkpost/matchbox';
 import ReportOptions from '../components/ReportOptions';
 import BounceChart from './components/BounceChart';
 import MetricsSummary from '../components/MetricsSummary';
@@ -22,6 +22,9 @@ const columns = [
 ];
 
 export class BouncePage extends Component {
+  state = {
+    tab: 0
+  };
 
   componentDidUpdate(prevProps) {
     if (prevProps.reportOptions !== this.props.reportOptions) {
@@ -30,7 +33,7 @@ export class BouncePage extends Component {
   }
 
   getRowData = (item) => {
-    const { aggregates = {}, addFilters, adminBounces } = this.props;
+    const { aggregates = {}, addFilters } = this.props;
     const { reason, domain, bounce_category_name, bounce_class_name, count_bounce, count_admin_bounce } = item;
     // calculate the rate of admin bounces against all bounces
     let numerator = count_bounce;
@@ -38,7 +41,7 @@ export class BouncePage extends Component {
 
     if (bounce_category_name === 'Admin') {
       numerator = count_admin_bounce;
-      denominator += adminBounces;
+      denominator += aggregates.countAdminBounce;
     }
 
     return [
@@ -51,9 +54,15 @@ export class BouncePage extends Component {
   };
 
   renderChart() {
-    const { chartLoading, aggregates, categories, types } = this.props;
-    if (!chartLoading && _.isEmpty(aggregates)) {
-      return <Empty title='Bounce Rates' message='No bounces to report' />;
+    const { chartLoading, aggregates, categories, types, adminCategories } = this.props;
+
+
+    if (!chartLoading) {
+      if (_.isEmpty(aggregates) ||
+        (!aggregates.countAdminBounce && this.state.tab === 1) ||
+        (!aggregates.countBounce && this.state.tab === 0)) {
+        return <Empty message='No bounces to report'/>;
+      }
     }
 
     return <BounceChart
@@ -61,11 +70,14 @@ export class BouncePage extends Component {
       aggregates={aggregates}
       categories={categories}
       types={types}
+      admin = {adminCategories}
+      tab = {this.state.tab}
     />;
   }
 
   renderCollection() {
-    const { tableLoading, reasons } = this.props;
+    const { tableLoading } = this.props;
+    const reasons = (this.state.tab === 1) ? this.props.adminReasons : this.props.reasons;
 
     if (tableLoading) {
       return <PanelLoading />;
@@ -96,12 +108,12 @@ export class BouncePage extends Component {
   }
 
   renderTopLevelMetrics() {
-    const { chartLoading, aggregates, adminBounces } = this.props;
-    const { countBounce, countSent } = aggregates;
+    const { chartLoading, aggregates } = this.props;
+    const { countBounce, countSent, countAdminBounce } = aggregates;
 
     // TODO Add support doc link - <UnstyledLink to={LINKS.ADMIN_BOUNCE} external>Learn more</UnstyledLink>.
-    const adminBounceText = adminBounces
-      ? <Fragment>{adminBounces.toLocaleString()} messages were categorized as Admin Bounces.</Fragment>
+    const adminBounceText = countAdminBounce
+      ? <Fragment>{countAdminBounce.toLocaleString()} messages were categorized as Admin Bounces.</Fragment>
       : null;
 
     // Aggregates aren't ready until chart refreshes
@@ -124,13 +136,23 @@ export class BouncePage extends Component {
     );
   }
 
+  renderTabs() {
+    return (
+      <Tabs tabs={[{ content: 'Bounces', onClick: () => this.handleTab(0) }, { content: 'Admin Bounces', onClick: () => this.handleTab(1) }]} selected={this.state.tab} />
+    );
+  }
+
+  handleTab = (index) => {
+    this.setState({ tab: index });
+  };
+
   render() {
     const { chartLoading, bounceSearchOptions } = this.props;
-
     return (
       <Page title='Bounce Report'>
         <ReportOptions reportLoading={chartLoading} searchOptions={bounceSearchOptions} />
         {this.renderTopLevelMetrics()}
+        {this.renderTabs()}
         {this.renderChart()}
         <hr/>
         {this.renderCollection()}

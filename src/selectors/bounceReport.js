@@ -12,7 +12,8 @@ const selectTableLoading = createSelector(
 );
 const selectAggregates = ({ bounceReport }) => bounceReport.aggregates;
 const selectClassifications = (state) => _.get(state, 'bounceReport.classifications', []);
-const selectReasons = ({ bounceReport }) => bounceReport.reasons;
+const selectReasons = ({ bounceReport }) => bounceReport.reasons.filter((reason) => reason.count_bounce > 0);
+const selectAdminReasons = ({ bounceReport }) => bounceReport.adminReasons.filter((reason) => reason.count_admin_bounce > 0);
 
 const selectFormattedAggregates = createSelector(
   [selectAggregates],
@@ -34,11 +35,14 @@ const selectCategories = createSelector(
   (categories) => _.filter(categories, ({ name }) => name !== 'Admin')
 );
 
-const selectAdminBounces = createSelector(
+const selectAdminCategories = createSelector(
   [selectReshapedCategories],
   (categories) => {
     const adminBounces = _.find(categories, ({ name }) => name === 'Admin');
-    return _.get(adminBounces, 'count', 0);
+    if (adminBounces) {
+      return adminBounces.children;
+    }
+    return [];
   }
 );
 
@@ -52,10 +56,11 @@ export const mapStateToProps = createStructuredSelector({
   chartLoading: selectChartLoading,
   tableLoading: selectTableLoading,
   reasons: selectReasons,
+  adminReasons: selectAdminReasons,
   aggregates: selectFormattedAggregates,
   categories: selectCategories,
-  adminBounces: selectAdminBounces,
   types: selectBandTypes,
+  adminCategories: selectAdminCategories,
   reportOptions: selectReportOptions,
   bounceSearchOptions: selectReportSearchOptions
 });

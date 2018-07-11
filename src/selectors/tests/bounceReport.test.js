@@ -32,6 +32,7 @@ describe('Selector: Bounce Report', () => {
         categoriesLoading: false,
         reasonsLoading: false,
         reasons: [],
+        adminReasons: [],
         classifications: []
       }
     };
@@ -55,12 +56,13 @@ describe('Selector: Bounce Report', () => {
       chartLoading: false,
       tableLoading: false,
       reasons: testState.bounceReport.reasons,
+      adminReasons: testState.bounceReport.adminReasons,
       aggregates: formattedAggregates,
       categories: reshapedCategories,
+      adminCategories: reshapedCategories,
       types: bandTypes,
       reportOptions: testState.reportOptions,
-      bounceSearchOptions: searchOptions,
-      adminBounces: 0
+      bounceSearchOptions: searchOptions
     });
     expect(bounceHelpers.getBandTypes).toHaveBeenCalledWith(formattedAggregates);
     expect(bounceHelpers.reshapeCategories).toHaveBeenCalledWith(testState.bounceReport.classifications);
@@ -106,7 +108,6 @@ describe('Selector: Bounce Report', () => {
     delete testState.bounceReport.classifications;
     const props = mapStateToProps(testState);
     expect(props.categories).toEqual(reshapedCategories);
-    expect(props.adminBounces).toEqual(0);
     expect(bounceHelpers.reshapeCategories).toHaveBeenCalledWith([]);
   });
 
@@ -118,7 +119,27 @@ describe('Selector: Bounce Report', () => {
     bounceHelpers.reshapeCategories = jest.fn(() => categories);
     const props = mapStateToProps(testState);
     expect(props.categories).toEqual([{ name: 'Block', count: 100, children: ['test']}]);
-    expect(props.adminBounces).toEqual(10);
+    expect(props.adminCategories).toEqual(['test']);
     expect(bounceHelpers.reshapeCategories).toHaveBeenCalledWith([]);
+  });
+
+  it('should remove regular bounces in admin bounce data', () => {
+    testState.bounceReport.adminReasons = [
+      { name: 'test1', count_bounce: 0, count_admin_bounce: 5 } ,
+      { name: 'test2', count_bounce: 5, count_admin_bounce: 0 },
+      { name: 'test3' }
+    ];
+    const props = mapStateToProps(testState);
+    expect(props.adminReasons).toHaveLength(1);
+  });
+
+  it('should remove admin bounces in regular bounce data', () => {
+    testState.bounceReport.reasons = [
+      { name: 'test1', count_bounce: 5, count_admin_bounce: 0 } ,
+      { name: 'test2', count_bounce: 0, count_admin_bounce: 5 },
+      { name: 'test3' }
+    ];
+    const props = mapStateToProps(testState);
+    expect(props.reasons).toHaveLength(1);
   });
 });

@@ -9,9 +9,9 @@ describe('BouncePage: ', () => {
     loading: false,
     aggregates: {
       countBounce: 1,
-      countSent: 10
+      countSent: 10,
+      countAdminBounce: 5
     },
-    adminBounces: 5,
     reportOptions: {
       relativeRange: 'hour'
     },
@@ -25,6 +25,15 @@ describe('BouncePage: ', () => {
       count_bounce: 5,
       domain: 'yahoo.com',
       reason: '554 - 5.7.1 Blacklisted by \'twoomail.com\'(twoo.com.multi.surbl.org) Contact the postmaster of this domain for resolution. This attempt has been logged.'
+    } ],
+    adminReasons: [ {
+      bounce_class_name: 'Admin Failure',
+      bounce_class_description: 'The message was failed by eceleritys configured policies',
+      bounce_category_name: 'Admin',
+      classification_id: 25,
+      count_admin_bounce: 2,
+      domain: 'yahoo.com',
+      reason: '550 - Administrative prohibition #51'
     } ],
     bounceSearchOptions: {}
   };
@@ -63,7 +72,11 @@ describe('BouncePage: ', () => {
   });
 
   it('should not display top level metrics admin bounce message with no admin bounces', () => {
-    wrapper.setProps({ adminBounces: 0 });
+    wrapper.setProps({ aggregates: {
+      countBounce: 1,
+      countSent: 10,
+      countAdminBounce: 0
+    }});
     expect(wrapper.find(MetricsSummary).props().secondaryMessage).toBe(null);
   });
 
@@ -72,8 +85,35 @@ describe('BouncePage: ', () => {
     expect(wrapper.find(MetricsSummary)).toHaveLength(0);
   });
 
-  it('should show empty reasons table when there are no reasons', () => {
-    wrapper.setProps({ reasons: []});
+  it('should show empty reasons table when there are no reasons when on regular bounce tab', () => {
+    wrapper.setState({ tab: 0 });
+    wrapper.setProps({
+      reasons: [],
+      adminReasons: [ {
+        bounce_class_name: 'Admin Failure',
+        bounce_class_description: 'The message was failed by eceleritys configured policies',
+        bounce_category_name: 'Admin',
+        classification_id: 25,
+        count_admin_bounce: 2,
+        domain: 'yahoo.com',
+        reason: '550 - Administrative prohibition #51'
+      } ]});
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should show empty reasons table when there are no admin reasons when on admin bounce tab', () => {
+    wrapper.setState({ tab: 1 });
+    wrapper.setProps({
+      adminReasons: [],
+      reasons: [ {
+        bounce_category_name: 'Block',
+        bounce_class_description: 'The message was blocked by the receiver as coming from a known spam source',
+        bounce_class_name: 'Spam Block',
+        classification_id: 51,
+        count_bounce: 5,
+        domain: 'yahoo.com',
+        reason: '554 - 5.7.1 Blacklisted by \'twoomail.com\'(twoo.com.multi.surbl.org) Contact the postmaster of this domain for resolution. This attempt has been logged.'
+      } ]});
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -112,4 +152,8 @@ describe('BouncePage: ', () => {
     expect(props.addFilters).toHaveBeenCalledWith([{ type: 'Recipient Domain', value: 'gmail' }]);
   });
 
+  it('should change state when the tab is clicked', () => {
+    wrapper.instance().handleTab(1);
+    expect(wrapper).toHaveState('tab', 1);
+  });
 });

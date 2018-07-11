@@ -5,11 +5,14 @@ import { PieChart } from 'src/components';
 import { shallow } from 'enzyme';
 
 describe('Bounce Chart', () => {
-
   const props = {
     categories: [
       { name: 'hard', count: 5 },
       { name: 'soft', count: 1, children: [{ name: 'softchild1', count: 2 }, { name: 'softchild2', count: 3 }]}
+    ],
+    admin: [
+      { name: 'admin failure', count: 5 },
+      { name: 'smart send', count: 1 }
     ],
     types: [
       { name: 'in', count: 20 },
@@ -17,8 +20,11 @@ describe('Bounce Chart', () => {
     ],
     aggregates: {
       countSent: 100,
-      countBounce: 50
-    }
+      countBounce: 50,
+      countAdminBounce: 10,
+      countTargeted: 60
+    },
+    tab: 0
   };
 
   let wrapper;
@@ -43,6 +49,12 @@ describe('Bounce Chart', () => {
     expect(wrapper.find(PieChart.ActiveLabel)).toMatchSnapshot();
 
     wrapper.instance().handleMouseOut();
+    wrapper.update();
+    expect(wrapper.find(PieChart.ActiveLabel)).toMatchSnapshot();
+    expect(wrapper.instance().state).toMatchSnapshot();
+
+    wrapper.setProps({ tab: 1 });
+    wrapper.instance().handleMouseOver({ name: 'Admin Failure', count: 2 });
     wrapper.update();
     expect(wrapper.find(PieChart.ActiveLabel)).toMatchSnapshot();
     expect(wrapper.instance().state).toMatchSnapshot();
@@ -72,5 +84,24 @@ describe('Bounce Chart', () => {
     expect(wrapper.instance().state).toMatchSnapshot();
     wrapper.instance().handleBreadcrumb();
     expect(wrapper.instance().state).toMatchSnapshot();
+  });
+
+  it('should switch legends when clicking on admin tab even when children data is in bounce tab', () => {
+    wrapper.instance().handleClick(props.categories[1]);
+    wrapper.setProps({ tab: 1 });
+    wrapper.update();
+    expect(wrapper.find(PieChart.Legend)).toMatchSnapshot();
+  });
+
+  it('should render bounces chart when on bounces tab', () => {
+    wrapper.setProps({ tab: 0 });
+    wrapper.update();
+    expect(wrapper.find(PieChart.Chart)).toMatchSnapshot();
+  });
+
+  it('should render admin bounces chart when on admin bounces tab', () => {
+    wrapper.setProps({ tab: 1 });
+    wrapper.update();
+    expect(wrapper.find(PieChart.Chart)).toMatchSnapshot();
   });
 });

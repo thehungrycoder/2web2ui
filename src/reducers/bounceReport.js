@@ -3,7 +3,7 @@ const initialState = {
   categories: [],
   aggregates: {},
   reasons: [],
-  adminBounces: 0
+  adminReasons: []
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -45,6 +45,17 @@ export default (state = initialState, { type, payload }) => {
     case 'FETCH_METRICS_BOUNCE_REASONS_BY_DOMAIN_FAIL':
       return { ...state, reasonsLoading: false };
 
+
+    // ADMIN BOUNCE REASONS
+
+    case 'FETCH_METRICS_ADMIN_BOUNCE_REASONS_BY_DOMAIN_PENDING':
+      return { ...state, reasonsLoading: true };
+
+    case 'FETCH_METRICS_ADMIN_BOUNCE_REASONS_BY_DOMAIN_SUCCESS':
+      return { ...state, reasonsLoading: false, adminReasons: payload };
+
+    case 'FETCH_METRICS_ADMIN_BOUNCE_REASONS_BY_DOMAIN_FAIL':
+      return { ...state, reasonsLoading: false };
 
     default:
       return state;

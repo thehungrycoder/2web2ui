@@ -1,7 +1,7 @@
 import { fetchDeliverability, fetchBounceClassifications, fetchBounceReasonsByDomain } from 'src/actions/metrics';
 import { getQueryFromOptions } from 'src/helpers/metrics';
 
-export function refreshBounceReport (updates = {}) {
+export function refreshBounceReport(updates = {}) {
   return (dispatch) => {
     const params = getQueryFromOptions(updates);
 
@@ -11,7 +11,7 @@ export function refreshBounceReport (updates = {}) {
         type: 'GET_BOUNCE_REPORT_AGGREGATES',
         params: {
           ...params,
-          metrics: 'count_sent,count_bounce,count_inband_bounce,count_outofband_bounce,count_admin_bounce'
+          metrics: 'count_sent,count_bounce,count_inband_bounce,count_outofband_bounce,count_admin_bounce,count_targeted'
         }
       })),
       dispatch(fetchBounceClassifications({
@@ -20,8 +20,12 @@ export function refreshBounceReport (updates = {}) {
       })),
       dispatch(fetchBounceReasonsByDomain({
         ...params,
-        metrics: 'count_bounce,count_admin_bounce'
-      }))
+        metrics: 'count_bounce'
+      }, 'FETCH_METRICS_BOUNCE_REASONS_BY_DOMAIN')),
+      dispatch(fetchBounceReasonsByDomain({
+        ...params,
+        metrics: 'count_admin_bounce'
+      }, 'FETCH_METRICS_ADMIN_BOUNCE_REASONS_BY_DOMAIN'))
     ]);
   };
 }
