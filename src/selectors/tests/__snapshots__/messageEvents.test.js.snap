@@ -38,6 +38,23 @@ Array [
 ]
 `;
 
+exports[`MessageEvents Selectors getSelectedEventFromEventsList returns correct event from events list 1`] = `
+Object {
+  "event_id": "default_id",
+  "foo": "bar",
+  "timestamp": "2017-11-09T00:00",
+}
+`;
+
+exports[`MessageEvents Selectors getSelectedEventFromMessageHistory returns correct event from messageHistory 1`] = `
+Object {
+  "event_id": "default_id",
+  "foo": "bar",
+  "formattedDate": "Nov 9 2017, 12:00am",
+  "timestamp": "2017-11-09T00:00",
+}
+`;
+
 exports[`MessageEvents Selectors selectMessageEventsSearchOptions prepares message events reportOptions for URL sharing 1`] = `
 Object {
   "from": "2018-03-23T21:10:08Z",

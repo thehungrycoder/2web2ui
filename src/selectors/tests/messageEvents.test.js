@@ -117,4 +117,26 @@ describe('MessageEvents Selectors', () => {
       expect(selectors.isMessageHistoryEmpty(state, props)).toEqual(false);
     });
   });
+
+  describe('getSelectedEventFromMessageHistory', () => {
+    it('returns correct event from messageHistory', () => {
+      props.match.params.eventId = 'default_id';
+      expect(selectors.getSelectedEventFromMessageHistory({ messageEvents: messageHistory }, props)).toMatchSnapshot();
+    });
+
+    it('returns undefined if event does not exist in messageHistory', () => {
+      expect(selectors.getSelectedEventFromMessageHistory({ messageEvents: messageHistory }, props)).toBe(undefined);
+    });
+  });
+
+  describe('getSelectedEventFromEventsList', () => {
+    it('returns correct event from events list', () => {
+      props.match.params.eventId = 'default_id';
+      expect(selectors.getSelectedEventFromEventsList({ messageEvents }, props)).toMatchSnapshot();
+    });
+
+    it('returns undefined if event does not exist in messageHistory', () => {
+      expect(selectors.getSelectedEventFromEventsList({ messageEvents }, props)).toBe(undefined);
+    });
+  });
 });

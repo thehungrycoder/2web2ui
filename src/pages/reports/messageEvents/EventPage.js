@@ -4,14 +4,12 @@ import { Link } from 'react-router-dom';
 
 import { getMessageHistory, getDocumentation } from 'src/actions/messageEvents';
 import RedirectAndAlert from 'src/components/globalAlert/RedirectAndAlert';
-import { isMessageHistoryEmpty, selectMessageHistory, selectInitialEventId } from 'src/selectors/messageEvents';
+import { isMessageHistoryEmpty, selectMessageHistory, selectInitialEventId, getSelectedEventFromMessageHistory, getSelectedEventFromEventsList } from 'src/selectors/messageEvents';
 import { getPath } from 'src/helpers/messageEvents';
 import { Page, Grid } from '@sparkpost/matchbox';
 import { Loading } from 'src/components';
 import HistoryTable from './components/HistoryTable';
 import EventDetails from './components/EventDetails';
-
-import _ from 'lodash';
 
 const breadcrumbAction = {
   content: 'All Message Events',
@@ -87,26 +85,24 @@ export class EventPage extends Component {
 
 const mapStateToProps = (state, props) => {
   const messageId = props.match.params.messageId;
-  const selectedEventId = selectInitialEventId(state, props);
-  const messageHistory = selectMessageHistory(state, props);
+  const isOrphanEvent = messageId === '<empty>';
 
   let selectedEvent;
 
-  if (messageHistory.length) {
-    selectedEvent = _.find(messageHistory, (event) => event.event_id === selectedEventId);
+  if (isOrphanEvent) {
+    selectedEvent = getSelectedEventFromEventsList(state, props);
   } else {
-    selectedEvent = _.find(state.messageEvents.events, (event) => event.event_id === selectedEventId);
+    selectedEvent = getSelectedEventFromMessageHistory(state, props);
   }
-
 
   return {
     isMessageHistoryEmpty: isMessageHistoryEmpty(state, props),
     isOrphanEvent: messageId === '<empty>', //event without a message_id property
     loading: state.messageEvents.historyLoading || state.messageEvents.documentationLoading,
-    messageHistory,
+    messageHistory: selectMessageHistory(state, props),
     messageId,
     documentation: state.messageEvents.documentation,
-    selectedEventId,
+    selectedEventId: selectInitialEventId(state, props),
     selectedEvent
   };
 };
