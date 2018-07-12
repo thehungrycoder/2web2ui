@@ -7,13 +7,20 @@ describe('Page: Event tests', () => {
     getMessageHistory: jest.fn(),
     getDocumentation: jest.fn(),
     history: {
-      replace: jest.fn()
+      replace: jest.fn(),
+      push: jest.fn()
     },
     messageId: 'id',
     messageHistory: [
       { event_id: '1' },
       { event_id: '2' }
-    ]
+    ],
+    isOrphanEvent: false,
+    match: {
+      params: {
+        eventId: 1
+      }
+    }
   };
 
   let wrapper;
@@ -26,19 +33,11 @@ describe('Page: Event tests', () => {
     expect(wrapper).toMatchSnapshot();
     expect(props.getDocumentation).toHaveBeenCalled();
     expect(props.getMessageHistory).toHaveBeenCalledWith({ messageId: props.messageId });
-    expect(wrapper.state().selectedEventId).toEqual(null);
   });
 
-  it('should handle location state', () => {
-    wrapper.setProps({ selectedEventId: '1' });
-    expect(wrapper.state().selectedEventId).toEqual('1');
-    expect(props.history.replace).toHaveBeenCalled();
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('should handle event click', () => {
+  it('should handle event click by pushing new state', () => {
     wrapper.instance().handleEventClick('eventId');
-    expect(wrapper.state().selectedEventId).toEqual('eventId');
+    expect(props.history.push).toHaveBeenCalledWith('/reports/message-events/details/id/eventId');
   });
 
   it('should render loading correctly', () => {

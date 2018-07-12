@@ -17,7 +17,7 @@ export class ViewDetailsButton extends Component {
 
     return (
       <div className={styles.AlignRight}>
-        <Button Component={Link} to={to} size='small' color={message_id ? 'blue' : 'orange'}>View Details</Button>
+        <Button Component={Link} to={to} size='small'>View Details</Button>
       </div>
     );
   }

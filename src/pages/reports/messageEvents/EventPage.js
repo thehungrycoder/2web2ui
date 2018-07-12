@@ -24,12 +24,7 @@ export class EventPage extends Component {
     messageHistory: []
   }
 
-  state = {
-    selectedEventId: null
-  }
-
   componentDidMount() {
-
     this.handleRefresh();
     this.props.getDocumentation();
   }

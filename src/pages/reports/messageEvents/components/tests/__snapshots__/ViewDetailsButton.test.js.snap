@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Component ViewDetailsButton renders correctly 1`] = `
+exports[`Component ViewDetailsButton renders correct if message_id is absent 1`] = `
 <div
   className="AlignRight"
 >
@@ -9,10 +9,7 @@ exports[`Component ViewDetailsButton renders correctly 1`] = `
     size="small"
     to={
       Object {
-        "pathname": "/reports/message-events/details/123abc",
-        "state": Object {
-          "selectedEventId": "456xyz",
-        },
+        "pathname": "/reports/message-events/details/<empty>/456xyz",
       }
     }
   >
@@ -21,4 +18,20 @@ exports[`Component ViewDetailsButton renders correctly 1`] = `
 </div>
 `;
 
-exports[`Component ViewDetailsButton renders nothing if message_id is absent 1`] = `""`;
+exports[`Component ViewDetailsButton renders correctly when message_id exists 1`] = `
+<div
+  className="AlignRight"
+>
+  <Button
+    Component={[Function]}
+    size="small"
+    to={
+      Object {
+        "pathname": "/reports/message-events/details/123abc/456xyz",
+      }
+    }
+  >
+    View Details
+  </Button>
+</div>
+`;
