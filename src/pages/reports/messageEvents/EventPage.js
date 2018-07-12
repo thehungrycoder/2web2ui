@@ -49,7 +49,7 @@ export class EventPage extends Component {
   render() {
     const { isMessageHistoryEmpty, isOrphanEvent, loading, messageId, messageHistory, documentation, selectedEventId, selectedEvent } = this.props;
 
-    if (isOrphanEvent && !selectedEvent) {
+    if ((!isOrphanEvent && isMessageHistoryEmpty) || (isOrphanEvent && !selectedEvent)) {
       const errorMessageInfo = isOrphanEvent ? `event_id # ${selectedEventId}` : `message_id # ${messageId}`;
       return (
         <RedirectAndAlert
@@ -79,7 +79,7 @@ export class EventPage extends Component {
       );
 
 
-    const title = isMessageHistoryEmpty ? `Event: ${selectedEventId}` : `Message: ${messageId}`;
+    const title = isOrphanEvent ? `Event: ${selectedEventId}` : `Message: ${messageId}`;
 
     return <Page title={title} breadcrumbAction={breadcrumbAction}>{pageContent}</Page>;
   }

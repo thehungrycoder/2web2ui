@@ -17,9 +17,7 @@ describe('Page: Event tests', () => {
     ],
     isOrphanEvent: false,
     match: {
-      params: {
-        eventId: 1
-      }
+      params: {}
     }
   };
 
@@ -35,6 +33,16 @@ describe('Page: Event tests', () => {
     expect(props.getMessageHistory).toHaveBeenCalledWith({ messageId: props.messageId });
   });
 
+  it('rewrites old path (w/o eventId) to new path', () => {
+    wrapper.setProps({ selectedEventId: 1 });
+    expect(props.history.replace).toHaveBeenCalledWith('/reports/message-events/details/id/1');
+  });
+
+  it('redirects to list page if event_id not found', () => {
+    wrapper.setProps({ isOrphanEvent: true, selectedEvent: null, selectedEventId: 3 });
+    expect(wrapper).toMatchSnapshot();
+  });
+
   it('should handle event click by pushing new state', () => {
     wrapper.instance().handleEventClick('eventId');
     expect(props.history.push).toHaveBeenCalledWith('/reports/message-events/details/id/eventId');
@@ -46,7 +54,7 @@ describe('Page: Event tests', () => {
   });
 
   it('should redirect when no message events', () => {
-    wrapper.setProps({ isMessageHistoryEmpty: true });
+    wrapper.setProps({ isMessageHistoryEmpty: true, isOrphanEvent: false });
     expect(wrapper).toMatchSnapshot();
   });
 });

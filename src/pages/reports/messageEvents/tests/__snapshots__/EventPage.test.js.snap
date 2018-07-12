@@ -1,47 +1,27 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Page: Event tests should redirect when no message events 1`] = `
-<Page
-  breadcrumbAction={
+exports[`Page: Event tests redirects to list page if event_id not found 1`] = `
+<Connect(RedirectAndAlert)
+  alert={
     Object {
-      "Component": [Function],
-      "content": "All Message Events",
-      "to": "/reports/message-events",
+      "message": "Unable to find event(s) data with event_id # 3",
+      "type": "warning",
     }
   }
-  empty={Object {}}
-  title="Event: undefined"
->
-  <Grid>
-    <Grid.Column
-      md={6}
-      xs={12}
-    >
-      <EventDetails
-        details={Object {}}
-      />
-    </Grid.Column>
-    <Grid.Column
-      md={6}
-      xs={12}
-    >
-      <HistoryTable
-        handleEventClick={[Function]}
-        handleRefresh={[Function]}
-        messageHistory={
-          Array [
-            Object {
-              "event_id": "1",
-            },
-            Object {
-              "event_id": "2",
-            },
-          ]
-        }
-      />
-    </Grid.Column>
-  </Grid>
-</Page>
+  to="/reports/message-events"
+/>
+`;
+
+exports[`Page: Event tests should redirect when no message events 1`] = `
+<Connect(RedirectAndAlert)
+  alert={
+    Object {
+      "message": "Unable to find event(s) data with message_id # id",
+      "type": "warning",
+    }
+  }
+  to="/reports/message-events"
+/>
 `;
 
 exports[`Page: Event tests should render page correctly 1`] = `

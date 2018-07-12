@@ -49,7 +49,3 @@ export const isMessageHistoryEmpty = createSelector(
   [getMessageHistory, getMessageIdParam],
   (history, id) => history.hasOwnProperty(id) && history[id].length === 0
 );
-
-export const selectCurrentEvent = createSelector(
-  [selectMessageEvents, getEventIdParam], (events, eventId) => _.find(events, { event_id: eventId })
-);
