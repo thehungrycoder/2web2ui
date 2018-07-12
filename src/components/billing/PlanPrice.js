@@ -21,14 +21,14 @@ const PlanPrice = ({ plan, showOverage = false, showIp = false, ...rest }) => {
   return (
     <span>
       <span className={styles.MainLabel} {...rest}>
-        <strong>{ plan.volume.toLocaleString() }</strong> emails/month
+        <strong>{plan.volume.toLocaleString()}</strong> <span>emails/month</span>
         {priceInfo.price > 0 && <span> at <strong>${priceInfo.price.toLocaleString()}</strong>/{priceInfo.intervalShort}</span>}
-        {plan.isFree && ' for Free'}
+        {plan.isFree && <span>&nbsp;for Free</span>}
       </span>
       <span className={styles.SupportLabel}>
-        {showOverage && overage }
+        {showOverage && <span>{overage}</span>}
 
-        { showIp && ip }
+        {showIp && <span>{ip}</span>}
       </span>
     </span>
   );

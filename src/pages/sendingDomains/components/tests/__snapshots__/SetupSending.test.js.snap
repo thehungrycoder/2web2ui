@@ -41,7 +41,10 @@ exports[`Component: SetupSending renders correctly for unverified DKIM and inval
       title={
         <React.Fragment>
           <ErrorIcon />
-           DNS Settings
+           
+          <span>
+            DNS Settings
+          </span>
         </React.Fragment>
       }
     >
@@ -111,7 +114,10 @@ exports[`Component: SetupSending renders correctly for unverified DKIM and inval
       title={
         <React.Fragment>
           <ErrorIcon />
-           DNS Settings
+           
+          <span>
+            DNS Settings
+          </span>
         </React.Fragment>
       }
     >
@@ -163,7 +169,10 @@ exports[`Component: SetupSending renders correctly when ownership and DKIM are v
       title={
         <React.Fragment>
           <VerifiedIcon />
-           DNS Settings
+           
+          <span>
+            DNS Settings
+          </span>
         </React.Fragment>
       }
     >
@@ -227,7 +236,10 @@ exports[`Component: SetupSending renders correctly when ownership is valid and D
       title={
         <React.Fragment>
           <ErrorIcon />
-           DNS Settings
+           
+          <span>
+            DNS Settings
+          </span>
         </React.Fragment>
       }
     >
