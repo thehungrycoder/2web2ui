@@ -7,7 +7,6 @@ const getMessageEvents = (state) => state.messageEvents.events;
 const getMessageHistory = (state) => state.messageEvents.history;
 const getMessageIdParam = (state, props) => props.match.params.messageId;
 export const getEventIdParam = (state, props) => props.match.params.eventId;
-const getEventIdLocationState = (state, props) => _.get(props, 'location.state.selectedEventId');
 
 export const selectMessageEvents = createSelector(
   [ getMessageEvents ],
@@ -26,7 +25,7 @@ export const selectMessageHistory = createSelector(
 );
 
 export const selectInitialEventId = createSelector(
-  [selectMessageHistory, getEventIdLocationState],
+  [selectMessageHistory, getEventIdParam],
   (messageHistory, selectedEventId) => selectedEventId || _.get(messageHistory[0], 'event_id')
 );
 

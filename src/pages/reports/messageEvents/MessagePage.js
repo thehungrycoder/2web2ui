@@ -29,6 +29,7 @@ export class MessagePage extends Component {
   }
 
   componentDidMount() {
+
     this.handleRefresh();
     this.props.getDocumentation();
   }
@@ -39,22 +40,20 @@ export class MessagePage extends Component {
   }
 
   componentWillReceiveProps({ selectedEventId }) {
-    if (!this.state.selectedEventId && selectedEventId) {
-      // Saves selected event from location state, defaults to first event in message history
-      this.setState({ selectedEventId });
-
-      // Resets location state
-      this.props.history.replace({ ...this.props.location, state: {}});
+    const { messageId, match } = this.props;
+    if (selectedEventId && messageId && !match.params.eventId) {
+      this.props.history.push(`/reports/message-events/details/${messageId}/${selectedEventId}`); //TODO abstract path creation
     }
   }
 
   handleEventClick = (selectedEventId) => {
-    this.setState({ selectedEventId });
+    const { history, messageId } = this.props;
+    const path = `/reports/message-events/details/${messageId ? `${messageId}/${selectedEventId}` : `<unknown>/${selectedEventId}`}`; //TODO abstract this path generation here and in ViewDetailsButton component
+    history.push(path); //TODO decide whether it should replace instead of push!
   }
 
   render() {
-    const { isMessageHistoryEmpty, loading, messageId, messageHistory, documentation } = this.props;
-    const { selectedEventId } = this.state;
+    const { isMessageHistoryEmpty, loading, messageId, messageHistory, documentation, selectedEventId } = this.props;
     const selectedEvent = _.find(messageHistory, (event) => event.event_id === selectedEventId);
 
     if (isMessageHistoryEmpty) {

@@ -10,8 +10,9 @@ export class ViewDetailsButton extends Component {
 
 
     const to = {
-      pathname: `/reports/message-events/${message_id ? `details/${message_id}` : `event/${event_id}`}`,
-      state: { selectedEventId: event_id }
+      pathname: `/reports/message-events/details/${message_id ? `${message_id}/${event_id}` : `<unknown>/${event_id}`}`
+      // pathname: `/reports/message-events/${message_id ? `details/${message_id}` : `event/${event_id}`}`,
+      // state: { selectedEventId: event_id }
     };
 
     return (
