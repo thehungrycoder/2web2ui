@@ -229,13 +229,6 @@ const routes = [
   },
   {
     path: '/reports/message-events/details/:messageId/:eventId?',
-    component: reports.MessagePage,
-    layout: App,
-    title: 'Message History',
-    supportDocSearch: 'event'
-  },
-  {
-    path: '/reports/message-events/event/:eventId',
     component: reports.EventPage,
     layout: App,
     title: 'Message History',
