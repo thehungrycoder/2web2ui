@@ -44,15 +44,7 @@ export function AuthFields({ authType }) {
   return null;
 }
 
-
-
 export class WebhookForm extends Component {
-
-  // componentDidUpdate(prevProps) {
-  //   if (!prevProps.showEvents && this.props.showEvents) {
-  //     this.props.change('events', {});
-  //   }
-  // }
 
   render() {
     const {
@@ -62,7 +54,7 @@ export class WebhookForm extends Component {
       eventListing,
       showEvents,
       disabled,
-      newWebhook, /* passed from CreatePage */
+      newWebhook,
       hasSubaccounts
     } = this.props;
 
@@ -90,6 +82,9 @@ export class WebhookForm extends Component {
   }
 }
 
+WebhookForm.defaultProps = {
+  newWebhook: false
+};
 
 const mapStateToProps = (state, props) => {
   const selector = formValueSelector(formName);
