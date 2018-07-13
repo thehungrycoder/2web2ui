@@ -139,4 +139,14 @@ describe('MessageEvents Selectors', () => {
       expect(selectors.getSelectedEventFromEventsList({ messageEvents }, props)).toBe(undefined);
     });
   });
+
+  describe('getMessageIdParam', () => {
+    it('returns correct messageId value from path', () => {
+      expect(selectors.getMessageIdParam({}, { match: { params: { messageId: 'xyz' }}})).toEqual('xyz');
+    });
+
+    it('returns undefined when messageId is absent', () => {
+      expect(selectors.getMessageIdParam({}, { match: { params: {}}})).toBe(undefined);
+    });
+  });
 });

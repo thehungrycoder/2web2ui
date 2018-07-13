@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import { getMessageHistory, getDocumentation } from 'src/actions/messageEvents';
 import RedirectAndAlert from 'src/components/globalAlert/RedirectAndAlert';
-import { isMessageHistoryEmpty, selectMessageHistory, selectInitialEventId, getSelectedEventFromMessageHistory, getSelectedEventFromEventsList } from 'src/selectors/messageEvents';
+import { isMessageHistoryEmpty, selectMessageHistory, selectInitialEventId, getSelectedEventFromMessageHistory, getSelectedEventFromEventsList, getMessageIdParam } from 'src/selectors/messageEvents';
 import { getPath } from 'src/helpers/messageEvents';
 import { Page, Grid } from '@sparkpost/matchbox';
 import { Loading } from 'src/components';
@@ -84,16 +84,10 @@ export class EventPage extends Component {
 }
 
 const mapStateToProps = (state, props) => {
-  const messageId = props.match.params.messageId;
+  const messageId = getMessageIdParam(state, props);
   const isOrphanEvent = messageId === '<empty>';
 
-  let selectedEvent;
-
-  if (isOrphanEvent) {
-    selectedEvent = getSelectedEventFromEventsList(state, props);
-  } else {
-    selectedEvent = getSelectedEventFromMessageHistory(state, props);
-  }
+  const selectedEvent = isOrphanEvent ? getSelectedEventFromEventsList(state, props) : getSelectedEventFromMessageHistory(state, props);
 
   return {
     isMessageHistoryEmpty: isMessageHistoryEmpty(state, props),
