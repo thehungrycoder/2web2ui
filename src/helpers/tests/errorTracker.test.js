@@ -18,7 +18,7 @@ describe('.breadcrumbCallback', () => {
 
 describe('.getEnricherOrDieTryin', () => {
   const getState = jest.fn();
-  const enrich = getEnricherOrDieTryin({ getState });
+  const enrich = getEnricherOrDieTryin({ getState }, { navigator: { language: 'en-US' }});
 
   beforeEach(() => { getState.mockReset(); });
 

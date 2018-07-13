@@ -5,6 +5,7 @@ Object {
   "logger": "test",
   "tags": Object {
     "customer": "123",
+    "language": "en-US",
   },
   "user": Object {
     "access_level": "admin",
@@ -19,6 +20,7 @@ Object {
   "logger": "test",
   "tags": Object {
     "customer": "123",
+    "language": "en-US",
     "tenant": "test",
   },
   "user": Object {
@@ -32,6 +34,7 @@ Object {
   "logger": "test",
   "tags": Object {
     "customer": undefined,
+    "language": "en-US",
   },
   "user": Object {},
 }
