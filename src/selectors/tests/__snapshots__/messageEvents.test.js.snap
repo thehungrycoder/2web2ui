@@ -38,6 +38,50 @@ Array [
 ]
 `;
 
+exports[`MessageEvents Selectors eventPageMSTP returns correct props for event with message_id 1`] = `
+Object {
+  "documentation": Object {},
+  "isMessageHistoryEmpty": false,
+  "isOrphanEvent": false,
+  "loading": false,
+  "messageHistory": Array [
+    Object {
+      "event_id": "default_id",
+      "foo": "bar",
+      "formattedDate": "Nov 9 2017, 12:00am",
+      "timestamp": "2017-11-09T00:00",
+    },
+    Object {
+      "bat": "baz",
+      "foo": "bar",
+      "formattedDate": "Nov 8 2017, 11:00am",
+      "timestamp": "2017-11-08T11:00",
+    },
+  ],
+  "messageId": "message_id",
+  "selectedEvent": Object {
+    "event_id": "default_id",
+    "foo": "bar",
+    "formattedDate": "Nov 9 2017, 12:00am",
+    "timestamp": "2017-11-09T00:00",
+  },
+  "selectedEventId": "default_id",
+}
+`;
+
+exports[`MessageEvents Selectors eventPageMSTP returns correct props for orphan event (w/o message_id) 1`] = `
+Object {
+  "documentation": Object {},
+  "isMessageHistoryEmpty": true,
+  "isOrphanEvent": true,
+  "loading": false,
+  "messageHistory": Array [],
+  "messageId": "<empty>",
+  "selectedEvent": undefined,
+  "selectedEventId": "default_id",
+}
+`;
+
 exports[`MessageEvents Selectors getSelectedEventFromEventsList returns correct event from events list 1`] = `
 Object {
   "event_id": "default_id",

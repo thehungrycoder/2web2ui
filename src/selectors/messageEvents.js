@@ -47,7 +47,7 @@ export const selectMessageEventsSearchOptions = createSelector(
 
 export const isMessageHistoryEmpty = createSelector(
   [getMessageHistory, getMessageIdParam],
-  (history, id) => history.hasOwnProperty(id) && history[id].length === 0
+  (history, id) => _.get(history, id, []).length === 0
 );
 
 export const getSelectedEventFromMessageHistory = createSelector(
@@ -59,4 +59,23 @@ export const getSelectedEventFromEventsList = createSelector(
   [getMessageEvents, getEventIdParam],
   (messageEvents, eventId) => _.find(messageEvents, (event) => event.event_id === eventId)
 );
+
+
+export const eventPageMSTP = (state, props) => {
+  const messageId = getMessageIdParam(state, props);
+  const isOrphanEvent = messageId === '<empty>';
+
+  const selectedEvent = isOrphanEvent ? getSelectedEventFromEventsList(state, props) : getSelectedEventFromMessageHistory(state, props);
+
+  return {
+    isMessageHistoryEmpty: isMessageHistoryEmpty(state, props),
+    isOrphanEvent: messageId === '<empty>', //event without a message_id property
+    loading: !!(state.messageEvents.historyLoading || state.messageEvents.documentationLoading),
+    messageHistory: selectMessageHistory(state, props),
+    messageId,
+    documentation: state.messageEvents.documentation,
+    selectedEventId: selectInitialEventId(state, props),
+    selectedEvent
+  };
+};
 

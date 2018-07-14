@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 
 import { getMessageHistory, getDocumentation } from 'src/actions/messageEvents';
 import RedirectAndAlert from 'src/components/globalAlert/RedirectAndAlert';
-import { isMessageHistoryEmpty, selectMessageHistory, selectInitialEventId, getSelectedEventFromMessageHistory, getSelectedEventFromEventsList, getMessageIdParam } from 'src/selectors/messageEvents';
-import { getPath } from 'src/helpers/messageEvents';
+import { eventPageMSTP } from 'src/selectors/messageEvents';
+import { getDetailsPath } from 'src/helpers/messageEvents';
 import { Page, Grid } from '@sparkpost/matchbox';
 import { Loading } from 'src/components';
 import HistoryTable from './components/HistoryTable';
@@ -35,13 +35,13 @@ export class EventPage extends Component {
   componentWillReceiveProps({ selectedEventId }) {
     const { messageId, match } = this.props;
     if (selectedEventId && messageId && !match.params.eventId) {
-      this.props.history.replace(getPath(messageId, selectedEventId));
+      this.props.history.replace(getDetailsPath(messageId, selectedEventId));
     }
   }
 
   handleEventClick = (selectedEventId) => {
     const { history, messageId } = this.props;
-    history.push(getPath(messageId, selectedEventId));
+    history.push(getDetailsPath(messageId, selectedEventId));
   }
 
   render() {
@@ -83,22 +83,4 @@ export class EventPage extends Component {
   }
 }
 
-const mapStateToProps = (state, props) => {
-  const messageId = getMessageIdParam(state, props);
-  const isOrphanEvent = messageId === '<empty>';
-
-  const selectedEvent = isOrphanEvent ? getSelectedEventFromEventsList(state, props) : getSelectedEventFromMessageHistory(state, props);
-
-  return {
-    isMessageHistoryEmpty: isMessageHistoryEmpty(state, props),
-    isOrphanEvent: messageId === '<empty>', //event without a message_id property
-    loading: state.messageEvents.historyLoading || state.messageEvents.documentationLoading,
-    messageHistory: selectMessageHistory(state, props),
-    messageId,
-    documentation: state.messageEvents.documentation,
-    selectedEventId: selectInitialEventId(state, props),
-    selectedEvent
-  };
-};
-
-export default connect(mapStateToProps, { getMessageHistory, getDocumentation })(EventPage);
+export default connect(eventPageMSTP, { getMessageHistory, getDocumentation })(EventPage);

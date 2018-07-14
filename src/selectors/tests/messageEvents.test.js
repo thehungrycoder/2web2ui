@@ -77,7 +77,7 @@ describe('MessageEvents Selectors', () => {
   });
 
   describe('isMessageHistoryEmpty', () => {
-    it('should return true', () => {
+    it('should return true when messageId is not in history', () => {
       const state = {
         messageEvents: {
           history: {
@@ -90,7 +90,7 @@ describe('MessageEvents Selectors', () => {
       expect(selectors.isMessageHistoryEmpty(state, props)).toEqual(true);
     });
 
-    it('should return false with message events', () => {
+    it('should return false when messageId is in history', () => {
       const state = {
         messageEvents: {
           history: {
@@ -106,7 +106,7 @@ describe('MessageEvents Selectors', () => {
       expect(selectors.isMessageHistoryEmpty(state, props)).toEqual(false);
     });
 
-    it('should return false with no events', () => {
+    it('should return true when history is empty', () => {
       const state = {
         messageEvents: {
           history: {}
@@ -114,7 +114,7 @@ describe('MessageEvents Selectors', () => {
       };
       const props = { match: { params: { messageId: 'abc' }}};
 
-      expect(selectors.isMessageHistoryEmpty(state, props)).toEqual(false);
+      expect(selectors.isMessageHistoryEmpty(state, props)).toEqual(true);
     });
   });
 
@@ -148,5 +148,25 @@ describe('MessageEvents Selectors', () => {
     it('returns undefined when messageId is absent', () => {
       expect(selectors.getMessageIdParam({}, { match: { params: {}}})).toBe(undefined);
     });
+  });
+
+  describe('eventPageMSTP', () => {
+    let store;
+    let props;
+    beforeEach(() => {
+      store = { messageEvents: { ...messageHistory, documentation: {}}};
+      props = { match: { params: { messageId: 'message_id', eventId: 'default_id' }}};
+    });
+
+    it('returns correct props for event with message_id', () => {
+      expect(selectors.eventPageMSTP(store, props)).toMatchSnapshot();
+    });
+
+    it('returns correct props for orphan event (w/o message_id)', () => {
+      props.match.params.messageId = '<empty>';
+      expect(selectors.eventPageMSTP(store, props)).toMatchSnapshot();
+    });
+
+
   });
 });
