@@ -69,7 +69,7 @@
     "print-js": "^1.0.31",
     "query-string": "^5.0.0",
     "raven-for-redux": "^1.1.1",
-    "raven-js": "^3.23.0",
+    "raven-js": "^3.26.3",
     "react": "^16.3.2",
     "react-ace": "^6.1.0",
     "react-chartjs-2": "^2.1.0",
