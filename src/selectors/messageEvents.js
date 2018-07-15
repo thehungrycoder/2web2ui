@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { formatDateTime } from 'src/helpers/date';
 import moment from 'moment';
-import { createSelector } from 'reselect';
+import { createSelector, createStructuredSelector } from 'reselect';
 
 const getMessageEvents = (state) => state.messageEvents.events;
 const getMessageHistory = (state) => state.messageEvents.history;
@@ -60,22 +60,23 @@ export const getSelectedEventFromEventsList = createSelector(
   (messageEvents, eventId) => _.find(messageEvents, (event) => event.event_id === eventId)
 );
 
+//whether the event is without a message_id (defaulted to <empty>)
+const isOrphanEvent = createSelector(
+  [getMessageIdParam], (messageId) => messageId === '<empty>'
+);
 
-export const eventPageMSTP = (state, props) => {
-  const messageId = getMessageIdParam(state, props);
-  const isOrphanEvent = messageId === '<empty>';
+const getSelectedEvent = createSelector(
+  [isOrphanEvent, getSelectedEventFromEventsList, getSelectedEventFromMessageHistory], (isOrphanEvent, eventFromEventList, eventFromMessageHistory) => isOrphanEvent ? eventFromEventList : eventFromMessageHistory
+);
 
-  const selectedEvent = isOrphanEvent ? getSelectedEventFromEventsList(state, props) : getSelectedEventFromMessageHistory(state, props);
-
-  return {
-    isMessageHistoryEmpty: isMessageHistoryEmpty(state, props),
-    isOrphanEvent: messageId === '<empty>', //event without a message_id property
-    loading: !!(state.messageEvents.historyLoading || state.messageEvents.documentationLoading),
-    messageHistory: selectMessageHistory(state, props),
-    messageId,
-    documentation: state.messageEvents.documentation,
-    selectedEventId: selectInitialEventId(state, props),
-    selectedEvent
-  };
-};
+export const eventPageMSTP = (state, props) => createStructuredSelector({
+  isMessageHistoryEmpty: isMessageHistoryEmpty,
+  isOrphanEvent: isOrphanEvent,
+  loading: (state) => !!(state.messageEvents.historyLoading || state.messageEvents.documentationLoading),
+  messageHistory: selectMessageHistory,
+  messageId: getMessageIdParam,
+  documentation: (state) => state.messageEvents.documentation,
+  selectedEventId: selectInitialEventId,
+  selectedEvent: getSelectedEvent
+});
 

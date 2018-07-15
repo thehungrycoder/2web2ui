@@ -159,12 +159,12 @@ describe('MessageEvents Selectors', () => {
     });
 
     it('returns correct props for event with message_id', () => {
-      expect(selectors.eventPageMSTP(store, props)).toMatchSnapshot();
+      expect(selectors.eventPageMSTP()(store, props)).toMatchSnapshot();
     });
 
     it('returns correct props for orphan event (w/o message_id)', () => {
       props.match.params.messageId = '<empty>';
-      expect(selectors.eventPageMSTP(store, props)).toMatchSnapshot();
+      expect(selectors.eventPageMSTP()(store, props)).toMatchSnapshot();
     });
 
 
