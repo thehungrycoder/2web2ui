@@ -46,6 +46,12 @@ describe('Analytics Utils', () => {
         payload: { syncErrors: { _error: 'must be value=2' }},
         meta: { form: 'fooForm' }
       }
+    },
+    'serializes when syncErrors contains object in value': {
+      action: {
+        payload: { syncErrors: { billingInfo: { address: 'Required', zip: 'Required' }}},
+        meta: { form: 'fooForm' }
+      }
     }
   };
 

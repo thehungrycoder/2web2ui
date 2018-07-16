@@ -7,7 +7,7 @@ export function isWhitelistedForm(event) {
 }
 
 export function determineFormValidationState(action) {
-  const fieldErrors = _.map(action.payload.syncErrors, (val, key) => `${key}=${val.replace('=','%3D')}`); //in case any error message contains equal sign (=)
+  const fieldErrors = _.map(action.payload.syncErrors, (val, key) => `${key}=${_.isString(val) ? val.replace('=','%3D') : JSON.stringify(val)}`);
 
   return {
     action: `Validation ${fieldErrors.length ? 'Error' : 'Success'}`,

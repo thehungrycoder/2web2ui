@@ -1,5 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Analytics Utils determineFormValidationState serializes when syncErrors contains object in value 1`] = `
+Object {
+  "action": "Validation Error",
+  "label": "fooForm: billingInfo={\\"address\\":\\"Required\\",\\"zip\\":\\"Required\\"}",
+}
+`;
+
 exports[`Analytics Utils determineFormValidationState validation error with fields errors 1`] = `
 Object {
   "action": "Validation Error",
