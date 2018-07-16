@@ -19,6 +19,11 @@ export default class ManualEntryForm extends Component {
     fromTime: ''
   }
 
+  componentDidMount() {
+    const { to, from } = this.props;
+    this.syncPropsToState({ to, from });
+  }
+
   componentWillReceiveProps(nextProps) {
     this.syncPropsToState(nextProps);
   }
