@@ -2,7 +2,6 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers';
 import ErrorTracker from './helpers/errorTracker';
-import analyticsMiddleware from './helpers/analytics/setup';
 
 const configureStore = () => {
   // necessary for redux devtools in development mode only
@@ -12,8 +11,7 @@ const configureStore = () => {
     rootReducer,
     composeEnhancers(
       applyMiddleware(thunk),
-      applyMiddleware(ErrorTracker.middleware),
-      applyMiddleware(analyticsMiddleware)
+      applyMiddleware(ErrorTracker.middleware)
     )
   );
 
