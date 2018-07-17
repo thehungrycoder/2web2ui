@@ -71,4 +71,3 @@ export const ANALYTICS_ONBOARDING = 'onboarding';
 export const ANALYTICS_ONBOARDING_LEARN_MORE = 'learn-more-sending-domains';
 export const ANALYTICS_ONBOARDING_CREATE_DOMAIN = 'create-sending-domain-verify-';
 export const ANALYTICS_WHITELISTED_FORMS = ['loginForm', 'registerAccountForm'];
-export const ANALYTICS_FORM_EVENT_CATEGORY = 'Form';

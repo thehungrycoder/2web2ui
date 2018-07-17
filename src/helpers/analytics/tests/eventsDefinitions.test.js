@@ -1,12 +1,15 @@
 import cases from 'jest-in-case';
 import _ from 'lodash';
-
+import * as utils from '../utils';
 import { getFormDefinition } from '../eventsDefinitions';
 
+jest.mock('../utils');
+
 describe('Event Definitions', () => {
-  let mockAction;
+  let defaultAction;
   beforeEach(() => {
-    mockAction = {
+    utils.isWhitelistedForm = jest.fn(() => true);
+    defaultAction = {
       type: null,
       meta: {
         form: 'formName'
@@ -24,7 +27,7 @@ describe('Event Definitions', () => {
   };
 
   cases('getFormDefinition', ({ name, value, ...rest }) => {
-    mockAction = _.assign(mockAction, rest);
+    const mockAction = _.assign({}, defaultAction, rest);
 
     expect(getFormDefinition(name, value)(mockAction)).toMatchSnapshot();
   }, TEST_CASES);
@@ -32,8 +35,14 @@ describe('Event Definitions', () => {
   describe('getFormDefinition', () => {
     it('invokes the callback when provided', () => {
       const fn = jest.fn().mockReturnValue({ action: 'Validation Error', label: 'formName: {"field1": "required"}' });
-      expect(getFormDefinition(fn)(mockAction)).toMatchSnapshot();
+      expect(getFormDefinition(fn)(defaultAction)).toMatchSnapshot();
       expect(fn).toHaveBeenCalledTimes(1);
+    });
+
+    it('returns null when form is not whitelisted', () => {
+      utils.isWhitelistedForm = jest.fn(() => false);
+      const fn = jest.fn().mockReturnValue({ action: 'Validation Error', label: 'formName: {"field1": "required"}' });
+      expect(getFormDefinition(fn)(defaultAction)).toBe(null);
     });
   });
 });

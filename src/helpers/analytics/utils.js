@@ -1,9 +1,12 @@
 import _ from 'lodash';
-import { ANALYTICS_FORM_EVENT_CATEGORY, ANALYTICS_WHITELISTED_FORMS } from '../../constants';
+import { ANALYTICS_WHITELISTED_FORMS } from '../../constants';
 
-export function isWhitelistedForm(event) {
-  const formName = _.first(event.label.split(':'));
-  return event.category === ANALYTICS_FORM_EVENT_CATEGORY && _.includes(ANALYTICS_WHITELISTED_FORMS, formName);
+export function isWhitelistedForm(formName) {
+  return _.includes(ANALYTICS_WHITELISTED_FORMS, formName);
+}
+
+export function isValidEvent(event) {
+  return !_.isEmpty(event);
 }
 
 export function determineFormValidationState(action) {

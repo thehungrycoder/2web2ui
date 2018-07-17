@@ -12,4 +12,4 @@ const eventsMap = {
   '@@redux-form/UPDATE_SYNC_ERRORS': getFormDefinition(utils.determineFormValidationState)
 };
 
-export default _.mapValues(eventsMap, (val) => ensure(utils.isWhitelistedForm, val));
+export default _.mapValues(eventsMap, (val) => ensure(utils.isValidEvent, val));

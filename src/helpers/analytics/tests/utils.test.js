@@ -3,29 +3,34 @@ import * as utils from '../utils';
 
 describe('Analytics Utils', () => {
   const isWhitelistedFormTestCases = {
-    'true when category is Form, form name is whitelisted one': {
-      event: { category: 'Form', label: 'loginForm' },
+    'true when form name is in whitelist': {
+      formName: 'loginForm',
       expectation: true
     },
-    'true when category is Form, form name is whitelisted one with validation errors': {
-      event: {
-        category: 'Form',
-        label: 'loginForm: name=Required,email=Required'
-      }, expectation: true
-    },
-    'false when category is Form, form name is not whitelisted one': {
-      event: { category: 'Form', label: 'apiKeyForm' },
-      expectation: false
-    },
-    'false when category is not Form, form name is whitelisted one': {
-      event: { category: 'Foo', label: 'loginForm' },
+    'false when form name is not in whitelist': {
+      formName: 'fooForm',
       expectation: false
     }
   };
 
-  cases('isWhitelistedForm', ({ name, event, expectation }) => {
-    expect(utils.isWhitelistedForm(event)).toBe(expectation);
+  cases('isWhitelistedForm', ({ name, formName, expectation }) => {
+    expect(utils.isWhitelistedForm(formName)).toBe(expectation);
   }, isWhitelistedFormTestCases);
+
+  const isValidEventTestCases = {
+    'true when event is not empty': {
+      event: { event: 'Interactions', category: 'Form', action: 'Initialize', label: 'someForm' },
+      expectation: true
+    },
+    'false when event is falsey': {
+      event: null,
+      expectation: false
+    }
+  };
+
+  cases('isValidEvent', ({ name, event, expectation }) => {
+    expect(utils.isValidEvent(event)).toBe(expectation);
+  }, isValidEventTestCases);
 
   const determineFormValidationStateTestCases = {
     'validation success with no syncErrors': { action: { payload: { syncErrors: {}}, meta: { form: 'fooForm' }}},
