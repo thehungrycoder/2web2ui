@@ -29,6 +29,15 @@ exports[`SendMoreCTA Component renders correctly 1`] = `
       <Case
         condition={[Function]}
       >
+        <PageLink
+          to="/account/billing"
+        >
+          Upgrade your account.
+        </PageLink>
+      </Case>
+      <Case
+        condition={[Function]}
+      >
         <React.Fragment>
           <UnstyledLink
             onClick={[Function]}

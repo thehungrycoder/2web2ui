@@ -216,6 +216,7 @@ describe('plan selector', () => {
 
     it('should not return new free plans if customer on free1 plan', () => {
       state.account.subscription.code = 'free1';
+      state.billing.plans.push({ code: 'free1' });
       expect(billingInfo.selectVisiblePlans(state)).toMatchSnapshot();
     });
   });

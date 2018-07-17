@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 import _ from 'lodash';
-import { isAws, isSelfServeBilling, onPlan } from 'src/helpers/conditions/account';
+import { isAws, isSelfServeBilling, onPlan } from './accessConditionState';
 
 const suspendedSelector = (state) => state.account.isSuspendedForBilling;
 const pendingSubscriptionSelector = (state) => state.account.pending_subscription;
