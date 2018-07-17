@@ -18,8 +18,7 @@ describe('JoinForm', () => {
 
     props = {
       loading: false,
-      onSubmit: jest.fn(),
-      handleSubmit: jest.fn()
+      onSubmit: jest.fn()
     };
 
     wrapper = shallow(<JoinForm {...props} />);
@@ -89,25 +88,13 @@ describe('JoinForm', () => {
         expect(mockRecaptcha.reset).toHaveBeenCalledTimes(1);
       });
 
-      it('sets recaptcha response to state & invokes handleSubmit', () => {
+      it('submits with correct data', () => {
         const formValues = { first_name: 'foo', last_name: 'bar', email: 'foo@bar.com', password: '***' };
         wrapper.setProps({ formValues });
         instance.recaptchaVerifyCallback('foobar');
-        expect(wrapper.state().recaptcha_response).toEqual('foobar');
-        expect(props.handleSubmit).toHaveBeenCalledWith(instance.onSubmit);
+        expect(props.onSubmit).toHaveBeenCalledWith({ ...formValues, recaptcha_response: 'foobar', recaptcha_type: 'invisible' });
       });
     });
 
-    describe('onSubmit', () => {
-      beforeEach(() => {
-        wrapper.setState({ recaptcha_response: 'some-response' });
-      });
-
-      it('submits with correct data', () => {
-        const formValues = { first_name: 'foo', last_name: 'bar', email: 'foo@bar.com', password: '***' };
-        instance.onSubmit(formValues);
-        expect(props.onSubmit).toHaveBeenCalledWith({ ...formValues, recaptcha_response: 'some-response', recaptcha_type: 'invisible' });
-      });
-    });
   });
 });

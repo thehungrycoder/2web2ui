@@ -32,22 +32,22 @@ const { recaptcha } = config;
 export class JoinForm extends Component {
   state = {
     reCaptchaReady: false,
-    reCaptchaInstance: null,
-    recaptcha_response: null
+    reCaptchaInstance: null
   };
 
   reCaptchaLoaded = () => {
     this.setState({ reCaptchaReady: true });
   };
 
-  onSubmit = (formValues) => this.props.onSubmit({ ...formValues, recaptcha_response: this.state.recaptcha_response, recaptcha_type: 'invisible' })
-
   recaptchaVerifyCallback = (response) => {
+    const { formValues, onSubmit } = this.props;
     this.state.reCaptchaInstance.reset();
-    this.setState({ recaptcha_response: response }, this.props.handleSubmit(this.onSubmit));
+    onSubmit({ ...formValues, recaptcha_response: response, recaptcha_type: 'invisible' });
   };
 
-  executeRecaptcha = () => this.state.reCaptchaInstance.execute();
+  executeRecaptcha = () => {
+    this.state.reCaptchaInstance.execute();
+  };
 
   linkRecaptcha = (instance) => {
     if (!this.state.reCaptchaInstance) {
@@ -59,13 +59,10 @@ export class JoinForm extends Component {
     const {
       loading,
       pristine,
-      invalid,
-      submitting
+      invalid
     } = this.props;
 
     const { reCaptchaReady } = this.state;
-
-    const pending = loading || submitting || !reCaptchaReady;
 
     return (
       <form>
@@ -77,7 +74,7 @@ export class JoinForm extends Component {
               label='First Name'
               autoComplete='given-name'
               validate={required}
-              disabled={pending}
+              disabled={!reCaptchaReady || loading}
               placeholder='Leslie'
             />
           </Grid.Column>
@@ -88,7 +85,7 @@ export class JoinForm extends Component {
               label='Last Name'
               autoComplete='family-name'
               validate={required}
-              disabled={pending}
+              disabled={!reCaptchaReady || loading}
               placeholder='Knope'
             />
           </Grid.Column>
@@ -98,7 +95,7 @@ export class JoinForm extends Component {
           component={TextFieldWrapper}
           label='Email'
           validate={[required, email]}
-          disabled={pending}
+          disabled={!reCaptchaReady || loading}
           autoComplete='username email'
           placeholder='leslie.knope@pawnee.indiana.state.us.gov'
         />
@@ -118,7 +115,7 @@ export class JoinForm extends Component {
             name='email_opt_in'
             id='email_opt_in'
             component={CheckboxWrapper}
-            disabled={pending}
+            disabled={!reCaptchaReady || loading}
             type='checkbox'
             label={<span>I'm happy to receive marketing email from SparkPost</span>}
           />
@@ -128,17 +125,17 @@ export class JoinForm extends Component {
             id='tou_accepted'
             component={CheckboxWrapper}
             type="checkbox"
-            disabled={pending}
+            disabled={!reCaptchaReady || loading}
             validate={required}
             label={<span>I agree to SparkPost's <UnstyledLink to={LINKS.TOU} external>Terms of Use</UnstyledLink></span>}
           />
         </Checkbox.Group>
 
         <Button primary
-          disabled={pending || pristine || invalid}
+          disabled={loading || pristine || invalid || !reCaptchaReady }
           onClick={this.executeRecaptcha}
         >
-          {loading ? 'Loading' : 'Create Account'}
+          { loading ? 'Loading' : 'Create Account' }
         </Button>
 
         <Recaptcha

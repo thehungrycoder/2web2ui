@@ -1,11 +1,9 @@
-import _ from 'lodash';
-
 // Google Tag Manager tracking helpers
 // Adapted from webui/src/common/services/analytics.js
 
-// Call to initialise the GTM dataLayer variable
+// Call once at app load time to initialise the GTM dataLayer variable
 // and trigger the GA 'Page View' event.
-export function setup() {
+export function setup () {
   if (!window.dataLayer) {
     window.dataLayer = [{
       'gtm.start': new Date().getTime(),
@@ -14,14 +12,13 @@ export function setup() {
   }
 }
 
-function pushEvent(evt) {
-  setup();
+function pushEvent (evt) {
   window.dataLayer.push(evt);
 }
 
 // Call on route change.
 // Used in Marketing GTM account.
-export function trackPageview({ path, title }) {
+export function trackPageview ({ path, title }) {
   pushEvent({
     event: 'content-view',
     'content-name': path,
@@ -30,7 +27,7 @@ export function trackPageview({ path, title }) {
 }
 
 // Call to push a generic event to GTM.
-export function trackEvent({ category, action, data }) {
+export function trackEvent ({ category, action, data }) {
   pushEvent({
     event: category,
     'event-action': action,
@@ -38,17 +35,13 @@ export function trackEvent({ category, action, data }) {
   });
 }
 
-export function pushEvents(events) {
-  _.each(events, pushEvent);
-}
-
 // Call to track specific form completion.
 // Used in the Marketing GTM account to track conversions.
-export function trackFormSuccess(action, data) {
+export function trackFormSuccess (action, data) {
   trackEvent({ category: 'Completed form', action, data });
 }
 
 // Call to send a variable to GTM.
-export function setVariable(name, value) {
+export function setVariable (name, value) {
   pushEvent({ [name]: value });
 }
