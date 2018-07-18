@@ -57,7 +57,7 @@ describe('messageEvents helpers', () => {
     });
 
     it('returns correct path when messageId is empty', () => {
-      expect(messageEventHelpers.getDetailsPath(null, 'bar')).toEqual('/reports/message-events/details/<empty>/bar');
+      expect(messageEventHelpers.getDetailsPath(null, 'bar')).toEqual('/reports/message-events/details/_noid_/bar');
     });
   });
 

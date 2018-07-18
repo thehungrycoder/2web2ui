@@ -9,7 +9,7 @@ exports[`Component ViewDetailsButton renders correct if message_id is absent 1`]
     size="small"
     to={
       Object {
-        "pathname": "/reports/message-events/details/<empty>/456xyz",
+        "pathname": "/reports/message-events/details/_noid_/456xyz",
       }
     }
   >

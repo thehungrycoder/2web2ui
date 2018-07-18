@@ -33,13 +33,15 @@ describe('Page: Event tests', () => {
     expect(props.getMessageHistory).toHaveBeenCalledWith({ messageId: props.messageId });
   });
 
-  it('rewrites old path (w/o eventId) to new path', () => {
-    wrapper.setProps({ selectedEventId: 1 });
+  it('redirects old path (w/o eventId) to new path', () => {
+    wrapper.setProps({ selectedEventId: 1, loading: true });
+    wrapper.setProps({ loading: false });
     expect(props.history.replace).toHaveBeenCalledWith('/reports/message-events/details/id/1');
   });
 
   it('redirects to list page if event_id not found', () => {
-    wrapper.setProps({ isOrphanEvent: true, selectedEvent: null, selectedEventId: 3 });
+    wrapper.setProps({ isOrphanEvent: true, selectedEvent: null, selectedEventId: 3, loading: true });
+    wrapper.setProps({ loading: false });
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -54,7 +56,8 @@ describe('Page: Event tests', () => {
   });
 
   it('should redirect when no message events', () => {
-    wrapper.setProps({ isMessageHistoryEmpty: true, isOrphanEvent: false });
+    wrapper.setProps({ isMessageHistoryEmpty: true, isOrphanEvent: false, loading: true });
+    wrapper.setProps({ loading: false });
     expect(wrapper).toMatchSnapshot();
   });
 });

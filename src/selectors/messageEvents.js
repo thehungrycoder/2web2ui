@@ -62,7 +62,7 @@ export const getSelectedEventFromEventsList = createSelector(
 
 //whether the event is without a message_id (defaulted to <empty>)
 const isOrphanEvent = createSelector(
-  [getMessageIdParam], (messageId) => messageId === '<empty>'
+  [getMessageIdParam], (messageId) => messageId === '_noid_'
 );
 
 const getSelectedEvent = createSelector(

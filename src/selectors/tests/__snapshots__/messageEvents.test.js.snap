@@ -76,7 +76,7 @@ Object {
   "isOrphanEvent": true,
   "loading": false,
   "messageHistory": Array [],
-  "messageId": "<empty>",
+  "messageId": "_noid_",
   "selectedEvent": undefined,
   "selectedEventId": "default_id",
 }

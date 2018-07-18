@@ -42,5 +42,5 @@ export function parseSearch(search) {
 
 
 export function getDetailsPath(messageId, eventId){
-  return `/reports/message-events/details/${messageId ? `${messageId}/${eventId}` : `<empty>/${eventId}`}`;
+  return `/reports/message-events/details/${messageId ? `${messageId}/${eventId}` : `_noid_/${eventId}`}`;
 }

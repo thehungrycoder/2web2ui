@@ -22,6 +22,10 @@ export class EventPage extends Component {
     messageHistory: []
   }
 
+  state = {
+    shouldRedirect: false
+  }
+
   componentDidMount() {
     this.handleRefresh();
     this.props.getDocumentation();
@@ -32,10 +36,17 @@ export class EventPage extends Component {
     getMessageHistory({ messageId });
   }
 
-  componentWillReceiveProps({ selectedEventId }) {
-    const { messageId, match } = this.props;
+  componentDidUpdate(prevProps) {
+    const { messageId, match, loading, isMessageHistoryEmpty, isOrphanEvent, selectedEvent, selectedEventId } = this.props;
+
     if (selectedEventId && messageId && !match.params.eventId) {
       this.props.history.replace(getDetailsPath(messageId, selectedEventId));
+    }
+
+    if (prevProps.loading && !loading) { //wait until finished loading
+      if ((!isOrphanEvent && isMessageHistoryEmpty) || (isOrphanEvent && !selectedEvent)) {
+        this.setState({ shouldRedirect: true });
+      }
     }
   }
 
@@ -45,9 +56,9 @@ export class EventPage extends Component {
   }
 
   render() {
-    const { isMessageHistoryEmpty, isOrphanEvent, loading, messageId, messageHistory, documentation, selectedEventId, selectedEvent } = this.props;
+    const { isOrphanEvent, loading, messageId, messageHistory, documentation, selectedEventId, selectedEvent } = this.props;
 
-    if ((!isOrphanEvent && isMessageHistoryEmpty) || (isOrphanEvent && !selectedEvent)) {
+    if (this.state.shouldRedirect) {
       const errorMessageInfo = isOrphanEvent ? `event_id # ${selectedEventId}` : `message_id # ${messageId}`;
       return (
         <RedirectAndAlert
