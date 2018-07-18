@@ -1,4 +1,8 @@
-import { selectWebhookBatches, selectInitialSubaccountValue } from '../webhooks';
+import {
+  selectWebhookBatches,
+  selectInitialSubaccountValue,
+  getSelectedEvents
+} from '../webhooks';
 
 describe('Webhooks selectors', () => {
   const state = {
@@ -18,7 +22,7 @@ describe('Webhooks selectors', () => {
     }
   };
 
-  it('should add formatted_time and status to batches store', () => {
+  test('selectWebhookBatches should add formatted_time and status to batches store', () => {
     expect(selectWebhookBatches(state)).toMatchSnapshot();
   });
 
@@ -44,6 +48,16 @@ describe('Webhooks selectors', () => {
       const location = { search: null };
       const result = selectInitialSubaccountValue({ ...state, subaccounts: { list: subaccounts }}, { location });
       expect(result).toEqual('Master and all subaccounts');
+    });
+  });
+
+  test('getSelectedEvents should convert the events array to a hash', () => {
+    expect(getSelectedEvents({
+      webhooks: { webhook: { events: ['one', 'two', 'five']}}
+    })).toEqual({
+      one: true,
+      two: true,
+      five: true
     });
   });
 });

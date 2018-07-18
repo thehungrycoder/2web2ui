@@ -5,6 +5,7 @@ import _ from 'lodash';
 
 const selectBatches = (state) => state.webhooks.batches;
 const formatStatus = (code) => _.inRange(code, 200, 300) ? 'Success' : 'Fail';
+const getCurrentWebhook = (state) => state.webhooks.webhook || {};
 
 export const selectWebhookBatches = (state) => {
   const batches = selectBatches(state);
@@ -36,4 +37,9 @@ export const selectInitialSubaccountValue = createSelector(
 
     return _.find(subaccounts, { id: Number(id) });
   }
+);
+
+export const getSelectedEvents = createSelector(
+  [getCurrentWebhook],
+  ({ events = []}) => events.reduce((hash, key) => ({ ...hash, [key]: true }), {})
 );

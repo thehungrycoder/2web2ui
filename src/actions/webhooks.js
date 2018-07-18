@@ -1,7 +1,7 @@
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 import setSubaccountHeader from './helpers/setSubaccountHeader';
 
-export function listWebhooks () {
+export function listWebhooks() {
   return sparkpostApiRequest({
     type: 'LIST_WEBHOOKS',
     meta: {
@@ -12,7 +12,7 @@ export function listWebhooks () {
   });
 }
 
-export function getWebhook ({ id, subaccount = null }) {
+export function getWebhook({ id, subaccount = null }) {
   const headers = setSubaccountHeader(subaccount);
 
   // Subaccount is passed through from qp because:
@@ -29,7 +29,7 @@ export function getWebhook ({ id, subaccount = null }) {
   });
 }
 
-export function createWebhook ({ webhook, subaccount = null }) {
+export function createWebhook({ webhook, subaccount = null }) {
   const headers = setSubaccountHeader(subaccount);
 
   // Subaccount is passed through to be used in the redirect in componentDidMount
@@ -46,7 +46,7 @@ export function createWebhook ({ webhook, subaccount = null }) {
   });
 }
 
-export function updateWebhook ({ id, subaccount = null, ...data }) {
+export function updateWebhook({ id, subaccount = null, ...data }) {
   const headers = setSubaccountHeader(subaccount);
   return sparkpostApiRequest({
     type: 'UPDATE_WEBHOOK',
@@ -59,7 +59,7 @@ export function updateWebhook ({ id, subaccount = null, ...data }) {
   });
 }
 
-export function deleteWebhook ({ id, subaccount = null }) {
+export function deleteWebhook({ id, subaccount = null }) {
   const headers = setSubaccountHeader(subaccount);
   return sparkpostApiRequest({
     type: 'DELETE_WEBHOOK',
@@ -71,7 +71,7 @@ export function deleteWebhook ({ id, subaccount = null }) {
   });
 }
 
-export function testWebhook ({ id, subaccount = null, message }) {
+export function testWebhook({ id, subaccount = null, message }) {
   const headers = setSubaccountHeader(subaccount);
   return sparkpostApiRequest({
     type: 'TEST_WEBHOOK',
@@ -84,28 +84,28 @@ export function testWebhook ({ id, subaccount = null, message }) {
   });
 }
 
-export function getEventDocs () {
+export function getEventDocs() {
   return sparkpostApiRequest({
     type: 'GET_EVENT_DOCS',
     meta: {
       method: 'GET',
-      url: 'webhooks/events/documentation'
+      url: '/webhooks/events/documentation'
     }
   });
 }
 
-export function getEventSamples (events) {
+export function getEventSamples(events) {
   return sparkpostApiRequest({
     type: 'GET_EVENT_SAMPLES',
     meta: {
       method: 'GET',
-      url: 'webhooks/events/samples',
+      url: '/webhooks/events/samples',
       params: { events: events.join(',') }
     }
   });
 }
 
-export function getBatches ({ id, subaccount = null }) {
+export function getBatches({ id, subaccount = null }) {
   const headers = setSubaccountHeader(subaccount);
   return sparkpostApiRequest({
     type: 'GET_WEBHOOK_BATCHES',

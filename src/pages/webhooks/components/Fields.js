@@ -50,8 +50,8 @@ const EventsRadioGroup = () => (
     component={RadioGroup}
     title='Events:'
     options={[
-      { value: 'all', label: 'All' },
-      { value: 'select', label: 'Select' }
+      { value: 'all', label: 'All events' },
+      { value: 'select', label: 'Select individual events' }
     ]}
   />
 );
