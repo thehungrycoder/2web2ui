@@ -80,7 +80,7 @@ export class EditBounce extends Component {
     const titleIcon = bounce ? <VerifiedIcon/> : <ErrorIcon/>;
 
     return (
-      <Panel title={<Fragment>{titleIcon} DNS Settings</Fragment>} sectioned
+      <Panel title={<Fragment>{titleIcon} <span>DNS Settings</span></Fragment>} sectioned
         actions={[this.getVerifyAction()]} >
         <LabelledValue label='Type'><p>CNAME</p></LabelledValue>
         <LabelledValue label='Hostname'><p>{id}</p></LabelledValue>
@@ -97,8 +97,8 @@ export class EditBounce extends Component {
           <p><em>Note: Bounce domains must be verified via DNS.</em></p>
         </SendingDomainSection.Left>
         <SendingDomainSection.Right>
-          { this.renderRootDomainWarning() }
-          { this.renderDnsSettings() }
+          {this.renderRootDomainWarning()}
+          {this.renderDnsSettings()}
         </SendingDomainSection.Right>
       </Fragment>
     );
@@ -127,9 +127,9 @@ export class EditBounce extends Component {
       <Fragment>
         <SendingDomainSection.Left/>
         <SendingDomainSection.Right>
-          { this.renderRootDomainWarning() }
-          { this.renderDnsSettings() }
-          { showDefaultBounceToggle &&
+          {this.renderRootDomainWarning()}
+          {this.renderDnsSettings()}
+          {showDefaultBounceToggle &&
               <Panel sectioned>
                 <Field
                   name='is_default_bounce_domain'
@@ -153,7 +153,7 @@ export class EditBounce extends Component {
 
     return (
       <SendingDomainSection title='Set Up For Bounce'>
-        { readyFor.bounce ? this.renderReady() : this.renderNotReady() }
+        {readyFor.bounce ? this.renderReady() : this.renderNotReady()}
       </SendingDomainSection>
     );
   }
