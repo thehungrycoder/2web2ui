@@ -105,7 +105,7 @@ const supportIssues = [
     id: 'account_cancellation',
     label: 'Account cancellation',
     messageLabel: 'Tell us why you are leaving',
-    type: COMPLIANCE
+    type: BILLING
   },
   {
     id: 'general_issue',
