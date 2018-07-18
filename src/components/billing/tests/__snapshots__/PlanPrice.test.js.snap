@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`PlanPrice allows class name overriding 1`] = `
-<span>
+<span
+  className="notranslate"
+>
   <span
     className="abcd-class"
   >
@@ -26,7 +28,9 @@ exports[`PlanPrice allows class name overriding 1`] = `
 `;
 
 exports[`PlanPrice renders correctly 1`] = `
-<span>
+<span
+  className="notranslate"
+>
   <span
     className="MainLabel"
   >
@@ -51,7 +55,9 @@ exports[`PlanPrice renders correctly 1`] = `
 `;
 
 exports[`PlanPrice renders correctly for free plan 1`] = `
-<span>
+<span
+  className="notranslate"
+>
   <span
     className="MainLabel"
   >
@@ -68,7 +74,9 @@ exports[`PlanPrice renders correctly for free plan 1`] = `
 `;
 
 exports[`PlanPrice renders correctly with hourly plans 1`] = `
-<span>
+<span
+  className="notranslate"
+>
   <span
     className="MainLabel"
   >
@@ -93,7 +101,9 @@ exports[`PlanPrice renders correctly with hourly plans 1`] = `
 `;
 
 exports[`PlanPrice renders free ip 1`] = `
-<span>
+<span
+  className="notranslate"
+>
   <span
     className="MainLabel"
   >
@@ -120,7 +130,9 @@ exports[`PlanPrice renders free ip 1`] = `
 `;
 
 exports[`PlanPrice renders free ip and overage correct 1`] = `
-<span>
+<span
+  className="notranslate"
+>
   <span
     className="MainLabel"
   >
@@ -150,7 +162,9 @@ exports[`PlanPrice renders free ip and overage correct 1`] = `
 exports[`PlanPrice renders nothing when no plan 1`] = `""`;
 
 exports[`PlanPrice renders with overage 1`] = `
-<span>
+<span
+  className="notranslate"
+>
   <span
     className="MainLabel"
   >

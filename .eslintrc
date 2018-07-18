@@ -56,6 +56,13 @@
         "when": "never",
         "children": true
       }
+    ],
+    "no-restricted-syntax": [
+      "warn",
+      {
+        "message": "☀️ Plz avoid bare strings inside JSX ☀️",
+        "selector": "JSXElement[children.length > 1] > Literal[value=/\\w+/]"
+      }
     ]
   },
   "extends": [

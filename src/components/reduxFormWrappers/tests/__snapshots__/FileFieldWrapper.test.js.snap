@@ -31,7 +31,9 @@ exports[`FileFieldWrapper renders disabled file input 1`] = `
         className="Placeholder"
       >
         <FileUpload />
-         Drag a file here, or click to browse
+        <span>
+          Drag a file here, or click to browse
+        </span>
       </span>
     </Dropzone>
   </div>
@@ -69,7 +71,9 @@ exports[`FileFieldWrapper renders file input 1`] = `
         className="Placeholder"
       >
         <FileUpload />
-         Drag a file here, or click to browse
+        <span>
+          Drag a file here, or click to browse
+        </span>
       </span>
     </Dropzone>
   </div>
@@ -111,7 +115,9 @@ exports[`FileFieldWrapper renders file input with error message 1`] = `
         className="Placeholder"
       >
         <FileUpload />
-         Drag a file here, or click to browse
+        <span>
+          Drag a file here, or click to browse
+        </span>
       </span>
     </Dropzone>
   </div>
@@ -149,7 +155,9 @@ exports[`FileFieldWrapper renders file input with help message 1`] = `
         className="Placeholder"
       >
         <FileUpload />
-         Drag a file here, or click to browse
+        <span>
+          Drag a file here, or click to browse
+        </span>
       </span>
     </Dropzone>
   </div>
@@ -192,7 +200,9 @@ exports[`FileFieldWrapper renders file input with no specified type 1`] = `
         className="Placeholder"
       >
         <FileUpload />
-         Drag a file here, or click to browse
+        <span>
+          Drag a file here, or click to browse
+        </span>
       </span>
     </Dropzone>
   </div>

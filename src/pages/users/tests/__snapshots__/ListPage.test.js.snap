@@ -84,8 +84,13 @@ exports[`Page: Users List should render correctly by default 1`] = `
     <DeleteModal
       content={
         <p>
-          User "
-          " will no longer be able to log in or access this SparkPost account and all API keys associated with this user will be immediately deleted.
+          <span>
+            User "
+          </span>
+          <span />
+          <span>
+            " will no longer be able to log in or access this SparkPost account and all API keys associated with this user will be immediately deleted.
+          </span>
         </p>
       }
       onCancel={[Function]}

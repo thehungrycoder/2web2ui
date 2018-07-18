@@ -100,7 +100,7 @@ export class SetupSending extends Component {
           color: 'orange'
         }]}
         sectioned
-        title={<Fragment>{titleIcon} DNS Settings</Fragment>}
+        title={<Fragment>{titleIcon} <span>DNS Settings</span></Fragment>}
       >
         <LabelledValue label='Type'><p>TXT</p></LabelledValue>
         <LabelledValue label='Hostname'><p>{dkimHostname}</p></LabelledValue>
