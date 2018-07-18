@@ -12,16 +12,14 @@ import { selectEventListing } from 'src/selectors/eventListing';
 
 export class WebhooksCreate extends Component {
   componentDidMount() {
-    if (!this.props.eventDocs) {
-      this.props.getEventDocs();
-    }
+    this.props.getEventDocs();
   }
 
   /*
     Makes a webhook object from form values and calls the createWebhook action
     with it. Invoked in the form's onSubmit func
   */
-  createWebhook(values) {
+  create = (values) => {
     const { createWebhook, showAlert, eventListing } = this.props;
     const { name, target, subaccount, eventsRadio, auth, assignTo } = values;
     const webhook = { name, target };
@@ -82,16 +80,16 @@ export class WebhooksCreate extends Component {
   }
 
   render() {
-    const { eventsLoading } = this.props; // Form doesn't load until we have events
+    const { eventListing, eventsLoading } = this.props; // Form doesn't load until we have events
 
-    if (eventsLoading) {
+    if (eventListing.length === 0 && eventsLoading) {
       return <Loading />;
     }
 
     return (
       <Page title='Create Webhook' breadcrumbAction={{ content: 'Webhooks', Component: Link, to: '/webhooks' }} >
         <Panel>
-          <WebhookForm newWebhook={true} onSubmit={(values) => this.createWebhook(values)}/>
+          <WebhookForm newWebhook={true} onSubmit={this.create}/>
         </Panel>
       </Page>
     );

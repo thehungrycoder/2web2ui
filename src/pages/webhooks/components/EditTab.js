@@ -12,16 +12,14 @@ import { selectEventListing } from 'src/selectors/eventListing';
 export class EditTab extends Component {
 
   componentDidMount() {
-    if (this.props.eventListing.length === 0) {
-      this.props.getEventDocs();
-    }
+    this.props.getEventDocs();
   }
 
   /*
     Passed as onSubmit to WebhookForm. Figures out what updates need to be passed
     to the updateWebhook action.
   */
-  update = async (values, webhook, allEvents) => {
+  update = async (values, webhook) => {
     const { getWebhook, updateWebhook, showAlert, eventListing } = this.props;
     const { name, target, active, events = [], eventsRadio } = values;
     const { id, subaccount } = webhook;
@@ -49,7 +47,7 @@ export class EditTab extends Component {
       delete webhook.auth_type;
     }
 
-    if (eventsLoading) {
+    if (eventListing.length === 0 && eventsLoading) {
       return <PanelLoading />;
     }
 

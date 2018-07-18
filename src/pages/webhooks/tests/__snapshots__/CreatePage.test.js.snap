@@ -21,6 +21,27 @@ exports[`Page: Webhook Create should build proper events tree 1`] = `
 </Page>
 `;
 
+exports[`Page: Webhook Create should not show loading component while events are loading if events are present 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "Webhooks",
+      "to": "/webhooks",
+    }
+  }
+  empty={Object {}}
+  title="Create Webhook"
+>
+  <Panel>
+    <withRouter(Connect(ReduxForm))
+      newWebhook={true}
+      onSubmit={[Function]}
+    />
+  </Panel>
+</Page>
+`;
+
 exports[`Page: Webhook Create should render happy path 1`] = `
 <Page
   breadcrumbAction={
@@ -42,4 +63,4 @@ exports[`Page: Webhook Create should render happy path 1`] = `
 </Page>
 `;
 
-exports[`Page: Webhook Create should show loading component while events are loading 1`] = `<Loading />`;
+exports[`Page: Webhook Create should show loading component while events are loading if no events are present 1`] = `<Loading />`;

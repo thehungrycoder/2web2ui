@@ -52,22 +52,25 @@ describe('Page: Webhook Create', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should show loading component while events are loading', () => {
+  it('should show loading component while events are loading if no events are present', () => {
+    wrapper.setProps({ eventsLoading: true, eventListing: []});
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should not show loading component while events are loading if events are present', () => {
     wrapper.setProps({ eventsLoading: true });
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should call createWebhook on submit of form', () => {
-    const createSpy = jest.spyOn(wrapper.instance(), 'createWebhook');
-    wrapper.instance().createWebhook.mockImplementation(jest.fn());
-    wrapper.find('withRouter(Connect(ReduxForm))').simulate('submit');
-    expect(createSpy).toHaveBeenCalled();
+    wrapper.find('withRouter(Connect(ReduxForm))').simulate('submit', {});
+    expect(props.createWebhook).toHaveBeenCalled();
   });
 
-  describe('createWebhook tests', () => {
+  describe('create tests', () => {
     it('should redirect on create success, and receive events from only master', async () => {
       const instance = wrapper.instance();
-      await instance.createWebhook({
+      await instance.create({
         name: 'my webhook',
         target: 'http://url.com',
         assignTo: 'master',
@@ -94,7 +97,7 @@ describe('Page: Webhook Create', () => {
 
     it('should only pass in checked events, and receive events from all', async () => {
       const instance = wrapper.instance();
-      await instance.createWebhook({
+      await instance.create({
         name: 'my webhook',
         target: 'http://url.com',
         eventsRadio: 'select',
@@ -119,7 +122,7 @@ describe('Page: Webhook Create', () => {
 
     it('should set appropriate values for basic auth webhook, and receive events from single sub', async () => {
       const instance = wrapper.instance();
-      await instance.createWebhook({
+      await instance.create({
         name: 'my webhook',
         target: 'http://url.com',
         eventsRadio: 'select',
@@ -149,7 +152,7 @@ describe('Page: Webhook Create', () => {
 
     it('should set appropriate values for oauth2 webhook', async () => {
       const instance = wrapper.instance();
-      await instance.createWebhook({
+      await instance.create({
         name: 'my webhook',
         target: 'http://url.com',
         eventsRadio: 'select',
@@ -180,14 +183,7 @@ describe('Page: Webhook Create', () => {
   });
 
   describe('componentDidMount tests', () => {
-    it('should call getEventDocs if they don\'t exist on props', () => {
-      const instance = wrapper.instance();
-      instance.componentDidMount();
-      expect(instance.props.getEventDocs).not.toHaveBeenCalled();
-    });
-
-    it('should not call getEventDocs if they exist on props', () => {
-      wrapper.setProps({ eventDocs: null });
+    it('should call getEventDocs', () => {
       const instance = wrapper.instance();
       instance.componentDidMount();
       expect(instance.props.getEventDocs).toHaveBeenCalled();

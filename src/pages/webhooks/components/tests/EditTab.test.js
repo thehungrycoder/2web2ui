@@ -56,14 +56,17 @@ describe('Webhooks EditTab', () => {
   });
 
   it('should render loading', () => {
+    wrapper.setProps({ eventsLoading: true, eventListing: []});
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should not render as loading if we already have an event listing', () => {
     wrapper.setProps({ eventsLoading: true });
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should get events if not loaded on mount', () => {
-    wrapper.setProps({ eventListing: []});
-    wrapper.instance().componentDidMount();
-    expect(wrapper.instance().props.getEventDocs).toHaveBeenCalledTimes(1);
+  it('should get event docs after mount', () => {
+    expect(props.getEventDocs).toHaveBeenCalledTimes(1);
   });
 
   describe('on submit', () => {

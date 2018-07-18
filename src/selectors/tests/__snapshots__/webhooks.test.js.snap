@@ -7,7 +7,7 @@ Object {
 }
 `;
 
-exports[`Webhooks selectors should add formatted_time and status to batches store 1`] = `
+exports[`Webhooks selectors selectWebhookBatches should add formatted_time and status to batches store 1`] = `
 Array [
   Object {
     "formatted_time": "Jan 24 2018, 12:00am",
