@@ -98,7 +98,7 @@ export class ListPage extends Component {
         onDelete={this.handleDelete}
         onCancel={this.handleCancel}
         open={isOpen}
-        content={<p>User "{name}" will no longer be able to log in or access this SparkPost account and all API keys associated with this user will be immediately deleted.</p>}
+        content={<p><span>User "</span><span>{name}</span><span>" will no longer be able to log in or access this SparkPost account and all API keys associated with this user will be immediately deleted.</span></p>}
         title="Are you sure you want to delete this user?"
       />
     );
@@ -120,7 +120,7 @@ export class ListPage extends Component {
           }}
           defaultSortColumn='name'
         />
-        { this.renderDeleteModal() }
+        {this.renderDeleteModal()}
       </div>
     );
   }
@@ -142,7 +142,7 @@ export class ListPage extends Component {
           image: Users,
           content: <p>Manage your team's accounts and roles.</p>
         }}>
-        { error ? this.renderError() : this.renderPage() }
+        {error ? this.renderError() : this.renderPage()}
       </Page>
     );
   }
