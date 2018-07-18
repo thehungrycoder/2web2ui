@@ -1,7 +1,40 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { WebhookForm } from '../WebhookForm';
+import { EventCheckBoxes, AuthFields, WebhookForm } from '../WebhookForm';
 import SubaccountSection from '../SubaccountSection';
+
+describe('EventCheckboxes component', () => {
+
+  it('should return null if show is false', () => {
+    expect(shallow(<EventCheckBoxes show={false} />)).toMatchSnapshot();
+  });
+
+  it('should render with events', () => {
+    const events = [
+      { key: 'testKeyA', display_name: 'Test Display Name A', description: 'A longer description for test event A' },
+      { key: 'testKeyB', display_name: 'Test Display Name B', description: 'A longer description for test event B' },
+      { key: 'testKeyC', display_name: 'Test Display Name C', description: 'A longer description for test event C' }
+    ];
+    expect(shallow(<EventCheckBoxes show={true} events={events} />)).toMatchSnapshot();
+  });
+
+});
+
+describe('AuthFields component', () => {
+
+  it('should render for basic auth', () => {
+    expect(shallow(<AuthFields authType='basic' />)).toMatchSnapshot();
+  });
+
+  it('should render for oauth', () => {
+    expect(shallow(<AuthFields authType='oauth2' />)).toMatchSnapshot();
+  });
+
+  it('should render null for unknown auth', () => {
+    expect(shallow(<AuthFields authType='bananas' />)).toMatchSnapshot();
+  });
+
+});
 
 describe('Webhooks Form Component', () => {
   let wrapper;
@@ -42,21 +75,9 @@ describe('Webhooks Form Component', () => {
   });
 
   describe('submit button props', () => {
-    it('should render update and disabled by default', () => {
+    it('should render submit text', () => {
+      wrapper.setProps({ submitText: 'Update Webhook' });
       expect(wrapper.find('Button').props().children).toEqual('Update Webhook');
-      expect(wrapper.find('Button').props().disabled).toBe(true);
-    });
-
-    it('should render submitting state correctly', () => {
-      wrapper.setProps({ submitting: true });
-      expect(wrapper.find('Button').props().children).toEqual('Submitting...');
-      expect(wrapper.find('Button').props().disabled).toBe(true);
-    });
-
-    it('should render create and dirt state correctly', () => {
-      wrapper.setProps({ newWebhook: true, pristine: false });
-      expect(wrapper.find('Button').props().children).toEqual('Create Webhook');
-      expect(wrapper.find('Button').props().disabled).toBe(false);
     });
   });
 

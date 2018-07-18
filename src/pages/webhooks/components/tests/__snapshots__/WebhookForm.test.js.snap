@@ -1,16 +1,59 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`AuthFields component should render for basic auth 1`] = `<BasicAuthFields />`;
+
+exports[`AuthFields component should render for oauth 1`] = `<OAuth2Fields />`;
+
+exports[`AuthFields component should render null for unknown auth 1`] = `""`;
+
+exports[`EventCheckboxes component should render with events 1`] = `
+<div
+  className="CheckboxGrid"
+>
+  <Field
+    component={[Function]}
+    helpText="A longer description for test event A"
+    key="testKeyA"
+    label="Test Display Name A"
+    name="events.testKeyA"
+    type="checkbox"
+  />
+  <Field
+    component={[Function]}
+    helpText="A longer description for test event B"
+    key="testKeyB"
+    label="Test Display Name B"
+    name="events.testKeyB"
+    type="checkbox"
+  />
+  <Field
+    component={[Function]}
+    helpText="A longer description for test event C"
+    key="testKeyC"
+    label="Test Display Name C"
+    name="events.testKeyC"
+    type="checkbox"
+  />
+</div>
+`;
+
+exports[`EventCheckboxes component should return null if show is false 1`] = `""`;
+
 exports[`Webhooks Form Component auth should render basic auth fields 1`] = `
 Array [
   <AuthDropDown />,
-  <BasicAuthFields />,
+  <AuthFields
+    authType="basic"
+  />,
 ]
 `;
 
 exports[`Webhooks Form Component auth should render basic oauth2 fields 1`] = `
 Array [
   <AuthDropDown />,
-  <OAuth2Fields />,
+  <AuthFields
+    authType="oauth2"
+  />,
 ]
 `;
 
@@ -24,22 +67,23 @@ exports[`Webhooks Form Component should render correctly 1`] = `
   </Panel.Section>
   <Panel.Section>
     <EventsRadioGroup />
+    <EventCheckBoxes />
   </Panel.Section>
   <Panel.Section>
     <AuthDropDown />
+    <AuthFields
+      authType={null}
+    />
   </Panel.Section>
   <Panel.Section>
     <ActiveField />
   </Panel.Section>
   <Panel.Section>
     <Button
-      disabled={true}
       primary={true}
       size="default"
       submit={true}
-    >
-      Update Webhook
-    </Button>
+    />
   </Panel.Section>
 </form>
 `;
@@ -47,7 +91,7 @@ exports[`Webhooks Form Component should render correctly 1`] = `
 exports[`Webhooks Form Component should show events checkboxes 1`] = `
 Array [
   <EventsRadioGroup />,
-  <Grid />,
+  <EventCheckBoxes />,
 ]
 `;
 

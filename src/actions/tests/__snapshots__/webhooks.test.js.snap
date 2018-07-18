@@ -76,7 +76,7 @@ Array [
   Object {
     "meta": Object {
       "method": "GET",
-      "url": "webhooks/events/documentation",
+      "url": "/webhooks/events/documentation",
     },
     "type": "GET_EVENT_DOCS",
   },
@@ -91,7 +91,7 @@ Array [
       "params": Object {
         "events": "event1,event2",
       },
-      "url": "webhooks/events/samples",
+      "url": "/webhooks/events/samples",
     },
     "type": "GET_EVENT_SAMPLES",
   },

@@ -4,6 +4,7 @@ import { MemoryRouter } from 'react-router-dom';
 import configureStore from 'src/store';
 import { Provider } from 'react-redux';
 import _ from 'lodash';
+import getFiller from './fill';
 
 // prevent problems with trying to load google analytics stuff
 jest.mock('src/helpers/analytics');
@@ -34,23 +35,6 @@ export async function setupForm(tree) {
     </Provider>
   );
 
-  const change = (index, value) => {
-    const el = mounted.find('Field').at(index);
-
-    const downshift = el.find('Downshift');
-    if (downshift.length) {
-      downshift.props().onChange(value);
-    } else {
-      let control = el.find('input');
-      if (control.length === 0) {
-        control = el.find('select');
-      }
-      control.simulate('change', { target: { value }});
-    }
-
-    mounted.update();
-  };
-
   await asyncFlush();
   mounted.update();
 
@@ -58,9 +42,8 @@ export async function setupForm(tree) {
     mounted,
     find: mounted.find.bind(mounted),
     store,
-    change,
+    fill: getFiller(mounted),
     asyncFlush,
-    fill: (fields) => fields.map((val, i) => change(i, val)),
     submit: async () => {
       mounted.find('form').simulate('submit');
       return asyncFlush();

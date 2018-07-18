@@ -73,11 +73,11 @@ exports[`should render EventsRadioGroup 1`] = `
   options={
     Array [
       Object {
-        "label": "All",
+        "label": "All events",
         "value": "all",
       },
       Object {
-        "label": "Select",
+        "label": "Select individual events",
         "value": "select",
       },
     ]
