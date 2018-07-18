@@ -39,3 +39,8 @@ export function parseSearch(search) {
 
   return { dateOptions, ...options };
 }
+
+
+export function getDetailsPath(messageId, eventId){
+  return `/reports/message-events/details/${messageId ? `${messageId}/${eventId}` : `_noid_/${eventId}`}`;
+}
