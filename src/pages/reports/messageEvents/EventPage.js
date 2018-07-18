@@ -32,8 +32,10 @@ export class EventPage extends Component {
   }
 
   handleRefresh = () => {
-    const { messageId, getMessageHistory } = this.props;
-    getMessageHistory({ messageId });
+    const { messageId, getMessageHistory, isOrphanEvent } = this.props;
+    if (!isOrphanEvent) {
+      getMessageHistory({ messageId });
+    }
   }
 
   componentDidUpdate(prevProps) {

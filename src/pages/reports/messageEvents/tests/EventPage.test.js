@@ -60,4 +60,23 @@ describe('Page: Event tests', () => {
     wrapper.setProps({ loading: false });
     expect(wrapper).toMatchSnapshot();
   });
+
+  describe('handleRefresh', () => {
+    let instance;
+    beforeEach(() => {
+      instance = wrapper.instance();
+      props.getMessageHistory.mockReset();
+    });
+
+    it('invokes getMessageHistory if not orphan event', () => {
+      instance.handleRefresh();
+      expect(props.getMessageHistory).toHaveBeenCalledWith({ messageId: 'id' });
+    });
+
+    it('does not invoke getMessageHistory if it is an orphan event', () => {
+      wrapper.setProps({ isOrphanEvent: true });
+      instance.handleRefresh();
+      expect(props.getMessageHistory).toHaveBeenCalledTimes(0);
+    });
+  });
 });
