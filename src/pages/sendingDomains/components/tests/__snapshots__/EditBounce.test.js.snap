@@ -134,7 +134,10 @@ exports[`Component: EditBounce does not show root domain warning for 3rd level d
         title={
           <React.Fragment>
             <ErrorIcon />
-             DNS Settings
+             
+            <span>
+              DNS Settings
+            </span>
           </React.Fragment>
         }
       >
@@ -215,7 +218,10 @@ exports[`Component: EditBounce renders not ready correctly 1`] = `
         title={
           <React.Fragment>
             <ErrorIcon />
-             DNS Settings
+             
+            <span>
+              DNS Settings
+            </span>
           </React.Fragment>
         }
       >
@@ -284,7 +290,10 @@ exports[`Component: EditBounce renders ready correctly 1`] = `
         title={
           <React.Fragment>
             <VerifiedIcon />
-             DNS Settings
+             
+            <span>
+              DNS Settings
+            </span>
           </React.Fragment>
         }
       >
