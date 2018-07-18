@@ -46,9 +46,9 @@ describe('Analytics Utils', () => {
         meta: { form: 'fooForm' }
       }
     },
-    'validation error with generic error with equal sign': {
+    'validation error with nested field names are flattened': {
       action: {
-        payload: { syncErrors: { _error: 'must be value=2' }},
+        payload: { syncErrors: { card: { number: '1234', expire: '0820' }, name: 'foobar' }},
         meta: { form: 'fooForm' }
       }
     }
@@ -57,6 +57,4 @@ describe('Analytics Utils', () => {
   cases('determineFormValidationState', ({ name, action }) => {
     expect(utils.determineFormValidationState(action)).toMatchSnapshot();
   }, determineFormValidationStateTestCases);
-
-
 });

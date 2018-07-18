@@ -14,16 +14,16 @@ Object {
 }
 `;
 
-exports[`Analytics Utils determineFormValidationState validation error with generic error with equal sign 1`] = `
+exports[`Analytics Utils determineFormValidationState validation error with nested field names are flattened 1`] = `
 Object {
   "action": "Validation Error",
-  "label": "fooForm: _error=must be value%3D2",
+  "label": "fooForm: card.number=1234,card.expire=0820,name=foobar",
 }
 `;
 
 exports[`Analytics Utils determineFormValidationState validation success with no syncErrors 1`] = `
 Object {
   "action": "Validation Success",
-  "label": "fooForm: ",
+  "label": "fooForm",
 }
 `;
