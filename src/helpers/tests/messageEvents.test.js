@@ -50,4 +50,15 @@ describe('messageEvents helpers', () => {
     expect(messageEventHelpers.parseSearch(searchText)).toMatchSnapshot();
   }, testCases);
 
+
+  describe('getDetailsPath', () => {
+    it('returns correct path when messageId and eventId exist', () => {
+      expect(messageEventHelpers.getDetailsPath('foo', 'bar')).toEqual('/reports/message-events/details/foo/bar');
+    });
+
+    it('returns correct path when messageId is empty', () => {
+      expect(messageEventHelpers.getDetailsPath(null, 'bar')).toEqual('/reports/message-events/details/_noid_/bar');
+    });
+  });
+
 });

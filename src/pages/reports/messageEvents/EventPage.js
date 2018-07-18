@@ -4,14 +4,12 @@ import { Link } from 'react-router-dom';
 
 import { getMessageHistory, getDocumentation } from 'src/actions/messageEvents';
 import RedirectAndAlert from 'src/components/globalAlert/RedirectAndAlert';
-import { isMessageHistoryEmpty, selectMessageHistory, selectInitialEventId } from 'src/selectors/messageEvents';
-
+import { eventPageMSTP } from 'src/selectors/messageEvents';
+import { getDetailsPath } from 'src/helpers/messageEvents';
 import { Page, Grid } from '@sparkpost/matchbox';
 import { Loading } from 'src/components';
 import HistoryTable from './components/HistoryTable';
 import EventDetails from './components/EventDetails';
-
-import _ from 'lodash';
 
 const breadcrumbAction = {
   content: 'All Message Events',
@@ -25,7 +23,7 @@ export class EventPage extends Component {
   }
 
   state = {
-    selectedEventId: null
+    shouldRedirect: false
   }
 
   componentDidMount() {
@@ -34,34 +32,40 @@ export class EventPage extends Component {
   }
 
   handleRefresh = () => {
-    const { messageId, getMessageHistory } = this.props;
-    getMessageHistory({ messageId });
+    const { messageId, getMessageHistory, isOrphanEvent } = this.props;
+    if (!isOrphanEvent) {
+      getMessageHistory({ messageId });
+    }
   }
 
-  componentWillReceiveProps({ selectedEventId }) {
-    if (!this.state.selectedEventId && selectedEventId) {
-      // Saves selected event from location state, defaults to first event in message history
-      this.setState({ selectedEventId });
+  componentDidUpdate(prevProps) {
+    const { messageId, match, loading, isMessageHistoryEmpty, isOrphanEvent, selectedEvent, selectedEventId } = this.props;
 
-      // Resets location state
-      this.props.history.replace({ ...this.props.location, state: {}});
+    if (selectedEventId && messageId && !match.params.eventId) {
+      this.props.history.replace(getDetailsPath(messageId, selectedEventId));
+    }
+
+    if (prevProps.loading && !loading) { //wait until finished loading
+      if ((!isOrphanEvent && isMessageHistoryEmpty) || (isOrphanEvent && !selectedEvent)) {
+        this.setState({ shouldRedirect: true });
+      }
     }
   }
 
   handleEventClick = (selectedEventId) => {
-    this.setState({ selectedEventId });
+    const { history, messageId } = this.props;
+    history.push(getDetailsPath(messageId, selectedEventId));
   }
 
   render() {
-    const { isMessageHistoryEmpty, loading, messageId, messageHistory, documentation } = this.props;
-    const { selectedEventId } = this.state;
-    const selectedEvent = _.find(messageHistory, (event) => event.event_id === selectedEventId);
+    const { isOrphanEvent, loading, messageId, messageHistory, documentation, selectedEventId, selectedEvent } = this.props;
 
-    if (isMessageHistoryEmpty) {
+    if (this.state.shouldRedirect) {
+      const errorMessageInfo = isOrphanEvent ? `event_id # ${selectedEventId}` : `message_id # ${messageId}`;
       return (
         <RedirectAndAlert
           to="/reports/message-events"
-          alert={{ type: 'warning', message: `Unable to find message events for ${messageId}` }}
+          alert={{ type: 'warning', message: `Unable to find event(s) data with ${errorMessageInfo}` }}
         />
       );
     }
@@ -70,30 +74,26 @@ export class EventPage extends Component {
       ? <Loading />
       : (
         <Grid>
-          <Grid.Column xs={12} md={6}>
+          <Grid.Column xs={12} md={isOrphanEvent ? 12 : 6}>
             <EventDetails details={selectedEvent} documentation={documentation}/>
           </Grid.Column>
-          <Grid.Column xs={12} md={6}>
-            <HistoryTable
-              messageHistory={messageHistory}
-              selectedId={selectedEventId}
-              handleEventClick={this.handleEventClick}
-              handleRefresh={this.handleRefresh}/>
-          </Grid.Column>
+          {!isOrphanEvent &&
+            <Grid.Column xs={12} md={6}>
+              <HistoryTable
+                messageHistory={messageHistory}
+                selectedId={selectedEventId}
+                handleEventClick={this.handleEventClick}
+                handleRefresh={this.handleRefresh}/>
+            </Grid.Column>
+          }
         </Grid>
       );
 
-    return <Page title={`Message: ${messageId}`} breadcrumbAction={breadcrumbAction}>{pageContent}</Page>;
+
+    const title = isOrphanEvent ? `Event: ${selectedEventId}` : `Message: ${messageId}`;
+
+    return <Page title={title} breadcrumbAction={breadcrumbAction}>{pageContent}</Page>;
   }
 }
 
-const mapStateToProps = (state, props) => ({
-  isMessageHistoryEmpty: isMessageHistoryEmpty(state, props),
-  loading: state.messageEvents.historyLoading || state.messageEvents.documentationLoading,
-  messageHistory: selectMessageHistory(state, props),
-  messageId: props.match.params.messageId,
-  documentation: state.messageEvents.documentation,
-  selectedEventId: selectInitialEventId(state, props)
-});
-
-export default connect(mapStateToProps, { getMessageHistory, getDocumentation })(EventPage);
+export default connect(eventPageMSTP, { getMessageHistory, getDocumentation })(EventPage);

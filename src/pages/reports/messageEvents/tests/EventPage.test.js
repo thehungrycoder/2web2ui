@@ -7,13 +7,18 @@ describe('Page: Event tests', () => {
     getMessageHistory: jest.fn(),
     getDocumentation: jest.fn(),
     history: {
-      replace: jest.fn()
+      replace: jest.fn(),
+      push: jest.fn()
     },
     messageId: 'id',
     messageHistory: [
       { event_id: '1' },
       { event_id: '2' }
-    ]
+    ],
+    isOrphanEvent: false,
+    match: {
+      params: {}
+    }
   };
 
   let wrapper;
@@ -26,19 +31,23 @@ describe('Page: Event tests', () => {
     expect(wrapper).toMatchSnapshot();
     expect(props.getDocumentation).toHaveBeenCalled();
     expect(props.getMessageHistory).toHaveBeenCalledWith({ messageId: props.messageId });
-    expect(wrapper.state().selectedEventId).toEqual(null);
   });
 
-  it('should handle location state', () => {
-    wrapper.setProps({ selectedEventId: '1' });
-    expect(wrapper.state().selectedEventId).toEqual('1');
-    expect(props.history.replace).toHaveBeenCalled();
+  it('redirects old path (w/o eventId) to new path', () => {
+    wrapper.setProps({ selectedEventId: 1, loading: true });
+    wrapper.setProps({ loading: false });
+    expect(props.history.replace).toHaveBeenCalledWith('/reports/message-events/details/id/1');
+  });
+
+  it('redirects to list page if event_id not found', () => {
+    wrapper.setProps({ isOrphanEvent: true, selectedEvent: null, selectedEventId: 3, loading: true });
+    wrapper.setProps({ loading: false });
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should handle event click', () => {
+  it('should handle event click by pushing new state', () => {
     wrapper.instance().handleEventClick('eventId');
-    expect(wrapper.state().selectedEventId).toEqual('eventId');
+    expect(props.history.push).toHaveBeenCalledWith('/reports/message-events/details/id/eventId');
   });
 
   it('should render loading correctly', () => {
@@ -47,7 +56,27 @@ describe('Page: Event tests', () => {
   });
 
   it('should redirect when no message events', () => {
-    wrapper.setProps({ isMessageHistoryEmpty: true });
+    wrapper.setProps({ isMessageHistoryEmpty: true, isOrphanEvent: false, loading: true });
+    wrapper.setProps({ loading: false });
     expect(wrapper).toMatchSnapshot();
+  });
+
+  describe('handleRefresh', () => {
+    let instance;
+    beforeEach(() => {
+      instance = wrapper.instance();
+      props.getMessageHistory.mockReset();
+    });
+
+    it('invokes getMessageHistory if not orphan event', () => {
+      instance.handleRefresh();
+      expect(props.getMessageHistory).toHaveBeenCalledWith({ messageId: 'id' });
+    });
+
+    it('does not invoke getMessageHistory if it is an orphan event', () => {
+      wrapper.setProps({ isOrphanEvent: true });
+      instance.handleRefresh();
+      expect(props.getMessageHistory).toHaveBeenCalledTimes(0);
+    });
   });
 });

@@ -20,11 +20,11 @@ describe('Component ViewDetailsButton', () => {
     };
   });
 
-  it('renders correctly', () => {
+  it('renders correctly when message_id exists', () => {
     expect(shallow(<ViewDetailsButton {...props} />)).toMatchSnapshot();
   });
 
-  it('renders nothing if message_id is absent', () => {
+  it('renders correct if message_id is absent', () => {
     delete props.message_id;
     expect(shallow(<ViewDetailsButton {...props} />)).toMatchSnapshot();
   });

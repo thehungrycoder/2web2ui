@@ -1,59 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Page: Event tests should handle location state 1`] = `
-<Page
-  breadcrumbAction={
+exports[`Page: Event tests redirects to list page if event_id not found 1`] = `
+<Connect(RedirectAndAlert)
+  alert={
     Object {
-      "Component": [Function],
-      "content": "All Message Events",
-      "to": "/reports/message-events",
+      "message": "Unable to find event(s) data with event_id # 3",
+      "type": "warning",
     }
   }
-  empty={Object {}}
-  title="Message: id"
->
-  <Grid>
-    <Grid.Column
-      md={6}
-      xs={12}
-    >
-      <EventDetails
-        details={
-          Object {
-            "event_id": "1",
-          }
-        }
-      />
-    </Grid.Column>
-    <Grid.Column
-      md={6}
-      xs={12}
-    >
-      <HistoryTable
-        handleEventClick={[Function]}
-        handleRefresh={[Function]}
-        messageHistory={
-          Array [
-            Object {
-              "event_id": "1",
-            },
-            Object {
-              "event_id": "2",
-            },
-          ]
-        }
-        selectedId="1"
-      />
-    </Grid.Column>
-  </Grid>
-</Page>
+  to="/reports/message-events"
+/>
 `;
 
 exports[`Page: Event tests should redirect when no message events 1`] = `
 <Connect(RedirectAndAlert)
   alert={
     Object {
-      "message": "Unable to find message events for id",
+      "message": "Unable to find event(s) data with message_id # id",
       "type": "warning",
     }
   }
@@ -99,7 +62,6 @@ exports[`Page: Event tests should render page correctly 1`] = `
             },
           ]
         }
-        selectedId={null}
       />
     </Grid.Column>
   </Grid>
