@@ -71,7 +71,7 @@
     "react": "^16.3.2",
     "react-ace": "^6.1.0",
     "react-chartjs-2": "^2.1.0",
-    "react-day-picker": "^7.0.7",
+    "react-day-picker": "^7.1.8",
     "react-dom": "^16.3.2",
     "react-dropzone": "^4.2.3",
     "react-helmet": "^5.2.0",
