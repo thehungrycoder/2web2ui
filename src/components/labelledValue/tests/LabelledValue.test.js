@@ -18,4 +18,9 @@ describe('LabelledValue Component', () => {
     const wrapper = shallow(<LabelledValue label='Label'><h5>child</h5></LabelledValue>);
     expect(wrapper).toMatchSnapshot();
   });
+
+  it('should render with label and value when value is boolean', () => {
+    const wrapper = shallow(<LabelledValue label='Label' value={false} />);
+    expect(wrapper).toMatchSnapshot();
+  });
 });
