@@ -2,13 +2,15 @@
 import React, { Component } from 'react';
 import { subMonths, format } from 'date-fns';
 import { getStartOfDay, getEndOfDay, getRelativeDateOptions } from 'src/helpers/date';
-import { Button, Datepicker, TextField, Select, Popover, WindowEvent } from '@sparkpost/matchbox';
+import { Button, TextField, Select, Popover, WindowEvent } from '@sparkpost/matchbox';
+import DateSelector from 'src/components/dateSelector/DateSelector'
 import ManualEntryForm from './ManualEntryForm';
 import { FORMATS } from 'src/constants';
 import styles from './DatePicker.module.scss';
 import PropTypes from 'prop-types';
 
 export default class AppDatePicker extends Component {
+
   DATE_FORMAT = FORMATS.LONG_DATETIME;
   state = {
     showDatePicker: false,
@@ -137,7 +139,7 @@ export default class AppDatePicker extends Component {
         onClose={this.cancelDatePicker}
         open={this.state.showDatePicker} >
 
-        <Datepicker
+        <DateSelector
           numberOfMonths={2}
           fixedWeeks
           enableOutsideDays={false}
