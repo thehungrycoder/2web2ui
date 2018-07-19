@@ -1,6 +1,5 @@
 import { createSelector } from 'reselect';
 import _ from 'lodash';
-import * as accountConditions from 'src/helpers/conditions/account';
 
 const getAccount = (state) => state.account;
 const getUser = (state) => state.currentUser;
@@ -37,17 +36,19 @@ export default selectAccessConditionState;
  * There may be a better way to organize this. :)
  */
 
-export const onPlan = (planCode) => createSelector(
-  [selectAccessConditionState],
-  (state) => accountConditions.onPlan(planCode)(state)
-);
+export const selectCondition = (condition) => createSelector([selectAccessConditionState], condition);
 
-export const isAws = createSelector(
-  [selectAccessConditionState],
-  accountConditions.isAws
-);
+// export const onPlan = (planCode) => createSelector(
+//   [selectAccessConditionState],
+//   (state) => accountConditions.onPlan(planCode)(state)
+// );
 
-export const isSelfServeBilling = createSelector(
-  [selectAccessConditionState],
-  accountConditions.isSelfServeBilling
-);
+// export const isAws = createSelector(
+//   [selectAccessConditionState],
+//   accountConditions.isAws
+// );
+
+// export const isSelfServeBilling = createSelector(
+//   [selectAccessConditionState],
+//   accountConditions.isSelfServeBilling
+// );

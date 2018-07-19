@@ -113,19 +113,6 @@ describe('selectBillingInfo', () => {
 
 });
 
-describe('isAWSAccountSelector', () => {
-  let state;
-  beforeEach(() => {
-    state = {
-      account: { subscription: { code: 'free', type: 'aws' }}
-    };
-  });
-
-  it('returns true when subscription type is aws', () => {
-    expect(billingInfo.isAWSAccountSelector(state)).toBe(true);
-  });
-});
-
 describe('canPurchaseIps', () => {
   let state;
   beforeEach(() => {

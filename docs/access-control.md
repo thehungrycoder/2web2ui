@@ -65,6 +65,33 @@ _Note: Routes default to exact: true because [it makes more sense](https://githu
 
 Condition helpers are functions that return a condition function. Any time you need to use an access control condition, create a helper for that condition scenario. Whenever that returned function is called, it will be passed an object containing whatever [the `accessConditionState` selector](#access-condition-selector) returns, and it should return a boolean that reflects the access decision.
 
+#### Using condition helpers as selectors
+
+IMPORTANT NOTE: These functions are _primarily_ meant to be used with the Access Control components in this repo. They _cannot_ be used directly as selectors without first wrapping them with the `selectCondition` method exported from the accessConditionState selector.
+
+```js
+const isCool = ({ account }) => account.isCool
+
+// Best way, use access control components
+<AccessControl condition={isCool}>
+  {...}
+</AccessControl>
+
+// Good, if you want to use the boolean value outside of access control components
+import { selectCondition } from 'src/selectors/accessConditionState'
+
+const mapStateToProps = (state) => ({
+  isCool: selectCondition(isCool)(state) // will break someday
+})
+
+// Bad, do not do
+const mapStateToProps = (state) => ({
+  isCool: isCool(state) // will break someday
+})
+```
+
+#### Condition helpers should return functions
+
 To avoid repetitiveness and noise, don't make helpers that work like this:
 ```js
 // helpers/conditions/hasGrants.js
