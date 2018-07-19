@@ -1,10 +1,10 @@
 import React from 'react';
 import { ChangePlanForm } from '../ChangePlanForm';
 import { shallow } from 'enzyme';
-import * as accountConditions from 'src/helpers/conditions/account';
+import * as accountConditions from 'src/selectors/accessConditionState';
 import * as conversions from 'src/helpers/conversionTracking';
 
-jest.mock('src/helpers/conditions/account');
+jest.mock('src/selectors/accessConditionState');
 jest.mock('src/helpers/conversionTracking');
 
 describe('Form Container: Change Plan', () => {

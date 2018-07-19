@@ -1,9 +1,10 @@
 import { createSelector } from 'reselect';
+import _ from 'lodash';
 import * as accountConditions from 'src/helpers/conditions/account';
 
 const getAccount = (state) => state.account;
 const getUser = (state) => state.currentUser;
-const getPlans = (state) => state.billing.plans || [];
+const getPlans = (state) => _.get(state, 'billing.plans', []);
 const getACReady = (state) => state.accessControlReady;
 
 export const getCurrentAccountPlan = createSelector(
