@@ -55,3 +55,26 @@ exports[`LabelledValue Component should render with label and value 1`] = `
   </div>
 </div>
 `;
+
+exports[`LabelledValue Component should render with label and value when value is boolean 1`] = `
+<div
+  className="LabelledValue"
+>
+  <div
+    className="LabelContainer"
+  >
+    <small
+      className="Label"
+    >
+      Label
+    </small>
+  </div>
+  <div
+    className="Content"
+  >
+    <h6>
+      false
+    </h6>
+  </div>
+</div>
+`;
