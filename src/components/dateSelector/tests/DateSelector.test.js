@@ -11,7 +11,7 @@ describe('dateselector', () => {
     return shallow(<DateSelector initialMonth={testDate} {...props} />);
   };
 
-  it('should render', () => {
+  it('should render correctly', () => {
     expect(subject()).toMatchSnapshot();
   });
 
