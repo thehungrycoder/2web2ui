@@ -12,7 +12,7 @@ describe('dateselector', () => {
   };
 
   it('should render', () => {
-    expect(subject()).toMatchSnapshot()
+    expect(subject()).toMatchSnapshot();
   });
 
   it('should compare selected days against isSameDay', () => {
@@ -43,9 +43,7 @@ describe('dateselector', () => {
 });
 
 describe('Navbar', () => {
-  const subject = (props) => {
-    return shallow(<Navbar {...props}/>)
-  }
+  const subject = (props) => shallow(<Navbar {...props}/>);
 
   it('should render correctly', () => {
     const wrapper = subject();
