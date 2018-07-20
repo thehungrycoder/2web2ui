@@ -62,6 +62,11 @@ export default [
     ]
   },
   {
+    label: 'A/B Tests',
+    to: '/abtests',
+    icon: Settings
+  },
+  {
     label: 'Webhooks',
     to: '/webhooks',
     icon: Language
