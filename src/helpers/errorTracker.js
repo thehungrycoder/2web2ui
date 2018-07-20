@@ -44,10 +44,11 @@ export function getEnricherOrDieTryin(store, context) {
     const { currentUser } = store.getState();
     const user = _.pick(currentUser, ['access_level', 'customer', 'username']);
     const fromOurBundle = isErrorFromOurBundle(data);
+    const apiError = isApiError(data);
 
     return {
       ...data,
-      level: !fromOurBundle ? 'warning' : 'error',
+      level: !fromOurBundle || apiError ? 'warning' : 'error',
       tags: { // all tags can be easily searched and sent in Slack notifications
         ...data.tags,
         customer: _.get(user, 'customer'),
@@ -74,6 +75,13 @@ export function isErrorFromOurBundle(data) {
 
   // if any frame is from our bundle
   return Boolean(frames.find(({ filename }) => looksLikeOurBundle.test(filename)));
+}
+
+export function isApiError(data) {
+  const looksLikeApiErrorType = new RegExp('SparkpostApiError|ZuoraApiError');
+  const type = _.get(data, 'exception.values[0].type');
+
+  return looksLikeApiErrorType.test(type);
 }
 
 // The purpose of this helper is to provide a common interface for reporting errors

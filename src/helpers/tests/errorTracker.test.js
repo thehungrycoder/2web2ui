@@ -1,6 +1,6 @@
 import cases from 'jest-in-case';
 import ErrorTracker, {
-  breadcrumbCallback, getEnricherOrDieTryin, isErrorFromOurBundle
+  breadcrumbCallback, getEnricherOrDieTryin, isApiError, isErrorFromOurBundle
 } from '../errorTracker';
 import * as mockRaven from 'raven-js';
 
@@ -56,7 +56,52 @@ cases('.getEnricherOrDieTryin', ({ context = {}, data = {}, state = {}}) => {
         }]
       }
     }
+  },
+  'with api error': {
+    data: {
+      exception: {
+        type: 'SparkpostApiError'
+      }
+    }
   }
+});
+
+describe('.isApiError', () => {
+  it('returns true with SparkpostApiError', () => {
+    const data = {
+      exception: {
+        values: [{
+          type: 'SparkpostApiError'
+        }]
+      }
+    };
+
+    expect(isApiError(data)).toEqual(true);
+  });
+
+  it('returns true with ZuoraApiError', () => {
+    const data = {
+      exception: {
+        values: [{
+          type: 'ZuoraApiError'
+        }]
+      }
+    };
+
+    expect(isApiError(data)).toEqual(true);
+  });
+
+  it('returns false with TypeError', () => {
+    const data = {
+      exception: {
+        values: [{
+          type: 'TypeError'
+        }]
+      }
+    };
+
+    expect(isApiError(data)).toEqual(false);
+  });
 });
 
 describe('.isErrorFromOurBundle', () => {

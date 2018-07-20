@@ -13,6 +13,22 @@ Object {
 }
 `;
 
+exports[`.getEnricherOrDieTryin with api error 1`] = `
+Object {
+  "exception": Object {
+    "type": "SparkpostApiError",
+  },
+  "level": "warning",
+  "logger": "test",
+  "tags": Object {
+    "customer": undefined,
+    "language": "unknown",
+    "source": "unknown",
+  },
+  "user": Object {},
+}
+`;
+
 exports[`.getEnricherOrDieTryin with current user 1`] = `
 Object {
   "level": "warning",
