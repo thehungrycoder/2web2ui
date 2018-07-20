@@ -1,4 +1,4 @@
-import { Home, InsertChart, Code, MailOutline, Language, Settings } from '@sparkpost/matchbox-icons';
+import { Home, InsertChart, Code, MailOutline, Language, Settings, Compare } from '@sparkpost/matchbox-icons';
 
 export default [
   {
@@ -45,6 +45,11 @@ export default [
     label: 'Templates',
     to: '/templates',
     icon: Code
+  },
+  {
+    label: 'A/B Testing',
+    to: '/ab-testing',
+    icon: Compare
   },
   {
     label: 'Lists',

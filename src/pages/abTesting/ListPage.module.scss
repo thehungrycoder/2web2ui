@@ -1,0 +1,26 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.Name {
+  margin-bottom: 0;
+}
+
+.Id {
+  margin-bottom: 0;
+  line-height: 1.4em;
+  font-size: rem(14);
+}
+
+.LastUpdated {
+  margin-bottom: 0;
+  font-size: rem(14);
+}
+
+.Template {
+  margin-bottom: 0;
+  font-size: rem(14);
+
+  .Winner {
+    // color: color(red, dark);
+    font-weight: 600;
+  }
+}
