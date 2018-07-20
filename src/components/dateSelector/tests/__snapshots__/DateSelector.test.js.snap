@@ -51,17 +51,18 @@ exports[`dateselector should render correctly 1`] = `
       }
       localeUtils={
         Object {
-          "formatDay": [Function],
-          "formatMonthTitle": [Function],
-          "formatWeekdayLong": [Function],
-          "formatWeekdayShort": [Function],
-          "getFirstDayOfWeek": [Function],
-          "getMonths": [Function],
+          "formatDay": [MockFunction],
+          "formatMonthTitle": [MockFunction],
+          "formatWeekdayLong": [MockFunction],
+          "formatWeekdayShort": [MockFunction],
+          "getFirstDayOfWeek": [MockFunction],
+          "getMonths": [MockFunction],
         }
       }
     />
   }
   classNames={null}
+  enableOutsideDaysClick={true}
   fixedWeeks={false}
   initialMonth={2018-05-20T04:00:00.000Z}
   labels={
@@ -73,44 +74,35 @@ exports[`dateselector should render correctly 1`] = `
   locale="en"
   localeUtils={
     Object {
+      "__esModule": true,
       "default": Object {
-        "formatDay": [Function],
-        "formatMonthTitle": [Function],
-        "formatWeekdayLong": [Function],
-        "formatWeekdayShort": [Function],
-        "getFirstDayOfWeek": [Function],
-        "getMonths": [Function],
+        "formatDay": [MockFunction],
+        "formatMonthTitle": [MockFunction],
+        "formatWeekdayLong": [MockFunction],
+        "formatWeekdayShort": [MockFunction],
+        "getFirstDayOfWeek": [MockFunction],
+        "getMonths": [MockFunction],
       },
-      "formatDay": [Function],
-      "formatMonthTitle": [Function],
-      "formatWeekdayLong": [Function],
-      "formatWeekdayShort": [Function],
-      "getFirstDayOfWeek": [Function],
-      "getMonths": [Function],
+      "formatDay": [MockFunction],
+      "formatMonthTitle": [MockFunction],
+      "formatWeekdayLong": [MockFunction],
+      "formatWeekdayShort": [MockFunction],
+      "getFirstDayOfWeek": [MockFunction],
+      "getMonths": [MockFunction],
     }
   }
-  modifiers={Object {}}
-  modifiersStyles={
+  modifiers={
     Object {
-      "firstSelected": Object {
-        "backgroundColor": "#2693c3",
-        "borderBottomLeftRadius": "4px",
-        "borderTopLeftRadius": "4px",
-        "color": "white",
-      },
-      "lastSelected": Object {
-        "backgroundColor": "#2693c3",
-        "borderBottomRightRadius": "4px",
-        "borderTopRightRadius": "4px",
-        "color": "white",
-      },
+      "firstSelected": [Function],
+      "inBetween": [Function],
+      "lastSelected": [Function],
     }
   }
   navbarElement={[Function]}
   numberOfMonths={1}
   pagedNavigation={false}
-  renderDay={[Function]}
-  renderWeek={[Function]}
+  renderDay={[MockFunction]}
+  renderWeek={[MockFunction]}
   reverseMonths={false}
   showOutsideDays={false}
   showWeekDays={true}

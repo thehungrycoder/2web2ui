@@ -26,34 +26,19 @@ export class Navbar extends Component {
   }
 }
 
-const DateSelector = ({ isSameDay = DateUtils.isSameDay, selectedDays, ...props }) => {
+const DateSelector = ({ selectedDays, ...props }) => {
   const modifiers = selectedDays
     ? {
-      firstSelected: (day) => isSameDay(day, selectedDays.from),
-      lastSelected: (day) => isSameDay(day, selectedDays.to)
+      [styles.firstSelected]: (day) => DateUtils.isSameDay(day, selectedDays.from),
+      [styles.lastSelected]: (day) => DateUtils.isSameDay(day, selectedDays.to),
+      [styles.inBetween]: (day) => DateUtils.isDayBetween(day, selectedDays.from, selectedDays.to)
     }
     : {};
-
-  const modifiersStyles = {
-    firstSelected: {
-      color: 'white',
-      backgroundColor: '#2693c3',
-      borderTopLeftRadius: '4px',
-      borderBottomLeftRadius: '4px'
-    },
-    lastSelected: {
-      color: 'white',
-      backgroundColor: '#2693c3',
-      borderTopRightRadius: '4px',
-      borderBottomRightRadius: '4px'
-    }
-  };
 
   return (
     <DayPicker
       modifiers={modifiers}
       classNames={styles}
-      modifiersStyles={modifiersStyles}
       navbarElement={Navbar}
       {...props}
     />
