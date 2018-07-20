@@ -21,9 +21,6 @@ const BLACKLIST = new Set([
   '@@redux-form/SET_SUBMIT_FAILED'
 ]);
 
-// Chrome and Firefox extensions
-export const BROWSER_EXTENSION_REGEX = new RegExp('^(chrome|chrome-extension|resource)://', 'i');
-
 /**
  * Filter out blacklisted breadcrumbs
  *
@@ -42,21 +39,41 @@ export function breadcrumbCallback(crumb) {
 }
 
 // Closure to safely enrich events with data from Redux store
-export function getEnricherOrDieTryin(store, window) {
+export function getEnricherOrDieTryin(store, context) {
   return function enrich(data) {
     const { currentUser } = store.getState();
     const user = _.pick(currentUser, ['access_level', 'customer', 'username']);
+    const fromOurBundle = isErrorFromOurBundle(data);
 
     return {
       ...data,
+      level: !fromOurBundle ? 'warning' : 'error',
       tags: { // all tags can be easily searched and sent in Slack notifications
         ...data.tags,
         customer: _.get(user, 'customer'),
-        language: _.get(window, 'navigator.language')
+        language: _.get(context, 'navigator.language', 'unknown'),
+        source: fromOurBundle ? '2web2ui' : 'unknown'
       },
       user
     };
   };
+}
+
+// Check if error event was thrown from our bundle or from something else (i.e. browser extension)
+export function isErrorFromOurBundle(data) {
+  // The local environment match is looser to allow for hot module replacement (i.e. http://app.sparkpost.test/4.a0803f8355f692de1382.hot-update.js)
+  const looksLikeOurBundle = new RegExp('sparkpost.test/|sparkpost.com/static/js/');
+  // There should never be multiple exception values
+  const frames = _.get(data, 'exception.values[0].stacktrace.frames', []);
+  const firstFunction = _.get(frames, '[0].function');
+
+  // A Sentry function is sometimes included and needs to be ignored (i.e. HTMLDocument.wrapped or wrapped)
+  if (/wrapped/.test(firstFunction)) {
+    frames.shift();
+  }
+
+  // if any frame is from our bundle
+  return Boolean(frames.find(({ filename }) => looksLikeOurBundle.test(filename)));
 }
 
 // The purpose of this helper is to provide a common interface for reporting errors
@@ -78,9 +95,6 @@ class ErrorTracker {
     const options = {
       breadcrumbCallback,
       dataCallback: getEnricherOrDieTryin(store, window),
-      ignoreUrls: [
-        BROWSER_EXTENSION_REGEX
-      ],
       release,
       tags: { tenant }
     };

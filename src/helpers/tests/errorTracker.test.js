@@ -1,5 +1,6 @@
+import cases from 'jest-in-case';
 import ErrorTracker, {
-  breadcrumbCallback, getEnricherOrDieTryin, BROWSER_EXTENSION_REGEX
+  breadcrumbCallback, getEnricherOrDieTryin, isErrorFromOurBundle
 } from '../errorTracker';
 import * as mockRaven from 'raven-js';
 
@@ -16,28 +17,123 @@ describe('.breadcrumbCallback', () => {
   });
 });
 
-describe('.getEnricherOrDieTryin', () => {
-  const getState = jest.fn();
-  const enrich = getEnricherOrDieTryin({ getState }, { navigator: { language: 'en-US' }});
+cases('.getEnricherOrDieTryin', ({ context = {}, data = {}, state = {}}) => {
+  const getState = jest.fn(() => state);
+  const enrich = getEnricherOrDieTryin({ getState }, context);
 
-  beforeEach(() => { getState.mockReset(); });
+  expect(enrich({ logger: 'test', ...data })).toMatchSnapshot();
+}, {
+  'by default': {},
+  'with current user': {
+    state: {
+      currentUser: {
+        id: 123, // should be ignored
+        access_level: 'admin',
+        customer: 123,
+        username: 'test-user'
+      }
+    }
+  },
+  'with language': {
+    context: {
+      navigator: { language: 'en-US' }
+    }
+  },
+  'with tags': {
+    data: {
+      tags: { tenant: 'test' }
+    }
+  },
+  'with error from our bundle': {
+    data: {
+      exception: {
+        values: [{
+          stacktrace: {
+            frames: [
+              { filename: 'sparkpost.com/static/js/bundle.js', function: 'test' }
+            ]
+          }
+        }]
+      }
+    }
+  }
+});
 
-  it('with current user', () => {
-    const currentUser = { access_level: 'admin', customer: '123', username: 'test-user' };
-    getState.mockReturnValue({ currentUser });
-    expect(enrich({ logger: 'test' })).toMatchSnapshot();
+describe('.isErrorFromOurBundle', () => {
+  it('returns true with error from our bundle', () => {
+    const data = {
+      exception: {
+        values: [{
+          stacktrace: {
+            frames: [
+              { filename: 'https://app.sparkpost.com/static/js/bundle.js', function: 'render' }
+            ]
+          }
+        }]
+      }
+    };
+
+    expect(isErrorFromOurBundle(data)).toEqual(true);
   });
 
-  it('without current user', () => {
-    const currentUser = {};
-    getState.mockReturnValue({ currentUser });
-    expect(enrich({ logger: 'test' })).toMatchSnapshot();
+  it('returns true with error from a native function called from our bundle', () => {
+    const data = {
+      exception: {
+        values: [{
+          stacktrace: {
+            frames: [
+              { filename: 'https://app.sparkpost.com/static/js/bundle.js', function: 'render' },
+              { filename: '<anonymous>', function: 'Object.stringify' }
+            ]
+          }
+        }]
+      }
+    };
+
+    expect(isErrorFromOurBundle(data)).toEqual(true);
   });
 
-  it('with tags', () => {
-    const currentUser = { customer: '123' };
-    getState.mockReturnValue({ currentUser });
-    expect(enrich({ logger: 'test', tags: { tenant: 'test' }})).toMatchSnapshot();
+  it('returns false with error from other source', () => {
+    const data = {
+      exception: {
+        values: [{
+          stacktrace: {
+            frames: [
+              { filename: 'chrome-extension://klkagjiegnnaknmfkmkbnjpmifplpiak/bull.js', function: 'steal' }
+            ]
+          }
+        }]
+      }
+    };
+
+    expect(isErrorFromOurBundle(data)).toEqual(false);
+  });
+
+  it('ignores raven-js frames and returns false with error from other source', () => {
+    const data = {
+      exception: {
+        values: [{
+          stacktrace: {
+            frames: [
+              { filename: 'https://app.sparkpost.com/static/js/bundle.js', function: 'HTMLDocument.wrapped' },
+              { filename: 'chrome-extension://klkagjiegnnaknmfkmkbnjpmifplpiak/bull.js', function: 'steal' }
+            ]
+          }
+        }]
+      }
+    };
+
+    expect(isErrorFromOurBundle(data)).toEqual(false);
+  });
+
+  it('returns false with exceptionless error', () => {
+    const data = {
+      exception: {
+        values: []
+      }
+    };
+
+    expect(isErrorFromOurBundle(data)).toEqual(false);
   });
 });
 
@@ -97,19 +193,5 @@ describe('.report', () => {
   it('sends extra data', () => {
     ErrorTracker.report('test-logger', error, { foo: 'bar' });
     expect(captureException).toHaveBeenCalledWith(error, { logger: 'test-logger', extra: { foo: 'bar' }});
-  });
-});
-
-describe('BROWSER_EXTENSION_REGEX', () => {
-  it('should match Chrome files', () => {
-    expect('chrome://example/test.js').toMatch(BROWSER_EXTENSION_REGEX);
-  });
-
-  it('should match Chrome extension files', () => {
-    expect('chrome-extension://example/test.js').toMatch(BROWSER_EXTENSION_REGEX);
-  });
-
-  it('should match Firefox extension files', () => {
-    expect('resource://example/test.js').toMatch(BROWSER_EXTENSION_REGEX);
   });
 });

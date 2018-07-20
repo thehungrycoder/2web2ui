@@ -1,40 +1,84 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`.getEnricherOrDieTryin with current user 1`] = `
+exports[`.getEnricherOrDieTryin by default 1`] = `
 Object {
+  "level": "warning",
   "logger": "test",
   "tags": Object {
-    "customer": "123",
-    "language": "en-US",
+    "customer": undefined,
+    "language": "unknown",
+    "source": "unknown",
+  },
+  "user": Object {},
+}
+`;
+
+exports[`.getEnricherOrDieTryin with current user 1`] = `
+Object {
+  "level": "warning",
+  "logger": "test",
+  "tags": Object {
+    "customer": 123,
+    "language": "unknown",
+    "source": "unknown",
   },
   "user": Object {
     "access_level": "admin",
-    "customer": "123",
+    "customer": 123,
     "username": "test-user",
   },
 }
 `;
 
-exports[`.getEnricherOrDieTryin with tags 1`] = `
+exports[`.getEnricherOrDieTryin with error from our bundle 1`] = `
 Object {
+  "exception": Object {
+    "values": Array [
+      Object {
+        "stacktrace": Object {
+          "frames": Array [
+            Object {
+              "filename": "sparkpost.com/static/js/bundle.js",
+              "function": "test",
+            },
+          ],
+        },
+      },
+    ],
+  },
+  "level": "error",
   "logger": "test",
   "tags": Object {
-    "customer": "123",
-    "language": "en-US",
-    "tenant": "test",
+    "customer": undefined,
+    "language": "unknown",
+    "source": "2web2ui",
   },
-  "user": Object {
-    "customer": "123",
-  },
+  "user": Object {},
 }
 `;
 
-exports[`.getEnricherOrDieTryin without current user 1`] = `
+exports[`.getEnricherOrDieTryin with language 1`] = `
 Object {
+  "level": "warning",
   "logger": "test",
   "tags": Object {
     "customer": undefined,
     "language": "en-US",
+    "source": "unknown",
+  },
+  "user": Object {},
+}
+`;
+
+exports[`.getEnricherOrDieTryin with tags 1`] = `
+Object {
+  "level": "warning",
+  "logger": "test",
+  "tags": Object {
+    "customer": undefined,
+    "language": "unknown",
+    "source": "unknown",
+    "tenant": "test",
   },
   "user": Object {},
 }
