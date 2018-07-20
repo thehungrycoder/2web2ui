@@ -25,9 +25,9 @@ describe('Date helpers', () => {
   });
 
   it('(with preventFuture: true) should get end of day as current time if end of day is in the future', () => {
-    const now = new Date('2017-12-18T04:20:00');
+    const now = new Date('2017-12-18T04:20:00-04:00');
     Date.now = jest.fn(() => now);
-    expect(getEndOfDay('2017-12-18T12:00:00', { preventFuture: true })).toEqual(now);
+    expect(getEndOfDay('2017-12-18T12:20:00-04:00', { preventFuture: true })).toEqual(now);
   });
 
   it('(with preventFuture: true) should get end of day normally if end of day is in the past', () => {
