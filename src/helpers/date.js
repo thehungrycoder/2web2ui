@@ -32,7 +32,7 @@ export function getEndOfDay(date, { preventFuture } = {}) {
   const now = moment();
   const end = new Date(date);
 
-  if (preventFuture && now.diff(end, 'days') === 0) {
+  if (preventFuture && now.isSame(end, 'day')) {
     return now.toDate();
   }
 

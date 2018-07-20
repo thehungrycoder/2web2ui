@@ -58,7 +58,7 @@ exports[`Component: DatePicker should render ok by default 1`] = `
   }
   wrapper="div"
 >
-  <Datepicker
+  <DateSelector
     disabledDays={
       Object {
         "after": 2017-01-15T12:00:00.000Z,
