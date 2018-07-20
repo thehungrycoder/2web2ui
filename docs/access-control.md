@@ -36,6 +36,28 @@ render() {
 
   _Note: The redirect will not happen before the `accessControlReady` flag is true in the global redux store. See the [Access Control Ready](#access-control-ready) section below for more information._
 
+## The `ConditionSwitch` and `Case` components
+
+Sometimes you want to evaluate a number of conditions but only act on the first condition that returns "true". This is how react router's "Switch" component works, and we've duplicated that here as well. For example:
+
+```jsx
+import { ConditionSwitch, Case } from 'src/components/auth'
+
+<ConditionSwitch>
+  <Case condition={onPlan('free-0817')}>
+    <h1>Show me to FREE customers</h1>
+  </Case>
+  <Case condition={not(isActive)}>
+    <h1>Show me to anyone who isn't FREE, and isn't active</h1>
+  </Case>
+  <Case condition={() => true}>
+    <h1>This last case will act as a "default" and be shown to everyone "else"</h1>
+  </Case>
+</ConditionSwitch>
+```
+
+The `ConditionSwitch` component will loop over its first level of "children" and grab the "condition" prop from each to evaluate it. The `Case` component just acts as an intermediary component to put the condition prop on. You could in theory do `<h1 condition={}>` and it would work, but could conflict with props for that real component, so `Case` helps to keep that separated.
+
 ## Route access
 
 The `<ProtectedRoute>` component now wraps its given component with the `<AccessControl>` component, passing through the `condition` from the route config (if it exists). It also sets `redirect` to "/dashboard" so that if the condition fails for any route, it will be redirected.
