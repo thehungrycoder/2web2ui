@@ -6,7 +6,8 @@ Object {
   "logger": "test",
   "tags": Object {
     "customer": undefined,
-    "language": "unknown",
+    "documentLanguage": "unknown",
+    "navigatorLanguage": "unknown",
     "source": "unknown",
   },
   "user": Object {},
@@ -22,7 +23,8 @@ Object {
   "logger": "test",
   "tags": Object {
     "customer": undefined,
-    "language": "unknown",
+    "documentLanguage": "unknown",
+    "navigatorLanguage": "unknown",
     "source": "unknown",
   },
   "user": Object {},
@@ -35,7 +37,8 @@ Object {
   "logger": "test",
   "tags": Object {
     "customer": 123,
-    "language": "unknown",
+    "documentLanguage": "unknown",
+    "navigatorLanguage": "unknown",
     "source": "unknown",
   },
   "user": Object {
@@ -43,6 +46,20 @@ Object {
     "customer": 123,
     "username": "test-user",
   },
+}
+`;
+
+exports[`.getEnricherOrDieTryin with document language 1`] = `
+Object {
+  "level": "warning",
+  "logger": "test",
+  "tags": Object {
+    "customer": undefined,
+    "documentLanguage": "af",
+    "navigatorLanguage": "unknown",
+    "source": "unknown",
+  },
+  "user": Object {},
 }
 `;
 
@@ -66,20 +83,22 @@ Object {
   "logger": "test",
   "tags": Object {
     "customer": undefined,
-    "language": "unknown",
+    "documentLanguage": "unknown",
+    "navigatorLanguage": "unknown",
     "source": "2web2ui",
   },
   "user": Object {},
 }
 `;
 
-exports[`.getEnricherOrDieTryin with language 1`] = `
+exports[`.getEnricherOrDieTryin with navigator language 1`] = `
 Object {
   "level": "warning",
   "logger": "test",
   "tags": Object {
     "customer": undefined,
-    "language": "en-US",
+    "documentLanguage": "unknown",
+    "navigatorLanguage": "en-US",
     "source": "unknown",
   },
   "user": Object {},
@@ -92,7 +111,8 @@ Object {
   "logger": "test",
   "tags": Object {
     "customer": undefined,
-    "language": "unknown",
+    "documentLanguage": "unknown",
+    "navigatorLanguage": "unknown",
     "source": "unknown",
     "tenant": "test",
   },

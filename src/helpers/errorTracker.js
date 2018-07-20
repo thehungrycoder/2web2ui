@@ -39,7 +39,7 @@ export function breadcrumbCallback(crumb) {
 }
 
 // Closure to safely enrich events with data from Redux store
-export function getEnricherOrDieTryin(store, context) {
+export function getEnricherOrDieTryin(store, currentWindow) {
   return function enrich(data) {
     const { currentUser } = store.getState();
     const user = _.pick(currentUser, ['access_level', 'customer', 'username']);
@@ -52,7 +52,9 @@ export function getEnricherOrDieTryin(store, context) {
       tags: { // all tags can be easily searched and sent in Slack notifications
         ...data.tags,
         customer: _.get(user, 'customer'),
-        language: _.get(context, 'navigator.language', 'unknown'),
+        // This <html> property should be set by us and updated when page is translated
+        documentLanguage: _.get(currentWindow, 'document.documentElement.lang', 'unknown'),
+        navigatorLanguage: _.get(currentWindow, 'navigator.language', 'unknown'),
         source: fromOurBundle ? '2web2ui' : 'unknown'
       },
       user

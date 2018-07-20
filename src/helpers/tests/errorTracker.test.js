@@ -17,9 +17,9 @@ describe('.breadcrumbCallback', () => {
   });
 });
 
-cases('.getEnricherOrDieTryin', ({ context = {}, data = {}, state = {}}) => {
+cases('.getEnricherOrDieTryin', ({ currentWindow = {}, data = {}, state = {}}) => {
   const getState = jest.fn(() => state);
-  const enrich = getEnricherOrDieTryin({ getState }, context);
+  const enrich = getEnricherOrDieTryin({ getState }, currentWindow);
 
   expect(enrich({ logger: 'test', ...data })).toMatchSnapshot();
 }, {
@@ -34,8 +34,15 @@ cases('.getEnricherOrDieTryin', ({ context = {}, data = {}, state = {}}) => {
       }
     }
   },
-  'with language': {
-    context: {
+  'with document language': {
+    currentWindow: {
+      document: {
+        documentElement: { lang: 'af' }
+      }
+    }
+  },
+  'with navigator language': {
+    currentWindow: {
       navigator: { language: 'en-US' }
     }
   },
