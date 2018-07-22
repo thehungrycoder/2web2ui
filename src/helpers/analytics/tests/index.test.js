@@ -83,4 +83,13 @@ describe('Analytics instrumentation', () => {
       expect(window.dataLayer.pop()).toEqual({ [varName]: varValue });
     });
   });
+
+  describe('pushEvents', () => {
+    it('invokes pushEvent correct', () => {
+      const data = [{ hut2: 'hut-shed-hut2' }, { hut3: 'hut-shed-hut3' }];
+      analytics.pushEvents(data);
+      expect(window.dataLayer.pop()).toEqual(data[1]);
+      expect(window.dataLayer.pop()).toEqual(data[0]);
+    });
+  });
 });

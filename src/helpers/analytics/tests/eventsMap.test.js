@@ -1,7 +1,7 @@
 import cases from 'jest-in-case';
 import eventsMap from '../eventsMap';
 
-jest.mock('../eventsDefinitions');
+jest.mock('../actionToEvents');
 
 const TEST_CASES = {
   '@@redux-form/INITIALIZE': { arg: 'Initialize' },

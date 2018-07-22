@@ -2,35 +2,24 @@ import cases from 'jest-in-case';
 import * as utils from '../utils';
 
 describe('Analytics Utils', () => {
-  const isWhitelistedFormTestCases = {
-    'true when form name is in whitelist': {
-      formName: 'loginForm',
-      expectation: true
-    },
-    'false when form name is not in whitelist': {
-      formName: 'fooForm',
-      expectation: false
-    }
-  };
+  describe('isWhitelistedForm', () => {
+    it('returns true if form is a whitelisted form', () => {
+      expect(utils.isWhitelistedForm('loginForm')).toBe(true);
+    });
 
-  cases('isWhitelistedForm', ({ name, formName, expectation }) => {
-    expect(utils.isWhitelistedForm(formName)).toBe(expectation);
-  }, isWhitelistedFormTestCases);
+    it('returns false if form is not a whitelisted form', () => {
+      expect(utils.isWhitelistedForm('fooForm')).toBe(false);
+    });
+  });
 
-  const isValidEventTestCases = {
-    'true when event is not empty': {
-      event: { event: 'Interactions', category: 'Form', action: 'Initialize', label: 'someForm' },
-      expectation: true
-    },
-    'false when event is falsey': {
-      event: null,
-      expectation: false
-    }
-  };
-
-  cases('isValidEvent', ({ name, event, expectation }) => {
-    expect(utils.isValidEvent(event)).toBe(expectation);
-  }, isValidEventTestCases);
+  describe('isValidEvent', () => {
+    it('returns true if event is not empty', () => {
+      expect(utils.isValidEvent({ event: 'Interactions', category: 'Form', action: 'Initialize', label: 'someForm' })).toBe(true);
+    });
+    it('returns false if event is empty', () => {
+      expect(utils.isValidEvent(null)).toBe(false);
+    });
+  });
 
   const determineFormValidationStateTestCases = {
     'validation success with no syncErrors': { action: { payload: { syncErrors: {}}, meta: { form: 'fooForm' }}},

@@ -1,14 +1,14 @@
 import _ from 'lodash';
-import * as utils from './utils';
+import { isWhitelistedForm } from './utils';
 
 
-export function getFormDefinition(actionName, value) {
+export function actionToFormEvent(actionName, value) {
   const labelPath = 'meta.form';
 
   return (action) => {
     const formName = _.get(action, labelPath);
 
-    if (!utils.isWhitelistedForm(formName)) {
+    if (!isWhitelistedForm(formName)) { //returning null to skip sending the event to gtm, enforced via ensure callback
       return null;
     }
 
