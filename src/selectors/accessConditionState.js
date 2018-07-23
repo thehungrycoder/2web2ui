@@ -25,30 +25,12 @@ const selectAccessConditionState = createSelector(
 export default selectAccessConditionState;
 
 /**
- * The following are a list of selectors that make
- * condition helpers available to be used as "regular"
- * selectors by first grabbing the computed access condition
- * state and passing it to the condition, as it expects.
+ * Use this helper to "wrap" a condition helper and turn it into a "regular selector"
  *
- * Without this, using conditions as selectors would fail
- * because things like 'accountPlan' would not be available.
- *
- * There may be a better way to organize this. :)
+ * Condition helpers expect a very specific state, so using condition helpers directly
+ * in mapStateToProps or in other selectors doesn't work. But by using this wrapper,
+ * the condition helper will be given the correct state to accurately return its boolean value.
  */
 
 export const selectCondition = (condition) => createSelector([selectAccessConditionState], condition);
 
-// export const onPlan = (planCode) => createSelector(
-//   [selectAccessConditionState],
-//   (state) => accountConditions.onPlan(planCode)(state)
-// );
-
-// export const isAws = createSelector(
-//   [selectAccessConditionState],
-//   accountConditions.isAws
-// );
-
-// export const isSelfServeBilling = createSelector(
-//   [selectAccessConditionState],
-//   accountConditions.isSelfServeBilling
-// );
