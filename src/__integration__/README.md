@@ -69,10 +69,11 @@ The setup helper does the following:
 
 1. Configures the Redux store with all of the app's reducers, initializing them with their initial state
 1. Logs the user in with a login action, with a token of `very-real-access-token` which will then appear in all SparkPost API request snapshots
+1. Sets the global "ACCESS_CONTROL_READY" state to true so that components who are waiting for this will stop waiting
 1. Uses enzyme's `mount()` method to mount the passed in component tree, mounted inside of the Redux Provider and inside of a React Router `<MemoryRouter>` to make sure Link components don't blow up.
 1. Performs an "async flush" which waits for a tick on the event loop to complete before returning
 1. Performs an "update" on the mounted component, updating all state after the previous tick completion
-1. Returns the form object
+1. Returns the form object (see below)
 
 #### The `form` object
 
@@ -83,9 +84,26 @@ The returned form object has the following keys:
 * `store` - The redux store
 * `change` - A method that takes an index and a value, and will simulate a change event to find the `Field` at that index and change its value
 * `asyncFlush` - convenience method to wait for the next JS tick
-* `fill` - Takes an array of values and will change each form field, in order
+* `fill` - Fill helper for filling form fields (see below for more)
 * `submit` - Submits the form and does an async flush for you
 * `debug` - Pretty prints the current redux state, defaults to the form state but can accept a string path to anywhere in the redux state tree
+
+#### How to `fill` fields
+
+You can use the returned `form.fill()` method to fill form fields. The fill method takes a single field object (or an array of field objects so that the fields will be filled in the precise order you intend.) Each field object should have a type (defaults to "text"), a name or selector, and a value.
+
+**Name vs. selector:**
+
+`{ type: 'text', name: 'this-name' }` -> enzyme will look for `<input name='this-name' />`
+`{ type: 'text', selector: 'id="myId"' }` -> enzyme will look for `<input id="myId" />`
+
+| Type | What `value` represents |
+|------|-------|
+| text | the string value for the field |
+| select | the value of the option to select from the group |
+| checkbox | boolean representing whether this box should be checked or not |
+| radio | find the option with this value and select it (can alternatively use `index`, which finds the option at this index and selects it) |
+| typeahead | usually an object that matches the object to be selected from the typeahead list |
 
 #### Fill the form, submit it, and snapshot
 
@@ -93,12 +111,10 @@ The last step is to fill the form with values, submit it, and then expect the ax
 
 ```js
 form.fill([
-  'Firsty',
-  'Lasty',
-  'something@email.test',
-  'US',
-  'MD',
-  '12345'
+  { name: 'firstName', value: 'Firsty' },
+  { name: 'lastName', value: 'Lasty' },
+  { type: 'checkbox', name: 'isCool', value: true },
+  { type: 'radio', name: 'favoriteFruit', value: 'bananas' }
 ]);
 
 axiosMock.mockClear();
