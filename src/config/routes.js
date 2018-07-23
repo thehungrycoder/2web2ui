@@ -34,7 +34,7 @@ import { emailVerificationRedirect, emailRedirects } from './emailRoutes';
 import SecretBillingPlanOrBillingSummaryPage from './SecretBillingPlanOrBillingSummaryPage';
 
 import { hasGrants, all, not } from 'src/helpers/conditions';
-import { isEnterprise, isAws } from 'src/helpers/conditions/account';
+import { isEnterprise, isAws, hasUiOption } from 'src/helpers/conditions/account';
 import { isHeroku, isAzure } from 'src/helpers/conditions/user';
 import { configFlag, configEquals } from 'src/helpers/conditions/config';
 
@@ -530,22 +530,26 @@ const routes = [
   {
     path: '/ab-testing',
     component: abTesting.ListPage,
-    condition: hasGrants('webhooks/view'), // TODO MAKE REAL
+    condition: hasUiOption('abtests'),
     layout: App,
     title: 'AB Testing',
     supportDocsSearch: 'A/B test'
   },
   // {
   //   path: '/ab-testing/create',
-  //   component: TestingCreatePage,
+  //   component: abTesting.CreatePage,
+  //   condition: hasUiOption('abtests'),
   //   layout: App,
   //   title: 'Create AB Test',
+  //   supportDocsSearch: 'A/B test'
   // },
   // {
   //   path: '/ab-testing/:id/:version?',
-  //   component: TestingDetailPage,
+  //   component: abTesting.DetailPage,
+  //   condition: hasUiOption('abtests'),
   //   layout: App,
   //   title: 'AB Testing',
+  //   supportDocsSearch: 'A/B test'
   // },
   {
     path: '/onboarding/plan',
