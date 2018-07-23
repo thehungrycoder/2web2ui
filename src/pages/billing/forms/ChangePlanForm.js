@@ -13,13 +13,13 @@ import {
   currentPlanSelector, canUpdateBillingInfoSelector, selectVisiblePlans
 } from 'src/selectors/accountBillingInfo';
 import { Panel, Grid } from '@sparkpost/matchbox';
-import { PlanPicker } from 'src/components';
-import { Loading } from 'src/components';
+import { Loading, PlanPicker } from 'src/components';
 import PaymentForm from './fields/PaymentForm';
 import BillingAddressForm from './fields/BillingAddressForm';
 import Confirmation from '../components/Confirmation';
 import CardSummary from '../components/CardSummary';
 import { isAws, isSelfServeBilling } from 'src/helpers/conditions/account';
+import { selectCondition } from 'src/selectors/accessConditionState';
 import { not } from 'src/helpers/conditions';
 import * as conversions from 'src/helpers/conversionTracking';
 import AccessControl from 'src/components/auth/AccessControl';
@@ -60,7 +60,7 @@ export class ChangePlanForm extends Component {
     // decides which action to be taken based on
     // if it's aws account, it already has billing and if you use a saved CC
     let action;
-    if (isAws({ account })) {
+    if (this.props.isAws) {
       action = updateSubscription({ code: newCode });
     } else if (account.billing) {
       action = this.state.useSavedCC ? updateSubscription({ code: newCode }) : billingUpdate(newValues);
@@ -160,10 +160,11 @@ const mapStateToProps = (state, props) => {
 
   return {
     loading: (!state.account.created && state.account.loading) || (plans.length === 0 && state.billing.plansLoading),
+    isAws: selectCondition(isAws)(state),
     account: state.account,
     billing: state.billing,
     canUpdateBillingInfo: canUpdateBillingInfoSelector(state),
-    isSelfServeBilling: isSelfServeBilling(state),
+    isSelfServeBilling: selectCondition(isSelfServeBilling)(state),
     plans,
     currentPlan: currentPlanSelector(state),
     selectedPlan: selector(state, 'planpicker') || {},
