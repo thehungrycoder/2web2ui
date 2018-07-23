@@ -1,5 +1,6 @@
 /* eslint-disable max-lines */
 import {
+  abTesting,
   apiKeys,
   AuthPage,
   SsoAuthPage,
@@ -24,10 +25,6 @@ import {
   passwordReset,
   PremiumSupportPage
 } from 'src/pages';
-
-import TestingListPage from 'src/pages/abTesting/ListPage';
-import TestingDetailPage from 'src/pages/abTesting/DetailsPage';
-import TestingCreatePage from 'src/pages/abTesting/CreatePage';
 
 import LogoutPage from 'src/pages/logout/LogoutPage';
 
@@ -532,23 +529,24 @@ const routes = [
   },
   {
     path: '/ab-testing',
-    component: TestingListPage,
+    component: abTesting.ListPage,
+    condition: hasGrants('webhooks/view'), // TODO MAKE REAL
     layout: App,
     title: 'AB Testing',
-    // supportDocSearch: 'ip pool'
+    supportDocsSearch: 'A/B test'
   },
-  {
-    path: '/ab-testing/create',
-    component: TestingCreatePage,
-    layout: App,
-    title: 'Create AB Test',
-  },
-  {
-    path: '/ab-testing/:id/:version?',
-    component: TestingDetailPage,
-    layout: App,
-    title: 'AB Testing',
-  },
+  // {
+  //   path: '/ab-testing/create',
+  //   component: TestingCreatePage,
+  //   layout: App,
+  //   title: 'Create AB Test',
+  // },
+  // {
+  //   path: '/ab-testing/:id/:version?',
+  //   component: TestingDetailPage,
+  //   layout: App,
+  //   title: 'AB Testing',
+  // },
   {
     path: '/onboarding/plan',
     component: onboarding.ChoosePlan,

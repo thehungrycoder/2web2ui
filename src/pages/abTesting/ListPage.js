@@ -1,19 +1,45 @@
 import React, { Component } from 'react';
-import classnames from 'classnames';
-import { Link } from 'react-router-dom';
-import { TableCollection } from 'src/components';
+import { connect } from 'react-redux';
+import { Link, withRouter } from 'react-router-dom';
+
+// Actions
+import { listAbTests } from 'src/actions/abTesting';
+
+// Components
 import { Page, UnstyledLink, Button, Popover, ActionList } from '@sparkpost/matchbox';
+import { Loading, TableCollection, ApiErrorBanner } from 'src/components';
 import { MoreHoriz } from '@sparkpost/matchbox-icons';
+import { Setup } from 'src/components/images';
 import StatusTag from './components/StatusTag';
 import { formatDate } from 'src/helpers/date';
 
-import data from './data'; // fake data
-
 import styles from './ListPage.module.scss';
 
-class ListPage extends Component {
+const filterBoxConfig = {
+  show: true,
+  itemToStringKeys: ['name', 'id', 'status', 'test_mode'],
+  exampleModifiers: ['id', 'status', 'test_mode']
+};
 
-  getRowData = ({ id, name, status, updated_at, version, default_template, winning_template_id }) => {
+export class ListPage extends Component {
+
+  componentDidMount() {
+    this.props.listAbTests();
+  }
+
+  getColumns() {
+    const columns = [
+      { label: 'Name', sortKey: 'name' },
+      { label: 'Status', sortKey: 'status' },
+      { label: 'Template', sortKey: (i) => i.winning_template_id || i.default_template.template_id },
+      { label: 'Last Modified', sortKey: 'updated_at' },
+      null
+    ];
+
+    return columns;
+  }
+
+  getRowData({ id, name, status, updated_at, version, default_template, winning_template_id }) {
 
     const actions = [
       {
@@ -66,37 +92,60 @@ class ListPage extends Component {
     ];
   }
 
+  renderError() {
+    const { error, listAbTests } = this.props;
+    return (
+      <ApiErrorBanner
+        message={'Sorry, we seem to have had some trouble loading your A/B tests.'}
+        errorDetails={error.message}
+        reload={listAbTests}
+      />
+    );
+  }
+
+  renderCollection() {
+    const { abTests } = this.props;
+    return (
+      <TableCollection
+        columns={this.getColumns()}
+        rows={abTests}
+        getRowData={this.getRowData}
+        pagination={true}
+        filterBox={filterBoxConfig}
+        defaultSortColumn='updated_at'
+      />
+    );
+  }
+
   render() {
-    const columns = [
-      { label: 'Name', sortKey: 'name' },
-      { label: 'Status', sortKey: 'status' },
-      { label: 'Template', sortKey: (i) => i.winning_template_id || i.default_template.template_id },
-      { label: 'Last Modified', sortKey: 'updated_at' },
-      null
-    ];
+    const { loading, error, abTests } = this.props;
+
+    if (loading) {
+      return <Loading />;
+    }
 
     return (
       <Page
         title='A/B Testing'
-        primaryAction={{ content: 'Create a New A/B Test', to: '/ab-testing/create', component: Link }} >
-
-        <TableCollection
-          columns={columns}
-          rows={data}
-          getRowData={this.getRowData}
-          pagination
-          filterBox={{
-            show: true,
-            itemToStringKeys: ['name', 'id', 'status', 'test_mode'],
-            exampleModifiers: ['id', 'status', 'test_mode']
-          }}
-          defaultSortColumn='updated_at'
-        />
-
+        primaryAction={{ content: 'Create a New A/B Test', to: '/ab-testing/create', component: Link }}
+        empty={{
+          show: !error && abTests.length === 0,
+          image: Setup,
+          title: 'Create an A/B test',
+          content: <p>TODO: Get some real text here</p>
+        }}>
+        {error ? this.renderError() : this.renderCollection()}
       </Page>
-
     );
   }
 }
 
-export default ListPage;
+function mapStateToProps({ abTesting, ...state }) {
+  return {
+    abTests: abTesting.list,
+    loading: abTesting.listLoading,
+    error: abTesting.listError
+  };
+}
+
+export default withRouter(connect(mapStateToProps, { listAbTests })(ListPage));
