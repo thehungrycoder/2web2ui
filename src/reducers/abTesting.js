@@ -1,7 +1,8 @@
 const initialState = {
   list: [],
   abTest: {},
-  getLoading: true
+  listLoading: true,
+  listError: null
 };
 
 export default (state = initialState, action) => {

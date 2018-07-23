@@ -532,7 +532,7 @@ const routes = [
     component: abTesting.ListPage,
     condition: hasUiOption('abtests'),
     layout: App,
-    title: 'AB Testing',
+    title: 'A/B Testing',
     supportDocsSearch: 'A/B test'
   },
   {

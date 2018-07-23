@@ -80,7 +80,7 @@ exports[`Page: A/B Test List should render happy path 1`] = `
       ]
     }
     defaultSortColumn="updated_at"
-    defaultSortDirection="asc"
+    defaultSortDirection="desc"
     filterBox={
       Object {
         "exampleModifiers": Array [
@@ -170,7 +170,7 @@ Array [
   <p
     className="LastUpdated"
   >
-    Oct 21 2018
+    Oct 21 2018, 6:10am
   </p>,
   <div
     style={

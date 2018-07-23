@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 // Actions
 import { listAbTests } from 'src/actions/abTesting';
@@ -11,7 +11,7 @@ import { Loading, TableCollection, ApiErrorBanner } from 'src/components';
 import { MoreHoriz } from '@sparkpost/matchbox-icons';
 import { Setup } from 'src/components/images';
 import StatusTag from './components/StatusTag';
-import { formatDate } from 'src/helpers/date';
+import { formatDateTime } from 'src/helpers/date';
 
 import styles from './ListPage.module.scss';
 
@@ -39,7 +39,7 @@ export class ListPage extends Component {
     return columns;
   }
 
-  getRowData({ id, name, status, updated_at, version, default_template, winning_template_id }) {
+  getRowData({ id, name, status, updated_at, default_template, winning_template_id }) {
 
     const actions = [
       {
@@ -71,19 +71,19 @@ export class ListPage extends Component {
     ];
 
     const template = winning_template_id
-      ? <React.Fragment><span className={styles.Winner}>Winner:</span> {winning_template_id}</React.Fragment>
+      ? <Fragment><span className={styles.Winner}>Winner:</span> {winning_template_id}</Fragment>
       : default_template.template_id;
 
     return [
-      <React.Fragment>
+      <Fragment>
         <p className={styles.Name}>
           <strong><UnstyledLink to={`/ab-testing/${id}`} component={Link}>{name}</UnstyledLink></strong>
         </p>
         <p className={styles.Id}>ID: {id}</p>
-      </React.Fragment>,
+      </Fragment>,
       <StatusTag status={status}/>,
       <p className={styles.Template}>{template}</p>,
-      <p className={styles.LastUpdated}>{formatDate(updated_at)}</p>,
+      <p className={styles.LastUpdated}>{formatDateTime(updated_at)}</p>,
       <div style={{ textAlign: 'right' }}>
         <Popover left trigger={<Button flat size='large'><MoreHoriz size={21}/></Button>}>
           <ActionList actions={actions}/>
@@ -113,6 +113,7 @@ export class ListPage extends Component {
         pagination={true}
         filterBox={filterBoxConfig}
         defaultSortColumn='updated_at'
+        defaultSortDirection='desc'
       />
     );
   }
@@ -148,4 +149,4 @@ function mapStateToProps({ abTesting, ...state }) {
   };
 }
 
-export default withRouter(connect(mapStateToProps, { listAbTests })(ListPage));
+export default connect(mapStateToProps, { listAbTests })(ListPage);
