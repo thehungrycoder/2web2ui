@@ -22,7 +22,7 @@ exports[`Page: A/B Test List should render error when it fails 1`] = `
   title="A/B Testing"
 >
   <ApiErrorBanner
-    errorDetails="this hook failed"
+    errorDetails="this failed"
     message="Sorry, we seem to have had some trouble loading your A/B tests."
     reload={
       [MockFunction] {
@@ -127,6 +127,7 @@ exports[`Page: A/B Test List should render happy path 1`] = `
           "name": "my ab test 3",
           "status": "completed",
           "updated_at": "2018-10-23T10:10:10.000Z",
+          "winning_template_id": "ab-test-winner",
         },
       ]
     }

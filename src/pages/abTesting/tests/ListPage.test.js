@@ -29,6 +29,7 @@ describe('Page: A/B Test List', () => {
         id: 'id-3',
         name: 'my ab test 3',
         status: 'completed',
+        winning_template_id: 'ab-test-winner',
         default_template: {
           template_id: 'ab-test-3'
         },
@@ -55,7 +56,7 @@ describe('Page: A/B Test List', () => {
   });
 
   it('should render error when it fails', () => {
-    wrapper.setProps({ error: { message: 'this hook failed' }});
+    wrapper.setProps({ error: { message: 'this failed' }});
     expect(wrapper).toMatchSnapshot();
   });
 
