@@ -46,6 +46,7 @@
     "url": "https://github.com/SparkPost/2web2ui/issues"
   },
   "dependencies": {
+    "@redux-beacon/ensure": "^1.0.0",
     "@sparkpost/boomerang": "^1.0.6",
     "@sparkpost/matchbox": "^3.2.6",
     "@sparkpost/matchbox-icons": "^1.1.1",
@@ -57,6 +58,7 @@
     "date-fns": "^1.28.5",
     "downshift": "^2.0.10",
     "email-addresses": "^3.0.1",
+    "flat": "^4.1.0",
     "history": "^4.6.1",
     "jest-in-case": "^1.0.2",
     "js-cookie": "^2.1.4",
@@ -85,6 +87,7 @@
     "react-timeago": "^4.1.9",
     "recharts": "^1.0.0-alpha.2",
     "redux": "^3.6.0",
+    "redux-beacon": "^2.0.3",
     "redux-form": "^7.2.3",
     "redux-thunk": "^2.2.0",
     "reselect": "^3.0.1",
