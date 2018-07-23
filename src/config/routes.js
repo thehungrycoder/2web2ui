@@ -535,22 +535,6 @@ const routes = [
     title: 'AB Testing',
     supportDocsSearch: 'A/B test'
   },
-  // {
-  //   path: '/ab-testing/create',
-  //   component: abTesting.CreatePage,
-  //   condition: hasUiOption('abtests'),
-  //   layout: App,
-  //   title: 'Create AB Test',
-  //   supportDocsSearch: 'A/B test'
-  // },
-  // {
-  //   path: '/ab-testing/:id/:version?',
-  //   component: abTesting.DetailPage,
-  //   condition: hasUiOption('abtests'),
-  //   layout: App,
-  //   title: 'AB Testing',
-  //   supportDocsSearch: 'A/B test'
-  // },
   {
     path: '/onboarding/plan',
     component: onboarding.ChoosePlan,

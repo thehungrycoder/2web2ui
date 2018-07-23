@@ -132,7 +132,7 @@ export class ListPage extends Component {
           show: !error && abTests.length === 0,
           image: Setup,
           title: 'Create an A/B test',
-          content: <p>TODO: Get some real text here</p>
+          content: <p>Create and run A/B tests to boost your engagement.</p>
         }}>
         {error ? this.renderError() : this.renderCollection()}
       </Page>

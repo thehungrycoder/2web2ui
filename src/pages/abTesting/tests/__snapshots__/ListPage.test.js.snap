@@ -5,7 +5,7 @@ exports[`Page: A/B Test List should render error when it fails 1`] = `
   empty={
     Object {
       "content": <p>
-        TODO: Get some real text here
+        Create and run A/B tests to boost your engagement.
       </p>,
       "image": [Function],
       "show": false,
@@ -41,7 +41,7 @@ exports[`Page: A/B Test List should render happy path 1`] = `
   empty={
     Object {
       "content": <p>
-        TODO: Get some real text here
+        Create and run A/B tests to boost your engagement.
       </p>,
       "image": [Function],
       "show": false,
