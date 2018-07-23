@@ -39,10 +39,6 @@ export class SendMoreCTA extends Component {
     return verifyingEmail ? <span>Resending a verification email... </span> : resendVerificationLink;
   }
 
-  renderUpgradeCTA() {
-    return <PageLink to="/account/billing">Upgrade your account.</PageLink>;
-  }
-
   renderSupportTicketCTA() {
     return (
       <Fragment>
@@ -63,10 +59,10 @@ export class SendMoreCTA extends Component {
             <Case condition={not(isEmailVerified)} children={this.renderVerifyEmailCTA()} />
 
             {/* on a deprecated plan */}
-            <Case condition={onPlanWithStatus('deprecated')} children={this.renderUpgradeCTA()} />
+            <Case condition={onPlanWithStatus('deprecated')} children={<PageLink to="/account/billing">Switch to a new plan.</PageLink>} />
 
             {/* is self serve billing and doesn't have online support */}
-            <Case condition={all(isSelfServeBilling, not(hasOnlineSupport))} children={this.renderUpgradeCTA()} />
+            <Case condition={all(isSelfServeBilling, not(hasOnlineSupport))} children={<PageLink to="/account/billing">Upgrade your account.</PageLink>} />
 
             {/* has online support and is active account status */}
             <Case condition={all(hasOnlineSupport, hasStatus('active'))} children={this.renderSupportTicketCTA()} />
