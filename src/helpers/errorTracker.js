@@ -67,12 +67,12 @@ export function isErrorFromOurBundle(data) {
   // The local environment match is looser to allow for hot module replacement (i.e. http://app.sparkpost.test/4.a0803f8355f692de1382.hot-update.js)
   const looksLikeOurBundle = new RegExp('sparkpost.test/|sparkpost.com/static/js/');
   // There should never be multiple exception values
-  const frames = _.get(data, 'exception.values[0].stacktrace.frames', []);
+  let frames = _.get(data, 'exception.values[0].stacktrace.frames', []);
   const firstFunction = _.get(frames, '[0].function');
 
-  // A Sentry function is sometimes included and needs to be ignored (i.e. HTMLDocument.wrapped or wrapped)
+  // A Sentry function may be included in the stacktrace and needs to be ignored (i.e. HTMLDocument.wrapped or wrapped)
   if (/wrapped/.test(firstFunction)) {
-    frames.shift();
+    frames = frames.slice(1); // safely reassign frames without Sentry function
   }
 
   // if any frame is from our bundle
