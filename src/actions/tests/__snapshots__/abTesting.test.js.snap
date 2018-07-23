@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Action Creator: A/B Testing should dispatch a list action 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "method": "GET",
+      "showErrorAlert": false,
+      "url": "/ab-test",
+    },
+    "type": "LIST_AB_TESTS",
+  },
+]
+`;
