@@ -4,6 +4,7 @@ import { reducer as form } from 'redux-form';
 import acceptedReport from './acceptedReport';
 import accessControlReady from './accessControlReady';
 import account from './account';
+import abTesting from './abTesting';
 import apiKeys from './api-keys';
 import auth from './auth';
 import billing from './billing';
@@ -46,6 +47,7 @@ const appReducer = combineReducers({
   delayReport,
   engagementReport,
   rejectionReport,
+  abTesting,
   apiKeys,
   currentUser,
   form,

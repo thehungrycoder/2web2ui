@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Status Tag Component should render cancelled 1`] = `
+<Tag
+  color={null}
+>
+  Cancelled
+</Tag>
+`;
+
+exports[`Status Tag Component should render completed 1`] = `
+<Tag
+  color="navy"
+>
+  Completed
+</Tag>
+`;
+
+exports[`Status Tag Component should render draft 1`] = `
+<Tag
+  color={null}
+>
+  Draft
+</Tag>
+`;
+
+exports[`Status Tag Component should render running 1`] = `
+<Tag
+  color="yellow"
+>
+  Running
+</Tag>
+`;
+
+exports[`Status Tag Component should render scheduled 1`] = `
+<Tag
+  color={null}
+>
+  Scheduled
+</Tag>
+`;

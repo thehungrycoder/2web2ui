@@ -3,6 +3,7 @@ export { default as SsoAuthPage } from './auth/SsoAuthPage';
 export { default as billing } from './billing';
 export { default as DashboardPage } from './dashboard/DashboardPage';
 export { default as ProfilePage } from './profile/ProfilePage';
+export { default as abTesting } from './abTesting';
 export { default as apiKeys } from './api-keys';
 export { default as RegisterPage } from './register/RegisterPage';
 export { default as JoinPage } from './join/JoinPage';

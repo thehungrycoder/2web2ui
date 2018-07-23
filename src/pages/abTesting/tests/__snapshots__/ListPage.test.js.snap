@@ -1,0 +1,233 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Page: A/B Test List should render error when it fails 1`] = `
+<Page
+  empty={
+    Object {
+      "content": <p>
+        Create and run A/B tests to boost your engagement.
+      </p>,
+      "image": [Function],
+      "show": false,
+      "title": "Create an A/B test",
+    }
+  }
+  primaryAction={
+    Object {
+      "component": [Function],
+      "content": "Create a New A/B Test",
+      "to": "/ab-testing/create",
+    }
+  }
+  title="A/B Testing"
+>
+  <ApiErrorBanner
+    errorDetails="this failed"
+    message="Sorry, we seem to have had some trouble loading your A/B tests."
+    reload={
+      [MockFunction] {
+        "calls": Array [
+          Array [],
+        ],
+        "results": undefined,
+      }
+    }
+  />
+</Page>
+`;
+
+exports[`Page: A/B Test List should render happy path 1`] = `
+<Page
+  empty={
+    Object {
+      "content": <p>
+        Create and run A/B tests to boost your engagement.
+      </p>,
+      "image": [Function],
+      "show": false,
+      "title": "Create an A/B test",
+    }
+  }
+  primaryAction={
+    Object {
+      "component": [Function],
+      "content": "Create a New A/B Test",
+      "to": "/ab-testing/create",
+    }
+  }
+  title="A/B Testing"
+>
+  <TableCollection
+    columns={
+      Array [
+        Object {
+          "label": "Name",
+          "sortKey": "name",
+        },
+        Object {
+          "label": "Status",
+          "sortKey": "status",
+        },
+        Object {
+          "label": "Template",
+          "sortKey": [Function],
+        },
+        Object {
+          "label": "Last Modified",
+          "sortKey": "updated_at",
+        },
+        null,
+      ]
+    }
+    defaultSortColumn="updated_at"
+    defaultSortDirection="desc"
+    filterBox={
+      Object {
+        "exampleModifiers": Array [
+          "id",
+          "status",
+          "test_mode",
+        ],
+        "itemToStringKeys": Array [
+          "name",
+          "id",
+          "status",
+          "test_mode",
+        ],
+        "show": true,
+      }
+    }
+    getRowData={[Function]}
+    pagination={true}
+    rows={
+      Array [
+        Object {
+          "default_template": Object {
+            "template_id": "ab-test-1",
+          },
+          "id": "id-1",
+          "name": "my ab test 1",
+          "status": "scheduled",
+          "updated_at": "2018-10-21T10:10:10.000Z",
+        },
+        Object {
+          "default_template": Object {
+            "template_id": "ab-test-2",
+          },
+          "id": "id-2",
+          "name": "my ab test 2",
+          "status": "running",
+          "updated_at": "2018-10-22T10:10:10.000Z",
+        },
+        Object {
+          "default_template": Object {
+            "template_id": "ab-test-3",
+          },
+          "id": "id-3",
+          "name": "my ab test 3",
+          "status": "completed",
+          "updated_at": "2018-10-23T10:10:10.000Z",
+          "winning_template_id": "ab-test-winner",
+        },
+      ]
+    }
+  />
+</Page>
+`;
+
+exports[`Page: A/B Test List should render loading component when loading data 1`] = `<Loading />`;
+
+exports[`Page: A/B Test List should render row data properly 1`] = `
+Array [
+  <React.Fragment>
+    <p
+      className="Name"
+    >
+      <strong>
+        <UnstyledLink
+          component={[Function]}
+          to="/ab-testing/id-1"
+        >
+          my ab test 1
+        </UnstyledLink>
+      </strong>
+    </p>
+    <p
+      className="Id"
+    >
+      ID: 
+      id-1
+    </p>
+  </React.Fragment>,
+  <StatusTag
+    status="scheduled"
+  />,
+  <p
+    className="Template"
+  >
+    ab-test-1
+  </p>,
+  <p
+    className="LastUpdated"
+  >
+    Oct 21 2018, 6:10am
+  </p>,
+  <div
+    style={
+      Object {
+        "textAlign": "right",
+      }
+    }
+  >
+    <Popover
+      bottom={true}
+      left={true}
+      right={true}
+      trigger={
+        <Button
+          flat={true}
+          size="large"
+        >
+          <MoreHoriz
+            size={21}
+          />
+        </Button>
+      }
+    >
+      <ActionList
+        actions={
+          Array [
+            Object {
+              "component": [Function],
+              "content": "Edit Test",
+              "section": 1,
+              "to": "/ab-testing/id-1",
+              "visible": true,
+            },
+            Object {
+              "content": "View Test",
+              "section": 1,
+              "visible": false,
+            },
+            Object {
+              "content": "Edit and Rerun Test",
+              "section": 1,
+              "visible": false,
+            },
+            Object {
+              "content": "Cancel Test",
+              "section": 2,
+              "visible": false,
+            },
+            Object {
+              "content": "Delete Test",
+              "section": 2,
+            },
+          ]
+        }
+        groupByKey="section"
+      />
+    </Popover>
+  </div>,
+]
+`;
