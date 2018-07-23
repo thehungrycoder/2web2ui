@@ -6,7 +6,8 @@ import {
   hasStatus,
   hasStatusReasonCategory,
   isSelfServeBilling,
-  hasOnlineSupport
+  hasOnlineSupport,
+  hasUiOption
 } from '../account';
 
 describe('Condition: onPlan', () => {
@@ -146,5 +147,29 @@ describe('Condition: hasOnlineSupport', () => {
   it('should return false for accounts without online support', () => {
     const state = {};
     expect(hasOnlineSupport(state)).toEqual(false);
+  });
+});
+
+describe('Condition: hasUiOption', () => {
+  it('should return true when option is set', () => {
+    const state = {
+      account: {
+        options: {
+          ui: { iceCream: 'vanilla' }
+        }
+      }
+    };
+    expect(hasUiOption('iceCream')(state)).toEqual(true);
+  });
+
+  it('should return false when option is missing', () => {
+    const state = {
+      account: {
+        options: {
+          ui: {}
+        }
+      }
+    };
+    expect(hasUiOption('iceCream')(state)).toEqual(false);
   });
 });
