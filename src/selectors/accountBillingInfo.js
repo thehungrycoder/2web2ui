@@ -1,11 +1,16 @@
 import { createSelector } from 'reselect';
 import _ from 'lodash';
 import { isAws, isSelfServeBilling, onPlan } from 'src/helpers/conditions/account';
+import { selectCondition } from './accessConditionState';
 
 const suspendedSelector = (state) => state.account.isSuspendedForBilling;
 const pendingSubscriptionSelector = (state) => state.account.pending_subscription;
 const plansSelector = (state) => state.billing.plans || [];
 const accountBillingSelector = (state) => state.account.billing;
+const selectIsAws = selectCondition(isAws);
+const selectIsSelfServeBilling = selectCondition(isSelfServeBilling);
+const selectIsCcFree1 = selectCondition(onPlan('ccfree1'));
+const selectIsFree1 = selectCondition(onPlan('free1'));
 
 export const currentSubscriptionSelector = (state) => state.account.subscription;
 
@@ -35,16 +40,11 @@ export const currentPlanSelector = createSelector(
   (currentPlanCode, plans) => _.find(plans, { code: currentPlanCode }) || {}
 );
 
-export const isAWSAccountSelector = createSelector(
-  [currentSubscriptionSelector],
-  (currentSubscription) => currentSubscription.type === 'aws'
-);
-
 /**
  * Returns true if user has billing account and they are on a paid plan
  */
 export const canUpdateBillingInfoSelector = createSelector(
-  [currentPlanSelector, accountBillingSelector, onPlan('ccfree1')],
+  [currentPlanSelector, accountBillingSelector, selectIsCcFree1],
   (currentPlan, accountBilling, isOnLegacyCcFreePlan) => (
     accountBilling && (isOnLegacyCcFreePlan || !currentPlan.isFree)
   )
@@ -54,12 +54,12 @@ export const canUpdateBillingInfoSelector = createSelector(
  * Return true if plan can purchase IP and has billing info (except for aws as it'll be billed outside)
  */
 export const canPurchaseIps = createSelector(
-  [currentPlanSelector, accountBillingSelector, isAWSAccountSelector],
+  [currentPlanSelector, accountBillingSelector, selectIsAws],
   (currentPlan, accountBilling, isAWSAccount) => currentPlan.canPurchaseIps === true && !!(accountBilling || isAWSAccount)
 );
 
 export const selectAvailablePlans = createSelector(
-  [plansSelector, isAws, isSelfServeBilling],
+  [plansSelector, selectIsAws, selectIsSelfServeBilling],
   (plans, isAws, isSelfServeBilling) => {
     const availablePlans = plans
       .filter(({ status }) => status === 'public' || status === 'secret')
@@ -75,7 +75,7 @@ export const selectAvailablePlans = createSelector(
 );
 
 export const selectVisiblePlans = createSelector(
-  [selectAvailablePlans, onPlan('free1')],
+  [selectAvailablePlans, selectIsFree1],
   (plans, isOnLegacyFree1Plan) => plans.filter(({ isFree, status }) =>
     status === 'public' &&
         !(isOnLegacyFree1Plan && isFree) //hide new free plans if on legacy free1 plan
@@ -89,7 +89,7 @@ export const selectBillingInfo = createSelector(
     canPurchaseIps,
     currentPlanSelector,
     selectVisiblePlans,
-    isAWSAccountSelector
+    selectIsAws
   ],
   (canUpdateBillingInfo, canChangePlan, canPurchaseIps, currentPlan, plans, isAWSAccount) => ({
     canUpdateBillingInfo,

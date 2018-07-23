@@ -113,19 +113,6 @@ describe('selectBillingInfo', () => {
 
 });
 
-describe('isAWSAccountSelector', () => {
-  let state;
-  beforeEach(() => {
-    state = {
-      account: { subscription: { code: 'free', type: 'aws' }}
-    };
-  });
-
-  it('returns true when subscription type is aws', () => {
-    expect(billingInfo.isAWSAccountSelector(state)).toBe(true);
-  });
-});
-
 describe('canPurchaseIps', () => {
   let state;
   beforeEach(() => {
@@ -216,6 +203,7 @@ describe('plan selector', () => {
 
     it('should not return new free plans if customer on free1 plan', () => {
       state.account.subscription.code = 'free1';
+      state.billing.plans.push({ code: 'free1' });
       expect(billingInfo.selectVisiblePlans(state)).toMatchSnapshot();
     });
   });

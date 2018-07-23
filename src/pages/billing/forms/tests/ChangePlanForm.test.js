@@ -1,10 +1,10 @@
 import React from 'react';
 import { ChangePlanForm } from '../ChangePlanForm';
 import { shallow } from 'enzyme';
-import * as accountConditions from 'src/helpers/conditions/account';
+import * as accountConditions from 'src/selectors/accessConditionState';
 import * as conversions from 'src/helpers/conversionTracking';
 
-jest.mock('src/helpers/conditions/account');
+jest.mock('src/selectors/accessConditionState');
 jest.mock('src/helpers/conversionTracking');
 
 describe('Form Container: Change Plan', () => {
@@ -48,7 +48,7 @@ describe('Form Container: Change Plan', () => {
       billingCreate: jest.fn(() => Promise.resolve()),
       billingUpdate: jest.fn(() => Promise.resolve()),
       updateSubscription: jest.fn(() => Promise.resolve()),
-      isAWSAccount: false
+      isAws: false
     };
     accountConditions.isAws = jest.fn(() => false);
     wrapper = shallow(<ChangePlanForm {...props} />);
@@ -133,7 +133,7 @@ describe('Form Container: Change Plan', () => {
     });
 
     it('should update subscription for aws account', async () => {
-      accountConditions.isAws.mockImplementation(() => true);
+      wrapper.setProps({ isAws: true });
       await instance.onSubmit({ planpicker: { code: 'free' }});
       expect(instance.props.updateSubscription).toHaveBeenCalledWith({ code: 'free' });
     });
