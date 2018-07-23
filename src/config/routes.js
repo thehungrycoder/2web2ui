@@ -1,5 +1,6 @@
 /* eslint-disable max-lines */
 import {
+  abTesting,
   apiKeys,
   AuthPage,
   SsoAuthPage,
@@ -33,7 +34,7 @@ import { emailVerificationRedirect, emailRedirects } from './emailRoutes';
 import SecretBillingPlanOrBillingSummaryPage from './SecretBillingPlanOrBillingSummaryPage';
 
 import { hasGrants, all, not } from 'src/helpers/conditions';
-import { isEnterprise, isAws } from 'src/helpers/conditions/account';
+import { isEnterprise, isAws, hasUiOption } from 'src/helpers/conditions/account';
 import { isHeroku, isAzure } from 'src/helpers/conditions/user';
 import { configFlag, configEquals } from 'src/helpers/conditions/config';
 
@@ -525,6 +526,14 @@ const routes = [
     layout: App,
     title: 'Edit IP Pool',
     supportDocSearch: 'ip pool'
+  },
+  {
+    path: '/ab-testing',
+    component: abTesting.ListPage,
+    condition: hasUiOption('abtests'),
+    layout: App,
+    title: 'A/B Testing',
+    supportDocsSearch: 'A/B test'
   },
   {
     path: '/onboarding/plan',
