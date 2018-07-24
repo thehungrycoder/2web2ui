@@ -74,3 +74,7 @@ export const selectIpPoolFormInitialValues = createSelector(
 export const shouldShowIpPurchaseCTA = createSelector(
   [currentPlanCodeSelector], (currentPlanCode) => !_.includes(ENTERPRISE_PLAN_CODES, currentPlanCode)
 );
+
+export const selectFirstIpPoolId = createSelector(
+  [getNonDefaultIpPools], (ipPools) => _.get(ipPools, '[0].id')
+);

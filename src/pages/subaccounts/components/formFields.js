@@ -10,11 +10,6 @@ const keyBoxHelpText = (createApiKey) => createApiKey
   ? 'The key will only be shown once when created, so be sure to copy and save it somewhere safe.'
   : 'Every subaccount you create will need its own API key. You can create one later.';
 
-const ipPoolsOptions = (ipPools) => (ipPools.map(({ id, name }) => ({
-  value: id,
-  label: `${name} (id: ${id})`
-})));
-
 const statusOptions = [
   { value: 'active' , label: 'Active' },
   { value: 'suspended' , label: 'Suspended' },
@@ -42,7 +37,7 @@ const ApiKeyCheckBox = ({ disabled, createApiKey }) => (
     component={CheckboxWrapper}
     type="checkbox"
     label="Create API Key"
-    helpText={ keyBoxHelpText(createApiKey) }
+    helpText={keyBoxHelpText(createApiKey)}
     disabled={disabled}
   />
 );
@@ -99,21 +94,9 @@ const StatusSelect = ({ disabled, compliance }) => compliance
     disabled={disabled}
   />);
 
-
-const IpPoolSelect = ({ ipPools, disabled }) => (
-  <Field
-    name="ipPool"
-    component={SelectWrapper}
-    options={ipPoolsOptions(ipPools)}
-    label="IP Pool"
-    disabled={disabled}
-  />
-);
-
 export {
   NameField,
   ApiKeyCheckBox,
   ApiKeyFields,
-  IpPoolSelect,
   StatusSelect
 };
