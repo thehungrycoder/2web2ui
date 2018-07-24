@@ -1,7 +1,8 @@
 import { any, all } from './compose';
 import _ from 'lodash';
 
-export const onPlan = (plan) => ({ account }) => account.subscription.code === plan;
+export const onPlan = (planCode) => ({ accountPlan }) => accountPlan.code === planCode;
+export const onPlanWithStatus = (status) => ({ accountPlan }) => accountPlan.status === status;
 export const onServiceLevel = (level) => ({ account }) => account.service_level === level;
 export const isEnterprise = any(
   onPlan('ent1'),

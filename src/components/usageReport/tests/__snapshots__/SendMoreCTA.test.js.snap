@@ -23,6 +23,15 @@ exports[`SendMoreCTA Component renders correctly 1`] = `
         <PageLink
           to="/account/billing"
         >
+          Switch to a new plan.
+        </PageLink>
+      </Case>
+      <Case
+        condition={[Function]}
+      >
+        <PageLink
+          to="/account/billing"
+        >
           Upgrade your account.
         </PageLink>
       </Case>
