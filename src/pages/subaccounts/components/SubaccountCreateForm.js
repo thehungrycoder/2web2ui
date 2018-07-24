@@ -60,7 +60,8 @@ const mapStateToProps = (state, props) => ({
   initialValues: {
     grants: getInitialSubaccountGrants(state),
     grantsRadio: 'all',
-    createApiKey: true
+    createApiKey: true,
+    restrictedToIpPool: false
   }
 });
 
