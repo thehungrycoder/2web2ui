@@ -14,6 +14,7 @@ exports[`IpPoolSelect renders disabled 1`] = `
       },
     ]
   }
+  validate={[Function]}
 />
 `;
 
@@ -30,5 +31,6 @@ exports[`IpPoolSelect renders with options 1`] = `
       },
     ]
   }
+  validate={[Function]}
 />
 `;
