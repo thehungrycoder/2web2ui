@@ -33,12 +33,12 @@ test('has ip pools', () => {
   expect(wrapper).toMatchSnapshot();
 });
 
-test('ip pools checked ', () => {
-  wrapper.setProps({ ipPools: ['swimmin']});
+test('has ip pools and checked checkbox', () => {
+  wrapper.setProps({ ipPools: ['salt water'], restrictedToIpPool: true });
   expect(wrapper).toMatchSnapshot();
 });
 
-it('submits correctly', () => {
+test('submits correctly', () => {
   wrapper.find('form').simulate('submit');
   expect(handleSubmit).toHaveBeenCalled();
   wrapper.setProps({ submitting: true });

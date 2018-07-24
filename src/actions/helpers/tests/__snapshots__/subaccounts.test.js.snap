@@ -1,15 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`formatSubaccount helper tests should not set ip pool if default 1`] = `
-Object {
-  "name": "subby",
-  "setup_api_key": false,
-}
-`;
-
 exports[`formatSubaccount helper tests should return api key - all grants 1`] = `
 Object {
-  "ip_pool": undefined,
   "key_grants": Array [
     "message_events/view",
     "message_events/write",
@@ -24,7 +16,6 @@ Object {
 
 exports[`formatSubaccount helper tests should return api key - select grants 1`] = `
 Object {
-  "ip_pool": undefined,
   "key_grants": Array [
     "message_events/view",
     "smtp/inject",
@@ -36,7 +27,6 @@ Object {
 
 exports[`formatSubaccount helper tests should return api key - valid ips 1`] = `
 Object {
-  "ip_pool": undefined,
   "key_grants": Array [
     "message_events/view",
     "message_events/write",
@@ -55,7 +45,6 @@ Object {
 
 exports[`formatSubaccount helper tests should return name only 1`] = `
 Object {
-  "ip_pool": undefined,
   "name": "mySubAccount",
   "setup_api_key": false,
 }
@@ -65,6 +54,13 @@ exports[`formatSubaccount helper tests should return subaccount with ip pool 1`]
 Object {
   "ip_pool": "marketing_ip_pool",
   "name": "pool account",
+  "setup_api_key": false,
+}
+`;
+
+exports[`formatSubaccount helper tests should return subaccount with ip pool not set 1`] = `
+Object {
+  "name": "subby",
   "setup_api_key": false,
 }
 `;

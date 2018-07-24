@@ -83,6 +83,7 @@ describe('formatSubaccount helper tests', () => {
     const result = formatSubaccount(
       {
         name: 'pool account',
+        restrictedToIpPool: true,
         ipPool: 'marketing_ip_pool'
       },
       getState
@@ -90,9 +91,10 @@ describe('formatSubaccount helper tests', () => {
     expect(result).toMatchSnapshot();
   });
 
-  it('should not set ip pool if default', () => {
+  it('should return subaccount with ip pool not set', () => {
     const result = formatSubaccount({
       name: 'subby',
+      restrictedToIpPool: false,
       ipPool: 'default'
     },
     getState

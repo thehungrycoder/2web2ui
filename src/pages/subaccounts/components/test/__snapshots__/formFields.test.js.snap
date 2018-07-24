@@ -71,27 +71,6 @@ exports[`ApiKeyFields 2`] = `
 </div>
 `;
 
-exports[`IpPoolSelect 1`] = `
-<Field
-  component={[Function]}
-  disabled={false}
-  label="IP Pool"
-  name="ipPool"
-  options={
-    Array [
-      Object {
-        "label": "Mine's just bigger is all (id: drake)",
-        "value": "drake",
-      },
-      Object {
-        "label": "Still nice (id: kanye)",
-        "value": "kanye",
-      },
-    ]
-  }
-/>
-`;
-
 exports[`NameField 1`] = `
 <Field
   component={[Function]}

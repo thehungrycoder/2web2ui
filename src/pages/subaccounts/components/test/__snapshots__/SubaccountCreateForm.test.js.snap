@@ -27,7 +27,7 @@ exports[`api key form 1`] = `
       size="default"
       submit={true}
     >
-      Create
+      Create Subaccount
     </Button>
   </Panel.Section>
 </form>
@@ -60,7 +60,7 @@ exports[`base case 1`] = `
       size="default"
       submit={true}
     >
-      Create
+      Create Subaccount
     </Button>
   </Panel.Section>
 </form>
@@ -88,13 +88,7 @@ exports[`has ip pools 1`] = `
     />
   </Panel.Section>
   <Panel.Section>
-    <IpPoolSelect
-      ipPools={
-        Array [
-          "salt water",
-        ]
-      }
-    />
+    <RestrictToIpPoolCheckbox />
   </Panel.Section>
   <Panel.Section>
     <Button
@@ -102,13 +96,13 @@ exports[`has ip pools 1`] = `
       size="default"
       submit={true}
     >
-      Create
+      Create Subaccount
     </Button>
   </Panel.Section>
 </form>
 `;
 
-exports[`ip pools checked  1`] = `
+exports[`has ip pools and checked checkbox 1`] = `
 <form
   onSubmit={[MockFunction]}
 >
@@ -130,10 +124,11 @@ exports[`ip pools checked  1`] = `
     />
   </Panel.Section>
   <Panel.Section>
+    <RestrictToIpPoolCheckbox />
     <IpPoolSelect
-      ipPools={
+      options={
         Array [
-          "swimmin",
+          "salt water",
         ]
       }
     />
@@ -144,7 +139,7 @@ exports[`ip pools checked  1`] = `
       size="default"
       submit={true}
     >
-      Create
+      Create Subaccount
     </Button>
   </Panel.Section>
 </form>

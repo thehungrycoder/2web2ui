@@ -12,10 +12,15 @@ import SubaccountEditForm from './SubaccountEditForm';
 
 export class EditTab extends Component {
 
-  onSubmit = ({ name, status, ipPool }) => {
+  onSubmit = ({ ipPool, name, restrictedToIpPool, status }) => {
     const { editSubaccount, subaccount, getSubaccount, showAlert } = this.props;
+    const nextSubaccount = {
+      name,
+      status,
+      ip_pool: restrictedToIpPool ? ipPool : '' // must pass an empty string to unset
+    };
 
-    return editSubaccount(subaccount.id, { name, status, ip_pool: ipPool }).then(() => {
+    return editSubaccount(subaccount.id, nextSubaccount).then(() => {
       showAlert({ type: 'success', message: 'Updated subaccount' });
       getSubaccount(subaccount.id);
     });
