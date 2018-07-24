@@ -4,7 +4,7 @@ import { reduxForm, formValueSelector } from 'redux-form';
 
 import { Button, Panel } from '@sparkpost/matchbox';
 import { getNonDefaultIpPools } from 'src/selectors/ipPools';
-import { selectInitialSubaccountValues } from 'src/selectors/subaccounts';
+import { selectFirstIpPoolId } from 'src/selectors/ipPools';
 import { NameField, StatusSelect } from './formFields';
 import IpPoolSelect from './IpPoolSelect';
 import RestrictToIpPoolCheckbox from './RestrictToIpPoolCheckbox';
@@ -49,13 +49,18 @@ const formName = 'SubaccountEditForm';
 const valueSelector = formValueSelector(formName);
 
 const mapStateToProps = (state, { subaccount }) => {
-  const { compliance } = subaccount;
+  const { compliance, ip_pool, name, status } = subaccount;
 
   return {
     compliance,
     ipPools: getNonDefaultIpPools(state),
     restrictedToIpPool: valueSelector(state, 'restrictedToIpPool'),
-    initialValues: selectInitialSubaccountValues(subaccount)
+    initialValues: {
+      ipPool: ip_pool || selectFirstIpPoolId(state),
+      name,
+      restrictedToIpPool: Boolean(ip_pool),
+      status: compliance ? `${status} by SparkPost` : status
+    }
   };
 };
 
