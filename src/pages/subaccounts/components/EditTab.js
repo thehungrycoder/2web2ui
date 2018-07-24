@@ -17,7 +17,7 @@ export class EditTab extends Component {
     const nextSubaccount = {
       name,
       status,
-      ip_pool: restrictedToIpPool ? ipPool : '' // ugh, not present doesn't work to unset
+      ip_pool: restrictedToIpPool ? ipPool : '' // must pass an empty string to unset
     };
 
     return editSubaccount(subaccount.id, nextSubaccount).then(() => {
