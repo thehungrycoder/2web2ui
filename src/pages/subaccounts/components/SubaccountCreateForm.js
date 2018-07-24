@@ -40,7 +40,7 @@ export class SubaccountCreateForm extends Component {
         )}
         <Panel.Section>
           <Button submit primary disabled={submitting || pristine}>
-            {submitting ? 'Loading...' : 'Create'}
+            {submitting ? 'Loading...' : 'Create Subaccount'}
           </Button>
         </Panel.Section>
       </form>

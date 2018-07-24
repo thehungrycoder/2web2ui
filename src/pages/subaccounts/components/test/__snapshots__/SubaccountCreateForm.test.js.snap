@@ -27,7 +27,7 @@ exports[`api key form 1`] = `
       size="default"
       submit={true}
     >
-      Create
+      Create Subaccount
     </Button>
   </Panel.Section>
 </form>
@@ -60,7 +60,7 @@ exports[`base case 1`] = `
       size="default"
       submit={true}
     >
-      Create
+      Create Subaccount
     </Button>
   </Panel.Section>
 </form>
@@ -96,7 +96,7 @@ exports[`has ip pools 1`] = `
       size="default"
       submit={true}
     >
-      Create
+      Create Subaccount
     </Button>
   </Panel.Section>
 </form>
@@ -139,7 +139,7 @@ exports[`has ip pools and checked checkbox 1`] = `
       size="default"
       submit={true}
     >
-      Create
+      Create Subaccount
     </Button>
   </Panel.Section>
 </form>
