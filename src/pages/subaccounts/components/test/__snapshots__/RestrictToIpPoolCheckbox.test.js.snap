@@ -4,7 +4,8 @@ exports[`RestrictToIpPoolCheckbox renders disabled checkbox 1`] = `
 <Field
   component={[Function]}
   disabled={true}
-  label="Restrict traffic to a single IP Pool"
+  helpText="If left unchecked, this subaccount may send using any IP pool."
+  label="Restrict this subaccount's mail deliveries to a single IP pool"
   name="restrictedToIpPool"
   type="checkbox"
 />
@@ -13,7 +14,8 @@ exports[`RestrictToIpPoolCheckbox renders disabled checkbox 1`] = `
 exports[`RestrictToIpPoolCheckbox renders enabled checkbox 1`] = `
 <Field
   component={[Function]}
-  label="Restrict traffic to a single IP Pool"
+  helpText="If left unchecked, this subaccount may send using any IP pool."
+  label="Restrict this subaccount's mail deliveries to a single IP pool"
   name="restrictedToIpPool"
   type="checkbox"
 />

@@ -8,8 +8,9 @@ export default function RestrictToIpPoolCheckbox({ disabled }) {
       name="restrictedToIpPool"
       component={CheckboxWrapper}
       type="checkbox"
-      label="Restrict traffic to a single IP Pool"
       disabled={disabled}
+      label="Restrict this subaccount's mail deliveries to a single IP pool"
+      helpText="If left unchecked, this subaccount may send using any IP pool."
     />
   );
 }
