@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`IpPoolSelect renders disabled 1`] = `
+<Field
+  component={[Function]}
+  disabled={true}
+  label="IP Pool"
+  name="ipPool"
+  options={
+    Array [
+      Object {
+        "label": "Test IP Pool (id: test)",
+        "value": "test",
+      },
+    ]
+  }
+  placeholder=" "
+  required={true}
+  validate={[Function]}
+/>
+`;
+
+exports[`IpPoolSelect renders with options 1`] = `
+<Field
+  component={[Function]}
+  label="IP Pool"
+  name="ipPool"
+  options={
+    Array [
+      Object {
+        "label": "Test IP Pool (id: test)",
+        "value": "test",
+      },
+    ]
+  }
+  placeholder=" "
+  required={true}
+  validate={[Function]}
+/>
+`;

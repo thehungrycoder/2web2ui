@@ -87,6 +87,16 @@ describe('Subaccount selectors', () => {
   });
 
   describe('selectInitialSubaccountValues', () => {
+    it('by default', () => {
+      const state = {};
+      expect(selector.selectInitialSubaccountValues(state)).toMatchSnapshot();
+    });
+
+    it('with an ip pool', () => {
+      const state = { ip_pool: 'test' };
+      expect(selector.selectInitialSubaccountValues(state)).toMatchSnapshot();
+    });
+
     it('should return status if not set by compliance', () => {
       const state = { name: 'subby', ip_pool: 'pool-id', compliance: false, status: 'valid' };
       expect(selector.selectInitialSubaccountValues(state)).toMatchSnapshot();

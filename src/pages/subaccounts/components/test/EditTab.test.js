@@ -41,18 +41,36 @@ describe('EditTab', () => {
   });
 
   describe('onSubmit', () => {
-    const newValues = {
-      name: 'Francine Neistat',
-      status: 'suspended',
-      ipPool: 'kiddy'
-    };
-
-    test('success', async() => {
+    test('success', async () => {
+      const newValues = {
+        name: 'Francine Neistat',
+        status: 'suspended',
+        restrictedToIpPool: true,
+        ipPool: 'kiddy'
+      };
       await wrapper.instance().onSubmit(newValues);
+
       expect(editSubaccount).toHaveBeenCalledWith(subaccount.id, {
         name: newValues.name,
         status: newValues.status,
         ip_pool: newValues.ipPool
+      });
+      expect(showAlert).toHaveBeenCalledWith({ type: 'success', message: 'Updated subaccount' });
+      expect(getSubaccount).toHaveBeenCalledWith(subaccount.id);
+    });
+
+    test('success when unsetting ip pool', async () => {
+      const newValues = {
+        name: 'Francine Neistat',
+        status: 'suspended',
+        restrictedToIpPool: false
+      };
+      await wrapper.instance().onSubmit(newValues);
+
+      expect(editSubaccount).toHaveBeenCalledWith(subaccount.id, {
+        name: newValues.name,
+        status: newValues.status,
+        ip_pool: ''
       });
       expect(showAlert).toHaveBeenCalledWith({ type: 'success', message: 'Updated subaccount' });
       expect(getSubaccount).toHaveBeenCalledWith(subaccount.id);

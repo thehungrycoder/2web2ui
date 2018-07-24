@@ -88,13 +88,7 @@ exports[`has ip pools 1`] = `
     />
   </Panel.Section>
   <Panel.Section>
-    <IpPoolSelect
-      ipPools={
-        Array [
-          "salt water",
-        ]
-      }
-    />
+    <RestrictToIpPoolCheckbox />
   </Panel.Section>
   <Panel.Section>
     <Button
@@ -108,7 +102,7 @@ exports[`has ip pools 1`] = `
 </form>
 `;
 
-exports[`ip pools checked  1`] = `
+exports[`has ip pools and checked checkbox 1`] = `
 <form
   onSubmit={[MockFunction]}
 >
@@ -130,10 +124,11 @@ exports[`ip pools checked  1`] = `
     />
   </Panel.Section>
   <Panel.Section>
+    <RestrictToIpPoolCheckbox />
     <IpPoolSelect
-      ipPools={
+      options={
         Array [
-          "swimmin",
+          "salt water",
         ]
       }
     />

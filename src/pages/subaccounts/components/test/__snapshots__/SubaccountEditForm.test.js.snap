@@ -8,16 +8,13 @@ exports[`base case 1`] = `
     <NameField
       disabled={false}
     />
-    <IpPoolSelect
-      disabled={false}
-      ipPools={
-        Array [
-          "an array of ip pools",
-        ]
-      }
-    />
     <StatusSelect
       compliance={false}
+      disabled={false}
+    />
+  </Panel.Section>
+  <Panel.Section>
+    <RestrictToIpPoolCheckbox
       disabled={false}
     />
   </Panel.Section>
@@ -42,16 +39,13 @@ exports[`cancel button 1`] = `
     <NameField
       disabled={false}
     />
-    <IpPoolSelect
-      disabled={false}
-      ipPools={
-        Array [
-          "an array of ip pools",
-        ]
-      }
-    />
     <StatusSelect
       compliance={false}
+      disabled={false}
+    />
+  </Panel.Section>
+  <Panel.Section>
+    <RestrictToIpPoolCheckbox
       disabled={false}
     />
   </Panel.Section>
@@ -113,16 +107,13 @@ exports[`should disable all fields when compliance is true 1`] = `
     <NameField
       disabled={true}
     />
-    <IpPoolSelect
-      disabled={true}
-      ipPools={
-        Array [
-          "an array of ip pools",
-        ]
-      }
-    />
     <StatusSelect
       compliance={true}
+      disabled={true}
+    />
+  </Panel.Section>
+  <Panel.Section>
+    <RestrictToIpPoolCheckbox
       disabled={true}
     />
   </Panel.Section>
@@ -154,16 +145,13 @@ exports[`submits correctly 1`] = `
     <NameField
       disabled={true}
     />
-    <IpPoolSelect
-      disabled={true}
-      ipPools={
-        Array [
-          "an array of ip pools",
-        ]
-      }
-    />
     <StatusSelect
       compliance={false}
+      disabled={true}
+    />
+  </Panel.Section>
+  <Panel.Section>
+    <RestrictToIpPoolCheckbox
       disabled={true}
     />
   </Panel.Section>
@@ -175,6 +163,45 @@ exports[`submits correctly 1`] = `
       submit={true}
     >
       Updating...
+    </Button>
+  </Panel.Section>
+</form>
+`;
+
+exports[`with an assigned ip pool 1`] = `
+<form
+  onSubmit={[MockFunction]}
+>
+  <Panel.Section>
+    <NameField
+      disabled={false}
+    />
+    <StatusSelect
+      compliance={false}
+      disabled={false}
+    />
+  </Panel.Section>
+  <Panel.Section>
+    <RestrictToIpPoolCheckbox
+      disabled={false}
+    />
+    <IpPoolSelect
+      disabled={false}
+      options={
+        Array [
+          "an array of ip pools",
+        ]
+      }
+    />
+  </Panel.Section>
+  <Panel.Section>
+    <Button
+      disabled={true}
+      primary={true}
+      size="default"
+      submit={true}
+    >
+      Update
     </Button>
   </Panel.Section>
 </form>

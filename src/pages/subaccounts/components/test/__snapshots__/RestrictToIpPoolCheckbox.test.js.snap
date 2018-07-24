@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RestrictToIpPoolCheckbox renders disabled checkbox 1`] = `
+<Field
+  component={[Function]}
+  disabled={true}
+  label="Restrict traffic to a single IP Pool"
+  name="restrictedToIpPool"
+  type="checkbox"
+/>
+`;
+
+exports[`RestrictToIpPoolCheckbox renders enabled checkbox 1`] = `
+<Field
+  component={[Function]}
+  label="Restrict traffic to a single IP Pool"
+  name="restrictedToIpPool"
+  type="checkbox"
+/>
+`;

@@ -34,10 +34,10 @@ export const selectSubaccountFromQuery = createSelector(
 );
 
 // changing the status name if set by compliance because it is uneditable
-export const selectInitialSubaccountValues = ({ name, ip_pool = 'default', ...subaccount }) =>
+export const selectInitialSubaccountValues = ({ name, ip_pool, ...subaccount }) =>
   ({
     name,
     ipPool: ip_pool,
+    restrictedToIpPool: Boolean(ip_pool),
     status: subaccount.compliance ? `${subaccount.status} by SparkPost` : subaccount.status
   });
-
