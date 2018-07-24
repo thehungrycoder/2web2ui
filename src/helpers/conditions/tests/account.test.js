@@ -1,6 +1,5 @@
 import {
   onPlan,
-  onPlanWithStatus,
   onServiceLevel,
   isEnterprise,
   isSuspendedForBilling,
@@ -11,22 +10,32 @@ import {
   hasUiOption
 } from '../account';
 
-test('Condition: onPlan', () => {
-  const condition = onPlan('p1');
-  expect(condition({ accountPlan: { code: 'p1' }})).toEqual(true);
-  expect(condition({ accountPlan: { code: 'p2' }})).toEqual(false);
+describe('Condition: onPlan', () => {
+
+  it('should return a function that returns true if on given plan', () => {
+    const condition = onPlan('p1');
+    expect(condition({ account: { subscription: { code: 'p1' }}})).toEqual(true);
+  });
+
+  it('should return a function that returns false if not on the given plan', () => {
+    const condition = onPlan('p1');
+    expect(condition({ account: { subscription: { code: 'p2' }}})).toEqual(false);
+  });
+
 });
 
-test('Condition: onPlanWithStatus', () => {
-  const condition = onPlanWithStatus('deprecated');
-  expect(condition({ accountPlan: { status: 'deprecated' }})).toEqual(true);
-  expect(condition({ accountPlan: { status: 'bananas' }})).toEqual(false);
-});
+describe('Condition: onServiceLevel', () => {
 
-test('Condition: onServiceLevel', () => {
-  const condition = onServiceLevel('other');
-  expect(condition({ account: { service_level: 'other' }})).toEqual(true);
-  expect(condition({ account: { service_level: 'standard' }})).toEqual(false);
+  it('should return a function that returns false if not on given level', () => {
+    const condition = onServiceLevel('other');
+    expect(condition({ account: { service_level: 'standard' }})).toEqual(false);
+  });
+
+  it('should return a function that returns true if on the given level', () => {
+    const condition = onServiceLevel('other');
+    expect(condition({ account: { service_level: 'other' }})).toEqual(true);
+  });
+
 });
 
 describe('Condition: isEnterprise', () => {
@@ -35,8 +44,6 @@ describe('Condition: isEnterprise', () => {
   let state;
   beforeEach(() => {
     state = {
-      accountPlan: {},
-      plans: [],
       account: {
         subscription: {
           code: 'abc1'
@@ -48,7 +55,7 @@ describe('Condition: isEnterprise', () => {
   });
 
   it('should return a function that returns true if on ent1 plan', () => {
-    state.accountPlan.code = 'ent1';
+    state.account.subscription.code = 'ent1';
     expect(condition(state)).toEqual(true);
   });
 

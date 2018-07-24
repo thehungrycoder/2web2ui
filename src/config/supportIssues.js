@@ -1,6 +1,6 @@
 import _ from 'lodash';
-import { hasOnlineSupport, hasStatus, hasStatusReasonCategory, isSuspendedForBilling, onPlanWithStatus } from 'src/helpers/conditions/account';
-import { isEmailVerified } from 'src/helpers/conditions/user';
+
+import { hasOnlineSupport, hasStatus, hasStatusReasonCategory, isSuspendedForBilling } from 'src/helpers/conditions/account';
 import { all, not, any } from 'src/helpers/conditions';
 import { isAdmin } from 'src/helpers/conditions/user';
 
@@ -99,15 +99,7 @@ const supportIssues = [
     id: 'daily_limits',
     label: 'Daily sending limit increase',
     messageLabel: 'What limit do you need and why?',
-    type: LIMITS,
-    condition: all(hasOnlineSupport, isAdmin, isEmailVerified, hasStatus('active'), not(onPlanWithStatus('deprecated')))
-  },
-  {
-    id: 'general_issue',
-    label: 'Another issue',
-    messageLabel: 'Tell us more about your issue',
-    type: SUPPORT,
-    condition: all(hasOnlineSupport, hasStatus('active'))
+    type: LIMITS
   },
   {
     id: 'account_cancellation',
