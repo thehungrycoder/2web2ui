@@ -2,6 +2,7 @@ import {
   getNonDefaultIpPools,
   getDefaultPool,
   getOrderedIpPools,
+  selectFirstIpPoolId,
   selectIpsForCurrentPool,
   selectIpPoolFormInitialValues,
   shouldShowIpPurchaseCTA
@@ -107,5 +108,14 @@ describe('Selector: ipPools', () => {
     });
   });
 
-});
+  describe('selectFirstIpPoolId', () => {
+    it('returns id of first ip pool', () => {
+      expect(selectFirstIpPoolId(state)).toEqual('big');
+    });
 
+    it('returns undefined', () => {
+      state.ipPools.list = [];
+      expect(selectFirstIpPoolId(state)).toBeUndefined();
+    });
+  });
+});
