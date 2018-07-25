@@ -9,7 +9,7 @@ exports[`Webhooks ResponseBlock Component should render correctly with a respons
     <TextField
       multiline={true}
       readOnly={true}
-      resize="both"
+      resize="vertical"
       rows={12}
       type="text"
       value="{
