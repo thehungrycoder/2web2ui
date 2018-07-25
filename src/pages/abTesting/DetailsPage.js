@@ -1,27 +1,36 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getAbTest } from 'src/actions/abTesting';
-import { selectAbTest, selectIdAndVersion } from 'src/selectors/abTesting';
+import { selectAbTest, selectIdAndVersion } from 'src/selectors/abTesting'
+import { selectSubaccountIdFromQuery, hasSubaccounts } from 'src/selectors/subaccounts';
 
 import { Loading } from 'src/components';
+import { Delete } from '@sparkpost/matchbox-icons';
 import RedirectAndAlert from 'src/components/globalAlert/RedirectAndAlert';
-import { Page, UnstyledLink, Button, Popover, ActionList } from '@sparkpost/matchbox';
-import { Save, Delete } from '@sparkpost/matchbox-icons';
+import EditMode from './EditMode';
+import ViewMode from './ViewMode';
 import _ from 'lodash';
 
+/**
+ * Details Page
+ * - Handles GET
+ * - Determines which page to render via test status
+ * - Constructs shared actions between editing/non-editing modes
+ */
 export class DetailsPage extends Component {
   static defaultProps = {
     test: {}
   }
 
   state = {
-    shouldRedirect: false
+    shouldRedirect: false,
+    showDelete: false
   }
 
   componentDidMount() {
-    const { id, version, getAbTest } = this.props;
-    getAbTest({ id, version });
+    const { id, version, subaccountId, getAbTest } = this.props;
+    getAbTest({ id, version, subaccountId });
   }
 
   componentDidUpdate({ error: prevError }) {
@@ -32,66 +41,49 @@ export class DetailsPage extends Component {
     }
   }
 
-  getPrimaryAction = () => {
-    const { status } = this.props.test;
-
-    if (status === 'draft') {
-      return {
-        content: 'Finalize and Schedule Test'
-      };
-      // action.onClick = () => ()
-    }
-
-    if (status === 'scheduled') {
-      return {
-        content: 'Update Test'
-      };
-    }
-
-    if (status === 'cancelled' || status === 'completed') {
-      return {
-        content: 'Edit and Rerun Test',
-        component: Link
-      };
-    }
-
-    return null;
+  toggleDelete = (modal) => {
+    this.setState({ showDelete: !this.state.showDelete });
   }
 
-  getSecondaryActions = () => {
-    const { test } = this.props;
-    return [
-      { content: 'Cancel Test', visible: test.status === 'running' },
-      { content: <span><Delete/> Delete Test</span> },
-      { content: <span><Save/> Save as Draft</span>, visible: test.status === 'draft' },
-      { content: 'Override Default Template', visible: !!test.winning_template_id }
-    ];
+  handleDelete = () => {
+    // TODO
   }
+
+  // Actions & other props we want to share with both Edit and View mode
+  getSharedProps = () => ({
+    breadcrumbAction: { content: 'Back to A/B Tests', component: Link, to: '/ab-testing' },
+    deleteAction: {
+      content: <span><Delete/> Delete Test</span>,
+      onClick: this.toggleDelete
+    },
+    test: this.props.test,
+    subaccountId: this.props.subaccountId
+  })
 
   render() {
-    const { test, loading, error } = this.props;
+    const { loading, error, test } = this.props;
+    const { status } = this.props.test;
 
-    if (loading) {
-      return <Loading />;
+    if (loading || _.isEmpty(test)) {
+      return <Loading />
     }
 
     if (this.state.shouldRedirect) {
       return (
         <RedirectAndAlert
           to='/ab-testing'
-          alert={{ type: 'warning', message: 'Unable to load A/B test', details: _.get(error, 'message') }}
+          alert={{ type: 'warning', message: `Unable to load A/B test`, details: _.get(error, 'message') }}
         />
       );
     }
 
-    return (
-      <Page
-        title={test.name}
-        breadcrumbAction={{ content: 'Back to A/B Tests', component: Link, to: '/ab-testing' }}
-        primaryAction={this.getPrimaryAction()}
-        secondaryActions={this.getSecondaryActions()}>
+    const DetailPage = (status === 'draft' || status === 'scheduled') ? EditMode : ViewMode;
 
-      </Page>
+    return (
+      <Fragment>
+        <DetailPage {...this.getSharedProps()} />
+        {/* TODO - Add delete modal here */}
+      </Fragment>
     );
   }
 }
@@ -101,7 +93,8 @@ function mapStateToProps(state, props) {
     test: selectAbTest(state, props),
     loading: state.abTesting.detailsLoading,
     error: state.abTesting.detailsError,
-    ...selectIdAndVersion(state, props)
+    ...selectIdAndVersion(state, props),
+    subaccountId: selectSubaccountIdFromQuery(state, props)
   };
 }
 

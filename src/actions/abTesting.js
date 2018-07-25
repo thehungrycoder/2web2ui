@@ -25,16 +25,15 @@ export function createAbTestDraft({ abTest, subaccount }) {
     }
   });
 }
-export function getAbTest({ id, version }) {
-  // Is this even needed? seems to work without /draft/
-  // const url = draft ? `/ab-test/draft/${id}` : `/ab-test/${id}`;
 
+export function getAbTest({ id, version, subaccountId, type = 'GET_AB_TEST' }) {
   return sparkpostApiRequest({
-    type: 'GET_AB_TEST',
+    type,
     meta: {
       method: 'GET',
       url: `/ab-test/${id}`,
       showErrorAlert: false,
+      headers: setSubaccountHeader(subaccountId),
       params: {
         version
       }
@@ -42,17 +41,23 @@ export function getAbTest({ id, version }) {
   });
 }
 
-export function updateDraftTest() {
+export function getLatestAbTest({ id, subaccountId }) {
+  return getAbTest({ id, subaccountId, type: 'GET_LATEST_AB_TEST' });
+}
+
+export function updateDraft(data, { id, subaccountId } = {}) {
   return sparkpostApiRequest({
     type: 'UPDATE_AB_TEST_DRAFT',
     meta: {
       method: 'PUT',
-      url: `/ab-test/draft/${id}`
+      url: `/ab-test/draft/${id}`,
+      headers: setSubaccountHeader(subaccountId),
+      data
     }
   });
 }
 
-export function updateTest() {
+export function updateScheduled() {
   return sparkpostApiRequest({
     type: 'UPDATE_AB_TEST',
     meta: {
