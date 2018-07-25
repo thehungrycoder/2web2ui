@@ -39,18 +39,19 @@ export class ListPage extends Component {
     return columns;
   }
 
-  getRowData({ id, name, status, updated_at, default_template, winning_template_id }) {
-
+  getRowData({ id, version, name, status, updated_at, default_template, winning_template_id }) {
     const actions = [
       {
         content: 'Edit Test',
-        to: `/ab-testing/${id}`,
+        to: `/ab-testing/${id}/${version}`,
         component: Link,
         visible: status === 'scheduled' || status === 'draft',
         section: 1
       },
       {
         content: 'View Test',
+        to: `/ab-testing/${id}/${version}`,
+        component: Link,
         visible: status === 'running' || status === 'cancelled' || status === 'completed',
         section: 1
       },
@@ -77,7 +78,7 @@ export class ListPage extends Component {
     return [
       <Fragment>
         <p className={styles.Name}>
-          <strong><UnstyledLink to={`/ab-testing/${id}`} component={Link}>{name}</UnstyledLink></strong>
+          <strong><UnstyledLink to={`/ab-testing/${id}/${version}`} component={Link}>{name}</UnstyledLink></strong>
         </p>
         <p className={styles.Id}>ID: {id}</p>
       </Fragment>,

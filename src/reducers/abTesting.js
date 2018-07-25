@@ -1,9 +1,11 @@
 const initialState = {
   list: [],
-  abTest: {},
   listLoading: true,
   listError: null,
-  createError: null
+  createError: null,
+  detailsById: {},
+  detailsLoading: false,
+  detailsError: null
 };
 
 export default (state = initialState, action) => {
@@ -29,6 +31,26 @@ export default (state = initialState, action) => {
 
     case 'CREATE_AB_TEST_DRAFT_FAIL':
       return { ...state, createError: action.payload };
+
+    /* Details */
+    case 'GET_AB_TEST_PENDING':
+      return { ...state, detailsLoading: true, detailsError: null };
+
+    case 'GET_AB_TEST_FAIL':
+      return { ...state, detailsError: action.payload, detailsLoading: false };
+
+    case 'GET_AB_TEST_SUCCESS':
+      return {
+        ...state,
+        detailsLoading: false,
+        detailsById: {
+          ...state.detailsById,
+          [action.payload.id]: {
+            ...state.detailsById[action.payload.id],
+            [`version_${action.payload.version}`]: action.payload
+          }
+        }
+      };
 
     default:
       return state;
