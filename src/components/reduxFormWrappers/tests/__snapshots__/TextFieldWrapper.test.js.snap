@@ -1,5 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`TextFieldWrapper allows overriding resize prop with multiline 1`] = `
+<TextField
+  id="example"
+  multiline={true}
+  name="example"
+  resize="block"
+  type="text"
+/>
+`;
+
 exports[`TextFieldWrapper renders text input 1`] = `
 <TextField
   id="example"
@@ -16,6 +26,16 @@ exports[`TextFieldWrapper renders text input with an error 1`] = `
   id="example"
   name="example"
   resize="both"
+  type="text"
+/>
+`;
+
+exports[`TextFieldWrapper renders with resize=vertical when multiline 1`] = `
+<TextField
+  id="example"
+  multiline={true}
+  name="example"
+  resize="vertical"
   type="text"
 />
 `;
