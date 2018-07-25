@@ -65,7 +65,7 @@ export function getEnricherOrDieTryin(store, currentWindow) {
 // Check if error event was thrown from our bundle or from something else (i.e. browser extension)
 export function isErrorFromOurBundle(data) {
   // The local environment match is looser to allow for hot module replacement (i.e. http://app.sparkpost.test/4.a0803f8355f692de1382.hot-update.js)
-  const looksLikeOurBundle = new RegExp('sparkpost.test/|sparkpost.com/static/js/');
+  const looksLikeOurBundle = /sparkpost\.test|sparkpost\.com\/static\/js\//;
   // There should never be multiple exception values
   let frames = _.get(data, 'exception.values[0].stacktrace.frames', []);
   const firstFunction = _.get(frames, '[0].function');
@@ -80,7 +80,7 @@ export function isErrorFromOurBundle(data) {
 }
 
 export function isApiError(data) {
-  const looksLikeApiErrorType = new RegExp('SparkpostApiError|ZuoraApiError');
+  const looksLikeApiErrorType = /SparkpostApiError|ZuoraApiError/;
   const type = _.get(data, 'exception.values[0].type');
 
   return looksLikeApiErrorType.test(type);

@@ -128,6 +128,22 @@ describe('.isErrorFromOurBundle', () => {
     expect(isErrorFromOurBundle(data)).toEqual(true);
   });
 
+  it('returns true with error from our bundle when running locally', () => {
+    const data = {
+      exception: {
+        values: [{
+          stacktrace: {
+            frames: [
+              { filename: 'http://app.sparkpost.test/4.a0803f8355f692de1382.hot-update.js', function: 'render' }
+            ]
+          }
+        }]
+      }
+    };
+
+    expect(isErrorFromOurBundle(data)).toEqual(true);
+  });
+
   it('returns true with error from a native function called from our bundle', () => {
     const data = {
       exception: {
