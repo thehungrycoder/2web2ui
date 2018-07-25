@@ -14,13 +14,16 @@ import AbTestCreateForm from './components/AbTestCreateForm';
 export class CreatePage extends Component {
 
   create = (values) => {
-    const { createAbTestDraft, showAlert } = this.props;
+    const { createAbTestDraft, showAlert, history } = this.props;
     const { id, name, subaccount = {}, default_variant = {}} = values;
     const default_template = { template_id: default_variant.id };
     const abTest = { id, name, default_template };
 
     return createAbTestDraft({ abTest, subaccount: subaccount.id || 0 })
-      .then(() => showAlert({ type: 'success', message: 'A/B test created' }));
+      .then(() => {
+        showAlert({ type: 'success', message: 'A/B test created' });
+        history.push('/ab-testing');
+      });
   }
 
   render() {
