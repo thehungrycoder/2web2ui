@@ -11,7 +11,7 @@ const ResponseBlock = ({ testSent, testResponse }) => {
   return (
     <Panel.Section>
       <p>The server responded like this:</p>
-      <code><TextField multiline readOnly value={JSON.stringify(testResponse, null, '  ')} rows={12} /></code>
+      <code><TextField multiline readOnly value={JSON.stringify(testResponse, null, '  ')} rows={12} resize='vertical' /></code>
     </Panel.Section>
   );
 };

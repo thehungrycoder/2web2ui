@@ -11,7 +11,7 @@ exports[`Webhooks RequestBlock Component should render correctly 1`] = `
     <TextField
       multiline={true}
       readOnly={true}
-      resize="both"
+      resize="vertical"
       rows={6}
       type="text"
       value="value"

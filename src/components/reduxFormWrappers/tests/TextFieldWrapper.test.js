@@ -19,5 +19,16 @@ cases('TextFieldWrapper', ({ name, ...props }) => { // ignore test name
       error: 'Oh no!',
       touched: true
     }
+  },
+  'renders with resize=vertical when multiline': {
+    input: { name: 'example' },
+    meta: {},
+    multiline: true
+  },
+  'allows overriding resize prop with multiline': {
+    input: { name: 'example' },
+    meta: {},
+    multiline: true,
+    resize: 'block'
   }
 });
