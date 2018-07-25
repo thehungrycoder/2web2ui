@@ -3,13 +3,15 @@ import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 import { Panel, UnstyledLink, Button, Grid } from '@sparkpost/matchbox';
 import { TextFieldWrapper } from 'src/components';
-import { Typeahead } from 'src/components/typeahead/Typeahead';
+import { TemplateTypeaheadWrapper, SubaccountTypeaheadWrapper } from 'src/components/reduxFormWrappers';
 import { slugify } from 'src/helpers/string';
+import { hasSubaccounts } from 'src/selectors/subaccounts';
+import { required, maxLength, abTestId } from 'src/helpers/validation';
 // import { NameField, TargetField, EventsRadioGroup, AuthDropDown, BasicAuthFields, OAuth2Fields, ActiveField } from './Fields';
 
 const formName = 'abTestForm';
 
-export class AbTestForm extends Component {
+export class AbTestCreateForm extends Component {
 
   handleIdFill = (e) => {
     const { change } = this.props;
@@ -35,7 +37,9 @@ export class AbTestForm extends Component {
                 name='name'
                 component={TextFieldWrapper}
                 label='Give your test a name'
-                onChange={this.handleIdFill} />
+                onChange={this.handleIdFill}
+                validate={[required, maxLength(64)]}
+              />
             </Grid.Column>
             <Grid.Column>
               <Field
@@ -43,18 +47,31 @@ export class AbTestForm extends Component {
                 component={TextFieldWrapper}
                 label='ID'
                 helpText={'A Unique ID for your test, we\'ll fill this in for you.'}
+                validate={[required, abTestId, maxLength(64)]}
               />
             </Grid.Column>
           </Grid>
         </Panel.Section>
+        {hasSubaccounts
+          ? <Panel.Section>
+            <Field
+              name='subaccount'
+              component={SubaccountTypeaheadWrapper}
+              label='Select the subaccount to be used for this test'
+              placeholder='Master Account'
+              helpText='Leaving this field blank will permanently assign the A/B test to the master account.'
+            />
+          </Panel.Section>
+          : null}
         <Panel.Section>
           <Field
-            name='default_template_id'
-            placeholder='Type to search'
-            component={Typeahead}
-            results={['template-1', 'template-2']}
+            name='default_variant'
+            component={TemplateTypeaheadWrapper}
             label={'Select this test\'s default template'}
-            helpText={<span>We will send this template by default when the test is not running. If you need to create a new template, <UnstyledLink to='#'>head over to the templates page</UnstyledLink>.</span>}/>
+            placeholder='Type to search'
+            helpText={<span>We will send this template by default when the test is not running. If you need to create a new template, <UnstyledLink to='#'>head over to the templates page</UnstyledLink>.</span>}
+            validate={required}
+          />
           <p></p>
         </Panel.Section>
         <Panel.Section>
@@ -65,17 +82,13 @@ export class AbTestForm extends Component {
   }
 }
 
-AbTestForm.defaultProps = {
-  newAbTest: false
-};
+AbTestCreateForm.defaultProps = {};
 
 function mapStateToProps(state, props) {
-  const abTestValues = props.newAbTest ? {} : state.abTesting.abTest;
-
   return {
     disabled: props.pristine || props.submitting,
-    submitText: props.submitting ? 'Submitting...' : (props.newAbTest ? 'Create A/B Test' : 'Update A/B Test'),
-    initialValues: { ...abTestValues }
+    submitText: props.submitting ? 'Submitting...' : 'Create New Test',
+    initialValues: {}
   };
 }
 
@@ -84,4 +97,4 @@ const formOptions = {
   enableReinitialize: true
 };
 
-export default connect(mapStateToProps, {})(reduxForm(formOptions)(AbTestForm));
+export default connect(mapStateToProps, {})(reduxForm(formOptions)(AbTestCreateForm));
