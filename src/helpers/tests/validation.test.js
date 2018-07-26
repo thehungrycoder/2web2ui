@@ -34,6 +34,10 @@ const cases = {
   integer: {
     good: ['-10', '-1', '0', '1', '109352', -10, -1, 0, 1, 109352],
     bad: [-498.2, 0.1, 39.2, 'bob', '', '-498.2', '0.1', '39.2']
+  },
+  abTestId: {
+    good: ['id', 'test-id', 'test_1', '1'],
+    bad: ['test.id', 'NOT_!@#$%^&*()_VALID', 'test id', ':doge:']
   }
 };
 

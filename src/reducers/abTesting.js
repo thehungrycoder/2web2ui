@@ -25,7 +25,7 @@ export default (state = initialState, action) => {
       return { ...state, abTest: {}, createError: null };
 
     case 'CREATE_AB_TEST_SUCCESS':
-      return { ...state, abTest: { id: action.payload.id }}; // TODO: what else is needed in abTest?
+      return { ...state, abTest: { id: action.payload.id }};
 
     case 'CREATE_AB_TEST_FAIL':
       return { ...state, abTest: {}, createError: action.payload };
@@ -36,7 +36,7 @@ export default (state = initialState, action) => {
       return { ...state, abTest: {}, createError: null };
 
     case 'CREATE_AB_TEST_DRAFT_SUCCESS':
-      return { ...state, abTest: { id: action.payload.id }}; // TODO: what else is needed in abTest?
+      return { ...state, abTest: { id: action.payload.id }};
 
     case 'CREATE_AB_TEST_DRAFT_FAIL':
       return { ...state, abTest: {}, createError: action.payload };

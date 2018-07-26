@@ -5,7 +5,7 @@ import { Panel, UnstyledLink, Button, Grid } from '@sparkpost/matchbox';
 import { TextFieldWrapper } from 'src/components';
 import { TemplateTypeaheadWrapper, SubaccountTypeaheadWrapper } from 'src/components/reduxFormWrappers';
 import { slugify } from 'src/helpers/string';
-import { hasSubaccounts } from 'src/selectors/subaccounts';
+import { hasSubaccounts as hasSubaccountsSelector } from 'src/selectors/subaccounts';
 import { required, maxLength, abTestId } from 'src/helpers/validation';
 
 const formName = 'abTestCreateForm';
@@ -22,7 +22,8 @@ export class AbTestCreateForm extends Component {
     const {
       handleSubmit,
       pristine,
-      submitting
+      submitting,
+      hasSubaccounts
     } = this.props;
 
     const disabled = pristine || submitting;
@@ -87,7 +88,8 @@ AbTestCreateForm.defaultProps = {};
 
 function mapStateToProps(state, props) {
   return {
-    initialValues: {}
+    initialValues: {},
+    hasSubaccounts: hasSubaccountsSelector(state)
   };
 }
 

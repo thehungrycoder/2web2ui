@@ -1,0 +1,87 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`A/B Test Create Form Component should not render subaccount section if subaccounts do not exist 1`] = `null`;
+
+exports[`A/B Test Create Form Component should render correctly 1`] = `
+<form
+  onSubmit={[MockFunction]}
+>
+  <Panel.Section>
+    <p>
+      Give your test a name and an ID. You will need to use this ID when specifying an A/B test in your transmission's content JSON object.
+    </p>
+    <Grid>
+      <Grid.Column>
+        <Field
+          component={[Function]}
+          label="Give your test a name"
+          name="name"
+          onChange={[Function]}
+          validate={
+            Array [
+              [Function],
+              [Function],
+            ]
+          }
+        />
+      </Grid.Column>
+      <Grid.Column>
+        <Field
+          component={[Function]}
+          helpText="A Unique ID for your test, we'll fill this in for you."
+          label="ID"
+          name="id"
+          validate={
+            Array [
+              [Function],
+              [Function],
+              [Function],
+            ]
+          }
+        />
+      </Grid.Column>
+    </Grid>
+  </Panel.Section>
+  <Panel.Section>
+    <Field
+      component={[Function]}
+      helpText={
+        <span>
+          We will send this template by default when the test is not running. If you need to create a new template, 
+          <UnstyledLink
+            to="#"
+          >
+            head over to the templates page
+          </UnstyledLink>
+          .
+        </span>
+      }
+      label="Select this test's default template"
+      name="default_variant"
+      placeholder="Type to search"
+      validate={[Function]}
+    />
+    <p />
+  </Panel.Section>
+  <Panel.Section>
+    <Button
+      disabled={true}
+      primary={true}
+      size="default"
+      submit={true}
+    >
+      Create New Test
+    </Button>
+  </Panel.Section>
+</form>
+`;
+
+exports[`A/B Test Create Form Component should render subaccount section if subaccounts exist 1`] = `
+<Field
+  component={[Function]}
+  helpText="Leaving this field blank will permanently assign the A/B test to the master account."
+  label="Select the subaccount to be used for this test"
+  name="subaccount"
+  placeholder="Master Account"
+/>
+`;

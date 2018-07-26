@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Template Typeahead render function should render the list (disabled) 1`] = `
+<Typeahead
+  disabled={true}
+  hasTemplates={false}
+  itemToString={[Function]}
+  label="Template"
+  listTemplates={
+    [MockFunction] {
+      "calls": Array [
+        Array [],
+      ],
+      "results": undefined,
+    }
+  }
+  name="template"
+  onChange={[MockFunction]}
+  renderItem={[Function]}
+  results={Array []}
+/>
+`;
+
+exports[`Template Typeahead render function should render the list 1`] = `
+<Typeahead
+  disabled={false}
+  hasTemplates={true}
+  itemToString={[Function]}
+  label="Template"
+  listTemplates={
+    [MockFunction] {
+      "calls": Array [
+        Array [],
+      ],
+      "results": undefined,
+    }
+  }
+  name="template"
+  onChange={[MockFunction]}
+  renderItem={[Function]}
+  results={
+    Array [
+      Object {
+        "id": "tmpl-1",
+        "name": "Template 1",
+      },
+      Object {
+        "id": "tmpl-2",
+        "name": "Template 2",
+      },
+      Object {
+        "id": "tmpl-3",
+        "name": "Template 3",
+      },
+    ]
+  }
+/>
+`;
