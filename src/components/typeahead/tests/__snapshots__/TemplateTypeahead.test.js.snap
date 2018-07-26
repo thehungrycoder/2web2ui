@@ -56,3 +56,9 @@ exports[`Template Typeahead render function should render the list 1`] = `
   }
 />
 `;
+
+exports[`Template Typeahead should renderItem correctly 1`] = `
+<TemplateTypeaheadItem
+  id="tmpl-10101"
+/>
+`;

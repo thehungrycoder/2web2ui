@@ -43,6 +43,12 @@ describe('Template Typeahead', () => {
     expect(item).toEqual('tmpl-10101');
   });
 
+  it('should renderItem correctly', () => {
+    wrapper.setProps({ hasTemplates: true });
+    const item = wrapper.find('Typeahead').props().renderItem({ id: 'tmpl-10101' });
+    expect(item).toMatchSnapshot();
+  });
+
   describe('render function', () => {
     it('should render the list', () => {
       wrapper.setProps({ results: results, hasTemplates: true });

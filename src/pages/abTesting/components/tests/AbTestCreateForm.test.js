@@ -6,6 +6,7 @@ describe('A/B Test Create Form Component', () => {
   let wrapper;
   const props = {
     handleSubmit: jest.fn(),
+    change: jest.fn(),
     submitting: false,
     pristine: true,
     hasSubaccounts: false
@@ -32,6 +33,11 @@ describe('A/B Test Create Form Component', () => {
   it('should not render subaccount section if subaccounts do not exist', () => {
     wrapper.setProps({ hasSubaccounts: false });
     expect(wrapper.find({ name: 'subaccount' })).toMatchSnapshot();
+  });
+
+  it('should handle ID fill', () => {
+    wrapper.find('Field').at(0).simulate('change', { target: { value: 'test 1 2!' }});
+    expect(wrapper.instance().props.change).toHaveBeenCalledWith('id', 'test-1-2');
   });
 
   describe('submit button props', () => {
