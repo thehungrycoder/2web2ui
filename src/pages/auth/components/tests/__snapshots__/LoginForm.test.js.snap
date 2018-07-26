@@ -11,7 +11,7 @@ exports[`renders correctly 1`] = `
     id="username"
     label="Email or Username"
     name="username"
-    placeholder="leslie.knope@pawnee.indiana.state.gov"
+    placeholder="email@example.com"
     validate={[Function]}
   />
   <Field
@@ -56,7 +56,7 @@ exports[`renders correctly when logging in 1`] = `
     id="username"
     label="Email or Username"
     name="username"
-    placeholder="leslie.knope@pawnee.indiana.state.gov"
+    placeholder="email@example.com"
     validate={[Function]}
   />
   <Field
@@ -102,7 +102,7 @@ exports[`renders correctly when ssoEnabled is true 1`] = `
     id="username"
     label="Email or Username"
     name="username"
-    placeholder="leslie.knope@pawnee.indiana.state.gov"
+    placeholder="email@example.com"
     validate={[Function]}
   />
   <Button
