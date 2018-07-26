@@ -21,9 +21,6 @@ const BLACKLIST = new Set([
   '@@redux-form/SET_SUBMIT_FAILED'
 ]);
 
-// Chrome and Firefox extensions
-export const BROWSER_EXTENSION_REGEX = new RegExp('^(chrome|chrome-extension|resource)://', 'i');
-
 /**
  * Filter out blacklisted breadcrumbs
  *
@@ -33,7 +30,7 @@ export const BROWSER_EXTENSION_REGEX = new RegExp('^(chrome|chrome-extension|res
  * @param {number} crumb.timestamp - created at
  * @see https://docs.sentry.io/clients/javascript/config
  */
-export function breadcrumbCallback (crumb) {
+export function breadcrumbCallback(crumb) {
   if (BLACKLIST.has(crumb.message)) {
     return false;
   }
@@ -42,20 +39,51 @@ export function breadcrumbCallback (crumb) {
 }
 
 // Closure to safely enrich events with data from Redux store
-export function getEnricherOrDieTryin (store) {
-  return function enrich (data) {
+export function getEnricherOrDieTryin(store, currentWindow) {
+  return function enrich(data) {
     const { currentUser } = store.getState();
     const user = _.pick(currentUser, ['access_level', 'customer', 'username']);
+    const fromOurBundle = isErrorFromOurBundle(data);
+    const apiError = isApiError(data);
 
     return {
       ...data,
+      level: !fromOurBundle || apiError ? 'warning' : 'error',
       tags: { // all tags can be easily searched and sent in Slack notifications
         ...data.tags,
-        customer: _.get(user, 'customer')
+        customer: _.get(user, 'customer'),
+        // This <html> property should be set by us and updated when page is translated
+        documentLanguage: _.get(currentWindow, 'document.documentElement.lang', 'unknown'),
+        navigatorLanguage: _.get(currentWindow, 'navigator.language', 'unknown'),
+        source: fromOurBundle ? '2web2ui' : 'unknown'
       },
       user
     };
   };
+}
+
+// Check if error event was thrown from our bundle or from something else (i.e. browser extension)
+export function isErrorFromOurBundle(data) {
+  // The local environment match is looser to allow for hot module replacement (i.e. http://app.sparkpost.test/4.a0803f8355f692de1382.hot-update.js)
+  const looksLikeOurBundle = /sparkpost\.test|sparkpost\.com\/static\/js\//;
+  // There should never be multiple exception values
+  let frames = _.get(data, 'exception.values[0].stacktrace.frames', []);
+  const firstFunction = _.get(frames, '[0].function');
+
+  // A Sentry function may be included in the stacktrace and needs to be ignored (i.e. HTMLDocument.wrapped or wrapped)
+  if (/wrapped/.test(firstFunction)) {
+    frames = frames.slice(1); // safely reassign frames without Sentry function
+  }
+
+  // if any frame is from our bundle
+  return Boolean(frames.find(({ filename }) => looksLikeOurBundle.test(filename)));
+}
+
+export function isApiError(data) {
+  const looksLikeApiErrorType = /SparkpostApiError|ZuoraApiError/;
+  const type = _.get(data, 'exception.values[0].type');
+
+  return looksLikeApiErrorType.test(type);
 }
 
 // The purpose of this helper is to provide a common interface for reporting errors
@@ -67,7 +95,7 @@ class ErrorTracker {
    * @param {object} store - the Redux store for additional context
    * @param {object}
    */
-  install (config, store) {
+  install(config, store) {
     const { release, sentry, tenant } = config;
 
     // Silently ignore installation if Sentry configuration is not provided
@@ -76,10 +104,7 @@ class ErrorTracker {
     const dsn = `https://${sentry.publicKey}@sentry.io/${sentry.projectId}`;
     const options = {
       breadcrumbCallback,
-      dataCallback: getEnricherOrDieTryin(store),
-      ignoreUrls: [
-        BROWSER_EXTENSION_REGEX
-      ],
+      dataCallback: getEnricherOrDieTryin(store, window),
       release,
       tags: { tenant }
     };
@@ -88,7 +113,7 @@ class ErrorTracker {
   }
 
   // Record redux actions as breadcrumbs
-  get middleware () {
+  get middleware() {
     return createRavenMiddleware(Raven);
   }
 
@@ -104,7 +129,7 @@ class ErrorTracker {
    *     ErrorTracker.report('where-am-i', error);
    *   }
    */
-  report (logger, error, extra = {}) {
+  report(logger, error, extra = {}) {
     // Silently ignore if Sentry is not setup
     if (!Raven.isSetup()) { return; }
     Raven.captureException(error, { logger, extra });
