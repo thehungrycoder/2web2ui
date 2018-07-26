@@ -28,54 +28,15 @@
 
      <!-- Pushes app load failure to Sentry -->
     <script>
-      /**
-       * Returns browser's name
-       * @credit https://jsfiddle.net/311aLtkz/
-       * @returns {*}
-       */
-      function getAgent(){
-        var isIE = /*@cc_on!@*/false || !!document.documentMode;
-
-        switch(true){
-          // Opera 8.0+
-          case (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0:
-            return 'Opera';
-
-          // Firefox 1.0+
-          case typeof InstallTrigger !== 'undefined':
-            return 'Firefox';
-
-          case !!window.chrome && !!window.chrome.webstore:
-            return 'Chrome';
-
-          case /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || safari.pushNotification):
-            return 'Safari';
-
-          case isIE:
-            return 'IE';
-
-          case !!window.StyleMedia:
-            return 'Edge';
-
-          default:
-            return ':shrug:';
-        }
-      }
-
       function trackAppLoadError() {
         var key = window.SP.productionConfig.sentry.publicKey;
         var id = window.SP.productionConfig.sentry.projectId;
+
         Raven.config('https://' + key + '@sentry.io/' + id).install();
-        Raven.captureMessage('Unable to load application');
+        Raven.captureMessage('Unable to load application', { level: 'warning' });
       }
 
-      function reportError(){
-        var agentsToIgnoreError = /IE/i;
-
-        if(agentsToIgnoreError.test(getAgent())){
-          return;
-        }
-
+      function reportError() {
         var sentry = document.createElement('script');
         sentry.src = 'https://cdn.ravenjs.com/3.24.0/raven.min.js';
         sentry.onload = trackAppLoadError;
@@ -84,6 +45,7 @@
 
       function handleAppLoad() {
         document.getElementById('loading').className += 'ready'; // Kills loading screen
+
         if (!window.SPARKPOST_LOADED) {
           document.getElementById('error').className += 'show';
           reportError();
