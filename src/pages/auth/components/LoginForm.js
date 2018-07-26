@@ -8,7 +8,7 @@ import { Button } from '@sparkpost/matchbox';
 
 export class LoginForm extends Component {
 
-  render () {
+  render() {
     const { loginPending, pristine, ssoEnabled, handleSubmit } = this.props;
 
     return (
@@ -19,7 +19,7 @@ export class LoginForm extends Component {
           name='username'
           id='username'
           label='Email or Username'
-          placeholder='leslie.knope@pawnee.indiana.state.gov'
+          placeholder='email@example.com'
           component={TextFieldWrapper}
           validate={required}
         />
@@ -53,7 +53,7 @@ export class LoginForm extends Component {
   }
 }
 
-function mapStateToProps ({ auth }) {
+function mapStateToProps({ auth }) {
   return {
     loginPending: auth.loginPending,
     initialValues: {
