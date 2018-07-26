@@ -17,15 +17,12 @@ export class TemplateTypeahead extends Component {
   render() {
     const { hasTemplates } = this.props;
 
-    if (!hasTemplates) {
-      return null;
-    }
-
     return (
       <Typeahead
         renderItem={(item) => <Item id={item.id} />}
         itemToString={(item) => (item ? item.id : '')}
         label="Template"
+        disabled={!hasTemplates}
         {...this.props}
       />
     );

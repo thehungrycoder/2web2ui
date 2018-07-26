@@ -7,9 +7,8 @@ import { TemplateTypeaheadWrapper, SubaccountTypeaheadWrapper } from 'src/compon
 import { slugify } from 'src/helpers/string';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
 import { required, maxLength, abTestId } from 'src/helpers/validation';
-// import { NameField, TargetField, EventsRadioGroup, AuthDropDown, BasicAuthFields, OAuth2Fields, ActiveField } from './Fields';
 
-const formName = 'abTestForm';
+const formName = 'abTestCreateForm';
 
 export class AbTestCreateForm extends Component {
 
@@ -22,9 +21,12 @@ export class AbTestCreateForm extends Component {
   render() {
     const {
       handleSubmit,
-      submitText,
-      disabled
+      pristine,
+      submitting
     } = this.props;
+
+    const disabled = pristine || submitting;
+    const submitText = submitting ? 'Submitting...' : 'Create New Test';
 
     return (
       <form onSubmit={handleSubmit}>
@@ -85,8 +87,6 @@ AbTestCreateForm.defaultProps = {};
 
 function mapStateToProps(state, props) {
   return {
-    disabled: props.pristine || props.submitting,
-    submitText: props.submitting ? 'Submitting...' : 'Create New Test',
     initialValues: {}
   };
 }
