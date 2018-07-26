@@ -42,8 +42,12 @@ describe('A/B Test Create Form Component', () => {
 
   describe('submit button props', () => {
     it('should render submit text', () => {
-      wrapper.setProps({ submitText: 'Update Webhook' });
       expect(wrapper.find('Button').props().children).toEqual('Create New Test');
+    });
+
+    it('should render submitting text', () => {
+      wrapper.setProps({ submitting: true, pristine: false });
+      expect(wrapper.find('Button').props().children).toEqual('Submitting...');
     });
   });
 });
