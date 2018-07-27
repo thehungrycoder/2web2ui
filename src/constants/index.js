@@ -66,7 +66,9 @@ export const CROSS_LINK_MAP = {
 
 export const FORMS = {
   LOGIN: 'loginForm',
-  JOIN: 'joinForm'
+  JOIN: 'joinForm',
+  JOIN_PLAN: 'joinPlanForm',
+  JOIN_SENDING_DOMAIN: 'joinSendingDomainForm'
 };
 
 export const ANALYTICS_CREATE_ACCOUNT = 'create account';
@@ -78,5 +80,7 @@ export const ANALYTICS_ONBOARDING_LEARN_MORE = 'learn-more-sending-domains';
 export const ANALYTICS_ONBOARDING_CREATE_DOMAIN = 'create-sending-domain-verify-';
 export const ANALYTICS_WHITELISTED_FORMS = [
   FORMS.LOGIN,
-  FORMS.JOIN
+  FORMS.JOIN,
+  FORMS.JOIN_PLAN,
+  FORMS.JOIN_SENDING_DOMAIN
 ];

@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from 'react';
-import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { reduxForm, Field, SubmissionError } from 'redux-form';
 import { create as createDomain } from 'src/actions/sendingDomains';
@@ -9,7 +8,10 @@ import Steps from './components/Steps';
 import SkipLink from './components/SkipLink';
 import { required, domain } from 'src/helpers/validation';
 import * as analytics from 'src/helpers/analytics';
-import { LINKS, ANALYTICS_ONBOARDING, ANALYTICS_ONBOARDING_LEARN_MORE, ANALYTICS_ONBOARDING_CREATE_DOMAIN } from 'src/constants';
+import {
+  FORMS, LINKS, ANALYTICS_ONBOARDING, ANALYTICS_ONBOARDING_LEARN_MORE,
+  ANALYTICS_ONBOARDING_CREATE_DOMAIN
+} from 'src/constants';
 
 export class SendingDomainPage extends Component {
   handleDomainCreate = (values) => {
@@ -21,7 +23,7 @@ export class SendingDomainPage extends Component {
     });
   }
 
-  componentDidUpdate (prevProps) {
+  componentDidUpdate(prevProps) {
     const { submitSucceeded, history } = this.props;
 
     // Redirect here instead of the createDomain promise
@@ -42,7 +44,7 @@ export class SendingDomainPage extends Component {
     data: { action: ANALYTICS_ONBOARDING_LEARN_MORE }
   });
 
-  render () {
+  render() {
     const { handleSubmit, submitting } = this.props;
 
     return (
@@ -75,6 +77,4 @@ export class SendingDomainPage extends Component {
   }
 }
 
-
-const formOptions = { form: 'onboardingDomain' };
-export default withRouter(connect(null, { createDomain })(reduxForm(formOptions)(SendingDomainPage)));
+export default connect(null, { createDomain })(reduxForm({ form: FORMS.JOIN_SENDING_DOMAIN })(SendingDomainPage));
