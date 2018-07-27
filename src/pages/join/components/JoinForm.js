@@ -4,7 +4,7 @@ import { reduxForm, Field, getFormValues } from 'redux-form';
 import Recaptcha from 'react-recaptcha';
 
 import config from 'src/config';
-import { LINKS } from 'src/constants';
+import { FORMS, LINKS } from 'src/constants';
 import { TextFieldWrapper, CheckboxWrapper } from 'src/components/reduxFormWrappers';
 import { Button, UnstyledLink, Grid, Checkbox } from '@sparkpost/matchbox';
 import { required, minLength, email, endsWithWhitespace } from 'src/helpers/validation';
@@ -154,15 +154,15 @@ export class JoinForm extends Component {
     );
   }
 }
-const formName = 'registerAccountForm';
+
 const mapStateToProps = (state, props) => ({
   initialValues: {
     tou_accepted: false,
     email_opt_in: false
   },
   loading: state.account.createLoading || state.auth.loginPending,
-  formValues: getFormValues(formName)(state)
+  formValues: getFormValues(FORMS.REGISTER_ACCOUNT)(state)
 });
 
-const RegisterAccountForm = reduxForm({ form: formName })(JoinForm);
+const RegisterAccountForm = reduxForm({ form: FORMS.REGISTER_ACCOUNT })(JoinForm);
 export default connect(mapStateToProps, {})(RegisterAccountForm);
