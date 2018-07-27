@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 import { Page, Panel, UnstyledLink } from '@sparkpost/matchbox';
 
@@ -8,7 +9,9 @@ import { get as getCurrentUser } from 'src/actions/currentUser';
 import { confirmPassword } from 'src/actions/auth';
 import { showAlert } from 'src/actions/globalAlert';
 import { openSupportTicketForm } from 'src/actions/support';
+import { verifyEmail } from 'src/actions/currentUser';
 
+import EmailBanner from 'src/components/emailBanner/EmailBanner';
 import NameForm from './components/NameForm';
 import PasswordForm from './components/PasswordForm';
 import TfaManager from './components/TfaManager';
@@ -21,6 +24,27 @@ import { isAdmin, isHeroku, isAzure, isSso } from 'src/helpers/conditions/user';
 export class ProfilePage extends Component {
   requestCancellation = () => {
     this.props.openSupportTicketForm({ issueId: 'account_cancellation' });
+  }
+
+  resendVerification() {
+    const { verifyEmail, showAlert } = this.props;
+    return verifyEmail()
+      .then(() => showAlert({
+        type: 'success',
+        message: 'Please click the link in the email we sent you to verify your email.'
+      }));
+  }
+
+  renderVerifyEmailCta() {
+    const { currentUser, verifyingEmail } = this.props;
+
+    if (!currentUser.email_verified) {
+      return (
+        <EmailBanner
+          verifying={verifyingEmail}
+          handleResend={() => this.resendVerification()} />
+      );
+    }
   }
 
   updateProfile = (values) => {
@@ -44,15 +68,14 @@ export class ProfilePage extends Component {
       .then(() => this.props.updateUser(username, { password: newPassword }));
   }
 
-  render () {
-    const {
-      username,
-      email,
-      customer
-    } = this.props.currentUser;
+  render() {
+    const { username, email, customer } = this.props.currentUser;
 
     return (
       <Page title='Profile'>
+
+        {this.renderVerifyEmailCta()}
+
         <Panel sectioned>
           <LabelledValue label='Account ID' value={customer}/>
           <LabelledValue label='Username' value={username}/>
@@ -92,17 +115,20 @@ export class ProfilePage extends Component {
   }
 }
 
-const mapStateToProps = ({ account, currentUser }) => ({
+const mapStateToProps = ({ account, currentUser, verifyingEmail }) => ({
   account,
-  currentUser
+  currentUser,
+  verifyingEmail
 });
 
 const mapDispatchToProps = {
   confirmPassword,
   getCurrentUser,
   openSupportTicketForm,
+  verifyEmail,
   showAlert,
   updateUser
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProfilePage);
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ProfilePage));

@@ -6,7 +6,7 @@ import _ from 'lodash';
 import { Page } from '@sparkpost/matchbox';
 import { UsageReport } from 'src/components';
 import Tutorial from './components/Tutorial';
-import EmailBanner from './components/EmailBanner';
+import EmailBanner from 'src/components/emailBanner/EmailBanner';
 import SuppressionBanner from './components/SuppressionBanner';
 
 import { showAlert } from 'src/actions/globalAlert';
