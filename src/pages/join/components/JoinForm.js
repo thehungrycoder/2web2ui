@@ -161,8 +161,8 @@ const mapStateToProps = (state, props) => ({
     email_opt_in: false
   },
   loading: state.account.createLoading || state.auth.loginPending,
-  formValues: getFormValues(FORMS.REGISTER_ACCOUNT)(state)
+  formValues: getFormValues(FORMS.JOIN)(state)
 });
 
-const RegisterAccountForm = reduxForm({ form: FORMS.REGISTER_ACCOUNT })(JoinForm);
+const RegisterAccountForm = reduxForm({ form: FORMS.JOIN })(JoinForm);
 export default connect(mapStateToProps, {})(RegisterAccountForm);
