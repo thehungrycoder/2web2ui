@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { reduxForm, getFormValues } from 'redux-form';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 import { showAlert } from 'src/actions/globalAlert';
 import { updateDraft } from 'src/actions/abTesting';
 import { selectEditInitialValues } from 'src/selectors/abTesting';
+import { formatFormValues } from 'src/helpers/abTesting';
 
-import { Page, UnstyledLink, Button, Popover, ActionList } from '@sparkpost/matchbox';
+import { Page } from '@sparkpost/matchbox';
 import { Save } from '@sparkpost/matchbox-icons';
 import Section from './components/Section';
 import StatusPanel from './components/StatusPanel';
@@ -21,25 +22,35 @@ const FORM_NAME = 'abTestEdit';
 export class EditMode extends Component {
 
   handleSaveAsDraft = (values) => {
-    const { updateDraft, subaccountId, showAlert } = this.props;
+    const { updateDraft, showAlert, subaccountId } = this.props;
     const { id } = this.props.test;
 
-    return updateDraft(values, { id, subaccountId }).then(() => {
+    return updateDraft(formatFormValues(values), { id, subaccountId }).then(() => {
       showAlert({ type: 'success', message: 'A/B Test Draft Updated' });
     });
   }
 
-  getPrimaryAction = () => {
-    const { status } = this.props.test;
+  handleSchedule = (values) => {
+    return;
+  }
 
-    if (status === 'draft') {
+  handleUpdateScheduled = (values) => {
+    return;
+  }
+
+  getPrimaryAction = () => {
+    const { handleSubmit, test } = this.props;
+
+    if (test.status === 'draft') {
       return {
-        content: 'Finalize and Schedule Test'
-      }
+        content: 'Finalize and Schedule Test',
+        onClick: handleSubmit(this.handleSchedule)
+      };
     }
 
     return {
-      content: 'Update Test'
+      content: 'Update Test',
+      onClick: handleSubmit(this.handleUpdateScheduled)
     };
   }
 
@@ -56,19 +67,18 @@ export class EditMode extends Component {
   }
 
   render() {
-    const { breadcrumbAction, test, subaccountId, formValues, submitting } = this.props;
-    const { id } = this.props.test;
+    const { breadcrumbAction, test, formValues, submitting, subaccountId } = this.props;
 
     return (
       <Page
-        title={id}
+        title={test.id}
         breadcrumbAction={breadcrumbAction}
         primaryAction={this.getPrimaryAction()}
         secondaryActions={this.getSecondaryActions()}>
 
         <Section title='Status'>
           <Section.Left>
-            <StatusContent test={test}  />
+            <StatusContent test={test} />
           </Section.Left>
           <Section.Right>
             <StatusPanel test={test} subaccountId={subaccountId} />
@@ -102,7 +112,7 @@ EditMode.propTypes = {
   test: PropTypes.shape({
     status: PropTypes.oneOf(['draft', 'scheduled'])
   })
-}
+};
 
 const mapStateToProps = (state, props) => ({
   formValues: getFormValues(FORM_NAME)(state),

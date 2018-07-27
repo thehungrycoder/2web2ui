@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { Page, UnstyledLink, Button, Popover, ActionList } from '@sparkpost/matchbox';
-import { Save } from '@sparkpost/matchbox-icons';
+import { Page } from '@sparkpost/matchbox';
 import Section from './components/Section';
 import StatusPanel from './components/StatusPanel';
 import { StatusContent, SettingsContent, VariantsContent } from './components/content';
@@ -15,9 +13,10 @@ export class ViewMode extends Component {
     if (status === 'cancelled' || status === 'completed') {
       return {
         content: 'Edit and Rerun Test'
-      }
+      };
     }
 
+    // Show nothing if running
     return null;
   }
 
@@ -25,12 +24,12 @@ export class ViewMode extends Component {
     const { test, deleteAction } = this.props;
     return [
       {
-        content: 'Cancel Test',
+        content: 'Cancel Test', // TODO find an icon
         visible: test.status === 'running'
       },
       {
-        content: 'Override Default Template',
-        visible: !!test.winning_template_id,
+        content: 'Override Default Template', // TODO find an icon
+        visible: !!test.winning_template_id
         // onClick: this.toggleOverrideModal()
       },
       deleteAction
@@ -50,11 +49,10 @@ export class ViewMode extends Component {
 
         <Section title='Status'>
           <Section.Left>
-            <StatusContent test={test}  />
+            <StatusContent test={test} />
           </Section.Left>
           <Section.Right>
             <StatusPanel test={test} subaccountId={subaccountId} />
-
           </Section.Right>
         </Section>
 
@@ -85,6 +83,6 @@ ViewMode.propTypes = {
   test: PropTypes.shape({
     status: PropTypes.oneOf(['cancelled', 'completed', 'running'])
   })
-}
+};
 
 export default ViewMode;

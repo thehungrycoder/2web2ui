@@ -52,6 +52,20 @@ export default (state = initialState, action) => {
         }
       };
 
+    /* Get Latest */
+    case 'GET_LATEST_AB_TEST_SUCCESS':
+      return {
+        ...state,
+        detailsLoading: false,
+        detailsById: {
+          ...state.detailsById,
+          [action.payload.id]: {
+            ...state.detailsById[action.payload.id],
+            latest: action.payload.version
+          }
+        }
+      };
+
     default:
       return state;
   }
