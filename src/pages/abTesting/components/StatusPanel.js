@@ -2,8 +2,8 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
-import { getLatestAbTest } from 'src/actions/abTesting';
-import { selectLatestVersionNumber } from 'src/selectors/abTesting';
+import { getAbTest, getLatestAbTest } from 'src/actions/abTesting';
+import { selectLatestVersionNumber, selectIdAndVersion } from 'src/selectors/abTesting';
 import { LabelledValue, SubaccountTag } from 'src/components';
 import { ActionList, Popover, Panel } from '@sparkpost/matchbox';
 import { ExpandMore } from '@sparkpost/matchbox-icons';
@@ -41,6 +41,15 @@ class StatusPanel extends Component {
     getLatestAbTest({ id, subaccountId });
   }
 
+  componentDidUpdate({ version: prevVersion }) {
+    const { id, version, subaccountId, getAbTest } = this.props;
+
+    // Fetch the updated version when url updates
+    if (prevVersion !== version) {
+      getAbTest({ id, version, subaccountId });
+    }
+  }
+
   render() {
     const { test, subaccountId, latest } = this.props;
     let panelActions = null;
@@ -64,6 +73,7 @@ class StatusPanel extends Component {
 }
 
 const mapStateToProps = (state, props) => ({
-  latest: selectLatestVersionNumber(state, props)
+  latest: selectLatestVersionNumber(state, props),
+  ...selectIdAndVersion(state, props)
 });
-export default withRouter(connect(mapStateToProps, { getLatestAbTest })(StatusPanel));
+export default withRouter(connect(mapStateToProps, { getAbTest, getLatestAbTest })(StatusPanel));

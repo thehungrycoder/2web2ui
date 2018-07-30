@@ -33,18 +33,11 @@ export class DetailsPage extends Component {
     getAbTest({ id, version, subaccountId });
   }
 
-  componentDidUpdate({ error: prevError, location: prevLocation }) {
-    const { error, test, location, id, version, subaccountId, getAbTest } = this.props;
+  componentDidUpdate({ error: prevError }) {
+    const { error, test } = this.props;
 
     if (!prevError && error && _.isEmpty(test)) {
       this.setState({ shouldRedirect: true });
-    }
-
-    // For the version history selector
-    // Fetch the updated version when url updates
-    // Do this here because it needs to be above loading state
-    if (prevLocation.pathname !== location.pathname) {
-      getAbTest({ id, version, subaccountId });
     }
   }
 
@@ -68,11 +61,10 @@ export class DetailsPage extends Component {
   })
 
   render() {
-    const { loading, error, test } = this.props;
+    const { loading, error } = this.props;
     const { status } = this.props.test;
 
-    // Prevent children from mounting if either loading, or there is no test to render
-    if (loading || (_.isEmpty(test) && !this.state.shouldRedirect)) {
+    if (loading) {
       return <Loading />;
     }
 

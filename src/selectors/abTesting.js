@@ -7,7 +7,7 @@ import _ from 'lodash';
 const selectDetails = (state) => state.abTesting.detailsById;
 
 /**
- * Selects ID and version from router params
+ * Selects ID and version from router query params
  */
 export const selectIdAndVersion = (state, props) => ({
   id: _.get(props, 'match.params.id'),
@@ -15,7 +15,7 @@ export const selectIdAndVersion = (state, props) => ({
 });
 
 /**
- * Selects a test from router params
+ * Selects a single test from router id and version query params
  */
 export const selectAbTest = createSelector(
   [selectDetails, selectIdAndVersion],
@@ -23,7 +23,7 @@ export const selectAbTest = createSelector(
 );
 
 /**
- * Selects a test's latest version number from router params
+ * Selects a test's latest version number from router id query params
  */
 export const selectLatestVersionNumber = createSelector(
   [selectDetails, selectIdAndVersion],
