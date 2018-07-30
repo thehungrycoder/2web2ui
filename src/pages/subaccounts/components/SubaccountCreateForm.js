@@ -4,7 +4,7 @@ import { reduxForm, formValueSelector } from 'redux-form';
 
 import { Button, Panel } from '@sparkpost/matchbox';
 import { getSubaccountGrants, getInitialSubaccountGrants } from 'src/selectors/api-keys';
-import { getNonDefaultIpPools, selectFirstIpPoolId } from 'src/selectors/ipPools';
+import { getIpPools, selectFirstIpPoolId } from 'src/selectors/ipPools';
 
 import { NameField, ApiKeyCheckBox, ApiKeyFields } from './formFields';
 import IpPoolSelect from './IpPoolSelect';
@@ -55,7 +55,7 @@ const mapStateToProps = (state, props) => ({
   grants: getSubaccountGrants(state),
   createApiKey: valueSelector(state, 'createApiKey'),
   showGrants: valueSelector(state, 'grantsRadio') === 'select',
-  ipPools: getNonDefaultIpPools(state),
+  ipPools: getIpPools(state),
   restrictedToIpPool: valueSelector(state, 'restrictedToIpPool'),
   initialValues: {
     grants: getInitialSubaccountGrants(state),
