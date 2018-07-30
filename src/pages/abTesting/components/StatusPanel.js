@@ -37,8 +37,8 @@ class StatusPanel extends Component {
   }
 
   componentDidMount() {
-    const { test, subaccountId, getLatestAbTest } = this.props;
-    getLatestAbTest({ id: test.id, subaccountId });
+    const { id, subaccountId, getLatestAbTest } = this.props;
+    getLatestAbTest({ id, subaccountId });
   }
 
   render() {

@@ -56,7 +56,6 @@ export default (state = initialState, action) => {
     case 'GET_LATEST_AB_TEST_SUCCESS':
       return {
         ...state,
-        detailsLoading: false,
         detailsById: {
           ...state.detailsById,
           [action.payload.id]: {

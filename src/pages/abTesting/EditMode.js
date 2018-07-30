@@ -5,7 +5,7 @@ import { reduxForm, getFormValues } from 'redux-form';
 import { withRouter } from 'react-router-dom';
 
 import { showAlert } from 'src/actions/globalAlert';
-import { updateDraft } from 'src/actions/abTesting';
+import { updateDraft, getAbTest } from 'src/actions/abTesting';
 import { selectEditInitialValues } from 'src/selectors/abTesting';
 import { formatFormValues } from 'src/helpers/abTesting';
 
@@ -22,10 +22,11 @@ const FORM_NAME = 'abTestEdit';
 export class EditMode extends Component {
 
   handleSaveAsDraft = (values) => {
-    const { updateDraft, showAlert, subaccountId } = this.props;
-    const { id } = this.props.test;
+    const { updateDraft, showAlert, subaccountId, getAbTest } = this.props;
+    const { id, version } = this.props.test;
 
     return updateDraft(formatFormValues(values), { id, subaccountId }).then(() => {
+      getAbTest({ id, version, subaccountId });
       showAlert({ type: 'success', message: 'A/B Test Draft Updated' });
     });
   }
@@ -71,7 +72,7 @@ export class EditMode extends Component {
 
     return (
       <Page
-        title={test.id}
+        title={test.name}
         breadcrumbAction={breadcrumbAction}
         primaryAction={this.getPrimaryAction()}
         secondaryActions={this.getSecondaryActions()}>
@@ -123,4 +124,4 @@ const formOptions = {
   form: FORM_NAME,
   enableReinitialize: true
 };
-export default withRouter(connect(mapStateToProps, { updateDraft, showAlert })(reduxForm(formOptions)(EditMode)));
+export default withRouter(connect(mapStateToProps, { updateDraft, getAbTest, showAlert })(reduxForm(formOptions)(EditMode)));

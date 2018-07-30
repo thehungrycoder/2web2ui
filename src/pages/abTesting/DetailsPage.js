@@ -42,6 +42,7 @@ export class DetailsPage extends Component {
 
     // For the version history selector
     // Fetch the updated version when url updates
+    // Do this here because it needs to be above loading state
     if (prevLocation.pathname !== location.pathname) {
       getAbTest({ id, version, subaccountId });
     }

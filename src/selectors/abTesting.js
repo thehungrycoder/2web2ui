@@ -46,6 +46,7 @@ export const selectEditInitialValues = createSelector(
       metric: 'count_unique_clicked',
       confidence_level: 0.95,
       engagement_timeout: 24,
+      audience_selection: 'percent',
 
       // Apply values to overwrite defaults
       ...values

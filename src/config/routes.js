@@ -544,9 +544,9 @@ const routes = [
     supportDocsSearch: 'A/B test'
   },
   {
-    path: '/ab-testing/:id/:version?',
+    path: '/ab-testing/:id/:version',
     component: abTesting.DetailsPage,
-    condition: hasUiOption('abtests'),
+    condition: all(hasGrants('ab-testing/manage'), hasUiOption('abtests')),
     layout: App,
     title: 'A/B Testing',
     supportDocsSearch: 'A/B test'

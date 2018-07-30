@@ -38,11 +38,11 @@ export class ViewMode extends Component {
 
   render() {
     const { breadcrumbAction, test, subaccountId } = this.props;
-    const { id } = this.props.test;
+    const { name } = this.props.test;
 
     return (
       <Page
-        title={id}
+        title={name}
         breadcrumbAction={breadcrumbAction}
         primaryAction={this.getPrimaryAction()}
         secondaryActions={this.getSecondaryActions()}>
