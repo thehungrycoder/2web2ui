@@ -36,12 +36,12 @@ export class ProfilePage extends Component {
   }
 
   renderVerifyEmailCta() {
-    const { currentUser, verifyingEmail } = this.props;
+    const { currentUser } = this.props;
 
     if (!currentUser.email_verified) {
       return (
         <EmailBanner
-          verifying={verifyingEmail}
+          verifying={currentUser.verifyingEmail}
           handleResend={() => this.resendVerification()} />
       );
     }
@@ -115,11 +115,11 @@ export class ProfilePage extends Component {
   }
 }
 
-const mapStateToProps = ({ account, currentUser, verifyingEmail }) => ({
+const mapStateToProps = ({ account, currentUser }) => ({
   account,
-  currentUser,
-  verifyingEmail
+  currentUser
 });
+//state.currentUser.verifyingEmail
 
 const mapDispatchToProps = {
   confirmPassword,
