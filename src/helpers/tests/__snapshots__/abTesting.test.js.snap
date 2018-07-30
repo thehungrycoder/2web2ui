@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`A/B testing helper formatFormValues should omit confidence level if in learning mode 1`] = `
+Object {
+  "audience_selection": "sample_size",
+  "name": "test_one",
+  "test_mode": "learning",
+  "total_sample_size": "100",
+}
+`;
+
+exports[`A/B testing helper formatFormValues should omit sample size if using percent 1`] = `
+Object {
+  "audience_selection": "percent",
+  "confidence_level": "0.91",
+  "name": "test_one",
+  "test_mode": "bayesian",
+}
+`;

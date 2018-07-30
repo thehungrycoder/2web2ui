@@ -1,5 +1,6 @@
 import _ from 'lodash';
 
+// Formats redux-form values before passing to API
 export const formatFormValues = (values) => {
   let formattedValues = values;
 

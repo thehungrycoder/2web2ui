@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Section Component should render correctly 1`] = `
+<div
+  className="Section"
+>
+  <hr
+    className="Hr"
+  />
+  <h3>
+    a section
+  </h3>
+  <Grid>
+    <Left>
+      left
+    </Left>
+    <Right>
+      right
+    </Right>
+  </Grid>
+</div>
+`;
+
+exports[`Section Component should render correctly 2`] = `
+<Grid.Column
+  lg={5}
+  xs={12}
+>
+  <div
+    className="Left"
+  >
+    left
+  </div>
+</Grid.Column>
+`;
+
+exports[`Section Component should render correctly 3`] = `
+<Grid.Column
+  lg={7}
+  xs={12}
+>
+  <div
+    className="Right"
+  >
+    right
+  </div>
+</Grid.Column>
+`;
