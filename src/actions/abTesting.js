@@ -57,7 +57,7 @@ export function updateDraft(data, { id, subaccountId } = {}) {
   });
 }
 
-export function updateScheduled() {
+export function updateScheduled({ id }) {
   return sparkpostApiRequest({
     type: 'UPDATE_AB_TEST',
     meta: {
