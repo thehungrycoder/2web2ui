@@ -58,7 +58,6 @@
     "date-fns": "^1.28.5",
     "downshift": "^2.0.10",
     "email-addresses": "^3.0.1",
-    "flat": "^4.1.0",
     "history": "^4.6.1",
     "jest-in-case": "^1.0.2",
     "js-cookie": "^2.1.4",

@@ -1,4 +1,3 @@
-import cases from 'jest-in-case';
 import * as utils from '../utils';
 
 describe('Analytics Utils', () => {
@@ -20,30 +19,4 @@ describe('Analytics Utils', () => {
       expect(utils.isValidEvent(null)).toBe(false);
     });
   });
-
-  const determineFormValidationStateTestCases = {
-    'validation success with no syncErrors': { action: { payload: { syncErrors: {}}, meta: { form: 'fooForm' }}},
-    'validation error with fields errors': {
-      action: {
-        payload: { syncErrors: { name: 'Required' }},
-        meta: { form: 'fooForm' }
-      }
-    },
-    'validation error with generic error': {
-      action: {
-        payload: { syncErrors: { _error: 'Some form level error' }},
-        meta: { form: 'fooForm' }
-      }
-    },
-    'validation error with nested field names are flattened': {
-      action: {
-        payload: { syncErrors: { card: { number: '1234', expire: '0820' }, name: 'foobar' }},
-        meta: { form: 'fooForm' }
-      }
-    }
-  };
-
-  cases('determineFormValidationState', ({ name, action }) => {
-    expect(utils.determineFormValidationState(action)).toMatchSnapshot();
-  }, determineFormValidationStateTestCases);
 });
