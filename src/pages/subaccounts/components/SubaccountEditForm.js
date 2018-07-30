@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { reduxForm, formValueSelector } from 'redux-form';
 
 import { Button, Panel } from '@sparkpost/matchbox';
-import { getNonDefaultIpPools } from 'src/selectors/ipPools';
+import { getIpPools } from 'src/selectors/ipPools';
 import { selectFirstIpPoolId } from 'src/selectors/ipPools';
 import { NameField, StatusSelect } from './formFields';
 import IpPoolSelect from './IpPoolSelect';
@@ -53,7 +53,7 @@ const mapStateToProps = (state, { subaccount }) => {
 
   return {
     compliance,
-    ipPools: getNonDefaultIpPools(state),
+    ipPools: getIpPools(state),
     restrictedToIpPool: valueSelector(state, 'restrictedToIpPool'),
     initialValues: {
       ipPool: ip_pool || selectFirstIpPoolId(state),
