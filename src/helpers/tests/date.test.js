@@ -14,6 +14,7 @@ import {
   parseTime,
   parseDatetime
 } from '../date';
+import { roundBoundaries } from '../metrics';
 import cases from 'jest-in-case';
 import moment from 'moment';
 
@@ -63,8 +64,9 @@ describe('Date helpers', () => {
       const date = moment(new Date('2017-12-17T12:00:00')).utc().toDate();
       Date.now = jest.fn(() => date);
       const { from, to, relativeRange } = getRelativeDates(range);
-      expect(to).toEqual(date);
-      expect(from).toEqual(moment(date).subtract(...subtractArgs).toDate());
+      const { from: expectedFrom, to: expectedTo } = roundBoundaries(moment(date).subtract(...subtractArgs), date);
+      expect(to).toEqual(expectedTo.toDate());
+      expect(from).toEqual(expectedFrom.toDate());
       expect(relativeRange).toEqual(range);
     }, {
       'for an hour ago': { range: 'hour', subtractArgs: [1, 'hours']},

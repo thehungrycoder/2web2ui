@@ -2,7 +2,9 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import _ from 'lodash';
 import * as dateHelpers from 'src/helpers/date';
+import * as metricsHelpers from 'src/helpers/metrics';
 import datefns from 'date-fns';
+import moment from 'moment';
 import DatePicker from '../DatePicker';
 import utc from 'src/__testHelpers__/time';
 
@@ -33,6 +35,7 @@ describe('Component: DatePicker', () => {
 
     dateHelpers.getStartOfDay = jest.fn(() => 'start-of-day');
     dateHelpers.getEndOfDay = jest.fn(() => 'end-of-day');
+    metricsHelpers.roundBoundaries = jest.fn(() => ({ from: moment(mockFrom), to: moment(mockNow) }));
     dateHelpers.getRelativeDateOptions = jest.fn(() => [1, 2, 3]);
     datefns.format = jest.fn((a,b) => b);
     datefns.subMonths = jest.fn((a) => a);
@@ -224,7 +227,8 @@ describe('Component: DatePicker', () => {
 
       expect(dateHelpers.getEndOfDay).toHaveBeenCalledWith(newDate, { preventFuture: true });
       expect(dateHelpers.getStartOfDay).not.toHaveBeenCalled();
-      expect(range).toEqual({ from, to: 'end-of-day' });
+      expect(metricsHelpers.roundBoundaries).toHaveBeenCalledWith(from, 'end-of-day');
+      expect(range).toEqual({ from: moment(mockFrom).toDate(), to: moment(mockNow).toDate() });
     });
 
     it('should return correct range when new date is before from and to', () => {
@@ -237,7 +241,8 @@ describe('Component: DatePicker', () => {
 
       expect(dateHelpers.getEndOfDay).not.toHaveBeenCalled();
       expect(dateHelpers.getStartOfDay).toHaveBeenCalledWith(newDate);
-      expect(range).toEqual({ from: 'start-of-day', to });
+      expect(metricsHelpers.roundBoundaries).toHaveBeenCalledWith('start-of-day', to);
+      expect(range).toEqual({ from: moment(mockFrom).toDate(), to: moment(mockNow).toDate() });
     });
 
     it('should return correct range when new date is after from and to', () => {
@@ -250,7 +255,8 @@ describe('Component: DatePicker', () => {
 
       expect(dateHelpers.getEndOfDay).toHaveBeenCalledWith(newDate, { preventFuture: true });
       expect(dateHelpers.getStartOfDay).not.toHaveBeenCalled();
-      expect(range).toEqual({ from, to: 'end-of-day' });
+      expect(metricsHelpers.roundBoundaries).toHaveBeenCalledWith(from, 'end-of-day');
+      expect(range).toEqual({ from: moment(mockFrom).toDate(), to: moment(mockNow).toDate() });
     });
 
     it('should return correct range when from and newDate are the same', () => {
@@ -263,7 +269,8 @@ describe('Component: DatePicker', () => {
 
       expect(dateHelpers.getEndOfDay).toHaveBeenCalledWith(newDate, { preventFuture: true });
       expect(dateHelpers.getStartOfDay).not.toHaveBeenCalled();
-      expect(range).toEqual({ from, to: 'end-of-day' });
+      expect(metricsHelpers.roundBoundaries).toHaveBeenCalledWith(from, 'end-of-day');
+      expect(range).toEqual({ from: moment(mockFrom).toDate(), to: moment(mockNow).toDate() });
     });
 
   });

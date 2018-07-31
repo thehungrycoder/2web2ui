@@ -1,9 +1,15 @@
 import moment from 'moment';
+import { ceil, floor, round } from 'moment-round';
 import _ from 'lodash';
 import { list as METRICS_LIST } from 'src/config/metrics';
 import config from 'src/config';
 import { getRelativeDates, getLocalTimezone } from 'src/helpers/date';
 import { safeDivide, safeRate } from './math';
+
+// hack moment with rounding plugin
+moment.prototype.round = round;
+moment.prototype.ceil = ceil;
+moment.prototype.floor = floor;
 
 const { metricsPrecisionMap: precisionMap, apiDateFormat, chartColors = []} = config;
 const indexedPrecisions = _.keyBy(precisionMap, 'value');
@@ -70,8 +76,75 @@ export function getPrecision(from, to = moment()) {
   return precisionMap.find(({ time }) => diff <= time).value;
 }
 
+export function getMomentPrecision(precision) {
+  return (indexedPrecisions[precision].time <= (60 * 24)) ? 'minutes' : 'hours';
+}
+
 export function getPrecisionType(precision) {
   return (indexedPrecisions[precision].time <= (60 * 24 * 2)) ? 'hours' : 'days';
+}
+
+/**
+ * Round 'from' and 'to' to nearest precision
+ *
+ * @param fromInput
+ * @param toInput
+ * @return {{to: *|moment.Moment, from: *|moment.Moment}}
+ */
+export function roundBoundaries(fromInput, toInput) {
+  let from = moment(fromInput);
+  let to = moment(toInput);
+
+  const precision = getPrecision(from, to);
+  const momentPrecision = getMomentPrecision(precision);
+  const roundInt = _.parseInt(_.words(precision)[0]) || 1;
+  // console.log('roundInt', roundInt);
+  // console.log('precision', precision);
+  // console.log('momentPrecision', momentPrecision);
+
+  // moment-round doesn't handle anything past an hour
+  if (_.includes(['day', 'week', 'month'], precision)) {
+    from = from.endOf(precision);
+    to = to.endOf(precision);
+  }
+  from.ceil(roundInt, momentPrecision);
+  to.ceil(roundInt, momentPrecision);
+  // At hours precision, metrics API is really grabbing data for hh:00:00 to hh:59:59
+  if (momentPrecision === 'hours') { to.subtract(1, 'minutes'); }
+
+  return { to, from };
+}
+
+
+/**
+ * Returns verified from and to dates; throws an error if date range is invalid - catch this to reset to last state
+ *
+ * @param from
+ * @param to
+ * @param now
+ * @return {{to: *|moment.Moment, from: *|moment.Moment}}
+ * */
+export function getValidDateRange(from, to, now) {
+  if (to.isValid() && from.isValid() && from.isBefore(to)) {
+
+    // Use the user's rounded 'to' input if it's less than or equal to 'now' rounded up to the nearest precision,
+    // otherwise use the valid range and precision of ceil(from) to ceil(now).
+    // This is necessary because the precision could change between the user's invalid range, and a valid range.
+    const { from: roundedFromNow, to: roundedNow } = roundBoundaries(from, now);
+    const { from: roundedFrom, to: roundedTo } = roundBoundaries(from, to);
+    // console.log('Is user\'s rounded to:', roundedTo.toDate(), 'same or before rounded now:', roundedNow.toDate());
+
+    if (roundedTo.isSameOrBefore(roundedNow)) {
+      from = roundedFrom;
+      to = roundedTo;
+    } else {
+      from = roundedFromNow;
+      to = roundedNow;
+    }
+    return { from, to };
+  }
+
+  throw new Error('Invalid date range selected');
 }
 
 export function _getMetricsFromKeys(keys = []) {

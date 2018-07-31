@@ -1,5 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`metrics helpers getValidDateRange should throw error when to is after now 1`] = `"Invalid date range selected"`;
+
+exports[`metrics helpers getValidDateRange should throw error when to is before from 1`] = `"Invalid date range selected"`;
+
+exports[`metrics helpers getValidDateRange should throw error with invalid from 1`] = `"Invalid date range selected"`;
+
+exports[`metrics helpers getValidDateRange should throw error with invalid to 1`] = `"Invalid date range selected"`;
+
 exports[`metrics helpers should build common metric options 1`] = `
 Object {
   "campaign": "test",

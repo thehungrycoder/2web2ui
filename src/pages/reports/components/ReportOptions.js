@@ -52,7 +52,7 @@ export class ReportOptions extends Component {
     return reportOptions.filters.length
       ? <Panel.Section>
         <small>Filters:</small>
-        { reportOptions.filters.map((item, index) => <Tag key={index} onRemove={() => this.handleFilterRemove(index)} className={styles.TagWrapper}>{ item.type }: { item.value }</Tag>)}
+        {reportOptions.filters.map((item, index) => <Tag key={index} onRemove={() => this.handleFilterRemove(index)} className={styles.TagWrapper}>{item.type}: {item.value}</Tag>)}
       </Panel.Section>
       : null;
   }
@@ -66,7 +66,7 @@ export class ReportOptions extends Component {
   }
 
   render() {
-    const { typeaheadCache, reportOptions, reportLoading, refreshReportOptions, searchOptions } = this.props;
+    const { typeaheadCache, reportOptions, reportLoading, refreshReportOptions, searchOptions, showPrecision } = this.props;
 
     return (
       <Panel>
@@ -79,6 +79,7 @@ export class ReportOptions extends Component {
                   relativeDateOptions={RELATIVE_DATE_OPTIONS}
                   disabled={reportLoading}
                   onChange={refreshReportOptions}
+                  showPrecision={showPrecision}
                 />
               </div>
             </Grid.Column>

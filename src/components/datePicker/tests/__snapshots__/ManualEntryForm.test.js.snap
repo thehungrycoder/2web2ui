@@ -18,7 +18,7 @@ exports[`Component: DatePicker ManualEntryForm should render correctly by defaul
         placeholder="1970-01-20"
         resize="both"
         type="text"
-        value=""
+        value="2018-01-10"
       />
     </Grid.Column>
     <Grid.Column>
@@ -31,7 +31,7 @@ exports[`Component: DatePicker ManualEntryForm should render correctly by defaul
         placeholder="12:00am"
         resize="both"
         type="text"
-        value=""
+        value="11:00am"
       />
     </Grid.Column>
     <Grid.Column
@@ -53,7 +53,7 @@ exports[`Component: DatePicker ManualEntryForm should render correctly by defaul
         placeholder="1970-01-20"
         resize="both"
         type="text"
-        value=""
+        value="2018-01-15"
       />
     </Grid.Column>
     <Grid.Column>
@@ -66,7 +66,7 @@ exports[`Component: DatePicker ManualEntryForm should render correctly by defaul
         placeholder="12:00am"
         resize="both"
         type="text"
-        value=""
+        value="11:00am"
       />
     </Grid.Column>
   </Grid>

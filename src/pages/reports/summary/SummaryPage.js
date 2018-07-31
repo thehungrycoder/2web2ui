@@ -57,6 +57,7 @@ export class SummaryReportPage extends Component {
         <ReportOptions
           reportLoading={chart.chartLoading}
           searchOptions={summarySearchOptions}
+          showPrecision={true}
         />
 
         <Panel>
