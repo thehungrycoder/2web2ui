@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { reduxForm, Field } from 'redux-form';
 import { Panel, UnstyledLink, Button, Grid } from '@sparkpost/matchbox';
 import { TextFieldWrapper } from 'src/components';
@@ -71,10 +72,9 @@ export class AbTestCreateForm extends Component {
             component={TemplateTypeaheadWrapper}
             label={'Select this test\'s default template'}
             placeholder='Type to search'
-            helpText={<span>We will send this template by default when the test is not running. If you need to create a new template, <UnstyledLink to='#'>head over to the templates page</UnstyledLink>.</span>}
+            helpText={<span>We will send this template by default when the test is not running. If you need to create a new template, <UnstyledLink component={Link} to='/templates'>head over to the templates page</UnstyledLink>.</span>}
             validate={required}
           />
-          <p></p>
         </Panel.Section>
         <Panel.Section>
           <Button submit primary disabled={disabled}>{submitText}</Button>

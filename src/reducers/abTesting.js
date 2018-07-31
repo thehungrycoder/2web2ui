@@ -22,13 +22,13 @@ export default (state = initialState, action) => {
     /* CREATE DRAFT */
 
     case 'CREATE_AB_TEST_DRAFT_PENDING':
-      return { ...state, abTest: {}, createError: null };
+      return { ...state, createError: null };
 
     case 'CREATE_AB_TEST_DRAFT_SUCCESS':
-      return { ...state, abTest: { id: action.payload.id }};
+      return { ...state };
 
     case 'CREATE_AB_TEST_DRAFT_FAIL':
-      return { ...state, abTest: {}, createError: action.payload };
+      return { ...state, createError: action.payload };
 
     default:
       return state;

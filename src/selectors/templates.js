@@ -5,7 +5,7 @@ import { getDomains, isVerified } from 'src/selectors/sendingDomains';
 import { selectSubaccountIdFromProps, selectSubaccountIdFromForm } from 'src/selectors/subaccounts';
 
 export const selectTemplates = (state) => state.templates.list;
-export const selectPublishedTemplates = (state) => _.filter(state.templates.list, (template) => template.published);
+export const selectPublishedTemplates = (state) => _.filter(state.templates.list, (template) => template.has_published);
 export const selectTemplateById = (state, props) => state.templates.byId[props.match.params.id] || { draft: {}, published: {}};
 
 export const selectDraftTemplate = (state, id) => _.get(state, ['templates', 'byId', id, 'draft']);
