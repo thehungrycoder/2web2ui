@@ -32,7 +32,7 @@ describe('A/B Test Create Form Component', () => {
 
   it('should not render subaccount section if subaccounts do not exist', () => {
     wrapper.setProps({ hasSubaccounts: false });
-    expect(wrapper.find({ name: 'subaccount' }).html()).toBe(null);
+    expect(wrapper.find({ name: 'subaccount' })).toHaveLength(0);
   });
 
   it('should handle ID fill', () => {

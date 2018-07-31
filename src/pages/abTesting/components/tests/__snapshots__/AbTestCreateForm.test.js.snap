@@ -1,7 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`A/B Test Create Form Component should not render subaccount section if subaccounts do not exist 1`] = `null`;
-
 exports[`A/B Test Create Form Component should render correctly 1`] = `
 <form
   onSubmit={[MockFunction]}
@@ -49,7 +47,8 @@ exports[`A/B Test Create Form Component should render correctly 1`] = `
         <span>
           We will send this template by default when the test is not running. If you need to create a new template, 
           <UnstyledLink
-            to="#"
+            component={[Function]}
+            to="/templates"
           >
             head over to the templates page
           </UnstyledLink>
@@ -61,7 +60,6 @@ exports[`A/B Test Create Form Component should render correctly 1`] = `
       placeholder="Type to search"
       validate={[Function]}
     />
-    <p />
   </Panel.Section>
   <Panel.Section>
     <Button

@@ -1,19 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Action Creator: A/B Testing should dispatch a create action 1`] = `
-Array [
-  Object {
-    "meta": Object {
-      "data": undefined,
-      "headers": Object {},
-      "method": "POST",
-      "url": "/ab-test",
-    },
-    "type": "CREATE_AB_TEST",
-  },
-]
-`;
-
 exports[`Action Creator: A/B Testing should dispatch a create draft action 1`] = `
 Array [
   Object {
