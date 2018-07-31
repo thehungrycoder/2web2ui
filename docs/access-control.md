@@ -103,7 +103,7 @@ const isCool = ({ account }) => account.isCool
 import { selectCondition } from 'src/selectors/accessConditionState'
 
 const mapStateToProps = (state) => ({
-  isCool: selectCondition(isCool)(state) // will break someday
+  isCool: selectCondition(isCool)(state) // should always work
 })
 
 // Bad, do not do

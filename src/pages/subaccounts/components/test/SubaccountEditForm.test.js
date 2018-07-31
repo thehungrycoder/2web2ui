@@ -28,19 +28,24 @@ test('no ip pools', () => {
   expect(wrapper).toMatchSnapshot();
 });
 
+test('with an assigned ip pool', () => {
+  wrapper.setProps({ ipPool: 'test', restrictedToIpPool: true });
+  expect(wrapper).toMatchSnapshot();
+});
+
 test('cancel button', () => {
   wrapper.setProps({ pristine: false });
   expect(wrapper).toMatchSnapshot();
 });
 
-it('submits correctly', () => {
+test('submits correctly', () => {
   wrapper.find('form').simulate('submit');
   expect(handleSubmit).toHaveBeenCalled();
   wrapper.setProps({ submitting: true });
   expect(wrapper).toMatchSnapshot();
 });
 
-it('should disable all fields when compliance is true', () => {
+test('should disable all fields when compliance is true', () => {
   wrapper.setProps({ compliance: true });
   expect(wrapper).toMatchSnapshot();
 });

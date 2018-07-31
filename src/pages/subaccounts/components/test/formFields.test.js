@@ -4,7 +4,6 @@ import {
   NameField,
   ApiKeyCheckBox,
   ApiKeyFields,
-  IpPoolSelect,
   StatusSelect
 } from '../formFields.js';
 
@@ -47,15 +46,5 @@ test('StatusSelect', () => {
   expect(wrapper).toMatchSnapshot();
 
   wrapper.setProps({ disabled: true, compliance: true });
-  expect(wrapper).toMatchSnapshot();
-});
-
-test('IpPoolSelect', () => {
-  const ipMans = [
-    { id: 'drake', name: 'Mine\'s just bigger is all' },
-    { id: 'kanye', name: 'Still nice' }
-  ];
-  const wrapper = shallow(<IpPoolSelect disabled={false} ipPools={ipMans}/>);
-
   expect(wrapper).toMatchSnapshot();
 });

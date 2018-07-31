@@ -110,17 +110,4 @@ describe('Subaccount selectors', () => {
       expect(selector.selectSubaccountFromQuery(state, props)).toEqual({ name: 'sub 2', id: 501 });
     });
   });
-
-  describe('selectInitialSubaccountValues', () => {
-    it('should return status if not set by compliance', () => {
-      const state = { name: 'subby', ip_pool: 'pool-id', compliance: false, status: 'valid' };
-      expect(selector.selectInitialSubaccountValues(state)).toMatchSnapshot();
-    });
-
-    it('should return status + by SparkPost if set by compliance', () => {
-      const state = { name: 'subby', compliance: true, status: 'terminated' };
-      expect(selector.selectInitialSubaccountValues(state)).toMatchSnapshot();
-    });
-  });
-
 });

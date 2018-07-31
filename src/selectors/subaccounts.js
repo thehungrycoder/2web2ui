@@ -33,14 +33,6 @@ export const selectSubaccountFromQuery = createSelector(
   (subaccounts, id) => _.find(subaccounts, { id: Number(id) })
 );
 
-// changing the status name if set by compliance because it is uneditable
-export const selectInitialSubaccountValues = ({ name, ip_pool = 'default', ...subaccount }) =>
-  ({
-    name,
-    ipPool: ip_pool,
-    status: subaccount.compliance ? `${subaccount.status} by SparkPost` : subaccount.status
-  });
-
 export const selectSubaccountIdFromProps = (state, props) => props.subaccountId;
 
 export const selectSubaccountIdFromForm = (state) => {

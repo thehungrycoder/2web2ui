@@ -5,7 +5,7 @@ import { currentPlanCodeSelector } from 'src/selectors/accountBillingInfo';
 import { ENTERPRISE_PLAN_CODES } from 'src/constants';
 const DEFAULT = 'default';
 
-const getIpPools = (state) => state.ipPools.list;
+export const getIpPools = (state) => state.ipPools.list;
 const selectCurrentPool = ({ ipPools = {}}) => ipPools.pool || {};
 
 export const selectIpsForCurrentPool = createSelector(
@@ -73,4 +73,8 @@ export const selectIpPoolFormInitialValues = createSelector(
  */
 export const shouldShowIpPurchaseCTA = createSelector(
   [currentPlanCodeSelector], (currentPlanCode) => !_.includes(ENTERPRISE_PLAN_CODES, currentPlanCode)
+);
+
+export const selectFirstIpPoolId = createSelector(
+  [getIpPools], (ipPools) => _.get(ipPools, '[0].id')
 );

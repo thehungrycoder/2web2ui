@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { reduxForm } from 'redux-form';
+import { reduxForm, formValueSelector } from 'redux-form';
 
 import { Button, Panel } from '@sparkpost/matchbox';
-import { selectInitialSubaccountValues } from 'src/selectors/subaccounts';
-import { NameField, IpPoolSelect, StatusSelect } from './formFields';
+import { getIpPools } from 'src/selectors/ipPools';
+import { selectFirstIpPoolId } from 'src/selectors/ipPools';
+import { NameField, StatusSelect } from './formFields';
+import IpPoolSelect from './IpPoolSelect';
+import RestrictToIpPoolCheckbox from './RestrictToIpPoolCheckbox';
 
 export class SubaccountEditForm extends Component {
 
@@ -15,23 +18,27 @@ export class SubaccountEditForm extends Component {
       submitting,
       ipPools,
       compliance,
-      reset
+      reset,
+      restrictedToIpPool
     } = this.props;
 
     return (
       <form onSubmit={handleSubmit}>
         <Panel.Section>
           <NameField disabled={submitting || compliance}/>
-
-          { !!ipPools.length && <IpPoolSelect ipPools={ipPools} disabled={submitting || compliance} /> }
-
           <StatusSelect disabled={submitting || compliance} compliance={compliance} />
         </Panel.Section>
+        {Boolean(ipPools.length) && (
+          <Panel.Section>
+            <RestrictToIpPoolCheckbox disabled={submitting || compliance} />
+            {restrictedToIpPool && <IpPoolSelect disabled={submitting || compliance} options={ipPools} />}
+          </Panel.Section>
+        )}
         <Panel.Section>
           <Button submit primary disabled={pristine || submitting || compliance}>
-            { submitting ? 'Updating...' : 'Update' }
+            {submitting ? 'Updating...' : 'Update Subaccount'}
           </Button>
-          { !pristine && <Button style={{ marginLeft: '1em' }} disabled={pristine || submitting} onClick={reset}>Cancel</Button> }
+          {!pristine && <Button style={{ marginLeft: '1em' }} disabled={pristine || submitting} onClick={reset}>Cancel</Button>}
         </Panel.Section>
       </form>
     );
@@ -39,14 +46,21 @@ export class SubaccountEditForm extends Component {
 }
 
 const formName = 'SubaccountEditForm';
+const valueSelector = formValueSelector(formName);
 
 const mapStateToProps = (state, { subaccount }) => {
-  const { compliance } = subaccount;
+  const { compliance, ip_pool, name, status } = subaccount;
 
   return {
-    ipPools: state.ipPools.list,
     compliance,
-    initialValues: selectInitialSubaccountValues(subaccount)
+    ipPools: getIpPools(state),
+    restrictedToIpPool: valueSelector(state, 'restrictedToIpPool'),
+    initialValues: {
+      ipPool: ip_pool || selectFirstIpPoolId(state),
+      name,
+      restrictedToIpPool: Boolean(ip_pool),
+      status: compliance ? `${status} by SparkPost` : status
+    }
   };
 };
 

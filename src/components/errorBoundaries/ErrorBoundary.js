@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { EmptyState } from '@sparkpost/matchbox';
 import { Generic } from 'src/components/images';
-import ErrorTracker from 'src/helpers/errorTracker';
 
 const primaryAction = {
   content: 'Reload Page',
@@ -15,12 +14,11 @@ export default class ErrorBoundary extends Component {
     hasError: false
   }
 
-  componentDidCatch (error, info) {
+  componentDidCatch() {
     this.setState({ hasError: true });
-    ErrorTracker.report({ info }, error);
   }
 
-  render () {
+  render() {
     if (this.state.hasError) {
       return <div style={{ margin: '0 auto', maxWidth: 1080 }}>
         <EmptyState
