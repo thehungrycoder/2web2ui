@@ -177,6 +177,29 @@ Array [
 ]
 `;
 
+exports[`Templates selectors selectPublishedTemplatesBySubaccount should return published templates if no subaccounts exist 1`] = `
+Array [
+  Object {
+    "has_published": true,
+    "name": "publishedSubaccount",
+    "shared_with_subaccounts": false,
+    "subaccount_id": 101,
+  },
+  Object {
+    "has_published": true,
+    "name": "publishedMaster",
+    "shared_with_subaccounts": false,
+    "subaccount_id": 0,
+  },
+  Object {
+    "has_published": true,
+    "name": "publishedShared",
+    "shared_with_subaccounts": true,
+    "subaccount_id": 0,
+  },
+]
+`;
+
 exports[`Templates selectors selectTemplateTestData should return default data 1`] = `
 "{
   \\"substitution_data\\": {},

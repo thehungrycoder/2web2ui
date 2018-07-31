@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 import { listTemplates } from 'src/actions/templates';
-import { selectPublishedTemplates, selectPublishedTemplatesBySubaccount } from 'src/selectors/templates';
-import { hasSubaccounts } from 'src/selectors/subaccounts';
+import { selectPublishedTemplatesBySubaccount } from 'src/selectors/templates';
 import { Typeahead } from './Typeahead';
 import React, { Component } from 'react';
 import Item from './TemplateTypeaheadItem';
@@ -31,9 +30,7 @@ export class TemplateTypeahead extends Component {
 }
 
 function mapStateToProps(state, props) {
-  const templates = hasSubaccounts(state)
-    ? selectPublishedTemplatesBySubaccount(state)
-    : selectPublishedTemplates(state);
+  const templates = selectPublishedTemplatesBySubaccount(state);
   return {
     results: templates,
     hasTemplates: templates.length > 0

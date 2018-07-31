@@ -90,6 +90,9 @@ describe('Templates selectors', () => {
           }
         }
       }
+    },
+    currentUser: {
+      has_subaccounts: true
     }
   };
 
@@ -205,6 +208,11 @@ describe('Templates selectors', () => {
     it('should return published templates for a specific subaccount', () => {
       store.form.abTesting.values.subaccount.id = 101;
       expect(selector.selectPublishedTemplatesBySubaccount(store, { subaccountId: 101 })).toMatchSnapshot();
+    });
+
+    it('should return published templates if no subaccounts exist', () => {
+      store.currentUser.has_subaccounts = false;
+      expect(selector.selectPublishedTemplatesBySubaccount(store)).toMatchSnapshot();
     });
   });
 });

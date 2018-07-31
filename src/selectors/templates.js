@@ -2,7 +2,7 @@ import _ from 'lodash';
 import config from 'src/config';
 import { createSelector } from 'reselect';
 import { getDomains, isVerified } from 'src/selectors/sendingDomains';
-import { selectSubaccountIdFromProps, selectSubaccountIdFromForm } from 'src/selectors/subaccounts';
+import { selectSubaccountIdFromProps, selectSubaccountIdFromForm, hasSubaccounts } from 'src/selectors/subaccounts';
 
 export const selectTemplates = (state) => state.templates.list;
 export const selectPublishedTemplates = (state) => _.filter(state.templates.list, (template) => template.has_published);
@@ -43,8 +43,14 @@ export const selectDomainsBySubaccount = createSelector(
 
 // Selects published templates, filtered by subaccount
 export const selectPublishedTemplatesBySubaccount = createSelector(
-  [selectPublishedTemplates, selectSubaccountIdFromForm],
-  (templates, subaccountId) => _.filter(templates, (template) => subaccountId
-    ? template.shared_with_subaccounts || template.subaccount_id === Number(subaccountId)
-    : !template.subaccount_id)
+  [selectPublishedTemplates, selectSubaccountIdFromForm, hasSubaccounts],
+  (templates, subaccountId, subaccountsExist) => {
+    if (subaccountsExist) {
+      return _.filter(templates, (template) => subaccountId
+        ? template.shared_with_subaccounts || template.subaccount_id === Number(subaccountId)
+        : !template.subaccount_id);
+    } else {
+      return templates;
+    }
+  }
 );
