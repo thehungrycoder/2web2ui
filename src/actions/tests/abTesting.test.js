@@ -14,4 +14,9 @@ describe('Action Creator: A/B Testing', () => {
     mockStore.dispatch(abTesting.listAbTests());
     expect(mockStore.getActions()).toMatchSnapshot();
   });
+
+  it('should dispatch a create draft action', () => {
+    mockStore.dispatch(abTesting.createAbTestDraft({ id: 'ab-test-id' }));
+    expect(mockStore.getActions()).toMatchSnapshot();
+  });
 });

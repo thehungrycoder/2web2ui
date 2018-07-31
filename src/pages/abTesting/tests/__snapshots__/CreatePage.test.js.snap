@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`A/B Test Create Page should render the list page correctly 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "component": [Function],
+      "content": "Back to A/B Tests",
+      "to": "/ab-testing",
+    }
+  }
+  empty={Object {}}
+>
+  <Panel
+    actions={
+      Array [
+        Object {
+          "color": "orange",
+          "content": "Learn more about A/B tests",
+          "external": true,
+          "to": "https://developers.sparkpost.com/api/ab-testing.html",
+        },
+      ]
+    }
+    title="Create a New A/B Test"
+  >
+    <Connect(ReduxForm)
+      onSubmit={[Function]}
+    />
+  </Panel>
+</Page>
+`;
+
+exports[`A/B Test Create Page should show loading component when data is loading 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "component": [Function],
+      "content": "Back to A/B Tests",
+      "to": "/ab-testing",
+    }
+  }
+  empty={Object {}}
+>
+  <Panel
+    actions={
+      Array [
+        Object {
+          "color": "orange",
+          "content": "Learn more about A/B tests",
+          "external": true,
+          "to": "https://developers.sparkpost.com/api/ab-testing.html",
+        },
+      ]
+    }
+    title="Create a New A/B Test"
+  >
+    <Connect(ReduxForm)
+      onSubmit={[Function]}
+    />
+  </Panel>
+</Page>
+`;

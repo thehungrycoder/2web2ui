@@ -2,8 +2,10 @@ import _ from 'lodash';
 import config from 'src/config';
 import { createSelector } from 'reselect';
 import { getDomains, isVerified } from 'src/selectors/sendingDomains';
+import { selectSubaccountIdFromProps, selectSubaccountIdFromForm, hasSubaccounts } from 'src/selectors/subaccounts';
 
 export const selectTemplates = (state) => state.templates.list;
+export const selectPublishedTemplates = (state) => _.filter(state.templates.list, (template) => template.has_published);
 export const selectTemplateById = (state, props) => state.templates.byId[props.match.params.id] || { draft: {}, published: {}};
 
 export const selectDraftTemplate = (state, id) => _.get(state, ['templates', 'byId', id, 'draft']);
@@ -24,8 +26,6 @@ export const selectClonedTemplate = (state, props) => {
   }
 };
 
-const selectSubaccountIdFromProps = (state, props) => props.subaccountId;
-
 // Selects sending domains for From Email typeahead
 export const selectDomainsBySubaccount = createSelector(
   [getDomains, selectSubaccountIdFromProps],
@@ -39,4 +39,18 @@ export const selectDomainsBySubaccount = createSelector(
       ? domain.shared_with_subaccounts || domain.subaccount_id === Number(subaccountId)
       : !domain.subaccount_id;
   })
+);
+
+// Selects published templates, filtered by subaccount
+export const selectPublishedTemplatesBySubaccount = createSelector(
+  [selectPublishedTemplates, selectSubaccountIdFromForm, hasSubaccounts],
+  (templates, subaccountId, subaccountsExist) => {
+    if (subaccountsExist) {
+      return _.filter(templates, (template) => subaccountId
+        ? template.shared_with_subaccounts || template.subaccount_id === Number(subaccountId)
+        : !template.subaccount_id);
+    } else {
+      return templates;
+    }
+  }
 );

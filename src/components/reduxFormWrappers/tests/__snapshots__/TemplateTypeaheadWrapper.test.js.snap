@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TemplateTypeaheadWrapper renders templates typeahead 1`] = `
+<Connect(TemplateTypeahead)
+  label="Start typing"
+  name="example"
+  onChange={[MockFunction]}
+  placeholder="example template"
+  selectedItem="template-one"
+  templates={
+    Array [
+      Object {
+        "value": "template-one",
+      },
+      Object {
+        "value": "template-two",
+      },
+    ]
+  }
+/>
+`;
+
+exports[`TemplateTypeaheadWrapper renders templates typeahead with error 1`] = `
+<Connect(TemplateTypeahead)
+  error="Oh no!"
+  label="Start typing"
+  name="example"
+  placeholder="example template"
+  templates={
+    Array [
+      Object {
+        "value": "template-one",
+      },
+      Object {
+        "value": "template-two",
+      },
+    ]
+  }
+/>
+`;
