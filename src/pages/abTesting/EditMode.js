@@ -92,7 +92,7 @@ export class EditMode extends Component {
             <SettingsContent test={test} />
           </Section.Left>
           <Section.Right>
-            <SettingsFields test={test} formValues={formValues} disabled={submitting} />
+            <SettingsFields formValues={formValues} disabled={submitting} />
           </Section.Right>
         </Section>
 

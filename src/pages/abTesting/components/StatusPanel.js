@@ -12,23 +12,18 @@ import StatusTag from './StatusTag';
 import _ from 'lodash';
 
 const VersionSelector = ({ current, latest, id, subaccountId }) => {
-  if (latest > 1) {
+  const actions = _.times(latest, (i) => ({
+    content: `View Version ${i + 1}`,
+    to: `/ab-testing/${id}/${i + 1}${setSubaccountQuery(subaccountId)}`,
+    component: Link,
+    visible: i + 1 !== current
+  })).reverse();
 
-    const actions = _.times(latest, (i) => ({
-      content: `View Version ${i + 1}`,
-      to: `/ab-testing/${id}/${i + 1}${setSubaccountQuery(subaccountId)}`,
-      component: Link,
-      visible: i + 1 !== current
-    })).reverse();
-
-    return (
-      <Popover left trigger={<Fragment>Version <span>{current}</span> <ExpandMore/></Fragment>}>
-        <ActionList actions={actions}/>
-      </Popover>
-    );
-  }
-
-  return null;
+  return (
+    <Popover left trigger={<Fragment>Version <span>{current}</span> <ExpandMore/></Fragment>}>
+      <ActionList actions={actions}/>
+    </Popover>
+  );
 };
 
 export class StatusPanel extends Component {

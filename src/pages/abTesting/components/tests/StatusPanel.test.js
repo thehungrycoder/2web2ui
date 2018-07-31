@@ -41,6 +41,11 @@ describe('Status Panel Component', () => {
     expect(wrapper.find(Panel.Section).prop('actions')).toEqual(null);
   });
 
+  it('should get a new version when url changes', () => {
+    wrapper.setProps({ version: 3 });
+    expect(props.getAbTest).toHaveBeenCalledWith({ id: 'test_one', subaccountId: 101, version: 3 });
+  });
+
   describe('version selector', () => {
     let versionSelector;
 

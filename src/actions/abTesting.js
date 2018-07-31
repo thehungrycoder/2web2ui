@@ -45,7 +45,7 @@ export function getLatestAbTest({ id, subaccountId }) {
   return getAbTest({ id, subaccountId, type: 'GET_LATEST_AB_TEST' });
 }
 
-export function updateDraft(data, { id, subaccountId } = {}) {
+export function updateDraft(data, { id, subaccountId }) {
   return sparkpostApiRequest({
     type: 'UPDATE_AB_TEST_DRAFT',
     meta: {
@@ -53,16 +53,6 @@ export function updateDraft(data, { id, subaccountId } = {}) {
       url: `/ab-test/draft/${id}`,
       headers: setSubaccountHeader(subaccountId),
       data
-    }
-  });
-}
-
-export function updateScheduled({ id }) {
-  return sparkpostApiRequest({
-    type: 'UPDATE_AB_TEST',
-    meta: {
-      method: 'PUT',
-      url: `/ab-test/${id}`
     }
   });
 }
