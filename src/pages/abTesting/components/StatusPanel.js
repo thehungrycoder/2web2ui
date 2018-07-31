@@ -31,7 +31,7 @@ const VersionSelector = ({ current, latest, id, subaccountId }) => {
   return null;
 };
 
-class StatusPanel extends Component {
+export class StatusPanel extends Component {
   static defaultProps = {
     latest: 0
   }
@@ -51,11 +51,11 @@ class StatusPanel extends Component {
   }
 
   render() {
-    const { test, subaccountId, latest } = this.props;
+    const { test, version, id, subaccountId, latest } = this.props;
     let panelActions = null;
 
     if (latest > 1) {
-      panelActions = [{ content: <VersionSelector current={test.version} id={test.id} latest={latest} subaccountId={subaccountId} />, color: 'orange' }];
+      panelActions = [{ content: <VersionSelector current={version} id={id} latest={latest} subaccountId={subaccountId} />, color: 'orange' }];
     }
 
     return (
@@ -64,7 +64,7 @@ class StatusPanel extends Component {
           <LabelledValue label='Status'>
             <StatusTag status={test.status} />
           </LabelledValue>
-          <LabelledValue label='Test ID' value={test.id} />
+          <LabelledValue label='Test ID' value={id} />
           {subaccountId && <LabelledValue label='Subaccount'><SubaccountTag id={subaccountId} /></LabelledValue>}
         </Panel.Section>
       </Panel>

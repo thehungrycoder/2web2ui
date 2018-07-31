@@ -1,0 +1,259 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Page: A/B Test Edit Mode should render draft status correctly 1`] = `
+<Page
+  empty={Object {}}
+  primaryAction={
+    Object {
+      "content": "Finalize and Schedule Test",
+      "onClick": [Function],
+    }
+  }
+  secondaryActions={
+    Array [
+      Object {
+        "content": <span>
+          <Save />
+           Save as Draft
+        </span>,
+        "onClick": [Function],
+        "visible": true,
+      },
+      Object {
+        "content": "delete content",
+        "onClick": [MockFunction],
+      },
+    ]
+  }
+  title="my ab test 1"
+>
+  <Section
+    title="Status"
+  >
+    <Left>
+      <StatusContent
+        test={
+          Object {
+            "default_template": Object {
+              "template_id": "ab-test-1",
+            },
+            "id": "id-1",
+            "name": "my ab test 1",
+            "status": "draft",
+            "updated_at": "2018-10-21T10:10:10.000Z",
+            "version": "1",
+          }
+        }
+      />
+    </Left>
+    <Right>
+      <withRouter(Connect(StatusPanel))
+        subaccountId="101"
+        test={
+          Object {
+            "default_template": Object {
+              "template_id": "ab-test-1",
+            },
+            "id": "id-1",
+            "name": "my ab test 1",
+            "status": "draft",
+            "updated_at": "2018-10-21T10:10:10.000Z",
+            "version": "1",
+          }
+        }
+      />
+      <StatusFields
+        disabled={false}
+      />
+    </Right>
+  </Section>
+  <Section
+    title="Settings"
+  >
+    <Left>
+      <SettingsContent
+        test={
+          Object {
+            "default_template": Object {
+              "template_id": "ab-test-1",
+            },
+            "id": "id-1",
+            "name": "my ab test 1",
+            "status": "draft",
+            "updated_at": "2018-10-21T10:10:10.000Z",
+            "version": "1",
+          }
+        }
+      />
+    </Left>
+    <Right>
+      <SettingsFields
+        disabled={false}
+        formValues="test values"
+        test={
+          Object {
+            "default_template": Object {
+              "template_id": "ab-test-1",
+            },
+            "id": "id-1",
+            "name": "my ab test 1",
+            "status": "draft",
+            "updated_at": "2018-10-21T10:10:10.000Z",
+            "version": "1",
+          }
+        }
+      />
+    </Right>
+  </Section>
+  <Section
+    title="Variants"
+  >
+    <Left>
+      <VariantsContent
+        test={
+          Object {
+            "default_template": Object {
+              "template_id": "ab-test-1",
+            },
+            "id": "id-1",
+            "name": "my ab test 1",
+            "status": "draft",
+            "updated_at": "2018-10-21T10:10:10.000Z",
+            "version": "1",
+          }
+        }
+      />
+    </Left>
+    <Right />
+  </Section>
+</Page>
+`;
+
+exports[`Page: A/B Test Edit Mode should render scheduled status correctly 1`] = `
+<Page
+  empty={Object {}}
+  primaryAction={
+    Object {
+      "content": "Update Test",
+      "onClick": [Function],
+    }
+  }
+  secondaryActions={
+    Array [
+      Object {
+        "content": <span>
+          <Save />
+           Save as Draft
+        </span>,
+        "onClick": [Function],
+        "visible": false,
+      },
+      Object {
+        "content": "delete content",
+        "onClick": [MockFunction],
+      },
+    ]
+  }
+  title="my ab test 1"
+>
+  <Section
+    title="Status"
+  >
+    <Left>
+      <StatusContent
+        test={
+          Object {
+            "default_template": Object {
+              "template_id": "ab-test-1",
+            },
+            "id": "id-1",
+            "name": "my ab test 1",
+            "status": "scheduled",
+            "updated_at": "2018-10-21T10:10:10.000Z",
+            "version": "1",
+          }
+        }
+      />
+    </Left>
+    <Right>
+      <withRouter(Connect(StatusPanel))
+        subaccountId="101"
+        test={
+          Object {
+            "default_template": Object {
+              "template_id": "ab-test-1",
+            },
+            "id": "id-1",
+            "name": "my ab test 1",
+            "status": "scheduled",
+            "updated_at": "2018-10-21T10:10:10.000Z",
+            "version": "1",
+          }
+        }
+      />
+      <StatusFields
+        disabled={false}
+      />
+    </Right>
+  </Section>
+  <Section
+    title="Settings"
+  >
+    <Left>
+      <SettingsContent
+        test={
+          Object {
+            "default_template": Object {
+              "template_id": "ab-test-1",
+            },
+            "id": "id-1",
+            "name": "my ab test 1",
+            "status": "scheduled",
+            "updated_at": "2018-10-21T10:10:10.000Z",
+            "version": "1",
+          }
+        }
+      />
+    </Left>
+    <Right>
+      <SettingsFields
+        disabled={false}
+        formValues="test values"
+        test={
+          Object {
+            "default_template": Object {
+              "template_id": "ab-test-1",
+            },
+            "id": "id-1",
+            "name": "my ab test 1",
+            "status": "scheduled",
+            "updated_at": "2018-10-21T10:10:10.000Z",
+            "version": "1",
+          }
+        }
+      />
+    </Right>
+  </Section>
+  <Section
+    title="Variants"
+  >
+    <Left>
+      <VariantsContent
+        test={
+          Object {
+            "default_template": Object {
+              "template_id": "ab-test-1",
+            },
+            "id": "id-1",
+            "name": "my ab test 1",
+            "status": "scheduled",
+            "updated_at": "2018-10-21T10:10:10.000Z",
+            "version": "1",
+          }
+        }
+      />
+    </Left>
+    <Right />
+  </Section>
+</Page>
+`;

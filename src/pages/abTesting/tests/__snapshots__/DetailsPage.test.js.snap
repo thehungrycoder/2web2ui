@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Page: A/B Test Details should render correctly and create shared props 1`] = `
+<React.Fragment>
+  <withRouter(Connect(ReduxForm))
+    breadcrumbAction={
+      Object {
+        "component": [Function],
+        "content": "Back to A/B Tests",
+        "to": "/ab-testing",
+      }
+    }
+    deleteAction={
+      Object {
+        "content": <span>
+          <Delete />
+           Delete Test
+        </span>,
+        "onClick": [Function],
+      }
+    }
+    subaccountId="101"
+    test={
+      Object {
+        "default_template": Object {
+          "template_id": "ab-test-1",
+        },
+        "id": "id-1",
+        "name": "my ab test 1",
+        "status": "draft",
+        "updated_at": "2018-10-21T10:10:10.000Z",
+        "version": "1",
+      }
+    }
+  />
+</React.Fragment>
+`;
+
+exports[`Page: A/B Test Details should render error 1`] = `
+<Connect(RedirectAndAlert)
+  alert={
+    Object {
+      "details": "an error",
+      "message": "Unable to load A/B test",
+      "type": "warning",
+    }
+  }
+  to="/ab-testing"
+/>
+`;
+
+exports[`Page: A/B Test Details should render loading 1`] = `<Loading />`;
