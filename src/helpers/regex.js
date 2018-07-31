@@ -6,3 +6,4 @@ export const portRegex = /^([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]
 export const domainRegex = /^(?!:\/\/)([a-z0-9-]+\.)*[a-z0-9][a-z0-9-]+\.[a-z]{2,63}$/i;
 export const newlineStrRegex = /\\r\\n|\\n/g;
 export const spacesRegex = /\s+/g;
+export const abTestIdRegex = /^[a-z0-9_-]+$/i;

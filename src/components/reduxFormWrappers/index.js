@@ -3,4 +3,5 @@ export { default as RadioGroup } from './RadioGroup'; // TODO: rename export to 
 export { default as SelectWrapper } from './SelectWrapper';
 export { default as SendingDomainTypeaheadWrapper } from './SendingDomainTypeaheadWrapper';
 export { default as SubaccountTypeaheadWrapper } from './SubaccountTypeaheadWrapper';
+export { default as TemplateTypeaheadWrapper } from './TemplateTypeaheadWrapper';
 export { default as TextFieldWrapper } from './TextFieldWrapper';

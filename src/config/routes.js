@@ -530,9 +530,17 @@ const routes = [
   {
     path: '/ab-testing',
     component: abTesting.ListPage,
-    condition: hasUiOption('abtests'),
+    condition: all(hasGrants('ab-testing/manage'), hasUiOption('abtests')),
     layout: App,
     title: 'A/B Testing',
+    supportDocsSearch: 'A/B test'
+  },
+  {
+    path: '/ab-testing/create',
+    component: abTesting.CreatePage,
+    condition: all(hasGrants('ab-testing/manage'), hasUiOption('abtests')),
+    layout: App,
+    title: 'Create A/B Test',
     supportDocsSearch: 'A/B test'
   },
   {

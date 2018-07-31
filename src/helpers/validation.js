@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import { formatBytes } from 'src/helpers/units';
-import { emailRegex, emailLocalRegex, domainRegex } from './regex';
+import { emailRegex, emailLocalRegex, domainRegex, abTestIdRegex } from './regex';
 import isURL from 'validator/lib/isURL';
 import Payment from 'payment';
 
@@ -18,6 +18,10 @@ export function emailLocal(value) {
 
 export function domain(value) {
   return domainRegex.test(value) ? undefined : 'Invalid Domain';
+}
+
+export function abTestId(value) {
+  return abTestIdRegex.test(value) ? undefined : 'Must contain only letters, numbers, hyphens, and underscores';
 }
 
 export function hasNumber(value) {
