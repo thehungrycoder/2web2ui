@@ -84,8 +84,6 @@ export class AbTestCreateForm extends Component {
   }
 }
 
-AbTestCreateForm.defaultProps = {};
-
 function mapStateToProps(state) {
   return {
     initialValues: {},
