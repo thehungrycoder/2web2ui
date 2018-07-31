@@ -19,17 +19,6 @@ export default (state = initialState, action) => {
     case 'LIST_AB_TESTS_SUCCESS':
       return { ...state, list: action.payload, listLoading: false };
 
-    /* CREATE */
-
-    case 'CREATE_AB_TEST_PENDING':
-      return { ...state, abTest: {}, createError: null };
-
-    case 'CREATE_AB_TEST_SUCCESS':
-      return { ...state, abTest: { id: action.payload.id }};
-
-    case 'CREATE_AB_TEST_FAIL':
-      return { ...state, abTest: {}, createError: action.payload };
-
     /* CREATE DRAFT */
 
     case 'CREATE_AB_TEST_DRAFT_PENDING':

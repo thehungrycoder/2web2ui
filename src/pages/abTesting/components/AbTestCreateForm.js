@@ -86,7 +86,7 @@ export class AbTestCreateForm extends Component {
 
 AbTestCreateForm.defaultProps = {};
 
-function mapStateToProps(state, props) {
+function mapStateToProps(state) {
   return {
     initialValues: {},
     hasSubaccounts: hasSubaccountsSelector(state)

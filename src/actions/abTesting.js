@@ -12,21 +12,7 @@ export function listAbTests() {
   });
 }
 
-export function createAbTest({ abTest, subaccount = null }) {
-  const headers = setSubaccountHeader(subaccount);
-
-  return sparkpostApiRequest({
-    type: 'CREATE_AB_TEST',
-    meta: {
-      method: 'POST',
-      url: '/ab-test',
-      data: abTest,
-      headers
-    }
-  });
-}
-
-export function createAbTestDraft({ abTest, subaccount = null }) {
+export function createAbTestDraft({ abTest, subaccount }) {
   const headers = setSubaccountHeader(subaccount);
 
   return sparkpostApiRequest({
