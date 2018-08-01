@@ -5,28 +5,28 @@ import EditMode from '../EditMode';
 import ViewMode from '../ViewMode';
 
 describe('Page: A/B Test Details', () => {
-  const props = {
-    error: null,
-    id: 'id-1',
-    version: '1',
-    subaccountId: '101',
-    test: {
-      id: 'id-1',
-      version: '1',
-      name: 'my ab test 1',
-      status: 'draft',
-      default_template: {
-        template_id: 'ab-test-1'
-      },
-      updated_at: '2018-10-21T10:10:10.000Z'
-    },
-    loading: false,
-    getAbTest: jest.fn()
-  };
-
+  let props;
   let wrapper;
 
   beforeEach(() => {
+    props = {
+      error: null,
+      id: 'id-1',
+      version: '1',
+      subaccountId: '101',
+      test: {
+        id: 'id-1',
+        version: '1',
+        name: 'my ab test 1',
+        status: 'draft',
+        default_template: {
+          template_id: 'ab-test-1'
+        },
+        updated_at: '2018-10-21T10:10:10.000Z'
+      },
+      loading: false,
+      getAbTest: jest.fn()
+    };
     wrapper = shallow(<DetailsPage {...props} />);
   });
 

@@ -20,17 +20,32 @@ describe('Action Creator: A/B Testing', () => {
     expect(mockStore.getActions()).toMatchSnapshot();
   });
 
-  it('should dispatch a get test action', () => {
+  it('should dispatch a get test action without subaccount', () => {
+    mockStore.dispatch(abTesting.getAbTest({ id: 'test_one', version: 2 }));
+    expect(mockStore.getActions()).toMatchSnapshot();
+  });
+
+  it('should dispatch a get test action with subaccount', () => {
     mockStore.dispatch(abTesting.getAbTest({ id: 'test_one', version: 2, subaccountId: 101 }));
     expect(mockStore.getActions()).toMatchSnapshot();
   });
 
-  it('should dispatch a get latest test version action', () => {
+  it('should dispatch a get latest test version action without subaccount', () => {
+    mockStore.dispatch(abTesting.getLatestAbTest({ id: 'test_one' }));
+    expect(mockStore.getActions()).toMatchSnapshot();
+  });
+
+  it('should dispatch a get latest test version action with subaccount', () => {
     mockStore.dispatch(abTesting.getLatestAbTest({ id: 'test_one', subaccountId: 101 }));
     expect(mockStore.getActions()).toMatchSnapshot();
   });
 
-  it('should dispatch an update draft action', () => {
+  it('should dispatch an update draft action without subaccount', () => {
+    mockStore.dispatch(abTesting.updateDraft('data', { id: 'test_one' }));
+    expect(mockStore.getActions()).toMatchSnapshot();
+  });
+
+  it('should dispatch an update draft action with subaccount', () => {
     mockStore.dispatch(abTesting.updateDraft('data', { id: 'test_one', subaccountId: 101 }));
     expect(mockStore.getActions()).toMatchSnapshot();
   });

@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getAbTest } from 'src/actions/abTesting';
-import { selectAbTest, selectIdAndVersion } from 'src/selectors/abTesting';
+import { selectAbTestFromParams, selectIdAndVersionFromParams } from 'src/selectors/abTesting';
 import { selectSubaccountIdFromQuery } from 'src/selectors/subaccounts';
 
 import { Loading } from 'src/components';
@@ -24,8 +24,8 @@ export class DetailsPage extends Component {
   }
 
   state = {
-    shouldRedirect: false,
-    showDelete: false
+    shouldRedirect: false
+    // showDelete: false
   }
 
   componentDidMount() {
@@ -41,13 +41,9 @@ export class DetailsPage extends Component {
     }
   }
 
-  toggleDelete = (modal) => {
-    this.setState({ showDelete: !this.state.showDelete });
-  }
-
-  handleDelete = () => {
-    // TODO
-  }
+  // toggleDelete = (modal) => {
+  //   this.setState({ showDelete: !this.state.showDelete });
+  // }
 
   // Actions & other props we want to share with both Edit and View mode
   getSharedProps = () => ({
@@ -90,10 +86,10 @@ export class DetailsPage extends Component {
 
 function mapStateToProps(state, props) {
   return {
-    test: selectAbTest(state, props),
+    test: selectAbTestFromParams(state, props),
     loading: state.abTesting.detailsLoading,
     error: state.abTesting.detailsError,
-    ...selectIdAndVersion(state, props),
+    ...selectIdAndVersionFromParams(state, props),
     subaccountId: selectSubaccountIdFromQuery(state, props)
   };
 }

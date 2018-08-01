@@ -37,15 +37,15 @@ describe('Selectors: abTesting', () => {
   };
 
   it('should selects ID and version from router params', () => {
-    expect(selectors.selectIdAndVersion(state, props)).toMatchSnapshot();
+    expect(selectors.selectIdAndVersionFromParams(state, props)).toMatchSnapshot();
   });
 
   it('should selects a single ab test from router params', () => {
-    expect(selectors.selectAbTest(state, props)).toMatchSnapshot();
+    expect(selectors.selectAbTestFromParams(state, props)).toMatchSnapshot();
   });
 
   it('should selects a single tests latest version number from router params', () => {
-    expect(selectors.selectLatestVersionNumber(state, props)).toMatchSnapshot();
+    expect(selectors.selectLatestVersionNumberFromParams(state, props)).toMatchSnapshot();
   });
 
   it('should generate initial values with all defaults for the edit form correctly', () => {

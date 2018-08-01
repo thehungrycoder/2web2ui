@@ -4,11 +4,12 @@ import StatusFields from '../StatusFields';
 
 describe('Status Fields Component', () => {
   let wrapper;
-  const props = {
-    diabled: false
-  };
+  let props;
 
   beforeEach(() => {
+    props = {
+      diabled: false
+    };
     wrapper = shallow(<StatusFields {...props} />);
   });
 

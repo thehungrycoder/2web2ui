@@ -6,33 +6,33 @@ import { formatFormValues } from 'src/helpers/abTesting';
 jest.mock('src/helpers/abTesting');
 
 describe('Page: A/B Test Edit Mode', () => {
-  const props = {
-    subaccountId: '101',
-    test: {
-      id: 'id-1',
-      version: '1',
-      name: 'my ab test 1',
-      status: 'draft',
-      default_template: {
-        template_id: 'ab-test-1'
-      },
-      updated_at: '2018-10-21T10:10:10.000Z'
-    },
-    getAbTest: jest.fn(),
-    showAlert: jest.fn(),
-    updateDraft: jest.fn(() => Promise.resolve()),
-    deleteAction: {
-      content: 'delete content',
-      onClick: jest.fn()
-    },
-    handleSubmit: jest.fn((a) => a),
-    formValues: 'test values',
-    submitting: false
-  };
-
+  let props;
   let wrapper;
 
   beforeEach(() => {
+    props = {
+      subaccountId: '101',
+      test: {
+        id: 'id-1',
+        version: '1',
+        name: 'my ab test 1',
+        status: 'draft',
+        default_template: {
+          template_id: 'ab-test-1'
+        },
+        updated_at: '2018-10-21T10:10:10.000Z'
+      },
+      getAbTest: jest.fn(),
+      showAlert: jest.fn(),
+      updateDraft: jest.fn(() => Promise.resolve()),
+      deleteAction: {
+        content: 'delete content',
+        onClick: jest.fn()
+      },
+      handleSubmit: jest.fn((a) => a),
+      formValues: 'test values',
+      submitting: false
+    };
     wrapper = shallow(<EditMode {...props} />);
     formatFormValues.mockImplementation((a) => a);
   });

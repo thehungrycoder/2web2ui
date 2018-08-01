@@ -7,26 +7,26 @@ import _ from 'lodash';
 const selectDetails = (state) => state.abTesting.detailsById;
 
 /**
- * Selects ID and version from router query params
+ * Selects ID and version from router params
  */
-export const selectIdAndVersion = (state, props) => ({
+export const selectIdAndVersionFromParams = (state, props) => ({
   id: _.get(props, 'match.params.id'),
   version: _.get(props, 'match.params.version')
 });
 
 /**
- * Selects a single test from router id and version query params
+ * Selects a single test from router id and version params
  */
-export const selectAbTest = createSelector(
-  [selectDetails, selectIdAndVersion],
+export const selectAbTestFromParams = createSelector(
+  [selectDetails, selectIdAndVersionFromParams],
   (details, { id, version }) => _.get(details, `${id}.version_${version}`)
 );
 
 /**
- * Selects a test's latest version number from router id query params
+ * Selects a test's latest version number from router id params
  */
-export const selectLatestVersionNumber = createSelector(
-  [selectDetails, selectIdAndVersion],
+export const selectLatestVersionNumberFromParams = createSelector(
+  [selectDetails, selectIdAndVersionFromParams],
   (details, { id }) => _.get(details, `${id}.latest`)
 );
 
@@ -34,7 +34,7 @@ export const selectLatestVersionNumber = createSelector(
  * Sets up redux-form intialValues for draft and scheduled mode
  */
 export const selectEditInitialValues = createSelector(
-  [selectAbTest],
+  [selectAbTestFromParams],
   (test) => {
 
     // Strip everything that is not editable

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
 import { getAbTest, getLatestAbTest } from 'src/actions/abTesting';
-import { selectLatestVersionNumber, selectIdAndVersion } from 'src/selectors/abTesting';
+import { selectLatestVersionNumberFromParams, selectIdAndVersionFromParams } from 'src/selectors/abTesting';
 import { LabelledValue, SubaccountTag } from 'src/components';
 import { ActionList, Popover, Panel } from '@sparkpost/matchbox';
 import { ExpandMore } from '@sparkpost/matchbox-icons';
@@ -68,7 +68,7 @@ export class StatusPanel extends Component {
 }
 
 const mapStateToProps = (state, props) => ({
-  latest: selectLatestVersionNumber(state, props),
-  ...selectIdAndVersion(state, props)
+  latest: selectLatestVersionNumberFromParams(state, props),
+  ...selectIdAndVersionFromParams(state, props)
 });
 export default withRouter(connect(mapStateToProps, { getAbTest, getLatestAbTest })(StatusPanel));

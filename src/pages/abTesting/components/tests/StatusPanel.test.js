@@ -5,21 +5,22 @@ import { Panel } from '@sparkpost/matchbox';
 
 describe('Status Panel Component', () => {
   let wrapper;
-  const props = {
-    test: {
-      id: 'test_one',
-      version: 4,
-      status: 'running'
-    },
-    latest: 5,
-    id: 'test_one',
-    version: 4,
-    subaccountId: 101,
-    getAbTest: jest.fn(),
-    getLatestAbTest: jest.fn()
-  };
+  let props;
 
   beforeEach(() => {
+    props = {
+      test: {
+        id: 'test_one',
+        version: 4,
+        status: 'running'
+      },
+      latest: 5,
+      id: 'test_one',
+      version: 4,
+      subaccountId: 101,
+      getAbTest: jest.fn(),
+      getLatestAbTest: jest.fn()
+    };
     wrapper = shallow(<StatusPanel {...props} />);
   });
 

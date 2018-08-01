@@ -14,7 +14,7 @@ Array [
 ]
 `;
 
-exports[`Action Creator: A/B Testing should dispatch a get latest test version action 1`] = `
+exports[`Action Creator: A/B Testing should dispatch a get latest test version action with subaccount 1`] = `
 Array [
   Object {
     "meta": Object {
@@ -33,13 +33,47 @@ Array [
 ]
 `;
 
-exports[`Action Creator: A/B Testing should dispatch a get test action 1`] = `
+exports[`Action Creator: A/B Testing should dispatch a get latest test version action without subaccount 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "headers": Object {},
+      "method": "GET",
+      "params": Object {
+        "version": undefined,
+      },
+      "showErrorAlert": false,
+      "url": "/ab-test/test_one",
+    },
+    "type": "GET_LATEST_AB_TEST",
+  },
+]
+`;
+
+exports[`Action Creator: A/B Testing should dispatch a get test action with subaccount 1`] = `
 Array [
   Object {
     "meta": Object {
       "headers": Object {
         "x-msys-subaccount": 101,
       },
+      "method": "GET",
+      "params": Object {
+        "version": 2,
+      },
+      "showErrorAlert": false,
+      "url": "/ab-test/test_one",
+    },
+    "type": "GET_AB_TEST",
+  },
+]
+`;
+
+exports[`Action Creator: A/B Testing should dispatch a get test action without subaccount 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "headers": Object {},
       "method": "GET",
       "params": Object {
         "version": 2,
@@ -65,7 +99,7 @@ Array [
 ]
 `;
 
-exports[`Action Creator: A/B Testing should dispatch an update draft action 1`] = `
+exports[`Action Creator: A/B Testing should dispatch an update draft action with subaccount 1`] = `
 Array [
   Object {
     "meta": Object {
@@ -73,6 +107,20 @@ Array [
       "headers": Object {
         "x-msys-subaccount": 101,
       },
+      "method": "PUT",
+      "url": "/ab-test/draft/test_one",
+    },
+    "type": "UPDATE_AB_TEST_DRAFT",
+  },
+]
+`;
+
+exports[`Action Creator: A/B Testing should dispatch an update draft action without subaccount 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "data": "data",
+      "headers": Object {},
       "method": "PUT",
       "url": "/ab-test/draft/test_one",
     },

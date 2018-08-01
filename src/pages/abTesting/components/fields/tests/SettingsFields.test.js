@@ -4,15 +4,16 @@ import SettingsFields from '../SettingsFields';
 
 describe('Settings Fields Component', () => {
   let wrapper;
-  const props = {
-    diabled: false,
-    formValues: {
-      test_mode: 'bayesian',
-      audience_selection: 'sample_size'
-    }
-  };
+  let props;
 
   beforeEach(() => {
+    props = {
+      diabled: false,
+      formValues: {
+        test_mode: 'bayesian',
+        audience_selection: 'sample_size'
+      }
+    };
     wrapper = shallow(<SettingsFields {...props} />);
   });
 
