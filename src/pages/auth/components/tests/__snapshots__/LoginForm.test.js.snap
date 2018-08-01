@@ -11,6 +11,7 @@ exports[`renders correctly 1`] = `
     id="username"
     label="Email or Username"
     name="username"
+    normalize={[Function]}
     placeholder="email@example.com"
     validate={[Function]}
   />
@@ -56,6 +57,7 @@ exports[`renders correctly when logging in 1`] = `
     id="username"
     label="Email or Username"
     name="username"
+    normalize={[Function]}
     placeholder="email@example.com"
     validate={[Function]}
   />
@@ -102,6 +104,7 @@ exports[`renders correctly when ssoEnabled is true 1`] = `
     id="username"
     label="Email or Username"
     name="username"
+    normalize={[Function]}
     placeholder="email@example.com"
     validate={[Function]}
   />

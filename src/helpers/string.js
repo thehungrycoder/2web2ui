@@ -78,3 +78,7 @@ export function decodeBase64(str) {
     return undefined; // ignore parsing error
   }
 }
+
+export function trimWhitespaces(str) {
+  return _.isString(str) ? str.trim() : str;
+}
