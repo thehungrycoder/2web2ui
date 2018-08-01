@@ -196,3 +196,7 @@ AppDatePicker.propTypes = {
   disabled: PropTypes.bool,
   showPresets: PropTypes.bool
 };
+
+AppDatePicker.defaultProps = {
+  showPrecision: true
+};

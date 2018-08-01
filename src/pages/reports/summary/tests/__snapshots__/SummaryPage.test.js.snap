@@ -5,9 +5,7 @@ exports[`Page: SummaryPage should render correctly 1`] = `
   empty={Object {}}
   title="Summary Report"
 >
-  <withRouter(Connect(ReportOptions))
-    showPrecision={true}
-  />
+  <withRouter(Connect(ReportOptions)) />
   <Panel>
     <Panel.Section
       className="ChartSection"
@@ -61,7 +59,6 @@ exports[`Page: SummaryPage should render when loading 1`] = `
 >
   <withRouter(Connect(ReportOptions))
     reportLoading={true}
-    showPrecision={true}
   />
   <Panel>
     <Panel.Section
