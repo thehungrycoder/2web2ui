@@ -1,0 +1,9 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.Right {
+  margin-top: spacing();
+
+  @media screen and (min-width: breakpoint(medium)) {
+    margin-top: rem(-42);
+  }
+}

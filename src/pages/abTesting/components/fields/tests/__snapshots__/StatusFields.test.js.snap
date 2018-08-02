@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Status Fields Component should disable fields correctly 1`] = `
+<React.Fragment>
+  <Panel
+    sectioned={true}
+  >
+    <Field
+      component={[Function]}
+      disabled={true}
+      label="Test Name"
+      name="name"
+    />
+  </Panel>
+  <Panel
+    sectioned={true}
+  >
+    <Field
+      component={[Function]}
+      disabled={true}
+      helpText="A test may run for a maximum of 30 days"
+      label="When should we run this test?"
+      name="dates"
+      placeholder="Jul 31st 2018 11:02am – Aug 1st 2018 11:02am"
+    />
+  </Panel>
+</React.Fragment>
+`;
+
+exports[`Status Fields Component should render correctly 1`] = `
+<React.Fragment>
+  <Panel
+    sectioned={true}
+  >
+    <Field
+      component={[Function]}
+      label="Test Name"
+      name="name"
+    />
+  </Panel>
+  <Panel
+    sectioned={true}
+  >
+    <Field
+      component={[Function]}
+      helpText="A test may run for a maximum of 30 days"
+      label="When should we run this test?"
+      name="dates"
+      placeholder="Jul 31st 2018 11:02am – Aug 1st 2018 11:02am"
+    />
+  </Panel>
+</React.Fragment>
+`;

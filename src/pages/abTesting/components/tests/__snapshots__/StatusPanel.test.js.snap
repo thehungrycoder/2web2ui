@@ -1,0 +1,100 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Status Panel Component should render draft and get latest on mount 1`] = `
+<Panel>
+  <Panel.Section
+    actions={
+      Array [
+        Object {
+          "color": "orange",
+          "content": <VersionSelector
+            current={4}
+            id="test_one"
+            latest={5}
+            subaccountId={101}
+          />,
+        },
+      ]
+    }
+  >
+    <LabelledValue
+      label="Status"
+    >
+      <StatusTag
+        status="running"
+      />
+    </LabelledValue>
+    <LabelledValue
+      label="Test ID"
+      value="test_one"
+    />
+    <LabelledValue
+      label="Subaccount"
+    >
+      <SubaccountTag
+        all={false}
+        id={101}
+        isDefault={false}
+        master={false}
+        receiveAll={false}
+      />
+    </LabelledValue>
+  </Panel.Section>
+</Panel>
+`;
+
+exports[`Status Panel Component version selector should render correctly 1`] = `
+<Popover
+  bottom={true}
+  left={true}
+  right={true}
+  trigger={
+    <React.Fragment>
+      Version 
+      <span>
+        4
+      </span>
+       
+      <ExpandMore />
+    </React.Fragment>
+  }
+>
+  <ActionList
+    actions={
+      Array [
+        Object {
+          "component": [Function],
+          "content": "View Version 5",
+          "to": "/ab-testing/test_one/5?subaccount=101",
+          "visible": true,
+        },
+        Object {
+          "component": [Function],
+          "content": "View Version 4",
+          "to": "/ab-testing/test_one/4?subaccount=101",
+          "visible": false,
+        },
+        Object {
+          "component": [Function],
+          "content": "View Version 3",
+          "to": "/ab-testing/test_one/3?subaccount=101",
+          "visible": true,
+        },
+        Object {
+          "component": [Function],
+          "content": "View Version 2",
+          "to": "/ab-testing/test_one/2?subaccount=101",
+          "visible": true,
+        },
+        Object {
+          "component": [Function],
+          "content": "View Version 1",
+          "to": "/ab-testing/test_one/1?subaccount=101",
+          "visible": true,
+        },
+      ]
+    }
+    groupByKey="section"
+  />
+</Popover>
+`;

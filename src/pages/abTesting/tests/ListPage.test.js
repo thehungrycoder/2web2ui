@@ -9,6 +9,7 @@ describe('Page: A/B Test List', () => {
     abTests: [
       {
         id: 'id-1',
+        version: '1',
         name: 'my ab test 1',
         status: 'scheduled',
         default_template: {
@@ -18,6 +19,7 @@ describe('Page: A/B Test List', () => {
       },
       {
         id: 'id-2',
+        version: '2',
         name: 'my ab test 2',
         status: 'running',
         default_template: {
@@ -27,6 +29,7 @@ describe('Page: A/B Test List', () => {
       },
       {
         id: 'id-3',
+        version: '3',
         name: 'my ab test 3',
         status: 'completed',
         winning_template_id: 'ab-test-winner',

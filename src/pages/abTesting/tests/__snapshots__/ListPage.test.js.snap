@@ -109,6 +109,7 @@ exports[`Page: A/B Test List should render happy path 1`] = `
           "name": "my ab test 1",
           "status": "scheduled",
           "updated_at": "2018-10-21T10:10:10.000Z",
+          "version": "1",
         },
         Object {
           "default_template": Object {
@@ -118,6 +119,7 @@ exports[`Page: A/B Test List should render happy path 1`] = `
           "name": "my ab test 2",
           "status": "running",
           "updated_at": "2018-10-22T10:10:10.000Z",
+          "version": "2",
         },
         Object {
           "default_template": Object {
@@ -127,6 +129,7 @@ exports[`Page: A/B Test List should render happy path 1`] = `
           "name": "my ab test 3",
           "status": "completed",
           "updated_at": "2018-10-23T10:10:10.000Z",
+          "version": "3",
           "winning_template_id": "ab-test-winner",
         },
       ]
@@ -146,7 +149,7 @@ Array [
       <strong>
         <UnstyledLink
           component={[Function]}
-          to="/ab-testing/id-1"
+          to="/ab-testing/id-1/1"
         >
           my ab test 1
         </UnstyledLink>
@@ -201,12 +204,14 @@ Array [
               "component": [Function],
               "content": "Edit Test",
               "section": 1,
-              "to": "/ab-testing/id-1",
+              "to": "/ab-testing/id-1/1",
               "visible": true,
             },
             Object {
+              "component": [Function],
               "content": "View Test",
               "section": 1,
+              "to": "/ab-testing/id-1/1",
               "visible": false,
             },
             Object {

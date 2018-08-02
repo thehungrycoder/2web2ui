@@ -22,4 +22,8 @@ describe('Status Tag Component', () => {
   it('should render completed', () => {
     expect(shallow(<StatusTag status={'completed'}/>)).toMatchSnapshot();
   });
+
+  it('should not render if status is undefined', () => {
+    expect(shallow(<StatusTag />).html()).toBe(null);
+  });
 });

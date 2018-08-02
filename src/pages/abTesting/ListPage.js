@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { setSubaccountQuery } from 'src/helpers/subaccounts';
 
 // Actions
 import { listAbTests } from 'src/actions/abTesting';
@@ -27,6 +28,10 @@ export class ListPage extends Component {
     this.props.listAbTests();
   }
 
+  getDetailsLink = ({ id, version, subaccount_id }) => {
+    return `/ab-testing/${id}/${version}${setSubaccountQuery(subaccount_id)}`;
+  }
+
   getColumns() {
     const columns = [
       { label: 'Name', sortKey: 'name' },
@@ -39,18 +44,19 @@ export class ListPage extends Component {
     return columns;
   }
 
-  getRowData({ id, name, status, updated_at, default_template, winning_template_id }) {
-
+  getRowData = ({ id, version, subaccount_id, name, status, updated_at, default_template, winning_template_id }) => {
     const actions = [
       {
         content: 'Edit Test',
-        to: `/ab-testing/${id}`,
+        to: this.getDetailsLink({ id, version, subaccount_id }),
         component: Link,
         visible: status === 'scheduled' || status === 'draft',
         section: 1
       },
       {
         content: 'View Test',
+        to: this.getDetailsLink({ id, version, subaccount_id }),
+        component: Link,
         visible: status === 'running' || status === 'cancelled' || status === 'completed',
         section: 1
       },
@@ -77,7 +83,7 @@ export class ListPage extends Component {
     return [
       <Fragment>
         <p className={styles.Name}>
-          <strong><UnstyledLink to={`/ab-testing/${id}`} component={Link}>{name}</UnstyledLink></strong>
+          <strong><UnstyledLink to={this.getDetailsLink({ id, version, subaccount_id })} component={Link}>{name}</UnstyledLink></strong>
         </p>
         <p className={styles.Id}>ID: {id}</p>
       </Fragment>,
