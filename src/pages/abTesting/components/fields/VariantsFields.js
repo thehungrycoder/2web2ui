@@ -25,7 +25,7 @@ const SampleSizeField = ({ namespace, ...props }) => (
 /*
   If you're looking at this, refer to https://redux-form.com/7.4.2/examples/fieldarrays/
  */
-const RenderVariants = ({ fields, formValues }) => (
+const RenderVariants = ({ fields, formValues, disabled }) => (
   <Panel>
     {fields.map((variant, i) => (
       <Panel.Section key={i}>
@@ -42,13 +42,14 @@ const RenderVariants = ({ fields, formValues }) => (
               component={TemplateTypeaheadWrapper}
               label='Select a template'
               placeholder='Type to search'
+              disabled={disabled}
             />
           </Grid.Column>
           <Grid.Column>
             {
               formValues.audience_selection === 'sample_size'
-                ? <SampleSizeField namespace={variant}/>
-                : <PercentField namespace={variant}/>
+                ? <SampleSizeField namespace={variant} disabled={disabled} />
+                : <PercentField namespace={variant} disabled={disabled} />
             }
           </Grid.Column>
         </Grid>
@@ -73,18 +74,19 @@ const VariantsFields = ({ disabled, formValues }) => (
             component={TemplateTypeaheadWrapper}
             label='Select a default template'
             placeholder='Type to search'
+            disabled={disabled}
           />
         </Grid.Column>
         <Grid.Column>
           {
             formValues.audience_selection === 'sample_size'
-              ? <SampleSizeField namespace='default_template'/>
-              : <PercentField namespace='default_template'/>
+              ? <SampleSizeField namespace='default_template' disabled={disabled} />
+              : <PercentField namespace='default_template' disabled={disabled} />
           }
         </Grid.Column>
       </Grid>
     </Panel>
-    <FieldArray name='variants' component={RenderVariants} formValues={formValues} />
+    <FieldArray name='variants' component={RenderVariants} formValues={formValues} disabled={disabled} />
 
     {/* This is a temporary hack to make sure at least some of the last typeahead is visible on screen */}
     <div style={{ height: '200px' }} />
