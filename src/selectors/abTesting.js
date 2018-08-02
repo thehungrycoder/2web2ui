@@ -1,6 +1,7 @@
 import { selectTemplates } from 'src/selectors/templates';
 import { createSelector } from 'reselect';
 import _ from 'lodash';
+import moment from 'moment';
 
 /**
  * Selects all A/B test details, which are keyed by ID
@@ -39,21 +40,27 @@ export const selectEditInitialValues = createSelector(
   (test, templates) => {
 
     // Strip everything that is not editable, or what will be reshaped
-    const values = _.omit(test, ['created_at', 'updated_at', 'id', 'status', 'version' ]);
+    const values = _.omit(test, ['created_at', 'updated_at', 'id', 'status', 'version', 'start_time', 'end_time', 'variants', 'default_template' ]);
 
-    // Find template for the typeahead
+    // Find default template
     const default_template = {
       template_object: _.find(templates, ({ id }) => id === test.default_template.template_id),
-      sample_size: values.default_template.sample_size,
-      percent: values.default_template.percent
+      sample_size: test.default_template.sample_size,
+      percent: test.default_template.percent
     };
 
     // Finds each variants' template
-    const variants = _.map(values.variants, ({ sample_size, percent, template_id: variantId }, i) => ({
+    const variants = _.map(test.variants, ({ sample_size, percent, template_id: variantId }, i) => ({
       template_object: _.find(templates, ({ id }) => id === variantId),
       sample_size,
       percent
     }));
+
+    // Reshape dates and sets defaults
+    const dates = {
+      from: test.start_time ? new Date(test.start_time) : moment().add(1, 'd').toDate(),
+      to: test.end_time ? new Date(test.end_time) : moment().add(8, 'd').toDate()
+    };
 
     return {
       // Set defaults values first
@@ -66,6 +73,7 @@ export const selectEditInitialValues = createSelector(
       // Apply values to overwrite defaults
       ...values,
 
+      dates,
       default_template,
 
       // If no variants exist, produce at least one visible set of fields

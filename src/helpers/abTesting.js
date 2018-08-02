@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
 // Formats redux-form values before passing to API
-export const formatFormValues = (values) => {
+export const formatFormValues = ({ default_template, variants, dates, ...values }) => {
   let formattedValues = values;
 
   if (values.test_mode === 'learning') {
@@ -12,8 +12,11 @@ export const formatFormValues = (values) => {
     formattedValues = _.omit(formattedValues, 'total_sample_size');
   }
 
-  formattedValues.default_template = formatTemplateObject(values.default_template);
-  formattedValues.variants = values.variants.map(formatTemplateObject);
+  formattedValues.default_template = formatTemplateObject(default_template);
+  formattedValues.variants = variants.map(formatTemplateObject);
+
+  formattedValues.start_time = dates.from;
+  formattedValues.end_time = dates.to;
 
   return formattedValues;
 };
