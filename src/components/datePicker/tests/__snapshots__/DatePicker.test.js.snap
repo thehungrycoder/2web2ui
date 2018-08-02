@@ -17,6 +17,7 @@ exports[`Component: DatePicker handleFormDates should use a date field format if
     />
   }
   disabled={false}
+  labelHidden={true}
   onClick={[MockFunction]}
   readOnly={true}
   resize="both"
