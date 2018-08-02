@@ -31,7 +31,7 @@ exports[`SuppressionSearch renders correctly 1`] = `
             "custom",
           ]
         }
-        showPrecision={true}
+        roundToPrecision={true}
         to={2018-02-15T12:00:00.000Z}
       />
     </div>

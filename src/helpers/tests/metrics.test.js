@@ -99,39 +99,39 @@ describe('metrics helpers', () => {
       },
       {
         timeLabel: '5min',
-        from: '2016-12-18T10:01',
+        from: '2016-12-18T10:09',
         to: '2016-12-18T12:01',
         expected: { from: '2016-12-18T10:05', to: '2016-12-18T12:05' }
       },
       {
         timeLabel: '15min',
-        from: '2016-12-18T06:01',
+        from: '2016-12-18T06:29',
         to: '2016-12-18T10:01',
         expected: { from: '2016-12-18T06:15', to: '2016-12-18T10:15' }
       },
       {
         timeLabel: 'hour',
-        from: '2016-12-16T10:01',
+        from: '2016-12-16T10:59',
         to: '2016-12-18T10:01',
-        expected: { from: '2016-12-16T11:00', to: '2016-12-18T10:59' }
+        expected: { from: '2016-12-16T10:00', to: '2016-12-18T10:59' }
       },
       {
         timeLabel: 'day',
-        from: '2016-11-15T10:01',
+        from: '2016-11-15T10:59',
         to: '2016-12-18T10:01',
-        expected: { from: '2016-11-16T00:00', to: '2016-12-18T23:59' }
+        expected: { from: '2016-11-15T10:00', to: '2016-12-18T10:59' }
       },
       {
         timeLabel: 'week',
-        from: '2016-06-21T10:01',
+        from: '2016-06-21T10:59',
         to: '2016-12-18T10:02',
-        expected: { from: '2016-06-26T00:00', to: '2016-12-24T23:59' }
+        expected: { from: '2016-06-21T10:00', to: '2016-12-18T10:59' }
       },
       {
         timeLabel: 'month',
-        from: '2016-02-18T10:01',
+        from: '2016-02-18T10:59',
         to: '2016-12-18T10:02',
-        expected: { from: '2016-03-01T00:00', to: '2016-12-31T23:59' }
+        expected: { from: '2016-02-18T10:00', to: '2016-12-18T10:59' }
       }
     ];
 
@@ -199,27 +199,51 @@ describe('metrics helpers', () => {
 
     const invalidCases = [
       {
+        name: 'with undefined to',
+        from: moment('2018-01-15')
+      },
+      {
+        name: 'with undefined from',
+        to: moment('2017-12-15')
+      },
+      {
         name: 'with invalid to',
-        to: 'garbage'
+        to: 'garbage',
+        from: moment('2018-01-15')
       },
       {
         name: 'with invalid from',
+        to: moment('2017-12-15'),
         from: 'garbage'
       },
       {
+        name: 'with invalid now',
+        from: moment('2018-01-15'),
+        to: moment('2017-12-15'),
+        now: 'garbage'
+      },
+      {
         name: 'when to is before from',
-        from: '2018-01-15',
-        to: '2017-12-15'
+        from: moment('2018-01-15'),
+        to: moment('2017-12-15')
       },
       {
         name: 'when to is after now',
-        to: '2018-02-15'
+        from: moment('2018-01-15'),
+        to: moment('2018-02-15'),
+        now: moment('2018-02-00')
+      },
+      {
+        name: 'when to is after now (without rounding)',
+        from: moment('2018-01-15'),
+        to: moment('2018-02-15'),
+        now: moment('2018-02-00'),
+        roundToPrecision: false
       }
     ];
 
-    cases('should throw error', ({ from, to, now }) => {
-      const params = _.map([from, to, now], (date) => moment(date));
-      const getInvalidDateRange = () => metricsHelpers.getValidDateRange(...params);
+    cases('should throw error', ({ from, to, now, roundToPrecision = true }) => {
+      const getInvalidDateRange = () => metricsHelpers.getValidDateRange({ from, to, now, roundToPrecision });
       expect(getInvalidDateRange).toThrowErrorMatchingSnapshot();
     }, invalidCases);
 
@@ -228,7 +252,24 @@ describe('metrics helpers', () => {
       const to = moment('2018-01-16T11:59Z');
       const now = moment('2018-02-01T11:00Z');
 
-      const validRange = metricsHelpers.getValidDateRange(from, to, now);
+      const validRange = metricsHelpers.getValidDateRange({ from, to, now, roundToPrecision: true });
+      expect(validRange).toEqual({ from, to });
+    });
+
+    it('should use input range if valid, when not rounding', () => {
+      const from = moment('2018-01-15T11:00Z');
+      const to = moment('2018-01-16T11:33Z');
+      const now = moment('2018-02-01T11:33Z');
+
+      const validRange = metricsHelpers.getValidDateRange({ from, to, now, roundToPrecision: false });
+      expect(validRange).toEqual({ from, to });
+    });
+
+    it('should use input range if valid when "now" is not provided', () => {
+      const from = moment('2018-01-15T11:00Z');
+      const to = moment('2018-01-16T11:59Z');
+
+      const validRange = metricsHelpers.getValidDateRange({ from, to, roundToPrecision: true });
       expect(validRange).toEqual({ from, to });
     });
 
@@ -237,7 +278,7 @@ describe('metrics helpers', () => {
       const to = moment('2018-01-19T11:59Z'); // would use day precision if valid
       const now = moment('2018-01-15T11:23Z'); // will instead use minute precision
 
-      const validRange = metricsHelpers.getValidDateRange(from, to, now);
+      const validRange = metricsHelpers.getValidDateRange({ from, to, now, roundToPrecision: true });
       expect(validRange).toEqual({ from, to: now });
     });
 
@@ -246,7 +287,7 @@ describe('metrics helpers', () => {
       const to = moment('2018-01-17T10:59Z');
       const now = moment('2018-01-16T11:23Z');
 
-      const validRange = metricsHelpers.getValidDateRange(from, to, now);
+      const validRange = metricsHelpers.getValidDateRange({ from, to, now, roundToPrecision: true });
       expect(validRange.from).toEqual(from);
       expect(validRange.to.toISOString()).toEqual(moment('2018-01-16T11:59Z').toISOString());
     });
@@ -256,7 +297,7 @@ describe('metrics helpers', () => {
       const to = moment('2018-01-19T11:27Z');
       const now = moment('2018-01-19T11:23Z');
 
-      const validRange = metricsHelpers.getValidDateRange(from, to, now);
+      const validRange = metricsHelpers.getValidDateRange({ from, to, now, roundToPrecision: true });
       expect(validRange.from).toEqual(from);
       expect(validRange.to.toISOString()).toEqual(moment('2018-01-19T11:59Z').toISOString());
     });

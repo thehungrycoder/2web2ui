@@ -91,8 +91,12 @@ export default class AppDatePicker extends Component {
       ? to = getEndOfDay(newDate, { preventFuture: true })
       : from = getStartOfDay(newDate);
 
-    const rounded = roundBoundaries(from, to);
-    return { from: rounded.from.toDate(), to: rounded.to.toDate() };
+    if (this.props.roundToPrecision) {
+      const rounded = roundBoundaries(from, to);
+      from = rounded.from.toDate();
+      to = rounded.to.toDate();
+    }
+    return { from, to };
   }
 
   handleSelectRange = (e) => {
@@ -127,7 +131,7 @@ export default class AppDatePicker extends Component {
       datePickerProps = {},
       textFieldProps = {},
       dateFieldFormat,
-      showPrecision
+      roundToPrecision
       showPresets = true,
       left
     } = this.props;
@@ -174,7 +178,7 @@ export default class AppDatePicker extends Component {
           {...datePickerProps}
         />
 
-        <ManualEntryForm selectDates={this.handleFormDates} onEnter={this.handleKeyDown} to={to} from={from} showPrecision={showPrecision}/>
+        <ManualEntryForm selectDates={this.handleFormDates} onEnter={this.handleKeyDown} to={to} from={from} roundToPrecision={roundToPrecision}/>
         <Button primary onClick={this.handleSubmit} className={styles.Apply}>Apply</Button>
         <Button onClick={this.cancelDatePicker}>Cancel</Button>
         <WindowEvent event='keydown' handler={this.handleKeyDown} />
@@ -189,7 +193,7 @@ AppDatePicker.propTypes = {
   to: PropTypes.instanceOf(Date),
   relativeRange: PropTypes.string,
   relativeDateOptions: PropTypes.arrayOf(PropTypes.string),
-  showPrecision: PropTypes.bool,
+  roundToPrecision: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
   datePickerProps: PropTypes.object,
   dateFieldFormat: PropTypes.string,
@@ -198,5 +202,5 @@ AppDatePicker.propTypes = {
 };
 
 AppDatePicker.defaultProps = {
-  showPrecision: true
+  roundToPrecision: true
 };

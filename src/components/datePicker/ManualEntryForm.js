@@ -61,10 +61,10 @@ export default class ManualEntryForm extends Component {
     const from = parseDatetime(this.state.fromDate, this.state.fromTime);
     const to = parseDatetime(this.state.toDate, this.state.toTime);
     // allow for prop-level override of "now" (DI, etc.)
-    const { now = moment() } = this.props;
+    const { now, roundToPrecision } = this.props;
 
     try {
-      const { to: roundedTo, from: roundedFrom } = getValidDateRange(from, to, now);
+      const { to: roundedTo, from: roundedFrom } = getValidDateRange({ from, to, now, roundToPrecision });
       return this.props.selectDates({ to: roundedTo.toDate(), from: roundedFrom.toDate() }, () => {
         if (e && e.key === 'Enter') {
           this.props.onEnter(e);
@@ -79,23 +79,25 @@ export default class ManualEntryForm extends Component {
 
   render() {
     const { toDate, toTime, fromDate, fromTime } = this.state;
+    const { roundToPrecision } = this.props;
 
+    let precisionLabel = null;
     let precisionLabelValue;
     const from = parseDatetime(fromDate, fromTime);
     const to = parseDatetime(toDate, toTime);
 
-    try {
-      // allow for prop-level override of "now" (DI, etc.)
-      const { now = moment() } = this.props;
-      const { from: validatedFrom, to: validatedTo } = getValidDateRange(from, to, now);
-      precisionLabelValue = _.upperFirst(getPrecision(validatedFrom, validatedTo));
-    } catch (e) {
-      precisionLabelValue = '';
-    }
+    if (roundToPrecision) {
+      try {
+        // allow for prop-level override of "now" (DI, etc.)
+        const { now = moment() } = this.props;
+        const { from: validatedFrom, to: validatedTo } = getValidDateRange({ from, to, now, roundToPrecision });
+        precisionLabelValue = _.upperFirst(getPrecision(validatedFrom, validatedTo));
+      } catch (e) {
+        precisionLabelValue = '';
+      }
 
-    const precisionLabel = this.props.showPrecision
-      ? <div className={styles.PrecisionLabel}>Precision: {precisionLabelValue}</div>
-      : null;
+      precisionLabel = <div className={styles.PrecisionLabel}>Precision: {precisionLabelValue}</div>;
+    }
 
     return (
       <form onKeyDown={this.handleEnter} className={styles.DateFields}>

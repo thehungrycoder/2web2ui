@@ -43,7 +43,7 @@ exports[`Component: MessageEventsSearch renders correctly 1`] = `
               "custom",
             ]
           }
-          showPrecision={true}
+          roundToPrecision={false}
           to={2018-02-15T12:00:00.000Z}
         />
       </Grid.Column>

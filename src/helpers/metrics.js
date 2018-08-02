@@ -92,22 +92,14 @@ export function getPrecisionType(precision) {
  * @return {{to: *|moment.Moment, from: *|moment.Moment}}
  */
 export function roundBoundaries(fromInput, toInput) {
-  let from = moment(fromInput);
-  let to = moment(toInput);
+  const from = moment(fromInput);
+  const to = moment(toInput);
 
   const precision = getPrecision(from, to);
   const momentPrecision = getMomentPrecision(precision);
   const roundInt = _.parseInt(_.words(precision)[0]) || 1;
-  // console.log('roundInt', roundInt);
-  // console.log('precision', precision);
-  // console.log('momentPrecision', momentPrecision);
 
-  // moment-round doesn't handle anything past an hour
-  if (_.includes(['day', 'week', 'month'], precision)) {
-    from = from.endOf(precision);
-    to = to.endOf(precision);
-  }
-  from.ceil(roundInt, momentPrecision);
+  from.floor(roundInt, momentPrecision);
   to.ceil(roundInt, momentPrecision);
   // At hours precision, metrics API is really grabbing data for hh:00:00 to hh:59:59
   if (momentPrecision === 'hours') { to.subtract(1, 'minutes'); }
@@ -122,11 +114,16 @@ export function roundBoundaries(fromInput, toInput) {
  * @param from
  * @param to
  * @param now
- * @return {{to: *|moment.Moment, from: *|moment.Moment}}
- * */
-export function getValidDateRange(from, to, now) {
-  if (to.isValid() && from.isValid() && from.isBefore(to)) {
+ * @param roundToPrecision
+ * @return {*}
+ */
+export function getValidDateRange({ from, to, now = moment(), roundToPrecision }) {
+  // If we're not rounding, just check that 'to' is before 'now'
+  const nonRoundCondition = () => roundToPrecision ? true : to.isBefore(now);
+  const validDates = _.every(_.map([from, to, now], (date) => moment.isMoment(date) && date.isValid()));
 
+  if (validDates && from.isBefore(to) && nonRoundCondition()) {
+    if (!roundToPrecision) { return { from, to }; }
     // Use the user's rounded 'to' input if it's less than or equal to 'now' rounded up to the nearest precision,
     // otherwise use the valid range and precision of ceil(from) to ceil(now).
     // This is necessary because the precision could change between the user's invalid range, and a valid range.

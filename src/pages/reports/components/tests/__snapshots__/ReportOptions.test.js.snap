@@ -35,7 +35,7 @@ exports[`Component: Report Options should mount and render correctly 1`] = `
               ]
             }
             relativeRange="day"
-            showPrecision={true}
+            roundToPrecision={true}
             to={2018-02-15T12:00:00.000Z}
           />
         </div>
@@ -114,7 +114,7 @@ exports[`Component: Report Options with active filters should render 1`] = `
               ]
             }
             relativeRange="day"
-            showPrecision={true}
+            roundToPrecision={true}
             to={2018-02-15T12:00:00.000Z}
           />
         </div>
