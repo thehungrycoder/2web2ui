@@ -544,6 +544,14 @@ const routes = [
     supportDocsSearch: 'A/B test'
   },
   {
+    path: '/ab-testing/:id/:version',
+    component: abTesting.DetailsPage,
+    condition: all(hasGrants('ab-testing/manage'), hasUiOption('abtests')),
+    layout: App,
+    title: 'A/B Testing',
+    supportDocsSearch: 'A/B test'
+  },
+  {
     path: '/onboarding/plan',
     component: onboarding.ChoosePlan,
     condition: configFlag('featureFlags.has_signup'),

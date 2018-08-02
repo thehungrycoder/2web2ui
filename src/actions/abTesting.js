@@ -25,3 +25,34 @@ export function createAbTestDraft({ abTest, subaccount }) {
     }
   });
 }
+
+export function getAbTest({ id, version, subaccountId, type = 'GET_AB_TEST' }) {
+  return sparkpostApiRequest({
+    type,
+    meta: {
+      method: 'GET',
+      url: `/ab-test/${id}`,
+      showErrorAlert: false,
+      headers: setSubaccountHeader(subaccountId),
+      params: {
+        version
+      }
+    }
+  });
+}
+
+export function getLatestAbTest({ id, subaccountId }) {
+  return getAbTest({ id, subaccountId, type: 'GET_LATEST_AB_TEST' });
+}
+
+export function updateDraft(data, { id, subaccountId }) {
+  return sparkpostApiRequest({
+    type: 'UPDATE_AB_TEST_DRAFT',
+    meta: {
+      method: 'PUT',
+      url: `/ab-test/draft/${id}`,
+      headers: setSubaccountHeader(subaccountId),
+      data
+    }
+  });
+}

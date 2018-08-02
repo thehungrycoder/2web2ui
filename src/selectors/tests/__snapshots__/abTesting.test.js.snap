@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Selectors: abTesting should generate initial values with all defaults for the edit form correctly 1`] = `
+Object {
+  "audience_selection": "percent",
+  "confidence_level": 0.95,
+  "engagement_timeout": 24,
+  "metric": "count_unique_clicked",
+  "name": "test 2 version 2",
+  "test_mode": "bayesian",
+}
+`;
+
+exports[`Selectors: abTesting should generate initial values with overridden defaults for the edit form correctly 1`] = `
+Object {
+  "audience_selection": "sample_size",
+  "confidence_level": 0.1,
+  "engagement_timeout": 2,
+  "metric": "count_unique_confirmed_opened",
+  "name": "test 2 version 1",
+  "test_mode": "learning",
+  "total_sample_size": 100,
+}
+`;
+
+exports[`Selectors: abTesting should selects ID and version from router params 1`] = `
+Object {
+  "id": "test_2",
+  "version": "2",
+}
+`;
+
+exports[`Selectors: abTesting should selects a single ab test from router params 1`] = `
+Object {
+  "name": "test 2 version 2",
+}
+`;
+
+exports[`Selectors: abTesting should selects a single tests latest version number from router params 1`] = `2`;
