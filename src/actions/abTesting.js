@@ -41,6 +41,30 @@ export function getAbTest({ id, version, subaccountId, type = 'GET_AB_TEST' }) {
   });
 }
 
+export function deleteAbTest({ id, subaccountId }) {
+  return sparkpostApiRequest({
+    type: 'DELETE_AB_TEST',
+    meta: {
+      method: 'DELETE',
+      url: `/ab-test/${id}`,
+      showErrorAlert: false,
+      headers: setSubaccountHeader(subaccountId)
+    }
+  });
+}
+
+export function cancelAbTest({ id, subaccountId }) {
+  return sparkpostApiRequest({
+    type: 'CANCEL_AB_TEST',
+    meta: {
+      method: 'POST',
+      url: `/ab-test/${id}/cancel`,
+      showErrorAlert: false,
+      headers: setSubaccountHeader(subaccountId)
+    }
+  });
+}
+
 export function getLatestAbTest({ id, subaccountId }) {
   return getAbTest({ id, subaccountId, type: 'GET_LATEST_AB_TEST' });
 }

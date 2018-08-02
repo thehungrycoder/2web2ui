@@ -3,6 +3,8 @@ const initialState = {
   listLoading: true,
   listError: null,
   createError: null,
+  deleteError: null,
+  cancelError: null,
   detailsById: {},
   detailsLoading: false,
   detailsError: null
@@ -31,6 +33,28 @@ export default (state = initialState, action) => {
 
     case 'CREATE_AB_TEST_DRAFT_FAIL':
       return { ...state, createError: action.payload };
+
+    /* DELETE */
+
+    case 'DELETE_AB_TEST_PENDING':
+      return { ...state, deleteError: null };
+
+    case 'DELETE_AB_TEST_SUCCESS':
+      return { ...state };
+
+    case 'DELETE_AB_TEST_FAIL':
+      return { ...state, deleteError: action.payload };
+
+    /* CANCEL */
+
+    case 'CANCEL_AB_TEST_PENDING':
+      return { ...state, cancelError: null };
+
+    case 'CANCEL_AB_TEST_SUCCESS':
+      return { ...state };
+
+    case 'CANCEL_AB_TEST_FAIL':
+      return { ...state, cancelError: action.payload };
 
     /* Details */
     case 'GET_AB_TEST_PENDING':

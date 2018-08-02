@@ -4,11 +4,12 @@ import { Link } from 'react-router-dom';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
 
 // Actions
-import { listAbTests } from 'src/actions/abTesting';
+import { listAbTests, deleteAbTest, cancelAbTest } from 'src/actions/abTesting';
+import { showAlert } from 'src/actions/globalAlert';
 
 // Components
 import { Page, UnstyledLink, Button, Popover, ActionList } from '@sparkpost/matchbox';
-import { Loading, TableCollection, ApiErrorBanner } from 'src/components';
+import { Loading, TableCollection, ApiErrorBanner, DeleteModal, ConfirmationModal } from 'src/components';
 import { MoreHoriz } from '@sparkpost/matchbox-icons';
 import { Setup } from 'src/components/images';
 import StatusTag from './components/StatusTag';
@@ -23,6 +24,12 @@ const filterBoxConfig = {
 };
 
 export class ListPage extends Component {
+
+  state = {
+    showDeleteModal: false,
+    testToDelete: {},
+    testToCancel: {}
+  };
 
   componentDidMount() {
     this.props.listAbTests();
@@ -67,12 +74,15 @@ export class ListPage extends Component {
       },
       {
         content: 'Cancel Test',
-        visible: status === 'running',
-        section: 2
+        visible: status === 'scheduled' || status === 'running',
+        section: 2,
+        onClick: () => this.toggleCancel(id, subaccount_id)
       },
       {
         content: 'Delete Test',
-        section: 2
+        visible: status === 'completed' || status === 'cancelled',
+        section: 2,
+        onClick: () => this.toggleDelete(id, subaccount_id)
       }
     ];
 
@@ -97,6 +107,38 @@ export class ListPage extends Component {
       </div>
     ];
   }
+
+  toggleDelete = (id, subaccount_id) => {
+    this.setState({
+      showDeleteModal: !this.state.showDeleteModal,
+      testToDelete: { id, subaccountId: subaccount_id }
+    });
+  };
+
+  handleDelete = () => {
+    const { id, subaccountId } = this.state.testToDelete;
+
+    return this.props.deleteAbTest({ id, subaccountId }).then(() => {
+      this.props.showAlert({ type: 'success', message: 'Test deleted' });
+      this.toggleDelete();
+    });
+  };
+
+  toggleCancel = (id, subaccount_id) => {
+    this.setState({
+      showCancelModal: !this.state.showCancelModal,
+      testToCancel: { id, subaccountId: subaccount_id }
+    });
+  };
+
+  handleCancel = () => {
+    const { id, subaccountId } = this.state.testToCancel;
+
+    return this.props.cancelAbTest({ id, subaccountId }).then(() => {
+      this.props.showAlert({ type: 'success', message: 'Test cancelled' });
+      this.toggleCancel();
+    });
+  };
 
   renderError() {
     const { error, listAbTests } = this.props;
@@ -142,6 +184,21 @@ export class ListPage extends Component {
           content: <p>Create and run A/B tests to boost your engagement.</p>
         }}>
         {error ? this.renderError() : this.renderCollection()}
+        <DeleteModal
+          open={this.state.showDeleteModal}
+          title='Are you sure you want to delete this test?'
+          content={<p>The test and all associated versions will be immediately and permanently removed. This cannot be undone.</p>}
+          onDelete={this.handleDelete}
+          onCancel={this.toggleDelete}
+        />
+        <ConfirmationModal
+          open={this.state.showCancelModal}
+          title='Are you sure you want to cancel this test?'
+          content={<p>The test will be cancelled and all further messages will be delivered to the default template.</p>}
+          onConfirm={this.handleCancel}
+          onCancel={this.toggleCancel}
+          confirmVerb='OK'
+        />
       </Page>
     );
   }
@@ -155,4 +212,4 @@ function mapStateToProps({ abTesting, ...state }) {
   };
 }
 
-export default connect(mapStateToProps, { listAbTests })(ListPage);
+export default connect(mapStateToProps, { listAbTests, deleteAbTest, cancelAbTest, showAlert })(ListPage);
