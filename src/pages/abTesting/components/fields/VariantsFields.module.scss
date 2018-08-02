@@ -1,0 +1,12 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.SmallHeader {
+  font-size: rem(14);
+}
+
+.RemoveWrapper {
+  position: relative;
+  float: right;
+  margin-bottom: -1.1rem;
+  z-index: 1;
+}

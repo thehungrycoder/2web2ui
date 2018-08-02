@@ -12,5 +12,14 @@ export const formatFormValues = (values) => {
     formattedValues = _.omit(formattedValues, 'total_sample_size');
   }
 
+  formattedValues.default_template = formatTemplateObject(values.default_template);
+  formattedValues.variants = values.variants.map(formatTemplateObject);
+
   return formattedValues;
 };
+
+const formatTemplateObject = ({ template_object, sample_size, percent }) => ({
+  template_id: template_object.id,
+  sample_size: sample_size,
+  percent: percent
+});

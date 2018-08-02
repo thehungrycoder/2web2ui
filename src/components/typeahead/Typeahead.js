@@ -13,6 +13,13 @@ export class Typeahead extends Component {
     name: 'subaccount'
   };
 
+  handleStateChange = (changes, downshift) => {
+    // Highlights first item in list by default
+    if (!downshift.highlightedIndex) {
+      downshift.setHighlightedIndex(0);
+    }
+  }
+
   typeaheadFn = ({
     getInputProps,
     getItemProps,
@@ -77,6 +84,7 @@ export class Typeahead extends Component {
         itemToString={itemToString}
         onChange={onChange}
         selectedItem={selectedItem}
+        onStateChange={this.handleStateChange}
       >
         {this.typeaheadFn}
       </Downshift>

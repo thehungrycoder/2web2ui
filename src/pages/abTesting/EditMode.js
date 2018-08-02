@@ -13,8 +13,7 @@ import { Page } from '@sparkpost/matchbox';
 import { Save } from '@sparkpost/matchbox-icons';
 import Section from './components/Section';
 import StatusPanel from './components/StatusPanel';
-import StatusFields from './components/fields/StatusFields';
-import SettingsFields from './components/fields/SettingsFields';
+import { StatusFields, SettingsFields, VariantsFields } from './components/fields';
 import { StatusContent, SettingsContent, VariantsContent } from './components/content';
 
 const FORM_NAME = 'abTestEdit';
@@ -98,13 +97,17 @@ export class EditMode extends Component {
             <VariantsContent test={test} />
           </Section.Left>
           <Section.Right>
-
+            <VariantsFields formValues={formValues} disabled={submitting} />
           </Section.Right>
         </Section>
       </Page>
     );
   }
 }
+
+EditMode.defaultProps = {
+  formValues: {}
+};
 
 EditMode.propTypes = {
   test: PropTypes.shape({

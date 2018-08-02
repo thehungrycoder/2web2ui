@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { reduxForm, Field } from 'redux-form';
+import { reduxForm, Field, formValueSelector } from 'redux-form';
 import { Panel, UnstyledLink, Button, Grid } from '@sparkpost/matchbox';
 import { TextFieldWrapper } from 'src/components';
 import { TemplateTypeaheadWrapper, SubaccountTypeaheadWrapper } from 'src/components/reduxFormWrappers';
@@ -26,7 +26,8 @@ export class AbTestCreateForm extends Component {
       pristine,
       submitting,
       hasSubaccounts,
-      templates
+      templates,
+      subaccountId
     } = this.props;
 
     const disabled = pristine || submitting;
@@ -72,6 +73,7 @@ export class AbTestCreateForm extends Component {
           <Field
             name='default_variant'
             component={TemplateTypeaheadWrapper}
+            subaccountId={subaccountId}
             label={'Select this test\'s default template'}
             placeholder='Type to search'
             helpText={templates.length > 0
@@ -90,10 +92,13 @@ export class AbTestCreateForm extends Component {
 }
 
 function mapStateToProps(state) {
+  const selector = formValueSelector(formName);
+
   return {
     initialValues: {},
     hasSubaccounts: hasSubaccountsSelector(state),
-    templates: selectPublishedTemplatesBySubaccount(state)
+    templates: selectPublishedTemplatesBySubaccount(state),
+    subaccountId: selector(state, 'subaccount.id') || 0
   };
 }
 
