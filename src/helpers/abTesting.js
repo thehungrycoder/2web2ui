@@ -1,28 +1,34 @@
 import _ from 'lodash';
 
 // Formats redux-form values before passing to API
-export const formatFormValues = ({ default_template, variants, dates, ...values }) => {
-  let formattedValues = values;
+export const formatFormValues = ({ default_template, variants, dates, ...rest }) => {
+  let values = rest;
 
   if (values.test_mode === 'learning') {
-    formattedValues = _.omit(formattedValues, 'confidence_level');
+    values = _.omit(values, 'confidence_level');
   }
 
   if (values.audience_selection === 'percent') {
-    formattedValues = _.omit(formattedValues, 'total_sample_size');
+    values = _.omit(values, 'total_sample_size');
   }
 
-  formattedValues.default_template = formatTemplateObject(default_template);
-  formattedValues.variants = variants.map(formatTemplateObject);
-
-  formattedValues.start_time = dates.from;
-  formattedValues.end_time = dates.to;
-
-  return formattedValues;
+  return {
+    ...values,
+    start_time: dates.from,
+    end_time: dates.to,
+    default_template: reduceTemplateObject(default_template),
+    variants: variants.map(reduceTemplateObject)
+  };
 };
 
-const formatTemplateObject = ({ template_object, sample_size, percent }) => ({
+// The template typeahead returns the full template object - we only need its ID
+const reduceTemplateObject = ({ template_object, ...rest }) => ({
   template_id: template_object.id,
-  sample_size: sample_size,
-  percent: percent
+  ...rest
+});
+
+
+export const findTemplateObject = (templates, { template_id, ...rest }) => ({
+  template_object: _.find(templates, ({ id }) => id === template_id),
+  ...rest
 });

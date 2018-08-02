@@ -16,7 +16,7 @@ const VersionSelector = ({ current, latest, id, subaccountId }) => {
     content: `View Version ${i + 1}`,
     to: `/ab-testing/${id}/${i + 1}${setSubaccountQuery(subaccountId)}`,
     component: Link,
-    visible: i + 1 !== current
+    visible: i + 1 !== Number(current)
   })).reverse();
 
   return (

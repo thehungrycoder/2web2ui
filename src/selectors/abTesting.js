@@ -1,5 +1,6 @@
 import { selectTemplates } from 'src/selectors/templates';
 import { createSelector } from 'reselect';
+import { findTemplateObject } from 'src/helpers/abTesting';
 import _ from 'lodash';
 import moment from 'moment';
 
@@ -42,19 +43,9 @@ export const selectEditInitialValues = createSelector(
     // Strip everything that is not editable, or what will be reshaped
     const values = _.omit(test, ['created_at', 'updated_at', 'id', 'status', 'version', 'start_time', 'end_time', 'variants', 'default_template' ]);
 
-    // Find default template
-    const default_template = {
-      template_object: _.find(templates, ({ id }) => id === test.default_template.template_id),
-      sample_size: test.default_template.sample_size,
-      percent: test.default_template.percent
-    };
-
-    // Finds each variants' template
-    const variants = _.map(test.variants, ({ sample_size, percent, template_id: variantId }, i) => ({
-      template_object: _.find(templates, ({ id }) => id === variantId),
-      sample_size,
-      percent
-    }));
+    // Find template objects of the default template and all variants
+    const default_template = findTemplateObject(templates, test.default_template);
+    const variants = _.map(test.variants, (variant) => findTemplateObject(templates, variant));
 
     // Reshape dates and sets defaults
     const dates = {
