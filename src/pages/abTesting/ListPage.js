@@ -27,6 +27,7 @@ export class ListPage extends Component {
 
   state = {
     showDeleteModal: false,
+    showCancelModal: false,
     testToDelete: {},
     testToCancel: {}
   };
