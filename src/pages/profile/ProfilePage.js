@@ -6,9 +6,9 @@ import { Page, Panel, UnstyledLink } from '@sparkpost/matchbox';
 import { updateUser } from 'src/actions/users';
 import { get as getCurrentUser } from 'src/actions/currentUser';
 import { confirmPassword } from 'src/actions/auth';
-import { showAlert } from 'src/actions/globalAlert';
 import { openSupportTicketForm } from 'src/actions/support';
 
+import VerifyEmailBanner from 'src/components/verifyEmailBanner/VerifyEmailBanner';
 import NameForm from './components/NameForm';
 import PasswordForm from './components/PasswordForm';
 import TfaManager from './components/TfaManager';
@@ -44,15 +44,16 @@ export class ProfilePage extends Component {
       .then(() => this.props.updateUser(username, { password: newPassword }));
   }
 
-  render () {
-    const {
-      username,
-      email,
-      customer
-    } = this.props.currentUser;
+  render() {
+    const { customer, email, email_verified, username, verifyingEmail } = this.props.currentUser;
 
     return (
       <Page title='Profile'>
+
+        {email_verified === false && (
+          <VerifyEmailBanner verifying={verifyingEmail} />
+        )}
+
         <Panel sectioned>
           <LabelledValue label='Account ID' value={customer}/>
           <LabelledValue label='Username' value={username}/>
@@ -101,7 +102,6 @@ const mapDispatchToProps = {
   confirmPassword,
   getCurrentUser,
   openSupportTicketForm,
-  showAlert,
   updateUser
 };
 

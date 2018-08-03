@@ -1,11 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Component: Email Banner should show default email banner 1`] = `
+exports[`Component: Verify Email Banner should show default email banner 1`] = `
 <Banner
   action={
     Object {
       "content": "Resend Email",
-      "onClick": [MockFunction],
+      "onClick": [Function],
     }
   }
   status="info"
@@ -17,7 +17,7 @@ exports[`Component: Email Banner should show default email banner 1`] = `
 </Banner>
 `;
 
-exports[`Component: Email Banner should show sending sending content 1`] = `
+exports[`Component: Verify Email Banner should show sending sending content 1`] = `
 <Banner
   action={
     Object {

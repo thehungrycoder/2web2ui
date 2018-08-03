@@ -19,17 +19,13 @@ describe('Page: Dashboard tests', () => {
     },
     hasSuppressions: true,
     accountAgeInWeeks: 0,
-    showAlert: jest.fn(),
-    verifyingEmail: false,
-    verifyEmail: jest.fn(() => Promise.resolve())
+    verifyingEmail: false
   };
 
   let wrapper;
-  let instance;
 
   beforeEach(() => {
     wrapper = shallow(<DashboardPage {...props} />);
-    instance = wrapper.instance();
   });
 
   it('should render page correctly with defaults', () => {
@@ -49,13 +45,5 @@ describe('Page: Dashboard tests', () => {
   it('should display upgrade CTA when account is free and active', () => {
     wrapper.setProps({ account: { subscription: { code: 'free' }, status: 'active' }});
     expect(wrapper).toMatchSnapshot();
-  });
-
-  it('should show success alert on successful email verification', async () => {
-    await instance.resendVerification();
-    expect(instance.props.showAlert).toHaveBeenCalledWith({
-      type: 'success',
-      message: 'Please click the link in the email we sent you to verify your email.'
-    });
   });
 });

@@ -6,11 +6,9 @@ import _ from 'lodash';
 import { Page } from '@sparkpost/matchbox';
 import { UsageReport } from 'src/components';
 import Tutorial from './components/Tutorial';
-import EmailBanner from './components/EmailBanner';
+import VerifyEmailBanner from 'src/components/verifyEmailBanner/VerifyEmailBanner';
 import SuppressionBanner from './components/SuppressionBanner';
 
-import { showAlert } from 'src/actions/globalAlert';
-import { verifyEmail } from 'src/actions/currentUser';
 import { fetch as fetchAccount } from 'src/actions/account';
 import { checkSuppression } from 'src/actions/suppressions';
 import { list as listSendingDomains } from 'src/actions/sendingDomains';
@@ -27,35 +25,14 @@ export class DashboardPage extends Component {
     this.props.listApiKeys({ id: 0 });
   }
 
-  resendVerification() {
-    const { verifyEmail, showAlert } = this.props;
-    return verifyEmail()
-      .then(() => showAlert({
-        type: 'success',
-        message: 'Please click the link in the email we sent you to verify your email.'
-      }));
-  }
-
-  renderVerifyEmailCta() {
-    const { currentUser, verifyingEmail } = this.props;
-
-    if (!currentUser.email_verified) {
-      return (
-        <EmailBanner
-          verifying={verifyingEmail}
-          handleResend={() => this.resendVerification()} />
-      );
-    }
-  }
-
   render() {
-    const { accountAgeInWeeks, hasSuppressions } = this.props;
+    const { accountAgeInWeeks, currentUser, hasSuppressions } = this.props;
 
     return (
       <Page title='Dashboard'>
-
-        {this.renderVerifyEmailCta()}
-
+        {currentUser.email_verified === false && (
+          <VerifyEmailBanner verifying={currentUser.verifyingEmail} />
+        )}
         <UsageReport />
         <SuppressionBanner accountAgeInWeeks={accountAgeInWeeks} hasSuppressions={hasSuppressions} />
         <Tutorial {...this.props} />
@@ -72,7 +49,6 @@ function mapStateToProps(state) {
 
   return {
     currentUser: state.currentUser,
-    verifyingEmail: state.currentUser.verifyingEmail,
     accountAgeInWeeks: acctAge,
     hasSuppressions: state.suppressions.hasSuppression,
     hasSendingDomains: state.sendingDomains.list.length > 0,
@@ -83,4 +59,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default withRouter(connect(mapStateToProps, { fetchAccount, checkSuppression, listSendingDomains, listApiKeys, verifyEmail, showAlert })(DashboardPage));
+export default withRouter(connect(mapStateToProps, { fetchAccount, checkSuppression, listSendingDomains, listApiKeys })(DashboardPage));
