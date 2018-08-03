@@ -35,9 +35,7 @@ export class ListPage extends Component {
     this.props.listAbTests();
   }
 
-  getDetailsLink = ({ id, version, subaccount_id }) => {
-    return `/ab-testing/${id}/${version}${setSubaccountQuery(subaccount_id)}`;
-  }
+  getDetailsLink = ({ id, version, subaccount_id }) => `/ab-testing/${id}/${version}${setSubaccountQuery(subaccount_id)}`
 
   getColumns() {
     const columns = [
