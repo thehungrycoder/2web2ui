@@ -6,12 +6,14 @@ import { showAlert } from 'src/actions/globalAlert';
 import { verifyEmail } from 'src/actions/currentUser';
 
 export class VerifyEmailBanner extends Component {
-  handleClick = () => {
-    this.props.verifyEmail().then(() => this.props.showAlert({
-      type: 'success',
-      message: 'Please click the link in the email we sent you to verify your email.'
-    }));
-  }
+  handleClick = () => (
+    this.props.verifyEmail().then(() => (
+      this.props.showAlert({
+        type: 'success',
+        message: 'Please click the link in the email we sent you to verify your email.'
+      })
+    ))
+  )
 
   render() {
     let action = {

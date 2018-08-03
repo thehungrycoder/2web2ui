@@ -25,25 +25,14 @@ export class DashboardPage extends Component {
     this.props.listApiKeys({ id: 0 });
   }
 
-  renderVerifyEmailCta() {
-    const { currentUser, verifyingEmail } = this.props;
-
-    if (!currentUser.email_verified) {
-      return (
-        <VerifyEmailBanner
-          verifying={verifyingEmail}/>
-      );
-    }
-  }
-
   render() {
-    const { accountAgeInWeeks, hasSuppressions } = this.props;
+    const { accountAgeInWeeks, currentUser, hasSuppressions } = this.props;
 
     return (
       <Page title='Dashboard'>
-
-        {this.renderVerifyEmailCta()}
-
+        {currentUser.email_verified === false && (
+          <VerifyEmailBanner verifying={currentUser.verifyingEmail} />
+        )}
         <UsageReport />
         <SuppressionBanner accountAgeInWeeks={accountAgeInWeeks} hasSuppressions={hasSuppressions} />
         <Tutorial {...this.props} />
@@ -60,7 +49,6 @@ function mapStateToProps(state) {
 
   return {
     currentUser: state.currentUser,
-    verifyingEmail: state.currentUser.verifyingEmail,
     accountAgeInWeeks: acctAge,
     hasSuppressions: state.suppressions.hasSuppression,
     hasSendingDomains: state.sendingDomains.list.length > 0,

@@ -19,17 +19,13 @@ describe('Page: Dashboard tests', () => {
     },
     hasSuppressions: true,
     accountAgeInWeeks: 0,
-    showAlert: jest.fn(),
-    verifyingEmail: false,
-    verifyEmail: jest.fn(() => Promise.resolve())
+    verifyingEmail: false
   };
 
   let wrapper;
-  let instance;
 
   beforeEach(() => {
     wrapper = shallow(<DashboardPage {...props} />);
-    instance = wrapper.instance();
   });
 
   it('should render page correctly with defaults', () => {

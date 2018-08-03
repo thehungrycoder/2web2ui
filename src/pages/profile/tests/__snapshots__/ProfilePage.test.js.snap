@@ -5,7 +5,6 @@ exports[`ProfilePage renders correctly 1`] = `
   empty={Object {}}
   title="Profile"
 >
-  <Connect(VerifyEmailBanner) />
   <Panel
     sectioned={true}
   >
@@ -20,6 +19,77 @@ exports[`ProfilePage renders correctly 1`] = `
     <LabelledValue
       label="Email Address"
       value="ned.stark@winterfell.biz"
+    />
+  </Panel>
+  <Connect(AccessControl)
+    condition={[Function]}
+  >
+    <Connect(AccessControl)
+      condition={[Function]}
+    >
+      <Connect(TfaManager) />
+    </Connect(AccessControl)>
+    <Panel
+      sectioned={true}
+      title="Edit Profile"
+    >
+      <Connect(ReduxForm)
+        onSubmit={[Function]}
+      />
+    </Panel>
+    <Connect(AccessControl)
+      condition={[Function]}
+    >
+      <Panel
+        sectioned={true}
+        title="Update Password"
+      >
+        <Connect(ReduxForm)
+          onSubmit={[Function]}
+        />
+      </Panel>
+    </Connect(AccessControl)>
+  </Connect(AccessControl)>
+  <Connect(AccessControl)
+    condition={[Function]}
+  >
+    <Panel
+      sectioned={true}
+      title="Request Account Cancellation"
+    >
+      <p>
+        To cancel your SparkPost account, 
+        <UnstyledLink
+          onClick={[Function]}
+        >
+          submit a cancellation request
+        </UnstyledLink>
+        . The request may take a few days to process.  All your data (e.g. domains, users, etc.) will be permanently deleted. We're sorry to see you go!
+      </p>
+    </Panel>
+  </Connect(AccessControl)>
+</Page>
+`;
+
+exports[`ProfilePage renders with verify email banner 1`] = `
+<Page
+  empty={Object {}}
+  title="Profile"
+>
+  <Connect(VerifyEmailBanner)
+    verifying={true}
+  />
+  <Panel
+    sectioned={true}
+  >
+    <LabelledValue
+      label="Account ID"
+    />
+    <LabelledValue
+      label="Username"
+    />
+    <LabelledValue
+      label="Email Address"
     />
   </Panel>
   <Connect(AccessControl)

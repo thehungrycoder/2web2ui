@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 
 import { Page, Panel, UnstyledLink } from '@sparkpost/matchbox';
 
@@ -22,17 +21,6 @@ import { isAdmin, isHeroku, isAzure, isSso } from 'src/helpers/conditions/user';
 export class ProfilePage extends Component {
   requestCancellation = () => {
     this.props.openSupportTicketForm({ issueId: 'account_cancellation' });
-  }
-
-  renderVerifyEmailCta() {
-    const { currentUser } = this.props;
-
-    if (!currentUser.email_verified) {
-      return (
-        <VerifyEmailBanner
-          verifying={currentUser.verifyingEmail}/>
-      );
-    }
   }
 
   updateProfile = (values) => {
@@ -57,12 +45,14 @@ export class ProfilePage extends Component {
   }
 
   render() {
-    const { username, email, customer } = this.props.currentUser;
+    const { customer, email, email_verified, username, verifyingEmail } = this.props.currentUser;
 
     return (
       <Page title='Profile'>
 
-        {this.renderVerifyEmailCta()}
+        {email_verified === false && (
+          <VerifyEmailBanner verifying={verifyingEmail} />
+        )}
 
         <Panel sectioned>
           <LabelledValue label='Account ID' value={customer}/>
@@ -107,7 +97,6 @@ const mapStateToProps = ({ account, currentUser }) => ({
   account,
   currentUser
 });
-//state.currentUser.verifyingEmail
 
 const mapDispatchToProps = {
   confirmPassword,
@@ -116,5 +105,4 @@ const mapDispatchToProps = {
   updateUser
 };
 
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ProfilePage));
+export default connect(mapStateToProps, mapDispatchToProps)(ProfilePage);
