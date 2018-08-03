@@ -7,7 +7,7 @@ import { TemplateTypeaheadWrapper } from 'src/components/reduxFormWrappers';
 
 import styles from './VariantsFields.module.scss';
 
-const PercentField = ({ namespace, ...props }) => (
+export const PercentField = ({ namespace, ...props }) => (
   <Field
     name={`${namespace}.percent`}
     label='Percent of total'
@@ -15,7 +15,7 @@ const PercentField = ({ namespace, ...props }) => (
     component={TextFieldWrapper} {...props} />
 );
 
-const SampleSizeField = ({ namespace, ...props }) => (
+export const SampleSizeField = ({ namespace, ...props }) => (
   <Field
     name={`${namespace}.sample_size`}
     label='Number of messages'
@@ -25,13 +25,13 @@ const SampleSizeField = ({ namespace, ...props }) => (
 /*
   If you're looking at this, refer to https://redux-form.com/7.4.2/examples/fieldarrays/
  */
-const RenderVariants = ({ fields, formValues, disabled }) => (
+export const RenderVariants = ({ fields, formValues, disabled }) => (
   <Panel>
     {fields.map((variant, i) => (
       <Panel.Section key={i}>
         <div className={styles.RemoveWrapper}>
           <Button flat color='orange' size='small' onClick={() => fields.remove(i)}>
-            Remove
+            Remove Variant
           </Button>
         </div>
         <h6 className={styles.SmallHeader}>Variant {i + 1}</h6>
@@ -92,5 +92,9 @@ const VariantsFields = ({ disabled, formValues }) => (
     <div style={{ height: '200px' }} />
   </Fragment>
 );
+
+VariantsFields.defaultProps = {
+  formValues: {}
+};
 
 export default VariantsFields;

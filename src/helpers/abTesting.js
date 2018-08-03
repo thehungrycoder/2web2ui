@@ -1,6 +1,8 @@
 import _ from 'lodash';
 
-// Formats redux-form values before passing to API
+/**
+ * Formats edit mode's redux-form values to be passed on to the API
+ */
 export const formatFormValues = ({ default_template, variants, dates, ...rest }) => {
   let values = rest;
 
@@ -21,14 +23,20 @@ export const formatFormValues = ({ default_template, variants, dates, ...rest })
   };
 };
 
-// The template typeahead returns the full template object - we only need its ID
-const reduceTemplateObject = ({ template_object, ...rest }) => ({
+/**
+ * Formats template object (default template and variants) from redux-form to be passed on to the API
+ * The template typeahead returns the full template object, we only need its ID
+ */
+const reduceTemplateObject = ({ template_object, ...rest } = {}) => ({
   template_id: template_object.id,
   ...rest
 });
 
-
-export const findTemplateObject = (templates, { template_id, ...rest }) => ({
+/**
+ * Formats template object (default template and variants) from the API to be passed on to redux-form
+ * The template typeahead expects full template objects
+ */
+export const findTemplateObject = (templates, { template_id, ...rest } = {}) => ({
   template_object: _.find(templates, ({ id }) => id === template_id),
   ...rest
 });
