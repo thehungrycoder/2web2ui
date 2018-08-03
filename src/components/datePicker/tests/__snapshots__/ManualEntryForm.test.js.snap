@@ -1,5 +1,78 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Component: DatePicker ManualEntryForm should not show precision when rounding is disabled 1`] = `
+<form
+  className="DateFields"
+  onKeyDown={[MockFunction]}
+>
+  <Grid
+    middle="xs"
+  >
+    <Grid.Column>
+      <TextField
+        id="fromDate"
+        label="From Date"
+        labelHidden={true}
+        onBlur={[MockFunction]}
+        onChange={[MockFunction]}
+        placeholder="1970-01-20"
+        resize="both"
+        type="text"
+        value="2018-01-10"
+      />
+    </Grid.Column>
+    <Grid.Column>
+      <TextField
+        id="fromTime"
+        label="From Time"
+        labelHidden={true}
+        onBlur={[MockFunction]}
+        onChange={[MockFunction]}
+        placeholder="12:00am"
+        resize="both"
+        type="text"
+        value="11:00am"
+      />
+    </Grid.Column>
+    <Grid.Column
+      xs={1}
+    >
+      <div
+        className="ArrowWrapper"
+      >
+        <ArrowForward />
+      </div>
+    </Grid.Column>
+    <Grid.Column>
+      <TextField
+        id="toDate"
+        label="To Date"
+        labelHidden={true}
+        onBlur={[MockFunction]}
+        onChange={[MockFunction]}
+        placeholder="1970-01-20"
+        resize="both"
+        type="text"
+        value="2018-01-15"
+      />
+    </Grid.Column>
+    <Grid.Column>
+      <TextField
+        id="toTime"
+        label="To Time"
+        labelHidden={true}
+        onBlur={[MockFunction]}
+        onChange={[MockFunction]}
+        placeholder="12:00am"
+        resize="both"
+        type="text"
+        value="11:00am"
+      />
+    </Grid.Column>
+  </Grid>
+</form>
+`;
+
 exports[`Component: DatePicker ManualEntryForm should render correctly by default 1`] = `
 <form
   className="DateFields"
@@ -70,6 +143,12 @@ exports[`Component: DatePicker ManualEntryForm should render correctly by defaul
       />
     </Grid.Column>
   </Grid>
+  <div
+    className="PrecisionLabel"
+  >
+    Precision: 
+    Hour
+  </div>
 </form>
 `;
 
@@ -143,6 +222,12 @@ exports[`Component: DatePicker ManualEntryForm should sync props to state 1`] = 
       />
     </Grid.Column>
   </Grid>
+  <div
+    className="PrecisionLabel"
+  >
+    Precision: 
+    Hour
+  </div>
 </form>
 `;
 
@@ -216,5 +301,11 @@ exports[`Component: DatePicker ManualEntryForm should update state from new prop
       />
     </Grid.Column>
   </Grid>
+  <div
+    className="PrecisionLabel"
+  >
+    Precision: 
+    Hour
+  </div>
 </form>
 `;

@@ -29,7 +29,8 @@ describe('Component: DatePicker ManualEntryForm', () => {
       onEnter,
       now: mockNow,
       to: mockTo,
-      from: mockFrom
+      from: mockFrom,
+      roundToPrecision: true
     };
 
     metricsHelpers.getValidDateRange = jest.fn(() => ({ from: mockFrom, to: mockTo }));
@@ -58,6 +59,14 @@ describe('Component: DatePicker ManualEntryForm', () => {
     wrapper.setProps({
       from: moment('2018-01-10T10:00:00'),
       to: moment('2018-01-15T14:00:00')
+    });
+    wrapper.update();
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should not show precision when rounding is disabled', () => {
+    wrapper.setProps({
+      roundToPrecision: false
     });
     wrapper.update();
     expect(wrapper).toMatchSnapshot();

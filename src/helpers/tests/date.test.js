@@ -72,6 +72,7 @@ describe('Date helpers', () => {
       'for an hour ago': { range: 'hour', subtractArgs: [1, 'hours']},
       'for a day ago': { range: 'day', subtractArgs: [1, 'days']},
       'for a week ago': { range: '7days', subtractArgs: [7, 'days']},
+      'for 10 days ago': { range: '10days', subtractArgs: [10, 'days']},
       'for a month': { range: '30days', subtractArgs: [30, 'days']},
       'for a quarter ago': { range: '90days', subtractArgs: [90, 'days']}
     });
