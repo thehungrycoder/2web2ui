@@ -5,7 +5,7 @@ exports[`ProfilePage renders correctly 1`] = `
   empty={Object {}}
   title="Profile"
 >
-  <Connect(EmailBanner) />
+  <Connect(VerifyEmailBanner) />
   <Panel
     sectioned={true}
   >

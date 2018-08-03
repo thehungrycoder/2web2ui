@@ -1,9 +1,9 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import { EmailBanner } from '../EmailBanner';
+import { VerifyEmailBanner } from '../VerifyEmailBanner';
 
-describe('Component: Email Banner', () => {
+describe('Component: Verify Email Banner', () => {
   const props = {
     verifying: false,
     showAlert: jest.fn(),
@@ -13,7 +13,7 @@ describe('Component: Email Banner', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = shallow(<EmailBanner {...props} />);
+    wrapper = shallow(<VerifyEmailBanner {...props} />);
   });
 
   it('should show default email banner', () => {
@@ -30,7 +30,7 @@ describe('Component: Email Banner', () => {
 
     expect(props.verifyEmail).toHaveBeenCalledTimes(1);
     expect(props.showAlert).toHaveBeenCalledWith(
-      expect.objectContaining({ type: 'success', })
+      expect.objectContaining({ type: 'success' })
     );
   });
 });

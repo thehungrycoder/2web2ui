@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { Banner } from '@sparkpost/matchbox';
-import { showAlert } from 'src/actions/globalAlert'
-import { verifyEmail } from 'src/actions/currentUser'
+import { showAlert } from 'src/actions/globalAlert';
+import { verifyEmail } from 'src/actions/currentUser';
 
-export class EmailBanner extends Component {
+export class VerifyEmailBanner extends Component {
   handleClick = () => {
     this.props.verifyEmail().then(() => this.props.showAlert({
       type: 'success',
@@ -22,7 +22,7 @@ export class EmailBanner extends Component {
     if (this.props.verifying) {
       action = {
         content: 'Sending..',
-        disabled: true,
+        disabled: true
       };
     }
 
@@ -44,6 +44,6 @@ export class EmailBanner extends Component {
 const mapDispatchToProps = {
   verifyEmail,
   showAlert
-}
+};
 
-export default connect(undefined, mapDispatchToProps)(EmailBanner);
+export default connect(undefined, mapDispatchToProps)(VerifyEmailBanner);

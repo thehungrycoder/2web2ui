@@ -9,7 +9,7 @@ import { get as getCurrentUser } from 'src/actions/currentUser';
 import { confirmPassword } from 'src/actions/auth';
 import { openSupportTicketForm } from 'src/actions/support';
 
-import EmailBanner from 'src/components/emailBanner/EmailBanner';
+import VerifyEmailBanner from 'src/components/verifyEmailBanner/VerifyEmailBanner';
 import NameForm from './components/NameForm';
 import PasswordForm from './components/PasswordForm';
 import TfaManager from './components/TfaManager';
@@ -29,9 +29,9 @@ export class ProfilePage extends Component {
 
     if (!currentUser.email_verified) {
       return (
-        <EmailBanner
+        <VerifyEmailBanner
           verifying={currentUser.verifyingEmail}/>
-        );
+      );
     }
   }
 

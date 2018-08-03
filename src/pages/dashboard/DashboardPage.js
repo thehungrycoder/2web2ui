@@ -6,7 +6,7 @@ import _ from 'lodash';
 import { Page } from '@sparkpost/matchbox';
 import { UsageReport } from 'src/components';
 import Tutorial from './components/Tutorial';
-import EmailBanner from 'src/components/emailBanner/EmailBanner';
+import VerifyEmailBanner from 'src/components/verifyEmailBanner/VerifyEmailBanner';
 import SuppressionBanner from './components/SuppressionBanner';
 
 import { fetch as fetchAccount } from 'src/actions/account';
@@ -30,7 +30,7 @@ export class DashboardPage extends Component {
 
     if (!currentUser.email_verified) {
       return (
-        <EmailBanner
+        <VerifyEmailBanner
           verifying={verifyingEmail}/>
       );
     }
