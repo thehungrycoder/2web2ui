@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { TextFieldWrapper, CheckboxWrapper, PageLink } from 'src/components';
 import { required } from 'src/helpers/validation';
-
+import { trimWhitespaces } from 'src/helpers/string';
 import { Button } from '@sparkpost/matchbox';
 
 export class LoginForm extends Component {
@@ -20,6 +20,7 @@ export class LoginForm extends Component {
           id='username'
           label='Email or Username'
           placeholder='email@example.com'
+          normalize={trimWhitespaces}
           component={TextFieldWrapper}
           validate={required}
         />

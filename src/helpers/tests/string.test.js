@@ -1,6 +1,6 @@
 import {
   snakeToFriendly, snakeToCamel, slugify, shrinkToFit, stringToArray, stringifyTypeaheadfilter,
-  stripTags, decodeBase64
+  stripTags, decodeBase64, trimWhitespaces
 } from '../string';
 
 describe('snakeToFrindly', () => {
@@ -86,5 +86,14 @@ describe('decodeBase64', () => {
   it('should decode and return string', () => {
     const encoded = btoa('Testing!');
     expect(decodeBase64(encoded)).toEqual('Testing!');
+  });
+});
+
+describe('trimWhitespaces', () => {
+  it('trims leading/trailing whitespaces in string only', () => {
+    expect(trimWhitespaces(' hello ')).toEqual('hello');
+    expect(trimWhitespaces('hello')).toEqual('hello');
+    expect(trimWhitespaces('hello there')).toEqual('hello there');
+    expect(trimWhitespaces(undefined)).toEqual('');
   });
 });
