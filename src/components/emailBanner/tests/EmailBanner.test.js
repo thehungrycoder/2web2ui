@@ -1,12 +1,13 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import EmailBanner from '../EmailBanner';
+import { EmailBanner } from '../EmailBanner';
 
 describe('Component: Email Banner', () => {
   const props = {
     verifying: false,
-    handleResend: jest.fn(() => true)
+    showAlert: jest.fn(),
+    verifyEmail: jest.fn(() => Promise.resolve())
   };
 
   let wrapper;
@@ -24,4 +25,12 @@ describe('Component: Email Banner', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('should show success alert on successful email verification', async () => {
+    await wrapper.instance().handleClick();
+
+    expect(props.verifyEmail).toHaveBeenCalledTimes(1);
+    expect(props.showAlert).toHaveBeenCalledWith(
+      expect.objectContaining({ type: 'success', })
+    );
+  });
 });

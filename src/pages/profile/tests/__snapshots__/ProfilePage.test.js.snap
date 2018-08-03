@@ -5,9 +5,7 @@ exports[`ProfilePage renders correctly 1`] = `
   empty={Object {}}
   title="Profile"
 >
-  <EmailBanner
-    handleResend={[Function]}
-  />
+  <Connect(EmailBanner) />
   <Panel
     sectioned={true}
   >

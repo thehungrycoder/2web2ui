@@ -7,9 +7,7 @@ import { Page, Panel, UnstyledLink } from '@sparkpost/matchbox';
 import { updateUser } from 'src/actions/users';
 import { get as getCurrentUser } from 'src/actions/currentUser';
 import { confirmPassword } from 'src/actions/auth';
-import { showAlert } from 'src/actions/globalAlert';
 import { openSupportTicketForm } from 'src/actions/support';
-import { verifyEmail } from 'src/actions/currentUser';
 
 import EmailBanner from 'src/components/emailBanner/EmailBanner';
 import NameForm from './components/NameForm';
@@ -26,24 +24,14 @@ export class ProfilePage extends Component {
     this.props.openSupportTicketForm({ issueId: 'account_cancellation' });
   }
 
-  resendVerification() {
-    const { verifyEmail, showAlert } = this.props;
-    return verifyEmail()
-      .then(() => showAlert({
-        type: 'success',
-        message: 'Please click the link in the email we sent you to verify your email.'
-      }));
-  }
-
   renderVerifyEmailCta() {
     const { currentUser } = this.props;
 
     if (!currentUser.email_verified) {
       return (
         <EmailBanner
-          verifying={currentUser.verifyingEmail}
-          handleResend={() => this.resendVerification()} />
-      );
+          verifying={currentUser.verifyingEmail}/>
+        );
     }
   }
 
@@ -125,8 +113,6 @@ const mapDispatchToProps = {
   confirmPassword,
   getCurrentUser,
   openSupportTicketForm,
-  verifyEmail,
-  showAlert,
   updateUser
 };
 

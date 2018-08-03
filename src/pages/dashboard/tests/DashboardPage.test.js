@@ -50,12 +50,4 @@ describe('Page: Dashboard tests', () => {
     wrapper.setProps({ account: { subscription: { code: 'free' }, status: 'active' }});
     expect(wrapper).toMatchSnapshot();
   });
-
-  it('should show success alert on successful email verification', async () => {
-    await instance.resendVerification();
-    expect(instance.props.showAlert).toHaveBeenCalledWith({
-      type: 'success',
-      message: 'Please click the link in the email we sent you to verify your email.'
-    });
-  });
 });

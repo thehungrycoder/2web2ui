@@ -9,8 +9,6 @@ import Tutorial from './components/Tutorial';
 import EmailBanner from 'src/components/emailBanner/EmailBanner';
 import SuppressionBanner from './components/SuppressionBanner';
 
-import { showAlert } from 'src/actions/globalAlert';
-import { verifyEmail } from 'src/actions/currentUser';
 import { fetch as fetchAccount } from 'src/actions/account';
 import { checkSuppression } from 'src/actions/suppressions';
 import { list as listSendingDomains } from 'src/actions/sendingDomains';
@@ -27,23 +25,13 @@ export class DashboardPage extends Component {
     this.props.listApiKeys({ id: 0 });
   }
 
-  resendVerification() {
-    const { verifyEmail, showAlert } = this.props;
-    return verifyEmail()
-      .then(() => showAlert({
-        type: 'success',
-        message: 'Please click the link in the email we sent you to verify your email.'
-      }));
-  }
-
   renderVerifyEmailCta() {
     const { currentUser, verifyingEmail } = this.props;
 
     if (!currentUser.email_verified) {
       return (
         <EmailBanner
-          verifying={verifyingEmail}
-          handleResend={() => this.resendVerification()} />
+          verifying={verifyingEmail}/>
       );
     }
   }
@@ -83,4 +71,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default withRouter(connect(mapStateToProps, { fetchAccount, checkSuppression, listSendingDomains, listApiKeys, verifyEmail, showAlert })(DashboardPage));
+export default withRouter(connect(mapStateToProps, { fetchAccount, checkSuppression, listSendingDomains, listApiKeys })(DashboardPage));

@@ -5,8 +5,7 @@ exports[`Page: Dashboard tests should correctly render page when user is not ver
   empty={Object {}}
   title="Dashboard"
 >
-  <EmailBanner
-    handleResend={[Function]}
+  <Connect(EmailBanner)
     verifying={false}
   />
   <Connect(UsageReport) />
