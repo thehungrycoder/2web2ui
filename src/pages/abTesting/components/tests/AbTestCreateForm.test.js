@@ -41,6 +41,12 @@ describe('A/B Test Create Form Component', () => {
     expect(wrapper.instance().props.change).toHaveBeenCalledWith('id', 'test-1-2');
   });
 
+  it('should render when no available templates', () => {
+    wrapper.setProps({ templates: []});
+    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.find('Button').props().disabled).toEqual(true);
+  });
+
   describe('submit button props', () => {
     it('should render submit text', () => {
       expect(wrapper.find('Button').props().children).toEqual('Create New Test');
@@ -50,5 +56,6 @@ describe('A/B Test Create Form Component', () => {
       wrapper.setProps({ submitting: true, pristine: false });
       expect(wrapper.find('Button').props().children).toEqual('Submitting...');
     });
+
   });
 });
