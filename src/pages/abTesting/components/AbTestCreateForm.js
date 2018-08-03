@@ -25,7 +25,8 @@ export class AbTestCreateForm extends Component {
       handleSubmit,
       pristine,
       submitting,
-      hasSubaccounts
+      hasSubaccounts,
+      templates
     } = this.props;
 
     const disabled = pristine || submitting;
@@ -73,7 +74,7 @@ export class AbTestCreateForm extends Component {
             component={TemplateTypeaheadWrapper}
             label={'Select this test\'s default template'}
             placeholder='Type to search'
-            helpText={this.props.templates.length > 0
+            helpText={templates.length > 0
               ? <span>We will send this template by default when the test is not running. If you need to create a new template, <UnstyledLink component={Link} to='/templates'>head over to the templates page</UnstyledLink>.</span>
               : <span>No available templates.  <UnstyledLink component={Link} to='/templates'>Head over to the templates page to set some up</UnstyledLink>.</span>
             }

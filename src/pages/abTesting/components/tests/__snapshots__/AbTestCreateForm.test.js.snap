@@ -58,7 +58,12 @@ exports[`A/B Test Create Form Component should render correctly 1`] = `
       label="Select this test's default template"
       name="default_variant"
       placeholder="Type to search"
-      validate={[Function]}
+      validate={
+        Array [
+          [Function],
+          [Function],
+        ]
+      }
     />
   </Panel.Section>
   <Panel.Section>

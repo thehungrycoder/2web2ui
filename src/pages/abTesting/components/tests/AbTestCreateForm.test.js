@@ -9,7 +9,8 @@ describe('A/B Test Create Form Component', () => {
     change: jest.fn(),
     submitting: false,
     pristine: true,
-    hasSubaccounts: false
+    hasSubaccounts: false,
+    templates: ['fake']
   };
 
   beforeEach(() => {
@@ -26,12 +27,12 @@ describe('A/B Test Create Form Component', () => {
   });
 
   it('should render subaccount section if subaccounts exist', () => {
-    wrapper.setProps({ hasSubaccounts: true });
+    wrapper.setProps({ hasSubaccounts: true, templates: ['fake']});
     expect(wrapper.find({ name: 'subaccount' })).toMatchSnapshot();
   });
 
   it('should not render subaccount section if subaccounts do not exist', () => {
-    wrapper.setProps({ hasSubaccounts: false });
+    wrapper.setProps({ hasSubaccounts: false, templates: ['fake']});
     expect(wrapper.find({ name: 'subaccount' })).toHaveLength(0);
   });
 
