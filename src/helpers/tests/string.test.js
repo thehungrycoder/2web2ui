@@ -94,8 +94,6 @@ describe('trimWhitespaces', () => {
     expect(trimWhitespaces(' hello ')).toEqual('hello');
     expect(trimWhitespaces('hello')).toEqual('hello');
     expect(trimWhitespaces('hello there')).toEqual('hello there');
-    expect(trimWhitespaces(null)).toEqual(null);
-    expect(trimWhitespaces(undefined)).toEqual(undefined);
-    expect(trimWhitespaces([])).toEqual([]);
+    expect(trimWhitespaces(undefined)).toEqual('');
   });
 });

@@ -79,6 +79,6 @@ export function decodeBase64(str) {
   }
 }
 
-export function trimWhitespaces(str) {
-  return _.isString(str) ? str.trim() : str;
+export function trimWhitespaces(str = '') {
+  return str.trim();
 }
