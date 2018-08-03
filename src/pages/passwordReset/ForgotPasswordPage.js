@@ -7,6 +7,7 @@ import { reduxForm, Field } from 'redux-form';
 import { CenteredLogo, PageLink, TextFieldWrapper } from 'src/components';
 import { Panel, Button } from '@sparkpost/matchbox';
 import { AUTH_ROUTE } from 'src/constants';
+import { trimWhitespaces } from 'src/helpers/string';
 
 const successAlert = {
   type: 'success',
@@ -19,7 +20,7 @@ const errorAlert = {
 };
 
 export class ForgotPasswordPage extends Component {
-  componentDidUpdate (prevProps) {
+  componentDidUpdate(prevProps) {
     const { emailSuccess, emailError, history, showAlert } = this.props;
 
     if (!prevProps.emailSuccess && emailSuccess) {
@@ -32,7 +33,7 @@ export class ForgotPasswordPage extends Component {
     }
   }
 
-  render () {
+  render() {
     const { handleSubmit, invalid, submitting, sendPasswordResetEmail } = this.props;
 
     const buttonText = submitting
@@ -49,6 +50,7 @@ export class ForgotPasswordPage extends Component {
               name='user'
               label='Username or email address'
               validate={required}
+              normalize={trimWhitespaces}
               component={TextFieldWrapper}
             />
             <Button primary submit disabled={invalid || submitting}>{buttonText}</Button>
