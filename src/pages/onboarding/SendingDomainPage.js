@@ -77,4 +77,10 @@ export class SendingDomainPage extends Component {
   }
 }
 
-export default connect(null, { createDomain })(reduxForm({ form: FORMS.JOIN_SENDING_DOMAIN })(SendingDomainPage));
+const mapStateToProps = () => ({
+  initialValues: {
+    domain: ''
+  }
+});
+
+export default connect(mapStateToProps, { createDomain })(reduxForm({ form: FORMS.JOIN_SENDING_DOMAIN })(SendingDomainPage));
