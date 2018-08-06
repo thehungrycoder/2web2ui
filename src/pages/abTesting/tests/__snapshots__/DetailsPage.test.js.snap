@@ -10,13 +10,24 @@ exports[`Page: A/B Test Details should render correctly and create shared props 
         "to": "/ab-testing",
       }
     }
+    cancelAction={
+      Object {
+        "content": <span>
+          <Cancel />
+           Cancel Test
+        </span>,
+        "onClick": [Function],
+        "visible": false,
+      }
+    }
     deleteAction={
       Object {
         "content": <span>
           <Delete />
            Delete Test
         </span>,
-        "onClick": undefined,
+        "onClick": [Function],
+        "visible": false,
       }
     }
     subaccountId="101"
@@ -32,6 +43,29 @@ exports[`Page: A/B Test Details should render correctly and create shared props 
         "version": "1",
       }
     }
+  />
+  <DeleteModal
+    content={
+      <p>
+        The test and all associated versions will be immediately and permanently removed. This cannot be undone.
+      </p>
+    }
+    onCancel={[Function]}
+    onDelete={[Function]}
+    open={false}
+    title="Are you sure you want to delete this test?"
+  />
+  <ConfirmationModal
+    confirmVerb="OK"
+    content={
+      <p>
+        The test will be cancelled and all further messages will be delivered to the default template.
+      </p>
+    }
+    onCancel={[Function]}
+    onConfirm={[Function]}
+    open={false}
+    title="Are you sure you want to cancel this test?"
   />
 </React.Fragment>
 `;

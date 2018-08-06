@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Page: A/B Test List should render error when it fails 1`] = `
+exports[`Page: A/B Test List should render cancel modal 1`] = `
 <Page
   empty={
     Object {
@@ -21,85 +21,8 @@ exports[`Page: A/B Test List should render error when it fails 1`] = `
   }
   title="A/B Testing"
 >
-  <ApiErrorBanner
-    errorDetails="this failed"
-    message="Sorry, we seem to have had some trouble loading your A/B tests."
-    reload={
-      [MockFunction] {
-        "calls": Array [
-          Array [],
-        ],
-        "results": undefined,
-      }
-    }
-  />
-</Page>
-`;
-
-exports[`Page: A/B Test List should render happy path 1`] = `
-<Page
-  empty={
-    Object {
-      "content": <p>
-        Create and run A/B tests to boost your engagement.
-      </p>,
-      "image": [Function],
-      "show": false,
-      "title": "Create an A/B test",
-    }
-  }
-  primaryAction={
-    Object {
-      "component": [Function],
-      "content": "Create a New A/B Test",
-      "to": "/ab-testing/create",
-    }
-  }
-  title="A/B Testing"
->
-  <TableCollection
-    columns={
-      Array [
-        Object {
-          "label": "Name",
-          "sortKey": "name",
-        },
-        Object {
-          "label": "Status",
-          "sortKey": "status",
-        },
-        Object {
-          "label": "Template",
-          "sortKey": [Function],
-        },
-        Object {
-          "label": "Last Modified",
-          "sortKey": "updated_at",
-        },
-        null,
-      ]
-    }
-    defaultSortColumn="updated_at"
-    defaultSortDirection="desc"
-    filterBox={
-      Object {
-        "exampleModifiers": Array [
-          "id",
-          "status",
-          "test_mode",
-        ],
-        "itemToStringKeys": Array [
-          "name",
-          "id",
-          "status",
-          "test_mode",
-        ],
-        "show": true,
-      }
-    }
-    getRowData={[Function]}
-    pagination={true}
-    rows={
+  <TestCollection
+    abTests={
       Array [
         Object {
           "default_template": Object {
@@ -134,105 +57,264 @@ exports[`Page: A/B Test List should render happy path 1`] = `
         },
       ]
     }
+    toggleCancel={[Function]}
+    toggleDelete={[Function]}
+  />
+  <DeleteModal
+    content={
+      <p>
+        The test and all associated versions will be immediately and permanently removed. This cannot be undone.
+      </p>
+    }
+    onCancel={[Function]}
+    onDelete={[Function]}
+    open={false}
+    title="Are you sure you want to delete this test?"
+  />
+  <ConfirmationModal
+    confirmVerb="OK"
+    content={
+      <p>
+        The test will be cancelled and all further messages will be delivered to the default template.
+      </p>
+    }
+    onCancel={[Function]}
+    onConfirm={[Function]}
+    open={true}
+    title="Are you sure you want to cancel this test?"
+  />
+</Page>
+`;
+
+exports[`Page: A/B Test List should render delete modal 1`] = `
+<Page
+  empty={
+    Object {
+      "content": <p>
+        Create and run A/B tests to boost your engagement.
+      </p>,
+      "image": [Function],
+      "show": false,
+      "title": "Create an A/B test",
+    }
+  }
+  primaryAction={
+    Object {
+      "component": [Function],
+      "content": "Create a New A/B Test",
+      "to": "/ab-testing/create",
+    }
+  }
+  title="A/B Testing"
+>
+  <TestCollection
+    abTests={
+      Array [
+        Object {
+          "default_template": Object {
+            "template_id": "ab-test-1",
+          },
+          "id": "id-1",
+          "name": "my ab test 1",
+          "status": "scheduled",
+          "updated_at": "2018-10-21T10:10:10.000Z",
+          "version": "1",
+        },
+        Object {
+          "default_template": Object {
+            "template_id": "ab-test-2",
+          },
+          "id": "id-2",
+          "name": "my ab test 2",
+          "status": "running",
+          "updated_at": "2018-10-22T10:10:10.000Z",
+          "version": "2",
+        },
+        Object {
+          "default_template": Object {
+            "template_id": "ab-test-3",
+          },
+          "id": "id-3",
+          "name": "my ab test 3",
+          "status": "completed",
+          "updated_at": "2018-10-23T10:10:10.000Z",
+          "version": "3",
+          "winning_template_id": "ab-test-winner",
+        },
+      ]
+    }
+    toggleCancel={[Function]}
+    toggleDelete={[Function]}
+  />
+  <DeleteModal
+    content={
+      <p>
+        The test and all associated versions will be immediately and permanently removed. This cannot be undone.
+      </p>
+    }
+    onCancel={[Function]}
+    onDelete={[Function]}
+    open={true}
+    title="Are you sure you want to delete this test?"
+  />
+  <ConfirmationModal
+    confirmVerb="OK"
+    content={
+      <p>
+        The test will be cancelled and all further messages will be delivered to the default template.
+      </p>
+    }
+    onCancel={[Function]}
+    onConfirm={[Function]}
+    open={false}
+    title="Are you sure you want to cancel this test?"
+  />
+</Page>
+`;
+
+exports[`Page: A/B Test List should render error when it fails 1`] = `
+<Page
+  empty={
+    Object {
+      "content": <p>
+        Create and run A/B tests to boost your engagement.
+      </p>,
+      "image": [Function],
+      "show": false,
+      "title": "Create an A/B test",
+    }
+  }
+  primaryAction={
+    Object {
+      "component": [Function],
+      "content": "Create a New A/B Test",
+      "to": "/ab-testing/create",
+    }
+  }
+  title="A/B Testing"
+>
+  <ApiErrorBanner
+    errorDetails="this failed"
+    message="Sorry, we seem to have had some trouble loading your A/B tests."
+    reload={
+      [MockFunction] {
+        "calls": Array [
+          Array [],
+        ],
+        "results": undefined,
+      }
+    }
+  />
+  <DeleteModal
+    content={
+      <p>
+        The test and all associated versions will be immediately and permanently removed. This cannot be undone.
+      </p>
+    }
+    onCancel={[Function]}
+    onDelete={[Function]}
+    open={false}
+    title="Are you sure you want to delete this test?"
+  />
+  <ConfirmationModal
+    confirmVerb="OK"
+    content={
+      <p>
+        The test will be cancelled and all further messages will be delivered to the default template.
+      </p>
+    }
+    onCancel={[Function]}
+    onConfirm={[Function]}
+    open={false}
+    title="Are you sure you want to cancel this test?"
+  />
+</Page>
+`;
+
+exports[`Page: A/B Test List should render happy path 1`] = `
+<Page
+  empty={
+    Object {
+      "content": <p>
+        Create and run A/B tests to boost your engagement.
+      </p>,
+      "image": [Function],
+      "show": false,
+      "title": "Create an A/B test",
+    }
+  }
+  primaryAction={
+    Object {
+      "component": [Function],
+      "content": "Create a New A/B Test",
+      "to": "/ab-testing/create",
+    }
+  }
+  title="A/B Testing"
+>
+  <TestCollection
+    abTests={
+      Array [
+        Object {
+          "default_template": Object {
+            "template_id": "ab-test-1",
+          },
+          "id": "id-1",
+          "name": "my ab test 1",
+          "status": "scheduled",
+          "updated_at": "2018-10-21T10:10:10.000Z",
+          "version": "1",
+        },
+        Object {
+          "default_template": Object {
+            "template_id": "ab-test-2",
+          },
+          "id": "id-2",
+          "name": "my ab test 2",
+          "status": "running",
+          "updated_at": "2018-10-22T10:10:10.000Z",
+          "version": "2",
+        },
+        Object {
+          "default_template": Object {
+            "template_id": "ab-test-3",
+          },
+          "id": "id-3",
+          "name": "my ab test 3",
+          "status": "completed",
+          "updated_at": "2018-10-23T10:10:10.000Z",
+          "version": "3",
+          "winning_template_id": "ab-test-winner",
+        },
+      ]
+    }
+    toggleCancel={[Function]}
+    toggleDelete={[Function]}
+  />
+  <DeleteModal
+    content={
+      <p>
+        The test and all associated versions will be immediately and permanently removed. This cannot be undone.
+      </p>
+    }
+    onCancel={[Function]}
+    onDelete={[Function]}
+    open={false}
+    title="Are you sure you want to delete this test?"
+  />
+  <ConfirmationModal
+    confirmVerb="OK"
+    content={
+      <p>
+        The test will be cancelled and all further messages will be delivered to the default template.
+      </p>
+    }
+    onCancel={[Function]}
+    onConfirm={[Function]}
+    open={false}
+    title="Are you sure you want to cancel this test?"
   />
 </Page>
 `;
 
 exports[`Page: A/B Test List should render loading component when loading data 1`] = `<Loading />`;
-
-exports[`Page: A/B Test List should render row data properly 1`] = `
-Array [
-  <React.Fragment>
-    <p
-      className="Name"
-    >
-      <strong>
-        <UnstyledLink
-          component={[Function]}
-          to="/ab-testing/id-1/1"
-        >
-          my ab test 1
-        </UnstyledLink>
-      </strong>
-    </p>
-    <p
-      className="Id"
-    >
-      ID: 
-      id-1
-    </p>
-  </React.Fragment>,
-  <StatusTag
-    status="scheduled"
-  />,
-  <p
-    className="Template"
-  >
-    ab-test-1
-  </p>,
-  <p
-    className="LastUpdated"
-  >
-    Oct 21 2018, 6:10am
-  </p>,
-  <div
-    style={
-      Object {
-        "textAlign": "right",
-      }
-    }
-  >
-    <Popover
-      bottom={true}
-      left={true}
-      right={true}
-      trigger={
-        <Button
-          flat={true}
-          size="large"
-        >
-          <MoreHoriz
-            size={21}
-          />
-        </Button>
-      }
-    >
-      <ActionList
-        actions={
-          Array [
-            Object {
-              "component": [Function],
-              "content": "Edit Test",
-              "section": 1,
-              "to": "/ab-testing/id-1/1",
-              "visible": true,
-            },
-            Object {
-              "component": [Function],
-              "content": "View Test",
-              "section": 1,
-              "to": "/ab-testing/id-1/1",
-              "visible": false,
-            },
-            Object {
-              "content": "Edit and Rerun Test",
-              "section": 1,
-              "visible": false,
-            },
-            Object {
-              "content": "Cancel Test",
-              "section": 2,
-              "visible": false,
-            },
-            Object {
-              "content": "Delete Test",
-              "section": 2,
-            },
-          ]
-        }
-        groupByKey="section"
-      />
-    </Popover>
-  </div>,
-]
-`;

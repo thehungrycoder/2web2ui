@@ -1,5 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Action Creator: A/B Testing should dispatch a cancel test action 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "headers": Object {
+        "x-msys-subaccount": 101,
+      },
+      "method": "POST",
+      "showErrorAlert": false,
+      "url": "/ab-test/test_one/cancel",
+    },
+    "type": "CANCEL_AB_TEST",
+  },
+]
+`;
+
 exports[`Action Creator: A/B Testing should dispatch a create draft action 1`] = `
 Array [
   Object {
@@ -10,6 +26,22 @@ Array [
       "url": "/ab-test/draft",
     },
     "type": "CREATE_AB_TEST_DRAFT",
+  },
+]
+`;
+
+exports[`Action Creator: A/B Testing should dispatch a delete test action 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "headers": Object {
+        "x-msys-subaccount": 101,
+      },
+      "method": "DELETE",
+      "showErrorAlert": false,
+      "url": "/ab-test/test_one",
+    },
+    "type": "DELETE_AB_TEST",
   },
 ]
 `;

@@ -26,7 +26,11 @@ describe('Page: A/B Test Edit Mode', () => {
       showAlert: jest.fn(),
       updateDraft: jest.fn(() => Promise.resolve()),
       deleteAction: {
-        content: 'delete content',
+        content: 'delete test',
+        onClick: jest.fn()
+      },
+      cancelAction: {
+        content: 'cancel test',
         onClick: jest.fn()
       },
       handleSubmit: jest.fn((a) => a),

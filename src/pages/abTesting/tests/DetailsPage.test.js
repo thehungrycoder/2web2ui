@@ -25,7 +25,11 @@ describe('Page: A/B Test Details', () => {
         updated_at: '2018-10-21T10:10:10.000Z'
       },
       loading: false,
-      getAbTest: jest.fn()
+      showAlert: jest.fn(),
+      getAbTest: jest.fn(),
+      cancelAbTest: jest.fn(() => Promise.resolve()),
+      deleteAbTest: jest.fn(() => Promise.resolve()),
+      history: { push: jest.fn() }
     };
     wrapper = shallow(<DetailsPage {...props} />);
   });
@@ -61,5 +65,35 @@ describe('Page: A/B Test Details', () => {
   it('should render error', () => {
     wrapper.setProps({ error: { message: 'an error' }, test: {}});
     expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should toggle cancel modal', () => {
+    expect(wrapper.instance().state.showCancelModal).toEqual(false);
+    wrapper.instance().toggleCancel();
+    expect(wrapper.instance().state.showCancelModal).toEqual(true);
+  });
+
+  it('should toggle delete modal', () => {
+    expect(wrapper.instance().state.showDeleteModal).toEqual(false);
+    wrapper.instance().toggleDelete();
+    expect(wrapper.instance().state.showDeleteModal).toEqual(true);
+  });
+
+  it('should handle cancel', () => {
+    wrapper.setProps({ 'test': { id: 'ab-test', subaccount_id: 202 }});
+    return wrapper.instance().handleCancel().then(() => {
+      expect(props.cancelAbTest).toHaveBeenCalledWith({ id: 'ab-test', subaccountId: 202 });
+      expect(props.showAlert).toHaveBeenCalled();
+      expect(props.history.push).toHaveBeenCalled();
+    });
+  });
+
+  it('should handle delete', () => {
+    wrapper.setProps({ 'test': { id: 'ab-test', subaccount_id: 202 }});
+    return wrapper.instance().handleDelete().then(() => {
+      expect(props.deleteAbTest).toHaveBeenCalledWith({ id: 'ab-test', subaccountId: 202 });
+      expect(props.showAlert).toHaveBeenCalled();
+      expect(props.history.push).toHaveBeenCalled();
+    });
   });
 });
