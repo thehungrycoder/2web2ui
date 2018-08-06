@@ -11,7 +11,14 @@ export class TemplateTypeahead extends Component {
   };
 
   componentDidMount() {
-    this.props.listTemplates();
+    const { results, listTemplates } = this.props;
+
+    // For redux-form FieldArrays
+    // Subsequent GETs on this list will refresh any selector using it,
+    // which also forces a form reinitialize if used in a form's initialValues.
+    if (results.length === 0) {
+      listTemplates();
+    }
   }
 
   render() {

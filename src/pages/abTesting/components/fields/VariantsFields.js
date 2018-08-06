@@ -25,7 +25,7 @@ export const SampleSizeField = ({ namespace, ...props }) => (
 /*
   If you're looking at this, refer to https://redux-form.com/7.4.2/examples/fieldarrays/
  */
-export const RenderVariants = ({ fields, formValues, disabled }) => (
+export const RenderVariants = ({ fields, formValues, disabled, subaccountId }) => (
   <Panel>
     {fields.map((variant, i) => (
       <Panel.Section key={i}>
@@ -43,6 +43,7 @@ export const RenderVariants = ({ fields, formValues, disabled }) => (
               label='Select a template'
               placeholder='Type to search'
               disabled={disabled}
+              subaccountId={subaccountId}
             />
           </Grid.Column>
           <Grid.Column>
@@ -63,7 +64,7 @@ export const RenderVariants = ({ fields, formValues, disabled }) => (
   </Panel>
 );
 
-const VariantsFields = ({ disabled, formValues }) => (
+const VariantsFields = ({ disabled, formValues, subaccountId }) => (
   <Fragment>
     <Panel sectioned>
       <h6 className={styles.SmallHeader}>Default Template</h6>
@@ -75,6 +76,7 @@ const VariantsFields = ({ disabled, formValues }) => (
             label='Select a default template'
             placeholder='Type to search'
             disabled={disabled}
+            subaccountId={subaccountId}
           />
         </Grid.Column>
         <Grid.Column>
@@ -86,7 +88,13 @@ const VariantsFields = ({ disabled, formValues }) => (
         </Grid.Column>
       </Grid>
     </Panel>
-    <FieldArray name='variants' component={RenderVariants} formValues={formValues} disabled={disabled} />
+    <FieldArray
+      name='variants'
+      component={RenderVariants}
+      formValues={formValues}
+      disabled={disabled}
+      subaccountId={subaccountId}
+    />
 
     {/* This is a temporary hack to make sure at least some of the last typeahead is visible on screen */}
     <div style={{ height: '200px' }} />
