@@ -64,6 +64,13 @@ export const CROSS_LINK_MAP = {
   [SPC_EU_TENANT]: { label: 'EU', url: LINKS.SPC_EU_URL }
 };
 
+export const FORMS = {
+  LOGIN: 'loginForm',
+  JOIN: 'joinForm',
+  JOIN_PLAN: 'joinPlanForm',
+  JOIN_SENDING_DOMAIN: 'joinSendingDomainForm'
+};
+
 export const ANALYTICS_CREATE_ACCOUNT = 'create account';
 export const ANALYTICS_ADDON_IP = 'dedicated_ips';
 export const ANALYTICS_PREMIUM_SUPPORT = 'premium-support';
@@ -71,4 +78,9 @@ export const ANALYTICS_ENTERPRISE_SUPPORT = 'enterprise-support';
 export const ANALYTICS_ONBOARDING = 'onboarding';
 export const ANALYTICS_ONBOARDING_LEARN_MORE = 'learn-more-sending-domains';
 export const ANALYTICS_ONBOARDING_CREATE_DOMAIN = 'create-sending-domain-verify-';
-export const ANALYTICS_WHITELISTED_FORMS = ['loginForm', 'registerAccountForm'];
+export const ANALYTICS_WHITELISTED_FORMS = [
+  FORMS.LOGIN,
+  FORMS.JOIN,
+  FORMS.JOIN_PLAN,
+  FORMS.JOIN_SENDING_DOMAIN
+];

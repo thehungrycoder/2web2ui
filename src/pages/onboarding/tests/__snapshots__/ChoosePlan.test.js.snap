@@ -19,14 +19,14 @@ exports[`ChoosePlan page tests should disable submit and plan picker when submit
             <Panel.Section>
               <Connect(PaymentForm)
                 disabled={true}
-                formName="selectInitialPlan"
+                formName="joinPlanForm"
               />
             </Panel.Section>
             <Panel.Section>
               <Connect(BillingAddressForm)
                 countries={Array []}
                 disabled={true}
-                formName="selectInitialPlan"
+                formName="joinPlanForm"
               />
             </Panel.Section>
           </React.Fragment>
@@ -68,14 +68,14 @@ exports[`ChoosePlan page tests should render correctly 1`] = `
             <Panel.Section>
               <Connect(PaymentForm)
                 disabled={false}
-                formName="selectInitialPlan"
+                formName="joinPlanForm"
               />
             </Panel.Section>
             <Panel.Section>
               <Connect(BillingAddressForm)
                 countries={Array []}
                 disabled={false}
-                formName="selectInitialPlan"
+                formName="joinPlanForm"
               />
             </Panel.Section>
           </React.Fragment>

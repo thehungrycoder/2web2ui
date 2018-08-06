@@ -2,14 +2,13 @@ import _ from 'lodash';
 import ensure from '@redux-beacon/ensure';
 
 import { actionToFormEvent } from './actionToEvents';
-import { determineFormValidationState, isValidEvent } from './utils';
+import { isValidEvent } from './utils';
 
 const eventsMap = {
   '@@redux-form/INITIALIZE': actionToFormEvent('Initialize'),
   '@@redux-form/START_SUBMIT': actionToFormEvent('Submit'),
   '@@redux-form/SET_SUBMIT_SUCCEEDED': actionToFormEvent('Submit Success'),
-  '@@redux-form/SET_SUBMIT_FAILED': actionToFormEvent('Submit Failure'),
-  '@@redux-form/UPDATE_SYNC_ERRORS': actionToFormEvent(determineFormValidationState)
+  '@@redux-form/SET_SUBMIT_FAILED': actionToFormEvent('Submit Failure')
 };
 
 //wrap each event (in eventsMap) with ensure to validate later.

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Panel, Grid, Button } from '@sparkpost/matchbox';
 import { showAlert } from 'src/actions/globalAlert';
 import { CenteredLogo, Loading, PlanPicker } from 'src/components';
+import { FORMS } from 'src/constants';
 import Steps from './components/Steps';
 import { getPlans } from 'src/actions/account';
 import { getBillingCountries } from 'src/actions/billing';
@@ -16,7 +17,6 @@ import { not } from 'src/helpers/conditions';
 import AccessControl from 'src/components/auth/AccessControl';
 import { prepareCardInfo } from 'src/helpers/billing';
 
-const FORM_NAME = 'selectInitialPlan';
 const NEXT_STEP = '/onboarding/sending-domain';
 
 export class OnboardingPlanPage extends Component {
@@ -72,13 +72,13 @@ export class OnboardingPlanPage extends Component {
       <Fragment>
         <Panel.Section>
           <PaymentForm
-            formName={FORM_NAME}
+            formName={FORMS.JOIN_PLAN}
             disabled={submitting}
           />
         </Panel.Section>
         <Panel.Section>
           <BillingAddressForm
-            formName={FORM_NAME}
+            formName={FORMS.JOIN_PLAN}
             disabled={submitting}
             countries={billing.countries}
           />
@@ -118,9 +118,9 @@ export class OnboardingPlanPage extends Component {
   }
 }
 
-const formOptions = { form: FORM_NAME, enableReinitialize: true };
+const formOptions = { form: FORMS.JOIN_PLAN, enableReinitialize: true };
 
 export default connect(
-  choosePlanMSTP(FORM_NAME),
+  choosePlanMSTP(FORMS.JOIN_PLAN),
   { billingCreate, showAlert, getPlans, getBillingCountries }
 )(reduxForm(formOptions)(OnboardingPlanPage));
