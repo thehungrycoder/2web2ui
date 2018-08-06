@@ -180,3 +180,211 @@ Array [
   </div>,
 ]
 `;
+
+exports[`TestCollection Component should render row data properly 2`] = `
+Array [
+  <React.Fragment>
+    <p
+      className="Name"
+    >
+      <strong>
+        <UnstyledLink
+          component={[Function]}
+          to="/ab-testing/id-2/2"
+        >
+          my ab test 2
+        </UnstyledLink>
+      </strong>
+    </p>
+    <p
+      className="Id"
+    >
+      ID: 
+      id-2
+    </p>
+  </React.Fragment>,
+  <StatusTag
+    status="running"
+  />,
+  <p
+    className="Template"
+  >
+    ab-test-2
+  </p>,
+  <p
+    className="LastUpdated"
+  >
+    Oct 22 2018, 6:10am
+  </p>,
+  <div
+    style={
+      Object {
+        "textAlign": "right",
+      }
+    }
+  >
+    <Popover
+      bottom={true}
+      left={true}
+      right={true}
+      trigger={
+        <Button
+          flat={true}
+          size="large"
+        >
+          <MoreHoriz
+            size={21}
+          />
+        </Button>
+      }
+    >
+      <ActionList
+        actions={
+          Array [
+            Object {
+              "component": [Function],
+              "content": "Edit Test",
+              "section": 1,
+              "to": "/ab-testing/id-2/2",
+              "visible": false,
+            },
+            Object {
+              "component": [Function],
+              "content": "View Test",
+              "section": 1,
+              "to": "/ab-testing/id-2/2",
+              "visible": true,
+            },
+            Object {
+              "content": "Edit and Rerun Test",
+              "section": 1,
+              "visible": false,
+            },
+            Object {
+              "content": "Cancel Test",
+              "onClick": [Function],
+              "section": 2,
+              "visible": true,
+            },
+            Object {
+              "content": "Delete Test",
+              "onClick": [Function],
+              "section": 2,
+              "visible": false,
+            },
+          ]
+        }
+        groupByKey="section"
+      />
+    </Popover>
+  </div>,
+]
+`;
+
+exports[`TestCollection Component should render row data properly 3`] = `
+Array [
+  <React.Fragment>
+    <p
+      className="Name"
+    >
+      <strong>
+        <UnstyledLink
+          component={[Function]}
+          to="/ab-testing/id-3/3"
+        >
+          my ab test 3
+        </UnstyledLink>
+      </strong>
+    </p>
+    <p
+      className="Id"
+    >
+      ID: 
+      id-3
+    </p>
+  </React.Fragment>,
+  <StatusTag
+    status="completed"
+  />,
+  <p
+    className="Template"
+  >
+    <React.Fragment>
+      <span
+        className="Winner"
+      >
+        Winner:
+      </span>
+       
+      ab-test-winner
+    </React.Fragment>
+  </p>,
+  <p
+    className="LastUpdated"
+  >
+    Oct 23 2018, 6:10am
+  </p>,
+  <div
+    style={
+      Object {
+        "textAlign": "right",
+      }
+    }
+  >
+    <Popover
+      bottom={true}
+      left={true}
+      right={true}
+      trigger={
+        <Button
+          flat={true}
+          size="large"
+        >
+          <MoreHoriz
+            size={21}
+          />
+        </Button>
+      }
+    >
+      <ActionList
+        actions={
+          Array [
+            Object {
+              "component": [Function],
+              "content": "Edit Test",
+              "section": 1,
+              "to": "/ab-testing/id-3/3",
+              "visible": false,
+            },
+            Object {
+              "component": [Function],
+              "content": "View Test",
+              "section": 1,
+              "to": "/ab-testing/id-3/3",
+              "visible": true,
+            },
+            Object {
+              "content": "Edit and Rerun Test",
+              "section": 1,
+              "visible": true,
+            },
+            Object {
+              "content": "Cancel Test",
+              "onClick": [Function],
+              "section": 2,
+              "visible": false,
+            },
+            Object {
+              "content": "Delete Test",
+              "onClick": [Function],
+              "section": 2,
+              "visible": true,
+            },
+          ]
+        }
+        groupByKey="section"
+      />
+    </Popover>
+  </div>,
+]
+`;

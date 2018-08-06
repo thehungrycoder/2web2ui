@@ -52,7 +52,11 @@ describe('TestCollection Component', () => {
   });
 
   it('should render row data properly', () => {
-    const row = wrapper.instance().getRowData(props.abTests[0]);
-    expect(row).toMatchSnapshot();
+    const row1 = wrapper.instance().getRowData(props.abTests[0]);
+    expect(row1).toMatchSnapshot();
+    const row2 = wrapper.instance().getRowData(props.abTests[1]);
+    expect(row2).toMatchSnapshot();
+    const row3 = wrapper.instance().getRowData(props.abTests[2]);
+    expect(row3).toMatchSnapshot();
   });
 });
