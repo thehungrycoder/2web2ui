@@ -12,7 +12,7 @@ import * as validations from '../validation';
 
 const cases = {
   required: {
-    good: ['101', 1, {}, [[]]],
+    good: ['101', 1, {}, []],
     bad: [null, undefined]
   },
   email: {
@@ -41,7 +41,8 @@ const cases = {
   },
   abTestDefaultTemplate: {
     good: [['foobar', null, { templates: ['foo', 'bar', 'foobar']}]],
-    bad: [['foobar', null, { templates: ['foo', 'bar']}]]
+    bad: [['foobar', null, { templates: ['foo', 'bar']}]],
+    multiArg: true
   }
 };
 
@@ -77,11 +78,12 @@ describe('Validation helpers', () => {
   Object.keys(cases).forEach((caseName) => {
     const goodInput = cases[caseName].good;
     const badInput = cases[caseName].bad;
+    const multiArg = !!cases[caseName].multiArg;
     goodInput.forEach((input) => it(`${caseName} should accept ${input}`,
-      () => expect(validations[caseName](...Array.isArray(input) ? input : [input])).toBeUndefined()));
+      () => expect(validations[caseName](...multiArg ? input : [input])).toBeUndefined()));
 
     badInput.forEach((input) => it(`${caseName} should not accept ${input}`,
-      () => expect(validations[caseName](...Array.isArray(input) ? input : [input])).toBeDefined()));
+      () => expect(validations[caseName](...multiArg ? input : [input])).toBeDefined()));
   });
 });
 
