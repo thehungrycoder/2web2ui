@@ -60,7 +60,7 @@ export class StatusPanel extends Component {
             <StatusTag status={test.status} />
           </LabelledValue>
           <LabelledValue label='Test ID' value={id} />
-          {subaccountId && <LabelledValue label='Subaccount'><SubaccountTag id={subaccountId} /></LabelledValue>}
+          {!!subaccountId && <LabelledValue label='Subaccount'><SubaccountTag id={subaccountId} /></LabelledValue>}
         </Panel.Section>
       </Panel>
     );

@@ -6,6 +6,7 @@ import { withRouter } from 'react-router-dom';
 
 import { showAlert } from 'src/actions/globalAlert';
 import { updateDraft, getAbTest } from 'src/actions/abTesting';
+import { listTemplates } from 'src/actions/templates';
 import { selectEditInitialValues } from 'src/selectors/abTesting';
 import { formatFormValues } from 'src/helpers/abTesting';
 
@@ -19,6 +20,12 @@ import { StatusContent, SettingsContent, VariantsContent } from './components/co
 const FORM_NAME = 'abTestEdit';
 
 export class EditMode extends Component {
+
+  componentDidMount() {
+    // Get templates here for the typeaheads
+    // Ensures the list is always up to date
+    this.props.listTemplates();
+  }
 
   handleSaveAsDraft = (values) => {
     const { updateDraft, showAlert, subaccountId, getAbTest } = this.props;
@@ -124,4 +131,4 @@ const formOptions = {
   form: FORM_NAME,
   enableReinitialize: true
 };
-export default withRouter(connect(mapStateToProps, { updateDraft, getAbTest, showAlert })(reduxForm(formOptions)(EditMode)));
+export default withRouter(connect(mapStateToProps, { listTemplates, updateDraft, getAbTest, showAlert })(reduxForm(formOptions)(EditMode)));

@@ -43,6 +43,16 @@ describe('A/B testing helper', () => {
     });
   });
 
+  describe('reduceTemplateObject', () => {
+    it('should pass through template id', () => {
+      expect(helpers.reduceTemplateObject({ template_id: 'template_two', sample_size: '500' })).toMatchSnapshot();
+    });
+
+    it('should handle an undefined template', () => {
+      expect(helpers.reduceTemplateObject()).toMatchSnapshot();
+    });
+  });
+
   describe('findTemplateObject', () => {
     it('should find template objects', () => {
       const templates = [

@@ -33,7 +33,7 @@ describe('Status Panel Component', () => {
   });
 
   it('should not render subaccount tag if test is not assigned to subaccount', () => {
-    wrapper.setProps({ subaccountId: null });
+    wrapper.setProps({ subaccountId: 0 });
     expect(wrapper.find('SubaccountTag')).toHaveLength(0);
   });
 

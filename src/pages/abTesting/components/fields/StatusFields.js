@@ -2,17 +2,7 @@ import React, { Fragment } from 'react';
 import { Field } from 'redux-form';
 import { Panel } from '@sparkpost/matchbox';
 import { AccessTime } from '@sparkpost/matchbox-icons';
-import { TextFieldWrapper } from 'src/components/reduxFormWrappers';
-import DatePicker from 'src/components/datePicker/DatePicker';
-
-const DateFieldWrapper = ({ input, ...rest }) => (
-  // TODO - pass through validation error
-  <DatePicker
-    onChange={input.onChange}
-    to={input.value.to}
-    from={input.value.from}
-    {...rest} />
-);
+import { TextFieldWrapper, DatePickerWrapper } from 'src/components/reduxFormWrappers';
 
 const StatusFields = ({ disabled }) => (
   <Fragment>
@@ -26,7 +16,7 @@ const StatusFields = ({ disabled }) => (
     </Panel>
     <Panel sectioned>
       <Field
-        component={DateFieldWrapper}
+        component={DatePickerWrapper}
         disabled={disabled}
         name='dates'
         left

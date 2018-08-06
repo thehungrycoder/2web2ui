@@ -27,8 +27,8 @@ export const formatFormValues = ({ default_template, variants, dates, ...rest })
  * Formats template object (default template and variants) from redux-form to be passed on to the API
  * The template typeahead returns the full template object, we only need its ID
  */
-const reduceTemplateObject = ({ template_object, ...rest } = {}) => ({
-  template_id: template_object.id,
+export const reduceTemplateObject = ({ template_object, ...rest } = {}) => ({
+  template_id: _.get(template_object, 'id'),
   ...rest
 });
 

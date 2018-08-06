@@ -59,3 +59,16 @@ Object {
   ],
 }
 `;
+
+exports[`A/B testing helper reduceTemplateObject should handle an undefined template 1`] = `
+Object {
+  "template_id": undefined,
+}
+`;
+
+exports[`A/B testing helper reduceTemplateObject should pass through template id 1`] = `
+Object {
+  "sample_size": "500",
+  "template_id": "template_two",
+}
+`;
