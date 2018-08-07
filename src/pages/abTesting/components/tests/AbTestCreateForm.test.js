@@ -27,12 +27,12 @@ describe('A/B Test Create Form Component', () => {
   });
 
   it('should render subaccount section if subaccounts exist', () => {
-    wrapper.setProps({ hasSubaccounts: true, templates: ['fake']});
+    wrapper.setProps({ hasSubaccounts: true });
     expect(wrapper.find({ name: 'subaccount' })).toMatchSnapshot();
   });
 
   it('should not render subaccount section if subaccounts do not exist', () => {
-    wrapper.setProps({ hasSubaccounts: false, templates: ['fake']});
+    wrapper.setProps({ hasSubaccounts: false });
     expect(wrapper.find({ name: 'subaccount' })).toHaveLength(0);
   });
 

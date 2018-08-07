@@ -25,7 +25,13 @@ export function abTestId(value) {
 }
 
 export function abTestDefaultTemplate(value, allValues, props) {
-  return props.templates.includes(value) ? undefined : 'Invalid Default Template';
+  if (props.templates.includes(value)) {
+    return undefined;
+  }
+  if (allValues.subaccount) {
+    return 'Template not available to selected subaccount';
+  }
+  return 'Subaccount templates not available to master account';
 }
 
 export function hasNumber(value) {

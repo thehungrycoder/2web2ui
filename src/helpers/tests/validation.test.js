@@ -40,8 +40,8 @@ const cases = {
     bad: ['test.id', 'NOT_!@#$%^&*()_VALID', 'test id', ':doge:']
   },
   abTestDefaultTemplate: {
-    good: [['foobar', null, { templates: ['foo', 'bar', 'foobar']}]],
-    bad: [['foobar', null, { templates: ['foo', 'bar']}]],
+    good: [['foobar', { subaccount: true }, { templates: ['foo', 'bar', 'foobar']}]],
+    bad: [['foobar', { subaccount: true }, { templates: ['foo', 'bar']}], ['foobar', { subaccount: false }, { templates: ['foo', 'bar']}]],
     multiArg: true
   }
 };
