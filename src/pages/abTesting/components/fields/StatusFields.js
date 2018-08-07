@@ -24,7 +24,6 @@ const StatusFields = ({ disabled }) => (
         textFieldProps={{
           helpText: 'A test may run for a maximum of 30 days',
           label: 'When should we run this test?',
-          labelHidden: false,
           prefix: <AccessTime />
         }}
         datePickerProps={{

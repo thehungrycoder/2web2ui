@@ -35,7 +35,6 @@ exports[`Status Fields Component should disable fields correctly 1`] = `
         Object {
           "helpText": "A test may run for a maximum of 30 days",
           "label": "When should we run this test?",
-          "labelHidden": false,
           "prefix": <AccessTime />,
         }
       }
@@ -77,7 +76,6 @@ exports[`Status Fields Component should render correctly 1`] = `
         Object {
           "helpText": "A test may run for a maximum of 30 days",
           "label": "When should we run this test?",
-          "labelHidden": false,
           "prefix": <AccessTime />,
         }
       }
