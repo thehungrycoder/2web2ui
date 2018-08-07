@@ -47,8 +47,8 @@ export function deleteAbTest({ id, subaccountId }) {
     meta: {
       method: 'DELETE',
       url: `/ab-test/${id}`,
-      showErrorAlert: false,
-      headers: setSubaccountHeader(subaccountId)
+      headers: setSubaccountHeader(subaccountId),
+      data: { id, subaccountId }
     }
   });
 }
@@ -59,7 +59,6 @@ export function cancelAbTest({ id, subaccountId }) {
     meta: {
       method: 'POST',
       url: `/ab-test/${id}/cancel`,
-      showErrorAlert: false,
       headers: setSubaccountHeader(subaccountId)
     }
   });

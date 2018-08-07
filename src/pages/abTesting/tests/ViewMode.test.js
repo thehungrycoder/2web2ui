@@ -56,9 +56,9 @@ describe('Page: A/B Test View Mode', () => {
   });
 
   it('should handle override', () => {
-    wrapper.setProps({ 'test': { id: 'ab-test', subaccount_id: 202 }});
+    wrapper.setProps({ 'test': { id: 'ab-test' }});
     return wrapper.instance().handleOverride().then(() => {
-      expect(props.updateDraft).toHaveBeenCalledWith({}, { id: 'ab-test', subaccountId: 202 });
+      expect(props.updateDraft).toHaveBeenCalledWith({}, { id: 'ab-test', subaccountId: '101' });
       expect(props.showAlert).toHaveBeenCalled();
       expect(props.history.push).toHaveBeenCalled();
     });

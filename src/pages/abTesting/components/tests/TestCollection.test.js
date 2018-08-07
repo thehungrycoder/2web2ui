@@ -8,6 +8,7 @@ describe('TestCollection Component', () => {
       {
         id: 'id-1',
         version: '1',
+        subaccount_id: 101,
         name: 'my ab test 1',
         status: 'scheduled',
         default_template: {
@@ -58,5 +59,17 @@ describe('TestCollection Component', () => {
     expect(row2).toMatchSnapshot();
     const row3 = wrapper.instance().getRowData(props.abTests[2]);
     expect(row3).toMatchSnapshot();
+  });
+
+  it('should toggleDelete', () => {
+    const actionCol = shallow(wrapper.instance().getRowData(props.abTests[0]).pop());
+    actionCol.find('ActionList').prop('actions')[4].onClick();
+    expect(props.toggleDelete).toHaveBeenCalledWith('id-1', 101);
+  });
+
+  it('should toggleCancel', () => {
+    const actionCol = shallow(wrapper.instance().getRowData(props.abTests[0]).pop());
+    actionCol.find('ActionList').prop('actions')[3].onClick();
+    expect(props.toggleCancel).toHaveBeenCalledWith('id-1', 101);
   });
 });

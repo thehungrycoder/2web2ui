@@ -48,9 +48,10 @@ export class DetailsPage extends Component {
   }
 
   handleDelete = () => {
-    const { id, subaccount_id } = this.props.test;
+    const { id } = this.props.test;
+    const { subaccountId } = this.props;
 
-    return this.props.deleteAbTest({ id, subaccountId: subaccount_id }).then(() => {
+    return this.props.deleteAbTest({ id, subaccountId }).then(() => {
       this.props.showAlert({ type: 'success', message: 'Test deleted' });
       this.props.history.push('/ab-testing');
     });
@@ -61,9 +62,10 @@ export class DetailsPage extends Component {
   }
 
   handleCancel = () => {
-    const { id, subaccount_id } = this.props.test;
+    const { id } = this.props.test;
+    const { subaccountId } = this.props;
 
-    return this.props.cancelAbTest({ id, subaccountId: subaccount_id }).then(() => {
+    return this.props.cancelAbTest({ id, subaccountId }).then(() => {
       this.props.showAlert({ type: 'success', message: 'Test cancelled' });
       this.props.history.push('/ab-testing');
     });
@@ -117,6 +119,7 @@ export class DetailsPage extends Component {
           content={<p>The test and all associated versions will be immediately and permanently removed. This cannot be undone.</p>}
           onDelete={this.handleDelete}
           onCancel={this.toggleDelete}
+          isPending={this.props.deletePending}
         />
         <ConfirmationModal
           open={this.state.showCancelModal}
@@ -124,6 +127,7 @@ export class DetailsPage extends Component {
           content={<p>The test will be cancelled and all further messages will be delivered to the default template.</p>}
           onConfirm={this.handleCancel}
           onCancel={this.toggleCancel}
+          isPending={this.props.cancelPending}
           confirmVerb='OK'
         />
       </Fragment>
@@ -135,6 +139,8 @@ function mapStateToProps(state, props) {
   return {
     test: selectAbTestFromParams(state, props),
     loading: state.abTesting.detailsLoading,
+    deletePending: state.abTesting.deletePending,
+    cancelPending: state.abTesting.cancelPending,
     error: state.abTesting.detailsError,
     ...selectIdAndVersionFromParams(state, props),
     subaccountId: selectSubaccountIdFromQuery(state, props)

@@ -80,18 +80,18 @@ describe('Page: A/B Test Details', () => {
   });
 
   it('should handle cancel', () => {
-    wrapper.setProps({ 'test': { id: 'ab-test', subaccount_id: 202 }});
+    wrapper.setProps({ 'test': { id: 'ab-test' }});
     return wrapper.instance().handleCancel().then(() => {
-      expect(props.cancelAbTest).toHaveBeenCalledWith({ id: 'ab-test', subaccountId: 202 });
+      expect(props.cancelAbTest).toHaveBeenCalledWith({ id: 'ab-test', subaccountId: '101' });
       expect(props.showAlert).toHaveBeenCalled();
       expect(props.history.push).toHaveBeenCalled();
     });
   });
 
   it('should handle delete', () => {
-    wrapper.setProps({ 'test': { id: 'ab-test', subaccount_id: 202 }});
+    wrapper.setProps({ 'test': { id: 'ab-test' }});
     return wrapper.instance().handleDelete().then(() => {
-      expect(props.deleteAbTest).toHaveBeenCalledWith({ id: 'ab-test', subaccountId: 202 });
+      expect(props.deleteAbTest).toHaveBeenCalledWith({ id: 'ab-test', subaccountId: '101' });
       expect(props.showAlert).toHaveBeenCalled();
       expect(props.history.push).toHaveBeenCalled();
     });

@@ -19,8 +19,6 @@ const filterBoxConfig = {
 
 export class TestCollection extends Component {
 
-  componentDidMount() {}
-
   getDetailsLink = ({ id, version, subaccount_id }) => `/ab-testing/${id}/${version}${setSubaccountQuery(subaccount_id)}`
 
   getColumns() {

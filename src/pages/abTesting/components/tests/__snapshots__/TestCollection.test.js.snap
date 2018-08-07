@@ -52,6 +52,7 @@ exports[`TestCollection Component should render 1`] = `
         "id": "id-1",
         "name": "my ab test 1",
         "status": "scheduled",
+        "subaccount_id": 101,
         "updated_at": "2018-10-21T10:10:10.000Z",
         "version": "1",
       },
@@ -90,7 +91,7 @@ Array [
       <strong>
         <UnstyledLink
           component={[Function]}
-          to="/ab-testing/id-1/1"
+          to="/ab-testing/id-1/1?subaccount=101"
         >
           my ab test 1
         </UnstyledLink>
@@ -145,14 +146,14 @@ Array [
               "component": [Function],
               "content": "Edit Test",
               "section": 1,
-              "to": "/ab-testing/id-1/1",
+              "to": "/ab-testing/id-1/1?subaccount=101",
               "visible": true,
             },
             Object {
               "component": [Function],
               "content": "View Test",
               "section": 1,
-              "to": "/ab-testing/id-1/1",
+              "to": "/ab-testing/id-1/1?subaccount=101",
               "visible": false,
             },
             Object {

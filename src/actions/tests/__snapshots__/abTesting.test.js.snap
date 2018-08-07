@@ -8,7 +8,6 @@ Array [
         "x-msys-subaccount": 101,
       },
       "method": "POST",
-      "showErrorAlert": false,
       "url": "/ab-test/test_one/cancel",
     },
     "type": "CANCEL_AB_TEST",
@@ -34,11 +33,14 @@ exports[`Action Creator: A/B Testing should dispatch a delete test action 1`] = 
 Array [
   Object {
     "meta": Object {
+      "data": Object {
+        "id": "test_one",
+        "subaccountId": 101,
+      },
       "headers": Object {
         "x-msys-subaccount": 101,
       },
       "method": "DELETE",
-      "showErrorAlert": false,
       "url": "/ab-test/test_one",
     },
     "type": "DELETE_AB_TEST",
