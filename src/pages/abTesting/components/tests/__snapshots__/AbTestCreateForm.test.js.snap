@@ -58,7 +58,12 @@ exports[`A/B Test Create Form Component should render correctly 1`] = `
       label="Select this test's default template"
       name="default_variant"
       placeholder="Type to search"
-      validate={[Function]}
+      validate={
+        Array [
+          [Function],
+          [Function],
+        ]
+      }
     />
   </Panel.Section>
   <Panel.Section>
@@ -82,4 +87,83 @@ exports[`A/B Test Create Form Component should render subaccount section if suba
   name="subaccount"
   placeholder="Master Account"
 />
+`;
+
+exports[`A/B Test Create Form Component should render when no available templates 1`] = `
+<form
+  onSubmit={[MockFunction]}
+>
+  <Panel.Section>
+    <p>
+      Give your test a name and an ID. You will need to use this ID when specifying an A/B test in your transmission's content JSON object.
+    </p>
+    <Grid>
+      <Grid.Column>
+        <Field
+          component={[Function]}
+          label="Give your test a name"
+          name="name"
+          onChange={[Function]}
+          validate={
+            Array [
+              [Function],
+              [Function],
+            ]
+          }
+        />
+      </Grid.Column>
+      <Grid.Column>
+        <Field
+          component={[Function]}
+          helpText="A Unique ID for your test, we'll fill this in for you."
+          label="ID"
+          name="id"
+          validate={
+            Array [
+              [Function],
+              [Function],
+              [Function],
+            ]
+          }
+        />
+      </Grid.Column>
+    </Grid>
+  </Panel.Section>
+  <Panel.Section>
+    <Field
+      component={[Function]}
+      helpText={
+        <span>
+          No available templates.  
+          <UnstyledLink
+            component={[Function]}
+            to="/templates"
+          >
+            Head over to the templates page to set some up
+          </UnstyledLink>
+          .
+        </span>
+      }
+      label="Select this test's default template"
+      name="default_variant"
+      placeholder="Type to search"
+      validate={
+        Array [
+          [Function],
+          [Function],
+        ]
+      }
+    />
+  </Panel.Section>
+  <Panel.Section>
+    <Button
+      disabled={true}
+      primary={true}
+      size="default"
+      submit={true}
+    >
+      Create New Test
+    </Button>
+  </Panel.Section>
+</form>
 `;

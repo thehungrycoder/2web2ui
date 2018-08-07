@@ -24,6 +24,16 @@ export function abTestId(value) {
   return abTestIdRegex.test(value) ? undefined : 'Must contain only letters, numbers, hyphens, and underscores';
 }
 
+export function abTestDefaultTemplate(value, allValues, props) {
+  if (props.templates.includes(value)) {
+    return undefined;
+  }
+  if (allValues.subaccount) {
+    return 'Template not available to selected subaccount';
+  }
+  return 'Subaccount templates not available to master account';
+}
+
 export function hasNumber(value) {
   return /\d+/.test(value) ? undefined : 'Must have at least 1 number';
 }

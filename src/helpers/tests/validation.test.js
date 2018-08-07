@@ -38,6 +38,11 @@ const cases = {
   abTestId: {
     good: ['id', 'test-id', 'test_1', '1'],
     bad: ['test.id', 'NOT_!@#$%^&*()_VALID', 'test id', ':doge:']
+  },
+  abTestDefaultTemplate: {
+    good: [['foobar', { subaccount: true }, { templates: ['foo', 'bar', 'foobar']}]],
+    bad: [['foobar', { subaccount: true }, { templates: ['foo', 'bar']}], ['foobar', { subaccount: false }, { templates: ['foo', 'bar']}]],
+    multiArg: true
   }
 };
 
@@ -73,11 +78,12 @@ describe('Validation helpers', () => {
   Object.keys(cases).forEach((caseName) => {
     const goodInput = cases[caseName].good;
     const badInput = cases[caseName].bad;
+    const multiArg = !!cases[caseName].multiArg;
     goodInput.forEach((input) => it(`${caseName} should accept ${input}`,
-      () => expect(validations[caseName](input)).toBeUndefined()));
+      () => expect(validations[caseName](...multiArg ? input : [input])).toBeUndefined()));
 
     badInput.forEach((input) => it(`${caseName} should not accept ${input}`,
-      () => expect(validations[caseName](input)).toBeDefined()));
+      () => expect(validations[caseName](...multiArg ? input : [input])).toBeDefined()));
   });
 });
 
