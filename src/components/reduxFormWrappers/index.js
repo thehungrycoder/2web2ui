@@ -5,3 +5,4 @@ export { default as SendingDomainTypeaheadWrapper } from './SendingDomainTypeahe
 export { default as SubaccountTypeaheadWrapper } from './SubaccountTypeaheadWrapper';
 export { default as TemplateTypeaheadWrapper } from './TemplateTypeaheadWrapper';
 export { default as TextFieldWrapper } from './TextFieldWrapper';
+export { default as DatePickerWrapper } from './DatePickerWrapper';

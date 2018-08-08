@@ -1,7 +1,8 @@
 import React, { Fragment } from 'react';
 import { Field } from 'redux-form';
 import { Panel } from '@sparkpost/matchbox';
-import { TextFieldWrapper } from 'src/components/reduxFormWrappers';
+import { AccessTime } from '@sparkpost/matchbox-icons';
+import { TextFieldWrapper, DatePickerWrapper } from 'src/components/reduxFormWrappers';
 
 const StatusFields = ({ disabled }) => (
   <Fragment>
@@ -14,14 +15,23 @@ const StatusFields = ({ disabled }) => (
       />
     </Panel>
     <Panel sectioned>
-      {/* TODO - add datepicker  */}
       <Field
-        name='dates'
-        component={TextFieldWrapper}
-        helpText='A test may run for a maximum of 30 days'
-        label='When should we run this test?'
+        component={DatePickerWrapper}
         disabled={disabled}
-        placeholder='Jul 31st 2018 11:02am – Aug 1st 2018 11:02am'
+        name='dates'
+        left
+        showPresets={false}
+        textFieldProps={{
+          helpText: 'A test may run for a maximum of 30 days',
+          label: 'When should we run this test?',
+          prefix: <AccessTime />
+        }}
+        datePickerProps={{
+          disabledDays: { before: new Date() },
+          initialMonth: new Date(),
+          toMonth: null,
+          fromMonth: new Date()
+        }}
       />
     </Panel>
   </Fragment>

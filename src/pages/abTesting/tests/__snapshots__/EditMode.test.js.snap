@@ -116,7 +116,13 @@ exports[`Page: A/B Test Edit Mode should render draft status correctly 1`] = `
         }
       />
     </Left>
-    <Right />
+    <Right>
+      <VariantsFields
+        disabled={false}
+        formValues="test values"
+        subaccountId="101"
+      />
+    </Right>
   </Section>
 </Page>
 `;
@@ -237,7 +243,13 @@ exports[`Page: A/B Test Edit Mode should render scheduled status correctly 1`] =
         }
       />
     </Left>
-    <Right />
+    <Right>
+      <VariantsFields
+        disabled={false}
+        formValues="test values"
+        subaccountId="101"
+      />
+    </Right>
   </Section>
 </Page>
 `;

@@ -24,6 +24,7 @@ describe('Page: A/B Test Edit Mode', () => {
       },
       getAbTest: jest.fn(),
       showAlert: jest.fn(),
+      listTemplates: jest.fn(),
       updateDraft: jest.fn(() => Promise.resolve()),
       deleteAction: {
         content: 'delete test',
@@ -43,6 +44,7 @@ describe('Page: A/B Test Edit Mode', () => {
 
   it('should render draft status correctly', () => {
     expect(wrapper).toMatchSnapshot();
+    expect(props.listTemplates).toHaveBeenCalled();
   });
 
   it('should render scheduled status correctly', () => {

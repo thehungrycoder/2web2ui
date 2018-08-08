@@ -1,3 +1,4 @@
+/* eslint max-lines: ["error", 200] */
 import React, { Component } from 'react';
 import { subMonths, format } from 'date-fns';
 import { getStartOfDay, getEndOfDay, getRelativeDateOptions } from 'src/helpers/date';
@@ -114,21 +115,33 @@ export default class AppDatePicker extends Component {
     const selectedRange = showDatePicker ? 'custom' : this.props.relativeRange;
 
     // allow for prop-level override of "now" (DI, etc.)
-    const { now = new Date(), relativeDateOptions = [], disabled, datePickerProps = {}, dateFieldFormat } = this.props;
+    const {
+      now = new Date(),
+      relativeDateOptions = [],
+      disabled,
+      datePickerProps = {},
+      textFieldProps = {},
+      dateFieldFormat,
+      showPresets = true,
+      left
+    } = this.props;
     const dateFormat = dateFieldFormat || this.DATE_FORMAT;
 
-    const rangeSelect = <Select
-      options={getRelativeDateOptions(relativeDateOptions)}
-      onChange={this.handleSelectRange}
-      value={selectedRange}
-      disabled={disabled} />;
+    const rangeSelect = showPresets
+      ? <Select
+        options={getRelativeDateOptions(relativeDateOptions)}
+        onChange={this.handleSelectRange}
+        value={selectedRange}
+        disabled={disabled} />
+      : null;
 
     const dateField = <TextField
-      labelHidden={true}
       onClick={this.showDatePicker}
       connectLeft={rangeSelect}
       value={`${format(from, dateFormat)} – ${format(to, dateFormat)}`}
-      readOnly />;
+      readOnly
+      disabled={disabled}
+      {...textFieldProps} />;
 
     return (
       <Popover
@@ -136,7 +149,8 @@ export default class AppDatePicker extends Component {
         className={styles.Popover}
         trigger={dateField}
         onClose={this.cancelDatePicker}
-        open={this.state.showDatePicker} >
+        open={this.state.showDatePicker}
+        left={left} >
 
         <DateSelector
           numberOfMonths={2}
@@ -168,9 +182,10 @@ AppDatePicker.propTypes = {
   from: PropTypes.instanceOf(Date),
   to: PropTypes.instanceOf(Date),
   relativeRange: PropTypes.string,
-  relativeDateOptions: PropTypes.arrayOf(PropTypes.string).isRequired,
+  relativeDateOptions: PropTypes.arrayOf(PropTypes.string),
   onChange: PropTypes.func.isRequired,
   datePickerProps: PropTypes.object,
   dateFieldFormat: PropTypes.string,
-  disabled: PropTypes.bool
+  disabled: PropTypes.bool,
+  showPresets: PropTypes.bool
 };

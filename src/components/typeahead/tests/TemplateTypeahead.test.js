@@ -31,8 +31,14 @@ describe('Template Typeahead', () => {
   });
 
   it('should get templates', () => {
+    expect(wrapper.instance().props.listTemplates).toHaveBeenCalledTimes(1);
+  });
+
+  it('should not get templates if list already exists', () => {
+    jest.clearAllMocks();
+    wrapper.setProps({ results: ['1', '2']});
     wrapper.instance().componentDidMount();
-    expect(wrapper.instance().props.listTemplates).toHaveBeenCalled();
+    expect(wrapper.instance().props.listTemplates).not.toHaveBeenCalled();
   });
 
   it('should render itemToString correctly', () => {
