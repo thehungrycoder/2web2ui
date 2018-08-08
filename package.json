@@ -144,7 +144,7 @@
     "node-sass": "^4.5.3",
     "object-assign": "^4.1.1",
     "postcss-flexbugs-fixes": "^4.0.0",
-    "postcss-loader": "^2.1.0",
+    "postcss-loader": "^3.0.0",
     "promise": "^8.0.1",
     "react-dev-utils": "^5.0.0",
     "react-error-overlay": "^4.0.0",
