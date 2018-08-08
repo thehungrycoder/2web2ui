@@ -20,9 +20,16 @@ describe('Page: A/B Test View Mode', () => {
         updated_at: '2018-10-21T10:10:10.000Z'
       },
       deleteAction: {
-        content: 'delete content',
+        content: 'delete test',
         onClick: jest.fn()
-      }
+      },
+      cancelAction: {
+        content: 'cancel test',
+        onClick: jest.fn()
+      },
+      showAlert: jest.fn(),
+      updateDraft: jest.fn(() => Promise.resolve()),
+      history: { push: jest.fn() }
     };
     wrapper = shallow(<ViewMode {...props} />);
 
@@ -40,5 +47,20 @@ describe('Page: A/B Test View Mode', () => {
   it('should render cancelled status correctly', () => {
     wrapper.setProps({ test: { ...props.test, status: 'cancelled' }});
     expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should toggle override modal', () => {
+    expect(wrapper.instance().state.showOverrideModal).toEqual(false);
+    wrapper.instance().toggleOverride();
+    expect(wrapper.instance().state.showOverrideModal).toEqual(true);
+  });
+
+  it('should handle override', () => {
+    wrapper.setProps({ 'test': { id: 'ab-test' }});
+    return wrapper.instance().handleOverride().then(() => {
+      expect(props.updateDraft).toHaveBeenCalledWith({}, { id: 'ab-test', subaccountId: '101' });
+      expect(props.showAlert).toHaveBeenCalled();
+      expect(props.history.push).toHaveBeenCalled();
+    });
   });
 });

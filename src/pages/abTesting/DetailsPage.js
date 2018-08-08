@@ -1,12 +1,13 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getAbTest } from 'src/actions/abTesting';
+import { getAbTest, deleteAbTest, cancelAbTest } from 'src/actions/abTesting';
 import { selectAbTestFromParams, selectIdAndVersionFromParams } from 'src/selectors/abTesting';
 import { selectSubaccountIdFromQuery } from 'src/selectors/subaccounts';
 
-import { Loading } from 'src/components';
-import { Delete } from '@sparkpost/matchbox-icons';
+import { Loading, DeleteModal, ConfirmationModal } from 'src/components';
+import { Delete, Cancel } from '@sparkpost/matchbox-icons';
+import { showAlert } from 'src/actions/globalAlert';
 import RedirectAndAlert from 'src/components/globalAlert/RedirectAndAlert';
 import EditMode from './EditMode';
 import ViewMode from './ViewMode';
@@ -24,8 +25,9 @@ export class DetailsPage extends Component {
   }
 
   state = {
-    shouldRedirect: false
-    // showDelete: false
+    shouldRedirect: false,
+    showDeleteModal: false,
+    showCancelModal: false
   }
 
   componentDidMount() {
@@ -41,20 +43,54 @@ export class DetailsPage extends Component {
     }
   }
 
-  // toggleDelete = (modal) => {
-  //   this.setState({ showDelete: !this.state.showDelete });
-  // }
+  toggleDelete = () => {
+    this.setState({ showDeleteModal: !this.state.showDeleteModal });
+  }
+
+  handleDelete = () => {
+    const { id } = this.props.test;
+    const { subaccountId, deleteAbTest, showAlert, history } = this.props;
+
+    return deleteAbTest({ id, subaccountId }).then(() => {
+      showAlert({ type: 'success', message: 'Test deleted' });
+      history.push('/ab-testing');
+    });
+  };
+
+  toggleCancel = () => {
+    this.setState({ showCancelModal: !this.state.showCancelModal });
+  }
+
+  handleCancel = () => {
+    const { id } = this.props.test;
+    const { subaccountId, version, cancelAbTest, getAbTest, showAlert } = this.props;
+
+    return cancelAbTest({ id, subaccountId }).then(() => {
+      showAlert({ type: 'success', message: 'Test cancelled' });
+      getAbTest({ id, version, subaccountId });
+      this.toggleCancel();
+    });
+  };
 
   // Actions & other props we want to share with both Edit and View mode
-  getSharedProps = () => ({
-    breadcrumbAction: { content: 'Back to A/B Tests', component: Link, to: '/ab-testing' },
-    deleteAction: {
-      content: <span><Delete/> Delete Test</span>,
-      onClick: this.toggleDelete
-    },
-    test: this.props.test,
-    subaccountId: this.props.subaccountId
-  })
+  getSharedProps = () => {
+    const { status } = this.props.test;
+    return {
+      breadcrumbAction: { content: 'Back to A/B Tests', component: Link, to: '/ab-testing' },
+      cancelAction: {
+        content: <span><Cancel/> Cancel Test</span>,
+        visible: status === 'scheduled' || status === 'running',
+        onClick: this.toggleCancel
+      },
+      deleteAction: {
+        content: <span><Delete/> Delete Test</span>,
+        visible: status === 'completed' || status === 'cancelled',
+        onClick: this.toggleDelete
+      },
+      test: this.props.test,
+      subaccountId: this.props.subaccountId
+    };
+  };
 
   render() {
     const { loading, error } = this.props;
@@ -78,7 +114,23 @@ export class DetailsPage extends Component {
     return (
       <Fragment>
         <DetailPage {...this.getSharedProps()} />
-        {/* TODO - Add delete modal here */}
+        <DeleteModal
+          open={this.state.showDeleteModal}
+          title='Are you sure you want to delete this test?'
+          content={<p>The test and all associated versions will be immediately and permanently removed. This cannot be undone.</p>}
+          onDelete={this.handleDelete}
+          onCancel={this.toggleDelete}
+          isPending={this.props.deletePending}
+        />
+        <ConfirmationModal
+          open={this.state.showCancelModal}
+          title='Are you sure you want to cancel this test?'
+          content={<p>The test will be cancelled and all further messages will be delivered to the default template.</p>}
+          onConfirm={this.handleCancel}
+          onCancel={this.toggleCancel}
+          isPending={this.props.cancelPending}
+          confirmVerb='OK'
+        />
       </Fragment>
     );
   }
@@ -88,10 +140,12 @@ function mapStateToProps(state, props) {
   return {
     test: selectAbTestFromParams(state, props),
     loading: state.abTesting.detailsLoading,
+    deletePending: state.abTesting.deletePending,
+    cancelPending: state.abTesting.cancelPending,
     error: state.abTesting.detailsError,
     ...selectIdAndVersionFromParams(state, props),
     subaccountId: selectSubaccountIdFromQuery(state, props)
   };
 }
 
-export default connect(mapStateToProps, { getAbTest })(DetailsPage);
+export default connect(mapStateToProps, { getAbTest, deleteAbTest, cancelAbTest, showAlert })(DetailsPage);

@@ -5,6 +5,9 @@ import { ListPage } from '../ListPage';
 describe('Page: A/B Test List', () => {
   const props = {
     listAbTests: jest.fn(),
+    deleteAbTest: jest.fn(() => Promise.resolve()),
+    cancelAbTest: jest.fn(() => Promise.resolve()),
+    showAlert: jest.fn(),
     error: null,
     abTests: [
       {
@@ -39,8 +42,7 @@ describe('Page: A/B Test List', () => {
         updated_at: '2018-10-23T10:10:10.000Z'
       }
     ],
-    loading: false,
-    showAlert: jest.fn()
+    loading: false
   };
 
   let wrapper;
@@ -58,13 +60,50 @@ describe('Page: A/B Test List', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('should render cancel modal', () => {
+    wrapper.setState({ showCancelModal: true });
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render delete modal', () => {
+    wrapper.setState({ showDeleteModal: true });
+    expect(wrapper).toMatchSnapshot();
+  });
+
   it('should render error when it fails', () => {
     wrapper.setProps({ error: { message: 'this failed' }});
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should render row data properly', () => {
-    const row = wrapper.instance().getRowData(props.abTests[0]);
-    expect(row).toMatchSnapshot();
+  it('should toggle cancel modal', () => {
+    expect(wrapper).toHaveState('showCancelModal', false);
+    expect(wrapper).toHaveState('testToCancel', {});
+    wrapper.instance().toggleCancel('test-id', 101);
+    expect(wrapper).toHaveState('showCancelModal', true);
+    expect(wrapper).toHaveState('testToCancel', { id: 'test-id', subaccountId: 101 });
+  });
+
+  it('should toggle delete modal', () => {
+    expect(wrapper).toHaveState('showDeleteModal', false);
+    expect(wrapper).toHaveState('testToDelete', {});
+    wrapper.instance().toggleDelete('test-id', 101);
+    expect(wrapper).toHaveState('showDeleteModal', true);
+    expect(wrapper).toHaveState('testToDelete', { id: 'test-id', subaccountId: 101 });
+  });
+
+  it('should handle cancel', () => {
+    wrapper.setState({ 'testToCancel': { id: 'ab-test', subaccountId: 202 }});
+    wrapper.instance().handleCancel().then(() => {
+      expect(props.cancelAbTest).toHaveBeenCalledWith({ id: 'ab-test', subaccountId: 202 });
+      expect(props.showAlert).toHaveBeenCalled();
+    });
+  });
+
+  it('should handle delete', () => {
+    wrapper.setState({ 'testToDelete': { id: 'ab-test', subaccountId: 202 }});
+    wrapper.instance().handleDelete().then(() => {
+      expect(props.deleteAbTest).toHaveBeenCalledWith({ id: 'ab-test', subaccountId: 202 });
+      expect(props.showAlert).toHaveBeenCalled();
+    });
   });
 });

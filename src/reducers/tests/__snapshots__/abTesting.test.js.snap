@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`A/B Testing reducer matches ab tests correctly (excludes deleted one) 1`] = `
+Object {
+  "deletePending": false,
+  "list": Array [
+    Object {
+      "id": "test-subaccount",
+      "subaccount_id": 101,
+    },
+    Object {
+      "id": "test-subaccount",
+      "subaccount_id": 202,
+    },
+  ],
+}
+`;
+
+exports[`A/B Testing reducer matches ab tests with subaccount correctly (excludes deleted one) 1`] = `
+Object {
+  "deletePending": false,
+  "list": Array [
+    Object {
+      "id": "test-master",
+    },
+    Object {
+      "id": "test-subaccount",
+      "subaccount_id": 202,
+    },
+  ],
+}
+`;
