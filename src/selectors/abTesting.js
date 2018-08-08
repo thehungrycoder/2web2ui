@@ -14,7 +14,7 @@ const selectDetails = (state) => state.abTesting.detailsById;
  */
 export const selectIdAndVersionFromParams = (state, props) => ({
   id: _.get(props, 'match.params.id'),
-  version: _.get(props, 'match.params.version')
+  version: Number(_.get(props, 'match.params.version'))
 });
 
 /**

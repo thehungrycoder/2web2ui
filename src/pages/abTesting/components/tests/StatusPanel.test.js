@@ -18,7 +18,6 @@ describe('Status Panel Component', () => {
       id: 'test_one',
       version: 4,
       subaccountId: 101,
-      getAbTest: jest.fn(),
       getLatestAbTest: jest.fn()
     };
     wrapper = shallow(<StatusPanel {...props} />);
@@ -40,11 +39,6 @@ describe('Status Panel Component', () => {
   it('should not render version selector if latest version is 1', () => {
     wrapper.setProps({ latest: 1 });
     expect(wrapper.find(Panel.Section).prop('actions')).toEqual(null);
-  });
-
-  it('should get a new version when url changes', () => {
-    wrapper.setProps({ version: 3 });
-    expect(props.getAbTest).toHaveBeenCalledWith({ id: 'test_one', subaccountId: 101, version: 3 });
   });
 
   describe('version selector', () => {

@@ -96,4 +96,9 @@ describe('Page: A/B Test Details', () => {
       expect(props.history.push).toHaveBeenCalled();
     });
   });
+
+  it('should get a new version when url changes', () => {
+    wrapper.setProps({ version: 3 });
+    expect(props.getAbTest).toHaveBeenCalledWith({ id: 'id-1', subaccountId: '101', version: 3 });
+  });
 });

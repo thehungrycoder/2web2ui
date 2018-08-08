@@ -16,7 +16,7 @@ const VersionSelector = ({ current, latest, id, subaccountId }) => {
     content: `View Version ${i + 1}`,
     to: `/ab-testing/${id}/${i + 1}${setSubaccountQuery(subaccountId)}`,
     component: Link,
-    visible: i + 1 !== Number(current)
+    visible: i + 1 !== current
   })).reverse();
 
   return (
@@ -34,15 +34,6 @@ export class StatusPanel extends Component {
   componentDidMount() {
     const { id, subaccountId, getLatestAbTest } = this.props;
     getLatestAbTest({ id, subaccountId });
-  }
-
-  componentDidUpdate({ version: prevVersion }) {
-    const { id, version, subaccountId, getAbTest } = this.props;
-
-    // Fetch the updated version when url updates
-    if (prevVersion !== version) {
-      getAbTest({ id, version, subaccountId });
-    }
   }
 
   render() {

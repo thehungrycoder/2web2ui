@@ -98,6 +98,7 @@ function mapStateToProps(state) {
     initialValues: {},
     hasSubaccounts: hasSubaccountsSelector(state),
     templates: selectPublishedTemplatesBySubaccount(state),
+    // Subaccount ID here is used to filter and validate available templates in the typeahead
     subaccountId: selector(state, 'subaccount.id') || 0
   };
 }

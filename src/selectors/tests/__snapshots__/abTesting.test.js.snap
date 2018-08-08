@@ -54,7 +54,7 @@ Object {
 exports[`Selectors: abTesting should selects ID and version from router params 1`] = `
 Object {
   "id": "test_2",
-  "version": "2",
+  "version": 2,
 }
 `;
 
