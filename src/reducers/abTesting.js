@@ -43,7 +43,12 @@ export default (state = initialState, { type, payload, meta }) => {
       return {
         ...state,
         deletePending: false,
-        list: state.list.filter((t) => (t.id !== meta.data.id && t.id !== meta.data.subaccountId))
+        list: state.list.filter((t) => {
+          if (meta.data.subaccountId) {
+            meta.data.subaccountId = parseInt(meta.data.subaccountId, 10);
+          }
+          return t.id !== meta.data.id || t.subaccount_id !== meta.data.subaccountId;
+        })
       };
 
     case 'DELETE_AB_TEST_FAIL':

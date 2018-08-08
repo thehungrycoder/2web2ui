@@ -49,11 +49,11 @@ export class DetailsPage extends Component {
 
   handleDelete = () => {
     const { id } = this.props.test;
-    const { subaccountId } = this.props;
+    const { subaccountId, deleteAbTest, showAlert, history } = this.props;
 
-    return this.props.deleteAbTest({ id, subaccountId }).then(() => {
-      this.props.showAlert({ type: 'success', message: 'Test deleted' });
-      this.props.history.push('/ab-testing');
+    return deleteAbTest({ id, subaccountId }).then(() => {
+      showAlert({ type: 'success', message: 'Test deleted' });
+      history.push('/ab-testing');
     });
   };
 
@@ -63,11 +63,12 @@ export class DetailsPage extends Component {
 
   handleCancel = () => {
     const { id } = this.props.test;
-    const { subaccountId } = this.props;
+    const { subaccountId, version, cancelAbTest, getAbTest, showAlert } = this.props;
 
-    return this.props.cancelAbTest({ id, subaccountId }).then(() => {
-      this.props.showAlert({ type: 'success', message: 'Test cancelled' });
-      this.props.history.push('/ab-testing');
+    return cancelAbTest({ id, subaccountId }).then(() => {
+      showAlert({ type: 'success', message: 'Test cancelled' });
+      getAbTest({ id, version, subaccountId });
+      this.toggleCancel();
     });
   };
 

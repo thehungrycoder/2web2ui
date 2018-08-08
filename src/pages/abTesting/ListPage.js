@@ -80,7 +80,7 @@ export class ListPage extends Component {
   }
 
   render() {
-    const { loading, error, abTests } = this.props;
+    const { loading, error, abTests, deletePending, cancelPending } = this.props;
 
     if (loading) {
       return <Loading />;
@@ -103,6 +103,7 @@ export class ListPage extends Component {
           content={<p>The test and all associated versions will be immediately and permanently removed. This cannot be undone.</p>}
           onDelete={this.handleDelete}
           onCancel={this.toggleDelete}
+          isPending={deletePending}
         />
         <ConfirmationModal
           open={this.state.showCancelModal}
@@ -110,6 +111,7 @@ export class ListPage extends Component {
           content={<p>The test will be cancelled and all further messages will be delivered to the default template.</p>}
           onConfirm={this.handleCancel}
           onCancel={this.toggleCancel}
+          isPending={cancelPending}
           confirmVerb='OK'
         />
       </Page>
@@ -121,6 +123,8 @@ function mapStateToProps({ abTesting, ...state }) {
   return {
     abTests: abTesting.list,
     loading: abTesting.listLoading,
+    deletePending: abTesting.deletePending,
+    cancelPending: abTesting.cancelPending,
     error: abTesting.listError
   };
 }

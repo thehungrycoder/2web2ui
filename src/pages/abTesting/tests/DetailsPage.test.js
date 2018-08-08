@@ -84,7 +84,7 @@ describe('Page: A/B Test Details', () => {
     return wrapper.instance().handleCancel().then(() => {
       expect(props.cancelAbTest).toHaveBeenCalledWith({ id: 'ab-test', subaccountId: '101' });
       expect(props.showAlert).toHaveBeenCalled();
-      expect(props.history.push).toHaveBeenCalled();
+      expect(props.getAbTest).toHaveBeenCalledWith({ id: props.id, version: props.version, subaccountId: props.subaccountId });
     });
   });
 
