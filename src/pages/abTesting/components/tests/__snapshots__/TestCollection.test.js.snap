@@ -1,0 +1,391 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TestCollection Component should render 1`] = `
+<TableCollection
+  columns={
+    Array [
+      Object {
+        "label": "Name",
+        "sortKey": "name",
+      },
+      Object {
+        "label": "Status",
+        "sortKey": "status",
+      },
+      Object {
+        "label": "Template",
+        "sortKey": [Function],
+      },
+      Object {
+        "label": "Last Modified",
+        "sortKey": "updated_at",
+      },
+      null,
+    ]
+  }
+  defaultSortColumn="updated_at"
+  defaultSortDirection="desc"
+  filterBox={
+    Object {
+      "exampleModifiers": Array [
+        "id",
+        "status",
+        "test_mode",
+      ],
+      "itemToStringKeys": Array [
+        "name",
+        "id",
+        "status",
+        "test_mode",
+      ],
+      "show": true,
+    }
+  }
+  getRowData={[Function]}
+  pagination={true}
+  rows={
+    Array [
+      Object {
+        "default_template": Object {
+          "template_id": "ab-test-1",
+        },
+        "id": "id-1",
+        "name": "my ab test 1",
+        "status": "scheduled",
+        "subaccount_id": 101,
+        "updated_at": "2018-10-21T10:10:10.000Z",
+        "version": "1",
+      },
+      Object {
+        "default_template": Object {
+          "template_id": "ab-test-2",
+        },
+        "id": "id-2",
+        "name": "my ab test 2",
+        "status": "running",
+        "updated_at": "2018-10-22T10:10:10.000Z",
+        "version": "2",
+      },
+      Object {
+        "default_template": Object {
+          "template_id": "ab-test-3",
+        },
+        "id": "id-3",
+        "name": "my ab test 3",
+        "status": "completed",
+        "updated_at": "2018-10-23T10:10:10.000Z",
+        "version": "3",
+        "winning_template_id": "ab-test-winner",
+      },
+    ]
+  }
+/>
+`;
+
+exports[`TestCollection Component should render row data properly 1`] = `
+Array [
+  <React.Fragment>
+    <p
+      className="Name"
+    >
+      <strong>
+        <UnstyledLink
+          component={[Function]}
+          to="/ab-testing/id-1/1?subaccount=101"
+        >
+          my ab test 1
+        </UnstyledLink>
+      </strong>
+    </p>
+    <p
+      className="Id"
+    >
+      ID: 
+      id-1
+    </p>
+  </React.Fragment>,
+  <StatusTag
+    status="scheduled"
+  />,
+  <p
+    className="Template"
+  >
+    ab-test-1
+  </p>,
+  <p
+    className="LastUpdated"
+  >
+    Oct 21 2018, 6:10am
+  </p>,
+  <div
+    style={
+      Object {
+        "textAlign": "right",
+      }
+    }
+  >
+    <Popover
+      bottom={true}
+      left={true}
+      right={true}
+      trigger={
+        <Button
+          flat={true}
+          size="large"
+        >
+          <MoreHoriz
+            size={21}
+          />
+        </Button>
+      }
+    >
+      <ActionList
+        actions={
+          Array [
+            Object {
+              "component": [Function],
+              "content": "Edit Test",
+              "section": 1,
+              "to": "/ab-testing/id-1/1?subaccount=101",
+              "visible": true,
+            },
+            Object {
+              "component": [Function],
+              "content": "View Test",
+              "section": 1,
+              "to": "/ab-testing/id-1/1?subaccount=101",
+              "visible": false,
+            },
+            Object {
+              "content": "Edit and Rerun Test",
+              "section": 1,
+              "visible": false,
+            },
+            Object {
+              "content": "Cancel Test",
+              "onClick": [Function],
+              "section": 2,
+              "visible": true,
+            },
+            Object {
+              "content": "Delete Test",
+              "onClick": [Function],
+              "section": 2,
+              "visible": false,
+            },
+          ]
+        }
+        groupByKey="section"
+      />
+    </Popover>
+  </div>,
+]
+`;
+
+exports[`TestCollection Component should render row data properly 2`] = `
+Array [
+  <React.Fragment>
+    <p
+      className="Name"
+    >
+      <strong>
+        <UnstyledLink
+          component={[Function]}
+          to="/ab-testing/id-2/2"
+        >
+          my ab test 2
+        </UnstyledLink>
+      </strong>
+    </p>
+    <p
+      className="Id"
+    >
+      ID: 
+      id-2
+    </p>
+  </React.Fragment>,
+  <StatusTag
+    status="running"
+  />,
+  <p
+    className="Template"
+  >
+    ab-test-2
+  </p>,
+  <p
+    className="LastUpdated"
+  >
+    Oct 22 2018, 6:10am
+  </p>,
+  <div
+    style={
+      Object {
+        "textAlign": "right",
+      }
+    }
+  >
+    <Popover
+      bottom={true}
+      left={true}
+      right={true}
+      trigger={
+        <Button
+          flat={true}
+          size="large"
+        >
+          <MoreHoriz
+            size={21}
+          />
+        </Button>
+      }
+    >
+      <ActionList
+        actions={
+          Array [
+            Object {
+              "component": [Function],
+              "content": "Edit Test",
+              "section": 1,
+              "to": "/ab-testing/id-2/2",
+              "visible": false,
+            },
+            Object {
+              "component": [Function],
+              "content": "View Test",
+              "section": 1,
+              "to": "/ab-testing/id-2/2",
+              "visible": true,
+            },
+            Object {
+              "content": "Edit and Rerun Test",
+              "section": 1,
+              "visible": false,
+            },
+            Object {
+              "content": "Cancel Test",
+              "onClick": [Function],
+              "section": 2,
+              "visible": true,
+            },
+            Object {
+              "content": "Delete Test",
+              "onClick": [Function],
+              "section": 2,
+              "visible": false,
+            },
+          ]
+        }
+        groupByKey="section"
+      />
+    </Popover>
+  </div>,
+]
+`;
+
+exports[`TestCollection Component should render row data properly 3`] = `
+Array [
+  <React.Fragment>
+    <p
+      className="Name"
+    >
+      <strong>
+        <UnstyledLink
+          component={[Function]}
+          to="/ab-testing/id-3/3"
+        >
+          my ab test 3
+        </UnstyledLink>
+      </strong>
+    </p>
+    <p
+      className="Id"
+    >
+      ID: 
+      id-3
+    </p>
+  </React.Fragment>,
+  <StatusTag
+    status="completed"
+  />,
+  <p
+    className="Template"
+  >
+    <React.Fragment>
+      <span
+        className="Winner"
+      >
+        Winner:
+      </span>
+       
+      ab-test-winner
+    </React.Fragment>
+  </p>,
+  <p
+    className="LastUpdated"
+  >
+    Oct 23 2018, 6:10am
+  </p>,
+  <div
+    style={
+      Object {
+        "textAlign": "right",
+      }
+    }
+  >
+    <Popover
+      bottom={true}
+      left={true}
+      right={true}
+      trigger={
+        <Button
+          flat={true}
+          size="large"
+        >
+          <MoreHoriz
+            size={21}
+          />
+        </Button>
+      }
+    >
+      <ActionList
+        actions={
+          Array [
+            Object {
+              "component": [Function],
+              "content": "Edit Test",
+              "section": 1,
+              "to": "/ab-testing/id-3/3",
+              "visible": false,
+            },
+            Object {
+              "component": [Function],
+              "content": "View Test",
+              "section": 1,
+              "to": "/ab-testing/id-3/3",
+              "visible": true,
+            },
+            Object {
+              "content": "Edit and Rerun Test",
+              "section": 1,
+              "visible": true,
+            },
+            Object {
+              "content": "Cancel Test",
+              "onClick": [Function],
+              "section": 2,
+              "visible": false,
+            },
+            Object {
+              "content": "Delete Test",
+              "onClick": [Function],
+              "section": 2,
+              "visible": true,
+            },
+          ]
+        }
+        groupByKey="section"
+      />
+    </Popover>
+  </div>,
+]
+`;

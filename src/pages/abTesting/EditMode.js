@@ -31,13 +31,9 @@ export class EditMode extends Component {
     });
   }
 
-  handleSchedule = (values) => {
-    return;
-  }
+  handleSchedule = (values) => {}
 
-  handleUpdateScheduled = (values) => {
-    return;
-  }
+  handleUpdateScheduled = (values) => {}
 
   getPrimaryAction = () => {
     const { handleSubmit, test } = this.props;
@@ -56,13 +52,14 @@ export class EditMode extends Component {
   }
 
   getSecondaryActions = () => {
-    const { test, deleteAction, handleSubmit } = this.props;
+    const { test, deleteAction, cancelAction, handleSubmit } = this.props;
     return [
       {
         content: <span><Save/> Save as Draft</span>,
         visible: test.status === 'draft',
         onClick: handleSubmit(this.handleSaveAsDraft)
       },
+      cancelAction,
       deleteAction
     ];
   }

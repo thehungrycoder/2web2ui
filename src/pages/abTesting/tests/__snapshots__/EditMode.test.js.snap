@@ -20,7 +20,11 @@ exports[`Page: A/B Test Edit Mode should render draft status correctly 1`] = `
         "visible": true,
       },
       Object {
-        "content": "delete content",
+        "content": "cancel test",
+        "onClick": [MockFunction],
+      },
+      Object {
+        "content": "delete test",
         "onClick": [MockFunction],
       },
     ]
@@ -137,7 +141,11 @@ exports[`Page: A/B Test Edit Mode should render scheduled status correctly 1`] =
         "visible": false,
       },
       Object {
-        "content": "delete content",
+        "content": "cancel test",
+        "onClick": [MockFunction],
+      },
+      Object {
+        "content": "delete test",
         "onClick": [MockFunction],
       },
     ]

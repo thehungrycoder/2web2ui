@@ -11,15 +11,16 @@ exports[`Page: A/B Test View Mode should render cancelled status correctly 1`] =
   secondaryActions={
     Array [
       Object {
-        "content": "Cancel Test",
-        "visible": false,
-      },
-      Object {
         "content": "Override Default Template",
-        "visible": false,
+        "onClick": [Function],
+        "visible": true,
       },
       Object {
-        "content": "delete content",
+        "content": "cancel test",
+        "onClick": [MockFunction],
+      },
+      Object {
+        "content": "delete test",
         "onClick": [MockFunction],
       },
     ]
@@ -105,6 +106,18 @@ exports[`Page: A/B Test View Mode should render cancelled status correctly 1`] =
     </Left>
     <Right />
   </Section>
+  <ConfirmationModal
+    confirmVerb="OK"
+    content={
+      <p>
+        The test will be updated and placed into draft state. Messages will be delivered to the default template.
+      </p>
+    }
+    onCancel={[Function]}
+    onConfirm={[Function]}
+    open={false}
+    title="Are you sure you want to override the winning template for this test?"
+  />
 </Page>
 `;
 
@@ -119,15 +132,16 @@ exports[`Page: A/B Test View Mode should render completed status correctly 1`] =
   secondaryActions={
     Array [
       Object {
-        "content": "Cancel Test",
-        "visible": false,
-      },
-      Object {
         "content": "Override Default Template",
-        "visible": false,
+        "onClick": [Function],
+        "visible": true,
       },
       Object {
-        "content": "delete content",
+        "content": "cancel test",
+        "onClick": [MockFunction],
+      },
+      Object {
+        "content": "delete test",
         "onClick": [MockFunction],
       },
     ]
@@ -213,6 +227,18 @@ exports[`Page: A/B Test View Mode should render completed status correctly 1`] =
     </Left>
     <Right />
   </Section>
+  <ConfirmationModal
+    confirmVerb="OK"
+    content={
+      <p>
+        The test will be updated and placed into draft state. Messages will be delivered to the default template.
+      </p>
+    }
+    onCancel={[Function]}
+    onConfirm={[Function]}
+    open={false}
+    title="Are you sure you want to override the winning template for this test?"
+  />
 </Page>
 `;
 
@@ -223,15 +249,16 @@ exports[`Page: A/B Test View Mode should render running status correctly 1`] = `
   secondaryActions={
     Array [
       Object {
-        "content": "Cancel Test",
-        "visible": true,
-      },
-      Object {
         "content": "Override Default Template",
+        "onClick": [Function],
         "visible": false,
       },
       Object {
-        "content": "delete content",
+        "content": "cancel test",
+        "onClick": [MockFunction],
+      },
+      Object {
+        "content": "delete test",
         "onClick": [MockFunction],
       },
     ]
@@ -317,5 +344,17 @@ exports[`Page: A/B Test View Mode should render running status correctly 1`] = `
     </Left>
     <Right />
   </Section>
+  <ConfirmationModal
+    confirmVerb="OK"
+    content={
+      <p>
+        The test will be updated and placed into draft state. Messages will be delivered to the default template.
+      </p>
+    }
+    onCancel={[Function]}
+    onConfirm={[Function]}
+    open={false}
+    title="Are you sure you want to override the winning template for this test?"
+  />
 </Page>
 `;
