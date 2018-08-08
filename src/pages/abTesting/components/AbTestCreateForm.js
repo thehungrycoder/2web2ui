@@ -91,13 +91,13 @@ export class AbTestCreateForm extends Component {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state, props) {
   const selector = formValueSelector(formName);
 
   return {
     initialValues: {},
     hasSubaccounts: hasSubaccountsSelector(state),
-    templates: selectPublishedTemplatesBySubaccount(state),
+    templates: selectPublishedTemplatesBySubaccount(state, props),
     // Subaccount ID here is used to filter and validate available templates in the typeahead
     subaccountId: selector(state, 'subaccount.id') || 0
   };
