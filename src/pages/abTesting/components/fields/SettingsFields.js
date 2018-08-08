@@ -2,6 +2,7 @@ import React from 'react';
 import { Field } from 'redux-form';
 import { Panel } from '@sparkpost/matchbox';
 import { TextFieldWrapper, RadioGroup } from 'src/components/reduxFormWrappers';
+import { numberBetween, integer, minNumber } from 'src/helpers/validation';
 
 const SettingsFields = ({ disabled, formValues = {}}) => (
   <div>
@@ -33,6 +34,7 @@ const SettingsFields = ({ disabled, formValues = {}}) => (
               name='confidence_level'
               component={TextFieldWrapper}
               label='At what confidence level should we pick and start sending a winner?'
+              validate={numberBetween(0, 1)}
               disabled={disabled} />
           </Panel.Section>
         )
@@ -57,6 +59,7 @@ const SettingsFields = ({ disabled, formValues = {}}) => (
           label='How long would you like to continue to collect engagement events after the last delivery?'
           helpText='By default, we continue to collect engagement events for 24 hours after the last delivery.'
           suffix='hours'
+          validate={[integer, minNumber(1)]}
           disabled={disabled}
         />
       </Panel.Section>
@@ -79,6 +82,7 @@ const SettingsFields = ({ disabled, formValues = {}}) => (
             name='total_sample_size'
             component={TextFieldWrapper}
             label='Total number of messages to send as part of the test'
+            validate={[integer, minNumber(1)]}
             disabled={disabled}
           />
         )}

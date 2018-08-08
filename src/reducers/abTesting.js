@@ -46,6 +46,17 @@ export default (state = initialState, { type, payload, meta }) => {
     case 'UPDATE_AB_TEST_DRAFT_FAIL':
       return { ...state, updateDraftPending: false };
 
+    /* SCHEDULE */
+
+    case 'SCHEDULE_AB_TEST_PENDING':
+      return { ...state, scheduleError: null };
+
+    case 'SCHEDULE_AB_TEST_SUCCESS':
+      return { ...state };
+
+    case 'SCHEDULE_AB_TEST_FAIL':
+      return { ...state, scheduleError: payload };
+
     /* DELETE */
 
     case 'DELETE_AB_TEST_PENDING':

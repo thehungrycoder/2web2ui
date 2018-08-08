@@ -64,6 +64,18 @@ export function cancelAbTest({ id, subaccountId }) {
   });
 }
 
+export function scheduleAbTest(data, { id, subaccountId }) {
+  return sparkpostApiRequest({
+    type: 'SCHEDULE_AB_TEST',
+    meta: {
+      method: 'POST',
+      url: `/ab-test/draft/${id}/schedule`,
+      headers: setSubaccountHeader(subaccountId),
+      data
+    }
+  });
+}
+
 export function getLatestAbTest({ id, subaccountId }) {
   return getAbTest({ id, subaccountId, type: 'GET_LATEST_AB_TEST' });
 }

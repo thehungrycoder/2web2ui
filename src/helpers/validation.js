@@ -77,6 +77,10 @@ export const maxNumber = _.memoize(function maxNumber(max) {
   return (value) => (value > max) ? `Must be less than ${max}` : undefined;
 });
 
+export const numberBetween = _.memoize(function numberBetween(min, max) {
+  return (value) => (value > min && value < max) ? `Must be between ${min} and ${max}` : undefined;
+});
+
 export const maxFileSize = _.memoize(function maxFilesSize(maxSize) {
   return (file) => {
     if (!file) {
