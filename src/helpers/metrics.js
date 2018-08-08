@@ -97,10 +97,12 @@ export function roundBoundaries(fromInput, toInput) {
 
   const precision = getPrecision(from, to);
   const momentPrecision = getMomentPrecision(precision);
+  // extract rounding interval from precision query param value
   const roundInt = _.parseInt(_.words(precision)[0]) || 1;
 
   from.floor(roundInt, momentPrecision);
-  to.ceil(roundInt, momentPrecision);
+  // if we're only at a minute precision, don't round up to the next minute
+  if (precision !== '1min') { to.ceil(roundInt, momentPrecision); }
   // At hours precision, metrics API is really grabbing data for hh:00:00 to hh:59:59
   if (momentPrecision === 'hours') { to.subtract(1, 'minutes'); }
 
@@ -125,11 +127,10 @@ export function getValidDateRange({ from, to, now = moment(), roundToPrecision }
   if (validDates && from.isBefore(to) && nonRoundCondition()) {
     if (!roundToPrecision) { return { from, to }; }
     // Use the user's rounded 'to' input if it's less than or equal to 'now' rounded up to the nearest precision,
-    // otherwise use the valid range and precision of ceil(from) to ceil(now).
+    // otherwise use the valid range and precision of floor(from) to ceil(now).
     // This is necessary because the precision could change between the user's invalid range, and a valid range.
     const { from: roundedFromNow, to: roundedNow } = roundBoundaries(from, now);
     const { from: roundedFrom, to: roundedTo } = roundBoundaries(from, to);
-    // console.log('Is user\'s rounded to:', roundedTo.toDate(), 'same or before rounded now:', roundedNow.toDate());
 
     if (roundedTo.isSameOrBefore(roundedNow)) {
       from = roundedFrom;
