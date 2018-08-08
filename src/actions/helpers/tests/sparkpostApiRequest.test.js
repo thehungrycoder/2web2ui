@@ -1,5 +1,5 @@
 /* eslint-disable max-lines */
-import sparkpostApiRequest, { refreshTokensUsed } from '../sparkpostApiRequest';
+import sparkpostApiRequest, { refreshing, refreshTokensUsed } from '../sparkpostApiRequest';
 import SparkpostApiError from '../sparkpostApiError';
 import { createMockStore } from 'src/__testHelpers__/mockStore';
 import * as axiosMocks from 'src/helpers/axiosInstances';
@@ -224,6 +224,7 @@ describe('Helper: SparkPost API Request', () => {
         try {
           await mockStore.dispatch(sparkpostApiRequest({ type: 'TEST_REFRESH_FAILED', meta: {}}));
         } catch (err) {
+          expect(refreshing).toEqual(false);
           expect(err).toBe(refreshErr);
           expect(authMock.logout).toHaveBeenCalledTimes(1);
         }

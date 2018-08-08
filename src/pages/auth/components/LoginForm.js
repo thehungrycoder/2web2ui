@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { TextFieldWrapper, CheckboxWrapper, PageLink } from 'src/components';
+import { FORMS } from 'src/constants';
 import { required } from 'src/helpers/validation';
-
+import { trimWhitespaces } from 'src/helpers/string';
 import { Button } from '@sparkpost/matchbox';
 
 export class LoginForm extends Component {
-
   render() {
     const { loginPending, pristine, ssoEnabled, handleSubmit } = this.props;
 
@@ -20,6 +20,7 @@ export class LoginForm extends Component {
           id='username'
           label='Email or Username'
           placeholder='email@example.com'
+          normalize={trimWhitespaces}
           component={TextFieldWrapper}
           validate={required}
         />
@@ -64,8 +65,4 @@ function mapStateToProps({ auth }) {
   };
 }
 
-const formOptions = {
-  form: 'loginForm'
-};
-
-export default connect(mapStateToProps)(reduxForm(formOptions)(LoginForm));
+export default connect(mapStateToProps)(reduxForm({ form: FORMS.LOGIN })(LoginForm));

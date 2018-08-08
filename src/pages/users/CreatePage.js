@@ -8,6 +8,7 @@ import { RadioGroup } from 'src/components/reduxFormWrappers';
 import { required, email } from 'src/helpers/validation';
 import { inviteUser } from 'src/actions/users';
 import { showAlert } from 'src/actions/globalAlert';
+import { trimWhitespaces } from 'src/helpers/string';
 
 const formName = 'userForm';
 const breadcrumbAction = {
@@ -54,7 +55,7 @@ export class CreatePage extends Component {
               <Field
                 name="email"
                 validate={[required, email]}
-                normalize={(value = '') => value.trim()}
+                normalize={trimWhitespaces}
                 label="Email address"
                 component={TextFieldWrapper}
               />

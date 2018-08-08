@@ -24,8 +24,7 @@ beforeEach(() => {
     updateUser: jest.fn(() => Promise.resolve()),
     getCurrentUser: jest.fn(() => Promise.resolve()),
     confirmPassword: jest.fn(() => Promise.resolve()),
-    openSupportTicketForm: jest.fn(),
-    showAlert: jest.fn()
+    openSupportTicketForm: jest.fn()
   };
 
   wrapper = shallow(<ProfilePage {...props} />);
@@ -34,6 +33,11 @@ beforeEach(() => {
 
 describe('ProfilePage', () => {
   it('renders correctly', () => {
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders with verify email banner', () => {
+    wrapper.setProps({ currentUser: { email_verified: false, verifyingEmail: true }});
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -67,7 +71,6 @@ describe('ProfilePage', () => {
       await instance.updateProfile({ firstName: 'John', lastName: 'Doe' });
       expect(props.updateUser).toHaveBeenCalledWith('Lord Stark', { first_name: 'John', last_name: 'Doe' });
       expect(props.getCurrentUser).toHaveBeenCalledTimes(1);
-      expect(props.showAlert).toHaveBeenCalledTimes(0);
     });
 
     it('should ignore refetch error, but report error silently', async () => {
@@ -77,7 +80,6 @@ describe('ProfilePage', () => {
 
       expect(props.updateUser).toHaveBeenCalledWith('Lord Stark', { first_name: 'Ryan', last_name: 'Seacrest' });
       expect(props.getCurrentUser).toHaveBeenCalledTimes(1);
-      expect(props.showAlert).not.toHaveBeenCalled();
       expect(errorTracker.report).toHaveBeenCalledWith('silent-ignore-refetch-current-user', getCurrentUserError);
     });
   });
@@ -87,7 +89,6 @@ describe('ProfilePage', () => {
       await instance.updatePassword({ currentPassword: '111', newPassword: '222' });
       expect(props.confirmPassword).toHaveBeenCalledWith('Lord Stark', '111');
       expect(props.updateUser).toHaveBeenCalledWith('Lord Stark', { password: '222' });
-      expect(props.showAlert).toHaveBeenCalledTimes(0);
     });
   });
 
