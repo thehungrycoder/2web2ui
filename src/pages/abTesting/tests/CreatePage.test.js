@@ -13,7 +13,8 @@ describe('A/B Test Create Page', () => {
       history: {
         push: jest.fn()
       },
-      loading: false
+      loading: false,
+      listTemplates: jest.fn()
     };
 
     wrapper = shallow(<CreatePage {...props} />);
@@ -21,6 +22,10 @@ describe('A/B Test Create Page', () => {
 
   it('should render the list page correctly', () => {
     expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should get templates on mount', () => {
+    expect(props.listTemplates).toHaveBeenCalled();
   });
 
   it('should show loading component when data is loading', () => {
