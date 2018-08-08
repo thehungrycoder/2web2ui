@@ -36,15 +36,6 @@ export class StatusPanel extends Component {
     getLatestAbTest({ id, subaccountId });
   }
 
-  componentDidUpdate({ version: prevVersion }) {
-    const { id, version, subaccountId, getAbTest } = this.props;
-
-    // Fetch the updated version when url updates
-    if (prevVersion !== version) {
-      getAbTest({ id, version, subaccountId });
-    }
-  }
-
   render() {
     const { test, version, id, subaccountId, latest } = this.props;
     let panelActions = null;
@@ -60,7 +51,7 @@ export class StatusPanel extends Component {
             <StatusTag status={test.status} />
           </LabelledValue>
           <LabelledValue label='Test ID' value={id} />
-          {subaccountId && <LabelledValue label='Subaccount'><SubaccountTag id={subaccountId} /></LabelledValue>}
+          {!!subaccountId && <LabelledValue label='Subaccount'><SubaccountTag id={subaccountId} /></LabelledValue>}
         </Panel.Section>
       </Panel>
     );

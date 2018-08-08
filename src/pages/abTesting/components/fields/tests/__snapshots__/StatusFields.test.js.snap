@@ -17,11 +17,27 @@ exports[`Status Fields Component should disable fields correctly 1`] = `
   >
     <Field
       component={[Function]}
+      datePickerProps={
+        Object {
+          "disabledDays": Object {
+            "before": 2018-05-15T12:00:00.000Z,
+          },
+          "fromMonth": 2018-05-15T12:00:00.000Z,
+          "initialMonth": 2018-05-15T12:00:00.000Z,
+          "toMonth": null,
+        }
+      }
       disabled={true}
-      helpText="A test may run for a maximum of 30 days"
-      label="When should we run this test?"
+      left={true}
       name="dates"
-      placeholder="Jul 31st 2018 11:02am – Aug 1st 2018 11:02am"
+      showPresets={false}
+      textFieldProps={
+        Object {
+          "helpText": "A test may run for a maximum of 30 days",
+          "label": "When should we run this test?",
+          "prefix": <AccessTime />,
+        }
+      }
     />
   </Panel>
 </React.Fragment>
@@ -43,10 +59,26 @@ exports[`Status Fields Component should render correctly 1`] = `
   >
     <Field
       component={[Function]}
-      helpText="A test may run for a maximum of 30 days"
-      label="When should we run this test?"
+      datePickerProps={
+        Object {
+          "disabledDays": Object {
+            "before": 2018-05-15T12:00:00.000Z,
+          },
+          "fromMonth": 2018-05-15T12:00:00.000Z,
+          "initialMonth": 2018-05-15T12:00:00.000Z,
+          "toMonth": null,
+        }
+      }
+      left={true}
       name="dates"
-      placeholder="Jul 31st 2018 11:02am – Aug 1st 2018 11:02am"
+      showPresets={false}
+      textFieldProps={
+        Object {
+          "helpText": "A test may run for a maximum of 30 days",
+          "label": "When should we run this test?",
+          "prefix": <AccessTime />,
+        }
+      }
     />
   </Panel>
 </React.Fragment>

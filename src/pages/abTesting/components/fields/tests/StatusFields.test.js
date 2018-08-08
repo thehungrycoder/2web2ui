@@ -7,6 +7,9 @@ describe('Status Fields Component', () => {
   let props;
 
   beforeEach(() => {
+    const mockNow = new Date('2018-05-15T12:00:00.000Z');
+    global.Date = jest.fn(() => mockNow);
+
     props = {
       diabled: false
     };

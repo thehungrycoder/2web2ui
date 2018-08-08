@@ -16,12 +16,24 @@ exports[`Component: DatePicker handleFormDates should use a date field format if
       value="day"
     />
   }
-  labelHidden={true}
+  disabled={false}
   onClick={[MockFunction]}
   readOnly={true}
   resize="both"
   type="text"
   value="YYYY-MM h – YYYY-MM h"
+/>
+`;
+
+exports[`Component: DatePicker should not render range select if showPresets is false 1`] = `
+<TextField
+  connectLeft={null}
+  disabled={false}
+  onClick={[MockFunction]}
+  readOnly={true}
+  resize="both"
+  type="text"
+  value="MMM Do YYYY h:mma – MMM Do YYYY h:mma"
 />
 `;
 
@@ -48,7 +60,7 @@ exports[`Component: DatePicker should render ok by default 1`] = `
           value="day"
         />
       }
-      labelHidden={true}
+      disabled={false}
       onClick={[Function]}
       readOnly={true}
       resize="both"

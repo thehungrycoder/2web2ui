@@ -77,5 +77,14 @@ describe('Typeahead', () => {
       const result = shallow(wrapper.instance().typeaheadFn({ ...args, isOpen: true }));
       expect(result.find('TextField').props().error).toBe(null);
     });
+
+    it('should select first result when typeahead opens', () => {
+      const ds = {
+        setHighlightedIndex: jest.fn(),
+        highlightedIndex: null
+      };
+      wrapper.instance().handleStateChange(null, ds);
+      expect(ds.setHighlightedIndex).toHaveBeenCalledWith(0);
+    });
   });
 });

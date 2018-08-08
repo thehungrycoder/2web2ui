@@ -1,0 +1,298 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Variants Fields Component Field Array should render fields correctly with percent fields 1`] = `
+<Panel>
+  <Panel.Section
+    key="0"
+  >
+    <div
+      className="RemoveWrapper"
+    >
+      <Button
+        color="orange"
+        flat={true}
+        onClick={[Function]}
+        size="small"
+      >
+        Remove Variant
+      </Button>
+    </div>
+    <h6
+      className="SmallHeader"
+    >
+      Variant 
+      1
+    </h6>
+    <Grid>
+      <Grid.Column>
+        <Field
+          component={[Function]}
+          disabled={false}
+          label="Select a template"
+          name="variant[1].template_object"
+          placeholder="Type to search"
+        />
+      </Grid.Column>
+      <Grid.Column>
+        <PercentField
+          disabled={false}
+          namespace="variant[1]"
+        />
+      </Grid.Column>
+    </Grid>
+  </Panel.Section>
+  <Panel.Section
+    key="1"
+  >
+    <div
+      className="RemoveWrapper"
+    >
+      <Button
+        color="orange"
+        flat={true}
+        onClick={[Function]}
+        size="small"
+      >
+        Remove Variant
+      </Button>
+    </div>
+    <h6
+      className="SmallHeader"
+    >
+      Variant 
+      2
+    </h6>
+    <Grid>
+      <Grid.Column>
+        <Field
+          component={[Function]}
+          disabled={false}
+          label="Select a template"
+          name="variant[2].template_object"
+          placeholder="Type to search"
+        />
+      </Grid.Column>
+      <Grid.Column>
+        <PercentField
+          disabled={false}
+          namespace="variant[2]"
+        />
+      </Grid.Column>
+    </Grid>
+  </Panel.Section>
+  <Panel.Section>
+    <Button
+      color="orange"
+      flat={true}
+      onClick={[Function]}
+      size="default"
+    >
+      <Add />
+       Add Another Variant
+    </Button>
+  </Panel.Section>
+</Panel>
+`;
+
+exports[`Variants Fields Component Field Array should render fields correctly with sample size fields 1`] = `
+<Panel>
+  <Panel.Section
+    key="0"
+  >
+    <div
+      className="RemoveWrapper"
+    >
+      <Button
+        color="orange"
+        flat={true}
+        onClick={[Function]}
+        size="small"
+      >
+        Remove Variant
+      </Button>
+    </div>
+    <h6
+      className="SmallHeader"
+    >
+      Variant 
+      1
+    </h6>
+    <Grid>
+      <Grid.Column>
+        <Field
+          component={[Function]}
+          disabled={false}
+          label="Select a template"
+          name="variant[1].template_object"
+          placeholder="Type to search"
+        />
+      </Grid.Column>
+      <Grid.Column>
+        <SampleSizeField
+          disabled={false}
+          namespace="variant[1]"
+        />
+      </Grid.Column>
+    </Grid>
+  </Panel.Section>
+  <Panel.Section
+    key="1"
+  >
+    <div
+      className="RemoveWrapper"
+    >
+      <Button
+        color="orange"
+        flat={true}
+        onClick={[Function]}
+        size="small"
+      >
+        Remove Variant
+      </Button>
+    </div>
+    <h6
+      className="SmallHeader"
+    >
+      Variant 
+      2
+    </h6>
+    <Grid>
+      <Grid.Column>
+        <Field
+          component={[Function]}
+          disabled={false}
+          label="Select a template"
+          name="variant[2].template_object"
+          placeholder="Type to search"
+        />
+      </Grid.Column>
+      <Grid.Column>
+        <SampleSizeField
+          disabled={false}
+          namespace="variant[2]"
+        />
+      </Grid.Column>
+    </Grid>
+  </Panel.Section>
+  <Panel.Section>
+    <Button
+      color="orange"
+      flat={true}
+      onClick={[Function]}
+      size="default"
+    >
+      <Add />
+       Add Another Variant
+    </Button>
+  </Panel.Section>
+</Panel>
+`;
+
+exports[`Variants Fields Component Percent Field should render correctly 1`] = `
+<Field
+  component={[Function]}
+  disabled={false}
+  label="Percent of total"
+  name="default_template.percent"
+  suffix="%"
+/>
+`;
+
+exports[`Variants Fields Component Sample Size Field should render correctly 1`] = `
+<Field
+  component={[Function]}
+  disabled={false}
+  label="Number of messages"
+  name="default_template.sample_size"
+/>
+`;
+
+exports[`Variants Fields Component should render percent audience selection correctly 1`] = `
+<React.Fragment>
+  <Panel
+    sectioned={true}
+  >
+    <h6
+      className="SmallHeader"
+    >
+      Default Template
+    </h6>
+    <Grid>
+      <Grid.Column>
+        <Field
+          component={[Function]}
+          label="Select a default template"
+          name="default_template.template_object"
+          placeholder="Type to search"
+        />
+      </Grid.Column>
+      <Grid.Column>
+        <PercentField
+          namespace="default_template"
+        />
+      </Grid.Column>
+    </Grid>
+  </Panel>
+  <FieldArray
+    component={[Function]}
+    formValues={
+      Object {
+        "audience_selection": "percent",
+      }
+    }
+    name="variants"
+  />
+  <div
+    style={
+      Object {
+        "height": "200px",
+      }
+    }
+  />
+</React.Fragment>
+`;
+
+exports[`Variants Fields Component should render sample size audience selection correctly 1`] = `
+<React.Fragment>
+  <Panel
+    sectioned={true}
+  >
+    <h6
+      className="SmallHeader"
+    >
+      Default Template
+    </h6>
+    <Grid>
+      <Grid.Column>
+        <Field
+          component={[Function]}
+          label="Select a default template"
+          name="default_template.template_object"
+          placeholder="Type to search"
+        />
+      </Grid.Column>
+      <Grid.Column>
+        <SampleSizeField
+          namespace="default_template"
+        />
+      </Grid.Column>
+    </Grid>
+  </Panel>
+  <FieldArray
+    component={[Function]}
+    formValues={
+      Object {
+        "audience_selection": "sample_size",
+      }
+    }
+    name="variants"
+  />
+  <div
+    style={
+      Object {
+        "height": "200px",
+      }
+    }
+  />
+</React.Fragment>
+`;
