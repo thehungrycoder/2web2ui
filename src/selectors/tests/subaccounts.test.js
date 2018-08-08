@@ -68,17 +68,6 @@ describe('Subaccount selectors', () => {
     });
   });
 
-  describe('selectSubaccountIdFromForm', () => {
-    it('should return subaccount id from form values', () => {
-      const state = { form: { formName: { values: { subaccount: { id: 101 }}}}};
-      expect(selector.selectSubaccountIdFromForm(state)).toEqual(101);
-    });
-
-    it('should return default subaccount id from form values', () => {
-      expect(selector.selectSubaccountIdFromForm({})).toEqual(0);
-    });
-  });
-
   describe('getSubaccountIdFromParams', () => {
     it('should return subaccount router params', () => {
       const props = { match: { params: { id: 101 }}};

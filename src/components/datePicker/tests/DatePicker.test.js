@@ -48,6 +48,11 @@ describe('Component: DatePicker', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('should not render range select if showPresets is false', () => {
+    wrapper.setProps({ showPresets: false });
+    expect(wrapper.find('Popover').prop('trigger')).toMatchSnapshot();
+  });
+
   it('should properly mount', () => {
     jest.spyOn(window, 'addEventListener');
 

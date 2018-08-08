@@ -35,11 +35,16 @@ export class DetailsPage extends Component {
     getAbTest({ id, version, subaccountId });
   }
 
-  componentDidUpdate({ error: prevError }) {
-    const { error, test } = this.props;
+  componentDidUpdate({ error: prevError, version: prevVersion }) {
+    const { error, test, getAbTest, id, version, subaccountId } = this.props;
 
     if (!prevError && error && _.isEmpty(test)) {
       this.setState({ shouldRedirect: true });
+    }
+
+    // Version history selector - Fetch the test when url updates
+    if (prevVersion !== version) {
+      getAbTest({ id, version, subaccountId });
     }
   }
 

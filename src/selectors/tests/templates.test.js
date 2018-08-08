@@ -82,15 +82,6 @@ describe('Templates selectors', () => {
         }
       ]
     },
-    form: {
-      abTesting: {
-        values: {
-          subaccount: {
-            id: 101
-          }
-        }
-      }
-    },
     currentUser: {
       has_subaccounts: true
     }
@@ -201,18 +192,16 @@ describe('Templates selectors', () => {
 
   describe('selectPublishedTemplatesBySubaccount', () => {
     it('should return published templates for master account', () => {
-      store.form.abTesting.values.subaccount.id = 0;
       expect(selector.selectPublishedTemplatesBySubaccount(store, {})).toMatchSnapshot();
     });
 
     it('should return published templates for a specific subaccount', () => {
-      store.form.abTesting.values.subaccount.id = 101;
       expect(selector.selectPublishedTemplatesBySubaccount(store, { subaccountId: 101 })).toMatchSnapshot();
     });
 
     it('should return published templates if no subaccounts exist', () => {
       store.currentUser.has_subaccounts = false;
-      expect(selector.selectPublishedTemplatesBySubaccount(store)).toMatchSnapshot();
+      expect(selector.selectPublishedTemplatesBySubaccount(store, {})).toMatchSnapshot();
     });
   });
 });

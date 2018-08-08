@@ -7,12 +7,19 @@ import { setSubaccountQuery } from 'src/helpers/subaccounts';
 // Actions
 import { createAbTestDraft } from 'src/actions/abTesting';
 import { showAlert } from 'src/actions/globalAlert';
+import { listTemplates } from 'src/actions/templates';
 
 // Components
 import { Page, Panel } from '@sparkpost/matchbox';
 import AbTestCreateForm from './components/AbTestCreateForm';
 
 export class CreatePage extends Component {
+
+  componentDidMount() {
+    // Get templates here for the typeahead
+    // Ensures the list is always up to date
+    this.props.listTemplates();
+  }
 
   create = (values) => {
     const { createAbTestDraft, showAlert, history } = this.props;
@@ -42,10 +49,4 @@ export class CreatePage extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    abTest: state.abTesting.abTest
-  };
-}
-
-export default connect(mapStateToProps, { createAbTestDraft, showAlert })(CreatePage);
+export default connect(null, { createAbTestDraft, showAlert, listTemplates })(CreatePage);

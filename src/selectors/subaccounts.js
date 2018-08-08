@@ -34,8 +34,3 @@ export const selectSubaccountFromQuery = createSelector(
 );
 
 export const selectSubaccountIdFromProps = (state, props) => props.subaccountId;
-
-export const selectSubaccountIdFromForm = (state) => {
-  const formName = _.keys(state.form)[0];
-  return _.get(state, `form[${formName}].values.subaccount.id`, 0);
-};
