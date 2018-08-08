@@ -59,7 +59,7 @@ export class ViewMode extends Component {
   }
 
   render() {
-    const { breadcrumbAction, test, subaccountId } = this.props;
+    const { breadcrumbAction, test, subaccountId, updateDraftPending } = this.props;
     const { name } = this.props.test;
 
     return (
@@ -102,6 +102,7 @@ export class ViewMode extends Component {
           content={<p>The test will be updated and placed into draft state. Messages will be delivered to the default template.</p>}
           onConfirm={this.handleOverride}
           onCancel={this.toggleOverride}
+          isPending={updateDraftPending}
           confirmVerb='OK'
         />
       </Page>
@@ -115,4 +116,10 @@ ViewMode.propTypes = {
   })
 };
 
-export default withRouter(connect(null, { updateDraft, showAlert })(ViewMode));
+function mapStateToProps(state) {
+  return {
+    updateDraftPending: state.abTesting.updateDraftPending
+  };
+}
+
+export default withRouter(connect(mapStateToProps, { updateDraft, showAlert })(ViewMode));

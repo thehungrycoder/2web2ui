@@ -3,6 +3,7 @@ const initialState = {
   listLoading: true,
   listError: null,
   createError: null,
+  updateDraftPending: false,
   deletePending: false,
   cancelPending: false,
   detailsById: {},
@@ -33,6 +34,17 @@ export default (state = initialState, { type, payload, meta }) => {
 
     case 'CREATE_AB_TEST_DRAFT_FAIL':
       return { ...state, createError: payload };
+
+    /* UPDATE DRAFT */
+
+    case 'UPDATE_AB_TEST_DRAFT_PENDING':
+      return { ...state, updateDraftPending: true };
+
+    case 'UPDATE_AB_TEST_DRAFT_SUCCESS':
+      return { ...state, updateDraftPending: false };
+
+    case 'UPDATE_AB_TEST_DRAFT_FAIL':
+      return { ...state, updateDraftPending: false };
 
     /* DELETE */
 
