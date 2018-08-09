@@ -135,22 +135,25 @@ describe('metrics helpers', () => {
       }
     ];
 
-    const allCases = _.map(caseList, (caseObj) => ({
-      name: `should round at ${caseObj.timeLabel}`,
-      from: moment(caseObj.from),
-      to: moment(caseObj.to),
-      expectedValue: { from: moment(caseObj.expected.from).toISOString(), to: moment(caseObj.expected.to).toISOString() }
-    }));
+    const allCases = _.map(caseList, (caseObj) => {
+      const expectedTo = caseObj.timeLabel === '1min' // we don't round at this precision
+        ? moment(caseObj.expected.to).toISOString()
+        : moment(caseObj.expected.to).endOf('minutes').toISOString();
+      return {
+        name: `should round at ${caseObj.timeLabel}`,
+        from: moment(caseObj.from),
+        to: moment(caseObj.to),
+        expectedValue: { from: moment(caseObj.expected.from).toISOString(), to: expectedTo }
+      };
+    });
 
-    cases('should round from and to values', ({ from, to, expectedValue }) => {
+    cases('should round from and to values', ({ timeLabel, from, to, expectedValue }) => {
       const { from: resFrom, to: resTo } = metricsHelpers.roundBoundaries(from, to);
 
       expect(resFrom.toISOString()).toEqual(expectedValue.from);
       expect(resTo.toISOString()).toEqual(expectedValue.to);
     }, allCases);
   });
-
-
 
 
   it('should get metrics from keys', () => {
@@ -253,7 +256,7 @@ describe('metrics helpers', () => {
       const now = moment('2018-02-01T11:00Z');
 
       const validRange = metricsHelpers.getValidDateRange({ from, to, now, roundToPrecision: true });
-      expect(validRange).toEqual({ from, to });
+      expect(validRange).toEqual({ from, to: to.endOf('minute') });
     });
 
     it('should use input range if valid, when not rounding', () => {
@@ -270,7 +273,7 @@ describe('metrics helpers', () => {
       const to = moment('2018-01-16T11:59Z');
 
       const validRange = metricsHelpers.getValidDateRange({ from, to, roundToPrecision: true });
-      expect(validRange).toEqual({ from, to });
+      expect(validRange).toEqual({ from, to: to.endOf('minute') });
     });
 
     it('should use current time if input "to" is later than now', () => {
@@ -289,7 +292,7 @@ describe('metrics helpers', () => {
 
       const validRange = metricsHelpers.getValidDateRange({ from, to, now, roundToPrecision: true });
       expect(validRange.from).toEqual(from);
-      expect(validRange.to.toISOString()).toEqual(moment('2018-01-16T11:59Z').toISOString());
+      expect(validRange.to.toISOString()).toEqual(moment('2018-01-16T11:59Z').endOf('minute').toISOString());
     });
 
     it('should use rounded input if equal to rounded now', () => {
@@ -299,7 +302,7 @@ describe('metrics helpers', () => {
 
       const validRange = metricsHelpers.getValidDateRange({ from, to, now, roundToPrecision: true });
       expect(validRange.from).toEqual(from);
-      expect(validRange.to.toISOString()).toEqual(moment('2018-01-19T11:59Z').toISOString());
+      expect(validRange.to.toISOString()).toEqual(moment('2018-01-19T11:59Z').endOf('minute').toISOString());
     });
   });
 });

@@ -87,9 +87,11 @@ export default class AppDatePicker extends Component {
   getOrderedRange(newDate) {
     let { from, to } = this.state.beforeSelected;
 
-    (from.getTime() <= newDate.getTime())
-      ? to = getEndOfDay(newDate, { preventFuture: true })
-      : from = getStartOfDay(newDate);
+    if (from.getTime() <= newDate.getTime()) {
+      to = getEndOfDay(newDate, { preventFuture: true });
+    } else {
+      from = getStartOfDay(newDate);
+    }
 
     if (this.props.roundToPrecision) {
       const rounded = roundBoundaries(from, to);

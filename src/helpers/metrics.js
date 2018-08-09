@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { ceil, floor, round } from 'moment-round';
+// import { ceil, floor, round } from 'moment-round';
 import _ from 'lodash';
 import { list as METRICS_LIST } from 'src/config/metrics';
 import config from 'src/config';
@@ -7,9 +7,9 @@ import { getRelativeDates, getLocalTimezone } from 'src/helpers/date';
 import { safeDivide, safeRate } from './math';
 
 // hack moment with rounding plugin
-moment.prototype.round = round;
-moment.prototype.ceil = ceil;
-moment.prototype.floor = floor;
+// moment.prototype.round = round;
+// moment.prototype.ceil = ceil;
+// moment.prototype.floor = floor;
 
 const { metricsPrecisionMap: precisionMap, apiDateFormat, chartColors = []} = config;
 const indexedPrecisions = _.keyBy(precisionMap, 'value');
@@ -100,15 +100,26 @@ export function roundBoundaries(fromInput, toInput) {
   // extract rounding interval from precision query param value
   const roundInt = _.parseInt(_.words(precision)[0]) || 1;
 
-  from.floor(roundInt, momentPrecision);
+  floorMoment(from, roundInt, momentPrecision);
   // if we're only at a minute precision, don't round up to the next minute
-  if (precision !== '1min') { to.ceil(roundInt, momentPrecision); }
+  if (precision !== '1min') { ceilMoment(to, roundInt, momentPrecision); }
   // At hours precision, metrics API is really grabbing data for hh:00:00 to hh:59:59
-  if (momentPrecision === 'hours') { to.subtract(1, 'minutes'); }
+  // if (momentPrecision === 'hours') { to.subtract(1, 'minutes'); }
 
   return { to, from };
 }
 
+function floorMoment(time, roundInt = 1, precision = 'minutes') {
+  const value = time.get(precision);
+  const roundedValue = Math.floor(value / roundInt) * roundInt;
+  time.set(precision, roundedValue).startOf(precision);
+}
+
+function ceilMoment(time, roundInt = 1, precision = 'minutes') {
+  const value = time.get(precision);
+  const roundedValue = Math.ceil(value / roundInt) * roundInt;
+  time.set(precision, roundedValue).endOf(precision);
+}
 
 /**
  * Returns verified from and to dates; throws an error if date range is invalid - catch this to reset to last state

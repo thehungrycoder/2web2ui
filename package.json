@@ -63,7 +63,6 @@
     "js-cookie": "^2.1.4",
     "localforage": "^1.5.3",
     "moment": "^2.20.1",
-    "moment-round": "https://github.com/SpotOnInc/moment-round",
     "papaparse": "^4.3.6",
     "payment": "^2.3.0",
     "print-js": "^1.0.31",
