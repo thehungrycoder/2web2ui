@@ -31,7 +31,7 @@ export class Typeahead extends Component {
     clearSelection,
     isOpen
   }) => {
-    const { name, results, disabled, label, placeholder = (isOpen ? 'Type to search' : 'None'), error, helpText, itemToString, renderItem } = this.props;
+    const { name, results, disabled, label, placeholder = (isOpen ? 'Type to search' : 'None'), error, helpText, errorInLabel, itemToString, renderItem } = this.props;
 
     const matches = sortMatch(
       results,
@@ -59,7 +59,8 @@ export class Typeahead extends Component {
       name,
       placeholder,
       helpText,
-      error: (!isOpen && error) ? error : null
+      error: (!isOpen && error) ? error : null,
+      errorInLabel
     });
 
     textFieldProps['data-lpignore'] = true;

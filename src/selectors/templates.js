@@ -1,8 +1,10 @@
 import _ from 'lodash';
 import config from 'src/config';
 import { createSelector } from 'reselect';
+import { formValueSelector } from 'redux-form';
 import { getDomains, isVerified } from 'src/selectors/sendingDomains';
 import { selectSubaccountIdFromProps, hasSubaccounts } from 'src/selectors/subaccounts';
+import { filterTemplatesBySubaccount } from 'src/helpers/templates';
 
 export const selectTemplates = (state) => state.templates.list;
 export const selectPublishedTemplates = (state) => _.filter(state.templates.list, (template) => template.has_published);
@@ -41,16 +43,24 @@ export const selectDomainsBySubaccount = createSelector(
   })
 );
 
-// Selects published templates, filtered by subaccount
+// Selects published templates, filtered by subaccount prop
+// Used within typeahead
 export const selectPublishedTemplatesBySubaccount = createSelector(
   [selectPublishedTemplates, selectSubaccountIdFromProps, hasSubaccounts],
-  (templates, subaccountId, subaccountsExist) => {
-    if (subaccountsExist) {
-      return _.filter(templates, (template) => subaccountId
-        ? template.shared_with_subaccounts || template.subaccount_id === Number(subaccountId)
-        : !template.subaccount_id);
-    } else {
-      return templates;
-    }
-  }
+  (templates, subaccountId, subaccountsExist) => filterTemplatesBySubaccount({ templates, subaccountId, hasSubaccounts: subaccountsExist })
+);
+
+/**
+ * Selects subaccount id from a redux-form subaccount typeahead
+ */
+export const selectSubaccountIdFromFormTypeahead = (state, props, formName) => {
+  const selector = formValueSelector(formName);
+  return selector(state, 'subaccount.id');
+};
+
+// Selects published templates, filtered by subaccount typeahead value within redux-form
+// Used for form validation
+export const selectPublishedTemplatesBySubaccountFromTypeahead = createSelector(
+  [selectPublishedTemplates, selectSubaccountIdFromFormTypeahead, hasSubaccounts],
+  (templates, subaccountId, subaccountsExist) => filterTemplatesBySubaccount({ templates, subaccountId, hasSubaccounts: subaccountsExist })
 );
