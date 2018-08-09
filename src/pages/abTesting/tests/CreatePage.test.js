@@ -34,12 +34,12 @@ describe('A/B Test Create Page', () => {
   });
 
   it('should show an alert on successful A/B test creation', async () => {
-    await wrapper.instance().create({ id: 'woooooooow', subaccount: 1, default_variant: { id: 'ok' }});
+    await wrapper.instance().create({ id: 'woooooooow', subaccount: { id: 1 }, default_variant: { id: 'ok' }});
     expect(wrapper.instance().props.showAlert).toHaveBeenCalledWith({
       type: 'success',
       message: 'A/B test created'
     });
-    expect(wrapper.instance().props.history.push).toHaveBeenCalled();
+    expect(wrapper.instance().props.history.push).toHaveBeenCalledWith('/ab-testing/woooooooow/1?subaccount=1');
   });
 
   it('should show an alert on successful A/B test creation (no subaccounts)', async () => {
@@ -48,6 +48,6 @@ describe('A/B Test Create Page', () => {
       type: 'success',
       message: 'A/B test created'
     });
-    expect(wrapper.instance().props.history.push).toHaveBeenCalled();
+    expect(wrapper.instance().props.history.push).toHaveBeenCalledWith('/ab-testing/woooooooow/1');
   });
 });

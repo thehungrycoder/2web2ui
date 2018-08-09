@@ -84,7 +84,8 @@ describe('Templates selectors', () => {
     },
     currentUser: {
       has_subaccounts: true
-    }
+    },
+    form: { testform: { values: {}}}
   };
 
   describe('Templates by id Selector', () => {
@@ -202,6 +203,29 @@ describe('Templates selectors', () => {
     it('should return published templates if no subaccounts exist', () => {
       store.currentUser.has_subaccounts = false;
       expect(selector.selectPublishedTemplatesBySubaccount(store, {})).toMatchSnapshot();
+    });
+  });
+
+  describe('selectPublishedTemplatesBySubaccountFromTypeahead', () => {
+
+    beforeEach(() => {
+      store.currentUser.has_subaccounts = true;
+      store.form.testform.values = { subaccount: null };
+    });
+
+    it('should return published templates for master account', () => {
+      expect(selector.selectPublishedTemplatesBySubaccountFromTypeahead(store, {}, 'testform')).toMatchSnapshot();
+    });
+
+    it('should return published templates for a specific subaccount', () => {
+      store.form.testform.values = { subaccount: { id: 101 }};
+      expect(selector.selectSubaccountIdFromFormTypeahead(store, {}, 'testform')).toBe(101);
+      expect(selector.selectPublishedTemplatesBySubaccountFromTypeahead(store, {}, 'testform')).toMatchSnapshot();
+    });
+
+    it('should return published templates if no subaccounts exist', () => {
+      store.currentUser.has_subaccounts = false;
+      expect(selector.selectPublishedTemplatesBySubaccountFromTypeahead(store, {}, 'testform')).toMatchSnapshot();
     });
   });
 });

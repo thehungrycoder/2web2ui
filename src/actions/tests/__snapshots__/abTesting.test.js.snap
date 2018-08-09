@@ -7,7 +7,9 @@ Array [
       "headers": Object {
         "x-msys-subaccount": 101,
       },
+      "id": "test_one",
       "method": "POST",
+      "subaccountId": 101,
       "url": "/ab-test/test_one/cancel",
     },
     "type": "CANCEL_AB_TEST",

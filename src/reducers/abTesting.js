@@ -75,7 +75,7 @@ export default (state = initialState, { type, payload, meta }) => {
       return {
         ...state,
         cancelPending: false,
-        list: state.list.map((t) => t.id === meta.id && t.subaccount_id === meta.subaccountId ? { ...t, status: payload.status } : t)
+        list: state.list.map((t) => t.id === meta.id && t.subaccount_id === parseInt(meta.subaccountId, 10) ? { ...t, status: payload.status } : t)
       };
 
     case 'CANCEL_AB_TEST_FAIL':
