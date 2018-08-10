@@ -74,4 +74,48 @@ describe('template helpers', () => {
       })).toMatchSnapshot();
     });
   });
+
+  describe('filterTemplatesBySubaccount', () => {
+    let templates;
+    beforeEach(() => {
+      templates = [
+        {
+          name: 'unpublished',
+          has_published: false,
+          shared_with_subaccounts: false,
+          subaccount_id: 101
+        },
+        {
+          name: 'publishedSubaccount',
+          has_published: true,
+          shared_with_subaccounts: false,
+          subaccount_id: 101
+        },
+        {
+          name: 'publishedMaster',
+          has_published: true,
+          shared_with_subaccounts: false,
+          subaccount_id: 0
+        },
+        {
+          name: 'publishedShared',
+          has_published: true,
+          shared_with_subaccounts: true,
+          subaccount_id: 0
+        }
+      ];
+    });
+
+    it('should return published templates for master account', () => {
+      expect(templatesHelper.filterTemplatesBySubaccount({ templates, subaccountId: null, hasSubaccounts: true })).toMatchSnapshot();
+    });
+
+    it('should return published templates for a specific subaccount', () => {
+      expect(templatesHelper.filterTemplatesBySubaccount({ templates, subaccountId: 101, hasSubaccounts: true })).toMatchSnapshot();
+    });
+
+    it('should return published templates if no subaccounts exist', () => {
+      expect(templatesHelper.filterTemplatesBySubaccount({ templates, subaccountId: null , hasSubaccounts: false })).toMatchSnapshot();
+    });
+  });
 });

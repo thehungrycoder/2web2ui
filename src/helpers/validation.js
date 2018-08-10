@@ -31,7 +31,7 @@ export function abTestDefaultTemplate(value, allValues, props) {
   if (allValues.subaccount) {
     return 'Template not available to selected subaccount';
   }
-  return 'Subaccount templates not available to master account';
+  return 'Template not available to master account';
 }
 
 export function hasNumber(value) {

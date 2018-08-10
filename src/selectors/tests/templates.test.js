@@ -84,7 +84,8 @@ describe('Templates selectors', () => {
     },
     currentUser: {
       has_subaccounts: true
-    }
+    },
+    form: { testform: { values: {}}}
   };
 
   describe('Templates by id Selector', () => {
@@ -192,16 +193,16 @@ describe('Templates selectors', () => {
 
   describe('selectPublishedTemplatesBySubaccount', () => {
     it('should return published templates for master account', () => {
-      expect(selector.selectPublishedTemplatesBySubaccount(store, {})).toMatchSnapshot();
+      expect(selector.selectPublishedTemplatesBySubaccount(store)).toMatchSnapshot();
     });
 
     it('should return published templates for a specific subaccount', () => {
-      expect(selector.selectPublishedTemplatesBySubaccount(store, { subaccountId: 101 })).toMatchSnapshot();
+      expect(selector.selectPublishedTemplatesBySubaccount(store, 101)).toMatchSnapshot();
     });
 
     it('should return published templates if no subaccounts exist', () => {
       store.currentUser.has_subaccounts = false;
-      expect(selector.selectPublishedTemplatesBySubaccount(store, {})).toMatchSnapshot();
+      expect(selector.selectPublishedTemplatesBySubaccount(store)).toMatchSnapshot();
     });
   });
 });
