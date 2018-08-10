@@ -37,8 +37,10 @@ export class EditMode extends Component {
     });
   }
 
+  //TODO: Need to do maths for total_sample_size
   handleSchedule = (values) => {}
 
+  //TODO: Need to do maths for total_sample_size
   handleUpdateScheduled = (values) => {}
 
   getPrimaryAction = () => {

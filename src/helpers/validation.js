@@ -36,8 +36,19 @@ export function abTestDefaultTemplate(value, formValues, props) {
 }
 
 export function abTestDuration(value, formValues) {
-  const testDuration = getDuration(value) + (parseInt(formValues.engagement_timeout, 10) || 24);
+  const testDuration = getDuration(value) + (formValues.engagement_timeout || 24);
   return testDuration > 720 ? 'Test duration + engagement timeout must be 30 days or less' : undefined;
+}
+
+export function abTestDistribution(value, formValues) {
+  const { default_template, variants } = formValues;
+  let total = 0;
+
+  if (value === 'percent') {
+    _.forEach(variants, (variant) => total += variant.percent);
+    total += default_template.percent;
+    return total === 100 ? undefined : 'Total distribution must equal 100%';
+  }
 }
 
 export function hasNumber(value) {
