@@ -1,7 +1,6 @@
 import _ from 'lodash';
 import config from 'src/config';
 import { createSelector } from 'reselect';
-import { formValueSelector } from 'redux-form';
 import { getDomains, isVerified } from 'src/selectors/sendingDomains';
 import { selectSubaccountIdFromProps, hasSubaccounts } from 'src/selectors/subaccounts';
 import { filterTemplatesBySubaccount } from 'src/helpers/templates';
@@ -43,24 +42,17 @@ export const selectDomainsBySubaccount = createSelector(
   })
 );
 
-// Selects published templates, filtered by subaccount prop
-// Used within typeahead
-export const selectPublishedTemplatesBySubaccount = createSelector(
-  [selectPublishedTemplates, selectSubaccountIdFromProps, hasSubaccounts],
-  (templates, subaccountId, subaccountsExist) => filterTemplatesBySubaccount({ templates, subaccountId, hasSubaccounts: subaccountsExist })
-);
+/**
+ * Selects subaccountId from the selector's second arguement, in place of props
+ */
+export const selectSubaccountId = (state, subaccountId) => subaccountId;
 
 /**
- * Selects subaccount id from a redux-form subaccount typeahead
+ * Selects published templates, filtered by provided subaccount
+ * @param state  redux state
+ * @param subaccountId
  */
-export const selectSubaccountIdFromFormTypeahead = (state, props, formName) => {
-  const selector = formValueSelector(formName);
-  return selector(state, 'subaccount.id');
-};
-
-// Selects published templates, filtered by subaccount typeahead value within redux-form
-// Used for form validation
-export const selectPublishedTemplatesBySubaccountFromTypeahead = createSelector(
-  [selectPublishedTemplates, selectSubaccountIdFromFormTypeahead, hasSubaccounts],
+export const selectPublishedTemplatesBySubaccount = createSelector(
+  [selectPublishedTemplates, selectSubaccountId, hasSubaccounts],
   (templates, subaccountId, subaccountsExist) => filterTemplatesBySubaccount({ templates, subaccountId, hasSubaccounts: subaccountsExist })
 );

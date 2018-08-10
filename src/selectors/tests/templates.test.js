@@ -193,39 +193,16 @@ describe('Templates selectors', () => {
 
   describe('selectPublishedTemplatesBySubaccount', () => {
     it('should return published templates for master account', () => {
-      expect(selector.selectPublishedTemplatesBySubaccount(store, {})).toMatchSnapshot();
+      expect(selector.selectPublishedTemplatesBySubaccount(store)).toMatchSnapshot();
     });
 
     it('should return published templates for a specific subaccount', () => {
-      expect(selector.selectPublishedTemplatesBySubaccount(store, { subaccountId: 101 })).toMatchSnapshot();
+      expect(selector.selectPublishedTemplatesBySubaccount(store, 101)).toMatchSnapshot();
     });
 
     it('should return published templates if no subaccounts exist', () => {
       store.currentUser.has_subaccounts = false;
-      expect(selector.selectPublishedTemplatesBySubaccount(store, {})).toMatchSnapshot();
-    });
-  });
-
-  describe('selectPublishedTemplatesBySubaccountFromTypeahead', () => {
-
-    beforeEach(() => {
-      store.currentUser.has_subaccounts = true;
-      store.form.testform.values = { subaccount: null };
-    });
-
-    it('should return published templates for master account', () => {
-      expect(selector.selectPublishedTemplatesBySubaccountFromTypeahead(store, {}, 'testform')).toMatchSnapshot();
-    });
-
-    it('should return published templates for a specific subaccount', () => {
-      store.form.testform.values = { subaccount: { id: 101 }};
-      expect(selector.selectSubaccountIdFromFormTypeahead(store, {}, 'testform')).toBe(101);
-      expect(selector.selectPublishedTemplatesBySubaccountFromTypeahead(store, {}, 'testform')).toMatchSnapshot();
-    });
-
-    it('should return published templates if no subaccounts exist', () => {
-      store.currentUser.has_subaccounts = false;
-      expect(selector.selectPublishedTemplatesBySubaccountFromTypeahead(store, {}, 'testform')).toMatchSnapshot();
+      expect(selector.selectPublishedTemplatesBySubaccount(store)).toMatchSnapshot();
     });
   });
 });

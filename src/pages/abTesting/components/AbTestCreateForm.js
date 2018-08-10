@@ -7,7 +7,7 @@ import { TextFieldWrapper } from 'src/components';
 import { TemplateTypeaheadWrapper, SubaccountTypeaheadWrapper } from 'src/components/reduxFormWrappers';
 import { slugify } from 'src/helpers/string';
 import { hasSubaccounts as hasSubaccountsSelector } from 'src/selectors/subaccounts';
-import { selectPublishedTemplatesBySubaccountFromTypeahead } from 'src/selectors/templates';
+import { selectPublishedTemplatesBySubaccount } from 'src/selectors/templates';
 import { required, maxLength, abTestId, abTestDefaultTemplate } from 'src/helpers/validation';
 
 const formName = 'abTestCreateForm';
@@ -94,13 +94,13 @@ export class AbTestCreateForm extends Component {
 
 function mapStateToProps(state, props) {
   const selector = formValueSelector(formName);
+  const subaccountId = selector(state, 'subaccount.id');
 
   return {
     initialValues: {},
     hasSubaccounts: hasSubaccountsSelector(state),
-    templates: selectPublishedTemplatesBySubaccountFromTypeahead(state, props, formName),
-    // Subaccount ID here is used to filter available templates in the typeahead
-    subaccountId: selector(state, 'subaccount.id')
+    templates: selectPublishedTemplatesBySubaccount(state, subaccountId),
+    subaccountId // Subaccount ID is used to filter available templates in the typeahead
   };
 }
 
