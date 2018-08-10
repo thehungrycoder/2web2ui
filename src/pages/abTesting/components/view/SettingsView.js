@@ -9,9 +9,15 @@ const SettingsView = ({ test }) => (
   <Panel>
     <Panel.Section >
       <LabelledValue label='Test Mode' >
-        <h6>{snakeToFriendly(test.test_mode)} </h6>
-        {test.test_mode === 'bayesian' && <p className={styles.HelpText}>In bayesian mode, once this test has completed, the best performing template will be used in subsequent transmissions in place of the default.</p>}
-        {test.test_mode === 'learning' && <p>In learning mode, once this test has completed, subsequent transmissions will revert to using the default template</p>}
+        <h6>{snakeToFriendly(test.test_mode)}</h6>
+        {
+          test.test_mode === 'bayesian' &&
+          <p className={styles.HelpText}>In bayesian mode, once this test has completed, the best performing template will be used in subsequent transmissions in place of the default.</p>
+        }
+        {
+          test.test_mode === 'learning' &&
+          <p className={styles.HelpText}>In learning mode, once this test has completed, subsequent transmissions will revert to using the default template</p>
+        }
       </LabelledValue>
       {
         (test.confidence_level && test.test_mode === 'bayesian') &&
