@@ -24,7 +24,7 @@ export class CreatePage extends Component {
   create = (values) => {
     const { createAbTestDraft, showAlert, history } = this.props;
     const { id, name, subaccount, default_variant = {}} = values;
-    const subaccountId = subaccount ? subaccount.id : 0;
+    const subaccountId = subaccount ? subaccount.id : null;
     const default_template = { template_id: default_variant.id };
     const abTest = { id, name, default_template };
 

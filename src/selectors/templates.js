@@ -3,6 +3,7 @@ import config from 'src/config';
 import { createSelector } from 'reselect';
 import { getDomains, isVerified } from 'src/selectors/sendingDomains';
 import { selectSubaccountIdFromProps, hasSubaccounts } from 'src/selectors/subaccounts';
+import { filterTemplatesBySubaccount } from 'src/helpers/templates';
 
 export const selectTemplates = (state) => state.templates.list;
 export const selectPublishedTemplates = (state) => _.filter(state.templates.list, (template) => template.has_published);
@@ -41,16 +42,17 @@ export const selectDomainsBySubaccount = createSelector(
   })
 );
 
-// Selects published templates, filtered by subaccount
+/**
+ * Selects subaccountId from the selector's second arguement, in place of props
+ */
+export const selectSubaccountId = (state, subaccountId) => subaccountId;
+
+/**
+ * Selects published templates, filtered by provided subaccount
+ * @param state  redux state
+ * @param subaccountId
+ */
 export const selectPublishedTemplatesBySubaccount = createSelector(
-  [selectPublishedTemplates, selectSubaccountIdFromProps, hasSubaccounts],
-  (templates, subaccountId, subaccountsExist) => {
-    if (subaccountsExist) {
-      return _.filter(templates, (template) => subaccountId
-        ? template.shared_with_subaccounts || template.subaccount_id === Number(subaccountId)
-        : !template.subaccount_id);
-    } else {
-      return templates;
-    }
-  }
+  [selectPublishedTemplates, selectSubaccountId, hasSubaccounts],
+  (templates, subaccountId, subaccountsExist) => filterTemplatesBySubaccount({ templates, subaccountId, hasSubaccounts: subaccountsExist })
 );

@@ -7,8 +7,8 @@ import { TextFieldWrapper } from 'src/components';
 import { TemplateTypeaheadWrapper, SubaccountTypeaheadWrapper } from 'src/components/reduxFormWrappers';
 import { slugify } from 'src/helpers/string';
 import { hasSubaccounts as hasSubaccountsSelector } from 'src/selectors/subaccounts';
-import { required, maxLength, abTestId, abTestDefaultTemplate } from 'src/helpers/validation';
 import { selectPublishedTemplatesBySubaccount } from 'src/selectors/templates';
+import { required, maxLength, abTestId, abTestDefaultTemplate } from 'src/helpers/validation';
 
 const formName = 'abTestCreateForm';
 
@@ -80,6 +80,7 @@ export class AbTestCreateForm extends Component {
               ? <span>We will send this template by default when the test is not running. If you need to create a new template, <UnstyledLink component={Link} to='/templates'>head over to the templates page</UnstyledLink>.</span>
               : <span>No available templates.  <UnstyledLink component={Link} to='/templates'>Head over to the templates page to set some up</UnstyledLink>.</span>
             }
+            errorInLabel
             validate={[required, abTestDefaultTemplate]}
           />
         </Panel.Section>
@@ -93,13 +94,13 @@ export class AbTestCreateForm extends Component {
 
 function mapStateToProps(state, props) {
   const selector = formValueSelector(formName);
+  const subaccountId = selector(state, 'subaccount.id');
 
   return {
     initialValues: {},
     hasSubaccounts: hasSubaccountsSelector(state),
-    templates: selectPublishedTemplatesBySubaccount(state, props),
-    // Subaccount ID here is used to filter and validate available templates in the typeahead
-    subaccountId: selector(state, 'subaccount.id') || 0
+    templates: selectPublishedTemplatesBySubaccount(state, subaccountId),
+    subaccountId // Subaccount ID is used to filter available templates in the typeahead
   };
 }
 

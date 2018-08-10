@@ -51,3 +51,17 @@ export const resolveTemplateStatus = ({ has_draft, has_published, published } = 
   // Unpublished draft template
   draft: !published && !has_published
 });
+
+
+/**
+ * Filters a list of templates available for use for the given subaccount
+ */
+export const filterTemplatesBySubaccount = ({ templates, subaccountId, hasSubaccounts }) => {
+  if (hasSubaccounts) {
+    return _.filter(templates, (template) => subaccountId
+      ? template.shared_with_subaccounts || template.subaccount_id === Number(subaccountId)
+      : !template.subaccount_id);
+  } else {
+    return templates;
+  }
+};

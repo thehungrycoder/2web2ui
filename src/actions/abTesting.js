@@ -59,7 +59,8 @@ export function cancelAbTest({ id, subaccountId }) {
     meta: {
       method: 'POST',
       url: `/ab-test/${id}/cancel`,
-      headers: setSubaccountHeader(subaccountId)
+      headers: setSubaccountHeader(subaccountId),
+      id, subaccountId
     }
   });
 }
