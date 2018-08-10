@@ -7,7 +7,7 @@ import _ from 'lodash';
 
 import styles from './View.module.scss';
 
-const PercentOrSample = ({ variant }) => {
+export const PercentOrSample = ({ variant }) => {
   if (variant.sample_size) {
     return <LabelledValue label='Sample Size'><p>{variant.sample_size.toLocaleString()}</p></LabelledValue>;
   }
@@ -19,7 +19,7 @@ const PercentOrSample = ({ variant }) => {
   return null;
 };
 
-const Engagement = ({ variant }) => {
+export const Engagement = ({ variant }) => {
   if (!variant.engagement_rate) {
     return null;
   }
@@ -49,7 +49,7 @@ const Engagement = ({ variant }) => {
   );
 };
 
-const Variant = ({ variant = {}, title, link }) => (
+export const Variant = ({ variant = {}, title }) => (
   <Panel>
     <Panel.Section actions={[{
       content: 'View Template',

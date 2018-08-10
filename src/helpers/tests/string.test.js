@@ -7,6 +7,10 @@ describe('snakeToFrindly', () => {
   it('should properly format a snaked cased string', () => {
     expect(snakeToFriendly('a_cool_string')).toEqual('A Cool String');
   });
+
+  it('should handle undefined', () => {
+    expect(snakeToFriendly(undefined)).toEqual('');
+  });
 });
 
 describe('snakeToCamel', () => {
