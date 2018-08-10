@@ -46,7 +46,7 @@ export class Typeahead extends Component {
     }));
 
     const listClasses = cx('List', {
-      open: isOpen && (!inputValue || matches.length),
+      open: isOpen && !selectedItem && (!inputValue || matches.length),
       hasHelp: !!helpText
     });
 
