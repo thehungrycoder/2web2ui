@@ -110,6 +110,10 @@ export default class AppDatePicker extends Component {
     this.props.onChange({ ...this.state.selected, relativeRange: 'custom' });
   }
 
+  handleTextUpdate = () => {
+    this.props.onBlur();
+  }
+
   render() {
     const { selected: { from, to }, showDatePicker } = this.state;
     const selectedRange = showDatePicker ? 'custom' : this.props.relativeRange;
@@ -123,6 +127,7 @@ export default class AppDatePicker extends Component {
       textFieldProps = {},
       dateFieldFormat,
       showPresets = true,
+      error,
       left
     } = this.props;
     const dateFormat = dateFieldFormat || this.DATE_FORMAT;
@@ -140,6 +145,8 @@ export default class AppDatePicker extends Component {
       connectLeft={rangeSelect}
       value={`${format(from, dateFormat)} – ${format(to, dateFormat)}`}
       readOnly
+      onBlur={this.handleTextUpdate}
+      error={error}
       disabled={disabled}
       {...textFieldProps} />;
 

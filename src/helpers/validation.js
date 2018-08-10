@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import { formatBytes } from 'src/helpers/units';
+import { getDuration } from 'src/helpers/date';
 import { emailRegex, emailLocalRegex, domainRegex, abTestIdRegex } from './regex';
 import isURL from 'validator/lib/isURL';
 import Payment from 'payment';
@@ -24,14 +25,19 @@ export function abTestId(value) {
   return abTestIdRegex.test(value) ? undefined : 'Must contain only letters, numbers, hyphens, and underscores';
 }
 
-export function abTestDefaultTemplate(value, allValues, props) {
+export function abTestDefaultTemplate(value, formValues, props) {
   if (props.templates.includes(value)) {
     return undefined;
   }
-  if (allValues.subaccount) {
+  if (formValues.subaccount) {
     return 'Template not available to selected subaccount';
   }
   return 'Subaccount templates not available to master account';
+}
+
+export function abTestDuration(value, formValues) {
+  const testDuration = getDuration(value) + (parseInt(formValues.engagement_timeout, 10) || 24);
+  return testDuration > 720 ? 'Test duration + engagement timeout must be 30 days or less' : undefined;
 }
 
 export function hasNumber(value) {
@@ -78,7 +84,7 @@ export const maxNumber = _.memoize(function maxNumber(max) {
 });
 
 export const numberBetween = _.memoize(function numberBetween(min, max) {
-  return (value) => (value > min && value < max) ? `Must be between ${min} and ${max}` : undefined;
+  return (value) => (value > min && value < max) ? undefined : `Must be between ${min} and ${max}`;
 });
 
 export const maxFileSize = _.memoize(function maxFilesSize(maxSize) {

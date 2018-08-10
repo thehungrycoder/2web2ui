@@ -107,6 +107,11 @@ export function getRelativeDates(range) {
   }
 }
 
+export function getDuration(dates, unit = 'hours') {
+  const { from, to } = dates;
+  return moment(to).diff(moment(from), unit);
+}
+
 export function formatDate(date, FORMAT = config.dateFormat) {
   return moment(date).format(FORMAT);
 }
