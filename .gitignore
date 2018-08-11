@@ -25,3 +25,4 @@ yarn-error.log*
 .vscode
 .idea/
 .history/
+src/config/__auto/
