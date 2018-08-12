@@ -1,15 +1,9 @@
 import moment from 'moment';
-// import { ceil, floor, round } from 'moment-round';
 import _ from 'lodash';
 import { list as METRICS_LIST } from 'src/config/metrics';
 import config from 'src/config';
 import { getRelativeDates, getLocalTimezone } from 'src/helpers/date';
 import { safeDivide, safeRate } from './math';
-
-// hack moment with rounding plugin
-// moment.prototype.round = round;
-// moment.prototype.ceil = ceil;
-// moment.prototype.floor = floor;
 
 const { metricsPrecisionMap: precisionMap, apiDateFormat, chartColors = []} = config;
 const indexedPrecisions = _.keyBy(precisionMap, 'value');
@@ -103,18 +97,28 @@ export function roundBoundaries(fromInput, toInput) {
   floorMoment(from, roundInt, momentPrecision);
   // if we're only at a minute precision, don't round up to the next minute
   if (precision !== '1min') { ceilMoment(to, roundInt, momentPrecision); }
-  // At hours precision, metrics API is really grabbing data for hh:00:00 to hh:59:59
-  // if (momentPrecision === 'hours') { to.subtract(1, 'minutes'); }
 
   return { to, from };
 }
 
+/**
+ * Rounds down moment to precision and interval
+ * @param time
+ * @param roundInt
+ * @param precision
+ */
 function floorMoment(time, roundInt = 1, precision = 'minutes') {
   const value = time.get(precision);
   const roundedValue = Math.floor(value / roundInt) * roundInt;
   time.set(precision, roundedValue).startOf(precision);
 }
 
+/**
+ * Rounds up moment to precision and interval
+ * @param time
+ * @param roundInt
+ * @param precision
+ */
 function ceilMoment(time, roundInt = 1, precision = 'minutes') {
   const value = time.get(precision);
   const roundedValue = Math.ceil(value / roundInt) * roundInt;

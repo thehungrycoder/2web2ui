@@ -135,16 +135,25 @@ describe('metrics helpers', () => {
       }
     ];
 
-    const allCases = _.map(caseList, (caseObj) => {
+    const allCases = _.flatMap(caseList, (caseObj) => {
+      const cases = [];
       const expectedTo = caseObj.timeLabel === '1min' // we don't round at this precision
-        ? moment(caseObj.expected.to).toISOString()
-        : moment(caseObj.expected.to).endOf('minutes').toISOString();
-      return {
+        ? moment(caseObj.expected.to)
+        : moment(caseObj.expected.to).endOf('minutes');
+      cases.push({
         name: `should round at ${caseObj.timeLabel}`,
         from: moment(caseObj.from),
         to: moment(caseObj.to),
-        expectedValue: { from: moment(caseObj.expected.from).toISOString(), to: expectedTo }
-      };
+        expectedValue: { from: moment(caseObj.expected.from).toISOString(), to: expectedTo.toISOString() }
+      });
+      cases.push({
+        name: `should not round if already at nearest precision for ${caseObj.timeLabel}`,
+        from: moment(caseObj.expected.from),
+        to: expectedTo,
+        expectedValue: { from: moment(caseObj.expected.from).toISOString(), to: expectedTo.toISOString() }
+      });
+
+      return cases;
     });
 
     cases('should round from and to values', ({ timeLabel, from, to, expectedValue }) => {
