@@ -133,7 +133,7 @@ export default class AppDatePicker extends Component {
       datePickerProps = {},
       textFieldProps = {},
       dateFieldFormat,
-      roundToPrecision
+      roundToPrecision,
       showPresets = true,
       left
     } = this.props;
