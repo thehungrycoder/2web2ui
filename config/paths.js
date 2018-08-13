@@ -53,4 +53,5 @@ module.exports = {
   appNodeModules: resolveApp(''),
   publicUrl: getPublicUrl(resolveApp('package.json')),
   servedPath: getServedPath(resolveApp('package.json')),
+  browsersSnapshot: resolveApp('browsers/snapshot.js'),
 };

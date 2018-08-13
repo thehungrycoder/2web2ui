@@ -28,7 +28,7 @@ const openBrowser = require('react-dev-utils/openBrowser');
 const paths = require('../config/paths');
 const config = require('../config/webpack.config.dev');
 const createDevServerConfig = require('../config/webpackDevServer.config');
-const browsersSnapshotGenerator = require('./genBrowsersSnapshot');
+const browsersSnapshotGenerator = require('../browsers/generator');
 
 const useYarn = fs.existsSync(paths.yarnLockFile);
 const isInteractive = process.stdout.isTTY;

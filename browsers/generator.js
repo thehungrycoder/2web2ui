@@ -1,12 +1,12 @@
 'use strict';
 
-const genBrowsersSnapshot = require('browserslist');
+const browserslist = require('browserslist');
 const _ = require('lodash');
 const caniuse = require('caniuse-db/data.json').agents;
 const fs = require('fs');
-const queryResults = genBrowsersSnapshot(); //automatically reads configuration from package.json
+const queryResults = browserslist(); //automatically reads configuration from package.json
 
-const destinationPath = 'src/config/__auto/browsers.js';
+const destinationPath = './browsers/snapshot.js';
 
 function generate () {
   const compatible = {};
@@ -27,7 +27,8 @@ function generate () {
   });
 
   const content = `const list = ${JSON.stringify(compatible, null, 2)};
-  
+
+  console.log('HELLO WORLD', list);  
   export default list;
   `;
 
