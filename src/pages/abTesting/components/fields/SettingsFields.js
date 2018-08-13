@@ -54,7 +54,6 @@ const SettingsFields = ({ disabled, formValues = {}}) => (
             { label: 'By Unique Click Rate', value: 'count_unique_clicked' },
             { label: 'By Unique Open Rate', value: 'count_unique_confirmed_opened' }
           ]}
-          bottomError={true}
           disabled={disabled}
         />
         <Field
@@ -82,6 +81,7 @@ const SettingsFields = ({ disabled, formValues = {}}) => (
             { label: 'By Percent', value: 'percent' },
             { label: 'By Number of Messages', value: 'sample_size' }
           ]}
+          bottomError={true}
           disabled={disabled}
         />
       </Panel.Section>
