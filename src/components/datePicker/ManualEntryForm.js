@@ -96,7 +96,7 @@ export default class ManualEntryForm extends Component {
         precisionLabelValue = '';
       }
 
-      precisionLabel = <div className={styles.PrecisionLabel}>Precision: {precisionLabelValue}</div>;
+      precisionLabel = <div className={styles.PrecisionLabel}>Precision: {_.startCase(_.words(precisionLabelValue).join(' '))}</div>;
     }
 
     return (
