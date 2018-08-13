@@ -27,6 +27,7 @@ describe('Page: A/B Test Details', () => {
       loading: false,
       showAlert: jest.fn(),
       getAbTest: jest.fn(),
+      getLatestAbTest: jest.fn(),
       cancelAbTest: jest.fn(() => Promise.resolve()),
       deleteAbTest: jest.fn(() => Promise.resolve()),
       history: { push: jest.fn() }
@@ -44,6 +45,11 @@ describe('Page: A/B Test Details', () => {
     expect(wrapper.find(EditMode)).toExist();
   });
 
+  it('should render edit mode when rescheduling', () => {
+    wrapper.setProps({ test: { ...props.test, status: 'completed' }, rescheduling: true });
+    expect(wrapper.find(EditMode)).toExist();
+  });
+
   it('should render view mode in running, cancelled, or completed', () => {
     wrapper.setProps({ test: { ...props.test, status: 'running' }});
     expect(wrapper.find(ViewMode)).toExist();
@@ -53,8 +59,9 @@ describe('Page: A/B Test Details', () => {
     expect(wrapper.find(ViewMode)).toExist();
   });
 
-  it('should get A/B test on mount', () => {
+  it('should get A/B test and latest on mount', () => {
     expect(props.getAbTest).toHaveBeenCalledWith({ id: props.id, version: props.version, subaccountId: props.subaccountId });
+    expect(props.getLatestAbTest).toHaveBeenCalledWith({ id: props.id, subaccountId: props.subaccountId });
   });
 
   it('should render loading', () => {
@@ -100,5 +107,6 @@ describe('Page: A/B Test Details', () => {
   it('should get a new version when url changes', () => {
     wrapper.setProps({ version: 3 });
     expect(props.getAbTest).toHaveBeenCalledWith({ id: 'id-1', subaccountId: '101', version: 3 });
+    expect(props.getLatestAbTest).toHaveBeenCalledWith({ id: 'id-1', subaccountId: '101' });
   });
 });

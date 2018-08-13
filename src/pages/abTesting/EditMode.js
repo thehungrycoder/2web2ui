@@ -5,7 +5,7 @@ import { reduxForm, getFormValues } from 'redux-form';
 import { withRouter } from 'react-router-dom';
 
 import { showAlert } from 'src/actions/globalAlert';
-import { updateDraft, getAbTest } from 'src/actions/abTesting';
+import { updateDraft, getAbTest, rescheuleAbTest } from 'src/actions/abTesting';
 import { listTemplates } from 'src/actions/templates';
 import { selectEditInitialValues } from 'src/selectors/abTesting';
 import { formatFormValues } from 'src/helpers/abTesting';
@@ -16,6 +16,7 @@ import Section from './components/Section';
 import StatusPanel from './components/StatusPanel';
 import { StatusFields, SettingsFields, VariantsFields } from './components/fields';
 import { StatusContent, SettingsContent, VariantsContent } from './components/content';
+import { setSubaccountQuery } from 'src/helpers/subaccounts';
 
 const FORM_NAME = 'abTestEdit';
 
@@ -41,8 +42,26 @@ export class EditMode extends Component {
 
   handleUpdateScheduled = (values) => {}
 
+  handleReschedule = (values) => {
+    const { id, version } = this.props.test;
+    const { subaccountId, rescheuleAbTest, history, showAlert } = this.props;
+
+    return rescheuleAbTest(formatFormValues(values), { id, subaccountId }).then(() => {
+      showAlert({ type: 'success', message: 'A/B Test Rescheduled' });
+      history.push(`/ab-testing/${id}/${version + 1}${setSubaccountQuery(subaccountId)}`);
+    });
+  }
+
   getPrimaryAction = () => {
-    const { handleSubmit, test } = this.props;
+    const { handleSubmit, test, rescheduling, rescheduleLoading } = this.props;
+
+    if (rescheduling) {
+      return {
+        content: 'Finalize and Reschedule Test',
+        onClick: handleSubmit(this.handleReschedule),
+        disabled: rescheduleLoading
+      };
+    }
 
     if (test.status === 'draft') {
       return {
@@ -118,17 +137,19 @@ EditMode.defaultProps = {
 
 EditMode.propTypes = {
   test: PropTypes.shape({
-    status: PropTypes.oneOf(['draft', 'scheduled'])
+    // Completed and cancelled are only allowed here during the reschedule phase
+    status: PropTypes.oneOf(['draft', 'scheduled', 'cancelled', 'completed'])
   })
 };
 
 const mapStateToProps = (state, props) => ({
   formValues: getFormValues(FORM_NAME)(state),
-  initialValues: selectEditInitialValues(state, props)
+  initialValues: selectEditInitialValues(state, props),
+  rescheduleLoading: state.abTesting.rescheduleLoading
 });
 
 const formOptions = {
   form: FORM_NAME,
   enableReinitialize: true
 };
-export default withRouter(connect(mapStateToProps, { listTemplates, updateDraft, getAbTest, showAlert })(reduxForm(formOptions)(EditMode)));
+export default withRouter(connect(mapStateToProps, { listTemplates, updateDraft, getAbTest, rescheuleAbTest, showAlert })(reduxForm(formOptions)(EditMode)));

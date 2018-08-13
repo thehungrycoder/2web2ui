@@ -22,7 +22,7 @@ export const selectIdAndVersionFromParams = (state, props) => ({
  */
 export const selectAbTestFromParams = createSelector(
   [selectDetails, selectIdAndVersionFromParams],
-  (details, { id, version }) => _.get(details, `${id}.version_${version}`)
+  (details, { id, version }) => _.get(details, `${id}.version_${version}`, {})
 );
 
 /**

@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Page } from '@sparkpost/matchbox';
+import { Save } from '@sparkpost/matchbox-icons';
 import Section from './components/Section';
 import StatusPanel from './components/StatusPanel';
 import { StatusContent, SettingsContent, VariantsContent } from './components/content';
 import { ConfirmationModal } from 'src/components';
 import { updateDraft } from 'src/actions/abTesting';
 import { showAlert } from 'src/actions/globalAlert';
+import { selectLatestVersionNumberFromParams } from 'src/selectors/abTesting';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
 
 export class ViewMode extends Component {
@@ -18,15 +20,24 @@ export class ViewMode extends Component {
   }
 
   getPrimaryAction = () => {
-    const { status } = this.props.test;
+    const { status, version } = this.props.test;
+    const { latest, location } = this.props;
 
-    if (status === 'cancelled' || status === 'completed') {
+    // Rescheduling only allowed if viewing latest
+    if (version === latest && (status === 'cancelled' || status === 'completed')) {
       return {
-        content: 'Edit and Rerun Test'
+        content: 'Edit and Reschedule Test',
+        to: {
+          pathname: location.pathname,
+          search: location.search,
+          state: {
+            rescheduling: true
+          }
+        },
+        component: Link
       };
     }
 
-    // Show nothing if running
     return null;
   }
 
@@ -35,7 +46,7 @@ export class ViewMode extends Component {
     const status = test.status;
     return [
       {
-        content: 'Override Default Template', // TODO find an icon
+        content: <span><Save /> Override Default Template</span>,
         visible: status === 'completed' || status === 'cancelled',
         onClick: this.toggleOverride
       },
@@ -116,9 +127,10 @@ ViewMode.propTypes = {
   })
 };
 
-function mapStateToProps(state) {
+function mapStateToProps(state, props) {
   return {
-    updateDraftPending: state.abTesting.updateDraftPending
+    updateDraftPending: state.abTesting.updateDraftPending,
+    latest: selectLatestVersionNumberFromParams(state, props)
   };
 }
 

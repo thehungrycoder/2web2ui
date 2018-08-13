@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Status Panel Component should render draft and get latest on mount 1`] = `
+exports[`Status Panel Component should render 1`] = `
 <Panel>
   <Panel.Section
     actions={

@@ -5,13 +5,24 @@ exports[`Page: A/B Test View Mode should render cancelled status correctly 1`] =
   empty={Object {}}
   primaryAction={
     Object {
-      "content": "Edit and Rerun Test",
+      "component": [Function],
+      "content": "Edit and Reschedule Test",
+      "to": Object {
+        "pathname": "/ab-testing/id-1/5",
+        "search": "?subaccount=101",
+        "state": Object {
+          "rescheduling": true,
+        },
+      },
     }
   }
   secondaryActions={
     Array [
       Object {
-        "content": "Override Default Template",
+        "content": <span>
+          <Save />
+           Override Default Template
+        </span>,
         "onClick": [Function],
         "visible": true,
       },
@@ -41,7 +52,7 @@ exports[`Page: A/B Test View Mode should render cancelled status correctly 1`] =
             "name": "my ab test 1",
             "status": "cancelled",
             "updated_at": "2018-10-21T10:10:10.000Z",
-            "version": "1",
+            "version": 5,
           }
         }
       />
@@ -58,7 +69,7 @@ exports[`Page: A/B Test View Mode should render cancelled status correctly 1`] =
             "name": "my ab test 1",
             "status": "cancelled",
             "updated_at": "2018-10-21T10:10:10.000Z",
-            "version": "1",
+            "version": 5,
           }
         }
       />
@@ -72,7 +83,7 @@ exports[`Page: A/B Test View Mode should render cancelled status correctly 1`] =
             "name": "my ab test 1",
             "status": "cancelled",
             "updated_at": "2018-10-21T10:10:10.000Z",
-            "version": "1",
+            "version": 5,
           }
         }
       />
@@ -92,7 +103,7 @@ exports[`Page: A/B Test View Mode should render cancelled status correctly 1`] =
             "name": "my ab test 1",
             "status": "cancelled",
             "updated_at": "2018-10-21T10:10:10.000Z",
-            "version": "1",
+            "version": 5,
           }
         }
       />
@@ -108,7 +119,7 @@ exports[`Page: A/B Test View Mode should render cancelled status correctly 1`] =
             "name": "my ab test 1",
             "status": "cancelled",
             "updated_at": "2018-10-21T10:10:10.000Z",
-            "version": "1",
+            "version": 5,
           }
         }
       />
@@ -128,7 +139,7 @@ exports[`Page: A/B Test View Mode should render cancelled status correctly 1`] =
             "name": "my ab test 1",
             "status": "cancelled",
             "updated_at": "2018-10-21T10:10:10.000Z",
-            "version": "1",
+            "version": 5,
           }
         }
       />
@@ -145,7 +156,7 @@ exports[`Page: A/B Test View Mode should render cancelled status correctly 1`] =
             "name": "my ab test 1",
             "status": "cancelled",
             "updated_at": "2018-10-21T10:10:10.000Z",
-            "version": "1",
+            "version": 5,
           }
         }
       />
@@ -171,13 +182,24 @@ exports[`Page: A/B Test View Mode should render completed status correctly 1`] =
   empty={Object {}}
   primaryAction={
     Object {
-      "content": "Edit and Rerun Test",
+      "component": [Function],
+      "content": "Edit and Reschedule Test",
+      "to": Object {
+        "pathname": "/ab-testing/id-1/5",
+        "search": "?subaccount=101",
+        "state": Object {
+          "rescheduling": true,
+        },
+      },
     }
   }
   secondaryActions={
     Array [
       Object {
-        "content": "Override Default Template",
+        "content": <span>
+          <Save />
+           Override Default Template
+        </span>,
         "onClick": [Function],
         "visible": true,
       },
@@ -207,7 +229,7 @@ exports[`Page: A/B Test View Mode should render completed status correctly 1`] =
             "name": "my ab test 1",
             "status": "completed",
             "updated_at": "2018-10-21T10:10:10.000Z",
-            "version": "1",
+            "version": 5,
           }
         }
       />
@@ -224,7 +246,7 @@ exports[`Page: A/B Test View Mode should render completed status correctly 1`] =
             "name": "my ab test 1",
             "status": "completed",
             "updated_at": "2018-10-21T10:10:10.000Z",
-            "version": "1",
+            "version": 5,
           }
         }
       />
@@ -238,7 +260,7 @@ exports[`Page: A/B Test View Mode should render completed status correctly 1`] =
             "name": "my ab test 1",
             "status": "completed",
             "updated_at": "2018-10-21T10:10:10.000Z",
-            "version": "1",
+            "version": 5,
           }
         }
       />
@@ -258,7 +280,7 @@ exports[`Page: A/B Test View Mode should render completed status correctly 1`] =
             "name": "my ab test 1",
             "status": "completed",
             "updated_at": "2018-10-21T10:10:10.000Z",
-            "version": "1",
+            "version": 5,
           }
         }
       />
@@ -274,7 +296,7 @@ exports[`Page: A/B Test View Mode should render completed status correctly 1`] =
             "name": "my ab test 1",
             "status": "completed",
             "updated_at": "2018-10-21T10:10:10.000Z",
-            "version": "1",
+            "version": 5,
           }
         }
       />
@@ -294,7 +316,7 @@ exports[`Page: A/B Test View Mode should render completed status correctly 1`] =
             "name": "my ab test 1",
             "status": "completed",
             "updated_at": "2018-10-21T10:10:10.000Z",
-            "version": "1",
+            "version": 5,
           }
         }
       />
@@ -311,7 +333,7 @@ exports[`Page: A/B Test View Mode should render completed status correctly 1`] =
             "name": "my ab test 1",
             "status": "completed",
             "updated_at": "2018-10-21T10:10:10.000Z",
-            "version": "1",
+            "version": 5,
           }
         }
       />
@@ -339,7 +361,10 @@ exports[`Page: A/B Test View Mode should render running status correctly 1`] = `
   secondaryActions={
     Array [
       Object {
-        "content": "Override Default Template",
+        "content": <span>
+          <Save />
+           Override Default Template
+        </span>,
         "onClick": [Function],
         "visible": false,
       },
@@ -369,7 +394,7 @@ exports[`Page: A/B Test View Mode should render running status correctly 1`] = `
             "name": "my ab test 1",
             "status": "running",
             "updated_at": "2018-10-21T10:10:10.000Z",
-            "version": "1",
+            "version": 5,
           }
         }
       />
@@ -386,7 +411,7 @@ exports[`Page: A/B Test View Mode should render running status correctly 1`] = `
             "name": "my ab test 1",
             "status": "running",
             "updated_at": "2018-10-21T10:10:10.000Z",
-            "version": "1",
+            "version": 5,
           }
         }
       />
@@ -400,7 +425,7 @@ exports[`Page: A/B Test View Mode should render running status correctly 1`] = `
             "name": "my ab test 1",
             "status": "running",
             "updated_at": "2018-10-21T10:10:10.000Z",
-            "version": "1",
+            "version": 5,
           }
         }
       />
@@ -420,7 +445,7 @@ exports[`Page: A/B Test View Mode should render running status correctly 1`] = `
             "name": "my ab test 1",
             "status": "running",
             "updated_at": "2018-10-21T10:10:10.000Z",
-            "version": "1",
+            "version": 5,
           }
         }
       />
@@ -436,7 +461,7 @@ exports[`Page: A/B Test View Mode should render running status correctly 1`] = `
             "name": "my ab test 1",
             "status": "running",
             "updated_at": "2018-10-21T10:10:10.000Z",
-            "version": "1",
+            "version": 5,
           }
         }
       />
@@ -456,7 +481,7 @@ exports[`Page: A/B Test View Mode should render running status correctly 1`] = `
             "name": "my ab test 1",
             "status": "running",
             "updated_at": "2018-10-21T10:10:10.000Z",
-            "version": "1",
+            "version": 5,
           }
         }
       />
@@ -473,7 +498,7 @@ exports[`Page: A/B Test View Mode should render running status correctly 1`] = `
             "name": "my ab test 1",
             "status": "running",
             "updated_at": "2018-10-21T10:10:10.000Z",
-            "version": "1",
+            "version": 5,
           }
         }
       />

@@ -14,7 +14,7 @@ describe('Page: A/B Test Edit Mode', () => {
       subaccountId: '101',
       test: {
         id: 'id-1',
-        version: '1',
+        version: 1,
         name: 'my ab test 1',
         status: 'draft',
         default_template: {
@@ -26,6 +26,9 @@ describe('Page: A/B Test Edit Mode', () => {
       showAlert: jest.fn(),
       listTemplates: jest.fn(),
       updateDraft: jest.fn(() => Promise.resolve()),
+      rescheuleAbTest: jest.fn(() => Promise.resolve()),
+      rescheduling: false,
+      rescheduleLoading: false,
       deleteAction: {
         content: 'delete test',
         onClick: jest.fn()
@@ -36,7 +39,10 @@ describe('Page: A/B Test Edit Mode', () => {
       },
       handleSubmit: jest.fn((a) => a),
       formValues: 'test values',
-      submitting: false
+      submitting: false,
+      history: {
+        push: jest.fn()
+      }
     };
     wrapper = shallow(<EditMode {...props} />);
     formatFormValues.mockImplementation((a) => a);
@@ -63,6 +69,28 @@ describe('Page: A/B Test Edit Mode', () => {
       expect(props.updateDraft).toHaveBeenCalledWith(props.formValues, { id: props.test.id, subaccountId: props.subaccountId });
       expect(props.getAbTest).toHaveBeenCalledWith({ id: props.test.id, version: props.test.version, subaccountId: props.subaccountId });
       expect(props.showAlert).toHaveBeenCalledWith({ message: 'A/B Test Draft Updated', type: 'success' });
+    });
+  });
+
+  describe('rescheduling', () => {
+    beforeEach(() => {
+      wrapper.setProps({ rescheduling: true });
+    });
+
+    it('should render reschedule primary action', () => {
+      expect(wrapper.find('Page').prop('primaryAction')).toMatchSnapshot();
+    });
+
+    it('should disable primary action when rescheduling is loading', () => {
+      wrapper.setProps({ rescheduleLoading: true });
+      expect(wrapper.find('Page').prop('primaryAction').disabled).toBe(true);
+    });
+
+    it('should handle reschedule action', async () => {
+      await wrapper.instance().handleReschedule(props.formValues);
+      expect(props.rescheuleAbTest).toHaveBeenCalledWith(props.formValues, { id: props.test.id, subaccountId: props.subaccountId });
+      expect(props.showAlert).toHaveBeenCalledWith({ message: 'A/B Test Rescheduled', type: 'success' });
+      expect(props.history.push).toHaveBeenCalledWith('/ab-testing/id-1/2?subaccount=101');
     });
   });
 });

@@ -50,7 +50,15 @@ export class TestCollection extends Component {
         section: 1
       },
       {
-        content: 'Edit and Rerun Test',
+        content: 'Reschedule Test',
+        to: {
+          pathname: this.getDetailsLink({ id, version }),
+          search: setSubaccountQuery(subaccount_id),
+          state: {
+            rescheduling: true
+          }
+        },
+        component: Link,
         visible: status === 'completed' || status === 'cancelled',
         section: 1
       },
