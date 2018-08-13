@@ -129,8 +129,8 @@ BillingAddressForm.propTypes = {
   formName: PropTypes.string.isRequired
 };
 
-// Get country value from state
 const mapStateToProps = (state, { formName }) => {
+  // Get country value from state
   const selector = formValueSelector(formName);
   const countryValue = selector(state, 'billingAddress.country');
 
