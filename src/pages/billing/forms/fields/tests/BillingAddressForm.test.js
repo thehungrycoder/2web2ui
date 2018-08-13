@@ -18,7 +18,6 @@ describe('Billing Address Form:', () => {
 
   beforeEach(() => {
     wrapper = shallow(<BillingAddressForm {...props} />);
-    jest.clearAllMocks();
   });
 
   it('should render', () => {
