@@ -2,7 +2,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers';
 import ErrorTracker from './helpers/errorTracker';
-import analyticsMiddleware from './helpers/analytics/setup';
+import analyticsMiddleware from './helpers/analytics/middleware';
 
 const configureStore = () => {
   // necessary for redux devtools in development mode only
