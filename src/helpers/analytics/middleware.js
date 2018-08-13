@@ -1,7 +1,14 @@
-import { createMiddleware } from 'redux-beacon';
-import { pushEvents } from './index';
-import eventsMap from './eventsMap';
+import { pushEvent } from '.';
+import eventsMapper from './eventsMapper';
 
-const analyticsMiddleware = createMiddleware(eventsMap, pushEvents);
+export default function middleware() {
+  return (next) => (action) => {
+    const event = eventsMapper(action);
 
-export default analyticsMiddleware;
+    if (event) {
+      pushEvent(event);
+    }
+
+    return next(action);
+  };
+}
