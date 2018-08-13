@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`eventsMapper with SparkPost API fail action 1`] = `
+Object {
+  "action": "GET_ACCOUNT_FAIL",
+  "category": "API",
+  "event": "ui-api-request",
+  "label": "Unable to find account",
+}
+`;
+
+exports[`eventsMapper with Zuora API fail action 1`] = `
+Object {
+  "action": "UPDATE_BILLING_FAIL",
+  "category": "API",
+  "event": "ui-api-request",
+  "label": "Unable to update billing information",
+}
+`;
+
+exports[`eventsMapper with failed submit form action 1`] = `
+Object {
+  "action": "Submit Failure",
+  "category": "Form",
+  "event": "Interactions",
+  "label": "joinForm",
+}
+`;
+
+exports[`eventsMapper with initialize form action 1`] = `
+Object {
+  "action": "Initialize",
+  "category": "Form",
+  "event": "Interactions",
+  "label": "joinForm",
+}
+`;
+
+exports[`eventsMapper with submit form action 1`] = `
+Object {
+  "action": "Submit",
+  "category": "Form",
+  "event": "Interactions",
+  "label": "joinForm",
+}
+`;
+
+exports[`eventsMapper with sucess submit form action 1`] = `
+Object {
+  "action": "Submit Success",
+  "category": "Form",
+  "event": "Interactions",
+  "label": "joinForm",
+}
+`;
+
+exports[`eventsMapper with untracked action 1`] = `undefined`;
