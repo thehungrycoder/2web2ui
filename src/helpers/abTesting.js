@@ -12,6 +12,8 @@ export const formatFormValues = ({ default_template, variants, dates, ...rest })
 
   if (values.audience_selection === 'percent') {
     values = _.omit(values, 'total_sample_size');
+  } else {
+    values.total_sample_size = calculateTotalSampleSize({ default_template, variants });
   }
 
   return {
@@ -40,3 +42,13 @@ export const findTemplateObject = (templates, { template_id, ...rest } = {}) => 
   template_object: _.find(templates, ({ id }) => id === template_id),
   ...rest
 });
+
+/**
+ * Calculates the total_sample_size of a test based upon the sample_size of default_template & variants
+ */
+export const calculateTotalSampleSize = ({ default_template, variants }) => {
+  let total = 0;
+  _.forEach(variants, (variant) => total += variant.sample_size);
+  total += default_template.sample_size;
+  return total;
+};

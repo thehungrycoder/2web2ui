@@ -76,6 +76,7 @@ export function scheduleAbTest(data, { id, subaccountId }) {
   });
 }
 
+// Gets the latest A/B test's version. Does not get full A/B test details.
 export function getLatestAbTest({ id, subaccountId }) {
   return getAbTest({ id, subaccountId, type: 'GET_LATEST_AB_TEST' });
 }
@@ -86,6 +87,18 @@ export function updateDraft(data, { id, subaccountId }) {
     meta: {
       method: 'PUT',
       url: `/ab-test/draft/${id}`,
+      headers: setSubaccountHeader(subaccountId),
+      data
+    }
+  });
+}
+
+export function updateAbTest(data, { id, subaccountId }) {
+  return sparkpostApiRequest({
+    type: 'UPDATE_AB_TEST',
+    meta: {
+      method: 'PUT',
+      url: `/ab-test/${id}`,
       headers: setSubaccountHeader(subaccountId),
       data
     }

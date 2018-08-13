@@ -5,7 +5,7 @@ import { reduxForm, getFormValues } from 'redux-form';
 import { withRouter } from 'react-router-dom';
 
 import { showAlert } from 'src/actions/globalAlert';
-import { updateDraft, getAbTest } from 'src/actions/abTesting';
+import { updateDraft, getAbTest, updateAbTest, scheduleAbTest } from 'src/actions/abTesting';
 import { listTemplates } from 'src/actions/templates';
 import { selectEditInitialValues } from 'src/selectors/abTesting';
 import { formatFormValues } from 'src/helpers/abTesting';
@@ -32,16 +32,30 @@ export class EditMode extends Component {
     const { id, version } = this.props.test;
 
     return updateDraft(formatFormValues(values), { id, subaccountId }).then(() => {
-      getAbTest({ id, version, subaccountId });
+      getAbTest({ id, subaccountId, version });
       showAlert({ type: 'success', message: 'A/B Test Draft Updated' });
     });
   }
 
-  //TODO: Need to do maths for total_sample_size
-  handleSchedule = (values) => {}
+  handleSchedule = (values) => {
+    const { scheduleAbTest, showAlert, subaccountId, getAbTest } = this.props;
+    const { id, version } = this.props.test;
 
-  //TODO: Need to do maths for total_sample_size
-  handleUpdateScheduled = (values) => {}
+    return scheduleAbTest(formatFormValues(values), { id, subaccountId }).then(() => {
+      getAbTest({ id, subaccountId, version });
+      showAlert({ type: 'success', message: 'A/B Test Draft Scheduled' });
+    });
+  }
+
+  handleUpdateScheduled = (values) => {
+    const { updateAbTest, showAlert, subaccountId, getAbTest } = this.props;
+    const { id, version } = this.props.test;
+
+    return updateAbTest(formatFormValues(values), { id, subaccountId }).then(() => {
+      getAbTest({ id, subaccountId, version });
+      showAlert({ type: 'success', message: 'A/B Test Updated' });
+    });
+  }
 
   getPrimaryAction = () => {
     const { handleSubmit, test } = this.props;
@@ -133,4 +147,4 @@ const formOptions = {
   form: FORM_NAME,
   enableReinitialize: true
 };
-export default withRouter(connect(mapStateToProps, { listTemplates, updateDraft, getAbTest, showAlert })(reduxForm(formOptions)(EditMode)));
+export default withRouter(connect(mapStateToProps, { listTemplates, updateDraft, getAbTest, updateAbTest, scheduleAbTest, showAlert })(reduxForm(formOptions)(EditMode)));
