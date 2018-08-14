@@ -27,7 +27,6 @@ exports[`Page: A/B Test Details should render correctly and create shared props 
            Delete Test
         </span>,
         "onClick": [Function],
-        "visible": false,
       }
     }
     subaccountId="101"

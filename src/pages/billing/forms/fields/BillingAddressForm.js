@@ -7,6 +7,7 @@ import { Grid } from '@sparkpost/matchbox';
 import { TextFieldWrapper, SelectWrapper } from 'src/components';
 import { required } from 'src/helpers/validation';
 import { getZipLabel } from 'src/helpers/billing';
+import { getFirstStateForCountry } from 'src/selectors/accountBillingForms';
 
 import styles from './Fields.module.scss';
 import _ from 'lodash';
@@ -24,15 +25,6 @@ export class BillingAddressForm extends Component {
     showName: true
   }
 
-  handleCountryChange = (e) => {
-    const value = e.target.value;
-
-    // Removes state value from store
-    if (value !== 'US' && value !== 'CA') {
-      this.props.change(this.props.formName, 'billingAddress.state', null);
-    }
-  }
-
   componentDidMount() {
     const { firstName, lastName } = this.props;
 
@@ -40,6 +32,21 @@ export class BillingAddressForm extends Component {
     // Their values are still in the redux-form store although the fields are hidden
     if (firstName && lastName) {
       this.setState({ showName: false });
+    }
+  }
+
+  componentDidUpdate({ countryValue: prevCountry }) {
+    const { countryValue, change, formName, firstState } = this.props;
+
+    // Handles billingAddress.state field mutation when country changes
+    if (prevCountry !== countryValue) {
+      if (countryValue === 'US' || countryValue === 'CA') {
+        // Sets first state value
+        change(formName, 'billingAddress.state', firstState);
+      } else {
+        // Removes state value from store
+        change(formName, 'billingAddress.state', null);
+      }
     }
   }
 
@@ -86,7 +93,7 @@ export class BillingAddressForm extends Component {
     return (
       <div>
         <p><small>Billing Address</small></p>
-        { nameFields }
+        {nameFields}
         <Field
           label='Country'
           name='billingAddress.country'
@@ -95,10 +102,9 @@ export class BillingAddressForm extends Component {
           options={countries}
           validate={required}
           disabled={disabled}
-          onChange={this.handleCountryChange}
         />
         <Grid>
-          { stateOrProvince }
+          {stateOrProvince}
           <Grid.Column xs={6}>
             <Field
               label={getZipLabel(countryValue)}
@@ -123,13 +129,16 @@ BillingAddressForm.propTypes = {
   formName: PropTypes.string.isRequired
 };
 
-// Get country value from state
 const mapStateToProps = (state, { formName }) => {
+  // Get country value from state
   const selector = formValueSelector(formName);
+  const countryValue = selector(state, 'billingAddress.country');
+
   return {
-    countryValue: selector(state, 'billingAddress.country'),
+    countryValue,
     firstName: selector(state, 'billingAddress.firstName'),
-    lastName: selector(state, 'billingAddress.lastName')
+    lastName: selector(state, 'billingAddress.lastName'),
+    firstState: getFirstStateForCountry(state, countryValue)
   };
 };
 export default connect(mapStateToProps, { change })(BillingAddressForm);

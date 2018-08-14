@@ -95,7 +95,11 @@ export default (state = initialState, { type, payload, meta }) => {
       return { ...state, cancelPending: true };
 
     case 'CANCEL_AB_TEST_SUCCESS':
-      return { ...state, cancelPending: false };
+      return {
+        ...state,
+        cancelPending: false,
+        list: state.list.map((t) => t.id === meta.id && t.subaccount_id === parseInt(meta.subaccountId, 10) ? { ...t, status: payload.status } : t)
+      };
 
     case 'CANCEL_AB_TEST_FAIL':
       return { ...state, cancelPending: false };

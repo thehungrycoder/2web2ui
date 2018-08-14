@@ -41,7 +41,6 @@ exports[`Billing Address Form: should render 1`] = `
     component={[Function]}
     label="Country"
     name="billingContact.country"
-    onChange={[Function]}
     options={
       Array [
         Object {
@@ -53,6 +52,16 @@ exports[`Billing Address Form: should render 1`] = `
             },
           ],
           "value": "US",
+        },
+        Object {
+          "label": "CANADA",
+          "states": Array [
+            Object {
+              "name": "alberta",
+              "value": "AB",
+            },
+          ],
+          "value": "CA",
         },
       ]
     }
@@ -115,7 +124,6 @@ exports[`Billing Address Form: should show states 1`] = `
     component={[Function]}
     label="Country"
     name="billingContact.country"
-    onChange={[Function]}
     options={
       Array [
         Object {
@@ -127,6 +135,16 @@ exports[`Billing Address Form: should show states 1`] = `
             },
           ],
           "value": "US",
+        },
+        Object {
+          "label": "CANADA",
+          "states": Array [
+            Object {
+              "name": "alberta",
+              "value": "AB",
+            },
+          ],
+          "value": "CA",
         },
       ]
     }

@@ -62,7 +62,6 @@ export class TestCollection extends Component {
       },
       {
         content: 'Delete Test',
-        visible: status === 'completed' || status === 'cancelled',
         section: 2,
         onClick: () => this.props.toggleDelete(id, subaccount_id)
       }

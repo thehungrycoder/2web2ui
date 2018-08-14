@@ -6,6 +6,7 @@ exports[`DatePickerWrapper renders correctly 1`] = `
   meta={Object {}}
   name="example"
   onChange={[MockFunction]}
+  roundToPrecision={true}
   to={2018-01-01T12:00:00.000Z}
   value={
     Object {

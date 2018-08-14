@@ -37,7 +37,7 @@ export class TemplateTypeahead extends Component {
 }
 
 function mapStateToProps(state, props) {
-  const templates = selectPublishedTemplatesBySubaccount(state, props);
+  const templates = selectPublishedTemplatesBySubaccount(state, props.subaccountId);
   return {
     results: templates,
     hasTemplates: templates.length > 0

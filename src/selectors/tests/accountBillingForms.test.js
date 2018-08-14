@@ -10,6 +10,13 @@ const baseUser = {
   zip_code: '54321'
 };
 
+const billingStore = {
+  countries: [
+    { value: 'US', states: [{ value: 'AL' }]},
+    { value: 'AF' }
+  ]
+};
+
 describe('Selector: Account billing form', () => {
   let user;
   let store;
@@ -24,7 +31,10 @@ describe('Selector: Account billing form', () => {
       { billingId: 'ias', code: 'im a secret', isFree: false, status: 'secret' }
     ]);
     user = Object.assign({}, baseUser);
-    store = { currentUser: user };
+    store = {
+      currentUser: user,
+      billing: billingStore
+    };
   });
 
   describe('changePlanInitialValues when NOT self serve', () => {
@@ -49,14 +59,14 @@ describe('Selector: Account billing form', () => {
 
   describe('updatePaymentInitialValues', () => {
     it('should return update payment values', () => {
-      const store = { currentUser: Object.assign({}, baseUser) };
+      const store = { currentUser: Object.assign({}, baseUser), billing: billingStore };
       expect(updatePaymentInitialValues(store)).toMatchSnapshot();
     });
   });
 
   describe('updateConteactInitialValues', () => {
     it('should return update contact values', () => {
-      const store = { account: { billing: Object.assign({}, baseUser) }};
+      const store = { account: { billing: Object.assign({}, baseUser) }, billing: billingStore };
       expect(updateContactInitialValues(store)).toMatchSnapshot();
     });
   });

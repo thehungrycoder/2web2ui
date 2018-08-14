@@ -6,10 +6,12 @@ Object {
   "list": Array [
     Object {
       "id": "test-subaccount",
+      "status": "scheduled",
       "subaccount_id": 101,
     },
     Object {
       "id": "test-subaccount",
+      "status": "draft",
       "subaccount_id": 202,
     },
   ],
@@ -22,9 +24,33 @@ Object {
   "list": Array [
     Object {
       "id": "test-master",
+      "status": "running",
     },
     Object {
       "id": "test-subaccount",
+      "status": "draft",
+      "subaccount_id": 202,
+    },
+  ],
+}
+`;
+
+exports[`A/B Testing reducer updates canceled test correctly 1`] = `
+Object {
+  "cancelPending": false,
+  "list": Array [
+    Object {
+      "id": "test-master",
+      "status": "running",
+    },
+    Object {
+      "id": "test-subaccount",
+      "status": "cancelled",
+      "subaccount_id": 101,
+    },
+    Object {
+      "id": "test-subaccount",
+      "status": "draft",
       "subaccount_id": 202,
     },
   ],

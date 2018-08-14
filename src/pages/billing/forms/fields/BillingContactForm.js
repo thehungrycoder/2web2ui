@@ -7,6 +7,7 @@ import { Grid } from '@sparkpost/matchbox';
 import { TextFieldWrapper, SelectWrapper } from 'src/components';
 import { required, email } from 'src/helpers/validation';
 import { getZipLabel } from 'src/helpers/billing';
+import { getFirstStateForCountry } from 'src/selectors/accountBillingForms';
 import styles from './Fields.module.scss';
 
 /**
@@ -19,12 +20,18 @@ import styles from './Fields.module.scss';
  * billingContact.zip
  */
 export class BillingContactForm extends Component {
-  handleCountryChange = (e) => {
-    const value = e.target.value;
+  componentDidUpdate({ countryValue: prevCountry }) {
+    const { countryValue, change, formName, firstState } = this.props;
 
-    // Removes state value from store
-    if (value !== 'US' && value !== 'CA') {
-      this.props.change(this.props.formName, 'billingContact.state', null);
+    // Handles billingContact.state field mutation when country changes
+    if (prevCountry !== countryValue) {
+      if (countryValue === 'US' || countryValue === 'CA') {
+        // Sets first state value
+        change(formName, 'billingContact.state', firstState);
+      } else {
+        // Removes state value from store
+        change(formName, 'billingContact.state', null);
+      }
     }
   }
 
@@ -75,7 +82,6 @@ export class BillingContactForm extends Component {
           name='billingContact.country'
           placeholder='Select a country'
           component={SelectWrapper}
-          onChange={this.handleCountryChange}
           options={countries}
           validate={required}
         />
@@ -104,11 +110,16 @@ BillingContactForm.propTypes = {
   formName: PropTypes.string.isRequired
 };
 
-// Get country value from state
+
 const mapStateToProps = (state, { formName }) => {
+  // Get country value from state
   const selector = formValueSelector(formName);
+  const countryValue = selector(state, 'billingContact.country');
+
   return {
-    countryValue: selector(state, 'billingContact.country')
+    countryValue,
+    firstState: getFirstStateForCountry(state, countryValue)
   };
 };
+
 export default connect(mapStateToProps, { change })(BillingContactForm);

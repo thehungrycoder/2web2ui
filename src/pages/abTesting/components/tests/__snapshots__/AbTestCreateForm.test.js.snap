@@ -43,6 +43,7 @@ exports[`A/B Test Create Form Component should render correctly 1`] = `
   <Panel.Section>
     <Field
       component={[Function]}
+      errorInLabel={true}
       helpText={
         <span>
           We will send this template by default when the test is not running. If you need to create a new template, 
@@ -132,6 +133,7 @@ exports[`A/B Test Create Form Component should render when no available template
   <Panel.Section>
     <Field
       component={[Function]}
+      errorInLabel={true}
       helpText={
         <span>
           No available templates.  
