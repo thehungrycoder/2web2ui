@@ -4,7 +4,14 @@ exports[`DatePickerWrapper renders correctly 1`] = `
 <AppDatePicker
   from={2018-01-01T12:00:00.000Z}
   meta={Object {}}
+  name="example"
   onChange={[MockFunction]}
   to={2018-01-01T12:00:00.000Z}
+  value={
+    Object {
+      "from": 2018-01-01T12:00:00.000Z,
+      "to": 2018-01-01T12:00:00.000Z,
+    }
+  }
 />
 `;

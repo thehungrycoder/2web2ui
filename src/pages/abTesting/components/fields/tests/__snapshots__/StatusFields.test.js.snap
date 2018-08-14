@@ -10,6 +10,12 @@ exports[`Status Fields Component should disable fields correctly 1`] = `
       disabled={true}
       label="Test Name"
       name="name"
+      validate={
+        Array [
+          [Function],
+          [Function],
+        ]
+      }
     />
   </Panel>
   <Panel
@@ -38,6 +44,7 @@ exports[`Status Fields Component should disable fields correctly 1`] = `
           "prefix": <AccessTime />,
         }
       }
+      validate={[Function]}
     />
   </Panel>
 </React.Fragment>
@@ -52,6 +59,12 @@ exports[`Status Fields Component should render correctly 1`] = `
       component={[Function]}
       label="Test Name"
       name="name"
+      validate={
+        Array [
+          [Function],
+          [Function],
+        ]
+      }
     />
   </Panel>
   <Panel
@@ -79,6 +92,7 @@ exports[`Status Fields Component should render correctly 1`] = `
           "prefix": <AccessTime />,
         }
       }
+      validate={[Function]}
     />
   </Panel>
 </React.Fragment>

@@ -133,6 +133,22 @@ Array [
 ]
 `;
 
+exports[`Action Creator: A/B Testing should dispatch a schedule test action 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "data": "data",
+      "headers": Object {
+        "x-msys-subaccount": 101,
+      },
+      "method": "POST",
+      "url": "/ab-test/draft/test_one/schedule",
+    },
+    "type": "SCHEDULE_AB_TEST",
+  },
+]
+`;
+
 exports[`Action Creator: A/B Testing should dispatch an update draft action with subaccount 1`] = `
 Array [
   Object {

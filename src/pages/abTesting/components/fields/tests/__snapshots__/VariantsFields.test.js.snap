@@ -10,6 +10,7 @@ exports[`Variants Fields Component Field Array should render fields correctly wi
     >
       <Button
         color="orange"
+        disabled={false}
         flat={true}
         onClick={[Function]}
         size="small"
@@ -31,6 +32,7 @@ exports[`Variants Fields Component Field Array should render fields correctly wi
           label="Select a template"
           name="variant[1].template_object"
           placeholder="Type to search"
+          validate={[Function]}
         />
       </Grid.Column>
       <Grid.Column>
@@ -49,6 +51,7 @@ exports[`Variants Fields Component Field Array should render fields correctly wi
     >
       <Button
         color="orange"
+        disabled={false}
         flat={true}
         onClick={[Function]}
         size="small"
@@ -70,6 +73,7 @@ exports[`Variants Fields Component Field Array should render fields correctly wi
           label="Select a template"
           name="variant[2].template_object"
           placeholder="Type to search"
+          validate={[Function]}
         />
       </Grid.Column>
       <Grid.Column>
@@ -83,6 +87,7 @@ exports[`Variants Fields Component Field Array should render fields correctly wi
   <Panel.Section>
     <Button
       color="orange"
+      disabled={false}
       flat={true}
       onClick={[Function]}
       size="default"
@@ -104,6 +109,7 @@ exports[`Variants Fields Component Field Array should render fields correctly wi
     >
       <Button
         color="orange"
+        disabled={false}
         flat={true}
         onClick={[Function]}
         size="small"
@@ -125,6 +131,7 @@ exports[`Variants Fields Component Field Array should render fields correctly wi
           label="Select a template"
           name="variant[1].template_object"
           placeholder="Type to search"
+          validate={[Function]}
         />
       </Grid.Column>
       <Grid.Column>
@@ -143,6 +150,7 @@ exports[`Variants Fields Component Field Array should render fields correctly wi
     >
       <Button
         color="orange"
+        disabled={false}
         flat={true}
         onClick={[Function]}
         size="small"
@@ -164,6 +172,7 @@ exports[`Variants Fields Component Field Array should render fields correctly wi
           label="Select a template"
           name="variant[2].template_object"
           placeholder="Type to search"
+          validate={[Function]}
         />
       </Grid.Column>
       <Grid.Column>
@@ -177,6 +186,7 @@ exports[`Variants Fields Component Field Array should render fields correctly wi
   <Panel.Section>
     <Button
       color="orange"
+      disabled={false}
       flat={true}
       onClick={[Function]}
       size="default"
@@ -194,7 +204,16 @@ exports[`Variants Fields Component Percent Field should render correctly 1`] = `
   disabled={false}
   label="Percent of total"
   name="default_template.percent"
+  parse={[Function]}
   suffix="%"
+  type="number"
+  validate={
+    Array [
+      [Function],
+      [Function],
+      [Function],
+    ]
+  }
 />
 `;
 
@@ -204,6 +223,15 @@ exports[`Variants Fields Component Sample Size Field should render correctly 1`]
   disabled={false}
   label="Number of messages"
   name="default_template.sample_size"
+  parse={[Function]}
+  type="number"
+  validate={
+    Array [
+      [Function],
+      [Function],
+      [Function],
+    ]
+  }
 />
 `;
 
@@ -224,6 +252,7 @@ exports[`Variants Fields Component should render percent audience selection corr
           label="Select a default template"
           name="default_template.template_object"
           placeholder="Type to search"
+          validate={[Function]}
         />
       </Grid.Column>
       <Grid.Column>
@@ -269,6 +298,7 @@ exports[`Variants Fields Component should render sample size audience selection 
           label="Select a default template"
           name="default_template.template_object"
           placeholder="Type to search"
+          validate={[Function]}
         />
       </Grid.Column>
       <Grid.Column>
