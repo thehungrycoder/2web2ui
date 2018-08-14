@@ -65,8 +65,6 @@ const parseBrowsersList = (browsersList) => {
       parsed[platform] = {};
     }
 
-    console.log(normalizedName);
-
     parsed[platform][normalizedName.toLowerCase()] = `>${normalizedVersion}`;
   });
 
@@ -75,24 +73,7 @@ const parseBrowsersList = (browsersList) => {
 
 const generate = () => {
   const queryResults = browserslist(packageJson.browserslist.production);
-  const list = parseBrowsersList(queryResults);
-
-  const content = `
-  //THIS FILE IS AUTO GENERATED DURING BUILD. DO NOT MANUALLY EDIT IT. See browsers/generator.js. 
-  const list = ${JSON.stringify(list, null, 2)};
-
-  export default list;
-  `;
-
-  fs.writeFileSync(destinationPath, content, 'utf8', (err) => {
-    if (err) {
-      return console.error(err);
-    }
-
-    console.log('Browsers snapshot saved!');
-  });
+  return parseBrowsersList(queryResults);
 };
 
 module.exports = generate;
-// generate();
-

@@ -25,7 +25,6 @@ const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages');
 const printHostingInstructions = require('react-dev-utils/printHostingInstructions');
 const FileSizeReporter = require('react-dev-utils/FileSizeReporter');
 const printBuildError = require('react-dev-utils/printBuildError');
-const browsersSnapshotGenerator = require('../browsers/generator');
 
 const measureFileSizesBeforeBuild =
   FileSizeReporter.measureFileSizesBeforeBuild;
@@ -48,8 +47,6 @@ measureFileSizesBeforeBuild(paths.appBuild)
     // Remove all content but keep the directory so that
     // if you're in it, you don't end up in Trash
     fs.emptyDirSync(paths.appBuild);
-
-    browsersSnapshotGenerator();
 
     // Merge with the public folder
     copyPublicFolder();
