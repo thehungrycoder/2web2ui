@@ -1,5 +1,6 @@
 import moment from 'moment';
 import config from 'src/config';
+import { roundBoundaries } from './metrics';
 import { FORMATS } from 'src/constants';
 
 export const relativeDateOptions = [
@@ -73,27 +74,33 @@ export function getLocalTimezone() {
 }
 
 export function getRelativeDates(range) {
-  const now = moment();
-  const to = now.toDate();
+  const now = moment().toDate();
+  let preciseFrom;
 
   switch (range) {
     case 'hour':
-      return { to, from: moment(to).subtract(1, 'hour').toDate(), relativeRange: range };
+      preciseFrom = moment(now).subtract(1, 'hour').toDate();
+      break;
 
     case 'day':
-      return { to, from: moment(to).subtract(1, 'day').toDate(), relativeRange: range };
+      preciseFrom = moment(now).subtract(1, 'day').toDate();
+      break;
 
     case '7days':
-      return { to, from: moment(to).subtract(7, 'day').toDate(), relativeRange: range };
+      preciseFrom = moment(now).subtract(7, 'day').toDate();
+      break;
 
     case '10days':
-      return { to, from: moment(to).subtract(10, 'day').toDate(), relativeRange: range };
+      preciseFrom = moment(now).subtract(10, 'day').toDate();
+      break;
 
     case '30days':
-      return { to, from: moment(to).subtract(30, 'day').toDate(), relativeRange: range };
+      preciseFrom = moment(now).subtract(30, 'day').toDate();
+      break;
 
     case '90days':
-      return { to, from: moment(to).subtract(90, 'day').toDate(), relativeRange: range };
+      preciseFrom = moment(now).subtract(90, 'day').toDate();
+      break;
 
     case 'custom':
       return { relativeRange: range };
@@ -105,6 +112,9 @@ export function getRelativeDates(range) {
       return {};
     }
   }
+
+  const { to, from } = roundBoundaries(preciseFrom, now);
+  return { to: to.toDate(), from: from.toDate(), relativeRange: range };
 }
 
 export function formatDate(date, FORMAT = config.dateFormat) {
