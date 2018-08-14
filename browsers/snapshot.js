@@ -1,27 +1,27 @@
-const list = {
+
+  //THIS FILE IS AUTO GENERATED DURING BUILD. DO NOT MANUALLY EDIT IT. EDIT browsers/generator.js. 
+  const list = {
   "mobile": {
-    "chrome for android": ">67",
-    "firefox for android": ">60",
-    "qq browser": ">1.2",
-    "uc browser for android": ">11.8",
-    "android browser": ">4.4",
-    "baidu browser": ">7.12",
-    "ie mobile": ">11",
-    "ios safari": ">10.3",
-    "opera mini": ">all",
-    "opera mobile": ">46",
-    "samsung internet": ">4"
+    "chrome": ">67.0.0",
+    "firefox": ">60.0.0",
+    "qqandroid": ">1.2.0",
+    "ucandroid": ">11.8.0",
+    "android": ">4.4.3",
+    "baidu": ">7.12.0",
+    "blackberry": ">7.0.0",
+    "ios": ">11.0.0",
+    "operamini": ">all.0.0",
+    "operamobile": ">12.1.0",
+    "samsung": ">6.2.0"
   },
   "desktop": {
-    "chrome": ">49",
-    "edge": ">16",
-    "firefox": ">52",
-    "ie": ">11",
-    "opera": ">52",
-    "safari": ">11"
+    "chrome": ">66.0.0",
+    "edge": ">16.0.0",
+    "firefox": ">52.0.0",
+    "opera": ">52.0.0",
+    "safari": ">11.0.0"
   }
 };
 
-  console.log('HELLO WORLD', list);  
   export default list;
   

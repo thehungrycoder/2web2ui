@@ -4,31 +4,83 @@ const browserslist = require('browserslist');
 const _ = require('lodash');
 const caniuse = require('caniuse-db/data.json').agents;
 const fs = require('fs');
-const queryResults = browserslist(); //automatically reads configuration from package.json
-
+const semver = require('semver');
+const packageJson = require('../package.json');
 const destinationPath = './browsers/snapshot.js';
 
-function generate () {
-  const compatible = {};
+const browserNamesMap = {
+  bb: 'BlackBerry',
+  and_chr: 'Chrome',
+  ChromeAndroid: 'Chrome',
+  FirefoxAndroid: 'Firefox',
+  ff: 'Firefox',
+  ie: 'Explorer',
+  ie_mob: 'ExplorerMobile',
+  and_ff: 'Firefox',
+  ios_saf: 'iOS',
+  op_mini: 'OperaMini',
+  op_mob: 'OperaMobile',
+  and_qq: 'QQAndroid',
+  and_uc: 'UCAndroid'
+};
 
-  _.map(queryResults, (browser) => {
-    browser = browser.split(' ');
 
-    const brand = browser[0];
-    const version = browser[1];
+const semverify = (version) => {
+  if (typeof version === 'string' && semver.valid(version)) {
+    return version;
+  }
 
-    const db = caniuse[brand];
+  const split = version.toString().split('.');
 
-    if (!compatible[db.type]) {
-      compatible[db.type] = {};
+  while (split.length < 3) {
+    split.push('0');
+  }
+
+  return split.join('.');
+};
+
+
+const parseBrowsersList = (browsersList) => {
+  const parsed = {};
+
+  _.each(browsersList, browser => {
+    const [browserName, browserVersion] = browser.split(' ');
+    const platform = caniuse[browserName].type;
+
+    let normalizedName = browserName;
+    let normalizedVersion = browserVersion;
+
+    if (browserName in browserNamesMap) {
+      normalizedName = browserNamesMap[browserName];
     }
 
-    compatible[db.type][db.browser.toLowerCase()] = `>${version}`;
+    try {
+      // Browser version can return as "10.0-10.2"
+      const splitVersion = browserVersion.split('-')[0];
+      normalizedVersion = semverify(splitVersion);
+    } catch (e) {
+    }
+
+    if (!parsed[platform]) {
+      parsed[platform] = {};
+    }
+
+    console.log(normalizedName);
+
+    parsed[platform][normalizedName.toLowerCase()] = `>${normalizedVersion}`;
   });
 
-  const content = `const list = ${JSON.stringify(compatible, null, 2)};
+  return parsed;
+};
 
-  console.log('HELLO WORLD', list);  
+const generate = () => {
+  const queryResults = browserslist(packageJson.browserslist.production);
+  const list = parseBrowsersList(queryResults);
+
+  const content = `
+  //THIS FILE IS AUTO GENERATED DURING BUILD. DO NOT MANUALLY EDIT IT. See browsers/generator.js. 
+  const list = ${JSON.stringify(list, null, 2)};
+
   export default list;
   `;
 
@@ -39,6 +91,8 @@ function generate () {
 
     console.log('Browsers snapshot saved!');
   });
-}
+};
 
 module.exports = generate;
+// generate();
+

@@ -2,7 +2,7 @@ import _ from 'lodash';
 import Raven from 'raven-js';
 import createRavenMiddleware from 'raven-for-redux';
 import bowser from 'bowser';
-import supportedBrowsers from 'src/config/__auto/browsers';
+import browsersSnapshot from 'browsers/snapshot';
 
 /**
  * List of breadcrumbs to ignore to reduce noise
@@ -49,7 +49,6 @@ export function getEnricherOrDieTryin(store, currentWindow) {
     const apiError = isApiError(data);
     const chunkFailure = isChunkFailure(data);
     const isSupportedBrowser = isErrorInSupportedBrowser(data);
-    // console.log('isSupportedBrowser', isSupportedBrowser);
 
     return {
       ...data,
@@ -100,13 +99,7 @@ export function isChunkFailure(data) {
 
 export function isErrorInSupportedBrowser(data) {
   const browser = bowser.getParser(window.navigator.userAgent);
-
-  // console.log('browers', supportedBrowsers);
-  // debugger;
-  // console.log('is browser satisfied', browser.satisfies(supportedBrowser));
-  // debugger;
-  return browser.satisfies(supportedBrowsers);
-
+  return browser.satisfies(browsersSnapshot);
 }
 
 // The purpose of this helper is to provide a common interface for reporting errors
