@@ -57,5 +57,8 @@ module.exports = {
     ''
   ],
   clearMocks: true,
-  restoreMocks: true
+  restoreMocks: true,
+  globals: {
+    "SUPPORTED_BROWSERS": {}
+  }
 };
