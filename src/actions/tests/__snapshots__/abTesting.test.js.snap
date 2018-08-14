@@ -178,3 +178,19 @@ Array [
   },
 ]
 `;
+
+exports[`Action Creator: A/B Testing should dispatch an update test action 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "data": "data",
+      "headers": Object {
+        "x-msys-subaccount": 101,
+      },
+      "method": "PUT",
+      "url": "/ab-test/test_one",
+    },
+    "type": "UPDATE_AB_TEST",
+  },
+]
+`;

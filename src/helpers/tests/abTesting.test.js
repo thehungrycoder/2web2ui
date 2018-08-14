@@ -63,4 +63,11 @@ describe('A/B testing helper', () => {
       expect(helpers.findTemplateObject(templates, { template_id: 'template_two', sample_size: 500 })).toMatchSnapshot();
     });
   });
+
+  describe('calculateTotalSampleSize', () => {
+    it('should calculate the total sample size of default_template + variants', () => {
+      const testMock = { default_template: { sample_size: 100 }, variants: [{ sample_size: 100 },{ sample_size: 100 }]};
+      expect(helpers.calculateTotalSampleSize(testMock)).toEqual(300);
+    });
+  });
 });

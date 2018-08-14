@@ -3,6 +3,7 @@ import {
   getStartOfDay,
   getRelativeDates,
   getRelativeDateOptions,
+  getDuration,
   formatDate,
   formatTime,
   formatDateTime,
@@ -247,6 +248,16 @@ describe('Date helpers', () => {
 
     it('returns valid time for 24-hour with am/pm', () => {
       expect(parseDatetime('2018-01-01 14:00am')).toBeValid();
+    });
+  });
+
+  describe('getDuration', () => {
+    it('returns the duration between two dates in hours', () => {
+      expect(getDuration({ from: '2017-12-18T00:00:00', to: '2017-12-19T00:00:00' })).toEqual(24);
+    });
+
+    it('returns the duration between two dates in days', () => {
+      expect(getDuration({ from: '2017-12-18T00:00:00', to: '2017-12-19T00:00:00' }, 'days')).toEqual(1);
     });
   });
 });

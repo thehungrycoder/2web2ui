@@ -45,6 +45,11 @@ describe('Action Creator: A/B Testing', () => {
     expect(mockStore.getActions()).toMatchSnapshot();
   });
 
+  it('should dispatch an update test action', () => {
+    mockStore.dispatch(abTesting.updateAbTest('data', { id: 'test_one', subaccountId: 101 }));
+    expect(mockStore.getActions()).toMatchSnapshot();
+  });
+
   it('should dispatch a get latest test version action without subaccount', () => {
     mockStore.dispatch(abTesting.getLatestAbTest({ id: 'test_one' }));
     expect(mockStore.getActions()).toMatchSnapshot();
