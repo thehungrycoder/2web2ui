@@ -89,7 +89,6 @@ export class DetailsPage extends Component {
       },
       deleteAction: {
         content: <span><Delete/> Delete Test</span>,
-        visible: status === 'completed' || status === 'cancelled',
         onClick: this.toggleDelete
       },
       test: this.props.test,
