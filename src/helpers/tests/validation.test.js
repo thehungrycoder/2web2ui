@@ -43,6 +43,19 @@ const cases = {
     good: [['foobar', { subaccount: true }, { templates: ['foo', 'bar', 'foobar']}]],
     bad: [['foobar', { subaccount: true }, { templates: ['foo', 'bar']}], ['foobar', { subaccount: false }, { templates: ['foo', 'bar']}]],
     multiArg: true
+  },
+  abTestDuration: {
+    good: [[{ from: '2018-08-20T19:50:00.000Z', to: '2018-08-21T19:50:00.000Z' }, { engagement_timeout: 24 }]],
+    bad: [
+      [{ from: '2018-08-20T19:50:00.000Z', to: '2019-08-21T19:50:00.000Z' }, { engagement_timeout: 24 }],
+      [{ from: '2018-08-20T19:50:00.000Z', to: '2018-08-21T19:50:00.000Z' }, { engagement_timeout: 2400 }]
+    ],
+    multiArg: true
+  },
+  abTestDistribution: {
+    good: [['sample_size', {}], ['percent', { default_template: { percent: 50 }, variants: [{ percent: 50 }]}]],
+    bad: [['percent', { default_template: { percent: 75 }, variants: [{ percent: 75 }]}]],
+    multiArg: true
   }
 };
 
@@ -112,6 +125,16 @@ describe('Memoized validation helpers', () => {
         expect(instance(arg)).toBeDefined();
       });
     });
+  });
+});
+
+describe('Number between validation', () => {
+  it('returns undefined for valid input', () => {
+    expect(validations.numberBetween(0, 1)(0.5)).toBeUndefined();
+  });
+
+  it('returns error for invalid input', () => {
+    expect(validations.numberBetween(0, 1)(0)).toEqual('Must be between 0 and 1');
   });
 });
 
