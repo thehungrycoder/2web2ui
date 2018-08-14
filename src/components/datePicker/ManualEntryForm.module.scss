@@ -2,6 +2,15 @@
 
 .DateFields {
   margin: spacing() 0;
+  position: relative;
+}
+
+.PrecisionLabel {
+  position: absolute;
+  top: percentage(1);
+  right: 0;
+  margin-top: 1.4rem;
+  font-style: italic;
 }
 
 .ArrowWrapper {

@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { subMonths, format } from 'date-fns';
 import { getStartOfDay, getEndOfDay, getRelativeDateOptions } from 'src/helpers/date';
+import { roundBoundaries } from 'src/helpers/metrics';
 import { Button, TextField, Select, Popover, WindowEvent } from '@sparkpost/matchbox';
 import DateSelector from 'src/components/dateSelector/DateSelector';
 import ManualEntryForm from './ManualEntryForm';
@@ -84,10 +85,20 @@ export default class AppDatePicker extends Component {
   }
 
   getOrderedRange(newDate) {
-    const { from, to } = this.state.beforeSelected;
-    return (from.getTime() <= newDate.getTime())
-      ? { from, to: getEndOfDay(newDate, { preventFuture: true }) }
-      : { from: getStartOfDay(newDate), to };
+    let { from, to } = this.state.beforeSelected;
+
+    if (from.getTime() <= newDate.getTime()) {
+      to = getEndOfDay(newDate, { preventFuture: true });
+    } else {
+      from = getStartOfDay(newDate);
+    }
+
+    if (this.props.roundToPrecision) {
+      const rounded = roundBoundaries(from, to);
+      from = rounded.from.toDate();
+      to = rounded.to.toDate();
+    }
+    return { from, to };
   }
 
   handleSelectRange = (e) => {
@@ -122,6 +133,7 @@ export default class AppDatePicker extends Component {
       datePickerProps = {},
       textFieldProps = {},
       dateFieldFormat,
+      roundToPrecision,
       showPresets = true,
       left
     } = this.props;
@@ -168,7 +180,7 @@ export default class AppDatePicker extends Component {
           {...datePickerProps}
         />
 
-        <ManualEntryForm selectDates={this.handleFormDates} onEnter={this.handleKeyDown} to={to} from={from} />
+        <ManualEntryForm selectDates={this.handleFormDates} onEnter={this.handleKeyDown} to={to} from={from} roundToPrecision={roundToPrecision}/>
         <Button primary onClick={this.handleSubmit} className={styles.Apply}>Apply</Button>
         <Button onClick={this.cancelDatePicker}>Cancel</Button>
         <WindowEvent event='keydown' handler={this.handleKeyDown} />
@@ -183,9 +195,14 @@ AppDatePicker.propTypes = {
   to: PropTypes.instanceOf(Date),
   relativeRange: PropTypes.string,
   relativeDateOptions: PropTypes.arrayOf(PropTypes.string),
+  roundToPrecision: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
   datePickerProps: PropTypes.object,
   dateFieldFormat: PropTypes.string,
   disabled: PropTypes.bool,
   showPresets: PropTypes.bool
+};
+
+AppDatePicker.defaultProps = {
+  roundToPrecision: true
 };
