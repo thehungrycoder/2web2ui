@@ -1,6 +1,9 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 import { OnboardingPlanPage as ChoosePlan } from '../ChoosePlan';
+import * as billingHelpers from 'src/helpers/billing';
+
+jest.mock('src/helpers/billing');
 
 describe('ChoosePlan page tests', () => {
   let wrapper;
@@ -19,13 +22,13 @@ describe('ChoosePlan page tests', () => {
     loading: false,
     billing: { countries: []},
     plans: [],
-    submitting: false,
-    updateSubscription: jest.fn(() => Promise.resolve())
+    submitting: false
   };
 
   beforeEach(() => {
     wrapper = shallow(<ChoosePlan {...props}/>);
     instance = wrapper.instance();
+    billingHelpers.prepareCardInfo = jest.fn((a) => a);
   });
 
   it('should render correctly', () => {
@@ -54,17 +57,18 @@ describe('ChoosePlan page tests', () => {
   });
 
   describe('onSubmit tests', () => {
-    it('should go to next page if plan is free, no-op', async() => {
+    it('should go to next page if plan is free, no-op', async () => {
       await instance.onSubmit({ planpicker: { isFree: true }});
+      expect(billingHelpers.prepareCardInfo).not.toHaveBeenCalled();
       expect(instance.props.history.push).toHaveBeenCalledWith('/onboarding/sending-domain');
       expect(instance.props.billingCreate).not.toHaveBeenCalled();
     });
 
-    it('should create billing record on submission', async() => {
-      const values = { planpicker: { isFree: false }, key: 'value' };
+    it('should create billing record on submission', async () => {
+      const values = { planpicker: { isFree: false }, key: 'value', card: 'card info' };
       await instance.onSubmit(values);
+      expect(billingHelpers.prepareCardInfo).toHaveBeenCalledWith('card info');
       expect(instance.props.billingCreate).toHaveBeenCalledWith(values);
-      expect(instance.props.updateSubscription).not.toHaveBeenCalled();
       expect(instance.props.history.push).toHaveBeenCalledWith('/onboarding/sending-domain');
       expect(instance.props.showAlert).toHaveBeenCalledWith({ type: 'success', message: 'Added your plan' });
     });

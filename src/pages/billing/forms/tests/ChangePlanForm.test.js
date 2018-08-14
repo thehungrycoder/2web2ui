@@ -3,7 +3,9 @@ import { ChangePlanForm } from '../ChangePlanForm';
 import { shallow } from 'enzyme';
 import * as accountConditions from 'src/selectors/accessConditionState';
 import * as conversions from 'src/helpers/conversionTracking';
+import * as billingHelpers from 'src/helpers/billing';
 
+jest.mock('src/helpers/billing');
 jest.mock('src/selectors/accessConditionState');
 jest.mock('src/helpers/conversionTracking');
 
@@ -54,6 +56,7 @@ describe('Form Container: Change Plan', () => {
     wrapper = shallow(<ChangePlanForm {...props} />);
     instance = wrapper.instance();
     submitSpy = jest.spyOn(instance.props, 'handleSubmit');
+    billingHelpers.prepareCardInfo = jest.fn((a) => a);
   });
 
   it('should render', () => {
@@ -111,13 +114,14 @@ describe('Form Container: Change Plan', () => {
     let values;
 
     beforeEach(() => {
-      values = { key: 'value', planpicker: { code: 'paid' }};
+      values = { key: 'value', planpicker: { code: 'paid' }, card: 'card info' };
     });
 
     it('should call billingCreate when no billing exists', async () => {
       const { billing, ...account } = props.account;
       wrapper.setProps({ account }); // remove billing from account
       await instance.onSubmit(values);
+      expect(billingHelpers.prepareCardInfo).toHaveBeenCalledWith('card info');
       expect(instance.props.billingCreate).toHaveBeenCalledWith(values);
       expect(instance.props.history.push).toHaveBeenCalledWith('/account/billing');
       expect(instance.props.showAlert).toHaveBeenCalledWith({ type: 'success', message: 'Subscription Updated' });
@@ -125,6 +129,7 @@ describe('Form Container: Change Plan', () => {
 
     it('should update subscription when billing exists and using saved cc', async () => {
       await instance.onSubmit(values);
+      expect(billingHelpers.prepareCardInfo).toHaveBeenCalledWith('card info');
       expect(instance.props.billingUpdate).toHaveBeenCalledWith(values);
       expect(instance.props.updateSubscription).not.toHaveBeenCalled();
       expect(instance.props.history.push).toHaveBeenCalledWith('/account/billing');
@@ -134,14 +139,26 @@ describe('Form Container: Change Plan', () => {
 
     it('should update subscription for aws account', async () => {
       wrapper.setProps({ isAws: true });
-      await instance.onSubmit({ planpicker: { code: 'free' }});
+      await instance.onSubmit({ planpicker: { code: 'free' }, card: 'card info' });
+      expect(billingHelpers.prepareCardInfo).toHaveBeenCalledWith('card info');
       expect(instance.props.updateSubscription).toHaveBeenCalledWith({ code: 'free' });
     });
 
     it('should update billing when billing exists but enter new cc info', async () => {
       wrapper.setState({ useSavedCC: true });
       wrapper.setProps({ account: { billing: true, subscription: { self_serve: true }}});
-      await instance.onSubmit({ planpicker: { code: 'free' }});
+      await instance.onSubmit({ planpicker: { code: 'free' }, card: 'card info' });
+      expect(billingHelpers.prepareCardInfo).toHaveBeenCalledWith('card info');
+      expect(instance.props.updateSubscription).toHaveBeenCalledWith({ code: 'free' });
+      expect(instance.props.billingUpdate).not.toHaveBeenCalled();
+      expect(instance.props.history.push).toHaveBeenCalledWith('/account/billing');
+      expect(instance.props.showAlert).toHaveBeenCalledWith({ type: 'success', message: 'Subscription Updated' });
+    });
+
+    it('should update subscription on downgrade, even with card info', async () => {
+      wrapper.setProps({ account: { billing: true, subscription: { self_serve: true }}});
+      await instance.onSubmit({ planpicker: { code: 'free', isFree: true }, card: 'card info' });
+      expect(billingHelpers.prepareCardInfo).not.toHaveBeenCalled();
       expect(instance.props.updateSubscription).toHaveBeenCalledWith({ code: 'free' });
       expect(instance.props.billingUpdate).not.toHaveBeenCalled();
       expect(instance.props.history.push).toHaveBeenCalledWith('/account/billing');

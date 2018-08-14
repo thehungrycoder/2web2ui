@@ -38,7 +38,9 @@ export class OnboardingPlanPage extends Component {
   onSubmit = (values) => {
     const { billingCreate, showAlert, history } = this.props;
 
-    const newValues = values.card ? { ...values, card: prepareCardInfo(values.card) } : values;
+    const newValues = values.card && !values.planpicker.isFree
+      ? { ...values, card: prepareCardInfo(values.card) }
+      : values;
 
     // no billing updates needed since they are still on free plan
     if (newValues.planpicker.isFree) {
