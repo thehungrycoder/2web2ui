@@ -35,6 +35,10 @@ const cases = {
     good: ['-10', '-1', '0', '1', '109352', -10, -1, 0, 1, 109352],
     bad: [-498.2, 0.1, 39.2, 'bob', '', '-498.2', '0.1', '39.2']
   },
+  startTimeAfterNow: {
+    good: [{ from: '2040-08-20T19:50:00.000Z' }],
+    bad: [{ from: '2000-08-20T19:50:00.000Z' }]
+  },
   abTestId: {
     good: ['id', 'test-id', 'test_1', '1'],
     bad: ['test.id', 'NOT_!@#$%^&*()_VALID', 'test id', ':doge:']
@@ -53,7 +57,11 @@ const cases = {
     multiArg: true
   },
   abTestDistribution: {
-    good: [['sample_size', {}], ['percent', { default_template: { percent: 50 }, variants: [{ percent: 50 }]}]],
+    good: [
+      ['sample_size', {}],
+      ['percent', { default_template: { percent: 50 }, variants: [{ percent: 50 }]}],
+      ['percent', { default_template: { percent: 50 }, variants: [{ percent: 50 }, undefined]}]
+    ],
     bad: [['percent', { default_template: { percent: 75 }, variants: [{ percent: 75 }]}]],
     multiArg: true
   }

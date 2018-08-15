@@ -45,7 +45,12 @@ exports[`Status Fields Component should disable fields correctly 1`] = `
           "prefix": <AccessTime />,
         }
       }
-      validate={[Function]}
+      validate={
+        Array [
+          [Function],
+          [Function],
+        ]
+      }
     />
   </Panel>
 </React.Fragment>
@@ -94,7 +99,12 @@ exports[`Status Fields Component should render correctly 1`] = `
           "prefix": <AccessTime />,
         }
       }
-      validate={[Function]}
+      validate={
+        Array [
+          [Function],
+          [Function],
+        ]
+      }
     />
   </Panel>
 </React.Fragment>

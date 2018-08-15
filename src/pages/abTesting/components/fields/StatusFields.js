@@ -3,7 +3,7 @@ import { Field } from 'redux-form';
 import { Panel } from '@sparkpost/matchbox';
 import { AccessTime } from '@sparkpost/matchbox-icons';
 import { TextFieldWrapper, DatePickerWrapper } from 'src/components/reduxFormWrappers';
-import { required, maxLength, abTestDuration } from 'src/helpers/validation';
+import { required, maxLength, abTestDuration, startTimeAfterNow } from 'src/helpers/validation';
 
 const StatusFields = ({ disabled }) => (
   <Fragment>
@@ -24,7 +24,7 @@ const StatusFields = ({ disabled }) => (
         left
         showPresets={false}
         roundToPrecision={false}
-        validate={abTestDuration}
+        validate={[abTestDuration, startTimeAfterNow]}
         textFieldProps={{
           helpText: 'A test may run for a maximum of 30 days',
           label: 'When should we run this test?',

@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import { formatBytes } from 'src/helpers/units';
-import { getDuration } from 'src/helpers/date';
+import { getDuration, isStartTimeAfterNow } from 'src/helpers/date';
 import { emailRegex, emailLocalRegex, domainRegex, abTestIdRegex } from './regex';
 import isURL from 'validator/lib/isURL';
 import Payment from 'payment';
@@ -44,9 +44,13 @@ export function abTestDistribution(value, formValues) {
   const { default_template, variants } = formValues;
 
   if (value === 'percent') {
-    const total = _.reduce(variants, (sum, variant) => sum + variant.percent, default_template.percent);
+    const total = _.reduce(variants, (sum, variant = { percent: 0 }) => sum + variant.percent, default_template.percent);
     return total === 100 ? undefined : 'Total distribution must equal 100%';
   }
+}
+
+export function startTimeAfterNow(value) {
+  return isStartTimeAfterNow(value) ? undefined : 'Start date cannot be in the past';
 }
 
 export function hasNumber(value) {
