@@ -171,7 +171,6 @@ Array [
               "content": "Delete Test",
               "onClick": [Function],
               "section": 2,
-              "visible": false,
             },
           ]
         }
@@ -271,7 +270,6 @@ Array [
               "content": "Delete Test",
               "onClick": [Function],
               "section": 2,
-              "visible": false,
             },
           ]
         }
@@ -379,7 +377,6 @@ Array [
               "content": "Delete Test",
               "onClick": [Function],
               "section": 2,
-              "visible": true,
             },
           ]
         }
