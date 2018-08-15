@@ -1,18 +1,12 @@
 import _ from 'lodash';
 import { ANALYTICS_WHITELISTED_FORMS } from 'src/constants';
+import { isError, isFormIncluded, isType, isTypeLike } from 'src/helpers/conditions/action';
 import { all } from 'src/helpers/conditions/compose';
 
 // access helpers
 const getErrorMessage = (action) => _.get(action, 'payload.error.message');
-const getErrorName = (action) => _.get(action, 'payload.error.name');
 const getFormName = (action) => _.get(action, 'meta.form');
 const getType = (action) => action.type;
-
-// condition helpers
-const isError = (name) => (action) => name === getErrorName(action);
-const isType = (type) => (action) => type === getType(action);
-const isTypeLike = (regex) => (action) => regex.test(getType(action));
-const isWhitelistedForm = (action) => ANALYTICS_WHITELISTED_FORMS.includes(getFormName(action));
 
 /**
  * @example
@@ -58,7 +52,7 @@ const events = [
     }
   },
   {
-    condition: all(isType('@@redux-form/INITIALIZE'), isWhitelistedForm),
+    condition: all(isType('@@redux-form/INITIALIZE'), isFormIncluded(ANALYTICS_WHITELISTED_FORMS)),
     definition: {
       event: 'Interactions',
       category: 'Form',
@@ -67,7 +61,7 @@ const events = [
     }
   },
   {
-    condition: all(isType('@@redux-form/START_SUBMIT'), isWhitelistedForm),
+    condition: all(isType('@@redux-form/START_SUBMIT'), isFormIncluded(ANALYTICS_WHITELISTED_FORMS)),
     definition: {
       event: 'Interactions',
       category: 'Form',
@@ -76,7 +70,7 @@ const events = [
     }
   },
   {
-    condition: all(isType('@@redux-form/SET_SUBMIT_FAILED'), isWhitelistedForm),
+    condition: all(isType('@@redux-form/SET_SUBMIT_FAILED'), isFormIncluded(ANALYTICS_WHITELISTED_FORMS)),
     definition: {
       event: 'Interactions',
       category: 'Form',
@@ -85,7 +79,7 @@ const events = [
     }
   },
   {
-    condition: all(isType('@@redux-form/SET_SUBMIT_SUCCEEDED'), isWhitelistedForm),
+    condition: all(isType('@@redux-form/SET_SUBMIT_SUCCEEDED'), isFormIncluded(ANALYTICS_WHITELISTED_FORMS)),
     definition: {
       event: 'Interactions',
       category: 'Form',
