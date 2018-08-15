@@ -14,15 +14,16 @@ describe('Analytics middleware', () => {
     const event = jest.fn();
     eventsMapper.mockReturnValue(event);
 
-    expect(subject(action)).toEqual(action);
-    expect(eventsMapper).toHaveBeenCalledWith(action);
+    subject(action);
+
     expect(analyticsHelpers.pushEvent).toHaveBeenCalledWith(event);
+    expect(next).toHaveBeenCalledWith(action);
   });
 
   it('ignores action', () => {
     eventsMapper.mockReturnValue(undefined);
+    subject(action);
 
-    expect(subject(action)).toEqual(action);
-    expect(eventsMapper).toHaveBeenCalledWith(action);
+    expect(next).toHaveBeenCalledWith(action);
   });
 });
