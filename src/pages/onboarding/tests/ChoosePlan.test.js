@@ -57,9 +57,21 @@ describe('ChoosePlan page tests', () => {
   });
 
   describe('onSubmit tests', () => {
+    it('should not need valid cc info for a free plan selection', async () => {
+      await instance.onSubmit({ planpicker: { code: 'free', isFree: true }});
+      expect(billingHelpers.prepareCardInfo).not.toHaveBeenCalled();
+    });
+
+    it('should prepare cc info for a paid plan selection', async () => {
+      await instance.onSubmit({
+        planpicker: { code: 'paid' },
+        card: { number: '411', name: 'Captain Moneybags' }
+      });
+      expect(billingHelpers.prepareCardInfo).toHaveBeenCalledWith({ number: '411', name: 'Captain Moneybags' });
+    });
+
     it('should go to next page if plan is free, no-op', async () => {
       await instance.onSubmit({ planpicker: { isFree: true }});
-      expect(billingHelpers.prepareCardInfo).not.toHaveBeenCalled();
       expect(instance.props.history.push).toHaveBeenCalledWith('/onboarding/sending-domain');
       expect(instance.props.billingCreate).not.toHaveBeenCalled();
     });
@@ -67,11 +79,9 @@ describe('ChoosePlan page tests', () => {
     it('should create billing record on submission', async () => {
       const values = { planpicker: { isFree: false }, key: 'value', card: 'card info' };
       await instance.onSubmit(values);
-      expect(billingHelpers.prepareCardInfo).toHaveBeenCalledWith('card info');
       expect(instance.props.billingCreate).toHaveBeenCalledWith(values);
       expect(instance.props.history.push).toHaveBeenCalledWith('/onboarding/sending-domain');
       expect(instance.props.showAlert).toHaveBeenCalledWith({ type: 'success', message: 'Added your plan' });
     });
-
   });
 });

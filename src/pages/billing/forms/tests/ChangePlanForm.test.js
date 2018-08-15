@@ -117,52 +117,61 @@ describe('Form Container: Change Plan', () => {
       values = { key: 'value', planpicker: { code: 'paid' }, card: 'card info' };
     });
 
-    it('should call billingCreate when no billing exists', async () => {
+    // Upgrade from free to new paid plan for the first time
+    it('should call billingCreate when no billing account exists', async () => {
       const { billing, ...account } = props.account;
       wrapper.setProps({ account }); // remove billing from account
       await instance.onSubmit(values);
-      expect(billingHelpers.prepareCardInfo).toHaveBeenCalledWith('card info');
       expect(instance.props.billingCreate).toHaveBeenCalledWith(values);
       expect(instance.props.history.push).toHaveBeenCalledWith('/account/billing');
       expect(instance.props.showAlert).toHaveBeenCalledWith({ type: 'success', message: 'Subscription Updated' });
     });
 
-    it('should update subscription when billing exists and using saved cc', async () => {
+    // Changing plan and changing card
+    it('should update billing account when billing account exists entering a new cc', async () => {
       await instance.onSubmit(values);
-      expect(billingHelpers.prepareCardInfo).toHaveBeenCalledWith('card info');
       expect(instance.props.billingUpdate).toHaveBeenCalledWith(values);
       expect(instance.props.updateSubscription).not.toHaveBeenCalled();
       expect(instance.props.history.push).toHaveBeenCalledWith('/account/billing');
       expect(instance.props.showAlert).toHaveBeenCalledWith({ type: 'success', message: 'Subscription Updated' });
-
     });
 
     it('should update subscription for aws account', async () => {
       wrapper.setProps({ isAws: true });
-      await instance.onSubmit({ planpicker: { code: 'free' }, card: 'card info' });
-      expect(billingHelpers.prepareCardInfo).toHaveBeenCalledWith('card info');
-      expect(instance.props.updateSubscription).toHaveBeenCalledWith({ code: 'free' });
+      await instance.onSubmit({ ...values, planpicker: { code: 'paid' }});
+      expect(instance.props.updateSubscription).toHaveBeenCalledWith({ code: 'paid' });
     });
 
-    it('should update billing when billing exists but enter new cc info', async () => {
+    // Changing plan and using existing card
+    it('should update subscription when billing account exists without entering new cc info', async () => {
       wrapper.setState({ useSavedCC: true });
       wrapper.setProps({ account: { billing: true, subscription: { self_serve: true }}});
-      await instance.onSubmit({ planpicker: { code: 'free' }, card: 'card info' });
-      expect(billingHelpers.prepareCardInfo).toHaveBeenCalledWith('card info');
+      await instance.onSubmit({ ...values, planpicker: { code: 'paid' }});
+      expect(instance.props.updateSubscription).toHaveBeenCalledWith({ code: 'paid' });
+      expect(instance.props.billingUpdate).not.toHaveBeenCalled();
+      expect(instance.props.history.push).toHaveBeenCalledWith('/account/billing');
+      expect(instance.props.showAlert).toHaveBeenCalledWith({ type: 'success', message: 'Subscription Updated' });
+    });
+
+    // Downgrade to free
+    it('should update subscription on downgrade to free', async () => {
+      wrapper.setState({ useSavedCC: true });
+      wrapper.setProps({ account: { billing: true, subscription: { self_serve: true }}});
+      await instance.onSubmit({ ...values, planpicker: { code: 'free', isFree: true }});
       expect(instance.props.updateSubscription).toHaveBeenCalledWith({ code: 'free' });
       expect(instance.props.billingUpdate).not.toHaveBeenCalled();
       expect(instance.props.history.push).toHaveBeenCalledWith('/account/billing');
       expect(instance.props.showAlert).toHaveBeenCalledWith({ type: 'success', message: 'Subscription Updated' });
     });
 
-    it('should update subscription on downgrade, even with card info', async () => {
-      wrapper.setProps({ account: { billing: true, subscription: { self_serve: true }}});
-      await instance.onSubmit({ planpicker: { code: 'free', isFree: true }, card: 'card info' });
+    it('should not prepare card info if downgrading to free', async () => {
+      await instance.onSubmit({ ...values, planpicker: { code: 'free', isFree: true }});
       expect(billingHelpers.prepareCardInfo).not.toHaveBeenCalled();
-      expect(instance.props.updateSubscription).toHaveBeenCalledWith({ code: 'free' });
-      expect(instance.props.billingUpdate).not.toHaveBeenCalled();
-      expect(instance.props.history.push).toHaveBeenCalledWith('/account/billing');
-      expect(instance.props.showAlert).toHaveBeenCalledWith({ type: 'success', message: 'Subscription Updated' });
+    });
+
+    it('should prepare card info if changing to paid plan', async () => {
+      await instance.onSubmit({ ...values, planpicker: { code: 'paid' }});
+      expect(billingHelpers.prepareCardInfo).toHaveBeenCalledWith(values.card);
     });
 
     it('should track the plan change', async () => {
