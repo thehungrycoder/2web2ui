@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import fp from 'lodash/fp';
-import { Page } from '@sparkpost/matchbox';
+import { Page, Toggle } from '@sparkpost/matchbox';
 import { Users } from 'src/components/images';
 import TimeAgo from 'react-timeago';
 
@@ -17,6 +17,7 @@ const COLUMNS = [
   { label: 'Name', sortKey: 'name' },
   { label: 'Role', sortKey: 'access' },
   { label: 'Email', sortKey: 'email' },
+  { label: 'Single Sign-on', sortKey: 'is_sso' },
   { label: 'Last Login', sortKey: 'last_login' },
   null
 ];
@@ -29,6 +30,8 @@ const primaryAction = {
   Component: Link,
   to: '/account/users/create'
 };
+
+const SsoSwitch = ({ value }) => <Toggle checked={value} />;
 
 export class ListPage extends Component {
   state = DEFAULT_STATE;
@@ -48,6 +51,10 @@ export class ListPage extends Component {
       allowSuperUser={user.access === 'superuser'}
     />,
     user.email,
+    <SsoSwitch
+      name={user.username}
+      value={user.is_sso}
+    />,
     user.last_login ? <TimeAgo date={user.last_login} live={false} /> : 'Never',
     <DeleteButton
       disabled={user.isCurrentUser}
