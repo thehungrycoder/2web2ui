@@ -65,7 +65,7 @@ export function cancelAbTest({ id, subaccountId }) {
   });
 }
 
-export function scheduleAbTest(data, { id, subaccountId }) {
+export function scheduleAbTest({ data, id, subaccountId }) {
   return sparkpostApiRequest({
     type: 'SCHEDULE_AB_TEST',
     meta: {
@@ -82,7 +82,7 @@ export function getLatestAbTest({ id, subaccountId }) {
   return getAbTest({ id, subaccountId, type: 'GET_LATEST_AB_TEST' });
 }
 
-export function updateDraft(data, { id, subaccountId }) {
+export function updateDraft({ data, id, subaccountId }) {
   return sparkpostApiRequest({
     type: 'UPDATE_AB_TEST_DRAFT',
     meta: {
@@ -94,7 +94,7 @@ export function updateDraft(data, { id, subaccountId }) {
   });
 }
 
-export function updateAbTest(data, { id, subaccountId }) {
+export function updateAbTest({ data, id, subaccountId }) {
   return sparkpostApiRequest({
     type: 'UPDATE_AB_TEST',
     meta: {

@@ -31,7 +31,7 @@ export class EditMode extends Component {
     const { updateDraft, showAlert, subaccountId, getAbTest } = this.props;
     const { id, version } = this.props.test;
 
-    return updateDraft(formatFormValues(values), { id, subaccountId }).then(() => {
+    return updateDraft({ data: formatFormValues(values), id, subaccountId }).then(() => {
       getAbTest({ id, subaccountId, version });
       showAlert({ type: 'success', message: 'A/B Test Draft Updated' });
     });
@@ -41,7 +41,7 @@ export class EditMode extends Component {
     const { scheduleAbTest, showAlert, subaccountId, getAbTest } = this.props;
     const { id, version } = this.props.test;
 
-    return scheduleAbTest(formatFormValues(values), { id, subaccountId }).then(() => {
+    return scheduleAbTest({ data: formatFormValues(values), id, subaccountId }).then(() => {
       getAbTest({ id, subaccountId, version });
       showAlert({ type: 'success', message: 'A/B Test Draft Scheduled' });
     });
@@ -51,7 +51,7 @@ export class EditMode extends Component {
     const { updateAbTest, showAlert, subaccountId, getAbTest } = this.props;
     const { id, version } = this.props.test;
 
-    return updateAbTest(formatFormValues(values), { id, subaccountId }).then(() => {
+    return updateAbTest({ data: formatFormValues(values), id, subaccountId }).then(() => {
       getAbTest({ id, subaccountId, version });
       showAlert({ type: 'success', message: 'A/B Test Updated' });
     });

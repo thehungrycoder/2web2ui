@@ -46,9 +46,4 @@ export const findTemplateObject = (templates, { template_id, ...rest } = {}) => 
 /**
  * Calculates the total_sample_size of a test based upon the sample_size of default_template & variants
  */
-export const calculateTotalSampleSize = ({ default_template, variants }) => {
-  let total = 0;
-  _.forEach(variants, (variant) => total += variant.sample_size);
-  total += default_template.sample_size;
-  return total;
-};
+export const calculateTotalSampleSize = ({ default_template, variants }) => _.reduce(variants, (sum, variant) => sum + variant.sample_size, default_template.sample_size);

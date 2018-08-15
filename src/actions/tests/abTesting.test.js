@@ -41,12 +41,12 @@ describe('Action Creator: A/B Testing', () => {
   });
 
   it('should dispatch a schedule test action', () => {
-    mockStore.dispatch(abTesting.scheduleAbTest('data', { id: 'test_one', subaccountId: 101 }));
+    mockStore.dispatch(abTesting.scheduleAbTest({ data: 'data', id: 'test_one', subaccountId: 101 }));
     expect(mockStore.getActions()).toMatchSnapshot();
   });
 
   it('should dispatch an update test action', () => {
-    mockStore.dispatch(abTesting.updateAbTest('data', { id: 'test_one', subaccountId: 101 }));
+    mockStore.dispatch(abTesting.updateAbTest({ data: 'data', id: 'test_one', subaccountId: 101 }));
     expect(mockStore.getActions()).toMatchSnapshot();
   });
 
@@ -61,12 +61,12 @@ describe('Action Creator: A/B Testing', () => {
   });
 
   it('should dispatch an update draft action without subaccount', () => {
-    mockStore.dispatch(abTesting.updateDraft('data', { id: 'test_one' }));
+    mockStore.dispatch(abTesting.updateDraft({ data: 'data', id: 'test_one' }));
     expect(mockStore.getActions()).toMatchSnapshot();
   });
 
   it('should dispatch an update draft action with subaccount', () => {
-    mockStore.dispatch(abTesting.updateDraft('data', { id: 'test_one', subaccountId: 101 }));
+    mockStore.dispatch(abTesting.updateDraft({ data: 'data', id: 'test_one', subaccountId: 101 }));
     expect(mockStore.getActions()).toMatchSnapshot();
   });
 });

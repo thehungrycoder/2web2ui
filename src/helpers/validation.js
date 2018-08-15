@@ -42,11 +42,9 @@ export function abTestDuration(value, formValues) {
 
 export function abTestDistribution(value, formValues) {
   const { default_template, variants } = formValues;
-  let total = 0;
 
   if (value === 'percent') {
-    _.forEach(variants, (variant) => total += variant.percent);
-    total += default_template.percent;
+    const total = _.reduce(variants, (sum, variant) => sum + variant.percent, default_template.percent);
     return total === 100 ? undefined : 'Total distribution must equal 100%';
   }
 }

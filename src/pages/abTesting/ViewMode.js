@@ -52,7 +52,7 @@ export class ViewMode extends Component {
     const { id, version } = this.props.test;
     const { subaccountId } = this.props;
 
-    return this.props.updateDraft({}, { id, subaccountId }).then(() => {
+    return this.props.updateDraft({ data: {}, id, subaccountId }).then(() => {
       this.props.showAlert({ type: 'success', message: 'Test overridden' });
       this.props.history.push(`/ab-testing/${id}/${version + 1}${setSubaccountQuery(subaccountId)}`);
     });
