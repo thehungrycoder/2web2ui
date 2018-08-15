@@ -36,8 +36,8 @@ const events = [
   {
     condition: all(isTypeLike(/_FAIL$/), isError('SparkpostApiError')),
     definition: {
-      event: 'ui-api-request',
-      category: 'API',
+      event: 'API Request',
+      category: 'SparkPost',
       action: getType,
       label: getErrorMessage
     }
@@ -45,8 +45,8 @@ const events = [
   {
     condition: all(isTypeLike(/_FAIL$/), isError('ZuoraApiError')),
     definition: {
-      event: 'ui-api-request',
-      category: 'API',
+      event: 'API Request',
+      category: 'Zuora',
       action: getType,
       label: getErrorMessage
     }
