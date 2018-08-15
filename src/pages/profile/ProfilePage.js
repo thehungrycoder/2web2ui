@@ -12,6 +12,7 @@ import VerifyEmailBanner from 'src/components/verifyEmailBanner/VerifyEmailBanne
 import NameForm from './components/NameForm';
 import PasswordForm from './components/PasswordForm';
 import TfaManager from './components/TfaManager';
+import SsoManager from './components/SsoManager';
 import { AccessControl } from 'src/components/auth';
 import { LabelledValue } from 'src/components';
 import ErrorTracker from 'src/helpers/errorTracker';
@@ -60,6 +61,7 @@ export class ProfilePage extends Component {
           <LabelledValue label='Email Address' value={email}/>
         </Panel>
 
+        <SsoManager />
         <AccessControl condition={all(not(isAzure), not(isHeroku))}>
           <AccessControl condition={not(isSso)}>
             <TfaManager />
@@ -75,6 +77,7 @@ export class ProfilePage extends Component {
             </Panel>
           </AccessControl>
         </AccessControl>
+
 
         <AccessControl condition={isAdmin}>
           <Panel sectioned title="Request Account Cancellation">
