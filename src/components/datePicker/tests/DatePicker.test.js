@@ -29,6 +29,7 @@ describe('Component: DatePicker', () => {
       relativeRange: 'day',
       relativeDateOptions: [],
       onChange: jest.fn(),
+      onBlur: jest.fn(),
       now: mockNow,
       disabled: false
     };
@@ -134,6 +135,19 @@ describe('Component: DatePicker', () => {
       expect(e.stopPropagation).toHaveBeenCalledTimes(1);
     });
 
+  });
+
+  describe('handleTextUpdate', () => {
+    it('should call props.onBlur if it exists', () => {
+      instance.handleTextUpdate();
+      expect(props.onBlur).toHaveBeenCalled();
+    });
+
+    it('should do nothing if props.onBlur does not exist', () => {
+      wrapper.setProps({ onBlur: undefined });
+      instance.handleTextUpdate();
+      expect(props.onBlur).not.toHaveBeenCalled();
+    });
   });
 
   describe('cancelDatePicker', () => {
