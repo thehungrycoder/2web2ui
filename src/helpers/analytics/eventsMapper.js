@@ -11,7 +11,7 @@ const getType = (action) => action.type;
 /**
  * @example
  *   {
- *     // logic to map action to event
+ *     // event will be emitted if satisfied
  *     condition: isType('TEST'),
  *
  *     // event tracking parameters for Google Tag Manager (GTM) and Analytics (GA)
@@ -96,5 +96,6 @@ export default function eventsMapper(action) {
     return; // skip
   }
 
+  // build an event from its definition and the incoming action
   return _.mapValues(event.definition, (value) => _.isFunction(value) ? value(action) : value);
 }
