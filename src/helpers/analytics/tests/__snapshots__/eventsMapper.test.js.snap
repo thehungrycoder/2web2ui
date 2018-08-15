@@ -3,8 +3,8 @@
 exports[`eventsMapper with SparkPost API fail action 1`] = `
 Object {
   "action": "GET_ACCOUNT_FAIL",
-  "category": "API",
-  "event": "ui-api-request",
+  "category": "SparkPost",
+  "event": "API Request",
   "label": "Unable to find account",
 }
 `;
@@ -12,8 +12,8 @@ Object {
 exports[`eventsMapper with Zuora API fail action 1`] = `
 Object {
   "action": "UPDATE_BILLING_FAIL",
-  "category": "API",
-  "event": "ui-api-request",
+  "category": "Zuora",
+  "event": "API Request",
   "label": "Unable to update billing information",
 }
 `;
