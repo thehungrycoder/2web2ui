@@ -5,6 +5,12 @@ cases('eventsMapper', ({ name, ...action }) => {
   expect(eventsMapper(action)).toMatchSnapshot();
 }, {
   'with untracked action': {},
+  'with basic fail action': {
+    type: 'GET_ACCOUNT_FAIL',
+    payload: {
+      error: new Error('Oh no!')
+    }
+  },
   'with SparkPost API fail action': {
     type: 'GET_ACCOUNT_FAIL',
     payload: {
@@ -22,6 +28,10 @@ cases('eventsMapper', ({ name, ...action }) => {
         message: 'Unable to update billing information'
       }
     }
+  },
+  'with unknown form action': {
+    type: '@@redux-form/INITIALIZE',
+    meta: { form: 'unknownForm' }
   },
   'with initialize form action': {
     type: '@@redux-form/INITIALIZE',

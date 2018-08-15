@@ -18,6 +18,8 @@ Object {
 }
 `;
 
+exports[`eventsMapper with basic fail action 1`] = `undefined`;
+
 exports[`eventsMapper with failed submit form action 1`] = `
 Object {
   "action": "Submit Failure",
@@ -53,5 +55,7 @@ Object {
   "label": "joinForm",
 }
 `;
+
+exports[`eventsMapper with unknown form action 1`] = `undefined`;
 
 exports[`eventsMapper with untracked action 1`] = `undefined`;
