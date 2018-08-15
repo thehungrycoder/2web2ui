@@ -23,6 +23,7 @@ const StatusFields = ({ disabled }) => (
         name='dates'
         left
         showPresets={false}
+        roundToPrecision={false}
         validate={abTestDuration}
         textFieldProps={{
           helpText: 'A test may run for a maximum of 30 days',
