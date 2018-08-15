@@ -20,7 +20,7 @@ describe('Analytics middleware', () => {
     expect(next).toHaveBeenCalledWith(action);
   });
 
-  it('ignores action', () => {
+  it('does not push an event', () => {
     eventsMapper.mockReturnValue(undefined);
     subject(action);
 
