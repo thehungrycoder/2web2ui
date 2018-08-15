@@ -11,7 +11,8 @@ class Alert extends Component {
     details: PropTypes.string,
     timeoutInterval: PropTypes.number,
     onDismiss: PropTypes.func.isRequired,
-    maxWidth: PropTypes.number
+    maxWidth: PropTypes.number,
+    action: PropTypes.object
   };
 
   static defaultProps = {
@@ -26,7 +27,7 @@ class Alert extends Component {
 
   timeout = null;
 
-  componentDidMount () {
+  componentDidMount() {
     if (this.props.autoDismiss) {
       this.refreshTimeout();
     }
@@ -50,22 +51,27 @@ class Alert extends Component {
     this.setState({ showDetails: true });
   }
 
-  renderMessage () {
-    const { message, details } = this.props;
+  renderMessage() {
+    const { message, details, action = {}} = this.props;
+    const { content: actionContent, ...actionProps } = action;
     const { showDetails } = this.state;
 
     const detailsLink = details && !showDetails
       ? <a className={styles.Details} onClick={this.handleDetails}>View Details</a>
       : null;
 
+    const actionMarkup = action
+      ? <a className={styles.Details} {...actionProps} >{actionContent}</a>
+      : null;
+
     const markup = showDetails
       ? <div>{details}</div>
-      : <div>{message} <span>{detailsLink}</span></div>;
+      : <div>{message} <span>{detailsLink || actionMarkup || null}</span></div>;
 
     return <div>{markup}</div>;
   }
 
-  render () {
+  render() {
     const { type, maxWidth } = this.props;
 
     return <Snackbar status={type} onDismiss={this.handleDismiss} maxWidth={maxWidth}>{this.renderMessage()}</Snackbar>;
