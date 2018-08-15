@@ -1,4 +1,4 @@
-/* eslint max-lines: ["error", 200] */
+/* eslint max-lines: ["error", 220] */
 import React, { Component } from 'react';
 import { subMonths, format } from 'date-fns';
 import { getStartOfDay, getEndOfDay, getRelativeDateOptions } from 'src/helpers/date';
@@ -122,7 +122,9 @@ export default class AppDatePicker extends Component {
   }
 
   handleTextUpdate = () => {
-    this.props.onBlur();
+    if (this.props.onBlur) {
+      this.props.onBlur();
+    }
   }
 
   render() {
