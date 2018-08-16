@@ -5,7 +5,7 @@ import { reduxForm, getFormValues } from 'redux-form';
 import { withRouter } from 'react-router-dom';
 
 import { showAlert } from 'src/actions/globalAlert';
-import { updateDraft, getAbTest, rescheuleAbTest } from 'src/actions/abTesting';
+import { updateDraft, getAbTest, rescheduleAbTest } from 'src/actions/abTesting';
 import { listTemplates } from 'src/actions/templates';
 import { selectEditInitialValues } from 'src/selectors/abTesting';
 import { formatFormValues } from 'src/helpers/abTesting';
@@ -44,9 +44,9 @@ export class EditMode extends Component {
 
   handleReschedule = (values) => {
     const { id, version } = this.props.test;
-    const { subaccountId, rescheuleAbTest, history, showAlert } = this.props;
+    const { subaccountId, rescheduleAbTest, history, showAlert } = this.props;
 
-    return rescheuleAbTest(formatFormValues(values), { id, subaccountId }).then(() => {
+    return rescheduleAbTest(formatFormValues(values), { id, subaccountId }).then(() => {
       showAlert({ type: 'success', message: 'A/B Test Rescheduled' });
       history.push(`/ab-testing/${id}/${version + 1}${setSubaccountQuery(subaccountId)}`);
     });
@@ -152,4 +152,4 @@ const formOptions = {
   form: FORM_NAME,
   enableReinitialize: true
 };
-export default withRouter(connect(mapStateToProps, { listTemplates, updateDraft, getAbTest, rescheuleAbTest, showAlert })(reduxForm(formOptions)(EditMode)));
+export default withRouter(connect(mapStateToProps, { listTemplates, updateDraft, getAbTest, rescheduleAbTest, showAlert })(reduxForm(formOptions)(EditMode)));

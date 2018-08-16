@@ -26,7 +26,7 @@ describe('Page: A/B Test Edit Mode', () => {
       showAlert: jest.fn(),
       listTemplates: jest.fn(),
       updateDraft: jest.fn(() => Promise.resolve()),
-      rescheuleAbTest: jest.fn(() => Promise.resolve()),
+      rescheduleAbTest: jest.fn(() => Promise.resolve()),
       rescheduling: false,
       rescheduleLoading: false,
       deleteAction: {
@@ -88,7 +88,7 @@ describe('Page: A/B Test Edit Mode', () => {
 
     it('should handle reschedule action', async () => {
       await wrapper.instance().handleReschedule(props.formValues);
-      expect(props.rescheuleAbTest).toHaveBeenCalledWith(props.formValues, { id: props.test.id, subaccountId: props.subaccountId });
+      expect(props.rescheduleAbTest).toHaveBeenCalledWith(props.formValues, { id: props.test.id, subaccountId: props.subaccountId });
       expect(props.showAlert).toHaveBeenCalledWith({ message: 'A/B Test Rescheduled', type: 'success' });
       expect(props.history.push).toHaveBeenCalledWith('/ab-testing/id-1/2?subaccount=101');
     });

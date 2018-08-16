@@ -66,7 +66,7 @@ describe('Action Creator: A/B Testing', () => {
   });
 
   it('should dispatch an reschedule action', () => {
-    mockStore.dispatch(abTesting.rescheuleAbTest('data', { id: 'test_one', subaccountId: 101 }));
+    mockStore.dispatch(abTesting.rescheduleAbTest('data', { id: 'test_one', subaccountId: 101 }));
     expect(mockStore.getActions()).toMatchSnapshot();
   });
 });
