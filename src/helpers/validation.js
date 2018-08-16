@@ -44,7 +44,7 @@ export function abTestDistribution(value, formValues) {
   const { default_template, variants } = formValues;
 
   if (value === 'percent') {
-    const total = _.reduce(variants, (sum, variant = { percent: 0 }) => sum + parseInt(variant.percent, 10), parseInt(default_template.percent, 10));
+    const total = _.reduce(variants, (sum, variant = { percent: 0 }) => sum + parseFloat(variant.percent), parseFloat(default_template.percent));
     return total === 100 ? undefined : 'Total distribution must equal 100%';
   }
 }
