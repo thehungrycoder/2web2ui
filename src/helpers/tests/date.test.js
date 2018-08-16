@@ -89,6 +89,17 @@ describe('Date helpers', () => {
       'for a quarter ago rounded': { range: '90days', subtractArgs: [90, 'days'], round: true }
     });
 
+    it('should default to rounding the range', () => {
+      const date = moment(new Date('2017-12-17T12:00:00')).utc();
+      Date.now = jest.fn(() => date);
+      const { from: expectedFrom, to: expectedTo } = roundBoundaries(moment(date.toDate()).subtract(7, 'days'), date);
+      const { from, to, relativeRange } = getRelativeDates('7days');
+
+      expect(to).toEqual(expectedTo.toDate());
+      expect(from).toEqual(expectedFrom.toDate());
+      expect(relativeRange).toEqual('7days');
+    });
+
     it('should return for a custom relative date range', () => {
       expect(getRelativeDates('custom')).toEqual({ relativeRange: 'custom' });
     });
