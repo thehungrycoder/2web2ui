@@ -1,6 +1,7 @@
 import {
   getEndOfDay,
   getStartOfDay,
+  getNextHour,
   getRelativeDates,
   getRelativeDateOptions,
   getDuration,
@@ -44,6 +45,14 @@ describe('Date helpers', () => {
     const startOfDay = new Date('2017-12-18T00:00:00.000');
     expect(getStartOfDay('2017-12-18T00:01:59')).toEqual(startOfDay);
     expect(getStartOfDay('2017-12-18T23:59:59')).toEqual(startOfDay);
+  });
+
+  it('should get start of next hour', () => {
+    const now = new Date('2017-12-18T04:20:00');
+    const nextHour = new Date('2017-12-18T05:00:00');
+    Date.now = jest.fn(() => now);
+    expect(getNextHour('2017-12-18T00:00:00')).toEqual(nextHour);
+    expect(getNextHour('2017-12-18T12:34:56')).toEqual(nextHour);
   });
 
   it('should compare two dates', () => {

@@ -36,7 +36,6 @@ const SettingsFields = ({ disabled, formValues = {}}) => (
               label='At what confidence level should we pick and start sending a winner?'
               type='number'
               step='0.01'
-              parse={Number}
               validate={numberBetween(0, 1)}
               disabled={disabled} />
           </Panel.Section>
@@ -63,7 +62,6 @@ const SettingsFields = ({ disabled, formValues = {}}) => (
           helpText='By default, we continue to collect engagement events for 24 hours after the last delivery.'
           suffix='hours'
           type='number'
-          parse={Number}
           validate={[integer, minNumber(1)]}
           disabled={disabled}
         />

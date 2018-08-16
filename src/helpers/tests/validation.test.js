@@ -73,12 +73,12 @@ const memoizedCases = {
     bad: [['csv', { name: 'test.txt' }]]
   },
   maxLength: {
-    good: [[1, '1'], [2, '12']],
+    good: [[1, '1'], [2, '12'], [1, ' 1 ']],
     bad: [[1, '123']]
   },
   minLength: {
     good: [[1, '12'], [5, '1234567']],
-    bad: [[2, '1'], [1, '']]
+    bad: [[2, '1'], [1, ''], [2, ' 1 ']]
   },
   minNumber: {
     good: [[1, 1], [-10, -9], [0, 2]],

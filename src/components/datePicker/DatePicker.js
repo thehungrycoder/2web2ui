@@ -1,7 +1,7 @@
 /* eslint max-lines: ["error", 220] */
 import React, { Component } from 'react';
 import { subMonths, format } from 'date-fns';
-import { getStartOfDay, getEndOfDay, getRelativeDateOptions } from 'src/helpers/date';
+import { getStartOfDay, getEndOfDay, getRelativeDateOptions, getNextHour } from 'src/helpers/date';
 import { roundBoundaries } from 'src/helpers/metrics';
 import { Button, TextField, Select, Popover, WindowEvent } from '@sparkpost/matchbox';
 import DateSelector from 'src/components/dateSelector/DateSelector';
@@ -65,9 +65,10 @@ export default class AppDatePicker extends Component {
 
   handleDayClick = (clicked) => {
     const { selecting, selected } = this.state;
+    const fromFormatter = this.props.fromSelectsNextHour ? getNextHour : getStartOfDay;
     const dates = selecting
       ? selected
-      : { from: getStartOfDay(clicked), to: getEndOfDay(clicked, { preventFuture: true }) };
+      : { from: fromFormatter(clicked), to: getEndOfDay(clicked, { preventFuture: true }) };
 
     this.setState({
       selected: dates,

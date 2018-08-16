@@ -361,7 +361,6 @@ exports[`Variants Fields Component Percent Field should render correctly 1`] = `
   disabled={false}
   label="Percent of total"
   name="default_template.percent"
-  parse={[Function]}
   suffix="%"
   type="number"
   validate={
@@ -380,7 +379,6 @@ exports[`Variants Fields Component Sample Size Field should render correctly 1`]
   disabled={false}
   label="Number of messages"
   name="default_template.sample_size"
-  parse={[Function]}
   type="number"
   validate={
     Array [

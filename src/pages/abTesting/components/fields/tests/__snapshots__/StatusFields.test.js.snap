@@ -14,6 +14,7 @@ exports[`Status Fields Component should disable fields correctly 1`] = `
         Array [
           [Function],
           [Function],
+          [Function],
         ]
       }
     />
@@ -34,6 +35,7 @@ exports[`Status Fields Component should disable fields correctly 1`] = `
         }
       }
       disabled={true}
+      fromSelectsNextHour={true}
       left={true}
       name="dates"
       roundToPrecision={false}
@@ -69,6 +71,7 @@ exports[`Status Fields Component should render correctly 1`] = `
         Array [
           [Function],
           [Function],
+          [Function],
         ]
       }
     />
@@ -88,6 +91,7 @@ exports[`Status Fields Component should render correctly 1`] = `
           "toMonth": null,
         }
       }
+      fromSelectsNextHour={true}
       left={true}
       name="dates"
       roundToPrecision={false}

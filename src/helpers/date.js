@@ -47,6 +47,13 @@ export function getStartOfDay(date) {
   return start;
 }
 
+export function getNextHour(date) {
+  const roundedDate = new Date(date);
+  const now = new Date(Date.now());
+  roundedDate.setHours(now.getHours() + 1, 0, 0, 0);
+  return roundedDate;
+}
+
 export function isSameDate(a, b) {
   return (a instanceof Date) && (b instanceof Date) && (a.getTime() === b.getTime());
 }

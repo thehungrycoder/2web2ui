@@ -13,7 +13,6 @@ export const PercentField = ({ namespace, ...props }) => (
     name={`${namespace}.percent`}
     label='Percent of total'
     type='number'
-    parse={Number}
     suffix='%'
     validate={[required, minNumber(1), maxNumber(100)]}
     component={TextFieldWrapper} {...props} />
@@ -24,7 +23,6 @@ export const SampleSizeField = ({ namespace, ...props }) => (
     name={`${namespace}.sample_size`}
     label='Number of messages'
     type='number'
-    parse={Number}
     validate={[required, integer, minNumber(1)]}
     component={TextFieldWrapper} {...props} />
 );

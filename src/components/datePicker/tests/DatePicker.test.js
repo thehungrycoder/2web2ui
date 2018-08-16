@@ -35,6 +35,7 @@ describe('Component: DatePicker', () => {
     };
 
     dateHelpers.getStartOfDay = jest.fn(() => 'start-of-day');
+    dateHelpers.getNextHour = jest.fn(() => 'next-hour');
     dateHelpers.getEndOfDay = jest.fn(() => 'end-of-day');
     metricsHelpers.roundBoundaries = jest.fn(() => ({ from: moment(mockFrom), to: moment(mockNow) }));
     dateHelpers.getRelativeDateOptions = jest.fn(() => [1, 2, 3]);
@@ -183,7 +184,7 @@ describe('Component: DatePicker', () => {
       expect(wrapper.state('selecting')).toEqual(false);
     });
 
-    it('should handle a day click when not selecting', () => {
+    it('should handle a day click when not selecting (start of day)', () => {
       const mockSelected = {};
       const mockClicked = {};
 
@@ -193,6 +194,23 @@ describe('Component: DatePicker', () => {
       instance.handleDayClick(mockClicked);
 
       expect(dateHelpers.getStartOfDay).toHaveBeenCalledWith(mockClicked);
+      expect(dateHelpers.getEndOfDay).toHaveBeenCalledWith(mockClicked, { preventFuture: true });
+      expect(wrapper.state('selected')).toEqual(mockNewSelected);
+      expect(wrapper.state('beforeSelected')).toEqual(mockNewSelected);
+      expect(wrapper.state('selecting')).toEqual(true);
+    });
+
+    it('should handle a day click when not selecting (next hour)', () => {
+      const mockSelected = {};
+      const mockClicked = {};
+
+      wrapper.setProps({ fromSelectsNextHour: true });
+      wrapper.setState({ selecting: false, selected: mockSelected, beforeSelected: null });
+      const mockNewSelected = { from: 'next-hour', to: 'end-of-day' };
+
+      instance.handleDayClick(mockClicked);
+
+      expect(dateHelpers.getNextHour).toHaveBeenCalledWith(mockClicked);
       expect(dateHelpers.getEndOfDay).toHaveBeenCalledWith(mockClicked, { preventFuture: true });
       expect(wrapper.state('selected')).toEqual(mockNewSelected);
       expect(wrapper.state('beforeSelected')).toEqual(mockNewSelected);

@@ -44,7 +44,7 @@ export function abTestDistribution(value, formValues) {
   const { default_template, variants } = formValues;
 
   if (value === 'percent') {
-    const total = _.reduce(variants, (sum, variant = { percent: 0 }) => sum + variant.percent, default_template.percent);
+    const total = _.reduce(variants, (sum, variant = { percent: 0 }) => sum + parseInt(variant.percent, 10), parseInt(default_template.percent, 10));
     return total === 100 ? undefined : 'Total distribution must equal 100%';
   }
 }
@@ -79,11 +79,11 @@ export const fileExtension = _.memoize(function fileExtension(extension) {
 });
 
 export const maxLength = _.memoize(function maxLength(length) {
-  return (value) => (value && value.length > length) ? `Must be ${length} characters or less` : undefined;
+  return (value) => (value && value.trim().length > length) ? `Must be ${length} characters or less` : undefined;
 });
 
 export const minLength = _.memoize(function minLength(length) {
-  return (value) => (typeof value !== 'undefined' && value.length < length) ? `Must be at least ${length} characters` : undefined;
+  return (value) => (typeof value !== 'undefined' && value.trim().length < length) ? `Must be at least ${length} characters` : undefined;
 });
 
 export const integer = (value) => /^-?[0-9]+$/.test(value) ? undefined : 'Integers only please';
