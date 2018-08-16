@@ -22,6 +22,7 @@ describe('Formatting helpers', () => {
       expect(formatting.formatNumber(999)).toEqual((999).toLocaleString());
       expect(formatting.formatNumber(1000)).toMatch(/K$/);
       expect(formatting.formatNumber(1000 * 1000)).toMatch(/M$/);
+      expect(formatting.formatNumber(1000 * 1000 * 1000)).toMatch(/B$/);
     });
   });
 
