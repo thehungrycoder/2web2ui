@@ -30,12 +30,10 @@ describe('ChunkLoading', () => {
   });
 
   it('should handle retry action', () => {
-    Object.defineProperty(window.location, 'reload', {
-      writable: true,
-      value: jest.fn()
-    });
+    const spy = jest.spyOn(window.location, 'reload').mockImplementation();
     const wrapper = shallow(<ChunkLoading />);
+
     wrapper.instance().handleRetry();
-    expect(window.location.reload).toHaveBeenCalledWith(true);
+    expect(spy).toHaveBeenCalledWith(true);
   });
 });

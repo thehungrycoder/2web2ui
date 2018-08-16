@@ -5,7 +5,7 @@ import { Loading } from 'src/components';
 
 export class ChunkLoading extends Component {
 
-  handleRetry = () => {
+  handleRetry() {
     window.location.reload(true);
   }
 
@@ -16,7 +16,6 @@ export class ChunkLoading extends Component {
       showAlert({
         message: 'Error loading page',
         type: 'error',
-        autoDismiss: false,
         maxWidth: 800,
         action: {
           content: 'Retry',

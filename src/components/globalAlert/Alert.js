@@ -66,7 +66,7 @@ class Alert extends Component {
 
     const markup = showDetails
       ? <div>{details}</div>
-      : <div>{message} <span>{detailsLink || actionMarkup || null}</span></div>;
+      : <div>{message} <span>{detailsLink || actionMarkup}</span></div>;
 
     return <div>{markup}</div>;
   }
