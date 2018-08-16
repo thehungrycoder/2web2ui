@@ -1,0 +1,187 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Variants View Component: Engagement Component: should render clicks correctly 1`] = `
+<Panel.Section>
+  <LabelledValue
+    label="Engagement"
+  >
+    <h6>
+      <Tooltip
+        bottom={true}
+        content={
+          <span>
+            10
+             clicks of 
+            100
+             accepted
+          </span>
+        }
+        dark={true}
+        forcePosition={false}
+        horizontalOffset="0px"
+        preferredDirection={
+          Object {
+            "bottom": true,
+            "left": false,
+            "right": true,
+            "top": false,
+          }
+        }
+        right={true}
+      >
+        <Unit
+          unit="percent"
+          value={0.2}
+        />
+         
+        <span
+          className="InfoIcon"
+        >
+          <InfoOutline />
+        </span>
+      </Tooltip>
+    </h6>
+  </LabelledValue>
+</Panel.Section>
+`;
+
+exports[`Variants View Component: Engagement Component: should render opens correctly 1`] = `
+<Panel.Section>
+  <LabelledValue
+    label="Engagement"
+  >
+    <h6>
+      <Tooltip
+        bottom={true}
+        content={
+          <span>
+            10
+             opens of 
+            100
+             accepted
+          </span>
+        }
+        dark={true}
+        forcePosition={false}
+        horizontalOffset="0px"
+        preferredDirection={
+          Object {
+            "bottom": true,
+            "left": false,
+            "right": true,
+            "top": false,
+          }
+        }
+        right={true}
+      >
+        <Unit
+          unit="percent"
+          value={0.2}
+        />
+         
+        <span
+          className="InfoIcon"
+        >
+          <InfoOutline />
+        </span>
+      </Tooltip>
+    </h6>
+  </LabelledValue>
+</Panel.Section>
+`;
+
+exports[`Variants View Component: PercentOrSample Component: should render percent correctly 1`] = `
+<LabelledValue
+  label="Percent"
+>
+  <p>
+    <Unit
+      unit="percent"
+      value={50}
+    />
+  </p>
+</LabelledValue>
+`;
+
+exports[`Variants View Component: PercentOrSample Component: should render sample size correctly 1`] = `
+<LabelledValue
+  label="Sample Size"
+>
+  <p>
+    1,000
+  </p>
+</LabelledValue>
+`;
+
+exports[`Variants View Component: Top level Component should render correctly 1`] = `
+<React.Fragment>
+  <Component
+    title="Default Template"
+    variant={
+      Object {
+        "template_id": "default",
+      }
+    }
+  />
+  <Component
+    key="0"
+    variant={
+      Object {
+        "template_id": "var1",
+      }
+    }
+  />
+  <Component
+    key="1"
+    variant={
+      Object {
+        "template_id": "var2",
+      }
+    }
+  />
+</React.Fragment>
+`;
+
+exports[`Variants View Component: Variant Component: should render correctly 1`] = `
+<Panel>
+  <Panel.Section
+    actions={
+      Array [
+        Object {
+          "color": "orange",
+          "component": [Function],
+          "content": "View Template",
+          "to": "/templates/edit/temp_id/published",
+        },
+      ]
+    }
+  >
+    <h6
+      className="SmallHeader"
+    >
+      variant title
+    </h6>
+    <LabelledValue
+      label="Template ID"
+    >
+      <h6>
+        temp_id
+      </h6>
+    </LabelledValue>
+    <Component
+      variant={
+        Object {
+          "template_id": "temp_id",
+        }
+      }
+    />
+  </Panel.Section>
+  <Component
+    variant={
+      Object {
+        "template_id": "temp_id",
+      }
+    }
+  />
+</Panel>
+`;

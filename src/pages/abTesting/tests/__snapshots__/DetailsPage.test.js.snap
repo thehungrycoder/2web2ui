@@ -13,7 +13,7 @@ exports[`Page: A/B Test Details should render correctly and create shared props 
     cancelAction={
       Object {
         "content": <span>
-          <Cancel />
+          <Block />
            Cancel Test
         </span>,
         "onClick": [Function],

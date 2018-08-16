@@ -80,3 +80,19 @@ export function updateDraft(data, { id, subaccountId }) {
     }
   });
 }
+
+export function updateScheduled(data, { id, subaccountId, type = 'UPDATE_AB_TEST' }) {
+  return sparkpostApiRequest({
+    type,
+    meta: {
+      method: 'PUT',
+      url: `/ab-test/${id}`,
+      headers: setSubaccountHeader(subaccountId),
+      data
+    }
+  });
+}
+
+export function rescheduleAbTest(data, { id, subaccountId }) {
+  return updateScheduled(data, { id, subaccountId, type: 'RESCHEDULE_AB_TEST' });
+}

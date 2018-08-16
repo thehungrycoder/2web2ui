@@ -1,5 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Page: A/B Test Edit Mode rescheduling should render reschedule primary action 1`] = `
+Object {
+  "content": "Finalize and Reschedule Test",
+  "disabled": false,
+  "onClick": [Function],
+}
+`;
+
 exports[`Page: A/B Test Edit Mode should render draft status correctly 1`] = `
 <Page
   empty={Object {}}
@@ -45,7 +53,7 @@ exports[`Page: A/B Test Edit Mode should render draft status correctly 1`] = `
             "name": "my ab test 1",
             "status": "draft",
             "updated_at": "2018-10-21T10:10:10.000Z",
-            "version": "1",
+            "version": 1,
           }
         }
       />
@@ -62,7 +70,7 @@ exports[`Page: A/B Test Edit Mode should render draft status correctly 1`] = `
             "name": "my ab test 1",
             "status": "draft",
             "updated_at": "2018-10-21T10:10:10.000Z",
-            "version": "1",
+            "version": 1,
           }
         }
       />
@@ -85,7 +93,7 @@ exports[`Page: A/B Test Edit Mode should render draft status correctly 1`] = `
             "name": "my ab test 1",
             "status": "draft",
             "updated_at": "2018-10-21T10:10:10.000Z",
-            "version": "1",
+            "version": 1,
           }
         }
       />
@@ -111,7 +119,7 @@ exports[`Page: A/B Test Edit Mode should render draft status correctly 1`] = `
             "name": "my ab test 1",
             "status": "draft",
             "updated_at": "2018-10-21T10:10:10.000Z",
-            "version": "1",
+            "version": 1,
           }
         }
       />
@@ -172,7 +180,7 @@ exports[`Page: A/B Test Edit Mode should render scheduled status correctly 1`] =
             "name": "my ab test 1",
             "status": "scheduled",
             "updated_at": "2018-10-21T10:10:10.000Z",
-            "version": "1",
+            "version": 1,
           }
         }
       />
@@ -189,7 +197,7 @@ exports[`Page: A/B Test Edit Mode should render scheduled status correctly 1`] =
             "name": "my ab test 1",
             "status": "scheduled",
             "updated_at": "2018-10-21T10:10:10.000Z",
-            "version": "1",
+            "version": 1,
           }
         }
       />
@@ -212,7 +220,7 @@ exports[`Page: A/B Test Edit Mode should render scheduled status correctly 1`] =
             "name": "my ab test 1",
             "status": "scheduled",
             "updated_at": "2018-10-21T10:10:10.000Z",
-            "version": "1",
+            "version": 1,
           }
         }
       />
@@ -238,7 +246,7 @@ exports[`Page: A/B Test Edit Mode should render scheduled status correctly 1`] =
             "name": "my ab test 1",
             "status": "scheduled",
             "updated_at": "2018-10-21T10:10:10.000Z",
-            "version": "1",
+            "version": 1,
           }
         }
       />

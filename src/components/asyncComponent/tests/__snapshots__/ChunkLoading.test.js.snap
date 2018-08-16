@@ -1,7 +1,24 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ChunkLoading should render custom loading 1`] = `<CustomLoading />`;
+exports[`ChunkLoading render cases should render custom loading 1`] = `<CustomLoading />`;
 
-exports[`ChunkLoading should render loading 1`] = `<Loading />`;
+exports[`ChunkLoading render cases should render loading 1`] = `<Loading />`;
 
-exports[`ChunkLoading should return null 1`] = `""`;
+exports[`ChunkLoading render cases should return null 1`] = `""`;
+
+exports[`ChunkLoading should show an alert with an error on update 1`] = `
+Array [
+  Array [
+    Object {
+      "action": Object {
+        "content": "Retry",
+        "onClick": [Function],
+      },
+      "dedupeId": "CHUNK_ERROR",
+      "maxWidth": 800,
+      "message": "Error loading page",
+      "type": "error",
+    },
+  ],
+]
+`;

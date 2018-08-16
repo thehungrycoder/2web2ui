@@ -157,8 +157,16 @@ Array [
               "visible": false,
             },
             Object {
-              "content": "Edit and Rerun Test",
+              "component": [Function],
+              "content": "Reschedule Test",
               "section": 1,
+              "to": Object {
+                "pathname": "/ab-testing/id-1/1",
+                "search": "?subaccount=101",
+                "state": Object {
+                  "rescheduling": true,
+                },
+              },
               "visible": false,
             },
             Object {
@@ -256,8 +264,16 @@ Array [
               "visible": true,
             },
             Object {
-              "content": "Edit and Rerun Test",
+              "component": [Function],
+              "content": "Reschedule Test",
               "section": 1,
+              "to": Object {
+                "pathname": "/ab-testing/id-2/2",
+                "search": "",
+                "state": Object {
+                  "rescheduling": true,
+                },
+              },
               "visible": false,
             },
             Object {
@@ -363,8 +379,16 @@ Array [
               "visible": true,
             },
             Object {
-              "content": "Edit and Rerun Test",
+              "component": [Function],
+              "content": "Reschedule Test",
               "section": 1,
+              "to": Object {
+                "pathname": "/ab-testing/id-3/3",
+                "search": "",
+                "state": Object {
+                  "rescheduling": true,
+                },
+              },
               "visible": true,
             },
             Object {

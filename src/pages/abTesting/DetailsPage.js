@@ -1,12 +1,12 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getAbTest, deleteAbTest, cancelAbTest } from 'src/actions/abTesting';
+import { getAbTest, getLatestAbTest, deleteAbTest, cancelAbTest } from 'src/actions/abTesting';
 import { selectAbTestFromParams, selectIdAndVersionFromParams } from 'src/selectors/abTesting';
 import { selectSubaccountIdFromQuery } from 'src/selectors/subaccounts';
 
 import { Loading, DeleteModal, ConfirmationModal } from 'src/components';
-import { Delete, Cancel } from '@sparkpost/matchbox-icons';
+import { Delete, Block } from '@sparkpost/matchbox-icons';
 import { showAlert } from 'src/actions/globalAlert';
 import RedirectAndAlert from 'src/components/globalAlert/RedirectAndAlert';
 import EditMode from './EditMode';
@@ -31,12 +31,14 @@ export class DetailsPage extends Component {
   }
 
   componentDidMount() {
-    const { id, version, subaccountId, getAbTest } = this.props;
+    const { id, version, subaccountId, getAbTest, getLatestAbTest } = this.props;
+
     getAbTest({ id, version, subaccountId });
+    getLatestAbTest({ id, subaccountId });
   }
 
   componentDidUpdate({ error: prevError, version: prevVersion }) {
-    const { error, test, getAbTest, id, version, subaccountId } = this.props;
+    const { error, test, getAbTest, getLatestAbTest, id, version, subaccountId } = this.props;
 
     if (!prevError && error && _.isEmpty(test)) {
       this.setState({ shouldRedirect: true });
@@ -45,6 +47,7 @@ export class DetailsPage extends Component {
     // Version history selector - Fetch the test when url updates
     if (prevVersion !== version) {
       getAbTest({ id, version, subaccountId });
+      getLatestAbTest({ id, subaccountId });
     }
   }
 
@@ -80,10 +83,12 @@ export class DetailsPage extends Component {
   // Actions & other props we want to share with both Edit and View mode
   getSharedProps = () => {
     const { status } = this.props.test;
+    const { test, subaccountId, rescheduling } = this.props;
+
     return {
       breadcrumbAction: { content: 'Back to A/B Tests', component: Link, to: '/ab-testing' },
       cancelAction: {
-        content: <span><Cancel/> Cancel Test</span>,
+        content: <span><Block/> Cancel Test</span>,
         visible: status === 'scheduled' || status === 'running',
         onClick: this.toggleCancel
       },
@@ -91,13 +96,14 @@ export class DetailsPage extends Component {
         content: <span><Delete/> Delete Test</span>,
         onClick: this.toggleDelete
       },
-      test: this.props.test,
-      subaccountId: this.props.subaccountId
+      test,
+      subaccountId,
+      rescheduling
     };
   };
 
   render() {
-    const { loading, error } = this.props;
+    const { loading, error, rescheduling } = this.props;
     const { status } = this.props.test;
 
     if (loading) {
@@ -113,7 +119,7 @@ export class DetailsPage extends Component {
       );
     }
 
-    const DetailPage = (status === 'draft' || status === 'scheduled') ? EditMode : ViewMode;
+    const DetailPage = (status === 'draft' || status === 'scheduled' || rescheduling) ? EditMode : ViewMode;
 
     return (
       <Fragment>
@@ -148,8 +154,9 @@ function mapStateToProps(state, props) {
     cancelPending: state.abTesting.cancelPending,
     error: state.abTesting.detailsError,
     ...selectIdAndVersionFromParams(state, props),
-    subaccountId: selectSubaccountIdFromQuery(state, props)
+    subaccountId: selectSubaccountIdFromQuery(state, props),
+    rescheduling: _.get(props, 'location.state.rescheduling')
   };
 }
 
-export default connect(mapStateToProps, { getAbTest, deleteAbTest, cancelAbTest, showAlert })(DetailsPage);
+export default connect(mapStateToProps, { getAbTest, getLatestAbTest, deleteAbTest, cancelAbTest, showAlert })(DetailsPage);

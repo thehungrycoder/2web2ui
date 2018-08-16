@@ -26,6 +26,23 @@ describe('Alert', () => {
     expect(wrapper.find('a')).toHaveLength(1);
   });
 
+  it('should render a provided action', () => {
+    wrapper.setProps({
+      details: null,
+      action: { content: 'action content', onClick: jest.fn() }
+    });
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should handle action on click', () => {
+    wrapper.setProps({
+      details: null,
+      action: { content: 'action content', onClick: jest.fn() }
+    });
+    wrapper.find('a').simulate('click');
+    expect(wrapper.instance().props.action.onClick).toHaveBeenCalled();
+  });
+
   it('should handle details click', () => {
     wrapper.find('a').simulate('click');
     expect(wrapper).toMatchSnapshot();

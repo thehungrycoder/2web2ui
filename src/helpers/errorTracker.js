@@ -45,10 +45,11 @@ export function getEnricherOrDieTryin(store, currentWindow) {
     const user = _.pick(currentUser, ['access_level', 'customer', 'username']);
     const fromOurBundle = isErrorFromOurBundle(data);
     const apiError = isApiError(data);
+    const chunkFailure = isChunkFailure(data);
 
     return {
       ...data,
-      level: !fromOurBundle || apiError ? 'warning' : 'error',
+      level: !fromOurBundle || apiError || chunkFailure ? 'warning' : 'error',
       tags: { // all tags can be easily searched and sent in Slack notifications
         ...data.tags,
         customer: _.get(user, 'customer'),
@@ -84,6 +85,13 @@ export function isApiError(data) {
   const type = _.get(data, 'exception.values[0].type');
 
   return looksLikeApiErrorType.test(type);
+}
+
+export function isChunkFailure(data) {
+  const looksLikeChunkFailure = /Loading chunk/;
+  const value = _.get(data, 'exception.values[0].value');
+
+  return looksLikeChunkFailure.test(value);
 }
 
 // The purpose of this helper is to provide a common interface for reporting errors
