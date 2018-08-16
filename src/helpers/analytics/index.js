@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 // Google Tag Manager tracking helpers
 // Adapted from webui/src/common/services/analytics.js
 
@@ -14,7 +12,7 @@ export function setup() {
   }
 }
 
-function pushEvent(evt) {
+export function pushEvent(evt) {
   setup();
   window.dataLayer.push(evt);
 }
@@ -36,10 +34,6 @@ export function trackEvent({ category, action, data }) {
     'event-action': action,
     'event-data': data || {}
   });
-}
-
-export function pushEvents(events) {
-  _.each(events, pushEvent);
 }
 
 // Call to track specific form completion.
