@@ -17,18 +17,13 @@ describe('Status Panel Component', () => {
       latest: 5,
       id: 'test_one',
       version: 4,
-      subaccountId: 101,
-      getLatestAbTest: jest.fn()
+      subaccountId: 101
     };
     wrapper = shallow(<StatusPanel {...props} />);
   });
 
-  it('should render draft and get latest on mount', () => {
+  it('should render', () => {
     expect(wrapper).toMatchSnapshot();
-    expect(props.getLatestAbTest).toHaveBeenCalledWith({
-      id: props.id,
-      subaccountId: props.subaccountId
-    });
   });
 
   it('should not render subaccount tag if test is not assigned to subaccount', () => {

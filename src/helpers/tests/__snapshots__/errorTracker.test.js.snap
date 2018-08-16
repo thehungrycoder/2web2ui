@@ -31,6 +31,27 @@ Object {
 }
 `;
 
+exports[`.getEnricherOrDieTryin with chunk loading error 1`] = `
+Object {
+  "exception": Object {
+    "values": Array [
+      Object {
+        "value": "Loading chunk 4 failed.",
+      },
+    ],
+  },
+  "level": "warning",
+  "logger": "test",
+  "tags": Object {
+    "customer": undefined,
+    "documentLanguage": "unknown",
+    "navigatorLanguage": "unknown",
+    "source": "unknown",
+  },
+  "user": Object {},
+}
+`;
+
 exports[`.getEnricherOrDieTryin with current user 1`] = `
 Object {
   "level": "warning",

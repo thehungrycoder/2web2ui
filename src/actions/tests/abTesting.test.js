@@ -59,4 +59,14 @@ describe('Action Creator: A/B Testing', () => {
     mockStore.dispatch(abTesting.updateDraft('data', { id: 'test_one', subaccountId: 101 }));
     expect(mockStore.getActions()).toMatchSnapshot();
   });
+
+  it('should dispatch an update scheduled action', () => {
+    mockStore.dispatch(abTesting.updateScheduled('data', { id: 'test_one', subaccountId: 101 }));
+    expect(mockStore.getActions()).toMatchSnapshot();
+  });
+
+  it('should dispatch an reschedule action', () => {
+    mockStore.dispatch(abTesting.rescheduleAbTest('data', { id: 'test_one', subaccountId: 101 }));
+    expect(mockStore.getActions()).toMatchSnapshot();
+  });
 });

@@ -14,6 +14,29 @@ exports[`Alert should handle details click 1`] = `
 </Snackbar>
 `;
 
+exports[`Alert should render a provided action 1`] = `
+<Snackbar
+  maxWidth={380}
+  onDismiss={[Function]}
+  status="error"
+>
+  <div>
+    <div>
+      message
+       
+      <span>
+        <a
+          className="Details"
+          onClick={[MockFunction]}
+        >
+          action content
+        </a>
+      </span>
+    </div>
+  </div>
+</Snackbar>
+`;
+
 exports[`Alert should render with all props 1`] = `
 <Snackbar
   maxWidth={380}
