@@ -60,21 +60,44 @@ describe('Date helpers', () => {
 
   describe('getRelativeDates', () => {
 
-    cases('calculations', ({ range, subtractArgs }) => {
-      const date = moment(new Date('2017-12-17T12:00:00')).utc().toDate();
+    cases('calculations', ({ range, subtractArgs, round }) => {
+      const date = moment(new Date('2017-12-17T12:00:00')).utc();
       Date.now = jest.fn(() => date);
-      const { from, to, relativeRange } = getRelativeDates(range);
-      const { from: expectedFrom, to: expectedTo } = roundBoundaries(moment(date).subtract(...subtractArgs), date);
+      const { from, to, relativeRange } = getRelativeDates(range, round);
+      let expectedFrom = moment(date.toDate()).subtract(...subtractArgs);
+      let expectedTo = date;
+      if (round) {
+        const rounded = roundBoundaries(expectedFrom, expectedTo);
+        expectedFrom = rounded.from;
+        expectedTo = rounded.to;
+      }
       expect(to).toEqual(expectedTo.toDate());
       expect(from).toEqual(expectedFrom.toDate());
       expect(relativeRange).toEqual(range);
     }, {
-      'for an hour ago': { range: 'hour', subtractArgs: [1, 'hours']},
-      'for a day ago': { range: 'day', subtractArgs: [1, 'days']},
-      'for a week ago': { range: '7days', subtractArgs: [7, 'days']},
-      'for 10 days ago': { range: '10days', subtractArgs: [10, 'days']},
-      'for a month': { range: '30days', subtractArgs: [30, 'days']},
-      'for a quarter ago': { range: '90days', subtractArgs: [90, 'days']}
+      'for an hour ago': { range: 'hour', subtractArgs: [1, 'hours'], round: false },
+      'for a day ago': { range: 'day', subtractArgs: [1, 'days'], round: false },
+      'for a week ago': { range: '7days', subtractArgs: [7, 'days'], round: false },
+      'for 10 days ago': { range: '10days', subtractArgs: [10, 'days'], round: false },
+      'for a month': { range: '30days', subtractArgs: [30, 'days'], round: false },
+      'for a quarter ago': { range: '90days', subtractArgs: [90, 'days'], round: false },
+      'for an hour ago rounded': { range: 'hour', subtractArgs: [1, 'hours'], round: true },
+      'for a day ago rounded': { range: 'day', subtractArgs: [1, 'days'], round: true },
+      'for a week ago rounded': { range: '7days', subtractArgs: [7, 'days'], round: true },
+      'for 10 days ago rounded': { range: '10days', subtractArgs: [10, 'days'], round: true },
+      'for a month rounded': { range: '30days', subtractArgs: [30, 'days'], round: true },
+      'for a quarter ago rounded': { range: '90days', subtractArgs: [90, 'days'], round: true }
+    });
+
+    it('should default to rounding the range', () => {
+      const date = moment(new Date('2017-12-17T12:00:00')).utc();
+      Date.now = jest.fn(() => date);
+      const { from: expectedFrom, to: expectedTo } = roundBoundaries(moment(date.toDate()).subtract(7, 'days'), date);
+      const { from, to, relativeRange } = getRelativeDates('7days');
+
+      expect(to).toEqual(expectedTo.toDate());
+      expect(from).toEqual(expectedFrom.toDate());
+      expect(relativeRange).toEqual('7days');
     });
 
     it('should return for a custom relative date range', () => {

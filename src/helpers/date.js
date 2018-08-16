@@ -73,7 +73,7 @@ export function getLocalTimezone() {
   return format.resolvedOptions().timeZone;
 }
 
-export function getRelativeDates(range) {
+export function getRelativeDates(range, roundToPrecision = true) {
   const now = moment().toDate();
   let preciseFrom;
 
@@ -113,8 +113,11 @@ export function getRelativeDates(range) {
     }
   }
 
-  const { to, from } = roundBoundaries(preciseFrom, now);
-  return { to: to.toDate(), from: from.toDate(), relativeRange: range };
+  if (roundToPrecision) {
+    const { to, from } = roundBoundaries(preciseFrom, now);
+    return { to: to.toDate(), from: from.toDate(), relativeRange: range };
+  }
+  return { to: now, from: preciseFrom, relativeRange: range };
 }
 
 export function formatDate(date, FORMAT = config.dateFormat) {
