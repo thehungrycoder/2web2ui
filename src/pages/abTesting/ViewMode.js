@@ -105,7 +105,7 @@ export class ViewMode extends Component {
             <VariantsContent test={test} />
           </Section.Left>
           <Section.Right>
-            <VariantsView test={test} />
+            <VariantsView test={test} subaccountId={subaccountId} />
           </Section.Right>
         </Section>
 
