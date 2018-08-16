@@ -68,7 +68,7 @@ export default (state = initialState, { type, payload, meta }) => {
     // Search options
 
     case 'REFRESH_MESSAGE_EVENTS_DATE_OPTIONS': {
-      const dateOptions = { ...state.search.dateOptions, ...payload, ...getRelativeDates(payload.relativeRange) };
+      const dateOptions = { ...state.search.dateOptions, ...payload, ...getRelativeDates(payload.relativeRange, false) };
       return { ...state, search: { ...state.search, dateOptions }};
     }
 
