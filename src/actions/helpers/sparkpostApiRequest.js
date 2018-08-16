@@ -95,7 +95,7 @@ const sparkpostRequest = requestHelperFactory({
     // any other API error should automatically fail, to be handled in the reducers/components
     dispatch({
       type: types.FAIL,
-      payload: { message, response },
+      payload: { error: apiError, message, response },
       meta
     });
 

@@ -9,7 +9,8 @@ const initialState = {
   cancelPending: false,
   detailsById: {},
   detailsLoading: false,
-  detailsError: null
+  detailsError: null,
+  rescheduleLoading: false
 };
 
 export default (state = initialState, { type, payload, meta }) => {
@@ -98,7 +99,9 @@ export default (state = initialState, { type, payload, meta }) => {
       return {
         ...state,
         cancelPending: false,
-        list: state.list.map((t) => t.id === meta.id && t.subaccount_id === parseInt(meta.subaccountId, 10) ? { ...t, status: payload.status } : t)
+        list: state.list.map((t) => t.id === meta.id && (!meta.subaccountId || t.subaccount_id === parseInt(meta.subaccountId, 10))
+          ? { ...t, status: payload.status }
+          : t)
       };
 
     case 'CANCEL_AB_TEST_FAIL':
@@ -136,6 +139,14 @@ export default (state = initialState, { type, payload, meta }) => {
           }
         }
       };
+
+    /* Rescheduling */
+    case 'RESCHEDULE_AB_TEST_PENDING':
+      return { ...state, rescheduleLoading: true };
+
+    case 'RESCHEDULE_AB_TEST_SUCCESS':
+    case 'RESCHEDULE_AB_TEST_FAIL':
+      return { ...state, rescheduleLoading: false };
 
     default:
       return state;

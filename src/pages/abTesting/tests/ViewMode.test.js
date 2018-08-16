@@ -11,7 +11,7 @@ describe('Page: A/B Test View Mode', () => {
       subaccountId: '101',
       test: {
         id: 'id-1',
-        version: '1',
+        version: 5,
         name: 'my ab test 1',
         status: 'running',
         default_template: {
@@ -19,6 +19,11 @@ describe('Page: A/B Test View Mode', () => {
         },
         updated_at: '2018-10-21T10:10:10.000Z'
       },
+      location: {
+        pathname: '/ab-testing/id-1/5',
+        search: '?subaccount=101'
+      },
+      latest: 5,
       deleteAction: {
         content: 'delete test',
         onClick: jest.fn()
@@ -47,6 +52,11 @@ describe('Page: A/B Test View Mode', () => {
   it('should render cancelled status correctly', () => {
     wrapper.setProps({ test: { ...props.test, status: 'cancelled' }});
     expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should not render reschedule action if not viewing latest', () => {
+    wrapper.setProps({ test: { ...props.test, status: 'cancelled', version: 4 }});
+    expect(wrapper.find('Page').prop('primaryAction')).toBe(null);
   });
 
   it('should toggle override modal', () => {

@@ -1,0 +1,76 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Settings View Component should render correctly 1`] = `
+<Panel>
+  <Panel.Section>
+    <LabelledValue
+      label="Test Mode"
+    >
+      <h6>
+        Bayesian
+      </h6>
+      <p
+        className="HelpText"
+      >
+        In bayesian mode, once this test has completed, the best performing template will be used in subsequent transmissions in place of the default.
+      </p>
+    </LabelledValue>
+    <LabelledValue
+      label="Confidence Level"
+    >
+      <p>
+        0.55
+      </p>
+    </LabelledValue>
+  </Panel.Section>
+  <Panel.Section>
+    <LabelledValue
+      label="Metric"
+    >
+      <p>
+        Unique Click Rate
+         
+      </p>
+    </LabelledValue>
+    <LabelledValue
+      label="Engagement Timeout"
+    >
+      <p>
+        14 hours
+         
+      </p>
+    </LabelledValue>
+    <LabelledValue
+      label="Distribution Method"
+    >
+      <p>
+        Sample Size
+      </p>
+    </LabelledValue>
+    <LabelledValue
+      label="Total Sample Size"
+    >
+      <p>
+        100
+      </p>
+    </LabelledValue>
+  </Panel.Section>
+</Panel>
+`;
+
+exports[`Settings View Component should render learning mode correctly 1`] = `
+<Panel.Section>
+  <LabelledValue
+    label="Test Mode"
+  >
+    <h6>
+      Learning
+    </h6>
+    <p
+      className="HelpText"
+    >
+      In learning mode, once this test has completed, subsequent transmissions will revert to using the default template
+    </p>
+  </LabelledValue>
+</Panel.Section>
+`;

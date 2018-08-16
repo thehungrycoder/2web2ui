@@ -1,3 +1,4 @@
+/* eslint max-lines: ["error", 200] */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, formValueSelector } from 'redux-form';
@@ -54,8 +55,11 @@ export class ChangePlanForm extends Component {
     const { account, billing, updateSubscription, billingCreate, billingUpdate, showAlert, history } = this.props;
     const oldCode = account.subscription.code;
     const newCode = values.planpicker.code;
+    const isDowngradeToFree = values.planpicker.isFree;
 
-    const newValues = values.card ? { ...values, card: prepareCardInfo(values.card) } : values;
+    const newValues = values.card && !isDowngradeToFree
+      ? { ...values, card: prepareCardInfo(values.card) }
+      : values;
 
     // decides which action to be taken based on
     // if it's aws account, it already has billing and if you use a saved CC
@@ -63,7 +67,7 @@ export class ChangePlanForm extends Component {
     if (this.props.isAws) {
       action = updateSubscription({ code: newCode });
     } else if (account.billing) {
-      action = this.state.useSavedCC ? updateSubscription({ code: newCode }) : billingUpdate(newValues);
+      action = this.state.useSavedCC || isDowngradeToFree ? updateSubscription({ code: newCode }) : billingUpdate(newValues);
     } else {
       action = billingCreate(newValues); // creates Zuora account
     }

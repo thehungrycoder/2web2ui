@@ -10,22 +10,21 @@ export default requestHelperFactory({
     if (!response.data.success) {
       const message = _.get(response, 'data.reasons[0].message', 'An error occurred while contacting the billing service');
       const sanitizedMessage = stripTags(message); // some messages include html tags
+      const error = new Error(sanitizedMessage);
+      error.name = 'ZuoraApiError';
+      error.response = response;
 
       dispatch({
         type: types.FAIL,
-        payload: { message: sanitizedMessage, response },
+        payload: { error, message: sanitizedMessage, response },
         meta
       });
-
-      const err = new Error(sanitizedMessage);
-      err.name = 'ZuoraApiError';
-      err.response = response;
 
       // auto alert all errors
       dispatch(showAlert({ type: 'error', message: sanitizedMessage }));
 
       // TODO: 'return' err once we unchain all actions
-      throw err;
+      throw error;
     }
 
     dispatch({

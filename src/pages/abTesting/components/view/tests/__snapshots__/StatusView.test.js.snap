@@ -1,0 +1,92 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Status View Component should render a default winning template correctly 1`] = `
+<Panel>
+  <Panel.Section>
+    <LabelledValue
+      label="Winner"
+    >
+      <h6>
+        default
+      </h6>
+      <p
+        className="HelpText"
+      >
+        No winner was found.
+      </p>
+    </LabelledValue>
+  </Panel.Section>
+</Panel>
+`;
+
+exports[`Status View Component should render correctly 1`] = `
+<React.Fragment>
+  <Panel
+    sectioned={true}
+  >
+    <LabelledValue
+      label="Start Date"
+    >
+      <p>
+        2018-05-00T12:00:00.000Z
+      </p>
+    </LabelledValue>
+    <LabelledValue
+      label="End Date"
+    >
+      <p>
+        2018-05-55T12:00:00.000Z
+      </p>
+    </LabelledValue>
+  </Panel>
+  <Winner
+    test={
+      Object {
+        "default_template": Object {
+          "template_id": "default",
+        },
+        "end_time": "2018-05-55T12:00:00.000Z",
+        "start_time": "2018-05-00T12:00:00.000Z",
+        "test_mode": "bayesian",
+        "winning_template_id": "winner",
+      }
+    }
+  />
+</React.Fragment>
+`;
+
+exports[`Status View Component should render winning template in bayesian mode correctly 1`] = `
+<Panel>
+  <Panel.Section>
+    <LabelledValue
+      label="Winner"
+    >
+      <h6>
+        winner
+      </h6>
+      <p
+        className="HelpText"
+      >
+        This variant is now being sent by default.
+      </p>
+    </LabelledValue>
+  </Panel.Section>
+</Panel>
+`;
+
+exports[`Status View Component should render winning template in learning mode correctly 1`] = `
+<Panel>
+  <Panel.Section>
+    <LabelledValue
+      label="Winner"
+    >
+      <h6>
+        winner
+      </h6>
+      <p
+        className="HelpText"
+      />
+    </LabelledValue>
+  </Panel.Section>
+</Panel>
+`;

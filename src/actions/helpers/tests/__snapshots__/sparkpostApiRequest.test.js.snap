@@ -18,6 +18,7 @@ Array [
       "url": "/some/path",
     },
     "payload": Object {
+      "error": [SparkpostApiError: API call failed],
       "message": "API call failed",
       "response": Object {
         "data": Object {
@@ -51,6 +52,7 @@ Array [
       "url": "/some/path",
     },
     "payload": Object {
+      "error": [SparkpostApiError: API call failed],
       "message": "API call failed",
       "response": Object {
         "data": Object {
@@ -87,6 +89,7 @@ Array [
       "url": "/some/path",
     },
     "payload": Object {
+      "error": [SparkpostApiError: API call failed],
       "message": "API call failed",
       "response": Object {
         "data": Object {
@@ -120,6 +123,7 @@ Array [
       "url": "/some/path",
     },
     "payload": Object {
+      "error": [SparkpostApiError: API call failed],
       "message": "API call failed",
       "response": Object {
         "data": Object {
@@ -155,6 +159,7 @@ Array [
       "url": "/some/path",
     },
     "payload": Object {
+      "error": [SparkpostApiError: API call failed],
       "message": "API call failed",
       "response": Object {
         "data": Object {
@@ -185,6 +190,7 @@ Array [
       "url": "/some/path",
     },
     "payload": Object {
+      "error": [SparkpostApiError: API call failed],
       "message": "API call failed",
       "response": Object {
         "data": Object {
@@ -274,6 +280,7 @@ Array [
       "retries": 3,
     },
     "payload": Object {
+      "error": [SparkpostApiError: API call failed],
       "message": "API call failed",
       "response": Object {
         "data": Object {
@@ -329,6 +336,7 @@ Array [
       "retries": 3,
     },
     "payload": Object {
+      "error": [SparkpostApiError: API call failed],
       "message": "API call failed",
       "response": Object {
         "data": Object {

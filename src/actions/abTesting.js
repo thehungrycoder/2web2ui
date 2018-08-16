@@ -94,9 +94,9 @@ export function updateDraft({ data, id, subaccountId }) {
   });
 }
 
-export function updateAbTest({ data, id, subaccountId }) {
+export function updateAbTest({ data, id, subaccountId, type = 'UPDATE_AB_TEST' }) {
   return sparkpostApiRequest({
-    type: 'UPDATE_AB_TEST',
+    type,
     meta: {
       method: 'PUT',
       url: `/ab-test/${id}`,
@@ -104,4 +104,8 @@ export function updateAbTest({ data, id, subaccountId }) {
       data
     }
   });
+}
+
+export function rescheduleAbTest({ data, id, subaccountId }) {
+  return updateAbTest({ data, id, subaccountId, type: 'RESCHEDULE_AB_TEST' });
 }

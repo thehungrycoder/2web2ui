@@ -1,6 +1,6 @@
 import cases from 'jest-in-case';
 import ErrorTracker, {
-  breadcrumbCallback, getEnricherOrDieTryin, isApiError, isErrorFromOurBundle
+  breadcrumbCallback, getEnricherOrDieTryin, isApiError, isErrorFromOurBundle, isChunkFailure
 } from '../errorTracker';
 import * as mockRaven from 'raven-js';
 
@@ -70,6 +70,15 @@ cases('.getEnricherOrDieTryin', ({ currentWindow = {}, data = {}, state = {}}) =
         type: 'SparkpostApiError'
       }
     }
+  },
+  'with chunk loading error': {
+    data: {
+      exception: {
+        values: [{
+          value: 'Loading chunk 4 failed.'
+        }]
+      }
+    }
   }
 });
 
@@ -108,6 +117,32 @@ describe('.isApiError', () => {
     };
 
     expect(isApiError(data)).toEqual(false);
+  });
+});
+
+describe('.isChunkFailure', () => {
+  it('returns true with a chunk loading error', () => {
+    const data = {
+      exception: {
+        values: [{
+          value: 'Loading chunk 5 failed.'
+        }]
+      }
+    };
+
+    expect(isChunkFailure(data)).toEqual(true);
+  });
+
+  it('returns false with another error', () => {
+    const data = {
+      exception: {
+        values: [{
+          value: 'Network Error'
+        }]
+      }
+    };
+
+    expect(isChunkFailure(data)).toEqual(false);
   });
 });
 

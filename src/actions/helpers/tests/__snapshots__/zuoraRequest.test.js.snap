@@ -9,6 +9,7 @@ Array [
   Object {
     "meta": Object {},
     "payload": Object {
+      "error": [ZuoraApiError: The credit card is bad and wrong],
       "message": "The credit card is bad and wrong",
       "response": Object {
         "data": Object {
