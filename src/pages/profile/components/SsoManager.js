@@ -8,7 +8,7 @@ import styles from './SsoManager.module.scss';
 
 const GreenCheck = () => <Check size={24} className={styles.GreenCheck}/>;
 
-const ProvisioningForm = ({ onProvision }) => <Grid top='xs'>
+const ProvisioningForm = ({ onProvision }) => <Grid top='xs' xs={9}>
   <Grid.Column>
     <FileFieldWrapper
       filetype='xml'
@@ -40,7 +40,16 @@ export default class SsoManager extends Component {
   render() {
     const { provisioned, enabled, hasSsoUsers } = this.state;
 
-    return <Panel sectioned title='SAML Single Sign-On'>
+    const actions = [
+      {
+        content: 'Learn More',
+        to: '#',
+        external: true,
+        color: 'orange'
+      }
+    ];
+
+    return <Panel sectioned title='SAML Single Sign-On' actions={actions}>
       <Panel.Section>
         <Grid>
           <Grid.Column xs={3}>
