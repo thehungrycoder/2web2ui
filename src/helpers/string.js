@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { newlineStrRegex, spacesRegex } from './regex';
 
-export function snakeToFriendly(string) {
+export function snakeToFriendly(string = '') {
   return string
     .charAt(0).toUpperCase() + string.slice(1)
     .replace(/(_\w)/g, (matches) => ` ${matches[1].toUpperCase()}`);

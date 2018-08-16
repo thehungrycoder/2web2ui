@@ -7,6 +7,7 @@ import { Save } from '@sparkpost/matchbox-icons';
 import Section from './components/Section';
 import StatusPanel from './components/StatusPanel';
 import { StatusContent, SettingsContent, VariantsContent } from './components/content';
+import { StatusView, SettingsView, VariantsView } from './components/view';
 import { ConfirmationModal } from 'src/components';
 import { updateDraft } from 'src/actions/abTesting';
 import { showAlert } from 'src/actions/globalAlert';
@@ -61,11 +62,11 @@ export class ViewMode extends Component {
 
   handleOverride = () => {
     const { id, version } = this.props.test;
-    const { subaccountId } = this.props;
+    const { subaccountId, updateDraft, showAlert, history } = this.props;
 
-    return this.props.updateDraft({}, { id, subaccountId }).then(() => {
-      this.props.showAlert({ type: 'success', message: 'Test overridden' });
-      this.props.history.push(`/ab-testing/${id}/${version + 1}${setSubaccountQuery(subaccountId)}`);
+    return updateDraft({}, { id, subaccountId }).then(() => {
+      showAlert({ type: 'success', message: 'Test overridden' });
+      history.push(`/ab-testing/${id}/${version + 1}${setSubaccountQuery(subaccountId)}`);
     });
   }
 
@@ -86,6 +87,7 @@ export class ViewMode extends Component {
           </Section.Left>
           <Section.Right>
             <StatusPanel test={test} subaccountId={subaccountId} />
+            <StatusView test={test} />
           </Section.Right>
         </Section>
 
@@ -94,7 +96,7 @@ export class ViewMode extends Component {
             <SettingsContent test={test} />
           </Section.Left>
           <Section.Right>
-
+            <SettingsView test={test} />
           </Section.Right>
         </Section>
 
@@ -103,7 +105,7 @@ export class ViewMode extends Component {
             <VariantsContent test={test} />
           </Section.Left>
           <Section.Right>
-
+            <VariantsView test={test} />
           </Section.Right>
         </Section>
 
