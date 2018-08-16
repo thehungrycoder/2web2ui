@@ -79,7 +79,7 @@ export const formatNumber = (value) => {
   let suffix = '';
 
   const formatters = {
-    'G': BILLION,
+    'B': BILLION,
     'M': MILLION,
     'K': 1000
   };
