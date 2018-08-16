@@ -68,7 +68,7 @@ export default class AppDatePicker extends Component {
     const fromFormatter = this.props.fromSelectsNextHour ? getNextHour : getStartOfDay;
     const dates = selecting
       ? selected
-      : { from: fromFormatter(clicked), to: getEndOfDay(clicked, { preventFuture: true }) };
+      : { from: fromFormatter(clicked), to: getEndOfDay(clicked, { preventFuture: this.props.preventFuture }) };
 
     this.setState({
       selected: dates,
@@ -89,7 +89,7 @@ export default class AppDatePicker extends Component {
     let { from, to } = this.state.beforeSelected;
 
     if (from.getTime() <= newDate.getTime()) {
-      to = getEndOfDay(newDate, { preventFuture: true });
+      to = getEndOfDay(newDate, { preventFuture: this.props.preventFuture });
     } else {
       from = getStartOfDay(newDate);
     }
@@ -214,5 +214,6 @@ AppDatePicker.propTypes = {
 };
 
 AppDatePicker.defaultProps = {
-  roundToPrecision: true
+  roundToPrecision: true,
+  preventFuture: true
 };

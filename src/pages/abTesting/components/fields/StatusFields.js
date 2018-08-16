@@ -24,6 +24,7 @@ const StatusFields = ({ disabled }) => (
         left
         showPresets={false}
         roundToPrecision={false}
+        preventFuture={false}
         fromSelectsNextHour={true}
         validate={[abTestDuration, startTimeAfterNow]}
         textFieldProps={{
