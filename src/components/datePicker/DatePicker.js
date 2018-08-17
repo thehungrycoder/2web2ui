@@ -65,11 +65,9 @@ export default class AppDatePicker extends Component {
 
   handleDayClick = (clicked) => {
     const { selecting, selected } = this.state;
-    const isClickedToday = isSameDate(getStartOfDay(clicked), getStartOfDay(new Date()));
-    const fromFormatter = (this.props.fromSelectsNextHour && isClickedToday) ? getNextHour : getStartOfDay;
     const dates = selecting
       ? selected
-      : { from: fromFormatter(clicked), to: getEndOfDay(clicked, { preventFuture: this.props.preventFuture }) };
+      : { from: this.fromFormatter(clicked), to: getEndOfDay(clicked, { preventFuture: this.props.preventFuture }) };
 
     this.setState({
       selected: dates,
@@ -88,13 +86,11 @@ export default class AppDatePicker extends Component {
 
   getOrderedRange(newDate) {
     let { from, to } = this.state.beforeSelected;
-    const isNewDateToday = isSameDate(getStartOfDay(newDate), getStartOfDay(new Date()));
-    const fromFormatter = (this.props.fromSelectsNextHour && isNewDateToday) ? getNextHour : getStartOfDay;
 
     if (from.getTime() <= newDate.getTime()) {
       to = getEndOfDay(newDate, { preventFuture: this.props.preventFuture });
     } else {
-      from = fromFormatter(newDate);
+      from = this.fromFormatter(newDate);
     }
 
     if (this.props.roundToPrecision) {
@@ -129,6 +125,12 @@ export default class AppDatePicker extends Component {
     if (this.props.onBlur) {
       this.props.onBlur();
     }
+  }
+
+  fromFormatter = (fromDate) => {
+    const isDateToday = isSameDate(getStartOfDay(fromDate), getStartOfDay(new Date()));
+    const formatter = (this.props.fromSelectsNextHour && isDateToday) ? getNextHour : getStartOfDay;
+    return formatter(fromDate);
   }
 
   render() {
