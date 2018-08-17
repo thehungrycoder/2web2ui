@@ -3,6 +3,8 @@ import Raven from 'raven-js';
 import createRavenMiddleware from 'raven-for-redux';
 import bowser from 'bowser';
 
+const browser = bowser.getParser(window.navigator.userAgent);
+
 /**
  * List of breadcrumbs to ignore to reduce noise
  * @note Sentry has a 100 breadcrumb per event/error maximum
@@ -47,11 +49,13 @@ export function getEnricherOrDieTryin(store, currentWindow) {
     const fromOurBundle = isErrorFromOurBundle(data);
     const apiError = isApiError(data);
     const chunkFailure = isChunkFailure(data);
-    const isSupportedBrowser = isErrorInSupportedBrowser(data);
+
+    /*global SUPPORTED_BROWSERS*/
+    const isSupportedBrowser = browser.satisfies(SUPPORTED_BROWSERS); //Refer to docs/browser-support-sentry-issue.md for more info)
 
     return {
       ...data,
-      level: !fromOurBundle || apiError || chunkFailure  || !isSupportedBrowser? 'warning' : 'error',
+      level: !fromOurBundle || apiError || chunkFailure || !isSupportedBrowser ? 'warning' : 'error',
       tags: { // all tags can be easily searched and sent in Slack notifications
         ...data.tags,
         customer: _.get(user, 'customer'),
@@ -94,12 +98,6 @@ export function isChunkFailure(data) {
   const value = _.get(data, 'exception.values[0].value');
 
   return looksLikeChunkFailure.test(value);
-}
-
-export function isErrorInSupportedBrowser(data) {
-  const browser = bowser.getParser(window.navigator.userAgent);
-  /*global SUPPORTED_BROWSERS*/
-  return browser.satisfies(SUPPORTED_BROWSERS); //SUPPORTED_BROWSERS will be replaced by webpack during build
 }
 
 // The purpose of this helper is to provide a common interface for reporting errors
