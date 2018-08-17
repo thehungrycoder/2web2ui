@@ -18,6 +18,7 @@ Object {
     "template_id": "template_one",
   },
   "end_time": "2018-08-09T12:00:00.978Z",
+  "engagement_timeout": 24,
   "name": "test_one",
   "start_time": "2018-08-00T12:00:00.978Z",
   "test_mode": "learning",
@@ -35,25 +36,29 @@ Object {
 }
 `;
 
-exports[`A/B testing helper formatFormValues should omit sample size if using percent 1`] = `
+exports[`A/B testing helper formatFormValues should omit total sample size if using percent 1`] = `
 Object {
   "audience_selection": "percent",
   "confidence_level": 0.91,
   "default_template": Object {
-    "sample_size": 200,
+    "percent": 50,
+    "sample_size": "200",
     "template_id": "template_one",
   },
   "end_time": "2018-08-09T12:00:00.978Z",
+  "engagement_timeout": 24,
   "name": "test_one",
   "start_time": "2018-08-00T12:00:00.978Z",
   "test_mode": "bayesian",
   "variants": Array [
     Object {
-      "sample_size": 200,
+      "percent": 25,
+      "sample_size": "200",
       "template_id": "template_two",
     },
     Object {
-      "sample_size": 200,
+      "percent": 25,
+      "sample_size": "200",
       "template_id": "template_three",
     },
   ],
