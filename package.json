@@ -73,7 +73,7 @@
     "react-chartjs-2": "^2.1.0",
     "react-day-picker": "^7.1.10",
     "react-dom": "^16.3.2",
-    "react-dropzone": "^4.2.3",
+    "react-dropzone": "^5.0.0",
     "react-helmet": "^5.2.0",
     "react-instantsearch": "^5.0.1",
     "react-load-script": "0.0.6",
