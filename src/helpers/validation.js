@@ -53,8 +53,8 @@ export function startTimeAfterNow(value) {
   return isStartTimeAfterNow(value) ? undefined : 'Start date cannot be in the past';
 }
 
-export function startTimeAfterEndTime(value) {
-  return getDuration(value, 'minutes') > 0 ? undefined : 'Start date must be after end date';
+export function startTimeBeforeEndTime(value) {
+  return getDuration(value, 'minutes') > 0 ? undefined : 'Start date must be before end date';
 }
 
 export function hasNumber(value) {

@@ -39,6 +39,10 @@ const cases = {
     good: [{ from: '2040-08-20T19:50:00.000Z' }],
     bad: [{ from: '2000-08-20T19:50:00.000Z' }]
   },
+  startTimeBeforeEndTime: {
+    good: [{ from: '2000-08-20T19:50:00.000Z', to: '2040-08-20T19:50:00.000Z' }],
+    bad: [{ from: '2040-08-20T19:50:00.000Z', to: '2000-08-20T19:50:00.000Z' }]
+  },
   abTestId: {
     good: ['id', 'test-id', 'test_1', '1'],
     bad: ['test.id', 'NOT_!@#$%^&*()_VALID', 'test id', ':doge:']
@@ -49,7 +53,10 @@ const cases = {
     multiArg: true
   },
   abTestDuration: {
-    good: [[{ from: '2018-08-20T19:50:00.000Z', to: '2018-08-21T19:50:00.000Z' }, { engagement_timeout: 24 }]],
+    good: [
+      [{ from: '2018-08-20T19:50:00.000Z', to: '2018-08-21T19:50:00.000Z' }, { engagement_timeout: 24 }],
+      [{ from: '2018-08-20T19:50:00.000Z', to: '2018-08-21T19:50:00.000Z' }, { engagement_timeout: '24' }]
+    ],
     bad: [
       [{ from: '2018-08-20T19:50:00.000Z', to: '2019-08-21T19:50:00.000Z' }, { engagement_timeout: 24 }],
       [{ from: '2018-08-20T19:50:00.000Z', to: '2018-08-21T19:50:00.000Z' }, { engagement_timeout: 2400 }]

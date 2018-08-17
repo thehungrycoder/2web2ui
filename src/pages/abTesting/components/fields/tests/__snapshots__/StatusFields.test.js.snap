@@ -52,6 +52,7 @@ exports[`Status Fields Component should disable fields correctly 1`] = `
         Array [
           [Function],
           [Function],
+          [Function],
         ]
       }
     />
@@ -107,6 +108,7 @@ exports[`Status Fields Component should render correctly 1`] = `
       }
       validate={
         Array [
+          [Function],
           [Function],
           [Function],
         ]
