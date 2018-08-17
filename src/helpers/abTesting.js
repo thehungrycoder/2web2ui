@@ -6,7 +6,6 @@ import _ from 'lodash';
 export const formatFormValues = ({ default_template, variants, dates, ...rest }) => {
   let values = rest;
 
-
   if (values.test_mode === 'learning') {
     values = _.omit(values, 'confidence_level');
   } else {
