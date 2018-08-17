@@ -51,6 +51,18 @@ describe('Variants Fields Component', () => {
       expect(fieldArray).toMatchSnapshot();
     });
 
+    it('should render 1 field with disabled remove button', () => {
+      fieldArrayProps.fields.pop();
+      fieldArray = shallow(<RenderVariants {...fieldArrayProps} />);
+      expect(fieldArray).toMatchSnapshot();
+    });
+
+    it('should render 20 fields with disabled add button', () => {
+      fieldArrayProps.fields.length = 20;
+      fieldArray = shallow(<RenderVariants {...fieldArrayProps} />);
+      expect(fieldArray).toMatchSnapshot();
+    });
+
     it('should render fields correctly with sample size fields', () => {
       fieldArray.setProps({ formValues: { audience_selection: 'sample_size' }});
       expect(fieldArray).toMatchSnapshot();

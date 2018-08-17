@@ -8,25 +8,25 @@ describe('A/B testing helper', () => {
       values = {
         name: 'test_one',
         test_mode: 'bayesian',
-        confidence_level: '0.91',
+        confidence_level: 0.91,
         audience_selection: 'sample_size',
-        total_sample_size: '100',
+        total_sample_size: 100,
         dates: {
           from: '2018-08-00T12:00:00.978Z',
           to: '2018-08-09T12:00:00.978Z'
         },
         default_template: {
           template_object: { id: 'template_one', should_not: 'be passed through' },
-          sample_size: '200'
+          sample_size: 200
         },
         variants: [
           {
             template_object: { id: 'template_two', should_not: 'be passed through' },
-            sample_size: '200'
+            sample_size: 200
           },
           {
             template_object: { id: 'template_three', should_not: 'be passed through' },
-            sample_size: '200'
+            sample_size: 200
           }
         ]
       };
@@ -45,7 +45,7 @@ describe('A/B testing helper', () => {
 
   describe('reduceTemplateObject', () => {
     it('should pass through template id', () => {
-      expect(helpers.reduceTemplateObject({ template_id: 'template_two', sample_size: '500' })).toMatchSnapshot();
+      expect(helpers.reduceTemplateObject({ template_id: 'template_two', sample_size: 500 })).toMatchSnapshot();
     });
 
     it('should handle an undefined template', () => {
@@ -60,7 +60,14 @@ describe('A/B testing helper', () => {
         { id: 'template_two', full: 'template 2' },
         { id: 'template_thre', full: 'template 3' }
       ];
-      expect(helpers.findTemplateObject(templates, { template_id: 'template_two', sample_size: '500' })).toMatchSnapshot();
+      expect(helpers.findTemplateObject(templates, { template_id: 'template_two', sample_size: 500 })).toMatchSnapshot();
+    });
+  });
+
+  describe('calculateTotalSampleSize', () => {
+    it('should calculate the total sample size of default_template + variants', () => {
+      const testMock = { default_template: { sample_size: 100 }, variants: [{ sample_size: 100 },{ sample_size: 100 }]};
+      expect(helpers.calculateTotalSampleSize(testMock)).toEqual(300);
     });
   });
 });

@@ -1,12 +1,15 @@
 import {
   getEndOfDay,
   getStartOfDay,
+  getNextHour,
   getRelativeDates,
   getRelativeDateOptions,
+  getDuration,
   formatDate,
   formatTime,
   formatDateTime,
   isSameDate,
+  isStartTimeAfterNow,
   getLocalTimezone,
   formatInputDate,
   formatInputTime,
@@ -42,6 +45,14 @@ describe('Date helpers', () => {
     const startOfDay = new Date('2017-12-18T00:00:00.000');
     expect(getStartOfDay('2017-12-18T00:01:59')).toEqual(startOfDay);
     expect(getStartOfDay('2017-12-18T23:59:59')).toEqual(startOfDay);
+  });
+
+  it('should get start of next hour', () => {
+    const now = new Date('2017-12-18T04:20:00');
+    const nextHour = new Date('2017-12-18T05:00:00');
+    Date.now = jest.fn(() => now);
+    expect(getNextHour('2017-12-18T00:00:00')).toEqual(nextHour);
+    expect(getNextHour('2017-12-18T12:34:56')).toEqual(nextHour);
   });
 
   it('should compare two dates', () => {
@@ -273,6 +284,26 @@ describe('Date helpers', () => {
 
     it('returns valid time for 24-hour with am/pm', () => {
       expect(parseDatetime('2018-01-01 14:00am')).toBeValid();
+    });
+  });
+
+  describe('getDuration', () => {
+    it('returns the duration between two dates in hours', () => {
+      expect(getDuration({ from: '2017-12-18T00:00:00', to: '2017-12-19T00:00:00' })).toEqual(24);
+    });
+
+    it('returns the duration between two dates in days', () => {
+      expect(getDuration({ from: '2017-12-18T00:00:00', to: '2017-12-19T00:00:00' }, 'days')).toEqual(1);
+    });
+  });
+
+  describe('isStartTimeAfterNow', () => {
+    it('returns false if start time is before now', () => {
+      expect(isStartTimeAfterNow({ from: '2000-12-18T00:00:00' })).toEqual(false);
+    });
+
+    it('returns true if start time is after now', () => {
+      expect(isStartTimeAfterNow({ from: '2040-12-18T00:00:00' })).toEqual(true);
     });
   });
 });

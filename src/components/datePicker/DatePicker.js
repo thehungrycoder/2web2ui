@@ -1,7 +1,7 @@
-/* eslint max-lines: ["error", 200] */
+/* eslint max-lines: ["error", 225] */
 import React, { Component } from 'react';
 import { subMonths, format } from 'date-fns';
-import { getStartOfDay, getEndOfDay, getRelativeDateOptions } from 'src/helpers/date';
+import { getStartOfDay, getEndOfDay, getRelativeDateOptions, getNextHour, isSameDate } from 'src/helpers/date';
 import { roundBoundaries } from 'src/helpers/metrics';
 import { Button, TextField, Select, Popover, WindowEvent } from '@sparkpost/matchbox';
 import DateSelector from 'src/components/dateSelector/DateSelector';
@@ -67,7 +67,7 @@ export default class AppDatePicker extends Component {
     const { selecting, selected } = this.state;
     const dates = selecting
       ? selected
-      : { from: getStartOfDay(clicked), to: getEndOfDay(clicked, { preventFuture: true }) };
+      : { from: this.fromFormatter(clicked), to: getEndOfDay(clicked, { preventFuture: this.props.preventFuture }) };
 
     this.setState({
       selected: dates,
@@ -88,9 +88,9 @@ export default class AppDatePicker extends Component {
     let { from, to } = this.state.beforeSelected;
 
     if (from.getTime() <= newDate.getTime()) {
-      to = getEndOfDay(newDate, { preventFuture: true });
+      to = getEndOfDay(newDate, { preventFuture: this.props.preventFuture });
     } else {
-      from = getStartOfDay(newDate);
+      from = this.fromFormatter(newDate);
     }
 
     if (this.props.roundToPrecision) {
@@ -121,6 +121,18 @@ export default class AppDatePicker extends Component {
     this.props.onChange({ ...this.state.selected, relativeRange: 'custom' });
   }
 
+  handleTextUpdate = () => {
+    if (this.props.onBlur) {
+      this.props.onBlur();
+    }
+  }
+
+  fromFormatter = (fromDate) => {
+    const isDateToday = isSameDate(getStartOfDay(fromDate), getStartOfDay(new Date()));
+    const formatter = (this.props.fromSelectsNextHour && isDateToday) ? getNextHour : getStartOfDay;
+    return formatter(fromDate);
+  }
+
   render() {
     const { selected: { from, to }, showDatePicker } = this.state;
     const selectedRange = showDatePicker ? 'custom' : this.props.relativeRange;
@@ -135,6 +147,7 @@ export default class AppDatePicker extends Component {
       dateFieldFormat,
       roundToPrecision,
       showPresets = true,
+      error,
       left
     } = this.props;
     const dateFormat = dateFieldFormat || this.DATE_FORMAT;
@@ -152,6 +165,8 @@ export default class AppDatePicker extends Component {
       connectLeft={rangeSelect}
       value={`${format(from, dateFormat)} – ${format(to, dateFormat)}`}
       readOnly
+      onBlur={this.handleTextUpdate}
+      error={error}
       disabled={disabled}
       {...textFieldProps} />;
 
@@ -204,5 +219,6 @@ AppDatePicker.propTypes = {
 };
 
 AppDatePicker.defaultProps = {
-  roundToPrecision: true
+  roundToPrecision: true,
+  preventFuture: true
 };

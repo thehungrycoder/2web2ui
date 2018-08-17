@@ -40,6 +40,16 @@ describe('Action Creator: A/B Testing', () => {
     expect(mockStore.getActions()).toMatchSnapshot();
   });
 
+  it('should dispatch a schedule test action', () => {
+    mockStore.dispatch(abTesting.scheduleAbTest({ data: 'data', id: 'test_one', subaccountId: 101 }));
+    expect(mockStore.getActions()).toMatchSnapshot();
+  });
+
+  it('should dispatch an update test action', () => {
+    mockStore.dispatch(abTesting.updateAbTest({ data: 'data', id: 'test_one', subaccountId: 101 }));
+    expect(mockStore.getActions()).toMatchSnapshot();
+  });
+
   it('should dispatch a get latest test version action without subaccount', () => {
     mockStore.dispatch(abTesting.getLatestAbTest({ id: 'test_one' }));
     expect(mockStore.getActions()).toMatchSnapshot();
@@ -51,22 +61,22 @@ describe('Action Creator: A/B Testing', () => {
   });
 
   it('should dispatch an update draft action without subaccount', () => {
-    mockStore.dispatch(abTesting.updateDraft('data', { id: 'test_one' }));
+    mockStore.dispatch(abTesting.updateDraft({ data: 'data', id: 'test_one' }));
     expect(mockStore.getActions()).toMatchSnapshot();
   });
 
   it('should dispatch an update draft action with subaccount', () => {
-    mockStore.dispatch(abTesting.updateDraft('data', { id: 'test_one', subaccountId: 101 }));
+    mockStore.dispatch(abTesting.updateDraft({ data: 'data', id: 'test_one', subaccountId: 101 }));
     expect(mockStore.getActions()).toMatchSnapshot();
   });
 
   it('should dispatch an update scheduled action', () => {
-    mockStore.dispatch(abTesting.updateScheduled('data', { id: 'test_one', subaccountId: 101 }));
+    mockStore.dispatch(abTesting.updateAbTest({ data: 'data', id: 'test_one', subaccountId: 101 }));
     expect(mockStore.getActions()).toMatchSnapshot();
   });
 
   it('should dispatch an reschedule action', () => {
-    mockStore.dispatch(abTesting.rescheduleAbTest('data', { id: 'test_one', subaccountId: 101 }));
+    mockStore.dispatch(abTesting.rescheduleAbTest({ data: 'data', id: 'test_one', subaccountId: 101 }));
     expect(mockStore.getActions()).toMatchSnapshot();
   });
 });
