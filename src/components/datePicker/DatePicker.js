@@ -88,11 +88,13 @@ export default class AppDatePicker extends Component {
 
   getOrderedRange(newDate) {
     let { from, to } = this.state.beforeSelected;
+    const isNewDateToday = isSameDate(getStartOfDay(newDate), getStartOfDay(new Date()));
+    const fromFormatter = (this.props.fromSelectsNextHour && isNewDateToday) ? getNextHour : getStartOfDay;
 
     if (from.getTime() <= newDate.getTime()) {
       to = getEndOfDay(newDate, { preventFuture: this.props.preventFuture });
     } else {
-      from = getStartOfDay(newDate);
+      from = fromFormatter(newDate);
     }
 
     if (this.props.roundToPrecision) {

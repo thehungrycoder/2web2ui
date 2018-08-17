@@ -37,6 +37,7 @@ describe('Component: DatePicker', () => {
     dateHelpers.getStartOfDay = jest.fn(() => 'start-of-day');
     dateHelpers.getNextHour = jest.fn(() => 'next-hour');
     dateHelpers.getEndOfDay = jest.fn(() => 'end-of-day');
+    dateHelpers.isSameDate = jest.fn(() => false);
     metricsHelpers.roundBoundaries = jest.fn(() => ({ from: moment(mockFrom), to: moment(mockNow) }));
     dateHelpers.getRelativeDateOptions = jest.fn(() => [1, 2, 3]);
     datefns.format = jest.fn((a,b) => b);
@@ -178,7 +179,7 @@ describe('Component: DatePicker', () => {
       const mockSelected = {};
       wrapper.setState({ selecting: true, selected: mockSelected, beforeSelected: null });
       instance.handleDayClick();
-      expect(dateHelpers.getStartOfDay).not.toHaveBeenCalled();
+      expect(dateHelpers.getStartOfDay).toHaveBeenCalledTimes(2);
       expect(wrapper.state('selected')).toBe(mockSelected);
       expect(wrapper.state('beforeSelected')).toBe(mockSelected);
       expect(wrapper.state('selecting')).toEqual(false);
@@ -194,6 +195,7 @@ describe('Component: DatePicker', () => {
       instance.handleDayClick(mockClicked);
 
       expect(dateHelpers.getStartOfDay).toHaveBeenCalledWith(mockClicked);
+      expect(dateHelpers.getStartOfDay).toHaveBeenCalledTimes(3);
       expect(dateHelpers.getEndOfDay).toHaveBeenCalledWith(mockClicked, { preventFuture: true });
       expect(wrapper.state('selected')).toEqual(mockNewSelected);
       expect(wrapper.state('beforeSelected')).toEqual(mockNewSelected);
@@ -204,12 +206,16 @@ describe('Component: DatePicker', () => {
       const mockSelected = {};
       const mockClicked = {};
 
+      dateHelpers.isSameDate = jest.fn(() => true);
+
       wrapper.setProps({ fromSelectsNextHour: true });
       wrapper.setState({ selecting: false, selected: mockSelected, beforeSelected: null });
       const mockNewSelected = { from: 'next-hour', to: 'end-of-day' };
 
       instance.handleDayClick(mockClicked);
 
+      expect(dateHelpers.getStartOfDay).toHaveBeenCalledWith(mockClicked);
+      expect(dateHelpers.getStartOfDay).toHaveBeenCalledTimes(2);
       expect(dateHelpers.getNextHour).toHaveBeenCalledWith(mockClicked);
       expect(dateHelpers.getEndOfDay).toHaveBeenCalledWith(mockClicked, { preventFuture: true });
       expect(wrapper.state('selected')).toEqual(mockNewSelected);
@@ -258,12 +264,12 @@ describe('Component: DatePicker', () => {
       const range = instance.getOrderedRange(newDate);
 
       expect(dateHelpers.getEndOfDay).toHaveBeenCalledWith(newDate, { preventFuture: true });
-      expect(dateHelpers.getStartOfDay).not.toHaveBeenCalled();
+      expect(dateHelpers.getStartOfDay).toHaveBeenCalledTimes(2);
       expect(metricsHelpers.roundBoundaries).toHaveBeenCalledWith(from, 'end-of-day');
       expect(range).toEqual({ from: moment(mockFrom).toDate(), to: moment(mockNow).toDate() });
     });
 
-    it('should return correct range when new date is before from and to', () => {
+    it('should return correct range when new date is before from and to (start of day)', () => {
       const newDate = new Date('2018-01-01');
       const from = new Date('2018-01-02');
       const to = new Date('2018-01-03');
@@ -273,7 +279,26 @@ describe('Component: DatePicker', () => {
 
       expect(dateHelpers.getEndOfDay).not.toHaveBeenCalled();
       expect(dateHelpers.getStartOfDay).toHaveBeenCalledWith(newDate);
+      expect(dateHelpers.getStartOfDay).toHaveBeenCalledTimes(3);
       expect(metricsHelpers.roundBoundaries).toHaveBeenCalledWith('start-of-day', to);
+      expect(range).toEqual({ from: moment(mockFrom).toDate(), to: moment(mockNow).toDate() });
+    });
+
+    it('should return correct range when new date is before from and to (next hour)', () => {
+      const newDate = new Date('2018-01-01');
+      const from = new Date('2018-01-02');
+      const to = new Date('2018-01-03');
+
+      dateHelpers.isSameDate = jest.fn(() => true);
+
+      wrapper.setProps({ fromSelectsNextHour: true });
+      wrapper.setState({ beforeSelected: { from, to }});
+      const range = instance.getOrderedRange(newDate);
+
+      expect(dateHelpers.getEndOfDay).not.toHaveBeenCalled();
+      expect(dateHelpers.getNextHour).toHaveBeenCalledWith(newDate);
+      expect(dateHelpers.getStartOfDay).toHaveBeenCalledTimes(2);
+      expect(metricsHelpers.roundBoundaries).toHaveBeenCalledWith('next-hour', to);
       expect(range).toEqual({ from: moment(mockFrom).toDate(), to: moment(mockNow).toDate() });
     });
 
@@ -286,7 +311,7 @@ describe('Component: DatePicker', () => {
       const range = instance.getOrderedRange(newDate);
 
       expect(dateHelpers.getEndOfDay).toHaveBeenCalledWith(newDate, { preventFuture: true });
-      expect(dateHelpers.getStartOfDay).not.toHaveBeenCalled();
+      expect(dateHelpers.getStartOfDay).toHaveBeenCalledTimes(2);
       expect(metricsHelpers.roundBoundaries).toHaveBeenCalledWith(from, 'end-of-day');
       expect(range).toEqual({ from: moment(mockFrom).toDate(), to: moment(mockNow).toDate() });
     });
@@ -300,7 +325,7 @@ describe('Component: DatePicker', () => {
       const range = instance.getOrderedRange(newDate);
 
       expect(dateHelpers.getEndOfDay).toHaveBeenCalledWith(newDate, { preventFuture: true });
-      expect(dateHelpers.getStartOfDay).not.toHaveBeenCalled();
+      expect(dateHelpers.getStartOfDay).toHaveBeenCalledTimes(2);
       expect(metricsHelpers.roundBoundaries).toHaveBeenCalledWith(from, 'end-of-day');
       expect(range).toEqual({ from: moment(mockFrom).toDate(), to: moment(mockNow).toDate() });
     });
