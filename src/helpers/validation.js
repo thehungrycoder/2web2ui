@@ -36,7 +36,7 @@ export function abTestDefaultTemplate(value, formValues, props) {
 }
 
 export function abTestDuration(value, formValues) {
-  const testDuration = getDuration(value) + (formValues.engagement_timeout || 24);
+  const testDuration = getDuration(value) + (parseInt(formValues.engagement_timeout, 10) || 24);
   return testDuration > 720 ? 'Test duration + engagement timeout must be 30 days or less' : undefined;
 }
 
@@ -51,6 +51,10 @@ export function abTestDistribution(value, formValues) {
 
 export function startTimeAfterNow(value) {
   return isStartTimeAfterNow(value) ? undefined : 'Start date cannot be in the past';
+}
+
+export function startTimeAfterEndTime(value) {
+  return getDuration(value, 'minutes') > 0 ? undefined : 'Start date must be after end date';
 }
 
 export function hasNumber(value) {
