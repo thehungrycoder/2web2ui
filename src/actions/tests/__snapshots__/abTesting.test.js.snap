@@ -135,6 +135,22 @@ Array [
 ]
 `;
 
+exports[`Action Creator: A/B Testing should dispatch a schedule test action 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "data": "data",
+      "headers": Object {
+        "x-msys-subaccount": 101,
+      },
+      "method": "POST",
+      "url": "/ab-test/draft/test_one/schedule",
+    },
+    "type": "SCHEDULE_AB_TEST",
+  },
+]
+`;
+
 exports[`Action Creator: A/B Testing should dispatch an reschedule action 1`] = `
 Array [
   Object {
@@ -182,6 +198,22 @@ Array [
 `;
 
 exports[`Action Creator: A/B Testing should dispatch an update scheduled action 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "data": "data",
+      "headers": Object {
+        "x-msys-subaccount": 101,
+      },
+      "method": "PUT",
+      "url": "/ab-test/test_one",
+    },
+    "type": "UPDATE_AB_TEST",
+  },
+]
+`;
+
+exports[`Action Creator: A/B Testing should dispatch an update test action 1`] = `
 Array [
   Object {
     "meta": Object {

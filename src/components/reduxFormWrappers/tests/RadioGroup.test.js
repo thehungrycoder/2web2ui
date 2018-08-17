@@ -35,7 +35,7 @@ cases('RadioGroup', ({ name, ...props }) => { // ignore test name
     ],
     title: 'Choose one'
   },
-  'renders error state': {
+  'renders error state (top)': {
     input: { name: 'example' },
     meta: { touched: true, error: 'error message' },
     options: [
@@ -43,5 +43,15 @@ cases('RadioGroup', ({ name, ...props }) => { // ignore test name
       { label: 'Option Two', value: 'two' }
     ],
     title: 'Choose one'
+  },
+  'renders error state (bottom)': {
+    input: { name: 'example' },
+    meta: { touched: true, error: 'error message' },
+    options: [
+      { label: 'Option One', value: 'one' },
+      { label: 'Option Two', value: 'two' }
+    ],
+    title: 'Choose one',
+    bottomError: true
   }
 });

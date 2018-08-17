@@ -47,6 +47,13 @@ export function getStartOfDay(date) {
   return start;
 }
 
+export function getNextHour(date) {
+  const roundedDate = new Date(date);
+  const now = new Date(Date.now());
+  roundedDate.setHours(now.getHours() + 1, 0, 0, 0);
+  return roundedDate;
+}
+
 export function isSameDate(a, b) {
   return (a instanceof Date) && (b instanceof Date) && (a.getTime() === b.getTime());
 }
@@ -118,6 +125,15 @@ export function getRelativeDates(range, roundToPrecision = true) {
     return { to: to.toDate(), from: from.toDate(), relativeRange: range };
   }
   return { to: now, from: preciseFrom, relativeRange: range };
+}
+
+export function getDuration(dates, unit = 'hours') {
+  const { from, to } = dates;
+  return moment(to).diff(moment(from), unit);
+}
+
+export function isStartTimeAfterNow({ from }) {
+  return moment().isBefore(moment(from));
 }
 
 export function formatDate(date, FORMAT = config.dateFormat) {

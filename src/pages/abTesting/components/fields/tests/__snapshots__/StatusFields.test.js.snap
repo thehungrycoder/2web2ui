@@ -10,6 +10,13 @@ exports[`Status Fields Component should disable fields correctly 1`] = `
       disabled={true}
       label="Test Name"
       name="name"
+      validate={
+        Array [
+          [Function],
+          [Function],
+          [Function],
+        ]
+      }
     />
   </Panel>
   <Panel
@@ -28,8 +35,11 @@ exports[`Status Fields Component should disable fields correctly 1`] = `
         }
       }
       disabled={true}
+      fromSelectsNextHour={true}
       left={true}
       name="dates"
+      preventFuture={false}
+      roundToPrecision={false}
       showPresets={false}
       textFieldProps={
         Object {
@@ -37,6 +47,13 @@ exports[`Status Fields Component should disable fields correctly 1`] = `
           "label": "When should we run this test?",
           "prefix": <AccessTime />,
         }
+      }
+      validate={
+        Array [
+          [Function],
+          [Function],
+          [Function],
+        ]
       }
     />
   </Panel>
@@ -52,6 +69,13 @@ exports[`Status Fields Component should render correctly 1`] = `
       component={[Function]}
       label="Test Name"
       name="name"
+      validate={
+        Array [
+          [Function],
+          [Function],
+          [Function],
+        ]
+      }
     />
   </Panel>
   <Panel
@@ -69,8 +93,11 @@ exports[`Status Fields Component should render correctly 1`] = `
           "toMonth": null,
         }
       }
+      fromSelectsNextHour={true}
       left={true}
       name="dates"
+      preventFuture={false}
+      roundToPrecision={false}
       showPresets={false}
       textFieldProps={
         Object {
@@ -78,6 +105,13 @@ exports[`Status Fields Component should render correctly 1`] = `
           "label": "When should we run this test?",
           "prefix": <AccessTime />,
         }
+      }
+      validate={
+        Array [
+          [Function],
+          [Function],
+          [Function],
+        ]
       }
     />
   </Panel>

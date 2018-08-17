@@ -4,6 +4,7 @@ import { Panel, Grid, Button } from '@sparkpost/matchbox';
 import { Add } from '@sparkpost/matchbox-icons';
 import { TextFieldWrapper } from 'src/components/reduxFormWrappers';
 import { TemplateTypeaheadWrapper } from 'src/components/reduxFormWrappers';
+import { required, integer, minNumber, maxNumber } from 'src/helpers/validation';
 
 import styles from './VariantsFields.module.scss';
 
@@ -11,7 +12,9 @@ export const PercentField = ({ namespace, ...props }) => (
   <Field
     name={`${namespace}.percent`}
     label='Percent of total'
+    type='number'
     suffix='%'
+    validate={[required, minNumber(1), maxNumber(100)]}
     component={TextFieldWrapper} {...props} />
 );
 
@@ -19,6 +22,8 @@ export const SampleSizeField = ({ namespace, ...props }) => (
   <Field
     name={`${namespace}.sample_size`}
     label='Number of messages'
+    type='number'
+    validate={[required, integer, minNumber(1)]}
     component={TextFieldWrapper} {...props} />
 );
 
@@ -32,7 +37,7 @@ export const RenderVariants = ({ fields, formValues, disabled, subaccountId }) =
       return (
         <Panel.Section key={i}>
           <div className={styles.RemoveWrapper}>
-            <Button flat color='orange' size='small' onClick={() => fields.remove(i)}>
+            <Button flat color='orange' size='small' onClick={() => fields.remove(i)} disabled={fields.length === 1}>
               Remove Variant
             </Button>
           </div>
@@ -44,6 +49,7 @@ export const RenderVariants = ({ fields, formValues, disabled, subaccountId }) =
                 component={TemplateTypeaheadWrapper}
                 label='Select a template'
                 placeholder='Type to search'
+                validate={required}
                 disabled={disabled}
                 subaccountId={subaccountId}
               />
@@ -57,7 +63,7 @@ export const RenderVariants = ({ fields, formValues, disabled, subaccountId }) =
     })
     }
     <Panel.Section>
-      <Button flat color='orange' onClick={() => fields.push()}>
+      <Button flat color='orange' onClick={() => fields.push()} disabled={fields.length >= 20}>
         <Add /> Add Another Variant
       </Button>
     </Panel.Section>
@@ -77,6 +83,7 @@ const VariantsFields = ({ disabled, formValues, subaccountId }) => {
               component={TemplateTypeaheadWrapper}
               label='Select a default template'
               placeholder='Type to search'
+              validate={required}
               disabled={disabled}
               subaccountId={subaccountId}
             />

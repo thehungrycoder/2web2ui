@@ -5,7 +5,7 @@ import { reduxForm, getFormValues } from 'redux-form';
 import { withRouter } from 'react-router-dom';
 
 import { showAlert } from 'src/actions/globalAlert';
-import { updateDraft, getAbTest, rescheduleAbTest } from 'src/actions/abTesting';
+import { updateDraft, getAbTest, updateAbTest, scheduleAbTest, rescheduleAbTest } from 'src/actions/abTesting';
 import { listTemplates } from 'src/actions/templates';
 import { selectEditInitialValues } from 'src/selectors/abTesting';
 import { formatFormValues } from 'src/helpers/abTesting';
@@ -32,21 +32,37 @@ export class EditMode extends Component {
     const { updateDraft, showAlert, subaccountId, getAbTest } = this.props;
     const { id, version } = this.props.test;
 
-    return updateDraft(formatFormValues(values), { id, subaccountId }).then(() => {
-      getAbTest({ id, version, subaccountId });
+    return updateDraft({ data: formatFormValues(values), id, subaccountId }).then(() => {
+      getAbTest({ id, subaccountId, version });
       showAlert({ type: 'success', message: 'A/B Test Draft Updated' });
     });
   }
 
-  handleSchedule = (values) => {}
+  handleSchedule = (values) => {
+    const { scheduleAbTest, showAlert, subaccountId, getAbTest } = this.props;
+    const { id, version } = this.props.test;
 
-  handleUpdateScheduled = (values) => {}
+    return scheduleAbTest({ data: formatFormValues(values), id, subaccountId }).then(() => {
+      getAbTest({ id, subaccountId, version });
+      showAlert({ type: 'success', message: 'A/B Test Draft Scheduled' });
+    });
+  }
+
+  handleUpdateScheduled = (values) => {
+    const { updateAbTest, showAlert, subaccountId, getAbTest } = this.props;
+    const { id, version } = this.props.test;
+
+    return updateAbTest({ data: formatFormValues(values), id, subaccountId }).then(() => {
+      getAbTest({ id, subaccountId, version });
+      showAlert({ type: 'success', message: 'A/B Test Updated' });
+    });
+  }
 
   handleReschedule = (values) => {
     const { id, version } = this.props.test;
     const { subaccountId, rescheduleAbTest, history, showAlert } = this.props;
 
-    return rescheduleAbTest(formatFormValues(values), { id, subaccountId }).then(() => {
+    return rescheduleAbTest({ data: formatFormValues(values), id, subaccountId }).then(() => {
       showAlert({ type: 'success', message: 'A/B Test Rescheduled' });
       history.push(`/ab-testing/${id}/${version + 1}${setSubaccountQuery(subaccountId)}`);
     });
@@ -152,4 +168,5 @@ const formOptions = {
   form: FORM_NAME,
   enableReinitialize: true
 };
-export default withRouter(connect(mapStateToProps, { listTemplates, updateDraft, getAbTest, rescheduleAbTest, showAlert })(reduxForm(formOptions)(EditMode)));
+
+export default withRouter(connect(mapStateToProps, { listTemplates, updateDraft, getAbTest, updateAbTest, scheduleAbTest, rescheduleAbTest, showAlert })(reduxForm(formOptions)(EditMode)));

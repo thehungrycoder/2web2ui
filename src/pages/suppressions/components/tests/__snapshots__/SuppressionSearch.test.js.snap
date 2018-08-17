@@ -21,6 +21,7 @@ exports[`SuppressionSearch renders correctly 1`] = `
             "results": undefined,
           }
         }
+        preventFuture={true}
         relativeDateOptions={
           Array [
             "hour",

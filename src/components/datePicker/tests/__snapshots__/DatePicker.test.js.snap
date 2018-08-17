@@ -17,6 +17,7 @@ exports[`Component: DatePicker handleFormDates should use a date field format if
     />
   }
   disabled={false}
+  onBlur={[MockFunction]}
   onClick={[MockFunction]}
   readOnly={true}
   resize="both"
@@ -29,6 +30,7 @@ exports[`Component: DatePicker should not render range select if showPresets is 
 <TextField
   connectLeft={null}
   disabled={false}
+  onBlur={[MockFunction]}
   onClick={[MockFunction]}
   readOnly={true}
   resize="both"
@@ -61,6 +63,7 @@ exports[`Component: DatePicker should render ok by default 1`] = `
         />
       }
       disabled={false}
+      onBlur={[Function]}
       onClick={[Function]}
       readOnly={true}
       resize="both"

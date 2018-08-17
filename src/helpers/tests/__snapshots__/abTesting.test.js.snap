@@ -2,7 +2,7 @@
 
 exports[`A/B testing helper findTemplateObject should find template objects 1`] = `
 Object {
-  "sample_size": "500",
+  "sample_size": 500,
   "template_object": Object {
     "full": "template 2",
     "id": "template_two",
@@ -14,21 +14,21 @@ exports[`A/B testing helper formatFormValues should omit confidence level if in 
 Object {
   "audience_selection": "sample_size",
   "default_template": Object {
-    "sample_size": "200",
+    "sample_size": 200,
     "template_id": "template_one",
   },
   "end_time": "2018-08-09T12:00:00.978Z",
   "name": "test_one",
   "start_time": "2018-08-00T12:00:00.978Z",
   "test_mode": "learning",
-  "total_sample_size": "100",
+  "total_sample_size": 600,
   "variants": Array [
     Object {
-      "sample_size": "200",
+      "sample_size": 200,
       "template_id": "template_two",
     },
     Object {
-      "sample_size": "200",
+      "sample_size": 200,
       "template_id": "template_three",
     },
   ],
@@ -38,9 +38,9 @@ Object {
 exports[`A/B testing helper formatFormValues should omit sample size if using percent 1`] = `
 Object {
   "audience_selection": "percent",
-  "confidence_level": "0.91",
+  "confidence_level": 0.91,
   "default_template": Object {
-    "sample_size": "200",
+    "sample_size": 200,
     "template_id": "template_one",
   },
   "end_time": "2018-08-09T12:00:00.978Z",
@@ -49,11 +49,11 @@ Object {
   "test_mode": "bayesian",
   "variants": Array [
     Object {
-      "sample_size": "200",
+      "sample_size": 200,
       "template_id": "template_two",
     },
     Object {
-      "sample_size": "200",
+      "sample_size": 200,
       "template_id": "template_three",
     },
   ],
@@ -68,7 +68,7 @@ Object {
 
 exports[`A/B testing helper reduceTemplateObject should pass through template id 1`] = `
 Object {
-  "sample_size": "500",
+  "sample_size": 500,
   "template_id": "template_two",
 }
 `;

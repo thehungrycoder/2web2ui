@@ -26,6 +26,8 @@ describe('Page: A/B Test Edit Mode', () => {
       showAlert: jest.fn(),
       listTemplates: jest.fn(),
       updateDraft: jest.fn(() => Promise.resolve()),
+      updateAbTest: jest.fn(() => Promise.resolve()),
+      scheduleAbTest: jest.fn(() => Promise.resolve()),
       rescheduleAbTest: jest.fn(() => Promise.resolve()),
       rescheduling: false,
       rescheduleLoading: false,
@@ -66,9 +68,39 @@ describe('Page: A/B Test Edit Mode', () => {
 
     it('should call handle save as draft', async () => {
       await wrapper.instance().handleSaveAsDraft(props.formValues);
-      expect(props.updateDraft).toHaveBeenCalledWith(props.formValues, { id: props.test.id, subaccountId: props.subaccountId });
+      expect(props.updateDraft).toHaveBeenCalledWith({ data: props.formValues, id: props.test.id, subaccountId: props.subaccountId });
       expect(props.getAbTest).toHaveBeenCalledWith({ id: props.test.id, version: props.test.version, subaccountId: props.subaccountId });
       expect(props.showAlert).toHaveBeenCalledWith({ message: 'A/B Test Draft Updated', type: 'success' });
+    });
+  });
+
+  describe('schedule actions', () => {
+    it('should call schedule method from primary action', () => {
+      wrapper.find('Page').prop('primaryAction').onClick();
+      expect(props.handleSubmit).toHaveBeenCalledWith(wrapper.instance().handleSchedule);
+    });
+
+    it('should call handle schedule', async () => {
+      await wrapper.instance().handleSchedule(props.formValues);
+      expect(props.scheduleAbTest).toHaveBeenCalledWith({ data: props.formValues, id: props.test.id, subaccountId: props.subaccountId });
+      expect(props.getAbTest).toHaveBeenCalledWith({ id: props.test.id, version: props.test.version, subaccountId: props.subaccountId });
+      expect(props.showAlert).toHaveBeenCalledWith({ message: 'A/B Test Draft Scheduled', type: 'success' });
+    });
+  });
+
+  describe('update actions', () => {
+    it('should call update method from primary action', () => {
+      wrapper.setProps({ test: { ...props.test, status: 'scheduled' }});
+      wrapper.find('Page').prop('primaryAction').onClick();
+      expect(props.handleSubmit).toHaveBeenCalledWith(wrapper.instance().handleUpdateScheduled);
+    });
+
+    it('should call handle update', async () => {
+      wrapper.setProps({ test: { ...props.test, status: 'scheduled' }});
+      await wrapper.instance().handleUpdateScheduled(props.formValues);
+      expect(props.updateAbTest).toHaveBeenCalledWith({ data: props.formValues, id: props.test.id, subaccountId: props.subaccountId });
+      expect(props.getAbTest).toHaveBeenCalledWith({ id: props.test.id, version: props.test.version, subaccountId: props.subaccountId });
+      expect(props.showAlert).toHaveBeenCalledWith({ message: 'A/B Test Updated', type: 'success' });
     });
   });
 
@@ -88,7 +120,7 @@ describe('Page: A/B Test Edit Mode', () => {
 
     it('should handle reschedule action', async () => {
       await wrapper.instance().handleReschedule(props.formValues);
-      expect(props.rescheduleAbTest).toHaveBeenCalledWith(props.formValues, { id: props.test.id, subaccountId: props.subaccountId });
+      expect(props.rescheduleAbTest).toHaveBeenCalledWith({ data: props.formValues, id: props.test.id, subaccountId: props.subaccountId });
       expect(props.showAlert).toHaveBeenCalledWith({ message: 'A/B Test Rescheduled', type: 'success' });
       expect(props.history.push).toHaveBeenCalledWith('/ab-testing/id-1/2?subaccount=101');
     });

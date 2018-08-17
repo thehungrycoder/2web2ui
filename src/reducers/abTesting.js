@@ -3,6 +3,7 @@ const initialState = {
   listLoading: true,
   listError: null,
   createError: null,
+  updateError: null,
   updateDraftPending: false,
   deletePending: false,
   cancelPending: false,
@@ -46,6 +47,28 @@ export default (state = initialState, { type, payload, meta }) => {
 
     case 'UPDATE_AB_TEST_DRAFT_FAIL':
       return { ...state, updateDraftPending: false };
+
+    /* UPDATE TEST */
+
+    case 'UPDATE_AB_TEST_PENDING':
+      return { ...state, updateError: null };
+
+    case 'UPDATE_AB_TEST_SUCCESS':
+      return { ...state };
+
+    case 'UPDATE_AB_TEST_FAIL':
+      return { ...state, updateError: payload };
+
+    /* SCHEDULE */
+
+    case 'SCHEDULE_AB_TEST_PENDING':
+      return { ...state, scheduleError: null };
+
+    case 'SCHEDULE_AB_TEST_SUCCESS':
+      return { ...state };
+
+    case 'SCHEDULE_AB_TEST_FAIL':
+      return { ...state, scheduleError: payload };
 
     /* DELETE */
 
