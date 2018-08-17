@@ -8,32 +8,36 @@ describe('A/B testing helper', () => {
       values = {
         name: 'test_one',
         test_mode: 'bayesian',
-        confidence_level: 0.91,
+        confidence_level: '0.91',
         audience_selection: 'sample_size',
         total_sample_size: 100,
+        engagement_timeout: '24',
         dates: {
           from: '2018-08-00T12:00:00.978Z',
           to: '2018-08-09T12:00:00.978Z'
         },
         default_template: {
           template_object: { id: 'template_one', should_not: 'be passed through' },
-          sample_size: 200
+          sample_size: '200'
         },
         variants: [
           {
             template_object: { id: 'template_two', should_not: 'be passed through' },
-            sample_size: 200
+            sample_size: '200'
           },
           {
             template_object: { id: 'template_three', should_not: 'be passed through' },
-            sample_size: 200
+            sample_size: '200'
           }
         ]
       };
     });
 
-    it('should omit sample size if using percent', () => {
+    it('should omit total sample size if using percent', () => {
       values.audience_selection = 'percent';
+      values.default_template.percent = '50';
+      values.variants[0].percent = '25';
+      values.variants[1].percent = '25';
       expect(helpers.formatFormValues(values)).toMatchSnapshot();
     });
 

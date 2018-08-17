@@ -8,6 +8,8 @@ export const formatFormValues = ({ default_template, variants, dates, ...rest })
 
   if (values.test_mode === 'learning') {
     values = _.omit(values, 'confidence_level');
+  } else {
+    values.confidence_level = parseFloat(values.confidence_level);
   }
 
   if (values.audience_selection === 'percent') {
@@ -15,6 +17,11 @@ export const formatFormValues = ({ default_template, variants, dates, ...rest })
   } else {
     values.total_sample_size = calculateTotalSampleSize({ default_template, variants });
   }
+
+  // Cast stringified values to numbers
+  default_template[values.audience_selection] = parseFloat(default_template[values.audience_selection]);
+  _.forEach(variants, (variant) => variant[values.audience_selection] = parseFloat(variant[values.audience_selection]));
+  values.engagement_timeout = parseInt(values.engagement_timeout, 10);
 
   return {
     ...values,
