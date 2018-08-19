@@ -1,0 +1,34 @@
+{
+  "apiBase": "//coep.api.e.sparkpost.com/api/v1",
+  "bounceDomains": {
+    "allowDefault": true,
+    "allowSubaccountDefault": false,
+    "cnameValue": "coep.mail.e.sparkpost.com"
+  },
+  "featureFlags": {
+    "allow_anyone_at_verification": true,
+    "allow_mailbox_verification": true
+  },
+  "sentry": {
+    "projectId": 237613,
+    "publicKey": "014f9707c27b4e7ea90aff051a82e561"
+  },
+  "smtpAuth": {
+    "enabled": true,
+    "host": "coep.smtp.e.sparkpost.com",
+    "port": 587,
+    "username": "coep"
+  },
+  "support": {
+    "algolia": {
+      "index": "production_site_posts_support_article",
+      "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
+      "appID": "SFXAWCYDV8"
+    },
+    "enabled": true
+  },
+  "tenant": "caponeuk",
+  "trackingDomains": {
+    "cnameValue": "click.notification.capitalone.co.uk"
+  }
+}
