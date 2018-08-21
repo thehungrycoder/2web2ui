@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Settings Content Component should not render anything by default 1`] = `<div />`;
+
+exports[`Settings Content Component should render when test is in draft mode 1`] = `
+<div>
+  <React.Fragment>
+    <p>
+      You may continue to adjust these settings and template variants while this test is in draft mode.
+    </p>
+    <p>
+      <UnstyledLink
+        external={true}
+        to="https://www.sparkpost.com/docs/tech-resources/a-b-testing-sparkpost/"
+      >
+        Learn more about configuring AB tests
+      </UnstyledLink>
+      .
+    </p>
+  </React.Fragment>
+</div>
+`;
