@@ -26,7 +26,12 @@ import not from 'src/helpers/conditions/not';
 
 export default [
   {
-    label: 'Profile',
+    label: 'Account Settings',
+    to: '/account/settings',
+    section: 1
+  },
+  {
+    label: 'User Profile',
     to: '/account/profile',
     section: 1
   },

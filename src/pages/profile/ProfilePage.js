@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { Page, Panel, UnstyledLink } from '@sparkpost/matchbox';
+import { Page, Panel } from '@sparkpost/matchbox';
 
 import { updateUser } from 'src/actions/users';
 import { get as getCurrentUser } from 'src/actions/currentUser';
@@ -12,12 +12,11 @@ import VerifyEmailBanner from 'src/components/verifyEmailBanner/VerifyEmailBanne
 import NameForm from './components/NameForm';
 import PasswordForm from './components/PasswordForm';
 import TfaManager from './components/TfaManager';
-import SsoManager from './components/SsoManager';
 import { AccessControl } from 'src/components/auth';
 import { LabelledValue } from 'src/components';
 import ErrorTracker from 'src/helpers/errorTracker';
 import { all, not } from 'src/helpers/conditions';
-import { isAdmin, isHeroku, isAzure, isSso } from 'src/helpers/conditions/user';
+import { isHeroku, isAzure, isSso } from 'src/helpers/conditions/user';
 
 export class ProfilePage extends Component {
   requestCancellation = () => {
@@ -49,7 +48,7 @@ export class ProfilePage extends Component {
     const { customer, email, email_verified, username, verifyingEmail } = this.props.currentUser;
 
     return (
-      <Page title='Profile'>
+      <Page title='User Profile'>
 
         {email_verified === false && (
           <VerifyEmailBanner verifying={verifyingEmail} />
@@ -61,7 +60,6 @@ export class ProfilePage extends Component {
           <LabelledValue label='Email Address' value={email}/>
         </Panel>
 
-        <SsoManager />
         <AccessControl condition={all(not(isAzure), not(isHeroku))}>
           <AccessControl condition={not(isSso)}>
             <TfaManager />
@@ -79,18 +77,7 @@ export class ProfilePage extends Component {
         </AccessControl>
 
 
-        <AccessControl condition={isAdmin}>
-          <Panel sectioned title="Request Account Cancellation">
-            <p>
-              To cancel your SparkPost account, {
-                <UnstyledLink onClick={this.requestCancellation}>
-                  submit a cancellation request
-                </UnstyledLink>
-              }. The request may take a few days to process.  All your data (e.g. domains, users, etc.)
-              will be permanently deleted. We're sorry to see you go!
-            </p>
-          </Panel>
-        </AccessControl>
+
       </Page>
     );
   }
