@@ -87,6 +87,19 @@ const config = {
     baseUrl: 'https://rest.apisandbox.zuora.com/v1',
     timeout: 15000
   },
+  brightback: {
+    baseUrl: 'https://app.brightback.com',
+    timeout: 15000,
+    data: {
+      app_id: 'APP_ID', // TODO
+      // Return URL from Brightback for end-users who do not cancel
+      save_return_url: '/account/billing',
+      // Return URL from Brightback for end-users who cancel
+      cancel_confirmation_url: '/accout/billing/plan?immediatePlanChange=free-0817',
+      // Billing URL to direct end-users to enter coupon code or other billing changes
+      billing_url: '/account/billing/plan'
+    }
+  },
   smtpAuth: {
     host: 'no-default-set',
     port: 587,

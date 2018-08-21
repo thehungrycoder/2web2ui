@@ -11,7 +11,7 @@ import billingUpdate from 'src/actions/billingUpdate';
 import { showAlert } from 'src/actions/globalAlert';
 import { changePlanInitialValues } from 'src/selectors/accountBillingForms';
 import {
-  currentPlanSelector, canUpdateBillingInfoSelector, selectVisiblePlans
+  currentPlanSelector, canUpdateBillingInfoSelector, selectVisiblePlans, selectImmediatePlanChangeFromSearch
 } from 'src/selectors/accountBillingInfo';
 import { Panel, Grid } from '@sparkpost/matchbox';
 import { Loading, PlanPicker } from 'src/components';
@@ -24,7 +24,7 @@ import { selectCondition } from 'src/selectors/accessConditionState';
 import { not } from 'src/helpers/conditions';
 import * as conversions from 'src/helpers/conversionTracking';
 import AccessControl from 'src/components/auth/AccessControl';
-import { prepareCardInfo } from 'src/helpers/billing';
+import { prepareCardInfo, stripImmediatePlanChange } from 'src/helpers/billing';
 
 const FORMNAME = 'changePlan';
 
@@ -40,6 +40,31 @@ export class ChangePlanForm extends Component {
     this.props.fetchAccount({ include: 'billing' });
   }
 
+  componentDidUpdate({ loading: prevLoading }) {
+    const { loading, immediatePlanChange, updateSubscription, history, location } = this.props;
+
+    if (prevLoading && !loading && immediatePlanChange) {
+      history.replace({
+        pathname: location.pathname,
+        search: stripImmediatePlanChange(location.search)
+      });
+      const action = updateSubscription({ code: immediatePlanChange });
+      this.handleBillingAction(action, immediatePlanChange);
+    }
+  }
+
+  handleBillingAction = (action, newCode) => {
+    const { history, showAlert, account, billing } = this.props;
+    const oldCode = account.subscription.code;
+
+    return action
+      .then(() => history.push('/account/billing'))
+      .then(() => {
+        conversions.trackPlanChange({ allPlans: billing.plans, oldCode, newCode });
+        return showAlert({ type: 'success', message: 'Subscription Updated' });
+      });
+  }
+
   componentWillReceiveProps(nextProps) {
     // Null check to make sure this only runs once
     if (nextProps.canUpdateBillingInfo && this.state.useSavedCC === null) {
@@ -52,32 +77,27 @@ export class ChangePlanForm extends Component {
   };
 
   onSubmit = (values) => {
-    const { account, billing, updateSubscription, billingCreate, billingUpdate, showAlert, history } = this.props;
-    const oldCode = account.subscription.code;
-    const newCode = values.planpicker.code;
-    const isDowngradeToFree = values.planpicker.isFree;
-
-    const newValues = values.card && !isDowngradeToFree
-      ? { ...values, card: prepareCardInfo(values.card) }
-      : values;
-
-    // decides which action to be taken based on
-    // if it's aws account, it already has billing and if you use a saved CC
-    let action;
-    if (this.props.isAws) {
-      action = updateSubscription({ code: newCode });
-    } else if (account.billing) {
-      action = this.state.useSavedCC || isDowngradeToFree ? updateSubscription({ code: newCode }) : billingUpdate(newValues);
-    } else {
-      action = billingCreate(newValues); // creates Zuora account
-    }
-
-    return action
-      .then(() => history.push('/account/billing'))
-      .then(() => {
-        conversions.trackPlanChange({ allPlans: billing.plans, oldCode, newCode });
-        return showAlert({ type: 'success', message: 'Subscription Updated' });
-      });
+    console.log('submitting form')
+    // const { account, billing, updateSubscription, billingCreate, billingUpdate, showAlert, history } = this.props;
+    // const newCode = values.planpicker.code;
+    // const isDowngradeToFree = values.planpicker.isFree;
+    //
+    // const newValues = values.card && !isDowngradeToFree
+    //   ? { ...values, card: prepareCardInfo(values.card) }
+    //   : values;
+    //
+    // // decides which action to be taken based on
+    // // if it's aws account, it already has billing and if you use a saved CC
+    // let action;
+    // if (this.props.isAws) {
+    //   action = updateSubscription({ code: newCode });
+    // } else if (account.billing) {
+    //   action = this.state.useSavedCC || isDowngradeToFree ? updateSubscription({ code: newCode }) : billingUpdate(newValues);
+    // } else {
+    //   action = billingCreate(newValues); // creates Zuora account
+    // }
+    //
+    // return this.handleBillingAction(action, newCode);
   };
 
   renderCCSection = () => {
@@ -158,12 +178,12 @@ export class ChangePlanForm extends Component {
 
 const mapStateToProps = (state, props) => {
   const selector = formValueSelector(FORMNAME);
-  const { code: planCode } = qs.parse(props.location.search);
+  const { code: planCode, immediatePlanChange } = qs.parse(props.location.search);
 
   const plans = selectVisiblePlans(state);
 
   return {
-    loading: (!state.account.created && state.account.loading) || (plans.length === 0 && state.billing.plansLoading),
+    loading: (!state.account.created || state.account.loading) || (plans.length === 0 && state.billing.plansLoading),
     isAws: selectCondition(isAws)(state),
     account: state.account,
     billing: state.billing,
@@ -172,7 +192,8 @@ const mapStateToProps = (state, props) => {
     plans,
     currentPlan: currentPlanSelector(state),
     selectedPlan: selector(state, 'planpicker') || {},
-    initialValues: changePlanInitialValues(state, { planCode })
+    initialValues: changePlanInitialValues(state, { planCode }),
+    immediatePlanChange
   };
 };
 

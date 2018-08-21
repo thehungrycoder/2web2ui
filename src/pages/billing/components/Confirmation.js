@@ -4,6 +4,7 @@ import config from 'src/config';
 import { getPlanPrice } from 'src/helpers/billing';
 import PlanPrice from 'src/components/billing/PlanPrice';
 import SupportTicketLink from 'src/components/supportTicketLink/SupportTicketLink';
+import Brightback from 'src/components/brightback/Brightback';
 
 export class Confirmation extends React.Component {
   renderSelectedPlanMarkup() {
@@ -97,14 +98,19 @@ export class Confirmation extends React.Component {
           {addonMarkup}
         </Panel.Section>
         <Panel.Section>
-          <Button
-            type='submit'
-            fullWidth
-            primary={!isDowngrade}
-            destructive={isDowngrade}
-            disabled={disableSubmit}>
-            {buttonText}
-          </Button>
+          <Brightback
+            enabled={billingEnabled && isPlanSelected && selected.isFree}
+            render={({ buttonProps }) => (
+              <Button
+                type='submit'
+                fullWidth
+                primary={!isDowngrade}
+                destructive={isDowngrade}
+                disabled={disableSubmit}
+                {...buttonProps}>
+                  {buttonText}
+              </Button>
+          )}/>
         </Panel.Section>
       </Panel>
     );
