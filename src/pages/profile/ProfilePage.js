@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { Page, Panel, UnstyledLink } from '@sparkpost/matchbox';
+import { Page, Panel, UnstyledLink, Button } from '@sparkpost/matchbox';
+import { ArrowForward } from '@sparkpost/matchbox-icons';
 
 import { updateUser } from 'src/actions/users';
 import { get as getCurrentUser } from 'src/actions/currentUser';
@@ -59,6 +60,40 @@ export class ProfilePage extends Component {
           <LabelledValue label='Account ID' value={customer}/>
           <LabelledValue label='Username' value={username}/>
           <LabelledValue label='Email Address' value={email}/>
+        </Panel>
+
+        <Panel title='Single Sign-On' actions={[{ content: 'Learn More', color: 'orange' }]}>
+          <Panel.Section actions={[ { content: 'Provision SAML', color: 'orange' } ]}>
+            <LabelledValue label='SAML'>
+              <h6>Not Provisioned</h6>
+              <p>Provision your SAML identity providor to turn on SSO.</p>
+            </LabelledValue>
+          </Panel.Section>
+        </Panel>
+
+        <Panel title='Single Sign-On' actions={[{ content: 'Learn More', color: 'orange' }]}>
+          <Panel.Section actions={[ { content: 'Reprovision SAML', color: 'orange' }]}>
+            <LabelledValue label='SAML'>
+              <h6>Provisioned to your-saml-provider.example.com</h6>
+            </LabelledValue>
+          </Panel.Section>
+          <Panel.Section actions={[ { content: 'Enable SSO', color: 'orange' } ]}>
+            <LabelledValue label='Single Sign-On' value='Disabled'/>
+          </Panel.Section>
+        </Panel>
+
+        <Panel title='Single Sign-On' actions={[{ content: 'Learn More', color: 'orange' }]}>
+          <Panel.Section actions={[ { content: 'Reprovision SAML', color: 'orange' }]}>
+            <LabelledValue label='SAML'>
+              <h6>Provisioned to your-saml-provider.example.com</h6>
+            </LabelledValue>
+          </Panel.Section>
+          <Panel.Section actions={[ { content: 'Disable SSO', color: 'orange' } ]}>
+            <LabelledValue label='Single Sign-On'>
+              <h6>Enabled</h6>
+              <h6><UnstyledLink>Manage single sign-on users <ArrowForward/></UnstyledLink></h6>
+            </LabelledValue>
+          </Panel.Section>
         </Panel>
 
         <SsoManager />
