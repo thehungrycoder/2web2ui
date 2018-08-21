@@ -21,7 +21,7 @@ export const PercentField = ({ namespace, ...props }) => (
 export const SampleSizeField = ({ namespace, ...props }) => (
   <Field
     name={`${namespace}.sample_size`}
-    label='Number of messages'
+    label='Number of Recipients'
     type='number'
     validate={[required, integer, minNumber(1)]}
     component={TextFieldWrapper} {...props} />

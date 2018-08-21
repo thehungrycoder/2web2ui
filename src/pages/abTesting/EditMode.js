@@ -115,7 +115,7 @@ export class EditMode extends Component {
         primaryAction={this.getPrimaryAction()}
         secondaryActions={this.getSecondaryActions()}>
 
-        <Section title='Status'>
+        <Section title='Basic Information'>
           <Section.Left>
             <StatusContent test={test} />
           </Section.Left>

@@ -47,7 +47,7 @@ export class ViewMode extends Component {
     const status = test.status;
     return [
       {
-        content: <span><Save /> Override Default Template</span>,
+        content: <span><Save /> Override with new draft</span>,
         visible: status === 'completed' || status === 'cancelled',
         onClick: this.toggleOverride
       },
