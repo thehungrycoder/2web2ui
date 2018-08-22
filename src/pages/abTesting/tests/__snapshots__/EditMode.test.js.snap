@@ -44,6 +44,7 @@ exports[`Page: A/B Test Edit Mode should render draft status correctly 1`] = `
   >
     <Left>
       <StatusContent
+        rescheduling={false}
         test={
           Object {
             "default_template": Object {
@@ -171,6 +172,7 @@ exports[`Page: A/B Test Edit Mode should render scheduled status correctly 1`] =
   >
     <Left>
       <StatusContent
+        rescheduling={false}
         test={
           Object {
             "default_template": Object {
