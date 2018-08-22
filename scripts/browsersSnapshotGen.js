@@ -3,10 +3,8 @@
 const browserslist = require('browserslist');
 const _ = require('lodash');
 const caniuse = require('caniuse-db/data.json').agents;
-const fs = require('fs');
 const semver = require('semver');
 const packageJson = require('../package.json');
-const destinationPath = './browsers/snapshot.js';
 
 const browserNamesMap = {
   bb: 'BlackBerry',

@@ -34,7 +34,8 @@ module.exports = {
   setupTestFrameworkScriptFile: '<rootDir>/config/jest/setup.js',
   testMatch: [
     '<rootDir>/src/**/__tests__/**/*.js?(x)',
-    '<rootDir>/src/**/?(*.)(spec|test).js?(x)'
+    '<rootDir>/src/**/?(*.)(spec|test).js?(x)',
+    '<rootDir>/scripts/**/?(*.)(spec|test).js?(x)'
   ],
   testEnvironment: 'node',
   testURL: 'http://phoenix.test',
