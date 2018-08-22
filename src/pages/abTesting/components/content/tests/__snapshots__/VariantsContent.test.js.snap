@@ -7,11 +7,11 @@ exports[`Variants Content Component should render help content 1`] = `
   </p>
   <p>
     If you need to create a new template, 
-    <UnstyledLink
+    <PageLink
       to="/templates"
     >
       head over to the templates page
-    </UnstyledLink>
+    </PageLink>
     .
   </p>
 </div>
