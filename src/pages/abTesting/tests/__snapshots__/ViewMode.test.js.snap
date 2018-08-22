@@ -21,7 +21,7 @@ exports[`Page: A/B Test View Mode should render cancelled status correctly 1`] =
       Object {
         "content": <span>
           <Save />
-           Override Default Template
+           Override with new draft
         </span>,
         "onClick": [Function],
         "visible": true,
@@ -198,7 +198,7 @@ exports[`Page: A/B Test View Mode should render completed status correctly 1`] =
       Object {
         "content": <span>
           <Save />
-           Override Default Template
+           Override with new draft
         </span>,
         "onClick": [Function],
         "visible": true,
@@ -363,7 +363,7 @@ exports[`Page: A/B Test View Mode should render running status correctly 1`] = `
       Object {
         "content": <span>
           <Save />
-           Override Default Template
+           Override with new draft
         </span>,
         "onClick": [Function],
         "visible": false,
