@@ -40,8 +40,12 @@ export function abTestDuration(value, formValues) {
   return testDuration > 720 ? 'Test duration + engagement timeout must be 30 days or less' : undefined;
 }
 
-export function abTestDistribution(value, formValues) {
+export function abTestDistribution(value, formValues, props) {
   const { default_template, variants } = formValues;
+
+  if (props.test.status === 'draft') {
+    return undefined;
+  }
 
   if (value === 'percent') {
     const total = _.reduce(variants, (sum, variant = { percent: 0 }) => sum + parseFloat(variant.percent), parseFloat(default_template.percent));

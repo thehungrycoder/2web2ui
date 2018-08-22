@@ -8,32 +8,54 @@ import { required, integer, minNumber, maxNumber } from 'src/helpers/validation'
 
 import styles from './VariantsFields.module.scss';
 
-export const PercentField = ({ namespace, ...props }) => (
-  <Field
-    name={`${namespace}.percent`}
-    label='Percent of total'
-    type='number'
-    suffix='%'
-    validate={[required, minNumber(1), maxNumber(100)]}
-    component={TextFieldWrapper} {...props} />
-);
+export const PercentField = ({ namespace, test, ...props }) => {
+  let validators = [required, minNumber(1), maxNumber(100)];
 
-export const SampleSizeField = ({ namespace, ...props }) => (
-  <Field
-    name={`${namespace}.sample_size`}
-    label='Number of messages'
-    type='number'
-    validate={[required, integer, minNumber(1)]}
-    component={TextFieldWrapper} {...props} />
-);
+  if (test.status === 'draft') {
+    validators = [];
+  }
+
+  return (
+    <Field
+      name={`${namespace}.percent`}
+      label='Percent of total'
+      type='number'
+      suffix='%'
+      validate={validators}
+      component={TextFieldWrapper} {...props} />
+  );
+};
+
+export const SampleSizeField = ({ namespace, test, ...props }) => {
+  let validators = [required, integer, minNumber(1)];
+
+  if (test.status === 'draft') {
+    validators = [];
+  }
+
+  return (
+    <Field
+      name={`${namespace}.sample_size`}
+      label='Number of messages'
+      type='number'
+      validate={validators}
+      component={TextFieldWrapper} {...props} />
+  );
+};
 
 /*
   If you're looking at this, refer to https://redux-form.com/7.4.2/examples/fieldarrays/
  */
-export const RenderVariants = ({ fields, formValues, disabled, subaccountId }) => (
+export const RenderVariants = ({ fields, formValues, disabled, subaccountId, test }) => (
   <Panel>
     {fields.map((variant, i) => {
       const CountField = formValues.audience_selection === 'sample_size' ? SampleSizeField : PercentField;
+      const validators = [required];
+
+      if (test.status === 'draft') {
+        validators.pop();
+      }
+
       return (
         <Panel.Section key={i}>
           <div className={styles.RemoveWrapper}>
@@ -49,13 +71,14 @@ export const RenderVariants = ({ fields, formValues, disabled, subaccountId }) =
                 component={TemplateTypeaheadWrapper}
                 label='Select a template'
                 placeholder='Type to search'
-                validate={required}
+                validate={validators}
                 disabled={disabled}
                 subaccountId={subaccountId}
+                test={test}
               />
             </Grid.Column>
             <Grid.Column>
-              <CountField namespace={variant} disabled={disabled} />
+              <CountField namespace={variant} disabled={disabled} test={test} />
             </Grid.Column>
           </Grid>
         </Panel.Section>
@@ -64,13 +87,13 @@ export const RenderVariants = ({ fields, formValues, disabled, subaccountId }) =
     }
     <Panel.Section>
       <Button flat color='orange' onClick={() => fields.push()} disabled={fields.length >= 20}>
-        <Add /> Add Another Variant
+        <Add /><span> Add Another Variant</span>
       </Button>
     </Panel.Section>
   </Panel>
 );
 
-const VariantsFields = ({ disabled, formValues, subaccountId }) => {
+const VariantsFields = ({ disabled, formValues, subaccountId, test }) => {
   const CountField = formValues.audience_selection === 'sample_size' ? SampleSizeField : PercentField;
   return (
     <Fragment>
@@ -89,7 +112,7 @@ const VariantsFields = ({ disabled, formValues, subaccountId }) => {
             />
           </Grid.Column>
           <Grid.Column>
-            <CountField namespace='default_template' disabled={disabled} />
+            <CountField namespace='default_template' disabled={disabled} test={test} />
           </Grid.Column>
         </Grid>
       </Panel>
@@ -99,6 +122,7 @@ const VariantsFields = ({ disabled, formValues, subaccountId }) => {
         formValues={formValues}
         disabled={disabled}
         subaccountId={subaccountId}
+        test={test}
       />
 
       {/* This is a temporary hack to make sure at least some of the last typeahead is visible on screen */}

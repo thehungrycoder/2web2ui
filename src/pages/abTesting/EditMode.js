@@ -8,7 +8,7 @@ import { showAlert } from 'src/actions/globalAlert';
 import { updateDraft, getAbTest, updateAbTest, scheduleAbTest, rescheduleAbTest } from 'src/actions/abTesting';
 import { listTemplates } from 'src/actions/templates';
 import { selectEditInitialValues } from 'src/selectors/abTesting';
-import { formatFormValues } from 'src/helpers/abTesting';
+import { formatFormValues, formatDraftOptionalValues } from 'src/helpers/abTesting';
 
 import { Page } from '@sparkpost/matchbox';
 import { Save } from '@sparkpost/matchbox-icons';
@@ -32,7 +32,8 @@ export class EditMode extends Component {
     const { updateDraft, showAlert, subaccountId, getAbTest } = this.props;
     const { id, version } = this.props.test;
 
-    return updateDraft({ data: formatFormValues(values), id, subaccountId }).then(() => {
+    const data = formatDraftOptionalValues(formatFormValues(values));
+    return updateDraft({ data, id, subaccountId }).then(() => {
       getAbTest({ id, subaccountId, version });
       showAlert({ type: 'success', message: 'A/B Test Draft Updated' });
     });
@@ -130,7 +131,7 @@ export class EditMode extends Component {
             <SettingsContent test={test} />
           </Section.Left>
           <Section.Right>
-            <SettingsFields formValues={formValues} disabled={submitting} />
+            <SettingsFields formValues={formValues} disabled={submitting} test={test} />
           </Section.Right>
         </Section>
 
@@ -139,7 +140,7 @@ export class EditMode extends Component {
             <VariantsContent test={test} />
           </Section.Left>
           <Section.Right>
-            <VariantsFields formValues={formValues} disabled={submitting} subaccountId={subaccountId} />
+            <VariantsFields formValues={formValues} disabled={submitting} subaccountId={subaccountId} test={test} />
           </Section.Right>
         </Section>
       </Page>
