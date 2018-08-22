@@ -377,7 +377,7 @@ exports[`Variants Fields Component Sample Size Field should render correctly 1`]
 <Field
   component={[Function]}
   disabled={false}
-  label="Number of messages"
+  label="Number of Recipients"
   name="default_template.sample_size"
   type="number"
   validate={

@@ -36,7 +36,7 @@ export const Engagement = ({ variant }) => {
 
   return (
     <Panel.Section>
-      <LabelledValue label='Engagement'>
+      <LabelledValue label='Engagement Rate Achieved'>
         <h6>
           <Tooltip dark content={metricMarkup}>
             <Unit unit='percent' value={variant.engagement_rate}/>
