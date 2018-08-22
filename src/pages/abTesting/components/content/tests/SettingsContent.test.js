@@ -21,4 +21,9 @@ describe('Settings Content Component', () => {
     wrapper.setProps({ test: { status: 'draft' }});
     expect(wrapper).toMatchSnapshot();
   });
+
+  it('should render when test is in scheduled mode', () => {
+    wrapper.setProps({ test: { status: 'scheduled' }});
+    expect(wrapper).toMatchSnapshot();
+  });
 });

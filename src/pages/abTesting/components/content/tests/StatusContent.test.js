@@ -51,4 +51,14 @@ describe('Status Content Component', () => {
     wrapper.setProps({ test: { status: 'completed', test_mode: 'bayesian', winning_template_id: 'one', default_template: { template_id: 'one' }}});
     expect(wrapper).toMatchSnapshot();
   });
+
+  it('should render rescheduling-specific help content when test is in completed mode and rescheduling the test', () => {
+    wrapper.setProps({ test: { status: 'completed' }, rescheduling: true });
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render rescheduling-specific help content when test is in cancelled mode and rescheduling the test', () => {
+    wrapper.setProps({ test: { status: 'cancelled' }, rescheduling: true });
+    expect(wrapper).toMatchSnapshot();
+  });
 });
