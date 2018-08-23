@@ -36,7 +36,7 @@ export const SampleSizeField = ({ namespace, test, ...props }) => {
   return (
     <Field
       name={`${namespace}.sample_size`}
-      label='Number of messages'
+      label='Number of Recipients'
       type='number'
       validate={validators}
       component={TextFieldWrapper} {...props} />

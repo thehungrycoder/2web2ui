@@ -107,7 +107,7 @@ export class EditMode extends Component {
   }
 
   render() {
-    const { breadcrumbAction, test, formValues, submitting, subaccountId } = this.props;
+    const { breadcrumbAction, test, rescheduling, formValues, submitting, subaccountId } = this.props;
 
     return (
       <Page
@@ -116,9 +116,9 @@ export class EditMode extends Component {
         primaryAction={this.getPrimaryAction()}
         secondaryActions={this.getSecondaryActions()}>
 
-        <Section title='Status'>
+        <Section title='Basic Information'>
           <Section.Left>
-            <StatusContent test={test} />
+            <StatusContent test={test} rescheduling={rescheduling} />
           </Section.Left>
           <Section.Right>
             <StatusPanel test={test} subaccountId={subaccountId} />

@@ -3,7 +3,7 @@
 exports[`Variants View Component: Engagement Component: should render clicks correctly 1`] = `
 <Panel.Section>
   <LabelledValue
-    label="Engagement"
+    label="Engagement Rate Achieved"
   >
     <h6>
       <Tooltip
@@ -48,7 +48,7 @@ exports[`Variants View Component: Engagement Component: should render clicks cor
 exports[`Variants View Component: Engagement Component: should render opens correctly 1`] = `
 <Panel.Section>
   <LabelledValue
-    label="Engagement"
+    label="Engagement Rate Achieved"
   >
     <h6>
       <Tooltip

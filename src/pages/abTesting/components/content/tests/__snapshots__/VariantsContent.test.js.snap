@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Variants Content Component should render help content 1`] = `
+<div>
+  <p>
+    The templates you've selected will appear here, along with their results once this test concludes.
+  </p>
+  <p>
+    If you need to create a new template, 
+    <PageLink
+      to="/templates"
+    >
+      head over to the templates page
+    </PageLink>
+    .
+  </p>
+</div>
+`;
