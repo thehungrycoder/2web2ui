@@ -73,7 +73,7 @@
     "react-chartjs-2": "^2.1.0",
     "react-day-picker": "^7.1.10",
     "react-dom": "^16.3.2",
-    "react-dropzone": "^5.0.0",
+    "react-dropzone": "^5.0.1",
     "react-helmet": "^5.2.0",
     "react-instantsearch": "^5.0.1",
     "react-load-script": "0.0.6",
@@ -93,7 +93,7 @@
     "validator": "^10.2.0"
   },
   "devDependencies": {
-    "@mdx-js/mdx": "^0.10.0",
+    "@mdx-js/mdx": "^0.15.0",
     "autoprefixer": "^9.0.0",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.2.1",
