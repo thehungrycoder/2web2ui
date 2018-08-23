@@ -47,7 +47,7 @@ export class UsageReport extends Component {
       return <PanelLoading />;
     }
 
-    if (usage.day.used === 0 && usage.month.used === 0 && accountAgeInWeeks < 4) {
+    if (usage.month.used === 0 && accountAgeInWeeks < 4) {
       return null;
     }
 

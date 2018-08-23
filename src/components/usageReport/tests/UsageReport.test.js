@@ -59,7 +59,6 @@ describe('UsageReport Component', () => {
 
   it('should not render with no usage on a new account', () => {
     props.usage.month.used = 0;
-    props.usage.day.used = 0;
     props.accountAgeInWeeks = 1;
     const wrapper = shallow(<UsageReport {...props} />);
     expect(wrapper.html()).toBe(null);
