@@ -6,23 +6,6 @@ export const RELATIVE_DATE_OPTIONS = [
   'custom'
 ];
 
-export const EVENT_FILTERS = [
-  'delivery',
-  'injection',
-  'bounce',
-  'delay',
-  'policy_rejection',
-  'out_of_band',
-  'open',
-  'initial_open',
-  'click',
-  'generation_failure',
-  'generation_rejection',
-  'spam_complaint',
-  'list_unsubscribe',
-  'link_unsubscribe'
-];
-
 export const TEXT_FILTERS = [
   { key: 'friendly_froms', label: 'From Addresses' },
   { key: 'subaccounts', label: 'Subaccount IDs' },

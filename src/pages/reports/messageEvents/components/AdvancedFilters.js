@@ -1,12 +1,13 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { updateMessageEventsSearchOptions } from 'src/actions/messageEvents';
+import { updateMessageEventsSearchOptions, getDocumentation } from 'src/actions/messageEvents';
+import { selectMessageEventsEventListing } from 'src/selectors/eventListing';
 import { WindowEvent, Panel, Modal, Button, Checkbox, TextField } from '@sparkpost/matchbox';
 import { snakeToFriendly, stringToArray } from 'src/helpers/string';
 import { onEnter, onEscape } from 'src/helpers/keyEvents';
 import _ from 'lodash';
 
-import { EVENT_FILTERS, TEXT_FILTERS } from './searchConfig';
+import { TEXT_FILTERS } from './searchConfig';
 import styles from './AdvancedFilters.module.scss';
 
 export class AdvancedFilters extends Component {
@@ -24,6 +25,7 @@ export class AdvancedFilters extends Component {
   }
 
   componentDidMount() {
+    this.props.getDocumentation();
     this.syncSearchToState(this.props);
   }
 
@@ -81,13 +83,16 @@ export class AdvancedFilters extends Component {
     this.setState({ search: { ...this.state.search, ...updatedSearch }});
   }
 
+  renderEvents = () => this.props.eventListing.map((event) => this.renderEvent(event));
+
   renderEvent = (event) => (
     <div className={styles.CheckWrapper} key={event}>
       <Checkbox
         id={event}
         onChange={() => this.handleCheckbox(event)}
         label={snakeToFriendly(event)}
-        checked={this.state.search.events[event] || false} />
+        checked={this.state.search.events[event] || false}
+      />
     </div>
   );
 
@@ -109,7 +114,7 @@ export class AdvancedFilters extends Component {
           <WindowEvent event='keydown' handler={this.handleKeyDown} />
           <Panel title='Advanced Filters'>
             <Panel.Section>
-              <Checkbox.Group label='Event Type'>{EVENT_FILTERS.map(this.renderEvent)}</Checkbox.Group>
+              <Checkbox.Group label='Event Type'>{this.renderEvents()}</Checkbox.Group>
             </Panel.Section>
             <Panel.Section>
               <p><small>Each of these filters accept comma-separated values.</small></p>
@@ -126,5 +131,8 @@ export class AdvancedFilters extends Component {
   }
 }
 
-const mapStateToProps = (state, props) => ({ search: state.messageEvents.search });
-export default connect(mapStateToProps, { updateMessageEventsSearchOptions })(AdvancedFilters);
+const mapStateToProps = (state) => ({
+  search: state.messageEvents.search,
+  eventListing: selectMessageEventsEventListing(state)
+});
+export default connect(mapStateToProps, { updateMessageEventsSearchOptions, getDocumentation })(AdvancedFilters);

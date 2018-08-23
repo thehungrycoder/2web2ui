@@ -6,6 +6,8 @@ describe('Component: ActiveFilters', () => {
   let wrapper;
   const props = {
     updateMessageEventsSearchOptions: jest.fn(),
+    getDocumentation: jest.fn(),
+    eventListing: ['amp_open', 'bounce', 'click', 'delivery'],
     search: {
       events: ['bounce', 'click'],
       friendly_froms: ['test@testy.co'],
@@ -46,14 +48,14 @@ describe('Component: ActiveFilters', () => {
 
   it('should handle filter changes and correctly apply', () => {
     wrapper.find('Button').at(0).simulate('click'); // Open modal
-    wrapper.find('Checkbox').at(0).simulate('change'); // Check delivery
+    wrapper.find('Checkbox').at(0).simulate('change'); // Check bounce
     wrapper.find('TextField').at(1).simulate('change', { target: { value: '101' }}); // Subaccount field
     expect(wrapper.state().search).toMatchSnapshot();
 
     wrapper.find('Button').at(1).simulate('click'); // Apply button
     expect(props.updateMessageEventsSearchOptions).toHaveBeenCalledWith({
       campaign_ids: [],
-      events: ['bounce', 'click', 'delivery'],
+      events: ['bounce', 'click', 'amp_open'],
       friendly_froms: ['test@testy.co'],
       subaccounts: ['101']
     });

@@ -4,9 +4,9 @@ exports[`Component: ActiveFilters should handle filter changes and correctly app
 Object {
   "campaign_ids": Array [],
   "events": Object {
+    "amp_open": true,
     "bounce": true,
     "click": true,
-    "delivery": true,
   },
   "friendly_froms": Array [
     "test@testy.co",
@@ -40,23 +40,12 @@ exports[`Component: ActiveFilters should render initially and sync to state corr
         >
           <div
             className="CheckWrapper"
-            key="delivery"
+            key="amp_open"
           >
             <Checkbox
               checked={false}
-              id="delivery"
-              label="Delivery"
-              onChange={[Function]}
-            />
-          </div>
-          <div
-            className="CheckWrapper"
-            key="injection"
-          >
-            <Checkbox
-              checked={false}
-              id="injection"
-              label="Injection"
+              id="amp_open"
+              label="Amp Open"
               onChange={[Function]}
             />
           </div>
@@ -73,61 +62,6 @@ exports[`Component: ActiveFilters should render initially and sync to state corr
           </div>
           <div
             className="CheckWrapper"
-            key="delay"
-          >
-            <Checkbox
-              checked={false}
-              id="delay"
-              label="Delay"
-              onChange={[Function]}
-            />
-          </div>
-          <div
-            className="CheckWrapper"
-            key="policy_rejection"
-          >
-            <Checkbox
-              checked={false}
-              id="policy_rejection"
-              label="Policy Rejection"
-              onChange={[Function]}
-            />
-          </div>
-          <div
-            className="CheckWrapper"
-            key="out_of_band"
-          >
-            <Checkbox
-              checked={false}
-              id="out_of_band"
-              label="Out Of Band"
-              onChange={[Function]}
-            />
-          </div>
-          <div
-            className="CheckWrapper"
-            key="open"
-          >
-            <Checkbox
-              checked={false}
-              id="open"
-              label="Open"
-              onChange={[Function]}
-            />
-          </div>
-          <div
-            className="CheckWrapper"
-            key="initial_open"
-          >
-            <Checkbox
-              checked={false}
-              id="initial_open"
-              label="Initial Open"
-              onChange={[Function]}
-            />
-          </div>
-          <div
-            className="CheckWrapper"
             key="click"
           >
             <Checkbox
@@ -139,56 +73,12 @@ exports[`Component: ActiveFilters should render initially and sync to state corr
           </div>
           <div
             className="CheckWrapper"
-            key="generation_failure"
+            key="delivery"
           >
             <Checkbox
               checked={false}
-              id="generation_failure"
-              label="Generation Failure"
-              onChange={[Function]}
-            />
-          </div>
-          <div
-            className="CheckWrapper"
-            key="generation_rejection"
-          >
-            <Checkbox
-              checked={false}
-              id="generation_rejection"
-              label="Generation Rejection"
-              onChange={[Function]}
-            />
-          </div>
-          <div
-            className="CheckWrapper"
-            key="spam_complaint"
-          >
-            <Checkbox
-              checked={false}
-              id="spam_complaint"
-              label="Spam Complaint"
-              onChange={[Function]}
-            />
-          </div>
-          <div
-            className="CheckWrapper"
-            key="list_unsubscribe"
-          >
-            <Checkbox
-              checked={false}
-              id="list_unsubscribe"
-              label="List Unsubscribe"
-              onChange={[Function]}
-            />
-          </div>
-          <div
-            className="CheckWrapper"
-            key="link_unsubscribe"
-          >
-            <Checkbox
-              checked={false}
-              id="link_unsubscribe"
-              label="Link Unsubscribe"
+              id="delivery"
+              label="Delivery"
               onChange={[Function]}
             />
           </div>
