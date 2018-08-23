@@ -1,10 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { UsageReport } from '../UsageReport';
-import datefns from 'date-fns';
-
-// Overrides format function - prevents tests from failing when run in different timezones.
-datefns.format = jest.fn((date) => date);
 
 describe('UsageReport Component', () => {
 
@@ -31,7 +27,8 @@ describe('UsageReport Component', () => {
           start: '2017-08-30T00:00:00.000Z'
         }
       },
-      getAccount
+      getAccount,
+      accountAgeInWeeks: 4
     };
   });
 
@@ -60,4 +57,11 @@ describe('UsageReport Component', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('should not render with no usage on a new account', () => {
+    props.usage.month.used = 0;
+    props.usage.day.used = 0;
+    props.accountAgeInWeeks = 1;
+    const wrapper = shallow(<UsageReport {...props} />);
+    expect(wrapper.html()).toBe(null);
+  });
 });

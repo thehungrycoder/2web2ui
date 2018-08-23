@@ -22,7 +22,7 @@ exports[`UsageReport Component should render with overages 1`] = `
 >
   <Panel.Section>
     <ProgressLabel
-      secondaryTitle="Since 2017-08-30T00:00:00.000Z"
+      secondaryTitle="Since Aug 29 2017, 8:00pm"
       title="Today"
     />
     <ProgressBar
@@ -42,7 +42,7 @@ exports[`UsageReport Component should render with overages 1`] = `
   </Panel.Section>
   <Panel.Section>
     <ProgressLabel
-      secondaryTitle="Billing cycle: 2017-08-01T08:00:00.000Z - 2017-08-31T08:00:00.000Z"
+      secondaryTitle="Billing cycle: Aug 1 2017 - Aug 31 2017"
       title="This Month"
     />
     <ProgressBar
@@ -86,7 +86,7 @@ exports[`UsageReport Component should render with regular usage 1`] = `
 >
   <Panel.Section>
     <ProgressLabel
-      secondaryTitle="Since 2017-08-30T00:00:00.000Z"
+      secondaryTitle="Since Aug 29 2017, 8:00pm"
       title="Today"
     />
     <ProgressBar
@@ -106,7 +106,7 @@ exports[`UsageReport Component should render with regular usage 1`] = `
   </Panel.Section>
   <Panel.Section>
     <ProgressLabel
-      secondaryTitle="Billing cycle: 2017-08-01T08:00:00.000Z - 2017-08-31T08:00:00.000Z"
+      secondaryTitle="Billing cycle: Aug 1 2017 - Aug 31 2017"
       title="This Month"
     />
     <ProgressBar
@@ -157,7 +157,7 @@ exports[`UsageReport Component should render with regular usage 3`] = `
   <h6
     className="ProgressSecondary"
   >
-    Since 2017-08-30T00:00:00.000Z
+    Since Aug 29 2017, 8:00pm
   </h6>
 </div>
 `;
