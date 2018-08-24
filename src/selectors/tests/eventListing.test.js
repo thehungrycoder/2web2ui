@@ -1,4 +1,4 @@
-import { selectEventListing, selectMessageEventsEventListing } from '../eventListing';
+import { selectWebhookEventListing, selectMessageEventListing } from '../eventListing';
 
 test('eventListing should transform event docs, sorted alpha-order by display_name', () => {
   const state = {
@@ -20,7 +20,7 @@ test('eventListing should transform event docs, sorted alpha-order by display_na
     }
   };
 
-  expect(selectEventListing(state)).toEqual([
+  expect(selectWebhookEventListing(state)).toEqual([
     { key: 'event3', a: 111, b: 222, display_name: 'A' },
     { key: 'event2', a: 11, b: 22, display_name: 'B' },
     { key: 'event1', a: 1, b: 2, display_name: 'C' },
@@ -37,7 +37,7 @@ test('should return a sorted list of message event doc keys', () => {
       }
     }
   };
-  expect(selectMessageEventsEventListing(state)).toEqual([
+  expect(selectMessageEventListing(state)).toEqual([
     'initial_open',
     'open'
   ]);

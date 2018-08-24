@@ -7,7 +7,7 @@ import { Panel } from '@sparkpost/matchbox';
 import { PanelLoading } from 'src/components';
 import WebhookForm from './WebhookForm';
 import resolveAuthUpdates from '../helpers/resolveAuthUpdates';
-import { selectEventListing } from 'src/selectors/eventListing';
+import { selectWebhookEventListing } from 'src/selectors/eventListing';
 
 export class EditTab extends Component {
 
@@ -64,7 +64,7 @@ export class EditTab extends Component {
 
 const mapStateToProps = (state) => ({
   eventsLoading: state.webhooks.docsLoading,
-  eventListing: selectEventListing(state)
+  eventListing: selectWebhookEventListing(state)
 });
 
 export default withRouter(connect(mapStateToProps, { getWebhook, getEventDocs, updateWebhook, showAlert })(EditTab));
