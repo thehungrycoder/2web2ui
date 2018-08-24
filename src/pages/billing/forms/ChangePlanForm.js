@@ -1,4 +1,4 @@
-/* eslint max-lines: ["error", 200] */
+/* eslint max-lines: ["error", 210] */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, formValueSelector } from 'redux-form';
@@ -11,7 +11,7 @@ import billingUpdate from 'src/actions/billingUpdate';
 import { showAlert } from 'src/actions/globalAlert';
 import { changePlanInitialValues } from 'src/selectors/accountBillingForms';
 import {
-  currentPlanSelector, canUpdateBillingInfoSelector, selectVisiblePlans, selectImmediatePlanChangeFromSearch
+  currentPlanSelector, canUpdateBillingInfoSelector, selectVisiblePlans
 } from 'src/selectors/accountBillingInfo';
 import { Panel, Grid } from '@sparkpost/matchbox';
 import { Loading, PlanPicker } from 'src/components';
@@ -77,27 +77,26 @@ export class ChangePlanForm extends Component {
   };
 
   onSubmit = (values) => {
-    console.log('submitting form')
-    // const { account, billing, updateSubscription, billingCreate, billingUpdate, showAlert, history } = this.props;
-    // const newCode = values.planpicker.code;
-    // const isDowngradeToFree = values.planpicker.isFree;
-    //
-    // const newValues = values.card && !isDowngradeToFree
-    //   ? { ...values, card: prepareCardInfo(values.card) }
-    //   : values;
-    //
-    // // decides which action to be taken based on
-    // // if it's aws account, it already has billing and if you use a saved CC
-    // let action;
-    // if (this.props.isAws) {
-    //   action = updateSubscription({ code: newCode });
-    // } else if (account.billing) {
-    //   action = this.state.useSavedCC || isDowngradeToFree ? updateSubscription({ code: newCode }) : billingUpdate(newValues);
-    // } else {
-    //   action = billingCreate(newValues); // creates Zuora account
-    // }
-    //
-    // return this.handleBillingAction(action, newCode);
+    const { account, updateSubscription, billingCreate, billingUpdate } = this.props;
+    const newCode = values.planpicker.code;
+    const isDowngradeToFree = values.planpicker.isFree;
+
+    const newValues = values.card && !isDowngradeToFree
+      ? { ...values, card: prepareCardInfo(values.card) }
+      : values;
+
+    // decides which action to be taken based on
+    // if it's aws account, it already has billing and if you use a saved CC
+    let action;
+    if (this.props.isAws) {
+      action = updateSubscription({ code: newCode });
+    } else if (account.billing) {
+      action = this.state.useSavedCC || isDowngradeToFree ? updateSubscription({ code: newCode }) : billingUpdate(newValues);
+    } else {
+      action = billingCreate(newValues); // creates Zuora account
+    }
+
+    return this.handleBillingAction(action, newCode);
   };
 
   renderCCSection = () => {
@@ -179,11 +178,10 @@ export class ChangePlanForm extends Component {
 const mapStateToProps = (state, props) => {
   const selector = formValueSelector(FORMNAME);
   const { code: planCode, immediatePlanChange } = qs.parse(props.location.search);
-
   const plans = selectVisiblePlans(state);
 
   return {
-    loading: (!state.account.created || state.account.loading) || (plans.length === 0 && state.billing.plansLoading),
+    loading: (!state.account.created && state.account.loading) || (plans.length === 0 && state.billing.plansLoading),
     isAws: selectCondition(isAws)(state),
     account: state.account,
     billing: state.billing,

@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Brightback Component should render correctly when enabled and with valid account data 1`] = `
+<button
+  to="http://redirect-to-brightback.com"
+  type="button"
+>
+  test
+</button>
+`;
+
+exports[`Brightback Component should render fallback when not enabled 1`] = `
+<button
+  type="submit"
+>
+  test
+</button>
+`;
+
+exports[`Brightback Component should render fallback without the UI option 1`] = `
+<button
+  type="submit"
+>
+  test
+</button>
+`;
+
+exports[`Brightback Component should render fallback without valid account data 1`] = `
+<button
+  type="submit"
+>
+  test
+</button>
+`;

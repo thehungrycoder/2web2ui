@@ -3,17 +3,21 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { precancel } from 'src/actions/brightback';
 import { selectBrightbackData } from 'src/selectors/brightback';
+import { hasUiOption } from 'src/helpers/conditions/account';
 
 export class Brightback extends Component {
   componentDidMount() {
-    const { precancel, data } = this.props;
-    precancel(data);
+    const { precancel, data, hasBrightbackOption } = this.props;
+
+    if (hasBrightbackOption) {
+      precancel(data);
+    }
   }
 
   getRenderProps() {
-    const { enabled, valid, url } = this.props;
+    const { enabled, valid, url, hasBrightbackOption } = this.props;
 
-    if (enabled && valid) {
+    if (hasBrightbackOption && enabled && valid) {
       return {
         buttonProps: {
           to: url,
@@ -34,6 +38,7 @@ const mapStateToProps = (state) => ({
   valid: state.brightback.valid,
   url: state.brightback.url,
   data: selectBrightbackData(state),
-  loading: state.brightback.precancelLoading
+  loading: state.brightback.precancelLoading,
+  hasBrightbackOption: hasUiOption('brightback')(state)
 });
 export default withRouter(connect(mapStateToProps, { precancel })(Brightback));

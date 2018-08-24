@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Selectors: brightback returns data to be passed onto brightback 1`] = `
+Object {
+  "account": Object {
+    "created_at": 1500000000000,
+    "internal_id": 101,
+  },
+  "app_id": "9N0rWBvKGR",
+  "billing_url": "http://phoenix.test/account/billing/plan",
+  "cancel_confirmation_url": "http://phoenix.test/accout/billing/plan?immediatePlanChange=free-0817",
+  "context": Object {
+    "locale": "en-US",
+    "referrer": "",
+    "timezone": "UTC",
+    "url": "http://phoenix.test/",
+    "user_agent": "node.js",
+  },
+  "save_return_url": "http://phoenix.test/account/billing",
+  "timestamp": "2017-11-15T10:00:00.000Z",
+}
+`;

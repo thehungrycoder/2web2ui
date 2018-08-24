@@ -1,4 +1,5 @@
 import config from 'src/config';
+import { getLocalTimezone } from 'src/helpers/date';
 
 export const selectBrightbackData = (state) => {
   const { customer_id, created } = state.account;
@@ -6,9 +7,10 @@ export const selectBrightbackData = (state) => {
 
   return {
     app_id: brightbackConfig.app_id,
+    timestamp: new Date().toISOString(),
     context: {
       locale: navigator.language,
-      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone, // eslint-disable-line new-cap
+      timezone: getLocalTimezone(),
       user_agent: navigator.userAgent,
       url: window.location.href,
       referrer: document.referrer
