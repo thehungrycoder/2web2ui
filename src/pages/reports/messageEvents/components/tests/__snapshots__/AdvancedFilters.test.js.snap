@@ -35,139 +35,40 @@ exports[`Component: ActiveFilters should render initially and sync to state corr
       title="Advanced Filters"
     >
       <Panel.Section>
-        <Checkbox.Group
-          label="Event Type"
-        >
-          <div
-            className="CheckWrapper"
-            key="amp_open"
-          >
-            <Checkbox
-              checked={false}
-              id="amp_open"
-              label="Amp Open"
-              onChange={[Function]}
-            />
-          </div>
-          <div
-            className="CheckWrapper"
-            key="bounce"
-          >
-            <Checkbox
-              checked={true}
-              id="bounce"
-              label="Bounce"
-              onChange={[Function]}
-            />
-          </div>
-          <div
-            className="CheckWrapper"
-            key="click"
-          >
-            <Checkbox
-              checked={true}
-              id="click"
-              label="Click"
-              onChange={[Function]}
-            />
-          </div>
-          <div
-            className="CheckWrapper"
-            key="delivery"
-          >
-            <Checkbox
-              checked={false}
-              id="delivery"
-              label="Delivery"
-              onChange={[Function]}
-            />
-          </div>
-        </Checkbox.Group>
+        <EventTypeFilters
+          checkedTypes={
+            Object {
+              "bounce": true,
+              "click": true,
+            }
+          }
+          eventTypes={
+            Array [
+              "amp_open",
+              "bounce",
+              "click",
+              "delivery",
+            ]
+          }
+          onChange={[Function]}
+        />
       </Panel.Section>
       <Panel.Section>
-        <p>
-          <small>
-            Each of these filters accept comma-separated values.
-          </small>
-        </p>
-        <div
-          className="FieldWrapper"
-          key="friendly_froms"
-        >
-          <TextField
-            id="friendly_froms"
-            label="From Addresses"
-            onChange={[Function]}
-            resize="both"
-            type="text"
-            value={
-              Array [
+        <TextFilters
+          filterValues={
+            Object {
+              "campaign_ids": Array [],
+              "events": Object {
+                "bounce": true,
+                "click": true,
+              },
+              "friendly_froms": Array [
                 "test@testy.co",
-              ]
+              ],
             }
-          />
-        </div>
-        <div
-          className="FieldWrapper"
-          key="subaccounts"
-        >
-          <TextField
-            id="subaccounts"
-            label="Subaccount IDs"
-            onChange={[Function]}
-            resize="both"
-            type="text"
-          />
-        </div>
-        <div
-          className="FieldWrapper"
-          key="message_ids"
-        >
-          <TextField
-            id="message_ids"
-            label="Message IDs"
-            onChange={[Function]}
-            resize="both"
-            type="text"
-          />
-        </div>
-        <div
-          className="FieldWrapper"
-          key="template_ids"
-        >
-          <TextField
-            id="template_ids"
-            label="Template IDs"
-            onChange={[Function]}
-            resize="both"
-            type="text"
-          />
-        </div>
-        <div
-          className="FieldWrapper"
-          key="campaign_ids"
-        >
-          <TextField
-            id="campaign_ids"
-            label="Campaign IDs"
-            onChange={[Function]}
-            resize="both"
-            type="text"
-            value={Array []}
-          />
-        </div>
-        <div
-          className="FieldWrapper"
-          key="bounce_classes"
-        >
-          <TextField
-            id="bounce_classes"
-            label="Bounce Classes"
-            onChange={[Function]}
-            resize="both"
-            type="text"
-          />
-        </div>
+          }
+          onChange={[Function]}
+        />
       </Panel.Section>
       <Panel.Section>
         <Button

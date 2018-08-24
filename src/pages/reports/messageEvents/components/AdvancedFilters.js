@@ -1,13 +1,15 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { updateMessageEventsSearchOptions, getDocumentation } from 'src/actions/messageEvents';
-import { selectMessageEventsEventListing } from 'src/selectors/eventListing';
-import { WindowEvent, Panel, Modal, Button, Checkbox, TextField } from '@sparkpost/matchbox';
-import { snakeToFriendly, stringToArray } from 'src/helpers/string';
+import { selectMessageEventListing } from 'src/selectors/eventListing';
+import { WindowEvent, Panel, Modal, Button } from '@sparkpost/matchbox';
+import { stringToArray } from 'src/helpers/string';
 import { onEnter, onEscape } from 'src/helpers/keyEvents';
 import _ from 'lodash';
 
-import { TEXT_FILTERS } from './searchConfig';
+import EventTypeFilters from './EventTypeFilters';
+import TextFilters from './TextFilters';
+
 import styles from './AdvancedFilters.module.scss';
 
 export class AdvancedFilters extends Component {
@@ -83,29 +85,6 @@ export class AdvancedFilters extends Component {
     this.setState({ search: { ...this.state.search, ...updatedSearch }});
   }
 
-  renderEvents = () => this.props.eventListing.map((event) => this.renderEvent(event));
-
-  renderEvent = (event) => (
-    <div className={styles.CheckWrapper} key={event}>
-      <Checkbox
-        id={event}
-        onChange={() => this.handleCheckbox(event)}
-        label={snakeToFriendly(event)}
-        checked={this.state.search.events[event] || false}
-      />
-    </div>
-  );
-
-  renderFilter = ({ key, ...rest }) => (
-    <div className={styles.FieldWrapper} key={key}>
-      <TextField
-        id={key}
-        value={this.state.search[key]}
-        onChange={(e) => this.handleTextField(e, key)}
-        {...rest} />
-    </div>
-  );
-
   render() {
     return (
       <Fragment>
@@ -114,11 +93,14 @@ export class AdvancedFilters extends Component {
           <WindowEvent event='keydown' handler={this.handleKeyDown} />
           <Panel title='Advanced Filters'>
             <Panel.Section>
-              <Checkbox.Group label='Event Type'>{this.renderEvents()}</Checkbox.Group>
+              <EventTypeFilters
+                eventTypes={this.props.eventListing}
+                checkedTypes={this.state.search.events}
+                onChange={this.handleCheckbox}
+              />
             </Panel.Section>
             <Panel.Section>
-              <p><small>Each of these filters accept comma-separated values.</small></p>
-              {TEXT_FILTERS.map(this.renderFilter)}
+              <TextFilters filterValues={this.state.search} onChange={this.handleTextField} />
             </Panel.Section>
             <Panel.Section>
               <Button primary onClick={this.handleApply}>Apply Filters</Button>
@@ -133,6 +115,6 @@ export class AdvancedFilters extends Component {
 
 const mapStateToProps = (state) => ({
   search: state.messageEvents.search,
-  eventListing: selectMessageEventsEventListing(state)
+  eventListing: selectMessageEventListing(state)
 });
 export default connect(mapStateToProps, { updateMessageEventsSearchOptions, getDocumentation })(AdvancedFilters);

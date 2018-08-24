@@ -48,8 +48,8 @@ describe('Component: ActiveFilters', () => {
 
   it('should handle filter changes and correctly apply', () => {
     wrapper.find('Button').at(0).simulate('click'); // Open modal
-    wrapper.find('Checkbox').at(0).simulate('change'); // Check bounce
-    wrapper.find('TextField').at(1).simulate('change', { target: { value: '101' }}); // Subaccount field
+    wrapper.find('EventTypeFilters').dive().find('Checkbox').at(0).simulate('change'); // Check bounce
+    wrapper.find('TextFilters').dive().find('TextField').at(1).simulate('change', { target: { value: '101' }}); // Subaccount field
     expect(wrapper.state().search).toMatchSnapshot();
 
     wrapper.find('Button').at(1).simulate('click'); // Apply button
