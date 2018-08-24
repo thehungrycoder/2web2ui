@@ -1,15 +1,12 @@
-// import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
+import brightbackRequest from './helpers/brightbackRequest';
 
 export function precancel(data) {
-  console.log({ data })
-  return {
-    type: 'BRIGHTBACK_PRECANCEL_TEST'
-  }
-  // return brightbackRequest({
-  //   type: 'BRIGHTBACK_PRECANCEL',
-  //   meta: {
-  //     method: 'POST',
-  //     url: '/precancel'
-  //   }
-  // });
+  return brightbackRequest({
+    type: 'BRIGHTBACK_PRECANCEL',
+    meta: {
+      method: 'POST',
+      url: '/precancel',
+      data
+    }
+  });
 }
