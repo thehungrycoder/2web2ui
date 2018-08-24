@@ -103,13 +103,6 @@ const supportIssues = [
     condition: all(hasOnlineSupport, isAdmin, isEmailVerified, hasStatus('active'), not(onPlanWithStatus('deprecated')))
   },
   {
-    id: 'general_issue',
-    label: 'Another issue',
-    messageLabel: 'Tell us more about your issue',
-    type: SUPPORT,
-    condition: all(hasOnlineSupport, hasStatus('active'))
-  },
-  {
     id: 'account_cancellation',
     label: 'Account cancellation',
     messageLabel: 'Tell us why you are leaving',
@@ -118,6 +111,7 @@ const supportIssues = [
   {
     id: 'general_issue',
     label: 'Another issue',
+    messageLabel: 'Tell us more about your issue',
     type: SUPPORT
   }
 ];
