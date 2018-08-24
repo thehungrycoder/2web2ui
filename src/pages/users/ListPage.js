@@ -2,22 +2,19 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import fp from 'lodash/fp';
-import { Page, Toggle } from '@sparkpost/matchbox';
+import { Page } from '@sparkpost/matchbox';
 import { Users } from 'src/components/images';
 import TimeAgo from 'react-timeago';
 
 import * as usersActions from 'src/actions/users';
 import { selectUsers } from 'src/selectors/users';
 
-import { Loading, ApiErrorBanner, DeleteModal, TableCollection } from 'src/components';
-import RoleSelect from './components/RoleSelect';
-import DeleteButton from './components/DeleteButton';
+import { Loading, ApiErrorBanner, DeleteModal, TableCollection, ActionPopover } from 'src/components';
 
 const COLUMNS = [
   { label: 'Name', sortKey: 'name' },
   { label: 'Role', sortKey: 'access' },
   { label: 'Email', sortKey: 'email' },
-  { label: 'Single Sign-on', sortKey: 'is_sso' },
   { label: 'Last Login', sortKey: 'last_login' },
   null
 ];
@@ -31,7 +28,13 @@ const primaryAction = {
   to: '/account/users/create'
 };
 
-const SsoSwitch = ({ value }) => <Toggle checked={value} />;
+const Actions = ({ username, deletable, onDelete }) => {
+  const actions = [ { content: 'Edit', to: `/account/users/edit/${username}`, component: Link } ];
+  if (deletable) {
+    actions.push({ content: 'Delete', onClick: () => onDelete(username) });
+  }
+  return <ActionPopover actions={actions} />;
+};
 
 export class ListPage extends Component {
   state = DEFAULT_STATE;
@@ -43,24 +46,10 @@ export class ListPage extends Component {
   // Do not allow current user to change their access/role or delete their account
   getRowData = (user) => [
     user.name,
-    <RoleSelect
-      disabled={user.isCurrentUser}
-      name={user.username}
-      onChange={this.handleAccessChange}
-      value={user.access}
-      allowSuperUser={user.access === 'superuser'}
-    />,
+    user.access,
     user.email,
-    <SsoSwitch
-      name={user.username}
-      value={user.is_sso}
-    />,
     user.last_login ? <TimeAgo date={user.last_login} live={false} /> : 'Never',
-    <DeleteButton
-      disabled={user.isCurrentUser}
-      name={user.username}
-      onClick={this.handleDeleteRequest}
-    />
+    <Actions username={user.username} deletable={!user.isCurrentUser} onDelete={this.handleDeleteRequest} />
   ];
 
   handleAccessChange = ({ name, value }) => {

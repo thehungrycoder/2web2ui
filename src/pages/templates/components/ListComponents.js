@@ -1,11 +1,11 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
-import { Popover, Button, ActionList, Tag, Tooltip } from '@sparkpost/matchbox';
-import { MoreHoriz } from '@sparkpost/matchbox-icons';
+import { Tag, Tooltip } from '@sparkpost/matchbox';
 import { formatDateTime } from 'src/helpers/date';
 import { resolveTemplateStatus } from 'src/helpers/templates';
 import styles from './ListComponents.module.scss';
+import { ActionPopover } from 'src/components';
 
 const Name = ({ name, id, subaccount_id, ...rowData }) => {
   const { published } = resolveTemplateStatus(rowData);
@@ -62,9 +62,7 @@ const Actions = ({ id, subaccount_id, ...rowData }) => {
 
   return (
     <div style={{ textAlign: 'right' }}>
-      <Popover left trigger={<Button flat><MoreHoriz size={20}/></Button>}>
-        <ActionList actions={actions}/>
-      </Popover>
+      <ActionPopover actions={actions} />
     </div>
   );
 };

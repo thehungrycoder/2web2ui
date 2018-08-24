@@ -1,33 +1,14 @@
 import React, { Component } from 'react';
-import { Panel, Grid, Button } from '@sparkpost/matchbox';
+import { Panel, Grid, Button, UnstyledLink } from '@sparkpost/matchbox';
+import { ArrowForward } from '@sparkpost/matchbox-icons';
 import Modal from 'src/components/modals/Modal';
 import { LabelledValue } from 'src/components';
 import FileFieldWrapper from 'src/components/reduxFormWrappers/FileFieldWrapper';
 import styles from './SsoManager.module.scss';
 
 class ProvisionSsoModal extends Component {
-  componentDidUpdate(oldProps) {
-    if (!oldProps.open && this.props.open) {
-      this.setState({ provisioning: false });
-    }
-
-    if (this.state.provisioning && oldProps.open) {
-      this.props.onClose();
-    }
-
-    if (this.state.provisioning && oldProps.open && !this.props.open) {
-      this.props.onProvision();
-    }
-  }
-
-  state = {
-    provisioning: false
-  }
-
-  onProvision = () => this.setState({ provisioned: true })
-
   render() {
-    const { provisioned, open, onClose } = this.props;
+    const { provisioned, open, onProvision, onClose } = this.props;
     return <Modal open={open}>
       <Panel title='Provision SAML Single Sign-on' accent>
         <Panel.Section>
@@ -49,7 +30,7 @@ class ProvisionSsoModal extends Component {
           </Grid>
         </Panel.Section>
         <Panel.Section>
-          <Button type='submit' primary onClick={this.onProvision}>Provision SSO</Button>
+          <Button type='submit' primary onClick={onProvision}>Provision SSO</Button>
           <Button onClick={onClose} className={styles.Cancel}>Cancel</Button>
         </Panel.Section>
       </Panel>
@@ -57,18 +38,27 @@ class ProvisionSsoModal extends Component {
   }
 }
 
-const SsoStatus = ({ provisioned, enabled }) => {
-  const status = [];
-  if (provisioned) {
-    status.push('Provisioned');
-  }
-  if (enabled) {
-    status.push('Enabled');
-  } else {
-    status.push('Disabled');
-  }
+const Provision = ({ provisioned, onProvision }) => {
+  const actionMsg = provisioned ? 'Reprovision SAML' : 'Provision SAML';
+  return <Panel.Section actions={[ { content: actionMsg, onClick: onProvision, color: 'orange' } ]}>
+    <LabelledValue label='SAML'>
+      <h6>{provisioned ? 'Provisioned to your-saml-provider.example.com' : 'Not provisioned'}</h6>
+      {!provisioned && <p>Provision your SAML identity providor to turn on SSO.</p>}
+    </LabelledValue>
+  </Panel.Section>;
+};
 
-  return <LabelledValue label='Status'>{status.join(', ')}</LabelledValue>;
+const Enable = ({ enabled, onToggle }) => {
+  const actionMsg = enabled ? 'Disable SSO' : 'Enable SSO';
+
+  const status = enabled ? 'Enabled' : 'Disabled';
+
+  return <Panel.Section actions={[ { content: actionMsg, onClick: onToggle, color: 'orange' } ]}>
+    <LabelledValue label='Single Sign-On'>
+      <h6>{status}</h6>
+      {enabled && <h6><UnstyledLink to='/account/users'>Manage single sign-on users <ArrowForward/></UnstyledLink></h6>}
+    </LabelledValue>
+  </Panel.Section>;
 };
 
 export default class SsoManager extends Component {
@@ -81,30 +71,18 @@ export default class SsoManager extends Component {
 
   onProvision = () => this.setState({ modal: false }, () => this.setState({ provisioned: true }))
 
-  onCloseModal = () => this.setState({ modal: false })
+  openModal = () => this.setState({ modal: true })
+  closeModal = () => this.setState({ modal: false })
 
-  onEnableChange = () => this.setState({ enabled: !this.state.enabled })
+  onEnableToggle = () => this.setState({ enabled: !this.state.enabled })
 
   render() {
-    const { modal, provisioned } = this.state;
+    const { modal, provisioned, enabled } = this.state;
 
-    const actions = [
-      {
-        content: provisioned ? 'Reprovision SSO' : 'Provision SSO',
-        onClick: () => this.setState({ modal: true }),
-        color: 'orange'
-      },
-      {
-        content: 'Learn More',
-        to: '#',
-        external: true,
-        color: 'orange'
-      }
-    ];
-
-    return <Panel sectioned title='SAML Single Sign-On' actions={actions}>
-      <SsoStatus {...this.state} />
-      <ProvisionSsoModal open={modal} provisioned={provisioned} onProvision={this.onProvision} onClose={this.onCloseModal} />
+    return <Panel title='Single Sign-On' actions={[{ content: 'Learn More', color: 'orange' }]}>
+      <Provision provisioned={provisioned} onProvision={this.openModal} />
+      {provisioned && <Enable enabled={enabled} onToggle={this.onEnableToggle} />}
+      <ProvisionSsoModal open={modal} provisioned={provisioned} onProvision={this.onProvision} onClose={this.closeModal} />
     </Panel>;
   }
 }
