@@ -33,7 +33,7 @@ export class DashboardPage extends Component {
         {currentUser.email_verified === false && (
           <VerifyEmailBanner verifying={currentUser.verifyingEmail} />
         )}
-        <UsageReport />
+        <UsageReport accountAgeInWeeks={accountAgeInWeeks} />
         <SuppressionBanner accountAgeInWeeks={accountAgeInWeeks} hasSuppressions={hasSuppressions} />
         <Tutorial {...this.props} />
       </Page>
