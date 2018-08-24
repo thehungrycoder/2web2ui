@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import EventTypeFilters from '../eventTypeFilters';
+import EventTypeFilters from '../EventTypeFilters';
 
 describe('EventTypeFilters', () => {
   let props;
