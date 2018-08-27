@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Helper: Brightback API Request should make a successful call 1`] = `
+Array [
+  Object {
+    "meta": Object {},
+    "type": "BRIGHTBACK_REQUEST_PENDING",
+  },
+  Object {
+    "meta": Object {},
+    "payload": Object {
+      "valid": true,
+    },
+    "type": "BRIGHTBACK_REQUEST_SUCCESS",
+  },
+]
+`;

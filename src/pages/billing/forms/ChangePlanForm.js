@@ -38,19 +38,22 @@ export class ChangePlanForm extends Component {
     this.props.getPlans();
     this.props.getBillingCountries();
     this.props.fetchAccount({ include: 'billing' });
+
+    if (this.props.immediatePlanChange) {
+      this.handleImmediatePlanChange();
+    }
   }
 
-  componentDidUpdate({ loading: prevLoading }) {
-    const { loading, immediatePlanChange, updateSubscription, history, location } = this.props;
+  handleImmediatePlanChange() {
+    const { immediatePlanChange, updateSubscription, history, location } = this.props;
 
-    if (prevLoading && !loading && immediatePlanChange) {
-      history.replace({
-        pathname: location.pathname,
-        search: stripImmediatePlanChange(location.search)
-      });
-      const action = updateSubscription({ code: immediatePlanChange });
-      this.handleBillingAction(action, immediatePlanChange);
-    }
+    history.replace({
+      pathname: location.pathname,
+      search: stripImmediatePlanChange(location.search)
+    });
+
+    const action = updateSubscription({ code: immediatePlanChange });
+    return this.handleBillingAction(action, immediatePlanChange);
   }
 
   handleBillingAction = (action, newCode) => {

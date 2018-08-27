@@ -5,7 +5,7 @@ import _ from 'lodash';
 export default requestHelperFactory({
   request: brightbackAxios,
   onSuccess: ({ response, dispatch, types, meta }) => {
-    const results = _.get(response, 'data.results', response.data);
+    const results = _.get(response, 'data');
 
     dispatch({
       type: types.SUCCESS,
