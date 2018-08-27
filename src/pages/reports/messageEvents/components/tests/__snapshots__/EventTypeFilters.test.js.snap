@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EventTypeFilters should render checked state 1`] = `
+<Checkbox.Group
+  label="Event Type"
+>
+  <div
+    className="CheckWrapper"
+    key="amp_open"
+  >
+    <Checkbox
+      checked={false}
+      id="amp_open"
+      label="Amp Open"
+      onChange={[Function]}
+    />
+  </div>
+  <div
+    className="CheckWrapper"
+    key="bounce"
+  >
+    <Checkbox
+      checked={true}
+      id="bounce"
+      label="Bounce"
+      onChange={[Function]}
+    />
+  </div>
+</Checkbox.Group>
+`;
+
+exports[`EventTypeFilters should render from a list of event types 1`] = `
+<Checkbox.Group
+  label="Event Type"
+>
+  <div
+    className="CheckWrapper"
+    key="amp_open"
+  >
+    <Checkbox
+      checked={false}
+      id="amp_open"
+      label="Amp Open"
+      onChange={[Function]}
+    />
+  </div>
+  <div
+    className="CheckWrapper"
+    key="bounce"
+  >
+    <Checkbox
+      checked={false}
+      id="bounce"
+      label="Bounce"
+      onChange={[Function]}
+    />
+  </div>
+</Checkbox.Group>
+`;

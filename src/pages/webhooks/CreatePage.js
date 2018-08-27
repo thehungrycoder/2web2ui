@@ -8,7 +8,7 @@ import { Loading } from 'src/components';
 import { Page, Panel } from '@sparkpost/matchbox';
 import WebhookForm from './components/WebhookForm';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
-import { selectEventListing } from 'src/selectors/eventListing';
+import { selectWebhookEventListing } from 'src/selectors/eventListing';
 
 export class WebhooksCreate extends Component {
   componentDidMount() {
@@ -99,7 +99,7 @@ export class WebhooksCreate extends Component {
 const mapStateToProps = (state) => ({
   webhook: state.webhooks.webhook,
   eventsLoading: state.webhooks.docsLoading,
-  eventListing: selectEventListing(state)
+  eventListing: selectWebhookEventListing(state)
 });
 
 export default withRouter(connect(mapStateToProps, { createWebhook, getEventDocs, showAlert })(WebhooksCreate));
