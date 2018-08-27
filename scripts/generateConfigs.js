@@ -42,9 +42,6 @@ const tenants = {
     splashPage: '/dashboard',
     trackingDomains: {
       cnameValue: 'mtaspc.et.e.tst.sparkpost.com'
-    },
-    zuora: {
-      baseUrl: 'https://rest.apisandbox.zuora.com/v1'
     }
   },
   speuat: {
@@ -134,10 +131,7 @@ const tenants = {
       username: 'stagingmtaspc',
       alternativePort: 2525
     },
-    splashPage: '/dashboard',
-    zuora: {
-      baseUrl: 'https://rest.apisandbox.zuora.com/v1'
-    }
+    splashPage: '/dashboard'
   },
   uat: {
     include: 'uat',

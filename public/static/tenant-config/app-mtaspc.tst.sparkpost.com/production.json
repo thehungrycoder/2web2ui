@@ -37,8 +37,5 @@
   "tenant": "mtaspc",
   "trackingDomains": {
     "cnameValue": "mtaspc.et.e.tst.sparkpost.com"
-  },
-  "zuora": {
-    "baseUrl": "https://rest.apisandbox.zuora.com/v1"
   }
 }

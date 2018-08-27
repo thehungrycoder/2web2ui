@@ -37,8 +37,5 @@
   "tenant": "stagingmtaspc",
   "trackingDomains": {
     "cnameValue": "stagingmtaspc.et.e.sparkpost.com"
-  },
-  "zuora": {
-    "baseUrl": "https://rest.apisandbox.zuora.com/v1"
   }
 }
