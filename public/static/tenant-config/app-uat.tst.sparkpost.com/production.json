@@ -15,7 +15,6 @@
     "templatesBySubaccount": true,
     "usage_from_redis": true
   },
-  "gaTag": "UA-111136819-2",
   "gtmId": "GTM-P87NNJ4",
   "sentry": {
     "projectId": 237611,

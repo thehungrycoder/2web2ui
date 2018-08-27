@@ -40,7 +40,6 @@ const config = {
     allow_anyone_at_verification: false,
     has_signup: false
   },
-  gaTag: 'no-default-set',
   heroku: {
     cookieName: 'heroku-nav-data'
   },

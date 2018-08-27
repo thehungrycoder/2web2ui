@@ -1004,7 +1004,6 @@ const defaults = Object.keys(tenants).map((tenant) => {
 // TODO: Name them something other than environments
 const contexts = {
   uat: {
-    gaTag: 'UA-111136819-2',
     sentry: {
       projectId: 237611,
       publicKey: 'b63907577f9c4091895c49cc963fa8e4'
@@ -1019,7 +1018,6 @@ const contexts = {
     }
   },
   staging: {
-    gaTag: 'UA-111136819-2',
     sentry: {
       projectId: 237612,
       publicKey: 'cb27762b225f4884b5e035580f1cc289'
@@ -1034,8 +1032,6 @@ const contexts = {
     }
   },
   production: {
-    // why is this not set for all enterprise tenants?
-    gaTag: 'UA-111136819-2',
     sentry: {
       projectId: 237613,
       publicKey: '014f9707c27b4e7ea90aff051a82e561'

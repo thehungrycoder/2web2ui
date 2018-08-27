@@ -9,7 +9,6 @@
     "allow_anyone_at_verification": true,
     "allow_mailbox_verification": true
   },
-  "gaTag": "UA-111136819-2",
   "sentry": {
     "projectId": 237611,
     "publicKey": "b63907577f9c4091895c49cc963fa8e4"

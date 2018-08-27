@@ -14,7 +14,6 @@
     "templatesBySubaccount": true,
     "usage_from_redis": true
   },
-  "gaTag": "UA-111136819-2",
   "sentry": {
     "projectId": 237612,
     "publicKey": "cb27762b225f4884b5e035580f1cc289"
