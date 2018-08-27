@@ -93,11 +93,6 @@ const tenants = {
       username: 'staging-mtas2',
       alternativePort: 2525
     },
-    support: {
-      algolia: {
-        index: 'staging_site_posts_support_article'
-      }
-    },
     trackingDomains: {
       cnameValue: 'staging-mtas2.spgo.io'
     }
