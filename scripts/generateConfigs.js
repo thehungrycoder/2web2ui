@@ -6,8 +6,7 @@ const tenants = {
     include: 'production',
     featureFlags: {
       allow_anyone_at_verification: true,
-      allow_default_signing_domains_for_ip_pools: true,
-      allow_mailbox_verification: true
+      allow_default_signing_domains_for_ip_pools: true
     },
     trackingDomains: {
       cnameValue: 'track.247sports-m.msyscloud.com'
@@ -29,7 +28,6 @@ const tenants = {
     featureFlags: {
       allow_anyone_at_verification: true,
       allow_default_signing_domains_for_ip_pools: true,
-      allow_mailbox_verification: true,
       has_signup: true
     },
     host: 'app-mtaspc.tst.sparkpost.com',
@@ -64,8 +62,7 @@ const tenants = {
     include: 'staging',
     apiBase: '//api-staging-mtas.sparkpost.com/api/v1',
     featureFlags: {
-      allow_anyone_at_verification: true,
-      allow_mailbox_verification: true
+      allow_anyone_at_verification: true
     },
     host: 'app-staging-mtas.sparkpost.com',
     smtpAuth: {
@@ -84,8 +81,7 @@ const tenants = {
       cnameValue: 'staging-mtas2.mail.e.sparkpost.com'
     },
     featureFlags: {
-      allow_anyone_at_verification: true,
-      allow_mailbox_verification: true
+      allow_anyone_at_verification: true
     },
     host: 'app-staging-mtas2.sparkpost.com',
     smtpAuth: {
@@ -105,7 +101,6 @@ const tenants = {
     featureFlags: {
       allow_anyone_at_verification: true,
       allow_default_signing_domains_for_ip_pools: true,
-      allow_mailbox_verification: true,
       has_signup: true
     },
     host: 'app-staging.sparkpost.com',
@@ -128,7 +123,6 @@ const tenants = {
     featureFlags: {
       allow_anyone_at_verification: true,
       allow_default_signing_domains_for_ip_pools: true,
-      allow_mailbox_verification: true,
       has_signup: true
     },
     host: 'app-stagingmtaspc.sparkpost.com',
@@ -155,7 +149,6 @@ const tenants = {
     featureFlags: {
       allow_anyone_at_verification: true,
       allow_default_signing_domains_for_ip_pools: true,
-      allow_mailbox_verification: true,
       has_signup: true
     },
     gtmId: 'GTM-P87NNJ4',
@@ -179,8 +172,7 @@ const tenants = {
       cnameValue: 'uat2public.mail.e.sparkpost.com'
     },
     featureFlags: {
-      allow_anyone_at_verification: true,
-      allow_mailbox_verification: true
+      allow_anyone_at_verification: true
     },
     host: 'app-uat2.tst.sparkpost.com',
     smtpAuth: {
@@ -195,8 +187,7 @@ const tenants = {
     include: 'uat',
     apiBase: '//api-uat3.tst.sparkpost.com/api/v1',
     featureFlags: {
-      allow_anyone_at_verification: true,
-      allow_mailbox_verification: true
+      allow_anyone_at_verification: true
     },
     host: 'app-uat3.tst.sparkpost.com',
     smtpAuth: {
@@ -210,8 +201,7 @@ const tenants = {
     include: 'uat',
     apiBase: '//api-uat4.tst.sparkpost.com/api/v1',
     featureFlags: {
-      allow_anyone_at_verification: true,
-      allow_mailbox_verification: true
+      allow_anyone_at_verification: true
     },
     host: 'app-uat4.tst.sparkpost.com',
     smtpAuth: {
@@ -232,7 +222,6 @@ const tenants = {
     featureFlags: {
       allow_anyone_at_verification: true,
       allow_default_signing_domains_for_ip_pools: true,
-      allow_mailbox_verification: true,
       has_signup: true
     },
     gtmId: 'GTM-WN7C84',
@@ -264,7 +253,6 @@ const tenants = {
     featureFlags: {
       allow_anyone_at_verification: true,
       allow_default_signing_domains_for_ip_pools: true,
-      allow_mailbox_verification: true,
       has_signup: true
     },
     gtmId: 'GTM-WN7C84',
@@ -293,8 +281,7 @@ const tenants = {
     },
     featureFlags: {
       allow_anyone_at_verification: true,
-      allow_default_signing_domains_for_ip_pools: true,
-      allow_mailbox_verification: true
+      allow_default_signing_domains_for_ip_pools: true
     }
   },
   atlassianus: {
@@ -302,8 +289,7 @@ const tenants = {
     alias: 'atlassian',
     featureFlags: {
       allow_anyone_at_verification: true,
-      allow_default_signing_domains_for_ip_pools: true,
-      allow_mailbox_verification: true
+      allow_default_signing_domains_for_ip_pools: true
     }
   },
   balutest: {
@@ -316,8 +302,7 @@ const tenants = {
     include: 'production',
     featureFlags: {
       allow_anyone_at_verification: true,
-      allow_default_signing_domains_for_ip_pools: true,
-      allow_mailbox_verification: true
+      allow_default_signing_domains_for_ip_pools: true
     }
   },
   booking: {
@@ -326,8 +311,7 @@ const tenants = {
       allowSubaccountDefault: false
     },
     featureFlags: {
-      allow_anyone_at_verification: true,
-      allow_mailbox_verification: true
+      allow_anyone_at_verification: true
     }
   },
   creditag: {
@@ -348,8 +332,7 @@ const tenants = {
     include: 'production',
     alias: 'careerbuilder',
     featureFlags: {
-      allow_anyone_at_verification: true,
-      allow_mailbox_verification: true
+      allow_anyone_at_verification: true
     },
     trackingDomains: {
       cnameValue: 'click.sites.careerbuilder.com'
@@ -359,8 +342,7 @@ const tenants = {
     include: 'production',
     featureFlags: {
       allow_anyone_at_verification: true,
-      allow_default_signing_domains_for_ip_pools: true,
-      allow_mailbox_verification: true
+      allow_default_signing_domains_for_ip_pools: true
     },
     trackingDomains: {
       cnameValue: 'click.mail.cerner.com'
@@ -370,8 +352,7 @@ const tenants = {
     include: 'production',
     featureFlags: {
       allow_anyone_at_verification: true,
-      allow_default_signing_domains_for_ip_pools: true,
-      allow_mailbox_verification: true
+      allow_default_signing_domains_for_ip_pools: true
     },
     trackingDomains: {
       cnameValue: 'track.clipper.sparkpostelite.com'
@@ -384,8 +365,7 @@ const tenants = {
       allowSubaccountDefault: false
     },
     featureFlags: {
-      allow_anyone_at_verification: true,
-      allow_mailbox_verification: true
+      allow_anyone_at_verification: true
     },
     trackingDomains: {
       cnameValue: 'click.notification.capitalone.co.uk'
@@ -395,8 +375,7 @@ const tenants = {
     include: 'production',
     featureFlags: {
       allow_anyone_at_verification: true,
-      allow_default_signing_domains_for_ip_pools: true,
-      allow_mailbox_verification: true
+      allow_default_signing_domains_for_ip_pools: true
     },
     trackingDomains: {
       cnameValue: 'track.sp.crdl.io'
@@ -406,8 +385,7 @@ const tenants = {
     include: 'production',
     featureFlags: {
       allow_anyone_at_verification: true,
-      allow_default_signing_domains_for_ip_pools: true,
-      allow_mailbox_verification: true
+      allow_default_signing_domains_for_ip_pools: true
     },
     trackingDomains: {
       cnameValue: 'click.mail.coursera.org'
@@ -419,8 +397,7 @@ const tenants = {
       allowSubaccountDefault: false
     },
     featureFlags: {
-      allow_anyone_at_verification: true,
-      allow_mailbox_verification: true
+      allow_anyone_at_verification: true
     }
   },
   dalenys: {
@@ -429,16 +406,14 @@ const tenants = {
       allowSubaccountDefault: false
     },
     featureFlags: {
-      allow_anyone_at_verification: true,
-      allow_mailbox_verification: true
+      allow_anyone_at_verification: true
     }
   },
   demo: {
     include: 'production',
     featureFlags: {
       allow_anyone_at_verification: true,
-      allow_default_signing_domains_for_ip_pools: true,
-      allow_mailbox_verification: true
+      allow_default_signing_domains_for_ip_pools: true
     },
     trackingDomains: {
       cnameValue: 'track.demo-t.sparkpostelite.com'
@@ -448,16 +423,14 @@ const tenants = {
     include: 'production',
     featureFlags: {
       allow_anyone_at_verification: true,
-      allow_default_signing_domains_for_ip_pools: true,
-      allow_mailbox_verification: true
+      allow_default_signing_domains_for_ip_pools: true
     }
   },
   ebates: {
     include: 'production',
     featureFlags: {
       allow_anyone_at_verification: true,
-      allow_default_signing_domains_for_ip_pools: true,
-      allow_mailbox_verification: true
+      allow_default_signing_domains_for_ip_pools: true
     },
     trackingDomains: {
       cnameValue: 'link.ebates.com'
@@ -467,8 +440,7 @@ const tenants = {
     include: 'production',
     featureFlags: {
       allow_anyone_at_verification: true,
-      allow_default_signing_domains_for_ip_pools: true,
-      allow_mailbox_verification: true
+      allow_default_signing_domains_for_ip_pools: true
     },
     trackingDomains: {
       cnameValue: 'link.eleatech.io'
@@ -479,8 +451,7 @@ const tenants = {
     alias: 'ft',
     featureFlags: {
       allow_anyone_at_verification: true,
-      allow_default_signing_domains_for_ip_pools: true,
-      allow_mailbox_verification: true
+      allow_default_signing_domains_for_ip_pools: true
     },
     trackingDomains: {
       cnameValue: 'track-ft.sparkpostelite.com'
@@ -490,8 +461,7 @@ const tenants = {
     include: 'production',
     featureFlags: {
       allow_anyone_at_verification: true,
-      allow_default_signing_domains_for_ip_pools: true,
-      allow_mailbox_verification: true
+      allow_default_signing_domains_for_ip_pools: true
     },
     trackingDomains: {
       cnameValue: 'track.p.gilt.com'
@@ -501,8 +471,7 @@ const tenants = {
     include: 'production',
     featureFlags: {
       allow_anyone_at_verification: true,
-      allow_default_signing_domains_for_ip_pools: true,
-      allow_mailbox_verification: true
+      allow_default_signing_domains_for_ip_pools: true
     },
     trackingDomains: {
       cnameValue: 'click.gmc.sparkpostelite.com'
@@ -511,8 +480,7 @@ const tenants = {
   guardian: {
     include: 'production',
     featureFlags: {
-      allow_anyone_at_verification: true,
-      allow_mailbox_verification: true
+      allow_anyone_at_verification: true
     },
     trackingDomains: {
       cnameValue: 'click.notifications.glic.com'
@@ -522,8 +490,7 @@ const tenants = {
     include: 'production',
     featureFlags: {
       allow_anyone_at_verification: true,
-      allow_default_signing_domains_for_ip_pools: true,
-      allow_mailbox_verification: true
+      allow_default_signing_domains_for_ip_pools: true
     }
   },
   hubspoteast: {
@@ -538,8 +505,7 @@ const tenants = {
       allowSubaccountDefault: false
     },
     featureFlags: {
-      allow_anyone_at_verification: true,
-      allow_mailbox_verification: true
+      allow_anyone_at_verification: true
     }
   },
   ims: {
@@ -547,8 +513,7 @@ const tenants = {
     alias: 'imshealth',
     featureFlags: {
       allow_anyone_at_verification: true,
-      allow_default_signing_domains_for_ip_pools: true,
-      allow_mailbox_verification: true
+      allow_default_signing_domains_for_ip_pools: true
     },
     trackingDomains: {
       cnameValue: 'click.sp.appature.com'
@@ -557,8 +522,7 @@ const tenants = {
   intercom: {
     include: 'production',
     featureFlags: {
-      allow_anyone_at_verification: true,
-      allow_mailbox_verification: true
+      allow_anyone_at_verification: true
     },
     trackingDomains: {
       cnameValue: 'track.intercom-t.sparkpostelite.com'
@@ -568,8 +532,7 @@ const tenants = {
     include: 'production',
     featureFlags: {
       allow_anyone_at_verification: true,
-      allow_default_signing_domains_for_ip_pools: true,
-      allow_mailbox_verification: true
+      allow_default_signing_domains_for_ip_pools: true
     },
     trackingDomains: {
       cnameValue: 'click.m.jane.com'
@@ -579,8 +542,7 @@ const tenants = {
     include: 'production',
     featureFlags: {
       allow_anyone_at_verification: true,
-      allow_default_signing_domains_for_ip_pools: true,
-      allow_mailbox_verification: true
+      allow_default_signing_domains_for_ip_pools: true
     },
     trackingDomains: {
       cnameValue: 'track-kayak.sparkpostelite.com'
@@ -590,8 +552,7 @@ const tenants = {
     include: 'production',
     featureFlags: {
       allow_anyone_at_verification: true,
-      allow_default_signing_domains_for_ip_pools: true,
-      allow_mailbox_verification: true
+      allow_default_signing_domains_for_ip_pools: true
     },
     trackingDomains: {
       cnameValue: 'track.linkedin.sparkpostelite.com'
@@ -601,8 +562,7 @@ const tenants = {
     include: 'production',
     featureFlags: {
       allow_anyone_at_verification: true,
-      allow_default_signing_domains_for_ip_pools: true,
-      allow_mailbox_verification: true
+      allow_default_signing_domains_for_ip_pools: true
     },
     trackingDomains: {
       cnameValue: 't.massdrop.com'
@@ -612,8 +572,7 @@ const tenants = {
     include: 'production',
     featureFlags: {
       allow_anyone_at_verification: true,
-      allow_default_signing_domains_for_ip_pools: true,
-      allow_mailbox_verification: true
+      allow_default_signing_domains_for_ip_pools: true
     },
     smtpAuth: {
       alternativePort: 2525
@@ -623,16 +582,14 @@ const tenants = {
     include: 'production',
     featureFlags: {
       allow_anyone_at_verification: true,
-      allow_default_signing_domains_for_ip_pools: true,
-      allow_mailbox_verification: true
+      allow_default_signing_domains_for_ip_pools: true
     }
   },
   nyt: {
     include: 'production',
     featureFlags: {
       allow_anyone_at_verification: true,
-      allow_default_signing_domains_for_ip_pools: true,
-      allow_mailbox_verification: true
+      allow_default_signing_domains_for_ip_pools: true
     }
   },
   ometria: {
@@ -641,8 +598,7 @@ const tenants = {
       allowSubaccountDefault: false
     },
     featureFlags: {
-      allow_anyone_at_verification: true,
-      allow_mailbox_verification: true
+      allow_anyone_at_verification: true
     },
     trackingDomains: {
       cnameValue: 'click.spe.ometria.email'
@@ -651,8 +607,7 @@ const tenants = {
   pinterest: {
     include: 'production',
     featureFlags: {
-      allow_anyone_at_verification: true,
-      allow_mailbox_verification: true
+      allow_anyone_at_verification: true
     },
     trackingDomains: {
       cnameValue: 'post.pinterest.com'
@@ -662,8 +617,7 @@ const tenants = {
     include: 'production',
     featureFlags: {
       allow_anyone_at_verification: true,
-      allow_default_signing_domains_for_ip_pools: true,
-      allow_mailbox_verification: true
+      allow_default_signing_domains_for_ip_pools: true
     },
     smtpAuth: {
       alternativePort: 2525
@@ -673,8 +627,7 @@ const tenants = {
     include: 'production',
     featureFlags: {
       allow_anyone_at_verification: true,
-      allow_default_signing_domains_for_ip_pools: true,
-      allow_mailbox_verification: true
+      allow_default_signing_domains_for_ip_pools: true
     },
     smtpAuth: {
       alternativePort: 2525
@@ -693,8 +646,7 @@ const tenants = {
   schoolm: {
     include: 'production',
     featureFlags: {
-      allow_anyone_at_verification: true,
-      allow_mailbox_verification: true
+      allow_anyone_at_verification: true
     },
     trackingDomains: {
       cnameValue: 'track.spe.schoolmessenger.com'
@@ -704,8 +656,7 @@ const tenants = {
     include: 'production',
     featureFlags: {
       allow_anyone_at_verification: true,
-      allow_default_signing_domains_for_ip_pools: true,
-      allow_mailbox_verification: true
+      allow_default_signing_domains_for_ip_pools: true
     }
   },
   sitecoreeu: {
@@ -715,15 +666,13 @@ const tenants = {
       allowSubaccountDefault: false
     },
     featureFlags: {
-      allow_anyone_at_verification: true,
-      allow_mailbox_verification: true
+      allow_anyone_at_verification: true
     }
   },
   sitecore: {
     include: 'production',
     featureFlags: {
-      allow_anyone_at_verification: true,
-      allow_mailbox_verification: true
+      allow_anyone_at_verification: true
     },
     trackingDomains: {
       cnameValue: 'click.sitecoremail.com'
@@ -733,8 +682,7 @@ const tenants = {
     include: 'production',
     featureFlags: {
       allow_anyone_at_verification: true,
-      allow_default_signing_domains_for_ip_pools: true,
-      allow_mailbox_verification: true
+      allow_default_signing_domains_for_ip_pools: true
     },
     trackingDomains: {
       cnameValue: 'click.email.snagajob.com'
@@ -754,8 +702,7 @@ const tenants = {
     alias: 'streetauthority',
     featureFlags: {
       allow_anyone_at_verification: true,
-      allow_default_signing_domains_for_ip_pools: true,
-      allow_mailbox_verification: true
+      allow_default_signing_domains_for_ip_pools: true
     },
     trackingDomains: {
       cnameValue: 'click.mail1.researchsend.com'
@@ -765,8 +712,7 @@ const tenants = {
     include: 'production',
     featureFlags: {
       allow_anyone_at_verification: true,
-      allow_default_signing_domains_for_ip_pools: true,
-      allow_mailbox_verification: true
+      allow_default_signing_domains_for_ip_pools: true
     },
     trackingDomains: {
       cnameValue: 'click.outbound.surveymonkey.com'
@@ -778,8 +724,7 @@ const tenants = {
       allowSubaccountDefault: false
     },
     featureFlags: {
-      allow_anyone_at_verification: true,
-      allow_mailbox_verification: true
+      allow_anyone_at_verification: true
     },
     trackingDomains: {
       cnameValue: 'click.talktalk.co.uk'
@@ -789,8 +734,7 @@ const tenants = {
     include: 'production',
     featureFlags: {
       allow_anyone_at_verification: true,
-      allow_default_signing_domains_for_ip_pools: true,
-      allow_mailbox_verification: true
+      allow_default_signing_domains_for_ip_pools: true
     },
     trackingDomains: {
       cnameValue: 'tracking.mail.tobi.com'
@@ -800,8 +744,7 @@ const tenants = {
     include: 'production',
     featureFlags: {
       allow_anyone_at_verification: true,
-      allow_default_signing_domains_for_ip_pools: true,
-      allow_mailbox_verification: true
+      allow_default_signing_domains_for_ip_pools: true
     },
     trackingDomains: {
       cnameValue: 'click.prop.trulia.com'
@@ -810,8 +753,7 @@ const tenants = {
   uber: {
     include: 'production',
     featureFlags: {
-      allow_anyone_at_verification: true,
-      allow_mailbox_verification: true
+      allow_anyone_at_verification: true
     },
     trackingDomains: {
       cnameValue: 'click.uber.com'
@@ -820,8 +762,7 @@ const tenants = {
   unear: {
     include: 'production',
     featureFlags: {
-      allow_anyone_at_verification: true,
-      allow_mailbox_verification: true
+      allow_anyone_at_verification: true
     },
     trackingDomains: {
       cnameValue: 'track.unear.sparkpostelite.com'
@@ -833,8 +774,7 @@ const tenants = {
       allowSubaccountDefault: false
     },
     featureFlags: {
-      allow_anyone_at_verification: true,
-      allow_mailbox_verification: true
+      allow_anyone_at_verification: true
     },
     trackingDomains: {
       cnameValue: 'click.utilitywarehouse.co.uk'
@@ -845,8 +785,7 @@ const tenants = {
     alias: 'vente-exclusive',
     featureFlags: {
       allow_anyone_at_verification: true,
-      allow_default_signing_domains_for_ip_pools: true,
-      allow_mailbox_verification: true
+      allow_default_signing_domains_for_ip_pools: true
     },
     trackingDomains: {
       cnameValue: 'click1.mail1.vente-exclusive.com'
@@ -856,8 +795,7 @@ const tenants = {
     include: 'production',
     featureFlags: {
       allow_anyone_at_verification: true,
-      allow_default_signing_domains_for_ip_pools: true,
-      allow_mailbox_verification: true
+      allow_default_signing_domains_for_ip_pools: true
     },
     trackingDomains: {
       cnameValue: 'click.sitemail.vivastreet.com'
@@ -869,15 +807,13 @@ const tenants = {
       allowSubaccountDefault: false
     },
     featureFlags: {
-      allow_anyone_at_verification: true,
-      allow_mailbox_verification: true
+      allow_anyone_at_verification: true
     }
   },
   wawd: {
     include: 'production',
     featureFlags: {
-      allow_anyone_at_verification: true,
-      allow_mailbox_verification: true
+      allow_anyone_at_verification: true
     },
     trackingDomains: {
       cnameValue: 'track.sp.actionkit.com'
@@ -886,8 +822,7 @@ const tenants = {
   wcare: {
     include: 'production',
     featureFlags: {
-      allow_anyone_at_verification: true,
-      allow_mailbox_verification: true
+      allow_anyone_at_verification: true
     },
     trackingDomains: {
       cnameValue: 'track.wcare-m.sparkpostelite.com'
@@ -897,8 +832,7 @@ const tenants = {
     include: 'production',
     featureFlags: {
       allow_anyone_at_verification: true,
-      allow_default_signing_domains_for_ip_pools: true,
-      allow_mailbox_verification: true
+      allow_default_signing_domains_for_ip_pools: true
     },
     trackingDomains: {
       cnameValue: 'track.workdayconnect.com'
@@ -908,8 +842,7 @@ const tenants = {
     include: 'production',
     featureFlags: {
       allow_anyone_at_verification: true,
-      allow_default_signing_domains_for_ip_pools: true,
-      allow_mailbox_verification: true
+      allow_default_signing_domains_for_ip_pools: true
     },
     trackingDomains: {
       cnameValue: 'click.mail.zillow.com'
@@ -919,16 +852,14 @@ const tenants = {
     include: 'production',
     featureFlags: {
       allow_anyone_at_verification: true,
-      allow_default_signing_domains_for_ip_pools: true,
-      allow_mailbox_verification: true
+      allow_default_signing_domains_for_ip_pools: true
     }
   },
   zip: {
     include: 'production',
     alias: 'ziprecruiter',
     featureFlags: {
-      allow_anyone_at_verification: true,
-      allow_mailbox_verification: true
+      allow_anyone_at_verification: true
     },
     trackingDomains: {
       cnameValue: 'track.sparkpost.ziprecruiter.com'
@@ -938,8 +869,7 @@ const tenants = {
     include: 'production',
     featureFlags: {
       allow_anyone_at_verification: true,
-      allow_default_signing_domains_for_ip_pools: true,
-      allow_mailbox_verification: true
+      allow_default_signing_domains_for_ip_pools: true
     },
     trackingDomains: {
       cnameValue: 'track.spe.zyngamail.com'

@@ -6,8 +6,7 @@
     "cnameValue": "pinterest.mail.e.sparkpost.com"
   },
   "featureFlags": {
-    "allow_anyone_at_verification": true,
-    "allow_mailbox_verification": true
+    "allow_anyone_at_verification": true
   },
   "sentry": {
     "projectId": 237613,
