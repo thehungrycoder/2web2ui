@@ -10,10 +10,7 @@
     "allow_anyone_at_verification": true,
     "allow_default_signing_domains_for_ip_pools": true,
     "allow_mailbox_verification": true,
-    "has_signup": true,
-    "sending_domains_v2": true,
-    "templatesBySubaccount": true,
-    "usage_from_redis": true
+    "has_signup": true
   },
   "gtmId": "GTM-P87NNJ4",
   "sentry": {

@@ -30,10 +30,7 @@ const tenants = {
       allow_anyone_at_verification: true,
       allow_default_signing_domains_for_ip_pools: true,
       allow_mailbox_verification: true,
-      has_signup: true,
-      sending_domains_v2: true,
-      templatesBySubaccount: true,
-      usage_from_redis: true
+      has_signup: true
     },
     host: 'app-mtaspc.tst.sparkpost.com',
     siftScience: {
@@ -114,10 +111,7 @@ const tenants = {
       allow_anyone_at_verification: true,
       allow_default_signing_domains_for_ip_pools: true,
       allow_mailbox_verification: true,
-      has_signup: true,
-      sending_domains_v2: true,
-      templatesBySubaccount: true,
-      usage_from_redis: true
+      has_signup: true
     },
     host: 'app-staging.sparkpost.com',
     siftScience: {
@@ -140,10 +134,7 @@ const tenants = {
       allow_anyone_at_verification: true,
       allow_default_signing_domains_for_ip_pools: true,
       allow_mailbox_verification: true,
-      has_signup: true,
-      sending_domains_v2: true,
-      templatesBySubaccount: true,
-      usage_from_redis: true
+      has_signup: true
     },
     host: 'app-stagingmtaspc.sparkpost.com',
     siftScience: {
@@ -170,10 +161,7 @@ const tenants = {
       allow_anyone_at_verification: true,
       allow_default_signing_domains_for_ip_pools: true,
       allow_mailbox_verification: true,
-      has_signup: true,
-      sending_domains_v2: true,
-      templatesBySubaccount: true,
-      usage_from_redis: true
+      has_signup: true
     },
     gtmId: 'GTM-P87NNJ4',
     host: 'app-uat.tst.sparkpost.com',
@@ -197,8 +185,7 @@ const tenants = {
     },
     featureFlags: {
       allow_anyone_at_verification: true,
-      allow_mailbox_verification: true,
-      sending_domains_v2: true
+      allow_mailbox_verification: true
     },
     host: 'app-uat2.tst.sparkpost.com',
     smtpAuth: {
@@ -251,10 +238,7 @@ const tenants = {
       allow_anyone_at_verification: true,
       allow_default_signing_domains_for_ip_pools: true,
       allow_mailbox_verification: true,
-      has_signup: true,
-      sending_domains_v2: true,
-      templatesBySubaccount: true,
-      usage_from_redis: true
+      has_signup: true
     },
     gtmId: 'GTM-WN7C84',
     host: 'app.eu.sparkpost.com',
@@ -286,10 +270,7 @@ const tenants = {
       allow_anyone_at_verification: true,
       allow_default_signing_domains_for_ip_pools: true,
       allow_mailbox_verification: true,
-      has_signup: true,
-      sending_domains_v2: true,
-      templatesBySubaccount: true,
-      usage_from_redis: true
+      has_signup: true
     },
     gtmId: 'GTM-WN7C84',
     host: 'app.sparkpost.com',

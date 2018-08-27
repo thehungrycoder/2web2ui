@@ -7,8 +7,7 @@
   },
   "featureFlags": {
     "allow_anyone_at_verification": true,
-    "allow_mailbox_verification": true,
-    "sending_domains_v2": true
+    "allow_mailbox_verification": true
   },
   "sentry": {
     "projectId": 237611,
