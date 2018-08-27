@@ -41,6 +41,12 @@ export default [
     section: 1
   },
   {
+    label: 'Alerts',
+    to: '/account/alerts',
+    section: 1,
+    labs: true
+  },
+  {
     label: 'Get Help',
     section: 2,
     action: openSupportPanel
