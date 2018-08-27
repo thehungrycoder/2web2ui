@@ -1,5 +1,3 @@
-'use strict';
-
 const browserslist = require('browserslist');
 const _ = require('lodash');
 const caniuse = require('caniuse-db/data.json').agents;
@@ -41,7 +39,7 @@ const semverify = (version) => {
 const parseBrowsersList = (browsersList) => {
   const parsed = {};
 
-  _.each(browsersList, browser => {
+  _.each(browsersList, (browser) => {
     const [browserName, browserVersion] = browser.split(' ');
     const platform = caniuse[browserName].type;
 
