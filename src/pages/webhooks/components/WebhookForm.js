@@ -6,7 +6,7 @@ import { hasSubaccounts } from 'src/selectors/subaccounts';
 import { withRouter } from 'react-router-dom';
 import { Button, Panel } from '@sparkpost/matchbox';
 import CheckboxWrapper from 'src/components/reduxFormWrappers/CheckboxWrapper';
-import { selectEventListing } from 'src/selectors/eventListing';
+import { selectWebhookEventListing } from 'src/selectors/eventListing';
 import { NameField, TargetField, EventsRadioGroup, AuthDropDown, BasicAuthFields, OAuth2Fields, ActiveField } from './Fields';
 import SubaccountSection from './SubaccountSection';
 import formatEditValues from '../helpers/formatEditValues';
@@ -97,7 +97,7 @@ const mapStateToProps = (state, props) => {
     submitText: props.submitting ? 'Submitting...' : (props.newWebhook ? 'Create Webhook' : 'Update Webhook'),
     auth,
     hasSubaccounts: hasSubaccounts(state),
-    eventListing: selectEventListing(state),
+    eventListing: selectWebhookEventListing(state),
     initialValues: {
       assignTo: 'all',
       eventsRadio: props.allChecked || props.newWebhook ? 'all' : 'select',

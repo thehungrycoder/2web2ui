@@ -1,8 +1,9 @@
 import { createSelector } from 'reselect';
 
 const selectWebhooksDocs = (state) => state.webhooks.docs || {};
+const selectMessageEventsDocs = (state) => state.messageEvents.documentation || {};
 
-export const selectEventListing = createSelector(
+export const selectWebhookEventListing = createSelector(
   [selectWebhooksDocs],
   (docs) => {
     const list = Object.keys(docs).reduce((accumulated, groupName) => {
@@ -18,4 +19,9 @@ export const selectEventListing = createSelector(
 
     return list;
   }
+);
+
+export const selectMessageEventListing = createSelector(
+  [selectMessageEventsDocs],
+  (docs) => Object.keys(docs).sort()
 );
