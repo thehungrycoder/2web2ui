@@ -1,6 +1,9 @@
 import _ from 'lodash';
 import Raven from 'raven-js';
 import createRavenMiddleware from 'raven-for-redux';
+import bowser from 'bowser';
+
+const browser = bowser.getParser(window.navigator.userAgent);
 
 /**
  * List of breadcrumbs to ignore to reduce noise
@@ -47,9 +50,12 @@ export function getEnricherOrDieTryin(store, currentWindow) {
     const apiError = isApiError(data);
     const chunkFailure = isChunkFailure(data);
 
+    /*global SUPPORTED_BROWSERS*/
+    const isSupportedBrowser = browser.satisfies(SUPPORTED_BROWSERS); //Refer to docs/browser-support-sentry-issue.md for more info)
+
     return {
       ...data,
-      level: !fromOurBundle || apiError || chunkFailure ? 'warning' : 'error',
+      level: !fromOurBundle || apiError || chunkFailure || !isSupportedBrowser ? 'warning' : 'error',
       tags: { // all tags can be easily searched and sent in Slack notifications
         ...data.tags,
         customer: _.get(user, 'customer'),

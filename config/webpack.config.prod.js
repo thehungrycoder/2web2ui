@@ -15,6 +15,7 @@ const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const paths = require('./paths');
 const getClientEnvironment = require('./env');
 const generateScopedName = require('./generateScopedName');
+const snapshotGenerator = require('../scripts/browsersSnapshotGen');
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // It requires a trailing slash, or the file assets will get an incorrect path.
@@ -74,7 +75,10 @@ module.exports = {
   // You can exclude the *.map files from the build during deployment.
   devtool: 'source-map',
   // In production, we only want to load the polyfills and the app code.
-  entry: [require.resolve('./polyfills'), paths.appIndexJs],
+  entry: [
+    require.resolve('./polyfills'),
+    paths.appIndexJs
+  ],
   output: {
     // The build folder.
     path: paths.appBuild,
@@ -389,6 +393,9 @@ module.exports = {
       statsOptions: null,
       // Log level. Can be 'info', 'warn', 'error' or 'silent'.
       logLevel: 'info'
+    }),
+    new webpack.DefinePlugin({
+      SUPPORTED_BROWSERS: JSON.stringify(snapshotGenerator())
     })
   ],
   // Some libraries import Node modules but don't use them in the browser.

@@ -5,6 +5,11 @@ import ErrorTracker, {
 import * as mockRaven from 'raven-js';
 
 jest.mock('raven-js');
+jest.mock('bowser', () => ({
+  getParser: jest.fn(() => ({
+    satisfies: jest.fn(() => true)
+  }))
+}));
 
 describe('.breadcrumbCallback', () => {
   it('returns false with blacklisted breadcrumb', () => {
