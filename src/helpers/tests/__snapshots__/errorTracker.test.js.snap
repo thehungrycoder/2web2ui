@@ -100,7 +100,7 @@ Object {
       },
     ],
   },
-  "level": "warning",
+  "level": "error",
   "logger": "test",
   "tags": Object {
     "customer": undefined,
