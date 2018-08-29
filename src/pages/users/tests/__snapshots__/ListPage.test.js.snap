@@ -34,7 +34,25 @@ exports[`Page: Users List should render correctly by default 1`] = `
             "sortKey": "access",
           },
           Object {
-            "label": "2 Factor Authentication",
+            "label": <Tooltip
+              bottom={true}
+              content="Two factor authentication status"
+              forcePosition={false}
+              horizontalOffset="0px"
+              preferredDirection={
+                Object {
+                  "bottom": true,
+                  "left": false,
+                  "right": true,
+                  "top": false,
+                }
+              }
+              right={true}
+            >
+              <span>
+                Two Factor Auth
+              </span>
+            </Tooltip>,
             "sortKey": "tfa_enabled",
           },
           Object {
@@ -72,11 +90,13 @@ exports[`Page: Users List should render correctly by default 1`] = `
             "access": "admin",
             "email": "user1@test.com",
             "name": "Test User 1",
+            "tfa_enabled": false,
           },
           Object {
             "access": "admin",
             "email": "user2@test.com",
             "name": "Test User 2",
+            "tfa_enabled": true,
           },
         ]
       }
@@ -141,9 +161,7 @@ exports[`Page: Users List should render with an error 1`] = `
 exports[`Page: Users List should transform row data for the table collection 1`] = `
 Array [
   <User
-    access="admin"
     email="testemail"
-    isCurrentUser={false}
     name="test-name"
   />,
   <RoleSelect
@@ -152,7 +170,9 @@ Array [
     onChange={[Function]}
     value="admin"
   />,
-  "Disabled",
+  <Tag>
+    Disabled
+  </Tag>,
   "Never",
   <DeleteButton
     disabled={false}

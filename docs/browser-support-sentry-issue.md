@@ -4,7 +4,7 @@
 
 We've a list of browsers that we officially support. The list is maintained using browserlists query which is available in package.json. 
 
-Other than some tools using that tool, we also use the query to detect if an user is using one of the browsers we officially support. Any error from our bundle on an unsupported browser will be marked as `warning` (in contrast to `error`) in Sentry. 
+In addition to some tools already using those query, we also use it to detect if an user is using one of the browsers we officially support. Any error from our bundle on an unsupported browser will be marked as `warning` (in contrast to `error`) in Sentry. 
 
 ### How it works?
 - `scripts/browsersSnapshotGen.js` is responsible for reading the query from `package.json` and return a list of browsers that we support. 
