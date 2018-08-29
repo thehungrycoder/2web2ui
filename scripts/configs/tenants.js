@@ -1,7 +1,23 @@
-// This is a complete list of all tenants and their specific configurations
+/**
+ * This is a complete list of all tenants and their specific configurations
+ * @example
+ *   {
+ *     // the unique tenant id
+ *     myTenant: {
+ *
+ *       // a context to set as the base configuration
+ *       extends: 'production',
+ *
+ *       // an alternative identifier for tenantId
+ *       alias: 'meTenant',
+ *
+ *       // all other values are overrides for the default template
+ *     }
+ *   }
+ */
 const tenants = {
   '247sports': {
-    include: 'production',
+    extends: 'production',
     featureFlags: {
       allow_anyone_at_verification: true,
       allow_default_signing_domains_for_ip_pools: true
@@ -11,7 +27,7 @@ const tenants = {
     }
   },
   amex: {
-    include: 'production',
+    extends: 'production',
     alias: 'amexgbt',
     bounceDomains: {
       allowDefault: false
@@ -21,7 +37,7 @@ const tenants = {
     }
   },
   mtaspc: {
-    include: 'uat',
+    extends: 'uat',
     apiBase: '//api-mtaspc.tst.sparkpost.com/api/v1',
     featureFlags: {
       allow_anyone_at_verification: true,
@@ -43,7 +59,7 @@ const tenants = {
     }
   },
   speuat: {
-    include: 'uat',
+    extends: 'uat',
     apiBase: '//api-speuat.tst.sparkpost.com/api/v1',
     host: 'app-speuat.tst.sparkpost.com',
     smtpAuth: {
@@ -54,7 +70,7 @@ const tenants = {
     }
   },
   stagingmtas: {
-    include: 'staging',
+    extends: 'staging',
     apiBase: '//api-staging-mtas.sparkpost.com/api/v1',
     featureFlags: {
       allow_anyone_at_verification: true
@@ -70,7 +86,7 @@ const tenants = {
     }
   },
   stagingmtas2: {
-    include: 'staging',
+    extends: 'staging',
     apiBase: '//api-staging-mtas2.sparkpost.com/api/v1',
     bounceDomains: {
       cnameValue: 'staging-mtas2.mail.e.sparkpost.com'
@@ -89,7 +105,7 @@ const tenants = {
     }
   },
   staging: {
-    include: 'staging',
+    extends: 'staging',
     apiBase: '//api-staging.sparkpost.com/api/v1',
     crossLinkTenant: 'spc',
     gtmId: 'GTM-5BCG3R',
@@ -113,7 +129,7 @@ const tenants = {
     }
   },
   stagingmtaspc: {
-    include: 'staging',
+    extends: 'staging',
     apiBase: '//api-stagingmtaspc.sparkpost.com/api/v1',
     featureFlags: {
       allow_anyone_at_verification: true,
@@ -132,7 +148,7 @@ const tenants = {
     splashPage: '/dashboard'
   },
   uat: {
-    include: 'uat',
+    extends: 'uat',
     apiBase: '//api-uat.tst.sparkpost.com/api/v1',
     bounceDomains: {
       cnameValue: 'uat-public.mail.e.sparkpost.com',
@@ -158,7 +174,7 @@ const tenants = {
     }
   },
   uat2: {
-    include: 'uat',
+    extends: 'uat',
     apiBase: '//api-uat2.tst.sparkpost.com/api/v1',
     bounceDomains: {
       cnameValue: 'uat2public.mail.e.sparkpost.com'
@@ -176,7 +192,7 @@ const tenants = {
     }
   },
   uat3: {
-    include: 'uat',
+    extends: 'uat',
     apiBase: '//api-uat3.tst.sparkpost.com/api/v1',
     featureFlags: {
       allow_anyone_at_verification: true
@@ -190,7 +206,7 @@ const tenants = {
     }
   },
   uat4: {
-    include: 'uat',
+    extends: 'uat',
     apiBase: '//api-uat4.tst.sparkpost.com/api/v1',
     featureFlags: {
       allow_anyone_at_verification: true
@@ -204,7 +220,7 @@ const tenants = {
     }
   },
   spceu: {
-    include: 'production',
+    extends: 'production',
     apiBase: '//api.eu.sparkpost.com/api/v1',
     bounceDomains: {
       allowSubaccountDefault: false,
@@ -236,7 +252,7 @@ const tenants = {
     }
   },
   spc: {
-    include: 'production',
+    extends: 'production',
     apiBase: '//api.sparkpost.com/api/v1',
     bounceDomains: {
       cnameValue: 'sparkpostmail.com',
@@ -266,7 +282,7 @@ const tenants = {
     }
   },
   atlassianeu: {
-    include: 'production',
+    extends: 'production',
     alias: 'atlassian-eu',
     bounceDomains: {
       allowSubaccountDefault: false
@@ -277,7 +293,7 @@ const tenants = {
     }
   },
   atlassianus: {
-    include: 'production',
+    extends: 'production',
     alias: 'atlassian',
     featureFlags: {
       allow_anyone_at_verification: true,
@@ -285,20 +301,20 @@ const tenants = {
     }
   },
   balutest: {
-    include: 'staging',
+    extends: 'staging',
     bounceDomains: {
       allowDefault: false
     }
   },
   becordial: {
-    include: 'production',
+    extends: 'production',
     featureFlags: {
       allow_anyone_at_verification: true,
       allow_default_signing_domains_for_ip_pools: true
     }
   },
   booking: {
-    include: 'production',
+    extends: 'production',
     bounceDomains: {
       allowSubaccountDefault: false
     },
@@ -307,21 +323,21 @@ const tenants = {
     }
   },
   creditag: {
-    include: 'production',
+    extends: 'production',
     alias: 'ca',
     bounceDomains: {
       allowSubaccountDefault: false
     }
   },
   capone: {
-    include: 'production',
+    extends: 'production',
     alias: 'capitalone',
     trackingDomains: {
       cnameValue: 'click.c1-t.msyscloud.com'
     }
   },
   careerb: {
-    include: 'production',
+    extends: 'production',
     alias: 'careerbuilder',
     featureFlags: {
       allow_anyone_at_verification: true
@@ -331,7 +347,7 @@ const tenants = {
     }
   },
   cerner: {
-    include: 'production',
+    extends: 'production',
     featureFlags: {
       allow_anyone_at_verification: true,
       allow_default_signing_domains_for_ip_pools: true
@@ -341,7 +357,7 @@ const tenants = {
     }
   },
   clipper: {
-    include: 'production',
+    extends: 'production',
     featureFlags: {
       allow_anyone_at_verification: true,
       allow_default_signing_domains_for_ip_pools: true
@@ -351,7 +367,7 @@ const tenants = {
     }
   },
   caponeuk: {
-    include: 'production',
+    extends: 'production',
     alias: 'coep',
     bounceDomains: {
       allowSubaccountDefault: false
@@ -364,7 +380,7 @@ const tenants = {
     }
   },
   cordial: {
-    include: 'production',
+    extends: 'production',
     featureFlags: {
       allow_anyone_at_verification: true,
       allow_default_signing_domains_for_ip_pools: true
@@ -374,7 +390,7 @@ const tenants = {
     }
   },
   coursera: {
-    include: 'production',
+    extends: 'production',
     featureFlags: {
       allow_anyone_at_verification: true,
       allow_default_signing_domains_for_ip_pools: true
@@ -384,7 +400,7 @@ const tenants = {
     }
   },
   creator: {
-    include: 'production',
+    extends: 'production',
     bounceDomains: {
       allowSubaccountDefault: false
     },
@@ -393,7 +409,7 @@ const tenants = {
     }
   },
   dalenys: {
-    include: 'production',
+    extends: 'production',
     bounceDomains: {
       allowSubaccountDefault: false
     },
@@ -402,7 +418,7 @@ const tenants = {
     }
   },
   demo: {
-    include: 'production',
+    extends: 'production',
     featureFlags: {
       allow_anyone_at_verification: true,
       allow_default_signing_domains_for_ip_pools: true
@@ -412,14 +428,14 @@ const tenants = {
     }
   },
   dhi: {
-    include: 'production',
+    extends: 'production',
     featureFlags: {
       allow_anyone_at_verification: true,
       allow_default_signing_domains_for_ip_pools: true
     }
   },
   ebates: {
-    include: 'production',
+    extends: 'production',
     featureFlags: {
       allow_anyone_at_verification: true,
       allow_default_signing_domains_for_ip_pools: true
@@ -429,7 +445,7 @@ const tenants = {
     }
   },
   eonian: {
-    include: 'production',
+    extends: 'production',
     featureFlags: {
       allow_anyone_at_verification: true,
       allow_default_signing_domains_for_ip_pools: true
@@ -439,7 +455,7 @@ const tenants = {
     }
   },
   fintimes: {
-    include: 'production',
+    extends: 'production',
     alias: 'ft',
     featureFlags: {
       allow_anyone_at_verification: true,
@@ -450,7 +466,7 @@ const tenants = {
     }
   },
   gilt: {
-    include: 'production',
+    extends: 'production',
     featureFlags: {
       allow_anyone_at_verification: true,
       allow_default_signing_domains_for_ip_pools: true
@@ -460,7 +476,7 @@ const tenants = {
     }
   },
   gmc: {
-    include: 'production',
+    extends: 'production',
     featureFlags: {
       allow_anyone_at_verification: true,
       allow_default_signing_domains_for_ip_pools: true
@@ -470,7 +486,7 @@ const tenants = {
     }
   },
   guardian: {
-    include: 'production',
+    extends: 'production',
     featureFlags: {
       allow_anyone_at_verification: true
     },
@@ -479,20 +495,20 @@ const tenants = {
     }
   },
   hubspot: {
-    include: 'production',
+    extends: 'production',
     featureFlags: {
       allow_anyone_at_verification: true,
       allow_default_signing_domains_for_ip_pools: true
     }
   },
   hubspoteast: {
-    include: 'production',
+    extends: 'production',
     trackingDomains: {
       cnameValue: 'track.hubspoteast.sparkpostelite.com'
     }
   },
   icims: {
-    include: 'production',
+    extends: 'production',
     bounceDomains: {
       allowSubaccountDefault: false
     },
@@ -501,7 +517,7 @@ const tenants = {
     }
   },
   ims: {
-    include: 'production',
+    extends: 'production',
     alias: 'imshealth',
     featureFlags: {
       allow_anyone_at_verification: true,
@@ -512,7 +528,7 @@ const tenants = {
     }
   },
   intercom: {
-    include: 'production',
+    extends: 'production',
     featureFlags: {
       allow_anyone_at_verification: true
     },
@@ -521,7 +537,7 @@ const tenants = {
     }
   },
   jane: {
-    include: 'production',
+    extends: 'production',
     featureFlags: {
       allow_anyone_at_verification: true,
       allow_default_signing_domains_for_ip_pools: true
@@ -531,7 +547,7 @@ const tenants = {
     }
   },
   kayak: {
-    include: 'production',
+    extends: 'production',
     featureFlags: {
       allow_anyone_at_verification: true,
       allow_default_signing_domains_for_ip_pools: true
@@ -541,7 +557,7 @@ const tenants = {
     }
   },
   linkedin: {
-    include: 'production',
+    extends: 'production',
     featureFlags: {
       allow_anyone_at_verification: true,
       allow_default_signing_domains_for_ip_pools: true
@@ -551,7 +567,7 @@ const tenants = {
     }
   },
   massdrop: {
-    include: 'production',
+    extends: 'production',
     featureFlags: {
       allow_anyone_at_verification: true,
       allow_default_signing_domains_for_ip_pools: true
@@ -561,7 +577,7 @@ const tenants = {
     }
   },
   mtas4tenant: {
-    include: 'production',
+    extends: 'production',
     featureFlags: {
       allow_anyone_at_verification: true,
       allow_default_signing_domains_for_ip_pools: true
@@ -571,21 +587,21 @@ const tenants = {
     }
   },
   nyl: {
-    include: 'production',
+    extends: 'production',
     featureFlags: {
       allow_anyone_at_verification: true,
       allow_default_signing_domains_for_ip_pools: true
     }
   },
   nyt: {
-    include: 'production',
+    extends: 'production',
     featureFlags: {
       allow_anyone_at_verification: true,
       allow_default_signing_domains_for_ip_pools: true
     }
   },
   ometria: {
-    include: 'production',
+    extends: 'production',
     bounceDomains: {
       allowSubaccountDefault: false
     },
@@ -597,7 +613,7 @@ const tenants = {
     }
   },
   pinterest: {
-    include: 'production',
+    extends: 'production',
     featureFlags: {
       allow_anyone_at_verification: true
     },
@@ -606,7 +622,7 @@ const tenants = {
     }
   },
   productionmtas: {
-    include: 'production',
+    extends: 'production',
     featureFlags: {
       allow_anyone_at_verification: true,
       allow_default_signing_domains_for_ip_pools: true
@@ -616,7 +632,7 @@ const tenants = {
     }
   },
   productionmtas2: {
-    include: 'production',
+    extends: 'production',
     featureFlags: {
       allow_anyone_at_verification: true,
       allow_default_signing_domains_for_ip_pools: true
@@ -626,7 +642,7 @@ const tenants = {
     }
   },
   sas: {
-    include: 'production',
+    extends: 'production',
     bounceDomains: {
       allowDefault: false,
       allowSubaccountDefault: false
@@ -636,7 +652,7 @@ const tenants = {
     }
   },
   schoolm: {
-    include: 'production',
+    extends: 'production',
     featureFlags: {
       allow_anyone_at_verification: true
     },
@@ -645,14 +661,14 @@ const tenants = {
     }
   },
   selective: {
-    include: 'production',
+    extends: 'production',
     featureFlags: {
       allow_anyone_at_verification: true,
       allow_default_signing_domains_for_ip_pools: true
     }
   },
   sitecoreeu: {
-    include: 'production',
+    extends: 'production',
     alias: 'sitecore-eu',
     bounceDomains: {
       allowSubaccountDefault: false
@@ -662,7 +678,7 @@ const tenants = {
     }
   },
   sitecore: {
-    include: 'production',
+    extends: 'production',
     featureFlags: {
       allow_anyone_at_verification: true
     },
@@ -671,7 +687,7 @@ const tenants = {
     }
   },
   snagajob: {
-    include: 'production',
+    extends: 'production',
     featureFlags: {
       allow_anyone_at_verification: true,
       allow_default_signing_domains_for_ip_pools: true
@@ -681,7 +697,7 @@ const tenants = {
     }
   },
   spestaging: {
-    include: 'staging',
+    extends: 'staging',
     smtpAuth: {
       host: 'smtp-spestaging42.msyscloud.com'
     },
@@ -690,7 +706,7 @@ const tenants = {
     }
   },
   streetauth: {
-    include: 'production',
+    extends: 'production',
     alias: 'streetauthority',
     featureFlags: {
       allow_anyone_at_verification: true,
@@ -701,7 +717,7 @@ const tenants = {
     }
   },
   surveymonkey: {
-    include: 'production',
+    extends: 'production',
     featureFlags: {
       allow_anyone_at_verification: true,
       allow_default_signing_domains_for_ip_pools: true
@@ -711,7 +727,7 @@ const tenants = {
     }
   },
   talktalk: {
-    include: 'production',
+    extends: 'production',
     bounceDomains: {
       allowSubaccountDefault: false
     },
@@ -723,7 +739,7 @@ const tenants = {
     }
   },
   tobi: {
-    include: 'production',
+    extends: 'production',
     featureFlags: {
       allow_anyone_at_verification: true,
       allow_default_signing_domains_for_ip_pools: true
@@ -733,7 +749,7 @@ const tenants = {
     }
   },
   trulia: {
-    include: 'production',
+    extends: 'production',
     featureFlags: {
       allow_anyone_at_verification: true,
       allow_default_signing_domains_for_ip_pools: true
@@ -743,7 +759,7 @@ const tenants = {
     }
   },
   uber: {
-    include: 'production',
+    extends: 'production',
     featureFlags: {
       allow_anyone_at_verification: true
     },
@@ -752,7 +768,7 @@ const tenants = {
     }
   },
   unear: {
-    include: 'production',
+    extends: 'production',
     featureFlags: {
       allow_anyone_at_verification: true
     },
@@ -761,7 +777,7 @@ const tenants = {
     }
   },
   utilitywhouse: {
-    include: 'production',
+    extends: 'production',
     bounceDomains: {
       allowSubaccountDefault: false
     },
@@ -773,7 +789,7 @@ const tenants = {
     }
   },
   vente: {
-    include: 'production',
+    extends: 'production',
     alias: 'vente-exclusive',
     featureFlags: {
       allow_anyone_at_verification: true,
@@ -784,7 +800,7 @@ const tenants = {
     }
   },
   vivastreet: {
-    include: 'production',
+    extends: 'production',
     featureFlags: {
       allow_anyone_at_verification: true,
       allow_default_signing_domains_for_ip_pools: true
@@ -794,7 +810,7 @@ const tenants = {
     }
   },
   vivmail: {
-    include: 'production',
+    extends: 'production',
     bounceDomains: {
       allowSubaccountDefault: false
     },
@@ -803,7 +819,7 @@ const tenants = {
     }
   },
   wawd: {
-    include: 'production',
+    extends: 'production',
     featureFlags: {
       allow_anyone_at_verification: true
     },
@@ -812,7 +828,7 @@ const tenants = {
     }
   },
   wcare: {
-    include: 'production',
+    extends: 'production',
     featureFlags: {
       allow_anyone_at_verification: true
     },
@@ -821,7 +837,7 @@ const tenants = {
     }
   },
   workday: {
-    include: 'production',
+    extends: 'production',
     featureFlags: {
       allow_anyone_at_verification: true,
       allow_default_signing_domains_for_ip_pools: true
@@ -831,7 +847,7 @@ const tenants = {
     }
   },
   zillow: {
-    include: 'production',
+    extends: 'production',
     featureFlags: {
       allow_anyone_at_verification: true,
       allow_default_signing_domains_for_ip_pools: true
@@ -841,14 +857,14 @@ const tenants = {
     }
   },
   ziprealty: {
-    include: 'production',
+    extends: 'production',
     featureFlags: {
       allow_anyone_at_verification: true,
       allow_default_signing_domains_for_ip_pools: true
     }
   },
   zip: {
-    include: 'production',
+    extends: 'production',
     alias: 'ziprecruiter',
     featureFlags: {
       allow_anyone_at_verification: true
@@ -858,7 +874,7 @@ const tenants = {
     }
   },
   zynga: {
-    include: 'production',
+    extends: 'production',
     featureFlags: {
       allow_anyone_at_verification: true,
       allow_default_signing_domains_for_ip_pools: true

@@ -7,7 +7,7 @@ const tenants = require('./configs/tenants');
 const configs = Object.keys(tenants).map((tenantId) => {
   const tenant = tenants[tenantId];
   const defaultConfig = defaultTemplate({ ...tenant, tenantId });
-  const config = _.merge(defaultConfig, contexts[tenant.include], tenant);
+  const config = _.merge(defaultConfig, contexts[tenant.extends], tenant);
   const sortedConfig = Object.keys(config).sort().reduce((accumulator, key) => ({
       ...accumulator,
       [key]: config[key]
