@@ -34,25 +34,7 @@ exports[`Page: Users List should render correctly by default 1`] = `
             "sortKey": "access",
           },
           Object {
-            "label": <Tooltip
-              bottom={true}
-              content="Two factor authentication status"
-              forcePosition={false}
-              horizontalOffset="0px"
-              preferredDirection={
-                Object {
-                  "bottom": true,
-                  "left": false,
-                  "right": true,
-                  "top": false,
-                }
-              }
-              right={true}
-            >
-              <span>
-                Two Factor Auth
-              </span>
-            </Tooltip>,
+            "label": "Two Factor Auth",
             "sortKey": "tfa_enabled",
           },
           Object {

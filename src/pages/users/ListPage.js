@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import fp from 'lodash/fp';
-import { Page, Tag, Tooltip } from '@sparkpost/matchbox';
+import { Page, Tag } from '@sparkpost/matchbox';
 import { Users } from 'src/components/images';
 import TimeAgo from 'react-timeago';
 
@@ -17,7 +17,7 @@ import User from './components/User';
 const COLUMNS = [
   { label: 'User', sortKey: 'name' },
   { label: 'Role', sortKey: 'access' },
-  { label: <Tooltip content='Two factor authentication status'><span>Two Factor Auth</span></Tooltip>, sortKey: 'tfa_enabled' },
+  { label: 'Two Factor Auth', sortKey: 'tfa_enabled' },
   { label: 'Last Login', sortKey: 'last_login' },
   null
 ];
