@@ -1,26 +1,30 @@
+const fs = require('fs');
 const _ = require('lodash');
+const prettier = require('prettier');
 const contexts = require('./configs/contexts');
 const defaultTemplate = require('./configs/defaultTemplate');
 const tenants = require('./configs/tenants');
 
-// Merge
+// merge defaults and context for each tenant configuration
 const configs = Object.keys(tenants).map((tenantId) => {
   const tenant = tenants[tenantId];
   const defaultConfig = defaultTemplate({ ...tenant, tenantId });
-  const config = _.merge(defaultConfig, contexts[tenant.extends], tenant);
-  const sortedConfig = Object.keys(config).sort().reduce((accumulator, key) => ({
-      ...accumulator,
-      [key]: config[key]
-    }), {});
 
-  return sortedConfig;
+  return _.merge(defaultConfig, contexts[tenant.extends], tenant);
 });
 
-const fs = require('fs');
+// generate and write configuration file
+configs.forEach(({ alias, context, host, ...config }) => {
+  const dir = `./public/static/tenant-config/${host}`;
+  const content = `
+    window.SP = window.SP || {};
+    window.SP.productionConfig = ${JSON.stringify(config)};
+  `;
+  const formattedContent = prettier.format(content, { parser: 'babylon', singleQuote: true });
 
-configs.forEach(({ alias, host, include, ...config }) => {
-  fs.writeFileSync(
-    `./public/static/tenant-config/${host}/production.json`,
-    JSON.stringify(config, null, '  ')
-  )
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir);
+  }
+
+  fs.writeFileSync(`${dir}/production.js`, formattedContent);
 });
