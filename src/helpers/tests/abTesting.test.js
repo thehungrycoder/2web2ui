@@ -74,4 +74,16 @@ describe('A/B testing helper', () => {
       expect(helpers.calculateTotalSampleSize(testMock)).toEqual(300);
     });
   });
+
+  describe('hasTestDelivered', () => {
+    it('should return true if a test has delivered messages', () => {
+      const testMock = { default_template: { count_accepted: 100 }, variants: [{ count_accepted: 100 },{ count_accepted: 100 }]};
+      expect(helpers.hasTestDelivered(testMock)).toEqual(true);
+    });
+
+    it('should return false if a test has no delivered messages', () => {
+      const testMock = { default_template: { count_accepted: 0 }, variants: [{ count_accepted: 0 },{ count_accepted: 0 }]};
+      expect(helpers.hasTestDelivered(testMock)).toEqual(false);
+    });
+  });
 });

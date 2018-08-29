@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Panel, Tooltip } from '@sparkpost/matchbox';
 import { InfoOutline } from '@sparkpost/matchbox-icons';
 import { LabelledValue, Unit } from 'src/components';
+import { hasTestDelivered } from 'src/helpers/abTesting';
 import _ from 'lodash';
 
 import styles from './View.module.scss';
@@ -19,8 +20,8 @@ export const PercentOrSample = ({ variant }) => {
   return null;
 };
 
-export const Engagement = ({ variant }) => {
-  if (!variant.engagement_rate) {
+export const Engagement = ({ variant, showRate }) => {
+  if (!showRate) {
     return null;
   }
 
@@ -39,7 +40,7 @@ export const Engagement = ({ variant }) => {
       <LabelledValue label='Engagement Rate Achieved'>
         <h6>
           <Tooltip dark content={metricMarkup}>
-            <Unit unit='percent' value={variant.engagement_rate}/>
+            <Unit unit='percent' value={variant.engagement_rate * 100}/>
             {' '}
             <span className={styles.InfoIcon}><InfoOutline /></span>
           </Tooltip>
@@ -49,7 +50,7 @@ export const Engagement = ({ variant }) => {
   );
 };
 
-export const Variant = ({ variant = {}, title }) => (
+export const Variant = ({ variant = {}, title, showRate }) => (
   <Panel>
     <Panel.Section actions={[{
       content: 'View Template',
@@ -65,15 +66,18 @@ export const Variant = ({ variant = {}, title }) => (
       <LabelledValue label='Template ID'><h6>{variant.template_id}</h6></LabelledValue>
       <PercentOrSample variant={variant} />
     </Panel.Section>
-    <Engagement variant={variant} />
+    <Engagement variant={variant} showRate={showRate} />
   </Panel>
 );
 
-const VariantsView = ({ test }) => (
-  <Fragment>
-    <Variant variant={test.default_template} title='Default Template' />
-    {_.map(test.variants, (variant, i) => <Variant variant={variant} key={i}/>)}
-  </Fragment>
-);
+const VariantsView = ({ test }) => {
+  const showEngagementRate = hasTestDelivered(test);
+  return (
+    <Fragment>
+      <Variant variant={test.default_template} title='Default Template' showRate={showEngagementRate} />
+      {_.map(test.variants, (variant, i) => <Variant variant={variant} key={i} showRate={showEngagementRate}/>)}
+    </Fragment>
+  );
+};
 
 export default VariantsView;

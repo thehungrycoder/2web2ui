@@ -47,7 +47,8 @@ describe('Variants View Component:', () => {
           engagement_rate: 0.2,
           count_unique_confirmed_opened: 10,
           count_accepted: 100
-        }
+        },
+        showRate: true
       };
       wrapper = shallow(<Engagement {...props} />);
     });
@@ -65,8 +66,8 @@ describe('Variants View Component:', () => {
       expect(wrapper).toMatchSnapshot();
     });
 
-    it('should not render without engagement rate', () => {
-      wrapper.setProps({ variant: {}});
+    it('should not render when disabled', () => {
+      wrapper.setProps({ showRate: false });
       expect(wrapper.html()).toBe(null);
     });
   });

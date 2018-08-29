@@ -59,3 +59,11 @@ export const calculateTotalSampleSize = ({ default_template, variants }) =>
     (sum, variant) => sum + parseInt(variant.sample_size, 10),
     parseInt(default_template.sample_size, 10)
   );
+
+/**
+ * Checks if a test has any variants which have been delivered to
+ */
+export const hasTestDelivered = (abTest) => {
+  const variants = [abTest.default_template].concat(abTest.variants);
+  return !!_.find(variants, (variant = {}) => variant.count_accepted > 0);
+};

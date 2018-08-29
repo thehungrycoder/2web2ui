@@ -31,7 +31,7 @@ exports[`Variants View Component: Engagement Component: should render clicks cor
       >
         <Unit
           unit="percent"
-          value={0.2}
+          value={20}
         />
          
         <span
@@ -76,7 +76,7 @@ exports[`Variants View Component: Engagement Component: should render opens corr
       >
         <Unit
           unit="percent"
-          value={0.2}
+          value={20}
         />
          
         <span
@@ -116,6 +116,7 @@ exports[`Variants View Component: PercentOrSample Component: should render sampl
 exports[`Variants View Component: Top level Component should render correctly 1`] = `
 <React.Fragment>
   <Component
+    showRate={false}
     title="Default Template"
     variant={
       Object {
@@ -125,6 +126,7 @@ exports[`Variants View Component: Top level Component should render correctly 1`
   />
   <Component
     key="0"
+    showRate={false}
     variant={
       Object {
         "template_id": "var1",
@@ -133,6 +135,7 @@ exports[`Variants View Component: Top level Component should render correctly 1`
   />
   <Component
     key="1"
+    showRate={false}
     variant={
       Object {
         "template_id": "var2",
