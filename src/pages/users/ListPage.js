@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import fp from 'lodash/fp';
-import { Page } from '@sparkpost/matchbox';
+import { Page, Tag } from '@sparkpost/matchbox';
 import { Users } from 'src/components/images';
 import TimeAgo from 'react-timeago';
 
@@ -12,11 +12,12 @@ import { selectUsers } from 'src/selectors/users';
 import { Loading, ApiErrorBanner, DeleteModal, TableCollection } from 'src/components';
 import RoleSelect from './components/RoleSelect';
 import DeleteButton from './components/DeleteButton';
+import User from './components/User';
 
 const COLUMNS = [
-  { label: 'Name', sortKey: 'name' },
+  { label: 'User', sortKey: 'name' },
   { label: 'Role', sortKey: 'access' },
-  { label: 'Email', sortKey: 'email' },
+  { label: 'Two Factor Auth', sortKey: 'tfa_enabled' },
   { label: 'Last Login', sortKey: 'last_login' },
   null
 ];
@@ -39,7 +40,7 @@ export class ListPage extends Component {
 
   // Do not allow current user to change their access/role or delete their account
   getRowData = (user) => [
-    user.name,
+    <User name={user.name} email={user.email} />,
     <RoleSelect
       disabled={user.isCurrentUser}
       name={user.username}
@@ -47,7 +48,7 @@ export class ListPage extends Component {
       value={user.access}
       allowSuperUser={user.access === 'superuser'}
     />,
-    user.email,
+    user.tfa_enabled ? <Tag color={'blue'}>Enabled</Tag> : <Tag>Disabled</Tag>,
     user.last_login ? <TimeAgo date={user.last_login} live={false} /> : 'Never',
     <DeleteButton
       disabled={user.isCurrentUser}

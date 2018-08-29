@@ -26,7 +26,7 @@ exports[`Page: Users List should render correctly by default 1`] = `
       columns={
         Array [
           Object {
-            "label": "Name",
+            "label": "User",
             "sortKey": "name",
           },
           Object {
@@ -34,8 +34,8 @@ exports[`Page: Users List should render correctly by default 1`] = `
             "sortKey": "access",
           },
           Object {
-            "label": "Email",
-            "sortKey": "email",
+            "label": "Two Factor Auth",
+            "sortKey": "tfa_enabled",
           },
           Object {
             "label": "Last Login",
@@ -72,11 +72,13 @@ exports[`Page: Users List should render correctly by default 1`] = `
             "access": "admin",
             "email": "user1@test.com",
             "name": "Test User 1",
+            "tfa_enabled": false,
           },
           Object {
             "access": "admin",
             "email": "user2@test.com",
             "name": "Test User 2",
+            "tfa_enabled": true,
           },
         ]
       }
@@ -140,14 +142,19 @@ exports[`Page: Users List should render with an error 1`] = `
 
 exports[`Page: Users List should transform row data for the table collection 1`] = `
 Array [
-  "test-name",
+  <User
+    email="testemail"
+    name="test-name"
+  />,
   <RoleSelect
     allowSuperUser={false}
     disabled={false}
     onChange={[Function]}
     value="admin"
   />,
-  "testemail",
+  <Tag>
+    Disabled
+  </Tag>,
   "Never",
   <DeleteButton
     disabled={false}

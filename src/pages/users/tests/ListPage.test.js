@@ -14,8 +14,8 @@ describe('Page: Users List', () => {
       loading: false,
       listUsers: jest.fn(),
       users: [
-        { name: 'Test User 1', access: 'admin', email: 'user1@test.com' },
-        { name: 'Test User 2', access: 'admin', email: 'user2@test.com' }
+        { name: 'Test User 1', access: 'admin', email: 'user1@test.com', tfa_enabled: false },
+        { name: 'Test User 2', access: 'admin', email: 'user2@test.com', tfa_enabled: true }
       ]
     };
     wrapper = shallow(<ListPage {...props} />);
@@ -40,7 +40,8 @@ describe('Page: Users List', () => {
       name: 'test-name',
       isCurrentUser: false,
       access: 'admin',
-      email: 'testemail'
+      email: 'testemail',
+      tfa_enabled: false
     });
 
     expect(row).toMatchSnapshot();
