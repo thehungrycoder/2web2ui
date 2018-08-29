@@ -62,7 +62,8 @@ export function getEnricherOrDieTryin(store, currentWindow) {
         // This <html> property should be set by us and updated when page is translated
         documentLanguage: _.get(currentWindow, 'document.documentElement.lang', 'unknown'),
         navigatorLanguage: _.get(currentWindow, 'navigator.language', 'unknown'),
-        source: fromOurBundle ? '2web2ui' : 'unknown'
+        source: fromOurBundle ? '2web2ui' : 'unknown',
+        url: data.request.url.replace(/\/reset-password\/.*$/, '/reset-password/[FILTERED]')
       },
       user
     };
