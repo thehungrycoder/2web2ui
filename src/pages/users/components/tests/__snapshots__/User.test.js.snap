@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: User renders name & email 1`] = `
+<React.Fragment>
+  <p
+    className="Name"
+  >
+    <strong>
+      foo bar
+    </strong>
+  </p>
+  <p
+    className="Email"
+  >
+    <em>
+      foo@bar.com
+    </em>
+  </p>
+</React.Fragment>
+`;
