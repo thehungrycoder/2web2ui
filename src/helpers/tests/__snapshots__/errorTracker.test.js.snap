@@ -4,6 +4,7 @@ exports[`.getEnricherOrDieTryin by default 1`] = `
 Object {
   "level": "warning",
   "logger": "test",
+  "request": undefined,
   "tags": Object {
     "customer": undefined,
     "documentLanguage": "unknown",
@@ -21,6 +22,7 @@ Object {
   },
   "level": "warning",
   "logger": "test",
+  "request": undefined,
   "tags": Object {
     "customer": undefined,
     "documentLanguage": "unknown",
@@ -42,6 +44,7 @@ Object {
   },
   "level": "warning",
   "logger": "test",
+  "request": undefined,
   "tags": Object {
     "customer": undefined,
     "documentLanguage": "unknown",
@@ -56,6 +59,7 @@ exports[`.getEnricherOrDieTryin with current user 1`] = `
 Object {
   "level": "warning",
   "logger": "test",
+  "request": undefined,
   "tags": Object {
     "customer": 123,
     "documentLanguage": "unknown",
@@ -74,9 +78,28 @@ exports[`.getEnricherOrDieTryin with document language 1`] = `
 Object {
   "level": "warning",
   "logger": "test",
+  "request": undefined,
   "tags": Object {
     "customer": undefined,
     "documentLanguage": "af",
+    "navigatorLanguage": "unknown",
+    "source": "unknown",
+  },
+  "user": Object {},
+}
+`;
+
+exports[`.getEnricherOrDieTryin with email verification token 1`] = `
+Object {
+  "level": "warning",
+  "logger": "test",
+  "request": Object {
+    "headers": undefined,
+    "url": "https://not-a-real-tenant.example.com/account/email-verification/[FILTERED]",
+  },
+  "tags": Object {
+    "customer": undefined,
+    "documentLanguage": "unknown",
     "navigatorLanguage": "unknown",
     "source": "unknown",
   },
@@ -102,6 +125,7 @@ Object {
   },
   "level": "error",
   "logger": "test",
+  "request": undefined,
   "tags": Object {
     "customer": undefined,
     "documentLanguage": "unknown",
@@ -116,6 +140,7 @@ exports[`.getEnricherOrDieTryin with navigator language 1`] = `
 Object {
   "level": "warning",
   "logger": "test",
+  "request": undefined,
   "tags": Object {
     "customer": undefined,
     "documentLanguage": "unknown",
@@ -126,16 +151,132 @@ Object {
 }
 `;
 
+exports[`.getEnricherOrDieTryin with other request fields 1`] = `
+Object {
+  "level": "warning",
+  "logger": "test",
+  "request": Object {
+    "headers": Object {
+      "Referer": "https://not-a-real-tenant.example.com/nice-route",
+      "User-Agent": "Probably not Mozilla really",
+    },
+    "url": "https://not-a-real-tenant.example.com/nice-route",
+  },
+  "tags": Object {
+    "customer": undefined,
+    "documentLanguage": "unknown",
+    "navigatorLanguage": "unknown",
+    "source": "unknown",
+  },
+  "user": Object {},
+}
+`;
+
+exports[`.getEnricherOrDieTryin with password reset token 1`] = `
+Object {
+  "level": "warning",
+  "logger": "test",
+  "request": Object {
+    "headers": undefined,
+    "url": "https://not-a-real-tenant.example.com/reset-password/[FILTERED]",
+  },
+  "tags": Object {
+    "customer": undefined,
+    "documentLanguage": "unknown",
+    "navigatorLanguage": "unknown",
+    "source": "unknown",
+  },
+  "user": Object {},
+}
+`;
+
+exports[`.getEnricherOrDieTryin with referer header 1`] = `
+Object {
+  "level": "warning",
+  "logger": "test",
+  "request": Object {
+    "headers": Object {
+      "Referer": "https://not-a-real-tenant.example.com/account/email-verification/[FILTERED]",
+      "User-Agent": "Probably not Mozilla really",
+    },
+    "url": "https://not-a-real-tenant.example.com/account/email-verification/[FILTERED]",
+  },
+  "tags": Object {
+    "customer": undefined,
+    "documentLanguage": "unknown",
+    "navigatorLanguage": "unknown",
+    "source": "unknown",
+  },
+  "user": Object {},
+}
+`;
+
+exports[`.getEnricherOrDieTryin with referrer header 1`] = `
+Object {
+  "level": "warning",
+  "logger": "test",
+  "request": Object {
+    "headers": Object {
+      "Referer": "https://not-a-real-tenant.example.com/account/email-verification/[FILTERED]",
+      "User-Agent": "Probably not Mozilla really",
+    },
+    "url": "https://not-a-real-tenant.example.com/account/email-verification/[FILTERED]",
+  },
+  "tags": Object {
+    "customer": undefined,
+    "documentLanguage": "unknown",
+    "navigatorLanguage": "unknown",
+    "source": "unknown",
+  },
+  "user": Object {},
+}
+`;
+
 exports[`.getEnricherOrDieTryin with tags 1`] = `
 Object {
   "level": "warning",
   "logger": "test",
+  "request": undefined,
   "tags": Object {
     "customer": undefined,
     "documentLanguage": "unknown",
     "navigatorLanguage": "unknown",
     "source": "unknown",
     "tenant": "test",
+  },
+  "user": Object {},
+}
+`;
+
+exports[`.getEnricherOrDieTryin without headers 1`] = `
+Object {
+  "level": "warning",
+  "logger": "test",
+  "request": Object {
+    "headers": undefined,
+    "url": "https://not-a-real-tenant.example.com/nice-route",
+  },
+  "tags": Object {
+    "customer": undefined,
+    "documentLanguage": "unknown",
+    "navigatorLanguage": "unknown",
+    "source": "unknown",
+  },
+  "user": Object {},
+}
+`;
+
+exports[`.getEnricherOrDieTryin without request object 1`] = `
+Object {
+  "level": "warning",
+  "logger": "test",
+  "otherField": "blue",
+  "request": undefined,
+  "tags": Object {
+    "customer": undefined,
+    "documentLanguage": "unknown",
+    "navigatorLanguage": "unknown",
+    "source": "unknown",
   },
   "user": Object {},
 }
