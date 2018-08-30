@@ -1,7 +1,10 @@
 window.SP = window.SP || {};
 window.SP.productionConfig = {
   apiBase: '//capitalone.api.e.sparkpost.com/api/v1',
-  featureFlags: {},
+  featureFlags: {
+    "allow_anyone_at_verification": true, 
+    "allow_mailbox_verification": true
+},
   support: {"algolia": {"index": "production_site_posts_support_article", "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6", "appID": "SFXAWCYDV8"}, "enabled": true},
   gaTag: 'UA-111136819-2',
   sentry: {

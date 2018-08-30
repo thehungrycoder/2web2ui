@@ -332,6 +332,9 @@ const tenants = {
   capone: {
     context: 'production',
     alias: 'capitalone',
+    featureFlags: {
+      allow_anyone_at_verification: true
+    },
     trackingDomains: {
       cnameValue: 'click.c1-t.msyscloud.com'
     }
