@@ -2,6 +2,7 @@ const fs = require('fs');
 const writeContent = require('../writeContent');
 
 jest.mock('fs');
+jest.mock('../../../config/paths', () => ({ appBuild: './build' }));
 
 describe('generateConfigs.writeContent', () => {
   const content = `window.SP.productionConfig = { tenant: 'test' };`;

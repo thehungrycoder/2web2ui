@@ -1,4 +1,4 @@
-// Shareable configurations
+// Shareable tenant configurations
 // TODO: Name them something other than environments
 const contexts = {
   uat: {
