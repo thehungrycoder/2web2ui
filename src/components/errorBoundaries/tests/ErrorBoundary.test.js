@@ -33,6 +33,6 @@ describe('Component: ErrorBoundary', () => {
     wrapper.instance().componentDidCatch(error);
 
     expect(wrapper.state('hasError')).toEqual(true);
-    expect(ErrorTracker.report).toHaveBeenCalledWith(error);
+    expect(ErrorTracker.report).toHaveBeenCalledWith('error-boundary', error);
   });
 });

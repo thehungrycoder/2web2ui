@@ -18,8 +18,9 @@ export default class ErrorBoundary extends Component {
   componentDidCatch(error) {
     this.setState({ hasError: true });
 
-    // Must manually report errors, React swallows errors in "production" builds
-    ErrorTracker.report(error);
+    // Must manually report errors because componentDidCatch() is
+    // analogous to a catch clause in production builds.
+    ErrorTracker.report('error-boundary', error);
   }
 
   render() {
