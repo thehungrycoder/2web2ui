@@ -64,6 +64,6 @@ export const calculateTotalSampleSize = ({ default_template, variants }) =>
  * Checks if a test has any variants which have been delivered to
  */
 export const hasTestDelivered = (abTest) => {
-  const variants = [abTest.default_template].concat(abTest.variants);
-  return !!_.find(variants, (variant = {}) => variant.count_accepted > 0);
+  const variants = [abTest.default_template, ...abTest.variants];
+  return Boolean(_.find(variants, (variant = {}) => variant.count_accepted > 0));
 };
