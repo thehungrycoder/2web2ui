@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`generateConfigs.constructConfig with context 1`] = `
+Object {
+  "apiBase": "//testTenant.api.e.sparkpost.com/api/v1",
+  "bounceDomains": Object {
+    "allowDefault": true,
+    "allowSubaccountDefault": true,
+    "cnameValue": "testTenant.mail.e.sparkpost.com",
+  },
+  "context": "uat",
+  "featureFlags": Object {},
+  "host": "testTenant.e.sparkpost.com",
+  "sentry": Object {
+    "projectId": 237611,
+    "publicKey": "b63907577f9c4091895c49cc963fa8e4",
+  },
+  "smtpAuth": Object {
+    "enabled": true,
+    "host": "testTenant.smtp.e.sparkpost.com",
+    "port": 587,
+    "username": "testTenant",
+  },
+  "support": Object {
+    "algolia": Object {
+      "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
+      "appID": "SFXAWCYDV8",
+      "index": "development_site_posts_support_article",
+    },
+    "enabled": true,
+  },
+  "tenant": "testTenant",
+  "tenantId": "testTenant",
+  "trackingDomains": Object {
+    "cnameValue": "testTenant.et.e.sparkpost.com",
+  },
+}
+`;
+
+exports[`generateConfigs.constructConfig with no context 1`] = `
+Object {
+  "apiBase": "//testTenant.api.e.sparkpost.com/api/v1",
+  "bounceDomains": Object {
+    "allowDefault": true,
+    "allowSubaccountDefault": true,
+    "cnameValue": "testTenant.mail.e.sparkpost.com",
+  },
+  "featureFlags": Object {},
+  "host": "testTenant.e.sparkpost.com",
+  "smtpAuth": Object {
+    "enabled": true,
+    "host": "testTenant.smtp.e.sparkpost.com",
+    "port": 587,
+    "username": "testTenant",
+  },
+  "support": Object {
+    "algolia": Object {
+      "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
+      "appID": "SFXAWCYDV8",
+    },
+    "enabled": true,
+  },
+  "tenant": "testTenant",
+  "tenantId": "testTenant",
+  "trackingDomains": Object {
+    "cnameValue": "testTenant.et.e.sparkpost.com",
+  },
+}
+`;

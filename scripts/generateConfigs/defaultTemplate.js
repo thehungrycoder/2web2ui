@@ -1,5 +1,5 @@
 // Generate default configurations with a tenant
-const defaultsTemplate = (tenant) => {
+const defaultTemplate = (tenant) => {
   const identifier = tenant.alias || tenant.tenantId;
 
   return {
@@ -31,4 +31,4 @@ const defaultsTemplate = (tenant) => {
   };
 };
 
-module.exports = defaultsTemplate;
+module.exports = defaultTemplate;
