@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { EmptyState } from '@sparkpost/matchbox';
 import { Generic } from 'src/components/images';
+import ErrorTracker from 'src/helpers/errorTracker';
 
 const primaryAction = {
   content: 'Reload Page',
@@ -14,8 +15,12 @@ export default class ErrorBoundary extends Component {
     hasError: false
   }
 
-  componentDidCatch() {
+  componentDidCatch(error) {
     this.setState({ hasError: true });
+
+    // Must manually report errors because componentDidCatch() is
+    // analogous to a catch clause in production builds.
+    ErrorTracker.report('error-boundary', error);
   }
 
   render() {

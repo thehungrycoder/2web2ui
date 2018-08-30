@@ -84,6 +84,54 @@ cases('.getEnricherOrDieTryin', ({ currentWindow = {}, data = {}, state = {}}) =
         }]
       }
     }
+  },
+  'with password reset token': {
+    data: {
+      request: {
+        url: 'https://not-a-real-tenant.example.com/reset-password/long-secret-reset-token'
+      }
+    }
+  },
+  'with email verification token': {
+    data: {
+      request: {
+        url: 'https://not-a-real-tenant.example.com/account/email-verification/long-verification-token'
+      }
+    }
+  },
+  'with other request fields': {
+    data: {
+      request: {
+        url: 'https://not-a-real-tenant.example.com/nice-route',
+        headers: {
+          Referer: 'https://not-a-real-tenant.example.com/nice-route',
+          'User-Agent': 'Probably not Mozilla really'
+        }
+      }
+    }
+  },
+  'with referer header': {
+    data: {
+      request: {
+        url: 'https://not-a-real-tenant.example.com/account/email-verification/long-verification-token',
+        headers: {
+          Referer: 'https://not-a-real-tenant.example.com/account/email-verification/long-verification-token',
+          'User-Agent': 'Probably not Mozilla really'
+        }
+      }
+    }
+  },
+  'without headers': {
+    data: {
+      request: {
+        url: 'https://not-a-real-tenant.example.com/nice-route'
+      }
+    }
+  },
+  'without request object': {
+    data: {
+      otherField: 'blue'
+    }
   }
 });
 

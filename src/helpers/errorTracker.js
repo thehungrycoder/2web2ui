@@ -41,6 +41,58 @@ export function breadcrumbCallback(crumb) {
   return crumb;
 }
 
+/**
+ * Remove sensitive tokens from URLs
+ * @param {String} url
+ */
+function filterURL(url) {
+  const filters = [
+    { re: /\/reset-password\/.*$/, replacement: '/reset-password/[FILTERED]' },
+    { re: /\/account\/email-verification\/.*$/, replacement: '/account/email-verification/[FILTERED]' }
+  ];
+
+  if (!url) {
+    return url;
+  }
+
+  // url.replace(filters[0].re, filters[0].replacement)
+  //    .replace(filters[1].re, filters[1].replacement) ...
+  return filters.reduce((filtered, { re, replacement }) => filtered.replace(re, replacement), url);
+}
+
+/**
+ * Sanitise any URL in a given field of an object.
+ * @param {Object} obj - containing key
+ * @param {String} key - key to sanitise
+ */
+function filterUrlFromKeyIn(obj, key) {
+  if (!obj) {
+    return obj;
+  }
+  return {
+    ...obj,
+    [key]: filterURL(obj[key])
+  };
+}
+
+/**
+ * Sanitise the browser request URL
+ * @param {Object} request - Sentry request object
+ */
+function filterRequest(request) {
+  if (!request) {
+    return request;
+  }
+
+  const urlFiltered = filterUrlFromKeyIn(request, 'url');
+  const headers = filterUrlFromKeyIn(request.headers, 'Referer');
+
+  return {
+    ...urlFiltered,
+    headers
+  };
+}
+
 // Closure to safely enrich events with data from Redux store
 export function getEnricherOrDieTryin(store, currentWindow) {
   return function enrich(data) {
@@ -49,12 +101,14 @@ export function getEnricherOrDieTryin(store, currentWindow) {
     const fromOurBundle = isErrorFromOurBundle(data);
     const apiError = isApiError(data);
     const chunkFailure = isChunkFailure(data);
+    const request = filterRequest(data.request);
 
     /*global SUPPORTED_BROWSERS*/
     const isSupportedBrowser = browser.satisfies(SUPPORTED_BROWSERS); //Refer to docs/browser-support-sentry-issue.md for more info)
 
     return {
       ...data,
+      request,
       level: !fromOurBundle || apiError || chunkFailure || !isSupportedBrowser ? 'warning' : 'error',
       tags: { // all tags can be easily searched and sent in Slack notifications
         ...data.tags,
