@@ -211,27 +211,6 @@ Object {
 }
 `;
 
-exports[`.getEnricherOrDieTryin with referrer header 1`] = `
-Object {
-  "level": "warning",
-  "logger": "test",
-  "request": Object {
-    "headers": Object {
-      "Referer": "https://not-a-real-tenant.example.com/account/email-verification/[FILTERED]",
-      "User-Agent": "Probably not Mozilla really",
-    },
-    "url": "https://not-a-real-tenant.example.com/account/email-verification/[FILTERED]",
-  },
-  "tags": Object {
-    "customer": undefined,
-    "documentLanguage": "unknown",
-    "navigatorLanguage": "unknown",
-    "source": "unknown",
-  },
-  "user": Object {},
-}
-`;
-
 exports[`.getEnricherOrDieTryin with tags 1`] = `
 Object {
   "level": "warning",
