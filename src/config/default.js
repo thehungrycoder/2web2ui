@@ -81,6 +81,13 @@ const config = {
   },
   tenant: 'local',
   website: {
+    cookie: {
+      name: 'website_auth',
+      options: {
+        domain: '.sparkpost.com',
+        path: '/'
+      }
+    },
     domain: 'sparkpost.com'
   },
   zuora: {

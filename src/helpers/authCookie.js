@@ -1,10 +1,12 @@
 import cookie from 'js-cookie';
 import config from 'src/config';
 
-const { name, options } = config.authentication.cookie;
+const authCookie = config.authentication.cookie;
+const websiteCookie = config.website.cookie;
 
 function save(data) {
-  cookie.set(name, data, options);
+  cookie.set(authCookie.name, data, authCookie.options);
+  cookie.set(websiteCookie.name, data, websiteCookie.options);
 }
 
 function merge(data) {
@@ -14,11 +16,12 @@ function merge(data) {
 }
 
 function get() {
-  return cookie.getJSON(name);
+  return cookie.getJSON(authCookie.name);
 }
 
 function remove() {
-  return cookie.remove(name, options);
+  cookie.remove(websiteCookie.name, websiteCookie.options);
+  return cookie.remove(authCookie.name, authCookie.options);
 }
 
 export default { save, merge, get, remove };

@@ -5,22 +5,25 @@ import config from 'src/config';
 jest.mock('js-cookie');
 
 describe('Helper: auth cookie', () => {
-  it('should save a cookie using config values', () => {
+  const { name: authCookieName, options: authCookieOptions } = config.authentication.cookie;
+  const { name: websiteCookieName, options: websiteCookieOptions } = config.website.cookie;
+
+  it('should save both auth and website cookies using config values', () => {
     const data = {};
-    const { name, options } = config.authentication.cookie;
     authCookie.save(data);
-    expect(cookieMock.set).toHaveBeenCalledWith(name, data, options);
+    expect(cookieMock.set).toHaveBeenCalledWith(authCookieName, data, authCookieOptions);
+    expect(cookieMock.set).toHaveBeenCalledWith(websiteCookieName, data, websiteCookieOptions);
   });
 
   it('should get a cookie', () => {
-    const cookieData = {};
-    cookieMock.getJSON.mockReturnValue(cookieData);
-    expect(authCookie.get()).toBe(cookieData);
+    const data = {};
+    cookieMock.getJSON.mockReturnValue(data);
+    expect(authCookie.get()).toBe(data);
   });
 
-  it('should remove a cookie', () => {
-    const { name, options } = config.authentication.cookie;
+  it('should remove both auth and website cookies', () => {
     authCookie.remove();
-    expect(cookieMock.remove).toHaveBeenCalledWith(name, options);
+    expect(cookieMock.remove).toHaveBeenCalledWith(authCookieName, authCookieOptions);
+    expect(cookieMock.remove).toHaveBeenCalledWith(websiteCookieName, websiteCookieOptions);
   });
 });
