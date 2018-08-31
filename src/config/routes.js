@@ -34,7 +34,7 @@ import { emailVerificationRedirect, emailRedirects } from './emailRoutes';
 import SecretBillingPlanOrBillingSummaryPage from './SecretBillingPlanOrBillingSummaryPage';
 
 import { hasGrants, all, not } from 'src/helpers/conditions';
-import { isEnterprise, isAws, hasUiOption } from 'src/helpers/conditions/account';
+import { isEnterprise, isAws } from 'src/helpers/conditions/account';
 import { isHeroku, isAzure } from 'src/helpers/conditions/user';
 import { configFlag, configEquals } from 'src/helpers/conditions/config';
 
@@ -530,7 +530,7 @@ const routes = [
   {
     path: '/ab-testing',
     component: abTesting.ListPage,
-    condition: all(hasGrants('ab-testing/manage'), hasUiOption('abtests')),
+    condition: hasGrants('ab-testing/manage'),
     layout: App,
     title: 'A/B Testing',
     supportDocsSearch: 'A/B test'
@@ -538,7 +538,7 @@ const routes = [
   {
     path: '/ab-testing/create',
     component: abTesting.CreatePage,
-    condition: all(hasGrants('ab-testing/manage'), hasUiOption('abtests')),
+    condition: hasGrants('ab-testing/manage'),
     layout: App,
     title: 'Create A/B Test',
     supportDocsSearch: 'A/B test'
@@ -546,7 +546,7 @@ const routes = [
   {
     path: '/ab-testing/:id/:version',
     component: abTesting.DetailsPage,
-    condition: all(hasGrants('ab-testing/manage'), hasUiOption('abtests')),
+    condition: hasGrants('ab-testing/manage'),
     layout: App,
     title: 'A/B Testing',
     supportDocsSearch: 'A/B test'
