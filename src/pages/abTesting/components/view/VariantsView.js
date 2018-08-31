@@ -27,11 +27,11 @@ export const Engagement = ({ variant, showRate }) => {
 
   let metricMarkup = null;
 
-  if (variant.count_unique_confirmed_opened) {
+  if (_.isNumber(variant.count_unique_confirmed_opened)) {
     metricMarkup = <span>{variant.count_unique_confirmed_opened.toLocaleString()} opens of {variant.count_accepted.toLocaleString()} accepted</span>;
   }
 
-  if (variant.count_unique_clicked) {
+  if (_.isNumber(variant.count_unique_clicked)) {
     metricMarkup = <span>{variant.count_unique_clicked.toLocaleString()} clicks of {variant.count_accepted.toLocaleString()} accepted</span>;
   }
 

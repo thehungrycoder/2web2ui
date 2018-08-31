@@ -55,7 +55,7 @@ exports[`Variants View Component: Engagement Component: should render opens corr
         bottom={true}
         content={
           <span>
-            10
+            0
              opens of 
             100
              accepted
