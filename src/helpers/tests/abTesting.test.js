@@ -85,5 +85,9 @@ describe('A/B testing helper', () => {
       const testMock = { default_template: { count_accepted: 0 }, variants: [{ count_accepted: 0 },{ count_accepted: 0 }]};
       expect(helpers.hasTestDelivered(testMock)).toEqual(false);
     });
+
+    it('should return false if no test is provided', () => {
+      expect(helpers.hasTestDelivered()).toEqual(false);
+    });
   });
 });
