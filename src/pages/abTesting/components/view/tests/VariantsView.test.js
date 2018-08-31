@@ -45,7 +45,7 @@ describe('Variants View Component:', () => {
         variant: {
           template_id: 'temp_id',
           engagement_rate: 0.2,
-          count_unique_confirmed_opened: 10,
+          count_unique_confirmed_opened: 0,
           count_accepted: 100
         },
         showRate: true
