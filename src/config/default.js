@@ -90,9 +90,11 @@ const config = {
   brightback: {
     baseUrl: 'https://app.brightback.com',
     app_id: '9N0rWBvKGR',
-    save_return_url: '/account/billing', // Return URL from Brightback for end-users who do not cancel
-    cancel_confirmation_url: '/accout/billing/plan?immediatePlanChange=free-0817', // Return URL from Brightback for end-users who cancel
-    billing_url: '/account/billing/plan' // Billing URL to direct end-users to enter coupon code or other billing changes
+    downgradeToFreeUrls: {
+      save_return_url: '/account/billing', // Return URL from Brightback for end-users who do not cancel
+      cancel_confirmation_url: '/accout/billing/plan?immediatePlanChange=free-0817', // Return URL from Brightback for end-users who cancel
+      billing_url: '/account/billing/plan' // Billing URL to direct end-users to enter coupon code or other billing changes
+    }
   },
   smtpAuth: {
     host: 'no-default-set',

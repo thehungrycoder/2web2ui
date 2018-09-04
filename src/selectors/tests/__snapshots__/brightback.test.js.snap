@@ -7,8 +7,8 @@ Object {
     "internal_id": 101,
   },
   "app_id": "9N0rWBvKGR",
-  "billing_url": "http://phoenix.test/account/billing/plan",
-  "cancel_confirmation_url": "http://phoenix.test/accout/billing/plan?immediatePlanChange=free-0817",
+  "billing_url": "http://phoenix.test/billing_url",
+  "cancel_confirmation_url": "http://phoenix.test/cancel_confirmation_url",
   "context": Object {
     "locale": "en-US",
     "referrer": "",
@@ -16,7 +16,8 @@ Object {
     "url": "http://phoenix.test/",
     "user_agent": "node.js",
   },
-  "save_return_url": "http://phoenix.test/account/billing",
+  "email": "test@email.com",
+  "save_return_url": "http://phoenix.test/save_return_url",
   "timestamp": "2017-11-15T10:00:00.000Z",
 }
 `;

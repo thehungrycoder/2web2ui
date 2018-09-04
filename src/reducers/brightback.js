@@ -1,19 +1,15 @@
 const initialState = {
-  valid: true,
-  url: null,
-  precancelLoading: false
+  valid: false,
+  url: null
 };
 
-export default (state = initialState, { type, payload, meta }) => {
+export default (state = initialState, { type, payload }) => {
   switch (type) {
     case 'BRIGHTBACK_PRECANCEL_PENDING':
-      return { ...state, precancelLoading: true, valid: false, url: null };
-
-    case 'BRIGHTBACK_PRECANCEL_FAIL':
-      return { ...state, precancelLoading: false };
+      return { ...state, ...initialState };
 
     case 'BRIGHTBACK_PRECANCEL_SUCCESS':
-      return { ...state, precancelLoading: false, ...payload };
+      return { ...state, ...payload };
 
     default:
       return state;

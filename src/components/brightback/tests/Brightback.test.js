@@ -4,8 +4,8 @@ import { shallow } from 'enzyme';
 
 describe('Brightback Component', () => {
   const props = {
-    render: jest.fn(({ buttonProps }) => (
-      <button type='submit' {...buttonProps}>test</button>
+    render: jest.fn((renderProps) => (
+      <div {...renderProps}>test</div>
     )),
     enabled: true,
     hasBrightbackOption: true,
@@ -23,20 +23,20 @@ describe('Brightback Component', () => {
     expect(props.precancel).toHaveBeenCalledWith(props.data);
   });
 
-  it('should render fallback without the UI option', () => {
+  it('should pass correct props without the UI option', () => {
     const wrapper = shallow(<Brightback {...props} hasBrightbackOption={false} />);
     expect(wrapper).toMatchSnapshot();
     expect(props.precancel).not.toHaveBeenCalled();
   });
 
-  it('should render fallback without valid account data', () => {
+  it('should pass correct props without valid account data', () => {
     const wrapper = shallow(<Brightback {...props} valid={false} />);
     expect(wrapper).toMatchSnapshot();
     expect(props.precancel).toHaveBeenCalledWith(props.data);
   });
 
-  it('should render fallback when not enabled', () => {
-    const wrapper = shallow(<Brightback {...props} enabled={false} />);
+  it('should pass correct props when passed condition is false', () => {
+    const wrapper = shallow(<Brightback {...props} condition={false} />);
     expect(wrapper).toMatchSnapshot();
     expect(props.precancel).toHaveBeenCalledWith(props.data);
   });

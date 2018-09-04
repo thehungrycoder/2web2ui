@@ -99,18 +99,19 @@ export class Confirmation extends React.Component {
         </Panel.Section>
         <Panel.Section>
           <Brightback
-            enabled={billingEnabled && isPlanSelected && selected.isFree}
-            render={({ buttonProps }) => (
+            condition={billingEnabled && isPlanSelected && selected.isFree}
+            urls={config.brightback.downgradeToFreeUrls}
+            render={({ enabled, to }) => (
               <Button
-                type='submit'
+                type={enabled ? 'button' : 'submit'}
+                to={enabled ? to : null}
                 fullWidth
                 primary={!isDowngrade}
                 destructive={isDowngrade}
-                disabled={disableSubmit}
-                {...buttonProps}>
-                  {buttonText}
+                disabled={disableSubmit} >
+                {buttonText}
               </Button>
-          )}/>
+            )}/>
         </Panel.Section>
       </Panel>
     );

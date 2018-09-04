@@ -15,14 +15,12 @@ export class Brightback extends Component {
   }
 
   getRenderProps() {
-    const { enabled, valid, url, hasBrightbackOption } = this.props;
+    const { valid, url, hasBrightbackOption, condition = true } = this.props;
 
-    if (hasBrightbackOption && enabled && valid) {
+    if (hasBrightbackOption && valid && condition) {
       return {
-        buttonProps: {
-          to: url,
-          type: 'button' // This overwrites 'submit' which triggers redux-form submit
-        }
+        to: url,
+        enabled: true
       };
     }
 
@@ -34,10 +32,10 @@ export class Brightback extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state, props) => ({
   valid: state.brightback.valid,
   url: state.brightback.url,
-  data: selectBrightbackData(state),
+  data: selectBrightbackData(state, props),
   loading: state.brightback.precancelLoading,
   hasBrightbackOption: hasUiOption('brightback')(state)
 });

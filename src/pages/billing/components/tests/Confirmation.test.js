@@ -6,7 +6,7 @@ import Brightback from 'src/components/brightback/Brightback';
 describe('Confirmation: ', () => {
   let wrapper;
   let props;
-  const getButton = () => wrapper.find(Brightback).props().render({ buttonProps: { test: 'prop' }});
+  const getButton = (props = {}) => wrapper.find(Brightback).props().render(props);
 
   const current = {
     monthly: 100,
@@ -60,11 +60,13 @@ describe('Confirmation: ', () => {
   it('should render correctly with an upgrade', () => {
     wrapper.setProps({ selected: upgrade, billingEnabled: true });
     expect(wrapper).toMatchSnapshot();
+    expect(getButton()).toMatchSnapshot();
   });
 
   it('should render correctly for an upgrade effectively immediately', () => {
     wrapper.setProps({ current: free, selected: upgrade, billingEnabled: true });
     expect(wrapper).toMatchSnapshot();
+    expect(getButton()).toMatchSnapshot();
   });
 
   it('should render correctly with a downgrade', () => {
@@ -76,6 +78,7 @@ describe('Confirmation: ', () => {
   it('should render correctly with a downgrade to free', () => {
     wrapper.setProps({ selected: free, billingEnabled: true });
     expect(wrapper).toMatchSnapshot();
+    expect(getButton({ enabled: true, to: 'redirect' })).toMatchSnapshot();
   });
 
   it('should render correctly with an upgrade with IP', () => {
