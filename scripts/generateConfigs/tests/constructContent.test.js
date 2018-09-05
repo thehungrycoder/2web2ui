@@ -9,6 +9,8 @@ describe('generateConfigs.constructContent', () => {
     const config = {
       alias: 'anotherTestTenant',
       host: 'test.example.com',
+      nextHost: 'next.test.example.com',
+      originHost: 'origin.test.example.com',
       tenantId: 'testTenant',
       apiBase: '//api.test.example/graphql'
     };

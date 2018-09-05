@@ -8,6 +8,12 @@
  *       // an alternative identifier for tenantId
  *       alias: 'meTenant',
  *
+ *       // host to "next" deployment
+ *       nextHost: 'next.tst.sparkpost.com'
+ *
+ *       // host to back door
+ *       originHost: 'origin.tst.sparkpost.com'
+ *
  *       // all other values are overrides for the default template
  *     }
  *   }
@@ -75,6 +81,8 @@ const productionTenants = {
     },
     gtmId: 'GTM-WN7C84',
     host: 'app.sparkpost.com',
+    nextHost: 'phoenix-next-prd.sparkpost.com',
+    originHost: 'phoenix-origin-prd.sparkpost.com',
     siftScience: {
       id: '7c5f68d795'
     },

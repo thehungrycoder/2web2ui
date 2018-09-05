@@ -8,6 +8,12 @@
  *       // an alternative identifier for tenantId
  *       alias: 'meTenant',
  *
+ *       // host to "next" deployment
+ *       nextHost: 'next.tst.sparkpost.com'
+ *
+ *       // host to back door
+ *       originHost: 'origin.tst.sparkpost.com'
+ *
  *       // all other values are overrides for the default template
  *     }
  *   }
@@ -56,6 +62,8 @@ const stagingTenants = {
       has_signup: true
     },
     host: 'app-staging.sparkpost.com',
+    nextHost: 'phoenix-next-stg.sparkpost.com',
+    originHost: 'phoenix-origin-stg.sparkpost.com',
     siftScience: {
       id: '88affa8e11'
     },

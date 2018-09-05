@@ -97,13 +97,6 @@ describe.skip('generateConfigs', () => {
         fs.renameSync(`${tmpTenantConfigPath}/${dir}`, `${tmpPath}/${dir}`);
       });
     })
-
-    fs.unlinkSync(`${tmpPath}/phoenix-next-prd.sparkpost.com`);
-    fs.unlinkSync(`${tmpPath}/phoenix-next-stg.sparkpost.com`);
-    fs.unlinkSync(`${tmpPath}/phoenix-next.tst.sparkpost.com`);
-    fs.unlinkSync(`${tmpPath}/phoenix-origin-prd.sparkpost.com`);
-    fs.unlinkSync(`${tmpPath}/phoenix-origin-stg.sparkpost.com`);
-    fs.unlinkSync(`${tmpPath}/phoenix-origin.tst.sparkpost.com`);
   })
 
   beforeEach(() => {
