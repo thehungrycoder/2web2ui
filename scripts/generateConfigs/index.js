@@ -7,7 +7,7 @@ const writeContent = require('./writeContent');
 const generateConfigs = () => {
   Object.keys(tenants).forEach((environment) => {
     Object.keys(tenants[environment]).forEach((tenantId) => {
-      const config = constructConfig({ ...tenants[tenantId], tenantId }, environment);
+      const config = constructConfig({ ...tenants[environment][tenantId], tenantId }, environment);
       const content = constructContent(config);
 
       writeContent(config.host, content);

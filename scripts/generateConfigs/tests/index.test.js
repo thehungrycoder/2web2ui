@@ -1,19 +1,20 @@
 const { execSync } = require('child_process');
 const fs = require('fs-extra');
 const cases = require('jest-in-case');
-const constructConfig = require('../constructConfig');
+const generateConfigs = require('../');
 const tenantsByEnvironment = require('../tenants');
 
 /**
  * To use, remove .skip and run directly, npx jest scripts/generateConfigs/tests/index.test.js
  */
-describe('generateConfigs', () => {
+describe.skip('generateConfigs', () => {
   const ansibleEnvironments = [
     'consolidated-tst',
     'consolidated-stg',
     'consolidated-prd',
     'consolidated-eu-webui'
   ];
+  const buildTenantConfigPath = `${process.cwd()}/build/static/tenant-config`;
   const tmpDeploymentPath = '/var/tmp/phoenix';
   const tmpTenantConfigPath = `${tmpDeploymentPath}/current/static/tenant-config`;
   const tmpPath = `${process.cwd()}/tmp`;
@@ -30,7 +31,16 @@ describe('generateConfigs', () => {
     return acc;
   }, {});
 
-  const readProductionConfig = (host) => {
+  const readBuildTenantConfig = (host) => {
+    const js = fs.readFileSync(`${buildTenantConfigPath}/${host}/production.js`, 'utf8');
+    let window = {};
+
+    eval(js); // sets window
+
+    return window.SP.productionConfig;
+  };
+
+  const readTmpTenantConfig = (host) => {
     const js = fs.readFileSync(`${tmpPath}/${host}/production.js`, 'utf8');
     let window = {};
 
@@ -65,7 +75,6 @@ describe('generateConfigs', () => {
     };
   }
 
-  // Setup
   beforeEach(() => {  // should be beforeAll, but it runs even if describe.skip
     // ugh, it takes minutes to run all the playbooks, so only do it once.  If you need to rerun the
     // playbooks, just delete the ./tmp directory
@@ -97,17 +106,28 @@ describe('generateConfigs', () => {
     fs.unlinkSync(`${tmpPath}/phoenix-origin.tst.sparkpost.com`);
   })
 
-  cases('generateConfigs', ({ name, environment, ...tenant }) => {
-    const { alias, host, tenantId, ...config } = constructConfig({ ...tenant, tenantId: name }, environment);
-    const prevConfig = readProductionConfig(host);
+  beforeEach(() => {
+    if (fs.existsSync(buildTenantConfigPath)) {
+      return;
+    }
 
-    expect(prevConfig).toEqual(config);
-  }, tenants);
+    fs.mkdirpSync(buildTenantConfigPath);
+    generateConfigs();
+  })
 
   it('should not be missing tenants', () => {
-    const prevTenantCount = fs.readdirSync(tmpPath).length;
-    const tenantCount = Object.keys(tenants).length;
+    const prevTenantList = fs.readdirSync(tmpPath);
+    const tenantList = fs.readdirSync(buildTenantConfigPath);
 
-    expect(prevTenantCount).toEqual(tenantCount);
+    expect(prevTenantList).toEqual(tenantList);
   });
+
+  fs.readdirSync(tmpPath).forEach((host) => {
+    it(`for ${host}`, () => {
+      const prevConfig = readTmpTenantConfig(host);
+      const nextConfig = readBuildTenantConfig(host);
+
+      expect(prevConfig).toEqual(nextConfig);
+    })
+  })
 })

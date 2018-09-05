@@ -60,5 +60,8 @@ module.exports = {
   restoreMocks: true,
   globals: {
     'SUPPORTED_BROWSERS': {}
-  }
+  },
+  watchPathIgnorePatterns: [
+    '<rootDir>/build'
+  ]
 };
