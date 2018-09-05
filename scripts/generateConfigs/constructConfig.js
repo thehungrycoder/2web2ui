@@ -1,10 +1,10 @@
 const _ = require('lodash');
-const contexts = require('./contexts');
+const environments = require('./environments');
 const defaultTemplate = require('./defaultTemplate');
 
-const constructConfig = (tenant) => _.merge(
+const constructConfig = (tenant, environment) => _.merge(
   defaultTemplate(tenant),
-  contexts[tenant.context],
+  environments[environment],
   tenant
 );
 

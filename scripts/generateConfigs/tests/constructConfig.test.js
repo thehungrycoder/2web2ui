@@ -4,11 +4,11 @@ const constructConfig = require('../constructConfig');
 cases('generateConfigs.constructConfig', ({ name, ...tenant }) => {
   expect(constructConfig(tenant)).toMatchSnapshot();
 }, {
-  'with no context': {
+  'with unknown environment': {
     tenantId: 'testTenant'
   },
-  'with context': {
-    context: 'uat',
+  'with environment': {
+    environment: 'uat',
     tenantId: 'testTenant'
   }
 });

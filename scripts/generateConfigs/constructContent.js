@@ -1,6 +1,6 @@
 const prettier = require('prettier');
 
-const constructContent = ({ alias, context, host, tenantId, ...config }) => {
+const constructContent = ({ alias, host, tenantId, ...config }) => {
   const content = `
     window.SP = window.SP || {};
     window.SP.productionConfig = ${JSON.stringify(config)};

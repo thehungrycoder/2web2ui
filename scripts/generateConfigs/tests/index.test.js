@@ -2,12 +2,12 @@ const { execSync } = require('child_process');
 const fs = require('fs-extra');
 const cases = require('jest-in-case');
 const constructConfig = require('../constructConfig');
-const tenants = require('../tenants');
+const tenantsByEnvironment = require('../tenants');
 
 /**
  * To use, remove .skip and run directly, npx jest scripts/generateConfigs/tests/index.test.js
  */
-describe.skip('generateConfigs', () => {
+describe('generateConfigs', () => {
   const ansibleEnvironments = [
     'consolidated-tst',
     'consolidated-stg',
@@ -17,6 +17,18 @@ describe.skip('generateConfigs', () => {
   const tmpDeploymentPath = '/var/tmp/phoenix';
   const tmpTenantConfigPath = `${tmpDeploymentPath}/current/static/tenant-config`;
   const tmpPath = `${process.cwd()}/tmp`;
+
+  // Reduce tenants into single object for testing
+  const tenants = Object.keys(tenantsByEnvironment).reduce((acc, environment) => {
+    Object.keys(tenantsByEnvironment[environment]).forEach((tenantId) => {
+      acc[tenantId] = {
+        ...tenantsByEnvironment[environment][tenantId],
+        environment
+      }
+    });
+
+    return acc;
+  }, {});
 
   const readProductionConfig = (host) => {
     const js = fs.readFileSync(`${tmpPath}/${host}/production.js`, 'utf8');
@@ -85,8 +97,8 @@ describe.skip('generateConfigs', () => {
     fs.unlinkSync(`${tmpPath}/phoenix-origin.tst.sparkpost.com`);
   })
 
-  cases('generateConfigs', ({ name, ...tenant }) => {
-    const { alias, context, host, tenantId, ...config } = constructConfig({ ...tenant, tenantId: name });
+  cases('generateConfigs', ({ name, environment, ...tenant }) => {
+    const { alias, host, tenantId, ...config } = constructConfig({ ...tenant, tenantId: name }, environment);
     const prevConfig = readProductionConfig(host);
 
     expect(prevConfig).toEqual(config);

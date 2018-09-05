@@ -8,7 +8,6 @@ describe('generateConfigs.constructContent', () => {
   it('returns configuration as a string of javascript', () => {
     const config = {
       alias: 'anotherTestTenant',
-      context: 'production',
       host: 'test.example.com',
       tenantId: 'testTenant',
       apiBase: '//api.test.example/graphql'

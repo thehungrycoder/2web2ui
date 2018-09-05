@@ -5,12 +5,14 @@ const writeContent = require('./writeContent');
 
 // Generate all static tenant configurations
 const generateConfigs = () => {
-  Object.keys(tenants).forEach((tenantId) => {
-    const config = constructConfig({ ...tenants[tenantId], tenantId });
-    const content = constructContent(config);
+  Object.keys(tenants).forEach((environment) => {
+    Object.keys(tenants[environment]).forEach((tenantId) => {
+      const config = constructConfig({ ...tenants[tenantId], tenantId }, environment);
+      const content = constructContent(config);
 
-    writeContent(config.host, content);
-  });
+      writeContent(config.host, content);
+    });
+  })
 }
 
 module.exports = generateConfigs;
