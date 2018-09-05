@@ -37,6 +37,7 @@ import tfa from './tfa';
 import tfaBackupCodes from './tfaBackupCodes';
 import trackingDomains from './trackingDomains';
 import webhooks from './webhooks';
+import websiteAuth from './websiteAuth';
 
 const appReducer = combineReducers({
   acceptedReport,
@@ -75,7 +76,8 @@ const appReducer = combineReducers({
   tfaBackupCodes,
   trackingDomains,
   users,
-  webhooks
+  webhooks,
+  websiteAuth
 });
 
 /**
