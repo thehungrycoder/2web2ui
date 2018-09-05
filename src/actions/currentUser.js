@@ -1,14 +1,15 @@
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 import authCookie from 'src/helpers/authCookie';
 
-export function get() {
+export function get({ meta = {}} = {}) {
   return (dispatch, getState) => {
     const { username } = getState().auth;
     return dispatch(sparkpostApiRequest({
       type: 'GET_CURRENT_USER',
       meta: {
         method: 'GET',
-        url: `/users/${username}`
+        url: `/users/${username}`,
+        ...meta
       }
     }));
   };
@@ -23,12 +24,13 @@ export function getGrantsFromCookie(authCookieData = authCookie.get()) {
   };
 }
 
-export function getGrants({ beta = false, role } = {}) {
+export function getGrants({ beta = false, role, meta = {}} = {}) {
   return (dispatch) => dispatch(sparkpostApiRequest({
     type: 'GET_GRANTS',
     meta: {
       url: '/authenticate/grants',
-      params: { beta, role }
+      params: { beta, role },
+      ...meta
     }
   }))
     .then((grantData) => {
