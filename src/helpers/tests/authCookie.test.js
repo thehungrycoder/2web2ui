@@ -5,14 +5,12 @@ import config from 'src/config';
 jest.mock('js-cookie');
 
 describe('Helper: auth cookie', () => {
-  const { name: authCookieName, options: authCookieOptions } = config.authentication.cookie;
-  const { name: websiteCookieName, options: websiteCookieOptions } = config.website.cookie;
+  const { name: authCookieName, options: authCookieOptions } = config.authentication.app.cookie;
 
-  it('should save both auth and website cookies using config values', () => {
+  it('should save auth cookie using config values', () => {
     const data = {};
     authCookie.save(data);
     expect(cookieMock.set).toHaveBeenCalledWith(authCookieName, data, authCookieOptions);
-    expect(cookieMock.set).toHaveBeenCalledWith(websiteCookieName, data, websiteCookieOptions);
   });
 
   it('should get a cookie', () => {
@@ -24,6 +22,5 @@ describe('Helper: auth cookie', () => {
   it('should remove both auth and website cookies', () => {
     authCookie.remove();
     expect(cookieMock.remove).toHaveBeenCalledWith(authCookieName, authCookieOptions);
-    expect(cookieMock.remove).toHaveBeenCalledWith(websiteCookieName, websiteCookieOptions);
   });
 });

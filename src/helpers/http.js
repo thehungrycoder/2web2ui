@@ -4,18 +4,23 @@ import { sparkpost as sparkpostRequest } from 'src/helpers/axiosInstances';
 
 const { authentication } = config;
 
+const buildHeaders = (authHeader) => ({
+  Authorization: authHeader,
+  'Content-Type': 'application/x-www-form-urlencoded'
+});
+
 // TODO handle timeout error better
 
-function useRefreshToken(refreshToken) {
+function useRefreshToken(refreshToken, authHeader = authentication.app.authHeader) {
   return sparkpostRequest({
     method: 'POST',
     url: '/authenticate',
     data: `grant_type=refresh_token&refresh_token=${refreshToken}`,
-    headers: authentication.headers
+    headers: buildHeaders(authHeader)
   });
 }
 
-function sparkpostLogin(username, password, rememberMe) {
+function sparkpostLogin(username, password, rememberMe, authHeader = authentication.app.authHeader) {
   username = encodeURIComponent(username);
   password = encodeURIComponent(password);
   const data = `grant_type=password&username=${username}&password=${password}&rememberMe=${rememberMe}`;
@@ -24,7 +29,7 @@ function sparkpostLogin(username, password, rememberMe) {
     method: 'POST',
     url: '/authenticate',
     data,
-    headers: authentication.headers
+    headers: buildHeaders(authHeader)
   });
 }
 

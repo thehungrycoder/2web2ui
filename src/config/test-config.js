@@ -13,10 +13,20 @@ const testConfig = {
     }
   },
   authentication: {
-    cookie: {
-      name: 'test',
-      options: {
-        path: '/'
+    app: {
+      cookie: {
+        name: 'test',
+        options: {
+          path: '/'
+        }
+      }
+    },
+    site: {
+      cookie: {
+        name: 'website_test',
+        options: {
+          path: '/'
+        }
       }
     }
   },
