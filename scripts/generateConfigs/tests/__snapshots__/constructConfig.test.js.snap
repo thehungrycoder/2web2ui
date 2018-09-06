@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`generateConfigs.constructConfig with environment 1`] = `
+Object {
+  "apiBase": "//testTenant.api.e.sparkpost.com/api/v1",
+  "bounceDomains": Object {
+    "allowDefault": true,
+    "allowSubaccountDefault": true,
+    "cnameValue": "testTenant.mail.e.sparkpost.com",
+  },
+  "environment": "uat",
+  "featureFlags": Object {},
+  "host": "testTenant.e.sparkpost.com",
+  "smtpAuth": Object {
+    "enabled": true,
+    "host": "testTenant.smtp.e.sparkpost.com",
+    "port": 587,
+    "username": "testTenant",
+  },
+  "support": Object {
+    "algolia": Object {
+      "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
+      "appID": "SFXAWCYDV8",
+    },
+    "enabled": true,
+  },
+  "tenant": "testTenant",
+  "tenantId": "testTenant",
+  "trackingDomains": Object {
+    "cnameValue": "testTenant.et.e.sparkpost.com",
+  },
+}
+`;
+
+exports[`generateConfigs.constructConfig with unknown environment 1`] = `
+Object {
+  "apiBase": "//testTenant.api.e.sparkpost.com/api/v1",
+  "bounceDomains": Object {
+    "allowDefault": true,
+    "allowSubaccountDefault": true,
+    "cnameValue": "testTenant.mail.e.sparkpost.com",
+  },
+  "featureFlags": Object {},
+  "host": "testTenant.e.sparkpost.com",
+  "smtpAuth": Object {
+    "enabled": true,
+    "host": "testTenant.smtp.e.sparkpost.com",
+    "port": 587,
+    "username": "testTenant",
+  },
+  "support": Object {
+    "algolia": Object {
+      "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
+      "appID": "SFXAWCYDV8",
+    },
+    "enabled": true,
+  },
+  "tenant": "testTenant",
+  "tenantId": "testTenant",
+  "trackingDomains": Object {
+    "cnameValue": "testTenant.et.e.sparkpost.com",
+  },
+}
+`;
