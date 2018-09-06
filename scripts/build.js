@@ -25,6 +25,7 @@ const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages');
 const printHostingInstructions = require('react-dev-utils/printHostingInstructions');
 const FileSizeReporter = require('react-dev-utils/FileSizeReporter');
 const printBuildError = require('react-dev-utils/printBuildError');
+const generateConfigs = require('./generateConfigs');
 
 const measureFileSizesBeforeBuild =
   FileSizeReporter.measureFileSizesBeforeBuild;
@@ -50,6 +51,10 @@ measureFileSizesBeforeBuild(paths.appBuild)
 
     // Merge with the public folder
     copyPublicFolder();
+
+    // Generate and merge tenant configurations in public/static/tenant-config
+    generateConfigs();
+
     // Start the webpack build
     return build(previousFileSizes);
   })
