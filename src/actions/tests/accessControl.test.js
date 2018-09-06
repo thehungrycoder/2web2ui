@@ -6,7 +6,7 @@ jest.mock('src/actions/account');
 jest.mock('src/actions/currentUser');
 
 describe('Action: Initialize Access Control', () => {
-
+  const meta = { showErrorAlert: false };
   beforeEach(() => {
     fetchAccount.mockImplementation(() => Promise.resolve('test-account'));
     getPlans.mockImplementation(() => Promise.resolve('test-plans'));
@@ -18,10 +18,10 @@ describe('Action: Initialize Access Control', () => {
     const dispatchMock = jest.fn((a) => a);
     await initializeAccessControl()(dispatchMock);
 
-    expect(fetchAccount).toHaveBeenCalledTimes(1);
-    expect(getPlans).toHaveBeenCalledTimes(1);
-    expect(getCurrentUser).toHaveBeenCalledTimes(1);
-    expect(getGrants).toHaveBeenCalledWith({ role: 'EQUISAPIEN' });
+    expect(fetchAccount).toHaveBeenCalledWith({ meta });
+    expect(getPlans).toHaveBeenCalledWith({ meta });
+    expect(getCurrentUser).toHaveBeenCalledWith({ meta });
+    expect(getGrants).toHaveBeenCalledWith({ role: 'EQUISAPIEN', meta });
     expect(dispatchMock).toHaveBeenCalledTimes(5);
     expect(dispatchMock).toHaveBeenLastCalledWith({
       type: 'ACCESS_CONTROL_READY'
