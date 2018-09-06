@@ -12,12 +12,13 @@ export function fetch({ meta = {}, ...params } = {}) {
   });
 }
 
-export function getPlans() {
+export function getPlans({ meta = {}} = {}) {
   return sparkpostApiRequest({
     type: 'GET_PLANS',
     meta: {
       method: 'GET',
-      url: '/account/plans'
+      url: '/account/plans',
+      ...meta
     }
   });
 }
