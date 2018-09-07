@@ -1,7 +1,7 @@
 import { OpenInNew, ExitToApp } from '@sparkpost/matchbox-icons';
 import { LINKS } from 'src/constants';
 import { openSupportPanel } from 'src/actions/support';
-import { isHeroku } from 'src/helpers/conditions/user';
+import { isAdmin, isHeroku } from 'src/helpers/conditions/user';
 import not from 'src/helpers/conditions/not';
 
 /***
@@ -25,6 +25,12 @@ import not from 'src/helpers/conditions/not';
  */
 
 export default [
+  {
+    label: 'Account Settings',
+    to: '/account/settings',
+    section: 1,
+    condition: isAdmin
+  },
   {
     label: 'Profile',
     to: '/account/profile',

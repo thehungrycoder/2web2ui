@@ -2,6 +2,7 @@
 import {
   abTesting,
   apiKeys,
+  AccountSettingsPage,
   AuthPage,
   SsoAuthPage,
   SSOPage,
@@ -446,6 +447,14 @@ const routes = [
     layout: App,
     title: 'New Tracking Domain',
     supportDocSearch: 'tracking domain'
+  },
+  {
+    path: '/account/settings',
+    component: AccountSettingsPage,
+    condition: hasGrants('users/self-manage'),
+    layout: App,
+    title: 'Account settings',
+    supportDocSearch: 'account settings'
   },
   {
     path: '/account/profile',
