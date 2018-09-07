@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AccountSettingsPage renders 1`] = `
+<Page
+  empty={Object {}}
+  title="Account Settings"
+>
+  <Connect(CancellationPanel) />
+</Page>
+`;
