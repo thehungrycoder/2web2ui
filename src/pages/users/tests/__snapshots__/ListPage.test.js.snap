@@ -146,19 +146,14 @@ Array [
     email="testemail"
     name="test-name"
   />,
-  <RoleSelect
-    allowSuperUser={false}
-    disabled={false}
-    onChange={[Function]}
-    value="admin"
-  />,
+  "admin",
   <Tag>
     Disabled
   </Tag>,
   "Never",
-  <DeleteButton
-    disabled={false}
-    onClick={[Function]}
+  <Actions
+    deletable={true}
+    onDelete={[Function]}
   />,
 ]
 `;

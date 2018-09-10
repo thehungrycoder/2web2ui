@@ -69,3 +69,75 @@ exports[`Page: Users Edit should render correctly by default 1`] = `
   />
 </Page>
 `;
+
+exports[`Page: Users Edit should render loading correctly 1`] = `<Loading />`;
+
+exports[`Page: Users Edit should show a delete modal 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "Users",
+      "to": "/account/users",
+    }
+  }
+  empty={Object {}}
+  secondaryActions={
+    Array [
+      Object {
+        "content": "Delete",
+        "onClick": [Function],
+      },
+    ]
+  }
+  title="Edit User"
+>
+  <Panel>
+    <form>
+      <Panel.Section>
+        <Field
+          component={[Function]}
+          label="Role"
+          name="access"
+        />
+      </Panel.Section>
+      <Panel.Section>
+        <Field
+          component={[Function]}
+          label="Enable single sign-on authentication for this user"
+          name="is_sso"
+          type="checkbox"
+        />
+      </Panel.Section>
+      <Panel.Section>
+        <Button
+          primary={true}
+          size="default"
+          submit={true}
+        >
+          Update user
+        </Button>
+      </Panel.Section>
+    </form>
+  </Panel>
+  <DeleteModal
+    content={
+      <p>
+        <span>
+          User "
+        </span>
+        <span>
+          test-user
+        </span>
+        <span>
+          " will no longer be able to log in or access this SparkPost account and all API keys associated with this user will be immediately deleted.
+        </span>
+      </p>
+    }
+    onCancel={[Function]}
+    onDelete={[Function]}
+    open={true}
+    title="Are you sure you want to delete this user?"
+  />
+</Page>
+`;

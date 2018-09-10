@@ -1,18 +1,22 @@
-import { selectUsers } from '../users';
+import { selectUsers, selectUserById } from '../users';
 
 describe('Users Selectors', () => {
-  const store = {
+  const state = {
     currentUser: { username: 'zebra' },
     users: {
-      entities: [
-        { name: 'Zebra', username: 'zebra' },
-        { name: 'Ape', username: 'ape' }
-      ],
+      entities: {
+        ape: { name: 'Ape', username: 'ape' },
+        zebra: { name: 'Zebra', username: 'zebra' }
+      },
       sortKey: 'name'
     }
   };
 
   it('returns enriched and sorted list', () => {
-    expect(selectUsers(store)).toMatchSnapshot();
+    expect(selectUsers(state)).toMatchSnapshot();
+  });
+
+  it('returns user from user list', () => {
+    expect(selectUserById(state, 'ape')).toMatchSnapshot();
   });
 });
