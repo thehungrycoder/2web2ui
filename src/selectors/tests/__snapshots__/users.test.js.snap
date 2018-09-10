@@ -14,3 +14,10 @@ Array [
   },
 ]
 `;
+
+exports[`Users Selectors returns user from user list 1`] = `
+Object {
+  "name": "Ape",
+  "username": "ape",
+}
+`;
