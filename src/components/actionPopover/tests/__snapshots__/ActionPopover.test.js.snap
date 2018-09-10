@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ActionPopover Component should render with actions 1`] = `
+<Popover
+  bottom={true}
+  left={true}
+  right={true}
+  trigger={
+    <Button
+      flat={true}
+      size="default"
+    >
+      <MoreHoriz
+        size={20}
+      />
+    </Button>
+  }
+>
+  <ActionList
+    actions={
+      Array [
+        Object {
+          "content": "Edit",
+          "to": "/some/link",
+        },
+        Object {
+          "content": "Delete",
+          "onClick": [Function],
+        },
+      ]
+    }
+    groupByKey="section"
+  />
+</Popover>
+`;
+
+exports[`ActionPopover Component should render with no props 1`] = `
+<Popover
+  bottom={true}
+  left={true}
+  right={true}
+  trigger={
+    <Button
+      flat={true}
+      size="default"
+    >
+      <MoreHoriz
+        size={20}
+      />
+    </Button>
+  }
+>
+  <ActionList
+    groupByKey="section"
+  />
+</Popover>
+`;
