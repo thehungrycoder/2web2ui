@@ -20,13 +20,15 @@ const COLUMNS = [
   null
 ];
 
-const Actions = ({ username, deletable, onDelete }) => {
+export const Actions = ({ username, deletable, onDelete }) => {
   const actions = [ { content: 'Edit', to: `/account/users/edit/${username}`, component: Link } ];
   if (deletable) {
     actions.push({ content: 'Delete', onClick: () => onDelete(username) });
   }
   return <ActionPopover actions={actions} />;
 };
+
+Actions.displayName = 'Actions';
 
 const DEFAULT_STATE = {
   userToDelete: {}

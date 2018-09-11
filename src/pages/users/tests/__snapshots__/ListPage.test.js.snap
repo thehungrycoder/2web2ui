@@ -1,5 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Page: Users List should render ActionPopover 1`] = `
+<ActionPopover
+  actions={
+    Array [
+      Object {
+        "component": [Function],
+        "content": "Edit",
+        "to": "/account/users/edit/test-username",
+      },
+      Object {
+        "content": "Delete",
+        "onClick": [Function],
+      },
+    ]
+  }
+/>
+`;
+
 exports[`Page: Users List should render correctly by default 1`] = `
 <Page
   empty={
@@ -73,12 +91,14 @@ exports[`Page: Users List should render correctly by default 1`] = `
             "email": "user1@test.com",
             "name": "Test User 1",
             "tfa_enabled": false,
+            "username": "test-user-1",
           },
           Object {
             "access": "admin",
             "email": "user2@test.com",
             "name": "Test User 2",
             "tfa_enabled": true,
+            "username": "test-user-2",
           },
         ]
       }
@@ -103,6 +123,8 @@ exports[`Page: Users List should render correctly by default 1`] = `
   </div>
 </Page>
 `;
+
+exports[`Page: Users List should render loading correctly 1`] = `<Loading />`;
 
 exports[`Page: Users List should render with an error 1`] = `
 <Page
@@ -140,6 +162,112 @@ exports[`Page: Users List should render with an error 1`] = `
 </Page>
 `;
 
+exports[`Page: Users List should show a delete modal 1`] = `
+<Page
+  empty={
+    Object {
+      "content": <p>
+        Manage your team's accounts and roles.
+      </p>,
+      "image": [Function],
+      "show": false,
+      "title": "Invite Your Team to SparkPost",
+    }
+  }
+  primaryAction={
+    Object {
+      "Component": [Function],
+      "content": "Invite User",
+      "to": "/account/users/create",
+    }
+  }
+  title="Users"
+>
+  <div>
+    <TableCollection
+      columns={
+        Array [
+          Object {
+            "label": "User",
+            "sortKey": "name",
+          },
+          Object {
+            "label": "Role",
+            "sortKey": "access",
+          },
+          Object {
+            "label": "Two Factor Auth",
+            "sortKey": "tfa_enabled",
+          },
+          Object {
+            "label": "Last Login",
+            "sortKey": "last_login",
+          },
+          null,
+        ]
+      }
+      defaultSortColumn="name"
+      defaultSortDirection="asc"
+      filterBox={
+        Object {
+          "exampleModifiers": Array [
+            "name",
+            "email",
+            "role",
+          ],
+          "itemToStringKeys": Array [
+            "username",
+            "name",
+            "email",
+          ],
+          "keyMap": Object {
+            "role": "access",
+          },
+          "show": true,
+        }
+      }
+      getRowData={[Function]}
+      pagination={true}
+      rows={
+        Array [
+          Object {
+            "access": "admin",
+            "email": "user1@test.com",
+            "name": "Test User 1",
+            "tfa_enabled": false,
+            "username": "test-user-1",
+          },
+          Object {
+            "access": "admin",
+            "email": "user2@test.com",
+            "name": "Test User 2",
+            "tfa_enabled": true,
+            "username": "test-user-2",
+          },
+        ]
+      }
+    />
+    <DeleteModal
+      content={
+        <p>
+          <span>
+            User "
+          </span>
+          <span />
+          <span>
+            " will no longer be able to log in or access this SparkPost account and all API keys associated with this user will be immediately deleted.
+          </span>
+        </p>
+      }
+      onCancel={[Function]}
+      onDelete={[Function]}
+      open={true}
+      title="Are you sure you want to delete this user?"
+    />
+  </div>
+</Page>
+`;
+
 exports[`Page: Users List should transform row data for the table collection 1`] = `
 Array [
   <User
@@ -154,6 +282,7 @@ Array [
   <Actions
     deletable={true}
     onDelete={[Function]}
+    username="test-username"
   />,
 ]
 `;
