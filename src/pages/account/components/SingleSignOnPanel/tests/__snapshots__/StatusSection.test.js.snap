@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`StatusSection renders when disabled 1`] = `
+<Panel.Section
+  actions={
+    Array [
+      Object {
+        "color": "orange",
+        "content": "Enable SSO",
+        "onClick": [Function],
+      },
+    ]
+  }
+>
+  <LabelledValue
+    label="Status"
+  >
+    <h6>
+      Disabled
+    </h6>
+  </LabelledValue>
+  <ConfirmationModal
+    confirmVerb="Disable"
+    content={
+      <p>
+        This will disable Single Sign-On for all your users.
+      </p>
+    }
+    onCancel={[Function]}
+    onConfirm={[Function]}
+    open={false}
+    title="Are you sure you want to disable Single Sign-On?"
+  />
+</Panel.Section>
+`;
+
+exports[`StatusSection renders when enabled 1`] = `
+<Panel.Section
+  actions={
+    Array [
+      Object {
+        "color": "orange",
+        "content": "Disable SSO",
+        "onClick": [Function],
+      },
+    ]
+  }
+>
+  <LabelledValue
+    label="Status"
+  >
+    <h6>
+      Enabled
+    </h6>
+    <h6>
+      <UnstyledLink
+        to="/account/users"
+      >
+        Manage single sign-on users 
+        <ArrowForward />
+      </UnstyledLink>
+    </h6>
+  </LabelledValue>
+  <ConfirmationModal
+    confirmVerb="Disable"
+    content={
+      <p>
+        This will disable Single Sign-On for all your users.
+      </p>
+    }
+    onCancel={[Function]}
+    onConfirm={[Function]}
+    open={false}
+    title="Are you sure you want to disable Single Sign-On?"
+  />
+</Panel.Section>
+`;

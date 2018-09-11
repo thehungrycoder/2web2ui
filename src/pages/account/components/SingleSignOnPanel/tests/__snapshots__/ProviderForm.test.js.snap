@@ -1,0 +1,87 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProviderForm disables fields and buttons when submitting 1`] = `
+<Form
+  onSubmit={[Function]}
+>
+  <Panel
+    accent={true}
+    title="Provision Single Sign-On"
+  >
+    <Panel.Section>
+      <Field
+        component={[Function]}
+        disabled={true}
+        filetype="xml"
+        helpText="
+                This is an XML file provided by your Identity Provider.  If you already
+                provided a file, reprovisioning will replace your current configuration.
+              "
+        label="Upload a Security Assertion Markup Language (SAML) metadata file."
+        name="samlFile"
+        type="file"
+        validate={[Function]}
+      />
+    </Panel.Section>
+    <Panel.Section>
+      <Button
+        disabled={true}
+        primary={true}
+        size="default"
+        type="submit"
+      >
+        Provision SSO
+      </Button>
+      <Button
+        className="cancel"
+        onClick={[Function]}
+        size="default"
+      >
+        Cancel
+      </Button>
+    </Panel.Section>
+  </Panel>
+</Form>
+`;
+
+exports[`ProviderForm renders form 1`] = `
+<Form
+  onSubmit={[Function]}
+>
+  <Panel
+    accent={true}
+    title="Provision Single Sign-On"
+  >
+    <Panel.Section>
+      <Field
+        component={[Function]}
+        filetype="xml"
+        helpText="
+                This is an XML file provided by your Identity Provider.  If you already
+                provided a file, reprovisioning will replace your current configuration.
+              "
+        label="Upload a Security Assertion Markup Language (SAML) metadata file."
+        name="samlFile"
+        type="file"
+        validate={[Function]}
+      />
+    </Panel.Section>
+    <Panel.Section>
+      <Button
+        primary={true}
+        size="default"
+        type="submit"
+      >
+        Provision SSO
+      </Button>
+      <Button
+        className="cancel"
+        onClick={[Function]}
+        size="default"
+      >
+        Cancel
+      </Button>
+    </Panel.Section>
+  </Panel>
+</Form>
+`;

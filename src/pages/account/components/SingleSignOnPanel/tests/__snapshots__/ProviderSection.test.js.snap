@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProviderSection renders when not provisioned 1`] = `
+<Panel.Section
+  actions={
+    Array [
+      Object {
+        "color": "orange",
+        "content": "Provision SSO",
+        "onClick": [Function],
+      },
+    ]
+  }
+>
+  <LabelledValue
+    label="Identity Provider"
+  >
+    <h6>
+      Not provisioned
+    </h6>
+  </LabelledValue>
+  <Modal
+    open={false}
+  >
+    <Connect(ReduxForm)
+      onCancel={[Function]}
+      onSubmit={[Function]}
+    />
+  </Modal>
+</Panel.Section>
+`;
+
+exports[`ProviderSection renders when provisioned 1`] = `
+<Panel.Section
+  actions={
+    Array [
+      Object {
+        "color": "orange",
+        "content": "Provision SSO",
+        "onClick": [Function],
+      },
+    ]
+  }
+>
+  <LabelledValue
+    label="Identity Provider"
+  >
+    <h6>
+      https://sso.sparkpost.com/redirect
+    </h6>
+  </LabelledValue>
+  <Modal
+    open={false}
+  >
+    <Connect(ReduxForm)
+      onCancel={[Function]}
+      onSubmit={[Function]}
+    />
+  </Modal>
+</Panel.Section>
+`;

@@ -5,6 +5,7 @@ exports[`AccountSettingsPage renders 1`] = `
   empty={Object {}}
   title="Account Settings"
 >
+  <Connect(SingleSignOnPanel) />
   <Connect(CancellationPanel) />
 </Page>
 `;
