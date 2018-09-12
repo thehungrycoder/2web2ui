@@ -15,7 +15,7 @@ import { list as listSendingDomains } from 'src/actions/sendingDomains';
 import { listApiKeys } from 'src/actions/api-keys';
 
 import selectAccountAgeInWeeks from 'src/selectors/accountAge';
-import { selectVerifiedDomains, selectReadyForBounce } from 'src/selectors/sendingDomains';
+import { selectVerifiedDomains, selectNotBlockedDomains } from 'src/selectors/sendingDomains';
 import { selectApiKeysForSending } from 'src/selectors/api-keys';
 
 export class DashboardPage extends Component {
@@ -43,18 +43,17 @@ export class DashboardPage extends Component {
 
 function mapStateToProps(state) {
   const acctAge = selectAccountAgeInWeeks(state);
+  const notBlockedDomains = selectNotBlockedDomains(state);
   const verifiedDomains = selectVerifiedDomains(state);
   const apiKeysForSending = selectApiKeysForSending(state);
-  const readyForBounce = selectReadyForBounce(state);
 
   return {
     currentUser: state.currentUser,
     accountAgeInWeeks: acctAge,
     hasSuppressions: state.suppressions.hasSuppression,
-    hasSendingDomains: state.sendingDomains.list.length > 0,
+    hasSendingDomains: notBlockedDomains.length > 0,
     hasVerifiedDomains: verifiedDomains.length > 0,
     hasApiKeysForSending: apiKeysForSending.length > 0,
-    hasBounceDomains: readyForBounce.length > 0,
     hasSentThisMonth: _.get(state, 'account.usage.month.used', 0) > 0
   };
 }

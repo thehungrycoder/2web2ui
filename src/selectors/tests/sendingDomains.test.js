@@ -1,4 +1,4 @@
-import { selectVerifiedDomains, selectReadyForBounce, selectDkimVerifiedDomains, hasUnverifiedDomains, selectDomain } from '../sendingDomains';
+import { selectVerifiedDomains, selectReadyForBounce, selectDkimVerifiedDomains, hasUnverifiedDomains, selectDomain, selectNotBlockedDomains } from '../sendingDomains';
 
 describe('Selectors: sendingDomains', () => {
   const state = {
@@ -37,6 +37,16 @@ describe('Selectors: sendingDomains', () => {
             cname_status: 'valid',
             dkim_status: 'invalid'
           }
+        },
+        {
+          domain: 'verified-but-blocked.test',
+          status: {
+            ownership_verified: true,
+            compliance_status: 'blocked',
+            mx_status: 'valid',
+            cname_status: 'valid',
+            dkim_status: 'valid'
+          }
         }
       ]
     }
@@ -56,6 +66,10 @@ describe('Selectors: sendingDomains', () => {
 
   it('should return all domains that are dkim verified', () => {
     expect(selectDkimVerifiedDomains(state)).toMatchSnapshot();
+  });
+
+  it('should return all domains that are not blocked', () => {
+    expect(selectNotBlockedDomains(state)).toMatchSnapshot();
   });
 
   describe('has unverified domains', () => {

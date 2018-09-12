@@ -34,12 +34,55 @@ Array [
       "ownership_verified": true,
     },
   },
+  Object {
+    "domain": "verified-but-blocked.test",
+    "status": Object {
+      "cname_status": "valid",
+      "compliance_status": "blocked",
+      "dkim_status": "valid",
+      "mx_status": "valid",
+      "ownership_verified": true,
+    },
+  },
 ]
 `;
 
 exports[`Selectors: sendingDomains should return all domains that are dkim verified 1`] = `
 Array [
   "dkim-verified.test",
+  "verified-but-blocked.test",
+]
+`;
+
+exports[`Selectors: sendingDomains should return all domains that are not blocked 1`] = `
+Array [
+  Object {
+    "domain": "owner-verified.test",
+    "status": Object {
+      "compliance_status": "valid",
+      "ownership_verified": true,
+    },
+  },
+  Object {
+    "domain": "dkim-verified.test",
+    "status": Object {
+      "cname_status": "invalid",
+      "compliance_status": "valid",
+      "dkim_status": "valid",
+      "mx_status": "valid",
+      "ownership_verified": false,
+    },
+  },
+  Object {
+    "domain": "compliance-verified.test",
+    "status": Object {
+      "cname_status": "valid",
+      "compliance_status": "pending",
+      "dkim_status": "invalid",
+      "mx_status": "invalid",
+      "ownership_verified": true,
+    },
+  },
 ]
 `;
 
