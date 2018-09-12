@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`accountSingleSignOnReducer GET_ACCOUNT_SSO_DETAILS_ERROR 1`] = `
+exports[`accountSingleSignOnReducer GET_ACCOUNT_SSO_DETAILS_FAIL 1`] = `
 Object {
   "error": "Oh Snap!",
   "loading": false,
@@ -40,6 +40,16 @@ Object {
   "loading": false,
   "provider": "https://sso.sparkpost.com/redirect",
   "updatedAt": "2018-09-11T19:07:17+00:00",
+}
+`;
+
+exports[`accountSingleSignOnReducer UPDATE_ACCOUNT_SSO_FAIL 1`] = `
+Object {
+  "cert": "abc==",
+  "enabled": true,
+  "provider": "https://sso.sparkpost.com/redirect",
+  "updateError": "Oh Snap!",
+  "updated_at": "2018-09-11T19:07:17+00:00",
 }
 `;
 

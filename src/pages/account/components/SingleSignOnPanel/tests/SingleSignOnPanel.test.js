@@ -25,6 +25,7 @@ describe('SingleSignOnPanel', () => {
       enabled: true,
       loading: false,
       provider: 'https://sso.sparkpost.com/redirect',
+      updateError: 'Oh no!',
       updatedAt: '2018-09-11T19:39:06+00:00'
     });
     expect(wrapper).toMatchSnapshot();

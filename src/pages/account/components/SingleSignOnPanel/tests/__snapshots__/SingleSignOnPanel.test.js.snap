@@ -23,6 +23,7 @@ exports[`SingleSignOnPanel renders with provider and status section 1`] = `
       enabled={true}
       provider="https://sso.sparkpost.com/redirect"
       updateAccountSingleSignOn={[MockFunction]}
+      updateError="Oh no!"
       updatedAt="2018-09-11T19:39:06+00:00"
     />
   </React.Fragment>

@@ -15,7 +15,15 @@ export class SingleSignOnPanel extends React.Component {
   }
 
   renderContents() {
-    const { cert, enabled, loading, provider, updateAccountSingleSignOn, updatedAt } = this.props;
+    const {
+      cert,
+      enabled,
+      loading,
+      provider,
+      updateAccountSingleSignOn,
+      updateError,
+      updatedAt
+    } = this.props;
 
     if (loading) {
       return <PanelLoading minHeight="130px" />;
@@ -29,6 +37,7 @@ export class SingleSignOnPanel extends React.Component {
           enabled={enabled}
           provider={provider}
           updateAccountSingleSignOn={updateAccountSingleSignOn}
+          updateError={updateError}
           updatedAt={updatedAt}
         />
       </React.Fragment>

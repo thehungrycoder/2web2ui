@@ -1,5 +1,35 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Component: ConfirmationModal should disable confirmation button 1`] = `
+<Modal
+  onClose={[MockFunction]}
+>
+  <Panel
+    accent={true}
+    sectioned={true}
+  >
+    <div>
+      <Button
+        className="Confirm"
+        disabled={true}
+        onClick={[MockFunction]}
+        primary={true}
+        size="default"
+      >
+        Confirm
+      </Button>
+      <Button
+        className="Cancel"
+        onClick={[MockFunction]}
+        size="default"
+      >
+        Cancel
+      </Button>
+    </div>
+  </Panel>
+</Modal>
+`;
+
 exports[`Component: ConfirmationModal should render correctly with basic props 1`] = `
 <Modal
   onClose={[MockFunction]}

@@ -30,4 +30,9 @@ describe('DeleteModal Component', () => {
 
     expect(wrapper).toMatchSnapshot();
   });
+
+  it('should disable delete button', () => {
+    const wrapper = shallow(<DeleteModal deleting {...props} />);
+    expect(wrapper).toMatchSnapshot();
+  });
 });

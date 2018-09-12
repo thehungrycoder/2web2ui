@@ -21,6 +21,7 @@ exports[`StatusSection renders when disabled 1`] = `
   </LabelledValue>
   <ConfirmationModal
     confirmVerb="Disable"
+    confirming={false}
     content={
       <p>
         This will disable Single Sign-On for all your users.
@@ -63,6 +64,7 @@ exports[`StatusSection renders when enabled 1`] = `
   </LabelledValue>
   <ConfirmationModal
     confirmVerb="Disable"
+    confirming={false}
     content={
       <p>
         This will disable Single Sign-On for all your users.
