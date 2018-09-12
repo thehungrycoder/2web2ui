@@ -7,7 +7,6 @@ import styles from './TutorialItem.module.scss';
 const TutorialItem = ({
   label,
   children,
-  labelLink,
   completed,
   actions
 }) => {

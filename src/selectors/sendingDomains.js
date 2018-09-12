@@ -47,5 +47,5 @@ export const selectSendingDomainsForSubaccount = createSelector(
 
 export const selectNotBlockedDomains = createSelector(
   [getDomains],
-  (domains) => _.filter(domains, (domain) => isNotBlocked(domain))
+  (domains) => _.filter(domains, isNotBlocked)
 );

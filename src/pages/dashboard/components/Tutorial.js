@@ -1,10 +1,9 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Panel } from '@sparkpost/matchbox';
 import { OpenInNew } from '@sparkpost/matchbox-icons';
 import TutorialItem from './TutorialItem';
-
-const sendingDomainUrl = 'account/sending-domains';
+import { LINKS } from 'src/constants';
 
 export class Tutorial extends Component {
   render() {
@@ -18,10 +17,10 @@ export class Tutorial extends Component {
 
     return (
       <Panel title='Getting Started Checklist' actions={[{
-        content: <Fragment>Need help? Check out our Getting Started guide <OpenInNew size={13}/></Fragment>,
+        content: <span>Need help? Check out our Getting Started guide <OpenInNew size={13}/></span>,
         color: 'orange',
         external: true,
-        to: 'https://www.sparkpost.com/docs/getting-started/getting-started-sparkpost/' }]}>
+        to: LINKS.GETTING_STARTED_GUIDE }]}>
 
         <TutorialItem
           label='Verify your email address'
@@ -31,7 +30,6 @@ export class Tutorial extends Component {
 
         <TutorialItem
           label='Add a sending domain'
-          labelLink={sendingDomainUrl}
           actions={[{ content: 'Add Sending Domain', color: 'orange', component: Link, to: '/account/sending-domains/create' }]}
           completed={hasSendingDomains}>
           <p>Adding a sending domain will allow you to send email from your own domain.</p>
@@ -39,7 +37,6 @@ export class Tutorial extends Component {
 
         <TutorialItem
           label='Verify your sending domain'
-          labelLink={sendingDomainUrl}
           actions={[{ content: 'View Sending Domains', color: 'orange', component: Link, to: '/account/sending-domains' }]}
           completed={hasVerifiedDomains}>
           <p>You'll need to verify your domain before you can use it.</p>

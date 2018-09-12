@@ -6,14 +6,14 @@ exports[`Component: Tutorial should render correctly by default 1`] = `
     Array [
       Object {
         "color": "orange",
-        "content": <React.Fragment>
+        "content": <span>
           Need help? Check out our Getting Started guide 
           <OpenInNew
             size={13}
           />
-        </React.Fragment>,
+        </span>,
         "external": true,
-        "to": "https://www.sparkpost.com/docs/getting-started/getting-started-sparkpost/",
+        "to": "https://www.sparkpost.com/docs/getting-started/getting-started-sparkpost",
       },
     ]
   }
@@ -40,7 +40,6 @@ exports[`Component: Tutorial should render correctly by default 1`] = `
     }
     completed={false}
     label="Add a sending domain"
-    labelLink="account/sending-domains"
   >
     <p>
       Adding a sending domain will allow you to send email from your own domain.
@@ -59,7 +58,6 @@ exports[`Component: Tutorial should render correctly by default 1`] = `
     }
     completed={true}
     label="Verify your sending domain"
-    labelLink="account/sending-domains"
   >
     <p>
       You'll need to verify your domain before you can use it.
