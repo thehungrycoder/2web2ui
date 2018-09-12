@@ -20,7 +20,13 @@ exports[`ProviderForm disables fields and buttons when submitting 1`] = `
         label="Upload a Security Assertion Markup Language (SAML) metadata file."
         name="samlFile"
         type="file"
-        validate={[Function]}
+        validate={
+          Array [
+            [Function],
+            [Function],
+            [Function],
+          ]
+        }
       />
     </Panel.Section>
     <Panel.Section>
@@ -63,7 +69,13 @@ exports[`ProviderForm renders form 1`] = `
         label="Upload a Security Assertion Markup Language (SAML) metadata file."
         name="samlFile"
         type="file"
-        validate={[Function]}
+        validate={
+          Array [
+            [Function],
+            [Function],
+            [Function],
+          ]
+        }
       />
     </Panel.Section>
     <Panel.Section>

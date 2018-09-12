@@ -7,8 +7,9 @@ import {
   reprovisionAccountSingleSignOn
 } from 'src/actions/accountSingleSignOn';
 import FileFieldWrapper from 'src/components/reduxFormWrappers/FileFieldWrapper';
+import config from 'src/config';
 import { getBase64Contents } from 'src/helpers/file';
-import { required } from 'src/helpers/validation';
+import { fileExtension, maxFileSize, required } from 'src/helpers/validation';
 import styles from './ProviderForm.module.scss';
 
 export class ProviderForm extends React.Component {
@@ -53,7 +54,7 @@ export class ProviderForm extends React.Component {
               `}
               name="samlFile"
               type="file"
-              validate={required}
+              validate={[required, fileExtension('xml'), maxFileSize(config.apiRequestBodyMaxSizeBytes)]}
             />
           </Panel.Section>
           <Panel.Section>
