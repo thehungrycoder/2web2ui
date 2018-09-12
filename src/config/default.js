@@ -20,7 +20,7 @@ const config = {
       cookie: {
         name: 'website_auth',
         options: {
-          domain: '.sparkpost.test',
+          domain: '.sparkpost.com',
           path: '/'
         }
       },

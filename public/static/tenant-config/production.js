@@ -1,6 +1,15 @@
 window.SP = window.SP || {};
 window.SP.productionConfig = {
   apiBase: 'http://api.sparkpost.test/api/v1',
+  authentication: {
+    site: {
+      cookie: {
+        options: {
+          domain: '.sparkpost.test'
+        }
+      }
+    }
+  },
   cookieConsent: {
     cookie: {
       options: {
