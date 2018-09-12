@@ -1,92 +1,135 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Component: TutorialItem should ignore a label link and children when the item is completed 1`] = `
-<div
-  className="Item completed"
->
-  <Check
-    className="Completed"
-    size={24}
-  />
+<Panel.Section>
   <div
-    className="Content"
+    className="Item completed"
   >
-    <h6
-      className="Label"
+    <div
+      className="Icon"
     >
-      my item
-    </h6>
+      <div
+        className="CompletedBackDrop"
+      >
+        <Check
+          className="Completed"
+          size={21}
+        />
+      </div>
+    </div>
+    <div
+      className="Content"
+    >
+      <h6
+        className="Label"
+      >
+        my item
+      </h6>
+      <div
+        className="HelpText"
+      >
+        Evie
+        Levon
+      </div>
+    </div>
   </div>
-</div>
+</Panel.Section>
 `;
 
 exports[`Component: TutorialItem should render correctly by default 1`] = `
-<div
-  className="Item"
->
+<Panel.Section>
   <div
-    className="Content"
+    className="Item"
   >
-    <h6
-      className="Label"
-    >
-      my item
-    </h6>
     <div
-      className="HelpText"
+      className="Icon"
     >
-      Evie
-      Levon
+      <div
+        className="NotCompleted"
+      />
+    </div>
+    <div
+      className="Content"
+    >
+      <h6
+        className="Label"
+      >
+        my item
+      </h6>
+      <div
+        className="HelpText"
+      >
+        Evie
+        Levon
+      </div>
     </div>
   </div>
-</div>
+</Panel.Section>
 `;
 
 exports[`Component: TutorialItem should render the link and children when not completed 1`] = `
-<div
-  className="Item"
->
+<Panel.Section>
   <div
-    className="Content"
+    className="Item"
   >
-    <h6
-      className="Label link"
+    <div
+      className="Icon"
     >
-      <Link
-        replace={false}
-        to="/go/to/here"
+      <div
+        className="NotCompleted"
+      />
+    </div>
+    <div
+      className="Content"
+    >
+      <h6
+        className="Label"
       >
         my item
-         
-        <ArrowForward />
-      </Link>
-    </h6>
-    <div
-      className="HelpText"
-    >
-      Evie
-      Levon
+      </h6>
+      <div
+        className="HelpText"
+      >
+        Evie
+        Levon
+      </div>
     </div>
   </div>
-</div>
+</Panel.Section>
 `;
 
 exports[`Component: TutorialItem should show checkmark when task is completed 1`] = `
-<div
-  className="Item completed"
->
-  <Check
-    className="Completed"
-    size={24}
-  />
+<Panel.Section>
   <div
-    className="Content"
+    className="Item completed"
   >
-    <h6
-      className="Label"
+    <div
+      className="Icon"
     >
-      my item
-    </h6>
+      <div
+        className="CompletedBackDrop"
+      >
+        <Check
+          className="Completed"
+          size={21}
+        />
+      </div>
+    </div>
+    <div
+      className="Content"
+    >
+      <h6
+        className="Label"
+      >
+        my item
+      </h6>
+      <div
+        className="HelpText"
+      >
+        Evie
+        Levon
+      </div>
+    </div>
   </div>
-</div>
+</Panel.Section>
 `;

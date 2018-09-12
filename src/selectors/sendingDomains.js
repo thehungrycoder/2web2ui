@@ -5,6 +5,7 @@ import _ from 'lodash';
 export const isDkimVerified = (domain) => domain.status.dkim_status === 'valid';
 export const isVerified = (domain) => domain.status.ownership_verified && domain.status.compliance_status === 'valid';
 export const isUnverified = (domain) => !domain.status.ownership_verified || domain.status.compliance_status === 'pending';
+export const isNotBlocked = (domain) => domain.status.compliance_status !== 'blocked';
 
 export const getDomains = (state) => state.sendingDomains.list;
 export const getDomain = (state) => state.sendingDomains.domain;
@@ -21,7 +22,7 @@ export const selectDomain = createSelector(
 
 export const selectVerifiedDomains = createSelector(
   [getDomains],
-  (domains) => _.filter(domains, (domain) => isVerified(domain))
+  (domains) => _.filter(domains, (domain) => isVerified(domain) && isNotBlocked(domain))
 );
 
 export const selectDkimVerifiedDomains = createSelector(
@@ -42,4 +43,9 @@ export const hasUnverifiedDomains = createSelector(
 export const selectSendingDomainsForSubaccount = createSelector(
   [getDomains, selectSubaccountFromProps],
   (domains, subaccount) => domains.filter((domain) => domain.subaccount_id === Number(subaccount))
+);
+
+export const selectNotBlockedDomains = createSelector(
+  [getDomains],
+  (domains) => _.filter(domains, isNotBlocked)
 );

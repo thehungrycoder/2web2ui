@@ -1,7 +1,9 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 
 .Item {
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .Label {
@@ -19,7 +21,7 @@
 }
 
 .HelpText {
-  color: color(gray, 4);
+  color: color(gray, 3);
 
   *:last-child {
     margin-bottom: 0;
@@ -27,16 +29,34 @@
 }
 
 .Content {
-  display: inline-block;
-  vertical-align: middle;
+  flex: 1 0 0;
+}
+
+.Icon {
+  flex: 1 0 0;
+  max-width: 28px;
+  margin-right: spacing();
+}
+
+.NotCompleted, .CompletedBackDrop {
+  position: relative;
+  width: 28px;
+  height: 28px;
+
+  border-radius: 50%;
+  border: 2px solid color(gray, 8);
 }
 
 .Completed {
-  display: inline-block;
-  vertical-align: middle;
-  margin-right: spacing();
-  margin-top: -3px;
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   fill: color(green);
   stroke: color(green);
-  stroke-width: 3px;
+  stroke-width: 1px;
+}
+
+.CompletedBackDrop {
+  border: 2px solid color(green);
 }
