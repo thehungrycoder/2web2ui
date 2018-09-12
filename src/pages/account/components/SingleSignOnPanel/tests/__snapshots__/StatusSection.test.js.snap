@@ -52,14 +52,14 @@ exports[`StatusSection renders when enabled 1`] = `
     <h6>
       Enabled
     </h6>
-    <h6>
-      <UnstyledLink
+    <p>
+      <PageLink
         to="/account/users"
       >
         Manage single sign-on users 
         <ArrowForward />
-      </UnstyledLink>
-    </h6>
+      </PageLink>
+    </p>
   </LabelledValue>
   <ConfirmationModal
     confirmVerb="Disable"

@@ -1,8 +1,9 @@
 import React from 'react';
-import { Panel, UnstyledLink } from '@sparkpost/matchbox';
+import { Panel } from '@sparkpost/matchbox';
 import { ArrowForward } from '@sparkpost/matchbox-icons';
 import ConfirmationModal from 'src/components/modals/ConfirmationModal';
 import LabelledValue from 'src/components/labelledValue/LabelledValue';
+import PageLink from 'src/components/pageLink/PageLink';
 
 export class StatusSection extends React.Component {
   state = {
@@ -57,11 +58,11 @@ export class StatusSection extends React.Component {
         <LabelledValue label="Status">
           <h6>{enabled ? 'Enabled' : 'Disabled'}</h6>
           {enabled && (
-            <h6>
-              <UnstyledLink to='/account/users'>
+            <p>
+              <PageLink to="/account/users">
                 Manage single sign-on users <ArrowForward/>
-              </UnstyledLink>
-            </h6>
+              </PageLink>
+            </p>
           )}
         </LabelledValue>
         <ConfirmationModal
