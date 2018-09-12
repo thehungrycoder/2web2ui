@@ -1,10 +1,16 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import AccountSettingsPage from '../AccountSettingsPage';
+import { AccountSettingsPage } from '../AccountSettingsPage';
 
 describe('AccountSettingsPage', () => {
   it('renders', () => {
-    const wrapper = shallow(<AccountSettingsPage />);
+    const props = {
+      currentUser: {
+        customer: 123123
+      }
+    };
+    const wrapper = shallow(<AccountSettingsPage {...props} />);
+
     expect(wrapper).toMatchSnapshot();
   });
 });

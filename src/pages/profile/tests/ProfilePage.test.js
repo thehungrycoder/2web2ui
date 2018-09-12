@@ -17,7 +17,6 @@ beforeEach(() => {
     currentUser: {
       username: 'Lord Stark',
       email: 'ned.stark@winterfell.biz',
-      customer: 12345,
       access_level: 'admin',
       is_sso: false
     },

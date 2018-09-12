@@ -40,7 +40,7 @@ export class ProfilePage extends Component {
   }
 
   render() {
-    const { customer, email, email_verified, username, verifyingEmail } = this.props.currentUser;
+    const { email, email_verified, username, verifyingEmail } = this.props.currentUser;
 
     return (
       <Page title='Profile'>
@@ -50,7 +50,6 @@ export class ProfilePage extends Component {
         )}
 
         <Panel sectioned>
-          <LabelledValue label='Account ID' value={customer}/>
           <LabelledValue label='Username' value={username}/>
           <LabelledValue label='Email Address' value={email}/>
         </Panel>
