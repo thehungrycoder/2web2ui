@@ -137,7 +137,7 @@ export function refresh(token, refreshToken) {
   return (dispatch) => {
     const newCookie = authCookie.merge({ access_token: token, refresh_token: refreshToken });
     dispatch(websiteAuth.refresh());
-    return login({ authData: newCookie });
+    return dispatch(login({ authData: newCookie }));
   };
 }
 

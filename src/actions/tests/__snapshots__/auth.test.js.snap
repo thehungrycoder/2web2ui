@@ -120,5 +120,8 @@ Array [
   Array [
     undefined,
   ],
+  Array [
+    [Function],
+  ],
 ]
 `;
