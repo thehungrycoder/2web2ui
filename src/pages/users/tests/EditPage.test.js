@@ -37,6 +37,30 @@ describe('Page: Users Edit', () => {
     expect(props.listUsers).toHaveBeenCalledTimes(1);
   });
 
+  it('should redirect on loadingError', () => {
+    props.loadingError = true;
+    wrapper = shallow(<EditPage {...props} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should load until we have a list of users', () => {
+    props.users = {};
+    wrapper = shallow(<EditPage {...props} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should not allow current user to delete', () => {
+    props.user.isCurrentUser = true;
+    wrapper = shallow(<EditPage {...props} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should error and redirect if user is not in users', () => {
+    props.user = undefined;
+    wrapper = shallow(<EditPage {...props} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
   it('should show a delete modal', () => {
     instance.toggleDelete();
     wrapper.update();
