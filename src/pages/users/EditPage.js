@@ -3,12 +3,11 @@ import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
 import { Page, Panel, Button } from '@sparkpost/matchbox';
-import { CheckboxWrapper } from 'src/components/reduxFormWrappers';
+import { CheckboxWrapper, RadioGroup } from 'src/components/reduxFormWrappers';
 import { Loading, DeleteModal } from 'src/components';
 import { updateUser, listUsers, deleteUser } from 'src/actions/users';
 import { selectUserById } from 'src/selectors/users';
-
-import RoleSelect from './components/RoleSelect';
+import RedirectAndAlert from 'src/components/globalAlert/RedirectAndAlert';
 
 import _ from 'lodash';
 
@@ -24,13 +23,6 @@ export class EditPage extends Component {
   };
 
   toggleDelete = () => this.setState({ showDelete: !this.state.showDelete });
-
-  secondaryActions = [
-    {
-      content: 'Delete',
-      onClick: this.toggleDelete
-    }
-  ];
 
   afterDelete = () => {
     this.toggleDelete();
@@ -63,24 +55,53 @@ export class EditPage extends Component {
   }
 
   render() {
-    const { handleSubmit, loading } = this.props;
+    const { handleSubmit, loading, loadingError, user, users } = this.props;
 
     if (loading) {
       return <Loading />;
     }
 
+    // if there is an error loading list of users or our user is unknown
+    if (loadingError || (!_.isEmpty(users) && !user)) {
+      return <RedirectAndAlert to="/account/users" alert={{ type: 'error', message: 'Unknown user???' }} />;
+    }
+
+    const secondaryActions = [];
+
+    if (!user.isCurrentUser) {
+      secondaryActions.push({
+        content: 'Delete',
+        onClick: this.toggleDelete
+      });
+    }
+
     return (
       <Page
-        title={'Edit User'}
+        title={user.email}
         breadcrumbAction={breadcrumbAction}
-        secondaryActions={this.secondaryActions}>
+        secondaryActions={secondaryActions}>
         <Panel>
           <form onSubmit={handleSubmit(this.handleUserUpdate)}>
             <Panel.Section>
               <Field
-                name='access'
-                component={RoleSelect}
-                label='Role'
+                name="access"
+                title="Role"
+                component={RadioGroup}
+                grid={{ xs: 12, sm: 12, md: 6 }}
+                options={[
+                  {
+                    label: <strong>Admin</strong>,
+                    value: 'admin',
+                    helpText: 'Has access to all functionality in the UI. Has the ability to add additional administrators and create / invite users with a role of Reporting',
+                    disabled: user.isCurrentUser
+                  },
+                  {
+                    label: <strong>Reporting</strong>,
+                    value: 'reporting',
+                    helpText: 'Has no access to functionality in the UI. Permissions include access to view all reports, and view all templates except being allowed to change them',
+                    disabled: user.isCurrentUser
+                  }
+                ]}
               />
             </Panel.Section>
             <Panel.Section>
@@ -109,11 +130,13 @@ export class EditPage extends Component {
 }
 
 const mapStateToProps = (state, props) => {
-
   const user = selectUserById(state, props.match.params.id);
 
   return {
+    user,
+    users: state.users.entities,
     loading: state.users.loading,
+    loadingError: state.users.error,
     initialValues: {
       access: _.get(user, 'access'),
       is_sso: _.get(user, 'is_sso')
