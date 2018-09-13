@@ -451,7 +451,7 @@ const routes = [
   {
     path: '/account/settings',
     component: AccountSettingsPage,
-    condition: hasGrants('users/self-manage'),
+    condition: hasGrants('users/manage'),
     layout: App,
     title: 'Account settings',
     supportDocSearch: 'account settings'
