@@ -8,26 +8,51 @@ exports[`ProviderForm disables fields and buttons when submitting 1`] = `
     accent={true}
     title="Provision Single Sign-On"
   >
-    <Panel.Section>
-      <Field
-        component={[Function]}
-        disabled={true}
-        filetype="xml"
-        helpText="
-                This is an XML file provided by your Identity Provider.  If you already
-                provided a file, reprovisioning will replace your current configuration.
-              "
-        label="Upload a Security Assertion Markup Language (SAML) metadata file."
-        name="samlFile"
-        type="file"
-        validate={
-          Array [
-            [Function],
-            [Function],
-            [Function],
-          ]
-        }
-      />
+    <Panel.Section
+      className="step"
+    >
+      <h6>
+        Step 1: Setup Callback URL
+      </h6>
+      <p>
+        To complete setup with your Identity Provider (IdP), you will need to provide the following callback URL.
+      </p>
+      <p>
+        <CopyField
+          hideCopy={false}
+          value="http://fake-api-test-host.com/users/saml/consume"
+        />
+      </p>
+    </Panel.Section>
+    <Panel.Section
+      className="step"
+    >
+      <h6>
+        Step 2: Upload your Security Assertion Markup Language (SAML)
+      </h6>
+      <p>
+        This is a configuration file that can be downloaded from your IdP.
+      </p>
+      <p>
+        <Field
+          component={[Function]}
+          disabled={true}
+          filetype="xml"
+          helpText="
+                  If you already provided a file, reprovisioning will replace your current
+                  configuration.
+                "
+          name="samlFile"
+          type="file"
+          validate={
+            Array [
+              [Function],
+              [Function],
+              [Function],
+            ]
+          }
+        />
+      </p>
     </Panel.Section>
     <Panel.Section>
       <Button
@@ -58,25 +83,50 @@ exports[`ProviderForm renders form 1`] = `
     accent={true}
     title="Provision Single Sign-On"
   >
-    <Panel.Section>
-      <Field
-        component={[Function]}
-        filetype="xml"
-        helpText="
-                This is an XML file provided by your Identity Provider.  If you already
-                provided a file, reprovisioning will replace your current configuration.
-              "
-        label="Upload a Security Assertion Markup Language (SAML) metadata file."
-        name="samlFile"
-        type="file"
-        validate={
-          Array [
-            [Function],
-            [Function],
-            [Function],
-          ]
-        }
-      />
+    <Panel.Section
+      className="step"
+    >
+      <h6>
+        Step 1: Setup Callback URL
+      </h6>
+      <p>
+        To complete setup with your Identity Provider (IdP), you will need to provide the following callback URL.
+      </p>
+      <p>
+        <CopyField
+          hideCopy={false}
+          value="http://fake-api-test-host.com/users/saml/consume"
+        />
+      </p>
+    </Panel.Section>
+    <Panel.Section
+      className="step"
+    >
+      <h6>
+        Step 2: Upload your Security Assertion Markup Language (SAML)
+      </h6>
+      <p>
+        This is a configuration file that can be downloaded from your IdP.
+      </p>
+      <p>
+        <Field
+          component={[Function]}
+          filetype="xml"
+          helpText="
+                  If you already provided a file, reprovisioning will replace your current
+                  configuration.
+                "
+          name="samlFile"
+          type="file"
+          validate={
+            Array [
+              [Function],
+              [Function],
+              [Function],
+            ]
+          }
+        />
+      </p>
     </Panel.Section>
     <Panel.Section>
       <Button

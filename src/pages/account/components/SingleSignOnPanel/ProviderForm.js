@@ -7,6 +7,7 @@ import {
   reprovisionAccountSingleSignOn
 } from 'src/actions/accountSingleSignOn';
 import { showAlert } from 'src/actions/globalAlert';
+import CopyField from 'src/components/copyField/CopyField';
 import FileFieldWrapper from 'src/components/reduxFormWrappers/FileFieldWrapper';
 import config from 'src/config';
 import { getBase64Contents } from 'src/helpers/file';
@@ -48,20 +49,35 @@ export class ProviderForm extends React.Component {
     return (
       <Form onSubmit={handleSubmit(this.submit)}>
         <Panel title="Provision Single Sign-On" accent>
-          <Panel.Section>
-            <Field
-              component={FileFieldWrapper}
-              disabled={submitting}
-              filetype="xml"
-              label='Upload a Security Assertion Markup Language (SAML) metadata file.'
-              helpText={`
-                This is an XML file provided by your Identity Provider.  If you already
-                provided a file, reprovisioning will replace your current configuration.
-              `}
-              name="samlFile"
-              type="file"
-              validate={[required, fileExtension('xml'), maxFileSize(config.apiRequestBodyMaxSizeBytes)]}
-            />
+          <Panel.Section className={styles.step}>
+            <h6>Step 1: Setup Callback URL</h6>
+            <p>
+              To complete setup with your Identity Provider (IdP), you will need to provide the
+              following callback URL.
+            </p>
+            <p>
+              <CopyField value={`${config.apiBase}/users/saml/consume`} />
+            </p>
+          </Panel.Section>
+          <Panel.Section className={styles.step}>
+            <h6>Step 2: Upload your Security Assertion Markup Language (SAML)</h6>
+            <p>
+              This is a configuration file that can be downloaded from your IdP.
+            </p>
+            <p>
+              <Field
+                component={FileFieldWrapper}
+                disabled={submitting}
+                filetype="xml"
+                helpText={`
+                  If you already provided a file, reprovisioning will replace your current
+                  configuration.
+                `}
+                name="samlFile"
+                type="file"
+                validate={[required, fileExtension('xml'), maxFileSize(config.apiRequestBodyMaxSizeBytes)]}
+              />
+            </p>
           </Panel.Section>
           <Panel.Section>
             <Button primary disabled={submitting} type="submit">Provision SSO</Button>

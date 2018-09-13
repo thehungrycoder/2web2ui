@@ -6,13 +6,8 @@ exports[`SingleSignOnPanel renders with panel loading 1`] = `
     Array [
       Object {
         "color": "orange",
-        "content": <span>
-          Learn More 
-          <OpenInNew
-            size={13}
-          />
-        </span>,
-        "external": true,
+        "component": [Function],
+        "content": "Learn More",
         "to": "https://www.sparkpost.com/docs/my-account-and-profile/sso",
       },
     ]
@@ -31,13 +26,8 @@ exports[`SingleSignOnPanel renders with provider and status section 1`] = `
     Array [
       Object {
         "color": "orange",
-        "content": <span>
-          Learn More 
-          <OpenInNew
-            size={13}
-          />
-        </span>,
-        "external": true,
+        "component": [Function],
+        "content": "Learn More",
         "to": "https://www.sparkpost.com/docs/my-account-and-profile/sso",
       },
     ]
