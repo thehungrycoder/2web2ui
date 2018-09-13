@@ -1,7 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { EditPage } from '../EditPage';
-import { SubmissionError } from 'redux-form';
 
 describe('Page: Users Edit', () => {
 
@@ -46,13 +45,7 @@ describe('Page: Users Edit', () => {
 
   it('should update a user', async () => {
     await instance.handleUserUpdate({ is_sso: true, access: 'admin' });
-    expect(props.updateUser).toHaveBeenCalledWith('test-user', { is_sso: true, access: 'admin' });
-  });
-
-  it('should handle error when updating a user', async () => {
-    wrapper.setProps({ updateUser: jest.fn(() => Promise.reject({ message: 'error' })) });
-    const instance = wrapper.instance();
-    await expect(instance.handleUserUpdate({ is_sso: true, access: 'admin' })).rejects.toThrowError(SubmissionError);
+    expect(props.updateUser).toHaveBeenCalledWith('test-user', { is_sso: true, access_level: 'admin' });
   });
 
   it('should delete a user', async () => {
