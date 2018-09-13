@@ -28,12 +28,18 @@ export default (state = initialState, action) => {
       return { ...initialState, entities: reduceUsers(action.payload) };
 
     case 'UPDATE_USER_SUCCESS': {
-      const { access_level, username } = action.meta.data;
+      const { access_level, is_sso, username } = action.meta.data;
       const user = fp.get(username)(state.entities);
 
       if (fp.isUndefined(user)) { return state; } // ignore
 
-      return fp.set(['entities', username, 'access'], access_level)(state);
+      fp.set(['entities', username, 'access'], access_level)(state);
+
+      return fp.set(['entities', username], {
+        ...state.entities[username],
+        access: access_level,
+        is_sso
+      })(state);
     }
 
     case 'REGISTER_USER_PENDING':

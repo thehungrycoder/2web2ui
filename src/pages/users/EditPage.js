@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Field, reduxForm, SubmissionError } from 'redux-form';
+import { Field, reduxForm } from 'redux-form';
 import { Page, Panel, Button } from '@sparkpost/matchbox';
 import { CheckboxWrapper } from 'src/components/reduxFormWrappers';
 import { Loading, DeleteModal } from 'src/components';
@@ -41,15 +41,12 @@ export class EditPage extends Component {
       });
   };
 
-  handleUserUpdate = (values) => {
+  handleUserUpdate = ({ access: access_level, is_sso }) => {
     const { updateUser } = this.props;
 
     const username = this.props.match.params.id;
 
-    return updateUser(username, values).catch((err) => {
-      // Required to properly control 'submitFailed' & 'submitSucceeded'
-      throw new SubmissionError(err);
-    });
+    return updateUser(username, { access_level, is_sso });
   };
 
   componentDidMount() {
@@ -57,7 +54,7 @@ export class EditPage extends Component {
   }
 
   render() {
-    const { currentUser, handleSubmit, loadingError, user, users } = this.props;
+    const { currentUser, handleSubmit, loadingError, submitting, user, users } = this.props;
 
     if (loadingError) {
       return <Redirect to="/account/users" />;
@@ -106,7 +103,7 @@ export class EditPage extends Component {
               />
             </Panel.Section>
             <Panel.Section>
-              <Button primary submit>{'Update user'}</Button>
+              <Button primary disabled={submitting} submit>{'Update user'}</Button>
             </Panel.Section>
           </form>
         </Panel>
