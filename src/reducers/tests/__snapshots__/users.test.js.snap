@@ -5,10 +5,12 @@ Object {
   "entities": Object {
     "test-user-one": Object {
       "access": "admin",
+      "is_sso": false,
       "username": "test-user-one",
     },
     "test-user-two": Object {
       "access": "reporting",
+      "is_sso": false,
       "username": "test-user-two",
     },
   },
@@ -24,6 +26,7 @@ Object {
   "entities": Object {
     "test-user-one": Object {
       "access": "admin",
+      "is_sso": false,
       "username": "test-user-one",
     },
   },
@@ -39,10 +42,33 @@ Object {
   "entities": Object {
     "test-user-one": Object {
       "access": "reporting",
+      "is_sso": undefined,
       "username": "test-user-one",
     },
     "test-user-two": Object {
       "access": "reporting",
+      "is_sso": false,
+      "username": "test-user-two",
+    },
+  },
+  "error": null,
+  "invite": Object {},
+  "loading": false,
+  "sortKey": "name",
+}
+`;
+
+exports[`Users reducer updates users is_sso from false to true 1`] = `
+Object {
+  "entities": Object {
+    "test-user-one": Object {
+      "access": undefined,
+      "is_sso": true,
+      "username": "test-user-one",
+    },
+    "test-user-two": Object {
+      "access": "reporting",
+      "is_sso": false,
       "username": "test-user-two",
     },
   },

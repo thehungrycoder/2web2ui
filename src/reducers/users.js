@@ -33,8 +33,6 @@ export default (state = initialState, action) => {
 
       if (fp.isUndefined(user)) { return state; } // ignore
 
-      fp.set(['entities', username, 'access'], access_level)(state);
-
       return fp.set(['entities', username], {
         ...state.entities[username],
         access: access_level,
