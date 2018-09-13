@@ -18,14 +18,14 @@ exports[`Page: Users Edit should render correctly by default 1`] = `
       },
     ]
   }
-  title="Edit User"
+  title="test-user@test.com"
 >
   <Panel>
     <form>
       <Panel.Section>
         <Field
+          allowSuperUser={false}
           component={[Function]}
-          label="Role"
           name="access"
         />
       </Panel.Section>
@@ -70,8 +70,6 @@ exports[`Page: Users Edit should render correctly by default 1`] = `
 </Page>
 `;
 
-exports[`Page: Users Edit should render loading correctly 1`] = `<Loading />`;
-
 exports[`Page: Users Edit should show a delete modal 1`] = `
 <Page
   breadcrumbAction={
@@ -90,14 +88,14 @@ exports[`Page: Users Edit should show a delete modal 1`] = `
       },
     ]
   }
-  title="Edit User"
+  title="test-user@test.com"
 >
   <Panel>
     <form>
       <Panel.Section>
         <Field
+          allowSuperUser={false}
           component={[Function]}
-          label="Role"
           name="access"
         />
       </Panel.Section>

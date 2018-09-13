@@ -12,7 +12,7 @@ describe('Page: Users Edit', () => {
   beforeEach(() => {
     props = {
       handleSubmit: jest.fn(),
-      loading: false,
+      loadingError: false,
       listUsers: jest.fn(),
       updateUser: jest.fn(() => Promise.resolve()),
       deleteUser: jest.fn(() => Promise.resolve()),
@@ -21,6 +21,12 @@ describe('Page: Users Edit', () => {
       },
       match: {
         params: { id: 'test-user' }
+      },
+      currentUser: { name: 'current-user' },
+      user: { access: 'admin', email: 'test-user@test.com', name: 'test-user' },
+      users: {
+        'current-user': { access: 'admin', email: 'current-user@test.com', name: 'current-user' },
+        'test-user': { access: 'admin', email: 'test-user@test.com', name: 'test-user' }
       }
     };
     wrapper = shallow(<EditPage {...props} />);
@@ -30,11 +36,6 @@ describe('Page: Users Edit', () => {
   it('should render correctly by default', () => {
     expect(wrapper).toMatchSnapshot();
     expect(props.listUsers).toHaveBeenCalledTimes(1);
-  });
-
-  it('should render loading correctly', () => {
-    wrapper.setProps({ loading: true });
-    expect(wrapper).toMatchSnapshot();
   });
 
   it('should show a delete modal', () => {

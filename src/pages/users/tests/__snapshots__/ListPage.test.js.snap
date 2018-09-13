@@ -273,6 +273,7 @@ Array [
   <User
     email="testemail"
     name="test-name"
+    username="test-username"
   />,
   "admin",
   <Tag>
