@@ -6,6 +6,7 @@ import {
   provisionAccountSingleSignOn,
   reprovisionAccountSingleSignOn
 } from 'src/actions/accountSingleSignOn';
+import { showAlert } from 'src/actions/globalAlert';
 import FileFieldWrapper from 'src/components/reduxFormWrappers/FileFieldWrapper';
 import config from 'src/config';
 import { getBase64Contents } from 'src/helpers/file';
@@ -18,14 +19,19 @@ export class ProviderForm extends React.Component {
   };
 
   submit = async ({ samlFile }) => {
-    const { provider, provisionAccountSingleSignOn, reprovisionAccountSingleSignOn } = this.props;
+    const {
+      provider,
+      provisionAccountSingleSignOn,
+      reprovisionAccountSingleSignOn,
+      showAlert
+    } = this.props;
     const samlContents = await getBase64Contents(samlFile);
+    const action = provider ? reprovisionAccountSingleSignOn : provisionAccountSingleSignOn;
 
-    if (provider) {
-      reprovisionAccountSingleSignOn(samlContents);
-    } else {
-      provisionAccountSingleSignOn(samlContents);
-    }
+    return action(samlContents)
+      .then(() => {
+        showAlert({ type: 'success', message: 'Successfully provisioned SAML' });
+      });
   };
 
   componentDidUpdate(prevProps) {
@@ -70,7 +76,8 @@ export class ProviderForm extends React.Component {
 
 const mapDispatchToProps = {
   provisionAccountSingleSignOn,
-  reprovisionAccountSingleSignOn
+  reprovisionAccountSingleSignOn,
+  showAlert
 };
 
 const mapStateToProps = ({ accountSingleSignOn }) => accountSingleSignOn;

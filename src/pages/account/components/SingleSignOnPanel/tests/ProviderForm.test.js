@@ -38,27 +38,32 @@ describe('ProviderForm', () => {
   });
 
   it('provisions on submit', async () => {
-    const provisionAccountSingleSignOn = jest.fn();
-    const wrapper = subject({ provisionAccountSingleSignOn });
+    const provisionAccountSingleSignOn = jest.fn(() => Promise.resolve());
+    const showAlert = jest.fn();
+    const wrapper = subject({ provisionAccountSingleSignOn, showAlert });
 
     getBase64Contents.mockImplementationOnce(() => Promise.resolve('abc=='));
-    await wrapper.simulate('submit', { samlFile: 'sample.xml' });
+    await wrapper.instance().submit({ samlFile: 'sample.xml' });
 
     expect(getBase64Contents).toHaveBeenCalledWith('sample.xml');
     expect(provisionAccountSingleSignOn).toHaveBeenCalledWith('abc==');
+    expect(showAlert).toHaveBeenCalled();
   });
 
   it('reprovisions on submit when provider is present', async () => {
-    const reprovisionAccountSingleSignOn = jest.fn();
+    const reprovisionAccountSingleSignOn = jest.fn(() => Promise.resolve());
+    const showAlert = jest.fn();
     const wrapper = subject({
       provider: 'https://sso.sparkpost.com/redirect',
-      reprovisionAccountSingleSignOn
+      reprovisionAccountSingleSignOn,
+      showAlert
     });
 
     getBase64Contents.mockImplementationOnce(() => Promise.resolve('abc=='));
-    await wrapper.simulate('submit', { samlFile: 'sample.xml' });
+    await wrapper.instance().submit({ samlFile: 'sample.xml' });
 
     expect(getBase64Contents).toHaveBeenCalledWith('sample.xml');
     expect(reprovisionAccountSingleSignOn).toHaveBeenCalledWith('abc==');
+    expect(showAlert).toHaveBeenCalled();
   });
 });
