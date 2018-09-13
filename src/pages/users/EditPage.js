@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
 import { Page, Panel, Button } from '@sparkpost/matchbox';
-import { CheckboxWrapper, RadioGroup } from 'src/components/reduxFormWrappers';
+import { CheckboxWrapper } from 'src/components/reduxFormWrappers';
 import { Loading, DeleteModal } from 'src/components';
 import { updateUser, listUsers, deleteUser } from 'src/actions/users';
 import { selectUserById } from 'src/selectors/users';
 import RedirectAndAlert from 'src/components/globalAlert/RedirectAndAlert';
+
+import RoleRadioGroup from './components/RoleRadioGroup';
 
 import _ from 'lodash';
 
@@ -55,14 +57,19 @@ export class EditPage extends Component {
   }
 
   render() {
-    const { handleSubmit, loading, loadingError, user, users } = this.props;
+    const { currentUser, handleSubmit, loadingError, user, users } = this.props;
 
-    if (loading) {
+    if (loadingError) {
+      return <Redirect to="/account/users" />;
+    }
+
+    // Load until we have at least one user
+    if (_.isEmpty(users)) {
       return <Loading />;
     }
 
-    // if there is an error loading list of users or our user is unknown
-    if (loadingError || (!_.isEmpty(users) && !user)) {
+    // Error if user is not in the user list
+    if (!user) {
       return <RedirectAndAlert to="/account/users" alert={{ type: 'error', message: 'Unknown user???' }} />;
     }
 
@@ -85,23 +92,9 @@ export class EditPage extends Component {
             <Panel.Section>
               <Field
                 name="access"
-                title="Role"
-                component={RadioGroup}
-                grid={{ xs: 12, sm: 12, md: 6 }}
-                options={[
-                  {
-                    label: <strong>Admin</strong>,
-                    value: 'admin',
-                    helpText: 'Has access to all functionality in the UI. Has the ability to add additional administrators and create / invite users with a role of Reporting',
-                    disabled: user.isCurrentUser
-                  },
-                  {
-                    label: <strong>Reporting</strong>,
-                    value: 'reporting',
-                    helpText: 'Has no access to functionality in the UI. Permissions include access to view all reports, and view all templates except being allowed to change them',
-                    disabled: user.isCurrentUser
-                  }
-                ]}
+                disabled={user.isCurrentUser}
+                allowSuperUser={currentUser.access === 'superuser'}
+                component={RoleRadioGroup}
               />
             </Panel.Section>
             <Panel.Section>
@@ -134,8 +127,8 @@ const mapStateToProps = (state, props) => {
 
   return {
     user,
+    currentUser: state.currentUser,
     users: state.users.entities,
-    loading: state.users.loading,
     loadingError: state.users.error,
     initialValues: {
       access: _.get(user, 'access'),
@@ -147,6 +140,6 @@ const mapStateToProps = (state, props) => {
 const mapDispatchToProps = { updateUser, listUsers, deleteUser };
 const formOptions = { form: 'userEditForm', enableReinitialize: true };
 
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(reduxForm(formOptions)(EditPage))
+export default
+connect(mapStateToProps, mapDispatchToProps)(reduxForm(formOptions)(EditPage)
 );

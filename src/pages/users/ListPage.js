@@ -49,7 +49,7 @@ export class ListPage extends Component {
 
   // Do not allow current user to change their access/role or delete their account
   getRowData = (user) => [
-    <User name={user.name} email={user.email} />,
+    <User name={user.name} email={user.email} username={user.username} />,
     user.access,
     user.tfa_enabled ? <Tag color={'blue'}>Enabled</Tag> : <Tag>Disabled</Tag>,
     user.last_login ? <TimeAgo date={user.last_login} live={false} /> : 'Never',
