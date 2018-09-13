@@ -41,6 +41,15 @@ exports[`SingleSignOnPanel renders with provider and status section 1`] = `
     <StatusSection
       cert="abc=="
       enabled={true}
+      getAccountSingleSignOnDetails={
+        [MockFunction] {
+          "calls": Array [
+            Array [],
+          ],
+          "results": undefined,
+        }
+      }
+      loading={false}
       provider="https://sso.sparkpost.com/redirect"
       updateAccountSingleSignOn={[MockFunction]}
       updateError="Oh no!"

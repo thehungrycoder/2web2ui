@@ -57,7 +57,6 @@ describe('StatusSection', () => {
 
     wrapper.find('ConfirmationModal').simulate('confirm');
 
-    expect(wrapper.state('isDisabling')).toEqual(true);
     expect(updateAccountSingleSignOn).toHaveBeenCalledWith({
       cert: 'abc==',
       enabled: false,
@@ -74,23 +73,17 @@ describe('StatusSection', () => {
     expect(wrapper.state('isModalOpen')).toEqual(false);
   });
 
-  it('closes modal and resets disabling status when updated', () => {
+  it('closes modal when updated', () => {
     const wrapper = subject();
 
-    wrapper.setState({ isDisabling: true, isModalOpen: true });
+    wrapper.setState({ isModalOpen: true });
     wrapper.setProps({ updatedAt: '2018-09-11T21:17:50+00:00' });
 
-    expect(wrapper.state('isDisabling')).toEqual(false);
     expect(wrapper.state('isModalOpen')).toEqual(false);
   });
 
-  it('only resets disabling status on update error', () => {
-    const wrapper = subject();
-
-    wrapper.setState({ isDisabling: true, isModalOpen: true });
-    wrapper.setProps({ updateError: 'Oh no!' });
-
-    expect(wrapper.state('isDisabling')).toEqual(false);
-    expect(wrapper.state('isModalOpen')).toEqual(true);
+  it('disables buttons when updating', () => {
+    const wrapper = subject({ updating: true });
+    expect(wrapper).toMatchSnapshot();
   });
 });

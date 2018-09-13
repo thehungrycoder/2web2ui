@@ -7,19 +7,14 @@ import PageLink from 'src/components/pageLink/PageLink';
 
 export class StatusSection extends React.Component {
   state = {
-    isDisabling: false,
     isModalOpen: false
   }
 
   componentDidUpdate(prevProps) {
-    const { updateError, updatedAt } = this.props;
+    const { updatedAt } = this.props;
 
     if (updatedAt !== prevProps.updatedAt) {
-      this.setState({ isDisabling: false, isModalOpen: false });
-    }
-
-    if (this.state.isDisabling && updateError) {
-      this.setState({ isDisabling: false });
+      this.setState({ isModalOpen: false });
     }
   }
 
@@ -29,9 +24,7 @@ export class StatusSection extends React.Component {
 
   disable = () => {
     const { cert, provider } = this.props;
-
     this.props.updateAccountSingleSignOn({ cert, enabled: false, provider });
-    this.setState({ isDisabling: true });
   }
 
   enable = () => {
@@ -48,7 +41,7 @@ export class StatusSection extends React.Component {
   }
 
   render() {
-    const { enabled, provider } = this.props;
+    const { enabled, provider, updating } = this.props;
 
     if (!provider) {
       return null;
@@ -59,6 +52,7 @@ export class StatusSection extends React.Component {
         actions={[{
           color: 'orange',
           content: enabled ? 'Disable SSO' : 'Enable SSO',
+          disabled: updating,
           onClick: this.toggle
         }]}
       >
@@ -73,7 +67,7 @@ export class StatusSection extends React.Component {
           )}
         </LabelledValue>
         <ConfirmationModal
-          confirming={this.state.isDisabling}
+          confirming={updating}
           open={this.state.isModalOpen}
           title="Are you sure you want to disable Single Sign-On?"
           content={

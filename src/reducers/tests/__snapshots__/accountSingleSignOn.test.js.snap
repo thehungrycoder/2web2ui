@@ -50,6 +50,7 @@ Object {
   "provider": "https://sso.sparkpost.com/redirect",
   "updateError": "Oh Snap!",
   "updated_at": "2018-09-11T19:07:17+00:00",
+  "updating": false,
 }
 `;
 
@@ -57,8 +58,8 @@ exports[`accountSingleSignOnReducer UPDATE_ACCOUNT_SSO_SUCCESS 1`] = `
 Object {
   "cert": "abc==",
   "enabled": true,
-  "loading": false,
   "provider": "https://sso.sparkpost.com/redirect",
   "updatedAt": "2018-09-11T19:07:17+00:00",
+  "updating": false,
 }
 `;
