@@ -1,11 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Panel } from '@sparkpost/matchbox';
+import { OpenInNew } from '@sparkpost/matchbox-icons';
 import {
   getAccountSingleSignOnDetails,
   updateAccountSingleSignOn
 } from 'src/actions/accountSingleSignOn';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
+import { LINKS } from 'src/constants';
 import ProviderSection from './ProviderSection';
 import StatusSection from './StatusSection';
 
@@ -46,7 +48,15 @@ export class SingleSignOnPanel extends React.Component {
 
   render() {
     return (
-      <Panel title="Single Sign-On">
+      <Panel
+        title="Single Sign-On"
+        actions={[{
+          color: 'orange',
+          content: <span>Learn More <OpenInNew size={13}/></span>,
+          external: true,
+          to: LINKS.SSO_GUIDE
+        }]}
+      >
         {this.renderContents()}
       </Panel>
     );
