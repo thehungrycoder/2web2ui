@@ -15,6 +15,8 @@ Array [
 ]
 `;
 
+exports[`Users Selectors returns if user not found 1`] = `undefined`;
+
 exports[`Users Selectors returns user from user list 1`] = `
 Object {
   "isCurrentUser": false,

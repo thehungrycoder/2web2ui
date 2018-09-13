@@ -19,4 +19,8 @@ describe('Users Selectors', () => {
   it('returns user from user list', () => {
     expect(selectUserById(state, 'ape')).toMatchSnapshot();
   });
+
+  it('returns if user not found', () => {
+    expect(selectUserById(state, 'missingUser')).toMatchSnapshot();
+  });
 });
