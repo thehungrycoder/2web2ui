@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SingleSignOnPanel renders with panel loading 1`] = `
+<Panel
+  actions={
+    Array [
+      Object {
+        "color": "orange",
+        "component": [Function],
+        "content": "Learn More",
+        "to": "https://www.sparkpost.com/docs/my-account-and-profile/sso",
+      },
+    ]
+  }
+  title="Single Sign-On"
+>
+  <PanelLoading
+    minHeight="130px"
+  />
+</Panel>
+`;
+
+exports[`SingleSignOnPanel renders with provider and status section 1`] = `
+<Panel
+  actions={
+    Array [
+      Object {
+        "color": "orange",
+        "component": [Function],
+        "content": "Learn More",
+        "to": "https://www.sparkpost.com/docs/my-account-and-profile/sso",
+      },
+    ]
+  }
+  title="Single Sign-On"
+>
+  <React.Fragment>
+    <ProviderSection
+      provider="https://sso.sparkpost.com/redirect"
+    />
+    <StatusSection
+      cert="abc=="
+      enabled={true}
+      getAccountSingleSignOnDetails={
+        [MockFunction] {
+          "calls": Array [
+            Array [],
+          ],
+          "results": undefined,
+        }
+      }
+      loading={false}
+      provider="https://sso.sparkpost.com/redirect"
+      updateAccountSingleSignOn={[MockFunction]}
+      updateError="Oh no!"
+      updatedAt="2018-09-11T19:39:06+00:00"
+    />
+  </React.Fragment>
+</Panel>
+`;

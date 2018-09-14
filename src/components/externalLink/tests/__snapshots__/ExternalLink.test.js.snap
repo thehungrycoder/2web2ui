@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ExternalLink renders 1`] = `
+<UnstyledLink
+  external={true}
+  to="http://example.com"
+>
+   
+  <OpenInNew
+    size={13}
+  />
+</UnstyledLink>
+`;

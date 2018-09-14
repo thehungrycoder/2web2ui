@@ -1,5 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`DeleteModal Component should disable delete button 1`] = `
+<ConfirmationModal
+  confirmVerb="Delete"
+  confirming={true}
+  handleDelete={[Function]}
+  handleToggle={[Function]}
+  onCancel={[Function]}
+  onConfirm={[Function]}
+  text="Got Damn"
+  title="NoobNoob"
+/>
+`;
+
 exports[`DeleteModal Component should render closed with props 1`] = `
 <ConfirmationModal
   confirmVerb="Delete"
