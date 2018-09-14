@@ -4,11 +4,12 @@ import { Link, withRouter } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
 import { Page, Panel, Button } from '@sparkpost/matchbox';
 import { TextFieldWrapper } from 'src/components';
-import { RadioGroup } from 'src/components/reduxFormWrappers';
 import { required, email } from 'src/helpers/validation';
 import { inviteUser } from 'src/actions/users';
 import { showAlert } from 'src/actions/globalAlert';
 import { trimWhitespaces } from 'src/helpers/string';
+
+import RoleRadioGroup from './components/RoleRadioGroup';
 
 const formName = 'userForm';
 const breadcrumbAction = {
@@ -17,10 +18,7 @@ const breadcrumbAction = {
   to: '/account/users'
 };
 
-
-
 export class CreatePage extends Component {
-
   handleSubmit = (values) => {
     const {
       inviteUser,
@@ -61,21 +59,7 @@ export class CreatePage extends Component {
               />
               <Field
                 name="access"
-                title="Role"
-                component={RadioGroup}
-                grid={{ xs: 12, sm: 12, md: 6 }}
-                options={[
-                  {
-                    label: <strong>Admin</strong>,
-                    value: 'admin',
-                    helpText: 'Has access to all functionality in the UI. Has the ability to add additional administrators and create / invite users with a role of Reporting'
-                  },
-                  {
-                    label: <strong>Reporting</strong>,
-                    value: 'reporting',
-                    helpText: 'Has no access to functionality in the UI. Permissions include access to view all reports, and view all templates except being allowed to change them'
-                  }
-                ]}
+                component={RoleRadioGroup}
               />
               <Button submit primary disabled={submitting || pristine}>
                 {submitting ? 'Loading' : 'Add User'}
@@ -86,7 +70,6 @@ export class CreatePage extends Component {
       </Page>
     );
   }
-
 }
 
 const mapStateToProps = () => ({

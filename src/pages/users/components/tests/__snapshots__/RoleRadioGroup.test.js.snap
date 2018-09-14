@@ -1,0 +1,107 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: RoleRadioGroup should render disabled 1`] = `
+<RadioGroup
+  grid={
+    Object {
+      "md": 6,
+      "sm": 12,
+      "xs": 12,
+    }
+  }
+  options={
+    Array [
+      Object {
+        "disabled": true,
+        "helpText": "Has access to all functionality in the UI. Has the ability to add additional administrators and create / invite users with a role of Reporting",
+        "label": <strong>
+          Admin
+        </strong>,
+        "value": "admin",
+      },
+      Object {
+        "disabled": true,
+        "helpText": "Has no access to functionality in the UI. Permissions include access to view all reports, and view all templates except being allowed to change them",
+        "label": <strong>
+          Reporting
+        </strong>,
+        "value": "reporting",
+      },
+    ]
+  }
+  title="Role"
+/>
+`;
+
+exports[`Component: RoleRadioGroup should render super user 1`] = `
+<RadioGroup
+  grid={
+    Object {
+      "md": 6,
+      "sm": 12,
+      "xs": 12,
+    }
+  }
+  options={
+    Array [
+      Object {
+        "disabled": false,
+        "helpText": "Has access to all functionality in the UI. Has the ability to add additional administrators and create / invite users with a role of Reporting",
+        "label": <strong>
+          Admin
+        </strong>,
+        "value": "admin",
+      },
+      Object {
+        "disabled": false,
+        "helpText": "Has no access to functionality in the UI. Permissions include access to view all reports, and view all templates except being allowed to change them",
+        "label": <strong>
+          Reporting
+        </strong>,
+        "value": "reporting",
+      },
+      Object {
+        "disabled": false,
+        "label": <strong>
+          Super User
+        </strong>,
+        "value": "superuser",
+      },
+    ]
+  }
+  title="Role"
+/>
+`;
+
+exports[`Component: RoleRadioGroup should render the RadioGroup 1`] = `
+<RadioGroup
+  grid={
+    Object {
+      "md": 6,
+      "sm": 12,
+      "xs": 12,
+    }
+  }
+  options={
+    Array [
+      Object {
+        "disabled": false,
+        "helpText": "Has access to all functionality in the UI. Has the ability to add additional administrators and create / invite users with a role of Reporting",
+        "label": <strong>
+          Admin
+        </strong>,
+        "value": "admin",
+      },
+      Object {
+        "disabled": false,
+        "helpText": "Has no access to functionality in the UI. Permissions include access to view all reports, and view all templates except being allowed to change them",
+        "label": <strong>
+          Reporting
+        </strong>,
+        "value": "reporting",
+      },
+    ]
+  }
+  title="Role"
+/>
+`;

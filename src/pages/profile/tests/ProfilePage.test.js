@@ -17,14 +17,12 @@ beforeEach(() => {
     currentUser: {
       username: 'Lord Stark',
       email: 'ned.stark@winterfell.biz',
-      customer: 12345,
       access_level: 'admin',
       is_sso: false
     },
     updateUser: jest.fn(() => Promise.resolve()),
     getCurrentUser: jest.fn(() => Promise.resolve()),
-    confirmPassword: jest.fn(() => Promise.resolve()),
-    openSupportTicketForm: jest.fn()
+    confirmPassword: jest.fn(() => Promise.resolve())
   };
 
   wrapper = shallow(<ProfilePage {...props} />);
@@ -89,13 +87,6 @@ describe('ProfilePage', () => {
       await instance.updatePassword({ currentPassword: '111', newPassword: '222' });
       expect(props.confirmPassword).toHaveBeenCalledWith('Lord Stark', '111');
       expect(props.updateUser).toHaveBeenCalledWith('Lord Stark', { password: '222' });
-    });
-  });
-
-  describe('requestCancellation', () => {
-    it('should open support panel and preselect account cancellation', () => {
-      instance.requestCancellation();
-      expect(props.openSupportTicketForm).toHaveBeenCalledWith({ issueId: 'account_cancellation' });
     });
   });
 });

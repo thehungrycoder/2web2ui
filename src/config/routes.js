@@ -2,6 +2,7 @@
 import {
   abTesting,
   apiKeys,
+  AccountSettingsPage,
   AuthPage,
   SsoAuthPage,
   SSOPage,
@@ -287,6 +288,14 @@ const routes = [
     supportDocSearch: 'user'
   },
   {
+    path: '/account/users/edit/:id',
+    component: users.EditPage,
+    condition: hasGrants('users/manage'),
+    layout: App,
+    title: 'Edit User',
+    supportDocSearch: 'user'
+  },
+  {
     path: '/templates',
     component: templates.ListPage,
     condition: hasGrants('templates/view'),
@@ -446,6 +455,14 @@ const routes = [
     layout: App,
     title: 'New Tracking Domain',
     supportDocSearch: 'tracking domain'
+  },
+  {
+    path: '/account/settings',
+    component: AccountSettingsPage,
+    condition: hasGrants('users/manage'),
+    layout: App,
+    title: 'Account settings',
+    supportDocSearch: 'account settings'
   },
   {
     path: '/account/profile',

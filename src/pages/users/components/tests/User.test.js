@@ -10,12 +10,13 @@ describe('Component: User', () => {
   beforeEach(() => {
     props = {
       name: 'foo bar',
-      email: 'foo@bar.com'
+      email: 'foo@bar.com',
+      username: 'foo-bar'
     };
     wrapper = shallow(<User {...props} />);
   });
 
-  it('renders name & email', () => {
+  it('renders name & email & username link', () => {
     expect(wrapper).toMatchSnapshot();
   });
 });

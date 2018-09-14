@@ -5,6 +5,7 @@ const config = {
   apiRequestHeaders: {
     'X-Sparky': '1d24c3473dd52a2f4a53fb6808cf9a73'
   },
+  apiRequestBodyMaxSizeBytes: 500 * 1000, // ~ 500 KB
   authentication: {
     cookie: {
       name: 'auth',

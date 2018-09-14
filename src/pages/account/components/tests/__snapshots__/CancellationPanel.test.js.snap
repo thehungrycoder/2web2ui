@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CancellationPanel renders 1`] = `
+<Panel
+  sectioned={true}
+  title="Request Account Cancellation"
+>
+  <p>
+    To cancel your SparkPost account, 
+    <UnstyledLink
+      onClick={[Function]}
+    >
+      submit a cancellation request
+    </UnstyledLink>
+    . The request may take a few days to process.  All your data (e.g. domains, users, etc.) will be permanently deleted. We're sorry to see you go!
+  </p>
+</Panel>
+`;
