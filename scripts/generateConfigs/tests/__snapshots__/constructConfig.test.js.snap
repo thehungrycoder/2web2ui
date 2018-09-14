@@ -2,7 +2,7 @@
 
 exports[`generateConfigs.constructConfig with environment 1`] = `
 Object {
-  "apiBase": "//testTenant.api.e.sparkpost.com/api/v1",
+  "apiBase": "https://testTenant.api.e.sparkpost.com/api/v1",
   "bounceDomains": Object {
     "allowDefault": true,
     "allowSubaccountDefault": true,
@@ -34,7 +34,7 @@ Object {
 
 exports[`generateConfigs.constructConfig with unknown environment 1`] = `
 Object {
-  "apiBase": "//testTenant.api.e.sparkpost.com/api/v1",
+  "apiBase": "https://testTenant.api.e.sparkpost.com/api/v1",
   "bounceDomains": Object {
     "allowDefault": true,
     "allowSubaccountDefault": true,

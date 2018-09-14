@@ -18,7 +18,7 @@ describe('Page: Users Edit', () => {
       history: {
         push: jest.fn()
       },
-      isAccountSingleSignOnDisabled: false,
+      isAccountSingleSignOnEnabled: true,
       match: {
         params: { id: 'test-user' }
       },
@@ -61,7 +61,7 @@ describe('Page: Users Edit', () => {
   });
 
   it('should disable single sign-on checkbox and display instructions', () => {
-    wrapper.setProps({ isAccountSingleSignOnDisabled: true });
+    wrapper.setProps({ isAccountSingleSignOnEnabled: false });
     expect(wrapper).toMatchSnapshot();
   });
 

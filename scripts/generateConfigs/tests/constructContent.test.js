@@ -1,7 +1,7 @@
 const constructContent = require('../constructContent');
 
 const EXPECTED_CONTENT = `window.SP = window.SP || {};
-window.SP.productionConfig = { apiBase: '//api.test.example/graphql' };
+window.SP.productionConfig = { apiBase: 'https://api.test.example/graphql' };
 `;
 
 describe('generateConfigs.constructContent', () => {
@@ -12,7 +12,7 @@ describe('generateConfigs.constructContent', () => {
       nextHost: 'next.test.example.com',
       originHost: 'origin.test.example.com',
       tenantId: 'testTenant',
-      apiBase: '//api.test.example/graphql'
+      apiBase: 'https://api.test.example/graphql'
     };
 
     expect(constructContent(config)).toEqual(EXPECTED_CONTENT);

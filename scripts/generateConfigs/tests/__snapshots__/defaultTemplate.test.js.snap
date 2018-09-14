@@ -2,7 +2,7 @@
 
 exports[`generateConfigs.defaultTemplate with alias 1`] = `
 Object {
-  "apiBase": "//aTestTenant.api.e.sparkpost.com/api/v1",
+  "apiBase": "https://aTestTenant.api.e.sparkpost.com/api/v1",
   "bounceDomains": Object {
     "allowDefault": true,
     "allowSubaccountDefault": true,
@@ -32,7 +32,7 @@ Object {
 
 exports[`generateConfigs.defaultTemplate with only tenantId 1`] = `
 Object {
-  "apiBase": "//testTenant.api.e.sparkpost.com/api/v1",
+  "apiBase": "https://testTenant.api.e.sparkpost.com/api/v1",
   "bounceDomains": Object {
     "allowDefault": true,
     "allowSubaccountDefault": true,

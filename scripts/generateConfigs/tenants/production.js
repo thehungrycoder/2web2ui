@@ -38,7 +38,7 @@ const productionTenants = {
     }
   },
   spceu: {
-    apiBase: '//api.eu.sparkpost.com/api/v1',
+    apiBase: 'https://api.eu.sparkpost.com/api/v1',
     bounceDomains: {
       allowSubaccountDefault: false,
       cnameValue: 'eu.sparkpostmail.com'
@@ -69,7 +69,7 @@ const productionTenants = {
     }
   },
   spc: {
-    apiBase: '//api.sparkpost.com/api/v1',
+    apiBase: 'https://api.sparkpost.com/api/v1',
     bounceDomains: {
       cnameValue: 'sparkpostmail.com',
     },
