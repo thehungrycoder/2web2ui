@@ -34,30 +34,40 @@ describe('Page: Users Edit', () => {
 
   it('should render correctly by default', () => {
     expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should not get list of users on mount if already loaded', () => {
+    expect(props.listUsers).toHaveBeenCalledTimes(0);
+  });
+
+  it('should get list of users on mount', () => {
+    shallow(<EditPage {...props} users={{}} />);
     expect(props.listUsers).toHaveBeenCalledTimes(1);
   });
 
   it('should redirect on loadingError', () => {
-    props.loadingError = true;
-    wrapper = shallow(<EditPage {...props} />);
+    wrapper.setProps({ loadingError: true });
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should load until we have a list of users', () => {
-    props.users = {};
-    wrapper = shallow(<EditPage {...props} />);
+    wrapper.setProps({ users: {}});
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should not allow current user to delete', () => {
-    props.user.isCurrentUser = true;
-    wrapper = shallow(<EditPage {...props} />);
+    wrapper.setProps({
+      user: {
+        ...props.user,
+        isCurrentUser: true
+      }
+    });
+
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should error and redirect if user is not in users', () => {
-    props.user = undefined;
-    wrapper = shallow(<EditPage {...props} />);
+    wrapper.setProps({ user: undefined });
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -77,8 +87,8 @@ describe('Page: Users Edit', () => {
     expect(props.deleteUser).toHaveBeenCalledWith('test-user');
   });
 
-  it('should redirect after delete', async () => {
-    await instance.deleteUser();
+  it('should redirect after delete', () => {
+    wrapper.setProps({ user: undefined });
     expect(props.history.push).toHaveBeenCalledWith('/account/users');
   });
 });

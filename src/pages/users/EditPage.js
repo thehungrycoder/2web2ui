@@ -26,31 +26,31 @@ export class EditPage extends Component {
 
   toggleDelete = () => this.setState({ showDelete: !this.state.showDelete });
 
-  afterDelete = () => {
-    this.toggleDelete();
-    this.props.history.push('/account/users');
-  };
-
   deleteUser = () => {
-    const { deleteUser } = this.props;
     const user = this.props.match.params.id;
-
-    return deleteUser(user)
-      .then(() => {
-        this.afterDelete();
-      });
-  };
+    return this.props.deleteUser(user);
+  }
 
   handleUserUpdate = ({ access: access_level, is_sso }) => {
     const { updateUser } = this.props;
-
     const username = this.props.match.params.id;
 
     return updateUser(username, { access_level, is_sso });
-  };
+  }
 
   componentDidMount() {
-    this.props.listUsers();
+    // only request if user visits page directly
+    // note, this is needed for the delete redirect to work correctly
+    if (_.isEmpty(this.props.users)) {
+      this.props.listUsers();
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    // redirect when user was deleted
+    if (!_.isEmpty(prevProps.user) && _.isEmpty(this.props.user)) {
+      this.props.history.push('/account/users');
+    }
   }
 
   render() {
