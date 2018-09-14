@@ -6,10 +6,12 @@ const state = {
   entities: {
     'test-user-one': {
       access: 'admin',
+      is_sso: false,
       username: 'test-user-one'
     },
     'test-user-two': {
       access: 'reporting',
+      is_sso: false,
       username: 'test-user-two'
     }
   }
@@ -29,6 +31,15 @@ const TEST_CASES = {
     meta: {
       data: {
         access_level: 'reporting',
+        username: 'test-user-one'
+      }
+    }
+  },
+  'updates users is_sso from false to true': {
+    type: 'UPDATE_USER_SUCCESS',
+    meta: {
+      data: {
+        is_sso: true,
         username: 'test-user-one'
       }
     }

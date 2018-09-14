@@ -288,6 +288,14 @@ const routes = [
     supportDocSearch: 'user'
   },
   {
+    path: '/account/users/edit/:id',
+    component: users.EditPage,
+    condition: hasGrants('users/manage'),
+    layout: App,
+    title: 'Edit User',
+    supportDocSearch: 'user'
+  },
+  {
     path: '/templates',
     component: templates.ListPage,
     condition: hasGrants('templates/view'),

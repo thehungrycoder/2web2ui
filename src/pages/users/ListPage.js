@@ -9,9 +9,7 @@ import TimeAgo from 'react-timeago';
 import * as usersActions from 'src/actions/users';
 import { selectUsers } from 'src/selectors/users';
 
-import { Loading, ApiErrorBanner, DeleteModal, TableCollection } from 'src/components';
-import RoleSelect from './components/RoleSelect';
-import DeleteButton from './components/DeleteButton';
+import { Loading, ApiErrorBanner, DeleteModal, TableCollection, ActionPopover } from 'src/components';
 import User from './components/User';
 
 const COLUMNS = [
@@ -21,6 +19,17 @@ const COLUMNS = [
   { label: 'Last Login', sortKey: 'last_login' },
   null
 ];
+
+export const Actions = ({ username, deletable, onDelete }) => {
+  const actions = [ { content: 'Edit', to: `/account/users/edit/${username}`, component: Link } ];
+  if (deletable) {
+    actions.push({ content: 'Delete', onClick: () => onDelete(username) });
+  }
+  return <ActionPopover actions={actions} />;
+};
+
+Actions.displayName = 'Actions';
+
 const DEFAULT_STATE = {
   userToDelete: {}
 };
@@ -40,28 +49,14 @@ export class ListPage extends Component {
 
   // Do not allow current user to change their access/role or delete their account
   getRowData = (user) => [
-    <User name={user.name} email={user.email} />,
-    <RoleSelect
-      disabled={user.isCurrentUser}
-      name={user.username}
-      onChange={this.handleAccessChange}
-      value={user.access}
-      allowSuperUser={user.access === 'superuser'}
-    />,
+    <User name={user.name} email={user.email} username={user.username} />,
+    user.access,
     user.tfa_enabled ? <Tag color={'blue'}>Enabled</Tag> : <Tag>Disabled</Tag>,
     user.last_login ? <TimeAgo date={user.last_login} live={false} /> : 'Never',
-    <DeleteButton
-      disabled={user.isCurrentUser}
-      name={user.username}
-      onClick={this.handleDeleteRequest}
-    />
+    <Actions username={user.username} deletable={!user.isCurrentUser} onDelete={this.handleDeleteRequest} />
   ];
 
-  handleAccessChange = ({ name, value }) => {
-    this.props.updateUser(name, { access_level: value });
-  }
-
-  handleCancel = () => { this.setState(DEFAULT_STATE); }
+  handleCancel = () => { this.setState(DEFAULT_STATE); };
 
   handleDelete = () => {
     const { userToDelete } = this.state;
@@ -74,7 +69,7 @@ export class ListPage extends Component {
   handleDeleteRequest = (username) => {
     const user = fp.find((user) => user.username === username)(this.props.users);
     this.setState({ userToDelete: user });
-  }
+  };
 
   renderError() {
     const { error, listUsers } = this.props;

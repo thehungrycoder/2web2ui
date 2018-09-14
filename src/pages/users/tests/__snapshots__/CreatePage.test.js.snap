@@ -34,33 +34,7 @@ exports[`Page: User Create Page should render correctly by default 1`] = `
         />
         <Field
           component={[Function]}
-          grid={
-            Object {
-              "md": 6,
-              "sm": 12,
-              "xs": 12,
-            }
-          }
           name="access"
-          options={
-            Array [
-              Object {
-                "helpText": "Has access to all functionality in the UI. Has the ability to add additional administrators and create / invite users with a role of Reporting",
-                "label": <strong>
-                  Admin
-                </strong>,
-                "value": "admin",
-              },
-              Object {
-                "helpText": "Has no access to functionality in the UI. Permissions include access to view all reports, and view all templates except being allowed to change them",
-                "label": <strong>
-                  Reporting
-                </strong>,
-                "value": "reporting",
-              },
-            ]
-          }
-          title="Role"
         />
         <Button
           disabled={false}
@@ -110,33 +84,7 @@ exports[`Page: User Create Page should render when pristine 1`] = `
         />
         <Field
           component={[Function]}
-          grid={
-            Object {
-              "md": 6,
-              "sm": 12,
-              "xs": 12,
-            }
-          }
           name="access"
-          options={
-            Array [
-              Object {
-                "helpText": "Has access to all functionality in the UI. Has the ability to add additional administrators and create / invite users with a role of Reporting",
-                "label": <strong>
-                  Admin
-                </strong>,
-                "value": "admin",
-              },
-              Object {
-                "helpText": "Has no access to functionality in the UI. Permissions include access to view all reports, and view all templates except being allowed to change them",
-                "label": <strong>
-                  Reporting
-                </strong>,
-                "value": "reporting",
-              },
-            ]
-          }
-          title="Role"
         />
         <Button
           disabled={true}
@@ -186,33 +134,7 @@ exports[`Page: User Create Page should render when submitting 1`] = `
         />
         <Field
           component={[Function]}
-          grid={
-            Object {
-              "md": 6,
-              "sm": 12,
-              "xs": 12,
-            }
-          }
           name="access"
-          options={
-            Array [
-              Object {
-                "helpText": "Has access to all functionality in the UI. Has the ability to add additional administrators and create / invite users with a role of Reporting",
-                "label": <strong>
-                  Admin
-                </strong>,
-                "value": "admin",
-              },
-              Object {
-                "helpText": "Has no access to functionality in the UI. Permissions include access to view all reports, and view all templates except being allowed to change them",
-                "label": <strong>
-                  Reporting
-                </strong>,
-                "value": "reporting",
-              },
-            ]
-          }
-          title="Role"
         />
         <Button
           disabled={true}
