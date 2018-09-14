@@ -3,7 +3,7 @@ const defaultTemplate = (tenant) => {
   const identifier = tenant.alias || tenant.tenantId;
 
   return {
-    apiBase: `//${identifier}.api.e.sparkpost.com/api/v1`,
+    apiBase: `https://${identifier}.api.e.sparkpost.com/api/v1`,
     bounceDomains: {
       allowDefault: true,
       allowSubaccountDefault: true,

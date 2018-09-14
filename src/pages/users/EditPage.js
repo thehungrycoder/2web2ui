@@ -53,7 +53,7 @@ export class EditPage extends Component {
     const {
       currentUser,
       handleSubmit,
-      isAccountSingleSignOnDisabled,
+      isAccountSingleSignOnEnabled,
       loadingError,
       submitting,
       user,
@@ -100,9 +100,9 @@ export class EditPage extends Component {
             <Panel.Section>
               <Field
                 component={CheckboxWrapper}
-                disabled={isAccountSingleSignOnDisabled}
+                disabled={!isAccountSingleSignOnEnabled}
                 helpText={
-                  isAccountSingleSignOnDisabled && (
+                  isAccountSingleSignOnEnabled === false && (
                     <span>
                       Single sign-on has not been configured for your account. Enable in your {
                         <PageLink to="/account/settings">account's settings</PageLink>
@@ -138,7 +138,7 @@ const mapStateToProps = (state, props) => {
   return {
     accountSingleSignOn: state.accountSingleSignOn,
     currentUser: state.currentUser,
-    isAccountSingleSignOnDisabled: state.accountSingleSignOn.enabled === false,
+    isAccountSingleSignOnEnabled: state.accountSingleSignOn.enabled,
     loadingError: state.users.error,
     user,
     users: state.users.entities,
