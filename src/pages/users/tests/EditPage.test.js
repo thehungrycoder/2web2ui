@@ -3,7 +3,6 @@ import { shallow } from 'enzyme';
 import { EditPage } from '../EditPage';
 
 describe('Page: Users Edit', () => {
-
   let props;
   let wrapper;
   let instance;
@@ -13,11 +12,13 @@ describe('Page: Users Edit', () => {
       handleSubmit: jest.fn(),
       loadingError: false,
       listUsers: jest.fn(),
-      updateUser: jest.fn(() => Promise.resolve()),
       deleteUser: jest.fn(() => Promise.resolve()),
+      getAccountSingleSignOnDetails: jest.fn(),
+      updateUser: jest.fn(() => Promise.resolve()),
       history: {
         push: jest.fn()
       },
+      isAccountSingleSignOnDisabled: false,
       match: {
         params: { id: 'test-user' }
       },
@@ -36,6 +37,10 @@ describe('Page: Users Edit', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('should get account single sign-on details on mount', () => {
+    expect(props.getAccountSingleSignOnDetails).toHaveBeenCalled();
+  });
+
   it('should not get list of users on mount if already loaded', () => {
     expect(props.listUsers).toHaveBeenCalledTimes(0);
   });
@@ -52,6 +57,11 @@ describe('Page: Users Edit', () => {
 
   it('should load until we have a list of users', () => {
     wrapper.setProps({ users: {}});
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should disable single sign-on checkbox and display instructions', () => {
+    wrapper.setProps({ isAccountSingleSignOnDisabled: true });
     expect(wrapper).toMatchSnapshot();
   });
 

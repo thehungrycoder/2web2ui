@@ -1,16 +1,17 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { Page, Panel, Button } from '@sparkpost/matchbox';
-import { CheckboxWrapper } from 'src/components/reduxFormWrappers';
-import { Loading, DeleteModal } from 'src/components';
 import { updateUser, listUsers, deleteUser } from 'src/actions/users';
+import { getAccountSingleSignOnDetails } from 'src/actions/accountSingleSignOn';
+import DeleteModal from 'src/components/modals/DeleteModal';
+import { Loading } from 'src/components/loading/Loading';
+import PageLink from 'src/components/pageLink/PageLink';
+import { CheckboxWrapper } from 'src/components/reduxFormWrappers';
 import { selectUserById } from 'src/selectors/users';
-
 import RoleRadioGroup from './components/RoleRadioGroup';
-
-import _ from 'lodash';
 
 const breadcrumbAction = {
   content: 'Users',
@@ -38,6 +39,10 @@ export class EditPage extends Component {
   }
 
   componentDidMount() {
+    if (_.isEmpty(this.props.accountSingleSignOn)) {
+      this.props.getAccountSingleSignOnDetails();
+    }
+
     // only request if user visits page directly
     if (_.isEmpty(this.props.users)) {
       this.props.listUsers();
@@ -45,7 +50,15 @@ export class EditPage extends Component {
   }
 
   render() {
-    const { currentUser, handleSubmit, loadingError, submitting, user, users } = this.props;
+    const {
+      currentUser,
+      handleSubmit,
+      isAccountSingleSignOnDisabled,
+      loadingError,
+      submitting,
+      user,
+      users
+    } = this.props;
 
     if (loadingError) {
       return <Redirect to="/account/users" />;
@@ -86,9 +99,19 @@ export class EditPage extends Component {
             </Panel.Section>
             <Panel.Section>
               <Field
-                name='is_sso'
-                label='Enable single sign-on authentication for this user'
                 component={CheckboxWrapper}
+                disabled={isAccountSingleSignOnDisabled}
+                helpText={
+                  isAccountSingleSignOnDisabled && (
+                    <span>
+                      Single sign-on has not been configured for your account. Enable in your {
+                        <PageLink to="/account/settings">account's settings</PageLink>
+                      }
+                    </span>
+                  )
+                }
+                label='Enable single sign-on authentication for this user'
+                name='is_sso'
                 type="checkbox"
               />
             </Panel.Section>
@@ -113,10 +136,12 @@ const mapStateToProps = (state, props) => {
   const user = selectUserById(state, props.match.params.id);
 
   return {
-    user,
+    accountSingleSignOn: state.accountSingleSignOn,
     currentUser: state.currentUser,
-    users: state.users.entities,
+    isAccountSingleSignOnDisabled: state.accountSingleSignOn.enabled === false,
     loadingError: state.users.error,
+    user,
+    users: state.users.entities,
     initialValues: {
       access: _.get(user, 'access'),
       is_sso: _.get(user, 'is_sso')
@@ -124,9 +149,7 @@ const mapStateToProps = (state, props) => {
   };
 };
 
-const mapDispatchToProps = { updateUser, listUsers, deleteUser };
+const mapDispatchToProps = { updateUser, listUsers, deleteUser, getAccountSingleSignOnDetails };
 const formOptions = { form: 'userEditForm', enableReinitialize: true };
 
-export default
-connect(mapStateToProps, mapDispatchToProps)(reduxForm(formOptions)(EditPage)
-);
+export default connect(mapStateToProps, mapDispatchToProps)(reduxForm(formOptions)(EditPage));
