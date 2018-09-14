@@ -4,7 +4,7 @@ exports[`Page: Users Edit should error and redirect if user is not in users 1`] 
 <Connect(RedirectAndAlert)
   alert={
     Object {
-      "message": "Unknown user???",
+      "message": "Unable to find, test-user",
       "type": "error",
     }
   }

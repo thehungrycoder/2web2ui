@@ -25,7 +25,7 @@ exports[`ActionPopover Component should render with actions 1`] = `
         },
         Object {
           "content": "Delete",
-          "onClick": [Function],
+          "onClick": [MockFunction],
         },
       ]
     }

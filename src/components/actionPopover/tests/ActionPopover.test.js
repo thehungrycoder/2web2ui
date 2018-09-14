@@ -6,7 +6,7 @@ describe('ActionPopover Component', () => {
 
   const actions = [
     { content: 'Edit', to: '/some/link' },
-    { content: 'Delete', onClick: () => {} }
+    { content: 'Delete', onClick: jest.fn() }
   ];
 
   it('should render with no props', () => {

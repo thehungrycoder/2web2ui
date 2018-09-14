@@ -67,7 +67,8 @@ export class EditPage extends Component {
 
     // Error if user is not in the user list
     if (!user) {
-      return <RedirectAndAlert to="/account/users" alert={{ type: 'error', message: 'Unknown user???' }} />;
+      const username = this.props.match.params.id;
+      return <RedirectAndAlert to="/account/users" alert={{ type: 'error', message: `Unable to find, ${username}` }} />;
     }
 
     const secondaryActions = [];
