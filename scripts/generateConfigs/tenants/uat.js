@@ -20,7 +20,7 @@
  */
 const uatTenants = {
   mtaspc: {
-    apiBase: '//api-mtaspc.tst.sparkpost.com/api/v1',
+    apiBase: 'https://api-mtaspc.tst.sparkpost.com/api/v1',
     featureFlags: {
       allow_anyone_at_verification: true,
       allow_default_signing_domains_for_ip_pools: true,
@@ -41,7 +41,7 @@ const uatTenants = {
     }
   },
   speuat: {
-    apiBase: '//api-speuat.tst.sparkpost.com/api/v1',
+    apiBase: 'https://api-speuat.tst.sparkpost.com/api/v1',
     host: 'app-speuat.tst.sparkpost.com',
     smtpAuth: {
       host: 'speuat.smtp.tst.sparkpost.com'
@@ -51,7 +51,7 @@ const uatTenants = {
     }
   },
   uat: {
-    apiBase: '//api-uat.tst.sparkpost.com/api/v1',
+    apiBase: 'https://api-uat.tst.sparkpost.com/api/v1',
     bounceDomains: {
       cnameValue: 'uat-public.mail.e.sparkpost.com',
     },
@@ -78,7 +78,7 @@ const uatTenants = {
     }
   },
   uat2: {
-    apiBase: '//api-uat2.tst.sparkpost.com/api/v1',
+    apiBase: 'https://api-uat2.tst.sparkpost.com/api/v1',
     bounceDomains: {
       cnameValue: 'uat2public.mail.e.sparkpost.com'
     },
@@ -95,7 +95,7 @@ const uatTenants = {
     }
   },
   uat3: {
-    apiBase: '//api-uat3.tst.sparkpost.com/api/v1',
+    apiBase: 'https://api-uat3.tst.sparkpost.com/api/v1',
     featureFlags: {
       allow_anyone_at_verification: true
     },
@@ -108,7 +108,7 @@ const uatTenants = {
     }
   },
   uat4: {
-    apiBase: '//api-uat4.tst.sparkpost.com/api/v1',
+    apiBase: 'https://api-uat4.tst.sparkpost.com/api/v1',
     featureFlags: {
       allow_anyone_at_verification: true
     },
