@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`IP Pool Selector: should render 1`] = `
+<div>
+  <ActionSelect
+    error={null}
+    history={Object {}}
+    ipPools={
+      Array [
+        Object {
+          "customer_provided": false,
+          "id": "default",
+          "ips": Array [],
+          "name": "Default",
+        },
+        Object {
+          "customer_provided": false,
+          "id": "pool_1",
+          "ips": Array [],
+          "name": "pool_1",
+        },
+      ]
+    }
+    listPools={
+      [MockFunction] {
+        "calls": Array [
+          Array [],
+        ],
+        "results": undefined,
+      }
+    }
+    loading={false}
+    showPurchaseCTA={true}
+  />
+</div>
+`;

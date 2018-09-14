@@ -69,15 +69,11 @@ export class AddIps extends Component {
     this.props.onClose();
   }
 
-  renderFreeIpNotice () {
-    if (this.props.currentPlan.isAwsAccount) {
-      return <strong>Your plan includes one free dedicated IP address.</strong>;
-    }
-
-    return <span><strong>Your plan includes one free dedicated IP address.</strong> If claimed, your account statement will show a charge with a matching refund.</span>;
+  renderFreeIpNotice() {
+    return <span><strong>Your plan includes one free dedicated IP address.</strong></span>;
   }
 
-  render () {
+  render() {
     const { currentPlan, error, handleSubmit, onClose, submitting } = this.props;
     const { maxPerAccount } = config.sendingIps;
     const remainingCount = maxPerAccount - Math.min(this.props.sendingIps.length, maxPerAccount);

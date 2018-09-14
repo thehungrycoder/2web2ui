@@ -10,12 +10,31 @@ function noop() {}
 
 export default function DedicatedIpSummarySection({ count = 0, plan = {}, onClick = noop, isAWSAccount }) {
   const hasReachedMax = count >= config.sendingIps.maxPerAccount;
-  const ipCtaContent = (count === 0 && plan.includesIp) ? 'Claim Your Free Dedicated IP' : 'Add Dedicated IPs';
+  const disabledPurchaseIP = hasReachedMax || plan.isFree;
 
   // There are some paid accounts that do not allow dedicated IPs
-  const action = plan.canPurchaseIps
-    ? { content: ipCtaContent, disabled: hasReachedMax, onClick, color: 'orange' }
-    : { content: 'Upgrade Now', to: '/account/billing/plan', Component: Link, color: 'orange' };
+  const addOrUpgradeAction = plan.canPurchaseIps
+    ? {
+      content: 'Add Dedicated IPs',
+      disabled: disabledPurchaseIP ,
+      onClick,
+      color: 'orange'
+    }
+    : {
+      content: 'Upgrade Now',
+      to: '/account/billing/plan',
+      Component: Link,
+      color: 'orange'
+    };
+
+  const manageIpAction = {
+    content: 'Manage Your IPs',
+    to: '/account/ip-pools',
+    disabled: count <= 0,
+    Component: Link,
+    onClick,
+    color: 'orange'
+  };
 
   // Decrement count if plan includes one free IP
   const billableCount = count > 0 && plan.includesIp ? count - 1 : count;
@@ -25,7 +44,7 @@ export default function DedicatedIpSummarySection({ count = 0, plan = {}, onClic
     : <h6>{count} for <DedicatedIpCost quantity={billableCount} isAWSAccount={isAWSAccount}/></h6>;
 
   return (
-    <Panel.Section actions={[action]}>
+    <Panel.Section actions={[manageIpAction, addOrUpgradeAction]}>
       <LabelledValue label='Dedicated IPs'>
         {summary}
         {hasReachedMax && <p>You have reached the maximum allowed.</p>}

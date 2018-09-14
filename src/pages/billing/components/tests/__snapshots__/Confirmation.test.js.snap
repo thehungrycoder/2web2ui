@@ -273,25 +273,6 @@ exports[`Confirmation:  should render correctly with an upgrade 1`] = `
     <p>
       Your upgrade will be effective today and you'll be billed a pro-rated amount for your current billing cycle.
     </p>
-    <div>
-      <p>
-        Note: your current plan includes a free dedicated IP address.
-      </p>
-      <p>
-        If you downgrade to the selected plan, you will lose that discount and will be charged the standard $
-        20
-         / month price for each dedicated IP on your next statement.
-      </p>
-      <p>
-        To remove dedicated IPs from your account, please 
-        <Connect(SupportTicketLink)
-          issueId="general_issue"
-        >
-          submit a support ticket
-        </Connect(SupportTicketLink)>
-        .
-      </p>
-    </div>
   </Panel.Section>
   <Panel.Section>
     <Button
