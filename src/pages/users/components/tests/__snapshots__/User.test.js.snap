@@ -1,13 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Component: User renders name & email 1`] = `
+exports[`Component: User renders name & email & username link 1`] = `
 <React.Fragment>
   <p
     className="Name"
   >
-    <strong>
-      foo bar
-    </strong>
+    <PageLink
+      to="/account/users/edit/foo-bar"
+    >
+      <strong>
+        foo bar
+      </strong>
+    </PageLink>
   </p>
   <p
     className="Email"

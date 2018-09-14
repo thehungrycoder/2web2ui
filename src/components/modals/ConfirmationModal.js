@@ -8,6 +8,7 @@ import { Loading } from 'src/components/loading/Loading';
 export default class ConfirmationModal extends Component {
 
   static propTypes = {
+    confirming: PropTypes.bool,
     open: PropTypes.bool,
     title: PropTypes.string,
     content: PropTypes.node,
@@ -17,11 +18,19 @@ export default class ConfirmationModal extends Component {
   };
 
   renderContent() {
-    const { children = null, content = children, onConfirm, onCancel, confirmVerb = 'Confirm' } = this.props;
+    const {
+      children = null,
+      confirming,
+      content = children,
+      onConfirm,
+      onCancel,
+      confirmVerb = 'Confirm'
+    } = this.props;
+
     return (
       <div>
         {content}
-        <Button onClick={onConfirm} primary className={styles.Confirm}>
+        <Button onClick={onConfirm} primary className={styles.Confirm} disabled={confirming}>
           {confirmVerb}
         </Button>
         <Button onClick={onCancel} className={styles.Cancel}>Cancel</Button>

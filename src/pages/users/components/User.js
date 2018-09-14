@@ -1,10 +1,15 @@
 import React, { Fragment } from 'react';
 import styles from './User.module.scss';
+import { PageLink } from 'src/components';
 
-const User = ({ name, email }) => (
+const User = ({ email, name, username }) => (
   <Fragment>
     <p className={styles.Name}>
-      <strong>{name}</strong>
+      <PageLink
+        to={`/account/users/edit/${username}`}
+      >
+        <strong>{name}</strong>
+      </PageLink>
     </p>
     <p className={styles.Email}>
       <em>{email}</em>

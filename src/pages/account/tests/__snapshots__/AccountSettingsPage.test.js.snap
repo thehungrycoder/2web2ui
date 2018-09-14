@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AccountSettingsPage renders 1`] = `
+<Page
+  empty={Object {}}
+  title="Account Settings"
+>
+  <Panel
+    sectioned={true}
+  >
+    <LabelledValue
+      label="Account ID"
+    >
+      123123
+    </LabelledValue>
+  </Panel>
+  <Connect(SingleSignOnPanel) />
+  <Connect(CancellationPanel) />
+</Page>
+`;

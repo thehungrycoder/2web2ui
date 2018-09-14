@@ -4,6 +4,7 @@ import { reducer as form } from 'redux-form';
 import acceptedReport from './acceptedReport';
 import accessControlReady from './accessControlReady';
 import account from './account';
+import accountSingleSignOn from './accountSingleSignOn';
 import abTesting from './abTesting';
 import apiKeys from './api-keys';
 import auth from './auth';
@@ -40,6 +41,7 @@ const appReducer = combineReducers({
   acceptedReport,
   accessControlReady,
   account,
+  accountSingleSignOn,
   auth,
   billing,
   bounceReport,

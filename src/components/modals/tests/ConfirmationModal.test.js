@@ -56,4 +56,15 @@ describe('Component: ConfirmationModal', () => {
     expect(onCancelMock).not.toHaveBeenCalled();
   });
 
+  it('should disable confirmation button', () => {
+    const wrapper = shallow(
+      <ConfirmationModal
+        confirming={true}
+        onCancel={onCancelMock}
+        onConfirm={onConfirmMock}
+      />
+    );
+
+    expect(wrapper).toMatchSnapshot();
+  });
 });
