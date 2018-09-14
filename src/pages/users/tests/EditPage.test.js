@@ -66,11 +66,6 @@ describe('Page: Users Edit', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should error and redirect if user is not in users', () => {
-    wrapper.setProps({ user: undefined });
-    expect(wrapper).toMatchSnapshot();
-  });
-
   it('should show a delete modal', () => {
     instance.toggleDelete();
     wrapper.update();
@@ -87,8 +82,8 @@ describe('Page: Users Edit', () => {
     expect(props.deleteUser).toHaveBeenCalledWith('test-user');
   });
 
-  it('should redirect after delete', () => {
+  it('should redirect after delete or if user does not exist', () => {
     wrapper.setProps({ user: undefined });
-    expect(props.history.push).toHaveBeenCalledWith('/account/users');
+    expect(wrapper).toMatchSnapshot();
   });
 });

@@ -7,7 +7,6 @@ import { CheckboxWrapper } from 'src/components/reduxFormWrappers';
 import { Loading, DeleteModal } from 'src/components';
 import { updateUser, listUsers, deleteUser } from 'src/actions/users';
 import { selectUserById } from 'src/selectors/users';
-import RedirectAndAlert from 'src/components/globalAlert/RedirectAndAlert';
 
 import RoleRadioGroup from './components/RoleRadioGroup';
 
@@ -40,16 +39,8 @@ export class EditPage extends Component {
 
   componentDidMount() {
     // only request if user visits page directly
-    // note, this is needed for the delete redirect to work correctly
     if (_.isEmpty(this.props.users)) {
       this.props.listUsers();
-    }
-  }
-
-  componentDidUpdate(prevProps) {
-    // redirect when user was deleted
-    if (!_.isEmpty(prevProps.user) && _.isEmpty(this.props.user)) {
-      this.props.history.push('/account/users');
     }
   }
 
@@ -65,9 +56,8 @@ export class EditPage extends Component {
       return <Loading />;
     }
 
-    // Error if user is not in the user list
     if (!user) {
-      return <RedirectAndAlert to="/account/users" alert={{ type: 'error', message: 'Unknown user???' }} />;
+      return <Redirect to="/account/users" />;
     }
 
     const secondaryActions = [];
