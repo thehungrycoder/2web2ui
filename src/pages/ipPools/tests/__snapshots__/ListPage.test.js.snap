@@ -60,6 +60,66 @@ exports[`IP Pools List Page does not render purchase action if showPurchaseCTA i
 </Page>
 `;
 
+exports[`IP Pools List Page does not render purchase action if showPurchaseCTA is false2 1`] = `
+<Page
+  empty={Object {}}
+  primaryAction={
+    Object {
+      "Component": [Function],
+      "content": "Create IP Pool",
+      "to": "/account/ip-pools/create",
+    }
+  }
+  secondaryActions={null}
+  title="IP Pools"
+>
+  <Component />
+  <TableCollection
+    columns={
+      Array [
+        Object {
+          "label": "Name",
+          "sortKey": "name",
+        },
+        Object {
+          "label": "ID",
+          "sortKey": "id",
+        },
+        Object {
+          "label": "Number of IPs Assigned",
+          "sortKey": [Function],
+        },
+      ]
+    }
+    defaultSortColumn={null}
+    defaultSortDirection="asc"
+    filterBox={
+      Object {
+        "exampleModifiers": Array [
+          "name",
+          "id",
+        ],
+        "itemToStringKeys": Array [
+          "name",
+          "id",
+        ],
+        "show": true,
+      }
+    }
+    getRowData={[Function]}
+    pagination={true}
+    rows={
+      Array [
+        Object {
+          "ips": Array [],
+          "name": "Default",
+        },
+      ]
+    }
+  />
+</Page>
+`;
+
 exports[`IP Pools List Page should render loading component when loading data 1`] = `<Loading />`;
 
 exports[`IP Pools List Page should render row properly 1`] = `
@@ -73,6 +133,35 @@ Array [
   "my-pool",
   "3",
 ]
+`;
+
+exports[`IP Pools List Page should render the IP warm-up banner correctly 1`] = `
+<Banner
+  status="warning"
+  title="New dedicated IP addresses need to be warmed up"
+>
+  <div>
+    <p>
+      In order to establish a positive spending reputation, warm up new dedicated IP addresses by gradually sending more emails.
+    </p>
+    <Button
+      external={true}
+      outline={true}
+      size="default"
+      to="https://support.sparkpost.com/customer/portal/articles/1972209-ip-warm-up-overview"
+    >
+      Read our IP Warm-up Overview
+      <OpenInNew
+        size={15}
+        style={
+          Object {
+            "marginLeft": 10,
+          }
+        }
+      />
+    </Button>
+  </div>
+</Banner>
 `;
 
 exports[`IP Pools List Page should render the list page correctly 1`] = `

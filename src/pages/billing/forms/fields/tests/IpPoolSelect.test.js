@@ -3,6 +3,8 @@ import { IpPoolSelect } from '../IpPoolSelect';
 import { shallow } from 'enzyme';
 
 describe('IP Pool Selector:', () => {
+  let wrapper;
+
   const props = {
     'disabled': false,
     'formName': 'add-sending-ips',
@@ -41,22 +43,23 @@ describe('IP Pool Selector:', () => {
     listPools: jest.fn()
   };
 
+  beforeEach(() => {
+    wrapper = shallow(<IpPoolSelect {...props} />);
+  });
+
   it('should render', () => {
-    const wrapper = shallow(<IpPoolSelect {...props} />);
     expect(wrapper).toMatchSnapshot();
     wrapper.instance().componentDidMount();
     expect(props.listPools).toHaveBeenCalled();
   });
 
   it('should render when disabled', () => {
-    const wrapper = shallow(<IpPoolSelect {...props} />);
     wrapper.setProps({ disabled: true });
     wrapper.update();
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should properly update when moving between new and existing IP', () => {
-    const wrapper = shallow(<IpPoolSelect {...props} />);
     expect(wrapper.find('NewIpPoolField')).toHaveLength(1);
     expect(wrapper.find('ExistingIpPoolField')).toHaveLength(0);
     expect(wrapper).toMatchSnapshot();
