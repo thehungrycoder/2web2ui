@@ -32,7 +32,6 @@ export default function DedicatedIpSummarySection({ count = 0, plan = {}, onClic
     to: '/account/ip-pools',
     disabled: count <= 0,
     Component: Link,
-    onClick,
     color: 'orange'
   };
 

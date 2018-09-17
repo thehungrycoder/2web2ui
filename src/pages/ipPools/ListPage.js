@@ -86,7 +86,7 @@ export const IPWarmupReminderBanner = () =>
         <p>
           In order to establish a positive spending reputation, warm up new dedicated IP addresses by gradually sending more emails.
         </p>
-        <Button outline={true} to={LINKS.IP_WARM_UP} external>{'Read our IP Warm-up Overview'}<OpenInNew size={15} /></Button>
+        <Button outline={true} to={LINKS.IP_WARM_UP} external>{'Read our IP Warm-up Overview'}<OpenInNew size={15} style={{ marginLeft: 10 }} /></Button>
       </div>
     </Banner>
   );

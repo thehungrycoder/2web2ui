@@ -9,7 +9,6 @@ exports[`DedicatedIpSummarySection renders count and cost for aws customers 1`] 
         "color": "orange",
         "content": "Manage Your IPs",
         "disabled": false,
-        "onClick": [Function],
         "to": "/account/ip-pools",
       },
       Object {
@@ -45,7 +44,6 @@ exports[`DedicatedIpSummarySection renders count and cost for aws customers with
         "color": "orange",
         "content": "Manage Your IPs",
         "disabled": false,
-        "onClick": [Function],
         "to": "/account/ip-pools",
       },
       Object {
@@ -81,7 +79,6 @@ exports[`DedicatedIpSummarySection renders count and zero cost 1`] = `
         "color": "orange",
         "content": "Manage Your IPs",
         "disabled": false,
-        "onClick": [Function],
         "to": "/account/ip-pools",
       },
       Object {
@@ -117,7 +114,6 @@ exports[`DedicatedIpSummarySection renders disabled add button, count, cost, and
         "color": "orange",
         "content": "Manage Your IPs",
         "disabled": false,
-        "onClick": [Function],
         "to": "/account/ip-pools",
       },
       Object {
@@ -156,7 +152,6 @@ exports[`DedicatedIpSummarySection renders upgrade button and zero count 1`] = `
         "color": "orange",
         "content": "Manage Your IPs",
         "disabled": true,
-        "onClick": [Function],
         "to": "/account/ip-pools",
       },
       Object {
@@ -187,7 +182,6 @@ exports[`DedicatedIpSummarySection renders zero count and first is free notice 1
         "color": "orange",
         "content": "Manage Your IPs",
         "disabled": true,
-        "onClick": [Function],
         "to": "/account/ip-pools",
       },
       Object {

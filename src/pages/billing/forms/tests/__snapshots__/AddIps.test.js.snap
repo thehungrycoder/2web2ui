@@ -171,7 +171,7 @@ exports[`AddIps renders free ip elements when included in plan 1`] = `
         Dedicated IPs give you better control over your sending reputation. 
         <span>
           <strong>
-            Your plan includes one free dedicated IP address.
+            Your plan includes one free dedicated IP address. 
           </strong>
         </span>
       </p>
