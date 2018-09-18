@@ -69,15 +69,7 @@ export class AddIps extends Component {
     this.props.onClose();
   }
 
-  renderFreeIpNotice () {
-    if (this.props.currentPlan.isAwsAccount) {
-      return <strong>Your plan includes one free dedicated IP address.</strong>;
-    }
-
-    return <span><strong>Your plan includes one free dedicated IP address.</strong> If claimed, your account statement will show a charge with a matching refund.</span>;
-  }
-
-  render () {
+  render() {
     const { currentPlan, error, handleSubmit, onClose, submitting } = this.props;
     const { maxPerAccount } = config.sendingIps;
     const remainingCount = maxPerAccount - Math.min(this.props.sendingIps.length, maxPerAccount);
@@ -91,8 +83,8 @@ export class AddIps extends Component {
       <form onSubmit={handleSubmit(this.onSubmit)} noValidate>
         <Panel title='Add Dedicated IPs' actions={[action]}>
           <Panel.Section>
-            <p>
-              Dedicated IPs give you better control over your sending reputation. {currentPlan.includesIp && this.renderFreeIpNotice()}
+            <p>{'Dedicated IPs give you better control over your sending reputation. '}
+              {currentPlan.includesIp && <span><strong>{'Your plan includes one free dedicated IP address. '}</strong></span>}
             </p>
 
             <Field

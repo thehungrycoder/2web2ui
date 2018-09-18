@@ -1,0 +1,389 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`IP Pool Selector: should properly update when moving between new and existing IP 1`] = `
+<div>
+  <ActionSelect
+    action="new"
+    disabled={false}
+    formName="add-sending-ips"
+    ipPools={
+      Array [
+        Object {
+          "customer_provided": false,
+          "id": "default",
+          "ips": Array [],
+          "name": "Default",
+        },
+        Object {
+          "customer_provided": false,
+          "id": "my_pool",
+          "ips": Array [
+            Object {
+              "external_ip": "192.168.0.1",
+              "hostname": "a.hostname.net",
+            },
+          ],
+          "name": "my pool",
+        },
+        Object {
+          "customer_provided": false,
+          "id": "some_pool",
+          "ips": Array [
+            Object {
+              "external_ip": "192.168.0.2",
+              "hostname": "a.hostname.com",
+            },
+          ],
+          "name": "Some Pool",
+        },
+      ]
+    }
+    listPools={
+      [MockFunction] {
+        "calls": Array [
+          Array [],
+        ],
+        "results": undefined,
+      }
+    }
+    loading={false}
+  />
+  <NewIpPoolField
+    action="new"
+    disabled={false}
+    formName="add-sending-ips"
+    ipPools={
+      Array [
+        Object {
+          "customer_provided": false,
+          "id": "default",
+          "ips": Array [],
+          "name": "Default",
+        },
+        Object {
+          "customer_provided": false,
+          "id": "my_pool",
+          "ips": Array [
+            Object {
+              "external_ip": "192.168.0.1",
+              "hostname": "a.hostname.net",
+            },
+          ],
+          "name": "my pool",
+        },
+        Object {
+          "customer_provided": false,
+          "id": "some_pool",
+          "ips": Array [
+            Object {
+              "external_ip": "192.168.0.2",
+              "hostname": "a.hostname.com",
+            },
+          ],
+          "name": "Some Pool",
+        },
+      ]
+    }
+    listPools={
+      [MockFunction] {
+        "calls": Array [
+          Array [],
+        ],
+        "results": undefined,
+      }
+    }
+    loading={false}
+  />
+</div>
+`;
+
+exports[`IP Pool Selector: should properly update when moving between new and existing IP 2`] = `
+<div>
+  <ActionSelect
+    action="existing"
+    disabled={false}
+    formName="add-sending-ips"
+    ipPools={
+      Array [
+        Object {
+          "customer_provided": false,
+          "id": "default",
+          "ips": Array [],
+          "name": "Default",
+        },
+        Object {
+          "customer_provided": false,
+          "id": "my_pool",
+          "ips": Array [
+            Object {
+              "external_ip": "192.168.0.1",
+              "hostname": "a.hostname.net",
+            },
+          ],
+          "name": "my pool",
+        },
+        Object {
+          "customer_provided": false,
+          "id": "some_pool",
+          "ips": Array [
+            Object {
+              "external_ip": "192.168.0.2",
+              "hostname": "a.hostname.com",
+            },
+          ],
+          "name": "Some Pool",
+        },
+      ]
+    }
+    listPools={
+      [MockFunction] {
+        "calls": Array [
+          Array [],
+        ],
+        "results": undefined,
+      }
+    }
+    loading={false}
+  />
+  <ExistingIpPoolField
+    action="existing"
+    disabled={false}
+    formName="add-sending-ips"
+    ipPools={
+      Array [
+        Object {
+          "customer_provided": false,
+          "id": "default",
+          "ips": Array [],
+          "name": "Default",
+        },
+        Object {
+          "customer_provided": false,
+          "id": "my_pool",
+          "ips": Array [
+            Object {
+              "external_ip": "192.168.0.1",
+              "hostname": "a.hostname.net",
+            },
+          ],
+          "name": "my pool",
+        },
+        Object {
+          "customer_provided": false,
+          "id": "some_pool",
+          "ips": Array [
+            Object {
+              "external_ip": "192.168.0.2",
+              "hostname": "a.hostname.com",
+            },
+          ],
+          "name": "Some Pool",
+        },
+      ]
+    }
+    listPools={
+      [MockFunction] {
+        "calls": Array [
+          Array [],
+        ],
+        "results": undefined,
+      }
+    }
+    loading={false}
+  />
+</div>
+`;
+
+exports[`IP Pool Selector: should render 1`] = `
+<div>
+  <ActionSelect
+    action="new"
+    disabled={false}
+    formName="add-sending-ips"
+    ipPools={
+      Array [
+        Object {
+          "customer_provided": false,
+          "id": "default",
+          "ips": Array [],
+          "name": "Default",
+        },
+        Object {
+          "customer_provided": false,
+          "id": "my_pool",
+          "ips": Array [
+            Object {
+              "external_ip": "192.168.0.1",
+              "hostname": "a.hostname.net",
+            },
+          ],
+          "name": "my pool",
+        },
+        Object {
+          "customer_provided": false,
+          "id": "some_pool",
+          "ips": Array [
+            Object {
+              "external_ip": "192.168.0.2",
+              "hostname": "a.hostname.com",
+            },
+          ],
+          "name": "Some Pool",
+        },
+      ]
+    }
+    listPools={
+      [MockFunction] {
+        "calls": Array [
+          Array [],
+        ],
+        "results": undefined,
+      }
+    }
+    loading={false}
+  />
+  <NewIpPoolField
+    action="new"
+    disabled={false}
+    formName="add-sending-ips"
+    ipPools={
+      Array [
+        Object {
+          "customer_provided": false,
+          "id": "default",
+          "ips": Array [],
+          "name": "Default",
+        },
+        Object {
+          "customer_provided": false,
+          "id": "my_pool",
+          "ips": Array [
+            Object {
+              "external_ip": "192.168.0.1",
+              "hostname": "a.hostname.net",
+            },
+          ],
+          "name": "my pool",
+        },
+        Object {
+          "customer_provided": false,
+          "id": "some_pool",
+          "ips": Array [
+            Object {
+              "external_ip": "192.168.0.2",
+              "hostname": "a.hostname.com",
+            },
+          ],
+          "name": "Some Pool",
+        },
+      ]
+    }
+    listPools={
+      [MockFunction] {
+        "calls": Array [
+          Array [],
+        ],
+        "results": undefined,
+      }
+    }
+    loading={false}
+  />
+</div>
+`;
+
+exports[`IP Pool Selector: should render when disabled 1`] = `
+<div>
+  <ActionSelect
+    action="new"
+    disabled={true}
+    formName="add-sending-ips"
+    ipPools={
+      Array [
+        Object {
+          "customer_provided": false,
+          "id": "default",
+          "ips": Array [],
+          "name": "Default",
+        },
+        Object {
+          "customer_provided": false,
+          "id": "my_pool",
+          "ips": Array [
+            Object {
+              "external_ip": "192.168.0.1",
+              "hostname": "a.hostname.net",
+            },
+          ],
+          "name": "my pool",
+        },
+        Object {
+          "customer_provided": false,
+          "id": "some_pool",
+          "ips": Array [
+            Object {
+              "external_ip": "192.168.0.2",
+              "hostname": "a.hostname.com",
+            },
+          ],
+          "name": "Some Pool",
+        },
+      ]
+    }
+    listPools={
+      [MockFunction] {
+        "calls": Array [
+          Array [],
+        ],
+        "results": undefined,
+      }
+    }
+    loading={false}
+  />
+  <NewIpPoolField
+    action="new"
+    disabled={true}
+    formName="add-sending-ips"
+    ipPools={
+      Array [
+        Object {
+          "customer_provided": false,
+          "id": "default",
+          "ips": Array [],
+          "name": "Default",
+        },
+        Object {
+          "customer_provided": false,
+          "id": "my_pool",
+          "ips": Array [
+            Object {
+              "external_ip": "192.168.0.1",
+              "hostname": "a.hostname.net",
+            },
+          ],
+          "name": "my pool",
+        },
+        Object {
+          "customer_provided": false,
+          "id": "some_pool",
+          "ips": Array [
+            Object {
+              "external_ip": "192.168.0.2",
+              "hostname": "a.hostname.com",
+            },
+          ],
+          "name": "Some Pool",
+        },
+      ]
+    }
+    listPools={
+      [MockFunction] {
+        "calls": Array [
+          Array [],
+        ],
+        "results": undefined,
+      }
+    }
+    loading={false}
+  />
+</div>
+`;
