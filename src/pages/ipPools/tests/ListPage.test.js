@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import { IpPoolsList, getRowData } from '../ListPage';
+import { IpPoolsList, getRowData, IPWarmupReminderBanner } from '../ListPage';
 
 describe('IP Pools List Page', () => {
   let props;
@@ -49,4 +49,14 @@ describe('IP Pools List Page', () => {
     wrapper.setProps({ ipPools: [{ name: 'Default', ips: []}], showPurchaseCTA: false });
     expect(wrapper).toMatchSnapshot();
   });
+
+  it('does not render purchase action if showPurchaseCTA is false2', () => {
+    wrapper.setProps({ ipPools: [{ name: 'Default', ips: []}], showPurchaseCTA: false });
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render the IP warm-up banner correctly', () => {
+    expect(shallow(<IPWarmupReminderBanner />)).toMatchSnapshot();
+  });
+
 });

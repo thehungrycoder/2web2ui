@@ -56,7 +56,7 @@ export class Confirmation extends React.Component {
           cycle.</p>;
       }
 
-      if (current.includesIp && !selected.includesIp && !selected.isFree) {
+      if (isDowngrade && current.includesIp && !selected.includesIp && !selected.isFree) {
         ipMarkup = (
           <div>
             <p>Note: your current plan includes a free dedicated IP address.</p>
@@ -69,6 +69,12 @@ export class Confirmation extends React.Component {
                 </SupportTicketLink>
               }.
             </p>
+          </div>
+        );
+      } else if (!isDowngrade && selected.includesIp && !current.includesIP) {
+        ipMarkup = (
+          <div>
+            <p>{'A free dedicated IP address will be added to your default IP pool.'}</p>
           </div>
         );
       }

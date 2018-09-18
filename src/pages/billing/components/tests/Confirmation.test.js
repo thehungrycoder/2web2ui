@@ -18,6 +18,13 @@ describe('Confirmation: ', () => {
     code: 'twohundred'
   };
 
+  const upgradeWithIP = {
+    monthly: 200,
+    volume: 2000,
+    code: 'twohundred',
+    includesIp: true
+  };
+
   const downgrade = {
     monthly: 50,
     volume: 500,
@@ -63,6 +70,11 @@ describe('Confirmation: ', () => {
 
   it('should render correctly with a downgrade to free', () => {
     wrapper.setProps({ selected: free, billingEnabled: true });
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render correctly with a downgrade to free2', () => {
+    wrapper.setProps({ current: free, selected: upgradeWithIP, billingEnabled: true });
     expect(wrapper).toMatchSnapshot();
   });
 
