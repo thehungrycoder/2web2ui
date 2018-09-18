@@ -350,6 +350,68 @@ exports[`Confirmation:  should render correctly with an upgrade 1`] = `
 </Panel>
 `;
 
+exports[`Confirmation:  should render correctly with an upgrade with IP 1`] = `
+<Panel>
+  <Panel.Section>
+    <span>
+      <small>
+        Current Plan
+      </small>
+      <h4>
+        <PlanPrice
+          plan={
+            Object {
+              "code": "zero",
+              "isFree": true,
+              "monthly": 0,
+              "volume": 100,
+            }
+          }
+        />
+      </h4>
+    </span>
+  </Panel.Section>
+  <Panel.Section>
+    <div>
+      <small>
+        New Plan
+      </small>
+      <h5>
+        <PlanPrice
+          plan={
+            Object {
+              "code": "twohundred",
+              "includesIp": true,
+              "monthly": 200,
+              "volume": 2000,
+            }
+          }
+        />
+      </h5>
+    </div>
+    <p>
+      Your upgrade will be effective today.
+    </p>
+    <div>
+      <p>
+        A free dedicated IP address will be added to your default IP pool.
+      </p>
+    </div>
+  </Panel.Section>
+  <Panel.Section>
+    <Button
+      destructive={false}
+      fullWidth={true}
+      primary={true}
+      size="default"
+      type="submit"
+    >
+      Upgrade Plan
+    </Button>
+  </Panel.Section>
+</Panel>
+`;
+
 exports[`Confirmation:  should render with nothing selected 1`] = `
 <Panel>
   <Panel.Section>
