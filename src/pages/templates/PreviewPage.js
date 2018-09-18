@@ -2,9 +2,9 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Page, Panel, TextField } from '@sparkpost/matchbox';
-import emailAddresses from 'email-addresses';
 
 import { ApiErrorBanner, Loading } from 'src/components';
+import { parseEmailAddresses } from 'src/helpers/email';
 import PreviewPanel from './components/PreviewPanel';
 
 export default class PreviewPage extends Component {
@@ -34,7 +34,7 @@ export default class PreviewPage extends Component {
   }
 
   onSend = () => {
-    const emails = emailAddresses.parseAddressList(this.state.to);
+    const emails = parseEmailAddresses(this.state.to);
 
     if (_.trim(this.state.to) === '') {
       this.setState({ validationError: 'At least one email address is required' });
@@ -105,7 +105,7 @@ export default class PreviewPage extends Component {
           />
         )}
         <Panel sectioned>
-          { canSendEmail &&
+          {canSendEmail &&
               <TextField
                 disabled={!!loadingError}
                 error={validationError}
