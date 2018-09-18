@@ -60,14 +60,9 @@ describe('IP Pool Selector:', () => {
   });
 
   it('should properly update when moving between new and existing IP', () => {
-    expect(wrapper.find('NewIpPoolField')).toHaveLength(1);
-    expect(wrapper.find('ExistingIpPoolField')).toHaveLength(0);
     expect(wrapper).toMatchSnapshot();
-
     wrapper.setProps({ action: 'existing' });
     wrapper.update();
-    expect(wrapper.find('NewIpPoolField')).toHaveLength(0);
-    expect(wrapper.find('ExistingIpPoolField')).toHaveLength(1);
     expect(wrapper).toMatchSnapshot();
 
     wrapper.instance().componentDidMount();
