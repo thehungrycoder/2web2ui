@@ -232,7 +232,63 @@ exports[`Confirmation:  should render correctly with a downgrade to free 1`] = `
 </Panel>
 `;
 
-exports[`Confirmation:  should render correctly with a downgrade to free2 1`] = `
+exports[`Confirmation:  should render correctly with an upgrade 1`] = `
+<Panel>
+  <Panel.Section>
+    <span>
+      <small>
+        Current Plan
+      </small>
+      <h4>
+        <PlanPrice
+          plan={
+            Object {
+              "code": "onehundred",
+              "includesIp": true,
+              "monthly": 100,
+              "volume": 1000,
+            }
+          }
+        />
+      </h4>
+    </span>
+  </Panel.Section>
+  <Panel.Section>
+    <div>
+      <small>
+        New Plan
+      </small>
+      <h5>
+        <PlanPrice
+          plan={
+            Object {
+              "code": "twohundred",
+              "monthly": 200,
+              "volume": 2000,
+            }
+          }
+        />
+      </h5>
+    </div>
+    <p>
+      Your upgrade will be effective today and you'll be billed a pro-rated amount for your current billing cycle.
+    </p>
+  </Panel.Section>
+  <Panel.Section>
+    <Button
+      destructive={false}
+      fullWidth={true}
+      primary={true}
+      size="default"
+      type="submit"
+    >
+      Upgrade Plan
+    </Button>
+  </Panel.Section>
+</Panel>
+`;
+
+exports[`Confirmation:  should render correctly with an upgrade with IP 1`] = `
 <Panel>
   <Panel.Section>
     <span>
@@ -279,62 +335,6 @@ exports[`Confirmation:  should render correctly with a downgrade to free2 1`] = 
         A free dedicated IP address will be added to your default IP pool.
       </p>
     </div>
-  </Panel.Section>
-  <Panel.Section>
-    <Button
-      destructive={false}
-      fullWidth={true}
-      primary={true}
-      size="default"
-      type="submit"
-    >
-      Upgrade Plan
-    </Button>
-  </Panel.Section>
-</Panel>
-`;
-
-exports[`Confirmation:  should render correctly with an upgrade 1`] = `
-<Panel>
-  <Panel.Section>
-    <span>
-      <small>
-        Current Plan
-      </small>
-      <h4>
-        <PlanPrice
-          plan={
-            Object {
-              "code": "onehundred",
-              "includesIp": true,
-              "monthly": 100,
-              "volume": 1000,
-            }
-          }
-        />
-      </h4>
-    </span>
-  </Panel.Section>
-  <Panel.Section>
-    <div>
-      <small>
-        New Plan
-      </small>
-      <h5>
-        <PlanPrice
-          plan={
-            Object {
-              "code": "twohundred",
-              "monthly": 200,
-              "volume": 2000,
-            }
-          }
-        />
-      </h5>
-    </div>
-    <p>
-      Your upgrade will be effective today and you'll be billed a pro-rated amount for your current billing cycle.
-    </p>
   </Panel.Section>
   <Panel.Section>
     <Button

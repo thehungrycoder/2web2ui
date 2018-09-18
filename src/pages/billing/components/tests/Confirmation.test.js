@@ -73,7 +73,7 @@ describe('Confirmation: ', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should render correctly with a downgrade to free2', () => {
+  it('should render correctly with an upgrade with IP', () => {
     wrapper.setProps({ current: free, selected: upgradeWithIP, billingEnabled: true });
     expect(wrapper).toMatchSnapshot();
   });

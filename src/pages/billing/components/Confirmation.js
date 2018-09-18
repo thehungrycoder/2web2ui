@@ -71,7 +71,7 @@ export class Confirmation extends React.Component {
             </p>
           </div>
         );
-      } else if (!isDowngrade && selected.includesIp && !current.includesIP) {
+      } else if (!isDowngrade && selected.includesIp && !current.includesIp) {
         ipMarkup = (
           <div>
             <p>{'A free dedicated IP address will be added to your default IP pool.'}</p>
