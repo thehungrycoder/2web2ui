@@ -15,6 +15,10 @@ describe('Email Helper', () => {
       expect(isEmailAddress('')).toEqual(false);
     });
 
+    it('returns false when invalid email address has no domain', () => {
+      expect(isEmailAddress('marká@')).toEqual(false);
+    });
+
     it('returns false when invalid email address has no top level domain', () => {
       expect(isEmailAddress('marká@example')).toEqual(false);
     });
@@ -47,6 +51,10 @@ describe('Email Helper', () => {
       expect(parseEmailAddress('')).toBeNull();
     });
 
+    it('returns null when invalid email address has no domain', () => {
+      expect(parseEmailAddress('marká@')).toBeNull();
+    });
+
     it('returns null when invalid email address has no top level domain', () => {
       expect(parseEmailAddress('marká@example')).toBeNull();
     });
@@ -71,6 +79,10 @@ describe('Email Helper', () => {
 
     it('returns null when multiple invalid email addresses', () => {
       expect(parseEmailAddresses('exampe, test')).toBeNull();
+    });
+
+    it('returns null when invalid email address has no domain', () => {
+      expect(parseEmailAddresses('marká@')).toBeNull();
     });
 
     it('returns null when invalid email address has no top level domain', () => {

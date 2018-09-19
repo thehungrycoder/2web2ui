@@ -14,8 +14,16 @@ const parts = ({ address, domain, local, name }) => ({ address, domain, local, n
 export const isEmailAddress = (str) => Boolean(parseEmailAddress(str));
 export const isEmailLocalPart = (str) => Boolean(parseEmailAddress(`${str || ''}@example.com`));
 
+// todo, remove try/catch when v3.0.2 is released
+// see, https://github.com/jackbearheart/email-addresses/issues/39
 export const parseEmailAddress = (input) => {
-  const result = emailAddresses.parseOneAddress({ ...DEFAULT_OPTIONS, input });
+  let result;
+
+  try {
+    result = emailAddresses.parseOneAddress({ ...DEFAULT_OPTIONS, input });
+  } catch (error) {
+    return null;
+  }
 
   if (result === null) {
     return null;
@@ -24,8 +32,16 @@ export const parseEmailAddress = (input) => {
   return parts(result);
 };
 
+// todo, remove try/catch when v3.0.2 is released
+// see, https://github.com/jackbearheart/email-addresses/issues/39
 export const parseEmailAddresses = (input) => {
-  const result = emailAddresses.parseAddressList({ ...DEFAULT_OPTIONS, input });
+  let result;
+
+  try {
+    result = emailAddresses.parseAddressList({ ...DEFAULT_OPTIONS, input });
+  } catch (error) {
+    return null;
+  }
 
   if (result === null) {
     return null;
