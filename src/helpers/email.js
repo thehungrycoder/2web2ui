@@ -2,14 +2,20 @@
 // see, https://tools.ietf.org/html/rfc6532
 import emailAddresses from 'email-addresses';
 
+const DEFAULT_OPTIONS = {
+  // requires top level domain
+  // see, https://github.com/jackbearheart/email-addresses#obj--addrsopts
+  rejectTLD: true
+};
+
 // standardize the record structure
 const parts = ({ address, domain, local, name }) => ({ address, domain, local, name });
 
 export const isEmailAddress = (str) => Boolean(parseEmailAddress(str));
 export const isEmailLocalPart = (str) => Boolean(parseEmailAddress(`${str || ''}@example.com`));
 
-export const parseEmailAddress = (str) => {
-  const result = emailAddresses.parseOneAddress(str);
+export const parseEmailAddress = (input) => {
+  const result = emailAddresses.parseOneAddress({ ...DEFAULT_OPTIONS, input });
 
   if (result === null) {
     return null;
@@ -18,8 +24,8 @@ export const parseEmailAddress = (str) => {
   return parts(result);
 };
 
-export const parseEmailAddresses = (str) => {
-  const result = emailAddresses.parseAddressList(str);
+export const parseEmailAddresses = (input) => {
+  const result = emailAddresses.parseAddressList({ ...DEFAULT_OPTIONS, input });
 
   if (result === null) {
     return null;
