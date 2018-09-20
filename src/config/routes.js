@@ -545,6 +545,14 @@ const routes = [
     supportDocSearch: 'upgrade account'
   },
   {
+    path: '/account/billing/plan/change',
+    component: billing.ImmediateChangePlanPage,
+    condition: all(hasGrants('account/manage'), not(isEnterprise), not(isHeroku), not(isAzure)),
+    layout: App,
+    title: 'Billing | Plan Change In Progress',
+    supportDocSearch: 'upgrade account'
+  },
+  {
     path: '/account/ip-pools',
     component: ipPools.ListPage,
     condition: hasGrants('ip_pools/manage'),

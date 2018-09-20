@@ -188,28 +188,4 @@ describe('Form Container: Change Plan', () => {
       });
     });
   });
-
-  describe('immediate plan change tests', () => {
-    it('should handle plan change immediately', async () => {
-      props.immediatePlanChange = 'free-0817';
-      wrapper = shallow(<ChangePlanForm {...props} />);
-      await instance.handleImmediatePlanChange();
-
-      expect(props.history.replace).toHaveBeenCalledWith({
-        pathname: '/account/billing/plan',
-        search: 'pass=through'
-      });
-      expect(props.updateSubscription).toHaveBeenCalledWith({ code: 'free-0817' });
-      expect(props.history.push).toHaveBeenCalledWith('/account/billing');
-      expect(props.showAlert).toHaveBeenCalledWith({ type: 'success', message: 'Subscription Updated' });
-    });
-
-    it('should not change plan without immediatePlanChange', async () => {
-      wrapper = shallow(<ChangePlanForm {...props} />);
-      expect(props.history.replace).not.toHaveBeenCalled();
-      expect(props.updateSubscription).not.toHaveBeenCalled();
-      expect(props.history.push).not.toHaveBeenCalled();
-      expect(props.showAlert).not.toHaveBeenCalled();
-    });
-  });
 });

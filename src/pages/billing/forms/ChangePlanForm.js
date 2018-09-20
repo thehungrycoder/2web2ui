@@ -1,4 +1,4 @@
-/* eslint max-lines: ["error", 210] */
+/* eslint max-lines: ["error", 200] */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, formValueSelector } from 'redux-form';
@@ -24,7 +24,7 @@ import { selectCondition } from 'src/selectors/accessConditionState';
 import { not } from 'src/helpers/conditions';
 import * as conversions from 'src/helpers/conversionTracking';
 import AccessControl from 'src/components/auth/AccessControl';
-import { prepareCardInfo, stripImmediatePlanChange } from 'src/helpers/billing';
+import { prepareCardInfo } from 'src/helpers/billing';
 
 const FORMNAME = 'changePlan';
 
@@ -38,34 +38,6 @@ export class ChangePlanForm extends Component {
     this.props.getPlans();
     this.props.getBillingCountries();
     this.props.fetchAccount({ include: 'billing' });
-
-    if (this.props.immediatePlanChange) {
-      this.handleImmediatePlanChange();
-    }
-  }
-
-  handleImmediatePlanChange() {
-    const { immediatePlanChange, updateSubscription, history, location } = this.props;
-
-    history.replace({
-      pathname: location.pathname,
-      search: stripImmediatePlanChange(location.search)
-    });
-
-    const action = updateSubscription({ code: immediatePlanChange });
-    return this.handleBillingAction(action, immediatePlanChange);
-  }
-
-  handleBillingAction = (action, newCode) => {
-    const { history, showAlert, account, billing } = this.props;
-    const oldCode = account.subscription.code;
-
-    return action
-      .then(() => history.push('/account/billing'))
-      .then(() => {
-        conversions.trackPlanChange({ allPlans: billing.plans, oldCode, newCode });
-        return showAlert({ type: 'success', message: 'Subscription Updated' });
-      });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -80,7 +52,8 @@ export class ChangePlanForm extends Component {
   };
 
   onSubmit = (values) => {
-    const { account, updateSubscription, billingCreate, billingUpdate } = this.props;
+    const { account, billing, updateSubscription, billingCreate, billingUpdate, showAlert, history } = this.props;
+    const oldCode = account.subscription.code;
     const newCode = values.planpicker.code;
     const isDowngradeToFree = values.planpicker.isFree;
 
@@ -99,7 +72,12 @@ export class ChangePlanForm extends Component {
       action = billingCreate(newValues); // creates Zuora account
     }
 
-    return this.handleBillingAction(action, newCode);
+    return action
+      .then(() => history.push('/account/billing'))
+      .then(() => {
+        conversions.trackPlanChange({ allPlans: billing.plans, oldCode, newCode });
+        return showAlert({ type: 'success', message: 'Subscription Updated' });
+      });
   };
 
   renderCCSection = () => {
@@ -180,7 +158,8 @@ export class ChangePlanForm extends Component {
 
 const mapStateToProps = (state, props) => {
   const selector = formValueSelector(FORMNAME);
-  const { code: planCode, immediatePlanChange } = qs.parse(props.location.search);
+  const { code: planCode } = qs.parse(props.location.search);
+
   const plans = selectVisiblePlans(state);
 
   return {
@@ -193,8 +172,7 @@ const mapStateToProps = (state, props) => {
     plans,
     currentPlan: currentPlanSelector(state),
     selectedPlan: selector(state, 'planpicker') || {},
-    initialValues: changePlanInitialValues(state, { planCode }),
-    immediatePlanChange
+    initialValues: changePlanInitialValues(state, { planCode })
   };
 };
 

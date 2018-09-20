@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: ImmediateChangePlanPage should render after plan changed 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "Back to billing",
+      "to": "/account/billing",
+    }
+  }
+  empty={Object {}}
+>
+  <h1>
+    Updating Your Subscription
+  </h1>
+  <Grid
+    center="xs"
+  >
+    <Grid.Column
+      xs={6}
+      xsOffset={3}
+    >
+      <h4>
+        All done! Your subscription has been updated.
+      </h4>
+    </Grid.Column>
+    <Grid.Column
+      xs={6}
+      xsOffset={3}
+    >
+      <UnstyledLink
+        to="/account/billing"
+      >
+        Back to billing
+      </UnstyledLink>
+    </Grid.Column>
+  </Grid>
+</Page>
+`;
+
+exports[`Component: ImmediateChangePlanPage should render while changing plan 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "Back to billing",
+      "to": "/account/billing",
+    }
+  }
+  empty={Object {}}
+>
+  <h1>
+    Updating Your Subscription
+  </h1>
+  <Grid
+    center="xs"
+  >
+    <Grid.Column
+      xs={6}
+      xsOffset={3}
+    >
+      <h4>
+        Just a moment...
+      </h4>
+    </Grid.Column>
+  </Grid>
+</Page>
+`;

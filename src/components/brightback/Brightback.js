@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { precancel } from 'src/actions/brightback';
 import { selectBrightbackData } from 'src/selectors/brightback';
 import { hasUiOption } from 'src/helpers/conditions/account';
+import BrightbackPropTypes from './Brightback.propTypes';
 
 export class Brightback extends Component {
   componentDidMount() {
@@ -31,6 +32,8 @@ export class Brightback extends Component {
     return this.props.render(this.getRenderProps());
   }
 }
+
+Brightback.propTypes = BrightbackPropTypes;
 
 const mapStateToProps = (state, props) => ({
   valid: state.brightback.valid,
