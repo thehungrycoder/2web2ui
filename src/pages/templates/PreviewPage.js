@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Page, Panel, TextField } from '@sparkpost/matchbox';
 
 import { ApiErrorBanner, Loading } from 'src/components';
-import { parseEmailAddresses } from 'src/helpers/email';
+import { parseRecipientEmailAddresses } from 'src/helpers/email';
 import PreviewPanel from './components/PreviewPanel';
 
 export default class PreviewPage extends Component {
@@ -34,7 +34,7 @@ export default class PreviewPage extends Component {
   }
 
   onSend = () => {
-    const emails = parseEmailAddresses(this.state.to);
+    const emails = parseRecipientEmailAddresses(this.state.to);
 
     if (_.trim(this.state.to) === '') {
       this.setState({ validationError: 'At least one email address is required' });

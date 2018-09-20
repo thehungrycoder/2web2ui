@@ -1,8 +1,9 @@
 import {
   isEmailAddress,
   isEmailLocalPart,
-  parseEmailAddress,
-  parseEmailAddresses
+  isRecipientEmailAddress,
+  parseRecipientEmailAddress,
+  parseRecipientEmailAddresses
 } from '../email';
 
 describe('Email Helper', () => {
@@ -16,15 +17,23 @@ describe('Email Helper', () => {
     });
 
     it('returns false when invalid email address has no domain', () => {
-      expect(isEmailAddress('marká@')).toEqual(false);
+      expect(isEmailAddress('mark@')).toEqual(false);
     });
 
-    it('returns false when invalid email address has no top level domain', () => {
-      expect(isEmailAddress('marká@example')).toEqual(false);
+    it('returns false when valid email address with name', () => {
+      expect(isEmailAddress('"Mark Wahlberg" <mark@example.com>')).toEqual(false);
+    });
+
+    it('returns false when valid email address contains 8-bit characters', () => {
+      expect(isEmailAddress('marká@example.com')).toEqual(false);
     });
 
     it('returns true when valid email address', () => {
-      expect(isEmailAddress('marká@example.com')).toEqual(true);
+      expect(isEmailAddress('mark@example.com')).toEqual(true);
+    });
+
+    it('returns true when valid email address has tags', () => {
+      expect(isEmailAddress('mark+tag@example.com')).toEqual(true);
     });
   });
 
@@ -38,68 +47,98 @@ describe('Email Helper', () => {
     });
 
     it('returns true when valid email local part', () => {
-      expect(isEmailLocalPart('marká')).toEqual(true);
+      expect(isEmailLocalPart('mark')).toEqual(true);
     });
   });
 
-  describe('.parseEmailAddress', () => {
+  describe('isRecipientEmailAddress', () => {
+    it('returns false when undefined', () => {
+      expect(isRecipientEmailAddress(undefined)).toEqual(false);
+    });
+
+    it('returns false when invalid email address', () => {
+      expect(isRecipientEmailAddress('')).toEqual(false);
+    });
+
+    it('returns false when invalid email address has no domain', () => {
+      expect(isRecipientEmailAddress('mark@')).toEqual(false);
+    });
+
+    it('returns true when valid email address with name', () => {
+      expect(isRecipientEmailAddress('"Mark Wahlberg" <mark@example.com>')).toEqual(true);
+    });
+
+    it('returns true when valid email address contains 8-bit characters', () => {
+      expect(isRecipientEmailAddress('marká@example.com')).toEqual(true);
+    });
+
+    it('returns true when valid email address', () => {
+      expect(isRecipientEmailAddress('mark@example.com')).toEqual(true);
+    });
+
+    it('returns true when valid email address has tags', () => {
+      expect(isRecipientEmailAddress('mark+tag@example.com')).toEqual(true);
+    });
+  });
+
+  describe('.parseRecipientEmailAddress', () => {
     it('returns null when undefined', () => {
-      expect(parseEmailAddress(undefined)).toBeNull();
+      expect(parseRecipientEmailAddress(undefined)).toBeNull();
     });
 
     it('returns null when invalid email address string', () => {
-      expect(parseEmailAddress('')).toBeNull();
+      expect(parseRecipientEmailAddress('')).toBeNull();
     });
 
     it('returns null when invalid email address has no domain', () => {
-      expect(parseEmailAddress('marká@')).toBeNull();
+      expect(parseRecipientEmailAddress('marká@')).toBeNull();
     });
 
     it('returns null when invalid email address has no top level domain', () => {
-      expect(parseEmailAddress('marká@example')).toBeNull();
+      expect(parseRecipientEmailAddress('marká@example')).toBeNull();
     });
 
     it('returns an email address object', () => {
-      expect(parseEmailAddress('marká@example.com')).toMatchSnapshot();
+      expect(parseRecipientEmailAddress('marká@example.com')).toMatchSnapshot();
     });
 
     it('returns an email address object with name', () => {
-      expect(parseEmailAddress('"Mark Wahlberg" <marká@example.com>')).toMatchSnapshot();
+      expect(parseRecipientEmailAddress('"Mark Wahlberg" <marká@example.com>')).toMatchSnapshot();
     });
   });
 
-  describe('.parseEmailAddresses', () => {
+  describe('.parseRecipientEmailAddresses', () => {
     it('returns null when undefined', () => {
-      expect(parseEmailAddresses(undefined)).toBeNull();
+      expect(parseRecipientEmailAddresses(undefined)).toBeNull();
     });
 
     it('returns null when invalid email address', () => {
-      expect(parseEmailAddresses('')).toBeNull();
+      expect(parseRecipientEmailAddresses('')).toBeNull();
     });
 
     it('returns null when multiple invalid email addresses', () => {
-      expect(parseEmailAddresses('exampe, test')).toBeNull();
+      expect(parseRecipientEmailAddresses('exampe, test')).toBeNull();
     });
 
     it('returns null when invalid email address has no domain', () => {
-      expect(parseEmailAddresses('marká@')).toBeNull();
+      expect(parseRecipientEmailAddresses('marká@')).toBeNull();
     });
 
     it('returns null when invalid email address has no top level domain', () => {
-      expect(parseEmailAddresses('marká@example')).toBeNull();
+      expect(parseRecipientEmailAddresses('marká@example')).toBeNull();
     });
 
     it('returns an email address object', () => {
-      expect(parseEmailAddresses('marká@example.com')).toMatchSnapshot();
+      expect(parseRecipientEmailAddresses('marká@example.com')).toMatchSnapshot();
     });
 
     it('returns multiple email address objects', () => {
-      expect(parseEmailAddresses('marká@example.com,marká@example.com')).toMatchSnapshot();
+      expect(parseRecipientEmailAddresses('marká@example.com,marká@example.com')).toMatchSnapshot();
     });
 
     it('returns multiple email address objects with name', () => {
       const addresses = '"Mark Wahlberg" <marká@example.com>, marká@example.com';
-      expect(parseEmailAddresses(addresses)).toMatchSnapshot();
+      expect(parseRecipientEmailAddresses(addresses)).toMatchSnapshot();
     });
   });
 });

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Email Helper .parseEmailAddress returns an email address object 1`] = `
+exports[`Email Helper .parseRecipientEmailAddress returns an email address object 1`] = `
 Object {
   "address": "marká@example.com",
   "domain": "example.com",
@@ -9,7 +9,7 @@ Object {
 }
 `;
 
-exports[`Email Helper .parseEmailAddress returns an email address object with name 1`] = `
+exports[`Email Helper .parseRecipientEmailAddress returns an email address object with name 1`] = `
 Object {
   "address": "marká@example.com",
   "domain": "example.com",
@@ -18,7 +18,7 @@ Object {
 }
 `;
 
-exports[`Email Helper .parseEmailAddresses returns an email address object 1`] = `
+exports[`Email Helper .parseRecipientEmailAddresses returns an email address object 1`] = `
 Array [
   Object {
     "address": "marká@example.com",
@@ -29,7 +29,7 @@ Array [
 ]
 `;
 
-exports[`Email Helper .parseEmailAddresses returns multiple email address objects 1`] = `
+exports[`Email Helper .parseRecipientEmailAddresses returns multiple email address objects 1`] = `
 Array [
   Object {
     "address": "marká@example.com",
@@ -46,7 +46,7 @@ Array [
 ]
 `;
 
-exports[`Email Helper .parseEmailAddresses returns multiple email address objects with name 1`] = `
+exports[`Email Helper .parseRecipientEmailAddresses returns multiple email address objects with name 1`] = `
 Array [
   Object {
     "address": "marká@example.com",

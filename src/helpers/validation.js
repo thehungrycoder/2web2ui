@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { formatBytes } from 'src/helpers/units';
 import { getDuration, isStartTimeAfterNow } from 'src/helpers/date';
-import { isEmailAddress, isEmailLocalPart } from 'src/helpers/email';
+import { isEmailAddress, isEmailLocalPart, isRecipientEmailAddress } from 'src/helpers/email';
 import { domainRegex, abTestIdRegex } from './regex';
 import isURL from 'validator/lib/isURL';
 import Payment from 'payment';
@@ -16,6 +16,10 @@ export function email(value) {
 
 export function emailLocal(value) {
   return isEmailLocalPart(value) ? undefined : 'Invalid Email';
+}
+
+export function recipientEmail(value) {
+  return isRecipientEmailAddress(value) ? undefined : 'Invalid Email';
 }
 
 export function domain(value) {
