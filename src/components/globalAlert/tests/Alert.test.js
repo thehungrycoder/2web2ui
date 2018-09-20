@@ -26,6 +26,11 @@ describe('Alert', () => {
     expect(wrapper.find('a')).toHaveLength(1);
   });
 
+  it('should render without an action or details', () => {
+    wrapper.setProps({ details: null });
+    expect(wrapper).toMatchSnapshot();
+  });
+
   it('should render a provided action', () => {
     wrapper.setProps({
       details: null,

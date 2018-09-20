@@ -59,3 +59,19 @@ exports[`Alert should render with all props 1`] = `
   </div>
 </Snackbar>
 `;
+
+exports[`Alert should render without an action or details 1`] = `
+<Snackbar
+  maxWidth={380}
+  onDismiss={[Function]}
+  status="error"
+>
+  <div>
+    <div>
+      message
+       
+      <span />
+    </div>
+  </div>
+</Snackbar>
+`;
