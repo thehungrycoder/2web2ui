@@ -52,17 +52,18 @@ class Alert extends Component {
   }
 
   renderMessage() {
-    const { message, details, action = {}} = this.props;
-    const { content: actionContent, ...actionProps } = action;
+    const { message, details, action } = this.props;
     const { showDetails } = this.state;
+    let actionMarkup = null;
 
     const detailsLink = details && !showDetails
       ? <a className={styles.Details} onClick={this.handleDetails}>View Details</a>
       : null;
 
-    const actionMarkup = action
-      ? <a className={styles.Details} {...actionProps} >{actionContent}</a>
-      : null;
+    if (action) {
+      const { content: actionContent, ...actionProps } = action;
+      actionMarkup = <a className={styles.Details} {...actionProps} >{actionContent}</a>;
+    }
 
     const markup = showDetails
       ? <div>{details}</div>
