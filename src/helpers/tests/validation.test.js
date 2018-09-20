@@ -23,6 +23,10 @@ const cases = {
     good: ['roberto.baggio', '101'],
     bad: ['@', 'you@example.com']
   },
+  recipientEmail: {
+    good: ['roberto@baggio.example.com', 'marká@example.com'],
+    bad: ['bugblatter']
+  },
   domain: {
     good: ['example.com', 'xo.co'],
     bad: ['101', 'no_capes']

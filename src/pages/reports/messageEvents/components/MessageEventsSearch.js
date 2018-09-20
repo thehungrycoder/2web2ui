@@ -10,7 +10,7 @@ import AdvancedFilters from './AdvancedFilters';
 import ActiveFilters from './ActiveFilters';
 import ShareModal from '../../components/ShareModal';
 import DatePicker from 'src/components/datePicker/DatePicker';
-import { email as emailValidator } from 'src/helpers/validation';
+import { recipientEmail as recipientEmailValidator } from 'src/helpers/validation';
 import { parseSearch } from 'src/helpers/messageEvents';
 import { stringToArray } from 'src/helpers/string';
 import { onEnter } from 'src/helpers/keyEvents';
@@ -42,7 +42,7 @@ export class MessageEventsSearch extends Component {
     const invalids = _.filter(addresses, (address) => {
       address = _.trim(address);
 
-      return address && emailValidator(address) !== undefined;
+      return address && recipientEmailValidator(address) !== undefined;
     });
 
     return invalids;

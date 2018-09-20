@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Email Helper .parseRecipientEmailAddress returns an email address object 1`] = `
+Object {
+  "address": "marká@example.com",
+  "domain": "example.com",
+  "local": "marká",
+  "name": null,
+}
+`;
+
+exports[`Email Helper .parseRecipientEmailAddress returns an email address object with name 1`] = `
+Object {
+  "address": "marká@example.com",
+  "domain": "example.com",
+  "local": "marká",
+  "name": "Mark Wahlberg",
+}
+`;
+
+exports[`Email Helper .parseRecipientEmailAddresses returns an email address object 1`] = `
+Array [
+  Object {
+    "address": "marká@example.com",
+    "domain": "example.com",
+    "local": "marká",
+    "name": null,
+  },
+]
+`;
+
+exports[`Email Helper .parseRecipientEmailAddresses returns multiple email address objects 1`] = `
+Array [
+  Object {
+    "address": "marká@example.com",
+    "domain": "example.com",
+    "local": "marká",
+    "name": null,
+  },
+  Object {
+    "address": "marká@example.com",
+    "domain": "example.com",
+    "local": "marká",
+    "name": null,
+  },
+]
+`;
+
+exports[`Email Helper .parseRecipientEmailAddresses returns multiple email address objects with name 1`] = `
+Array [
+  Object {
+    "address": "marká@example.com",
+    "domain": "example.com",
+    "local": "marká",
+    "name": "Mark Wahlberg",
+  },
+  Object {
+    "address": "marká@example.com",
+    "domain": "example.com",
+    "local": "marká",
+    "name": null,
+  },
+]
+`;
