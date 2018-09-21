@@ -9,7 +9,7 @@ describe('Brightback Component', () => {
     )),
     enabled: true,
     hasBrightbackOption: true,
-    precancel: jest.fn(),
+    prepBrightback: jest.fn((a) => a),
     data: {
       test: 'data'
     },
@@ -20,24 +20,24 @@ describe('Brightback Component', () => {
   it('should render correctly when enabled and with valid account data', () => {
     const wrapper = shallow(<Brightback {...props}/>);
     expect(wrapper).toMatchSnapshot();
-    expect(props.precancel).toHaveBeenCalledWith(props.data);
+    expect(props.prepBrightback).toHaveBeenCalledWith(props.data);
   });
 
   it('should pass correct props without the UI option', () => {
     const wrapper = shallow(<Brightback {...props} hasBrightbackOption={false} />);
     expect(wrapper).toMatchSnapshot();
-    expect(props.precancel).not.toHaveBeenCalled();
+    expect(props.prepBrightback).not.toHaveBeenCalled();
   });
 
   it('should pass correct props without valid account data', () => {
     const wrapper = shallow(<Brightback {...props} valid={false} />);
     expect(wrapper).toMatchSnapshot();
-    expect(props.precancel).toHaveBeenCalledWith(props.data);
+    expect(props.prepBrightback).toHaveBeenCalledWith(props.data);
   });
 
   it('should pass correct props when passed condition is false', () => {
     const wrapper = shallow(<Brightback {...props} condition={false} />);
     expect(wrapper).toMatchSnapshot();
-    expect(props.precancel).toHaveBeenCalledWith(props.data);
+    expect(props.prepBrightback).toHaveBeenCalledWith(props.data);
   });
 });

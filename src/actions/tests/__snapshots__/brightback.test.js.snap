@@ -1,6 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Action Creator: Brightback should dispatch a precancel action 1`] = `
+exports[`Action Creators: Brightback loadPrerequisiteMetrics should dispatch a metrics loading action 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "method": "GET",
+      "params": Object {
+        "delimiter": ",",
+        "from": "2016-11-17T23:15",
+        "metrics": "count_sent,count_unique_confirmed_opened_approx,count_accepted",
+        "precision": "day",
+        "timezone": "Europe/London",
+        "to": "2016-11-24T23:15",
+      },
+      "url": "/metrics/deliverability",
+    },
+    "type": "BRIGHTBACK_METRICS",
+  },
+]
+`;
+
+exports[`Action Creators: Brightback precancel should dispatch a precancel action 1`] = `
 Array [
   Object {
     "meta": Object {
@@ -11,6 +31,62 @@ Array [
       "url": "/precancel",
     },
     "type": "BRIGHTBACK_PRECANCEL",
+  },
+]
+`;
+
+exports[`Action Creators: Brightback prepBrightback should load metrics and call precancel 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "method": "GET",
+      "params": Object {
+        "delimiter": ",",
+        "from": "2016-11-17T23:15",
+        "metrics": "count_sent,count_unique_confirmed_opened_approx,count_accepted",
+        "precision": "day",
+        "timezone": "Europe/London",
+        "to": "2016-11-24T23:15",
+      },
+      "url": "/metrics/deliverability",
+    },
+    "type": "BRIGHTBACK_METRICS",
+  },
+  Object {
+    "meta": Object {
+      "data": Object {
+        "custom": Object {
+          "activity": Object {
+            "emails": 6316851,
+            "open_rate": 38,
+          },
+        },
+        "test": "data",
+      },
+      "method": "POST",
+      "url": "/precancel",
+    },
+    "type": "BRIGHTBACK_PRECANCEL",
+  },
+]
+`;
+
+exports[`Action Creators: Brightback prepBrightback should not call precancel if metrics did not load 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "method": "GET",
+      "params": Object {
+        "delimiter": ",",
+        "from": "2016-11-17T23:15",
+        "metrics": "count_sent,count_unique_confirmed_opened_approx,count_accepted",
+        "precision": "day",
+        "timezone": "Europe/London",
+        "to": "2016-11-24T23:15",
+      },
+      "url": "/metrics/deliverability",
+    },
+    "type": "BRIGHTBACK_METRICS",
   },
 ]
 `;

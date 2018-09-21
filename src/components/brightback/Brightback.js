@@ -1,17 +1,17 @@
 import React, { Component } from 'react'; // eslint-disable-line no-unused-vars
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { precancel } from 'src/actions/brightback';
+import { prepBrightback } from 'src/actions/brightback';
 import { selectBrightbackData } from 'src/selectors/brightback';
 import { hasUiOption } from 'src/helpers/conditions/account';
 import BrightbackPropTypes from './Brightback.propTypes';
 
 export class Brightback extends Component {
   componentDidMount() {
-    const { precancel, data, hasBrightbackOption } = this.props;
+    const { data, prepBrightback, hasBrightbackOption } = this.props;
 
     if (hasBrightbackOption) {
-      precancel(data);
+      prepBrightback(data);
     }
   }
 
@@ -39,7 +39,6 @@ const mapStateToProps = (state, props) => ({
   valid: state.brightback.valid,
   url: state.brightback.url,
   data: selectBrightbackData(state, props),
-  loading: state.brightback.precancelLoading,
   hasBrightbackOption: hasUiOption('brightback')(state)
 });
-export default withRouter(connect(mapStateToProps, { precancel })(Brightback));
+export default withRouter(connect(mapStateToProps, { prepBrightback })(Brightback));
