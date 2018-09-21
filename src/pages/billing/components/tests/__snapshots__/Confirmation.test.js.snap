@@ -320,17 +320,31 @@ exports[`Confirmation:  should render correctly with an upgrade 1`] = `
     </p>
   </Panel.Section>
   <Panel.Section>
-    <Button
-      destructive={false}
-      fullWidth={true}
-      primary={true}
-      size="default"
-      type="submit"
-    >
-      Upgrade Plan
-    </Button>
+    <withRouter(Connect(Brightback))
+      render={[Function]}
+      urls={
+        Object {
+          "billing_url": "/account/billing/plan",
+          "cancel_confirmation_url": "/account/billing/plan/change?immediatePlanChange=free-0817",
+          "save_return_url": "/account/billing",
+        }
+      }
+    />
   </Panel.Section>
 </Panel>
+`;
+
+exports[`Confirmation:  should render correctly with an upgrade 2`] = `
+<Button
+  destructive={false}
+  fullWidth={true}
+  primary={true}
+  size="default"
+  to={null}
+  type="submit"
+>
+  Upgrade Plan
+</Button>
 `;
 
 exports[`Confirmation:  should render correctly with an upgrade with IP 1`] = `
@@ -394,19 +408,6 @@ exports[`Confirmation:  should render correctly with an upgrade with IP 1`] = `
     />
   </Panel.Section>
 </Panel>
-`;
-
-exports[`Confirmation:  should render correctly with an upgrade 2`] = `
-<Button
-  destructive={false}
-  fullWidth={true}
-  primary={true}
-  size="default"
-  to={null}
-  type="submit"
->
-  Upgrade Plan
-</Button>
 `;
 
 exports[`Confirmation:  should render with nothing selected 1`] = `

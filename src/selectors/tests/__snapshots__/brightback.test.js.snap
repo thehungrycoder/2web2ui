@@ -16,6 +16,7 @@ Object {
     "url": "http://phoenix.test/",
     "user_agent": "node.js",
   },
+  "email": "forkyphig@example.com",
   "save_return_url": "http://phoenix.test/save_return_url",
   "timestamp": "2017-11-15T10:00:00.000Z",
 }

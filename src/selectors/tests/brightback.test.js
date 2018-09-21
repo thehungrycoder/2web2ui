@@ -8,6 +8,9 @@ describe('Selectors: brightback', () => {
     account: {
       created: '2017-11-15T10:00:00.000Z',
       customer_id: 101
+    },
+    currentUser: {
+      email: 'forkyphig@example.com'
     }
   };
 

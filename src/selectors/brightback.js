@@ -3,6 +3,7 @@ import { getLocalTimezone } from 'src/helpers/date';
 
 export const selectBrightbackData = (state, { urls = {}}) => {
   const { customer_id, created } = state.account;
+  const { email } = state.currentUser;
   const { brightback: brightbackConfig } = config;
   const { save_return_url, cancel_confirmation_url, billing_url } = urls;
 
@@ -22,6 +23,7 @@ export const selectBrightbackData = (state, { urls = {}}) => {
     account: {
       created_at: new Date(created).getTime(),
       internal_id: customer_id
-    }
+    },
+    email
   };
 };
