@@ -2,6 +2,7 @@ import { createMockStore } from 'src/__testHelpers__/mockStore';
 import * as brightback from '../brightback';
 import sparkpostApiRequest from '../helpers/sparkpostApiRequest';
 import brightbackRequest from '../helpers/brightbackRequest';
+import * as dateHelpers from 'src/helpers/date';
 
 import moment from 'moment';
 
@@ -29,8 +30,9 @@ describe('Action Creators: Brightback', () => {
   beforeEach(() => {
     mockStore = createMockStore({});
     accountDetails = { test: 'data' };
-    const date = moment(new Date('2016-11-25T04:15:00'));
+    const date = moment(new Date('2016-11-25T04:15:00Z'));
     Date.now = jest.fn(() => date);
+    dateHelpers.getLocalTimezone = jest.fn(() => 'UTC');
     sparkpostApiRequest.mockImplementation(asyncAction([{
       count_accepted: 5685438,
       count_sent: 6316851,
