@@ -30,7 +30,6 @@ export class AccountDropdown extends Component {
   getItems() {
     const { accountNavItems, dispatch } = this.props;
     const items = accountNavItems.map(({ action, label, external, condition, icon: Icon, labs, ...rest }) => {
-      console.log(labs)
       const labsMarkup = labs
         ? <div className={styles.FloatIcon}><Tag color='blue'>LABS</Tag></div>
         : null;
@@ -38,7 +37,7 @@ export class AccountDropdown extends Component {
       const content = Icon
         ? <Fragment>{label}<div className={styles.FloatIcon}><Icon size={15} /></div></Fragment>
         : <Fragment>{label} {labsMarkup}</Fragment>;
-      const listItem = { content, external, ...rest };
+      const listItem = { content, label, external, ...rest };
 
       if (!external) {
         listItem.component = Link;

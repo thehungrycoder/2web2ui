@@ -47,7 +47,7 @@ export default [
   },
   {
     label: 'Alerts',
-    to: '/account/alerts',
+    to: '/alerts',
     section: 1,
     labs: true
   },
