@@ -6,6 +6,7 @@ import {
   isSuspendedForBilling,
   hasStatus,
   hasStatusReasonCategory,
+  isCustomBilling,
   isSelfServeBilling,
   hasOnlineSupport,
   hasUiOption
@@ -164,5 +165,32 @@ describe('Condition: hasUiOption', () => {
       }
     };
     expect(hasUiOption('iceCream')(state)).toEqual(false);
+  });
+});
+
+
+describe('Condition: isCustomBilling', () => {
+  it('should return false', () => {
+    const state = {
+      account: {
+        subscription: {
+          custom: false
+        }
+      }
+    };
+
+    expect(isCustomBilling(state)).toEqual(false);
+  });
+
+  it('should return true', () => {
+    const state = {
+      account: {
+        subscription: {
+          custom: true
+        }
+      }
+    };
+
+    expect(isCustomBilling(state)).toEqual(true);
   });
 });
