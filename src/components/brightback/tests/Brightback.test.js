@@ -7,6 +7,7 @@ describe('Brightback Component', () => {
     render: jest.fn((renderProps) => (
       <div {...renderProps}>test</div>
     )),
+    condition: true,
     enabled: true,
     hasBrightbackOption: true,
     prepBrightback: jest.fn((a) => a),

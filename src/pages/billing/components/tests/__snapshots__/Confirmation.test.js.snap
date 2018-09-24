@@ -86,6 +86,7 @@ exports[`Confirmation:  should render correctly for an upgrade effectively immed
   </Panel.Section>
   <Panel.Section>
     <withRouter(Connect(Brightback))
+      condition={false}
       render={[Function]}
       urls={
         Object {
@@ -176,6 +177,7 @@ exports[`Confirmation:  should render correctly with a downgrade 1`] = `
   </Panel.Section>
   <Panel.Section>
     <withRouter(Connect(Brightback))
+      condition={false}
       render={[Function]}
       urls={
         Object {
@@ -321,6 +323,7 @@ exports[`Confirmation:  should render correctly with an upgrade 1`] = `
   </Panel.Section>
   <Panel.Section>
     <withRouter(Connect(Brightback))
+      condition={false}
       render={[Function]}
       urls={
         Object {
@@ -397,6 +400,7 @@ exports[`Confirmation:  should render correctly with an upgrade with IP 1`] = `
   </Panel.Section>
   <Panel.Section>
     <withRouter(Connect(Brightback))
+      condition={false}
       render={[Function]}
       urls={
         Object {
