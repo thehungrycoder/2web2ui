@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should return a sorted list of message event doc objects 1`] = `
+Array [
+  Object {
+    "description": "When a thing opens early",
+    "displayName": "Initial open",
+    "type": "initial_open",
+  },
+  Object {
+    "description": "When a thing opens",
+    "displayName": "Open",
+    "type": "open",
+  },
+]
+`;

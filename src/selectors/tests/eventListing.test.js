@@ -28,17 +28,14 @@ test('eventListing should transform event docs, sorted alpha-order by display_na
   ]);
 });
 
-test('should return a sorted list of message event doc keys', () => {
+test('should return a sorted list of message event doc objects', () => {
   const state = {
     messageEvents: {
       documentation: {
-        open: {},
-        initial_open: {}
+        open: { displayName: 'Open', description: 'When a thing opens' },
+        initial_open: { displayName: 'Initial open', description: 'When a thing opens early' }
       }
     }
   };
-  expect(selectMessageEventListing(state)).toEqual([
-    'initial_open',
-    'open'
-  ]);
+  expect(selectMessageEventListing(state)).toMatchSnapshot();
 });
