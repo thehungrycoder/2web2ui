@@ -1,0 +1,69 @@
+import React from 'react';
+import { shallow } from 'enzyme';
+import ManuallyBilledBanner from '../ManuallyBilledBanner';
+
+describe('ManuallyBilledBanner', () => {
+  const subject = ({ account = {}}) => (
+    shallow(<ManuallyBilledBanner account={account} />)
+  );
+
+  it('renders banner', () => {
+    const account = {
+      subscription: {
+        name: 'Test',
+        plan_volume: 15000
+      }
+    };
+
+    expect(subject({ account })).toMatchSnapshot();
+  });
+
+  it('renders banner with plan volume of zero when missing', () => {
+    const account = {
+      subscription: {
+        name: 'Test'
+      }
+    };
+
+    expect(subject({ account })).toMatchSnapshot();
+  });
+
+  it('with pending subscription', () => {
+    const account = {
+      pending_subscription: {
+        name: 'Next Test',
+        effective_date: '10/5/2020'
+      },
+      subscription: {
+        name: 'Test',
+        plan_volume: 15000
+      }
+    };
+
+    expect(subject({ account })).toMatchSnapshot();
+  });
+
+  it('with transitioning custom subscription', () => {
+    const account = {
+      subscription: {
+        custom: true,
+        plan_volume_per_period: undefined
+      }
+    };
+
+    expect(subject({ account })).toMatchSnapshot();
+  });
+
+  it('with custom subscription', () => {
+    const account = {
+      subscription: {
+        custom: true,
+        period: 'year',
+        plan_volume: 10000,
+        plan_volume_per_period: 120000
+      }
+    };
+
+    expect(subject({ account })).toMatchSnapshot();
+  });
+});

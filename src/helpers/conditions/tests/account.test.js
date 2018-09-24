@@ -2,6 +2,7 @@ import {
   onPlan,
   onPlanWithStatus,
   onServiceLevel,
+  onSubscriptionWithType,
   isEnterprise,
   isSuspendedForBilling,
   hasStatus,
@@ -111,18 +112,49 @@ describe('Conditon: hasStatusReasonCategory', () => {
 });
 
 describe('Condition: isSelfServeBilling', () => {
-
-  it('should return whether the account is self serve billing', () => {
+  it('should return false with undefined subscription', () => {
     const account = {};
     expect(isSelfServeBilling({ account })).toEqual(false);
-    account.subscription = {};
+  });
+
+  it('should return false with empty subscription', () => {
+    const account = {
+      subscription: {}
+    };
+
     expect(isSelfServeBilling({ account })).toEqual(false);
-    account.subscription.self_serve = false;
+  });
+
+  it('should return false with manual subscription', () => {
+    const account = {
+      subscription: {
+        self_serve: false
+      }
+    };
+
     expect(isSelfServeBilling({ account })).toEqual(false);
-    account.subscription.self_serve = true;
+  });
+
+  it('should return true with custom self server subscription', () => {
+    const account = {
+      subscription: {
+        custom: true,
+        type: 'zuora'
+      }
+    };
+
     expect(isSelfServeBilling({ account })).toEqual(true);
   });
 
+  it('should return true with self serve subscription', () => {
+    const account = {
+      subscription: {
+        self_serve: true
+      }
+    };
+
+    expect(isSelfServeBilling({ account })).toEqual(true);
+  });
 });
 
 describe('Condition: hasOnlineSupport', () => {
@@ -192,5 +224,31 @@ describe('Condition: isCustomBilling', () => {
     };
 
     expect(isCustomBilling(state)).toEqual(true);
+  });
+});
+
+describe('Condition: onSubscriptionWithType', () => {
+  it('should return true', () => {
+    const state = {
+      account: {
+        subscription: {
+          type: 'manual'
+        }
+      }
+    };
+
+    expect(onSubscriptionWithType('manual')(state)).toEqual(true);
+  });
+
+  it('should return false', () => {
+    const state = {
+      account: {
+        subscription: {
+          type: 'manual'
+        }
+      }
+    };
+
+    expect(onSubscriptionWithType('zuora')(state)).toEqual(false);
   });
 });

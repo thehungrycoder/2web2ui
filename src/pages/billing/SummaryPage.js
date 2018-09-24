@@ -8,21 +8,21 @@ import ConditionSwitch, { defaultCase } from 'src/components/auth/ConditionSwitc
 import { not } from 'src/helpers/conditions';
 import { isSuspendedForBilling, isSelfServeBilling } from 'src/helpers/conditions/account';
 import { Loading } from 'src/components';
-import { ManuallyBilledBanner } from './components/Banners';
 import BillingSummary from './components/BillingSummary';
+import ManuallyBilledBanner from './components/ManuallyBilledBanner';
 import SuspendedForBilling from './components/SuspendedForBilling';
 import { list as getInvoices } from 'src/actions/invoices';
 
 export class BillingSummaryPage extends Component {
 
-  componentDidMount () {
+  componentDidMount() {
     this.props.fetchAccount({ include: 'billing' });
     this.props.getPlans();
     this.props.getSendingIps();
     this.props.getInvoices();
   }
 
-  render () {
+  render() {
     const { loading, account, billingInfo, sendingIps, invoices } = this.props;
 
     if (loading) {
