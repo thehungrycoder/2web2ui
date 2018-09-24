@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 import _ from 'lodash';
-import { isAws, isSelfServeBilling, onPlan } from 'src/helpers/conditions/account';
+import { isAws, isCustomBilling, isSelfServeBilling, onPlan } from 'src/helpers/conditions/account';
 import { selectCondition } from './accessConditionState';
 
 const suspendedSelector = (state) => state.account.isSuspendedForBilling;
@@ -8,6 +8,7 @@ const pendingSubscriptionSelector = (state) => state.account.pending_subscriptio
 const plansSelector = (state) => state.billing.plans || [];
 const accountBillingSelector = (state) => state.account.billing;
 const selectIsAws = selectCondition(isAws);
+const selectIsCustomBilling = selectCondition(isCustomBilling);
 const selectIsSelfServeBilling = selectCondition(isSelfServeBilling);
 const selectIsCcFree1 = selectCondition(onPlan('ccfree1'));
 const selectIsFree1 = selectCondition(onPlan('free1'));
@@ -28,8 +29,8 @@ export const currentPlanCodeSelector = createSelector(
  * Returns true if user does not have pending plan change or is not suspended
  */
 export const canChangePlanSelector = createSelector(
-  [suspendedSelector, pendingSubscriptionSelector],
-  (suspended, pendingSubscription) => !suspended && !pendingSubscription
+  [suspendedSelector, pendingSubscriptionSelector, selectIsCustomBilling],
+  (suspended, pendingSubscription, customBilling) => !suspended && !pendingSubscription && !customBilling
 );
 
 /**
