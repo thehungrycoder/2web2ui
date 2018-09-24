@@ -36,7 +36,13 @@ import { emailVerificationRedirect, emailRedirects } from './emailRoutes';
 import SecretBillingPlanOrBillingSummaryPage from './SecretBillingPlanOrBillingSummaryPage';
 
 import { hasGrants, all, not } from 'src/helpers/conditions';
-import { isEnterprise, isAws, isCustomBilling } from 'src/helpers/conditions/account';
+import {
+  isAws,
+  isCustomBilling,
+  isEnterprise,
+  isSubscriptionPending,
+  onSubscriptionWithType
+} from 'src/helpers/conditions/account';
 import { isHeroku, isAzure } from 'src/helpers/conditions/user';
 import { configFlag, configEquals } from 'src/helpers/conditions/config';
 
@@ -512,6 +518,19 @@ const routes = [
     layout: App,
     title: 'Billing',
     supportDocSearch: 'billing'
+  },
+  {
+    path: '/account/billing/enable-automatic',
+    component: billing.EnableAutomaticBillingPage,
+    condition: all(
+      hasGrants('account/manage'),
+      isCustomBilling,
+      onSubscriptionWithType('manual'),
+      not(isSubscriptionPending)
+    ),
+    layout: App,
+    title: 'Billing | Enable Automatic Billing',
+    supportDocSearch: 'upgrade account'
   },
   {
     path: '/account/billing/plan',
