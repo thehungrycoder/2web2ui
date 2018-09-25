@@ -14,7 +14,7 @@ export class AlertsPage extends Component {
         title="Alerts"
         image={Generic}
         primaryAction={{ content: 'Create an Alert', to: LINKS.ALERTS_DOCS, component: ExternalLink }}
-        secondaryAction={{ content: 'Share your thoughts on Alerts!', to: LINKS.ALERTS_SURVEY, component: ExternalLink }}
+        secondaryAction={{ content: 'Tell us what else you’d like to see in Alerts', to: LINKS.ALERTS_SURVEY, component: ExternalLink }}
       >
         <p className={styles.Paragraph}>Are you looking for notifications when you get close to your monthly plan volume so that you can avoid overages?  Looking for notifications on other metrics?</p>
       </EmptyState>

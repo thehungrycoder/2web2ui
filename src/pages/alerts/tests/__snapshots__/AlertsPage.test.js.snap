@@ -13,7 +13,7 @@ exports[`Page: Alerts should render happy path 1`] = `
   secondaryAction={
     Object {
       "component": [Function],
-      "content": "Share your thoughts on Alerts!",
+      "content": "Tell us what else you’d like to see in Alerts",
       "to": "https://goo.gl/forms/rnIuTvdVF2xhpKCy2",
     }
   }
