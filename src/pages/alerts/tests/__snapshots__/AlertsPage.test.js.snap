@@ -3,25 +3,26 @@
 exports[`Page: Alerts should render happy path 1`] = `
 <EmptyState
   image={[Function]}
+  primaryAction={
+    Object {
+      "component": [Function],
+      "content": "Create an Alert",
+      "to": "https://developers.sparkpost.com/api/alerts/#alerts",
+    }
+  }
+  secondaryAction={
+    Object {
+      "component": [Function],
+      "content": "Share your thoughts on Alerts!",
+      "to": "https://goo.gl/forms/rnIuTvdVF2xhpKCy2",
+    }
+  }
   title="Alerts"
 >
-  <p>
-    Are you looking for notifications when you get close to your monthly plan volume so that you can avoid overages?  Set up a monthly sending limit alert by following the instructions located 
-    <a
-      href="https://developers.sparkpost.com/api/alerts/#alerts"
-    >
-      here
-    </a>
-    .
-  </p>
-  <p>
-    Looking for notifications on other metrics? Please take a minute to tell us how we can help you by filling out this short 
-    <a
-      href="https://goo.gl/forms/rnIuTvdVF2xhpKCy2"
-    >
-      form 
-    </a>
-    .
+  <p
+    className="Paragraph"
+  >
+    Are you looking for notifications when you get close to your monthly plan volume so that you can avoid overages?  Looking for notifications on other metrics?
   </p>
 </EmptyState>
 `;

@@ -107,6 +107,7 @@ export default [
     label: 'Alerts',
     to: '/alerts',
     labs: true,
+    divider: true,
     icon: NotificationsActive
   }
 ];

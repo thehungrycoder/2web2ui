@@ -43,7 +43,8 @@ export class Item extends Component {
       label,
       children,
       toggleMobileNav,
-      labs
+      labs,
+      divider
     } = this.props;
 
     const active = this.isActive();
@@ -52,20 +53,19 @@ export class Item extends Component {
       active && styles.isActive,
       children && styles.hasChildren,
       this.state.open && styles.isOpen,
-      mobile && styles.mobile,
-      labs && styles.labs
+      mobile && styles.mobile
     );
 
     if (labs) {
       return (
         <li>
-          <hr className={styles.hr}/>
+          {divider ? (<hr className={styles.hr}/>) : null}
           <Link to={to} className={linkClasses} onClick={mobile ? toggleMobileNav : null}>
             {Icon && <span className={styles.iconWrapper}><Icon size={21} className={styles.icon} /></span>}
             {label} <div style={{ float: 'right' }}><Tag color='blue'>LABS</Tag></div>
           </Link>
         </li>
-      )
+      );
     }
 
     return (
