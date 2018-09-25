@@ -38,7 +38,7 @@ exports[`Page: Webhook Details should render happy path 1`] = `
         },
         Object {
           "Component": [Function],
-          "content": "Batch Status",
+          "content": "Batches",
           "to": "/webhooks/details/my-id/batches?subaccount=101",
         },
       ]
@@ -54,7 +54,13 @@ exports[`Page: Webhook Details should render happy path 1`] = `
     render={[Function]}
   />
   <Route
+    exact={true}
     path="/webhooks/details/my-id/batches"
+    render={[Function]}
+  />
+  <Route
+    exact={true}
+    path="/webhooks/details/my-id/batches/:batchId"
     render={[Function]}
   />
   <DeleteModal

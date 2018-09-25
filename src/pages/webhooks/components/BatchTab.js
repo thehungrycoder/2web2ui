@@ -1,23 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import _ from 'lodash';
 
 import { getBatches } from 'src/actions/webhooks';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
 
-import { Button, Panel } from '@sparkpost/matchbox';
+import { Button, Tag } from '@sparkpost/matchbox';
 import { TableCollection, Empty } from 'src/components';
 import { selectWebhookBatches } from 'src/selectors/webhooks';
 
 const columns = [
-  { label: 'Delivery Time', sortKey: 'formatted_time' },
-  { label: 'Batch ID', sortKey: 'batch_id' },
-  { label: 'Status', sortKey: 'status' },
-  { label: 'Attempt #', sortKey: 'attempts' },
-  { label: 'Response', sortKey: 'response_code' }
+  { label: 'Timestamp' },
+  { label: 'Batch ID' },
+  { label: 'Status' },
+  { label: 'Attempts' },
+  null
 ];
-
-const getRowData = (batch) => [batch.formatted_time, batch.batch_id, batch.status, batch.attempts, batch.response_code];
 
 export class BatchTab extends Component {
   componentDidMount() {
@@ -27,11 +26,24 @@ export class BatchTab extends Component {
   refreshBatches = () => {
     const { webhook, getBatches } = this.props;
     const { id, subaccount } = webhook;
-
     return getBatches({ id, subaccount });
   };
 
-  renderBatches() {
+  getRowData = (batch) => {
+    const { webhook, query } = this.props;
+
+    return [
+      batch.formatted_time,
+      batch.batch_id,
+      <Tag color={batch.status === 'Success' ? 'blue' : 'yellow'}>{batch.response_code}</Tag>,
+      batch.attempts,
+      <div style={{ textAlign: 'right' }}>
+        <Button component={Link} size='small' to={`/webhooks/details/${webhook.id}/batches/${batch.batch_id}${query}`}>View Details</Button>
+      </div>
+    ];
+  };
+
+  render() {
     const { batches, batchesLoading } = this.props;
 
     if (batchesLoading) {
@@ -46,25 +58,9 @@ export class BatchTab extends Component {
       <TableCollection
         columns={columns}
         rows={batches}
-        getRowData={getRowData}
+        getRowData={this.getRowData}
         pagination={true}
-        defaultSortColumn='formatted_time'
-        defaultSortDirection='desc'
       />
-    );
-  }
-
-  render() {
-    const { batchesLoading } = this.props;
-    const buttonText = batchesLoading ? 'Refreshing...' : 'Refresh Batches';
-
-    return (
-      <Panel>
-        <Panel.Section >
-          <Button primary size='small' disabled={batchesLoading} onClick={this.refreshBatches}>{buttonText}</Button>
-        </Panel.Section>
-        { this.renderBatches() }
-      </Panel>
     );
   }
 }

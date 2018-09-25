@@ -1,0 +1,9 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.BackLink {
+  margin-bottom: spacing();
+}
+
+.TooltipTrigger {
+  color: color(gray, 4);
+}

@@ -13,6 +13,8 @@ import { Page, Tabs } from '@sparkpost/matchbox';
 import TestTab from './components/TestTab';
 import EditTab from './components/EditTab';
 import BatchTab from './components/BatchTab';
+import BatchDetailsTab from './components/BatchDetailsTab';
+
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
 
 export class WebhooksDetails extends Component {
@@ -53,6 +55,8 @@ export class WebhooksDetails extends Component {
     const editPath = `/webhooks/details/${webhookId}`;
     const testPath = `/webhooks/details/${webhookId}/test`;
     const batchPath = `/webhooks/details/${webhookId}/batches`;
+    const batchDetailsPath = `/webhooks/details/${webhookId}/batches/:batchId`;
+
     const secondaryActions = [
       {
         content: 'Delete',
@@ -71,7 +75,7 @@ export class WebhooksDetails extends Component {
         to: `${testPath}${query}`
       },
       {
-        content: 'Batch Status',
+        content: 'Batches',
         Component: Link,
         to: `${batchPath}${query}`
       }
@@ -96,9 +100,11 @@ export class WebhooksDetails extends Component {
           selected={selectedTab}
           tabs={tabs}
         />
-        <Route exact path={editPath} render={() => <EditTab webhook={webhook}/> } />
+        <Route exact path={editPath} render={() => <EditTab webhook={webhook}/>} />
         <Route path={testPath} render={() => <TestTab webhook={webhook}/>} />
-        <Route path={batchPath} render={() => <BatchTab webhook={webhook}/>} />
+        <Route exact path={batchPath} render={() => <BatchTab webhook={webhook} query={query}/>} />
+        <Route exact path={batchDetailsPath} render={() => <BatchDetailsTab webhook={webhook} />} />
+
         <DeleteModal
           open={this.state.showDelete}
           title='Are you sure you want to delete this webhook?'

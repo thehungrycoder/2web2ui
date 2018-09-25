@@ -1,100 +1,57 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Webhook Component: Batch Status Tab should render batch status tab with table data 1`] = `
-<Panel>
-  <Panel.Section>
-    <Button
-      disabled={false}
-      onClick={[Function]}
-      primary={true}
-      size="small"
-    >
-      Refresh Batches
-    </Button>
-  </Panel.Section>
-  <TableCollection
-    columns={
-      Array [
-        Object {
-          "label": "Delivery Time",
-          "sortKey": "formatted_time",
-        },
-        Object {
-          "label": "Batch ID",
-          "sortKey": "batch_id",
-        },
-        Object {
-          "label": "Status",
-          "sortKey": "status",
-        },
-        Object {
-          "label": "Attempt #",
-          "sortKey": "attempts",
-        },
-        Object {
-          "label": "Response",
-          "sortKey": "response_code",
-        },
-      ]
-    }
-    defaultSortColumn="formatted_time"
-    defaultSortDirection="desc"
-    getRowData={[Function]}
-    pagination={true}
-    rows={
-      Array [
-        Object {
-          "attempts": 1,
-          "batch_id": "243423423423",
-          "formatted_time": "so-formatted",
-          "response_code": 200,
-          "status": "p",
-        },
-        Object {
-          "attempts": 4,
-          "batch_id": "996969545",
-          "formatted_time": "so-formatted-2",
-          "response_code": 500,
-          "status": "f",
-        },
-      ]
-    }
-  />
-</Panel>
-`;
-
-exports[`Webhook Component: Batch Status Tab should show button text as Refreshing while refreshing data 1`] = `
-<Panel>
-  <Panel.Section>
-    <Button
-      disabled={true}
-      onClick={[Function]}
-      primary={true}
-      size="small"
-    >
-      Refreshing...
-    </Button>
-  </Panel.Section>
-  <PanelLoading
-    minHeight="400px"
-  />
-</Panel>
+<TableCollection
+  columns={
+    Array [
+      Object {
+        "label": "Timestamp",
+      },
+      Object {
+        "label": "Batch ID",
+      },
+      Object {
+        "label": "Status",
+      },
+      Object {
+        "label": "Attempts",
+      },
+      null,
+    ]
+  }
+  defaultSortColumn={null}
+  defaultSortDirection="asc"
+  getRowData={[Function]}
+  pagination={true}
+  rows={
+    Array [
+      Object {
+        "attempts": 1,
+        "batch_id": "243423423423",
+        "formatted_time": "so-formatted",
+        "response_code": 200,
+        "status": "p",
+      },
+      Object {
+        "attempts": 4,
+        "batch_id": "996969545",
+        "formatted_time": "so-formatted-2",
+        "response_code": 500,
+        "status": "f",
+      },
+    ]
+  }
+/>
 `;
 
 exports[`Webhook Component: Batch Status Tab should show empty message when no batches exist 1`] = `
-<Panel>
-  <Panel.Section>
-    <Button
-      disabled={false}
-      onClick={[Function]}
-      primary={true}
-      size="small"
-    >
-      Refresh Batches
-    </Button>
-  </Panel.Section>
-  <Empty
-    message="There are no batches for your webhook"
-  />
-</Panel>
+<Empty
+  message="There are no batches for your webhook"
+/>
+`;
+
+exports[`Webhook Component: Batch Status Tab should show loading component while refreshing data 1`] = `
+<PanelLoading
+  minHeight="400px"
+/>
 `;

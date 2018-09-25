@@ -105,14 +105,15 @@ export function getEventSamples(events) {
   });
 }
 
-export function getBatches({ id, subaccount = null }) {
+export function getBatches({ id, subaccount = null, params }) {
   const headers = setSubaccountHeader(subaccount);
   return sparkpostApiRequest({
     type: 'GET_WEBHOOK_BATCHES',
     meta: {
       method: 'GET',
-      url: `/webhooks/${id}/batch-status`,
-      headers
+      url: `/webhooks/${id}/batches`,
+      headers,
+      params
     }
   });
 }

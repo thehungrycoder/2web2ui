@@ -43,7 +43,7 @@ describe('Webhook Component: Batch Status Tab', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should show button text as Refreshing while refreshing data', () => {
+  it('should show loading component while refreshing data', () => {
     wrapper.setProps({ batchesLoading: true });
     expect(wrapper).toMatchSnapshot();
   });
