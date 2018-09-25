@@ -6,6 +6,9 @@ exports[`Component: Billing Summary should render correctly for a paid plan 1`] 
     account={
       Object {
         "billing": Object {},
+        "subscription": Object {
+          "plan_volume": 15000,
+        },
       }
     }
   />
@@ -29,7 +32,7 @@ exports[`Component: Billing Summary should render correctly for a paid plan 1`] 
         label="Your Plan"
         plan={
           Object {
-            "isFree": false,
+            "plan_volume": 15000,
           }
         }
       />
@@ -99,6 +102,9 @@ exports[`Component: Billing Summary should render correctly for a standard free 
     account={
       Object {
         "billing": Object {},
+        "subscription": Object {
+          "plan_volume": 15000,
+        },
       }
     }
   />
@@ -122,7 +128,7 @@ exports[`Component: Billing Summary should render correctly for a standard free 
         label="Your Plan"
         plan={
           Object {
-            "isFree": true,
+            "plan_volume": 15000,
           }
         }
       />
@@ -143,6 +149,9 @@ exports[`Component: Billing Summary should render correctly if you can't buy IPs
     account={
       Object {
         "billing": Object {},
+        "subscription": Object {
+          "plan_volume": 15000,
+        },
       }
     }
   />
@@ -166,7 +175,7 @@ exports[`Component: Billing Summary should render correctly if you can't buy IPs
         label="Your Plan"
         plan={
           Object {
-            "isFree": true,
+            "plan_volume": 15000,
           }
         }
       />
@@ -227,6 +236,9 @@ exports[`Component: Billing Summary should render correctly if you can't change 
     account={
       Object {
         "billing": Object {},
+        "subscription": Object {
+          "plan_volume": 15000,
+        },
       }
     }
   />
@@ -239,7 +251,7 @@ exports[`Component: Billing Summary should render correctly if you can't change 
         label="Your Plan"
         plan={
           Object {
-            "isFree": true,
+            "plan_volume": 15000,
           }
         }
       />
@@ -309,6 +321,9 @@ exports[`Component: Billing Summary should render correctly if you can't update 
     account={
       Object {
         "billing": Object {},
+        "subscription": Object {
+          "plan_volume": 15000,
+        },
       }
     }
   />
@@ -332,7 +347,7 @@ exports[`Component: Billing Summary should render correctly if you can't update 
         label="Your Plan"
         plan={
           Object {
-            "isFree": true,
+            "plan_volume": 15000,
           }
         }
       />
@@ -362,6 +377,9 @@ exports[`Component: Billing Summary should render with IP modal open 1`] = `
     account={
       Object {
         "billing": Object {},
+        "subscription": Object {
+          "plan_volume": 15000,
+        },
       }
     }
   />
@@ -385,7 +403,7 @@ exports[`Component: Billing Summary should render with IP modal open 1`] = `
         label="Your Plan"
         plan={
           Object {
-            "isFree": true,
+            "plan_volume": 15000,
           }
         }
       />
@@ -459,6 +477,9 @@ exports[`Component: Billing Summary should render with the billing contact modal
     account={
       Object {
         "billing": Object {},
+        "subscription": Object {
+          "plan_volume": 15000,
+        },
       }
     }
   />
@@ -482,7 +503,7 @@ exports[`Component: Billing Summary should render with the billing contact modal
         label="Your Plan"
         plan={
           Object {
-            "isFree": true,
+            "plan_volume": 15000,
           }
         }
       />
@@ -556,6 +577,9 @@ exports[`Component: Billing Summary should render with the payment info modal op
     account={
       Object {
         "billing": Object {},
+        "subscription": Object {
+          "plan_volume": 15000,
+        },
       }
     }
   />
@@ -579,7 +603,7 @@ exports[`Component: Billing Summary should render with the payment info modal op
         label="Your Plan"
         plan={
           Object {
-            "isFree": true,
+            "plan_volume": 15000,
           }
         }
       />
@@ -653,6 +677,9 @@ exports[`Component: Billing Summary should show the invoice history if there are
     account={
       Object {
         "billing": Object {},
+        "subscription": Object {
+          "plan_volume": 15000,
+        },
       }
     }
   />
@@ -676,7 +703,7 @@ exports[`Component: Billing Summary should show the invoice history if there are
         label="Your Plan"
         plan={
           Object {
-            "isFree": true,
+            "plan_volume": 15000,
           }
         }
       />
