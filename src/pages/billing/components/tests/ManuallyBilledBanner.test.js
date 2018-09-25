@@ -47,6 +47,7 @@ describe('ManuallyBilledBanner', () => {
     const account = {
       subscription: {
         custom: true,
+        name: 'Custom',
         plan_volume_per_period: undefined
       }
     };
@@ -58,6 +59,7 @@ describe('ManuallyBilledBanner', () => {
     const account = {
       subscription: {
         custom: true,
+        name: 'Custom',
         period: 'year',
         plan_volume: 10000,
         plan_volume_per_period: 120000

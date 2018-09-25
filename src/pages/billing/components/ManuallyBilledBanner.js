@@ -44,7 +44,7 @@ const ManuallyBilledBanner = ({
     return (
       <Banner
         status="warning"
-        title="Your current plan is being transitioned to a custom plan"
+        title={`Your current plan is being transitioned to a ${subscriptionName} plan`}
       >
         <p>
           If your account should not be transitioned, please {

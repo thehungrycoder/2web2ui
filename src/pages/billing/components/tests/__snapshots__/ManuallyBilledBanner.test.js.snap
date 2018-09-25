@@ -69,7 +69,7 @@ exports[`ManuallyBilledBanner with custom subscription 1`] = `
   }
   status="info"
   title="
-    Your current undefined plan includes 120,000 emails per year
+    Your current Custom plan includes 120,000 emails per year
   "
 >
   <p>
@@ -104,7 +104,7 @@ exports[`ManuallyBilledBanner with pending subscription 1`] = `
 exports[`ManuallyBilledBanner with transitioning custom subscription 1`] = `
 <Banner
   status="warning"
-  title="Your current plan is being transitioned to a custom plan"
+  title="Your current plan is being transitioned to a Custom plan"
 >
   <p>
     If your account should not be transitioned, please 
