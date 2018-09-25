@@ -3,8 +3,9 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import fp from 'lodash/fp';
 import { Page, Tag } from '@sparkpost/matchbox';
-import { Users } from 'src/components/images';
 import TimeAgo from 'react-timeago';
+import { Users } from 'src/components/images';
+import PageLink from 'src/components/pageLink/PageLink';
 
 import * as usersActions from 'src/actions/users';
 import { selectUsers } from 'src/selectors/users';
@@ -122,7 +123,7 @@ export class ListPage extends Component {
   }
 
   render() {
-    const { loading, error, users } = this.props;
+    const { currentUser, loading, error, users } = this.props;
 
     if (loading) {
       return <Loading />;
@@ -130,13 +131,18 @@ export class ListPage extends Component {
 
     return (
       <Page
-        primaryAction={primaryAction}
         title="Users"
+        primaryAction={primaryAction}
         empty={{
           show: users.length === 1,
           title: 'Invite Your Team to SparkPost',
           image: Users,
-          content: <p>Manage your team's accounts and roles.</p>
+          content: <p>Manage your team's accounts and roles.</p>,
+          secondaryAction: {
+            Component: PageLink,
+            content: 'Edit your user account',
+            to: `/account/users/edit/${currentUser.username}`
+          }
         }}>
         {error ? this.renderError() : this.renderPage()}
       </Page>
@@ -145,6 +151,7 @@ export class ListPage extends Component {
 }
 
 const mapStateToProps = (state) => ({
+  currentUser: state.currentUser,
   error: state.users.error,
   loading: state.users.loading,
   users: selectUsers(state)
