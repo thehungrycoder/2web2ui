@@ -33,16 +33,11 @@ exports[`EnableAutomaticBillingForm renders form 1`] = `
       md={5}
       xs={12}
     >
-      <Panel>
+      <Panel
+        title="Your Plan"
+      >
         <Panel.Section>
-          <small>
-            Your Plan
-          </small>
-          <h4>
-            15,000
-             emails/
-            year
-          </h4>
+          <PlanSummary />
         </Panel.Section>
         <Panel.Section>
           <Button
@@ -95,16 +90,11 @@ exports[`EnableAutomaticBillingForm renders form disabled 1`] = `
       md={5}
       xs={12}
     >
-      <Panel>
+      <Panel
+        title="Your Plan"
+      >
         <Panel.Section>
-          <small>
-            Your Plan
-          </small>
-          <h4>
-            15,000
-             emails/
-            year
-          </h4>
+          <PlanSummary />
         </Panel.Section>
         <Panel.Section>
           <Button

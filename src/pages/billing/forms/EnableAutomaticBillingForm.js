@@ -10,6 +10,7 @@ import { Loading } from 'src/components/loading/Loading';
 import { prepareCardInfo } from 'src/helpers/billing';
 import { currentPlanSelector } from 'src/selectors/accountBillingInfo';
 import { getFirstCountry, getFirstStateForCountry } from 'src/selectors/accountBillingForms';
+import PlanSummary from '../components/PlanSummary';
 import BillingAddressForm from './fields/BillingAddressForm';
 import PaymentForm from './fields/PaymentForm';
 
@@ -31,7 +32,7 @@ export class EnableAutomaticBillingForm extends React.Component {
   };
 
   render() {
-    const { billingCountries, currentPlan, handleSubmit, loading, submitting } = this.props;
+    const { billingCountries, currentSubscription, handleSubmit, loading, submitting } = this.props;
 
     if (loading) {
       return <Loading />;
@@ -55,12 +56,9 @@ export class EnableAutomaticBillingForm extends React.Component {
             </Panel>
           </Grid.Column>
           <Grid.Column xs={12} md={5}>
-            <Panel>
+            <Panel title="Your Plan">
               <Panel.Section>
-                <small>Your Plan</small>
-                <h4>
-                  {currentPlan.plan_volume_per_period.toLocaleString()} emails/{currentPlan.period}
-                </h4>
+                <PlanSummary plan={currentSubscription} />
               </Panel.Section>
               <Panel.Section>
                 <Button disabled={submitting} fullWidth primary type="submit">
@@ -81,7 +79,7 @@ const mapStateToProps = (state) => {
 
   return {
     billingCountries: state.billing.countries,
-    currentPlan: state.account.subscription,
+    currentSubscription: state.account.subscription,
     initialValues: {
       email: state.currentUser.email,
       billingAddress: {

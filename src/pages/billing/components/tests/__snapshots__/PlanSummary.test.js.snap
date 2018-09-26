@@ -1,46 +1,46 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`PlanSummary renders summary 1`] = `
-<LabelledValue
-  label="Your Plan"
->
-  <h6>
+<React.Fragment>
+  <h6
+    className="Headline"
+  >
     1,000
      emails for 
     $100 per month
   </h6>
-</LabelledValue>
+</React.Fragment>
 `;
 
 exports[`PlanSummary renders summary for free plan 1`] = `
-<LabelledValue
-  label="Your Plan"
->
-  <h6>
+<React.Fragment>
+  <h6
+    className="Headline"
+  >
     1,000
      emails for 
     Free
   </h6>
-</LabelledValue>
+</React.Fragment>
 `;
 
 exports[`PlanSummary renders summary with custom plan 1`] = `
-<LabelledValue
-  label="Your Plan"
->
-  <h6>
+<React.Fragment>
+  <h6
+    className="Headline"
+  >
     12,000
      emails for 
     $100 per year
   </h6>
-</LabelledValue>
+</React.Fragment>
 `;
 
 exports[`PlanSummary renders summary with overages 1`] = `
-<LabelledValue
-  label="Your Plan"
->
-  <h6>
+<React.Fragment>
+  <h6
+    className="Headline"
+  >
     1,000
      emails for 
     $100 per month
@@ -50,5 +50,5 @@ exports[`PlanSummary renders summary with overages 1`] = `
     0.01
      per thousand extra emails
   </p>
-</LabelledValue>
+</React.Fragment>
 `;

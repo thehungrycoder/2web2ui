@@ -1,5 +1,5 @@
 import React from 'react';
-import { LabelledValue } from 'src/components';
+import styles from './PlanSummary.module.scss';
 
 const PlanSummary = ({
   plan: {
@@ -16,12 +16,12 @@ const PlanSummary = ({
   const volume = (planVolumePerPeriod || planVolume).toLocaleString();
 
   return (
-    <LabelledValue label="Your Plan">
-      <h6>
+    <React.Fragment>
+      <h6 className={styles.Headline}>
         {volume} emails for {cost}
       </h6>
       {overage && <p>${overage.toFixed(2)} per thousand extra emails</p>}
-    </LabelledValue>
+    </React.Fragment>
   );
 };
 
