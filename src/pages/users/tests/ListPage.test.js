@@ -11,6 +11,9 @@ describe('Page: Users List', () => {
 
   beforeEach(() => {
     props = {
+      currentUser: {
+        username: 'test-user-1'
+      },
       loading: false,
       listUsers: jest.fn(),
       users: [
