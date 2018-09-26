@@ -9,19 +9,19 @@ import { LabelledValue, PageLink } from 'src/components';
 import _ from 'lodash';
 import styles from './BatchDetailsTab.module.scss';
 
-class BatchDetailsTab extends Component {
+export class BatchDetailsTab extends Component {
   componentDidMount() {
     this.getAttempts();
   }
 
   getAttempts = () => {
-    const { webhook, getBatches, match } = this.props;
+    const { webhook, getBatches, batchId } = this.props;
     const { id, subaccount } = webhook;
-    return getBatches({ id, subaccount, params: { batch_ids: match.params.batchId }});
+    return getBatches({ id, subaccount, params: { batch_ids: batchId }});
   }
 
   render() {
-    const { batches, firstBatch = {}, webhook, loading } = this.props;
+    const { batches, firstBatch, webhook, loading } = this.props;
     const refreshAction = {
       content: loading ? 'Loading...' : 'Refresh Batches',
       color: 'orange',
@@ -74,8 +74,9 @@ const mapStateToProps = (state, props) => {
   const batches = selectWebhookBatches(state);
   return {
     batches,
-    firstBatch: _.first(batches),
-    loading: state.webhooks.batchesLoading
+    firstBatch: _.first(batches) || {},
+    loading: state.webhooks.batchesLoading,
+    batchId: props.match.params.batchId
   };
 };
 

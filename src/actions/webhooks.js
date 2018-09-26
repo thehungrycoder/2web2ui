@@ -105,7 +105,7 @@ export function getEventSamples(events) {
   });
 }
 
-export function getBatches({ id, subaccount = null, params }) {
+export function getBatches({ id, subaccount = null, params = {}}) {
   const headers = setSubaccountHeader(subaccount);
   return sparkpostApiRequest({
     type: 'GET_WEBHOOK_BATCHES',

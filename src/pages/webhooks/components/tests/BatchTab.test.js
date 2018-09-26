@@ -5,9 +5,10 @@ import { BatchTab } from '../BatchTab';
 
 describe('Webhook Component: Batch Status Tab', () => {
   let wrapper;
+  let props;
 
   beforeEach(() => {
-    const props = {
+    props = {
       getBatches: jest.fn(() => Promise.resolve()),
       webhook: {
         id: 'webhook-id'
@@ -16,7 +17,7 @@ describe('Webhook Component: Batch Status Tab', () => {
         {
           formatted_time: 'so-formatted',
           batch_id: '243423423423',
-          status: 'p',
+          status: 'Success',
           attempts: 1,
           response_code: 200
         },
@@ -29,7 +30,8 @@ describe('Webhook Component: Batch Status Tab', () => {
         }
       ],
       batchesLoading: false,
-      showAlert: jest.fn()
+      showAlert: jest.fn(),
+      query: ''
     };
 
     wrapper = shallow(<BatchTab {...props} />);
@@ -41,6 +43,11 @@ describe('Webhook Component: Batch Status Tab', () => {
 
   it('should render batch status tab with table data', () => {
     expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render table rows correctly', () => {
+    const rows = props.batches.map(wrapper.instance().getRowData);
+    expect(rows).toMatchSnapshot();
   });
 
   it('should show loading component while refreshing data', () => {

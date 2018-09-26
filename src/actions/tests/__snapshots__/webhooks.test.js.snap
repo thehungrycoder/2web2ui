@@ -64,7 +64,8 @@ Array [
     "meta": Object {
       "headers": Object {},
       "method": "GET",
-      "url": "/webhooks/123/batch-status",
+      "params": Object {},
+      "url": "/webhooks/123/batches",
     },
     "type": "GET_WEBHOOK_BATCHES",
   },

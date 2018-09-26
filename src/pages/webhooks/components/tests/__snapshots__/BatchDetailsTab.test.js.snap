@@ -1,0 +1,291 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Webhook Component: Batch Status Tab should get batches on mount 1`] = `
+Array [
+  Array [
+    Object {
+      "id": "webhook-id",
+      "params": Object {
+        "batch_ids": "batch_1",
+      },
+      "subaccount": 101,
+    },
+  ],
+]
+`;
+
+exports[`Webhook Component: Batch Status Tab should handle loading state 1`] = `
+<div>
+  <Panel>
+    <Panel.Section>
+      <div
+        className="BackLink"
+      >
+        <small>
+          <PageLink
+            to="/webhooks/details/webhook-id/batches"
+          >
+            <ArrowBack />
+             Return to All Batches
+          </PageLink>
+        </small>
+      </div>
+      <LabelledValue
+        label="Batch ID"
+      >
+        <h6>
+          243423423423
+        </h6>
+      </LabelledValue>
+      <LabelledValue
+        label="Attempts"
+      >
+        <h6>
+          1
+        </h6>
+      </LabelledValue>
+      <LabelledValue
+        label="Batch Size"
+      >
+        <h6>
+          <Tooltip
+            bottom={true}
+            content="Number of events in this batch"
+            dark={true}
+            forcePosition={false}
+            horizontalOffset="0px"
+            preferredDirection={
+              Object {
+                "bottom": true,
+                "left": false,
+                "right": true,
+                "top": false,
+              }
+            }
+            right={true}
+          >
+             
+            <InfoOutline
+              className="TooltipTrigger"
+            />
+          </Tooltip>
+        </h6>
+      </LabelledValue>
+    </Panel.Section>
+  </Panel>
+  <Panel
+    actions={
+      Array [
+        Object {
+          "color": "orange",
+          "content": "Loading...",
+          "disabled": true,
+          "onClick": [Function],
+        },
+      ]
+    }
+    title="Batch Attempt History"
+  >
+    <Table>
+      <thead>
+        <Table.Row>
+          <Table.HeaderCell
+            width="200px"
+          >
+            Status
+          </Table.HeaderCell>
+          <Table.HeaderCell
+            width="250px"
+          >
+            Timestamp
+          </Table.HeaderCell>
+          <Table.HeaderCell
+            width="200px"
+          >
+            Latency
+          </Table.HeaderCell>
+          <Table.HeaderCell>
+            Attempt
+          </Table.HeaderCell>
+        </Table.Row>
+      </thead>
+      <tbody>
+        <Table.Row
+          key="0"
+        >
+          <Table.Cell>
+            <Tag
+              color="blue"
+            >
+              200
+            </Tag>
+          </Table.Cell>
+          <Table.Cell>
+            so-formatted
+          </Table.Cell>
+          <Table.Cell />
+          <Table.Cell>
+            2
+          </Table.Cell>
+        </Table.Row>
+        <Table.Row
+          key="1"
+        >
+          <Table.Cell>
+            <Tag
+              color="yellow"
+            >
+              500
+            </Tag>
+          </Table.Cell>
+          <Table.Cell>
+            so-formatted-2
+          </Table.Cell>
+          <Table.Cell />
+          <Table.Cell>
+            1
+          </Table.Cell>
+        </Table.Row>
+      </tbody>
+    </Table>
+  </Panel>
+</div>
+`;
+
+exports[`Webhook Component: Batch Status Tab should render batch details 1`] = `
+<div>
+  <Panel>
+    <Panel.Section>
+      <div
+        className="BackLink"
+      >
+        <small>
+          <PageLink
+            to="/webhooks/details/webhook-id/batches"
+          >
+            <ArrowBack />
+             Return to All Batches
+          </PageLink>
+        </small>
+      </div>
+      <LabelledValue
+        label="Batch ID"
+      >
+        <h6>
+          243423423423
+        </h6>
+      </LabelledValue>
+      <LabelledValue
+        label="Attempts"
+      >
+        <h6>
+          1
+        </h6>
+      </LabelledValue>
+      <LabelledValue
+        label="Batch Size"
+      >
+        <h6>
+          <Tooltip
+            bottom={true}
+            content="Number of events in this batch"
+            dark={true}
+            forcePosition={false}
+            horizontalOffset="0px"
+            preferredDirection={
+              Object {
+                "bottom": true,
+                "left": false,
+                "right": true,
+                "top": false,
+              }
+            }
+            right={true}
+          >
+             
+            <InfoOutline
+              className="TooltipTrigger"
+            />
+          </Tooltip>
+        </h6>
+      </LabelledValue>
+    </Panel.Section>
+  </Panel>
+  <Panel
+    actions={
+      Array [
+        Object {
+          "color": "orange",
+          "content": "Refresh Batches",
+          "disabled": false,
+          "onClick": [Function],
+        },
+      ]
+    }
+    title="Batch Attempt History"
+  >
+    <Table>
+      <thead>
+        <Table.Row>
+          <Table.HeaderCell
+            width="200px"
+          >
+            Status
+          </Table.HeaderCell>
+          <Table.HeaderCell
+            width="250px"
+          >
+            Timestamp
+          </Table.HeaderCell>
+          <Table.HeaderCell
+            width="200px"
+          >
+            Latency
+          </Table.HeaderCell>
+          <Table.HeaderCell>
+            Attempt
+          </Table.HeaderCell>
+        </Table.Row>
+      </thead>
+      <tbody>
+        <Table.Row
+          key="0"
+        >
+          <Table.Cell>
+            <Tag
+              color="blue"
+            >
+              200
+            </Tag>
+          </Table.Cell>
+          <Table.Cell>
+            so-formatted
+          </Table.Cell>
+          <Table.Cell />
+          <Table.Cell>
+            2
+          </Table.Cell>
+        </Table.Row>
+        <Table.Row
+          key="1"
+        >
+          <Table.Cell>
+            <Tag
+              color="yellow"
+            >
+              500
+            </Tag>
+          </Table.Cell>
+          <Table.Cell>
+            so-formatted-2
+          </Table.Cell>
+          <Table.Cell />
+          <Table.Cell>
+            1
+          </Table.Cell>
+        </Table.Row>
+      </tbody>
+    </Table>
+  </Panel>
+</div>
+`;

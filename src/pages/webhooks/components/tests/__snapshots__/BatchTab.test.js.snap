@@ -30,7 +30,7 @@ exports[`Webhook Component: Batch Status Tab should render batch status tab with
         "batch_id": "243423423423",
         "formatted_time": "so-formatted",
         "response_code": 200,
-        "status": "p",
+        "status": "Success",
       },
       Object {
         "attempts": 4,
@@ -42,6 +42,61 @@ exports[`Webhook Component: Batch Status Tab should render batch status tab with
     ]
   }
 />
+`;
+
+exports[`Webhook Component: Batch Status Tab should render table rows correctly 1`] = `
+Array [
+  Array [
+    "so-formatted",
+    "243423423423",
+    <Tag
+      color="blue"
+    >
+      200
+    </Tag>,
+    1,
+    <div
+      style={
+        Object {
+          "textAlign": "right",
+        }
+      }
+    >
+      <Button
+        component={[Function]}
+        size="small"
+        to="/webhooks/details/webhook-id/batches/243423423423"
+      >
+        View Details
+      </Button>
+    </div>,
+  ],
+  Array [
+    "so-formatted-2",
+    "996969545",
+    <Tag
+      color="yellow"
+    >
+      500
+    </Tag>,
+    4,
+    <div
+      style={
+        Object {
+          "textAlign": "right",
+        }
+      }
+    >
+      <Button
+        component={[Function]}
+        size="small"
+        to="/webhooks/details/webhook-id/batches/996969545"
+      >
+        View Details
+      </Button>
+    </div>,
+  ],
+]
 `;
 
 exports[`Webhook Component: Batch Status Tab should show empty message when no batches exist 1`] = `
