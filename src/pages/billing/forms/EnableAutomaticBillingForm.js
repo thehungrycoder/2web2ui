@@ -75,7 +75,7 @@ export class EnableAutomaticBillingForm extends React.Component {
 
 const mapStateToProps = (state) => {
   const country = getFirstCountry(state);
-  const { billingId } = currentPlanSelector(state);
+  const currentPlan = currentPlanSelector(state);
 
   return {
     billingCountries: state.billing.countries,
@@ -88,9 +88,7 @@ const mapStateToProps = (state) => {
         state: getFirstStateForCountry(state, country),
         country
       },
-      planpicker: {
-        billingId // for billingCreate
-      }
+      planpicker: currentPlan // for billingCreate
     },
     loading: state.billing.plansLoading
   };
