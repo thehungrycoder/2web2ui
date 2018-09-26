@@ -40,8 +40,7 @@ import {
   isAws,
   isCustomBilling,
   isEnterprise,
-  isSubscriptionPending,
-  onSubscriptionWithType
+  isSelfServeBilling
 } from 'src/helpers/conditions/account';
 import { isHeroku, isAzure } from 'src/helpers/conditions/user';
 import { configFlag, configEquals } from 'src/helpers/conditions/config';
@@ -524,9 +523,8 @@ const routes = [
     component: billing.EnableAutomaticBillingPage,
     condition: all(
       hasGrants('account/manage'),
-      isCustomBilling,
-      onSubscriptionWithType('manual'),
-      not(isSubscriptionPending)
+      not(isSelfServeBilling),
+      isCustomBilling
     ),
     layout: App,
     title: 'Billing | Enable Automatic Billing',

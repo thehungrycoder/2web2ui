@@ -2,7 +2,6 @@ import {
   onPlan,
   onPlanWithStatus,
   onServiceLevel,
-  onSubscriptionWithType,
   isEnterprise,
   isSuspendedForBilling,
   hasStatus,
@@ -135,17 +134,6 @@ describe('Condition: isSelfServeBilling', () => {
     expect(isSelfServeBilling({ account })).toEqual(false);
   });
 
-  it('should return true with custom self server subscription', () => {
-    const account = {
-      subscription: {
-        custom: true,
-        type: 'zuora'
-      }
-    };
-
-    expect(isSelfServeBilling({ account })).toEqual(true);
-  });
-
   it('should return true with self serve subscription', () => {
     const account = {
       subscription: {
@@ -224,31 +212,5 @@ describe('Condition: isCustomBilling', () => {
     };
 
     expect(isCustomBilling(state)).toEqual(true);
-  });
-});
-
-describe('Condition: onSubscriptionWithType', () => {
-  it('should return true', () => {
-    const state = {
-      account: {
-        subscription: {
-          type: 'manual'
-        }
-      }
-    };
-
-    expect(onSubscriptionWithType('manual')(state)).toEqual(true);
-  });
-
-  it('should return false', () => {
-    const state = {
-      account: {
-        subscription: {
-          type: 'manual'
-        }
-      }
-    };
-
-    expect(onSubscriptionWithType('zuora')(state)).toEqual(false);
   });
 });

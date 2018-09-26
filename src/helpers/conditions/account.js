@@ -4,7 +4,6 @@ import _ from 'lodash';
 export const onPlan = (planCode) => ({ accountPlan }) => accountPlan.code === planCode;
 export const onPlanWithStatus = (status) => ({ accountPlan }) => accountPlan.status === status;
 export const onServiceLevel = (level) => ({ account }) => account.service_level === level;
-export const onSubscriptionWithType = (type) => ({ account: { subscription }}) => subscription.type === type;
 export const isEnterprise = any(
   onPlan('ent1'),
   onServiceLevel('enterprise')
@@ -18,11 +17,7 @@ export const isSuspendedForBilling = all(
 export const subscriptionSelfServeIsTrue = ({ account }) => _.get(account, 'subscription.self_serve', false);
 export const isAws = ({ account }) => _.get(account, 'subscription.type') === 'aws';
 export const isCustomBilling = ({ account }) => _.get(account, 'subscription.custom', false);
-export const isSelfServeBilling = any(
-  subscriptionSelfServeIsTrue,
-  all(isCustomBilling, onSubscriptionWithType('zuora')),
-  isAws
-);
+export const isSelfServeBilling = any(subscriptionSelfServeIsTrue, isAws);
 export const hasOnlineSupport = ({ account }) => _.get(account, 'support.online', false);
 export const hasUiOption = (option) => ({ account }) => _.has(account.options, `ui.${option}`);
 export const isSubscriptionPending = ({ account }) => Boolean(account.pending_subscription);
