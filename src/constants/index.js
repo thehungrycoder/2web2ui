@@ -50,7 +50,7 @@ export const LINKS = {
   GETTING_STARTED_GUIDE: 'https://www.sparkpost.com/docs/getting-started/getting-started-sparkpost',
   ADMIN_BOUNCE: 'https://support.sparkpost.com/', // TODO Add this to the bounce page
   SSO_GUIDE: 'https://www.sparkpost.com/docs/my-account-and-profile/sso',
-  ALERTS_DOCS: 'https://developers.sparkpost.com/api/alerts/#alerts',
+  ALERTS_DOCS: 'https://developers.sparkpost.com/api/alerts/#alerts-post-create-an-alert',
   ALERTS_SURVEY: 'https://goo.gl/forms/rnIuTvdVF2xhpKCy2'
 };
 
