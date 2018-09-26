@@ -1,10 +1,7 @@
 import React from 'react';
-import { format } from 'date-fns';
 import { Banner } from '@sparkpost/matchbox';
 import PageLink from 'src/components/pageLink/PageLink';
 import SupportTicketLink from 'src/components/supportTicketLink/SupportTicketLink';
-
-const dateFormat = (date) => format(date, 'MMM DD, YYYY');
 
 /**
  * Renders plan information for non-self-serve users
@@ -12,7 +9,6 @@ const dateFormat = (date) => format(date, 'MMM DD, YYYY');
  */
 const ManuallyBilledBanner = ({
   account: {
-    pending_subscription: pendingSubscription,
     subscription: {
       custom,
       name: subscriptionName,
@@ -26,18 +22,6 @@ const ManuallyBilledBanner = ({
   const title = `
     Your current ${subscriptionName} plan includes ${localePlanVolume} emails per ${period}
   `;
-
-  if (pendingSubscription) {
-    return (
-      <Banner status="info" title={title}>
-        <p>
-          You're scheduled to switch to the {pendingSubscription.name} plan on {
-            dateFormat(pendingSubscription.effective_date)
-          }.
-        </p>
-      </Banner>
-    );
-  }
 
   // this is an edge case and should not happen often
   if (custom && !planVolumePerPeriod) {

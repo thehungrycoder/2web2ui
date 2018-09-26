@@ -28,21 +28,6 @@ describe('ManuallyBilledBanner', () => {
     expect(subject({ account })).toMatchSnapshot();
   });
 
-  it('with pending subscription', () => {
-    const account = {
-      pending_subscription: {
-        name: 'Next Test',
-        effective_date: '10/5/2020'
-      },
-      subscription: {
-        name: 'Test',
-        plan_volume: 15000
-      }
-    };
-
-    expect(subject({ account })).toMatchSnapshot();
-  });
-
   it('with transitioning custom subscription', () => {
     const account = {
       subscription: {

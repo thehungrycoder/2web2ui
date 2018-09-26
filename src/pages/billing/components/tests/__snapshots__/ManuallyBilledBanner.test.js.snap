@@ -84,23 +84,6 @@ exports[`ManuallyBilledBanner with custom subscription 1`] = `
 </Banner>
 `;
 
-exports[`ManuallyBilledBanner with pending subscription 1`] = `
-<Banner
-  status="info"
-  title="
-    Your current Test plan includes 15,000 emails per month
-  "
->
-  <p>
-    You're scheduled to switch to the 
-    Next Test
-     plan on 
-    Oct 05, 2020
-    .
-  </p>
-</Banner>
-`;
-
 exports[`ManuallyBilledBanner with transitioning custom subscription 1`] = `
 <Banner
   status="warning"
