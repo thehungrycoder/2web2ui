@@ -7,7 +7,7 @@ exports[`Page: Alerts should render happy path 1`] = `
     Object {
       "component": [Function],
       "content": "Create an Alert",
-      "to": "https://developers.sparkpost.com/api/alerts/#alerts",
+      "to": "https://developers.sparkpost.com/api/alerts/#alerts-post-create-an-alert",
     }
   }
   secondaryAction={
