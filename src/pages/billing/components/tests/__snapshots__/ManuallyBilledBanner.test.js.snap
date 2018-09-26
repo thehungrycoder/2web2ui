@@ -29,35 +29,6 @@ exports[`ManuallyBilledBanner renders banner 1`] = `
 </Banner>
 `;
 
-exports[`ManuallyBilledBanner renders banner with plan volume of zero when missing 1`] = `
-<Banner
-  action={
-    Object {
-      "Component": [Function],
-      "content": "Enable Automatic Billing",
-      "to": "/account/billing/plan",
-    }
-  }
-  status="info"
-  title="
-    Your current Test plan includes 0 emails per month
-  "
->
-  <p>
-    To make changes to your plan or billing information, please 
-    <Connect(SupportTicketLink)
-      issueId="general_issue"
-    >
-      submit a support ticket
-    </Connect(SupportTicketLink)>
-    .
-  </p>
-  <p>
-    Enable automatic billing to self-manage your plan and add-ons.
-  </p>
-</Banner>
-`;
-
 exports[`ManuallyBilledBanner with custom subscription 1`] = `
 <Banner
   action={

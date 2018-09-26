@@ -18,21 +18,12 @@ describe('ManuallyBilledBanner', () => {
     expect(subject({ account })).toMatchSnapshot();
   });
 
-  it('renders banner with plan volume of zero when missing', () => {
-    const account = {
-      subscription: {
-        name: 'Test'
-      }
-    };
-
-    expect(subject({ account })).toMatchSnapshot();
-  });
-
   it('with transitioning custom subscription', () => {
     const account = {
       subscription: {
         custom: true,
         name: 'Custom',
+        plan_volume: 15000,
         plan_volume_per_period: undefined
       }
     };

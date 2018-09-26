@@ -18,7 +18,7 @@ const ManuallyBilledBanner = ({
     }
   }
 }) => {
-  const localePlanVolume = (planVolumePerPeriod || planVolume || 0).toLocaleString();
+  const localePlanVolume = (planVolumePerPeriod || planVolume).toLocaleString();
   const title = `
     Your current ${subscriptionName} plan includes ${localePlanVolume} emails per ${period}
   `;
