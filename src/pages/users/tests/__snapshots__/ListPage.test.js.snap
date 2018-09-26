@@ -26,6 +26,11 @@ exports[`Page: Users List should render correctly by default 1`] = `
         Manage your team's accounts and roles.
       </p>,
       "image": [Function],
+      "secondaryAction": Object {
+        "Component": [Function],
+        "content": "Edit your user account",
+        "to": "/account/users/edit/test-user-1",
+      },
       "show": false,
       "title": "Invite Your Team to SparkPost",
     }
@@ -134,6 +139,11 @@ exports[`Page: Users List should render with an error 1`] = `
         Manage your team's accounts and roles.
       </p>,
       "image": [Function],
+      "secondaryAction": Object {
+        "Component": [Function],
+        "content": "Edit your user account",
+        "to": "/account/users/edit/test-user-1",
+      },
       "show": false,
       "title": "Invite Your Team to SparkPost",
     }
@@ -170,6 +180,11 @@ exports[`Page: Users List should show a delete modal 1`] = `
         Manage your team's accounts and roles.
       </p>,
       "image": [Function],
+      "secondaryAction": Object {
+        "Component": [Function],
+        "content": "Edit your user account",
+        "to": "/account/users/edit/test-user-1",
+      },
       "show": false,
       "title": "Invite Your Team to SparkPost",
     }
