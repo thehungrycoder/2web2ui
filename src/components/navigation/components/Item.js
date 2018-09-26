@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { WindowSizeContext } from 'src/context/WindowSize';
+import { Tag } from '@sparkpost/matchbox';
 import { ChevronLeft } from '@sparkpost/matchbox-icons';
 import classnames from 'classnames';
 import styles from './Item.module.scss';
@@ -41,7 +42,9 @@ export class Item extends Component {
       icon: Icon,
       label,
       children,
-      toggleMobileNav
+      toggleMobileNav,
+      labs,
+      divider
     } = this.props;
 
     const active = this.isActive();
@@ -52,6 +55,18 @@ export class Item extends Component {
       this.state.open && styles.isOpen,
       mobile && styles.mobile
     );
+
+    if (labs) {
+      return (
+        <li>
+          {divider ? (<hr className={styles.hr}/>) : null}
+          <Link to={to} className={linkClasses} onClick={mobile ? toggleMobileNav : null}>
+            {Icon && <span className={styles.iconWrapper}><Icon size={21} className={styles.icon} /></span>}
+            {label} <div style={{ float: 'right' }}><Tag color='blue'>LABS</Tag></div>
+          </Link>
+        </li>
+      );
+    }
 
     return (
       <span>

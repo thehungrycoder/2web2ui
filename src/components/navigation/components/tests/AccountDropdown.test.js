@@ -27,6 +27,11 @@ describe('AccountDropdown', () => {
         {
           label: 'link3',
           action: jest.fn(() => link3Action)
+        },
+        {
+          label: 'link4',
+          to: 'link',
+          labs: true
         }
       ]
     };
@@ -53,7 +58,7 @@ describe('AccountDropdown', () => {
   });
 
   it('should dispatch nav item action on click', () => {
-    const link3 = wrapper.instance().getItems().find((item) => item.content === 'link3');
+    const link3 = wrapper.instance().getItems().find((item) => item.label === 'link3');
     link3.onClick();
 
     expect(props.accountNavItems[2].action).toHaveBeenCalled();

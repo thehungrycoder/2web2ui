@@ -1,6 +1,7 @@
 /* eslint-disable max-lines */
 import {
   abTesting,
+  AlertsPage,
   apiKeys,
   AccountSettingsPage,
   AuthPage,
@@ -567,6 +568,13 @@ const routes = [
     layout: App,
     title: 'A/B Testing',
     supportDocsSearch: 'A/B test'
+  },
+  {
+    path: '/alerts',
+    component: AlertsPage,
+    layout: App,
+    title: 'Alerts',
+    supportDocsSearch: 'Alerts'
   },
   {
     path: '/onboarding/plan',
