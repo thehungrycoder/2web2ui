@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Page: Alerts should render happy path 1`] = `
+<EmptyState
+  image={[Function]}
+  primaryAction={
+    Object {
+      "component": [Function],
+      "content": "Create an Alert",
+      "to": "https://developers.sparkpost.com/api/alerts/#alerts",
+    }
+  }
+  secondaryAction={
+    Object {
+      "component": [Function],
+      "content": "Tell us what else you’d like to see in Alerts",
+      "to": "https://goo.gl/forms/rnIuTvdVF2xhpKCy2",
+    }
+  }
+  title="Alerts"
+>
+  <p
+    className="Paragraph"
+  >
+    Are you looking for notifications when you get close to your monthly plan volume so that you can avoid overages?  Looking for notifications on other metrics?
+  </p>
+</EmptyState>
+`;

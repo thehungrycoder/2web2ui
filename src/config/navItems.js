@@ -1,4 +1,4 @@
-import { Home, InsertChart, Code, MailOutline, Language, Settings, Compare } from '@sparkpost/matchbox-icons';
+import { Home, InsertChart, Code, MailOutline, Language, Settings, Compare, NotificationsActive } from '@sparkpost/matchbox-icons';
 
 export default [
   {
@@ -102,5 +102,12 @@ export default [
         to: '/account/ip-pools'
       }
     ]
+  },
+  {
+    label: 'Alerts',
+    to: '/alerts',
+    labs: true,
+    divider: true,
+    icon: NotificationsActive
   }
 ];

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { WindowSizeContext } from 'src/context/WindowSize';
 import { selectAccountNavItems } from 'src/selectors/navItems';
-import { UnstyledLink, Popover, ActionList } from '@sparkpost/matchbox';
+import { UnstyledLink, Popover, ActionList, Tag } from '@sparkpost/matchbox';
 import { ArrowDropDown, Person } from '@sparkpost/matchbox-icons';
 import styles from './AccountDropdown.module.scss';
 
@@ -29,11 +29,15 @@ export class AccountDropdown extends Component {
 
   getItems() {
     const { accountNavItems, dispatch } = this.props;
-    const items = accountNavItems.map(({ action, label, external, condition, icon: Icon, ...rest }) => {
+    const items = accountNavItems.map(({ action, label, external, condition, icon: Icon, labs, ...rest }) => {
+      const labsMarkup = labs
+        ? <div className={styles.FloatIcon}><Tag color='blue'>LABS</Tag></div>
+        : null;
+
       const content = Icon
-        ? <Fragment>{label} <div className={styles.FloatIcon}><Icon size={15} /></div></Fragment>
-        : label;
-      const listItem = { content, external, ...rest };
+        ? <Fragment>{label}<div className={styles.FloatIcon}><Icon size={15} /></div></Fragment>
+        : <Fragment>{label} {labsMarkup}</Fragment>;
+      const listItem = { content, label, external, ...rest };
 
       if (!external) {
         listItem.component = Link;
