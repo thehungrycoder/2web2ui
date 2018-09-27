@@ -18,13 +18,28 @@ describe('ManuallyBilledBanner', () => {
     expect(subject({ account })).toMatchSnapshot();
   });
 
-  it('with transitioning custom subscription', () => {
+  it('with transitioning custom subscription when volume per period is undefined', () => {
     const account = {
       subscription: {
         custom: true,
         name: 'Custom',
         plan_volume: 15000,
-        plan_volume_per_period: undefined
+        plan_volume_per_period: undefined,
+        recurring_charge: 100
+      }
+    };
+
+    expect(subject({ account })).toMatchSnapshot();
+  });
+
+  it('with transitioning custom subscription when charge is undefined', () => {
+    const account = {
+      subscription: {
+        custom: true,
+        name: 'Custom',
+        plan_volume: 15000,
+        plan_volume_per_period: 180000,
+        recurring_charge: undefined
       }
     };
 
@@ -38,7 +53,8 @@ describe('ManuallyBilledBanner', () => {
         name: 'Custom',
         period: 'year',
         plan_volume: 10000,
-        plan_volume_per_period: 120000
+        plan_volume_per_period: 120000,
+        recurring_charge: 100
       }
     };
 

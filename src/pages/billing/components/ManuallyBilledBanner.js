@@ -14,7 +14,8 @@ const ManuallyBilledBanner = ({
       name: subscriptionName,
       period = 'month',
       plan_volume: planVolume,
-      plan_volume_per_period: planVolumePerPeriod
+      plan_volume_per_period: planVolumePerPeriod,
+      recurring_charge: recurringCharge
     }
   }
 }) => {
@@ -23,8 +24,9 @@ const ManuallyBilledBanner = ({
     Your current ${subscriptionName} plan includes ${localePlanVolume} emails per ${period}
   `;
 
-  // this is an edge case and should not happen often
-  if (custom && !planVolumePerPeriod) {
+  // this is an edge case that will only happen if the custom plan is not configured correctly
+  // with charge and volume
+  if (custom && (!planVolumePerPeriod || !recurringCharge)) {
     return (
       <Banner
         status="warning"
