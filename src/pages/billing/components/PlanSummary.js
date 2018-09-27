@@ -1,32 +1,27 @@
 import React from 'react';
-import { LabelledValue } from 'src/components';
+import styles from './PlanSummary.module.scss';
 
-const PlanSummary = ({ plan }) => {
-  let monthly = '';
-
-  if (!plan) {
-    return <LabelledValue label='Your Plan' />;
+const PlanSummary = ({
+  plan: {
+    period,
+    plan_volume: planVolume,
+    plan_volume_per_period: planVolumePerPeriod,
+    overage,
+    recurring_charge: recurringCharge
   }
-
-  if (plan.monthly !== undefined) {
-    monthly = plan.monthly === 0
-      ? 'for Free'
-      : <span><strong>for ${plan.monthly.toLocaleString()}</strong> per month</span>;
-  }
-
-  const overage = plan.overage
-    ? <p>${plan.overage.toFixed(2)}/thousand extra emails</p>
-    : null;
-
-  const volume = plan.volume
-    ? <span><strong>{plan.volume.toLocaleString()}</strong> emails</span>
-    : null;
+}) => {
+  const cost = recurringCharge === 0
+    ? 'Free'
+    : `$${recurringCharge.toLocaleString()} per ${period || 'month'}`;
+  const volume = (planVolumePerPeriod || planVolume).toLocaleString();
 
   return (
-    <LabelledValue label='Your Plan'>
-      <h6>{ volume } { monthly }</h6>
-      { overage }
-    </LabelledValue>
+    <React.Fragment>
+      <h6 className={styles.Headline}>
+        {volume} emails for {cost}
+      </h6>
+      {overage && <p>${overage.toFixed(2)} per thousand extra emails</p>}
+    </React.Fragment>
   );
 };
 

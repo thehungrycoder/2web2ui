@@ -6,6 +6,7 @@ import {
   isSuspendedForBilling,
   hasStatus,
   hasStatusReasonCategory,
+  isCustomBilling,
   isSelfServeBilling,
   hasOnlineSupport,
   hasUiOption
@@ -110,18 +111,38 @@ describe('Conditon: hasStatusReasonCategory', () => {
 });
 
 describe('Condition: isSelfServeBilling', () => {
-
-  it('should return whether the account is self serve billing', () => {
+  it('should return false with undefined subscription', () => {
     const account = {};
     expect(isSelfServeBilling({ account })).toEqual(false);
-    account.subscription = {};
-    expect(isSelfServeBilling({ account })).toEqual(false);
-    account.subscription.self_serve = false;
-    expect(isSelfServeBilling({ account })).toEqual(false);
-    account.subscription.self_serve = true;
-    expect(isSelfServeBilling({ account })).toEqual(true);
   });
 
+  it('should return false with empty subscription', () => {
+    const account = {
+      subscription: {}
+    };
+
+    expect(isSelfServeBilling({ account })).toEqual(false);
+  });
+
+  it('should return false with manual subscription', () => {
+    const account = {
+      subscription: {
+        self_serve: false
+      }
+    };
+
+    expect(isSelfServeBilling({ account })).toEqual(false);
+  });
+
+  it('should return true with self serve subscription', () => {
+    const account = {
+      subscription: {
+        self_serve: true
+      }
+    };
+
+    expect(isSelfServeBilling({ account })).toEqual(true);
+  });
 });
 
 describe('Condition: hasOnlineSupport', () => {
@@ -164,5 +185,32 @@ describe('Condition: hasUiOption', () => {
       }
     };
     expect(hasUiOption('iceCream')(state)).toEqual(false);
+  });
+});
+
+
+describe('Condition: isCustomBilling', () => {
+  it('should return false', () => {
+    const state = {
+      account: {
+        subscription: {
+          custom: false
+        }
+      }
+    };
+
+    expect(isCustomBilling(state)).toEqual(false);
+  });
+
+  it('should return true', () => {
+    const state = {
+      account: {
+        subscription: {
+          custom: true
+        }
+      }
+    };
+
+    expect(isCustomBilling(state)).toEqual(true);
   });
 });

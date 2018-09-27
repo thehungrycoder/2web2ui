@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ManuallyBilledBanner renders banner 1`] = `
+<Banner
+  action={
+    Object {
+      "Component": [Function],
+      "content": "Enable Automatic Billing",
+      "to": "/account/billing/plan",
+    }
+  }
+  status="info"
+  title="
+    Your current Test plan includes 15,000 emails per month
+  "
+>
+  <p>
+    To make changes to your plan or billing information, please 
+    <Connect(SupportTicketLink)
+      issueId="general_issue"
+    >
+      submit a support ticket
+    </Connect(SupportTicketLink)>
+    .
+  </p>
+  <p>
+    Enable automatic billing to self-manage your plan and add-ons.
+  </p>
+</Banner>
+`;
+
+exports[`ManuallyBilledBanner with custom subscription 1`] = `
+<Banner
+  action={
+    Object {
+      "Component": [Function],
+      "content": "Enable Automatic Billing",
+      "to": "/account/billing/enable-automatic",
+    }
+  }
+  status="info"
+  title="
+    Your current Custom plan includes 120,000 emails per year
+  "
+>
+  <p>
+    To make changes to your plan or billing information, please 
+    <Connect(SupportTicketLink)
+      issueId="general_issue"
+    >
+      submit a support ticket
+    </Connect(SupportTicketLink)>
+    .
+  </p>
+</Banner>
+`;
+
+exports[`ManuallyBilledBanner with transitioning custom subscription 1`] = `
+<Banner
+  status="warning"
+  title="Your current plan is being transitioned to a Custom plan"
+>
+  <p>
+    If your account should not be transitioned, please 
+    <Connect(SupportTicketLink)
+      issueId="general_issue"
+    >
+      submit a support ticket
+    </Connect(SupportTicketLink)>
+    .
+  </p>
+</Banner>
+`;

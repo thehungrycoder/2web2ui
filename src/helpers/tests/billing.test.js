@@ -1,6 +1,7 @@
 import {
   formatCountries,
   formatCardTypes,
+  formatCreateData,
   formatDataForCors,
   getPlanPrice,
   prepareCardInfo
@@ -95,8 +96,20 @@ describe('Billing Helpers', () => {
       expect(prepareCardInfo({ number: '411', expCombined: '02 / 2019' })).toMatchSnapshot();
     });
   });
+
+  describe('formatCreateData', () => {
+    it('returns formatted data', () => {
+      const data = {
+        accountNumber: 123,
+        billingId: 'b1ll7',
+        billToContact: Symbol('bill-to-contact'),
+        contractEffectiveDate: '01/01/1970',
+        creditCard: Symbol('credit-card'),
+        crmId: 123,
+        name: 'Super Test'
+      };
+
+      expect(formatCreateData(data)).toMatchSnapshot();
+    });
+  });
 });
-
-
-
-

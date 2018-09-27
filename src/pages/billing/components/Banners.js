@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import { LINKS } from 'src/constants';
 import * as conversions from 'src/helpers/conversionTracking';
 import { ANALYTICS_PREMIUM_SUPPORT, ANALYTICS_ENTERPRISE_SUPPORT } from 'src/constants';
-import SupportTicketLink from 'src/components/supportTicketLink/SupportTicketLink';
 
 const dateFormat = (date) => format(date, 'MMM DD, YYYY');
 
@@ -25,46 +24,6 @@ export const PendingPlanBanner = ({ account }) => {
         on {dateFormat(account.pending_subscription.effective_date)}, and can't update your plan
         until that switch happens.
       </p>
-    </Banner>
-  );
-};
-
-/**
- * Renders plan information for non-self-serve users
- * @prop account Account state from redux store
- */
-export const ManuallyBilledBanner = ({ account, ...rest }) => {
-  if (account.subscription.self_serve || !account.subscription.plan_volume) {
-    return null;
-  }
-
-  const convertAction = !account.pending_subscription
-    ? { content: 'Enable Automatic Billing', to: '/account/billing/plan', Component: Link }
-    : null;
-
-  const convertMarkup = !account.pending_subscription
-    ? <p>Enable automatic billing to self-manage your plan and add-ons.</p>
-    : null;
-
-  return (
-    <Banner
-      status='info'
-      title={`Your current ${account.subscription.name} plan includes ${account.subscription.plan_volume.toLocaleString()} emails per month`}
-      action={convertAction}
-    >
-      {account.pending_subscription ? (
-        <p>
-          You're scheduled to switch to the {account.pending_subscription.name} plan
-          on {dateFormat(account.pending_subscription.effective_date)}.
-        </p>
-      ) : (
-        <p>
-          To make changes to your plan, billing information, or addons, please {
-            <SupportTicketLink issueId="general_issue">submit a support ticket</SupportTicketLink>
-          }.
-        </p>
-      )}
-      {convertMarkup}
     </Banner>
   );
 };

@@ -55,6 +55,28 @@ Array [
 ]
 `;
 
+exports[`Billing Helpers formatCreateData returns formatted data 1`] = `
+Object {
+  "accountNumber": 123,
+  "autoPay": true,
+  "billToContact": Symbol(bill-to-contact),
+  "creditCard": Symbol(credit-card),
+  "crmId": 123,
+  "currency": "USD",
+  "invoiceCollect": true,
+  "name": "Super Test",
+  "subscription": Object {
+    "contractEffectiveDate": "01/01/1970",
+    "subscribeToRatePlans": Array [
+      Object {
+        "productRatePlanId": "b1ll7",
+      },
+    ],
+    "termType": "EVERGREEN",
+  },
+}
+`;
+
 exports[`Billing Helpers formatDataForCors should return the correctly formatted values 1`] = `
 Object {
   "billingData": Object {

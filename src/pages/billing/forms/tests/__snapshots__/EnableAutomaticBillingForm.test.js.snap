@@ -1,0 +1,116 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EnableAutomaticBillingForm renders form 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <Grid>
+    <Grid.Column>
+      <Panel
+        title="Add a Credit Card"
+      >
+        <Panel.Section>
+          <Connect(PaymentForm)
+            formName="enableAutomaticBilling"
+          />
+        </Panel.Section>
+        <Panel.Section>
+          <Connect(BillingAddressForm)
+            countries={
+              Array [
+                Object {
+                  "label": "United States",
+                  "value": "US",
+                },
+              ]
+            }
+            formName="enableAutomaticBilling"
+          />
+        </Panel.Section>
+      </Panel>
+    </Grid.Column>
+    <Grid.Column
+      md={5}
+      xs={12}
+    >
+      <Panel
+        title="Your Plan"
+      >
+        <Panel.Section>
+          <PlanSummary />
+        </Panel.Section>
+        <Panel.Section>
+          <Button
+            fullWidth={true}
+            primary={true}
+            size="default"
+            type="submit"
+          >
+            Enable Automatic Billing
+          </Button>
+        </Panel.Section>
+      </Panel>
+    </Grid.Column>
+  </Grid>
+</form>
+`;
+
+exports[`EnableAutomaticBillingForm renders form disabled 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <Grid>
+    <Grid.Column>
+      <Panel
+        title="Add a Credit Card"
+      >
+        <Panel.Section>
+          <Connect(PaymentForm)
+            disabled={true}
+            formName="enableAutomaticBilling"
+          />
+        </Panel.Section>
+        <Panel.Section>
+          <Connect(BillingAddressForm)
+            countries={
+              Array [
+                Object {
+                  "label": "United States",
+                  "value": "US",
+                },
+              ]
+            }
+            disabled={true}
+            formName="enableAutomaticBilling"
+          />
+        </Panel.Section>
+      </Panel>
+    </Grid.Column>
+    <Grid.Column
+      md={5}
+      xs={12}
+    >
+      <Panel
+        title="Your Plan"
+      >
+        <Panel.Section>
+          <PlanSummary />
+        </Panel.Section>
+        <Panel.Section>
+          <Button
+            disabled={true}
+            fullWidth={true}
+            primary={true}
+            size="default"
+            type="submit"
+          >
+            Enable Automatic Billing
+          </Button>
+        </Panel.Section>
+      </Panel>
+    </Grid.Column>
+  </Grid>
+</form>
+`;
+
+exports[`EnableAutomaticBillingForm renders loading panel 1`] = `<Loading />`;

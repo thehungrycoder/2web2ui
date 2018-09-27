@@ -2,53 +2,31 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import PlanSummary from '../PlanSummary';
 
-describe('Component: PlanSummary', () => {
+describe('PlanSummary', () => {
+  const subject = (plan = {}) => shallow(
+    <PlanSummary plan={{ plan_volume: 1000, recurring_charge: 100, ...plan }} />
+  );
 
-  let props;
-  let wrapper;
+  it('renders summary', () => {
+    expect(subject()).toMatchSnapshot();
+  });
 
-  beforeEach(() => {
-    props = {
-      plan: {
-        overage: 0.01,
-        monthly: 100000,
-        volume: 100000000
-      }
+  it('renders summary for free plan', () => {
+    expect(subject({ recurring_charge: 0 })).toMatchSnapshot();
+  });
+
+  it('renders summary with overages', () => {
+    expect(subject({ overage: 0.0123 })).toMatchSnapshot();
+  });
+
+  it('renders summary with custom plan', () => {
+    const plan = {
+      plan_volume: 1000,
+      plan_volume_per_period: 12000,
+      recurring_charge: 100,
+      period: 'year'
     };
-    wrapper = shallow(<PlanSummary {...props} />);
-  });
 
-  it('should render correctly', () => {
-    expect(wrapper).toMatchSnapshot();
+    expect(subject(plan)).toMatchSnapshot();
   });
-
-  it('should render with no monthly value', () => {
-    delete props.plan.monthly;
-    wrapper.setProps({ plan: props.plan });
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('should render with 0 monthly value', () => {
-    props.plan.monthly = 0;
-    wrapper.setProps({ plan: props.plan });
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('should render with no overage value', () => {
-    delete props.plan.overage;
-    wrapper.setProps({ plan: props.plan });
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('should render with no volume value', () => {
-    delete props.plan.volume;
-    wrapper.setProps({ plan: props.plan });
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('should render with no plan', () => {
-    wrapper.setProps({ plan: undefined });
-    expect(wrapper).toMatchSnapshot();
-  });
-
 });

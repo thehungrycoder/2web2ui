@@ -15,7 +15,10 @@ describe('Component: Billing Summary', () => {
   beforeEach(() => {
     props = {
       account: {
-        billing: {}
+        billing: {},
+        subscription: {
+          plan_volume: 15000
+        }
       },
       currentPlan: {
         isFree: true
