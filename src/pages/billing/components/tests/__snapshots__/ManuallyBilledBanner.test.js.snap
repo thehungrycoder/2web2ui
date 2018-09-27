@@ -55,7 +55,24 @@ exports[`ManuallyBilledBanner with custom subscription 1`] = `
 </Banner>
 `;
 
-exports[`ManuallyBilledBanner with transitioning custom subscription 1`] = `
+exports[`ManuallyBilledBanner with transitioning custom subscription when charge is undefined 1`] = `
+<Banner
+  status="warning"
+  title="Your current plan is being transitioned to a Custom plan"
+>
+  <p>
+    If your account should not be transitioned, please 
+    <Connect(SupportTicketLink)
+      issueId="general_issue"
+    >
+      submit a support ticket
+    </Connect(SupportTicketLink)>
+    .
+  </p>
+</Banner>
+`;
+
+exports[`ManuallyBilledBanner with transitioning custom subscription when volume per period is undefined 1`] = `
 <Banner
   status="warning"
   title="Your current plan is being transitioned to a Custom plan"
