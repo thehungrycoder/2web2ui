@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 // import * as conversions from 'src/helpers/conversionTracking';
 
-import { ImmediateChangePlanPage } from '../ImmediateChangePlanPage';
+import { ImmediateChangePlanPage, LOAD_STATE } from '../ImmediateChangePlanPage';
 
 const plans = [
   {
@@ -44,7 +44,6 @@ describe('Component: ImmediateChangePlanPage', () => {
     await wrapper;
 
     expect(props.updateSubscription).toHaveBeenCalledWith({ code: 'so-very-free' });
-    expect(props.showAlert).toHaveBeenCalledWith({ type: 'success', message: 'Subscription Updated' });
   });
 
   it('should not change plan without immediatePlanChange', async () => {
@@ -59,11 +58,24 @@ describe('Component: ImmediateChangePlanPage', () => {
   });
 
   it('should render while changing plan', () => {
+    wrapper.setState({ loading: LOAD_STATE.PENDING });
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render after plan changed', () => {
-    wrapper.setState({ loading: false });
+    wrapper.setState({ loading: LOAD_STATE.SUCCESS });
     expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render after plan change failed', () => {
+    wrapper.setState({ loading: LOAD_STATE.FAILURE, error: { message: 'Kapow' }});
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should allow retries after failure', () => {
+    wrapper.setState({ loading: LOAD_STATE.FAILURE, error: { message: 'boom' }});
+    const reloadFn = wrapper.find('ApiErrorBanner').first().prop('reload');
+    reloadFn();
+    expect(props.updateSubscription).toHaveBeenCalled();
   });
 });

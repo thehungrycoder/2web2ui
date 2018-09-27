@@ -1,18 +1,27 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
-import { Page, Grid, UnstyledLink } from '@sparkpost/matchbox';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import qs from 'query-string';
+import { Button } from '@sparkpost/matchbox';
+import { ApiErrorBanner, Loading } from 'src/components';
 import * as conversions from 'src/helpers/conversionTracking';
 import { updateSubscription } from 'src/actions/billing';
 import { showAlert } from 'src/actions/globalAlert';
 import { stripImmediatePlanChange } from 'src/helpers/billing';
 
+import styles from './ImmediateChangePlanPage.module.scss';
+
 const BILLING_ROUTE = '/account/billing';
+
+export const LOAD_STATE = {
+  PENDING: 1,
+  SUCCESS: 2,
+  FAILURE: 3
+};
 
 export class ImmediateChangePlanPage extends Component {
   state = {
-    loading: true
+    loading: LOAD_STATE.PENDING
   }
 
   componentDidMount() {
@@ -33,45 +42,58 @@ export class ImmediateChangePlanPage extends Component {
     });
   }
 
-  handleImmediatePlanChange() {
-    const { billing, oldCode, immediatePlanChange: newCode, updateSubscription, showAlert } = this.props;
+  handleImmediatePlanChange = () => {
+    const { billing, oldCode, immediatePlanChange: newCode, updateSubscription } = this.props;
+    this.setState({ loading: LOAD_STATE.PENDING });
     return updateSubscription({ code: newCode })
       .then(() => {
         conversions.trackPlanChange({ allPlans: billing.plans, oldCode, newCode });
-        this.setState({ loading: false });
-        showAlert({ type: 'success', message: 'Subscription Updated' });
+        this.setState({ loading: LOAD_STATE.SUCCESS });
+      }, (error) => {
+        this.setState({ loading: LOAD_STATE.FAILURE, error });
       });
+  }
+
+  getLoadState() {
+    return Number(this.state.loading);
+  }
+
+  renderSuccess() {
+    return <div className={styles.MessageInnards}>
+      <h1>Your subscription has been updated.</h1>
+      <Button to={BILLING_ROUTE} color='orange'>Back to Billing</Button>
+    </div>;
+  }
+
+  renderError() {
+    return <div className={styles.ErrorBanner}>
+      <ApiErrorBanner
+        errorDetails={this.state.error.message}
+        message='Sorry, we had some trouble updating your subscription.'
+        reload={this.handleImmediatePlanChange}
+      />
+    </div>;
   }
 
   render() {
     const { loading } = this.state;
-    return <Page breadcrumbAction={{ content: 'Back to billing', to: '/account/billing', Component: Link }}>
-      <h1>Updating Your Subscription</h1>
-      <Grid center="xs">
-        <Grid.Column xsOffset={3} xs={6}>
-          <h4>
-            {
-              loading
-                ? 'Just a moment...'
-                : 'All done! Your subscription has been updated.'
-            }
-          </h4>
-        </Grid.Column>
-        {
-          loading
-            ? null
-            : <Grid.Column xsOffset={3} xs={6}><UnstyledLink to={BILLING_ROUTE}>Back to billing</UnstyledLink></Grid.Column>
-        }
-      </Grid>
-    </Page>;
+
+    if (loading === LOAD_STATE.PENDING) {
+      return <Loading />;
+    }
+
+    return <div className={styles.MessageBlock}>
+      {loading === LOAD_STATE.FAILURE && this.renderError()}
+      {loading === LOAD_STATE.SUCCESS && this.renderSuccess()}
+    </div>;
   }
 }
 
 const mapStateToProps = (state, props) => {
-  const { code: oldCode, immediatePlanChange } = qs.parse(props.location.search);
+  const { immediatePlanChange } = qs.parse(props.location.search);
   return {
     billing: state.billing,
-    oldCode,
+    oldCode: state.account.subscription.code,
     immediatePlanChange
   };
 };

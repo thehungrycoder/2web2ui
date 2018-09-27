@@ -31,7 +31,8 @@ export function loadPrerequisiteMetrics() {
     meta: {
       method: 'GET',
       url: '/metrics/deliverability',
-      params: metricsRequest
+      params: metricsRequest,
+      showErrorAlert: false
     }
   });
 }
@@ -42,7 +43,8 @@ export function precancel(data) {
     meta: {
       method: 'POST',
       url: '/precancel',
-      data
+      data,
+      showErrorAlert: false
     }
   });
 }
