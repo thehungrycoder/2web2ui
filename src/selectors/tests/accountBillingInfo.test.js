@@ -73,6 +73,18 @@ describe('Selector: can change plan', () => {
 
     expect(billingInfo.canChangePlanSelector(state)).toEqual(false);
   });
+
+  it('should return false with a custom plan', () => {
+    const state = {
+      account: {
+        subscription: {
+          custom: true
+        }
+      }
+    };
+
+    expect(billingInfo.canChangePlanSelector(state)).toEqual(false);
+  });
 });
 
 describe('currentPlanCodeSelector: can select plan code', () => {

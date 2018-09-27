@@ -1,7 +1,7 @@
 import billingCreate from '../billingCreate';
 import * as accountActions from 'src/actions/account';
 import * as billingActions from 'src/actions/billing';
-import { isAws } from 'src/helpers/conditions/account';
+import * as accountConditions from 'src/helpers/conditions/account';
 import * as billingHelpers from 'src/helpers/billing';
 
 jest.mock('src/actions/account');
@@ -14,7 +14,8 @@ describe('Action Creator: Billing Create', () => {
 
   beforeEach(() => {
     dispatch = jest.fn((a) => a);
-    isAws.mockImplementation(() => false);
+    accountConditions.isAws = jest.fn(() => false);
+    accountConditions.isCustomBilling = jest.fn(() => false);
   });
 
   it('update without a planpicker code', () => {
@@ -29,7 +30,8 @@ describe('Action Creator: Billing Create', () => {
       billToContact: {},
       creditCard: {
         cardNumber: '1111222233334444'
-      }
+      },
+      invoiceCollect: true
     };
     const getState = () => ({ currentUser });
     const thunk = billingCreate(values);
@@ -69,11 +71,11 @@ describe('Action Creator: Billing Create', () => {
     const values = { planpicker: { code: 'plan-code' }};
     const thunk = billingCreate(values);
 
-    isAws.mockImplementation(() => true);
+    accountConditions.isAws = jest.fn(() => true);
     billingActions.updateSubscription = jest.fn();
 
     thunk(dispatch, () => state);
-    expect(isAws).toHaveBeenCalledWith(state);
+    expect(accountConditions.isAws).toHaveBeenCalledWith(state);
     expect(billingActions.updateSubscription).toHaveBeenCalledWith({ code: 'plan-code' });
   });
 });

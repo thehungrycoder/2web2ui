@@ -33,49 +33,6 @@ exports[`Billing Banners:  Enterprise banner renders 1`] = `
 </Banner>
 `;
 
-exports[`Billing Banners:  ManuallyBilledBanner should render with pending subscription 1`] = `
-<Banner
-  action={null}
-  status="info"
-  title="Your current whoa plan includes 123 emails per month"
->
-  <p>
-    You're scheduled to switch to the 
-    omg
-     plan on 
-    Oct 05, 2020
-    .
-  </p>
-</Banner>
-`;
-
-exports[`Billing Banners:  ManuallyBilledBanner should render with subscription 1`] = `
-<Banner
-  action={
-    Object {
-      "Component": [Function],
-      "content": "Enable Automatic Billing",
-      "to": "/account/billing/plan",
-    }
-  }
-  status="info"
-  title="Your current whoa plan includes 123 emails per month"
->
-  <p>
-    To make changes to your plan, billing information, or addons, please 
-    <Connect(SupportTicketLink)
-      issueId="general_issue"
-    >
-      submit a support ticket
-    </Connect(SupportTicketLink)>
-    .
-  </p>
-  <p>
-    Enable automatic billing to self-manage your plan and add-ons.
-  </p>
-</Banner>
-`;
-
 exports[`Billing Banners:  PendingPlanBanner should render with pending_subscription 1`] = `
 <Banner
   status="info"

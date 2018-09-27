@@ -6,6 +6,9 @@ exports[`Component: Billing Summary should render correctly for a paid plan 1`] 
     account={
       Object {
         "billing": Object {},
+        "subscription": Object {
+          "plan_volume": 15000,
+        },
       }
     }
   />
@@ -25,14 +28,17 @@ exports[`Component: Billing Summary should render correctly for a paid plan 1`] 
         ]
       }
     >
-      <PlanSummary
+      <LabelledValue
         label="Your Plan"
-        plan={
-          Object {
-            "isFree": false,
+      >
+        <PlanSummary
+          plan={
+            Object {
+              "plan_volume": 15000,
+            }
           }
-        }
-      />
+        />
+      </LabelledValue>
     </Panel.Section>
     <DedicatedIpSummarySection
       count={0}
@@ -99,6 +105,9 @@ exports[`Component: Billing Summary should render correctly for a standard free 
     account={
       Object {
         "billing": Object {},
+        "subscription": Object {
+          "plan_volume": 15000,
+        },
       }
     }
   />
@@ -118,14 +127,17 @@ exports[`Component: Billing Summary should render correctly for a standard free 
         ]
       }
     >
-      <PlanSummary
+      <LabelledValue
         label="Your Plan"
-        plan={
-          Object {
-            "isFree": true,
+      >
+        <PlanSummary
+          plan={
+            Object {
+              "plan_volume": 15000,
+            }
           }
-        }
-      />
+        />
+      </LabelledValue>
     </Panel.Section>
   </Panel>
   <Component />
@@ -143,6 +155,9 @@ exports[`Component: Billing Summary should render correctly if you can't buy IPs
     account={
       Object {
         "billing": Object {},
+        "subscription": Object {
+          "plan_volume": 15000,
+        },
       }
     }
   />
@@ -162,14 +177,17 @@ exports[`Component: Billing Summary should render correctly if you can't buy IPs
         ]
       }
     >
-      <PlanSummary
+      <LabelledValue
         label="Your Plan"
-        plan={
-          Object {
-            "isFree": true,
+      >
+        <PlanSummary
+          plan={
+            Object {
+              "plan_volume": 15000,
+            }
           }
-        }
-      />
+        />
+      </LabelledValue>
     </Panel.Section>
   </Panel>
   <Panel
@@ -227,6 +245,9 @@ exports[`Component: Billing Summary should render correctly if you can't change 
     account={
       Object {
         "billing": Object {},
+        "subscription": Object {
+          "plan_volume": 15000,
+        },
       }
     }
   />
@@ -235,14 +256,17 @@ exports[`Component: Billing Summary should render correctly if you can't change 
     title="Plan Overview"
   >
     <Panel.Section>
-      <PlanSummary
+      <LabelledValue
         label="Your Plan"
-        plan={
-          Object {
-            "isFree": true,
+      >
+        <PlanSummary
+          plan={
+            Object {
+              "plan_volume": 15000,
+            }
           }
-        }
-      />
+        />
+      </LabelledValue>
     </Panel.Section>
     <DedicatedIpSummarySection
       count={0}
@@ -309,6 +333,9 @@ exports[`Component: Billing Summary should render correctly if you can't update 
     account={
       Object {
         "billing": Object {},
+        "subscription": Object {
+          "plan_volume": 15000,
+        },
       }
     }
   />
@@ -328,14 +355,17 @@ exports[`Component: Billing Summary should render correctly if you can't update 
         ]
       }
     >
-      <PlanSummary
+      <LabelledValue
         label="Your Plan"
-        plan={
-          Object {
-            "isFree": true,
+      >
+        <PlanSummary
+          plan={
+            Object {
+              "plan_volume": 15000,
+            }
           }
-        }
-      />
+        />
+      </LabelledValue>
     </Panel.Section>
     <DedicatedIpSummarySection
       count={0}
@@ -362,6 +392,9 @@ exports[`Component: Billing Summary should render with IP modal open 1`] = `
     account={
       Object {
         "billing": Object {},
+        "subscription": Object {
+          "plan_volume": 15000,
+        },
       }
     }
   />
@@ -381,14 +414,17 @@ exports[`Component: Billing Summary should render with IP modal open 1`] = `
         ]
       }
     >
-      <PlanSummary
+      <LabelledValue
         label="Your Plan"
-        plan={
-          Object {
-            "isFree": true,
+      >
+        <PlanSummary
+          plan={
+            Object {
+              "plan_volume": 15000,
+            }
           }
-        }
-      />
+        />
+      </LabelledValue>
     </Panel.Section>
     <DedicatedIpSummarySection
       count={0}
@@ -459,6 +495,9 @@ exports[`Component: Billing Summary should render with the billing contact modal
     account={
       Object {
         "billing": Object {},
+        "subscription": Object {
+          "plan_volume": 15000,
+        },
       }
     }
   />
@@ -478,14 +517,17 @@ exports[`Component: Billing Summary should render with the billing contact modal
         ]
       }
     >
-      <PlanSummary
+      <LabelledValue
         label="Your Plan"
-        plan={
-          Object {
-            "isFree": true,
+      >
+        <PlanSummary
+          plan={
+            Object {
+              "plan_volume": 15000,
+            }
           }
-        }
-      />
+        />
+      </LabelledValue>
     </Panel.Section>
     <DedicatedIpSummarySection
       count={0}
@@ -556,6 +598,9 @@ exports[`Component: Billing Summary should render with the payment info modal op
     account={
       Object {
         "billing": Object {},
+        "subscription": Object {
+          "plan_volume": 15000,
+        },
       }
     }
   />
@@ -575,14 +620,17 @@ exports[`Component: Billing Summary should render with the payment info modal op
         ]
       }
     >
-      <PlanSummary
+      <LabelledValue
         label="Your Plan"
-        plan={
-          Object {
-            "isFree": true,
+      >
+        <PlanSummary
+          plan={
+            Object {
+              "plan_volume": 15000,
+            }
           }
-        }
-      />
+        />
+      </LabelledValue>
     </Panel.Section>
     <DedicatedIpSummarySection
       count={0}
@@ -653,6 +701,9 @@ exports[`Component: Billing Summary should show the invoice history if there are
     account={
       Object {
         "billing": Object {},
+        "subscription": Object {
+          "plan_volume": 15000,
+        },
       }
     }
   />
@@ -672,14 +723,17 @@ exports[`Component: Billing Summary should show the invoice history if there are
         ]
       }
     >
-      <PlanSummary
+      <LabelledValue
         label="Your Plan"
-        plan={
-          Object {
-            "isFree": true,
+      >
+        <PlanSummary
+          plan={
+            Object {
+              "plan_volume": 15000,
+            }
           }
-        }
-      />
+        />
+      </LabelledValue>
     </Panel.Section>
     <DedicatedIpSummarySection
       count={0}

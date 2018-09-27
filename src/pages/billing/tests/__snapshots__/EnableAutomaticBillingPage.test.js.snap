@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EnableAutomaticBillingPage renders page with form 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "Back to billing",
+      "to": "/account/billing",
+    }
+  }
+  empty={Object {}}
+>
+  <withRouter(Connect(ReduxForm)) />
+</Page>
+`;

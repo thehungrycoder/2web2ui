@@ -71,7 +71,9 @@ export default class BillingSummary extends Component {
 
         <Panel accent title='Plan Overview'>
           <Panel.Section {...changePlanActions}>
-            <PlanSummary label='Your Plan' plan={currentPlan} />
+            <LabelledValue label="Your Plan">
+              <PlanSummary plan={account.subscription} />
+            </LabelledValue>
           </Panel.Section>
           {canPurchaseIps && this.renderDedicatedIpSummarySection()}
         </Panel>
