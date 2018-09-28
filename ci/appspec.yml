@@ -1,0 +1,19 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /opt/msys/app/phoenix
+permissions:
+  - object: /
+    pattern: "**"
+    owner: ubuntu
+    group: ubuntu
+hooks:
+  ApplicationStop:
+    - location: scripts/stop.sh
+      timeout: 10
+      runas: ubuntu
+  ApplicationStart:
+    - location: scripts/start.sh
+      timeout: 20
+      runas: ubuntu

@@ -55,6 +55,7 @@ measureFileSizesBeforeBuild(paths.appBuild)
     // Generate and merge tenant configurations in public/static/tenant-config
     generateConfigs();
 
+    copyPaths();
     // Start the webpack build
     return build(previousFileSizes);
   })
@@ -85,7 +86,6 @@ measureFileSizesBeforeBuild(paths.appBuild)
         WARN_AFTER_BUNDLE_GZIP_SIZE,
         WARN_AFTER_CHUNK_GZIP_SIZE
       );
-      console.log();
 
       const appPackage = require(paths.appPackageJson);
       const publicUrl = paths.publicUrl;
@@ -153,4 +153,15 @@ function copyPublicFolder() {
     dereference: true,
     filter: file => file !== paths.appHtml,
   });
+}
+
+function copyPaths() {
+
+  console.log('copying static paths', paths.copyPaths);
+  paths.copyPaths.forEach((path) => {
+    fs.copySync(path[0], `${paths.appBuild}/${path[1]}`, {
+      dereference: true
+    })
+  });
+
 }

@@ -1,0 +1,18 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - npm install
+  pre_build:
+    commands:
+      - npm run test-ci
+      - rm -rf node_modules
+  build:
+    commands:
+      - npm install
+      - npm run build
+
+artifacts:
+  files:
+    - 'build/**/*'
