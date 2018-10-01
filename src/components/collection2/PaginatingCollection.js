@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import qs from 'query-string';
 import { withRouter } from 'react-router-dom';
-import CollectionView from './CollectionView';
+import TableCollectionView from './TableCollectionView';
 import Pagination from './Pagination';
 
 class PaginatingCollection extends Component {
@@ -32,7 +32,7 @@ class PaginatingCollection extends Component {
 
     return {
       rows: props.rows,
-      rowCount: props.rowCount || props.rows.length,
+      rowCount: props.rowCount || (props.rows ? props.rows.length : 0),
       perPage: props.defaultPerPage,
       currentPage: Number(qs.parse(props.location.search).page) || 1
     };
@@ -87,7 +87,7 @@ class PaginatingCollection extends Component {
   }
 
   render() {
-    const { collectionComponent: Coll = CollectionView } = this.props;
+    const { collectionComponent: Coll = TableCollectionView } = this.props;
     return <Fragment>
       <Coll {...this.props} rows={this.state.rows} />
       {this.renderPagination()}

@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { Panel, TextField } from '@sparkpost/matchbox';
 import { Search } from '@sparkpost/matchbox-icons';
 import PaginatingCollection from './PaginatingCollection';
+import TableCollectionView from './TableCollectionView';
 import _ from 'lodash';
 
 const FilterBox = ({ onChange }) => <Panel sectioned>
@@ -34,7 +35,7 @@ export class FilteringCollection extends Component {
   })
 
   render() {
-    const { collectionComponent: Coll } = this.props;
+    const { collectionComponent: Coll = TableCollectionView } = this.props;
     const { rows, rowCount } = this.state;
     return <Fragment>
       <FilterBox onChange={this.debouncedHandleFilterChange} />
