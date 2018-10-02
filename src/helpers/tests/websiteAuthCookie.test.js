@@ -8,8 +8,11 @@ describe('Helper: website auth cookie', () => {
   const { name: authCookieName, options: authCookieOptions } = config.authentication.site.cookie;
 
   it('should save cookie', () => {
-    websiteAuthCookie.save('fredo');
-    expect(cookieMock.set).toHaveBeenCalledWith(authCookieName, 'fredo', authCookieOptions);
+    websiteAuthCookie.save({ name: 'fredo' });
+    expect(cookieMock.set).toHaveBeenCalledWith(authCookieName, {
+      name: 'fredo',
+      tenant: config.tenant
+    }, authCookieOptions);
   });
 
   it('should remove cookie', () => {
