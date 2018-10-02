@@ -1,0 +1,280 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: PaginatingCollection should render async fetched rows 1`] = `
+<React.Fragment>
+  <TableCollectionView
+    defaultPerPage={5}
+    fetchRows={
+      [MockFunction] {
+        "calls": Array [
+          Array [
+            Object {
+              "currentPage": 1,
+              "perPage": 5,
+            },
+          ],
+          Array [
+            Object {
+              "currentPage": 1,
+              "perPage": 5,
+            },
+          ],
+        ],
+        "results": undefined,
+      }
+    }
+    history={
+      Object {
+        "push": [MockFunction],
+      }
+    }
+    location={
+      Object {
+        "pathname": "/",
+        "search": "",
+      }
+    }
+    rows={
+      Array [
+        Object {
+          "id": 0,
+          "name": "row-name-0-0",
+        },
+        Object {
+          "id": 1,
+          "name": "row-name-0-1",
+        },
+        Object {
+          "id": 2,
+          "name": "row-name-0-2",
+        },
+        Object {
+          "id": 3,
+          "name": "row-name-0-3",
+        },
+        Object {
+          "id": 4,
+          "name": "row-name-0-4",
+        },
+        Object {
+          "id": 5,
+          "name": "row-name-1-5",
+        },
+        Object {
+          "id": 6,
+          "name": "row-name-1-6",
+        },
+        Object {
+          "id": 7,
+          "name": "row-name-1-7",
+        },
+        Object {
+          "id": 8,
+          "name": "row-name-1-8",
+        },
+        Object {
+          "id": 9,
+          "name": "row-name-1-9",
+        },
+      ]
+    }
+  />
+  <CollectionPagination
+    currentPage={1}
+    onPageChange={[Function]}
+    onPerPageChange={[Function]}
+    pageRange={5}
+    perPage={5}
+    perPageButtons={
+      Array [
+        10,
+        25,
+        50,
+        100,
+      ]
+    }
+    rowCount={10}
+    saveCsv={false}
+  />
+</React.Fragment>
+`;
+
+exports[`Component: PaginatingCollection should render initial rows if provided 1`] = `
+<React.Fragment>
+  <TableCollectionView
+    defaultPerPage={5}
+    fetchRows={[MockFunction]}
+    history={
+      Object {
+        "push": [MockFunction],
+      }
+    }
+    location={
+      Object {
+        "pathname": "/",
+        "search": "",
+      }
+    }
+    rows={
+      Array [
+        Object {
+          "id": 0,
+          "name": "row-name-0-0",
+        },
+        Object {
+          "id": 1,
+          "name": "row-name-0-1",
+        },
+        Object {
+          "id": 2,
+          "name": "row-name-0-2",
+        },
+        Object {
+          "id": 3,
+          "name": "row-name-0-3",
+        },
+        Object {
+          "id": 4,
+          "name": "row-name-0-4",
+        },
+        Object {
+          "id": 5,
+          "name": "row-name-1-5",
+        },
+        Object {
+          "id": 6,
+          "name": "row-name-1-6",
+        },
+        Object {
+          "id": 7,
+          "name": "row-name-1-7",
+        },
+        Object {
+          "id": 8,
+          "name": "row-name-1-8",
+        },
+        Object {
+          "id": 9,
+          "name": "row-name-1-9",
+        },
+      ]
+    }
+  />
+  <CollectionPagination
+    currentPage={1}
+    onPageChange={[Function]}
+    onPerPageChange={[Function]}
+    pageRange={5}
+    perPage={5}
+    perPageButtons={
+      Array [
+        10,
+        25,
+        50,
+        100,
+      ]
+    }
+    rowCount={10}
+    saveCsv={false}
+  />
+</React.Fragment>
+`;
+
+exports[`Component: PaginatingCollection should render sync fetched rows 1`] = `
+<React.Fragment>
+  <TableCollectionView
+    defaultPerPage={5}
+    fetchRows={
+      [MockFunction] {
+        "calls": Array [
+          Array [
+            Object {
+              "currentPage": 1,
+              "perPage": 5,
+            },
+          ],
+          Array [
+            Object {
+              "currentPage": 1,
+              "perPage": 5,
+            },
+          ],
+        ],
+        "results": undefined,
+      }
+    }
+    history={
+      Object {
+        "push": [MockFunction],
+      }
+    }
+    location={
+      Object {
+        "pathname": "/",
+        "search": "",
+      }
+    }
+    rows={
+      Array [
+        Object {
+          "id": 0,
+          "name": "row-name-0-0",
+        },
+        Object {
+          "id": 1,
+          "name": "row-name-0-1",
+        },
+        Object {
+          "id": 2,
+          "name": "row-name-0-2",
+        },
+        Object {
+          "id": 3,
+          "name": "row-name-0-3",
+        },
+        Object {
+          "id": 4,
+          "name": "row-name-0-4",
+        },
+        Object {
+          "id": 5,
+          "name": "row-name-1-5",
+        },
+        Object {
+          "id": 6,
+          "name": "row-name-1-6",
+        },
+        Object {
+          "id": 7,
+          "name": "row-name-1-7",
+        },
+        Object {
+          "id": 8,
+          "name": "row-name-1-8",
+        },
+        Object {
+          "id": 9,
+          "name": "row-name-1-9",
+        },
+      ]
+    }
+  />
+  <CollectionPagination
+    currentPage={1}
+    onPageChange={[Function]}
+    onPerPageChange={[Function]}
+    pageRange={5}
+    perPage={5}
+    perPageButtons={
+      Array [
+        10,
+        25,
+        50,
+        100,
+      ]
+    }
+    rowCount={10}
+    saveCsv={false}
+  />
+</React.Fragment>
+`;

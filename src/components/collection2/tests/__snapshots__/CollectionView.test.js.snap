@@ -5,79 +5,139 @@ exports[`Component: CollectionView should render correctly with basic props 1`] 
   <headerComponent />
   <PassThroughWrapper>
     <rowComponent
-      id={0}
       key="row-0"
-      name="row-name--0"
+      rowData={
+        Array [
+          0,
+          "row-name-0-0",
+        ]
+      }
     />
     <rowComponent
-      id={1}
       key="1-1"
-      name="row-name--1"
+      rowData={
+        Array [
+          1,
+          "row-name-0-1",
+        ]
+      }
     />
     <rowComponent
-      id={2}
       key="2-2"
-      name="row-name--2"
+      rowData={
+        Array [
+          2,
+          "row-name-0-2",
+        ]
+      }
     />
     <rowComponent
-      id={3}
       key="3-3"
-      name="row-name--3"
+      rowData={
+        Array [
+          3,
+          "row-name-0-3",
+        ]
+      }
     />
     <rowComponent
-      id={4}
       key="4-4"
-      name="row-name--4"
+      rowData={
+        Array [
+          4,
+          "row-name-0-4",
+        ]
+      }
     />
     <rowComponent
-      id={5}
       key="5-5"
-      name="row-name--5"
+      rowData={
+        Array [
+          5,
+          "row-name-1-5",
+        ]
+      }
     />
     <rowComponent
-      id={6}
       key="6-6"
-      name="row-name--6"
+      rowData={
+        Array [
+          6,
+          "row-name-1-6",
+        ]
+      }
     />
     <rowComponent
-      id={7}
       key="7-7"
-      name="row-name--7"
+      rowData={
+        Array [
+          7,
+          "row-name-1-7",
+        ]
+      }
     />
     <rowComponent
-      id={8}
       key="8-8"
-      name="row-name--8"
+      rowData={
+        Array [
+          8,
+          "row-name-1-8",
+        ]
+      }
     />
     <rowComponent
-      id={9}
       key="9-9"
-      name="row-name--9"
+      rowData={
+        Array [
+          9,
+          "row-name-1-9",
+        ]
+      }
     />
     <rowComponent
-      id={10}
       key="10-10"
-      name="row-name--10"
+      rowData={
+        Array [
+          10,
+          "row-name-2-10",
+        ]
+      }
     />
     <rowComponent
-      id={11}
       key="11-11"
-      name="row-name--11"
+      rowData={
+        Array [
+          11,
+          "row-name-2-11",
+        ]
+      }
     />
     <rowComponent
-      id={12}
       key="12-12"
-      name="row-name--12"
+      rowData={
+        Array [
+          12,
+          "row-name-2-12",
+        ]
+      }
     />
     <rowComponent
-      id={13}
       key="13-13"
-      name="row-name--13"
+      rowData={
+        Array [
+          13,
+          "row-name-2-13",
+        ]
+      }
     />
     <rowComponent
-      id={14}
       key="14-14"
-      name="row-name--14"
+      rowData={
+        Array [
+          14,
+          "row-name-2-14",
+        ]
+      }
     />
   </PassThroughWrapper>
 </PassThroughWrapper>
@@ -88,19 +148,31 @@ exports[`Component: CollectionView should render with custom wrappers 1`] = `
   <headerComponent />
   <CustomBodyWrapper>
     <rowComponent
-      id={0}
       key="row-0"
-      name="row-name--0"
+      rowData={
+        Array [
+          0,
+          "row-name-0-0",
+        ]
+      }
     />
     <rowComponent
-      id={1}
       key="1-1"
-      name="row-name--1"
+      rowData={
+        Array [
+          1,
+          "row-name-0-1",
+        ]
+      }
     />
     <rowComponent
-      id={2}
       key="2-2"
-      name="row-name--2"
+      rowData={
+        Array [
+          2,
+          "row-name-0-2",
+        ]
+      }
     />
   </CustomBodyWrapper>
 </CustomOuterWrapper>

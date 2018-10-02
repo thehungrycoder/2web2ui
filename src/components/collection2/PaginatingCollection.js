@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import TableCollectionView from './TableCollectionView';
 import Pagination from './Pagination';
 
-class PaginatingCollection extends Component {
+export class PaginatingCollection extends Component {
   state = {}
 
   static defaultProps = {
@@ -13,9 +13,9 @@ class PaginatingCollection extends Component {
 
   updateRows() {
     const { currentPage, perPage } = this.state;
-    this.setState({ rows: null },
-      () => Promise.resolve(this.props.fetchRows({ currentPage, perPage }))
-        .then(({ rows, rowCount }) => this.setState({ rows, rowCount })));
+    this.setState({ rows: null });
+    return Promise.resolve(this.props.fetchRows({ currentPage, perPage }))
+      .then(({ rows, rowCount }) => this.setState({ rows, rowCount }));
   }
 
   pageParamsChanged() {
@@ -24,12 +24,11 @@ class PaginatingCollection extends Component {
   }
 
   static getDerivedStateFromProps(props, state) {
-    // If we're given rows on mount, use those to start with
-
     if (state.rows) {
       return null;
     }
 
+    // If we're given rows on mount, use those to start with
     return {
       rows: props.rows,
       rowCount: props.rowCount || (props.rows ? props.rows.length : 0),
