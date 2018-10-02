@@ -2,7 +2,7 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /opt/msys/app/phoenix
+    destination: /var/www/html
 permissions:
   - object: /
     pattern: "**"
