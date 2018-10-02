@@ -54,6 +54,7 @@ module.exports = {
   publicUrl: getPublicUrl(resolveApp('package.json')),
   servedPath: getServedPath(resolveApp('package.json')),
   copyPaths: [
+    [`${appDirectory}/ci/scripts`, 'scripts'],
     [`${appDirectory}/ci/appspec.yml`, 'appspec.yml']
   ]
 };
