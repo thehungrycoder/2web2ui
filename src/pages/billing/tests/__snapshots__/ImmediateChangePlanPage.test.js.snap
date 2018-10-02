@@ -26,13 +26,11 @@ exports[`Component: ImmediateChangePlanPage should render after plan changed 1`]
     <h1>
       Your subscription has been updated.
     </h1>
-    <Button
-      color="orange"
-      size="default"
+    <PageLink
       to="/account/billing"
     >
       Back to Billing
-    </Button>
+    </PageLink>
   </div>
 </div>
 `;

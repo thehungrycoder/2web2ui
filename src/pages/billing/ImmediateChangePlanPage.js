@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import qs from 'query-string';
-import { Button } from '@sparkpost/matchbox';
-import { ApiErrorBanner, Loading } from 'src/components';
+import { ApiErrorBanner, Loading, PageLink } from 'src/components';
 import * as conversions from 'src/helpers/conversionTracking';
 import { updateSubscription } from 'src/actions/billing';
 import { showAlert } from 'src/actions/globalAlert';
@@ -61,7 +60,7 @@ export class ImmediateChangePlanPage extends Component {
   renderSuccess() {
     return <div className={styles.MessageInnards}>
       <h1>Your subscription has been updated.</h1>
-      <Button to={BILLING_ROUTE} color='orange'>Back to Billing</Button>
+      <PageLink to={BILLING_ROUTE}>Back to Billing</PageLink>
     </div>;
   }
 
