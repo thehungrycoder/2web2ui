@@ -10,16 +10,31 @@ To create CodeBuild resources, we need to use codebuild.yml.
 Either, use this file using CloudFormation UI or run the following command from aws cli. 
 
 ```
-aws cloudformation create-stack --stack-name <stack_name> --template-body file://<path>/codebuild.yml  --capabilities CAPABILITY_NAMED_IAM
+aws cloudformation create-stack --stack-name <stack_name> --template-body file://<path>/codebuild.yml --parameters <path>/parameters.json --capabilities CAPABILITY_NAMED_IAM
 ``` 
 
 To update stack:
 
 ```
-aws cloudformation update-stack --stack-name <stack_name> --template-body file://<path>/codebuild.yml  --capabilities CAPABILITY_NAMED_IAM
+aws cloudformation update-stack --stack-name <stack_name> --template-body file://<path>/codebuild.yml --parameters <path>/parameters.json --capabilities CAPABILITY_NAMED_IAM
 ``` 
 
 What this will do? 
 - Create S3 Bucket
 - Create CodeBuild Service Role including Policy doc
 - Create CodeBuild Project
+
+
+## CodeDeploy
+
+Running in CLI:
+
+```
+aws cloudformation create-stack --stack-name CodeDeployTest --template-body <path>/codedeploy.yml --parameters <path>/parameters.json --capabilities CAPABILITY_NAMED_IAM
+```
+
+Update:
+
+```
+aws cloudformation update-stack --stack-name CodeDeployTest --template-body <path>/codedeploy.yml --parameters <path>/parameters.json --capabilities CAPABILITY_NAMED_IAM
+```

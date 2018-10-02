@@ -1,0 +1,11 @@
+[
+  {
+    "ParameterKey": "S3BucketName",
+    "ParameterValue": "phoenix-artifacts"
+  },
+  {
+    "ParameterKey": "ELBName",
+    "ParameterValue": "phoenix-app-staging"
+  }
+]
+

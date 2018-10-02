@@ -1,0 +1,85 @@
+---
+Description: Create Phoenix UI CodeDeploy Infrastructures
+
+Parameters:
+  S3BucketName:
+    Type: String
+    Description: Enter the S3 Bucket name CodeDeploy will get the build artifacts from
+  ELBName:
+    Type: String
+    Description: Name of ELB
+
+Resources:
+  CodeDeployIAMServiceRole:
+    Type: 'AWS::IAM::Role'
+    Properties:
+      RoleName: !Sub 'CodeDeployIAMServiceRole-${AWS::StackName}'
+      AssumeRolePolicyDocument:
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - codedeploy.amazonaws.com #todo limit to certain AZ?
+            Action:
+              - 'sts:AssumeRole'
+      Policies:
+        - PolicyName: S3BucketAccess
+          PolicyDocument:
+            Statement:
+              - Effect: Allow
+                Action:
+                  - "s3:GetObject"
+                  - "s3:GetObjectVersion"
+                Resource:
+                   - !Sub 'arn:aws:s3:::${S3BucketName}'
+                   - !Sub 'arn:aws:s3:::${S3BucketName}/*'
+        - PolicyName: LogsAccess
+          PolicyDocument:
+            Statement:
+              - Effect: Allow
+                Action:
+                  - "logs:Describe*"
+                  - "logs:Get*"
+                  - "tag:Get*"
+                  - "logs:CreateLogGroup"
+                  - "logs:CreateLogStream"
+                  - "logs:PutLogEvents"
+                Resource:
+                  - Fn::Sub: arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/codedeploy/*
+        - PolicyName: AutoScalingAccess
+          PolicyDocument:
+            Statement:
+              - Effect: Allow
+                Action:
+                  - ec2:* #todo more granular permissions
+                  - autoscaling:* #todo more granular permissions
+                Resource: "*"
+
+  CodeDeployProject:
+    Type: AWS::CodeDeploy::Application
+    Properties:
+      ApplicationName:
+        Fn::Sub: CodeDeploy-${AWS::StackName}
+      ComputePlatform: Server
+
+  StagingDeploymentGroup:
+      Type: AWS::CodeDeploy::DeploymentGroup
+      Properties:
+        ApplicationName: !Ref CodeDeployProject
+        ServiceRoleArn: !GetAtt CodeDeployIAMServiceRole.Arn
+        DeploymentConfigName: CodeDeployDefault.OneAtATime
+        DeploymentStyle:
+          DeploymentOption: WITH_TRAFFIC_CONTROL
+          DeploymentType: IN_PLACE
+
+        Ec2TagFilters:
+          - Type: KEY_AND_VALUE
+            Key: App
+            Value: WebUI
+          - Type: KEY_AND_VALUE
+            Key: Env
+            Value: Staging
+        LoadBalancerInfo:
+          ElbInfoList:
+            - Name:
+                Ref: ELBName
