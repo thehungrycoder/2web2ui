@@ -2,11 +2,18 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Description: Create Phoenix CodeBuild Infrastructures
 
+Parameters:
+  S3BucketName:
+    Type: String
+    Description: Enter the S3 Bucket name CodeDeploy will get the build artifacts from
+
 Resources:
   ArtifactS3Bucket:
     Type: AWS::S3::Bucket
+#    DeletionPolicy: Retain
     Properties:
-      BucketName: phoenix-artifacts
+      BucketName:
+        Ref: S3BucketName
       AccessControl: Private
       VersioningConfiguration:
         Status: Suspended
@@ -14,7 +21,7 @@ Resources:
   CodeBuildIAMServiceRole:
     Type: 'AWS::IAM::Role'
     Properties:
-      RoleName: !Sub 'CodeBuildIAMServiceRole-${AWS::StackName}'
+      RoleName: !Sub '${AWS::StackName}-CodeBuildIAMServiceRole'
       AssumeRolePolicyDocument:
         Version: 2012-10-17
         Statement:
@@ -25,7 +32,7 @@ Resources:
             Action:
               - 'sts:AssumeRole'
       Policies:
-        - PolicyName: PhoenixCodeBuildRolePolicy
+        - PolicyName: !Sub '${AWS::StackName}-CodeBuildRole'
           PolicyDocument:
             Version: 2012-10-17
             Statement:
@@ -52,7 +59,7 @@ Resources:
     Type: AWS::CodeBuild::Project
     Properties:
       Name:
-        Fn::Sub: CodeBuild-${AWS::StackName}
+        Fn::Sub: ${AWS::StackName}-CodeBuild
       Description: Phoenix UI CodeBuild plan
       ServiceRole:
         Fn::GetAtt: [ CodeBuildIAMServiceRole, Arn ]
@@ -62,7 +69,7 @@ Resources:
         Location:
           Ref: ArtifactS3Bucket
         Name:
-          Fn::Sub: Build-${AWS::StackName}.zip
+          Fn::Sub: ${AWS::StackName}-Build.zip
       Environment:
         Type: LINUX_CONTAINER
         ComputeType: BUILD_GENERAL1_MEDIUM

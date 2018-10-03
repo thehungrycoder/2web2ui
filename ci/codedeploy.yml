@@ -5,15 +5,18 @@ Parameters:
   S3BucketName:
     Type: String
     Description: Enter the S3 Bucket name CodeDeploy will get the build artifacts from
-  ELBName:
+  StagingELBName:
     Type: String
-    Description: Name of ELB
+    Description: Name of Staging ELB
+  ProdELBName:
+    Type: String
+    Description: Name of Production ELB
 
 Resources:
   CodeDeployIAMServiceRole:
     Type: AWS::IAM::Role
     Properties:
-      RoleName: !Sub 'CodeDeployIAMServiceRole-${AWS::StackName}'
+      RoleName: !Sub '${AWS::StackName}-CodeDeployIAMServiceRole'
       AssumeRolePolicyDocument:
         Statement:
           - Effect: Allow
@@ -28,7 +31,7 @@ Resources:
   CodeDeployEC2Role: #this role will be used by EC2 instances where application will be deployed
     Type: AWS::IAM::Role
     Properties:
-      RoleName: !Sub 'CodeDeployEC2Role-${AWS::StackName}'
+      RoleName: !Sub '${AWS::StackName}-CodeDeployEC2Role'
       AssumeRolePolicyDocument:
         Statement:
           - Effect: Allow
@@ -47,9 +50,8 @@ Resources:
                   - s3:List*
                 Resource:
                    - !Sub 'arn:aws:s3:::${S3BucketName}/*'
-  CodeDeployEC2RoleProfile:
+  CodeDeployEC2InstanceProfile:
     Type: AWS::IAM::InstanceProfile
-
     Properties:
       InstanceProfileName: !Sub '${AWS::StackName}-CodeDeployEC2InstanceProfile'
       Path: /
@@ -62,13 +64,14 @@ Resources:
     DependsOn: CodeDeployEC2Role
     Properties:
       ApplicationName:
-        Fn::Sub: CodeDeploy-${AWS::StackName}
+        Fn::Sub: ${AWS::StackName}-CodeDeploy
       ComputePlatform: Server
 
   StagingDeploymentGroup:
     Type: AWS::CodeDeploy::DeploymentGroup
     DependsOn: CodeDeployProject
     Properties:
+      DeploymentGroupName: !Sub '${AWS::StackName}-Staging'
       ApplicationName: !Ref CodeDeployProject
       ServiceRoleArn: !GetAtt CodeDeployIAMServiceRole.Arn
       DeploymentConfigName: CodeDeployDefault.OneAtATime
@@ -82,13 +85,24 @@ Resources:
       LoadBalancerInfo:
         ElbInfoList:
           - Name:
-              Ref: ELBName
-#      Deployment:
-#        Description: Test Deployment
-#        Revision:
-#          RevisionType: S3
-#          S3Location:
-#            Bucket:
-#              Ref: S3BucketName
-#            BundleType: zip
-#            Key: Build-S3Test.zip
+              Ref: StagingELBName
+
+  ProductionDeploymentGroup:
+      Type: AWS::CodeDeploy::DeploymentGroup
+      DependsOn: CodeDeployProject
+      Properties:
+        DeploymentGroupName: !Sub '${AWS::StackName}-Production'
+        ApplicationName: !Ref CodeDeployProject
+        ServiceRoleArn: !GetAtt CodeDeployIAMServiceRole.Arn
+        DeploymentConfigName: CodeDeployDefault.OneAtATime
+        DeploymentStyle:
+          DeploymentOption: WITH_TRAFFIC_CONTROL
+          DeploymentType: IN_PLACE
+        Ec2TagFilters:
+          - Key: App_Env
+            Type: KEY_AND_VALUE
+            Value: WebUI_Production
+        LoadBalancerInfo:
+          ElbInfoList:
+            - Name:
+                Ref: ProdELBName
