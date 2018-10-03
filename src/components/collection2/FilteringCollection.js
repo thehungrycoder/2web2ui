@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { Panel, TextField } from '@sparkpost/matchbox';
 import { Search } from '@sparkpost/matchbox-icons';
-import PaginatingCollection from './PaginatingCollection';
 import TableCollectionView from './TableCollectionView';
 import _ from 'lodash';
 
@@ -58,7 +57,3 @@ export class FilteringCollection extends Component {
     </Fragment>;
   }
 }
-
-export const FilteringPaginatingCollection = ({ collectionComponent, ...rest }) => <FilteringCollection
-  collectionComponent={(props) => <PaginatingCollection {...props} collectionComponent={collectionComponent} />}
-  {...rest} />;
