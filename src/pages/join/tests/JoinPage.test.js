@@ -17,6 +17,7 @@ let formValues;
 jest.mock('js-cookie');
 jest.mock('src/config', () => ({
   zuora: {}, //axiosInstance throws without this
+  brightback: {}, //axiosInstance throws without this
   authentication: { cookie: {}}, //authCookie throws without this
   heroku: {
     cookieName: 'my-cookie'

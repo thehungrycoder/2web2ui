@@ -27,15 +27,17 @@ exports[`Confirmation:  renders correctly when billing not enabled 1`] = `
     </p>
   </Panel.Section>
   <Panel.Section>
-    <Button
-      destructive={false}
-      fullWidth={true}
-      primary={true}
-      size="default"
-      type="submit"
-    >
-      Enable Automatic Billing
-    </Button>
+    <withRouter(Connect(Brightback))
+      condition={false}
+      render={[Function]}
+      urls={
+        Object {
+          "billing_url": "/account/billing/plan",
+          "cancel_confirmation_url": "/account/billing/plan/change?immediatePlanChange=free-0817",
+          "save_return_url": "/account/billing",
+        }
+      }
+    />
   </Panel.Section>
 </Panel>
 `;
@@ -83,17 +85,32 @@ exports[`Confirmation:  should render correctly for an upgrade effectively immed
     </p>
   </Panel.Section>
   <Panel.Section>
-    <Button
-      destructive={false}
-      fullWidth={true}
-      primary={true}
-      size="default"
-      type="submit"
-    >
-      Upgrade Plan
-    </Button>
+    <withRouter(Connect(Brightback))
+      condition={false}
+      render={[Function]}
+      urls={
+        Object {
+          "billing_url": "/account/billing/plan",
+          "cancel_confirmation_url": "/account/billing/plan/change?immediatePlanChange=free-0817",
+          "save_return_url": "/account/billing",
+        }
+      }
+    />
   </Panel.Section>
 </Panel>
+`;
+
+exports[`Confirmation:  should render correctly for an upgrade effectively immediately 2`] = `
+<Button
+  destructive={false}
+  fullWidth={true}
+  primary={true}
+  size="default"
+  to={null}
+  type="submit"
+>
+  Upgrade Plan
+</Button>
 `;
 
 exports[`Confirmation:  should render correctly with a downgrade 1`] = `
@@ -159,17 +176,32 @@ exports[`Confirmation:  should render correctly with a downgrade 1`] = `
     </div>
   </Panel.Section>
   <Panel.Section>
-    <Button
-      destructive={true}
-      fullWidth={true}
-      primary={false}
-      size="default"
-      type="submit"
-    >
-      Downgrade Plan
-    </Button>
+    <withRouter(Connect(Brightback))
+      condition={false}
+      render={[Function]}
+      urls={
+        Object {
+          "billing_url": "/account/billing/plan",
+          "cancel_confirmation_url": "/account/billing/plan/change?immediatePlanChange=free-0817",
+          "save_return_url": "/account/billing",
+        }
+      }
+    />
   </Panel.Section>
 </Panel>
+`;
+
+exports[`Confirmation:  should render correctly with a downgrade 2`] = `
+<Button
+  destructive={true}
+  fullWidth={true}
+  primary={false}
+  size="default"
+  to={null}
+  type="submit"
+>
+  Downgrade Plan
+</Button>
 `;
 
 exports[`Confirmation:  should render correctly with a downgrade to free 1`] = `
@@ -219,17 +251,32 @@ exports[`Confirmation:  should render correctly with a downgrade to free 1`] = `
     </p>
   </Panel.Section>
   <Panel.Section>
-    <Button
-      destructive={true}
-      fullWidth={true}
-      primary={false}
-      size="default"
-      type="submit"
-    >
-      Downgrade Plan
-    </Button>
+    <withRouter(Connect(Brightback))
+      condition={true}
+      render={[Function]}
+      urls={
+        Object {
+          "billing_url": "/account/billing/plan",
+          "cancel_confirmation_url": "/account/billing/plan/change?immediatePlanChange=free-0817",
+          "save_return_url": "/account/billing",
+        }
+      }
+    />
   </Panel.Section>
 </Panel>
+`;
+
+exports[`Confirmation:  should render correctly with a downgrade to free 2`] = `
+<Button
+  destructive={true}
+  fullWidth={true}
+  primary={false}
+  size="default"
+  to="redirect"
+  type="button"
+>
+  Downgrade Plan
+</Button>
 `;
 
 exports[`Confirmation:  should render correctly with an upgrade 1`] = `
@@ -275,17 +322,32 @@ exports[`Confirmation:  should render correctly with an upgrade 1`] = `
     </p>
   </Panel.Section>
   <Panel.Section>
-    <Button
-      destructive={false}
-      fullWidth={true}
-      primary={true}
-      size="default"
-      type="submit"
-    >
-      Upgrade Plan
-    </Button>
+    <withRouter(Connect(Brightback))
+      condition={false}
+      render={[Function]}
+      urls={
+        Object {
+          "billing_url": "/account/billing/plan",
+          "cancel_confirmation_url": "/account/billing/plan/change?immediatePlanChange=free-0817",
+          "save_return_url": "/account/billing",
+        }
+      }
+    />
   </Panel.Section>
 </Panel>
+`;
+
+exports[`Confirmation:  should render correctly with an upgrade 2`] = `
+<Button
+  destructive={false}
+  fullWidth={true}
+  primary={true}
+  size="default"
+  to={null}
+  type="submit"
+>
+  Upgrade Plan
+</Button>
 `;
 
 exports[`Confirmation:  should render correctly with an upgrade with IP 1`] = `
@@ -337,15 +399,17 @@ exports[`Confirmation:  should render correctly with an upgrade with IP 1`] = `
     </div>
   </Panel.Section>
   <Panel.Section>
-    <Button
-      destructive={false}
-      fullWidth={true}
-      primary={true}
-      size="default"
-      type="submit"
-    >
-      Upgrade Plan
-    </Button>
+    <withRouter(Connect(Brightback))
+      condition={false}
+      render={[Function]}
+      urls={
+        Object {
+          "billing_url": "/account/billing/plan",
+          "cancel_confirmation_url": "/account/billing/plan/change?immediatePlanChange=free-0817",
+          "save_return_url": "/account/billing",
+        }
+      }
+    />
   </Panel.Section>
 </Panel>
 `;
@@ -377,15 +441,30 @@ exports[`Confirmation:  should render with nothing selected 1`] = `
     </p>
   </Panel.Section>
   <Panel.Section>
-    <Button
-      destructive={false}
-      fullWidth={true}
-      primary={true}
-      size="default"
-      type="submit"
-    >
-      Upgrade Plan
-    </Button>
+    <withRouter(Connect(Brightback))
+      condition={false}
+      render={[Function]}
+      urls={
+        Object {
+          "billing_url": "/account/billing/plan",
+          "cancel_confirmation_url": "/account/billing/plan/change?immediatePlanChange=free-0817",
+          "save_return_url": "/account/billing",
+        }
+      }
+    />
   </Panel.Section>
 </Panel>
+`;
+
+exports[`Confirmation:  should render with nothing selected 2`] = `
+<Button
+  destructive={false}
+  fullWidth={true}
+  primary={true}
+  size="default"
+  to={null}
+  type="submit"
+>
+  Upgrade Plan
+</Button>
 `;

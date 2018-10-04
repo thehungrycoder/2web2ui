@@ -4,7 +4,8 @@ import {
   formatCreateData,
   formatDataForCors,
   getPlanPrice,
-  prepareCardInfo
+  prepareCardInfo,
+  stripImmediatePlanChange
 } from '../billing';
 
 describe('Billing Helpers', () => {
@@ -110,6 +111,12 @@ describe('Billing Helpers', () => {
       };
 
       expect(formatCreateData(data)).toMatchSnapshot();
+    })
+  });
+
+  describe('stripImmediatePlanChange', () => {
+    it('returns search options without immediatePlanChange', () => {
+      expect(stripImmediatePlanChange('immediatePlanChange=free-0817&pass=through')).toEqual('pass=through');
     });
   });
 });

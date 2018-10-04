@@ -8,6 +8,7 @@ import config from 'src/config';
 
 jest.mock('src/config', () => ({
   zuora: {}, //axiosInstance throws without this
+  brightback: {}, //axiosInstance throws without this
   authentication: { cookie: {}}, //authCookie throws without this,
   heroku: {
     cookieName: 'my-cookie'
@@ -119,12 +120,12 @@ describe('Component: EditBounce', () => {
 
 
   describe('verifyDomain', () => {
-    it('renders loading state correctly', async() => {
+    it('renders loading state correctly', async () => {
       wrapper.setProps({ verifyCnameLoading: true });
       expect(wrapper.find('Panel').props().actions).toMatchSnapshot();
     });
 
-    it('verifies domain and alerts when verification successful', async() => {
+    it('verifies domain and alerts when verification successful', async () => {
       props.verifyCname.mockReturnValue(Promise.resolve({ cname_status: 'valid' }));
       await instance.verifyDomain();
       expect(props.verifyCname).toHaveBeenCalledTimes(1);
@@ -135,7 +136,7 @@ describe('Component: EditBounce', () => {
       expect(arg.message).toMatch(/successfully verified/);
     });
 
-    it('alerts error when verification req is successful but verification is failed', async() => {
+    it('alerts error when verification req is successful but verification is failed', async () => {
       const result = {
         cname_status: 'invalid',
         dns: {
@@ -155,7 +156,7 @@ describe('Component: EditBounce', () => {
   });
 
   describe('toggleDefaultBounce', () => {
-    it('calls update with toggled value', async() => {
+    it('calls update with toggled value', async () => {
       await instance.toggleDefaultBounce();
       expect(props.update).toHaveBeenCalledWith({ id: props.id, subaccount: 100, is_default_bounce_domain: true });
 
@@ -164,7 +165,7 @@ describe('Component: EditBounce', () => {
       expect(props.update).toHaveBeenCalledWith({ id: props.id, subaccount: 100, is_default_bounce_domain: false });
     });
 
-    it('on error reset form and rethrow the error', async() => {
+    it('on error reset form and rethrow the error', async () => {
       const err = new Error('Request failed!');
       props.update.mockReturnValue(Promise.reject(err));
 

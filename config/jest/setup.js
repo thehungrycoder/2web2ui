@@ -44,3 +44,6 @@ jest.mock('moment', () => {
   momentTimezone.tz.setDefault('America/New_York');
   return momentTimezone;
 });
+
+Object.defineProperty(global.navigator, 'userAgent', { value: 'node.js', configurable: true });
+Object.defineProperty(global.navigator, 'language', { value: 'en-US', configurable: true });
