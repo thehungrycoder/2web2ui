@@ -25,7 +25,7 @@ Resources:
                 - codedeploy.amazonaws.com #todo limit to certain AZ?
             Action:
               - 'sts:AssumeRole'
-      "ManagedPolicyArns":
+      ManagedPolicyArns:
         - arn:aws:iam::aws:policy/service-role/AWSCodeDeployRole
 
   CodeDeployEC2Role: #this role will be used by EC2 instances where application will be deployed
@@ -71,7 +71,7 @@ Resources:
     Type: AWS::CodeDeploy::DeploymentGroup
     DependsOn: CodeDeployProject
     Properties:
-      DeploymentGroupName: !Sub '${AWS::StackName}-Staging'
+      DeploymentGroupName: Staging
       ApplicationName: !Ref CodeDeployProject
       ServiceRoleArn: !GetAtt CodeDeployIAMServiceRole.Arn
       DeploymentConfigName: CodeDeployDefault.OneAtATime
@@ -91,7 +91,7 @@ Resources:
       Type: AWS::CodeDeploy::DeploymentGroup
       DependsOn: CodeDeployProject
       Properties:
-        DeploymentGroupName: !Sub '${AWS::StackName}-Production'
+        DeploymentGroupName: Production
         ApplicationName: !Ref CodeDeployProject
         ServiceRoleArn: !GetAtt CodeDeployIAMServiceRole.Arn
         DeploymentConfigName: CodeDeployDefault.OneAtATime
@@ -106,3 +106,7 @@ Resources:
           ElbInfoList:
             - Name:
                 Ref: ProdELBName
+
+Outputs:
+  CodeDeloyApplicationName:
+    Value: ${AWS::StackName}-CodeDeploy

@@ -90,3 +90,8 @@ Resources:
         S3Logs:
           Status: DISABLED
 
+Outputs:
+  CodeBuildApplicationName:
+    Value: ${AWS::StackName}-CodeBuild
+  S3BucketName:
+    Value: S3BucketName
