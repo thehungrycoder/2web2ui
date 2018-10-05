@@ -74,7 +74,7 @@ Resources:
       DeploymentGroupName: Staging
       ApplicationName: !Ref CodeDeployProject
       ServiceRoleArn: !GetAtt CodeDeployIAMServiceRole.Arn
-      DeploymentConfigName: CodeDeployDefault.OneAtATime
+      DeploymentConfigName: CodeDeployDefault.AllAtOnce
       DeploymentStyle:
         DeploymentOption: WITH_TRAFFIC_CONTROL
         DeploymentType: IN_PLACE
