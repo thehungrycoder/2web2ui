@@ -7,7 +7,10 @@ describe('EventTypeFilters', () => {
 
   beforeEach(() => {
     props = {
-      eventTypes: ['amp_open', 'bounce'],
+      eventTypeDocs: [
+        { type: 'amp_open', displayName: 'AMP Open', description: 'AMP open desc' },
+        { type: 'bounce' , displayName: 'Bounce', description: 'Bounce desc' }
+      ],
       checkedTypes: {},
       onChange: jest.fn()
     };

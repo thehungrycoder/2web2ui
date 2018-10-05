@@ -2,22 +2,15 @@
 
 .CheckBoxGrid {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr 1fr;
 
   fieldset {
     white-space: normal;
+    margin: 0;
   }
 
   @media screen and (min-width: breakpoint(medium)) {
-    grid-template-columns: 1fr 1fr;
-    grid-column-gap: 20px;
-    grid-row-gap: 15px;
-  }
-
-  @media screen and (min-width: breakpoint(larger)) {
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-column-gap: 50px;
-    grid-row-gap: 25px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 }
 

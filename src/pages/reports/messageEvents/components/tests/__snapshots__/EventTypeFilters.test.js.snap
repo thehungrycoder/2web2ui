@@ -5,24 +5,56 @@ exports[`EventTypeFilters should render checked state 1`] = `
   label="Event Type"
 >
   <div
-    className="CheckWrapper"
-    key="amp_open"
+    className="CheckBoxGrid"
   >
     <Checkbox
       checked={false}
       id="amp_open"
-      label="Amp Open"
+      key="amp_open"
+      label={
+        <Tooltip
+          bottom={true}
+          content="AMP open desc"
+          forcePosition={false}
+          horizontalOffset="0px"
+          preferredDirection={
+            Object {
+              "bottom": true,
+              "left": false,
+              "right": true,
+              "top": false,
+            }
+          }
+          right={true}
+        >
+          AMP Open
+        </Tooltip>
+      }
       onChange={[Function]}
     />
-  </div>
-  <div
-    className="CheckWrapper"
-    key="bounce"
-  >
     <Checkbox
       checked={true}
       id="bounce"
-      label="Bounce"
+      key="bounce"
+      label={
+        <Tooltip
+          bottom={true}
+          content="Bounce desc"
+          forcePosition={false}
+          horizontalOffset="0px"
+          preferredDirection={
+            Object {
+              "bottom": true,
+              "left": false,
+              "right": true,
+              "top": false,
+            }
+          }
+          right={true}
+        >
+          Bounce
+        </Tooltip>
+      }
       onChange={[Function]}
     />
   </div>
@@ -34,24 +66,56 @@ exports[`EventTypeFilters should render from a list of event types 1`] = `
   label="Event Type"
 >
   <div
-    className="CheckWrapper"
-    key="amp_open"
+    className="CheckBoxGrid"
   >
     <Checkbox
       checked={false}
       id="amp_open"
-      label="Amp Open"
+      key="amp_open"
+      label={
+        <Tooltip
+          bottom={true}
+          content="AMP open desc"
+          forcePosition={false}
+          horizontalOffset="0px"
+          preferredDirection={
+            Object {
+              "bottom": true,
+              "left": false,
+              "right": true,
+              "top": false,
+            }
+          }
+          right={true}
+        >
+          AMP Open
+        </Tooltip>
+      }
       onChange={[Function]}
     />
-  </div>
-  <div
-    className="CheckWrapper"
-    key="bounce"
-  >
     <Checkbox
       checked={false}
       id="bounce"
-      label="Bounce"
+      key="bounce"
+      label={
+        <Tooltip
+          bottom={true}
+          content="Bounce desc"
+          forcePosition={false}
+          horizontalOffset="0px"
+          preferredDirection={
+            Object {
+              "bottom": true,
+              "left": false,
+              "right": true,
+              "top": false,
+            }
+          }
+          right={true}
+        >
+          Bounce
+        </Tooltip>
+      }
       onChange={[Function]}
     />
   </div>
