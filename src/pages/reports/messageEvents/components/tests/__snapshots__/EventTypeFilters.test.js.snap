@@ -15,6 +15,7 @@ exports[`EventTypeFilters should render checked state 1`] = `
         <Tooltip
           bottom={true}
           content="AMP open desc"
+          dark={true}
           forcePosition={false}
           horizontalOffset="0px"
           preferredDirection={
@@ -40,6 +41,7 @@ exports[`EventTypeFilters should render checked state 1`] = `
         <Tooltip
           bottom={true}
           content="Bounce desc"
+          dark={true}
           forcePosition={false}
           horizontalOffset="0px"
           preferredDirection={
@@ -76,6 +78,7 @@ exports[`EventTypeFilters should render from a list of event types 1`] = `
         <Tooltip
           bottom={true}
           content="AMP open desc"
+          dark={true}
           forcePosition={false}
           horizontalOffset="0px"
           preferredDirection={
@@ -101,6 +104,7 @@ exports[`EventTypeFilters should render from a list of event types 1`] = `
         <Tooltip
           bottom={true}
           content="Bounce desc"
+          dark={true}
           forcePosition={false}
           horizontalOffset="0px"
           preferredDirection={

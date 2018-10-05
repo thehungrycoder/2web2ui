@@ -10,7 +10,7 @@ const EventTypeFilters = ({ eventTypeDocs, checkedTypes, onChange }) => <Checkbo
         id={evtDoc.type}
         key={evtDoc.type}
         onChange={() => onChange(evtDoc.type)}
-        label={<Tooltip content={evtDoc.description}>{evtDoc.displayName}</Tooltip>}
+        label={<Tooltip dark content={evtDoc.description}>{evtDoc.displayName}</Tooltip>}
         checked={checkedTypes[evtDoc.type] || false}
       />
     )}
