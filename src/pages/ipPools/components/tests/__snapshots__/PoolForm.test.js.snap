@@ -26,48 +26,44 @@ exports[`PoolForm tests should not disable button if form is not pristine or not
         />
       </Connect(AccessControl)>
     </Panel.Section>
-    <React.Fragment>
-      <Panel.Section>
-        <p>
-          Add dedicated IPs to this pool by moving them from their current pool
-          <React.Fragment>
-            , or by 
-            <UnstyledLink
-              component={[Function]}
-              to="/account/billing"
-            >
-              purchasing new IPs
-            </UnstyledLink>
-          </React.Fragment>
-          .
-        </p>
-      </Panel.Section>
-      <TableCollection
-        columns={
-          Array [
-            "Sending IP",
-            "Hostname",
-            "IP Pool",
-          ]
-        }
-        defaultSortColumn={null}
-        defaultSortDirection="asc"
-        getRowData={[Function]}
-        pagination={false}
-        rows={
-          Array [
-            Object {
-              "external_ip": "external",
-              "hostname": "hostname",
-            },
-            Object {
-              "external_ip": "external-2",
-              "hostname": "hostname-2",
-            },
-          ]
-        }
-      />
-    </React.Fragment>
+    <Panel.Section>
+      <p>
+        Add dedicated IPs to this pool by moving them from their current pool
+        , or by 
+        <UnstyledLink
+          component={[Function]}
+          to="/account/billing"
+        >
+          purchasing new IPs
+        </UnstyledLink>
+        .
+      </p>
+    </Panel.Section>
+    <TableCollection
+      columns={
+        Array [
+          "Sending IP",
+          "Hostname",
+          "IP Pool",
+        ]
+      }
+      defaultSortColumn={null}
+      defaultSortDirection="asc"
+      getRowData={[Function]}
+      pagination={false}
+      rows={
+        Array [
+          Object {
+            "external_ip": "external",
+            "hostname": "hostname",
+          },
+          Object {
+            "external_ip": "external-2",
+            "hostname": "hostname-2",
+          },
+        ]
+      }
+    />
     <Panel.Section>
       <Button
         disabled={false}
@@ -98,48 +94,44 @@ exports[`PoolForm tests should not render signing_domain if editing default pool
         validate={[Function]}
       />
     </Panel.Section>
-    <React.Fragment>
-      <Panel.Section>
-        <p>
-          Add dedicated IPs to this pool by moving them from their current pool
-          <React.Fragment>
-            , or by 
-            <UnstyledLink
-              component={[Function]}
-              to="/account/billing"
-            >
-              purchasing new IPs
-            </UnstyledLink>
-          </React.Fragment>
-          .
-        </p>
-      </Panel.Section>
-      <TableCollection
-        columns={
-          Array [
-            "Sending IP",
-            "Hostname",
-            "IP Pool",
-          ]
-        }
-        defaultSortColumn={null}
-        defaultSortDirection="asc"
-        getRowData={[Function]}
-        pagination={false}
-        rows={
-          Array [
-            Object {
-              "external_ip": "external",
-              "hostname": "hostname",
-            },
-            Object {
-              "external_ip": "external-2",
-              "hostname": "hostname-2",
-            },
-          ]
-        }
-      />
-    </React.Fragment>
+    <Panel.Section>
+      <p>
+        Add dedicated IPs to this pool by moving them from their current pool
+        , or by 
+        <UnstyledLink
+          component={[Function]}
+          to="/account/billing"
+        >
+          purchasing new IPs
+        </UnstyledLink>
+        .
+      </p>
+    </Panel.Section>
+    <TableCollection
+      columns={
+        Array [
+          "Sending IP",
+          "Hostname",
+          "IP Pool",
+        ]
+      }
+      defaultSortColumn={null}
+      defaultSortDirection="asc"
+      getRowData={[Function]}
+      pagination={false}
+      rows={
+        Array [
+          Object {
+            "external_ip": "external",
+            "hostname": "hostname",
+          },
+          Object {
+            "external_ip": "external-2",
+            "hostname": "hostname-2",
+          },
+        ]
+      }
+    />
     <Panel.Section>
       <Button
         disabled={true}
@@ -180,48 +172,44 @@ exports[`PoolForm tests should not render signing_domain if feature flag is disa
         />
       </Connect(AccessControl)>
     </Panel.Section>
-    <React.Fragment>
-      <Panel.Section>
-        <p>
-          Add dedicated IPs to this pool by moving them from their current pool
-          <React.Fragment>
-            , or by 
-            <UnstyledLink
-              component={[Function]}
-              to="/account/billing"
-            >
-              purchasing new IPs
-            </UnstyledLink>
-          </React.Fragment>
-          .
-        </p>
-      </Panel.Section>
-      <TableCollection
-        columns={
-          Array [
-            "Sending IP",
-            "Hostname",
-            "IP Pool",
-          ]
-        }
-        defaultSortColumn={null}
-        defaultSortDirection="asc"
-        getRowData={[Function]}
-        pagination={false}
-        rows={
-          Array [
-            Object {
-              "external_ip": "external",
-              "hostname": "hostname",
-            },
-            Object {
-              "external_ip": "external-2",
-              "hostname": "hostname-2",
-            },
-          ]
-        }
-      />
-    </React.Fragment>
+    <Panel.Section>
+      <p>
+        Add dedicated IPs to this pool by moving them from their current pool
+        , or by 
+        <UnstyledLink
+          component={[Function]}
+          to="/account/billing"
+        >
+          purchasing new IPs
+        </UnstyledLink>
+        .
+      </p>
+    </Panel.Section>
+    <TableCollection
+      columns={
+        Array [
+          "Sending IP",
+          "Hostname",
+          "IP Pool",
+        ]
+      }
+      defaultSortColumn={null}
+      defaultSortDirection="asc"
+      getRowData={[Function]}
+      pagination={false}
+      rows={
+        Array [
+          Object {
+            "external_ip": "external",
+            "hostname": "hostname",
+          },
+          Object {
+            "external_ip": "external-2",
+            "hostname": "hostname-2",
+          },
+        ]
+      }
+    />
     <Panel.Section>
       <Button
         disabled={true}
@@ -342,39 +330,37 @@ exports[`PoolForm tests should not show purchase cta if showPurchaseCTA is false
         />
       </Connect(AccessControl)>
     </Panel.Section>
-    <React.Fragment>
-      <Panel.Section>
-        <p>
-          Add dedicated IPs to this pool by moving them from their current pool
-          .
-        </p>
-      </Panel.Section>
-      <TableCollection
-        columns={
-          Array [
-            "Sending IP",
-            "Hostname",
-            "IP Pool",
-          ]
-        }
-        defaultSortColumn={null}
-        defaultSortDirection="asc"
-        getRowData={[Function]}
-        pagination={false}
-        rows={
-          Array [
-            Object {
-              "external_ip": "external",
-              "hostname": "hostname",
-            },
-            Object {
-              "external_ip": "external-2",
-              "hostname": "hostname-2",
-            },
-          ]
-        }
-      />
-    </React.Fragment>
+    <Panel.Section>
+      <p>
+        Add dedicated IPs to this pool by moving them from their current pool
+        .
+      </p>
+    </Panel.Section>
+    <TableCollection
+      columns={
+        Array [
+          "Sending IP",
+          "Hostname",
+          "IP Pool",
+        ]
+      }
+      defaultSortColumn={null}
+      defaultSortDirection="asc"
+      getRowData={[Function]}
+      pagination={false}
+      rows={
+        Array [
+          Object {
+            "external_ip": "external",
+            "hostname": "hostname",
+          },
+          Object {
+            "external_ip": "external-2",
+            "hostname": "hostname-2",
+          },
+        ]
+      }
+    />
     <Panel.Section>
       <Button
         disabled={true}
@@ -415,48 +401,44 @@ exports[`PoolForm tests should render form 1`] = `
         />
       </Connect(AccessControl)>
     </Panel.Section>
-    <React.Fragment>
-      <Panel.Section>
-        <p>
-          Add dedicated IPs to this pool by moving them from their current pool
-          <React.Fragment>
-            , or by 
-            <UnstyledLink
-              component={[Function]}
-              to="/account/billing"
-            >
-              purchasing new IPs
-            </UnstyledLink>
-          </React.Fragment>
-          .
-        </p>
-      </Panel.Section>
-      <TableCollection
-        columns={
-          Array [
-            "Sending IP",
-            "Hostname",
-            "IP Pool",
-          ]
-        }
-        defaultSortColumn={null}
-        defaultSortDirection="asc"
-        getRowData={[Function]}
-        pagination={false}
-        rows={
-          Array [
-            Object {
-              "external_ip": "external",
-              "hostname": "hostname",
-            },
-            Object {
-              "external_ip": "external-2",
-              "hostname": "hostname-2",
-            },
-          ]
-        }
-      />
-    </React.Fragment>
+    <Panel.Section>
+      <p>
+        Add dedicated IPs to this pool by moving them from their current pool
+        , or by 
+        <UnstyledLink
+          component={[Function]}
+          to="/account/billing"
+        >
+          purchasing new IPs
+        </UnstyledLink>
+        .
+      </p>
+    </Panel.Section>
+    <TableCollection
+      columns={
+        Array [
+          "Sending IP",
+          "Hostname",
+          "IP Pool",
+        ]
+      }
+      defaultSortColumn={null}
+      defaultSortDirection="asc"
+      getRowData={[Function]}
+      pagination={false}
+      rows={
+        Array [
+          Object {
+            "external_ip": "external",
+            "hostname": "hostname",
+          },
+          Object {
+            "external_ip": "external-2",
+            "hostname": "hostname-2",
+          },
+        ]
+      }
+    />
     <Panel.Section>
       <Button
         disabled={true}
@@ -500,48 +482,44 @@ exports[`PoolForm tests should show help text when editing default pool 1`] = `
         validate={[Function]}
       />
     </Panel.Section>
-    <React.Fragment>
-      <Panel.Section>
-        <p>
-          Add dedicated IPs to this pool by moving them from their current pool
-          <React.Fragment>
-            , or by 
-            <UnstyledLink
-              component={[Function]}
-              to="/account/billing"
-            >
-              purchasing new IPs
-            </UnstyledLink>
-          </React.Fragment>
-          .
-        </p>
-      </Panel.Section>
-      <TableCollection
-        columns={
-          Array [
-            "Sending IP",
-            "Hostname",
-            "IP Pool",
-          ]
-        }
-        defaultSortColumn={null}
-        defaultSortDirection="asc"
-        getRowData={[Function]}
-        pagination={false}
-        rows={
-          Array [
-            Object {
-              "external_ip": "external",
-              "hostname": "hostname",
-            },
-            Object {
-              "external_ip": "external-2",
-              "hostname": "hostname-2",
-            },
-          ]
-        }
-      />
-    </React.Fragment>
+    <Panel.Section>
+      <p>
+        Add dedicated IPs to this pool by moving them from their current pool
+        , or by 
+        <UnstyledLink
+          component={[Function]}
+          to="/account/billing"
+        >
+          purchasing new IPs
+        </UnstyledLink>
+        .
+      </p>
+    </Panel.Section>
+    <TableCollection
+      columns={
+        Array [
+          "Sending IP",
+          "Hostname",
+          "IP Pool",
+        ]
+      }
+      defaultSortColumn={null}
+      defaultSortDirection="asc"
+      getRowData={[Function]}
+      pagination={false}
+      rows={
+        Array [
+          Object {
+            "external_ip": "external",
+            "hostname": "hostname",
+          },
+          Object {
+            "external_ip": "external-2",
+            "hostname": "hostname-2",
+          },
+        ]
+      }
+    />
     <Panel.Section>
       <Button
         disabled={true}
@@ -582,48 +560,44 @@ exports[`PoolForm tests should update button text to Saving and disable button w
         />
       </Connect(AccessControl)>
     </Panel.Section>
-    <React.Fragment>
-      <Panel.Section>
-        <p>
-          Add dedicated IPs to this pool by moving them from their current pool
-          <React.Fragment>
-            , or by 
-            <UnstyledLink
-              component={[Function]}
-              to="/account/billing"
-            >
-              purchasing new IPs
-            </UnstyledLink>
-          </React.Fragment>
-          .
-        </p>
-      </Panel.Section>
-      <TableCollection
-        columns={
-          Array [
-            "Sending IP",
-            "Hostname",
-            "IP Pool",
-          ]
-        }
-        defaultSortColumn={null}
-        defaultSortDirection="asc"
-        getRowData={[Function]}
-        pagination={false}
-        rows={
-          Array [
-            Object {
-              "external_ip": "external",
-              "hostname": "hostname",
-            },
-            Object {
-              "external_ip": "external-2",
-              "hostname": "hostname-2",
-            },
-          ]
-        }
-      />
-    </React.Fragment>
+    <Panel.Section>
+      <p>
+        Add dedicated IPs to this pool by moving them from their current pool
+        , or by 
+        <UnstyledLink
+          component={[Function]}
+          to="/account/billing"
+        >
+          purchasing new IPs
+        </UnstyledLink>
+        .
+      </p>
+    </Panel.Section>
+    <TableCollection
+      columns={
+        Array [
+          "Sending IP",
+          "Hostname",
+          "IP Pool",
+        ]
+      }
+      defaultSortColumn={null}
+      defaultSortDirection="asc"
+      getRowData={[Function]}
+      pagination={false}
+      rows={
+        Array [
+          Object {
+            "external_ip": "external",
+            "hostname": "hostname",
+          },
+          Object {
+            "external_ip": "external-2",
+            "hostname": "hostname-2",
+          },
+        ]
+      }
+    />
     <Panel.Section>
       <Button
         disabled={true}

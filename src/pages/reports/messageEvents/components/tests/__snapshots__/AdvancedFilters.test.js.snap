@@ -16,7 +16,7 @@ Object {
 `;
 
 exports[`Component: ActiveFilters should render initially and sync to state correctly 1`] = `
-<React.Fragment>
+<Fragment>
   <Button
     onClick={[Function]}
     size="default"
@@ -88,5 +88,5 @@ exports[`Component: ActiveFilters should render initially and sync to state corr
       </Panel.Section>
     </Panel>
   </Modal>
-</React.Fragment>
+</Fragment>
 `;

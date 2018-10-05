@@ -38,7 +38,9 @@ exports[`Component: Typeahead should render ok by default 1`] = `
   onUserAction={[Function]}
   selectedItemChanged={[Function]}
   stateReducer={[Function]}
-/>
+>
+  <Component />
+</Downshift>
 `;
 
 exports[`Component: Typeahead should render with matches 1`] = `

@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ApiPage should render 1`] = `
-<React.Fragment>
+<Fragment>
   <CenteredLogo />
   <Panel
     accent={true}
@@ -51,5 +51,5 @@ exports[`ApiPage should render 1`] = `
     </Panel.Section>
     <withRouter(Steps) />
   </Panel>
-</React.Fragment>
+</Fragment>
 `;

@@ -20,7 +20,7 @@ exports[`Status View Component should render a default winning template correctl
 `;
 
 exports[`Status View Component should render correctly 1`] = `
-<React.Fragment>
+<Fragment>
   <Panel
     sectioned={true}
   >
@@ -52,7 +52,7 @@ exports[`Status View Component should render correctly 1`] = `
       }
     }
   />
-</React.Fragment>
+</Fragment>
 `;
 
 exports[`Status View Component should render winning template in bayesian mode correctly 1`] = `

@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Component: ShareModal should render correctly when open 1`] = `
-<React.Fragment>
+<Fragment>
   <Button
     fullWidth={true}
     id="shareModalButton"
@@ -49,11 +49,11 @@ exports[`Component: ShareModal should render correctly when open 1`] = `
       </Panel.Section>
     </Panel>
   </Modal>
-</React.Fragment>
+</Fragment>
 `;
 
 exports[`Component: ShareModal should render with a valid relative range 1`] = `
-<React.Fragment>
+<Fragment>
   <Button
     fullWidth={true}
     id="shareModalButton"
@@ -97,7 +97,7 @@ exports[`Component: ShareModal should render with a valid relative range 1`] = `
       </Panel.Section>
     </Panel>
   </Modal>
-</React.Fragment>
+</Fragment>
 `;
 
 exports[`Component: ShareModal should unpin when clicking the checkbox 1`] = `"http://phoenix.test/?range=custom&recipients=one%40test.com&recipients=two%2B2%40test.com"`;

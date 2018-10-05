@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`AddForm tests should disable fields when submitting 1`] = `
-<React.Fragment>
+<Fragment>
   <form>
     <Panel.Section>
       <Field
@@ -57,11 +57,11 @@ exports[`AddForm tests should disable fields when submitting 1`] = `
       </Button>
     </Panel.Section>
   </form>
-</React.Fragment>
+</Fragment>
 `;
 
 exports[`AddForm tests should make form submitable when dirty and not submitting 1`] = `
-<React.Fragment>
+<Fragment>
   <form>
     <Panel.Section>
       <Field
@@ -117,11 +117,11 @@ exports[`AddForm tests should make form submitable when dirty and not submitting
       </Button>
     </Panel.Section>
   </form>
-</React.Fragment>
+</Fragment>
 `;
 
 exports[`AddForm tests should render add form 1`] = `
-<React.Fragment>
+<Fragment>
   <form>
     <Panel.Section>
       <Field
@@ -177,5 +177,5 @@ exports[`AddForm tests should render add form 1`] = `
       </Button>
     </Panel.Section>
   </form>
-</React.Fragment>
+</Fragment>
 `;

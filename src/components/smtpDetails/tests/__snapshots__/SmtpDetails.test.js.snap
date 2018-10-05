@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Smtp component: Smtp Details should render page correctly with an api key 1`] = `
-<React.Fragment>
+<Fragment>
   <p>
     Use the information below to configure your SMTP client to relay via SparkPost. We generated an API key for you to use as a password.
   </p>
@@ -38,11 +38,11 @@ exports[`Smtp component: Smtp Details should render page correctly with an api k
       value="123456"
     />
   </LabelledValue>
-</React.Fragment>
+</Fragment>
 `;
 
 exports[`Smtp component: Smtp Details should render page correctly with defaults 1`] = `
-<React.Fragment>
+<Fragment>
   <p>
     Use the information below to configure your SMTP client to relay via SparkPost. You need an API key to use as a password when filling out the information.
   </p>
@@ -86,5 +86,5 @@ exports[`Smtp component: Smtp Details should render page correctly with defaults
       </PageLink>
     </p>
   </LabelledValue>
-</React.Fragment>
+</Fragment>
 `;

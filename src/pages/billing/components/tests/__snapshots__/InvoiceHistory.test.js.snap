@@ -41,7 +41,7 @@ exports[`Component: Invoice History should deactivate download buttons while an 
 `;
 
 exports[`Component: Invoice History should show a list of invoices 1`] = `
-<React.Fragment>
+<Fragment>
   <Panel
     title="Invoice History"
   >
@@ -102,11 +102,11 @@ exports[`Component: Invoice History should show a list of invoices 1`] = `
       }
     />
   </Panel>
-</React.Fragment>
+</Fragment>
 `;
 
 exports[`Component: Invoice History should show a message that only 20 invoices are available if there are 20 invoices 1`] = `
-<React.Fragment>
+<Fragment>
   <Panel
     title="Invoice History"
   >
@@ -280,7 +280,7 @@ exports[`Component: Invoice History should show a message that only 20 invoices 
       </p>
     }
   />
-</React.Fragment>
+</Fragment>
 `;
 
 exports[`Component: Invoice History should show the right information in a row 1`] = `

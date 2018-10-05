@@ -15,21 +15,19 @@ exports[`ChoosePlan page tests should disable submit and plan picker when submit
         <Connect(AccessControl)
           condition={[Function]}
         >
-          <React.Fragment>
-            <Panel.Section>
-              <Connect(PaymentForm)
-                disabled={true}
-                formName="joinPlanForm"
-              />
-            </Panel.Section>
-            <Panel.Section>
-              <Connect(BillingAddressForm)
-                countries={Array []}
-                disabled={true}
-                formName="joinPlanForm"
-              />
-            </Panel.Section>
-          </React.Fragment>
+          <Panel.Section>
+            <Connect(PaymentForm)
+              disabled={true}
+              formName="joinPlanForm"
+            />
+          </Panel.Section>
+          <Panel.Section>
+            <Connect(BillingAddressForm)
+              countries={Array []}
+              disabled={true}
+              formName="joinPlanForm"
+            />
+          </Panel.Section>
         </Connect(AccessControl)>
         <Panel.Section>
           <Button
@@ -64,21 +62,19 @@ exports[`ChoosePlan page tests should render correctly 1`] = `
         <Connect(AccessControl)
           condition={[Function]}
         >
-          <React.Fragment>
-            <Panel.Section>
-              <Connect(PaymentForm)
-                disabled={false}
-                formName="joinPlanForm"
-              />
-            </Panel.Section>
-            <Panel.Section>
-              <Connect(BillingAddressForm)
-                countries={Array []}
-                disabled={false}
-                formName="joinPlanForm"
-              />
-            </Panel.Section>
-          </React.Fragment>
+          <Panel.Section>
+            <Connect(PaymentForm)
+              disabled={false}
+              formName="joinPlanForm"
+            />
+          </Panel.Section>
+          <Panel.Section>
+            <Connect(BillingAddressForm)
+              countries={Array []}
+              disabled={false}
+              formName="joinPlanForm"
+            />
+          </Panel.Section>
         </Connect(AccessControl)>
         <Panel.Section>
           <Button
