@@ -52,10 +52,12 @@ measureFileSizesBeforeBuild(paths.appBuild)
     // Merge with the public folder
     copyPublicFolder();
 
+    //copy files/dirs given their paths
+    copyPaths();
+
     // Generate and merge tenant configurations in public/static/tenant-config
     generateConfigs();
 
-    copyPaths();
     // Start the webpack build
     return build(previousFileSizes);
   })
@@ -156,8 +158,7 @@ function copyPublicFolder() {
 }
 
 function copyPaths() {
-
-  console.log('copying static paths', paths.copyPaths);
+  console.log('copying static paths');
   paths.copyPaths.forEach((path) => {
     fs.copySync(path[0], `${paths.appBuild}/${path[1]}`, {
       dereference: true
