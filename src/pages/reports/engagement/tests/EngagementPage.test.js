@@ -42,7 +42,7 @@ describe('Engagement Report Page', () => {
 
   it('should not refresh when report options reference is unchanged', () => {
     wrapper.setProps({ reportOptions: {}});
-    expect(props.refreshEngagementReport).toHaveBeenCalledTimes(0);
+    expect(props.refreshEngagementReport).toHaveBeenCalledTimes(1);
   });
 
 });
