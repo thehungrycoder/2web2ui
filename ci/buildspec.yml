@@ -1,13 +1,10 @@
 version: 0.2
 
 phases:
-  install:
-    commands:
-      - npm install
   pre_build:
     commands:
-      - npm run test-ci
-      - rm -rf node_modules
+      - npm ci
+#      - npm run test-ci
   build:
     commands:
       - npm install
