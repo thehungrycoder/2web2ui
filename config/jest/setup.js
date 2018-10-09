@@ -2,7 +2,7 @@
 
 import raf from './tempPolyfills';
 import Enzyme from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import Adapter from 'enzyme-adapter-react-16.3';
 import toJson from 'enzyme-to-json';
 import * as matchers from './matchers';
 
