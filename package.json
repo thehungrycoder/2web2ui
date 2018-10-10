@@ -16,9 +16,13 @@
     "coveralls": "cat ./build-reports/lcov.info | coveralls",
     "test-examples": "node scripts/test.js --env=jsdom --config=./jest.config.js --testMatch='<rootDir>/docs/testing/**/?(*.)test.js'",
     "lint": "node node_modules/eslint/bin/eslint.js src",
-    "lintfix": "npm run lint -- --fix",
-    "precommit": "lint-staged",
-    "prepush": "auditmated"
+    "lintfix": "npm run lint -- --fix"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "auditmated"
+    }
   },
   "lint-staged": {
     "src/**/*.js": [
