@@ -26,6 +26,9 @@ Array [
     },
   ],
   Array [
+    undefined,
+  ],
+  Array [
     [Function],
   ],
 ]
@@ -37,6 +40,9 @@ Array [
     Object {
       "type": "LOGIN_PENDING",
     },
+  ],
+  Array [
+    undefined,
   ],
   Array [
     Object {
@@ -96,12 +102,26 @@ Array [
 ]
 `;
 
-exports[`Action Creator: Auth should dispatch a logout when user is logged in 1`] = `
+exports[`Action Creator: Auth logout should dispatch a logout when user is logged in 1`] = `
 Array [
+  Array [
+    undefined,
+  ],
   Array [
     Object {
       "type": "LOGOUT",
     },
+  ],
+]
+`;
+
+exports[`Action Creator: Auth refresh should dispatch follow-on actions 1`] = `
+Array [
+  Array [
+    undefined,
+  ],
+  Array [
+    [Function],
   ],
 ]
 `;

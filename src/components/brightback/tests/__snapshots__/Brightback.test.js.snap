@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Brightback Component should pass correct props when passed condition is false 1`] = `
+<div>
+  test
+</div>
+`;
+
+exports[`Brightback Component should pass correct props without the UI option 1`] = `
+<div>
+  test
+</div>
+`;
+
+exports[`Brightback Component should pass correct props without valid account data 1`] = `
+<div>
+  test
+</div>
+`;
+
+exports[`Brightback Component should render correctly when enabled and with valid account data 1`] = `
+<div
+  enabled={true}
+  to="http://redirect-to-brightback.com"
+>
+  test
+</div>
+`;

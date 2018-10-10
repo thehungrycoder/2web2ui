@@ -7,15 +7,24 @@ const config = {
   },
   apiRequestBodyMaxSizeBytes: 500 * 1000, // ~ 500 KB
   authentication: {
-    cookie: {
-      name: 'auth',
-      options: {
-        path: '/'
-      }
+    app: {
+      cookie: {
+        name: 'auth',
+        options: {
+          path: '/'
+        }
+      },
+      authHeader: 'Basic bXN5c1dlYlVJOmZhODZkNzJlLTYyODctNDUxMy1hZTdmLWVjOGM4ZmEwZDc2Ng=='
     },
-    headers: {
-      Authorization: 'Basic bXN5c1dlYlVJOmZhODZkNzJlLTYyODctNDUxMy1hZTdmLWVjOGM4ZmEwZDc2Ng==',
-      'Content-Type': 'application/x-www-form-urlencoded'
+    site: {
+      cookie: {
+        name: 'website_auth',
+        options: {
+          domain: '.sparkpost.com',
+          path: '/'
+        }
+      },
+      authHeader: 'Basic bXN5c1VJTGltaXRlZDphZjE0OTdkYS02NjI5LTQ3NTEtODljZS01ZDBmODE4N2MyMDQ='
     }
   },
   cardTypes: [
@@ -86,6 +95,15 @@ const config = {
   zuora: {
     baseUrl: 'https://rest.apisandbox.zuora.com/v1',
     timeout: 15000
+  },
+  brightback: {
+    baseUrl: 'https://app.brightback.com',
+    app_id: '9N0rWBvKGR',
+    downgradeToFreeUrls: {
+      save_return_url: '/account/billing', // Return URL from Brightback for end-users who do not cancel
+      cancel_confirmation_url: '/account/billing/plan/change?immediatePlanChange=free-0817', // Return URL from Brightback for end-users who cancel
+      billing_url: '/account/billing/plan' // Billing URL to direct end-users to enter coupon code or other billing changes
+    }
   },
   smtpAuth: {
     host: 'no-default-set',

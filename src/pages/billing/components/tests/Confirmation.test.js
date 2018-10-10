@@ -1,10 +1,13 @@
 import React from 'react';
 import Confirmation from '../Confirmation';
 import { shallow } from 'enzyme';
+import Brightback from 'src/components/brightback/Brightback';
 
 describe('Confirmation: ', () => {
   let wrapper;
   let props;
+  const getButton = (props = {}) => wrapper.find(Brightback).props().render(props);
+
   const current = {
     monthly: 100,
     volume: 1000,
@@ -51,26 +54,31 @@ describe('Confirmation: ', () => {
 
   it('should render with nothing selected', () => {
     expect(wrapper).toMatchSnapshot();
+    expect(getButton()).toMatchSnapshot();
   });
 
   it('should render correctly with an upgrade', () => {
     wrapper.setProps({ selected: upgrade, billingEnabled: true });
     expect(wrapper).toMatchSnapshot();
+    expect(getButton()).toMatchSnapshot();
   });
 
   it('should render correctly for an upgrade effectively immediately', () => {
     wrapper.setProps({ current: free, selected: upgrade, billingEnabled: true });
     expect(wrapper).toMatchSnapshot();
+    expect(getButton()).toMatchSnapshot();
   });
 
   it('should render correctly with a downgrade', () => {
     wrapper.setProps({ selected: downgrade, billingEnabled: true });
     expect(wrapper).toMatchSnapshot();
+    expect(getButton()).toMatchSnapshot();
   });
 
   it('should render correctly with a downgrade to free', () => {
     wrapper.setProps({ selected: free, billingEnabled: true });
     expect(wrapper).toMatchSnapshot();
+    expect(getButton({ enabled: true, to: 'redirect' })).toMatchSnapshot();
   });
 
   it('should render correctly with an upgrade with IP', () => {

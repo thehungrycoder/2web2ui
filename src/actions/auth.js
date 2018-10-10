@@ -1,5 +1,6 @@
 import { sparkpostLogin } from '../helpers/http';
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
+import * as websiteAuth from 'src/actions/websiteAuth';
 import { getTfaStatusBeforeLoggedIn } from 'src/actions/tfa';
 import { showAlert } from 'src/actions/globalAlert';
 import { removeHerokuToolbar } from 'src/helpers/heroku';
@@ -21,6 +22,7 @@ export function login({ authData = {}, saveCookie = false }) {
   }
 
   return (dispatch) => {
+    dispatch(websiteAuth.login(saveCookie)); // Complete the website cookie set up process
     dispatch({
       type: 'LOGIN_SUCCESS',
       payload: authData
@@ -52,6 +54,9 @@ export function authenticate(username, password, rememberMe = false) {
     return sparkpostLogin(username, password, rememberMe)
       .then(({ data = {}} = {}) => {
         const authData = { ...data, username };
+
+        // Start website auth token cookie setup process
+        dispatch(websiteAuth.authenticate(username, password, rememberMe));
 
         return Promise.all([ authData, getTfaStatusBeforeLoggedIn({ username, token: authData.access_token })]);
       })
@@ -129,8 +134,11 @@ export function ssoCheck(username) {
 }
 
 export function refresh(token, refreshToken) {
-  const newCookie = authCookie.merge({ access_token: token, refresh_token: refreshToken });
-  return login({ authData: newCookie });
+  return (dispatch) => {
+    const newCookie = authCookie.merge({ access_token: token, refresh_token: refreshToken });
+    dispatch(websiteAuth.refresh());
+    return dispatch(login({ authData: newCookie }));
+  };
 }
 
 export function logout() {
@@ -140,6 +148,8 @@ export function logout() {
     if (!auth.loggedIn) {
       return;
     }
+
+    dispatch(websiteAuth.logout());
 
     removeHerokuToolbar();
     authCookie.remove();

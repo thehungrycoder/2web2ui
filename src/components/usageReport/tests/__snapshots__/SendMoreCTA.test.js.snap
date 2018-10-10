@@ -38,14 +38,12 @@ exports[`SendMoreCTA Component renders correctly 1`] = `
       <Case
         condition={[Function]}
       >
-        <React.Fragment>
-          <UnstyledLink
-            onClick={[Function]}
-          >
-            Submit a request
-          </UnstyledLink>
-           to increase your daily sending limit.
-        </React.Fragment>
+        <UnstyledLink
+          onClick={[Function]}
+        >
+          Submit a request
+        </UnstyledLink>
+         to increase your daily sending limit.
       </Case>
     </Connect(Component)>
      

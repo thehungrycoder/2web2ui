@@ -27,11 +27,9 @@ exports[`AccountDropdown activator should render email address on desktop 1`] = 
   className="Email"
   onClick={[Function]}
 >
-  <React.Fragment>
-    test@testing.com
-     
-    <ArrowDropDown />
-  </React.Fragment>
+  test@testing.com
+   
+  <ArrowDropDown />
 </UnstyledLink>
 `;
 

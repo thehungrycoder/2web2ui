@@ -114,7 +114,7 @@ exports[`Variants View Component: PercentOrSample Component: should render sampl
 `;
 
 exports[`Variants View Component: Top level Component should render correctly 1`] = `
-<React.Fragment>
+<Fragment>
   <Component
     showRate={false}
     title="Default Template"
@@ -142,7 +142,7 @@ exports[`Variants View Component: Top level Component should render correctly 1`
       }
     }
   />
-</React.Fragment>
+</Fragment>
 `;
 
 exports[`Variants View Component: Variant Component: should render correctly 1`] = `

@@ -35,14 +35,17 @@ describe('Engagement Report Page', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should refresh when report options reference changes', () => {
-    wrapper.setProps({ reportOptions: { relativeRange: 'day' }});
-    expect(props.refreshEngagementReport).toHaveBeenLastCalledWith({ relativeRange: 'day' });
-  });
-
   it('should not refresh when report options reference is unchanged', () => {
-    wrapper.setProps({ reportOptions: {}});
     expect(props.refreshEngagementReport).toHaveBeenCalledTimes(0);
   });
 
+  it('should refresh when report options reference changes', () => {
+    wrapper.setProps({ reportOptions: {}});
+    expect(props.refreshEngagementReport).toHaveBeenCalledTimes(1);
+  });
+
+  it('should refresh when report options change', () => {
+    wrapper.setProps({ reportOptions: { relativeRange: 'day' }});
+    expect(props.refreshEngagementReport).toHaveBeenLastCalledWith({ relativeRange: 'day' });
+  });
 });

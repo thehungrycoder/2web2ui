@@ -5,6 +5,7 @@ import { Panel } from '@sparkpost/matchbox';
 import { Empty, PanelLoading } from 'src/components';
 import { formatNumber, formatPercent } from 'src/helpers/units';
 import { safeRate } from 'src/helpers/math';
+import PercentLabel from '../PercentLabel';
 import styles from './EngagementChart.module.scss';
 
 // Width must be less than 100% to get ResponsiveContainer to be responsive
@@ -16,31 +17,7 @@ const MARGINS = { bottom: 5, left: 5, right: 5, top: 25 };
 // Pad between tallest bar and top of the chart to provide room for the LabelList
 const TOP_PADDING = { top: 60 };
 
-
-// NOTE: ReferenceArea was used because they could easily attach to two bars and provide the
-// cooridinates and dimmenions to reliable place this label
-function PercentLabel ({ percentage, width, x, yAxis }) {
-  const label = { height: 24, width: 64 };
-  const offset = (width / 2) - (label.width / 2);
-  const y = yAxis.y + (yAxis.height / yAxis.tickCount) * Math.round(yAxis.tickCount / 2);
-
-  return (
-    <g>
-      <svg {...label} x={x + offset} y={y - label.height / 2 + 1}>
-        <path
-          d="M3 1h52c.7 0 1.3.3 1.6.8l6.4 9c.5.7.5 1.7-.1 2.4l-6.3 8c-.4.5-1 .8-1.6.8H3a2 2 0 0 1-2-2V3c0-1.1.9-2 2-2z"
-          fill="white"
-          stroke="#e1e1e6"
-          strokeMiterlimit="10"
-          vectorEffect="non-scaling-stroke"
-        />
-      </svg>
-      <text x={x + offset + 5} y={y + 6} fill="#55555a">{percentage}</text>
-    </g>
-  );
-}
-
-export default function EngagementChart ({ accepted = 0, clicks = 0, loading, opens = 0, sent = 0 }) {
+export default function EngagementChart({ accepted = 0, clicks = 0, loading, opens = 0, sent = 0 }) {
   const data = [
     { label: 'Sent', value: sent },
     { label: 'Accepted', value: accepted },

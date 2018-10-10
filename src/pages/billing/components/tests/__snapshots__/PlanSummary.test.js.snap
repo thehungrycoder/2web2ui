@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`PlanSummary renders summary 1`] = `
-<React.Fragment>
+<Fragment>
   <h6
     className="Headline"
   >
@@ -9,11 +9,11 @@ exports[`PlanSummary renders summary 1`] = `
      emails for 
     $100 per month
   </h6>
-</React.Fragment>
+</Fragment>
 `;
 
 exports[`PlanSummary renders summary for free plan 1`] = `
-<React.Fragment>
+<Fragment>
   <h6
     className="Headline"
   >
@@ -21,11 +21,11 @@ exports[`PlanSummary renders summary for free plan 1`] = `
      emails for 
     Free
   </h6>
-</React.Fragment>
+</Fragment>
 `;
 
 exports[`PlanSummary renders summary with custom plan 1`] = `
-<React.Fragment>
+<Fragment>
   <h6
     className="Headline"
   >
@@ -33,11 +33,11 @@ exports[`PlanSummary renders summary with custom plan 1`] = `
      emails for 
     $100 per year
   </h6>
-</React.Fragment>
+</Fragment>
 `;
 
 exports[`PlanSummary renders summary with overages 1`] = `
-<React.Fragment>
+<Fragment>
   <h6
     className="Headline"
   >
@@ -50,5 +50,5 @@ exports[`PlanSummary renders summary with overages 1`] = `
     0.01
      per thousand extra emails
   </p>
-</React.Fragment>
+</Fragment>
 `;

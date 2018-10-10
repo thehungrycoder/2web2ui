@@ -2,7 +2,7 @@
 
 import raf from './tempPolyfills';
 import Enzyme from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import Adapter from 'enzyme-adapter-react-16.3';
 import toJson from 'enzyme-to-json';
 import * as matchers from './matchers';
 
@@ -44,3 +44,6 @@ jest.mock('moment', () => {
   momentTimezone.tz.setDefault('America/New_York');
   return momentTimezone;
 });
+
+Object.defineProperty(global.navigator, 'userAgent', { value: 'node.js', configurable: true });
+Object.defineProperty(global.navigator, 'language', { value: 'en-US', configurable: true });

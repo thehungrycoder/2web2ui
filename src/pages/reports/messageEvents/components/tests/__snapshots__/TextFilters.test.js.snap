@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`TextFilters should populate fields 1`] = `
-<React.Fragment>
+<Fragment>
   <p>
     <small>
       Each of these filters accept comma-separated values.
@@ -32,11 +32,11 @@ exports[`TextFilters should populate fields 1`] = `
       type="text"
     />
   </div>
-</React.Fragment>
+</Fragment>
 `;
 
 exports[`TextFilters should render correctly 1`] = `
-<React.Fragment>
+<Fragment>
   <p>
     <small>
       Each of these filters accept comma-separated values.
@@ -66,5 +66,5 @@ exports[`TextFilters should render correctly 1`] = `
       type="text"
     />
   </div>
-</React.Fragment>
+</Fragment>
 `;

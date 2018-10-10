@@ -1,7 +1,7 @@
 import axios from 'axios';
 import config from 'src/config';
 
-const { apiBase, zuora: zuoraConfig, apiRequestHeaders } = config;
+const { apiBase, zuora: zuoraConfig, brightback: brightbackConfig, apiRequestHeaders } = config;
 
 export const sparkpost = axios.create({
   baseURL: apiBase,
@@ -11,4 +11,8 @@ export const sparkpost = axios.create({
 
 export const zuora = axios.create({
   baseURL: zuoraConfig.baseUrl
+});
+
+export const brightback = axios.create({
+  baseURL: brightbackConfig.baseUrl
 });

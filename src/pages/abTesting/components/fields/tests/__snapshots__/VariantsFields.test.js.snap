@@ -391,7 +391,7 @@ exports[`Variants Fields Component Sample Size Field should render correctly 1`]
 `;
 
 exports[`Variants Fields Component should render percent audience selection correctly 1`] = `
-<React.Fragment>
+<Fragment>
   <Panel
     sectioned={true}
   >
@@ -433,11 +433,11 @@ exports[`Variants Fields Component should render percent audience selection corr
       }
     }
   />
-</React.Fragment>
+</Fragment>
 `;
 
 exports[`Variants Fields Component should render sample size audience selection correctly 1`] = `
-<React.Fragment>
+<Fragment>
   <Panel
     sectioned={true}
   >
@@ -479,5 +479,5 @@ exports[`Variants Fields Component should render sample size audience selection 
       }
     }
   />
-</React.Fragment>
+</Fragment>
 `;

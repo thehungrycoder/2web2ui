@@ -10,6 +10,7 @@ import apiKeys from './api-keys';
 import auth from './auth';
 import billing from './billing';
 import bounceReport from './bounceReport';
+import brightback from './brightback';
 import cookieConsent from './cookieConsent';
 import delayReport from './delayReport';
 import engagementReport from './engagementReport';
@@ -36,6 +37,7 @@ import tfa from './tfa';
 import tfaBackupCodes from './tfaBackupCodes';
 import trackingDomains from './trackingDomains';
 import webhooks from './webhooks';
+import websiteAuth from './websiteAuth';
 
 const appReducer = combineReducers({
   acceptedReport,
@@ -45,6 +47,7 @@ const appReducer = combineReducers({
   auth,
   billing,
   bounceReport,
+  brightback,
   cookieConsent,
   delayReport,
   engagementReport,
@@ -73,7 +76,8 @@ const appReducer = combineReducers({
   tfaBackupCodes,
   trackingDomains,
   users,
-  webhooks
+  webhooks,
+  websiteAuth
 });
 
 /**

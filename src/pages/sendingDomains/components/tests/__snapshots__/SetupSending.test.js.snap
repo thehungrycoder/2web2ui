@@ -79,23 +79,21 @@ exports[`Component: SetupSending renders correctly for unverified DKIM and inval
   title="Set Up For Sending"
 >
   <Left>
-    <React.Fragment>
-      <p>
-        <strong>
-          To use this domain for sending
-        </strong>
-        , add this TXT record to your DNS settings, paying close attention to the specified hostname.
-      </p>
-      <p>
-        We recommend DNS verification, but if you don't have DNS access, you can 
-        <UnstyledLink
-          id="verify-with-email"
-          onClick={[Function]}
-        >
-           set this domain up for sending via email.
-        </UnstyledLink>
-      </p>
-    </React.Fragment>
+    <p>
+      <strong>
+        To use this domain for sending
+      </strong>
+      , add this TXT record to your DNS settings, paying close attention to the specified hostname.
+    </p>
+    <p>
+      We recommend DNS verification, but if you don't have DNS access, you can 
+      <UnstyledLink
+        id="verify-with-email"
+        onClick={[Function]}
+      >
+         set this domain up for sending via email.
+      </UnstyledLink>
+    </p>
   </Left>
   <Right>
     <Panel
