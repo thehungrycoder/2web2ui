@@ -23,5 +23,12 @@ export const selectWebhookEventListing = createSelector(
 
 export const selectMessageEventListing = createSelector(
   [selectMessageEventsDocs],
-  (docs) => Object.keys(docs).sort()
+  (docs) => Object.keys(docs).sort().map((type) => {
+    const evt = docs[type];
+    return {
+      type,
+      displayName: evt.displayName,
+      description: evt.description
+    };
+  })
 );
