@@ -23,17 +23,28 @@ Test config is active during `npm run test`
 
 Put test-time values in `src/config/test-config.js`.
 
-# Per-Tenant Overrides
-Ansible generates `public/static/tenant-config/<tenant-hostname>.js` for each tenant. The format of this file is a little different than the others since it's loaded at runtime.
 
-Tenant config is stored under `window.SP.productionConfig` and then merged with defaults in the config module. 
+## Tenant Configurations
 
-The app then loads a fixed tenant config URL which Nginx on the UI tier routes to the current tenant's config file. See `A-D/roles/ui_tier/templates/web_proxy.conf.j2` for details.
+Our build generates a configuration script,  `build/public/static/tenant-config/<host>/production.js`, for each tenant.  The script is loaded by `build/public/static/index.html` for a request host (see `Ansible-Deployments/roles/ui_tier/templates/web_proxy.conf.j2` for more details).  The script sets a global variable, `window.SP.productionConfig`, that is merged in the `src/config` module.
 
-### Development Environment
-Start your dev environment by running `npm start` :)
 
-Put dev values in `public/static/tenant-config/production.js`.
+## Configuration
 
-Note: we tend to use `.sparkpost.test` domains during development.
+All the magic happens in `scripts/generateConfigs`.  The following are the maps used to generate the tenant configuration scripts.
 
+- `tenants/<environment>.js` - tenant configurations, environment dictates which environment configuration to merge with
+- `environments/<environment>.js` - environment configurations
+- `defaultTemplate.js` - defaults for all tenants
+
+Please note that `constructContent.js` ignores (by deconstructing) some configuration value that are only used during generation.
+
+
+### Local Development
+
+Since there is no build, there are no tenant configuration scripts.  Therefore, `public/static/tenant-config/production.js` is used.
+
+
+### Manual Test
+
+To manually test generated tenant configurations, run `npm run build` and confirm the tenant configuration, `build/public/static/tenant-config/<host>/production.js`, looks as you expect.
