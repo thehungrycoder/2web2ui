@@ -20,5 +20,7 @@ exports[`Animator should render 1`] = `
     }
   }
   unmountOnExit={false}
-/>
+>
+  <Component />
+</Transition>
 `;

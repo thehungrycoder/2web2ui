@@ -56,15 +56,18 @@ exports[`EngagementChart renders engagement chart 1`] = `
         <CartesianGrid
           fill="none"
           horizontal={true}
+          horizontalFill={Array []}
           horizontalPoints={Array []}
           stroke="#ccc"
           strokeDasharray="4 1"
           vertical={false}
+          verticalFill={Array []}
           verticalPoints={Array []}
         />
         <XAxis
           allowDataOverflow={false}
           allowDecimals={true}
+          allowDuplicatedCategory={true}
           dataKey="label"
           domain={
             Array [
@@ -93,6 +96,7 @@ exports[`EngagementChart renders engagement chart 1`] = `
         <YAxis
           allowDataOverflow={false}
           allowDecimals={true}
+          allowDuplicatedCategory={true}
           domain={
             Array [
               0,
@@ -142,9 +146,9 @@ exports[`EngagementChart renders engagement chart 1`] = `
           />
         </Bar>
         <ReferenceArea
-          alwaysShow={false}
           fill="#ccc"
           fillOpacity={0.5}
+          ifOverflow="discard"
           isFront={false}
           percentage="80%"
           r={10}
@@ -157,9 +161,9 @@ exports[`EngagementChart renders engagement chart 1`] = `
           yAxisId={0}
         />
         <ReferenceArea
-          alwaysShow={false}
           fill="#ccc"
           fillOpacity={0.5}
+          ifOverflow="discard"
           isFront={false}
           percentage="12.5%"
           r={10}
@@ -172,9 +176,9 @@ exports[`EngagementChart renders engagement chart 1`] = `
           yAxisId={0}
         />
         <ReferenceArea
-          alwaysShow={false}
           fill="#ccc"
           fillOpacity={0.5}
+          ifOverflow="discard"
           isFront={false}
           percentage="6.31%"
           r={10}

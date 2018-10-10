@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Component: SuspendedForBilling should render correctly 1`] = `
-<React.Fragment>
+<Fragment>
   <Banner
     status="danger"
     title="Your account has been suspended due to a billing problem"
@@ -22,5 +22,5 @@ exports[`Component: SuspendedForBilling should render correctly 1`] = `
     </p>
   </Banner>
   <UpdatePaymentForm />
-</React.Fragment>
+</Fragment>
 `;

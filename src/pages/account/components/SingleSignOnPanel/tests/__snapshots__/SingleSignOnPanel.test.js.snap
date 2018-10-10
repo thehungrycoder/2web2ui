@@ -34,27 +34,25 @@ exports[`SingleSignOnPanel renders with provider and status section 1`] = `
   }
   title="Single Sign-On"
 >
-  <React.Fragment>
-    <ProviderSection
-      provider="https://sso.sparkpost.com/redirect"
-    />
-    <StatusSection
-      cert="abc=="
-      enabled={true}
-      getAccountSingleSignOnDetails={
-        [MockFunction] {
-          "calls": Array [
-            Array [],
-          ],
-          "results": undefined,
-        }
+  <ProviderSection
+    provider="https://sso.sparkpost.com/redirect"
+  />
+  <StatusSection
+    cert="abc=="
+    enabled={true}
+    getAccountSingleSignOnDetails={
+      [MockFunction] {
+        "calls": Array [
+          Array [],
+        ],
+        "results": undefined,
       }
-      loading={false}
-      provider="https://sso.sparkpost.com/redirect"
-      updateAccountSingleSignOn={[MockFunction]}
-      updateError="Oh no!"
-      updatedAt="2018-09-11T19:39:06+00:00"
-    />
-  </React.Fragment>
+    }
+    loading={false}
+    provider="https://sso.sparkpost.com/redirect"
+    updateAccountSingleSignOn={[MockFunction]}
+    updateError="Oh no!"
+    updatedAt="2018-09-11T19:39:06+00:00"
+  />
 </Panel>
 `;

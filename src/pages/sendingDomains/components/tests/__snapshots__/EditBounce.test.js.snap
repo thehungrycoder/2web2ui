@@ -104,67 +104,65 @@ exports[`Component: EditBounce does not show root domain warning for 3rd level d
 <SendingDomainSection
   title="Set Up For Bounce"
 >
-  <React.Fragment>
-    <Left>
-      <p>
-        <strong>
-          To use this domain for bounces
-        </strong>
-        , add this CNAME record to your DNS settings.
-      </p>
-      <p>
-        <em>
-          Note: Bounce domains must be verified via DNS.
-        </em>
-      </p>
-    </Left>
-    <Right>
-      <Panel
-        actions={
-          Array [
-            Object {
-              "color": "orange",
-              "content": "Verify CNAME Record",
-              "disabled": false,
-              "onClick": [Function],
-            },
-          ]
-        }
-        sectioned={true}
-        title={
-          <React.Fragment>
-            <ErrorIcon />
-             
-            <span>
-              DNS Settings
-            </span>
-          </React.Fragment>
-        }
+  <Left>
+    <p>
+      <strong>
+        To use this domain for bounces
+      </strong>
+      , add this CNAME record to your DNS settings.
+    </p>
+    <p>
+      <em>
+        Note: Bounce domains must be verified via DNS.
+      </em>
+    </p>
+  </Left>
+  <Right>
+    <Panel
+      actions={
+        Array [
+          Object {
+            "color": "orange",
+            "content": "Verify CNAME Record",
+            "disabled": false,
+            "onClick": [Function],
+          },
+        ]
+      }
+      sectioned={true}
+      title={
+        <React.Fragment>
+          <ErrorIcon />
+           
+          <span>
+            DNS Settings
+          </span>
+        </React.Fragment>
+      }
+    >
+      <LabelledValue
+        label="Type"
       >
-        <LabelledValue
-          label="Type"
-        >
-          <p>
-            CNAME
-          </p>
-        </LabelledValue>
-        <LabelledValue
-          label="Hostname"
-        >
-          <p>
-            c.b.a.com
-          </p>
-        </LabelledValue>
-        <LabelledValue
-          label="Value"
-        >
-          <p>
-            sparkpostmail.com
-          </p>
-        </LabelledValue>
-      </Panel>
-    </Right>
-  </React.Fragment>
+        <p>
+          CNAME
+        </p>
+      </LabelledValue>
+      <LabelledValue
+        label="Hostname"
+      >
+        <p>
+          c.b.a.com
+        </p>
+      </LabelledValue>
+      <LabelledValue
+        label="Value"
+      >
+        <p>
+          sparkpostmail.com
+        </p>
+      </LabelledValue>
+    </Panel>
+  </Right>
 </SendingDomainSection>
 `;
 
@@ -172,83 +170,81 @@ exports[`Component: EditBounce renders not ready correctly 1`] = `
 <SendingDomainSection
   title="Set Up For Bounce"
 >
-  <React.Fragment>
-    <Left>
-      <p>
-        <strong>
-          To use this domain for bounces
-        </strong>
-        , add this CNAME record to your DNS settings.
-      </p>
-      <p>
-        <em>
-          Note: Bounce domains must be verified via DNS.
-        </em>
-      </p>
-    </Left>
-    <Right>
-      <Banner
-        status="warning"
+  <Left>
+    <p>
+      <strong>
+        To use this domain for bounces
+      </strong>
+      , add this CNAME record to your DNS settings.
+    </p>
+    <p>
+      <em>
+        Note: Bounce domains must be verified via DNS.
+      </em>
+    </p>
+  </Left>
+  <Right>
+    <Banner
+      status="warning"
+    >
+      We strongly recommend using a subdomain such as 
+      <strong>
+        bounces.
+        xyz.com
+      </strong>
+       for bounce domains. 
+      <Link
+        replace={false}
+        to="/account/sending-domains/create"
       >
-        We strongly recommend using a subdomain such as 
-        <strong>
-          bounces.
+        Create a new domain now.
+      </Link>
+    </Banner>
+    <Panel
+      actions={
+        Array [
+          Object {
+            "color": "orange",
+            "content": "Verify CNAME Record",
+            "disabled": false,
+            "onClick": [Function],
+          },
+        ]
+      }
+      sectioned={true}
+      title={
+        <React.Fragment>
+          <ErrorIcon />
+           
+          <span>
+            DNS Settings
+          </span>
+        </React.Fragment>
+      }
+    >
+      <LabelledValue
+        label="Type"
+      >
+        <p>
+          CNAME
+        </p>
+      </LabelledValue>
+      <LabelledValue
+        label="Hostname"
+      >
+        <p>
           xyz.com
-        </strong>
-         for bounce domains. 
-        <Link
-          replace={false}
-          to="/account/sending-domains/create"
-        >
-          Create a new domain now.
-        </Link>
-      </Banner>
-      <Panel
-        actions={
-          Array [
-            Object {
-              "color": "orange",
-              "content": "Verify CNAME Record",
-              "disabled": false,
-              "onClick": [Function],
-            },
-          ]
-        }
-        sectioned={true}
-        title={
-          <React.Fragment>
-            <ErrorIcon />
-             
-            <span>
-              DNS Settings
-            </span>
-          </React.Fragment>
-        }
+        </p>
+      </LabelledValue>
+      <LabelledValue
+        label="Value"
       >
-        <LabelledValue
-          label="Type"
-        >
-          <p>
-            CNAME
-          </p>
-        </LabelledValue>
-        <LabelledValue
-          label="Hostname"
-        >
-          <p>
-            xyz.com
-          </p>
-        </LabelledValue>
-        <LabelledValue
-          label="Value"
-        >
-          <p>
-            sparkpostmail.com
-          </p>
-        </LabelledValue>
-      </Panel>
-    </Right>
-  </React.Fragment>
+        <p>
+          sparkpostmail.com
+        </p>
+      </LabelledValue>
+    </Panel>
+  </Right>
 </SendingDomainSection>
 `;
 
@@ -256,71 +252,69 @@ exports[`Component: EditBounce renders ready correctly 1`] = `
 <SendingDomainSection
   title="Set Up For Bounce"
 >
-  <React.Fragment>
-    <Left />
-    <Right>
-      <Banner
-        status="warning"
+  <Left />
+  <Right>
+    <Banner
+      status="warning"
+    >
+      We strongly recommend using a subdomain such as 
+      <strong>
+        bounces.
+        xyz.com
+      </strong>
+       for bounce domains. 
+      <Link
+        replace={false}
+        to="/account/sending-domains/create"
       >
-        We strongly recommend using a subdomain such as 
-        <strong>
-          bounces.
+        Create a new domain now.
+      </Link>
+    </Banner>
+    <Panel
+      actions={
+        Array [
+          Object {
+            "color": "orange",
+            "content": "Re-verify CNAME Record",
+            "disabled": false,
+            "onClick": [Function],
+          },
+        ]
+      }
+      sectioned={true}
+      title={
+        <React.Fragment>
+          <VerifiedIcon />
+           
+          <span>
+            DNS Settings
+          </span>
+        </React.Fragment>
+      }
+    >
+      <LabelledValue
+        label="Type"
+      >
+        <p>
+          CNAME
+        </p>
+      </LabelledValue>
+      <LabelledValue
+        label="Hostname"
+      >
+        <p>
           xyz.com
-        </strong>
-         for bounce domains. 
-        <Link
-          replace={false}
-          to="/account/sending-domains/create"
-        >
-          Create a new domain now.
-        </Link>
-      </Banner>
-      <Panel
-        actions={
-          Array [
-            Object {
-              "color": "orange",
-              "content": "Re-verify CNAME Record",
-              "disabled": false,
-              "onClick": [Function],
-            },
-          ]
-        }
-        sectioned={true}
-        title={
-          <React.Fragment>
-            <VerifiedIcon />
-             
-            <span>
-              DNS Settings
-            </span>
-          </React.Fragment>
-        }
+        </p>
+      </LabelledValue>
+      <LabelledValue
+        label="Value"
       >
-        <LabelledValue
-          label="Type"
-        >
-          <p>
-            CNAME
-          </p>
-        </LabelledValue>
-        <LabelledValue
-          label="Hostname"
-        >
-          <p>
-            xyz.com
-          </p>
-        </LabelledValue>
-        <LabelledValue
-          label="Value"
-        >
-          <p>
-            sparkpostmail.com
-          </p>
-        </LabelledValue>
-      </Panel>
-    </Right>
-  </React.Fragment>
+        <p>
+          sparkpostmail.com
+        </p>
+      </LabelledValue>
+    </Panel>
+  </Right>
 </SendingDomainSection>
 `;
 

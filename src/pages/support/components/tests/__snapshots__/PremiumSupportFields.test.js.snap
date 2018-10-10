@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`PremiumSupportFields default state 1`] = `
-<React.Fragment>
+<Fragment>
   <Field
     component={[Function]}
     label="Please list any existing and previous non SparkPost sending domains."
@@ -89,5 +89,5 @@ exports[`PremiumSupportFields default state 1`] = `
     multiline={true}
     name="current_issues"
   />
-</React.Fragment>
+</Fragment>
 `;

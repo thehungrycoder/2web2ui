@@ -162,7 +162,7 @@ exports[`Template List Components LastUpdated should render 1`] = `
 `;
 
 exports[`Template List Components Name should render 1`] = `
-<React.Fragment>
+<Fragment>
   <p
     className="Name"
   >
@@ -183,7 +183,7 @@ exports[`Template List Components Name should render 1`] = `
       id-123
     </em>
   </p>
-</React.Fragment>
+</Fragment>
 `;
 
 exports[`Template List Components Status should render draft 1`] = `

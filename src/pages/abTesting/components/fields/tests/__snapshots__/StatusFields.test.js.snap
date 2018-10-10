@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Status Fields Component should disable fields correctly 1`] = `
-<React.Fragment>
+<Fragment>
   <Panel
     sectioned={true}
   >
@@ -57,11 +57,11 @@ exports[`Status Fields Component should disable fields correctly 1`] = `
       }
     />
   </Panel>
-</React.Fragment>
+</Fragment>
 `;
 
 exports[`Status Fields Component should render correctly 1`] = `
-<React.Fragment>
+<Fragment>
   <Panel
     sectioned={true}
   >
@@ -115,5 +115,5 @@ exports[`Status Fields Component should render correctly 1`] = `
       }
     />
   </Panel>
-</React.Fragment>
+</Fragment>
 `;
