@@ -233,6 +233,12 @@ const productionTenants = {
       allow_default_signing_domains_for_ip_pools: true
     }
   },
+  disney: {
+    featureFlags: {
+      allow_anyone_at_verification: true,
+      allow_default_signing_domains_for_ip_pools: true
+    }
+  },
   ebates: {
     featureFlags: {
       allow_anyone_at_verification: true,
