@@ -2,12 +2,17 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { AdvancedFilters } from '../AdvancedFilters';
 
-describe('Component: ActiveFilters', () => {
+describe('Component: AdvancedFilters', () => {
   let wrapper;
   const props = {
     updateMessageEventsSearchOptions: jest.fn(),
     getDocumentation: jest.fn(),
-    eventListing: ['amp_open', 'bounce', 'click', 'delivery'],
+    eventListing: [
+      { type: 'amp_open', displayName: 'AMP Open', description: 'AMP open desc' },
+      { type: 'bounce', displayName: 'Bounce', description: 'Bounce desc' },
+      { type: 'click', displayName: 'Click', description: 'Click desc' },
+      { type: 'delivery', displayName: 'Delivery', description: 'Delivery desc' }
+    ],
     search: {
       events: ['bounce', 'click'],
       friendly_froms: ['test@testy.co'],

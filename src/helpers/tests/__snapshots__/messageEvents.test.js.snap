@@ -5,10 +5,14 @@ Object {
   "bounce": Object {
     "bounce_class": "Classification code for a given message (see [Bounce Classification Codes](https://support.sparkpost.com/customer/portal/articles/1929896))",
     "campaign_id": "Campaign of which this message was a part",
+    "description": "This event type is for testing event stuff",
+    "displayName": "A test event type",
   },
   "delivery": Object {
     "campaign_id": "Campaign of which this message was a part",
     "customer_id": "SparkPost-customer identifier through which this message was sent",
+    "description": "This event type is also for testing event stuff",
+    "displayName": "A second test event type",
   },
 }
 `;

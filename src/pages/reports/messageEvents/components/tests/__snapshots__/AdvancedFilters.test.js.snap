@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Component: ActiveFilters should handle filter changes and correctly apply 1`] = `
+exports[`Component: AdvancedFilters should handle filter changes and correctly apply 1`] = `
 Object {
   "campaign_ids": Array [],
   "events": Object {
@@ -15,7 +15,7 @@ Object {
 }
 `;
 
-exports[`Component: ActiveFilters should render initially and sync to state correctly 1`] = `
+exports[`Component: AdvancedFilters should render initially and sync to state correctly 1`] = `
 <Fragment>
   <Button
     onClick={[Function]}
@@ -42,12 +42,28 @@ exports[`Component: ActiveFilters should render initially and sync to state corr
               "click": true,
             }
           }
-          eventTypes={
+          eventTypeDocs={
             Array [
-              "amp_open",
-              "bounce",
-              "click",
-              "delivery",
+              Object {
+                "description": "AMP open desc",
+                "displayName": "AMP Open",
+                "type": "amp_open",
+              },
+              Object {
+                "description": "Bounce desc",
+                "displayName": "Bounce",
+                "type": "bounce",
+              },
+              Object {
+                "description": "Click desc",
+                "displayName": "Click",
+                "type": "click",
+              },
+              Object {
+                "description": "Delivery desc",
+                "displayName": "Delivery",
+                "type": "delivery",
+              },
             ]
           }
           onChange={[Function]}

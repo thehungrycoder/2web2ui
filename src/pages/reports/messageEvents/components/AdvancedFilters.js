@@ -94,7 +94,7 @@ export class AdvancedFilters extends Component {
           <Panel title='Advanced Filters'>
             <Panel.Section>
               <EventTypeFilters
-                eventTypes={this.props.eventListing}
+                eventTypeDocs={this.props.eventListing}
                 checkedTypes={this.state.search.events}
                 onChange={this.handleCheckbox}
               />

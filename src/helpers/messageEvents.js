@@ -3,20 +3,34 @@ import qs from 'query-string';
 import _ from 'lodash';
 import { getRelativeDates } from 'src/helpers/date';
 
-/**
- * Reshapes message event documentation for tooltips
+/*
+ * Translate the array of event definitions from /message-events/events/documentation
+ * into an map of event type to event field descriptions.
+ * [ {[fieldName]: { sampleValue, description }}, ... ] -> { type: { [fieldName]: description }, ... displayName, description }
+ * 
+ * Note: we treat display_name and event_description fields specially. They are not true event fields.
+ * They're metadata and their sampleValue fields contain their 'value'.
  */
 export function formatDocumentation(data) {
   const events = {};
 
   _.each(data, (event) => {
-    const { type, ...rest } = event;
-    events[type.sampleValue] = _.mapValues(rest, ({ description }) => description);
+    const {
+      type,
+      display_name: { sampleValue: displayName },
+      event_description: { sampleValue: description },
+      ...rest
+    } = event;
+    const fieldDescriptions = _.mapValues(rest, ({ description }) => description);
+    events[type.sampleValue] = {
+      displayName,
+      description,
+      ...fieldDescriptions
+    };
   });
 
   return events;
 }
-
 export function parseSearch(search) {
   const { from, to, range, ...rest } = qs.parse(search);
   let dateOptions = {};

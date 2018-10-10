@@ -9,6 +9,8 @@ describe('messageEvents helpers', () => {
     beforeEach(() => {
       data = [{
         'type': { 'description': 'Type of event this record describes', 'sampleValue': 'bounce' },
+        'display_name': { 'description': 'A description of this event', 'sampleValue': 'A test event type' },
+        'event_description': { 'description': 'A description of the description', 'sampleValue': 'This event type is for testing event stuff' },
         'bounce_class': {
           'description': 'Classification code for a given message (see [Bounce Classification Codes](https://support.sparkpost.com/customer/portal/articles/1929896))',
           'sampleValue': '1'
@@ -19,6 +21,8 @@ describe('messageEvents helpers', () => {
         }
       }, {
         'type': { 'description': 'Type of event this record describes', 'sampleValue': 'delivery' },
+        'display_name': { 'description': 'A description of this event', 'sampleValue': 'A second test event type' },
+        'event_description': { 'description': 'A description of the description', 'sampleValue': 'This event type is also for testing event stuff' },
         'campaign_id': {
           'description': 'Campaign of which this message was a part',
           'sampleValue': 'Example Campaign Name'

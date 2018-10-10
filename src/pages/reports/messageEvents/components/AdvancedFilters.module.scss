@@ -1,11 +1,16 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 
-.CheckWrapper {
-  display: inline-block;
-  width: 50%;
+.CheckBoxGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 
-  @media screen and (min-width: breakpoint(small)) {
-    width: 25%;
+  fieldset {
+    white-space: normal;
+    margin: 0;
+  }
+
+  @media screen and (min-width: breakpoint(medium)) {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 }
 
