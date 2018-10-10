@@ -15,7 +15,7 @@ Object {
 }
 `;
 
-exports[`Component: ActiveFilters should render initially and sync to state correctly 1`] = `
+exports[`Component: AdvancedFilters should render initially and sync to state correctly 1`] = `
 <Fragment>
   <Button
     onClick={[Function]}
