@@ -11,12 +11,15 @@ phases:
 #      - npm run test-ci
   build:
     commands:
-      - echo "list contents"
-      - ls -la
-      - ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'
       - npm install
       - npm run build
-
+  post_build:
+    commands:
+      - echo "list post build contents"
+      - cd build
+      - ls -la
+      - ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'
+      - cd ..
 artifacts:
   files:
     - '**/*'
