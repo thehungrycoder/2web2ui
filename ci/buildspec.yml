@@ -4,11 +4,13 @@ phases:
   install:
     commands:
       - npm install -g npm
+      - sudo apt-get install git -y
 
-#  pre_build:
-#    commands:
+  pre_build:
+    commands:
 #      - npm ci
 #      - npm run test-ci
+      - git clone https://GITHUB_USERNAME:$GITHUB_TOKEN@github.com/SparkPost/automation-scripts.git
   build:
     commands:
       - npm install
