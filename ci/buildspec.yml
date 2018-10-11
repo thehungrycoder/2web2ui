@@ -5,10 +5,10 @@ phases:
     commands:
       - npm install -g npm
 
-  pre_build:
-    commands:
-      - npm ci
-      - npm run test-ci
+#  pre_build:
+#    commands:
+#      - npm ci
+#      - npm run test-ci
   build:
     commands:
       - echo "list contents"
