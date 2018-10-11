@@ -1,8 +1,6 @@
 import { email, emailLocal, domain } from 'src/helpers/validation';
 import _ from 'lodash';
 
-const ID_ALLOWED_CHARS = 'a-z0-9_-';
-
 // This validator is intentionally not very good
 // Legacy app uses this regex: /^{{\s*(\w|\.)+\s*}}$/ - however does not handle complex but valid substitution data
 function looseSubstitution(value) {
@@ -42,7 +40,6 @@ function validJson(value, { testData }) {
 }
 
 export {
-  ID_ALLOWED_CHARS,
   looseSubstitution,
   emailOrSubstitution,
   contentRequired,

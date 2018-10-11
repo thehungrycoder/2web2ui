@@ -13,7 +13,7 @@ import FromEmailWrapper from './FromEmail';
 // Helpers & Validation
 import { required, slug } from 'src/helpers/validation';
 import { slugify } from 'src/helpers/string';
-import { ID_ALLOWED_CHARS, emailOrSubstitution, looseSubstitution } from './validation';
+import { emailOrSubstitution, looseSubstitution } from './validation';
 
 import styles from './FormEditor.module.scss';
 
@@ -25,8 +25,7 @@ export default class Form extends Component {
       return;
     }
 
-    const idValue = slugify(e.target.value).replace(new RegExp(`[^${ID_ALLOWED_CHARS}]`, 'g'), '');
-    change(name, 'id', idValue);
+    change(name, 'id', slugify(e.target.value));
   }
 
   componentDidMount() {

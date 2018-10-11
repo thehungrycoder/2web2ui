@@ -15,9 +15,7 @@ const formName = 'abTestCreateForm';
 export class AbTestCreateForm extends Component {
 
   handleIdFill = (e) => {
-    const { change } = this.props;
-    const idValue = slugify(e.target.value).replace(new RegExp('[^a-z0-9_-]', 'g'), '');
-    change('id', idValue);
+    this.props.change('id', slugify(e.target.value));
   }
 
   render() {
