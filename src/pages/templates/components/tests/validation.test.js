@@ -76,13 +76,3 @@ describe('emailOrSubstitution', () => {
     expect(validation.emailOrSubstitution('{{ab}}')).toEqual(undefined);
   });
 });
-
-describe('idSyntax', () => {
-  it('should handle invalid id', () => {
-    expect(validation.idSyntax('not!valid@12 3')).toEqual('Can only contain lowercase letters, numbers, hyphens and underscores');
-  });
-
-  it('should handle valid id', () => {
-    expect(validation.idSyntax('is-valid-1')).toEqual(undefined);
-  });
-});

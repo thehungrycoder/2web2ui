@@ -11,9 +11,9 @@ import { TextFieldWrapper, PanelLoading } from 'src/components';
 import FromEmailWrapper from './FromEmail';
 
 // Helpers & Validation
-import { required } from 'src/helpers/validation';
+import { required, slug } from 'src/helpers/validation';
 import { slugify } from 'src/helpers/string';
-import { ID_ALLOWED_CHARS, idSyntax, emailOrSubstitution, looseSubstitution } from './validation';
+import { ID_ALLOWED_CHARS, emailOrSubstitution, looseSubstitution } from './validation';
 
 import styles from './FormEditor.module.scss';
 
@@ -99,7 +99,7 @@ export default class Form extends Component {
               label='Template ID'
               helpText={newTemplate ? 'A Unique ID for your template, we\'ll fill this in for you.' : null}
               disabled={!newTemplate || readOnly}
-              validate={newTemplate ? [required, idSyntax] : null}
+              validate={newTemplate ? [required, slug] : null}
             />
           </Panel.Section>
           {hasSubaccounts && <SubaccountSection newTemplate={newTemplate} formName={name} disabled={readOnly} />}

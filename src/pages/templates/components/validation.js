@@ -9,10 +9,6 @@ function looseSubstitution(value) {
   return value.includes('{{') && value.includes('}}') ? undefined : 'Substitution syntax error';
 }
 
-function idSyntax(value) {
-  return new RegExp(`^[${ID_ALLOWED_CHARS}]*$`).test(value) ? undefined : 'Can only contain lowercase letters, numbers, hyphens and underscores';
-}
-
 function emailOrSubstitution(value) {
   if (!value) {
     return undefined;
@@ -47,7 +43,6 @@ function validJson(value, { testData }) {
 
 export {
   ID_ALLOWED_CHARS,
-  idSyntax,
   looseSubstitution,
   emailOrSubstitution,
   contentRequired,

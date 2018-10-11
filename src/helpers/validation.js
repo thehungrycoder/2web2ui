@@ -2,7 +2,7 @@ import _ from 'lodash';
 import { formatBytes } from 'src/helpers/units';
 import { getDuration, isStartTimeAfterNow } from 'src/helpers/date';
 import { isEmailAddress, isEmailLocalPart, isRecipientEmailAddress } from 'src/helpers/email';
-import { domainRegex, abTestIdRegex } from './regex';
+import { domainRegex, slugRegex } from './regex';
 import isURL from 'validator/lib/isURL';
 import Payment from 'payment';
 
@@ -26,8 +26,8 @@ export function domain(value) {
   return domainRegex.test(value) ? undefined : 'Invalid Domain';
 }
 
-export function abTestId(value) {
-  return abTestIdRegex.test(value) ? undefined : 'Must contain only letters, numbers, hyphens, and underscores';
+export function slug(value) {
+  return slugRegex.test(value) ? undefined : 'Must contain only lowercase letters, numbers, hyphens, and underscores';
 }
 
 export function abTestDefaultTemplate(value, formValues, props) {
