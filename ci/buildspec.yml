@@ -10,15 +10,14 @@ phases:
     commands:
 #      - npm ci
 #      - npm run test-ci
-      - git clone https://GITHUB_USERNAME:$GITHUB_TOKEN@github.com/SparkPost/automation-scripts.git
   build:
     commands:
       - npm install
       - npm run build
   post_build:
     commands:
-      - echo "list post build contents"
-      - cd $CODEBUILD_SRC_DIR
+      - cd build
+      - git clone https://GITHUB_USERNAME:$GITHUB_TOKEN@github.com/SparkPost/automation-scripts.git
       - ls -la
       - cd -
 artifacts:
