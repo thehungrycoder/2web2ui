@@ -16,11 +16,15 @@ phases:
   post_build:
     commands:
       - echo "list post build contents"
-      - cd build
+      - cd $CODEBUILD_SRC_DIR
       - ls -la
-      - ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'
-      - cd ..
+      - cd -
 artifacts:
   files:
     - '**/*'
   base-directory: build
+  secondary-artifacts:
+    buildautomation:
+      files:
+        - '**/*'
+      base-directory: automationscripts
