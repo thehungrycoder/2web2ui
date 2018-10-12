@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snippet Actions .createSnippet with id and name 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "data": Object {
+        "id": "test-snippet",
+        "name": "Test Snippet",
+      },
+      "method": "POST",
+      "url": "/snippets",
+    },
+    "type": "CREATE_SNIPPET",
+  },
+]
+`;
