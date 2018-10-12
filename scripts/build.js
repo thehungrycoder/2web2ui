@@ -52,9 +52,6 @@ measureFileSizesBeforeBuild(paths.appBuild)
     // Merge with the public folder
     copyPublicFolder();
 
-    //copy files/dirs given their paths
-    copyPaths();
-
     // Generate and merge tenant configurations in public/static/tenant-config
     generateConfigs();
 
@@ -155,14 +152,4 @@ function copyPublicFolder() {
     dereference: true,
     filter: file => file !== paths.appHtml,
   });
-}
-
-function copyPaths() {
-  console.log('copying static paths');
-  paths.copyPaths.forEach((path) => {
-    fs.copySync(path[0], `${paths.appBuild}/${path[1]}`, {
-      dereference: true
-    })
-  });
-
 }

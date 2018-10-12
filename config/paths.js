@@ -52,9 +52,5 @@ module.exports = {
   testsSetup: resolveApp('src/setupTests.js'),
   appNodeModules: resolveApp(''),
   publicUrl: getPublicUrl(resolveApp('package.json')),
-  servedPath: getServedPath(resolveApp('package.json')),
-  copyPaths: [
-    [`${appDirectory}/ci/scripts`, 'scripts'],
-    [`${appDirectory}/ci/appspec.yml`, 'appspec.yml']
-  ]
+  servedPath: getServedPath(resolveApp('package.json'))
 };
