@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { RadioGroup, SubaccountTypeaheadWrapper } from 'src/components';
 import { Field } from 'redux-form';
-import SubaccountSection from '../SubaccountSection';
+import SubaccountSection from './SubaccountSection';
 import ToggleBlock from 'src/components/toggleBlock/ToggleBlock';
 
 describe('Templates SubaccountSection', () => {

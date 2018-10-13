@@ -51,7 +51,8 @@ export const LINKS = {
   ADMIN_BOUNCE: 'https://support.sparkpost.com/', // TODO Add this to the bounce page
   SSO_GUIDE: 'https://www.sparkpost.com/docs/my-account-and-profile/sso',
   ALERTS_DOCS: 'https://developers.sparkpost.com/api/alerts/#alerts-post-create-an-alert',
-  ALERTS_SURVEY: 'https://goo.gl/forms/rnIuTvdVF2xhpKCy2'
+  ALERTS_SURVEY: 'https://goo.gl/forms/rnIuTvdVF2xhpKCy2',
+  SNIPPET_SUBSTITUTION_REFERENCE: 'https://developers.sparkpost.com/api/substitutions-reference/#header-snippets'
 };
 
 export const ENTERPRISE_PLAN_CODES = ['ent1'];

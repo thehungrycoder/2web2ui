@@ -1,7 +1,64 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`CreatePage .submitSnippet succeeds with a subaccount assignment 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "id": "example-snippet",
+        "name": "Example Snippet",
+        "sharedWithSubaccounts": false,
+        "subaccount": Object {
+          "id": "example-subaccount",
+        },
+      },
+    ],
+  ],
+  "results": undefined,
+}
+`;
+
+exports[`CreatePage .submitSnippet succeeds with master account assignment 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "id": "example-snippet",
+        "name": "Example Snippet",
+        "sharedWithSubaccounts": false,
+        "subaccount": undefined,
+      },
+    ],
+  ],
+  "results": undefined,
+}
+`;
+
+exports[`CreatePage .submitSnippet succeeds with shared subaccounts assignment 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "id": "example-snippet",
+        "name": "Example Snippet",
+        "sharedWithSubaccounts": true,
+        "subaccount": undefined,
+      },
+    ],
+  ],
+  "results": undefined,
+}
+`;
+
 exports[`CreatePage renders form 1`] = `
 <Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "Snippets",
+      "to": "/snippets",
+    }
+  }
   empty={Object {}}
   primaryAction={
     Object {
@@ -39,7 +96,9 @@ exports[`CreatePage renders form 1`] = `
               helpText={
                 <React.Fragment>
                   Use this unique identifier to 
-                  <ExternalLink>
+                  <ExternalLink
+                    to="https://developers.sparkpost.com/api/substitutions-reference/#header-snippets"
+                  >
                     reference your snippet in a template
                   </ExternalLink>
                 </React.Fragment>
@@ -55,9 +114,86 @@ exports[`CreatePage renders form 1`] = `
               }
             />
           </Panel.Section>
+        </Panel>
+      </Grid.Column>
+      <Grid.Column
+        lg={8}
+        xs={12}
+      >
+        Editor
+      </Grid.Column>
+    </Grid>
+  </Form>
+</Page>
+`;
+
+exports[`CreatePage renders form with subaccount assignment 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "Snippets",
+      "to": "/snippets",
+    }
+  }
+  empty={Object {}}
+  primaryAction={
+    Object {
+      "Component": [Function],
+      "content": "Create Snippet",
+      "onClick": [Function],
+    }
+  }
+  title="New Snippet"
+>
+  <Form
+    onSubmit={[Function]}
+  >
+    <Grid>
+      <Grid.Column
+        lg={4}
+        xs={12}
+      >
+        <Panel>
           <Panel.Section>
-            Subaccounts
+            <Field
+              component={[Function]}
+              label="Snippet Name"
+              name="name"
+              onChange={[Function]}
+              validate={
+                Array [
+                  [Function],
+                  [Function],
+                ]
+              }
+            />
+            <Field
+              component={[Function]}
+              helpText={
+                <React.Fragment>
+                  Use this unique identifier to 
+                  <ExternalLink
+                    to="https://developers.sparkpost.com/api/substitutions-reference/#header-snippets"
+                  >
+                    reference your snippet in a template
+                  </ExternalLink>
+                </React.Fragment>
+              }
+              label="Snippet ID"
+              name="id"
+              validate={
+                Array [
+                  [Function],
+                  [Function],
+                  [Function],
+                ]
+              }
+            />
           </Panel.Section>
+          <Component
+            newTemplate={true}
+          />
         </Panel>
       </Grid.Column>
       <Grid.Column

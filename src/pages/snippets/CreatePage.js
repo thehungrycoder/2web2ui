@@ -4,10 +4,13 @@ import { Field, Form, reduxForm, SubmissionError } from 'redux-form';
 import { Button, Grid, Page, Panel } from '@sparkpost/matchbox';
 import { createSnippet } from 'src/actions/snippets';
 import ExternalLink from 'src/components/externalLink/ExternalLink';
+import PageLink from 'src/components/pageLink';
 import TextFieldWrapper from 'src/components/reduxFormWrappers/TextFieldWrapper';
+import SubaccountSection from 'src/components/subaccountSection';
 import { LINKS } from 'src/constants';
 import { slugify } from 'src/helpers/string';
 import { maxLength, required, slug } from 'src/helpers/validation';
+import { hasSubaccounts } from 'src/selectors/subaccounts';
 
 export class CreatePage extends React.Component {
   componentDidUpdate() {
@@ -20,7 +23,14 @@ export class CreatePage extends React.Component {
     this.props.change('id', slugify(event.target.value));
   }
 
-  submitSnippet = async (values) => {
+  submitSnippet = async ({ assignTo, id, name, subaccount }) => {
+    const values = {
+      id,
+      name,
+      sharedWithSubaccounts: assignTo === 'shared',
+      subaccount
+    };
+
     try {
       await this.props.createSnippet(values);
     } catch (error) {
@@ -29,11 +39,12 @@ export class CreatePage extends React.Component {
   }
 
   render() {
-    const { handleSubmit, submitting } = this.props;
+    const { handleSubmit, hasSubaccounts, submitting } = this.props;
 
     return (
       <Page
         title="New Snippet"
+        breadcrumbAction={{ Component: PageLink, content: 'Snippets', to: '/snippets' }}
         primaryAction={{
           Component: Button,
           content: 'Create Snippet',
@@ -70,9 +81,7 @@ export class CreatePage extends React.Component {
                     validate={[required, slug, maxLength(64)]}
                   />
                 </Panel.Section>
-                <Panel.Section>
-                  Subaccounts
-                </Panel.Section>
+                {hasSubaccounts && <SubaccountSection newTemplate={true} disabled={submitting} />}
               </Panel>
             </Grid.Column>
             <Grid.Column xs={12} lg={8}>
@@ -93,6 +102,11 @@ const mapStateToDispatch = {
   createSnippet
 };
 
-const mapStateToProps = (state, props) => ({});
+const mapStateToProps = (state, props) => ({
+  hasSubaccounts: hasSubaccounts(state),
+  initialValues: {
+    assignTo: 'master' // default for SubaccountSection
+  }
+});
 
 export default connect(mapStateToProps, mapStateToDispatch)(reduxForm(formOptions)(CreatePage));

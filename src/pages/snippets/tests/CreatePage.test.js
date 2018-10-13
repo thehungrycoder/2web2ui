@@ -1,6 +1,7 @@
 import React from 'react';
 import { SubmissionError } from 'redux-form';
 import { shallow } from 'enzyme';
+import cases from 'jest-in-case';
 import { CreatePage } from '../CreatePage';
 
 describe('CreatePage', () => {
@@ -10,6 +11,10 @@ describe('CreatePage', () => {
 
   it('renders form', () => {
     expect(subject()).toMatchSnapshot();
+  });
+
+  it('renders form with subaccount assignment', () => {
+    expect(subject({ hasSubaccounts: true })).toMatchSnapshot();
   });
 
   it('redirects when submit succeeds', () => {
@@ -30,19 +35,45 @@ describe('CreatePage', () => {
       createSnippet: jest.fn(() => Promise.resolve())
     };
     const wrapper = subject(props);
-    const values = {};
 
-    wrapper.prop('primaryAction').onClick(values);
-
-    expect(props.createSnippet).toHaveBeenCalledWith(values);
+    wrapper.prop('primaryAction').onClick({});
+    expect(props.createSnippet).toHaveBeenCalled();
   });
 
-  it('throws submission error when create snippet action fails', async () => {
-    const props = {
-      createSnippet: jest.fn(() => Promise.reject(new Error('Oh no!')))
-    };
-    const instance = subject(props).instance();
+  describe('.submitSnippet', () => {
+    cases('succeeds', ({ name, ...values }) => {
+      const createSnippet = jest.fn(() => Promise.resolve());
+      const wrapper = subject({ createSnippet });
 
-    await expect(instance.submitSnippet()).rejects.toThrowError(SubmissionError);
+      wrapper.prop('primaryAction').onClick({
+        ...values,
+        id: 'example-snippet',
+        name: 'Example Snippet'
+      });
+
+      expect(createSnippet).toMatchSnapshot();
+    }, {
+      'with master account assignment': {
+        assignTo: 'master'
+      },
+      'with shared subaccounts assignment': {
+        assignTo: 'shared'
+      },
+      'with a subaccount assignment': {
+        assignTo: 'subaccount',
+        subaccount: {
+          id: 'example-subaccount'
+        }
+      }
+    });
+
+    it('throws submission error when createSnippet fails', async () => {
+      const props = {
+        createSnippet: jest.fn(() => Promise.reject(new Error('Oh no!')))
+      };
+      const instance = subject(props).instance();
+
+      await expect(instance.submitSnippet({})).rejects.toThrowError(SubmissionError);
+    });
   });
 });

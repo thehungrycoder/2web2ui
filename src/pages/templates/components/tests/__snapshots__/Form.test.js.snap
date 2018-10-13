@@ -246,9 +246,8 @@ exports[`Template Form should render 1`] = `
 `;
 
 exports[`Template Form should render subaccount fields if has subaccounts 1`] = `
-<Connect(SubaccountSection)
+<Component
   disabled={false}
-  formName="form-name"
   newTemplate={false}
 />
 `;
