@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import { ContentEditor } from './ContentEditor';
+import ContentEditor from './ContentEditor';
 
 describe('ContentEditor', () => {
   let wrapper;

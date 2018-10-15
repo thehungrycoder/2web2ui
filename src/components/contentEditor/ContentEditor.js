@@ -1,7 +1,6 @@
 import React from 'react';
 import { Field } from 'redux-form';
 import { Panel, Tabs } from '@sparkpost/matchbox';
-import withFormName from 'src/components/withFormName';
 import { json } from 'src/helpers/validation';
 import AceWrapper from './AceWrapper';
 
@@ -32,7 +31,7 @@ const fields = [
   }
 ];
 
-export class ContentEditor extends React.Component {
+class ContentEditor extends React.Component {
   state = {
     selectedTab: 0
   }
@@ -79,4 +78,4 @@ export class ContentEditor extends React.Component {
   }
 }
 
-export default withFormName(ContentEditor);
+export default ContentEditor;
