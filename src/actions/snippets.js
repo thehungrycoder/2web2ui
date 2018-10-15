@@ -2,12 +2,12 @@ import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 import setSubaccountHeader from './helpers/setSubaccountHeader';
 
 export const createSnippet = ({
-  html = '',
+  html,
   id,
   name,
   sharedWithSubaccounts = false,
   subaccount,
-  text = ''
+  text
 }) => (
   sparkpostApiRequest({
     type: 'CREATE_SNIPPET',
@@ -16,6 +16,7 @@ export const createSnippet = ({
       headers: setSubaccountHeader(subaccount),
       url: '/snippets',
       data: {
+        // undefined content parts will not be sent with request
         content: {
           html,
           text

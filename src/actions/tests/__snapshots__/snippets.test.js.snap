@@ -6,7 +6,7 @@ Array [
     "meta": Object {
       "data": Object {
         "content": Object {
-          "html": "",
+          "html": undefined,
           "text": "Testing...",
         },
         "id": "test-snippet",
@@ -28,7 +28,7 @@ Array [
     "meta": Object {
       "data": Object {
         "content": Object {
-          "html": "",
+          "html": undefined,
           "text": "Testing...",
         },
         "id": "test-snippet",
@@ -50,7 +50,7 @@ Array [
     "meta": Object {
       "data": Object {
         "content": Object {
-          "html": "",
+          "html": undefined,
           "text": "Testing...",
         },
         "id": "test-snippet",
