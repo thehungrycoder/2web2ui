@@ -8,7 +8,7 @@ const mapStateToProps = (state, props) => {
 
   return {
     assignTo: selector(state, 'assignTo'),
-    subaccountId: selector(state, 'subaccountId')
+    subaccountId: selector(state, 'subaccount_id')
   };
 };
 
