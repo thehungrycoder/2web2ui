@@ -36,23 +36,27 @@ This makes it so that our forms can connect to form state changes, which are cau
 Start by importing the right stuff
 ```js
 import React, { Component } from 'react';
-import { reduxForm } from 'redux-form';
+import { Form, reduxForm } from 'redux-form';
 
 class MyForm extends Component {
+  submit = (values) => {
+    // do something
+  }
+
   render() {
     return (
-      <form onSubmit={this.props.handleSubmit}>
+      <Form onSubmit={this.submit}>
         <Field name='firstName' component={someComponent}/>
         <button submit>Submit</button>
-      </form>
+      </Form>
     );
   }
 }
 
 // Give your form a name, and wrap your component with the redux-form higher order component.
-const formOptions = { form: 'my-form-name' };
-export default reduxForm(formOptions)(MyForm);
+export default reduxForm({ form: 'my-form-name' })(MyForm);
 ```
+*If you opt to use `<form />` instead of `<Form />`, you will need to wrap your submit handler with the `handleSubmit` prop provided by `reduxForm`.*
 
 **handleSubmit**
 
@@ -168,4 +172,23 @@ You can specify multiple validators using an array: `validate={[required, maxLen
 import { required } from 'src/helpers/validation';
 
 <Field name='firstName' validate={required} />
+```
+
+## Access Form Name from Nested Component
+
+Some Redux Form functions require a form name argument.  Passing it through several levels of components can be ugly.  Instead, use our `withFormName` higher order component.
+
+```js
+import { connect } from 'redux-form';
+import withFormName from 'src/components/withFormName';
+
+const mapStateToProps = (state, props) => {
+  const selector = formValueSelector(props.formName);
+
+  return {
+    myFieldValue = selector(state, 'myField')
+  }
+};
+
+export default withFormName(connect(mapStateToProps)(PresentationComponent));
 ```
