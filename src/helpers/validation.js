@@ -125,3 +125,11 @@ export function url(value) {
 export const cardExpiry = (value) => (
   Payment.fns.validateCardExpiry(value) ? undefined : 'Please choose a valid expiration date'
 );
+
+export const json = (value) => {
+  try {
+    JSON.parse(value);
+  } catch (e) {
+    return 'Must be valid JSON';
+  }
+};

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Editor should render 1`] = `
+exports[`ContentEditor should render 1`] = `
 <div
   className="EditorSection"
 >
@@ -32,7 +32,46 @@ exports[`Editor should render 1`] = `
       component={[Function]}
       mode="html"
       name="content.html"
-      readOnly={false}
+      syntaxValidation={false}
+      validate={
+        Array [
+          [Function],
+          [Function],
+        ]
+      }
+    />
+  </Panel>
+</div>
+`;
+
+exports[`ContentEditor should render without test data tab 1`] = `
+<div
+  className="EditorSection"
+>
+  <Tabs
+    color="orange"
+    connectBelow={true}
+    selected={0}
+    tabs={
+      Array [
+        Object {
+          "content": "HTML",
+          "onClick": [Function],
+        },
+        Object {
+          "content": "Text",
+          "onClick": [Function],
+        },
+      ]
+    }
+  />
+  <Panel
+    className="EditorPanel"
+  >
+    <Field
+      component={[Function]}
+      mode="html"
+      name="content.html"
       syntaxValidation={false}
       validate={
         Array [

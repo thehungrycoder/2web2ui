@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Field, Form, reduxForm, SubmissionError } from 'redux-form';
 import { Button, Grid, Page, Panel } from '@sparkpost/matchbox';
 import { createSnippet } from 'src/actions/snippets';
+import ContentEditor from 'src/components/contentEditor';
 import ExternalLink from 'src/components/externalLink/ExternalLink';
 import PageLink from 'src/components/pageLink';
 import TextFieldWrapper from 'src/components/reduxFormWrappers/TextFieldWrapper';
@@ -23,12 +24,14 @@ export class CreatePage extends React.Component {
     this.props.change('id', slugify(event.target.value));
   }
 
-  submitSnippet = async ({ assignTo, id, name, subaccount }) => {
+  submitSnippet = async ({ assignTo, content: { html, text } = {}, id, name, subaccount }) => {
     const values = {
+      html,
       id,
       name,
       sharedWithSubaccounts: assignTo === 'shared',
-      subaccount
+      subaccount,
+      text
     };
 
     try {
@@ -85,7 +88,7 @@ export class CreatePage extends React.Component {
               </Panel>
             </Grid.Column>
             <Grid.Column xs={12} lg={8}>
-              Editor
+              <ContentEditor contentOnly={true} />
             </Grid.Column>
           </Grid>
         </Form>

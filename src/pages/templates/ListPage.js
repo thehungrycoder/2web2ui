@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { SubaccountTag, TableCollection, ApiErrorBanner, Loading } from 'src/components';
 import { Templates } from 'src/components/images';
 import { Page } from '@sparkpost/matchbox';
-import Editor from './components/Editor'; // async, for preload
 import { Name, Status, Actions, LastUpdated } from './components/ListComponents';
 import { resolveTemplateStatus } from 'src/helpers/templates';
 
@@ -17,7 +16,6 @@ export default class ListPage extends Component {
 
   componentDidMount() {
     this.props.listTemplates();
-    Editor.preload(); //loads editor chunk
   }
 
   renderError() {

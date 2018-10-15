@@ -5,6 +5,10 @@ Array [
   Object {
     "meta": Object {
       "data": Object {
+        "content": Object {
+          "html": "",
+          "text": "Testing...",
+        },
         "id": "test-snippet",
         "name": "Test Snippet",
         "shared_with_subaccounts": false,
@@ -23,6 +27,10 @@ Array [
   Object {
     "meta": Object {
       "data": Object {
+        "content": Object {
+          "html": "",
+          "text": "Testing...",
+        },
         "id": "test-snippet",
         "name": "Test Snippet",
         "shared_with_subaccounts": true,
@@ -41,6 +49,10 @@ Array [
   Object {
     "meta": Object {
       "data": Object {
+        "content": Object {
+          "html": "",
+          "text": "Testing...",
+        },
         "id": "test-snippet",
         "name": "Test Snippet",
         "shared_with_subaccounts": false,
@@ -48,6 +60,28 @@ Array [
       "headers": Object {
         "x-msys-subaccount": "example-subaccount",
       },
+      "method": "POST",
+      "url": "/snippets",
+    },
+    "type": "CREATE_SNIPPET",
+  },
+]
+`;
+
+exports[`Snippet Actions .createSnippet with html and text content 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "data": Object {
+        "content": Object {
+          "html": "<p>Testing...</p>",
+          "text": "Testing...",
+        },
+        "id": "test-snippet",
+        "name": "Test Snippet",
+        "shared_with_subaccounts": false,
+      },
+      "headers": Object {},
       "method": "POST",
       "url": "/snippets",
     },

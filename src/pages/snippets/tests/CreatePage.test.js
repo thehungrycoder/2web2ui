@@ -53,6 +53,12 @@ describe('CreatePage', () => {
 
       expect(createSnippet).toMatchSnapshot();
     }, {
+      'with content': {
+        content: {
+          html: '<p>testing...</p>',
+          text: 'testing...'
+        }
+      },
       'with master account assignment': {
         assignTo: 'master'
       },

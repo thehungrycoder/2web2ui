@@ -9,7 +9,13 @@ describe('Snippet Actions', () => {
   snapshotActionCases('.createSnippet', [
     {
       name: 'when assigned to master account',
-      action: () => createSnippet({ id: 'test-snippet', name: 'Test Snippet' })
+      action: () => (
+        createSnippet({
+          id: 'test-snippet',
+          name: 'Test Snippet',
+          text: 'Testing...'
+        })
+      )
     },
     {
       name: 'when shared with all subaccounts',
@@ -17,7 +23,8 @@ describe('Snippet Actions', () => {
         createSnippet({
           id: 'test-snippet',
           name: 'Test Snippet',
-          sharedWithSubaccounts: true
+          sharedWithSubaccounts: true,
+          text: 'Testing...'
         })
       )
     },
@@ -29,7 +36,19 @@ describe('Snippet Actions', () => {
           name: 'Test Snippet',
           subaccount: {
             id: 'example-subaccount'
-          }
+          },
+          text: 'Testing...'
+        })
+      )
+    },
+    {
+      name: 'with html and text content',
+      action: () => (
+        createSnippet({
+          html: '<p>Testing...</p>',
+          id: 'test-snippet',
+          name: 'Test Snippet',
+          text: 'Testing...'
         })
       )
     }

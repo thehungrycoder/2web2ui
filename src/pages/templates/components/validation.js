@@ -1,5 +1,4 @@
 import { email, emailLocal, domain } from 'src/helpers/validation';
-import _ from 'lodash';
 
 // This validator is intentionally not very good
 // Legacy app uses this regex: /^{{\s*(\w|\.)+\s*}}$/ - however does not handle complex but valid substitution data
@@ -23,25 +22,7 @@ function emailOrSubstitution(value) {
   return !looseSubstitution(value) || !email(value) ? undefined : 'Invalid email or substitution value';
 }
 
-function contentRequired(value, allValues) {
-  const html = _.get(allValues, 'content.html');
-  const text = _.get(allValues, 'content.text');
-  return !html && !text ? 'Template HTML or text content is required.' : undefined;
-}
-
-function validJson(value, { testData }) {
-  try {
-    JSON.parse(testData);
-  } catch (e) {
-    return 'Invalid Test Data';
-  }
-
-  return undefined;
-}
-
 export {
   looseSubstitution,
-  emailOrSubstitution,
-  contentRequired,
-  validJson
+  emailOrSubstitution
 };

@@ -33,9 +33,7 @@ exports[`Template CreatePage Duplicate Template should render correctly 1`] = `
       lg={8}
       xs={12}
     >
-      <LoadableComponent
-        name="templateCreate"
-      />
+      <LoadableComponent />
     </Grid.Column>
   </Grid>
 </Page>
@@ -74,9 +72,7 @@ exports[`Template CreatePage New Template should render correctly 1`] = `
       lg={8}
       xs={12}
     >
-      <LoadableComponent
-        name="templateCreate"
-      />
+      <LoadableComponent />
     </Grid.Column>
   </Grid>
 </Page>

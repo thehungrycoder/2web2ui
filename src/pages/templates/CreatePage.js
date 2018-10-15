@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 // Components
+import ContentEditor from 'src/components/contentEditor';
 import Form from './components/containers/Form.container';
-import Editor from './components/Editor'; // async
 import { Page, Grid } from '@sparkpost/matchbox';
 import { Loading } from 'src/components';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
@@ -46,14 +46,14 @@ export default class CreatePage extends Component {
       <Page
         primaryAction={primaryAction}
         breadcrumbAction={backAction}
-        title={ cloneId ? 'Duplicate Template' : 'New Template' }>
+        title={cloneId ? 'Duplicate Template' : 'New Template'}>
 
         <Grid>
           <Grid.Column xs={12} lg={4}>
             <Form newTemplate name={formName} subaccountId={subaccountId}/>
           </Grid.Column>
           <Grid.Column xs={12} lg={8}>
-            <Editor name={formName} />
+            <ContentEditor />
           </Grid.Column>
         </Grid>
       </Page>

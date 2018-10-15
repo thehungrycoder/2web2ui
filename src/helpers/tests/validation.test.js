@@ -75,6 +75,10 @@ const cases = {
     ],
     bad: [['percent', { default_template: { percent: 75 }, variants: [{ percent: 75 }]}]],
     multiArg: true
+  },
+  json: {
+    good: ['{}', '{ "test": "example" }'],
+    bad: [undefined, '', '{', '{ a: b }']
   }
 };
 

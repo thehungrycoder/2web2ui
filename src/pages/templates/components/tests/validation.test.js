@@ -1,37 +1,5 @@
 import * as validation from '../validation';
 
-describe('validJson', () => {
-  it('should return error with invalid json', () => {
-    expect(validation.validJson('', { testData: 'not json' })).toEqual('Invalid Test Data');
-  });
-
-  it('should return undefined with valid json', () => {
-    expect(validation.validJson('', { testData: '{ "test": "json" }' })).toEqual(undefined);
-  });
-});
-
-describe('contentRequired', () => {
-  it('should handle error', () => {
-    const allValues = {
-      content: {
-        html: '',
-        text: ''
-      }
-    };
-    expect(validation.contentRequired('', allValues)).toEqual('Template HTML or text content is required.');
-  });
-
-  it('should handle success', () => {
-    const allValues = {
-      content: {
-        html: 'test',
-        text: ''
-      }
-    };
-    expect(validation.contentRequired('', allValues)).toEqual(undefined);
-  });
-});
-
 describe('substitution', () => {
   it('should loosely handle substitution values', () => {
     expect(validation.looseSubstitution('{{ sub_content }}')).toEqual(undefined);

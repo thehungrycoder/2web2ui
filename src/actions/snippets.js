@@ -1,7 +1,14 @@
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 import setSubaccountHeader from './helpers/setSubaccountHeader';
 
-export const createSnippet = ({ id, name, sharedWithSubaccounts = false, subaccount }) => (
+export const createSnippet = ({
+  html = '',
+  id,
+  name,
+  sharedWithSubaccounts = false,
+  subaccount,
+  text = ''
+}) => (
   sparkpostApiRequest({
     type: 'CREATE_SNIPPET',
     meta: {
@@ -9,6 +16,10 @@ export const createSnippet = ({ id, name, sharedWithSubaccounts = false, subacco
       headers: setSubaccountHeader(subaccount),
       url: '/snippets',
       data: {
+        content: {
+          html,
+          text
+        },
         id,
         name,
         shared_with_subaccounts: subaccount ? false : sharedWithSubaccounts

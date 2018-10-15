@@ -5,12 +5,32 @@ exports[`CreatePage .submitSnippet succeeds with a subaccount assignment 1`] = `
   "calls": Array [
     Array [
       Object {
+        "html": undefined,
         "id": "example-snippet",
         "name": "Example Snippet",
         "sharedWithSubaccounts": false,
         "subaccount": Object {
           "id": "example-subaccount",
         },
+        "text": undefined,
+      },
+    ],
+  ],
+  "results": undefined,
+}
+`;
+
+exports[`CreatePage .submitSnippet succeeds with content 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "html": "<p>testing...</p>",
+        "id": "example-snippet",
+        "name": "Example Snippet",
+        "sharedWithSubaccounts": false,
+        "subaccount": undefined,
+        "text": "testing...",
       },
     ],
   ],
@@ -23,10 +43,12 @@ exports[`CreatePage .submitSnippet succeeds with master account assignment 1`] =
   "calls": Array [
     Array [
       Object {
+        "html": undefined,
         "id": "example-snippet",
         "name": "Example Snippet",
         "sharedWithSubaccounts": false,
         "subaccount": undefined,
+        "text": undefined,
       },
     ],
   ],
@@ -39,10 +61,12 @@ exports[`CreatePage .submitSnippet succeeds with shared subaccounts assignment 1
   "calls": Array [
     Array [
       Object {
+        "html": undefined,
         "id": "example-snippet",
         "name": "Example Snippet",
         "sharedWithSubaccounts": true,
         "subaccount": undefined,
+        "text": undefined,
       },
     ],
   ],
@@ -120,7 +144,9 @@ exports[`CreatePage renders form 1`] = `
         lg={8}
         xs={12}
       >
-        Editor
+        <LoadableComponent
+          contentOnly={true}
+        />
       </Grid.Column>
     </Grid>
   </Form>
@@ -200,7 +226,9 @@ exports[`CreatePage renders form with subaccount assignment 1`] = `
         lg={8}
         xs={12}
       >
-        Editor
+        <LoadableComponent
+          contentOnly={true}
+        />
       </Grid.Column>
     </Grid>
   </Form>
