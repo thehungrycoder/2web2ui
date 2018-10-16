@@ -40,8 +40,8 @@ class ContentEditor extends React.Component {
     this.setState({ selectedTab: index });
   }
 
-  requiredHtmlOrText = (value, { content: { html, text } = {}}) => {
-    if (!html && !text) {
+  requiredHtmlOrText = (value, { content: { html = '', text = '' } = {}}) => {
+    if (html.trim() === '' && text.trim() === '') {
       return 'HTML or Text is required';
     }
   }

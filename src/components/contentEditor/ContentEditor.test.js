@@ -66,6 +66,10 @@ describe('ContentEditor', () => {
     it('returns required validation message', () => {
       expect(subject({})).toMatch(/required/);
     });
+
+    it('returns required validation message with whitespace', () => {
+      expect(subject({ html: '     ' })).toMatch(/required/);
+    });
   });
 
   describe('.validTestDataJson', () => {
