@@ -21,7 +21,11 @@ describe('snakeToCamel', () => {
 
 describe('slugify', () => {
   it('should split camelCase humps with a hypen', () => {
-    expect(slugify('camelCase')).toEqual('camel-case');
+    expect(slugify('exampleValue')).toEqual('example-value');
+  });
+
+  it('should replace underscores with a hypen', () => {
+    expect(slugify('example_value')).toEqual('example-value');
   });
 
   it('should replace whitespace with a hypen', () => {

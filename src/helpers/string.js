@@ -9,7 +9,8 @@ export function snakeToFriendly(string = '') {
 
 export const slugify = (value = '') => (
   value
-    .replace(/([a-z])([A-Z])/g, '$1-$2') // camelCase to camel-case
+    .replace(/([a-z])([A-Z])/g, '$1-$2') // exampleValue to example-value
+    .replace(/_/g, '-')
     .replace(/\s+/g, '-')
     .toLowerCase()
     .replace(/[^a-z0-9_-]/g, '') // remove invalid
