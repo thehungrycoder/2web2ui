@@ -101,7 +101,7 @@ const formOptions = {
   form: 'createSnippetForm'
 };
 
-const mapStateToDispatch = {
+const mapDispatchToProps = {
   createSnippet
 };
 
@@ -112,4 +112,4 @@ const mapStateToProps = (state, props) => ({
   }
 });
 
-export default connect(mapStateToProps, mapStateToDispatch)(reduxForm(formOptions)(CreatePage));
+export default connect(mapStateToProps, mapDispatchToProps)(reduxForm(formOptions)(CreatePage));
