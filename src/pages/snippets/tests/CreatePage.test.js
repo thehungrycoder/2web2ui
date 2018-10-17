@@ -1,5 +1,4 @@
 import React from 'react';
-import { SubmissionError } from 'redux-form';
 import { shallow } from 'enzyme';
 import cases from 'jest-in-case';
 import { CreatePage } from '../CreatePage';
@@ -71,15 +70,6 @@ describe('CreatePage', () => {
           id: 'example-subaccount'
         }
       }
-    });
-
-    it('throws submission error when createSnippet fails', async () => {
-      const props = {
-        createSnippet: jest.fn(() => Promise.reject(new Error('Oh no!')))
-      };
-      const instance = subject(props).instance();
-
-      await expect(instance.submitSnippet({})).rejects.toThrowError(SubmissionError);
     });
   });
 });
