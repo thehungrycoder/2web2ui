@@ -47,7 +47,7 @@ const cases = {
     good: [{ from: '2000-08-20T19:50:00.000Z', to: '2040-08-20T19:50:00.000Z' }],
     bad: [{ from: '2040-08-20T19:50:00.000Z', to: '2000-08-20T19:50:00.000Z' }]
   },
-  abTestId: {
+  slug: {
     good: ['id', 'test-id', 'test_1', '1'],
     bad: ['test.id', 'NOT_!@#$%^&*()_VALID', 'test id', ':doge:']
   },
@@ -75,6 +75,10 @@ const cases = {
     ],
     bad: [['percent', { default_template: { percent: 75 }, variants: [{ percent: 75 }]}]],
     multiArg: true
+  },
+  json: {
+    good: ['{}', '{ "test": "example" }'],
+    bad: [undefined, '', '{', '{ a: b }']
   }
 };
 

@@ -1,0 +1,91 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snippet Actions .createSnippet when assigned to master account 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "data": Object {
+        "content": Object {
+          "html": undefined,
+          "text": "Testing...",
+        },
+        "id": "test-snippet",
+        "name": "Test Snippet",
+        "shared_with_subaccounts": false,
+      },
+      "headers": Object {},
+      "method": "POST",
+      "url": "/snippets",
+    },
+    "type": "CREATE_SNIPPET",
+  },
+]
+`;
+
+exports[`Snippet Actions .createSnippet when shared with all subaccounts 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "data": Object {
+        "content": Object {
+          "html": undefined,
+          "text": "Testing...",
+        },
+        "id": "test-snippet",
+        "name": "Test Snippet",
+        "shared_with_subaccounts": true,
+      },
+      "headers": Object {},
+      "method": "POST",
+      "url": "/snippets",
+    },
+    "type": "CREATE_SNIPPET",
+  },
+]
+`;
+
+exports[`Snippet Actions .createSnippet with a subaccount 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "data": Object {
+        "content": Object {
+          "html": undefined,
+          "text": "Testing...",
+        },
+        "id": "test-snippet",
+        "name": "Test Snippet",
+        "shared_with_subaccounts": false,
+      },
+      "headers": Object {
+        "x-msys-subaccount": "example-subaccount",
+      },
+      "method": "POST",
+      "url": "/snippets",
+    },
+    "type": "CREATE_SNIPPET",
+  },
+]
+`;
+
+exports[`Snippet Actions .createSnippet with html and text content 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "data": Object {
+        "content": Object {
+          "html": "<p>Testing...</p>",
+          "text": "Testing...",
+        },
+        "id": "test-snippet",
+        "name": "Test Snippet",
+        "shared_with_subaccounts": false,
+      },
+      "headers": Object {},
+      "method": "POST",
+      "url": "/snippets",
+    },
+    "type": "CREATE_SNIPPET",
+  },
+]
+`;

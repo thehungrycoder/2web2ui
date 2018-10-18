@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import ContentEditor from 'src/components/contentEditor';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
 import Form from './components/containers/Form.container';
-import Editor from './components/Editor'; // async
 import { Loading } from 'src/components';
 import { Page, Grid } from '@sparkpost/matchbox';
 
@@ -67,7 +67,7 @@ export default class PublishedPage extends Component {
             <Form name={formName} subaccountId={subaccountId} readOnly />
           </Grid.Column>
           <Grid.Column xs={12} lg={8}>
-            <Editor name={formName} readOnly />
+            <ContentEditor readOnly />
           </Grid.Column>
         </Grid>
       </Page>

@@ -40,7 +40,6 @@ exports[`Template PublishedPage should render correctly 1`] = `
       xs={12}
     >
       <LoadableComponent
-        name="templatePublished"
         readOnly={true}
       />
     </Grid.Column>
@@ -88,7 +87,6 @@ exports[`Template PublishedPage should render read-only correctly 1`] = `
       xs={12}
     >
       <LoadableComponent
-        name="templatePublished"
         readOnly={true}
       />
     </Grid.Column>
