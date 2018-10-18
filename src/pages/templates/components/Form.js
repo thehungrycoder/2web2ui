@@ -6,14 +6,14 @@ import config from 'src/config';
 // Components
 import { Panel } from '@sparkpost/matchbox';
 import ToggleBlock from 'src/components/toggleBlock/ToggleBlock';
-import SubaccountSection from './containers/SubaccountSection.container';
+import SubaccountSection from 'src/components/subaccountSection';
 import { TextFieldWrapper, PanelLoading } from 'src/components';
 import FromEmailWrapper from './FromEmail';
 
 // Helpers & Validation
-import { required } from 'src/helpers/validation';
+import { required, slug } from 'src/helpers/validation';
 import { slugify } from 'src/helpers/string';
-import { ID_ALLOWED_CHARS, idSyntax, emailOrSubstitution, looseSubstitution } from './validation';
+import { emailOrSubstitution, looseSubstitution } from './validation';
 
 import styles from './FormEditor.module.scss';
 
@@ -25,8 +25,7 @@ export default class Form extends Component {
       return;
     }
 
-    const idValue = slugify(e.target.value).replace(new RegExp(`[^${ID_ALLOWED_CHARS}]`, 'g'), '');
-    change(name, 'id', idValue);
+    change(name, 'id', slugify(e.target.value));
   }
 
   componentDidMount() {
@@ -74,7 +73,7 @@ export default class Form extends Component {
   }
 
   render() {
-    const { newTemplate, readOnly, domains, hasSubaccounts, name, domainsLoading } = this.props;
+    const { newTemplate, readOnly, domains, hasSubaccounts, domainsLoading } = this.props;
 
     if (domainsLoading) {
       return <PanelLoading />;
@@ -99,10 +98,10 @@ export default class Form extends Component {
               label='Template ID'
               helpText={newTemplate ? 'A Unique ID for your template, we\'ll fill this in for you.' : null}
               disabled={!newTemplate || readOnly}
-              validate={newTemplate ? [required, idSyntax] : null}
+              validate={newTemplate ? [required, slug] : null}
             />
           </Panel.Section>
-          {hasSubaccounts && <SubaccountSection newTemplate={newTemplate} formName={name} disabled={readOnly} />}
+          {hasSubaccounts && <SubaccountSection newTemplate={newTemplate} disabled={readOnly} />}
         </Panel>
         <Panel>
           <Panel.Section>

@@ -25,7 +25,8 @@ import {
   DefaultRedirect,
   JoinPage,
   passwordReset,
-  PremiumSupportPage
+  PremiumSupportPage,
+  snippets
 } from 'src/pages';
 
 import LogoutPage from 'src/pages/logout/LogoutPage';
@@ -300,6 +301,14 @@ const routes = [
     layout: App,
     title: 'Edit User',
     supportDocSearch: 'user'
+  },
+  {
+    path: '/snippets/create',
+    component: snippets.CreatePage,
+    condition: hasGrants('templates/modify'),
+    layout: App,
+    title: 'New Snippet',
+    supportDocSearch: 'snippets'
   },
   {
     path: '/templates',

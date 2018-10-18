@@ -20,8 +20,24 @@ describe('snakeToCamel', () => {
 });
 
 describe('slugify', () => {
-  it('should properly format a string', () => {
-    expect(slugify('one Two  3')).toEqual('one-two-3');
+  it('should split camelCase humps with a hypen', () => {
+    expect(slugify('exampleValue')).toEqual('example-value');
+  });
+
+  it('should replace underscores with a hypen', () => {
+    expect(slugify('example_value')).toEqual('example-value');
+  });
+
+  it('should replace whitespace with a hypen', () => {
+    expect(slugify('white       space')).toEqual('white-space');
+  });
+
+  it('should lowercase', () => {
+    expect(slugify('UPPERCASE')).toEqual('uppercase');
+  });
+
+  it('should remove invalid characters', () => {
+    expect(slugify('Example #1')).toEqual('example-1');
   });
 });
 

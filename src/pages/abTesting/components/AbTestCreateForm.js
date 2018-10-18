@@ -8,16 +8,14 @@ import { TemplateTypeaheadWrapper, SubaccountTypeaheadWrapper } from 'src/compon
 import { slugify } from 'src/helpers/string';
 import { hasSubaccounts as hasSubaccountsSelector } from 'src/selectors/subaccounts';
 import { selectPublishedTemplatesBySubaccount } from 'src/selectors/templates';
-import { required, maxLength, abTestId, abTestDefaultTemplate } from 'src/helpers/validation';
+import { required, maxLength, slug, abTestDefaultTemplate } from 'src/helpers/validation';
 
 const formName = 'abTestCreateForm';
 
 export class AbTestCreateForm extends Component {
 
   handleIdFill = (e) => {
-    const { change } = this.props;
-    const idValue = slugify(e.target.value).replace(new RegExp('[^a-z0-9_-]', 'g'), '');
-    change('id', idValue);
+    this.props.change('id', slugify(e.target.value));
   }
 
   render() {
@@ -53,7 +51,7 @@ export class AbTestCreateForm extends Component {
                 component={TextFieldWrapper}
                 label='ID'
                 helpText={'A Unique ID for your test, we\'ll fill this in for you.'}
-                validate={[required, abTestId, maxLength(64)]}
+                validate={[required, slug, maxLength(64)]}
               />
             </Grid.Column>
           </Grid>

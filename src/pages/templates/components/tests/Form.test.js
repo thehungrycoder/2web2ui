@@ -1,6 +1,6 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import SubaccountSection from '../containers/SubaccountSection.container';
+import SubaccountSection from 'src/components/subaccountSection';
 
 import Form from '../Form';
 
@@ -17,7 +17,6 @@ describe('Template Form', () => {
       change: jest.fn(),
       newTemplate: false,
       readOnly: false,
-      name: 'form-name',
       hasSubaccounts: false,
       domainsLoading: false
     };

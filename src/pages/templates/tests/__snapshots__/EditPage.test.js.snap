@@ -67,7 +67,6 @@ exports[`Template EditPage should render correctly 1`] = `
       xs={12}
     >
       <LoadableComponent
-        name="templateEdit"
         readOnly={false}
       />
     </Grid.Column>
@@ -146,7 +145,6 @@ exports[`Template EditPage should render correctly for read-only users 1`] = `
       xs={12}
     >
       <LoadableComponent
-        name="templateEdit"
         readOnly={true}
       />
     </Grid.Column>

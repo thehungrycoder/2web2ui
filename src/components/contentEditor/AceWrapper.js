@@ -7,7 +7,7 @@ import 'brace/theme/tomorrow';
 import 'brace/ext/searchbox';
 
 import { Error } from '@sparkpost/matchbox';
-import styles from '../FormEditor.module.scss';
+import styles from './AceWrapper.module.scss';
 
 const AceWrapper = ({
   input,

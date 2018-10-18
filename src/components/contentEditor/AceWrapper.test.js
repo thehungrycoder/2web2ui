@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import AceWrapper from '../AceWrapper';
+import AceWrapper from './AceWrapper';
 
 describe('AceWrapper', () => {
   let wrapper;

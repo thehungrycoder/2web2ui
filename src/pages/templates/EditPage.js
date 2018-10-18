@@ -4,8 +4,8 @@ import { setSubaccountQuery } from 'src/helpers/subaccounts';
 import _ from 'lodash';
 
 // Components
+import ContentEditor from 'src/components/contentEditor';
 import Form from './components/containers/Form.container';
-import Editor from './components/Editor'; // async
 import { Loading, DeleteModal } from 'src/components';
 import { Page, Grid } from '@sparkpost/matchbox';
 
@@ -128,7 +128,7 @@ export default class EditPage extends Component {
             <Form name={formName} subaccountId={subaccountId} readOnly={!canModify} />
           </Grid.Column>
           <Grid.Column xs={12} lg={8}>
-            <Editor name={formName} readOnly={!canModify} />
+            <ContentEditor readOnly={!canModify} />
           </Grid.Column>
         </Grid>
         <DeleteModal

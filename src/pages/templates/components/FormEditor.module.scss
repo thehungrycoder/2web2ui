@@ -1,33 +1,3 @@
-@import '~@sparkpost/matchbox/src/styles/config.scss';
-
-.FormPanel, .EditorPanel {
+.FormPanel {
   position: relative;
-}
-
-.EditorPanel {
-  height: 93%;
-  margin-bottom: 0;
-  z-index: 1;
-
-  @media screen and (min-width: breakpoint(medium)) {
-    max-height: 100%;
-  }
-}
-
-.EditorSection {
-  position: relative;
-  height: 100%;
-  margin-top: spacing();
-
-  @media screen and (min-width: breakpoint(medium)) {
-    margin-top: 0;
-  }
-}
-
-.Error {
-  position: absolute;
-  z-index: 1;
-  top: rem(-40);
-  right: spacing();
-  line-height: rem(15);
 }

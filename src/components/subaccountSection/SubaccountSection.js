@@ -82,7 +82,7 @@ export default class SubaccountSection extends Component {
 
     return (
       <Panel.Section>
-        { newTemplate ? this.renderCreate() : this.renderEdit() }
+        {newTemplate ? this.renderCreate() : this.renderEdit()}
       </Panel.Section>
     );
   }
