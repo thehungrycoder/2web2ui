@@ -40,5 +40,6 @@ describe('JoinError', () => {
 
   it('it returns generic error on all other cases', () => {
     expect(shallow(<JoinError errors={{}} data={data} />)).toMatchSnapshot();
+    expect(true).toBe(false);
   });
 });
