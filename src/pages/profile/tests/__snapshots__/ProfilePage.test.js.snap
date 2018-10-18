@@ -32,6 +32,11 @@ exports[`ProfilePage renders correctly 1`] = `
       <Connect(ReduxForm)
         onSubmit={[Function]}
       />
+      <button
+        onClick={[Function]}
+      >
+        Cause Error
+      </button>
     </Panel>
     <Connect(AccessControl)
       condition={[Function]}
@@ -82,6 +87,11 @@ exports[`ProfilePage renders with verify email banner 1`] = `
       <Connect(ReduxForm)
         onSubmit={[Function]}
       />
+      <button
+        onClick={[Function]}
+      >
+        Cause Error
+      </button>
     </Panel>
     <Connect(AccessControl)
       condition={[Function]}

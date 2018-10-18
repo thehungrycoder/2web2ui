@@ -61,6 +61,7 @@ export class ProfilePage extends Component {
 
           <Panel sectioned title='Edit Profile'>
             <NameForm onSubmit={this.updateProfile} />
+            <button onClick={() => { throw new Error('i am occurred'); }}>Cause Error</button>
           </Panel>
 
           <AccessControl condition={not(isSso)}>
