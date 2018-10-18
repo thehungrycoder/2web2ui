@@ -16,6 +16,13 @@ export const slugify = (value = '') => (
     .replace(/[^a-z0-9_-]/g, '') // remove invalid
 );
 
+export const slugToFriendly = (string = '') => (
+  string
+    .charAt(0).toUpperCase() + string.slice(1)
+    .replace(/[_-]+/g, '-') // replace groups of underscores or hyphens with single hyphen
+    .replace(/(-\w)/g, (matches) => ` ${matches[1].toUpperCase()}`)
+);
+
 export function snakeToCamel(string) {
   return string.replace(/(_\w)/g, (matches) => matches[1].toUpperCase());
 }

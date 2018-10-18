@@ -1,6 +1,7 @@
 import { snapshotActionCases } from 'src/__testHelpers__/snapshotActionHelpers';
 import {
-  createSnippet
+  createSnippet,
+  getSnippets
 } from '../snippets';
 
 jest.mock('src/actions/helpers/sparkpostApiRequest');
@@ -51,6 +52,13 @@ describe('Snippet Actions', () => {
           text: 'Testing...'
         })
       )
+    }
+  ]);
+
+  snapshotActionCases('.getSnippets', [
+    {
+      name: 'when assigned to master account',
+      action: getSnippets
     }
   ]);
 });

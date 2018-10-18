@@ -1,0 +1,247 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ListPage Name renders name data cell 1`] = `
+<NameCell
+  id="example-id"
+  name="Example Name"
+  to="/snippets/edit/example-id"
+/>
+`;
+
+exports[`ListPage Subaccount returns a tag 1`] = `
+<SubaccountTag
+  all={false}
+  id={999}
+  isDefault={false}
+  master={false}
+  receiveAll={false}
+/>
+`;
+
+exports[`ListPage UpdatedAt returns created at 1`] = `"Aug 10 2017, 10:15am"`;
+
+exports[`ListPage UpdatedAt returns updated at 1`] = `"Sep 10 2017, 10:15am"`;
+
+exports[`ListPage renders loading page 1`] = `<Loading />`;
+
+exports[`ListPage renders page with error banner 1`] = `
+<Page
+  empty={
+    Object {
+      "content": <p>
+        Build, import, edit, and reuse snippets.
+      </p>,
+      "image": [Function],
+      "show": false,
+      "title": "Manage your template snippets",
+    }
+  }
+  primaryAction={
+    Object {
+      "Component": [Function],
+      "content": "Create Snippet",
+      "to": "/snippets/create",
+    }
+  }
+  title="Snippets"
+>
+  <ApiErrorBanner
+    errorDetails="Oh no!"
+    message="Sorry, we seem to have had some trouble loading your snippets."
+    reload={[Function]}
+  />
+</Page>
+`;
+
+exports[`ListPage renders page with table collect 1`] = `
+<Page
+  empty={
+    Object {
+      "content": <p>
+        Build, import, edit, and reuse snippets.
+      </p>,
+      "image": [Function],
+      "show": false,
+      "title": "Manage your template snippets",
+    }
+  }
+  primaryAction={
+    Object {
+      "Component": [Function],
+      "content": "Create Snippet",
+      "to": "/snippets/create",
+    }
+  }
+  title="Snippets"
+>
+  <TableCollection
+    columns={
+      Array [
+        Object {
+          "label": "Name",
+          "sortKey": "name",
+        },
+        Object {
+          "label": "Subaccount",
+          "sortKey": [Function],
+        },
+        Object {
+          "label": "Last Updated",
+          "sortKey": [Function],
+        },
+      ]
+    }
+    defaultSortColumn="name"
+    defaultSortDirection="asc"
+    filterBox={
+      Object {
+        "exampleModifiers": Array [
+          "id",
+          "name",
+        ],
+        "itemToStringKeys": Array [
+          "name",
+          "id",
+          "subaccount_id",
+        ],
+        "show": true,
+      }
+    }
+    getRowData={[Function]}
+    pagination={true}
+    rows={
+      Array [
+        Object {
+          "id": "example-id",
+          "name": "Example Snippet",
+        },
+      ]
+    }
+  />
+</Page>
+`;
+
+exports[`ListPage renders page without primary action button 1`] = `
+<Page
+  empty={
+    Object {
+      "content": <p>
+        Build, import, edit, and reuse snippets.
+      </p>,
+      "image": [Function],
+      "show": false,
+      "title": "Manage your template snippets",
+    }
+  }
+  title="Snippets"
+>
+  <TableCollection
+    columns={
+      Array [
+        Object {
+          "label": "Name",
+          "sortKey": "name",
+        },
+        Object {
+          "label": "Subaccount",
+          "sortKey": [Function],
+        },
+        Object {
+          "label": "Last Updated",
+          "sortKey": [Function],
+        },
+      ]
+    }
+    defaultSortColumn="name"
+    defaultSortDirection="asc"
+    filterBox={
+      Object {
+        "exampleModifiers": Array [
+          "id",
+          "name",
+        ],
+        "itemToStringKeys": Array [
+          "name",
+          "id",
+          "subaccount_id",
+        ],
+        "show": true,
+      }
+    }
+    getRowData={[Function]}
+    pagination={true}
+    rows={
+      Array [
+        Object {
+          "id": "example-id",
+          "name": "Example Snippet",
+        },
+      ]
+    }
+  />
+</Page>
+`;
+
+exports[`ListPage renders page without subaccount column 1`] = `
+<Page
+  empty={
+    Object {
+      "content": <p>
+        Build, import, edit, and reuse snippets.
+      </p>,
+      "image": [Function],
+      "show": false,
+      "title": "Manage your template snippets",
+    }
+  }
+  primaryAction={
+    Object {
+      "Component": [Function],
+      "content": "Create Snippet",
+      "to": "/snippets/create",
+    }
+  }
+  title="Snippets"
+>
+  <TableCollection
+    columns={
+      Array [
+        Object {
+          "label": "Name",
+          "sortKey": "name",
+        },
+        Object {
+          "label": "Last Updated",
+          "sortKey": [Function],
+        },
+      ]
+    }
+    defaultSortColumn="name"
+    defaultSortDirection="asc"
+    filterBox={
+      Object {
+        "exampleModifiers": Array [
+          "id",
+          "name",
+        ],
+        "itemToStringKeys": Array [
+          "name",
+          "id",
+          "subaccount_id",
+        ],
+        "show": true,
+      }
+    }
+    getRowData={[Function]}
+    pagination={true}
+    rows={
+      Array [
+        Object {
+          "id": "example-id",
+          "name": "Example Snippet",
+        },
+      ]
+    }
+  />
+</Page>
+`;

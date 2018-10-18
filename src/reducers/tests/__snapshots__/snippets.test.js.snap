@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snippets Reducer GET_SNIPPETS when fail 1`] = `
+Object {
+  "error": [Error: Oh no!],
+  "loading": false,
+}
+`;
+
+exports[`Snippets Reducer GET_SNIPPETS when pending 1`] = `
+Object {
+  "loading": true,
+}
+`;
+
+exports[`Snippets Reducer GET_SNIPPETS when success 1`] = `
+Object {
+  "items": Array [
+    Object {
+      "id": "example-snippet",
+      "name": "Example Snippet",
+    },
+  ],
+  "loading": false,
+}
+`;
+
+exports[`Snippets Reducer returns default state 1`] = `
+Object {
+  "items": Array [],
+  "loading": false,
+}
+`;
