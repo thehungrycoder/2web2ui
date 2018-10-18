@@ -32,6 +32,7 @@ exports[`ContentEditor should render 1`] = `
       component={[Function]}
       mode="html"
       name="content.html"
+      normalize={[Function]}
       syntaxValidation={false}
       validate={
         Array [
@@ -72,6 +73,7 @@ exports[`ContentEditor should render without test data tab 1`] = `
       component={[Function]}
       mode="html"
       name="content.html"
+      normalize={[Function]}
       syntaxValidation={false}
       validate={
         Array [

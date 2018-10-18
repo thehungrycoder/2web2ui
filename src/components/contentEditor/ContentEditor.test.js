@@ -1,5 +1,6 @@
 import { shallow } from 'enzyme';
 import React from 'react';
+import cases from 'jest-in-case';
 
 import ContentEditor from './ContentEditor';
 
@@ -44,6 +45,23 @@ describe('ContentEditor', () => {
     wrapper.instance().handleTab(2);
     wrapper.update();
     expect(wrapper.find('Field').props().syntaxValidation).toBe(true);
+  });
+
+  cases('.normalize', ({ expected, value }) => {
+    expect(wrapper.instance().normalize(value)).toEqual(expected);
+  }, {
+    'when undefined': {
+      expected: '',
+      value: undefined
+    },
+    'when empty': {
+      expected: '',
+      value: ' \t\n\t '
+    },
+    'when filled': {
+      expected: ' <p>testing</p> ',
+      value: ' <p>testing</p> '
+    }
   });
 
   describe('.requiredHtmlOrText', () => {

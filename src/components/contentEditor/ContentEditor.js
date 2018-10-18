@@ -40,6 +40,16 @@ class ContentEditor extends React.Component {
     this.setState({ selectedTab: index });
   }
 
+
+  // note, create/update snippet requests will fail if either part only contains whitespace
+  normalize = (value = '') => {
+    if (value.trim() === '') {
+      return '';
+    }
+
+    return value;
+  }
+
   requiredHtmlOrText = (value, { content: { html = '', text = '' } = {}}) => {
     if (html.trim() === '' && text.trim() === '') {
       return 'HTML or Text is required';
@@ -65,11 +75,12 @@ class ContentEditor extends React.Component {
         <Tabs selected={selectedTab} tabs={tabs} />
         <Panel className={styles.EditorPanel}>
           <Field
-            name={fields[selectedTab].name}
-            mode={fields[selectedTab].mode}
-            syntaxValidation={fields[selectedTab].syntaxValidation}
             component={AceWrapper}
+            mode={fields[selectedTab].mode}
+            name={fields[selectedTab].name}
+            normalize={this.normalize}
             readOnly={readOnly && selectedTab !== 2}
+            syntaxValidation={fields[selectedTab].syntaxValidation}
             validate={[this.requiredHtmlOrText, this.validTestDataJson]}
           />
         </Panel>
