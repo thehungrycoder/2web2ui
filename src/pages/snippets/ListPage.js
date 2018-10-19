@@ -1,5 +1,6 @@
 import React from 'react';
 import { Page } from '@sparkpost/matchbox';
+import ActionPopover from 'src/components/actionPopover';
 import ApiErrorBanner from 'src/components/apiErrorBanner';
 import { Templates } from 'src/components/images';
 import { NameCell, TableCollection } from 'src/components/collection';
@@ -7,10 +8,22 @@ import Loading from 'src/components/loading';
 import PageLink from 'src/components/pageLink';
 import SubaccountTag from 'src/components/tags/SubaccountTag';
 import { formatDateTime } from 'src/helpers/date';
+import { setSubaccountQuery } from 'src/helpers/subaccounts';
 
+export const Actions = ({ id, subaccount_id }) => (
+  <ActionPopover
+    actions={[
+      {
+        Component: PageLink,
+        content: 'Edit',
+        to: `/snippets/edit/${id}${setSubaccountQuery(subaccount_id)}`
+      }
+    ]}
+  />
+);
 
-export const Name = ({ id, name }) => (
-  <NameCell id={id} name={name} to={`/snippets/edit/${id}`} />
+export const Name = ({ id, name, subaccount_id }) => (
+  <NameCell id={id} name={name} to={`/snippets/edit/${id}${setSubaccountQuery(subaccount_id)}`} />
 );
 
 export const Subaccount = ({ shared_with_subaccounts, subaccount_id }) => {
@@ -34,10 +47,19 @@ export default class ListPage extends React.Component {
 
   Row = (data) => {
     if (this.props.hasSubaccounts) {
-      return [<Name {...data} />, <Subaccount {...data} />, <UpdatedAt {...data} />];
+      return [
+        <Name {...data} />,
+        <Subaccount {...data} />,
+        <UpdatedAt {...data} />,
+        <Actions {...data} />
+      ];
     }
 
-    return [<Name {...data} />, <UpdatedAt {...data} />];
+    return [
+      <Name {...data} />,
+      <UpdatedAt {...data} />,
+      <Actions {...data} />
+    ];
   }
 
   render() {
@@ -84,8 +106,8 @@ export default class ListPage extends React.Component {
           <TableCollection
             columns={(
               hasSubaccounts
-                ? [nameHeader, subaccountHeader, updateAtHeader]
-                : [nameHeader, updateAtHeader]
+                ? [nameHeader, subaccountHeader, updateAtHeader, null]
+                : [nameHeader, updateAtHeader, null]
             )}
             defaultSortColumn="name"
             filterBox={{

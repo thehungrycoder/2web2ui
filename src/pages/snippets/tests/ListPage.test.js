@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import ListPage, { Name, Subaccount, UpdatedAt } from '../ListPage';
+import ListPage, { Actions, Name, Subaccount, UpdatedAt } from '../ListPage';
 
 describe('ListPage', () => {
   const subject = (props = {}) => shallow(
@@ -44,9 +44,26 @@ describe('ListPage', () => {
     expect(wrapper.prop('empty')).toHaveProperty('show', true);
   });
 
+  describe('Actions', () => {
+    it('renders actions popover', () => {
+      const wrapper = shallow(<Actions id="example-id" name="Example Name" />);
+      expect(wrapper).toMatchSnapshot();
+    });
+
+    it('renders actions popover with subaccount specific edit link', () => {
+      const wrapper = shallow(<Actions id="example-id" name="Example Name" subaccount_id={999} />);
+      expect(wrapper).toMatchSnapshot();
+    });
+  });
+
   describe('Name', () => {
     it('renders name data cell', () => {
       const wrapper = shallow(<Name id="example-id" name="Example Name" />);
+      expect(wrapper).toMatchSnapshot();
+    });
+
+    it('renders name data cell with subaccount specific edit link', () => {
+      const wrapper = shallow(<Name id="example-id" name="Example Name" subaccount_id={999} />);
       expect(wrapper).toMatchSnapshot();
     });
   });
