@@ -109,5 +109,12 @@ export default [
     labs: true,
     divider: true,
     icon: NotificationsActive
+  },
+  {
+    label: 'Recipient Verification',
+    to: '/recipientVerification',
+    labs: true,
+    divider: false,
+    icon: NotificationsActive
   }
 ];
