@@ -28,7 +28,7 @@ describe('Component: SetupSending', () => {
         status
       },
       verifyDkimLoading: false,
-      verifyDkim: jest.fn(() => Promise.resolve()),
+      verifyDkim: jest.fn(() => Promise.resolve({ ownership_verified: true, dkim_status: 'valid' })),
       showAlert: jest.fn()
     };
 
@@ -58,7 +58,7 @@ describe('Component: SetupSending', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('disables the verification button while submitting', async() => {
+  it('disables the verification button while submitting', async () => {
     wrapper.setProps({ verifyDkimLoading: true });
     expect(wrapper.find('Panel').props().actions).toMatchSnapshot();
   });
@@ -88,7 +88,7 @@ describe('Component: SetupSending', () => {
       instance = wrapper.instance();
     });
 
-    it('verifies domain and alerts when verification successful', async() => {
+    it('verifies domain and alerts when verification successful', async () => {
       props.verifyDkim.mockReturnValue(Promise.resolve({ dkim_status: 'valid' }));
       await instance.verifyDomain();
       expect(props.verifyDkim).toHaveBeenCalledTimes(1);
@@ -97,7 +97,7 @@ describe('Component: SetupSending', () => {
       expect(props.showAlert).toHaveBeenCalledWith({ type: 'success', message: 'You have successfully verified DKIM record of xyz.com' });
     });
 
-    it('alerts error when verification req is successful but verification is failed', async() => {
+    it('alerts error when verification req is successful but verification is failed', async () => {
       props.verifyDkim.mockReturnValue(Promise.resolve({ dkim_status: 'invalid', dns: { dkim_error: 'nope!' }}));
       await instance.verifyDomain();
       expect(props.verifyDkim).toHaveBeenCalledTimes(1);
