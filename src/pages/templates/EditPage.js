@@ -2,12 +2,11 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
 import _ from 'lodash';
-
 // Components
 import ContentEditor from 'src/components/contentEditor';
 import Form from './components/containers/Form.container';
-import { Loading, DeleteModal } from 'src/components';
-import { Page, Grid } from '@sparkpost/matchbox';
+import { DeleteModal, Loading } from 'src/components';
+import { Grid, Page } from '@sparkpost/matchbox';
 
 export default class EditPage extends Component {
   state = {
@@ -22,7 +21,10 @@ export default class EditPage extends Component {
   }
 
   componentDidUpdate() {
-    if (this.props.getDraftError) {
+    const { showAlert, getDraftError } = this.props;
+
+    if (getDraftError) {
+      showAlert({ type: 'error', message: 'Unable to load template' });
       this.props.history.push('/templates/');
     }
   }
