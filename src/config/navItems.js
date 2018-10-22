@@ -112,7 +112,7 @@ export default [
   },
   {
     label: 'Recipient Verification',
-    to: '/recipientVerification',
+    to: '/recipient-verification',
     labs: true,
     divider: false,
     icon: NotificationsActive

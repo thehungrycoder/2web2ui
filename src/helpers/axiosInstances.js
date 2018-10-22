@@ -1,10 +1,16 @@
 import axios from 'axios';
 import config from 'src/config';
 
-const { apiBase, zuora: zuoraConfig, brightback: brightbackConfig, apiRequestHeaders } = config;
+const { apiBase, labsBase, zuora: zuoraConfig, brightback: brightbackConfig, apiRequestHeaders } = config;
 
 export const sparkpost = axios.create({
   baseURL: apiBase,
+  headers: apiRequestHeaders,
+  withCredentials: true
+});
+
+export const sparkpostLabs = axios.create({
+  baseURL: labsBase,
   headers: apiRequestHeaders,
   withCredentials: true
 });
