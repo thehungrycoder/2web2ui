@@ -19,7 +19,8 @@ describe('Template PublishedPage', () => {
       handleSubmit: jest.fn(),
       canModify: true,
       history: { push: jest.fn() },
-      getPublishedError: null
+      getPublishedError: null,
+      showAlert: jest.fn()
     };
   });
 
@@ -43,6 +44,7 @@ describe('Template PublishedPage', () => {
     wrapper = shallow(<PublishedPage {...props} />);
     wrapper.setProps({ getPublishedError: 'error' });
     expect(props.history.push).toHaveBeenCalledWith('/templates/');
+    expect(props.showAlert).toHaveBeenCalledWith({ type: 'error', message: 'Unable to load template' });
   });
 
   it('should handle preview', async () => {

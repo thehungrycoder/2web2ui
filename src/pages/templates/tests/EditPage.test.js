@@ -50,7 +50,6 @@ describe('Template EditPage', () => {
   it('should handle errors when getting template', () => {
     wrapper.setProps({ getDraftError: 'error' });
     expect(props.history.push).toHaveBeenCalledWith('/templates/');
-
     expect(props.showAlert).toHaveBeenCalledWith({ type: 'error', message: 'Unable to load template' });
   });
 
