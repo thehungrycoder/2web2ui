@@ -1,4 +1,4 @@
-import { Home, InsertChart, Code, MailOutline, Language, Settings, Compare, NotificationsActive } from '@sparkpost/matchbox-icons';
+import { Home, InsertChart, Code, MailOutline, Language, Settings, Compare, NotificationsActive, VerifiedUser } from '@sparkpost/matchbox-icons';
 
 export default [
   {
@@ -115,6 +115,6 @@ export default [
     to: '/recipient-verification',
     labs: true,
     divider: false,
-    icon: NotificationsActive
+    icon: VerifiedUser
   }
 ];
