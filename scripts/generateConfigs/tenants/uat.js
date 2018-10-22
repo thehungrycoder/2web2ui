@@ -53,7 +53,7 @@ const uatTenants = {
   uat: {
     apiBase: 'https://api-uat.tst.sparkpost.com/api/v1',
     bounceDomains: {
-      cnameValue: 'uat-public.mail.e.sparkpost.com',
+      cnameValue: 'uat-public.mail.e.sparkpost.com'
     },
     crossLinkTenant: 'spceu',
     featureFlags: {
@@ -63,6 +63,7 @@ const uatTenants = {
     },
     gtmId: 'GTM-P87NNJ4',
     host: 'app-uat.tst.sparkpost.com',
+    labsBase: 'https://api-uat.tst.sparkpost.com/api/labs',
     nextHost: 'phoenix-next.tst.sparkpost.com',
     originHost: 'phoenix-origin.tst.sparkpost.com',
     siftScience: {
@@ -86,6 +87,7 @@ const uatTenants = {
       allow_anyone_at_verification: true
     },
     host: 'app-uat2.tst.sparkpost.com',
+    labsBase: 'https://api-uat2.tst.sparkpost.com/api/labs',
     smtpAuth: {
       host: 'smtp2.tst.sparkpost',
       username: 'uat2public'
@@ -100,6 +102,7 @@ const uatTenants = {
       allow_anyone_at_verification: true
     },
     host: 'app-uat3.tst.sparkpost.com',
+    labsBase: 'https://api-uat3.tst.sparkpost.com/api/labs',
     smtpAuth: {
       host: 'smtp3.tst.sparkpost'
     },
@@ -113,6 +116,7 @@ const uatTenants = {
       allow_anyone_at_verification: true
     },
     host: 'app-uat4.tst.sparkpost.com',
+    labsBase: 'https://api-uat4.tst.sparkpost.com/api/labs',
     smtpAuth: {
       host: 'uat4.smtp.tst.sparkpost.com'
     },

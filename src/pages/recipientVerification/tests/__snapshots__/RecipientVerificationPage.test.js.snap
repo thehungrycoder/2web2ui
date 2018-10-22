@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Page: Recipient Email Verification should render happy path 1`] = `
+<EmptyState
+  image={[Function]}
+  title="Recipient Email Verification"
+>
+  <p
+    className="Paragraph"
+  >
+    Future awesome styles
+  </p>
+</EmptyState>
+`;
