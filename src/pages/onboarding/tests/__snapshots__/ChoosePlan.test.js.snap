@@ -113,11 +113,11 @@ exports[`ChoosePlan page tests should show free bullets when isFree is selected 
         >
           <Panel.Section>
             <p>
-              Our full-featured, free account designed for developers:
+              Our full-featured, free account provides you:
             </p>
             <ul>
               <li>
-                Up to 15,000 free messages per month, forever.
+                Up to 15,000 free messages for first 30 days, then 500/month forever.
               </li>
               <li>
                 Access to all of our powerful API features.
