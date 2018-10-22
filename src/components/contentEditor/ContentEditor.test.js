@@ -88,6 +88,10 @@ describe('ContentEditor', () => {
     it('returns required validation message with whitespace', () => {
       expect(subject({ html: '     ' })).toMatch(/required/);
     });
+
+    it('returns required validation message with null', () => {
+      expect(subject({ html: null })).toMatch(/required/);
+    });
   });
 
   describe('.validTestDataJson', () => {
