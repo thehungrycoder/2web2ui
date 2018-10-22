@@ -7,6 +7,7 @@ import { hasGrants } from 'src/helpers/conditions';
 import { selectTemplateById, selectTemplateTestData } from 'src/selectors/templates';
 import { selectSubaccountIdFromQuery, selectSubaccountFromQuery } from 'src/selectors/subaccounts';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
+import { showAlert } from 'src/actions/globalAlert';
 
 import PublishedPage from '../PublishedPage';
 
@@ -36,4 +37,4 @@ const formOptions = {
   enableReinitialize: true // required to update initial values from redux state
 };
 
-export default withRouter(connect(mapStateToProps, { getPublished, getTestData, setTestData })(reduxForm(formOptions)(PublishedPage)));
+export default withRouter(connect(mapStateToProps, { getPublished, getTestData, setTestData, showAlert })(reduxForm(formOptions)(PublishedPage)));

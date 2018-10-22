@@ -47,3 +47,9 @@ jest.mock('moment', () => {
 
 Object.defineProperty(global.navigator, 'userAgent', { value: 'node.js', configurable: true });
 Object.defineProperty(global.navigator, 'language', { value: 'en-US', configurable: true });
+
+// Show a stack track for unhandled rejections to help
+// track them down.
+process.on('unhandledRejection', (reason) => {
+	console.log(reason)
+});
