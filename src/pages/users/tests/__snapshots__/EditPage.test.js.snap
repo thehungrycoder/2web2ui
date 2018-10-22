@@ -110,7 +110,13 @@ exports[`Page: Users Edit should not allow current user to delete 1`] = `
         <Field
           component={[Function]}
           disabled={false}
-          helpText={false}
+          helpText={
+            <span>
+              Enabling single sign-on will remove your password. 
+              <br />
+              To use password again, you'll need to reset it from Log In page
+            </span>
+          }
           label="Enable single sign-on authentication for this user"
           name="is_sso"
           type="checkbox"
@@ -196,7 +202,13 @@ exports[`Page: Users Edit should render correctly by default 1`] = `
         <Field
           component={[Function]}
           disabled={false}
-          helpText={false}
+          helpText={
+            <span>
+              Enabling single sign-on will remove your password. 
+              <br />
+              To use password again, you'll need to reset it from Log In page
+            </span>
+          }
           label="Enable single sign-on authentication for this user"
           name="is_sso"
           type="checkbox"
@@ -268,7 +280,13 @@ exports[`Page: Users Edit should show a delete modal 1`] = `
         <Field
           component={[Function]}
           disabled={false}
-          helpText={false}
+          helpText={
+            <span>
+              Enabling single sign-on will remove your password. 
+              <br />
+              To use password again, you'll need to reset it from Log In page
+            </span>
+          }
           label="Enable single sign-on authentication for this user"
           name="is_sso"
           type="checkbox"

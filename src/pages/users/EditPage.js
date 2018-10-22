@@ -82,6 +82,10 @@ export class EditPage extends Component {
       });
     }
 
+    const ssoHelpText = isAccountSingleSignOnEnabled
+      ? <span>Enabling single sign-on will remove your password. <br/>To use password again, you'll need to reset it from Log In page</span>
+      : <span>Single sign-on has not been configured for your account. Enable in your <PageLink to="/account/settings">account's settings</PageLink></span>;
+
     return (
       <Page
         title={user.email}
@@ -101,15 +105,7 @@ export class EditPage extends Component {
               <Field
                 component={CheckboxWrapper}
                 disabled={!isAccountSingleSignOnEnabled}
-                helpText={
-                  isAccountSingleSignOnEnabled === false && (
-                    <span>
-                      Single sign-on has not been configured for your account. Enable in your {
-                        <PageLink to="/account/settings">account's settings</PageLink>
-                      }
-                    </span>
-                  )
-                }
+                helpText={ssoHelpText}
                 label='Enable single sign-on authentication for this user'
                 name='is_sso'
                 type="checkbox"
