@@ -115,7 +115,7 @@ exports[`ListPage renders page with table collect 1`] = `
       Array [
         Object {
           "label": "Name",
-          "sortKey": "name",
+          "sortKey": [Function],
         },
         Object {
           "label": "Subaccount",
@@ -128,7 +128,7 @@ exports[`ListPage renders page with table collect 1`] = `
         null,
       ]
     }
-    defaultSortColumn="name"
+    defaultSortColumn={[Function]}
     defaultSortDirection="asc"
     filterBox={
       Object {
@@ -177,7 +177,7 @@ exports[`ListPage renders page without primary action button 1`] = `
       Array [
         Object {
           "label": "Name",
-          "sortKey": "name",
+          "sortKey": [Function],
         },
         Object {
           "label": "Subaccount",
@@ -190,7 +190,7 @@ exports[`ListPage renders page without primary action button 1`] = `
         null,
       ]
     }
-    defaultSortColumn="name"
+    defaultSortColumn={[Function]}
     defaultSortDirection="asc"
     filterBox={
       Object {
@@ -246,7 +246,7 @@ exports[`ListPage renders page without subaccount column 1`] = `
       Array [
         Object {
           "label": "Name",
-          "sortKey": "name",
+          "sortKey": [Function],
         },
         Object {
           "label": "Last Updated",
@@ -255,7 +255,7 @@ exports[`ListPage renders page without subaccount column 1`] = `
         null,
       ]
     }
-    defaultSortColumn="name"
+    defaultSortColumn={[Function]}
     defaultSortDirection="asc"
     filterBox={
       Object {

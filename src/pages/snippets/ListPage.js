@@ -10,36 +10,6 @@ import SubaccountTag from 'src/components/tags/SubaccountTag';
 import { formatDateTime } from 'src/helpers/date';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
 
-export const Actions = ({ id, subaccount_id }) => (
-  <ActionPopover
-    actions={[
-      {
-        Component: PageLink,
-        content: 'Edit',
-        to: `/snippets/edit/${id}${setSubaccountQuery(subaccount_id)}`
-      }
-    ]}
-  />
-);
-
-export const Name = ({ id, name, subaccount_id }) => (
-  <NameCell id={id} name={name} to={`/snippets/edit/${id}${setSubaccountQuery(subaccount_id)}`} />
-);
-
-export const Subaccount = ({ shared_with_subaccounts, subaccount_id }) => {
-  if (!shared_with_subaccounts && !subaccount_id) {
-    return null;
-  }
-
-  return <SubaccountTag all={shared_with_subaccounts} id={subaccount_id} />;
-};
-
-// on initial creation of a snippet, updated_at is not present
-export const UpdatedAt = ({ created_at, updated_at }) => (
-  formatDateTime(updated_at || created_at)
-);
-
-
 export default class ListPage extends React.Component {
   componentDidMount() {
     this.props.getSnippets();
@@ -48,34 +18,22 @@ export default class ListPage extends React.Component {
   Row = (data) => {
     if (this.props.hasSubaccounts) {
       return [
-        <Name {...data} />,
-        <Subaccount {...data} />,
-        <UpdatedAt {...data} />,
-        <Actions {...data} />
+        <CELLS.Name {...data} />,
+        <CELLS.Subaccount {...data} />,
+        <CELLS.UpdatedAt {...data} />,
+        <CELLS.Actions {...data} />
       ];
     }
 
     return [
-      <Name {...data} />,
-      <UpdatedAt {...data} />,
-      <Actions {...data} />
+      <CELLS.Name {...data} />,
+      <CELLS.UpdatedAt {...data} />,
+      <CELLS.Actions {...data} />
     ];
   }
 
   render() {
     const { canCreate, error, getSnippets, hasSubaccounts, loading, snippets } = this.props;
-    const nameHeader = { label: 'Name', sortKey: 'name' };
-    const subaccountHeader = {
-      label: 'Subaccount',
-      sortKey: ({ subaccount_id, shared_with_subaccounts }) => [
-        subaccount_id,
-        shared_with_subaccounts
-      ]
-    };
-    const updateAtHeader = {
-      label: 'Last Updated',
-      sortKey: ({ created_at, updated_at }) => [updated_at, created_at]
-    };
 
     if (loading) {
       return <Loading />;
@@ -106,10 +64,10 @@ export default class ListPage extends React.Component {
           <TableCollection
             columns={(
               hasSubaccounts
-                ? [nameHeader, subaccountHeader, updateAtHeader, null]
-                : [nameHeader, updateAtHeader, null]
+                ? [HEADERS.name, HEADERS.subaccount, HEADERS.updateAt, HEADERS.actions]
+                : [HEADERS.name, HEADERS.updateAt, HEADERS.actions]
             )}
-            defaultSortColumn="name"
+            defaultSortColumn={HEADERS.name.sortKey}
             filterBox={{
               show: true,
               exampleModifiers: ['id', 'name'],
@@ -124,3 +82,53 @@ export default class ListPage extends React.Component {
     );
   }
 }
+
+const HEADERS = {
+  actions: null, // placeholder for the column
+  name: {
+    label: 'Name',
+    sortKey: ({ id, name }) => (name || id).toLowerCase() // name may not be present
+  },
+  subaccount: {
+    label: 'Subaccount',
+    sortKey: ({ subaccount_id, shared_with_subaccounts }) => (
+      subaccount_id || shared_with_subaccounts
+    )
+  },
+  updateAt: {
+    label: 'Last Updated',
+    sortKey: ({ created_at, updated_at }) => updated_at || created_at
+  }
+};
+
+export const CELLS = {
+  Actions: ({ id, subaccount_id }) => (
+    <ActionPopover
+      actions={[
+        {
+          Component: PageLink,
+          content: 'Edit',
+          to: `/snippets/edit/${id}${setSubaccountQuery(subaccount_id)}`
+        }
+      ]}
+    />
+  ),
+  Name: ({ id, name, subaccount_id }) => (
+    <NameCell
+      id={id}
+      name={name}
+      to={`/snippets/edit/${id}${setSubaccountQuery(subaccount_id)}`}
+    />
+  ),
+  Subaccount: ({ shared_with_subaccounts, subaccount_id }) => {
+    if (!shared_with_subaccounts && !subaccount_id) {
+      return null;
+    }
+
+    return <SubaccountTag all={shared_with_subaccounts} id={subaccount_id} />;
+  },
+  // on initial creation of a snippet, updated_at is not present
+  UpdatedAt: ({ created_at, updated_at }) => (
+    formatDateTime(updated_at || created_at)
+  )
+};
