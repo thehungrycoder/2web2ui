@@ -1,6 +1,6 @@
 import {
-  snakeToFriendly, snakeToCamel, slugify, shrinkToFit, stringToArray, stringifyTypeaheadfilter,
-  stripTags, decodeBase64, trimWhitespaces
+  snakeToFriendly, snakeToCamel, slugify, slugToFriendly, shrinkToFit, stringToArray,
+  stringifyTypeaheadfilter, stripTags, decodeBase64, trimWhitespaces
 } from '../string';
 
 describe('snakeToFrindly', () => {
@@ -38,6 +38,24 @@ describe('slugify', () => {
 
   it('should remove invalid characters', () => {
     expect(slugify('Example #1')).toEqual('example-1');
+  });
+});
+
+describe('slugToFriendly', () => {
+  it('should uppercase first character', () => {
+    expect(slugToFriendly('e')).toEqual('E');
+  });
+
+  it('should replace a hyphen and uppercase first letter', () => {
+    expect(slugToFriendly('example-slug')).toEqual('Example Slug');
+  });
+
+  it('should replace all hyphen and uppercase first letter', () => {
+    expect(slugToFriendly('my-example-slug')).toEqual('My Example Slug');
+  });
+
+  it('should replace hyphen and underscore group and uppercase first letter', () => {
+    expect(slugToFriendly('example___---slug')).toEqual('Example Slug');
   });
 });
 

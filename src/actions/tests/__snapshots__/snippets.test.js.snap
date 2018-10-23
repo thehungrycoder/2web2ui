@@ -89,3 +89,15 @@ Array [
   },
 ]
 `;
+
+exports[`Snippet Actions .getSnippets when assigned to master account 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "method": "GET",
+      "url": "/snippets",
+    },
+    "type": "GET_SNIPPETS",
+  },
+]
+`;

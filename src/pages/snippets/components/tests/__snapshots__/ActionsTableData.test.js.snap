@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ActionsTableData renders actions popover 1`] = `
+<ActionPopover
+  actions={
+    Array [
+      Object {
+        "Component": [Function],
+        "content": "Edit",
+        "to": "/snippets/edit/example-id",
+      },
+    ]
+  }
+/>
+`;
+
+exports[`ActionsTableData renders actions popover with subaccount specific edit link 1`] = `
+<ActionPopover
+  actions={
+    Array [
+      Object {
+        "Component": [Function],
+        "content": "Edit",
+        "to": "/snippets/edit/example-id?subaccount=999",
+      },
+    ]
+  }
+/>
+`;

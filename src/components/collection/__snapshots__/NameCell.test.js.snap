@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NameCell renders with a name 1`] = `
+Array [
+  <p
+    className="Name"
+    key="name"
+  >
+    <PageLink
+      to="/example/item"
+    >
+      The Example Item
+    </PageLink>
+  </p>,
+  <p
+    className="Id"
+    key="id"
+  >
+    ID: 
+    example-item
+  </p>,
+]
+`;
+
+exports[`NameCell renders with id as name 1`] = `
+Array [
+  <p
+    className="Name"
+    key="name"
+  >
+    <PageLink
+      to="/example/item"
+    >
+      Example Item
+    </PageLink>
+  </p>,
+  <p
+    className="Id"
+    key="id"
+  >
+    ID: 
+    example-item
+  </p>,
+]
+`;

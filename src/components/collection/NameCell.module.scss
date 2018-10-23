@@ -1,0 +1,13 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.Id {
+  font-style: italic;
+  font-size: rem(14);
+  line-height: rem(14);
+  margin-bottom: 0;
+}
+
+.Name {
+  font-weight: bold;
+  margin-bottom: 0;
+}
