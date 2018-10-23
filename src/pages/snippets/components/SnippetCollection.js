@@ -52,7 +52,7 @@ export class SnippetCollection extends Component {
         columns={this.getColumns()}
         rows={snippets}
         getRowData={this.getRowData}
-        defaultSortColumn="name"
+        defaultSortColumn={this.HEADERS.name.sortKey}
         filterBox={filterBoxConfig}
         pagination
       />
