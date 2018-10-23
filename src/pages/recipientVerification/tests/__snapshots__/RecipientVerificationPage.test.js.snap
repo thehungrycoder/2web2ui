@@ -1,14 +1,33 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Page: Recipient Email Verification should render happy path 1`] = `
-<EmptyState
-  image={[Function]}
+<Page
+  empty={Object {}}
   title="Recipient Email Verification"
 >
-  <p
-    className="Paragraph"
-  >
-    Future awesome styles
-  </p>
-</EmptyState>
+  <Tabs
+    color="orange"
+    connectBelow={true}
+    selected={0}
+    tabs={
+      Array [
+        Object {
+          "content": "Verify A List",
+          "onClick": [Function],
+        },
+        Object {
+          "content": "Verify a Single Address",
+          "onClick": [Function],
+        },
+      ]
+    }
+  />
+  <Panel>
+    <Panel.Section>
+      <Connect(ReduxForm)
+        onSubmit={[Function]}
+      />
+    </Panel.Section>
+  </Panel>
+</Page>
 `;
