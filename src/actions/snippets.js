@@ -28,3 +28,13 @@ export const createSnippet = ({
     }
   })
 );
+
+export const getSnippets = () => (
+  sparkpostApiRequest({
+    type: 'GET_SNIPPETS',
+    meta: {
+      method: 'GET',
+      url: '/snippets'
+    }
+  })
+);

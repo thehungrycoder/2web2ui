@@ -303,12 +303,20 @@ const routes = [
     supportDocSearch: 'user'
   },
   {
+    path: '/snippets',
+    component: snippets.ListPage,
+    condition: hasGrants('templates/view'),
+    layout: App,
+    title: 'Snippets',
+    supportDocSearch: 'snippet'
+  },
+  {
     path: '/snippets/create',
     component: snippets.CreatePage,
     condition: hasGrants('templates/modify'),
     layout: App,
     title: 'New Snippet',
-    supportDocSearch: 'snippets'
+    supportDocSearch: 'snippet'
   },
   {
     path: '/templates',
