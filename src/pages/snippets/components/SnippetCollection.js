@@ -63,7 +63,7 @@ export class SnippetCollection extends Component {
     actions: null, // placeholder for the column
     name: {
       label: 'Name',
-      sortKey: ({ id, name }) => name || id // name may not be present
+      sortKey: ({ id, name }) => (name || id).toLowerCase() // name may not be present
     },
     subaccount: {
       label: 'Subaccount',
