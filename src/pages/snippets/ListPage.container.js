@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { getSnippets } from 'src/actions/snippets';
+import { getSnippets, deleteSnippet } from 'src/actions/snippets';
 import { hasGrants } from 'src/helpers/conditions';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
 import ListPage from './ListPage';
@@ -13,7 +13,8 @@ const mapStateToProps = (state, props) => ({
 });
 
 const mapDispatchToProps = {
-  getSnippets
+  getSnippets,
+  deleteSnippet
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ListPage);

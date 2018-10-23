@@ -9,6 +9,7 @@ import PageLink from 'src/components/pageLink';
 import SubaccountTag from 'src/components/tags/SubaccountTag';
 import { formatDateTime } from 'src/helpers/date';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
+import { DeleteModal } from 'src/components';
 
 export const Actions = ({ id, subaccount_id }) => (
   <ActionPopover
@@ -16,7 +17,13 @@ export const Actions = ({ id, subaccount_id }) => (
       {
         Component: PageLink,
         content: 'Edit',
-        to: `/snippets/edit/${id}${setSubaccountQuery(subaccount_id)}`
+        to: `/snippets/edit/${id}${setSubaccountQuery(subaccount_id)}`,
+        section: 1
+      },
+      {
+        content: 'Delete',
+        section: 2,
+        onClick: () => this.props.toggleDelete(id, subaccount_id)
       }
     ]}
   />
@@ -41,6 +48,12 @@ export const UpdatedAt = ({ created_at, updated_at }) => (
 
 
 export default class ListPage extends React.Component {
+
+  state = {
+    showDeleteModal: false,
+    snippetToDelete: {}
+  }
+
   componentDidMount() {
     this.props.getSnippets();
   }
@@ -62,8 +75,24 @@ export default class ListPage extends React.Component {
     ];
   }
 
+  toggleDelete = (id, subaccount_id) => {
+    this.setState({
+      showDeleteModal: !this.state.showDeleteModal,
+      snippetToDelete: { id, subaccountId: subaccount_id }
+    });
+  };
+
+  handleDelete = () => {
+    const { id, subaccountId } = this.state.snippetToDelete;
+
+    return this.props.deleteSnippet({ id, subaccountId }).then(() => {
+      this.props.showAlert({ type: 'success', message: 'Snippet deleted' });
+      this.toggleDelete();
+    });
+  };
+
   render() {
-    const { canCreate, error, getSnippets, hasSubaccounts, loading, snippets } = this.props;
+    const { canCreate, error, getSnippets, hasSubaccounts, loading, snippets, deletePending } = this.props;
     const nameHeader = { label: 'Name', sortKey: 'name' };
     const subaccountHeader = {
       label: 'Subaccount',
@@ -120,6 +149,14 @@ export default class ListPage extends React.Component {
             pagination
           />
         )}
+        <DeleteModal
+          open={this.state.showDeleteModal}
+          title='Are you sure you want to delete this snippet?'
+          content={<p>The snippet will be immediately and permanently removed. This cannot be undone.</p>}
+          onDelete={this.handleDelete}
+          onCancel={this.toggleDelete}
+          isPending={deletePending}
+        />
       </Page>
     );
   }
