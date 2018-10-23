@@ -1,63 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ListPage Actions renders actions popover 1`] = `
-<ActionPopover
-  actions={
-    Array [
-      Object {
-        "Component": [Function],
-        "content": "Edit",
-        "to": "/snippets/edit/example-id",
-      },
-    ]
-  }
-/>
-`;
-
-exports[`ListPage Actions renders actions popover with subaccount specific edit link 1`] = `
-<ActionPopover
-  actions={
-    Array [
-      Object {
-        "Component": [Function],
-        "content": "Edit",
-        "to": "/snippets/edit/example-id?subaccount=999",
-      },
-    ]
-  }
-/>
-`;
-
-exports[`ListPage Name renders name data cell 1`] = `
-<NameCell
-  id="example-id"
-  name="Example Name"
-  to="/snippets/edit/example-id"
-/>
-`;
-
-exports[`ListPage Name renders name data cell with subaccount specific edit link 1`] = `
-<NameCell
-  id="example-id"
-  name="Example Name"
-  to="/snippets/edit/example-id?subaccount=999"
-/>
-`;
-
-exports[`ListPage Subaccount returns a tag 1`] = `
-<SubaccountTag
-  all={false}
-  id={999}
-  isDefault={false}
-  master={false}
-  receiveAll={false}
-/>
-`;
-
-exports[`ListPage UpdatedAt returns created at 1`] = `"Aug 10 2017, 10:15am"`;
-
-exports[`ListPage UpdatedAt returns updated at 1`] = `"Sep 10 2017, 10:15am"`;
-
 exports[`ListPage renders loading page 1`] = `<Loading />`;
 
 exports[`ListPage renders page with error banner 1`] = `
@@ -128,7 +70,7 @@ exports[`ListPage renders page with table collect 1`] = `
         null,
       ]
     }
-    defaultSortColumn="name"
+    defaultSortColumn={[Function]}
     defaultSortDirection="asc"
     filterBox={
       Object {
@@ -190,7 +132,7 @@ exports[`ListPage renders page without primary action button 1`] = `
         null,
       ]
     }
-    defaultSortColumn="name"
+    defaultSortColumn={[Function]}
     defaultSortDirection="asc"
     filterBox={
       Object {
@@ -255,7 +197,7 @@ exports[`ListPage renders page without subaccount column 1`] = `
         null,
       ]
     }
-    defaultSortColumn="name"
+    defaultSortColumn={[Function]}
     defaultSortDirection="asc"
     filterBox={
       Object {

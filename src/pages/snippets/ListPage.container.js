@@ -10,6 +10,7 @@ const mapStateToProps = (state, props) => ({
   error: state.snippets.error,
   hasSubaccounts: hasSubaccounts(state),
   loading: state.snippets.loading,
+  deletePending: state.snippets.deletePending,
   snippets: state.snippets.items
 });
 
