@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UpdatedAtTableData returns created at 1`] = `"Aug 10 2017, 10:15am"`;
+
+exports[`UpdatedAtTableData returns updated at 1`] = `"Sep 10 2017, 10:15am"`;

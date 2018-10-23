@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SubaccountTableData returns a tag 1`] = `
+<SubaccountTag
+  all={false}
+  id={999}
+  isDefault={false}
+  master={false}
+  receiveAll={false}
+/>
+`;

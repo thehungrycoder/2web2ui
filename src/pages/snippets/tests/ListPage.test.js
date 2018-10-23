@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import ListPage, { CELLS } from '../ListPage';
+import ListPage from '../ListPage';
 
 describe('ListPage', () => {
   const subject = (props = {}) => shallow(
@@ -42,59 +42,5 @@ describe('ListPage', () => {
   it('shows empty state', () => {
     const wrapper = subject({ snippets: []});
     expect(wrapper.prop('empty')).toHaveProperty('show', true);
-  });
-
-  describe('Actions', () => {
-    it('renders actions popover', () => {
-      const wrapper = shallow(<CELLS.Actions id="example-id" name="Example Name" />);
-      expect(wrapper).toMatchSnapshot();
-    });
-
-    it('renders actions popover with subaccount specific edit link', () => {
-      const wrapper = shallow(<CELLS.Actions id="example-id" name="Example Name" subaccount_id={999} />);
-      expect(wrapper).toMatchSnapshot();
-    });
-  });
-
-  describe('Name', () => {
-    it('renders name data cell', () => {
-      const wrapper = shallow(<CELLS.Name id="example-id" name="Example Name" />);
-      expect(wrapper).toMatchSnapshot();
-    });
-
-    it('renders name data cell with subaccount specific edit link', () => {
-      const wrapper = shallow(<CELLS.Name id="example-id" name="Example Name" subaccount_id={999} />);
-      expect(wrapper).toMatchSnapshot();
-    });
-  });
-
-  describe('Subaccount', () => {
-    it('returns null', () => {
-      const wrapper = shallow(<CELLS.Subaccount />);
-      expect(wrapper.html()).toBeNull();
-    });
-
-    it('returns a tag', () => {
-      const wrapper = shallow(<CELLS.Subaccount shared_with_subaccounts={false} subaccount_id={999} />);
-      expect(wrapper).toMatchSnapshot();
-    });
-  });
-
-  describe('UpdatedAt', () => {
-    it('returns created at', () => {
-      const wrapper = shallow(<CELLS.UpdatedAt created_at="2017-08-10T14:15:16+00:00" />);
-      expect(wrapper).toMatchSnapshot();
-    });
-
-    it('returns updated at', () => {
-      const wrapper = shallow(
-        <CELLS.UpdatedAt
-          created_at="2017-08-10T14:15:16+00:00"
-          updated_at="2017-09-10T14:15:16+00:00"
-        />
-      );
-
-      expect(wrapper).toMatchSnapshot();
-    });
   });
 });
