@@ -64,8 +64,6 @@ export class RecipientVerificationListForm extends Component {
     const uploadHint = 'Upload a list of email addresses to verify';
     const uploadValidators = [required, maxFileSize(config.maxUploadSizeBytes)];
 
-    const recipient = 'jim.braman@sparkpost.com';
-
     // const batchPath = '/recipient-verification';
     // const recipientPath = `/recipient-verification/${recipient}`;
 
