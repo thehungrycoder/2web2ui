@@ -106,11 +106,10 @@ export class SnippetCollection extends Component {
       if (!shared_with_subaccounts && !subaccount_id) {
         return null;
       }
-
       return <SubaccountTag all={shared_with_subaccounts} id={subaccount_id} />;
     },
-    // on initial creation of a snippet, updated_at is not present
     UpdatedAt: ({ created_at, updated_at }) => (
+      // on initial creation of a snippet, updated_at is not present
       formatDateTime(updated_at || created_at)
     )
   }
