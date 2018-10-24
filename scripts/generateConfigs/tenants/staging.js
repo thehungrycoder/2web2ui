@@ -62,7 +62,6 @@ const stagingTenants = {
       has_signup: true
     },
     host: 'app-staging.sparkpost.com',
-    labsBase: 'https://api-staging.sparkpost.com/api/labs',
     nextHost: 'phoenix-next-stg.sparkpost.com',
     originHost: 'phoenix-origin-stg.sparkpost.com',
     siftScience: {

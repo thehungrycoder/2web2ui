@@ -11,7 +11,6 @@ const defaultTemplate = (tenant) => {
     },
     featureFlags: {},
     host: `${identifier}.e.sparkpost.com`,
-    labsBase: `https://${identifier}.api.e.sparkpost.com/api/labs`,
     smtpAuth: {
       enabled: true,
       host: `${identifier}.smtp.e.sparkpost.com`,
