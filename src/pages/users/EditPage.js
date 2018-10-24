@@ -124,7 +124,7 @@ export class EditPage extends Component {
           onDelete={this.deleteUser}
           onCancel={this.toggleDelete}
           open={this.state.showDelete}
-          content={<p><span>User "</span><span>{this.props.match.params.id}</span><span>" will no longer be able to log in or access this SparkPost account and all API keys associated with this user will be immediately deleted.</span></p>}
+          content={<p><span>User "</span><span>{this.props.match.params.id}</span><span>" will no longer be able to log in or access this SparkPost account. All API keys associated with this user will be transferred to you.</span></p>}
           title="Are you sure you want to delete this user?"
         />
       </Page>
