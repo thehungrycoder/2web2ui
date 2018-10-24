@@ -5,7 +5,7 @@ export function fetch() {
     type: 'FETCH_COUNTRIES',
     meta: {
       method: 'GET',
-      url: '/account/countries'
+      url: '/v1/account/countries'
     }
   });
 }

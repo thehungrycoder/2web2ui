@@ -16,7 +16,7 @@ Array [
   Object {
     "meta": Object {
       "method": "GET",
-      "url": "/sending-ips",
+      "url": "/v1/sending-ips",
     },
     "type": "LIST_SENDING_IPS",
   },
@@ -39,7 +39,7 @@ Array [
   Object {
     "meta": Object {
       "method": "GET",
-      "url": "/sending-ips",
+      "url": "/v1/sending-ips",
     },
     "type": "LIST_SENDING_IPS",
   },
@@ -52,7 +52,7 @@ Array [
     "meta": Object {
       "method": "POST",
       "onSuccess": [MockFunction],
-      "url": "/account/billing/collect",
+      "url": "/v1/account/billing/collect",
     },
     "type": "COLLECT_PAYMENTS",
   },
@@ -70,7 +70,7 @@ Array [
       "params": Object {
         "context": "some-context",
       },
-      "url": "/account/cors-data",
+      "url": "/v1/account/cors-data",
       "word": "up",
     },
     "type": "CORS_SOME_CONTEXT",
@@ -102,7 +102,7 @@ Array [
   Object {
     "meta": Object {
       "method": "POST",
-      "url": "/account/subscription/check",
+      "url": "/v1/account/subscription/check",
       "word": "test",
     },
     "type": "SYNC_SUBSCRIPTION",
@@ -115,7 +115,7 @@ Array [
   Object {
     "meta": Object {
       "method": "POST",
-      "url": "/account/subscription/check",
+      "url": "/v1/account/subscription/check",
     },
     "type": "SYNC_SUBSCRIPTION",
   },
@@ -150,7 +150,7 @@ Array [
       },
       "method": "PUT",
       "onSuccess": [Function],
-      "url": "/account/subscription",
+      "url": "/v1/account/subscription",
     },
     "type": "UPDATE_SUBSCRIPTION",
   },
@@ -166,7 +166,7 @@ Array [
       },
       "method": "PUT",
       "onSuccess": [Function],
-      "url": "/account/aws-marketplace/subscription",
+      "url": "/v1/account/aws-marketplace/subscription",
     },
     "type": "UPDATE_SUBSCRIPTION",
   },
@@ -182,7 +182,7 @@ Array [
       },
       "method": "PUT",
       "onSuccess": [MockFunction],
-      "url": "/account/subscription",
+      "url": "/v1/account/subscription",
     },
     "type": "UPDATE_SUBSCRIPTION",
   },

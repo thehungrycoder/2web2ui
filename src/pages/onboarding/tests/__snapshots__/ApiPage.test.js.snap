@@ -24,7 +24,7 @@ exports[`ApiPage should render 1`] = `
       </p>
       <CodeBlock
         code="curl -X POST \\\\
-  http://fake-api-test-host.com/transmissions \\\\
+  http://fake-api-test-host.com/v1/transmissions \\\\
   -H \\"Authorization: 123456789\\" \\\\
   -H \\"Content-Type: application/json\\" \\\\
   -d '{

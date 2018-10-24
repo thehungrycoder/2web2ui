@@ -5,7 +5,7 @@ export function fetch({ type = 'FETCH_METRICS', path, params = {}}) {
     type,
     meta: {
       method: 'GET',
-      url: `/metrics/${path}`,
+      url: `/v1/metrics/${path}`,
       params: {
         ...params
       }

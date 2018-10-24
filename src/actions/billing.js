@@ -11,7 +11,7 @@ export function syncSubscription({ meta = {}} = {}) {
     type: 'SYNC_SUBSCRIPTION',
     meta: {
       method: 'POST',
-      url: '/account/subscription/check',
+      url: '/v1/account/subscription/check',
       ...meta
     }
   });
@@ -28,7 +28,7 @@ export function updateSubscription({ code, meta = {}}) {
       type: 'UPDATE_SUBSCRIPTION',
       meta: {
         method: 'PUT',
-        url: isAws(getState()) ? '/account/aws-marketplace/subscription' : '/account/subscription',
+        url: isAws(getState()) ? '/v1/account/aws-marketplace/subscription' : '/v1/account/subscription',
         data: { code },
         ...meta,
         onSuccess: meta.onSuccess ? meta.onSuccess : () => fetchAccount({ include: 'usage,billing' })
@@ -46,7 +46,7 @@ export function updateBillingContact(data) {
     type: 'UPDATE_BILLING_CONTACT',
     meta: {
       method: 'PUT',
-      url: '/account/billing',
+      url: '/v1/account/billing',
       data: formatContactData(data)
     }
   });
@@ -61,7 +61,7 @@ export function cors({ meta = {}, context, data = {}}) {
     type,
     meta: {
       method: 'POST',
-      url: '/account/cors-data',
+      url: '/v1/account/cors-data',
       params: { context },
       data,
       ...meta
@@ -123,7 +123,7 @@ export function collectPayments({ meta = {}}) {
     type: 'COLLECT_PAYMENTS',
     meta: {
       method: 'POST',
-      url: '/account/billing/collect',
+      url: '/v1/account/billing/collect',
       ...meta
     }
   });
@@ -137,7 +137,7 @@ export function getBillingCountries() {
     type: 'GET_COUNTRIES_BILLING',
     meta: {
       method: 'GET',
-      url: '/account/countries',
+      url: '/v1/account/countries',
       params: {
         filter: 'billing'
       }

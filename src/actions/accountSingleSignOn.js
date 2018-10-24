@@ -5,7 +5,7 @@ export const getAccountSingleSignOnDetails = () => (
     type: 'GET_ACCOUNT_SSO_DETAILS',
     meta: {
       method: 'GET',
-      url: '/account/sso/saml'
+      url: '/v1/account/sso/saml'
     }
   })
 );
@@ -15,7 +15,7 @@ export const provisionAccountSingleSignOn = (fileContents) => (
     type: 'PROVISION_ACCOUNT_SSO',
     meta: {
       method: 'POST',
-      url: '/account/sso/saml',
+      url: '/v1/account/sso/saml',
       data: {
         xml_file: fileContents
       }
@@ -28,7 +28,7 @@ export const reprovisionAccountSingleSignOn = (fileContents) => (
     type: 'REPROVISION_ACCOUNT_SSO',
     meta: {
       method: 'PUT',
-      url: '/account/sso/saml',
+      url: '/v1/account/sso/saml',
       data: {
         xml_file: fileContents
       }
@@ -41,7 +41,7 @@ export const updateAccountSingleSignOn = ({ cert, enabled, provider }) => (
     type: 'UPDATE_ACCOUNT_SSO',
     meta: {
       method: 'PUT',
-      url: '/account/sso/saml',
+      url: '/v1/account/sso/saml',
       data: {
         cert,
         enabled,

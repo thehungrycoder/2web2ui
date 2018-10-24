@@ -7,7 +7,7 @@ export function listTrackingDomains() {
     type: 'LIST_TRACKING_DOMAINS',
     meta: {
       method: 'GET',
-      url: '/tracking-domains',
+      url: '/v1/tracking-domains',
       showErrorAlert: false
     }
   });
@@ -18,7 +18,7 @@ export function createTrackingDomain({ subaccount, ...data }) {
     type: 'CREATE_TRACKING_DOMAIN',
     meta: {
       method: 'POST',
-      url: '/tracking-domains',
+      url: '/v1/tracking-domains',
       headers: setSubaccountHeader(subaccount),
       data
     }
@@ -31,7 +31,7 @@ export function updateTrackingDomain({ domain, subaccount = null, ...data }) {
     type: 'UPDATE_TRACKING_DOMAIN',
     meta: {
       method: 'PUT',
-      url: `/tracking-domains/${domain}`,
+      url: `/v1/tracking-domains/${domain}`,
       headers: setSubaccountHeader(subaccount),
       data,
       domain
@@ -45,7 +45,7 @@ export function deleteTrackingDomain({ domain, subaccountId }) {
     type: 'DELETE_TRACKING_DOMAIN',
     meta: {
       method: 'DELETE',
-      url: `/tracking-domains/${domain}`,
+      url: `/v1/tracking-domains/${domain}`,
       headers: setSubaccountHeader(subaccountId),
       domain
     }
@@ -58,7 +58,7 @@ export function verifyTrackingDomain({ domain, subaccountId }) {
     type: 'VERIFY_TRACKING_DOMAIN',
     meta: {
       method: 'POST',
-      url: `/tracking-domains/${domain}/verify`,
+      url: `/v1/tracking-domains/${domain}/verify`,
       headers: setSubaccountHeader(subaccountId),
       domain
     }

@@ -20,7 +20,7 @@ exports[`ProviderForm disables fields and buttons when submitting 1`] = `
       <p>
         <CopyField
           hideCopy={false}
-          value="http://fake-api-test-host.com/users/saml/consume"
+          value="http://fake-api-test-host.com/v1/users/saml/consume"
         />
       </p>
     </Panel.Section>
@@ -95,7 +95,7 @@ exports[`ProviderForm renders form 1`] = `
       <p>
         <CopyField
           hideCopy={false}
-          value="http://fake-api-test-host.com/users/saml/consume"
+          value="http://fake-api-test-host.com/v1/users/saml/consume"
         />
       </p>
     </Panel.Section>

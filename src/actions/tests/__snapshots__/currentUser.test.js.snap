@@ -5,7 +5,7 @@ Array [
   Object {
     "meta": Object {
       "method": "GET",
-      "url": "/users/bkemper",
+      "url": "/v1/users/bkemper",
     },
     "type": "GET_CURRENT_USER",
   },
@@ -46,7 +46,7 @@ Array [
         },
       },
       "method": "PUT",
-      "url": "/users/bkemper",
+      "url": "/v1/users/bkemper",
     },
     "type": "UPDATE_USER_UI_OPTIONS",
   },

@@ -16,7 +16,7 @@ export function checkSuppression() { //used in DashBoardPage to check if account
       type: 'CHECK_SUPPRESSIONS',
       meta: {
         method: 'GET',
-        url: '/suppression-list',
+        url: '/v1/suppression-list',
         params
       }
     })
@@ -28,7 +28,7 @@ export function searchRecipient({ email, subaccountId } = {}) {
     type: 'SEARCH_SUPPRESSIONS_RECIPIENT',
     meta: {
       method: 'GET',
-      url: `/suppression-list/${email}`,
+      url: `/v1/suppression-list/${email}`,
       headers: setSubaccountHeader(subaccountId)
     }
   });
@@ -60,7 +60,7 @@ export function searchSuppressions(options) {
     type: 'GET_SUPPRESSIONS',
     meta: {
       method: 'GET',
-      url: '/suppression-list',
+      url: '/v1/suppression-list',
       params
     }
   });
@@ -73,7 +73,7 @@ export function deleteSuppression(suppression) {
     type: 'DELETE_SUPPRESSION',
     meta: {
       method: 'DELETE',
-      url: `/suppression-list/${recipient}`,
+      url: `/v1/suppression-list/${recipient}`,
       headers: setSubaccountHeader(subaccountId),
       data: { type },
       suppression
@@ -108,7 +108,7 @@ export function createOrUpdateSuppressions(recipients, subaccount) {
     type: 'CREATE_OR_UPDATE_SUPPRESSIONS',
     meta: {
       method: 'PUT',
-      url: '/suppression-list',
+      url: '/v1/suppression-list',
       headers: setSubaccountHeader(subaccount),
       data: {
         recipients: sanitizedRecipients
@@ -133,7 +133,7 @@ export function parseSuppressionsFile(file) {
 }
 
 export function uploadSuppressions(file, subaccount) {
-  return async(dispatch) => {
+  return async (dispatch) => {
     const recipients = await dispatch(parseSuppressionsFile(file));
     return dispatch(createOrUpdateSuppressions(recipients, subaccount));
   };

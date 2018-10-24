@@ -30,7 +30,7 @@ export function loadPrerequisiteMetrics() {
     type: 'BRIGHTBACK_METRICS',
     meta: {
       method: 'GET',
-      url: '/metrics/deliverability',
+      url: '/v1/metrics/deliverability',
       params: metricsRequest,
       showErrorAlert: false
     }

@@ -8,7 +8,7 @@ export function get({ meta = {}} = {}) {
       type: 'GET_CURRENT_USER',
       meta: {
         method: 'GET',
-        url: `/users/${username}`,
+        url: `/v1/users/${username}`,
         ...meta
       }
     }));
@@ -28,7 +28,7 @@ export function getGrants({ beta = false, role, meta = {}} = {}) {
   return (dispatch) => dispatch(sparkpostApiRequest({
     type: 'GET_GRANTS',
     meta: {
-      url: '/authenticate/grants',
+      url: '/v1/authenticate/grants',
       params: { beta, role },
       ...meta
     }
@@ -47,7 +47,7 @@ export function verifyEmail(data = {}, { showErrorAlert = true, type = 'VERIFY_E
       type,
       meta: {
         method: 'POST',
-        url: `/users/${username}/verify`,
+        url: `/v1/users/${username}/verify`,
         data,
         showErrorAlert
       }
@@ -68,7 +68,7 @@ export function userGivesCookieConsent(username) {
       type: 'USER_GIVES_COOKIE_CONSENT',
       meta: {
         method: 'PUT',
-        url: `/users/${username}`,
+        url: `/v1/users/${username}`,
         data: { cookie_consent: true }
       }
     };
@@ -84,7 +84,7 @@ export function updateUserUIOptions(updates) {
       type: 'UPDATE_USER_UI_OPTIONS',
       meta: {
         method: 'PUT',
-        url: `/users/${currentUser.username}`,
+        url: `/v1/users/${currentUser.username}`,
         data: {
           options: {
             ui: updates
