@@ -6,7 +6,7 @@ export function createApiKey({ grants, label, subaccount, validIps: valid_ips = 
     type: 'CREATE_API_KEY',
     meta: {
       method: 'POST',
-      url: '/api-keys',
+      url: '/v1/api-keys',
       headers: setSubaccountHeader(subaccount),
       data: {
         grants,
@@ -24,7 +24,7 @@ export function getApiKey({ id, subaccount = null }) {
     type: 'GET_API_KEY',
     meta: {
       method: 'GET',
-      url: `/api-keys/${id}`,
+      url: `/v1/api-keys/${id}`,
       headers
     }
   });
@@ -38,7 +38,7 @@ export function deleteApiKey({ id, subaccount = null }) {
     type: 'DELETE_API_KEY',
     meta: {
       method: 'DELETE',
-      url: `/api-keys/${id}`,
+      url: `/v1/api-keys/${id}`,
       headers
     }
   });
@@ -49,7 +49,7 @@ export function updateApiKey({ grants, id, label, subaccount, validIps: valid_ip
     type: 'UPDATE_API_KEY',
     meta: {
       method: 'PUT',
-      url: `/api-keys/${id}`,
+      url: `/v1/api-keys/${id}`,
       headers: setSubaccountHeader(subaccount),
       data: {
         grants,
@@ -73,7 +73,7 @@ export function listApiKeys(subaccount) {
     type: 'LIST_API_KEYS',
     meta: {
       method: 'GET',
-      url: '/api-keys',
+      url: '/v1/api-keys',
       headers,
       showErrorAlert: false
     }
@@ -85,7 +85,7 @@ export function listGrants() {
     type: 'LIST_GRANTS',
     meta: {
       method: 'GET',
-      url: '/authenticate/grants'
+      url: '/v1/authenticate/grants'
     }
   });
 }
@@ -95,7 +95,7 @@ export function listSubaccountGrants() {
     type: 'LIST_SUBACCOUNT_GRANTS',
     meta: {
       method: 'GET',
-      url: '/authenticate/grants',
+      url: '/v1/authenticate/grants',
       params: {
         role: 'subaccount'
       }

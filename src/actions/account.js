@@ -5,7 +5,7 @@ export function fetch({ meta = {}, ...params } = {}) {
     type: 'FETCH_ACCOUNT',
     meta: {
       method: 'GET',
-      url: '/account',
+      url: '/v1/account',
       ...meta,
       params
     }
@@ -17,7 +17,7 @@ export function getPlans({ meta = {}} = {}) {
     type: 'GET_PLANS',
     meta: {
       method: 'GET',
-      url: '/account/plans',
+      url: '/v1/account/plans',
       ...meta
     }
   });
@@ -28,7 +28,7 @@ export function update(data) {
     type: 'UPDATE_ACCOUNT',
     meta: {
       method: 'PUT',
-      url: '/account',
+      url: '/v1/account',
       data
     }
   });
@@ -41,7 +41,7 @@ export function register(data) {
     type: 'CREATE_ACCOUNT',
     meta: {
       method: 'POST',
-      url: '/account',
+      url: '/v1/account',
       data
     }
   });
@@ -53,7 +53,7 @@ export function emailRequest(data) {
     type: 'EMAIL_REQUEST',
     meta: {
       method: 'POST',
-      url: '/account/email-request',
+      url: '/v1/account/email-request',
       data
     }
   });

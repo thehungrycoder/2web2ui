@@ -10,7 +10,7 @@ Object {
       "to": "2018-02-01T10:10",
     },
     "showErrorAlert": false,
-    "url": "/message-events",
+    "url": "/v1/message-events",
   },
   "type": "GET_MESSAGE_EVENTS",
 }
@@ -24,7 +24,7 @@ Object {
       "from": "2018-02-01T10:10",
     },
     "showErrorAlert": false,
-    "url": "/message-events",
+    "url": "/v1/message-events",
   },
   "type": "GET_MESSAGE_EVENTS",
 }
@@ -38,7 +38,7 @@ Object {
       "recipients": "1,2,3",
     },
     "showErrorAlert": false,
-    "url": "/message-events",
+    "url": "/v1/message-events",
   },
   "type": "GET_MESSAGE_EVENTS",
 }
@@ -52,7 +52,7 @@ Object {
       "to": "2018-02-01T10:10",
     },
     "showErrorAlert": false,
-    "url": "/message-events",
+    "url": "/v1/message-events",
   },
   "type": "GET_MESSAGE_EVENTS",
 }
@@ -67,7 +67,7 @@ Object {
       "message_ids": "abcd,efgh",
       "to": "2018-02-01T10:10",
     },
-    "url": "/message-events",
+    "url": "/v1/message-events",
   },
   "type": "GET_MESSAGE_HISTORY",
 }

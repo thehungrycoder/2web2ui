@@ -20,7 +20,7 @@
  */
 const stagingTenants = {
   stagingmtas: {
-    apiBase: 'https://api-staging-mtas.sparkpost.com/api/v1',
+    apiBase: 'https://api-staging-mtas.sparkpost.com/api',
     featureFlags: {
       allow_anyone_at_verification: true
     },
@@ -35,7 +35,7 @@ const stagingTenants = {
     }
   },
   stagingmtas2: {
-    apiBase: 'https://api-staging-mtas2.sparkpost.com/api/v1',
+    apiBase: 'https://api-staging-mtas2.sparkpost.com/api',
     bounceDomains: {
       cnameValue: 'staging-mtas2.mail.e.sparkpost.com'
     },
@@ -53,7 +53,7 @@ const stagingTenants = {
     }
   },
   staging: {
-    apiBase: 'https://api-staging.sparkpost.com/api/v1',
+    apiBase: 'https://api-staging.sparkpost.com/api',
     crossLinkTenant: 'spc',
     gtmId: 'GTM-5BCG3R',
     featureFlags: {
@@ -78,7 +78,7 @@ const stagingTenants = {
     }
   },
   stagingmtaspc: {
-    apiBase: 'https://api-stagingmtaspc.sparkpost.com/api/v1',
+    apiBase: 'https://api-stagingmtaspc.sparkpost.com/api',
     featureFlags: {
       allow_anyone_at_verification: true,
       allow_default_signing_domains_for_ip_pools: true,

@@ -1,7 +1,7 @@
 import config from 'src/config';
 
 export function getTransmissionsUri() {
-  const configUri = `${config.apiBase}/transmissions`;
+  const configUri = `${config.apiBase}/v1/transmissions`;
 
   // if config uri is protocol-relative, prepend window protocol
   if (/^\/\//.test(configUri)) {

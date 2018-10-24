@@ -6,7 +6,7 @@ export function listWebhooks() {
     type: 'LIST_WEBHOOKS',
     meta: {
       method: 'GET',
-      url: '/webhooks',
+      url: '/v1/webhooks',
       showErrorAlert: false
     }
   });
@@ -22,7 +22,7 @@ export function getWebhook({ id, subaccount = null }) {
     type: 'GET_WEBHOOK',
     meta: {
       method: 'GET',
-      url: `/webhooks/${id}`,
+      url: `/v1/webhooks/${id}`,
       subaccount,
       headers
     }
@@ -38,7 +38,7 @@ export function createWebhook({ webhook, subaccount = null }) {
     type: 'CREATE_WEBHOOK',
     meta: {
       method: 'POST',
-      url: '/webhooks',
+      url: '/v1/webhooks',
       data: webhook,
       subaccount,
       headers
@@ -52,7 +52,7 @@ export function updateWebhook({ id, subaccount = null, ...data }) {
     type: 'UPDATE_WEBHOOK',
     meta: {
       method: 'PUT',
-      url: `/webhooks/${id}`,
+      url: `/v1/webhooks/${id}`,
       data,
       headers
     }
@@ -65,7 +65,7 @@ export function deleteWebhook({ id, subaccount = null }) {
     type: 'DELETE_WEBHOOK',
     meta: {
       method: 'DELETE',
-      url: `/webhooks/${id}`,
+      url: `/v1/webhooks/${id}`,
       headers
     }
   });
@@ -77,7 +77,7 @@ export function testWebhook({ id, subaccount = null, message }) {
     type: 'TEST_WEBHOOK',
     meta: {
       method: 'POST',
-      url: `/webhooks/${id}/validate`,
+      url: `/v1/webhooks/${id}/validate`,
       data: { message },
       headers
     }
@@ -89,7 +89,7 @@ export function getEventDocs() {
     type: 'GET_EVENT_DOCS',
     meta: {
       method: 'GET',
-      url: '/webhooks/events/documentation'
+      url: '/v1/webhooks/events/documentation'
     }
   });
 }
@@ -99,7 +99,7 @@ export function getEventSamples(events) {
     type: 'GET_EVENT_SAMPLES',
     meta: {
       method: 'GET',
-      url: '/webhooks/events/samples',
+      url: '/v1/webhooks/events/samples',
       params: { events: events.join(',') }
     }
   });
@@ -111,7 +111,7 @@ export function getBatches({ id, subaccount = null }) {
     type: 'GET_WEBHOOK_BATCHES',
     meta: {
       method: 'GET',
-      url: `/webhooks/${id}/batch-status`,
+      url: `/v1/webhooks/${id}/batch-status`,
       headers
     }
   });

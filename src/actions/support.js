@@ -46,7 +46,7 @@ export function createTicket({ issueType, ...data }) {
     type: 'CREATE_TICKET',
     meta: {
       method: 'POST',
-      url: '/integrations/support/ticket',
+      url: '/v1/integrations/support/ticket',
       data: {
         ...data,
         issue_type: issueType

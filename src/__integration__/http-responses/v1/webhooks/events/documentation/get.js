@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 export default () => ({
   'results': {
     'message_event': {

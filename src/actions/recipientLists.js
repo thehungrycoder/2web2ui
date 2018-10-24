@@ -11,7 +11,7 @@ export function listRecipientLists({ force } = {}) {
         type: 'LIST_RECIPIENT_LISTS',
         meta: {
           method: 'GET',
-          url: '/recipient-lists',
+          url: '/v1/recipient-lists',
           showErrorAlert: false
         }
       })
@@ -24,7 +24,7 @@ export function createRecipientList(data) {
     type: 'CREATE_RECIPIENT_LIST',
     meta: {
       method: 'POST',
-      url: '/recipient-lists',
+      url: '/v1/recipient-lists',
       data
     }
   });
@@ -35,7 +35,7 @@ export function updateRecipientList({ id, ...updateFields }, params) {
     type: 'UPDATE_RECIPIENT_LIST',
     meta: {
       method: 'PUT',
-      url: `/recipient-lists/${id}`,
+      url: `/v1/recipient-lists/${id}`,
       data: updateFields,
       id,
       params
@@ -48,7 +48,7 @@ export function deleteRecipientList(id) {
     type: 'DELETE_RECIPIENT_LIST',
     meta: {
       method: 'DELETE',
-      url: `/recipient-lists/${id}`,
+      url: `/v1/recipient-lists/${id}`,
       id
     }
   });
@@ -59,7 +59,7 @@ export function getRecipientList(id, params) {
     type: 'GET_RECIPIENT_LIST',
     meta: {
       method: 'GET',
-      url: `/recipient-lists/${id}`,
+      url: `/v1/recipient-lists/${id}`,
       params
     }
   });
