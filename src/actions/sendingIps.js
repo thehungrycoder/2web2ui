@@ -5,7 +5,7 @@ export function updateSendingIp(id, ipPoolName) {
     type: 'UPDATE_SENDING_IP',
     meta: {
       method: 'PUT',
-      url: `/sending-ips/${id}`,
+      url: `/v1/sending-ips/${id}`,
       data: { ip_pool: ipPoolName }
     }
   });
@@ -16,7 +16,7 @@ export function list() {
     type: 'LIST_SENDING_IPS',
     meta: {
       method: 'GET',
-      url: '/sending-ips'
+      url: '/v1/sending-ips'
     }
   });
 }

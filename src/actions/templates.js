@@ -11,7 +11,7 @@ export function listTemplates() {
     type: 'LIST_TEMPLATES',
     meta: {
       method: 'GET',
-      url: '/templates',
+      url: '/v1/templates',
       showErrorAlert: false
     }
   });
@@ -22,7 +22,7 @@ export function getDraft(id, subaccountId) {
     type: 'GET_DRAFT_TEMPLATE',
     meta: {
       method: 'GET',
-      url: `/templates/${id}`,
+      url: `/v1/templates/${id}`,
       headers: setSubaccountHeader(subaccountId)
     }
   });
@@ -47,7 +47,7 @@ export function getPreview({ content, id, mode, subaccountId, substitution_data 
     meta: {
       context: { id, mode },
       method: 'POST',
-      url: '/utils/content-previewer',
+      url: '/v1/utils/content-previewer',
       data: { content, substitution_data },
       headers: setSubaccountHeader(subaccountId),
       showErrorAlert: false
@@ -60,7 +60,7 @@ export function getPublished(id, subaccountId) {
     type: 'GET_PUBLISHED_TEMPLATE',
     meta: {
       method: 'GET',
-      url: `/templates/${id}`,
+      url: `/v1/templates/${id}`,
       params: { draft: false },
       headers: setSubaccountHeader(subaccountId),
       showErrorAlert: false
@@ -88,7 +88,7 @@ export function create(data) {
       type: 'CREATE_TEMPLATE',
       meta: {
         method: 'POST',
-        url: '/templates',
+        url: '/v1/templates',
         headers: setSubaccountHeader(subaccount),
         data: {
           ...formData,
@@ -111,7 +111,7 @@ export function update(data, subaccountId, params = {}) {
       type: 'UPDATE_TEMPLATE',
       meta: {
         method: 'PUT',
-        url: `/templates/${id}`,
+        url: `/v1/templates/${id}`,
         data: {
           ...formData,
           content: shapeContent(content)
@@ -135,7 +135,7 @@ export function publish(data, subaccountId) {
         type: 'PUBLISH_TEMPLATE',
         meta: {
           method: 'PUT',
-          url: `/templates/${id}`,
+          url: `/v1/templates/${id}`,
           data: { published: true },
           headers: setSubaccountHeader(subaccountId)
         }
@@ -149,7 +149,7 @@ export function deleteTemplate(id, subaccountId) {
     type: 'DELETE_TEMPLATE',
     meta: {
       method: 'DELETE',
-      url: `/templates/${id}`,
+      url: `/v1/templates/${id}`,
       headers: setSubaccountHeader(subaccountId)
     }
   });
@@ -213,7 +213,7 @@ export function sendPreview({ id, mode, emails, from, subaccountId }) {
       type: 'SEND_PREVIEW_TRANSMISSION',
       meta: {
         method: 'POST',
-        url: '/transmissions',
+        url: '/v1/transmissions',
         headers: setSubaccountHeader(subaccountId),
         data: {
           ...testData,
