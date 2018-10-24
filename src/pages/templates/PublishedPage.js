@@ -14,7 +14,10 @@ export default class PublishedPage extends Component {
   }
 
   componentDidUpdate() {
-    if (this.props.getPublishedError) {
+    const { showAlert, getPublishedError } = this.props;
+
+    if (getPublishedError) {
+      showAlert({ type: 'error', message: 'Unable to load template' });
       this.props.history.push('/templates/');
     }
   }
