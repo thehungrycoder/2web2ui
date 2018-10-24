@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 // Components
 import { TableCollection } from 'src/components';
-
 import ActionsTableData from './ActionsTableData';
 import NameTableData from './NameTableData';
 import SubaccountTableData from './SubaccountTableData';

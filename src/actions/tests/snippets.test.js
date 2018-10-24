@@ -1,7 +1,8 @@
 import { snapshotActionCases } from 'src/__testHelpers__/snapshotActionHelpers';
 import {
   createSnippet,
-  getSnippets
+  getSnippets,
+  deleteSnippet
 } from '../snippets';
 
 jest.mock('src/actions/helpers/sparkpostApiRequest');
@@ -59,6 +60,26 @@ describe('Snippet Actions', () => {
     {
       name: 'when assigned to master account',
       action: getSnippets
+    }
+  ]);
+
+  snapshotActionCases('.deleteSnippet', [
+    {
+      name: 'when assigned to master account',
+      action: () => (
+        deleteSnippet({
+          id: 'test-snippet'
+        })
+      )
+    },
+    {
+      name: 'when assigned to subaccount',
+      action: () => (
+        deleteSnippet({
+          id: 'test-snippet',
+          subaccount_id: 101
+        })
+      )
     }
   ]);
 });

@@ -7,21 +7,33 @@ exports[`ActionsTableData renders actions popover 1`] = `
       Object {
         "Component": [Function],
         "content": "Edit",
+        "section": 1,
         "to": "/snippets/edit/example-id",
+      },
+      Object {
+        "content": "Delete",
+        "onClick": [Function],
+        "section": 2,
       },
     ]
   }
 />
 `;
 
-exports[`ActionsTableData renders actions popover with subaccount specific edit link 1`] = `
+exports[`ActionsTableData renders actions popover with subaccount specific edit & delete links 1`] = `
 <ActionPopover
   actions={
     Array [
       Object {
         "Component": [Function],
         "content": "Edit",
+        "section": 1,
         "to": "/snippets/edit/example-id?subaccount=999",
+      },
+      Object {
+        "content": "Delete",
+        "onClick": [Function],
+        "section": 2,
       },
     ]
   }

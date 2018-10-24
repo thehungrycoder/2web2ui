@@ -8,7 +8,7 @@ describe('ActionsTableData', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('renders actions popover with subaccount specific edit link', () => {
+  it('renders actions popover with subaccount specific edit & delete links', () => {
     const wrapper = shallow(<ActionsTableData id="example-id" name="Example Name" subaccount_id={999} />);
     expect(wrapper).toMatchSnapshot();
   });

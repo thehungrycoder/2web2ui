@@ -90,6 +90,40 @@ Array [
 ]
 `;
 
+exports[`Snippet Actions .deleteSnippet when assigned to master account 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "data": Object {
+        "id": "test-snippet",
+        "subaccountId": undefined,
+      },
+      "headers": Object {},
+      "method": "DELETE",
+      "url": "/snippets/test-snippet",
+    },
+    "type": "DELETE_SNIPPET",
+  },
+]
+`;
+
+exports[`Snippet Actions .deleteSnippet when assigned to subaccount 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "data": Object {
+        "id": "test-snippet",
+        "subaccountId": undefined,
+      },
+      "headers": Object {},
+      "method": "DELETE",
+      "url": "/snippets/test-snippet",
+    },
+    "type": "DELETE_SNIPPET",
+  },
+]
+`;
+
 exports[`Snippet Actions .getSnippets when assigned to master account 1`] = `
 Array [
   Object {
