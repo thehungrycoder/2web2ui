@@ -14,7 +14,7 @@ const buildHeaders = (authHeader) => ({
 function useRefreshToken(refreshToken, authHeader = authentication.app.authHeader) {
   return sparkpostRequest({
     method: 'POST',
-    url: '/authenticate',
+    url: '/v1/authenticate',
     data: `grant_type=refresh_token&refresh_token=${refreshToken}`,
     headers: buildHeaders(authHeader)
   });
@@ -27,7 +27,7 @@ function sparkpostLogin(username, password, rememberMe, authHeader = authenticat
 
   return sparkpostRequest({
     method: 'POST',
-    url: '/authenticate',
+    url: '/v1/authenticate',
     data,
     headers: buildHeaders(authHeader)
   });
