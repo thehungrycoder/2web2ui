@@ -5,7 +5,7 @@ export function createRecipientVerificationList(data) {
     type: 'CREATE_RECIPIENT_VERIFICATION_LIST',
     meta: {
       method: 'POST',
-      url: '/recipient-verification-api',
+      url: '/labs/recipient-verification-api',
       data
     }
   });

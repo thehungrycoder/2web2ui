@@ -6,7 +6,7 @@ export function list() {
     type: 'LIST_SUBACCOUNTS',
     meta: {
       method: 'GET',
-      url: '/subaccounts',
+      url: '/v1/subaccounts',
       showErrorAlert: false
     }
   });
@@ -18,7 +18,7 @@ export function create(values) {
       type: 'CREATE_SUBACCOUNT',
       meta: {
         method: 'POST',
-        url: '/subaccounts',
+        url: '/v1/subaccounts',
         data: { ...formatSubaccount(values, getState) }
       }
     })
@@ -40,7 +40,7 @@ export function getSubaccount(id) {
     type: 'GET_SUBACCOUNT',
     meta: {
       method: 'GET',
-      url: `subaccounts/${id}`,
+      url: `/v1/subaccounts/${id}`,
       // sparkpostApiRequest suppress 404 and not 400 for invalid
       showErrorAlert: false
     }
@@ -52,7 +52,7 @@ export function editSubaccount(id, data) {
     type: 'EDIT_SUBACCOUNT',
     meta: {
       method: 'PUT',
-      url: `subaccounts/${id}`,
+      url: `/v1/subaccounts/${id}`,
       data: data
     }
   });

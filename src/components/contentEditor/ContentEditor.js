@@ -50,8 +50,10 @@ class ContentEditor extends React.Component {
     return value;
   }
 
-  requiredHtmlOrText = (value, { content: { html = '', text = '' } = {}}) => {
-    if (html.trim() === '' && text.trim() === '') {
+  // note, must handle null template parts
+  requiredHtmlOrText = (value, { content: { html, text } = {}}) => {
+    // return validation error if both parts are falsy or empty
+    if ((!html || html.trim() === '') && (!text || text.trim() === '')) {
       return 'HTML or Text is required';
     }
   }

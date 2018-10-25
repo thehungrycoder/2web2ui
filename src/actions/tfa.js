@@ -5,7 +5,7 @@ import { login } from 'src/actions/auth';
 export function getTfaStatusBeforeLoggedIn({ username, token }) {
   return sparkpostRequest({
     method: 'GET',
-    url: `/users/${username}/two-factor`,
+    url: `/v1/users/${username}/two-factor`,
     headers: {
       Authorization: token
     }
@@ -19,7 +19,7 @@ export function getTfaStatus() {
       type: 'GET_TFA_STATUS',
       meta: {
         method: 'GET',
-        url: `/users/${currentUser.username}/two-factor`
+        url: `/v1/users/${currentUser.username}/two-factor`
       }
     }));
   };
@@ -32,7 +32,7 @@ export function getTfaBackupStatus() {
       type: 'GET_TFA_BACKUP_STATUS',
       meta: {
         method: 'GET',
-        url: `/users/${currentUser.username}/two-factor/backup`
+        url: `/v1/users/${currentUser.username}/two-factor/backup`
       }
     }));
   };
@@ -45,7 +45,7 @@ export function generateBackupCodes(password) {
       type: 'TFA_GENERATE_BACKUP_CODES',
       meta: {
         method: 'POST',
-        url: `/users/${currentUser.username}/two-factor/backup`,
+        url: `/v1/users/${currentUser.username}/two-factor/backup`,
         data: {
           password
         }
@@ -67,7 +67,7 @@ export function getTfaSecret() {
       type: 'GET_TFA_SECRET',
       meta: {
         method: 'PUT',
-        url: `/users/${currentUser.username}/two-factor`,
+        url: `/v1/users/${currentUser.username}/two-factor`,
         data: {
           enabled: true
         }
@@ -91,7 +91,7 @@ export function toggleTfa(data) {
       type: 'TFA_TOGGLE',
       meta: {
         method: 'PUT',
-        url: `/users/${currentUser.username}/two-factor`,
+        url: `/v1/users/${currentUser.username}/two-factor`,
         data
       }
     })).catch(() => {
@@ -106,7 +106,7 @@ export function verifyAndLogin({ authData, code }) {
 
     return sparkpostRequest({
       method: 'POST',
-      url: `/users/${authData.username}/two-factor`,
+      url: `/v1/users/${authData.username}/two-factor`,
       headers: {
         Authorization: authData.token
       },

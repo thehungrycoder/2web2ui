@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NameTableData renders name data cell 1`] = `
+<NameCell
+  id="example-id"
+  name="Example Name"
+  to="/snippets/edit/example-id"
+/>
+`;
+
+exports[`NameTableData renders name data cell with subaccount specific edit link 1`] = `
+<NameCell
+  id="example-id"
+  name="Example Name"
+  to="/snippets/edit/example-id?subaccount=999"
+/>
+`;

@@ -1,0 +1,228 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ListPage renders loading page 1`] = `<Loading />`;
+
+exports[`ListPage renders page with error banner 1`] = `
+<Page
+  empty={
+    Object {
+      "content": <p>
+        Build, import, edit, and reuse snippets.
+      </p>,
+      "image": [Function],
+      "show": false,
+      "title": "Manage your template snippets",
+    }
+  }
+  primaryAction={
+    Object {
+      "Component": [Function],
+      "content": "Create Snippet",
+      "to": "/snippets/create",
+    }
+  }
+  title="Snippets"
+>
+  <ApiErrorBanner
+    errorDetails="Oh no!"
+    message="Sorry, we seem to have had some trouble loading your snippets."
+    reload={[Function]}
+  />
+</Page>
+`;
+
+exports[`ListPage renders page with table collect 1`] = `
+<Page
+  empty={
+    Object {
+      "content": <p>
+        Build, import, edit, and reuse snippets.
+      </p>,
+      "image": [Function],
+      "show": false,
+      "title": "Manage your template snippets",
+    }
+  }
+  primaryAction={
+    Object {
+      "Component": [Function],
+      "content": "Create Snippet",
+      "to": "/snippets/create",
+    }
+  }
+  title="Snippets"
+>
+  <TableCollection
+    columns={
+      Array [
+        Object {
+          "label": "Name",
+          "sortKey": [Function],
+        },
+        Object {
+          "label": "Subaccount",
+          "sortKey": [Function],
+        },
+        Object {
+          "label": "Last Updated",
+          "sortKey": [Function],
+        },
+        null,
+      ]
+    }
+    defaultSortColumn={[Function]}
+    defaultSortDirection="asc"
+    filterBox={
+      Object {
+        "exampleModifiers": Array [
+          "id",
+          "name",
+        ],
+        "itemToStringKeys": Array [
+          "name",
+          "id",
+          "subaccount_id",
+        ],
+        "show": true,
+      }
+    }
+    getRowData={[Function]}
+    pagination={true}
+    rows={
+      Array [
+        Object {
+          "id": "example-id",
+          "name": "Example Snippet",
+        },
+      ]
+    }
+  />
+</Page>
+`;
+
+exports[`ListPage renders page without primary action button 1`] = `
+<Page
+  empty={
+    Object {
+      "content": <p>
+        Build, import, edit, and reuse snippets.
+      </p>,
+      "image": [Function],
+      "show": false,
+      "title": "Manage your template snippets",
+    }
+  }
+  title="Snippets"
+>
+  <TableCollection
+    columns={
+      Array [
+        Object {
+          "label": "Name",
+          "sortKey": [Function],
+        },
+        Object {
+          "label": "Subaccount",
+          "sortKey": [Function],
+        },
+        Object {
+          "label": "Last Updated",
+          "sortKey": [Function],
+        },
+        null,
+      ]
+    }
+    defaultSortColumn={[Function]}
+    defaultSortDirection="asc"
+    filterBox={
+      Object {
+        "exampleModifiers": Array [
+          "id",
+          "name",
+        ],
+        "itemToStringKeys": Array [
+          "name",
+          "id",
+          "subaccount_id",
+        ],
+        "show": true,
+      }
+    }
+    getRowData={[Function]}
+    pagination={true}
+    rows={
+      Array [
+        Object {
+          "id": "example-id",
+          "name": "Example Snippet",
+        },
+      ]
+    }
+  />
+</Page>
+`;
+
+exports[`ListPage renders page without subaccount column 1`] = `
+<Page
+  empty={
+    Object {
+      "content": <p>
+        Build, import, edit, and reuse snippets.
+      </p>,
+      "image": [Function],
+      "show": false,
+      "title": "Manage your template snippets",
+    }
+  }
+  primaryAction={
+    Object {
+      "Component": [Function],
+      "content": "Create Snippet",
+      "to": "/snippets/create",
+    }
+  }
+  title="Snippets"
+>
+  <TableCollection
+    columns={
+      Array [
+        Object {
+          "label": "Name",
+          "sortKey": [Function],
+        },
+        Object {
+          "label": "Last Updated",
+          "sortKey": [Function],
+        },
+        null,
+      ]
+    }
+    defaultSortColumn={[Function]}
+    defaultSortDirection="asc"
+    filterBox={
+      Object {
+        "exampleModifiers": Array [
+          "id",
+          "name",
+        ],
+        "itemToStringKeys": Array [
+          "name",
+          "id",
+          "subaccount_id",
+        ],
+        "show": true,
+      }
+    }
+    getRowData={[Function]}
+    pagination={true}
+    rows={
+      Array [
+        Object {
+          "id": "example-id",
+          "name": "Example Snippet",
+        },
+      ]
+    }
+  />
+</Page>
+`;

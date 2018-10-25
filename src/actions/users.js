@@ -8,7 +8,7 @@ export function inviteUser(email, access_level) {
     meta: {
       data: { email, access_level },
       method: 'POST',
-      url: '/users/invite'
+      url: '/v1/users/invite'
     }
   };
 
@@ -21,7 +21,7 @@ export function deleteUser(username) {
     meta: {
       data: { username }, // need in reducer, no user reference in response
       method: 'DELETE',
-      url: `/users/${username}`
+      url: `/v1/users/${username}`
     }
   };
 
@@ -37,7 +37,7 @@ export function listUsers() {
     type: 'LIST_USERS',
     meta: {
       method: 'GET',
-      url: '/users',
+      url: '/v1/users',
       showErrorAlert: false
     }
   });
@@ -48,7 +48,7 @@ export function updateUser(username, data) {
     type: 'UPDATE_USER',
     meta: {
       method: 'PUT',
-      url: `/users/${username}`,
+      url: `/v1/users/${username}`,
       data: {
         ...data,
         username // need in reducer, no user reference in response
@@ -65,7 +65,7 @@ export function checkInviteToken(token) {
     type: 'CHECK_INVITE_TOKEN',
     meta: {
       method: 'GET',
-      url: `/users/invite/${token}`
+      url: `/v1/users/invite/${token}`
     }
   };
 
@@ -78,7 +78,7 @@ export function registerUser(token, data) {
     type: 'REGISTER_USER',
     meta: {
       method: 'POST',
-      url: `/users/register/${token}`,
+      url: `/v1/users/register/${token}`,
       data: { ...data, tou_accepted: true }
     }
   };

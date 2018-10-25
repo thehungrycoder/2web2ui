@@ -1,6 +1,6 @@
 window.SP = window.SP || {};
 window.SP.productionConfig = {
-  apiBase: 'http://api.sparkpost.test/api/v1',
+  apiBase: 'http://api.sparkpost.test/api',
   authentication: {
     site: {
       cookie: {

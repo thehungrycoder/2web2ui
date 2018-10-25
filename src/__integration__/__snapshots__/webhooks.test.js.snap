@@ -38,7 +38,7 @@ Array [
       "method": "post",
       "params": undefined,
       "responseType": "json",
-      "url": "/webhooks",
+      "url": "/v1/webhooks",
     },
   ],
 ]
@@ -82,7 +82,7 @@ Array [
       "method": "post",
       "params": undefined,
       "responseType": "json",
-      "url": "/webhooks",
+      "url": "/v1/webhooks",
     },
   ],
 ]
@@ -125,7 +125,7 @@ Array [
       "method": "post",
       "params": undefined,
       "responseType": "json",
-      "url": "/webhooks",
+      "url": "/v1/webhooks",
     },
   ],
 ]
@@ -149,7 +149,7 @@ Array [
       "method": "post",
       "params": undefined,
       "responseType": "json",
-      "url": "/webhooks",
+      "url": "/v1/webhooks",
     },
   ],
 ]
@@ -197,7 +197,7 @@ Array [
       "method": "post",
       "params": undefined,
       "responseType": "json",
-      "url": "/webhooks",
+      "url": "/v1/webhooks",
     },
   ],
 ]
@@ -248,7 +248,7 @@ Array [
       "method": "post",
       "params": undefined,
       "responseType": "json",
-      "url": "/webhooks",
+      "url": "/v1/webhooks",
     },
   ],
 ]

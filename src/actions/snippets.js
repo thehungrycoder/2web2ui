@@ -14,7 +14,7 @@ export const createSnippet = ({
     meta: {
       method: 'POST',
       headers: setSubaccountHeader(subaccount),
-      url: '/snippets',
+      url: '/v1/snippets',
       data: {
         // undefined content parts will not be sent with request
         content: {
@@ -25,6 +25,16 @@ export const createSnippet = ({
         name,
         shared_with_subaccounts: subaccount ? false : sharedWithSubaccounts
       }
+    }
+  })
+);
+
+export const getSnippets = () => (
+  sparkpostApiRequest({
+    type: 'GET_SNIPPETS',
+    meta: {
+      method: 'GET',
+      url: '/v1/snippets'
     }
   })
 );

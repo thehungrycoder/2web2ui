@@ -14,7 +14,7 @@ export function sendPasswordResetEmail({ user }) {
 
     return sparkpostRequest({
       method: 'POST',
-      url: '/users/password/forgot',
+      url: '/v1/users/password/forgot',
       data
     })
       .then(() => dispatch({ type: 'SEND_PASSWORD_EMAIL_SUCCESS' }))
@@ -31,7 +31,7 @@ export function resetPassword({ password, token }) {
 
     return sparkpostRequest({
       method: 'POST',
-      url: '/users/password/reset',
+      url: '/v1/users/password/reset',
       headers: { Authorization: token },
       data: { password }
     })

@@ -20,15 +20,15 @@ export class SsoAuthPage extends Component {
     this.props.ssoCheck(username);
   }
 
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps(nextProps) {
     const { ssoUser, username } = nextProps.auth;
 
     if (ssoUser) {
-      window.location.assign(`${config.apiBase}/users/saml/login/${username}`);
+      window.location.assign(`${config.apiBase}/v1/users/saml/login/${username}`);
     }
   }
 
-  render () {
+  render() {
     const { location, auth } = this.props;
     const { ssoUser } = auth;
     const { submitted } = this.state;
