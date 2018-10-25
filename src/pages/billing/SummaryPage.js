@@ -5,8 +5,8 @@ import { fetch as fetchAccount, getPlans } from 'src/actions/account';
 import { list as getSendingIps } from 'src/actions/sendingIps';
 import { selectBillingInfo } from 'src/selectors/accountBillingInfo';
 import ConditionSwitch, { defaultCase } from 'src/components/auth/ConditionSwitch';
-import { not } from 'src/helpers/conditions';
-import { isSuspendedForBilling, isSelfServeBilling } from 'src/helpers/conditions/account';
+import { all, not } from 'src/helpers/conditions';
+import { isSuspendedForBilling, isSelfServeBilling, onZuoraPlan } from 'src/helpers/conditions/account';
 import { Loading } from 'src/components';
 import BillingSummary from './components/BillingSummary';
 import ManuallyBilledBanner from './components/ManuallyBilledBanner';
@@ -33,7 +33,7 @@ export class BillingSummaryPage extends Component {
       <Page title='Billing'>
         <ConditionSwitch>
           <SuspendedForBilling condition={isSuspendedForBilling} account={account} />
-          <ManuallyBilledBanner condition={not(isSelfServeBilling)} account={account} />
+          <ManuallyBilledBanner condition={all(not(isSelfServeBilling), onZuoraPlan)} account={account} />
           <BillingSummary condition={defaultCase} account={account} {...billingInfo} invoices={invoices} sendingIps={sendingIps} />
         </ConditionSwitch>
       </Page>

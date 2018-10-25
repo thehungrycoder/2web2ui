@@ -12,6 +12,7 @@ describe('Page: BillingSummaryPage', () => {
         subscription: {}
       },
       billingInfo: {},
+      currentPlan: { code: '10.23k-1018', billingId: 'guuuiiiiiid' },
       loading: false,
       sendingIps: {
         list: []

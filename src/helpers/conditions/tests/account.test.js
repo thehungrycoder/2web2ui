@@ -1,5 +1,6 @@
 import {
   onPlan,
+  onZuoraPlan,
   onPlanWithStatus,
   onServiceLevel,
   isEnterprise,
@@ -16,6 +17,11 @@ test('Condition: onPlan', () => {
   const condition = onPlan('p1');
   expect(condition({ accountPlan: { code: 'p1' }})).toEqual(true);
   expect(condition({ accountPlan: { code: 'p2' }})).toEqual(false);
+});
+
+test('Condition: onZuoraPlan', () => {
+  expect(onZuoraPlan({ accountPlan: { billingId: 'uuuiiiiid' }})).toEqual(true);
+  expect(onZuoraPlan({ accountPlan: {}})).toEqual(false);
 });
 
 test('Condition: onPlanWithStatus', () => {
