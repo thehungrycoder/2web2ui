@@ -6,7 +6,7 @@ export const createSnippet = ({
   id,
   name,
   sharedWithSubaccounts = false,
-  subaccount,
+  subaccountId,
   text
 }) => (
   sparkpostApiRequest({
@@ -23,7 +23,7 @@ export const createSnippet = ({
         },
         id,
         name,
-        shared_with_subaccounts: subaccount ? false : sharedWithSubaccounts
+        shared_with_subaccounts: subaccountId ? false : sharedWithSubaccounts
       }
     }
   })

@@ -24,13 +24,19 @@ export class CreatePage extends React.Component {
     this.props.change('id', slugify(event.target.value));
   }
 
-  submitSnippet = ({ assignTo, content: { html, text } = {}, id, name, subaccount }) => (
+  submitSnippet = ({
+    assignTo,
+    content: { html, text } = {},
+    id,
+    name,
+    subaccount: { id: subaccountId } = {}
+  }) => (
     this.props.createSnippet({
       html,
       id,
       name,
       sharedWithSubaccounts: assignTo === 'shared',
-      subaccount,
+      subaccountId,
       text
     })
   )

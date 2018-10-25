@@ -36,9 +36,7 @@ describe('Snippet Actions', () => {
         createSnippet({
           id: 'test-snippet',
           name: 'Test Snippet',
-          subaccount: {
-            id: 'example-subaccount'
-          },
+          subaccountId: 'example-subaccount',
           text: 'Testing...'
         })
       )
