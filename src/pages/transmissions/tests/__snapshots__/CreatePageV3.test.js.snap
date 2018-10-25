@@ -1,0 +1,97 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CreatePageV3 renders disabled transmission form when sending 1`] = `
+<Page
+  empty={Object {}}
+  primaryAction={
+    Object {
+      "component": [Function],
+      "content": "Send Transmission",
+      "disabled": true,
+      "onClick": [Function],
+    }
+  }
+  title="New Transmission"
+>
+  <Panel
+    sectioned={true}
+  >
+    <form>
+      <TextField
+        disabled={true}
+        label="Who will receive this transmission?"
+        onChange={[Function]}
+        placeholder="Enter a recipient email address"
+        resize="both"
+        type="text"
+        value=""
+      />
+      <Select
+        disabled={true}
+        label="What will this transmission contain?"
+        onChange={[Function]}
+        options={
+          Array [
+            Object {
+              "label": "Select a template",
+              "value": "",
+            },
+            Object {
+              "label": "Example Template",
+              "value": "example-template",
+            },
+          ]
+        }
+      />
+    </form>
+  </Panel>
+</Page>
+`;
+
+exports[`CreatePageV3 renders transmission form 1`] = `
+<Page
+  empty={Object {}}
+  primaryAction={
+    Object {
+      "component": [Function],
+      "content": "Send Transmission",
+      "disabled": true,
+      "onClick": [Function],
+    }
+  }
+  title="New Transmission"
+>
+  <Panel
+    sectioned={true}
+  >
+    <form>
+      <TextField
+        disabled={true}
+        label="Who will receive this transmission?"
+        onChange={[Function]}
+        placeholder="Enter a recipient email address"
+        resize="both"
+        type="text"
+        value=""
+      />
+      <Select
+        disabled={true}
+        label="What will this transmission contain?"
+        onChange={[Function]}
+        options={
+          Array [
+            Object {
+              "label": "Select a template",
+              "value": "",
+            },
+            Object {
+              "label": "Example Template",
+              "value": "example-template",
+            },
+          ]
+        }
+      />
+    </form>
+  </Panel>
+</Page>
+`;

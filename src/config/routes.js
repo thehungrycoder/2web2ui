@@ -29,6 +29,10 @@ import {
   snippets
 } from 'src/pages';
 
+import CreatePageV1 from 'src/pages/transmissions/CreatePageV1';
+import CreatePageV2 from 'src/pages/transmissions/CreatePageV2';
+import CreatePageV3 from 'src/pages/transmissions/CreatePageV3.container';
+
 import LogoutPage from 'src/pages/logout/LogoutPage';
 
 import onboarding from 'src/pages/onboarding';
@@ -671,6 +675,24 @@ const routes = [
     path: '/logout',
     component: LogoutPage,
     title: 'Logging out...'
+  },
+  {
+    path: '/transmissions/1',
+    component: CreatePageV1,
+    layout: App,
+    title: 'Transmissions'
+  },
+  {
+    path: '/transmissions/2',
+    component: CreatePageV2,
+    layout: App,
+    title: 'Transmissions'
+  },
+  {
+    path: '/transmissions/3',
+    component: CreatePageV3,
+    layout: App,
+    title: 'Transmissions'
   }
 ];
 
