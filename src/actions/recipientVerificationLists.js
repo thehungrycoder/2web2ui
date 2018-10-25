@@ -1,12 +1,15 @@
-import sparkpostApiRequest from 'src/actions/helpers/sparkpostLabsRequest';
+import sparkpostLabsRequest from 'src/actions/helpers/sparkpostLabsRequest';
 
 export function createRecipientVerificationList(data) {
-  return sparkpostApiRequest({
+  return sparkpostLabsRequest({
     type: 'CREATE_RECIPIENT_VERIFICATION_LIST',
     meta: {
       method: 'POST',
-      url: '/labs/recipient-verification-api',
-      data
+      url: '/recipient-verification-api',
+      data,
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
     }
   });
 }

@@ -1,15 +1,14 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { Field, SubmissionError, reduxForm } from 'redux-form';
+import { Field, reduxForm } from 'redux-form';
 import { Panel, Banner, Button, Error } from '@sparkpost/matchbox';
 import { Loading, DownloadLink } from 'src/components';
 import styles from './RecipientVerificationPage.module.scss';
 import { required, maxFileSize } from 'src/helpers/validation';
 import FileFieldWrapper from 'src/components/reduxFormWrappers/FileFieldWrapper';
-import parseRecipientVerificationListCsv from '../helpers/csv';
+import { createRecipientVerificationList } from 'src/actions/recipientVerificationLists';
 import config from 'src/config';
 import exampleRecipientVerificationListPath from './example-recipient-verification-list.csv';
-import _ from 'lodash';
 
 const formName = 'recipientVerificationListForm';
 
@@ -18,32 +17,11 @@ export class RecipientVerificationListForm extends Component {
     selectedTab: 0
   };
 
-  parseCsv = (csv) => parseRecipientVerificationListCsv(csv)
-    .catch((csvErrors) => {
-      throw new SubmissionError({ _error: csvErrors });
-    });
-
-  // `csv` is an internal field. The outer conponent can access the parsed records in `recipients`.
-  formatValues = (values) => _.omit(values, ['csv']);
-
-  submitWithRecipients = (values, recipients) => this.props.onSubmit({
-    recipients,
-    ...this.formatValues(values)
-  });
-
-  submitWithoutRecipients = (values) => this.props.onSubmit(this.formatValues(values));
-
-  // Parse CSV, store JSON result, collect and show parsing errors
-  preSubmit = (values) => {
-    console.log('values.csv', values.csv); //eslint-disable-line no-console
-    if (values.csv) {
-      // CSV upload is optional in edit mode
-      return this.parseCsv(values.csv)
-        .then((recipients) => this.submitWithRecipients(values, recipients));
-    } else {
-      return this.submitWithoutRecipients(this.formatValues(values));
-    }
-  };
+  onSubmit = (fields) => {
+    const form_data = new FormData();
+    form_data.append('upload', fields.csv);
+    return this.props.createRecipientVerificationList(form_data);
+  }
 
   renderCsvErrors() {
     const { error } = this.props;
@@ -62,7 +40,7 @@ export class RecipientVerificationListForm extends Component {
     }
 
     const uploadHint = 'Upload a list of email addresses to verify';
-    const uploadValidators = [required, maxFileSize(config.maxUploadSizeBytes)];
+    const uploadValidators = [required, maxFileSize(config.maxRecipVerifUploadSizeBytes)];
 
     // const batchPath = '/recipient-verification';
     // const recipientPath = `/recipient-verification/${recipient}`;
@@ -72,7 +50,7 @@ export class RecipientVerificationListForm extends Component {
       //   {error ? this.renderError() : null}
       <Fragment>
         {error && this.renderCsvErrors()}
-        <form onSubmit={handleSubmit(this.preSubmit)}>
+        <form onSubmit={handleSubmit(this.onSubmit)}>
           <Panel.Section>
             <p className={styles.Paragraph}>Verify a list of your recipients by separating deliverable email addresses from rejected or undeliverable email addresses.</p>
             <Field
@@ -101,8 +79,4 @@ export class RecipientVerificationListForm extends Component {
 
 const WrappedForm = reduxForm({ form: formName })(RecipientVerificationListForm);
 
-const mapStateToProps = (state, props) => ({
-  initialValues: state.recipientVerificationLists.current
-});
-
-export default connect(mapStateToProps)(WrappedForm);
+export default connect(null, { createRecipientVerificationList })(WrappedForm);

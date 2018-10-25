@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import { Page, Tabs, Panel } from '@sparkpost/matchbox';
-import { ApiErrorBanner } from 'src/components';
 
 import { createRecipientVerificationList } from 'src/actions/recipientVerificationLists';
 import { showAlert } from 'src/actions/globalAlert';
@@ -29,18 +28,6 @@ export class RecipientVerificationPage extends Component {
     this.setState({ selectedTab: tabIdx });
   }
 
-  createRecipientVerificationList = (values) => {
-    const { createRecipientVerificationList, showAlert, history } = this.props;
-
-    return createRecipientVerificationList(values).then(() => {
-      showAlert({
-        type: 'success',
-        message: 'Created Recipient Email Verification List'
-      });
-      history.push('/recipient-verification');
-    });
-  };
-
   render() {
 
     const { selectedTab } = this.state;
@@ -56,7 +43,7 @@ export class RecipientVerificationPage extends Component {
         <Panel.Section>
           {selectedTab === 1
             ? <SingleAddressForm />
-            : <RecipientVerificationListForm onSubmit={this.createRecipientVerificationList} />
+            : <RecipientVerificationListForm />
           }
         </Panel.Section>
       </Panel>

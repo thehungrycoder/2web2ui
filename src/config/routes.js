@@ -664,7 +664,7 @@ const routes = [
   {
     path: '/recipient-verification',
     component: RecipientVerificationPage,
-    condition: all(hasGrants('recipient-verification/manage'), hasUiOption('recipientverif')),
+    condition: all(hasGrants('recipient-verification-api/manage'), hasUiOption('recipientverif')),
     layout: App,
     title: 'Recipient Email Verification',
     supportDocsSearch: 'Recipient Verification'
