@@ -3,7 +3,7 @@ import {
   createRecipientVerificationList
 } from '../recipientVerificationLists';
 
-jest.mock('src/actions/helpers/sparkpostLabsRequest');
+jest.mock('src/actions/helpers/sparkpostApiRequest');
 
 describe('Recipient Verification Actions', () => {
   snapshotActionCases('.createRecipientVerificationList', [
