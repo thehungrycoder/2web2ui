@@ -94,7 +94,7 @@ exports[`Snippet Actions .deleteSnippet when assigned to master account 1`] = `
 Array [
   Object {
     "meta": Object {
-      "data": Object {
+      "context": Object {
         "id": "test-snippet",
         "subaccountId": undefined,
       },
@@ -111,11 +111,13 @@ exports[`Snippet Actions .deleteSnippet when assigned to subaccount 1`] = `
 Array [
   Object {
     "meta": Object {
-      "data": Object {
+      "context": Object {
         "id": "test-snippet",
-        "subaccountId": undefined,
+        "subaccountId": 101,
       },
-      "headers": Object {},
+      "headers": Object {
+        "x-msys-subaccount": 101,
+      },
       "method": "DELETE",
       "url": "/snippets/test-snippet",
     },

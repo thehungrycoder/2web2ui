@@ -25,6 +25,7 @@ describe('SnippetCollection Component', () => {
         created_at: '2018-10-21T10:10:10.000Z'
       }
     ],
+    hasSubaccounts: true,
     toggleDelete: jest.fn()
   };
 
@@ -38,13 +39,14 @@ describe('SnippetCollection Component', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should render row data properly', () => {
-    const row1 = wrapper.instance().getRowData(props.snippets[0]);
-    expect(row1).toMatchSnapshot();
-    const row2 = wrapper.instance().getRowData(props.snippets[1]);
-    expect(row2).toMatchSnapshot();
-    const row3 = wrapper.instance().getRowData(props.snippets[2]);
-    expect(row3).toMatchSnapshot();
+  it('should render subaccount column', () => {
+    wrapper.setProps({ hasSubaccounts: true });
+    expect(wrapper.instance()).toMatchSnapshot();
+  });
+
+  it('should not render subaccount column', () => {
+    wrapper.setProps({ hasSubaccounts: false });
+    expect(wrapper.instance()).toMatchSnapshot();
   });
 
   it('should toggleDelete', () => {

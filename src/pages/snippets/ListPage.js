@@ -46,12 +46,13 @@ export default class ListPage extends React.Component {
   }
 
   renderCollection() {
-    const { snippets, hasSubaccounts } = this.props;
+    const { snippets, hasSubaccounts, canCreate } = this.props;
     return (
       <SnippetCollection
         snippets={snippets}
         toggleDelete={this.toggleDelete}
         hasSubaccounts={hasSubaccounts}
+        canCreate={canCreate}
       />
     );
   }
@@ -82,7 +83,7 @@ export default class ListPage extends React.Component {
         <DeleteModal
           open={this.state.showDeleteModal}
           title='Are you sure you want to delete this snippet?'
-          content={<p>The snippet will be immediately and permanently removed. This cannot be undone.</p>}
+          content={<p>The snippet will be immediately and permanently removed. All substitution references will need to be manually removed from templates. This cannot be undone.</p>}
           onDelete={this.handleDelete}
           onCancel={this.toggleDelete}
           isPending={deletePending}

@@ -14,6 +14,7 @@ exports[`ActionsTableData renders actions popover 1`] = `
         "content": "Delete",
         "onClick": [Function],
         "section": 2,
+        "visible": undefined,
       },
     ]
   }
@@ -34,6 +35,28 @@ exports[`ActionsTableData renders actions popover with subaccount specific edit 
         "content": "Delete",
         "onClick": [Function],
         "section": 2,
+        "visible": true,
+      },
+    ]
+  }
+/>
+`;
+
+exports[`ActionsTableData renders actions popover without delete link 1`] = `
+<ActionPopover
+  actions={
+    Array [
+      Object {
+        "Component": [Function],
+        "content": "Edit",
+        "section": 1,
+        "to": "/snippets/edit/example-id?subaccount=999",
+      },
+      Object {
+        "content": "Delete",
+        "onClick": [Function],
+        "section": 2,
+        "visible": false,
       },
     ]
   }

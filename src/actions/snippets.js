@@ -46,7 +46,7 @@ export const deleteSnippet = ({ id, subaccountId }) => (
       method: 'DELETE',
       url: `/snippets/${id}`,
       headers: setSubaccountHeader(subaccountId),
-      data: { id, subaccountId }
+      context: { id, subaccountId }
     }
   })
 );

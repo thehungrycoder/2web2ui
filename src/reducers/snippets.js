@@ -12,12 +12,12 @@ export default (state = initialState, { type, payload, meta }) => {
     case 'GET_SNIPPETS_FAIL':
       return { ...state, error: payload.error, loading: false };
     case 'GET_SNIPPETS_PENDING':
-      return { ...state, loading: true };
+      return { ...state, error: null, loading: true };
     case 'GET_SNIPPETS_SUCCESS':
       return { ...state, items: payload, loading: false };
 
     case 'DELETE_SNIPPET_FAIL':
-      return { ...state, error: payload.error, deletePending: false };
+      return { ...state, deletePending: false };
     case 'DELETE_SNIPPET_PENDING':
       return { ...state, deletePending: true };
     case 'DELETE_SNIPPET_SUCCESS':
@@ -25,10 +25,10 @@ export default (state = initialState, { type, payload, meta }) => {
         ...state,
         deletePending: false,
         items: state.items.filter((t) => {
-          if (meta.data.subaccountId) {
-            meta.data.subaccountId = parseInt(meta.data.subaccountId, 10);
+          if (meta.context.subaccountId) {
+            meta.context.subaccountId = parseInt(meta.context.subaccountId, 10);
           }
-          return t.id !== meta.data.id || t.subaccount_id !== meta.data.subaccountId;
+          return t.id !== meta.context.id || t.subaccount_id !== meta.context.subaccountId;
         })
       };
 

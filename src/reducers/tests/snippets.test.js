@@ -23,7 +23,12 @@ describe('Snippets Reducer', () => {
   });
 
   cases('DELETE_SNIPPET', ({ name, ...action }) => {
-    const state = { items: [{ id: 'deleteMe' }]};
+    const state = {
+      items: [
+        { id: 'deleteMe' },
+        { id: 'deleteMe', subaccount_id: 101 }
+      ]
+    };
     expect(snippetsReducer(state, action)).toMatchSnapshot();
   }, {
     'when fail': {
@@ -31,18 +36,19 @@ describe('Snippets Reducer', () => {
       payload: {
         error: new Error('Oh no!')
       },
-      meta: { data: { id: 'deleteMe' }}
+      meta: { context: { id: 'deleteMe' }}
     },
     'when pending': {
       type: 'DELETE_SNIPPET_PENDING',
-      meta: { data: { id: 'deleteMe' }}
+      meta: { context: { id: 'deleteMe' }}
     },
-    'when success': {
+    'when success (master)': {
       type: 'DELETE_SNIPPET_SUCCESS',
-      payload: [
-        { id: 'example-snippet', name: 'Example Snippet' }
-      ],
-      meta: { data: { id: 'deleteMe' }}
+      meta: { context: { id: 'deleteMe' }}
+    },
+    'when success (subaccount)': {
+      type: 'DELETE_SNIPPET_SUCCESS',
+      meta: { context: { id: 'deleteMe', subaccountId: 101 }}
     }
   });
 });

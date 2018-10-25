@@ -1,11 +1,160 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`SnippetCollection Component should not render subaccount column 1`] = `
+SnippetCollection {
+  "HEADERS": Object {
+    "actions": null,
+    "name": Object {
+      "label": "Name",
+      "sortKey": [Function],
+    },
+    "subaccount": Object {
+      "label": "Subaccount",
+      "sortKey": [Function],
+    },
+    "updateAt": Object {
+      "label": "Last Updated",
+      "sortKey": [Function],
+    },
+  },
+  "context": Object {},
+  "getRowData": [Function],
+  "props": Object {
+    "hasSubaccounts": false,
+    "snippets": Array [
+      Object {
+        "created_at": "2018-10-21T10:10:10.000Z",
+        "id": "id-1",
+        "name": "my snippet 1",
+        "subaccount_id": 101,
+      },
+      Object {
+        "created_at": "2018-10-21T10:10:10.000Z",
+        "id": "id-2",
+        "name": "my snippet 2",
+        "updated_at": "2018-10-21T10:10:10.000Z",
+      },
+      Object {
+        "created_at": "2018-10-21T10:10:10.000Z",
+        "id": "id-3",
+        "name": "my snippet 3",
+        "shared_with_subaccounts": true,
+        "updated_at": "2018-10-21T10:10:10.000Z",
+      },
+    ],
+    "toggleDelete": [MockFunction],
+  },
+  "refs": Object {},
+  "setState": [Function],
+  "state": Object {},
+  "updater": Updater {
+    "_callbacks": Array [],
+    "_renderer": ReactShallowRenderer {
+      "_context": Object {},
+      "_element": <SnippetCollection
+        hasSubaccounts={false}
+        snippets={
+          Array [
+            Object {
+              "created_at": "2018-10-21T10:10:10.000Z",
+              "id": "id-1",
+              "name": "my snippet 1",
+              "subaccount_id": 101,
+            },
+            Object {
+              "created_at": "2018-10-21T10:10:10.000Z",
+              "id": "id-2",
+              "name": "my snippet 2",
+              "updated_at": "2018-10-21T10:10:10.000Z",
+            },
+            Object {
+              "created_at": "2018-10-21T10:10:10.000Z",
+              "id": "id-3",
+              "name": "my snippet 3",
+              "shared_with_subaccounts": true,
+              "updated_at": "2018-10-21T10:10:10.000Z",
+            },
+          ]
+        }
+        toggleDelete={[MockFunction]}
+      />,
+      "_forcedUpdate": false,
+      "_instance": [Circular],
+      "_newState": null,
+      "_rendered": <TableCollection
+        columns={
+          Array [
+            Object {
+              "label": "Name",
+              "sortKey": [Function],
+            },
+            Object {
+              "label": "Last Updated",
+              "sortKey": [Function],
+            },
+            null,
+          ]
+        }
+        defaultSortColumn={[Function]}
+        defaultSortDirection="asc"
+        filterBox={
+          Object {
+            "exampleModifiers": Array [
+              "id",
+              "name",
+            ],
+            "itemToStringKeys": Array [
+              "name",
+              "id",
+              "subaccount_id",
+            ],
+            "show": true,
+          }
+        }
+        getRowData={[Function]}
+        pagination={true}
+        rows={
+          Array [
+            Object {
+              "created_at": "2018-10-21T10:10:10.000Z",
+              "id": "id-1",
+              "name": "my snippet 1",
+              "subaccount_id": 101,
+            },
+            Object {
+              "created_at": "2018-10-21T10:10:10.000Z",
+              "id": "id-2",
+              "name": "my snippet 2",
+              "updated_at": "2018-10-21T10:10:10.000Z",
+            },
+            Object {
+              "created_at": "2018-10-21T10:10:10.000Z",
+              "id": "id-3",
+              "name": "my snippet 3",
+              "shared_with_subaccounts": true,
+              "updated_at": "2018-10-21T10:10:10.000Z",
+            },
+          ]
+        }
+      />,
+      "_rendering": false,
+      "_updater": [Circular],
+    },
+  },
+  Symbol(enzyme.__setState__): [Function],
+}
+`;
+
 exports[`SnippetCollection Component should render 1`] = `
 <TableCollection
   columns={
     Array [
       Object {
         "label": "Name",
+        "sortKey": [Function],
+      },
+      Object {
+        "label": "Subaccount",
         "sortKey": [Function],
       },
       Object {
@@ -59,77 +208,151 @@ exports[`SnippetCollection Component should render 1`] = `
 />
 `;
 
-exports[`SnippetCollection Component should render row data properly 1`] = `
-Array [
-  <NameTableData
-    created_at="2018-10-21T10:10:10.000Z"
-    id="id-1"
-    name="my snippet 1"
-    subaccount_id={101}
-  />,
-  <UpdatedAtTableData
-    created_at="2018-10-21T10:10:10.000Z"
-    id="id-1"
-    name="my snippet 1"
-    subaccount_id={101}
-  />,
-  <ActionsTableData
-    created_at="2018-10-21T10:10:10.000Z"
-    id="id-1"
-    name="my snippet 1"
-    subaccount_id={101}
-    toggleDelete={[MockFunction]}
-  />,
-]
-`;
-
-exports[`SnippetCollection Component should render row data properly 2`] = `
-Array [
-  <NameTableData
-    created_at="2018-10-21T10:10:10.000Z"
-    id="id-2"
-    name="my snippet 2"
-    updated_at="2018-10-21T10:10:10.000Z"
-  />,
-  <UpdatedAtTableData
-    created_at="2018-10-21T10:10:10.000Z"
-    id="id-2"
-    name="my snippet 2"
-    updated_at="2018-10-21T10:10:10.000Z"
-  />,
-  <ActionsTableData
-    created_at="2018-10-21T10:10:10.000Z"
-    id="id-2"
-    name="my snippet 2"
-    toggleDelete={[MockFunction]}
-    updated_at="2018-10-21T10:10:10.000Z"
-  />,
-]
-`;
-
-exports[`SnippetCollection Component should render row data properly 3`] = `
-Array [
-  <NameTableData
-    created_at="2018-10-21T10:10:10.000Z"
-    id="id-3"
-    name="my snippet 3"
-    shared_with_subaccounts={true}
-    updated_at="2018-10-21T10:10:10.000Z"
-  />,
-  <UpdatedAtTableData
-    created_at="2018-10-21T10:10:10.000Z"
-    id="id-3"
-    name="my snippet 3"
-    shared_with_subaccounts={true}
-    updated_at="2018-10-21T10:10:10.000Z"
-  />,
-  <ActionsTableData
-    created_at="2018-10-21T10:10:10.000Z"
-    id="id-3"
-    name="my snippet 3"
-    shared_with_subaccounts={true}
-    toggleDelete={[MockFunction]}
-    updated_at="2018-10-21T10:10:10.000Z"
-  />,
-]
+exports[`SnippetCollection Component should render subaccount column 1`] = `
+SnippetCollection {
+  "HEADERS": Object {
+    "actions": null,
+    "name": Object {
+      "label": "Name",
+      "sortKey": [Function],
+    },
+    "subaccount": Object {
+      "label": "Subaccount",
+      "sortKey": [Function],
+    },
+    "updateAt": Object {
+      "label": "Last Updated",
+      "sortKey": [Function],
+    },
+  },
+  "context": Object {},
+  "getRowData": [Function],
+  "props": Object {
+    "hasSubaccounts": true,
+    "snippets": Array [
+      Object {
+        "created_at": "2018-10-21T10:10:10.000Z",
+        "id": "id-1",
+        "name": "my snippet 1",
+        "subaccount_id": 101,
+      },
+      Object {
+        "created_at": "2018-10-21T10:10:10.000Z",
+        "id": "id-2",
+        "name": "my snippet 2",
+        "updated_at": "2018-10-21T10:10:10.000Z",
+      },
+      Object {
+        "created_at": "2018-10-21T10:10:10.000Z",
+        "id": "id-3",
+        "name": "my snippet 3",
+        "shared_with_subaccounts": true,
+        "updated_at": "2018-10-21T10:10:10.000Z",
+      },
+    ],
+    "toggleDelete": [MockFunction],
+  },
+  "refs": Object {},
+  "setState": [Function],
+  "state": Object {},
+  "updater": Updater {
+    "_callbacks": Array [],
+    "_renderer": ReactShallowRenderer {
+      "_context": Object {},
+      "_element": <SnippetCollection
+        hasSubaccounts={true}
+        snippets={
+          Array [
+            Object {
+              "created_at": "2018-10-21T10:10:10.000Z",
+              "id": "id-1",
+              "name": "my snippet 1",
+              "subaccount_id": 101,
+            },
+            Object {
+              "created_at": "2018-10-21T10:10:10.000Z",
+              "id": "id-2",
+              "name": "my snippet 2",
+              "updated_at": "2018-10-21T10:10:10.000Z",
+            },
+            Object {
+              "created_at": "2018-10-21T10:10:10.000Z",
+              "id": "id-3",
+              "name": "my snippet 3",
+              "shared_with_subaccounts": true,
+              "updated_at": "2018-10-21T10:10:10.000Z",
+            },
+          ]
+        }
+        toggleDelete={[MockFunction]}
+      />,
+      "_forcedUpdate": false,
+      "_instance": [Circular],
+      "_newState": null,
+      "_rendered": <TableCollection
+        columns={
+          Array [
+            Object {
+              "label": "Name",
+              "sortKey": [Function],
+            },
+            Object {
+              "label": "Subaccount",
+              "sortKey": [Function],
+            },
+            Object {
+              "label": "Last Updated",
+              "sortKey": [Function],
+            },
+            null,
+          ]
+        }
+        defaultSortColumn={[Function]}
+        defaultSortDirection="asc"
+        filterBox={
+          Object {
+            "exampleModifiers": Array [
+              "id",
+              "name",
+            ],
+            "itemToStringKeys": Array [
+              "name",
+              "id",
+              "subaccount_id",
+            ],
+            "show": true,
+          }
+        }
+        getRowData={[Function]}
+        pagination={true}
+        rows={
+          Array [
+            Object {
+              "created_at": "2018-10-21T10:10:10.000Z",
+              "id": "id-1",
+              "name": "my snippet 1",
+              "subaccount_id": 101,
+            },
+            Object {
+              "created_at": "2018-10-21T10:10:10.000Z",
+              "id": "id-2",
+              "name": "my snippet 2",
+              "updated_at": "2018-10-21T10:10:10.000Z",
+            },
+            Object {
+              "created_at": "2018-10-21T10:10:10.000Z",
+              "id": "id-3",
+              "name": "my snippet 3",
+              "shared_with_subaccounts": true,
+              "updated_at": "2018-10-21T10:10:10.000Z",
+            },
+          ]
+        }
+      />,
+      "_rendering": false,
+      "_updater": [Circular],
+    },
+  },
+  Symbol(enzyme.__setState__): [Function],
+}
 `;

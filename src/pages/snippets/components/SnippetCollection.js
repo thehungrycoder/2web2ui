@@ -26,9 +26,10 @@ export class SnippetCollection extends Component {
   }
 
   getRowData = (data) => {
-    const actionsData = { ...data, toggleDelete: this.props.toggleDelete };
+    const { toggleDelete, canCreate, hasSubaccounts } = this.props;
+    const actionsData = { ...data, toggleDelete, canCreate };
 
-    if (this.props.hasSubaccounts) {
+    if (hasSubaccounts) {
       return [
         <NameTableData {...data} />,
         <SubaccountTableData {...data} />,

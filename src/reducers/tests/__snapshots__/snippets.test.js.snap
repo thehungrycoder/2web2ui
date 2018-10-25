@@ -3,10 +3,13 @@
 exports[`Snippets Reducer DELETE_SNIPPET when fail 1`] = `
 Object {
   "deletePending": false,
-  "error": [Error: Oh no!],
   "items": Array [
     Object {
       "id": "deleteMe",
+    },
+    Object {
+      "id": "deleteMe",
+      "subaccount_id": 101,
     },
   ],
 }
@@ -19,14 +22,34 @@ Object {
     Object {
       "id": "deleteMe",
     },
+    Object {
+      "id": "deleteMe",
+      "subaccount_id": 101,
+    },
   ],
 }
 `;
 
-exports[`Snippets Reducer DELETE_SNIPPET when success 1`] = `
+exports[`Snippets Reducer DELETE_SNIPPET when success (master) 1`] = `
 Object {
   "deletePending": false,
-  "items": Array [],
+  "items": Array [
+    Object {
+      "id": "deleteMe",
+      "subaccount_id": 101,
+    },
+  ],
+}
+`;
+
+exports[`Snippets Reducer DELETE_SNIPPET when success (subaccount) 1`] = `
+Object {
+  "deletePending": false,
+  "items": Array [
+    Object {
+      "id": "deleteMe",
+    },
+  ],
 }
 `;
 
@@ -42,6 +65,7 @@ Object {
 exports[`Snippets Reducer GET_SNIPPETS when pending 1`] = `
 Object {
   "deletePending": false,
+  "error": null,
   "items": Array [],
   "loading": true,
 }

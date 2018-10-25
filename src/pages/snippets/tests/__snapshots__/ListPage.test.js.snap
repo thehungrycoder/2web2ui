@@ -31,7 +31,7 @@ exports[`ListPage renders page with error banner 1`] = `
   <DeleteModal
     content={
       <p>
-        The snippet will be immediately and permanently removed. This cannot be undone.
+        The snippet will be immediately and permanently removed. All substitution references will need to be manually removed from templates. This cannot be undone.
       </p>
     }
     onCancel={[Function]}
@@ -64,6 +64,7 @@ exports[`ListPage renders page with snippet collection 1`] = `
   title="Snippets"
 >
   <SnippetCollection
+    canCreate={true}
     hasSubaccounts={true}
     snippets={
       Array [
@@ -78,7 +79,7 @@ exports[`ListPage renders page with snippet collection 1`] = `
   <DeleteModal
     content={
       <p>
-        The snippet will be immediately and permanently removed. This cannot be undone.
+        The snippet will be immediately and permanently removed. All substitution references will need to be manually removed from templates. This cannot be undone.
       </p>
     }
     onCancel={[Function]}
@@ -104,6 +105,7 @@ exports[`ListPage renders page without primary action button 1`] = `
   title="Snippets"
 >
   <SnippetCollection
+    canCreate={false}
     hasSubaccounts={true}
     snippets={
       Array [
@@ -118,7 +120,7 @@ exports[`ListPage renders page without primary action button 1`] = `
   <DeleteModal
     content={
       <p>
-        The snippet will be immediately and permanently removed. This cannot be undone.
+        The snippet will be immediately and permanently removed. All substitution references will need to be manually removed from templates. This cannot be undone.
       </p>
     }
     onCancel={[Function]}
@@ -151,6 +153,7 @@ exports[`ListPage renders page without subaccount column 1`] = `
   title="Snippets"
 >
   <SnippetCollection
+    canCreate={true}
     hasSubaccounts={false}
     snippets={
       Array [
@@ -165,7 +168,7 @@ exports[`ListPage renders page without subaccount column 1`] = `
   <DeleteModal
     content={
       <p>
-        The snippet will be immediately and permanently removed. This cannot be undone.
+        The snippet will be immediately and permanently removed. All substitution references will need to be manually removed from templates. This cannot be undone.
       </p>
     }
     onCancel={[Function]}

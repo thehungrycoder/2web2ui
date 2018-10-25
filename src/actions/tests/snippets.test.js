@@ -77,7 +77,7 @@ describe('Snippet Actions', () => {
       action: () => (
         deleteSnippet({
           id: 'test-snippet',
-          subaccount_id: 101
+          subaccountId: 101
         })
       )
     }
