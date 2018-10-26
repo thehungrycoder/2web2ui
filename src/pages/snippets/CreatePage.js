@@ -2,8 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Field, Form, reduxForm } from 'redux-form';
 import { Button, Grid, Page, Panel } from '@sparkpost/matchbox';
-import { createSnippet } from 'src/actions/snippets';
+import { createSnippet, getSnippet } from 'src/actions/snippets';
+import { getSubaccount } from 'src/actions/subaccounts';
 import ContentEditor from 'src/components/contentEditor';
+import Loading from 'src/components/loading';
 import PageLink from 'src/components/pageLink';
 import TextFieldWrapper from 'src/components/reduxFormWrappers/TextFieldWrapper';
 import SubaccountSection from 'src/components/subaccountSection';
@@ -13,6 +15,14 @@ import { hasSubaccounts } from 'src/selectors/subaccounts';
 import IdentifierHelpText from './components/IdentifierHelpText';
 
 export class CreatePage extends React.Component {
+  componentDidMount() {
+    // Sent here via duplicate button
+    if (this.props.location.state) {
+      const { id, subaccount_id } = this.props.location.state;
+      this.props.getSnippet({ id, subaccountId: subaccount_id });
+    }
+  }
+
   componentDidUpdate() {
     if (this.props.submitSucceeded) {
       this.props.history.push('/snippets');
@@ -41,7 +51,11 @@ export class CreatePage extends React.Component {
   )
 
   render() {
-    const { handleSubmit, hasSubaccounts, submitting } = this.props;
+    const { handleSubmit, hasSubaccounts, submitting, loading } = this.props;
+
+    if (loading) {
+      return <Loading />;
+    }
 
     return (
       <Page
@@ -89,18 +103,38 @@ export class CreatePage extends React.Component {
 }
 
 const formOptions = {
-  form: 'createSnippetForm'
+  form: 'createSnippetForm',
+  enableReinitialize: true
 };
 
 const mapDispatchToProps = {
-  createSnippet
+  createSnippet,
+  getSnippet,
+  getSubaccount
 };
 
 const mapStateToProps = (state, props) => ({
   hasSubaccounts: hasSubaccounts(state),
-  initialValues: {
-    assignTo: 'master' // default for SubaccountSection
-  }
+  initialValues: getInitialValues(state, props),
+  loading: state.snippets.loading
 });
+
+const getInitialValues = (state, props) => {
+  if (state.snippets.snippet) {
+    const { id, name, content, shared_with_subaccounts } = state.snippets.snippet;
+    const { subaccount_id } = props.location.state;
+    return {
+      id: `${id}-copy`,
+      name: `${name} Copy`,
+      subaccount: { id: subaccount_id },
+      assignTo: subaccount_id ? 'subaccount' : shared_with_subaccounts ? 'shared' : 'master',
+      content
+    };
+  } else {
+    return {
+      assignTo: 'master'
+    };
+  }
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(reduxForm(formOptions)(CreatePage));

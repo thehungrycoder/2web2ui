@@ -3,6 +3,7 @@ const initialState = {
   loading: false,
   deletePending: false,
   getPending: false
+  snippet: null
 };
 
 export default (state = initialState, { type, payload, meta }) => {
@@ -24,11 +25,18 @@ export default (state = initialState, { type, payload, meta }) => {
       return { ...state, item: payload, getPending: false };
 
     case 'GET_SNIPPETS_FAIL':
-      return { ...state, error: payload.error, loading: false };
+      return { ...state, snippet: null, error: payload.error, loading: false };
     case 'GET_SNIPPETS_PENDING':
-      return { ...state, error: null, loading: true };
+      return { ...state, snippet: null, error: null, loading: true };
     case 'GET_SNIPPETS_SUCCESS':
-      return { ...state, items: payload, loading: false };
+      return { ...state, snippet: null, items: payload, loading: false };
+
+    case 'GET_SNIPPET_FAIL':
+      return { ...state, snippet: null, error: payload.error, loading: false };
+    case 'GET_SNIPPET_PENDING':
+      return { ...state, snippet: null, error: null, loading: true };
+    case 'GET_SNIPPET_SUCCESS':
+      return { ...state, snippet: payload, loading: false };
 
     case 'DELETE_SNIPPET_FAIL':
       return { ...state, deletePending: false };

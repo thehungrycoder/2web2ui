@@ -12,6 +12,14 @@ const ActionsTableData = ({ id, subaccount_id, toggleDelete }) => (
         to: `/snippets/edit/${id}${setSubaccountQuery(subaccount_id)}`
       },
       {
+        Component: PageLink,
+        content: 'Duplicate',
+        to: {
+          pathname: '/snippets/create',
+          state: { id, subaccount_id }
+        }
+      },
+      {
         content: 'Delete',
         onClick: () => toggleDelete(id, subaccount_id)
       }
