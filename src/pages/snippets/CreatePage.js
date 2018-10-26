@@ -11,7 +11,7 @@ import TextFieldWrapper from 'src/components/reduxFormWrappers/TextFieldWrapper'
 import SubaccountSection from 'src/components/subaccountSection';
 import { slugify } from 'src/helpers/string';
 import { maxLength, required, slug } from 'src/helpers/validation';
-import { hasSubaccounts } from 'src/selectors/subaccounts';
+import { hasSubaccounts, selectSubaccountFromId } from 'src/selectors/subaccounts';
 import IdentifierHelpText from './components/IdentifierHelpText';
 
 export class CreatePage extends React.Component {
@@ -126,7 +126,7 @@ const getInitialValues = (state, props) => {
     return {
       id: `${id}-copy`,
       name: `${name} Copy`,
-      subaccount: { id: subaccount_id },
+      subaccount: selectSubaccountFromId(state, subaccount_id),
       assignTo: subaccount_id ? 'subaccount' : shared_with_subaccounts ? 'shared' : 'master',
       content
     };
