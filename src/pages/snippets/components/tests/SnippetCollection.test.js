@@ -1,6 +1,6 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import { SnippetCollection } from '../SnippetCollection';
+import SnippetCollection from '../SnippetCollection';
 
 describe('SnippetCollection Component', () => {
   const props = {
@@ -41,12 +41,12 @@ describe('SnippetCollection Component', () => {
 
   it('should render subaccount column', () => {
     wrapper.setProps({ hasSubaccounts: true });
-    expect(wrapper.instance()).toMatchSnapshot();
+    expect(wrapper).toMatchSnapshot();
   });
 
   it('should not render subaccount column', () => {
     wrapper.setProps({ hasSubaccounts: false });
-    expect(wrapper.instance()).toMatchSnapshot();
+    expect(wrapper).toMatchSnapshot();
   });
 
   it('should toggleDelete', () => {

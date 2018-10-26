@@ -13,16 +13,14 @@ const filterBoxConfig = {
   itemToStringKeys: ['name', 'id', 'subaccount_id']
 };
 
-export class SnippetCollection extends Component {
+export default class SnippetCollection extends Component {
 
   getColumns() {
-    const { HEADERS } = this;
+    const { headers } = this;
 
-    const columns = this.props.hasSubaccounts
-      ? [HEADERS.name, HEADERS.subaccount, HEADERS.updateAt, HEADERS.actions]
-      : [HEADERS.name, HEADERS.updateAt, HEADERS.actions];
-
-    return columns;
+    return this.props.hasSubaccounts
+      ? [headers.name, headers.subaccount, headers.updateAt, headers.actions]
+      : [headers.name, headers.updateAt, headers.actions];
   }
 
   getRowData = (data) => {
@@ -52,14 +50,14 @@ export class SnippetCollection extends Component {
         columns={this.getColumns()}
         rows={snippets}
         getRowData={this.getRowData}
-        defaultSortColumn={this.HEADERS.name.sortKey}
+        defaultSortColumn={this.headers.name.sortKey}
         filterBox={filterBoxConfig}
         pagination
       />
     );
   }
 
-  HEADERS = {
+  headers = {
     actions: null, // placeholder for the column
     name: {
       label: 'Name',
@@ -77,5 +75,3 @@ export class SnippetCollection extends Component {
     }
   }
 }
-
-export default SnippetCollection;
