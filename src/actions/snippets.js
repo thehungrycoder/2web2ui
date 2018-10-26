@@ -38,3 +38,15 @@ export const getSnippets = () => (
     }
   })
 );
+
+export const deleteSnippet = ({ id, subaccountId }) => (
+  sparkpostApiRequest({
+    type: 'DELETE_SNIPPET',
+    meta: {
+      method: 'DELETE',
+      url: `/snippets/${id}`,
+      headers: setSubaccountHeader(subaccountId),
+      context: { id, subaccountId }
+    }
+  })
+);

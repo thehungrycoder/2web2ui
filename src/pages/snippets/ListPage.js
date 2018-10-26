@@ -2,38 +2,63 @@ import React from 'react';
 import { Page } from '@sparkpost/matchbox';
 import ApiErrorBanner from 'src/components/apiErrorBanner';
 import { Templates } from 'src/components/images';
-import { TableCollection } from 'src/components/collection';
 import Loading from 'src/components/loading';
 import PageLink from 'src/components/pageLink';
-import ActionsTableData from './components/ActionsTableData';
-import NameTableData from './components/NameTableData';
-import SubaccountTableData from './components/SubaccountTableData';
-import UpdatedAtTableData from './components/UpdatedAtTableData';
+import { DeleteModal } from 'src/components';
+import SnippetCollection from './components/SnippetCollection';
 
 export default class ListPage extends React.Component {
+
+  state = {
+    showDeleteModal: false,
+    snippetToDelete: {}
+  }
+
   componentDidMount() {
     this.props.getSnippets();
   }
 
-  Row = (data) => {
-    if (this.props.hasSubaccounts) {
-      return [
-        <NameTableData {...data} />,
-        <SubaccountTableData {...data} />,
-        <UpdatedAtTableData {...data} />,
-        <ActionsTableData {...data} />
-      ];
-    }
+  toggleDelete = (id, subaccount_id) => {
+    this.setState({
+      showDeleteModal: !this.state.showDeleteModal,
+      snippetToDelete: { id, subaccountId: subaccount_id }
+    });
+  }
 
-    return [
-      <NameTableData {...data} />,
-      <UpdatedAtTableData {...data} />,
-      <ActionsTableData {...data} />
-    ];
+  handleDelete = () => {
+    const { id, subaccountId } = this.state.snippetToDelete;
+
+    return this.props.deleteSnippet({ id, subaccountId }).then(() => {
+      this.props.showAlert({ type: 'success', message: 'Snippet deleted' });
+      this.toggleDelete();
+    });
+  }
+
+  renderError() {
+    const { error, getSnippets } = this.props;
+    return (
+      <ApiErrorBanner
+        errorDetails={error.message}
+        message="Sorry, we seem to have had some trouble loading your snippets."
+        reload={getSnippets}
+      />
+    );
+  }
+
+  renderCollection() {
+    const { snippets, hasSubaccounts, canCreate } = this.props;
+    return (
+      <SnippetCollection
+        snippets={snippets}
+        toggleDelete={this.toggleDelete}
+        hasSubaccounts={hasSubaccounts}
+        canCreate={canCreate}
+      />
+    );
   }
 
   render() {
-    const { canCreate, error, getSnippets, hasSubaccounts, loading, snippets } = this.props;
+    const { canCreate, error, loading, snippets, deletePending } = this.props;
 
     if (loading) {
       return <Loading />;
@@ -54,49 +79,16 @@ export default class ListPage extends React.Component {
           content: <p>Build, import, edit, and reuse snippets.</p>
         }}
       >
-        {error ? (
-          <ApiErrorBanner
-            errorDetails={error.message}
-            message="Sorry, we seem to have had some trouble loading your snippets."
-            reload={getSnippets}
-          />
-        ) : (
-          <TableCollection
-            columns={(
-              hasSubaccounts
-                ? [HEADERS.name, HEADERS.subaccount, HEADERS.updateAt, HEADERS.actions]
-                : [HEADERS.name, HEADERS.updateAt, HEADERS.actions]
-            )}
-            defaultSortColumn={HEADERS.name.sortKey}
-            filterBox={{
-              show: true,
-              exampleModifiers: ['id', 'name'],
-              itemToStringKeys: ['name', 'id', 'subaccount_id']
-            }}
-            getRowData={this.Row}
-            rows={snippets}
-            pagination
-          />
-        )}
+        {error ? this.renderError() : this.renderCollection()}
+        <DeleteModal
+          open={this.state.showDeleteModal}
+          title='Are you sure you want to delete this snippet?'
+          content={<p>The snippet will be immediately and permanently removed. All substitution references will need to be manually removed from templates. This cannot be undone.</p>}
+          onDelete={this.handleDelete}
+          onCancel={this.toggleDelete}
+          isPending={deletePending}
+        />
       </Page>
     );
   }
 }
-
-const HEADERS = {
-  actions: null, // placeholder for the column
-  name: {
-    label: 'Name',
-    sortKey: ({ id, name }) => (name || id).toLowerCase() // name may not be present
-  },
-  subaccount: {
-    label: 'Subaccount',
-    sortKey: ({ subaccount_id, shared_with_subaccounts }) => (
-      subaccount_id || shared_with_subaccounts
-    )
-  },
-  updateAt: {
-    label: 'Last Updated',
-    sortKey: ({ created_at, updated_at }) => updated_at || created_at
-  }
-};

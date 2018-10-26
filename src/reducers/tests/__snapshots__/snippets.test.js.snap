@@ -1,33 +1,85 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Snippets Reducer DELETE_SNIPPET when fail 1`] = `
+Object {
+  "deletePending": false,
+  "items": Array [
+    Object {
+      "id": "deleteMe",
+    },
+    Object {
+      "id": "deleteMe",
+      "subaccount_id": 101,
+    },
+  ],
+}
+`;
+
+exports[`Snippets Reducer DELETE_SNIPPET when pending 1`] = `
+Object {
+  "deletePending": true,
+  "items": Array [
+    Object {
+      "id": "deleteMe",
+    },
+    Object {
+      "id": "deleteMe",
+      "subaccount_id": 101,
+    },
+  ],
+}
+`;
+
+exports[`Snippets Reducer DELETE_SNIPPET when success (master) 1`] = `
+Object {
+  "deletePending": false,
+  "items": Array [
+    Object {
+      "id": "deleteMe",
+      "subaccount_id": 101,
+    },
+  ],
+}
+`;
+
+exports[`Snippets Reducer DELETE_SNIPPET when success (subaccount) 1`] = `
+Object {
+  "deletePending": false,
+  "items": Array [
+    Object {
+      "id": "deleteMe",
+    },
+  ],
+}
+`;
+
 exports[`Snippets Reducer GET_SNIPPETS when fail 1`] = `
 Object {
+  "deletePending": false,
   "error": [Error: Oh no!],
+  "items": Array [],
   "loading": false,
 }
 `;
 
 exports[`Snippets Reducer GET_SNIPPETS when pending 1`] = `
 Object {
+  "deletePending": false,
+  "error": null,
+  "items": Array [],
   "loading": true,
 }
 `;
 
 exports[`Snippets Reducer GET_SNIPPETS when success 1`] = `
 Object {
+  "deletePending": false,
   "items": Array [
     Object {
       "id": "example-snippet",
       "name": "Example Snippet",
     },
   ],
-  "loading": false,
-}
-`;
-
-exports[`Snippets Reducer returns default state 1`] = `
-Object {
-  "items": Array [],
   "loading": false,
 }
 `;
