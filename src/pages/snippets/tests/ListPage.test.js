@@ -13,7 +13,7 @@ describe('ListPage', () => {
     />
   );
 
-  it('renders page with table collect', () => {
+  it('renders page with snippet collection', () => {
     expect(subject()).toMatchSnapshot();
   });
 
