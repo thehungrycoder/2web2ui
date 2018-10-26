@@ -32,9 +32,16 @@ AWS CodePipeline is setup with the following components:
   
   * **CodePipeline**: 
   CodePipeline glues the build and deploy steps together. When a change is pushed to `master`, it kicks of the pipeline causing CodeBuild and CodeDeploy work sequentially. 
-  After CodeDeploy successfully deploys to Tst/Staging, it awaits for approval to deploy to Production. Currently this process is manual and you need to approve it from Pipeline UI Console. FE-565 will allow doing it directly from Slack. 
+  After CodeDeploy successfully deploys to Tst/Staging, it awaits for approval to deploy to Production. 
+  You can approval Production deployment either from CodePipeline UI Console or by clicking **Aprove** button in the slack notification. More about it below.
   
-  Once approved, it triggers CodeDeploy to start deployment to Production.   
+  Once approved, it triggers CodeDeploy to start deployment to Production.
+  
+  * **Slack Notification**:
+  Pipeline will notify action status to `#team-ux-alerts` channel in addition to CodePipeline UI. 
+  A new slack app `prime_msysmc` is deployed for this purpose. You must add it in the channel. This is deployed manually hence doesn't have an associated cloudformation template.  
+  See `aws-codepipeline-slack` repo for more info.  
+     
   
 ## Workflow
   - Create PR for your changes
@@ -42,7 +49,7 @@ AWS CodePipeline is setup with the following components:
   - Merge into master
     (This will kick of deployment until staging)
   - Verify on Staging
-  - Approve Production deployment from AWS Pipeline UI Console
+  - Approve Production deployment from AWS Pipeline UI Console or from Slack message click **Approve** button
   - Verify on Production
   - Rollback if needed (more on this below)
 
@@ -88,7 +95,10 @@ Note: you can either revert the revert commit later using `git revert` or branch
     * `sparkposttest`: https://us-west-2.console.aws.amazon.com/codesuite/codepipeline/pipelines/PhoenixUI-UAT/view?region=us-west-2
 
 * BuildSpec & AppSpec
-    BuildSpec (for CodeBuild) and AppSpec (for CodeDeploy) are in `automation-tools` repo inside `phoenix-ui/aws`. 
+    BuildSpec (for CodeBuild) and AppSpec (for CodeDeploy) are in `automation-tools` repo inside `phoenix-ui/aws`.
+
+* Notification 
+  See *Deployements* section in `aws-codepipeline-slack` readme.
 
 ## Modifying The CloudFormation Stack
 In case you need to modify the stack, update the corresponding template in ux-cloudformation repo and create a PR. Run and verify the stack in `sparkposttest` if needed. 
