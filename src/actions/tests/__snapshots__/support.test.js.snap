@@ -9,7 +9,7 @@ Object {
       "subject": "sub",
     },
     "method": "POST",
-    "url": "/integrations/support/ticket",
+    "url": "/v1/integrations/support/ticket",
   },
   "type": "CREATE_TICKET",
 }

@@ -6,7 +6,7 @@ export function list() {
     type: 'LIST_SENDING_DOMAINS',
     meta: {
       method: 'GET',
-      url: '/sending-domains'
+      url: '/v1/sending-domains'
     }
   });
 }
@@ -16,7 +16,7 @@ export function get(id) {
     type: 'GET_SENDING_DOMAIN',
     meta: {
       method: 'GET',
-      url: `/sending-domains/${id}`,
+      url: `/v1/sending-domains/${id}`,
       id,
       showErrorAlert: false
     }
@@ -30,7 +30,7 @@ export function create(data) {
     type: 'CREATE_SENDING_DOMAIN',
     meta: {
       method: 'POST',
-      url: '/sending-domains',
+      url: '/v1/sending-domains',
       headers: setSubaccountHeader(subaccount),
       data: { ...formData, shared_with_subaccounts: assignTo === 'shared' }
     }
@@ -44,7 +44,7 @@ export function update({ id, subaccount, ...data }) {
     type: 'UPDATE_SENDING_DOMAIN',
     meta: {
       method: 'PUT',
-      url: `/sending-domains/${id}`,
+      url: `/v1/sending-domains/${id}`,
       data,
       headers
     }
@@ -56,7 +56,7 @@ export function remove({ id, subaccount }) {
     type: 'DELETE_SENDING_DOMAIN',
     meta: {
       method: 'DELETE',
-      url: `/sending-domains/${id}`,
+      url: `/v1/sending-domains/${id}`,
       headers: setSubaccountHeader(subaccount)
     }
   });
@@ -67,7 +67,7 @@ function verify({ id, subaccount, type, ...rest }) {
     type: `VERIFY_SENDING_DOMAIN_${type.toUpperCase()}`,
     meta: {
       method: 'POST',
-      url: `/sending-domains/${id}/verify`,
+      url: `/v1/sending-domains/${id}/verify`,
       headers: setSubaccountHeader(subaccount),
       data: {
         ...rest,
@@ -108,7 +108,7 @@ function verifyToken({ id, subaccount, type, token }) {
     type: 'VERIFY_TOKEN',
     meta: {
       method: 'POST',
-      url: `/sending-domains/${id}/verify`,
+      url: `/v1/sending-domains/${id}/verify`,
       headers: setSubaccountHeader(subaccount),
       data: { [`${type}_token`]: token },
       type,

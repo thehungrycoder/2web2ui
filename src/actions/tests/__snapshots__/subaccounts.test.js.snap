@@ -16,7 +16,7 @@ Array [
         "name": "Test Example",
       },
       "method": "PUT",
-      "url": "subaccounts/123",
+      "url": "/v1/subaccounts/123",
     },
     "type": "EDIT_SUBACCOUNT",
   },
@@ -29,7 +29,7 @@ Array [
     "meta": Object {
       "method": "GET",
       "showErrorAlert": false,
-      "url": "subaccounts/123",
+      "url": "/v1/subaccounts/123",
     },
     "type": "GET_SUBACCOUNT",
   },
@@ -42,7 +42,7 @@ Array [
     "meta": Object {
       "method": "GET",
       "showErrorAlert": false,
-      "url": "/subaccounts",
+      "url": "/v1/subaccounts",
     },
     "type": "LIST_SUBACCOUNTS",
   },

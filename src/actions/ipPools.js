@@ -5,7 +5,7 @@ export function listPools() {
     type: 'LIST_IP_POOLS',
     meta: {
       method: 'GET',
-      url: '/ip-pools',
+      url: '/v1/ip-pools',
       showErrorAlert: false
     }
   });
@@ -16,7 +16,7 @@ export function createPool({ name, signing_domain }) {
     type: 'CREATE_IP_POOL',
     meta: {
       method: 'POST',
-      url: '/ip-pools',
+      url: '/v1/ip-pools',
       data: { name, signing_domain }
     }
   });
@@ -27,7 +27,7 @@ export function updatePool(id, update) {
     type: 'UPDATE_IP_POOL',
     meta: {
       method: 'PUT',
-      url: `/ip-pools/${id}`,
+      url: `/v1/ip-pools/${id}`,
       data: update
     }
   });
@@ -38,7 +38,7 @@ export function deletePool(id) {
     type: 'DELETE_IP_POOL',
     meta: {
       method: 'DELETE',
-      url: `/ip-pools/${id}`
+      url: `/v1/ip-pools/${id}`
     }
   });
 }
@@ -48,7 +48,7 @@ export function getPool(id) {
     type: 'GET_IP_POOL',
     meta: {
       method: 'GET',
-      url: `/ip-pools/${id}`
+      url: `/v1/ip-pools/${id}`
     }
   });
 }

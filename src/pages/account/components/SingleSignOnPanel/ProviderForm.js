@@ -56,7 +56,7 @@ export class ProviderForm extends React.Component {
               following callback URL.
             </p>
             <p>
-              <CopyField value={`${config.apiBase}/users/saml/consume`} />
+              <CopyField value={`${config.apiBase}/v1/users/saml/consume`} />
             </p>
           </Panel.Section>
           <Panel.Section className={styles.step}>

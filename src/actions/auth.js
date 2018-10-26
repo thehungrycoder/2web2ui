@@ -127,7 +127,7 @@ export function ssoCheck(username) {
     type: 'SSO_CHECK',
     meta: {
       method: 'GET',
-      url: `/users/${username}/saml`,
+      url: `/v1/users/${username}/saml`,
       username
     }
   });

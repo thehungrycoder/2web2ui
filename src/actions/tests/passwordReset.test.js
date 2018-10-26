@@ -11,29 +11,29 @@ describe('Action Creator: Password', () => {
   });
 
   describe('sendPasswordResetEmail', () => {
-    it('sends with username', async() => {
+    it('sends with username', async () => {
       const thunk = passwordReset.sendPasswordResetEmail({ user: 'username' });
       await thunk(dispatchMock);
       expect(sparkpostRequest).toHaveBeenCalledWith({
         data: { username: 'username' },
         method: 'POST',
-        url: '/users/password/forgot'
+        url: '/v1/users/password/forgot'
       });
       expect(dispatchMock.mock.calls).toMatchSnapshot();
     });
 
-    it('sends with email', async() => {
+    it('sends with email', async () => {
       const thunk = passwordReset.sendPasswordResetEmail({ user: 'user@email.com' });
       await thunk(dispatchMock);
       expect(sparkpostRequest).toHaveBeenCalledWith({
         data: { email: 'user@email.com' },
         method: 'POST',
-        url: '/users/password/forgot'
+        url: '/v1/users/password/forgot'
       });
       expect(dispatchMock.mock.calls).toMatchSnapshot();
     });
 
-    it('handles error', async() => {
+    it('handles error', async () => {
       sparkpostRequest.mockImplementation(() => Promise.reject('error'));
       const thunk = passwordReset.sendPasswordResetEmail({ user: 'user@email.com' });
       await thunk(dispatchMock);
@@ -42,19 +42,19 @@ describe('Action Creator: Password', () => {
   });
 
   describe('resetPassword', () => {
-    it('handles success', async() => {
+    it('handles success', async () => {
       const thunk = passwordReset.resetPassword({ password: '12345', token: 'faketoken' });
       await thunk(dispatchMock);
       expect(sparkpostRequest).toHaveBeenCalledWith({
         data: { password: '12345' },
         method: 'POST',
         headers: { Authorization: 'faketoken' },
-        url: '/users/password/reset'
+        url: '/v1/users/password/reset'
       });
       expect(dispatchMock.mock.calls).toMatchSnapshot();
     });
 
-    it('handles error', async() => {
+    it('handles error', async () => {
       sparkpostRequest.mockImplementation(() => Promise.reject('error'));
       const thunk = passwordReset.resetPassword({ password: '12345', token: 'faketoken' });
       await thunk(dispatchMock);

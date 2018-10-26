@@ -15,7 +15,7 @@ Object {
     "headers": Object {},
     "method": "PUT",
     "showErrorAlert": false,
-    "url": "/suppression-list",
+    "url": "/v1/suppression-list",
   },
   "type": "CREATE_OR_UPDATE_SUPPRESSIONS",
 }
@@ -41,7 +41,7 @@ Object {
     "headers": Object {},
     "method": "PUT",
     "showErrorAlert": false,
-    "url": "/suppression-list",
+    "url": "/v1/suppression-list",
   },
   "type": "CREATE_OR_UPDATE_SUPPRESSIONS",
 }
@@ -67,7 +67,7 @@ Object {
     "headers": Object {},
     "method": "PUT",
     "showErrorAlert": false,
-    "url": "/suppression-list",
+    "url": "/v1/suppression-list",
   },
   "type": "CREATE_OR_UPDATE_SUPPRESSIONS",
 }
@@ -88,7 +88,7 @@ Object {
     "headers": Object {},
     "method": "PUT",
     "showErrorAlert": false,
-    "url": "/suppression-list",
+    "url": "/v1/suppression-list",
   },
   "type": "CREATE_OR_UPDATE_SUPPRESSIONS",
 }
@@ -114,7 +114,7 @@ Object {
     "headers": Object {},
     "method": "PUT",
     "showErrorAlert": false,
-    "url": "/suppression-list",
+    "url": "/v1/suppression-list",
   },
   "type": "CREATE_OR_UPDATE_SUPPRESSIONS",
 }
@@ -137,7 +137,7 @@ Object {
     },
     "method": "PUT",
     "showErrorAlert": false,
-    "url": "/suppression-list",
+    "url": "/v1/suppression-list",
   },
   "type": "CREATE_OR_UPDATE_SUPPRESSIONS",
 }
@@ -158,7 +158,7 @@ Object {
     "headers": Object {},
     "method": "PUT",
     "showErrorAlert": false,
-    "url": "/suppression-list",
+    "url": "/v1/suppression-list",
   },
   "type": "CREATE_OR_UPDATE_SUPPRESSIONS",
 }
@@ -216,7 +216,7 @@ Array [
         },
         "method": "PUT",
         "showErrorAlert": false,
-        "url": "/suppression-list",
+        "url": "/v1/suppression-list",
       },
       "type": "CREATE_OR_UPDATE_SUPPRESSIONS",
     },

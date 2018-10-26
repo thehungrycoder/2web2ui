@@ -6,7 +6,7 @@ export function listAbTests() {
     type: 'LIST_AB_TESTS',
     meta: {
       method: 'GET',
-      url: '/ab-test',
+      url: '/v1/ab-test',
       showErrorAlert: false
     }
   });
@@ -19,7 +19,7 @@ export function createAbTestDraft({ abTest, subaccount }) {
     type: 'CREATE_AB_TEST_DRAFT',
     meta: {
       method: 'POST',
-      url: '/ab-test/draft',
+      url: '/v1/ab-test/draft',
       data: abTest,
       headers
     }
@@ -31,7 +31,7 @@ export function getAbTest({ id, version, subaccountId, type = 'GET_AB_TEST' }) {
     type,
     meta: {
       method: 'GET',
-      url: `/ab-test/${id}`,
+      url: `/v1/ab-test/${id}`,
       showErrorAlert: false,
       headers: setSubaccountHeader(subaccountId),
       params: {
@@ -46,7 +46,7 @@ export function deleteAbTest({ id, subaccountId }) {
     type: 'DELETE_AB_TEST',
     meta: {
       method: 'DELETE',
-      url: `/ab-test/${id}`,
+      url: `/v1/ab-test/${id}`,
       headers: setSubaccountHeader(subaccountId),
       data: { id, subaccountId }
     }
@@ -58,7 +58,7 @@ export function cancelAbTest({ id, subaccountId }) {
     type: 'CANCEL_AB_TEST',
     meta: {
       method: 'POST',
-      url: `/ab-test/${id}/cancel`,
+      url: `/v1/ab-test/${id}/cancel`,
       headers: setSubaccountHeader(subaccountId),
       id, subaccountId
     }
@@ -70,7 +70,7 @@ export function scheduleAbTest({ data, id, subaccountId }) {
     type: 'SCHEDULE_AB_TEST',
     meta: {
       method: 'POST',
-      url: `/ab-test/draft/${id}/schedule`,
+      url: `/v1/ab-test/draft/${id}/schedule`,
       headers: setSubaccountHeader(subaccountId),
       data
     }
@@ -87,7 +87,7 @@ export function updateDraft({ data, id, subaccountId }) {
     type: 'UPDATE_AB_TEST_DRAFT',
     meta: {
       method: 'PUT',
-      url: `/ab-test/draft/${id}`,
+      url: `/v1/ab-test/draft/${id}`,
       headers: setSubaccountHeader(subaccountId),
       data
     }
@@ -99,7 +99,7 @@ export function updateAbTest({ data, id, subaccountId, type = 'UPDATE_AB_TEST' }
     type,
     meta: {
       method: 'PUT',
-      url: `/ab-test/${id}`,
+      url: `/v1/ab-test/${id}`,
       headers: setSubaccountHeader(subaccountId),
       data
     }

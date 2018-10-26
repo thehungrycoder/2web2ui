@@ -14,7 +14,7 @@ export const createSnippet = ({
     meta: {
       method: 'POST',
       headers: setSubaccountHeader(subaccount),
-      url: '/snippets',
+      url: '/v1/snippets',
       data: {
         // undefined content parts will not be sent with request
         content: {
@@ -34,7 +34,7 @@ export const getSnippets = () => (
     type: 'GET_SNIPPETS',
     meta: {
       method: 'GET',
-      url: '/snippets'
+      url: '/v1/snippets'
     }
   })
 );

@@ -13,7 +13,7 @@ Array [
         "context": "update-billing",
       },
       "responseType": "json",
-      "url": "/account/cors-data",
+      "url": "/v1/account/cors-data",
     },
   ],
   Array [
@@ -57,7 +57,7 @@ Array [
       "method": "put",
       "params": undefined,
       "responseType": "json",
-      "url": "/account/subscription",
+      "url": "/v1/account/subscription",
     },
   ],
   Array [
@@ -69,7 +69,7 @@ Array [
       "method": "post",
       "params": undefined,
       "responseType": "json",
-      "url": "/account/subscription/check",
+      "url": "/v1/account/subscription/check",
     },
   ],
   Array [
@@ -81,7 +81,7 @@ Array [
       "method": "post",
       "params": undefined,
       "responseType": "json",
-      "url": "/account/billing/collect",
+      "url": "/v1/account/billing/collect",
     },
   ],
   Array [
@@ -95,7 +95,7 @@ Array [
         "include": "usage,billing",
       },
       "responseType": "json",
-      "url": "/account",
+      "url": "/v1/account",
     },
   ],
 ]
@@ -114,7 +114,7 @@ Array [
       "method": "put",
       "params": undefined,
       "responseType": "json",
-      "url": "/account/subscription",
+      "url": "/v1/account/subscription",
     },
   ],
   Array [
@@ -128,7 +128,7 @@ Array [
         "include": "usage,billing",
       },
       "responseType": "json",
-      "url": "/account",
+      "url": "/v1/account",
     },
   ],
 ]
@@ -159,7 +159,7 @@ Array [
         "context": "create-account",
       },
       "responseType": "json",
-      "url": "/account/cors-data",
+      "url": "/v1/account/cors-data",
     },
   ],
   Array [
@@ -223,7 +223,7 @@ Array [
       "method": "post",
       "params": undefined,
       "responseType": "json",
-      "url": "/account/subscription/check",
+      "url": "/v1/account/subscription/check",
     },
   ],
   Array [
@@ -237,7 +237,7 @@ Array [
         "include": "usage,billing",
       },
       "responseType": "json",
-      "url": "/account",
+      "url": "/v1/account",
     },
   ],
 ]
@@ -261,7 +261,7 @@ Array [
       "method": "put",
       "params": undefined,
       "responseType": "json",
-      "url": "/account/billing",
+      "url": "/v1/account/billing",
     },
   ],
   Array [
@@ -275,7 +275,7 @@ Array [
         "include": "usage,billing",
       },
       "responseType": "json",
-      "url": "/account",
+      "url": "/v1/account",
     },
   ],
 ]
@@ -294,7 +294,7 @@ Array [
         "context": "update-billing",
       },
       "responseType": "json",
-      "url": "/account/cors-data",
+      "url": "/v1/account/cors-data",
     },
   ],
   Array [
@@ -336,7 +336,7 @@ Array [
       "method": "post",
       "params": undefined,
       "responseType": "json",
-      "url": "/account/subscription/check",
+      "url": "/v1/account/subscription/check",
     },
   ],
   Array [
@@ -348,7 +348,7 @@ Array [
       "method": "post",
       "params": undefined,
       "responseType": "json",
-      "url": "/account/billing/collect",
+      "url": "/v1/account/billing/collect",
     },
   ],
   Array [
@@ -362,7 +362,7 @@ Array [
         "include": "usage,billing",
       },
       "responseType": "json",
-      "url": "/account",
+      "url": "/v1/account",
     },
   ],
 ]

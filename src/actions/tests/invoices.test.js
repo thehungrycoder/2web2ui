@@ -13,7 +13,7 @@ describe('Action Creator: Invoices', () => {
         type: 'LIST_INVOICES',
         meta: {
           method: 'GET',
-          url: '/account/invoices'
+          url: '/v1/account/invoices'
         }
       }
     );
@@ -27,7 +27,7 @@ describe('Action Creator: Invoices', () => {
         type: 'GET_INVOICE',
         meta: {
           method: 'GET',
-          url: '/account/invoices/thisId',
+          url: '/v1/account/invoices/thisId',
           responseType: 'blob',
           invoiceId: 'thisId'
         }
