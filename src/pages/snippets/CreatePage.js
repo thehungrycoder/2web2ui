@@ -119,10 +119,11 @@ const mapStateToProps = (state, props) => ({
   loading: state.snippets.loading
 });
 
-const getInitialValues = (state, props) => {
+export const getInitialValues = (state, props) => {
   if (state.snippets.snippet) {
     const { id, name, content, shared_with_subaccounts } = state.snippets.snippet;
     const { subaccount_id } = props.location.state;
+
     return {
       id: `${id}-copy`,
       name: `${name} Copy`,

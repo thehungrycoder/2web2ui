@@ -72,6 +72,48 @@ exports[`CreatePage .submitSnippet succeeds with shared subaccounts assignment 1
 }
 `;
 
+exports[`CreatePage duplicate succeeds master account 1`] = `
+Object {
+  "assignTo": "master",
+  "content": Object {
+    "html": "hello",
+    "text": "world",
+  },
+  "id": "testid-copy",
+  "name": "Testing Snippets Copy",
+  "subaccount": undefined,
+}
+`;
+
+exports[`CreatePage duplicate succeeds shared with subaccounts 1`] = `
+Object {
+  "assignTo": "shared",
+  "content": Object {
+    "html": "hello",
+    "text": "world",
+  },
+  "id": "testid-copy",
+  "name": "Testing Snippets Copy",
+  "subaccount": undefined,
+}
+`;
+
+exports[`CreatePage duplicate succeeds subaccount 1`] = `
+Object {
+  "assignTo": "subaccount",
+  "content": Object {
+    "html": "hello",
+    "text": "world",
+  },
+  "id": "testid-copy",
+  "name": "Testing Snippets Copy",
+  "subaccount": Object {
+    "id": 101,
+    "name": "bestsub",
+  },
+}
+`;
+
 exports[`CreatePage renders form 1`] = `
 <Page
   breadcrumbAction={

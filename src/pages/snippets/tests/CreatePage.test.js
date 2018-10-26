@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import cases from 'jest-in-case';
-import { CreatePage } from '../CreatePage';
+import { CreatePage, getInitialValues } from '../CreatePage';
 
 describe('CreatePage', () => {
   const subject = (props) => shallow(
@@ -9,18 +9,34 @@ describe('CreatePage', () => {
   );
 
   it('renders form', () => {
-    expect(subject()).toMatchSnapshot();
+    expect(subject({ location: {}})).toMatchSnapshot();
   });
 
   it('renders form with subaccount assignment', () => {
-    expect(subject({ hasSubaccounts: true })).toMatchSnapshot();
+    expect(subject({ hasSubaccounts: true, location: {}})).toMatchSnapshot();
+  });
+
+  it('gets a snippet if passed data from router', () => {
+    const getSnippet = jest.fn(() => Promise.resolve());
+    const props = {
+      getSnippet,
+      location: {
+        state: {
+          id: 'testid',
+          subaccount_id: 101
+        }
+      }
+    };
+    subject(props);
+    expect(getSnippet).toHaveBeenCalledWith({ id: 'testid', subaccountId: 101 });
   });
 
   it('redirects when submit succeeds', () => {
     const props = {
       history: {
         push: jest.fn()
-      }
+      },
+      location: {}
     };
 
     const wrapper = subject(props);
@@ -31,7 +47,8 @@ describe('CreatePage', () => {
 
   it('triggers create snippet action when primary action is clicked', () => {
     const props = {
-      createSnippet: jest.fn(() => Promise.resolve())
+      createSnippet: jest.fn(() => Promise.resolve()),
+      location: {}
     };
     const wrapper = subject(props);
 
@@ -42,7 +59,7 @@ describe('CreatePage', () => {
   describe('.submitSnippet', () => {
     cases('succeeds', ({ name, ...values }) => {
       const createSnippet = jest.fn(() => Promise.resolve());
-      const wrapper = subject({ createSnippet });
+      const wrapper = subject({ createSnippet, location: {}});
 
       wrapper.prop('primaryAction').onClick({
         ...values,
@@ -69,6 +86,49 @@ describe('CreatePage', () => {
         subaccount: {
           id: 'example-subaccount'
         }
+      }
+    });
+  });
+
+  describe('duplicate', () => {
+    cases('succeeds', ({ name, ...values }) => {
+      const state = {
+        subaccounts: {
+          list: [{ id: values.subaccount_id, name: 'bestsub' }]
+        },
+        snippets: {
+          snippet: {
+            ...values,
+            id: 'testid',
+            name: 'Testing Snippets',
+            content: {
+              html: 'hello',
+              text: 'world'
+            }
+          }
+        }
+      };
+      const props = {
+        location: {
+          state: {
+            id: 'testid',
+            subaccount_id: values.subaccount_id
+          }
+        }
+      };
+
+      expect(getInitialValues(state, props)).toMatchSnapshot();
+    }, {
+      'master account': {
+        assignTo: 'master'
+      },
+      'shared with subaccounts': {
+        assignTo: 'shared',
+        shared_with_subaccounts: true
+      },
+      'subaccount': {
+        assignTo: 'subaccount',
+        subaccount_id: 101
       }
     });
   });
