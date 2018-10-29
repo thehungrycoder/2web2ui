@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
-import { Panel, Button } from '@sparkpost/matchbox';
+import { Button } from '@sparkpost/matchbox';
 import { Loading, ApiErrorBanner, TextFieldWrapper } from 'src/components';
 import styles from './RecipientVerificationPage.module.scss';
 import { required, maxLength } from 'src/helpers/validation';
