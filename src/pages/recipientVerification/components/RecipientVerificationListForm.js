@@ -16,7 +16,7 @@ export class RecipientVerificationListForm extends Component {
 
   createForm = (fields) => {
     const form_data = new FormData();
-    form_data.append('upload', fields.csv);
+    form_data.append('myupload', fields.csv);
     return this.props.uploadRecipientVerificationList(form_data);
   }
 
@@ -31,7 +31,7 @@ export class RecipientVerificationListForm extends Component {
 
     return (
       <Fragment>
-        {error && this.renderCsvErrors()}
+        {error}
         <form onSubmit={handleSubmit(this.createForm)}>
           <p className={styles.Paragraph}>{headerContent}</p>
           <Field

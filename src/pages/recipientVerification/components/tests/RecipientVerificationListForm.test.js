@@ -47,11 +47,4 @@ describe('RecipientVerificationListForm', () => {
     wrapper.find('form').simulate('submit', formValuesWithCsv);
     expect(props.uploadRecipientVerificationList.mock.calls).toMatchSnapshot();
   });
-
-  it('should throw on submit if CSV parsing fails', () => {
-    wrapper.setProps(props);
-    formValuesWithCsv.csv = 'email,metadata\nscratchexample.com,"{""flavor"":""vanilla"""\n';
-    wrapper.find('form').simulate('submit', formValuesWithCsv);
-    expect(props.uploadRecipientVerificationList.mock.calls).toMatchSnapshot();
-  });
 });
