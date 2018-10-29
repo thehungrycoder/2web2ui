@@ -2,8 +2,6 @@
 
 exports[`RecipientVerificationListForm renders CSV errors 1`] = `
 <Fragment>
-  Line 73: Too many notes
-  Line 247: Vanilla is unacceptable
   <form
     onSubmit={[Function]}
   >
