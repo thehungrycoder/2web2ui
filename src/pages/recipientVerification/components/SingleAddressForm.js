@@ -30,11 +30,6 @@ export class SingleAddressForm extends Component {
       return <Loading />;
     }
 
-    //const recipient = 'jim.braman@sparkpost.com';
-
-    // const batchPath = '/recipient-verification';
-    // const recipientPath = `/recipient-verification/${recipient}`;
-
     return (
       <Fragment>
         <form onSubmit={handleSubmit}>
