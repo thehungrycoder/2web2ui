@@ -24,9 +24,7 @@ exports[`Page: Recipient Email Verification should render happy path 1`] = `
   />
   <Panel>
     <Panel.Section>
-      <Connect(ReduxForm)
-        onSubmit={[Function]}
-      />
+      <Connect(ReduxForm) />
     </Panel.Section>
   </Panel>
 </Page>

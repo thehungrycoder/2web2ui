@@ -2,7 +2,9 @@
 
 exports[`RecipientVerificationListForm defaults to create mode 1`] = `
 <Fragment>
-  <form>
+  <form
+    onSubmit={[Function]}
+  >
     <Panel.Section>
       <p
         className="Paragraph"
@@ -12,17 +14,29 @@ exports[`RecipientVerificationListForm defaults to create mode 1`] = `
       <Field
         component={[Function]}
         fileType="csv"
-        helpText={
-          <span>
-            You can download a 
-            <DownloadLink
-              href="example-recipient-verification-list.csv"
-            >
-              CSV template here
-            </DownloadLink>
-             to use when formatting your recipient list for upload.
-          </span>
-        }
+        helpText="<span>You can download a <function DownloadLink({ children, href }) {
+  return _react2.default.createElement(
+    \\"a\\",
+    { download: true, href: href, referrerPolicy: \\"origin\\", __source: {
+        fileName: _jsxFileName,
+        lineNumber: 6
+      },
+      __self: this
+    },
+    children
+  );
+} href={example-recipient-verification-list.csv}>CSV template here</function DownloadLink({ children, href }) {
+  return _react2.default.createElement(
+    \\"a\\",
+    { download: true, href: href, referrerPolicy: \\"origin\\", __source: {
+        fileName: _jsxFileName,
+        lineNumber: 6
+      },
+      __self: this
+    },
+    children
+  );
+}> to use when formatting your recipient list for upload.</span>"
         label="Upload a list of email addresses to verify"
         name="csv"
         required={true}
@@ -61,7 +75,9 @@ exports[`RecipientVerificationListForm renders CSV errors 1`] = `
       key="1"
     />
   </Banner>
-  <form>
+  <form
+    onSubmit={[Function]}
+  >
     <Panel.Section>
       <p
         className="Paragraph"
@@ -71,17 +87,29 @@ exports[`RecipientVerificationListForm renders CSV errors 1`] = `
       <Field
         component={[Function]}
         fileType="csv"
-        helpText={
-          <span>
-            You can download a 
-            <DownloadLink
-              href="example-recipient-verification-list.csv"
-            >
-              CSV template here
-            </DownloadLink>
-             to use when formatting your recipient list for upload.
-          </span>
-        }
+        helpText="<span>You can download a <function DownloadLink({ children, href }) {
+  return _react2.default.createElement(
+    \\"a\\",
+    { download: true, href: href, referrerPolicy: \\"origin\\", __source: {
+        fileName: _jsxFileName,
+        lineNumber: 6
+      },
+      __self: this
+    },
+    children
+  );
+} href={example-recipient-verification-list.csv}>CSV template here</function DownloadLink({ children, href }) {
+  return _react2.default.createElement(
+    \\"a\\",
+    { download: true, href: href, referrerPolicy: \\"origin\\", __source: {
+        fileName: _jsxFileName,
+        lineNumber: 6
+      },
+      __self: this
+    },
+    children
+  );
+}> to use when formatting your recipient list for upload.</span>"
         label="Upload a list of email addresses to verify"
         name="csv"
         required={true}
@@ -107,7 +135,9 @@ exports[`RecipientVerificationListForm renders CSV errors 1`] = `
 
 exports[`RecipientVerificationListForm renders correctly in create mode 1`] = `
 <Fragment>
-  <form>
+  <form
+    onSubmit={[Function]}
+  >
     <Panel.Section>
       <p
         className="Paragraph"
@@ -117,17 +147,29 @@ exports[`RecipientVerificationListForm renders correctly in create mode 1`] = `
       <Field
         component={[Function]}
         fileType="csv"
-        helpText={
-          <span>
-            You can download a 
-            <DownloadLink
-              href="example-recipient-verification-list.csv"
-            >
-              CSV template here
-            </DownloadLink>
-             to use when formatting your recipient list for upload.
-          </span>
-        }
+        helpText="<span>You can download a <function DownloadLink({ children, href }) {
+  return _react2.default.createElement(
+    \\"a\\",
+    { download: true, href: href, referrerPolicy: \\"origin\\", __source: {
+        fileName: _jsxFileName,
+        lineNumber: 6
+      },
+      __self: this
+    },
+    children
+  );
+} href={example-recipient-verification-list.csv}>CSV template here</function DownloadLink({ children, href }) {
+  return _react2.default.createElement(
+    \\"a\\",
+    { download: true, href: href, referrerPolicy: \\"origin\\", __source: {
+        fileName: _jsxFileName,
+        lineNumber: 6
+      },
+      __self: this
+    },
+    children
+  );
+}> to use when formatting your recipient list for upload.</span>"
         label="Upload a list of email addresses to verify"
         name="csv"
         required={true}
@@ -153,7 +195,9 @@ exports[`RecipientVerificationListForm renders correctly in create mode 1`] = `
 
 exports[`RecipientVerificationListForm renders correctly in edit mode 1`] = `
 <Fragment>
-  <form>
+  <form
+    onSubmit={[Function]}
+  >
     <Panel.Section>
       <p
         className="Paragraph"
@@ -163,17 +207,29 @@ exports[`RecipientVerificationListForm renders correctly in edit mode 1`] = `
       <Field
         component={[Function]}
         fileType="csv"
-        helpText={
-          <span>
-            You can download a 
-            <DownloadLink
-              href="example-recipient-verification-list.csv"
-            >
-              CSV template here
-            </DownloadLink>
-             to use when formatting your recipient list for upload.
-          </span>
-        }
+        helpText="<span>You can download a <function DownloadLink({ children, href }) {
+  return _react2.default.createElement(
+    \\"a\\",
+    { download: true, href: href, referrerPolicy: \\"origin\\", __source: {
+        fileName: _jsxFileName,
+        lineNumber: 6
+      },
+      __self: this
+    },
+    children
+  );
+} href={example-recipient-verification-list.csv}>CSV template here</function DownloadLink({ children, href }) {
+  return _react2.default.createElement(
+    \\"a\\",
+    { download: true, href: href, referrerPolicy: \\"origin\\", __source: {
+        fileName: _jsxFileName,
+        lineNumber: 6
+      },
+      __self: this
+    },
+    children
+  );
+}> to use when formatting your recipient list for upload.</span>"
         label="Upload a list of email addresses to verify"
         name="csv"
         required={true}
@@ -199,7 +255,9 @@ exports[`RecipientVerificationListForm renders correctly in edit mode 1`] = `
 
 exports[`RecipientVerificationListForm should disable form elements on submit 1`] = `
 <Fragment>
-  <form>
+  <form
+    onSubmit={[Function]}
+  >
     <Panel.Section>
       <p
         className="Paragraph"
@@ -208,19 +266,30 @@ exports[`RecipientVerificationListForm should disable form elements on submit 1`
       </p>
       <Field
         component={[Function]}
-        disabled={true}
         fileType="csv"
-        helpText={
-          <span>
-            You can download a 
-            <DownloadLink
-              href="example-recipient-verification-list.csv"
-            >
-              CSV template here
-            </DownloadLink>
-             to use when formatting your recipient list for upload.
-          </span>
-        }
+        helpText="<span>You can download a <function DownloadLink({ children, href }) {
+  return _react2.default.createElement(
+    \\"a\\",
+    { download: true, href: href, referrerPolicy: \\"origin\\", __source: {
+        fileName: _jsxFileName,
+        lineNumber: 6
+      },
+      __self: this
+    },
+    children
+  );
+} href={example-recipient-verification-list.csv}>CSV template here</function DownloadLink({ children, href }) {
+  return _react2.default.createElement(
+    \\"a\\",
+    { download: true, href: href, referrerPolicy: \\"origin\\", __source: {
+        fileName: _jsxFileName,
+        lineNumber: 6
+      },
+      __self: this
+    },
+    children
+  );
+}> to use when formatting your recipient list for upload.</span>"
         label="Upload a list of email addresses to verify"
         name="csv"
         required={true}
@@ -242,4 +311,44 @@ exports[`RecipientVerificationListForm should disable form elements on submit 1`
     </Panel.Section>
   </form>
 </Fragment>
+`;
+
+exports[`RecipientVerificationListForm should submit csv 1`] = `
+Array [
+  Array [
+    FormData {
+      Symbol(impl): FormDataImpl {
+        "_entries": Array [
+          Object {
+            "name": "upload",
+            "value": "email,foo@address.com
+bar@address.com
+",
+          },
+        ],
+        Symbol(wrapper): [Circular],
+      },
+    },
+  ],
+]
+`;
+
+exports[`RecipientVerificationListForm should throw on submit if CSV parsing fails 1`] = `
+Array [
+  Array [
+    FormData {
+      Symbol(impl): FormDataImpl {
+        "_entries": Array [
+          Object {
+            "name": "upload",
+            "value": "email,metadata
+scratchexample.com,\\"{\\"\\"flavor\\"\\":\\"\\"vanilla\\"\\"\\"
+",
+          },
+        ],
+        Symbol(wrapper): [Circular],
+      },
+    },
+  ],
+]
 `;

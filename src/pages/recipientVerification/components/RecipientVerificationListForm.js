@@ -39,37 +39,29 @@ export class RecipientVerificationListForm extends Component {
       return <Loading />;
     }
 
+    const headerContent = 'Verify a list of your recipients by separating deliverable email addresses from rejected or undeliverable email addresses.';
     const uploadHint = 'Upload a list of email addresses to verify';
     const uploadValidators = [required, maxFileSize(config.maxRecipVerifUploadSizeBytes)];
-
-    // const batchPath = '/recipient-verification';
-    // const recipientPath = `/recipient-verification/${recipient}`;
+    const helpContent = `<span>You can download a <${DownloadLink} href={${exampleRecipientVerificationListPath}}>CSV template here</${DownloadLink}> to use when formatting your recipient list for upload.</span>`;
+    const buttonContent = 'Verify Email Addresses';
 
     return (
-      // <div>
-      //   {error ? this.renderError() : null}
       <Fragment>
         {error && this.renderCsvErrors()}
         <form onSubmit={handleSubmit(this.createForm)}>
           <Panel.Section>
-            <p className={styles.Paragraph}>Verify a list of your recipients by separating deliverable email addresses from rejected or undeliverable email addresses.</p>
+            <p className={styles.Paragraph}>{headerContent}</p>
             <Field
               component={FileFieldWrapper}
               disabled={submitting}
-              fileType="csv"
-              helpText={
-                <span>
-                  You can download
-                  a <DownloadLink href={exampleRecipientVerificationListPath}>CSV template here</DownloadLink> to
-                  use when formatting your recipient list for upload.
-                </span>
-              }
+              fileType='csv'
+              helpText={helpContent}
               label={uploadHint}
-              name="csv"
+              name='csv'
               validate={uploadValidators}
               required
             />
-            <Button primary submit disabled={submitDisabled}>Verify Email Addresses</Button>
+            <Button primary submit disabled={submitDisabled}>{buttonContent}</Button>
           </Panel.Section>
         </form>
       </Fragment>
