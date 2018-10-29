@@ -32,7 +32,6 @@ export class RecipientVerificationListForm extends Component {
 
   render() {
     const { loading, pristine, valid, error, submitting, handleSubmit } = this.props;
-
     const submitDisabled = pristine || !valid || submitting;
 
     if (loading) {
