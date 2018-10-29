@@ -21,7 +21,7 @@ export class RecipientVerificationListForm extends Component {
   }
 
   render() {
-    const { pristine, valid, error, submitting, handleSubmit } = this.props;
+    const { pristine, valid, submitting, handleSubmit } = this.props;
     const submitDisabled = pristine || !valid || submitting;
 
     const headerContent = 'Verify a list of your recipients by separating deliverable email addresses from rejected or undeliverable email addresses.';
@@ -31,7 +31,6 @@ export class RecipientVerificationListForm extends Component {
 
     return (
       <Fragment>
-        {error}
         <form onSubmit={handleSubmit(this.createForm)}>
           <p className={styles.Paragraph}>{headerContent}</p>
           <Field
