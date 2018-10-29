@@ -25,7 +25,7 @@ export default (state = initialState, { type, payload }) => {
     case 'CLEAR_GLOBAL_ALERT':
       return {
         ...state,
-        alerts: state.alerts.filter(({ id, dedupeId }) => id !== payload.id && dedupeId !== payload.id)
+        alerts: state.alerts.filter(({ id }) => id !== payload.id)
       };
 
     default:

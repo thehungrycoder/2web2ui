@@ -1,12 +1,10 @@
 import React, { createContext, Component } from 'react';
-import store from 'src/store';
 import moment from 'moment';
-import _ from 'lodash';
 
 const defaultContext = {};
 const defaultAction = {
-  interval: 5000,
-  duration: 10000
+  interval: 1000,
+  duration: 2000
 };
 
 export const PollContext = createContext(defaultContext);
@@ -24,7 +22,7 @@ class Poll extends Component {
     this.setState({
       actions: {},
       startPolling: this.start,
-      stopPolling: this.stop,
+      stopPolling: this.stop
     });
   }
 
@@ -43,16 +41,16 @@ class Poll extends Component {
   }
 
   start = (action) => {
-    const { key, interval, alert } = action;
+    const { key, interval } = action;
 
     this.setActionState(key, {
       ...defaultAction,
       ...action,
-      startTime: new Date(),
+      startTime: moment(),
       status: 'polling'
     });
 
-    setTimeout(() => this.poll(key), (interval));
+    return setTimeout(() => this.poll(key), interval);
   };
 
   stop = (key) => {

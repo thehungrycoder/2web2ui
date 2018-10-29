@@ -4,12 +4,13 @@ import { Provider } from 'react-redux';
 import config from './config';
 import { unregister } from './helpers/registerServiceWorker';
 import ErrorTracker from './helpers/errorTracker';
-import store from './store';
+import configureStore from './store';
 
 import './critical.scss';
 import './index.scss';
 import App from './App';
 
+const store = configureStore();
 const renderApp = () => {
   render(
     <Provider store={store}><App /></Provider>,
