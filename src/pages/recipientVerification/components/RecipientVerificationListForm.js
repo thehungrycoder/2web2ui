@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import { Banner, Button, Error } from '@sparkpost/matchbox';
-import { Loading, DownloadLink } from 'src/components';
+import { Button } from '@sparkpost/matchbox';
+import { DownloadLink } from 'src/components';
 import styles from './RecipientVerificationPage.module.scss';
 import { required, maxFileSize } from 'src/helpers/validation';
 import FileFieldWrapper from 'src/components/reduxFormWrappers/FileFieldWrapper';
@@ -20,20 +20,9 @@ export class RecipientVerificationListForm extends Component {
     return this.props.uploadRecipientVerificationList(form_data);
   }
 
-  renderCsvErrors() {
-    const { error } = this.props;
-    return <Banner status='danger' title='CSV Format Errors'>
-      {error.map((err, idx) => <Error key={idx} error={err}/>)}
-    </Banner>;
-  }
-
   render() {
-    const { loading, pristine, valid, error, submitting, handleSubmit } = this.props;
+    const { pristine, valid, error, submitting, handleSubmit } = this.props;
     const submitDisabled = pristine || !valid || submitting;
-
-    if (loading) {
-      return <Loading />;
-    }
 
     const headerContent = 'Verify a list of your recipients by separating deliverable email addresses from rejected or undeliverable email addresses.';
     const uploadHint = 'Upload a list of email addresses to verify';

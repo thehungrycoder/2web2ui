@@ -2,23 +2,13 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 import { Button } from '@sparkpost/matchbox';
-import { Loading, ApiErrorBanner, TextFieldWrapper } from 'src/components';
+import { Loading, TextFieldWrapper } from 'src/components';
 import styles from './RecipientVerificationPage.module.scss';
 import { required, maxLength } from 'src/helpers/validation';
 
 const formName = 'singleAddressForm';
 
 export class SingleAddressForm extends Component {
-
-  renderError() {
-    const { error } = this.props;
-    return (
-      <ApiErrorBanner
-        message={'Sorry, we seem to have had some trouble loading the Recipient Email Verification Tool'}
-        errorDetails={error.message}
-      />
-    );
-  }
 
   render() {
     const { loading, pristine, valid, submitting, handleSubmit } = this.props;
