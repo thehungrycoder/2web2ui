@@ -23,12 +23,15 @@ describe('Recipient List Actions', () => {
 
   snapshotActionCases('.listRecipientLists', [
     {
-      name: 'when showErrorAlert is on',
+      name: 'when list is not loaded',
       action: () => (
-        listRecipientLists({
-          showErrorAlert: true
-        })
-      )
+        listRecipientLists()
+      ),
+      state: {
+        recipientLists: {
+          listLoaded: false
+        }
+      }
     }
   ]);
 

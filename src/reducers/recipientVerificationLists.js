@@ -1,8 +1,6 @@
 const initialState = {
   list: [],
-  error: null,
-  listLoaded: false,
-  listLoading: false
+  error: null
 };
 
 export default (state = initialState, { meta, payload, type }) => {
@@ -10,7 +8,7 @@ export default (state = initialState, { meta, payload, type }) => {
     case 'CREATE_RECIPIENT_VERIFICATION_LIST_PENDING':
       return { ...state, loading: true };
 
-    case 'CREATE_RECIPIENT_VERIFICATION_LIST_SUCCESS':
+    case 'UPLOAD_RECIPIENT_VERIFICATION_LIST_SUCCESS':
       return {
         ...state,
         loading: false,
