@@ -14,7 +14,7 @@ export const createSnippet = ({
     meta: {
       method: 'POST',
       headers: setSubaccountHeader(subaccount),
-      url: '/v1/snippets',
+      url: '/labs/snippets',
       data: {
         // undefined content parts will not be sent with request
         content: {
@@ -34,7 +34,7 @@ export const getSnippets = () => (
     type: 'GET_SNIPPETS',
     meta: {
       method: 'GET',
-      url: '/v1/snippets'
+      url: '/labs/snippets'
     }
   })
 );
@@ -44,7 +44,7 @@ export const deleteSnippet = ({ id, subaccountId }) => (
     type: 'DELETE_SNIPPET',
     meta: {
       method: 'DELETE',
-      url: `/snippets/${id}`,
+      url: `/labs/snippets/${id}`,
       headers: setSubaccountHeader(subaccountId),
       context: { id, subaccountId }
     }
