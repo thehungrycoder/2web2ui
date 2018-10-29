@@ -12,7 +12,7 @@ describe('RecipientVerificationListForm', () => {
   beforeEach(() => {
     props = {
       handleSubmit: jest.fn((a) => a),
-      createRecipientVerificationList: jest.fn()
+      uploadRecipientVerificationList: jest.fn()
     };
 
     wrapper = shallow(<RecipientVerificationListForm {...props} />);
@@ -22,17 +22,7 @@ describe('RecipientVerificationListForm', () => {
     };
   });
 
-  it('defaults to create mode', () => {
-    wrapper.setProps(props);
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('renders correctly in create mode', () => {
-    wrapper.setProps(props);
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('renders correctly in edit mode', () => {
+  it('renders correctly', () => {
     wrapper.setProps(props);
     expect(wrapper).toMatchSnapshot();
   });
@@ -55,13 +45,13 @@ describe('RecipientVerificationListForm', () => {
   it('should submit csv', async () => {
     wrapper.setProps(props);
     wrapper.find('form').simulate('submit', formValuesWithCsv);
-    expect(props.createRecipientVerificationList.mock.calls).toMatchSnapshot();
+    expect(props.uploadRecipientVerificationList.mock.calls).toMatchSnapshot();
   });
 
   it('should throw on submit if CSV parsing fails', () => {
     wrapper.setProps(props);
     formValuesWithCsv.csv = 'email,metadata\nscratchexample.com,"{""flavor"":""vanilla"""\n';
     wrapper.find('form').simulate('submit', formValuesWithCsv);
-    expect(props.createRecipientVerificationList.mock.calls).toMatchSnapshot();
+    expect(props.uploadRecipientVerificationList.mock.calls).toMatchSnapshot();
   });
 });

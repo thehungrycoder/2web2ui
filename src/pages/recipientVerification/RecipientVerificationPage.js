@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { withRouter } from 'react-router-dom';
-
 import { Page, Tabs, Panel } from '@sparkpost/matchbox';
-
-import { createRecipientVerificationList } from 'src/actions/recipientVerificationLists';
-import { showAlert } from 'src/actions/globalAlert';
 
 import RecipientVerificationListForm from './components/RecipientVerificationListForm';
 import SingleAddressForm from './components/SingleAddressForm';
@@ -51,9 +46,4 @@ export class RecipientVerificationPage extends Component {
   }
 }
 
-const mapDispatchToProps = {
-  createRecipientVerificationList,
-  showAlert
-};
-
-export default withRouter(connect(undefined, mapDispatchToProps)(RecipientVerificationPage));
+export default connect(undefined)(RecipientVerificationPage);

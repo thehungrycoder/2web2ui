@@ -33,18 +33,16 @@ export class SingleAddressForm extends Component {
     return (
       <Fragment>
         <form onSubmit={handleSubmit}>
-          <Panel.Section>
-            <p className={styles.Paragraph}>Verify an email address to determine if it is a deliverable email address or a rejected, undeliverable email address.</p>
-            <Field
-              name='name'
-              component={TextFieldWrapper}
-              label='Enter an email address to verify'
-              placeholder={'eg. example@mail.com'}
-              onChange={this.handleIdFill}
-              validate={[required, maxLength(64)]}
-            />
-            <Button primary submit disabled={submitDisabled}>Verify Email Address</Button>
-          </Panel.Section>
+          <p className={styles.Paragraph}>Verify an email address to determine if it is a deliverable email address or a rejected, undeliverable email address.</p>
+          <Field
+            name='name'
+            component={TextFieldWrapper}
+            label='Enter an email address to verify'
+            placeholder={'eg. example@mail.com'}
+            onChange={this.handleIdFill}
+            validate={[required, maxLength(64)]}
+          />
+          <Button primary submit disabled={submitDisabled}>Verify Email Address</Button>
         </form>
       </Fragment>
     );
