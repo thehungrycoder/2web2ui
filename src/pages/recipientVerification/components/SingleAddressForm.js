@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 import { Button } from '@sparkpost/matchbox';
-import { Loading, TextFieldWrapper } from 'src/components';
+import { TextFieldWrapper } from 'src/components';
 import styles from './RecipientVerificationPage.module.scss';
 import { required, maxLength } from 'src/helpers/validation';
 
@@ -11,14 +11,8 @@ const formName = 'singleAddressForm';
 export class SingleAddressForm extends Component {
 
   render() {
-    const { loading, pristine, valid, submitting, handleSubmit } = this.props;
-
+    const { pristine, valid, submitting, handleSubmit } = this.props;
     const submitDisabled = pristine || !valid || submitting;
-
-
-    if (loading) {
-      return <Loading />;
-    }
 
     return (
       <Fragment>
